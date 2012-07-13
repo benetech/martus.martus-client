@@ -40,14 +40,15 @@ import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.reports.PageReportBuilder;
 import org.martus.client.reports.ReportAnswers;
+import org.martus.client.reports.ReportAnswers.ReportType;
 import org.martus.client.reports.ReportFormat;
 import org.martus.client.reports.ReportFormatFilter;
 import org.martus.client.reports.ReportOutput;
 import org.martus.client.reports.ReportRunner;
 import org.martus.client.reports.RunReportOptions;
 import org.martus.client.reports.TabularReportBuilder;
-import org.martus.client.reports.ReportAnswers.ReportType;
 import org.martus.client.search.FieldChooserSpecBuilder;
+import org.martus.client.search.PageReportFieldChooserSpecBuilder;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -55,9 +56,9 @@ import org.martus.client.swingui.WorkerThread;
 import org.martus.client.swingui.dialogs.UIReportFieldDlg;
 import org.martus.client.swingui.dialogs.UiIncludePrivateDataDlg;
 import org.martus.client.swingui.dialogs.UiPrintPreviewDlg;
+import org.martus.client.swingui.dialogs.UiPushbuttonsDlg;
 import org.martus.client.swingui.dialogs.UiReportFieldChooserDlg;
 import org.martus.client.swingui.dialogs.UiReportFieldOrganizerDlg;
-import org.martus.client.swingui.dialogs.UiPushbuttonsDlg;
 import org.martus.client.swingui.dialogs.UiSortFieldsDlg;
 import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.FormatFilter;
@@ -395,7 +396,7 @@ public class ActionMenuReports extends ActionPrint
 			UIReportFieldDlg dlg;
 			if(reportType.isPage())
 			{
-				FieldChooserSpecBuilder fieldChooserSpecBuilder = new FieldChooserSpecBuilder(mainWindow.getLocalization());
+				FieldChooserSpecBuilder fieldChooserSpecBuilder = new PageReportFieldChooserSpecBuilder(mainWindow.getLocalization());
 				FieldSpec[] availableFieldSpecs = fieldChooserSpecBuilder.createFieldSpecArray(mainWindow.getStore());
 				dlg = new UiReportFieldChooserDlg(mainWindow, availableFieldSpecs);
 			}
