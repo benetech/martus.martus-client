@@ -97,8 +97,13 @@ public class MartusUserDictionary implements UserDictionaryProvider
 	@Override
 	public void addWord(String newWord)
 	{
-		original.add(newWord);
+		addWordToInMemoryWordList(newWord);
 		saveDictionary();
+	}
+
+	private void addWordToInMemoryWordList(String newWord)
+	{
+		original.add(newWord.trim());
 	}
 	
 	private void loadDictionary()
@@ -125,7 +130,7 @@ public class MartusUserDictionary implements UserDictionaryProvider
 			if(extras.contains(word))
 				continue;
 			
-			original.add(word);
+			addWordToInMemoryWordList(word);
 		}
 		
 		MartusLogger.log("User dictionary loaded word count: " + original.size());
