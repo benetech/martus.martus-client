@@ -41,17 +41,13 @@ import javax.swing.text.JTextComponent;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.reports.ChartAnswers;
 import org.martus.client.search.FieldChooserSpecBuilder;
-import org.martus.client.search.SearchFieldTreeNode;
 import org.martus.client.search.SortFieldChooserSpecBuilder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
-import org.martus.common.fieldspec.SearchFieldTreeModel;
-import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.UiLabel;
@@ -138,7 +134,6 @@ public class CreateChartDialog extends JDialog
 		chooser = new UiPopUpFieldChooserEditor(getMainWindow());
 		FieldChooserSpecBuilder specBuilder = new SortFieldChooserSpecBuilder(getLocalization());
 		PopUpTreeFieldSpec treeSpec = specBuilder.createSpec(getStore());
-		removeGridFields(treeSpec);
 		chooser.setSpec(treeSpec);
 		chooser.setText("");
 		
@@ -203,21 +198,6 @@ public class CreateChartDialog extends JDialog
 	private ClientBulletinStore getStore()
 	{
 		return getMainWindow().getApp().getStore();
-	}
-
-	private void removeGridFields(PopUpTreeFieldSpec treeSpec)
-	{
-		SearchFieldTreeModel model = treeSpec.getTreeModel();
-		SearchFieldTreeNode rootNode = (SearchFieldTreeNode) model.getRoot();
-		for(int i = rootNode.getChildCount() - 1; i >= 0; --i)
-		{
-			SearchFieldTreeNode fieldNode = (SearchFieldTreeNode) rootNode.getChildAt(i);
-			SearchableFieldChoiceItem fieldChoiceItem = fieldNode.getChoiceItem();
-			FieldSpec spec = fieldChoiceItem.getSpec();
-			FieldSpec parentSpec = spec.getParent();
-			if(parentSpec != null && parentSpec.getType().isGrid())
-				rootNode.remove(i);
-		}
 	}
 
 	public ChartAnswers getAnswers()
