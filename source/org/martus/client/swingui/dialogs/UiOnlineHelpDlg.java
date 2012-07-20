@@ -202,10 +202,12 @@ public class UiOnlineHelpDlg extends JDialog
 		{
 			Object selectedValue = tocList.getSelectedValue();
 			String searchString = "-\n" + (String)selectedValue;
-			System.out.println("Searching for: {" + searchString + "}");
-			System.out.println("FileContents starts with: {" + fileContents.substring(0, 200) + "}");
 			System.out.println("First newline at " + fileContents.indexOf("\n"));
 			System.out.println("First -newline at " + fileContents.indexOf("-\n"));
+			System.out.println("First -CRLF at " + fileContents.indexOf("-\r\n"));
+			for(int i = 0; i < 20; ++i)
+				System.out.print(new Integer(fileContents.charAt(i)) + " ");
+			System.out.println();
 			int foundAt = fileContents.indexOf(searchString);
 			int startHighlight = foundAt+2;
 			int endHighlight = foundAt + searchString.length();
