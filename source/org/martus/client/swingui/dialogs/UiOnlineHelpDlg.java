@@ -139,25 +139,31 @@ public class UiOnlineHelpDlg extends JDialog
 
 	public String getFileContents(InputStream fileStream)
 	{
+		StringBuffer message = new StringBuffer();
 		if(fileStream == null)
 		{
 			System.out.println("UiOnlineHelpDlg: getFileContents null stream");
 			return null;
 		}
-
-		
 		try
 		{
 			UnicodeReader reader = new UnicodeReader(fileStream);
-			String message = reader.readAll();
+			while(true)
+			{
+				String lineIn = reader.readLine();
+				if(lineIn == null)
+					break;
+				message.append(lineIn);
+				message.append('\n');
+			}
 			reader.close();
-			return message;
 		}
 		catch(IOException e)
 		{
 			System.out.println("UiOnlineHelpDlg: " + e);
 			return null;
 		}
+		return new String(message);
 	}
 
 	public Vector getFileVectorContents(InputStream fileStream)
