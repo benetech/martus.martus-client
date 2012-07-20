@@ -30,7 +30,7 @@ import java.io.File;
 
 import javax.swing.JComponent;
 
-import org.martus.client.core.LanguageChangeListener;
+import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiEditableFieldCreator;
 import org.martus.client.swingui.fields.UiField;
@@ -77,12 +77,12 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 		}
 	}
 
-	UiField createField(FieldSpec spec, LanguageChangeListener listener) 
+	UiField createField(FieldSpec spec, BulletinLanguageChangeListener listener) 
 	{
 		UiField newField = super.createField(spec, listener);
 		
 		if(spec.getType().isLanguageDropdown())
-			newField.setLanguageListener(listener);
+			newField.setBulletinLanguageListener(listener);
 		return newField;
 	}
 

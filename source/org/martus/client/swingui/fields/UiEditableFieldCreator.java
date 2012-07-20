@@ -28,6 +28,7 @@ package org.martus.client.swingui.fields;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.fieldspec.DateFieldSpec;
 import org.martus.common.fieldspec.DateRangeFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
@@ -66,6 +67,31 @@ public class UiEditableFieldCreator extends UiFieldCreator
 		UiChoiceEditor dropDownField = new UiChoiceEditor(mainWindow.getLocalization());
 		dropDownField.setSpec(getContext(), spec);
 		return dropDownField;
+	}
+	
+	public UiField createLanguageField(DropDownFieldSpec spec)
+	{
+		if(isBulletinLanguageField(spec))
+		{
+			UiChoiceEditor dropDownField = new UiBulletinLanguageChoiceEditor(mainWindow.getLocalization());
+			dropDownField.setSpec(getContext(), spec);
+			return dropDownField;
+		}
+		
+		return createChoiceField(spec);
+	}
+
+	private boolean isBulletinLanguageField(DropDownFieldSpec spec)
+	{
+		boolean isTopLevelField = spec.getParent() == null;
+		if(!isTopLevelField)
+			return false;
+		
+		String tag = spec.getTag();
+		if(!tag.equals(BulletinConstants.TAGLANGUAGE))
+			return false;
+		
+		return true;
 	}
 	
 	public UiField createDateField(FieldSpec spec)

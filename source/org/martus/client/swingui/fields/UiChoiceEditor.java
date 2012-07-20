@@ -38,7 +38,6 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComponent;
 import javax.swing.JList;
 
-import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.fields.UiEditableGrid.EnterAction;
 import org.martus.client.swingui.fields.UiEditableGrid.ShiftTabAction;
 import org.martus.client.swingui.fields.UiEditableGrid.SpaceAction;
@@ -209,8 +208,6 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 
 	public void actionPerformed(ActionEvent e) 
 	{
-		if(observer != null)
-			observer.languageChanged(getText());
 		updateEditabilityOfComboBoxes(e.getSource());
 	}
 
@@ -304,11 +301,6 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		return (JComponent[])comboBoxes.toArray(new JComponent[0]);
 	}
 
-	public void setLanguageListener(LanguageChangeListener listener)
-	{
-		observer = listener;
-	}
-	
 	public void setActions(EnterAction enterActionToUse, SpaceAction spaceActionToUse, TabAction tabActionToUse, ShiftTabAction shiftTabActionToUse)
 	{
 		enterAction = enterActionToUse;
@@ -332,7 +324,6 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	private Box container;
 	private Vector comboBoxes;
 	private ListOfReusableChoicesLists choiceLists;
-	private LanguageChangeListener observer;
 	private boolean isUpdateInProgress;
 
 	private EnterAction enterAction;

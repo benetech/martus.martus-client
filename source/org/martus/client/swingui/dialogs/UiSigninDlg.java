@@ -26,10 +26,12 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.clientside.CurrentUiState;
@@ -37,7 +39,7 @@ import org.martus.clientside.UiBasicSigninDlg;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiLabel;
 
-public class UiSigninDlg extends UiBasicSigninDlg implements LanguageChangeListener
+public class UiSigninDlg extends UiBasicSigninDlg
 {
 	public UiSigninDlg(UiLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode, String username, char[] password)
 	{
@@ -52,17 +54,21 @@ public class UiSigninDlg extends UiBasicSigninDlg implements LanguageChangeListe
 		languageDropdown = new UiChoiceEditor(localization);
 		languageDropdown.setChoices(localization.getUiLanguages());
 		languageDropdown.setText(localization.getCurrentLanguageCode());
-		languageDropdown.setLanguageListener(this);
+		languageDropdown.addActionListener(new LanguageChangedHandler());
 		return languageDropdown.getComponent();
 	}
 
-	// LanguageChangeListener Interface
-	public void languageChanged(String languageCode)
+	class LanguageChangedHandler implements ActionListener
 	{
-		UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(owner, localization, languageCode);
-		UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner, localization, languageCode);
-		changeLanguagesAndRestartSignin(languageCode);
-		dispose();
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			String languageCode = languageDropdown.getText();
+			UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(owner, localization, languageCode);
+			UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner, localization, languageCode);
+			changeLanguagesAndRestartSignin(languageCode);
+			dispose();
+		}
 	}
 	
 	void changeLanguagesAndRestartSignin(String languageCode)

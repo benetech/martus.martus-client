@@ -40,6 +40,7 @@ import javax.swing.KeyStroke;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.text.JTextComponent;
 
+import org.martus.client.swingui.fields.UiStringField;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusLogger;
 import org.martus.util.TokenReplacement;
@@ -61,26 +62,29 @@ import com.inet.jortho.MartusSpellCheckerListener;
  */
 public class UiStringFieldContextMenuListener extends MartusSpellCheckerListener
 {
-	public UiStringFieldContextMenuListener(JPopupMenu menuToUse, JTextComponent textFieldToUse, UiLocalization localizationToUse)
+	public UiStringFieldContextMenuListener(JPopupMenu menuToUse, UiStringField stringFieldToUse, UiLocalization localizationToUse)
 	{
 		super(menuToUse, null);
 
 		menu = menuToUse;
-		textField = textFieldToUse;
+		field = stringFieldToUse;
 		localization = localizationToUse;
 	}
 
 	@Override
 	public void popupMenuWillBecomeVisible(PopupMenuEvent ev)
 	{
-		super.popupMenuWillBecomeVisible(ev);
+		if(field.isSpellCheckEnabled())
+		{
+			super.popupMenuWillBecomeVisible(ev);
 
-		Component[] menuItems = menu.getComponents();
-		boldifySuggestedWords(menuItems);
-		extractMoreSuggestionsSubmenu(menuItems);
-
-		if(menuItems.length > 0)
-			menu.addSeparator();
+			Component[] menuItems = menu.getComponents();
+			boldifySuggestedWords(menuItems);
+			extractMoreSuggestionsSubmenu(menuItems);
+	
+			if(menuItems.length > 0)
+				menu.addSeparator();
+		}
 		
 		JTextComponent editor = getTextField();
 		boolean editable = editor.isEditable();
@@ -159,7 +163,7 @@ public class UiStringFieldContextMenuListener extends MartusSpellCheckerListener
 
 	private JTextComponent getTextField()
 	{
-		return textField;
+		return field.getTextComponent();
 	}
 
 	static abstract class TextComponentAction extends AbstractAction
@@ -251,6 +255,6 @@ public class UiStringFieldContextMenuListener extends MartusSpellCheckerListener
 	}
 
 	private JPopupMenu menu;
-	private JTextComponent textField;
+	private UiStringField field;
 	private UiLocalization localization;
 }

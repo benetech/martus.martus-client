@@ -256,7 +256,6 @@ public class ActionMenuCharts extends UiMenuAction
 			Bulletin b = getStore().getBulletinRevision(uid);
 			SafeReadableBulletin srb = new SafeReadableBulletin(b, getLocalization());
 			MartusField selectedField = srb.getPossiblyNestedField(selectedSpec);
-			MartusField topLevelField = srb.getPossiblyNestedField(selectedSpec.getTopLevelTag());
 			MartusField fieldToCount = selectedField;
 			
 			int relevantLevel = 0;
@@ -269,6 +268,7 @@ public class ActionMenuCharts extends UiMenuAction
 					String[] allLevelCodes = selectedSpec.getReusableChoicesCodes();
 					relevantLevel = new Vector(Arrays.asList(allLevelCodes)).indexOf(thisLevelCode);
 					
+					MartusField topLevelField = srb.getPossiblyNestedField(selectedSpec.getTopLevelTag());
 					fieldToCount = topLevelField;
 				}
 			}

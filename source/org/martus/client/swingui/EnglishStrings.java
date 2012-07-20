@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
+
 import org.martus.common.bulletin.Bulletin;
 
 public class EnglishStrings
@@ -234,6 +235,8 @@ public class EnglishStrings
 "wintitle:notifyErrorImportingBulletinsTooNew=Import Bulletin(s)",
 "wintitle:notifyErrorSavingDictionary=Error",
 "wintitle:notifyErrorLoadingDictionary=Error",
+"wintitle:notifyErrorUpdatingDictionary=Error",
+"wintitle:ConfigureSpellCheck=Configure Spell Checking",
 
 "wintitle:notifyRetrieveCompleted=Retrieve Complete",
 "field:notifyRetrieveCompletedcause=Retrieving bulletins from the server is complete",
@@ -465,6 +468,7 @@ public class EnglishStrings
 "menu:Preferences=Preferences",
 "menu:contactinfo=Contact Information",
 "menu:DefaultDetailsFieldContent=Default Details Field Content",
+"menu:ConfigureSpellCheck=Spell Checking",
 "menu:changeUserNamePassword=Change User Name or Password",
 "menu:tools=Tools",
 "menu:QuickEraseDeleteMyDataOnly=Delete My Data",
@@ -615,6 +619,7 @@ public class EnglishStrings
 "button:RunChart=Display an existing chart",
 "button:CreateChart=Create a new chart template",
 "wintitle:CreateChart=Charts",
+"field:ChartPrivateFieldsNotice=Please note that any Martus bulletin data in charts will not be encrypted, \nand anyone who gets a copy of the chart output will be able to read all the data. \nUse caution when selecting a private field.",
 "field:ChartType=Type of Chart",
 "field:ChartTypeBar=Bar Chart",
 "field:ChartType3DBar=3D Bar Chart",
@@ -921,6 +926,8 @@ public class EnglishStrings
 "field:notifyErrorImportingBulletinsTooNewcause=This XML file was created by a newer version of Martus and cannot be read by this version.  You must upgrade to the newer version of Martus to import this file.",
 "field:notifyErrorSavingDictionarycause=Unknown error saving user dictionary",
 "field:notifyErrorLoadingDictionarycause=Unknown error loading user dictionary for spell checking",
+"field:notifyErrorUpdatingDictionarycause=Unable to update the dictionary. Be sure the word list is in the correct format.",
+"field:SpellCheckUserDictionaryInstructions=The following words have been added to the user dictionary. \nYou can delete or edit them here, or you can add more words. \nEach word must be on a line by itself.",
 
 "field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",
@@ -1411,13 +1418,13 @@ public class EnglishStrings
 	"In this release, if you are searching on a multi-level dropdown, all searches are exact matches, " +
 	"not partial or \"starts with\" matches.  " +
 	"This means that you have to pick the exact level at which you want to be searching.  " +
-	"For example, an \"Event Location\" field that has three levels (State/City/Neighborhood) " +
-	"will have three entries in the search field list:  Event Location: State, Event Location: City, and Event Location: Neighborhood.  " +
-	"So if you want to find any bulletins that have an Event Location anywhere in California (regardless of the City), " +
-	"you have to pick the \"Event Location: State\" field to search on and pick California off the dropdown list choices. " +
-	"If you pick Event Location: City to search on and then pick California but leave the City level blank, " +
+	"For example, an \"Event Location\" field that has three levels (Region/City/Neighborhood) " +
+	"will have three entries in the search field list:  Event Location: Region, Event Location: City, and Event Location: Neighborhood.  " +
+	"So if you want to find any bulletins that have an Event Location anywhere in Region X (regardless of the City), " +
+	"you have to pick the \"Event Location: Region\" field to search on and pick Region X off the dropdown list choices. " +
+	"If you pick Event Location: City to search on and then pick Region X but leave the City level blank, " +
 	"Martus will only find entries where there was no City data entered  (City was blank), " +
-	"as opposed to ANY location with California regardless of what data was entered at the City level.\n" +
+	"as opposed to ANY location with Region X regardless of what data was entered at the City level.\n" +
 	"\n " +
 	"3. " +
 	"If you do not see your search terms/dates in the final version of the bulletin displayed in the Search Results folder, " +

@@ -65,10 +65,12 @@ abstract public class RetrieveTableModel extends UiTableModel
 	
 	public void initialize(RetrieveSummariesProgressMeter progressHandlerToUse) throws ServerErrorException
 	{
+		MartusLogger.logBeginProcess("Initializing Retrieve dialog");
 		setProgressDialog(progressHandlerToUse);
 		populateAllSummariesList();
 		buildDownloadableSummariesList();
 		changeToDownloadableSummaries();
+		MartusLogger.logEndProcess("Initializing Retrieve dialog");
 
 		populateMissingSummaryDataFromServer(this);
 	}
@@ -394,7 +396,6 @@ abstract public class RetrieveTableModel extends UiTableModel
 
 	public void populateMissingSummaryDataFromServer(RetrieveTableModel tableModelToUse)
 	{
-		MartusLogger.logBeginProcess("Retrieve missing summary data from server");
 		RetrieveThread worker = new RetrieveThread(tableModelToUse);
 		worker.start();
 
@@ -402,8 +403,6 @@ abstract public class RetrieveTableModel extends UiTableModel
 			waitForThreadToTerminate(worker);
 		else
 			progressHandler.started();
-
-		MartusLogger.logEndProcess("Retrieve missing summary data from server");
 	}
 
 	public void waitForThreadToTerminate(RetrieveThread worker)
@@ -426,8 +425,10 @@ abstract public class RetrieveTableModel extends UiTableModel
 
 		public void run()
 		{
+			MartusLogger.logBeginProcess("Retrieve missing summary data from server");
 			retrieveMissingDetailsFromServer();
 			finishedRetrieve();
+			MartusLogger.logEndProcess("Retrieve missing summary data from server");
 		}
 		
 		public void retrieveMissingDetailsFromServer()

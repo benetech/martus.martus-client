@@ -81,7 +81,8 @@ public class FieldChooserSpecBuilder
 	FieldChoicesByLabel buildFieldChoicesByLabel(ClientBulletinStore storeToUse, MiniFieldSpec[] specsToInclude)
 	{
 		FieldChoicesByLabel allAvailableFields = new FieldChoicesByLabel();
-		allAvailableFields.add(createLastSavedDateChoice());
+		if(shouldIncludeLastSaved())
+			allAvailableFields.add(createLastSavedDateChoice());
 		allAvailableFields.addAll(convertToChoiceItems(storeToUse.getAllKnownFieldSpecs(), storeToUse.getAllReusableChoiceLists()));
 		if(specsToInclude != null)
 		{
@@ -89,6 +90,11 @@ public class FieldChooserSpecBuilder
 		}
 		addSpecialFields(allAvailableFields);
 		return allAvailableFields;
+	}
+
+	protected boolean shouldIncludeLastSaved()
+	{
+		return true;
 	}
 	
 	public FieldSpec[] createFieldSpecArray(ClientBulletinStore storeToUse)

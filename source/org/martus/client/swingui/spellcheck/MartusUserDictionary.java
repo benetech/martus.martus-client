@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.spellcheck;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -47,7 +48,6 @@ public class MartusUserDictionary implements UserDictionaryProvider
 		
 		extras = new HashSet<String>();
 		extras.add("Martus");
-		extras.add("Miradi");
 		extras.add("Benetech");
 		
 		loadDictionary();
@@ -97,8 +97,13 @@ public class MartusUserDictionary implements UserDictionaryProvider
 	@Override
 	public void addWord(String newWord)
 	{
-		original.add(newWord);
+		addWordToInMemoryWordList(newWord);
 		saveDictionary();
+	}
+
+	private void addWordToInMemoryWordList(String newWord)
+	{
+		original.add(newWord.trim());
 	}
 	
 	private void loadDictionary()
@@ -106,20 +111,29 @@ public class MartusUserDictionary implements UserDictionaryProvider
 		try
 		{
 			String allWords = getApp().readSignedUserDictionary();
-			UnicodeStringReader reader = new UnicodeStringReader(allWords);
-			while(reader.ready())
-			{
-				String word = reader.readLine();
-				original.add(word);
-			}
-			
-			MartusLogger.log("User dictionary loaded word count: " + original.size());
+			loadDictionary(allWords);
 		} 
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
 			mainWindow.notifyDlg("ErrorLoadingDictionary");
 		}
+	}
+
+	private void loadDictionary(String allWords) throws IOException
+	{
+		original.clear();
+		UnicodeStringReader reader = new UnicodeStringReader(allWords);
+		while(reader.ready())
+		{
+			String word = reader.readLine();
+			if(extras.contains(word))
+				continue;
+			
+			addWordToInMemoryWordList(word);
+		}
+		
+		MartusLogger.log("User dictionary loaded word count: " + original.size());
 	}
 
 	private void saveDictionary()
@@ -131,12 +145,20 @@ public class MartusUserDictionary implements UserDictionaryProvider
 			buffer.append('\n');
 		}
 		
+		String words = buffer.toString();
+
+		saveDictionary(words);
+	}
+
+	private void saveDictionary(String words)
+	{
 		try
 		{
-			getApp().writeSignedUserDictionary(buffer.toString());
+			getApp().writeSignedUserDictionary(words);
 		} 
 		catch (Exception e)
 		{
+			MartusLogger.logException(e);
 			mainWindow.notifyDlg("ErrorSavingDictionary");
 		}
 	}
@@ -144,8 +166,16 @@ public class MartusUserDictionary implements UserDictionaryProvider
 	@Override
 	public void setUserWords(String words)
 	{
-		// FIXME: Needs to be implemented
-		throw new RuntimeException("Not Implemented Yet!");
+		try
+		{
+			loadDictionary(words);
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			mainWindow.notifyDlg("ErrorUpdatingDictionary");
+		}
+		saveDictionary();
 	}
 	
 	public MartusApp getApp()

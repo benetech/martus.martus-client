@@ -1,8 +1,8 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2005-2007, Beneficent
-Technology, Inc. (The Benetech Initiative).
+monitoring software. Copyright (C) 2012, Beneficent
+Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -23,13 +23,32 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
+package org.martus.client.swingui.fields;
 
-package org.martus.client.core;
+import java.awt.event.ActionEvent;
 
-import java.util.EventListener;
+import org.martus.client.core.BulletinLanguageChangeListener;
+import org.martus.common.MiniLocalization;
 
-public interface LanguageChangeListener extends EventListener
+public class UiBulletinLanguageChoiceEditor extends UiChoiceEditor
 {
-	void languageChanged(String newLanguageCode);
+	public UiBulletinLanguageChoiceEditor(MiniLocalization localizationToUse)
+	{
+		super(localizationToUse);
+	}
 
+	public void setBulletinLanguageListener(BulletinLanguageChangeListener listener)
+	{
+		bulletinLanguageChangedListener = listener;
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e)
+	{
+		super.actionPerformed(e);
+		if(bulletinLanguageChangedListener != null)
+			bulletinLanguageChangedListener.bulletinLanguageHasChanged(getText());
+	}
+
+	private BulletinLanguageChangeListener bulletinLanguageChangedListener;
 }

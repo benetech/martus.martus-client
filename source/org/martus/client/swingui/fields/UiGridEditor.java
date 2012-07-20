@@ -108,4 +108,29 @@ public class UiGridEditor extends UiEditableGrid
 			throw e;
 		}
 	}
+	
+	@Override
+	public void updateSpellChecker(String bulletinLanguageCode)
+	{
+		super.updateSpellChecker(bulletinLanguageCode);
+		
+		if(expandedFieldRows != null)
+			updateSpellCheckerForExpandedFields(bulletinLanguageCode);
+		else
+			getTable().updateSpellChecker(bulletinLanguageCode);
+	}
+
+	private void updateSpellCheckerForExpandedFields(String bulletinLanguageCode)
+	{
+		for(int row = 0; row < expandedFieldRows.size(); ++row)
+		{
+			UiField[] fields = (UiField[])expandedFieldRows.get(row);
+			for(int fieldIndex = 0; fieldIndex < fields.length; ++fieldIndex)
+			{
+				UiField field = fields[fieldIndex];
+				if(field != null)
+					field.updateSpellChecker(bulletinLanguageCode);
+			}
+		}
+	}
 }

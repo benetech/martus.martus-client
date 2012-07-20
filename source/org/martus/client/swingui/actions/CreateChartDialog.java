@@ -25,29 +25,29 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.actions;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.text.JTextComponent;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.reports.ChartAnswers;
 import org.martus.client.search.FieldChooserSpecBuilder;
-import org.martus.client.search.SearchFieldTreeNode;
 import org.martus.client.search.SortFieldChooserSpecBuilder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
-import org.martus.common.fieldspec.SearchFieldTreeModel;
-import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.UiLabel;
@@ -65,8 +65,18 @@ public class CreateChartDialog extends JDialog
 		setTitle(getLocalization().getWindowTitle("CreateChart"));
 		setModal(true);
 		
+		getContentPane().setLayout(new BorderLayout());
+		String disclaimerText = getLocalization().getFieldLabel("ChartPrivateFieldsNotice");
+		String htmlDisclaimerText = "<html><b>" + disclaimerText.replaceAll("\\n", "<br/>");
+		UiLabel disclaimer = new UiLabel(htmlDisclaimerText);
+		disclaimer.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
+		getContentPane().add(disclaimer, BorderLayout.BEFORE_FIRST_LINE);
+
 		JPanel panel = new JPanel(new GridLayoutPlus(0, 2));
-		getContentPane().add(panel);
+		Border lineBorder = BorderFactory.createLineBorder(Color.BLACK);
+		Border marginBorder = BorderFactory.createEmptyBorder(8,8,8,8);
+		Border mainPanelBorder = BorderFactory.createCompoundBorder(lineBorder, marginBorder);
+		panel.setBorder(mainPanelBorder);
 		
 		chartTypeComponent = createChartTypeComponent();
 		Component[] typeRow = new Component[] {createLabel("ChartType"), chartTypeComponent};
@@ -78,6 +88,7 @@ public class CreateChartDialog extends JDialog
 		subtitleComponent = new UiTextField(40);
 		Component[] subtitleRow = new Component[] {createLabel("ChartSubtitle"), subtitleComponent};
 		Utilities.addComponentsRespectingOrientation(panel, subtitleRow);
+		getContentPane().add(panel, BorderLayout.CENTER);
 		
 		ok = new UiButton(getLocalization().getButtonLabel("ok"));
 		ok.addActionListener(new OkHandler());
@@ -88,8 +99,7 @@ public class CreateChartDialog extends JDialog
 		Box buttonBox = Box.createHorizontalBox();
 		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {Box.createHorizontalGlue(), ok, cancel});
 		
-		Utilities.addComponentsRespectingOrientation(panel, new Component[] {new UiLabel(" "), buttonBox});
-		
+		getContentPane().add(buttonBox, BorderLayout.AFTER_LAST_LINE);
 		pack();
 	}
 	
@@ -124,7 +134,6 @@ public class CreateChartDialog extends JDialog
 		chooser = new UiPopUpFieldChooserEditor(getMainWindow());
 		FieldChooserSpecBuilder specBuilder = new SortFieldChooserSpecBuilder(getLocalization());
 		PopUpTreeFieldSpec treeSpec = specBuilder.createSpec(getStore());
-		removeGridFields(treeSpec);
 		chooser.setSpec(treeSpec);
 		chooser.setText("");
 		
@@ -189,21 +198,6 @@ public class CreateChartDialog extends JDialog
 	private ClientBulletinStore getStore()
 	{
 		return getMainWindow().getApp().getStore();
-	}
-
-	private void removeGridFields(PopUpTreeFieldSpec treeSpec)
-	{
-		SearchFieldTreeModel model = treeSpec.getTreeModel();
-		SearchFieldTreeNode rootNode = (SearchFieldTreeNode) model.getRoot();
-		for(int i = rootNode.getChildCount() - 1; i >= 0; --i)
-		{
-			SearchFieldTreeNode fieldNode = (SearchFieldTreeNode) rootNode.getChildAt(i);
-			SearchableFieldChoiceItem fieldChoiceItem = fieldNode.getChoiceItem();
-			FieldSpec spec = fieldChoiceItem.getSpec();
-			FieldSpec parentSpec = spec.getParent();
-			if(parentSpec != null && parentSpec.getType().isGrid())
-				rootNode.remove(i);
-		}
 	}
 
 	public ChartAnswers getAnswers()

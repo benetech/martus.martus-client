@@ -107,6 +107,11 @@ public class GridCellEditorAndRenderer extends AbstractCellEditor implements Tab
 		return component;
 	}
 	
+	public void updateSpellChecker(String bulletinLanguageCode)
+	{
+		uiField.updateSpellChecker(bulletinLanguageCode);
+	}
+
 	public void setActions(EnterAction enterActionToUse, SpaceAction spaceActionToUse, TabAction tabActionToUse, ShiftTabAction shiftTabActionToUse)
 	{
 		getUiField().setActions(enterActionToUse, spaceActionToUse, tabActionToUse, shiftTabActionToUse);

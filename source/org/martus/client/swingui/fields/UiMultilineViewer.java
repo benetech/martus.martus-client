@@ -45,7 +45,7 @@ public class UiMultilineViewer extends UiStringField
 	}
 	
 	@Override
-	protected JTextComponent getTextComponent()
+	public JTextComponent getTextComponent()
 	{
 		return text;
 	}

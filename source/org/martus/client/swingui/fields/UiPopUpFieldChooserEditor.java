@@ -150,7 +150,7 @@ public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 		notifyListeners();
 	}
 
-	public static DefaultMutableTreeNode askUserForField(Container topLevel, Point location, PopUpTreeFieldSpec treeSpec, String initialCode, MartusLocalization localization)
+	private DefaultMutableTreeNode askUserForField(Container topLevel, Point location, PopUpTreeFieldSpec treeSpec, String initialCode, MartusLocalization localization)
 	{
 		FieldTreeDialog dlg = createFieldChooserDialog(topLevel, location, treeSpec, localization);
 		dlg.selectCode(initialCode);
@@ -159,7 +159,7 @@ public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 		return selectedNode;
 	}
 
-	private static FieldTreeDialog createFieldChooserDialog(Container topLevel, Point locationOnScreen, PopUpTreeFieldSpec treeSpec, MartusLocalization localization)
+	protected FieldTreeDialog createFieldChooserDialog(Container topLevel, Point locationOnScreen, PopUpTreeFieldSpec treeSpec, MartusLocalization localization)
 	{
 		return new FieldTreeDialog((JDialog)topLevel, locationOnScreen, treeSpec, localization);
 	}

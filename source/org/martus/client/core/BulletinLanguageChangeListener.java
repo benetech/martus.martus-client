@@ -24,46 +24,12 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.swingui.fields;
+package org.martus.client.core;
 
-import javax.swing.JComponent;
-import javax.swing.text.JTextComponent;
+import java.util.EventListener;
 
-import org.martus.clientside.UiLocalization;
-import org.martus.swing.UiTextField;
-
-abstract public class UiSingleLineTextField extends UiStringField
+public interface BulletinLanguageChangeListener extends EventListener
 {
-	public UiSingleLineTextField(UiLocalization localizationToUse)
-	{
-		super(localizationToUse);
-	}
-	
-	@Override
-	public JTextComponent getTextComponent()
-	{
-		return widget;
-	}
-	
-	public JComponent getComponent()
-	{
-		return widget;
-	}
+	void bulletinLanguageHasChanged(String newLanguageCode);
 
-	public JTextComponent getEditor()
-	{
-		return widget;
-	}
-
-	public String getText()
-	{
-		return widget.getText();
-	}
-
-	public void setText(String newText)
-	{
-		widget.setText(newText);
-	}
-
-	UiTextField widget;
 }

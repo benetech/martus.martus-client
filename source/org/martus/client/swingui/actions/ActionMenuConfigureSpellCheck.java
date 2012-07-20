@@ -1,8 +1,8 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2005-2007, Beneficent
-Technology, Inc. (The Benetech Initiative).
+monitoring software. Copyright (C) 2012, Beneficent
+Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -23,47 +23,28 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
+package org.martus.client.swingui.actions;
 
-package org.martus.client.swingui.fields;
+import java.awt.event.ActionEvent;
 
-import javax.swing.JComponent;
-import javax.swing.text.JTextComponent;
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.dialogs.ConfigureSpellCheckDialog;
+import org.martus.swing.Utilities;
 
-import org.martus.clientside.UiLocalization;
-import org.martus.swing.UiTextField;
-
-abstract public class UiSingleLineTextField extends UiStringField
+public class ActionMenuConfigureSpellCheck extends UiMenuAction
 {
-	public UiSingleLineTextField(UiLocalization localizationToUse)
+	public ActionMenuConfigureSpellCheck(UiMainWindow mainWindowToUse)
 	{
-		super(localizationToUse);
+		super(mainWindowToUse, "ConfigureSpellCheck");
 	}
-	
+
 	@Override
-	public JTextComponent getTextComponent()
+	public void actionPerformed(ActionEvent e)
 	{
-		return widget;
-	}
-	
-	public JComponent getComponent()
-	{
-		return widget;
+		ConfigureSpellCheckDialog dialog = new ConfigureSpellCheckDialog(getMainWindow());
+		dialog.pack();
+		Utilities.centerDlg(dialog);
+		dialog.setVisible(true);
 	}
 
-	public JTextComponent getEditor()
-	{
-		return widget;
-	}
-
-	public String getText()
-	{
-		return widget.getText();
-	}
-
-	public void setText(String newText)
-	{
-		widget.setText(newText);
-	}
-
-	UiTextField widget;
 }
