@@ -1,21 +1,23 @@
 ﻿--------
 1. Introduction to the Martus™ Software
-Martus™ Software User Guide Version 4.0
+Martus™ Software User Guide Version 4.1
 --------
 1a. What is Martus™?
-Named after the Greek word for witness, the Martus Project provides an efficient and secure way to store and retrieve information about human rights abuses. Using the Martus application, you can create bulletins that record human rights abuses, attach supporting documents, specify whether the information should be public or private, and store the information on a secure server. To learn more about the problems the Martus Project addresses and future plans for the project, visit https://www.martus.org. 
+Named after the Greek word for witness, the Martus Project provides an efficient and secure way to store and retrieve information about human rights abuses. Using the Martus application, you can create bulletins that record human rights abuses, attach supporting documents, specify whether the information should be public or private, and store the information on a secure server. Martus encrypts data directly on your computer, and sends this data in an encrypted form to a secure server when you have an internet connection. To learn more about the problems the Martus Project addresses, how Martus is being used throughout the world to securely collect and store sensitive data, and future plans for the project, visit https://www.martus.org. 
 --------
 1b. Why is security so important when using Martus?
-The people who give you information about human rights abuses are concerned about security—and you need to be just as concerned in order to protect them and yourself. It’s important that only the designated people have access to the bulletins you’ve created, especially the information you deem particularly sensitive (which you can maintain as private). It’s equally critical that no one else is able to modify the data you submit, or to create false or inaccurate bulletins using your account.
+The people who give you information about human rights abuses are concerned about security and privacy—and you need to be just as concerned in order to protect them and yourself. It’s important that only the designated people have access to the bulletins you’ve created, especially the information you deem particularly sensitive (which you can maintain as private). It’s equally critical that no one else is able to modify the data you submit, or to create false or inaccurate bulletins using your account.
 
 There are steps you can take to prevent someone from using your Martus account to read the data you’ve collected or to submit additional data, even if they steal your computer or otherwise gain access to it. 
 --------
 1c. How does Martus keep the data secure?
 Every Martus account has a key which can only be accessed using the password for that account. When you sign in to the Martus software, your password enables the application to open the key (associated with the MartusKeyPair.dat file,) so that you can see the bulletins you’ve created and stored. 
 
-Your password is yours alone; without it, no one can open your private bulletins, the private data in the public bulletins you’ve sent to the server, or any of the bulletins on your hard drive, whether they are in draft or sealed status. However, if you’ve set up a Headquarters (HQ) account, the HQ accountholder (typically, your organization’s main office) will still be able to see the private data that you sent to the server.
+Your password is yours alone; without it, no one can open your private bulletins, the private data in the public bulletins you’ve sent to the server, or any of the bulletins on your hard drive, whether they are in draft or sealed status. However, if you’ve set up a Headquarters (HQ) account, the HQ account holder (typically, your organization’s central office) will be able to see the private data that you sent to the server.
 
 Because there are computer programs and keyboard alterations that can allow others to record the characters you type on your keyboard, the Martus software includes an on-screen keyboard for you to use when you enter your password. This makes it even harder for an intruder to discover your password. 
+
+Information secured with Martus is also protected from being modified by others and the software ensures that no one can create false or inaccurate bulletins using your account. Even if your computer is lost, seized, or stolen, Martus ensures that data entered into Martus bulletins cannot be read by those without permission to access the data.
 --------
 1d. What does an individual need to do to keep data secure?
 Use a password that you’ll remember, but that no one else can guess. Pay special attention to the guidelines in “2f. Choosing a password” in this user guide.
@@ -43,7 +45,7 @@ Although these limitations may sound scary, Martus information is far more secur
 Note: As described elsewhere in this User Guide, Martus allows you to attach files to bulletins. On most operating systems, when attachments are opened they are automatically saved in a ‘temporary’ directory, which is unencrypted. For information about the security precaution known as attachment ‘shredding,’ please see section “11. Frequently Asked Questions” (FAQ) #38. 
 --------
 1f. Why send bulletins to the server?
-A Martus server is a computer server that accepts encrypted bulletins, securely backs them up, and replicates them to multiple locations, safeguarding the information from loss. (Benetech provides the server software to the organizations that host Martus servers, but it does not host Martus backup servers directly; e-mail info@martus.org for a list of potential server hosts.) Any bulletins you haven’t sent to a server exist only on your computer. If your computer is lost, stolen, or damaged, you could lose all of that data. The server acts as a backup mechanism. With your key and your username and password, you can install Martus on a different computer and access all the public and private data in bulletins you sent to the server. And if you have set up any Headquarters (HQ) accounts, sending bulletins to the server makes them available to those accounts (both public and private data).  See “9c. Restoring your key” and “9f. Sharing your private data with colleagues.” 
+A Martus server is a computer server that accepts encrypted bulletins, securely backs them up, and replicates them to multiple locations, safeguarding the information from loss. (Benetech provides the server software to the organizations that host Martus servers, but it does not host Martus backup servers directly; e-mail info@martus.org for a list of potential server hosts.) Any bulletins you haven’t sent to a server exist only on your computer. If your computer is lost, stolen, or damaged, you could lose all of that data. The server acts as a backup mechanism, so the data entered into Martus can be recovered if you lose access to your computer. With your key and your username and password, you can install Martus on a different computer and access all the public and private data in bulletins you sent to the server. And if you have set up any Headquarters (HQ) accounts, sending bulletins to the server makes them available to those accounts (both public and private data).  See “9c. Restoring your key” and “9f. Sharing your private data with colleagues.” 
 
 Additionally, public information in bulletins may be available to researchers, the press, and others interested in human rights issues. If you store the bulletins on your computer, only you have access to the information; if you send them to a server that is connected to the web-based Martus Search Engine, others can learn about the public information in the cases you document. 
 --------
@@ -321,7 +323,8 @@ See Linux portion of section “2a. Installing” for examples.
 2. If other accounts already exist on your computer, click the New Account tab in the Signin dialog box, and then click OK. If there are no existing accounts, Martus will prompt you to either create a new account or restore an account from backup key files. 
 3. Choose a language from the dropdown menu in the Signin dialog box.
 4. Type a username; it can contain letters, numbers, punctuation, and spaces. We recommend that you create a username that has between 8 and 50 characters, and recommend against entering non-ascii characters using the Alt + NumberPad method.  Choose a username that will be easy for you to remember, and remember how you capitalize it, as Martus usernames are case-sensitive.
-5. Click characters on the on-screen keyboard to type a password that has between 8 and 50 characters. (There is no cursor in the Password field, and you do not have to click in it.) Choose a password that you can remember, but that would be difficult for someone else to guess.  Use a combination of letters, numbers, and punctuation to make the password more secure; Martus passwords are case-sensitive.  See “2f. Choosing a password” for guidelines for creating a secure, useful password.  If you forget your username or password, there is no way for you to access the bulletins you have created or any of the data on your computer unless you have performed a multi-file key backup (or have a Headquarters account that can retrieve your bulletins.)   See “9b. Backing up your key” for more information. 
+5. 
+Click characters on the on-screen keyboard to type a password that has between 8 and 50 characters. (There is no cursor in the Password field, and you do not have to click in it.) Choose a password that you can remember, but that would be difficult for someone else to guess.  Use a combination of letters, numbers, and punctuation to make the password more secure; Martus passwords are case-sensitive.  See “2f. Choosing a password” for guidelines for creating a secure, useful password.  If you forget your username or password, there is no way for you to access the bulletins you have created or any of the data on your computer unless you have performed a multi-file key backup (or have a Headquarters account that can retrieve your bulletins.)   See “9b. Backing up your key” for more information. 
 
 
 
@@ -492,9 +495,26 @@ If you often use similar types of information in the Details section of all your
 Most Martus users find that the standard bulletin fields meet their needs. However, if you need to create fields beyond the standard Martus fields, you can also create custom fields of various types.  If you have certain types of data that you want to enter in every bulletin, this allows you to structure your data differently than including it in the standard Summary or Details text fields.  See “10b. Customizing bulletin fields” and “10c. Using Customization Templates” for more information on this feature.
 
 If you’d like to customize how bulletins are displayed in Martus (either while editing or in preview mode), there are various options (e.g. hiding/un-hiding long fields) that are described further in section “10d. Customizing your bulletin display.”
+
+
+--------
+4c. Checking the spelling of text in your bulletins
+Martus will automatically check the spelling of words in text fields while you are editing/entering data in bulletins, and you can see which words are spelled incorrectly by the red lines underneath them. If you right-click on the misspelled word, the spell-check menu window will appear and display suggestions for correctly spelled words that may have been intended instead of the current spelling. The spell-check menu window also has the option to “Add to User Dictionary” (we suggest you do this for any valid project-specific words that are likely to show up in many bulletins, for example names of locations or organizations). Each Martus account has a dictionary on their computer that they can update as they use Martus.
+
+
+
+Notes:
+1. The spell-checker will ignore words that are all capital letters or contain numbers.
+2. In this version, the spell-checker does not check any fields outside of bulletins (e.g. contact info, HQ labels, folder names).
+3. The spell-checker only displays mis-spellings in bulletin fields when in Edit mode (they are not displayed in View mode). 
+4. In this version, for words that are mis-spelled inside of Grid text fields, you have to left-click on the cell first (as if you were editing it) before right-clicking to bring up the menu to see suggestions or add to the user dictionary.
+5. In this version, spell-checking is only available for English (determined by the standard language field set for your bulletin).
+
+You can also view, and add words to, the spell-check dictionary under the Options > Spell Checking menu.  If you unintentionally added words to the dictionary (when checking spelling in bulletins) that you want to remove, you can do so here.
  
 
 
+Note:  When you hit OK, the words will be saved in alphabetical order.
 --------
 5. Saving and Modifying Bulletins
 When you create a bulletin, you can seal it or save a draft. Once you’ve saved a sealed document to the Martus server the only way to modify it is to create a new version of the bulletin. Martus automatically saves backup copies of draft bulletins to the Martus server, but you can continue to modify a draft bulletin until you save it as a sealed document.  In general, drafts are less secure than sealed bulletins because unlike sealed bulletins, they can be deleted from the server. Additionally, if someone gains access to your account, they can remove or change previously entered bulletin text.
@@ -805,12 +825,12 @@ Martus allows you to print one or more bulletins at a time. To print:
 
 Martus prints a list of attachments, but not the contents of the attachments. To print an attached file, click Save Attachment, save it to a folder on your hard drive, and then open it and print it in an appropriate application, such as an image-editing or word-processing application.  In Windows, you can simply click View Attachment, and then print the attachment from the application that opens it; you needn’t save it to your hard drive first.  
 
-Martus prints only the latest version of each bulletin on your computer.
+Note: Martus prints only the latest version of each bulletin on your computer.
 
 To print a set of bulletins that match a set of filter criteria, you can run a search, and print all the bulletins that are displayed in the Search Results folder.  For more information on searching, see “6m. Searching for specific bulletins.” 
 --------
 6o. Creating bulletin reports
-You can create customized reports from information in bulletins, and then print those reports to a printer or to an HTML file (which can be opened in a browser, or other application such as word processor or spreadsheet for further editing/formatting if desired.) 
+You can create customized reports from information in the bulletins on your computer, and then print those reports to a printer or to an HTML file (which can be opened in a browser, or other application such as word processor or spreadsheet for further editing/formatting if desired.) 
 
 To create a report:
 1. Choose File > Reports. 
@@ -847,9 +867,18 @@ Note: Martus will remember the immediately previous sort selection until you exi
 
 Note: You can copy and paste text from the preview screen directly into other applications, e.g., word-processors or spreadsheets.
 
-Martus displays only the latest version of each bulletin on your computer in the report.
+Note: Martus only displays data from the latest version of each bulletin on your computer in the report.
 
-See example of a tabular report below.
+See examples of reports below:
+
+
+Tabular report with summary counts:
+
+
+
+
+Page report without summary counts:
+
 
 
 Important Note:
@@ -861,9 +890,61 @@ b. Duplicate reporting (i.e. more than one bulletin may exist about the same inc
 c. Data quality issues (e.g. typos that might lead to a search not finding bulletins, fields being left blank where values were expected). Some of these issues can be addressed in a project customization, by requiring certain fields to be entered before a bulletin or grid row can be saved, or using dropdown fields to avoid typos and guarantee consistency in searching.
 d. Possible inconsistency in how data is entered in Martus by different people. For more on this topic, see the “Inter-rater Reliability” and “Controlled Vocabulary” sections on https://www.hrdag.org/resources/core_concepts.shtml. 
 4. Martus reports especially should not attempt to count the number of violations, victims or perpetrators, beyond counting the number of bulletins that match search criteria. Before counting violations or victims/perpetrators, important data processing needs to take place before such counting can be considered scientifically defensible. This includes addressing the possibility of duplicate reporting (more than one bulletin may exist about the same incident); representing the complexity of human rights violations (an individual who was the victim of a given act may later become the perpetrator of a different act, or vice versa); and maintaining consistency in meaning and counting (ensuring, for example, making sure that all the data entered in bulletins used consistent definitions for violations.)
-5. If you would like to perform descriptive or qualitative analysis of the information entered into Martus, Benetech can help you to use a tool to export data using customized scripts for your project. The exported data may be able to be reviewed using Benetech’s analytical tools, but please keep in mind that quantitative or inferential statistical analysis cannot be performed until additional steps have been taken in processing the data, and without enough volume and different sources of data, statistical analysis may not give meaningful or reliable results.
+5. If you would like to perform descriptive or qualitative analysis of the information entered into Martus, Benetech can help you to use a tool to export and summarize data for your project. The exported data may be able to be reviewed using Benetech’s analytical tools, but please keep in mind that quantitative or inferential statistical analysis cannot be performed until additional steps have been taken in processing the data, and without enough volume and different sources of data, statistical analysis may not give meaningful or reliable results.
 --------
-6p. Exporting bulletin data
+6p. Creating bulletin charts
+You can create customized charts from information in the bulletins on your computer, and then print those reports to a printer or to a JPEG image file (which can be opened in various applications such as image display tools, or a word processor for further editing/formatting if desired.) 
+
+To create a chart:
+1. Choose File > Charts. 
+2. Select click Bar Chart, 3D Bar Chart, or Pie Chart from the “Type of Chart” dropdown list. A Bar or 3D Bar Chart shows counts of bulletins for each value of the field you select, while a Pie Chart shows both the counts of bulletins and the % (percentage) of total bulletins that match your defined search criteria (chosen when you create the chart).  See examples below for each type of chart.  
+
+
+
+	Note:  You will see a warning message that any data in charts will not be encrypted, so anyone who sees the chart (in printed or electronic form) will be able to read all the data.
+
+3. 
+Click on the Choose Field button to select the field you want to include in the chart, pick a field from the list (which will include all the standard or custom fields that are in any of the bulletins on your computer), and then click OK.
+	
+
+
+
+4. If desired, enter text that will be displayed beneath the title of the report in the Subtitle field (e.g. “Human Rights Organization data collection monthly status report”). 
+5. Hit the OK button.
+6. In the Search dialog box, enter the criteria for bulletins you want to include in your chart. To use search criteria you’ve previously saved, click Load Previous Search. When you’ve entered the search criteria, click Search. For more information on searching, see “6m. Searching for specific bulletins.” 
+
+Note: Martus will remember the immediately previous search criteria without you needing to load it. 
+
+7. Martus displays a preview of the chart. Click Print to Printer to print the report to your printer (Martus will automatically scale the printout to fit the page width, based on your printer preferences). Click Print to File to save the report on your computer as a JPEG image file that you can open in the image display program of your choice, or copy/insert into a word-processing application. If you want to make changes to the report before printing, click Cancel, choose File > Charts, and create a new chart. 
+
+Note: Martus only displays data from the latest version of each bulletin on your computer in the chart.
+
+See examples of charts below.
+
+
+Bar Chart: 
+
+
+
+3D Bar Chart: 
+
+
+Pie Chart:
+
+
+
+Important Note:
+6. Martus charts are intended to give you information about the status/progress of data that has been gathered and entered in Martus, but not to analyze “what happened” from the data that has been entered. So for example we can count the number of bulletins that came from a particular timeframe or region (if your project is collection that information), but not how many killings there were in a particular region.
+7. Martus charts are also meant to focus on fields in which the information is distinct for a bulletin or source document. For example, you can design reports to search for all bulletins entered by a certain user, or given by individuals of a given ethnicity (if your project is collecting that information).
+8. Martus charts do not correct for the following:
+a. Sampling bias (e.g. all bulletins entered being more from one particular region than any others, even if the project is covering incidents that happened across all of them). 
+b. Duplicate reporting (i.e. more than one bulletin may exist about the same incident, or the same person may be mentioned using different names, or there may be multiple people with the same name).
+c. Data quality issues (e.g. typos that might lead to a search not finding bulletins, fields being left blank where values were expected). Some of these issues can be addressed in a project customization, by requiring certain fields to be entered before a bulletin or grid row can be saved, or using dropdown fields to avoid typos and guarantee consistency in searching.
+d. Possible inconsistency in how data is entered in Martus by different people. For more on this topic, see the “Inter-rater Reliability” and “Controlled Vocabulary” sections on https://www.hrdag.org/resources/core_concepts.shtml. 
+9. Martus charts especially should not attempt to count the number of violations, victims or perpetrators, beyond counting the number of bulletins that match search criteria. Before counting violations or victims/perpetrators, important data processing needs to take place before such counting can be considered scientifically defensible. This includes addressing the possibility of duplicate reporting (more than one bulletin may exist about the same incident); representing the complexity of human rights violations (an individual who was the victim of a given act may later become the perpetrator of a different act, or vice versa); and maintaining consistency in meaning and counting (ensuring, for example, making sure that all the data entered in bulletins used consistent definitions for violations.)
+10. If you would like to perform descriptive or qualitative analysis of the information entered into Martus, Benetech can help you to use a tool to export and summarize data for your project. The exported data may be able to be reviewed using Benetech’s analytical tools, but please keep in mind that quantitative or inferential statistical analysis cannot be performed until additional steps have been taken in processing the data, and without enough volume and different sources of data, statistical analysis may not give meaningful or reliable results.
+--------
+6q. Exporting bulletin data
 You can export the data in a bulletin to an XML file, which you can open in any application that supports XML (Extensible Markup Language). XML documents include tags that define the structure of the document, and the role of each document component in that structure.  Martus exports only the latest version of each bulletin on your computer, but shows any previous version bulletin ids and public keys for previous authors in an “Extended History” section of the exported file, for those who need it. 
 
 To export bulletins to XML:
@@ -879,8 +960,9 @@ Note: If you specify that only public data should be exported, any bulletins who
 
 Note: When viewing Extended History in an exported XML file for a bulletin, the earliest author is displayed at the top of the Extended History section, and the most recent (before the current author) is at the bottom.  Within each author’s section, if an author created multiple versions of the bulletin, the earliest/oldest version’s bulletin id is at the top of the list, and the latest/newest is at the bottom. 
 
+Note:  If you want to export more than the final versions of your bulletins, see section “11. Frequently Asked Questions” (FAQ) number 50 (Is it possible to export more than the final version of my bulletins to XML?).
 --------
-6q. Importing bulletin(s)
+6r. Importing bulletin(s)
 You can import bulletins from files that are formatted in XML, including bulletins that have been exported from Martus. You can also import attachments such as pictures, word-processing documents, or spreadsheets. Attachments do not have to be in XML format to be imported. 
 
 To import bulletins:
@@ -1031,7 +1113,7 @@ To increase the security of Martus on your computer (in case your computer falls
 Note: As described elsewhere in this User Guide, Martus allows you to attach files to bulletins. On most operating systems, when attachments are opened they are automatically saved in a ‘temporary’ directory, which is unencrypted. For information about the security precaution known as attachment ‘shredding,’ please see section “11. Frequently Asked Questions” (FAQ) #38. 
 --------
 9f. Sharing your private data with colleagues
-Your organization’s headquarters may want to access the bulletins you create, and the bulletins created by other members of your organization. Your organization’s headquarters—or anyone else you want to share your data with—can create a Headquarters (HQ) account, which will permit them to view your bulletins, including the private data in them, only if you give them permission. They will not be able to create bulletins using your account. This access can provide several advantages: it gives the organization’s leaders more information, and it ensures that someone will be able to access your private bulletin data even if you lose your key file or forget your password. You can create multiple HQ accounts, which can be useful if you would like to send different bulletins to different HQ accounts, or if there are additional people inside or outside your organization who you want to review your bulletins.
+Your organization’s headquarters may want to access the bulletins you create, and the bulletins created by other members of your organization. Your organization’s headquarters—or anyone else you want to share your data with (e.g. an editor who wants to review the work of a journalist) —can create a Headquarters (HQ) account, which will permit them to view your bulletins, including the private data in them, only if you give them permission. They will not be able to create bulletins using your account. This access can provide several advantages: it gives the organization’s leaders more information, and it ensures that someone will be able to access your private bulletin data even if you lose your key file or forget your password. You can create multiple HQ accounts, which can be useful if you would like to send different bulletins to different HQ accounts, or if there are additional people inside or outside your organization who you want to review your bulletins.
 
 All the private (and public) data in each bulletin that you save will be viewable by any HQ accounts you have selected under the bulletin’s “Headquarters” section.  This allows you to designate which HQ accounts are allowed to view each bulletin.
 
@@ -1061,9 +1143,9 @@ Import the HQ public account ID and public code:
 5. Enter the public code your headquarters office gave you. Before continuing, confirm with your headquarters office that this really is the correct public code.
 6. Click Yes to confirm that you want to grant this HQ account access to your public and private data.
 7. Enter a label for the HQ account. Use a label that is meaningful to you, as you may not always remember the account's public code. The HQ label might be the name of the person or organization, or the name of a city or region, for example. You can change the label later if you want to. Only you will see the label you assign; others who view the bulletin will not see the label, for security reasons.
-8. Check the default box if you would like to share all new bulletins (and new versions of bulletins) with this account by default.  You can still deny access to individual bulletins as you create them (see “Headquarters” section of “4a. Completing fields in a bulletin” for more information). 
-
+8. Check the default box if you would like to share all new bulletins (and new versions of bulletins) with this account by default.  You can still deny access to individual bulletins as you create them (see “Headquarters” section of “4a. Completing fields in a bulletin” for more information).
 9. Click Save.
+
 
 Instructions for field users who want to update a group of bulletins to a have a new Headquarters 
 If you have a new Headquarters account that does not have access to some of your old bulletins, you can give them access to a group of your bulletins at once, instead of having to do so one-by-one.  You can do this “bulk” or “batch” Headquarters access update for multiple bulletins by selecting the desired bulletins, and going to Edit > Update headquarters access. This option will be grayed out unless at least one bulletin is selected and at least one HQ is configured. Martus will display a progress bar during the update and allow you to cancel if desired. Draft bulletins will be updated to reflect the new HQ information. For sealed 
@@ -1523,7 +1605,7 @@ Then note the error messages you receive as you work in Martus, and e-mail those
 • Paste this, either by right-clicking and choosing "Paste", hit Command+V (also known as Apple key+V) or go to the Terminal menu bar and select Edit > Paste. You can paste either directly into an email or into a file using a text editor that you attach to an email to help@martus.org.
 
 In Linux, start Martus from the command-shell line, by typing
-java -Xbootclasspath/p:<Martus program directory>/bc-jce.jar -jar <Martus program directory>/martus.jar
+java -Xbootclasspath/p:<Martus program directory>/ThirdParty/bc-jce.jar -jar <Martus program directory>/martus.jar
 
 See Linux portion of section “2a. Installing” for examples.
 
@@ -1618,7 +1700,7 @@ The installation steps will be the same as in the Linux portion of section “2a
 
 a. You will need root privileges. We recommend using the sudo command, but you could instead directly sign in as a root user.
 b.  When choosing the <Martus Program Directory>, choose a world readable directory such as /usr/share/java/martus
-c.  If using sudo, then commands that write data (mkdir, unzip, echo, chmod)  must be preceeded by "sudo". For example:
+c.  If using sudo, then commands that write data (mkdir, unzip, echo, chmod)  must be preceded by "sudo". For example:
        sudo mkdir -p /usr/share/java/martus
 
 d. After creating the script as described in section “2a. Installing”, copy it to /usr/bin, like this (assuming you are using sudo):
@@ -1693,7 +1775,7 @@ You should see the new timeout length in the Martus console.
 For instructions on how to change the Martus command line for Mac (if you installed from zip or CD/iso files) or Linux, see section “2a. Installing” of the User Guide or email help@martus.org. 
 
 40. I want to use Martus in Burmese but the fonts don’t seem to be displaying correctly.  How can I get Burmese text to show up in Martus?
-In Martus 4.0, Burmese fonts should display correctly in Windows without any extra steps required. If you notice that the fonts are not displaying correctly in the window title bars at the top of each screen, follow the steps in c) below.
+In Martus 4.0, Burmese fonts should display correctly in Windows without any extra steps required. If you notice that the fonts are not displaying correctly in the window title bars at the top of each screen, copy the Myazedi font file from C:\Martus\lib\fonts\fallback to your Windows\Fonts folder, and follow the steps in c) below.
 
 If  you are running Martus 4.0 in Burmese on Mac and the fonts are not displaying correctly, you can find the Myazedi font inside the Fonts folder of the Martus DMG (or zip file) – double-click on it to install.  
 
@@ -1728,7 +1810,7 @@ Start Martus as usual.  Pick Burmese from the language dropdown on the signin sc
 While you cannot type Burmese text into Martus, you can copy/paste Burmese text into Martus fields.  
 
 41. I want to run Martus in Khmer, but the fonts don’t seem to be displaying correctly.  How can I get Khmer text to show up in Martus?
-In Martus 4.0, Khmer fonts should display correctly in Windows without any extra steps required. If you notice that the fonts are not displaying correctly in the window title bars at the top of each screen, follow the steps in e) below.
+In Martus 4.0, Khmer fonts should display correctly in Windows without any extra steps required. If you notice that the fonts are not displaying correctly in the window title bars at the top of each screen, copy the KhmerOS font file from C:\Martus\lib\fonts\fallback to your Windows\Fonts folder, and follow the steps in e) below.
 
 If  you are running Martus 4.0 in Khmer on Mac and the fonts are not displaying correctly, you can find the KhmerOS font inside the Fonts folder of the Martus DMG (or zip file) – double-click on it to install.  
 
@@ -1833,4 +1915,16 @@ Replace what is in the Target command line with the below:
     or the equivalent based on where you installed Java6: 
     "C:\where-you-installed-java\jre6\bin\java.exe" -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
 Note: In versions of Martus before 4.0, there were some server functions that would not work correctly when running Martus with certain versions of Java6 in Windows.  If you are using Martus 4.0 or later, this will not be an issue because the correct version of Java6 is included, but if you are using an earlier version of Martus with Java6, you need to make sure that your version of Java6 is later than 1.6.0_30.  Please email help@martus.org if you need assistance.
+50. Is it possible to export more than the final version of my bulletins to XML?
+Starting in version 4.1, there is a test version of XML export functionality for multiple versions of Martus bulletins. This feature has not been fully completed, but will be helpful for those users who want to export all their version history into other tools.  Please note that if you try to import a multiple-version exported XML file back into Martus, the imported bulletins would not be connected to each other in any way, and would not have any previous author information. To access this feature, you must add the “ --alpha-tester” option to the end of your Martus command line.  
+
+You can do this in Windows by right-clicking on the Martus desktop shortcut, choosing Properties, selecting the Shortcut tab, and adding the “ --alpha-tester” (without quotes) at the end of the text in the Target box.  
+
+You can do this in Mac (if installed with a DMG) by right-clicking on the Martus icon (.app file), pick “Show Package Contents”, double-click on Contents folder, right click on info.plist, choose Open With and pick TextEdit, and add “ --alpha-tester” (without quotes) to the Arguments section so it looks like this:
+    <key>Arguments</key>
+            <string>--alpha-tester </string>
+Close the info.plist file, saving the changes if asked, and close the Contents folder. 
+Once you have changed your Martus command, you will be able to see the  “Include all versions of each bulletin in export” checkbox when you select File > Export Folder or File > Export Bulletins. More instructions about standard (final version only) XML bulletin export are available in section “6p. Exporting bulletin data”. 
+51. Are there any Martus training resources available for my organization?
+Please see the Martus website for web and video tutorials on how to use Martus, including installation and troubleshooting for Windows and Mac.  You can find these under the “Products and Services” menu of https://www.martus.org, or directly at https://www.martus.org/martusdemo.  
 

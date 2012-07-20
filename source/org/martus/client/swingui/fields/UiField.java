@@ -31,7 +31,7 @@ import java.awt.event.FocusListener;
 import javax.swing.JComponent;
 import javax.swing.event.ChangeListener;
 
-import org.martus.client.core.LanguageChangeListener;
+import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.swingui.fields.UiEditableGrid.EnterAction;
 import org.martus.client.swingui.fields.UiEditableGrid.ShiftTabAction;
 import org.martus.client.swingui.fields.UiEditableGrid.SpaceAction;
@@ -67,7 +67,7 @@ abstract public class UiField
 	{
 	}
 	
-	public void setLanguageListener(LanguageChangeListener listener)
+	public void setBulletinLanguageListener(BulletinLanguageChangeListener listener)
 	{
 	}
 	

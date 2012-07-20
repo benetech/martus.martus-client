@@ -1,8 +1,8 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2005-2007, Beneficent
-Technology, Inc. (The Benetech Initiative).
+monitoring software. Copyright (C) 2012, Beneficent
+Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -23,47 +23,21 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
+package org.martus.client.search;
 
-package org.martus.client.swingui.fields;
+import org.martus.common.MiniLocalization;
 
-import javax.swing.JComponent;
-import javax.swing.text.JTextComponent;
-
-import org.martus.clientside.UiLocalization;
-import org.martus.swing.UiTextField;
-
-abstract public class UiSingleLineTextField extends UiStringField
+public class PageReportFieldChooserSpecBuilder extends FieldChooserSpecBuilder
 {
-	public UiSingleLineTextField(UiLocalization localizationToUse)
+	public PageReportFieldChooserSpecBuilder(MiniLocalization localizationToUse)
 	{
 		super(localizationToUse);
 	}
-	
+
 	@Override
-	public JTextComponent getTextComponent()
+	protected boolean shouldIncludeLastSaved()
 	{
-		return widget;
+		// NOTE: Page Reports don't support pseudofields
+		return false;
 	}
-	
-	public JComponent getComponent()
-	{
-		return widget;
-	}
-
-	public JTextComponent getEditor()
-	{
-		return widget;
-	}
-
-	public String getText()
-	{
-		return widget.getText();
-	}
-
-	public void setText(String newText)
-	{
-		widget.setText(newText);
-	}
-
-	UiTextField widget;
 }

@@ -39,7 +39,6 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JViewport;
 
-import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentViewSection;
@@ -51,7 +50,7 @@ import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
-public class UiBulletinPreviewDlg extends JDialog implements ActionListener, LanguageChangeListener
+public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 {
 
 	public UiBulletinPreviewDlg(UiMainWindow owner, MartusLocalization localizationToUse, String windowTitleTag)
@@ -68,7 +67,7 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener, Lan
 		UiBulletinComponentViewSection view = new UiBulletinComponentViewSection(owner, Bulletin.TOP_SECTION);
 		FieldSpecCollection standardFieldTags = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
 		
-		view.createLabelsAndFields(standardFieldTags, this);
+		view.createLabelsAndFields(standardFieldTags, null);
 		view.copyDataFromPacket(fdp);
 		view.updateEncryptedIndicator(fdp.isEncrypted());	
 		
@@ -106,12 +105,5 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener, Lan
 		dispose();
 	}
 
-	public void languageChanged(String newLanguageCode) 
-	{
-		//read-only nothing to do
-	}
-
-
 	private MartusLocalization localization;
-
 }

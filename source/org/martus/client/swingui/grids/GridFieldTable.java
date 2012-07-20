@@ -87,6 +87,22 @@ abstract public class GridFieldTable extends GridTable
 	{
 		editors = newEditors;
 	}
+	
+	@Override
+	public void updateSpellChecker(String bulletinLanguageCode)
+	{
+		super.updateSpellChecker(bulletinLanguageCode);
+		updateSpellChecker(renderers, bulletinLanguageCode);
+		updateSpellChecker(editors, bulletinLanguageCode);
+	}
+
+	private void updateSpellChecker(GridCellEditorAndRenderer[] editorsOrRenderers, String bulletinLanguageCode)
+	{
+		for (GridCellEditorAndRenderer editorOrRenderer : editorsOrRenderers)
+		{
+			editorOrRenderer.updateSpellChecker(bulletinLanguageCode);
+		}
+	}
 
 	private GridCellEditorAndRenderer genericDateEditor;
 	private GridCellEditorAndRenderer genericDateRangeEditor;

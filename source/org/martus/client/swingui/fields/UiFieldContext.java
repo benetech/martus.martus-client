@@ -42,6 +42,7 @@ public class UiFieldContext
 		fieldSpecs = new FieldSpecCollection();
 		gridFieldsByTag = new HashMap();
 		fieldsByTag = new HashMap();
+		currentBulletinLanguage = "";
 	}
 
 	public void setSectionFieldSpecs(FieldSpecCollection specs)
@@ -127,7 +128,18 @@ public class UiFieldContext
 		return fieldSpecs.getAllReusableChoiceLists();
 	}
 
+	public void setCurrentBulletinLanguage(String bulletinLanguageCode)
+	{
+		currentBulletinLanguage = bulletinLanguageCode;
+	}
+	
+	public String getCurrentBulletinLanguage()
+	{
+		return currentBulletinLanguage;
+	}
+
 	private FieldSpecCollection fieldSpecs;
 	private HashMap gridFieldsByTag;
 	private HashMap fieldsByTag;
+	private String currentBulletinLanguage;
 }

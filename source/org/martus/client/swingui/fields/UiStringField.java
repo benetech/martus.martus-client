@@ -32,7 +32,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.text.JTextComponent;
 
 import org.martus.client.swingui.MartusLocalization;
-import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.spellcheck.UiStringFieldContextMenuListener;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiPopupMenu;
@@ -56,11 +55,11 @@ public abstract class UiStringField extends UiField
 	public void contextMenu(MouseEvent e)
 	{
 		UiPopupMenu menu = new UiPopupMenu();
-		menu.addPopupMenuListener(new UiStringFieldContextMenuListener(menu, getEditor(), localization));
+		menu.addPopupMenuListener(new UiStringFieldContextMenuListener(menu, this, localization));
 		menu.show(getEditor(), e.getX(), e.getY());
 	}
 	
-	abstract protected JTextComponent getTextComponent();
+	public abstract JTextComponent getTextComponent();
 
 	abstract public JTextComponent getEditor();
 
@@ -87,14 +86,22 @@ public abstract class UiStringField extends UiField
 			boolean hasAutospell = true;
 			// NOTE: JOrtho will only show squigglies for editable fields 
 			SpellChecker.register(getTextComponent(), hasPopup, hasShortcut, hasAutospell);
+			isSpellCheckEnabled = true;
 		} 
 		else
 		{
+			isSpellCheckEnabled = false;
 			SpellChecker.unregister(getTextComponent());
 		}
 	}
 	
+	public boolean isSpellCheckEnabled()
+	{
+		return isSpellCheckEnabled;
+	}
+	
 	UiLocalization localization;
 	MouseAdapter mouseAdapter;
+	private boolean isSpellCheckEnabled;
 }
 

@@ -19,6 +19,7 @@
 4. Creating a Bulletin
 4a. Completing fields in a bulletin
 4b. Customizing your bulletins
+4c. Checking the spelling of text in your bulletins
 5. Saving and Modifying Bulletins
 5a. Saving a sealed bulletin
 5b. Saving a draft
@@ -43,8 +44,9 @@
 6m. Searching for specific bulletins
 6n. Printing bulletins
 6o. Creating bulletin reports
-6p. Exporting bulletin data
-6q. Importing bulletin(s)
+6p. Creating bulletin charts
+6q. Exporting bulletin data
+6r. Importing bulletin(s)
 7. Deleting Your Bulletins and Account Information
 8. Deleting All Martus Data, Including the Application
 9. Keeping Your Data Secure

@@ -77,6 +77,12 @@ public class UiReadOnlyFieldCreator extends UiFieldCreator
 		return viewer;
 	}
 
+	@Override
+	public UiField createLanguageField(DropDownFieldSpec spec)
+	{
+		return createChoiceField(spec);
+	}
+
 	public UiField createBoolField(FieldSpec spec)
 	{
 		return new UiBoolViewer(getLocalization());
