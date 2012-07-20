@@ -1,5 +1,5 @@
-1. Introduction to the Martus™ Software
-1a. What is Martus™?
+ï»¿1. Introduction to the Martusâ„¢ Software
+1a. What is Martusâ„¢?
 1b. Why is security so important when using Martus?
 1c. How does Martus keep the data secure?
 1d. What does an individual need to do to keep data secure?

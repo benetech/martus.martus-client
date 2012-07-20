@@ -1915,7 +1915,6 @@ Replace what is in the Target command line with the below:
     or the equivalent based on where you installed Java6: 
     "C:\where-you-installed-java\jre6\bin\java.exe" -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
 Note: In versions of Martus before 4.0, there were some server functions that would not work correctly when running Martus with certain versions of Java6 in Windows.  If you are using Martus 4.0 or later, this will not be an issue because the correct version of Java6 is included, but if you are using an earlier version of Martus with Java6, you need to make sure that your version of Java6 is later than 1.6.0_30.  Please email help@martus.org if you need assistance.
-
 50. Is it possible to export more than the final version of my bulletins to XML?
 Starting in version 4.1, there is a test version of XML export functionality for multiple versions of Martus bulletins. This feature has not been fully completed, but will be helpful for those users who want to export all their version history into other tools.  Please note that if you try to import a multiple-version exported XML file back into Martus, the imported bulletins would not be connected to each other in any way, and would not have any previous author information. To access this feature, you must add the “ --alpha-tester” option to the end of your Martus command line.  
 
@@ -1926,6 +1925,6 @@ You can do this in Mac (if installed with a DMG) by right-clicking on the Martus
             <string>--alpha-tester </string>
 Close the info.plist file, saving the changes if asked, and close the Contents folder. 
 Once you have changed your Martus command, you will be able to see the  “Include all versions of each bulletin in export” checkbox when you select File > Export Folder or File > Export Bulletins. More instructions about standard (final version only) XML bulletin export are available in section “6p. Exporting bulletin data”. 
-
 51. Are there any Martus training resources available for my organization?
 Please see the Martus website for web and video tutorials on how to use Martus, including installation and troubleshooting for Windows and Mac.  You can find these under the “Products and Services” menu of https://www.martus.org, or directly at https://www.martus.org/martusdemo.  
+
