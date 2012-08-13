@@ -2,9 +2,9 @@
 # Language code:  fa
 # Language name:  Farsi/Dari
 # Translated by:  Abdee Kalantari, Global Arena
-# Exported date:  Thu Oct 06 10:42:01 PDT 2011
-# Client version: pre-3.6.1
-# Client build:   2011-10-05
+# Exported date:  Mon Aug 13 09:32:20 PDT 2012
+# Client version: 4.1.0
+# Client build:   2012-07-27.3168
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -133,6 +133,9 @@
 #____________________=Continue
 -2e02-button:Continue=ادامه دهيد
 
+#_______________________=Create a new chart template
+-9ef9-button:CreateChart=<Create a new chart template>
+
 #____________________________=Create New Page Report
 -1d7a-button:CreatePageReport= ایجاد صفحه گزارش جدید
 
@@ -240,6 +243,9 @@
 
 #______________________________________________=Retrieve latest bulletin version only
 -3449-button:RetrieveLatestBulletinRevisionOnly= حصول مجدد تنها آخرین
+
+#____________________=Display an existing chart
+-7d62-button:RunChart=<Display an existing chart>
 
 #_____________________=Use Existing Report Format
 -b052-button:RunReport= استفاده از ساختار گزارش موجود
@@ -547,6 +553,51 @@
 #_____________________________=Thai Solar (2548-05-31)
 -2be4-field:CalendarSystemThai= تقویم شمسی تایلندی (2548-05-31)
 
+#_________________________=Chart produced #Date#
+-fb8c-field:ChartCreatedOn=<Chart produced #Date#>
+
+#____________________________=Field to count
+-77e7-field:ChartFieldToCount=<Field to count>
+
+#______________________________=(Missing field or data)
+-1af6-field:ChartItemLabelBlank=<(Missing field or data)>
+
+#_____________________________=#Count# bulletins = #Percent# of Martus bulletins
+-9e45-field:ChartPieSliceLabel=<#Count# bulletins = #Percent# of Martus bulletins>
+
+#___________________________________=Please note that any Martus bulletin data in charts will not be encrypted, \nand anyone who gets a copy of the chart output will be able to read all the data. \nUse caution when selecting a private field.
+-cf89-field:ChartPrivateFieldsNotice=&lt;Please note that any Martus bulletin data in charts will not be encrypted, \nand anyone who gets a copy of the chart output will be able to read all the data. \nUse caution when selecting a private field.&gt;
+
+#______________________________________________=Note: Chart shows number of Martus bulletins matching search criteria.
+-dee3-field:ChartSelectedBulletinsDisclaimerBar=<Note: Chart shows number of Martus bulletins matching search criteria.>
+
+#______________________________________________=Note: Chart shows % of Martus bulletins matching search criteria.
+-b721-field:ChartSelectedBulletinsDisclaimerPie=<Note: Chart shows % of Martus bulletins matching search criteria.>
+
+#___________________________=Martus Bulletin Counts
+-5582-field:ChartSeriesTitle=<Martus Bulletin Counts>
+
+#________________________=Subtitle (optional)
+-4104-field:ChartSubtitle=<Subtitle (optional)>
+
+#_____________________=Martus Bulletins by #SelectedField#
+-1933-field:ChartTitle=<Martus Bulletins by #SelectedField#>
+
+#____________________=Type of Chart
+-3f13-field:ChartType=<Type of Chart>
+
+#_________________________=3D Bar Chart
+-8e3e-field:ChartType3DBar=<3D Bar Chart>
+
+#_______________________=Bar Chart
+-75fe-field:ChartTypeBar=<Bar Chart>
+
+#_______________________=Pie Chart
+-75ed-field:ChartTypePie=<Pie Chart>
+
+#__________________________=Martus Bulletin Count
+-0d40-field:ChartYAxisTitle=<Martus Bulletin Count>
+
 #__________________________________=Select the headquarters listed below that you want to add to all the bulletins listed above.
 -23a1-field:ChooseHeadquartersToAdd= آنعده دفاتر مرکزی ذکر شده در پائین را انتخاب کنید که می خواهید در همه رویدادهای خبری در لِست فوق اضافه شوند.  
 
@@ -646,6 +697,9 @@
 #_____________________________=Default Details
 -4a82-field:DefaultDetailFiles=جزيياتی که از ابتدا وارد شده بود
 
+#__________________________________________=chart.jpeg
+-4a06-field:DefaultPrintChartToDiskFileName=<chart.jpeg>
+
 #_____________________________________=bulletins.html
 -a4f1-field:DefaultPrintToDiskFileName=bulletins.html
 
@@ -709,6 +763,9 @@
 #___________________________=Exit when complete
 -30e3-field:ExitWhenComplete=پس از اتمام کار، برنامه خروج کند.
 
+#____________________________=Include all versions of each bulletin in export
+-d390-field:ExportAllVersions=<Include all versions of each bulletin in export>
+
 #____________________________=Include attachments in export
 -1a48-field:ExportAttachments=شمولیت ضمیمه ها هنگام صدور 
 
@@ -736,8 +793,8 @@
 #______________________________=If you want all of your grid search criteria to be met in a single bulletin grid row, please check the "Match grid column specifications" checkbox. For example, if you want to search for a specific victim name in a single row in your bulletins created after a certain date, select the checkbox and enter the following fields in the Search screen: "Victim Information: First Name" = x and "Victim Information: Last Name" = y and "Date Created" >= YYYY-Mon-DD. If you do not select the "Match grid column specifications" checkbox, Martus will find bulletins created after your specified date where any row has the first name you specified and any other row has the last name specified, but not necessarily in the same bulletin row (you could have a row with "First Name" = x and "Last Name" = b, and a different row with "First Name" = a and "Last Name" = y, and Martus will find that bulletin as matching the search because you did not specify that it had to match in a single row)\n\n
 -2a0a-field:FancySearchHelpMsg4=اگر می خواهید همه شرایط جستجوی مشبک تان در یک سطر مشبک رویداد خبری یکجا قرار داده شود، لطفا قوطی مارک دار " مشخصات ستون مشبک را مطابقت دهید" . بطور مثال اگر در رویدادهای خبری ایجاد شده پس از یک تاریخ معین می خواهید برای نام یک قربانی مشخص در یک سطر فردی جستجو کنید، قوطی مارک را انتخاب کنید و در صحفه نمایش جستجو ساحات ذیل را وارد کنید: "معلومات قربانی: اسم" = x و "معلومات قربانی: تخلص" = y و "تاریخ ایجاد" >= روز/ماه/سال  اگر گزینه قوطی مارک دار " مشخصات ستون مشبک را مطابقت دهید" را انتخاب نکنید، Martus رویدادهای خبری ایجاد شده بعد از تاریخ مشخص کرده شما جایی که یک سطر نام مشخص کرده شما را و سطر دیگر تخلص مشخص کرده شما را در بر داشته باشد، پیدا خواهد کرد، اما باید در عین رویداد خبری باشد) شما می توانید یک سطر با "First Name" = x and "Last Name" = b و سطر دیگر با"First Name" = a  ("اسم اول") و  "Last Name" = y ("تخلص") داشته باشید، و Martus رویدادهای خبری همخوان با جستجوی شما را پیدا خواهد کرد زیرا شما مشخص نساخته بودید تا در یک سطر فردی باید همخوانی داشته باشند.) \n\n
 
-#______________________________= Additional Search Notes:\n\n 1. Because Martus searches all rows of any grid (table) fields for your criteria, it may find bulletins where one grid row matches your criteria but other rows do not.  For example you could have a bulletin with a grid that has a location field in it and you have multiple rows of data in the grid with locations A, B, and C.  If you search for bulletins where location != C (does not equal C), Martus will find that bulletin because there are 2 rows in the bulletin grid where the location is not C, even though there is one row where the locations IS C.\n\n 2. In this release, if you are searching on a multi-level dropdown, all searches are exact matches, not partial or "starts with" matches.  This means that you have to pick the exact level at which you want to be searching.  For example, an "Event Location" field that has three levels (State/City/Neighborhood) will have three entries in the search field list:  Event Location: State, Event Location: City, and Event Location: Neighborhood.  So if you want to find any bulletins that have an Event Location anywhere in California (regardless of the City), you have to pick the "Event Location: State" field to search on and pick California off the dropdown list choices. If you pick Event Location: City to search on and then pick California but leave the City level blank, Martus will only find entries where there was no City data entered  (City was blank), as opposed to ANY location with California regardless of what data was entered at the City level.\n\n 3. If you do not see your search terms/dates in the final version of the bulletin displayed in the Search Results folder, your criteria may have been matched in an earlier version of the bulletin.  You can access previous versions by clicking the "Bulletin Details..." button at the top of the bulletin.  To search only the most recent versions of bulletins, select Only Search Most Recent Versions of Bulletins in the Search dialog box.\n\n 4. If you have fields in different bulletins or from different customizations that are exactly the same, Martus will combine them in any Search and Report field lists.  And while Martus warns you about duplicate labels where you are creating a new bulletin customization, it is possible that over time, you may have bulletins with different customizations that ended up with the same labels (e.g. maybe you changed a text field to a dropdown field but kept the same label).  In these cases, Martus will display both fields in the search screen, and try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists.  Also, if you have fields with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same.  So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion. Please see the "Customize Fields" Help screen for more guidelines on creating fields for searching.\n\n 5. You may sometimes see duplicate entries in dropdown list search criteria values in the search screen.  If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria dropdown list options are the labels for each list entry, but the codes you defined determine how many entries there will be in the search dropdown list (see the "Customize Fields" Help screen for more information about creating custom dropdown fields). So if you have different Reusable Choices codes with the same label in different bulletin customizations in your account, the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like "label1" and your search will be on bulletins that have that label, regardless of which code the customization had for the label).  And if you have the same Reusable Choices code with different labels in different bulletin customizations in your account, the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like "label1; label2" and your search will be on bulletins that have either of those labels).\n\nFor additional help with searching, email help@martus.org.
--35fc-field:FancySearchHelpMsg5= یاداشت بیشتر در مورد جستجو: \n\n 1. Martus همه سطرها در ساحات مشبک (جدول) نظر به شرایط شما جستجو می کند، ممکن است رویدادهای خبری پیدا کند که یک سطر مشبک آن با شرایط شما همخوانی دارد اما سطرهای دیگر ندارد. بطور مثال، ممکن است یک رویداد خبری همراه با یک مشبک داشته باشید که ساحه مکان دارد و شما چندین سطر اطلاعات با مکان های A, B,  و  C در این مشبک دارید. اگر دنبال رویدادهایی بگردید که != C (مساوی نیست به C) می باشد، Martus آن رویداد خبری را پیدا خواهد نمود زیرا در مشبک رویداد خبری دو سطر وجود دارد که مکان هایشان C نیستند، اگرچه یک سطر هم وجود دارد که مکان های آن C می باشد. \n\n2. در این انتشار، اگر یک لِست پائین شونده چند سویه یی را جستجو می کنید، همه جستجوها همخوانی های قسمی یا "با...شروع شود" نه بلکه همخوانی های دقیق می باشند. به این معنی که شما سویه دقیقی را که در آن جستجو دارید، باید انتخاب کنید. بطور مثال، یک ساحه "رخداد مکان" که سه سویه دارد (ایالت/شهر/محله) در لست ساحه جستجو سه ورودی خواهد داشت. مکان رخداد: ایالت، مکان رخداد:شهر، و مکان رخداد:محله. بناءً اگر می خواهید رویدادی بیابید که یک مکان رخداد در یکی از مکان های در کالیفورنیا دارد (بدون درنظرداشت شهر)، شما ساحه "مکان رخداد:ایالت" را برای جستجو باید برگزیده و کالیفورنیا را از گزینه های لست پائین شونده انتخاب کنید. اگر مکان رخداد: شهر را برای جستجو انتخاب کردید و سپس کالیفورنیا را برگزیدید اما سویه شهر را خالی گذاشتید، Martus تنها ورودی هایی را می یابد که در آن اطلاعات شهر وارد شده نباشد (شهر خالی گذاشته شده بود) بعوض هرگونه مکانی همراه با کالیفورنیا بدون درنظرداشت اینکه چگونه اطلاعات در سویه شهر وارد شده بود. \n\n3. اگر جملات/تاریخ های جستجو در نسخه نهایی رویداد خبری را در پوشه نتایج جستجو نمایش داده نشد، شرایط تان ممکن است با یک نسخه قدیمی رویداد خبری همخوانی پیدا کند. به نسخه های قدیمی رویداد با کلیک روی "جزئیات رویداد خبری..." می توانید دسترسی پیدا کنید. برای جستجوی تنها آخرین نسخه از رویدادهای خبری، تنها جستجوی تازه ترین رویدادهای خبری را در قوطی تبادله جستجو انتخاب کنید. \n\n4. اگر ساحات شما در رویدادهای خبری متفاوت و یا در فرمایشات متفاوتی وجود دارد که دقیقاً یکسان اند، Martus در لست های ساحه جستجو و گزارش ادغام خواهد کرد. اگرچه Martus در مورد برچسب های مکرر که در آنها شما فرمایشات رویدادهای جدید را ایجاد می کنید، هشدار می دهد، اما با آنهم ممکن است با گذشت زمان شما رویدادهایی با فرمایشات مختلف داشته باشید که در برجسب های یکسان قرار داشته اند.(بطور مثال شما یک ساحه متنی را به یک پائین شونده تبدیل می کنید اما برچسب را یکسان نگه می دارید) در این موارد، Martus هردو ساحات را در صفحه نمایش جستجو نشان می دهد و سعی می کند به شما کمک کند تا با نمایش نوع و بند ساحه در لست های انتخابی  تفاوت میان ساحات را کشف کنید. همچنان اگر کدام ساحه با بند یکسان و برچسب های متفاوت و/یا نوع های ساحه متفاوت داشته باشید، Martus ممکن است با استفاده از بند و نوع ساحه، هنگامیکه دو ساحه یکسان مورد هدف است، سعی نموده و آنرا مشخص سازد. بناءً ما برای تان توصیه می کنیم تا هنگام ارائه فرمایشات بندها و برچسب ها بصورت واضح با یکدیگر باید مرتبط باشند تا از هرگونه اشتباه جلوگیری گردد. برای معلومات بیشتر در مور راهنمایی روی ایجاد ساحات برای جستجو به صفحه نمایش امداد "فرمایش ساحات" مراجعه کنید. \n\n5. شما ممکن است بعضی اوقات ورودهای مکرر در مقادیر شرایط جستجو در لست های پائین شونده در صفحه نمایش جستجو ببینید. اگر برای جستجو ساحه پائین شونده گزینه های قابل استفاده مکرر برگزیدید، مقادیری که بحیث اختیارات لست پائین شونده شرایط نمایش داده می شوند در عبارتند از برچسب ها برای هر لست ورودی می باشند، اما کود هایی شما تعریف کردید، تعداد ورود در لست پائین شونده جستجو را معین می سازد (برای معلومات بیشتر در ایجاد ساحات پائین شونده دلخواه به صفحه نمایش امداد "فرمایش ساحات" مراجعه نمایید). ازینرو اگر شما کودهای گزینه های قابل استفاده مکرر در برچسب های یکسان در فرمایشات رویدادهای خبری در حساب خود دارید، این برچسب ها در لست های پائین شونده رویداد خبری دوبار نمایش داده می شوند (بطور مثال، اگر label1 (برچسب1) را برای کود1 و کود2 استفاده کرده باشید، در پائین شونده جستجو 2 ورودی خواهید دید که شبیه "label1"(برچسب1) می باشند و جستجوی شما بالای رویدادهایی خواهد بود که آن برچسب را دارد، بدون در نظرداشت اینکه فرمایشات برای این برچسب کدام کود را داشت). و اگر شما کود گزینه های قابل استفاده مکرر یکسان با برچسب های متفاوت در فرمایشات رویدادهای خبری در حساب خود داشتید، لست پائین شونده جستجو برای آن کود هردو مقدار را بوسیله یک نقطه ویرگول نشان خواهد داد (بطور مثال اگر کود1 را برای برچسب1 و برچسب2 استفاده کرده باشید شما در پائین شونده جستجو یک ورودی خواهید داشت که که چنین می باشد "label1; label2"("برچسب1؛ برجسب2") و جستجوی تان بالای رویدادهایی است که یکی از این برچسب ها را دارد). \n\nبرای کمک بیشتر در مورد جستجو به آدرس help@martus.org ایمیل بفرستید.
+#______________________________= Additional Search Notes:\n\n 1. Because Martus searches all rows of any grid (table) fields for your criteria, it may find bulletins where one grid row matches your criteria but other rows do not.  For example you could have a bulletin with a grid that has a location field in it and you have multiple rows of data in the grid with locations A, B, and C.  If you search for bulletins where location != C (does not equal C), Martus will find that bulletin because there are 2 rows in the bulletin grid where the location is not C, even though there is one row where the locations IS C.\n\n 2. In this release, if you are searching on a multi-level dropdown, all searches are exact matches, not partial or "starts with" matches.  This means that you have to pick the exact level at which you want to be searching.  For example, an "Event Location" field that has three levels (Region/City/Neighborhood) will have three entries in the search field list:  Event Location: Region, Event Location: City, and Event Location: Neighborhood.  So if you want to find any bulletins that have an Event Location anywhere in Region X (regardless of the City), you have to pick the "Event Location: Region" field to search on and pick Region X off the dropdown list choices. If you pick Event Location: City to search on and then pick Region X but leave the City level blank, Martus will only find entries where there was no City data entered  (City was blank), as opposed to ANY location with Region X regardless of what data was entered at the City level.\n\n 3. If you do not see your search terms/dates in the final version of the bulletin displayed in the Search Results folder, your criteria may have been matched in an earlier version of the bulletin.  You can access previous versions by clicking the "Bulletin Details..." button at the top of the bulletin.  To search only the most recent versions of bulletins, select Only Search Most Recent Versions of Bulletins in the Search dialog box.\n\n 4. If you have fields in different bulletins or from different customizations that are exactly the same, Martus will combine them in any Search and Report field lists.  And while Martus warns you about duplicate labels where you are creating a new bulletin customization, it is possible that over time, you may have bulletins with different customizations that ended up with the same labels (e.g. maybe you changed a text field to a dropdown field but kept the same label).  In these cases, Martus will display both fields in the search screen, and try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists.  Also, if you have fields with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same.  So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion. Please see the "Customize Fields" Help screen for more guidelines on creating fields for searching.\n\n 5. You may sometimes see duplicate entries in dropdown list search criteria values in the search screen.  If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria dropdown list options are the labels for each list entry, but the codes you defined determine how many entries there will be in the search dropdown list (see the "Customize Fields" Help screen for more information about creating custom dropdown fields). So if you have different Reusable Choices codes with the same label in different bulletin customizations in your account, the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like "label1" and your search will be on bulletins that have that label, regardless of which code the customization had for the label).  And if you have the same Reusable Choices code with different labels in different bulletin customizations in your account, the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like "label1; label2" and your search will be on bulletins that have either of those labels).\n\nFor additional help with searching, email help@martus.org.
+-c989-field:FancySearchHelpMsg5=< یاداشت بیشتر در مورد جستجو: \n\n 1. Martus همه سطرها در ساحات مشبک (جدول) نظر به شرایط شما جستجو می کند، ممکن است رویدادهای خبری پیدا کند که یک سطر مشبک آن با شرایط شما همخوانی دارد اما سطرهای دیگر ندارد. بطور مثال، ممکن است یک رویداد خبری همراه با یک مشبک داشته باشید که ساحه مکان دارد و شما چندین سطر اطلاعات با مکان های A, B,  و  C در این مشبک دارید. اگر دنبال رویدادهایی بگردید که != C (مساوی نیست به C) می باشد، Martus آن رویداد خبری را پیدا خواهد نمود زیرا در مشبک رویداد خبری دو سطر وجود دارد که مکان هایشان C نیستند، اگرچه یک سطر هم وجود دارد که مکان های آن C می باشد. \n\n2. در این انتشار، اگر یک لِست پائین شونده چند سویه یی را جستجو می کنید، همه جستجوها همخوانی های قسمی یا "با...شروع شود" نه بلکه همخوانی های دقیق می باشند. به این معنی که شما سویه دقیقی را که در آن جستجو دارید، باید انتخاب کنید. بطور مثال، یک ساحه "رخداد مکان" که سه سویه دارد (ایالت/شهر/محله) در لست ساحه جستجو سه ورودی خواهد داشت. مکان رخداد: ایالت، مکان رخداد:شهر، و مکان رخداد:محله. بناءً اگر می خواهید رویدادی بیابید که یک مکان رخداد در یکی از مکان های در کالیفورنیا دارد (بدون درنظرداشت شهر)، شما ساحه "مکان رخداد:ایالت" را برای جستجو باید برگزیده و کالیفورنیا را از گزینه های لست پائین شونده انتخاب کنید. اگر مکان رخداد: شهر را برای جستجو انتخاب کردید و سپس کالیفورنیا را برگزیدید اما سویه شهر را خالی گذاشتید، Martus تنها ورودی هایی را می یابد که در آن اطلاعات شهر وارد شده نباشد (شهر خالی گذاشته شده بود) بعوض هرگونه مکانی همراه با کالیفورنیا بدون درنظرداشت اینکه چگونه اطلاعات در سویه شهر وارد شده بود. \n\n3. اگر جملات/تاریخ های جستجو در نسخه نهایی رویداد خبری را در پوشه نتایج جستجو نمایش داده نشد، شرایط تان ممکن است با یک نسخه قدیمی رویداد خبری همخوانی پیدا کند. به نسخه های قدیمی رویداد با کلیک روی "جزئیات رویداد خبری..." می توانید دسترسی پیدا کنید. برای جستجوی تنها آخرین نسخه از رویدادهای خبری، تنها جستجوی تازه ترین رویدادهای خبری را در قوطی تبادله جستجو انتخاب کنید. \n\n4. اگر ساحات شما در رویدادهای خبری متفاوت و یا در فرمایشات متفاوتی وجود دارد که دقیقاً یکسان اند، Martus در لست های ساحه جستجو و گزارش ادغام خواهد کرد. اگرچه Martus در مورد برچسب های مکرر که در آنها شما فرمایشات رویدادهای جدید را ایجاد می کنید، هشدار می دهد، اما با آنهم ممکن است با گذشت زمان شما رویدادهایی با فرمایشات مختلف داشته باشید که در برجسب های یکسان قرار داشته اند.(بطور مثال شما یک ساحه متنی را به یک پائین شونده تبدیل می کنید اما برچسب را یکسان نگه می دارید) در این موارد، Martus هردو ساحات را در صفحه نمایش جستجو نشان می دهد و سعی می کند به شما کمک کند تا با نمایش نوع و بند ساحه در لست های انتخابی  تفاوت میان ساحات را کشف کنید. همچنان اگر کدام ساحه با بند یکسان و برچسب های متفاوت و/یا نوع های ساحه متفاوت داشته باشید، Martus ممکن است با استفاده از بند و نوع ساحه، هنگامیکه دو ساحه یکسان مورد هدف است، سعی نموده و آنرا مشخص سازد. بناءً ما برای تان توصیه می کنیم تا هنگام ارائه فرمایشات بندها و برچسب ها بصورت واضح با یکدیگر باید مرتبط باشند تا از هرگونه اشتباه جلوگیری گردد. برای معلومات بیشتر در مور راهنمایی روی ایجاد ساحات برای جستجو به صفحه نمایش امداد "فرمایش ساحات" مراجعه کنید. \n\n5. شما ممکن است بعضی اوقات ورودهای مکرر در مقادیر شرایط جستجو در لست های پائین شونده در صفحه نمایش جستجو ببینید. اگر برای جستجو ساحه پائین شونده گزینه های قابل استفاده مکرر برگزیدید، مقادیری که بحیث اختیارات لست پائین شونده شرایط نمایش داده می شوند در عبارتند از برچسب ها برای هر لست ورودی می باشند، اما کود هایی شما تعریف کردید، تعداد ورود در لست پائین شونده جستجو را معین می سازد (برای معلومات بیشتر در ایجاد ساحات پائین شونده دلخواه به صفحه نمایش امداد "فرمایش ساحات" مراجعه نمایید). ازینرو اگر شما کودهای گزینه های قابل استفاده مکرر در برچسب های یکسان در فرمایشات رویدادهای خبری در حساب خود دارید، این برچسب ها در لست های پائین شونده رویداد خبری دوبار نمایش داده می شوند (بطور مثال، اگر label1 (برچسب1) را برای کود1 و کود2 استفاده کرده باشید، در پائین شونده جستجو 2 ورودی خواهید دید که شبیه "label1"(برچسب1) می باشند و جستجوی شما بالای رویدادهایی خواهد بود که آن برچسب را دارد، بدون در نظرداشت اینکه فرمایشات برای این برچسب کدام کود را داشت). و اگر شما کود گزینه های قابل استفاده مکرر یکسان با برچسب های متفاوت در فرمایشات رویدادهای خبری در حساب خود داشتید، لست پائین شونده جستجو برای آن کود هردو مقدار را بوسیله یک نقطه ویرگول نشان خواهد داد (بطور مثال اگر کود1 را برای برچسب1 و برچسب2 استفاده کرده باشید شما در پائین شونده جستجو یک ورودی خواهید داشت که که چنین می باشد "label1; label2"("برچسب1؛ برجسب2") و جستجوی تان بالای رویدادهایی است که یکی از این برچسب ها را دارد). \n\nبرای کمک بیشتر در مورد جستجو به آدرس help@martus.org ایمیل بفرستید.>
 
 #___________________________=Yes/No
 -9f62-field:FieldTypeBOOLEAN= بلی/نخیر
@@ -1065,6 +1122,9 @@
 
 #___________________________________=NOTE: Bulletins authored by other accounts cannot be changed using this command, so they are not included in the list above.
 -250a-field:SkippingBulletinsNotOurs=یاداشت: رویدادهای خبری که بوسیله حساب های دیگر تألیف گردیده اند، با استفاده از این فرمان تغیر داده نمی شوند، بناءً آنها در لست فوق ظاهر نمی شوند.
+
+#_______________________________________________=The following words have been added to the user dictionary. \nYou can delete or edit them here, or you can add more words. \nEach word must be on a line by itself.
+-ad45-field:SpellCheckUserDictionaryInstructions=&lt;The following words have been added to the user dictionary. \nYou can delete or edit them here, or you can add more words. \nEach word must be on a line by itself.&gt;
 
 #___________________________________=Human Rights Bulletin System
 -fe5b-field:SplashProductDescription=سيستمِ رویداد خبری خبریِ حقوقِ بشر
@@ -1681,6 +1741,12 @@
 #________________________________________________=The bulletin version you are trying to view is currently not on your computer.
 -e4b7-field:notifyBulletinVersionNotInSystemcause=آن نسخه از رویداد خبری را که شما می خواهيد ببينيد، در حال حاضر روی کامپيوتر شما موجود نيست.
 
+#____________________________________=Printing complete
+-b4a9-field:notifyChartCompletedcause=<Printing complete>
+
+#_______________________________________=An unknown error has occurred
+-6130-field:notifyChartUnknownErrorcause=<An unknown error has occurred>
+
 #____________________________________=The selected server is not responding. Before you choose a server, you must be connected to the internet, and that server must be available.
 -38fd-field:notifyConfigNoServercause=سـروِری را که برگزيده ايد به ما پاسخ نمی دهد.  قبل از اينکه شما برای خودتان يک سـِروِر انتخاب کنيد بايد به اينترنت مرتبط شده باشيد و آن سِروِره هم بايد قابل دسترسی باشد.
 
@@ -1720,6 +1786,9 @@
 #_____________________________________=An error has occurred, which may have prevented Martus from saving some configuration information. You may see a warning next time you log in.
 -117c-field:notifyErrorDuringExitcause=یک خطایی رخ داد که ممکن است Martus را از ثبت بعضی از اطلاعات در مورد پیکربندی ممانعت کرده باشد. بار دیگر که شما ورود مجازی می کنید، با یک هشدار مواجه خواهید شد.
 
+#_____________________________________________=There was an error exporting bulletins from Martus.  Not all bulletins were exported.
+-229b-field:notifyErrorExportingBulletinscause=<There was an error exporting bulletins from Martus.  Not all bulletins were exported.>
+
 #_________________________________________________________=There was an error saving your template.
 -88ed-field:notifyErrorExportingCustomizationTemplatecause=خطا به هنگامِ ذخيره کردنِ قالبِ شما
 
@@ -1737,6 +1806,9 @@
 
 #_________________________________________________________=There was an error importing this template.
 -4a9a-field:notifyErrorImportingCustomizationTemplatecause=خطا به هنگامِ واردکردنِ اين قالب
+
+#____________________________________________=Unknown error loading user dictionary for spell checking
+-4d01-field:notifyErrorLoadingDictionarycause=<Unknown error loading user dictionary for spell checking>
 
 #______________________________________=An error prevented the file from being read.
 -1ad3-field:notifyErrorReadingFilecause=يک خطا باعث شد که فايل خوانده نـشود.
@@ -1756,8 +1828,14 @@
 #_______________________________________=Unable to save configuration file.
 -896e-field:notifyErrorSavingConfigcause=متأسفانه قادر به ذخيره کرده فايلِ مشخصات (کانفيگوراسيون) نيستيم.
 
+#___________________________________________=Unknown error saving user dictionary
+-fc3a-field:notifyErrorSavingDictionarycause=<Unknown error saving user dictionary>
+
 #______________________________________=Unable to save current screen layout.
 -2bad-field:notifyErrorSavingStatecause=متأسفانه قادر به ذخيره کردن شکل کنونیِ اين صفحه نيستيم.
+
+#_____________________________________________=Unable to update the dictionary. Be sure the word list is in the correct format.
+-6486-field:notifyErrorUpdatingDictionarycause=<Unable to update the dictionary. Be sure the word list is in the correct format.>
 
 #______________________________________=An error prevented the file from being written. Check to make sure the disk is not full or write protected.
 -2a84-field:notifyErrorWritingFilecause=يک خطا باعث شد که فايل نتواند ذخيره شود. لطفن نگاه کنيد تا مطمئن شويد ديسک پر نشده باشد يا اجازه نوشتن روی آن داده شده باشد.
@@ -2089,8 +2167,8 @@
 #________________=Title
 -768e-field:title=عنوان اصلی
 
-#_____________________________=Farsi/Dari 4.0.0
-field:translationVersion=فارسی/دری  4.0.0 
+#_____________________________=Farsi/Dari 4.0
+field:translationVersion=فارسی/دری  4.0 
 
 #___________________=Username
 -84c2-field:username=اسم استفاده کننده
@@ -2172,6 +2250,9 @@ field:translationVersion=فارسی/دری  4.0.0
 
 #________________=Arabic
 -af4f-language:ar=عربی
+
+#_________________=Armenian
+-1a0d-language:arm=<Armenian>
 
 #________________=Azerbaijani
 -6885-language:az=آذربايجانی
@@ -2326,11 +2407,20 @@ field:translationVersion=فارسی/دری  4.0.0
 #________________________=Update Headquarters Access...
 -fe87-menu:AddPermissions=در حال تازه کری دسترسی دفاتر مرکزی...
 
+#_________________________=Add '#NewWord#' to User Dictionary
+-0ca4-menu:AddToDictionary=<Add '#NewWord#' to User Dictionary>
+
 #_____________________________=Backup My Key
 -2852-menu:BackupMyKeyPairFile=از روی کليد من نسخهء اضافی درست بکن
 
+#________________=Charts
+-8610-menu:Charts=<Charts>
+
 #______________________=Configure Headquarters
 -bf2f-menu:ConfigureHQs=مشخصات دفتر مرکزی را وارد کنيد
+
+#_____________________________=Spell Checking
+-5cf2-menu:ConfigureSpellCheck=<Spell Checking>
 
 #_______________________=Copy Bulletin(s)
 -a57a-menu:CopyBulletins=رویداد(های) خبری  را کـُپی کن
@@ -2373,6 +2463,9 @@ field:translationVersion=فارسی/دری  4.0.0
 
 #_________________________=Import Bulletins
 -4094-menu:ImportBulletins=ادخال رویدادهای خبری
+
+#_________________________________=More Suggestions
+-a25a-menu:MoreSpellingSuggestions=<More Suggestions>
 
 #_________________________=Organize Folders
 -1ee2-menu:OrganizeFolders=تنظیم پوشه ها
@@ -2491,23 +2584,23 @@ field:translationVersion=فارسی/دری  4.0.0
 #__________________=hamal
 -23d3-month:Afghan1=حمل
 
-#___________________=d��adi
--bedc-month:Afghan10=جدی
+#___________________=dʒadi
+-e5c6-month:Afghan10=<جدی>
 
 #___________________=hut
 -0002-month:Afghan11=دلو
 
-#___________________=dalv��
--5f43-month:Afghan12=حوت
+#___________________=dalvæ
+-5a4f-month:Afghan12=<حوت>
 
 #__________________=sawr
 -1365-month:Afghan2=ثور
 
-#__________________=d��awz��
--3336-month:Afghan3=جوزا
+#__________________=dʒawzɒ
+-9238-month:Afghan3=<جوزا>
 
-#__________________=sarat��n
--4c9c-month:Afghan4=سرطان
+#__________________=saratɒn
+-5684-month:Afghan4=<سرطان>
 
 #__________________=asad
 -8efa-month:Afghan5=اسد
@@ -2515,8 +2608,8 @@ field:translationVersion=فارسی/دری  4.0.0
 #__________________=sonbola
 -20ff-month:Afghan6=سنبله
 
-#__________________=miz��n
--a640-month:Afghan7=میزان
+#__________________=mizɒn
+-99b2-month:Afghan7=<میزان>
 
 #__________________='aqrab
 -c52e-month:Afghan8=عقرب
@@ -2676,6 +2769,12 @@ field:translationVersion=فارسی/دری  4.0.0
 
 #__________________________=Headquarters Editor
 -7fb9-wintitle:ConfigureHQs=اديتورِ دفترِ مرکزی
+
+#_________________________________=Configure Spell Checking
+-b0ce-wintitle:ConfigureSpellCheck=<Configure Spell Checking>
+
+#_________________________=Charts
+-8610-wintitle:CreateChart=<Charts>
 
 #____________________________________=Help on Creating Custom Fields
 -ed1d-wintitle:CreateCustomFieldsHelp=کمک برای قسمت هايی که با خواست خودتان می سازيد
@@ -2862,6 +2961,9 @@ field:translationVersion=فارسی/دری  4.0.0
 
 #_______________________________________=Retrieve My Sealed Bulletins
 -68b9-wintitle:RetrieveMySealedBulletins=رویداد های خبری سربسته مرا بيرون بکش
+
+#______________________________=Charts
+-8610-wintitle:RunOrCreateChart=<Charts>
 
 #_______________________________=Reports
 -88bc-wintitle:RunOrCreateReport=گزارش ها
@@ -3148,6 +3250,12 @@ field:translationVersion=فارسی/دری  4.0.0
 #______________________________________________=Bulletin Version Not Found
 -a60d-wintitle:notifyBulletinVersionNotInSystem=اين نسخه از رویداد خبری پيدا نشد
 
+#__________________________________=Charts
+-8610-wintitle:notifyChartCompleted=<Charts>
+
+#_____________________________________=Charts
+-8610-wintitle:notifyChartUnknownError=<Charts>
+
 #__________________________________=Unable to Connect to Server
 -1b07-wintitle:notifyConfigNoServer=قادر به ارتباط با سرویس دهنده نيستيم
 
@@ -3187,6 +3295,9 @@ field:translationVersion=فارسی/دری  4.0.0
 #___________________________________=Error During Exit
 -e05d-wintitle:notifyErrorDuringExit=خطا هنگام خروج
 
+#___________________________________________=Error Exporting Bulletins
+-6969-wintitle:notifyErrorExportingBulletins=<Error Exporting Bulletins>
+
 #_______________________________________________________=Error Exporting Template
 -f4cc-wintitle:notifyErrorExportingCustomizationTemplate=خطا به هنگام صدورِ قالب
 
@@ -3204,6 +3315,9 @@ field:translationVersion=فارسی/دری  4.0.0
 
 #_____________________________________________________________=Error Importing Template
 -4f1a-wintitle:notifyErrorImportingCustomizationTemplateFuture=خطا در ادخال قالب
+
+#__________________________________________=Error
+-7f2f-wintitle:notifyErrorLoadingDictionary=<Error>
 
 #____________________________________=Error Reading File
 -73ad-wintitle:notifyErrorReadingFile=خطا به هنگام بازکردن و خواندن فايل
@@ -3223,8 +3337,14 @@ field:translationVersion=فارسی/دری  4.0.0
 #_____________________________________=Error Saving Configuration File
 -1287-wintitle:notifyErrorSavingConfig=به هنگام ذخيره کردنِ فايل مشخصات (کانفيگوراسيون) خطايی رخ داد
 
+#_________________________________________=Error
+-7f2f-wintitle:notifyErrorSavingDictionary=<Error>
+
 #____________________________________=Error Saving State
 -884d-wintitle:notifyErrorSavingState=خطا در حفظِ وضعيت
+
+#___________________________________________=Error
+-7f2f-wintitle:notifyErrorUpdatingDictionary=<Error>
 
 #____________________________________=Error Writing File
 -fabf-wintitle:notifyErrorWritingFile=خطا در کپی کردنِ فايل
