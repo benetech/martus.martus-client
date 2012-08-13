@@ -2,9 +2,9 @@
 # Language code:  bur
 # Language name:  Burmese
 # Translated by:  Solveware, Global Arena 
-# Exported date:  Thu Oct 06 17:11:57 PDT 2011
-# Client version: pre-3.6.1
-# Client build:   2011-10-05
+# Exported date:  Fri Aug 10 20:45:04 PDT 2012
+# Client version: 4.1.0
+# Client build:   2012-07-27.3168
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -133,6 +133,9 @@
 #____________________=Continue
 -2e02-button:Continue=ဆက္သၾား
 
+#_______________________=Create a new chart template
+-9ef9-button:CreateChart=<Create a new chart template>
+
 #____________________________=Create New Page Report
 -1d7a-button:CreatePageReport=စာမဵက္ႎႀာပုံစံအစီရင္ခံစာအသစ္တည္ေဆာက္ပၝ
 
@@ -240,6 +243,9 @@
 
 #______________________________________________=Retrieve latest bulletin version only
 -3449-button:RetrieveLatestBulletinRevisionOnly=ေနာက္ဆံုး စာေစာင္မူကၾဲကိုသာ ဴပန္လည္ရယူပၝ
+
+#____________________=Display an existing chart
+-7d62-button:RunChart=<Display an existing chart>
 
 #_____________________=Use Existing Report Format
 -b052-button:RunReport=လက္ရႀိ အစီရင္ခံစာ အဴပင္အဆင္ကို သံုးပၝ
@@ -547,6 +553,51 @@
 #_____________________________=Thai Solar (2548-05-31)
 -2be4-field:CalendarSystemThai=ထိုင္း ေနဴပကၡဒိန္ (2548-05-31)
 
+#_________________________=Chart produced #Date#
+-fb8c-field:ChartCreatedOn=<Chart produced #Date#>
+
+#____________________________=Field to count
+-77e7-field:ChartFieldToCount=<Field to count>
+
+#______________________________=(Missing field or data)
+-1af6-field:ChartItemLabelBlank=<(Missing field or data)>
+
+#_____________________________=#Count# bulletins = #Percent# of Martus bulletins
+-9e45-field:ChartPieSliceLabel=<#Count# bulletins = #Percent# of Martus bulletins>
+
+#___________________________________=Please note that any Martus bulletin data in charts will not be encrypted, \nand anyone who gets a copy of the chart output will be able to read all the data. \nUse caution when selecting a private field.
+-cf89-field:ChartPrivateFieldsNotice=&lt;Please note that any Martus bulletin data in charts will not be encrypted, \nand anyone who gets a copy of the chart output will be able to read all the data. \nUse caution when selecting a private field.&gt;
+
+#______________________________________________=Note: Chart shows number of Martus bulletins matching search criteria.
+-dee3-field:ChartSelectedBulletinsDisclaimerBar=<Note: Chart shows number of Martus bulletins matching search criteria.>
+
+#______________________________________________=Note: Chart shows % of Martus bulletins matching search criteria.
+-b721-field:ChartSelectedBulletinsDisclaimerPie=<Note: Chart shows % of Martus bulletins matching search criteria.>
+
+#___________________________=Martus Bulletin Counts
+-5582-field:ChartSeriesTitle=<Martus Bulletin Counts>
+
+#________________________=Subtitle (optional)
+-4104-field:ChartSubtitle=<Subtitle (optional)>
+
+#_____________________=Martus Bulletins by #SelectedField#
+-1933-field:ChartTitle=<Martus Bulletins by #SelectedField#>
+
+#____________________=Type of Chart
+-3f13-field:ChartType=<Type of Chart>
+
+#_________________________=3D Bar Chart
+-8e3e-field:ChartType3DBar=<3D Bar Chart>
+
+#_______________________=Bar Chart
+-75fe-field:ChartTypeBar=<Bar Chart>
+
+#_______________________=Pie Chart
+-75ed-field:ChartTypePie=<Pie Chart>
+
+#__________________________=Martus Bulletin Count
+-0d40-field:ChartYAxisTitle=<Martus Bulletin Count>
+
 #__________________________________=Select the headquarters listed below that you want to add to all the bulletins listed above.
 -23a1-field:ChooseHeadquartersToAdd=အထက္ တၾင္စာရင္းဴပႂစုထားေသာ စာေစာင္မဵားထဲသုိ သင္ ထပ္ထည့္လုိသည့္ ေအာက္တၾင္စာရင္းဴပႂစုထားေသာ ပင္မ မဵားကုိ ေရၾးခဵယ္ပၝ။
 
@@ -646,6 +697,9 @@
 #_____________________________=Default Details
 -4a82-field:DefaultDetailFiles=ပံုေသသတ္မႀတ္ခဵက္ အေသးစိတ္
 
+#__________________________________________=chart.jpeg
+-4a06-field:DefaultPrintChartToDiskFileName=<chart.jpeg>
+
 #_____________________________________=bulletins.html
 -a4f1-field:DefaultPrintToDiskFileName=bulletins.html
 
@@ -709,6 +763,9 @@
 #___________________________=Exit when complete
 -30e3-field:ExitWhenComplete=လုပ္ငန္း႓ပီးဆံုးလ႖င္ ထၾက္ပၝ
 
+#____________________________=Include all versions of each bulletin in export
+-d390-field:ExportAllVersions=<Include all versions of each bulletin in export>
+
 #____________________________=Include attachments in export
 -1a48-field:ExportAttachments=ထုတ္လုပ္ေပးပိုႚမႁတၾင္ ပူးတၾဲပၝမဵား ထည့္သၾင္းပၝ
 
@@ -736,8 +793,8 @@
 #______________________________=If you want all of your grid search criteria to be met in a single bulletin grid row, please check the "Match grid column specifications" checkbox. For example, if you want to search for a specific victim name in a single row in your bulletins created after a certain date, select the checkbox and enter the following fields in the Search screen: "Victim Information: First Name" = x and "Victim Information: Last Name" = y and "Date Created" >= YYYY-Mon-DD. If you do not select the "Match grid column specifications" checkbox, Martus will find bulletins created after your specified date where any row has the first name you specified and any other row has the last name specified, but not necessarily in the same bulletin row (you could have a row with "First Name" = x and "Last Name" = b, and a different row with "First Name" = a and "Last Name" = y, and Martus will find that bulletin as matching the search because you did not specify that it had to match in a single row)\n\n
 -2a0a-field:FancySearchHelpMsg4=သင္၏ ရႀာေဖၾ ဂရစ္စံမဵားသည္ တစ္ခုတည္းေသာ စာေစာင္ဂရစ္ တန္းတၾင္ ဴပည့္စုံေစလုိလဵင္ “ဂရစ္ေကာ္လံ သတ္မႀတ္ခဵက္မဵား ယႀဥ္တၾဲပၝ”အကၾက္ကုိ ေရၾးပၝ။ ဥပမာအားဴဖင့္ သင့္အေနဴဖင့္ ရက္စဲၾတစ္ခု ဴပီးေနာက္ ဖန္တီးထားသည့္ သင့္စာေစာင္မႀ တန္းတစ္ခုတၾင္ ႎႀိပ္စက္ခံရသူတစ္ဦး၏ သီးဴခား အမည္ကုိ ရႀာေဖၾလုိပၝက ထုိအကၾက္ကုိ ေရၾးခဵယ္ဴပီး ရႀာေဖၾ မဵက္ႎႀာဴပင္တၾင္ ေအာက္ေဖာ္ဴပပၝ နယ္ပယ္ မဵားကုိ ထည့္သၾင္းပၝ။ "ဓားစာခံ၏ အခဵက္အလက္။ ကုိယ္ပုိင္အမည္"=x ႎႀင့္ ႎႀိပ္စက္ခံ ရသူ၏ "အခဵက္အလက္။ မဵိႂးရုိးအမည္=y ႎႀင့္ "ဖန္တီးသည့္ေနစၾဲ">=`ႎႀစ္-လ-ရက္။ အကယ္၍သင္သည္ “ဂရစ္ေကာ္လံ သတ္မႀတ္ခဵက္မဵား ယႀဥ္တၾဲပၝ”အကၾက္ကုိ မေရၾးခဲ့ပၝက Martus သည္ မည္သည့္အတန္းတၾင္မဆုိ သင္အတိအကဵ ေဖာ္ဴပသည့္ ပထမအမည္ ပၝရႀိဴပီး အဴခားမည္သည့္ အတန္းတၾင္မဆို သင္အတိအကဵ ေဖာ္ဴပသည့္ ေနာက္ဆုံးအမည္ ပၝရႀိသည့္ သင္သတ္မႀတ္ေသာ ရက္စဲၾဴပီးေနာက္ဖန္တီးသည့္ စာေစာင္မဵားကုိ ရႀာေဖၾလိမ့္မည္။ သိုႛရာတၾင္ တူညီေသာ စာေစာင္အတန္းတၾင္ ရႀာေဖၾမည္ မဟုတ္ေပ။ (သင့္အေနဴဖင့္ ကုိယ္ပုိင္အမည္"=x ႎႀင့္ မဵိႂးရုိးအမည္=b ပၝရႀိေသာ တန္းတစ္ခုရရႀိႎုိင္ဴပီး ကုိယ္ပုိင္အမည္"=a ႎႀင့္ မဵိႂးရုိးအမည္=y ပၝရႀိေသာ ကၾဲဴပားဴခားနားသည့္ တန္းတစ္ခု ရရႀိႎုိင္သည္။ သင့္အေနဴဖင့္ အတန္း တစ္ခုတၾင္ ယႀဥ္တဲၾရမည္ဟု အတိအကဵ သတ္မႀတ္မထားေသာေဳကာင့္ Martus သည္ ထုိစာေစာင္အား ရႀာေဖၾမႁကုိ ကုိက္ညီမႁအဴဖစ္ ရႀာေဖၾလိမ့္မည္။)\n\n
 
-#______________________________= Additional Search Notes:\n\n 1. Because Martus searches all rows of any grid (table) fields for your criteria, it may find bulletins where one grid row matches your criteria but other rows do not.  For example you could have a bulletin with a grid that has a location field in it and you have multiple rows of data in the grid with locations A, B, and C.  If you search for bulletins where location != C (does not equal C), Martus will find that bulletin because there are 2 rows in the bulletin grid where the location is not C, even though there is one row where the locations IS C.\n\n 2. In this release, if you are searching on a multi-level dropdown, all searches are exact matches, not partial or "starts with" matches.  This means that you have to pick the exact level at which you want to be searching.  For example, an "Event Location" field that has three levels (State/City/Neighborhood) will have three entries in the search field list:  Event Location: State, Event Location: City, and Event Location: Neighborhood.  So if you want to find any bulletins that have an Event Location anywhere in California (regardless of the City), you have to pick the "Event Location: State" field to search on and pick California off the dropdown list choices. If you pick Event Location: City to search on and then pick California but leave the City level blank, Martus will only find entries where there was no City data entered  (City was blank), as opposed to ANY location with California regardless of what data was entered at the City level.\n\n 3. If you do not see your search terms/dates in the final version of the bulletin displayed in the Search Results folder, your criteria may have been matched in an earlier version of the bulletin.  You can access previous versions by clicking the "Bulletin Details..." button at the top of the bulletin.  To search only the most recent versions of bulletins, select Only Search Most Recent Versions of Bulletins in the Search dialog box.\n\n 4. If you have fields in different bulletins or from different customizations that are exactly the same, Martus will combine them in any Search and Report field lists.  And while Martus warns you about duplicate labels where you are creating a new bulletin customization, it is possible that over time, you may have bulletins with different customizations that ended up with the same labels (e.g. maybe you changed a text field to a dropdown field but kept the same label).  In these cases, Martus will display both fields in the search screen, and try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists.  Also, if you have fields with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same.  So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion. Please see the "Customize Fields" Help screen for more guidelines on creating fields for searching.\n\n 5. You may sometimes see duplicate entries in dropdown list search criteria values in the search screen.  If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria dropdown list options are the labels for each list entry, but the codes you defined determine how many entries there will be in the search dropdown list (see the "Customize Fields" Help screen for more information about creating custom dropdown fields). So if you have different Reusable Choices codes with the same label in different bulletin customizations in your account, the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like "label1" and your search will be on bulletins that have that label, regardless of which code the customization had for the label).  And if you have the same Reusable Choices code with different labels in different bulletin customizations in your account, the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like "label1; label2" and your search will be on bulletins that have either of those labels).\n\nFor additional help with searching, email help@martus.org.
--35fc-field:FancySearchHelpMsg5=ရႀာေဖၾဴခင္းႎႀင့္ ပတ္သက္သည့္ ထပ္တိုးအခဵက္အလက္မဵား \n\n ၁) Martus သည္ သင့္လိုအပ္ခဵက္အတၾက္ အကၾက္ေနရာတိုင္းရႀိ အတန္းမႀန္သမ႖ကို ရႀာေဖၾေပးဴခင္းေဳကာင့္ သင့္လိုအပ္ခဵက္ႎႀင့္ ကိုက္ညီေသာ အတန္းတစ္တန္းရႀိဴပီး မကိုက္ညီသည့္ အဴခားအတန္းမဵားပၝဝင္သည့္ စာေစာင္ကို ရႀာေဖၾမိႎိုင္သည္။ ဥပမာ - သင့္ထံတၾင္ တည္ေနရာနယ္ပယ္ ပၝဝင္ေသာအကၾက္ရႀိသည့္ စာေစာင္ရႀိေနႎိုင္ဴပီး တည္ေနရာ က၊ခ၊ ႎႀင့္ ဂ ပၝဝင္ေသာ အကၾက္ရႀိသည့္ အတန္းတစ္တန္းထက္ပိုေသာ အခဵက္အလက္မဵားရႀိသည္ ဆိုပၝစိုႛ။ အကယ္၍ သင္က တည္ေနရာ ဂ မဟုတ္ေသာ (တည္ေနရာ !=ဂ) စာေစာင္ကို ရႀာေဖၾပၝက Martus သည္ ထိုစာေစာင္ကို ရႀာေဖၾလိမ့္မည္။ အဘယ္ေဳကာင့္ဆိုေသာ္ စာေစာင္ထဲတၾင္ တည္ေနရာ ဂ ပၝဝင္ေသာ အတန္းတစ္တန္းပၝဝင္လင့္ကစား တည္ေနရာ ဂ မဟုတ္ေသာ ေနရာပၝဝင္ေသာ အတန္း၂တန္းရႀိေသာေဳကာင့္ဴဖစ္သည္။ \n\n ၂) ဤထုတ္ဴပန္ခဵက္တၾင္ အကယ္၍ သင္က အဆင့္တစ္ခုထက္ပိုေသာ ေရၾးခဵယ္စရာ ဆၾဲခဵစာရင္းတၾင္ ရႀာေဖၾပၝက ေတၾႛရႀိမည့္ အေဴဖမဵားသည္ အတိအကဵတူညီေသာ အေဴဖမဵားသာဴဖစ္မည္။ တဝက္တပဵက္တူေသာ/အစသာတူေသာ အေဴဖမဵိႂးမရပၝ။ ဆိုလိုသည္မႀာ သင္ရႀာေဖၾလိုသည့္ အဆင့္အတိအကဵကို သင္က ေရၾးခဵယ္ရမည္ဴဖစ္သည္။ ဥပမာ - အဆင့္သံုးဆင့္ (ဴပည္နယ္၊ ဴမိႂႛ၊ ရပ္ကၾက္) ရႀိသည့္ “ဴဖစ္ရပ္တည္ေနရာ”  သည္ နယ္ပယ္ရႀာေဖၾစာရင္းတၾင္ တည္ေနရာ ဴပည္နယ္၊ တည္ေနရာ ဴမိႂႛ၊ တည္ေနရာ ရပ္ကၾက္ ဟူ၍ သံုးဳကိမ္ဴဖည့္သၾင္းရမည္ ဴဖစ္သည္။ ထိုႛေဳကာင့္ သင္သည္ ကခဵင္ဴပည္နယ္တၾင္ ရႀိသည့္ မည္သည့္ဴဖစ္ရပ္တည္ေနရာမဆို (ဴမိႂႛကို မစဥ္းစားဘဲ) ပၝဝင္ေသာ စာေစာင္ကို ရႀာေဖၾလုိလ႖င္ တည္ေနရာဴပည္နယ္ကို ေရၾးခဵယ္ရမည္ဴဖစ္ဴပီး ေရၾးခဵယ္စရာဆၾဲခဵစာရင္းမႀ ကခဵင္ဴပည္နယ္ကို ေရၾးခဵယ္ရမည္ဴဖစ္သည္။ အကယ္၍ သင္သည္ ဴဖစ္ရပ္တည္ေနရာ - ဴမိႂႛကို ရႀာေဖၾေနရာတၾင္ ေရၾးခဵယ္ကာ ကခဵင္ဴပည္နယ္းကိုသာ ေရၾးခဵယ္ဴပီး ဴမိႂႛအဆင့္ကို ကၾက္လပ္ထားခဲ့ပၝက Martus က ဴမိႂႛအခဵက္အလက္မထည့္သၾင္းထားေသာ (ဴမိႂႛေနရာ ကၾက္လပ္) ရလဒ္မဵားကိုသာ ရႀာေဖၾလိမ့္မည္။ ဴမိႂႛအဆင့္တၾင္ မည္သည့္အခဵက္အလက္ထည့္သၾင္းထားသည္ကို မစဥ္းစားဘဲ ကခဵင္ဴပည္နယ္ရႀိ မည္သည့္တည္ေနရာကိုမဆို ရႀာေဖၾေစခဵင္ေသာ လုပ္ေဆာင္ခဵက္ႎႀင့္ ဆန္ႛကဵင္သၾားေပလိမ့္မည္။ \n\n ၃) အကယ္၍ ရႀာေဖၾရလဒ္စာတၾဲအတၾင္းတၾင္ ဴပသထားေသာ စာေစာင္ေနာက္ဆံုးဗားရႀင္းတၾင္ သင္၏ရႀာေဖၾသတ္မႀတ္ခဵက္/ေနႛစၾဲမဵားကို ရႀာမေတၾႛပၝက သင္၏သတ္မႀတ္ခဵက္သည္ စာေစာင္ဗားရႀင္းအေဟာင္းႎႀင့္ ကိုက္ညီေနေသာေဳကာင့္ ဴဖစ္ႎိုင္သည္။ စာေစာင္၏ထိပ္စီးတၾင္ရႀိေသာ “စာေစာင္အေသးစိတ္”ခလုတ္ကို ႎိႀပ္၍ ယခင္ဗားရႀင္းကို ဴပန္ဳကည့္ႎိုင္သည္။ စာေစာင္၏ေနာက္ဆံုးဗားရႀင္းမဵားမႀ ရႀာေဖၾလိုပၝက ရႀာေဖၾေနရာတၾင္ စာေစာင္ေနာက္ဆံုးဗားရႀင္းမႀသာ ဆိုသည္ကို ေရၾးခဵယ္ပၝ။ \n\n ၄) အကယ္၍ သင့္ထံတၾင္ မတူညီေသာ စာေစာင္မဵားမႀ သိုႛမဟုတ္ မတူညီေသာ စိတ္ဳကိႂက္ဴပင္ဆင္မႁမဵားမႀ တေထရာတည္းတူညီေနေသာ နယ္ပယ္မဵား ရႀိေနပၝက Martus မႀ မည္သည့္ ရႀာေဖၾဴခင္းႎႀင့္ တင္ဴပဴခင္းနယ္ပယ္စာရင္းတၾင္မဆို ေပၝင္း၍ဴပမည္ဴဖစ္သည္။ ထိုႛအဴပင္ Martus က သင္စာေစာင္အသစ္ စိတ္ဳကိႂက္ဴပင္ဆင္မႁမဵားဖန္တီးခဵိန္တၾင္ တစ္ခုထက္ပိုေသာ အမႀတ္အသားမဵားရႀိေနေဳကာင္း သတိေပးေနခဵိန္၌ သင့္ထံတၾင္ တူညီေသာ အမႀတ္အသားမဵားရႀိသည့္ မတူညီေသာ စိတ္ဳကိႂက္ဴပင္ဆင္မႁမဵားရႀိေသာ စာေစာင္ရႀိေနဴခင္းလည္း ဴဖစ္ႎိုင္သည္။ (ဥပမာ - သင္က ေရၾးခဵယ္စရာေနရာတၾင္ အကၡရာထည့္သၾင္းသည့္ ေနရာကို တူညီေသာ အမႀတ္အသားကို သိမ္းထားဴခင္း) ဤအေဴခအေနမဵိႂးတၾင္ Martus သည္ ရႀာေဖၾမဵက္ႎႀာဴပင္တၾင္ အေဴဖႎႀစ္ခုစလံုးကို ဴပလိမ့္မည္။ ထိုႛအဴပင္ နယ္ပယ္ေရၾးခဵယ္မႁစာရင္းတၾင္ မည္သည့္ နယ္ပယ္အမဵိႂးအစားႎႀင့္ အညၿန္းမဵားရႀိသည္ကို ဴပသဴခင္းဴဖင့္ Martus က နယ္ပယ္မဵားဳကားရႀိ မတူညီမႁကို သင္စဥ္းစားႎိုင္ေအာင္ ကူညီေပးလိမ့္မည္။ ထိုႛအတူ သင့္ထံတၾင္ တူညီေသာအညၿန္းမဵားႎႀင့္ မတူညီေသာအမႀတ္အသားမဵား ႎႀင့္/သိုႛမဟုတ္ နယ္ပယ္အမဵိႂးအစားမဵားရႀိေနပၝက Martus မႀ အညၿန္းႎႀင့္ နယ္ပယ္အမဵိႂးအစားကို အသံုးဴပႂကာ မည္သည့္အခဵိန္တၾင္ မတူညီေသာ နယ္ပယ္မဵား တူညီသင့္သည္ကို ရႀာေဖၾေပးလိမ့္မည္။ ထိုႛေဳကာင့္ က႗ႎု္ပ္တိုႛ တိုက္တၾန္းလိုသည္မႀာ ရႁပ္ေထၾးမႁမဵား မဴဖစ္ေစရန္ သင့္အေနႎႀင့္ စိတ္ဳကိႂက္ဴပင္ဆင္ထားေသာေနရာတၾင္ နယ္ပယ္အညၿန္းႎႀင့္ အမႀတ္အသားမဵားကို ရႀင္းရႀင္းလင္းလင္းဴဖစ္ေအာင္ သတ္မႀတ္ရမည္။  ရႀာေဖၾဴခင္းမဵားအတၾက္ နယ္ပယ္မဵားဖန္တီးဴခင္းႎႀင့္ ပတ္သက္သည့္ ထပ္မံလမ္းညၿန္ခဵက္မဵားကို သိရႀိလိုပၝက “နယ္ပယ္မဵားစိတ္ဳကိႂက္္ဴပင္ဆင္ဴခင္း” အကူအညီစာမဵက္ႎႀာတၾင္ ေကဵးဇူးဴပႂ၍ ဳကည့္ပၝ။ \n\n ၅) သင့္အေနဴဖင့္ တစ္ခၝတရံ ရႀာေဖၾရလဒ္ဴပမဵက္ႎႀာဴပင္၏ ရႀာေဖၾမႁသတ္မႀတ္ခဵက္တန္ဖိုးမဵား ဆၾဲခဵစာရင္းတၾင္ တစ္ခုထက္ပိုေသာ တူညီသည့္အခဵက္အလက္မဵားကို ေတၾႛရႀႀိေကာင္းေတၾႛရႀိမည္။ ရႀာေဖၾေနရာတၾင္ “ဴပန္လည္အသံုးဴပႂႎိုင္ေသာ ေရၾးခဵယ္မႁမဵား ဆၾဲခဵနယ္ပယ္”ကို သင္ေရၾးခဵယ္ပၝက  သတ္မႀတ္ခဵက္ဆၾဲခဵစာရင္းေရၾးခဵယ္မႁ အခၾင့္အလမ္းမဵားအဴဖစ္ ဴပေသာ တန္ဖိုးမဵားသည္ သၾင္းထားေသာ စာရင္းတစ္ခုစီအတၾက္ အမႀတ္အသားမဵား ဴဖစ္သည္။ (စိတ္ဳကိႂက္ဴပင္ဆင္ထားေသာ ဆၾဲခဵနယ္ပယ္မဵားႎႀင့္ ပတ္သက္၍ ပိုမိုသိရႀိလိုပၝက “နယ္ပယ္မဵားစိတ္ဳကိႂက္္ဴပင္ဆင္ဴခင္း” အကူအညီစာမဵက္ႎႀာတၾင္ ေကဵးဇူးဴပႂ၍ ဳကည့္ပၝ။) အကယ္၍ သင့္အေကာင့္ရႀိ မတူညီေသာ စိတ္ဳကိႂက္ဴပင္ဆင္ထားသည့္ စာေစာင္မဵားထဲ၌ ေခၝင္းစဥ္တူညီေသာ္လည္း မတူညီေသာ ဴပန္လည္အသံုးခဵႎိုင္သည့္ ေရၾးခဵယ္မႁကုဒ္မဵား ရႀိေနပၝက အမႀတ္အသားမဵားသည္ ရႀာေဖၾဆၾဲခဵစာရင္းတၾင္ ႎႀစ္ဳကိမ္ဴပေနလိမ့္မည္။ (ဆိုလိုသည္မႀာ သင္သည္ အမႀတ္အသား၁ကို ကုဒ္၁ ႎႀင့္ ကုဒ္၂ ႎႀစ္ခုလံုးအတၾက္ သံုးထားပၝက ရႀာေဖၾဆၾဲခဵစာရင္းတၾင္ အမႀတ္အသား၁ဟု ထင္ရေသာ ရလဒ္ႎႀစ္ခုကို သင္ေတၾႛရလိမ့္မည္ဴဖစ္သည္။ ထိုႛအဴပင္ သင္၏ရႀာေဖၾဴခင္းသည္ ထိုအမႀတ္အသားအတၾက္ မည္သည့္စိတ္ဳကိႂက္ဴပင္ဆင္မႁကုဒ္ရိႀခဲ့သည္ ဴဖစ္ေစကာမူ ထိုအမႀတ္အသားရႀိေနေသာ စာေစာင္တၾင္ ေဖာ္ဴပေနလိမ့္မည္။) အကယ္၍ သင့္အေကာင့္ထဲရိႀ မတူညီေသာ စိတ္ဳကိႂက္ဴပင္ဆင္မႁစာေစာင္မဵားထဲ၌ မတူညီေသာ အမႀတ္အသားမဵားရႀိသည့္ တူညီေသာ ဴပန္လည္အသံုးဴပႂႎိုင္ေသာ ေရၾးခဵယ္စရာမဵား ရႀိေနပၝက ထိုကုဒ္အတၾက္ ရႀာေဖၾဆၾဲခဵစာရင္းသည္ တန္ဖိုးႎႀစ္ခုစလံုးကို ဆီမီးေကာ္လံ (Semicolon) ခံ၍ ေဖာ္ဴပလိမ့္မည္။ (ဆိုလိုသည္မႀာ အမႀတ္အသား၁ ႎႀင့္ အမႀတ္အသား၂တိုႛ အတၾက္ ကုဒ္၁ကို သင္အသံုးဴပႂထားပၝက ရႀာေဖၾဆၾဲခဵစာရင္းတၾင္ “အမႀတ္အသား၁ ; အမႀတ္အသား၂” ဟုထင္ရေသာ ရလဒ္ကိုေတၾႛရမည္။ ထိုႛအဴပင္ သင့္ရႀာေဖၾမႁသည္ ထုိအမႀတ္အသားမဵား တစ္ခုမဟုတ္ တစ္ခုရႀိေနေသာ စာေစာင္တၾင္ ေဖာ္ဴပေနလိမ့္မည္။) ရႀာေဖၾဴခင္းႎႀင့္ ပတ္သက္၍ ထပ္ဴဖည့္အကူအညီမဵား လိုအပ္ပၝက help@martus.org သိုႛ အီးေမးလ္ပိုႛပၝ။
+#______________________________= Additional Search Notes:\n\n 1. Because Martus searches all rows of any grid (table) fields for your criteria, it may find bulletins where one grid row matches your criteria but other rows do not.  For example you could have a bulletin with a grid that has a location field in it and you have multiple rows of data in the grid with locations A, B, and C.  If you search for bulletins where location != C (does not equal C), Martus will find that bulletin because there are 2 rows in the bulletin grid where the location is not C, even though there is one row where the locations IS C.\n\n 2. In this release, if you are searching on a multi-level dropdown, all searches are exact matches, not partial or "starts with" matches.  This means that you have to pick the exact level at which you want to be searching.  For example, an "Event Location" field that has three levels (Region/City/Neighborhood) will have three entries in the search field list:  Event Location: Region, Event Location: City, and Event Location: Neighborhood.  So if you want to find any bulletins that have an Event Location anywhere in Region X (regardless of the City), you have to pick the "Event Location: Region" field to search on and pick Region X off the dropdown list choices. If you pick Event Location: City to search on and then pick Region X but leave the City level blank, Martus will only find entries where there was no City data entered  (City was blank), as opposed to ANY location with Region X regardless of what data was entered at the City level.\n\n 3. If you do not see your search terms/dates in the final version of the bulletin displayed in the Search Results folder, your criteria may have been matched in an earlier version of the bulletin.  You can access previous versions by clicking the "Bulletin Details..." button at the top of the bulletin.  To search only the most recent versions of bulletins, select Only Search Most Recent Versions of Bulletins in the Search dialog box.\n\n 4. If you have fields in different bulletins or from different customizations that are exactly the same, Martus will combine them in any Search and Report field lists.  And while Martus warns you about duplicate labels where you are creating a new bulletin customization, it is possible that over time, you may have bulletins with different customizations that ended up with the same labels (e.g. maybe you changed a text field to a dropdown field but kept the same label).  In these cases, Martus will display both fields in the search screen, and try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists.  Also, if you have fields with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same.  So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion. Please see the "Customize Fields" Help screen for more guidelines on creating fields for searching.\n\n 5. You may sometimes see duplicate entries in dropdown list search criteria values in the search screen.  If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria dropdown list options are the labels for each list entry, but the codes you defined determine how many entries there will be in the search dropdown list (see the "Customize Fields" Help screen for more information about creating custom dropdown fields). So if you have different Reusable Choices codes with the same label in different bulletin customizations in your account, the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like "label1" and your search will be on bulletins that have that label, regardless of which code the customization had for the label).  And if you have the same Reusable Choices code with different labels in different bulletin customizations in your account, the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like "label1; label2" and your search will be on bulletins that have either of those labels).\n\nFor additional help with searching, email help@martus.org.
+-c989-field:FancySearchHelpMsg5=<ရႀာေဖၾဴခင္းႎႀင့္ ပတ္သက္သည့္ ထပ္တိုးအခဵက္အလက္မဵား \n\n ၁) Martus သည္ သင့္လိုအပ္ခဵက္အတၾက္ အကၾက္ေနရာတိုင္းရႀိ အတန္းမႀန္သမ႖ကို ရႀာေဖၾေပးဴခင္းေဳကာင့္ သင့္လိုအပ္ခဵက္ႎႀင့္ ကိုက္ညီေသာ အတန္းတစ္တန္းရႀိဴပီး မကိုက္ညီသည့္ အဴခားအတန္းမဵားပၝဝင္သည့္ စာေစာင္ကို ရႀာေဖၾမိႎိုင္သည္။ ဥပမာ - သင့္ထံတၾင္ တည္ေနရာနယ္ပယ္ ပၝဝင္ေသာအကၾက္ရႀိသည့္ စာေစာင္ရႀိေနႎိုင္ဴပီး တည္ေနရာ က၊ခ၊ ႎႀင့္ ဂ ပၝဝင္ေသာ အကၾက္ရႀိသည့္ အတန္းတစ္တန္းထက္ပိုေသာ အခဵက္အလက္မဵားရႀိသည္ ဆိုပၝစိုႛ။ အကယ္၍ သင္က တည္ေနရာ ဂ မဟုတ္ေသာ (တည္ေနရာ !=ဂ) စာေစာင္ကို ရႀာေဖၾပၝက Martus သည္ ထိုစာေစာင္ကို ရႀာေဖၾလိမ့္မည္။ အဘယ္ေဳကာင့္ဆိုေသာ္ စာေစာင္ထဲတၾင္ တည္ေနရာ ဂ ပၝဝင္ေသာ အတန္းတစ္တန္းပၝဝင္လင့္ကစား တည္ေနရာ ဂ မဟုတ္ေသာ ေနရာပၝဝင္ေသာ အတန္း၂တန္းရႀိေသာေဳကာင့္ဴဖစ္သည္။ \n\n ၂) ဤထုတ္ဴပန္ခဵက္တၾင္ အကယ္၍ သင္က အဆင့္တစ္ခုထက္ပိုေသာ ေရၾးခဵယ္စရာ ဆၾဲခဵစာရင္းတၾင္ ရႀာေဖၾပၝက ေတၾႛရႀိမည့္ အေဴဖမဵားသည္ အတိအကဵတူညီေသာ အေဴဖမဵားသာဴဖစ္မည္။ တဝက္တပဵက္တူေသာ/အစသာတူေသာ အေဴဖမဵိႂးမရပၝ။ ဆိုလိုသည္မႀာ သင္ရႀာေဖၾလိုသည့္ အဆင့္အတိအကဵကို သင္က ေရၾးခဵယ္ရမည္ဴဖစ္သည္။ ဥပမာ - အဆင့္သံုးဆင့္ (ဴပည္နယ္၊ ဴမိႂႛ၊ ရပ္ကၾက္) ရႀိသည့္ “ဴဖစ္ရပ္တည္ေနရာ”  သည္ နယ္ပယ္ရႀာေဖၾစာရင္းတၾင္ တည္ေနရာ ဴပည္နယ္၊ တည္ေနရာ ဴမိႂႛ၊ တည္ေနရာ ရပ္ကၾက္ ဟူ၍ သံုးဳကိမ္ဴဖည့္သၾင္းရမည္ ဴဖစ္သည္။ ထိုႛေဳကာင့္ သင္သည္ ကခဵင္ဴပည္နယ္တၾင္ ရႀိသည့္ မည္သည့္ဴဖစ္ရပ္တည္ေနရာမဆို (ဴမိႂႛကို မစဥ္းစားဘဲ) ပၝဝင္ေသာ စာေစာင္ကို ရႀာေဖၾလုိလ႖င္ တည္ေနရာဴပည္နယ္ကို ေရၾးခဵယ္ရမည္ဴဖစ္ဴပီး ေရၾးခဵယ္စရာဆၾဲခဵစာရင္းမႀ ကခဵင္ဴပည္နယ္ကို ေရၾးခဵယ္ရမည္ဴဖစ္သည္။ အကယ္၍ သင္သည္ ဴဖစ္ရပ္တည္ေနရာ - ဴမိႂႛကို ရႀာေဖၾေနရာတၾင္ ေရၾးခဵယ္ကာ ကခဵင္ဴပည္နယ္းကိုသာ ေရၾးခဵယ္ဴပီး ဴမိႂႛအဆင့္ကို ကၾက္လပ္ထားခဲ့ပၝက Martus က ဴမိႂႛအခဵက္အလက္မထည့္သၾင္းထားေသာ (ဴမိႂႛေနရာ ကၾက္လပ္) ရလဒ္မဵားကိုသာ ရႀာေဖၾလိမ့္မည္။ ဴမိႂႛအဆင့္တၾင္ မည္သည့္အခဵက္အလက္ထည့္သၾင္းထားသည္ကို မစဥ္းစားဘဲ ကခဵင္ဴပည္နယ္ရႀိ မည္သည့္တည္ေနရာကိုမဆို ရႀာေဖၾေစခဵင္ေသာ လုပ္ေဆာင္ခဵက္ႎႀင့္ ဆန္ႛကဵင္သၾားေပလိမ့္မည္။ \n\n ၃) အကယ္၍ ရႀာေဖၾရလဒ္စာတၾဲအတၾင္းတၾင္ ဴပသထားေသာ စာေစာင္ေနာက္ဆံုးဗားရႀင္းတၾင္ သင္၏ရႀာေဖၾသတ္မႀတ္ခဵက္/ေနႛစၾဲမဵားကို ရႀာမေတၾႛပၝက သင္၏သတ္မႀတ္ခဵက္သည္ စာေစာင္ဗားရႀင္းအေဟာင္းႎႀင့္ ကိုက္ညီေနေသာေဳကာင့္ ဴဖစ္ႎိုင္သည္။ စာေစာင္၏ထိပ္စီးတၾင္ရႀိေသာ “စာေစာင္အေသးစိတ္”ခလုတ္ကို ႎိႀပ္၍ ယခင္ဗားရႀင္းကို ဴပန္ဳကည့္ႎိုင္သည္။ စာေစာင္၏ေနာက္ဆံုးဗားရႀင္းမဵားမႀ ရႀာေဖၾလိုပၝက ရႀာေဖၾေနရာတၾင္ စာေစာင္ေနာက္ဆံုးဗားရႀင္းမႀသာ ဆိုသည္ကို ေရၾးခဵယ္ပၝ။ \n\n ၄) အကယ္၍ သင့္ထံတၾင္ မတူညီေသာ စာေစာင္မဵားမႀ သိုႛမဟုတ္ မတူညီေသာ စိတ္ဳကိႂက္ဴပင္ဆင္မႁမဵားမႀ တေထရာတည္းတူညီေနေသာ နယ္ပယ္မဵား ရႀိေနပၝက Martus မႀ မည္သည့္ ရႀာေဖၾဴခင္းႎႀင့္ တင္ဴပဴခင္းနယ္ပယ္စာရင္းတၾင္မဆို ေပၝင္း၍ဴပမည္ဴဖစ္သည္။ ထိုႛအဴပင္ Martus က သင္စာေစာင္အသစ္ စိတ္ဳကိႂက္ဴပင္ဆင္မႁမဵားဖန္တီးခဵိန္တၾင္ တစ္ခုထက္ပိုေသာ အမႀတ္အသားမဵားရႀိေနေဳကာင္း သတိေပးေနခဵိန္၌ သင့္ထံတၾင္ တူညီေသာ အမႀတ္အသားမဵားရႀိသည့္ မတူညီေသာ စိတ္ဳကိႂက္ဴပင္ဆင္မႁမဵားရႀိေသာ စာေစာင္ရႀိေနဴခင္းလည္း ဴဖစ္ႎိုင္သည္။ (ဥပမာ - သင္က ေရၾးခဵယ္စရာေနရာတၾင္ အကၡရာထည့္သၾင္းသည့္ ေနရာကို တူညီေသာ အမႀတ္အသားကို သိမ္းထားဴခင္း) ဤအေဴခအေနမဵိႂးတၾင္ Martus သည္ ရႀာေဖၾမဵက္ႎႀာဴပင္တၾင္ အေဴဖႎႀစ္ခုစလံုးကို ဴပလိမ့္မည္။ ထိုႛအဴပင္ နယ္ပယ္ေရၾးခဵယ္မႁစာရင္းတၾင္ မည္သည့္ နယ္ပယ္အမဵိႂးအစားႎႀင့္ အညၿန္းမဵားရႀိသည္ကို ဴပသဴခင္းဴဖင့္ Martus က နယ္ပယ္မဵားဳကားရႀိ မတူညီမႁကို သင္စဥ္းစားႎိုင္ေအာင္ ကူညီေပးလိမ့္မည္။ ထိုႛအတူ သင့္ထံတၾင္ တူညီေသာအညၿန္းမဵားႎႀင့္ မတူညီေသာအမႀတ္အသားမဵား ႎႀင့္/သိုႛမဟုတ္ နယ္ပယ္အမဵိႂးအစားမဵားရႀိေနပၝက Martus မႀ အညၿန္းႎႀင့္ နယ္ပယ္အမဵိႂးအစားကို အသံုးဴပႂကာ မည္သည့္အခဵိန္တၾင္ မတူညီေသာ နယ္ပယ္မဵား တူညီသင့္သည္ကို ရႀာေဖၾေပးလိမ့္မည္။ ထိုႛေဳကာင့္ က႗ႎု္ပ္တိုႛ တိုက္တၾန္းလိုသည္မႀာ ရႁပ္ေထၾးမႁမဵား မဴဖစ္ေစရန္ သင့္အေနႎႀင့္ စိတ္ဳကိႂက္ဴပင္ဆင္ထားေသာေနရာတၾင္ နယ္ပယ္အညၿန္းႎႀင့္ အမႀတ္အသားမဵားကို ရႀင္းရႀင္းလင္းလင္းဴဖစ္ေအာင္ သတ္မႀတ္ရမည္။  ရႀာေဖၾဴခင္းမဵားအတၾက္ နယ္ပယ္မဵားဖန္တီးဴခင္းႎႀင့္ ပတ္သက္သည့္ ထပ္မံလမ္းညၿန္ခဵက္မဵားကို သိရႀိလိုပၝက “နယ္ပယ္မဵားစိတ္ဳကိႂက္္ဴပင္ဆင္ဴခင္း” အကူအညီစာမဵက္ႎႀာတၾင္ ေကဵးဇူးဴပႂ၍ ဳကည့္ပၝ။ \n\n ၅) သင့္အေနဴဖင့္ တစ္ခၝတရံ ရႀာေဖၾရလဒ္ဴပမဵက္ႎႀာဴပင္၏ ရႀာေဖၾမႁသတ္မႀတ္ခဵက္တန္ဖိုးမဵား ဆၾဲခဵစာရင္းတၾင္ တစ္ခုထက္ပိုေသာ တူညီသည့္အခဵက္အလက္မဵားကို ေတၾႛရႀႀိေကာင္းေတၾႛရႀိမည္။ ရႀာေဖၾေနရာတၾင္ “ဴပန္လည္အသံုးဴပႂႎိုင္ေသာ ေရၾးခဵယ္မႁမဵား ဆၾဲခဵနယ္ပယ္”ကို သင္ေရၾးခဵယ္ပၝက  သတ္မႀတ္ခဵက္ဆၾဲခဵစာရင္းေရၾးခဵယ္မႁ အခၾင့္အလမ္းမဵားအဴဖစ္ ဴပေသာ တန္ဖိုးမဵားသည္ သၾင္းထားေသာ စာရင္းတစ္ခုစီအတၾက္ အမႀတ္အသားမဵား ဴဖစ္သည္။ (စိတ္ဳကိႂက္ဴပင္ဆင္ထားေသာ ဆၾဲခဵနယ္ပယ္မဵားႎႀင့္ ပတ္သက္၍ ပိုမိုသိရႀိလိုပၝက “နယ္ပယ္မဵားစိတ္ဳကိႂက္္ဴပင္ဆင္ဴခင္း” အကူအညီစာမဵက္ႎႀာတၾင္ ေကဵးဇူးဴပႂ၍ ဳကည့္ပၝ။) အကယ္၍ သင့္အေကာင့္ရႀိ မတူညီေသာ စိတ္ဳကိႂက္ဴပင္ဆင္ထားသည့္ စာေစာင္မဵားထဲ၌ ေခၝင္းစဥ္တူညီေသာ္လည္း မတူညီေသာ ဴပန္လည္အသံုးခဵႎိုင္သည့္ ေရၾးခဵယ္မႁကုဒ္မဵား ရႀိေနပၝက အမႀတ္အသားမဵားသည္ ရႀာေဖၾဆၾဲခဵစာရင္းတၾင္ ႎႀစ္ဳကိမ္ဴပေနလိမ့္မည္။ (ဆိုလိုသည္မႀာ သင္သည္ အမႀတ္အသား၁ကို ကုဒ္၁ ႎႀင့္ ကုဒ္၂ ႎႀစ္ခုလံုးအတၾက္ သံုးထားပၝက ရႀာေဖၾဆၾဲခဵစာရင္းတၾင္ အမႀတ္အသား၁ဟု ထင္ရေသာ ရလဒ္ႎႀစ္ခုကို သင္ေတၾႛရလိမ့္မည္ဴဖစ္သည္။ ထိုႛအဴပင္ သင္၏ရႀာေဖၾဴခင္းသည္ ထိုအမႀတ္အသားအတၾက္ မည္သည့္စိတ္ဳကိႂက္ဴပင္ဆင္မႁကုဒ္ရိႀခဲ့သည္ ဴဖစ္ေစကာမူ ထိုအမႀတ္အသားရႀိေနေသာ စာေစာင္တၾင္ ေဖာ္ဴပေနလိမ့္မည္။) အကယ္၍ သင့္အေကာင့္ထဲရိႀ မတူညီေသာ စိတ္ဳကိႂက္ဴပင္ဆင္မႁစာေစာင္မဵားထဲ၌ မတူညီေသာ အမႀတ္အသားမဵားရႀိသည့္ တူညီေသာ ဴပန္လည္အသံုးဴပႂႎိုင္ေသာ ေရၾးခဵယ္စရာမဵား ရႀိေနပၝက ထိုကုဒ္အတၾက္ ရႀာေဖၾဆၾဲခဵစာရင္းသည္ တန္ဖိုးႎႀစ္ခုစလံုးကို ဆီမီးေကာ္လံ (Semicolon) ခံ၍ ေဖာ္ဴပလိမ့္မည္။ (ဆိုလိုသည္မႀာ အမႀတ္အသား၁ ႎႀင့္ အမႀတ္အသား၂တိုႛ အတၾက္ ကုဒ္၁ကို သင္အသံုးဴပႂထားပၝက ရႀာေဖၾဆၾဲခဵစာရင္းတၾင္ “အမႀတ္အသား၁ ; အမႀတ္အသား၂” ဟုထင္ရေသာ ရလဒ္ကိုေတၾႛရမည္။ ထိုႛအဴပင္ သင့္ရႀာေဖၾမႁသည္ ထုိအမႀတ္အသားမဵား တစ္ခုမဟုတ္ တစ္ခုရႀိေနေသာ စာေစာင္တၾင္ ေဖာ္ဴပေနလိမ့္မည္။) ရႀာေဖၾဴခင္းႎႀင့္ ပတ္သက္၍ ထပ္ဴဖည့္အကူအညီမဵား လိုအပ္ပၝက help@martus.org သိုႛ အီးေမးလ္ပိုႛပၝ။>
 
 #___________________________=Yes/No
 -9f62-field:FieldTypeBOOLEAN=ဟုတ္ပၝသည္/မဟုတ္ပၝ
@@ -1065,6 +1122,9 @@
 
 #___________________________________=NOTE: Bulletins authored by other accounts cannot be changed using this command, so they are not included in the list above.
 -250a-field:SkippingBulletinsNotOurs=မႀတ္ခဵက္။  ။အဴခားအေကာင့္မဵားက ေရးသားေသာ စာေစာင္မဵားကုိ ဤအမိန္ေပးမႁ ဴဖင့္ေဴပာင္းလဲမရပၝ။ထုိေဳကာင့္ ၎တုိသည္ အထက္ေဖာ္ဴပပၝဇယားတၾင္မပၝ၀င္ပၝ။။
+
+#_______________________________________________=The following words have been added to the user dictionary. \nYou can delete or edit them here, or you can add more words. \nEach word must be on a line by itself.
+-ad45-field:SpellCheckUserDictionaryInstructions=&lt;The following words have been added to the user dictionary. \nYou can delete or edit them here, or you can add more words. \nEach word must be on a line by itself.&gt;
 
 #___________________________________=Human Rights Bulletin System
 -fe5b-field:SplashProductDescription=လူႛအခၾင့္အေရးစာေစာင္မဵား ထိန္းသိမ္းမႁစနစ္
@@ -1681,6 +1741,12 @@
 #________________________________________________=The bulletin version you are trying to view is currently not on your computer.
 -e4b7-field:notifyBulletinVersionNotInSystemcause=ယခု ဳကည့္႟ႁလိုေသာ စာေစာင္မူကၾဲသည္ သင့္ကၾန္ပဵႃတာ္တၾင္ မရႀိပၝ။
 
+#____________________________________=Printing complete
+-b4a9-field:notifyChartCompletedcause=<Printing complete>
+
+#_______________________________________=An unknown error has occurred
+-6130-field:notifyChartUnknownErrorcause=<An unknown error has occurred>
+
 #____________________________________=The selected server is not responding. Before you choose a server, you must be connected to the internet, and that server must be available.
 -38fd-field:notifyConfigNoServercause=ေရၾးခဵယ္ထားေသာ ဆာဗာသည္ တုန္ႛဴပန္မႁမရႀိပၝ။ ဆာဗာမေရၾးမီ အင္တာနက္ႎႀင့္ ခဵိတ္ဆက္ရပၝမည္။ ေရၾးခဵယ္ထားေသာ ဆာဗာသည္လည္း ဆက္သၾယ္ေဆာင္ရၾက္ႎိုင္သည့္ ဆာဗာ ဴဖစ္ရပၝမည္။
 
@@ -1720,6 +1786,9 @@
 #_____________________________________=An error has occurred, which may have prevented Martus from saving some configuration information. You may see a warning next time you log in.
 -117c-field:notifyErrorDuringExitcause=အခက္အခဲတစ္ခု ႒ကံႂေတၾႚေနရသဴဖင့္ ဆက္သၾယ္တပ္ဆင္မႁဆိုင္ရာ သတင္းအခဵက္အလက္မဵားကို Martus က သိမ္းဆည္း၍မရပၝ။ ေနာက္တစ္႒ကိမ္ Martus ေဆာ့ဖ္ဝဲသိုႛ ဝင္ေရာက္သည့္အခၝ သတိေပးခဵက္ကို ေတၾႛပၝလိမ့္မည္။
 
+#_____________________________________________=There was an error exporting bulletins from Martus.  Not all bulletins were exported.
+-229b-field:notifyErrorExportingBulletinscause=<There was an error exporting bulletins from Martus.  Not all bulletins were exported.>
+
 #_________________________________________________________=There was an error saving your template.
 -88ed-field:notifyErrorExportingCustomizationTemplatecause=ပံုစံခၾင္အား သိမ္းဆည္းရာတၾင္ အခက္အခဲတစ္ခု ရႀိေနပၝသည္။
 
@@ -1737,6 +1806,9 @@
 
 #_________________________________________________________=There was an error importing this template.
 -4a9a-field:notifyErrorImportingCustomizationTemplatecause=ဤပံုစံခၾင္အား တင္သၾင္းရာတၾင္ အခက္အခဲတစ္ခု ႒ကံႂေတၾႚေနရသည္။
+
+#____________________________________________=Unknown error loading user dictionary for spell checking
+-4d01-field:notifyErrorLoadingDictionarycause=<Unknown error loading user dictionary for spell checking>
 
 #______________________________________=An error prevented the file from being read.
 -1ad3-field:notifyErrorReadingFilecause=အခက္အခဲတစ္ခုေဳကာင့္ ဤစာတၾဲအား ဖတ္၍မရပၝ။
@@ -1756,8 +1828,14 @@
 #_______________________________________=Unable to save configuration file.
 -896e-field:notifyErrorSavingConfigcause=ဆက္သၾယ္တပ္ဆင္မႁဆိုင္ရာ စာတၾဲကို သိမ္းဆည္း၍ မရပၝ။
 
+#___________________________________________=Unknown error saving user dictionary
+-fc3a-field:notifyErrorSavingDictionarycause=<Unknown error saving user dictionary>
+
 #______________________________________=Unable to save current screen layout.
 -2bad-field:notifyErrorSavingStatecause=လက္ရႀိ ဖန္သားဴပင္ အခင္းအကဵင္းကို သိမ္းဆည္း၍ မရပၝ။
+
+#_____________________________________________=Unable to update the dictionary. Be sure the word list is in the correct format.
+-6486-field:notifyErrorUpdatingDictionarycause=<Unable to update the dictionary. Be sure the word list is in the correct format.>
 
 #______________________________________=An error prevented the file from being written. Check to make sure the disk is not full or write protected.
 -2a84-field:notifyErrorWritingFilecause=ဤစာတၾဲကို ေရးသားရာတၾင္ အခက္အခဲတစ္ခုက တားဆီးေနပၝသည္။ ဒစ္သည္ ဴပည့္ကဵပ္ေနဴခင္း သိုႛမဟုတ္ ဝင္ေရာက္ေေရးသားမႁမႀ ကာကၾယ္ထားဴခင္းတိုႛ မရႀိေစရန္ ေသခဵာစၾာစစ္ေဆးပၝ။
@@ -2173,6 +2251,9 @@ field:translationVersion=ဴမန္မာ 4.0.0
 #________________=Arabic
 -af4f-language:ar=အာရပ္
 
+#_________________=Armenian
+-1a0d-language:arm=<Armenian>
+
 #________________=Azerbaijani
 -6885-language:az=အဇာဘိုင္ဂဵန္
 
@@ -2326,11 +2407,20 @@ field:translationVersion=ဴမန္မာ 4.0.0
 #________________________=Update Headquarters Access...
 -fe87-menu:AddPermissions= ပင္မသိုႛ၀င္ေရာက္မႁကုိ အပ္ဒိတ္ လုပ္ပၝ။
 
+#_________________________=Add '#NewWord#' to User Dictionary
+-0ca4-menu:AddToDictionary=<Add '#NewWord#' to User Dictionary>
+
 #_____________________________=Backup My Key
 -2852-menu:BackupMyKeyPairFile=က႗ႎု္ပ္၏ေသာ့ကို မိတၨႃကူးပၾားပၝ
 
+#________________=Charts
+-8610-menu:Charts=<Charts>
+
 #______________________=Configure Headquarters
 -bf2f-menu:ConfigureHQs=ပင္မကို ဆက္သၾယ္တပ္ဆင္ပၝ
+
+#_____________________________=Spell Checking
+-5cf2-menu:ConfigureSpellCheck=<Spell Checking>
 
 #_______________________=Copy Bulletin(s)
 -a57a-menu:CopyBulletins=စာေစာင္(မဵား)ကို မိတၨႃပၾားပၝ
@@ -2373,6 +2463,9 @@ field:translationVersion=ဴမန္မာ 4.0.0
 
 #_________________________=Import Bulletins
 -4094-menu:ImportBulletins=စာေစာင္မဵားကို တင္သၾင္းပၝ
+
+#_________________________________=More Suggestions
+-a25a-menu:MoreSpellingSuggestions=<More Suggestions>
 
 #_________________________=Organize Folders
 -1ee2-menu:OrganizeFolders=စာေစာင္မဵားကို စုစည္းပၝ
@@ -2491,23 +2584,23 @@ field:translationVersion=ဴမန္မာ 4.0.0
 #__________________=hamal
 -23d3-month:Afghan1=ဖာဗာဒင
 
-#___________________=d��adi
--bedc-month:Afghan10=ေဒး 
+#___________________=dʒadi
+-e5c6-month:Afghan10=<ေဒး >
 
 #___________________=hut
 -0002-month:Afghan11=ဘာမန
 
-#___________________=dalv��
--5f43-month:Afghan12=အက္စ္ဖန္ 
+#___________________=dalvæ
+-5a4f-month:Afghan12=<အက္စ္ဖန္ >
 
 #__________________=sawr
 -1365-month:Afghan2=ေဳသာ္ဒီဘယ္ဟက္ရ 
 
-#__________________=d��awz��
--3336-month:Afghan3=ေခၞဒက္ 
+#__________________=dʒawzɒ
+-9238-month:Afghan3=<ေခၞဒက္ >
 
-#__________________=sarat��n
--4c9c-month:Afghan4=တား 
+#__________________=saratɒn
+-5684-month:Afghan4=<တား >
 
 #__________________=asad
 -8efa-month:Afghan5=ေမာ္ဒက္ 
@@ -2515,8 +2608,8 @@ field:translationVersion=ဴမန္မာ 4.0.0
 #__________________=sonbola
 -20ff-month:Afghan6=ရႀားရီဗာ 
 
-#__________________=miz��n
--a640-month:Afghan7=မား 
+#__________________=mizɒn
+-99b2-month:Afghan7=<မား >
 
 #__________________='aqrab
 -c52e-month:Afghan8=အဘန္ 
@@ -2676,6 +2769,12 @@ field:translationVersion=ဴမန္မာ 4.0.0
 
 #__________________________=Headquarters Editor
 -7fb9-wintitle:ConfigureHQs=ပင္မ အယ္ဒီတာ
+
+#_________________________________=Configure Spell Checking
+-b0ce-wintitle:ConfigureSpellCheck=<Configure Spell Checking>
+
+#_________________________=Charts
+-8610-wintitle:CreateChart=<Charts>
 
 #____________________________________=Help on Creating Custom Fields
 -ed1d-wintitle:CreateCustomFieldsHelp=စိတ္႒ကိႂက္သိုမႀီးခဵက္မဵား တည္ေဆာက္ဴခင္းအတၾက္ အကူအညီ
@@ -2862,6 +2961,9 @@ field:translationVersion=ဴမန္မာ 4.0.0
 
 #_______________________________________=Retrieve My Sealed Bulletins
 -68b9-wintitle:RetrieveMySealedBulletins=က႗ႎု္ပ္၏ ခဵိပ္ပိတ္စာေစာင္မဵား ဴပန္လည္ရယူေနစဥ္
+
+#______________________________=Charts
+-8610-wintitle:RunOrCreateChart=<Charts>
 
 #_______________________________=Reports
 -88bc-wintitle:RunOrCreateReport=အစီရင္ခံစာမဵား
@@ -3148,6 +3250,12 @@ field:translationVersion=ဴမန္မာ 4.0.0
 #______________________________________________=Bulletin Version Not Found
 -a60d-wintitle:notifyBulletinVersionNotInSystem=စာေစာင္မူကၾဲ ရႀာမေတၾႚပၝ
 
+#__________________________________=Charts
+-8610-wintitle:notifyChartCompleted=<Charts>
+
+#_____________________________________=Charts
+-8610-wintitle:notifyChartUnknownError=<Charts>
+
 #__________________________________=Unable to Connect to Server
 -1b07-wintitle:notifyConfigNoServer=ဆာဗာသိုႛ ခဵိတ္ဆက္၍ မရပၝ
 
@@ -3187,6 +3295,9 @@ field:translationVersion=ဴမန္မာ 4.0.0
 #___________________________________=Error During Exit
 -e05d-wintitle:notifyErrorDuringExit=Martus မႀထၾက္စဥ္ အခက္အခဲရႀိေနပၝသည္
 
+#___________________________________________=Error Exporting Bulletins
+-6969-wintitle:notifyErrorExportingBulletins=<Error Exporting Bulletins>
+
 #_______________________________________________________=Error Exporting Template
 -f4cc-wintitle:notifyErrorExportingCustomizationTemplate=ပံုစံခၾင္ ထုတ္လုပ္ေပးပိုႛစဥ္ အခက္အခဲရႀိေနပၝသည္
 
@@ -3204,6 +3315,9 @@ field:translationVersion=ဴမန္မာ 4.0.0
 
 #_____________________________________________________________=Error Importing Template
 -4f1a-wintitle:notifyErrorImportingCustomizationTemplateFuture=ပံုစံခၾင္ တင္သၾင္းစဥ္ အခက္အခဲရႀိေနပၝသည္
+
+#__________________________________________=Error
+-7f2f-wintitle:notifyErrorLoadingDictionary=<Error>
 
 #____________________________________=Error Reading File
 -73ad-wintitle:notifyErrorReadingFile=စာတၾဲ ဖတ္ရာတၾင္ အခက္အခဲရႀိေနပၝသည္
@@ -3223,8 +3337,14 @@ field:translationVersion=ဴမန္မာ 4.0.0
 #_____________________________________=Error Saving Configuration File
 -1287-wintitle:notifyErrorSavingConfig=အခက္အခဲသိမ္းဆည္းမႁကို တပ္ဆင္ေပးမည့္ စာတၾဲ
 
+#_________________________________________=Error
+-7f2f-wintitle:notifyErrorSavingDictionary=<Error>
+
 #____________________________________=Error Saving State
 -884d-wintitle:notifyErrorSavingState=အခက္အခဲသိမ္းဆည္းမႁ အေဴခအေန
+
+#___________________________________________=Error
+-7f2f-wintitle:notifyErrorUpdatingDictionary=<Error>
 
 #____________________________________=Error Writing File
 -fabf-wintitle:notifyErrorWritingFile=အခက္အခဲကို ေရးသားထားသည့္ စာတၾဲ
