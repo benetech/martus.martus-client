@@ -248,7 +248,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private void warnIfCryptoJarsNotLoaded() throws Exception
 	{
 		URL jceJarURL = MartusJarVerification.getJarURL(Cipher.class);
-		if(jceJarURL.toString().indexOf("bc-jce") < 0)
+		String urlString = jceJarURL.toString();
+		int foundAt = urlString.indexOf("bc-jce");
+		MartusLogger.log("warnIfCryptoJarsNotLoaded Cipher: " + urlString);
+		MartusLogger.log("Found bc-jce? " + foundAt);
+		if(foundAt < 0)
 		{
 			String hintsToSolve = "Xbootclasspath might be incorrect; bc-jce.jar might be missing from Martus/lib/ext";
 			JOptionPane.showMessageDialog(null, "Didn't load bc-jce.jar\n\n" + hintsToSolve);
