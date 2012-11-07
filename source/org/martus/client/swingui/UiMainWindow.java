@@ -251,7 +251,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String urlString = jceJarURL.toString();
 		int foundAt = urlString.indexOf("bc-jce");
 		MartusLogger.log("warnIfCryptoJarsNotLoaded Cipher: " + urlString);
-		MartusLogger.log("Found bc-jce? " + foundAt);
 		if(foundAt < 0)
 		{
 			String hintsToSolve = "Xbootclasspath might be incorrect; bc-jce.jar might be missing from Martus/lib/ext";
