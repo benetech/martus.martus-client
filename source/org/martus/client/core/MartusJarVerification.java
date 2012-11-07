@@ -54,7 +54,6 @@ public class MartusJarVerification
 		String urlString = jceJarURL.toString();
 		int foundAt = urlString.indexOf("bc-jce");
 		MartusLogger.log("verifyJars Cipher: " + urlString);
-		MartusLogger.log("Found bc-jce? " + foundAt);
 		if(foundAt < 0)
 		{
 			String hintsToSolve = "\n\nXbootclasspath might be incorrect; bc-jce.jar might be missing from Martus/lib/ext";
