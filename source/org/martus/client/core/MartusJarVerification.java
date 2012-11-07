@@ -37,6 +37,7 @@ import java.util.jar.JarFile;
 import javax.crypto.Cipher;
 
 import org.bouncycastle.crypto.engines.RSAEngine;
+import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.crypto.MartusCrypto.InvalidJarException;
@@ -50,7 +51,11 @@ public class MartusJarVerification
 		// for bc-jce, look for SSMTSJAR.SF (SSMTSJAR.SIG)
 		
 		URL jceJarURL = getJarURL(Cipher.class);
-		if(jceJarURL.toString().indexOf("bc-jce") < 0)
+		String urlString = jceJarURL.toString();
+		int foundAt = urlString.indexOf("bc-jce");
+		MartusLogger.log("verifyJars Cipher: " + urlString);
+		MartusLogger.log("Found bc-jce? " + foundAt);
+		if(foundAt < 0)
 		{
 			String hintsToSolve = "\n\nXbootclasspath might be incorrect; bc-jce.jar might be missing from Martus/lib/ext";
 			throw new InvalidJarException("Didn't load bc-jce.jar" + hintsToSolve);
@@ -58,6 +63,7 @@ public class MartusJarVerification
 		verifySignedKeyFile("bc-jce.jar", jceJarURL, "SSMTSJAR");
 		
 		URL bcprovJarURL = getJarURL(RSAEngine.class);
+		MartusLogger.log("verifyJars RSA: " + bcprovJarURL.toString());
 		String bcprovJarName = BCPROV_JAR_FILE_NAME;
 		if(bcprovJarURL.toString().indexOf(bcprovJarName) < 0)
 		{
@@ -163,6 +169,6 @@ public class MartusJarVerification
 
 	private static final String MARTUS_SIGNATURE_FILE_EXTENSION = ".SIG";
 	private static final String SIGNATURE_FILE_EXTENSION = ".SF";
-	public static final String BCPROV_JAR_FILE_NAME = "bcprov-jdk14-135.jar";
+	public static final String BCPROV_JAR_FILE_NAME = "bcprov-jdk15on-147.jar";
 
 }

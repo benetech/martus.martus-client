@@ -192,7 +192,7 @@ public class Martus
 	private static String[] getThirdPartyJarNames()
 	{
 		return new String[] {
-			"bcprov-jdk14-135.jar",
+			"bcprov-jdk15on-147.jar",
 			"icu4j-3.4.4.jar",
 			"jcommon-1.0.17.jar",
 			"jfreechart-1.0.14.jar",
@@ -200,7 +200,6 @@ public class Martus
 			"junit-3.8.2.jar",
 			"layouts-2006-08-10.jar",
 			"persiancalendar-2.1.jar",
-			"velocity-1.4.jar",
 			"velocity-dep-1.4.jar",
 			"xmlrpc-1.2-b1.jar",
 		};

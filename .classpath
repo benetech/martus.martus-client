@@ -12,9 +12,9 @@
 	<classpathentry kind="lib" path="/martus-thirdparty/common/Velocity/bin/velocity-dep-1.4-rc1.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/martus-clientside"/>
 	<classpathentry kind="lib" path="/martus-thirdparty/client/jhlabs/bin/layouts.jar" sourcepath="/martus-thirdparty/client/jhlabs/src/layouts.zip"/>
-	<classpathentry kind="lib" path="/martus-thirdparty/libext/BouncyCastle/bin/bcprov-jdk14-135.jar" sourcepath="/martus-thirdparty/libext/BouncyCastle/source/bcprov-jdk14-135.zip"/>
 	<classpathentry kind="lib" path="/martus-thirdparty/client/jortho/bin/jortho-0.5.jar" sourcepath="/martus-thirdparty/client/jortho/source/JOrtho_0.5.zip"/>
 	<classpathentry kind="lib" path="/martus-thirdparty/client/JFreeChart/bin/jfreechart-1.0.14.jar" sourcepath="/martus-thirdparty/client/JFreeChart/source/jfreechart-1.0.14.zip"/>
 	<classpathentry kind="lib" path="/martus-thirdparty/client/JFreeChart/bin/jcommon-1.0.17.jar"/>
+	<classpathentry kind="lib" path="/martus-thirdparty/libext/BouncyCastle/bin/bcprov-jdk15on-147.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
