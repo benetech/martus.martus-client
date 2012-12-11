@@ -129,8 +129,8 @@ public class MartusJarVerification
 			
 			if(!Arrays.equals(expected, actual))
 			{
-				String basicErrorMessage = "Unequal contents for: " + keyFileNameWithoutExtension;
-				String hintsToSolve = "Might be wrong version of jar (" + jarURL + ")";
+				String basicErrorMessage = "\nUnequal contents for: " + keyFileNameWithoutExtension;
+				String hintsToSolve = "\nMight be wrong version of jar (" + jarURL + ")";
 				throw new MartusCrypto.InvalidJarException(errorMessageStart + basicErrorMessage + hintsToSolve);
 			}
 		}
