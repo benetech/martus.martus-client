@@ -25,12 +25,13 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.JarURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -39,8 +40,8 @@ import javax.crypto.Cipher;
 import org.bouncycastle.crypto.engines.RSAEngine;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.crypto.MartusCrypto.InvalidJarException;
+import org.martus.common.crypto.MartusSecurity;
 
 public class MartusJarVerification
 {
@@ -96,7 +97,7 @@ public class MartusJarVerification
 			int size = (int)entry.getSize();
 			
 			InputStream actualKeyFileIn = jf.getInputStream(entry);
-			byte[] actual = null;
+			String actual = null;
 			try
 			{
 				actual = readAll(size, actualKeyFileIn);
@@ -115,7 +116,7 @@ public class MartusJarVerification
 				String basicErrorMessage = "Couldn't open " + keyFileInMartusJar + " in Martus jar";
 				throw new MartusCrypto.InvalidJarException(errorMessageStart + basicErrorMessage);
 			}
-			byte[] expected = null;
+			String expected = null;
 			try
 			{
 				expected = readAll(size, referenceKeyFileIn);
@@ -127,7 +128,7 @@ public class MartusJarVerification
 				throw new MartusCrypto.InvalidJarException(errorMessageStart + basicErrorMessage);
 			}
 			
-			if(!Arrays.equals(expected, actual))
+			if(!actual.equals(expected))
 			{
 				String basicErrorMessage = "\nUnequal contents for: " + keyFileNameWithoutExtension;
 				String hintsToSolve = "\nMight be wrong version of jar (" + jarURL + ")";
@@ -135,19 +136,27 @@ public class MartusJarVerification
 			}
 		}
 
-	static byte[] readAll(int size, InputStream streamToRead) throws IOException
+	static String readAll(int size, InputStream streamToRead) throws IOException
 	{
-		byte[] gotBytes = new byte[size];
-		int got = 0;
-		while(true)
+		StringBuffer buffer = new StringBuffer(size);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(streamToRead));
+		try
 		{
-			int thisByte = streamToRead.read();
-			if(thisByte < 0)
-				break;
-			gotBytes[got++] = (byte)thisByte;
+			while(true)
+			{
+				String line = reader.readLine();
+				if(line == null)
+					break;
+				buffer.append(line);
+				buffer.append('\n');
+			}
+			streamToRead.close();
+			return buffer.toString();
 		}
-		streamToRead.close();
-		return gotBytes;
+		finally
+		{
+			reader.close();
+		}
 	}
 
 	public static URL getJarURL(Class c) throws MartusCrypto.InvalidJarException, MalformedURLException
