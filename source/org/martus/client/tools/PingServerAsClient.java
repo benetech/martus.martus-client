@@ -32,7 +32,6 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.network.NetworkInterface;
 import org.martus.common.network.NetworkResponse;
-import org.martus.common.network.NonSSLNetworkAPI;
 
 public class PingServerAsClient
 {
@@ -46,7 +45,7 @@ public class PingServerAsClient
 	{
 		processArgs(args);
 		
-		NonSSLNetworkAPI server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(ip);
+		ClientSideNetworkHandlerUsingXmlRpcForNonSSL server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(ip);
 		if(!ClientSideNetworkHandlerUsingXmlRpcForNonSSL.isNonSSLServerAvailable(server))
 		{
 			sleepToAvoidMixingOurOutputWithTheStackTrace();

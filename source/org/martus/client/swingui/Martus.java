@@ -36,6 +36,7 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
+import org.martus.clientside.ClientPortOverride;
 import org.martus.common.MartusLogger;
 import org.martus.common.VersionBuildDate;
 import org.martus.swing.UiOptionPane;
@@ -109,6 +110,14 @@ public class Martus
 			int timeoutMinutes = Integer.parseInt(requestedTimeoutMinutes);
 			UiMainWindow.timeoutInXSeconds = 60 * timeoutMinutes;
 			options.remove(foundTimeout);
+		}
+		
+		int foundInsecurePorts = options.indexOf("--insecure-ports");
+		if(foundInsecurePorts >= 0)
+		{
+			MartusLogger.log("WARNING: USING INSECURE PORTS (--insecure-ports)");
+			ClientPortOverride.useInsecurePorts = true;
+			options.remove(foundInsecurePorts);
 		}
 		
 		if(options.size() > 0)
@@ -232,5 +241,4 @@ public class Martus
 
 	private final static String TIMEOUT_OPTION_TEXT = "--timeout-minutes=";
 	private final static int DEFAULT_TIMEOUT_SECONDS = (10 * 60);
-
 }
