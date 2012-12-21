@@ -77,6 +77,7 @@ import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.HQKeys.HQsException;
 import org.martus.common.LegacyCustomFields;
+import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.BulletinNotFoundException;
 import org.martus.common.MartusUtilities.FileVerificationException;
@@ -102,6 +103,7 @@ import org.martus.common.network.NetworkInterface;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.network.NonSSLNetworkAPI;
+import org.martus.common.network.NonSSLNetworkAPIWithHelpers;
 import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.FieldDataPacket;
@@ -1400,11 +1402,11 @@ public class MartusApp
 		ServerNotAvailableException,
 		PublicInformationInvalidException
 	{
-		NonSSLNetworkAPI server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName);
+		ClientSideNetworkHandlerUsingXmlRpcForNonSSL server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName);
 		return getServerPublicKey(server);
 	}
 
-	public String getServerPublicKey(NonSSLNetworkAPI server) throws
+	public String getServerPublicKey(NonSSLNetworkAPIWithHelpers server) throws
 		ServerNotAvailableException,
 		PublicInformationInvalidException
 	{
@@ -1459,6 +1461,7 @@ public class MartusApp
 		catch (Exception e)
 		{
 			//System.out.println("MartusApp.getServerCompliance :" + e);
+			MartusLogger.logException(e);
 			throw new ServerCallFailedException();
 		}		
 		throw new ServerCallFailedException();
@@ -1971,6 +1974,7 @@ public class MartusApp
 		catch(Exception notInterestingBecauseTheServerMightJustBeDown)
 		{
 			//System.out.println("MartusApp.isSSLServerAvailable: " + e);
+			MartusLogger.logException(notInterestingBecauseTheServerMightJustBeDown);
 		}
 
 		return false;
