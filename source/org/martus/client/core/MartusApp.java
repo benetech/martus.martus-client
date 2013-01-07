@@ -62,6 +62,7 @@ import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiConstants;
+import org.martus.client.test.MockClientSideNetworkHandler;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
 import org.martus.clientside.MtfAwareLocalization;
@@ -77,6 +78,7 @@ import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.HQKeys.HQsException;
 import org.martus.common.LegacyCustomFields;
+import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.BulletinNotFoundException;
 import org.martus.common.MartusUtilities.FileVerificationException;
@@ -98,10 +100,12 @@ import org.martus.common.database.FileDatabase.MissingAccountMapSignatureExcepti
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
-import org.martus.common.network.NetworkInterface;
+import org.martus.common.network.ClientSideNetworkInterface;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.network.NonSSLNetworkAPI;
+import org.martus.common.network.NonSSLNetworkAPIWithHelpers;
+import org.martus.common.network.ServerSideNetworkInterface;
 import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.FieldDataPacket;
@@ -1400,11 +1404,11 @@ public class MartusApp
 		ServerNotAvailableException,
 		PublicInformationInvalidException
 	{
-		NonSSLNetworkAPI server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName);
+		ClientSideNetworkHandlerUsingXmlRpcForNonSSL server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName);
 		return getServerPublicKey(server);
 	}
 
-	public String getServerPublicKey(NonSSLNetworkAPI server) throws
+	public String getServerPublicKey(NonSSLNetworkAPIWithHelpers server) throws
 		ServerNotAvailableException,
 		PublicInformationInvalidException
 	{
@@ -1459,6 +1463,7 @@ public class MartusApp
 		catch (Exception e)
 		{
 			//System.out.println("MartusApp.getServerCompliance :" + e);
+			MartusLogger.logException(e);
 			throw new ServerCallFailedException();
 		}		
 		throw new ServerCallFailedException();
@@ -1951,9 +1956,14 @@ public class MartusApp
 		return store.getSignatureGenerator();
 	}
 
-	public void setSSLNetworkInterfaceHandlerForTesting(NetworkInterface server)
+	public void setSSLNetworkInterfaceHandlerForTesting(ClientSideNetworkInterface server)
 	{
 		currentNetworkInterfaceHandler = server;
+	}
+
+	public void setSSLNetworkInterfaceHandlerForTesting(ServerSideNetworkInterface server)
+	{
+		setSSLNetworkInterfaceHandlerForTesting(new MockClientSideNetworkHandler(server));
 	}
 
 	public boolean isSSLServerAvailable(ClientSideNetworkGateway server)
@@ -1971,6 +1981,7 @@ public class MartusApp
 		catch(Exception notInterestingBecauseTheServerMightJustBeDown)
 		{
 			//System.out.println("MartusApp.isSSLServerAvailable: " + e);
+			MartusLogger.logException(notInterestingBecauseTheServerMightJustBeDown);
 		}
 
 		return false;
@@ -1986,7 +1997,7 @@ public class MartusApp
 		return currentNetworkInterfaceGateway;
 	}
 
-	private NetworkInterface getCurrentNetworkInterfaceHandler()
+	private ClientSideNetworkInterface getCurrentNetworkInterfaceHandler()
 	{
 		if(currentNetworkInterfaceHandler == null)
 		{
@@ -1996,7 +2007,7 @@ public class MartusApp
 		return currentNetworkInterfaceHandler;
 	}
 
-	private NetworkInterface createXmlRpcNetworkInterfaceHandler()
+	private ClientSideNetworkInterface createXmlRpcNetworkInterfaceHandler()
 	{
 		String ourServer = getServerName();
 		String ourServerPublicKey = getConfigInfo().getServerPublicKey();
@@ -2076,7 +2087,7 @@ public class MartusApp
 	private HashMap fieldExpansionStates;
 	private HashMap gridExpansionStates;
 	private ConfigInfo configInfo;
-	public NetworkInterface currentNetworkInterfaceHandler;
+	public ClientSideNetworkInterface currentNetworkInterfaceHandler;
 	public ClientSideNetworkGateway currentNetworkInterfaceGateway;
 	public String currentUserName;
 	private int maxNewFolders;

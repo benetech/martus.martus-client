@@ -36,6 +36,7 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
@@ -144,7 +145,7 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			MartusLogger.logException(e);
 			return errorMessage("ServerInfoInvalid");
 		}
 		if(!serverPublicCode.equals(normalizedPublicCode))
