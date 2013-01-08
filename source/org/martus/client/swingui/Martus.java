@@ -210,7 +210,10 @@ public class Martus
 			"layouts-2006-08-10.jar",
 			"persiancalendar-2.1.jar",
 			"velocity-dep-1.4.jar",
-			"xmlrpc-1.2-b1.jar",
+			"commons-logging-1.1.jar",
+			"ws-commons-util-1.0.2.jar",
+			"xmlrpc-common-3.1.3.jar",
+			"xmlrpc-client-3.1.3.jar",
 		};
 	}
 
