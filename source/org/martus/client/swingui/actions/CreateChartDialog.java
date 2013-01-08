@@ -144,7 +144,6 @@ public class CreateChartDialog extends JDialog
 	
 	class FieldChooserActionHandler implements ActionListener
 	{
-		@Override
 		public void actionPerformed(ActionEvent e)
 		{
 			boolean isFieldSelected = isFieldSelected();
@@ -165,7 +164,6 @@ public class CreateChartDialog extends JDialog
 	
 	class OkHandler implements ActionListener
 	{
-		@Override
 		public void actionPerformed(ActionEvent e)
 		{
 			doOk();
@@ -181,7 +179,6 @@ public class CreateChartDialog extends JDialog
 
 	class CancelHandler implements ActionListener
 	{
-		@Override
 		public void actionPerformed(ActionEvent e)
 		{
 			doCancel();

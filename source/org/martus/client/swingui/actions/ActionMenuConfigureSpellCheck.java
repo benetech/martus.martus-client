@@ -38,7 +38,6 @@ public class ActionMenuConfigureSpellCheck extends UiMenuAction
 		super(mainWindowToUse, "ConfigureSpellCheck");
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e)
 	{
 		ConfigureSpellCheckDialog dialog = new ConfigureSpellCheckDialog(getMainWindow());

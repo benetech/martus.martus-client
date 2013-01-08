@@ -100,7 +100,6 @@ class MainFrame extends JFrame
 	
 	class UpdateHandler implements ActionListener
 	{
-		@Override
 		public void actionPerformed(ActionEvent event)
 		{
 			extractTextFromEditor();
