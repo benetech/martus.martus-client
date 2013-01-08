@@ -99,7 +99,6 @@ public class ActionMenuCharts extends UiMenuAction
 		super(mainWindowToUse, "Charts");
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent events)
 	{
 		try
@@ -351,7 +350,6 @@ public class ActionMenuCharts extends UiMenuAction
 			chart = chartToWrap;
 		}
 
-		@Override
 		public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException
 		{
 			if(pageIndex != 0)
@@ -507,7 +505,6 @@ public class ActionMenuCharts extends UiMenuAction
 			return super.generateSectionLabel(dataset, key);
 		}
 
-		@Override
 		public AttributedString generateAttributedSectionLabel(
 				PieDataset dataset, Comparable key)
 		{

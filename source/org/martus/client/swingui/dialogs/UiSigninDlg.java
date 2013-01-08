@@ -60,7 +60,6 @@ public class UiSigninDlg extends UiBasicSigninDlg
 
 	class LanguageChangedHandler implements ActionListener
 	{
-		@Override
 		public void actionPerformed(ActionEvent e)
 		{
 			String languageCode = languageDropdown.getText();

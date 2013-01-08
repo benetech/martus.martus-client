@@ -102,7 +102,6 @@ public class ConfigureSpellCheckDialog extends JDialog
 
 	class OkHandler implements ActionListener
 	{
-		@Override
 		public void actionPerformed(ActionEvent e)
 		{
 			doOk();
@@ -118,7 +117,6 @@ public class ConfigureSpellCheckDialog extends JDialog
 
 	class CancelHandler implements ActionListener
 	{
-		@Override
 		public void actionPerformed(ActionEvent e)
 		{
 			dispose();

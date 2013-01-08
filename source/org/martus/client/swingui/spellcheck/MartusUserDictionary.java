@@ -53,7 +53,6 @@ public class MartusUserDictionary implements UserDictionaryProvider
 		loadDictionary();
 	}
 	
-	@Override
 	public Iterator<String> getWords(Locale locale)
 	{
 		return new WordIterator(original, extras);
@@ -94,7 +93,6 @@ public class MartusUserDictionary implements UserDictionaryProvider
 	}
 	
 
-	@Override
 	public void addWord(String newWord)
 	{
 		addWordToInMemoryWordList(newWord);
@@ -163,7 +161,6 @@ public class MartusUserDictionary implements UserDictionaryProvider
 		}
 	}
 
-	@Override
 	public void setUserWords(String words)
 	{
 		try
