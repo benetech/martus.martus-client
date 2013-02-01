@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.swingui.Martus;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
 import org.martus.common.MartusLogger;
@@ -21,6 +22,7 @@ import org.martus.common.network.NonSSLNetworkAPIWithHelpers;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.StreamableBase64;
+import org.miradi.main.RuntimeJarLoader;
 
 /**
  * @author roms
@@ -43,6 +45,17 @@ public class ServerLoader {
             usage("Not enough arguments.");
         }
         else {
+
+            try
+            {
+                Martus.addThirdPartyJarsToClasspath();
+            }
+            catch (Exception e)
+            {
+                System.out.println("Error loading third-party jars");
+                e.printStackTrace();
+            }
+
             String serverIp = args[0];
             String magicWord = args[1];
             int numThreads = Integer.valueOf(args[2]);
