@@ -103,6 +103,7 @@ public class ServerLoader {
             MartusLogger.logException(e);
         }
 
+        MartusLogger.log("tempDir is " + tempDir);
         zippedBulletins = new File[numBulletins];
         bulletinIds = new UniversalId[numBulletins];
         try
@@ -129,6 +130,7 @@ public class ServerLoader {
 
     private void createZippedBulletins() throws Exception
     {
+        MartusLogger.log("Creating bulletins by the hundreds");
         for (int i = 0; i < numBulletins; i++) {
             Bulletin bulletin = createBulletin(i);
             store.saveBulletin(bulletin);
@@ -138,7 +140,11 @@ public class ServerLoader {
             zippedBulletins[i] = file;
             bulletinIds[i] = bulletin.getUniversalId();
             store.destroyBulletin(bulletin);
+            if (i > 0 && (i % 100 == 0)) {
+                MartusLogger.log("created " + i);
+            }
         }
+        MartusLogger.log("Sending bulletins");
     }
 
     private Bulletin createBulletin(int num) throws Exception
