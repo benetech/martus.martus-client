@@ -132,13 +132,19 @@ public class ServerLoader {
 
     private boolean verifyServer() throws Exceptions.ServerNotAvailableException, MartusUtilities.PublicInformationInvalidException, MartusCrypto.MartusSignatureException {
         NonSSLNetworkAPIWithHelpers server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverIP);
-        String result = server.getServerPublicKey(martusCrypto);
-
-        gateway = ClientSideNetworkGateway.buildGateway(serverIP, result);
-        NetworkResponse response = gateway.getUploadRights(martusCrypto, magicWord);
-        if (!response.getResultCode().equals(NetworkInterfaceConstants.OK))
+        try
         {
-            MartusLogger.log("couldn't verify magic word");
+            String result = server.getServerPublicKey(martusCrypto);
+
+            gateway = ClientSideNetworkGateway.buildGateway(serverIP, result);
+            NetworkResponse response = gateway.getUploadRights(martusCrypto, magicWord);
+            if (!response.getResultCode().equals(NetworkInterfaceConstants.OK))
+            {
+                MartusLogger.log("couldn't verify magic word");
+                return false;
+            }
+        } catch (Exception e) {
+            MartusLogger.log("couldn't verify server");
             return false;
         }
         return true;
