@@ -10,6 +10,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.Martus;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
+import org.martus.common.Exceptions;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.Bulletin;
@@ -74,21 +75,8 @@ public class ServerLoader {
         {
             martusCrypto = new MartusSecurity();
             martusCrypto.createKeyPair();
-
-            NonSSLNetworkAPIWithHelpers server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverIP);
-            String result = server.getServerPublicKey(martusCrypto);
-
-            gateway = ClientSideNetworkGateway.buildGateway(serverIP, result);
-            NetworkResponse response = gateway.getUploadRights(martusCrypto, magicWord);
-            if (!response.getResultCode().equals(NetworkInterfaceConstants.OK))
-            {
-                MartusLogger.log("couldn't verify magic word");
-                return;
-            }
-
-            //can now create bulletins;
         } catch (Exception e) {
-            MartusLogger.log("unable to verify server info");
+            MartusLogger.log("unable to create crypto");
             MartusLogger.logException(e);
         }
 
@@ -110,22 +98,50 @@ public class ServerLoader {
         {
             createZippedBulletins();
 
-            ExecutorService executor = Executors.newFixedThreadPool(numThreads);
-            int i = 0;
-            for (File file : zippedBulletins) {
-                Runnable sender = new BulletinSenderRunnable(martusCrypto, gateway, file, bulletinIds[i++]);
-                executor.execute(sender);
+            MartusLogger.log("Verifying server");
+            try {
+                while (!verifyServer()) {
+                    Thread.sleep(5 * 1000);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            executor.shutdown();
-            while (!executor.isTerminated()) {
-                //do nothing - just waiting
-            }
-            MartusLogger.log("Finished sending bulletins");
+
+            sendBulletins();
         } catch (Exception e) {
             MartusLogger.log("problem sending bulletins");
             MartusLogger.logException(e);
         }
         DirectoryUtils.deleteEntireDirectoryTree(tempDir);
+    }
+
+    private void sendBulletins() {
+        MartusLogger.log("Start sending bulletins");
+        ExecutorService executor = Executors.newFixedThreadPool(numThreads);
+        int i = 0;
+        for (File file : zippedBulletins) {
+            Runnable sender = new BulletinSenderRunnable(martusCrypto, gateway, file, bulletinIds[i++]);
+            executor.execute(sender);
+        }
+        executor.shutdown();
+        while (!executor.isTerminated()) {
+            //do nothing - just waiting
+        }
+        MartusLogger.log("Finished sending bulletins");
+    }
+
+    private boolean verifyServer() throws Exceptions.ServerNotAvailableException, MartusUtilities.PublicInformationInvalidException, MartusCrypto.MartusSignatureException {
+        NonSSLNetworkAPIWithHelpers server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverIP);
+        String result = server.getServerPublicKey(martusCrypto);
+
+        gateway = ClientSideNetworkGateway.buildGateway(serverIP, result);
+        NetworkResponse response = gateway.getUploadRights(martusCrypto, magicWord);
+        if (!response.getResultCode().equals(NetworkInterfaceConstants.OK))
+        {
+            MartusLogger.log("couldn't verify magic word");
+            return false;
+        }
+        return true;
     }
 
     private void createZippedBulletins() throws Exception
@@ -144,7 +160,6 @@ public class ServerLoader {
                 MartusLogger.log("created " + i);
             }
         }
-        MartusLogger.log("Sending bulletins");
     }
 
     private Bulletin createBulletin(int num) throws Exception
