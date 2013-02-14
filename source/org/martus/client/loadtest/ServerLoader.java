@@ -23,6 +23,7 @@ import org.martus.common.network.NetworkResponse;
 import org.martus.common.network.NonSSLNetworkAPIWithHelpers;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.DirectoryUtils;
+import org.martus.util.Stopwatch;
 import org.martus.util.StreamableBase64;
 
 /**
@@ -129,6 +130,7 @@ public class ServerLoader {
     }
 
     private void sendBulletins() {
+    	Stopwatch sw = new Stopwatch();
         MartusLogger.log("Start sending bulletins");
         ExecutorService executor = Executors.newFixedThreadPool(numThreads);
         int i = 0;
@@ -140,7 +142,9 @@ public class ServerLoader {
         while (!executor.isTerminated()) {
             //do nothing - just waiting
         }
-        MartusLogger.log("Finished sending bulletins");
+        MartusLogger.log("Finished sending bulletins to " + serverIP);
+        MartusLogger.log("Time required to create " + numBulletins + " bulletins: " + minutesElapsedCreatingBulletins + " minutes.");
+        MartusLogger.log("Time required for " + numThreads + " threads to send bulletins: " + sw.elapsedInMinutes() + " minutes.");
     }
 
     private boolean verifyServer() throws Exceptions.ServerNotAvailableException, MartusUtilities.PublicInformationInvalidException, MartusCrypto.MartusSignatureException {
@@ -165,6 +169,7 @@ public class ServerLoader {
 
     private void createZippedBulletins() throws Exception
     {
+    	Stopwatch sw = new Stopwatch();
         MartusLogger.log("Creating bulletins by the hundreds");
         for (int i = 0; i < numBulletins; i++) {
             Bulletin bulletin = createBulletin(i);
@@ -179,6 +184,7 @@ public class ServerLoader {
                 MartusLogger.log("created " + i);
             }
         }
+        minutesElapsedCreatingBulletins = sw.elapsedInMinutes();
     }
 
     private Bulletin createBulletin(int num) throws Exception
@@ -246,4 +252,5 @@ public class ServerLoader {
     private int numBulletins;
     private File[] zippedBulletins;
     private UniversalId[] bulletinIds;
+    private int minutesElapsedCreatingBulletins;
 }
