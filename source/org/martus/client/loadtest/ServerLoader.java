@@ -8,6 +8,7 @@ import java.util.concurrent.Executors;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.Martus;
+import org.martus.clientside.ClientPortOverride;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
 import org.martus.common.Exceptions;
@@ -23,7 +24,6 @@ import org.martus.common.network.NonSSLNetworkAPIWithHelpers;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.StreamableBase64;
-import org.miradi.main.RuntimeJarLoader;
 
 /**
  * @author roms
@@ -61,14 +61,27 @@ public class ServerLoader {
             String magicWord = args[1];
             int numThreads = Integer.valueOf(args[2]);
             int numBulletins = Integer.valueOf(args[3]);
+            
+            if(args.length >= 5)
+            {
+            	String flag = args[4];
+            	if(flag.equals("--insecure-ports"))
+            	{
+        			ClientPortOverride.useInsecurePorts = true;
+            	}
+            	else
+            	{
+            		System.err.println("Unknown flag: " + flag);
+            		System.exit(1);
+            	}
+            }
 
             final ServerLoader loader = new ServerLoader(serverIp, magicWord, numThreads, numBulletins);
             loader.startLoading();
-
         }
     }
 
-    public void startLoading()
+	public void startLoading()
     {
 
         try
@@ -219,7 +232,7 @@ public class ServerLoader {
     private static void usage( String msg )
     {
         System.err.println( msg );
-        System.err.println( "Usage: java ServerLoader  <server ip> <magic word>  <number of threads> <number of bulletins>" );
+        System.err.println( "Usage: java ServerLoader  <server ip> <magic word>  <number of threads> <number of bulletins> [--insecure]" );
     }
 
 
@@ -231,6 +244,6 @@ public class ServerLoader {
     private File tempDir;
     private int numThreads;
     private int numBulletins;
-    File[] zippedBulletins;
-    UniversalId[] bulletinIds;
+    private File[] zippedBulletins;
+    private UniversalId[] bulletinIds;
 }
