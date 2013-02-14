@@ -23,7 +23,6 @@ public class BulletinSenderRunnable implements Runnable
         this.bulletinId = bulletinId;
     }
 
-    @Override
     public void run()
     {
         try
