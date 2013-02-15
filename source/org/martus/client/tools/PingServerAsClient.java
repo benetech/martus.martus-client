@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.tools;
 
+import org.martus.client.swingui.Martus;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
 import org.martus.common.crypto.MartusCrypto;
@@ -38,6 +39,8 @@ public class PingServerAsClient
 
 	public static void main(String[] args) throws Exception
 	{
+		Martus.addThirdPartyJarsToClasspath();
+		
 		new PingServerAsClient(args);
 	}
 	
