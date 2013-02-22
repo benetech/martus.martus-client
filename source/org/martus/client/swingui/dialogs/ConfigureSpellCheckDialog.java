@@ -52,7 +52,7 @@ public class ConfigureSpellCheckDialog extends JDialog
 		mainWindow = mainWindowToUse;
 		
 		setTitle(getLocalization().getWindowTitle("ConfigureSpellCheck"));
-		setModalityType(ModalityType.APPLICATION_MODAL);
+		setModal(true);
 		
 		getContentPane().setLayout(new BorderLayout());
 		
