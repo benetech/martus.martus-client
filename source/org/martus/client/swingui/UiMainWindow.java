@@ -1249,6 +1249,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		localization.setCurrentCalendarSystem(uiState.getCurrentCalendarSystem());
 		localization.setAdjustThaiLegacyDates(uiState.getAdjustThaiLegacyDates());
 		localization.setAdjustPersianLegacyDates(uiState.getAdjustPersianLegacyDates());
+		localization.setUseZawgyi(uiState.getUseZawgyi());
 	}
 
 	private void copyLocalizationSettingsToUiState()
@@ -1258,6 +1259,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		uiState.setCurrentCalendarSystem(getLocalization().getCurrentCalendarSystem());
 		uiState.setCurrentAdjustThaiLegacyDates(getLocalization().getAdjustThaiLegacyDates());
 		uiState.setCurrentAdjustPersianLegacyDates(getLocalization().getAdjustPersianLegacyDates());
+		uiState.setCurrentAdjustPersianLegacyDates(getLocalization().getAdjustPersianLegacyDates());
+		uiState.setCurrentUseZawgyi(getLocalization().getUseZawgyi());
 	}
 
 	public void selectBulletinInCurrentFolderIfExists(UniversalId id)

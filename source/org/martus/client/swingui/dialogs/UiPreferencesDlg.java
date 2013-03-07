@@ -91,6 +91,10 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		adjustPersian = new UiCheckBox();
 		adjustPersian.setText(localization.getFieldLabel("preferencesAdjustPersian"));
 		adjustPersian.setSelected(localization.getAdjustPersianLegacyDates());
+
+        useZawgyi = new UiCheckBox();
+        useZawgyi.setText(localization.getFieldLabel("preferencesUseZawgyi"));
+        useZawgyi.setSelected(localization.getUseZawgyi());
 		
 		allPrivate = new UiCheckBox();
 		allPrivate.setText(localization.getFieldLabel("preferencesAllPrivate"));
@@ -107,7 +111,8 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		preferences.addComponents(new UiLabel(localization.getFieldLabel("CalendarSystem")), calendarDropdown.getComponent());
 		preferences.addOnNewLine(adjustThai);
 		preferences.addOnNewLine(adjustPersian);
-		
+		preferences.addOnNewLine(useZawgyi);
+
 		preferences.addBlankLine();
 		preferences.addOnNewLine(allPrivate);
 		preferences.addOnNewLine(checkFieldOfficeBulletins);
@@ -179,6 +184,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			localization.setCurrentLanguageCode(languageDropdown.getText());
 			localization.setAdjustThaiLegacyDates(adjustThai.isSelected());
 			localization.setAdjustPersianLegacyDates(adjustPersian.isSelected());
+			localization.setUseZawgyi(useZawgyi.isSelected());
 			result = true;
 		}
 		dispose();
@@ -192,6 +198,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	private UiChoiceEditor calendarDropdown;
 	private UiCheckBox adjustThai;
 	private UiCheckBox adjustPersian;
+	private UiCheckBox useZawgyi;
 	private UiCheckBox allPrivate;
 	private UiCheckBox checkFieldOfficeBulletins;
 	private JButton ok;
