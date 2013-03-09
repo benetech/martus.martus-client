@@ -75,6 +75,7 @@ public class ConfigInfo
 	public void setCheckForFieldOfficeBulletins(boolean newCheckForBulletins){checkForFieldOfficeBulletins = newCheckForBulletins;}
 	public void setCustomFieldTopSectionXml(String newXml)	{customFieldTopSectionXml = newXml;}
 	public void setCustomFieldBottomSectionXml(String newXml)	{customFieldBottomSectionXml = newXml;}
+	public void setUseZawgyi(boolean newUseZawgyi){useZawgyi = newUseZawgyi;}
 
 	public void clearHQKey()						{ legacyHQKey = ""; }
 	public void clearPromptUserRequestSendToServer() { mustAskUserToSendToServer = false; }
@@ -103,6 +104,7 @@ public class ConfigInfo
 	public boolean getCheckForFieldOfficeBulletins() {return checkForFieldOfficeBulletins;}
 	public String getCustomFieldTopSectionXml()	{return customFieldTopSectionXml;}
 	public String getCustomFieldBottomSectionXml() {return customFieldBottomSectionXml;}
+	public boolean getUseZawgyi() {return useZawgyi;}
 	
 	public boolean isServerConfigured()
 	{
@@ -204,6 +206,9 @@ public class ConfigInfo
 				loaded.customFieldTopSectionXml = readLongString(in);
 				loaded.customFieldBottomSectionXml = readLongString(in);
 			}
+
+            if(loaded.version >= 15)
+                loaded.useZawgyi = in.readBoolean();
 		}
 		finally
 		{
@@ -242,6 +247,7 @@ public class ConfigInfo
 			out.writeBoolean(checkForFieldOfficeBulletins);
 			writeLongString(out, customFieldTopSectionXml);
 			writeLongString(out, customFieldBottomSectionXml);
+            out.writeBoolean(useZawgyi);
 		}
 		finally
 		{
@@ -268,7 +274,7 @@ public class ConfigInfo
 	
 	private boolean mustAskUserToSendToServer;
 
-	public static final short VERSION = 14;
+	public static final short VERSION = 15;
 	//Version 1
 	private short version;
 	private String author;
@@ -308,5 +314,7 @@ public class ConfigInfo
 	//Version 14
 	private String customFieldTopSectionXml;
 	private String customFieldBottomSectionXml;
+    //Version 15
+    private boolean useZawgyi;
 
 }

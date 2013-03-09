@@ -1249,7 +1249,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		localization.setCurrentCalendarSystem(uiState.getCurrentCalendarSystem());
 		localization.setAdjustThaiLegacyDates(uiState.getAdjustThaiLegacyDates());
 		localization.setAdjustPersianLegacyDates(uiState.getAdjustPersianLegacyDates());
-		localization.setUseZawgyi(uiState.getUseZawgyi());
 	}
 
 	private void copyLocalizationSettingsToUiState()
@@ -1259,8 +1258,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		uiState.setCurrentCalendarSystem(getLocalization().getCurrentCalendarSystem());
 		uiState.setCurrentAdjustThaiLegacyDates(getLocalization().getAdjustThaiLegacyDates());
 		uiState.setCurrentAdjustPersianLegacyDates(getLocalization().getAdjustPersianLegacyDates());
-		uiState.setCurrentAdjustPersianLegacyDates(getLocalization().getAdjustPersianLegacyDates());
-		uiState.setCurrentUseZawgyi(getLocalization().getUseZawgyi());
 	}
 
 	public void selectBulletinInCurrentFolderIfExists(UniversalId id)
@@ -1601,6 +1598,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			app.getConfigInfo().setForceBulletinsAllPrivate(dlg.isAllPrivateChecked());
 			app.getConfigInfo().setCheckForFieldOfficeBulletins(dlg.isCheckFieldOfficeBulletinsChecked());
+			app.getConfigInfo().setUseZawgyi(dlg.isUseZawgyi());
 			saveConfigInfo();
 			initializeViews();
 			restoreState();
@@ -2634,6 +2632,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		return app.getConfigInfo().getCheckForFieldOfficeBulletins();
 	}
+
+    public boolean getUseZawgyi()
+    {
+        return app.getConfigInfo().getUseZawgyi();
+    }
 
 	public boolean isAnyBulletinSelected()
 	{
