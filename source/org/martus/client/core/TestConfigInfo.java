@@ -53,7 +53,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 		
-		assertEquals(14, ConfigInfo.VERSION);
+		assertEquals(15, ConfigInfo.VERSION);
 
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
@@ -237,6 +237,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setCheckForFieldOfficeBulletins(sampleCheckForFieldOfficeBulletins);
 		info.setCustomFieldTopSectionXml(sampleCustomFieldTopSectionXml);
 		info.setCustomFieldBottomSectionXml(sampleCustomFieldBottomSectionXml);
+		info.setUseZawgyi(sampleUseZawgyi);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -364,6 +365,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 			if(VERSION < 12)
 				assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
 		}
+
+		if(VERSION >= 15)
+			assertEquals(label + ": sampleUseZawgyi", sampleUseZawgyi, info.getUseZawgyi());
+		else
+			assertEquals(label + ": sampleUseZawgyi", false, info.getUseZawgyi());
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -447,6 +453,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 			ConfigInfo.writeLongString(out, sampleCustomFieldTopSectionXml);
 			ConfigInfo.writeLongString(out, sampleCustomFieldBottomSectionXml);
 		}
+		if(VERSION >= 15)
+		{
+			out.writeBoolean(sampleUseZawgyi);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -494,5 +504,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 //Version 14
 	final String sampleCustomFieldTopSectionXml = longString;
 	final String sampleCustomFieldBottomSectionXml = longString;
+	//Version 15
+	final boolean sampleUseZawgyi = true;
 	
 }

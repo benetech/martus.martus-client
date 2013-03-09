@@ -94,7 +94,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 
         useZawgyi = new UiCheckBox();
         useZawgyi.setText(localization.getFieldLabel("preferencesUseZawgyi"));
-        useZawgyi.setSelected(localization.getUseZawgyi());
+        useZawgyi.setSelected(owner.getUseZawgyi());
 		
 		allPrivate = new UiCheckBox();
 		allPrivate.setText(localization.getFieldLabel("preferencesAllPrivate"));
@@ -145,6 +145,11 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	{
 		return checkFieldOfficeBulletins.isSelected();
 	}
+
+    public boolean isUseZawgyi()
+    {
+        return useZawgyi.isSelected();
+    }
 	
 	private String buildMdyLabel(String mdyOrder)
 	{
@@ -184,7 +189,6 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			localization.setCurrentLanguageCode(languageDropdown.getText());
 			localization.setAdjustThaiLegacyDates(adjustThai.isSelected());
 			localization.setAdjustPersianLegacyDates(adjustPersian.isSelected());
-			localization.setUseZawgyi(useZawgyi.isSelected());
 			result = true;
 		}
 		dispose();
