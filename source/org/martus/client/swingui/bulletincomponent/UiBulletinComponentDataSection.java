@@ -41,6 +41,7 @@ import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.client.swingui.fields.UiFieldCreator;
 import org.martus.client.swingui.fields.UiGrid;
+import org.martus.clientside.Burmese;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
@@ -65,6 +66,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		super(mainWindowToUse, sectionNameToUse);
 		sectionName = sectionNameToUse;
 		context = new UiFieldContext();
+        useZawgyi = mainWindow.getUseZawgyi();
 	}
 	
 	protected UiFieldContext getContext()
@@ -166,7 +168,8 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			String text = "";
 			if(fdp != null)
 				text = fdp.get(context.getFieldSpec(fieldNum).getTag());
-			fields[fieldNum].setText(text);
+            text = getDisplayableBurmese(text);
+            fields[fieldNum].setText(text);
 		}
 
 		if(fdp == null)
@@ -177,7 +180,19 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			addAttachment(attachments[i]);
 	}
 
-	static class FieldRow
+    private String getDisplayableBurmese(String text) {
+        if (useZawgyi)
+            text = Burmese.getDisplayable(text);
+        return text;
+    }
+
+    private String getStorableBurmese(String text) {
+        if (useZawgyi)
+            text = Burmese.getStorable(text);
+        return text;
+    }
+
+    static class FieldRow
 	{
 		public FieldRow(UiMainWindow mainWindowToUse)
 		{
@@ -268,8 +283,10 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	public void copyDataToBulletin(Bulletin bulletin)
 	{	
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
-		{						
-			bulletin.set(context.getFieldSpec(fieldNum).getTag(), fields[fieldNum].getText());													
+		{
+            String text = fields[fieldNum].getText();
+            text = getStorableBurmese(text);
+			bulletin.set(context.getFieldSpec(fieldNum).getTag(), text);
 		}
 	}
 
@@ -363,5 +380,6 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	private UiField[] fields;
 	UiFieldCreator fieldCreator;
 	private UiFieldContext context;
+    private boolean useZawgyi;
 }
 
