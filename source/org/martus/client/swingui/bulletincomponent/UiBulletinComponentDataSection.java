@@ -180,13 +180,13 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			addAttachment(attachments[i]);
 	}
 
-    private String getDisplayableBurmese(String text) {
+    private String getDisplayable(String text) {
         if (useZawgyi)
             text = Burmese.getDisplayable(text);
         return text;
     }
 
-    private String getStorableBurmese(String text) {
+    private String getStorable(String text) {
         if (useZawgyi)
             text = Burmese.getStorable(text);
         return text;
