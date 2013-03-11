@@ -32,6 +32,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Vector;
 
+import org.martus.clientside.Burmese;
 import org.martus.common.ContactInfo;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.crypto.MartusCrypto;
@@ -385,7 +386,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		DataOutputStream out = new DataOutputStream(outputStream);
 		out.writeShort(VERSION);
-		out.writeUTF(sampleAuthor);
+		out.writeUTF((VERSION >= 15 && sampleUseZawgyi) ? Burmese.getStorable(sampleAuthor) : sampleAuthor);
 		out.writeUTF(sampleOrg);
 		out.writeUTF(sampleEmail);
 		out.writeUTF(sampleWebPage);
@@ -466,7 +467,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 	private final static String longString = createLongSampleString();
 	
 //Version 1
-	final String sampleAuthor = "author";
+	// sampleAuthor set to Zawgyi font
+	final String sampleAuthor = Burmese.getDisplayable("ဉာဏ်ကြီးရှင်သည်");
 	final String sampleOrg = "org";
 	final String sampleEmail = "email";
 	final String sampleWebPage = "web";
