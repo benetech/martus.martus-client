@@ -168,7 +168,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			String text = "";
 			if(fdp != null)
 				text = fdp.get(context.getFieldSpec(fieldNum).getTag());
-            text = getDisplayableBurmese(text);
+            text = getDisplayable(text);
             fields[fieldNum].setText(text);
 		}
 
@@ -285,7 +285,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
 		{
             String text = fields[fieldNum].getText();
-            text = getStorableBurmese(text);
+            text = getStorable(text);
 			bulletin.set(context.getFieldSpec(fieldNum).getTag(), text);
 		}
 	}
