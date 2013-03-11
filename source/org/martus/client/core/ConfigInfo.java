@@ -221,6 +221,7 @@ public class ConfigInfo
 		return loaded;
 	}
 
+	//todo: remember to add any new user entered strings to this method
 	private static void convertStringsToZawgyi(ConfigInfo configInfo) {
 		configInfo.author = Burmese.getDisplayable(configInfo.author);
 		configInfo.organization = Burmese.getDisplayable(configInfo.organization);
