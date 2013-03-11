@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.martus.clientside.Burmese;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
@@ -141,6 +142,7 @@ public class ConfigInfo
 		defaultHQKeysXml = "";
 		customFieldTopSectionXml = "";
 		customFieldBottomSectionXml = "";
+		useZawgyi = false;
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException
@@ -214,7 +216,28 @@ public class ConfigInfo
 		{
 			in.close();
 		}
+		if (loaded.useZawgyi)
+			convertStringsToZawgyi(loaded);
 		return loaded;
+	}
+
+	private static void convertStringsToZawgyi(ConfigInfo configInfo) {
+		configInfo.author = Burmese.getDisplayable(configInfo.author);
+		configInfo.organization = Burmese.getDisplayable(configInfo.organization);
+		configInfo.email = Burmese.getDisplayable(configInfo.email);
+		configInfo.webPage = Burmese.getDisplayable(configInfo.webPage);
+		configInfo.phone = Burmese.getDisplayable(configInfo.phone);
+		configInfo.address = Burmese.getDisplayable(configInfo.address);
+		configInfo.serverName = Burmese.getDisplayable(configInfo.serverName);
+		configInfo.templateDetails = Burmese.getDisplayable(configInfo.templateDetails);
+		configInfo.legacyHQKey = Burmese.getDisplayable(configInfo.legacyHQKey);
+		configInfo.serverPublicKey = Burmese.getDisplayable(configInfo.serverPublicKey);
+		configInfo.serverCompliance = Burmese.getDisplayable(configInfo.serverCompliance);
+		configInfo.customFieldLegacySpecs = Burmese.getDisplayable(configInfo.customFieldLegacySpecs);
+		configInfo.allHQKeysXml = Burmese.getDisplayable(configInfo.allHQKeysXml);
+		configInfo.defaultHQKeysXml = Burmese.getDisplayable(configInfo.defaultHQKeysXml);
+		configInfo.customFieldTopSectionXml = Burmese.getDisplayable(configInfo.customFieldTopSectionXml);
+		configInfo.customFieldBottomSectionXml = Burmese.getDisplayable(configInfo.customFieldBottomSectionXml);
 	}
 
 	public void save(OutputStream outputStream) throws IOException
@@ -223,26 +246,26 @@ public class ConfigInfo
 		try
 		{
 			out.writeShort(VERSION);
-			out.writeUTF(author);
-			out.writeUTF(organization);
-			out.writeUTF(email);
-			out.writeUTF(webPage);
-			out.writeUTF(phone);
-			out.writeUTF(address);
-			out.writeUTF(serverName);
-			out.writeUTF(templateDetails);
-			out.writeUTF(legacyHQKey);
-			out.writeUTF(serverPublicKey);
+			writeUTF(out, author);
+			writeUTF(out, organization);
+			writeUTF(out, email);
+			writeUTF(out, webPage);
+			writeUTF(out, phone);
+			writeUTF(out, address);
+			writeUTF(out, serverName);
+			writeUTF(out, templateDetails);
+			writeUTF(out, legacyHQKey);
+			writeUTF(out, serverPublicKey);
 			out.writeBoolean(sendContactInfoToServer);
-			out.writeUTF(serverCompliance);
-			out.writeUTF(customFieldLegacySpecs);
+			writeUTF(out, serverCompliance);
+			writeUTF(out, customFieldLegacySpecs);
 			out.writeUTF("");
 			out.writeBoolean(forceBulletinsAllPrivate);
 			out.writeBoolean(backedUpKeypairEncrypted);
 			out.writeBoolean(backedUpKeypairShare);
-			out.writeUTF(allHQKeysXml);
+			writeUTF(out, allHQKeysXml);
 			out.writeBoolean(bulletinVersioningAware);
-			out.writeUTF(defaultHQKeysXml);
+			writeUTF(out, defaultHQKeysXml);
 			out.writeUTF("");
 			out.writeBoolean(checkForFieldOfficeBulletins);
 			writeLongString(out, customFieldTopSectionXml);
@@ -254,9 +277,17 @@ public class ConfigInfo
 			out.close();
 		}
 	}
+
+	public static void writeUTF(DataOutputStream out, String data) throws IOException {
+		if (useZawgyi)
+			data = Burmese.getStorable(data);
+		out.writeUTF(data);
+	}
 	
 	public static void writeLongString(DataOutputStream out, String data) throws IOException
 	{
+		if (useZawgyi)
+			data = Burmese.getStorable(data);
 		byte[] bytes = data.getBytes("UTF-8");
 		out.writeInt(bytes.length);
 		for(int i = 0; i < bytes.length; ++i)
@@ -315,6 +346,6 @@ public class ConfigInfo
 	private String customFieldTopSectionXml;
 	private String customFieldBottomSectionXml;
     //Version 15
-    private boolean useZawgyi;
+    private static boolean useZawgyi;
 
 }
