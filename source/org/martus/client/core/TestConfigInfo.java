@@ -468,7 +468,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 	
 //Version 1
 	// sampleAuthor set to Zawgyi font
-	final String sampleAuthor = Burmese.getDisplayable("ဉာဏ်ကြီးရှင်သည်");
+	final String sampleAuthor = "\u1009\u102c\u100f\u1039\u1080\u1000\u102e\u1038\u101b\u103d\u1004\u1039\u101e\u100a\u1039";
 	final String sampleOrg = "org";
 	final String sampleEmail = "email";
 	final String sampleWebPage = "web";
