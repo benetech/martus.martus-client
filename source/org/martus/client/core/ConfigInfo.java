@@ -221,8 +221,8 @@ public class ConfigInfo
 		return loaded;
 	}
 
-	//todo: remember to add any new user entered strings to this method
-	private static void convertStringsToZawgyi(ConfigInfo configInfo) {
+	private static void convertStringsToZawgyi(ConfigInfo configInfo)
+	{
 		configInfo.author = Burmese.getDisplayable(configInfo.author);
 		configInfo.organization = Burmese.getDisplayable(configInfo.organization);
 		configInfo.email = Burmese.getDisplayable(configInfo.email);
@@ -348,5 +348,7 @@ public class ConfigInfo
 	private String customFieldBottomSectionXml;
     //Version 15
     private static boolean useZawgyi;
+
+	//TODO (NOTE): Add any new String member variables to the convertStringsToZawgyi() method
 
 }
