@@ -231,12 +231,7 @@ public class ConfigInfo
 		configInfo.address = Burmese.getDisplayable(configInfo.address);
 		configInfo.serverName = Burmese.getDisplayable(configInfo.serverName);
 		configInfo.templateDetails = Burmese.getDisplayable(configInfo.templateDetails);
-		configInfo.legacyHQKey = Burmese.getDisplayable(configInfo.legacyHQKey);
-		configInfo.serverPublicKey = Burmese.getDisplayable(configInfo.serverPublicKey);
 		configInfo.serverCompliance = Burmese.getDisplayable(configInfo.serverCompliance);
-		configInfo.customFieldLegacySpecs = Burmese.getDisplayable(configInfo.customFieldLegacySpecs);
-		configInfo.allHQKeysXml = Burmese.getDisplayable(configInfo.allHQKeysXml);
-		configInfo.defaultHQKeysXml = Burmese.getDisplayable(configInfo.defaultHQKeysXml);
 		configInfo.customFieldTopSectionXml = Burmese.getDisplayable(configInfo.customFieldTopSectionXml);
 		configInfo.customFieldBottomSectionXml = Burmese.getDisplayable(configInfo.customFieldBottomSectionXml);
 	}
@@ -255,18 +250,18 @@ public class ConfigInfo
 			writeUTF(out, address);
 			writeUTF(out, serverName);
 			writeUTF(out, templateDetails);
-			writeUTF(out, legacyHQKey);
-			writeUTF(out, serverPublicKey);
+			out.writeUTF(legacyHQKey);
+			out.writeUTF(serverPublicKey);
 			out.writeBoolean(sendContactInfoToServer);
 			writeUTF(out, serverCompliance);
-			writeUTF(out, customFieldLegacySpecs);
+			out.writeUTF(customFieldLegacySpecs);
 			out.writeUTF("");
 			out.writeBoolean(forceBulletinsAllPrivate);
 			out.writeBoolean(backedUpKeypairEncrypted);
 			out.writeBoolean(backedUpKeypairShare);
-			writeUTF(out, allHQKeysXml);
+			out.writeUTF(allHQKeysXml);
 			out.writeBoolean(bulletinVersioningAware);
-			writeUTF(out, defaultHQKeysXml);
+			out.writeUTF(defaultHQKeysXml);
 			out.writeUTF("");
 			out.writeBoolean(checkForFieldOfficeBulletins);
 			writeLongString(out, customFieldTopSectionXml);
@@ -349,6 +344,6 @@ public class ConfigInfo
     //Version 15
     private static boolean useZawgyi;
 
-	//TODO (NOTE): Add any new String member variables to the convertStringsToZawgyi() method
+	//TODO (NOTE): Add any new user editable String member variables to the convertStringsToZawgyi() method
 
 }
