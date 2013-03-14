@@ -125,8 +125,10 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			setVerticalAlignment(UiLabel.TOP);
 			setFont(new UiWrappedTextArea("").getFont());
 			setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
-			
+
 			String labelText = spec.getLabel();
+			if (useZawgyi)
+				labelText = Burmese.getDisplayable(labelText);
 			if(labelText.equals(""))
 				labelText = getLocalization().getFieldLabel(spec.getTag());
 			setText(labelText);
