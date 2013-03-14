@@ -63,6 +63,7 @@ import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.test.MockClientSideNetworkHandler;
+import org.martus.clientside.Burmese;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
 import org.martus.clientside.MtfAwareLocalization;
@@ -531,6 +532,8 @@ public class MartusApp
 	public static FieldSpecCollection getCustomFieldSpecsTopSection(ConfigInfo configInfo) throws CustomFieldsParseException
 	{
 		String xmlSpecs = configInfo.getCustomFieldTopSectionXml();
+		if (configInfo.getUseZawgyi())
+			xmlSpecs = Burmese.getStorable(xmlSpecs);
 		if(xmlSpecs.length() > 0)
 			return FieldCollection.parseXml(xmlSpecs);
 			
@@ -542,6 +545,8 @@ public class MartusApp
 	public static FieldSpecCollection getCustomFieldSpecsBottomSection(ConfigInfo configInfo) throws CustomFieldsParseException
 	{
 		String xmlSpecs = configInfo.getCustomFieldBottomSectionXml();
+		if (configInfo.getUseZawgyi())
+			xmlSpecs = Burmese.getStorable(xmlSpecs);
 		if(xmlSpecs.length() > 0)
 			return FieldCollection.parseXml(xmlSpecs);
 			
@@ -1292,6 +1297,7 @@ public class MartusApp
 		stopWatch.start();
 		long revisionsSearched = 0;
 		BulletinSearcher matcher = new BulletinSearcher(searchNode, searchSameRowsOnly);
+		matcher.setUseZawgyi(configInfo.getUseZawgyi());
 		SortableBulletinList matchedBulletinUids = new SortableBulletinList(localization, specsForSorting, extraSpecs);
 
 		Set uids = store.getAllBulletinLeafUids();

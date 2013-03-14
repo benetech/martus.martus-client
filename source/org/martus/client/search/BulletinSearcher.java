@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import org.martus.client.core.SafeReadableBulletin;
+import org.martus.clientside.Burmese;
 import org.martus.common.MiniLocalization;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
@@ -53,6 +54,11 @@ public class BulletinSearcher
 	public boolean doesMatch(SafeReadableBulletin b, MiniLocalization localization)
 	{
 		return (getMatchResults(b, localization).doesMatch());
+	}
+
+	public void setUseZawgyi(boolean useZawgyi)
+	{
+		this.useZawgyi = useZawgyi;
 	}
 
 	private MatchResults getMatchResults(SafeReadableBulletin b, MiniLocalization localization)
@@ -79,6 +85,8 @@ public class BulletinSearcher
 	private MatchResults getMatchResultsForValueNode(SafeReadableBulletin b, MiniLocalization localization)
 	{
 		String searchForValue = node.getValue();
+		if (useZawgyi)
+			searchForValue = Burmese.getStorable(searchForValue);
 
 		FieldSpec fieldToSearch = node.getField();
 		String tagToSearch = fieldToSearch.getTag();
@@ -97,7 +105,7 @@ public class BulletinSearcher
 			Integer[] matchingRows = field.getMatchingRows(compareOp, searchForValue, localization);
 			return new MatchResults(topLevelField.getTag(), matchingRows);
 		}
-		
+
 		return new MatchResults(field.doesMatch(compareOp, searchForValue, localization));
 	}
 	
@@ -268,5 +276,5 @@ public class BulletinSearcher
 	
 	private SearchTreeNode node;
 	private boolean sameRowsMode;
-
+	private boolean useZawgyi;
 }
