@@ -142,7 +142,7 @@ public class ConfigInfo
 		defaultHQKeysXml = "";
 		customFieldTopSectionXml = "";
 		customFieldBottomSectionXml = "";
-		useZawgyi = false;
+		useZawgyi = true;
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException

@@ -423,6 +423,15 @@ public class MartusApp
 			store.setBottomSectionFieldSpecs(specsBottom);
 			
 			convertLegacyHQToMultipleHQs();
+
+			if (configInfo.getUseZawgyi())
+			{
+				FontSetter.setUIFont("Zawgyi-One");
+			}  else
+			{
+				FontSetter.restoreDefaults();
+			}
+
 			
 		}
 		catch (Exception e)
