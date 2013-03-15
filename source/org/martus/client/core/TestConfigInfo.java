@@ -370,7 +370,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		if(VERSION >= 15)
 			assertEquals(label + ": sampleUseZawgyi", sampleUseZawgyi, info.getUseZawgyi());
 		else
-			assertEquals(label + ": sampleUseZawgyi", false, info.getUseZawgyi());
+			assertEquals(label + ": sampleUseZawgyi", true, info.getUseZawgyi());
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -386,7 +386,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		DataOutputStream out = new DataOutputStream(outputStream);
 		out.writeShort(VERSION);
-		out.writeUTF((VERSION >= 15 && sampleUseZawgyi) ? Burmese.getStorable(sampleAuthor) : sampleAuthor);
+		out.writeUTF(Burmese.getStorable(sampleAuthor));
 		out.writeUTF(sampleOrg);
 		out.writeUTF(sampleEmail);
 		out.writeUTF(sampleWebPage);
