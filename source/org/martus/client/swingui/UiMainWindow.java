@@ -73,6 +73,7 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.ConfigInfo;
+import org.martus.client.core.FontSetter;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.LoadConfigInfoException;
 import org.martus.client.core.MartusApp.MartusAppInitializationException;
@@ -117,6 +118,7 @@ import org.martus.client.swingui.tablemodels.RetrieveHQTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
+import org.martus.clientside.Burmese;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.MtfAwareLocalization;
@@ -320,6 +322,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			localization.setCurrentLanguageCode(MtfAwareLocalization.ENGLISH);
 			localization.setDateFormatFromLanguage();
 		}
+
+		//if (MtfAwareLocalization.BURMESE.equals(localization.getCurrentLanguageCode()))
+		FontSetter.setUIFont("Zawgyi-One");
 	}
 
 	public File getUiStateFile()
@@ -2384,6 +2389,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				userChoice = signinDlg.getUserChoice();
 				userName = signinDlg.getNameText();
 				userPassword = signinDlg.getPassword();
+				if (app.getConfigInfo().getUseZawgyi())
+				{
+					userName = Burmese.getStorable(userName);
+					userPassword = Burmese.getStorable(userPassword);
+				}
 			}
 			if (userChoice != UiSigninDlg.SIGN_IN)
 				return userChoice;
