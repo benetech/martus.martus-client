@@ -9,39 +9,11 @@ import java.util.Map;
 
 import org.martus.common.MartusLogger;
 
-/**
- * @author roms
- *         Date: 3/14/13
- */
 public class FontSetter {
 
-	/**
-	 *
-	 * @param fontName String name of desired font
-	 */
 	public static void setUIFont(String fontName)
 	{
 		createOriginalDefaults();
-		Enumeration keys = UIManager.getDefaults().keys();
-		while (keys.hasMoreElements()) {
-			Object key = keys.nextElement();
-			Object value = UIManager.get(key);
-			if (value instanceof FontUIResource)
-			{
-				if (null == originalDefaults.get(key))
-				{
-					originalDefaults.put(key, value);
-				}
-				FontUIResource orig = (FontUIResource) value;
-				Font font = new Font(fontName, orig.getStyle(), orig.getSize());
-				UIManager.put(key, new FontUIResource(font));
-			}
-		}
-	 }
-
-	public static void restoreDefaults()
-	{
-		MartusLogger.log("FontSetter.restorDefaults()");
 		Enumeration keys = UIManager.getDefaults().keys();
 		while (keys.hasMoreElements())
 		{
@@ -49,14 +21,43 @@ public class FontSetter {
 			Object value = UIManager.get(key);
 			if (value instanceof FontUIResource)
 			{
-				UIManager.put(key, originalDefaults.get(key));
+				memorizeOriginalFont(key, value);
+				FontUIResource current = (FontUIResource) value;
+				Font font = new Font(fontName, current.getStyle(), current.getSize());
+				UIManager.put(key, new FontUIResource(font));
+			}
+		}
+	 }
+
+	private static void memorizeOriginalFont(Object key, Object value)
+	{
+		if (originalDefaults.get(key) == null)
+		{
+			originalDefaults.put(key, value);
+		}
+	}
+
+	public static void restoreDefaults()
+	{
+		MartusLogger.log("FontSetter.restoreDefaults()");
+		if (originalDefaults == null)
+			return;
+		Enumeration keys = UIManager.getDefaults().keys();
+		while (keys.hasMoreElements())
+		{
+			Object key = keys.nextElement();
+			Object value = UIManager.get(key);
+			if (value instanceof FontUIResource)
+			{
+				if (originalDefaults.get(key) != null)
+					UIManager.put(key, originalDefaults.get(key));
 			}
 		}
 	}
 
 	private static void createOriginalDefaults()
 	{
-		if (null == originalDefaults)
+		if (originalDefaults == null)
 		{
 			originalDefaults = new HashMap<Object,Object>();
 		}
