@@ -323,8 +323,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			localization.setDateFormatFromLanguage();
 		}
 
-		//if (MtfAwareLocalization.BURMESE.equals(localization.getCurrentLanguageCode()))
-		FontSetter.setUIFont("Zawgyi-One");
+		if (MtfAwareLocalization.BURMESE.equals(localization.getCurrentLanguageCode()))
+			FontSetter.setUIFont(Burmese.ZAWGYI_FONT);
 	}
 
 	public File getUiStateFile()

@@ -426,7 +426,7 @@ public class MartusApp
 
 			if (configInfo.getUseZawgyi())
 			{
-				FontSetter.setUIFont("Zawgyi-One");
+				FontSetter.setUIFont(Burmese.ZAWGYI_FONT);
 			}  else
 			{
 				FontSetter.restoreDefaults();
