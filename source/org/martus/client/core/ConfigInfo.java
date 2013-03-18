@@ -35,6 +35,7 @@ import java.io.OutputStream;
 import org.martus.clientside.Burmese;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.fieldspec.StandardFieldSpecs;
+import org.martus.swing.FontHandler;
 
 public class ConfigInfo
 {
@@ -218,6 +219,7 @@ public class ConfigInfo
 		}
 		if (loaded.useZawgyi)
 			convertStringsToZawgyi(loaded);
+		FontHandler.setUseZawgyi(loaded.useZawgyi);
 		return loaded;
 	}
 
