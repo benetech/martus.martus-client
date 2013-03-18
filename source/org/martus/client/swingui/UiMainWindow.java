@@ -324,7 +324,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 
 		if (MtfAwareLocalization.BURMESE.equals(localization.getCurrentLanguageCode()))
-			FontSetter.setUIFont(Burmese.ZAWGYI_FONT);
+			FontSetter.setUIFont(FontHandler.BURMESE_FONT);
 	}
 
 	public File getUiStateFile()

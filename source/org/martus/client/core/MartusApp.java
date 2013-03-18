@@ -117,6 +117,7 @@ import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.common.packet.UniversalId;
 import org.martus.jarverifier.JarVerifier;
+import org.martus.swing.FontHandler;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.Stopwatch;
 import org.martus.util.StreamCopier;
@@ -426,7 +427,7 @@ public class MartusApp
 
 			if (configInfo.getUseZawgyi())
 			{
-				FontSetter.setUIFont(Burmese.ZAWGYI_FONT);
+				FontSetter.setUIFont(FontHandler.BURMESE_FONT);
 			}  else
 			{
 				FontSetter.restoreDefaults();
