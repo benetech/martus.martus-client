@@ -118,7 +118,6 @@ import org.martus.client.swingui.tablemodels.RetrieveHQTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
-import org.martus.clientside.Burmese;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.MtfAwareLocalization;
@@ -2389,11 +2388,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				userChoice = signinDlg.getUserChoice();
 				userName = signinDlg.getNameText();
 				userPassword = signinDlg.getPassword();
-				if (app.getConfigInfo().getUseZawgyi())
-				{
-					userName = Burmese.getStorable(userName);
-					userPassword = Burmese.getStorable(userPassword);
-				}
 			}
 			if (userChoice != UiSigninDlg.SIGN_IN)
 				return userChoice;
