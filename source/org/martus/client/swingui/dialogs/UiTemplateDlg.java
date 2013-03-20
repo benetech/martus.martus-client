@@ -41,8 +41,8 @@ import javax.swing.filechooser.FileFilter;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.clientside.Burmese;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
@@ -64,6 +64,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		mainWindow = owner;
 		defaultDetailsFile = defaultDetailsFileToUse;
 
+		fontHelper = new UiFontEncodingHelper(info.getUseZawgyi());
 		UiLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle("BulletinTemplate"));
 		okButton = new UiButton(localization.getButtonLabel("ok"));
@@ -80,13 +81,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		UiScrollPane detailScrollPane = new UiScrollPane(details, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-		if (info.getUseZawgyi())
-		{
-			details.setText(Burmese.getDisplayable(info.getTemplateDetails()));
-		} else
-		{
-			details.setText(info.getTemplateDetails());
-		}
+		fontHelper.setDisplayableText(details, info.getTemplateDetails());
 		
 		UiParagraphPanel panel = new UiParagraphPanel();
 		
@@ -191,13 +186,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		result = false;
 		if(ae.getSource() == okButton)
 		{
-			if (info.getUseZawgyi())
-			{
-				info.setTemplateDetails(Burmese.getStorable(details.getText()));
-			} else
-			{
-				info.setTemplateDetails(details.getText());
-			}
+			info.setTemplateDetails(fontHelper.getStorable(details.getText()));
 			result = true;
 		}
 		dispose();
@@ -210,4 +199,5 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 	boolean result;
 	UiMainWindow mainWindow;
 	File defaultDetailsFile;
+	UiFontEncodingHelper fontHelper;
 }

@@ -32,8 +32,8 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import org.martus.client.core.ConfigInfo;
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.clientside.Burmese;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
@@ -50,6 +50,7 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 	{
 		super(mainWindow.getCurrentActiveFrame(), "", true);
 		info = infoToUse;
+		fontHelper = new UiFontEncodingHelper(info.getUseZawgyi());
 
 		UiLocalization localization = mainWindow.getLocalization();
 	
@@ -110,23 +111,12 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 
 	private void setInitialValues()
 	{
-		if (info.getUseZawgyi())
-		{
-		 	source.setText(Burmese.getDisplayable(info.getAuthor()));
-			organization.setText(Burmese.getDisplayable(info.getOrganization()));
-			email.setText(Burmese.getDisplayable(info.getEmail()));
-			webpage.setText(Burmese.getDisplayable(info.getWebPage()));
-			phone.setText(Burmese.getDisplayable(info.getPhone()));
-			address.setText(Burmese.getDisplayable(info.getAddress()));
-		} else
-		{
-			source.setText(info.getAuthor());
-			organization.setText(info.getOrganization());
-			email.setText(info.getEmail());
-			webpage.setText(info.getWebPage());
-			phone.setText(info.getPhone());
-			address.setText(info.getAddress());
-		}
+		fontHelper.setDisplayableText(source, info.getAuthor());
+		fontHelper.setDisplayableText(organization, info.getOrganization());
+		fontHelper.setDisplayableText(email, info.getEmail());
+		fontHelper.setDisplayableText(webpage, info.getWebPage());
+		fontHelper.setDisplayableText(phone, info.getPhone());
+		fontHelper.setDisplayableText(address, info.getAddress());
 	}
 
 	public boolean getResult()
@@ -139,23 +129,12 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		result = false;
 		if(ae.getSource() == ok)
 		{
-			if (info.getUseZawgyi())
-			{
-				info.setAuthor(Burmese.getStorable(source.getText()));
-				info.setOrganization(Burmese.getStorable(organization.getText()));
-				info.setEmail(Burmese.getStorable(email.getText()));
-				info.setWebPage(Burmese.getStorable(webpage.getText()));
-				info.setPhone(Burmese.getStorable(phone.getText()));
-				info.setAddress(Burmese.getStorable(address.getText()));
-			}   else
-			{
-				info.setAuthor(source.getText());
-				info.setOrganization(organization.getText());
-				info.setEmail(email.getText());
-				info.setWebPage(webpage.getText());
-				info.setPhone(phone.getText());
-				info.setAddress(address.getText());
-			}
+			info.setAuthor(fontHelper.getStorable(source.getText()));
+			info.setOrganization(fontHelper.getStorable(organization.getText()));
+			info.setEmail(fontHelper.getStorable(email.getText()));
+			info.setWebPage(fontHelper.getStorable(webpage.getText()));
+			info.setPhone(fontHelper.getStorable(phone.getText()));
+			info.setAddress(fontHelper.getStorable(address.getText()));
 			result = true;
 		}
 		dispose();
@@ -171,6 +150,7 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 	UiTextField webpage;
 	UiTextField phone;
 	UiTextArea address;
+	UiFontEncodingHelper fontHelper;
 
 	JButton ok;
 }
