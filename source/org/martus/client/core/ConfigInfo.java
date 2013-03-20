@@ -225,14 +225,6 @@ public class ConfigInfo
 
 	private static void convertStringsToZawgyi(ConfigInfo configInfo)
 	{
-		configInfo.author = Burmese.getDisplayable(configInfo.author);
-		configInfo.organization = Burmese.getDisplayable(configInfo.organization);
-		configInfo.email = Burmese.getDisplayable(configInfo.email);
-		configInfo.webPage = Burmese.getDisplayable(configInfo.webPage);
-		configInfo.phone = Burmese.getDisplayable(configInfo.phone);
-		configInfo.address = Burmese.getDisplayable(configInfo.address);
-		configInfo.serverName = Burmese.getDisplayable(configInfo.serverName);
-		configInfo.templateDetails = Burmese.getDisplayable(configInfo.templateDetails);
 		configInfo.serverCompliance = Burmese.getDisplayable(configInfo.serverCompliance);
 		configInfo.customFieldTopSectionXml = Burmese.getDisplayable(configInfo.customFieldTopSectionXml);
 		configInfo.customFieldBottomSectionXml = Burmese.getDisplayable(configInfo.customFieldBottomSectionXml);
@@ -244,14 +236,14 @@ public class ConfigInfo
 		try
 		{
 			out.writeShort(VERSION);
-			writeUTF(out, author);
-			writeUTF(out, organization);
-			writeUTF(out, email);
-			writeUTF(out, webPage);
-			writeUTF(out, phone);
-			writeUTF(out, address);
-			writeUTF(out, serverName);
-			writeUTF(out, templateDetails);
+			out.writeUTF(author);
+			out.writeUTF(organization);
+			out.writeUTF(email);
+			out.writeUTF(webPage);
+			out.writeUTF(phone);
+			out.writeUTF(address);
+			out.writeUTF(serverName);
+			out.writeUTF(templateDetails);
 			out.writeUTF(legacyHQKey);
 			out.writeUTF(serverPublicKey);
 			out.writeBoolean(sendContactInfoToServer);
