@@ -35,13 +35,13 @@ import javax.swing.JComponent;
 import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.client.swingui.fields.UiFieldCreator;
 import org.martus.client.swingui.fields.UiGrid;
-import org.martus.clientside.Burmese;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
@@ -66,7 +66,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		super(mainWindowToUse, sectionNameToUse);
 		sectionName = sectionNameToUse;
 		context = new UiFieldContext();
-        useZawgyi = mainWindow.getUseZawgyi();
+		fontHelper = new UiFontEncodingHelper(mainWindow.getUseZawgyi());
 	}
 	
 	protected UiFieldContext getContext()
@@ -127,8 +127,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
 
 			String labelText = spec.getLabel();
-			if (useZawgyi)
-				labelText = Burmese.getDisplayable(labelText);
+			labelText = fontHelper.getDisplayable(labelText);
 			if(labelText.equals(""))
 				labelText = getLocalization().getFieldLabel(spec.getTag());
 			setText(labelText);
@@ -170,7 +169,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			String text = "";
 			if(fdp != null)
 				text = fdp.get(context.getFieldSpec(fieldNum).getTag());
-            text = getDisplayable(text);
+			text = fontHelper.getDisplayable(text);
             fields[fieldNum].setText(text);
 		}
 
@@ -181,18 +180,6 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		for(int i = 0 ; i < attachments.length ; ++i)
 			addAttachment(attachments[i]);
 	}
-
-    private String getDisplayable(String text) {
-        if (useZawgyi)
-            text = Burmese.getDisplayable(text);
-        return text;
-    }
-
-    private String getStorable(String text) {
-        if (useZawgyi)
-            text = Burmese.getStorable(text);
-        return text;
-    }
 
     static class FieldRow
 	{
@@ -256,9 +243,9 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		{
 			if(labelText.equals(""))
 				labelText = localization.getFieldLabel(tag);
-			else if (useZawgyi)
+			else
 			{
-				labelText = Burmese.getDisplayable(labelText);
+				labelText = fontHelper.getDisplayable(labelText);
 			}
 
 			UiWrappedTextArea labelComponent = createLabelComponent(tag, labelText);
@@ -291,7 +278,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
 		{
             String text = fields[fieldNum].getText();
-            text = getStorable(text);
+			text = fontHelper.getStorable(text);
 			bulletin.set(context.getFieldSpec(fieldNum).getTag(), text);
 		}
 	}
@@ -386,6 +373,6 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	private UiField[] fields;
 	UiFieldCreator fieldCreator;
 	private UiFieldContext context;
-    private static boolean useZawgyi;
+	static UiFontEncodingHelper fontHelper;
 }
 

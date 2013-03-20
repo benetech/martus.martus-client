@@ -47,8 +47,8 @@ import javax.swing.filechooser.FileFilter;
 import org.martus.client.core.CustomFieldsDuplicateLabelChecker;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.clientside.Burmese;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HQKeys;
@@ -77,6 +77,7 @@ public class UiCustomFieldsDlg extends JDialog
 		String baseTag = "CustomFields";
 		MartusLocalization localization = owner.getLocalization();
 		setTitle(localization.getWindowTitle("input" + baseTag));
+		fontHelper = new UiFontEncodingHelper(mainWindow.getUseZawgyi());
 
 		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "Info"));
 
@@ -147,11 +148,8 @@ public class UiCustomFieldsDlg extends JDialog
 			{
 				String topText = topSectionXmlTextArea.getText();
 				String bottomText = bottomSectionXmlTextArea.getText();
-				if (mainWindow.getUseZawgyi())
-				{
-					topText = Burmese.getStorable(topText);
-					bottomText = Burmese.getStorable(bottomText);
-				}
+				topText = fontHelper.getStorable(topText);
+				bottomText = fontHelper.getStorable(bottomText);
 				if(!validateXml(topText, bottomText))
 				 	return;
 				if(!checkForDuplicateLabels())
@@ -370,8 +368,7 @@ public class UiCustomFieldsDlg extends JDialog
 	UiTextArea createXMLTextArea(FieldSpecCollection fieldSpecs)
 	{
 		String xmlRepresentationFieldSpecs = fieldSpecs.toXml();
-		if (mainWindow.getUseZawgyi())
-			xmlRepresentationFieldSpecs = Burmese.getDisplayable(xmlRepresentationFieldSpecs);
+		xmlRepresentationFieldSpecs = fontHelper.getDisplayable(xmlRepresentationFieldSpecs);
 		return createXMLTextArea(xmlRepresentationFieldSpecs);
 	}
 
@@ -433,6 +430,7 @@ public class UiCustomFieldsDlg extends JDialog
 
 	UiTextArea topSectionXmlTextArea;
 	UiTextArea bottomSectionXmlTextArea;
+	UiFontEncodingHelper fontHelper;
 	String topSectionXmlResult = null;
 	String bottomSectionXmlResult = null;
 	UiMainWindow mainWindow;
