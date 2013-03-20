@@ -32,7 +32,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.martus.clientside.Burmese;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.swing.FontHandler;
@@ -217,15 +216,8 @@ public class ConfigInfo
 		{
 			in.close();
 		}
-		if (loaded.useZawgyi)
-			convertStringsToZawgyi(loaded);
 		FontHandler.setUseZawgyi(loaded.useZawgyi);
 		return loaded;
-	}
-
-	private static void convertStringsToZawgyi(ConfigInfo configInfo)
-	{
-		configInfo.serverCompliance = Burmese.getDisplayable(configInfo.serverCompliance);
 	}
 
 	public void save(OutputStream outputStream) throws IOException
@@ -245,7 +237,7 @@ public class ConfigInfo
 			out.writeUTF(legacyHQKey);
 			out.writeUTF(serverPublicKey);
 			out.writeBoolean(sendContactInfoToServer);
-			writeUTF(out, serverCompliance);
+			out.writeUTF(serverCompliance);
 			out.writeUTF(customFieldLegacySpecs);
 			out.writeUTF("");
 			out.writeBoolean(forceBulletinsAllPrivate);
@@ -266,12 +258,6 @@ public class ConfigInfo
 		}
 	}
 
-	public static void writeUTF(DataOutputStream out, String data) throws IOException {
-		if (useZawgyi)
-			data = Burmese.getStorable(data);
-		out.writeUTF(data);
-	}
-	
 	public static void writeLongString(DataOutputStream out, String data) throws IOException
 	{
 		byte[] bytes = data.getBytes("UTF-8");
@@ -332,6 +318,6 @@ public class ConfigInfo
 	private String customFieldTopSectionXml;
 	private String customFieldBottomSectionXml;
     //Version 15
-    private static boolean useZawgyi;
+    private boolean useZawgyi;
 
 }
