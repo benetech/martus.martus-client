@@ -48,7 +48,8 @@ public class TestBulletinTableModel extends TestCaseEnhanced
     {
     	super.setUp();
     	localization = new MockUiLocalization();
-		app = MockMartusApp.create(new MockClientDatabase());
+		app = MockMartusApp.create(new MockClientDatabase(), localization);
+	    //app.setLocalization(localization);
 		app.loadSampleData();
 		store = app.getStore();
 		folderSaved = app.getFolderSaved();
@@ -63,7 +64,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 	
 	public void testColumnTags()
 	{
-		BulletinTableModel list = new BulletinTableModel(localization);
+		BulletinTableModel list = new BulletinTableModel(app);
 		list.setFolder(folderSaved);
 
 		assertEquals("column count", 6, list.getColumnCount());
@@ -77,7 +78,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 
     public void testColumnLabels()
     {
-		BulletinTableModel list = new BulletinTableModel(localization);
+		BulletinTableModel list = new BulletinTableModel(app);
 		list.setFolder(folderSaved);
 
 		assertEquals(localization.getFieldLabel(BulletinConstants.TAGSTATUS), list.getColumnName(STATUS));
@@ -90,7 +91,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 
 	public void testRows()
 	{
-		BulletinTableModel list = new BulletinTableModel(localization);
+		BulletinTableModel list = new BulletinTableModel(app);
 		list.setFolder(folderSaved);
 
 		assertEquals(store.getBulletinCount(), list.getRowCount());
@@ -104,7 +105,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 
 	public void testGetBulletin()
 	{
-		BulletinTableModel list = new BulletinTableModel(localization);
+		BulletinTableModel list = new BulletinTableModel(app);
 		list.setFolder(folderSaved);
 		for(int i = 0; i < folderSaved.getBulletinCount(); ++i)
 		{
@@ -116,7 +117,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 
 	public void testGetValueAt() throws Exception
 	{
-		BulletinTableModel list = new BulletinTableModel(localization);
+		BulletinTableModel list = new BulletinTableModel(app);
 		list.setFolder(folderSaved);
 
 		assertEquals("", list.getValueAt(1000, 0));
@@ -146,7 +147,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 	
 	public void testSentColumnGetValueAtSealed() throws Exception
 	{
-		BulletinTableModel list = new BulletinTableModel(localization);
+		BulletinTableModel list = new BulletinTableModel(app);
 		list.setFolder(folderSaved);
 		int row = 0;
 		Bulletin b = list.getBulletin(row);
@@ -162,7 +163,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 	
 	public void testSentColumnGetValueMyDraft() throws Exception
 	{
-		BulletinTableModel list = new BulletinTableModel(localization);
+		BulletinTableModel list = new BulletinTableModel(app);
 		list.setFolder(folderSaved);
 
 		Bulletin myDraft = store.createEmptyBulletin();
@@ -189,7 +190,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 	
 	public void testSentColumnGetValueAtNotMyDraft() throws Exception
 	{
-		BulletinTableModel list = new BulletinTableModel(localization);
+		BulletinTableModel list = new BulletinTableModel(app);
 		list.setFolder(folderSaved);
 
 		MockMartusSecurity otherSecurity = MockMartusSecurity.createOtherClient();
@@ -217,7 +218,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 
 	public void testSetFolder()
 	{
-		BulletinTableModel list = new BulletinTableModel(localization);
+		BulletinTableModel list = new BulletinTableModel(app);
 		assertEquals(0, list.getRowCount());
 
 		list.setFolder(folderSaved);
@@ -232,7 +233,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 
 	public void testFindBulletin() throws Exception
 	{
-		BulletinTableModel list = new BulletinTableModel(localization);
+		BulletinTableModel list = new BulletinTableModel(app);
 		list.setFolder(folderSaved);
 
 		assertEquals(-1, list.findBulletin(null));
@@ -252,7 +253,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 
 	public void testSortByColumn()
 	{
-		BulletinTableModel list = new BulletinTableModel(localization);
+		BulletinTableModel list = new BulletinTableModel(app);
 		list.setFolder(folderSaved);
 
 		String tag = BulletinConstants.TAGEVENTDATE;
@@ -267,7 +268,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 	
 	public void testHtmlTags() throws Exception
 	{
-		BulletinTableModel list = new BulletinTableModel(localization);
+		BulletinTableModel list = new BulletinTableModel(app);
 		list.setFolder(folderSaved);
 
 		Bulletin b = list.getBulletin(0);

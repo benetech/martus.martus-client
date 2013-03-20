@@ -876,7 +876,12 @@ public class MartusApp
 	{
 		return currentRetrieveCommand;
 	}
-	
+
+	public MtfAwareLocalization getLocalization()
+	{
+		return localization;
+	}
+
 	public void startBackgroundRetrieve(RetrieveCommand rc) throws MartusSignatureException, NoKeyPairException, EncryptionException, IOException
 	{
 		currentRetrieveCommand = rc;
