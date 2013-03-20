@@ -30,6 +30,9 @@ import javax.swing.table.AbstractTableModel;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.UiFontEncodingHelper;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
@@ -37,9 +40,10 @@ import org.martus.common.packet.UniversalId;
 
 public class BulletinTableModel extends AbstractTableModel
 {
-    public BulletinTableModel(MiniLocalization localizationToUse)
+    public BulletinTableModel(MartusApp app)
     {
-		localization = localizationToUse;
+		localization = app.getLocalization();
+	    fontHelper = new UiFontEncodingHelper(app.getConfigInfo().getUseZawgyi());
     }
 
 	public void setFolder(BulletinFolder folderToUse)
@@ -126,7 +130,7 @@ public class BulletinTableModel extends AbstractTableModel
 		if (rawData.startsWith("<"))
 			return " "+rawData;				
 			
-		return rawData;
+		return fontHelper.getDisplayable(rawData);
 	}
 
 
@@ -158,4 +162,5 @@ public class BulletinTableModel extends AbstractTableModel
 
 	MiniLocalization localization;
 	BulletinFolder folder;
+	UiFontEncodingHelper fontHelper;
 }

@@ -73,6 +73,7 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.ConfigInfo;
+import org.martus.client.core.FontSetter;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.LoadConfigInfoException;
 import org.martus.client.core.MartusApp.MartusAppInitializationException;
@@ -321,6 +322,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			localization.setCurrentLanguageCode(MtfAwareLocalization.ENGLISH);
 			localization.setDateFormatFromLanguage();
 		}
+
+		if (MtfAwareLocalization.BURMESE.equals(localization.getCurrentLanguageCode()))
+			FontSetter.setUIFont(FontHandler.BURMESE_FONT);
 	}
 
 	public File getUiStateFile()

@@ -77,7 +77,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
     public UiBulletinTable(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
-		model = new BulletinTableModel(mainWindow.getLocalization());
+		model = new BulletinTableModel(mainWindow.getApp());
 		setModel(model);
 		setStatusColumnWidth();
 		setSentColumnWidth();

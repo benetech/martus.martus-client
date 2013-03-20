@@ -117,6 +117,7 @@ import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.common.packet.UniversalId;
 import org.martus.jarverifier.JarVerifier;
+import org.martus.swing.FontHandler;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.Stopwatch;
 import org.martus.util.StreamCopier;
@@ -431,7 +432,15 @@ public class MartusApp
 			store.setBottomSectionFieldSpecs(specsBottom);
 			
 			convertLegacyHQToMultipleHQs();
-			
+
+			if (configInfo.getUseZawgyi())
+			{
+				FontSetter.setUIFont(FontHandler.BURMESE_FONT);
+			}  else
+			{
+				FontSetter.restoreDefaults();
+			}
+
 		}
 		catch (Exception e)
 		{
@@ -876,7 +885,12 @@ public class MartusApp
 	{
 		return currentRetrieveCommand;
 	}
-	
+
+	public MtfAwareLocalization getLocalization()
+	{
+		return localization;
+	}
+
 	public void startBackgroundRetrieve(RetrieveCommand rc) throws MartusSignatureException, NoKeyPairException, EncryptionException, IOException
 	{
 		currentRetrieveCommand = rc;
@@ -1301,6 +1315,7 @@ public class MartusApp
 		stopWatch.start();
 		long revisionsSearched = 0;
 		BulletinSearcher matcher = new BulletinSearcher(searchNode, searchSameRowsOnly);
+		matcher.setUseZawgyi(configInfo.getUseZawgyi());
 		SortableBulletinList matchedBulletinUids = new SortableBulletinList(localization, specsForSorting, extraSpecs);
 
 		Set uids = store.getAllBulletinLeafUids();

@@ -157,7 +157,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 			data += "\n";
 		}
 		reader.close();
-		details.setText(data);
+		fontHelper.setDisplayableText(details, data);
 	}
 
 	class DefaultDetailsFilter extends FileFilter
