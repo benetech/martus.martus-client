@@ -177,6 +177,6 @@ public class MartusJarVerification
 
 	private static final String MARTUS_SIGNATURE_FILE_EXTENSION = ".SIG";
 	private static final String SIGNATURE_FILE_EXTENSION = ".SF";
-	public static final String BCPROV_JAR_FILE_NAME = "bcprov-jdk15on-147.jar";
+	public static final String BCPROV_JAR_FILE_NAME = "bcprov-jdk15on-148.jar";
 
 }

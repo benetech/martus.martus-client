@@ -63,7 +63,7 @@ public class PingServerAsClient
 		String serverPublicKey = server.getServerPublicKey(new MartusSecurity());
 		System.out.println("server public code: " + MartusCrypto.computeFormattedPublicCode(serverPublicKey));
 
-		NetworkInterface networkInterface = ClientSideNetworkGateway.buildNetworkInterface(ip, serverPublicKey);
+		NetworkInterface networkInterface = ClientSideNetworkGateway.buildNetworkInterface(ip, serverPublicKey, null);
 		ClientSideNetworkGateway gateway = new ClientSideNetworkGateway(networkInterface);
 		NetworkResponse response = gateway.getServerInfo();
 		String sslPingResponse = response.getResultCode();

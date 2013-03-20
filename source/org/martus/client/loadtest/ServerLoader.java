@@ -153,7 +153,7 @@ public class ServerLoader {
         {
             String result = server.getServerPublicKey(martusCrypto);
 
-            gateway = ClientSideNetworkGateway.buildGateway(serverIP, result);
+            gateway = ClientSideNetworkGateway.buildGateway(serverIP, result, null);
             NetworkResponse response = gateway.getUploadRights(martusCrypto, magicWord);
             if (!response.getResultCode().equals(NetworkInterfaceConstants.OK))
             {

@@ -201,7 +201,7 @@ public class Martus
 	private static String[] getThirdPartyJarNames()
 	{
 		return new String[] {
-			"bcprov-jdk15on-147.jar",
+			"bcprov-jdk15on-148.jar",
 			"icu4j-3.4.4.jar",
 			"jcommon-1.0.17.jar",
 			"jfreechart-1.0.14.jar",
