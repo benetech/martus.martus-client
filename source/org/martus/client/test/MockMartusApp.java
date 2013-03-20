@@ -66,6 +66,14 @@ public class MockMartusApp extends MartusApp
 
 	}
 
+	public static MockMartusApp create(Database db, UiLocalization localizationToUse) throws Exception
+		{
+			MockMartusApp app = create(createFakeDataDirectory(), createFakeSecurity(), localizationToUse);
+			app.store = new MockBulletinStore(db, app.getSecurity());
+			return app;
+
+		}
+
 	private static MockMartusApp create(File fakeDataDirectory, MartusCrypto crypto) throws MartusAppInitializationException, IOException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException 
 	{
 		UiLocalization emptyLocalization = createFakeLocalization(fakeDataDirectory);
