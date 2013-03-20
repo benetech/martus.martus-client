@@ -226,8 +226,6 @@ public class ConfigInfo
 	private static void convertStringsToZawgyi(ConfigInfo configInfo)
 	{
 		configInfo.serverCompliance = Burmese.getDisplayable(configInfo.serverCompliance);
-		configInfo.customFieldTopSectionXml = Burmese.getDisplayable(configInfo.customFieldTopSectionXml);
-		configInfo.customFieldBottomSectionXml = Burmese.getDisplayable(configInfo.customFieldBottomSectionXml);
 	}
 
 	public void save(OutputStream outputStream) throws IOException
@@ -276,8 +274,6 @@ public class ConfigInfo
 	
 	public static void writeLongString(DataOutputStream out, String data) throws IOException
 	{
-		if (useZawgyi)
-			data = Burmese.getStorable(data);
 		byte[] bytes = data.getBytes("UTF-8");
 		out.writeInt(bytes.length);
 		for(int i = 0; i < bytes.length; ++i)
@@ -337,7 +333,5 @@ public class ConfigInfo
 	private String customFieldBottomSectionXml;
     //Version 15
     private static boolean useZawgyi;
-
-	//TODO (NOTE): Add any new user editable String member variables to the convertStringsToZawgyi() method
 
 }

@@ -48,6 +48,7 @@ import org.martus.client.core.CustomFieldsDuplicateLabelChecker;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.clientside.Burmese;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HQKeys;
@@ -146,6 +147,11 @@ public class UiCustomFieldsDlg extends JDialog
 			{
 				String topText = topSectionXmlTextArea.getText();
 				String bottomText = bottomSectionXmlTextArea.getText();
+				if (mainWindow.getUseZawgyi())
+				{
+					topText = Burmese.getStorable(topText);
+					bottomText = Burmese.getStorable(bottomText);
+				}
 				if(!validateXml(topText, bottomText))
 				 	return;
 				if(!checkForDuplicateLabels())
@@ -364,6 +370,8 @@ public class UiCustomFieldsDlg extends JDialog
 	UiTextArea createXMLTextArea(FieldSpecCollection fieldSpecs)
 	{
 		String xmlRepresentationFieldSpecs = fieldSpecs.toXml();
+		if (mainWindow.getUseZawgyi())
+			xmlRepresentationFieldSpecs = Burmese.getDisplayable(xmlRepresentationFieldSpecs);
 		return createXMLTextArea(xmlRepresentationFieldSpecs);
 	}
 

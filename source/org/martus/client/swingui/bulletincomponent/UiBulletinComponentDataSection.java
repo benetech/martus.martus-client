@@ -256,6 +256,10 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		{
 			if(labelText.equals(""))
 				labelText = localization.getFieldLabel(tag);
+			else if (useZawgyi)
+			{
+				labelText = Burmese.getDisplayable(labelText);
+			}
 
 			UiWrappedTextArea labelComponent = createLabelComponent(tag, labelText);
 			label = createLabelWithHider(tag, labelComponent);
@@ -382,6 +386,6 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	private UiField[] fields;
 	UiFieldCreator fieldCreator;
 	private UiFieldContext context;
-    private boolean useZawgyi;
+    private static boolean useZawgyi;
 }
 
