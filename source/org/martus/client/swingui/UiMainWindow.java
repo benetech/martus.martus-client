@@ -136,6 +136,7 @@ import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.network.NetworkInterfaceConstants;
+import org.martus.common.network.TorTransportWrapper;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.XmlPacketLoader;
@@ -1671,7 +1672,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				return;		
 			String serverIPAddress = serverInfoDlg.getServerIPAddress();
 			String serverPublicKey = serverInfoDlg.getServerPublicKey();
-			ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, serverPublicKey);
+			ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, serverPublicKey, getTransport());
 			
 			if(!app.isSSLServerAvailable(gateway))
 			{
@@ -1684,7 +1685,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			{
 				//TODO:The following line shouldn't be necessary but without it, the trustmanager 
 				//will reject the old server, we don't know why.
-				ClientSideNetworkGateway.buildGateway(previousServerInfo.getServerName(), previousServerInfo.getServerPublicKey());
+				ClientSideNetworkGateway.buildGateway(previousServerInfo.getServerName(), previousServerInfo.getServerPublicKey(), getTransport());
 				
 				notifyDlg("UserRejectedServerCompliance");
 				if(serverIPAddress.equals(previousServerInfo.getServerName()) &&
@@ -1745,6 +1746,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			inConfigServer = false;
 		}
+	}
+	
+	private TorTransportWrapper getTransport()
+	{
+		return getApp().getTransport();
 	}
 
 	private void offerToCancelRetrieveInProgress()

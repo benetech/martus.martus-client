@@ -101,6 +101,7 @@ import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.network.ClientSideNetworkInterface;
+import org.martus.common.network.TorTransportWrapper;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.network.NonSSLNetworkAPI;
@@ -142,6 +143,9 @@ public class MartusApp
 	public MartusApp(MartusCrypto cryptoToUse, File dataDirectoryToUse, MtfAwareLocalization localizationToUse) throws MartusAppInitializationException
 	{
 		localization = localizationToUse;
+
+		transport = new TorTransportWrapper();
+		transport.start();
 		
 		try
 		{
@@ -180,6 +184,11 @@ public class MartusApp
 		}
 
 		UpdateDocsIfNecessaryFromMLPFiles();
+	}
+
+	public TorTransportWrapper getTransport()
+	{
+		return transport;
 	}
 
 	public static boolean isRunningFromJar() throws MalformedURLException
@@ -1393,7 +1402,7 @@ public class MartusApp
 		if(serverName.length() == 0)
 			return false;
 
-		NonSSLNetworkAPI server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName);
+		NonSSLNetworkAPI server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName, transport);
 		return ClientSideNetworkHandlerUsingXmlRpcForNonSSL.isNonSSLServerAvailable(server);
 	}
 
@@ -1419,7 +1428,7 @@ public class MartusApp
 		ServerNotAvailableException,
 		PublicInformationInvalidException
 	{
-		ClientSideNetworkHandlerUsingXmlRpcForNonSSL server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName);
+		ClientSideNetworkHandlerUsingXmlRpcForNonSSL server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName, transport);
 		return getServerPublicKey(server);
 	}
 
@@ -2026,7 +2035,7 @@ public class MartusApp
 	{
 		String ourServer = getServerName();
 		String ourServerPublicKey = getConfigInfo().getServerPublicKey();
-		return ClientSideNetworkGateway.buildNetworkInterface(ourServer,ourServerPublicKey);
+		return ClientSideNetworkGateway.buildNetworkInterface(ourServer,ourServerPublicKey, transport);
 	}
 
 	private void invalidateCurrentHandlerAndGateway()
@@ -2107,6 +2116,7 @@ public class MartusApp
 	public String currentUserName;
 	private int maxNewFolders;
 	public RetrieveCommand currentRetrieveCommand;
+	private TorTransportWrapper transport;
 
 	public static final String PUBLIC_INFO_EXTENSION = ".mpi";
 	public static final String MARTUS_IMPORT_EXPORT_EXTENSION = ".xml";
