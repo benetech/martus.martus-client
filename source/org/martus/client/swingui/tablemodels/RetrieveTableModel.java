@@ -30,6 +30,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
@@ -39,8 +40,8 @@ import org.martus.client.swingui.RetrieveSummariesProgressMeter;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.BulletinSummary;
 import org.martus.common.MartusLogger;
-import org.martus.common.MiniLocalization;
 import org.martus.common.MartusUtilities.ServerErrorException;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
@@ -396,20 +397,36 @@ abstract public class RetrieveTableModel extends UiTableModel
 
 	public void populateMissingSummaryDataFromServer(RetrieveTableModel tableModelToUse)
 	{
-		RetrieveThread worker = new RetrieveThread(tableModelToUse);
-		worker.start();
+		Vector downloadableBulletinSummaries = new Vector(tableModelToUse.getDownloadableSummaries());
+		List summariesToDownload = Collections.synchronizedList(new Vector());
+		for (Object rawBulletinSummary : downloadableBulletinSummaries)
+		{
+			BulletinSummary bulletinSummary = (BulletinSummary) rawBulletinSummary;
+			if(!bulletinSummary.hasFieldDataPacket())
+				summariesToDownload.add(bulletinSummary);
+		}
+		
+		int originalCount = summariesToDownload.size();
+		final int SUMMARY_RETRIEVER_THREAD_COUNT = 10;
+		RetrieveThread[] workers = new RetrieveThread[SUMMARY_RETRIEVER_THREAD_COUNT];
+		for(int i = 0; i < SUMMARY_RETRIEVER_THREAD_COUNT; ++i)
+		{
+			workers[i] = new RetrieveThread(tableModelToUse, summariesToDownload, originalCount);
+			workers[i].start();
+		}
 
 		if(progressHandler == null)
-			waitForThreadToTerminate(worker);
+			waitForThreadsToTerminate(workers);
 		else
 			progressHandler.started();
 	}
 
-	public void waitForThreadToTerminate(RetrieveThread worker)
+	public void waitForThreadsToTerminate(RetrieveThread[] workers)
 	{
 		try
 		{
-			worker.join();
+			for(int i = 0; i < workers.length; ++i)
+				workers[i].join();
 		}
 		catch (InterruptedException e)
 		{
@@ -418,9 +435,11 @@ abstract public class RetrieveTableModel extends UiTableModel
 
 	class RetrieveThread extends Thread
 	{
-		public RetrieveThread(RetrieveTableModel tableModelToUse)
+		public RetrieveThread(RetrieveTableModel tableModelToUse, List bulletinSummariesToDownload, int originalCountToUse)
 		{
 			tableModel = tableModelToUse;
+			summariesToDownload = bulletinSummariesToDownload;
+			originalCount = originalCountToUse;
 		}
 
 		public void run()
@@ -430,35 +449,33 @@ abstract public class RetrieveTableModel extends UiTableModel
 			finishedRetrieve();
 			MartusLogger.logEndProcess("Retrieve missing summary data from server");
 		}
-		
+
 		public void retrieveMissingDetailsFromServer()
 		{
-			Vector bulletinSummaries = new Vector(tableModel.getDownloadableSummaries());
-			Iterator iterator = bulletinSummaries.iterator();
-			int count = 0;
-			int maxCount = bulletinSummaries.size();
-			while(iterator.hasNext())
+			while(true)
 			{
-				BulletinSummary summary = (BulletinSummary)iterator.next();
+				BulletinSummary summary = getNextSummaryToRetrieve();
+				if(summary == null)
+					return;
+				
 				try
 				{
-					if(!summary.hasFieldDataPacket())
-					{
-						app.setFieldDataPacketFromServer(summary);
-						tableModel.summaryHasChanged(summary);
-					}
+					app.setFieldDataPacketFromServer(summary);
+					tableModel.summaryHasChanged(summary);
 				}
 				catch (Exception e)
 				{
 					errorThrown = e;
 					tableModel.summaryNotAvailable(summary);
 				}
-
+		
 				if(progressHandler != null)
 				{
 					if(progressHandler.shouldExit())
 						break;
-					progressHandler.updateProgressMeter(++count, maxCount);
+					
+					int completed = originalCount - summariesToDownload.size();
+					progressHandler.updateProgressMeter(completed, originalCount);
 				}
 			}
 		}
@@ -469,7 +486,20 @@ abstract public class RetrieveTableModel extends UiTableModel
 				progressHandler.finished();
 		}
 
+		private BulletinSummary getNextSummaryToRetrieve()
+		{
+			synchronized (summariesToDownload)
+			{
+				if(summariesToDownload.size() > 0)
+					return (BulletinSummary) summariesToDownload.remove(0);
+			}
+			
+			return null;
+		}
+		
 		private RetrieveTableModel tableModel;
+		private List summariesToDownload;
+		private int originalCount;
 	}
 	
 	void summaryHasChanged(BulletinSummary summary)
