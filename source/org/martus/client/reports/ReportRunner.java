@@ -64,10 +64,10 @@ public class ReportRunner
 		signatureVerifier = app.getSecurity();
 		localization = app.getLocalization();
 		
-		engine = new VelocityEngine();
-		engine.init();
 		File logFile = new File(app.getCurrentAccountDirectory(), "velocity.log");
+		engine = new VelocityEngine();
 		engine.setProperty(RuntimeConstants.RUNTIME_LOG, logFile.getAbsolutePath());
+		engine.init();
 	}
 	
 	public void runReport(ReportFormat rf, ReadableDatabase db, SortableBulletinList bulletins, ReportOutput destination, RunReportOptions options, PoolOfReusableChoicesLists reusableChoicesLists) throws Exception
