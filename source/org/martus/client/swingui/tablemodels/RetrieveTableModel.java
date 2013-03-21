@@ -407,20 +407,26 @@ abstract public class RetrieveTableModel extends UiTableModel
 		}
 		
 		int originalCount = summariesToDownload.size();
-		RetrieveThread worker = new RetrieveThread(tableModelToUse, summariesToDownload, originalCount);
-		worker.start();
+		final int SUMMARY_RETRIEVER_THREAD_COUNT = 10;
+		RetrieveThread[] workers = new RetrieveThread[SUMMARY_RETRIEVER_THREAD_COUNT];
+		for(int i = 0; i < SUMMARY_RETRIEVER_THREAD_COUNT; ++i)
+		{
+			workers[i] = new RetrieveThread(tableModelToUse, summariesToDownload, originalCount);
+			workers[i].start();
+		}
 
 		if(progressHandler == null)
-			waitForThreadToTerminate(worker);
+			waitForThreadsToTerminate(workers);
 		else
 			progressHandler.started();
 	}
 
-	public void waitForThreadToTerminate(RetrieveThread worker)
+	public void waitForThreadsToTerminate(RetrieveThread[] workers)
 	{
 		try
 		{
-			worker.join();
+			for(int i = 0; i < workers.length; ++i)
+				workers[i].join();
 		}
 		catch (InterruptedException e)
 		{
