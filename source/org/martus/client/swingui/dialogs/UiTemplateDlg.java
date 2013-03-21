@@ -186,7 +186,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		result = false;
 		if(ae.getSource() == okButton)
 		{
-			info.setTemplateDetails(fontHelper.getStorable(details.getText()));
+			info.setTemplateDetails(fontHelper.getStorableText(details));
 			result = true;
 		}
 		dispose();
