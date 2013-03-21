@@ -33,6 +33,7 @@ import java.util.Set;
 
 import org.apache.velocity.VelocityContext;
 import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.core.MartusApp;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.test.MockMartusApp;
 import org.martus.common.FieldSpecCollection;
@@ -41,12 +42,12 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.bulletin.Bulletin.DamagedBulletinException;
+import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.bulletinstore.BulletinStore;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
+import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -73,7 +74,8 @@ public class TestReportRunner extends TestCaseEnhanced
 	
 	public void setUp() throws Exception
 	{
-		rr = new ReportRunner(MockMartusSecurity.createClient(), new MiniLocalization());
+		MartusApp app = MockMartusApp.create(MockMartusSecurity.createClient());
+		rr = new ReportRunner(app);
 		context = new VelocityContext();
 	}	
 	
@@ -293,7 +295,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		options.hideDetail = withDetail;
 		options.printBreaks = true;
 		options.includePrivate = true;
-		ReportRunner runner = new ReportRunner(app.getSecurity(), new MiniLocalization());
+		ReportRunner runner = new ReportRunner(app);
 		SortableBulletinList bulletins = new SortableBulletinList(localization, sortSpecs);
 		bulletins.add(b1);
 		bulletins.add(b2);

@@ -77,7 +77,7 @@ public class UiGridEditor extends UiEditableGrid
 		}
 		catch (Exception e)
 		{
-			throw new DataInvalidException();
+			throw new DataInvalidException(e);
 		}
 	}
 	
