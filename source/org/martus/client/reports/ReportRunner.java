@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.reports;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -34,6 +35,8 @@ import java.util.Vector;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.runtime.RuntimeConstants;
+import org.martus.client.core.MartusApp;
 import org.martus.client.core.SafeReadableBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.common.MiniLocalization;
@@ -56,12 +59,14 @@ import org.martus.common.packet.UniversalId;
 
 public class ReportRunner
 {
-	public ReportRunner(MartusCrypto security, MiniLocalization localizationToUse) throws Exception
+	public ReportRunner(MartusApp app) throws Exception
 	{
-		signatureVerifier = security;
-		localization = localizationToUse;
+		signatureVerifier = app.getSecurity();
+		localization = app.getLocalization();
 		
+		File logFile = new File(app.getCurrentAccountDirectory(), "velocity.log");
 		engine = new VelocityEngine();
+		engine.setProperty(RuntimeConstants.RUNTIME_LOG, logFile.getAbsolutePath());
 		engine.init();
 	}
 	

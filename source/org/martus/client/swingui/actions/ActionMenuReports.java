@@ -359,7 +359,7 @@ public class ActionMenuReports extends ActionPrint
 		public void doTheWorkWithNO_SWING_CALLS() throws Exception
 		{
 			MartusApp app = mainWindow.getApp();
-			ReportRunner rr = new ReportRunner(app.getSecurity(), mainWindow.getLocalization());
+			ReportRunner rr = new ReportRunner(app);
 			rr.runReport(rf, mainWindow.getStore().getDatabase(), list, destination, options, app.getStore().getAllReusableChoiceLists());
 		}
 		

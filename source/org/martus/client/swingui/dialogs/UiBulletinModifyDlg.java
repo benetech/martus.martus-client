@@ -55,6 +55,7 @@ import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSect
 import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.DateRangeInvertedException;
 import org.martus.common.fieldspec.DateTooEarlyException;
@@ -213,7 +214,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		}
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+			MartusLogger.logException(e);
 			observer.notifyDlg(this, "UnexpectedError");
 		}
 		return false;
