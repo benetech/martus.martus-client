@@ -200,7 +200,10 @@ abstract public class RetrieveTableModel extends UiTableModel
 	
 	public void sortCurrentSummaries()
 	{
-		Collections.sort(currentSummaries, new SummarySorter(currentSortColumn));
+		synchronized (currentSummaries)
+		{
+			Collections.sort(currentSummaries, new SummarySorter(currentSortColumn));
+		}
 		fireTableDataChanged();
 	}
 	
@@ -233,8 +236,11 @@ abstract public class RetrieveTableModel extends UiTableModel
 
 	public void setAllFlags(boolean flagState)
 	{
-		for(int i = 0; i < currentSummaries.size(); ++i)
-			((BulletinSummary)currentSummaries.get(i)).setChecked(flagState);
+		synchronized (currentSummaries)
+		{
+			for (int i = 0; i < currentSummaries.size(); ++i)
+				((BulletinSummary) currentSummaries.get(i)).setChecked(flagState);
+		}
 		fireTableDataChanged();
 	}
 
@@ -261,20 +267,26 @@ abstract public class RetrieveTableModel extends UiTableModel
 	private Vector getListOfRequestedUids(boolean includeEalierVerions)
 	{
 		Vector uidList = new Vector();
-		for(int i = 0; i < currentSummaries.size(); ++i)
+		synchronized (currentSummaries)
 		{
-			BulletinSummary summary = (BulletinSummary)currentSummaries.get(i);
-			if(summary.isChecked())
+			for (int i = 0; i < currentSummaries.size(); ++i)
 			{
-				UniversalId uid = UniversalId.createFromAccountAndLocalId(summary.getAccountId(), summary.getLocalId());
-				uidList.add(uid);
-				if(includeEalierVerions)
+				BulletinSummary summary = (BulletinSummary) currentSummaries
+						.get(i);
+				if (summary.isChecked())
 				{
-					BulletinHistory history = summary.getHistory();
-					for(int h = 0; h < history.size(); ++h)
+					UniversalId uid = UniversalId.createFromAccountAndLocalId(
+							summary.getAccountId(), summary.getLocalId());
+					uidList.add(uid);
+					if (includeEalierVerions)
 					{
-						uid = UniversalId.createFromAccountAndLocalId(summary.getAccountId(), history.get(h));
-						uidList.add(uid);
+						BulletinHistory history = summary.getHistory();
+						for (int h = 0; h < history.size(); ++h)
+						{
+							uid = UniversalId.createFromAccountAndLocalId(
+									summary.getAccountId(), history.get(h));
+							uidList.add(uid);
+						}
 					}
 				}
 			}
@@ -386,24 +398,33 @@ abstract public class RetrieveTableModel extends UiTableModel
 	protected void buildDownloadableSummariesList()
 	{
 		downloadableSummaries = new Vector();
-		Iterator iterator = allSummaries.iterator();
-		while(iterator.hasNext())
+		synchronized (allSummaries)
 		{
-			BulletinSummary currentSummary = (BulletinSummary)iterator.next();
-			if(currentSummary.isDownloadable())
-				downloadableSummaries.add(currentSummary);
+			Iterator iterator = allSummaries.iterator();
+			while (iterator.hasNext())
+			{
+				BulletinSummary currentSummary = (BulletinSummary) iterator
+						.next();
+				if (currentSummary.isDownloadable())
+					downloadableSummaries.add(currentSummary);
+			}
 		}
 	}
 
 	public void populateMissingSummaryDataFromServer(RetrieveTableModel tableModelToUse)
 	{
 		Vector downloadableBulletinSummaries = new Vector(tableModelToUse.getDownloadableSummaries());
-		List summariesToDownload = Collections.synchronizedList(new Vector());
-		for (Object rawBulletinSummary : downloadableBulletinSummaries)
+		
+		List summariesToDownload;
+		synchronized (downloadableBulletinSummaries)
 		{
-			BulletinSummary bulletinSummary = (BulletinSummary) rawBulletinSummary;
-			if(!bulletinSummary.hasFieldDataPacket())
-				summariesToDownload.add(bulletinSummary);
+			summariesToDownload = Collections.synchronizedList(new Vector());
+			for (Object rawBulletinSummary : downloadableBulletinSummaries)
+			{
+				BulletinSummary bulletinSummary = (BulletinSummary) rawBulletinSummary;
+				if (!bulletinSummary.hasFieldDataPacket())
+					summariesToDownload.add(bulletinSummary);
+			}
 		}
 		
 		int originalCount = summariesToDownload.size();
@@ -512,7 +533,10 @@ abstract public class RetrieveTableModel extends UiTableModel
 	{
 		summary.setDownloadable(false);
 		downloadableSummaries.remove(summary);
-		currentSummaries.remove(summary);
+		synchronized (currentSummaries)
+		{
+			currentSummaries.remove(summary);
+		}
 		fireTableDataChanged();
 	}
 
@@ -559,29 +583,35 @@ abstract public class RetrieveTableModel extends UiTableModel
 	
 	void markAsOnServer(Vector summaries)
 	{
-		for(int i=0; i < summaries.size(); ++i)
+		synchronized (summaries)
 		{
-			BulletinSummary summary = (BulletinSummary)summaries.get(i);
-			Bulletin b = app.getStore().getBulletinRevision(summary.getUniversalId());
-			if(b != null)
-				app.getStore().setIsOnServer(b);
+			for (int i = 0; i < summaries.size(); ++i)
+			{
+				BulletinSummary summary = (BulletinSummary) summaries.get(i);
+				Bulletin b = app.getStore().getBulletinRevision(
+						summary.getUniversalId());
+				if (b != null)
+					app.getStore().setIsOnServer(b);
+			}
 		}
 	}
 	
 	public Set getUidsThatWouldBeUpgrades(Vector uidsSelectedForRetrieve)
 	{
 		Set uidsBeingUpgraded = new HashSet();
-		for(int i=0; i < allSummaries.size(); ++i)
+		synchronized (allSummaries)
 		{
-			BulletinSummary summary = (BulletinSummary)allSummaries.get(i);
-			UniversalId uidBeingRetrieved = summary.getUniversalId();
-			if(!uidsSelectedForRetrieve.contains(uidBeingRetrieved))
-				continue;
-			
-			if(doesBulletinExist(summary))
-				uidsBeingUpgraded.add(uidBeingRetrieved);
+			for (int i = 0; i < allSummaries.size(); ++i)
+			{
+				BulletinSummary summary = (BulletinSummary) allSummaries.get(i);
+				UniversalId uidBeingRetrieved = summary.getUniversalId();
+				if (!uidsSelectedForRetrieve.contains(uidBeingRetrieved))
+					continue;
+
+				if (doesBulletinExist(summary))
+					uidsBeingUpgraded.add(uidBeingRetrieved);
+			}
 		}
-		
 		return uidsBeingUpgraded;
 	}
 

@@ -76,11 +76,14 @@ public class UiServerSummariesRetrieveDlg extends UiServerSummariesDlg
 	private String getTitleFromSummary(UniversalId uid)
 	{
 		Vector summaries = model.getAllSummaries();
-		for(int j=0; j < summaries.size(); ++j)
+		synchronized (summaries)
 		{
-			BulletinSummary summary = (BulletinSummary)summaries.get(j);
-			if(uid.equals(summary.getUniversalId()))
-				return summary.getTitle();
+			for (int j = 0; j < summaries.size(); ++j)
+			{
+				BulletinSummary summary = (BulletinSummary) summaries.get(j);
+				if (uid.equals(summary.getUniversalId()))
+					return summary.getTitle();
+			}
 		}
 		return "?";
 	}
