@@ -90,7 +90,7 @@ public class UiConfigureHQs extends JDialog
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(vBox);
 		
-		model = new HeadQuartersTableModelConfiguration(localization);
+		model = new HeadQuartersTableModelConfiguration(mainWindow.getApp());
 		table = createHeadquartersTable(model);
 		
 		try

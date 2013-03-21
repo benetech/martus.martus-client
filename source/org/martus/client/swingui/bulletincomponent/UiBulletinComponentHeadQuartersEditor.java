@@ -40,8 +40,8 @@ public class UiBulletinComponentHeadQuartersEditor extends UiBulletinComponentHe
 	{
 		super(mainWindowToUse, bulletinToUse, tagQualifierToUse, mainWindowToUse.getEditingTextFieldColumns());
 
-		tableModel = new HeadQuartersTableModelEdit(getLocalization());
 		MartusApp app = mainWindow.getApp();
+		tableModel = new HeadQuartersTableModelEdit(app);
 
 		HQKeys bulletinAuthorizedHeadquartersKeys = bulletinToUse.getAuthorizedToReadKeys();
 		app.addHQLabelsWherePossible(bulletinAuthorizedHeadquartersKeys);

@@ -31,8 +31,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 
+import org.martus.client.swingui.UiFontEncodingHelper;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiParagraphPanel;
@@ -42,14 +43,16 @@ import org.martus.swing.Utilities;
 
 public class UiStringInputDlg extends JDialog
 {
-	public UiStringInputDlg(JFrame owner, UiLocalization localization, String baseTag, String descriptionTag, String rawDescriptionText, String defaultText)
+	public UiStringInputDlg(UiMainWindow owner, String baseTag, String descriptionTag, String rawDescriptionText, String defaultText)
 	{
 		super(owner, "", true);
 
+		fontHelper = new UiFontEncodingHelper(owner.getUseZawgyi());
+		UiLocalization localization = owner.getLocalization();
 		setTitle(localization.getWindowTitle("input" + baseTag));
 		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "entry"));
 		text = new UiTextField(30);
-		text.setText(defaultText);
+		fontHelper.setDisplayableText(text, defaultText);
 
 		JButton ok = new UiButton(localization.getButtonLabel("input" + baseTag + "ok"));
 		ok.addActionListener(new OkHandler());
@@ -81,7 +84,7 @@ public class UiStringInputDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			result = text.getText();
+			result = fontHelper.getStorable(text.getText());
 			dispose();
 		}
 	}
@@ -102,5 +105,6 @@ public class UiStringInputDlg extends JDialog
 
 	UiTextField text;
 	String result = null;
+	UiFontEncodingHelper fontHelper;
 }
 

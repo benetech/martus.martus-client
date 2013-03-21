@@ -1095,7 +1095,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public String getStringInput(String baseTag, String descriptionTag, String rawDescriptionText, String defaultText)
 	{
-		UiStringInputDlg inputDlg = new UiStringInputDlg(this, getLocalization(), baseTag, descriptionTag, rawDescriptionText, defaultText);
+		UiStringInputDlg inputDlg = new UiStringInputDlg(this, baseTag, descriptionTag, rawDescriptionText, defaultText);
 		inputDlg.setFocusToInputField();
 		inputDlg.setVisible(true);
 		return inputDlg.getResult();

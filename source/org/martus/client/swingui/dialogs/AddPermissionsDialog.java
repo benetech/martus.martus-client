@@ -79,7 +79,7 @@ public class AddPermissionsDialog extends JDialog
 		String chooseHeadquartersToAdd = localization.getFieldLabel("ChooseHeadquartersToAdd");
 		contentPane.add(new UiWrappedTextArea(chooseHeadquartersToAdd));
 		
-		model = new HeadQuartersTableModelEdit(localization);
+		model = new HeadQuartersTableModelEdit(mainWindow.getApp());
 		model.addKeys(hqKeys);
 		UiHeadquartersTable hqTable = new UiHeadquartersTable(model);
 		hqTable.setMaxColumnWidthToHeaderWidth(0);

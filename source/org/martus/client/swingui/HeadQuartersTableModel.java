@@ -30,6 +30,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 
+import org.martus.client.core.MartusApp;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.MiniLocalization;
@@ -37,10 +38,11 @@ import org.martus.swing.UiTableModel;
 
 public abstract class HeadQuartersTableModel extends UiTableModel 
 {
-	public HeadQuartersTableModel(MiniLocalization localizationToUse)
+	public HeadQuartersTableModel(MartusApp app)
 	{
-		localization = localizationToUse;
+		localization = app.getLocalization();
 		entries = new Vector();
+		fontHelper = new UiFontEncodingHelper(app.getConfigInfo().getUseZawgyi());
 	}
 	
 	public void setHQSelectionListener(HeadQuartersSelectionListener selectionListenerToUse)
@@ -148,7 +150,7 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 		if(column == COLUMN_DEFAULT || column == COLUMN_SELECTED)
 			return new Boolean(entry.isSelected());
 		if(column == COLUMN_LABEL)
-			return entry.getLabel();
+			return  fontHelper.getDisplayable(entry.getLabel());
 		if(column == COLUMN_PUBLIC_CODE)
 			return entry.getPublicCode();
 		return "";
@@ -157,7 +159,7 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 	public String getLabel(int row)
 	{
 		HeadQuarterEntry entry = (HeadQuarterEntry)entries.get(row);
-		return entry.getLabel();
+		return fontHelper.getDisplayable(entry.getLabel());
 	}
 
 	public String getPublicCode(int row)
@@ -217,4 +219,5 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 	public int columnCount;
 	MiniLocalization localization;
 	HeadQuartersSelectionListener selectionListener;
+	UiFontEncodingHelper fontHelper;
 }
