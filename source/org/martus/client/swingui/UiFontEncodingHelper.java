@@ -18,6 +18,14 @@ public class UiFontEncodingHelper
 		textField.setText(value);
 	}
 
+	public String getStorableText(JTextComponent textField)
+	{
+		String value = textField.getText();
+		if (useZawgyi)
+			value = Burmese.getStorable(value);
+		return value;
+	}
+
 	public String getDisplayable(String value)
 	{
 		if (useZawgyi)
