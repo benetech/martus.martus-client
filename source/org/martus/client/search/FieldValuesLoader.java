@@ -30,7 +30,9 @@ import java.util.HashSet;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.core.MartusApp;
 import org.martus.client.core.SafeReadableBulletin;
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -43,10 +45,11 @@ import org.martus.common.packet.UniversalId;
 
 public class FieldValuesLoader
 {
-	public FieldValuesLoader(ClientBulletinStore storeToUse, MiniLocalization localizationToUse)
+	public FieldValuesLoader(MartusApp app)
 	{
-		store = storeToUse;
-		localization = localizationToUse;
+		store = app.getStore();
+		localization = app.getLocalization();
+		fontHelper = new UiFontEncodingHelper(app.getConfigInfo().getUseZawgyi());
 	}
 	
 	public HashSet loadFieldValuesFromAllBulletinRevisions(UiProgressWithCancelDlg progressMeter, FieldSpec fieldSpec)
@@ -80,6 +83,7 @@ public class FieldValuesLoader
 				else
 				{
 					String value = field.getData();
+					value = fontHelper.getDisplayable(value);
 					choices.add(createChoiceItem(value));
 				}
 			}
@@ -105,4 +109,5 @@ public class FieldValuesLoader
 
 	private ClientBulletinStore store;
 	private MiniLocalization localization;
+	UiFontEncodingHelper fontHelper;
 }

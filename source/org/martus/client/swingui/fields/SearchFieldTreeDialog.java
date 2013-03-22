@@ -226,7 +226,7 @@ public class SearchFieldTreeDialog extends FieldTreeDialog
 
 		private synchronized void doWork()
 		{
-			FieldValuesLoader loader = new FieldValuesLoader(getStore(), mainWindow.getLocalization());
+			FieldValuesLoader loader = new FieldValuesLoader(mainWindow.getApp());
 			loadedValues = loader.loadFieldValuesFromAllBulletinRevisions(progressMeter, spec);
 		}
 		
