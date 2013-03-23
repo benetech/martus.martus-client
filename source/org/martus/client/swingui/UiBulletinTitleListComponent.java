@@ -40,6 +40,7 @@ public class UiBulletinTitleListComponent extends UiList
 
 	private static String[] extractTitles(UiMainWindow window, Vector bulletins)
 	{
+		UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(window.getUseZawgyi());
 		String[] titles = new String[bulletins.size()];
 		for (int i = 0; i < titles.length; i++)
 		{
@@ -47,6 +48,7 @@ public class UiBulletinTitleListComponent extends UiList
 			String bulletinTitle = b.get(BulletinConstants.TAGTITLE);
 			if(bulletinTitle == null || bulletinTitle.length() == 0)
 				bulletinTitle = window.getLocalization().getFieldLabel("UntitledBulletin");
+			bulletinTitle = fontHelper.getDisplayable(bulletinTitle);
 			titles[i] = bulletinTitle;
 		}
 		return titles;
