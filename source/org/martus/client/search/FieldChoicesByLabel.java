@@ -35,6 +35,7 @@ import java.util.Vector;
 
 import javax.swing.tree.TreeNode;
 
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
@@ -42,12 +43,14 @@ import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
+import org.martus.swing.FontHandler;
 
 public class FieldChoicesByLabel
 {
 	public FieldChoicesByLabel()
 	{
 		allChoices = new Vector();
+		fontHelper = new UiFontEncodingHelper(FontHandler.getUseZawgyi());
 	}
 	
 	public void add(ChoiceItem itemToAdd)
@@ -61,6 +64,9 @@ public class FieldChoicesByLabel
 		while(iter.hasNext())
 		{
 			ChoiceItem choice = (ChoiceItem)iter.next();
+			String label = choice.getLabel();
+			label = fontHelper.getDisplayable(label);
+			choice.setLabel(label);
 			add(choice);
 		}
 	}
@@ -271,4 +277,5 @@ public class FieldChoicesByLabel
 	}
 	
 	Vector allChoices;
+	UiFontEncodingHelper fontHelper;
 }
