@@ -32,15 +32,13 @@ import java.util.Vector;
 import org.martus.client.core.MartusApp;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
-import org.martus.common.MiniLocalization;
 
 public abstract class HeadquartersTableModel extends ExternalPublicKeysTableModel 
 {
 	public HeadquartersTableModel(MartusApp app)
 	{
-		localization = app.getLocalization();
+		super(app);
 		entries = new Vector();
-		fontHelper = new UiFontEncodingHelper(app.getConfigInfo().getUseZawgyi());
 	}
 	
 	public void setHQSelectionListener(HeadquartersSelectionListener selectionListenerToUse)
@@ -132,13 +130,13 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 	public String getColumnName(int column)
 	{
 		if(column == COLUMN_DEFAULT)
-			return localization.getFieldLabel("ConfigureHeadQuartersDefault");
-		if(column == COLUMN_PUBLIC_CODE)
-			return localization.getFieldLabel("ConfigureHQColumnHeaderPublicCode");
+			return getLocalization().getFieldLabel("ConfigureHeadQuartersDefault");
 		if(column == COLUMN_SELECTED)
-			return localization.getFieldLabel("HeadQuartersSelected");
+			return getLocalization().getFieldLabel("HeadQuartersSelected");
+		if(column == COLUMN_PUBLIC_CODE)
+			return getLocalization().getFieldLabel("ConfigureHQColumnHeaderPublicCode");
 		if(column == COLUMN_LABEL)
-			return localization.getFieldLabel("BulletinHeadQuartersHQLabel");
+			return getLocalization().getFieldLabel("BulletinHeadQuartersHQLabel");
 		return "";
 	}
 
@@ -148,7 +146,7 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 		if(column == COLUMN_DEFAULT || column == COLUMN_SELECTED)
 			return new Boolean(entry.isSelected());
 		if(column == COLUMN_LABEL)
-			return  fontHelper.getDisplayable(entry.getLabel());
+			return getDisplayableLabel(entry);
 		if(column == COLUMN_PUBLIC_CODE)
 			return entry.getPublicCode();
 		return "";
@@ -157,7 +155,7 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 	public String getLabel(int row)
 	{
 		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
-		return fontHelper.getDisplayable(entry.getLabel());
+		return getDisplayableLabel(entry);
 	}
 
 	public String getPublicCode(int row)
@@ -215,7 +213,5 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 	public int COLUMN_PUBLIC_CODE = -1;
 	public int COLUMN_LABEL = -1;
 	public int columnCount;
-	MiniLocalization localization;
 	HeadquartersSelectionListener selectionListener;
-	UiFontEncodingHelper fontHelper;
 }
