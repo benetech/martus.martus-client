@@ -80,7 +80,7 @@ public class SelectableExternalPublicKeyEntry
 	
 	public boolean equals(Object rawOther)
 	{
-		if(! (rawOther instanceof HeadquarterEntry))
+		if(! (rawOther instanceof SelectableHeadquartersEntry))
 			return false;
 		
 		SelectableExternalPublicKeyEntry other = (SelectableExternalPublicKeyEntry)rawOther;

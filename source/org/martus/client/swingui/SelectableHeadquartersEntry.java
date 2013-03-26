@@ -28,9 +28,9 @@ package org.martus.client.swingui;
 
 import org.martus.common.HeadquartersKey;
 
-public class HeadquarterEntry extends SelectableExternalPublicKeyEntry
+public class SelectableHeadquartersEntry extends SelectableExternalPublicKeyEntry
 {
-	public HeadquarterEntry(HeadquartersKey keyToUse)
+	public SelectableHeadquartersEntry(HeadquartersKey keyToUse)
 	{
 		super(keyToUse);
 	}

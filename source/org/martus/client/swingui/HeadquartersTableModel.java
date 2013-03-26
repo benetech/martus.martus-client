@@ -48,7 +48,7 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 		selectionListener = selectionListenerToUse;
 	}
 	
-	public void addNewHeadQuarterEntry(HeadquarterEntry entryToAdd)
+	public void addNewHeadQuarterEntry(SelectableHeadquartersEntry entryToAdd)
 	{
 		entries.add(entryToAdd);
 		int rowAdded = entries.size();
@@ -60,7 +60,7 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 		for(int j = 0; j < keys.size(); ++j)
 		{
 			HeadquartersKey hqKeyToCheck = keys.get(j);
-			HeadquarterEntry headQuarterEntry = new HeadquarterEntry(hqKeyToCheck);
+			SelectableHeadquartersEntry headQuarterEntry = new SelectableHeadquartersEntry(hqKeyToCheck);
 			if(!contains(headQuarterEntry))
 				addNewHeadQuarterEntry(headQuarterEntry);
 		}
@@ -77,7 +77,7 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 	
 	public void selectRow(int row)
 	{
-		HeadquarterEntry entry = (HeadquarterEntry)entries.get(row);
+		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
 		entry.setSelected(true);
 	}
 	
@@ -97,7 +97,7 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 		HeadquartersKeys keys = new HeadquartersKeys();
 		for (Iterator iter = entries.iterator(); iter.hasNext();) 
 		{
-			HeadquarterEntry hqEntry = (HeadquarterEntry) iter.next();
+			SelectableHeadquartersEntry hqEntry = (SelectableHeadquartersEntry) iter.next();
 			if(hqEntry.isSelected())
 				keys.add(hqEntry.getKey());
 		}
@@ -109,14 +109,14 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 		HeadquartersKeys keys = new HeadquartersKeys();
 		for (Iterator iter = entries.iterator(); iter.hasNext();) 
 		{
-			keys.add(((HeadquarterEntry) iter.next()).getKey());
+			keys.add(((SelectableHeadquartersEntry) iter.next()).getKey());
 		}	
 		return keys;
 	}
 	
 	public HeadquartersKey getHQKey(int row)
 	{
-		return ((HeadquarterEntry)entries.get(row)).getKey();
+		return ((SelectableHeadquartersEntry)entries.get(row)).getKey();
 	}
 	
 	public int getRowCount() 
@@ -144,7 +144,7 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 
 	public Object getValueAt(int row, int column)
 	{
-		HeadquarterEntry entry = (HeadquarterEntry)entries.get(row);
+		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
 		if(column == COLUMN_DEFAULT || column == COLUMN_SELECTED)
 			return new Boolean(entry.isSelected());
 		if(column == COLUMN_LABEL)
@@ -156,25 +156,25 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 	
 	public String getLabel(int row)
 	{
-		HeadquarterEntry entry = (HeadquarterEntry)entries.get(row);
+		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
 		return fontHelper.getDisplayable(entry.getLabel());
 	}
 
 	public String getPublicCode(int row)
 	{
-		HeadquarterEntry entry = (HeadquarterEntry)entries.get(row);
+		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
 		return entry.getPublicCode();
 	}
 
 	public void setLabel(int row, String newLabel)
 	{
-		HeadquarterEntry entry = (HeadquarterEntry)entries.get(row);
+		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
 		entry.setLabel(newLabel);
 	}
 	
 	public void setValueAt(Object value, int row, int column)
 	{
-		HeadquarterEntry entry = (HeadquarterEntry)entries.get(row);
+		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
 		if(column == COLUMN_SELECTED || column == COLUMN_DEFAULT)
 		{
 			entry.setSelected(((Boolean)value).booleanValue());
@@ -204,7 +204,7 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 		return false;
 	}
 	
-	public boolean contains(HeadquarterEntry entry)
+	public boolean contains(SelectableHeadquartersEntry entry)
 	{
 		return entries.contains(entry);
 	}
