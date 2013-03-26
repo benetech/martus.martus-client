@@ -35,6 +35,7 @@ import java.util.Vector;
 
 import javax.swing.JComponent;
 
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPrintBulletinDlg;
 import org.martus.common.MartusLogger;
@@ -62,6 +63,7 @@ public class ActionPrint extends UiMenuAction
 	public ActionPrint(UiMainWindow mainWindowToUse, String menuTag)
 	{
 		super(mainWindowToUse, menuTag);
+		fontHelper = new UiFontEncodingHelper(mainWindowToUse.getUseZawgyi());
 	}
 	
 	public boolean isEnabled()
@@ -230,10 +232,12 @@ public class ActionPrint extends UiMenuAction
 		boolean yourBulletin = bulletin.getAccount().equals(getApp().getAccountId());	
 		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization() );
 		String html = generator.getHtmlFragment(bulletin, getStore().getDatabase(), includePrivateData, yourBulletin);
+		html = fontHelper.getDisplayable(html);
 		return html;
 	}
 
 	
 	static final boolean previewForDebugging = false;
 	private static final String HTML_FILE_EXTENSION = ".html";
+	UiFontEncodingHelper fontHelper;
 }
