@@ -31,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -39,6 +40,7 @@ import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
+
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.HeadQuarterEntry;
 import org.martus.client.swingui.HeadQuartersTableModel;
@@ -47,7 +49,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
-import org.martus.common.HQKeys.HQsException;
+import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
@@ -99,9 +101,9 @@ public class UiConfigureHQs extends JDialog
 			for(int i = 0; i<local.size();++i)
 				addHQKeyToTable(local.get(i));
 		}
-		catch (HQsException e)
+		catch (Exception e)
 		{
-			e.printStackTrace();
+			MartusLogger.logException(e);
 		}
 		enableDisableButtons();
 		
