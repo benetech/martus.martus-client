@@ -88,6 +88,6 @@ public class HeadquarterEntry
 		return key.equals(other.key);
 	}
 	
-	HeadquartersKey key;
-	boolean isSelected;
+	private HeadquartersKey key;
+	private boolean isSelected;
 }
