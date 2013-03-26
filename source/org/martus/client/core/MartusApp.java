@@ -76,7 +76,6 @@ import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
-import org.martus.common.HQKeys.HQsException;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
@@ -101,12 +100,12 @@ import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.network.ClientSideNetworkInterface;
-import org.martus.common.network.TorTransportWrapper;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.network.NonSSLNetworkAPI;
 import org.martus.common.network.NonSSLNetworkAPIWithHelpers;
 import org.martus.common.network.ServerSideNetworkInterface;
+import org.martus.common.network.TorTransportWrapper;
 import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.FieldDataPacket;
@@ -273,12 +272,12 @@ public class MartusApp
 		return configInfo.getLegacyHQKey();
 	}
 	
-	public HQKeys getAllHQKeys() throws HQsException
+	public HQKeys getAllHQKeys() throws Exception
 	{
 		return new HQKeys(configInfo.getAllHQKeysXml());
 	}
 
-	public HQKeys getDefaultHQKeys() throws HQsException
+	public HQKeys getDefaultHQKeys() throws Exception
 	{
 		return new HQKeys(configInfo.getDefaultHQKeysXml());
 	}
@@ -289,9 +288,9 @@ public class MartusApp
 		{
 			return getAllHQKeys();
 		}
-		catch (HQsException e)
+		catch (Exception e)
 		{
-			e.printStackTrace();
+			MartusLogger.logException(e);
 			HQKey legacyKey = new HQKey(getLegacyHQKey());
 			return new HQKeys(legacyKey);
 		}
@@ -303,9 +302,9 @@ public class MartusApp
 		{
 			return getDefaultHQKeys();
 		}
-		catch (HQsException e)
+		catch (Exception e)
 		{
-			e.printStackTrace();
+			MartusLogger.logException(e);
 			HQKey legacyKey = new HQKey(getLegacyHQKey());
 			return new HQKeys(legacyKey);
 		}
@@ -342,9 +341,9 @@ public class MartusApp
 			}
 			return hqLabelIfPresent;
 		}
-		catch (HQsException e)
+		catch (Exception e)
 		{
-			e.printStackTrace();
+			MartusLogger.logException(e);
 			return "";
 		}
 	}
@@ -524,7 +523,7 @@ public class MartusApp
 		}
 	}
 
-	private void convertLegacyHQToMultipleHQs() throws HQsException
+	private void convertLegacyHQToMultipleHQs() throws Exception
 	{
 		String legacyHQKey = configInfo.getLegacyHQKey();
 		if(legacyHQKey.length()>0)

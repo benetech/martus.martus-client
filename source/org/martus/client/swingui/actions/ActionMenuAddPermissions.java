@@ -37,7 +37,6 @@ import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
 import org.martus.common.HQKeys;
 import org.martus.common.MartusLogger;
 import org.martus.common.ProgressMeterInterface;
-import org.martus.common.HQKeys.HQsException;
 import org.martus.common.bulletin.Bulletin;
 
 
@@ -57,9 +56,9 @@ public class ActionMenuAddPermissions extends UiMenuAction
 		{
 			return (mainWindow.getApp().getAllHQKeys().size() > 0);
 		} 
-		catch (HQsException e)
+		catch (Exception e)
 		{
-			e.printStackTrace();
+			MartusLogger.logException(e);
 			return false;
 		}
 	}
