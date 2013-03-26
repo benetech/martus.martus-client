@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui;
 
+import java.util.Vector;
+
 import org.martus.client.core.MartusApp;
 import org.martus.common.MiniLocalization;
 import org.martus.swing.UiTableModel;
@@ -35,6 +37,14 @@ abstract public class ExternalPublicKeysTableModel extends UiTableModel
 	{
 		localization = app.getLocalization();
 		fontHelper = new UiFontEncodingHelper(app.getConfigInfo().getUseZawgyi());
+		entries = new Vector();
+	}
+	
+	public void addRawEntry(SelectableHeadquartersEntry entryToAdd)
+	{
+		entries.add(entryToAdd);
+		int rowAdded = entries.size();
+		fireTableRowsInserted(rowAdded, rowAdded);
 	}
 	
 	public String getDisplayableLabel(SelectableExternalPublicKeyEntry entry)
@@ -47,6 +57,51 @@ abstract public class ExternalPublicKeysTableModel extends UiTableModel
 		return localization;
 	}
 	
+	public int getRowCount() 
+	{
+		return entries.size();
+	}
+
+	public void selectRow(int row)
+	{
+		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
+		entry.setSelected(true);
+	}
+	
+	public void removeRow(int row)
+	{
+		entries.remove(row);
+		fireTableRowsDeleted(row, row);
+	}
+
+	public String getLabel(int row)
+	{
+		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
+		return getDisplayableLabel(entry);
+	}
+
+	public String getPublicCode(int row)
+	{
+		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
+		return entry.getPublicCode();
+	}
+
+	public boolean contains(SelectableHeadquartersEntry entry)
+	{
+		return entries.contains(entry);
+	}
+	
+	protected Vector getRawEntries()
+	{
+		return entries;
+	}
+	
+	protected SelectableExternalPublicKeyEntry getRawEntry(int row)
+	{
+		return (SelectableExternalPublicKeyEntry)getRawEntries().get(row);
+	}
+	
 	private MiniLocalization localization;
 	private UiFontEncodingHelper fontHelper;
+	private Vector entries;
 }

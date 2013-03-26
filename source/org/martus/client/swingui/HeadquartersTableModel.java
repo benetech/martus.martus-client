@@ -27,7 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import java.util.Iterator;
-import java.util.Vector;
 
 import org.martus.client.core.MartusApp;
 import org.martus.common.HeadquartersKey;
@@ -38,7 +37,6 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 	public HeadquartersTableModel(MartusApp app)
 	{
 		super(app);
-		entries = new Vector();
 	}
 	
 	public void setHQSelectionListener(HeadquartersSelectionListener selectionListenerToUse)
@@ -48,9 +46,7 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 	
 	public void addNewHeadQuarterEntry(SelectableHeadquartersEntry entryToAdd)
 	{
-		entries.add(entryToAdd);
-		int rowAdded = entries.size();
-		fireTableRowsInserted(rowAdded, rowAdded);
+		addRawEntry(entryToAdd);
 	}
 	
 	public void addKeys(HeadquartersKeys keys)
@@ -73,18 +69,6 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 		}
 	}
 	
-	public void selectRow(int row)
-	{
-		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
-		entry.setSelected(true);
-	}
-	
-	public void removeRow(int row)
-	{
-		entries.remove(row);
-		fireTableRowsDeleted(row, row);
-	}
-
 	public int getNumberOfSelectedHQs()
 	{
 		return getAllSelectedHeadQuarterKeys().size();
@@ -93,7 +77,7 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 	public HeadquartersKeys getAllSelectedHeadQuarterKeys()
 	{
 		HeadquartersKeys keys = new HeadquartersKeys();
-		for (Iterator iter = entries.iterator(); iter.hasNext();) 
+		for (Iterator iter = getRawEntries().iterator(); iter.hasNext();) 
 		{
 			SelectableHeadquartersEntry hqEntry = (SelectableHeadquartersEntry) iter.next();
 			if(hqEntry.isSelected())
@@ -105,7 +89,7 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 	public HeadquartersKeys getAllKeys()
 	{
 		HeadquartersKeys keys = new HeadquartersKeys();
-		for (Iterator iter = entries.iterator(); iter.hasNext();) 
+		for (Iterator iter = getRawEntries().iterator(); iter.hasNext();) 
 		{
 			keys.add(((SelectableHeadquartersEntry) iter.next()).getKey());
 		}	
@@ -114,14 +98,9 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 	
 	public HeadquartersKey getHQKey(int row)
 	{
-		return ((SelectableHeadquartersEntry)entries.get(row)).getKey();
+		return (HeadquartersKey) getRawEntry(row).getKey();
 	}
 	
-	public int getRowCount() 
-	{
-		return entries.size();
-	}
-
 	public int getColumnCount()
 	{
 		return columnCount;
@@ -142,7 +121,7 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 
 	public Object getValueAt(int row, int column)
 	{
-		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
+		SelectableExternalPublicKeyEntry entry = getRawEntry(row);
 		if(column == COLUMN_DEFAULT || column == COLUMN_SELECTED)
 			return new Boolean(entry.isSelected());
 		if(column == COLUMN_LABEL)
@@ -152,27 +131,15 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 		return "";
 	}
 	
-	public String getLabel(int row)
-	{
-		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
-		return getDisplayableLabel(entry);
-	}
-
-	public String getPublicCode(int row)
-	{
-		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
-		return entry.getPublicCode();
-	}
-
 	public void setLabel(int row, String newLabel)
 	{
-		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
+		SelectableExternalPublicKeyEntry entry = getRawEntry(row);
 		entry.setLabel(newLabel);
 	}
 	
 	public void setValueAt(Object value, int row, int column)
 	{
-		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
+		SelectableExternalPublicKeyEntry entry = getRawEntry(row);
 		if(column == COLUMN_SELECTED || column == COLUMN_DEFAULT)
 		{
 			entry.setSelected(((Boolean)value).booleanValue());
@@ -202,12 +169,6 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 		return false;
 	}
 	
-	public boolean contains(SelectableHeadquartersEntry entry)
-	{
-		return entries.contains(entry);
-	}
-	
-	Vector entries;
 	public int COLUMN_DEFAULT = -1;
 	public int COLUMN_SELECTED = -1;
 	public int COLUMN_PUBLIC_CODE = -1;
