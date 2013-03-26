@@ -43,7 +43,7 @@ import javax.swing.filechooser.FileFilter;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.SelectableHeadquartersEntry;
 import org.martus.client.swingui.HeadquartersTableModel;
-import org.martus.client.swingui.HeadquartersTableModelConfiguration;
+import org.martus.client.swingui.HeadquartersManagementTableModel;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.HeadquartersKey;
@@ -89,7 +89,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(vBox);
 		
-		model = new HeadquartersTableModelConfiguration(mainWindow.getApp());
+		model = new HeadquartersManagementTableModel(mainWindow.getApp());
 		table = createHeadquartersTable(model);
 		
 		try
@@ -388,7 +388,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 
 	UiMainWindow mainWindow;
 	UiTable table;
-	HeadquartersTableModelConfiguration model;
+	HeadquartersManagementTableModel model;
 	JButton remove;
 	JButton renameLabel;
 	UiLocalization localization;

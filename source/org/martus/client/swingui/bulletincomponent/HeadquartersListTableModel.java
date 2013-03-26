@@ -29,12 +29,11 @@ package org.martus.client.swingui.bulletincomponent;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.HeadquartersTableModel;
 
-public class HeadquartersTableModelEdit extends HeadquartersTableModel 
+public class HeadquartersListTableModel extends HeadquartersTableModel
 {
-	public HeadquartersTableModelEdit(MartusApp app)
+	public HeadquartersListTableModel(MartusApp app)
 	{
 		super(app);
-		COLUMN_SELECTED = columnCount++;
 		COLUMN_LABEL = columnCount++;
 	}
 
