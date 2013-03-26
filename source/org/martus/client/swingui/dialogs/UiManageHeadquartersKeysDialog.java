@@ -35,7 +35,6 @@ import java.io.File;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
@@ -62,11 +61,11 @@ import org.martus.swing.Utilities;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 
-public class UiManageHeadquartersKeysDialog extends JDialog
+public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDialog
 {
 	public UiManageHeadquartersKeysDialog(UiMainWindow owner)
 	{
-		super(owner, "", true);
+		super(owner);
 		mainWindow = owner;
 		localization = mainWindow.getLocalization();
 		
