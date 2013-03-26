@@ -123,7 +123,7 @@ import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiUtilities;
 import org.martus.common.EnglishCommonStrings;
-import org.martus.common.HQKeys;
+import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.FileVerificationException;
@@ -2234,7 +2234,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		new UiConfigureHQs(this);
 	}
 	
-	public void setAndSaveHQKeysInConfigInfo(HQKeys allHQKeys, HQKeys defaultHQKeys)
+	public void setAndSaveHQKeysInConfigInfo(HeadquartersKeys allHQKeys, HeadquartersKeys defaultHQKeys)
 	{
 		try
 		{

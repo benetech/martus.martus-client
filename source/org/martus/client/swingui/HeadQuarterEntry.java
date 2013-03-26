@@ -26,12 +26,12 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
-import org.martus.common.HQKey;
+import org.martus.common.HeadquartersKey;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class HeadQuarterEntry 
 {
-	public HeadQuarterEntry(HQKey keyToUse)
+	public HeadQuarterEntry(HeadquartersKey keyToUse)
 	{
 		key = keyToUse;
 	}
@@ -69,7 +69,7 @@ public class HeadQuarterEntry
 		}
 	}
 
-	public HQKey getKey()
+	public HeadquartersKey getKey()
 	{
 		return key;
 	}
@@ -88,6 +88,6 @@ public class HeadQuarterEntry
 		return key.equals(other.key);
 	}
 	
-	HQKey key;
+	HeadquartersKey key;
 	boolean isSelected;
 }

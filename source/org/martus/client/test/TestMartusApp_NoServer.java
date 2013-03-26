@@ -60,8 +60,8 @@ import org.martus.clientside.UiLocalization;
 import org.martus.clientside.test.ServerSideNetworkHandlerNotAvailable;
 import org.martus.common.FieldCollection;
 import org.martus.common.FieldSpecCollection;
-import org.martus.common.HQKey;
-import org.martus.common.HQKeys;
+import org.martus.common.HeadquartersKey;
+import org.martus.common.HeadquartersKeys;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MiniLocalization;
@@ -1044,8 +1044,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("already exists?", false, configFile.exists());
 		String sampleHQKey = "abc123";
 		String sampleLabel = "Fred";
-		HQKeys keys = new HQKeys();
-		HQKey key = new HQKey(sampleHQKey, sampleLabel);
+		HeadquartersKeys keys = new HeadquartersKeys();
+		HeadquartersKey key = new HeadquartersKey(sampleHQKey, sampleLabel);
 		keys.add(key);
 		appWithAccount.setAndSaveHQKeys(keys, keys);
 		assertEquals("Incorrect public key", sampleHQKey, appWithAccount.getLegacyHQKey());
@@ -1060,35 +1060,35 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String sampleLabel1 = "Fred";
 		String sampleHQKey2 = "234567";
 		String sampleLabel2 = "Bev";
-		HQKeys allKeys = new HQKeys();
-		HQKey key1 = new HQKey(sampleHQKey1, sampleLabel1);
-		HQKey key2 = new HQKey(sampleHQKey2, sampleLabel2);
+		HeadquartersKeys allKeys = new HeadquartersKeys();
+		HeadquartersKey key1 = new HeadquartersKey(sampleHQKey1, sampleLabel1);
+		HeadquartersKey key2 = new HeadquartersKey(sampleHQKey2, sampleLabel2);
 		allKeys.add(key1);
 		allKeys.add(key2);
-		HQKeys defaultKeys = new HQKeys(key1);
+		HeadquartersKeys defaultKeys = new HeadquartersKeys(key1);
 		
 		appWithAccount.setAndSaveHQKeys(allKeys, defaultKeys);
 		assertEquals("Incorrect default public key", sampleHQKey1, appWithAccount.getLegacyHQKey());
-		HQKeys returnedKeys = appWithAccount.getAllHQKeys();
+		HeadquartersKeys returnedKeys = appWithAccount.getAllHQKeys();
 		assertTrue(returnedKeys.containsKey(sampleHQKey1));
 		assertTrue(returnedKeys.containsKey(sampleHQKey2));
-		HQKeys returnedKeysWithFallBack = appWithAccount.getAllHQKeysWithFallback();
+		HeadquartersKeys returnedKeysWithFallBack = appWithAccount.getAllHQKeysWithFallback();
 		assertTrue(returnedKeysWithFallBack.containsKey(sampleHQKey1));
 		assertTrue(returnedKeysWithFallBack.containsKey(sampleHQKey2));
 		
 		
-		HQKeys returnedDefaultKeys = appWithAccount.getDefaultHQKeys();
+		HeadquartersKeys returnedDefaultKeys = appWithAccount.getDefaultHQKeys();
 		assertTrue(returnedDefaultKeys.containsKey(sampleHQKey1));
 		assertFalse(returnedDefaultKeys.containsKey(sampleHQKey2));
-		HQKeys returnedDefaultKeysWithFallBack = appWithAccount.getDefaultHQKeysWithFallback();
+		HeadquartersKeys returnedDefaultKeysWithFallBack = appWithAccount.getDefaultHQKeysWithFallback();
 		assertTrue(returnedDefaultKeysWithFallBack.containsKey(sampleHQKey1));
 		assertFalse(returnedDefaultKeysWithFallBack.containsKey(sampleHQKey2));
 
-		HQKeys empty = new HQKeys();
+		HeadquartersKeys empty = new HeadquartersKeys();
 		appWithAccount.setAndSaveHQKeys(empty, empty);
-		HQKeys noFallbackKeys = appWithAccount.getAllHQKeysWithFallback();
+		HeadquartersKeys noFallbackKeys = appWithAccount.getAllHQKeysWithFallback();
 		assertEquals(0, noFallbackKeys.size());
-		HQKeys noDefaultKeys = appWithAccount.getDefaultHQKeysWithFallback();
+		HeadquartersKeys noDefaultKeys = appWithAccount.getDefaultHQKeysWithFallback();
 		assertEquals(0, noDefaultKeys.size());
 
 	}
@@ -1098,15 +1098,15 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		File configFile = appWithAccount.getConfigInfoFile();
 		configFile.deleteOnExit();
 		assertEquals("already exists?", false, configFile.exists());
-		HQKeys empty = new HQKeys();
+		HeadquartersKeys empty = new HeadquartersKeys();
 		appWithAccount.setAndSaveHQKeys(empty, empty);
 		assertEquals("HQ key exists?", "", appWithAccount.getLegacyHQKey());
 		assertEquals("Didn't save?", true, configFile.exists());
 
 		String sampleHQKey1 = "abc123";
 		String sampleLabel1 = "Fred";
-		HQKeys keys = new HQKeys();
-		HQKey key1 = new HQKey(sampleHQKey1, sampleLabel1);
+		HeadquartersKeys keys = new HeadquartersKeys();
+		HeadquartersKey key1 = new HeadquartersKey(sampleHQKey1, sampleLabel1);
 		keys.add(key1);
 
 		appWithAccount.setAndSaveHQKeys(keys,keys);
@@ -2178,17 +2178,17 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		String sampleHQKey1 = "abc123";
 		String sampleLabel1 = "Fred";
-		HQKeys keys = new HQKeys();
-		HQKey key1 = new HQKey(sampleHQKey1, sampleLabel1);
+		HeadquartersKeys keys = new HeadquartersKeys();
+		HeadquartersKey key1 = new HeadquartersKey(sampleHQKey1, sampleLabel1);
 		keys.add(key1);
 		appWithAccount.setAndSaveHQKeys(keys,keys);
-		HQKeys returnedKeys = appWithAccount.getAllHQKeys();
-		HQKey returnedKey1 = returnedKeys.get(0);
+		HeadquartersKeys returnedKeys = appWithAccount.getAllHQKeys();
+		HeadquartersKey returnedKey1 = returnedKeys.get(0);
 		assertEquals("Public Key not set?", sampleHQKey1, returnedKey1.getPublicKey());
 		assertEquals("Label not set?", sampleLabel1, returnedKey1.getLabel());
 
-		HQKeys returnedDefaultKeys = appWithAccount.getDefaultHQKeys();
-		HQKey returnedKey2 = returnedDefaultKeys.get(0);
+		HeadquartersKeys returnedDefaultKeys = appWithAccount.getDefaultHQKeys();
+		HeadquartersKey returnedKey2 = returnedDefaultKeys.get(0);
 		assertEquals("Public Key not set?", sampleHQKey1, returnedKey2.getPublicKey());
 		assertEquals("Label not set?", sampleLabel1, returnedKey2.getLabel());
 		
@@ -2202,12 +2202,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		String sampleHQKey1 = "abc123";
 		String sampleLabel1 = "Fred";
-		HQKeys keys = new HQKeys();
-		HQKey key1 = new HQKey(sampleHQKey1, sampleLabel1);
+		HeadquartersKeys keys = new HeadquartersKeys();
+		HeadquartersKey key1 = new HeadquartersKey(sampleHQKey1, sampleLabel1);
 		keys.add(key1);
 		appWithAccount.setAndSaveHQKeys(keys, keys);
 		assertEquals("Label not the same?", sampleLabel1, appWithAccount.getHQLabelIfPresent(key1));
-		HQKey missingKey = new HQKey("public key", "some label");
+		HeadquartersKey missingKey = new HeadquartersKey("public key", "some label");
 		assertEquals("unknown Key not configured?", missingKey.getPublicCode()+" <field:HQNotConfigured>", appWithAccount.getHQLabelIfPresent(missingKey));
 	}
 	

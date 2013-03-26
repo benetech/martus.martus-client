@@ -51,7 +51,7 @@ import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.FieldSpecCollection;
-import org.martus.common.HQKeys;
+import org.martus.common.HeadquartersKeys;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.BulletinFieldSpecs;
 import org.martus.common.fieldspec.CustomFieldError;
@@ -226,7 +226,7 @@ public class UiCustomFieldsDlg extends JDialog
 		{
 			Vector authorizedKeys = new Vector();
 			authorizedKeys.add(security.getPublicKeyString());
-			HQKeys hqKeys = mainWindow.getApp().getAllHQKeysWithFallback();
+			HeadquartersKeys hqKeys = mainWindow.getApp().getAllHQKeysWithFallback();
 			for(int i = 0; i < hqKeys.size(); ++i)
 			{
 				authorizedKeys.add(hqKeys.get(i).getPublicKey());

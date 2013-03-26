@@ -41,8 +41,8 @@ import org.martus.client.core.MartusClientXml;
 import org.martus.client.test.MockBulletinStore;
 import org.martus.common.BulletinSummary;
 import org.martus.common.FieldSpecCollection;
-import org.martus.common.HQKey;
-import org.martus.common.HQKeys;
+import org.martus.common.HeadquartersKey;
+import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusXml;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
@@ -308,7 +308,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     
     private Bulletin createSealedBulletin(MartusCrypto otherSecurity) throws Exception
 	{
-		HQKeys oldHq = new HQKeys(new HQKey(fakeHqKey));
+		HeadquartersKeys oldHq = new HeadquartersKeys(new HeadquartersKey(fakeHqKey));
     	
     	Bulletin original = new Bulletin(otherSecurity);
     	original.set(Bulletin.TAGTITLE, PUBLIC_DATA);
@@ -1585,8 +1585,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		ClientBulletinStore hqStore = createTempStore();
 
 		Bulletin original = testStore.createEmptyBulletin();
-		HQKeys keys = new HQKeys();
-		HQKey key1 = new HQKey(hqStore.getAccountId());
+		HeadquartersKeys keys = new HeadquartersKeys();
+		HeadquartersKey key1 = new HeadquartersKey(hqStore.getAccountId());
 		keys.add(key1);
 		original.setAuthorizedToReadKeys(keys);
 		original.setSealed();

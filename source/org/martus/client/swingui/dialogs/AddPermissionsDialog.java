@@ -39,7 +39,7 @@ import org.martus.client.swingui.UiHeadquartersTable;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.HeadQuartersTableModelEdit;
 import org.martus.clientside.UiLocalization;
-import org.martus.common.HQKeys;
+import org.martus.common.HeadquartersKeys;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
@@ -50,7 +50,7 @@ import com.jhlabs.awt.GridLayoutPlus;
 
 public class AddPermissionsDialog extends JDialog
 {
-	public AddPermissionsDialog(UiMainWindow mainWindowToUse, Vector allBulletins, Vector ourBulletins, HQKeys hqKeys)
+	public AddPermissionsDialog(UiMainWindow mainWindowToUse, Vector allBulletins, Vector ourBulletins, HeadquartersKeys hqKeys)
 	{
 		super(mainWindowToUse);
 		mainWindow = mainWindowToUse;
@@ -104,7 +104,7 @@ public class AddPermissionsDialog extends JDialog
 		setResizable(true);
 	}
 	
-	public HQKeys getSelectedHqKeys()
+	public HeadquartersKeys getSelectedHqKeys()
 	{
 		return selectedHqKeys;
 	}
@@ -116,7 +116,7 @@ public class AddPermissionsDialog extends JDialog
 	
 	void doOk()
 	{
-		HQKeys selectedKeys = model.getAllSelectedHeadQuarterKeys();
+		HeadquartersKeys selectedKeys = model.getAllSelectedHeadQuarterKeys();
 		if(selectedKeys.size() == 0)
 		{
 			mainWindow.notifyDlg("AddPermissionsZeroHeadquartersSelected");
@@ -152,5 +152,5 @@ public class AddPermissionsDialog extends JDialog
 	
 	UiMainWindow mainWindow;
 	HeadQuartersTableModelEdit model;
-	HQKeys selectedHqKeys;
+	HeadquartersKeys selectedHqKeys;
 }
