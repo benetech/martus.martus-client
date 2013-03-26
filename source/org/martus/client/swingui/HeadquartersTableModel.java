@@ -29,14 +29,12 @@ package org.martus.client.swingui;
 import java.util.Iterator;
 import java.util.Vector;
 
-
 import org.martus.client.core.MartusApp;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MiniLocalization;
-import org.martus.swing.UiTableModel;
 
-public abstract class HeadquartersTableModel extends UiTableModel 
+public abstract class HeadquartersTableModel extends ExternalPublicKeysTableModel 
 {
 	public HeadquartersTableModel(MartusApp app)
 	{
