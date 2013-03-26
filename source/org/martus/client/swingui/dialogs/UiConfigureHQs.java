@@ -123,7 +123,6 @@ public class UiConfigureHQs extends JDialog
 		getRootPane().setDefaultButton(cancel);
 		Utilities.centerDlg(this);
 		setResizable(true);
-		setVisible(true);
 	}
 	
 	void enableDisableButtons()
