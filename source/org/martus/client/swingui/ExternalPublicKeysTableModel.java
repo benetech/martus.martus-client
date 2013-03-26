@@ -25,8 +25,28 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui;
 
+import org.martus.client.core.MartusApp;
+import org.martus.common.MiniLocalization;
 import org.martus.swing.UiTableModel;
 
 abstract public class ExternalPublicKeysTableModel extends UiTableModel
 {
+	public ExternalPublicKeysTableModel(MartusApp app)
+	{
+		localization = app.getLocalization();
+		fontHelper = new UiFontEncodingHelper(app.getConfigInfo().getUseZawgyi());
+	}
+	
+	public String getDisplayableLabel(SelectableExternalPublicKeyEntry entry)
+	{
+		return fontHelper.getDisplayable(entry.getLabel());
+	}
+	
+	public MiniLocalization getLocalization()
+	{
+		return localization;
+	}
+	
+	private MiniLocalization localization;
+	private UiFontEncodingHelper fontHelper;
 }
