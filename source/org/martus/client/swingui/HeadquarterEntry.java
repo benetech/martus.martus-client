@@ -27,67 +27,16 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import org.martus.common.HeadquartersKey;
-import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
-public class HeadquarterEntry 
+public class HeadquarterEntry extends SelectableExternalPublicKeyEntry
 {
 	public HeadquarterEntry(HeadquartersKey keyToUse)
 	{
-		key = keyToUse;
-	}
-	
-	public boolean isSelected()
-	{
-		return isSelected;
-	}
-
-	public void setSelected(boolean selected)
-	{
-		isSelected = selected;
-	}
-	
-	public String getLabel()
-	{
-		return key.getLabel();
-	}
-	
-	public void setLabel(String newLabel)
-	{
-		key.setLabel(newLabel);
-	}
-	
-	public String getPublicCode()
-	{
-		try
-		{
-			return key.getPublicCode();
-		}
-		catch(InvalidBase64Exception e)
-		{
-			e.printStackTrace();
-			return "";
-		}
+		super(keyToUse);
 	}
 
 	public HeadquartersKey getKey()
 	{
-		return key;
+		return (HeadquartersKey)getRawKey();
 	}
-	
-	public int hashCode()
-	{
-		return key.hashCode();
-	}
-	
-	public boolean equals(Object rawOther)
-	{
-		if(! (rawOther instanceof HeadquarterEntry))
-			return false;
-		
-		HeadquarterEntry other = (HeadquarterEntry)rawOther;
-		return key.equals(other.key);
-	}
-	
-	private HeadquartersKey key;
-	private boolean isSelected;
 }
