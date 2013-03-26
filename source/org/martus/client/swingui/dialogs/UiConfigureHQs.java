@@ -42,9 +42,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.HeadQuarterEntry;
-import org.martus.client.swingui.HeadQuartersTableModel;
-import org.martus.client.swingui.HeadQuartersTableModelConfiguration;
+import org.martus.client.swingui.HeadquarterEntry;
+import org.martus.client.swingui.HeadquartersTableModel;
+import org.martus.client.swingui.HeadquartersTableModelConfiguration;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.HeadquartersKey;
@@ -92,7 +92,7 @@ public class UiConfigureHQs extends JDialog
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(vBox);
 		
-		model = new HeadQuartersTableModelConfiguration(mainWindow.getApp());
+		model = new HeadquartersTableModelConfiguration(mainWindow.getApp());
 		table = createHeadquartersTable(model);
 		
 		try
@@ -136,7 +136,7 @@ public class UiConfigureHQs extends JDialog
 
 	}
 	
-	protected UiTable createHeadquartersTable(HeadQuartersTableModel hqModel) 
+	protected UiTable createHeadquartersTable(HeadquartersTableModel hqModel) 
 	{
 		UiTable hqTable = new UiTable(hqModel);
 		hqTable.setRenderers(hqModel);
@@ -268,7 +268,7 @@ public class UiConfigureHQs extends JDialog
 					return;
 				}
 			}
-			HeadQuarterEntry entry = new HeadQuarterEntry(publicKey);
+			HeadquarterEntry entry = new HeadquarterEntry(publicKey);
 			HeadquartersKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
 			boolean isDefault = defaultHQKeys.containsKey(publicKey.getPublicKey());
 			entry.setSelected(isDefault);
@@ -381,7 +381,7 @@ public class UiConfigureHQs extends JDialog
 
 	UiMainWindow mainWindow;
 	UiTable table;
-	HeadQuartersTableModelConfiguration model;
+	HeadquartersTableModelConfiguration model;
 	JButton remove;
 	JButton renameLabel;
 	UiLocalization localization;

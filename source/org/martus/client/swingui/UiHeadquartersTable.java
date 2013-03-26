@@ -31,7 +31,7 @@ import org.martus.swing.UiTable;
 
 public class UiHeadquartersTable extends UiTable
 {
-	public UiHeadquartersTable(HeadQuartersTableModel hqModel)
+	public UiHeadquartersTable(HeadquartersTableModel hqModel)
 	{
 		super(hqModel);
 		setRenderers(hqModel);

@@ -32,7 +32,7 @@ import javax.swing.event.ChangeEvent;
 
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.BulletinLanguageChangeListener;
-import org.martus.client.swingui.HeadQuartersSelectionListener;
+import org.martus.client.swingui.HeadquartersSelectionListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -42,7 +42,7 @@ import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiTableWithCellEditingProtection;
 
-public class UiBulletinEditor extends UiBulletinComponent implements HeadQuartersSelectionListener
+public class UiBulletinEditor extends UiBulletinComponent implements HeadquartersSelectionListener
 {
 	public UiBulletinEditor(UiMainWindow mainWindowToUse)
 	{

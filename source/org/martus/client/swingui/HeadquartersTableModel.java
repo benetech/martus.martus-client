@@ -36,21 +36,21 @@ import org.martus.common.HeadquartersKeys;
 import org.martus.common.MiniLocalization;
 import org.martus.swing.UiTableModel;
 
-public abstract class HeadQuartersTableModel extends UiTableModel 
+public abstract class HeadquartersTableModel extends UiTableModel 
 {
-	public HeadQuartersTableModel(MartusApp app)
+	public HeadquartersTableModel(MartusApp app)
 	{
 		localization = app.getLocalization();
 		entries = new Vector();
 		fontHelper = new UiFontEncodingHelper(app.getConfigInfo().getUseZawgyi());
 	}
 	
-	public void setHQSelectionListener(HeadQuartersSelectionListener selectionListenerToUse)
+	public void setHQSelectionListener(HeadquartersSelectionListener selectionListenerToUse)
 	{
 		selectionListener = selectionListenerToUse;
 	}
 	
-	public void addNewHeadQuarterEntry(HeadQuarterEntry entryToAdd)
+	public void addNewHeadQuarterEntry(HeadquarterEntry entryToAdd)
 	{
 		entries.add(entryToAdd);
 		int rowAdded = entries.size();
@@ -62,7 +62,7 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 		for(int j = 0; j < keys.size(); ++j)
 		{
 			HeadquartersKey hqKeyToCheck = keys.get(j);
-			HeadQuarterEntry headQuarterEntry = new HeadQuarterEntry(hqKeyToCheck);
+			HeadquarterEntry headQuarterEntry = new HeadquarterEntry(hqKeyToCheck);
 			if(!contains(headQuarterEntry))
 				addNewHeadQuarterEntry(headQuarterEntry);
 		}
@@ -79,7 +79,7 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 	
 	public void selectRow(int row)
 	{
-		HeadQuarterEntry entry = (HeadQuarterEntry)entries.get(row);
+		HeadquarterEntry entry = (HeadquarterEntry)entries.get(row);
 		entry.setSelected(true);
 	}
 	
@@ -99,7 +99,7 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 		HeadquartersKeys keys = new HeadquartersKeys();
 		for (Iterator iter = entries.iterator(); iter.hasNext();) 
 		{
-			HeadQuarterEntry hqEntry = (HeadQuarterEntry) iter.next();
+			HeadquarterEntry hqEntry = (HeadquarterEntry) iter.next();
 			if(hqEntry.isSelected())
 				keys.add(hqEntry.getKey());
 		}
@@ -111,14 +111,14 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 		HeadquartersKeys keys = new HeadquartersKeys();
 		for (Iterator iter = entries.iterator(); iter.hasNext();) 
 		{
-			keys.add(((HeadQuarterEntry) iter.next()).getKey());
+			keys.add(((HeadquarterEntry) iter.next()).getKey());
 		}	
 		return keys;
 	}
 	
 	public HeadquartersKey getHQKey(int row)
 	{
-		return ((HeadQuarterEntry)entries.get(row)).getKey();
+		return ((HeadquarterEntry)entries.get(row)).getKey();
 	}
 	
 	public int getRowCount() 
@@ -146,7 +146,7 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 
 	public Object getValueAt(int row, int column)
 	{
-		HeadQuarterEntry entry = (HeadQuarterEntry)entries.get(row);
+		HeadquarterEntry entry = (HeadquarterEntry)entries.get(row);
 		if(column == COLUMN_DEFAULT || column == COLUMN_SELECTED)
 			return new Boolean(entry.isSelected());
 		if(column == COLUMN_LABEL)
@@ -158,25 +158,25 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 	
 	public String getLabel(int row)
 	{
-		HeadQuarterEntry entry = (HeadQuarterEntry)entries.get(row);
+		HeadquarterEntry entry = (HeadquarterEntry)entries.get(row);
 		return fontHelper.getDisplayable(entry.getLabel());
 	}
 
 	public String getPublicCode(int row)
 	{
-		HeadQuarterEntry entry = (HeadQuarterEntry)entries.get(row);
+		HeadquarterEntry entry = (HeadquarterEntry)entries.get(row);
 		return entry.getPublicCode();
 	}
 
 	public void setLabel(int row, String newLabel)
 	{
-		HeadQuarterEntry entry = (HeadQuarterEntry)entries.get(row);
+		HeadquarterEntry entry = (HeadquarterEntry)entries.get(row);
 		entry.setLabel(newLabel);
 	}
 	
 	public void setValueAt(Object value, int row, int column)
 	{
-		HeadQuarterEntry entry = (HeadQuarterEntry)entries.get(row);
+		HeadquarterEntry entry = (HeadquarterEntry)entries.get(row);
 		if(column == COLUMN_SELECTED || column == COLUMN_DEFAULT)
 		{
 			entry.setSelected(((Boolean)value).booleanValue());
@@ -206,7 +206,7 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 		return false;
 	}
 	
-	public boolean contains(HeadQuarterEntry entry)
+	public boolean contains(HeadquarterEntry entry)
 	{
 		return entries.contains(entry);
 	}
@@ -218,6 +218,6 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 	public int COLUMN_LABEL = -1;
 	public int columnCount;
 	MiniLocalization localization;
-	HeadQuartersSelectionListener selectionListener;
+	HeadquartersSelectionListener selectionListener;
 	UiFontEncodingHelper fontHelper;
 }

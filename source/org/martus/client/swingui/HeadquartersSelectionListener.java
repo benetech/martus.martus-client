@@ -27,7 +27,7 @@ package org.martus.client.swingui;
 
 	import java.util.EventListener;
 
-	public interface HeadQuartersSelectionListener extends EventListener
+	public interface HeadquartersSelectionListener extends EventListener
 	{
 		void selectedHQsChanged(int newNumberOfSelectedHQs);
 	}
