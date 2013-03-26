@@ -62,9 +62,9 @@ import org.martus.swing.Utilities;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 
-public class UiConfigureHeadquartersDialog extends JDialog
+public class UiManageHeadquartersKeysDialog extends JDialog
 {
-	public UiConfigureHeadquartersDialog(UiMainWindow owner)
+	public UiManageHeadquartersKeysDialog(UiMainWindow owner)
 	{
 		super(owner, "", true);
 		mainWindow = owner;
