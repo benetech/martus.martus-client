@@ -29,7 +29,7 @@ package org.martus.client.swingui.actions;
 import java.awt.event.ActionEvent;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.dialogs.UiConfigureHeadquartersDialog;
+import org.martus.client.swingui.dialogs.UiManageHeadquartersKeysDialog;
 
 public class ActionMenuConfigureHQs extends UiMenuAction
 {
@@ -48,7 +48,7 @@ public class ActionMenuConfigureHQs extends UiMenuAction
 		if(!mainWindow.reSignIn())
 			return;
 		
-		UiConfigureHeadquartersDialog dialog = new UiConfigureHeadquartersDialog(mainWindow);
+		UiManageHeadquartersKeysDialog dialog = new UiManageHeadquartersKeysDialog(mainWindow);
 		dialog.setVisible(true);
 	}
 	
