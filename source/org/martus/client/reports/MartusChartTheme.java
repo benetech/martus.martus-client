@@ -28,6 +28,7 @@ package org.martus.client.reports;
 import java.awt.Font;
 
 import org.jfree.chart.StandardChartTheme;
+import org.martus.swing.FontHandler;
 
 public class MartusChartTheme extends StandardChartTheme
 {
@@ -38,10 +39,10 @@ public class MartusChartTheme extends StandardChartTheme
 		// NOTE: JFreeChart default is "Tahoma", which somehow maps to Dialog,
 		// which for some reason (in J6) doesn't fall back to the fallback fonts, 
 		// and therefore doesn't work in Armenian, Bangla, Khmer, or Nepali 
-        setExtraLargeFont(new Font("SansSerif", Font.BOLD, 20));
-        setLargeFont(new Font("SansSerif", Font.BOLD, 14));
-        setRegularFont(new Font("SansSerif", Font.PLAIN, 12));
-        setSmallFont(new Font("SansSerif", Font.PLAIN, 10));
+        setExtraLargeFont(new Font(FontHandler.getDefaultFontName(), Font.BOLD, 20));
+        setLargeFont(new Font(FontHandler.getDefaultFontName(), Font.BOLD, 14));
+        setRegularFont(new Font(FontHandler.getDefaultFontName(), Font.PLAIN, 12));
+        setSmallFont(new Font(FontHandler.getDefaultFontName(), Font.PLAIN, 10));
 	}
 
 }
