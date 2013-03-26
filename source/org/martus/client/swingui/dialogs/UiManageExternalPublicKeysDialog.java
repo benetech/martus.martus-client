@@ -31,9 +31,10 @@ import org.martus.client.swingui.UiMainWindow;
 
 public class UiManageExternalPublicKeysDialog extends JDialog
 {
-	public UiManageExternalPublicKeysDialog(UiMainWindow owner)
+	public UiManageExternalPublicKeysDialog(UiMainWindow owner, String title)
 	{
 		super(owner);
+		setTitle(title);
 		setModal(true);
 	}
 
