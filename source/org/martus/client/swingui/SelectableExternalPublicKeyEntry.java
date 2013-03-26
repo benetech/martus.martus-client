@@ -35,6 +35,11 @@ public class SelectableExternalPublicKeyEntry
 		key = keyToUse;
 	}
 	
+	public ExternalPublicKey getKey()
+	{
+		return key;
+	}
+	
 	public boolean isSelected()
 	{
 		return isSelected;
