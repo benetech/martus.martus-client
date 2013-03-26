@@ -65,11 +65,9 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 {
 	public UiManageHeadquartersKeysDialog(UiMainWindow owner)
 	{
-		super(owner);
+		super(owner, owner.getLocalization().getWindowTitle("ConfigureHQs"));
 		mainWindow = owner;
 		localization = mainWindow.getLocalization();
-		
-		setTitle(localization.getWindowTitle("ConfigureHQs"));
 		
 		JButton add = new UiButton(localization.getButtonLabel("ConfigureHQsAdd"));
 		add.addActionListener(new AddHandler());
@@ -78,13 +76,13 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		renameLabel = new UiButton(localization.getButtonLabel("ConfigureHQsReLabel"));
 		renameLabel.addActionListener(new RenameHandler());
 
+		String[] dialogText = getDialogText();
 		UiVBox vBox = new UiVBox();
-		vBox.addCentered(new UiWrappedTextArea(localization.getFieldLabel("HQsSetAsProxyUploader")));
-		vBox.addSpace();
-		vBox.addCentered(new UiWrappedTextArea(localization.getFieldLabel("HQsSetAsDefault")));
-		vBox.addSpace();
-		vBox.addCentered(new UiWrappedTextArea(localization.getFieldLabel("ConfigureHQsCurrentHQs")));
-		vBox.addSpace();
+		for (String text : dialogText)
+		{
+			vBox.addCentered(new UiWrappedTextArea(text));
+			vBox.addSpace();
+		}
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(10,10,10,10));
@@ -122,6 +120,17 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		getRootPane().setDefaultButton(cancel);
 		Utilities.centerDlg(this);
 		setResizable(true);
+	}
+
+	private String[] getDialogText()
+	{
+		String[] dialogText = new String[]
+		{
+			localization.getFieldLabel("HQsSetAsProxyUploader"),
+			localization.getFieldLabel("HQsSetAsDefault"),
+			localization.getFieldLabel("ConfigureHQsCurrentHQs")
+		};
+		return dialogText;
 	}
 	
 	void enableDisableButtons()
