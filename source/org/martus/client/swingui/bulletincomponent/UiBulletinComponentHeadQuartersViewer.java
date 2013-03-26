@@ -47,7 +47,7 @@ public class UiBulletinComponentHeadQuartersViewer extends UiBulletinComponentHe
 			return;
 		}
 		
-		tableModel = new HeadquartersTableModelView(mainWindowToUse.getApp());
+		tableModel = new HeadquartersListTableModel(mainWindowToUse.getApp());
 		mainWindow.getApp().addHQLabelsWherePossible(authorizedToReadKeys);
 		for (int i = 0; i < authorizedToReadKeys.size(); ++i) 
 		{
