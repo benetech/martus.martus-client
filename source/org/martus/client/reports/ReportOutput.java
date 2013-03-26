@@ -35,7 +35,9 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Vector;
 
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.actions.ActionPrint;
+import org.martus.swing.FontHandler;
 import org.martus.swing.PrintUtilities;
 import org.martus.swing.UiLabel;
 
@@ -47,6 +49,7 @@ public class ReportOutput extends Writer implements Printable
 		currentPage = new StringWriter();
 		documentStart = "";
 		documentEnd = "";
+		fontHelper = new UiFontEncodingHelper(FontHandler.getUseZawgyi());
 	}
 	
 	public void close() throws IOException
@@ -125,7 +128,7 @@ public class ReportOutput extends Writer implements Printable
 			text.append(getFakePageBreak());
 		}
 		text.append(getDocumentEnd());
-		return text.toString();
+		return fontHelper.getDisplayable(text.toString());
 	}
 	
 	public String getPrintablePage(int page)
@@ -200,4 +203,5 @@ public class ReportOutput extends Writer implements Printable
 	String fakePageBreak;
 	
 	int[] pagesPerStoredPage;
+	UiFontEncodingHelper fontHelper;
 }
