@@ -37,7 +37,7 @@ import javax.swing.JDialog;
 import org.martus.client.swingui.UiBulletinTitleListComponent;
 import org.martus.client.swingui.UiHeadquartersTable;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.bulletincomponent.HeadQuartersTableModelEdit;
+import org.martus.client.swingui.bulletincomponent.HeadquartersTableModelEdit;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.HeadquartersKeys;
 import org.martus.swing.UiButton;
@@ -79,7 +79,7 @@ public class AddPermissionsDialog extends JDialog
 		String chooseHeadquartersToAdd = localization.getFieldLabel("ChooseHeadquartersToAdd");
 		contentPane.add(new UiWrappedTextArea(chooseHeadquartersToAdd));
 		
-		model = new HeadQuartersTableModelEdit(mainWindow.getApp());
+		model = new HeadquartersTableModelEdit(mainWindow.getApp());
 		model.addKeys(hqKeys);
 		UiHeadquartersTable hqTable = new UiHeadquartersTable(model);
 		hqTable.setMaxColumnWidthToHeaderWidth(0);
@@ -151,6 +151,6 @@ public class AddPermissionsDialog extends JDialog
 	}
 	
 	UiMainWindow mainWindow;
-	HeadQuartersTableModelEdit model;
+	HeadquartersTableModelEdit model;
 	HeadquartersKeys selectedHqKeys;
 }

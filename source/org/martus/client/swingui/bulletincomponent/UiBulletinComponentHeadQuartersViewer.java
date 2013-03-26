@@ -26,7 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 
-import org.martus.client.swingui.HeadQuarterEntry;
+import org.martus.client.swingui.HeadquarterEntry;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.bulletin.Bulletin;
@@ -47,11 +47,11 @@ public class UiBulletinComponentHeadQuartersViewer extends UiBulletinComponentHe
 			return;
 		}
 		
-		tableModel = new HeadQuartersTableModelView(mainWindowToUse.getApp());
+		tableModel = new HeadquartersTableModelView(mainWindowToUse.getApp());
 		mainWindow.getApp().addHQLabelsWherePossible(authorizedToReadKeys);
 		for (int i = 0; i < authorizedToReadKeys.size(); ++i) 
 		{
-			tableModel.addNewHeadQuarterEntry(new HeadQuarterEntry(authorizedToReadKeys.get(i)));
+			tableModel.addNewHeadQuarterEntry(new HeadquarterEntry(authorizedToReadKeys.get(i)));
 		}
 		UiTable hqTable = createHeadquartersTable(tableModel);
 		hqTable.setEnabled(false);

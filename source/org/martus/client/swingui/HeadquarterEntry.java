@@ -29,9 +29,9 @@ package org.martus.client.swingui;
 import org.martus.common.HeadquartersKey;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
-public class HeadQuarterEntry 
+public class HeadquarterEntry 
 {
-	public HeadQuarterEntry(HeadquartersKey keyToUse)
+	public HeadquarterEntry(HeadquartersKey keyToUse)
 	{
 		key = keyToUse;
 	}
@@ -81,10 +81,10 @@ public class HeadQuarterEntry
 	
 	public boolean equals(Object rawOther)
 	{
-		if(! (rawOther instanceof HeadQuarterEntry))
+		if(! (rawOther instanceof HeadquarterEntry))
 			return false;
 		
-		HeadQuarterEntry other = (HeadQuarterEntry)rawOther;
+		HeadquarterEntry other = (HeadquarterEntry)rawOther;
 		return key.equals(other.key);
 	}
 	

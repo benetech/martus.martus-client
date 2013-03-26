@@ -26,7 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.HeadQuartersSelectionListener;
+import org.martus.client.swingui.HeadquartersSelectionListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.bulletin.Bulletin;
@@ -36,12 +36,12 @@ import org.martus.swing.UiTable;
 
 public class UiBulletinComponentHeadQuartersEditor extends UiBulletinComponentHeadQuartersSection
 {
-	public UiBulletinComponentHeadQuartersEditor(HeadQuartersSelectionListener hqSelectionListener, UiMainWindow mainWindowToUse, Bulletin bulletinToUse, String tagQualifierToUse)
+	public UiBulletinComponentHeadQuartersEditor(HeadquartersSelectionListener hqSelectionListener, UiMainWindow mainWindowToUse, Bulletin bulletinToUse, String tagQualifierToUse)
 	{
 		super(mainWindowToUse, bulletinToUse, tagQualifierToUse, mainWindowToUse.getEditingTextFieldColumns());
 
 		MartusApp app = mainWindow.getApp();
-		tableModel = new HeadQuartersTableModelEdit(app);
+		tableModel = new HeadquartersTableModelEdit(app);
 
 		HeadquartersKeys bulletinAuthorizedHeadquartersKeys = bulletinToUse.getAuthorizedToReadKeys();
 		app.addHQLabelsWherePossible(bulletinAuthorizedHeadquartersKeys);

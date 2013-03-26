@@ -26,7 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 
-import org.martus.client.swingui.HeadQuartersTableModel;
+import org.martus.client.swingui.HeadquartersTableModel;
 import org.martus.client.swingui.UiHeadquartersTable;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
@@ -52,7 +52,7 @@ abstract public class UiBulletinComponentHeadQuartersSection extends UiBulletinC
 		return getLocalization().getFieldLabel("BulletinHeadQuarters" + tag);
 	}
 	
-	protected UiTable createHeadquartersTable(HeadQuartersTableModel hqModel) 
+	protected UiTable createHeadquartersTable(HeadquartersTableModel hqModel) 
 	{
 		return new UiHeadquartersTable(hqModel);
 	}
@@ -60,6 +60,6 @@ abstract public class UiBulletinComponentHeadQuartersSection extends UiBulletinC
 	abstract public void copyDataToBulletin(Bulletin bulletinToCopyInto);
 
 	Bulletin bulletin;
-	HeadQuartersTableModel tableModel;
+	HeadquartersTableModel tableModel;
 
 }
