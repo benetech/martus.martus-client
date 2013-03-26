@@ -47,7 +47,9 @@ public class ActionMenuConfigureHQs extends UiMenuAction
 	{
 		if(!mainWindow.reSignIn())
 			return;
-		new UiConfigureHQs(mainWindow);
+		
+		UiConfigureHQs dialog = new UiConfigureHQs(mainWindow);
+		dialog.setVisible(true);
 	}
 	
 }
