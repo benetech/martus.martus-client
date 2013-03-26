@@ -88,7 +88,6 @@ import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
 import org.martus.client.swingui.dialogs.UiAboutDlg;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.dialogs.UiConfigServerDlg;
-import org.martus.client.swingui.dialogs.UiConfigureHQs;
 import org.martus.client.swingui.dialogs.UiContactInfoDlg;
 import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
 import org.martus.client.swingui.dialogs.UiExportBulletinsDlg;
@@ -2225,13 +2224,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void displayScrollableMessage(String titleTag, String message, String okButtonTag, Map tokenReplacement) 
 	{
 		new UiShowScrollableTextDlg(this, titleTag, okButtonTag, MtfAwareLocalization.UNUSED_TAG, MtfAwareLocalization.UNUSED_TAG, message, tokenReplacement, null);
-	}
-	
-	public void doConfigureHQs()
-	{
-		if(!reSignIn())
-			return;
-		new UiConfigureHQs(this);
 	}
 	
 	public void setAndSaveHQKeysInConfigInfo(HeadquartersKeys allHQKeys, HeadquartersKeys defaultHQKeys)
