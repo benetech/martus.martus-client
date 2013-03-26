@@ -100,21 +100,36 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 	{
 		return (HeadquartersKey) getRawEntry(row).getKey();
 	}
-	
-	public int getColumnCount()
+
+	public int getDefaultEnabledColumnIndex()
 	{
-		return columnCount;
+		return -1;
 	}
 	
+	public int getPublicCodeColumnIndex()
+	{
+		return -1;
+	}
+	
+	public int getLabelColumnIndex()
+	{
+		return -1;
+	}
+
+	public int getIsSelectedColumnIndex()
+	{
+		return -1;
+	}
+
 	public String getColumnName(int column)
 	{
-		if(column == COLUMN_DEFAULT)
+		if(column == getDefaultEnabledColumnIndex())
 			return getLocalization().getFieldLabel("ConfigureHeadQuartersDefault");
-		if(column == COLUMN_SELECTED)
+		if(column == getIsSelectedColumnIndex())
 			return getLocalization().getFieldLabel("HeadQuartersSelected");
-		if(column == COLUMN_PUBLIC_CODE)
+		if(column == getPublicCodeColumnIndex())
 			return getLocalization().getFieldLabel("ConfigureHQColumnHeaderPublicCode");
-		if(column == COLUMN_LABEL)
+		if(column == getLabelColumnIndex())
 			return getLocalization().getFieldLabel("BulletinHeadQuartersHQLabel");
 		return "";
 	}
@@ -122,11 +137,11 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 	public Object getValueAt(int row, int column)
 	{
 		SelectableExternalPublicKeyEntry entry = getRawEntry(row);
-		if(column == COLUMN_DEFAULT || column == COLUMN_SELECTED)
+		if(column == getDefaultEnabledColumnIndex() || column == getIsSelectedColumnIndex())
 			return new Boolean(entry.isSelected());
-		if(column == COLUMN_LABEL)
+		if(column == getLabelColumnIndex())
 			return getDisplayableLabel(entry);
-		if(column == COLUMN_PUBLIC_CODE)
+		if(column == getPublicCodeColumnIndex())
 			return entry.getPublicCode();
 		return "";
 	}
@@ -140,7 +155,7 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 	public void setValueAt(Object value, int row, int column)
 	{
 		SelectableExternalPublicKeyEntry entry = getRawEntry(row);
-		if(column == COLUMN_SELECTED || column == COLUMN_DEFAULT)
+		if(column == getIsSelectedColumnIndex() || column == getDefaultEnabledColumnIndex())
 		{
 			entry.setSelected(((Boolean)value).booleanValue());
 			if(selectionListener != null)
@@ -150,9 +165,9 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 	
 	public Class getColumnClass(int column)
 	{
-		if(column == COLUMN_SELECTED || column == COLUMN_DEFAULT)
+		if(column == getIsSelectedColumnIndex() || column == getDefaultEnabledColumnIndex())
 			return Boolean.class;
-		if(column == COLUMN_LABEL || column == COLUMN_PUBLIC_CODE)
+		if(column == getLabelColumnIndex() || column == getPublicCodeColumnIndex())
 			return String.class;
 		return null;
 	}
@@ -164,15 +179,10 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 	
 	public boolean isCellEditable(int row, int column)
 	{
-		if(column == COLUMN_SELECTED || column == COLUMN_DEFAULT)
+		if(column == getIsSelectedColumnIndex() || column == getDefaultEnabledColumnIndex())
 			return true;
 		return false;
 	}
 	
-	public int COLUMN_DEFAULT = -1;
-	public int COLUMN_SELECTED = -1;
-	public int COLUMN_PUBLIC_CODE = -1;
-	public int COLUMN_LABEL = -1;
-	public int columnCount;
 	HeadquartersSelectionListener selectionListener;
 }

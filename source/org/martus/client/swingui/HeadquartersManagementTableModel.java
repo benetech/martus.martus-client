@@ -31,9 +31,29 @@ public class HeadquartersManagementTableModel extends HeadquartersTableModel
 	public HeadquartersManagementTableModel(MartusApp app)
 	{
 		super(app);
-		COLUMN_DEFAULT = columnCount++;
-		COLUMN_PUBLIC_CODE = columnCount++;
-		COLUMN_LABEL = columnCount++;
+	}
+	
+	public int getColumnCount()
+	{
+		return 3;
+	}
+	
+	public int getDefaultEnabledColumnIndex()
+	{
+		return COLUMN_DEFAULT;
+	}
+	
+	public int getPublicCodeColumnIndex()
+	{
+		return COLUMN_PUBLIC_CODE;
+	}
+	
+	public int getLabelColumnIndex()
+	{
+		return COLUMN_LABEL;
 	}
 
+	public static final int COLUMN_DEFAULT = 0;
+	public static final int COLUMN_PUBLIC_CODE = 1;
+	public static final int COLUMN_LABEL = 2;
 }

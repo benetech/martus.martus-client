@@ -34,7 +34,18 @@ public class HeadquartersListTableModel extends HeadquartersTableModel
 	public HeadquartersListTableModel(MartusApp app)
 	{
 		super(app);
-		COLUMN_LABEL = columnCount++;
 	}
 
+	@Override
+	public int getLabelColumnIndex()
+	{
+		return COLUMN_LABEL;
+	}
+
+	public int getColumnCount()
+	{
+		return 1;
+	}
+	
+	public static final int COLUMN_LABEL = 0;
 }
