@@ -74,8 +74,8 @@ import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.FieldCollection;
 import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.FieldSpecCollection;
-import org.martus.common.HQKey;
-import org.martus.common.HQKeys;
+import org.martus.common.HeadquartersKey;
+import org.martus.common.HeadquartersKeys;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
@@ -272,17 +272,17 @@ public class MartusApp
 		return configInfo.getLegacyHQKey();
 	}
 	
-	public HQKeys getAllHQKeys() throws Exception
+	public HeadquartersKeys getAllHQKeys() throws Exception
 	{
-		return new HQKeys(configInfo.getAllHQKeysXml());
+		return new HeadquartersKeys(configInfo.getAllHQKeysXml());
 	}
 
-	public HQKeys getDefaultHQKeys() throws Exception
+	public HeadquartersKeys getDefaultHQKeys() throws Exception
 	{
-		return new HQKeys(configInfo.getDefaultHQKeysXml());
+		return new HeadquartersKeys(configInfo.getDefaultHQKeysXml());
 	}
 
-	public HQKeys getAllHQKeysWithFallback()
+	public HeadquartersKeys getAllHQKeysWithFallback()
 	{
 		try
 		{
@@ -291,12 +291,12 @@ public class MartusApp
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			HQKey legacyKey = new HQKey(getLegacyHQKey());
-			return new HQKeys(legacyKey);
+			HeadquartersKey legacyKey = new HeadquartersKey(getLegacyHQKey());
+			return new HeadquartersKeys(legacyKey);
 		}
 	}
 	
-	public HQKeys getDefaultHQKeysWithFallback()
+	public HeadquartersKeys getDefaultHQKeysWithFallback()
 	{
 		try
 		{
@@ -305,22 +305,22 @@ public class MartusApp
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			HQKey legacyKey = new HQKey(getLegacyHQKey());
-			return new HQKeys(legacyKey);
+			HeadquartersKey legacyKey = new HeadquartersKey(getLegacyHQKey());
+			return new HeadquartersKeys(legacyKey);
 		}
 	}
 
-	public void addHQLabelsWherePossible(HQKeys keys)
+	public void addHQLabelsWherePossible(HeadquartersKeys keys)
 	{
 		for(int i = 0; i < keys.size(); ++i)
 		{
-			HQKey key = keys.get(i);
+			HeadquartersKey key = keys.get(i);
 			key.setLabel(getHQLabelIfPresent(key));
 		}
 	}
 
 	
-	public String getHQLabelIfPresent(HQKey hqKey)
+	public String getHQLabelIfPresent(HeadquartersKey hqKey)
 	{
 		try
 		{
@@ -353,7 +353,7 @@ public class MartusApp
 		return configInfo;
 	}
 	
-	public void setAndSaveHQKeys(HQKeys allHQKeys, HQKeys defaultHQKeys) throws SaveConfigInfoException 
+	public void setAndSaveHQKeys(HeadquartersKeys allHQKeys, HeadquartersKeys defaultHQKeys) throws SaveConfigInfoException 
 	{
 		configInfo.setAllHQKeysXml(allHQKeys.toStringWithLabel());
 		configInfo.setDefaultHQKeysXml(defaultHQKeys.toStringWithLabel());
@@ -528,10 +528,10 @@ public class MartusApp
 		String legacyHQKey = configInfo.getLegacyHQKey();
 		if(legacyHQKey.length()>0)
 		{
-			HQKeys hqKeys = getAllHQKeys();
+			HeadquartersKeys hqKeys = getAllHQKeys();
 			if(!hqKeys.containsKey(legacyHQKey))
 			{
-				HQKey legacy = new HQKey(legacyHQKey);
+				HeadquartersKey legacy = new HeadquartersKey(legacyHQKey);
 				hqKeys.add(legacy);
 				try
 				{
@@ -990,7 +990,7 @@ public class MartusApp
 
 	public void setDefaultHQKeysInBulletin(Bulletin b)
 	{
-		HQKeys hqKeys = getDefaultHQKeysWithFallback();
+		HeadquartersKeys hqKeys = getDefaultHQKeysWithFallback();
 		b.setAuthorizedToReadKeys(hqKeys);
 	}
 

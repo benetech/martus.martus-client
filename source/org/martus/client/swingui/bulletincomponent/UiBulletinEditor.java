@@ -34,7 +34,7 @@ import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.swingui.HeadQuartersSelectionListener;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.HQKeys;
+import org.martus.common.HeadquartersKeys;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
@@ -132,8 +132,8 @@ public class UiBulletinEditor extends UiBulletinComponent implements HeadQuarter
 	
 	public boolean isHeadquartersAuthorizedModified(Bulletin original, Bulletin newBulletin)
 	{
-		HQKeys orignialHQs = original.getAuthorizedToReadKeys();
-		HQKeys newHQs = newBulletin.getAuthorizedToReadKeys();
+		HeadquartersKeys orignialHQs = original.getAuthorizedToReadKeys();
+		HeadquartersKeys newHQs = newBulletin.getAuthorizedToReadKeys();
 		if(!orignialHQs.toStringWithLabel().equals(newHQs.toStringWithLabel()))
 			return true;
 		return false;

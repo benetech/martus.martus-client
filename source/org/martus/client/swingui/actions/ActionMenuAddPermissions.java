@@ -34,7 +34,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WorkerProgressThread;
 import org.martus.client.swingui.dialogs.AddPermissionsDialog;
 import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
-import org.martus.common.HQKeys;
+import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusLogger;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.bulletin.Bulletin;
@@ -85,11 +85,11 @@ public class ActionMenuAddPermissions extends UiMenuAction
 			return;
 		}
 
-		HQKeys allHqKeys = mainWindow.getApp().getAllHQKeys();
+		HeadquartersKeys allHqKeys = mainWindow.getApp().getAllHQKeys();
 		AddPermissionsDialog dlg = new AddPermissionsDialog(mainWindow, selectedBulletins, ourBulletins, allHqKeys);
 		dlg.setVisible(true);
 		
-		HQKeys selectedHqKeys = dlg.getSelectedHqKeys();
+		HeadquartersKeys selectedHqKeys = dlg.getSelectedHqKeys();
 		if(selectedHqKeys == null)
 			return;
 		
@@ -103,7 +103,7 @@ public class ActionMenuAddPermissions extends UiMenuAction
 	
 	static class KeyAdderThread extends WorkerProgressThread
 	{
-		public KeyAdderThread(UiMainWindow mainWindowToUse, Vector bulletinsToModify, HQKeys keysToAdd)
+		public KeyAdderThread(UiMainWindow mainWindowToUse, Vector bulletinsToModify, HeadquartersKeys keysToAdd)
 		{
 			mainWindow = mainWindowToUse;
 			bulletins = bulletinsToModify;
@@ -142,7 +142,7 @@ public class ActionMenuAddPermissions extends UiMenuAction
 
 		UiMainWindow mainWindow;
 		Vector bulletins;
-		HQKeys hqKeys;
+		HeadquartersKeys hqKeys;
 	}
 
 	// TODO: This method is duplicated in ActionMenuSealSelectedBulletins

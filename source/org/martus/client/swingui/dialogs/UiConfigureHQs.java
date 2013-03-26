@@ -47,8 +47,8 @@ import org.martus.client.swingui.HeadQuartersTableModel;
 import org.martus.client.swingui.HeadQuartersTableModelConfiguration;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
-import org.martus.common.HQKey;
-import org.martus.common.HQKeys;
+import org.martus.common.HeadquartersKey;
+import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiButton;
@@ -97,7 +97,7 @@ public class UiConfigureHQs extends JDialog
 		
 		try
 		{
-			HQKeys local = mainWindow.getApp().getAllHQKeys();
+			HeadquartersKeys local = mainWindow.getApp().getAllHQKeys();
 			for(int i = 0; i<local.size();++i)
 				addHQKeyToTable(local.get(i));
 		}
@@ -222,7 +222,7 @@ public class UiConfigureHQs extends JDialog
 		{
 			try
 			{
-				HQKey publicKey = getPublicKey();
+				HeadquartersKey publicKey = getPublicKey();
 				if(publicKey==null)
 					return;
 				addHQKeyToTable(publicKey);
@@ -255,7 +255,7 @@ public class UiConfigureHQs extends JDialog
 		}
 	}
 
-	void addHQKeyToTable(HQKey publicKey)
+	void addHQKeyToTable(HeadquartersKey publicKey)
 	{
 		try
 		{
@@ -269,7 +269,7 @@ public class UiConfigureHQs extends JDialog
 				}
 			}
 			HeadQuarterEntry entry = new HeadQuarterEntry(publicKey);
-			HQKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
+			HeadquartersKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
 			boolean isDefault = defaultHQKeys.containsKey(publicKey.getPublicKey());
 			entry.setSelected(isDefault);
 			model.addNewHeadQuarterEntry(entry);
@@ -286,7 +286,7 @@ public class UiConfigureHQs extends JDialog
 		mainWindow.setAndSaveHQKeysInConfigInfo(model.getAllKeys(), model.getAllSelectedHeadQuarterKeys());
 	}
 	
-	public HQKey getPublicKey() throws Exception
+	public HeadquartersKey getPublicKey() throws Exception
 	{
 		String windowTitle = localization.getWindowTitle("ImportHQPublicKey");
 		String buttonLabel = localization.getButtonLabel("inputImportPublicCodeok");
@@ -309,7 +309,7 @@ public class UiConfigureHQs extends JDialog
 		else
 			return null;
 		String label = getHQLabel(MartusCrypto.computeFormattedPublicCode(publicKeyString), "");
-		HQKey newKey = new HQKey(publicKeyString, label);
+		HeadquartersKey newKey = new HeadquartersKey(publicKeyString, label);
 		return newKey;
 	}
 
@@ -323,10 +323,10 @@ public class UiConfigureHQs extends JDialog
 
 	private String getUniqueLabel(String publicCode, String label) 
 	{
-		HQKeys hQKeys = model.getAllKeys();
+		HeadquartersKeys hQKeys = model.getAllKeys();
 		for(int i = 0; i < hQKeys.size(); ++i)
 		{
-			HQKey hqKey = hQKeys.get(i);
+			HeadquartersKey hqKey = hQKeys.get(i);
 			try 
 			{
 				if(hqKey.getPublicCode().equals(publicCode))

@@ -28,7 +28,7 @@ package org.martus.client.swingui.bulletincomponent;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.HeadQuartersSelectionListener;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.HQKeys;
+import org.martus.common.HeadquartersKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
@@ -43,12 +43,12 @@ public class UiBulletinComponentHeadQuartersEditor extends UiBulletinComponentHe
 		MartusApp app = mainWindow.getApp();
 		tableModel = new HeadQuartersTableModelEdit(app);
 
-		HQKeys bulletinAuthorizedHeadquartersKeys = bulletinToUse.getAuthorizedToReadKeys();
+		HeadquartersKeys bulletinAuthorizedHeadquartersKeys = bulletinToUse.getAuthorizedToReadKeys();
 		app.addHQLabelsWherePossible(bulletinAuthorizedHeadquartersKeys);
 		tableModel.addKeys(bulletinAuthorizedHeadquartersKeys);
 		tableModel.selectKeys(bulletinAuthorizedHeadquartersKeys);
 		
-		HQKeys appAvailableHeadquartersKeys = app.getAllHQKeysWithFallback();
+		HeadquartersKeys appAvailableHeadquartersKeys = app.getAllHQKeysWithFallback();
 		tableModel.addKeys(appAvailableHeadquartersKeys);
 
 		UiLabel hqLabel = new UiLabel(getLabel("Headquarters"));

@@ -31,8 +31,8 @@ import java.util.Vector;
 
 
 import org.martus.client.core.MartusApp;
-import org.martus.common.HQKey;
-import org.martus.common.HQKeys;
+import org.martus.common.HeadquartersKey;
+import org.martus.common.HeadquartersKeys;
 import org.martus.common.MiniLocalization;
 import org.martus.swing.UiTableModel;
 
@@ -57,18 +57,18 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 		fireTableRowsInserted(rowAdded, rowAdded);
 	}
 	
-	public void addKeys(HQKeys keys)
+	public void addKeys(HeadquartersKeys keys)
 	{
 		for(int j = 0; j < keys.size(); ++j)
 		{
-			HQKey hqKeyToCheck = keys.get(j);
+			HeadquartersKey hqKeyToCheck = keys.get(j);
 			HeadQuarterEntry headQuarterEntry = new HeadQuarterEntry(hqKeyToCheck);
 			if(!contains(headQuarterEntry))
 				addNewHeadQuarterEntry(headQuarterEntry);
 		}
 	}
 
-	public void selectKeys(HQKeys keys)
+	public void selectKeys(HeadquartersKeys keys)
 	{
 		for(int row = 0; row < getRowCount(); ++row)
 		{
@@ -94,9 +94,9 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 		return getAllSelectedHeadQuarterKeys().size();
 	}
 
-	public HQKeys getAllSelectedHeadQuarterKeys()
+	public HeadquartersKeys getAllSelectedHeadQuarterKeys()
 	{
-		HQKeys keys = new HQKeys();
+		HeadquartersKeys keys = new HeadquartersKeys();
 		for (Iterator iter = entries.iterator(); iter.hasNext();) 
 		{
 			HeadQuarterEntry hqEntry = (HeadQuarterEntry) iter.next();
@@ -106,9 +106,9 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 		return keys;
 	}
 	
-	public HQKeys getAllKeys()
+	public HeadquartersKeys getAllKeys()
 	{
-		HQKeys keys = new HQKeys();
+		HeadquartersKeys keys = new HeadquartersKeys();
 		for (Iterator iter = entries.iterator(); iter.hasNext();) 
 		{
 			keys.add(((HeadQuarterEntry) iter.next()).getKey());
@@ -116,7 +116,7 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 		return keys;
 	}
 	
-	public HQKey getHQKey(int row)
+	public HeadquartersKey getHQKey(int row)
 	{
 		return ((HeadQuarterEntry)entries.get(row)).getKey();
 	}

@@ -28,7 +28,7 @@ package org.martus.client.swingui.bulletincomponent;
 
 import org.martus.client.swingui.HeadQuarterEntry;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.HQKeys;
+import org.martus.common.HeadquartersKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
@@ -40,7 +40,7 @@ public class UiBulletinComponentHeadQuartersViewer extends UiBulletinComponentHe
 	{
 		super(mainWindowToUse, bulletinToUse, tagQualifierToUse, mainWindowToUse.getPreviewTextFieldColumns());
 		UiLabel hqLabel = new UiLabel(getLabel("Headquarters"));
-		HQKeys authorizedToReadKeys = bulletinToUse.getAuthorizedToReadKeys();
+		HeadquartersKeys authorizedToReadKeys = bulletinToUse.getAuthorizedToReadKeys();
 		if(authorizedToReadKeys.size() == 0)
 		{
 			addComponents(hqLabel, new UiLabel(getLocalization().getFieldLabel("NoHQsConfigured")));
