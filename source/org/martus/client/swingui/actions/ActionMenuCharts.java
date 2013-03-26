@@ -78,6 +78,7 @@ import org.martus.client.reports.MartusChartTheme;
 import org.martus.client.search.SaneCollator;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiChartPreviewDlg;
 import org.martus.common.MartusLogger;
@@ -97,6 +98,7 @@ public class ActionMenuCharts extends UiMenuAction
 	public ActionMenuCharts(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse, "Charts");
+		fontHelper = new UiFontEncodingHelper(mainWindowToUse.getUseZawgyi());
 	}
 
 	public void actionPerformed(ActionEvent events)
@@ -206,7 +208,7 @@ public class ActionMenuCharts extends UiMenuAction
 		String selectedFieldLabel = fieldToCount.getLabel();
 		if(selectedFieldLabel.equals(""))
 			selectedFieldLabel = getLocalization().getFieldLabel(fieldToCount.getTag());
-		
+
 		JFreeChart chart = createRawChart(answers, counts, selectedFieldLabel);
 		new MartusChartTheme().apply(chart);
 
@@ -420,6 +422,7 @@ public class ActionMenuCharts extends UiMenuAction
 	private DefaultCategoryDataset createBarChartDataset(HashMap<String, Integer> counts)
 	{
 		String seriesTitle = getLocalization().getFieldLabel("ChartSeriesTitle");
+		seriesTitle = fontHelper.getDisplayable(seriesTitle);
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		Vector<String> keys = new Vector<String>(counts.keySet());
 		Collections.sort(keys, new SaneCollator(getLocalization().getCurrentLanguageCode()));
@@ -428,6 +431,7 @@ public class ActionMenuCharts extends UiMenuAction
 			Integer count = counts.get(value);
 			if(value.length() == 0)
 				value = getLocalization().getFieldLabel("ChartItemLabelBlank");
+			value = fontHelper.getDisplayable(value);
 			dataset.addValue(count, seriesTitle, value);
 		}
 		return dataset;
@@ -563,4 +567,5 @@ public class ActionMenuCharts extends UiMenuAction
 //	}
 //
 	private final static String JPEG_EXTENSION = ".jpeg";
+	UiFontEncodingHelper fontHelper;
 }
