@@ -41,7 +41,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.HeadquarterEntry;
+import org.martus.client.swingui.SelectableHeadquartersEntry;
 import org.martus.client.swingui.HeadquartersTableModel;
 import org.martus.client.swingui.HeadquartersTableModelConfiguration;
 import org.martus.client.swingui.UiMainWindow;
@@ -275,7 +275,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 					return;
 				}
 			}
-			HeadquarterEntry entry = new HeadquarterEntry(publicKey);
+			SelectableHeadquartersEntry entry = new SelectableHeadquartersEntry(publicKey);
 			HeadquartersKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
 			boolean isDefault = defaultHQKeys.containsKey(publicKey.getPublicKey());
 			entry.setSelected(isDefault);
