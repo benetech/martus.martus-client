@@ -146,12 +146,6 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 		return "";
 	}
 	
-	public void setLabel(int row, String newLabel)
-	{
-		SelectableExternalPublicKeyEntry entry = getRawEntry(row);
-		entry.setLabel(newLabel);
-	}
-	
 	public void setValueAt(Object value, int row, int column)
 	{
 		SelectableExternalPublicKeyEntry entry = getRawEntry(row);

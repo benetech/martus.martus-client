@@ -52,18 +52,6 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	}
 
 	@Override
-	CancelHandler createCancelHandler()
-	{
-		return new CancelHandler();
-	}
-
-	@Override
-	SaveHandler createSaveHandler()
-	{
-		return new SaveHandler();
-	}
-
-	@Override
 	void addExistingKeysToTable()
 	{
 		try
@@ -82,12 +70,6 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	HeadquartersManagementTableModel createModel()
 	{
 		return new HeadquartersManagementTableModel(mainWindow.getApp());
-	}
-
-	@Override
-	RenameHandler createRenameHandler()
-	{
-		return new RenameHandler();
 	}
 
 	@Override
@@ -114,46 +96,6 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		return dialogText;
 	}
 	
-	
-	class CancelHandler implements ActionListener
-	{
-		public void actionPerformed(ActionEvent ae)
-		{
-			dispose();
-		}
-	}
-	
-	class SaveHandler implements ActionListener
-	{
-		public void actionPerformed(ActionEvent ae)
-		{
-			updateConfigInfo();
-			dispose();
-		}
-	}
-	
-	class RenameHandler implements ActionListener
-	{
-		public void actionPerformed(ActionEvent ae)
-		{
-			if(table.getSelectedRowCount()==0)
-			{
-				mainWindow.notifyDlg("NoHQsSelected");
-				return;
-			}
-			int rowCount = model.getRowCount();
-			for(int i = rowCount-1; i >=0 ; --i)
-			{
-				if(table.isRowSelected(i))
-				{
-					String newLabel = getHQLabel(model.getPublicCode(i), model.getLabel(i));
-					if(newLabel== null)
-						break;
-					getHeadquartersModel().setLabel(i, newLabel);
-				}
-			}
-		}
-	}
 	
 	class AddHandler implements ActionListener
 	{
@@ -252,7 +194,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		return newKey;
 	}
 
-	public String getHQLabel(String publicCode, String previousValue)
+	String getHQLabel(String publicCode, String previousValue)
 	{
 		String label = mainWindow.getStringInput("GetHQLabel", "", publicCode, previousValue);
 		if(label == null)
