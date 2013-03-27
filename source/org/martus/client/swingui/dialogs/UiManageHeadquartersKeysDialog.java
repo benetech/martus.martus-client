@@ -103,7 +103,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		{
 			try
 			{
-				HeadquartersKey publicKey = getPublicKey();
+				HeadquartersKey publicKey = importPublicKey();
 				if(publicKey==null)
 					return;
 				addHQKeyToTable(publicKey);
@@ -167,7 +167,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		mainWindow.setAndSaveHQKeysInConfigInfo(getHeadquartersModel().getAllKeys(), getHeadquartersModel().getAllSelectedHeadQuarterKeys());
 	}
 	
-	public HeadquartersKey getPublicKey() throws Exception
+	public HeadquartersKey importPublicKey() throws Exception
 	{
 		String windowTitle = localization.getWindowTitle("ImportHQPublicKey");
 		String buttonLabel = localization.getButtonLabel("inputImportPublicCodeok");
