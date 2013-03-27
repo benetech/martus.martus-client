@@ -25,9 +25,15 @@ Boston, MA 02111-1307, USA.
 
 */
 
-import javax.swing.JDialog;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
+import javax.swing.JDialog;
+import javax.swing.ListSelectionModel;
+
+import org.martus.client.swingui.HeadquartersTableModel;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.swing.UiTable;
 
 public class UiManageExternalPublicKeysDialog extends JDialog
 {
@@ -38,4 +44,47 @@ public class UiManageExternalPublicKeysDialog extends JDialog
 		setModal(true);
 	}
 
+	protected UiTable createHeadquartersTable(HeadquartersTableModel hqModel) 
+	{
+		UiTable hqTable = new UiTable(hqModel);
+		hqTable.setRenderers(hqModel);
+		hqTable.createDefaultColumnsFromModel();
+		hqTable.addKeyListener(new TableListener());
+		hqTable.setColumnSelectionAllowed(false);
+		hqTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		hqTable.setShowGrid(true);
+		hqTable.setMaxColumnWidthToHeaderWidth(0);
+		hqTable.resizeTable(DEFAULT_VIEABLE_ROWS);
+		
+		return hqTable;
+	}
+
+	
+	class TableListener implements KeyListener
+	{
+		public void keyPressed(KeyEvent e)
+		{
+			if(e.getKeyCode() ==  KeyEvent.VK_TAB && !e.isControlDown())
+			{
+				e.consume();
+				if(e.isShiftDown())
+					table.transferFocusBackward();
+				else 
+					table.transferFocus();
+			}
+		}
+
+		public void keyReleased(KeyEvent e)
+		{
+		}
+
+		public void keyTyped(KeyEvent e)
+		{
+		}
+	}
+
+	private static final int DEFAULT_VIEABLE_ROWS = 5;
+
+	UiMainWindow mainWindow;
+	UiTable table;
 }

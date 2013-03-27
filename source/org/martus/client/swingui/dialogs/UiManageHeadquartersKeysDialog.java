@@ -28,22 +28,18 @@ package org.martus.client.swingui.dialogs;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.SelectableHeadquartersEntry;
-import org.martus.client.swingui.HeadquartersTableModel;
 import org.martus.client.swingui.HeadquartersManagementTableModel;
+import org.martus.client.swingui.SelectableHeadquartersEntry;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.HeadquartersKey;
@@ -54,7 +50,6 @@ import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
-import org.martus.swing.UiTable;
 import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -143,45 +138,6 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 
 	}
 	
-	protected UiTable createHeadquartersTable(HeadquartersTableModel hqModel) 
-	{
-		UiTable hqTable = new UiTable(hqModel);
-		hqTable.setRenderers(hqModel);
-		hqTable.createDefaultColumnsFromModel();
-		hqTable.addKeyListener(new TableListener());
-		hqTable.setColumnSelectionAllowed(false);
-		hqTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		hqTable.setShowGrid(true);
-		hqTable.setMaxColumnWidthToHeaderWidth(0);
-		hqTable.resizeTable(DEFAULT_VIEABLE_ROWS);
-		
-		return hqTable;
-	}
-
-	
-	class TableListener implements KeyListener
-	{
-		public void keyPressed(KeyEvent e)
-		{
-			if(e.getKeyCode() ==  KeyEvent.VK_TAB && !e.isControlDown())
-			{
-				e.consume();
-				if(e.isShiftDown())
-					table.transferFocusBackward();
-				else 
-					table.transferFocus();
-			}
-		}
-
-		public void keyReleased(KeyEvent e)
-		{
-		}
-
-		public void keyTyped(KeyEvent e)
-		{
-		}
-	}
-
 	
 	class CancelHandler implements ActionListener
 	{
@@ -386,11 +342,8 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	}
 	
 
-	UiMainWindow mainWindow;
-	UiTable table;
 	HeadquartersManagementTableModel model;
 	JButton remove;
 	JButton renameLabel;
 	UiLocalization localization;
-	private static final int DEFAULT_VIEABLE_ROWS = 5;
 }
