@@ -29,6 +29,7 @@ import org.martus.client.core.SafeReadableBulletin;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
+import org.martus.swing.FontHandler;
 import org.martus.util.language.LanguageOptions;
 
 public class TabularReportBuilder extends ReportBuilder
@@ -54,7 +55,7 @@ public class TabularReportBuilder extends ReportBuilder
 
 	private String createStartSection()
 	{
-		StringBuffer startBuffer = new StringBuffer();
+		StringBuilder startBuffer = new StringBuilder();
 		startBuffer.append("<html>");
 		startBuffer.append("<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'>\n");
 		return startBuffer.toString();
@@ -62,8 +63,10 @@ public class TabularReportBuilder extends ReportBuilder
 
 	private String createHeaderSection(MiniFieldSpec[] specs)
 	{
-		StringBuffer headerBuffer = new StringBuffer();
-		headerBuffer.append("<table border='3' cellpadding='5' cellspacing='0'>\n");
+		StringBuilder headerBuffer = new StringBuilder();
+		headerBuffer.append("<table ");
+		addFontStyle(headerBuffer);
+		headerBuffer.append("border='3' cellpadding='5' cellspacing='0'>\n");
 		headerBuffer.append("<tr>\n");
 
 		int start = 0;
@@ -98,7 +101,7 @@ public class TabularReportBuilder extends ReportBuilder
 	
 	private String createDetailSection(MiniFieldSpec[] specs)
 	{
-		StringBuffer detailBuffer = new StringBuffer();
+		StringBuilder detailBuffer = new StringBuilder();
 		detailBuffer.append("<tr>\n");
 		int start = 0;
 		int end = specs.length;
@@ -125,7 +128,7 @@ public class TabularReportBuilder extends ReportBuilder
 		String[] tags = SafeReadableBulletin.parseNestedTags(spec.getTag());
 		String topLevelTag = tags[0];
 		
-		StringBuffer result = new StringBuffer();
+		StringBuilder result = new StringBuilder();
 		result.append("$bulletin.field(\"");
 		result.append(quotedEscape(topLevelTag));
 		result.append("\", \"");
@@ -147,16 +150,18 @@ public class TabularReportBuilder extends ReportBuilder
 	private String createBreakSection(MiniFieldSpec[] specs)
 	{
 		int columnCount = specs.length;
-		StringBuffer breakSection = new StringBuffer();
+		StringBuilder breakSection = new StringBuilder();
 		breakSection.append(getTableRowStart(columnCount));
 		String localizedLabel = "$BreakFields.get($BreakLevel).getLocalizedLabelHtml($localization): ";
 		String breakItem = "$BreakFields.get($BreakLevel).html($localization)";
 		String breakCount = " = $BreakCount";
 		if(LanguageOptions.isRightToLeftLanguage())
 		{
-			breakSection.append("<table border='0'><tr>");
-			breakSection.append("<td align='right'><em>"+breakCount+"</em></td>");
-			breakSection.append("<td align='right'><em>"+breakItem+"</em></td>");
+			breakSection.append("<table ");
+			addFontStyle(breakSection);
+			breakSection.append("border='0'><tr>");
+			breakSection.append("<td align='right'><em>").append(breakCount).append("</em></td>");
+			breakSection.append("<td align='right'><em>").append(breakItem).append("</em></td>");
 			breakSection.append("<td align='right'<em>");
 			breakSection.append(getIndent());
 			breakSection.append(localizedLabel);
@@ -193,7 +198,7 @@ public class TabularReportBuilder extends ReportBuilder
 	
 	private String createEndSection()
 	{
-		StringBuffer endBuffer = new StringBuffer();
+		StringBuilder endBuffer = new StringBuilder();
 		endBuffer.append("</table></html>\n");
 		return endBuffer.toString();
 	}
