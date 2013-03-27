@@ -111,7 +111,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 	abstract ExternalPublicKeysTableModel createModel();
 	abstract void addExistingKeysToTable();
 	abstract void updateConfigInfo();
-	abstract String getHQLabel(String publicCode, String previousValue);
+	abstract String askUserForNewLabel(String publicCode, String previousValue);
 
 	RenameHandler createRenameHandler()
 	{
@@ -213,7 +213,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 			{
 				if(table.isRowSelected(i))
 				{
-					String newLabel = getHQLabel(model.getPublicCode(i), model.getLabel(i));
+					String newLabel = askUserForNewLabel(model.getPublicCode(i), model.getLabel(i));
 					if(newLabel== null)
 						break;
 					getModel().setLabel(i, newLabel);
