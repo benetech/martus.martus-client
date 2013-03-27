@@ -52,7 +52,7 @@ import org.martus.swing.Utilities;
 
 abstract public class UiManageExternalPublicKeysDialog extends JDialog
 {
-	public UiManageExternalPublicKeysDialog(UiMainWindow owner, String title)
+	public UiManageExternalPublicKeysDialog(UiMainWindow owner, String title) throws Exception
 	{
 		super(owner);
 		setTitle(title);
@@ -109,7 +109,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 	abstract ActionListener createRemoveHandler();
 	abstract String[] getDialogText();
 	abstract ExternalPublicKeysTableModel createModel();
-	abstract void addExistingKeysToTable();
+	abstract void addExistingKeysToTable() throws Exception;
 	abstract void updateConfigInfo();
 	abstract String askUserForNewLabel(String publicCode, String previousValue);
 
