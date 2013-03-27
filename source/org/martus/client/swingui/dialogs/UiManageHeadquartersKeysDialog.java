@@ -189,12 +189,12 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		}
 		else
 			return null;
-		String label = getHQLabel(MartusCrypto.computeFormattedPublicCode(publicKeyString), "");
+		String label = askUserForNewLabel(MartusCrypto.computeFormattedPublicCode(publicKeyString), "");
 		HeadquartersKey newKey = new HeadquartersKey(publicKeyString, label);
 		return newKey;
 	}
 
-	String getHQLabel(String publicCode, String previousValue)
+	String askUserForNewLabel(String publicCode, String previousValue)
 	{
 		String label = mainWindow.getStringInput("GetHQLabel", "", publicCode, previousValue);
 		if(label == null)
