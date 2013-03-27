@@ -87,6 +87,7 @@ import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.packet.UniversalId;
+import org.martus.swing.FontHandler;
 import org.martus.swing.PrintUtilities;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.Utilities;
@@ -211,8 +212,8 @@ public class ActionMenuCharts extends UiMenuAction
 
 		JFreeChart chart = createRawChart(answers, counts, selectedFieldLabel);
 		new MartusChartTheme().apply(chart);
-
-		TextTitle subtitle = new TextTitle(answers.getSubtitle());
+		TextTitle subtitle = new TextTitle(fontHelper.getDisplayable(answers.getSubtitle()));
+		subtitle.setFont(FontHandler.getDefaultFont());
 		chart.addSubtitle(subtitle);
 		chart.addSubtitle(createLegend(chart));
 		
