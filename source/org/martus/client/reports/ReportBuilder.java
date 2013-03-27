@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.reports;
 
 import org.martus.common.MiniLocalization;
+import org.martus.swing.FontHandler;
 import org.martus.util.language.LanguageOptions;
 
 public class ReportBuilder
@@ -106,6 +107,12 @@ public class ReportBuilder
 		String item2 = sumaryId + value + " = ";
 		String item3 = sumaryId + count;
 		return item1+item2+item3;
+	}
+
+	public static void addFontStyle(StringBuilder html)
+	{
+		if (FontHandler.getUseZawgyi())
+			html.append("style=\"font-family: Zawgyi-One, Sans-Serif; \" ");
 	}
 
 	protected static final String INDENT = "&nbsp;&nbsp;&nbsp;&nbsp;";
