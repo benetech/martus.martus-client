@@ -33,6 +33,7 @@ import javax.swing.ListSelectionModel;
 
 import org.martus.client.swingui.HeadquartersTableModel;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiTable;
 
 public class UiManageExternalPublicKeysDialog extends JDialog
@@ -42,6 +43,9 @@ public class UiManageExternalPublicKeysDialog extends JDialog
 		super(owner);
 		setTitle(title);
 		setModal(true);
+
+		mainWindow = owner;
+		localization = mainWindow.getLocalization();
 	}
 
 	protected UiTable createHeadquartersTable(HeadquartersTableModel hqModel) 
@@ -87,4 +91,5 @@ public class UiManageExternalPublicKeysDialog extends JDialog
 
 	UiMainWindow mainWindow;
 	UiTable table;
+	UiLocalization localization;
 }

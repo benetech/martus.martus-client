@@ -41,7 +41,6 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.HeadquartersManagementTableModel;
 import org.martus.client.swingui.SelectableHeadquartersEntry;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.clientside.UiLocalization;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusLogger;
@@ -61,15 +60,13 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	public UiManageHeadquartersKeysDialog(UiMainWindow owner)
 	{
 		super(owner, owner.getLocalization().getWindowTitle("ConfigureHQs"));
-		mainWindow = owner;
-		localization = mainWindow.getLocalization();
 		
 		JButton add = new UiButton(localization.getButtonLabel("ConfigureHQsAdd"));
-		add.addActionListener(new AddHandler());
+		add.addActionListener(createAddHandler());
 		remove = new UiButton(localization.getButtonLabel("ConfigureHQsRemove"));
-		remove.addActionListener(new RemoveHandler());
+		remove.addActionListener(createRemoveHandler());
 		renameLabel = new UiButton(localization.getButtonLabel("ConfigureHQsReLabel"));
-		renameLabel.addActionListener(new RenameHandler());
+		renameLabel.addActionListener(createRenameHandler());
 
 		String[] dialogText = getDialogText();
 		UiVBox vBox = new UiVBox();
@@ -84,9 +81,42 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(vBox);
 		
-		model = new HeadquartersManagementTableModel(mainWindow.getApp());
+		model = createModel();
 		table = createHeadquartersTable(model);
 		
+		addExistingKeysToTable();
+		enableDisableButtons();
+		
+		UiScrollPane scroller = new UiScrollPane(table);
+		panel.add(scroller);
+		panel.add(new UiLabel(" "));
+		
+		Box hBox = Box.createHorizontalBox();
+		JButton save = new UiButton(localization.getButtonLabel("save"));
+		save.addActionListener(createSaveHandler());
+		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
+		cancel.addActionListener(createCancelHandler());
+		Utilities.addComponentsRespectingOrientation(hBox, new Component[]{add,remove,renameLabel,Box.createHorizontalGlue(),save,cancel});
+		panel.add(hBox);
+		
+		getContentPane().add(panel);
+		getRootPane().setDefaultButton(cancel);
+		Utilities.centerDlg(this);
+		setResizable(true);
+	}
+
+	private CancelHandler createCancelHandler()
+	{
+		return new CancelHandler();
+	}
+
+	private SaveHandler createSaveHandler()
+	{
+		return new SaveHandler();
+	}
+
+	private void addExistingKeysToTable()
+	{
 		try
 		{
 			HeadquartersKeys local = mainWindow.getApp().getAllHQKeys();
@@ -97,24 +127,26 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		{
 			MartusLogger.logException(e);
 		}
-		enableDisableButtons();
-		
-		UiScrollPane scroller = new UiScrollPane(table);
-		panel.add(scroller);
-		panel.add(new UiLabel(" "));
-		
-		Box hBox = Box.createHorizontalBox();
-		JButton save = new UiButton(localization.getButtonLabel("save"));
-		save.addActionListener(new SaveHandler());
-		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
-		cancel.addActionListener(new CancelHandler());
-		Utilities.addComponentsRespectingOrientation(hBox, new Component[]{add,remove,renameLabel,Box.createHorizontalGlue(),save,cancel});
-		panel.add(hBox);
-		
-		getContentPane().add(panel);
-		getRootPane().setDefaultButton(cancel);
-		Utilities.centerDlg(this);
-		setResizable(true);
+	}
+
+	private HeadquartersManagementTableModel createModel()
+	{
+		return new HeadquartersManagementTableModel(mainWindow.getApp());
+	}
+
+	private RenameHandler createRenameHandler()
+	{
+		return new RenameHandler();
+	}
+
+	private RemoveHandler createRemoveHandler()
+	{
+		return new RemoveHandler();
+	}
+
+	private AddHandler createAddHandler()
+	{
+		return new AddHandler();
 	}
 
 	private String[] getDialogText()
@@ -345,5 +377,4 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	HeadquartersManagementTableModel model;
 	JButton remove;
 	JButton renameLabel;
-	UiLocalization localization;
 }
