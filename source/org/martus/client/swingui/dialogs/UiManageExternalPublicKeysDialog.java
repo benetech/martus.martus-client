@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 */
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -106,12 +107,26 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 
 	abstract ActionListener createAddHandler();
 	abstract ActionListener createRemoveHandler();
-	abstract ActionListener createRenameHandler();
 	abstract String[] getDialogText();
 	abstract ExternalPublicKeysTableModel createModel();
 	abstract void addExistingKeysToTable();
-	abstract ActionListener createSaveHandler();
-	abstract ActionListener createCancelHandler();
+	abstract void updateConfigInfo();
+	abstract String getHQLabel(String publicCode, String previousValue);
+
+	RenameHandler createRenameHandler()
+	{
+		return new RenameHandler();
+	}
+
+	SaveHandler createSaveHandler()
+	{
+		return new SaveHandler();
+	}
+
+	CancelHandler createCancelHandler()
+	{
+		return new CancelHandler();
+	}
 
 	protected UiTable createTable(ExternalPublicKeysTableModel hqModel) 
 	{
@@ -167,6 +182,46 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 		}
 	}
 
+	class CancelHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
+		{
+			dispose();
+		}
+	}
+	
+	class SaveHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
+		{
+			updateConfigInfo();
+			dispose();
+		}
+	}
+	
+	class RenameHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
+		{
+			if(table.getSelectedRowCount()==0)
+			{
+				mainWindow.notifyDlg("NoHQsSelected");
+				return;
+			}
+			int rowCount = model.getRowCount();
+			for(int i = rowCount-1; i >=0 ; --i)
+			{
+				if(table.isRowSelected(i))
+				{
+					String newLabel = getHQLabel(model.getPublicCode(i), model.getLabel(i));
+					if(newLabel== null)
+						break;
+					getModel().setLabel(i, newLabel);
+				}
+			}
+		}
+	}
+	
 	private static final int DEFAULT_VIEABLE_ROWS = 5;
 
 	UiMainWindow mainWindow;
