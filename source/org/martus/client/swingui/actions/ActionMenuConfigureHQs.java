@@ -30,6 +30,7 @@ import java.awt.event.ActionEvent;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiManageHeadquartersKeysDialog;
+import org.martus.common.MartusLogger;
 
 public class ActionMenuConfigureHQs extends UiMenuAction
 {
@@ -48,8 +49,16 @@ public class ActionMenuConfigureHQs extends UiMenuAction
 		if(!mainWindow.reSignIn())
 			return;
 		
-		UiManageHeadquartersKeysDialog dialog = new UiManageHeadquartersKeysDialog(mainWindow);
-		dialog.setVisible(true);
+		try
+		{
+			UiManageHeadquartersKeysDialog dialog = new UiManageHeadquartersKeysDialog(mainWindow);
+			dialog.setVisible(true);
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			mainWindow.unexpectedErrorDlg();
+		}
 	}
 	
 }

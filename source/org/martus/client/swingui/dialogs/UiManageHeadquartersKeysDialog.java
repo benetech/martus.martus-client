@@ -37,7 +37,6 @@ import org.martus.client.swingui.SelectableHeadquartersEntry;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
-import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiFileChooser;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
@@ -45,25 +44,18 @@ import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDialog
 {
-	public UiManageHeadquartersKeysDialog(UiMainWindow owner)
+	public UiManageHeadquartersKeysDialog(UiMainWindow owner) throws Exception
 	{
 		super(owner, owner.getLocalization().getWindowTitle("ConfigureHQs"));
 		
 	}
 
 	@Override
-	void addExistingKeysToTable()
+	void addExistingKeysToTable() throws Exception
 	{
-		try
-		{
-			HeadquartersKeys local = mainWindow.getApp().getAllHQKeys();
-			for(int i = 0; i<local.size();++i)
-				addHQKeyToTable(local.get(i));
-		}
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-		}
+		HeadquartersKeys local = mainWindow.getApp().getAllHQKeys();
+		for(int i = 0; i<local.size();++i)
+			addHQKeyToTable(local.get(i));
 	}
 
 	@Override
