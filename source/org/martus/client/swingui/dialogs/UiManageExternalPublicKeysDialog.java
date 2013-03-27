@@ -25,18 +25,31 @@ Boston, MA 02111-1307, USA.
 
 */
 
+import java.awt.Component;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
 
-import org.martus.client.swingui.HeadquartersTableModel;
+import org.martus.client.swingui.ExternalPublicKeysTableModel;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
+import org.martus.swing.UiButton;
+import org.martus.swing.UiLabel;
+import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
+import org.martus.swing.UiVBox;
+import org.martus.swing.UiWrappedTextArea;
+import org.martus.swing.Utilities;
 
-public class UiManageExternalPublicKeysDialog extends JDialog
+abstract public class UiManageExternalPublicKeysDialog extends JDialog
 {
 	public UiManageExternalPublicKeysDialog(UiMainWindow owner, String title)
 	{
@@ -46,9 +59,61 @@ public class UiManageExternalPublicKeysDialog extends JDialog
 
 		mainWindow = owner;
 		localization = mainWindow.getLocalization();
+
+		JButton add = new UiButton(localization.getButtonLabel("ConfigureHQsAdd"));
+		add.addActionListener(createAddHandler());
+		remove = new UiButton(localization.getButtonLabel("ConfigureHQsRemove"));
+		remove.addActionListener(createRemoveHandler());
+		renameLabel = new UiButton(localization.getButtonLabel("ConfigureHQsReLabel"));
+		renameLabel.addActionListener(createRenameHandler());
+
+		String[] dialogText = getDialogText();
+		UiVBox vBox = new UiVBox();
+		for (String text : dialogText)
+		{
+			vBox.addCentered(new UiWrappedTextArea(text));
+			vBox.addSpace();
+		}
+
+		JPanel panel = new JPanel();
+		panel.setBorder(new EmptyBorder(10,10,10,10));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(vBox);
+		
+		model = createModel();
+		table = createTable(model);
+		
+		addExistingKeysToTable();
+		enableDisableButtons();
+		
+		UiScrollPane scroller = new UiScrollPane(table);
+		panel.add(scroller);
+		panel.add(new UiLabel(" "));
+		
+		Box hBox = Box.createHorizontalBox();
+		JButton save = new UiButton(localization.getButtonLabel("save"));
+		save.addActionListener(createSaveHandler());
+		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
+		cancel.addActionListener(createCancelHandler());
+		Utilities.addComponentsRespectingOrientation(hBox, new Component[]{add,remove,renameLabel,Box.createHorizontalGlue(),save,cancel});
+		panel.add(hBox);
+		
+		getContentPane().add(panel);
+		getRootPane().setDefaultButton(cancel);
+		Utilities.centerDlg(this);
+		setResizable(true);
 	}
 
-	protected UiTable createHeadquartersTable(HeadquartersTableModel hqModel) 
+	abstract ActionListener createAddHandler();
+	abstract ActionListener createRemoveHandler();
+	abstract ActionListener createRenameHandler();
+	abstract String[] getDialogText();
+	abstract ExternalPublicKeysTableModel createModel();
+	abstract void addExistingKeysToTable();
+	abstract ActionListener createSaveHandler();
+	abstract ActionListener createCancelHandler();
+
+	protected UiTable createTable(ExternalPublicKeysTableModel hqModel) 
 	{
 		UiTable hqTable = new UiTable(hqModel);
 		hqTable.setRenderers(hqModel);
@@ -62,7 +127,22 @@ public class UiManageExternalPublicKeysDialog extends JDialog
 		
 		return hqTable;
 	}
+	
+	ExternalPublicKeysTableModel getModel()
+	{
+		return model;
+	}
 
+	void enableDisableButtons()
+	{
+		boolean enableButtons = false;
+		if(table.getRowCount()>0)
+			enableButtons = true;
+		remove.setEnabled(enableButtons);
+		renameLabel.setEnabled(enableButtons);
+
+	}
+	
 	
 	class TableListener implements KeyListener
 	{
@@ -92,4 +172,8 @@ public class UiManageExternalPublicKeysDialog extends JDialog
 	UiMainWindow mainWindow;
 	UiTable table;
 	UiLocalization localization;
+
+	ExternalPublicKeysTableModel model;
+	JButton remove;
+	JButton renameLabel;
 }
