@@ -55,8 +55,6 @@ public class FieldChoicesByLabel
 	
 	public void add(ChoiceItem itemToAdd)
 	{
-		String label = itemToAdd.getLabel();
-		itemToAdd.setLabel(fontHelper.getDisplayable(label));
 		allChoices.add(itemToAdd);
 	}
 	
@@ -67,6 +65,7 @@ public class FieldChoicesByLabel
 		{
 			ChoiceItem choice = (ChoiceItem)iter.next();
 			String label = choice.getLabel();
+			label = fontHelper.getDisplayable(label);
 			choice.setLabel(label);
 			add(choice);
 		}
