@@ -43,6 +43,7 @@ import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.swing.FontHandler;
 
 public class FieldChoicesByLabel
@@ -65,7 +66,9 @@ public class FieldChoicesByLabel
 		{
 			ChoiceItem choice = (ChoiceItem)iter.next();
 			String label = choice.getLabel();
-			label = fontHelper.getDisplayable(label);
+			boolean custom = StandardFieldSpecs.isCustomFieldTag(choice.getSpec().getTag());
+			if (custom)
+				label = fontHelper.getDisplayable(label);
 			choice.setLabel(label);
 			add(choice);
 		}

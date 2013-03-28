@@ -29,7 +29,6 @@ import org.martus.client.core.SafeReadableBulletin;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
-import org.martus.swing.FontHandler;
 import org.martus.util.language.LanguageOptions;
 
 public class TabularReportBuilder extends ReportBuilder
@@ -82,7 +81,9 @@ public class TabularReportBuilder extends ReportBuilder
 		{
 			headerBuffer.append("<th>");
 			MiniFieldSpec spec = specs[i];
-			String label = StandardFieldSpecs.getLocalizedLabelHtml(spec.getTag(), spec.getLabel(), localization);
+			String specLabel = spec.getLabel();
+			String label = StandardFieldSpecs.getLocalizedLabelHtml(spec.getTag(), specLabel, localization);
+			label = fontHelper.getStorable(label);
 			headerBuffer.append(bodyEscape(label));
 			headerBuffer.append("</th>");
 		}
