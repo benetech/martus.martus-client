@@ -419,10 +419,13 @@ public class ActionMenuReports extends ActionPrint
 			}
 			MiniFieldSpec[] specs = new MiniFieldSpec[selectedSpecs.length];
 			for(int i = 0; i < specs.length; ++i)
+			{
+				selectedSpecs[i].setLabel(fontHelper.getStorable(selectedSpecs[i].getLabel()));
 				specs[i] = new MiniFieldSpec(selectedSpecs[i]);
+			}
 			return specs;
 		}
 	}
-	
+
 }
 
