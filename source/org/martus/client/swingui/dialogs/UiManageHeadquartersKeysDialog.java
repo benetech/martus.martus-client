@@ -25,104 +25,59 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.ListSelectionModel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.SelectableHeadquartersEntry;
-import org.martus.client.swingui.HeadquartersTableModel;
 import org.martus.client.swingui.HeadquartersManagementTableModel;
+import org.martus.client.swingui.SelectableHeadquartersEntry;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.clientside.UiLocalization;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
-import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
-import org.martus.swing.UiLabel;
-import org.martus.swing.UiScrollPane;
-import org.martus.swing.UiTable;
-import org.martus.swing.UiVBox;
-import org.martus.swing.UiWrappedTextArea;
-import org.martus.swing.Utilities;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 
 public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDialog
 {
-	public UiManageHeadquartersKeysDialog(UiMainWindow owner)
+	public UiManageHeadquartersKeysDialog(UiMainWindow owner) throws Exception
 	{
 		super(owner, owner.getLocalization().getWindowTitle("ConfigureHQs"));
-		mainWindow = owner;
-		localization = mainWindow.getLocalization();
 		
-		JButton add = new UiButton(localization.getButtonLabel("ConfigureHQsAdd"));
-		add.addActionListener(new AddHandler());
-		remove = new UiButton(localization.getButtonLabel("ConfigureHQsRemove"));
-		remove.addActionListener(new RemoveHandler());
-		renameLabel = new UiButton(localization.getButtonLabel("ConfigureHQsReLabel"));
-		renameLabel.addActionListener(new RenameHandler());
-
-		String[] dialogText = getDialogText();
-		UiVBox vBox = new UiVBox();
-		for (String text : dialogText)
-		{
-			vBox.addCentered(new UiWrappedTextArea(text));
-			vBox.addSpace();
-		}
-
-		JPanel panel = new JPanel();
-		panel.setBorder(new EmptyBorder(10,10,10,10));
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.add(vBox);
-		
-		model = new HeadquartersManagementTableModel(mainWindow.getApp());
-		table = createHeadquartersTable(model);
-		
-		try
-		{
-			HeadquartersKeys local = mainWindow.getApp().getAllHQKeys();
-			for(int i = 0; i<local.size();++i)
-				addHQKeyToTable(local.get(i));
-		}
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-		}
-		enableDisableButtons();
-		
-		UiScrollPane scroller = new UiScrollPane(table);
-		panel.add(scroller);
-		panel.add(new UiLabel(" "));
-		
-		Box hBox = Box.createHorizontalBox();
-		JButton save = new UiButton(localization.getButtonLabel("save"));
-		save.addActionListener(new SaveHandler());
-		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
-		cancel.addActionListener(new CancelHandler());
-		Utilities.addComponentsRespectingOrientation(hBox, new Component[]{add,remove,renameLabel,Box.createHorizontalGlue(),save,cancel});
-		panel.add(hBox);
-		
-		getContentPane().add(panel);
-		getRootPane().setDefaultButton(cancel);
-		Utilities.centerDlg(this);
-		setResizable(true);
 	}
 
-	private String[] getDialogText()
+	@Override
+	void addExistingKeysToTable() throws Exception
+	{
+		HeadquartersKeys local = mainWindow.getApp().getAllHQKeys();
+		for(int i = 0; i<local.size();++i)
+			addHQKeyToTable(local.get(i));
+	}
+
+	@Override
+	HeadquartersManagementTableModel createModel()
+	{
+		return new HeadquartersManagementTableModel(mainWindow.getApp());
+	}
+
+	@Override
+	RemoveHandler createRemoveHandler()
+	{
+		return new RemoveHandler();
+	}
+
+	@Override
+	AddHandler createAddHandler()
+	{
+		return new AddHandler();
+	}
+
+	@Override
+	String[] getDialogText()
 	{
 		String[] dialogText = new String[]
 		{
@@ -133,95 +88,6 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		return dialogText;
 	}
 	
-	void enableDisableButtons()
-	{
-		boolean enableButtons = false;
-		if(table.getRowCount()>0)
-			enableButtons = true;
-		remove.setEnabled(enableButtons);
-		renameLabel.setEnabled(enableButtons);
-
-	}
-	
-	protected UiTable createHeadquartersTable(HeadquartersTableModel hqModel) 
-	{
-		UiTable hqTable = new UiTable(hqModel);
-		hqTable.setRenderers(hqModel);
-		hqTable.createDefaultColumnsFromModel();
-		hqTable.addKeyListener(new TableListener());
-		hqTable.setColumnSelectionAllowed(false);
-		hqTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		hqTable.setShowGrid(true);
-		hqTable.setMaxColumnWidthToHeaderWidth(0);
-		hqTable.resizeTable(DEFAULT_VIEABLE_ROWS);
-		
-		return hqTable;
-	}
-
-	
-	class TableListener implements KeyListener
-	{
-		public void keyPressed(KeyEvent e)
-		{
-			if(e.getKeyCode() ==  KeyEvent.VK_TAB && !e.isControlDown())
-			{
-				e.consume();
-				if(e.isShiftDown())
-					table.transferFocusBackward();
-				else 
-					table.transferFocus();
-			}
-		}
-
-		public void keyReleased(KeyEvent e)
-		{
-		}
-
-		public void keyTyped(KeyEvent e)
-		{
-		}
-	}
-
-	
-	class CancelHandler implements ActionListener
-	{
-		public void actionPerformed(ActionEvent ae)
-		{
-			dispose();
-		}
-	}
-	
-	class SaveHandler implements ActionListener
-	{
-		public void actionPerformed(ActionEvent ae)
-		{
-			updateConfigInfo();
-			dispose();
-		}
-	}
-	
-	class RenameHandler implements ActionListener
-	{
-		public void actionPerformed(ActionEvent ae)
-		{
-			if(table.getSelectedRowCount()==0)
-			{
-				mainWindow.notifyDlg("NoHQsSelected");
-				return;
-			}
-			int rowCount = model.getRowCount();
-			for(int i = rowCount-1; i >=0 ; --i)
-			{
-				if(table.isRowSelected(i))
-				{
-					String newLabel = getHQLabel(model.getPublicCode(i), model.getLabel(i));
-					if(newLabel== null)
-						break;
-					model.setLabel(i, newLabel);
-				}
-			}
-		}
-	}
 	
 	class AddHandler implements ActionListener
 	{
@@ -229,7 +95,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		{
 			try
 			{
-				HeadquartersKey publicKey = getPublicKey();
+				HeadquartersKey publicKey = importPublicKey();
 				if(publicKey==null)
 					return;
 				addHQKeyToTable(publicKey);
@@ -279,7 +145,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 			HeadquartersKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
 			boolean isDefault = defaultHQKeys.containsKey(publicKey.getPublicKey());
 			entry.setSelected(isDefault);
-			model.addNewHeadQuarterEntry(entry);
+			getHeadquartersModel().addNewHeadQuarterEntry(entry);
 		}
 		catch (InvalidBase64Exception e)
 		{
@@ -290,10 +156,10 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	void updateConfigInfo()
 	{
 		enableDisableButtons();
-		mainWindow.setAndSaveHQKeysInConfigInfo(model.getAllKeys(), model.getAllSelectedHeadQuarterKeys());
+		mainWindow.setAndSaveHQKeysInConfigInfo(getHeadquartersModel().getAllKeys(), getHeadquartersModel().getAllSelectedHeadQuarterKeys());
 	}
 	
-	public HeadquartersKey getPublicKey() throws Exception
+	public HeadquartersKey importPublicKey() throws Exception
 	{
 		String windowTitle = localization.getWindowTitle("ImportHQPublicKey");
 		String buttonLabel = localization.getButtonLabel("inputImportPublicCodeok");
@@ -315,12 +181,12 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		}
 		else
 			return null;
-		String label = getHQLabel(MartusCrypto.computeFormattedPublicCode(publicKeyString), "");
+		String label = askUserForNewLabel(MartusCrypto.computeFormattedPublicCode(publicKeyString), "");
 		HeadquartersKey newKey = new HeadquartersKey(publicKeyString, label);
 		return newKey;
 	}
 
-	public String getHQLabel(String publicCode, String previousValue)
+	String askUserForNewLabel(String publicCode, String previousValue)
 	{
 		String label = mainWindow.getStringInput("GetHQLabel", "", publicCode, previousValue);
 		if(label == null)
@@ -330,7 +196,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 
 	private String getUniqueLabel(String publicCode, String label) 
 	{
-		HeadquartersKeys hQKeys = model.getAllKeys();
+		HeadquartersKeys hQKeys = getHeadquartersModel().getAllKeys();
 		for(int i = 0; i < hQKeys.size(); ++i)
 		{
 			HeadquartersKey hqKey = hQKeys.get(i);
@@ -384,13 +250,9 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 			mainWindow.notifyDlg(errorBaseTag);
 		}
 	}
-	
 
-	UiMainWindow mainWindow;
-	UiTable table;
-	HeadquartersManagementTableModel model;
-	JButton remove;
-	JButton renameLabel;
-	UiLocalization localization;
-	private static final int DEFAULT_VIEABLE_ROWS = 5;
+	HeadquartersManagementTableModel getHeadquartersModel()
+	{
+		return (HeadquartersManagementTableModel) getModel();
+	}
 }
