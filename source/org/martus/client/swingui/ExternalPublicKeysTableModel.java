@@ -91,6 +91,12 @@ abstract public class ExternalPublicKeysTableModel extends UiTableModel
 		return entries.contains(entry);
 	}
 	
+	public void setLabel(int row, String newLabel)
+	{
+		SelectableExternalPublicKeyEntry entry = getRawEntry(row);
+		entry.setLabel(newLabel);
+	}
+	
 	protected Vector getRawEntries()
 	{
 		return entries;
