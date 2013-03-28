@@ -111,12 +111,6 @@ public class ReportBuilder
 		return item1+item2+item3;
 	}
 
-	public static void addFontStyle(StringBuilder html)
-	{
-		if (FontHandler.getUseZawgyi())
-			html.append("style=\"font-family: Zawgyi-One, Sans-Serif; \" ");
-	}
-
 	protected static final String INDENT = "&nbsp;&nbsp;&nbsp;&nbsp;";
 
 	MiniLocalization localization;

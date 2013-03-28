@@ -63,9 +63,7 @@ public class TabularReportBuilder extends ReportBuilder
 	private String createHeaderSection(MiniFieldSpec[] specs)
 	{
 		StringBuilder headerBuffer = new StringBuilder();
-		headerBuffer.append("<table ");
-		addFontStyle(headerBuffer);
-		headerBuffer.append("border='3' cellpadding='5' cellspacing='0'>\n");
+		headerBuffer.append("<table border='3' cellpadding='5' cellspacing='0'>\n");
 		headerBuffer.append("<tr>\n");
 
 		int start = 0;
@@ -158,9 +156,7 @@ public class TabularReportBuilder extends ReportBuilder
 		String breakCount = " = $BreakCount";
 		if(LanguageOptions.isRightToLeftLanguage())
 		{
-			breakSection.append("<table ");
-			addFontStyle(breakSection);
-			breakSection.append("border='0'><tr>");
+			breakSection.append("<table border='0'><tr>");
 			breakSection.append("<td align='right'><em>").append(breakCount).append("</em></td>");
 			breakSection.append("<td align='right'><em>").append(breakItem).append("</em></td>");
 			breakSection.append("<td align='right'<em>");
