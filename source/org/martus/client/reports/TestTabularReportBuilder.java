@@ -31,6 +31,7 @@ import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.MiniFieldSpec;
+import org.martus.swing.FontHandler;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.language.LanguageOptions;
 import org.martus.util.xml.XmlUtilities;
@@ -49,6 +50,7 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 			new MiniFieldSpec(FieldSpec.createCustomField("tag2", "Label2", new FieldTypeNormal())),
 			new MiniFieldSpec(FieldSpec.createCustomField("tag3", "Label3", new FieldTypeNormal())),
 		};
+		FontHandler.setUseZawgyi(false);
 		TabularReportBuilder builder = new TabularReportBuilder(new MiniLocalization());
 		ReportFormat rf = builder.createTabular(specs);
 		
