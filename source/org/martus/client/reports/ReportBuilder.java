@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.reports;
 
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.common.MiniLocalization;
 import org.martus.swing.FontHandler;
 import org.martus.util.language.LanguageOptions;
@@ -34,6 +35,7 @@ public class ReportBuilder
 	public ReportBuilder(MiniLocalization localizationToUse)
 	{
 		localization = localizationToUse;
+		fontHelper = new UiFontEncodingHelper(FontHandler.getUseZawgyi());
 	}
 	
 	/*
@@ -118,4 +120,5 @@ public class ReportBuilder
 	protected static final String INDENT = "&nbsp;&nbsp;&nbsp;&nbsp;";
 
 	MiniLocalization localization;
+	UiFontEncodingHelper fontHelper;
 }
