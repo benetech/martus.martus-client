@@ -32,9 +32,9 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiManageHeadquartersKeysDialog;
 import org.martus.common.MartusLogger;
 
-public class ActionMenuConfigureHQs extends UiMenuAction
+public class ActionMenuConfigureHeadquartersKeys extends UiMenuAction
 {
-	public ActionMenuConfigureHQs(UiMainWindow mainWindowToUse)
+	public ActionMenuConfigureHeadquartersKeys(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse, "ConfigureHQs");
 	}
