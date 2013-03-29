@@ -81,7 +81,8 @@ public class TabularReportBuilder extends ReportBuilder
 			MiniFieldSpec spec = specs[i];
 			String specLabel = spec.getLabel();
 			String label = StandardFieldSpecs.getLocalizedLabelHtml(spec.getTag(), specLabel, localization);
-			//the previous line ensures that standard field labels are in Zawgyi from mtf for Burmese language
+			//NOTE: Custom spec labels are already in storable (unicode), but standard spec
+			// labels are in displayable
 			if (StandardFieldSpecs.isStandardFieldTag(spec.getTag()))
 				label = fontHelper.getStorable(label);
 			headerBuffer.append(bodyEscape(label));
