@@ -47,6 +47,7 @@ import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
+import org.martus.swing.FontHandler;
 
 
 /*
@@ -238,6 +239,7 @@ public class SafeReadableBulletin
 			ChoiceItem choice = (ChoiceItem)iter.next();
 			MiniFieldSpec miniSpec = new MiniFieldSpec(choice.getSpec());
 			MartusField field = getPossiblyNestedField(miniSpec);
+			field.setConvertStandardLabelToStorable(FontHandler.getUseZawgyi());
 			fields.add(field);
 		}
 		return fields;

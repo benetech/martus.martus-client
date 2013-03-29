@@ -2,7 +2,7 @@ package org.martus.client.swingui;
 
 import javax.swing.text.JTextComponent;
 
-import org.martus.clientside.Burmese;
+import org.martus.common.utilities.BurmeseUtilities;
 
 public class UiFontEncodingHelper
 {
@@ -14,7 +14,7 @@ public class UiFontEncodingHelper
 	public void setDisplayableText(JTextComponent textField, String value)
 	{
 		if (useZawgyi)
-			value = Burmese.getDisplayable(value);
+			value = BurmeseUtilities.getDisplayable(value);
 		textField.setText(value);
 	}
 
@@ -22,21 +22,21 @@ public class UiFontEncodingHelper
 	{
 		String value = textField.getText();
 		if (useZawgyi)
-			value = Burmese.getStorable(value);
+			value = BurmeseUtilities.getStorable(value);
 		return value;
 	}
 
 	public String getDisplayable(String value)
 	{
 		if (useZawgyi)
-			value = Burmese.getDisplayable(value);
+			value = BurmeseUtilities.getDisplayable(value);
 		return value;
 	}
 
 	public String getStorable(String value)
 	{
 		if (useZawgyi)
-			value = Burmese.getStorable(value);
+			value = BurmeseUtilities.getStorable(value);
 		return value;
 	}
 
