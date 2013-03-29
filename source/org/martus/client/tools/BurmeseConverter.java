@@ -8,7 +8,7 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-import org.martus.clientside.Burmese;
+import org.martus.common.utilities.BurmeseUtilities;
 
 /**
  * @author roms
@@ -54,7 +54,7 @@ public class BurmeseConverter {
 
             String strLine;
             while ((strLine = br.readLine()) != null)   {
-              String convertedLine = (toTharlon) ? Burmese.getStorable(strLine) : Burmese.getDisplayable(strLine);
+              String convertedLine = (toTharlon) ? BurmeseUtilities.getStorable(strLine) : BurmeseUtilities.getDisplayable(strLine);
               writer.write(convertedLine);
               writer.newLine();
             }

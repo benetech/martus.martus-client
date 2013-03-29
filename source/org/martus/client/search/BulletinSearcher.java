@@ -33,10 +33,10 @@ import java.util.Map;
 import java.util.Vector;
 
 import org.martus.client.core.SafeReadableBulletin;
-import org.martus.clientside.Burmese;
 import org.martus.common.MiniLocalization;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.utilities.BurmeseUtilities;
 
 public class BulletinSearcher
 {
@@ -86,7 +86,7 @@ public class BulletinSearcher
 	{
 		String searchForValue = node.getValue();
 		if (useZawgyi)
-			searchForValue = Burmese.getStorable(searchForValue);
+			searchForValue = BurmeseUtilities.getStorable(searchForValue);
 
 		FieldSpec fieldToSearch = node.getField();
 		String tagToSearch = fieldToSearch.getTag();
