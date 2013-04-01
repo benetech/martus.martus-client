@@ -1,8 +1,8 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2001-2007, Beneficent
-Technology, Inc. (The Benetech Initiative).
+monitoring software. Copyright (C) 2013, Beneficent
+Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -31,47 +31,40 @@ import java.io.File;
 
 import javax.swing.filechooser.FileFilter;
 
+import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.ExternalPublicKeysTableModel;
-import org.martus.client.swingui.HeadquartersManagementTableModel;
-import org.martus.client.swingui.SelectableHeadquartersEntry;
+import org.martus.client.swingui.FieldDeskManagementTableModel;
+import org.martus.client.swingui.SelectableFieldDeskEntry;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.HeadquartersKey;
+import org.martus.common.FieldDeskKey;
+import org.martus.common.FieldDeskKeys;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiFileChooser;
-import org.martus.swing.UiTable;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
-
-public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDialog
+public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialog
 {
-	public UiManageHeadquartersKeysDialog(UiMainWindow owner) throws Exception
+	public UiManageFieldDeskKeysDialog(UiMainWindow owner) throws Exception
 	{
-		super(owner, owner.getLocalization().getWindowTitle("ConfigureHQs"));
+		super(owner, owner.getLocalization().getWindowTitle("ManageFieldDeskKeys"));
 		
 	}
 
 	@Override
 	void addExistingKeysToTable() throws Exception
 	{
-		HeadquartersKeys local = mainWindow.getApp().getAllHQKeys();
+		String fieldDeskKeysXml = mainWindow.getApp().getConfigInfo().getFieldDeskKeysXml();
+		FieldDeskKeys local = new FieldDeskKeys(fieldDeskKeysXml);
 		for(int i = 0; i<local.size();++i)
-			addHQKeyToTable(local.get(i));
+			addFieldDeskKeyToTable(local.get(i));
 	}
 
 	@Override
-	protected UiTable createTable(ExternalPublicKeysTableModel hqModel)
+	ExternalPublicKeysTableModel createModel()
 	{
-		UiTable newTable = super.createTable(hqModel);
-		newTable.setMaxColumnWidthToHeaderWidth(0);
-		return newTable;
-	}
-	
-	@Override
-	HeadquartersManagementTableModel createModel()
-	{
-		return new HeadquartersManagementTableModel(mainWindow.getApp());
+		return new FieldDeskManagementTableModel(mainWindow.getApp());
 	}
 
 	@Override
@@ -89,7 +82,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	@Override
 	String getEditLabelButtonName()
 	{
-		return localization.getButtonLabel("ConfigureHQsReLabel");
+		return localization.getButtonLabel("EditFieldDeskLabel");
 	}
 
 	@Override
@@ -97,9 +90,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	{
 		String[] dialogText = new String[]
 		{
-			localization.getFieldLabel("HQsSetAsProxyUploader"),
-			localization.getFieldLabel("HQsSetAsDefault"),
-			localization.getFieldLabel("ConfigureHQsCurrentHQs")
+			localization.getFieldLabel("**************** Need text here")
 		};
 		return dialogText;
 	}
@@ -107,8 +98,9 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	@Override
 	void notifyNoneSelected()
 	{
-		mainWindow.notifyDlg("NoHQsSelected");
+		mainWindow.notifyDlg("NoFieldDesksSelected");
 	}
+	
 	
 	class AddHandler implements ActionListener
 	{
@@ -116,10 +108,10 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		{
 			try
 			{
-				HeadquartersKey publicKey = importPublicKey();
+				FieldDeskKey publicKey = importPublicKey();
 				if(publicKey==null)
 					return;
-				addHQKeyToTable(publicKey);
+				addFieldDeskKeyToTable(publicKey);
 			}
 			catch (Exception e)
 			{
@@ -134,10 +126,10 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		{
 			if(table.getSelectedRowCount()==0)
 			{
-				mainWindow.notifyDlg("NoHQsSelected");
+				notifyNoneSelected();
 				return;
 			}
-			if(!mainWindow.confirmDlg("ClearHQInformation"))
+			if(!mainWindow.confirmDlg("RemoveFieldDeskKeys"))
 				return;
 			
 			int rowCount = model.getRowCount();
@@ -149,7 +141,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		}
 	}
 
-	void addHQKeyToTable(HeadquartersKey publicKey)
+	void addFieldDeskKeyToTable(FieldDeskKey publicKey)
 	{
 		try
 		{
@@ -158,15 +150,15 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 			{
 				if(model.getPublicCode(i).equals(publicCode))
 				{
-					mainWindow.notifyDlg("HQKeyAlradyExists");
+					mainWindow.notifyDlg("FieldDeskKeyAlreadyExists");
 					return;
 				}
 			}
-			SelectableHeadquartersEntry entry = new SelectableHeadquartersEntry(publicKey);
+			SelectableFieldDeskEntry entry = new SelectableFieldDeskEntry(publicKey);
 			HeadquartersKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
 			boolean isDefault = defaultHQKeys.containsKey(publicKey.getPublicKey());
 			entry.setSelected(isDefault);
-			getHeadquartersModel().addNewHeadQuarterEntry(entry);
+			getFieldDeskModel().addNewFieldDeskEntry(entry);
 		}
 		catch (InvalidBase64Exception e)
 		{
@@ -177,12 +169,15 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	void updateConfigInfo()
 	{
 		enableDisableButtons();
-		mainWindow.setAndSaveHQKeysInConfigInfo(getHeadquartersModel().getAllKeys(), getHeadquartersModel().getAllSelectedHeadQuarterKeys());
+		String fieldDeskKeysXml = getFieldDeskModel().getAllKeys().toStringWithLabel();
+		ConfigInfo configInfo = mainWindow.getApp().getConfigInfo();
+		configInfo.setFieldDeskKeysXml(fieldDeskKeysXml);
+		mainWindow.saveConfigInfo();
 	}
 	
-	public HeadquartersKey importPublicKey() throws Exception
+	public FieldDeskKey importPublicKey() throws Exception
 	{
-		String windowTitle = localization.getWindowTitle("ImportHQPublicKey");
+		String windowTitle = localization.getWindowTitle("ImportFieldDeskPublicKey");
 		String buttonLabel = localization.getButtonLabel("inputImportPublicCodeok");
 		
 		File currentDirectory = new File(mainWindow.getApp().getCurrentAccountDirectoryName());
@@ -195,21 +190,21 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		String publicKeyString = mainWindow.getApp().extractPublicInfo(importFile);
 
 		String publicCode = MartusCrypto.computePublicCode(publicKeyString);
-		if(confirmPublicCode(publicCode, "ImportPublicCode", "AccountCodeWrong"))
+		if(confirmPublicCode(publicCode, "ImportPublicKey", "AccountCodeWrong"))
 		{
-			if(!mainWindow.confirmDlg("SetImportPublicKey"))
+			if(!mainWindow.confirmDlg("ImportFieldDeskPublicKey"))
 				return null;
 		}
 		else
 			return null;
 		String label = askUserForNewLabel(MartusCrypto.computeFormattedPublicCode(publicKeyString), "");
-		HeadquartersKey newKey = new HeadquartersKey(publicKeyString, label);
+		FieldDeskKey newKey = new FieldDeskKey(publicKeyString, label);
 		return newKey;
 	}
 
 	String askUserForNewLabel(String publicCode, String previousValue)
 	{
-		String label = mainWindow.getStringInput("GetHQLabel", "", publicCode, previousValue);
+		String label = mainWindow.getStringInput("GetFieldDeskLabel", "", publicCode, previousValue);
 		if(label == null)
 			return null;
 		return getUniqueLabel(publicCode, label);
@@ -217,22 +212,22 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 
 	private String getUniqueLabel(String publicCode, String label) 
 	{
-		HeadquartersKeys hQKeys = getHeadquartersModel().getAllKeys();
-		for(int i = 0; i < hQKeys.size(); ++i)
+		FieldDeskKeys keys = getFieldDeskModel().getAllKeys();
+		for(int i = 0; i < keys.size(); ++i)
 		{
-			HeadquartersKey hqKey = hQKeys.get(i);
+			FieldDeskKey key = keys.get(i);
 			try 
 			{
-				if(hqKey.getPublicCode().equals(publicCode))
+				if(key.getPublicCode().equals(publicCode))
 					continue;
 			} 
 			catch (InvalidBase64Exception e) 
 			{
 			}
-			String hqConfiguredLabel = hqKey.getLabel();
-			if(hqConfiguredLabel.length() >0 && label.equals(hqConfiguredLabel))
+			String configuredLabel = key.getLabel();
+			if(configuredLabel.length() >0 && label.equals(configuredLabel))
 			{
-				mainWindow.notifyDlg("HeadquarterLabelDuplicate");
+				mainWindow.notifyDlg("FieldDeskLabelDuplicate");
 				return null;
 			}
 		}
@@ -272,8 +267,9 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		}
 	}
 
-	HeadquartersManagementTableModel getHeadquartersModel()
+	FieldDeskManagementTableModel getFieldDeskModel()
 	{
-		return (HeadquartersManagementTableModel) getModel();
+		return (FieldDeskManagementTableModel) getModel();
 	}
+
 }

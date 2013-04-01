@@ -106,16 +106,6 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 		return -1;
 	}
 	
-	public int getPublicCodeColumnIndex()
-	{
-		return -1;
-	}
-	
-	public int getLabelColumnIndex()
-	{
-		return -1;
-	}
-
 	public int getIsSelectedColumnIndex()
 	{
 		return -1;
@@ -123,27 +113,23 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 
 	public String getColumnName(int column)
 	{
-		if(column == getDefaultEnabledColumnIndex())
-			return getLocalization().getFieldLabel("ConfigureHeadQuartersDefault");
 		if(column == getIsSelectedColumnIndex())
 			return getLocalization().getFieldLabel("HeadQuartersSelected");
-		if(column == getPublicCodeColumnIndex())
-			return getLocalization().getFieldLabel("ConfigureHQColumnHeaderPublicCode");
-		if(column == getLabelColumnIndex())
-			return getLocalization().getFieldLabel("BulletinHeadQuartersHQLabel");
-		return "";
+		if(column == getDefaultEnabledColumnIndex())
+			return getLocalization().getFieldLabel("ConfigureHeadQuartersDefault");
+
+		return super.getColumnName(column);
 	}
 
 	public Object getValueAt(int row, int column)
 	{
 		SelectableExternalPublicKeyEntry entry = getRawEntry(row);
-		if(column == getDefaultEnabledColumnIndex() || column == getIsSelectedColumnIndex())
+		if(column == getIsSelectedColumnIndex())
 			return new Boolean(entry.isSelected());
-		if(column == getLabelColumnIndex())
-			return getDisplayableLabel(entry);
-		if(column == getPublicCodeColumnIndex())
-			return entry.getPublicCode();
-		return "";
+		if(column == getDefaultEnabledColumnIndex())
+			return new Boolean(entry.isSelected());
+
+		return super.getValueAt(row, column);
 	}
 	
 	public void setValueAt(Object value, int row, int column)
@@ -159,11 +145,11 @@ public abstract class HeadquartersTableModel extends ExternalPublicKeysTableMode
 	
 	public Class getColumnClass(int column)
 	{
-		if(column == getIsSelectedColumnIndex() || column == getDefaultEnabledColumnIndex())
+		if(column == getIsSelectedColumnIndex())
 			return Boolean.class;
-		if(column == getLabelColumnIndex() || column == getPublicCodeColumnIndex())
-			return String.class;
-		return null;
+		if(column == getDefaultEnabledColumnIndex())
+			return Boolean.class;
+		return super.getColumnClass(column);
 	}
 
 	public boolean isEnabled(int row) 

@@ -40,7 +40,7 @@ abstract public class ExternalPublicKeysTableModel extends UiTableModel
 		entries = new Vector();
 	}
 	
-	public void addRawEntry(SelectableHeadquartersEntry entryToAdd)
+	public void addRawEntry(SelectableExternalPublicKeyEntry entryToAdd)
 	{
 		entries.add(entryToAdd);
 		int rowAdded = entries.size();
@@ -57,6 +57,25 @@ abstract public class ExternalPublicKeysTableModel extends UiTableModel
 		return localization;
 	}
 	
+	public int getPublicCodeColumnIndex()
+	{
+		return -1;
+	}
+	
+	public int getLabelColumnIndex()
+	{
+		return -1;
+	}
+
+	public String getColumnName(int column)
+	{
+		if(column == getPublicCodeColumnIndex())
+			return getLocalization().getFieldLabel("ConfigureHQColumnHeaderPublicCode");
+		if(column == getLabelColumnIndex())
+			return getLocalization().getFieldLabel("BulletinHeadQuartersHQLabel");
+		return "";
+	}
+
 	public int getRowCount() 
 	{
 		return entries.size();
@@ -64,7 +83,7 @@ abstract public class ExternalPublicKeysTableModel extends UiTableModel
 
 	public void selectRow(int row)
 	{
-		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
+		SelectableExternalPublicKeyEntry entry = (SelectableExternalPublicKeyEntry)entries.get(row);
 		entry.setSelected(true);
 	}
 	
@@ -76,17 +95,17 @@ abstract public class ExternalPublicKeysTableModel extends UiTableModel
 
 	public String getLabel(int row)
 	{
-		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
+		SelectableExternalPublicKeyEntry entry = (SelectableExternalPublicKeyEntry)entries.get(row);
 		return getDisplayableLabel(entry);
 	}
 
 	public String getPublicCode(int row)
 	{
-		SelectableHeadquartersEntry entry = (SelectableHeadquartersEntry)entries.get(row);
+		SelectableExternalPublicKeyEntry entry = (SelectableExternalPublicKeyEntry)entries.get(row);
 		return entry.getPublicCode();
 	}
 
-	public boolean contains(SelectableHeadquartersEntry entry)
+	public boolean contains(SelectableExternalPublicKeyEntry entry)
 	{
 		return entries.contains(entry);
 	}
@@ -97,6 +116,23 @@ abstract public class ExternalPublicKeysTableModel extends UiTableModel
 		entry.setLabel(newLabel);
 	}
 	
+	public Object getValueAt(int row, int column)
+	{
+		SelectableExternalPublicKeyEntry entry = getRawEntry(row);
+		if(column == getLabelColumnIndex())
+			return getDisplayableLabel(entry);
+		if(column == getPublicCodeColumnIndex())
+			return entry.getPublicCode();
+		return "";
+	}
+
+	public Class getColumnClass(int column)
+	{
+		if(column == getLabelColumnIndex() || column == getPublicCodeColumnIndex())
+			return String.class;
+		return null;
+	}
+
 	protected Vector getRawEntries()
 	{
 		return entries;

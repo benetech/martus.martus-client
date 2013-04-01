@@ -53,7 +53,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 		
-		assertEquals(15, ConfigInfo.VERSION);
+		assertEquals(16, ConfigInfo.VERSION);
 
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
@@ -238,6 +238,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setCustomFieldTopSectionXml(sampleCustomFieldTopSectionXml);
 		info.setCustomFieldBottomSectionXml(sampleCustomFieldBottomSectionXml);
 		info.setUseZawgyi(sampleUseZawgyi);
+		info.setFieldDeskKeysXml(sampleFieldDeskKeysXml);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -265,6 +266,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleCheckForFieldOfficeBulletins", false, info.getCheckForFieldOfficeBulletins());
 		assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getCustomFieldTopSectionXml());
 		assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
+		assertEquals(label + ": sampleFieldDeskKeysXml", "", info.getFieldDeskKeysXml());
 		
 	}
 
@@ -370,6 +372,12 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleUseZawgyi", sampleUseZawgyi, info.getUseZawgyi());
 		else
 			assertEquals(label + ": sampleUseZawgyi", true, info.getUseZawgyi());
+		
+		if(VERSION >= 16)
+			assertEquals(label + ": sampleFieldDeskKeys", sampleFieldDeskKeysXml, info.getFieldDeskKeysXml());
+		else
+			assertEquals(label + ": sampleFieldDeskKeys", "", info.getFieldDeskKeysXml());
+
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -457,6 +465,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			out.writeBoolean(sampleUseZawgyi);
 		}
+		if(VERSION >= 16)
+		{
+			ConfigInfo.writeLongString(out, sampleFieldDeskKeysXml);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -505,7 +517,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 //Version 14
 	final String sampleCustomFieldTopSectionXml = longString;
 	final String sampleCustomFieldBottomSectionXml = longString;
-	//Version 15
+//Version 15
 	final boolean sampleUseZawgyi = true;
-	
+//Version 16
+	final String sampleFieldDeskKeysXml = "<FieldDesks><FieldDesk><PublicKey>1234</PublicKey><Label>Test Label</Label></FieldDesk></FieldDesks>";
 }

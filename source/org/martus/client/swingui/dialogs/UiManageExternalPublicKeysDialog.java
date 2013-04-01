@@ -65,7 +65,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 		add.addActionListener(createAddHandler());
 		remove = new UiButton(localization.getButtonLabel("ConfigureHQsRemove"));
 		remove.addActionListener(createRemoveHandler());
-		renameLabel = new UiButton(localization.getButtonLabel("ConfigureHQsReLabel"));
+		renameLabel = new UiButton(getEditLabelButtonName());
 		renameLabel.addActionListener(createRenameHandler());
 
 		String[] dialogText = getDialogText();
@@ -105,6 +105,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 		setResizable(true);
 	}
 
+	abstract String getEditLabelButtonName();
 	abstract ActionListener createAddHandler();
 	abstract ActionListener createRemoveHandler();
 	abstract String[] getDialogText();
@@ -112,6 +113,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 	abstract void addExistingKeysToTable() throws Exception;
 	abstract void updateConfigInfo();
 	abstract String askUserForNewLabel(String publicCode, String previousValue);
+	abstract void notifyNoneSelected();
 
 	RenameHandler createRenameHandler()
 	{
@@ -128,19 +130,18 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 		return new CancelHandler();
 	}
 
-	protected UiTable createTable(ExternalPublicKeysTableModel hqModel) 
+	protected UiTable createTable(ExternalPublicKeysTableModel modelToUse) 
 	{
-		UiTable hqTable = new UiTable(hqModel);
-		hqTable.setRenderers(hqModel);
-		hqTable.createDefaultColumnsFromModel();
-		hqTable.addKeyListener(new TableListener());
-		hqTable.setColumnSelectionAllowed(false);
-		hqTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		hqTable.setShowGrid(true);
-		hqTable.setMaxColumnWidthToHeaderWidth(0);
-		hqTable.resizeTable(DEFAULT_VIEABLE_ROWS);
+		UiTable newTable = new UiTable(modelToUse);
+		newTable.setRenderers(modelToUse);
+		newTable.createDefaultColumnsFromModel();
+		newTable.addKeyListener(new TableListener());
+		newTable.setColumnSelectionAllowed(false);
+		newTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		newTable.setShowGrid(true);
+		newTable.resizeTable(DEFAULT_VIEABLE_ROWS);
 		
-		return hqTable;
+		return newTable;
 	}
 	
 	ExternalPublicKeysTableModel getModel()
@@ -205,7 +206,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 		{
 			if(table.getSelectedRowCount()==0)
 			{
-				mainWindow.notifyDlg("NoHQsSelected");
+				notifyNoneSelected();
 				return;
 			}
 			int rowCount = model.getRowCount();
@@ -220,6 +221,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 				}
 			}
 		}
+
 	}
 	
 	private static final int DEFAULT_VIEABLE_ROWS = 5;
