@@ -1816,7 +1816,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		saveConfigInfo();
 	}
 	
-	private void saveConfigInfo()
+	public void saveConfigInfo()
 	{
 		try
 		{
@@ -2236,9 +2236,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			notifyDlg("ErrorSavingConfig");
 		}
-		
 	}
-
 
 	void initializeViews()
 	{

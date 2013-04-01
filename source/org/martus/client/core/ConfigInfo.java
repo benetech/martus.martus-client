@@ -77,6 +77,8 @@ public class ConfigInfo
 	public void setCustomFieldTopSectionXml(String newXml)	{customFieldTopSectionXml = newXml;}
 	public void setCustomFieldBottomSectionXml(String newXml)	{customFieldBottomSectionXml = newXml;}
 	public void setUseZawgyi(boolean newUseZawgyi){useZawgyi = newUseZawgyi;}
+	public void setFieldDeskKeysXml(String newFieldDeskKeysXml) { fieldDeskKeysXml = newFieldDeskKeysXml; } 
+
 
 	public void clearHQKey()						{ legacyHQKey = ""; }
 	public void clearPromptUserRequestSendToServer() { mustAskUserToSendToServer = false; }
@@ -106,6 +108,8 @@ public class ConfigInfo
 	public String getCustomFieldTopSectionXml()	{return customFieldTopSectionXml;}
 	public String getCustomFieldBottomSectionXml() {return customFieldBottomSectionXml;}
 	public boolean getUseZawgyi() {return useZawgyi;}
+	public String getFieldDeskKeysXml() { return fieldDeskKeysXml; }
+
 	
 	public boolean isServerConfigured()
 	{
@@ -143,6 +147,7 @@ public class ConfigInfo
 		customFieldTopSectionXml = "";
 		customFieldBottomSectionXml = "";
 		useZawgyi = true;
+		fieldDeskKeysXml = "";
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException
@@ -211,6 +216,9 @@ public class ConfigInfo
 
             if(loaded.version >= 15)
                 loaded.useZawgyi = in.readBoolean();
+            
+            if(loaded.version >= 16)
+            	loaded.fieldDeskKeysXml = readLongString(in);
 		}
 		finally
 		{
@@ -251,6 +259,7 @@ public class ConfigInfo
 			writeLongString(out, customFieldTopSectionXml);
 			writeLongString(out, customFieldBottomSectionXml);
             out.writeBoolean(useZawgyi);
+            writeLongString(out, fieldDeskKeysXml);
 		}
 		finally
 		{
@@ -277,7 +286,8 @@ public class ConfigInfo
 	
 	private boolean mustAskUserToSendToServer;
 
-	public static final short VERSION = 15;
+	public static final short VERSION = 16;
+	
 	//Version 1
 	private short version;
 	private String author;
@@ -319,5 +329,6 @@ public class ConfigInfo
 	private String customFieldBottomSectionXml;
     //Version 15
     private boolean useZawgyi;
-
+    //Version 16
+    private String fieldDeskKeysXml;
 }
