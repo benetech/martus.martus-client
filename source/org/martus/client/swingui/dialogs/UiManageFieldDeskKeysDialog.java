@@ -33,6 +33,7 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.ExternalPublicKeysTableModel;
 import org.martus.client.swingui.FieldDeskManagementTableModel;
+import org.martus.client.swingui.SelectableExternalPublicKeyEntry;
 import org.martus.client.swingui.SelectableFieldDeskEntry;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.ExternalPublicKey;
@@ -114,7 +115,7 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 					return;
 				}
 			}
-			SelectableFieldDeskEntry entry = createSelectableEntry(publicKey);
+			SelectableExternalPublicKeyEntry entry = createSelectableEntry(publicKey);
 			HeadquartersKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
 			boolean isDefault = defaultHQKeys.containsKey(publicKey.getPublicKey());
 			entry.setSelected(isDefault);
@@ -126,13 +127,12 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 		}
 	}
 
-	private void addEntryToModel(SelectableFieldDeskEntry entry)
+	private void addEntryToModel(SelectableExternalPublicKeyEntry entry)
 	{
-		getFieldDeskModel().addNewFieldDeskEntry(entry);
+		getFieldDeskModel().addNewFieldDeskEntry((SelectableFieldDeskEntry)entry);
 	}
 
-	private SelectableFieldDeskEntry createSelectableEntry(
-			ExternalPublicKey publicKey)
+	private SelectableFieldDeskEntry createSelectableEntry(ExternalPublicKey publicKey)
 	{
 		SelectableFieldDeskEntry entry = new SelectableFieldDeskEntry((FieldDeskKey)publicKey);
 		return entry;
