@@ -104,6 +104,12 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	};
 	
 	@Override
+	void notifyKeyAlreadyExists()
+	{
+		mainWindow.notifyDlg("HQKeyAlradyExists");
+	}
+	
+	@Override
 	void addKeyToTable(ExternalPublicKey publicKey)
 	{
 		try
@@ -113,7 +119,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 			{
 				if(model.getPublicCode(i).equals(publicCode))
 				{
-					mainWindow.notifyDlg("HQKeyAlradyExists");
+					notifyKeyAlreadyExists();
 					return;
 				}
 			}
