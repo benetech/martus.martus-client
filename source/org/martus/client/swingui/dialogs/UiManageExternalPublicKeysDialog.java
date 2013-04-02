@@ -114,6 +114,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 	abstract String askUserForNewLabel(String publicCode, String previousValue);
 	abstract void notifyNoneSelected();
 	abstract boolean confirmRemoveKey();
+	abstract void notifyKeyAlreadyExists();
 	abstract void addKeyToTable(ExternalPublicKey publicKey);
 	abstract ExternalPublicKey importPublicKey() throws Exception;
 

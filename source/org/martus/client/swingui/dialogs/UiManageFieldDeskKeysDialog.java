@@ -95,6 +95,12 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 	};
 	
 	@Override
+	void notifyKeyAlreadyExists()
+	{
+		mainWindow.notifyDlg("FieldDeskKeyAlreadyExists");
+	}
+	
+	@Override
 	void addKeyToTable(ExternalPublicKey publicKey)
 	{
 		try
@@ -104,7 +110,7 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 			{
 				if(model.getPublicCode(i).equals(publicCode))
 				{
-					mainWindow.notifyDlg("FieldDeskKeyAlreadyExists");
+					notifyKeyAlreadyExists();
 					return;
 				}
 			}
