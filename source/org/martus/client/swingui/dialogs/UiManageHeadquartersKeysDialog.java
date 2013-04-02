@@ -25,8 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.filechooser.FileFilter;
@@ -78,7 +76,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	@Override
 	RemoveHandler createRemoveHandler()
 	{
-		return new RemoveHandler("NoHQsSelected", "ClearHQInformation");
+		return new RemoveHandler("ClearHQInformation");
 	}
 
 	@Override
@@ -105,36 +103,6 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		mainWindow.notifyDlg("NoHQsSelected");
 	}
 	
-	class RemoveHandler implements ActionListener
-	{
-		public RemoveHandler(String noneSelectedMessageTagToUse, String confirmMessageTagToUse)
-		{
-			noneSelectedMessageTag = noneSelectedMessageTagToUse;
-			confirmMessageTag = confirmMessageTagToUse;
-		}
-		
-		public void actionPerformed(ActionEvent ae)
-		{
-			if(table.getSelectedRowCount()==0)
-			{
-				mainWindow.notifyDlg(noneSelectedMessageTag);
-				return;
-			}
-			if(!mainWindow.confirmDlg(confirmMessageTag))
-				return;
-			
-			int rowCount = model.getRowCount();
-			for(int i = rowCount-1; i >=0 ; --i)
-			{
-				if(table.isRowSelected(i))
-					model.removeRow(i);
-			}
-		}
-		
-		private String noneSelectedMessageTag;
-		private String confirmMessageTag;
-	}
-
 	@Override
 	void addKeyToTable(ExternalPublicKey publicKey)
 	{

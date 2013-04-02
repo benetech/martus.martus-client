@@ -220,6 +220,34 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 		}
 	}
 	
+	class RemoveHandler implements ActionListener
+	{
+		public RemoveHandler(String confirmMessageTagToUse)
+		{
+			confirmMessageTag = confirmMessageTagToUse;
+		}
+		
+		public void actionPerformed(ActionEvent ae)
+		{
+			if(table.getSelectedRowCount()==0)
+			{
+				notifyNoneSelected();
+				return;
+			}
+			if(!mainWindow.confirmDlg(confirmMessageTag))
+				return;
+			
+			int rowCount = model.getRowCount();
+			for(int i = rowCount-1; i >=0 ; --i)
+			{
+				if(table.isRowSelected(i))
+					model.removeRow(i);
+			}
+		}
+		
+		private String confirmMessageTag;
+	}
+
 	class RenameHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
