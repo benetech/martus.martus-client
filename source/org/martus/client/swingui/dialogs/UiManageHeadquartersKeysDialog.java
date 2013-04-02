@@ -36,6 +36,7 @@ import org.martus.client.swingui.ExternalPublicKeysTableModel;
 import org.martus.client.swingui.HeadquartersManagementTableModel;
 import org.martus.client.swingui.SelectableHeadquartersEntry;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.ExternalPublicKey;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.crypto.MartusCrypto;
@@ -57,7 +58,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	{
 		HeadquartersKeys local = mainWindow.getApp().getAllHQKeys();
 		for(int i = 0; i<local.size();++i)
-			addHQKeyToTable(local.get(i));
+			addKeyToTable(local.get(i));
 	}
 
 	@Override
@@ -78,12 +79,6 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	RemoveHandler createRemoveHandler()
 	{
 		return new RemoveHandler();
-	}
-
-	@Override
-	AddHandler createAddHandler()
-	{
-		return new AddHandler();
 	}
 
 	@Override
@@ -110,24 +105,6 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		mainWindow.notifyDlg("NoHQsSelected");
 	}
 	
-	class AddHandler implements ActionListener
-	{
-		public void actionPerformed(ActionEvent ae)
-		{
-			try
-			{
-				HeadquartersKey publicKey = importPublicKey();
-				if(publicKey==null)
-					return;
-				addHQKeyToTable(publicKey);
-			}
-			catch (Exception e)
-			{
-				mainWindow.notifyDlg("PublicInfoFileError");
-			}
-		}
-	}
-
 	class RemoveHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
@@ -149,7 +126,8 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		}
 	}
 
-	void addHQKeyToTable(HeadquartersKey publicKey)
+	@Override
+	void addKeyToTable(ExternalPublicKey publicKey)
 	{
 		try
 		{
@@ -162,7 +140,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 					return;
 				}
 			}
-			SelectableHeadquartersEntry entry = new SelectableHeadquartersEntry(publicKey);
+			SelectableHeadquartersEntry entry = new SelectableHeadquartersEntry((HeadquartersKey)publicKey);
 			HeadquartersKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
 			boolean isDefault = defaultHQKeys.containsKey(publicKey.getPublicKey());
 			entry.setSelected(isDefault);
@@ -180,7 +158,8 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		mainWindow.setAndSaveHQKeysInConfigInfo(getHeadquartersModel().getAllKeys(), getHeadquartersModel().getAllSelectedHeadQuarterKeys());
 	}
 	
-	public HeadquartersKey importPublicKey() throws Exception
+	@Override
+	ExternalPublicKey importPublicKey() throws Exception
 	{
 		String windowTitle = localization.getWindowTitle("ImportHQPublicKey");
 		String buttonLabel = localization.getButtonLabel("inputImportPublicCodeok");

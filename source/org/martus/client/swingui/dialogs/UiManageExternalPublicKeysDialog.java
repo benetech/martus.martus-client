@@ -42,6 +42,7 @@ import javax.swing.border.EmptyBorder;
 import org.martus.client.swingui.ExternalPublicKeysTableModel;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.ExternalPublicKey;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
@@ -62,7 +63,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 		localization = mainWindow.getLocalization();
 
 		JButton add = new UiButton(localization.getButtonLabel("ConfigureHQsAdd"));
-		add.addActionListener(createAddHandler());
+		add.addActionListener(new AddHandler());
 		remove = new UiButton(localization.getButtonLabel("ConfigureHQsRemove"));
 		remove.addActionListener(createRemoveHandler());
 		renameLabel = new UiButton(getEditLabelButtonName());
@@ -106,7 +107,6 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 	}
 
 	abstract String getEditLabelButtonName();
-	abstract ActionListener createAddHandler();
 	abstract ActionListener createRemoveHandler();
 	abstract String[] getDialogText();
 	abstract ExternalPublicKeysTableModel createModel();
@@ -114,6 +114,8 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 	abstract void updateConfigInfo();
 	abstract String askUserForNewLabel(String publicCode, String previousValue);
 	abstract void notifyNoneSelected();
+	abstract void addKeyToTable(ExternalPublicKey publicKey);
+	abstract ExternalPublicKey importPublicKey() throws Exception;
 
 	RenameHandler createRenameHandler()
 	{
@@ -180,6 +182,24 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 
 		public void keyTyped(KeyEvent e)
 		{
+		}
+	}
+
+	class AddHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
+		{
+			try
+			{
+				ExternalPublicKey publicKey = importPublicKey();
+				if(publicKey==null)
+					return;
+				addKeyToTable(publicKey);
+			}
+			catch (Exception e)
+			{
+				mainWindow.notifyDlg("PublicInfoFileError");
+			}
 		}
 	}
 

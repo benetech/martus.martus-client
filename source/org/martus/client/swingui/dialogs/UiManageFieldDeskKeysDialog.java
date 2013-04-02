@@ -37,6 +37,7 @@ import org.martus.client.swingui.ExternalPublicKeysTableModel;
 import org.martus.client.swingui.FieldDeskManagementTableModel;
 import org.martus.client.swingui.SelectableFieldDeskEntry;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.ExternalPublicKey;
 import org.martus.common.FieldDeskKey;
 import org.martus.common.FieldDeskKeys;
 import org.martus.common.HeadquartersKeys;
@@ -58,7 +59,7 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 		String fieldDeskKeysXml = mainWindow.getApp().getConfigInfo().getFieldDeskKeysXml();
 		FieldDeskKeys local = new FieldDeskKeys(fieldDeskKeysXml);
 		for(int i = 0; i<local.size();++i)
-			addFieldDeskKeyToTable(local.get(i));
+			addKeyToTable(local.get(i));
 	}
 
 	@Override
@@ -71,12 +72,6 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 	RemoveHandler createRemoveHandler()
 	{
 		return new RemoveHandler();
-	}
-
-	@Override
-	AddHandler createAddHandler()
-	{
-		return new AddHandler();
 	}
 
 	@Override
@@ -101,25 +96,6 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 		mainWindow.notifyDlg("NoFieldDesksSelected");
 	}
 	
-	
-	class AddHandler implements ActionListener
-	{
-		public void actionPerformed(ActionEvent ae)
-		{
-			try
-			{
-				FieldDeskKey publicKey = importPublicKey();
-				if(publicKey==null)
-					return;
-				addFieldDeskKeyToTable(publicKey);
-			}
-			catch (Exception e)
-			{
-				mainWindow.notifyDlg("PublicInfoFileError");
-			}
-		}
-	}
-
 	class RemoveHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
@@ -141,7 +117,8 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 		}
 	}
 
-	void addFieldDeskKeyToTable(FieldDeskKey publicKey)
+	@Override
+	void addKeyToTable(ExternalPublicKey publicKey)
 	{
 		try
 		{
@@ -154,7 +131,7 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 					return;
 				}
 			}
-			SelectableFieldDeskEntry entry = new SelectableFieldDeskEntry(publicKey);
+			SelectableFieldDeskEntry entry = new SelectableFieldDeskEntry((FieldDeskKey)publicKey);
 			HeadquartersKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
 			boolean isDefault = defaultHQKeys.containsKey(publicKey.getPublicKey());
 			entry.setSelected(isDefault);
@@ -175,7 +152,8 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 		mainWindow.saveConfigInfo();
 	}
 	
-	public FieldDeskKey importPublicKey() throws Exception
+	@Override
+	ExternalPublicKey importPublicKey() throws Exception
 	{
 		String windowTitle = localization.getWindowTitle("ImportFieldDeskPublicKey");
 		String buttonLabel = localization.getButtonLabel("inputImportPublicCodeok");
