@@ -200,7 +200,7 @@ public class EnglishStrings
 "wintitle:notifyAttachmentNotAFile=Attachment Chosen Not a File",
 "wintitle:notifyFilesWillNotBeDeleted=Files Not Deleted",
 "wintitle:notifyHQKeyAlradyExists=Headquarters Key Already Exists",
-"wintitle:notifyFieldDeskKeyAlradyExists=Field Desk Key Already Exists",
+"wintitle:notifyFieldDeskKeyAlreadyExists=Field Desk Key Already Exists",
 "wintitle:notifyFolderMigrationFailed=Folder Migration Error",
 "wintitle:notifyResendErrorNotAuthorizedToSend=Not Authorized To Send",
 "wintitle:notifyResendError=Error Sending Bulletin",
