@@ -25,8 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.filechooser.FileFilter;
@@ -69,12 +67,6 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 	}
 
 	@Override
-	RemoveHandler createRemoveHandler()
-	{
-		return new RemoveHandler();
-	}
-
-	@Override
 	String getEditLabelButtonName()
 	{
 		return localization.getButtonLabel("EditFieldDeskLabel");
@@ -96,27 +88,12 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 		mainWindow.notifyDlg("NoFieldDesksSelected");
 	}
 	
-	class RemoveHandler implements ActionListener
+	@Override
+	boolean confirmRemoveKey()
 	{
-		public void actionPerformed(ActionEvent ae)
-		{
-			if(table.getSelectedRowCount()==0)
-			{
-				notifyNoneSelected();
-				return;
-			}
-			if(!mainWindow.confirmDlg("RemoveFieldDeskKeys"))
-				return;
-			
-			int rowCount = model.getRowCount();
-			for(int i = rowCount-1; i >=0 ; --i)
-			{
-				if(table.isRowSelected(i))
-					model.removeRow(i);
-			}
-		}
-	}
-
+		return mainWindow.confirmDlg("RemoveFieldDeskKeys");
+	};
+	
 	@Override
 	void addKeyToTable(ExternalPublicKey publicKey)
 	{
