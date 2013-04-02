@@ -132,8 +132,8 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	@Override
 	ExternalPublicKey importPublicKey() throws Exception
 	{
-		String windowTitle = localization.getWindowTitle("ImportHQPublicKey");
-		String buttonLabel = localization.getButtonLabel("inputImportPublicCodeok");
+		String windowTitle = getImportKeyDialogTitle();
+		String buttonLabel = getImportKeyOkButtonText();
 		
 		File currentDirectory = new File(mainWindow.getApp().getCurrentAccountDirectoryName());
 		FileFilter filter = new PublicInfoFileFilter();
@@ -145,16 +145,42 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		String publicKeyString = mainWindow.getApp().extractPublicInfo(importFile);
 
 		String publicCode = MartusCrypto.computePublicCode(publicKeyString);
-		if(confirmPublicCode(publicCode, "ImportPublicCode", "AccountCodeWrong"))
+		if(confirmPublicCode(publicCode))
 		{
-			if(!mainWindow.confirmDlg("SetImportPublicKey"))
+			if(!confirmImportKey())
 				return null;
 		}
 		else
 			return null;
 		String label = askUserForNewLabel(MartusCrypto.computeFormattedPublicCode(publicKeyString), "");
-		HeadquartersKey newKey = new HeadquartersKey(publicKeyString, label);
-		return newKey;
+		return createKeyWithLabel(publicKeyString, label);
+	}
+
+	private HeadquartersKey createKeyWithLabel(String publicKeyString, String label)
+	{
+		return new HeadquartersKey(publicKeyString, label);
+	}
+
+	private boolean confirmPublicCode(String publicCode)
+	{
+		return confirmPublicCode(publicCode, "ImportPublicCode", "AccountCodeWrong");
+	}
+
+	private boolean confirmImportKey()
+	{
+		return mainWindow.confirmDlg("SetImportPublicKey");
+	}
+
+	private String getImportKeyDialogTitle()
+	{
+		String windowTitle = localization.getWindowTitle("ImportHQPublicKey");
+		return windowTitle;
+	}
+
+	private String getImportKeyOkButtonText()
+	{
+		String buttonLabel = localization.getButtonLabel("inputImportPublicCodeok");
+		return buttonLabel;
 	}
 
 	String askUserForNewLabel(String publicCode, String previousValue)
