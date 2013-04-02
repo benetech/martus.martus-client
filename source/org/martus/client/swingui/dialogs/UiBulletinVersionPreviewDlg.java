@@ -27,7 +27,6 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinVersionView;
@@ -46,7 +45,7 @@ public class UiBulletinVersionPreviewDlg extends UiBulletinPreviewDlg implements
 			view.copyDataFromBulletin(b);
 			view.updateEncryptedIndicator(b.isAllPrivate());
 		}
-		catch(IOException e)
+		catch(Exception e)
 		{
 			System.out.println("UiBulletinVersionPreviewDlg: " + e);
 			dispose();

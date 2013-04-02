@@ -29,6 +29,7 @@ package org.martus.client.swingui.bulletincomponent;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
@@ -36,8 +37,8 @@ import javax.swing.Scrollable;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.BulletinLanguageChangeListener;
+import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.common.FieldSpecCollection;
@@ -127,7 +128,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		return currentBulletin;
 	}
 
-	public void copyDataFromBulletin(Bulletin bulletinToShow) throws IOException
+	public void copyDataFromBulletin(Bulletin bulletinToShow) throws Exception
 	{
 		removeAll();
 		currentBulletin = bulletinToShow;
@@ -162,10 +163,15 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 
 		String accountId = mainWindow.getApp().getAccountId();
 		
-		boolean notYourBulletin = !currentBulletin.getAccount().equals(accountId);
+		String authorPublicKeyString = currentBulletin.getAccount();
+		boolean notYourBulletin = !authorPublicKeyString.equals(accountId);
 		boolean notAuthorizedToRead = !currentBulletin.getAuthorizedToReadKeys().containsKey(accountId);
 		mainWindow.setWaitingCursor();
 		boolean isBulletinValid = mainWindow.getStore().isBulletinValid(currentBulletin);
+
+		Vector<String> fieldDeskPublicKeyStrings = mainWindow.getApp().getFieldDeskPublicKeyStrings();
+		boolean isFieldDeskBulletin = fieldDeskPublicKeyStrings.contains(authorPublicKeyString);
+		
 		mainWindow.resetCursor();
 		
 		if(!isBulletinValid || (notYourBulletin && notAuthorizedToRead))
@@ -191,6 +197,13 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 			String text = mainWindow.getLocalization().getFieldLabel("BulletinHasUnknownStuff");
 			publicSection.updateWarningIndicator(text);
 			privateSection.updateWarningIndicator(text);
+		}
+		else if(notYourBulletin && !isFieldDeskBulletin)
+		{
+			String text = mainWindow.getLocalization().getFieldLabel("BulletinUnverifiedFieldDesk");
+			publicSection.updateWarningIndicator(text);
+			privateSection.updateWarningIndicator(text);
+			
 		}
 		else if(notYourBulletin)
 		{

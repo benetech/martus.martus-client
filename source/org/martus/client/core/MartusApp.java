@@ -73,6 +73,7 @@ import org.martus.common.Exceptions.ServerCallFailedException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.FieldCollection;
 import org.martus.common.FieldCollection.CustomFieldsParseException;
+import org.martus.common.FieldDeskKeys;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
@@ -346,6 +347,20 @@ public class MartusApp
 			MartusLogger.logException(e);
 			return "";
 		}
+	}
+
+	public Vector<String> getFieldDeskPublicKeyStrings() throws Exception
+	{
+		String xml = getConfigInfo().getFieldDeskKeysXml();
+		FieldDeskKeys keys = new FieldDeskKeys(xml);
+		Vector<String> keyStrings = new Vector<String>();
+		for(int i = 0; i < keys.size(); ++i)
+		{
+			String fieldDeskPublicKeyString = keys.get(i).getPublicKey();
+			keyStrings.add(fieldDeskPublicKeyString);
+		}
+		
+		return keyStrings;
 	}
 
 	public ConfigInfo getConfigInfo()

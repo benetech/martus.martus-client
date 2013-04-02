@@ -27,9 +27,10 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Rectangle;
-import java.io.IOException;
+
 import javax.swing.JComponent;
 import javax.swing.JViewport;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiScrollPane;
@@ -80,7 +81,7 @@ public class UiBulletinPreviewPane extends UiScrollPane
 		{
 			view.copyDataFromBulletin(currentBulletin);
 		}
-		catch(IOException e)
+		catch(Exception e)
 		{
 			System.out.println("UiBulletinPreview.refresh: " + e);
 		}
