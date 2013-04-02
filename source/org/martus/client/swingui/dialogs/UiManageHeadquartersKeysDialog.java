@@ -32,6 +32,7 @@ import javax.swing.filechooser.FileFilter;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.ExternalPublicKeysTableModel;
 import org.martus.client.swingui.HeadquartersManagementTableModel;
+import org.martus.client.swingui.SelectableExternalPublicKeyEntry;
 import org.martus.client.swingui.SelectableHeadquartersEntry;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.ExternalPublicKey;
@@ -123,7 +124,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 					return;
 				}
 			}
-			SelectableHeadquartersEntry entry = createSelectableEntry(publicKey);
+			SelectableExternalPublicKeyEntry entry = createSelectableEntry(publicKey);
 			HeadquartersKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
 			boolean isDefault = defaultHQKeys.containsKey(publicKey.getPublicKey());
 			entry.setSelected(isDefault);
@@ -135,13 +136,12 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 		}
 	}
 
-	private void addEntryToModel(SelectableHeadquartersEntry entry)
+	private void addEntryToModel(SelectableExternalPublicKeyEntry entry)
 	{
-		getHeadquartersModel().addNewHeadQuarterEntry(entry);
+		getHeadquartersModel().addNewHeadQuarterEntry((SelectableHeadquartersEntry)entry);
 	}
 
-	private SelectableHeadquartersEntry createSelectableEntry(
-			ExternalPublicKey publicKey)
+	private SelectableExternalPublicKeyEntry createSelectableEntry(ExternalPublicKey publicKey)
 	{
 		SelectableHeadquartersEntry entry = new SelectableHeadquartersEntry((HeadquartersKey)publicKey);
 		return entry;
