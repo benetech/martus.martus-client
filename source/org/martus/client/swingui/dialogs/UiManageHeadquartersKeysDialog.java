@@ -78,7 +78,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	@Override
 	RemoveHandler createRemoveHandler()
 	{
-		return new RemoveHandler();
+		return new RemoveHandler("NoHQsSelected", "ClearHQInformation");
 	}
 
 	@Override
@@ -107,14 +107,20 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	
 	class RemoveHandler implements ActionListener
 	{
+		public RemoveHandler(String noneSelectedMessageTagToUse, String confirmMessageTagToUse)
+		{
+			noneSelectedMessageTag = noneSelectedMessageTagToUse;
+			confirmMessageTag = confirmMessageTagToUse;
+		}
+		
 		public void actionPerformed(ActionEvent ae)
 		{
 			if(table.getSelectedRowCount()==0)
 			{
-				mainWindow.notifyDlg("NoHQsSelected");
+				mainWindow.notifyDlg(noneSelectedMessageTag);
 				return;
 			}
-			if(!mainWindow.confirmDlg("ClearHQInformation"))
+			if(!mainWindow.confirmDlg(confirmMessageTag))
 				return;
 			
 			int rowCount = model.getRowCount();
@@ -124,6 +130,9 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 					model.removeRow(i);
 			}
 		}
+		
+		private String noneSelectedMessageTag;
+		private String confirmMessageTag;
 	}
 
 	@Override
