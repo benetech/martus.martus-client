@@ -97,7 +97,7 @@ abstract public class ExternalPublicKeysTableModel extends UiTableModel
 	public String getLabel(int row)
 	{
 		SelectableExternalPublicKeyEntry entry = (SelectableExternalPublicKeyEntry)entries.get(row);
-		return getDisplayableLabel(entry);
+		return entry.getLabel();
 	}
 	
 	public ExternalPublicKey getPublicKey(int row)
