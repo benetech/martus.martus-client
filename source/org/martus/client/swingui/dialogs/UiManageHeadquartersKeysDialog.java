@@ -123,16 +123,28 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 					return;
 				}
 			}
-			SelectableHeadquartersEntry entry = new SelectableHeadquartersEntry((HeadquartersKey)publicKey);
+			SelectableHeadquartersEntry entry = createSelectableEntry(publicKey);
 			HeadquartersKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
 			boolean isDefault = defaultHQKeys.containsKey(publicKey.getPublicKey());
 			entry.setSelected(isDefault);
-			getHeadquartersModel().addNewHeadQuarterEntry(entry);
+			addEntryToModel(entry);
 		}
 		catch (InvalidBase64Exception e)
 		{
 			e.printStackTrace();
 		}
+	}
+
+	private void addEntryToModel(SelectableHeadquartersEntry entry)
+	{
+		getHeadquartersModel().addNewHeadQuarterEntry(entry);
+	}
+
+	private SelectableHeadquartersEntry createSelectableEntry(
+			ExternalPublicKey publicKey)
+	{
+		SelectableHeadquartersEntry entry = new SelectableHeadquartersEntry((HeadquartersKey)publicKey);
+		return entry;
 	}
 	
 	void updateConfigInfo()

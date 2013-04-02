@@ -114,16 +114,28 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 					return;
 				}
 			}
-			SelectableFieldDeskEntry entry = new SelectableFieldDeskEntry((FieldDeskKey)publicKey);
+			SelectableFieldDeskEntry entry = createSelectableEntry(publicKey);
 			HeadquartersKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
 			boolean isDefault = defaultHQKeys.containsKey(publicKey.getPublicKey());
 			entry.setSelected(isDefault);
-			getFieldDeskModel().addNewFieldDeskEntry(entry);
+			addEntryToModel(entry);
 		}
 		catch (InvalidBase64Exception e)
 		{
 			e.printStackTrace();
 		}
+	}
+
+	private void addEntryToModel(SelectableFieldDeskEntry entry)
+	{
+		getFieldDeskModel().addNewFieldDeskEntry(entry);
+	}
+
+	private SelectableFieldDeskEntry createSelectableEntry(
+			ExternalPublicKey publicKey)
+	{
+		SelectableFieldDeskEntry entry = new SelectableFieldDeskEntry((FieldDeskKey)publicKey);
+		return entry;
 	}
 	
 	void updateConfigInfo()
