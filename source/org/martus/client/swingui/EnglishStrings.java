@@ -693,7 +693,7 @@ public class EnglishStrings
 "field:confirmWarningSwitchToNormalKeyboardeffect=If this is a Headquarters computer, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.",
 "field:confirmClearHQInformationcause=You have chosen to remove all selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  New versions of sealed bulletins will not be able to be viewed by Headquarters, but any old versions of sealed bulletins that already are on a Headquarters' computer CANNOT be reset to be non-viewable by the Headquarters.",
 "field:confirmClearHQInformationeffect=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.",
-"field:confirmRemoveFieldDeskKeyscause=You have chosen to remove the selected Field Desk accounts.",
+"field:confirmRemoveFieldDeskKeyscause=You have chosen to remove the selected Field Desk account(s).",
 "field:confirmRemoveFieldDeskKeyseffect=By clicking on Yes, bulletins created by those accounts will no longer be indicated as having been authored by a Field Desk",
 "field:confirmCloneMySealedAsDraftcause=You have chosen to modify one of your sealed bulletins, thus creating a new version of that bulletin.",
 "field:confirmCloneMySealedAsDrafteffect=Clicking on Yes will create a new version of this bulletin that initially contains all the same information.",
