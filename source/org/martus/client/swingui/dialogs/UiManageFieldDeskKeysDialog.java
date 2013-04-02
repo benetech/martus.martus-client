@@ -39,7 +39,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.ExternalPublicKey;
 import org.martus.common.FieldDeskKey;
 import org.martus.common.FieldDeskKeys;
-import org.martus.common.HeadquartersKeys;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiFileChooser;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
@@ -102,37 +101,13 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 	}
 	
 	@Override
-	void addKeyToTable(ExternalPublicKey publicKey)
-	{
-		try
-		{
-			String publicCode = publicKey.getPublicCode();
-			for(int i = 0; i < table.getRowCount(); ++i)
-			{
-				if(model.getPublicCode(i).equals(publicCode))
-				{
-					notifyKeyAlreadyExists();
-					return;
-				}
-			}
-			SelectableExternalPublicKeyEntry entry = createSelectableEntry(publicKey);
-			HeadquartersKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
-			boolean isDefault = defaultHQKeys.containsKey(publicKey.getPublicKey());
-			entry.setSelected(isDefault);
-			addEntryToModel(entry);
-		}
-		catch (InvalidBase64Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	private void addEntryToModel(SelectableExternalPublicKeyEntry entry)
+	void addEntryToModel(SelectableExternalPublicKeyEntry entry)
 	{
 		getFieldDeskModel().addNewFieldDeskEntry((SelectableFieldDeskEntry)entry);
 	}
 
-	private SelectableFieldDeskEntry createSelectableEntry(ExternalPublicKey publicKey)
+	@Override
+	SelectableExternalPublicKeyEntry createSelectableEntry(ExternalPublicKey publicKey)
 	{
 		SelectableFieldDeskEntry entry = new SelectableFieldDeskEntry((FieldDeskKey)publicKey);
 		return entry;

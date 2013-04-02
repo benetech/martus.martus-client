@@ -40,9 +40,11 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
 import org.martus.client.swingui.ExternalPublicKeysTableModel;
+import org.martus.client.swingui.SelectableExternalPublicKeyEntry;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.ExternalPublicKey;
+import org.martus.common.HeadquartersKeys;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
@@ -50,6 +52,7 @@ import org.martus.swing.UiTable;
 import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 abstract public class UiManageExternalPublicKeysDialog extends JDialog
 {
@@ -110,12 +113,13 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 	abstract String[] getDialogText();
 	abstract ExternalPublicKeysTableModel createModel();
 	abstract void addExistingKeysToTable() throws Exception;
+	abstract void addEntryToModel(SelectableExternalPublicKeyEntry entry);
+	abstract SelectableExternalPublicKeyEntry createSelectableEntry(ExternalPublicKey publicKey);
 	abstract void updateConfigInfo();
 	abstract String askUserForNewLabel(String publicCode, String previousValue);
 	abstract void notifyNoneSelected();
 	abstract boolean confirmRemoveKey();
 	abstract void notifyKeyAlreadyExists();
-	abstract void addKeyToTable(ExternalPublicKey publicKey);
 	abstract ExternalPublicKey importPublicKey() throws Exception;
 
 	RenameHandler createRenameHandler()
@@ -162,7 +166,32 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 
 	}
 	
-	
+	void addKeyToTable(ExternalPublicKey publicKey)
+	{
+		try
+		{
+			String publicCode = publicKey.getPublicCode();
+			for(int i = 0; i < table.getRowCount(); ++i)
+			{
+				if(model.getPublicCode(i).equals(publicCode))
+				{
+					notifyKeyAlreadyExists();
+					return;
+				}
+			}
+			SelectableExternalPublicKeyEntry entry = createSelectableEntry(publicKey);
+			HeadquartersKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
+			boolean isDefault = defaultHQKeys.containsKey(publicKey.getPublicKey());
+			entry.setSelected(isDefault);
+			addEntryToModel(entry);
+		}
+		catch (InvalidBase64Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+
 	class TableListener implements KeyListener
 	{
 		public void keyPressed(KeyEvent e)
