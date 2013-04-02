@@ -25,12 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
-import java.io.File;
-
-import javax.swing.filechooser.FileFilter;
-
 import org.martus.client.core.ConfigInfo;
-import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.ExternalPublicKeysTableModel;
 import org.martus.client.swingui.FieldDeskManagementTableModel;
 import org.martus.client.swingui.SelectableExternalPublicKeyEntry;
@@ -40,7 +35,6 @@ import org.martus.common.ExternalPublicKey;
 import org.martus.common.FieldDeskKey;
 import org.martus.common.FieldDeskKeys;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.swing.UiFileChooser;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialog
@@ -123,33 +117,36 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 	}
 	
 	@Override
-	ExternalPublicKey importPublicKey() throws Exception
+	String getImportKeyDialogTitle()
 	{
-		String windowTitle = localization.getWindowTitle("ImportFieldDeskPublicKey");
-		String buttonLabel = localization.getButtonLabel("inputImportPublicCodeok");
-		
-		File currentDirectory = new File(mainWindow.getApp().getCurrentAccountDirectoryName());
-		FileFilter filter = new PublicInfoFileFilter();
-		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, windowTitle, null, currentDirectory, buttonLabel, filter);
-		if (results.wasCancelChoosen())
-			return null;
-		
-		File importFile = results.getChosenFile();
-		String publicKeyString = mainWindow.getApp().extractPublicInfo(importFile);
-
-		String publicCode = MartusCrypto.computePublicCode(publicKeyString);
-		if(confirmPublicCode(publicCode, "ImportPublicKey", "AccountCodeWrong"))
-		{
-			if(!mainWindow.confirmDlg("ImportFieldDeskPublicKey"))
-				return null;
-		}
-		else
-			return null;
-		String label = askUserForNewLabel(MartusCrypto.computeFormattedPublicCode(publicKeyString), "");
-		FieldDeskKey newKey = new FieldDeskKey(publicKeyString, label);
-		return newKey;
+		return localization.getWindowTitle("ImportFieldDeskPublicKey");
 	}
 
+	@Override
+	String getImportKeyOkButtonText()
+	{
+		return localization.getButtonLabel("inputImportPublicCodeok");
+	}
+
+	@Override
+	boolean confirmPublicCode(String publicCode)
+	{
+		return confirmPublicCode(publicCode, "ImportPublicKey", "AccountCodeWrong");
+	}
+
+	@Override
+	boolean confirmImportKey()
+	{
+		return mainWindow.confirmDlg("ImportFieldDeskPublicKey");
+	}
+
+	@Override
+	ExternalPublicKey createKeyWithLabel(String publicKeyString, String label)
+	{
+		return new FieldDeskKey(publicKeyString, label);
+	}
+
+	@Override
 	String askUserForNewLabel(String publicCode, String previousValue)
 	{
 		String label = mainWindow.getStringInput("GetFieldDeskLabel", "", publicCode, previousValue);
@@ -182,21 +179,6 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 		return label;
 	}
 	
-	class PublicInfoFileFilter extends FileFilter
-	{
-		public boolean accept(File pathname)
-		{
-			if(pathname.isDirectory())
-				return true;
-			return(pathname.getName().endsWith(MartusApp.PUBLIC_INFO_EXTENSION));
-		}
-
-		public String getDescription()
-		{
-			return localization.getFieldLabel("PublicInformationFiles");
-		}
-	}
-
 
 	boolean confirmPublicCode(String rawPublicCode, String baseTag, String errorBaseTag)
 	{
