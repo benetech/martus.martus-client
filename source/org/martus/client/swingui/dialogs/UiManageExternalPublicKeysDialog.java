@@ -57,7 +57,6 @@ import org.martus.swing.UiTable;
 import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
-import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 abstract public class UiManageExternalPublicKeysDialog extends JDialog
 {
@@ -188,8 +187,13 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 		
 		File importFile = results.getChosenFile();
 		String publicKeyString = mainWindow.getApp().extractPublicInfo(importFile);
-
 		String publicCode = MartusCrypto.computePublicCode(publicKeyString);
+		if(doesPublicCodeAlreadyExist(publicKeyString))
+		{
+			notifyKeyAlreadyExists();
+			return null;
+		}
+
 		if(confirmPublicCode(publicCode))
 		{
 			if(!confirmImportKey())
@@ -208,29 +212,27 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 
 	void addKeyToTable(ExternalPublicKey publicKey)
 	{
-		try
-		{
-			String publicCode = publicKey.getPublicCode();
-			for(int i = 0; i < table.getRowCount(); ++i)
-			{
-				if(model.getPublicCode(i).equals(publicCode))
-				{
-					notifyKeyAlreadyExists();
-					return;
-				}
-			}
-			SelectableExternalPublicKeyEntry entry = createSelectableEntry(publicKey);
-			HeadquartersKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
-			boolean isDefault = defaultHQKeys.containsKey(publicKey.getPublicKey());
-			entry.setSelected(isDefault);
-			addEntryToModel(entry);
-		}
-		catch (InvalidBase64Exception e)
-		{
-			e.printStackTrace();
-		}
+		SelectableExternalPublicKeyEntry entry = createSelectableEntry(publicKey);
+		HeadquartersKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
+		boolean isDefault = defaultHQKeys.containsKey(publicKey.getPublicKey());
+		entry.setSelected(isDefault);
+		addEntryToModel(entry);
 	}
 
+	private boolean doesPublicCodeAlreadyExist(String publicKeyString)
+	{
+		for(int i = 0; i < table.getRowCount(); ++i)
+		{
+			ExternalPublicKey rowKey = model.getPublicKey(i);
+			String rowKeyString = rowKey.getPublicKey();
+			if(rowKeyString.equals(publicKeyString))
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
 
 	class TableListener implements KeyListener
 	{

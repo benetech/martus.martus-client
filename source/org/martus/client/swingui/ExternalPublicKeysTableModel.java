@@ -28,6 +28,7 @@ package org.martus.client.swingui;
 import java.util.Vector;
 
 import org.martus.client.core.MartusApp;
+import org.martus.common.ExternalPublicKey;
 import org.martus.common.MiniLocalization;
 import org.martus.swing.UiTableModel;
 
@@ -97,6 +98,12 @@ abstract public class ExternalPublicKeysTableModel extends UiTableModel
 	{
 		SelectableExternalPublicKeyEntry entry = (SelectableExternalPublicKeyEntry)entries.get(row);
 		return getDisplayableLabel(entry);
+	}
+	
+	public ExternalPublicKey getPublicKey(int row)
+	{
+		SelectableExternalPublicKeyEntry entry = (SelectableExternalPublicKeyEntry)entries.get(row);
+		return entry.getKey();
 	}
 
 	public String getPublicCode(int row)
