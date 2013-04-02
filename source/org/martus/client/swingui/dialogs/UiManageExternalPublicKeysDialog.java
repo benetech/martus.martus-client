@@ -30,6 +30,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -38,14 +39,18 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileFilter;
 
+import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.ExternalPublicKeysTableModel;
 import org.martus.client.swingui.SelectableExternalPublicKeyEntry;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.ExternalPublicKey;
 import org.martus.common.HeadquartersKeys;
+import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiButton;
+import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
@@ -112,6 +117,11 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 	abstract String getEditLabelButtonName();
 	abstract String[] getDialogText();
 	abstract ExternalPublicKeysTableModel createModel();
+	abstract String getImportKeyDialogTitle();
+	abstract String getImportKeyOkButtonText();
+	abstract boolean confirmPublicCode(String publicCode);
+	abstract boolean confirmImportKey();
+	abstract ExternalPublicKey createKeyWithLabel(String publicKeyString, String label);
 	abstract void addExistingKeysToTable() throws Exception;
 	abstract void addEntryToModel(SelectableExternalPublicKeyEntry entry);
 	abstract SelectableExternalPublicKeyEntry createSelectableEntry(ExternalPublicKey publicKey);
@@ -120,7 +130,6 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 	abstract void notifyNoneSelected();
 	abstract boolean confirmRemoveKey();
 	abstract void notifyKeyAlreadyExists();
-	abstract ExternalPublicKey importPublicKey() throws Exception;
 
 	RenameHandler createRenameHandler()
 	{
@@ -166,6 +175,37 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 
 	}
 	
+	ExternalPublicKey importPublicKey() throws Exception
+	{
+		String windowTitle = getImportKeyDialogTitle();
+		String buttonLabel = getImportKeyOkButtonText();
+		
+		File currentDirectory = new File(mainWindow.getApp().getCurrentAccountDirectoryName());
+		FileFilter filter = createFileFilter();
+		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, windowTitle, null, currentDirectory, buttonLabel, filter);
+		if (results.wasCancelChoosen())
+			return null;
+		
+		File importFile = results.getChosenFile();
+		String publicKeyString = mainWindow.getApp().extractPublicInfo(importFile);
+
+		String publicCode = MartusCrypto.computePublicCode(publicKeyString);
+		if(confirmPublicCode(publicCode))
+		{
+			if(!confirmImportKey())
+				return null;
+		}
+		else
+			return null;
+		String label = askUserForNewLabel(MartusCrypto.computeFormattedPublicCode(publicKeyString), "");
+		return createKeyWithLabel(publicKeyString, label);
+	}
+
+	private PublicInfoFileFilter createFileFilter()
+	{
+		return new PublicInfoFileFilter();
+	}
+
 	void addKeyToTable(ExternalPublicKey publicKey)
 	{
 		try
@@ -295,6 +335,22 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 
 	}
 	
+	class PublicInfoFileFilter extends FileFilter
+	{
+		public boolean accept(File pathname)
+		{
+			if(pathname.isDirectory())
+				return true;
+			return(pathname.getName().endsWith(MartusApp.PUBLIC_INFO_EXTENSION));
+		}
+
+		public String getDescription()
+		{
+			return localization.getFieldLabel("PublicInformationFiles");
+		}
+	}
+
+
 	private static final int DEFAULT_VIEABLE_ROWS = 5;
 
 	UiMainWindow mainWindow;
