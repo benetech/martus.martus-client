@@ -111,37 +111,13 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	}
 	
 	@Override
-	void addKeyToTable(ExternalPublicKey publicKey)
-	{
-		try
-		{
-			String publicCode = publicKey.getPublicCode();
-			for(int i = 0; i < table.getRowCount(); ++i)
-			{
-				if(model.getPublicCode(i).equals(publicCode))
-				{
-					notifyKeyAlreadyExists();
-					return;
-				}
-			}
-			SelectableExternalPublicKeyEntry entry = createSelectableEntry(publicKey);
-			HeadquartersKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
-			boolean isDefault = defaultHQKeys.containsKey(publicKey.getPublicKey());
-			entry.setSelected(isDefault);
-			addEntryToModel(entry);
-		}
-		catch (InvalidBase64Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	private void addEntryToModel(SelectableExternalPublicKeyEntry entry)
+	void addEntryToModel(SelectableExternalPublicKeyEntry entry)
 	{
 		getHeadquartersModel().addNewHeadQuarterEntry((SelectableHeadquartersEntry)entry);
 	}
 
-	private SelectableExternalPublicKeyEntry createSelectableEntry(ExternalPublicKey publicKey)
+	@Override
+	SelectableExternalPublicKeyEntry createSelectableEntry(ExternalPublicKey publicKey)
 	{
 		SelectableHeadquartersEntry entry = new SelectableHeadquartersEntry((HeadquartersKey)publicKey);
 		return entry;
