@@ -65,7 +65,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 		JButton add = new UiButton(localization.getButtonLabel("ConfigureHQsAdd"));
 		add.addActionListener(new AddHandler());
 		remove = new UiButton(localization.getButtonLabel("ConfigureHQsRemove"));
-		remove.addActionListener(createRemoveHandler());
+		remove.addActionListener(new RemoveHandler());
 		renameLabel = new UiButton(getEditLabelButtonName());
 		renameLabel.addActionListener(createRenameHandler());
 
@@ -107,13 +107,13 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 	}
 
 	abstract String getEditLabelButtonName();
-	abstract ActionListener createRemoveHandler();
 	abstract String[] getDialogText();
 	abstract ExternalPublicKeysTableModel createModel();
 	abstract void addExistingKeysToTable() throws Exception;
 	abstract void updateConfigInfo();
 	abstract String askUserForNewLabel(String publicCode, String previousValue);
 	abstract void notifyNoneSelected();
+	abstract boolean confirmRemoveKey();
 	abstract void addKeyToTable(ExternalPublicKey publicKey);
 	abstract ExternalPublicKey importPublicKey() throws Exception;
 
@@ -222,11 +222,6 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 	
 	class RemoveHandler implements ActionListener
 	{
-		public RemoveHandler(String confirmMessageTagToUse)
-		{
-			confirmMessageTag = confirmMessageTagToUse;
-		}
-		
 		public void actionPerformed(ActionEvent ae)
 		{
 			if(table.getSelectedRowCount()==0)
@@ -234,7 +229,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 				notifyNoneSelected();
 				return;
 			}
-			if(!mainWindow.confirmDlg(confirmMessageTag))
+			if(!confirmRemoveKey())
 				return;
 			
 			int rowCount = model.getRowCount();
@@ -244,8 +239,6 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 					model.removeRow(i);
 			}
 		}
-		
-		private String confirmMessageTag;
 	}
 
 	class RenameHandler implements ActionListener

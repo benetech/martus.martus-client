@@ -74,12 +74,6 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	}
 
 	@Override
-	RemoveHandler createRemoveHandler()
-	{
-		return new RemoveHandler("ClearHQInformation");
-	}
-
-	@Override
 	String getEditLabelButtonName()
 	{
 		return localization.getButtonLabel("ConfigureHQsReLabel");
@@ -102,6 +96,12 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	{
 		mainWindow.notifyDlg("NoHQsSelected");
 	}
+	
+	@Override
+	boolean confirmRemoveKey()
+	{
+		return mainWindow.confirmDlg("ClearHQInformation");
+	};
 	
 	@Override
 	void addKeyToTable(ExternalPublicKey publicKey)
