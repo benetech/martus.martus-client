@@ -59,6 +59,10 @@ public class SortFieldChooserSpecBuilder extends FieldChooserSpecBuilder
 			return true;
 		if(type.isGrid())
 			return true;
+		if(type.isMessage())
+			return true;
+		if(type.isSectionStart())
+			return true;
 		
 		return false;
 	}
