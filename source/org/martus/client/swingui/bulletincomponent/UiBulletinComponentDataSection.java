@@ -66,7 +66,6 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		super(mainWindowToUse, sectionNameToUse);
 		sectionName = sectionNameToUse;
 		context = new UiFieldContext();
-		fontHelper = new UiFontEncodingHelper(mainWindow.getUseZawgyi());
 	}
 	
 	protected UiFieldContext getContext()
@@ -373,6 +372,6 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	private UiField[] fields;
 	UiFieldCreator fieldCreator;
 	private UiFieldContext context;
-	static UiFontEncodingHelper fontHelper;
+
 }
 
