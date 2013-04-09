@@ -59,7 +59,7 @@ public class UiEditableFieldCreator extends UiFieldCreator
 
 	public UiField createMessageField(FieldSpec spec)
 	{
-		return new UiMessageField(spec, mainWindow);
+		return new UiMessageField(spec, mainWindow.getEditingTextFieldColumns(), mainWindow);
 	}
 
 	public UiField createChoiceField(DropDownFieldSpec spec)

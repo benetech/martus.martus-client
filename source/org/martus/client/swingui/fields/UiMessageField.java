@@ -37,13 +37,13 @@ import org.martus.swing.UiWrappedTextArea;
 
 public class UiMessageField extends UiViewerField
 {
-	public UiMessageField(FieldSpec spec, UiMainWindow mainWindow)
+	public UiMessageField(FieldSpec spec, int numberColumns, UiMainWindow mainWindow)
 	{
 		super(mainWindow.getLocalization());
 		String message = ((MessageFieldSpec)(spec)).getMessage();
 		if (mainWindow.getUseZawgyi())
 			message = BurmeseUtilities.getDisplayable(message);
-		widget = new UiWrappedTextArea(message, mainWindow.getEditingTextFieldColumns());
+		widget = new UiWrappedTextArea(message, numberColumns);
 		widget.setEditable(false);
 		widget.setBackground(new JPanel().getBackground());
 	}
