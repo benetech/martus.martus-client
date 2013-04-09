@@ -28,18 +28,22 @@ package org.martus.client.swingui.fields;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MessageFieldSpec;
+import org.martus.common.utilities.BurmeseUtilities;
 import org.martus.swing.UiWrappedTextArea;
 
 public class UiMessageField extends UiViewerField
 {
-	public UiMessageField(FieldSpec spec, int numberColumns, MiniLocalization localizationToUse)
+	public UiMessageField(FieldSpec spec, UiMainWindow mainWindow)
 	{
-		super(localizationToUse);
+		super(mainWindow.getLocalization());
 		String message = ((MessageFieldSpec)(spec)).getMessage();
-		widget = new UiWrappedTextArea(message, numberColumns);
+		if (mainWindow.getUseZawgyi())
+			message = BurmeseUtilities.getDisplayable(message);
+		widget = new UiWrappedTextArea(message, mainWindow.getEditingTextFieldColumns());
 		widget.setEditable(false);
 		widget.setBackground(new JPanel().getBackground());
 	}
