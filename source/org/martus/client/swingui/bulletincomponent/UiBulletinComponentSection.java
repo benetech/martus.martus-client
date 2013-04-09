@@ -44,8 +44,10 @@ import javax.swing.border.LineBorder;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiWarningLabel;
+import org.martus.common.utilities.BurmeseUtilities;
 import org.martus.swing.UiLabel;
 import org.martus.swing.Utilities;
 import org.martus.util.language.LanguageOptions;
@@ -64,6 +66,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 		setLayout(layout);
 		mainWindow = mainWindowToUse;
 		groups = new Vector();
+		fontHelper = new UiFontEncodingHelper(mainWindow.getUseZawgyi());
 		
 		setBorder(new EtchedBorder());
 		
@@ -100,6 +103,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 			remove(currentGroup);
 		}
 
+		title = fontHelper.getDisplayable(title);
 		currentGroup = new FieldGroup(tag, title);
 		add(currentGroup);
 		groups.add(currentGroup);
@@ -216,4 +220,5 @@ abstract public class UiBulletinComponentSection extends JPanel
 	
 	FieldGroup currentGroup;
 	Vector groups;
+	static UiFontEncodingHelper fontHelper;
 }
