@@ -47,6 +47,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.search.SaneCollator;
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.grids.GridTable;
@@ -80,6 +81,7 @@ abstract public class UiGrid extends UiField
 		model = modelToUse;
 		context = contextToUse;
 		fieldCreator = fieldCreatorToUse;
+		fontHelper = new UiFontEncodingHelper(mainWindowToUse.getUseZawgyi());
 		
 		table = createGridTable(dlgLauncher, context);
 		table.setColumnSelectionAllowed(false);
@@ -208,8 +210,10 @@ abstract public class UiGrid extends UiField
 					wrapper.add(cellComponent, BorderLayout.CENTER);
 					cellComponent = wrapper;
 				}
+				String columnName = model.getColumnName(column);
+				columnName = fontHelper.getDisplayable(columnName);
 				Component[] rowComponents = new Component[] {
-						new UiLabel(model.getColumnName(column)), 
+						new UiLabel(columnName),
 						cellComponent,
 						};
 				Utilities.addComponentsRespectingOrientation(rowPanel, rowComponents);
@@ -411,5 +415,6 @@ abstract public class UiGrid extends UiField
 	protected GridTable table;
 	protected GridTableModel model;
 	Vector expandedFieldRows;
+	UiFontEncodingHelper fontHelper;
 }
 
