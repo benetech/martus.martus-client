@@ -71,7 +71,7 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 	{
 		String[] dialogText = new String[]
 		{
-			localization.getFieldLabel("**************** Need text here")
+			localization.getFieldLabel("ConfigureFDsOverview")
 		};
 		return dialogText;
 	}

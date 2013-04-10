@@ -312,7 +312,7 @@ public class EnglishStrings
 "wintitle:CreateCustomFieldsHelp=Help on Creating Custom Fields",
 "wintitle:ErrorCustomFields=Customize Fields Error",
 "wintitle:ConfigureHQs=Manage Headquarters Keys",
-"wintitle:ManageFieldDeskKeys=Manage Field Desk Keys",
+"wintitle:ManageFieldDeskKeys=Manage Field Desk Accounts",
 "wintitle:ExportCustomizationTemplateSaveAs=Export Customization Template",
 "wintitle:ImportCustomizationTemplateOpen=Import Customization Template",
 "wintitle:SetFolderOrder=Folder Order",
@@ -1371,6 +1371,8 @@ public class EnglishStrings
 "field:UnknownDateSave=Unknown",
 "field:AttachmentSizeUnknown=Unknown",
 "field:ConfigureHQsCurrentHQs=Current Headquarters",
+"field:ConfigureFDsOverview=These Field Desk accounts are those you trust to send you their private bulletin information and attachments. " +
+		"Any Field Desk bulletins you receive from accounts not on this list will be marked as from an unverified account.",
 "field:ColumnGridRowNumber=Row #",
 "field:SetFolderOrder=To change a folder's position, select the folder name and use the #MoveFolderUp# / #MoveFolderDown# buttons.",
 "field:FancySearchHelpMsg1=---Overview---\n\n" +
