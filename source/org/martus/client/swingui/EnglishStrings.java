@@ -287,7 +287,7 @@ public class EnglishStrings
 "wintitle:saveBackupKeyPair=Back up key file",
 "wintitle:BulletinPreview=Bulletin Preview",
 "wintitle:DeleteBulletinFile=Delete Bulletin File",
-"wintitle:ImportHQPublicKey=Import Headquarters Public Information File",
+"wintitle:ImportHQPublicKey=Import Headquarters Account",
 "wintitle:ImportFieldDeskPublicKey=Import Field Desk Public Information File",
 "wintitle:ServerNews=Server News: Message #CurrentNewsItem# of #MaxNewsItems#",
 "wintitle:LoadDefaultDetails=Load Default Details Field Content",
@@ -1257,7 +1257,7 @@ public class EnglishStrings
 	"</ReusableChoices>",
 
 "field:inputservermagicwordentry=If you want to request permission to upload to this server, enter the 'magic word' now:",
-"field:inputImportPublicCodeentry=Enter the Public Code for this account:",
+"field:inputImportPublicCodeentry=Enter the Public Code for the account being imported:",
 "field:inputImportPublicKeyentry=Enter the Public Code for this account:",
 "field:inputExportMyPublicKeyentry=",
 "field:inputGetShareFileNameentry=Enter the name of the file you wish to export.",
