@@ -55,7 +55,7 @@ public class EnglishStrings
 "wintitle:confirmOverWriteExistingFile=Confirm Replace Existing File",
 "wintitle:confirmCancelModifyBulletin=Cancel Modify Bulletin",
 "wintitle:confirmSetImportPublicKey=Confirm Import of Public Account Id",
-"wintitle:confirmImportFieldDeskPublicKey=Import Account Publid Information",
+"wintitle:confirmImportFieldDeskPublicKey=Import Account Public Information",
 "wintitle:confirmWarningSwitchToNormalKeyboard=Security Warning",
 "wintitle:confirmClearHQInformation=Confirm Removal of Headquarters",
 "wintitle:confirmRemoveFieldDeskKeys=Confirm Removal of Field Desk(s)",
