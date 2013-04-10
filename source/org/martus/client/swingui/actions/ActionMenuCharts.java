@@ -212,7 +212,7 @@ public class ActionMenuCharts extends UiMenuAction
 
 		JFreeChart chart = createRawChart(answers, counts, selectedFieldLabel);
 		new MartusChartTheme().apply(chart);
-		TextTitle subtitle = new TextTitle(fontHelper.getDisplayable(answers.getSubtitle()));
+		TextTitle subtitle = new TextTitle(answers.getSubtitle());
 		subtitle.setFont(FontHandler.getDefaultFont());
 		chart.addSubtitle(subtitle);
 		chart.addSubtitle(createLegend(chart));
@@ -232,6 +232,7 @@ public class ActionMenuCharts extends UiMenuAction
         legend.setBackgroundPaint(Color.white);
         legend.setPosition(RectangleEdge.BOTTOM);
         legend.addChangeListener(chart);
+		legend.setItemFont(FontHandler.getDefaultFont());
         return legend;
 	}
 
@@ -432,7 +433,8 @@ public class ActionMenuCharts extends UiMenuAction
 			Integer count = counts.get(value);
 			if(value.length() == 0)
 				value = getLocalization().getFieldLabel("ChartItemLabelBlank");
-			value = fontHelper.getDisplayable(value);
+			else
+				value = fontHelper.getDisplayable(value);
 			dataset.addValue(count, seriesTitle, value);
 		}
 		return dataset;
@@ -450,7 +452,7 @@ public class ActionMenuCharts extends UiMenuAction
 		domainAxis.setCategoryLabelPositions(newPositions);
 
 		barChart.addSubtitle(new TextTitle(getLocalization().getFieldLabel("ChartSelectedBulletinsDisclaimerBar"), 
-				TextTitle.DEFAULT_FONT, TextTitle.DEFAULT_TEXT_PAINT, RectangleEdge.BOTTOM, 
+				FontHandler.getDefaultFont(), TextTitle.DEFAULT_TEXT_PAINT, RectangleEdge.BOTTOM,
 				TextTitle.DEFAULT_HORIZONTAL_ALIGNMENT, TextTitle.DEFAULT_VERTICAL_ALIGNMENT, 
 				TextTitle.DEFAULT_PADDING));
 	}
@@ -468,7 +470,7 @@ public class ActionMenuCharts extends UiMenuAction
 		        );
 		
 		pieChart.addSubtitle(new TextTitle(getLocalization().getFieldLabel("ChartSelectedBulletinsDisclaimerPie"), 
-				TextTitle.DEFAULT_FONT, TextTitle.DEFAULT_TEXT_PAINT, RectangleEdge.BOTTOM, 
+				TextTitle.DEFAULT_FONT, TextTitle.DEFAULT_TEXT_PAINT, RectangleEdge.BOTTOM,
 				TextTitle.DEFAULT_HORIZONTAL_ALIGNMENT, TextTitle.DEFAULT_VERTICAL_ALIGNMENT, 
 				TextTitle.DEFAULT_PADDING));
 
@@ -536,6 +538,8 @@ public class ActionMenuCharts extends UiMenuAction
 			Integer count = counts.get(value);
 			if(value.length() == 0)
 				value = getLocalization().getFieldLabel("ChartItemLabelBlank");
+			else
+				value = fontHelper.getDisplayable(value);
 			pieDataset.setValue(value, count);
 		}
 		return pieDataset;
