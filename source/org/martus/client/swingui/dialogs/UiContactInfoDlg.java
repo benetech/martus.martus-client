@@ -92,8 +92,6 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		panel.addComponents(new UiLabel(localization.getFieldLabel("address")), addressScrollPane);
 		
 		StringBuffer helpmsg = new StringBuffer();
-		helpmsg.append(localization.getFieldLabel("ContactInfoDescriptionOfFields"));
-		helpmsg.append('\n');
 		helpmsg.append(localization.getFieldLabel("ContactInfoFutureUseOfFields"));
 		helpmsg.append('\n');
 		helpmsg.append(localization.getFieldLabel("ContactInfoUpdateLater"));
