@@ -584,7 +584,7 @@ public class EnglishStrings
 "field:" + Bulletin.PSEUDOFIELD_WAS_SENT + "=Sent",
 "field:preferencesAdjustThai=Automatically adjust legacy Thai dates",
 "field:preferencesAdjustPersian=Automatically adjust legacy Afghan/Persian dates",
-"field:preferencesUseZawgyi=Use Zawgyi for Burmese display and input",
+"field:preferencesUseZawgyi=Use Zawgyi font for Burmese display and input",
 "field:preferencesAllPrivate=Prevent creating public bulletins",
 "field:preferencesCheckFieldOfficeBulletins=Automatically check for new Field Desk bulletins",
 "field:HeadQuartersSelected=Selected?",
