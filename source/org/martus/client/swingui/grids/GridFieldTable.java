@@ -30,9 +30,12 @@ import java.util.Collection;
 
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiFieldContext;
+import org.martus.swing.FontHandler;
 
 abstract public class GridFieldTable extends GridTable
 {
@@ -86,6 +89,19 @@ abstract public class GridFieldTable extends GridTable
 	public void initializeEditors(GridCellEditorAndRenderer[] newEditors)
 	{
 		editors = newEditors;
+	}
+
+	@Override
+	public void addColumn(TableColumn column)
+	{
+		UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(FontHandler.getUseZawgyi());
+		if (column.getHeaderValue() == null) {
+            int modelColumn = column.getModelIndex();
+            String columnName = getModel().getColumnName(modelColumn);
+			columnName = fontHelper.getDisplayable(columnName);
+            column.setHeaderValue(columnName);
+        }
+        getColumnModel().addColumn(column);
 	}
 	
 	@Override
