@@ -77,7 +77,8 @@ public class ConfigInfo
 	public void setCustomFieldTopSectionXml(String newXml)	{customFieldTopSectionXml = newXml;}
 	public void setCustomFieldBottomSectionXml(String newXml)	{customFieldBottomSectionXml = newXml;}
 	public void setUseZawgyi(boolean newUseZawgyi){useZawgyi = newUseZawgyi;}
-	public void setFieldDeskKeysXml(String newFieldDeskKeysXml) { fieldDeskKeysXml = newFieldDeskKeysXml; } 
+	public void setFieldDeskKeysXml(String newFieldDeskKeysXml) { fieldDeskKeysXml = newFieldDeskKeysXml; }
+	public void setBackedUpImprovedKeypairShare(boolean newBackedUpImprovedKeypairShare) {backedUpImprovedKeypairShare = newBackedUpImprovedKeypairShare;}
 
 
 	public void clearHQKey()						{ legacyHQKey = ""; }
@@ -109,7 +110,7 @@ public class ConfigInfo
 	public String getCustomFieldBottomSectionXml() {return customFieldBottomSectionXml;}
 	public boolean getUseZawgyi() {return useZawgyi;}
 	public String getFieldDeskKeysXml() { return fieldDeskKeysXml; }
-
+	public boolean hasBackedUpImprovedKeypairShare() {return backedUpImprovedKeypairShare;}
 	
 	public boolean isServerConfigured()
 	{
@@ -148,6 +149,7 @@ public class ConfigInfo
 		customFieldBottomSectionXml = "";
 		useZawgyi = true;
 		fieldDeskKeysXml = "";
+		backedUpImprovedKeypairShare = false;
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException
@@ -219,6 +221,9 @@ public class ConfigInfo
             
             if(loaded.version >= 16)
             	loaded.fieldDeskKeysXml = readLongString(in);
+
+			if(loaded.version >= 17)
+				loaded.backedUpImprovedKeypairShare = in.readBoolean();
 		}
 		finally
 		{
@@ -260,6 +265,7 @@ public class ConfigInfo
 			writeLongString(out, customFieldBottomSectionXml);
             out.writeBoolean(useZawgyi);
             writeLongString(out, fieldDeskKeysXml);
+			out.writeBoolean(backedUpImprovedKeypairShare);
 		}
 		finally
 		{
@@ -286,7 +292,7 @@ public class ConfigInfo
 	
 	private boolean mustAskUserToSendToServer;
 
-	public static final short VERSION = 16;
+	public static final short VERSION = 17;
 	
 	//Version 1
 	private short version;
@@ -331,4 +337,6 @@ public class ConfigInfo
     private boolean useZawgyi;
     //Version 16
     private String fieldDeskKeysXml;
+	//Version 17
+	private boolean backedUpImprovedKeypairShare;
 }

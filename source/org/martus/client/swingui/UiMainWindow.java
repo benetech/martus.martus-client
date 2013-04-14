@@ -773,18 +773,21 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		ConfigInfo info = app.getConfigInfo();
 		boolean hasBackedUpEncrypted = info.hasUserBackedUpKeypairEncrypted();
 		boolean hasBackedUpShare = info.hasUserBackedUpKeypairShare();
-		if(!hasBackedUpEncrypted || !hasBackedUpShare)
+		boolean hasBackedUpImprovedShare = info.hasBackedUpImprovedKeypairShare();
+		if(!hasBackedUpEncrypted || !hasBackedUpShare || !hasBackedUpImprovedShare)
 		{
 			String generalMsg = localization.getFieldLabel("confirmgeneralBackupKeyPairMsgcause");
 			String generalMsgEffect = localization.getFieldLabel("confirmgeneralBackupKeyPairMsgeffect");
 			String backupEncrypted = "";
 			String backupShare = "";
+			String backupImprovedShare = "";
 			if(!hasBackedUpEncrypted)
 				backupEncrypted = localization.getFieldLabel("confirmbackupIncompleteEncryptedNeeded");
 			if(!hasBackedUpShare)
 				backupShare = localization.getFieldLabel("confirmbackupIncompleteShareNeeded");
-
-			String[] contents = {generalMsg, "", backupEncrypted, backupShare, "", generalMsgEffect}; 
+			if (hasBackedUpShare && !hasBackedUpImprovedShare)
+				backupImprovedShare = localization.getFieldLabel("confirmbackupIncompleteShareNeeded");
+			String[] contents = {generalMsg, "", backupEncrypted, backupShare, backupImprovedShare,"", generalMsgEffect};
 			if(confirmDlg(getCurrentActiveFrame(), localization.getWindowTitle("askToBackupKeyPair"), contents))
 			{
 				if(!hasBackedUpEncrypted)
