@@ -53,7 +53,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 		
-		assertEquals(16, ConfigInfo.VERSION);
+		assertEquals(17, ConfigInfo.VERSION);
 
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
@@ -239,6 +239,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setCustomFieldBottomSectionXml(sampleCustomFieldBottomSectionXml);
 		info.setUseZawgyi(sampleUseZawgyi);
 		info.setFieldDeskKeysXml(sampleFieldDeskKeysXml);
+		info.setBackedUpImprovedKeypairShare(sampleBackedUpImprovedKeypairShare);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -267,7 +268,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getCustomFieldTopSectionXml());
 		assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
 		assertEquals(label + ": sampleFieldDeskKeysXml", "", info.getFieldDeskKeysXml());
-		
+		assertEquals(label + ": sampleBackedUpImprovedKeypairShare", false, info.hasBackedUpImprovedKeypairShare());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -378,6 +379,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 		else
 			assertEquals(label + ": sampleFieldDeskKeys", "", info.getFieldDeskKeysXml());
 
+		if(VERSION >= 17)
+			assertEquals(label + ": sampleBackedUpImprovedKeypairShare", sampleBackedUpImprovedKeypairShare, info.hasBackedUpImprovedKeypairShare());
+		else
+			assertEquals(label + ": sampleBackedUpImprovedKeypairShare", false, info.hasBackedUpImprovedKeypairShare());
+
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -469,6 +475,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			ConfigInfo.writeLongString(out, sampleFieldDeskKeysXml);
 		}
+		if(VERSION >= 17)
+		{
+			out.writeBoolean(sampleBackedUpImprovedKeypairShare);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -521,4 +531,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final boolean sampleUseZawgyi = true;
 //Version 16
 	final String sampleFieldDeskKeysXml = "<FieldDesks><FieldDesk><PublicKey>1234</PublicKey><Label>Test Label</Label></FieldDesk></FieldDesks>";
+//Version 17
+	final boolean sampleBackedUpImprovedKeypairShare = true;
 }

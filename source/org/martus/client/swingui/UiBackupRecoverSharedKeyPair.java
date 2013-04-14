@@ -117,6 +117,7 @@ public class UiBackupRecoverSharedKeyPair
 		try
 		{
 			mainWindow.getApp().getConfigInfo().setBackedUpKeypairShare(true);
+			mainWindow.getApp().getConfigInfo().setBackedUpImprovedKeypairShare(true);
 			mainWindow.getApp().saveConfigInfo();
 		}
 		catch (SaveConfigInfoException e)
