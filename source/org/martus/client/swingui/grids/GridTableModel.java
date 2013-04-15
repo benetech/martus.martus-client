@@ -30,12 +30,14 @@ import java.io.IOException;
 import javax.swing.table.AbstractTableModel;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.common.GridData;
 import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
+import org.martus.swing.FontHandler;
 import org.xml.sax.SAXException;
 
 
@@ -44,6 +46,7 @@ public class GridTableModel extends AbstractTableModel
 	public GridTableModel(GridFieldSpec fieldSpec, PoolOfReusableChoicesLists reusableChoicesList)
 	{
 		gridData = new GridData(fieldSpec,reusableChoicesList);
+		fontHelper = new UiFontEncodingHelper(FontHandler.getUseZawgyi());
 	}
 	
 	public int getColumnCount() 
@@ -91,7 +94,9 @@ public class GridTableModel extends AbstractTableModel
 	{
 		if(column == 0)
 			return getGridFieldSpec().getColumnZeroLabel();
-		return (String)getGridFieldSpec().getAllColumnLabels().get(column - EXTRA_COLUMN);
+		String result =  (String)getGridFieldSpec().getAllColumnLabels().get(column - EXTRA_COLUMN);
+		result = fontHelper.getDisplayable(result);
+		return result;
 	}
 	
 	public FieldType getColumnType(int column) 
@@ -157,4 +162,5 @@ public class GridTableModel extends AbstractTableModel
 
 	private int EXTRA_COLUMN = 1;
 	private GridData gridData;
+	private UiFontEncodingHelper fontHelper;
 }

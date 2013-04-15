@@ -211,7 +211,6 @@ abstract public class UiGrid extends UiField
 					cellComponent = wrapper;
 				}
 				String columnName = model.getColumnName(column);
-				columnName = fontHelper.getDisplayable(columnName);
 				Component[] rowComponents = new Component[] {
 						new UiLabel(columnName),
 						cellComponent,
@@ -376,6 +375,7 @@ abstract public class UiGrid extends UiField
 	}
 	
 	public ChoiceItem[] buildChoicesFromColumnValues(String gridColumnLabel) {
+		gridColumnLabel = fontHelper.getDisplayable(gridColumnLabel);
 		int gridColumn = model.findColumn(gridColumnLabel);
 		FieldSpec columnSpec = model.getFieldSpecForColumn(gridColumn);
 	
