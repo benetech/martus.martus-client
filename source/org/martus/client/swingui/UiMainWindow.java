@@ -792,7 +792,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			{
 				if(!hasBackedUpEncrypted)
 					askToBackupKeyPairEncryptedSingleFile();
-				if(!hasBackedUpShare)
+				if(!hasBackedUpShare || !hasBackedUpImprovedShare)
 					askToBackupKeyPareToSecretShareFiles();
 			}
 		}
