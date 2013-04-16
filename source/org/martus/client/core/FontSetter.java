@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.martus.common.MartusLogger;
+import org.martus.swing.FontHandler;
 
 public class FontSetter {
 
@@ -28,6 +29,17 @@ public class FontSetter {
 			}
 		}
 	 }
+
+	public static void setDefaultFont(boolean useZawgyi)
+	{
+		if (useZawgyi)
+		{
+			setUIFont(FontHandler.BURMESE_FONT);
+		}  else
+		{
+			restoreDefaults();
+		}
+	}
 
 	private static void memorizeOriginalFont(Object key, Object value)
 	{

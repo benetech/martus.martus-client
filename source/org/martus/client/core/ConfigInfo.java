@@ -147,7 +147,7 @@ public class ConfigInfo
 		defaultHQKeysXml = "";
 		customFieldTopSectionXml = "";
 		customFieldBottomSectionXml = "";
-		useZawgyi = true;
+		useZawgyi = false;
 		fieldDeskKeysXml = "";
 		backedUpImprovedKeypairShare = false;
 	}
