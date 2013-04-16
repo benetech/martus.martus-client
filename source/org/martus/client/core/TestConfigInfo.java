@@ -372,7 +372,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		if(VERSION >= 15)
 			assertEquals(label + ": sampleUseZawgyi", sampleUseZawgyi, info.getUseZawgyi());
 		else
-			assertEquals(label + ": sampleUseZawgyi", true, info.getUseZawgyi());
+			assertEquals(label + ": sampleUseZawgyi", false, info.getUseZawgyi());
 		
 		if(VERSION >= 16)
 			assertEquals(label + ": sampleFieldDeskKeys", sampleFieldDeskKeysXml, info.getFieldDeskKeysXml());

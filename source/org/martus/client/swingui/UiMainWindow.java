@@ -1607,6 +1607,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			app.getConfigInfo().setCheckForFieldOfficeBulletins(dlg.isCheckFieldOfficeBulletinsChecked());
 			app.getConfigInfo().setUseZawgyi(dlg.isUseZawgyi());
 			FontHandler.setUseZawgyi(dlg.isUseZawgyi());
+			FontSetter.setDefaultFont(dlg.isUseZawgyi());
 			saveConfigInfo();
 			initializeViews();
 			restoreState();

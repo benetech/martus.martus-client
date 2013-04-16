@@ -446,14 +446,7 @@ public class MartusApp
 			store.setBottomSectionFieldSpecs(specsBottom);
 			
 			convertLegacyHQToMultipleHQs();
-
-			if (configInfo.getUseZawgyi())
-			{
-				FontSetter.setUIFont(FontHandler.BURMESE_FONT);
-			}  else
-			{
-				FontSetter.restoreDefaults();
-			}
+			FontSetter.setDefaultFont(configInfo.getUseZawgyi());
 
 		}
 		catch (Exception e)
