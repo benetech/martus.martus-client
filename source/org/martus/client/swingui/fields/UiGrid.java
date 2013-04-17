@@ -58,6 +58,7 @@ import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
+import org.martus.common.utilities.BurmeseUtilities;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
@@ -386,6 +387,7 @@ abstract public class UiGrid extends UiField
 		for(int row = 0; row < model.getRowCount(); ++row)
 		{
 			String thisValue = (String)model.getValueAt(row, gridColumn);
+			thisValue = BurmeseUtilities.getStorable(thisValue);
 			if(existingValues.contains(thisValue))
 				continue;
 	

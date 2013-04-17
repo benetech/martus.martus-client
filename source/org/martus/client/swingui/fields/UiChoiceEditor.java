@@ -38,6 +38,7 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComponent;
 import javax.swing.JList;
 
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.fields.UiEditableGrid.EnterAction;
 import org.martus.client.swingui.fields.UiEditableGrid.ShiftTabAction;
 import org.martus.client.swingui.fields.UiEditableGrid.SpaceAction;
@@ -46,6 +47,8 @@ import org.martus.common.ListOfReusableChoicesLists;
 import org.martus.common.MiniLocalization;
 import org.martus.common.ReusableChoices;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.utilities.BurmeseUtilities;
+import org.martus.swing.FontHandler;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.Utilities;
@@ -56,6 +59,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	public UiChoiceEditor(MiniLocalization localizationToUse)
 	{
 		super(localizationToUse);
+		fontHelper = new UiFontEncodingHelper(FontHandler.getUseZawgyi());
 
 		container = Box.createHorizontalBox();
 		comboBoxes = new Vector();
@@ -90,6 +94,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 				choiceText = choiceItem.toString();
 
 			String displayString = choiceText + spaceSoValueWontBeHiddenIfEmpty;
+			displayString  = BurmeseUtilities.getDisplayable(displayString);
 			Component cellRenderer = super.getListCellRendererComponent(list, displayString, index, isSelected,
 					cellHasFocus);
 			cellRenderer.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
@@ -330,5 +335,6 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	private SpaceAction spaceAction;
 	private TabAction tabAction;
 	private ShiftTabAction shiftTabAction;
+	private UiFontEncodingHelper fontHelper;
 }
 
