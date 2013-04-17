@@ -447,6 +447,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		timeoutChecker.schedule(timeoutTimerTask, 0, BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS);
 
 		loadConfigInfo();
+		getApp().startOrStopTorAsRequested();
 		if(!createdNewAccount && !justRecovered)
 			askAndBackupKeypairIfRequired();
 		

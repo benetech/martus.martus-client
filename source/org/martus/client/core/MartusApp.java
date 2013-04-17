@@ -144,8 +144,7 @@ public class MartusApp
 	{
 		localization = localizationToUse;
 
-		transport = new TorTransportWrapper();
-		transport.start();
+		transport = TorTransportWrapper.create();
 		
 		try
 		{
@@ -453,6 +452,15 @@ public class MartusApp
 		{
 			throw new LoadConfigInfoException(e);
 		}
+	}
+	
+	public void startOrStopTorAsRequested()
+	{
+		boolean isTorEnabled = true; // getConfigInfo().isTorEnabled();
+		if(isTorEnabled)
+			transport.start();
+		else
+			transport.stop();
 	}
 
 	private byte[] verifyAndReadSignedFile(File dataFile, File sigFile) throws Exception
