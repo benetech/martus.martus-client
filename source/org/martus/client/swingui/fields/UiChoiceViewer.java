@@ -33,8 +33,13 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JComponent;
 
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.common.ListOfReusableChoicesLists;
 import org.martus.common.MiniLocalization;
+import org.martus.common.ReusableChoices;
+import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.utilities.BurmeseUtilities;
+import org.martus.swing.FontHandler;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.Utilities;
@@ -45,6 +50,7 @@ public class UiChoiceViewer extends UiChoice
 	{
 		super(localizationToUse);
 		container = Box.createHorizontalBox();
+		fontHelper = new UiFontEncodingHelper(FontHandler.getUseZawgyi());
 	}
 	
 	public String getText()
@@ -65,7 +71,9 @@ public class UiChoiceViewer extends UiChoice
 			widget.setHorizontalAlignment(UiLanguageDirection.getHorizontalAlignment());
 			if(displayText[level].length() > 0)
 			{
-				widget.setText(" " + displayText[level] + " ");
+				String thisDisplayText = displayText[level];
+				thisDisplayText = fontHelper.getDisplayable(thisDisplayText);
+				widget.setText(" " + thisDisplayText + " ");
 				if(reusableChoicesLists.size() > 1)
 					widget.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			}
@@ -94,4 +102,5 @@ public class UiChoiceViewer extends UiChoice
 
 	private Box container;
 	private ListOfReusableChoicesLists reusableChoicesLists;
+	private UiFontEncodingHelper fontHelper;
 }
