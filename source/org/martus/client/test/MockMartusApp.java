@@ -163,7 +163,7 @@ public class MockMartusApp extends MartusApp
 		if(sigFile.exists())
 			throw new IOException("sigFile");
 
-		File logFile = new File(getUploadLogFilename());
+		File logFile = new File(getLegacyUploadLogFilename());
 		logFile.delete();
 		if(logFile.exists())
 			throw new IOException("logFile");
