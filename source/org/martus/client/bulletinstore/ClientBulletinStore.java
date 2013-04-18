@@ -50,9 +50,9 @@ import org.martus.common.BulletinSummary;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
+import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusXml;
 import org.martus.common.PoolOfReusableChoicesLists;
-import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.bulletin.BulletinZipImporter;
@@ -61,8 +61,8 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.database.ClientFileDatabase;
 import org.martus.common.database.Database;
-import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.Database.RecordHiddenException;
+import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.field.MartusField;
@@ -1424,7 +1424,12 @@ public class ClientBulletinStore extends BulletinStore
 
 	private File getFieldSpecCacheFile()
 	{
-		return new File(getStoreRootDir(), FIELD_SPEC_CACHE_FILE_NAME);
+		return getFieldSpecCacheFile(getStoreRootDir());
+	}
+
+	public static File getFieldSpecCacheFile(File accountDirectory)
+	{
+		return new File(accountDirectory, FIELD_SPEC_CACHE_FILE_NAME);
 	}
 	
 	public boolean bulletinHasCurrentFieldSpecs(Bulletin b)

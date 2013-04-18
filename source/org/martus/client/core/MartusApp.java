@@ -58,6 +58,7 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.reports.ReportFormatFilter;
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.EnglishStrings;
@@ -117,7 +118,6 @@ import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.common.packet.UniversalId;
 import org.martus.jarverifier.JarVerifier;
-import org.martus.swing.FontHandler;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.Stopwatch;
 import org.martus.util.StreamCopier;
@@ -684,12 +684,22 @@ public class MartusApp
 
 	public File getRetrieveFile()
 	{
-		return new File(getCurrentAccountDirectory(), "Retrieve.dat");
+		return getRetrieveFile(getCurrentAccountDirectory());
 	}
 
-	public String getUploadLogFilename()
+	private static File getRetrieveFile(File accountDirectory)
 	{
-		return  getCurrentAccountDirectoryName() + "MartusUploadLog.txt";
+		return new File(accountDirectory, "Retrieve.dat");
+	}
+
+	public String getLegacyUploadLogFilename()
+	{
+		return getLegacyUploadLogFileForAccount(getCurrentAccountDirectory()).getAbsolutePath();
+	}
+
+	private File getLegacyUploadLogFileForAccount(File accountDirectory)
+	{
+		return new File(accountDirectory, "MartusUploadLog.txt");
 	}
 
 	public InputStream getHelpMain(String currentLanguageCode)
@@ -1107,10 +1117,24 @@ public class MartusApp
 		DirectoryUtils.scrubAndDeleteFile(getUiStateFileForAccount(accountDirectory));
 		DirectoryUtils.scrubAndDeleteFile(ClientBulletinStore.getFoldersFileForAccount(accountDirectory));
 		DirectoryUtils.scrubAndDeleteFile(ClientBulletinStore.getCacheFileForAccount(accountDirectory));
+		DirectoryUtils.scrubAndDeleteFile(ClientBulletinStore.getFieldSpecCacheFile(accountDirectory));
+		DirectoryUtils.scrubAndDeleteFile(getRetrieveFile(accountDirectory));
+		DirectoryUtils.scrubAndDeleteFile(getDictionaryFileForAccount(accountDirectory));
+		DirectoryUtils.scrubAndDeleteFile(getDictionarySignatureFileForAccount(accountDirectory));
+		DirectoryUtils.scrubAndDeleteFile(getLegacyUploadLogFileForAccount(accountDirectory));
+		DirectoryUtils.scrubAndDeleteFile(new File(accountDirectory, "velocity.log"));
+
 		File[] exportedKeys = exportedPublicKeyFiles(accountDirectory);
 		for (int i = 0; i < exportedKeys.length; i++)
 		{
 			File file = exportedKeys[i];
+			DirectoryUtils.scrubAndDeleteFile(file);
+		}
+
+		File[] reportFormats = reportFormatFiles(accountDirectory, getLocalization());
+		for (int i = 0; i < reportFormats.length; i++)
+		{
+			File file = reportFormats[i];
 			DirectoryUtils.scrubAndDeleteFile(file);
 		}
 	}
@@ -1125,6 +1149,12 @@ public class MartusApp
 			}
 		});
 		return mpiFiles;
+	}
+
+	private static File[] reportFormatFiles(File accountDir, MiniLocalization localization)
+	{
+		File[] reportFormatFiles = accountDir.listFiles(new ReportFormatFilter(localization));
+		return reportFormatFiles;
 	}
 
 	private File[] GetMlpFiles()

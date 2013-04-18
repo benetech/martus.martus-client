@@ -29,7 +29,7 @@ package org.martus.client.reports;
 import org.martus.clientside.FormatFilter;
 import org.martus.common.MiniLocalization;
 
-public class ReportFormatFilter extends FormatFilter
+public class ReportFormatFilter extends FormatFilter implements java.io.FileFilter
 {
 	public ReportFormatFilter(MiniLocalization localization)
 	{
