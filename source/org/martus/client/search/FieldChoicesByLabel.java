@@ -51,7 +51,7 @@ public class FieldChoicesByLabel
 	public FieldChoicesByLabel()
 	{
 		allChoices = new Vector();
-		fontHelper = new UiFontEncodingHelper(FontHandler.getUseZawgyi());
+		fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
 	}
 	
 	public void add(ChoiceItem itemToAdd)

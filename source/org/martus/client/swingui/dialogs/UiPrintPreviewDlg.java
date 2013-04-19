@@ -44,7 +44,7 @@ public class UiPrintPreviewDlg extends UiPreviewDlg
 	private JComponent createScrollablePreview(ReportOutput output)
 	{
 		String html = output.getPrintableDocument();
-		if (mainWindow.getUseZawgyi())
+		if (mainWindow.getUseZawgyiFont())
 			html = html.replaceAll("<table", "<table style=\"font-family: Zawgyi-One, Sans-Serif; \" ");
 		JComponent previewText = ActionPrint.getHtmlViewableComponent(html);
 		JComponent scrollablePreview = new UiScrollPane(previewText);

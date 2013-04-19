@@ -59,7 +59,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	public UiChoiceEditor(MiniLocalization localizationToUse)
 	{
 		super(localizationToUse);
-		fontHelper = new UiFontEncodingHelper(FontHandler.getUseZawgyi());
+		fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
 
 		container = Box.createHorizontalBox();
 		comboBoxes = new Vector();

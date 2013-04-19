@@ -50,7 +50,7 @@ public class UiChoiceViewer extends UiChoice
 	{
 		super(localizationToUse);
 		container = Box.createHorizontalBox();
-		fontHelper = new UiFontEncodingHelper(FontHandler.getUseZawgyi());
+		fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
 	}
 	
 	public String getText()

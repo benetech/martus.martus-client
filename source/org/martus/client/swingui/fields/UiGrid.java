@@ -82,7 +82,7 @@ abstract public class UiGrid extends UiField
 		model = modelToUse;
 		context = contextToUse;
 		fieldCreator = fieldCreatorToUse;
-		fontHelper = new UiFontEncodingHelper(mainWindowToUse.getUseZawgyi());
+		fontHelper = new UiFontEncodingHelper(mainWindowToUse.getDoZawgyiConversion());
 		
 		table = createGridTable(dlgLauncher, context);
 		table.setColumnSelectionAllowed(false);

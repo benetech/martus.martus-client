@@ -46,7 +46,7 @@ public class GridTableModel extends AbstractTableModel
 	public GridTableModel(GridFieldSpec fieldSpec, PoolOfReusableChoicesLists reusableChoicesList)
 	{
 		gridData = new GridData(fieldSpec,reusableChoicesList);
-		fontHelper = new UiFontEncodingHelper(FontHandler.getUseZawgyi());
+		fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
 	}
 	
 	public int getColumnCount() 

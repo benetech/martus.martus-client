@@ -63,7 +63,7 @@ public class ActionPrint extends UiMenuAction
 	public ActionPrint(UiMainWindow mainWindowToUse, String menuTag)
 	{
 		super(mainWindowToUse, menuTag);
-		fontHelper = new UiFontEncodingHelper(mainWindowToUse.getUseZawgyi());
+		fontHelper = new UiFontEncodingHelper(mainWindowToUse.getDoZawgyiConversion());
 	}
 	
 	public boolean isEnabled()

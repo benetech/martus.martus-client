@@ -239,7 +239,7 @@ public class SafeReadableBulletin
 			ChoiceItem choice = (ChoiceItem)iter.next();
 			MiniFieldSpec miniSpec = new MiniFieldSpec(choice.getSpec());
 			MartusField field = getPossiblyNestedField(miniSpec);
-			field.setConvertStandardLabelToStorable(FontHandler.getUseZawgyi());
+			field.setConvertStandardLabelToStorable(FontHandler.isDoZawgyiConversion());
 			fields.add(field);
 		}
 		return fields;

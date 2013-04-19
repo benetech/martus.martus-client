@@ -47,7 +47,7 @@ public class UiStringInputDlg extends JDialog
 	{
 		super(owner, "", true);
 
-		fontHelper = new UiFontEncodingHelper(owner.getUseZawgyi());
+		fontHelper = new UiFontEncodingHelper(owner.getDoZawgyiConversion());
 		UiLocalization localization = owner.getLocalization();
 		setTitle(localization.getWindowTitle("input" + baseTag));
 		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "entry"));

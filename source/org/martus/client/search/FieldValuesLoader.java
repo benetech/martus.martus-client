@@ -49,7 +49,7 @@ public class FieldValuesLoader
 	{
 		store = app.getStore();
 		localization = app.getLocalization();
-		fontHelper = new UiFontEncodingHelper(app.getConfigInfo().getUseZawgyi());
+		fontHelper = new UiFontEncodingHelper(app.getConfigInfo().getDoZawgyiConversion());
 	}
 	
 	public HashSet loadFieldValuesFromAllBulletinRevisions(UiProgressWithCancelDlg progressMeter, FieldSpec fieldSpec)

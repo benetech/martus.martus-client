@@ -49,7 +49,7 @@ public class ReportOutput extends Writer implements Printable
 		currentPage = new StringWriter();
 		documentStart = "";
 		documentEnd = "";
-		fontHelper = new UiFontEncodingHelper(FontHandler.getUseZawgyi());
+		fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
 	}
 	
 	public void close() throws IOException

@@ -50,7 +50,7 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 			new MiniFieldSpec(FieldSpec.createCustomField("tag2", "Label2", new FieldTypeNormal())),
 			new MiniFieldSpec(FieldSpec.createCustomField("tag3", "Label3", new FieldTypeNormal())),
 		};
-		FontHandler.setUseZawgyi(false);
+		FontHandler.setUseZawgyiFont(false);
 		TabularReportBuilder builder = new TabularReportBuilder(new MiniLocalization());
 		ReportFormat rf = builder.createTabular(specs);
 		

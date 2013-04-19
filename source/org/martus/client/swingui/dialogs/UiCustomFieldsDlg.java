@@ -77,7 +77,7 @@ public class UiCustomFieldsDlg extends JDialog
 		String baseTag = "CustomFields";
 		MartusLocalization localization = owner.getLocalization();
 		setTitle(localization.getWindowTitle("input" + baseTag));
-		fontHelper = new UiFontEncodingHelper(mainWindow.getUseZawgyi());
+		fontHelper = new UiFontEncodingHelper(mainWindow.getDoZawgyiConversion());
 
 		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "Info"));
 

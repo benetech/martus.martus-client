@@ -76,7 +76,7 @@ public class ConfigInfo
 	public void setCheckForFieldOfficeBulletins(boolean newCheckForBulletins){checkForFieldOfficeBulletins = newCheckForBulletins;}
 	public void setCustomFieldTopSectionXml(String newXml)	{customFieldTopSectionXml = newXml;}
 	public void setCustomFieldBottomSectionXml(String newXml)	{customFieldBottomSectionXml = newXml;}
-	public void setUseZawgyi(boolean newUseZawgyi){useZawgyi = newUseZawgyi;}
+	public void setUseZawgyiFont(boolean newUseZawgyiFont){useZawgyiFont = newUseZawgyiFont;}
 	public void setFieldDeskKeysXml(String newFieldDeskKeysXml) { fieldDeskKeysXml = newFieldDeskKeysXml; }
 	public void setBackedUpImprovedKeypairShare(boolean newBackedUpImprovedKeypairShare) {backedUpImprovedKeypairShare = newBackedUpImprovedKeypairShare;}
 
@@ -108,9 +108,10 @@ public class ConfigInfo
 	public boolean getCheckForFieldOfficeBulletins() {return checkForFieldOfficeBulletins;}
 	public String getCustomFieldTopSectionXml()	{return customFieldTopSectionXml;}
 	public String getCustomFieldBottomSectionXml() {return customFieldBottomSectionXml;}
-	public boolean getUseZawgyi() {return useZawgyi;}
+	public boolean getUseZawgyiFont() {return useZawgyiFont;}
 	public String getFieldDeskKeysXml() { return fieldDeskKeysXml; }
 	public boolean hasBackedUpImprovedKeypairShare() {return backedUpImprovedKeypairShare;}
+	public boolean getDoZawgyiConversion() {return doZawgyiConversion;}
 	
 	public boolean isServerConfigured()
 	{
@@ -147,7 +148,7 @@ public class ConfigInfo
 		defaultHQKeysXml = "";
 		customFieldTopSectionXml = "";
 		customFieldBottomSectionXml = "";
-		useZawgyi = false;
+		useZawgyiFont = false;
 		fieldDeskKeysXml = "";
 		backedUpImprovedKeypairShare = false;
 	}
@@ -217,7 +218,7 @@ public class ConfigInfo
 			}
 
             if(loaded.version >= 15)
-                loaded.useZawgyi = in.readBoolean();
+                loaded.useZawgyiFont = in.readBoolean();
             
             if(loaded.version >= 16)
             	loaded.fieldDeskKeysXml = readLongString(in);
@@ -229,7 +230,8 @@ public class ConfigInfo
 		{
 			in.close();
 		}
-		FontHandler.setUseZawgyi(loaded.useZawgyi);
+		FontHandler.setUseZawgyiFont(loaded.useZawgyiFont);
+		FontHandler.setDoZawgyiConversion(doZawgyiConversion);
 		return loaded;
 	}
 
@@ -263,7 +265,7 @@ public class ConfigInfo
 			out.writeBoolean(checkForFieldOfficeBulletins);
 			writeLongString(out, customFieldTopSectionXml);
 			writeLongString(out, customFieldBottomSectionXml);
-            out.writeBoolean(useZawgyi);
+            out.writeBoolean(useZawgyiFont);
             writeLongString(out, fieldDeskKeysXml);
 			out.writeBoolean(backedUpImprovedKeypairShare);
 		}
@@ -291,6 +293,7 @@ public class ConfigInfo
 	}
 	
 	private boolean mustAskUserToSendToServer;
+	private static boolean doZawgyiConversion = true;
 
 	public static final short VERSION = 17;
 	
@@ -334,7 +337,7 @@ public class ConfigInfo
 	private String customFieldTopSectionXml;
 	private String customFieldBottomSectionXml;
     //Version 15
-    private boolean useZawgyi;
+    private boolean useZawgyiFont;
     //Version 16
     private String fieldDeskKeysXml;
 	//Version 17

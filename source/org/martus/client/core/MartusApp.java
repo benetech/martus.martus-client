@@ -445,7 +445,7 @@ public class MartusApp
 			store.setBottomSectionFieldSpecs(specsBottom);
 			
 			convertLegacyHQToMultipleHQs();
-			FontSetter.setDefaultFont(configInfo.getUseZawgyi());
+			FontSetter.setDefaultFont(configInfo.getUseZawgyiFont());
 
 		}
 		catch (Exception e)
@@ -1360,7 +1360,7 @@ public class MartusApp
 		stopWatch.start();
 		long revisionsSearched = 0;
 		BulletinSearcher matcher = new BulletinSearcher(searchNode, searchSameRowsOnly);
-		matcher.setUseZawgyi(configInfo.getUseZawgyi());
+		matcher.setDoZawgyiConversion(configInfo.getDoZawgyiConversion());
 		SortableBulletinList matchedBulletinUids = new SortableBulletinList(localization, specsForSorting, extraSpecs);
 
 		Set uids = store.getAllBulletinLeafUids();

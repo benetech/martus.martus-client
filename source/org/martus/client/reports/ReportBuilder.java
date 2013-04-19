@@ -35,7 +35,7 @@ public class ReportBuilder
 	public ReportBuilder(MiniLocalization localizationToUse)
 	{
 		localization = localizationToUse;
-		fontHelper = new UiFontEncodingHelper(FontHandler.getUseZawgyi());
+		fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
 	}
 	
 	/*

@@ -50,7 +50,7 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 	{
 		super(mainWindow.getCurrentActiveFrame(), "", true);
 		info = infoToUse;
-		fontHelper = new UiFontEncodingHelper(info.getUseZawgyi());
+		fontHelper = new UiFontEncodingHelper(info.getDoZawgyiConversion());
 
 		UiLocalization localization = mainWindow.getLocalization();
 	

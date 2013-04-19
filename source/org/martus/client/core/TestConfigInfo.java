@@ -237,7 +237,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setCheckForFieldOfficeBulletins(sampleCheckForFieldOfficeBulletins);
 		info.setCustomFieldTopSectionXml(sampleCustomFieldTopSectionXml);
 		info.setCustomFieldBottomSectionXml(sampleCustomFieldBottomSectionXml);
-		info.setUseZawgyi(sampleUseZawgyi);
+		info.setUseZawgyiFont(sampleUseZawgyi);
 		info.setFieldDeskKeysXml(sampleFieldDeskKeysXml);
 		info.setBackedUpImprovedKeypairShare(sampleBackedUpImprovedKeypairShare);
 	}
@@ -370,9 +370,9 @@ public class TestConfigInfo extends TestCaseEnhanced
 		}
 
 		if(VERSION >= 15)
-			assertEquals(label + ": sampleUseZawgyi", sampleUseZawgyi, info.getUseZawgyi());
+			assertEquals(label + ": sampleUseZawgyi", sampleUseZawgyi, info.getUseZawgyiFont());
 		else
-			assertEquals(label + ": sampleUseZawgyi", false, info.getUseZawgyi());
+			assertEquals(label + ": sampleUseZawgyi", false, info.getUseZawgyiFont());
 		
 		if(VERSION >= 16)
 			assertEquals(label + ": sampleFieldDeskKeys", sampleFieldDeskKeysXml, info.getFieldDeskKeysXml());

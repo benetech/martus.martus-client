@@ -99,7 +99,7 @@ public class ActionMenuCharts extends UiMenuAction
 	public ActionMenuCharts(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse, "Charts");
-		fontHelper = new UiFontEncodingHelper(mainWindowToUse.getUseZawgyi());
+		fontHelper = new UiFontEncodingHelper(mainWindowToUse.getDoZawgyiConversion());
 	}
 
 	public void actionPerformed(ActionEvent events)
