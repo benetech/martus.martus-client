@@ -420,6 +420,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 
 		String currentLanguageCode = localization.getCurrentLanguageCode();
+		FontSetter.setDefaultFont(currentLanguageCode.equals(MtfAwareLocalization.BURMESE));
 		displayDefaultUnofficialTranslationMessageIfNecessary(currentActiveFrame, localization, currentLanguageCode);
 		displayIncompatibleMtfVersionWarningMessageIfNecessary(currentActiveFrame, localization, localization.getCurrentLanguageCode());
 		
@@ -1608,7 +1609,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			app.getConfigInfo().setCheckForFieldOfficeBulletins(dlg.isCheckFieldOfficeBulletinsChecked());
 			app.getConfigInfo().setUseZawgyiFont(dlg.isUseZawgyiFont());
 			saveConfigInfo();
-			FontHandler.setUseZawgyiFont(dlg.isUseZawgyiFont());
 			FontSetter.setDefaultFont(dlg.isUseZawgyiFont());
 			initializeViews();
 			restoreState();
