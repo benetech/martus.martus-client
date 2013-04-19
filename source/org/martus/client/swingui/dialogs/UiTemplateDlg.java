@@ -64,7 +64,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		mainWindow = owner;
 		defaultDetailsFile = defaultDetailsFileToUse;
 
-		fontHelper = new UiFontEncodingHelper(info.getUseZawgyi());
+		fontHelper = new UiFontEncodingHelper(info.getDoZawgyiConversion());
 		UiLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle("BulletinTemplate"));
 		okButton = new UiButton(localization.getButtonLabel("ok"));

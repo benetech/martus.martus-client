@@ -41,7 +41,7 @@ public class UiMessageField extends UiViewerField
 	{
 		super(mainWindow.getLocalization());
 		String message = ((MessageFieldSpec)(spec)).getMessage();
-		if (mainWindow.getUseZawgyi())
+		if (mainWindow.getDoZawgyiConversion())
 			message = BurmeseUtilities.getDisplayable(message);
 		widget = new UiWrappedTextArea(message, numberColumns);
 		widget.setEditable(false);

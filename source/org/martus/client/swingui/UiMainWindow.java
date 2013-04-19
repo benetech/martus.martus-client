@@ -1606,10 +1606,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			app.getConfigInfo().setForceBulletinsAllPrivate(dlg.isAllPrivateChecked());
 			app.getConfigInfo().setCheckForFieldOfficeBulletins(dlg.isCheckFieldOfficeBulletinsChecked());
-			app.getConfigInfo().setUseZawgyi(dlg.isUseZawgyi());
-			FontHandler.setUseZawgyi(dlg.isUseZawgyi());
-			FontSetter.setDefaultFont(dlg.isUseZawgyi());
+			app.getConfigInfo().setUseZawgyiFont(dlg.isUseZawgyiFont());
 			saveConfigInfo();
+			FontHandler.setUseZawgyiFont(dlg.isUseZawgyiFont());
+			FontSetter.setDefaultFont(dlg.isUseZawgyiFont());
 			initializeViews();
 			restoreState();
 			setVisible(true);
@@ -2639,10 +2639,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return app.getConfigInfo().getCheckForFieldOfficeBulletins();
 	}
 
-    public boolean getUseZawgyi()
-    {
-        return app.getConfigInfo().getUseZawgyi();
-    }
+    public boolean getUseZawgyiFont()
+	{
+		return app.getConfigInfo().getUseZawgyiFont();
+	}
+
+	public boolean getDoZawgyiConversion()
+	{
+	 	return app.getConfigInfo().getDoZawgyiConversion();
+	}
 
 	public boolean isAnyBulletinSelected()
 	{

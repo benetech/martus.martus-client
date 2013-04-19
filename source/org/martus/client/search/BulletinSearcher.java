@@ -56,9 +56,9 @@ public class BulletinSearcher
 		return (getMatchResults(b, localization).doesMatch());
 	}
 
-	public void setUseZawgyi(boolean useZawgyi)
+	public void setDoZawgyiConversion(boolean doZawgyiConversion)
 	{
-		this.useZawgyi = useZawgyi;
+		this.doZawgyiConversion = doZawgyiConversion;
 	}
 
 	private MatchResults getMatchResults(SafeReadableBulletin b, MiniLocalization localization)
@@ -85,7 +85,7 @@ public class BulletinSearcher
 	private MatchResults getMatchResultsForValueNode(SafeReadableBulletin b, MiniLocalization localization)
 	{
 		String searchForValue = node.getValue();
-		if (useZawgyi)
+		if (doZawgyiConversion)
 			searchForValue = BurmeseUtilities.getStorable(searchForValue);
 
 		FieldSpec fieldToSearch = node.getField();
@@ -276,5 +276,5 @@ public class BulletinSearcher
 	
 	private SearchTreeNode node;
 	private boolean sameRowsMode;
-	private boolean useZawgyi;
+	private boolean doZawgyiConversion;
 }

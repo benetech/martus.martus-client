@@ -43,7 +43,7 @@ public class BulletinTableModel extends AbstractTableModel
     public BulletinTableModel(MartusApp app)
     {
 		localization = app.getLocalization();
-	    fontHelper = new UiFontEncodingHelper(app.getConfigInfo().getUseZawgyi());
+	    fontHelper = new UiFontEncodingHelper(app.getConfigInfo().getDoZawgyiConversion());
     }
 
 	public void setFolder(BulletinFolder folderToUse)

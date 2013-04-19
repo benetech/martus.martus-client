@@ -492,7 +492,7 @@ class BackgroundTimerTask extends TimerTask
 	{
 		public ThreadedServerComplianceDlg(String newComplianceToUse)
 		{
-			UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(mainWindow.getUseZawgyi());
+			UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(mainWindow.getDoZawgyiConversion());
 			newCompliance = fontHelper.getDisplayable(newComplianceToUse);
 		}
 			

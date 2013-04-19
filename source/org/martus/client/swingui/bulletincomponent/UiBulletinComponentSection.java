@@ -66,7 +66,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 		setLayout(layout);
 		mainWindow = mainWindowToUse;
 		groups = new Vector();
-		fontHelper = new UiFontEncodingHelper(mainWindow.getUseZawgyi());
+		fontHelper = new UiFontEncodingHelper(mainWindow.getDoZawgyiConversion());
 		
 		setBorder(new EtchedBorder());
 		

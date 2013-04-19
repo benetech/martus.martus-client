@@ -37,7 +37,7 @@ abstract public class ExternalPublicKeysTableModel extends UiTableModel
 	public ExternalPublicKeysTableModel(MartusApp app)
 	{
 		localization = app.getLocalization();
-		fontHelper = new UiFontEncodingHelper(app.getConfigInfo().getUseZawgyi());
+		fontHelper = new UiFontEncodingHelper(app.getConfigInfo().getDoZawgyiConversion());
 		entries = new Vector();
 	}
 	

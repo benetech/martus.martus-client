@@ -33,12 +33,15 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
+import org.martus.client.core.FontSetter;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
+import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.swing.FontHandler;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiLabel;
@@ -92,9 +95,9 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		adjustPersian.setText(localization.getFieldLabel("preferencesAdjustPersian"));
 		adjustPersian.setSelected(localization.getAdjustPersianLegacyDates());
 
-        useZawgyi = new UiCheckBox();
-        useZawgyi.setText(localization.getFieldLabel("preferencesUseZawgyi"));
-        useZawgyi.setSelected(owner.getUseZawgyi());
+		useZawgyiFont = new UiCheckBox();
+		useZawgyiFont.setText(localization.getFieldLabel("preferencesUseZawgyi"));
+		useZawgyiFont.setSelected(owner.getUseZawgyiFont());
 		
 		allPrivate = new UiCheckBox();
 		allPrivate.setText(localization.getFieldLabel("preferencesAllPrivate"));
@@ -111,7 +114,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		preferences.addComponents(new UiLabel(localization.getFieldLabel("CalendarSystem")), calendarDropdown.getComponent());
 		preferences.addOnNewLine(adjustThai);
 		preferences.addOnNewLine(adjustPersian);
-		preferences.addOnNewLine(useZawgyi);
+		preferences.addOnNewLine(useZawgyiFont);
 
 		preferences.addBlankLine();
 		preferences.addOnNewLine(allPrivate);
@@ -146,9 +149,9 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		return checkFieldOfficeBulletins.isSelected();
 	}
 
-    public boolean isUseZawgyi()
+    public boolean isUseZawgyiFont()
     {
-        return useZawgyi.isSelected();
+        return useZawgyiFont.isSelected();
     }
 	
 	private String buildMdyLabel(String mdyOrder)
@@ -189,6 +192,8 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			localization.setCurrentLanguageCode(languageDropdown.getText());
 			localization.setAdjustThaiLegacyDates(adjustThai.isSelected());
 			localization.setAdjustPersianLegacyDates(adjustPersian.isSelected());
+			FontHandler.setUseZawgyiFont(isUseZawgyiFont());
+			FontSetter.setDefaultFont(isUseZawgyiFont());
 			result = true;
 		}
 		dispose();
@@ -202,7 +207,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	private UiChoiceEditor calendarDropdown;
 	private UiCheckBox adjustThai;
 	private UiCheckBox adjustPersian;
-	private UiCheckBox useZawgyi;
+	private UiCheckBox useZawgyiFont;
 	private UiCheckBox allPrivate;
 	private UiCheckBox checkFieldOfficeBulletins;
 	private JButton ok;
