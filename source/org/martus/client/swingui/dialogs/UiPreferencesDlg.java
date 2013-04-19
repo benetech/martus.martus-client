@@ -184,6 +184,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		{
 			MartusLocalization localization = owner.getLocalization();
 			String languageCodeSelected = languageDropdown.getText();
+			FontSetter.setDefaultFont(isUseZawgyiFont());
 			UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(owner.getCurrentActiveFrame(), localization, languageCodeSelected);
 			UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner.getCurrentActiveFrame(), localization, languageCodeSelected);
 			localization.setMdyOrder(mdyDropdown.getText());
@@ -192,8 +193,6 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			localization.setCurrentLanguageCode(languageDropdown.getText());
 			localization.setAdjustThaiLegacyDates(adjustThai.isSelected());
 			localization.setAdjustPersianLegacyDates(adjustPersian.isSelected());
-			FontHandler.setUseZawgyiFont(isUseZawgyiFont());
-			FontSetter.setDefaultFont(isUseZawgyiFont());
 			result = true;
 		}
 		dispose();

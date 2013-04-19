@@ -32,6 +32,7 @@ public class FontSetter {
 
 	public static void setDefaultFont(boolean useZawgyi)
 	{
+		FontHandler.setUseZawgyiFont(useZawgyi);
 		if (useZawgyi)
 		{
 			setUIFont(FontHandler.BURMESE_FONT);

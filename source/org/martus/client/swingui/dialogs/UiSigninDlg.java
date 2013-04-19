@@ -32,9 +32,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+import org.martus.client.core.FontSetter;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.clientside.CurrentUiState;
+import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiBasicSigninDlg;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiLabel;
@@ -63,6 +65,7 @@ public class UiSigninDlg extends UiBasicSigninDlg
 		public void actionPerformed(ActionEvent e)
 		{
 			String languageCode = languageDropdown.getText();
+			FontSetter.setDefaultFont(languageCode.equals(MtfAwareLocalization.BURMESE));
 			UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(owner, localization, languageCode);
 			UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner, localization, languageCode);
 			changeLanguagesAndRestartSignin(languageCode);
