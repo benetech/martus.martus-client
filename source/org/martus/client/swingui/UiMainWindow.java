@@ -788,8 +788,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(!hasBackedUpShare)
 				backupShare = localization.getFieldLabel("confirmbackupIncompleteShareNeeded");
 			if (hasBackedUpShare && !hasBackedUpImprovedShare)
-				backupImprovedShare = localization.getFieldLabel("confirmbackupIncompleteShareNeeded");
-			String[] contents = {generalMsg, "", backupEncrypted, backupShare, backupImprovedShare,"", generalMsgEffect};
+				backupImprovedShare = localization.getFieldLabel("confirmbackupIncompleteImprovedShareNeeded");
+			String[] contents;
+			if (backupImprovedShare.length() > 0)
+				contents = new String[] {generalMsg, "", backupEncrypted, "", backupImprovedShare,"", generalMsgEffect};
+			else
+				contents = new String[] {generalMsg, "", backupEncrypted, backupShare, "", generalMsgEffect};
 			if(confirmDlg(getCurrentActiveFrame(), localization.getWindowTitle("askToBackupKeyPair"), contents))
 			{
 				if(!hasBackedUpEncrypted)
