@@ -687,7 +687,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		try
 		{
-			File lockFile = new File(app.getMartusDataRootDirectory(), "lock");
+			File lockFile = getLockFile();
 			lockStream = new FileOutputStream(lockFile);
 			lockToPreventTwoInstances = lockStream.getChannel().tryLock();
 			lockFile.deleteOnExit();
@@ -701,6 +701,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			notifyDlg("AlreadyRunning");
 			System.exit(1);
 		}
+	}
+
+	private File getLockFile()
+	{
+		return new File(app.getMartusDataRootDirectory(), "lock");
 	}
 	
 	public void unLock()
@@ -2501,6 +2506,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void exitWithoutSavingState()
 	{
 		getStore().prepareToExitWithoutSavingState();
+		lock
 		System.exit(0);
 	}
 
