@@ -118,6 +118,7 @@ import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.common.packet.UniversalId;
 import org.martus.jarverifier.JarVerifier;
+import org.martus.swing.FontHandler;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.Stopwatch;
 import org.martus.util.StreamCopier;
@@ -445,10 +446,11 @@ public class MartusApp
 			store.setBottomSectionFieldSpecs(specsBottom);
 			
 			convertLegacyHQToMultipleHQs();
-			if (localization.getCurrentLanguageCode().equals(MtfAwareLocalization.BURMESE))
+			String languageCode = localization.getCurrentLanguageCode();
+			if (languageCode != null && languageCode.equals(MtfAwareLocalization.BURMESE))
 				configInfo.setUseZawgyiFont(true);
 			FontSetter.setDefaultFont(configInfo.getUseZawgyiFont());
-
+			FontHandler.setDoZawgyiConversion(configInfo.getDoZawgyiConversion());
 		}
 		catch (Exception e)
 		{

@@ -230,8 +230,7 @@ public class ConfigInfo
 		{
 			in.close();
 		}
-		FontSetter.setDefaultFont(loaded.useZawgyiFont);
-		FontHandler.setDoZawgyiConversion(true);
+
 		return loaded;
 	}
 
