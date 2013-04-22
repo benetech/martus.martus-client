@@ -789,11 +789,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				backupShare = localization.getFieldLabel("confirmbackupIncompleteShareNeeded");
 			if (hasBackedUpShare && !hasBackedUpImprovedShare)
 				backupImprovedShare = localization.getFieldLabel("confirmbackupIncompleteImprovedShareNeeded");
-			String[] contents;
-			if (backupImprovedShare.length() > 0)
-				contents = new String[] {generalMsg, "", backupEncrypted, "", backupImprovedShare,"", generalMsgEffect};
-			else
-				contents = new String[] {generalMsg, "", backupEncrypted, backupShare, "", generalMsgEffect};
+			String[] contents = new String[] {generalMsg, "", backupEncrypted, "", getBackupShareText(backupImprovedShare, backupShare), "", generalMsgEffect};
 			if(confirmDlg(getCurrentActiveFrame(), localization.getWindowTitle("askToBackupKeyPair"), contents))
 			{
 				if(!hasBackedUpEncrypted)
@@ -802,6 +798,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 					askToBackupKeyPareToSecretShareFiles();
 			}
 		}
+	}
+
+	private String getBackupShareText(String backupImprovedShareText, String backupShareText)
+	{
+		if (backupImprovedShareText.length() > 0)
+			return backupImprovedShareText;
+		else
+			return backupShareText;
 	}
 
 	void notifyClientCompliance()
