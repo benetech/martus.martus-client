@@ -2506,7 +2506,30 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void exitWithoutSavingState()
 	{
 		getStore().prepareToExitWithoutSavingState();
-		lock
+		try
+		{
+			lockToPreventTwoInstances.release();
+		} 
+		catch (IOException e)
+		{
+			MartusLogger.logException(e);
+		}
+		try
+		{
+			lockStream.close();
+		} 
+		catch (IOException e)
+		{
+			MartusLogger.logException(e);
+		}
+		try
+		{
+			getLockFile().delete();
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
 		System.exit(0);
 	}
 
