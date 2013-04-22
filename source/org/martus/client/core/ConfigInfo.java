@@ -111,7 +111,7 @@ public class ConfigInfo
 	public boolean getUseZawgyiFont() {return useZawgyiFont;}
 	public String getFieldDeskKeysXml() { return fieldDeskKeysXml; }
 	public boolean hasBackedUpImprovedKeypairShare() {return backedUpImprovedKeypairShare;}
-	public boolean getDoZawgyiConversion() {return doZawgyiConversion;}
+	public boolean getDoZawgyiConversion() {return true;}
 	
 	public boolean isServerConfigured()
 	{
@@ -231,7 +231,7 @@ public class ConfigInfo
 			in.close();
 		}
 		FontSetter.setDefaultFont(loaded.useZawgyiFont);
-		FontHandler.setDoZawgyiConversion(doZawgyiConversion);
+		FontHandler.setDoZawgyiConversion(true);
 		return loaded;
 	}
 
@@ -293,7 +293,6 @@ public class ConfigInfo
 	}
 	
 	private boolean mustAskUserToSendToServer;
-	private static boolean doZawgyiConversion = true;
 
 	public static final short VERSION = 17;
 	
