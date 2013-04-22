@@ -446,12 +446,8 @@ public class MartusApp
 			
 			convertLegacyHQToMultipleHQs();
 			if (localization.getCurrentLanguageCode().equals(MtfAwareLocalization.BURMESE))
-			{
 				configInfo.setUseZawgyiFont(true);
-				FontSetter.setDefaultFont(configInfo.getUseZawgyiFont());
-			}
-			else
-				FontSetter.setDefaultFont(configInfo.getUseZawgyiFont());
+			FontSetter.setDefaultFont(configInfo.getUseZawgyiFont());
 
 		}
 		catch (Exception e)
