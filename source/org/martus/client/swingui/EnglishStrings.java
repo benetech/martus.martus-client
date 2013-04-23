@@ -68,7 +68,7 @@ public class EnglishStrings
 "wintitle:confirmRedoWeakPassword=Weak Password Warning",
 "wintitle:confirmExportPrivateData=Confirm Export Private Data",
 "wintitle:confirmResetDefaultDetails=Reset Contents",
-"wintitle:confirmNotYourBulletinViewAttachmentAnyways=View Attachment",
+"wintitle:confirmNotYourBulletinViewAttachmentAnyways=Attachment Warning",
 "wintitle:confirmServerComplianceFailed=Server Compliance Statement",
 "wintitle:confirmWarnMissingOrCorruptAccountMapSignatureFile=Accountmap Signature File Missing Or Corrupt",
 "wintitle:confirmWarnMissingAccountMapFile=Accountmap File Missing Or Corrupt",
