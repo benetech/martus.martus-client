@@ -35,7 +35,6 @@ import javax.swing.JComponent;
 import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
-import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiField;
