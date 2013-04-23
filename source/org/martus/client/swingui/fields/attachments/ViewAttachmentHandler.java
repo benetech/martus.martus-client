@@ -94,6 +94,11 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 	{
 		final String baseTag = "NotYourBulletinViewAttachmentAnyways";
 		
+		return confirmViewOrSaveNotYourAttachment(baseTag);
+	}
+
+	private boolean confirmViewOrSaveNotYourAttachment(final String baseTag)
+	{
 		UiMainWindow mainWindow = getMainWindow();
 		String title = mainWindow.getConfirmDialogTitle(baseTag);
 		String cause = mainWindow.getConfirmCauseText(baseTag);
