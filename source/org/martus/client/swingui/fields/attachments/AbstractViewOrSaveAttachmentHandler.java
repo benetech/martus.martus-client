@@ -27,8 +27,20 @@ package org.martus.client.swingui.fields.attachments;
 
 import java.awt.event.ActionListener;
 
+import org.martus.client.swingui.UiMainWindow;
+
 
 public abstract class AbstractViewOrSaveAttachmentHandler implements ActionListener
 {
+	public AbstractViewOrSaveAttachmentHandler(UiMainWindow mainWindowToUse)
+	{
+		mainWindow = mainWindowToUse;
+	}
 
+	public UiMainWindow getMainWindow()
+	{
+		return mainWindow;
+	}
+	
+	private UiMainWindow mainWindow;
 }

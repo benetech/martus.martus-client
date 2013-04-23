@@ -50,7 +50,7 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 {
 	public ViewAttachmentHandler(UiMainWindow mainWindowToUse, AbstractAttachmentPanel panelToUse)
 	{
-		mainWindow = mainWindowToUse;
+		super(mainWindowToUse);
 		panel = panelToUse;
 	}
 	
@@ -62,18 +62,18 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		
 		if(!Utilities.isMSWindows() && !Utilities.isMacintosh() && !UiMainWindow.isAlphaTester)
 		{
-			mainWindow.notifyDlg("ViewAttachmentNotAvailable");
+			getMainWindow().notifyDlg("ViewAttachmentNotAvailable");
 			return;
 		}
 		
 		AttachmentProxy proxy = panel.getAttachmentProxy();
 		String proxyAuthor = getProxyAuthor(proxy);
-		if(proxyAuthor != null && !mainWindow.getApp().getAccountId().equals(proxyAuthor))
+		if(proxyAuthor != null && !getMainWindow().getApp().getAccountId().equals(proxyAuthor))
 		{
 			if(!confirmViewNotYourBulletin())
 				return;
 		}
-		mainWindow.setWaitingCursor();
+		getMainWindow().setWaitingCursor();
 		try
 		{
 			File temp = getAttachmentAsFile(proxy);
@@ -85,12 +85,12 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 			System.out.println("Unable to view attachment:" + e);
 			notifyUnableToView();
 		}
-		mainWindow.resetCursor();
+		getMainWindow().resetCursor();
 	}
 
 	private boolean confirmViewNotYourBulletin()
 	{
-		return mainWindow.confirmDlg("NotYourBulletinViewAttachmentAnyways");
+		return getMainWindow().confirmDlg("NotYourBulletinViewAttachmentAnyways");
 	}
 
 	private String getProxyAuthor(AttachmentProxy proxy) 
@@ -107,7 +107,7 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		if(proxy.getFile() != null)
 			return proxy.getFile();
 		
-		ClientBulletinStore store = mainWindow.getApp().getStore();
+		ClientBulletinStore store = getMainWindow().getApp().getStore();
 		ReadableDatabase db = store.getDatabase();
 		MartusCrypto security = store.getSignatureVerifier();
 		File temp = extractAttachmentToTempFile(db, proxy, security);
@@ -170,7 +170,7 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 
 	private void notifyUnableToView()
 	{
-		mainWindow.notifyDlg("UnableToViewAttachment");
+		getMainWindow().notifyDlg("UnableToViewAttachment");
 	}
 	
 	static File extractAttachmentToTempFile(ReadableDatabase db, AttachmentProxy proxy, MartusCrypto security) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
@@ -184,6 +184,5 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		return temp;
 	}
 
-	UiMainWindow mainWindow;
 	AbstractAttachmentPanel panel;
 }

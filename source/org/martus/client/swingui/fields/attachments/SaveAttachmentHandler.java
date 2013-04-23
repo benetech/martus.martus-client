@@ -39,7 +39,7 @@ class SaveAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 {
 	public SaveAttachmentHandler(UiMainWindow mainWindowToUse, AttachmentProxy proxyToUse)
 	{
-		mainWindow = mainWindowToUse;
+		super(mainWindowToUse);
 		proxy = proxyToUse;
 	}
 	
@@ -51,29 +51,29 @@ class SaveAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		if(last == null)
 			last = UiFileChooser.getHomeDirectoryFile();
 		File attachmentFileToSave = new File(last, fileName);
-		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, null, attachmentFileToSave);
+		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(getMainWindow(), null, attachmentFileToSave);
 		if(results.wasCancelChoosen())
 			return;
 		setLastAttachmentSaveDirectory(results.getCurrentDirectory());
 		File outputFile = results.getChosenFile();
 		if(outputFile.exists())
 		{
-			if(!mainWindow.confirmDlg("OverWriteExistingFile"))
+			if(!getMainWindow().confirmDlg("OverWriteExistingFile"))
 				return;
 		}
-		mainWindow.setWaitingCursor();
+		getMainWindow().setWaitingCursor();
 		try
 		{
-			ClientBulletinStore store = mainWindow.getApp().getStore();
+			ClientBulletinStore store = getMainWindow().getApp().getStore();
 			ReadableDatabase db = store.getDatabase();
 			BulletinLoader.extractAttachmentToFile(db, proxy, store.getSignatureVerifier(), outputFile);
 		}
 		catch(Exception e)
 		{
-			mainWindow.notifyDlg("UnableToSaveAttachment");
+			getMainWindow().notifyDlg("UnableToSaveAttachment");
 			System.out.println("Unable to save file :" + e);
 		}
-		mainWindow.resetCursor();
+		getMainWindow().resetCursor();
 	}
 
 	static void setLastAttachmentSaveDirectory(File newAttachmentSaveDirectory)
@@ -88,6 +88,5 @@ class SaveAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 
 	static File lastAttachmentSaveDirectory;
 
-	UiMainWindow mainWindow;
 	AttachmentProxy proxy;
 }
