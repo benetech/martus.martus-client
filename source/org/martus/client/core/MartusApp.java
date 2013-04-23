@@ -363,6 +363,13 @@ public class MartusApp
 		return keyStrings;
 	}
 
+	public boolean isVerifiedFieldDeskAccount(String authorPublicKeyString) throws Exception
+	{
+		Vector<String> fieldDeskPublicKeyStrings = getFieldDeskPublicKeyStrings();
+		boolean isFieldDeskBulletin = fieldDeskPublicKeyStrings.contains(authorPublicKeyString);
+		return isFieldDeskBulletin;
+	}
+
 	public ConfigInfo getConfigInfo()
 	{
 		return configInfo;
