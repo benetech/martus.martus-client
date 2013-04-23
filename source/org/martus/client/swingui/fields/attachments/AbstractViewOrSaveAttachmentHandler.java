@@ -26,8 +26,10 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields.attachments;
 
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.clientside.UiUtilities;
 
 
 public abstract class AbstractViewOrSaveAttachmentHandler implements ActionListener
@@ -42,5 +44,17 @@ public abstract class AbstractViewOrSaveAttachmentHandler implements ActionListe
 		return mainWindow;
 	}
 	
+	boolean confirmViewOrSaveNotYourAttachment(final String baseTag)
+	{
+		String title = mainWindow.getConfirmDialogTitle(baseTag);
+		String cause = mainWindow.getConfirmCauseText(baseTag);
+		String effect = mainWindow.getConfirmEffectText(baseTag);
+		String question = UiUtilities.getConfirmQuestionText(mainWindow.getLocalization());
+		String[] contents = { cause, "", effect, "", question};
+		String[] buttons = UiUtilities.getConfirmDialogButtons(mainWindow.getLocalization());
+		HashMap<String, String> replacements = new HashMap<String, String>();
+		return UiUtilities.confirmDlg(mainWindow, title, contents, buttons, replacements);
+	}
+
 	private UiMainWindow mainWindow;
 }
