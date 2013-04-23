@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields.attachments;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -36,7 +35,7 @@ import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.swing.UiFileChooser;
 
-class SaveAttachmentHandler implements ActionListener
+class SaveAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 {
 	public SaveAttachmentHandler(UiMainWindow mainWindowToUse, AttachmentProxy proxyToUse)
 	{
