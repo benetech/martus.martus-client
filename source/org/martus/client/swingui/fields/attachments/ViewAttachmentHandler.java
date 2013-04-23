@@ -71,7 +71,7 @@ class ViewAttachmentHandler implements ActionListener
 		String proxyAuthor = getProxyAuthor(proxy);
 		if(proxyAuthor != null && !mainWindow.getApp().getAccountId().equals(proxyAuthor))
 		{
-			if(!mainWindow.confirmDlg("NotYourBulletinViewAttachmentAnyways"))
+			if(!confirmViewNotYourBulletin())
 				return;
 		}
 		mainWindow.setWaitingCursor();
@@ -87,6 +87,11 @@ class ViewAttachmentHandler implements ActionListener
 			notifyUnableToView();
 		}
 		mainWindow.resetCursor();
+	}
+
+	private boolean confirmViewNotYourBulletin()
+	{
+		return mainWindow.confirmDlg("NotYourBulletinViewAttachmentAnyways");
 	}
 
 	private String getProxyAuthor(AttachmentProxy proxy) 
