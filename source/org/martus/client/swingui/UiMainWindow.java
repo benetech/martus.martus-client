@@ -1024,12 +1024,30 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean confirmCustomButtonsDlg(JFrame parent,String baseTag, String[] buttons, Map tokenReplacement)
 	{
-		String title = localization.getWindowTitle("confirm" + baseTag);
-		String cause = localization.getFieldLabel("confirm" + baseTag + "cause");
-		String effect = localization.getFieldLabel("confirm" + baseTag + "effect");
+		String title = getConfirmDialogTitle(baseTag);
+		String cause = getConfirmCauseText(baseTag);
+		String effect = getConfirmEffectText(baseTag);
 		String[] contents = {cause, "", effect};
 
 		return confirmDlg(parent, title, contents, buttons, tokenReplacement);
+	}
+
+	public String getConfirmEffectText(String baseTag)
+	{
+		String effect = localization.getFieldLabel("confirm" + baseTag + "effect");
+		return effect;
+	}
+
+	public String getConfirmCauseText(String baseTag)
+	{
+		String cause = localization.getFieldLabel("confirm" + baseTag + "cause");
+		return cause;
+	}
+
+	public String getConfirmDialogTitle(String baseTag)
+	{
+		String title = localization.getWindowTitle("confirm" + baseTag);
+		return title;
 	}
 
 	public boolean confirmDlg(JFrame parent, String title, String[] contents, String[] buttons, Map tokenReplacement)
