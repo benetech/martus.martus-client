@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields.attachments;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,7 +46,7 @@ import org.martus.common.packet.UniversalId;
 import org.martus.swing.Utilities;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
-class ViewAttachmentHandler implements ActionListener
+class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 {
 	public ViewAttachmentHandler(UiMainWindow mainWindowToUse, AbstractAttachmentPanel panelToUse)
 	{
