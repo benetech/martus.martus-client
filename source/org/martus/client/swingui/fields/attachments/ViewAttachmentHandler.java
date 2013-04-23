@@ -29,12 +29,10 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.clientside.UiUtilities;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinLoader;
@@ -95,19 +93,6 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		final String baseTag = "NotYourBulletinViewAttachmentAnyways";
 		
 		return confirmViewOrSaveNotYourAttachment(baseTag);
-	}
-
-	private boolean confirmViewOrSaveNotYourAttachment(final String baseTag)
-	{
-		UiMainWindow mainWindow = getMainWindow();
-		String title = mainWindow.getConfirmDialogTitle(baseTag);
-		String cause = mainWindow.getConfirmCauseText(baseTag);
-		String effect = mainWindow.getConfirmEffectText(baseTag);
-		String question = UiUtilities.getConfirmQuestionText(mainWindow.getLocalization());
-		String[] contents = { cause, "", effect, "", question};
-		String[] buttons = UiUtilities.getConfirmDialogButtons(mainWindow.getLocalization());
-		HashMap<String, String> replacements = new HashMap<String, String>();
-		return UiUtilities.confirmDlg(mainWindow, title, contents, buttons, replacements);
 	}
 
 	private String getProxyAuthor(AttachmentProxy proxy) 
