@@ -29,7 +29,6 @@ package org.martus.client.swingui.bulletincomponent;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.io.IOException;
-import java.util.Vector;
 
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
@@ -169,8 +168,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		mainWindow.setWaitingCursor();
 		boolean isBulletinValid = mainWindow.getStore().isBulletinValid(currentBulletin);
 
-		Vector<String> fieldDeskPublicKeyStrings = mainWindow.getApp().getFieldDeskPublicKeyStrings();
-		boolean isFieldDeskBulletin = fieldDeskPublicKeyStrings.contains(authorPublicKeyString);
+		boolean isFieldDeskBulletin = mainWindow.getApp().isVerifiedFieldDeskAccount(authorPublicKeyString);
 		
 		mainWindow.resetCursor();
 		
