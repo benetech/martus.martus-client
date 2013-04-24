@@ -30,6 +30,8 @@ import java.util.HashMap;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiUtilities;
+import org.martus.common.bulletin.AttachmentProxy;
+import org.martus.common.packet.UniversalId;
 
 
 public abstract class AbstractViewOrSaveAttachmentHandler implements ActionListener
@@ -44,16 +46,35 @@ public abstract class AbstractViewOrSaveAttachmentHandler implements ActionListe
 		return mainWindow;
 	}
 	
-	boolean confirmViewOrSaveNotYourAttachment(final String baseTag)
+	boolean confirmViewOrSaveNotYourAttachment(String authorId, String actionName) throws Exception
 	{
+		boolean isVerifiedFieldDesk = getMainWindow().getApp().isVerifiedFieldDeskAccount(authorId);
+
+		String baseTag = "NotYourBulletinViewAttachmentAnyways";
+		
 		String title = mainWindow.getConfirmDialogTitle(baseTag);
 		String cause = mainWindow.getConfirmCauseText(baseTag);
 		String effect = mainWindow.getConfirmEffectText(baseTag);
 		String question = UiUtilities.getConfirmQuestionText(mainWindow.getLocalization());
 		String[] contents = { cause, "", effect, "", question};
+		if(!isVerifiedFieldDesk)
+		{
+			String textForUnverified = mainWindow.getLocalization().getFieldLabel("UnverifiedFDAttachment");
+			contents = new String[] { cause, "", textForUnverified, "", effect, "", question};
+		}
 		String[] buttons = UiUtilities.getConfirmDialogButtons(mainWindow.getLocalization());
-		HashMap<String, String> replacements = new HashMap<String, String>();
-		return UiUtilities.confirmDlg(mainWindow, title, contents, buttons, replacements);
+		HashMap<String, String> replacement = new HashMap<String, String>();
+		replacement.put("#action#", actionName);
+		return UiUtilities.confirmDlg(mainWindow, title, contents, buttons, replacement);
+	}
+
+	String getProxyAuthor(AttachmentProxy proxy) 
+	{
+		UniversalId uid = proxy.getUniversalId();
+		if(uid == null)
+			return null;
+
+		return uid.getAccountId();
 	}
 
 	private UiMainWindow mainWindow;

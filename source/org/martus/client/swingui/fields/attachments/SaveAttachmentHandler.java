@@ -30,6 +30,7 @@ import java.io.File;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.database.ReadableDatabase;
@@ -45,6 +46,22 @@ class SaveAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 	
 	public void actionPerformed(ActionEvent ae)
 	{
+		String proxyAuthor = getProxyAuthor(proxy);
+		if(proxyAuthor != null && !getMainWindow().getApp().getAccountId().equals(proxyAuthor))
+		{
+			try
+			{
+				String actionName = getMainWindow().getLocalization().getFieldLabel("SaveAttachmentAction");
+				if(!confirmViewOrSaveNotYourAttachment(proxyAuthor, actionName))
+					return;
+			}
+			catch(Exception e)
+			{
+				MartusLogger.logException(e);
+				return;
+			}
+		}
+		
 		String fileName = proxy.getLabel();
 
 		File last = getLastAttachmentSaveDirectory();
