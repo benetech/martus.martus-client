@@ -713,7 +713,7 @@ public class EnglishStrings
 "field:confirmResetDefaultDetailscause=This will reset the current Default Details contents to the original contents. After resetting the contents, you should review them to be sure they are correct.",
 "field:confirmResetDefaultDetailseffect=After you review the contents, you can accept them, modify them, or press cancel to keep the existing default details.",
 "field:confirmNotYourBulletinViewAttachmentAnywayscause=Warning: the bulletin you are currently viewing is not yours.  Attachments can contain viruses, or malicious programs harmful to your computer.",
-"field:confirmNotYourBulletinViewAttachmentAnywayseffect=Clicking on Yes will display the attachment, clicking on No will not try to display the attachment.",
+"field:confirmNotYourBulletinViewAttachmentAnywayseffect=Clicking on Yes will #action# the attachment. Clicking on No will cancel this action.",
 "field:confirmServerComplianceFailedcause=Martus software is unable to determine whether this server complies with the official guidelines for operating a secure and reliable Martus server.",
 "field:confirmServerComplianceFailedeffect=Benetech recommends that you do not use this server until a compliance statement is made available for you to read.  Continuing will select this non-compliant server anyway.",
 "field:confirmWarnMissingOrCorruptAccountMapSignatureFilecause=Warning: acctmap.txt.sig file is missing or is corrupt in your account's packets directory.  If you have just upgraded to a new release of Martus this warning is harmless and you should click on No.  Otherwise this may indicate someone has tried to tamper with your data or could be caused by a hardware error.",		
@@ -954,6 +954,9 @@ public class EnglishStrings
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",
 "field:IncompatibleMtfVersionProgram=Martus Software Version: #ProgramVersionNumber#",
 
+"field:UnverifiedFDAttachment=The account that created this bulletin has not been verified, so there is an increased chance that this attachment could be dangerous. We recommend that you verify this Field Desk account before you #action# this attachment (See Tools > Configure Field Desks). Opening this attachment could put your computer at risk. ",
+"field:SaveAttachmentAction=save",
+"field:ViewAttachmentAction=view",
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
 "field:messageErrorDateRangeInvertedcause=This date range has an end date that is earlier than the start date: #FieldLabel#",

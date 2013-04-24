@@ -42,7 +42,6 @@ import org.martus.common.database.ReadableDatabase;
 import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
-import org.martus.common.packet.UniversalId;
 import org.martus.swing.Utilities;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
@@ -66,16 +65,18 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 			return;
 		}
 		
-		AttachmentProxy proxy = panel.getAttachmentProxy();
-		String proxyAuthor = getProxyAuthor(proxy);
-		if(proxyAuthor != null && !getMainWindow().getApp().getAccountId().equals(proxyAuthor))
-		{
-			if(!confirmViewNotYourBulletin())
-				return;
-		}
 		getMainWindow().setWaitingCursor();
 		try
 		{
+			AttachmentProxy proxy = panel.getAttachmentProxy();
+			String proxyAuthor = getProxyAuthor(proxy);
+			if(proxyAuthor != null && !getMainWindow().getApp().getAccountId().equals(proxyAuthor))
+			{
+				String actionName = getMainWindow().getLocalization().getFieldLabel("ViewAttachmentAction");
+				if(!confirmViewOrSaveNotYourAttachment(proxyAuthor, actionName))
+					return;
+			}
+
 			File temp = getAttachmentAsFile(proxy);
 			launchExternalAttachmentViewer(temp);
 		}
@@ -86,22 +87,6 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 			notifyUnableToView();
 		}
 		getMainWindow().resetCursor();
-	}
-
-	private boolean confirmViewNotYourBulletin()
-	{
-		final String baseTag = "NotYourBulletinViewAttachmentAnyways";
-		
-		return confirmViewOrSaveNotYourAttachment(baseTag);
-	}
-
-	private String getProxyAuthor(AttachmentProxy proxy) 
-	{
-		UniversalId uid = proxy.getUniversalId();
-		if(uid == null)
-			return null;
-
-		return uid.getAccountId();
 	}
 
 	private File getAttachmentAsFile(AttachmentProxy proxy) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException 
