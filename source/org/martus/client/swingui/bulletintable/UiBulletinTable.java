@@ -267,34 +267,40 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 
 	public void doModifyBulletin()
 	{
-		Bulletin original = getSingleSelectedBulletin();
-		if(original == null)
-			return;
-
-		String myAccountId = mainWindow.getApp().getAccountId();
-		boolean isMine = myAccountId.equals(original.getAccount());
-		boolean isSealed = original.isSealed();
-		
-		if(!isMine)
-		{
-			if(!mainWindow.confirmDlg("CloneBulletinAsMine"))
-				return;
-		}
-		
-		if(isMySealed(isMine, isSealed))
-		{
-			if(!mainWindow.confirmDlg("CloneMySealedAsDraft"))
-				return;
-		}
-		
-		if(original.hasUnknownTags() || original.hasUnknownCustomField())
-		{
-			if(!mainWindow.confirmDlg("EditBulletinWithUnknownTags"))
-				return;
-		}
-		
 		try
 		{
+			Bulletin original = getSingleSelectedBulletin();
+			if(original == null)
+				return;
+
+			String myAccountId = mainWindow.getApp().getAccountId();
+			boolean isMine = myAccountId.equals(original.getAccount());
+			boolean isSealed = original.isSealed();
+			boolean isVerifiedFieldDeskBulletin = mainWindow.getApp().isVerifiedFieldDeskAccount(original.getAccount());
+
+			if(!isVerifiedFieldDeskBulletin)
+			{
+				if(!mainWindow.confirmDlg("CloneUnverifiedFDBulletinAsMine"))
+					return;
+			}
+			else if(!isMine)
+			{
+				if(!mainWindow.confirmDlg("CloneBulletinAsMine"))
+					return;
+			}
+			
+			if(isMySealed(isMine, isSealed))
+			{
+				if(!mainWindow.confirmDlg("CloneMySealedAsDraft"))
+					return;
+			}
+			
+			if(original.hasUnknownTags() || original.hasUnknownCustomField())
+			{
+				if(!mainWindow.confirmDlg("EditBulletinWithUnknownTags"))
+					return;
+			}
+			
 			Bulletin bulletinToModify = original; 
 			if(isMyDraft(isMine, isSealed))
 				bulletinToModify = updateFieldSpecsIfNecessary(original);
