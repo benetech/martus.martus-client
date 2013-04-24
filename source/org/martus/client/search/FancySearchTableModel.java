@@ -196,6 +196,11 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		{
 			opChoiceVector.addAll(getContainsChoices(localization));
 		}
+		else if(selectedFieldType.isMessage())
+		{
+			// NOTE: Ideally we would have an "Exists" op, but we don't,
+			// and = or contains would both give misleading results.
+		}
 		else
 		{
 			throw new RuntimeException("Don't know ops for type: " + selectedFieldType.getTypeName());
