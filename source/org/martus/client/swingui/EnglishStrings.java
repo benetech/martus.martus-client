@@ -782,7 +782,7 @@ public class EnglishStrings
 "field:confirmSendWithPublicDataeffect=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it " +
 		"except by creating a new version of the bulletin.\n\n" +
 		"The public information in this bulletin will be released for possible publication on the Martus Search Engine, " +
-		"and may be viewed by people outside your organization.\n\n" +
+		"and may be viewed by people outside your organization. If you have sent your contact information to the server, that contact information will also be displayed with each public bulletin on the Martus Search Engine.\n\n" +
 		"If there is information you do not want to be publicly available, " +
 		"either move that data to the bottom (always Private) pane of the bulletin or " +
 		"check the 'Keep ALL Information Private' box before saving the bulletin.",
