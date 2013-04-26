@@ -278,15 +278,18 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 			boolean isSealed = original.isSealed();
 			boolean isVerifiedFieldDeskBulletin = mainWindow.getApp().isVerifiedFieldDeskAccount(original.getAccount());
 
-			if(!isVerifiedFieldDeskBulletin)
+			if(!isMine)
 			{
-				if(!mainWindow.confirmDlg("CloneUnverifiedFDBulletinAsMine"))
-					return;
-			}
-			else if(!isMine)
-			{
-				if(!mainWindow.confirmDlg("CloneBulletinAsMine"))
-					return;
+				if(isVerifiedFieldDeskBulletin)
+				{
+					if(!mainWindow.confirmDlg("CloneBulletinAsMine"))
+						return;
+				}
+				else
+				{
+					if(!mainWindow.confirmDlg("CloneUnverifiedFDBulletinAsMine"))
+						return;
+				}
 			}
 			
 			if(isMySealed(isMine, isSealed))
