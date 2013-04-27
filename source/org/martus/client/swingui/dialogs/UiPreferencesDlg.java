@@ -63,6 +63,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		languageDropdown = new UiChoiceEditor(localization);
 		languageDropdown.setChoices(localization.getUiLanguages());
 		languageDropdown.setText(localization.getCurrentLanguageCode());
+		languageDropdown.addActionListener(new LanguageChangedHandler());
 		
 		ChoiceItem[] mdyChoices = new ChoiceItem[] {
 			new ChoiceItem("ymd", buildMdyLabel("ymd")),
@@ -98,6 +99,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		useZawgyiFont = new UiCheckBox();
 		useZawgyiFont.setText(localization.getFieldLabel("preferencesUseZawgyi"));
 		useZawgyiFont.setSelected(owner.getUseZawgyiFont());
+		determineStateOfZawgyiCheckbox(localization.getCurrentLanguageCode());
 		
 		allPrivate = new UiCheckBox();
 		allPrivate.setText(localization.getFieldLabel("preferencesAllPrivate"));
@@ -196,6 +198,23 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			result = true;
 		}
 		dispose();
+	}
+
+	class LanguageChangedHandler implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				String languageCode = languageDropdown.getText();
+				determineStateOfZawgyiCheckbox(languageCode);
+			}
+		}
+
+	private void determineStateOfZawgyiCheckbox(String languageCode)
+	{
+		if (languageCode.equals(MtfAwareLocalization.BURMESE))
+		{
+			useZawgyiFont.setSelected(true);
+		}
 	}
 
 
