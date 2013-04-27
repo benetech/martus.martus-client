@@ -39,6 +39,7 @@ import javax.crypto.Cipher;
 
 import org.bouncycastle.crypto.engines.RSAEngine;
 import org.martus.common.MartusLogger;
+import org.martus.common.Version;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.InvalidJarException;
 import org.martus.common.crypto.MartusSecurity;
@@ -50,17 +51,30 @@ public class MartusJarVerification
 	{
 		// for bcprov, look for BCKEY.SF (BCKEY.SIG)
 		// for bc-jce, look for SSMTSJAR.SF (SSMTSJAR.SIG)
-		
+
 		URL jceJarURL = getJarURL(Cipher.class);
 		String urlString = jceJarURL.toString();
 		int foundAt = urlString.indexOf("bc-jce");
+		boolean foundBcJce = (foundAt >= 0);
 		MartusLogger.log("verifyJars Cipher: " + urlString);
-		if(foundAt < 0)
+		
+		if(Version.isRunningUnderOpenJDK())
 		{
-			String hintsToSolve = "\n\nXbootclasspath might be incorrect; bc-jce.jar might be missing from Martus/lib/ext";
-			throw new InvalidJarException("Didn't load bc-jce.jar" + hintsToSolve);
+			if(foundBcJce)
+			{
+				String hintsToSolve = "Make sure Xbootclasspath does not contain bc-jce.jar";
+				throw new RuntimeException("When running under OpenJDK, bc-jce.jar cannot be used\n\n" + hintsToSolve);
+			}
 		}
-		verifySignedKeyFile("bc-jce.jar", jceJarURL, "SSMTSJAR");
+		else
+		{
+			if(!foundBcJce)
+			{
+				String hintsToSolve = "\n\nXbootclasspath might be incorrect; bc-jce.jar might be missing from Martus/lib/ext";
+				throw new InvalidJarException("Didn't load bc-jce.jar" + hintsToSolve);
+			}
+			verifySignedKeyFile("bc-jce.jar", jceJarURL, "SSMTSJAR");
+		}
 		
 		URL bcprovJarURL = getJarURL(RSAEngine.class);
 		MartusLogger.log("verifyJars RSA: " + bcprovJarURL.toString());
