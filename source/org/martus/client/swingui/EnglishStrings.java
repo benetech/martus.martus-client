@@ -544,7 +544,7 @@ public class EnglishStrings
 "field:RetrieveSummariesMessage=All bulletins retrieved will still remain on the server.\nYou can only retrieve bulletins that are not currently on your computer.",
 "field:DeleteServerDraftsMessage=You can only delete draft bulletins from the server that are not currently on your computer.",
 "field:ContactInfoRequiredFields=This information identifies your organization.\nYou must enter either an Author or Organization, and both are shown in every bulletin you create.",
-"field:ContactInfoFutureUseOfFields=This information will be available to anyone who can view your public bulletin information, or anyone with administrative rights on the server.\nThis allows people to contact you for further information.",
+"field:ContactInfoFutureUseOfFields=This information will be available to anyone who can view your public bulletin information, or anyone with administrative rights on the server. This allows people to contact you for further information.",
 "field:ContactInfoUpdateLater=You can change any of this information later, by choosing Options/Contact Info.",
 "field:UploadingSealedBulletin=Sending Sealed Bulletin",
 "field:UploadingDraftBulletin=Sending Draft Bulletin",
