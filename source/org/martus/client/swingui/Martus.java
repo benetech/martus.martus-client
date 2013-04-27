@@ -31,6 +31,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Properties;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
@@ -61,6 +62,8 @@ public class Martus
 		System.out.println(UiConstants.programName);
 		System.out.println(UiConstants.versionLabel + " " + VersionBuildDate.getVersionBuildDate());
 		System.out.println("Java version: " + System.getProperty("java.version"));
+		System.out.println("Java vendor : " + System.getProperty("java.vendor"));
+		System.out.println("Java runtime: " + System.getProperty("java.runtime.name"));
 		System.out.println(MartusLogger.getMemoryStatistics());
 
 		try
