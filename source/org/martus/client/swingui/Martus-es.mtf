@@ -566,7 +566,7 @@
 -9e45-field:ChartPieSliceLabel=#Count# boletines = #Percent# boletines de Martus
 
 #___________________________________=Please note that any Martus bulletin data in charts will not be encrypted, \nand anyone who gets a copy of the chart output will be able to read all the data. \nUse caution when selecting a private field.
--cf89-field:ChartPrivateFieldsNotice=Por favor, tenga en cuenta que en una gráfica los datos de un boletín de Martus no estarán cifrados, \ny qualquiera persona que obtenga una copia de la salida de la gráfica podrá leer todos los datos. Use caución cuando seleccionando un campo privado.
+-cf89-field:ChartPrivateFieldsNotice=Por favor, tenga en cuenta que en una gráfica los datos de un boletín de Martus no estarán cifrados, \n y que cualquier persona que obtenga una copia de la salida de la gráfica podrá leer todos los datos. Tenga cuidado al seleccionar un campo privado.
 
 #______________________________________________=Note: Chart shows number of Martus bulletins matching search criteria.
 -dee3-field:ChartSelectedBulletinsDisclaimerBar=Nota: La gráfica muestra número de boletines de Martus que encajan con los criterios de la búsqueda.
