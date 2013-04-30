@@ -1,4 +1,4 @@
---------
+﻿--------
 1. Introduction to the Martus™ Software
 Martus™ Software User Guide Version 4.2
 --------
@@ -2047,7 +2047,7 @@ To run Martus over Tor on Windows, please do the following:
 4. In the “Target” field, modify the text to include –DsocksProxyHost=127.0.0.1 
 –DsocksProxyPort=9150 immediately preceding –Xbootclasspath. Your command line in the Target field should now look something like this (needs to all be on one line, do not hit return/enter in the middle of the command):
 
-C:\Martus\bin\java.exe -Xms256m -Xmx512m –DsocksProxyHost=127.0.0.1 –DsocksProxyPort=9150 
+C:\Martus\bin\java.exe -Xms256m -Xmx512m -DsocksProxyHost=127.0.0.1 -DsocksProxyPort=9150 
    -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
 
 5. Apply the changes and click OK to exit the Properties dialog.
@@ -2065,8 +2065,7 @@ To run Martus over Tor on a Mac (if installed with a DMG), please do the followi
 6. Towards the bottom, you should see something that looks like this:  
 
 <key>VMOptions</key>
-<string>-Xms256m –Xmx512m 
-    - Xbootclasspath/p:Contents/Resources/Java/ThirdParty/bc-jce.jar</string>
+<string>-Xms256m –Xmx512m -Xbootclasspath/p:Contents/Resources/Java/ThirdParty/bc-jce.jar</string>
 
 7. Add “-DsocksProxyHost=127.0.0.1 -DsocksProxyPort=9150” to the command so that the whole thing now looks like this (needs to all be on one line, do not hit return/enter in the middle of the command): 
 
@@ -2078,7 +2077,7 @@ To run Martus over Tor on a Mac (if installed with a DMG), please do the followi
 9. Start the Tor Browser. This will launch the Vidalia interface, which acts as your Tor control panel. After a connection to the Tor network is established (and your onion icon in the dock has turned green), the Tor Browser will launch, and your homepage will tell you that you are connected to Tor.
 10. After the Tor Browser is fully launched, click your Martus icon and log in as normal. Martus’ connection to the backup servers will now be routed over Tor.
 
-Note:  Using this configuration, Martus will ONLY connect to the backup servers once the Tor Browser and Vidalia are running and properly connected to the Tor network. If you would like to have the option to connect to Martus servers without using Tor, you can create a second copy of your Martus app, name it something like “Martus over Tor” (without the quotes), and configure only that icon starting with Step (3) above. Then you will have two app icons to use: the original Martus icon to use over the open internet, and the Martus on Tor icon to anonymize your connection to the Martus servers.
+Note:  Using this configuration, Martus will ONLY connect to the backup servers once the Tor Browser and Vidalia are running and properly connected to the Tor network. If you would like to have the option to connect to Martus servers without using Tor, you can create a second copy of your Martus app, name it something like “Martus over Tor” (without the quotes), and configure only that icon starting with Step (4) above. Then you will have two app icons to use: the original Martus icon to use over the open internet, and the Martus on Tor icon to anonymize your connection to the Martus servers.
 
 For instructions on how to change the Martus command line for Mac if you installed from zip or CD/iso files (instead of from a DMG), see section “2a. Installing” of the User Guide or email help@martus.org.
 
@@ -2122,7 +2121,7 @@ After reading the About and Warning pages, you can download, verify and install 
 
 Some notes as you get started with Tails:
 • Install Tails to a USB: Install Tails on a USB drive (size 2Gb or larger). This will create a bootable LiveUSB capable of running Tails.
-• Configure Persistence: The Tails USB provides the option to create a persistent partition where files can be saved. Martus requires the creation of this persistent volume in order to work properly. To learn more about what Persistence is and how to configure your volume, see the Tails Persistence page: https://tails.boum.org/doc/first_steps/persistence/index.en.html (please read all warnings related to Persistence as well).
+• Configure Persistence: The Tails USB provides the option to create a persistent partition where files can be saved. Martus requires the creation of this persistent volume in order to work properly. Anything saved outside of this folder will be erased when Tails shuts down. To learn more about what Persistence is and how to configure your volume, see the Tails Persistence page: https://tails.boum.org/doc/first_steps/persistence/index.en.html (please read all warnings related to Persistence as well).
 
 Note: Martus over Tails will only work on Windows/Linux computers, and not on Mac computers: Mac computers will not currently boot a Tails LiveUSB (though they will boot a Tails LiveDVD). As a persistent partition is currently necessary to run Martus on Tails, and the LiveUSB is the only option that offers persistence, users will need to boot Tails to a Windows-compatible computer or Linux PC.
 
@@ -2132,11 +2131,11 @@ Once you have created your Tails LiveUSB, updated your computer’s boot order a
 
 1. Boot Tails on your computer.
 2. From the Tails desktop, open the "amnesia’s home" folder, and then the Persistent folder. Inside the Persistent folder, create a new folder named Martus.
-3. Download the latest Martus for Linux from https://www.martus.org/cgi-bin/download_martus.cgi . Save the .zip file to the Martus folder you just created.
+3. Download the latest Martus for Linux from https://www.martus.org/cgi-bin/download_martus.cgi. Save the .zip file to the Martus folder you just created.
 4. Extract the Martus .zip package to the same Martus folder, so that the location of all the files is /home/amnesia/Persistent/Martus
 5. Open gedit Text Editor from Applications > Accessories. In the open text file, include the following (and ONLY the following, all of which must remain together as one line of text):
 
--DsocksProxyHost=127.0.0.1 -DsocksProxyPort=9050 -Duser.home="Accounts" -jar martus.jar 
+java -DsocksProxyHost=127.0.0.1 -DsocksProxyPort=9050 -Duser.home="Accounts" -jar martus.jar 
 
 6. Save this file as “Run Martus” (without quotes) inside your /Persistent/Martus folder and close gedit.
 7. Open your Martus folder, right-click on the “Run Martus” file, and select Properties. Select the Permissions tab, and check the box next to "Allow executing file as program." Click “Close”.
