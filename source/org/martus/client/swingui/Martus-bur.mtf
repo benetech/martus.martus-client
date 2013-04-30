@@ -1,4 +1,4 @@
-# Martus Client Translation File
+﻿# Martus Client Translation File
 # Language code:  bur
 # Language name:  Burmese
 # Translated by:  Solveware, Global Arena 
@@ -10,7 +10,7 @@
 # Lines beginning with # are comments and are ignored by Martus
 # Each entry has two lines. The first line is the current English
 #    text, and the second line consists of: KEY=VALUE
-#    (e.g. -c47a-button:customHelp=<Help> )
+#    (e.g. -c47a-button:customHelp=< =Help > )
 # Do not modify any KEY. Do localize every VALUE.
 # Each VALUE that needs to be translated has <> around it.
 #    As you translate each VALUE, remove its <>
@@ -134,7 +134,7 @@
 -2e02-button:Continue=ဆက္သြား
 
 #_______________________=Create a new chart template
--9ef9-button:CreateChart=<Create a new chart template>
+-9ef9-button:CreateChart=ကားခ်ပ္ပံုစံအသစ္တစ္ခုလုပ္မည္
 
 #____________________________=Create New Page Report
 -1d7a-button:CreatePageReport=စာမ်က္ႏွာပုံစံအစီရင္ခံစာအသစ္တည္ေဆာက္ပါ
@@ -245,7 +245,7 @@
 -3449-button:RetrieveLatestBulletinRevisionOnly=ေနာက္ဆုံး စာေစာင္မူကြဲကိုသာ ျပန္လည္ရယူပါ
 
 #____________________=Display an existing chart
--7d62-button:RunChart=<Display an existing chart>
+-7d62-button:RunChart=ရိွေနေသာကားခ်ပ္ကိုျပပါ
 
 #_____________________=Use Existing Report Format
 -b052-button:RunReport=လက္ရွိ အစီရင္ခံစာ အျပင္အဆင္ကို သုံးပါ
@@ -554,49 +554,49 @@
 -2be4-field:CalendarSystemThai=ထိုင္း ေနျပကၡဒိန္ (2548-05-31)
 
 #_________________________=Chart produced #Date#
--fb8c-field:ChartCreatedOn=<Chart produced #Date#>
+-fb8c-field:ChartCreatedOn=ကားခ်ပ္ဆဲြေသာ #Date#
 
 #____________________________=Field to count
--77e7-field:ChartFieldToCount=<Field to count>
+-77e7-field:ChartFieldToCount=ေရတြက္ရန္ေနရာ
 
 #______________________________=(Missing field or data)
--1af6-field:ChartItemLabelBlank=<(Missing field or data)>
+-1af6-field:ChartItemLabelBlank=(ေပ်ာက္ေနေသာေနရာ သို႔မဟုတ္ အခ်က္အလက္)
 
 #_____________________________=#Count# bulletins = #Percent# of Martus bulletins
--9e45-field:ChartPieSliceLabel=<#Count# bulletins = #Percent# of Martus bulletins>
+-9e45-field:ChartPieSliceLabel=#Count# ေၾကညာခ်က္မ်ား = #Percent# Martus ေၾကညာခ်က္မ်ား၏
 
 #___________________________________=Please note that any Martus bulletin data in charts will not be encrypted, \nand anyone who gets a copy of the chart output will be able to read all the data. \nUse caution when selecting a private field.
--cf89-field:ChartPrivateFieldsNotice=&lt;Please note that any Martus bulletin data in charts will not be encrypted, \nand anyone who gets a copy of the chart output will be able to read all the data. \nUse caution when selecting a private field.&gt;
+-cf89-field:ChartPrivateFieldsNotice=ကားခ်ပ္မ်ားရိွ မည္သည့္ Martus ေၾကညာခ်က္အခ်က္အလက္ကိုမဆို အင္ခရစ္လုပ္မည္မဟုတ္ပဲ \nကားခ်ပ္ရလဒ္၏ပံုတူရရိွသူမည္သူမဆို အခ်က္အလက္အားလံုးကိုဖတ္ႏိုင္မည္ျဖစ္သည္ကိုသတိျပဳပါ။ \nကိုယ္ပိုင္ေနရာကိုေရြးသည့္အခါ သတိျပဳပါ။
 
 #______________________________________________=Note: Chart shows number of Martus bulletins matching search criteria.
--dee3-field:ChartSelectedBulletinsDisclaimerBar=<Note: Chart shows number of Martus bulletins matching search criteria.>
+-dee3-field:ChartSelectedBulletinsDisclaimerBar=မွတ္ခ်က္။ ကားခ်ပ္သည္ ရွာေဖြမႈသတ္မွတ္ခ်က္မ်ားႏွင့္ ကိုက္ညီသည့္ Martus ေၾကညာခ်က္မ်ား၏အေရအတြက္ကိုျပမည္။ 
 
 #______________________________________________=Note: Chart shows % of Martus bulletins matching search criteria.
--b721-field:ChartSelectedBulletinsDisclaimerPie=<Note: Chart shows % of Martus bulletins matching search criteria.>
+-b721-field:ChartSelectedBulletinsDisclaimerPie=မွတ္ခ်က္။ ကားခ်ပ္သည္ ရွာေဖြမႈသတ္မွတ္ခ်က္မ်ားႏွင့္ကိုက္ညီသည့္ Martus ေၾကညာခ်က္မ်ား၏ရာခိုင္ႏႈန္းကိုျပမည္။
 
 #___________________________=Martus Bulletin Counts
--5582-field:ChartSeriesTitle=<Martus Bulletin Counts>
+-5582-field:ChartSeriesTitle= Martus ေၾကညာခ်က္အေရအတြက္မ်ား
 
 #________________________=Subtitle (optional)
--4104-field:ChartSubtitle=<Subtitle (optional)>
+-4104-field:ChartSubtitle=ေခါင္းစဥ္ခဲြ (စိတ္ႀကိဳက္)
 
 #_____________________=Martus Bulletins by #SelectedField#
--1933-field:ChartTitle=<Martus Bulletins by #SelectedField#>
+-1933-field:ChartTitle= Martus ေၾကညာခ်က္မ်ား #SelectedField#
 
 #____________________=Type of Chart
--3f13-field:ChartType=<Type of Chart>
+-3f13-field:ChartType=ကားခ်ပ္အမ်ိဳးအစား
 
 #_________________________=3D Bar Chart
--8e3e-field:ChartType3DBar=<3D Bar Chart>
+-8e3e-field:ChartType3DBar=3D ဘားကားခ်ပ္
 
 #_______________________=Bar Chart
--75fe-field:ChartTypeBar=<Bar Chart>
+-75fe-field:ChartTypeBar=ဘားကားခ်ပ္
 
 #_______________________=Pie Chart
--75ed-field:ChartTypePie=<Pie Chart>
+-75ed-field:ChartTypePie=ပိုင္ကားခ်ပ္
 
 #__________________________=Martus Bulletin Count
--0d40-field:ChartYAxisTitle=<Martus Bulletin Count>
+-0d40-field:ChartYAxisTitle= Martus ေၾကညာခ်က္အေရအတြက္
 
 #__________________________________=Select the headquarters listed below that you want to add to all the bulletins listed above.
 -23a1-field:ChooseHeadquartersToAdd=အထက္ တြင္စာရင္းျပဳစုထားေသာ စာေစာင္မ်ားထဲသို သင္ ထပ္ထည့္လိုသည့္ ေအာက္တြင္စာရင္းျပဳစုထားေသာ ပင္မ မ်ားကို ေရြးခ်ယ္ပါ။
@@ -698,7 +698,7 @@
 -4a82-field:DefaultDetailFiles=ပုံေသသတ္မွတ္ခ်က္ အေသးစိတ္
 
 #__________________________________________=chart.jpeg
--4a06-field:DefaultPrintChartToDiskFileName=<chart.jpeg>
+-4a06-field:DefaultPrintChartToDiskFileName=ကားခ်ပ္.jpeg
 
 #_____________________________________=bulletins.html
 -a4f1-field:DefaultPrintToDiskFileName=bulletins.html
@@ -764,7 +764,7 @@
 -30e3-field:ExitWhenComplete=လုပ္ငန္းၿပီးဆုံးလၽွင္ ထြက္ပါ
 
 #____________________________=Include all versions of each bulletin in export
--d390-field:ExportAllVersions=<Include all versions of each bulletin in export>
+-d390-field:ExportAllVersions=တင္ပို႔ရာတြင္ ေၾကညာခ်က္တိုင္း၏ဗားရွင္းအားလံုးပါ၀င္ေစပါ။
 
 #____________________________=Include attachments in export
 -1a48-field:ExportAttachments=ထုတ္လုပ္ေပးပို႔မွုတြင္ ပူးတြဲပါမ်ား ထည့္သြင္းပါ
@@ -794,7 +794,7 @@
 -2a0a-field:FancySearchHelpMsg4=သင္၏ ရွာေဖြ ဂရစ္စံမ်ားသည္ တစ္ခုတည္းေသာ စာေစာင္ဂရစ္ တန္းတြင္ ျပည့္စုံေစလိုလ်င္ “ဂရစ္ေကာ္လံ သတ္မွတ္ခ်က္မ်ား ယွဥ္တြဲပါ”အကြက္ကို ေရြးပါ။ ဥပမာအားျဖင့္ သင့္အေနျဖင့္ ရက္စြဲတစ္ခု ၿပီးေနာက္ ဖန္တီးထားသည့္ သင့္စာေစာင္မွ တန္းတစ္ခုတြင္ ႏွိပ္စက္ခံရသူတစ္ဦး၏ သီးျခား အမည္ကို ရွာေဖြလိုပါက ထိုအကြက္ကို ေရြးခ်ယ္ၿပီး ရွာေဖြ မ်က္ႏွာျပင္တြင္ ေအာက္ေဖာ္ျပပါ နယ္ပယ္ မ်ားကို ထည့္သြင္းပါ။ "ဓားစာခံ၏ အခ်က္အလက္။ ကိုယ္ပိုင္အမည္"=x ႏွင့္ ႏွိပ္စက္ခံ ရသူ၏ "အခ်က္အလက္။ မ်ိဳးရိုးအမည္=y ႏွင့္ "ဖန္တီးသည့္ေနစြဲ">=`ႏွစ္-လ-ရက္။ အကယ္၍သင္သည္ “ဂရစ္ေကာ္လံ သတ္မွတ္ခ်က္မ်ား ယွဥ္တြဲပါ”အကြက္ကို မေရြးခဲ့ပါက Martus သည္ မည္သည့္အတန္းတြင္မဆို သင္အတိအက် ေဖာ္ျပသည့္ ပထမအမည္ ပါရွိၿပီး အျခားမည္သည့္ အတန္းတြင္မဆို သင္အတိအက် ေဖာ္ျပသည့္ ေနာက္ဆုံးအမည္ ပါရွိသည့္ သင္သတ္မွတ္ေသာ ရက္စြဲၿပီးေနာက္ဖန္တီးသည့္ စာေစာင္မ်ားကို ရွာေဖြလိမ့္မည္။ သို႔ရာတြင္ တူညီေသာ စာေစာင္အတန္းတြင္ ရွာေဖြမည္ မဟုတ္ေပ။ (သင့္အေနျဖင့္ ကိုယ္ပိုင္အမည္"=x ႏွင့္ မ်ိဳးရိုးအမည္=b ပါရွိေသာ တန္းတစ္ခုရရွိနိုင္ၿပီး ကိုယ္ပိုင္အမည္"=a ႏွင့္ မ်ိဳးရိုးအမည္=y ပါရွိေသာ ကြဲျပားျခားနားသည့္ တန္းတစ္ခု ရရွိနိုင္သည္။ သင့္အေနျဖင့္ အတန္း တစ္ခုတြင္ ယွဥ္တြဲရမည္ဟု အတိအက် သတ္မွတ္မထားေသာေၾကာင့္ Martus သည္ ထိုစာေစာင္အား ရွာေဖြမွုကို ကိုက္ညီမွုအျဖစ္ ရွာေဖြလိမ့္မည္။)\n\n
 
 #______________________________= Additional Search Notes:\n\n 1. Because Martus searches all rows of any grid (table) fields for your criteria, it may find bulletins where one grid row matches your criteria but other rows do not.  For example you could have a bulletin with a grid that has a location field in it and you have multiple rows of data in the grid with locations A, B, and C.  If you search for bulletins where location != C (does not equal C), Martus will find that bulletin because there are 2 rows in the bulletin grid where the location is not C, even though there is one row where the locations IS C.\n\n 2. In this release, if you are searching on a multi-level dropdown, all searches are exact matches, not partial or "starts with" matches.  This means that you have to pick the exact level at which you want to be searching.  For example, an "Event Location" field that has three levels (Region/City/Neighborhood) will have three entries in the search field list:  Event Location: Region, Event Location: City, and Event Location: Neighborhood.  So if you want to find any bulletins that have an Event Location anywhere in Region X (regardless of the City), you have to pick the "Event Location: Region" field to search on and pick Region X off the dropdown list choices. If you pick Event Location: City to search on and then pick Region X but leave the City level blank, Martus will only find entries where there was no City data entered  (City was blank), as opposed to ANY location with Region X regardless of what data was entered at the City level.\n\n 3. If you do not see your search terms/dates in the final version of the bulletin displayed in the Search Results folder, your criteria may have been matched in an earlier version of the bulletin.  You can access previous versions by clicking the "Bulletin Details..." button at the top of the bulletin.  To search only the most recent versions of bulletins, select Only Search Most Recent Versions of Bulletins in the Search dialog box.\n\n 4. If you have fields in different bulletins or from different customizations that are exactly the same, Martus will combine them in any Search and Report field lists.  And while Martus warns you about duplicate labels where you are creating a new bulletin customization, it is possible that over time, you may have bulletins with different customizations that ended up with the same labels (e.g. maybe you changed a text field to a dropdown field but kept the same label).  In these cases, Martus will display both fields in the search screen, and try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists.  Also, if you have fields with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same.  So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion. Please see the "Customize Fields" Help screen for more guidelines on creating fields for searching.\n\n 5. You may sometimes see duplicate entries in dropdown list search criteria values in the search screen.  If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria dropdown list options are the labels for each list entry, but the codes you defined determine how many entries there will be in the search dropdown list (see the "Customize Fields" Help screen for more information about creating custom dropdown fields). So if you have different Reusable Choices codes with the same label in different bulletin customizations in your account, the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like "label1" and your search will be on bulletins that have that label, regardless of which code the customization had for the label).  And if you have the same Reusable Choices code with different labels in different bulletin customizations in your account, the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like "label1; label2" and your search will be on bulletins that have either of those labels).\n\nFor additional help with searching, email help@martus.org.
--c989-field:FancySearchHelpMsg5=<ရွာေဖြျခင္းႏွင့္ ပတ္သက္သည့္ ထပ္တိုးအခ်က္အလက္မ်ား \n\n ၁) Martus သည္ သင့္လိုအပ္ခ်က္အတြက္ အကြက္ေနရာတိုင္းရွိ အတန္းမွန္သမၽွကို ရွာေဖြေပးျခင္းေၾကာင့္ သင့္လိုအပ္ခ်က္ႏွင့္ ကိုက္ညီေသာ အတန္းတစ္တန္းရွိၿပီး မကိုက္ညီသည့္ အျခားအတန္းမ်ားပါဝင္သည့္ စာေစာင္ကို ရွာေဖြမိနိုင္သည္။ ဥပမာ - သင့္ထံတြင္ တည္ေနရာနယ္ပယ္ ပါဝင္ေသာအကြက္ရွိသည့္ စာေစာင္ရွိေနနိုင္ၿပီး တည္ေနရာ က၊ခ၊ ႏွင့္ ဂ ပါဝင္ေသာ အကြက္ရွိသည့္ အတန္းတစ္တန္းထက္ပိုေသာ အခ်က္အလက္မ်ားရွိသည္ ဆိုပါစို႔။ အကယ္၍ သင္က တည္ေနရာ ဂ မဟုတ္ေသာ (တည္ေနရာ !=ဂ) စာေစာင္ကို ရွာေဖြပါက Martus သည္ ထိုစာေစာင္ကို ရွာေဖြလိမ့္မည္။ အဘယ္ေၾကာင့္ဆိုေသာ္ စာေစာင္ထဲတြင္ တည္ေနရာ ဂ ပါဝင္ေသာ အတန္းတစ္တန္းပါဝင္လင့္ကစား တည္ေနရာ ဂ မဟုတ္ေသာ ေနရာပါဝင္ေသာ အတန္း၂တန္းရွိေသာေၾကာင့္ျဖစ္သည္။ \n\n ၂) ဤထုတ္ျပန္ခ်က္တြင္ အကယ္၍ သင္က အဆင့္တစ္ခုထက္ပိုေသာ ေရြးခ်ယ္စရာ ဆြဲခ်စာရင္းတြင္ ရွာေဖြပါက ေတြ႕ရွိမည့္ အေျဖမ်ားသည္ အတိအက်တူညီေသာ အေျဖမ်ားသာျဖစ္မည္။ တဝက္တပ်က္တူေသာ/အစသာတူေသာ အေျဖမ်ိဳးမရပါ။ ဆိုလိုသည္မွာ သင္ရွာေဖြလိုသည့္ အဆင့္အတိအက်ကို သင္က ေရြးခ်ယ္ရမည္ျဖစ္သည္။ ဥပမာ - အဆင့္သုံးဆင့္ (ျပည္နယ္၊ ၿမိဳ႕၊ ရပ္ကြက္) ရွိသည့္ “ျဖစ္ရပ္တည္ေနရာ”  သည္ နယ္ပယ္ရွာေဖြစာရင္းတြင္ တည္ေနရာ ျပည္နယ္၊ တည္ေနရာ ၿမိဳ႕၊ တည္ေနရာ ရပ္ကြက္ ဟူ၍ သုံးႀကိမ္ျဖည့္သြင္းရမည္ ျဖစ္သည္။ ထို႔ေၾကာင့္ သင္သည္ ကခ်င္ျပည္နယ္တြင္ ရွိသည့္ မည္သည့္ျဖစ္ရပ္တည္ေနရာမဆို (ၿမိဳ႕ကို မစဥ္းစားဘဲ) ပါဝင္ေသာ စာေစာင္ကို ရွာေဖြလိုလၽွင္ တည္ေနရာျပည္နယ္ကို ေရြးခ်ယ္ရမည္ျဖစ္ၿပီး ေရြးခ်ယ္စရာဆြဲခ်စာရင္းမွ ကခ်င္ျပည္နယ္ကို ေရြးခ်ယ္ရမည္ျဖစ္သည္။ အကယ္၍ သင္သည္ ျဖစ္ရပ္တည္ေနရာ - ၿမိဳ႕ကို ရွာေဖြေနရာတြင္ ေရြးခ်ယ္ကာ ကခ်င္ျပည္နယ္းကိုသာ ေရြးခ်ယ္ၿပီး ၿမိဳ႕အဆင့္ကို ကြက္လပ္ထားခဲ့ပါက Martus က ၿမိဳ႕အခ်က္အလက္မထည့္သြင္းထားေသာ (ၿမိဳ႕ေနရာ ကြက္လပ္) ရလဒ္မ်ားကိုသာ ရွာေဖြလိမ့္မည္။ ၿမိဳ႕အဆင့္တြင္ မည္သည့္အခ်က္အလက္ထည့္သြင္းထားသည္ကို မစဥ္းစားဘဲ ကခ်င္ျပည္နယ္ရွိ မည္သည့္တည္ေနရာကိုမဆို ရွာေဖြေစခ်င္ေသာ လုပ္ေဆာင္ခ်က္ႏွင့္ ဆန္႔က်င္သြားေပလိမ့္မည္။ \n\n ၃) အကယ္၍ ရွာေဖြရလဒ္စာတြဲအတြင္းတြင္ ျပသထားေသာ စာေစာင္ေနာက္ဆုံးဗားရွင္းတြင္ သင္၏ရွာေဖြသတ္မွတ္ခ်က္/ေန႔စြဲမ်ားကို ရွာမေတြ႕ပါက သင္၏သတ္မွတ္ခ်က္သည္ စာေစာင္ဗားရွင္းအေဟာင္းႏွင့္ ကိုက္ညီေနေသာေၾကာင့္ ျဖစ္နိုင္သည္။ စာေစာင္၏ထိပ္စီးတြင္ရွိေသာ “စာေစာင္အေသးစိတ္”ခလုတ္ကို ႏွိပ္၍ ယခင္ဗားရွင္းကို ျပန္ၾကည့္နိုင္သည္။ စာေစာင္၏ေနာက္ဆုံးဗားရွင္းမ်ားမွ ရွာေဖြလိုပါက ရွာေဖြေနရာတြင္ စာေစာင္ေနာက္ဆုံးဗားရွင္းမွသာ ဆိုသည္ကို ေရြးခ်ယ္ပါ။ \n\n ၄) အကယ္၍ သင့္ထံတြင္ မတူညီေသာ စာေစာင္မ်ားမွ သို႔မဟုတ္ မတူညီေသာ စိတ္ႀကိဳက္ျပင္ဆင္မွုမ်ားမွ တေထရာတည္းတူညီေနေသာ နယ္ပယ္မ်ား ရွိေနပါက Martus မွ မည္သည့္ ရွာေဖြျခင္းႏွင့္ တင္ျပျခင္းနယ္ပယ္စာရင္းတြင္မဆို ေပါင္း၍ျပမည္ျဖစ္သည္။ ထို႔အျပင္ Martus က သင္စာေစာင္အသစ္ စိတ္ႀကိဳက္ျပင္ဆင္မွုမ်ားဖန္တီးခ်ိန္တြင္ တစ္ခုထက္ပိုေသာ အမွတ္အသားမ်ားရွိေနေၾကာင္း သတိေပးေနခ်ိန္၌ သင့္ထံတြင္ တူညီေသာ အမွတ္အသားမ်ားရွိသည့္ မတူညီေသာ စိတ္ႀကိဳက္ျပင္ဆင္မွုမ်ားရွိေသာ စာေစာင္ရွိေနျခင္းလည္း ျဖစ္နိုင္သည္။ (ဥပမာ - သင္က ေရြးခ်ယ္စရာေနရာတြင္ အကၡရာထည့္သြင္းသည့္ ေနရာကို တူညီေသာ အမွတ္အသားကို သိမ္းထားျခင္း) ဤအေျခအေနမ်ိဳးတြင္ Martus သည္ ရွာေဖြမ်က္ႏွာျပင္တြင္ အေျဖႏွစ္ခုစလုံးကို ျပလိမ့္မည္။ ထို႔အျပင္ နယ္ပယ္ေရြးခ်ယ္မွုစာရင္းတြင္ မည္သည့္ နယ္ပယ္အမ်ိဳးအစားႏွင့္ အညႊန္းမ်ားရွိသည္ကို ျပသျခင္းျဖင့္ Martus က နယ္ပယ္မ်ားၾကားရွိ မတူညီမွုကို သင္စဥ္းစားနိုင္ေအာင္ ကူညီေပးလိမ့္မည္။ ထို႔အတူ သင့္ထံတြင္ တူညီေသာအညႊန္းမ်ားႏွင့္ မတူညီေသာအမွတ္အသားမ်ား ႏွင့္/သို႔မဟုတ္ နယ္ပယ္အမ်ိဳးအစားမ်ားရွိေနပါက Martus မွ အညႊန္းႏွင့္ နယ္ပယ္အမ်ိဳးအစားကို အသုံးျပဳကာ မည္သည့္အခ်ိန္တြင္ မတူညီေသာ နယ္ပယ္မ်ား တူညီသင့္သည္ကို ရွာေဖြေပးလိမ့္မည္။ ထို႔ေၾကာင့္ ကၽြႏု္ပ္တို႔ တိုက္တြန္းလိုသည္မွာ ရွုပ္ေထြးမွုမ်ား မျဖစ္ေစရန္ သင့္အေနႏွင့္ စိတ္ႀကိဳက္ျပင္ဆင္ထားေသာေနရာတြင္ နယ္ပယ္အညႊန္းႏွင့္ အမွတ္အသားမ်ားကို ရွင္းရွင္းလင္းလင္းျဖစ္ေအာင္ သတ္မွတ္ရမည္။  ရွာေဖြျခင္းမ်ားအတြက္ နယ္ပယ္မ်ားဖန္တီးျခင္းႏွင့္ ပတ္သက္သည့္ ထပ္မံလမ္းညႊန္ခ်က္မ်ားကို သိရွိလိုပါက “နယ္ပယ္မ်ားစိတ္ႀကိဳက္္ျပင္ဆင္ျခင္း” အကူအညီစာမ်က္ႏွာတြင္ ေက်းဇူးျပဳ၍ ၾကည့္ပါ။ \n\n ၅) သင့္အေနျဖင့္ တစ္ခါတရံ ရွာေဖြရလဒ္ျပမ်က္ႏွာျပင္၏ ရွာေဖြမွုသတ္မွတ္ခ်က္တန္ဖိုးမ်ား ဆြဲခ်စာရင္းတြင္ တစ္ခုထက္ပိုေသာ တူညီသည့္အခ်က္အလက္မ်ားကို ေတြ႕ရွွိေကာင္းေတြ႕ရွိမည္။ ရွာေဖြေနရာတြင္ “ျပန္လည္အသုံးျပဳနိုင္ေသာ ေရြးခ်ယ္မွုမ်ား ဆြဲခ်နယ္ပယ္”ကို သင္ေရြးခ်ယ္ပါက  သတ္မွတ္ခ်က္ဆြဲခ်စာရင္းေရြးခ်ယ္မွု အခြင့္အလမ္းမ်ားအျဖစ္ ျပေသာ တန္ဖိုးမ်ားသည္ သြင္းထားေသာ စာရင္းတစ္ခုစီအတြက္ အမွတ္အသားမ်ား ျဖစ္သည္။ (စိတ္ႀကိဳက္ျပင္ဆင္ထားေသာ ဆြဲခ်နယ္ပယ္မ်ားႏွင့္ ပတ္သက္၍ ပိုမိုသိရွိလိုပါက “နယ္ပယ္မ်ားစိတ္ႀကိဳက္္ျပင္ဆင္ျခင္း” အကူအညီစာမ်က္ႏွာတြင္ ေက်းဇူးျပဳ၍ ၾကည့္ပါ။) အကယ္၍ သင့္အေကာင့္ရွိ မတူညီေသာ စိတ္ႀကိဳက္ျပင္ဆင္ထားသည့္ စာေစာင္မ်ားထဲ၌ ေခါင္းစဥ္တူညီေသာ္လည္း မတူညီေသာ ျပန္လည္အသုံးခ်နိုင္သည့္ ေရြးခ်ယ္မွုကုဒ္မ်ား ရွိေနပါက အမွတ္အသားမ်ားသည္ ရွာေဖြဆြဲခ်စာရင္းတြင္ ႏွစ္ႀကိမ္ျပေနလိမ့္မည္။ (ဆိုလိုသည္မွာ သင္သည္ အမွတ္အသား၁ကို ကုဒ္၁ ႏွင့္ ကုဒ္၂ ႏွစ္ခုလုံးအတြက္ သုံးထားပါက ရွာေဖြဆြဲခ်စာရင္းတြင္ အမွတ္အသား၁ဟု ထင္ရေသာ ရလဒ္ႏွစ္ခုကို သင္ေတြ႕ရလိမ့္မည္ျဖစ္သည္။ ထို႔အျပင္ သင္၏ရွာေဖြျခင္းသည္ ထိုအမွတ္အသားအတြက္ မည္သည့္စိတ္ႀကိဳက္ျပင္ဆင္မွုကုဒ္ရွိခဲ့သည္ ျဖစ္ေစကာမူ ထိုအမွတ္အသားရွိေနေသာ စာေစာင္တြင္ ေဖာ္ျပေနလိမ့္မည္။) အကယ္၍ သင့္အေကာင့္ထဲရွိ မတူညီေသာ စိတ္ႀကိဳက္ျပင္ဆင္မွုစာေစာင္မ်ားထဲ၌ မတူညီေသာ အမွတ္အသားမ်ားရွိသည့္ တူညီေသာ ျပန္လည္အသုံးျပဳနိုင္ေသာ ေရြးခ်ယ္စရာမ်ား ရွိေနပါက ထိုကုဒ္အတြက္ ရွာေဖြဆြဲခ်စာရင္းသည္ တန္ဖိုးႏွစ္ခုစလုံးကို ဆီမီးေကာ္လံ (Semicolon) ခံ၍ ေဖာ္ျပလိမ့္မည္။ (ဆိုလိုသည္မွာ အမွတ္အသား၁ ႏွင့္ အမွတ္အသား၂တို႔ အတြက္ ကုဒ္၁ကို သင္အသုံးျပဳထားပါက ရွာေဖြဆြဲခ်စာရင္းတြင္ “အမွတ္အသား၁ ; အမွတ္အသား၂” ဟုထင္ရေသာ ရလဒ္ကိုေတြ႕ရမည္။ ထို႔အျပင္ သင့္ရွာေဖြမွုသည္ ထိုအမွတ္အသားမ်ား တစ္ခုမဟုတ္ တစ္ခုရွိေနေသာ စာေစာင္တြင္ ေဖာ္ျပေနလိမ့္မည္။) ရွာေဖြျခင္းႏွင့္ ပတ္သက္၍ ထပ္ျဖည့္အကူအညီမ်ား လိုအပ္ပါက help@martus.org သို႔ အီးေမးလ္ပို႔ပါ။>
+-c989-field:FancySearchHelpMsg5=ရွာေဖြျခင္းႏွင့္ ပတ္သက္သည့္ ထပ္တိုးအခ်က္အလက္မ်ား \n\n ၁) Martus သည္ သင့္လိုအပ္ခ်က္အတြက္ အကြက္ေနရာတိုင္းရွိ အတန္းမွန္သမၽွကို ရွာေဖြေပးျခင္းေၾကာင့္ သင့္လိုအပ္ခ်က္ႏွင့္ ကိုက္ညီေသာ အတန္းတစ္တန္းရွိၿပီး မကိုက္ညီသည့္ အျခားအတန္းမ်ားပါဝင္သည့္ စာေစာင္ကို ရွာေဖြမိနိုင္သည္။ ဥပမာ - သင့္ထံတြင္ တည္ေနရာနယ္ပယ္ ပါဝင္ေသာအကြက္ရွိသည့္ စာေစာင္ရွိေနနိုင္ၿပီး တည္ေနရာ က၊ခ၊ ႏွင့္ ဂ ပါဝင္ေသာ အကြက္ရွိသည့္ အတန္းတစ္တန္းထက္ပိုေသာ အခ်က္အလက္မ်ားရွိသည္ ဆိုပါစို႔။ အကယ္၍ သင္က တည္ေနရာ ဂ မဟုတ္ေသာ (တည္ေနရာ !=ဂ) စာေစာင္ကို ရွာေဖြပါက Martus သည္ ထိုစာေစာင္ကို ရွာေဖြလိမ့္မည္။ အဘယ္ေၾကာင့္ဆိုေသာ္ စာေစာင္ထဲတြင္ တည္ေနရာ ဂ ပါဝင္ေသာ အတန္းတစ္တန္းပါဝင္လင့္ကစား တည္ေနရာ ဂ မဟုတ္ေသာ ေနရာပါဝင္ေသာ အတန္း၂တန္းရွိေသာေၾကာင့္ျဖစ္သည္။ \n\n ၂) ဤထုတ္ျပန္ခ်က္တြင္ အကယ္၍ သင္က အဆင့္တစ္ခုထက္ပိုေသာ ေရြးခ်ယ္စရာ ဆြဲခ်စာရင္းတြင္ ရွာေဖြပါက ေတြ႕ရွိမည့္ အေျဖမ်ားသည္ အတိအက်တူညီေသာ အေျဖမ်ားသာျဖစ္မည္။ တဝက္တပ်က္တူေသာ/အစသာတူေသာ အေျဖမ်ိဳးမရပါ။ ဆိုလိုသည္မွာ သင္ရွာေဖြလိုသည့္ အဆင့္အတိအက်ကို သင္က ေရြးခ်ယ္ရမည္ျဖစ္သည္။ ဥပမာ - အဆင့္သုံးဆင့္ (ျပည္နယ္၊ ၿမိဳ႕၊ ရပ္ကြက္) ရွိသည့္ “ျဖစ္ရပ္တည္ေနရာ”  သည္ နယ္ပယ္ရွာေဖြစာရင္းတြင္ တည္ေနရာ ျပည္နယ္၊ တည္ေနရာ ၿမိဳ႕၊ တည္ေနရာ ရပ္ကြက္ ဟူ၍ သုံးႀကိမ္ျဖည့္သြင္းရမည္ ျဖစ္သည္။ ထို႔ေၾကာင့္ သင္သည္ နယ္ေျမ (က) တြင ္ ရွိသည့္ မည္သည့္ျဖစ္ရပ္တည္ေနရာမဆို (ၿမိဳ႕ကို မစဥ္းစားဘဲ) ပါဝင္ေသာ စာေစာင္ကို ရွာေဖြလိုလၽွင္ တည္ေနရာျပည္နယ္ကို ေရြးခ်ယ္ရမည္ျဖစ္ၿပီး ေရြးခ်ယ္စရာဆြဲခ်စာရင္းမွ နယ္ေျမ (က) ကို ေရြးခ်ယ္ရမည္ျဖစ္သည္။ အကယ္၍ သင္သည္ ျဖစ္ရပ္တည္ေနရာ - ၿမိဳ႕ကို ရွာေဖြေနရာတြင္ ေရြးခ်ယ္ကာ နယ္ေျမ (က)ကိုသာ ေရြးခ်ယ္ၿပီး ၿမိဳ႕အဆင့္ကို ကြက္လပ္ထားခဲ့ပါက Martus က ၿမိဳ႕အခ်က္အလက္မထည့္သြင္းထားေသာ (ၿမိဳ႕ေနရာ ကြက္လပ္) ရလဒ္မ်ားကိုသာ ရွာေဖြလိမ့္မည္။ ၿမိဳ႕အဆင့္တြင္ မည္သည့္အခ်က္အလက္ထည့္သြင္းထားသည္ကို မစဥ္းစားဘဲ နယ္ေျမ (က) ရိွွိ မည္သည့္တည္ေနရာကိုမဆို ရွာေဖြေစခ်င္ေသာ လုပ္ေဆာင္ခ်က္ႏွင့္ ဆန္႔က်င္သြားေပလိမ့္မည္။ \n\n ၃) အကယ္၍ ရွာေဖြရလဒ္စာတြဲအတြင္းတြင္ ျပသထားေသာ စာေစာင္ေနာက္ဆုံးဗားရွင္းတြင္ သင္၏ရွာေဖြသတ္မွတ္ခ်က္/ေန႔စြဲမ်ားကို ရွာမေတြ႕ပါက သင္၏သတ္မွတ္ခ်က္သည္ စာေစာင္ဗားရွင္းအေဟာင္းႏွင့္ ကိုက္ညီေနေသာေၾကာင့္ ျဖစ္နိုင္သည္။ စာေစာင္၏ထိပ္စီးတြင္ရွိေသာ “စာေစာင္အေသးစိတ္”ခလုတ္ကို ႏွိပ္၍ ယခင္ဗားရွင္းကို ျပန္ၾကည့္နိုင္သည္။ စာေစာင္၏ေနာက္ဆုံးဗားရွင္းမ်ားမွ ရွာေဖြလိုပါက ရွာေဖြေနရာတြင္ စာေစာင္ေနာက္ဆုံးဗားရွင္းမွသာ ဆိုသည္ကို ေရြးခ်ယ္ပါ။ \n\n ၄) အကယ္၍ သင့္ထံတြင္ မတူညီေသာ စာေစာင္မ်ားမွ သို႔မဟုတ္ မတူညီေသာ စိတ္ႀကိဳက္ျပင္ဆင္မွုမ်ားမွ တေထရာတည္းတူညီေနေသာ နယ္ပယ္မ်ား ရွိေနပါက Martus မွ မည္သည့္ ရွာေဖြျခင္းႏွင့္ တင္ျပျခင္းနယ္ပယ္စာရင္းတြင္မဆို ေပါင္း၍ျပမည္ျဖစ္သည္။ ထို႔အျပင္ Martus က သင္စာေစာင္အသစ္ စိတ္ႀကိဳက္ျပင္ဆင္မွုမ်ားဖန္တီးခ်ိန္တြင္ တစ္ခုထက္ပိုေသာ အမွတ္အသားမ်ားရွိေနေၾကာင္း သတိေပးေနခ်ိန္၌ သင့္ထံတြင္ တူညီေသာ အမွတ္အသားမ်ားရွိသည့္ မတူညီေသာ စိတ္ႀကိဳက္ျပင္ဆင္မွုမ်ားရွိေသာ စာေစာင္ရွိေနျခင္းလည္း ျဖစ္နိုင္သည္။ (ဥပမာ - သင္က ေရြးခ်ယ္စရာေနရာတြင္ အကၡရာထည့္သြင္းသည့္ ေနရာကို တူညီေသာ အမွတ္အသားကို သိမ္းထားျခင္း) ဤအေျခအေနမ်ိဳးတြင္ Martus သည္ ရွာေဖြမ်က္ႏွာျပင္တြင္ အေျဖႏွစ္ခုစလုံးကို ျပလိမ့္မည္။ ထို႔အျပင္ နယ္ပယ္ေရြးခ်ယ္မွုစာရင္းတြင္ မည္သည့္ နယ္ပယ္အမ်ိဳးအစားႏွင့္ အညႊန္းမ်ားရွိသည္ကို ျပသျခင္းျဖင့္ Martus က နယ္ပယ္မ်ားၾကားရွိ မတူညီမွုကို သင္စဥ္းစားနိုင္ေအာင္ ကူညီေပးလိမ့္မည္။ ထို႔အတူ သင့္ထံတြင္ တူညီေသာအညႊန္းမ်ားႏွင့္ မတူညီေသာအမွတ္အသားမ်ား ႏွင့္/သို႔မဟုတ္ နယ္ပယ္အမ်ိဳးအစားမ်ားရွိေနပါက Martus မွ အညႊန္းႏွင့္ နယ္ပယ္အမ်ိဳးအစားကို အသုံးျပဳကာ မည္သည့္အခ်ိန္တြင္ မတူညီေသာ နယ္ပယ္မ်ား တူညီသင့္သည္ကို ရွာေဖြေပးလိမ့္မည္။ ထို႔ေၾကာင့္ ကၽြႏု္ပ္တို႔ တိုက္တြန္းလိုသည္မွာ ရွုပ္ေထြးမွုမ်ား မျဖစ္ေစရန္ သင့္အေနႏွင့္ စိတ္ႀကိဳက္ျပင္ဆင္ထားေသာေနရာတြင္ နယ္ပယ္အညႊန္းႏွင့္ အမွတ္အသားမ်ားကို ရွင္းရွင္းလင္းလင္းျဖစ္ေအာင္ သတ္မွတ္ရမည္။  ရွာေဖြျခင္းမ်ားအတြက္ နယ္ပယ္မ်ားဖန္တီးျခင္းႏွင့္ ပတ္သက္သည့္ ထပ္မံလမ္းညႊန္ခ်က္မ်ားကို သိရွိလိုပါက “နယ္ပယ္မ်ားစိတ္ႀကိဳက္္ျပင္ဆင္ျခင္း” အကူအညီစာမ်က္ႏွာတြင္ ေက်းဇူးျပဳ၍ ၾကည့္ပါ။ \n\n ၅) သင့္အေနျဖင့္ တစ္ခါတရံ ရွာေဖြရလဒ္ျပမ်က္ႏွာျပင္၏ ရွာေဖြမွုသတ္မွတ္ခ်က္တန္ဖိုးမ်ား ဆြဲခ်စာရင္းတြင္ တစ္ခုထက္ပိုေသာ တူညီသည့္အခ်က္အလက္မ်ားကို ေတြ႕ရွွိေကာင္းေတြ႕ရွိမည္။ ရွာေဖြေနရာတြင္ “ျပန္လည္အသုံးျပဳနိုင္ေသာ ေရြးခ်ယ္မွုမ်ား ဆြဲခ်နယ္ပယ္”ကို သင္ေရြးခ်ယ္ပါက  သတ္မွတ္ခ်က္ဆြဲခ်စာရင္းေရြးခ်ယ္မွု အခြင့္အလမ္းမ်ားအျဖစ္ ျပေသာ တန္ဖိုးမ်ားသည္ သြင္းထားေသာ စာရင္းတစ္ခုစီအတြက္ အမွတ္အသားမ်ား ျဖစ္သည္။ (စိတ္ႀကိဳက္ျပင္ဆင္ထားေသာ ဆြဲခ်နယ္ပယ္မ်ားႏွင့္ ပတ္သက္၍ ပိုမိုသိရွိလိုပါက “နယ္ပယ္မ်ားစိတ္ႀကိဳက္္ျပင္ဆင္ျခင္း” အကူအညီစာမ်က္ႏွာတြင္ ေက်းဇူးျပဳ၍ ၾကည့္ပါ။) အကယ္၍ သင့္အေကာင့္ရွိ မတူညီေသာ စိတ္ႀကိဳက္ျပင္ဆင္ထားသည့္ စာေစာင္မ်ားထဲ၌ ေခါင္းစဥ္တူညီေသာ္လည္း မတူညီေသာ ျပန္လည္အသုံးခ်နိုင္သည့္ ေရြးခ်ယ္မွုကုဒ္မ်ား ရွိေနပါက အမွတ္အသားမ်ားသည္ ရွာေဖြဆြဲခ်စာရင္းတြင္ ႏွစ္ႀကိမ္ျပေနလိမ့္မည္။ (ဆိုလိုသည္မွာ သင္သည္ အမွတ္အသား၁ကို ကုဒ္၁ ႏွင့္ ကုဒ္၂ ႏွစ္ခုလုံးအတြက္ သုံးထားပါက ရွာေဖြဆြဲခ်စာရင္းတြင္ အမွတ္အသား၁ဟု ထင္ရေသာ ရလဒ္ႏွစ္ခုကို သင္ေတြ႕ရလိမ့္မည္ျဖစ္သည္။ ထို႔အျပင္ သင္၏ရွာေဖြျခင္းသည္ ထိုအမွတ္အသားအတြက္ မည္သည့္စိတ္ႀကိဳက္ျပင္ဆင္မွုကုဒ္ရွိခဲ့သည္ ျဖစ္ေစကာမူ ထိုအမွတ္အသားရွိေနေသာ စာေစာင္တြင္ ေဖာ္ျပေနလိမ့္မည္။) အကယ္၍ သင့္အေကာင့္ထဲရွိ မတူညီေသာ စိတ္ႀကိဳက္ျပင္ဆင္မွုစာေစာင္မ်ားထဲ၌ မတူညီေသာ အမွတ္အသားမ်ားရွိသည့္ တူညီေသာ ျပန္လည္အသုံးျပဳနိုင္ေသာ ေရြးခ်ယ္စရာမ်ား ရွိေနပါက ထိုကုဒ္အတြက္ ရွာေဖြဆြဲခ်စာရင္းသည္ တန္ဖိုးႏွစ္ခုစလုံးကို ဆီမီးေကာ္လံ (Semicolon) ခံ၍ ေဖာ္ျပလိမ့္မည္။ (ဆိုလိုသည္မွာ အမွတ္အသား၁ ႏွင့္ အမွတ္အသား၂တို႔ အတြက္ ကုဒ္၁ကို သင္အသုံးျပဳထားပါက ရွာေဖြဆြဲခ်စာရင္းတြင္ “အမွတ္အသား၁ ; အမွတ္အသား၂” ဟုထင္ရေသာ ရလဒ္ကိုေတြ႕ရမည္။ ထို႔အျပင္ သင့္ရွာေဖြမွုသည္ ထိုအမွတ္အသားမ်ား တစ္ခုမဟုတ္ တစ္ခုရွိေနေသာ စာေစာင္တြင္ ေဖာ္ျပေနလိမ့္မည္။) ရွာေဖြျခင္းႏွင့္ ပတ္သက္၍ ထပ္ျဖည့္အကူအညီမ်ား လိုအပ္ပါက help@martus.org သို႔ အီးေမးလ္ပို႔ပါ။
 
 #___________________________=Yes/No
 -9f62-field:FieldTypeBOOLEAN=ဟုတ္ပါသည္/မဟုတ္ပါ
@@ -1124,7 +1124,7 @@
 -250a-field:SkippingBulletinsNotOurs=မွတ္ခ်က္။  ။အျခားအေကာင့္မ်ားက ေရးသားေသာ စာေစာင္မ်ားကို ဤအမိန္ေပးမွု ျဖင့္ေျပာင္းလဲမရပါ။ထိုေၾကာင့္ ၎တိုသည္ အထက္ေဖာ္ျပပါဇယားတြင္မပါဝင္ပါ။။
 
 #_______________________________________________=The following words have been added to the user dictionary. \nYou can delete or edit them here, or you can add more words. \nEach word must be on a line by itself.
--ad45-field:SpellCheckUserDictionaryInstructions=&lt;The following words have been added to the user dictionary. \nYou can delete or edit them here, or you can add more words. \nEach word must be on a line by itself.&gt;
+-ad45-field:SpellCheckUserDictionaryInstructions=ေအာက္ပါစာလံုးမ်ားကို အသံုးျပဳသူအဘိဓာန္တြင္ထည့္ၿပီးျဖစ္သည္။ \nသင္သည္ ဤေနရာတြင္ ၄င္းတို႔အားဖ်က္ျခင္း သို႔မဟုတ္ ျပင္ဆင္ျခင္းမ်ားျပဳလုပ္ႏိုင္သည္။ သို႔မဟုတ္ စားလံုးမ်ားထပ္ထည့္ႏိုင္သည္။  \nစာလံုးတစ္ခုစီသည္ လိုင္းတစ္လိုင္းေပၚတြင္ရိွေနရမည္။
 
 #___________________________________=Human Rights Bulletin System
 -fe5b-field:SplashProductDescription=လူ႔အခြင့္အေရးစာေစာင္မ်ား ထိန္းသိမ္းမွုစနစ္
@@ -1154,7 +1154,7 @@
 -5ea8-field:UntitledBulletin=ေခါင္းစဥ္တပ္မထားေသာ စာေစာင္
 
 #______________________________________=Upload Failed
--88c1-field:UploadFailedProgressMessage=ေပးပို႔ထည့္သြင္းမွု မေအာင္ျမင္ပါ
+-88c1-field:UploadFailedProgressMessage= ေပးပို႔ထည့္သြင္းမွု မေအာင္ျမင္ပါ
 
 #_________________________________=Sending Draft Bulletin
 -8ea2-field:UploadingDraftBulletin=မူၾကမ္းစာေစာင္ ေပးပို႔ေနသည္
@@ -1742,10 +1742,10 @@
 -e4b7-field:notifyBulletinVersionNotInSystemcause=ယခု ၾကည့္ရွုလိုေသာ စာေစာင္မူကြဲသည္ သင့္ကြန္ပ်ဴတာ္တြင္ မရွိပါ။
 
 #____________________________________=Printing complete
--b4a9-field:notifyChartCompletedcause=<Printing complete>
-
+-b4a9-field:notifyChartCompletedcause=ပရင့္ထုတ္ျခင္းၿပီးဆံုးသည္
+	
 #_______________________________________=An unknown error has occurred
--6130-field:notifyChartUnknownErrorcause=<An unknown error has occurred>
+-6130-field:notifyChartUnknownErrorcause=မသိေသာအမွားတစ္ခုျဖစ္သည္။
 
 #____________________________________=The selected server is not responding. Before you choose a server, you must be connected to the internet, and that server must be available.
 -38fd-field:notifyConfigNoServercause=ေရြးခ်ယ္ထားေသာ ဆာဗာသည္ တုန္႔ျပန္မွုမရွိပါ။ ဆာဗာမေရြးမီ အင္တာနက္ႏွင့္ ခ်ိတ္ဆက္ရပါမည္။ ေရြးခ်ယ္ထားေသာ ဆာဗာသည္လည္း ဆက္သြယ္ေဆာင္ရြက္နိုင္သည့္ ဆာဗာ ျဖစ္ရပါမည္။
@@ -1787,7 +1787,7 @@
 -117c-field:notifyErrorDuringExitcause=အခက္အခဲတစ္ခု ၾကဳံေတြ႕ေနရသျဖင့္ ဆက္သြယ္တပ္ဆင္မွုဆိုင္ရာ သတင္းအခ်က္အလက္မ်ားကို Martus က သိမ္းဆည္း၍မရပါ။ ေနာက္တစ္ႀကိမ္ Martus ေဆာ့ဖ္ဝဲသို႔ ဝင္ေရာက္သည့္အခါ သတိေပးခ်က္ကို ေတြ႕ပါလိမ့္မည္။
 
 #_____________________________________________=There was an error exporting bulletins from Martus.  Not all bulletins were exported.
--229b-field:notifyErrorExportingBulletinscause=<There was an error exporting bulletins from Martus.  Not all bulletins were exported.>
+-229b-field:notifyErrorExportingBulletinscause= Martus မွေၾကညာခ်က္မ်ားတင္ပို႔ရာတြင္ အမွားတစ္ခုရိွေနသည္။ ေၾကညာခ်က္အားလံုးမတင္ပို႔ႏိုင္ပါ။
 
 #_________________________________________________________=There was an error saving your template.
 -88ed-field:notifyErrorExportingCustomizationTemplatecause=ပုံစံခြင္အား သိမ္းဆည္းရာတြင္ အခက္အခဲတစ္ခု ရွိေနပါသည္။
@@ -1808,7 +1808,7 @@
 -4a9a-field:notifyErrorImportingCustomizationTemplatecause=ဤပုံစံခြင္အား တင္သြင္းရာတြင္ အခက္အခဲတစ္ခု ၾကဳံေတြ႕ေနရသည္။
 
 #____________________________________________=Unknown error loading user dictionary for spell checking
--4d01-field:notifyErrorLoadingDictionarycause=<Unknown error loading user dictionary for spell checking>
+-4d01-field:notifyErrorLoadingDictionarycause=သတ္ပံုစစ္ေဆးရန္အတြက္ အသံုးျပဳသူအဘိဓာန္ကိုဆဲြတင္ရာတြင္ မသိေသာအမွားတစ္ခု
 
 #______________________________________=An error prevented the file from being read.
 -1ad3-field:notifyErrorReadingFilecause=အခက္အခဲတစ္ခုေၾကာင့္ ဤစာတြဲအား ဖတ္၍မရပါ။
@@ -1829,13 +1829,13 @@
 -896e-field:notifyErrorSavingConfigcause=ဆက္သြယ္တပ္ဆင္မွုဆိုင္ရာ စာတြဲကို သိမ္းဆည္း၍ မရပါ။
 
 #___________________________________________=Unknown error saving user dictionary
--fc3a-field:notifyErrorSavingDictionarycause=<Unknown error saving user dictionary>
+-fc3a-field:notifyErrorSavingDictionarycause=အသံုးျပဳသူအဘိဓာန္ကိုသိမ္းဆည္းရာတြင္ မသိေသာအမွားတစ္ခု
 
 #______________________________________=Unable to save current screen layout.
 -2bad-field:notifyErrorSavingStatecause=လက္ရွိ ဖန္သားျပင္ အခင္းအက်င္းကို သိမ္းဆည္း၍ မရပါ။
 
 #_____________________________________________=Unable to update the dictionary. Be sure the word list is in the correct format.
--6486-field:notifyErrorUpdatingDictionarycause=<Unable to update the dictionary. Be sure the word list is in the correct format.>
+-6486-field:notifyErrorUpdatingDictionarycause=အဘိဓာန္ကိုအဆင့္ျမင့္၍မရပါ။ စာလံုးစာရင္းသည္မွန္ကန္ေသာပံုစံတြင္ရိွေအာင္ ေသခ်ာျပဳလုပ္ပါ။
 
 #______________________________________=An error prevented the file from being written. Check to make sure the disk is not full or write protected.
 -2a84-field:notifyErrorWritingFilecause=ဤစာတြဲကို ေရးသားရာတြင္ အခက္အခဲတစ္ခုက တားဆီးေနပါသည္။ ဒစ္သည္ ျပည့္က်ပ္ေနျခင္း သို႔မဟုတ္ ဝင္ေရာက္ေေရးသားမွုမွ ကာကြယ္ထားျခင္းတို႔ မရွိေစရန္ ေသခ်ာစြာစစ္ေဆးပါ။
@@ -1952,7 +1952,7 @@
 -f5b5-field:notifyPublicInfoFileErrorcause=အသုံးျပဳ၍ရေသာ အမ်ားဆိုင္ သတင္းအခ်က္အလက္မ်ား ဤစာတြဲတြင္ မပါဝင္ပါ။
 
 #___________________________________________________________________________=Key restore succeeded!  You now have to enter a user name and password.
--2527-field:notifyRecoveredKeyShareSucceededNewUserNamePasswordRequiredcause=ေသာ့
+-2527-field:notifyRecoveredKeyShareSucceededNewUserNamePasswordRequiredcause= ေသာ့
 
 #_______________________________________________=Key restore is complete, you will now be logged into Martus.
 -efa0-field:notifyRecoveryOfKeyPairCompletecause=ေသာ့ျပန္လည္ေဖာ္ထုတ္ျခင္း ၿပီးသြားပါၿပီ။ ယခု Martus အတြင္းသို႔ ဝင္ေရာက္ပါေတာ့မည္။
@@ -2167,8 +2167,8 @@
 #________________=Title
 -768e-field:title=ေခါင္းစီး
 
-#_____________________________=Burmese 4.0.0
-field:translationVersion=ျမန္မာ 4.0.0
+#_____________________________=Burmese 4.1
+field:translationVersion=ျမန္မာ 4.1
 
 #___________________=Username
 -84c2-field:username=သုံးစြဲသူအမည္
@@ -2252,7 +2252,7 @@ field:translationVersion=ျမန္မာ 4.0.0
 -af4f-language:ar=အာရပ္
 
 #_________________=Armenian
--1a0d-language:arm=<Armenian>
+-1a0d-language:arm=အာမန္းနီးယန္း
 
 #________________=Azerbaijani
 -6885-language:az=အဇာဘိုင္ဂ်န္
@@ -2408,19 +2408,19 @@ field:translationVersion=ျမန္မာ 4.0.0
 -fe87-menu:AddPermissions= ပင္မသို႔ဝင္ေရာက္မွုကို အပ္ဒိတ္ လုပ္ပါ။
 
 #_________________________=Add '#NewWord#' to User Dictionary
--0ca4-menu:AddToDictionary=<Add '#NewWord#' to User Dictionary>
+-0ca4-menu:AddToDictionary=ထည့္ပါ '#NewWord#' အသံုးျပဳသူအဘိဓာန္တြင္
 
 #_____________________________=Backup My Key
 -2852-menu:BackupMyKeyPairFile=ကၽြႏု္ပ္၏ေသာ့ကို မိတၱဴကူးပြားပါ
 
 #________________=Charts
--8610-menu:Charts=<Charts>
+-8610-menu:Charts=ကားခ်ပ္မ်ား
 
 #______________________=Configure Headquarters
 -bf2f-menu:ConfigureHQs=ပင္မကို ဆက္သြယ္တပ္ဆင္ပါ
 
 #_____________________________=Spell Checking
--5cf2-menu:ConfigureSpellCheck=<Spell Checking>
+-5cf2-menu:ConfigureSpellCheck=သတ္ပံုစစ္ေဆးျခင္း
 
 #_______________________=Copy Bulletin(s)
 -a57a-menu:CopyBulletins=စာေစာင္(မ်ား)ကို မိတၱဴပြားပါ
@@ -2465,7 +2465,7 @@ field:translationVersion=ျမန္မာ 4.0.0
 -4094-menu:ImportBulletins=စာေစာင္မ်ားကို တင္သြင္းပါ
 
 #_________________________________=More Suggestions
--a25a-menu:MoreSpellingSuggestions=<More Suggestions>
+-a25a-menu:MoreSpellingSuggestions=ထပ္မံအႀကံျပဳခ်က္မ်ား
 
 #_________________________=Organize Folders
 -1ee2-menu:OrganizeFolders=စာေစာင္မ်ားကို စုစည္းပါ
@@ -2585,22 +2585,22 @@ field:translationVersion=ျမန္မာ 4.0.0
 -23d3-month:Afghan1=ဖာဗာဒင
 
 #___________________=dʒadi
--e5c6-month:Afghan10=<ေဒး >
+-e5c6-month:Afghan10=ေဒး 
 
 #___________________=hut
 -0002-month:Afghan11=ဘာမန
 
 #___________________=dalvæ
--5a4f-month:Afghan12=<အက္စ္ဖန္ >
+-5a4f-month:Afghan12=အက္စ္ဖန္ 
 
 #__________________=sawr
 -1365-month:Afghan2=ေၾသာ္ဒီဘယ္ဟက္ရ 
 
 #__________________=dʒawzɒ
--9238-month:Afghan3=<ေခၚဒက္ >
+-9238-month:Afghan3=ေခၚဒက္ 
 
 #__________________=saratɒn
--5684-month:Afghan4=<တား >
+-5684-month:Afghan4=တား 
 
 #__________________=asad
 -8efa-month:Afghan5=ေမာ္ဒက္ 
@@ -2609,7 +2609,7 @@ field:translationVersion=ျမန္မာ 4.0.0
 -20ff-month:Afghan6=ရွားရီဗာ 
 
 #__________________=mizɒn
--99b2-month:Afghan7=<မား >
+-99b2-month:Afghan7=မား 
 
 #__________________='aqrab
 -c52e-month:Afghan8=အဘန္ 
@@ -2771,10 +2771,10 @@ field:translationVersion=ျမန္မာ 4.0.0
 -7fb9-wintitle:ConfigureHQs=ပင္မ အယ္ဒီတာ
 
 #_________________________________=Configure Spell Checking
--b0ce-wintitle:ConfigureSpellCheck=<Configure Spell Checking>
+-b0ce-wintitle:ConfigureSpellCheck=သတ္ပံုစစ္ေဆးျခင္းကို သီးသန္႔စီစဥ္ထားပါ
 
 #_________________________=Charts
--8610-wintitle:CreateChart=<Charts>
+-8610-wintitle:CreateChart=ကားခ်ပ္မ်ား
 
 #____________________________________=Help on Creating Custom Fields
 -ed1d-wintitle:CreateCustomFieldsHelp=စိတ္ႀကိဳက္သိုမွီးခ်က္မ်ား တည္ေဆာက္ျခင္းအတြက္ အကူအညီ
@@ -2963,7 +2963,7 @@ field:translationVersion=ျမန္မာ 4.0.0
 -68b9-wintitle:RetrieveMySealedBulletins=ကၽြႏု္ပ္၏ ခ်ိပ္ပိတ္စာေစာင္မ်ား ျပန္လည္ရယူေနစဥ္
 
 #______________________________=Charts
--8610-wintitle:RunOrCreateChart=<Charts>
+-8610-wintitle:RunOrCreateChart=ကားခ်ပ္မ်ား
 
 #_______________________________=Reports
 -88bc-wintitle:RunOrCreateReport=အစီရင္ခံစာမ်ား
@@ -3251,10 +3251,10 @@ field:translationVersion=ျမန္မာ 4.0.0
 -a60d-wintitle:notifyBulletinVersionNotInSystem=စာေစာင္မူကြဲ ရွာမေတြ႕ပါ
 
 #__________________________________=Charts
--8610-wintitle:notifyChartCompleted=<Charts>
+-8610-wintitle:notifyChartCompleted=ကားခ်ပ္မ်ား
 
 #_____________________________________=Charts
--8610-wintitle:notifyChartUnknownError=<Charts>
+-8610-wintitle:notifyChartUnknownError=ကားခ်ပ္မ်ား
 
 #__________________________________=Unable to Connect to Server
 -1b07-wintitle:notifyConfigNoServer=ဆာဗာသို႔ ခ်ိတ္ဆက္၍ မရပါ
@@ -3296,10 +3296,10 @@ field:translationVersion=ျမန္မာ 4.0.0
 -e05d-wintitle:notifyErrorDuringExit=Martus မွထြက္စဥ္ အခက္အခဲရွိေနပါသည္
 
 #___________________________________________=Error Exporting Bulletins
--6969-wintitle:notifyErrorExportingBulletins=<Error Exporting Bulletins>
+-6969-wintitle:notifyErrorExportingBulletins=ေၾကညာခ်က္မ်ားတင္ပို႔ရာတြင္ မွားယြင္းမႈ
 
 #_______________________________________________________=Error Exporting Template
--f4cc-wintitle:notifyErrorExportingCustomizationTemplate=ပုံစံခြင္ ထုတ္လုပ္ေပးပို႔စဥ္ အခက္အခဲရွိေနပါသည္
+f4cc-wintitle:notifyErrorExportingCustomizationTemplate=ပုံစံခြင္ ထုတ္လုပ္ေပးပို႔စဥ္ အခက္အခဲရွိေနပါသည္
 
 #___________________________________________=Error Importing Bulletins
 -aeb8-wintitle:notifyErrorImportingBulletins=စာေစာင္မ်ား တင္သြင္းစဥ္ အခက္အခဲရွိေနပါသည္
@@ -3317,7 +3317,7 @@ field:translationVersion=ျမန္မာ 4.0.0
 -4f1a-wintitle:notifyErrorImportingCustomizationTemplateFuture=ပုံစံခြင္ တင္သြင္းစဥ္ အခက္အခဲရွိေနပါသည္
 
 #__________________________________________=Error
--7f2f-wintitle:notifyErrorLoadingDictionary=<Error>
+-7f2f-wintitle:notifyErrorLoadingDictionary=အမွား
 
 #____________________________________=Error Reading File
 -73ad-wintitle:notifyErrorReadingFile=စာတြဲ ဖတ္ရာတြင္ အခက္အခဲရွိေနပါသည္
@@ -3338,13 +3338,13 @@ field:translationVersion=ျမန္မာ 4.0.0
 -1287-wintitle:notifyErrorSavingConfig=အခက္အခဲသိမ္းဆည္းမွုကို တပ္ဆင္ေပးမည့္ စာတြဲ
 
 #_________________________________________=Error
--7f2f-wintitle:notifyErrorSavingDictionary=<Error>
+-7f2f-wintitle:notifyErrorSavingDictionary=အမွား
 
 #____________________________________=Error Saving State
 -884d-wintitle:notifyErrorSavingState=အခက္အခဲသိမ္းဆည္းမွု အေျခအေန
 
 #___________________________________________=Error
--7f2f-wintitle:notifyErrorUpdatingDictionary=<Error>
+-7f2f-wintitle:notifyErrorUpdatingDictionary=အမွား
 
 #____________________________________=Error Writing File
 -fabf-wintitle:notifyErrorWritingFile=အခက္အခဲကို ေရးသားထားသည့္ စာတြဲ
@@ -3633,3 +3633,4 @@ field:translationVersion=ျမန္မာ 4.0.0
 
 #_________________________________=Confirm Delete Folder
 -1a75-wintitle:warningdeletefolder=စာတြဲစုဖ်က္ပစ္ျခင္းကို အတည္ျပဳေပးပါ
+
