@@ -103,7 +103,6 @@ abstract public class UiBulletinComponentSection extends JPanel
 			remove(currentGroup);
 		}
 
-		title = fontHelper.getDisplayable(title);
 		currentGroup = new FieldGroup(tag, title);
 		add(currentGroup);
 		groups.add(currentGroup);
