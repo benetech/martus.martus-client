@@ -49,7 +49,6 @@ public class FieldValuesLoader
 	{
 		store = app.getStore();
 		localization = app.getLocalization();
-		fontHelper = new UiFontEncodingHelper(app.getConfigInfo().getDoZawgyiConversion());
 	}
 	
 	public HashSet loadFieldValuesFromAllBulletinRevisions(UiProgressWithCancelDlg progressMeter, FieldSpec fieldSpec)
@@ -83,7 +82,6 @@ public class FieldValuesLoader
 				else
 				{
 					String value = field.getData();
-					value = fontHelper.getDisplayable(value);
 					choices.add(createChoiceItem(value));
 				}
 			}
@@ -109,5 +107,4 @@ public class FieldValuesLoader
 
 	private ClientBulletinStore store;
 	private MiniLocalization localization;
-	UiFontEncodingHelper fontHelper;
 }
