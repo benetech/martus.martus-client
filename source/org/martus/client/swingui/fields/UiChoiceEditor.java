@@ -83,6 +83,10 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		return (UiComboBox) comboBoxes.get(i);
 	}
 
+	String getRenderableText(String textValue) {
+		return BurmeseUtilities.getDisplayable( textValue);
+	}
+
 	class UiChoiceListCellRenderer extends DefaultListCellRenderer
 	{
 		
@@ -94,7 +98,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 				choiceText = choiceItem.toString();
 
 			String displayString = choiceText + spaceSoValueWontBeHiddenIfEmpty;
-			displayString  = BurmeseUtilities.getDisplayable(displayString);
+			displayString  = getRenderableText(displayString);
 			Component cellRenderer = super.getListCellRendererComponent(list, displayString, index, isSelected,
 					cellHasFocus);
 			cellRenderer.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
