@@ -29,6 +29,7 @@ import java.awt.event.ActionEvent;
 
 import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.common.MiniLocalization;
+import org.martus.common.utilities.BurmeseUtilities;
 
 public class UiBulletinLanguageChoiceEditor extends UiChoiceEditor
 {
@@ -40,6 +41,10 @@ public class UiBulletinLanguageChoiceEditor extends UiChoiceEditor
 	public void setBulletinLanguageListener(BulletinLanguageChangeListener listener)
 	{
 		bulletinLanguageChangedListener = listener;
+	}
+
+	String getRenderableText(String textValue) {
+		return textValue;
 	}
 	
 	@Override
