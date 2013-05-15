@@ -31,7 +31,6 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Properties;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
@@ -211,6 +210,7 @@ public class Martus
 			"js-2006-03-08.jar",
 			"junit-3.8.2.jar",
 			"layouts-2006-08-10.jar",
+			"orchid-0.9.0.jar",
 			"persiancalendar-2.1.jar",
 			"velocity-dep-1.4.jar",
 			"commons-logging-1.1.jar",
