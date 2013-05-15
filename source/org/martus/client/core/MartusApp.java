@@ -467,7 +467,7 @@ public class MartusApp
 	
 	public void startOrStopTorAsRequested()
 	{
-		boolean isTorEnabled = true; // getConfigInfo().isTorEnabled();
+		boolean isTorEnabled = false; // getConfigInfo().isTorEnabled();
 		if(isTorEnabled)
 			transport.start();
 		else
