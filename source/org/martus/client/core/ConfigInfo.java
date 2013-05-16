@@ -79,6 +79,7 @@ public class ConfigInfo
 	public void setUseZawgyiFont(boolean newUseZawgyiFont){useZawgyiFont = newUseZawgyiFont;}
 	public void setFieldDeskKeysXml(String newFieldDeskKeysXml) { fieldDeskKeysXml = newFieldDeskKeysXml; }
 	public void setBackedUpImprovedKeypairShare(boolean newBackedUpImprovedKeypairShare) {backedUpImprovedKeypairShare = newBackedUpImprovedKeypairShare;}
+	public void setUseInternalTor(boolean newUseInternalTor) { useInternalTor = newUseInternalTor;}
 
 
 	public void clearHQKey()						{ legacyHQKey = ""; }
@@ -112,7 +113,8 @@ public class ConfigInfo
 	public String getFieldDeskKeysXml() { return fieldDeskKeysXml; }
 	public boolean hasBackedUpImprovedKeypairShare() {return backedUpImprovedKeypairShare;}
 	public boolean getDoZawgyiConversion() {return true;}
-	
+	public boolean useInternalTor() {return useInternalTor;}
+
 	public boolean isServerConfigured()
 	{
 		return (serverName.length()>0 && serverPublicKey.length()>0);
@@ -151,6 +153,7 @@ public class ConfigInfo
 		useZawgyiFont = false;
 		fieldDeskKeysXml = "";
 		backedUpImprovedKeypairShare = false;
+		useInternalTor = false;
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException
@@ -225,6 +228,9 @@ public class ConfigInfo
 
 			if(loaded.version >= 17)
 				loaded.backedUpImprovedKeypairShare = in.readBoolean();
+			
+			if(loaded.version >= 18)
+				loaded.useInternalTor = in.readBoolean();
 		}
 		finally
 		{
@@ -267,6 +273,7 @@ public class ConfigInfo
             out.writeBoolean(useZawgyiFont);
             writeLongString(out, fieldDeskKeysXml);
 			out.writeBoolean(backedUpImprovedKeypairShare);
+			out.writeBoolean(useInternalTor);
 		}
 		finally
 		{
@@ -293,7 +300,7 @@ public class ConfigInfo
 	
 	private boolean mustAskUserToSendToServer;
 
-	public static final short VERSION = 17;
+	public static final short VERSION = 18;
 	
 	//Version 1
 	private short version;
@@ -340,4 +347,6 @@ public class ConfigInfo
     private String fieldDeskKeysXml;
 	//Version 17
 	private boolean backedUpImprovedKeypairShare;
+	//Version 18
+	private boolean useInternalTor;
 }

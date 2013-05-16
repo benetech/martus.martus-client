@@ -404,6 +404,7 @@ public class MartusApp
 			throw new SaveConfigInfoException();
 		}
 
+		startOrStopTorAsRequested();
 	}
 
 	public void encryptAndWriteFileAndSignatureFile(File file, File signatureFile,
@@ -467,7 +468,7 @@ public class MartusApp
 	
 	public void startOrStopTorAsRequested()
 	{
-		boolean isTorEnabled = false; // getConfigInfo().isTorEnabled();
+		boolean isTorEnabled = getConfigInfo().useInternalTor();
 		if(isTorEnabled)
 			transport.start();
 		else
