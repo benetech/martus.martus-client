@@ -1653,6 +1653,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			app.getConfigInfo().setForceBulletinsAllPrivate(dlg.isAllPrivateChecked());
 			app.getConfigInfo().setCheckForFieldOfficeBulletins(dlg.isCheckFieldOfficeBulletinsChecked());
 			app.getConfigInfo().setUseZawgyiFont(dlg.isUseZawgyiFont());
+			app.getConfigInfo().setUseInternalTor(dlg.isUseInternalTorChecked());
 			saveConfigInfo();
 			FontSetter.setDefaultFont(dlg.isUseZawgyiFont());
 			initializeViews();
@@ -2716,6 +2717,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public boolean getDoZawgyiConversion()
 	{
 	 	return app.getConfigInfo().getDoZawgyiConversion();
+	}
+	
+	public boolean getUseInternalTor()
+	{
+		return app.getConfigInfo().useInternalTor();
 	}
 
 	public boolean isAnyBulletinSelected()

@@ -588,6 +588,7 @@ public class EnglishStrings
 "field:preferencesUseZawgyi=Use Zawgyi font for Burmese display and input",
 "field:preferencesAllPrivate=Prevent creating public bulletins",
 "field:preferencesCheckFieldOfficeBulletins=Automatically check for new Field Desk bulletins",
+"field:PreferencesUseInternalTor=Use internal Tor (improves security but may be slower)",
 "field:HeadQuartersSelected=Selected?",
 "field:ConfigureHeadQuartersDefault=Default?",
 "field:CustomizationTemplateFiles=Customization Template Files",

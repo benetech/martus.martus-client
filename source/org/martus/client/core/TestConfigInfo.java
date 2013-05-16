@@ -53,7 +53,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 		
-		assertEquals(17, ConfigInfo.VERSION);
+		assertEquals(18, ConfigInfo.VERSION);
 
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
@@ -240,6 +240,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setUseZawgyiFont(sampleUseZawgyi);
 		info.setFieldDeskKeysXml(sampleFieldDeskKeysXml);
 		info.setBackedUpImprovedKeypairShare(sampleBackedUpImprovedKeypairShare);
+		info.setUseInternalTor(sampleUseInternalTor);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -269,6 +270,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
 		assertEquals(label + ": sampleFieldDeskKeysXml", "", info.getFieldDeskKeysXml());
 		assertEquals(label + ": sampleBackedUpImprovedKeypairShare", false, info.hasBackedUpImprovedKeypairShare());
+		assertEquals(label + ": sampleUseInternalTor", false, info.useInternalTor());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -384,6 +386,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 		else
 			assertEquals(label + ": sampleBackedUpImprovedKeypairShare", false, info.hasBackedUpImprovedKeypairShare());
 
+		if(VERSION >= 18)
+			assertEquals(label + ": sampleUseInternalTor", sampleUseInternalTor, info.useInternalTor());
+		else
+			assertEquals(label + ": sampleUseInternalTor", false, info.useInternalTor());
+
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -479,6 +486,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			out.writeBoolean(sampleBackedUpImprovedKeypairShare);
 		}
+		if(VERSION >= 18)
+		{
+			out.writeBoolean(sampleUseInternalTor);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -533,4 +544,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final String sampleFieldDeskKeysXml = "<FieldDesks><FieldDesk><PublicKey>1234</PublicKey><Label>Test Label</Label></FieldDesk></FieldDesks>";
 //Version 17
 	final boolean sampleBackedUpImprovedKeypairShare = true;
+//Version 18
+	final boolean sampleUseInternalTor = true;
 }

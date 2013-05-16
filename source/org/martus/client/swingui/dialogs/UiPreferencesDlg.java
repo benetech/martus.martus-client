@@ -41,7 +41,6 @@ import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.swing.FontHandler;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiLabel;
@@ -108,6 +107,10 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		checkFieldOfficeBulletins = new UiCheckBox();
 		checkFieldOfficeBulletins.setText(localization.getFieldLabel("preferencesCheckFieldOfficeBulletins"));
 		checkFieldOfficeBulletins.setSelected(owner.getCheckFieldOfficeBulletins());
+		
+		useInternalTor = new UiCheckBox();
+		useInternalTor.setText(localization.getFieldLabel("PreferencesUseInternalTor"));
+		useInternalTor.setSelected(owner.getUseInternalTor());
 
 		UiParagraphPanel preferences = new UiParagraphPanel();
 		preferences.addComponents(new UiLabel(localization.getFieldLabel("language")), languageDropdown.getComponent());
@@ -121,6 +124,8 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		preferences.addBlankLine();
 		preferences.addOnNewLine(allPrivate);
 		preferences.addOnNewLine(checkFieldOfficeBulletins);
+		preferences.addBlankLine();
+		preferences.addOnNewLine(useInternalTor);
 		preferences.addBlankLine();
 		
 		ok = new UiButton(localization.getButtonLabel("ok"));
@@ -156,6 +161,11 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
         return useZawgyiFont.isSelected();
     }
 	
+	public boolean isUseInternalTorChecked()
+	{
+		return useInternalTor.isSelected();
+	}
+
 	private String buildMdyLabel(String mdyOrder)
 	{
 		MiniLocalization localization = owner.getLocalization();
@@ -228,6 +238,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	private UiCheckBox useZawgyiFont;
 	private UiCheckBox allPrivate;
 	private UiCheckBox checkFieldOfficeBulletins;
+	private UiCheckBox useInternalTor;
 	private JButton ok;
 	private JButton cancel;
 	
