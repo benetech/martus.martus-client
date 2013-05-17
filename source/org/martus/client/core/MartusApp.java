@@ -65,6 +65,7 @@ import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.test.MockClientSideNetworkHandler;
 import org.martus.clientside.ClientSideNetworkGateway;
+import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpc;
 import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.PasswordHelper;
@@ -468,11 +469,22 @@ public class MartusApp
 	
 	public void startOrStopTorAsRequested()
 	{
+		// NOTE: The handler must exist, but it gets created on the fly, so force it
+		getCurrentNetworkInterfaceHandler();
+		
 		boolean isTorEnabled = getConfigInfo().useInternalTor();
+		int newTimeout = 0;
 		if(isTorEnabled)
+		{
 			transport.start();
+			newTimeout = ClientSideNetworkHandlerUsingXmlRpc.TOR_GET_SERVER_INFO_TIMEOUT_SECONDS;
+		}
 		else
+		{
 			transport.stop();
+			newTimeout = ClientSideNetworkHandlerUsingXmlRpc.DEFAULT_GET_SERVER_INFO_TIMEOUT_SECONDS;
+		}
+		currentNetworkInterfaceHandler.setTimeoutGetServerInfo(newTimeout);
 	}
 
 	private byte[] verifyAndReadSignedFile(File dataFile, File sigFile) throws Exception
