@@ -37,6 +37,10 @@ public class MockClientSideNetworkHandler implements ClientSideNetworkInterface
 		server = serverToUse;
 	}
 
+	public void setTimeoutGetServerInfo(int torGetServerInfoTimeoutSeconds)
+	{
+	}
+
 	// begin ServerInterface
 	public Vector getServerInfo(Vector reservedForFuture)
 	{
@@ -116,4 +120,5 @@ public class MockClientSideNetworkHandler implements ClientSideNetworkInterface
 	}
 
 	private ServerSideNetworkInterface server;
+
 }
