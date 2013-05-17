@@ -231,7 +231,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			timeoutInXSeconds = TESTING_TIMEOUT_60_SECONDS;
 			System.out.println(timeoutDebug.toString() + " detected");
 		}
-		MartusLogger.log("Timeout set to " + timeoutInXSeconds + " seconds");
+		MartusLogger.log("Inactivity timeout set to " + timeoutInXSeconds + " seconds");
 		
 		timeBetweenFieldOfficeChecksSeconds = TIME_BETWEEN_FIELD_OFFICE_CHECKS_SECONDS;
 		File foCheckDebug = new File(getApp().getMartusDataRootDirectory(), "focheck.debug");
