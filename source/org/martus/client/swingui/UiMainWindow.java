@@ -1658,6 +1658,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			FontSetter.setDefaultFont(dlg.isUseZawgyiFont());
 			initializeViews();
 			restoreState();
+			getTransport().updateStatus();
 			setVisible(true);
 		}
 
@@ -2334,6 +2335,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		getContentPane().add(folderSplitter);
 		statusBar = new UiStatusBar(getLocalization());		
+		getTransport().setProgressMeter(statusBar.getTorProgressMeter());
 		getContentPane().add(statusBar, BorderLayout.SOUTH ); 
 		
 		MartusLogger.logEndProcess("Initializing views");
