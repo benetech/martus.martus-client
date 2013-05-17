@@ -124,7 +124,6 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		preferences.addBlankLine();
 		preferences.addOnNewLine(allPrivate);
 		preferences.addOnNewLine(checkFieldOfficeBulletins);
-		preferences.addBlankLine();
 		preferences.addOnNewLine(useInternalTor);
 		preferences.addBlankLine();
 		
