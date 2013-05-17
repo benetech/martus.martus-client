@@ -2393,9 +2393,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void setStatusMessageTag(String tag)
 	{
-		UiProgressMeter r = statusBar.getBackgroundProgressMeter();	
-		r.setStatusMessage(tag);
-		r.hideProgressMeter();
+		statusBar.setStatusMessageTag(tag);
 	}
 	
 	public void setStatusMessageReady()

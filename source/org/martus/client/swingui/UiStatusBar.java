@@ -55,6 +55,12 @@ public class UiStatusBar extends JPanel
 		return backgroundProgressMeter;
 	}
 
+	public void setStatusMessageTag(String tag)
+	{
+		UiProgressMeter r = getBackgroundProgressMeter();	
+		r.setStatusMessage(tag);
+		r.hideProgressMeter();
+	}
 
 	private UiProgressMeter backgroundProgressMeter;
 }
