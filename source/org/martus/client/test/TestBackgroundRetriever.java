@@ -110,6 +110,10 @@ class ProgressRecorder implements ProgressMeterInterface
 		return false;
 	}
 	
+	public void hideProgressMeter()
+	{
+	}
+
 	public int current;
 	public int max;
 }

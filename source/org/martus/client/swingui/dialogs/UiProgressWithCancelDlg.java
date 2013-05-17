@@ -78,6 +78,11 @@ public class UiProgressWithCancelDlg extends JDialog implements ProgressMeterInt
 		return isExitRequested;
 	}
 
+	public void hideProgressMeter()
+	{
+		progressMeter.hideProgressMeter();
+	}
+
 	public void updateProgressMeter(int currentValue, int maxValue)
 	{
 		progressMeter.updateProgressMeter(currentValue, maxValue);

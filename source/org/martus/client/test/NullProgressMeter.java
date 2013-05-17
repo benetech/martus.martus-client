@@ -50,4 +50,7 @@ public class NullProgressMeter implements ProgressMeterInterface
 		return false;
 	}
 
+	public void hideProgressMeter()
+	{
+	}
 }

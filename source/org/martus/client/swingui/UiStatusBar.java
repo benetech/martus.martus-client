@@ -46,7 +46,10 @@ public class UiStatusBar extends JPanel
 
 		Box statusBarBox = Box.createHorizontalBox();
 		backgroundProgressMeter = new UiProgressMeter(null, localization);
-		Utilities.addComponentsRespectingOrientation(statusBarBox, new Component[]{backgroundProgressMeter, Box.createHorizontalGlue()});
+		backgroundProgressMeter.hideProgressMeter();
+		torProgressMeter = new UiProgressMeter(null, localization);
+		torProgressMeter.hideProgressMeter();
+		Utilities.addComponentsRespectingOrientation(statusBarBox, new Component[]{backgroundProgressMeter, Box.createHorizontalGlue(), torProgressMeter});
 		add(statusBarBox);
 	}
 	
@@ -54,7 +57,12 @@ public class UiStatusBar extends JPanel
 	{
 		return backgroundProgressMeter;
 	}
-
+	
+	public UiProgressMeter getTorProgressMeter()
+	{
+		return torProgressMeter;
+	}
+	
 	public void setStatusMessageTag(String tag)
 	{
 		UiProgressMeter r = getBackgroundProgressMeter();	
@@ -63,4 +71,5 @@ public class UiStatusBar extends JPanel
 	}
 
 	private UiProgressMeter backgroundProgressMeter;
+	private UiProgressMeter torProgressMeter;
 }
