@@ -469,22 +469,23 @@ public class MartusApp
 	
 	public void startOrStopTorAsRequested()
 	{
-		// NOTE: The handler must exist, but it gets created on the fly, so force it
-		getCurrentNetworkInterfaceHandler();
-		
 		boolean isTorEnabled = getConfigInfo().useInternalTor();
 		int newTimeout = 0;
 		if(isTorEnabled)
-		{
-			transport.start();
 			newTimeout = ClientSideNetworkHandlerUsingXmlRpc.TOR_GET_SERVER_INFO_TIMEOUT_SECONDS;
-		}
 		else
-		{
+			newTimeout = ClientSideNetworkHandlerUsingXmlRpc.WITHOUT_TOR_GET_SERVER_INFO_TIMEOUT_SECONDS;
+
+		// NOTE: force the handler to be created if it wasn't already
+		getCurrentNetworkInterfaceHandler();
+		boolean isServerConfigured = (currentNetworkInterfaceHandler != null);
+		if(isServerConfigured)
+			currentNetworkInterfaceHandler.setTimeoutGetServerInfo(newTimeout);
+
+		if(isTorEnabled)
+			transport.start();
+		else
 			transport.stop();
-			newTimeout = ClientSideNetworkHandlerUsingXmlRpc.DEFAULT_GET_SERVER_INFO_TIMEOUT_SECONDS;
-		}
-		currentNetworkInterfaceHandler.setTimeoutGetServerInfo(newTimeout);
 	}
 
 	private byte[] verifyAndReadSignedFile(File dataFile, File sigFile) throws Exception
