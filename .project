@@ -22,7 +22,7 @@
 		<link>
 			<name>dictionaries</name>
 			<type>2</type>
-			<location>/home/kevins/work/hg/martus/martus/martus-thirdparty/client/jortho/bin/dictionaries</location>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/martus-thirdparty/client/jortho/bin/dictionaries</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
