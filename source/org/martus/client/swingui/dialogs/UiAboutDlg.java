@@ -67,7 +67,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		
 		setTitle(localization.getWindowTitle("about"));
 
-		JLabel icon = new JLabel(new ImageIcon(UiAboutDlg.class.getResource("MartusLogo.gif")),JLabel.LEFT);
+		JLabel icon = new JLabel(new ImageIcon(UiAboutDlg.class.getResource("MartusLogo.png")),JLabel.LEFT);
 
 		StringBuffer versionInfo = new StringBuffer(UiConstants.programName);
 		versionInfo.append(" ");
