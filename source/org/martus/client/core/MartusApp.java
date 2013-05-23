@@ -146,10 +146,13 @@ public class MartusApp
 	{
 		localization = localizationToUse;
 
-		transport = TorTransportWrapper.create();
-		
 		try
 		{
+			transport = TorTransportWrapper.create();
+			File torDirectory = new File(dataDirectoryToUse, "orchid");
+			torDirectory.mkdirs();
+			transport.setTorDataDirectory(torDirectory);
+			
 			if(cryptoToUse == null)
 				cryptoToUse = new MartusSecurity();
 
