@@ -186,7 +186,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		
 		cursorStack = new Stack();
-		UiModelessBusyDlg splashScreen = new UiModelessBusyDlg(new ImageIcon(UiAboutDlg.class.getResource("MartusLogo.gif")));
+		UiModelessBusyDlg splashScreen = new UiModelessBusyDlg(new ImageIcon(UiAboutDlg.class.getResource("MartusLogo.png")));
 
 		// Pop up a nag screen if this is an unofficial private release
 //		int secondsToWait = 0;
