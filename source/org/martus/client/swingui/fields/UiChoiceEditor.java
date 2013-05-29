@@ -83,7 +83,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		return (UiComboBox) comboBoxes.get(i);
 	}
 
-	String getRenderableText(String textValue) {
+	String getDisplayable(String textValue) {
 		return BurmeseUtilities.getDisplayable( textValue);
 	}
 
@@ -98,7 +98,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 				choiceText = choiceItem.toString();
 
 			String displayString = choiceText + spaceSoValueWontBeHiddenIfEmpty;
-			displayString  = getRenderableText(displayString);
+			displayString  = getDisplayable(displayString);
 			Component cellRenderer = super.getListCellRendererComponent(list, displayString, index, isSelected,
 					cellHasFocus);
 			cellRenderer.setComponentOrientation(UiLanguageDirection.getComponentOrientation());

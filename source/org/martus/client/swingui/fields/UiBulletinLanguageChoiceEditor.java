@@ -43,7 +43,7 @@ public class UiBulletinLanguageChoiceEditor extends UiChoiceEditor
 		bulletinLanguageChangedListener = listener;
 	}
 
-	String getRenderableText(String textValue) {
+	String getDisplayable(String textValue) {
 		return textValue;
 	}
 	
