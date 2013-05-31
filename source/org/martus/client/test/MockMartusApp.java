@@ -184,6 +184,11 @@ public class MockMartusApp extends MartusApp
 		if(retrieveFile.exists())
 			throw new IOException("RetrieveFile");
 		
+		File orchidDirectory = getOrchidDirectory();
+		DirectoryUtils.deleteEntireDirectoryTree(orchidDirectory);
+		if(orchidDirectory.exists())
+			throw new IOException("Orchid directory " + orchidDirectory.getPath());
+		
 		rootDir.delete();
 		if(rootDir.exists())
 			throw new IOException("MartusRootDirectory " + rootDir.getPath());

@@ -148,8 +148,10 @@ public class MartusApp
 
 		try
 		{
+			martusDataRootDirectory = dataDirectoryToUse;
+
 			transport = TorTransportWrapper.create();
-			File torDirectory = new File(dataDirectoryToUse, "orchid");
+			File torDirectory = getOrchidDirectory();
 			torDirectory.mkdirs();
 			transport.setTorDataDirectory(torDirectory);
 			
@@ -161,7 +163,6 @@ public class MartusApp
 			configInfo = new ConfigInfo();
 			currentUserName = "";
 			maxNewFolders = MAXFOLDERS;
-			martusDataRootDirectory = dataDirectoryToUse;
 			store = new ClientBulletinStore(cryptoToUse);
 			fieldExpansionStates = new HashMap();
 			gridExpansionStates = new HashMap();
@@ -188,6 +189,11 @@ public class MartusApp
 		}
 
 		UpdateDocsIfNecessaryFromMLPFiles();
+	}
+
+	public File getOrchidDirectory()
+	{
+		return new File(getMartusDataRootDirectory(), "orchid");
 	}
 
 	public TorTransportWrapper getTransport()
