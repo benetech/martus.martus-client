@@ -75,11 +75,11 @@ public class PageReportBuilder extends ReportBuilder
 	public String createDetailSection()
 	{
 		StringBuffer result = new StringBuffer();
-		BulletinHtmlGenerator.appendTitleOfSection(result, "$localization.getStorable($localization.getFieldLabel('publicsection'))");
+		BulletinHtmlGenerator.appendTitleOfSection(result, "$localization.getStorableFieldLabel('publicsection')");
 		result.append("#foreach($field in $bulletin.getTopFields())\n");
 		result.append(getFieldRow());
 		result.append("#end\n");
-		BulletinHtmlGenerator.appendTitleOfSection(result, "$localization.getStorable($localization.getFieldLabel('privatesection'))");
+		BulletinHtmlGenerator.appendTitleOfSection(result, "$localization.getStorableFieldLabel('privatesection')");
 		result.append("#foreach($field in $bulletin.getBottomFields())\n");
 		result.append(getFieldRow());
 		result.append("#end\n");
