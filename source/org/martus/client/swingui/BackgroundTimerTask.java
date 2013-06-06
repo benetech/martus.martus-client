@@ -63,6 +63,8 @@ class BackgroundTimerTask extends TimerTask
 		ProgressMeterInterface progressMeter = mainWindow.statusBar.getBackgroundProgressMeter();
 		uploader = new BackgroundUploader(mainWindow.getApp(), progressMeter);
 		retriever = new BackgroundRetriever(mainWindow.getApp(), progressMeter);
+		if(mainWindow.isServerConfigured())
+			setWaitingForServer();
 	}
 	
 	public void forceRecheckOfUidsOnServer()
@@ -70,6 +72,12 @@ class BackgroundTimerTask extends TimerTask
 		gotUpdatedOnServerUids = false;
 	}
 
+	public void setWaitingForServer()
+	{
+		mainWindow.setStatusMessageTag(UiMainWindow.STATUS_CONNECTING);
+		waitingForServer = true;
+	}
+	
 	public void run()
 	{
 		if(mainWindow.mainWindowInitalizing)
@@ -96,6 +104,8 @@ class BackgroundTimerTask extends TimerTask
 	
 		try
 		{
+			if(waitingForServer)
+				updateServerStatus();
 			checkComplianceStatement();
 			checkForNewsFromServer();
 			getUpdatedListOfBulletinsOnServer();
@@ -108,12 +118,24 @@ class BackgroundTimerTask extends TimerTask
 		}
 	}
 
+	private void updateServerStatus()
+	{
+		if(!mainWindow.isServerConfigured())
+			mainWindow.clearStatusMessage();
+		else if(isServerAvailable())
+		{
+			mainWindow.setStatusMessageReady();
+			waitingForServer = false;
+		}
+		else
+		{
+			mainWindow.setStatusMessageTag(UiMainWindow.STATUS_CONNECTING);
+		}
+	}
+
 	private boolean isServerAvailable()
 	{
-		if(getApp().isSSLServerAvailable())
-			return true;
-		mainWindow.setStatusMessageTag(UiMainWindow.STATUS_NO_SERVER_AVAILABLE);
-		return false;
+		return (getApp().isSSLServerAvailable());
 	}
 	
 	private void doRetrievingOrUploading() throws Exception
@@ -290,7 +312,7 @@ class BackgroundTimerTask extends TimerTask
 		gotUpdatedOnServerUids = true;
 		
 		System.out.println("Exiting BackgroundUploadTimerTask.getUpdatedListOfBulletinsOnServer");
-		mainWindow.setStatusMessageTag(UiMainWindow.STATUS_READY);
+		mainWindow.setStatusMessageReady();
 	}
 
 	Set getFieldOfficeSummariesOnServer() throws Exception 
@@ -405,7 +427,7 @@ class BackgroundTimerTask extends TimerTask
 			String compliance = getApp().getServerCompliance(gateway);
 			alreadyCheckedCompliance = true;
 			if (compliance != null)
-				mainWindow.setStatusMessageTag(UiMainWindow.STATUS_READY);
+				mainWindow.setStatusMessageReady();
 			
 			if(!compliance.equals(getApp().getConfigInfo().getServerCompliance()))
 			{
@@ -442,7 +464,7 @@ class BackgroundTimerTask extends TimerTask
 		Vector newsItems = getApp().getNewsFromServer();
 		int newsSize = newsItems.size();
 		if (newsSize > 0)
-			mainWindow.setStatusMessageTag(UiMainWindow.STATUS_READY);
+			mainWindow.setStatusMessageReady();
 			
 		
 		for (int i = 0; i < newsSize; ++i)
@@ -573,6 +595,7 @@ class BackgroundTimerTask extends TimerTask
 
 	long nextCheckForFieldOfficeBulletins;
 	
+	boolean waitingForServer;
 	boolean alreadyCheckedCompliance;
 	boolean inComplianceDialog;
 	boolean alreadyGotNews;
