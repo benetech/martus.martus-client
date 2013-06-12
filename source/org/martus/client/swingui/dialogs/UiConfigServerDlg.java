@@ -133,13 +133,13 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		if(normalizedPublicCode.length() == 0)
 			return errorMessage("InvalidServerCode");
 
-		if(!app.isNonSSLServerAvailable(serverName))
-			return errorMessage("ConfigNoServer");
-
 		String serverKey = null;
 		String serverPublicCode = null;
 		try
 		{
+			if(!app.isNonSSLServerAvailable(serverName))
+				return errorMessage("ConfigNoServer");
+
 			serverKey = app.getServerPublicKey(serverName);
 			serverPublicCode = MartusCrypto.computePublicCode(serverKey);
 		}
