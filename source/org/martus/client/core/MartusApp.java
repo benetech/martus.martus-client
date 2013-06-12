@@ -1476,7 +1476,7 @@ public class MartusApp
 		store.saveFolders();
 	}
 
-	public boolean isNonSSLServerAvailable(String serverName)
+	public boolean isNonSSLServerAvailable(String serverName) throws Exception
 	{
 		if(serverName.length() == 0)
 			return false;
@@ -1503,9 +1503,7 @@ public class MartusApp
 		return getSecurity().hasKeyPair();
 	}
 
-	public String getServerPublicKey(String serverName) throws
-		ServerNotAvailableException,
-		PublicInformationInvalidException
+	public String getServerPublicKey(String serverName) throws Exception
 	{
 		ClientSideNetworkHandlerUsingXmlRpcForNonSSL server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName, transport);
 		return getServerPublicKey(server);

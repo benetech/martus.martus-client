@@ -11,7 +11,6 @@ import org.martus.client.swingui.Martus;
 import org.martus.clientside.ClientPortOverride;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
-import org.martus.common.Exceptions;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.Bulletin;
@@ -147,7 +146,8 @@ public class ServerLoader {
         MartusLogger.log("Time required for " + numThreads + " threads to send bulletins: " + sw.elapsedInMinutes() + " minutes.");
     }
 
-    private boolean verifyServer() throws Exceptions.ServerNotAvailableException, MartusUtilities.PublicInformationInvalidException, MartusCrypto.MartusSignatureException {
+    private boolean verifyServer() throws Exception
+    {
         NonSSLNetworkAPIWithHelpers server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverIP);
         try
         {
