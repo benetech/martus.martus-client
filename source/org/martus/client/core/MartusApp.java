@@ -66,7 +66,7 @@ import org.martus.client.swingui.UiConstants;
 import org.martus.client.test.MockClientSideNetworkHandler;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpc;
-import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
+import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.PasswordHelper;
 import org.martus.common.BulletinSummary;
@@ -1481,8 +1481,8 @@ public class MartusApp
 		if(serverName.length() == 0)
 			return false;
 
-		NonSSLNetworkAPI server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName, transport);
-		return ClientSideNetworkHandlerUsingXmlRpcForNonSSL.isNonSSLServerAvailable(server);
+		NonSSLNetworkAPI server = new ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer(serverName, transport);
+		return ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer.isNonSSLServerAvailable(server);
 	}
 
 	public boolean isSSLServerAvailable()
@@ -1505,7 +1505,7 @@ public class MartusApp
 
 	public String getServerPublicKey(String serverName) throws Exception
 	{
-		ClientSideNetworkHandlerUsingXmlRpcForNonSSL server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName, transport);
+		ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer server = new ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer(serverName, transport);
 		return getServerPublicKey(server);
 	}
 

@@ -10,7 +10,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.Martus;
 import org.martus.clientside.ClientPortOverride;
 import org.martus.clientside.ClientSideNetworkGateway;
-import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
+import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.Bulletin;
@@ -148,7 +148,7 @@ public class ServerLoader {
 
     private boolean verifyServer() throws Exception
     {
-        NonSSLNetworkAPIWithHelpers server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverIP);
+        NonSSLNetworkAPIWithHelpers server = new ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer(serverIP);
         try
         {
             String result = server.getServerPublicKey(martusCrypto);
