@@ -28,7 +28,7 @@ package org.martus.client.tools;
 
 import org.martus.client.swingui.Martus;
 import org.martus.clientside.ClientSideNetworkGateway;
-import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
+import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.network.NetworkInterface;
@@ -48,8 +48,8 @@ public class PingServerAsClient
 	{
 		processArgs(args);
 		
-		ClientSideNetworkHandlerUsingXmlRpcForNonSSL server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(ip);
-		if(!ClientSideNetworkHandlerUsingXmlRpcForNonSSL.isNonSSLServerAvailable(server))
+		ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer server = new ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer(ip);
+		if(!ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer.isNonSSLServerAvailable(server))
 		{
 			sleepToAvoidMixingOurOutputWithTheStackTrace();
 			System.out.println("Can't contact non-ssl server");
