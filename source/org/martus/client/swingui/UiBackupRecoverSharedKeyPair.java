@@ -276,6 +276,9 @@ public class UiBackupRecoverSharedKeyPair
 			if (!results.wasCancelChoosen())
 			{	
 				File pathChoosen = results.getCurrentDirectory();
+				if(pathChoosen == null)
+					continue;
+				
 				String pathToUse = verifyBackupShareMediaType(pathChoosen);
 				if(pathToUse != null)
 					return pathToUse;
