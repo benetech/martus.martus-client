@@ -2626,6 +2626,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			bulletins.add(selectedFolder.getBulletinSorted(i));
 		}
 		String defaultFileName = MartusUtilities.createValidFileName(selectedFolder.getLocalizedName(localization));
+		if(defaultFileName.length() == 0)
+			defaultFileName = localization.getFieldLabel("ExportedBulletins");
 		new UiExportBulletinsDlg(this, bulletins, defaultFileName);
 	}
 
