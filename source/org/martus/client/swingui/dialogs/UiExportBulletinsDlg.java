@@ -60,6 +60,9 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		mainWindow = mainWindowToUse;
 		bulletins = bulletinsToExport;
 		defaultFileName = defaultName;
+		if(defaultFileName == null)
+			throw new RuntimeException("Must pass non-null defaultFileName to export dialog");
+
 		constructDialog();
 	}
 
@@ -114,12 +117,11 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 	File askForDestinationFile()
 	{
 		String windowTitle = mainWindow.getLocalization().getWindowTitle("ExportBulletinsSaveAs");
-		if(defaultFileName != null && defaultFileName.length() > 0)
-			defaultFileName += MartusApp.MARTUS_IMPORT_EXPORT_EXTENSION;
-		else
-			defaultFileName = null;
+		File startingFile = new File(defaultFileName);
+		defaultFileName += MartusApp.MARTUS_IMPORT_EXPORT_EXTENSION;
+		startingFile = new File(mainWindow.getApp().getCurrentAccountDirectory(), defaultFileName);
 	
-		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(UiExportBulletinsDlg.this, windowTitle, defaultFileName);
+		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(UiExportBulletinsDlg.this, windowTitle, startingFile);
 		if (results.wasCancelChoosen())
 			return null;
 
