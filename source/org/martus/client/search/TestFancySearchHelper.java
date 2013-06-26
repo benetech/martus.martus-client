@@ -63,7 +63,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	
 	public void setUp() throws Exception
 	{
-		app = MockMartusApp.create();
+		app = MockMartusApp.create(getName());
 		getStore().createFieldSpecCacheFromDatabase();
 		tempDir = createTempDirectory();
 		localization = new MartusLocalization(tempDir, new String[0]);

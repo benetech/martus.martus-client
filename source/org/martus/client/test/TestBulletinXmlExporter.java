@@ -91,7 +91,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		failingAttachments = 0;
 		if(app == null)
 		{
-			app = MockMartusApp.create();
+			app = MockMartusApp.create(getName());
 			attachmentDirectory = createTempDirectory();
 			store = app.getStore();
 		}

@@ -36,7 +36,6 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.Database;
 import org.martus.common.database.MockClientDatabase;
-import org.martus.util.TestCaseEnhanced;
 
 
 public class MockBulletinStore extends ClientBulletinStore
@@ -54,7 +53,7 @@ public class MockBulletinStore extends ClientBulletinStore
 	public MockBulletinStore(Database db, MartusCrypto crypto) throws Exception
 	{
 		super(crypto);
-		File dir = File.createTempFile("$$$MockBulletinStore_" + TestCaseEnhanced.getCallingTestClass(), null);
+		File dir = File.createTempFile("$$$MockBulletinStore", null);
 		dir.deleteOnExit();
 		dir.delete();
 		dir.mkdirs();

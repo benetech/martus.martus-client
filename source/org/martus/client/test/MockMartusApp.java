@@ -39,36 +39,35 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.Database;
-import org.martus.common.database.MockClientDatabase;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
+import org.martus.common.database.MockClientDatabase;
 import org.martus.common.test.UnicodeConstants;
 import org.martus.util.DirectoryUtils;
-import org.martus.util.TestCaseEnhanced;
 
 public class MockMartusApp extends MartusApp
 {
-	public static MockMartusApp create(MartusCrypto crypto) throws Exception
+	public static MockMartusApp create(MartusCrypto crypto, String testName) throws Exception
 	{
-		return create(createFakeDataDirectory(), crypto);
+		return create(createFakeDataDirectory(testName), crypto);
 	}
 
-	public static MockMartusApp create(MartusCrypto crypto, UiLocalization localization) throws Exception
+	public static MockMartusApp create(MartusCrypto crypto, UiLocalization localization, String testName) throws Exception
 	{
-		return create(createFakeDataDirectory(), crypto, localization);
+		return create(createFakeDataDirectory(testName), crypto, localization);
 	}
 
-	public static MockMartusApp create(Database db) throws Exception
+	public static MockMartusApp create(Database db, String testName) throws Exception
 	{
-		MockMartusApp app = create(createFakeDataDirectory(), createFakeSecurity());
+		MockMartusApp app = create(createFakeDataDirectory(testName), createFakeSecurity());
 		app.store = new MockBulletinStore(db, app.getSecurity());
 		return app;
 
 	}
 
-	public static MockMartusApp create(Database db, UiLocalization localizationToUse) throws Exception
+	public static MockMartusApp create(Database db, UiLocalization localizationToUse, String testName) throws Exception
 		{
-			MockMartusApp app = create(createFakeDataDirectory(), createFakeSecurity(), localizationToUse);
+			MockMartusApp app = create(createFakeDataDirectory(testName), createFakeSecurity(), localizationToUse);
 			app.store = new MockBulletinStore(db, app.getSecurity());
 			return app;
 
@@ -94,9 +93,9 @@ public class MockMartusApp extends MartusApp
 		app.store.createFieldSpecCacheFromDatabase();
 	}
 
-	public static MockMartusApp create() throws Exception
+	public static MockMartusApp create(String testName) throws Exception
 	{
-		return create(createFakeDataDirectory(), createFakeSecurity());
+		return create(createFakeDataDirectory(testName), createFakeSecurity());
 	}
 
 	protected MockMartusApp(MartusCrypto crypto, File dataDirectoryToUse, UiLocalization localizationToUse) throws MartusAppInitializationException
@@ -110,9 +109,9 @@ public class MockMartusApp extends MartusApp
 		return MockMartusSecurity.createClient();
 	}
 	
-	public static File createFakeDataDirectory() throws IOException
+	public static File createFakeDataDirectory(String name) throws IOException
 	{
-		File fakeDataDirectory = File.createTempFile("$$$MockMartusApp_" + TestCaseEnhanced.getCallingTestClass(), null);
+		File fakeDataDirectory = File.createTempFile("$$$MockMartusApp_" + name, null);
 		fakeDataDirectory.deleteOnExit();
 		fakeDataDirectory.delete();
 		fakeDataDirectory.mkdir();

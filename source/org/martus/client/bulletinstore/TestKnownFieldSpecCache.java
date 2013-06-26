@@ -61,7 +61,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 	public void setUp() throws Exception
 	{
 		security = MockMartusSecurity.createClient();
-		app = MockMartusApp.create(security);
+		app = MockMartusApp.create(security, getName());
 		ClientBulletinStore store = app.getStore();
 		cache = store.knownFieldSpecCache;
 	}
@@ -99,7 +99,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 	{
 		MockMartusSecurity otherSecurity = MockMartusSecurity.createOtherClient();
 
-		MockMartusApp otherApp = MockMartusApp.create(otherSecurity);
+		MockMartusApp otherApp = MockMartusApp.create(otherSecurity, getName());
 		Bulletin notOurs = createSampleBulletin(otherSecurity);
 		notOurs.setAllPrivate(true);
 		assertTrue("Not encrypting?", otherApp.getStore().mustEncryptPublicData());

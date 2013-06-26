@@ -77,7 +77,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		localization = new MartusLocalization(tempDir, new String[0]);
 		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
 		
-		app = MockMartusApp.create();
+		app = MockMartusApp.create(getName());
 		getStore().createFieldSpecCacheFromDatabase();
 		tempDir = createTempDirectory();
 		searchBuilder = new SearchFieldChooserSpecBuilder(localization);
