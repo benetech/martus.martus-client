@@ -208,7 +208,7 @@ public class Martus
 			"jcommon-1.0.17.jar",
 			"jfreechart-1.0.14.jar",
 			"js-2006-03-08.jar",
-			"junit-3.8.1.jar",
+			"junit-4.11.jar",
 			"layouts-2006-08-10.jar",
 			"orchid-0.9.0.jar",
 			"persiancalendar-2.1.jar",
