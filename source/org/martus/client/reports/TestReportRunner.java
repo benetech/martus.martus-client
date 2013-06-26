@@ -74,7 +74,7 @@ public class TestReportRunner extends TestCaseEnhanced
 	
 	public void setUp() throws Exception
 	{
-		MartusApp app = MockMartusApp.create(MockMartusSecurity.createClient());
+		MartusApp app = MockMartusApp.create(MockMartusSecurity.createClient(), getName());
 		rr = new ReportRunner(app);
 		context = new VelocityContext();
 	}	
@@ -126,7 +126,7 @@ public class TestReportRunner extends TestCaseEnhanced
 	
 	public void testRunReport() throws Exception
 	{
-		MockMartusApp app = MockMartusApp.create();
+		MockMartusApp app = MockMartusApp.create(getName());
 		app.getLocalization().setCurrentLanguageCode(MiniLocalization.ENGLISH);
 		app.loadSampleData();
 		BulletinStore store = app.getStore();
@@ -170,7 +170,7 @@ public class TestReportRunner extends TestCaseEnhanced
 			LegacyCustomFields.createFromLegacy("custom,Custom <label>"),
 		};
 		
-		MockMartusApp app = MockMartusApp.create();
+		MockMartusApp app = MockMartusApp.create(getName());
 		app.getLocalization().setCurrentLanguageCode(MiniLocalization.ENGLISH);
 		Bulletin b = new Bulletin(app.getSecurity(), new FieldSpecCollection(specs), new FieldSpecCollection());
 		String sampleCustomData = "Robert Plant";
@@ -244,7 +244,7 @@ public class TestReportRunner extends TestCaseEnhanced
 
 	private MockMartusApp createAppWithBulletinsForBreaks(String sampleDate) throws Exception
 	{
-		MockMartusApp app = MockMartusApp.create();
+		MockMartusApp app = MockMartusApp.create(getName());
 		createAndSaveSampleBulletin(app, "a", "1", sampleDate);
 		createAndSaveSampleBulletin(app, "a", "1", sampleDate);
 		createAndSaveSampleBulletin(app, "a", "2", sampleDate);
@@ -266,7 +266,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		choices.add(new ChoiceItem("a", aLabel));
 		String bLabel = "Excellent B";
 		choices.add(new ChoiceItem("b", bLabel));
-		MockMartusApp app = MockMartusApp.create();
+		MockMartusApp app = MockMartusApp.create(getName());
 		FieldSpecCollection defaultSpecs = app.getStore().getTopSectionFieldSpecs();
 		FieldSpecCollection specs = new FieldSpecCollection();
 		for(int i = 0; i < defaultSpecs.size(); ++i)
@@ -351,7 +351,7 @@ public class TestReportRunner extends TestCaseEnhanced
 	
 	public void testTotalsInPageReport() throws Exception
 	{
-		MockMartusApp app = MockMartusApp.create();
+		MockMartusApp app = MockMartusApp.create(getName());
 		app.loadSampleData();
 
 		ReportFormat rf = new ReportFormat();
@@ -437,7 +437,7 @@ public class TestReportRunner extends TestCaseEnhanced
 	
 	public void testPageReport() throws Exception
 	{
-		MockMartusApp app = MockMartusApp.create();
+		MockMartusApp app = MockMartusApp.create(getName());
 		FieldSpec[] topFields = {
 			FieldSpec.createStandardField(Bulletin.TAGAUTHOR, new FieldTypeNormal()),
 			FieldSpec.createCustomField("tag2", "Label 2", new FieldTypeDate()),
@@ -494,7 +494,7 @@ public class TestReportRunner extends TestCaseEnhanced
 	
 	private ReportOutput runReportOnSampleData(ReportFormat rf) throws Exception
 	{
-		MockMartusApp app = MockMartusApp.create();
+		MockMartusApp app = MockMartusApp.create(getName());
 		app.loadSampleData();
 		return runReportOnAppData(rf, app);
 	}

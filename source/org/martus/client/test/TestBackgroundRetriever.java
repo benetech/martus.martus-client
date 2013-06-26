@@ -48,7 +48,7 @@ public class TestBackgroundRetriever extends TestCaseEnhanced
 
 	public void testAppCurrentRetrieveCommand() throws Exception
 	{
-		MockMartusApp app = MockMartusApp.create();
+		MockMartusApp app = MockMartusApp.create(getName());
 		RetrieveCommand shouldBeEmpty = app.getCurrentRetrieveCommand();
 		assertEquals("not empty?", 0, shouldBeEmpty.getRemainingToRetrieveCount());
 		
@@ -64,7 +64,7 @@ public class TestBackgroundRetriever extends TestCaseEnhanced
 	
 	public void testBasics() throws Exception
 	{
-		MockRetrievingApp app = MockRetrievingApp.createMockRetrievingApp();
+		MockRetrievingApp app = MockRetrievingApp.createMockRetrievingApp(getName());
 		RetrieveCommand rc = createSampleRetrieveCommand();
 		app.startBackgroundRetrieve(rc);
 		ProgressRecorder progressRecorder = new ProgressRecorder();
@@ -125,9 +125,9 @@ class MockRetrievingApp extends MockMartusApp
 		super(cryptoToUse, dataDirectoryToUse, localizationToUse);
 	}
 	
-	public static MockRetrievingApp createMockRetrievingApp() throws Exception 
+	public static MockRetrievingApp createMockRetrievingApp(String testName) throws Exception 
 	{
-		File directory = createFakeDataDirectory();
+		File directory = createFakeDataDirectory(testName);
 		MockRetrievingApp app = new MockRetrievingApp(createFakeSecurity(), directory, createFakeLocalization(directory));
 		initializeMockApp(app, directory);
 		return app;

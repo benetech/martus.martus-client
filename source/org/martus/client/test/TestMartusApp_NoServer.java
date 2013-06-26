@@ -103,7 +103,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		testAppLocalization = new MartusLocalization(null, UiMainWindow.getAllEnglishStrings());
 		testAppLocalization.setCurrentLanguageCode("en");
-		appWithAccount = MockMartusApp.create(mockSecurityForApp);
+		appWithAccount = MockMartusApp.create(mockSecurityForApp, getName());
 		appWithAccount.setSSLNetworkInterfaceHandlerForTesting(new ServerSideNetworkHandlerNotAvailable());
 
 		File keyPairFile = appWithAccount.getCurrentKeyPairFile();
@@ -922,7 +922,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testCreateAccount() throws Exception
 	{
 		TRACE_BEGIN("testCreateAccount");
-		MockMartusApp app = MockMartusApp.create();
+		MockMartusApp app = MockMartusApp.create(getName());
 		app.createAccount(userName, userPassword);
 		File keyPairFile = app.getCurrentKeyPairFile();
 		assertEquals("not root dir?", app.getMartusDataRootDirectory(), keyPairFile.getParentFile());
@@ -951,7 +951,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testMultipleCreateAccounts() throws Exception
 	{
 		TRACE_BEGIN("testMultipleCreateAccounts");
-		MockMartusApp app = MockMartusApp.create();
+		MockMartusApp app = MockMartusApp.create(getName());
 		String newUserName = "testName";
 		char[] newUserPassword = "passWOrd".toCharArray();
 		app.createAccount(newUserName, newUserPassword);
@@ -1155,7 +1155,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testFileOutputStreamReadOnly() throws Exception
 	{
 		TRACE_BEGIN("testFileOutputStreamReadOnly");
-		File readOnlyFile = createTempFileFromName("FileOutputStreamReadOnly_"+TestCaseEnhanced.getCallingTestClass());
+		File readOnlyFile = createTempFileFromName("FileOutputStreamReadOnly_"+ getName());
 		readOnlyFile.setReadOnly();
 		try
 		{
@@ -1273,7 +1273,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testAttemptReSignInAuthorizationFailure() throws Exception
 	{
 		TRACE_BEGIN("testAttemptReSignInAuthorizationFailure");
-		MockMartusApp app = MockMartusApp.create();
+		MockMartusApp app = MockMartusApp.create(getName());
 		app.createAccount(userName, userPassword);
 		app.getSecurity().clearKeyPair();
 		app.currentUserName = "";
@@ -1321,7 +1321,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testAttemptSignInToAdditionalAccount() throws Exception
 	{
 		TRACE_BEGIN("testAttemptSignInToAdditionalAccount");
-		MockMartusApp app = MockMartusApp.create();
+		MockMartusApp app = MockMartusApp.create(getName());
 		app.createAccount(userName, userPassword);
 		String userNameTest2 = "user2";
 		char[] userPasswordTest2 = "pass2".toCharArray();
@@ -1336,7 +1336,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	
 	public void testIsUserOwnerOfThisAccountDirectory() throws Exception
 	{
-		MockMartusApp app = MockMartusApp.create();
+		MockMartusApp app = MockMartusApp.create(getName());
 		File tempDirectory = createTempDirectory();
 		tempDirectory.deleteOnExit();
 		File hashFile = app.getUserNameHashFile(tempDirectory);
@@ -1733,7 +1733,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testFindBulletinInAllFolders() throws Exception
 	{
 		TRACE_BEGIN("testFindBulletinInAllFolders");
-		MockMartusApp app = MockMartusApp.create();
+		MockMartusApp app = MockMartusApp.create(getName());
 		Bulletin b1 = app.createBulletin();
 		Bulletin b2 = app.createBulletin();
 		app.getStore().saveBulletin(b1);

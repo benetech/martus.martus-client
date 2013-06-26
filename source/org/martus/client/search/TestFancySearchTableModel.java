@@ -63,7 +63,7 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 
 	public void testGetCellType() throws Exception
 	{
-		MockMartusApp app = MockMartusApp.create();
+		MockMartusApp app = MockMartusApp.create(getName());
 		ClientBulletinStore store = app.getStore();
 		store.createFieldSpecCacheFromDatabase();
 		app.loadSampleData();

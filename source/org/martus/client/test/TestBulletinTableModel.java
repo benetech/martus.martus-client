@@ -47,8 +47,8 @@ public class TestBulletinTableModel extends TestCaseEnhanced
     public void setUp() throws Exception
     {
     	super.setUp();
-    	localization = new MockUiLocalization();
-		app = MockMartusApp.create(new MockClientDatabase(), localization);
+    	localization = new MockUiLocalization(getName());
+		app = MockMartusApp.create(new MockClientDatabase(), localization, getName());
 	    //app.setLocalization(localization);
 		app.loadSampleData();
 		store = app.getStore();
