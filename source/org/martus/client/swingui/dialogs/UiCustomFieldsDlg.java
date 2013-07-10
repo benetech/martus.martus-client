@@ -191,14 +191,10 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			File currentDirectory = new File(mainWindow.getApp().getCurrentAccountDirectoryName());
 			FileFilter filter = new MCTFileFilter();
-			String windowTitle = mainWindow.getLocalization().getWindowTitle("ImportCustomizationTemplateOpen");
-			String buttonLabel = mainWindow.getLocalization().getButtonLabel("customImport");
-			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, windowTitle, null, currentDirectory, buttonLabel, filter);
-			if (results.wasCancelChoosen())
+			File importFile = mainWindow.doFileOpenDialog("ImportCustomization", filter);
+			if(importFile == null)
 				return;
-			File importFile = results.getChosenFile();
 
 			CustomFieldTemplate template = new CustomFieldTemplate();
 			
@@ -287,7 +283,7 @@ public class UiCustomFieldsDlg extends JDialog
 
 		public String getDescription()
 		{
-			return mainWindow.getLocalization().getFieldLabel("CustomizationTemplateFiles");
+			return mainWindow.getLocalization().getFieldLabel("CustomizationTemplateFileFilter");
 		}
 	}
 
