@@ -50,7 +50,6 @@ import org.martus.common.ExternalPublicKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiButton;
-import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
@@ -116,8 +115,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 	abstract String getEditLabelButtonName();
 	abstract String[] getDialogText();
 	abstract ExternalPublicKeysTableModel createModel();
-	abstract String getImportKeyDialogTitle();
-	abstract String getImportKeyOkButtonText();
+	abstract String getImportKeyDialogCategory();
 	abstract boolean confirmPublicCode(String publicCode);
 	abstract boolean confirmImportKey();
 	abstract ExternalPublicKey createKeyWithLabel(String publicKeyString, String label);
@@ -176,16 +174,11 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 	
 	ExternalPublicKey importPublicKey() throws Exception
 	{
-		String windowTitle = getImportKeyDialogTitle();
-		String buttonLabel = getImportKeyOkButtonText();
-		
-		File currentDirectory = new File(mainWindow.getApp().getCurrentAccountDirectoryName());
 		FileFilter filter = createFileFilter();
-		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, windowTitle, null, currentDirectory, buttonLabel, filter);
-		if (results.wasCancelChoosen())
+		File importFile = mainWindow.doFileOpenDialogWithDirectoryMemory(getImportKeyDialogCategory(), filter);
+		if(importFile == null)
 			return null;
 		
-		File importFile = results.getChosenFile();
 		String publicKeyString = mainWindow.getApp().extractPublicInfo(importFile);
 		String publicCode = MartusCrypto.computePublicCode(publicKeyString);
 		if(doesPublicCodeAlreadyExist(publicKeyString))

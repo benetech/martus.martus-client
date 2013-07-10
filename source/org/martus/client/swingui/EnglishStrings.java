@@ -288,8 +288,6 @@ public class EnglishStrings
 "wintitle:saveBackupKeyPair=Back up key file",
 "wintitle:BulletinPreview=Bulletin Preview",
 "wintitle:DeleteBulletinFile=Delete Bulletin File",
-"wintitle:ImportHQPublicKey=Import Headquarters Account",
-"wintitle:ImportFieldDeskPublicKey=Import Field Desk Public Information File",
 "wintitle:ServerNews=Server News: Message #CurrentNewsItem# of #MaxNewsItems#",
 "wintitle:LoadDefaultDetails=Load Default Details Field Content",
 "wintitle:ExportBulletins=Export Bulletins",
@@ -535,7 +533,7 @@ public class EnglishStrings
 "field:HelpExample1DefaultDetails=Were there any witnesses?",
 "field:HelpExample2DefaultDetails=List Victim Names and Ages:",
 "field:HelpExampleEtcDefaultDetails=etc...",
-"field:PublicInformationFiles=Public Information Files",
+"field:PublicInformationFiles=Public Information Files (*.mpi)",
 "field:BulletinImportFileFilter=Bulletin Files (*.xml)",
 "field:NormalKeyboardMsg1=Remember: Entering your password using the regular keyboard may reduce security.",
 "field:NormalKeyboardMsg2=For maximum security switch to the on-screen keyboard.",
@@ -682,6 +680,12 @@ public class EnglishStrings
 
 "wintitle:FileDialogImportBulletins=Import Bulletins",
 "button:FileDialogOkImportBulletins=Import",
+
+"wintitle:FileDialogImportHeadquartersPublicKey=Import Headquarters Account",
+"button:FileDialogOkImportHeadquartersPublicKey=Import",
+
+"wintitle:FileDialogImportFieldDeskPublicKey=Import Field Desk Public Information File",
+"button:FileDialogOkImportFieldDeskPublicKey=Import",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
