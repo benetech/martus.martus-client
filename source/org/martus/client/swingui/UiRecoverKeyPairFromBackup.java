@@ -31,8 +31,8 @@ import java.io.IOException;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.dialogs.UiSigninDlg;
+import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.PasswordHelper;
-import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiPasswordField;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
@@ -50,52 +50,30 @@ public class UiRecoverKeyPairFromBackup
 	public boolean recoverPrivateKey()
 	{
 		mainWindow.notifyDlg("RecoveryProcessBackupFile");
-		File startingDirectory = UiFileChooser.getHomeDirectoryFile();
 		while(true)
 		{
-			String windowTitle = localization.getWindowTitle("RecoverKeyPair");
-			boolean showCancelDlg = true;
-			boolean showUnableToRecoverDlg = false;
-			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, windowTitle, UiFileChooser.NO_FILE_SELECTED, startingDirectory);
-			if (!results.wasCancelChoosen())
+			File backupFile = mainWindow.doFileOpenDialogWithDirectoryMemory("RestoreFromKeyPair", FileDialogHelpers.NO_FILTER);
+			if (backupFile == null)
+				return false;
+			
+			try
 			{
-				File backupFile = results.getChosenFile();
-				try
-				{
-					attemptSignIn(backupFile);
-					return saveKeyPairToAccount();
-				}
-				catch (IOException e)
-				{
-					showCancelDlg = false;
-					showUnableToRecoverDlg = true;
-				}
-				catch (AttemptedSignInFailedException e)
-				{
-					showCancelDlg = false;
-					showUnableToRecoverDlg = true;
-				}
-				catch (AbortedSignInException e)
-				{
-					showCancelDlg = true;
-					showUnableToRecoverDlg = false;
-				}
-				finally
-				{
-					UiPasswordField.scrubData(userPassword);
-				}
-				
+				attemptSignIn(backupFile);
+				return saveKeyPairToAccount();
 			}
-			startingDirectory = results.getCurrentDirectory();
-			if(showUnableToRecoverDlg)
+			catch (AbortedSignInException e)
+			{
+				if(mainWindow.confirmDlg("CancelBackupRecovery"))
+					return false;
+			}
+			catch (Exception e)
 			{
 				if(!mainWindow.confirmDlg("UnableToRecoverFromBackupFile"))
 					return false;
 			}
-			if(showCancelDlg)
-			{	
-				if(mainWindow.confirmDlg("CancelBackupRecovery"))
-					return false;
+			finally
+			{
+				UiPasswordField.scrubData(userPassword);
 			}
 		}
 	}

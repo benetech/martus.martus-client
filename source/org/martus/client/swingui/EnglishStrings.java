@@ -304,7 +304,6 @@ public class EnglishStrings
 "wintitle:ErrorVerifyingKeyPairShare=Verification Error",				
 "wintitle:VerifyingKeyPairShare=Verifying Disk",
 "wintitle:RemoveServer=Remove Server",
-"wintitle:RecoverKeyPair=Restore Key from Backup File",
 "wintitle:BackupKeyPairGeneralInfo=Backup Key Information",
 "wintitle:BackupKeyPairToSecretShareInformation=Backup Key Information ",
 "wintitle:ErrorAttachmentMissing=Attachment Missing",
@@ -672,6 +671,9 @@ public class EnglishStrings
 
 "wintitle:FileDialogAddAttachment=Add Attachment",
 "button:FileDialogOkAddAttachment=Add Attachment",
+
+"wintitle:FileDialogRestoreFromKeyPair=Restore Account",
+"button:FileDialogOkRestoreFromKeyPair=Restore",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
