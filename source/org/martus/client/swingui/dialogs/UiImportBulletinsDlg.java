@@ -31,17 +31,18 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
 import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
+
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ImportBulletins;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiButton;
-import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiTextField;
 import org.martus.swing.Utilities;
@@ -62,18 +63,8 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 	
 	private File getFileToImport()
 	{
-		MartusLocalization localization = mainWindow.getLocalization();
-		String continueLabel = localization.getButtonLabel("Continue");
-		File homeDirectory = UiFileChooser.getHomeDirectoryFile();
 		BulletinImportFileFilter importFilter = new BulletinImportFileFilter();
-		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(UiImportBulletinsDlg.this, localization.getWindowTitle(IMPORT_BULLETINS_TITLE), null, homeDirectory, continueLabel,importFilter);
-		if (results.wasCancelChoosen())
-			return null;
-	
-		File importFile = results.getChosenFile();
-		if(!importFile.exists() || !importFile.isFile() )
-			return null;
-		return importFile;
+		return mainWindow.doFileOpenDialog("ImportBulletins", importFilter);
 	}	
 	
 	private void constructDialog()
@@ -117,7 +108,7 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 
 		public String getDescription()
 		{
-			return mainWindow.getLocalization().getFieldLabel("BulletinImportFiles");
+			return mainWindow.getLocalization().getFieldLabel("BulletinImportFileFilter");
 		}
 	}
 
