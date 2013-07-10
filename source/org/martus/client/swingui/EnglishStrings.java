@@ -536,7 +536,7 @@ public class EnglishStrings
 "field:HelpExample2DefaultDetails=List Victim Names and Ages:",
 "field:HelpExampleEtcDefaultDetails=etc...",
 "field:PublicInformationFiles=Public Information Files",
-"field:BulletinImportFiles=Bulletin Import Files",
+"field:BulletinImportFileFilter=Bulletin Files (*.xml)",
 "field:NormalKeyboardMsg1=Remember: Entering your password using the regular keyboard may reduce security.",
 "field:NormalKeyboardMsg2=For maximum security switch to the on-screen keyboard.",
 "field:RetrieveSummariesMessage=All bulletins retrieved will still remain on the server.\nYou can only retrieve bulletins that are not currently on your computer.",
@@ -679,6 +679,9 @@ public class EnglishStrings
 
 "wintitle:FileDialogImportCustomization=Import Customization Template",
 "button:FileDialogOkImportCustomization=Import",
+
+"wintitle:FileDialogImportBulletins=Import Bulletins",
+"button:FileDialogOkImportBulletins=Import",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
