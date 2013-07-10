@@ -91,7 +91,6 @@ class AttachmentDropAdapter implements DropTargetListener
 		for(int i = 0; i<list.size(); ++i)
 		{	
 			File file = (File)list.get(i);
-			AddHandler.setLastAttachmentLoadDirectory(file.getAbsoluteFile());
 			AttachmentProxy a = new AttachmentProxy(file);
 			editor.addAttachment(a);
 		}
