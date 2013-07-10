@@ -675,6 +675,9 @@ public class EnglishStrings
 "wintitle:FileDialogRestoreFromKeyPair=Restore Account",
 "button:FileDialogOkRestoreFromKeyPair=Restore",
 
+"wintitle:FileDialogImportMBA=Import MBA",
+"button:FileDialogOkImportMBA=Import",
+
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
 "field:VirtualKeyboardKeys=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\\/?|;:~",
@@ -1514,6 +1517,7 @@ public class EnglishStrings
 "field:ChooseReportFields=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. ",
 "field:MartusReportFormatFileFilter=Martus Report Format (.mrf)",
 "field:MartusSearchSpecFileFilter=Martus Search Specification (.mss)",
+"field:MBAFileFilter=Martus Bulletin Archive (*.mba)",
 "field:CustomXMLTopSection=Top Pane of Bulletin",
 "field:CustomXMLBottomSection=Bottom (always Private) Pane of Bulletin",
 "field:WasSentYes=Yes",
