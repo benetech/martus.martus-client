@@ -74,6 +74,7 @@ public class UiRecoverKeyPairFromBackup
 			finally
 			{
 				UiPasswordField.scrubData(userPassword);
+				userPassword = null;
 			}
 		}
 	}
