@@ -670,6 +670,9 @@ public class EnglishStrings
 "field:confirmAddingPermissionsToBulletinsCancelcause=The operation will be stopped immediately.",
 "field:confirmAddingPermissionsToBulletinsCanceleffect=If you do this, the bulletins already processed will have the new headquarters access, but other selected bulletins will not.",
 
+"wintitle:FileDialogAddAttachment=Add Attachment",
+"button:FileDialogOkAddAttachment=Add Attachment",
+
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
 "field:VirtualKeyboardKeys=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\\/?|;:~",

@@ -66,6 +66,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileFilter;
 
 import org.bouncycastle.crypto.engines.RSAEngine;
 import org.json.JSONObject;
@@ -119,6 +120,7 @@ import org.martus.client.swingui.tablemodels.RetrieveMyTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.CurrentUiState;
+import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiUtilities;
 import org.martus.common.EnglishCommonStrings;
@@ -2910,6 +2912,37 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		return getTextFieldColumns(Utilities.getViewableScreenSize().width);
 	}
+	
+	public File doFileOpenDialog(String fileDialogCategory, FileFilter filter)
+	{
+		return internalDoFileOpenDialog(fileDialogCategory, null, filter);
+	}
+	
+	public File doFileOpenDialogWithDirectoryMemory(String fileDialogCategory, FileFilter filter)
+	{
+		File directory = getMemorizedFileOpenDirectories().get(fileDialogCategory);
+		File file = internalDoFileOpenDialog(fileDialogCategory, directory, filter);
+		if(file != null)
+			getMemorizedFileOpenDirectories().put(fileDialogCategory, file.getParentFile());
+		return file;
+	}
+	
+	private File internalDoFileOpenDialog(String fileDialogCategory, File directory, FileFilter filter)
+	{
+		String title = getLocalization().getWindowTitle("FileDialog" + fileDialogCategory);
+		String okButtonLabel = getLocalization().getButtonLabel("FileDialogOk" + fileDialogCategory);
+		if(directory == null)
+			directory = getApp().getCurrentAccountDirectory();
+		return FileDialogHelpers.doFileOpenDialog(getCurrentActiveFrame(), title, okButtonLabel, directory, filter);
+	}
+
+	private Map<String, File> getMemorizedFileOpenDirectories()
+	{
+		if(memorizedFileOpenDirectories == null)
+			memorizedFileOpenDirectories = new HashMap<String, File>();
+		return memorizedFileOpenDirectories;
+	}
+
 
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
@@ -2959,4 +2992,5 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private BackgroundTimerTask backgroundUploadTimerTask;
 	private Stack cursorStack;
 
+	private static Map<String, File> memorizedFileOpenDirectories;
 }
