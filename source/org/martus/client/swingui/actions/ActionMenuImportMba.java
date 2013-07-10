@@ -34,12 +34,10 @@ import javax.swing.filechooser.FileFilter;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.TransferableBulletinList;
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
-import org.martus.swing.UiFileChooser;
 
 public class ActionMenuImportMba extends UiMenuAction
 {
@@ -90,18 +88,8 @@ public class ActionMenuImportMba extends UiMenuAction
 
 	private File getFileToImport()
 	{
-		MartusLocalization localization = mainWindow.getLocalization();
-		String continueLabel = localization.getButtonLabel("Import");
-		File homeDirectory = UiFileChooser.getHomeDirectoryFile();
-		String title = localization.getWindowTitle("ImportMBA");
 		MbaImportFileFilter filter = new MbaImportFileFilter();
-		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, title, null, homeDirectory, continueLabel, filter);
-		if (results.wasCancelChoosen())
-			return null;
-	
-		File importFile = results.getChosenFile();
-		if(!importFile.exists() || !importFile.isFile() )
-			return null;
+		File importFile = mainWindow.doFileOpenDialogWithDirectoryMemory("ImportMBA", filter);
 		return importFile;
 	}	
 	
@@ -116,7 +104,7 @@ public class ActionMenuImportMba extends UiMenuAction
 
 		public String getDescription()
 		{
-			return mainWindow.getLocalization().getFieldLabel("MBAFiles");
+			return mainWindow.getLocalization().getFieldLabel("MBAFileFilter");
 		}
 	}
 
