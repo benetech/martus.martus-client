@@ -31,9 +31,8 @@ import java.io.File;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
-import org.martus.common.MiniLocalization;
+import org.martus.clientside.FileDialogHelpers;
 import org.martus.common.bulletin.AttachmentProxy;
-import org.martus.swing.UiFileChooser;
 
 class AddHandler implements ActionListener
 {
@@ -46,39 +45,13 @@ class AddHandler implements ActionListener
 	
 	public void actionPerformed(ActionEvent ae)
 	{
-		File last = getLastAttachmentLoadDirectory();
-		if(last == null)
-			last = UiFileChooser.getHomeDirectoryFile();
+		File file = mainWindow.doFileOpenDialogWithDirectoryMemory("AddAttachment", FileDialogHelpers.NO_FILTER);
+		if(file == null)
+			return;
 		
-		MiniLocalization localization = mainWindow.getLocalization();
-		String buttonLabel = localization.getButtonLabel("addattachment");
-		UiFileChooser.FileDialogResults results = null;
-		while(true)
-		{	
-			results = UiFileChooser.displayFileOpenDialog(editor, null, UiFileChooser.NO_FILE_SELECTED, last, buttonLabel, null);
-			if (results.wasCancelChoosen())
-				return;
-			if(results.getChosenFile().isFile())
-				break;
-			mainWindow.notifyDlg("AttachmentNotAFile");
-		}
-		setLastAttachmentLoadDirectory(results.getCurrentDirectory());
-		AttachmentProxy a = new AttachmentProxy(results.getChosenFile());
+		AttachmentProxy a = new AttachmentProxy(file);
 		editor.addAttachment(a);
-		
 	}
-
-	static void setLastAttachmentLoadDirectory(File newAttachmentLoadDirectory)
-	{
-		lastAttachmentLoadDirectory = newAttachmentLoadDirectory;
-	}
-
-	static File getLastAttachmentLoadDirectory()
-	{
-		return lastAttachmentLoadDirectory;
-	}
-
-	private static File lastAttachmentLoadDirectory;
 
 	UiMainWindow mainWindow;
 	AttachmentTableModel model;
