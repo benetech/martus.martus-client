@@ -117,15 +117,9 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 	}
 	
 	@Override
-	String getImportKeyDialogTitle()
+	String getImportKeyDialogCategory()
 	{
-		return localization.getWindowTitle("ImportFieldDeskPublicKey");
-	}
-
-	@Override
-	String getImportKeyOkButtonText()
-	{
-		return localization.getButtonLabel("inputImportPublicCodeok");
+		return "ImportFieldDeskPublicKey";
 	}
 
 	@Override

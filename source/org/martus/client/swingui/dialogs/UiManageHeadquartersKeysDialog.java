@@ -142,17 +142,10 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	}
 
 	@Override
-	String getImportKeyDialogTitle()
+	String getImportKeyDialogCategory()
 	{
-		String windowTitle = localization.getWindowTitle("ImportHQPublicKey");
+		String windowTitle = "ImportHeadquartersPublicKey";
 		return windowTitle;
-	}
-
-	@Override
-	String getImportKeyOkButtonText()
-	{
-		String buttonLabel = localization.getButtonLabel("inputImportPublicCodeok");
-		return buttonLabel;
 	}
 
 	@Override
