@@ -314,7 +314,6 @@ public class EnglishStrings
 "wintitle:ConfigureHQs=Manage Headquarters Keys",
 "wintitle:ManageFieldDeskKeys=Manage Field Desk Accounts",
 "wintitle:ExportCustomizationTemplateSaveAs=Export Customization Template",
-"wintitle:ImportCustomizationTemplateOpen=Import Customization Template",
 "wintitle:SetFolderOrder=Folder Order",
 "wintitle:FancySearchHelp=Search Help",
 
@@ -593,7 +592,7 @@ public class EnglishStrings
 "field:PreferencesUseInternalTor=Use embedded Tor (Using Tor improves security but may be slower than not using Tor)",
 "field:HeadQuartersSelected=Selected?",
 "field:ConfigureHeadQuartersDefault=Default?",
-"field:CustomizationTemplateFiles=Customization Template Files",
+"field:CustomizationTemplateFileFilter=Customization Template Files (*.mct)",
 "field:SearchGridHeaderField=Field(s) to search",
 "field:SearchGridHeaderOp=Compare how?",
 "field:SearchGridHeaderValue=Search for...",
@@ -677,6 +676,9 @@ public class EnglishStrings
 
 "wintitle:FileDialogImportMBA=Import MBA",
 "button:FileDialogOkImportMBA=Import",
+
+"wintitle:FileDialogImportCustomization=Import Customization Template",
+"button:FileDialogOkImportCustomization=Import",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
