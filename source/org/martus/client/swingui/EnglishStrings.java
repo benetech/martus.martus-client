@@ -687,7 +687,8 @@ public class EnglishStrings
 "button:FileDialogOkImportFieldDeskPublicKey=Import",
 
 "wintitle:FileDialogSaveReportFormat=Save Report Format",
-"button:FileDialogOkSaveReport=Save",
+
+"wintitle:FileDialogPrintToFile=Print to File",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
@@ -1529,6 +1530,7 @@ public class EnglishStrings
 "field:MartusReportFormatFileFilter=Martus Report Format (.mrf)",
 "field:MartusSearchSpecFileFilter=Martus Search Specification (.mss)",
 "field:MBAFileFilter=Martus Bulletin Archive (*.mba)",
+"field:JPEGFileFilter=JPEG (*.jpeg, *.jpg)",
 "field:CustomXMLTopSection=Top Pane of Bulletin",
 "field:CustomXMLBottomSection=Bottom (always Private) Pane of Bulletin",
 "field:WasSentYes=Yes",
