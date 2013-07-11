@@ -197,21 +197,16 @@ public class UiBackupRecoverSharedKeyPair
 		File firstShareFile = null;
 		while(true)
 		{
-			String windowTitle = localization.getWindowTitle("SaveShareKeyPair");
-			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, windowTitle, UiFileChooser.NO_FILE_SELECTED);
-			
-			if (!results.wasCancelChoosen())
+			firstShareFile = mainWindow.doFileOpenDialog("RecoverSharedKeyPair", null);
+			if(firstShareFile != null)
 			{
-				firstShareFile = results.getChosenFile();
-				if(firstShareFile != null && firstShareFile.isFile())
-				{
-					if(getRootKeyShareFileName(firstShareFile) != null)
-						break;
+				if(getRootKeyShareFileName(firstShareFile) != null)
+					break;
 
-					if(!mainWindow.confirmDlg("ErrorRecoverIvalidFileName"))
-						return null;
-					continue;
-				}
+				if(!mainWindow.confirmDlg("ErrorRecoverIvalidFileName"))
+					return null;
+
+				continue;
 			}
 			if(mainWindow.confirmDlg("CancelShareRecover"))
 				return null;

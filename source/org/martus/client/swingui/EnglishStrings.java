@@ -571,6 +571,7 @@ public class EnglishStrings
 "field:DefaultDetailFiles=Default Details",
 "field:ServerComplianceDescription=The server you have selected has provided the following statement describing its compliance with the official guidelines for the secure and reliable operation of a Martus server.  You can accept or reject this server based on its compliance statement.",
 "field:ServerComplianceChangedDescription=The current server has updated its statement describing its compliance with the official guidelines for the secure and reliable operation of a Martus server.  The new statement appears below. You can accept or reject this server based on its compliance statement.",
+"field:RecoverShareKeyPair=Another part of the shared key is required to complete this process.",
 "field:ErrorPreviousBackupShareExists=A previous backup file exists.  You must save each file on its own removable media disk.",		
 "field:ErrorRecoverNoAppropriateFileFound=No appropriate backup file was found on this disk, please try a different disk.",
 "field:ErrorRecoverShareDisk=An error occurred reading this key backup file.",
@@ -685,6 +686,9 @@ public class EnglishStrings
 
 "wintitle:FileDialogImportFieldDeskPublicKey=Import Field Desk Public Information File",
 "button:FileDialogOkImportFieldDeskPublicKey=Import",
+
+"wintitle:FileDialogRecoverSharedKeyPair=Recover Shared Key",
+"button:FileDialogOkRecoverSharedKeyPair=Recover",
 
 "wintitle:FileDialogSaveReportFormat=Save Report Format",
 
