@@ -321,7 +321,6 @@ public class EnglishStrings
 
 "wintitle:RunOrCreateReport=Reports",
 "wintitle:ReportChooseSortFields=Reports",
-"wintitle:SaveReportAs=Save Report Format As...",
 "wintitle:ChooseReportToRun=Run Report...",
 "wintitle:ChooseReportFields=Create Report",
 "wintitle:OrganizeReportFields=Organize Report Fields",
@@ -686,6 +685,9 @@ public class EnglishStrings
 
 "wintitle:FileDialogImportFieldDeskPublicKey=Import Field Desk Public Information File",
 "button:FileDialogOkImportFieldDeskPublicKey=Import",
+
+"wintitle:FileDialogSaveReportFormat=Save Report Format",
+"button:FileDialogOkSaveReport=Save",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
