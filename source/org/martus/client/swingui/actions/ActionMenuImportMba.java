@@ -35,6 +35,7 @@ import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.FormatFilter;
 import org.martus.common.MartusLogger;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
@@ -87,13 +88,18 @@ public class ActionMenuImportMba extends UiMenuAction
 
 	private File getFileToImport()
 	{
-		MartusBulletinArchiveFileFilter filter = new MartusBulletinArchiveFileFilter();
+		MartusBulletinArchiveFileFilter filter = new MartusBulletinArchiveFileFilter(getLocalization());
 		File importFile = mainWindow.doFileOpenDialogWithDirectoryMemory("ImportMBA", filter);
 		return importFile;
 	}	
 	
-	class MartusBulletinArchiveFileFilter extends FormatFilter
+	static class MartusBulletinArchiveFileFilter extends FormatFilter
 	{
+		public MartusBulletinArchiveFileFilter(MiniLocalization localization)
+		{
+			description = localization.getFieldLabel("MBAFileFilter");
+		}
+		
 		@Override
 		public String getExtension()
 		{
@@ -102,9 +108,10 @@ public class ActionMenuImportMba extends UiMenuAction
 
 		public String getDescription()
 		{
-			return mainWindow.getLocalization().getFieldLabel("MBAFileFilter");
+			return description;
 		}
 
+		private String description;
 	}
 
 
