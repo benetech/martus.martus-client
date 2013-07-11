@@ -38,13 +38,13 @@ import javax.swing.JComponent;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPrintBulletinDlg;
+import org.martus.clientside.FormatFilter;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinHtmlGenerator;
 import org.martus.swing.HtmlViewer;
 import org.martus.swing.PrintPage;
 import org.martus.swing.PrintUtilities;
-import org.martus.swing.UiFileChooser;
 import org.martus.util.UnicodeWriter;
 import org.martus.util.language.LanguageOptions;
 
@@ -109,25 +109,35 @@ public class ActionPrint extends UiMenuAction
 
 	File chooseDestinationFile()
 	{
-		String title = getLocalization().getWindowTitle("PrintToWhichFile");
-		File destination = new File(getLocalization().getFieldLabel("DefaultPrintToDiskFileName"));
+		String defaultFilename = getLocalization().getFieldLabel("DefaultPrintToDiskFileName");
+		FormatFilter filter = new HtmlFilter();
+		File destination = mainWindow.doFileSaveDialog("PrintToFile", defaultFilename, filter);
+		return destination;
 		
-		while(true)
+	}
+	
+	class HtmlFilter extends FormatFilter
+	{
+		@Override
+		public String getExtension()
 		{
-			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, title, destination);
-			if(results.wasCancelChoosen())
-				return null;
-			
-			destination = results.getChosenFile();
-			if(!destination.getName().toLowerCase().endsWith(HTML_FILE_EXTENSION))
-				destination = new File(destination.getAbsolutePath() + HTML_FILE_EXTENSION);
-			if(!destination.exists())
-				break;
-			if(mainWindow.confirmDlg(mainWindow, "OverWriteExistingFile"))
-				break;
+			return HTML_EXTENSION;
 		}
 		
-		return destination;
+		@Override
+		public String[] getExtensions()
+		{
+			return new String[] {HTML_EXTENSION, HTM_EXTENSION};
+		}
+
+		@Override
+		public String getDescription()
+		{
+			return getLocalization().getFieldLabel("HtmlFileFilter");
+		}
+		
+		public final static String HTML_EXTENSION = ".html"; 
+		public final static String HTM_EXTENSION = ".htm"; 
 	}
 	
 	private void printToDisk(Vector currentSelectedBulletins, boolean includePrivateData)
@@ -238,6 +248,5 @@ public class ActionPrint extends UiMenuAction
 
 	
 	static final boolean previewForDebugging = false;
-	private static final String HTML_FILE_EXTENSION = ".html";
 	UiFontEncodingHelper fontHelper;
 }
