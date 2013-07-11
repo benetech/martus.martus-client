@@ -215,11 +215,8 @@ public class ActionMenuReports extends ActionPrint
 
 	File askForReportFileToSaveTo()
 	{
-		String title = getLocalization().getWindowTitle("SaveReportAs");
-		File directory = mainWindow.getApp().getCurrentAccountDirectory();
 		FormatFilter filter = new ReportFormatFilter(getLocalization());
-		MartusLocalization localization = mainWindow.getLocalization();
-		return FileDialogHelpers.doFileSaveDialog(mainWindow, title, directory, filter, localization);
+		return mainWindow.doFileSaveDialog("SaveReportFormat", filter);
 	}
 
 	void runReport(ReportAnswers answers) throws Exception
