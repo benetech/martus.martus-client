@@ -37,13 +37,14 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.MartusConstants;
+import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
 import org.martus.common.Version;
 import org.martus.common.crypto.MartusCrypto.KeyShareException;
 import org.martus.swing.UiFileChooser;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
-import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class UiBackupRecoverSharedKeyPair 
 {
@@ -270,16 +271,10 @@ public class UiBackupRecoverSharedKeyPair
 		while(true)
 		{
 			String windowTitle = localization.getWindowTitle("SaveShareKeyPair");
-			String fileName = defaultFileName + "-1" + MartusApp.SHARE_KEYPAIR_FILENAME_EXTENSION;
-			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, windowTitle, fileName);
-			
-			if (!results.wasCancelChoosen())
+			File pathChosen = UiFileChooser.displayChooseDirectoryDialog(mainWindow, windowTitle);
+			if(pathChosen != null)
 			{	
-				File pathChoosen = results.getCurrentDirectory();
-				if(pathChoosen == null)
-					continue;
-				
-				String pathToUse = verifyBackupShareMediaType(pathChoosen);
+				String pathToUse = verifyBackupShareMediaType(pathChosen);
 				if(pathToUse != null)
 					return pathToUse;
 			}
@@ -316,6 +311,7 @@ public class UiBackupRecoverSharedKeyPair
 			{
 				String fileName = defaultFileName + "-" + Integer.toString(disk) + MartusApp.SHARE_KEYPAIR_FILENAME_EXTENSION;
 				File currentShareFile = new File(driveToUse, fileName);
+				MartusLogger.log("Attempting backup to " + currentShareFile);
 				String[] otherBackupFiles = currentShareFile.getParentFile().list(new BackupShareFilenameFilter(defaultFileName, MartusApp.SHARE_KEYPAIR_FILENAME_EXTENSION));
 				if(otherBackupFiles != null && otherBackupFiles.length > 0)
 				{
