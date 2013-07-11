@@ -144,7 +144,6 @@ import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.XmlPacketLoader;
 import org.martus.swing.FontHandler;
-import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiOptionPane;
@@ -2229,7 +2228,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		
 		String defaultBackupFilename = "MartusKeyPairBackup.dat";
-		File newBackupFile = doFileSaveDialog("SaveKeyPair", defaultBackupFilename, null);
+		File newBackupFile = doFileSaveDialog("SaveKeyPair", defaultBackupFilename, new KeyPairFormatFilter());
 		if(newBackupFile == null)
 			return;
 
@@ -2270,6 +2269,22 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			e.printStackTrace();
 			notifyDlg("ErrorSavingConfig");
 		}
+	}
+	
+	class KeyPairFormatFilter extends FormatFilter
+	{
+		@Override
+		public String getExtension()
+		{
+			return MartusApp.SHARE_KEYPAIR_FILENAME_EXTENSION;
+		}
+
+		@Override
+		public String getDescription()
+		{
+			return getLocalization().getFieldLabel("KeyPairFileFilter");
+		}
+		
 	}
 	
 	public void displayScrollableMessage(String titleTag, String message, String okButtonTag, Map tokenReplacement) 

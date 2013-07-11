@@ -1532,6 +1532,7 @@ public class EnglishStrings
 "field:MartusSearchSpecFileFilter=Martus Search Specification (.mss)",
 "field:MBAFileFilter=Martus Bulletin Archive (*.mba)",
 "field:JPEGFileFilter=JPEG (*.jpeg, *.jpg)",
+"field:KeyPairFileFilter=Martus Key (*.dat)",
 "field:CustomXMLTopSection=Top Pane of Bulletin",
 "field:CustomXMLBottomSection=Bottom (always Private) Pane of Bulletin",
 "field:WasSentYes=Yes",
