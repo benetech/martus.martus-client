@@ -121,6 +121,7 @@ import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.FileDialogHelpers;
+import org.martus.clientside.FormatFilter;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiUtilities;
 import org.martus.common.EnglishCommonStrings;
@@ -2934,6 +2935,18 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(directory == null)
 			directory = getApp().getCurrentAccountDirectory();
 		return FileDialogHelpers.doFileOpenDialog(getCurrentActiveFrame(), title, okButtonLabel, directory, filter);
+	}
+	
+	public File doFileSaveDialog(String fileDialogCategory, FormatFilter filter)
+	{
+		return doFileSaveDialog(fileDialogCategory, "", filter);
+	}
+	
+	public File doFileSaveDialog(String fileDialogCategory, String defaultFilename, FormatFilter filter)
+	{
+		String title = getLocalization().getWindowTitle("FileDialog" + fileDialogCategory);
+		File directory = getApp().getCurrentAccountDirectory();
+		return FileDialogHelpers.doFileSaveDialog(getCurrentActiveFrame(), title, directory, defaultFilename, filter, getLocalization());
 	}
 
 	private Map<String, File> getMemorizedFileOpenDirectories()
