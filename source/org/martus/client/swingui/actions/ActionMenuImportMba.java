@@ -32,6 +32,7 @@ import java.util.zip.ZipFile;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
