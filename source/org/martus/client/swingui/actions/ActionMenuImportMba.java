@@ -88,12 +88,12 @@ public class ActionMenuImportMba extends UiMenuAction
 
 	private File getFileToImport()
 	{
-		MbaImportFileFilter filter = new MbaImportFileFilter();
+		MartusBulletinArchiveFileFilter filter = new MartusBulletinArchiveFileFilter();
 		File importFile = mainWindow.doFileOpenDialogWithDirectoryMemory("ImportMBA", filter);
 		return importFile;
 	}	
 	
-	class MbaImportFileFilter extends FileFilter
+	class MartusBulletinArchiveFileFilter extends FileFilter
 	{
 		public boolean accept(File pathname)
 		{
