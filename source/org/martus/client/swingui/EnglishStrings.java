@@ -695,6 +695,8 @@ public class EnglishStrings
 
 "wintitle:FileDialogExportMBA=Export Martus Bulletin Archive",
 
+"wintitle:FileDialogSaveAttachment=Save Attachment",
+
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
 "field:VirtualKeyboardKeys=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\\/?|;:~",

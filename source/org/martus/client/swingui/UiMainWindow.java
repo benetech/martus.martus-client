@@ -2943,6 +2943,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return FileDialogHelpers.doFileOpenDialog(getCurrentActiveFrame(), title, okButtonLabel, directory, filter);
 	}
 	
+	public File doFileSaveDialogNoFilterWithDirectoryMemory(String fileDialogCategory, String defaultFilename)
+	{
+		File directory = getMemorizedFileOpenDirectories().get(fileDialogCategory);
+		File file = internalDoFileSaveDialog(fileDialogCategory, directory, defaultFilename, null);
+		if(file != null)
+			getMemorizedFileOpenDirectories().put(fileDialogCategory, file.getParentFile());
+		return file;
+	}
+
 	public File doFileSaveDialog(String fileDialogCategory, FormatFilter filter)
 	{
 		return doFileSaveDialog(fileDialogCategory, "", filter);
@@ -2950,9 +2959,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public File doFileSaveDialog(String fileDialogCategory, String defaultFilename, FormatFilter filter)
 	{
+		return internalDoFileSaveDialog(fileDialogCategory, null, defaultFilename, filter);
+	}
+	
+	private File internalDoFileSaveDialog(String fileDialogCategory, File defaultDirectory, String defaultFilename, FormatFilter filter)
+	{
 		String title = getLocalization().getWindowTitle("FileDialog" + fileDialogCategory);
-		File directory = getApp().getCurrentAccountDirectory();
-		return FileDialogHelpers.doFileSaveDialog(getCurrentActiveFrame(), title, directory, defaultFilename, filter, getLocalization());
+		if(defaultDirectory == null)
+			defaultDirectory = getApp().getCurrentAccountDirectory();
+		return FileDialogHelpers.doFileSaveDialog(getCurrentActiveFrame(), title, defaultDirectory, defaultFilename, filter, getLocalization());
 	}
 
 	private Map<String, File> getMemorizedFileOpenDirectories()
