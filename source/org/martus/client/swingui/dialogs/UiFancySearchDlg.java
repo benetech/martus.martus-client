@@ -362,7 +362,7 @@ public class UiFancySearchDlg extends JDialog
 			dialog.setVisible(false);
 			try
 			{
-				File saveTo = FileDialogHelpers.doFileSaveDialog(dialog.mainWindow, title, directory, filter, localization);
+				File saveTo = FileDialogHelpers.doFileSaveDialog(dialog.mainWindow, title, directory, "", filter, localization);
 				if(saveTo == null)
 					return;
 				
