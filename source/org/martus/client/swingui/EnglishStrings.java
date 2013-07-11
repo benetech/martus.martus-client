@@ -698,6 +698,8 @@ public class EnglishStrings
 
 "wintitle:FileDialogExportBulletins=Export Bulletins",
 
+"wintitle:FileDialogExportCustomization=Export Customization Template",
+
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
 "field:VirtualKeyboardKeys=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\\/?|;:~",
