@@ -34,7 +34,6 @@ import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.database.ReadableDatabase;
-import org.martus.swing.UiFileChooser;
 
 class SaveAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 {
@@ -64,20 +63,10 @@ class SaveAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		
 		String fileName = proxy.getLabel();
 
-		File last = getLastAttachmentSaveDirectory();
-		if(last == null)
-			last = UiFileChooser.getHomeDirectoryFile();
-		File attachmentFileToSave = new File(last, fileName);
-		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(getMainWindow(), null, attachmentFileToSave);
-		if(results.wasCancelChoosen())
+		File outputFile = getMainWindow().doFileSaveDialogNoFilterWithDirectoryMemory("SaveAttachment", fileName);
+		if(outputFile == null)
 			return;
-		setLastAttachmentSaveDirectory(results.getCurrentDirectory());
-		File outputFile = results.getChosenFile();
-		if(outputFile.exists())
-		{
-			if(!getMainWindow().confirmDlg("OverWriteExistingFile"))
-				return;
-		}
+		
 		getMainWindow().setWaitingCursor();
 		try
 		{
