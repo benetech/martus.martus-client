@@ -35,13 +35,13 @@ import java.io.File;
 import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.filechooser.FileFilter;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ImportBulletins;
-import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
+import org.martus.clientside.FormatFilter;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiTextField;
@@ -63,7 +63,7 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 	
 	private File getFileToImport()
 	{
-		BulletinImportFileFilter importFilter = new BulletinImportFileFilter();
+		FormatFilter importFilter = new BulletinXmlFileFilter(mainWindow.getLocalization());
 		return mainWindow.doFileOpenDialog("ImportBulletins", importFilter);
 	}	
 	
@@ -97,21 +97,6 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 	
 	}	
 	
-	class BulletinImportFileFilter extends FileFilter
-	{
-		public boolean accept(File pathname)
-		{
-			if(pathname.isDirectory())
-				return true;
-			return(pathname.getName().endsWith(MartusApp.MARTUS_IMPORT_EXPORT_EXTENSION));
-		}
-
-		public String getDescription()
-		{
-			return mainWindow.getLocalization().getFieldLabel("BulletinImportFileFilter");
-		}
-	}
-
 	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource().equals(ok))
