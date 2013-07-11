@@ -285,7 +285,6 @@ public class EnglishStrings
 "wintitle:ConfigServer=Server Configuration",
 "wintitle:ServerSelectionResults=Server Configuration Results",
 "wintitle:search=Search",
-"wintitle:saveBackupKeyPair=Back up key file",
 "wintitle:BulletinPreview=Bulletin Preview",
 "wintitle:DeleteBulletinFile=Delete Bulletin File",
 "wintitle:ServerNews=Server News: Message #CurrentNewsItem# of #MaxNewsItems#",
@@ -689,6 +688,8 @@ public class EnglishStrings
 "wintitle:FileDialogSaveReportFormat=Save Report Format",
 
 "wintitle:FileDialogPrintToFile=Print to File",
+
+"wintitle:FileDialogSaveKeyPair=Backup Key File",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
