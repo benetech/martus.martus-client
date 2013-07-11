@@ -81,6 +81,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiChartPreviewDlg;
+import org.martus.clientside.FormatFilter;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusField;
@@ -89,7 +90,6 @@ import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.FontHandler;
 import org.martus.swing.PrintUtilities;
-import org.martus.swing.UiFileChooser;
 import org.martus.swing.Utilities;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
@@ -314,25 +314,32 @@ public class ActionMenuCharts extends UiMenuAction
 
 	File chooseDestinationFile()
 	{
-		String title = getLocalization().getWindowTitle("PrintToWhichFile");
-		File destination = new File(getLocalization().getFieldLabel("DefaultPrintChartToDiskFileName"));
-		
-		while(true)
+		String defaultFilename = getLocalization().getFieldLabel("DefaultPrintChartToDiskFileName");
+		FormatFilter jpegFilter = new JPEGFilter();
+		File destination = mainWindow.doFileSaveDialog("PrintToFile", defaultFilename, jpegFilter);
+		return destination;
+	}
+	
+	class JPEGFilter extends FormatFilter
+	{
+		@Override
+		public String getExtension()
 		{
-			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, title, destination);
-			if(results.wasCancelChoosen())
-				return null;
-			
-			destination = results.getChosenFile();
-			if(!destination.getName().toLowerCase().endsWith(JPEG_EXTENSION))
-				destination = new File(destination.getAbsolutePath() + JPEG_EXTENSION);
-			if(!destination.exists())
-				break;
-			if(mainWindow.confirmDlg(mainWindow, "OverWriteExistingFile"))
-				break;
+			return JPEG_EXTENSION;
 		}
 		
-		return destination;
+		@Override
+		public String[] getExtensions()
+		{
+			return new String[] {JPEG_EXTENSION, JPG_EXTENSION};
+		}
+
+		@Override
+		public String getDescription()
+		{
+			return getLocalization().getFieldLabel("JPEGFileFilter");
+		}
+		
 	}
 	
 	private boolean printToPrinter(JFreeChart chart) throws PrinterException
@@ -572,5 +579,6 @@ public class ActionMenuCharts extends UiMenuAction
 //	}
 //
 	private final static String JPEG_EXTENSION = ".jpeg";
+	private final static String JPG_EXTENSION = ".jpg";
 	UiFontEncodingHelper fontHelper;
 }
