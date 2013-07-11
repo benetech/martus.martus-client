@@ -23,13 +23,13 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.actions;
+package org.martus.client.swingui.filefilters;
 
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.clientside.FormatFilter;
 import org.martus.common.MiniLocalization;
 
-class MartusBulletinArchiveFileFilter extends FormatFilter
+public class MartusBulletinArchiveFileFilter extends FormatFilter
 {
 	public MartusBulletinArchiveFileFilter(MiniLocalization localization)
 	{
