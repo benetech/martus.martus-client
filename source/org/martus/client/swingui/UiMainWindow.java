@@ -42,7 +42,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -2255,19 +2254,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				notifyDlg("ErrorBackingupKeyPair");
 			}
 		}
-		catch (FileNotFoundException fnfe)
-		{
-			notifyDlg("ErrorBackingupKeyPair");
-		}
-		catch (IOException ioe)
-		{
-			System.out.println(ioe.getMessage());
-			notifyDlg("ErrorBackingupKeyPair");
-		}
 		catch (SaveConfigInfoException e)
 		{
 			e.printStackTrace();
 			notifyDlg("ErrorSavingConfig");
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			notifyDlg("ErrorSavingFile");
 		}
 	}
 	
