@@ -672,7 +672,7 @@ public class EnglishStrings
 "wintitle:FileDialogRestoreFromKeyPair=Restore Account",
 "button:FileDialogOkRestoreFromKeyPair=Restore",
 
-"wintitle:FileDialogImportMBA=Import MBA",
+"wintitle:FileDialogImportMBA=Import Martus Bulletin Archive",
 "button:FileDialogOkImportMBA=Import",
 
 "wintitle:FileDialogImportCustomization=Import Customization Template",
@@ -692,6 +692,8 @@ public class EnglishStrings
 "wintitle:FileDialogPrintToFile=Print to File",
 
 "wintitle:FileDialogSaveKeyPair=Backup Key File",
+
+"wintitle:FileDialogExportMBA=Export Martus Bulletin Archive",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",

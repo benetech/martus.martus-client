@@ -33,20 +33,20 @@ import java.io.UnsupportedEncodingException;
 import java.util.Vector;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
+import org.martus.clientside.FormatFilter;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinZipUtilities;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.DecryptionException;
 import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
+import org.martus.common.database.Database.RecordHiddenException;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
-import org.martus.common.database.Database.RecordHiddenException;
 import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
-import org.martus.swing.UiFileChooser;
-import org.martus.swing.UiFileChooser.FileDialogResults;
 
 public class ActionMenuExportMba extends UiMenuAction
 {
@@ -69,13 +69,14 @@ public class ActionMenuExportMba extends UiMenuAction
 				return;
 			if(bulletins.size()!=1)
 				mainWindow.notifyDlg("ExportMbaSingleBulletinOnly");
-			String title = mainWindow.getLocalization().getWindowTitle("ExportMba");
 			Bulletin bulletin = (Bulletin)bulletins.get(0);
-			String defaultFileName = bulletin.toFileName();
-			FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, title, defaultFileName);
-			if(results.wasCancelChoosen())
+			
+			String defaultFilename = bulletin.toFileName();
+			FormatFilter filter = new MartusBulletinArchiveFileFilter(getLocalization());
+			File destination = getMainWindow().doFileSaveDialog("ExportMBA", defaultFilename, filter);
+			if(destination == null)
 				return;
-			File destination = results.getChosenFile();
+			
 			exportBulletinToMba(bulletin, destination);
 		} 
 		catch (Exception e)
