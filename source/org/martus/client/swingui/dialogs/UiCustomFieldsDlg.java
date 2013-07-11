@@ -45,10 +45,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 
 import org.martus.client.core.CustomFieldsDuplicateLabelChecker;
-import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.filefilters.MCTFileFilter;
+import org.martus.clientside.FormatFilter;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKeys;
@@ -58,7 +59,6 @@ import org.martus.common.fieldspec.CustomFieldError;
 import org.martus.common.fieldspec.CustomFieldTemplate;
 import org.martus.common.fieldspec.CustomFieldTemplate.FutureVersionException;
 import org.martus.swing.UiButton;
-import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTextArea;
@@ -191,7 +191,7 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			FileFilter filter = new MCTFileFilter();
+			FileFilter filter = new MCTFileFilter(mainWindow.getLocalization());
 			File importFile = mainWindow.doFileOpenDialog("ImportCustomization", filter);
 			if(importFile == null)
 				return;
@@ -243,21 +243,11 @@ public class UiCustomFieldsDlg extends JDialog
 			if(!checkForDuplicateLabels())
 				return;
 			
-			String windowTitle = mainWindow.getLocalization().getWindowTitle("ExportCustomizationTemplateSaveAs");
-			FileFilter filter = new MCTFileFilter();
-			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, windowTitle, mainWindow.getApp().getCurrentAccountDirectory(), filter);
-			
-			if (results.wasCancelChoosen())
+			FormatFilter filter = new MCTFileFilter(mainWindow.getLocalization());
+			File destFile = mainWindow.doFileSaveDialog("ExportCustomization", filter);
+			if(destFile == null)
 				return;
-			File destFileOriginal = results.getChosenFile();
-			File destFile = null;
-			if(destFileOriginal.getName().endsWith(MartusApp.CUSTOMIZATION_TEMPLATE_EXTENSION))
-				destFile = destFileOriginal;
-			else
-				destFile = new File(destFileOriginal.getAbsolutePath() + MartusApp.CUSTOMIZATION_TEMPLATE_EXTENSION);
-			if(destFile.exists())
-				if(!mainWindow.confirmDlg("OverWriteExistingFile"))
-					return;
+			
 			CustomFieldTemplate template = new CustomFieldTemplate();
 			MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
 			if(template.ExportTemplate(securityTemp, destFile, topSectionXmlTextArea.getText(), bottomSectionXmlTextArea.getText()))
@@ -272,21 +262,6 @@ public class UiCustomFieldsDlg extends JDialog
 		}
 	}
 	
-	class MCTFileFilter extends FileFilter
-	{
-		public boolean accept(File pathname)
-		{
-			if(pathname.isDirectory())
-				return true;
-			return(pathname.getName().endsWith(MartusApp.CUSTOMIZATION_TEMPLATE_EXTENSION));
-		}
-
-		public String getDescription()
-		{
-			return mainWindow.getLocalization().getFieldLabel("CustomizationTemplateFileFilter");
-		}
-	}
-
 	class CustomHelpHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
