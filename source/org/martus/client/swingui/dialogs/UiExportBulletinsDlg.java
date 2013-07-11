@@ -41,11 +41,12 @@ import org.martus.client.bulletinstore.ExportBulletins;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiBulletinTitleListComponent;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
+import org.martus.clientside.FormatFilter;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiCheckBox;
-import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiList;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiVBox;
@@ -118,20 +119,8 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 
 	File askForDestinationFile()
 	{
-		String windowTitle = mainWindow.getLocalization().getWindowTitle("ExportBulletinsSaveAs");
-		File startingFile = new File(defaultFileName);
-		startingFile = new File(mainWindow.getApp().getCurrentAccountDirectory(), defaultFileName);
-	
-		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(UiExportBulletinsDlg.this, windowTitle, startingFile);
-		if (results.wasCancelChoosen())
-			return null;
-
-		File destFile = results.getChosenFile();
-		if(destFile.exists())
-			if(!mainWindow.confirmDlg("OverWriteExistingFile"))
-				return null;
-
-		return destFile;
+		FormatFilter filter = new BulletinXmlFileFilter(mainWindow.getLocalization());
+		return mainWindow.doFileSaveDialog("ExportBulletins", defaultFileName, filter);
 	}
 
 	boolean userWantsToExportPrivate()

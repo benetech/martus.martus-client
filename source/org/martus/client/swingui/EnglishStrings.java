@@ -292,7 +292,6 @@ public class EnglishStrings
 "wintitle:ServerNews=Server News: Message #CurrentNewsItem# of #MaxNewsItems#",
 "wintitle:LoadDefaultDetails=Load Default Details Field Content",
 "wintitle:ExportBulletins=Export Bulletins",
-"wintitle:ExportBulletinsSaveAs=Export Bulletins",
 "wintitle:SaveShareKeyPair=Saving Backup Disk",
 "wintitle:SaveRecoverShareKeyPairOf=of",
 "wintitle:BackupSecretShareCompleteInformation=Backup Complete",				
@@ -534,7 +533,7 @@ public class EnglishStrings
 "field:HelpExample2DefaultDetails=List Victim Names and Ages:",
 "field:HelpExampleEtcDefaultDetails=etc...",
 "field:PublicInformationFiles=Public Information Files (*.mpi)",
-"field:BulletinImportFileFilter=Bulletin Files (*.xml)",
+"field:BulletinXmlFileFilter=Bulletin Files (*.xml)",
 "field:NormalKeyboardMsg1=Remember: Entering your password using the regular keyboard may reduce security.",
 "field:NormalKeyboardMsg2=For maximum security switch to the on-screen keyboard.",
 "field:RetrieveSummariesMessage=All bulletins retrieved will still remain on the server.\nYou can only retrieve bulletins that are not currently on your computer.",
@@ -696,6 +695,8 @@ public class EnglishStrings
 "wintitle:FileDialogExportMBA=Export Martus Bulletin Archive",
 
 "wintitle:FileDialogSaveAttachment=Save Attachment",
+
+"wintitle:FileDialogExportBulletins=Export Bulletins",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
