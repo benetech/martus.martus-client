@@ -2228,8 +2228,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return;
 		}
 		
+		String defaultBackupFilename = "MartusKeyPairBackup.dat";
+
 		String windowTitle = getLocalization().getWindowTitle("saveBackupKeyPair");
-		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(this, windowTitle, MartusApp.KEYPAIR_FILENAME);
+		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(this, windowTitle, defaultBackupFilename);
 		
 		if (results.wasCancelChoosen())
 			return;
