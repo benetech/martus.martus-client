@@ -2169,38 +2169,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return true;
 	}
 
-	public void doExportMyPublicKey()
-	{
-		try
-		{
-			File export;
-			do
-			{
-				String fileName = getStringInput("ExportMyPublicKey", "NameOfExportedFile", "", "");
-				if(fileName == null)
-					return;
-				export = app.getPublicInfoFile(fileName);
-				if(export.exists())
-				{
-					if(confirmDlg("OverWriteExistingFile"))
-						export.delete();
-				}
-			}while(export.exists());
-			
-			app.exportPublicInfo(export);
-			String title = getLocalization().getWindowTitle("notifyExportMyPublicKey");
-			String msg = getLocalization().getFieldLabel("notifyExportMyPublicKeycause");
-			String ok = getLocalization().getButtonLabel("ok");
-			String[] contents = {msg, export.getCanonicalPath()};
-			String[] buttons = {ok};
-			new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons);
-		}
-		catch(Exception e)
-		{
-			System.out.println("UiMainWindow.doExportMyPublicKey :" + e);
-		}
-	}
-
 	public void askToBackupKeyPairEncryptedSingleFile()
 	{
 		if(confirmDlg("BackupKeyPairInformation"))

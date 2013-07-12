@@ -252,7 +252,6 @@ public class EnglishStrings
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
 "wintitle:inputservermagicword=Request Upload Permission",
-"wintitle:inputExportMyPublicKey=Export My Public Account Id",
 "wintitle:inputImportPublicCode=Import Account Public Information",
 "wintitle:inputImportPublicKey=Import Account Public Information",
 "wintitle:inputCustomFields=Customize Fields",
@@ -349,7 +348,6 @@ public class EnglishStrings
 "button:inputserverpubliccodeok=OK",
 "button:inputsearchok=Search",
 "button:inputservermagicwordok=OK",
-"button:inputExportMyPublicKeyok=Export",
 "button:inputImportPublicCodeok=Import",
 "button:inputImportPublicKeyok=Import",
 "button:inputLoadDefaultDetailsok=Load",
@@ -704,6 +702,8 @@ public class EnglishStrings
 
 "wintitle:FileDialogExportCustomization=Export Customization Template",
 
+"wintitle:FileDialogExportPublicKey=Export Public Account Id",
+
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
 "field:VirtualKeyboardKeys=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\\/?|;:~",
@@ -894,7 +894,7 @@ public class EnglishStrings
 "field:notifyFoundOrphanscause=One or more bulletins were not in any folder. These lost bulletins have been placed into the Recovered Bulletins folder.",
 "field:notifyFoundDamagedBulletinscause=One or more bulletins were severely damaged, and cannot be displayed. If these bulletins were backed up to a server, you may be able to retrieve undamaged copies from there.",
 "field:notifyErrorSavingStatecause=Unable to save current screen layout.",
-"field:notifyExportMyPublicKeycause=The following file has been exported.",
+"field:notifyExportMyPublicKeycause=The following file has been exported: #Filename#",
 "field:notifyPublicInfoFileErrorcause=The file does not contain valid public information.",
 "field:notifyAccountCodeWrongcause=The Public Code does not match the one you entered.",
 "field:notifyErrorSavingConfigcause=Unable to save configuration file.",
@@ -1305,7 +1305,6 @@ public class EnglishStrings
 "field:inputservermagicwordentry=If you want to request permission to upload to this server, enter the 'magic word' now:",
 "field:inputImportPublicCodeentry=Enter the Public Code for the account being imported:",
 "field:inputImportPublicKeyentry=Enter the Public Code for this account:",
-"field:inputExportMyPublicKeyentry=",
 "field:inputGetShareFileNameentry=Enter the name of the file you wish to export.",
 "field:inputCustomFieldsInfo=Enter the XML representation for the layout of new and modified bulletins.",
 "field:inputGetHQLabelentry=Enter the label you wish to associate with this Headquarters.",
