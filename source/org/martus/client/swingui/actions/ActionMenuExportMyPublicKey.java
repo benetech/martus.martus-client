@@ -27,8 +27,13 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.util.HashMap;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.filefilters.PublicInfoFileFilter;
+import org.martus.clientside.FormatFilter;
+import org.martus.common.MartusLogger;
 
 public class ActionMenuExportMyPublicKey extends UiMenuAction
 {
@@ -39,7 +44,28 @@ public class ActionMenuExportMyPublicKey extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doExportMyPublicKey();
+		doExportMyPublicKey();
+	}
+
+	public void doExportMyPublicKey()
+	{
+		try
+		{
+			FormatFilter filter = new PublicInfoFileFilter(getLocalization());  
+			File file = mainWindow.doFileSaveDialog("ExportPublicKey", filter);
+			if(file == null)
+				return;
+			
+			getApp().exportPublicInfo(file);
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("#Filename#", file.getCanonicalPath());
+			mainWindow.notifyDlg("ExportMyPublicKey", map);
+		}
+		catch(Exception e)
+		{
+			MartusLogger.logException(e);
+			mainWindow.notifyDlg("ErrorSavingFile");
+		}
 	}
 
 }
