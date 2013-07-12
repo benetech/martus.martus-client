@@ -468,6 +468,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			askAndBackupKeypairIfRequired();
 		
 		UiModelessBusyDlg waitingForBulletinsToLoad = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitingForBulletinsToLoad"));
+		try
 		{
 			if(!loadFoldersAndBulletins())
 				return false;
@@ -475,7 +476,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			initializeViews();
 			restoreState();
 		}
-		waitingForBulletinsToLoad.endDialog();
+		catch(Exception e)
+		{
+			MartusLogger.logException(e);
+			unexpectedErrorDlg();
+		}
+		finally
+		{
+			waitingForBulletinsToLoad.endDialog();
+		}
 
 		MartusLogger.log("reloadPendingRetrieveQueue");
 		reloadPendingRetrieveQueue();
@@ -516,12 +525,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return true;
     }
 	
-	private void loadFieldSpecCache()
+	private void loadFieldSpecCache() throws Exception
 	{
 		MartusLogger.logBeginProcess("loadFieldSpecCache");
 		if(!getStore().loadFieldSpecCache())
 		{
-			notifyDlg(this, "CreatingFieldSpecCache");
+			if(!createdNewAccount)
+				notifyDlg(this, "CreatingFieldSpecCache");
+
 			getStore().createFieldSpecCacheFromDatabase();
 		}
 		MartusLogger.logEndProcess("loadFieldSpecCache");
@@ -742,7 +753,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		preparingToExitMartus = true;
 	}
 
-	private boolean loadFoldersAndBulletins()
+	private boolean loadFoldersAndBulletins() throws Exception
 	{
 		MartusLogger.logBeginProcess("quarantineUnreadableBulletins");
 		int quarantineCount = app.quarantineUnreadableBulletins();
