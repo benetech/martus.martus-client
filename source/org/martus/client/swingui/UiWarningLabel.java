@@ -40,7 +40,7 @@ public class UiWarningLabel extends UiLabel
 		setHorizontalTextPosition(LEFT);
 		setVerticalTextPosition(TOP);
 		setFont(getFont().deriveFont(Font.BOLD));
-		setBackground(Color.yellow);
+		setBackground(NORMAL_BACKGROUND);
 		setForeground(Color.black);
 		setOpaque(true);
 		setBorder(new LineBorder(Color.black, 2));
@@ -51,4 +51,5 @@ public class UiWarningLabel extends UiLabel
 		super.setText("   " + text + "   ");
 	}
 
+	private static final Color NORMAL_BACKGROUND = Color.yellow;
 }
