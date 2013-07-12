@@ -41,10 +41,10 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 
-import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.ExternalPublicKeysTableModel;
 import org.martus.client.swingui.SelectableExternalPublicKeyEntry;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.filefilters.PublicInfoFileFilter;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.ExternalPublicKey;
 import org.martus.common.HeadquartersKeys;
@@ -200,7 +200,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 
 	private PublicInfoFileFilter createFileFilter()
 	{
-		return new PublicInfoFileFilter();
+		return new PublicInfoFileFilter(mainWindow.getLocalization());
 	}
 
 	void addKeyToTable(ExternalPublicKey publicKey)
@@ -330,21 +330,6 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 
 	}
 	
-	class PublicInfoFileFilter extends FileFilter
-	{
-		public boolean accept(File pathname)
-		{
-			if(pathname.isDirectory())
-				return true;
-			return(pathname.getName().endsWith(MartusApp.PUBLIC_INFO_EXTENSION));
-		}
-
-		public String getDescription()
-		{
-			return localization.getFieldLabel("PublicInformationFiles");
-		}
-	}
-
 
 	private static final int DEFAULT_VIEABLE_ROWS = 5;
 
