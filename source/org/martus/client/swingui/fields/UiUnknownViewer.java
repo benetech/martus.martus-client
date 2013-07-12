@@ -27,7 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 
 import org.martus.client.swingui.UiWarningLabel;
 import org.martus.common.MiniLocalization;
@@ -38,7 +37,7 @@ public class UiUnknownViewer extends UiViewerField
 	{
 		super(localizationToUse);
 		component = new UiWarningLabel();
-		component.setText(localizationToUse.getFieldLabel("UnknownFieldType"));
+		component.setWarningText(localizationToUse.getFieldLabel("UnknownFieldType"));
 	}
 
 	public JComponent getComponent()
@@ -55,5 +54,5 @@ public class UiUnknownViewer extends UiViewerField
 	{
 	}
 
-	JLabel component;
+	private UiWarningLabel component;
 }
