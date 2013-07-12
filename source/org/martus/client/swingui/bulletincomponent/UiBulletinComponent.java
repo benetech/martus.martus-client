@@ -179,35 +179,35 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 			{
 				text = mainWindow.getLocalization().getFieldLabel("NotAuthorizedToViewPrivate");
 				if(currentBulletin.isAllPrivate())
-					publicSection.updateWarningIndicator(text);
+					publicSection.setWarningText(text);
 			}
 			else
 			{
 				System.out.println("Damaged: " + currentBulletin.getLocalId());
 				text = mainWindow.getLocalization().getFieldLabel("MayBeDamaged");
-				publicSection.updateWarningIndicator(text);
+				publicSection.setWarningText(text);
 			}
-			privateSection.updateWarningIndicator(text);
+			privateSection.setWarningText(text);
 		}
 		else if(currentBulletin.hasUnknownTags())
 		{
 			System.out.println("Unknown tags: " + currentBulletin.getLocalId());
 			String text = mainWindow.getLocalization().getFieldLabel("BulletinHasUnknownStuff");
-			publicSection.updateWarningIndicator(text);
-			privateSection.updateWarningIndicator(text);
+			publicSection.setWarningText(text);
+			privateSection.setWarningText(text);
 		}
 		else if(notYourBulletin && !isFieldDeskBulletin)
 		{
 			String text = mainWindow.getLocalization().getFieldLabel("BulletinUnverifiedFieldDesk");
-			publicSection.updateWarningIndicator(text);
-			privateSection.updateWarningIndicator(text);
+			publicSection.setWarningText(text);
+			privateSection.setWarningText(text);
 			
 		}
 		else if(notYourBulletin)
 		{
 			String text = mainWindow.getLocalization().getFieldLabel("BulletinNotYours");
-			publicSection.updateWarningIndicator(text);
-			privateSection.updateWarningIndicator(text);
+			publicSection.setInformationalText(text);
+			privateSection.setInformationalText(text);
 			
 		}
 

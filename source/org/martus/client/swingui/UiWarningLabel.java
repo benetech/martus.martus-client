@@ -40,16 +40,28 @@ public class UiWarningLabel extends UiLabel
 		setHorizontalTextPosition(LEFT);
 		setVerticalTextPosition(TOP);
 		setFont(getFont().deriveFont(Font.BOLD));
-		setBackground(NORMAL_BACKGROUND);
 		setForeground(Color.black);
 		setOpaque(true);
 		setBorder(new LineBorder(Color.black, 2));
 	}
 	
-	public void setText(String text)
+	public void setText()
 	{
+		throw new RuntimeException("Raw setText not supported by UiWarningLabel");
+	}
+	
+	public void setWarningText(String text)
+	{
+		setBackground(WARNING_BACKGROUND);
 		super.setText("   " + text + "   ");
 	}
 
-	private static final Color NORMAL_BACKGROUND = Color.yellow;
+	public void setInformationalText(String text)
+	{
+		setBackground(INFORMATIONAL_BACKGROUND);
+		super.setText("   " + text + "   ");
+	}
+
+	private static final Color WARNING_BACKGROUND = Color.yellow;
+	private static final Color INFORMATIONAL_BACKGROUND = Color.green.brighter().brighter();
 }

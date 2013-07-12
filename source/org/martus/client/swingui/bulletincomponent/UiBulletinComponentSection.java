@@ -47,7 +47,6 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiWarningLabel;
-import org.martus.common.utilities.BurmeseUtilities;
 import org.martus.swing.UiLabel;
 import org.martus.swing.Utilities;
 import org.martus.util.language.LanguageOptions;
@@ -191,9 +190,15 @@ abstract public class UiBulletinComponentSection extends JPanel
 		warningIndicator.setVisible(false);
 	}
 
-	public void updateWarningIndicator(String text)
+	public void setWarningText(String text)
 	{
-		warningIndicator.setText(text);
+		warningIndicator.setWarningText(text);
+		warningIndicator.setVisible(true);
+	}
+
+	public void setInformationalText(String text)
+	{
+		warningIndicator.setInformationalText(text);
 		warningIndicator.setVisible(true);
 	}
 
@@ -215,7 +220,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 
 	protected UiMainWindow mainWindow;
 	JLabel sectionHeading;
-	JLabel warningIndicator;
+	UiWarningLabel warningIndicator;
 	
 	FieldGroup currentGroup;
 	Vector groups;
