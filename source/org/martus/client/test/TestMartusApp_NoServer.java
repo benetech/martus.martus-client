@@ -79,6 +79,7 @@ import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
+import org.martus.common.test.UniversalIdForTesting;
 import org.martus.swing.Utilities;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.TestCaseEnhanced;
@@ -149,8 +150,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		try
 		{
 			Vector uids = new Vector();
-			uids.add(UniversalId.createDummyUniversalId());
-			uids.add(UniversalId.createDummyUniversalId());
+			uids.add(UniversalIdForTesting.createDummyUniversalId());
+			uids.add(UniversalIdForTesting.createDummyUniversalId());
 			RetrieveCommand rc = new RetrieveCommand("folder", uids);
 			
 			FakeRetrieveApp app = new FakeRetrieveApp(tempDir);
@@ -251,8 +252,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testCreateRetrieveCommandBundle() throws Exception
 	{
 		Vector uids = new Vector();
-		uids.add(UniversalId.createDummyUniversalId());
-		uids.add(UniversalId.createDummyUniversalId());
+		uids.add(UniversalIdForTesting.createDummyUniversalId());
+		uids.add(UniversalIdForTesting.createDummyUniversalId());
 		RetrieveCommand rc = new RetrieveCommand("folder", uids);
 		byte[] bundle = appWithAccount.createRetrieveCommandBundle(rc);
 		

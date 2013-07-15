@@ -33,6 +33,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExists
 import org.martus.client.test.MockBulletinStore;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
+import org.martus.common.test.UniversalIdForTesting;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestBulletinFolder extends TestCaseEnhanced
@@ -195,7 +196,7 @@ public class TestBulletinFolder extends TestCaseEnhanced
 	public void testRemove() throws Exception
 	{
 		assertEquals("start", 2, testFolder.getBulletinCount());
-		UniversalId badId = UniversalId.createDummyUniversalId();
+		UniversalId badId = UniversalIdForTesting.createDummyUniversalId();
 		testFolder.remove(badId);
 
 		assertEquals("after non remove", 2, testFolder.getBulletinCount());
