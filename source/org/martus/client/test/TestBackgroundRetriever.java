@@ -37,6 +37,7 @@ import org.martus.clientside.UiLocalization;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.packet.UniversalId;
+import org.martus.common.test.UniversalIdForTesting;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestBackgroundRetriever extends TestCaseEnhanced
@@ -84,9 +85,9 @@ public class TestBackgroundRetriever extends TestCaseEnhanced
 	{
 		String sampleFolderName = "Destination";
 		Vector sampleUidList = new Vector();
-		sampleUidList.add(UniversalId.createDummyUniversalId());
-		sampleUidList.add(UniversalId.createDummyUniversalId());
-		sampleUidList.add(UniversalId.createDummyUniversalId());
+		sampleUidList.add(UniversalIdForTesting.createDummyUniversalId());
+		sampleUidList.add(UniversalIdForTesting.createDummyUniversalId());
+		sampleUidList.add(UniversalIdForTesting.createDummyUniversalId());
 		RetrieveCommand rc = new RetrieveCommand(sampleFolderName, sampleUidList);
 		return rc;
 	}

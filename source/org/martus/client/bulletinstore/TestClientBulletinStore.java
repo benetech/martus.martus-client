@@ -560,7 +560,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		TRACE("testFindBulletinById");
 
 		assertEquals(0, testStore.getBulletinCount());
-		UniversalId uInvalidId = UniversalId.createDummyUniversalId();
+		UniversalId uInvalidId = UniversalIdForTesting.createDummyUniversalId();
 		Bulletin b = testStore.getBulletinRevision(uInvalidId);
 		assertEquals(true, (b == null));
 
@@ -976,7 +976,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("still in folder", true, folder.contains(b));
 		UniversalId bFakeId = UniversalIdForTesting.createFromAccountAndPrefix("aa", "abc");
 		testStore.addBulletinToFolder(folder, bFakeId);
-		UniversalId badId2 = UniversalId.createDummyUniversalId();
+		UniversalId badId2 = UniversalIdForTesting.createDummyUniversalId();
 		assertEquals("bad bulletin", -1, folder.find(badId2));
 
 	}
@@ -1413,7 +1413,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	{
 		TRACE("testDeleteFolderCausesSave");
 		
-		DatabaseKey foldersKey = DatabaseKey.createLegacyKey(UniversalId.createDummyUniversalId());
+		DatabaseKey foldersKey = DatabaseKey.createLegacyKey(UniversalIdForTesting.createDummyUniversalId());
 		testStore.deleteAllData();
 		Bulletin b = testStore.createEmptyBulletin();
 		testStore.createFolder("z");
@@ -1428,7 +1428,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	{
 		TRACE("testRenameFolderCausesSave");
 
-		DatabaseKey foldersKey = DatabaseKey.createLegacyKey(UniversalId.createDummyUniversalId());
+		DatabaseKey foldersKey = DatabaseKey.createLegacyKey(UniversalIdForTesting.createDummyUniversalId());
 		testStore.deleteAllData();
 		Bulletin b = testStore.createEmptyBulletin();
 		testStore.createFolder("x");

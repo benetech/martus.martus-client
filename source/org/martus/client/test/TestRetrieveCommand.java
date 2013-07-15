@@ -61,9 +61,9 @@ public class TestRetrieveCommand extends TestCaseEnhanced
 	{
 		String sampleFolderName = "Destination";
 		Vector sampleUidList = new Vector();
-		sampleUidList.add(UniversalId.createDummyUniversalId());
-		sampleUidList.add(UniversalId.createDummyUniversalId());
-		sampleUidList.add(UniversalId.createDummyUniversalId());
+		sampleUidList.add(UniversalIdForTesting.createDummyUniversalId());
+		sampleUidList.add(UniversalIdForTesting.createDummyUniversalId());
+		sampleUidList.add(UniversalIdForTesting.createDummyUniversalId());
 		RetrieveCommand rc = new RetrieveCommand(sampleFolderName, sampleUidList);
 		assertEquals("wrong folder name?", sampleFolderName, rc.getFolderName());
 		assertEquals("didn't start with something to retrieve?", sampleUidList.size(), rc.getRemainingToRetrieveCount());
@@ -77,7 +77,7 @@ public class TestRetrieveCommand extends TestCaseEnhanced
 		
 		try
 		{
-			rc.markAsRetrieved(UniversalId.createDummyUniversalId());
+			rc.markAsRetrieved(UniversalIdForTesting.createDummyUniversalId());
 			fail("Should have thrown trying to remove anything other than the first item");
 		}
 		catch(RuntimeException ignoreExpected)
