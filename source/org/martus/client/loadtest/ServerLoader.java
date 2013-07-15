@@ -20,6 +20,7 @@ import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.network.NonSSLNetworkAPIWithHelpers;
+import org.martus.common.network.TorTransportWrapper;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.Stopwatch;
@@ -148,12 +149,14 @@ public class ServerLoader {
 
     private boolean verifyServer() throws Exception
     {
-        NonSSLNetworkAPIWithHelpers server = new ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer(serverIP);
+	    TorTransportWrapper transport = TorTransportWrapper.create();
+        NonSSLNetworkAPIWithHelpers server = new ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer(serverIP, transport);
         try
         {
             String result = server.getServerPublicKey(martusCrypto);
 
-            gateway = ClientSideNetworkGateway.buildGateway(serverIP, result, null);
+
+            gateway = ClientSideNetworkGateway.buildGateway(serverIP, result, transport);
             NetworkResponse response = gateway.getUploadRights(martusCrypto, magicWord);
             if (!response.getResultCode().equals(NetworkInterfaceConstants.OK))
             {
