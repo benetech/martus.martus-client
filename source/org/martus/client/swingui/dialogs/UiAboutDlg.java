@@ -146,5 +146,15 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		}
 	}
 
-	private final static String THIRD_PARTY_NOTICE = "This product includes software developed by the Apache Software Foundation (http://www.apache.org/).";
+	private final static String THIRD_PARTY_NOTICE = "This product includes software developed by " +
+			"the Apache Software Foundation (http://www.apache.org/), " +
+			"Bouncy Castle, " +
+			"IBM, " +
+			"JH Labs, " +
+			"JOrtho, " +
+			"JUnit, " +
+			"The Mozilla Foundation, " +
+			"Logi Ragnarsson, " +
+			"Object Refinery Limited, " +
+			"and Subgraph [Orchid].";
 }
