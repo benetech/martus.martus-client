@@ -122,7 +122,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 
 		final String disclaimer = localization.getFieldLabel("aboutDlgDisclaimer");
 		final String credits = localization.getFieldLabel("aboutDlgCredits");
-		final String notice = "\n" + disclaimer + "\n\n" + credits + "\n\n" + APACHENOTICE;
+		final String notice = "\n" + disclaimer + "\n\n" + credits + "\n\n" + THIRD_PARTY_NOTICE;
 
 		getContentPane().add(hBoxVersionAndIcon, BorderLayout.NORTH);
 		getContentPane().add(new UiWrappedTextArea(notice), BorderLayout.CENTER);
@@ -146,5 +146,5 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		}
 	}
 
-	final String APACHENOTICE = "This product includes software developed by the Apache Software Foundation (http://www.apache.org/).";
+	final String THIRD_PARTY_NOTICE = "This product includes software developed by the Apache Software Foundation (http://www.apache.org/).";
 }
