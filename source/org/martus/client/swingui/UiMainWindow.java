@@ -716,7 +716,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			File lockFile = getLockFile();
 			lockStream = new FileOutputStream(lockFile);
 			lockToPreventTwoInstances = lockStream.getChannel().tryLock();
-			lockFile.deleteOnExit();
 		}
 		catch (Exception e)
 		{
