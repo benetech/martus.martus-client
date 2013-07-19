@@ -272,11 +272,7 @@ public class UiCustomFieldsDlg extends JDialog
 			message += localization.getFieldLabel("CreateCustomFieldsHelp2b");
 			String examples = localization.getFieldLabel("CreateCustomFieldsHelp3");
 			UiTextArea xmlExamples = createXMLTextArea(examples);
-			xmlExamples.setCaretPosition(0);
-			xmlExamples.setBackground(new JFrame().getBackground());
-			xmlExamples.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-			
-			xmlExamples.setEditable(false);
+			formatTextArea(xmlExamples);
 			UiScrollPane pane = createScrollPane(xmlExamples);
 
 			new UiShowScrollableTextDlg(mainWindow, "CreateCustomFieldsHelp", "ok", MtfAwareLocalization.UNUSED_TAG, MtfAwareLocalization.UNUSED_TAG, message, pane);
@@ -305,7 +301,7 @@ public class UiCustomFieldsDlg extends JDialog
 		String header2 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader2");
 		String header3 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader3");
 		String header4 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader4");
-		StringBuffer errorMessage = new StringBuffer(GetDataAndSpacing(header1, HEADER_SPACING_1));
+		StringBuilder errorMessage = new StringBuilder(GetDataAndSpacing(header1, HEADER_SPACING_1));
 		errorMessage.append(GetDataAndSpacing(header2, HEADER_SPACING_2));
 		errorMessage.append(GetDataAndSpacing(header3, HEADER_SPACING_3));
 		errorMessage.append(header4);
@@ -313,16 +309,30 @@ public class UiCustomFieldsDlg extends JDialog
 		for(int i = 0; i<errors.size(); ++i)
 		{
 			CustomFieldError thisError = (CustomFieldError)errors.get(i);
-			StringBuffer thisErrorMessage = new StringBuffer(GetDataAndSpacing(thisError.getCode(), HEADER_SPACING_1));
+			StringBuilder thisErrorMessage = new StringBuilder(GetDataAndSpacing(thisError.getCode(), HEADER_SPACING_1));
 			thisErrorMessage.append(GetDataAndSpacing(thisError.getType(), HEADER_SPACING_2));
 			thisErrorMessage.append(GetDataAndSpacing(thisError.getTag(), HEADER_SPACING_3));
 			thisErrorMessage.append(thisError.getLabel());
 			errorMessage.append(thisErrorMessage);
 			errorMessage.append('\n');
 		}
-		new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", "ok", MtfAwareLocalization.UNUSED_TAG, "ErrorCustomFields", errorMessage.toString(), null);
+
+		String errorDescription = mainWindow.getLocalization().getFieldLabel("ErrorCustomFields");
+		UiTextArea specificErrors = createXMLTextArea(errorMessage.toString());
+		formatTextArea(specificErrors);
+		UiScrollPane specificErrorsPane = createScrollPane(specificErrors);
+
+		new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", "ok", MtfAwareLocalization.UNUSED_TAG, MtfAwareLocalization.UNUSED_TAG, errorDescription, specificErrorsPane);
 	}
-		
+
+	private void formatTextArea(UiTextArea textArea)
+	{
+		textArea.setCaretPosition(0);
+		textArea.setBackground(new JFrame().getBackground());
+		textArea.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		textArea.setEditable(false);
+	}
+
 	private String GetDataAndSpacing(String data, int columnSpacing)
 	{
 		if(data == null)
