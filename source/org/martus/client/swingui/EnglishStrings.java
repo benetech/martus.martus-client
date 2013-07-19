@@ -398,6 +398,7 @@ public class EnglishStrings
 "button:ConfigureHQsAdd=Add...",
 "button:ConfigureHQsRemove=Remove",
 "button:ConfigureHQsReLabel=Change Label",
+"button:ConfigurePublicKeysView=View",
 "button:EditFieldDeskLabel=Change Label",
 "button:BulletinDetails=Bulletin Details...",
 "button:ViewPreviousBulletinVersion=View Selected Version...",
@@ -663,7 +664,8 @@ public class EnglishStrings
 "wintitle:confirmAddingPermissionsToBulletinsCancel=Cancel",
 "field:confirmAddingPermissionsToBulletinsCancelcause=The operation will be stopped immediately.",
 "field:confirmAddingPermissionsToBulletinsCanceleffect=If you do this, the bulletins already processed will have the new headquarters access, but other selected bulletins will not.",
-
+"wintitle:notifyViewKeyDetails=View Key Details",
+"field:notifyViewKeyDetailscause=Label: #Label#\n\nPublic Code: #PublicCode#\n\nFull Public Key: #PublicKey#",
 "wintitle:FileDialogAddAttachment=Add Attachment",
 "button:FileDialogOkAddAttachment=Add Attachment",
 
@@ -1583,6 +1585,7 @@ public class EnglishStrings
 "field:PreviousBulletinId=Bulletin ID: #ID#",
 "field:BulletinDetailsUnknownDate=(unknown)",
 "field:BulletinDetailsUnknownTitle=(unknown)",
+"field:Unknown=(unknown)",
 "field:BulletinDetailsInProgressDate=(in progress)",
 "field:BulletinDetailsInProgressTitle=(in progress)",
 "field:BulletinHeadQuartersHQInfoForView=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.",

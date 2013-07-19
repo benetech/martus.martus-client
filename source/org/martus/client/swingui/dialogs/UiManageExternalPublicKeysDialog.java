@@ -31,6 +31,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -48,6 +50,7 @@ import org.martus.client.swingui.filefilters.PublicInfoFileFilter;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.ExternalPublicKey;
 import org.martus.common.HeadquartersKeys;
+import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
@@ -74,6 +77,8 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 		remove.addActionListener(new RemoveHandler());
 		renameLabel = new UiButton(getEditLabelButtonName());
 		renameLabel.addActionListener(createRenameHandler());
+		view = new UiButton(localization.getButtonLabel("ConfigurePublicKeysView"));
+		view.addActionListener(createViewHandler());
 
 		String[] dialogText = getDialogText();
 		UiVBox vBox = new UiVBox();
@@ -103,7 +108,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 		save.addActionListener(createSaveHandler());
 		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(createCancelHandler());
-		Utilities.addComponentsRespectingOrientation(hBox, new Component[]{add,remove,renameLabel,Box.createHorizontalGlue(),save,cancel});
+		Utilities.addComponentsRespectingOrientation(hBox, new Component[]{add,remove,renameLabel,view,Box.createHorizontalGlue(),save,cancel});
 		panel.add(hBox);
 		
 		getContentPane().add(panel);
@@ -127,6 +132,11 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 	abstract void notifyNoneSelected();
 	abstract boolean confirmRemoveKey();
 	abstract void notifyKeyAlreadyExists();
+	
+	ViewHandler createViewHandler()
+	{
+		return new ViewHandler();
+	}
 
 	RenameHandler createRenameHandler()
 	{
@@ -169,7 +179,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 			enableButtons = true;
 		remove.setEnabled(enableButtons);
 		renameLabel.setEnabled(enableButtons);
-
+		view.setEnabled(enableButtons);
 	}
 	
 	ExternalPublicKey importPublicKey() throws Exception
@@ -330,6 +340,42 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 
 	}
 	
+	class ViewHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event)
+		{
+			if(table.getSelectedRowCount()==0)
+			{
+				notifyNoneSelected();
+				return;
+			}
+			int rowCount = model.getRowCount();
+			for(int i = rowCount-1; i >=0 ; --i)
+			{
+				if(table.isRowSelected(i))
+				{
+					ExternalPublicKey key = model.getPublicKey(i);
+					Map<String, String> tokenReplacement = new HashMap<String, String>();
+					tokenReplacement.put("#Label#", key.getLabel());
+					String publicCode = mainWindow.getLocalization().getFieldLabel("Unknown");
+					try
+					{
+						publicCode = key.getPublicCode();
+					}
+					catch(Exception e)
+					{
+						MartusLogger.logException(e);
+						mainWindow.unexpectedErrorDlg();
+					}
+					tokenReplacement.put("#PublicCode#", publicCode);
+					tokenReplacement.put("#PublicKey#", key.getPublicKey());
+					mainWindow.notifyDlg("ViewKeyDetails", tokenReplacement);
+				}
+			}
+		}
+		
+	}
+	
 
 	private static final int DEFAULT_VIEABLE_ROWS = 5;
 
@@ -338,6 +384,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 	UiLocalization localization;
 
 	ExternalPublicKeysTableModel model;
-	JButton remove;
-	JButton renameLabel;
+	private JButton remove;
+	private JButton renameLabel;
+	private JButton view;
 }
