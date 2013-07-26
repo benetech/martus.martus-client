@@ -47,7 +47,7 @@
 #      (e.g.  "acctmap.txt" and "packets"
 #      in field:confirmWarnMissingAccountMapFilecause=Warning: acctmap.txt
 #      file in your account's packets directory...)
-#  6.  do not translate the words "Martus" or "Benetech"
+#  6.  do not translate the words "Martus" or "Benetech" or "Tor"
 #  7.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
 #      CreateCustomFieldsHelp2, but put translation in parentheses after
 #      english : e.g.  'author' (translation-of-author from mtf, e.g. autor in spanish), so users know what they refer to
