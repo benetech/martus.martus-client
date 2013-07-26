@@ -94,7 +94,7 @@
 # 15       - We have file filters like 'Martus Report Format (.mrf)'
 #            and 'Martus Search Specification (.mss)'.
 #            The descriptive names should be translated, but the (.mrf) and (.mss)
-#            must not be translated.
+#            must not be translated. Similarly for .html, .htm, .mba, .mpi, .xml, .mct, .jpeg, .jpg, and .dat file extensions.
 # 16.  If you want your language to appear left to right,
 #      Comment the next line (by adding a # in front of !right-to-left)
 !right-to-left
