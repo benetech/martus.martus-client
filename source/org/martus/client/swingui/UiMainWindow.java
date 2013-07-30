@@ -1670,6 +1670,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			initializeViews();
 			restoreState();
 			getTransport().updateStatus();
+			backgroundUploadTimerTask.setWaitingForServer();
 			setVisible(true);
 		}
 
