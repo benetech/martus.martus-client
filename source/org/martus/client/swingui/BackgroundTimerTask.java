@@ -129,7 +129,7 @@ class BackgroundTimerTask extends TimerTask
 		}
 		else
 		{
-			mainWindow.setStatusMessageTag(UiMainWindow.STATUS_CONNECTING);
+			setWaitingForServer();
 		}
 	}
 
