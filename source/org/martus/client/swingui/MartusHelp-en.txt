@@ -1,6 +1,6 @@
---------
+﻿--------
 1. Introduction to the Martus™ Software
-Martus™ Software User Guide Version 4.2
+Martus™ Software User Guide Version 4.3
 --------
 1a. What is Martus™?
 Named after the Greek word for witness, the Martus Project provides an efficient and secure way to store and retrieve information about human rights abuses. Using the Martus application, you can create bulletins that record human rights abuses, attach supporting documents, specify whether the information should be public or private, and store the information on a secure server. Martus encrypts data directly on your computer, and sends this data in an encrypted form to a secure server when you have an internet connection. To learn more about the problems the Martus Project addresses, how Martus is being used throughout the world to securely collect and store sensitive data, and future plans for the project, visit https://www.martus.org. 
@@ -25,6 +25,8 @@ Use a password that you’ll remember, but that no one else can guess. Pay speci
 To keep your password secret, don’t write it down anywhere that it could be found and connected with the Martus software. Don’t send it to anyone through e-mail or give it to anyone over the phone, as those means of communications may not be secure.
 
 In addition to your password, you need your key to access your account. Make backup copies of your key and store them separately from your password. (For more information, see “9b. Backing up your key.”) This is important because if you are unable to start your computer or it is stolen, you’ll need to install the key on another computer to access the private data you have recorded, even if it’s stored on the Martus server.
+
+For additional security options when running Martus, see the Tor option in “2h. Setting your preferences” and see “11. Frequently Asked Questions” (FAQ) #53 and #54.
 --------
 1e. What are the limitations to Martus security?
 The Martus software uses very strong encryption technology to scramble your bulletins so that other people cannot read them on your hard drive.  However, since security involves people, and people are human, Martus security has limitations.  We want to make sure you understand these limitations, even though the software is designed to be very secure.  Here are some of the ways your private information may be compromised:
@@ -43,8 +45,6 @@ Although Martus has been reviewed extensively for strength of security, and comp
 Although these limitations may sound scary, Martus information is far more secure than information on paper or in most existing computer programs (including those used by banks.)  We explain these limitations to make sure you understand them, and the importance of being security-conscious in your use of Martus. Although we have built a very strong lock on your information, any lock can be unlocked by a key left out, and even the strongest locks can be broken with enough effort.
 
 Note: As described elsewhere in this User Guide, Martus allows you to attach files to bulletins. On most operating systems, when attachments are opened they are automatically saved in a ‘temporary’ directory, which is unencrypted. For information about the security precaution known as attachment ‘shredding,’ please see section “11. Frequently Asked Questions” (FAQ) #38. 
-
-For additional security options when running Martus, see “11. Frequently Asked Questions” (FAQ) #53 and #54.
 --------
 1f. Why send bulletins to the server?
 A Martus server is a computer server that accepts encrypted bulletins, securely backs them up, and replicates them to multiple locations, safeguarding the information from loss. (Benetech provides the server software to the organizations that host Martus servers, but it does not host Martus backup servers directly; e-mail info@martus.org for a list of potential server hosts.) Any bulletins you haven’t sent to a server exist only on your computer. If your computer is lost, stolen, or damaged, you could lose all of that data. The server acts as a backup mechanism, so the data entered into Martus can be recovered if you lose access to your computer. With your key and your username and password, you can install Martus on a different computer and access all the public and private data in bulletins you sent to the server. And if you have set up any Headquarters (HQ) accounts, sending bulletins to the server makes them available to those accounts (both public and private data).  See “9c. Restoring your key” and “9f. Sharing your private data with colleagues.” 
@@ -184,7 +184,7 @@ Manual installation using a ZIP or ISO file:
 13. Click the button called Run. This should launch Martus, which will confirm for you that you have done the Automator step of the process correctly.
 14. Before you exit the Automator, go to File > Save As. In the subsequent dialog, name the file Martus. Under “Where”, select Desktop. Finally, under “File Format”, be sure to select Application. Do not select Workflow. This will create an icon on your desktop called Martus which you can double-click to run the program. Please email help@martus.org if you need help with any of these steps.
 
-Note: In Mac OS, the Martus data folder is named .Martus and is located in your Home folder. This folder contains your Martus account and bulletin info, as well as other files created while using Martus, such as report/search templates, HQ information .mpi files, etc. The Martus data folder is also where you would place any language pack files. Normally the Martus data folder is hidden, so is not viewable using the Finder application. In order to access these files, you will need to set your computer preferences to "show" this hidden folder. To do so, follow these steps: 
+Note: In Mac OS, the Martus data folder is named .Martus and is located in your Home folder. This folder contains your Martus account and bulletin info, as well as other files created while using Martus, such as report/search templates, HQ information .mpi files, etc (though many of these can also be saved to other folders if desired). The Martus data folder is also where you would place any language pack files. Normally the Martus data folder is hidden, so is not viewable using the Finder application. In order to access these files, you will need to set your computer preferences to "show" this hidden folder. To do so, follow these steps: 
   
 1. Go to Finder > Applications > Utilities, and open the Terminal application. (You can also hit Command-Space to bring up the search, enter "terminal", and when it finds the Terminal app, launch it.)
 2. Type 
@@ -286,7 +286,6 @@ If you installed Martus with a DMG file on a Mac, you can uninstall Martus witho
 Note:  Please note that if you copied the Martus application (Martus.app) to your Applications folder or your Desktop (or elsewhere on your computer), it will not be removed when you uninstall Martus, which may be a security concern.
 
 To uninstall Martus in Linux (or if you installed using a zip or ISO file in Mac OS) without deleting your Martus bulletins or account data, delete the martus.jar and the ThirdParty directory.  
-
 
 If you want to delete bulletins and your key file, but keep the Martus application, choose Tools > Delete My Data. For more information, see “7. Deleting Your Bulletins and Account Information.”
 
@@ -423,6 +422,8 @@ If you are running Martus in a language other than Burmese and want to type or v
 If you never want to make bulletin data public, choose Options > Preferences. Then, check Prevent Creating Public Bulletins, and click OK. Until you uncheck this option, every bulletin you create in Martus is private, and you will not be able to uncheck the Keep ALL Information Private option in new bulletins.
 
 If you are a Headquarters account and want to be notified if there are field bulletins to retrieve, go to Options > Preferences, and select "Automatically check for new Field Desk bulletins." Approximately hourly, a message will appear in the status bar (lower left corner of the screen) saying that Martus is checking for new field desk bulletins.  The status bar will display another message if there are field bulletins to be retrieved, at which point you can go to the Server menu to load the Retrieve screen (see “6i. Retrieving bulletins created by field desks.”)  Please note that selecting this option can cause slower server performance, especially if you have a slow internet connection, so it should only be selected if your field desk accounts are actively creating bulletins.
+
+To run Martus using Tor, which can improve security of your Martus data when it is being sent to the servers, go to Options > Preferences, and select "Use embedded Tor".  For more information about Tor, go to https://www.torproject.org/ or see “11. Frequently Asked Questions” (FAQ) #53. 
 
 
 
@@ -734,7 +735,7 @@ If you are using a Headquarters account, you can retrieve draft or sealed bullet
 
 Tip:  You can sort the bulletins in the Retrieve screen by clicking on the column headers to help you find the bulletins you need (especially useful if you have a long list.) For example, you can sort by author (if you only want to retrieve the bulletins from a particular field office, by date (to find most recent bulletins) or by size (if you want to wait to retrieve a very large bulletin at a later time.) The sort functionality is ascending only.
 
-When you view a field desk bulletin, a bright yellow and black “Field Desk Bulletin” label appears at the top of the bulletin.
+When you view a field desk bulletin from someone you know, a bright green and black “Field Desk Bulletin” label appears at the top of the bulletin.
 
  We recommend that, when possible, Headquarters accounts “verify” their Field Desk accounts to ensure that the data is being sent from someone they know.  This is especially important when opening attachments inside bulletins to avoid malware or other potentially dangerous content.  
 
@@ -876,7 +877,7 @@ To create a new report format, click Create New Tabular Report or Create New Pag
 If you’re creating a tabular report, click Add in the Organize Report Fields dialog box to open the Create Report dialog box, select the fields you wish to include and hit OK. You can then change the order of fields on the report by selecting a field and clicking Move Up or Move Down. Click OK when you’ve arranged the fields the way you want them.
 
 
-4. In the Save Report Format As dialog box, enter a name for the format you’ve created, and then click Save. Martus saves the report format with an .mrf extension. 
+4. In the Save Report Format As dialog box, enter a name for the format you’ve created, and then click Save. Martus saves the report format with an .mrf extension in the directory you choose (it will put it in your Martus account directory by default). 
 
 Note: If you Cancel out of the Save Report Format As dialog box, your report format will be lost. You must save each report format you create in order to run the report. 
 
@@ -1173,7 +1174,7 @@ To verify a Field Desk account, the Field Desk account must export their public 
 Instructions for giving your account information to another Martus account 
 To share your public account ID and public code with other Martus accounts (e.g. a Headquarters account who wants to receive bulletins from people in the field, or a Field Desk account that wants to be verified by their Headquarters account):
 1. Create a Martus account. (See “2e. Setting up your account.”)
-2. In Martus, choose Tools > Export My Public Account ID, and name the file. Martus saves the file with a .mpi (Martus Public Information) extension in your account directory in the Martus folder on your hard drive, and confirms that it has been saved. 
+2. In Martus, choose Tools > Export My Public Account ID, and name the file. Martus saves the file with a .mpi (Martus Public Information) extension in your account directory in the Martus folder on your hard drive by default (though you can also save it elsewhere on your computer if desired), and confirms that it has been saved. 
 3. Give the .mpi file to the person using the other Martus account (either Headquarters or Field Desk).  If you can’t find your .mpi file on a Mac, see FAQ #48 (“Why can’t I find my Martus files on my Mac?”).
 4. Choose Help > View My Account Details.
 5. Write down the public code.
@@ -1194,9 +1195,12 @@ Import the HQ public account ID and public code:
 9. Click Save.
 
 
+Note:  For extra security and confirmation, you can also view a longer account identifier for your Headquarters Accounts by selecting a Headquarters row, hitting the “View” button, and confirming that the value you see in the “Public Account Id” field matches the value that your Headquarters account sees for “Public Account Id” when they go to Help > View My Account Details.
+
 Instructions for Field Desk users who want to update a group of bulletins to have a new Headquarters account
 If you have a new Headquarters account that does not have access to some of your old bulletins, you can give them access to a group of your bulletins at once, instead of having to do so one-by-one.  You can do this “bulk” or “batch” Headquarters access update for multiple bulletins by selecting the desired bulletins, and going to Edit > Update headquarters access. This option will be grayed out unless at least one bulletin is selected and at least one HQ is configured. Martus will display a progress bar during the update and allow you to cancel if desired. Draft bulletins will be updated to reflect the new HQ information. For sealed 
 bulletins, Martus will automatically generate a new sealed version of each bulletin.
+
 
 
 
@@ -1225,6 +1229,9 @@ Import the Field Desk public account ID and public code:
 7. Enter a label for the Field Desk account. Use a label that is meaningful to you, as you may not always remember the account's public code. The Field Desk account label might be the name of the person or organization, or the name of a city or region, for example. You can change the label later if you want to. Only you will see the label you assign; others who view the bulletin will not see the label, for security reasons.
 8. Click Save.
 
+ 
+
+Note:  For extra security and confirmation, you can also view a longer account identifier for your Field Desk Accounts by selecting a Field Desk row, hitting the “View” button, and confirming that the value you see in the “Public Account Id” field matches the value that your Field Desk account sees for “Public Account Id” when they go to Help > View My Account Details.
 --------
 9g. Enabling other accounts to send your bulletins to a server
 If you do not have the ability to connect to a server, you should have another account send your bulletins to a server for you to safeguard the information in the bulletins.  If you cannot backup your bulletins to a server from your account, you will not be able to recover them if your computer is damaged or stolen.  See “1f. Why send bulletins to the server?” for more information.  
@@ -1985,7 +1992,7 @@ If you pick a Reusable Choices dropdown field to search on, the values that are 
 If you have fields in different bulletins or from different customizations that are exactly the same, Martus will combine them in any Search and Report field lists.  And while Martus warns you about duplicate labels where you are creating a new bulletin customization, it is possible that over time, you may have bulletins with different customizations that ended up with the same labels (e.g. maybe you changed a text field to a dropdown field but kept the same label).  In these cases, Martus will try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists.  Also, if you have fields with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same.  So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion.  See section “10b. Customizing bulletin fields” for more information about configuring custom fields.
 
 48. Why can’t I find my Martus files on my Mac?
-In Mac OS, the Martus data directory (and some other program directories) are hidden by default. These directories are not viewable using the Finder application, and are prefaced with a "." (e.g. ".Martus"). Martus saves some files, such as the Headquarters information .mpi file, directly to the Martus directory. In order to access these files, you will need to set your computer preferences to "show" these hidden folders. To do so, follow these steps: 
+In Mac OS, the Martus data directory (and some other program directories) are hidden by default. These directories are not viewable using the Finder application, and are prefaced with a "." (e.g. ".Martus"). Martus saves some files, such as the Headquarters information .mpi file, directly to the Martus directory by default (though you can also choose to save them elsewhere on your computer). In order to access these files, you will need to set your computer preferences to "show" these hidden folders. To do so, follow these steps: 
 a)  Go to Finder > Applications > Utilities, and open the Terminal application. (You can also hit Command-Space to bring up the search, enter "terminal", and when it finds the Terminal app, launch it.)
 b)  Type 
   
@@ -2036,9 +2043,11 @@ Some users have noticed this issue when running Martus on Windows 7.  Please try
 53. I am concerned that my internet activity, and/or my connection and sending bulletins to the Martus servers, is being monitored or blocked.  What can I do? 
 The Onion Router, or Tor (https://www.torproject.org), is software and an open network that provides anonymity and privacy protection over the internet. Tor routes an internet user’s traffic through a global network of relays in such a way as to obscure both the origin and the destination of the traffic. By bouncing your communications around a distributed network all around the world, Tor helps defend against a form of network surveillance known as traffic analysis. It will make sending bulletins harder to track, but also much slower.
 
-WARNING: Before downloading, installing and using Tor, please read the full list of warnings available at https://www.torproject.org/download/download#warning. If you have any questions about what Tor does or does not do, or any other Tor-specific questions, email the Tor support team at help@rt.torproject.org. (For questions about Martus and Tor, email the Martus support team at help@martus.org). 
+WARNING: Before using Tor, please read the full list of warnings available at https://www.torproject.org/download/download#warning. If you have any questions about what Tor does or does not do, or any other Tor-specific questions, email the Tor support team at help@rt.torproject.org. (For questions about Martus and Tor, email the Martus support team at help@martus.org). 
 
-Martus can be configured to connect to the servers through the Tor network. After installing Martus (see section “2a. Installing”), follow the steps outlined below that correspond to your operating system.
+In Martus 4.3 and later, you can run Martus with Tor by going to Options > Preferences and checking the “Use Embedded Tor” box.
+
+In versions before 4.3, Martus can be configured to connect to the servers through the Tor network, but it requires additional configuration steps. After installing Martus (see section “2a. Installing”), follow the steps outlined below that correspond to your operating system.
 
 To run Martus over Tor on Windows, please do the following:
 1. Download and install the Tor Browser Bundle for Windows from https://www.torproject.org/download .
@@ -2101,7 +2110,6 @@ Note: Using this configuration, Martus will ONLY connect to the backup servers o
 If you have additional questions, please contact the Martus support team at help@martus.org. 
 
 54. I am concerned that my computer is compromised, and/or that my internet activity is constantly being monitored or blocked. What can I do to better protect myself while using Martus?
-
 Users operating in particularly oppressive or antagonistic online contexts may be interested in tools that better preserve their privacy, circumvent censorship and completely bypass a compromised hard drive.
 
 One such tool is Tails (The Amnesic Incognito Live System, https://tails.boum.org/) a free, open source bootable LiveUSB or LiveDVD that offers advanced security and privacy features by default. It allows users to boot from virtually any computer using a previously-configured DVD or USB stick, bypassing that computer’s internal hard drive. Tails anonymizes a user's internet activity by routing all connections through the Tor network (see previous FAQ), leaves no trace on the computer being used, and provides the latest open source cryptographic tools, allowing users to encrypt their emails, chats and files.
@@ -2130,21 +2138,21 @@ Note: Martus over Tails will only work on Windows/Linux computers, and not on Ma
 Once you have created your Tails LiveUSB, updated your computer’s boot order and configured the Persistent volume, please follow the instructions below to install Martus.
 
 1. Boot Tails on your computer.
-2. From the Tails desktop, open the "amnesia’s home" folder, and then the Persistent folder. Inside the Persistent folder, create a new folder named Martus.
-3. Download the latest Martus for Linux from https://www.martus.org/cgi-bin/download_martus.cgi. Save the .zip file to the Martus folder you just created.
-4. Extract the Martus .zip package to the same Martus folder, so that the location of all the files is /home/amnesia/Persistent/Martus
+2. From the Tails desktop, open the "amnesia’s home" folder, and then the Persistent folder. 
+3. Download the latest Martus for Linux from https://www.martus.org/cgi-bin/download_martus.cgi. Save the .zip file to the Persistent folder.
+4. Extract the Martus .zip package to the Persistent folder, so that the location of all the files is /home/amnesia/Persistent. This will create a new folder called MartusClient-version# (e.g. MartusClient-4.3.0).
 5. Open gedit Text Editor from Applications > Accessories. In the open text file, include the following (and ONLY the following, all of which must remain together as one line of text):
 
 java -DsocksProxyHost=127.0.0.1 -DsocksProxyPort=9050 -Duser.home="Accounts" -jar martus.jar 
 
-6. Save this file as “Run Martus” (without quotes) inside your /Persistent/Martus folder and close gedit.
-7. Open your Martus folder, right-click on the “Run Martus” file, and select Properties. Select the Permissions tab, and check the box next to "Allow executing file as program." Click “Close”.
+6. Save this file as “Run Martus” (without quotes) inside your /Persistent/Martus Client-version# (e.g. MartusClient-4.3.0). folder and close gedit.
+7. Open your Martus Client-version# (e.g. MartusClient-4.3.0). folder, right-click on the “Run Martus” file, and select Properties. Select the Permissions tab, and check the box next to "Allow executing file as program." Click “Close”.
 8. In your Martus folder, double-click the Run Martus icon. When prompted, select "Run in Terminal." You will see a Terminal window open, followed by Martus itself. This is how you will start Martus every time you want to run it.
 
 If you have any questions or experience any problems while installing or running Martus on Tails, please email help@martus.org. It is often helpful to include a copy of the text that is in the Terminal when you are running Martus when you email us. Please highlight this text, right-click and select copy, paste it into a gedit file, save the file, and attach it to your email.
 
 55. When I try to run Martus on my Mac (running OS 10.8), I see a message that says “Martus.app can’t be opened because it is from an unidentified developer.” How can I run Martus?
-
 On OSX Mountain Lion (10.8), the default security settings sometimes only allow users to run applications that either have been downloaded directly from the Mac App Store, or have been published by one of Apple’s identified developers. The current version of Martus does not meet those criteria, so you can get this warning if you double-click on the app to run it.
 
-Instead of double-clicking to run the Martus app, right-click and choose “Open”.  You will still get a warning screen, but you can choose to open the Martus app to run it.   
+Instead of double-clicking to run the Martus app, right-click and choose “Open”.  You will still get a warning screen, but you can choose to open the Martus app to run it.
+
