@@ -665,7 +665,7 @@ public class EnglishStrings
 "field:confirmAddingPermissionsToBulletinsCancelcause=The operation will be stopped immediately.",
 "field:confirmAddingPermissionsToBulletinsCanceleffect=If you do this, the bulletins already processed will have the new headquarters access, but other selected bulletins will not.",
 "wintitle:notifyViewKeyDetails=View Key Details",
-"field:notifyViewKeyDetailscause=Label: #Label#\n\nPublic Code: #PublicCode#\n\nFull Public Key: #PublicKey#",
+"field:notifyViewKeyDetailscause=Label: #Label#\n\nPublic Code: #PublicCode#\n\nPublic Account Id: #PublicKey#",
 "wintitle:FileDialogAddAttachment=Add Attachment",
 "button:FileDialogOkAddAttachment=Add Attachment",
 
