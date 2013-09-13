@@ -1763,6 +1763,7 @@ public class MartusApp
 	public void createAccountInternal(File accountDataDirectory, String userName, char[] userPassPhrase) throws
 		Exception
 	{
+		MartusLogger.log("Creating account with " + MartusCrypto.getBitsWhenCreatingKeyPair() + " bits");
 		File keyPairFile = getKeyPairFile(accountDataDirectory);
 		if(keyPairFile.exists())
 			throw(new AccountAlreadyExistsException());
