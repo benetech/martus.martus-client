@@ -120,6 +120,7 @@ import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.common.packet.UniversalId;
 import org.martus.jarverifier.JarVerifier;
 import org.martus.swing.FontHandler;
+import org.martus.util.DatePreference;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.Stopwatch;
 import org.martus.util.StreamCopier;
@@ -258,6 +259,9 @@ public class MartusApp
 			
 			if(MtfAwareLocalization.isRecognizedLanguage(languageCode))
 			{
+				MartusLogger.log("Setting default language: " + languageCode);
+				DatePreference datePref = MiniLocalization.getDefaultDatePreferenceForLanguage(languageCode);
+				MartusLogger.log("Setting default date fmt: " + datePref.getDateTemplate());
 				localization.setCurrentLanguageCode(languageCode);
 				localization.setDateFormatFromLanguage();
 			}
