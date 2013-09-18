@@ -108,11 +108,9 @@ public class UiCreateNewAccountProcess
 				defaultUserName = originalUserName;
 
 			UiSigninDlg signinDlg2 = getSigninResults( UiSigninDlg.RETYPE_USERNAME_PASSWORD, defaultUserName);
-			if (signinDlg1.getUserChoice() != UiSigninDlg.SIGN_IN)
-				
-			
 			if (signinDlg2.getUserChoice() != UiSigninDlg.SIGN_IN)
 				return;
+
 			String userName2 = signinDlg2.getNameText();
 			char[] userPassword2 = signinDlg2.getPassword();
 
