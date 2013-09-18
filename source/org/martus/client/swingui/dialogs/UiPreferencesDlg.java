@@ -199,7 +199,8 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(owner.getCurrentActiveFrame(), localization, languageCodeSelected);
 			UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner.getCurrentActiveFrame(), localization, languageCodeSelected);
 			localization.setMdyOrder(mdyDropdown.getText());
-			localization.setDateDelimiter(delimiterDropdown.getText().charAt(0));
+			String delimiter = delimiterDropdown.getText();
+			localization.setDateDelimiter(delimiter.charAt(0));
 			localization.setCurrentCalendarSystem(calendarDropdown.getText());
 			localization.setCurrentLanguageCode(languageDropdown.getText());
 			localization.setAdjustThaiLegacyDates(adjustThai.isSelected());
