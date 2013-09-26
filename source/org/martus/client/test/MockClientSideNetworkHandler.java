@@ -104,6 +104,11 @@ public class MockClientSideNetworkHandler implements ClientSideNetworkInterface
 		return server.getServerCompliance(myAccountId, parameters, signature);
 	}
 
+	public Vector getPartialUploadStatus(String publicKeyString, Vector parameters, String signature) 
+	{
+		return server.getPartialUploadStatus(publicKeyString, parameters, signature);
+	}
+
 	private Vector getFixedAuthorPlusRetrieveTagsVector(Vector parameters)
 	{
 		// NOTE: First element of parameters is Author key String, 

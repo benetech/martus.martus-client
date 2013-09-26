@@ -39,7 +39,9 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.ContactInfo;
+import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
+import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.MartusUtilities.FileTooLargeException;
 import org.martus.common.bulletin.Bulletin;
@@ -54,6 +56,7 @@ import org.martus.common.database.ReadableDatabase;
 import org.martus.common.database.Database.RecordHiddenException;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
+import org.martus.common.network.PartialUploadStatus;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.Packet.InvalidPacketException;
@@ -129,7 +132,7 @@ public class BackgroundUploader
 			MartusSignatureException
 	{
 		int totalSize = MartusUtilities.getCappedFileLength(tempFile);
-		int offset = getOffsetToStartUploading(tempFile);
+		int offset = getOffsetToStartUploading(uid, tempFile);
 		byte[] rawBytes = new byte[app.serverChunkSize];
 		FileInputStream inputStream = new FileInputStream(tempFile);
 		inputStream.skip(offset);
@@ -159,10 +162,27 @@ public class BackgroundUploader
 		return result;
 	}
 
-	private int getOffsetToStartUploading(File tempFile)
+	private int getOffsetToStartUploading(UniversalId uid, File tempFile)
 	{
-		// NOTE: For now, always start at the beginning
-		return 0;
+		ClientSideNetworkGateway gateway = app.getCurrentNetworkInterfaceGateway();
+		String authorId = uid.getAccountId();
+		String bulletinLocalId = uid.getLocalId();
+		try
+		{
+			PartialUploadStatus status = gateway.getPartialUploadStatus(app.getSecurity(), authorId, bulletinLocalId);
+			if(!status.hasPartialUpload())
+				return 0;
+			
+			// Verify SHA against tempfile
+			
+			// NOTE: For now, always start at the beginning
+			return 0;
+		} 
+		catch (ServerErrorException e)
+		{
+			MartusLogger.logException(e);
+			return 0;
+		}
 	}
 
 	BackgroundUploader.UploadResult uploadOneBulletin(BulletinFolder uploadFromFolder)
