@@ -129,9 +129,10 @@ public class BackgroundUploader
 			MartusSignatureException
 	{
 		int totalSize = MartusUtilities.getCappedFileLength(tempFile);
-		int offset = 0;
+		int offset = getOffsetToStartUploading(tempFile);
 		byte[] rawBytes = new byte[app.serverChunkSize];
 		FileInputStream inputStream = new FileInputStream(tempFile);
+		inputStream.skip(offset);
 		String result = null;
 		while(true)
 		{
@@ -156,6 +157,12 @@ public class BackgroundUploader
 		}
 		inputStream.close();
 		return result;
+	}
+
+	private int getOffsetToStartUploading(File tempFile)
+	{
+		// NOTE: For now, always start at the beginning
+		return 0;
 	}
 
 	BackgroundUploader.UploadResult uploadOneBulletin(BulletinFolder uploadFromFolder)
