@@ -175,10 +175,10 @@ public class BackgroundUploader
 			
 			// Verify SHA against tempfile
 			
-			// NOTE: For now, always start at the beginning
+			// NOTE: For now, always start uploading at the beginning
 			return 0;
 		} 
-		catch (ServerErrorException e)
+		catch (Exception e)
 		{
 			MartusLogger.logException(e);
 			return 0;
