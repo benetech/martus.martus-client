@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
 import java.util.Vector;
@@ -41,27 +42,20 @@ import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.ContactInfo;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
-import org.martus.common.MartusUtilities.ServerErrorException;
-import org.martus.common.ProgressMeterInterface;
 import org.martus.common.MartusUtilities.FileTooLargeException;
+import org.martus.common.ProgressMeterInterface;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinZipUtilities;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.crypto.MartusCrypto.CryptoException;
-import org.martus.common.crypto.MartusCrypto.DecryptionException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
-import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
+import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
-import org.martus.common.database.Database.RecordHiddenException;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.network.PartialUploadStatus;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
-import org.martus.common.packet.Packet.InvalidPacketException;
-import org.martus.common.packet.Packet.SignatureVerificationException;
-import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.util.StreamableBase64;
 
 public class BackgroundUploader
@@ -89,8 +83,7 @@ public class BackgroundUploader
 		return uploadResult;
 	}
 
-	public String uploadBulletin(Bulletin b) throws
-			InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException, CryptoException, FileNotFoundException, MartusSignatureException, FileTooLargeException, IOException, RecordHiddenException
+	public String uploadBulletin(Bulletin b) throws Exception
 	{
 		ClientBulletinStore store = app.getStore();
 		// FIXME: is it safe to skip if it's "probably" on the server???
@@ -173,15 +166,35 @@ public class BackgroundUploader
 			if(!status.hasPartialUpload())
 				return 0;
 			
-			// Verify SHA against tempfile
+			if(status.lengthOfPartialUpload() > Integer.MAX_VALUE)
+				return 0;
 			
-			// NOTE: For now, always start uploading at the beginning
+			int partialLength = (int)status.lengthOfPartialUpload();
+			String sha1Base64OnServer = status.sha1OfPartialUpload();
+			String sha1Base64Here = getPartialDigest(tempFile, partialLength);
+			if(sha1Base64Here.equals(sha1Base64OnServer))
+				return partialLength;
+			
 			return 0;
 		} 
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
 			return 0;
+		}
+	}
+
+	public String getPartialDigest(File file, long partialLength) throws Exception
+	{
+		InputStream in = new FileInputStream(file);
+		try
+		{
+			byte[] digest = MartusSecurity.createPartialDigest(in, partialLength);
+			return StreamableBase64.encode(digest);
+		}
+		finally
+		{
+			in.close();
 		}
 	}
 
@@ -238,32 +251,7 @@ public class BackgroundUploader
 			uploadResult.exceptionThrown = e.toString();
 			uploadResult.isHopelesslyDamaged = true;
 		} 
-		catch (MartusCrypto.NoKeyPairException e)
-		{
-			uploadResult.exceptionThrown = e.toString();
-			uploadResult.bulletinNotSentAndRemovedFromQueue = true;
-		} 
-		catch (FileNotFoundException e)
-		{
-			uploadResult.exceptionThrown = e.toString();
-			uploadResult.bulletinNotSentAndRemovedFromQueue = true;
-		} 
-		catch (MartusCrypto.MartusSignatureException e)
-		{
-			uploadResult.exceptionThrown = e.toString();
-			uploadResult.bulletinNotSentAndRemovedFromQueue = true;
-		} 
-		catch (MartusCrypto.CryptoException e)
-		{
-			uploadResult.exceptionThrown = e.toString();
-			uploadResult.bulletinNotSentAndRemovedFromQueue = true;
-		} 
-		catch (IOException e)
-		{
-			uploadResult.exceptionThrown = e.toString();
-			uploadResult.bulletinNotSentAndRemovedFromQueue = true;
-		}
-		catch (RecordHiddenException e)
+		catch (Exception e)
 		{
 			uploadResult.exceptionThrown = e.toString();
 			uploadResult.bulletinNotSentAndRemovedFromQueue = true;

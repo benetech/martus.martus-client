@@ -27,9 +27,6 @@ package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.Vector;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -38,15 +35,8 @@ import org.martus.clientside.FormatFilter;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinZipUtilities;
-import org.martus.common.crypto.MartusCrypto.CryptoException;
-import org.martus.common.crypto.MartusCrypto.DecryptionException;
-import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
-import org.martus.common.database.Database.RecordHiddenException;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
-import org.martus.common.packet.Packet.InvalidPacketException;
-import org.martus.common.packet.Packet.SignatureVerificationException;
-import org.martus.common.packet.Packet.WrongPacketTypeException;
 
 public class ActionMenuExportMba extends UiMenuAction
 {
@@ -86,7 +76,7 @@ public class ActionMenuExportMba extends UiMenuAction
 		}
 	}
 
-	private void exportBulletinToMba(Bulletin bulletin, File destination) throws UnsupportedEncodingException, InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException, FileNotFoundException, IOException, CryptoException, RecordHiddenException
+	private void exportBulletinToMba(Bulletin bulletin, File destination) throws Exception
 	{
 		ReadableDatabase db = mainWindow.getApp().getStore().getDatabase();
 		DatabaseKey headerKey = DatabaseKey.createKey(bulletin.getUniversalId(), bulletin.getStatus()); 
