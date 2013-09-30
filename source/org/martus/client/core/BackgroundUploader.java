@@ -170,11 +170,13 @@ public class BackgroundUploader
 				return 0;
 			
 			int partialLength = (int)status.lengthOfPartialUpload();
+			MartusLogger.log("Partial upload found, length=" + partialLength);
 			String sha1Base64OnServer = status.sha1OfPartialUpload();
 			String sha1Base64Here = getPartialDigest(tempFile, partialLength);
 			if(sha1Base64Here.equals(sha1Base64OnServer))
 				return partialLength;
 			
+			MartusLogger.log("Partial upload mismatch; will upload from scratch");
 			return 0;
 		} 
 		catch (Exception e)
