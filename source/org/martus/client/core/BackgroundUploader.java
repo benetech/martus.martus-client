@@ -155,7 +155,7 @@ public class BackgroundUploader
 		return result;
 	}
 
-	private int getOffsetToStartUploading(UniversalId uid, File tempFile)
+	public int getOffsetToStartUploading(UniversalId uid, File tempFile)
 	{
 		ClientSideNetworkGateway gateway = app.getCurrentNetworkInterfaceGateway();
 		String authorId = uid.getAccountId();
