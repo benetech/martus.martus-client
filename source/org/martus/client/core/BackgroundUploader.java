@@ -39,7 +39,6 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.ContactInfo;
-import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.FileTooLargeException;
 import org.martus.common.ProgressMeterInterface;
@@ -51,7 +50,6 @@ import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
-import org.martus.common.network.PartialUploadStatus;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.StreamableBase64;
@@ -156,37 +154,7 @@ public class BackgroundUploader
 	public int getOffsetToStartUploading(UniversalId uid, File tempFile)
 	{
 		ClientSideNetworkGateway gateway = app.getCurrentNetworkInterfaceGateway();
-		return getOffsetToStartUploading(gateway, uid, tempFile, app.getSecurity());
-	}
-
-	static public int getOffsetToStartUploading(ClientSideNetworkGateway gateway, UniversalId uid,	File tempFile, MartusCrypto security)
-	{
-		String authorId = uid.getAccountId();
-		String bulletinLocalId = uid.getLocalId();
-		try
-		{
-			PartialUploadStatus status = gateway.getPartialUploadStatus(security, authorId, bulletinLocalId);
-			if(!status.hasPartialUpload())
-				return 0;
-			
-			if(status.lengthOfPartialUpload() > Integer.MAX_VALUE)
-				return 0;
-			
-			int partialLength = (int)status.lengthOfPartialUpload();
-			MartusLogger.log("Partial upload found, length=" + partialLength);
-			String sha1Base64OnServer = status.sha1OfPartialUpload();
-			String sha1Base64Here = MartusCrypto.getPartialDigest(tempFile, partialLength);
-			if(sha1Base64Here.equals(sha1Base64OnServer))
-				return partialLength;
-			
-			MartusLogger.log("Partial upload mismatch; will upload from scratch");
-			return 0;
-		} 
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-			return 0;
-		}
+		return ClientSideNetworkGateway.getOffsetToStartUploading(gateway, uid, tempFile, app.getSecurity());
 	}
 
 	BackgroundUploader.UploadResult uploadOneBulletin(BulletinFolder uploadFromFolder)
