@@ -156,6 +156,11 @@ public class BackgroundUploader
 	public int getOffsetToStartUploading(UniversalId uid, File tempFile)
 	{
 		ClientSideNetworkGateway gateway = app.getCurrentNetworkInterfaceGateway();
+		return getOffsetToStartUploading(gateway, uid, tempFile);
+	}
+
+	public int getOffsetToStartUploading(ClientSideNetworkGateway gateway, UniversalId uid,	File tempFile)
+	{
 		String authorId = uid.getAccountId();
 		String bulletinLocalId = uid.getLocalId();
 		try
