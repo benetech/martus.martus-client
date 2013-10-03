@@ -30,7 +30,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
 import java.util.Vector;
@@ -48,7 +47,6 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinZipUtilities;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
-import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.network.NetworkInterfaceConstants;
@@ -172,7 +170,7 @@ public class BackgroundUploader
 			int partialLength = (int)status.lengthOfPartialUpload();
 			MartusLogger.log("Partial upload found, length=" + partialLength);
 			String sha1Base64OnServer = status.sha1OfPartialUpload();
-			String sha1Base64Here = getPartialDigest(tempFile, partialLength);
+			String sha1Base64Here = MartusCrypto.getPartialDigest(tempFile, partialLength);
 			if(sha1Base64Here.equals(sha1Base64OnServer))
 				return partialLength;
 			
@@ -183,20 +181,6 @@ public class BackgroundUploader
 		{
 			MartusLogger.logException(e);
 			return 0;
-		}
-	}
-
-	static public String getPartialDigest(File file, long partialLength) throws Exception
-	{
-		InputStream in = new FileInputStream(file);
-		try
-		{
-			byte[] digest = MartusSecurity.createPartialDigest(in, partialLength);
-			return StreamableBase64.encode(digest);
-		}
-		finally
-		{
-			in.close();
 		}
 	}
 
