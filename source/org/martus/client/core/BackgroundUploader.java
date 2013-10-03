@@ -186,7 +186,7 @@ public class BackgroundUploader
 		}
 	}
 
-	public String getPartialDigest(File file, long partialLength) throws Exception
+	static public String getPartialDigest(File file, long partialLength) throws Exception
 	{
 		InputStream in = new FileInputStream(file);
 		try
