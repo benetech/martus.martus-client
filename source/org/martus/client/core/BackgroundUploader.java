@@ -156,16 +156,16 @@ public class BackgroundUploader
 	public int getOffsetToStartUploading(UniversalId uid, File tempFile)
 	{
 		ClientSideNetworkGateway gateway = app.getCurrentNetworkInterfaceGateway();
-		return getOffsetToStartUploading(gateway, uid, tempFile);
+		return getOffsetToStartUploading(gateway, uid, tempFile, app.getSecurity());
 	}
 
-	public int getOffsetToStartUploading(ClientSideNetworkGateway gateway, UniversalId uid,	File tempFile)
+	static public int getOffsetToStartUploading(ClientSideNetworkGateway gateway, UniversalId uid,	File tempFile, MartusCrypto security)
 	{
 		String authorId = uid.getAccountId();
 		String bulletinLocalId = uid.getLocalId();
 		try
 		{
-			PartialUploadStatus status = gateway.getPartialUploadStatus(app.getSecurity(), authorId, bulletinLocalId);
+			PartialUploadStatus status = gateway.getPartialUploadStatus(security, authorId, bulletinLocalId);
 			if(!status.hasPartialUpload())
 				return 0;
 			
