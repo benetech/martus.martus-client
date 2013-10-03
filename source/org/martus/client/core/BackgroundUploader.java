@@ -154,7 +154,7 @@ public class BackgroundUploader
 	public int getOffsetToStartUploading(UniversalId uid, File tempFile)
 	{
 		ClientSideNetworkGateway gateway = app.getCurrentNetworkInterfaceGateway();
-		return ClientSideNetworkGateway.getOffsetToStartUploading(gateway, uid, tempFile, app.getSecurity());
+		return gateway.getOffsetToStartUploading(uid, tempFile, app.getSecurity());
 	}
 
 	BackgroundUploader.UploadResult uploadOneBulletin(BulletinFolder uploadFromFolder)
