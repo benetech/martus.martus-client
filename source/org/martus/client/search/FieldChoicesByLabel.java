@@ -35,6 +35,7 @@ import java.util.Vector;
 
 import javax.swing.tree.TreeNode;
 
+import org.martus.client.core.ZawgyiLabelUtilities;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -48,10 +49,11 @@ import org.martus.swing.FontHandler;
 
 public class FieldChoicesByLabel
 {
-	public FieldChoicesByLabel()
+	public FieldChoicesByLabel(MiniLocalization localizationToUse)
 	{
 		allChoices = new Vector();
 		fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
+		localization = localizationToUse;
 	}
 	
 	public void add(ChoiceItem itemToAdd)
@@ -65,10 +67,7 @@ public class FieldChoicesByLabel
 		while(iter.hasNext())
 		{
 			ChoiceItem choice = (ChoiceItem)iter.next();
-			String label = choice.getLabel();
-			boolean custom = StandardFieldSpecs.isCustomFieldTag(choice.getSpec().getTag());
-			if (custom)
-				label = fontHelper.getDisplayable(label);
+			String label = ZawgyiLabelUtilities.getDisplayableLabel(choice.getSpec(), localization);
 			choice.setLabel(label);
 			add(choice);
 		}
@@ -281,4 +280,5 @@ public class FieldChoicesByLabel
 	
 	Vector allChoices;
 	UiFontEncodingHelper fontHelper;
+	MiniLocalization localization;
 }

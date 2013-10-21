@@ -32,6 +32,7 @@ import java.util.Set;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.core.ZawgyiLabelUtilities;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.ReusableChoices;
@@ -80,7 +81,7 @@ public class FieldChooserSpecBuilder
 
 	FieldChoicesByLabel buildFieldChoicesByLabel(ClientBulletinStore storeToUse, MiniFieldSpec[] specsToInclude)
 	{
-		FieldChoicesByLabel allAvailableFields = new FieldChoicesByLabel();
+		FieldChoicesByLabel allAvailableFields = new FieldChoicesByLabel(localization);
 		if(shouldIncludeLastSaved())
 			allAvailableFields.add(createLastSavedDateChoice());
 		allAvailableFields.addAll(convertToChoiceItems(storeToUse.getAllKnownFieldSpecs(), storeToUse.getAllReusableChoiceLists()));

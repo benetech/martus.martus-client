@@ -87,7 +87,7 @@ public class TestFieldChoicesByLabel extends TestCaseEnhanced
 
 	private ChoiceItem[] runChoicesThroughFilter(ChoiceItem[] choices, MiniFieldSpec[] keep)
 	{
-		FieldChoicesByLabel  fcbl = new FieldChoicesByLabel();
+		FieldChoicesByLabel  fcbl = new FieldChoicesByLabel(localization);
 		fcbl.addAll(new HashSet(Arrays.asList(choices)));
 		fcbl.onlyKeep(keep);
 		return fcbl.getRawChoices();
@@ -98,7 +98,7 @@ public class TestFieldChoicesByLabel extends TestCaseEnhanced
 		FieldSpec a = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
 		FieldSpec b = FieldSpec.createCustomField(a.getTag(), a.getLabel(), new FieldTypeNormal());
 		
-		FieldChoicesByLabel choices = new FieldChoicesByLabel();
+		FieldChoicesByLabel choices = new FieldChoicesByLabel(localization);
 		choices.add(new SearchableFieldChoiceItem(a));
 		choices.add(new SearchableFieldChoiceItem(b));
 		choices.mergeSimilarDropdowns();
@@ -211,7 +211,7 @@ public class TestFieldChoicesByLabel extends TestCaseEnhanced
 		dropdown2.setLabel("Label");
 		dropdown2.setChoices(new ChoiceItem[] {new ChoiceItem("code2", "Aaaaa")});
 		
-		FieldChoicesByLabel fieldChoicesByLabel = new FieldChoicesByLabel();
+		FieldChoicesByLabel fieldChoicesByLabel = new FieldChoicesByLabel(localization);
 		fieldChoicesByLabel.add(new SearchableFieldChoiceItem(dropdown1));
 		fieldChoicesByLabel.add(new SearchableFieldChoiceItem(dropdown2));
 		
@@ -238,7 +238,7 @@ public class TestFieldChoicesByLabel extends TestCaseEnhanced
 		dropdown2.setLabel(dropdown1.getLabel());
 		dropdown2.addReusableChoicesCode("different");
 		
-		FieldChoicesByLabel choices = new FieldChoicesByLabel();
+		FieldChoicesByLabel choices = new FieldChoicesByLabel(localization);
 		choices.add(new SearchableFieldChoiceItem(dropdown1));
 		choices.add(new SearchableFieldChoiceItem(dropdown2));
 		
