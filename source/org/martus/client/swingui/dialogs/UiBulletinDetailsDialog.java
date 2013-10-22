@@ -45,6 +45,7 @@ import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.ExtendedHistoryEntry;
 import org.martus.common.packet.ExtendedHistoryList;
 import org.martus.common.packet.UniversalId;
+import org.martus.common.utilities.BurmeseUtilities;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
@@ -225,7 +226,10 @@ public class UiBulletinDetailsDialog extends JDialog
 	{
 		Bulletin b = mainWindow.getStore().getBulletinRevision(uid);
 		if(b != null)
-			return b.get(Bulletin.TAGTITLE);
+		{
+			final String title = b.get(Bulletin.TAGTITLE);
+			return BurmeseUtilities.getDisplayable(title);
+		}
 		
 		if(uid.equals(bulletin.getUniversalId()))
 			return getLabel("InProgressTitle");
