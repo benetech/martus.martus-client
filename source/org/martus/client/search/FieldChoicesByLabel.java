@@ -67,7 +67,7 @@ public class FieldChoicesByLabel
 		while(iter.hasNext())
 		{
 			ChoiceItem choice = (ChoiceItem)iter.next();
-			String label = ZawgyiLabelUtilities.getDisplayableLabel(choice.getSpec(), localization);
+			String label = ZawgyiLabelUtilities.getDisplayableLabel(choice.getSpec());
 			choice.setLabel(label);
 			add(choice);
 		}

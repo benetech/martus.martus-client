@@ -34,6 +34,7 @@ import javax.swing.JComponent;
 
 import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.core.MartusApp;
+import org.martus.client.core.ZawgyiLabelUtilities;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiDateEditor;
@@ -287,9 +288,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
 		{
 			String tag = context.getFieldSpec(fieldNum).getTag();
-			String label = getLocalization().getFieldLabel(tag);
-			if(StandardFieldSpecs.isCustomFieldTag(tag))
-				label = context.getFieldSpec(fieldNum).getLabel();
+			String label = ZawgyiLabelUtilities.getDisplayableLabel(context.getFieldSpec(fieldNum));
 			try 
 			{
 				fields[fieldNum].validate(context.getFieldSpec(fieldNum), label);
