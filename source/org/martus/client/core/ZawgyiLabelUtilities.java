@@ -12,7 +12,7 @@ import org.martus.swing.FontHandler;
  */
 public class ZawgyiLabelUtilities
 {
-	public static String getDisplayableLabel(FieldSpec spec, MiniLocalization localization)
+	public static String getDisplayableLabel(FieldSpec spec)
 	{
 		FieldSpec baseSpec = spec.getParent();
 		if(baseSpec == null)
