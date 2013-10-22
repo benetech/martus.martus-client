@@ -1,7 +1,6 @@
 package org.martus.client.core;
 
 import org.martus.client.swingui.UiFontEncodingHelper;
-import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.swing.FontHandler;
