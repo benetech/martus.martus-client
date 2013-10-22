@@ -14,11 +14,17 @@ public class ZawgyiLabelUtilities
 {
 	public static String getDisplayableLabel(FieldSpec spec, MiniLocalization localization)
 	{
-		boolean custom = StandardFieldSpecs.isCustomFieldTag(spec.getTag());
-		if (!custom)
-			return localization.getFieldLabel(spec.getTag());
+		FieldSpec baseSpec = spec.getParent();
+		if(baseSpec == null)
+			baseSpec = spec;
+		boolean custom = StandardFieldSpecs.isCustomFieldTag(baseSpec.getTag());
+		String label = spec.getLabel();
+		if (custom)
+		{
+			UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
+			label = fontHelper.getDisplayable(spec.getLabel());
+		}
 
-		UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
-		return fontHelper.getDisplayable(spec.getLabel());
+		return label;
 	}
 }
