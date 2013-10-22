@@ -698,7 +698,7 @@
 -bc78-field:DateNotSpecified=အမ်ိဳးအမည္မသိ
 
 #______________________=Day
--987b-field:DatePartDay=ရက္စြဲ
+-987b-field:DatePartDay=ရက္၈ဲွ
 
 #________________________=Month
 -082b-field:DatePartMonth=လ
