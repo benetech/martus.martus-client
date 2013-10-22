@@ -31,6 +31,7 @@ import java.util.HashMap;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 
+import org.martus.client.core.ZawgyiLabelUtilities;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiGridDateRangeEditorViewer;
@@ -56,7 +57,7 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 	{
 		try
 		{
-			String label = gridSpec.getLabel() + ": " + fieldSpecBeingEdited.getLabel();
+			String label = gridSpec.getLabel() + ": " + ZawgyiLabelUtilities.getDisplayableLabel(fieldSpecBeingEdited);
 			uiField.validate(fieldSpecBeingEdited, label);
 			return super.stopCellEditing();
 		}
