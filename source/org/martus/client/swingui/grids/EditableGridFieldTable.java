@@ -80,7 +80,7 @@ public class EditableGridFieldTable extends GridFieldTable
 		if(type.isDate())
 			return new GridDateCellEditor((DateFieldSpec)cellFieldSpec, localization);
 		if(type.isDateRange())
-			return new GridDateRangeCellEditor(dlgLauncher, getGridFieldSpec(), (DateRangeFieldSpec)cellFieldSpec);
+			return new GridDateRangeCellEditor(dlgLauncher, getGridFieldSpec(), (DateRangeFieldSpec)cellFieldSpec, localization);
 		if(type.isDropdown() || type.isLanguageDropdown())
 			return new GridDropDownCellEditor(context, localization);
 		if(type.isPopUpTree())

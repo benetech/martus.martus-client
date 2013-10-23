@@ -35,6 +35,7 @@ import org.martus.client.core.ZawgyiLabelUtilities;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiGridDateRangeEditorViewer;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.DateRangeFieldSpec;
 import org.martus.common.fieldspec.DateRangeInvertedException;
@@ -46,18 +47,19 @@ import org.martus.swing.UiComboBox;
 
 public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 {
-	GridDateRangeCellEditor(UiDialogLauncher dlgLauncherToUse, GridFieldSpec gridSpecToUse, DateRangeFieldSpec cellFieldSpec)
+	GridDateRangeCellEditor(UiDialogLauncher dlgLauncherToUse, GridFieldSpec gridSpecToUse, DateRangeFieldSpec cellFieldSpec, MiniLocalization localizationToUse)
 	{
 		super(new UiGridDateRangeEditorViewer(cellFieldSpec, dlgLauncherToUse.GetLocalization()));
 		dlgLauncher = dlgLauncherToUse;
 		gridSpec = gridSpecToUse;
+		localization = localizationToUse;
 	}
 
 	public boolean stopCellEditing()
 	{
 		try
 		{
-			String label = gridSpec.getLabel() + ": " + ZawgyiLabelUtilities.getDisplayableLabel(fieldSpecBeingEdited);
+			String label = gridSpec.getLabel() + ": " + ZawgyiLabelUtilities.getDisplayableLabel(fieldSpecBeingEdited, getLocalization());
 			uiField.validate(fieldSpecBeingEdited, label);
 			return super.stopCellEditing();
 		}
@@ -117,9 +119,15 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 		if(!date.isPopupVisible())
 			date.requestFocus();
 	}
+	
+	private MiniLocalization getLocalization()
+	{
+		return localization;
+	}
 
 	String originalDate;
 	FieldSpec fieldSpecBeingEdited;
 	UiDialogLauncher dlgLauncher;
 	private GridFieldSpec gridSpec;
+	private MiniLocalization localization;
 }

@@ -79,7 +79,7 @@ public class SearchGridTable extends GridTable
 		UiLocalization localization = dlgLauncher.GetLocalization();
 		map.put(new FieldTypeBoolean(), new GridBooleanCellEditor(localization));
 		map.put(new FieldTypeDate(), new GridDateCellEditor((DateFieldSpec)new FieldTypeDate().createEmptyFieldSpec(), localization));
-		map.put(new FieldTypeDateRange(), new GridDateRangeCellEditor(dlgLauncher, getGridFieldSpec(), (DateRangeFieldSpec) new FieldTypeDateRange().createEmptyFieldSpec()));
+		map.put(new FieldTypeDateRange(), new GridDateRangeCellEditor(dlgLauncher, getGridFieldSpec(), (DateRangeFieldSpec) new FieldTypeDateRange().createEmptyFieldSpec(), localization));
 		map.put(new FieldTypeDropdown(), new GridDropDownCellEditor(context, localization));
 		map.put(new FieldTypeLanguage(), new GridDropDownCellEditor(context, localization));
 		map.put(new FieldTypeNormal(), new GridNormalCellEditor(localization));

@@ -1,6 +1,7 @@
 package org.martus.client.core;
 
 import org.martus.client.swingui.UiFontEncodingHelper;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.swing.FontHandler;
@@ -11,7 +12,7 @@ import org.martus.swing.FontHandler;
  */
 public class ZawgyiLabelUtilities
 {
-	public static String getDisplayableLabel(FieldSpec spec)
+	public static String getDisplayableLabel(FieldSpec spec, MiniLocalization localization)
 	{
 		FieldSpec baseSpec = spec.getParent();
 		if(baseSpec == null)
@@ -22,6 +23,10 @@ public class ZawgyiLabelUtilities
 		{
 			UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
 			label = fontHelper.getDisplayable(spec.getLabel());
+		}
+		else
+		{
+			label = localization.getFieldLabel(spec.getTag());
 		}
 
 		return label;
