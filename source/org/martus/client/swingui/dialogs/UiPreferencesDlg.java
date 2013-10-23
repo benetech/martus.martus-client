@@ -34,13 +34,16 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 
 import org.martus.client.core.FontSetter;
+import org.martus.client.core.ZawgyiLabelUtilities;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.swing.FontHandler;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiLabel;
@@ -180,11 +183,15 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 				case 'd': tag = "Day"; break;
 			}
 			dateParts.add(" ");
-			dateParts.add(localization.getFieldLabel("DatePart" + tag));
+			String translated = localization.getFieldLabel("DatePart" + tag);
+			
+			String storableSinceThisIsInADropdown = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion()).getStorable(translated);
+			dateParts.add(storableSinceThisIsInADropdown);
 		}
 		dateParts.add(" ");
 
-		return Utilities.createStringRespectingOrientation(dateParts);
+		String label = Utilities.createStringRespectingOrientation(dateParts);
+		return label;
 	}
 
 
