@@ -31,6 +31,7 @@ import java.text.ParseException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.GridData;
@@ -44,6 +45,7 @@ import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.common.fieldspec.GridFieldSpec.UnsupportedFieldTypeException;
+import org.martus.swing.FontHandler;
 
 public class FancySearchHelper
 {
@@ -105,7 +107,9 @@ public class FancySearchHelper
 	
 	private ChoiceItem createLocalizedChoiceItem(String tag)
 	{
-		return new ChoiceItem(tag, getLocalization().getKeyword(tag));
+		String translated = getLocalization().getKeyword(tag);
+		String storableSinceThisIsInADropdown = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion()).getStorable(translated);
+		return new ChoiceItem(tag, storableSinceThisIsInADropdown);
 	}
 	
 	public void setSearchFromJson(GridData gridData, JSONObject json)
