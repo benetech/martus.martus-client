@@ -52,7 +52,6 @@ import org.martus.common.fieldspec.DateTooLateException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.RequiredFieldIsBlankException;
-import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiWrappedTextArea;
@@ -287,7 +286,6 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	{
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
 		{
-			String tag = context.getFieldSpec(fieldNum).getTag();
 			String label = ZawgyiLabelUtilities.getDisplayableLabel(context.getFieldSpec(fieldNum));
 			try 
 			{
