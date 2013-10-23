@@ -44,7 +44,6 @@ import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
-import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.swing.FontHandler;
 
 public class FieldChoicesByLabel
@@ -67,7 +66,7 @@ public class FieldChoicesByLabel
 		while(iter.hasNext())
 		{
 			ChoiceItem choice = (ChoiceItem)iter.next();
-			String label = ZawgyiLabelUtilities.getDisplayableLabel(choice.getSpec());
+			String label = ZawgyiLabelUtilities.getDisplayableLabel(choice.getSpec(), localization);
 			choice.setLabel(label);
 			add(choice);
 		}

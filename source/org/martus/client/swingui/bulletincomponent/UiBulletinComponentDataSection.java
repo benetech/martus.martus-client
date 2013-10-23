@@ -286,7 +286,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	{
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
 		{
-			String label = ZawgyiLabelUtilities.getDisplayableLabel(context.getFieldSpec(fieldNum));
+			String label = ZawgyiLabelUtilities.getDisplayableLabel(context.getFieldSpec(fieldNum), getLocalization());
 			try 
 			{
 				fields[fieldNum].validate(context.getFieldSpec(fieldNum), label);
