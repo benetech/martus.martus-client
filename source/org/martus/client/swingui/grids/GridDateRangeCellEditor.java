@@ -59,7 +59,7 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 	{
 		try
 		{
-			String displayableGridLabel = gridSpec.getLabel();
+			String displayableGridLabel = ZawgyiLabelUtilities.getDisplayableLabel(gridSpec, getLocalization());
 			String displayableColumnLabel = ZawgyiLabelUtilities.getDisplayableLabel(fieldSpecBeingEdited, getLocalization());
 			String label = displayableGridLabel + ": " + displayableColumnLabel;
 			uiField.validate(fieldSpecBeingEdited, label);
