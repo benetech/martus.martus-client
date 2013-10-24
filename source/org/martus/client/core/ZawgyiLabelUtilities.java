@@ -24,9 +24,10 @@ public class ZawgyiLabelUtilities
 			UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
 			label = fontHelper.getDisplayable(spec.getLabel());
 		}
-		else
+		else if(baseSpec.getParent() != null)
 		{
-			label = localization.getFieldLabel(spec.getTag());
+			String tag = spec.getTag();
+			label = localization.getFieldLabel(tag);
 		}
 
 		return label;
