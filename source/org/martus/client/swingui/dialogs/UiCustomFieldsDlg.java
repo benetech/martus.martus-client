@@ -312,7 +312,8 @@ public class UiCustomFieldsDlg extends JDialog
 			StringBuilder thisErrorMessage = new StringBuilder(GetDataAndSpacing(thisError.getCode(), HEADER_SPACING_1));
 			thisErrorMessage.append(GetDataAndSpacing(thisError.getType(), HEADER_SPACING_2));
 			thisErrorMessage.append(GetDataAndSpacing(thisError.getTag(), HEADER_SPACING_3));
-			thisErrorMessage.append(thisError.getLabel());
+			String label = fontHelper.getDisplayable(thisError.getLabel());
+			thisErrorMessage.append(label);
 			errorMessage.append(thisErrorMessage);
 			errorMessage.append('\n');
 		}
