@@ -90,7 +90,10 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			fields[fieldNum] = createField(spec, listener);
 			
 			if(spec.getType().isSectionStart())
-				startNewGroup("_Section" + spec.getTag(), spec.getLabel());
+			{
+				String label = spec.getLabel();
+				startNewGroup("_Section" + spec.getTag(), label);
+			} 
 			else
 			{
 				// FIXME: ask spec whether to keep on line or not
