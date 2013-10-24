@@ -91,7 +91,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			
 			if(spec.getType().isSectionStart())
 			{
-				String label = spec.getLabel();
+				String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, getLocalization());
 				startNewGroup("_Section" + spec.getTag(), label);
 			} 
 			else
