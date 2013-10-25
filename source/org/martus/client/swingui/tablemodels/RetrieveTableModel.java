@@ -37,6 +37,7 @@ import java.util.Vector;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.RetrieveSummariesProgressMeter;
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.BulletinSummary;
 import org.martus.common.MartusLogger;
@@ -50,6 +51,7 @@ import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
+import org.martus.swing.FontHandler;
 import org.martus.swing.UiTableModel;
 
 abstract public class RetrieveTableModel extends UiTableModel  
@@ -124,13 +126,14 @@ abstract public class RetrieveTableModel extends UiTableModel
 		return unformatted;
 	}
 
-	Object getUnformattedValueAt(BulletinSummary summary, int column) {
+	Object getUnformattedValueAt(BulletinSummary summary, int column) 
+	{
 		if(column == COLUMN_RETRIEVE_FLAG)
 			return new Boolean(summary.isChecked());
 		if(column == COLUMN_TITLE)
-			return summary.getStorableTitle();
+			return getDisplayable(summary.getStorableTitle());
 		if(column == COLUMN_AUTHOR)
-			return summary.getStorableAuthor();
+			return getDisplayable(summary.getStorableAuthor());
 		if(column == COLUMN_LAST_DATE_SAVED)
 			return new Long(summary.getDateTimeSaved());
 		if(column == COLUMN_BULLETIN_SIZE)
@@ -140,6 +143,12 @@ abstract public class RetrieveTableModel extends UiTableModel
 		if(column == COLUMN_VERSION_NUMBER)
 			return new Integer(summary.getVersionNumber());
 		return "";
+	}
+
+	private Object getDisplayable(String storableTitle)
+	{
+		UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
+		return fontHelper.getDisplayable(storableTitle);
 	}
 
 	public void setValueAt(Object value, int row, int column)
