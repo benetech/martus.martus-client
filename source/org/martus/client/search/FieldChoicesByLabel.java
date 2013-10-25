@@ -72,16 +72,16 @@ public class FieldChoicesByLabel
 		}
 	}
 	
-	public void onlyKeep(MiniFieldSpec[] specs)
+	public void onlyKeep(MiniFieldSpec[] allowedSpecs)
 	{
-		HashSet specSet = new HashSet();
-		specSet.addAll(Arrays.asList(specs));
+		HashSet allowedSpecSet = new HashSet();
+		allowedSpecSet.addAll(Arrays.asList(allowedSpecs));
 		Vector newChoices = new Vector();
 		for(int i = 0; i < allChoices.size(); ++i)
 		{
 			ChoiceItem choice = (ChoiceItem)allChoices.get(i);
 			MiniFieldSpec spec = new MiniFieldSpec(choice.getSpec());
-			if(specSet.contains(spec))
+			if(allowedSpecSet.contains(spec))
 				newChoices.add(choice);
 		}
 		
