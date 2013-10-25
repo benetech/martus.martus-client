@@ -32,10 +32,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.common.BulletinSummary;
 import org.martus.common.packet.UniversalId;
+import org.martus.swing.FontHandler;
 
 
 public class UiServerSummariesRetrieveDlg extends UiServerSummariesDlg
@@ -75,6 +77,7 @@ public class UiServerSummariesRetrieveDlg extends UiServerSummariesDlg
 	
 	private String getDisplayableTitleFromSummary(UniversalId uid)
 	{
+		UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
 		Vector summaries = model.getAllSummaries();
 		synchronized (summaries)
 		{
@@ -84,7 +87,7 @@ public class UiServerSummariesRetrieveDlg extends UiServerSummariesDlg
 				if (uid.equals(summary.getUniversalId()))
 				{
 					String storableTitle = summary.getStorableTitle();
-					return storableTitle;
+					return fontHelper.getDisplayable(storableTitle);
 				}
 			}
 		}
