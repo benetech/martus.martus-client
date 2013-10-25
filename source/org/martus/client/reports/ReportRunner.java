@@ -39,7 +39,7 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.SafeReadableBulletin;
 import org.martus.client.core.SortableBulletinList;
-import org.martus.common.MiniLocalization;
+import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.Bulletin;
@@ -55,6 +55,7 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
+import org.martus.swing.FontHandler;
 
 
 public class ReportRunner
@@ -63,6 +64,7 @@ public class ReportRunner
 	{
 		signatureVerifier = app.getSecurity();
 		localization = app.getLocalization();
+		localization.setSpecialZawgyiFlagForReportRunner(FontHandler.isDoZawgyiConversion());
 		
 		File logFile = new File(app.getCurrentAccountDirectory(), "velocity.log");
 		engine = new VelocityEngine();
@@ -354,7 +356,7 @@ public class ReportRunner
 	}
 
 	VelocityEngine engine;
-	MiniLocalization localization;
+	MtfAwareLocalization localization;
 	MartusCrypto signatureVerifier;
 	VelocityContext context;
 }
