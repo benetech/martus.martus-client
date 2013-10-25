@@ -82,7 +82,10 @@ public class UiServerSummariesRetrieveDlg extends UiServerSummariesDlg
 			{
 				BulletinSummary summary = (BulletinSummary) summaries.get(j);
 				if (uid.equals(summary.getUniversalId()))
-					return summary.getStorableTitle();
+				{
+					String storableTitle = summary.getStorableTitle();
+					return storableTitle;
+				}
 			}
 		}
 		return "?";
