@@ -81,6 +81,8 @@ public class FieldChoicesByLabel
 		{
 			ChoiceItem choice = (ChoiceItem)allChoices.get(i);
 			MiniFieldSpec spec = new MiniFieldSpec(choice.getSpec());
+			spec.setLabel(fontHelper.getStorable(spec.getLabel()));
+			spec.setTopLevelLabel(fontHelper.getStorable(spec.getTopLevelLabel()));
 			if(isSpecInAllowed(spec, allowedSpecSet))
 				newChoices.add(choice);
 		}
@@ -88,9 +90,9 @@ public class FieldChoicesByLabel
 		allChoices = newChoices;
 	}
 
-	private boolean isSpecInAllowed(MiniFieldSpec spec, HashSet allowedSpecSet)
+	private boolean isSpecInAllowed(MiniFieldSpec specToFind, HashSet allowedSpecSet)
 	{
-		return allowedSpecSet.contains(spec);
+		return allowedSpecSet.contains(specToFind);
 	}
 	
 	public ChoiceItem[] getRawChoices()
