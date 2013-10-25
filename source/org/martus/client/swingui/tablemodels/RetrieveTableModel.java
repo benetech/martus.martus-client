@@ -128,9 +128,9 @@ abstract public class RetrieveTableModel extends UiTableModel
 		if(column == COLUMN_RETRIEVE_FLAG)
 			return new Boolean(summary.isChecked());
 		if(column == COLUMN_TITLE)
-			return summary.getDisplayableTitle();
+			return summary.getStorableTitle();
 		if(column == COLUMN_AUTHOR)
-			return summary.getDisplayableAuthor();
+			return summary.getStorableAuthor();
 		if(column == COLUMN_LAST_DATE_SAVED)
 			return new Long(summary.getDateTimeSaved());
 		if(column == COLUMN_BULLETIN_SIZE)
