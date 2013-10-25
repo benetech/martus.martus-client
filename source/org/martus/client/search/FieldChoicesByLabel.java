@@ -81,11 +81,16 @@ public class FieldChoicesByLabel
 		{
 			ChoiceItem choice = (ChoiceItem)allChoices.get(i);
 			MiniFieldSpec spec = new MiniFieldSpec(choice.getSpec());
-			if(allowedSpecSet.contains(spec))
+			if(isSpecInAllowed(spec, allowedSpecSet))
 				newChoices.add(choice);
 		}
 		
 		allChoices = newChoices;
+	}
+
+	private boolean isSpecInAllowed(MiniFieldSpec spec, HashSet allowedSpecSet)
+	{
+		return allowedSpecSet.contains(spec);
 	}
 	
 	public ChoiceItem[] getRawChoices()
