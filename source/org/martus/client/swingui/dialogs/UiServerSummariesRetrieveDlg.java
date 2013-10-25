@@ -62,7 +62,7 @@ public class UiServerSummariesRetrieveDlg extends UiServerSummariesDlg
 			for(Iterator iter = uidsBeingUpgraded.iterator(); iter.hasNext();)
 			{
 				UniversalId uid = (UniversalId) iter.next();
-				titles += "   " + getTitleFromSummary(uid) + "\n";
+				titles += "   " + getDisplayableTitleFromSummary(uid) + "\n";
 			}
 			Map replacements = new HashMap();
 			replacements.put("#Titles#", titles);
@@ -73,7 +73,7 @@ public class UiServerSummariesRetrieveDlg extends UiServerSummariesDlg
 		return super.confirmIntentionsBeforeClosing();
 	}
 	
-	private String getTitleFromSummary(UniversalId uid)
+	private String getDisplayableTitleFromSummary(UniversalId uid)
 	{
 		Vector summaries = model.getAllSummaries();
 		synchronized (summaries)
