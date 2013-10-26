@@ -289,10 +289,12 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	{
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
 		{
-			String label = ZawgyiLabelUtilities.getDisplayableLabel(context.getFieldSpec(fieldNum), getLocalization());
+			FieldSpec spec = context.getFieldSpec(fieldNum);
+			String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, getLocalization());
 			try 
 			{
-				fields[fieldNum].validate(context.getFieldSpec(fieldNum), label);
+				UiField thisField = fields[fieldNum];
+				thisField.validate(spec, label);
 			} 
 			catch (UiDateEditor.DateFutureException e) 
 			{
