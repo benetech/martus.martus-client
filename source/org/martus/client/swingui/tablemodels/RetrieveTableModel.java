@@ -145,8 +145,11 @@ abstract public class RetrieveTableModel extends UiTableModel
 		return "";
 	}
 
-	private Object getDisplayable(String storableTitle)
+	private String getDisplayable(String storableTitle)
 	{
+		if(storableTitle == null)
+			return "";
+		
 		UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
 		return fontHelper.getDisplayable(storableTitle);
 	}
