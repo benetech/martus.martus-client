@@ -39,6 +39,7 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.SafeReadableBulletin;
 import org.martus.client.core.SortableBulletinList;
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.ReusableChoices;
@@ -65,6 +66,7 @@ public class ReportRunner
 		signatureVerifier = app.getSecurity();
 		localization = app.getLocalization();
 		localization.setSpecialZawgyiFlagForReportRunner(FontHandler.isDoZawgyiConversion());
+		fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
 		
 		File logFile = new File(app.getCurrentAccountDirectory(), "velocity.log");
 		engine = new VelocityEngine();
@@ -213,7 +215,8 @@ public class ReportRunner
 			for(int i = 0; i < breakSpecsToUse.length; ++i)
 			{
 				MiniFieldSpec spec = breakSpecsToUse[i];
-				breakLabels.add(StandardFieldSpecs.getLocalizedLabelHtml(spec.getTag(), spec.getLabel(), localization));
+				String localizedLabelHtml = StandardFieldSpecs.getLocalizedLabelHtml(spec.getTag(), spec.getLabel(), localization);
+				breakLabels.add(fontHelper.getStorable(localizedLabelHtml));
 			}
 			summaryCounts = new SummaryCount(breakLabels);
 		}
@@ -305,7 +308,9 @@ public class ReportRunner
 					dropdownSpec.addReusableChoicesCode(choicesForThisBreak.getCode());
 				}
 				spec.setTag(miniSpec.getTag());
-				spec.setLabel(miniSpec.getLabel());
+				String displayableLabel = miniSpec.getLabel();
+				String storableLabel = fontHelper.getStorable(displayableLabel);
+				spec.setLabel(storableLabel);
 				MartusField field = MartusSearchableGridColumnField.createMartusField(spec, reusableChoicesForThisBreakOnly);
 				field.setData(previousValue.getCode());
 				breakFields.add(field);
@@ -359,4 +364,5 @@ public class ReportRunner
 	MtfAwareLocalization localization;
 	MartusCrypto signatureVerifier;
 	VelocityContext context;
+	UiFontEncodingHelper fontHelper;
 }
