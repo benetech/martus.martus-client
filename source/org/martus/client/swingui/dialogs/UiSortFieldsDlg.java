@@ -147,8 +147,6 @@ public class UiSortFieldsDlg extends JDialog implements ActionListener
 			if(spec.getTag().length() == 0)
 				break;
 			sortMiniSpecs.add(spec);
-			
-			System.out.println("ActionMenuReport.getSortTags: " + spec);
 		}
 		savedBreakChoice = (ChoiceItem)breakChoice.getSelectedItem();
 	}
