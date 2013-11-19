@@ -376,11 +376,19 @@ public class MartusApp
 		return keyStrings;
 	}
 
-	public FieldDeskKeys getFieldDeskKeys() throws Exception
+	public FieldDeskKeys getFieldDeskKeys()
 	{
-		String xml = getConfigInfo().getFieldDeskKeysXml();
-		FieldDeskKeys keys = new FieldDeskKeys(xml);
-		return keys;
+		try
+		{
+			String xml = getConfigInfo().getFieldDeskKeysXml();
+			FieldDeskKeys keys = new FieldDeskKeys(xml);
+			return keys;
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			return new FieldDeskKeys();
+		}
 	}
 
 	public boolean isVerifiedFieldDeskAccount(String authorPublicKeyString) throws Exception
