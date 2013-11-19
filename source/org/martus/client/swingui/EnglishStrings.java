@@ -112,6 +112,7 @@ public class EnglishStrings
 "wintitle:confirmSealingSelectedBulletinsCancel=Sealing Bulletins",
 "wintitle:confirmXmlSchemaNewerImportAnyway=Import Bulletins",
 "wintitle:confirmLoadingFieldValuesFromAllBulletinsCancel=Loading Values",
+"wintitle:confirmImportingCustomizationUnknownSigner=Import Customization Template",
 
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrorBulletinOlder=Cannot Move Bulletin(s)",
@@ -861,6 +862,9 @@ public class EnglishStrings
 "field:confirmLoadingFieldValuesFromAllBulletinsCancelcause=This will stop loading all the values for this field.",
 "field:confirmLoadingFieldValuesFromAllBulletinsCanceleffect=The field will be still/again be searchable as text.",
 
+"field:confirmImportingCustomizationUnknownSignercause=This template was not created by a known account. You should carefully review the fields to make sure the template is suitable. You will be able to cancel the template editing to restore the earlier template.",
+"field:confirmImportingCustomizationUnknownSignereffect=To see the template contents, continue with the import.",
+
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
 "field:notifyDropErrorBulletinOldercause=One or more bulletins cannot be moved to that folder, because a newer version of this bulletin already exists.",
 "field:notifyDropErrorscause=An unexpected error occurred while moving the bulletin(s). One or more files may be damaged.",
@@ -964,7 +968,11 @@ public class EnglishStrings
 "field:notifyErrorExportingCustomizationTemplatecause=There was an error saving your template.",
 "field:notifyErrorImportingCustomizationTemplatecause=There was an error importing this template.",
 "field:notifyErrorImportingCustomizationTemplateFuturecause=The customization template you are trying to import was created by a newer version of Martus.  You need to upgrade to the latest version of Martus before you can import this template.",
-"field:notifyImportingCustomizationTemplateSuccesscause=Successfully imported customization template.",
+"field:notifyImportingCustomizationTemplateSuccesscause=Successfully imported a customization template that was created by #CreatedBy#.",
+"field:TemplateCreatedByThisAccount=this account",
+"field:TemplateCreatedByHeadquarters=Headquarters #Name#",
+"field:TemplateCreatedByFieldDesk=Field Desk #Name#",
+"field:TemplateCreatedByUnknown=an unknown account",
 "field:notifyExportingCustomizationTemplateSuccesscause=Successfully exported customization template.",
 "field:notifyCreatingFieldSpecCachecause=Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis list does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.",
 "field:notifyRetrieveErrorcause=An error has occurred while retrieving a bulletin.",
