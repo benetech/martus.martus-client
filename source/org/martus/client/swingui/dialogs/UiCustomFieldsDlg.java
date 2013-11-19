@@ -53,6 +53,7 @@ import org.martus.clientside.FormatFilter;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKeys;
+import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.BulletinFieldSpecs;
 import org.martus.common.fieldspec.CustomFieldError;
@@ -198,11 +199,20 @@ public class UiCustomFieldsDlg extends JDialog
 
 			CustomFieldTemplate template = new CustomFieldTemplate();
 			
-			Vector authorizedKeys = getAuthorizedKeys();
 			
 			try
 			{
-				if(template.importTemplate(security, importFile, authorizedKeys))
+				boolean imported = template.importTemplate(security, importFile);
+				if(imported)
+				{
+					Vector authorizedKeys = getAuthorizedKeys();
+					String signedBy = template.getSignedBy();
+					if(!authorizedKeys.contains(signedBy))
+						if(!mainWindow.confirmDlg("ImportingCustomizationUnknownSigner"))
+							return;
+				}
+				
+				if(imported)
 				{
 					topSectionXmlTextArea.setText(template.getImportedTopSectionText());
 					bottomSectionXmlTextArea.setText(template.getImportedBottomSectionText());
@@ -214,6 +224,11 @@ public class UiCustomFieldsDlg extends JDialog
 			catch(FutureVersionException e)
 			{
 				mainWindow.notifyDlg("ErrorImportingCustomizationTemplateFuture");
+			}
+			catch(Exception e)
+			{
+				MartusLogger.logException(e);
+				mainWindow.unexpectedErrorDlg();
 			}
 			mainWindow.notifyDlg("ErrorImportingCustomizationTemplate");
 		}
