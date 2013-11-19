@@ -31,6 +31,7 @@ import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -51,9 +52,11 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.clientside.FormatFilter;
 import org.martus.clientside.MtfAwareLocalization;
+import org.martus.common.FieldDeskKeys;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusLogger;
+import org.martus.common.MiniLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.BulletinFieldSpecs;
 import org.martus.common.fieldspec.CustomFieldError;
@@ -66,6 +69,7 @@ import org.martus.swing.UiTextArea;
 import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
+import org.martus.util.TokenReplacement;
 
 
 public class UiCustomFieldsDlg extends JDialog
@@ -216,7 +220,10 @@ public class UiCustomFieldsDlg extends JDialog
 				{
 					topSectionXmlTextArea.setText(template.getImportedTopSectionText());
 					bottomSectionXmlTextArea.setText(template.getImportedBottomSectionText());
-					mainWindow.notifyDlg("ImportingCustomizationTemplateSuccess");
+					String signedBy = template.getSignedBy();
+					HashMap replacement = new HashMap();
+					replacement.put("#CreatedBy#", getCreatedBy(signedBy));
+					mainWindow.notifyDlg("ImportingCustomizationTemplateSuccess", replacement);
 					return;
 				}
 				displayXMLError(template);
@@ -233,16 +240,58 @@ public class UiCustomFieldsDlg extends JDialog
 			mainWindow.notifyDlg("ErrorImportingCustomizationTemplate");
 		}
 
+		private Object getCreatedBy(String signedBy) throws Exception
+		{
+			MiniLocalization localization = mainWindow.getLocalization();
+			
+			if(signedBy.equals(security.getPublicKeyString()))
+				return localization.getFieldLabel("TemplateCreatedByThisAccount");
+			
+			HeadquartersKeys hqKeys = getHeadquartersKeys();
+			if(hqKeys.containsKey(signedBy))
+			{
+				String label = hqKeys.getLabelIfPresent(signedBy);
+				String template = localization.getFieldLabel("TemplateCreatedByHeadquarters");
+				return TokenReplacement.replaceToken(template, "#Name#", label);
+			}
+			
+			FieldDeskKeys fdKeys = getFieldDeskKeys();
+			if(fdKeys.containsKey(signedBy))
+			{
+				String label = fdKeys.getLabelIfPresent(signedBy);
+				String template = localization.getFieldLabel("TemplateCreatedByFieldDesk");
+				return TokenReplacement.replaceToken(template, "#Name#", label);
+			}
+			
+			return localization.getFieldLabel("TemplateCreatedByUnknown");
+		}
+
 		private Vector getAuthorizedKeys()
 		{
 			Vector authorizedKeys = new Vector();
 			authorizedKeys.add(security.getPublicKeyString());
-			HeadquartersKeys hqKeys = mainWindow.getApp().getAllHQKeysWithFallback();
+			HeadquartersKeys hqKeys = getHeadquartersKeys();
 			for(int i = 0; i < hqKeys.size(); ++i)
 			{
 				authorizedKeys.add(hqKeys.get(i).getPublicKey());
 			}
+			FieldDeskKeys fdKeys = getFieldDeskKeys();
+			for(int i = 0; i < fdKeys.size(); ++i)
+			{
+				authorizedKeys.add(fdKeys.get(i).getPublicKey());
+			}
+			
 			return authorizedKeys;
+		}
+
+		public HeadquartersKeys getHeadquartersKeys()
+		{
+			return mainWindow.getApp().getAllHQKeysWithFallback();
+		}
+
+		public FieldDeskKeys getFieldDeskKeys()
+		{
+			return mainWindow.getApp().getFieldDeskKeys();
 		}
 	}
 
