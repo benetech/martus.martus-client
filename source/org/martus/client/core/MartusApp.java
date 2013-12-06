@@ -365,8 +365,7 @@ public class MartusApp
 
 	public Vector<String> getFieldDeskPublicKeyStrings() throws Exception
 	{
-		String xml = getConfigInfo().getFieldDeskKeysXml();
-		FieldDeskKeys keys = new FieldDeskKeys(xml);
+		FieldDeskKeys keys = getFieldDeskKeys();
 		Vector<String> keyStrings = new Vector<String>();
 		for(int i = 0; i < keys.size(); ++i)
 		{
@@ -375,6 +374,21 @@ public class MartusApp
 		}
 		
 		return keyStrings;
+	}
+
+	public FieldDeskKeys getFieldDeskKeys()
+	{
+		try
+		{
+			String xml = getConfigInfo().getFieldDeskKeysXml();
+			FieldDeskKeys keys = new FieldDeskKeys(xml);
+			return keys;
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			return new FieldDeskKeys();
+		}
 	}
 
 	public boolean isVerifiedFieldDeskAccount(String authorPublicKeyString) throws Exception
