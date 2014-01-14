@@ -91,15 +91,23 @@ public class UiFxSelectLanguageDlg extends MartusStage
 	public void initialize()
 	{
 		//Main Pane containing both Left & Right sides
+		Scene scene = createScene();
+		setScene(scene);
+	}
+
+	public Scene createScene()
+	{
+		MartusScene scene = new MartusScene();
+
 		BorderPane basePane = new BorderPane();
 		basePane.setLeft(constructLeftSide());
 		basePane.setCenter(constructRightSide());
-		Group root = new Group();
-        root.getChildren().add(basePane);
-		Scene scene = new Scene(root);
-		String css = this.getClass().getResource("background.css").toExternalForm();
+        scene.getRootGroup().getChildren().add(basePane);
+
+        String css = this.getClass().getResource("background.css").toExternalForm();
 		scene.getStylesheets().add(css);			
-		setScene(scene);
+		
+		return scene;
 	}
 
 	@Override
