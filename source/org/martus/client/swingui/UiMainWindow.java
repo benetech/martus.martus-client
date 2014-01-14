@@ -110,6 +110,7 @@ import org.martus.client.swingui.dialogs.UiStringInputDlg;
 import org.martus.client.swingui.dialogs.UiTemplateDlg;
 import org.martus.client.swingui.dialogs.UiWarningMessageDlg;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
+import org.martus.client.swingui.jfx.JfxModalDialogLauncher;
 import org.martus.client.swingui.jfx.UiFxSelectLanguageDlg;
 import org.martus.client.swingui.spellcheck.SpellCheckerManager;
 import org.martus.client.swingui.tablemodels.DeleteMyServerDraftsTableModel;
@@ -245,7 +246,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		splashScreen.endDialog();
 		
-		new UiFxSelectLanguageDlg(this, "es");
+		JfxModalDialogLauncher.createAndShow(this, new UiFxSelectLanguageDlg(getLocalization(), "es"));
 		initalizeUiState();
 		
 		setGlassPane(new WindowObscurer());
