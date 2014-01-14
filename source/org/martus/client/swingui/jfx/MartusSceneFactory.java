@@ -25,9 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import javafx.embed.swing.JFXPanel;
-
-public class MartusStage extends JFXPanel
+abstract public class MartusSceneFactory
 {
-
+	abstract public MartusScene createScene();
 }
