@@ -25,23 +25,27 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import org.martus.clientside.UiLocalization;
+import java.net.URL;
 
-public class FxSelectLanguageSceneFactory extends MartusSceneFactory
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.Pane;
+
+public class MartusFxmlScene extends MartusScene
 {
-	public FxSelectLanguageSceneFactory(UiLocalization localizationToUse, String defaultLanguageCodeToUse)
+	public MartusFxmlScene(String fxmlResourceName) throws Exception
 	{
-		defaultLanguageCode = defaultLanguageCodeToUse;
-		localization = localizationToUse;
+		super(loadFxml(fxmlResourceName));
 	}
 	
-	@Override
-	public MartusScene createScene()
+	private static Pane loadFxml(String fxmlResourceName) throws Exception
 	{
-		MartusScene scene = new FxSelectLanguageScene(localization, defaultLanguageCode);
-		return scene;
+		URL fxmlUrl = getResourceAsUrl(fxmlResourceName);
+		return FXMLLoader.load(fxmlUrl);
 	}
-	
-	UiLocalization localization;
-	String defaultLanguageCode;
+
+	private static URL getResourceAsUrl(String resourceName) throws Exception
+	{
+		URL url = MartusScene.class.getResource(resourceName);
+		return url;
+	}
 }

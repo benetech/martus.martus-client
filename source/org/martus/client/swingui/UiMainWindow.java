@@ -111,7 +111,7 @@ import org.martus.client.swingui.dialogs.UiTemplateDlg;
 import org.martus.client.swingui.dialogs.UiWarningMessageDlg;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.FxModalDialog;
-import org.martus.client.swingui.jfx.FxSelectLanguageSceneFactory;
+import org.martus.client.swingui.jfx.FxSelectLanguageScene2;
 import org.martus.client.swingui.spellcheck.SpellCheckerManager;
 import org.martus.client.swingui.tablemodels.DeleteMyServerDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveHQDraftsTableModel;
@@ -246,7 +246,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		splashScreen.endDialog();
 		
-		FxModalDialog.createAndShow(this, new FxSelectLanguageSceneFactory(getLocalization(), "es"));
+		FxModalDialog.createAndShow(this, new FxSelectLanguageScene2.Factory(getLocalization(), "es"));
 		initalizeUiState();
 		
 		setGlassPane(new WindowObscurer());
