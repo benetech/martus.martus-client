@@ -7,14 +7,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="748.0" stylesheets="file:/D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/background.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="748.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 <children><VBox id="LeftBox" layoutX="2.0" layoutY="3.0" prefHeight="724.0" prefWidth="265.0">
 <children><VBox id="LeftVBoxTOC6" prefHeight="725.0" prefWidth="265.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
 <children><HBox id="LeftHeaderBox" prefHeight="48.0" prefWidth="265.0">
 <children><Label id="LeftHeaderLabel" prefHeight="48.0" prefWidth="266.0" text="Getting started with Martus is Easy!" wrapText="true">
-<padding>
-<Insets left="10.0" />
-</padding></Label>
+</Label>
 </children></HBox><VBox id="LeftTOC1VBox" prefHeight="100.0" prefWidth="265.0">
 <children><Label id="LeftTOC_Title" prefHeight="39.0" prefWidth="265.0" text="Create an Account">
 <graphic><ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
@@ -30,7 +28,7 @@
 </VBox.margin></Label>
 </children></VBox><VBox id="LeftTOC1VBox" prefHeight="124.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 <children>
-<Label id="LeftTOC_Title" prefHeight="39.0" prefWidth="265.0" text="Use Tore (Optional)">
+<Label id="LeftTOC_Title" prefHeight="39.0" prefWidth="265.0" text="Use Tor (Optional)">
 <graphic>
 <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
 <image>

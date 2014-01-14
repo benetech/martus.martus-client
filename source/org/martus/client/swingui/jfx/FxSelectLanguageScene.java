@@ -47,8 +47,28 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class FxSelectLanguageScene extends MartusScene
+public class FxSelectLanguageScene extends MartusPureJavaScene
 {
+	public static class Factory extends MartusSceneFactory
+	{
+		public Factory(UiLocalization localizationToUse, String defaultLanguageCodeToUse)
+		{
+			defaultLanguageCode = defaultLanguageCodeToUse;
+			localization = localizationToUse;
+		}
+		
+		@Override
+		public MartusScene createScene()
+		{
+			MartusScene scene = new FxSelectLanguageScene(localization, defaultLanguageCode);
+			return scene;
+		}
+		
+		UiLocalization localization;
+		String defaultLanguageCode;
+	
+	}
+	
 	public FxSelectLanguageScene(UiLocalization localizationToUse, String defaultLanguageCodeToUse)
 	{
 		defaultLanguageCode = defaultLanguageCodeToUse;

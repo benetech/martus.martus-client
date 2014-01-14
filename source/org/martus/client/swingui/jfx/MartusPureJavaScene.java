@@ -25,7 +25,18 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-abstract public class MartusSceneFactory
+import javafx.scene.Group;
+
+public class MartusPureJavaScene extends MartusScene
 {
-	abstract public MartusScene createScene() throws Exception;
+	public MartusPureJavaScene()
+	{
+		super(new Group());
+	}
+
+	public Group getRootGroup()
+	{
+		return (Group)getRoot();
+	}
+
 }
