@@ -25,33 +25,23 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import java.awt.Dimension;
+import org.martus.clientside.UiLocalization;
 
-import javafx.application.Platform;
-
-import javax.swing.JDialog;
-
-import org.martus.client.swingui.UiMainWindow;
-import org.martus.swing.Utilities;
-
-public class JfxModalDialogLauncher extends JDialog
+public class FxSelectLanguageSceneFactory extends MartusSceneFactory
 {
-	public static void createAndShow(UiMainWindow owner, MartusStage stage)
+	public FxSelectLanguageSceneFactory(UiLocalization localizationToUse, String defaultLanguageCodeToUse)
 	{
-		JfxModalDialogLauncher dialog = new JfxModalDialogLauncher(owner);
-		Platform.runLater(new JfxRunner(dialog, stage));
-		dialog.getContentPane().add(stage);
-		dialog.setPreferredSize(new Dimension(900, 600));
-		dialog.setTitle(stage.getTitle());
-		dialog.getContentPane().add(stage);
-		Utilities.centerDlg(dialog);
-		dialog.setVisible(true);
+		defaultLanguageCode = defaultLanguageCodeToUse;
+		localization = localizationToUse;
 	}
 	
-	private JfxModalDialogLauncher(UiMainWindow owner)
+	@Override
+	public MartusScene createScene()
 	{
-		super(owner);
-		setModal(true);
-		
+		MartusScene scene = new FxSelectLanguageScene(localization, defaultLanguageCode);
+		return scene;
 	}
+	
+	UiLocalization localization;
+	String defaultLanguageCode;
 }

@@ -1,8 +1,8 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2001-2014, Beneficent
-Technology, Inc. (The Benetech Initiative).
+monitoring software. Copyright (C) 2014, Beneficent
+Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -23,9 +23,11 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-
-
 package org.martus.client.swingui.jfx;
+
+import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.clientside.UiLocalization;
+import org.martus.common.fieldspec.ChoiceItem;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -33,9 +35,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -47,75 +47,28 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import org.martus.client.swingui.dialogs.UiDialogLauncher;
-import org.martus.clientside.UiLocalization;
-import org.martus.common.fieldspec.ChoiceItem;
-
-public class UiFxSelectLanguageDlg extends MartusStage 
+public class FxSelectLanguageScene extends MartusScene
 {
-	public UiFxSelectLanguageDlg(UiLocalization localizationToUse, String defaultLanguageCodeToUse)
+	public FxSelectLanguageScene(UiLocalization localizationToUse, String defaultLanguageCodeToUse)
 	{
 		defaultLanguageCode = defaultLanguageCodeToUse;
 		localization = localizationToUse;
+
+		BorderPane basePane = new BorderPane();
+		basePane.setLeft(constructLeftSide());
+		basePane.setCenter(constructRightSide());
+        getRootGroup().getChildren().add(basePane);
+
+        String css = this.getClass().getResource("background.css").toExternalForm();
+		getStylesheets().add(css);			
+
 	}
-	
-//	public UiFxSelectLanguageDlg(UiMainWindow owner, String defaultLanguageCodeToUse)
-//	{
-//		super(owner);
-//		localization = owner.getLocalization();
-//		defaultLanguageCode = defaultLanguageCodeToUse;
-//		languageCodeChosen = null;
-//		JFXPanel panel = new JFXPanel();
-//		Platform.runLater(new JFXSelectLanguage(panel));
-//		getContentPane().add(panel);
-//		this.setPreferredSize(new Dimension(900,LEFT_COLUMN_MAX_WIDTH+RIGHT_COLUMN_MAX_WIDTH));
-//		setTitle(localization.getWindowTitle("about"));
-//		Utilities.centerDlg(this);
-//		setVisible(true);
-//	}
-	
+
 	public String GetLanguage()
 	{
 		return languageCodeChosen;
 	}
 	
-//	private class JFXSelectLanguage implements Runnable
-//	{
-//		public JFXSelectLanguage(JFXPanel stageToUse)
-//		{
-//			stage = stageToUse;
-//		}
-//		
-//		public void run()
-	@Override
-	public void initialize()
-	{
-		//Main Pane containing both Left & Right sides
-		Scene scene = createScene();
-		setScene(scene);
-	}
-
-	public Scene createScene()
-	{
-		MartusScene scene = new MartusScene();
-
-		BorderPane basePane = new BorderPane();
-		basePane.setLeft(constructLeftSide());
-		basePane.setCenter(constructRightSide());
-        scene.getRootGroup().getChildren().add(basePane);
-
-        String css = this.getClass().getResource("background.css").toExternalForm();
-		scene.getStylesheets().add(css);			
-		
-		return scene;
-	}
-
-	@Override
-	public String getTitle()
-	{
-		return localization.getWindowTitle("about");
-	}
-
 	private VBox constructRightSide()
 	{
 		HBox logoHeader = new HBox();
@@ -171,7 +124,7 @@ public class UiFxSelectLanguageDlg extends MartusStage
 			   		//@Override 
 			   		public void handle(ActionEvent e) 
 			   		{
-			   			dispose();
+			   			getShell().dispose();
 			   		}
 				}
 				);
@@ -320,14 +273,14 @@ public class UiFxSelectLanguageDlg extends MartusStage
 //				item.getChildren().add(new Label(" "));
 //			}
 //		}
-	
-	String languageCodeChosen;
-	UiLocalization localization;
-	String defaultLanguageCode;
-	ChoiceItem[] allUILanguagesSupported;
-	
+
 	private final int LEFT_COLUMN_MAX_WIDTH = 350;
 	private final int RIGHT_COLUMN_MAX_WIDTH = 450;
 //	private final int MARGIN_SPACING = 30;
 //	private final int WHITESPACE_COUNT = 5;
+
+	String languageCodeChosen;
+	UiLocalization localization;
+	String defaultLanguageCode;
+	ChoiceItem[] allUILanguagesSupported;
 }

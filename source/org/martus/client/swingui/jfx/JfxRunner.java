@@ -29,24 +29,21 @@ import javax.swing.JDialog;
 
 public class JfxRunner implements Runnable
 {
-	public JfxRunner(JDialog shellToUse, MartusStage stageToUse)
+	public JfxRunner(JDialog shellToUse, MartusStage stageToUse, MartusSceneFactory sceneFactoryToUse)
 	{
 		shell = shellToUse;
 		stage = stageToUse;
-		stage.setRunner(this);
+		sceneFactory = sceneFactoryToUse;
 	}
 	
 	public void run()
 	{
-		stage.initialize();
+		MartusScene scene = sceneFactory.createScene();
+		scene.setShell(shell);
+		stage.setScene(scene);
 	}
 	
-	public void dispose()
-	{
-		shell.dispose();
-	}
-
 	private JDialog shell;
 	private MartusStage stage;
-
+	private MartusSceneFactory sceneFactory;
 }

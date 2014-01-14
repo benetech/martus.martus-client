@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import javax.swing.JDialog;
+
 import javafx.scene.Group;
 import javafx.scene.Scene;
 
@@ -39,4 +41,16 @@ public class MartusScene extends Scene
 	{
 		return (Group)getRoot();
 	}
+
+	public void setShell(JDialog shellToUse)
+	{
+		shell = shellToUse;
+	}
+	
+	public JDialog getShell()
+	{
+		return shell;
+	}
+	
+	private JDialog shell;
 }
