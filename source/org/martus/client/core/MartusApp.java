@@ -80,6 +80,8 @@ import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.LegacyCustomFields;
+import org.martus.common.MartusAccountAccessToken;
+import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.BulletinNotFoundException;
@@ -1549,6 +1551,23 @@ public class MartusApp
 
 		return false;
 	}
+	
+	public MartusAccountAccessToken getMartusAccountAccessTokenFromServer() throws TokenInvalidException, ServerNotAvailableException 
+	{
+		if(!isSSLServerAvailable())
+			throw new ServerNotAvailableException();
+
+		NetworkResponse response = getCurrentNetworkInterfaceGateway().getMartusAccountAccessToken(getSecurity());
+		if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
+			throw new ServerNotAvailableException();
+			
+		Vector singleToken = response.getResultVector();
+		if(singleToken.size() != 1)
+			throw new TokenInvalidException();
+		String ourTokenString = (String)singleToken.get(0);
+		return new MartusAccountAccessToken(ourTokenString);
+	}
+	
 
 	public Vector getNewsFromServer()
 	{
