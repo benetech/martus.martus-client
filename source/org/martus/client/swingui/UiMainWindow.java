@@ -246,7 +246,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		splashScreen.endDialog();
 		
-		FxModalDialog.createAndShow(this, new FxSelectLanguageScene2.Factory(getLocalization(), "es"));
 		initalizeUiState();
 		
 		setGlassPane(new WindowObscurer());
@@ -428,6 +427,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean run()
 	{
+		try
+		{
+			FxModalDialog.createAndShow(this, new FxSelectLanguageScene2.Factory(this, "es"));
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			exitWithoutSavingState();
+		}
+
 		setCurrentActiveFrame(this);
 		
 		if(Utilities.isMSWindows())
