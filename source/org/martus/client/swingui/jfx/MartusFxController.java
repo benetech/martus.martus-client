@@ -27,10 +27,16 @@ package org.martus.client.swingui.jfx;
 
 import javax.swing.JDialog;
 
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 
 public class MartusFxController
 {
+	public MartusFxController(UiMainWindow mainWindowToUse)
+	{
+		mainWindow = mainWindowToUse;
+	}
+
 	public JDialog getShell()
 	{
 		return shell;
@@ -41,14 +47,14 @@ public class MartusFxController
 		shell = shellToUse;
 	}
 	
-	public void setMainWindow(UiMainWindow mainWindowToUse)
-	{
-		mainWindow = mainWindowToUse;
-	}
-	
 	public UiMainWindow getMainWindow()
 	{
 		return mainWindow;
+	}
+	
+	public MartusLocalization getLocalization()
+	{
+		return mainWindow.getLocalization();
 	}
 
 	private JDialog shell;

@@ -29,29 +29,11 @@ import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
 
-abstract public class MartusFxmlSceneFactory extends MartusSceneFactory
+public class MartusFxmlLoader extends FXMLLoader
 {
-	public MartusFxmlSceneFactory(MartusFxController controller, String fxmlLocation) throws Exception
+	public MartusFxmlLoader(MartusFxController controllerToUse, URL resourceAsUrl)
 	{
-		loader = new MartusFxmlLoader(controller, getResourceAsUrl(fxmlLocation));
+		super(resourceAsUrl);
+		setController(controllerToUse);
 	}
-
-	public MartusFxController getController()
-	{
-		MartusFxController controller = getLoader().getController();
-		return controller;
-	}
-	
-	public FXMLLoader getLoader()
-	{
-		return loader;
-	}
-	
-	public static URL getResourceAsUrl(String resourceName) throws Exception
-	{
-		URL url = MartusScene.class.getResource(resourceName);
-		return url;
-	}
-	
-	private FXMLLoader loader;
 }

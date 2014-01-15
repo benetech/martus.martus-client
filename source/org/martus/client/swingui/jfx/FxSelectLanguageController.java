@@ -25,15 +25,55 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.Vector;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 
-public class FxSelectLanguageController extends MartusFxController
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.fieldspec.ChoiceItem;
+
+public class FxSelectLanguageController extends MartusFxController implements Initializable
 {
+	public FxSelectLanguageController(UiMainWindow mainWindowToUse)
+	{
+		super(mainWindowToUse);
+	}
+	
+	public void initialize(URL url, ResourceBundle resourceBundle)
+	{
+		ObservableList<String> availableLanguages = FXCollections.observableArrayList(getAvailableLanguages());
+		languagesDropdown.setItems(availableLanguages);
+	}
+
 	@FXML
 	protected void handleNext(ActionEvent event) 
 	{
 		getShell().dispose();
 	}
 
+	private ObservableList<String> getAvailableLanguages()
+	{
+		Vector<String> languages = new Vector<String>();
+		ChoiceItem[] allUILanguagesSupported = getLocalization().getUiLanguages();
+		for(int i = 0; i < allUILanguagesSupported.length; ++i)
+		{
+			String currentCode = allUILanguagesSupported[i].getCode();
+			getLocalization().setCurrentLanguageCode(currentCode);
+			String languageName = getLocalization().getLanguageName(currentCode);
+
+			languages.add(languageName);
+		}
+
+		return FXCollections.observableArrayList(languages);
+	}
+
+	@FXML // fx:id="languagesDropdown"
+	private ChoiceBox<String> languagesDropdown; // Value injected by FXMLLoader
 }

@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx;
 
 import javafx.fxml.FXMLLoader;
 
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 
@@ -34,11 +35,11 @@ public class FxSelectLanguageScene2 extends MartusFxmlScene
 {
 	public static class Factory extends MartusFxmlSceneFactory
 	{
-		public Factory(UiLocalization localizationToUse, String defaultLanguageCodeToUse) throws Exception
+		public Factory(UiMainWindow mainWindowToUse, String defaultLanguageCodeToUse) throws Exception
 		{
-			super("MartusCreateAccount.fxml");
+			super(new FxSelectLanguageController(mainWindowToUse), "MartusCreateAccount.fxml");
 			defaultLanguageCode = defaultLanguageCodeToUse;
-			localization = localizationToUse;
+			localization = mainWindowToUse.getLocalization();
 		}
 		
 		@Override
