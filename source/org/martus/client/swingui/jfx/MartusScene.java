@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
