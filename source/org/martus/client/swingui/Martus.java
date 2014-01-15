@@ -155,6 +155,13 @@ public class Martus
 			
 			if(useSystemLookAndFeel)
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+	        UiMainWindow window = new UiMainWindow();
+	        if(!window.run())
+	        {
+	        	MartusLogger.log("Exiting after run()");
+	        	System.exit(0);
+	        }
 		}
 		catch(Exception e)
 		{
@@ -162,12 +169,6 @@ public class Martus
 			//e.printStatckTrace(System.out);
 		}
 
-        UiMainWindow window = new UiMainWindow();
-        if(!window.run())
-        {
-        	MartusLogger.log("Exiting after run()");
-        	System.exit(0);
-        }
     }
 
 	private static int findOption(Vector options, String optionText)

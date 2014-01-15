@@ -162,7 +162,7 @@ import org.martus.util.xml.XmlUtilities;
 
 public class UiMainWindow extends JFrame implements ClipboardOwner
 {
-	public UiMainWindow()
+	public UiMainWindow() throws Exception
 	{
 		super();
 
