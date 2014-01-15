@@ -25,13 +25,15 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 
-public class MartusFxmlScene extends MartusScene
+public class FxSelectLanguageController extends MartusFxController
 {
-	public MartusFxmlScene(FXMLLoader loaderToUse) throws Exception
+	@FXML
+	protected void handleNext(ActionEvent event) 
 	{
-		super((Parent) loaderToUse.load());
+		getShell().dispose();
 	}
+
 }

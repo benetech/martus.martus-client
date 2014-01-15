@@ -28,4 +28,10 @@ package org.martus.client.swingui.jfx;
 abstract public class MartusSceneFactory
 {
 	abstract public MartusScene createScene() throws Exception;
+	
+	public MartusFxController getController()
+	{
+		// NOTE: Pure Java scene Factories don't have controllers
+		return null;
+	}
 }
