@@ -41,7 +41,7 @@ public class FxModalDialog extends JDialog
 		MartusStage stage = new MartusStage();
 		FxModalDialog dialog = new FxModalDialog(owner);
 		dialog.getContentPane().add(stage);
-		Platform.runLater(new JfxRunner(owner, dialog, stage, sceneFactory));
+		Platform.runLater(new JfxRunner(dialog, stage, sceneFactory));
 
 		dialog.setPreferredSize(new Dimension(900, 600));
 //		dialog.setTitle(stage.getTitle());
