@@ -25,13 +25,32 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javax.swing.JDialog;
 
-public class MartusFxmlScene extends MartusScene
+import org.martus.client.swingui.UiMainWindow;
+
+public class MartusFxController
 {
-	public MartusFxmlScene(FXMLLoader loaderToUse) throws Exception
+	public JDialog getShell()
 	{
-		super((Parent) loaderToUse.load());
+		return shell;
 	}
+
+	public void setShell(JDialog shellToUse)
+	{
+		shell = shellToUse;
+	}
+	
+	public void setMainWindow(UiMainWindow mainWindowToUse)
+	{
+		mainWindow = mainWindowToUse;
+	}
+	
+	public UiMainWindow getMainWindow()
+	{
+		return mainWindow;
+	}
+
+	private JDialog shell;
+	private UiMainWindow mainWindow;
 }
