@@ -29,20 +29,16 @@ import org.martus.common.MartusLogger;
 
 public class JfxRunner implements Runnable
 {
-	public JfxRunner(MartusStage stageToUse, MartusSceneFactory sceneFactoryToUse)
+	public JfxRunner(MartusStage stageToUse)
 	{
 		stage = stageToUse;
-		sceneFactory = sceneFactoryToUse;
 	}
 	
 	public void run()
 	{
 		try
 		{
-			MartusScene scene = sceneFactory.createScene();
-			MartusController controller = sceneFactory.getController();
-			controller.setStage(stage);
-			stage.setScene(scene);
+			stage.showCurrentScene();
 		} 
 		catch (Exception e)
 		{
@@ -53,5 +49,4 @@ public class JfxRunner implements Runnable
 	}
 	
 	private MartusStage stage;
-	private MartusSceneFactory sceneFactory;
 }

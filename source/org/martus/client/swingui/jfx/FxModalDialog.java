@@ -41,7 +41,7 @@ public class FxModalDialog extends JDialog
 		FxModalDialog dialog = new FxModalDialog(owner);
 		dialog.getContentPane().add(stage);
 		stage.setShell(dialog);
-		Platform.runLater(new JfxRunner(stage, stage.getCurrentSceneFactory()));
+		Platform.runLater(new JfxRunner(stage));
 
 		dialog.setPreferredSize(new Dimension(900, 600));
 //		dialog.setTitle(stage.getTitle());
