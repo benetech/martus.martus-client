@@ -25,15 +25,12 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import javax.swing.JDialog;
-
 import org.martus.common.MartusLogger;
 
 public class JfxRunner implements Runnable
 {
-	public JfxRunner(JDialog shellToUse, MartusStage stageToUse, MartusSceneFactory sceneFactoryToUse)
+	public JfxRunner(MartusStage stageToUse, MartusSceneFactory sceneFactoryToUse)
 	{
-		shell = shellToUse;
 		stage = stageToUse;
 		sceneFactory = sceneFactoryToUse;
 	}
@@ -44,7 +41,7 @@ public class JfxRunner implements Runnable
 		{
 			MartusScene scene = sceneFactory.createScene();
 			MartusController controller = sceneFactory.getController();
-			controller.setShell(shell);
+			controller.setShell(stage.getShell());
 			stage.setScene(scene);
 		} 
 		catch (Exception e)
@@ -55,7 +52,6 @@ public class JfxRunner implements Runnable
 		}
 	}
 	
-	private JDialog shell;
 	private MartusStage stage;
 	private MartusSceneFactory sceneFactory;
 }

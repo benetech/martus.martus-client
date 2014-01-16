@@ -27,7 +27,21 @@ package org.martus.client.swingui.jfx;
 
 import javafx.embed.swing.JFXPanel;
 
+import javax.swing.JDialog;
+
 abstract public class MartusStage extends JFXPanel
 {
 	abstract public MartusSceneFactory getInitialSceneFactory() throws Exception;
+	
+	public void setShell(JDialog shellToUse)
+	{
+		shell = shellToUse;
+	}
+	
+	public JDialog getShell()
+	{
+		return shell;
+	}
+	
+	private JDialog shell;
 }
