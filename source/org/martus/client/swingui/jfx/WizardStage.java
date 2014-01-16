@@ -78,7 +78,7 @@ abstract public class WizardStage extends MartusStage
 		{
 			++currentSceneIndex;
 			if(currentSceneIndex >= scenes.size())
-				getShell().dispose();
+				getShell().setVisible(false);
 			else
 				showCurrentScene();
 		}
