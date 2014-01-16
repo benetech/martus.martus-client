@@ -29,14 +29,9 @@ import org.martus.client.swingui.UiMainWindow;
 
 public class SetupWizardStage extends WizardStage
 {
-	public SetupWizardStage(UiMainWindow mainWindow)
+	public SetupWizardStage(UiMainWindow mainWindow) throws Exception
 	{
 		super(mainWindow);
-	}
-
-	@Override
-	public MartusSceneFactory getCurrentSceneFactory() throws Exception
-	{
-		return new FxSelectLanguageScene.Factory(getMainWindow(), "es");
+		addSceneFactory(0, new FxSelectLanguageScene.Factory(getMainWindow(), "es"));
 	}
 }
