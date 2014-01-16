@@ -28,8 +28,6 @@ package org.martus.client.swingui.jfx;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-import javax.swing.JDialog;
-
 public class MartusScene extends Scene
 {
 	public MartusScene(Parent root)
@@ -37,15 +35,4 @@ public class MartusScene extends Scene
 		super(root);
 	}
 	
-	public void setShell(JDialog shellToUse)
-	{
-		shell = shellToUse;
-	}
-	
-	public JDialog getShell()
-	{
-		return shell;
-	}
-	
-	private JDialog shell;
 }
