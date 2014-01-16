@@ -25,10 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import org.martus.client.swingui.dialogs.UiDialogLauncher;
-import org.martus.clientside.UiLocalization;
-import org.martus.common.fieldspec.ChoiceItem;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -47,7 +43,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class FxPureJavaSelectLanguageScene extends MartusPureJavaScene
+import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.clientside.UiLocalization;
+import org.martus.common.fieldspec.ChoiceItem;
+
+public class FxPureJavaSelectLanguageScene extends MartusPureJavaScene implements MartusController
 {
 	public static class Factory extends MartusSceneFactory
 	{
@@ -60,12 +60,20 @@ public class FxPureJavaSelectLanguageScene extends MartusPureJavaScene
 		@Override
 		public MartusScene createScene()
 		{
-			MartusScene scene = new FxPureJavaSelectLanguageScene(localization, defaultLanguageCode);
+			FxPureJavaSelectLanguageScene scene = new FxPureJavaSelectLanguageScene(localization, defaultLanguageCode);
+			controller = scene;
 			return scene;
 		}
 		
-		UiLocalization localization;
-		String defaultLanguageCode;
+		@Override
+		public MartusController getController()
+		{
+			return controller;
+		}
+		
+		private UiLocalization localization;
+		private String defaultLanguageCode;
+		private MartusController controller;
 	
 	}
 	
