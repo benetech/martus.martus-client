@@ -44,7 +44,7 @@ public class JfxRunner implements Runnable
 		{
 			MartusScene scene = sceneFactory.createScene();
 			scene.setShell(shell);
-			MartusFxController controller = sceneFactory.getController();
+			MartusController controller = sceneFactory.getController();
 			if(controller != null)
 				controller.setShell(shell);
 			stage.setScene(scene);
