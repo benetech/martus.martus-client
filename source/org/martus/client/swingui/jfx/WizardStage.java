@@ -25,33 +25,19 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import java.awt.Dimension;
-
-import javafx.application.Platform;
-
-import javax.swing.JDialog;
-
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.swing.Utilities;
 
-public class FxModalDialog extends JDialog
+abstract public class WizardStage extends MartusStage
 {
-	public static void createAndShow(UiMainWindow owner, MartusStage stage) throws Exception
+	public WizardStage(UiMainWindow mainWindowToUse)
 	{
-		FxModalDialog dialog = new FxModalDialog(owner);
-		dialog.getContentPane().add(stage);
-		Platform.runLater(new JfxRunner(dialog, stage, stage.getInitialSceneFactory()));
-
-		dialog.setPreferredSize(new Dimension(900, 600));
-//		dialog.setTitle(stage.getTitle());
-		Utilities.centerDlg(dialog);
-		dialog.setVisible(true);
+		mainWindow = mainWindowToUse;
 	}
 	
-	private FxModalDialog(UiMainWindow owner)
+	public UiMainWindow getMainWindow()
 	{
-		super(owner);
-		setModal(true);
-		
+		return mainWindow;
 	}
+
+	private UiMainWindow mainWindow;
 }

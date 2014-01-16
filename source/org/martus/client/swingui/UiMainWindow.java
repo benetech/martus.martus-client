@@ -111,7 +111,7 @@ import org.martus.client.swingui.dialogs.UiTemplateDlg;
 import org.martus.client.swingui.dialogs.UiWarningMessageDlg;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.FxModalDialog;
-import org.martus.client.swingui.jfx.FxSelectLanguageScene2;
+import org.martus.client.swingui.jfx.SetupWizardStage;
 import org.martus.client.swingui.spellcheck.SpellCheckerManager;
 import org.martus.client.swingui.tablemodels.DeleteMyServerDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveHQDraftsTableModel;
@@ -429,7 +429,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		try
 		{
-			FxModalDialog.createAndShow(this, new FxSelectLanguageScene2.Factory(this, "es"));
+			FxModalDialog.createAndShow(this, new SetupWizardStage(this));
 		} 
 		catch (Exception e)
 		{
