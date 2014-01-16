@@ -48,11 +48,21 @@ public class FxSelectLanguageController extends MartusFxController implements In
 	
 	public void initialize(URL url, ResourceBundle resourceBundle)
 	{
-		ObservableList<String> availableLanguages = FXCollections.observableArrayList(getAvailableLanguages());
+		ObservableList<ChoiceItem> availableLanguages = FXCollections.observableArrayList(getAvailableLanguages());
 		languagesDropdown.setItems(availableLanguages);
-		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
-		String currentLanguageName = getLocalization().getLanguageName(currentLanguageCode);
-		languagesDropdown.getSelectionModel().select(currentLanguageName);
+		languagesDropdown.getSelectionModel().select(findCurrentLanguageChoiceItem());
+	}
+	
+	private ChoiceItem findCurrentLanguageChoiceItem()
+	{
+		ObservableList<ChoiceItem> availableLanguages = getAvailableLanguages();
+		for (ChoiceItem choiceItem : availableLanguages)
+		{
+			if (choiceItem.getCode().equals(getLocalization().getCurrentLanguageCode()))
+				return choiceItem;
+		}
+		
+		return null;
 	}
 
 	@FXML
@@ -61,22 +71,21 @@ public class FxSelectLanguageController extends MartusFxController implements In
 		getStage().handleNavigationEvent(WizardStage.NAVIGATION_NEXT);
 	}
 
-	private ObservableList<String> getAvailableLanguages()
+	private ObservableList<ChoiceItem> getAvailableLanguages()
 	{
-		Vector<String> languages = new Vector<String>();
 		ChoiceItem[] allUILanguagesSupported = getLocalization().getUiLanguages();
+		Vector<ChoiceItem> languageChoices = new Vector<ChoiceItem>();
 		for(int i = 0; i < allUILanguagesSupported.length; ++i)
 		{
 			String currentCode = allUILanguagesSupported[i].getCode();
 			getLocalization().setCurrentLanguageCode(currentCode);
 			String languageName = getLocalization().getLanguageName(currentCode);
-
-			languages.add(languageName);
+			languageChoices.add(new ChoiceItem(currentCode, languageName));
 		}
 
-		return FXCollections.observableArrayList(languages);
+		return FXCollections.observableArrayList(languageChoices);
 	}
 
 	@FXML // fx:id="languagesDropdown"
-	private ChoiceBox<String> languagesDropdown; // Value injected by FXMLLoader
+	private ChoiceBox<ChoiceItem> languagesDropdown; // Value injected by FXMLLoader
 }
