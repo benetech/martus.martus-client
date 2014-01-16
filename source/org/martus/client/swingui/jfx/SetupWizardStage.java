@@ -32,7 +32,7 @@ public class SetupWizardStage extends WizardStage
 	public SetupWizardStage(UiMainWindow mainWindow) throws Exception
 	{
 		super(mainWindow);
-		addSceneFactory(0, new FxSelectLanguageScene.Factory(getMainWindow(), "es"));
+		addSceneFactory(0, new FxSelectLanguageScene.Factory(getMainWindow()));
 		addSceneFactory(1, new FxPureJavaSelectLanguageScene.Factory(getLocalization(), "es"));
 	}
 }
