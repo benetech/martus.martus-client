@@ -35,28 +35,27 @@ public class FxSelectLanguageScene extends MartusFxmlScene
 {
 	public static class Factory extends MartusFxmlSceneFactory
 	{
-		public Factory(UiMainWindow mainWindowToUse, String defaultLanguageCodeToUse) throws Exception
+		public Factory(UiMainWindow mainWindowToUse) throws Exception
 		{
 			super(new FxSelectLanguageController(mainWindowToUse), "MartusCreateAccount.fxml");
-			defaultLanguageCode = defaultLanguageCodeToUse;
+
 			localization = mainWindowToUse.getLocalization();
 		}
 		
 		@Override
 		public MartusScene createScene() throws Exception
 		{
-			MartusScene scene = new FxSelectLanguageScene(getLoader(), localization, defaultLanguageCode);
+			MartusScene scene = new FxSelectLanguageScene(getLoader(), localization);
 			return scene;
 		}
 
 		private UiLocalization localization;
-		private String defaultLanguageCode;
 	}
 	
-	public FxSelectLanguageScene(FXMLLoader loader, UiLocalization localizationToUse, String defaultLanguageCodeToUse) throws Exception
+	public FxSelectLanguageScene(FXMLLoader loader, UiLocalization localizationToUse) throws Exception
 	{
 		super(loader);
-		defaultLanguageCode = defaultLanguageCodeToUse;
+
 		localization = localizationToUse;
 
         String css = this.getClass().getResource("background.css").toExternalForm();
@@ -66,6 +65,5 @@ public class FxSelectLanguageScene extends MartusFxmlScene
 
 	String languageCodeChosen;
 	UiLocalization localization;
-	String defaultLanguageCode;
 	ChoiceItem[] allUILanguagesSupported;
 }
