@@ -25,8 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import javax.swing.JDialog;
-
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 
@@ -37,14 +35,14 @@ public class MartusFxController implements MartusController
 		mainWindow = mainWindowToUse;
 	}
 
-	public JDialog getShell()
+	public void setStage(MartusStage stageToUse)
 	{
-		return shell;
+		stage = stageToUse;
 	}
-
-	public void setShell(JDialog shellToUse)
+	
+	public MartusStage getStage()
 	{
-		shell = shellToUse;
+		return stage;
 	}
 	
 	public UiMainWindow getMainWindow()
@@ -57,6 +55,6 @@ public class MartusFxController implements MartusController
 		return mainWindow.getLocalization();
 	}
 
-	private JDialog shell;
+	private MartusStage stage;
 	private UiMainWindow mainWindow;
 }

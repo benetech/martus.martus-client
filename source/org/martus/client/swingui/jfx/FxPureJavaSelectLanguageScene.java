@@ -154,7 +154,7 @@ public class FxPureJavaSelectLanguageScene extends MartusPureJavaScene implement
 			   		//@Override 
 			   		public void handle(ActionEvent e) 
 			   		{
-			   			getShell().dispose();
+			   			getStage().dispose();
 			   		}
 				}
 				);
@@ -304,17 +304,17 @@ public class FxPureJavaSelectLanguageScene extends MartusPureJavaScene implement
 //			}
 //		}
 
-	public void setShell(JDialog shellToUse)
+	public void setStage(MartusStage stageToUse)
 	{
-		shell = shellToUse;
+		stage = stageToUse;
 	}
 	
-	public JDialog getShell()
+	public MartusStage getStage()
 	{
-		return shell;
+		return stage;
 	}
 	
-	private JDialog shell;
+	private MartusStage stage;
 	private final int LEFT_COLUMN_MAX_WIDTH = 350;
 	private final int RIGHT_COLUMN_MAX_WIDTH = 450;
 //	private final int MARGIN_SPACING = 30;
