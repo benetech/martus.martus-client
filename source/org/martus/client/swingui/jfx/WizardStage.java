@@ -43,6 +43,16 @@ abstract public class WizardStage extends MartusStage
 	{
 		return mainWindow;
 	}
+	
+	@Override
+	public void showCurrentScene() throws Exception
+	{
+		MartusSceneFactory sceneFactory = getCurrentSceneFactory();
+		MartusScene scene = sceneFactory.createScene();
+		MartusController controller = sceneFactory.getController();
+		controller.setStage(this);
+		setScene(scene);
+	}
 
 	protected void addSceneFactory(int i, MartusSceneFactory sceneFactory)
 	{

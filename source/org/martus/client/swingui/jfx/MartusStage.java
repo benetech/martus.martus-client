@@ -47,5 +47,7 @@ abstract public class MartusStage extends JFXPanel
 	{
 	}
 
+	abstract public void showCurrentScene() throws Exception;
+
 	private JDialog shell;
 }
