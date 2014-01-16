@@ -50,6 +50,9 @@ public class FxSelectLanguageController extends MartusFxController implements In
 	{
 		ObservableList<String> availableLanguages = FXCollections.observableArrayList(getAvailableLanguages());
 		languagesDropdown.setItems(availableLanguages);
+		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
+		String currentLanguageName = getLocalization().getLanguageName(currentLanguageCode);
+		languagesDropdown.getSelectionModel().select(currentLanguageName);
 	}
 
 	@FXML
