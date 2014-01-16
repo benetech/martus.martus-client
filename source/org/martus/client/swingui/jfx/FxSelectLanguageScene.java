@@ -31,7 +31,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class FxSelectLanguageScene2 extends MartusFxmlScene
+public class FxSelectLanguageScene extends MartusFxmlScene
 {
 	public static class Factory extends MartusFxmlSceneFactory
 	{
@@ -45,7 +45,7 @@ public class FxSelectLanguageScene2 extends MartusFxmlScene
 		@Override
 		public MartusScene createScene() throws Exception
 		{
-			MartusScene scene = new FxSelectLanguageScene2(getLoader(), localization, defaultLanguageCode);
+			MartusScene scene = new FxSelectLanguageScene(getLoader(), localization, defaultLanguageCode);
 			return scene;
 		}
 
@@ -53,7 +53,7 @@ public class FxSelectLanguageScene2 extends MartusFxmlScene
 		private String defaultLanguageCode;
 	}
 	
-	public FxSelectLanguageScene2(FXMLLoader loader, UiLocalization localizationToUse, String defaultLanguageCodeToUse) throws Exception
+	public FxSelectLanguageScene(FXMLLoader loader, UiLocalization localizationToUse, String defaultLanguageCodeToUse) throws Exception
 	{
 		super(loader);
 		defaultLanguageCode = defaultLanguageCodeToUse;

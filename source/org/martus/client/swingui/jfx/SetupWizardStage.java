@@ -37,6 +37,6 @@ public class SetupWizardStage extends WizardStage
 	@Override
 	public MartusSceneFactory getInitialSceneFactory() throws Exception
 	{
-		return new FxSelectLanguageScene2.Factory(getMainWindow(), "es");
+		return new FxSelectLanguageScene.Factory(getMainWindow(), "es");
 	}
 }
