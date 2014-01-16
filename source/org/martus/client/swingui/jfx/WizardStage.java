@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import java.util.Vector;
+
 import org.martus.client.swingui.UiMainWindow;
 
 abstract public class WizardStage extends MartusStage
@@ -32,6 +34,9 @@ abstract public class WizardStage extends MartusStage
 	public WizardStage(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
+		
+		scenes = new Vector<MartusSceneFactory>();
+		currentSceneIndex = 0;
 	}
 	
 	public UiMainWindow getMainWindow()
@@ -39,5 +44,18 @@ abstract public class WizardStage extends MartusStage
 		return mainWindow;
 	}
 
+	protected void addSceneFactory(int i, MartusSceneFactory sceneFactory)
+	{
+		scenes.add(i, sceneFactory);
+	}
+
+	@Override
+	public MartusSceneFactory getCurrentSceneFactory() throws Exception
+	{
+		return scenes.get(currentSceneIndex);
+	}
+
 	private UiMainWindow mainWindow;
+	private int currentSceneIndex;
+	private Vector<MartusSceneFactory> scenes;
 }
