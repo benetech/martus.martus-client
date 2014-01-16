@@ -27,7 +27,9 @@ package org.martus.client.swingui.jfx;
 
 import java.util.Vector;
 
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.MartusLogger;
 
 abstract public class WizardStage extends MartusStage
 {
@@ -42,6 +44,11 @@ abstract public class WizardStage extends MartusStage
 	public UiMainWindow getMainWindow()
 	{
 		return mainWindow;
+	}
+	
+	public MartusLocalization getLocalization()
+	{
+		return getMainWindow().getLocalization();
 	}
 	
 	@Override
@@ -67,9 +74,19 @@ abstract public class WizardStage extends MartusStage
 
 	public void handleNavigationEvent(String navigationNext)
 	{
-		++currentSceneIndex;
-		if(currentSceneIndex >= scenes.size())
+		try
+		{
+			++currentSceneIndex;
+			if(currentSceneIndex >= scenes.size())
+				getShell().dispose();
+			else
+				showCurrentScene();
+		}
+		catch(Exception e)
+		{
+			MartusLogger.logException(e);
 			getShell().dispose();
+		}
 	}
 
 	public static final String NAVIGATION_NEXT = "Next";

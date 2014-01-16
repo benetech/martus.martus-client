@@ -33,5 +33,6 @@ public class SetupWizardStage extends WizardStage
 	{
 		super(mainWindow);
 		addSceneFactory(0, new FxSelectLanguageScene.Factory(getMainWindow(), "es"));
+		addSceneFactory(1, new FxPureJavaSelectLanguageScene.Factory(getLocalization(), "es"));
 	}
 }
