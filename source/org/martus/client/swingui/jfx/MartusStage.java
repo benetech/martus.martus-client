@@ -27,7 +27,7 @@ package org.martus.client.swingui.jfx;
 
 import javafx.embed.swing.JFXPanel;
 
-public class MartusStage extends JFXPanel
+abstract public class MartusStage extends JFXPanel
 {
-
+	abstract public MartusSceneFactory getInitialSceneFactory() throws Exception;
 }
