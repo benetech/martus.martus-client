@@ -55,6 +55,15 @@ abstract public class WizardStage extends MartusStage
 		return scenes.get(currentSceneIndex);
 	}
 
+	public void handleNavigationEvent(String navigationNext)
+	{
+		++currentSceneIndex;
+		if(currentSceneIndex >= scenes.size())
+			getShell().dispose();
+	}
+
+	public static final String NAVIGATION_NEXT = "Next";
+
 	private UiMainWindow mainWindow;
 	private int currentSceneIndex;
 	private Vector<MartusSceneFactory> scenes;
