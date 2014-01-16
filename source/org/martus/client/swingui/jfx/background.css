@@ -1,0 +1,45 @@
+.root {
+}
+
+.button{
+    -fx-border-radius: 5;
+    -fx-padding: 3 6 6 6;
+}
+
+.LeftPanel {
+	-fx-background-color: darkcyan;
+}
+
+.LeftTitle {
+	-fx-text-fill: aqua;
+    -fx-padding: 6 6 6 6;
+}
+
+.LeftGrid {
+	-fx-grid-lines-visible: false;
+	-fx-alignment: top-left;
+	-fx-spacing: 10;
+}
+
+.Icon {
+    -fx-padding: 16 16 16 16;
+    -fx-alignment: top-left;
+}
+
+.Entry {
+	-fx-text-fill: aqua;
+    -fx-padding: 6 6 6 6;
+}
+
+.Description {
+	color: white;
+	-fx-text-fill: white;
+    -fx-padding: 6 6 6 6;
+}
+
+.RightPanel {
+	-fx-background-color: aquamarine;
+    -fx-padding: 6 6 6 6;
+	-fx-spacing: 10;
+}
+
