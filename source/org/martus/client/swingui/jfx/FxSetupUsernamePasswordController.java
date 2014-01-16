@@ -25,14 +25,28 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+
 import org.martus.client.swingui.UiMainWindow;
 
-public class SetupWizardStage extends WizardStage
+public class FxSetupUsernamePasswordController extends MartusFxController
 {
-	public SetupWizardStage(UiMainWindow mainWindow) throws Exception
+	public FxSetupUsernamePasswordController(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindow);
-		addSceneFactory(0, new FxSelectLanguageScene.Factory(getMainWindow(), "es"));
-		addSceneFactory(1, new FxSetupUsernamePasswordScene.Factory(getMainWindow()));
+		super(mainWindowToUse);
 	}
+
+	@FXML
+	protected void handleNext(ActionEvent event) 
+	{
+		getStage().handleNavigationEvent(WizardStage.NAVIGATION_NEXT);
+	}
+
+	@FXML
+	protected void handleBack(ActionEvent event) 
+	{
+		getStage().handleNavigationEvent(WizardStage.NAVIGATION_BACK);
+	}
+
 }

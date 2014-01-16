@@ -72,7 +72,15 @@ abstract public class WizardStage extends MartusStage
 		return scenes.get(currentSceneIndex);
 	}
 
-	public void handleNavigationEvent(String navigationNext)
+	public void handleNavigationEvent(String navigationType)
+	{
+		if(navigationType.equals(NAVIGATION_BACK))
+			back();
+		else if(navigationType.equals(NAVIGATION_NEXT))
+			next();
+	}
+	
+	private void next()
 	{
 		try
 		{
@@ -89,7 +97,24 @@ abstract public class WizardStage extends MartusStage
 		}
 	}
 
+	private void back()
+	{
+		try
+		{
+			--currentSceneIndex;
+			if(currentSceneIndex < 0)
+				getShell().setVisible(false);
+			else
+				showCurrentScene();
+		}
+		catch(Exception e)
+		{
+			MartusLogger.logException(e);
+			getShell().dispose();
+		}
+	}
 	public static final String NAVIGATION_NEXT = "Next";
+	public static final String NAVIGATION_BACK = "Back";
 
 	private UiMainWindow mainWindow;
 	private int currentSceneIndex;
