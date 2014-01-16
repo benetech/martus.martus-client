@@ -25,9 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import javax.swing.JDialog;
 
 public interface MartusController
 {
-	public void setShell(JDialog shell);
+	public void setStage(MartusStage stage);
 }
