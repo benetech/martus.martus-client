@@ -31,7 +31,7 @@ import javax.swing.JDialog;
 
 abstract public class MartusStage extends JFXPanel
 {
-	abstract public MartusSceneFactory getInitialSceneFactory() throws Exception;
+	abstract public MartusSceneFactory getCurrentSceneFactory() throws Exception;
 	
 	public void setShell(JDialog shellToUse)
 	{
