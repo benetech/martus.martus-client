@@ -25,8 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import javax.swing.JDialog;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -154,7 +152,7 @@ public class FxPureJavaSelectLanguageScene extends MartusPureJavaScene implement
 			   		//@Override 
 			   		public void handle(ActionEvent e) 
 			   		{
-			   			getStage().dispose();
+			   			getStage().handleNavigationEvent(WizardStage.NAVIGATION_NEXT);
 			   		}
 				}
 				);

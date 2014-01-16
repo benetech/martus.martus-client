@@ -43,9 +43,8 @@ abstract public class MartusStage extends JFXPanel
 		return shell;
 	}
 	
-	public void dispose()
+	public void handleNavigationEvent(String navigationNext)
 	{
-		shell.dispose();
 	}
 
 	private JDialog shell;
