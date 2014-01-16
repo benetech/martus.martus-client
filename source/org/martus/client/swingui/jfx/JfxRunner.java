@@ -43,10 +43,8 @@ public class JfxRunner implements Runnable
 		try
 		{
 			MartusScene scene = sceneFactory.createScene();
-			scene.setShell(shell);
 			MartusController controller = sceneFactory.getController();
-			if(controller != null)
-				controller.setShell(shell);
+			controller.setShell(shell);
 			stage.setScene(scene);
 		} 
 		catch (Exception e)

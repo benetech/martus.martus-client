@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import javax.swing.JDialog;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -302,6 +304,17 @@ public class FxPureJavaSelectLanguageScene extends MartusPureJavaScene implement
 //			}
 //		}
 
+	public void setShell(JDialog shellToUse)
+	{
+		shell = shellToUse;
+	}
+	
+	public JDialog getShell()
+	{
+		return shell;
+	}
+	
+	private JDialog shell;
 	private final int LEFT_COLUMN_MAX_WIDTH = 350;
 	private final int RIGHT_COLUMN_MAX_WIDTH = 450;
 //	private final int MARGIN_SPACING = 30;
