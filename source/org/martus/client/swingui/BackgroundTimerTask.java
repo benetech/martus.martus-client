@@ -52,6 +52,7 @@ import org.martus.common.MartusLogger;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
@@ -469,14 +470,10 @@ class BackgroundTimerTask extends TimerTask
 			MartusAccountAccessToken currentToken = getApp().getMartusAccountAccessTokenFromServer();
 			//TODO check and save token to configInfo. 
 		} 
-		catch (TokenInvalidException e)
+		catch (Exception e)
 		{
 			MartusLogger.logException(e);
 		} 
-		catch (ServerNotAvailableException e)
-		{
-			MartusLogger.logException(e);
-		}
 	}
 
 	public void checkForNewsFromServer()

@@ -1552,7 +1552,7 @@ public class MartusApp
 		return false;
 	}
 	
-	public MartusAccountAccessToken getMartusAccountAccessTokenFromServer() throws TokenInvalidException, ServerNotAvailableException 
+	public MartusAccountAccessToken getMartusAccountAccessTokenFromServer() throws TokenInvalidException, ServerNotAvailableException, MartusSignatureException 
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
