@@ -41,7 +41,7 @@ public class FxSetupUsernamePasswordScene extends MartusFxmlScene
 		@Override
 		public MartusScene createScene() throws Exception
 		{
-			FxSetupUsernamePasswordScene scene = new FxSetupUsernamePasswordScene(getLoader());
+			FxSetupUsernamePasswordScene scene = new FxSetupUsernamePasswordScene(createLoader());
 			return scene;
 		}
 	}
