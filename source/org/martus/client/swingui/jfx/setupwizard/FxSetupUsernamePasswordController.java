@@ -33,6 +33,7 @@ import javafx.scene.control.TextField;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxWizardStage;
+import org.martus.common.MartusLogger;
 
 public class FxSetupUsernamePasswordController extends FxController
 {
@@ -44,7 +45,27 @@ public class FxSetupUsernamePasswordController extends FxController
 	@FXML
 	protected void handleNext(ActionEvent event) 
 	{
-		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
+		try
+		{
+			createAccount();
+			getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+	}
+
+	private void createAccount() throws Exception
+	{
+		String userNameValue = userName.getText();
+		String passwordValue = passwordField.getText();
+		String confirmedPasswordValue = confirmPasswordField.getText();
+		//FIXME need better handling of invalid pw and u
+		if (!passwordValue.equals(confirmedPasswordValue))
+			return;
+		
+		getMainWindow().getApp().createAccount(userNameValue, passwordValue.toCharArray());
 	}
 
 	@FXML
