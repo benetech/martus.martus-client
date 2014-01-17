@@ -26,7 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx;
 
 
-public interface MartusController
+public interface FxController
 {
 	public void setStage(MartusStage stage);
 }

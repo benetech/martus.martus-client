@@ -56,7 +56,7 @@ abstract public class WizardStage extends MartusStage
 	{
 		MartusSceneFactory sceneFactory = getCurrentSceneFactory();
 		MartusScene scene = sceneFactory.createScene();
-		MartusController controller = sceneFactory.getController();
+		FxController controller = sceneFactory.getController();
 		controller.setStage(this);
 		setScene(scene);
 	}

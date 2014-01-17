@@ -40,9 +40,9 @@ abstract public class MartusFxmlSceneFactory extends MartusSceneFactory
 		return controller;
 	}
 	
-	public MartusFxmlLoader createLoader() throws Exception
+	public FxmlLoaderWithController createLoader() throws Exception
 	{
-		return new MartusFxmlLoader(controller, getResourceAsUrl(fxmlLocation));
+		return new FxmlLoaderWithController(controller, getResourceAsUrl(fxmlLocation));
 	}
 	
 	public static URL getResourceAsUrl(String resourceName) throws Exception

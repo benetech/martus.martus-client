@@ -28,5 +28,5 @@ package org.martus.client.swingui.jfx;
 abstract public class MartusSceneFactory
 {
 	abstract public MartusScene createScene() throws Exception;
-	abstract public MartusController getController() throws Exception;
+	abstract public FxController getController() throws Exception;
 }
