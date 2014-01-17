@@ -28,7 +28,7 @@ package org.martus.client.swingui.jfx;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 
-public class MartusFxController implements MartusController
+public class MartusFxController implements FxController
 {
 	public MartusFxController(UiMainWindow mainWindowToUse)
 	{

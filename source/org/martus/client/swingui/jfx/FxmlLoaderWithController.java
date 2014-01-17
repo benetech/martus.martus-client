@@ -29,9 +29,9 @@ import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
 
-public class MartusFxmlLoader extends FXMLLoader
+public class FxmlLoaderWithController extends FXMLLoader
 {
-	public MartusFxmlLoader(MartusFxController controllerToUse, URL resourceAsUrl)
+	public FxmlLoaderWithController(MartusFxController controllerToUse, URL resourceAsUrl)
 	{
 		super(resourceAsUrl);
 		setController(controllerToUse);
