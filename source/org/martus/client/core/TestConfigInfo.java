@@ -152,7 +152,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 	public void testMartusAccountAccessTokens() 
 	{
 		ConfigInfo info = new ConfigInfo();
-		assertEquals("Should have no Tokens for a new config", 0, info.getMartusAccountAccessTokens().size());
+		assertEquals("Should have 0 Tokens for a new config", 0, info.getMartusAccountAccessTokens().size());
+		assertFalse("should not have a Token", info.hasMartusAccountAccessToken());
 		try
 		{
 			info.getCurrentMartusAccountAccessToken();
@@ -160,8 +161,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 		}
 		catch(TokenInvalidException expectedException)
 		{
-			
 		}
+
 		try
 		{
 			String rawTokenData = "11223344";  
@@ -170,13 +171,31 @@ public class TestConfigInfo extends TestCaseEnhanced
 			newTokens.add(currentToken);
 			info.setMartusAccountAccessTokens(newTokens);
 			assertEquals("Token data should match", rawTokenData, info.getCurrentMartusAccountAccessToken().getToken());
+			assertTrue("should now have a Token", info.hasMartusAccountAccessToken());
+			assertEquals("Should have 1 Token", 1, info.getMartusAccountAccessTokens().size());
+			
+			Vector emptyTokens = new Vector();
+			info.setMartusAccountAccessTokens(emptyTokens);
+			assertFalse("should not have any tokens now", info.hasMartusAccountAccessToken());
+			info.setCurrentMartusAccountAccessToken(currentToken);
+			assertEquals("Token data should still match", rawTokenData, info.getCurrentMartusAccountAccessToken().getToken());
+			assertTrue("should now have a Token again", info.hasMartusAccountAccessToken());
+			assertEquals("Should have 1 Token again", 1, info.getMartusAccountAccessTokens().size());
+			
+			String newMartusRawToken = "34482187";
+			MartusAccountAccessToken newToken = new MartusAccountAccessToken(newMartusRawToken);
+			
+			info.setCurrentMartusAccountAccessToken(newToken);
+			
+			assertEquals("Token data should match new Token", newMartusRawToken, info.getCurrentMartusAccountAccessToken().getToken());
+			assertTrue("should still have a Token", info.hasMartusAccountAccessToken());
+			assertEquals("Should still have 1 Token", 1, info.getMartusAccountAccessTokens().size());
+			
 		}
 		catch(TokenInvalidException e)
 		{
 			
 		}
-		
-		
 	}
 
 	public void testGetContactInfo() throws Exception

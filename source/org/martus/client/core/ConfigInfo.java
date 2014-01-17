@@ -85,7 +85,12 @@ public class ConfigInfo
 	public void setBackedUpImprovedKeypairShare(boolean newBackedUpImprovedKeypairShare) {backedUpImprovedKeypairShare = newBackedUpImprovedKeypairShare;}
 	public void setUseInternalTor(boolean newUseInternalTor) { useInternalTor = newUseInternalTor;}
 	public void setMartusAccountAccessTokens(Vector newTokens) { martusAccountAccessTokens = newTokens;} 
-
+	public void setCurrentMartusAccountAccessToken(MartusAccountAccessToken newToken) 
+	{
+		Vector tokenList = new Vector();
+		tokenList.add(newToken);
+		setMartusAccountAccessTokens(tokenList);
+	}
 
 	public void clearHQKey()						{ legacyHQKey = ""; }
 	public void clearPromptUserRequestSendToServer() { mustAskUserToSendToServer = false; }
@@ -119,11 +124,15 @@ public class ConfigInfo
 	public boolean hasBackedUpImprovedKeypairShare() {return backedUpImprovedKeypairShare;}
 	public boolean getDoZawgyiConversion() {return true;}
 	public boolean useInternalTor() {return useInternalTor;}
-	public Vector getMartusAccountAccessTokens() { return martusAccountAccessTokens;} 
+	public Vector getMartusAccountAccessTokens() { return martusAccountAccessTokens;}
+	public boolean hasMartusAccountAccessToken() 
+	{
+		int numTokens = martusAccountAccessTokens.size();
+		return (numTokens == 1);
+	}
 	public MartusAccountAccessToken getCurrentMartusAccountAccessToken() throws TokenInvalidException
 	{ 
-		int numTokens = martusAccountAccessTokens.size();
-		if(numTokens != 1)
+		if(!hasMartusAccountAccessToken())
 			throw new TokenInvalidException();
 		return (MartusAccountAccessToken)martusAccountAccessTokens.get(0);
 	} 
