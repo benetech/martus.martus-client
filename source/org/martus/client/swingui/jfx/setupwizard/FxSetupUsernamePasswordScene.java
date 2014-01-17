@@ -38,7 +38,7 @@ public class FxSetupUsernamePasswordScene extends FxmlScene
 	{
 		public Factory(UiMainWindow mainWindowToUse) throws Exception
 		{
-			super(new FxSetupUsernamePasswordController(mainWindowToUse), "SetupUsernamePassword.fxml");
+			super(new FxSetupUsernamePasswordController(mainWindowToUse), "setupwizard/SetupUsernamePassword.fxml");
 		}
 
 		@Override

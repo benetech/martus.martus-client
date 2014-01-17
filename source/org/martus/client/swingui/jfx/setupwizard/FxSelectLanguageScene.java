@@ -40,7 +40,7 @@ public class FxSelectLanguageScene extends FxmlScene
 	{
 		public Factory(UiMainWindow mainWindowToUse) throws Exception
 		{
-			super(new FxSelectLanguageController(mainWindowToUse), "MartusCreateAccount.fxml");
+			super(new FxSelectLanguageController(mainWindowToUse), "setupwizard/MartusCreateAccount.fxml");
 
 			localization = mainWindowToUse.getLocalization();
 		}
