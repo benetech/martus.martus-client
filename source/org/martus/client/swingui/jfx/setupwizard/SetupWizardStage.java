@@ -23,30 +23,17 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+package org.martus.client.swingui.jfx.setupwizard;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxWizardStage;
 
-public class FxSetupUsernamePasswordController extends FxController
+public class SetupWizardStage extends FxWizardStage
 {
-	public FxSetupUsernamePasswordController(UiMainWindow mainWindowToUse)
+	public SetupWizardStage(UiMainWindow mainWindow) throws Exception
 	{
-		super(mainWindowToUse);
+		super(mainWindow);
+		addSceneFactory(0, new FxSelectLanguageScene.Factory(getMainWindow()));
+		addSceneFactory(1, new FxSetupUsernamePasswordScene.Factory(getMainWindow()));
 	}
-
-	@FXML
-	protected void handleNext(ActionEvent event) 
-	{
-		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
-	}
-
-	@FXML
-	protected void handleBack(ActionEvent event) 
-	{
-		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_BACK);
-	}
-
 }

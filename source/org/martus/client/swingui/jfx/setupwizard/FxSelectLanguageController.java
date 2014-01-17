@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.setupwizard;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,6 +37,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxSelectLanguageController extends FxController implements Initializable
