@@ -23,47 +23,39 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.setupwizard;
+
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxScene;
+import org.martus.client.swingui.jfx.FxmlScene;
+import org.martus.client.swingui.jfx.FxmlSceneFactory;
 
 import javafx.fxml.FXMLLoader;
 
-import org.martus.client.swingui.UiMainWindow;
-import org.martus.clientside.UiLocalization;
-import org.martus.common.fieldspec.ChoiceItem;
-
-public class FxSelectLanguageScene extends FxmlScene
+public class FxSetupUsernamePasswordScene extends FxmlScene
 {
 	public static class Factory extends FxmlSceneFactory
 	{
 		public Factory(UiMainWindow mainWindowToUse) throws Exception
 		{
-			super(new FxSelectLanguageController(mainWindowToUse), "MartusCreateAccount.fxml");
-
-			localization = mainWindowToUse.getLocalization();
+			super(new FxSetupUsernamePasswordController(mainWindowToUse), "SetupUsernamePassword.fxml");
 		}
-		
+
 		@Override
 		public FxScene createScene() throws Exception
 		{
-			FxScene scene = new FxSelectLanguageScene(createLoader(), localization);
+			FxSetupUsernamePasswordScene scene = new FxSetupUsernamePasswordScene(createLoader());
 			return scene;
 		}
-
-		private UiLocalization localization;
 	}
 	
-	public FxSelectLanguageScene(FXMLLoader loader, UiLocalization localizationToUse) throws Exception
+	public FxSetupUsernamePasswordScene(FXMLLoader loader) throws Exception
 	{
 		super(loader);
-
-		localization = localizationToUse;
 
         String css = this.getClass().getResource("background.css").toExternalForm();
 		getStylesheets().add(css);			
 
 	}
 
-	String languageCodeChosen;
-	UiLocalization localization;
-	ChoiceItem[] allUILanguagesSupported;
 }

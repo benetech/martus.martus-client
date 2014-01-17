@@ -113,7 +113,7 @@ import org.martus.client.swingui.dialogs.UiTemplateDlg;
 import org.martus.client.swingui.dialogs.UiWarningMessageDlg;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.FxModalDialog;
-import org.martus.client.swingui.jfx.SetupWizardStage;
+import org.martus.client.swingui.jfx.setupwizard.SetupWizardStage;
 import org.martus.client.swingui.spellcheck.SpellCheckerManager;
 import org.martus.client.swingui.tablemodels.DeleteMyServerDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveHQDraftsTableModel;
