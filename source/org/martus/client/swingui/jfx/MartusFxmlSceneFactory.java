@@ -29,13 +29,13 @@ import java.net.URL;
 
 abstract public class MartusFxmlSceneFactory extends FxSceneFactory
 {
-	public MartusFxmlSceneFactory(MartusFxController controllerToUse, String fxmlLocationToUse) throws Exception
+	public MartusFxmlSceneFactory(FxController controllerToUse, String fxmlLocationToUse) throws Exception
 	{
 		controller = controllerToUse;
 		fxmlLocation = fxmlLocationToUse;
 	}
 
-	public MartusFxController getController()
+	public FxController getController()
 	{
 		return controller;
 	}
@@ -51,6 +51,6 @@ abstract public class MartusFxmlSceneFactory extends FxSceneFactory
 		return url;
 	}
 	
-	private MartusFxController controller;
+	private FxController controller;
 	private String fxmlLocation;
 }
