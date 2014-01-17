@@ -29,9 +29,9 @@ import org.martus.client.swingui.UiMainWindow;
 
 import javafx.fxml.FXMLLoader;
 
-public class FxSetupUsernamePasswordScene extends MartusFxmlScene
+public class FxSetupUsernamePasswordScene extends FxmlScene
 {
-	public static class Factory extends MartusFxmlSceneFactory
+	public static class Factory extends FxmlSceneFactory
 	{
 		public Factory(UiMainWindow mainWindowToUse) throws Exception
 		{

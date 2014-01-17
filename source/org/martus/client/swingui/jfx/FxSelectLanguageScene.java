@@ -31,9 +31,9 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class FxSelectLanguageScene extends MartusFxmlScene
+public class FxSelectLanguageScene extends FxmlScene
 {
-	public static class Factory extends MartusFxmlSceneFactory
+	public static class Factory extends FxmlSceneFactory
 	{
 		public Factory(UiMainWindow mainWindowToUse) throws Exception
 		{
