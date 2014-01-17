@@ -27,7 +27,7 @@ package org.martus.client.swingui.jfx;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public class SetupWizardStage extends WizardStage
+public class SetupWizardStage extends FxWizardStage
 {
 	public SetupWizardStage(UiMainWindow mainWindow) throws Exception
 	{

@@ -28,5 +28,5 @@ package org.martus.client.swingui.jfx;
 
 public interface FxController
 {
-	public void setStage(MartusStage stage);
+	public void setStage(FxStage stage);
 }

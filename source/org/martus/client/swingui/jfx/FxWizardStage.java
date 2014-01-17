@@ -31,9 +31,9 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
-abstract public class WizardStage extends MartusStage
+abstract public class FxWizardStage extends FxStage
 {
-	public WizardStage(UiMainWindow mainWindowToUse)
+	public FxWizardStage(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
 		

@@ -35,12 +35,12 @@ public class MartusFxController implements FxController
 		mainWindow = mainWindowToUse;
 	}
 
-	public void setStage(MartusStage stageToUse)
+	public void setStage(FxStage stageToUse)
 	{
 		stage = stageToUse;
 	}
 	
-	public MartusStage getStage()
+	public FxStage getStage()
 	{
 		return stage;
 	}
@@ -55,6 +55,6 @@ public class MartusFxController implements FxController
 		return mainWindow.getLocalization();
 	}
 
-	private MartusStage stage;
+	private FxStage stage;
 	private UiMainWindow mainWindow;
 }

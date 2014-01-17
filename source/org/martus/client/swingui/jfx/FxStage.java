@@ -29,7 +29,7 @@ import javafx.embed.swing.JFXPanel;
 
 import javax.swing.JDialog;
 
-abstract public class MartusStage extends JFXPanel
+abstract public class FxStage extends JFXPanel
 {
 	abstract public MartusSceneFactory getCurrentSceneFactory() throws Exception;
 	
