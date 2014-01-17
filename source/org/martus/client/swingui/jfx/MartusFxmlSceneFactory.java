@@ -27,24 +27,22 @@ package org.martus.client.swingui.jfx;
 
 import java.net.URL;
 
-import javafx.fxml.FXMLLoader;
-
 abstract public class MartusFxmlSceneFactory extends MartusSceneFactory
 {
-	public MartusFxmlSceneFactory(MartusFxController controller, String fxmlLocation) throws Exception
+	public MartusFxmlSceneFactory(MartusFxController controllerToUse, String fxmlLocationToUse) throws Exception
 	{
-		loader = new MartusFxmlLoader(controller, getResourceAsUrl(fxmlLocation));
+		controller = controllerToUse;
+		fxmlLocation = fxmlLocationToUse;
 	}
 
 	public MartusFxController getController()
 	{
-		MartusFxController controller = getLoader().getController();
 		return controller;
 	}
 	
-	public FXMLLoader getLoader()
+	public MartusFxmlLoader createLoader() throws Exception
 	{
-		return loader;
+		return new MartusFxmlLoader(controller, getResourceAsUrl(fxmlLocation));
 	}
 	
 	public static URL getResourceAsUrl(String resourceName) throws Exception
@@ -53,5 +51,6 @@ abstract public class MartusFxmlSceneFactory extends MartusSceneFactory
 		return url;
 	}
 	
-	private FXMLLoader loader;
+	private MartusFxController controller;
+	private String fxmlLocation;
 }

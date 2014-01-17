@@ -45,7 +45,7 @@ public class FxSelectLanguageScene extends MartusFxmlScene
 		@Override
 		public MartusScene createScene() throws Exception
 		{
-			MartusScene scene = new FxSelectLanguageScene(getLoader(), localization);
+			MartusScene scene = new FxSelectLanguageScene(createLoader(), localization);
 			return scene;
 		}
 
