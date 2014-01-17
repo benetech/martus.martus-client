@@ -123,9 +123,9 @@ public class ConfigInfo
 	public MartusAccountAccessToken getCurrentMartusAccountAccessToken() throws TokenInvalidException
 	{ 
 		int numTokens = martusAccountAccessTokens.size();
-		if(numTokens == 0)
+		if(numTokens != 1)
 			throw new TokenInvalidException();
-		return (MartusAccountAccessToken)martusAccountAccessTokens.get(numTokens-1);
+		return (MartusAccountAccessToken)martusAccountAccessTokens.get(0);
 	} 
 
 	public boolean isServerConfigured()

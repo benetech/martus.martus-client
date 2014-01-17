@@ -469,6 +469,7 @@ class BackgroundTimerTask extends TimerTask
 		{
 			MartusAccountAccessToken currentToken = getApp().getMartusAccountAccessTokenFromServer();
 			//TODO check and save token to configInfo. 
+			alreadyGotMartusAccountAccessToken = true;
 		} 
 		catch (Exception e)
 		{
