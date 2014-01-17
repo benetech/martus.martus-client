@@ -49,7 +49,7 @@ import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxPureJavaSelectLanguageScene extends MartusPureJavaScene implements FxController
 {
-	public static class Factory extends MartusSceneFactory
+	public static class Factory extends FxSceneFactory
 	{
 		public Factory(UiLocalization localizationToUse, String defaultLanguageCodeToUse)
 		{
@@ -58,7 +58,7 @@ public class FxPureJavaSelectLanguageScene extends MartusPureJavaScene implement
 		}
 		
 		@Override
-		public MartusScene createScene()
+		public FxScene createScene()
 		{
 			FxPureJavaSelectLanguageScene scene = new FxPureJavaSelectLanguageScene(localization, defaultLanguageCode);
 			controller = scene;

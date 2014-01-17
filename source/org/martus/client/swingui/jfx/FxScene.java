@@ -28,9 +28,9 @@ package org.martus.client.swingui.jfx;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-public class MartusScene extends Scene
+public class FxScene extends Scene
 {
-	public MartusScene(Parent root)
+	public FxScene(Parent root)
 	{
 		super(root);
 	}

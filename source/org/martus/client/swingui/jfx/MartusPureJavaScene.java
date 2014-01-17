@@ -27,7 +27,7 @@ package org.martus.client.swingui.jfx;
 
 import javafx.scene.Group;
 
-public class MartusPureJavaScene extends MartusScene
+public class MartusPureJavaScene extends FxScene
 {
 	public MartusPureJavaScene()
 	{

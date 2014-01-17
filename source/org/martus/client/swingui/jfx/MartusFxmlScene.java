@@ -28,7 +28,7 @@ package org.martus.client.swingui.jfx;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
-public class MartusFxmlScene extends MartusScene
+public class MartusFxmlScene extends FxScene
 {
 	public MartusFxmlScene(FXMLLoader loaderToUse) throws Exception
 	{
