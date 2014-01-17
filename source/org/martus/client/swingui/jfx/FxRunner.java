@@ -29,7 +29,7 @@ import org.martus.common.MartusLogger;
 
 public class FxRunner implements Runnable
 {
-	public FxRunner(MartusStage stageToUse)
+	public FxRunner(FxStage stageToUse)
 	{
 		stage = stageToUse;
 	}
@@ -48,5 +48,5 @@ public class FxRunner implements Runnable
 		}
 	}
 	
-	private MartusStage stage;
+	private FxStage stage;
 }

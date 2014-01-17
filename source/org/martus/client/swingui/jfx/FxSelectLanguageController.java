@@ -68,7 +68,7 @@ public class FxSelectLanguageController extends MartusFxController implements In
 	@FXML
 	protected void handleNext(ActionEvent event) 
 	{
-		getStage().handleNavigationEvent(WizardStage.NAVIGATION_NEXT);
+		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
 	}
 
 	private ObservableList<ChoiceItem> getAvailableLanguages()

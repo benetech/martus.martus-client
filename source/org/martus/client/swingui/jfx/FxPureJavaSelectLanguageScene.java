@@ -152,7 +152,7 @@ public class FxPureJavaSelectLanguageScene extends MartusPureJavaScene implement
 			   		//@Override 
 			   		public void handle(ActionEvent e) 
 			   		{
-			   			getStage().handleNavigationEvent(WizardStage.NAVIGATION_NEXT);
+			   			getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
 			   		}
 				}
 				);
@@ -302,17 +302,17 @@ public class FxPureJavaSelectLanguageScene extends MartusPureJavaScene implement
 //			}
 //		}
 
-	public void setStage(MartusStage stageToUse)
+	public void setStage(FxStage stageToUse)
 	{
 		stage = stageToUse;
 	}
 	
-	public MartusStage getStage()
+	public FxStage getStage()
 	{
 		return stage;
 	}
 	
-	private MartusStage stage;
+	private FxStage stage;
 	private final int LEFT_COLUMN_MAX_WIDTH = 350;
 	private final int RIGHT_COLUMN_MAX_WIDTH = 450;
 //	private final int MARGIN_SPACING = 30;

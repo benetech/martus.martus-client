@@ -40,13 +40,13 @@ public class FxSetupUsernamePasswordController extends MartusFxController
 	@FXML
 	protected void handleNext(ActionEvent event) 
 	{
-		getStage().handleNavigationEvent(WizardStage.NAVIGATION_NEXT);
+		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
 	}
 
 	@FXML
 	protected void handleBack(ActionEvent event) 
 	{
-		getStage().handleNavigationEvent(WizardStage.NAVIGATION_BACK);
+		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_BACK);
 	}
 
 }
