@@ -27,9 +27,9 @@ package org.martus.client.swingui.jfx;
 
 import org.martus.common.MartusLogger;
 
-public class JfxRunner implements Runnable
+public class FxRunner implements Runnable
 {
-	public JfxRunner(MartusStage stageToUse)
+	public FxRunner(MartusStage stageToUse)
 	{
 		stage = stageToUse;
 	}
