@@ -40,6 +40,7 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BackgroundRetriever;
 import org.martus.client.core.BackgroundUploader;
+import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.BulletinSummary;
@@ -467,8 +468,20 @@ class BackgroundTimerTask extends TimerTask
 			return;
 		try
 		{
-			MartusAccountAccessToken currentToken = getApp().getMartusAccountAccessTokenFromServer();
-			//TODO check and save token to configInfo. 
+			MartusAccountAccessToken currentTokenFromServer = getApp().getMartusAccountAccessTokenFromServer();
+			ConfigInfo config = getApp().getConfigInfo();
+			boolean saveTokenToConfigInfo = true;
+			if(config.hasMartusAccountAccessToken())
+			{
+				MartusAccountAccessToken previousToken = config.getCurrentMartusAccountAccessToken();
+				if(previousToken.equals(currentTokenFromServer))
+					saveTokenToConfigInfo = false;
+			}
+			if(saveTokenToConfigInfo)
+			{
+				config.setCurrentMartusAccountAccessToken(currentTokenFromServer);
+				getApp().saveConfigInfo();
+			}
 			alreadyGotMartusAccountAccessToken = true;
 		} 
 		catch (Exception e)
