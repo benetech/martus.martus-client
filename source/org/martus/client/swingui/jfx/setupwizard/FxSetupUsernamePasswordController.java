@@ -27,6 +27,8 @@ package org.martus.client.swingui.jfx.setupwizard;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
@@ -51,4 +53,12 @@ public class FxSetupUsernamePasswordController extends FxController
 		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_BACK);
 	}
 
+	@FXML
+	private TextField userName;
+	
+	@FXML
+	private PasswordField passwordField;
+	
+	@FXML
+	private PasswordField confirmPasswordField;
 }
