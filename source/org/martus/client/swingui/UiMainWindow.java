@@ -55,6 +55,8 @@ import java.util.Stack;
 import java.util.TimerTask;
 import java.util.Vector;
 
+import javafx.application.Platform;
+
 import javax.crypto.Cipher;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -429,7 +431,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		try
 		{
-			FxModalDialog.createAndShow(this, new SetupWizardStage(this));
+			// NOTE: Prevent implicit JavaFX shutdown when the only JFX window is closed
+		    Platform.setImplicitExit(false);
+		    
+		    FxModalDialog.createAndShow(this, new SetupWizardStage(this));
 		} 
 		catch (Exception e)
 		{
