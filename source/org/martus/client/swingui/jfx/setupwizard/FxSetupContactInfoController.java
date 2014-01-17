@@ -31,7 +31,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
+import org.martus.client.core.ConfigInfo;
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxWizardStage;
@@ -41,6 +45,9 @@ public class FxSetupContactInfoController extends FxController implements Initia
 	public FxSetupContactInfoController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+		
+		info = getMainWindow().getApp().getConfigInfo();
+		fontHelper = new UiFontEncodingHelper(getConfigInfo().getDoZawgyiConversion());
 	}
 
 	public void initialize(URL url, ResourceBundle bundle)
@@ -50,7 +57,44 @@ public class FxSetupContactInfoController extends FxController implements Initia
 	@FXML
 	protected void handleNext(ActionEvent event) 
 	{
+		getConfigInfo().setAuthor(getFontHelper().getStorable(authorField.getText()));
+		getConfigInfo().setOrganization(getFontHelper().getStorable(organizationField.getText()));
+		getConfigInfo().setEmail(getFontHelper().getStorable(emailField.getText()));
+		getConfigInfo().setWebPage(getFontHelper().getStorable(webPageField.getText()));
+		getConfigInfo().setPhone(getFontHelper().getStorable(phoneNumberField.getText()));
+		getConfigInfo().setAddress(getFontHelper().getStorable(mailingAddressField.getText()));
+		
 		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
 	}
 
+	private UiFontEncodingHelper getFontHelper()
+	{
+		return fontHelper;
+	}
+
+	private ConfigInfo getConfigInfo()
+	{
+		return info;
+	}
+
+	@FXML
+	private TextField authorField;
+	
+	@FXML
+	private TextField organizationField;
+	
+	@FXML
+	private TextField emailField;
+	
+	@FXML
+	private TextField webPageField;
+	
+	@FXML
+	private TextField phoneNumberField;
+	
+	@FXML
+	private TextArea mailingAddressField;
+	
+	private ConfigInfo info;
+	private UiFontEncodingHelper fontHelper;
 }
