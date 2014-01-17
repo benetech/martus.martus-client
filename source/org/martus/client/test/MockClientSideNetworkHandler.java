@@ -99,9 +99,9 @@ public class MockClientSideNetworkHandler implements ClientSideNetworkInterface
 		return server.getNews(myAccountId, parameters, signature);
 	}
 	
-	public Vector getMartusAccountAccessToken(String myAccountId)
+	public Vector getMartusAccountAccessToken(String myAccountId, Vector parameters, String signature)
 	{
-		return server.getMartusAccountAccessToken(myAccountId);
+		return server.getMartusAccountAccessToken(myAccountId, parameters, signature);
 	}
 
 	public Vector getServerCompliance(String myAccountId, Vector parameters, String signature)
