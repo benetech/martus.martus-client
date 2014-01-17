@@ -27,12 +27,32 @@ package org.martus.client.swingui.jfx;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public class SetupWizardStage extends WizardStage
+import javafx.fxml.FXMLLoader;
+
+public class FxSetupUsernamePasswordScene extends MartusFxmlScene
 {
-	public SetupWizardStage(UiMainWindow mainWindow) throws Exception
+	public static class Factory extends MartusFxmlSceneFactory
 	{
-		super(mainWindow);
-		addSceneFactory(0, new FxSelectLanguageScene.Factory(getMainWindow()));
-		addSceneFactory(1, new FxSetupUsernamePasswordScene.Factory(getMainWindow()));
+		public Factory(UiMainWindow mainWindowToUse) throws Exception
+		{
+			super(new FxSetupUsernamePasswordController(mainWindowToUse), "SetupUsernamePassword.fxml");
+		}
+
+		@Override
+		public MartusScene createScene() throws Exception
+		{
+			FxSetupUsernamePasswordScene scene = new FxSetupUsernamePasswordScene(getLoader());
+			return scene;
+		}
 	}
+	
+	public FxSetupUsernamePasswordScene(FXMLLoader loader) throws Exception
+	{
+		super(loader);
+
+        String css = this.getClass().getResource("background.css").toExternalForm();
+		getStylesheets().add(css);			
+
+	}
+
 }
