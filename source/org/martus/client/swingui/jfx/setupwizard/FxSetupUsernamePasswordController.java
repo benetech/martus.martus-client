@@ -27,8 +27,10 @@ package org.martus.client.swingui.jfx.setupwizard;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
@@ -60,10 +62,6 @@ public class FxSetupUsernamePasswordController extends FxController
 	{
 		String userNameValue = userName.getText();
 		String passwordValue = passwordField.getText();
-		String confirmedPasswordValue = confirmPasswordField.getText();
-		//FIXME need better handling of invalid pw and u
-		if (!passwordValue.equals(confirmedPasswordValue))
-			return;
 		
 		getMainWindow().getApp().createAccount(userNameValue, passwordValue.toCharArray());
 	}
@@ -72,6 +70,23 @@ public class FxSetupUsernamePasswordController extends FxController
 	protected void handleBack(ActionEvent event) 
 	{
 		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_BACK);
+	}
+	
+	@FXML
+	protected void handleUsernameChanged(KeyEvent keyEvent)
+	{
+		String userNameValue = userName.getText();
+		String passwordValue = passwordField.getText();
+		try
+		{ 
+			errorLabel.setText("");
+			if (getMainWindow().getApp().doesAccountExist(userNameValue, passwordValue.toCharArray()))
+				errorLabel.setText("Account already Exists!");
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
 	}
 
 	@FXML
@@ -82,4 +97,7 @@ public class FxSetupUsernamePasswordController extends FxController
 	
 	@FXML
 	private PasswordField confirmPasswordField;
+	
+	@FXML
+	private Label errorLabel;
 }
