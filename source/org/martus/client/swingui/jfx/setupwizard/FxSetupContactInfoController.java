@@ -25,16 +25,32 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxWizardStage;
 
-public class SetupWizardStage extends FxWizardStage
+public class FxSetupContactInfoController extends FxController implements Initializable
 {
-	public SetupWizardStage(UiMainWindow mainWindow) throws Exception
+	public FxSetupContactInfoController(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindow);
-		addSceneFactory(0, new FxSelectLanguageScene.Factory(getMainWindow()));
-		addSceneFactory(1, new FxSetupUsernamePasswordScene.Factory(getMainWindow()));
-		addSceneFactory(2, new FxSetupContactInfoSceneFactory(getMainWindow()));
+		super(mainWindowToUse);
 	}
+
+	public void initialize(URL url, ResourceBundle bundle)
+	{
+	}
+
+	@FXML
+	protected void handleNext(ActionEvent event) 
+	{
+		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
+	}
+
 }
