@@ -130,7 +130,7 @@ public class MartusUserDictionary implements UserDictionaryProvider
 			
 			addWordToInMemoryWordList(word);
 		}
-		
+		reader.close();
 		MartusLogger.log("User dictionary loaded word count: " + original.size());
 	}
 
