@@ -25,32 +25,13 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import java.net.URL;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 
-abstract public class MartusFxmlSceneFactory extends FxSceneFactory
+public class FxmlScene extends FxScene
 {
-	public MartusFxmlSceneFactory(FxController controllerToUse, String fxmlLocationToUse) throws Exception
+	public FxmlScene(FXMLLoader loaderToUse) throws Exception
 	{
-		controller = controllerToUse;
-		fxmlLocation = fxmlLocationToUse;
+		super((Parent) loaderToUse.load());
 	}
-
-	public FxController getController()
-	{
-		return controller;
-	}
-	
-	public FxmlLoaderWithController createLoader() throws Exception
-	{
-		return new FxmlLoaderWithController(controller, getResourceAsUrl(fxmlLocation));
-	}
-	
-	public static URL getResourceAsUrl(String resourceName) throws Exception
-	{
-		URL url = FxScene.class.getResource(resourceName);
-		return url;
-	}
-	
-	private FxController controller;
-	private String fxmlLocation;
 }
