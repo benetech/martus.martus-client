@@ -27,7 +27,7 @@ package org.martus.client.swingui.jfx;
 
 import java.net.URL;
 
-abstract public class MartusFxmlSceneFactory extends MartusSceneFactory
+abstract public class MartusFxmlSceneFactory extends FxSceneFactory
 {
 	public MartusFxmlSceneFactory(MartusFxController controllerToUse, String fxmlLocationToUse) throws Exception
 	{
@@ -47,7 +47,7 @@ abstract public class MartusFxmlSceneFactory extends MartusSceneFactory
 	
 	public static URL getResourceAsUrl(String resourceName) throws Exception
 	{
-		URL url = MartusScene.class.getResource(resourceName);
+		URL url = FxScene.class.getResource(resourceName);
 		return url;
 	}
 	

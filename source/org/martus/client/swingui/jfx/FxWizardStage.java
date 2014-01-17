@@ -37,7 +37,7 @@ abstract public class FxWizardStage extends FxStage
 	{
 		mainWindow = mainWindowToUse;
 		
-		scenes = new Vector<MartusSceneFactory>();
+		scenes = new Vector<FxSceneFactory>();
 		currentSceneIndex = 0;
 	}
 	
@@ -54,20 +54,20 @@ abstract public class FxWizardStage extends FxStage
 	@Override
 	public void showCurrentScene() throws Exception
 	{
-		MartusSceneFactory sceneFactory = getCurrentSceneFactory();
-		MartusScene scene = sceneFactory.createScene();
+		FxSceneFactory sceneFactory = getCurrentSceneFactory();
+		FxScene scene = sceneFactory.createScene();
 		FxController controller = sceneFactory.getController();
 		controller.setStage(this);
 		setScene(scene);
 	}
 
-	protected void addSceneFactory(int i, MartusSceneFactory sceneFactory)
+	protected void addSceneFactory(int i, FxSceneFactory sceneFactory)
 	{
 		scenes.add(i, sceneFactory);
 	}
 
 	@Override
-	public MartusSceneFactory getCurrentSceneFactory() throws Exception
+	public FxSceneFactory getCurrentSceneFactory() throws Exception
 	{
 		return scenes.get(currentSceneIndex);
 	}
@@ -118,5 +118,5 @@ abstract public class FxWizardStage extends FxStage
 
 	private UiMainWindow mainWindow;
 	private int currentSceneIndex;
-	private Vector<MartusSceneFactory> scenes;
+	private Vector<FxSceneFactory> scenes;
 }
