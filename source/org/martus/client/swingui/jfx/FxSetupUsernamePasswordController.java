@@ -30,7 +30,7 @@ import javafx.fxml.FXML;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public class FxSetupUsernamePasswordController extends MartusFxController
+public class FxSetupUsernamePasswordController extends FxController
 {
 	public FxSetupUsernamePasswordController(UiMainWindow mainWindowToUse)
 	{

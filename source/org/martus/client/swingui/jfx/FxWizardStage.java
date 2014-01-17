@@ -56,7 +56,7 @@ abstract public class FxWizardStage extends FxStage
 	{
 		FxSceneFactory sceneFactory = getCurrentSceneFactory();
 		FxScene scene = sceneFactory.createScene();
-		FxController controller = sceneFactory.getController();
+		FxControllerInterface controller = sceneFactory.getController();
 		controller.setStage(this);
 		setScene(scene);
 	}

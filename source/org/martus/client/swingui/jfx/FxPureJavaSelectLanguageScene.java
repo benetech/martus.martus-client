@@ -47,7 +47,7 @@ import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class FxPureJavaSelectLanguageScene extends MartusPureJavaScene implements FxController
+public class FxPureJavaSelectLanguageScene extends MartusPureJavaScene implements FxControllerInterface
 {
 	public static class Factory extends FxSceneFactory
 	{
@@ -66,14 +66,14 @@ public class FxPureJavaSelectLanguageScene extends MartusPureJavaScene implement
 		}
 		
 		@Override
-		public FxController getController()
+		public FxControllerInterface getController()
 		{
 			return controller;
 		}
 		
 		private UiLocalization localization;
 		private String defaultLanguageCode;
-		private FxController controller;
+		private FxControllerInterface controller;
 	
 	}
 	

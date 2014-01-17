@@ -25,36 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import org.martus.client.swingui.MartusLocalization;
-import org.martus.client.swingui.UiMainWindow;
 
-public class MartusFxController implements FxController
+public interface FxControllerInterface
 {
-	public MartusFxController(UiMainWindow mainWindowToUse)
-	{
-		mainWindow = mainWindowToUse;
-	}
-
-	public void setStage(FxStage stageToUse)
-	{
-		stage = stageToUse;
-	}
-	
-	public FxStage getStage()
-	{
-		return stage;
-	}
-	
-	public UiMainWindow getMainWindow()
-	{
-		return mainWindow;
-	}
-	
-	public MartusLocalization getLocalization()
-	{
-		return mainWindow.getLocalization();
-	}
-
-	private FxStage stage;
-	private UiMainWindow mainWindow;
+	public void setStage(FxStage stage);
 }

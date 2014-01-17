@@ -31,7 +31,7 @@ import javafx.fxml.FXMLLoader;
 
 public class FxmlLoaderWithController extends FXMLLoader
 {
-	public FxmlLoaderWithController(MartusFxController controllerToUse, URL resourceAsUrl)
+	public FxmlLoaderWithController(FxController controllerToUse, URL resourceAsUrl)
 	{
 		super(resourceAsUrl);
 		setController(controllerToUse);
