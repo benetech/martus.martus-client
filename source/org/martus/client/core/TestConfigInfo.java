@@ -205,9 +205,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 			catch (TokenInvalidException expectedException)
 			{
 			}
-			
-			
-			
 		}
 		catch(TokenInvalidException e)
 		{
