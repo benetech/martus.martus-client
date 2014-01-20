@@ -191,6 +191,23 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertTrue("should still have a Token", info.hasMartusAccountAccessToken());
 			assertEquals("Should still have 1 Token", 1, info.getMartusAccountAccessTokens().size());
 			
+			Vector moreThanOneToken = new Vector();
+			moreThanOneToken.add(currentToken);
+			moreThanOneToken.add(newToken);
+			
+			info.setMartusAccountAccessTokens(moreThanOneToken);
+			assertFalse("Should not have a valid token since there isn't just 1 token", info.hasMartusAccountAccessToken());
+			try
+			{
+				info.getCurrentMartusAccountAccessToken();
+				fail("More than one token should throw and exception");
+			}
+			catch (TokenInvalidException expectedException)
+			{
+			}
+			
+			
+			
 		}
 		catch(TokenInvalidException e)
 		{
