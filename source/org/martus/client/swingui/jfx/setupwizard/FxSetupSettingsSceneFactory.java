@@ -26,17 +26,19 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.setupwizard;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxWizardStage;
+import org.martus.client.swingui.jfx.FxScene;
+import org.martus.client.swingui.jfx.FxmlSceneFactory;
 
-public class SetupWizardStage extends FxWizardStage
+public class FxSetupSettingsSceneFactory extends FxmlSceneFactory
 {
-	public SetupWizardStage(UiMainWindow mainWindow) throws Exception
+	public FxSetupSettingsSceneFactory(UiMainWindow mainWindowToUse) throws Exception
 	{
-		super(mainWindow);
-		
-		addSceneFactory(0, new FxSelectLanguageScene.Factory(getMainWindow()));
-		addSceneFactory(1, new FxSetupUsernamePasswordScene.Factory(getMainWindow()));
-		addSceneFactory(2, new FxSetupContactInfoSceneFactory(getMainWindow()));
-		addSceneFactory(3, new FxSetupSettingsSceneFactory(getMainWindow()));
+		super(new FxSetupSettingsController(mainWindowToUse), "setupwizard/SetupSettings.fxml");
+	}
+
+	@Override
+	public FxScene createScene() throws Exception
+	{
+		return new FxSetupSettingsScene(createLoader());
 	}
 }
