@@ -53,6 +53,13 @@ public class FxSetupSettingsController extends FxController implements Initializ
 	@FXML
 	protected void handleNext(ActionEvent event) 
 	{
+		getMainWindow().getApp().getConfigInfo().setForceBulletinsAllPrivate(preventPublicBulletinsCheckBox.isSelected());
+		getMainWindow().getApp().getConfigInfo().setCheckForFieldOfficeBulletins(userTorCheckBox.isSelected());
+		
+		getLocalization().setMdyOrder(dateFormatSequenceDropDown.getSelectionModel().getSelectedItem().getCode());
+		String delimiter = dateDelimeterComboBox.getSelectionModel().getSelectedItem().getCode();
+		getLocalization().setDateDelimiter(delimiter.charAt(0));
+
 		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
 	}
 	
