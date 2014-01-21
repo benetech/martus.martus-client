@@ -25,13 +25,75 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxController;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.Vector;
 
-public class FxSetupSettingsController extends FxController
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.dialogs.UiPreferencesDlg;
+import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.FxWizardStage;
+import org.martus.common.fieldspec.ChoiceItem;
+
+public class FxSetupSettingsController extends FxController implements Initializable
 {
 	public FxSetupSettingsController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
+	
+	@FXML
+	protected void handleNext(ActionEvent event) 
+	{
+		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
+	}
+	
+	public void initialize(URL url, ResourceBundle resourceBundle)
+	{
+		dateFormatSequenceDropDown.setItems(FXCollections.observableArrayList(getDateFormatChoices()));
+		dateFormatSequenceDropDown.getSelectionModel().select(0);
+		
+		dateDelimeterComboBox.setItems(FXCollections.observableArrayList(getDateDelimeterChoices()));
+		dateDelimeterComboBox.getSelectionModel().select(0);
+	}
+	
+	private ObservableList<ChoiceItem> getDateFormatChoices()
+	{
+		Vector<ChoiceItem> choices = new Vector<ChoiceItem>();
+		choices.add(new ChoiceItem("ymd", UiPreferencesDlg.buildMdyLabel(getLocalization(), "ymd")));
+		choices.add(new ChoiceItem("mdy", UiPreferencesDlg.buildMdyLabel(getLocalization(), "mdy")));
+		choices.add(new ChoiceItem("dmy", UiPreferencesDlg.buildMdyLabel(getLocalization(), "dmy")));
+
+		return FXCollections.observableArrayList(choices);
+	}
+	
+	private ObservableList<ChoiceItem> getDateDelimeterChoices()
+	{
+		Vector<ChoiceItem> choices = new Vector<ChoiceItem>();
+		choices.add(new ChoiceItem("/", getLocalization().getFieldLabel("DateDelimiterSlash")));
+		choices.add(new ChoiceItem("-", getLocalization().getFieldLabel("DateDelimiterDash")));
+		choices.add(new ChoiceItem(".", getLocalization().getFieldLabel("DateDelimiterDot")));
+
+		return FXCollections.observableArrayList(choices);
+	}
+
+	@FXML
+	private CheckBox preventPublicBulletinsCheckBox;
+	
+	@FXML
+	private CheckBox userTorCheckBox;
+	
+	@FXML
+	private ComboBox<ChoiceItem> dateFormatSequenceDropDown;
+	
+	@FXML
+	private ComboBox<ChoiceItem> dateDelimeterComboBox;
 }
