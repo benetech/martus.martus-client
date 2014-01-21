@@ -59,7 +59,8 @@ public class FxSetupSettingsController extends FxController implements Initializ
 		getLocalization().setMdyOrder(dateFormatSequenceDropDown.getSelectionModel().getSelectedItem().getCode());
 		String delimiter = dateDelimeterComboBox.getSelectionModel().getSelectedItem().getCode();
 		getLocalization().setDateDelimiter(delimiter.charAt(0));
-
+		getMainWindow().saveConfigInfo();
+		
 		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
 	}
 	
