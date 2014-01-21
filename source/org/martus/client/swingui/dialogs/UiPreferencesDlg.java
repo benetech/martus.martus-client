@@ -34,7 +34,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 
 import org.martus.client.core.FontSetter;
-import org.martus.client.core.ZawgyiLabelUtilities;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
@@ -171,6 +170,11 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	private String buildMdyLabel(String mdyOrder)
 	{
 		MiniLocalization localization = owner.getLocalization();
+		return buildMdyLabel(localization, mdyOrder);
+	}
+
+	public static String buildMdyLabel(MiniLocalization localization, String mdyOrder)
+	{
 		Vector dateParts = new Vector(); 
 		for(int i = 0; i < mdyOrder.length(); ++i)
 		{
