@@ -27,6 +27,8 @@ package org.martus.client.swingui.jfx;
 
 import java.util.Vector;
 
+import javafx.application.Platform;
+
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
@@ -37,7 +39,7 @@ abstract public class FxWizardStage extends FxStage
 	{
 		mainWindow = mainWindowToUse;
 		
-		scenes = new Vector<FxSceneFactory>();
+		scenes = new Vector<FxScene>();
 		currentSceneIndex = 0;
 	}
 	
@@ -54,20 +56,50 @@ abstract public class FxWizardStage extends FxStage
 	@Override
 	public void showCurrentScene() throws Exception
 	{
-		FxSceneFactory sceneFactory = getCurrentSceneFactory();
+		setScene(getCurrentScene());
+	}
+
+	protected void addSceneFactory(int i, FxSceneFactory sceneFactory) throws Exception
+	{
+		Platform.runLater(new SceneCreator(i, sceneFactory));
+	}
+
+	class SceneCreator implements Runnable
+	{
+		public SceneCreator(int indexToUse, FxSceneFactory sceneFactoryToUse)
+		{
+			i = indexToUse;
+			sceneFactory = sceneFactoryToUse;
+		}
+
+		public void run()
+		{
+			try
+			{
+				createAndAddScene(i, sceneFactory);
+			} 
+			catch (Exception e)
+			{
+				MartusLogger.logException(e);
+				getMainWindow().exitWithoutSavingState();
+			}
+		}
+		
+		private int i;
+		private FxSceneFactory sceneFactory;
+	}
+	
+	public void createAndAddScene(int i, FxSceneFactory sceneFactory)
+			throws Exception
+	{
 		FxScene scene = sceneFactory.createScene();
 		FxControllerInterface controller = sceneFactory.getController();
 		controller.setStage(this);
-		setScene(scene);
-	}
-
-	protected void addSceneFactory(int i, FxSceneFactory sceneFactory)
-	{
-		scenes.add(i, sceneFactory);
+		scenes.add(i, scene);
 	}
 
 	@Override
-	public FxSceneFactory getCurrentSceneFactory() throws Exception
+	public FxScene getCurrentScene() throws Exception
 	{
 		return scenes.get(currentSceneIndex);
 	}
@@ -118,5 +150,5 @@ abstract public class FxWizardStage extends FxStage
 
 	private UiMainWindow mainWindow;
 	private int currentSceneIndex;
-	private Vector<FxSceneFactory> scenes;
+	private Vector<FxScene> scenes;
 }
