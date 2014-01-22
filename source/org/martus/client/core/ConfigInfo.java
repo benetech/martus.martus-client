@@ -31,15 +31,19 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Vector;
 
 import org.martus.common.LegacyCustomFields;
+import org.martus.common.MartusAccountAccessToken;
+import org.martus.common.MartusLogger;
+import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
 import org.martus.common.fieldspec.StandardFieldSpecs;
-import org.martus.swing.FontHandler;
 
 public class ConfigInfo
 {
 	public ConfigInfo()
 	{
+		martusAccountAccessTokens = new Vector();
 		clear();
 	}
 
@@ -80,7 +84,13 @@ public class ConfigInfo
 	public void setFieldDeskKeysXml(String newFieldDeskKeysXml) { fieldDeskKeysXml = newFieldDeskKeysXml; }
 	public void setBackedUpImprovedKeypairShare(boolean newBackedUpImprovedKeypairShare) {backedUpImprovedKeypairShare = newBackedUpImprovedKeypairShare;}
 	public void setUseInternalTor(boolean newUseInternalTor) { useInternalTor = newUseInternalTor;}
-
+	public void setMartusAccountAccessTokens(Vector newTokens) { martusAccountAccessTokens = newTokens;} 
+	public void setCurrentMartusAccountAccessToken(MartusAccountAccessToken newToken) 
+	{
+		Vector tokenList = new Vector();
+		tokenList.add(newToken);
+		setMartusAccountAccessTokens(tokenList);
+	}
 
 	public void clearHQKey()						{ legacyHQKey = ""; }
 	public void clearPromptUserRequestSendToServer() { mustAskUserToSendToServer = false; }
@@ -114,6 +124,18 @@ public class ConfigInfo
 	public boolean hasBackedUpImprovedKeypairShare() {return backedUpImprovedKeypairShare;}
 	public boolean getDoZawgyiConversion() {return true;}
 	public boolean useInternalTor() {return useInternalTor;}
+	public Vector getMartusAccountAccessTokens() { return martusAccountAccessTokens;}
+	public boolean hasMartusAccountAccessToken() 
+	{
+		int numTokens = martusAccountAccessTokens.size();
+		return (numTokens == 1);
+	}
+	public MartusAccountAccessToken getCurrentMartusAccountAccessToken() throws TokenInvalidException
+	{ 
+		if(!hasMartusAccountAccessToken())
+			throw new TokenInvalidException();
+		return (MartusAccountAccessToken)martusAccountAccessTokens.get(0);
+	} 
 
 	public boolean isServerConfigured()
 	{
@@ -154,6 +176,7 @@ public class ConfigInfo
 		fieldDeskKeysXml = "";
 		backedUpImprovedKeypairShare = false;
 		useInternalTor = false;
+		martusAccountAccessTokens.clear(); 
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException
@@ -231,6 +254,26 @@ public class ConfigInfo
 			
 			if(loaded.version >= 18)
 				loaded.useInternalTor = in.readBoolean();
+			
+			if(loaded.version >= 19)
+			{
+				int numTokens = in.readInt();
+				Vector loadedTokens = new Vector();
+				for(int i = 0 ; i < numTokens; ++i)
+				{
+					String rawToken = in.readUTF();
+					try
+					{
+						loadedTokens.add(new MartusAccountAccessToken(rawToken));
+					} 
+					catch (TokenInvalidException e)
+					{
+						MartusLogger.log("ConfigInfo.Load MartusAccountAccessToken Invalid: " + rawToken);
+						throw new IOException();
+					}
+				}
+				loaded.setMartusAccountAccessTokens(loadedTokens);
+			}
 		}
 		finally
 		{
@@ -274,6 +317,12 @@ public class ConfigInfo
             writeLongString(out, fieldDeskKeysXml);
 			out.writeBoolean(backedUpImprovedKeypairShare);
 			out.writeBoolean(useInternalTor);
+			int numTokens = martusAccountAccessTokens.size(); 
+			out.writeInt(numTokens);
+			for(int i = 0; i < numTokens; ++i)
+			{
+				out.writeUTF(((MartusAccountAccessToken)martusAccountAccessTokens.get(i)).getToken());
+			}
 		}
 		finally
 		{
@@ -300,7 +349,7 @@ public class ConfigInfo
 	
 	private boolean mustAskUserToSendToServer;
 
-	public static final short VERSION = 18;
+	public static final short VERSION = 19;
 	
 	//Version 1
 	private short version;
@@ -349,4 +398,6 @@ public class ConfigInfo
 	private boolean backedUpImprovedKeypairShare;
 	//Version 18
 	private boolean useInternalTor;
+	//Version 19
+	private Vector martusAccountAccessTokens;
 }

@@ -159,6 +159,7 @@ public class ImportXmlBulletins
 
 			BufferedReader reader = new BufferedReader(new UnicodeReader(System.in));
 			userName = reader.readLine();
+			reader.close();
 		}
 		catch(Exception e)
 		{
@@ -178,6 +179,7 @@ public class ImportXmlBulletins
 			BufferedReader reader = new BufferedReader(new UnicodeReader(System.in));
 			//TODO security issue here password is a string.
 			userPassPhrase = reader.readLine();
+			reader.close();
 		}
 		catch(Exception e)
 		{
@@ -251,6 +253,7 @@ public class ImportXmlBulletins
 
 			BufferedReader reader = new BufferedReader(new UnicodeReader(System.in));
 			folderName = reader.readLine();
+			reader.close();
 		}
 		catch(Exception e)
 		{

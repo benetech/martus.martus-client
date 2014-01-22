@@ -40,16 +40,20 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BackgroundRetriever;
 import org.martus.client.core.BackgroundUploader;
+import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.BulletinSummary;
 import org.martus.common.BulletinSummary.WrongValueCount;
 import org.martus.common.Exceptions.ServerCallFailedException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
+import org.martus.common.MartusAccountAccessToken;
+import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
 import org.martus.common.MartusLogger;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
@@ -108,6 +112,7 @@ class BackgroundTimerTask extends TimerTask
 				updateServerStatus();
 			checkComplianceStatement();
 			checkForNewsFromServer();
+			getMartusAccountAccessToken();
 			getUpdatedListOfBulletinsOnServer();
 			doRetrievingOrUploading();
 			checkForNewFieldOfficeBulletins();
@@ -454,6 +459,26 @@ class BackgroundTimerTask extends TimerTask
 			e.printStackTrace();
 		}
 	}
+	
+	public void getMartusAccountAccessToken()
+	{
+		if(alreadyGotMartusAccountAccessToken)
+			return;
+		if(!isServerAvailable())
+			return;
+		try
+		{
+			MartusAccountAccessToken currentTokenFromServer = getApp().getMartusAccountAccessTokenFromServer();
+			ConfigInfo config = getApp().getConfigInfo();
+			config.setCurrentMartusAccountAccessToken(currentTokenFromServer);
+			getApp().saveConfigInfo();
+			alreadyGotMartusAccountAccessToken = true;
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		} 
+	}
 
 	public void checkForNewsFromServer()
 	{
@@ -599,6 +624,7 @@ class BackgroundTimerTask extends TimerTask
 	boolean alreadyCheckedCompliance;
 	boolean inComplianceDialog;
 	boolean alreadyGotNews;
+	boolean alreadyGotMartusAccountAccessToken;
 	boolean gotUpdatedOnServerUids;
 	boolean checkingForNewFieldOfficeBulletins;
 }

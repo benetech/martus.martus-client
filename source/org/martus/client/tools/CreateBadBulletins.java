@@ -107,6 +107,7 @@ public class CreateBadBulletins
 		UnicodeReader rawReader = new UnicodeReader(System.in);	
 		BufferedReader reader = new BufferedReader(rawReader);
 		String result = reader.readLine();
+		reader.close();
 		return result;
 	}
 
