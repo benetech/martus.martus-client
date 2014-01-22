@@ -31,7 +31,7 @@ import javax.swing.JDialog;
 
 abstract public class FxStage extends JFXPanel
 {
-	abstract public FxScene getCurrentScene() throws Exception;
+	abstract public FxSceneFactory getCurrentSceneFactory() throws Exception;
 	
 	public void setShell(JDialog shellToUse)
 	{
