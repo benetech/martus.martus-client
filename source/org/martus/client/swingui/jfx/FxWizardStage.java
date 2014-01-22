@@ -27,8 +27,6 @@ package org.martus.client.swingui.jfx;
 
 import java.util.Vector;
 
-import javafx.application.Platform;
-
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
@@ -56,39 +54,11 @@ abstract public class FxWizardStage extends FxStage
 	@Override
 	public void showCurrentScene() throws Exception
 	{
-		Platform.runLater(new SceneSwitcher());
-	}
-	
-	protected class SceneSwitcher implements Runnable
-	{
-
-		public void run()
-		{
-			try
-			{
-				createAndShowScene();
-			} 
-			catch (Exception e)
-			{
-				MartusLogger.logException(e);
-				getMainWindow().exitWithoutSavingState();
-			}
-		}
-		
-		public void createAndShowScene() throws Exception
-		{
-			FxSceneFactory sceneFactory = getCurrentSceneFactory();
-			FxScene scene = sceneFactory.createScene();
-			FxControllerInterface controller = sceneFactory.getController();
-			controller.setStage(getStage());
-			setScene(scene);
-		}
-
-	}
-	
-	public FxStage getStage()
-	{
-		return this;
+		FxSceneFactory sceneFactory = getCurrentSceneFactory();
+		FxScene scene = sceneFactory.createScene();
+		FxControllerInterface controller = sceneFactory.getController();
+		controller.setStage(this);
+		setScene(scene);
 	}
 
 	protected void addSceneFactory(int i, FxSceneFactory sceneFactory)
