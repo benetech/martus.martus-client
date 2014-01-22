@@ -34,6 +34,8 @@ import java.util.Vector;
 
 import org.martus.common.ContactInfo;
 import org.martus.common.LegacyCustomFields;
+import org.martus.common.MartusAccountAccessToken;
+import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.fieldspec.StandardFieldSpecs;
@@ -43,9 +45,10 @@ import org.martus.util.TestCaseEnhanced;
 
 public class TestConfigInfo extends TestCaseEnhanced
 {
-    public TestConfigInfo(String name) throws IOException
+    public TestConfigInfo(String name) throws Exception
 	{
         super(name);
+        sampleMartusAccountAccessTokens.add(new MartusAccountAccessToken("65412385"));
     }
 
 	public void testBasics()
@@ -53,7 +56,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 		
-		assertEquals(18, ConfigInfo.VERSION);
+		assertEquals(19, ConfigInfo.VERSION);
 
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
@@ -146,6 +149,68 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals("HQ key should have reverted", hqKey, info.getLegacyHQKey());
 	}
 
+	public void testMartusAccountAccessTokens() 
+	{
+		ConfigInfo info = new ConfigInfo();
+		assertEquals("Should have 0 Tokens for a new config", 0, info.getMartusAccountAccessTokens().size());
+		assertFalse("should not have a Token", info.hasMartusAccountAccessToken());
+		try
+		{
+			info.getCurrentMartusAccountAccessToken();
+			fail("Should have thrown an exception since there are no tokens yet");
+		}
+		catch(TokenInvalidException expectedException)
+		{
+		}
+
+		try
+		{
+			String rawTokenData = "11223344";  
+			MartusAccountAccessToken currentToken = new MartusAccountAccessToken(rawTokenData);
+			Vector newTokens = new Vector();
+			newTokens.add(currentToken);
+			info.setMartusAccountAccessTokens(newTokens);
+			assertEquals("Token data should match", rawTokenData, info.getCurrentMartusAccountAccessToken().getToken());
+			assertTrue("should now have a Token", info.hasMartusAccountAccessToken());
+			assertEquals("Should have 1 Token", 1, info.getMartusAccountAccessTokens().size());
+			
+			Vector emptyTokens = new Vector();
+			info.setMartusAccountAccessTokens(emptyTokens);
+			assertFalse("should not have any tokens now", info.hasMartusAccountAccessToken());
+			info.setCurrentMartusAccountAccessToken(currentToken);
+			assertEquals("Token data should still match", rawTokenData, info.getCurrentMartusAccountAccessToken().getToken());
+			assertTrue("should now have a Token again", info.hasMartusAccountAccessToken());
+			assertEquals("Should have 1 Token again", 1, info.getMartusAccountAccessTokens().size());
+			
+			String newMartusRawToken = "34482187";
+			MartusAccountAccessToken newToken = new MartusAccountAccessToken(newMartusRawToken);
+			
+			info.setCurrentMartusAccountAccessToken(newToken);
+			
+			assertEquals("Token data should match new Token", newMartusRawToken, info.getCurrentMartusAccountAccessToken().getToken());
+			assertTrue("should still have a Token", info.hasMartusAccountAccessToken());
+			assertEquals("Should still have 1 Token", 1, info.getMartusAccountAccessTokens().size());
+			
+			Vector moreThanOneToken = new Vector();
+			moreThanOneToken.add(currentToken);
+			moreThanOneToken.add(newToken);
+			
+			info.setMartusAccountAccessTokens(moreThanOneToken);
+			assertFalse("Should not have a valid token since there isn't just 1 token", info.hasMartusAccountAccessToken());
+			try
+			{
+				info.getCurrentMartusAccountAccessToken();
+				fail("More than one token should throw and exception");
+			}
+			catch (TokenInvalidException expectedException)
+			{
+			}
+		}
+		catch(TokenInvalidException e)
+		{
+			
+		}
+	}
 
 	public void testGetContactInfo() throws Exception
 	{
@@ -241,6 +306,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setFieldDeskKeysXml(sampleFieldDeskKeysXml);
 		info.setBackedUpImprovedKeypairShare(sampleBackedUpImprovedKeypairShare);
 		info.setUseInternalTor(sampleUseInternalTor);
+		info.setMartusAccountAccessTokens(sampleMartusAccountAccessTokens);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -271,6 +337,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleFieldDeskKeysXml", "", info.getFieldDeskKeysXml());
 		assertEquals(label + ": sampleBackedUpImprovedKeypairShare", false, info.hasBackedUpImprovedKeypairShare());
 		assertEquals(label + ": sampleUseInternalTor", false, info.useInternalTor());
+		assertEquals(label + ": sampleMartusAccountAccessTokens", 0, info.getMartusAccountAccessTokens().size());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -391,6 +458,19 @@ public class TestConfigInfo extends TestCaseEnhanced
 		else
 			assertEquals(label + ": sampleUseInternalTor", false, info.useInternalTor());
 
+		if(VERSION >= 19)
+		{
+			int numTokens = sampleMartusAccountAccessTokens.size(); 
+			assertEquals(label + ": sampleMartusAccountAccessTokens size", numTokens, info.getMartusAccountAccessTokens().size());
+			for(int i = 0; i<numTokens; ++i)
+			{
+				assertEquals(label + ": sampleMartusAccountAccessTokens data", ((MartusAccountAccessToken)sampleMartusAccountAccessTokens.get(i)).getToken(), ((MartusAccountAccessToken)info.getMartusAccountAccessTokens().get(i)).getToken());
+			}
+		}
+		else
+		{
+			assertEquals(label + ": sampleMartusAccountAccessTokens", 0, info.getMartusAccountAccessTokens().size());
+		}
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -490,6 +570,15 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			out.writeBoolean(sampleUseInternalTor);
 		}
+		if(VERSION >= 19)
+		{
+			int numTokens = sampleMartusAccountAccessTokens.size();
+			out.writeInt(numTokens);
+			for(int i = 0; i < numTokens; ++i)
+			{
+				out.writeUTF(((MartusAccountAccessToken)sampleMartusAccountAccessTokens.get(i)).getToken());
+			}
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -546,4 +635,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final boolean sampleBackedUpImprovedKeypairShare = true;
 //Version 18
 	final boolean sampleUseInternalTor = true;
+//Version 19
+	final Vector sampleMartusAccountAccessTokens = new Vector();
 }
