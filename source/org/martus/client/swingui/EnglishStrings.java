@@ -1353,6 +1353,7 @@ public class EnglishStrings
 "field:AccountInfoPublicKey=Public Account Id:",
 "field:AccountInfoPublicCode=Public Code:",
 "field:AccountInfoDirectory=Account Directory: ",
+"field:AccountAccessToken=Martus Account Access Token: ",
 "field:NameOfExportedFile=Please enter a name for the file you wish to export.",
 "field:ServerNameEntry=Server name or IP address:",
 "field:ServerPublicCodeEntry=Server Public Identification Code:",
