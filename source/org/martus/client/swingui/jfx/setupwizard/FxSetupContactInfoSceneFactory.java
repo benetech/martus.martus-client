@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.setupwizard;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxScene;
 import org.martus.client.swingui.jfx.FxmlSceneFactory;
 
 public class FxSetupContactInfoSceneFactory extends FxmlSceneFactory
@@ -35,12 +34,4 @@ public class FxSetupContactInfoSceneFactory extends FxmlSceneFactory
 	{
 		super(new FxSetupContactInfoController(mainWindowToUse), "setupwizard/SetupContactInfo.fxml");
 	}
-
-	@Override
-	public FxScene createScene() throws Exception
-	{
-		FxSetupContactInfoScene scene = new FxSetupContactInfoScene(createLoader());
-		return scene;
-	}
-
 }

@@ -27,6 +27,8 @@ package org.martus.client.swingui.jfx;
 
 import java.net.URL;
 
+import javafx.scene.Parent;
+
 abstract public class FxmlSceneFactory extends FxSceneFactory
 {
 	public FxmlSceneFactory(FxController controllerToUse, String fxmlLocationToUse) throws Exception
@@ -43,6 +45,11 @@ abstract public class FxmlSceneFactory extends FxSceneFactory
 	public FxmlLoaderWithController createLoader() throws Exception
 	{
 		return new FxmlLoaderWithController(controller, getResourceAsUrl(fxmlLocation));
+	}
+	
+	public Parent createContents() throws Exception
+	{
+		return (Parent)createLoader().load();
 	}
 	
 	public static URL getResourceAsUrl(String resourceName) throws Exception

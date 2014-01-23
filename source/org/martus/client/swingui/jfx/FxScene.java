@@ -34,7 +34,7 @@ public class FxScene extends Scene
 	{
 		super(root);
 		
-        String css = this.getClass().getResource("background.css").toExternalForm();
+        String css = FxScene.class.getResource("setupwizard/background.css").toExternalForm();
 		getStylesheets().add(css);			
 	}
 	

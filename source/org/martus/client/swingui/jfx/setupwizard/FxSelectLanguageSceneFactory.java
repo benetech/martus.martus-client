@@ -26,25 +26,12 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.setupwizard;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxScene;
 import org.martus.client.swingui.jfx.FxmlSceneFactory;
-import org.martus.clientside.UiLocalization;
 
 public class FxSelectLanguageSceneFactory extends FxmlSceneFactory
 {
 	public FxSelectLanguageSceneFactory(UiMainWindow mainWindowToUse) throws Exception
 	{
 		super(new FxSelectLanguageController(mainWindowToUse), "setupwizard/MartusCreateAccount.fxml");
-
-		localization = mainWindowToUse.getLocalization();
 	}
-	
-	@Override
-	public FxScene createScene() throws Exception
-	{
-		FxScene scene = new FxSelectLanguageScene(createLoader(), localization);
-		return scene;
-	}
-
-	private UiLocalization localization;
 }
