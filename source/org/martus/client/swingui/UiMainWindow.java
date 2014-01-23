@@ -128,7 +128,9 @@ import org.martus.clientside.FormatFilter;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiUtilities;
 import org.martus.common.EnglishCommonStrings;
+import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.HeadquartersKeys;
+import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.FileVerificationException;
@@ -137,6 +139,7 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.Version;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
@@ -1632,10 +1635,25 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		catch(InvalidBase64Exception e)
 		{
 		}
+
+		
+		String martusAccountAccessToken = "";
+		String martusAccountAccessTokenDescription = getLocalization().getFieldLabel("AccountAccessToken");
+		try
+		{
+			MartusAccountAccessToken accountToken = app.getMartusAccountAccessTokenFromServer();
+			martusAccountAccessToken = accountToken.getToken();
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		} 
+		
 		String accountDirectory = getLocalization().getFieldLabel("AccountInfoDirectory") + app.getCurrentAccountDirectory();
 		
+		
 		String ok = getLocalization().getButtonLabel("ok");
-		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescription, formattedCodeContents, " ", accountDirectory};
+		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescription, formattedCodeContents, " ", martusAccountAccessTokenDescription, martusAccountAccessToken, " ", accountDirectory};
 		String[] buttons = {ok};
 
 		new UiNotifyDlg(this, title, contents, buttons);
