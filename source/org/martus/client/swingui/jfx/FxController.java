@@ -25,6 +25,10 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import java.net.URL;
+
+import javafx.scene.Parent;
+
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 
@@ -33,6 +37,21 @@ abstract public class FxController implements FxControllerInterface
 	public FxController(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
+	}
+	
+	public Parent createContents() throws Exception
+	{
+		return (Parent)createLoader().load();
+	}
+	
+	private FxmlLoaderWithController createLoader() throws Exception
+	{
+		return new FxmlLoaderWithController(this, getResourceAsUrl(getFxmlLocation()));
+	}
+	
+	private URL getResourceAsUrl(String resourceName) throws Exception
+	{
+		return FxScene.class.getResource(resourceName);
 	}
 
 	public void setStage(FxStage stageToUse)

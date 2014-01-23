@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import java.net.URL;
 import java.util.Vector;
 
 import javafx.scene.Parent;
@@ -54,26 +53,11 @@ abstract public class FxWizardStage extends FxStage
 		}
 
 		FxController controller = getCurrentSceneFactory();
-		Parent contents = createContents(controller);
+		Parent contents = controller.createContents();
 		controller.setStage(this);
 		scene.setRoot(contents);
 	}	
 	
-	private Parent createContents(FxController controller) throws Exception
-	{
-		return (Parent)createLoader(controller).load();
-	}
-	
-	private FxmlLoaderWithController createLoader(FxController controller) throws Exception
-	{
-		return new FxmlLoaderWithController(controller, getResourceAsUrl(controller.getFxmlLocation()));
-	}
-	
-	private URL getResourceAsUrl(String resourceName) throws Exception
-	{
-		return FxScene.class.getResource(resourceName);
-	}
-
 	protected void addSceneFactory(int i, FxController sceneFactory)
 	{
 		scenes.add(i, sceneFactory);
