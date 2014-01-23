@@ -34,9 +34,9 @@ import javafx.fxml.FXMLLoader;
 
 public class FxSetupUsernamePasswordScene extends FxmlScene
 {
-	public static class Factory extends FxmlSceneFactory
+	public static class FxSetupUsernamePasswordSceneFactory extends FxmlSceneFactory
 	{
-		public Factory(UiMainWindow mainWindowToUse) throws Exception
+		public FxSetupUsernamePasswordSceneFactory(UiMainWindow mainWindowToUse) throws Exception
 		{
 			super(new FxSetupUsernamePasswordController(mainWindowToUse), "setupwizard/SetupUsernamePassword.fxml");
 		}
