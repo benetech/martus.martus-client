@@ -25,8 +25,10 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import javafx.scene.Parent;
+
 abstract public class FxSceneFactory
 {
-	abstract public FxScene createScene() throws Exception;
 	abstract public FxControllerInterface getController() throws Exception;
+	abstract public Parent createContents() throws Exception;
 }

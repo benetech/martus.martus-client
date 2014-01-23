@@ -27,6 +27,9 @@ package org.martus.client.swingui.jfx;
 
 import java.util.Vector;
 
+import javafx.scene.Parent;
+import javafx.scene.layout.Region;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
@@ -35,7 +38,7 @@ abstract public class FxWizardStage extends FxStage
 	public FxWizardStage(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		
+	
 		scenes = new Vector<FxSceneFactory>();
 		currentSceneIndex = 0;
 	}
@@ -43,11 +46,18 @@ abstract public class FxWizardStage extends FxStage
 	@Override
 	public void showCurrentScene() throws Exception
 	{
+		if(scene == null)
+		{
+			scene = new FxScene(new Region());
+			setScene(scene);
+		}
+
 		FxSceneFactory sceneFactory = getCurrentSceneFactory();
-		FxScene scene = sceneFactory.createScene();
+		Parent contents = sceneFactory.createContents();
 		FxControllerInterface controller = sceneFactory.getController();
 		controller.setStage(this);
-		setScene(scene);
+		scene.setRoot(contents);
+		invalidate();
 	}
 
 	protected void addSceneFactory(int i, FxSceneFactory sceneFactory)
@@ -107,4 +117,5 @@ abstract public class FxWizardStage extends FxStage
 
 	private int currentSceneIndex;
 	private Vector<FxSceneFactory> scenes;
+	private FxScene scene;
 }
