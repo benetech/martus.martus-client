@@ -40,7 +40,7 @@ abstract public class FxWizardStage extends FxStage
 		super(mainWindowToUse);
 	
 		controllers = new Vector<FxController>();
-		currentSceneIndex = 0;
+		currentControllerIndex = 0;
 	}
 	
 	@Override
@@ -66,7 +66,7 @@ abstract public class FxWizardStage extends FxStage
 	@Override
 	public FxController getCurrentController() throws Exception
 	{
-		return controllers.get(currentSceneIndex);
+		return controllers.get(currentControllerIndex);
 	}
 
 	public void handleNavigationEvent(String navigationType)
@@ -81,8 +81,8 @@ abstract public class FxWizardStage extends FxStage
 	{
 		try
 		{
-			++currentSceneIndex;
-			if(currentSceneIndex >= controllers.size())
+			++currentControllerIndex;
+			if(currentControllerIndex >= controllers.size())
 				getShell().setVisible(false);
 			else
 				showCurrentScene();
@@ -98,8 +98,8 @@ abstract public class FxWizardStage extends FxStage
 	{
 		try
 		{
-			--currentSceneIndex;
-			if(currentSceneIndex < 0)
+			--currentControllerIndex;
+			if(currentControllerIndex < 0)
 				getShell().setVisible(false);
 			else
 				showCurrentScene();
@@ -113,7 +113,7 @@ abstract public class FxWizardStage extends FxStage
 	public static final String NAVIGATION_NEXT = "Next";
 	public static final String NAVIGATION_BACK = "Back";
 
-	private int currentSceneIndex;
+	private int currentControllerIndex;
 	private Vector<FxController> controllers;
 	private FxScene scene;
 }
