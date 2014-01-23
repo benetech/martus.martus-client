@@ -39,7 +39,7 @@ abstract public class FxStage extends JFXPanel
 		mainWindow = mainWindowToUse;
 	}
 
-	abstract public FxSceneFactory getCurrentSceneFactory() throws Exception;
+	abstract public FxController getCurrentSceneFactory() throws Exception;
 	abstract public void showCurrentScene() throws Exception;
 	
 	public void setShell(JDialog shellToUse)
