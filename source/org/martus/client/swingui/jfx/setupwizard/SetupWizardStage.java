@@ -34,9 +34,9 @@ public class SetupWizardStage extends FxWizardStage
 	{
 		super(mainWindow);
 		
-		addSceneFactory(0, new FxSelectLanguageController(getMainWindow()));
-		addSceneFactory(1, new FxSetupUsernamePasswordController(getMainWindow()));
-		addSceneFactory(2, new FxSetupContactInfoController(getMainWindow()));
-		addSceneFactory(3, new FxSetupSettingsController(getMainWindow()));
+		addController(0, new FxSelectLanguageController(getMainWindow()));
+		addController(1, new FxSetupUsernamePasswordController(getMainWindow()));
+		addController(2, new FxSetupContactInfoController(getMainWindow()));
+		addController(3, new FxSetupSettingsController(getMainWindow()));
 	}
 }
