@@ -104,6 +104,13 @@ public class FxSetupUsernamePasswordController extends FxController
 		nextButton.setDisable(false);
 	}
 	
+
+	@Override
+	public String getFxmlLocation()
+	{
+		return "setupwizard/SetupUsernamePassword.fxml";
+	}
+	
 	@FXML
 	private Button nextButton; 
 

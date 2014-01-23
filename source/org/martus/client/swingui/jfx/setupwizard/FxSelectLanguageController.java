@@ -88,6 +88,13 @@ public class FxSelectLanguageController extends FxController implements Initiali
 		return FXCollections.observableArrayList(languageChoices);
 	}
 
+	@Override
+	public String getFxmlLocation()
+	{
+		return "setupwizard/MartusCreateAccount.fxml";
+	}
+	
 	@FXML // fx:id="languagesDropdown"
 	private ChoiceBox<ChoiceItem> languagesDropdown; // Value injected by FXMLLoader
+
 }

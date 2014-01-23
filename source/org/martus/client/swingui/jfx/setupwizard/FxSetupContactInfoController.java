@@ -76,6 +76,12 @@ public class FxSetupContactInfoController extends FxController implements Initia
 	{
 		return info;
 	}
+	
+	@Override
+	public String getFxmlLocation()
+	{
+		return "setupwizard/SetupContactInfo.fxml";
+	}
 
 	@FXML
 	private TextField authorField;

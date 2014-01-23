@@ -92,6 +92,12 @@ public class FxSetupSettingsController extends FxController implements Initializ
 
 		return FXCollections.observableArrayList(choices);
 	}
+	
+	@Override
+	public String getFxmlLocation()
+	{
+		return "setupwizard/SetupSettings.fxml";
+	}
 
 	@FXML
 	private CheckBox preventPublicBulletinsCheckBox;
