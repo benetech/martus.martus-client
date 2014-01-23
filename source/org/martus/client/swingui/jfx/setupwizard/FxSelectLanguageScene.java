@@ -36,9 +36,9 @@ import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxSelectLanguageScene extends FxmlScene
 {
-	public static class Factory extends FxmlSceneFactory
+	public static class FxSelectLanguageSceneFactory extends FxmlSceneFactory
 	{
-		public Factory(UiMainWindow mainWindowToUse) throws Exception
+		public FxSelectLanguageSceneFactory(UiMainWindow mainWindowToUse) throws Exception
 		{
 			super(new FxSelectLanguageController(mainWindowToUse), "setupwizard/MartusCreateAccount.fxml");
 
