@@ -25,30 +25,12 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxScene;
 import org.martus.client.swingui.jfx.FxmlScene;
-import org.martus.client.swingui.jfx.FxmlSceneFactory;
 
 import javafx.fxml.FXMLLoader;
 
 public class FxSetupUsernamePasswordScene extends FxmlScene
 {
-	public static class FxSetupUsernamePasswordSceneFactory extends FxmlSceneFactory
-	{
-		public FxSetupUsernamePasswordSceneFactory(UiMainWindow mainWindowToUse) throws Exception
-		{
-			super(new FxSetupUsernamePasswordController(mainWindowToUse), "setupwizard/SetupUsernamePassword.fxml");
-		}
-
-		@Override
-		public FxScene createScene() throws Exception
-		{
-			FxSetupUsernamePasswordScene scene = new FxSetupUsernamePasswordScene(createLoader());
-			return scene;
-		}
-	}
-	
 	public FxSetupUsernamePasswordScene(FXMLLoader loader) throws Exception
 	{
 		super(loader);
