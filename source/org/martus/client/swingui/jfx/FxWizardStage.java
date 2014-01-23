@@ -58,9 +58,9 @@ abstract public class FxWizardStage extends FxStage
 		scene.setRoot(contents);
 	}	
 	
-	protected void addController(int i, FxController sceneFactory)
+	protected void addController(FxController sceneFactory)
 	{
-		controllers.add(i, sceneFactory);
+		controllers.add(sceneFactory);
 	}
 
 	@Override
