@@ -429,18 +429,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean run()
 	{
-		try
-		{
-			// NOTE: Prevent implicit JavaFX shutdown when the only JFX window is closed
-		    Platform.setImplicitExit(false);
-		    
-		    FxModalDialog.createAndShow(this, new SetupWizardStage(this));
-		} 
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-			exitWithoutSavingState();
-		}
+		startAccountSetupWizard();
 
 		setCurrentActiveFrame(this);
 		
@@ -542,6 +531,22 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		MartusLogger.log("Initialization complete");
 		return true;
     }
+
+	private void startAccountSetupWizard()
+	{
+		try
+		{
+			// NOTE: Prevent implicit JavaFX shutdown when the only JFX window is closed
+		    Platform.setImplicitExit(false);
+		    
+		    FxModalDialog.createAndShow(this, new SetupWizardStage(this));
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			exitWithoutSavingState();
+		}
+	}
 	
 	private void loadFieldSpecCache() throws Exception
 	{
