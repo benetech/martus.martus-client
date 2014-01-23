@@ -34,6 +34,7 @@ public class FxmlLoaderWithController extends FXMLLoader
 	public FxmlLoaderWithController(FxController controllerToUse, URL resourceAsUrl)
 	{
 		super(resourceAsUrl);
+		
 		setController(controllerToUse);
 	}
 }
