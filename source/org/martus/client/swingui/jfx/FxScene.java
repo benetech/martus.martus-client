@@ -33,6 +33,9 @@ public class FxScene extends Scene
 	public FxScene(Parent root)
 	{
 		super(root);
+		
+        String css = this.getClass().getResource("background.css").toExternalForm();
+		getStylesheets().add(css);			
 	}
 	
 }
