@@ -34,8 +34,5 @@ public class FxSetupSettingsScene extends FxmlScene
 	public FxSetupSettingsScene(FXMLLoader loaderToUse) throws Exception
 	{
 		super(loaderToUse);
-		
-        String css = this.getClass().getResource("background.css").toExternalForm();
-		getStylesheets().add(css);			
 	}
 }

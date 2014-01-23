@@ -33,9 +33,6 @@ public class FxSetupContactInfoScene extends FxmlScene
 	public FxSetupContactInfoScene(FxmlLoaderWithController loader) throws Exception
 	{
 		super(loader);
-
-        String css = this.getClass().getResource("background.css").toExternalForm();
-		getStylesheets().add(css);			
 	}
 
 }

@@ -39,9 +39,6 @@ public class FxSelectLanguageScene extends FxmlScene
 
 		localization = localizationToUse;
 
-        String css = this.getClass().getResource("background.css").toExternalForm();
-		getStylesheets().add(css);			
-
 	}
 
 	String languageCodeChosen;

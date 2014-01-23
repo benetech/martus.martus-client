@@ -34,10 +34,6 @@ public class FxSetupUsernamePasswordScene extends FxmlScene
 	public FxSetupUsernamePasswordScene(FXMLLoader loader) throws Exception
 	{
 		super(loader);
-
-        String css = this.getClass().getResource("background.css").toExternalForm();
-		getStylesheets().add(css);			
-
 	}
 
 }
