@@ -32,6 +32,6 @@ public class FxSelectLanguageSceneFactory extends FxmlSceneFactory
 {
 	public FxSelectLanguageSceneFactory(UiMainWindow mainWindowToUse) throws Exception
 	{
-		super(new FxSelectLanguageController(mainWindowToUse), "setupwizard/MartusCreateAccount.fxml");
+		super(new FxSelectLanguageController(mainWindowToUse));
 	}
 }

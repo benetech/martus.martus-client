@@ -32,6 +32,6 @@ public class FxSetupSettingsSceneFactory extends FxmlSceneFactory
 {
 	public FxSetupSettingsSceneFactory(UiMainWindow mainWindowToUse) throws Exception
 	{
-		super(new FxSetupSettingsController(mainWindowToUse), "setupwizard/SetupSettings.fxml");
+		super(new FxSetupSettingsController(mainWindowToUse));
 	}
 }

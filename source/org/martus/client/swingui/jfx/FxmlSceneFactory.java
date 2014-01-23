@@ -31,10 +31,9 @@ import javafx.scene.Parent;
 
 abstract public class FxmlSceneFactory extends FxSceneFactory
 {
-	public FxmlSceneFactory(FxController controllerToUse, String fxmlLocationToUse) throws Exception
+	public FxmlSceneFactory(FxController controllerToUse) throws Exception
 	{
 		controller = controllerToUse;
-		fxmlLocation = fxmlLocationToUse;
 	}
 
 	public FxController getController()
@@ -44,7 +43,7 @@ abstract public class FxmlSceneFactory extends FxSceneFactory
 	
 	public FxmlLoaderWithController createLoader() throws Exception
 	{
-		return new FxmlLoaderWithController(controller, getResourceAsUrl(fxmlLocation));
+		return new FxmlLoaderWithController(controller, getResourceAsUrl(controller.getFxmlLocation()));
 	}
 	
 	public Parent createContents() throws Exception
@@ -59,5 +58,4 @@ abstract public class FxmlSceneFactory extends FxSceneFactory
 	}
 	
 	private FxController controller;
-	private String fxmlLocation;
 }

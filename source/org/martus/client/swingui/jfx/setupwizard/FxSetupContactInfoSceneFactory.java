@@ -32,6 +32,6 @@ public class FxSetupContactInfoSceneFactory extends FxmlSceneFactory
 {
 	public FxSetupContactInfoSceneFactory(UiMainWindow mainWindowToUse) throws Exception
 	{
-		super(new FxSetupContactInfoController(mainWindowToUse), "setupwizard/SetupContactInfo.fxml");
+		super(new FxSetupContactInfoController(mainWindowToUse));
 	}
 }
