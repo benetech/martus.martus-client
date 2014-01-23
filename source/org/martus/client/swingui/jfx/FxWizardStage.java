@@ -39,7 +39,7 @@ abstract public class FxWizardStage extends FxStage
 	{
 		super(mainWindowToUse);
 	
-		scenes = new Vector<FxController>();
+		controllers = new Vector<FxController>();
 		currentSceneIndex = 0;
 	}
 	
@@ -52,7 +52,7 @@ abstract public class FxWizardStage extends FxStage
 			setScene(scene);
 		}
 
-		FxController controller = getCurrentSceneFactory();
+		FxController controller = getCurrentController();
 		Parent contents = controller.createContents();
 		controller.setStage(this);
 		scene.setRoot(contents);
@@ -60,13 +60,13 @@ abstract public class FxWizardStage extends FxStage
 	
 	protected void addController(int i, FxController sceneFactory)
 	{
-		scenes.add(i, sceneFactory);
+		controllers.add(i, sceneFactory);
 	}
 
 	@Override
-	public FxController getCurrentSceneFactory() throws Exception
+	public FxController getCurrentController() throws Exception
 	{
-		return scenes.get(currentSceneIndex);
+		return controllers.get(currentSceneIndex);
 	}
 
 	public void handleNavigationEvent(String navigationType)
@@ -82,7 +82,7 @@ abstract public class FxWizardStage extends FxStage
 		try
 		{
 			++currentSceneIndex;
-			if(currentSceneIndex >= scenes.size())
+			if(currentSceneIndex >= controllers.size())
 				getShell().setVisible(false);
 			else
 				showCurrentScene();
@@ -114,6 +114,6 @@ abstract public class FxWizardStage extends FxStage
 	public static final String NAVIGATION_BACK = "Back";
 
 	private int currentSceneIndex;
-	private Vector<FxController> scenes;
+	private Vector<FxController> controllers;
 	private FxScene scene;
 }
