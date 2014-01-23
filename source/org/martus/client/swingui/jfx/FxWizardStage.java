@@ -27,7 +27,6 @@ package org.martus.client.swingui.jfx;
 
 import java.util.Vector;
 
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
@@ -35,20 +34,10 @@ abstract public class FxWizardStage extends FxStage
 {
 	public FxWizardStage(UiMainWindow mainWindowToUse)
 	{
-		mainWindow = mainWindowToUse;
+		super(mainWindowToUse);
 		
 		scenes = new Vector<FxSceneFactory>();
 		currentSceneIndex = 0;
-	}
-	
-	public UiMainWindow getMainWindow()
-	{
-		return mainWindow;
-	}
-	
-	public MartusLocalization getLocalization()
-	{
-		return getMainWindow().getLocalization();
 	}
 	
 	@Override
@@ -116,7 +105,6 @@ abstract public class FxWizardStage extends FxStage
 	public static final String NAVIGATION_NEXT = "Next";
 	public static final String NAVIGATION_BACK = "Back";
 
-	private UiMainWindow mainWindow;
 	private int currentSceneIndex;
 	private Vector<FxSceneFactory> scenes;
 }

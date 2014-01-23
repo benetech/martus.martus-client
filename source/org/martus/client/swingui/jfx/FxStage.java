@@ -29,9 +29,18 @@ import javafx.embed.swing.JFXPanel;
 
 import javax.swing.JDialog;
 
+import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.UiMainWindow;
+
 abstract public class FxStage extends JFXPanel
 {
+	public FxStage(UiMainWindow mainWindowToUse)
+	{
+		mainWindow = mainWindowToUse;
+	}
+
 	abstract public FxSceneFactory getCurrentSceneFactory() throws Exception;
+	abstract public void showCurrentScene() throws Exception;
 	
 	public void setShell(JDialog shellToUse)
 	{
@@ -47,7 +56,16 @@ abstract public class FxStage extends JFXPanel
 	{
 	}
 
-	abstract public void showCurrentScene() throws Exception;
+	public UiMainWindow getMainWindow()
+	{
+		return mainWindow;
+	}
+
+	public MartusLocalization getLocalization()
+	{
+		return getMainWindow().getLocalization();
+	}
 
 	private JDialog shell;
+	private UiMainWindow mainWindow;
 }
