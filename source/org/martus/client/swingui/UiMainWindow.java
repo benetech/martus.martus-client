@@ -429,8 +429,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean run()
 	{
-		startAccountSetupWizard();
-
 		setCurrentActiveFrame(this);
 		
 		if(Utilities.isMSWindows())
@@ -451,6 +449,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		mainWindowInitalizing = true;
 
+		if (getApp().hasNoAccounts())
+			startAccountSetupWizard();
+		
 		if(!sessionSignIn())
 			return false;
 		

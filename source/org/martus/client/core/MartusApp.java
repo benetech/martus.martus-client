@@ -1891,6 +1891,11 @@ public class MartusApp
 		}
 	}
 
+	public boolean hasNoAccounts()
+	{
+		return !doesAnyAccountExist();
+	}
+	
 	public boolean doesAnyAccountExist()
 	{
 		Vector accountDirectories = getAllAccountDirectories();
