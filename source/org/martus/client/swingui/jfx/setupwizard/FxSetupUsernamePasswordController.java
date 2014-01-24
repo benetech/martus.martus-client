@@ -51,7 +51,8 @@ public class FxSetupUsernamePasswordController extends FxController
 		try
 		{
 			createAccount();
-			getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
+			
+			super.handleNext(event);
 		}
 		catch (Exception e)
 		{

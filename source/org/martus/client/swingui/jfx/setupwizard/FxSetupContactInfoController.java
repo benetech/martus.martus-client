@@ -38,7 +38,6 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
-import org.martus.client.swingui.jfx.FxWizardStage;
 
 public class FxSetupContactInfoController extends FxController implements Initializable
 {
@@ -64,7 +63,7 @@ public class FxSetupContactInfoController extends FxController implements Initia
 		getConfigInfo().setPhone(getFontHelper().getStorable(phoneNumberField.getText()));
 		getConfigInfo().setAddress(getFontHelper().getStorable(mailingAddressField.getText()));
 		
-		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
+		super.handleNext(event);
 	}
 
 	private UiFontEncodingHelper getFontHelper()
