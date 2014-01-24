@@ -68,7 +68,6 @@ public class ConfigInfo
 	public void setServerPublicKey(String newServerPublicKey){serverPublicKey = newServerPublicKey; }
 	public void setTemplateDetails(String newTemplateDetails){ templateDetails = newTemplateDetails; }
 	public void setLegacyHQKey(String newHQKey)			{ legacyHQKey = newHQKey; }
-	public void setSendContactInfoToServer(boolean newSendContactInfoToServer) {sendContactInfoToServer = newSendContactInfoToServer; }
 	public void setServerCompliance(String newCompliance) {serverCompliance = newCompliance;}
 	public void setCustomFieldLegacySpecs(String newSpecs)	{customFieldLegacySpecs = newSpecs;}
 	public void setForceBulletinsAllPrivate(boolean newForceBulletinsAllPrivate)	{forceBulletinsAllPrivate = newForceBulletinsAllPrivate; }
@@ -93,7 +92,6 @@ public class ConfigInfo
 	}
 
 	public void clearHQKey()						{ legacyHQKey = ""; }
-	public void clearPromptUserRequestSendToServer() { mustAskUserToSendToServer = false; }
 
 	public short getVersion()			{ return version; }
 	public String getAuthor()			{ return author; }
@@ -106,8 +104,6 @@ public class ConfigInfo
 	public String getServerPublicKey()	{ return serverPublicKey; }
 	public String getTemplateDetails() { return templateDetails; }
 	public String getLegacyHQKey() 			{ return legacyHQKey; }
-	public boolean shouldContactInfoBeSentToServer() { return sendContactInfoToServer; }
-	public boolean promptUserRequestSendToServer() { return mustAskUserToSendToServer; }
 	public String getServerCompliance() {return serverCompliance;}
 	public String getCustomFieldLegacySpecs() {return customFieldLegacySpecs;}
 	public boolean shouldForceBulletinsAllPrivate()	{ return forceBulletinsAllPrivate;}
@@ -160,8 +156,7 @@ public class ConfigInfo
 		serverPublicKey="";
 		templateDetails = "";
 		legacyHQKey = "";
-		sendContactInfoToServer = false;
-		mustAskUserToSendToServer = false;
+		notUsedSendContactInfoToServer = false;
 		serverCompliance = "";
 		customFieldLegacySpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultTopSetionFieldSpecs());
 		forceBulletinsAllPrivate = false;
@@ -199,9 +194,7 @@ public class ConfigInfo
 			loaded.serverPublicKey = in.readUTF();
 						
 			if(loaded.version >= 2)
-				loaded.sendContactInfoToServer = in.readBoolean();
-			else
-				loaded.mustAskUserToSendToServer = true;
+				loaded.notUsedSendContactInfoToServer = in.readBoolean();
 				
 			if(loaded.version >= 4)
 				loaded.serverCompliance = in.readUTF();
@@ -299,7 +292,7 @@ public class ConfigInfo
 			out.writeUTF(templateDetails);
 			out.writeUTF(legacyHQKey);
 			out.writeUTF(serverPublicKey);
-			out.writeBoolean(sendContactInfoToServer);
+			out.writeBoolean(notUsedSendContactInfoToServer);
 			out.writeUTF(serverCompliance);
 			out.writeUTF(customFieldLegacySpecs);
 			out.writeUTF("");
@@ -347,8 +340,6 @@ public class ConfigInfo
 		return new String(bytes, "UTF-8");
 	}
 	
-	private boolean mustAskUserToSendToServer;
-
 	public static final short VERSION = 19;
 	
 	//Version 1
@@ -364,7 +355,7 @@ public class ConfigInfo
 	private String templateDetails;
 	private String legacyHQKey;
 	//Version 2
-	private boolean sendContactInfoToServer;
+	private boolean notUsedSendContactInfoToServer;
 	//Version 3 flag to indicate AccountMap.txt is signed.
 	//Version 4
 	private String serverCompliance;
