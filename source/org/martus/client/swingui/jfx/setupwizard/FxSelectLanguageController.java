@@ -31,14 +31,12 @@ import java.util.Vector;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
-import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxSelectLanguageController extends FxController implements Initializable
@@ -65,12 +63,6 @@ public class FxSelectLanguageController extends FxController implements Initiali
 		}
 		
 		return null;
-	}
-
-	@FXML
-	protected void handleNext(ActionEvent event) 
-	{
-		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
 	}
 
 	private ObservableList<ChoiceItem> getAvailableLanguages()
