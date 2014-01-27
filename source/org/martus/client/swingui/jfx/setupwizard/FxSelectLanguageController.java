@@ -95,7 +95,7 @@ public class FxSelectLanguageController extends FxWizardController implements In
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/MartusCreateAccount.fxml";
+		return "setupwizard/SetupLanguage.fxml";
 	}
 	
 	@FXML // fx:id="languagesDropdown"
