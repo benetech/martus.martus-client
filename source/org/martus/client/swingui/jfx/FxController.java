@@ -27,6 +27,8 @@ package org.martus.client.swingui.jfx;
 
 import java.net.URL;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Parent;
 
 import org.martus.client.swingui.MartusLocalization;
@@ -37,6 +39,18 @@ abstract public class FxController implements FxControllerInterface
 	public FxController(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
+	}
+	
+	@FXML
+	protected void handleNext(ActionEvent event)
+	{
+		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
+	}
+	
+	@FXML
+	protected void handleBack(ActionEvent event) 
+	{
+		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_BACK);
 	}
 	
 	public Parent createContents() throws Exception

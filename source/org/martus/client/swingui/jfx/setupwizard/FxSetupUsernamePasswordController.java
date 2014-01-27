@@ -35,7 +35,6 @@ import javafx.scene.input.KeyEvent;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
-import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.common.MartusLogger;
 
 public class FxSetupUsernamePasswordController extends FxController
@@ -51,7 +50,8 @@ public class FxSetupUsernamePasswordController extends FxController
 		try
 		{
 			createAccount();
-			getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
+			
+			super.handleNext(event);
 		}
 		catch (Exception e)
 		{
@@ -67,12 +67,6 @@ public class FxSetupUsernamePasswordController extends FxController
 		getMainWindow().getApp().createAccount(userNameValue, passwordValue.toCharArray());
 	}
 
-	@FXML
-	protected void handleBack(ActionEvent event) 
-	{
-		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_BACK);
-	}
-	
 	@FXML
 	protected void handleUsernameChanged(KeyEvent keyEvent)
 	{
