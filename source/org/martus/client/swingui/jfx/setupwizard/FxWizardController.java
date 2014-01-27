@@ -64,5 +64,5 @@ abstract public class FxWizardController extends FxController
 	}
 	
 	@FXML
-	private Button nextButton; 
+	public Button nextButton; 
 }
