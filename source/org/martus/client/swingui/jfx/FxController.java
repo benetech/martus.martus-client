@@ -47,6 +47,12 @@ abstract public class FxController implements FxControllerInterface
 		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
 	}
 	
+	@FXML
+	protected void handleBack(ActionEvent event) 
+	{
+		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_BACK);
+	}
+	
 	public Parent createContents() throws Exception
 	{
 		return (Parent)createLoader().load();
