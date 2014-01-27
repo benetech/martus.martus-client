@@ -37,9 +37,8 @@ import javafx.scene.control.TextField;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxController;
 
-public class FxSetupContactInfoController extends FxController implements Initializable
+public class FxSetupContactInfoController extends FxWizardController implements Initializable
 {
 	public FxSetupContactInfoController(UiMainWindow mainWindowToUse)
 	{

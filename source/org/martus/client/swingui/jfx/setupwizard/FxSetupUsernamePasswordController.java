@@ -34,10 +34,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.MartusLogger;
 
-public class FxSetupUsernamePasswordController extends FxController
+public class FxSetupUsernamePasswordController extends FxWizardController
 {
 	public FxSetupUsernamePasswordController(UiMainWindow mainWindowToUse)
 	{

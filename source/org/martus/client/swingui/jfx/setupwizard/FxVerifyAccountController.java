@@ -32,10 +32,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.MartusLogger;
 
-public class FxVerifyAccountController extends FxController
+public class FxVerifyAccountController extends FxWizardController
 {
 	public FxVerifyAccountController(UiMainWindow mainWindowToUse)
 	{

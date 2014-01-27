@@ -36,10 +36,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class FxSelectLanguageController extends FxController implements Initializable
+public class FxSelectLanguageController extends FxWizardController implements Initializable
 {
 	public FxSelectLanguageController(UiMainWindow mainWindowToUse)
 	{
