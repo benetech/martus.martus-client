@@ -31,7 +31,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import org.martus.client.core.ConfigInfo;
@@ -52,10 +51,6 @@ public class FxSetupContactInfoController extends FxWizardController implements 
 	{
 		authorField.setText(getConfigInfo().getAuthor());
 		organizationField.setText(getConfigInfo().getOrganization());
-		emailField.setText(getConfigInfo().getEmail());
-		webPageField.setText(getConfigInfo().getWebPage());
-		phoneNumberField.setText(getConfigInfo().getPhone());
-		mailingAddressField.setText(getConfigInfo().getAddress());
 	}
 
 	@FXML
@@ -63,10 +58,6 @@ public class FxSetupContactInfoController extends FxWizardController implements 
 	{
 		getConfigInfo().setAuthor(getFontHelper().getStorable(authorField.getText()));
 		getConfigInfo().setOrganization(getFontHelper().getStorable(organizationField.getText()));
-		getConfigInfo().setEmail(getFontHelper().getStorable(emailField.getText()));
-		getConfigInfo().setWebPage(getFontHelper().getStorable(webPageField.getText()));
-		getConfigInfo().setPhone(getFontHelper().getStorable(phoneNumberField.getText()));
-		getConfigInfo().setAddress(getFontHelper().getStorable(mailingAddressField.getText()));
 		
 		super.handleNext(event);
 	}
@@ -92,18 +83,6 @@ public class FxSetupContactInfoController extends FxWizardController implements 
 	
 	@FXML
 	private TextField organizationField;
-	
-	@FXML
-	private TextField emailField;
-	
-	@FXML
-	private TextField webPageField;
-	
-	@FXML
-	private TextField phoneNumberField;
-	
-	@FXML
-	private TextArea mailingAddressField;
 	
 	private ConfigInfo info;
 	private UiFontEncodingHelper fontHelper;
