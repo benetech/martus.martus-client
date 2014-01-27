@@ -40,7 +40,6 @@ import javafx.scene.control.ComboBox;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPreferencesDlg;
 import org.martus.client.swingui.jfx.FxController;
-import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxSetupSettingsController extends FxController implements Initializable
@@ -61,7 +60,7 @@ public class FxSetupSettingsController extends FxController implements Initializ
 		getLocalization().setDateDelimiter(delimiter.charAt(0));
 		getMainWindow().saveConfigInfo();
 		
-		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
+		super.handleNext(event);
 	}
 	
 	public void initialize(URL url, ResourceBundle resourceBundle)
