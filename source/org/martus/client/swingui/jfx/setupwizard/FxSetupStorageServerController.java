@@ -25,19 +25,36 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxWizardStage;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 
-public class SetupWizardStage extends FxWizardStage
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxController;
+import org.martus.common.MartusLogger;
+
+public class FxSetupStorageServerController extends FxController
 {
-	public SetupWizardStage(UiMainWindow mainWindow) throws Exception
+	public FxSetupStorageServerController(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindow);
-		
-		addController(new FxSelectLanguageController(getMainWindow()));
-		addController(new FxSetupUsernamePasswordController(getMainWindow()));
-		addController(new FxSetupContactInfoController(getMainWindow()));
-		addController(new FxSetupSettingsController(getMainWindow()));
-		addController(new FxSetupStorageServerController(getMainWindow()));
+		super(mainWindowToUse);
+	}
+
+	@FXML
+	protected void handleNext(ActionEvent event) 
+	{
+		try
+		{
+			super.handleNext(event);
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+	}
+
+	@Override
+	public String getFxmlLocation()
+	{
+		return "setupwizard/SetupStorageServer.fxml";
 	}
 }
