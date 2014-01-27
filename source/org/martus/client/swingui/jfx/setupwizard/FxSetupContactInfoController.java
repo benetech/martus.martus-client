@@ -51,6 +51,12 @@ public class FxSetupContactInfoController extends FxController implements Initia
 
 	public void initialize(URL url, ResourceBundle bundle)
 	{
+		authorField.setText(getConfigInfo().getAuthor());
+		organizationField.setText(getConfigInfo().getOrganization());
+		emailField.setText(getConfigInfo().getEmail());
+		webPageField.setText(getConfigInfo().getWebPage());
+		phoneNumberField.setText(getConfigInfo().getPhone());
+		mailingAddressField.setText(getConfigInfo().getAddress());
 	}
 
 	@FXML
