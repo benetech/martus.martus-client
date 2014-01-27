@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.setupwizard;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
@@ -51,4 +52,17 @@ abstract public class FxWizardController extends FxController
 	{
 		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_BACK);
 	}
+	
+	protected void disableNext()
+	{
+		nextButton.setDisable(true);
+	}
+	
+	protected void enableNext()
+	{
+		nextButton.setDisable(false);
+	}
+	
+	@FXML
+	private Button nextButton; 
 }
