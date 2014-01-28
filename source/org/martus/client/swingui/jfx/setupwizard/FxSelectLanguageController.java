@@ -31,19 +31,31 @@ import java.util.Vector;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxController;
+import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class FxSelectLanguageController extends FxController implements Initializable
+public class FxSelectLanguageController extends FxWizardController implements Initializable
 {
 	public FxSelectLanguageController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+	}
+	
+	@Override
+	protected void handleNext(ActionEvent event)
+	{
+		String selectedLanguageCode = languagesDropdown.getSelectionModel().getSelectedItem().getCode();
+		
+		if (MtfAwareLocalization.isRecognizedLanguage(selectedLanguageCode))
+			getMainWindow().getLocalization().setCurrentLanguageCode(selectedLanguageCode);
+		
+		super.handleNext(event);
 	}
 	
 	public void initialize(URL url, ResourceBundle resourceBundle)
@@ -83,7 +95,7 @@ public class FxSelectLanguageController extends FxController implements Initiali
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/MartusCreateAccount.fxml";
+		return "setupwizard/SetupLanguage.fxml";
 	}
 	
 	@FXML // fx:id="languagesDropdown"

@@ -39,10 +39,9 @@ import javafx.scene.control.ComboBox;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPreferencesDlg;
-import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class FxSetupSettingsController extends FxController implements Initializable
+public class FxSetupSettingsController extends FxWizardController implements Initializable
 {
 	public FxSetupSettingsController(UiMainWindow mainWindowToUse)
 	{

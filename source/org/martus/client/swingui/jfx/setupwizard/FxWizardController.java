@@ -27,33 +27,42 @@ package org.martus.client.swingui.jfx.setupwizard;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.MartusLogger;
+import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.FxWizardStage;
 
-public class FxSetupStorageServerController extends FxWizardController
+
+abstract public class FxWizardController extends FxController
 {
-	public FxSetupStorageServerController(UiMainWindow mainWindowToUse)
+	public FxWizardController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
-
+	
 	@FXML
-	protected void handleNext(ActionEvent event) 
+	protected void handleNext(ActionEvent event)
 	{
-		try
-		{
-			super.handleNext(event);
-		}
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-		}
+		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
 	}
-
-	@Override
-	public String getFxmlLocation()
+	
+	@FXML
+	protected void handleBack(ActionEvent event) 
 	{
-		return "setupwizard/SetupStorageServer.fxml";
+		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_BACK);
 	}
+	
+	protected void disableNext()
+	{
+		nextButton.setDisable(true);
+	}
+	
+	protected void enableNext()
+	{
+		nextButton.setDisable(false);
+	}
+	
+	@FXML
+	public Button nextButton; 
 }

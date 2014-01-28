@@ -25,35 +25,54 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
-public class FxSetupStorageServerController extends FxWizardController
+public class FxVerifyAccountController extends FxWizardController
 {
-	public FxSetupStorageServerController(UiMainWindow mainWindowToUse)
+	public FxVerifyAccountController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
-
+	
 	@FXML
-	protected void handleNext(ActionEvent event) 
+	protected void handleUsernameChanged(KeyEvent keyEvent)
 	{
+		String userNameValue = userNameField.getText();
+		String passwordValue = passwordField.getText();
+		
 		try
-		{
-			super.handleNext(event);
+		{ 
+			accountConfirmLabel.setText("");
+			if (getMainWindow().getApp().doesAccountExist(userNameValue, passwordValue.toCharArray()))
+			{
+				accountConfirmLabel.setText("User name and password match!");
+			}
 		}
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
 		}
 	}
-
+	
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/SetupStorageServer.fxml";
+		return "setupwizard/VerifyAccount.fxml";
 	}
+
+	@FXML
+	private TextField userNameField;
+	
+	@FXML
+	private PasswordField passwordField;
+	
+	@FXML
+	private Label accountConfirmLabel;
 }

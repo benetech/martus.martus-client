@@ -36,6 +36,7 @@ public class SetupWizardStage extends FxWizardStage
 		
 		addController(new FxSelectLanguageController(getMainWindow()));
 		addController(new FxSetupUsernamePasswordController(getMainWindow()));
+		addController(new FxVerifyAccountController(getMainWindow()));
 		addController(new FxSetupContactInfoController(getMainWindow()));
 		addController(new FxSetupSettingsController(getMainWindow()));
 		addController(new FxSetupStorageServerController(getMainWindow()));

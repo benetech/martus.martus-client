@@ -27,17 +27,15 @@ package org.martus.client.swingui.jfx.setupwizard;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.MartusLogger;
 
-public class FxSetupUsernamePasswordController extends FxController
+public class FxSetupUsernamePasswordController extends FxWizardController
 {
 	public FxSetupUsernamePasswordController(UiMainWindow mainWindowToUse)
 	{
@@ -88,26 +86,12 @@ public class FxSetupUsernamePasswordController extends FxController
 		}
 	}
 	
-	private void disableNext()
-	{
-		nextButton.setDisable(true);
-	}
-	
-	private void enableNext()
-	{
-		nextButton.setDisable(false);
-	}
-	
-
 	@Override
 	public String getFxmlLocation()
 	{
 		return "setupwizard/SetupUsernamePassword.fxml";
 	}
 	
-	@FXML
-	private Button nextButton; 
-
 	@FXML
 	private TextField userName;
 	
