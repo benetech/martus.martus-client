@@ -290,7 +290,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setServerPublicKey(sampleServerKey);
 		info.setTemplateDetails(sampleTemplateDetails);
 		info.setLegacyHQKey(sampleHQKey);
-		info.setSendContactInfoToServer(sampleSendContactInfoToServer);
 		info.setServerCompliance(sampleServerCompliance);
 		info.setCustomFieldLegacySpecs(sampleCustomFieldSpecs);
 		info.setForceBulletinsAllPrivate(sampleForceAllPrivate);
@@ -322,7 +321,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleServerKey", "", info.getServerPublicKey());
 		assertEquals(label + ": sampleTemplateDetails", "", info.getTemplateDetails());
 		assertEquals(label + ": sampleHQKey", "", info.getLegacyHQKey());
-		assertEquals(label + ": sampleSendContactInfoToServer", false, info.shouldContactInfoBeSentToServer());
 		assertEquals(label + ": sampleServerComplicance", "", info.getServerCompliance());
 		assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldLegacySpecs());
 		assertEquals(label + ": sampleForceAllPrivate", false, info.shouldForceBulletinsAllPrivate());
@@ -362,9 +360,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertTrue(label+":Should be a new config file", info.isNewVersion());
 		
 		if(VERSION >= 2)
-			assertEquals(label + ": sampleSendContactInfoToServer", sampleSendContactInfoToServer, info.shouldContactInfoBeSentToServer());
-		else
-			assertEquals(label + ": sampleSendContactInfoToServer", false, info.shouldContactInfoBeSentToServer());
+			; // Version 2 added sendContactInfoToServer, which is no longer used.
 
 		if(VERSION >= 3)
 			; // Version 3 added no data fields
@@ -498,7 +494,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		out.writeUTF(sampleServerKey);
 		if(VERSION >= 2)
 		{
-			out.writeBoolean(sampleSendContactInfoToServer);
+			out.writeBoolean(notUsedSampleSendContactInfoToServer);
 		}
 		if(VERSION >= 3)
 			; // Version 3 added no data fields
@@ -600,7 +596,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final String sampleTemplateDetails = "details\ndetail2";
 	final String sampleHQKey = "1234324234";
 //Version 2
-	final boolean sampleSendContactInfoToServer = true;
+	final boolean notUsedSampleSendContactInfoToServer = true;
 //Version 3
 	//nothing added just signed.
 //Version 4

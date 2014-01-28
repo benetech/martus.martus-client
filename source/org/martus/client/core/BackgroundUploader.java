@@ -74,8 +74,6 @@ public class BackgroundUploader
 			uploadResult = uploadOneBulletin(folderSealedOutbox);
 		else if(store.hasAnyNonDiscardedBulletins(folderDraftOutbox))
 			uploadResult = uploadOneBulletin(folderDraftOutbox);
-		else if(app.getConfigInfo().shouldContactInfoBeSentToServer())
-			uploadResult = sendContactInfoToServer();
 		return uploadResult;
 	}
 
@@ -271,7 +269,6 @@ public class BackgroundUploader
 	
 		try
 		{
-			configInfo.setSendContactInfoToServer(false);
 			app.saveConfigInfo();
 		}
 		catch (SaveConfigInfoException e)

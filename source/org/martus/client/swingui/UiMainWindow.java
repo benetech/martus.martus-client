@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2001-2007, Beneficent
+monitoring software. Copyright (C) 2001-2014, Beneficent
 Technology, Inc. (The Benetech Initiative).
 
 Martus is free software; you can redistribute it and/or
@@ -607,11 +607,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		ConfigInfo info = app.getConfigInfo();
 		if(!info.hasEnoughContactInfo())
 			doContactInfo();
-		else if(info.promptUserRequestSendToServer())
-		{
-			requestToUpdateContactInfoOnServerAndSaveInfo();
-			info.clearPromptUserRequestSendToServer();
-		}
 	}
 	
 	private void reloadPendingRetrieveQueue()
@@ -1721,8 +1716,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		ConfigInfo info = app.getConfigInfo();
 		UiContactInfoDlg setupContactDlg = new UiContactInfoDlg(this, info);
 		boolean pressedOk = setupContactDlg.getResult();
-		if(pressedOk)
-			requestToUpdateContactInfoOnServerAndSaveInfo();
 		// the following is required (for unknown reasons)
 		// to get the window to redraw after the dialog
 		// is closed. Yuck! kbs.
@@ -1833,8 +1826,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			String[] buttons = {ok};
 		
 			new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons);
-			if(magicAccepted)
-				requestToUpdateContactInfoOnServerAndSaveInfo();
 			
 			backgroundUploadTimerTask.forceRecheckOfUidsOnServer();
 			getStore().clearOnServerLists();
@@ -1905,19 +1896,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			
 		UiShowScrollableTextDlg dlg = new UiShowScrollableTextDlg(this, "ServerCompliance", "ServerComplianceAccept", "ServerComplianceReject", descriptionTag, newServerCompliance, null);
 		return dlg.getResult();
-	}
-
-	private void requestToUpdateContactInfoOnServerAndSaveInfo()
-	{
-		saveConfigInfo();
-		
-		ConfigInfo configInfo = app.getConfigInfo();
-		if(!configInfo.isServerConfigured())
-			return;
-		
-		boolean sendInfo = confirmDlg("RequestToSendContactInfoToServer");
-		configInfo.setSendContactInfoToServer(sendInfo);
-		saveConfigInfo();
 	}
 	
 	public void saveConfigInfo()
