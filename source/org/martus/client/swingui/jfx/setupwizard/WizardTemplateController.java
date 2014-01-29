@@ -23,60 +23,32 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.setupwizard;
 
-import java.net.URL;
-
+import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.layout.Pane;
 
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 
-abstract public class FxController implements FxControllerInterface
+public class WizardTemplateController extends FxWizardController
 {
-	public FxController(UiMainWindow mainWindowToUse)
+	public WizardTemplateController(UiMainWindow mainWindowToUse)
 	{
-		mainWindow = mainWindowToUse;
-	}
-	
-	public Parent createContents() throws Exception
-	{
-		return (Parent)createLoader().load();
-	}
-	
-	private FxmlLoaderWithController createLoader() throws Exception
-	{
-		String fxmlLocation = getFxmlLocation();
-		URL resourceUrl = getResourceAsUrl(fxmlLocation);
-		
-		return new FxmlLoaderWithController(this, resourceUrl);
-	}
-	
-	private URL getResourceAsUrl(String resourceName) throws Exception
-	{
-		return FxScene.class.getResource(resourceName);
+		super(mainWindowToUse);
 	}
 
-	public void setStage(FxStage stageToUse)
+	@Override
+	public String getFxmlLocation()
 	{
-		stage = stageToUse;
+		return "setupwizard/WizardFramework.fxml";
 	}
 	
-	public FxStage getStage()
+	public void setRightSideContentPane(Parent contents)
 	{
-		return stage;
+		contentPane.getChildren().addAll(contents);
 	}
 	
-	public UiMainWindow getMainWindow()
-	{
-		return mainWindow;
-	}
-	
-	public MartusLocalization getLocalization()
-	{
-		return mainWindow.getLocalization();
-	}
-
-	private FxStage stage;
-	private UiMainWindow mainWindow;
+	@FXML
+	private Pane contentPane;	
 }

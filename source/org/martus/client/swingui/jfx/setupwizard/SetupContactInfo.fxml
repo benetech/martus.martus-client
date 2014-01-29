@@ -4,19 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 <children>
-    <SplitPane dividerPositions="0.3634085213032581" focusTraversable="true" prefHeight="700.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml">
-    <items>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="318.0" prefWidth="84.0">
-            <children>
-                <VBox xmlns:fx="http://javafx.com/fxml">
-                <fx:include source="SetupWizardToc.fxml" />
-            </VBox>
-        </children>
-    </AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="318.0" prefWidth="84.0">
-        <children>
             <GridPane prefHeight="210.0" prefWidth="494.0" xmlns:fx="http://javafx.com/fxml">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="19.0" prefWidth="118.0" />
@@ -39,10 +28,5 @@
                 <TextField id="" fx:id="organizationField" GridPane.columnIndex="1" GridPane.rowIndex="5" /><Label text="Account Contact Information" GridPane.columnSpan="2" /><Label text="This information is optional and is used to prepopulate your bulletins for yourconvenience. It is stored on your local computer and not sent to the Martus server." wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="2" />
             </children>
         </GridPane>
-        <Button id="" layoutX="400.0" layoutY="600.0" mnemonicParsing="false" onAction="#handleNext" text="Continue" BorderPane.alignment="BOTTOM_RIGHT" />
-    </children>
-</AnchorPane>
-</items>
-</SplitPane>
 </children>
 </AnchorPane>
