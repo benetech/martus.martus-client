@@ -45,22 +45,8 @@ public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardCont
 	@Override
 	public void handleNext(ActionEvent event) 
 	{
-		try
-		{
-			createAccount();
-		}
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-		}
-	}
-
-	private void createAccount() throws Exception
-	{
-		String userNameValue = userName.getText();
-		String passwordValue = passwordField.getText();
-		
-		getMainWindow().getApp().createAccount(userNameValue, passwordValue.toCharArray());
+		StaticAccountCreationData.setUserName(userName.getText());
+		StaticAccountCreationData.setPassword(passwordField.getText());
 	}
 
 	@FXML
