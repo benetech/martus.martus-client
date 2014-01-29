@@ -23,20 +23,15 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.setupwizard;
+package org.martus.client.swingui.jfx;
 
-import org.martus.client.swingui.UiMainWindow;
+import javafx.event.ActionEvent;
 
-public class FxSetupStorageServerController extends AbstractFxSetupWizardController
+public interface ContentNavigationHandlerInterface
 {
-	public FxSetupStorageServerController(UiMainWindow mainWindowToUse)
-	{
-		super(mainWindowToUse);
-	}
+	public void handleNext(ActionEvent actionEvent);
+	
+	public void handleBack(ActionEvent actionEvent);
 
-	@Override
-	public String getFxmlLocation()
-	{
-		return "setupwizard/SetupStorageServer.fxml";
-	}
+	public void setWizardNavigationHandler(NavigationButtonsInterface wizardNavigationHandler);
 }

@@ -30,6 +30,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.ContentNavigationHandlerInterface;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.NavigationButtonsInterface;
@@ -45,12 +46,14 @@ abstract public class FxWizardController extends FxController implements Navigat
 	@FXML
 	protected void handleNext(ActionEvent event)
 	{
+		getContentNavigationHandler().handleNext(event);
 		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
 	}
 	
 	@FXML
 	protected void handleBack(ActionEvent event) 
 	{
+		getContentNavigationHandler().handleBack(event);
 		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_BACK);
 	}
 	
@@ -74,14 +77,15 @@ abstract public class FxWizardController extends FxController implements Navigat
 		return backButton; 
 	}
 	
-	public void setNavigationHandler(NavigationButtonsInterface navigationHandlerToUse)
+	public void setNavigationHandler(ContentNavigationHandlerInterface contentNavigationHandlerToUse)
 	{
-		navigationHandler = navigationHandlerToUse;
+		contentNavigationHandler = contentNavigationHandlerToUse;
+		contentNavigationHandler.setWizardNavigationHandler(this);
 	}
 	
-	public NavigationButtonsInterface getNavigationHandler()
+	private ContentNavigationHandlerInterface getContentNavigationHandler()
 	{
-		return navigationHandler;
+		return contentNavigationHandler;
 	}
 	
 	@FXML
@@ -90,5 +94,5 @@ abstract public class FxWizardController extends FxController implements Navigat
 	@FXML
 	public Button backButton;
 	
-	private NavigationButtonsInterface navigationHandler;
+	private ContentNavigationHandlerInterface contentNavigationHandler;
 }

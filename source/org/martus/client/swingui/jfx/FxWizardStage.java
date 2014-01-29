@@ -31,7 +31,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.Region;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.setupwizard.FxWizardController;
+import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardController;
 import org.martus.client.swingui.jfx.setupwizard.WizardTemplateController;
 import org.martus.common.MartusLogger;
 
@@ -56,8 +56,8 @@ abstract public class FxWizardStage extends FxStage
 		}
 		
 		Parent wizardTemplateContents = wizardTemplateController.createContents();
-		FxWizardController rightSideController = (FxWizardController) getCurrentController();
-		rightSideController.setNavigationHandler(wizardTemplateController);
+		AbstractFxSetupWizardController rightSideController = (AbstractFxSetupWizardController) getCurrentController();
+		wizardTemplateController.setNavigationHandler(rightSideController);
 		Parent createContents = rightSideController.createContents();
 		wizardTemplateController.setRightSideContentPane(createContents);
 		wizardTemplateController.setStage(this);
