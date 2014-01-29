@@ -25,54 +25,37 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
+import javafx.event.ActionEvent;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.MartusLogger;
+import org.martus.client.swingui.jfx.ContentNavigationHandlerInterface;
+import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.NavigationButtonsInterface;
 
-public class FxVerifyAccountController extends AbstractFxSetupWizardController
+abstract public class AbstractFxSetupWizardController extends FxController implements ContentNavigationHandlerInterface
 {
-	public FxVerifyAccountController(UiMainWindow mainWindowToUse)
+	public AbstractFxSetupWizardController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
 	
-	@FXML
-	protected void handleUsernameChanged(KeyEvent keyEvent)
+	public NavigationButtonsInterface getWizardController()
 	{
-		String userNameValue = userNameField.getText();
-		String passwordValue = passwordField.getText();
-		
-		try
-		{ 
-			accountConfirmLabel.setText("");
-			if (getMainWindow().getApp().doesAccountExist(userNameValue, passwordValue.toCharArray()))
-			{
-				accountConfirmLabel.setText("User name and password match!");
-			}
-		}
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-		}
+		return wizardNavigationHandler;
 	}
 	
-	@Override
-	public String getFxmlLocation()
+	public void handleNext(ActionEvent actionEvent)
 	{
-		return "setupwizard/VerifyAccount.fxml";
 	}
-
-	@FXML
-	private TextField userNameField;
 	
-	@FXML
-	private PasswordField passwordField;
+	public void handleBack(ActionEvent actionEvent)
+	{
+	}
 	
-	@FXML
-	private Label accountConfirmLabel;
+	public void setWizardNavigationHandler(NavigationButtonsInterface wizardNavigationHandlerToUse)
+	{
+		wizardNavigationHandler = wizardNavigationHandlerToUse;
+	}
+	
+	private NavigationButtonsInterface wizardNavigationHandler;
 }

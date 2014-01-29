@@ -35,21 +35,19 @@ import javafx.scene.input.KeyEvent;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
-public class FxSetupUsernamePasswordController extends FxWizardController
+public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardController
 {
 	public FxSetupUsernamePasswordController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
 
-	@FXML
-	protected void handleNext(ActionEvent event) 
+	@Override
+	public void handleNext(ActionEvent event) 
 	{
 		try
 		{
 			createAccount();
-			
-			super.handleNext(event);
 		}
 		catch (Exception e)
 		{
