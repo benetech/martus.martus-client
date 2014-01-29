@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -39,6 +40,28 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardController
 	public FxVerifyAccountController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+	}
+
+	@Override
+	public void handleNext(ActionEvent event) 
+	{
+		try
+		{
+			createAccount();
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+	}
+
+	private void createAccount() throws Exception
+	{
+		String userNameValue = StaticAccountCreationData.getUserName();
+		String passwordValue = StaticAccountCreationData.getPassword();
+		StaticAccountCreationData.dispose();
+		
+		getMainWindow().getApp().createAccount(userNameValue, passwordValue.toCharArray());
 	}
 	
 	@FXML
