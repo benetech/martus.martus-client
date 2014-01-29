@@ -49,6 +49,8 @@ public class FxSetupContactInfoController extends AbstractFxSetupWizardControlle
 
 	public void initialize(URL url, ResourceBundle bundle)
 	{
+		getWizardNavigationHandler().getBackButton().setDisable(true);
+
 		authorField.setText(getConfigInfo().getAuthor());
 		organizationField.setText(getConfigInfo().getOrganization());
 	}
