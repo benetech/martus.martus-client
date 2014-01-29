@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+    <SplitPane dividerPositions="0.3634085213032581" focusTraversable="true" prefHeight="700.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml">
+    <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="318.0" prefWidth="84.0">
+            <children>
+                <VBox xmlns:fx="http://javafx.com/fxml">
+                <fx:include source="SetupWizardToc.fxml" />
+            </VBox>
+        </children>
+    </AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="318.0" prefWidth="84.0">
+        <children>
+        	<Button id="" fx:id="nextButton" layoutX="395.0" layoutY="641.0" mnemonicParsing="false" onAction="#handleNext" text="Continue" BorderPane.alignment="BOTTOM_RIGHT" />
+        	<Pane fx:id="contentPane" layoutX="14.0" layoutY="14.0" prefHeight="252.0" prefWidth="487.0" />
+    	</children>
+</AnchorPane>
+</items>
+</SplitPane>
+</children>
+</AnchorPane>
