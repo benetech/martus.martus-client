@@ -17,8 +17,8 @@
       </AnchorPane>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="318.0" prefWidth="84.0">
         <children>
-          <Button id="" fx:id="nextButton" layoutX="395.0" layoutY="641.0" mnemonicParsing="false" onAction="#handleNext" text="Continue" BorderPane.alignment="BOTTOM_RIGHT" />
           <Pane fx:id="contentPane" layoutX="14.0" layoutY="14.0" prefHeight="252.0" prefWidth="487.0" /><Button fx:id="backButton" layoutX="27.0" layoutY="641.0" mnemonicParsing="false" onAction="#handleBack" text="Go Back" />
+          <Button id="" fx:id="nextButton" layoutX="395.0" layoutY="641.0" mnemonicParsing="false" onAction="#handleNext" text="Continue" BorderPane.alignment="BOTTOM_RIGHT" />
       </children>
       </AnchorPane>
       </items>
