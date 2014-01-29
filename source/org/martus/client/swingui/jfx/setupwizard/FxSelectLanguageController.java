@@ -60,17 +60,20 @@ public class FxSelectLanguageController extends AbstractFxSetupWizardController 
 	{
 		ObservableList<ChoiceItem> availableLanguages = FXCollections.observableArrayList(getAvailableLanguages());
 		languagesDropdown.setItems(availableLanguages);
-		languagesDropdown.getSelectionModel().select(findCurrentLanguageChoiceItem());
+		ChoiceItem currentLanguageChoiceItem = findCurrentLanguageChoiceItem();
+		languagesDropdown.getSelectionModel().select(currentLanguageChoiceItem);
 		
 		getWizardController().getBackButton().setVisible(false);
 	}
 	
 	private ChoiceItem findCurrentLanguageChoiceItem()
 	{
+		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
+
 		ObservableList<ChoiceItem> availableLanguages = getAvailableLanguages();
 		for (ChoiceItem choiceItem : availableLanguages)
 		{
-			if (choiceItem.getCode().equals(getLocalization().getCurrentLanguageCode()))
+			if (choiceItem.getCode().equals(currentLanguageCode))
 				return choiceItem;
 		}
 		
@@ -79,6 +82,7 @@ public class FxSelectLanguageController extends AbstractFxSetupWizardController 
 
 	private ObservableList<ChoiceItem> getAvailableLanguages()
 	{
+		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
 		ChoiceItem[] allUILanguagesSupported = getLocalization().getUiLanguages();
 		Vector<ChoiceItem> languageChoices = new Vector<ChoiceItem>();
 		for(int i = 0; i < allUILanguagesSupported.length; ++i)
@@ -88,6 +92,8 @@ public class FxSelectLanguageController extends AbstractFxSetupWizardController 
 			String languageName = getLocalization().getLanguageName(currentCode);
 			languageChoices.add(new ChoiceItem(currentCode, languageName));
 		}
+		
+		getLocalization().setCurrentLanguageCode(currentLanguageCode);
 
 		return FXCollections.observableArrayList(languageChoices);
 	}
