@@ -31,16 +31,19 @@ import javafx.scene.Parent;
 import javafx.scene.layout.Region;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.setupwizard.FxWizardController;
+import org.martus.client.swingui.jfx.setupwizard.WizardTemplateController;
 import org.martus.common.MartusLogger;
 
 abstract public class FxWizardStage extends FxStage
 {
-	public FxWizardStage(UiMainWindow mainWindowToUse)
+	public FxWizardStage(UiMainWindow mainWindowToUse) throws Exception
 	{
 		super(mainWindowToUse);
 	
 		controllers = new Vector<FxController>();
 		currentControllerIndex = 0;
+		wizardTemplateController = new WizardTemplateController(getMainWindow());
 	}
 	
 	@Override
@@ -51,12 +54,15 @@ abstract public class FxWizardStage extends FxStage
 			scene = new FxScene(new Region());
 			setScene(scene);
 		}
-
-		FxController controller = getCurrentController();
-		Parent contents = controller.createContents();
-		controller.setStage(this);
-		scene.setRoot(contents);
-	}	
+		
+		Parent wizardTemplateContents = wizardTemplateController.createContents();
+		FxWizardController rightSideController = (FxWizardController) getCurrentController();
+		rightSideController.setNavigationHandler(wizardTemplateController);
+		Parent createContents = rightSideController.createContents();
+		wizardTemplateController.setRightSideContentPane(createContents);
+		wizardTemplateController.setStage(this);
+		scene.setRoot(wizardTemplateContents);
+	}
 	
 	protected void addController(FxController sceneFactory)
 	{
@@ -110,10 +116,13 @@ abstract public class FxWizardStage extends FxStage
 			getShell().dispose();
 		}
 	}
+	
 	public static final String NAVIGATION_NEXT = "Next";
 	public static final String NAVIGATION_BACK = "Back";
 
 	private int currentControllerIndex;
 	private Vector<FxController> controllers;
 	private FxScene scene;
+	
+	private WizardTemplateController wizardTemplateController;
 }
