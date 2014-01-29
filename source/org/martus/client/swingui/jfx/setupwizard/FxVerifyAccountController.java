@@ -71,11 +71,13 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardController
 		String passwordValue = passwordField.getText();
 		
 		try
-		{ 
+		{
+			getWizardNavigationHandler().getNextButton().setDisable(true);
 			accountConfirmLabel.setText("");
 			if (getMainWindow().getApp().doesAccountExist(userNameValue, passwordValue.toCharArray()))
 			{
 				accountConfirmLabel.setText("User name and password match!");
+				getWizardNavigationHandler().getNextButton().setDisable(false);
 			}
 		}
 		catch (Exception e)
