@@ -32,9 +32,10 @@ import javafx.scene.control.Button;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxWizardStage;
+import org.martus.client.swingui.jfx.NavigationButtonsInterface;
 
 
-abstract public class FxWizardController extends FxController
+abstract public class FxWizardController extends FxController implements NavigationButtonsInterface
 {
 	public FxWizardController(UiMainWindow mainWindowToUse)
 	{
@@ -63,6 +64,31 @@ abstract public class FxWizardController extends FxController
 		nextButton.setDisable(false);
 	}
 	
+	public Button getNextButton()
+	{
+		return nextButton;
+	}
+	
+	public Button getBackButton()
+	{
+		return backButton; 
+	}
+	
+	public void setNavigationHandler(NavigationButtonsInterface navigationHandlerToUse)
+	{
+		navigationHandler = navigationHandlerToUse;
+	}
+	
+	public NavigationButtonsInterface getNavigationHandler()
+	{
+		return navigationHandler;
+	}
+	
 	@FXML
-	public Button nextButton; 
+	public Button nextButton;
+	
+	@FXML
+	public Button backButton;
+	
+	private NavigationButtonsInterface navigationHandler;
 }
