@@ -57,10 +57,10 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardController
 
 	private void createAccount() throws Exception
 	{
-		String userNameValue = StaticAccountCreationData.getUserName();
-		String passwordValue = StaticAccountCreationData.getPassword();
-		StaticAccountCreationData.dispose();
+		String userNameValue = userNameField.getText();
+		String passwordValue = passwordField.getText();
 		
+		StaticAccountCreationData.dispose();
 		getMainWindow().getApp().createAccount(userNameValue, passwordValue.toCharArray());
 	}
 	
@@ -69,16 +69,18 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardController
 	{
 		String userNameValue = userNameField.getText();
 		String passwordValue = passwordField.getText();
-		
 		try
 		{
 			getWizardNavigationHandler().getNextButton().setDisable(true);
 			accountConfirmLabel.setText("");
-			if (getMainWindow().getApp().doesAccountExist(userNameValue, passwordValue.toCharArray()))
-			{
-				accountConfirmLabel.setText("User name and password match!");
-				getWizardNavigationHandler().getNextButton().setDisable(false);
-			}
+			if (!userNameValue.equals(StaticAccountCreationData.getUserName()))
+				return;
+			
+			if (!passwordValue.equals(StaticAccountCreationData.getPassword()))
+				return;
+			
+			accountConfirmLabel.setText("User name and password match!");
+			getWizardNavigationHandler().getNextButton().setDisable(false);
 		}
 		catch (Exception e)
 		{
