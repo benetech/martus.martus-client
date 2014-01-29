@@ -89,10 +89,10 @@ abstract public class FxWizardTemplateController extends FxController implements
 	}
 	
 	@FXML
-	public Button nextButton;
+	protected Button nextButton;
 	
 	@FXML
-	public Button backButton;
+	protected Button backButton;
 	
 	private ContentNavigationHandlerInterface contentNavigationHandler;
 }
