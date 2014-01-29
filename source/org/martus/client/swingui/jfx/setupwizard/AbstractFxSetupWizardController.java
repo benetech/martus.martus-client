@@ -39,7 +39,7 @@ abstract public class AbstractFxSetupWizardController extends FxController imple
 		super(mainWindowToUse);
 	}
 	
-	public NavigationButtonsInterface getWizardController()
+	public NavigationButtonsInterface getWizardNavigationHandler()
 	{
 		return wizardNavigationHandler;
 	}
