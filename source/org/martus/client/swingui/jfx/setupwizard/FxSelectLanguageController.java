@@ -63,6 +63,8 @@ public class FxSelectLanguageController extends FxWizardController implements In
 		ObservableList<ChoiceItem> availableLanguages = FXCollections.observableArrayList(getAvailableLanguages());
 		languagesDropdown.setItems(availableLanguages);
 		languagesDropdown.getSelectionModel().select(findCurrentLanguageChoiceItem());
+		
+		getNavigationHandler().getBackButton().setVisible(false);
 	}
 	
 	private ChoiceItem findCurrentLanguageChoiceItem()

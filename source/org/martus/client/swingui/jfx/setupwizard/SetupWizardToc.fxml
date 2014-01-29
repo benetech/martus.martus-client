@@ -6,142 +6,142 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="724.0" prefWidth="400.0">
-<children>
+  <children>
     <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" id="LeftVBoxTOC6" prefHeight="725.0" prefWidth="400.0">
-    <children>
+      <children>
         <HBox id="LeftHeaderBox" prefHeight="48.0" prefWidth="300.0">
-            <children>
-                <Label id="LeftHeaderLabel" prefHeight="48.0" prefWidth="266.0" text="Getting started with Martus is Easy!" wrapText="true"/>
-            </children>
-        </HBox>
-        <VBox id="LeftTOC1VBox" prefHeight="100.0" prefWidth="300.0">
-            <children>
-                <Label id="LeftTOC_Title" prefHeight="39.0" prefWidth="265.0" text="Create an Account">
-                    <graphic>
-                        <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png"/>
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <textFill>
-                        <Color blue="1.0"/>
-                    </textFill>
-                </Label>
-                <Label id="LeftTOC_Description" prefHeight="42.0" text="you will need to enter a user name and secure password." wrapText="true">
-                    <VBox.margin>
-                        <Insets left="60.0"/>
-                    </VBox.margin>
-                </Label>
-            </children>
-        </VBox>
-        <VBox id="LeftTOC1VBox" prefHeight="117.0" prefWidth="300.0">
-            <children>
-                <Label id="LeftTOC_Title" prefHeight="39.0" prefWidth="265.0" text="Use Tor (Optional)">
-                    <graphic>
-                        <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png"/>
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <textFill>
-                        <Color blue="1.0"/>
-                    </textFill>
-                </Label>
-                <Label id="LeftTOC_Description" prefHeight="83.0" prefWidth="205.0" text="Tor is currently the best tool available to hid your network activities." wrapText="true">
-                    <VBox.margin>
-                        <Insets left="60.0"/>
-                    </VBox.margin>
-                </Label>
-            </children>
-        </VBox>
-        <VBox id="LeftTOC1VBox" prefHeight="104.0" prefWidth="300.0">
-            <children>
-                <Label id="LeftTOC_Title" prefHeight="39.0" prefWidth="265.0" text="Setup Server Storage">
-                    <graphic>
-                        <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png"/>
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <textFill>
-                        <Color blue="1.0"/>
-                    </textFill>
-                </Label>
-                <Label id="LeftTOC_Description" prefHeight="42.0" prefWidth="205.0" text="Back up your bulletins on a secure server." wrapText="true">
-                    <VBox.margin>
-                        <Insets left="60.0"/>
-                    </VBox.margin>
-                </Label>
-            </children>
-        </VBox>
-        <VBox id="LeftTOC1VBox" prefHeight="124.0" prefWidth="300.0">
-            <children>
-                <Label id="LeftTOC_Title" prefHeight="39.0" prefWidth="265.0" text="Add Contacts">
-                    <graphic>
-                        <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png"/>
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <textFill>
-                        <Color blue="1.0"/>
-                    </textFill>
-                </Label>
-                <Label id="LeftTOC_Description" prefHeight="87.0" prefWidth="205.0" text="Share your bulletins with other Martus users and receive bulletins from others." wrapText="true">
-                    <VBox.margin>
-                        <Insets left="60.0"/>
-                    </VBox.margin>
-                </Label>
-            </children>
-        </VBox>
-        <VBox id="LeftTOC1VBox" prefHeight="92.0" prefWidth="300.0">
-            <children>
-                <Label id="LeftTOC_Title" prefHeight="39.0" prefWidth="265.0" text="Import Forms">
-                    <graphic>
-                        <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png"/>
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <textFill>
-                        <Color blue="1.0"/>
-                    </textFill>
-                </Label>
-                <Label id="LeftTOC_Description" prefHeight="42.0" prefWidth="205.0" text="Start with form templates to upload bulletins quickly." wrapText="true">
-                    <VBox.margin>
-                        <Insets left="60.0"/>
-                    </VBox.margin>
-                </Label>
-            </children>
-        </VBox>
-        <VBox id="LeftTOC1VBox" prefHeight="181.0" prefWidth="300.0">
-            <children>
-                <Label id="LeftTOC_Title" prefHeight="55.0" prefWidth="265.0" text="Backup Your Key">
-                    <graphic>
-                        <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png"/>
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <textFill>
-                        <Color blue="1.0"/>
-                    </textFill>
-                </Label>
-                <Label id="LeftTOC_Description" prefHeight="133.0" prefWidth="205.0" text="Files encrypted with the Martus key can only be opened with that key.  Back it up to be sure you can always get your documents." wrapText="true">
-                    <VBox.margin>
-                        <Insets left="60.0"/>
-                    </VBox.margin>
-                </Label>
-            </children>
-        </VBox>
-    </children>
-</VBox>
-</children>
+          <children>
+            <Label id="LeftHeaderLabel" prefHeight="48.0" prefWidth="266.0" text="Getting started with Martus is Easy!" wrapText="true"/>
+          </children>
+      </HBox>
+      <VBox id="LeftTOC1VBox" prefHeight="100.0" prefWidth="300.0">
+        <children>
+          <Label id="LeftTOC_Title" prefHeight="39.0" prefWidth="265.0" text="Create an Account">
+            <graphic>
+              <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                  <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png"/>
+                </image>
+              </ImageView>
+            </graphic>
+            <textFill>
+              <Color blue="1.0"/>
+            </textFill>
+          </Label>
+          <Label id="LeftTOC_Description" prefHeight="42.0" text="you will need to enter a user name and secure password." wrapText="true">
+            <VBox.margin>
+              <Insets left="60.0"/>
+            </VBox.margin>
+          </Label>
+        </children>
+      </VBox>
+      <VBox id="LeftTOC1VBox" prefHeight="117.0" prefWidth="300.0">
+        <children>
+          <Label id="LeftTOC_Title" prefHeight="39.0" prefWidth="265.0" text="Use Tor (Optional)">
+            <graphic>
+              <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                  <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png"/>
+                </image>
+              </ImageView>
+            </graphic>
+            <textFill>
+              <Color blue="1.0"/>
+            </textFill>
+          </Label>
+          <Label id="LeftTOC_Description" prefHeight="83.0" prefWidth="205.0" text="Tor is currently the best tool available to hid your network activities." wrapText="true">
+            <VBox.margin>
+              <Insets left="60.0"/>
+            </VBox.margin>
+          </Label>
+        </children>
+      </VBox>
+      <VBox id="LeftTOC1VBox" prefHeight="104.0" prefWidth="300.0">
+        <children>
+          <Label id="LeftTOC_Title" prefHeight="39.0" prefWidth="265.0" text="Setup Server Storage">
+            <graphic>
+              <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                  <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png"/>
+                </image>
+              </ImageView>
+            </graphic>
+            <textFill>
+              <Color blue="1.0"/>
+            </textFill>
+          </Label>
+          <Label id="LeftTOC_Description" prefHeight="42.0" prefWidth="205.0" text="Back up your bulletins on a secure server." wrapText="true">
+            <VBox.margin>
+              <Insets left="60.0"/>
+            </VBox.margin>
+          </Label>
+        </children>
+      </VBox>
+      <VBox id="LeftTOC1VBox" prefHeight="124.0" prefWidth="300.0">
+        <children>
+          <Label id="LeftTOC_Title" prefHeight="39.0" prefWidth="265.0" text="Add Contacts">
+            <graphic>
+              <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                  <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png"/>
+                </image>
+              </ImageView>
+            </graphic>
+            <textFill>
+              <Color blue="1.0"/>
+            </textFill>
+          </Label>
+          <Label id="LeftTOC_Description" prefHeight="87.0" prefWidth="205.0" text="Share your bulletins with other Martus users and receive bulletins from others." wrapText="true">
+            <VBox.margin>
+              <Insets left="60.0"/>
+            </VBox.margin>
+          </Label>
+        </children>
+      </VBox>
+      <VBox id="LeftTOC1VBox" prefHeight="92.0" prefWidth="300.0">
+        <children>
+          <Label id="LeftTOC_Title" prefHeight="39.0" prefWidth="265.0" text="Import Forms">
+            <graphic>
+              <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                  <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png"/>
+                </image>
+              </ImageView>
+            </graphic>
+            <textFill>
+              <Color blue="1.0"/>
+            </textFill>
+          </Label>
+          <Label id="LeftTOC_Description" prefHeight="42.0" prefWidth="205.0" text="Start with form templates to upload bulletins quickly." wrapText="true">
+            <VBox.margin>
+              <Insets left="60.0"/>
+            </VBox.margin>
+          </Label>
+        </children>
+      </VBox>
+      <VBox id="LeftTOC1VBox" prefHeight="181.0" prefWidth="300.0">
+        <children>
+          <Label id="LeftTOC_Title" prefHeight="55.0" prefWidth="265.0" text="Backup Your Key">
+            <graphic>
+              <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                  <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png"/>
+                </image>
+              </ImageView>
+            </graphic>
+            <textFill>
+              <Color blue="1.0"/>
+            </textFill>
+          </Label>
+          <Label id="LeftTOC_Description" prefHeight="133.0" prefWidth="205.0" text="Files encrypted with the Martus key can only be opened with that key.  Back it up to be sure you can always get your documents." wrapText="true">
+            <VBox.margin>
+              <Insets left="60.0"/>
+            </VBox.margin>
+          </Label>
+        </children>
+      </VBox>
+      </children>
+  </VBox>
+  </children>
 </AnchorPane>
 
