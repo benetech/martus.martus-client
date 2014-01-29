@@ -40,7 +40,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class FxSelectLanguageController extends FxWizardController implements Initializable
+public class FxSelectLanguageController extends AbstractFxSetupWizardController implements Initializable
 {
 	public FxSelectLanguageController(UiMainWindow mainWindowToUse)
 	{
@@ -48,14 +48,12 @@ public class FxSelectLanguageController extends FxWizardController implements In
 	}
 	
 	@Override
-	protected void handleNext(ActionEvent event)
+	public void handleNext(ActionEvent event)
 	{
 		String selectedLanguageCode = languagesDropdown.getSelectionModel().getSelectedItem().getCode();
 		
 		if (MtfAwareLocalization.isRecognizedLanguage(selectedLanguageCode))
 			getMainWindow().getLocalization().setCurrentLanguageCode(selectedLanguageCode);
-		
-		super.handleNext(event);
 	}
 	
 	public void initialize(URL url, ResourceBundle resourceBundle)
@@ -64,7 +62,7 @@ public class FxSelectLanguageController extends FxWizardController implements In
 		languagesDropdown.setItems(availableLanguages);
 		languagesDropdown.getSelectionModel().select(findCurrentLanguageChoiceItem());
 		
-		getNavigationHandler().getBackButton().setVisible(false);
+		getWizardController().getBackButton().setVisible(false);
 	}
 	
 	private ChoiceItem findCurrentLanguageChoiceItem()
@@ -102,5 +100,4 @@ public class FxSelectLanguageController extends FxWizardController implements In
 	
 	@FXML // fx:id="languagesDropdown"
 	private ChoiceBox<ChoiceItem> languagesDropdown; // Value injected by FXMLLoader
-
 }

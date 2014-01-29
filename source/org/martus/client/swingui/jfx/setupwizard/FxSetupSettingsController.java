@@ -41,15 +41,15 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPreferencesDlg;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class FxSetupSettingsController extends FxWizardController implements Initializable
+public class FxSetupSettingsController extends AbstractFxSetupWizardController implements Initializable
 {
 	public FxSetupSettingsController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
 	
-	@FXML
-	protected void handleNext(ActionEvent event) 
+	@Override
+	public void handleNext(ActionEvent event) 
 	{
 		getMainWindow().getApp().getConfigInfo().setForceBulletinsAllPrivate(preventPublicBulletinsCheckBox.isSelected());
 		getMainWindow().getApp().getConfigInfo().setCheckForFieldOfficeBulletins(userTorCheckBox.isSelected());
@@ -58,8 +58,6 @@ public class FxSetupSettingsController extends FxWizardController implements Ini
 		String delimiter = dateDelimeterComboBox.getSelectionModel().getSelectedItem().getCode();
 		getLocalization().setDateDelimiter(delimiter.charAt(0));
 		getMainWindow().saveConfigInfo();
-		
-		super.handleNext(event);
 	}
 	
 	public void initialize(URL url, ResourceBundle resourceBundle)
