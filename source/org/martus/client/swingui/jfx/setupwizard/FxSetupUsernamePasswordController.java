@@ -56,13 +56,11 @@ public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardCont
 		String passwordValue = passwordField.getText();
 		try
 		{ 
-			//FIXME urgent : enable and fix once new template based wizard is working
-			//enableNext();
+			getWizardNavigationHandler().getNextButton().setDisable(false);
 			errorLabel.setText("");
 			if (getMainWindow().getApp().doesAccountExist(userNameValue, passwordValue.toCharArray()))
 			{
-				//FIXME urgent : enable and fix once new template based wizard is working
-				//disableNext();
+				getWizardNavigationHandler().getNextButton().setDisable(true);
 				errorLabel.setText("Account already Exists!");
 			}
 		}
