@@ -63,7 +63,7 @@ public class FxSelectLanguageController extends AbstractFxSetupWizardController 
 		ChoiceItem currentLanguageChoiceItem = findCurrentLanguageChoiceItem();
 		languagesDropdown.getSelectionModel().select(currentLanguageChoiceItem);
 		
-		getWizardController().getBackButton().setVisible(false);
+		getWizardNavigationHandler().getBackButton().setVisible(false);
 	}
 	
 	private ChoiceItem findCurrentLanguageChoiceItem()
