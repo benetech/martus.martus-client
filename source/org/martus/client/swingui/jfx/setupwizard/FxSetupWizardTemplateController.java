@@ -31,9 +31,9 @@ import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public class WizardTemplateController extends FxWizardTemplateController
+public class FxSetupWizardTemplateController extends FxWizardTemplateController
 {
-	public WizardTemplateController(UiMainWindow mainWindowToUse)
+	public FxSetupWizardTemplateController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
