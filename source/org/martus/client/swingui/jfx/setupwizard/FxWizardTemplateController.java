@@ -36,9 +36,9 @@ import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.NavigationButtonsInterface;
 
 
-abstract public class FxWizardController extends FxController implements NavigationButtonsInterface
+abstract public class FxWizardTemplateController extends FxController implements NavigationButtonsInterface
 {
-	public FxWizardController(UiMainWindow mainWindowToUse)
+	public FxWizardTemplateController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
