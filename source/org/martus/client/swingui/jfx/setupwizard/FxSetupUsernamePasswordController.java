@@ -83,8 +83,5 @@ public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardCont
 	private PasswordField passwordField;
 	
 	@FXML
-	private PasswordField confirmPasswordField;
-	
-	@FXML
 	private Label errorLabel;
 }
