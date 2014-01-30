@@ -7,7 +7,9 @@
 }
 
 .LeftPanel {
-	-fx-background-color: darkcyan;
+	-fx-background-color: cyan;
+    -fx-padding: 6 6 6 6;
+    -fx-border-color: black;
 }
 
 .LeftTitle {
