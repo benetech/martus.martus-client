@@ -77,7 +77,7 @@ abstract public class FxWizardTemplateController extends FxController implements
 		return backButton; 
 	}
 	
-	public void setNavigationHandler(ContentNavigationHandlerInterface contentNavigationHandlerToUse)
+	public void setContentController(ContentNavigationHandlerInterface contentNavigationHandlerToUse)
 	{
 		contentNavigationHandler = contentNavigationHandlerToUse;
 		contentNavigationHandler.setWizardNavigationHandler(this);
