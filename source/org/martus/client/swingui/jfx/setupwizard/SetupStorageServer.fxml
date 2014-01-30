@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <GridPane prefHeight="247.0" prefWidth="489.0" xmlns:fx="http://javafx.com/fxml">
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+      </rowConstraints>
+      <children>
+        <Label prefHeight="34.0" prefWidth="403.0" text="Setup Server Storage" GridPane.columnSpan="2147483647" />
+        <Label prefHeight="155.0" prefWidth="467.0" text="Storing documents on the Martus servers (or your organization's alternateserver) allows you to:1. Store your encrypted documents where they can only be retrieved byyour organization or anyone you share your public key with.2. Backup your files in case your computer is lost or stolen." wrapText="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+        <RadioButton mnemonicParsing="false" selected="true" text="Default backup server" GridPane.rowIndex="2">
+			<toggleGroup>
+				<ToggleGroup fx:id="setupServerGroup" />
+			</toggleGroup>
+		</RadioButton>
+        <RadioButton mnemonicParsing="false" text="Advanced Server Settings" toggleGroup="$setupServerGroup" GridPane.rowIndex="3" />
+        <RadioButton mnemonicParsing="false" text="I'll setup my server later" toggleGroup="$setupServerGroup" GridPane.rowIndex="4" />
+      </children>
+    </GridPane>
+  </children>
+</AnchorPane>
