@@ -48,7 +48,7 @@ public class FxSelectLanguageController extends AbstractFxSetupWizardController 
 	}
 	
 	@Override
-	public void handleNext(ActionEvent event)
+	public void nextWasPressed(ActionEvent event)
 	{
 		String selectedLanguageCode = languagesDropdown.getSelectionModel().getSelectedItem().getCode();
 		

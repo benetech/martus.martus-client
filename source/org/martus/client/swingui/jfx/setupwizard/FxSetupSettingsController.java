@@ -49,7 +49,7 @@ public class FxSetupSettingsController extends AbstractFxSetupWizardController i
 	}
 	
 	@Override
-	public void handleNext(ActionEvent event) 
+	public void nextWasPressed(ActionEvent event) 
 	{
 		getMainWindow().getApp().getConfigInfo().setForceBulletinsAllPrivate(preventPublicBulletinsCheckBox.isSelected());
 		getMainWindow().getApp().getConfigInfo().setCheckForFieldOfficeBulletins(userTorCheckBox.isSelected());

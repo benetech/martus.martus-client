@@ -43,7 +43,7 @@ public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardCont
 	}
 
 	@Override
-	public void handleNext(ActionEvent event) 
+	public void nextWasPressed(ActionEvent event) 
 	{
 		StaticAccountCreationData.setUserName(userName.getText());
 		StaticAccountCreationData.setPassword(passwordField.getText().toCharArray());

@@ -17,10 +17,10 @@
           <Pane fx:id="contentPane" layoutX="14.0" layoutY="14.0" maxHeight="-Infinity" prefHeight="500.0" prefWidth="500.0" />
 </center>
 <bottom><BorderPane>
-<left><Button fx:id="backButton" layoutX="27.0" layoutY="641.0" mnemonicParsing="false" onAction="#handleBack" text="Go Back" BorderPane.alignment="CENTER_LEFT" />
+<left><Button fx:id="backButton" layoutX="27.0" layoutY="641.0" mnemonicParsing="false" onAction="#backWasPressed" text="Go Back" BorderPane.alignment="CENTER_LEFT" />
 </left>
 <right>
-          <Button id="" fx:id="nextButton" layoutX="395.0" layoutY="641.0" mnemonicParsing="false" onAction="#handleNext" text="Continue" BorderPane.alignment="CENTER_RIGHT" />
+          <Button id="" fx:id="nextButton" layoutX="395.0" layoutY="641.0" mnemonicParsing="false" onAction="#nextWasPressed" text="Continue" BorderPane.alignment="CENTER_RIGHT" />
 </right></BorderPane>
 </bottom></BorderPane>
 </center></BorderPane>

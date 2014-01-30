@@ -56,7 +56,7 @@ public class FxSetupContactInfoController extends AbstractFxSetupWizardControlle
 	}
 
 	@Override
-	public void handleNext(ActionEvent event) 
+	public void nextWasPressed(ActionEvent event) 
 	{
 		getConfigInfo().setAuthor(getFontHelper().getStorable(authorField.getText()));
 		getConfigInfo().setOrganization(getFontHelper().getStorable(organizationField.getText()));
