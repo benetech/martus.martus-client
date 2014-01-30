@@ -44,9 +44,12 @@ public class FxSetupWizardTemplateController extends FxWizardTemplateController
 		return "setupwizard/WizardFramework.fxml";
 	}
 	
-	public void setContentPane(Parent contents)
+	public void setContentPane(AbstractFxSetupWizardController contentPaneController) throws Exception
 	{
-		contentPane.getChildren().addAll(contents);
+		setContentController(contentPaneController);
+		Parent createContents = contentPaneController.createContents();
+		
+		contentPane.getChildren().addAll(createContents);
 	}
 	
 	@FXML
