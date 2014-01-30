@@ -44,7 +44,7 @@ public class FxSetupWizardTemplateController extends FxWizardTemplateController
 		return "setupwizard/WizardFramework.fxml";
 	}
 	
-	public void setRightSideContentPane(Parent contents)
+	public void setContentPane(Parent contents)
 	{
 		contentPane.getChildren().addAll(contents);
 	}
