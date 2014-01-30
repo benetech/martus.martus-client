@@ -57,7 +57,7 @@ abstract public class FxWizardStage extends FxStage
 		
 		Parent wizardTemplateContents = wizardTemplateController.createContents();
 		AbstractFxSetupWizardController rightSideController = (AbstractFxSetupWizardController) getCurrentController();
-		wizardTemplateController.setNavigationHandler(rightSideController);
+		wizardTemplateController.setContentController(rightSideController);
 		Parent createContents = rightSideController.createContents();
 		wizardTemplateController.setRightSideContentPane(createContents);
 		wizardTemplateController.setStage(this);
