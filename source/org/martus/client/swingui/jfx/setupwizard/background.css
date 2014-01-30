@@ -7,14 +7,14 @@
 }
 
 .LeftPanel {
-	-fx-background-color: cyan;
+	-fx-background-color: darkcyan;
     -fx-padding: 6 6 6 6;
     -fx-border-color: black;
 }
 
-.LeftTitle {
+.TOCTitle {
 	-fx-text-fill: aqua;
-    -fx-padding: 6 6 6 6;
+    -fx-padding: 2 2 2 2;
 }
 
 .LeftGrid {
@@ -28,15 +28,15 @@
     -fx-alignment: top-left;
 }
 
-.Entry {
+.TOCEntry {
 	-fx-text-fill: aqua;
-    -fx-padding: 6 6 6 6;
+    -fx-padding: 2 2 2 2;
 }
 
-.Description {
+.TOCDescription {
 	color: white;
 	-fx-text-fill: white;
-    -fx-padding: 6 6 6 6;
+    -fx-padding: 2 2 2 2;
 }
 
 .RightPanel {

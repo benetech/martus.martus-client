@@ -10,7 +10,7 @@
   <children>
     <VBox id="LeftVBoxTOC6" styleClass="LeftPanel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
       <children>
-            <Label id="LeftHeaderLabel" text="Getting started with Martus is Easy!" wrapText="true" /><GridPane xmlns:fx="http://javafx.com/fxml">
+            <Label id="LeftHeaderLabel" styleClass="TOCTitle" text="Getting started with Martus is Easy!" wrapText="true" /><GridPane xmlns:fx="http://javafx.com/fxml">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
@@ -27,12 +27,9 @@
 <children>
       <VBox id="LeftTOC1VBox" GridPane.columnIndex="1">
         <children>
-          <Label id="LeftTOC_Title" text="Create an Account">
-            <textFill>
-              <Color blue="1.0" />
-            </textFill>
+          <Label id="LeftTOC_Title" styleClass="TOCEntry" text="Create an Account">
           </Label>
-          <Label id="LeftTOC_Description" text="You will need to enter a user name and secure password." wrapText="true">
+          <Label id="LeftTOC_Description" styleClass="TOCDescription" text="You will need to enter a user name and secure password." wrapText="true">
             <VBox.margin>
               <Insets left="60.0" />
             </VBox.margin>
@@ -41,12 +38,9 @@
       </VBox>
       <VBox id="LeftTOC1VBox" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <children>
-          <Label id="LeftTOC_Title" text="Use Tor (Optional)">
-            <textFill>
-              <Color blue="1.0" />
-            </textFill>
+          <Label id="LeftTOC_Title" styleClass="TOCEntry" text="Use Tor (Optional)">
           </Label>
-          <Label id="LeftTOC_Description" text="Tor is currently the best tool available to hid your network activities." wrapText="true">
+          <Label id="LeftTOC_Description" styleClass="TOCDescription" text="Tor is currently the best tool available to hid your network activities." wrapText="true">
             <VBox.margin>
               <Insets left="60.0" />
             </VBox.margin>
@@ -55,12 +49,9 @@
       </VBox>
       <VBox id="LeftTOC1VBox" GridPane.columnIndex="1" GridPane.rowIndex="2">
         <children>
-          <Label id="LeftTOC_Title" text="Setup Server Storage">
-            <textFill>
-              <Color blue="1.0" />
-            </textFill>
+          <Label id="LeftTOC_Title" styleClass="TOCEntry" text="Setup Server Storage">
           </Label>
-          <Label id="LeftTOC_Description" text="Back up your bulletins on a secure server." wrapText="true">
+          <Label id="LeftTOC_Description" styleClass="TOCDescription" text="Back up your bulletins on a secure server." wrapText="true">
             <VBox.margin>
               <Insets left="60.0" />
             </VBox.margin>
@@ -69,12 +60,9 @@
       </VBox>
       <VBox id="LeftTOC1VBox" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <children>
-          <Label id="LeftTOC_Title" text="Add Contacts">
-            <textFill>
-              <Color blue="1.0" />
-            </textFill>
+          <Label id="LeftTOC_Title" styleClass="TOCEntry" text="Add Contacts">
           </Label>
-          <Label id="LeftTOC_Description" text="Share your bulletins with other Martus users and receive bulletins from others." wrapText="true">
+          <Label id="LeftTOC_Description" styleClass="TOCDescription" text="Share your bulletins with other Martus users and receive bulletins from others." wrapText="true">
             <VBox.margin>
               <Insets left="60.0" />
             </VBox.margin>
@@ -83,12 +71,9 @@
       </VBox>
       <VBox id="LeftTOC1VBox" GridPane.columnIndex="1" GridPane.rowIndex="4">
         <children>
-          <Label id="LeftTOC_Title" text="Import Forms">
-            <textFill>
-              <Color blue="1.0" />
-            </textFill>
+          <Label id="LeftTOC_Title" styleClass="TOCEntry" text="Import Forms">
           </Label>
-          <Label id="LeftTOC_Description" text="Start with form templates to upload bulletins quickly." wrapText="true">
+          <Label id="LeftTOC_Description" styleClass="TOCDescription" text="Start with form templates to upload bulletins quickly." wrapText="true">
             <VBox.margin>
               <Insets left="60.0" />
             </VBox.margin>
@@ -97,12 +82,9 @@
       </VBox>
       <VBox id="LeftTOC1VBox" GridPane.columnIndex="1" GridPane.rowIndex="5">
         <children>
-          <Label id="LeftTOC_Title" text="Backup Your Key">
-            <textFill>
-              <Color blue="1.0" />
-            </textFill>
+          <Label id="LeftTOC_Title" styleClass="TOCEntry" text="Backup Your Key">
           </Label>
-          <Label id="LeftTOC_Description" text="Files encrypted with the Martus key can only be opened with that key.  Back it up to be sure you can always get your documents." wrapText="true">
+          <Label id="LeftTOC_Description" styleClass="TOCDescription" text="Files encrypted with the Martus key can only be opened with that key.  Back it up to be sure you can always get your documents." wrapText="true">
             <VBox.margin>
               <Insets left="60.0" />
             </VBox.margin>
