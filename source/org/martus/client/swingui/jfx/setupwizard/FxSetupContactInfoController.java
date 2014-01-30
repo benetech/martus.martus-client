@@ -37,7 +37,7 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 
-public class FxSetupContactInfoController extends FxWizardController implements Initializable
+public class FxSetupContactInfoController extends AbstractFxSetupWizardController implements Initializable
 {
 	public FxSetupContactInfoController(UiMainWindow mainWindowToUse)
 	{
@@ -49,17 +49,17 @@ public class FxSetupContactInfoController extends FxWizardController implements 
 
 	public void initialize(URL url, ResourceBundle bundle)
 	{
+		getWizardNavigationHandler().getBackButton().setDisable(true);
+
 		authorField.setText(getConfigInfo().getAuthor());
 		organizationField.setText(getConfigInfo().getOrganization());
 	}
 
-	@FXML
-	protected void handleNext(ActionEvent event) 
+	@Override
+	public void nextWasPressed(ActionEvent event) 
 	{
 		getConfigInfo().setAuthor(getFontHelper().getStorable(authorField.getText()));
 		getConfigInfo().setOrganization(getFontHelper().getStorable(organizationField.getText()));
-		
-		super.handleNext(event);
 	}
 
 	private UiFontEncodingHelper getFontHelper()

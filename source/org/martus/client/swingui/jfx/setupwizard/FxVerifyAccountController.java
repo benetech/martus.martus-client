@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -34,31 +35,63 @@ import javafx.scene.input.KeyEvent;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
-public class FxVerifyAccountController extends FxWizardController
+public class FxVerifyAccountController extends AbstractFxSetupWizardController
 {
 	public FxVerifyAccountController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
-	
-	@FXML
-	protected void handleUsernameChanged(KeyEvent keyEvent)
+
+	@Override
+	public void nextWasPressed(ActionEvent event) 
 	{
-		String userNameValue = userNameField.getText();
-		String passwordValue = passwordField.getText();
-		
 		try
-		{ 
-			accountConfirmLabel.setText("");
-			if (getMainWindow().getApp().doesAccountExist(userNameValue, passwordValue.toCharArray()))
-			{
-				accountConfirmLabel.setText("User name and password match!");
-			}
+		{
+			createAccount();
 		}
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
 		}
+	}
+
+	private void createAccount() throws Exception
+	{
+		String userNameValue = userNameField.getText();
+		String passwordValue = passwordField.getText();
+		
+		StaticAccountCreationData.dispose();
+		getMainWindow().getApp().createAccount(userNameValue, passwordValue.toCharArray());
+	}
+	
+	@FXML
+	protected void handleUsernameChanged(KeyEvent keyEvent)
+	{
+		try
+		{
+			accountConfirmLabel.setText("");
+			boolean shouldBeEnabled = isOkToCreateAccount();
+			getWizardNavigationHandler().getNextButton().setDisable(!shouldBeEnabled);
+			if (shouldBeEnabled)
+				accountConfirmLabel.setText("User name and password match!");
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+	}
+
+	private boolean isOkToCreateAccount()
+	{
+		String userNameValue = userNameField.getText();
+		String passwordValue = passwordField.getText();
+		if (!userNameValue.equals(StaticAccountCreationData.getUserName()))
+			return false;
+		
+		if (!passwordValue.equals(StaticAccountCreationData.getPassword()))
+			return false;
+		
+		return true;
 	}
 	
 	@Override

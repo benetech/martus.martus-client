@@ -31,9 +31,9 @@ import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public class WizardTemplateController extends FxWizardController
+public class FxSetupWizardTemplateController extends FxWizardTemplateController
 {
-	public WizardTemplateController(UiMainWindow mainWindowToUse)
+	public FxSetupWizardTemplateController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
@@ -41,12 +41,15 @@ public class WizardTemplateController extends FxWizardController
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/WizardFramework.fxml";
+		return "setupwizard/SetupWizardFramework.fxml";
 	}
 	
-	public void setRightSideContentPane(Parent contents)
+	public void setContentPane(AbstractFxSetupWizardController contentPaneController) throws Exception
 	{
-		contentPane.getChildren().addAll(contents);
+		setContentController(contentPaneController);
+		Parent createContents = contentPaneController.createContents();
+		
+		contentPane.getChildren().addAll(createContents);
 	}
 	
 	@FXML

@@ -30,27 +30,30 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.ContentNavigationHandlerInterface;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.NavigationButtonsInterface;
 
 
-abstract public class FxWizardController extends FxController implements NavigationButtonsInterface
+abstract public class FxWizardTemplateController extends FxController implements NavigationButtonsInterface
 {
-	public FxWizardController(UiMainWindow mainWindowToUse)
+	public FxWizardTemplateController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
 	
 	@FXML
-	protected void handleNext(ActionEvent event)
+	protected void nextWasPressed(ActionEvent event)
 	{
+		getContentNavigationHandler().nextWasPressed(event);
 		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
 	}
 	
 	@FXML
-	protected void handleBack(ActionEvent event) 
+	protected void backWasPressed(ActionEvent event) 
 	{
+		getContentNavigationHandler().backWasPressed(event);
 		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_BACK);
 	}
 	
@@ -74,21 +77,22 @@ abstract public class FxWizardController extends FxController implements Navigat
 		return backButton; 
 	}
 	
-	public void setNavigationHandler(NavigationButtonsInterface navigationHandlerToUse)
+	public void setContentController(ContentNavigationHandlerInterface contentNavigationHandlerToUse)
 	{
-		navigationHandler = navigationHandlerToUse;
+		contentNavigationHandler = contentNavigationHandlerToUse;
+		contentNavigationHandler.setWizardNavigationHandler(this);
 	}
 	
-	public NavigationButtonsInterface getNavigationHandler()
+	private ContentNavigationHandlerInterface getContentNavigationHandler()
 	{
-		return navigationHandler;
+		return contentNavigationHandler;
 	}
 	
 	@FXML
-	public Button nextButton;
+	protected Button nextButton;
 	
 	@FXML
-	public Button backButton;
+	protected Button backButton;
 	
-	private NavigationButtonsInterface navigationHandler;
+	private ContentNavigationHandlerInterface contentNavigationHandler;
 }

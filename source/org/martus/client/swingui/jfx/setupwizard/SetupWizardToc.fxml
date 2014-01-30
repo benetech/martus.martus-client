@@ -3,145 +3,96 @@
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <VBox id="LeftVBoxTOC6" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox id="LeftVBoxTOC6" styleClass="LeftPanel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
       <children>
-        <HBox id="LeftHeaderBox" prefWidth="300.0">
-          <children>
-            <Label id="LeftHeaderLabel" prefWidth="266.0" text="Getting started with Martus is Easy!" wrapText="true" />
-          </children>
-      </HBox>
-      <VBox id="LeftTOC1VBox" prefWidth="300.0">
+            <Label id="LeftHeaderLabel" styleClass="TOCTitle" text="Getting started with Martus is Easy!" wrapText="true" /><GridPane xmlns:fx="http://javafx.com/fxml">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+<RowConstraints minHeight="10.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+<RowConstraints minHeight="10.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+<RowConstraints minHeight="10.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+  </rowConstraints>
+<children>
+      <VBox id="LeftTOC1VBox" GridPane.columnIndex="1">
         <children>
-          <Label id="LeftTOC_Title" prefWidth="265.0" text="Create an Account">
-            <graphic>
-              <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                  <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png" />
-                </image>
-              </ImageView>
-            </graphic>
-            <textFill>
-              <Color blue="1.0" />
-            </textFill>
+          <Label id="LeftTOC_Title" styleClass="TOCEntry" text="Create an Account">
           </Label>
-          <Label id="LeftTOC_Description" text="you will need to enter a user name and secure password." wrapText="true">
+          <Label id="LeftTOC_Description" styleClass="TOCDescription" text="You will need to enter a user name and secure password." wrapText="true">
             <VBox.margin>
               <Insets left="60.0" />
             </VBox.margin>
           </Label>
         </children>
       </VBox>
-      <VBox id="LeftTOC1VBox" prefWidth="300.0">
+      <VBox id="LeftTOC1VBox" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <children>
-          <Label id="LeftTOC_Title" prefWidth="265.0" text="Use Tor (Optional)">
-            <graphic>
-              <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                  <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png" />
-                </image>
-              </ImageView>
-            </graphic>
-            <textFill>
-              <Color blue="1.0" />
-            </textFill>
+          <Label id="LeftTOC_Title" styleClass="TOCEntry" text="Use Tor (Optional)">
           </Label>
-          <Label id="LeftTOC_Description" text="Tor is currently the best tool available to hid your network activities." wrapText="true">
+          <Label id="LeftTOC_Description" styleClass="TOCDescription" text="Tor is currently the best tool available to hid your network activities." wrapText="true">
             <VBox.margin>
               <Insets left="60.0" />
             </VBox.margin>
           </Label>
         </children>
       </VBox>
-      <VBox id="LeftTOC1VBox">
+      <VBox id="LeftTOC1VBox" GridPane.columnIndex="1" GridPane.rowIndex="2">
         <children>
-          <Label id="LeftTOC_Title" prefWidth="265.0" text="Setup Server Storage">
-            <graphic>
-              <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                  <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png" />
-                </image>
-              </ImageView>
-            </graphic>
-            <textFill>
-              <Color blue="1.0" />
-            </textFill>
+          <Label id="LeftTOC_Title" styleClass="TOCEntry" text="Setup Server Storage">
           </Label>
-          <Label id="LeftTOC_Description" text="Back up your bulletins on a secure server." wrapText="true">
+          <Label id="LeftTOC_Description" styleClass="TOCDescription" text="Back up your bulletins on a secure server." wrapText="true">
             <VBox.margin>
               <Insets left="60.0" />
             </VBox.margin>
           </Label>
         </children>
       </VBox>
-      <VBox id="LeftTOC1VBox" prefWidth="300.0">
+      <VBox id="LeftTOC1VBox" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <children>
-          <Label id="LeftTOC_Title" prefWidth="265.0" text="Add Contacts">
-            <graphic>
-              <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                  <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png" />
-                </image>
-              </ImageView>
-            </graphic>
-            <textFill>
-              <Color blue="1.0" />
-            </textFill>
+          <Label id="LeftTOC_Title" styleClass="TOCEntry" text="Add Contacts">
           </Label>
-          <Label id="LeftTOC_Description" text="Share your bulletins with other Martus users and receive bulletins from others." wrapText="true">
+          <Label id="LeftTOC_Description" styleClass="TOCDescription" text="Share your bulletins with other Martus users and receive bulletins from others." wrapText="true">
             <VBox.margin>
               <Insets left="60.0" />
             </VBox.margin>
           </Label>
         </children>
       </VBox>
-      <VBox id="LeftTOC1VBox" prefWidth="300.0">
+      <VBox id="LeftTOC1VBox" GridPane.columnIndex="1" GridPane.rowIndex="4">
         <children>
-          <Label id="LeftTOC_Title" prefWidth="265.0" text="Import Forms">
-            <graphic>
-              <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                  <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png" />
-                </image>
-              </ImageView>
-            </graphic>
-            <textFill>
-              <Color blue="1.0" />
-            </textFill>
+          <Label id="LeftTOC_Title" styleClass="TOCEntry" text="Import Forms">
           </Label>
-          <Label id="LeftTOC_Description" text="Start with form templates to upload bulletins quickly." wrapText="true">
+          <Label id="LeftTOC_Description" styleClass="TOCDescription" text="Start with form templates to upload bulletins quickly." wrapText="true">
             <VBox.margin>
               <Insets left="60.0" />
             </VBox.margin>
           </Label>
         </children>
       </VBox>
-      <VBox id="LeftTOC1VBox" prefWidth="300.0">
+      <VBox id="LeftTOC1VBox" GridPane.columnIndex="1" GridPane.rowIndex="5">
         <children>
-          <Label id="LeftTOC_Title" prefWidth="265.0" text="Backup Your Key">
-            <graphic>
-              <ImageView id="LeftTOC_Icon" fitHeight="36.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                  <Image smooth="false" url="@../../../../../../../../../../../../D:/Benetech/martus-client/source/org/martus/client/swingui/dialogs/MartusLogo.png" />
-                </image>
-              </ImageView>
-            </graphic>
-            <textFill>
-              <Color blue="1.0" />
-            </textFill>
+          <Label id="LeftTOC_Title" styleClass="TOCEntry" text="Backup Your Key">
           </Label>
-          <Label id="LeftTOC_Description" text="Files encrypted with the Martus key can only be opened with that key.  Back it up to be sure you can always get your documents." wrapText="true">
+          <Label id="LeftTOC_Description" styleClass="TOCDescription" text="Files encrypted with the Martus key can only be opened with that key.  Back it up to be sure you can always get your documents." wrapText="true">
             <VBox.margin>
               <Insets left="60.0" />
             </VBox.margin>
           </Label>
         </children>
       </VBox>
+</children>
+</GridPane>
       </children>
   </VBox>
   </children>

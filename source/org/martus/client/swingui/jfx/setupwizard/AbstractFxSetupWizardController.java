@@ -25,18 +25,37 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import org.martus.client.swingui.UiMainWindow;
+import javafx.event.ActionEvent;
 
-public class FxSetupStorageServerController extends AbstractFxSetupWizardController
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.ContentNavigationHandlerInterface;
+import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.NavigationButtonsInterface;
+
+abstract public class AbstractFxSetupWizardController extends FxController implements ContentNavigationHandlerInterface
 {
-	public FxSetupStorageServerController(UiMainWindow mainWindowToUse)
+	public AbstractFxSetupWizardController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
-
-	@Override
-	public String getFxmlLocation()
+	
+	public NavigationButtonsInterface getWizardNavigationHandler()
 	{
-		return "setupwizard/SetupStorageServer.fxml";
+		return wizardNavigationHandler;
 	}
+	
+	public void nextWasPressed(ActionEvent actionEvent)
+	{
+	}
+	
+	public void backWasPressed(ActionEvent actionEvent)
+	{
+	}
+	
+	public void setWizardNavigationHandler(NavigationButtonsInterface wizardNavigationHandlerToUse)
+	{
+		wizardNavigationHandler = wizardNavigationHandlerToUse;
+	}
+	
+	private NavigationButtonsInterface wizardNavigationHandler;
 }

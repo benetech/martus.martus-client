@@ -35,34 +35,18 @@ import javafx.scene.input.KeyEvent;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
-public class FxSetupUsernamePasswordController extends FxWizardController
+public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardController
 {
 	public FxSetupUsernamePasswordController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
 
-	@FXML
-	protected void handleNext(ActionEvent event) 
+	@Override
+	public void nextWasPressed(ActionEvent event) 
 	{
-		try
-		{
-			createAccount();
-			
-			super.handleNext(event);
-		}
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-		}
-	}
-
-	private void createAccount() throws Exception
-	{
-		String userNameValue = userName.getText();
-		String passwordValue = passwordField.getText();
-		
-		getMainWindow().getApp().createAccount(userNameValue, passwordValue.toCharArray());
+		StaticAccountCreationData.setUserName(userName.getText());
+		StaticAccountCreationData.setPassword(passwordField.getText().toCharArray());
 	}
 
 	@FXML
@@ -72,13 +56,11 @@ public class FxSetupUsernamePasswordController extends FxWizardController
 		String passwordValue = passwordField.getText();
 		try
 		{ 
-			//FIXME urgent : enable and fix once new template based wizard is working
-			//enableNext();
+			getWizardNavigationHandler().getNextButton().setDisable(false);
 			errorLabel.setText("");
 			if (getMainWindow().getApp().doesAccountExist(userNameValue, passwordValue.toCharArray()))
 			{
-				//FIXME urgent : enable and fix once new template based wizard is working
-				//disableNext();
+				getWizardNavigationHandler().getNextButton().setDisable(true);
 				errorLabel.setText("Account already Exists!");
 			}
 		}
@@ -99,9 +81,6 @@ public class FxSetupUsernamePasswordController extends FxWizardController
 	
 	@FXML
 	private PasswordField passwordField;
-	
-	@FXML
-	private PasswordField confirmPasswordField;
 	
 	@FXML
 	private Label errorLabel;

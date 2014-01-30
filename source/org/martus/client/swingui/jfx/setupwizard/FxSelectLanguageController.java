@@ -40,7 +40,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class FxSelectLanguageController extends FxWizardController implements Initializable
+public class FxSelectLanguageController extends AbstractFxSetupWizardController implements Initializable
 {
 	public FxSelectLanguageController(UiMainWindow mainWindowToUse)
 	{
@@ -48,31 +48,32 @@ public class FxSelectLanguageController extends FxWizardController implements In
 	}
 	
 	@Override
-	protected void handleNext(ActionEvent event)
+	public void nextWasPressed(ActionEvent event)
 	{
 		String selectedLanguageCode = languagesDropdown.getSelectionModel().getSelectedItem().getCode();
 		
 		if (MtfAwareLocalization.isRecognizedLanguage(selectedLanguageCode))
 			getMainWindow().getLocalization().setCurrentLanguageCode(selectedLanguageCode);
-		
-		super.handleNext(event);
 	}
 	
 	public void initialize(URL url, ResourceBundle resourceBundle)
 	{
 		ObservableList<ChoiceItem> availableLanguages = FXCollections.observableArrayList(getAvailableLanguages());
 		languagesDropdown.setItems(availableLanguages);
-		languagesDropdown.getSelectionModel().select(findCurrentLanguageChoiceItem());
+		ChoiceItem currentLanguageChoiceItem = findCurrentLanguageChoiceItem();
+		languagesDropdown.getSelectionModel().select(currentLanguageChoiceItem);
 		
-		getNavigationHandler().getBackButton().setVisible(false);
+		getWizardNavigationHandler().getBackButton().setVisible(false);
 	}
 	
 	private ChoiceItem findCurrentLanguageChoiceItem()
 	{
+		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
+
 		ObservableList<ChoiceItem> availableLanguages = getAvailableLanguages();
 		for (ChoiceItem choiceItem : availableLanguages)
 		{
-			if (choiceItem.getCode().equals(getLocalization().getCurrentLanguageCode()))
+			if (choiceItem.getCode().equals(currentLanguageCode))
 				return choiceItem;
 		}
 		
@@ -81,6 +82,7 @@ public class FxSelectLanguageController extends FxWizardController implements In
 
 	private ObservableList<ChoiceItem> getAvailableLanguages()
 	{
+		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
 		ChoiceItem[] allUILanguagesSupported = getLocalization().getUiLanguages();
 		Vector<ChoiceItem> languageChoices = new Vector<ChoiceItem>();
 		for(int i = 0; i < allUILanguagesSupported.length; ++i)
@@ -90,6 +92,8 @@ public class FxSelectLanguageController extends FxWizardController implements In
 			String languageName = getLocalization().getLanguageName(currentCode);
 			languageChoices.add(new ChoiceItem(currentCode, languageName));
 		}
+		
+		getLocalization().setCurrentLanguageCode(currentLanguageCode);
 
 		return FXCollections.observableArrayList(languageChoices);
 	}
@@ -102,5 +106,4 @@ public class FxSelectLanguageController extends FxWizardController implements In
 	
 	@FXML // fx:id="languagesDropdown"
 	private ChoiceBox<ChoiceItem> languagesDropdown; // Value injected by FXMLLoader
-
 }

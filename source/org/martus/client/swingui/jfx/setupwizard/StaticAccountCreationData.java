@@ -25,18 +25,34 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import org.martus.client.swingui.UiMainWindow;
-
-public class FxSetupStorageServerController extends AbstractFxSetupWizardController
+public class StaticAccountCreationData
 {
-	public FxSetupStorageServerController(UiMainWindow mainWindowToUse)
+	public static void dispose()
 	{
-		super(mainWindowToUse);
+		userName = null;
+		password = null;
 	}
-
-	@Override
-	public String getFxmlLocation()
+	
+	public static void setUserName(String userNameToUse)
 	{
-		return "setupwizard/SetupStorageServer.fxml";
+		userName = userNameToUse;
 	}
+	
+	public static void setPassword(char[] passwordToUse)
+	{
+		password = passwordToUse;
+	}
+	
+	public static String getUserName()
+	{
+		return userName;
+	}
+	
+	public static String getPassword()
+	{
+		return new String(password);
+	}
+	
+	private static String userName;
+	private static char[] password;
 }
