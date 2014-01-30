@@ -642,32 +642,35 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(!app.doesAnyAccountExist())
 			signInType = UiSigninDlg.INITIAL_NEW_RECOVER_ACCOUNT;
 		
-		int result = signIn(signInType); 
-		if(result == UiSigninDlg.CANCEL)
-			return false;
-		if(result == UiSigninDlg.NEW_ACCOUNT)
-			wantsNewAccount = true;
-		if(result == UiSigninDlg.RECOVER_ACCOUNT_BY_SHARE)
-		{	
-			UiBackupRecoverSharedKeyPair recover = new UiBackupRecoverSharedKeyPair(this);
-			if(!recover.recoverKeyPairFromMultipleUnencryptedFiles())
-				return false;
-			justRecovered = true;
-		}
-		if(result == UiSigninDlg.RECOVER_ACCOUNT_BY_BACKUP_FILE)
+		if(!isAlreadySignedIn())
 		{
-			UiRecoverKeyPairFromBackup recover = new UiRecoverKeyPairFromBackup(this);
-			if(!recover.recoverPrivateKey())
+			int result = signIn(signInType); 
+			if(result == UiSigninDlg.CANCEL)
 				return false;
-			justRecovered = true;
-		}
-
-		createdNewAccount = false;
-		if(wantsNewAccount)
-		{
-			if(!createAccount())
-				return false;
-			createdNewAccount = true;
+			if(result == UiSigninDlg.NEW_ACCOUNT)
+				wantsNewAccount = true;
+			if(result == UiSigninDlg.RECOVER_ACCOUNT_BY_SHARE)
+			{	
+				UiBackupRecoverSharedKeyPair recover = new UiBackupRecoverSharedKeyPair(this);
+				if(!recover.recoverKeyPairFromMultipleUnencryptedFiles())
+					return false;
+				justRecovered = true;
+			}
+			if(result == UiSigninDlg.RECOVER_ACCOUNT_BY_BACKUP_FILE)
+			{
+				UiRecoverKeyPairFromBackup recover = new UiRecoverKeyPairFromBackup(this);
+				if(!recover.recoverPrivateKey())
+					return false;
+				justRecovered = true;
+			}
+	
+			createdNewAccount = false;
+			if(wantsNewAccount)
+			{
+				if(!createAccount())
+					return false;
+				createdNewAccount = true;
+			}
 		}
 		
 		initalizeUiState();
@@ -698,7 +701,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return true;
 	}
     
- 	private void askToRepairMissingOrCorruptAccountMapSignature()
+ 	private boolean isAlreadySignedIn()
+	{
+		return (getApp().getAccountId() != null);
+	}
+
+	private void askToRepairMissingOrCorruptAccountMapSignature()
 	{
 		if(!confirmDlgBeep("WarnMissingOrCorruptAccountMapSignatureFile"))
 			exitWithoutSavingState();
