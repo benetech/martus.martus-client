@@ -44,11 +44,11 @@ abstract public class AbstractFxSetupWizardController extends FxController imple
 		return wizardNavigationHandler;
 	}
 	
-	public void handleNext(ActionEvent actionEvent)
+	public void nextWasPressed(ActionEvent actionEvent)
 	{
 	}
 	
-	public void handleBack(ActionEvent actionEvent)
+	public void backWasPressed(ActionEvent actionEvent)
 	{
 	}
 	

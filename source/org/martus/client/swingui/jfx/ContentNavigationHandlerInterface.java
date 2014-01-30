@@ -29,9 +29,9 @@ import javafx.event.ActionEvent;
 
 public interface ContentNavigationHandlerInterface
 {
-	public void handleNext(ActionEvent actionEvent);
+	public void nextWasPressed(ActionEvent actionEvent);
 	
-	public void handleBack(ActionEvent actionEvent);
+	public void backWasPressed(ActionEvent actionEvent);
 
 	public void setWizardNavigationHandler(NavigationButtonsInterface wizardNavigationHandler);
 }

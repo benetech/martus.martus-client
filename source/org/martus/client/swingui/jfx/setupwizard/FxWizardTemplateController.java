@@ -44,16 +44,16 @@ abstract public class FxWizardTemplateController extends FxController implements
 	}
 	
 	@FXML
-	protected void handleNext(ActionEvent event)
+	protected void nextWasPressed(ActionEvent event)
 	{
-		getContentNavigationHandler().handleNext(event);
+		getContentNavigationHandler().nextWasPressed(event);
 		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
 	}
 	
 	@FXML
-	protected void handleBack(ActionEvent event) 
+	protected void backWasPressed(ActionEvent event) 
 	{
-		getContentNavigationHandler().handleBack(event);
+		getContentNavigationHandler().backWasPressed(event);
 		getStage().handleNavigationEvent(FxWizardStage.NAVIGATION_BACK);
 	}
 	

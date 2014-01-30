@@ -43,7 +43,7 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardController
 	}
 
 	@Override
-	public void handleNext(ActionEvent event) 
+	public void nextWasPressed(ActionEvent event) 
 	{
 		try
 		{
