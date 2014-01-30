@@ -67,25 +67,31 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardController
 	@FXML
 	protected void handleUsernameChanged(KeyEvent keyEvent)
 	{
-		String userNameValue = userNameField.getText();
-		String passwordValue = passwordField.getText();
 		try
 		{
-			getWizardNavigationHandler().getNextButton().setDisable(true);
 			accountConfirmLabel.setText("");
-			if (!userNameValue.equals(StaticAccountCreationData.getUserName()))
-				return;
-			
-			if (!passwordValue.equals(StaticAccountCreationData.getPassword()))
-				return;
-			
-			accountConfirmLabel.setText("User name and password match!");
-			getWizardNavigationHandler().getNextButton().setDisable(false);
+			boolean shouldBeEnabled = isOkToCreateAccount();
+			getWizardNavigationHandler().getNextButton().setDisable(!shouldBeEnabled);
+			if (shouldBeEnabled)
+				accountConfirmLabel.setText("User name and password match!");
 		}
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
 		}
+	}
+
+	private boolean isOkToCreateAccount()
+	{
+		String userNameValue = userNameField.getText();
+		String passwordValue = passwordField.getText();
+		if (!userNameValue.equals(StaticAccountCreationData.getUserName()))
+			return false;
+		
+		if (!passwordValue.equals(StaticAccountCreationData.getPassword()))
+			return false;
+		
+		return true;
 	}
 	
 	@Override
