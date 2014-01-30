@@ -41,7 +41,7 @@ public class FxSetupWizardTemplateController extends FxWizardTemplateController
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/WizardFramework.fxml";
+		return "setupwizard/SetupWizardFramework.fxml";
 	}
 	
 	public void setContentPane(AbstractFxSetupWizardController contentPaneController) throws Exception
