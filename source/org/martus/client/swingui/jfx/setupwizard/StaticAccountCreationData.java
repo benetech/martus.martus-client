@@ -38,7 +38,7 @@ public class StaticAccountCreationData
 		userName = userNameToUse;
 	}
 	
-	public static void setPassword(String passwordToUse)
+	public static void setPassword(char[] passwordToUse)
 	{
 		password = passwordToUse;
 	}
@@ -50,9 +50,9 @@ public class StaticAccountCreationData
 	
 	public static String getPassword()
 	{
-		return password;
+		return new String(password);
 	}
 	
 	private static String userName;
-	private static String password;
+	private static char[] password;
 }

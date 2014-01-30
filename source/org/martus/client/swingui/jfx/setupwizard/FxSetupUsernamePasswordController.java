@@ -46,7 +46,7 @@ public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardCont
 	public void handleNext(ActionEvent event) 
 	{
 		StaticAccountCreationData.setUserName(userName.getText());
-		StaticAccountCreationData.setPassword(passwordField.getText());
+		StaticAccountCreationData.setPassword(passwordField.getText().toCharArray());
 	}
 
 	@FXML
