@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -20,7 +21,7 @@
         <Label prefHeight="34.0" prefWidth="403.0" text="Verify your Account" GridPane.columnSpan="2147483647" />
         <Label text="Confirm User Name" GridPane.rowIndex="1" />
         <Label text="Confirm Password" GridPane.rowIndex="2" />
-        <PasswordField fx:id="passwordField" onInputMethodTextChanged="#handleUsernameChanged" onKeyTyped="#handleUsernameChanged" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <PasswordField fx:id="passwordField" onKeyTyped="#handleUsernameChanged" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         <TextField fx:id="userNameField" onKeyTyped="#handleUsernameChanged" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Label fx:id="accountConfirmLabel" GridPane.columnSpan="2" GridPane.rowIndex="3" />
       </children>
