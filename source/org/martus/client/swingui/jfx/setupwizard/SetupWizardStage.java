@@ -25,7 +25,12 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import java.io.File;
+
+import javafx.scene.layout.Region;
+
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxScene;
 import org.martus.client.swingui.jfx.FxWizardStage;
 
 public class SetupWizardStage extends FxWizardStage
@@ -40,5 +45,13 @@ public class SetupWizardStage extends FxWizardStage
 		addController(new FxSetupContactInfoController(getMainWindow()));
 		addController(new FxSetupSettingsController(getMainWindow()));
 		addController(new FxSetupStorageServerController(getMainWindow()));
+	}
+	
+	@Override
+	protected FxScene createScene() throws Exception
+	{
+		File fxmlDir = new File(getMainWindow().getApp().getMartusDataRootDirectory(), "fxml");
+		
+		return new FxScene(new Region(), fxmlDir);
 	}
 }
