@@ -1642,7 +1642,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String martusAccountAccessTokenDescription = getLocalization().getFieldLabel("AccountAccessToken");
 		try
 		{
-			MartusAccountAccessToken accountToken = app.getMartusAccountAccessTokenFromServer();
+			MartusAccountAccessToken accountToken = app.getConfigInfo().getCurrentMartusAccountAccessToken();
 			martusAccountAccessToken = accountToken.getToken();
 		} 
 		catch (Exception e)
