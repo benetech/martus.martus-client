@@ -27,8 +27,6 @@ package org.martus.client.swingui.jfx.setupwizard;
 
 import java.io.File;
 
-import javafx.scene.layout.Region;
-
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxScene;
 import org.martus.client.swingui.jfx.FxWizardStage;
@@ -52,6 +50,6 @@ public class SetupWizardStage extends FxWizardStage
 	{
 		File fxmlDir = new File(getMainWindow().getApp().getMartusDataRootDirectory(), "fxml");
 		
-		return new SetupWizardScene(new Region(), fxmlDir);
+		return new SetupWizardScene(fxmlDir);
 	}
 }
