@@ -23,31 +23,24 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.setupwizard;
 
 import java.io.File;
-import java.net.URL;
 
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 
-abstract public class FxScene extends Scene
+import org.martus.client.swingui.jfx.FxScene;
+
+public class SetupWizardScene extends FxScene
 {
-	public FxScene(Parent root, File fxmlDirToUse) throws Exception
+	public SetupWizardScene(Parent root, File fxmlDirToUse) throws Exception
 	{
-		super(root);
-		
-		getStylesheets().add(getBestCssLocation(fxmlDirToUse).toExternalForm());
+		super(root, fxmlDirToUse);
 	}
 
-	private URL getBestCssLocation(File fxmlDirToUse) throws Exception
+	@Override
+	protected String getSetupWizardCssLocation()
 	{
-		File backgroundCssFile = new File(fxmlDirToUse, getSetupWizardCssLocation());
-		if (backgroundCssFile.exists())
-			return backgroundCssFile.toURI().toURL();
-
-		return FxScene.class.getResource(getSetupWizardCssLocation());
+		return "setupwizard/background.css";
 	}
-
-	abstract protected String getSetupWizardCssLocation();
 }

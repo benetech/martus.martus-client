@@ -52,6 +52,6 @@ public class SetupWizardStage extends FxWizardStage
 	{
 		File fxmlDir = new File(getMainWindow().getApp().getMartusDataRootDirectory(), "fxml");
 		
-		return new FxScene(new Region(), fxmlDir);
+		return new SetupWizardScene(new Region(), fxmlDir);
 	}
 }
