@@ -27,15 +27,13 @@ package org.martus.client.swingui.jfx.setupwizard;
 
 import java.io.File;
 
-import javafx.scene.layout.Region;
-
 import org.martus.client.swingui.jfx.FxScene;
 
 public class SetupWizardScene extends FxScene
 {
 	public SetupWizardScene(File fxmlDirToUse) throws Exception
 	{
-		super(new Region(), fxmlDirToUse);
+		super(fxmlDirToUse);
 	}
 
 	@Override

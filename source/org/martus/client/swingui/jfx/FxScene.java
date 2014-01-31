@@ -28,14 +28,14 @@ package org.martus.client.swingui.jfx;
 import java.io.File;
 import java.net.URL;
 
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Region;
 
 abstract public class FxScene extends Scene
 {
-	public FxScene(Parent root, File fxmlDirToUse) throws Exception
+	public FxScene(File fxmlDirToUse) throws Exception
 	{
-		super(root);
+		super(new Region());
 		
 		getStylesheets().add(getBestCssLocation(fxmlDirToUse).toExternalForm());
 	}
