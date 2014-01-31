@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import java.io.File;
 import java.util.Vector;
 
 import javafx.scene.Parent;
@@ -51,7 +52,8 @@ abstract public class FxWizardStage extends FxStage
 	{
 		if(scene == null)
 		{
-			scene = new FxScene(new Region());
+			File fxmlDir = new File(getMainWindow().getApp().getMartusDataRootDirectory(), "fxml");
+			scene = new FxScene(new Region(), fxmlDir);
 			setScene(scene);
 		}
 		
