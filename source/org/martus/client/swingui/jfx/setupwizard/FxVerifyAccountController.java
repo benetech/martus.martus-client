@@ -25,21 +25,34 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
-public class FxVerifyAccountController extends AbstractFxSetupWizardController
+public class FxVerifyAccountController extends AbstractFxSetupWizardController implements ChangeListener<String>, Initializable
 {
 	public FxVerifyAccountController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		getWizardNavigationHandler().getNextButton().setDisable(true);
+		userNameField.textProperty().addListener(this);
+		passwordField.textProperty().addListener(this);
 	}
 
 	@Override
@@ -64,9 +77,10 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardController
 		getMainWindow().getApp().createAccount(userNameValue, passwordValue.toCharArray());
 	}
 	
-	@FXML
-	protected void handleUsernameChanged(KeyEvent keyEvent)
+	@Override
+	public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 	{
+		System.out.println("pass = " + passwordField.getText());
 		try
 		{
 			accountConfirmLabel.setText("");
