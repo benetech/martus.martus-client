@@ -80,7 +80,6 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardController i
 	@Override
 	public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 	{
-		System.out.println("pass = " + passwordField.getText());
 		try
 		{
 			accountConfirmLabel.setText("");
