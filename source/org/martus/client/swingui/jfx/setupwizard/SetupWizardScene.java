@@ -39,7 +39,7 @@ public class SetupWizardScene extends FxScene
 	}
 
 	@Override
-	protected String getSetupWizardCssLocation()
+	protected String getCssLocation()
 	{
 		return "setupwizard/background.css";
 	}
