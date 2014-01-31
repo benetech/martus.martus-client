@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import java.io.File;
 import java.net.URL;
 
 import javafx.scene.Parent;
@@ -46,11 +47,21 @@ abstract public class FxController implements FxControllerInterface
 	
 	private FxmlLoaderWithController createLoader() throws Exception
 	{
-		String fxmlLocation = getFxmlLocation();
-		URL resourceUrl = getResourceAsUrl(fxmlLocation);
+		URL resourceUrl = getBestFxmlLocation();
 		
 		return new FxmlLoaderWithController(this, resourceUrl);
 	}
+
+	private URL getBestFxmlLocation() throws Exception
+	{
+		File fxmlDir = new File(getMainWindow().getApp().getMartusDataRootDirectory(), "fxml");
+		String fxmlLocation = getFxmlLocation();
+		File fxmlFile = new File(fxmlDir, fxmlLocation);
+		if (fxmlFile.exists())
+			return fxmlFile.toURI().toURL();
+
+		return getResourceAsUrl(fxmlLocation);
+	}		
 	
 	private URL getResourceAsUrl(String resourceName) throws Exception
 	{
