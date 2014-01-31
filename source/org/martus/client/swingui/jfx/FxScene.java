@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx;
 
 import java.io.File;
+import java.net.URL;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -36,16 +37,16 @@ public class FxScene extends Scene
 	{
 		super(root);
 		
-		getStylesheets().add(getBestCssLocation(fxmlDirToUse));
+		getStylesheets().add(getBestCssLocation(fxmlDirToUse).toExternalForm());
 	}
 
-	private String getBestCssLocation(File fxmlDirToUse) throws Exception
+	private URL getBestCssLocation(File fxmlDirToUse) throws Exception
 	{
 		File backgroundCssFile = new File(fxmlDirToUse, getSetupWizardCssLocation());
 		if (backgroundCssFile.exists())
-			return backgroundCssFile.toURI().toURL().toExternalForm();
+			return backgroundCssFile.toURI().toURL();
 
-		return FxScene.class.getResource(getSetupWizardCssLocation()).toExternalForm();
+		return FxScene.class.getResource(getSetupWizardCssLocation());
 	}
 
 	//TODO this class is generic and this css is specific to setup wizard.  
