@@ -42,9 +42,9 @@ abstract public class FxScene extends Scene
 
 	private URL getBestCssLocation(File fxmlDirToUse) throws Exception
 	{
-		File backgroundCssFile = new File(fxmlDirToUse, getCssLocation());
-		if (backgroundCssFile.exists())
-			return backgroundCssFile.toURI().toURL();
+		File cssFile = new File(fxmlDirToUse, getCssLocation());
+		if (cssFile.exists())
+			return cssFile.toURI().toURL();
 
 		return FxScene.class.getResource(getCssLocation());
 	}
