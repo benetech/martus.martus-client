@@ -40,7 +40,7 @@ import javafx.scene.control.TextField;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
-public class FxVerifyAccountController extends AbstractFxSetupWizardController implements ChangeListener<String>, Initializable
+public class FxVerifyAccountController extends AbstractFxSetupWizardController implements Initializable
 {
 	public FxVerifyAccountController(UiMainWindow mainWindowToUse)
 	{
@@ -51,8 +51,8 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardController i
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		getWizardNavigationHandler().getNextButton().setDisable(true);
-		userNameField.textProperty().addListener(this);
-		passwordField.textProperty().addListener(this);
+		userNameField.textProperty().addListener(new LoginChangeHandler());
+		passwordField.textProperty().addListener(new LoginChangeHandler());
 	}
 
 	@Override
@@ -77,23 +77,6 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardController i
 		getMainWindow().getApp().createAccount(userNameValue, passwordValue.toCharArray());
 	}
 	
-	@Override
-	public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
-	{
-		try
-		{
-			accountConfirmLabel.setText("");
-			boolean shouldBeEnabled = isOkToCreateAccount();
-			getWizardNavigationHandler().getNextButton().setDisable(!shouldBeEnabled);
-			if (shouldBeEnabled)
-				accountConfirmLabel.setText("User name and password match!");
-		}
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-		}
-	}
-
 	private boolean isOkToCreateAccount()
 	{
 		String userNameValue = userNameField.getText();
@@ -107,10 +90,39 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardController i
 		return true;
 	}
 	
+	private Label getAccountConfirmLabel()
+	{
+		return accountConfirmLabel;
+	}
+	
 	@Override
 	public String getFxmlLocation()
 	{
 		return "setupwizard/VerifyAccount.fxml";
+	}
+	
+	private class LoginChangeHandler implements ChangeListener<String>
+	{
+		public LoginChangeHandler()
+		{
+		}
+		
+		@Override
+		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
+		{
+			try
+			{
+				getAccountConfirmLabel().setText("");
+				boolean shouldBeEnabled = isOkToCreateAccount();
+				getWizardNavigationHandler().getNextButton().setDisable(!shouldBeEnabled);
+				if (shouldBeEnabled)
+					getAccountConfirmLabel().setText("User name and password match!");
+			}
+			catch (Exception e)
+			{
+				MartusLogger.logException(e);
+			}
+		}
 	}
 
 	@FXML
