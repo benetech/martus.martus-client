@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javafx.scene.Parent;
@@ -55,19 +56,18 @@ abstract public class FxController implements FxControllerInterface
 	private URL getBestFxmlLocation() throws Exception
 	{
 		File fxmlDir = new File(getMainWindow().getApp().getMartusDataRootDirectory(), "fxml");
-		String fxmlLocation = getFxmlLocation();
-		File fxmlFile = new File(fxmlDir, fxmlLocation);
+		return getBestFile(fxmlDir, getFxmlLocation());
+	}
+
+	public static URL getBestFile(File fxmlDir, String fileLocation) throws MalformedURLException
+	{
+		File fxmlFile = new File(fxmlDir, fileLocation);
 		if (fxmlFile.exists())
 			return fxmlFile.toURI().toURL();
 
-		return getResourceAsUrl(fxmlLocation);
+		return FxScene.class.getResource(fileLocation);
 	}		
 	
-	private URL getResourceAsUrl(String resourceName) throws Exception
-	{
-		return FxScene.class.getResource(resourceName);
-	}
-
 	public void setStage(FxStage stageToUse)
 	{
 		stage = stageToUse;
