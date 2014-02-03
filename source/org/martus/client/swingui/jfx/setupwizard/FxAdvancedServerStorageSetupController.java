@@ -25,32 +25,30 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import java.io.File;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxScene;
-import org.martus.client.swingui.jfx.FxWizardStage;
 
-public class SetupWizardStage extends FxWizardStage
+public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizardController
 {
-	public SetupWizardStage(UiMainWindow mainWindow) throws Exception
+	public FxAdvancedServerStorageSetupController(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindow);
-		
-		addController(new FxSelectLanguageController(getMainWindow()));
-		addController(new FxSetupUsernamePasswordController(getMainWindow()));
-		addController(new FxVerifyAccountController(getMainWindow()));
-		addController(new FxSetupContactInfoController(getMainWindow()));
-		addController(new FxSetupSettingsController(getMainWindow()));
-		addController(new FxSetupStorageServerController(getMainWindow()));
-		addController(new FxAdvancedServerStorageSetupController(getMainWindow()));
+		super(mainWindowToUse);
+	}
+
+	@Override
+	public String getFxmlLocation()
+	{
+		return "setupwizard/AdvancedServerStorageSetup.fxml";
 	}
 	
-	@Override
-	protected FxScene createScene() throws Exception
-	{
-		File fxmlDir = getMainWindow().getApp().getFxmlDirectory();
-		
-		return new SetupWizardScene(fxmlDir);
-	}
+	@FXML
+	private TextField ipAddressField;
+	
+	@FXML
+	private TextField publicCodeField;
+	
+	@FXML
+	private TextField magicWordField;
 }
