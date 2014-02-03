@@ -55,7 +55,7 @@ abstract public class FxController implements FxControllerInterface
 
 	private URL getBestFxmlLocation() throws Exception
 	{
-		File fxmlDir = new File(getMainWindow().getApp().getMartusDataRootDirectory(), "fxml");
+		File fxmlDir = getMainWindow().getApp().getFxmlDirectory();
 		return getBestFile(fxmlDir, getFxmlLocation());
 	}
 

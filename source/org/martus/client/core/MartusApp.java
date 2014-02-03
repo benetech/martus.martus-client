@@ -642,6 +642,11 @@ public class MartusApp
 		store.doAfterSigninInitialization(getCurrentAccountDirectory());
 	}
 	
+	public File getFxmlDirectory()
+	{
+		return new File (getMartusDataRootDirectory(), FXML_DIRECTORY_NAME);
+	}
+	
 	public File getMartusDataRootDirectory()
 	{
 		return martusDataRootDirectory;
@@ -2270,6 +2275,7 @@ public class MartusApp
 	public static final String PACKETS_DIRECTORY_NAME = "packets";
 	public static final String DOCUMENTS_DIRECTORY_NAME = "Docs";
 	public static final String USE_UNOFFICIAL_TRANSLATIONS_NAME = "use_unofficial_translations.txt";
+	private static final String FXML_DIRECTORY_NAME = "fxml";
 	private final int MAXFOLDERS = 50;
 	public int serverChunkSize = NetworkInterfaceConstants.CLIENT_MAX_CHUNK_SIZE;
 }

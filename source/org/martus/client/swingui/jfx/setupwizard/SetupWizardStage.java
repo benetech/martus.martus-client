@@ -48,7 +48,7 @@ public class SetupWizardStage extends FxWizardStage
 	@Override
 	protected FxScene createScene() throws Exception
 	{
-		File fxmlDir = new File(getMainWindow().getApp().getMartusDataRootDirectory(), "fxml");
+		File fxmlDir = getMainWindow().getApp().getFxmlDirectory();
 		
 		return new SetupWizardScene(fxmlDir);
 	}
