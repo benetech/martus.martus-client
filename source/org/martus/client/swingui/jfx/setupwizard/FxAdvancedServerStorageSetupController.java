@@ -25,16 +25,29 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizardController
+public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizardController implements Initializable
 {
 	public FxAdvancedServerStorageSetupController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		getWizardNavigationHandler().getNextButton().setDisable(true);
+		
 	}
 
 	@Override
@@ -42,6 +55,17 @@ public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizar
 	{
 		return "setupwizard/AdvancedServerStorageSetup.fxml";
 	}
+	
+	@FXML
+	public void connect()
+	{
+	}
+	
+	@FXML
+	private Label statusLabel;
+	
+	@FXML
+	private Button connectButton;
 	
 	@FXML
 	private TextField ipAddressField;
