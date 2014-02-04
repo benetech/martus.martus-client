@@ -62,6 +62,7 @@ import org.martus.client.reports.ReportFormatFilter;
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.EnglishStrings;
+import org.martus.client.swingui.SelectableHeadquartersEntry;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.test.MockClientSideNetworkHandler;
 import org.martus.clientside.ClientSideNetworkGateway;
@@ -71,10 +72,13 @@ import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.PasswordHelper;
 import org.martus.common.BulletinSummary;
 import org.martus.common.BulletinSummary.WrongValueCount;
+import org.martus.common.ContactKey;
+import org.martus.common.ContactKeys;
 import org.martus.common.Exceptions.ServerCallFailedException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.FieldCollection;
 import org.martus.common.FieldCollection.CustomFieldsParseException;
+import org.martus.common.FieldDeskKey;
 import org.martus.common.FieldDeskKeys;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
@@ -411,7 +415,7 @@ public class MartusApp
 		configInfo.setAllHQKeysXml(allHQKeys.toStringWithLabel());
 		configInfo.setDefaultHQKeysXml(defaultHQKeys.toStringWithLabel());
 		if(allHQKeys.isEmpty())
-			configInfo.clearHQKey();
+			configInfo.clearLegacyHQKey();
 		else
 			configInfo.setLegacyHQKey(allHQKeys.get(0).getPublicKey());
 		saveConfigInfo();
@@ -484,12 +488,16 @@ public class MartusApp
 			removeSpaceLikeCharactersFromTags(specsBottom);
 			store.setBottomSectionFieldSpecs(specsBottom);
 			
-			convertLegacyHQToMultipleHQs();
 			String languageCode = localization.getCurrentLanguageCode();
 			if (languageCode != null && languageCode.equals(MtfAwareLocalization.BURMESE))
 				configInfo.setUseZawgyiFont(true);
 			FontSetter.setDefaultFont(configInfo.getUseZawgyiFont());
 			FontHandler.setDoZawgyiConversion(configInfo.getDoZawgyiConversion());
+			
+			if(configInfo.getVersion() < ConfigInfo.VERSION_WITH_CONTACT_KEYS)
+			{
+				migrateToUsingContactKeys();
+			}
 		}
 		catch (Exception e)
 		{
@@ -614,6 +622,37 @@ public class MartusApp
 				}
 			}
 		}
+	}
+	
+	private void migrateToUsingContactKeys() throws Exception
+	{
+		String legacyHQKey = configInfo.getLegacyHQKey();
+		HeadquartersKeys deprecatedHqKeys = getAllHQKeys();
+		if(legacyHQKey.length() > 0 && !deprecatedHqKeys.containsKey(legacyHQKey))
+		{
+			HeadquartersKey legacy = new HeadquartersKey(legacyHQKey);
+			deprecatedHqKeys.add(legacy);
+		}
+		FieldDeskKeys deprecatedFieldDeskKeys = getFieldDeskKeys();
+		
+		Vector keys = new Vector();
+		for(int i = 0; i < deprecatedHqKeys.size(); ++i)
+		{
+			HeadquartersKey hqKeyToAdd = deprecatedHqKeys.get(i);
+			keys.add(new ContactKey(hqKeyToAdd.getPublicKey(), hqKeyToAdd.getLabel(), true, false));
+		}
+		for(int i = 0; i < deprecatedFieldDeskKeys.size(); ++i)
+		{
+			FieldDeskKey fdKeyToAdd = deprecatedFieldDeskKeys.get(i);
+			keys.add(new ContactKey(fdKeyToAdd.getPublicKey(), fdKeyToAdd.getLabel(), false, true));
+		}
+		ContactKeys contactKeys = new ContactKeys(keys);
+		configInfo.setContactKeysXml(contactKeys.toString());
+		configInfo.setAllHQKeysXml("");
+		configInfo.setFieldDeskKeysXml("");
+		configInfo.clearLegacyHQKey(); 
+		saveConfigInfo();
+		loadConfigInfo();
 	}
 
 	public static FieldSpecCollection getCustomFieldSpecsTopSection(ConfigInfo configInfo) throws CustomFieldsParseException
