@@ -25,33 +25,18 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import java.io.File;
-
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxScene;
-import org.martus.client.swingui.jfx.FxWizardStage;
 
-public class SetupWizardStage extends FxWizardStage
+public class FxAddContactsController extends AbstractFxSetupWizardController
 {
-	public SetupWizardStage(UiMainWindow mainWindow) throws Exception
+	public FxAddContactsController(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindow);
-		
-		addController(new FxSelectLanguageController(getMainWindow()));
-		addController(new FxSetupUsernamePasswordController(getMainWindow()));
-		addController(new FxVerifyAccountController(getMainWindow()));
-		addController(new FxSetupContactInfoController(getMainWindow()));
-		addController(new FxSetupSettingsController(getMainWindow()));
-		addController(new FxSetupStorageServerController(getMainWindow()));
-		addController(new FxAdvancedServerStorageSetupController(getMainWindow()));
-		addController(new FxAddContactsController(getMainWindow()));
+		super(mainWindowToUse);
 	}
-	
+
 	@Override
-	protected FxScene createScene() throws Exception
+	public String getFxmlLocation()
 	{
-		File fxmlDir = getMainWindow().getApp().getFxmlDirectory();
-		
-		return new SetupWizardScene(fxmlDir);
+		return "setupwizard/FxSetupAddContacts.fxml";
 	}
 }
