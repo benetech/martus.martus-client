@@ -90,9 +90,8 @@ public class ConfigInfo
 		tokenList.add(newToken);
 		setMartusAccountAccessTokens(tokenList);
 	}
-	public void setContactKeysXml(String contactKeysXml){this.contactKeysXml = contactKeysXml;}
 
-	public void clearLegacyHQKey()						{ legacyHQKey = ""; }
+	public void clearHQKey()						{ legacyHQKey = ""; }
 
 	public short getVersion()			{ return version; }
 	public String getAuthor()			{ return author; }
@@ -133,7 +132,6 @@ public class ConfigInfo
 			throw new TokenInvalidException();
 		return (MartusAccountAccessToken)martusAccountAccessTokens.get(0);
 	} 
-	public String getContactKeysXml() {return contactKeysXml;}
 
 	public boolean isServerConfigured()
 	{
@@ -174,7 +172,6 @@ public class ConfigInfo
 		backedUpImprovedKeypairShare = false;
 		useInternalTor = false;
 		martusAccountAccessTokens.clear(); 
-		contactKeysXml = "";
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException
@@ -270,10 +267,6 @@ public class ConfigInfo
 				}
 				loaded.setMartusAccountAccessTokens(loadedTokens);
 			}
-			if(loaded.version >= 20)
-			{
-				loaded.contactKeysXml = readLongString(in);
-			}
 		}
 		finally
 		{
@@ -323,7 +316,6 @@ public class ConfigInfo
 			{
 				out.writeUTF(((MartusAccountAccessToken)martusAccountAccessTokens.get(i)).getToken());
 			}
-			writeLongString(out,contactKeysXml);
 		}
 		finally
 		{
@@ -348,8 +340,8 @@ public class ConfigInfo
 		return new String(bytes, "UTF-8");
 	}
 	
-	public static final short VERSION = 20;
-
+	public static final short VERSION = 19;
+	
 	//Version 1
 	private short version;
 	private String author;
@@ -399,8 +391,4 @@ public class ConfigInfo
 	private boolean useInternalTor;
 	//Version 19
 	private Vector martusAccountAccessTokens;
-	//Version 20
-	public static final short VERSION_WITH_CONTACT_KEYS = 20;
-	private String contactKeysXml;
-	
 }

@@ -29,8 +29,6 @@ package org.martus.client.test;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -60,11 +58,7 @@ import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.PasswordHelper;
 import org.martus.clientside.UiLocalization;
 import org.martus.clientside.test.ServerSideNetworkHandlerNotAvailable;
-import org.martus.common.ContactKey;
-import org.martus.common.ContactKeys;
 import org.martus.common.FieldCollection;
-import org.martus.common.FieldDeskKey;
-import org.martus.common.FieldDeskKeys;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
@@ -890,99 +884,6 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		TRACE_END();
 
-	}
-	
-	public void testContactInfoMigrationHqFdToContacts() throws Exception
-	{
-		TRACE_BEGIN("testContactInfo");
-		File file = appWithAccount.getConfigInfoFile();
-		file.delete();
-		assertEquals("delete didn't work", false, file.exists());
-		createOldConfigInfoFileWithSampleData(file);
-		appWithAccount.loadConfigInfo();
-		ConfigInfo config = appWithAccount.getConfigInfo();
-		assertTrue("ConfigInfo file wasn't converted?", config.getVersion() >= ConfigInfo.VERSION_WITH_CONTACT_KEYS);
-		assertEquals("LegacyHQ should be blank", "", config.getLegacyHQKey());
-		assertEquals("Old HQ's should be blank", "", config.getAllHQKeysXml());
-		assertEquals("Old FieldDesk's should be blank", "", config.getFieldDeskKeysXml());
-		assertEquals("New Contact Keys should not be blank", getNewConfigInfoContactsKeysXml(), config.getContactKeysXml());
-		TRACE_END();
-	}
-	
-	public void createOldConfigInfoFileWithSampleData(File file)
-			throws Exception
-		{
-			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-			DataOutputStream out = new DataOutputStream(outputStream);
-			out.writeShort(ConfigInfo.VERSION_WITH_CONTACT_KEYS - 1);
-			out.writeUTF("author");
-			out.writeUTF("org");
-			out.writeUTF("email");
-			out.writeUTF("web");
-			out.writeUTF("phone");
-			out.writeUTF("address\nline2");
-			out.writeUTF("server name");
-			out.writeUTF("details\ndetail2");
-			out.writeUTF(getLegacyHQ());
-			out.writeUTF("server pub key");
-			out.writeBoolean(false);
-			out.writeUTF("I am compliant");
-			out.writeUTF("language;author;custom,Custom Field;title;entrydate");
-			out.writeUTF("");
-			out.writeBoolean(true);
-			out.writeBoolean(true);
-			out.writeBoolean(true);
-			out.writeUTF(getOldConfigInfoHQKeys());
-			out.writeBoolean(true);
-			out.writeUTF("");
-			out.writeUTF("");
-			out.writeBoolean(true);
-			ConfigInfo.writeLongString(out, "");
-			ConfigInfo.writeLongString(out, "");
-			out.writeBoolean(false);
-			ConfigInfo.writeLongString(out, getOldConfigInfoFieldDeskKeysXml());
-			out.writeBoolean(true);
-			out.writeBoolean(false);
-			out.writeInt(0);
-			out.flush();
-			out.close();
-			byte[] encryptedInfo = outputStream.toByteArray();
-			File signatureFile = appWithAccount.getConfigInfoSignatureFile();
-			appWithAccount.encryptAndWriteFileAndSignatureFile(file, signatureFile, encryptedInfo);
-		}
-	private String getLegacyHQ()
-	{
-		return "LegacyHQ";
-	}
-	private String getOldConfigInfoHQKeys()
-	{
-		Vector keys = new Vector();
-		keys.add(new HeadquartersKey(hqKey1, hqKeylabel1));
-		keys.add(new HeadquartersKey(hqKey2, hqKeylabel2));
-		HeadquartersKeys contactKeys = new HeadquartersKeys(keys);
-		return contactKeys.toStringWithLabel();
-	}
-	
-	private String getOldConfigInfoFieldDeskKeysXml()
-	{
-		Vector keys = new Vector();
-		keys.add(new FieldDeskKey(fdKey1, fdKeyLabel1));
-		keys.add(new FieldDeskKey(fdKey2, fdKeyLabel2));
-		FieldDeskKeys fieldDeskKeys = new FieldDeskKeys(keys);
-		return fieldDeskKeys.toStringWithLabel();
-	}
-
-	private String getNewConfigInfoContactsKeysXml()
-	{
-		Vector keys = new Vector();
-		keys.add(new ContactKey(hqKey1, hqKeylabel1, true, false));
-		keys.add(new ContactKey(hqKey2, hqKeylabel2, true, false));
-		keys.add(new ContactKey(getLegacyHQ(), "", true, false));
-		keys.add(new ContactKey(fdKey1, fdKeyLabel1, false, true));
-		keys.add(new ContactKey(fdKey2, fdKeyLabel2, false, true));
-		ContactKeys contactKeys = new ContactKeys(keys);
-		return contactKeys.toStringWithLabel();
-		
 	}
 	
 	public void testRemoveSpaceLikeCharactersFromTags() throws Exception
@@ -2346,13 +2247,4 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	static final String MDY_SLASH = "MM/dd/yyyy";
 	static final String DMY_SLASH = "dd/MM/yyyy";
 	static final String DMY_DOT = "dd.MM.yyyy";
-
-	static final String hqKey1 = "HQ key 1";
-	static final String hqKeylabel1 = "HQ label 1";
-	static final String hqKey2 = "HQ key 2";
-	static final String hqKeylabel2 = "HQ label 2";
-	static final String fdKey1 = "FD key 1";
-	static final String fdKeyLabel1 = "FD label 1";
-	static final String fdKey2 = "FD key 2";
-	static final String fdKeyLabel2 = "FD label 2";
 }
