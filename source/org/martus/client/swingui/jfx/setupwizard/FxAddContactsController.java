@@ -25,13 +25,49 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+
 import org.martus.client.swingui.UiMainWindow;
 
-public class FxAddContactsController extends AbstractFxSetupWizardController
+public class FxAddContactsController extends AbstractFxSetupWizardController implements Initializable
 {
 	public FxAddContactsController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("contactName"));
+		publicCodeColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("publicCode"));
+		sentToColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("sentTo"));
+		receivedFromColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("receivedFrom"));
+		
+		contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
+		publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
+		sentToColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(sentToColumn));
+		receivedFromColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(receivedFromColumn));
+		
+		contactsTableId.setItems(data);
+	}
+	
+	@FXML
+	public void addRow()
+	{
+		data.add(new ContactsTableData("", "", false, false));
 	}
 
 	@Override
@@ -39,4 +75,27 @@ public class FxAddContactsController extends AbstractFxSetupWizardController
 	{
 		return "setupwizard/FxSetupAddContacts.fxml";
 	}
+	
+	@FXML
+	private TableView<ContactsTableData> contactsTableId;
+	
+	@FXML
+	private TableColumn<ContactsTableData, String> contactNameColumn;
+	
+	@FXML
+	private TableColumn<ContactsTableData, String> publicCodeColumn;
+	
+	@FXML
+	private TableColumn<ContactsTableData, Boolean> sentToColumn;
+	
+	@FXML
+	private TableColumn<ContactsTableData, Boolean> receivedFromColumn;
+	
+	@FXML
+	private TableColumn<ContactsTableData, Button> removeColumn;
+	
+	@FXML
+	private Button addRowButtonId;
+	
+	private ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
 }
