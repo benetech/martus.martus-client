@@ -62,7 +62,6 @@ import org.martus.client.reports.ReportFormatFilter;
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.EnglishStrings;
-import org.martus.client.swingui.SelectableHeadquartersEntry;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.test.MockClientSideNetworkHandler;
 import org.martus.clientside.ClientSideNetworkGateway;
@@ -139,8 +138,6 @@ import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.FileInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.ZipEntryInputStreamWithSeekThatClosesZipFile;
-
-
 
 public class MartusApp
 {
@@ -289,14 +286,17 @@ public class MartusApp
 		invalidateCurrentHandlerAndGateway();
 	}
 
-	public String getLegacyHQKey()
-	{
-		return configInfo.getLegacyHQKey();
-	}
-	
 	public HeadquartersKeys getAllHQKeys() throws Exception
 	{
-		return new HeadquartersKeys(configInfo.getAllHQKeysXml());
+		ContactKeys allContacts = new ContactKeys(configInfo.getContactKeysXml());
+		HeadquartersKeys hqKeys = new HeadquartersKeys();
+		for(int i = 0; i < allContacts.size(); ++i)
+		{
+			ContactKey currentContact = allContacts.get(i);
+			if(currentContact.getCanSendTo())
+				hqKeys.add(new HeadquartersKey(currentContact.getPublicKey(),currentContact.getLabel()));
+		}
+		return hqKeys;
 	}
 
 	public HeadquartersKeys getDefaultHQKeys() throws Exception
@@ -313,8 +313,7 @@ public class MartusApp
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			HeadquartersKey legacyKey = new HeadquartersKey(getLegacyHQKey());
-			return new HeadquartersKeys(legacyKey);
+			return new HeadquartersKeys();
 		}
 	}
 	
@@ -327,8 +326,7 @@ public class MartusApp
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			HeadquartersKey legacyKey = new HeadquartersKey(getLegacyHQKey());
-			return new HeadquartersKeys(legacyKey);
+			return new HeadquartersKeys();
 		}
 	}
 
@@ -385,17 +383,22 @@ public class MartusApp
 
 	public FieldDeskKeys getFieldDeskKeys()
 	{
+		FieldDeskKeys fdKeys = new FieldDeskKeys();
 		try
 		{
-			String xml = getConfigInfo().getFieldDeskKeysXml();
-			FieldDeskKeys keys = new FieldDeskKeys(xml);
-			return keys;
+			ContactKeys allContacts = new ContactKeys(configInfo.getContactKeysXml());
+			for(int i = 0; i < allContacts.size(); ++i)
+			{
+				ContactKey currentContact = allContacts.get(i);
+				if(currentContact.getCanReceiveFrom())
+					fdKeys.add(new FieldDeskKey(currentContact.getPublicKey(),currentContact.getLabel()));
+			}
 		} 
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			return new FieldDeskKeys();
 		}
+		return fdKeys;
 	}
 
 	public boolean isVerifiedFieldDeskAccount(String authorPublicKeyString) throws Exception
@@ -412,13 +415,48 @@ public class MartusApp
 	
 	public void setAndSaveHQKeys(HeadquartersKeys allHQKeys, HeadquartersKeys defaultHQKeys) throws SaveConfigInfoException 
 	{
-		configInfo.setAllHQKeysXml(allHQKeys.toStringWithLabel());
+		try
+		{
+			ContactKeys originalContacts = new ContactKeys(configInfo.getContactKeysXml());
+			ContactKeys updatedContacts = new ContactKeys();
+			updateExistingHQContacts(allHQKeys, originalContacts, updatedContacts);
+			addNewHQsOnlyToContacts(allHQKeys, updatedContacts);
+			configInfo.setContactKeysXml(updatedContacts.toString());
+		} 
+		catch (Exception e)
+		{
+			System.out.println("setAndSaveHQKeys :" + e);
+			throw new SaveConfigInfoException();
+		}
 		configInfo.setDefaultHQKeysXml(defaultHQKeys.toStringWithLabel());
-		if(allHQKeys.isEmpty())
-			configInfo.clearLegacyHQKey();
-		else
-			configInfo.setLegacyHQKey(allHQKeys.get(0).getPublicKey());
 		saveConfigInfo();
+	}
+
+	private void addNewHQsOnlyToContacts(HeadquartersKeys allHQKeys, ContactKeys updatedContacts)
+	{
+		for(int i = 0; i < allHQKeys.size(); ++i)
+		{
+			HeadquartersKey currentHQ = allHQKeys.get(i);
+			if(!updatedContacts.containsKey(currentHQ.getPublicKey()))
+			{
+				ContactKey newHQContact = new ContactKey(currentHQ.getPublicKey(), currentHQ.getLabel());
+				newHQContact.setCanSendTo(true);
+				updatedContacts.add(newHQContact);
+			}
+		}
+	}
+
+	private void updateExistingHQContacts(HeadquartersKeys allHQKeys, ContactKeys originalContacts, ContactKeys updatedContacts)
+	{
+		for(int i = 0; i < originalContacts.size(); ++i)
+		{
+			ContactKey currentContact = originalContacts.get(i);
+			if(allHQKeys.containsKey(currentContact.getPublicKey()))
+				currentContact.setCanSendTo(true);
+			else
+				currentContact.setCanSendTo(false);
+			updatedContacts.add(currentContact);
+		}
 	}
 
 	public void saveConfigInfo() throws SaveConfigInfoException
