@@ -101,6 +101,12 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardController i
 		return "setupwizard/VerifyAccount.fxml";
 	}
 	
+	@Override
+	public String getNextControllerClassName()
+	{
+		return FxSetupContactInfoController.class.getSimpleName();
+	}
+	
 	private class LoginChangeHandler implements ChangeListener<String>
 	{
 		public LoginChangeHandler()

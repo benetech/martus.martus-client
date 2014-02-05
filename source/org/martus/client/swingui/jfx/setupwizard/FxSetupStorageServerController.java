@@ -39,4 +39,10 @@ public class FxSetupStorageServerController extends AbstractFxSetupWizardControl
 	{
 		return "setupwizard/SetupStorageServer.fxml";
 	}
+	
+	@Override
+	public String getNextControllerClassName()
+	{
+		return FxAdvancedServerStorageSetupController.class.getSimpleName();
+	}
 }

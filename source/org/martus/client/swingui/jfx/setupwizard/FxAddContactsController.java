@@ -124,6 +124,12 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		return "setupwizard/FxSetupAddContacts.fxml";
 	}
 	
+	@Override
+	public String getNextControllerClassName()
+	{
+		return null;
+	}
+	
 	@FXML
 	private TableView<ContactsTableData> contactsTableId;
 	

@@ -46,8 +46,6 @@ public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizar
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		getWizardNavigationHandler().getNextButton().setDisable(true);
-		
 	}
 
 	@Override
@@ -59,6 +57,12 @@ public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizar
 	@FXML
 	public void connect()
 	{
+	}
+	
+	@Override
+	public String getNextControllerClassName()
+	{
+		return FxAddContactsController.class.getSimpleName();
 	}
 	
 	@FXML

@@ -104,6 +104,12 @@ public class FxSelectLanguageController extends AbstractFxSetupWizardController 
 		return "setupwizard/SetupLanguage.fxml";
 	}
 	
+	@Override
+	public String getNextControllerClassName()
+	{
+		return FxSetupUsernamePasswordController.class.getSimpleName();
+	}
+	
 	@FXML // fx:id="languagesDropdown"
 	private ChoiceBox<ChoiceItem> languagesDropdown; // Value injected by FXMLLoader
 }

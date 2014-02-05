@@ -94,6 +94,12 @@ public class FxSetupSettingsController extends AbstractFxSetupWizardController i
 	{
 		return "setupwizard/SetupSettings.fxml";
 	}
+	
+	@Override
+	public String getNextControllerClassName()
+	{
+		return FxSetupStorageServerController.class.getSimpleName();
+	}
 
 	@FXML
 	private CheckBox preventPublicBulletinsCheckBox;
