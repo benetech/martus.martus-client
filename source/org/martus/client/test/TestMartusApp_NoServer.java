@@ -903,6 +903,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		ConfigInfo config = appWithAccount.getConfigInfo();
 		assertTrue("ConfigInfo file wasn't converted?", config.getVersion() >= ConfigInfo.VERSION_WITH_CONTACT_KEYS);
 		assertEquals("LegacyHQ should be blank", "", config.getLegacyHQKey());
+		assertEquals("LegacyHQ should be included in Default HQ Keys", getLegacyDefaultHQXml(), config.getDefaultHQKeysXml());
 		assertEquals("Old HQ's should be blank", "", config.getAllHQKeysXml());
 		assertEquals("Old FieldDesk's should be blank", "", config.getFieldDeskKeysXml());
 		assertEquals("New Contact Keys should not be blank", getNewConfigInfoContactsKeysXml(), config.getContactKeysXml());
@@ -934,7 +935,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 			out.writeBoolean(true);
 			out.writeUTF(getOldConfigInfoHQKeys());
 			out.writeBoolean(true);
-			out.writeUTF("");
+			String emptyDefaultHQKeys = "";
+			out.writeUTF(emptyDefaultHQKeys);
 			out.writeUTF("");
 			out.writeBoolean(true);
 			ConfigInfo.writeLongString(out, "");
@@ -992,7 +994,13 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		keys.add(fdContactKey2);
 		ContactKeys contactKeys = new ContactKeys(keys);
 		return contactKeys.toStringWithLabel();
-		
+	}
+	
+	private String getLegacyDefaultHQXml()
+	{
+		HeadquartersKeys defaultHQs = new HeadquartersKeys();
+		defaultHQs.add(new HeadquartersKey(getLegacyHQ()));
+		return defaultHQs.toStringWithLabel();
 	}
 	
 	public void testRemoveSpaceLikeCharactersFromTags() throws Exception
