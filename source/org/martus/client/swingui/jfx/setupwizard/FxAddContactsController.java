@@ -31,15 +31,22 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxStage;
+import org.martus.common.MartusLogger;
 
 public class FxAddContactsController extends AbstractFxSetupWizardController implements Initializable
 {
@@ -51,6 +58,8 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		contactsTableId.setVisible(false);
+		
 		contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("contactName"));
 		publicCodeColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("publicCode"));
 		sentToColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("sentTo"));
@@ -67,7 +76,46 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	@FXML
 	public void addRow()
 	{
-		data.add(new ContactsTableData("", "", false, false));
+		showAddContactsDialog();
+	}
+
+	private void showAddContactsDialog()
+	{
+		try
+		{
+			FXMLLoader fl = new FXMLLoader();
+			fl.setLocation(FxStage.class.getResource("setupwizard/SetupAddContactPopup.fxml"));
+			fl.setController(this);
+			fl.load();
+			Parent root = fl.getRoot();
+			
+			Stage stage = new Stage();
+			stage.setTitle("Add Contact");
+	        stage.initModality(Modality.WINDOW_MODAL);
+	       
+	        Scene scene = new Scene(root);
+	        stage.setScene(scene);
+	        stage.showAndWait();
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+	}
+	
+	@FXML
+	public void getPublicCode()
+	{
+	}
+	
+	@FXML
+	public void addContact()
+	{
+	}
+	
+	@FXML
+	public void verifiedContact()
+	{
 	}
 
 	@Override
