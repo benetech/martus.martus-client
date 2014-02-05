@@ -602,28 +602,6 @@ public class MartusApp
 		}
 	}
 
-	private void convertLegacyHQToMultipleHQs() throws Exception
-	{
-		String legacyHQKey = configInfo.getLegacyHQKey();
-		if(legacyHQKey.length()>0)
-		{
-			HeadquartersKeys hqKeys = getAllHQKeys();
-			if(!hqKeys.containsKey(legacyHQKey))
-			{
-				HeadquartersKey legacy = new HeadquartersKey(legacyHQKey);
-				hqKeys.add(legacy);
-				try
-				{
-					setAndSaveHQKeys(hqKeys, hqKeys);
-				}
-				catch(MartusApp.SaveConfigInfoException e)
-				{
-					System.out.println("SaveConfigInfoException: " + e);						
-				}
-			}
-		}
-	}
-	
 	private void migrateToUsingContactKeys() throws Exception
 	{
 		String legacyHQKey = configInfo.getLegacyHQKey();
