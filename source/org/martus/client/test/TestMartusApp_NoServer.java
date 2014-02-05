@@ -1166,8 +1166,10 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		HeadquartersKey key = new HeadquartersKey(sampleHQKey, sampleLabel);
 		keys.add(key);
 		appWithAccount.setAndSaveHQKeys(keys, keys);
-		assertEquals("Incorrect public key", sampleHQKey, appWithAccount.getLegacyHQKey());
+		assertEquals("legacy public key now Blank", "", appWithAccount.getConfigInfo().getLegacyHQKey());
 		assertEquals("Didn't save?", true, configFile.exists());
+		assertTrue("HQ Key not saved", appWithAccount.getAllHQKeys().contains(key));
+		
 	}
 	
 	public void testGetAndSetMultipleHQKeys() throws Exception
@@ -1186,7 +1188,10 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		HeadquartersKeys defaultKeys = new HeadquartersKeys(key1);
 		
 		appWithAccount.setAndSaveHQKeys(allKeys, defaultKeys);
-		assertEquals("Incorrect default public key", sampleHQKey1, appWithAccount.getLegacyHQKey());
+		assertEquals("Incorrect Legacy default public key should now be blank", "", appWithAccount.getConfigInfo().getLegacyHQKey());
+		assertTrue("public key1 not set", appWithAccount.getAllHQKeys().containsKey(sampleHQKey1));
+		assertTrue("public key2 not set", appWithAccount.getAllHQKeys().containsKey(sampleHQKey2));
+			
 		HeadquartersKeys returnedKeys = appWithAccount.getAllHQKeys();
 		assertTrue(returnedKeys.containsKey(sampleHQKey1));
 		assertTrue(returnedKeys.containsKey(sampleHQKey2));
@@ -1218,7 +1223,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("already exists?", false, configFile.exists());
 		HeadquartersKeys empty = new HeadquartersKeys();
 		appWithAccount.setAndSaveHQKeys(empty, empty);
-		assertEquals("HQ key exists?", "", appWithAccount.getLegacyHQKey());
+		assertEquals("HQ key exists?", "", appWithAccount.getConfigInfo().getLegacyHQKey());
 		assertEquals("Didn't save?", true, configFile.exists());
 
 		String sampleHQKey1 = "abc123";
@@ -1228,12 +1233,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		keys.add(key1);
 
 		appWithAccount.setAndSaveHQKeys(keys,keys);
-		assertEquals("Incorrect public key", sampleHQKey1, appWithAccount.getLegacyHQKey());
+		assertEquals("Incorrect public key", "", appWithAccount.getConfigInfo().getLegacyHQKey());
 		assertEquals("all keys not set?", 1, appWithAccount.getAllHQKeys().size());
 		assertEquals("Default keys not set", 1, appWithAccount.getDefaultHQKeys().size());
 
 		appWithAccount.setAndSaveHQKeys(empty,empty);
-		assertEquals("HQ not cleared", "", appWithAccount.getLegacyHQKey());
+		assertEquals("HQ not cleared", "", appWithAccount.getConfigInfo().getLegacyHQKey());
 		assertEquals("All HQs not cleared", 0, appWithAccount.getAllHQKeys().size());
 		assertEquals("Default HQs not cleared", 0, appWithAccount.getDefaultHQKeys().size());
 	}
