@@ -975,11 +975,21 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	private String getNewConfigInfoContactsKeysXml()
 	{
 		Vector keys = new Vector();
-		keys.add(new ContactKey(hqKey1, hqKeylabel1, true, false));
-		keys.add(new ContactKey(hqKey2, hqKeylabel2, true, false));
-		keys.add(new ContactKey(getLegacyHQ(), "", true, false));
-		keys.add(new ContactKey(fdKey1, fdKeyLabel1, false, true));
-		keys.add(new ContactKey(fdKey2, fdKeyLabel2, false, true));
+		ContactKey hqContactKey1 = new ContactKey(hqKey1, hqKeylabel1);
+		hqContactKey1.setCanSendTo(true);
+		keys.add(hqContactKey1);
+		ContactKey hqContactKey2 = new ContactKey(hqKey2, hqKeylabel2);
+		hqContactKey2.setCanSendTo(true);
+		keys.add(hqContactKey2);
+		ContactKey hqLegacyContactKey = new ContactKey(getLegacyHQ(), "");
+		hqLegacyContactKey.setCanSendTo(true);
+		keys.add(hqLegacyContactKey);
+		ContactKey fdContactKey1 = new ContactKey(fdKey1, fdKeyLabel1);
+		fdContactKey1.setCanReceiveFrom(true);
+		keys.add(fdContactKey1);
+		ContactKey fdContactKey2 = new ContactKey(fdKey2, fdKeyLabel2);
+		fdContactKey2.setCanReceiveFrom(true);
+		keys.add(fdContactKey2);
 		ContactKeys contactKeys = new ContactKeys(keys);
 		return contactKeys.toStringWithLabel();
 		

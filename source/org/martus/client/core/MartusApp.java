@@ -639,12 +639,16 @@ public class MartusApp
 		for(int i = 0; i < deprecatedHqKeys.size(); ++i)
 		{
 			HeadquartersKey hqKeyToAdd = deprecatedHqKeys.get(i);
-			keys.add(new ContactKey(hqKeyToAdd.getPublicKey(), hqKeyToAdd.getLabel(), true, false));
+			ContactKey hqContactKey = new ContactKey(hqKeyToAdd.getPublicKey(), hqKeyToAdd.getLabel());
+			hqContactKey.setCanSendTo(true);
+			keys.add(hqContactKey);
 		}
 		for(int i = 0; i < deprecatedFieldDeskKeys.size(); ++i)
 		{
 			FieldDeskKey fdKeyToAdd = deprecatedFieldDeskKeys.get(i);
-			keys.add(new ContactKey(fdKeyToAdd.getPublicKey(), fdKeyToAdd.getLabel(), false, true));
+			ContactKey fdContactKey = new ContactKey(fdKeyToAdd.getPublicKey(), fdKeyToAdd.getLabel());
+			fdContactKey.setCanReceiveFrom(true);
+			keys.add(fdContactKey);
 		}
 		ContactKeys contactKeys = new ContactKeys(keys);
 		configInfo.setContactKeysXml(contactKeys.toString());
