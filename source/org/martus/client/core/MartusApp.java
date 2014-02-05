@@ -605,8 +605,8 @@ public class MartusApp
 	private void migrateToUsingContactKeys() throws Exception
 	{
 		String legacyHQKey = configInfo.getLegacyHQKey();
-		HeadquartersKeys deprecatedHqKeys = getAllHQKeys();
-		HeadquartersKeys defaultHqKeys = getDefaultHQKeys();
+		HeadquartersKeys deprecatedHqKeys = new HeadquartersKeys(configInfo.getAllHQKeysXml());
+		HeadquartersKeys defaultHqKeys = new HeadquartersKeys(configInfo.getDefaultHQKeysXml());
 		if(legacyHQKey.length() > 0)
 		{
 			HeadquartersKey legacyHQ = new HeadquartersKey(legacyHQKey);
@@ -620,8 +620,8 @@ public class MartusApp
 				configInfo.setDefaultHQKeysXml(defaultHqKeys.toStringWithLabel());
 			}
 		}
-		FieldDeskKeys deprecatedFieldDeskKeys = getFieldDeskKeys();
-		
+		FieldDeskKeys deprecatedFieldDeskKeys = new FieldDeskKeys(configInfo.getFieldDeskKeysXml());
+	
 		Vector keys = new Vector();
 		for(int i = 0; i < deprecatedHqKeys.size(); ++i)
 		{
