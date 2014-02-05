@@ -628,10 +628,19 @@ public class MartusApp
 	{
 		String legacyHQKey = configInfo.getLegacyHQKey();
 		HeadquartersKeys deprecatedHqKeys = getAllHQKeys();
-		if(legacyHQKey.length() > 0 && !deprecatedHqKeys.containsKey(legacyHQKey))
+		HeadquartersKeys defaultHqKeys = getDefaultHQKeys();
+		if(legacyHQKey.length() > 0)
 		{
-			HeadquartersKey legacy = new HeadquartersKey(legacyHQKey);
-			deprecatedHqKeys.add(legacy);
+			HeadquartersKey legacyHQ = new HeadquartersKey(legacyHQKey);
+			if(!deprecatedHqKeys.containsKey(legacyHQKey))
+			{
+				deprecatedHqKeys.add(legacyHQ);
+			}
+			if(!defaultHqKeys.containsKey(legacyHQKey))
+			{
+				defaultHqKeys.add(legacyHQ);
+				configInfo.setDefaultHQKeysXml(defaultHqKeys.toStringWithLabel());
+			}
 		}
 		FieldDeskKeys deprecatedFieldDeskKeys = getFieldDeskKeys();
 		
