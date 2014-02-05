@@ -77,6 +77,12 @@ public class FxSetupContactInfoController extends AbstractFxSetupWizardControlle
 	{
 		return "setupwizard/SetupContactInfo.fxml";
 	}
+	
+	@Override
+	public String getNextControllerClassName()
+	{
+		return FxSetupSettingsController.class.getSimpleName();
+	}
 
 	@FXML
 	private TextField authorField;

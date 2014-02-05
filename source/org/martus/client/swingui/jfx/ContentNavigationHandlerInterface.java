@@ -34,4 +34,6 @@ public interface ContentNavigationHandlerInterface
 	public void backWasPressed(ActionEvent actionEvent);
 
 	public void setWizardNavigationHandler(NavigationButtonsInterface wizardNavigationHandler);
+	
+	public String getNextControllerClassName();
 }

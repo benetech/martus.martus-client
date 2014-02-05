@@ -76,6 +76,12 @@ public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardCont
 		return "setupwizard/SetupUsernamePassword.fxml";
 	}
 	
+	@Override
+	public String getNextControllerClassName()
+	{
+		return FxVerifyAccountController.class.getSimpleName();
+	}
+	
 	@FXML
 	private TextField userName;
 	
