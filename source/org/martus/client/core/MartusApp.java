@@ -419,17 +419,36 @@ public class MartusApp
 		{
 			ContactKeys originalContacts = new ContactKeys(configInfo.getContactKeysXml());
 			ContactKeys updatedContacts = new ContactKeys();
-			updateExistingHQContacts(allHQKeys, originalContacts, updatedContacts);
+			updateExistingHQContacts(allHQKeys, defaultHQKeys, originalContacts, updatedContacts);
 			addNewHQsOnlyToContacts(allHQKeys, updatedContacts);
+			addNewHQsOnlyToContacts(defaultHQKeys, updatedContacts);
+
 			configInfo.setContactKeysXml(updatedContacts.toString());
+			configInfo.setDefaultHQKeysXml(defaultHQKeys.toStringWithLabel());
+			saveConfigInfo();
 		} 
 		catch (Exception e)
 		{
 			System.out.println("setAndSaveHQKeys :" + e);
 			throw new SaveConfigInfoException();
 		}
-		configInfo.setDefaultHQKeysXml(defaultHQKeys.toStringWithLabel());
-		saveConfigInfo();
+	}
+	
+	public void setAndSaveFDKeys(FieldDeskKeys allFDKeys)
+	{
+		try
+		{
+			ContactKeys originalContacts = new ContactKeys(configInfo.getContactKeysXml());
+			ContactKeys updatedContacts = new ContactKeys();
+			updateExistingFDContacts(allFDKeys, originalContacts, updatedContacts);
+			addNewFDsOnlyToContacts(allFDKeys, updatedContacts);
+			configInfo.setContactKeysXml(updatedContacts.toString());
+			saveConfigInfo();
+		} 
+		catch (Exception e)
+		{
+			System.out.println("setAndSaveFDKeys :" + e);
+		}
 	}
 
 	private void addNewHQsOnlyToContacts(HeadquartersKeys allHQKeys, ContactKeys updatedContacts)
@@ -446,15 +465,43 @@ public class MartusApp
 		}
 	}
 
-	private void updateExistingHQContacts(HeadquartersKeys allHQKeys, ContactKeys originalContacts, ContactKeys updatedContacts)
+	private void updateExistingHQContacts(HeadquartersKeys allHQKeys, HeadquartersKeys defaultKeys, ContactKeys originalContacts, ContactKeys updatedContacts)
 	{
 		for(int i = 0; i < originalContacts.size(); ++i)
 		{
 			ContactKey currentContact = originalContacts.get(i);
-			if(allHQKeys.containsKey(currentContact.getPublicKey()))
+			String publicKey = currentContact.getPublicKey();
+			if(allHQKeys.containsKey(publicKey) || defaultKeys.containsKey(publicKey))
 				currentContact.setCanSendTo(true);
 			else
 				currentContact.setCanSendTo(false);
+			updatedContacts.add(currentContact);
+		}
+	}
+
+	private void addNewFDsOnlyToContacts(FieldDeskKeys allFDKeys, ContactKeys updatedContacts)
+	{
+		for(int i = 0; i < allFDKeys.size(); ++i)
+		{
+			FieldDeskKey currentFD = allFDKeys.get(i);
+			if(!updatedContacts.containsKey(currentFD.getPublicKey()))
+			{
+				ContactKey newFDContact = new ContactKey(currentFD.getPublicKey(), currentFD.getLabel());
+				newFDContact.setCanReceiveFrom(true);
+				updatedContacts.add(newFDContact);
+			}
+		}
+	}
+
+	private void updateExistingFDContacts(FieldDeskKeys allFDKeys, ContactKeys originalContacts, ContactKeys updatedContacts)
+	{
+		for(int i = 0; i < originalContacts.size(); ++i)
+		{
+			ContactKey currentContact = originalContacts.get(i);
+			if(allFDKeys.containsKey(currentContact.getPublicKey()))
+				currentContact.setCanReceiveFrom(true);
+			else
+				currentContact.setCanReceiveFrom(false);
 			updatedContacts.add(currentContact);
 		}
 	}
