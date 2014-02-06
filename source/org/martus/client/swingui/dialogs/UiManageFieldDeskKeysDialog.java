@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
-import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.ExternalPublicKeysTableModel;
 import org.martus.client.swingui.FieldDeskManagementTableModel;
 import org.martus.client.swingui.SelectableExternalPublicKeyEntry;
@@ -110,10 +109,7 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 	void updateConfigInfo()
 	{
 		enableDisableButtons();
-		String fieldDeskKeysXml = getFieldDeskModel().getAllKeys().toStringWithLabel();
-		ConfigInfo configInfo = mainWindow.getApp().getConfigInfo();
-		configInfo.setFieldDeskKeysXml(fieldDeskKeysXml);
-		mainWindow.saveConfigInfo();
+		mainWindow.getApp().setAndSaveFDKeys(getFieldDeskModel().getAllKeys());
 	}
 	
 	@Override
