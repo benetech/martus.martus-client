@@ -35,5 +35,5 @@ public interface ContentNavigationHandlerInterface
 
 	public void setWizardNavigationHandler(NavigationButtonsInterface wizardNavigationHandler);
 	
-	public String getNextControllerClassName();
+	public FxController getNextControllerClassName();
 }

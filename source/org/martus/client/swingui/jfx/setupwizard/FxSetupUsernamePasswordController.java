@@ -33,6 +33,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.MartusLogger;
 
 public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardController
@@ -77,9 +78,9 @@ public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardCont
 	}
 	
 	@Override
-	public String getNextControllerClassName()
+	public FxController getNextControllerClassName()
 	{
-		return FxVerifyAccountController.class.getSimpleName();
+		return new FxVerifyAccountController(getMainWindow());
 	}
 	
 	@FXML

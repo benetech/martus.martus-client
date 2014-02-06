@@ -45,6 +45,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxStage;
 import org.martus.common.MartusLogger;
 
@@ -125,9 +126,9 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	}
 	
 	@Override
-	public String getNextControllerClassName()
+	public FxController getNextControllerClassName()
 	{
-		return FxSetupImportFormTemplates.class.getSimpleName();
+		return new FxSetupImportFormTemplates(getMainWindow());
 	}
 	
 	@FXML
