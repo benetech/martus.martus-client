@@ -45,7 +45,6 @@ public class FxModalDialog extends JDialog
 		Platform.runLater(new FxRunner(stage));
 
 		dialog.setPreferredSize(new Dimension(900, 700));
-//		dialog.setTitle(stage.getTitle());
 		Utilities.centerDlg(dialog);
 		dialog.setVisible(true);
 	}
@@ -53,7 +52,7 @@ public class FxModalDialog extends JDialog
 	private FxModalDialog(UiMainWindow owner)
 	{
 		super(owner);
+
 		setModal(true);
-		
 	}
 }
