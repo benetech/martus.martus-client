@@ -37,6 +37,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxController;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 
@@ -105,9 +106,9 @@ public class FxSelectLanguageController extends AbstractFxSetupWizardController 
 	}
 	
 	@Override
-	public String getNextControllerClassName()
+	public FxController getNextControllerClassName()
 	{
-		return FxSetupUsernamePasswordController.class.getSimpleName();
+		return new FxSetupUsernamePasswordController(getMainWindow());
 	}
 	
 	@FXML // fx:id="languagesDropdown"

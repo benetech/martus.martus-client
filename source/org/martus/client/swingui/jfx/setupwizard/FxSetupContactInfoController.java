@@ -36,6 +36,7 @@ import javafx.scene.control.TextField;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxController;
 
 public class FxSetupContactInfoController extends AbstractFxSetupWizardController implements Initializable
 {
@@ -79,9 +80,9 @@ public class FxSetupContactInfoController extends AbstractFxSetupWizardControlle
 	}
 	
 	@Override
-	public String getNextControllerClassName()
+	public FxController getNextControllerClassName()
 	{
-		return FxSetupSettingsController.class.getSimpleName();
+		return new FxSetupSettingsController(getMainWindow());
 	}
 
 	@FXML

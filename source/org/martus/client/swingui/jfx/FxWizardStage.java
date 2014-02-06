@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx;
 
 import java.util.Stack;
-import java.util.Vector;
 
 import javafx.scene.Parent;
 
@@ -41,9 +40,10 @@ abstract public class FxWizardStage extends FxStage
 	{
 		super(mainWindowToUse);
 	
-		controllers = new Vector<FxController>();
-		visitedWizardPagesStack = new Stack<String>();
+		visitedWizardPagesStack = new Stack<FxController>();
 		wizardTemplateController = new FxSetupWizardTemplateController(getMainWindow());
+		
+		currentController = getFirstController();
 	}
 	
 	@Override
@@ -51,7 +51,6 @@ abstract public class FxWizardStage extends FxStage
 	{
 		if(scene == null)
 		{
-			setCurrentControllerNameToFirstController();
 			scene = createScene();
 			setScene(scene);
 		}
@@ -63,21 +62,10 @@ abstract public class FxWizardStage extends FxStage
 		scene.setRoot(wizardTemplateContents);
 	}
 	
-	protected void addController(FxController sceneFactory)
-	{
-		controllers.add(sceneFactory);
-	}
-
 	@Override
 	public FxController getCurrentController() throws Exception
 	{
-		for (FxController controller : controllers)
-		{
-			if (controller.getClass().getSimpleName().equals(currentControllerClassName))
-				return controller;
-		}
-		
-		return null;
+		return currentController;
 	}
 
 	public void handleNavigationEvent(String navigationType)
@@ -92,7 +80,7 @@ abstract public class FxWizardStage extends FxStage
 	{
 		try
 		{
-			visitedWizardPagesStack.push(currentControllerClassName);
+			visitedWizardPagesStack.push(currentController);
 			AbstractFxSetupWizardController contentPaneController = (AbstractFxSetupWizardController) getCurrentController();
 			if(contentPaneController.getNextControllerClassName() == null)
 			{
@@ -100,7 +88,7 @@ abstract public class FxWizardStage extends FxStage
 			}
 			else
 			{
-				currentControllerClassName = contentPaneController.getNextControllerClassName();
+				currentController = contentPaneController.getNextControllerClassName();
 				showCurrentScene();
 			}
 		}
@@ -121,7 +109,7 @@ abstract public class FxWizardStage extends FxStage
 			}
 			else
 			{
-				currentControllerClassName = visitedWizardPagesStack.pop();
+				currentController = visitedWizardPagesStack.pop();
 				showCurrentScene();
 			}
 		}
@@ -131,21 +119,17 @@ abstract public class FxWizardStage extends FxStage
 			getShell().dispose();
 		}
 	}
-
-	private void setCurrentControllerNameToFirstController()
-	{
-		currentControllerClassName = controllers.firstElement().getClass().getSimpleName();
-	}
 	
+	abstract protected FxController getFirstController();
+
 	abstract protected FxScene createScene() throws Exception;
 	
 	public static final String NAVIGATION_NEXT = "Next";
 	public static final String NAVIGATION_BACK = "Back";
 
-	private String currentControllerClassName;
-	private Vector<FxController> controllers;
+	private FxController currentController;
 	private FxScene scene;
-	private Stack<String> visitedWizardPagesStack;
+	private Stack<FxController> visitedWizardPagesStack;
 	
 	private FxSetupWizardTemplateController wizardTemplateController;
 }

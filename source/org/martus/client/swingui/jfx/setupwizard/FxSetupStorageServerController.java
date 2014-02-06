@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.setupwizard;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxController;
 
 public class FxSetupStorageServerController extends AbstractFxSetupWizardController
 {
@@ -41,8 +42,8 @@ public class FxSetupStorageServerController extends AbstractFxSetupWizardControl
 	}
 	
 	@Override
-	public String getNextControllerClassName()
+	public FxController getNextControllerClassName()
 	{
-		return FxAdvancedServerStorageSetupController.class.getSimpleName();
+		return new FxAdvancedServerStorageSetupController(getMainWindow());
 	}
 }

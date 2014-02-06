@@ -29,6 +29,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxController;
 
 public class FxSetupImportFormTemplates extends AbstractFxSetupWizardController
 {
@@ -38,9 +39,9 @@ public class FxSetupImportFormTemplates extends AbstractFxSetupWizardController
 	}
 
 	@Override
-	public String getNextControllerClassName()
+	public FxController getNextControllerClassName()
 	{
-		return FxSetupBackupYourKeyController.class.getSimpleName();
+		return new FxSetupBackupYourKeyController(getMainWindow());
 	}
 
 	@Override
