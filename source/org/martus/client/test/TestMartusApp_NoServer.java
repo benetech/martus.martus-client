@@ -1305,6 +1305,63 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertFalse("Account 2 should not be an HQ anymore", returnedKeysAfterDefaultWasntIncluded.contains(key2));
 		assertFalse("Account 4 should not be an HQ anymore", returnedKeysAfterDefaultWasntIncluded.contains(key4));
 		assertEquals("We should still only have 2 HQ accounts", 2, returnedKeysAfterDefaultWasntIncluded.size());
+		
+		FieldDeskKeys onlyAccount1and2areFDs = new FieldDeskKeys();
+		FieldDeskKey fDkey1 = new FieldDeskKey(sampleHQKey1, sampleLabel1);
+		FieldDeskKey FDkey2 = new FieldDeskKey(sampleHQKey2, sampleLabel2);
+		onlyAccount1and2areFDs.add(fDkey1);
+		onlyAccount1and2areFDs.add(FDkey2);
+		appWithAccount.setAndSaveFDKeys(onlyAccount1and2areFDs);
+		
+		ContactKeys newContactsWithFDsAndHQs = new ContactKeys(appWithAccount.getConfigInfo().getContactKeysXml());
+		assertEquals("Should have 4 contacts now total", 4, newContactsWithFDsAndHQs.size());
+		contactKey1 = newContactsWithFDsAndHQs.get(0);
+		if(contactKey1.getLabel().equals(sampleLabel1))
+			verifyContactInfo(sampleHQKey1, contactKey1, true, true);
+		else if(contactKey1.getLabel().equals(sampleLabel2))
+			verifyContactInfo(sampleHQKey2, contactKey1, false, true);
+		else if(contactKey1.getLabel().equals(sampleLabel3))
+			verifyContactInfo(sampleHQKey3, contactKey1, true, false);
+		else if(contactKey1.getLabel().equals(sampleLabel4))
+			verifyContactInfo(sampleHQKey4, contactKey1, false, false);
+		else
+			fail("ContactKey1 not found?");
+		
+		contactKey2 = newContactsWithFDsAndHQs.get(0);
+		if(contactKey2.getLabel().equals(sampleLabel1))
+			verifyContactInfo(sampleHQKey1, contactKey2, true, true);
+		else if(contactKey2.getLabel().equals(sampleLabel2))
+			verifyContactInfo(sampleHQKey2, contactKey2, false, true);
+		else if(contactKey2.getLabel().equals(sampleLabel3))
+			verifyContactInfo(sampleHQKey3, contactKey2, true, false);
+		else if(contactKey2.getLabel().equals(sampleLabel4))
+			verifyContactInfo(sampleHQKey4, contactKey2, false, false);
+		else
+			fail("ContactKey2 not found?");
+		
+		contactKey3 = newContactsWithFDsAndHQs.get(0);
+		if(contactKey3.getLabel().equals(sampleLabel1))
+			verifyContactInfo(sampleHQKey1, contactKey3, true, true);
+		else if(contactKey3.getLabel().equals(sampleLabel2))
+			verifyContactInfo(sampleHQKey2, contactKey3, false, true);
+		else if(contactKey3.getLabel().equals(sampleLabel3))
+			verifyContactInfo(sampleHQKey3, contactKey3, true, false);
+		else if(contactKey3.getLabel().equals(sampleLabel4))
+			verifyContactInfo(sampleHQKey4, contactKey3, false, false);
+		else
+			fail("ContactKey3 not found?");
+
+		ContactKey contactKey4 = newContactsWithFDsAndHQs.get(0);
+		if(contactKey4.getLabel().equals(sampleLabel1))
+			verifyContactInfo(sampleHQKey1, contactKey4, true, true);
+		else if(contactKey4.getLabel().equals(sampleLabel2))
+			verifyContactInfo(sampleHQKey2, contactKey4, false, true);
+		else if(contactKey4.getLabel().equals(sampleLabel3))
+			verifyContactInfo(sampleHQKey3, contactKey4, true, false);
+		else if(contactKey4.getLabel().equals(sampleLabel4))
+			verifyContactInfo(sampleHQKey4, contactKey4, false, false);
+		else
+			fail("ContactKey4 not found?");
 	}
 
 	public void testSetAndSaveFDKeys() throws Exception
