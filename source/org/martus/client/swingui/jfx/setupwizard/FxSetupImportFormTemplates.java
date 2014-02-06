@@ -25,34 +25,30 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import java.io.File;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxScene;
-import org.martus.client.swingui.jfx.FxWizardStage;
 
-public class SetupWizardStage extends FxWizardStage
+public class FxSetupImportFormTemplates extends AbstractFxSetupWizardController
 {
-	public SetupWizardStage(UiMainWindow mainWindow) throws Exception
+	public FxSetupImportFormTemplates(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindow);
-	
-		addController(new FxSelectLanguageController(getMainWindow()));
-		addController(new FxSetupUsernamePasswordController(getMainWindow()));
-		addController(new FxVerifyAccountController(getMainWindow()));
-		addController(new FxSetupContactInfoController(getMainWindow()));
-		addController(new FxSetupSettingsController(getMainWindow()));
-		addController(new FxSetupStorageServerController(getMainWindow()));
-		addController(new FxAdvancedServerStorageSetupController(getMainWindow()));
-		addController(new FxAddContactsController(getMainWindow()));
-		addController(new FxSetupImportFormTemplates(getMainWindow()));
+		super(mainWindowToUse);
 	}
-	
+
 	@Override
-	protected FxScene createScene() throws Exception
+	public String getNextControllerClassName()
 	{
-		File fxmlDir = getMainWindow().getApp().getFxmlDirectory();
-		
-		return new SetupWizardScene(fxmlDir);
+		return null;
 	}
+
+	@Override
+	public String getFxmlLocation()
+	{
+		return "setupwizard/SetupImportFormTemplates.fxml";
+	}
+	
+	@FXML
+	private Label statusLabel;
 }
