@@ -52,7 +52,9 @@ public class FxSetupSettingsController extends AbstractFxSetupWizardController i
 	@Override
 	public void nextWasPressed(ActionEvent event) 
 	{
-		getMainWindow().getApp().getConfigInfo().setForceBulletinsAllPrivate(preventPublicBulletinsCheckBox.isSelected());
+		//NOTE: This might belong somewhere else, but for now it's important to set it 
+		getMainWindow().getApp().getConfigInfo().setForceBulletinsAllPrivate(true);
+		
 		getMainWindow().getApp().getConfigInfo().setCheckForFieldOfficeBulletins(userTorCheckBox.isSelected());
 		
 		getLocalization().setMdyOrder(dateFormatSequenceDropDown.getSelectionModel().getSelectedItem().getCode());
@@ -102,9 +104,6 @@ public class FxSetupSettingsController extends AbstractFxSetupWizardController i
 		return new FxSetupStorageServerController(getMainWindow());
 	}
 
-	@FXML
-	private CheckBox preventPublicBulletinsCheckBox;
-	
 	@FXML
 	private CheckBox userTorCheckBox;
 	

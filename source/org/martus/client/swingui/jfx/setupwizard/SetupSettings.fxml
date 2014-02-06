@@ -35,7 +35,6 @@
         <RowConstraints />
       </rowConstraints>
       <children>
-        <CheckBox fx:id="preventPublicBulletinsCheckBox" mnemonicParsing="false" text="Always prevent creating public bulletins" />
         <CheckBox fx:id="userTorCheckBox" mnemonicParsing="false" text="Use Tor" GridPane.rowIndex="1" />
         <TextArea editable="false" layoutX="115.0" layoutY="100.0" prefHeight="108.0" text="Turn Tor ON if you wish to hide that you are connecting to a Martus server.This may help reach the Martus servers if they are blocked from your location. NOTE: this will slow sending of bulletins.Read more about Tor at: https://www.torproject.orgYou can turn Tor ON or OFF at any time by clicking the icon shown abovein the upper right corner of the Martus desktop." wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="3" />
       </children>
