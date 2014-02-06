@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+  </rowConstraints>
+<children><Label text="Add Contacts" GridPane.columnIndex="1" /><Label text="To send bulletins to your contacts, you will need their public code. You willalso want to share your public code with your contacts so they can verify your key." wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.rowSpan="2" /><TableView fx:id="contactsTableId" editable="true" fixedCellSize="0.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="2" xmlns:fx="http://javafx.com/fxml">
+  <columns>
+    <TableColumn fx:id="contactNameColumn" prefWidth="108.0" text="Contact Name" />
+    <TableColumn fx:id="publicCodeColumn" minWidth="-1.0" prefWidth="104.0" text="Public Code" /><TableColumn fx:id="sentToColumn" minWidth="0.0" prefWidth="65.0" text="Send To" /><TableColumn fx:id="receivedFromColumn" minWidth="2.0" prefWidth="109.0" text="Receive From" /><TableColumn fx:id="removeColumn" minWidth="-Infinity" prefWidth="90.0" text="Remove" />
+  </columns>
+</TableView><Button fx:id="addRowButtonId" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#addRow" text="Add Row" GridPane.columnIndex="3" GridPane.rowIndex="5" /><Label text="You can add contacts from the Martus desktop if you don't know them now." wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="6" />
+</children>
+</GridPane>
