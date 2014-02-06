@@ -33,6 +33,7 @@ import javafx.scene.Parent;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.MartusLogger;
 
 abstract public class FxController implements FxControllerInterface
 {
@@ -63,7 +64,10 @@ abstract public class FxController implements FxControllerInterface
 	{
 		File fxmlFile = new File(fxmlDir, fileLocation);
 		if (fxmlFile.exists())
+		{
+			MartusLogger.log("Loading FX file from disk:" + fileLocation);
 			return fxmlFile.toURI().toURL();
+		}
 
 		return FxScene.class.getResource(fileLocation);
 	}		
