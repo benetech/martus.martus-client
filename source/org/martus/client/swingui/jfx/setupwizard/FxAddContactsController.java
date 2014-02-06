@@ -127,7 +127,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	@Override
 	public String getNextControllerClassName()
 	{
-		return null;
+		return FxSetupImportFormTemplates.class.getSimpleName();
 	}
 	
 	@FXML

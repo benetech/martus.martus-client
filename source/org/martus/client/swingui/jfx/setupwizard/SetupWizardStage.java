@@ -46,6 +46,7 @@ public class SetupWizardStage extends FxWizardStage
 		addController(new FxAdvancedServerStorageSetupController(getMainWindow()));
 		addController(new FxAddContactsController(getMainWindow()));
 		addController(new FxSetupImportFormTemplates(getMainWindow()));
+		addController(new FxSetupBackupYourKeyController(getMainWindow()));
 	}
 	
 	@Override

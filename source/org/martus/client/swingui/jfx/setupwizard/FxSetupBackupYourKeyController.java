@@ -25,14 +25,11 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-
 import org.martus.client.swingui.UiMainWindow;
 
-public class FxSetupImportFormTemplates extends AbstractFxSetupWizardController
+public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardController
 {
-	public FxSetupImportFormTemplates(UiMainWindow mainWindowToUse)
+	public FxSetupBackupYourKeyController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
@@ -40,15 +37,12 @@ public class FxSetupImportFormTemplates extends AbstractFxSetupWizardController
 	@Override
 	public String getNextControllerClassName()
 	{
-		return FxSetupBackupYourKeyController.class.getSimpleName();
+		return null;
 	}
 
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/SetupImportFormTemplates.fxml";
+		return "setupwizard/SetupBackupYourKey.fxml";
 	}
-	
-	@FXML
-	private Label statusLabel;
 }
