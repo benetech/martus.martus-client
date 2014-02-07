@@ -62,6 +62,11 @@ public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardCont
 		StaticAccountCreationData.setUserName(getUserName().getText());
 		StaticAccountCreationData.setPassword(getPasswordField().getText().toCharArray());
 	}
+	
+	private Label getErrorLabel()
+	{
+		return errorLabel;
+	}
 
 	public class LoginChangeHandler implements ChangeListener<String>
 	{
@@ -69,17 +74,28 @@ public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardCont
 		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 		{
 			boolean canContinue = false;
-
 			if(getUserName().getText().length() > 0)
 			{
 				char[] password = getPasswordField().getText().toCharArray();
 				if(password.length >= MartusUserNameAndPassword.BASIC_PASSWORD_LENGTH)
+				{
 					canContinue = true;
+				}
 			}
 
+			updateErrorLabel(canContinue);
+			
 			getWizardNavigationHandler().getNextButton().setDisable(!canContinue);
 		}
-	
+
+		private void updateErrorLabel(boolean canContinue)
+		{
+			String errorMessage = "";
+			if (!canContinue)
+				errorMessage = "Password must be at least 8 characters, 15 recommened.";
+			
+			getErrorLabel().setText(errorMessage);
+		}
 	}
 	
 	@Override
