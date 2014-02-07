@@ -418,8 +418,7 @@ public class MartusApp
 		try
 		{
 			ContactKeys originalContacts = new ContactKeys(configInfo.getContactKeysXml());
-			ContactKeys updatedContacts = new ContactKeys();
-			updateExistingHQContacts(allHQKeys, defaultHQKeys, originalContacts, updatedContacts);
+			ContactKeys updatedContacts = getContactKeysWithCanSendAdjusted(allHQKeys, defaultHQKeys, originalContacts);
 			addNewHQsOnlyToContacts(allHQKeys, updatedContacts);
 			addNewHQsOnlyToContacts(defaultHQKeys, updatedContacts);
 
@@ -429,7 +428,7 @@ public class MartusApp
 		} 
 		catch (Exception e)
 		{
-			System.out.println("setAndSaveHQKeys :" + e);
+			MartusLogger.logException(e);
 			throw new SaveConfigInfoException();
 		}
 	}
@@ -439,15 +438,14 @@ public class MartusApp
 		try
 		{
 			ContactKeys originalContacts = new ContactKeys(configInfo.getContactKeysXml());
-			ContactKeys updatedContacts = new ContactKeys();
-			updateExistingFDContacts(allFDKeys, originalContacts, updatedContacts);
+			ContactKeys updatedContacts = getContactKeysWithCanReceiveFromAdjusted(allFDKeys, originalContacts);
 			addNewFDsOnlyToContacts(allFDKeys, updatedContacts);
 			configInfo.setContactKeysXml(updatedContacts.toString());
 			saveConfigInfo();
 		} 
 		catch (Exception e)
 		{
-			System.out.println("setAndSaveFDKeys :" + e);
+			MartusLogger.logException(e);
 		}
 	}
 
@@ -465,8 +463,9 @@ public class MartusApp
 		}
 	}
 
-	private void updateExistingHQContacts(HeadquartersKeys allHQKeys, HeadquartersKeys defaultKeys, ContactKeys originalContacts, ContactKeys updatedContacts)
+	private ContactKeys getContactKeysWithCanSendAdjusted(HeadquartersKeys allHQKeys, HeadquartersKeys defaultKeys, ContactKeys originalContacts)
 	{
+		ContactKeys adjustedCanSendToKeys = new ContactKeys();
 		for(int i = 0; i < originalContacts.size(); ++i)
 		{
 			ContactKey currentContact = originalContacts.get(i);
@@ -475,8 +474,9 @@ public class MartusApp
 				currentContact.setCanSendTo(true);
 			else
 				currentContact.setCanSendTo(false);
-			updatedContacts.add(currentContact);
+			adjustedCanSendToKeys.add(currentContact);
 		}
+		return adjustedCanSendToKeys;
 	}
 
 	private void addNewFDsOnlyToContacts(FieldDeskKeys allFDKeys, ContactKeys updatedContacts)
@@ -493,8 +493,9 @@ public class MartusApp
 		}
 	}
 
-	private void updateExistingFDContacts(FieldDeskKeys allFDKeys, ContactKeys originalContacts, ContactKeys updatedContacts)
+	private ContactKeys getContactKeysWithCanReceiveFromAdjusted(FieldDeskKeys allFDKeys, ContactKeys originalContacts)
 	{
+		ContactKeys updatedContactKeysWithCanReceiveFromAdjusted = new ContactKeys();
 		for(int i = 0; i < originalContacts.size(); ++i)
 		{
 			ContactKey currentContact = originalContacts.get(i);
@@ -502,8 +503,9 @@ public class MartusApp
 				currentContact.setCanReceiveFrom(true);
 			else
 				currentContact.setCanReceiveFrom(false);
-			updatedContacts.add(currentContact);
+			updatedContactKeysWithCanReceiveFromAdjusted.add(currentContact);
 		}
+	return updatedContactKeysWithCanReceiveFromAdjusted;
 	}
 
 	public void saveConfigInfo() throws SaveConfigInfoException
