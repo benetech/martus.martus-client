@@ -122,7 +122,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/FxSetupAddContacts.fxml";
+		return "setupwizard/SetupAddContacts.fxml";
 	}
 	
 	@Override
