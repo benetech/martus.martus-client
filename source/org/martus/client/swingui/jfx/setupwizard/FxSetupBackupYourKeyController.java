@@ -23,15 +23,27 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.setupwizard;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxController;
 
-public class FxmlScene extends FxScene
+public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardController
 {
-	public FxmlScene(FXMLLoader loaderToUse) throws Exception
+	public FxSetupBackupYourKeyController(UiMainWindow mainWindowToUse)
 	{
-		super((Parent) loaderToUse.load());
+		super(mainWindowToUse);
+	}
+
+	@Override
+	public FxController getNextControllerClassName()
+	{
+		return null;
+	}
+
+	@Override
+	public String getFxmlLocation()
+	{
+		return "setupwizard/SetupBackupYourKey.fxml";
 	}
 }

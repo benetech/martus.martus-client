@@ -47,8 +47,14 @@ public class Martus
 {
     public static void main (String args[])
 	{
+		System.out.println(UiConstants.programName);
+		System.out.println(UiConstants.versionLabel + " " + VersionBuildDate.getVersionBuildDate());
+		System.out.println("Java version: " + System.getProperty("java.version"));
+		System.out.println("Java vendor : " + System.getProperty("java.vendor"));
+		System.out.println("Java runtime: " + System.getProperty("java.runtime.name"));
+
 		final String javaVersion = System.getProperty("java.version");
-		final String minimumJavaVersion = "1.4.1";
+		final String minimumJavaVersion = "1.7.0";
 		if(javaVersion.compareTo(minimumJavaVersion) < 0)
 		{
 			final String errorMessage = "Requires Java version " + minimumJavaVersion + " or later!";
@@ -58,13 +64,7 @@ public class Martus
 			System.exit(2);
 		}
 		
-		System.out.println(UiConstants.programName);
-		System.out.println(UiConstants.versionLabel + " " + VersionBuildDate.getVersionBuildDate());
-		System.out.println("Java version: " + System.getProperty("java.version"));
-		System.out.println("Java vendor : " + System.getProperty("java.vendor"));
-		System.out.println("Java runtime: " + System.getProperty("java.runtime.name"));
 		System.out.println(MartusLogger.getMemoryStatistics());
-
 		try
 		{
 			addThirdPartyJarsToClasspath();

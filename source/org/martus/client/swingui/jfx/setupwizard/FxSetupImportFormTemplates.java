@@ -23,27 +23,33 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.setupwizard;
 
-import java.io.File;
-import java.net.URL;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
-import javafx.scene.Scene;
-import javafx.scene.layout.Region;
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxController;
 
-abstract public class FxScene extends Scene
+public class FxSetupImportFormTemplates extends AbstractFxSetupWizardController
 {
-	public FxScene(File fxmlDirToUse) throws Exception
+	public FxSetupImportFormTemplates(UiMainWindow mainWindowToUse)
 	{
-		super(new Region());
-		
-		getStylesheets().add(getBestCssLocation(fxmlDirToUse).toExternalForm());
+		super(mainWindowToUse);
 	}
 
-	private URL getBestCssLocation(File fxmlDirToUse) throws Exception
+	@Override
+	public FxController getNextControllerClassName()
 	{
-		return FxController.getBestFile(fxmlDirToUse, getCssLocation());
+		return new FxSetupBackupYourKeyController(getMainWindow());
 	}
 
-	abstract protected String getCssLocation();
+	@Override
+	public String getFxmlLocation()
+	{
+		return "setupwizard/SetupImportFormTemplates.fxml";
+	}
+	
+	@FXML
+	private Label statusLabel;
 }
