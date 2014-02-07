@@ -36,6 +36,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 
 import org.martus.client.core.MartusUserNameAndPassword;
 import org.martus.client.swingui.UiMainWindow;
@@ -54,6 +55,7 @@ public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardCont
 		getWizardNavigationHandler().getNextButton().setDisable(true);
 		getUserName().textProperty().addListener(new LoginChangeHandler());
 		getPasswordField().textProperty().addListener(new LoginChangeHandler());
+		hintLabel.setTooltip(new Tooltip("Create secure passwords by using numbers, letters and sympbols."));
 	}
 
 	@Override
@@ -138,4 +140,7 @@ public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardCont
 	
 	@FXML
 	private Label errorLabel;
+	
+	@FXML
+	private Label hintLabel;
 }
