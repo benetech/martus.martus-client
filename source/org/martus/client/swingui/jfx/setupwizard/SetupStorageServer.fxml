@@ -21,13 +21,13 @@
       <children>
         <Label prefHeight="34.0" prefWidth="403.0" text="Setup Server Storage" GridPane.columnSpan="2147483647" />
         <Label prefHeight="155.0" prefWidth="467.0" text="Storing documents on the Martus servers (or your organization's alternateserver) allows you to:1. Store your encrypted documents where they can only be retrieved byyour organization or anyone you share your public key with.2. Backup your files in case your computer is lost or stolen." wrapText="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
-        <RadioButton mnemonicParsing="false" selected="true" text="Default backup server" GridPane.rowIndex="2">
+        <RadioButton fx:id="defaultRadioButton" mnemonicParsing="false" selected="true" text="Default backup server" GridPane.rowIndex="2">
 			<toggleGroup>
 				<ToggleGroup fx:id="setupServerGroup" />
 			</toggleGroup>
 		</RadioButton>
-        <RadioButton mnemonicParsing="false" text="Advanced Server Settings" toggleGroup="$setupServerGroup" GridPane.rowIndex="3" />
-        <RadioButton mnemonicParsing="false" text="I'll setup my server later" toggleGroup="$setupServerGroup" GridPane.rowIndex="4" />
+        <RadioButton fx:id="advancedRadioButton" mnemonicParsing="false" text="Advanced Server Settings" toggleGroup="$setupServerGroup" GridPane.rowIndex="3" />
+        <RadioButton fx:id="setupLaterRadioButton" mnemonicParsing="false" text="I'll setup my server later" toggleGroup="$setupServerGroup" GridPane.rowIndex="4" />
       </children>
     </GridPane>
   </children>

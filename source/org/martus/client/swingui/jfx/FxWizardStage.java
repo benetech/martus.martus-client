@@ -25,10 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import java.util.Vector;
+import java.util.Stack;
 
 import javafx.scene.Parent;
-import javafx.scene.layout.Region;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardController;
@@ -41,9 +40,10 @@ abstract public class FxWizardStage extends FxStage
 	{
 		super(mainWindowToUse);
 	
-		controllers = new Vector<FxController>();
-		currentControllerIndex = 0;
+		visitedWizardPagesStack = new Stack<FxController>();
 		wizardTemplateController = new FxSetupWizardTemplateController(getMainWindow());
+		
+		currentController = getFirstController();
 	}
 	
 	@Override
@@ -51,7 +51,7 @@ abstract public class FxWizardStage extends FxStage
 	{
 		if(scene == null)
 		{
-			scene = new FxScene(new Region());
+			scene = createScene();
 			setScene(scene);
 		}
 		
@@ -62,15 +62,10 @@ abstract public class FxWizardStage extends FxStage
 		scene.setRoot(wizardTemplateContents);
 	}
 	
-	protected void addController(FxController sceneFactory)
-	{
-		controllers.add(sceneFactory);
-	}
-
 	@Override
 	public FxController getCurrentController() throws Exception
 	{
-		return controllers.get(currentControllerIndex);
+		return currentController;
 	}
 
 	public void handleNavigationEvent(String navigationType)
@@ -85,11 +80,17 @@ abstract public class FxWizardStage extends FxStage
 	{
 		try
 		{
-			++currentControllerIndex;
-			if(currentControllerIndex >= controllers.size())
+			visitedWizardPagesStack.push(currentController);
+			AbstractFxSetupWizardController contentPaneController = (AbstractFxSetupWizardController) getCurrentController();
+			if(contentPaneController.getNextControllerClassName() == null)
+			{
 				getShell().setVisible(false);
+			}
 			else
+			{
+				currentController = contentPaneController.getNextControllerClassName();
 				showCurrentScene();
+			}
 		}
 		catch(Exception e)
 		{
@@ -102,11 +103,15 @@ abstract public class FxWizardStage extends FxStage
 	{
 		try
 		{
-			--currentControllerIndex;
-			if(currentControllerIndex < 0)
+			if(visitedWizardPagesStack.isEmpty())
+			{
 				getShell().setVisible(false);
+			}
 			else
+			{
+				currentController = visitedWizardPagesStack.pop();
 				showCurrentScene();
+			}
 		}
 		catch(Exception e)
 		{
@@ -115,12 +120,16 @@ abstract public class FxWizardStage extends FxStage
 		}
 	}
 	
+	abstract protected FxController getFirstController();
+
+	abstract protected FxScene createScene() throws Exception;
+	
 	public static final String NAVIGATION_NEXT = "Next";
 	public static final String NAVIGATION_BACK = "Back";
 
-	private int currentControllerIndex;
-	private Vector<FxController> controllers;
+	private FxController currentController;
 	private FxScene scene;
+	private Stack<FxController> visitedWizardPagesStack;
 	
 	private FxSetupWizardTemplateController wizardTemplateController;
 }

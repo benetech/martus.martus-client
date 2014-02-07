@@ -28,69 +28,56 @@ package org.martus.client.swingui.jfx.setupwizard;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import org.martus.client.core.ConfigInfo;
-import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 
-public class FxSetupContactInfoController extends AbstractFxSetupWizardController implements Initializable
+public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizardController implements Initializable
 {
-	public FxSetupContactInfoController(UiMainWindow mainWindowToUse)
+	public FxAdvancedServerStorageSetupController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		
-		info = getMainWindow().getApp().getConfigInfo();
-		fontHelper = new UiFontEncodingHelper(getConfigInfo().getDoZawgyiConversion());
-	}
-
-	public void initialize(URL url, ResourceBundle bundle)
-	{
-		getWizardNavigationHandler().getBackButton().setDisable(true);
-
-		authorField.setText(getConfigInfo().getAuthor());
-		organizationField.setText(getConfigInfo().getOrganization());
-	}
-
-	@Override
-	public void nextWasPressed(ActionEvent event) 
-	{
-		getConfigInfo().setAuthor(getFontHelper().getStorable(authorField.getText()));
-		getConfigInfo().setOrganization(getFontHelper().getStorable(organizationField.getText()));
-	}
-
-	private UiFontEncodingHelper getFontHelper()
-	{
-		return fontHelper;
-	}
-
-	private ConfigInfo getConfigInfo()
-	{
-		return info;
 	}
 	
 	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+	}
+
+	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/SetupContactInfo.fxml";
+		return "setupwizard/AdvancedServerStorageSetup.fxml";
+	}
+	
+	@FXML
+	public void connect()
+	{
 	}
 	
 	@Override
 	public FxController getNextControllerClassName()
 	{
-		return new FxSetupSettingsController(getMainWindow());
+		return new FxAddContactsController(getMainWindow());
 	}
-
-	@FXML
-	private TextField authorField;
 	
 	@FXML
-	private TextField organizationField;
+	private Label statusLabel;
 	
-	private ConfigInfo info;
-	private UiFontEncodingHelper fontHelper;
+	@FXML
+	private Button connectButton;
+	
+	@FXML
+	private TextField ipAddressField;
+	
+	@FXML
+	private TextField publicCodeField;
+	
+	@FXML
+	private TextField magicWordField;
 }

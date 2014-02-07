@@ -25,49 +25,61 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 
+import org.martus.client.core.MartusUserNameAndPassword;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.MartusLogger;
+import org.martus.client.swingui.jfx.FxController;
 
-public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardController
+public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardController implements Initializable
 {
 	public FxSetupUsernamePasswordController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1)
+	{
+		getWizardNavigationHandler().getNextButton().setDisable(true);
+		getUserName().textProperty().addListener(new LoginChangeHandler());
+		getPasswordField().textProperty().addListener(new LoginChangeHandler());
+	}
 
 	@Override
 	public void nextWasPressed(ActionEvent event) 
 	{
-		StaticAccountCreationData.setUserName(userName.getText());
-		StaticAccountCreationData.setPassword(passwordField.getText().toCharArray());
+		StaticAccountCreationData.setUserName(getUserName().getText());
+		StaticAccountCreationData.setPassword(getPasswordField().getText().toCharArray());
 	}
 
-	@FXML
-	protected void handleUsernameChanged(KeyEvent keyEvent)
+	public class LoginChangeHandler implements ChangeListener<String>
 	{
-		String userNameValue = userName.getText();
-		String passwordValue = passwordField.getText();
-		try
-		{ 
-			getWizardNavigationHandler().getNextButton().setDisable(false);
-			errorLabel.setText("");
-			if (getMainWindow().getApp().doesAccountExist(userNameValue, passwordValue.toCharArray()))
-			{
-				getWizardNavigationHandler().getNextButton().setDisable(true);
-				errorLabel.setText("Account already Exists!");
-			}
-		}
-		catch (Exception e)
+		@Override
+		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 		{
-			MartusLogger.logException(e);
+			boolean canContinue = false;
+
+			if(getUserName().getText().length() > 0)
+			{
+				char[] password = getPasswordField().getText().toCharArray();
+				if(password.length >= MartusUserNameAndPassword.BASIC_PASSWORD_LENGTH)
+					canContinue = true;
+			}
+
+			getWizardNavigationHandler().getNextButton().setDisable(!canContinue);
 		}
+	
 	}
 	
 	@Override
@@ -76,6 +88,32 @@ public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardCont
 		return "setupwizard/SetupUsernamePassword.fxml";
 	}
 	
+	@Override
+	public FxController getNextControllerClassName()
+	{
+		return new FxVerifyAccountController(getMainWindow());
+	}
+	
+	public PasswordField getPasswordField()
+	{
+		return passwordField;
+	}
+
+	public void setPasswordField(PasswordField passwordField)
+	{
+		this.passwordField = passwordField;
+	}
+
+	public TextField getUserName()
+	{
+		return userName;
+	}
+
+	public void setUserName(TextField userName)
+	{
+		this.userName = userName;
+	}
+
 	@FXML
 	private TextField userName;
 	

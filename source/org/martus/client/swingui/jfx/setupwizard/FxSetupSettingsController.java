@@ -39,6 +39,7 @@ import javafx.scene.control.ComboBox;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPreferencesDlg;
+import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxSetupSettingsController extends AbstractFxSetupWizardController implements Initializable
@@ -51,7 +52,9 @@ public class FxSetupSettingsController extends AbstractFxSetupWizardController i
 	@Override
 	public void nextWasPressed(ActionEvent event) 
 	{
-		getMainWindow().getApp().getConfigInfo().setForceBulletinsAllPrivate(preventPublicBulletinsCheckBox.isSelected());
+		//NOTE: This might belong somewhere else, but for now it's important to set it 
+		getMainWindow().getApp().getConfigInfo().setForceBulletinsAllPrivate(true);
+		
 		getMainWindow().getApp().getConfigInfo().setCheckForFieldOfficeBulletins(userTorCheckBox.isSelected());
 		
 		getLocalization().setMdyOrder(dateFormatSequenceDropDown.getSelectionModel().getSelectedItem().getCode());
@@ -94,10 +97,13 @@ public class FxSetupSettingsController extends AbstractFxSetupWizardController i
 	{
 		return "setupwizard/SetupSettings.fxml";
 	}
-
-	@FXML
-	private CheckBox preventPublicBulletinsCheckBox;
 	
+	@Override
+	public FxController getNextControllerClassName()
+	{
+		return new FxSetupStorageServerController(getMainWindow());
+	}
+
 	@FXML
 	private CheckBox userTorCheckBox;
 	
