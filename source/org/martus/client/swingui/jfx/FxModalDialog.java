@@ -39,7 +39,7 @@ public class FxModalDialog extends JDialog
 	public static void createAndShow(UiMainWindow owner, FxStage stage) throws Exception
 	{
 		FxModalDialog dialog = new FxModalDialog(owner);
-		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		dialog.getContentPane().add(stage);
 		stage.setShell(dialog);
 		Platform.runLater(new FxRunner(stage));

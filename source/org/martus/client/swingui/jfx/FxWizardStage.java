@@ -25,9 +25,14 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Stack;
 
 import javafx.scene.Parent;
+
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardController;
@@ -118,6 +123,34 @@ abstract public class FxWizardStage extends FxStage
 			MartusLogger.logException(e);
 			getShell().dispose();
 		}
+	}
+	
+	@Override
+	public void setShell(JDialog shellToUse)
+	{
+		super.setShell(shellToUse);
+		shellToUse.addWindowListener(new WindowCloseHandler(getMainWindow()));
+	}
+	
+	private class WindowCloseHandler extends WindowAdapter
+	{
+		public WindowCloseHandler(UiMainWindow ownerToUse)
+		{
+			owner = ownerToUse;
+		}
+
+		@Override
+		public void windowClosing(WindowEvent e)
+		{
+			int result = JOptionPane.showConfirmDialog(getShell(), "Wizard will now close.  Are you sure?", "Confirmation", JOptionPane.YES_NO_OPTION);
+			if (result == JOptionPane.YES_OPTION)
+			{
+				owner.exitWithoutSavingState();
+				super.windowClosing(e);
+			}
+		}
+		
+		private UiMainWindow owner;
 	}
 	
 	abstract protected FxController getFirstController();
