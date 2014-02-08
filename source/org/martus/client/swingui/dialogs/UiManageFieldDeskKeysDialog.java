@@ -94,6 +94,12 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 	}
 	
 	@Override
+	void notifyKeyIsOurself()
+	{
+		mainWindow.notifyDlg("FieldDeskKeyIsOurself");
+	}
+	
+	@Override
 	void addEntryToModel(SelectableExternalPublicKeyEntry entry)
 	{
 		getFieldDeskModel().addNewFieldDeskEntry((SelectableFieldDeskEntry)entry);
