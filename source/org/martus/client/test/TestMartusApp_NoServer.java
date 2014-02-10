@@ -894,7 +894,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	
 	public void testContactInfoMigrationHqFdToContacts() throws Exception
 	{
-		TRACE_BEGIN("testContactInfo");
+		TRACE_BEGIN("testContactInfoMigrationHqFdToContacts");
 		File file = appWithAccount.getConfigInfoFile();
 		file.delete();
 		assertEquals("delete didn't work", false, file.exists());
@@ -903,13 +903,40 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		ConfigInfo config = appWithAccount.getConfigInfo();
 		assertTrue("ConfigInfo file wasn't converted?", config.getVersion() >= ConfigInfo.VERSION_WITH_CONTACT_KEYS);
 		assertEquals("LegacyHQ should be blank", "", config.getLegacyHQKey());
-		assertEquals("LegacyHQ should be included in Default HQ Keys", getLegacyDefaultHQXml(), config.getDefaultHQKeysXml());
+		assertEquals("Old Default HQ Keys should be blank", "", config.getDefaultHQKeysXml());
 		assertEquals("Old HQ's should be blank", "", config.getAllHQKeysXml());
 		assertEquals("Old FieldDesk's should be blank", "", config.getFieldDeskKeysXml());
-		assertEquals("New Contact Keys should not be blank", getNewConfigInfoContactsKeysXml(), config.getContactKeysXml());
+		assertEquals("New Contact Keys does not match?", getNewConfigInfoContactsKeysXml(), config.getContactKeysXml());
 		TRACE_END();
 	}
 	
+	public void testContactInfoMigrationHqFdWithSelfIncludedAsHQandFD() throws Exception
+	{
+		TRACE_BEGIN("testContactInfoMigrationHqFdWithSelfIncludedAsHQandFD");
+		File file = appWithAccount.getConfigInfoFile();
+		file.delete();
+		assertEquals("delete didn't work", false, file.exists());
+		String ourClientPublicKey = appWithAccount.getAccountId();
+		createOldConfigInfoFileWithSelfIncludedAsHQandFD(file, ourClientPublicKey);
+		appWithAccount.loadConfigInfo();
+		ConfigInfo config = appWithAccount.getConfigInfo();
+		assertTrue("ConfigInfo file wasn't converted?", config.getVersion() >= ConfigInfo.VERSION_WITH_CONTACT_KEYS);
+		assertEquals("LegacyHQ should be blank", "", config.getLegacyHQKey());
+		assertEquals("Old HQ's should be blank", "", config.getAllHQKeysXml());
+		assertEquals("Old FieldDesk's should be blank", "", config.getFieldDeskKeysXml());
+		HeadquartersKeys allHQs = appWithAccount.getAllHQKeys();
+		assertEquals("Should only have 3 keys (HQ1, HQ2, and LegacyHQ)", 3, allHQs.size());
+		assertFalse("Should not incluse ourself", allHQs.containsKey(ourClientPublicKey));
+		HeadquartersKeys allDefaultHQs = appWithAccount.getDefaultHQKeys();
+		assertEquals("Should only have 2 default keys (HQ1 and LegacyHQ)", 2, allDefaultHQs.size());
+		assertFalse("Should not incluse ourself as default", allDefaultHQs.containsKey(ourClientPublicKey));
+		FieldDeskKeys allFDs = appWithAccount.getFieldDeskKeys();
+		assertEquals("Should only have 2 FD keys", 2, allFDs.size());
+		assertFalse("Should not incluse ourself as a FD", allFDs.containsKey(ourClientPublicKey));
+		
+		TRACE_END();
+	}
+
 	public void createOldConfigInfoFileWithSampleData(File file)
 			throws Exception
 		{
@@ -952,6 +979,49 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 			File signatureFile = appWithAccount.getConfigInfoSignatureFile();
 			appWithAccount.encryptAndWriteFileAndSignatureFile(file, signatureFile, encryptedInfo);
 		}
+
+	public void createOldConfigInfoFileWithSelfIncludedAsHQandFD(File file, String clientPublicKey)
+			throws Exception
+		{
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			DataOutputStream out = new DataOutputStream(outputStream);
+			out.writeShort(ConfigInfo.VERSION_WITH_CONTACT_KEYS - 1);
+			out.writeUTF("author");
+			out.writeUTF("org");
+			out.writeUTF("email");
+			out.writeUTF("web");
+			out.writeUTF("phone");
+			out.writeUTF("address\nline2");
+			out.writeUTF("server name");
+			out.writeUTF("details\ndetail2");
+			out.writeUTF(getLegacyHQ());
+			out.writeUTF("server pub key");
+			out.writeBoolean(false);
+			out.writeUTF("I am compliant");
+			out.writeUTF("language;author;custom,Custom Field;title;entrydate");
+			out.writeUTF("");
+			out.writeBoolean(true);
+			out.writeBoolean(true);
+			out.writeBoolean(true);
+			out.writeUTF(getOldConfigInfoHQKeysWithKey(clientPublicKey));
+			out.writeBoolean(true);
+			out.writeUTF(getOldDefaultHQWithKey(clientPublicKey));
+			out.writeUTF("");
+			out.writeBoolean(true);
+			ConfigInfo.writeLongString(out, "");
+			ConfigInfo.writeLongString(out, "");
+			out.writeBoolean(false);
+			ConfigInfo.writeLongString(out, getOldConfigInfoFieldDeskKeysWithKeyXml(clientPublicKey));
+			out.writeBoolean(true);
+			out.writeBoolean(false);
+			out.writeInt(0);
+			out.flush();
+			out.close();
+			byte[] encryptedInfo = outputStream.toByteArray();
+			File signatureFile = appWithAccount.getConfigInfoSignatureFile();
+			appWithAccount.encryptAndWriteFileAndSignatureFile(file, signatureFile, encryptedInfo);
+		}
+
 	private String getLegacyHQ()
 	{
 		return "LegacyHQ";
@@ -965,6 +1035,26 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		return contactKeys.toStringWithLabel();
 	}
 	
+	
+	private String getOldConfigInfoHQKeysWithKey(String clientKeyToIncludeAswell)
+	{
+		Vector keys = new Vector();
+		keys.add(new HeadquartersKey(hqKey1, hqKeylabel1));
+		keys.add(new HeadquartersKey(hqKey2, hqKeylabel2));
+		keys.add(new HeadquartersKey(clientKeyToIncludeAswell, "Our self"));
+		HeadquartersKeys contactKeys = new HeadquartersKeys(keys);
+		return contactKeys.toStringWithLabel();
+	}
+	
+	private String getOldDefaultHQWithKey(String clientKeyToIncludeAswell)
+	{
+		Vector keys = new Vector();
+		keys.add(new HeadquartersKey(hqKey1, hqKeylabel1));
+		keys.add(new HeadquartersKey(clientKeyToIncludeAswell, "Our self"));
+		HeadquartersKeys contactKeys = new HeadquartersKeys(keys);
+		return contactKeys.toStringWithLabel();
+	}
+
 	private String getOldConfigInfoFieldDeskKeysXml()
 	{
 		Vector keys = new Vector();
@@ -974,18 +1064,29 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		return fieldDeskKeys.toStringWithLabel();
 	}
 
+	private String getOldConfigInfoFieldDeskKeysWithKeyXml(String clientKeyToIncludeAswell)
+	{
+		Vector keys = new Vector();
+		keys.add(new FieldDeskKey(fdKey1, fdKeyLabel1));
+		keys.add(new FieldDeskKey(fdKey2, fdKeyLabel2));
+		keys.add(new FieldDeskKey(clientKeyToIncludeAswell, "Our self"));
+		FieldDeskKeys fieldDeskKeys = new FieldDeskKeys(keys);
+		return fieldDeskKeys.toStringWithLabel();
+	}
+
 	private String getNewConfigInfoContactsKeysXml()
 	{
 		Vector keys = new Vector();
+		ContactKey hqLegacyContactKey = new ContactKey(getLegacyHQ(), "");
+		hqLegacyContactKey.setCanSendTo(true);
+		hqLegacyContactKey.setCanSendToDefault(true);
+		keys.add(hqLegacyContactKey);
 		ContactKey hqContactKey1 = new ContactKey(hqKey1, hqKeylabel1);
 		hqContactKey1.setCanSendTo(true);
 		keys.add(hqContactKey1);
 		ContactKey hqContactKey2 = new ContactKey(hqKey2, hqKeylabel2);
 		hqContactKey2.setCanSendTo(true);
 		keys.add(hqContactKey2);
-		ContactKey hqLegacyContactKey = new ContactKey(getLegacyHQ(), "");
-		hqLegacyContactKey.setCanSendTo(true);
-		keys.add(hqLegacyContactKey);
 		ContactKey fdContactKey1 = new ContactKey(fdKey1, fdKeyLabel1);
 		fdContactKey1.setCanReceiveFrom(true);
 		keys.add(fdContactKey1);
@@ -994,13 +1095,6 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		keys.add(fdContactKey2);
 		ContactKeys contactKeys = new ContactKeys(keys);
 		return contactKeys.toStringWithLabel();
-	}
-	
-	private String getLegacyDefaultHQXml()
-	{
-		HeadquartersKeys defaultHQs = new HeadquartersKeys();
-		defaultHQs.add(new HeadquartersKey(getLegacyHQ()));
-		return defaultHQs.toStringWithLabel();
 	}
 	
 	public void testRemoveSpaceLikeCharactersFromTags() throws Exception

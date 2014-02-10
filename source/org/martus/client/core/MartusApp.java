@@ -301,7 +301,15 @@ public class MartusApp
 
 	public HeadquartersKeys getDefaultHQKeys() throws Exception
 	{
-		return new HeadquartersKeys(configInfo.getDefaultHQKeysXml());
+		ContactKeys allContacts = new ContactKeys(configInfo.getContactKeysXml());
+		HeadquartersKeys hqKeys = new HeadquartersKeys();
+		for(int i = 0; i < allContacts.size(); ++i)
+		{
+			ContactKey currentContact = allContacts.get(i);
+			if(currentContact.getCanSendToDefault())
+				hqKeys.add(new HeadquartersKey(currentContact.getPublicKey(),currentContact.getLabel()));
+		}
+		return hqKeys;
 	}
 
 	public HeadquartersKeys getAllHQKeysWithFallback()
@@ -419,11 +427,9 @@ public class MartusApp
 		{
 			ContactKeys originalContacts = new ContactKeys(configInfo.getContactKeysXml());
 			ContactKeys updatedContacts = getContactKeysWithCanSendAdjusted(allHQKeys, defaultHQKeys, originalContacts);
-			addNewHQsOnlyToContacts(allHQKeys, updatedContacts);
-			addNewHQsOnlyToContacts(defaultHQKeys, updatedContacts);
-
+			addNewHQsOnlyToContacts(defaultHQKeys, updatedContacts, true);
+			addNewHQsOnlyToContacts(allHQKeys, updatedContacts, false);
 			configInfo.setContactKeysXml(updatedContacts.toString());
-			configInfo.setDefaultHQKeysXml(defaultHQKeys.toStringWithLabel());
 			saveConfigInfo();
 		} 
 		catch (Exception e)
@@ -449,7 +455,7 @@ public class MartusApp
 		}
 	}
 
-	private void addNewHQsOnlyToContacts(HeadquartersKeys allHQKeys, ContactKeys updatedContacts)
+	private void addNewHQsOnlyToContacts(HeadquartersKeys allHQKeys, ContactKeys updatedContacts, boolean isDefaultHQ)
 	{
 		for(int i = 0; i < allHQKeys.size(); ++i)
 		{
@@ -458,6 +464,7 @@ public class MartusApp
 			{
 				ContactKey newHQContact = new ContactKey(currentHQ.getPublicKey(), currentHQ.getLabel());
 				newHQContact.setCanSendTo(true);
+				newHQContact.setCanSendToDefault(isDefaultHQ);
 				updatedContacts.add(newHQContact);
 			}
 		}
@@ -474,6 +481,11 @@ public class MartusApp
 				currentContact.setCanSendTo(true);
 			else
 				currentContact.setCanSendTo(false);
+			if(defaultKeys.containsKey(publicKey))
+				currentContact.setCanSendToDefault(true);
+			else
+				currentContact.setCanSendToDefault(false);
+				
 			adjustedCanSendToKeys.add(currentContact);
 		}
 		return adjustedCanSendToKeys;
@@ -692,37 +704,52 @@ public class MartusApp
 	private void migrateToUsingContactKeys() throws Exception
 	{
 		String legacyHQKey = configInfo.getLegacyHQKey();
+		String ourPublicKey = getAccountId();
+		if(legacyHQKey.equals(ourPublicKey))
+			legacyHQKey = "";
 		HeadquartersKeys deprecatedHqKeys = new HeadquartersKeys(configInfo.getAllHQKeysXml());
-		HeadquartersKeys defaultHqKeys = new HeadquartersKeys(configInfo.getDefaultHQKeysXml());
+		HeadquartersKeys deprecatedDefaultHqKeys = new HeadquartersKeys(configInfo.getDefaultHQKeysXml());
 		if(legacyHQKey.length() > 0)
 		{
 			HeadquartersKey legacyHQ = new HeadquartersKey(legacyHQKey);
-			if(!deprecatedHqKeys.containsKey(legacyHQKey))
+			if(!deprecatedDefaultHqKeys.containsKey(legacyHQKey))
+				deprecatedDefaultHqKeys.add(legacyHQ);
+		}
+		Vector keys = new Vector();
+		
+		for(int i = 0; i < deprecatedDefaultHqKeys.size(); ++i)
+		{
+			HeadquartersKey defaultHQKeyToAdd = deprecatedDefaultHqKeys.get(i);
+			if(!defaultHQKeyToAdd.getPublicKey().equals(ourPublicKey))
 			{
-				deprecatedHqKeys.add(legacyHQ);
-			}
-			if(!defaultHqKeys.containsKey(legacyHQKey))
-			{
-				defaultHqKeys.add(legacyHQ);
-				configInfo.setDefaultHQKeysXml(defaultHqKeys.toStringWithLabel());
+				ContactKey hqContactKey = new ContactKey(defaultHQKeyToAdd.getPublicKey(), defaultHQKeyToAdd.getLabel());
+				hqContactKey.setCanSendTo(true);
+				hqContactKey.setCanSendToDefault(true);
+				keys.add(hqContactKey);
 			}
 		}
-		FieldDeskKeys deprecatedFieldDeskKeys = new FieldDeskKeys(configInfo.getFieldDeskKeysXml());
-	
-		Vector keys = new Vector();
 		for(int i = 0; i < deprecatedHqKeys.size(); ++i)
 		{
 			HeadquartersKey hqKeyToAdd = deprecatedHqKeys.get(i);
-			ContactKey hqContactKey = new ContactKey(hqKeyToAdd.getPublicKey(), hqKeyToAdd.getLabel());
-			hqContactKey.setCanSendTo(true);
-			keys.add(hqContactKey);
+			if(!hqKeyToAdd.getPublicKey().equals(ourPublicKey)  &&
+					!deprecatedDefaultHqKeys.contains(hqKeyToAdd))
+			{
+				ContactKey hqContactKey = new ContactKey(hqKeyToAdd.getPublicKey(), hqKeyToAdd.getLabel());
+				hqContactKey.setCanSendTo(true);
+				keys.add(hqContactKey);
+			}
 		}
+
+		FieldDeskKeys deprecatedFieldDeskKeys = new FieldDeskKeys(configInfo.getFieldDeskKeysXml());
 		for(int i = 0; i < deprecatedFieldDeskKeys.size(); ++i)
 		{
 			FieldDeskKey fdKeyToAdd = deprecatedFieldDeskKeys.get(i);
-			ContactKey fdContactKey = new ContactKey(fdKeyToAdd.getPublicKey(), fdKeyToAdd.getLabel());
-			fdContactKey.setCanReceiveFrom(true);
-			keys.add(fdContactKey);
+			if(!fdKeyToAdd.getPublicKey().equals(ourPublicKey))
+			{
+				ContactKey fdContactKey = new ContactKey(fdKeyToAdd.getPublicKey(), fdKeyToAdd.getLabel());
+				fdContactKey.setCanReceiveFrom(true);
+				keys.add(fdContactKey);
+			}
 		}
 		ContactKeys contactKeys = new ContactKeys(keys);
 		configInfo.setContactKeysXml(contactKeys.toString());
