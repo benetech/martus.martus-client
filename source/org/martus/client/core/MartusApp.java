@@ -594,9 +594,7 @@ public class MartusApp
 			FontHandler.setDoZawgyiConversion(configInfo.getDoZawgyiConversion());
 			
 			if(configInfo.getVersion() < ConfigInfo.VERSION_WITH_CONTACT_KEYS)
-			{
 				migrateToUsingContactKeys();
-			}
 		}
 		catch (Exception e)
 		{
@@ -755,6 +753,7 @@ public class MartusApp
 		configInfo.setContactKeysXml(contactKeys.toString());
 		configInfo.setAllHQKeysXml("");
 		configInfo.setFieldDeskKeysXml("");
+		configInfo.setDefaultHQKeysXml("");
 		configInfo.clearLegacyHQKey(); 
 		saveConfigInfo();
 		loadConfigInfo();

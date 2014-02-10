@@ -923,6 +923,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertTrue("ConfigInfo file wasn't converted?", config.getVersion() >= ConfigInfo.VERSION_WITH_CONTACT_KEYS);
 		assertEquals("LegacyHQ should be blank", "", config.getLegacyHQKey());
 		assertEquals("Old HQ's should be blank", "", config.getAllHQKeysXml());
+		assertEquals("Old Default HQ's should be blank", "", config.getDefaultHQKeysXml());
 		assertEquals("Old FieldDesk's should be blank", "", config.getFieldDeskKeysXml());
 		HeadquartersKeys allHQs = appWithAccount.getAllHQKeys();
 		assertEquals("Should only have 3 keys (HQ1, HQ2, and LegacyHQ)", 3, allHQs.size());
