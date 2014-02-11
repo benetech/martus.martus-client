@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2001-2007, Beneficent
+monitoring software. Copyright (C) 2001-2014, Beneficent
 Technology, Inc. (The Benetech Initiative).
 
 Martus is free software; you can redistribute it and/or
@@ -56,7 +56,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 		
-		assertEquals(19, ConfigInfo.VERSION);
+		assertEquals(20, ConfigInfo.VERSION);
 
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
@@ -141,7 +141,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setLegacyHQKey(hqKey);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		info.save(outputStream);
-		info.clearHQKey();
+		info.clearLegacyHQKey();
 		assertEquals("HQ Key Should be cleared", "", info.getLegacyHQKey());
 
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
@@ -306,6 +306,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setBackedUpImprovedKeypairShare(sampleBackedUpImprovedKeypairShare);
 		info.setUseInternalTor(sampleUseInternalTor);
 		info.setMartusAccountAccessTokens(sampleMartusAccountAccessTokens);
+		info.setContactKeysXml(sampleContactKeysXml);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -336,6 +337,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleBackedUpImprovedKeypairShare", false, info.hasBackedUpImprovedKeypairShare());
 		assertEquals(label + ": sampleUseInternalTor", false, info.useInternalTor());
 		assertEquals(label + ": sampleMartusAccountAccessTokens", 0, info.getMartusAccountAccessTokens().size());
+		assertEquals(label + ": sampleContactKeysXml", "", info.getContactKeysXml());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -467,6 +469,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			assertEquals(label + ": sampleMartusAccountAccessTokens", 0, info.getMartusAccountAccessTokens().size());
 		}
+		
+		if(VERSION >= 20)
+			assertEquals(label + ": sampleContactKeys", sampleContactKeysXml, info.getContactKeysXml());
+		else
+			assertEquals(label + ": sampleContactKeys", "", info.getContactKeysXml());
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -575,6 +582,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 				out.writeUTF(((MartusAccountAccessToken)sampleMartusAccountAccessTokens.get(i)).getToken());
 			}
 		}
+		if(VERSION >= 20)
+		{
+			ConfigInfo.writeLongString(out, sampleContactKeysXml);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -633,4 +644,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final boolean sampleUseInternalTor = true;
 //Version 19
 	final Vector sampleMartusAccountAccessTokens = new Vector();
+//Version 20
+	final String sampleContactKeysXml = "<ContactKeys><ContactKey><PublicKey>1234</PublicKey><Label>Test Label</Label><CanSendTo>YES</CanSendTo><CanReceiveFrom>NO</CanReceiveFrom></ContactKey></ContactKeys>";
 }
