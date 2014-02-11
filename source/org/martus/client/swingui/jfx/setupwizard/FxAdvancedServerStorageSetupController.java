@@ -35,6 +35,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxController;
 
 public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizardController implements Initializable
 {
@@ -46,8 +47,6 @@ public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizar
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		getWizardNavigationHandler().getNextButton().setDisable(true);
-		
 	}
 
 	@Override
@@ -59,6 +58,12 @@ public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizar
 	@FXML
 	public void connect()
 	{
+	}
+	
+	@Override
+	public FxController getNextControllerClassName()
+	{
+		return new FxAddContactsController(getMainWindow());
 	}
 	
 	@FXML

@@ -23,36 +23,27 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
-
-import java.awt.Dimension;
-
-import javafx.application.Platform;
-
-import javax.swing.JDialog;
+package org.martus.client.swingui.jfx.setupwizard;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.swing.Utilities;
+import org.martus.client.swingui.jfx.FxController;
 
-public class FxModalDialog extends JDialog
+public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardController
 {
-	public static void createAndShow(UiMainWindow owner, FxStage stage) throws Exception
+	public FxSetupBackupYourKeyController(UiMainWindow mainWindowToUse)
 	{
-		FxModalDialog dialog = new FxModalDialog(owner);
-		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		dialog.getContentPane().add(stage);
-		stage.setShell(dialog);
-		Platform.runLater(new FxRunner(stage));
-
-		dialog.setPreferredSize(new Dimension(900, 700));
-		Utilities.centerDlg(dialog);
-		dialog.setVisible(true);
+		super(mainWindowToUse);
 	}
-	
-	private FxModalDialog(UiMainWindow owner)
-	{
-		super(owner);
 
-		setModal(true);
+	@Override
+	public FxController getNextControllerClassName()
+	{
+		return null;
+	}
+
+	@Override
+	public String getFxmlLocation()
+	{
+		return "setupwizard/SetupBackupYourKey.fxml";
 	}
 }

@@ -23,36 +23,33 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.setupwizard;
 
-import java.awt.Dimension;
-
-import javafx.application.Platform;
-
-import javax.swing.JDialog;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.swing.Utilities;
+import org.martus.client.swingui.jfx.FxController;
 
-public class FxModalDialog extends JDialog
+public class FxSetupImportFormTemplates extends AbstractFxSetupWizardController
 {
-	public static void createAndShow(UiMainWindow owner, FxStage stage) throws Exception
+	public FxSetupImportFormTemplates(UiMainWindow mainWindowToUse)
 	{
-		FxModalDialog dialog = new FxModalDialog(owner);
-		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		dialog.getContentPane().add(stage);
-		stage.setShell(dialog);
-		Platform.runLater(new FxRunner(stage));
+		super(mainWindowToUse);
+	}
 
-		dialog.setPreferredSize(new Dimension(900, 700));
-		Utilities.centerDlg(dialog);
-		dialog.setVisible(true);
+	@Override
+	public FxController getNextControllerClassName()
+	{
+		return new FxSetupBackupYourKeyController(getMainWindow());
+	}
+
+	@Override
+	public String getFxmlLocation()
+	{
+		return "setupwizard/SetupImportFormTemplates.fxml";
 	}
 	
-	private FxModalDialog(UiMainWindow owner)
-	{
-		super(owner);
-
-		setModal(true);
-	}
+	@FXML
+	private Label statusLabel;
 }
