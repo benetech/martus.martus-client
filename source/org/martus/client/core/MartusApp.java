@@ -306,7 +306,7 @@ public class MartusApp
 		for(int i = 0; i < allContacts.size(); ++i)
 		{
 			ContactKey currentContact = allContacts.get(i);
-			if(currentContact.getCanSendToDefault())
+			if(currentContact.getSendToByDefault())
 				hqKeys.add(new HeadquartersKey(currentContact.getPublicKey(),currentContact.getLabel()));
 		}
 		return hqKeys;
@@ -464,7 +464,7 @@ public class MartusApp
 			{
 				ContactKey newHQContact = new ContactKey(currentHQ.getPublicKey(), currentHQ.getLabel());
 				newHQContact.setCanSendTo(true);
-				newHQContact.setCanSendToDefault(isDefaultHQ);
+				newHQContact.setSendToByDefault(isDefaultHQ);
 				updatedContacts.add(newHQContact);
 			}
 		}
@@ -490,12 +490,12 @@ public class MartusApp
 			if(defaultKeys.containsKey(publicKey))
 			{
 				currentContact.setCanSendTo(true);
-				currentContact.setCanSendToDefault(true);
+				currentContact.setSendToByDefault(true);
 				currentContact.setLabel(defaultKeys.getLabelIfPresent(publicKey));
 			}
 			else
 			{
-				currentContact.setCanSendToDefault(false);
+				currentContact.setSendToByDefault(false);
 			}
 				
 			adjustedCanSendToKeys.add(currentContact);
@@ -740,7 +740,7 @@ public class MartusApp
 			{
 				ContactKey hqContactKey = new ContactKey(defaultHQKeyToAdd.getPublicKey(), defaultHQKeyToAdd.getLabel());
 				hqContactKey.setCanSendTo(true);
-				hqContactKey.setCanSendToDefault(true);
+				hqContactKey.setSendToByDefault(true);
 				keys.add(hqContactKey);
 			}
 		}
