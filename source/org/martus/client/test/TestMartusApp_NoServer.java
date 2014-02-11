@@ -1080,7 +1080,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		Vector keys = new Vector();
 		ContactKey hqLegacyContactKey = new ContactKey(getLegacyHQ(), "");
 		hqLegacyContactKey.setCanSendTo(true);
-		hqLegacyContactKey.setCanSendToDefault(true);
+		hqLegacyContactKey.setSendToByDefault(true);
 		keys.add(hqLegacyContactKey);
 		ContactKey hqContactKey1 = new ContactKey(hqKey1, hqKeylabel1);
 		hqContactKey1.setCanSendTo(true);
