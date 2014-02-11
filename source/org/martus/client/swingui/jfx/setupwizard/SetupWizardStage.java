@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.setupwizard;
 import java.io.File;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxScene;
 import org.martus.client.swingui.jfx.FxWizardStage;
 
@@ -36,15 +37,12 @@ public class SetupWizardStage extends FxWizardStage
 	public SetupWizardStage(UiMainWindow mainWindow) throws Exception
 	{
 		super(mainWindow);
-		
-		addController(new FxSelectLanguageController(getMainWindow()));
-		addController(new FxSetupUsernamePasswordController(getMainWindow()));
-		addController(new FxVerifyAccountController(getMainWindow()));
-		addController(new FxSetupContactInfoController(getMainWindow()));
-		addController(new FxSetupSettingsController(getMainWindow()));
-		addController(new FxSetupStorageServerController(getMainWindow()));
-		addController(new FxAdvancedServerStorageSetupController(getMainWindow()));
-		addController(new FxAddContactsController(getMainWindow()));
+	}
+	
+	@Override
+	protected FxController getFirstController()
+	{
+		return new FxSelectLanguageController(getMainWindow());
 	}
 	
 	@Override

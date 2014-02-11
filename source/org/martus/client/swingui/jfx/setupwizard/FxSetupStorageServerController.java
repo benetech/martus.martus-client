@@ -25,7 +25,11 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.RadioButton;
+
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxController;
 
 public class FxSetupStorageServerController extends AbstractFxSetupWizardController
 {
@@ -39,4 +43,16 @@ public class FxSetupStorageServerController extends AbstractFxSetupWizardControl
 	{
 		return "setupwizard/SetupStorageServer.fxml";
 	}
+	
+	@Override
+	public FxController getNextControllerClassName()
+	{
+		if (advancedRadioButton.isSelected())
+			return new FxAdvancedServerStorageSetupController(getMainWindow());
+		
+		return new FxAddContactsController(getMainWindow());
+	}
+	
+	@FXML
+	private RadioButton advancedRadioButton;
 }

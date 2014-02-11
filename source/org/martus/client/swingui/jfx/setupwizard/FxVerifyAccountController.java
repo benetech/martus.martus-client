@@ -38,6 +38,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.MartusLogger;
 
 public class FxVerifyAccountController extends AbstractFxSetupWizardController implements Initializable
@@ -99,6 +100,12 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardController i
 	public String getFxmlLocation()
 	{
 		return "setupwizard/VerifyAccount.fxml";
+	}
+	
+	@Override
+	public FxController getNextControllerClassName()
+	{
+		return new FxSetupContactInfoController(getMainWindow());
 	}
 	
 	private class LoginChangeHandler implements ChangeListener<String>
