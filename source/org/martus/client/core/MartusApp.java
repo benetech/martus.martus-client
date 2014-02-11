@@ -477,14 +477,26 @@ public class MartusApp
 		{
 			ContactKey currentContact = originalContacts.get(i);
 			String publicKey = currentContact.getPublicKey();
-			if(allHQKeys.containsKey(publicKey) || defaultKeys.containsKey(publicKey))
+		
+			if(allHQKeys.containsKey(publicKey))
+			{
 				currentContact.setCanSendTo(true);
+				currentContact.setLabel(allHQKeys.getLabelIfPresent(publicKey));
+			}
 			else
+			{
 				currentContact.setCanSendTo(false);
+			}
 			if(defaultKeys.containsKey(publicKey))
+			{
+				currentContact.setCanSendTo(true);
 				currentContact.setCanSendToDefault(true);
+				currentContact.setLabel(defaultKeys.getLabelIfPresent(publicKey));
+			}
 			else
+			{
 				currentContact.setCanSendToDefault(false);
+			}
 				
 			adjustedCanSendToKeys.add(currentContact);
 		}
@@ -511,10 +523,16 @@ public class MartusApp
 		for(int i = 0; i < originalContacts.size(); ++i)
 		{
 			ContactKey currentContact = originalContacts.get(i);
-			if(allFDKeys.containsKey(currentContact.getPublicKey()))
+			String publicKey = currentContact.getPublicKey();
+			if(allFDKeys.containsKey(publicKey))
+			{
 				currentContact.setCanReceiveFrom(true);
+				currentContact.setLabel(allFDKeys.getLabelIfPresent(publicKey));
+			}
 			else
+			{
 				currentContact.setCanReceiveFrom(false);
+			}
 			updatedContactKeysWithCanReceiveFromAdjusted.add(currentContact);
 		}
 	return updatedContactKeysWithCanReceiveFromAdjusted;
