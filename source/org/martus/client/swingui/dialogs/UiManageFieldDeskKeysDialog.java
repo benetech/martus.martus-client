@@ -47,10 +47,9 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 	@Override
 	void addExistingKeysToTable() throws Exception
 	{
-		String fieldDeskKeysXml = mainWindow.getApp().getConfigInfo().getFieldDeskKeysXml();
-		FieldDeskKeys local = new FieldDeskKeys(fieldDeskKeysXml);
-		for(int i = 0; i<local.size();++i)
-			addKeyToTable(local.get(i));
+		FieldDeskKeys fieldDeskKeys = mainWindow.getApp().getFieldDeskKeys();
+		for(int i = 0; i<fieldDeskKeys.size();++i)
+			addKeyToTable(fieldDeskKeys.get(i));
 	}
 
 	@Override
