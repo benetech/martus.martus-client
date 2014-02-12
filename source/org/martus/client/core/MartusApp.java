@@ -71,10 +71,13 @@ import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.PasswordHelper;
 import org.martus.common.BulletinSummary;
 import org.martus.common.BulletinSummary.WrongValueCount;
+import org.martus.common.ContactKey;
+import org.martus.common.ContactKeys;
 import org.martus.common.Exceptions.ServerCallFailedException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.FieldCollection;
 import org.martus.common.FieldCollection.CustomFieldsParseException;
+import org.martus.common.FieldDeskKey;
 import org.martus.common.FieldDeskKeys;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
@@ -135,8 +138,6 @@ import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.FileInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.ZipEntryInputStreamWithSeekThatClosesZipFile;
-
-
 
 public class MartusApp
 {
@@ -285,19 +286,30 @@ public class MartusApp
 		invalidateCurrentHandlerAndGateway();
 	}
 
-	public String getLegacyHQKey()
-	{
-		return configInfo.getLegacyHQKey();
-	}
-	
 	public HeadquartersKeys getAllHQKeys() throws Exception
 	{
-		return new HeadquartersKeys(configInfo.getAllHQKeysXml());
+		ContactKeys allContacts = new ContactKeys(configInfo.getContactKeysXml());
+		HeadquartersKeys hqKeys = new HeadquartersKeys();
+		for(int i = 0; i < allContacts.size(); ++i)
+		{
+			ContactKey currentContact = allContacts.get(i);
+			if(currentContact.getCanSendTo())
+				hqKeys.add(new HeadquartersKey(currentContact.getPublicKey(),currentContact.getLabel()));
+		}
+		return hqKeys;
 	}
 
 	public HeadquartersKeys getDefaultHQKeys() throws Exception
 	{
-		return new HeadquartersKeys(configInfo.getDefaultHQKeysXml());
+		ContactKeys allContacts = new ContactKeys(configInfo.getContactKeysXml());
+		HeadquartersKeys hqKeys = new HeadquartersKeys();
+		for(int i = 0; i < allContacts.size(); ++i)
+		{
+			ContactKey currentContact = allContacts.get(i);
+			if(currentContact.getSendToByDefault())
+				hqKeys.add(new HeadquartersKey(currentContact.getPublicKey(),currentContact.getLabel()));
+		}
+		return hqKeys;
 	}
 
 	public HeadquartersKeys getAllHQKeysWithFallback()
@@ -309,8 +321,7 @@ public class MartusApp
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			HeadquartersKey legacyKey = new HeadquartersKey(getLegacyHQKey());
-			return new HeadquartersKeys(legacyKey);
+			return new HeadquartersKeys();
 		}
 	}
 	
@@ -323,8 +334,7 @@ public class MartusApp
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			HeadquartersKey legacyKey = new HeadquartersKey(getLegacyHQKey());
-			return new HeadquartersKeys(legacyKey);
+			return new HeadquartersKeys();
 		}
 	}
 
@@ -381,17 +391,22 @@ public class MartusApp
 
 	public FieldDeskKeys getFieldDeskKeys()
 	{
+		FieldDeskKeys fdKeys = new FieldDeskKeys();
 		try
 		{
-			String xml = getConfigInfo().getFieldDeskKeysXml();
-			FieldDeskKeys keys = new FieldDeskKeys(xml);
-			return keys;
+			ContactKeys allContacts = new ContactKeys(configInfo.getContactKeysXml());
+			for(int i = 0; i < allContacts.size(); ++i)
+			{
+				ContactKey currentContact = allContacts.get(i);
+				if(currentContact.getCanReceiveFrom())
+					fdKeys.add(new FieldDeskKey(currentContact.getPublicKey(),currentContact.getLabel()));
+			}
 		} 
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			return new FieldDeskKeys();
 		}
+		return fdKeys;
 	}
 
 	public boolean isVerifiedFieldDeskAccount(String authorPublicKeyString) throws Exception
@@ -408,13 +423,119 @@ public class MartusApp
 	
 	public void setAndSaveHQKeys(HeadquartersKeys allHQKeys, HeadquartersKeys defaultHQKeys) throws SaveConfigInfoException 
 	{
-		configInfo.setAllHQKeysXml(allHQKeys.toStringWithLabel());
-		configInfo.setDefaultHQKeysXml(defaultHQKeys.toStringWithLabel());
-		if(allHQKeys.isEmpty())
-			configInfo.clearHQKey();
-		else
-			configInfo.setLegacyHQKey(allHQKeys.get(0).getPublicKey());
-		saveConfigInfo();
+		try
+		{
+			ContactKeys originalContacts = new ContactKeys(configInfo.getContactKeysXml());
+			ContactKeys updatedContacts = getContactKeysWithCanSendAdjusted(allHQKeys, defaultHQKeys, originalContacts);
+			addNewHQsOnlyToContacts(defaultHQKeys, updatedContacts, true);
+			addNewHQsOnlyToContacts(allHQKeys, updatedContacts, false);
+			configInfo.setContactKeysXml(updatedContacts.toString());
+			saveConfigInfo();
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			throw new SaveConfigInfoException();
+		}
+	}
+	
+	public void setAndSaveFDKeys(FieldDeskKeys allFDKeys)
+	{
+		try
+		{
+			ContactKeys originalContacts = new ContactKeys(configInfo.getContactKeysXml());
+			ContactKeys updatedContacts = getContactKeysWithCanReceiveFromAdjusted(allFDKeys, originalContacts);
+			addNewFDsOnlyToContacts(allFDKeys, updatedContacts);
+			configInfo.setContactKeysXml(updatedContacts.toString());
+			saveConfigInfo();
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+	}
+
+	private void addNewHQsOnlyToContacts(HeadquartersKeys allHQKeys, ContactKeys updatedContacts, boolean isDefaultHQ)
+	{
+		for(int i = 0; i < allHQKeys.size(); ++i)
+		{
+			HeadquartersKey currentHQ = allHQKeys.get(i);
+			if(!updatedContacts.containsKey(currentHQ.getPublicKey()))
+			{
+				ContactKey newHQContact = new ContactKey(currentHQ.getPublicKey(), currentHQ.getLabel());
+				newHQContact.setCanSendTo(true);
+				newHQContact.setSendToByDefault(isDefaultHQ);
+				updatedContacts.add(newHQContact);
+			}
+		}
+	}
+
+	private ContactKeys getContactKeysWithCanSendAdjusted(HeadquartersKeys allHQKeys, HeadquartersKeys defaultKeys, ContactKeys originalContacts)
+	{
+		ContactKeys adjustedCanSendToKeys = new ContactKeys();
+		for(int i = 0; i < originalContacts.size(); ++i)
+		{
+			ContactKey currentContact = originalContacts.get(i);
+			String publicKey = currentContact.getPublicKey();
+		
+			if(allHQKeys.containsKey(publicKey))
+			{
+				currentContact.setCanSendTo(true);
+				currentContact.setLabel(allHQKeys.getLabelIfPresent(publicKey));
+			}
+			else
+			{
+				currentContact.setCanSendTo(false);
+			}
+			if(defaultKeys.containsKey(publicKey))
+			{
+				currentContact.setCanSendTo(true);
+				currentContact.setSendToByDefault(true);
+				currentContact.setLabel(defaultKeys.getLabelIfPresent(publicKey));
+			}
+			else
+			{
+				currentContact.setSendToByDefault(false);
+			}
+				
+			adjustedCanSendToKeys.add(currentContact);
+		}
+		return adjustedCanSendToKeys;
+	}
+
+	private void addNewFDsOnlyToContacts(FieldDeskKeys allFDKeys, ContactKeys updatedContacts)
+	{
+		for(int i = 0; i < allFDKeys.size(); ++i)
+		{
+			FieldDeskKey currentFD = allFDKeys.get(i);
+			if(!updatedContacts.containsKey(currentFD.getPublicKey()))
+			{
+				ContactKey newFDContact = new ContactKey(currentFD.getPublicKey(), currentFD.getLabel());
+				newFDContact.setCanReceiveFrom(true);
+				updatedContacts.add(newFDContact);
+			}
+		}
+	}
+
+	private ContactKeys getContactKeysWithCanReceiveFromAdjusted(FieldDeskKeys allFDKeys, ContactKeys originalContacts)
+	{
+		ContactKeys updatedContactKeysWithCanReceiveFromAdjusted = new ContactKeys();
+		for(int i = 0; i < originalContacts.size(); ++i)
+		{
+			ContactKey currentContact = originalContacts.get(i);
+			String publicKey = currentContact.getPublicKey();
+			if(allFDKeys.containsKey(publicKey))
+			{
+				currentContact.setCanReceiveFrom(true);
+				currentContact.setLabel(allFDKeys.getLabelIfPresent(publicKey));
+			}
+			else
+			{
+				currentContact.setCanReceiveFrom(false);
+			}
+			updatedContactKeysWithCanReceiveFromAdjusted.add(currentContact);
+		}
+	return updatedContactKeysWithCanReceiveFromAdjusted;
 	}
 
 	public void saveConfigInfo() throws SaveConfigInfoException
@@ -484,12 +605,14 @@ public class MartusApp
 			removeSpaceLikeCharactersFromTags(specsBottom);
 			store.setBottomSectionFieldSpecs(specsBottom);
 			
-			convertLegacyHQToMultipleHQs();
 			String languageCode = localization.getCurrentLanguageCode();
 			if (languageCode != null && languageCode.equals(MtfAwareLocalization.BURMESE))
 				configInfo.setUseZawgyiFont(true);
 			FontSetter.setDefaultFont(configInfo.getUseZawgyiFont());
 			FontHandler.setDoZawgyiConversion(configInfo.getDoZawgyiConversion());
+			
+			if(configInfo.getVersion() < ConfigInfo.VERSION_WITH_CONTACT_KEYS)
+				migrateToUsingContactKeys();
 		}
 		catch (Exception e)
 		{
@@ -594,26 +717,64 @@ public class MartusApp
 		}
 	}
 
-	private void convertLegacyHQToMultipleHQs() throws Exception
+	private void migrateToUsingContactKeys() throws Exception
 	{
 		String legacyHQKey = configInfo.getLegacyHQKey();
-		if(legacyHQKey.length()>0)
+		String ourPublicKey = getAccountId();
+		if(legacyHQKey.equals(ourPublicKey))
+			legacyHQKey = "";
+		HeadquartersKeys deprecatedHqKeys = new HeadquartersKeys(configInfo.getAllHQKeysXml());
+		HeadquartersKeys deprecatedDefaultHqKeys = new HeadquartersKeys(configInfo.getDefaultHQKeysXml());
+		if(legacyHQKey.length() > 0)
 		{
-			HeadquartersKeys hqKeys = getAllHQKeys();
-			if(!hqKeys.containsKey(legacyHQKey))
+			HeadquartersKey legacyHQ = new HeadquartersKey(legacyHQKey);
+			if(!deprecatedDefaultHqKeys.containsKey(legacyHQKey))
+				deprecatedDefaultHqKeys.add(legacyHQ);
+		}
+		Vector keys = new Vector();
+		
+		for(int i = 0; i < deprecatedDefaultHqKeys.size(); ++i)
+		{
+			HeadquartersKey defaultHQKeyToAdd = deprecatedDefaultHqKeys.get(i);
+			if(!defaultHQKeyToAdd.getPublicKey().equals(ourPublicKey))
 			{
-				HeadquartersKey legacy = new HeadquartersKey(legacyHQKey);
-				hqKeys.add(legacy);
-				try
-				{
-					setAndSaveHQKeys(hqKeys, hqKeys);
-				}
-				catch(MartusApp.SaveConfigInfoException e)
-				{
-					System.out.println("SaveConfigInfoException: " + e);						
-				}
+				ContactKey hqContactKey = new ContactKey(defaultHQKeyToAdd.getPublicKey(), defaultHQKeyToAdd.getLabel());
+				hqContactKey.setCanSendTo(true);
+				hqContactKey.setSendToByDefault(true);
+				keys.add(hqContactKey);
 			}
 		}
+		for(int i = 0; i < deprecatedHqKeys.size(); ++i)
+		{
+			HeadquartersKey hqKeyToAdd = deprecatedHqKeys.get(i);
+			if(!hqKeyToAdd.getPublicKey().equals(ourPublicKey)  &&
+					!deprecatedDefaultHqKeys.contains(hqKeyToAdd))
+			{
+				ContactKey hqContactKey = new ContactKey(hqKeyToAdd.getPublicKey(), hqKeyToAdd.getLabel());
+				hqContactKey.setCanSendTo(true);
+				keys.add(hqContactKey);
+			}
+		}
+
+		FieldDeskKeys deprecatedFieldDeskKeys = new FieldDeskKeys(configInfo.getFieldDeskKeysXml());
+		for(int i = 0; i < deprecatedFieldDeskKeys.size(); ++i)
+		{
+			FieldDeskKey fdKeyToAdd = deprecatedFieldDeskKeys.get(i);
+			if(!fdKeyToAdd.getPublicKey().equals(ourPublicKey))
+			{
+				ContactKey fdContactKey = new ContactKey(fdKeyToAdd.getPublicKey(), fdKeyToAdd.getLabel());
+				fdContactKey.setCanReceiveFrom(true);
+				keys.add(fdContactKey);
+			}
+		}
+		ContactKeys contactKeys = new ContactKeys(keys);
+		configInfo.setContactKeysXml(contactKeys.toString());
+		configInfo.setAllHQKeysXml("");
+		configInfo.setFieldDeskKeysXml("");
+		configInfo.setDefaultHQKeysXml("");
+		configInfo.clearLegacyHQKey(); 
+		saveConfigInfo();
+		loadConfigInfo();
 	}
 
 	public static FieldSpecCollection getCustomFieldSpecsTopSection(ConfigInfo configInfo) throws CustomFieldsParseException
