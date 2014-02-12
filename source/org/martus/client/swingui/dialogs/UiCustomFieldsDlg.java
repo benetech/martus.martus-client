@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2001-2007, Beneficent
+monitoring software. Copyright (C) 2001-2014, Beneficent
 Technology, Inc. (The Benetech Initiative).
 
 Martus is free software; you can redistribute it and/or
@@ -314,7 +314,9 @@ public class UiCustomFieldsDlg extends JDialog
 			
 			CustomFieldTemplate template = new CustomFieldTemplate();
 			MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
-			if(template.ExportTemplate(securityTemp, destFile, topSectionXmlTextArea.getText(), bottomSectionXmlTextArea.getText()))
+			String formTemplateTitle = "";
+			String formTemplateDescription = "";
+			if(template.ExportTemplate(securityTemp, destFile, topSectionXmlTextArea.getText(), bottomSectionXmlTextArea.getText(), formTemplateTitle, formTemplateDescription))
 			{
 				mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
 			}
@@ -390,7 +392,7 @@ public class UiCustomFieldsDlg extends JDialog
 		new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", "ok", MtfAwareLocalization.UNUSED_TAG, MtfAwareLocalization.UNUSED_TAG, errorDescription, specificErrorsPane);
 	}
 
-	private void formatTextArea(UiTextArea textArea)
+	protected void formatTextArea(UiTextArea textArea)
 	{
 		textArea.setCaretPosition(0);
 		textArea.setBackground(new JFrame().getBackground());
