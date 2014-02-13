@@ -293,7 +293,7 @@ public class MartusApp
 		for(int i = 0; i < allContacts.size(); ++i)
 		{
 			ContactKey currentContact = allContacts.get(i);
-			if(currentContact.getCanSendTo())
+			if(currentContact.getCanSendTo() || currentContact.getSendToByDefault())
 				hqKeys.add(new HeadquartersKey(currentContact.getPublicKey(),currentContact.getLabel()));
 		}
 		return hqKeys;
