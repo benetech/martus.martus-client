@@ -103,6 +103,7 @@ import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomFieldTemplate;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.network.ClientSideNetworkInterface;
@@ -1573,7 +1574,7 @@ public class MartusApp
 		String ourTokenString = (String)singleToken.get(0);
 		return new MartusAccountAccessToken(ourTokenString);
 	}
-	
+
 	public String getMartusAccountIdFromAccessTokenOnServer(MartusAccountAccessToken tokenToUse) throws TokenNotFoundException, ServerNotAvailableException, MartusSignatureException 
 	{
 		if(!isSSLServerAvailable())
@@ -1595,6 +1596,27 @@ public class MartusApp
 		return AccountId;
 	}
 
+	public void putFormTemplateOnServer(CustomFieldTemplate formTemplate) throws ServerNotAvailableException, MartusSignatureException 
+	{
+		if(!isSSLServerAvailable())
+			throw new ServerNotAvailableException();
+		String formTemplateData = formTemplate.getExportedTemplateAsBase64String(getSecurity());
+		NetworkResponse response = getCurrentNetworkInterfaceGateway().putFormTemplate(getSecurity(), formTemplateData);
+		if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
+			throw new ServerNotAvailableException();
+	}
+	
+	
+	public Vector getListOfFormTemplatesOnServer(String accountToRetreiveListFrom) throws ServerNotAvailableException, MartusSignatureException 
+	{
+		if(!isSSLServerAvailable())
+			throw new ServerNotAvailableException();
+		NetworkResponse response = getCurrentNetworkInterfaceGateway().getListOfFormTemplates(getSecurity(), accountToRetreiveListFrom);
+		if(response.getResultCode().equals(NetworkInterfaceConstants.OK))
+			return response.getResultVector();
+		throw new ServerNotAvailableException();
+	}
+	
 	public Vector getNewsFromServer()
 	{
 		if(!isSSLServerAvailable())
