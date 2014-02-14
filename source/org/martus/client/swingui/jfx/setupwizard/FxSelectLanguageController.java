@@ -108,7 +108,7 @@ public class FxSelectLanguageController extends AbstractFxSetupWizardController 
 	@Override
 	public FxController getNextControllerClassName()
 	{
-		return new FxSetupUsernamePasswordController(getMainWindow());
+		return null;
 	}
 	
 	@FXML // fx:id="languagesDropdown"
