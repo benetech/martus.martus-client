@@ -42,7 +42,7 @@ public class SetupWizardStage extends FxWizardStage
 	@Override
 	protected FxController getFirstController()
 	{
-		return new FxSelectLanguageController(getMainWindow());
+		return new FxSetupUsernamePasswordController(getMainWindow());
 	}
 	
 	@Override

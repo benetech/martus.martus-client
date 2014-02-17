@@ -38,7 +38,7 @@ public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardControl
 	@Override
 	public FxController getNextControllerClassName()
 	{
-		return null;
+		return new FxSelectLanguageController(getMainWindow());
 	}
 
 	@Override
