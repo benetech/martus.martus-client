@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
-import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.ExternalPublicKeysTableModel;
 import org.martus.client.swingui.FieldDeskManagementTableModel;
 import org.martus.client.swingui.SelectableExternalPublicKeyEntry;
@@ -48,10 +47,9 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 	@Override
 	void addExistingKeysToTable() throws Exception
 	{
-		String fieldDeskKeysXml = mainWindow.getApp().getConfigInfo().getFieldDeskKeysXml();
-		FieldDeskKeys local = new FieldDeskKeys(fieldDeskKeysXml);
-		for(int i = 0; i<local.size();++i)
-			addKeyToTable(local.get(i));
+		FieldDeskKeys fieldDeskKeys = mainWindow.getApp().getFieldDeskKeys();
+		for(int i = 0; i<fieldDeskKeys.size();++i)
+			addKeyToTable(fieldDeskKeys.get(i));
 	}
 
 	@Override
@@ -95,6 +93,12 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 	}
 	
 	@Override
+	void notifyKeyIsOurself()
+	{
+		mainWindow.notifyDlg("FieldDeskKeyIsOurself");
+	}
+	
+	@Override
 	void addEntryToModel(SelectableExternalPublicKeyEntry entry)
 	{
 		getFieldDeskModel().addNewFieldDeskEntry((SelectableFieldDeskEntry)entry);
@@ -110,10 +114,7 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 	void updateConfigInfo()
 	{
 		enableDisableButtons();
-		String fieldDeskKeysXml = getFieldDeskModel().getAllKeys().toStringWithLabel();
-		ConfigInfo configInfo = mainWindow.getApp().getConfigInfo();
-		configInfo.setFieldDeskKeysXml(fieldDeskKeysXml);
-		mainWindow.saveConfigInfo();
+		mainWindow.getApp().setAndSaveFDKeys(getFieldDeskModel().getAllKeys());
 	}
 	
 	@Override

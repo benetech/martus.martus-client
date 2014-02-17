@@ -105,6 +105,13 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 	}
 	
 	@Override
+	void notifyKeyIsOurself()
+	{
+		mainWindow.notifyDlg("HQKeyIsOurself");
+	}
+
+	
+	@Override
 	void addEntryToModel(SelectableExternalPublicKeyEntry entry)
 	{
 		getHeadquartersModel().addNewHeadQuarterEntry((SelectableHeadquartersEntry)entry);

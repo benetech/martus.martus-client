@@ -132,6 +132,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 	abstract void notifyNoneSelected();
 	abstract boolean confirmRemoveKey();
 	abstract void notifyKeyAlreadyExists();
+	abstract void notifyKeyIsOurself();
 	
 	ViewHandler createViewHandler()
 	{
@@ -196,6 +197,12 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 			notifyKeyAlreadyExists();
 			return null;
 		}
+		
+		if(isPublicKeyOurself(publicKeyString))
+		{
+			notifyKeyIsOurself();
+			return null;
+		}
 
 		if(confirmPublicCode(publicCode))
 		{
@@ -235,6 +242,11 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 		}
 		
 		return false;
+	}
+	
+	private boolean isPublicKeyOurself(String publicKeyToTest)
+	{
+		return mainWindow.getApp().getAccountId().equals(publicKeyToTest);
 	}
 
 	class TableListener implements KeyListener
