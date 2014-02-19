@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.JarURLConnection;
 import java.net.MalformedURLException;
@@ -105,6 +106,7 @@ import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.CustomFieldTemplate;
+import org.martus.common.fieldspec.CustomFieldTemplate.FutureVersionException;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.network.ClientSideNetworkInterface;
@@ -1619,6 +1621,36 @@ public class MartusApp
 			throw new NoFormsAvailableException();
 		throw new ServerNotAvailableException();
 	}
+	
+	public CustomFieldTemplate getFormTemplateOnServer(String accountId, String formTitle) throws ServerNotAvailableException, NoFormsAvailableException, MartusSignatureException, IOException, InvalidBase64Exception, FutureVersionException 
+	{
+		if(!isSSLServerAvailable())
+			throw new ServerNotAvailableException();
+		NetworkResponse response = getCurrentNetworkInterfaceGateway().getFormTemplate(getSecurity(), accountId, formTitle);
+		if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
+		{
+			if(response.getResultCode().equals(NetworkInterfaceConstants.FORM_TEMPLATE_DOES_NOT_EXIST))
+				throw new NoFormsAvailableException();
+			throw new ServerNotAvailableException();
+		}
+		Vector result = response.getResultVector();
+		if(result.size() != 1)
+			throw new NoFormsAvailableException();
+		String base64FormData = (String)result.get(0);
+		StringReader reader = new StringReader(base64FormData);
+		File formTemplateTempFile = File.createTempFile("$$$FormTemplate", null);
+		formTemplateTempFile.deleteOnExit();
+		FileOutputStream output = new FileOutputStream(formTemplateTempFile);
+		StreamableBase64.decode(reader, output);
+		output.flush();
+		output.close();
+
+		CustomFieldTemplate template = new CustomFieldTemplate();
+		template.importTemplate(getSecurity(), formTemplateTempFile);
+		formTemplateTempFile.delete();
+		return template;
+	}
+
 	
 	public Vector getNewsFromServer()
 	{
