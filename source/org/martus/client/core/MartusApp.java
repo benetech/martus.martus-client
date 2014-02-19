@@ -71,6 +71,7 @@ import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.PasswordHelper;
 import org.martus.common.BulletinSummary;
 import org.martus.common.BulletinSummary.WrongValueCount;
+import org.martus.common.Exceptions.NoFormsAvailableException;
 import org.martus.common.Exceptions.ServerCallFailedException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.FieldCollection;
@@ -1607,13 +1608,15 @@ public class MartusApp
 	}
 	
 	
-	public Vector getListOfFormTemplatesOnServer(String accountToRetreiveListFrom) throws ServerNotAvailableException, MartusSignatureException 
+	public Vector getListOfFormTemplatesOnServer(String accountToRetreiveListFrom) throws ServerNotAvailableException, MartusSignatureException, NoFormsAvailableException 
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
 		NetworkResponse response = getCurrentNetworkInterfaceGateway().getListOfFormTemplates(getSecurity(), accountToRetreiveListFrom);
 		if(response.getResultCode().equals(NetworkInterfaceConstants.OK))
 			return response.getResultVector();
+		if(response.getResultCode().equals(NetworkInterfaceConstants.NO_FORM_TEMPLATES_AVAILABLE))
+			throw new NoFormsAvailableException();
 		throw new ServerNotAvailableException();
 	}
 	
