@@ -52,6 +52,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.clientside.FormatFilter;
 import org.martus.clientside.MtfAwareLocalization;
+import org.martus.common.FieldCollection;
 import org.martus.common.FieldDeskKeys;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKeys;
@@ -314,16 +315,35 @@ public class UiCustomFieldsDlg extends JDialog
 			
 			CustomFieldTemplate template = new CustomFieldTemplate();
 			MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
-			String formTemplateTitle = "";
-			String formTemplateDescription = "";
+			String formTemplateTitle = "Default Template";
+			String formTemplateDescription = "Default Description";
 			if(template.ExportTemplate(securityTemp, destFile, topSectionXmlTextArea.getText(), bottomSectionXmlTextArea.getText(), formTemplateTitle, formTemplateDescription))
 			{
 				mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
+				//saveTemplateOnServer(formTemplateTitle, formTemplateDescription);
 			}
 			else
 			{
 				displayXMLError(template);
 				mainWindow.notifyDlg("ErrorExportingCustomizationTemplate");
+			}
+		}
+
+		private void saveTemplateOnServer(String formTemplateTitle,
+				String formTemplateDescription)
+		{
+			try
+			{
+				FieldCollection specTop = new FieldCollection(FieldCollection.parseXml(topSectionXmlTextArea.getText()));
+				FieldCollection specBottom = new FieldCollection(FieldCollection.parseXml(bottomSectionXmlTextArea.getText()));
+				CustomFieldTemplate template1 = new CustomFieldTemplate(formTemplateTitle, formTemplateDescription, specTop, specBottom);
+				mainWindow.getApp().putFormTemplateOnServer(template1);
+				Vector returnedListOfTemplatesFromServer = mainWindow.getApp().getListOfFormTemplatesOnServer(mainWindow.getApp().getAccountId());
+				String title = (String)returnedListOfTemplatesFromServer.get(0);
+				String description = (String)returnedListOfTemplatesFromServer.get(1);
+				
+			} catch (Exception e)
+			{
 			}
 		}
 	}
