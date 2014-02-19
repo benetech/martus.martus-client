@@ -124,6 +124,11 @@ public class MockClientSideNetworkHandler implements ClientSideNetworkInterface
 		return server.putFormTemplate(myAccountId, parameters, signature);
 	}
 
+	public Vector getFormTemplate(String myAccountId, Vector parameters, String signature) 
+	{
+		return server.getFormTemplate(myAccountId, parameters, signature);
+	}
+
 	public Vector getPartialUploadStatus(String publicKeyString, Vector parameters, String signature) 
 	{
 		return server.getPartialUploadStatus(publicKeyString, parameters, signature);
