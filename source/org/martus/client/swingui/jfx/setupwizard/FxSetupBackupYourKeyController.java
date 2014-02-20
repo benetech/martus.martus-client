@@ -66,8 +66,6 @@ public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardControl
 	{
 		backupMessageLabel.setText("");
 		File keypairFile = getMainWindow().getApp().getCurrentKeyPairFile();
-		System.out.println("FIle =  " + keypairFile.exists());
-		System.out.println("file =  " + keypairFile.getAbsolutePath());
 		if(keypairFile.length() > UiMainWindow.MAX_KEYPAIRFILE_SIZE)
 		{
 			backupMessageLabel.setText("keypair file too large!");
