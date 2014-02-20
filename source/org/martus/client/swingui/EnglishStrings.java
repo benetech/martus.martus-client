@@ -244,7 +244,13 @@ public class EnglishStrings
 "wintitle:notifyErrorSavingDictionary=Error",
 "wintitle:notifyErrorLoadingDictionary=Error",
 "wintitle:notifyErrorUpdatingDictionary=Error",
-"wintitle:ConfigureSpellCheck=Configure Spell Checking",
+
+"wintitle:notifyTemplateSavedToServer=Save Template To Server",
+"field:notifyTemplateSavedToServercause=Successfully saved form template to your account on the server.",
+"wintitle:notifyServerNotAvailable=Save Template To Server",
+"field:notifyServerNotAvailablecause=Server not available.",
+"wintitle:notifyErrorSavingTemplateToServer=Save Template To Server",
+"field:notifyErrorSavingTemplateToServercause=Unexpected error saving template to server.",
 
 "wintitle:notifyRetrieveCompleted=Retrieve Complete",
 "field:notifyRetrieveCompletedcause=Retrieving bulletins from the server is complete",
@@ -313,6 +319,7 @@ public class EnglishStrings
 "wintitle:ExportCustomizationTemplateSaveAs=Export Customization Template",
 "wintitle:SetFolderOrder=Folder Order",
 "wintitle:FancySearchHelp=Search Help",
+"wintitle:ConfigureSpellCheck=Configure Spell Checking",
 
 "wintitle:warningdeletefolder=Confirm Delete Folder",
 "wintitle:warningDeleteSingleBulletin=Confirm Delete Bulletin",
@@ -361,6 +368,8 @@ public class EnglishStrings
 "button:customImport=Import Template",
 "button:customExport=Export Template",
 "button:AddPermissions=Update Headquarters Access",
+"button:customSendToServer=Send Template to Server",
+"button:customReceiveFromServer=Retrieve Template from Server",
 
 "button:cancel=Cancel",
 "button:save=Save",
