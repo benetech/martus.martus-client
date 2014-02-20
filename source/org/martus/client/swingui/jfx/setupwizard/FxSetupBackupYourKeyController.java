@@ -25,14 +25,29 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.stage.FileChooser;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.util.FileVerifier;
 
 public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardController
 {
 	public FxSetupBackupYourKeyController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+	}
+	
+	@FXML
+	public void createSingelEncryptedFile() throws Exception
+	{
+		doBackupKeyPairToSingleEncryptedFile();
 	}
 
 	@Override
@@ -46,4 +61,50 @@ public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardControl
 	{
 		return "setupwizard/SetupBackupYourKey.fxml";
 	}
+	
+	private void doBackupKeyPairToSingleEncryptedFile() throws Exception 
+	{
+		backupMessageLabel.setText("");
+		File keypairFile = getMainWindow().getApp().getCurrentKeyPairFile();
+		System.out.println("FIle =  " + keypairFile.exists());
+		System.out.println("file =  " + keypairFile.getAbsolutePath());
+		if(keypairFile.length() > UiMainWindow.MAX_KEYPAIRFILE_SIZE)
+		{
+			backupMessageLabel.setText("keypair file too large!");
+			return;
+		}
+
+		FileChooser fileChooser = new FileChooser();
+		File martusRootDir = getMainWindow().getApp().getMartusDataRootDirectory();
+		fileChooser.setInitialDirectory(martusRootDir);
+		fileChooser.setInitialFileName("MartusKeyPairBackup.dat");
+		fileChooser.setTitle("Backup Key File");
+		fileChooser.getExtensionFilters().addAll(
+				new FileChooser.ExtensionFilter("All Files", "*.*"),
+				new FileChooser.ExtensionFilter("Martus Key (*.dat)", "*.dat"));
+		File newBackupFile = fileChooser.showSaveDialog(null);
+		if(newBackupFile == null)
+			return;
+
+		FileInputStream input = new FileInputStream(keypairFile);
+		FileOutputStream output = new FileOutputStream(newBackupFile);
+
+		int originalKeyPairFileSize = (int) keypairFile.length();
+		byte[] inputArray = new byte[originalKeyPairFileSize];
+
+		input.read(inputArray);
+		output.write(inputArray);
+		input.close();
+		output.close();
+		if(FileVerifier.verifyFiles(keypairFile, newBackupFile))
+		{
+			backupMessageLabel.setText( newBackupFile.getName() + " created.");
+			getMainWindow().getApp().getConfigInfo().setBackedUpKeypairEncrypted(true);
+			getMainWindow().getApp().saveConfigInfo();
+		}
+	}
+	
+	
+	@FXML
+	private Label backupMessageLabel;
 }
