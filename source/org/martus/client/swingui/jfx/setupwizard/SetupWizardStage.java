@@ -31,6 +31,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxScene;
 import org.martus.client.swingui.jfx.FxWizardStage;
+import org.martus.common.MartusLogger;
 
 public class SetupWizardStage extends FxWizardStage
 {
@@ -42,6 +43,22 @@ public class SetupWizardStage extends FxWizardStage
 	@Override
 	protected FxController getFirstController()
 	{
+		if(UiMainWindow.isAlphaTester)
+		{
+			if(!getMainWindow().getApp().hasNoAccounts())
+			{
+				try
+				{
+					getMainWindow().getApp().attemptSignIn("a", "password".toCharArray());
+					return new FxSetupContactInfoController(getMainWindow());
+				} 
+				catch (Exception e)
+				{
+					MartusLogger.logException(e);
+					System.exit(1);
+				}
+			}
+		}
 		return new FxSetupUsernamePasswordController(getMainWindow());
 	}
 	

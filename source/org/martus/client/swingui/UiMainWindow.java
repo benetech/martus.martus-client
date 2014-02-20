@@ -450,7 +450,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		mainWindowInitalizing = true;
 
-		if (getApp().hasNoAccounts())
+		if (getApp().hasNoAccounts() || isAlphaTester)
 			startAccountSetupWizard();
 		
 		if(!sessionSignIn())
