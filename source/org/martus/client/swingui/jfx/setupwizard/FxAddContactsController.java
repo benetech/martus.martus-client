@@ -38,7 +38,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
@@ -63,13 +62,9 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		
 		contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("contactName"));
 		publicCodeColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("publicCode"));
-		sentToColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("sentTo"));
-		receivedFromColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("receivedFrom"));
 		
 		contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
 		publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
-		sentToColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(sentToColumn));
-		receivedFromColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(receivedFromColumn));
 		
 		contactsTableId.setItems(data);
 	}
@@ -139,15 +134,6 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	
 	@FXML
 	private TableColumn<ContactsTableData, String> publicCodeColumn;
-	
-	@FXML
-	private TableColumn<ContactsTableData, Boolean> sentToColumn;
-	
-	@FXML
-	private TableColumn<ContactsTableData, Boolean> receivedFromColumn;
-	
-	@FXML
-	private TableColumn<ContactsTableData, Button> removeColumn;
 	
 	@FXML
 	private Button addRowButtonId;
