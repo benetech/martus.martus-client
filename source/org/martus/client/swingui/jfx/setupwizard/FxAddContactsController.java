@@ -28,6 +28,8 @@ package org.martus.client.swingui.jfx.setupwizard;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -47,6 +49,7 @@ import javafx.stage.Stage;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxStage;
+import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusLogger;
 
 public class FxAddContactsController extends AbstractFxSetupWizardController implements Initializable
@@ -68,6 +71,10 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
 		
 		contactsTable.setItems(data);
+
+		setAddContactButtonEnabled(false);
+		
+		accessTokenField.textProperty().addListener(new AccessTokenChangeHandler());
 	}
 	
 	@FXML
@@ -127,6 +134,30 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		return new FxSetupImportFormTemplates(getMainWindow());
 	}
 	
+	protected class AccessTokenChangeHandler implements ChangeListener<String>
+	{
+		@Override
+		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
+		{
+			boolean canAdd = (isValidAccessToken(newValue));
+			setAddContactButtonEnabled(canAdd);
+		}
+
+		private boolean isValidAccessToken(String tokenToValidate)
+		{
+			if(tokenToValidate.length() == 0)
+				return false;
+			
+			return MartusAccountAccessToken.isTokenValid(tokenToValidate);
+		}
+		
+	}
+	
+	public void setAddContactButtonEnabled(boolean canAdd)
+	{
+		addContactButton.setDisable(!canAdd);
+	}
+
 	@FXML
 	private TableView<ContactsTableData> contactsTable;
 	
@@ -143,4 +174,5 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	private Button addContactButton;
 	
 	private ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
+
 }
