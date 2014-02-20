@@ -67,6 +67,7 @@ import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTextArea;
+import org.martus.swing.UiTextField;
 import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -119,10 +120,20 @@ public class UiCustomFieldsDlg extends JDialog
 		bottomSectionXmlTextArea.setCaretPosition(0);
 		UiScrollPane bottomSectionTextPane = new UiScrollPane(bottomSectionXmlTextArea);
 
+		UiLabel titleLabel = new UiLabel(localization.getFieldLabel("inputCustomFieldsTitle"));
+		titleField = new UiTextField();
+		Box titleBox = createLabelAndTextFieldBox(titleLabel, titleField);
 
+		UiLabel descriptionLabel = new UiLabel(localization.getFieldLabel("inputCustomFieldsDescription"));
+		descriptionField = new UiTextField();
+		Box descriptionBox = createLabelAndTextFieldBox(descriptionLabel, descriptionField);
+		
 		JPanel customFieldsPanel = new JPanel();
 		customFieldsPanel.setBorder(new EmptyBorder(10,10,10,10));
 		customFieldsPanel.setLayout(new BoxLayout(customFieldsPanel, BoxLayout.Y_AXIS));
+
+		customFieldsPanel.add(titleBox);
+		customFieldsPanel.add(descriptionBox);
 		customFieldsPanel.add(label);
 		Box topBox = Box.createHorizontalBox();
 		Utilities.addComponentsRespectingOrientation(topBox, new Component[] {new UiLabel(localization.getFieldLabel("CustomXMLTopSection")), Box.createHorizontalGlue()});
@@ -141,6 +152,17 @@ public class UiCustomFieldsDlg extends JDialog
 		setResizable(true);
 	}
 
+	private Box createLabelAndTextFieldBox(UiLabel label, UiTextField textField)
+	{
+		Box box = Box.createHorizontalBox();
+		box.add(label);
+		box.add(Box.createHorizontalGlue());
+		box.add(new UiLabel(" "));
+		box.add(Box.createHorizontalGlue());
+		box.add(textField);
+		return box;
+	}
+	
 	public void setFocusToInputField()
 	{
 		topSectionXmlTextArea.requestFocus();
@@ -162,6 +184,8 @@ public class UiCustomFieldsDlg extends JDialog
 					return;
 				topSectionXmlResult = topText;
 				bottomSectionXmlResult = bottomText;
+				titleResult = titleField.getText();
+				descriptionResult = descriptionField.getText();
 			} 
 			catch (Exception e) 
 			{
@@ -221,6 +245,8 @@ public class UiCustomFieldsDlg extends JDialog
 				{
 					topSectionXmlTextArea.setText(template.getImportedTopSectionText());
 					bottomSectionXmlTextArea.setText(template.getImportedBottomSectionText());
+					titleField.setText(template.getTitle());
+					descriptionField.setText(template.getDescription());
 					String signedBy = template.getSignedBy();
 					HashMap replacement = new HashMap();
 					replacement.put("#CreatedBy#", getCreatedBy(signedBy));
@@ -315,8 +341,8 @@ public class UiCustomFieldsDlg extends JDialog
 			
 			CustomFieldTemplate template = new CustomFieldTemplate();
 			MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
-			String formTemplateTitle = "Default Template";
-			String formTemplateDescription = "Default Description";
+			String formTemplateTitle = titleField.getText();
+			String formTemplateDescription = descriptionField.getText();
 			if(template.ExportTemplate(securityTemp, destFile, topSectionXmlTextArea.getText(), bottomSectionXmlTextArea.getText(), formTemplateTitle, formTemplateDescription))
 			{
 				mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
@@ -499,11 +525,15 @@ public class UiCustomFieldsDlg extends JDialog
 		return false;
 	}
 
+	UiTextField titleField;
+	UiTextField descriptionField;
 	UiTextArea topSectionXmlTextArea;
 	UiTextArea bottomSectionXmlTextArea;
 	UiFontEncodingHelper fontHelper;
 	String topSectionXmlResult = null;
 	String bottomSectionXmlResult = null;
+	String titleResult = null;
+	String descriptionResult = null;
 	UiMainWindow mainWindow;
 	MartusCrypto security;
 
