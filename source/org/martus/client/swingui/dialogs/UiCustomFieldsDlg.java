@@ -28,6 +28,7 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.Component;
 import java.awt.ComponentOrientation;
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -52,13 +53,16 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.clientside.FormatFilter;
 import org.martus.clientside.MtfAwareLocalization;
+import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.FieldCollection;
+import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.FieldDeskKeys;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.fieldspec.BulletinFieldSpecs;
 import org.martus.common.fieldspec.CustomFieldError;
 import org.martus.common.fieldspec.CustomFieldTemplate;
@@ -94,6 +98,10 @@ public class UiCustomFieldsDlg extends JDialog
 		importTemplate.addActionListener(new ImportTemplateHandler());
 		JButton exportTemplate = new UiButton(localization.getButtonLabel("customExport"));
 		exportTemplate.addActionListener(new ExportTemplateHandler());
+		JButton sendTemplateToServer = new UiButton(localization.getButtonLabel("customSendToServer"));
+		sendTemplateToServer.addActionListener(new SendTemplateToServerHandler());
+		
+		
 
 		
 		JButton ok = new UiButton(localization.getButtonLabel("input" + baseTag + "ok"));
@@ -107,6 +115,7 @@ public class UiCustomFieldsDlg extends JDialog
 		vBox.add(defaults);
 		vBox.add(exportTemplate);
 		vBox.add(importTemplate);
+		vBox.add(sendTemplateToServer);
 		
 		Box buttons = Box.createHorizontalBox();
 		Component buttonsToAdd[] = {vBox, Box.createHorizontalGlue(), ok, cancel, help};  
@@ -322,6 +331,8 @@ public class UiCustomFieldsDlg extends JDialog
 		}
 	}
 
+	
+	
 	class ExportTemplateHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
@@ -354,28 +365,48 @@ public class UiCustomFieldsDlg extends JDialog
 				mainWindow.notifyDlg("ErrorExportingCustomizationTemplate");
 			}
 		}
+	}
 
-		private void saveTemplateOnServer(String formTemplateTitle,
-				String formTemplateDescription)
+	class SendTemplateToServerHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
 		{
+			String topXml = topSectionXmlTextArea.getText();
+			String bottomXml = bottomSectionXmlTextArea.getText();
+			if(!validateXml(topXml, bottomXml))
+			{
+				mainWindow.notifyDlg("ErrorExportingCustomizationTemplate");
+				return;
+			}
+			if(!checkForDuplicateLabels())
+				return;
 			try
 			{
-				FieldCollection specTop = new FieldCollection(FieldCollection.parseXml(topSectionXmlTextArea.getText()));
-				FieldCollection specBottom = new FieldCollection(FieldCollection.parseXml(bottomSectionXmlTextArea.getText()));
-				CustomFieldTemplate template1 = new CustomFieldTemplate(formTemplateTitle, formTemplateDescription, specTop, specBottom);
+				FieldCollection specTop = new FieldCollection(FieldCollection.parseXml(topXml));
+				FieldCollection specBottom = new FieldCollection(FieldCollection.parseXml(bottomXml));
+				CustomFieldTemplate template1 = new CustomFieldTemplate(titleField.getText(), descriptionField.getText(), specTop, specBottom);
 				mainWindow.getApp().putFormTemplateOnServer(template1);
-				Vector returnedListOfTemplatesFromServer = mainWindow.getApp().getListOfFormTemplatesOnServer(mainWindow.getApp().getAccountId());
-				String title = (String)returnedListOfTemplatesFromServer.get(0);
-				String description = (String)returnedListOfTemplatesFromServer.get(1);
-				CustomFieldTemplate returnedTemplate = mainWindow.getApp().getFormTemplateOnServer(mainWindow.getApp().getAccountId(), title);
-				String returnedTitle = returnedTemplate.getTitle();
-				String returnedDescription = returnedTemplate.getDescription();
+				mainWindow.notifyDlg("TemplateSavedToServer");
+			} 
+			catch (ServerNotAvailableException e)
+			{
+				mainWindow.notifyDlgBeep("ServerNotAvailable");
 			} 
 			catch (Exception e)
 			{
+				MartusLogger.logException(e);
+				mainWindow.notifyDlgBeep("ErrorSavingTemplateToServer");
 			}
+
+			//Vector returnedListOfTemplatesFromServer = mainWindow.getApp().getListOfFormTemplatesOnServer(mainWindow.getApp().getAccountId());
+			//String title = (String)returnedListOfTemplatesFromServer.get(0);
+			//String description = (String)returnedListOfTemplatesFromServer.get(1);
+			//CustomFieldTemplate returnedTemplate = mainWindow.getApp().getFormTemplateOnServer(mainWindow.getApp().getAccountId(), title);
+			//String returnedTitle = returnedTemplate.getTitle();
+			//String returnedDescription = returnedTemplate.getDescription();
 		}
 	}
+	
 	
 	class CustomHelpHandler implements ActionListener
 	{
