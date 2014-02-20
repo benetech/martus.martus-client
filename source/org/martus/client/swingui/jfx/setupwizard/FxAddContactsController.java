@@ -38,6 +38,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
@@ -58,7 +59,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		contactsTableId.setVisible(false);
+		contactsTable.setVisible(false);
 		
 		contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("contactName"));
 		publicCodeColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("publicCode"));
@@ -66,7 +67,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
 		publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
 		
-		contactsTableId.setItems(data);
+		contactsTable.setItems(data);
 	}
 	
 	@FXML
@@ -127,7 +128,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	}
 	
 	@FXML
-	private TableView<ContactsTableData> contactsTableId;
+	private TableView<ContactsTableData> contactsTable;
 	
 	@FXML
 	private TableColumn<ContactsTableData, String> contactNameColumn;
@@ -136,7 +137,10 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	private TableColumn<ContactsTableData, String> publicCodeColumn;
 	
 	@FXML
-	private Button addRowButtonId;
+	private TextField accessTokenField;
+	
+	@FXML
+	private Button addContactButton;
 	
 	private ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
 }
