@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -17,17 +17,20 @@
 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
   </rowConstraints>
-<children><Label text="Contact Nickname" /><TextField fx:id="conactNicknameField" promptText="create contact nickname" GridPane.columnIndex="1" /><Label text="Access Token" GridPane.rowIndex="1" /><TextField fx:id="accessTokenField" promptText="enter contact's access token" GridPane.columnIndex="1" GridPane.rowIndex="1" /><Button mnemonicParsing="false" onAction="#getPublicCode" text="Get Public Code" GridPane.columnIndex="1" GridPane.rowIndex="2" /><HBox GridPane.columnIndex="1" GridPane.rowIndex="4">
-<children><Button mnemonicParsing="false" text="Cancel">
+<children>
+<Label text="Public Code:" />
+<Label fx:id="contactPublicCodeLabel" GridPane.columnIndex="1" />
+
+<HBox GridPane.columnIndex="1" GridPane.rowIndex="4">
+<children><Button mnemonicParsing="false" onAction="#cancelVerify" text="Cancel">
 <HBox.margin>
 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-</HBox.margin></Button><Button mnemonicParsing="false" onAction="#addContact" text="Add">
-<HBox.margin>
-<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-</HBox.margin></Button><Button mnemonicParsing="false" onAction="#verifiedContact" text="Verified">
+</HBox.margin></Button><Button mnemonicParsing="false" onAction="#verifyContact" text="Verify Contact">
 <HBox.margin>
 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
 </HBox.margin></Button>
-</children></HBox><Label GridPane.columnSpan="2" GridPane.rowIndex="3" />
+</children>
+</HBox>
+
 </children>
 </GridPane>
