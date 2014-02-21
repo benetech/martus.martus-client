@@ -69,7 +69,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		contactsTable.setVisible(false);
+		publicCodeColumn.setEditable(false);
 		
 		contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("contactName"));
 		publicCodeColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("publicCode"));
@@ -77,8 +77,8 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
 		publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
 		
-		loadExistingContactData();
 		contactsTable.setItems(data);
+		loadExistingContactData();
 
 		updateAddContactButtonState();
 		
@@ -248,13 +248,15 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	
 	private void loadExistingContactData()
 	{
-		// FIXME: Not yet working, but shows the direction I'm heading
-//		String name = "Elmer Fudd";
-//		String accountId = "1234";
-//		boolean canSendTo = false;
-//		boolean canReceiveFrom = true;
-//		ContactsTableData contactData = new ContactsTableData(name, accountId, canSendTo, canReceiveFrom); 
-//		data.add(contactData);
+		data.clear();
+		
+		// FIXME: Replace this fake data with real data
+		String name = "Elmer Fudd";
+		String publicCode = "1234";
+		boolean canSendTo = false;
+		boolean canReceiveFrom = true;
+		ContactsTableData contactData = new ContactsTableData(name, publicCode, canSendTo, canReceiveFrom); 
+		data.add(contactData);
 	}
 
 	@FXML
