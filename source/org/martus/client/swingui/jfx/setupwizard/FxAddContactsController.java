@@ -38,6 +38,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -49,8 +50,13 @@ import javafx.stage.Stage;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxStage;
+import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusAccountAccessToken;
+import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
+import org.martus.common.MartusAccountAccessToken.TokenNotFoundException;
 import org.martus.common.MartusLogger;
+import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
+import org.martus.common.crypto.MartusSecurity;
 
 public class FxAddContactsController extends AbstractFxSetupWizardController implements Initializable
 {
@@ -80,10 +86,36 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	@FXML
 	public void addContact()
 	{
-		showAddContactsDialog();
+		try
+		{
+			MartusAccountAccessToken token = new MartusAccountAccessToken(accessTokenField.getText());
+			String contactAccountId = getApp().getMartusAccountIdFromAccessTokenOnServer(token);
+			showAddContactsDialog(contactAccountId);
+		} 
+		catch (TokenInvalidException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		catch (TokenNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		catch (MartusSignatureException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		catch (ServerNotAvailableException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
-	private void showAddContactsDialog()
+	private void showAddContactsDialog(String contactAccountId)
 	{
 		try
 		{
@@ -92,6 +124,9 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 			fl.setController(this);
 			fl.load();
 			Parent root = fl.getRoot();
+			
+			String contactPublicCode = MartusSecurity.computeFormattedPublicCode(contactAccountId);
+			contactPublicCodeLabel.setText(contactPublicCode);
 			
 			popupStage = new Stage();
 			popupStage.setTitle("Add Contact");
@@ -187,6 +222,9 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	
 	@FXML
 	private Button addContactButton;
+	
+	@FXML
+	private Label contactPublicCodeLabel;
 	
 	private ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
 	private Stage popupStage;
