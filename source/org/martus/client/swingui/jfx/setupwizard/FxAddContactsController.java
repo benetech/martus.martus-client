@@ -28,6 +28,8 @@ package org.martus.client.swingui.jfx.setupwizard;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -36,9 +38,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
@@ -47,7 +50,14 @@ import javafx.stage.Stage;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxStage;
+import org.martus.common.Exceptions.ServerNotAvailableException;
+import org.martus.common.MartusAccountAccessToken;
+import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
+import org.martus.common.MartusAccountAccessToken.TokenNotFoundException;
 import org.martus.common.MartusLogger;
+import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
+import org.martus.common.crypto.MartusSecurity;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class FxAddContactsController extends AbstractFxSetupWizardController implements Initializable
 {
@@ -59,44 +69,72 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		contactsTableId.setVisible(false);
+		publicCodeColumn.setEditable(false);
 		
 		contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("contactName"));
 		publicCodeColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("publicCode"));
-		sentToColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("sentTo"));
-		receivedFromColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("receivedFrom"));
 		
 		contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
 		publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
-		sentToColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(sentToColumn));
-		receivedFromColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(receivedFromColumn));
 		
-		contactsTableId.setItems(data);
+		contactsTable.setItems(data);
+		loadExistingContactData();
+
+		updateAddContactButtonState();
+		
+		accessTokenField.textProperty().addListener(new AccessTokenChangeHandler());
 	}
 	
 	@FXML
-	public void addRow()
-	{
-		showAddContactsDialog();
-	}
-
-	private void showAddContactsDialog()
+	public void addContact()
 	{
 		try
 		{
+			MartusAccountAccessToken token = new MartusAccountAccessToken(accessTokenField.getText());
+			String contactAccountId = getApp().getMartusAccountIdFromAccessTokenOnServer(token);
+			showAddContactsDialog(contactAccountId);
+		} 
+		catch (TokenInvalidException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		catch (TokenNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		catch (MartusSignatureException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		catch (ServerNotAvailableException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void showAddContactsDialog(String contactAccountId)
+	{
+		try
+		{
+			Stage popupStage = new Stage();
+			popupStage.setTitle("Add Contact");
+	        popupStage.initModality(Modality.WINDOW_MODAL);
+	       
 			FXMLLoader fl = new FXMLLoader();
-			fl.setLocation(FxStage.class.getResource("setupwizard/SetupAddContactPopup.fxml"));
-			fl.setController(this);
+			PopupController popupController = new PopupController(getMainWindow(), popupStage, contactAccountId);
+			fl.setController(popupController);
+			fl.setLocation(FxStage.class.getResource(popupController.getFxmlLocation()));
 			fl.load();
 			Parent root = fl.getRoot();
 			
-			Stage stage = new Stage();
-			stage.setTitle("Add Contact");
-	        stage.initModality(Modality.WINDOW_MODAL);
-	       
 	        Scene scene = new Scene(root);
-	        stage.setScene(scene);
-	        stage.showAndWait();
+	        popupStage.setScene(scene);
+	        popupStage.showAndWait();
 		}
 		catch (Exception e)
 		{
@@ -104,21 +142,55 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		}
 	}
 	
-	@FXML
-	public void getPublicCode()
+	public static class PopupController extends FxController implements Initializable
 	{
-	}
-	
-	@FXML
-	public void addContact()
-	{
-	}
-	
-	@FXML
-	public void verifiedContact()
-	{
-	}
+		public PopupController(UiMainWindow mainWindowToUse, Stage popupStage, String contactAccountIdToUse)
+		{
+			super(mainWindowToUse);
+			ourStage = popupStage;
+			contactAccountId = contactAccountIdToUse;
+		}
+		
+		@Override
+		public void initialize(URL arg0, ResourceBundle arg1)
+		{
+			try
+			{
+				String contactPublicCode = MartusSecurity.computeFormattedPublicCode(contactAccountId);
+				contactPublicCodeLabel.setText(contactPublicCode);
+			} 
+			catch (InvalidBase64Exception e)
+			{
+				MartusLogger.logException(e);
+				System.exit(1);
+			}
+		}
+		
+		@Override
+		public String getFxmlLocation()
+		{
+			return "setupwizard/SetupAddContactPopup.fxml";
+		}
 
+		@FXML
+		public void cancelVerify()
+		{
+			ourStage.close();
+		}
+
+		@FXML
+		public void verifyContact()
+		{
+			ourStage.close();
+		}
+
+		@FXML
+		private Label contactPublicCodeLabel;
+		
+		private Stage ourStage;
+		private String contactAccountId;
+	}
+	
 	@Override
 	public String getFxmlLocation()
 	{
@@ -131,8 +203,64 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		return new FxSetupImportFormTemplates(getMainWindow());
 	}
 	
+	protected class AccessTokenChangeHandler implements ChangeListener<String>
+	{
+		@Override
+		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
+		{
+			updateAddContactButtonState();
+		}
+
+	}
+	
+	protected void updateAddContactButtonState()
+	{
+		String candidateToken = accessTokenField.getText();
+		boolean canAdd = (isValidAccessToken(candidateToken));
+
+		Button nextButton = getWizardNavigationHandler().getNextButton();
+		if(candidateToken.length() == 0)
+		{
+			addContactButton.setDefaultButton(false);
+			nextButton.setDefaultButton(true);
+		}
+		else if(canAdd)
+		{
+			nextButton.setDefaultButton(false);
+			addContactButton.setDefaultButton(true);
+		}
+		else
+		{
+			nextButton.setDefaultButton(false);
+			addContactButton.setDefaultButton(true);
+		}
+
+		addContactButton.setDisable(!canAdd);
+	}
+
+	private boolean isValidAccessToken(String tokenToValidate)
+	{
+		if(tokenToValidate.length() == 0)
+			return false;
+		
+		return MartusAccountAccessToken.isTokenValid(tokenToValidate);
+	}
+	
+	private void loadExistingContactData()
+	{
+		data.clear();
+		
+		// FIXME: Replace this fake data with real data
+		String name = "Elmer Fudd";
+		String publicCode = "1234";
+		boolean canSendTo = false;
+		boolean canReceiveFrom = true;
+		ContactsTableData contactData = new ContactsTableData(name, publicCode, canSendTo, canReceiveFrom); 
+		data.add(contactData);
+	}
+
 	@FXML
-	private TableView<ContactsTableData> contactsTableId;
+	private TableView<ContactsTableData> contactsTable;
 	
 	@FXML
 	private TableColumn<ContactsTableData, String> contactNameColumn;
@@ -141,16 +269,10 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	private TableColumn<ContactsTableData, String> publicCodeColumn;
 	
 	@FXML
-	private TableColumn<ContactsTableData, Boolean> sentToColumn;
+	private TextField accessTokenField;
 	
 	@FXML
-	private TableColumn<ContactsTableData, Boolean> receivedFromColumn;
-	
-	@FXML
-	private TableColumn<ContactsTableData, Button> removeColumn;
-	
-	@FXML
-	private Button addRowButtonId;
+	private Button addContactButton;
 	
 	private ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
 }

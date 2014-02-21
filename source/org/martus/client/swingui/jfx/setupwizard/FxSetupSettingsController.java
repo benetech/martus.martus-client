@@ -49,27 +49,40 @@ public class FxSetupSettingsController extends AbstractFxSetupWizardController i
 		super(mainWindowToUse);
 	}
 	
+	public void initialize(URL url, ResourceBundle resourceBundle)
+	{
+		ObservableList<ChoiceItem> dateFormatChoices = getDateFormatChoices();
+		dateFormatSequenceDropDown.setItems(FXCollections.observableArrayList(dateFormatChoices));
+		String dateFormatCode = getLocalization().getMdyOrder();
+		selectItemByCode(dateFormatSequenceDropDown, dateFormatCode);
+		
+		ObservableList<ChoiceItem> dateDelimeterChoices = getDateDelimeterChoices();
+		dateDelimeterComboBox.setItems(FXCollections.observableArrayList(dateDelimeterChoices));
+	
+		String dateDelimeterCode = new String(new char[] {getLocalization().getDateDelimiter()});
+		selectItemByCode(dateDelimeterComboBox, dateDelimeterCode);
+	}
+
+	private void selectItemByCode(ComboBox comboBox, String code)
+	{
+		ObservableList<ChoiceItem> choices = comboBox.getItems();
+		for(int i = 0; i < choices.size(); ++i)
+			if(choices.get(i).getCode().equals(code))
+				comboBox.getSelectionModel().select(i);
+	}
+	
 	@Override
 	public void nextWasPressed(ActionEvent event) 
 	{
 		//NOTE: This might belong somewhere else, but for now it's important to set it 
-		getMainWindow().getApp().getConfigInfo().setForceBulletinsAllPrivate(true);
+		getApp().getConfigInfo().setForceBulletinsAllPrivate(true);
 		
-		getMainWindow().getApp().getConfigInfo().setCheckForFieldOfficeBulletins(userTorCheckBox.isSelected());
+		getApp().getConfigInfo().setCheckForFieldOfficeBulletins(userTorCheckBox.isSelected());
 		
 		getLocalization().setMdyOrder(dateFormatSequenceDropDown.getSelectionModel().getSelectedItem().getCode());
 		String delimiter = dateDelimeterComboBox.getSelectionModel().getSelectedItem().getCode();
 		getLocalization().setDateDelimiter(delimiter.charAt(0));
 		getMainWindow().saveConfigInfo();
-	}
-	
-	public void initialize(URL url, ResourceBundle resourceBundle)
-	{
-		dateFormatSequenceDropDown.setItems(FXCollections.observableArrayList(getDateFormatChoices()));
-		dateFormatSequenceDropDown.getSelectionModel().select(0);
-		
-		dateDelimeterComboBox.setItems(FXCollections.observableArrayList(getDateDelimeterChoices()));
-		dateDelimeterComboBox.getSelectionModel().select(0);
 	}
 	
 	private ObservableList<ChoiceItem> getDateFormatChoices()
