@@ -29,6 +29,8 @@ package org.martus.client.test;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -58,7 +60,11 @@ import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.PasswordHelper;
 import org.martus.clientside.UiLocalization;
 import org.martus.clientside.test.ServerSideNetworkHandlerNotAvailable;
+import org.martus.common.ContactKey;
+import org.martus.common.ContactKeys;
 import org.martus.common.FieldCollection;
+import org.martus.common.FieldDeskKey;
+import org.martus.common.FieldDeskKeys;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
@@ -886,6 +892,212 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 	}
 	
+	public void testContactInfoMigrationHqFdToContacts() throws Exception
+	{
+		TRACE_BEGIN("testContactInfoMigrationHqFdToContacts");
+		File file = appWithAccount.getConfigInfoFile();
+		file.delete();
+		assertEquals("delete didn't work", false, file.exists());
+		createOldConfigInfoFileWithSampleData(file);
+		appWithAccount.loadConfigInfo();
+		ConfigInfo config = appWithAccount.getConfigInfo();
+		assertTrue("ConfigInfo file wasn't converted?", config.getVersion() >= ConfigInfo.VERSION_WITH_CONTACT_KEYS);
+		assertEquals("LegacyHQ should be blank", "", config.getLegacyHQKey());
+		assertEquals("Old Default HQ Keys should be blank", "", config.getDefaultHQKeysXml());
+		assertEquals("Old HQ's should be blank", "", config.getAllHQKeysXml());
+		assertEquals("Old FieldDesk's should be blank", "", config.getFieldDeskKeysXml());
+		assertEquals("New Contact Keys does not match?", getNewConfigInfoContactsKeysXml(), config.getContactKeysXml());
+		TRACE_END();
+	}
+	
+	public void testContactInfoMigrationHqFdWithSelfIncludedAsHQandFD() throws Exception
+	{
+		TRACE_BEGIN("testContactInfoMigrationHqFdWithSelfIncludedAsHQandFD");
+		File file = appWithAccount.getConfigInfoFile();
+		file.delete();
+		assertEquals("delete didn't work", false, file.exists());
+		String ourClientPublicKey = appWithAccount.getAccountId();
+		createOldConfigInfoFileWithSelfIncludedAsHQandFD(file, ourClientPublicKey);
+		appWithAccount.loadConfigInfo();
+		ConfigInfo config = appWithAccount.getConfigInfo();
+		assertTrue("ConfigInfo file wasn't converted?", config.getVersion() >= ConfigInfo.VERSION_WITH_CONTACT_KEYS);
+		assertEquals("LegacyHQ should be blank", "", config.getLegacyHQKey());
+		assertEquals("Old HQ's should be blank", "", config.getAllHQKeysXml());
+		assertEquals("Old Default HQ's should be blank", "", config.getDefaultHQKeysXml());
+		assertEquals("Old FieldDesk's should be blank", "", config.getFieldDeskKeysXml());
+		HeadquartersKeys allHQs = appWithAccount.getAllHQKeys();
+		assertEquals("Should only have 3 keys (HQ1, HQ2, and LegacyHQ)", 3, allHQs.size());
+		assertFalse("Should not incluse ourself", allHQs.containsKey(ourClientPublicKey));
+		HeadquartersKeys allDefaultHQs = appWithAccount.getDefaultHQKeys();
+		assertEquals("Should only have 2 default keys (HQ1 and LegacyHQ)", 2, allDefaultHQs.size());
+		assertFalse("Should not incluse ourself as default", allDefaultHQs.containsKey(ourClientPublicKey));
+		FieldDeskKeys allFDs = appWithAccount.getFieldDeskKeys();
+		assertEquals("Should only have 2 FD keys", 2, allFDs.size());
+		assertFalse("Should not incluse ourself as a FD", allFDs.containsKey(ourClientPublicKey));
+		
+		TRACE_END();
+	}
+
+	public void createOldConfigInfoFileWithSampleData(File file)
+			throws Exception
+		{
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			DataOutputStream out = new DataOutputStream(outputStream);
+			out.writeShort(ConfigInfo.VERSION_WITH_CONTACT_KEYS - 1);
+			out.writeUTF("author");
+			out.writeUTF("org");
+			out.writeUTF("email");
+			out.writeUTF("web");
+			out.writeUTF("phone");
+			out.writeUTF("address\nline2");
+			out.writeUTF("server name");
+			out.writeUTF("details\ndetail2");
+			out.writeUTF(getLegacyHQ());
+			out.writeUTF("server pub key");
+			out.writeBoolean(false);
+			out.writeUTF("I am compliant");
+			out.writeUTF("language;author;custom,Custom Field;title;entrydate");
+			out.writeUTF("");
+			out.writeBoolean(true);
+			out.writeBoolean(true);
+			out.writeBoolean(true);
+			out.writeUTF(getOldConfigInfoHQKeys());
+			out.writeBoolean(true);
+			String emptyDefaultHQKeys = "";
+			out.writeUTF(emptyDefaultHQKeys);
+			out.writeUTF("");
+			out.writeBoolean(true);
+			ConfigInfo.writeLongString(out, "");
+			ConfigInfo.writeLongString(out, "");
+			out.writeBoolean(false);
+			ConfigInfo.writeLongString(out, getOldConfigInfoFieldDeskKeysXml());
+			out.writeBoolean(true);
+			out.writeBoolean(false);
+			out.writeInt(0);
+			out.flush();
+			out.close();
+			byte[] encryptedInfo = outputStream.toByteArray();
+			File signatureFile = appWithAccount.getConfigInfoSignatureFile();
+			appWithAccount.encryptAndWriteFileAndSignatureFile(file, signatureFile, encryptedInfo);
+		}
+
+	public void createOldConfigInfoFileWithSelfIncludedAsHQandFD(File file, String clientPublicKey)
+			throws Exception
+		{
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			DataOutputStream out = new DataOutputStream(outputStream);
+			out.writeShort(ConfigInfo.VERSION_WITH_CONTACT_KEYS - 1);
+			out.writeUTF("author");
+			out.writeUTF("org");
+			out.writeUTF("email");
+			out.writeUTF("web");
+			out.writeUTF("phone");
+			out.writeUTF("address\nline2");
+			out.writeUTF("server name");
+			out.writeUTF("details\ndetail2");
+			out.writeUTF(getLegacyHQ());
+			out.writeUTF("server pub key");
+			out.writeBoolean(false);
+			out.writeUTF("I am compliant");
+			out.writeUTF("language;author;custom,Custom Field;title;entrydate");
+			out.writeUTF("");
+			out.writeBoolean(true);
+			out.writeBoolean(true);
+			out.writeBoolean(true);
+			out.writeUTF(getOldConfigInfoHQKeysWithKey(clientPublicKey));
+			out.writeBoolean(true);
+			out.writeUTF(getOldDefaultHQWithKey(clientPublicKey));
+			out.writeUTF("");
+			out.writeBoolean(true);
+			ConfigInfo.writeLongString(out, "");
+			ConfigInfo.writeLongString(out, "");
+			out.writeBoolean(false);
+			ConfigInfo.writeLongString(out, getOldConfigInfoFieldDeskKeysWithKeyXml(clientPublicKey));
+			out.writeBoolean(true);
+			out.writeBoolean(false);
+			out.writeInt(0);
+			out.flush();
+			out.close();
+			byte[] encryptedInfo = outputStream.toByteArray();
+			File signatureFile = appWithAccount.getConfigInfoSignatureFile();
+			appWithAccount.encryptAndWriteFileAndSignatureFile(file, signatureFile, encryptedInfo);
+		}
+
+	private String getLegacyHQ()
+	{
+		return "LegacyHQ";
+	}
+	private String getOldConfigInfoHQKeys()
+	{
+		Vector keys = new Vector();
+		keys.add(new HeadquartersKey(hqKey1, hqKeylabel1));
+		keys.add(new HeadquartersKey(hqKey2, hqKeylabel2));
+		HeadquartersKeys contactKeys = new HeadquartersKeys(keys);
+		return contactKeys.toStringWithLabel();
+	}
+	
+	
+	private String getOldConfigInfoHQKeysWithKey(String clientKeyToIncludeAswell)
+	{
+		Vector keys = new Vector();
+		keys.add(new HeadquartersKey(hqKey1, hqKeylabel1));
+		keys.add(new HeadquartersKey(hqKey2, hqKeylabel2));
+		keys.add(new HeadquartersKey(clientKeyToIncludeAswell, "Our self"));
+		HeadquartersKeys contactKeys = new HeadquartersKeys(keys);
+		return contactKeys.toStringWithLabel();
+	}
+	
+	private String getOldDefaultHQWithKey(String clientKeyToIncludeAswell)
+	{
+		Vector keys = new Vector();
+		keys.add(new HeadquartersKey(hqKey1, hqKeylabel1));
+		keys.add(new HeadquartersKey(clientKeyToIncludeAswell, "Our self"));
+		HeadquartersKeys contactKeys = new HeadquartersKeys(keys);
+		return contactKeys.toStringWithLabel();
+	}
+
+	private String getOldConfigInfoFieldDeskKeysXml()
+	{
+		Vector keys = new Vector();
+		keys.add(new FieldDeskKey(fdKey1, fdKeyLabel1));
+		keys.add(new FieldDeskKey(fdKey2, fdKeyLabel2));
+		FieldDeskKeys fieldDeskKeys = new FieldDeskKeys(keys);
+		return fieldDeskKeys.toStringWithLabel();
+	}
+
+	private String getOldConfigInfoFieldDeskKeysWithKeyXml(String clientKeyToIncludeAswell)
+	{
+		Vector keys = new Vector();
+		keys.add(new FieldDeskKey(fdKey1, fdKeyLabel1));
+		keys.add(new FieldDeskKey(fdKey2, fdKeyLabel2));
+		keys.add(new FieldDeskKey(clientKeyToIncludeAswell, "Our self"));
+		FieldDeskKeys fieldDeskKeys = new FieldDeskKeys(keys);
+		return fieldDeskKeys.toStringWithLabel();
+	}
+
+	private String getNewConfigInfoContactsKeysXml()
+	{
+		Vector keys = new Vector();
+		ContactKey hqLegacyContactKey = new ContactKey(getLegacyHQ(), "");
+		hqLegacyContactKey.setCanSendTo(true);
+		hqLegacyContactKey.setSendToByDefault(true);
+		keys.add(hqLegacyContactKey);
+		ContactKey hqContactKey1 = new ContactKey(hqKey1, hqKeylabel1);
+		hqContactKey1.setCanSendTo(true);
+		keys.add(hqContactKey1);
+		ContactKey hqContactKey2 = new ContactKey(hqKey2, hqKeylabel2);
+		hqContactKey2.setCanSendTo(true);
+		keys.add(hqContactKey2);
+		ContactKey fdContactKey1 = new ContactKey(fdKey1, fdKeyLabel1);
+		fdContactKey1.setCanReceiveFrom(true);
+		keys.add(fdContactKey1);
+		ContactKey fdContactKey2 = new ContactKey(fdKey2, fdKeyLabel2);
+		fdContactKey2.setCanReceiveFrom(true);
+		keys.add(fdContactKey2);
+		ContactKeys contactKeys = new ContactKeys(keys);
+		return contactKeys.toStringWithLabel();
+	}
+	
 	public void testRemoveSpaceLikeCharactersFromTags() throws Exception
 	{
 		String tagWithSpaceLikeCharacters = "a b\u00a0c\u202fd\ufeffe\u2060f"; 
@@ -1049,8 +1261,10 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		HeadquartersKey key = new HeadquartersKey(sampleHQKey, sampleLabel);
 		keys.add(key);
 		appWithAccount.setAndSaveHQKeys(keys, keys);
-		assertEquals("Incorrect public key", sampleHQKey, appWithAccount.getLegacyHQKey());
+		assertEquals("legacy public key now Blank", "", appWithAccount.getConfigInfo().getLegacyHQKey());
 		assertEquals("Didn't save?", true, configFile.exists());
+		assertTrue("HQ Key not saved", appWithAccount.getAllHQKeys().contains(key));
+		
 	}
 	
 	public void testGetAndSetMultipleHQKeys() throws Exception
@@ -1069,7 +1283,10 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		HeadquartersKeys defaultKeys = new HeadquartersKeys(key1);
 		
 		appWithAccount.setAndSaveHQKeys(allKeys, defaultKeys);
-		assertEquals("Incorrect default public key", sampleHQKey1, appWithAccount.getLegacyHQKey());
+		assertEquals("Incorrect Legacy default public key should now be blank", "", appWithAccount.getConfigInfo().getLegacyHQKey());
+		assertTrue("public key1 not set", appWithAccount.getAllHQKeys().containsKey(sampleHQKey1));
+		assertTrue("public key2 not set", appWithAccount.getAllHQKeys().containsKey(sampleHQKey2));
+			
 		HeadquartersKeys returnedKeys = appWithAccount.getAllHQKeys();
 		assertTrue(returnedKeys.containsKey(sampleHQKey1));
 		assertTrue(returnedKeys.containsKey(sampleHQKey2));
@@ -1091,9 +1308,330 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals(0, noFallbackKeys.size());
 		HeadquartersKeys noDefaultKeys = appWithAccount.getDefaultHQKeysWithFallback();
 		assertEquals(0, noDefaultKeys.size());
+	}
+	
+	public void testGetAndSaveHQKeys() throws Exception
+	{
+		File configFile = appWithAccount.getConfigInfoFile();
+		configFile.deleteOnExit();
+		String sampleHQKey1 = "account1";
+		String sampleLabel1 = "Fred";
+		String sampleHQKey2 = "account2";
+		String sampleLabel2 = "Wilma";
+		HeadquartersKeys onlyAccount1and2areHQs = new HeadquartersKeys();
+		HeadquartersKey key1 = new HeadquartersKey(sampleHQKey1, sampleLabel1);
+		HeadquartersKey key2 = new HeadquartersKey(sampleHQKey2, sampleLabel2);
+		onlyAccount1and2areHQs.add(key1);
+		onlyAccount1and2areHQs.add(key2);
+		HeadquartersKeys defaultKeysOnlyAccount1 = new HeadquartersKeys(key1);
+		appWithAccount.setAndSaveHQKeys(onlyAccount1and2areHQs, defaultKeysOnlyAccount1);
+		ContactKeys allContacts = new ContactKeys(appWithAccount.getConfigInfo().getContactKeysXml());
+		assertEquals("Should have 2 contacts total", 2, allContacts.size());
+		HeadquartersKeys returnedHQKeys = appWithAccount.getAllHQKeys();
+		assertEquals("Should only have 2 HQ contacts now total", 2, returnedHQKeys.size());
+		assertTrue("We should still have Account1 as an HQ", returnedHQKeys.contains(key1));
+		assertTrue("We should still have Account2 as an HQ", returnedHQKeys.contains(key2));
+		
+		String sampleHQKey3 = "account3";
+		String sampleLabel3 = "Pebbles";
+		HeadquartersKey key3 = new HeadquartersKey(sampleHQKey3, sampleLabel3);
+		HeadquartersKeys onlyAccount1and3areHQs = new HeadquartersKeys();
+		onlyAccount1and3areHQs.add(key1);
+		onlyAccount1and3areHQs.add(key3);
+		appWithAccount.setAndSaveHQKeys(onlyAccount1and3areHQs, defaultKeysOnlyAccount1);
+		
+		ContactKeys allNewContacts = new ContactKeys(appWithAccount.getConfigInfo().getContactKeysXml());
+		assertEquals("Should have 3 contacts now total", 3, allNewContacts.size());
+		ContactKey contactKey1 = allNewContacts.get(0);
+		if(contactKey1.getLabel().equals(sampleLabel1))
+			verifyContactInfo(sampleHQKey1, contactKey1, true, false);
+		else if(contactKey1.getLabel().equals(sampleLabel2))
+			verifyContactInfo(sampleHQKey2, contactKey1, false, false);
+		else if(contactKey1.getLabel().equals(sampleLabel3))
+			verifyContactInfo(sampleHQKey3, contactKey1, true, false);
+		else
+			fail("ContactKey1 not found?");
+		
+		ContactKey contactKey2 = allNewContacts.get(1);
+		if(contactKey2.getLabel().equals(sampleLabel1))
+			verifyContactInfo(sampleHQKey1, contactKey2, true, false);
+		else if(contactKey2.getLabel().equals(sampleLabel2))
+			verifyContactInfo(sampleHQKey2, contactKey2, false, false);
+		else if(contactKey2.getLabel().equals(sampleLabel3))
+			verifyContactInfo(sampleHQKey3, contactKey2, true, false);
+		else
+			fail("ContactKey2 not found?");
 
+		ContactKey contactKey3 = allNewContacts.get(2);
+		if(contactKey3.getLabel().equals(sampleLabel1))
+			verifyContactInfo(sampleHQKey1, contactKey3, true, false);
+		else if(contactKey3.getLabel().equals(sampleLabel2))
+			verifyContactInfo(sampleHQKey2, contactKey3, false, false);
+		else if(contactKey3.getLabel().equals(sampleLabel3))
+			verifyContactInfo(sampleHQKey3, contactKey3, true, false);
+		else
+			fail("ContactKey3 not found?");
+		
+		HeadquartersKeys returnedKeys = appWithAccount.getAllHQKeys();
+		assertTrue("We should still have Account1 as an HQ", returnedKeys.contains(key1));
+		assertTrue("We should now have also Account3 as an HQ", returnedKeys.contains(key3));
+		assertFalse("We should not have Account2 anymore as an HQ", returnedKeys.contains(key2));
+		
+		String sampleHQKey4 = "account4";
+		String sampleLabel4 = "Dino";
+		HeadquartersKey key4 = new HeadquartersKey(sampleHQKey4, sampleLabel4);
+		HeadquartersKeys newDefaultKey4 = new HeadquartersKeys();
+		newDefaultKey4.add(key4);
+		appWithAccount.setAndSaveHQKeys(onlyAccount1and3areHQs, newDefaultKey4);
+		HeadquartersKeys returnedKeysAfterNewDefaultAccountWasntIncluded = appWithAccount.getAllHQKeys();
+		assertTrue("We should still have Account1 as an HQ", returnedKeysAfterNewDefaultAccountWasntIncluded.contains(key1));
+		assertTrue("We should still have Account3 as an HQ", returnedKeysAfterNewDefaultAccountWasntIncluded.contains(key3));
+		assertFalse("Account 2 should still not be an HQ", returnedKeysAfterNewDefaultAccountWasntIncluded.contains(key2));
+		assertTrue("We should also have Account4 as an HQ", returnedKeysAfterNewDefaultAccountWasntIncluded.contains(key4));
+		assertEquals("We should now have 3 HQ accounts", 3, returnedKeysAfterNewDefaultAccountWasntIncluded.size());
+		
+		HeadquartersKeys onlyAccount3isHQbutDefaultIsAccount1 = new HeadquartersKeys();
+		onlyAccount3isHQbutDefaultIsAccount1.add(key3);
+		appWithAccount.setAndSaveHQKeys(onlyAccount3isHQbutDefaultIsAccount1, defaultKeysOnlyAccount1);
+		
+		HeadquartersKeys returnedKeysAfterDefaultWasntIncluded = appWithAccount.getAllHQKeys();
+		assertTrue("We should still have Account1 as an HQ since its a default HQ", returnedKeysAfterDefaultWasntIncluded.contains(key1));
+		assertTrue("We should still have Account3 as an HQ since its included in all HQs", returnedKeysAfterDefaultWasntIncluded.contains(key3));
+		assertFalse("Account 2 should not be an HQ anymore", returnedKeysAfterDefaultWasntIncluded.contains(key2));
+		assertFalse("Account 4 should not be an HQ anymore", returnedKeysAfterDefaultWasntIncluded.contains(key4));
+		assertEquals("We should still only have 2 HQ accounts", 2, returnedKeysAfterDefaultWasntIncluded.size());
+		
+		FieldDeskKeys onlyAccount1and2areFDs = new FieldDeskKeys();
+		FieldDeskKey fDkey1 = new FieldDeskKey(sampleHQKey1, sampleLabel1);
+		FieldDeskKey FDkey2 = new FieldDeskKey(sampleHQKey2, sampleLabel2);
+		onlyAccount1and2areFDs.add(fDkey1);
+		onlyAccount1and2areFDs.add(FDkey2);
+		appWithAccount.setAndSaveFDKeys(onlyAccount1and2areFDs);
+		
+		ContactKeys newContactsWithFDsAndHQs = new ContactKeys(appWithAccount.getConfigInfo().getContactKeysXml());
+		assertEquals("Should have 4 contacts now total", 4, newContactsWithFDsAndHQs.size());
+		contactKey1 = newContactsWithFDsAndHQs.get(0);
+		if(contactKey1.getLabel().equals(sampleLabel1))
+			verifyContactInfo(sampleHQKey1, contactKey1, true, true);
+		else if(contactKey1.getLabel().equals(sampleLabel2))
+			verifyContactInfo(sampleHQKey2, contactKey1, false, true);
+		else if(contactKey1.getLabel().equals(sampleLabel3))
+			verifyContactInfo(sampleHQKey3, contactKey1, true, false);
+		else if(contactKey1.getLabel().equals(sampleLabel4))
+			verifyContactInfo(sampleHQKey4, contactKey1, false, false);
+		else
+			fail("ContactKey1 not found?");
+		
+		contactKey2 = newContactsWithFDsAndHQs.get(0);
+		if(contactKey2.getLabel().equals(sampleLabel1))
+			verifyContactInfo(sampleHQKey1, contactKey2, true, true);
+		else if(contactKey2.getLabel().equals(sampleLabel2))
+			verifyContactInfo(sampleHQKey2, contactKey2, false, true);
+		else if(contactKey2.getLabel().equals(sampleLabel3))
+			verifyContactInfo(sampleHQKey3, contactKey2, true, false);
+		else if(contactKey2.getLabel().equals(sampleLabel4))
+			verifyContactInfo(sampleHQKey4, contactKey2, false, false);
+		else
+			fail("ContactKey2 not found?");
+		
+		contactKey3 = newContactsWithFDsAndHQs.get(0);
+		if(contactKey3.getLabel().equals(sampleLabel1))
+			verifyContactInfo(sampleHQKey1, contactKey3, true, true);
+		else if(contactKey3.getLabel().equals(sampleLabel2))
+			verifyContactInfo(sampleHQKey2, contactKey3, false, true);
+		else if(contactKey3.getLabel().equals(sampleLabel3))
+			verifyContactInfo(sampleHQKey3, contactKey3, true, false);
+		else if(contactKey3.getLabel().equals(sampleLabel4))
+			verifyContactInfo(sampleHQKey4, contactKey3, false, false);
+		else
+			fail("ContactKey3 not found?");
+
+		ContactKey contactKey4 = newContactsWithFDsAndHQs.get(0);
+		if(contactKey4.getLabel().equals(sampleLabel1))
+			verifyContactInfo(sampleHQKey1, contactKey4, true, true);
+		else if(contactKey4.getLabel().equals(sampleLabel2))
+			verifyContactInfo(sampleHQKey2, contactKey4, false, true);
+		else if(contactKey4.getLabel().equals(sampleLabel3))
+			verifyContactInfo(sampleHQKey3, contactKey4, true, false);
+		else if(contactKey4.getLabel().equals(sampleLabel4))
+			verifyContactInfo(sampleHQKey4, contactKey4, false, false);
+		else
+			fail("ContactKey4 not found?");
 	}
 
+	public void testChangingHQLabels() throws Exception
+	{
+		File configFile = appWithAccount.getConfigInfoFile();
+		configFile.deleteOnExit();
+		String sampleHQKey1 = "account1";
+		String sampleLabel1 = "Fred";
+		String sampleHQKey2 = "account2";
+		String sampleLabel2 = "Wilma";
+		HeadquartersKey key1 = new HeadquartersKey(sampleHQKey1, sampleLabel1);
+		HeadquartersKey key2 = new HeadquartersKey(sampleHQKey2, sampleLabel2);
+
+		HeadquartersKeys key1andkey2 = new HeadquartersKeys();
+		key1andkey2.add(key1);
+		key1andkey2.add(key2);
+		HeadquartersKeys defaultKeys = new HeadquartersKeys();
+		defaultKeys.add(key1);
+		appWithAccount.setAndSaveHQKeys(key1andkey2, defaultKeys);
+		HeadquartersKeys returnedKeysAfterAddingH1andH2asBothHQandDefault = appWithAccount.getAllHQKeys();
+
+		assertTrue("We should still have Account1 as HQ anddefault HQ", returnedKeysAfterAddingH1andH2asBothHQandDefault.contains(key1));
+		assertTrue("We should still have Account2 as HQ anddefault HQ", returnedKeysAfterAddingH1andH2asBothHQandDefault.contains(key2));
+		assertEquals("We should still only have 2 HQ accounts", 2, returnedKeysAfterAddingH1andH2asBothHQandDefault.size());
+		HeadquartersKey testKey = returnedKeysAfterAddingH1andH2asBothHQandDefault.get(0);
+		assertEquals("Key1 Label not correct?",sampleLabel1, testKey.getLabel());
+		String newLabel1 = "Flinstone";
+
+		key1.setLabel(newLabel1);
+		HeadquartersKeys updatedLabelKey1andkey2 = new HeadquartersKeys();
+		updatedLabelKey1andkey2.add(key1);
+		updatedLabelKey1andkey2.add(key2);
+
+		HeadquartersKeys updatedLabelDefaultKey1 = new HeadquartersKeys();
+		updatedLabelDefaultKey1.add(key1);
+
+		
+		appWithAccount.setAndSaveHQKeys(updatedLabelKey1andkey2, updatedLabelDefaultKey1);
+		HeadquartersKeys returnedKeysAfterUpdatingH1andH2asBothHQandDefault = appWithAccount.getAllHQKeys();
+		
+		assertTrue("We should still have Account1 as HQ anddefault HQ", returnedKeysAfterUpdatingH1andH2asBothHQandDefault.contains(key1));
+		assertTrue("We should still have Account2 as HQ anddefault HQ", returnedKeysAfterUpdatingH1andH2asBothHQandDefault.contains(key2));
+		assertEquals("We should still only have 2 HQ accounts", 2, returnedKeysAfterUpdatingH1andH2asBothHQandDefault.size());
+		HeadquartersKey testKey2 = returnedKeysAfterUpdatingH1andH2asBothHQandDefault.get(0);
+		assertEquals("Key1 Label not changed?",newLabel1, testKey2.getLabel());
+
+		HeadquartersKeys key1andUpdatedLabelkey2 = new HeadquartersKeys();
+		String UpdatedKey2Label = "Rubble";
+		key2.setLabel(UpdatedKey2Label);
+		key1andUpdatedLabelkey2.add(key1);
+		key1andUpdatedLabelkey2.add(key2);
+		appWithAccount.setAndSaveHQKeys(key1andUpdatedLabelkey2, updatedLabelDefaultKey1);
+		HeadquartersKeys returnedKeysAfterUpdatingKey2Label = appWithAccount.getAllHQKeys();
+		
+		assertTrue("We should still have Account1 as HQ anddefault HQ", returnedKeysAfterUpdatingKey2Label.contains(key1));
+		assertTrue("We should still have Account2 as HQ anddefault HQ", returnedKeysAfterUpdatingKey2Label.contains(key2));
+		assertEquals("We should still only have 2 HQ accounts", 2, returnedKeysAfterUpdatingKey2Label.size());
+		HeadquartersKey testKey3 = returnedKeysAfterUpdatingKey2Label.get(1);
+		assertEquals("Key2 Label not changed?",UpdatedKey2Label, testKey3.getLabel());
+		
+	}
+	
+	public void testSetAndSaveFDKeys() throws Exception
+	{
+		File configFile = appWithAccount.getConfigInfoFile();
+		configFile.deleteOnExit();
+		String sampleFDKey1 = "account1";
+		String sampleLabel1 = "Fred";
+		String sampleFDKey2 = "account2";
+		String sampleLabel2 = "Wilma";
+		FieldDeskKeys onlyAccount1and2areFDs = new FieldDeskKeys();
+		FieldDeskKey key1 = new FieldDeskKey(sampleFDKey1, sampleLabel1);
+		FieldDeskKey key2 = new FieldDeskKey(sampleFDKey2, sampleLabel2);
+		onlyAccount1and2areFDs.add(key1);
+		onlyAccount1and2areFDs.add(key2);
+		appWithAccount.setAndSaveFDKeys(onlyAccount1and2areFDs);
+		ContactKeys allContacts = new ContactKeys(appWithAccount.getConfigInfo().getContactKeysXml());
+		assertEquals("Should have 2 contacts total", 2, allContacts.size());
+		FieldDeskKeys returnedFDKeys = appWithAccount.getFieldDeskKeys();
+		assertEquals("Should only have 2 FD contacts now total", 2, returnedFDKeys.size());
+		assertTrue("We should have Account1 as an FD", returnedFDKeys.containsKey(sampleFDKey1));
+		assertTrue("We should have Account2 as an FD", returnedFDKeys.containsKey(sampleFDKey2));
+		
+		String sampleFDKey3 = "account3";
+		String sampleLabel3 = "Pebbles";
+		FieldDeskKey key3 = new FieldDeskKey(sampleFDKey3, sampleLabel3);
+		FieldDeskKeys onlyAccount1and3areFDs = new FieldDeskKeys();
+		onlyAccount1and3areFDs.add(key1);
+		onlyAccount1and3areFDs.add(key3);
+		appWithAccount.setAndSaveFDKeys(onlyAccount1and3areFDs);
+		
+		ContactKeys allNewContacts = new ContactKeys(appWithAccount.getConfigInfo().getContactKeysXml());
+		assertEquals("Should have 3 contacts now total", 3, allNewContacts.size());
+		ContactKey contactKey1 = allNewContacts.get(0);
+		if(contactKey1.getLabel().equals(sampleLabel1))
+			verifyContactInfo(sampleFDKey1, contactKey1, false, true);
+		else if(contactKey1.getLabel().equals(sampleLabel2))
+			verifyContactInfo(sampleFDKey2, contactKey1, false, false);
+		else if(contactKey1.getLabel().equals(sampleLabel3))
+			verifyContactInfo(sampleFDKey3, contactKey1, false, true);
+		else
+			fail("ContactKey1 not found?");
+		
+		ContactKey contactKey2 = allNewContacts.get(1);
+		if(contactKey2.getLabel().equals(sampleLabel1))
+			verifyContactInfo(sampleFDKey1, contactKey2, false, true);
+		else if(contactKey2.getLabel().equals(sampleLabel2))
+			verifyContactInfo(sampleFDKey2, contactKey2, false, false);
+		else if(contactKey2.getLabel().equals(sampleLabel3))
+			verifyContactInfo(sampleFDKey3, contactKey2, false, true);
+		else
+			fail("ContactKey2 not found?");
+
+		ContactKey contactKey3 = allNewContacts.get(2);
+		if(contactKey3.getLabel().equals(sampleLabel1))
+			verifyContactInfo(sampleFDKey1, contactKey3, false, true);
+		else if(contactKey3.getLabel().equals(sampleLabel2))
+			verifyContactInfo(sampleFDKey2, contactKey3, false, false);
+		else if(contactKey3.getLabel().equals(sampleLabel3))
+			verifyContactInfo(sampleFDKey3, contactKey3, false, true);
+		else
+			fail("ContactKey3 not found?");
+		
+		FieldDeskKeys returnedKeys = appWithAccount.getFieldDeskKeys();
+		assertTrue("We should still have Account1 as an FD", returnedKeys.containsKey(sampleFDKey1));
+		assertTrue("We should now have also Account3 as an FD", returnedKeys.containsKey(sampleFDKey3));
+		assertFalse("We should not have Account2 anymore as an FD", returnedKeys.containsKey(sampleFDKey2));
+	}
+
+	public void testChangingFDLabels() throws Exception
+	{
+		File configFile = appWithAccount.getConfigInfoFile();
+		configFile.deleteOnExit();
+		String sampleFDKey1 = "account1";
+		String sampleLabel1 = "Fred";
+		String sampleFDKey2 = "account2";
+		String sampleLabel2 = "Wilma";
+		FieldDeskKey key1 = new FieldDeskKey(sampleFDKey1, sampleLabel1);
+		FieldDeskKey key2 = new FieldDeskKey(sampleFDKey2, sampleLabel2);
+
+		FieldDeskKeys key1andkey2 = new FieldDeskKeys();
+		key1andkey2.add(key1);
+		key1andkey2.add(key2);
+		appWithAccount.setAndSaveFDKeys(key1andkey2);
+		FieldDeskKeys returnedKeysAfterAddingBothFDs = appWithAccount.getFieldDeskKeys();
+
+		assertTrue("We should have Account1 as FD", returnedKeysAfterAddingBothFDs.contains(key1));
+		assertTrue("We should have Account2 as FD", returnedKeysAfterAddingBothFDs.contains(key2));
+		assertEquals("We should only have 2 FD accounts", 2, returnedKeysAfterAddingBothFDs.size());
+		FieldDeskKey testKey = returnedKeysAfterAddingBothFDs.get(0);
+		assertEquals("Key1 Label not correct?",sampleLabel1, testKey.getLabel());
+		String newLabel1 = "Flinstone";
+
+		key1.setLabel(newLabel1);
+		FieldDeskKeys updatedLabelKey1andkey2 = new FieldDeskKeys();
+		updatedLabelKey1andkey2.add(key1);
+		updatedLabelKey1andkey2.add(key2);
+		
+		appWithAccount.setAndSaveFDKeys(updatedLabelKey1andkey2);
+		FieldDeskKeys returnedKeysAfterUpdatingH1andH2 = appWithAccount.getFieldDeskKeys();
+		
+		assertTrue("We should still have Account1 as FD", returnedKeysAfterUpdatingH1andH2.contains(key1));
+		assertTrue("We should still have Account2 as FD", returnedKeysAfterUpdatingH1andH2.contains(key2));
+		assertEquals("We should still only have 2 FD accounts", 2, returnedKeysAfterUpdatingH1andH2.size());
+		FieldDeskKey testKey2 = returnedKeysAfterUpdatingH1andH2.get(0);
+		assertEquals("Key1 Label not changed?",newLabel1, testKey2.getLabel());
+	}	
+	
+	private void verifyContactInfo(String publicKey, ContactKey contactKey, boolean canSendTo, boolean canReceiveFrom)
+	{
+		assertEquals(publicKey + ": Public Code doesn't match?", publicKey, contactKey.getPublicKey());
+		assertEquals(publicKey + ": Can Send To doesn't match?", canSendTo, contactKey.getCanSendTo());
+		assertEquals(publicKey + ": Can Receive From doesn't match?", canReceiveFrom, contactKey.getCanReceiveFrom());
+	}
+	
 	public void testClearHQKey() throws Exception
 	{
 		File configFile = appWithAccount.getConfigInfoFile();
@@ -1101,7 +1639,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("already exists?", false, configFile.exists());
 		HeadquartersKeys empty = new HeadquartersKeys();
 		appWithAccount.setAndSaveHQKeys(empty, empty);
-		assertEquals("HQ key exists?", "", appWithAccount.getLegacyHQKey());
+		assertEquals("HQ key exists?", "", appWithAccount.getConfigInfo().getLegacyHQKey());
 		assertEquals("Didn't save?", true, configFile.exists());
 
 		String sampleHQKey1 = "abc123";
@@ -1111,12 +1649,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		keys.add(key1);
 
 		appWithAccount.setAndSaveHQKeys(keys,keys);
-		assertEquals("Incorrect public key", sampleHQKey1, appWithAccount.getLegacyHQKey());
+		assertEquals("Incorrect public key", "", appWithAccount.getConfigInfo().getLegacyHQKey());
 		assertEquals("all keys not set?", 1, appWithAccount.getAllHQKeys().size());
 		assertEquals("Default keys not set", 1, appWithAccount.getDefaultHQKeys().size());
 
 		appWithAccount.setAndSaveHQKeys(empty,empty);
-		assertEquals("HQ not cleared", "", appWithAccount.getLegacyHQKey());
+		assertEquals("HQ not cleared", "", appWithAccount.getConfigInfo().getLegacyHQKey());
 		assertEquals("All HQs not cleared", 0, appWithAccount.getAllHQKeys().size());
 		assertEquals("Default HQs not cleared", 0, appWithAccount.getDefaultHQKeys().size());
 	}
@@ -2247,4 +2785,13 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	static final String MDY_SLASH = "MM/dd/yyyy";
 	static final String DMY_SLASH = "dd/MM/yyyy";
 	static final String DMY_DOT = "dd.MM.yyyy";
+
+	static final String hqKey1 = "HQ key 1";
+	static final String hqKeylabel1 = "HQ label 1";
+	static final String hqKey2 = "HQ key 2";
+	static final String hqKeylabel2 = "HQ label 2";
+	static final String fdKey1 = "FD key 1";
+	static final String fdKeyLabel1 = "FD label 1";
+	static final String fdKey2 = "FD key 2";
+	static final String fdKeyLabel2 = "FD label 2";
 }

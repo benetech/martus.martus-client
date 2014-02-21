@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2001-2007, Beneficent
+monitoring software. Copyright (C) 2001-2014, Beneficent
 Technology, Inc. (The Benetech Initiative).
 
 Martus is free software; you can redistribute it and/or
@@ -306,6 +306,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setBackedUpImprovedKeypairShare(sampleBackedUpImprovedKeypairShare);
 		info.setUseInternalTor(sampleUseInternalTor);
 		info.setMartusAccountAccessTokens(sampleMartusAccountAccessTokens);
+		info.setContactKeysXml(sampleContactKeysXml);
 		info.setCurrentFormTemplateTitle(sampleCurrentFormTemplateTitle);
 		info.setCurrentFormTemplateDescription(sampleCurrentFormTemplateDescription);
 	}
@@ -338,6 +339,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleBackedUpImprovedKeypairShare", false, info.hasBackedUpImprovedKeypairShare());
 		assertEquals(label + ": sampleUseInternalTor", false, info.useInternalTor());
 		assertEquals(label + ": sampleMartusAccountAccessTokens", 0, info.getMartusAccountAccessTokens().size());
+		assertEquals(label + ": sampleContactKeysXml", "", info.getContactKeysXml());
 		assertEquals(label + ": sampleCurrentFormTemplateTitle", "", info.getCurrentFormTemplateTitle());
 		assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getCurrentFormTemplateDescription());
 	}
@@ -471,7 +473,12 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			assertEquals(label + ": sampleMartusAccountAccessTokens", 0, info.getMartusAccountAccessTokens().size());
 		}
+		
 		if(VERSION >= 20)
+			assertEquals(label + ": sampleContactKeys", sampleContactKeysXml, info.getContactKeysXml());
+		else
+			assertEquals(label + ": sampleContactKeys", "", info.getContactKeysXml());
+		if(VERSION >= 21)
 		{
 			assertEquals(label + ": sampleCurrentFormTemplateTitle", sampleCurrentFormTemplateTitle, info.getCurrentFormTemplateTitle());
 			assertEquals(label + ": sampleCurrentFormTemplateDescription", sampleCurrentFormTemplateDescription, info.getCurrentFormTemplateDescription());
@@ -481,8 +488,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleCurrentFormTemplateTitle", "", info.getCurrentFormTemplateTitle());
 			assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getCurrentFormTemplateDescription());
 		}
-		
-		
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -593,6 +598,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 		}
 		if(VERSION >= 20)
 		{
+			ConfigInfo.writeLongString(out, sampleContactKeysXml);
+		}
+		if(VERSION >= 21)
+		{
 			ConfigInfo.writeLongString(out, sampleCurrentFormTemplateTitle);
 			ConfigInfo.writeLongString(out, sampleCurrentFormTemplateDescription);
 		}
@@ -655,7 +664,9 @@ public class TestConfigInfo extends TestCaseEnhanced
 //Version 19
 	final Vector sampleMartusAccountAccessTokens = new Vector();
 //Version 20
+	final String sampleContactKeysXml = "<ContactKeys><ContactKey><PublicKey>1234</PublicKey><Label>Test Label</Label><CanSendTo>YES</CanSendTo><CanReceiveFrom>NO</CanReceiveFrom></ContactKey></ContactKeys>";
+//Version 21
 	final String sampleCurrentFormTemplateTitle = "Sample Title for this Template";
 	final String sampleCurrentFormTemplateDescription = "Sample Description for this template.";
-	
+		
 }

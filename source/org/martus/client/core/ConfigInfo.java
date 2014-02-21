@@ -67,20 +67,20 @@ public class ConfigInfo
 	public void setServerName(String newServerName){ serverName = newServerName; }
 	public void setServerPublicKey(String newServerPublicKey){serverPublicKey = newServerPublicKey; }
 	public void setTemplateDetails(String newTemplateDetails){ templateDetails = newTemplateDetails; }
-	public void setLegacyHQKey(String newHQKey)			{ legacyHQKey = newHQKey; }
+	public void setLegacyHQKey(String newHQKey)			{ deprecatedLegacyHQKey = newHQKey; }
 	public void setServerCompliance(String newCompliance) {serverCompliance = newCompliance;}
 	public void setCustomFieldLegacySpecs(String newSpecs)	{customFieldLegacySpecs = newSpecs;}
 	public void setForceBulletinsAllPrivate(boolean newForceBulletinsAllPrivate)	{forceBulletinsAllPrivate = newForceBulletinsAllPrivate; }
 	public void setBackedUpKeypairEncrypted(boolean newBackedUpKeypairEncrypted)	{backedUpKeypairEncrypted = newBackedUpKeypairEncrypted; }
 	public void setBackedUpKeypairShare(boolean newBackedUpKeypairShare)	{backedUpKeypairShare = newBackedUpKeypairShare; }
-	public void setAllHQKeysXml(String allHQKeysXml){this.allHQKeysXml = allHQKeysXml;}
+	public void setAllHQKeysXml(String allHQKeysXml){this.deprecatedAllHQKeysXml = allHQKeysXml;}
 	public void setBulletinVersioningAware(boolean newBulletinVersioningAware){this.bulletinVersioningAware = newBulletinVersioningAware;}
-	public void setDefaultHQKeysXml(String defaultHQKeysXml){this.defaultHQKeysXml = defaultHQKeysXml;}
+	public void setDefaultHQKeysXml(String defaultHQKeysXml){this.deprecatedDefaultHQKeysXml = defaultHQKeysXml;}
 	public void setCheckForFieldOfficeBulletins(boolean newCheckForBulletins){checkForFieldOfficeBulletins = newCheckForBulletins;}
 	public void setCustomFieldTopSectionXml(String newXml)	{customFieldTopSectionXml = newXml;}
 	public void setCustomFieldBottomSectionXml(String newXml)	{customFieldBottomSectionXml = newXml;}
 	public void setUseZawgyiFont(boolean newUseZawgyiFont){useZawgyiFont = newUseZawgyiFont;}
-	public void setFieldDeskKeysXml(String newFieldDeskKeysXml) { fieldDeskKeysXml = newFieldDeskKeysXml; }
+	public void setFieldDeskKeysXml(String newFieldDeskKeysXml) { deprecatedFieldDeskKeysXml = newFieldDeskKeysXml; }
 	public void setBackedUpImprovedKeypairShare(boolean newBackedUpImprovedKeypairShare) {backedUpImprovedKeypairShare = newBackedUpImprovedKeypairShare;}
 	public void setUseInternalTor(boolean newUseInternalTor) { useInternalTor = newUseInternalTor;}
 	public void setMartusAccountAccessTokens(Vector newTokens) { martusAccountAccessTokens = newTokens;} 
@@ -90,10 +90,11 @@ public class ConfigInfo
 		tokenList.add(newToken);
 		setMartusAccountAccessTokens(tokenList);
 	}
+	public void setContactKeysXml(String contactKeysXml){this.contactKeysXml = contactKeysXml;}
 	public void setCurrentFormTemplateTitle(String netFormTemplateTitle) { currentFormTemplateTitle = netFormTemplateTitle; }
 	public void setCurrentFormTemplateDescription(String netFormTemplateDescription) { currentFormTemplateDescription = netFormTemplateDescription; }
 
-	public void clearHQKey()						{ legacyHQKey = ""; }
+	public void clearLegacyHQKey()						{ deprecatedLegacyHQKey = ""; }
 
 	public short getVersion()			{ return version; }
 	public String getAuthor()			{ return author; }
@@ -105,20 +106,20 @@ public class ConfigInfo
 	public String getServerName()		{ return serverName; }
 	public String getServerPublicKey()	{ return serverPublicKey; }
 	public String getTemplateDetails() { return templateDetails; }
-	public String getLegacyHQKey() 			{ return legacyHQKey; }
+	public String getLegacyHQKey() 			{ return deprecatedLegacyHQKey; }
 	public String getServerCompliance() {return serverCompliance;}
 	public String getCustomFieldLegacySpecs() {return customFieldLegacySpecs;}
 	public boolean shouldForceBulletinsAllPrivate()	{ return forceBulletinsAllPrivate;}
 	public boolean hasUserBackedUpKeypairEncrypted()	{ return backedUpKeypairEncrypted;}
 	public boolean hasUserBackedUpKeypairShare()	{ return backedUpKeypairShare;}
-	public String getAllHQKeysXml()		{return allHQKeysXml;}
+	public String getAllHQKeysXml()		{return deprecatedAllHQKeysXml;}
 	public boolean isBulletinVersioningAware()	{return bulletinVersioningAware;}
-	public String getDefaultHQKeysXml()		{return defaultHQKeysXml;}
+	public String getDefaultHQKeysXml()		{return deprecatedDefaultHQKeysXml;}
 	public boolean getCheckForFieldOfficeBulletins() {return checkForFieldOfficeBulletins;}
 	public String getCustomFieldTopSectionXml()	{return customFieldTopSectionXml;}
 	public String getCustomFieldBottomSectionXml() {return customFieldBottomSectionXml;}
 	public boolean getUseZawgyiFont() {return useZawgyiFont;}
-	public String getFieldDeskKeysXml() { return fieldDeskKeysXml; }
+	public String getFieldDeskKeysXml() { return deprecatedFieldDeskKeysXml; }
 	public boolean hasBackedUpImprovedKeypairShare() {return backedUpImprovedKeypairShare;}
 	public boolean getDoZawgyiConversion() {return true;}
 	public boolean useInternalTor() {return useInternalTor;}
@@ -133,7 +134,8 @@ public class ConfigInfo
 		if(!hasMartusAccountAccessToken())
 			throw new TokenInvalidException();
 		return (MartusAccountAccessToken)martusAccountAccessTokens.get(0);
-	}
+	} 
+	public String getContactKeysXml() {return contactKeysXml;}
 	public String getCurrentFormTemplateTitle()  { return currentFormTemplateTitle;}
 	public String getCurrentFormTemplateDescription()  { return currentFormTemplateDescription;}
 
@@ -159,23 +161,24 @@ public class ConfigInfo
 		serverName = "";
 		serverPublicKey="";
 		templateDetails = "";
-		legacyHQKey = "";
-		notUsedSendContactInfoToServer = false;
+		deprecatedLegacyHQKey = "";
+		deprecatedSendContactInfoToServer = false;
 		serverCompliance = "";
 		customFieldLegacySpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultTopSetionFieldSpecs());
 		forceBulletinsAllPrivate = false;
 		backedUpKeypairEncrypted = false;
 		backedUpKeypairShare = false;
-		allHQKeysXml = "";
+		deprecatedAllHQKeysXml = "";
 		bulletinVersioningAware = true;
-		defaultHQKeysXml = "";
+		deprecatedDefaultHQKeysXml = "";
 		customFieldTopSectionXml = "";
 		customFieldBottomSectionXml = "";
 		useZawgyiFont = false;
-		fieldDeskKeysXml = "";
+		deprecatedFieldDeskKeysXml = "";
 		backedUpImprovedKeypairShare = false;
 		useInternalTor = false;
 		martusAccountAccessTokens.clear(); 
+		contactKeysXml = "";
 		currentFormTemplateTitle = "";
 		currentFormTemplateDescription = "";
 	}
@@ -196,11 +199,11 @@ public class ConfigInfo
 			loaded.address = in.readUTF();
 			loaded.serverName = in.readUTF();
 			loaded.templateDetails = in.readUTF();
-			loaded.legacyHQKey = in.readUTF();
+			loaded.deprecatedLegacyHQKey = in.readUTF();
 			loaded.serverPublicKey = in.readUTF();
 						
 			if(loaded.version >= 2)
-				loaded.notUsedSendContactInfoToServer = in.readBoolean();
+				loaded.deprecatedSendContactInfoToServer = in.readBoolean();
 				
 			if(loaded.version >= 4)
 				loaded.serverCompliance = in.readUTF();
@@ -209,7 +212,7 @@ public class ConfigInfo
 				loaded.customFieldLegacySpecs = in.readUTF();
 				
 			if(loaded.version >= 6)
-				loaded.customFieldTopSectionXml = in.readUTF();
+				loaded.customFieldTopSectionXml = in.readUTF(); //legacyCustomFieldTopSectionXml
 
 			if(loaded.version >= 7)
 				loaded.forceBulletinsAllPrivate = in.readBoolean();
@@ -220,7 +223,7 @@ public class ConfigInfo
 				loaded.backedUpKeypairShare = in.readBoolean();
 			}
 			if(loaded.version >= 9)
-				loaded.allHQKeysXml = in.readUTF();
+				loaded.deprecatedAllHQKeysXml = in.readUTF();
 			
 			if(loaded.version >= 10)
 				loaded.bulletinVersioningAware = in.readBoolean();
@@ -228,10 +231,10 @@ public class ConfigInfo
 				loaded.bulletinVersioningAware = false;
 
 			if(loaded.version >= 11)
-				loaded.defaultHQKeysXml = in.readUTF();
+				loaded.deprecatedDefaultHQKeysXml = in.readUTF();
 
 			if(loaded.version >= 12)
-				loaded.customFieldBottomSectionXml = in.readUTF();
+				loaded.customFieldBottomSectionXml = in.readUTF(); //legacyCustomFieldBottomSectionXml
 
 			if(loaded.version >= 13)
 				loaded.checkForFieldOfficeBulletins = in.readBoolean();
@@ -246,7 +249,7 @@ public class ConfigInfo
                 loaded.useZawgyiFont = in.readBoolean();
             
             if(loaded.version >= 16)
-            	loaded.fieldDeskKeysXml = readLongString(in);
+            	loaded.deprecatedFieldDeskKeysXml = readLongString(in);
 
 			if(loaded.version >= 17)
 				loaded.backedUpImprovedKeypairShare = in.readBoolean();
@@ -275,6 +278,10 @@ public class ConfigInfo
 			}
 			if(loaded.version >= 20)
 			{
+				loaded.contactKeysXml = readLongString(in);
+			}
+			if(loaded.version >= 21)
+			{
 			 	loaded.currentFormTemplateTitle = readLongString(in);
 			 	loaded.currentFormTemplateDescription = readLongString(in);
 			}
@@ -301,24 +308,24 @@ public class ConfigInfo
 			out.writeUTF(address);
 			out.writeUTF(serverName);
 			out.writeUTF(templateDetails);
-			out.writeUTF(legacyHQKey);
+			out.writeUTF(deprecatedLegacyHQKey);
 			out.writeUTF(serverPublicKey);
-			out.writeBoolean(notUsedSendContactInfoToServer);
+			out.writeBoolean(deprecatedSendContactInfoToServer);
 			out.writeUTF(serverCompliance);
 			out.writeUTF(customFieldLegacySpecs);
-			out.writeUTF("");
+			out.writeUTF("");//legacyCustomFieldTopSectionXml
 			out.writeBoolean(forceBulletinsAllPrivate);
 			out.writeBoolean(backedUpKeypairEncrypted);
 			out.writeBoolean(backedUpKeypairShare);
-			out.writeUTF(allHQKeysXml);
+			out.writeUTF(deprecatedAllHQKeysXml);
 			out.writeBoolean(bulletinVersioningAware);
-			out.writeUTF(defaultHQKeysXml);
-			out.writeUTF("");
+			out.writeUTF(deprecatedDefaultHQKeysXml);
+			out.writeUTF(""); //legacyCustomFieldBottomSectionXml
 			out.writeBoolean(checkForFieldOfficeBulletins);
 			writeLongString(out, customFieldTopSectionXml);
 			writeLongString(out, customFieldBottomSectionXml);
             out.writeBoolean(useZawgyiFont);
-            writeLongString(out, fieldDeskKeysXml);
+            writeLongString(out, deprecatedFieldDeskKeysXml);
 			out.writeBoolean(backedUpImprovedKeypairShare);
 			out.writeBoolean(useInternalTor);
 			int numTokens = martusAccountAccessTokens.size(); 
@@ -327,6 +334,7 @@ public class ConfigInfo
 			{
 				out.writeUTF(((MartusAccountAccessToken)martusAccountAccessTokens.get(i)).getToken());
 			}
+			writeLongString(out,contactKeysXml);
 			writeLongString(out, currentFormTemplateTitle);
 			writeLongString(out, currentFormTemplateDescription);
 		}
@@ -353,8 +361,8 @@ public class ConfigInfo
 		return new String(bytes, "UTF-8");
 	}
 	
-	public static final short VERSION = 20;
-	
+	public static final short VERSION = 21;
+
 	//Version 1
 	private short version;
 	private String author;
@@ -366,9 +374,9 @@ public class ConfigInfo
 	private String serverName;
 	private String serverPublicKey;
 	private String templateDetails;
-	private String legacyHQKey;
+	private String deprecatedLegacyHQKey;
 	//Version 2
-	private boolean notUsedSendContactInfoToServer;
+	private boolean deprecatedSendContactInfoToServer;
 	//Version 3 flag to indicate AccountMap.txt is signed.
 	//Version 4
 	private String serverCompliance;
@@ -382,11 +390,11 @@ public class ConfigInfo
 	private boolean backedUpKeypairEncrypted;
 	private boolean backedUpKeypairShare;
 	//Version 9
-	private String allHQKeysXml;
+	private String deprecatedAllHQKeysXml;
 	//Version 10 
 	private boolean bulletinVersioningAware;
 	//Version 11
-	private String defaultHQKeysXml;
+	private String deprecatedDefaultHQKeysXml;
 	//Version 12
 		// was: private String legacyCustomFieldBottomSectionXml;
 	//Version 13
@@ -397,7 +405,7 @@ public class ConfigInfo
     //Version 15
     private boolean useZawgyiFont;
     //Version 16
-    private String fieldDeskKeysXml;
+    private String deprecatedFieldDeskKeysXml;
 	//Version 17
 	private boolean backedUpImprovedKeypairShare;
 	//Version 18
@@ -405,6 +413,10 @@ public class ConfigInfo
 	//Version 19
 	private Vector martusAccountAccessTokens;
 	//Version 20
+	public static final short VERSION_WITH_CONTACT_KEYS = 20;
+	private String contactKeysXml;
+	//Version 21
 	private String currentFormTemplateTitle;
 	private String currentFormTemplateDescription;
+	
 }
