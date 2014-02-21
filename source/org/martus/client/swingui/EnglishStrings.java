@@ -369,7 +369,6 @@ public class EnglishStrings
 "button:customExport=Export Template",
 "button:AddPermissions=Update Headquarters Access",
 "button:customSendToServer=Send Template to Server",
-"button:customReceiveFromServer=Retrieve Template from Server",
 
 "button:cancel=Cancel",
 "button:save=Save",
