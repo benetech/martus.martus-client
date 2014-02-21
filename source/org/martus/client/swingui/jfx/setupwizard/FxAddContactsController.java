@@ -72,13 +72,13 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		
 		contactsTable.setItems(data);
 
-		setAddContactButtonEnabled(false);
+		updateAddContactButtonState();
 		
 		accessTokenField.textProperty().addListener(new AccessTokenChangeHandler());
 	}
 	
 	@FXML
-	public void addRow()
+	public void addContact()
 	{
 		showAddContactsDialog();
 	}
@@ -93,13 +93,13 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 			fl.load();
 			Parent root = fl.getRoot();
 			
-			Stage stage = new Stage();
-			stage.setTitle("Add Contact");
-	        stage.initModality(Modality.WINDOW_MODAL);
+			popupStage = new Stage();
+			popupStage.setTitle("Add Contact");
+	        popupStage.initModality(Modality.WINDOW_MODAL);
 	       
 	        Scene scene = new Scene(root);
-	        stage.setScene(scene);
-	        stage.showAndWait();
+	        popupStage.setScene(scene);
+	        popupStage.showAndWait();
 		}
 		catch (Exception e)
 		{
@@ -108,20 +108,16 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	}
 	
 	@FXML
-	public void getPublicCode()
+	public void cancelVerify()
 	{
+		popupStage.close();
 	}
 	
-	@FXML
-	public void addContact()
+	public void verifyContact()
 	{
+		popupStage.close();
 	}
 	
-	@FXML
-	public void verifiedContact()
-	{
-	}
-
 	@Override
 	public String getFxmlLocation()
 	{
@@ -139,25 +135,44 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		@Override
 		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 		{
-			boolean canAdd = (isValidAccessToken(newValue));
-			setAddContactButtonEnabled(canAdd);
+			updateAddContactButtonState();
 		}
 
-		private boolean isValidAccessToken(String tokenToValidate)
-		{
-			if(tokenToValidate.length() == 0)
-				return false;
-			
-			return MartusAccountAccessToken.isTokenValid(tokenToValidate);
-		}
-		
 	}
 	
-	public void setAddContactButtonEnabled(boolean canAdd)
+	protected void updateAddContactButtonState()
 	{
+		String candidateToken = accessTokenField.getText();
+		boolean canAdd = (isValidAccessToken(candidateToken));
+
+		Button nextButton = getWizardNavigationHandler().getNextButton();
+		if(candidateToken.length() == 0)
+		{
+			addContactButton.setDefaultButton(false);
+			nextButton.setDefaultButton(true);
+		}
+		else if(canAdd)
+		{
+			nextButton.setDefaultButton(false);
+			addContactButton.setDefaultButton(true);
+		}
+		else
+		{
+			nextButton.setDefaultButton(false);
+			addContactButton.setDefaultButton(true);
+		}
+
 		addContactButton.setDisable(!canAdd);
 	}
 
+	private boolean isValidAccessToken(String tokenToValidate)
+	{
+		if(tokenToValidate.length() == 0)
+			return false;
+		
+		return MartusAccountAccessToken.isTokenValid(tokenToValidate);
+	}
+	
 	@FXML
 	private TableView<ContactsTableData> contactsTable;
 	
@@ -174,5 +189,5 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	private Button addContactButton;
 	
 	private ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
-
+	private Stage popupStage;
 }

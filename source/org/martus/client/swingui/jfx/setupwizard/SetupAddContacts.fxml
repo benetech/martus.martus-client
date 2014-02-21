@@ -15,7 +15,7 @@
 </top>
 <center><VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
 <children><HBox prefHeight="100.0" prefWidth="200.0">
-<children><Label text="Access Token:" GridPane.rowIndex="5" /><TextField fx:id="accessTokenField" promptText="Access Token" GridPane.rowIndex="4" /><Button fx:id="addContactButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#addRow" text="Add Contact..." GridPane.rowIndex="3" />
+<children><Label text="Access Token:" GridPane.rowIndex="5" /><TextField fx:id="accessTokenField" promptText="Access Token" GridPane.rowIndex="4" /><Button fx:id="addContactButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#addContact" text="Add Contact..." GridPane.rowIndex="3" />
 </children></HBox><TableView fx:id="contactsTable" editable="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" xmlns:fx="http://javafx.com/fxml">
   <columns>
     <TableColumn fx:id="publicCodeColumn" maxWidth="1.7976931348623157E308" prefWidth="189.0" text="Public Code" />
