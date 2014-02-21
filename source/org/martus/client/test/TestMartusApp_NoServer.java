@@ -1250,6 +1250,58 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("wrong username?", userNameToUse, appWithRealAccount.getUserName());
 	}
 
+	public void testSetAndGetContactKeys() throws Exception
+	{
+		File configFile = appWithAccount.getConfigInfoFile();
+		configFile.deleteOnExit();
+		assertEquals("already exists?", false, configFile.exists());
+		assertEquals("Should not have any contacts yet", 0, appWithAccount.getContactKeys().size());
+		assertEquals("Should also not have any HQs as well", 0, appWithAccount.getAllHQKeys().size());
+		assertEquals("Should also not have any FD's as well", 0, appWithAccount.getFieldDeskKeys().size());
+		String sampleHQPublicKey = "HQ";
+		String sampleHQLabel = "Fred";
+		ContactKeys keys = new ContactKeys();
+		ContactKey hqKey = new ContactKey(sampleHQPublicKey, sampleHQLabel);
+		hqKey.setCanSendTo(true);
+		keys.add(hqKey);
+		appWithAccount.setContactKeys(keys);
+		ContactKeys keysReturned = appWithAccount.getContactKeys();
+		assertEquals("Should now have 1 contact", 1, keysReturned.size());
+		assertEquals("Should also have 1 HQ now as well", 1, appWithAccount.getAllHQKeys().size());
+		assertEquals("Should still have 0 FD's as well", 0, appWithAccount.getFieldDeskKeys().size());
+
+		String sampleFDPublicKey = "FD";
+		String sampleFDLabel = "Wilma";
+		ContactKey fdKey = new ContactKey(sampleFDPublicKey, sampleFDLabel);
+		fdKey.setCanReceiveFrom(true);
+		keysReturned.add(fdKey);
+		appWithAccount.setContactKeys(keysReturned);
+		ContactKeys keysReturned2 = appWithAccount.getContactKeys();
+		assertEquals("Should now have 2 contacts", 2, keysReturned2.size());
+		assertEquals("Should still have 1 HQ now as well", 1, appWithAccount.getAllHQKeys().size());
+		assertEquals("Should now have 1 FD's as well", 1, appWithAccount.getFieldDeskKeys().size());
+		
+		String sampleNonHqFdKey = "Not HQ Not FD";
+		String sampleNonHqFdLable = "Pebbles";
+		ContactKey normalContactKey = new ContactKey(sampleNonHqFdKey, sampleNonHqFdLable);
+		keysReturned2.add(normalContactKey);
+		appWithAccount.setContactKeys(keysReturned2);
+		ContactKeys keysReturned3 = appWithAccount.getContactKeys();
+		assertEquals("Should now have 3 contacts", 3, keysReturned3.size());
+		assertEquals("Should still have 1 HQ", 1, appWithAccount.getAllHQKeys().size());
+		assertEquals("Should still have 1 FD's as well", 1, appWithAccount.getFieldDeskKeys().size());
+		
+		ContactKeys emptyKeys = new ContactKeys();
+		appWithAccount.setContactKeys(emptyKeys);
+		ContactKeys keysReturned4 = appWithAccount.getContactKeys();
+		assertEquals("Should now have 0 contacts", 0, keysReturned4.size());
+		assertEquals("Should have 0 HQs", 0, appWithAccount.getAllHQKeys().size());
+		assertEquals("Should have 0 FDs", 0, appWithAccount.getFieldDeskKeys().size());
+		
+		
+	}
+
+	
 	public void testSetAndGetHQKey() throws Exception
 	{
 		File configFile = appWithAccount.getConfigInfoFile();

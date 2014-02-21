@@ -290,6 +290,26 @@ public class MartusApp
 		invalidateCurrentHandlerAndGateway();
 	}
 
+	public ContactKeys getContactKeys() throws Exception
+	{
+		ContactKeys allContacts = new ContactKeys(configInfo.getContactKeysXml());
+		return allContacts;
+	}
+
+	public void setContactKeys(ContactKeys newContactKeys) throws SaveConfigInfoException 
+	{
+		try
+		{
+			configInfo.setContactKeysXml(newContactKeys.toString());
+			saveConfigInfo();
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			throw new SaveConfigInfoException();
+		}
+	}
+
 	public HeadquartersKeys getAllHQKeys() throws Exception
 	{
 		ContactKeys allContacts = new ContactKeys(configInfo.getContactKeysXml());
