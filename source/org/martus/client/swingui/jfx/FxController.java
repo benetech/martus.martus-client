@@ -31,6 +31,7 @@ import java.net.URL;
 
 import javafx.scene.Parent;
 
+import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
@@ -56,7 +57,7 @@ abstract public class FxController implements FxControllerInterface
 
 	private URL getBestFxmlLocation() throws Exception
 	{
-		File fxmlDir = getMainWindow().getApp().getFxmlDirectory();
+		File fxmlDir = getApp().getFxmlDirectory();
 		return getBestFile(fxmlDir, getFxmlLocation());
 	}
 
@@ -89,7 +90,12 @@ abstract public class FxController implements FxControllerInterface
 	
 	public MartusLocalization getLocalization()
 	{
-		return mainWindow.getLocalization();
+		return getMainWindow().getLocalization();
+	}
+	
+	public MartusApp getApp()
+	{
+		return getMainWindow().getApp();
 	}
 
 	private FxStage stage;

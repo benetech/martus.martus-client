@@ -54,7 +54,7 @@ public class FxSelectLanguageController extends AbstractFxSetupWizardController 
 		String selectedLanguageCode = languagesDropdown.getSelectionModel().getSelectedItem().getCode();
 		
 		if (MtfAwareLocalization.isRecognizedLanguage(selectedLanguageCode))
-			getMainWindow().getLocalization().setCurrentLanguageCode(selectedLanguageCode);
+			getLocalization().setCurrentLanguageCode(selectedLanguageCode);
 	}
 	
 	public void initialize(URL url, ResourceBundle resourceBundle)
