@@ -396,13 +396,6 @@ public class UiCustomFieldsDlg extends JDialog
 				MartusLogger.logException(e);
 				mainWindow.notifyDlgBeep("ErrorSavingTemplateToServer");
 			}
-
-			//Vector returnedListOfTemplatesFromServer = mainWindow.getApp().getListOfFormTemplatesOnServer(mainWindow.getApp().getAccountId());
-			//String title = (String)returnedListOfTemplatesFromServer.get(0);
-			//String description = (String)returnedListOfTemplatesFromServer.get(1);
-			//CustomFieldTemplate returnedTemplate = mainWindow.getApp().getFormTemplateOnServer(mainWindow.getApp().getAccountId(), title);
-			//String returnedTitle = returnedTemplate.getTitle();
-			//String returnedDescription = returnedTemplate.getDescription();
 		}
 	}
 	
