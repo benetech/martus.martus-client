@@ -90,6 +90,8 @@ public class ConfigInfo
 		tokenList.add(newToken);
 		setMartusAccountAccessTokens(tokenList);
 	}
+	public void setCurrentFormTemplateTitle(String netFormTemplateTitle) { currentFormTemplateTitle = netFormTemplateTitle; }
+	public void setCurrentFormTemplateDescription(String netFormTemplateDescription) { currentFormTemplateDescription = netFormTemplateDescription; }
 
 	public void clearHQKey()						{ legacyHQKey = ""; }
 
@@ -131,7 +133,9 @@ public class ConfigInfo
 		if(!hasMartusAccountAccessToken())
 			throw new TokenInvalidException();
 		return (MartusAccountAccessToken)martusAccountAccessTokens.get(0);
-	} 
+	}
+	public String getCurrentFormTemplateTitle()  { return currentFormTemplateTitle;}
+	public String getCurrentFormTemplateDescription()  { return currentFormTemplateDescription;}
 
 	public boolean isServerConfigured()
 	{
@@ -172,6 +176,8 @@ public class ConfigInfo
 		backedUpImprovedKeypairShare = false;
 		useInternalTor = false;
 		martusAccountAccessTokens.clear(); 
+		currentFormTemplateTitle = "";
+		currentFormTemplateDescription = "";
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException
@@ -267,6 +273,11 @@ public class ConfigInfo
 				}
 				loaded.setMartusAccountAccessTokens(loadedTokens);
 			}
+			if(loaded.version >= 20)
+			{
+			 	loaded.currentFormTemplateTitle = readLongString(in);
+			 	loaded.currentFormTemplateDescription = readLongString(in);
+			}
 		}
 		finally
 		{
@@ -316,6 +327,8 @@ public class ConfigInfo
 			{
 				out.writeUTF(((MartusAccountAccessToken)martusAccountAccessTokens.get(i)).getToken());
 			}
+			writeLongString(out, currentFormTemplateTitle);
+			writeLongString(out, currentFormTemplateDescription);
 		}
 		finally
 		{
@@ -340,7 +353,7 @@ public class ConfigInfo
 		return new String(bytes, "UTF-8");
 	}
 	
-	public static final short VERSION = 19;
+	public static final short VERSION = 20;
 	
 	//Version 1
 	private short version;
@@ -391,4 +404,7 @@ public class ConfigInfo
 	private boolean useInternalTor;
 	//Version 19
 	private Vector martusAccountAccessTokens;
+	//Version 20
+	private String currentFormTemplateTitle;
+	private String currentFormTemplateDescription;
 }

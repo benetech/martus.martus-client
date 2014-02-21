@@ -56,7 +56,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 		
-		assertEquals(19, ConfigInfo.VERSION);
+		assertEquals(20, ConfigInfo.VERSION);
 
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
@@ -306,6 +306,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setBackedUpImprovedKeypairShare(sampleBackedUpImprovedKeypairShare);
 		info.setUseInternalTor(sampleUseInternalTor);
 		info.setMartusAccountAccessTokens(sampleMartusAccountAccessTokens);
+		info.setCurrentFormTemplateTitle(sampleCurrentFormTemplateTitle);
+		info.setCurrentFormTemplateDescription(sampleCurrentFormTemplateDescription);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -336,6 +338,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleBackedUpImprovedKeypairShare", false, info.hasBackedUpImprovedKeypairShare());
 		assertEquals(label + ": sampleUseInternalTor", false, info.useInternalTor());
 		assertEquals(label + ": sampleMartusAccountAccessTokens", 0, info.getMartusAccountAccessTokens().size());
+		assertEquals(label + ": sampleCurrentFormTemplateTitle", "", info.getCurrentFormTemplateTitle());
+		assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getCurrentFormTemplateDescription());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -467,6 +471,18 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			assertEquals(label + ": sampleMartusAccountAccessTokens", 0, info.getMartusAccountAccessTokens().size());
 		}
+		if(VERSION >= 20)
+		{
+			assertEquals(label + ": sampleCurrentFormTemplateTitle", sampleCurrentFormTemplateTitle, info.getCurrentFormTemplateTitle());
+			assertEquals(label + ": sampleCurrentFormTemplateDescription", sampleCurrentFormTemplateDescription, info.getCurrentFormTemplateDescription());
+		}
+		else
+		{
+			assertEquals(label + ": sampleCurrentFormTemplateTitle", "", info.getCurrentFormTemplateTitle());
+			assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getCurrentFormTemplateDescription());
+		}
+		
+		
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -575,6 +591,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 				out.writeUTF(((MartusAccountAccessToken)sampleMartusAccountAccessTokens.get(i)).getToken());
 			}
 		}
+		if(VERSION >= 20)
+		{
+			ConfigInfo.writeLongString(out, sampleCurrentFormTemplateTitle);
+			ConfigInfo.writeLongString(out, sampleCurrentFormTemplateDescription);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -633,4 +654,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final boolean sampleUseInternalTor = true;
 //Version 19
 	final Vector sampleMartusAccountAccessTokens = new Vector();
+//Version 20
+	final String sampleCurrentFormTemplateTitle = "Sample Title for this Template";
+	final String sampleCurrentFormTemplateDescription = "Sample Description for this template.";
+	
 }
