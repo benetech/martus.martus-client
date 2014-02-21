@@ -128,10 +128,12 @@ public class UiCustomFieldsDlg extends JDialog
 
 		UiLabel titleLabel = new UiLabel(localization.getFieldLabel("inputCustomFieldsTitle"));
 		titleField = new UiTextField();
+		titleField.setText(bulletinFieldSpecs.getTitleOfSpecs());
 		Box titleBox = createLabelAndTextFieldBox(titleLabel, titleField);
 
 		UiLabel descriptionLabel = new UiLabel(localization.getFieldLabel("inputCustomFieldsDescription"));
 		descriptionField = new UiTextField();
+		descriptionField.setText(bulletinFieldSpecs.getDescriptionOfSpecs());
 		Box descriptionBox = createLabelAndTextFieldBox(descriptionLabel, descriptionField);
 		
 		JPanel customFieldsPanel = new JPanel();
@@ -524,6 +526,16 @@ public class UiCustomFieldsDlg extends JDialog
 	public String getBottomSectionXml()
 	{
 		return bottomSectionXmlResult;
+	}
+
+	public String getFormTemplateTitle()
+	{
+		return titleResult;
+	}
+
+	public String getFormTemplateDescription()
+	{
+		return descriptionResult;
 	}
 
 	boolean checkForDuplicateLabels() 
