@@ -141,7 +141,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setLegacyHQKey(hqKey);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		info.save(outputStream);
-		info.clearHQKey();
+		info.clearLegacyHQKey();
 		assertEquals("HQ Key Should be cleared", "", info.getLegacyHQKey());
 
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
