@@ -1616,9 +1616,12 @@ public class MartusApp
 			throw new ServerNotAvailableException();
 		NetworkResponse response = getCurrentNetworkInterfaceGateway().getListOfFormTemplates(getSecurity(), accountToRetreiveListFrom);
 		if(response.getResultCode().equals(NetworkInterfaceConstants.OK))
-			return response.getResultVector();
-		if(response.getResultCode().equals(NetworkInterfaceConstants.NO_FORM_TEMPLATES_AVAILABLE))
-			throw new NoFormsAvailableException();
+		{
+			Vector resultVector = response.getResultVector();
+			if(resultVector.size() == 0)
+				throw new NoFormsAvailableException();
+			return resultVector;
+		}
 		throw new ServerNotAvailableException();
 	}
 	
