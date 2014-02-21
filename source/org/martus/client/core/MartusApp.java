@@ -1610,18 +1610,13 @@ public class MartusApp
 	}
 	
 	
-	public Vector getListOfFormTemplatesOnServer(String accountToRetreiveListFrom) throws ServerNotAvailableException, MartusSignatureException, NoFormsAvailableException 
+	public Vector getListOfFormTemplatesOnServer(String accountToRetreiveListFrom) throws ServerNotAvailableException, MartusSignatureException 
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
 		NetworkResponse response = getCurrentNetworkInterfaceGateway().getListOfFormTemplates(getSecurity(), accountToRetreiveListFrom);
 		if(response.getResultCode().equals(NetworkInterfaceConstants.OK))
-		{
-			Vector resultVector = response.getResultVector();
-			if(resultVector.size() == 0)
-				throw new NoFormsAvailableException();
-			return resultVector;
-		}
+			return response.getResultVector();
 		throw new ServerNotAvailableException();
 	}
 	
