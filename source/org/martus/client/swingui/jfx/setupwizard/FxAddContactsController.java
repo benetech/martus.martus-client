@@ -77,6 +77,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
 		publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
 		
+		loadExistingContactData();
 		contactsTable.setItems(data);
 
 		updateAddContactButtonState();
@@ -245,6 +246,17 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		return MartusAccountAccessToken.isTokenValid(tokenToValidate);
 	}
 	
+	private void loadExistingContactData()
+	{
+		// FIXME: Not yet working, but shows the direction I'm heading
+//		String name = "Elmer Fudd";
+//		String accountId = "1234";
+//		boolean canSendTo = false;
+//		boolean canReceiveFrom = true;
+//		ContactsTableData contactData = new ContactsTableData(name, accountId, canSendTo, canReceiveFrom); 
+//		data.add(contactData);
+	}
+
 	@FXML
 	private TableView<ContactsTableData> contactsTable;
 	
