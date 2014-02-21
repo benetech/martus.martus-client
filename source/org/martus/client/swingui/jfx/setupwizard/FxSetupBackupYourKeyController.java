@@ -65,7 +65,7 @@ public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardControl
 	private void doBackupKeyPairToSingleEncryptedFile() throws Exception 
 	{
 		backupMessageLabel.setText("");
-		File keypairFile = getMainWindow().getApp().getCurrentKeyPairFile();
+		File keypairFile = getApp().getCurrentKeyPairFile();
 		if(keypairFile.length() > UiMainWindow.MAX_KEYPAIRFILE_SIZE)
 		{
 			backupMessageLabel.setText("keypair file too large!");
@@ -73,7 +73,7 @@ public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardControl
 		}
 
 		FileChooser fileChooser = new FileChooser();
-		File martusRootDir = getMainWindow().getApp().getMartusDataRootDirectory();
+		File martusRootDir = getApp().getMartusDataRootDirectory();
 		fileChooser.setInitialDirectory(martusRootDir);
 		fileChooser.setInitialFileName("MartusKeyPairBackup.dat");
 		fileChooser.setTitle("Backup Key File");
@@ -97,8 +97,8 @@ public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardControl
 		if(FileVerifier.verifyFiles(keypairFile, newBackupFile))
 		{
 			backupMessageLabel.setText( newBackupFile.getName() + " created.");
-			getMainWindow().getApp().getConfigInfo().setBackedUpKeypairEncrypted(true);
-			getMainWindow().getApp().saveConfigInfo();
+			getApp().getConfigInfo().setBackedUpKeypairEncrypted(true);
+			getApp().saveConfigInfo();
 		}
 	}
 	

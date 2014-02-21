@@ -53,9 +53,9 @@ public class FxSetupSettingsController extends AbstractFxSetupWizardController i
 	public void nextWasPressed(ActionEvent event) 
 	{
 		//NOTE: This might belong somewhere else, but for now it's important to set it 
-		getMainWindow().getApp().getConfigInfo().setForceBulletinsAllPrivate(true);
+		getApp().getConfigInfo().setForceBulletinsAllPrivate(true);
 		
-		getMainWindow().getApp().getConfigInfo().setCheckForFieldOfficeBulletins(userTorCheckBox.isSelected());
+		getApp().getConfigInfo().setCheckForFieldOfficeBulletins(userTorCheckBox.isSelected());
 		
 		getLocalization().setMdyOrder(dateFormatSequenceDropDown.getSelectionModel().getSelectedItem().getCode());
 		String delimiter = dateDelimeterComboBox.getSelectionModel().getSelectedItem().getCode();

@@ -44,7 +44,7 @@ public class FxSetupContactInfoController extends AbstractFxSetupWizardControlle
 	{
 		super(mainWindowToUse);
 		
-		info = getMainWindow().getApp().getConfigInfo();
+		info = getApp().getConfigInfo();
 		fontHelper = new UiFontEncodingHelper(getConfigInfo().getDoZawgyiConversion());
 	}
 
