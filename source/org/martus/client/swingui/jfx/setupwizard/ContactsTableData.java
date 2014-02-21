@@ -30,12 +30,12 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class ContactsTableData
 {
-	public ContactsTableData(String contactNameToUse, String publicCodeToUse, boolean sentToToUse, boolean recievedFromToUse)
+	public ContactsTableData(String contactNameToUse, String publicCodeToUse, boolean canSendToToUse, boolean canRecieveFromToUse)
 	{
 		contactName = new SimpleStringProperty(contactNameToUse);
 		publicCode = new SimpleStringProperty(publicCodeToUse);
-		sentTo = new SimpleBooleanProperty(sentToToUse);
-		receivedFrom = new SimpleBooleanProperty(recievedFromToUse);
+		canSendTo = new SimpleBooleanProperty(canSendToToUse);
+		canReceiveFrom = new SimpleBooleanProperty(canRecieveFromToUse);
 	}
 	
 	public String getContactName()
@@ -58,28 +58,28 @@ public class ContactsTableData
 		this.publicCode.set(publicCodeToUse);
 	}
 	
-	public boolean getSentTo()
+	public boolean getCanSendTo()
 	{
-		return sentTo.get();
+		return canSendTo.get();
 	}
 	
-	public void setSentTo(boolean sentToToUse)
+	public void setCanSendTo(boolean canSendToToUse)
 	{
-		sentTo.set(sentToToUse);
+		canSendTo.set(canSendToToUse);
 	}
 	
-	public boolean getReceivedFrom()
+	public boolean getCanReceiveFrom()
 	{
-		return receivedFrom.get();
+		return canReceiveFrom.get();
 	}
 	
-	public void setReceivedFrom(boolean receivedFromToUse)
+	public void setCanReceiveFrom(boolean canReceiveFromToUse)
 	{
-		receivedFrom.set(receivedFromToUse);
+		canReceiveFrom.set(canReceiveFromToUse);
 	}
 	
 	private final SimpleStringProperty contactName;
 	private final SimpleStringProperty publicCode;
-	private final SimpleBooleanProperty sentTo;
-	private final SimpleBooleanProperty receivedFrom;
+	private final SimpleBooleanProperty canSendTo;
+	private final SimpleBooleanProperty canReceiveFrom;
 }
