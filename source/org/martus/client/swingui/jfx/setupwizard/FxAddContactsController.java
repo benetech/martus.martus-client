@@ -57,6 +57,7 @@ import org.martus.common.MartusAccountAccessToken.TokenNotFoundException;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.crypto.MartusSecurity;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class FxAddContactsController extends AbstractFxSetupWizardController implements Initializable
 {
@@ -119,19 +120,17 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	{
 		try
 		{
-			FXMLLoader fl = new FXMLLoader();
-			fl.setLocation(FxStage.class.getResource("setupwizard/SetupAddContactPopup.fxml"));
-			fl.setController(this);
-			fl.load();
-			Parent root = fl.getRoot();
-			
-			String contactPublicCode = MartusSecurity.computeFormattedPublicCode(contactAccountId);
-			contactPublicCodeLabel.setText(contactPublicCode);
-			
-			popupStage = new Stage();
+			Stage popupStage = new Stage();
 			popupStage.setTitle("Add Contact");
 	        popupStage.initModality(Modality.WINDOW_MODAL);
 	       
+			FXMLLoader fl = new FXMLLoader();
+			PopupController popupController = new PopupController(getMainWindow(), popupStage, contactAccountId);
+			fl.setController(popupController);
+			fl.setLocation(FxStage.class.getResource(popupController.getFxmlLocation()));
+			fl.load();
+			Parent root = fl.getRoot();
+			
 	        Scene scene = new Scene(root);
 	        popupStage.setScene(scene);
 	        popupStage.showAndWait();
@@ -142,15 +141,53 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		}
 	}
 	
-	@FXML
-	public void cancelVerify()
+	public static class PopupController extends FxController implements Initializable
 	{
-		popupStage.close();
-	}
-	
-	public void verifyContact()
-	{
-		popupStage.close();
+		public PopupController(UiMainWindow mainWindowToUse, Stage popupStage, String contactAccountIdToUse)
+		{
+			super(mainWindowToUse);
+			ourStage = popupStage;
+			contactAccountId = contactAccountIdToUse;
+		}
+		
+		@Override
+		public void initialize(URL arg0, ResourceBundle arg1)
+		{
+			try
+			{
+				String contactPublicCode = MartusSecurity.computeFormattedPublicCode(contactAccountId);
+				contactPublicCodeLabel.setText(contactPublicCode);
+			} 
+			catch (InvalidBase64Exception e)
+			{
+				MartusLogger.logException(e);
+				System.exit(1);
+			}
+		}
+		
+		@Override
+		public String getFxmlLocation()
+		{
+			return "setupwizard/SetupAddContactPopup.fxml";
+		}
+
+		@FXML
+		public void cancelVerify()
+		{
+			ourStage.close();
+		}
+
+		@FXML
+		public void verifyContact()
+		{
+			ourStage.close();
+		}
+
+		@FXML
+		private Label contactPublicCodeLabel;
+		
+		private Stage ourStage;
+		private String contactAccountId;
 	}
 	
 	@Override
@@ -223,9 +260,5 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	@FXML
 	private Button addContactButton;
 	
-	@FXML
-	private Label contactPublicCodeLabel;
-	
 	private ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
-	private Stage popupStage;
 }
