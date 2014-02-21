@@ -91,6 +91,8 @@ public class ConfigInfo
 		setMartusAccountAccessTokens(tokenList);
 	}
 	public void setContactKeysXml(String contactKeysXml){this.contactKeysXml = contactKeysXml;}
+	public void setCurrentFormTemplateTitle(String netFormTemplateTitle) { currentFormTemplateTitle = netFormTemplateTitle; }
+	public void setCurrentFormTemplateDescription(String netFormTemplateDescription) { currentFormTemplateDescription = netFormTemplateDescription; }
 
 	public void clearLegacyHQKey()						{ deprecatedLegacyHQKey = ""; }
 
@@ -134,6 +136,8 @@ public class ConfigInfo
 		return (MartusAccountAccessToken)martusAccountAccessTokens.get(0);
 	} 
 	public String getContactKeysXml() {return contactKeysXml;}
+	public String getCurrentFormTemplateTitle()  { return currentFormTemplateTitle;}
+	public String getCurrentFormTemplateDescription()  { return currentFormTemplateDescription;}
 
 	public boolean isServerConfigured()
 	{
@@ -175,6 +179,8 @@ public class ConfigInfo
 		useInternalTor = false;
 		martusAccountAccessTokens.clear(); 
 		contactKeysXml = "";
+		currentFormTemplateTitle = "";
+		currentFormTemplateDescription = "";
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException
@@ -274,6 +280,11 @@ public class ConfigInfo
 			{
 				loaded.contactKeysXml = readLongString(in);
 			}
+			if(loaded.version >= 21)
+			{
+			 	loaded.currentFormTemplateTitle = readLongString(in);
+			 	loaded.currentFormTemplateDescription = readLongString(in);
+			}
 		}
 		finally
 		{
@@ -324,6 +335,8 @@ public class ConfigInfo
 				out.writeUTF(((MartusAccountAccessToken)martusAccountAccessTokens.get(i)).getToken());
 			}
 			writeLongString(out,contactKeysXml);
+			writeLongString(out, currentFormTemplateTitle);
+			writeLongString(out, currentFormTemplateDescription);
 		}
 		finally
 		{
@@ -348,7 +361,7 @@ public class ConfigInfo
 		return new String(bytes, "UTF-8");
 	}
 	
-	public static final short VERSION = 20;
+	public static final short VERSION = 21;
 
 	//Version 1
 	private short version;
@@ -402,5 +415,8 @@ public class ConfigInfo
 	//Version 20
 	public static final short VERSION_WITH_CONTACT_KEYS = 20;
 	private String contactKeysXml;
+	//Version 21
+	private String currentFormTemplateTitle;
+	private String currentFormTemplateDescription;
 	
 }

@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.JarURLConnection;
 import java.net.MalformedURLException;
@@ -71,6 +72,7 @@ import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.PasswordHelper;
 import org.martus.common.BulletinSummary;
 import org.martus.common.BulletinSummary.WrongValueCount;
+import org.martus.common.Exceptions.NoFormsAvailableException;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.Exceptions.ServerCallFailedException;
@@ -106,6 +108,8 @@ import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomFieldTemplate;
+import org.martus.common.fieldspec.CustomFieldTemplate.FutureVersionException;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.network.ClientSideNetworkInterface;
@@ -1734,7 +1738,7 @@ public class MartusApp
 		String ourTokenString = (String)singleToken.get(0);
 		return new MartusAccountAccessToken(ourTokenString);
 	}
-	
+
 	public String getMartusAccountIdFromAccessTokenOnServer(MartusAccountAccessToken tokenToUse) throws TokenNotFoundException, ServerNotAvailableException, MartusSignatureException 
 	{
 		if(!isSSLServerAvailable())
@@ -1756,6 +1760,57 @@ public class MartusApp
 		return AccountId;
 	}
 
+	public void putFormTemplateOnServer(CustomFieldTemplate formTemplate) throws ServerNotAvailableException, MartusSignatureException 
+	{
+		if(!isSSLServerAvailable())
+			throw new ServerNotAvailableException();
+		String formTemplateData = formTemplate.getExportedTemplateAsBase64String(getSecurity());
+		NetworkResponse response = getCurrentNetworkInterfaceGateway().putFormTemplate(getSecurity(), formTemplateData);
+		if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
+			throw new ServerNotAvailableException();
+	}
+	
+	
+	public Vector getListOfFormTemplatesOnServer(String accountToRetreiveListFrom) throws ServerNotAvailableException, MartusSignatureException 
+	{
+		if(!isSSLServerAvailable())
+			throw new ServerNotAvailableException();
+		NetworkResponse response = getCurrentNetworkInterfaceGateway().getListOfFormTemplates(getSecurity(), accountToRetreiveListFrom);
+		if(response.getResultCode().equals(NetworkInterfaceConstants.OK))
+			return response.getResultVector();
+		throw new ServerNotAvailableException();
+	}
+	
+	public CustomFieldTemplate getFormTemplateOnServer(String accountId, String formTitle) throws ServerNotAvailableException, NoFormsAvailableException, MartusSignatureException, IOException, InvalidBase64Exception, FutureVersionException 
+	{
+		if(!isSSLServerAvailable())
+			throw new ServerNotAvailableException();
+		NetworkResponse response = getCurrentNetworkInterfaceGateway().getFormTemplate(getSecurity(), accountId, formTitle);
+		if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
+		{
+			if(response.getResultCode().equals(NetworkInterfaceConstants.FORM_TEMPLATE_DOES_NOT_EXIST))
+				throw new NoFormsAvailableException();
+			throw new ServerNotAvailableException();
+		}
+		Vector result = response.getResultVector();
+		if(result.size() != 1)
+			throw new NoFormsAvailableException();
+		String base64FormData = (String)result.get(0);
+		StringReader reader = new StringReader(base64FormData);
+		File formTemplateTempFile = File.createTempFile("$$$FormTemplate", null);
+		formTemplateTempFile.deleteOnExit();
+		FileOutputStream output = new FileOutputStream(formTemplateTempFile);
+		StreamableBase64.decode(reader, output);
+		output.flush();
+		output.close();
+
+		CustomFieldTemplate template = new CustomFieldTemplate();
+		template.importTemplate(getSecurity(), formTemplateTempFile);
+		formTemplateTempFile.delete();
+		return template;
+	}
+
+	
 	public Vector getNewsFromServer()
 	{
 		if(!isSSLServerAvailable())
@@ -2427,7 +2482,6 @@ public class MartusApp
 
 	public static final String PUBLIC_INFO_EXTENSION = ".mpi";
 	public static final String MARTUS_IMPORT_EXPORT_EXTENSION = ".xml";
-	public static final String CUSTOMIZATION_TEMPLATE_EXTENSION = ".mct";
 	public static final String DEFAULT_DETAILS_EXTENSION = ".txt";
 	public static final String AUTHENTICATE_SERVER_FAILED = "Failed to Authenticate Server";
 	public static final String SHARE_KEYPAIR_FILENAME_EXTENSION = ".dat";

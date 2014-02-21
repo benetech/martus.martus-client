@@ -75,7 +75,7 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardController i
 		String passwordValue = passwordField.getText();
 		
 		StaticAccountCreationData.dispose();
-		getMainWindow().getApp().createAccount(userNameValue, passwordValue.toCharArray());
+		getApp().createAccount(userNameValue, passwordValue.toCharArray());
 	}
 	
 	private boolean isOkToCreateAccount()

@@ -65,6 +65,7 @@ abstract public class FxWizardStage extends FxStage
 		wizardTemplateController.setContentPane(contentPaneController);
 		wizardTemplateController.setStage(this);
 		scene.setRoot(wizardTemplateContents);
+		wizardTemplateController.getNextButton().setDefaultButton(true);
 	}
 	
 	@Override

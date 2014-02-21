@@ -450,7 +450,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		mainWindowInitalizing = true;
 
-		if (getApp().hasNoAccounts())
+		if (getApp().hasNoAccounts() || isAlphaTester)
 			startAccountSetupWizard();
 		
 		if(!sessionSignIn())
@@ -3018,7 +3018,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private static final int TESTING_TIMEOUT_60_SECONDS = 60;
 	private static final int TESTING_FOCHECK_SECONDS = 5 * 60;
 	private static final int MINIMUM_SCREEN_WIDTH = 700;
-	private static final int MAX_KEYPAIRFILE_SIZE = 32000;
+	public static final int MAX_KEYPAIRFILE_SIZE = 32000;
 	private static final int BACKGROUND_UPLOAD_CHECK_MILLIS = 5*1000;
 	private static final int BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS = 5*1000;
 	private static final int TIME_BETWEEN_FIELD_OFFICE_CHECKS_SECONDS = 60 * 60;

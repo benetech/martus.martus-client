@@ -141,7 +141,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setLegacyHQKey(hqKey);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		info.save(outputStream);
-		info.clearLegacyHQKey();
+		info.clearHQKey();
 		assertEquals("HQ Key Should be cleared", "", info.getLegacyHQKey());
 
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
@@ -307,6 +307,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setUseInternalTor(sampleUseInternalTor);
 		info.setMartusAccountAccessTokens(sampleMartusAccountAccessTokens);
 		info.setContactKeysXml(sampleContactKeysXml);
+		info.setCurrentFormTemplateTitle(sampleCurrentFormTemplateTitle);
+		info.setCurrentFormTemplateDescription(sampleCurrentFormTemplateDescription);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -338,6 +340,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleUseInternalTor", false, info.useInternalTor());
 		assertEquals(label + ": sampleMartusAccountAccessTokens", 0, info.getMartusAccountAccessTokens().size());
 		assertEquals(label + ": sampleContactKeysXml", "", info.getContactKeysXml());
+		assertEquals(label + ": sampleCurrentFormTemplateTitle", "", info.getCurrentFormTemplateTitle());
+		assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getCurrentFormTemplateDescription());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -474,6 +478,16 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleContactKeys", sampleContactKeysXml, info.getContactKeysXml());
 		else
 			assertEquals(label + ": sampleContactKeys", "", info.getContactKeysXml());
+		if(VERSION >= 21)
+		{
+			assertEquals(label + ": sampleCurrentFormTemplateTitle", sampleCurrentFormTemplateTitle, info.getCurrentFormTemplateTitle());
+			assertEquals(label + ": sampleCurrentFormTemplateDescription", sampleCurrentFormTemplateDescription, info.getCurrentFormTemplateDescription());
+		}
+		else
+		{
+			assertEquals(label + ": sampleCurrentFormTemplateTitle", "", info.getCurrentFormTemplateTitle());
+			assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getCurrentFormTemplateDescription());
+		}
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -586,6 +600,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			ConfigInfo.writeLongString(out, sampleContactKeysXml);
 		}
+		if(VERSION >= 21)
+		{
+			ConfigInfo.writeLongString(out, sampleCurrentFormTemplateTitle);
+			ConfigInfo.writeLongString(out, sampleCurrentFormTemplateDescription);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -646,4 +665,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final Vector sampleMartusAccountAccessTokens = new Vector();
 //Version 20
 	final String sampleContactKeysXml = "<ContactKeys><ContactKey><PublicKey>1234</PublicKey><Label>Test Label</Label><CanSendTo>YES</CanSendTo><CanReceiveFrom>NO</CanReceiveFrom></ContactKey></ContactKeys>";
+//Version 21
+	final String sampleCurrentFormTemplateTitle = "Sample Title for this Template";
+	final String sampleCurrentFormTemplateDescription = "Sample Description for this template.";
+		
 }

@@ -29,6 +29,7 @@ package org.martus.client.swingui.actions;
 import java.awt.event.ActionEvent;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
@@ -57,7 +58,9 @@ public class ActionMenuCustomFields extends UiMenuAction
 		BulletinFieldSpecs existingSpecs = new BulletinFieldSpecs();
 		existingSpecs.setTopSectionSpecs(store.getTopSectionFieldSpecs());
 		existingSpecs.setBottomSectionSpecs(store.getBottomSectionFieldSpecs());
-		
+		ConfigInfo configInfo = app.getConfigInfo();
+		existingSpecs.setTitleOfSpecs(configInfo.getCurrentFormTemplateTitle());
+		existingSpecs.setDescriptionOfSpecs(configInfo.getCurrentFormTemplateDescription());
 		BulletinFieldSpecs newSpecs = getCustomizedFieldsFromUser(existingSpecs);
 		if(newSpecs == null)
 			return;
@@ -66,10 +69,11 @@ public class ActionMenuCustomFields extends UiMenuAction
 		FieldSpecCollection bottomSectionSpecs = newSpecs.getBottomSectionSpecs();
 		store.setTopSectionFieldSpecs(topSectionSpecs);
 		store.setBottomSectionFieldSpecs(bottomSectionSpecs);
-		app.getConfigInfo().setCustomFieldLegacySpecs(MartusConstants.deprecatedCustomFieldSpecs);
-		app.getConfigInfo().setCustomFieldTopSectionXml(topSectionSpecs.toXml());
-		app.getConfigInfo().setCustomFieldBottomSectionXml(bottomSectionSpecs.toXml());
-
+		configInfo.setCustomFieldLegacySpecs(MartusConstants.deprecatedCustomFieldSpecs);
+		configInfo.setCustomFieldTopSectionXml(topSectionSpecs.toXml());
+		configInfo.setCustomFieldBottomSectionXml(bottomSectionSpecs.toXml());
+		configInfo.setCurrentFormTemplateTitle(newSpecs.getTitleOfSpecs());
+		configInfo.setCurrentFormTemplateDescription(newSpecs.getDescriptionOfSpecs());
 		try
 		{
 			app.saveConfigInfo();
@@ -94,12 +98,17 @@ public class ActionMenuCustomFields extends UiMenuAction
 			if(newBottomSectionCustomFieldXml == null)
 				return null;
 			
+			String newTitle = inputDlg.getFormTemplateTitle();
+			String newDescription = inputDlg.getFormTemplateDescription();
+			
 			if(newTopSectionCustomFieldXml.length() == 0 || newBottomSectionCustomFieldXml.length() == 0)
 			{
 				if(mainWindow.confirmDlg("UndoCustomFields"))
 				{
 					existingSpecs.setTopSectionSpecs(StandardFieldSpecs.getDefaultTopSetionFieldSpecs());
 					existingSpecs.setBottomSectionSpecs(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+					existingSpecs.setTitleOfSpecs("");
+					existingSpecs.setDescriptionOfSpecs("");
 				}					
 			}
 			else
@@ -118,6 +127,8 @@ public class ActionMenuCustomFields extends UiMenuAction
 				BulletinFieldSpecs newFieldSpecs = new BulletinFieldSpecs();
 				newFieldSpecs.setTopSectionSpecs(newTopSectionSpecs);
 				newFieldSpecs.setBottomSectionSpecs(newBottomSectionSpecs);
+				newFieldSpecs.setTitleOfSpecs(newTitle);
+				newFieldSpecs.setDescriptionOfSpecs(newDescription);
 				return newFieldSpecs;
 			}
 		}
