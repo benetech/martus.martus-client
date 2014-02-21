@@ -34,6 +34,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import org.martus.client.core.ConfigInfo;
+import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
@@ -61,6 +62,15 @@ public class FxSetupContactInfoController extends AbstractFxSetupWizardControlle
 	{
 		getConfigInfo().setAuthor(getFontHelper().getStorable(authorField.getText()));
 		getConfigInfo().setOrganization(getFontHelper().getStorable(organizationField.getText()));
+		try
+		{
+			getApp().saveConfigInfo();
+		} 
+		catch (SaveConfigInfoException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private UiFontEncodingHelper getFontHelper()

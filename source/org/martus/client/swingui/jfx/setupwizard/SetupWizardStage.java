@@ -50,6 +50,7 @@ public class SetupWizardStage extends FxWizardStage
 				try
 				{
 					getMainWindow().getApp().attemptSignIn("a", "password".toCharArray());
+					getMainWindow().getApp().loadConfigInfo();
 					return new FxSetupContactInfoController(getMainWindow());
 				} 
 				catch (Exception e)
