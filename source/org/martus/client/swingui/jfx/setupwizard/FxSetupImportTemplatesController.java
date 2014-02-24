@@ -38,14 +38,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
@@ -173,35 +171,10 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardContr
 					data.add(new ContactsWithTemplatesTableData(key.getLabel(), key.getPublicCode(), false, ""));
 				}
 				
-				Callback<TableColumn<ContactsWithTemplatesTableData, Boolean>, TableCell<ContactsWithTemplatesTableData, Boolean>> radioButtonCellFactory = 
-		                new Callback<TableColumn<ContactsWithTemplatesTableData, Boolean>, TableCell<ContactsWithTemplatesTableData, Boolean>>() 
-		                {
-
-		            @Override
-		            public TableCell call(final TableColumn param) 
-		            {
-		                final TableCell cell = new TableCell() 
-		                {
-		                    @Override
-		                    public void updateItem(Object item, boolean empty) 
-		                    {
-		                    	if (item != null)
-		                    	{
-		                    		//NOT GETTING CALLED
-		                    		RadioButton choice = new RadioButton();                                                     
-		                    		setGraphic(choice);
-		                    	}
-		                    }
-		                };
-
-		                return cell;
-		            }
-		        };
-		        
 				System.out.println("data size =" + data.size());
 			
 				contactSelectedColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, Boolean>("rowSelected"));
-				contactSelectedColumn.setCellFactory(radioButtonCellFactory);
+				contactSelectedColumn.setCellFactory(new RadioButtonCellFactory());
 				
 				contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("contactName"));
 				contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsWithTemplatesTableData>forTableColumn());
