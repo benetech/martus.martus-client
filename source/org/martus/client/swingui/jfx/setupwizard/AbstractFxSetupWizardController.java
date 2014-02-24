@@ -34,6 +34,7 @@ import javafx.fxml.Initializable;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.ContentNavigationHandlerInterface;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.NavigationButtonsInterface;
 
 abstract public class AbstractFxSetupWizardController extends FxController implements ContentNavigationHandlerInterface, Initializable
@@ -64,6 +65,11 @@ abstract public class AbstractFxSetupWizardController extends FxController imple
 	public void setWizardNavigationHandler(NavigationButtonsInterface wizardNavigationHandlerToUse)
 	{
 		wizardNavigationHandler = wizardNavigationHandlerToUse;
+	}
+	
+	public FxWizardStage getWizardStage()
+	{
+		return (FxWizardStage)getStage();
 	}
 	
 	private NavigationButtonsInterface wizardNavigationHandler;
