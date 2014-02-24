@@ -174,7 +174,8 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardContr
 				}
 				
 				Callback<TableColumn<ContactsWithTemplatesTableData, Boolean>, TableCell<ContactsWithTemplatesTableData, Boolean>> radioButtonCellFactory = 
-		                new Callback<TableColumn<ContactsWithTemplatesTableData, Boolean>, TableCell<ContactsWithTemplatesTableData, Boolean>>() {
+		                new Callback<TableColumn<ContactsWithTemplatesTableData, Boolean>, TableCell<ContactsWithTemplatesTableData, Boolean>>() 
+		                {
 
 		            @Override
 		            public TableCell call(final TableColumn param) 
@@ -198,14 +199,14 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardContr
 		        };
 		        
 				System.out.println("data size =" + data.size());
-				
-				contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("contactName"));
-				publicCodeColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("publicCode"));
-				
+			
 				contactSelectedColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, Boolean>("rowSelected"));
 				contactSelectedColumn.setCellFactory(radioButtonCellFactory);
-
+				
+				contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("contactName"));
 				contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsWithTemplatesTableData>forTableColumn());
+				
+				publicCodeColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("publicCode"));
 				publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsWithTemplatesTableData>forTableColumn());
 
 				contactsWithTemplatesTableView.setItems(data);
