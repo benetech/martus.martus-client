@@ -42,6 +42,7 @@ import org.martus.common.MartusLogger;
 import org.martus.common.VersionBuildDate;
 import org.martus.swing.UiOptionPane;
 import org.martus.swing.Utilities;
+import org.miradi.main.ClassPathHacker;
 import org.miradi.main.RuntimeJarLoader;
 
 public class Martus
@@ -221,13 +222,12 @@ public class Martus
 		URL javaRuntimeURL = MartusJarVerification.getJarURL(String.class);
 		String urlString = javaRuntimeURL.toString();
 		String withoutJarPrefix = urlString.replace("jar:", "");
-		String withoutFilePrefix = withoutJarPrefix.replace("file:", "");
-		int jarAt = withoutFilePrefix.indexOf("rt.jar");
-		String directory = withoutFilePrefix.substring(0, jarAt);
-		File runtimeDirectory = new File(directory);
-		MartusLogger.log("Adding JavaFX from: " + runtimeDirectory.getAbsolutePath());
-		String[] fxJars = { "jfxrt.jar" };
-		RuntimeJarLoader.addJarsInSubdirectoryToClasspath(runtimeDirectory, fxJars);
+		
+		int jarAt = withoutJarPrefix.indexOf("rt.jar");
+		String directory = withoutJarPrefix.substring(0, jarAt);
+		URL jfxURL = new URL(directory + "jfxrt.jar");
+		MartusLogger.log("Adding JavaFX jar: " + jfxURL.toExternalForm());
+		ClassPathHacker.addURL(jfxURL);
 	}
 	
 	private static String[] getThirdPartyJarNames()
