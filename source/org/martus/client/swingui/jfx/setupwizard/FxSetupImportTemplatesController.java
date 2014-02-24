@@ -32,22 +32,16 @@ import java.util.Vector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
-import org.martus.client.swingui.jfx.FxStage;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.MartusLogger;
@@ -122,20 +116,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardContr
 	
 	private void showAddContactsDialog() throws Exception
 	{
-		Stage popupStage = new Stage();
-		popupStage.setTitle("Import Template");
-		popupStage.initModality(Modality.WINDOW_MODAL);
-
-		FXMLLoader fl = new FXMLLoader();
-		ImportTemplatesFromMyContactsController popupController = new ImportTemplatesFromMyContactsController(getMainWindow());
-		fl.setController(popupController);
-		fl.setLocation(FxStage.class.getResource(popupController.getFxmlLocation()));
-		fl.load();
-		Parent root = fl.getRoot();
-
-		Scene scene = new Scene(root);
-		popupStage.setScene(scene);
-	    popupStage.showAndWait();
+		showControllerInsideModalDialog(new ImportTemplatesFromMyContactsController(getMainWindow()), "Import Template");
 	}
 	
 	private static class ImportTemplatesFromMyContactsController extends FxController implements Initializable
