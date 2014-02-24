@@ -25,8 +25,12 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
@@ -36,6 +40,16 @@ public class FxSetupStorageServerController extends AbstractFxSetupWizardControl
 	public FxSetupStorageServerController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+		
+		destination = null;
+	}
+	
+	@Override
+	public void initialize(URL rootLocation, ResourceBundle bundle)
+	{
+		super.initialize(rootLocation, bundle);
+		
+		getWizardNavigationHandler().getNextButton().setVisible(false);
 	}
 
 	@Override
@@ -47,12 +61,38 @@ public class FxSetupStorageServerController extends AbstractFxSetupWizardControl
 	@Override
 	public FxController getNextControllerClassName()
 	{
-		if (advancedRadioButton.isSelected())
-			return new FxAdvancedServerStorageSetupController(getMainWindow());
-		
-		return new FxAddContactsController(getMainWindow());
+		return destination;
 	}
 	
 	@FXML
-	private RadioButton advancedRadioButton;
+	public void setupServerLater()
+	{
+		destination = new FxAddContactsController(getMainWindow());
+		getWizardStage().next();
+	}
+	
+	@FXML
+	public void useDefaultServer()
+	{
+		destination = new FxAddContactsController(getMainWindow());
+		getWizardStage().next();
+	}
+	
+	@FXML
+	public void advancedServerSettings()
+	{
+		destination = new FxAdvancedServerStorageSetupController(getMainWindow());
+		getWizardStage().next();
+	}
+	
+	@FXML
+	private Button laterButton;
+
+	@FXML
+	private Button defaultServerButton;
+
+	@FXML
+	private Hyperlink advancedHyperlink;
+	
+	private FxController destination;
 }
