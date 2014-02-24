@@ -50,6 +50,8 @@ import javafx.stage.Stage;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxStage;
+import org.martus.common.ContactKey;
+import org.martus.common.ContactKeys;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
@@ -250,13 +252,25 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	{
 		data.clear();
 		
-		// FIXME: Replace this fake data with real data
-		String name = "Elmer Fudd";
-		String publicCode = "1234";
-		boolean canSendTo = false;
-		boolean canReceiveFrom = true;
-		ContactsTableData contactData = new ContactsTableData(name, publicCode, canSendTo, canReceiveFrom); 
-		data.add(contactData);
+		try
+		{
+			ContactKeys keys = getApp().getContactKeys();
+			for(int i = 0; i < keys.size(); ++i)
+			{
+				ContactKey contact = keys.get(i);
+				String name = contact.getLabel();
+				String publicCode = contact.getPublicCode();
+				boolean canSendTo = contact.getCanSendTo();
+				boolean canReceiveFrom = contact.getCanReceiveFrom();
+				ContactsTableData contactData = new ContactsTableData(name, publicCode, canSendTo, canReceiveFrom); 
+				data.add(contactData);
+			}
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+		
 	}
 
 	@FXML
