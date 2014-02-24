@@ -127,7 +127,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardContr
 		popupStage.initModality(Modality.WINDOW_MODAL);
 
 		FXMLLoader fl = new FXMLLoader();
-		ImportTemplatesFromMyContactsController popupController = new ImportTemplatesFromMyContactsController(getMainWindow(), popupStage);
+		ImportTemplatesFromMyContactsController popupController = new ImportTemplatesFromMyContactsController(getMainWindow());
 		fl.setController(popupController);
 		fl.setLocation(FxStage.class.getResource(popupController.getFxmlLocation()));
 		fl.load();
@@ -140,11 +140,9 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardContr
 	
 	private static class ImportTemplatesFromMyContactsController extends FxController implements Initializable
 	{
-		public ImportTemplatesFromMyContactsController(UiMainWindow mainWindowToUse, Stage popupStage) throws Exception
+		public ImportTemplatesFromMyContactsController(UiMainWindow mainWindowToUse) throws Exception
 		{
 			super(mainWindowToUse);
-
-			ourStage = popupStage;
 		}
 		
 		@Override
@@ -186,8 +184,6 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardContr
 		{
 			return "setupwizard/SetupImportTemplateFromMyContactsPopup.fxml";
 		}
-
-		private Stage ourStage;
 
 		@FXML
 		private TableView<ContactsWithTemplatesTableData> contactsWithTemplatesTableView;
