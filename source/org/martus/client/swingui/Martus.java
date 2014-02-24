@@ -33,9 +33,12 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Vector;
 
+import javafx.stage.Stage;
+
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
+import org.martus.client.core.MartusJarVerification;
 import org.martus.clientside.ClientPortOverride;
 import org.martus.common.MartusLogger;
 import org.martus.common.VersionBuildDate;
@@ -194,11 +197,37 @@ public class Martus
 			return;
 		}
 		
+		try
+		{
+			new Stage();
+			MartusLogger.log("JavaFX already present");
+		}
+		catch(NoClassDefFoundError e)
+		{
+			addJavaFxJarToClasspath();
+		}
+
 		String jarSubdirectoryName = "ThirdParty";
 		System.out.println("Running Martus from " + martusJarDirectory);
 		File thirdPartyDirectory = new File(martusJarDirectory, jarSubdirectoryName);
 		if(thirdPartyDirectory.exists())
 			RuntimeJarLoader.addJarsInSubdirectoryToClasspath(thirdPartyDirectory, getThirdPartyJarNames());
+	}
+
+	public static void addJavaFxJarToClasspath() throws Exception
+	{
+		MartusLogger.log("Adding JavaFX to classpath");
+
+		URL javaRuntimeURL = MartusJarVerification.getJarURL(String.class);
+		String urlString = javaRuntimeURL.toString();
+		String withoutJarPrefix = urlString.replace("jar:", "");
+		String withoutFilePrefix = withoutJarPrefix.replace("file:", "");
+		int jarAt = withoutFilePrefix.indexOf("rt.jar");
+		String directory = withoutFilePrefix.substring(0, jarAt);
+		File runtimeDirectory = new File(directory);
+		MartusLogger.log("Adding JavaFX from: " + runtimeDirectory.getAbsolutePath());
+		String[] fxJars = { "jfxrt.jar" };
+		RuntimeJarLoader.addJarsInSubdirectoryToClasspath(runtimeDirectory, fxJars);
 	}
 	
 	private static String[] getThirdPartyJarNames()
