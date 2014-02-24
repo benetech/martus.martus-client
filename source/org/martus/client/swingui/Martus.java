@@ -33,8 +33,6 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Vector;
 
-import javafx.stage.Stage;
-
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -199,7 +197,9 @@ public class Martus
 		
 		try
 		{
-			new Stage();
+			@SuppressWarnings("unused")
+			javafx.scene.paint.Color c = javafx.scene.paint.Color.BLUE;
+			
 			MartusLogger.log("JavaFX already present");
 		}
 		catch(NoClassDefFoundError e)
