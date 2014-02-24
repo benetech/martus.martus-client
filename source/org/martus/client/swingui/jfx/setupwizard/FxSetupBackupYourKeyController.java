@@ -79,7 +79,7 @@ public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardControl
 		fileChooser.setTitle("Backup Key File");
 		fileChooser.getExtensionFilters().addAll(
 				new FileChooser.ExtensionFilter("All Files", "*.*"),
-				new FileChooser.ExtensionFilter("Martus Key (*.dat)", "*.dat"));
+				new FileChooser.ExtensionFilter(getLocalization().getFieldLabel("KeyPairFileFilter"), "*.dat"));
 		File newBackupFile = fileChooser.showSaveDialog(null);
 		if(newBackupFile == null)
 			return;
