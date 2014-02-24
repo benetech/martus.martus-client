@@ -35,6 +35,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.util.FileTransfer;
 import org.martus.util.FileVerifier;
+import org.martus.util.TokenReplacement;
 
 public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardController
 {
@@ -86,7 +87,8 @@ public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardControl
 		FileTransfer.copyFile(keypairFile, newBackupFile);
 		if(FileVerifier.verifyFiles(keypairFile, newBackupFile))
 		{
-			backupMessageLabel.setText( newBackupFile.getName() + " created.");
+			String message = TokenReplacement.replaceToken("#backupFileName created.", "#backupFileName", newBackupFile.getName());
+			backupMessageLabel.setText(message);
 			getApp().getConfigInfo().setBackedUpKeypairEncrypted(true);
 			getApp().saveConfigInfo();
 		}
