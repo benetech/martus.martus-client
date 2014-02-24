@@ -58,22 +58,22 @@ public class ContactsWithTemplatesTableData
 		this.publicCode.set(publicCodeToUse);
 	}
 	
-	public boolean getSentTo()
+	public boolean getRowSelected()
 	{
 		return rowSelected.get();
 	}
 	
-	public void setSentTo(boolean sentToToUse)
+	public void setRowSelected(boolean rowSelectedToUse)
 	{
-		rowSelected.set(sentToToUse);
+		rowSelected.set(rowSelectedToUse);
 	}
 	
-	public String getReceivedFrom()
+	public String getSelectedTemplateName()
 	{
 		return selectedTemplateName.get();
 	}
 	
-	public void setReceivedFrom(String selectedTamplateNameToUse)
+	public void setSelectedTemplateName(String selectedTamplateNameToUse)
 	{
 		selectedTemplateName.set(selectedTamplateNameToUse);
 	}
