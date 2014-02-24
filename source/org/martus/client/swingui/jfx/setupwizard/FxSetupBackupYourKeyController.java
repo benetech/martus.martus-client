@@ -26,8 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.setupwizard;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -35,6 +33,7 @@ import javafx.stage.FileChooser;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.util.FileTransfer;
 import org.martus.util.FileVerifier;
 
 public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardController
@@ -84,16 +83,7 @@ public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardControl
 		if(newBackupFile == null)
 			return;
 
-		FileInputStream input = new FileInputStream(keypairFile);
-		FileOutputStream output = new FileOutputStream(newBackupFile);
-
-		int originalKeyPairFileSize = (int) keypairFile.length();
-		byte[] inputArray = new byte[originalKeyPairFileSize];
-
-		input.read(inputArray);
-		output.write(inputArray);
-		input.close();
-		output.close();
+		FileTransfer.copyFile(keypairFile, newBackupFile);
 		if(FileVerifier.verifyFiles(keypairFile, newBackupFile))
 		{
 			backupMessageLabel.setText( newBackupFile.getName() + " created.");
