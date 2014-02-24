@@ -48,10 +48,8 @@ import javafx.stage.Stage;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxStage;
-import org.martus.common.FieldDeskKey;
-import org.martus.common.FieldDeskKeys;
-import org.martus.common.HeadquartersKey;
-import org.martus.common.HeadquartersKeys;
+import org.martus.common.ContactKey;
+import org.martus.common.ContactKeys;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.ChoiceItem;
 
@@ -157,17 +155,10 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardContr
 				contactsWithTemplatesTableView.setEditable(true);
 				//getApp().attemptSignIn("c", "cccccccc".toCharArray());
 				//data.add(new ContactsWithTemplatesTableData("ABC", "1234", true, "dropDown"));
-				HeadquartersKeys headquarterKeys = getApp().getAllHQKeys();
-				for (int index = 0; index < headquarterKeys.size(); ++index)
+				ContactKeys contactKey = getApp().getContactKeys();
+				for (int index = 0; index < contactKey.size(); ++index)
 				{
-					HeadquartersKey key = headquarterKeys.get(index);
-					data.add(new ContactsWithTemplatesTableData(key.getLabel(), key.getPublicCode(), false, ""));
-				}
-				
-				FieldDeskKeys fieldDeskKeys = getApp().getFieldDeskKeys();
-				for (int index = 0; index < fieldDeskKeys.size(); ++index)
-				{
-					FieldDeskKey key = fieldDeskKeys.get(index);
+					ContactKey key = contactKey.get(index);
 					data.add(new ContactsWithTemplatesTableData(key.getLabel(), key.getPublicCode(), false, ""));
 				}
 				
