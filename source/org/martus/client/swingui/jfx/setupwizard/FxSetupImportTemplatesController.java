@@ -132,8 +132,6 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardContr
 			try
 			{
 				contactsWithTemplatesTableView.setEditable(true);
-				//getApp().attemptSignIn("c", "cccccccc".toCharArray());
-				//data.add(new ContactsWithTemplatesTableData("ABC", "1234", true, "dropDown"));
 				ContactKeys contactKey = getApp().getContactKeys();
 				for (int index = 0; index < contactKey.size(); ++index)
 				{
