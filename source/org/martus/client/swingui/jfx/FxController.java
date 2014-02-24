@@ -29,7 +29,11 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
@@ -96,6 +100,23 @@ abstract public class FxController implements FxControllerInterface
 	public MartusApp getApp()
 	{
 		return getMainWindow().getApp();
+	}
+	
+	public void showControllerInsideModalDialog(FxController controller, String dialogTitle) throws Exception
+	{
+		Stage popupStage = new Stage();
+		popupStage.setTitle(dialogTitle);
+		popupStage.initModality(Modality.WINDOW_MODAL);
+
+		FXMLLoader fl = new FXMLLoader();
+		fl.setController(controller);
+		fl.setLocation(FxStage.class.getResource(controller.getFxmlLocation()));
+		fl.load();
+		Parent root = fl.getRoot();
+
+		Scene scene = new Scene(root);
+		popupStage.setScene(scene);
+	    popupStage.showAndWait();
 	}
 
 	private FxStage stage;
