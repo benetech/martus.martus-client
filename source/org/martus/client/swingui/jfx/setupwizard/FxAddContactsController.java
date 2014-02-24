@@ -94,6 +94,12 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		{
 			MartusAccountAccessToken token = new MartusAccountAccessToken(accessTokenField.getText());
 			String contactAccountId = getApp().getMartusAccountIdFromAccessTokenOnServer(token);
+			String ourAccountId = "6836.3614.4386.7238.1816"; //getApp().getAccountId();
+			if(ourAccountId.equals(contactAccountId))
+			{
+				showNotifyDlg("ContactKeyIsOurself");
+				return;
+			}
 			showAddContactsDialog(contactAccountId);
 		} 
 		catch (TokenInvalidException e)
@@ -113,8 +119,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		} 
 		catch (ServerNotAvailableException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			showNotifyDlg("retrievenoserver");
 		}
 		
 	}
@@ -183,6 +188,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		@FXML
 		public void verifyContact()
 		{
+			//FIXME do real work here.
 			ourStage.close();
 		}
 
