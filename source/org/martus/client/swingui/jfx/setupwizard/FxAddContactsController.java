@@ -50,6 +50,8 @@ import javafx.stage.Stage;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxStage;
+import org.martus.common.ContactKey;
+import org.martus.common.ContactKeys;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
@@ -92,6 +94,12 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		{
 			MartusAccountAccessToken token = new MartusAccountAccessToken(accessTokenField.getText());
 			String contactAccountId = getApp().getMartusAccountIdFromAccessTokenOnServer(token);
+			String ourAccountId = "6836.3614.4386.7238.1816"; //getApp().getAccountId();
+			if(ourAccountId.equals(contactAccountId))
+			{
+				showNotifyDlg("ContactKeyIsOurself");
+				return;
+			}
 			showAddContactsDialog(contactAccountId);
 		} 
 		catch (TokenInvalidException e)
@@ -111,8 +119,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		} 
 		catch (ServerNotAvailableException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			showNotifyDlg("retrievenoserver");
 		}
 		
 	}
@@ -181,6 +188,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		@FXML
 		public void verifyContact()
 		{
+			//FIXME do real work here.
 			ourStage.close();
 		}
 
@@ -250,13 +258,25 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 	{
 		data.clear();
 		
-		// FIXME: Replace this fake data with real data
-		String name = "Elmer Fudd";
-		String publicCode = "1234";
-		boolean canSendTo = false;
-		boolean canReceiveFrom = true;
-		ContactsTableData contactData = new ContactsTableData(name, publicCode, canSendTo, canReceiveFrom); 
-		data.add(contactData);
+		try
+		{
+			ContactKeys keys = getApp().getContactKeys();
+			for(int i = 0; i < keys.size(); ++i)
+			{
+				ContactKey contact = keys.get(i);
+				String name = contact.getLabel();
+				String publicCode = contact.getPublicCode();
+				boolean canSendTo = contact.getCanSendTo();
+				boolean canReceiveFrom = contact.getCanReceiveFrom();
+				ContactsTableData contactData = new ContactsTableData(name, publicCode, canSendTo, canReceiveFrom); 
+				data.add(contactData);
+			}
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+		
 	}
 
 	@FXML

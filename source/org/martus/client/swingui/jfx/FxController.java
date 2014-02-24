@@ -29,6 +29,8 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.swing.JOptionPane;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -101,6 +103,15 @@ abstract public class FxController implements FxControllerInterface
 	{
 		return getMainWindow().getApp();
 	}
+	
+	public void showNotifyDlg(String tag)
+	{
+		
+		String title = "";
+		String message = "";
+		JOptionPane.showMessageDialog(getStage().getShell(), message, title, JOptionPane.WARNING_MESSAGE);
+	}
+
 	
 	public void showControllerInsideModalDialog(FxController controller, String dialogTitle) throws Exception
 	{
