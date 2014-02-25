@@ -27,16 +27,25 @@ package org.martus.client.swingui.jfx.setupwizard;
 
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
+import javafx.scene.control.ToggleGroup;
 
 public class RadioButtonTableCell extends TableCell
 {
+	public RadioButtonTableCell(ToggleGroup groupToUse)
+	{
+		group = groupToUse;
+	}
+	
 	@Override
 	public void updateItem(Object item, boolean empty) 
 	{
 		if (item != null)
 		{
 			RadioButton choice = new RadioButton();
+			choice.setToggleGroup(group);
 			setGraphic(choice);
 		}
 	}
+
+	private ToggleGroup group;
 }

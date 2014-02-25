@@ -27,13 +27,21 @@ package org.martus.client.swingui.jfx.setupwizard;
 
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.ToggleGroup;
 import javafx.util.Callback;
 
 public class RadioButtonCellFactory implements Callback<TableColumn<ContactsWithTemplatesTableData, Boolean>, TableCell<ContactsWithTemplatesTableData, Boolean>>
 {
+	public RadioButtonCellFactory()
+	{
+		System.out.println("boo");
+		group = new ToggleGroup();
+	}
 	@Override
 	public TableCell call(final TableColumn param) 
 	{
-		return new RadioButtonTableCell();
+		return new RadioButtonTableCell(group);
 	}
+	
+	private ToggleGroup group;
 }
