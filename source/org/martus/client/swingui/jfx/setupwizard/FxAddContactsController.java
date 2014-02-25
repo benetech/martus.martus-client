@@ -96,8 +96,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			MartusAccountAccessToken token = new MartusAccountAccessToken(accessTokenField.getText());
 			MartusApp app = getApp();
 			String contactAccountId = app.getMartusAccountIdFromAccessTokenOnServer(token);
-			String ourAccountId = app.getAccountId();
-			if(ourAccountId.equals(contactAccountId))
+			if(contactAccountId.equals(app.getAccountId()))
 			{
 				showNotifyDlg("ContactKeyIsOurself");
 				return;
@@ -130,8 +129,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	{
 		try
 		{
-			Stage popupStage = new Stage();
-			PopupController popupController = new PopupController(getMainWindow(), popupStage, contactAccountId);
+			PopupController popupController = new PopupController(getMainWindow(), contactAccountId);
 			showControllerInsideModalDialog(popupController, "AddContact");
 		}
 		catch (Exception e)
@@ -142,10 +140,9 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	
 	public static class PopupController extends FxController implements Initializable
 	{
-		public PopupController(UiMainWindow mainWindowToUse, Stage popupStage, String contactAccountIdToUse)
+		public PopupController(UiMainWindow mainWindowToUse, String contactAccountIdToUse)
 		{
 			super(mainWindowToUse);
-			ourStage = popupStage;
 			contactAccountId = contactAccountIdToUse;
 		}
 		
@@ -173,20 +170,19 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		@FXML
 		public void cancelVerify()
 		{
-			ourStage.close();
+			getStage().close();
 		}
 
 		@FXML
 		public void verifyContact()
 		{
 			//FIXME do real work here.
-			ourStage.close();
+			getStage().close();
 		}
 
 		@FXML
 		private Label contactPublicCodeLabel;
 		
-		private Stage ourStage;
 		private String contactAccountId;
 	}
 	
