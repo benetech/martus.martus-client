@@ -42,7 +42,7 @@ import org.martus.client.swingui.dialogs.UiPreferencesDlg;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class FxSetupSettingsController extends AbstractFxSetupWizardController implements Initializable
+public class FxSetupSettingsController extends AbstractFxSetupWizardContentController implements Initializable
 {
 	public FxSetupSettingsController(UiMainWindow mainWindowToUse)
 	{

@@ -39,7 +39,7 @@ import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 
-public class FxSetupContactInfoController extends AbstractFxSetupWizardController implements Initializable
+public class FxSetupContactInfoController extends AbstractFxSetupWizardContentController implements Initializable
 {
 	public FxSetupContactInfoController(UiMainWindow mainWindowToUse)
 	{

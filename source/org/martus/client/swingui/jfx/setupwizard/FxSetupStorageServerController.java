@@ -37,7 +37,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.MartusLogger;
 
-public class FxSetupStorageServerController extends AbstractFxSetupWizardController
+public class FxSetupStorageServerController extends AbstractFxSetupWizardContentController
 {
 	public FxSetupStorageServerController(UiMainWindow mainWindowToUse)
 	{

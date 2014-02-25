@@ -41,7 +41,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.MartusLogger;
 
-public class FxVerifyAccountController extends AbstractFxSetupWizardController implements Initializable
+public class FxVerifyAccountController extends AbstractFxSetupWizardContentController implements Initializable
 {
 	public FxVerifyAccountController(UiMainWindow mainWindowToUse)
 	{

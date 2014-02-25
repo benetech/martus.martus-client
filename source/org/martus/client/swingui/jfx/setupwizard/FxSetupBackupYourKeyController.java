@@ -37,7 +37,7 @@ import org.martus.util.FileTransfer;
 import org.martus.util.FileVerifier;
 import org.martus.util.TokenReplacement;
 
-public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardController
+public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardContentController
 {
 	public FxSetupBackupYourKeyController(UiMainWindow mainWindowToUse)
 	{

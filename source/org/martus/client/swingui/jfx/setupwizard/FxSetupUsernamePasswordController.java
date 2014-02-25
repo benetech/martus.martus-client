@@ -42,7 +42,7 @@ import org.martus.client.core.MartusUserNameAndPassword;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 
-public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardController implements Initializable
+public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardContentController implements Initializable
 {
 	public FxSetupUsernamePasswordController(UiMainWindow mainWindowToUse)
 	{

@@ -37,7 +37,7 @@ import javafx.scene.control.TextField;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 
-public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizardController implements Initializable
+public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizardContentController implements Initializable
 {
 	public FxAdvancedServerStorageSetupController(UiMainWindow mainWindowToUse)
 	{
