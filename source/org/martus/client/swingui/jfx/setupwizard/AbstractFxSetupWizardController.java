@@ -69,7 +69,7 @@ abstract public class AbstractFxSetupWizardController extends FxController imple
 	
 	public FxWizardStage getWizardStage()
 	{
-		return (FxWizardStage)getStage();
+		return (FxWizardStage)getFxStage();
 	}
 	
 	private NavigationButtonsInterface wizardNavigationHandler;
