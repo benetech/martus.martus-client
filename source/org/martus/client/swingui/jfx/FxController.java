@@ -170,7 +170,7 @@ abstract public class FxController implements FxControllerInterface
 	{
 		Stage popupStage = new Stage();
 		controller.setStage(popupStage);
-		popupStage.setTitle(getLocalization().getWindowTitle(dialogTitleTag));
+		popupStage.setTitle(getLocalization().getWindowTitle("notify"+dialogTitleTag));
 		popupStage.initModality(Modality.WINDOW_MODAL);
 
 		FXMLLoader fl = new FXMLLoader();
