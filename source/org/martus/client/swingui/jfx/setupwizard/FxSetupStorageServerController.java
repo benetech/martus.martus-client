@@ -28,12 +28,15 @@ package org.martus.client.swingui.jfx.setupwizard;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 
+import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.common.MartusLogger;
 
 public class FxSetupStorageServerController extends AbstractFxSetupWizardController
 {
@@ -50,12 +53,29 @@ public class FxSetupStorageServerController extends AbstractFxSetupWizardControl
 		super.initialize(rootLocation, bundle);
 		
 		getWizardNavigationHandler().getNextButton().setVisible(false);
+		defaultServerButton.setDefaultButton(true);
 	}
 
 	@Override
 	public String getFxmlLocation()
 	{
 		return "setupwizard/SetupStorageServer.fxml";
+	}
+
+	@Override
+	public void nextWasPressed(ActionEvent actionEvent)
+	{
+		try
+		{
+			getApp().saveConfigInfo();
+		} 
+		catch (SaveConfigInfoException e)
+		{
+			MartusLogger.logException(e);
+			System.exit(1);
+		}
+		
+		super.nextWasPressed(actionEvent);
 	}
 	
 	@Override
@@ -74,10 +94,32 @@ public class FxSetupStorageServerController extends AbstractFxSetupWizardControl
 	@FXML
 	public void useDefaultServer()
 	{
+		getApp().getConfigInfo().setServerName(getDefaultServerIp());
+		getApp().getConfigInfo().setServerPublicKey(getDefaultServerPublicKey());
+		
 		destination = new FxAddContactsController(getMainWindow());
 		getWizardStage().next();
 	}
 	
+	private String getDefaultServerIp()
+	{
+		return "54.213.152.140";
+	}
+
+	private String getDefaultServerPublicKey()
+	{
+		return "MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAjIX0yCfct1/WQptimL"
+				+ "jK35F3wsW/SEQ8DGdxfMBTZX1GVoOD6zg0d71Ns1ij4FdnOUsD4QCN4Kiay"
+				+ "Q+l28eIU8LL8L5oJClFwsVqgNDvPn8jR/CAbPy9NL0gKHevvX/dciVVCSrg"
+				+ "Oyyc9p9MP05qyekXqVIfLoZNkcXL5tQKrEiqVdJaDEPepPIkQpBgFwF0QZl"
+				+ "J7NdgF4T5wSyEt+fxL7qnZOCqchF8aVbSzAaGLRQEJEtFYTa9mOUCdCLtcn"
+				+ "sdgnj+lLftaV5+8o8ZeUTbyH5H/NlLddboxlI8rNalY7E5f3DltOOmTyjMh"
+				+ "KSaxl9lfIxpfKoeLdYb5bA74BV1AjbwnxahlN4KRZm/7i0RkapKIXZ0Hqus"
+				+ "4JKUG5CJcIybS64ppt8ufCvAEERrZUzrrIDNwv+qob9PYFdiMq1xg+VNrxm"
+				+ "/0RXfjwgXxNjDS07MTQc2w/z1egtsDLSi4dALw69nefS0hbZwbv8dIrN23i"
+				+ "Hn0FNdbz81l1FrELGyh1hRAgMBAAE=";
+	}
+
 	@FXML
 	public void advancedServerSettings()
 	{
