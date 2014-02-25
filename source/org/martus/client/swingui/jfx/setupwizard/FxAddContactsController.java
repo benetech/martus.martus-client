@@ -47,6 +47,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxStage;
@@ -93,8 +94,9 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		try
 		{
 			MartusAccountAccessToken token = new MartusAccountAccessToken(accessTokenField.getText());
-			String contactAccountId = getApp().getMartusAccountIdFromAccessTokenOnServer(token);
-			String ourAccountId = getApp().getAccountId();
+			MartusApp app = getApp();
+			String contactAccountId = app.getMartusAccountIdFromAccessTokenOnServer(token);
+			String ourAccountId = app.getAccountId();
 			if(ourAccountId.equals(contactAccountId))
 			{
 				showNotifyDlg("ContactKeyIsOurself");
