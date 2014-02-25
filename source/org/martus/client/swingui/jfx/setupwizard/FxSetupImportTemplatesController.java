@@ -116,7 +116,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardContr
 	
 	private void showAddContactsDialog() throws Exception
 	{
-		showControllerInsideModalDialog(new ImportTemplatesFromMyContactsController(getMainWindow()), "Import Template");
+		showControllerInsideModalDialog(new ImportTemplatesFromMyContactsController(getMainWindow()), "ImportTemplate");
 	}
 	
 	private static class ImportTemplatesFromMyContactsController extends FxController implements Initializable

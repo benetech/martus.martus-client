@@ -28,12 +28,15 @@ package org.martus.client.swingui.jfx;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
-import javax.swing.JOptionPane;
-
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -79,16 +82,26 @@ abstract public class FxController implements FxControllerInterface
 		return FxScene.class.getResource(fileLocation);
 	}		
 	
-	public void setStage(FxStage stageToUse)
+	public void setFxStage(FxStage stageToUse)
+	{
+		fxStage = stageToUse;
+	}
+	
+	public FxStage getFxStage()
+	{
+		return fxStage;
+	}
+	
+	public void setStage(Stage stageToUse)
 	{
 		stage = stageToUse;
 	}
 	
-	public FxStage getStage()
+	public Stage getStage()
 	{
 		return stage;
 	}
-	
+
 	public UiMainWindow getMainWindow()
 	{
 		return mainWindow;
@@ -106,16 +119,58 @@ abstract public class FxController implements FxControllerInterface
 	
 	public void showNotifyDlg(String baseTag)
 	{
-		String title = getLocalization().getWindowTitle("notify" + baseTag);
-		String cause = getLocalization().getFieldLabel("notify" + baseTag + "cause");
-		//JOptionPane.showMessageDialog(getStage().getShell(), message, title, JOptionPane.WARNING_MESSAGE);
+		try
+		{
+			PopupNotifyController popupController = new PopupNotifyController(getMainWindow(), baseTag);
+			showControllerInsideModalDialog(popupController, baseTag);
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+	}
+	
+	public static class PopupNotifyController extends FxController implements Initializable
+	{
+		public PopupNotifyController(UiMainWindow mainWindowToUse, String notificationTag)
+		{
+			super(mainWindowToUse);
+			baseTag = notificationTag;
+		}
+		
+		@Override
+		public void initialize(URL arg0, ResourceBundle arg1)
+		{
+			MartusLocalization localization = getLocalization();
+			fxOkButton.setText(localization.getButtonLabel("ok"));
+			fxLabel.setText(localization.getFieldLabel("notify"+baseTag+"cause"));
+		}
+		
+		@Override
+		public String getFxmlLocation()
+		{
+			return "setupwizard/NotifyPopup.fxml";
+		}
+
+		@FXML
+		public void okPressed()
+		{
+			getStage().close();
+		}
+
+		@FXML
+		private Label fxLabel;
+		@FXML
+		private Button fxOkButton;
+		private String baseTag;
 	}
 
 	
-	public void showControllerInsideModalDialog(FxController controller, String dialogTitle) throws Exception
+	public void showControllerInsideModalDialog(FxController controller, String dialogTitleTag) throws Exception
 	{
 		Stage popupStage = new Stage();
-		popupStage.setTitle(dialogTitle);
+		controller.setStage(popupStage);
+		popupStage.setTitle(getLocalization().getWindowTitle(dialogTitleTag));
 		popupStage.initModality(Modality.WINDOW_MODAL);
 
 		FXMLLoader fl = new FXMLLoader();
@@ -129,6 +184,7 @@ abstract public class FxController implements FxControllerInterface
 	    popupStage.showAndWait();
 	}
 
-	private FxStage stage;
+	private Stage stage;
+	private FxStage fxStage;
 	private UiMainWindow mainWindow;
 }

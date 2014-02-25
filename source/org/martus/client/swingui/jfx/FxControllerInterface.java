@@ -28,6 +28,6 @@ package org.martus.client.swingui.jfx;
 
 public interface FxControllerInterface
 {
-	public void setStage(FxStage stage);
+	public void setFxStage(FxStage stage);
 	public String getFxmlLocation();
 }

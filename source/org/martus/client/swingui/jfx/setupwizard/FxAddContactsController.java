@@ -130,7 +130,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		{
 			Stage popupStage = new Stage();
 			PopupController popupController = new PopupController(getMainWindow(), popupStage, contactAccountId);
-			showControllerInsideModalDialog(popupController, "Add Contact");
+			showControllerInsideModalDialog(popupController, "AddContact");
 		}
 		catch (Exception e)
 		{

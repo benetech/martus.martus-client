@@ -113,6 +113,10 @@ public class EnglishStrings
 "wintitle:confirmLoadingFieldValuesFromAllBulletinsCancel=Loading Values",
 "wintitle:confirmImportingCustomizationUnknownSigner=Import Customization Template",
 
+"wintitle:AddContact=Add Contact",
+"wintitle:ImportTemplate=Import Template",
+"wintitle:ContactsNoServer=Contacts Server",
+
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrorBulletinOlder=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrors=Error Moving Bulletin(s)",
@@ -123,7 +127,6 @@ public class EnglishStrings
 "wintitle:notifyretrievefailed=Retrieve Bulletins",
 "wintitle:notifyretrievenothing=Retrieve Bulletins",
 "wintitle:notifyretrievenoserver=Retrieve Bulletins",
-"wintitle:notifyContactsNoServer=Contacts Server",
 "wintitle:notifyDeleteServerDraftsWorked=Delete Drafts From Server",
 "wintitle:notifyDeleteServerDraftsNone=Delete Drafts From Server",
 "wintitle:notifyDeleteServerDraftsFailed=Delete Drafts From Server",
@@ -248,6 +251,7 @@ public class EnglishStrings
 "wintitle:notifyErrorSavingDictionary=Error",
 "wintitle:notifyErrorLoadingDictionary=Error",
 "wintitle:notifyErrorUpdatingDictionary=Error",
+
 
 "wintitle:notifyTemplateSavedToServer=Save Template To Server",
 "field:notifyTemplateSavedToServercause=Successfully saved form template to your account on the server.",
