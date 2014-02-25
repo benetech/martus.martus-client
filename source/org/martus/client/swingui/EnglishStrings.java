@@ -113,9 +113,9 @@ public class EnglishStrings
 "wintitle:confirmLoadingFieldValuesFromAllBulletinsCancel=Loading Values",
 "wintitle:confirmImportingCustomizationUnknownSigner=Import Customization Template",
 
-"wintitle:AddContact=Add Contact",
-"wintitle:ImportTemplate=Import Template",
-"wintitle:ContactsNoServer=Contacts Server",
+"wintitle:notifyAddContact=Add Contact",
+"wintitle:notifyImportTemplate=Import Template",
+"wintitle:notifyContactsNoServer=Contacts Server",
 
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrorBulletinOlder=Cannot Move Bulletin(s)",
@@ -210,7 +210,6 @@ public class EnglishStrings
 "wintitle:notifyFieldDeskKeyAlreadyExists=Field Desk Account Already Exists",
 "wintitle:notifyFieldDeskKeyIsOurself=Field Desk Account Is Yourself",
 "wintitle:notifyHQKeyIsOurself=HQ Account Is Yourself",
-"wintitle:notifyContactKeyIsOurself=Contact Account Is Yourself",
 "wintitle:notifyFolderMigrationFailed=Folder Migration Error",
 "wintitle:notifyResendErrorNotAuthorizedToSend=Not Authorized To Send",
 "wintitle:notifyResendError=Error Sending Bulletin",
@@ -252,6 +251,12 @@ public class EnglishStrings
 "wintitle:notifyErrorLoadingDictionary=Error",
 "wintitle:notifyErrorUpdatingDictionary=Error",
 
+"wintitle:notifyContactKeyIsOurself=Contact Account Is Yourself",
+"field:notifyContactKeyIsOurselfcause=You cannot add yourself as a contact.",
+"wintitle:notifyContactKeyAlreadyExists=Contact Account Already Exists",
+"field:notifyContactKeyAlreadyExistscause=You have already added this contact.",
+"wintitle:notifyUnableToRetrieveContactFromServer=Unable To Retrieve Contact Info",
+"field:notifyUnableToRetrieveContactFromServercause=We were unable to retrieve the contact information from the server for this token.  A Martus server may be temporarily down, please try again later.",
 
 "wintitle:notifyTemplateSavedToServer=Save Template To Server",
 "field:notifyTemplateSavedToServercause=Successfully saved form template to your account on the server.",
@@ -970,7 +975,6 @@ public class EnglishStrings
 "field:notifyFieldDeskKeyAlreadyExistscause=You have already added this account as a Field Desk.",
 "field:notifyFieldDeskKeyIsOurselfcause=You cannot add yourself as a Field Desk.",
 "field:notifyHQKeyIsOurselfcause=You cannot add yourself as an HQ.",
-"field:notifyContactKeyIsOurselfcause=You cannot add yourself as a contact.",
 "field:notifyFolderMigrationFailedcause=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.",
 "field:notifyResendErrorNotAuthorizedToSendcause=One or more bulletins were unable to be resent because you are not authorized to upload them.",
 "field:notifyResendErrorcause=One or more bulletins were unable to be resent due to an unexpected error.",

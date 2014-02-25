@@ -33,10 +33,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -44,23 +41,17 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
-import org.martus.client.swingui.jfx.FxStage;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusAccountAccessToken;
-import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
 import org.martus.common.MartusAccountAccessToken.TokenNotFoundException;
 import org.martus.common.MartusLogger;
-import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.crypto.MartusSecurity;
-import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class FxAddContactsController extends AbstractFxSetupWizardContentController implements Initializable
 {
@@ -89,7 +80,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	}
 	
 	@FXML
-	public void addContact()
+	public void addContact() 
 	{
 		try
 		{
@@ -101,64 +92,82 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 				showNotifyDlg("ContactKeyIsOurself");
 				return;
 			}
-			showAddContactsDialog(contactAccountId);
-		} 
-		catch (TokenInvalidException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		catch (TokenNotFoundException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		catch (MartusSignatureException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String contactPublicCode = MartusSecurity.computeFormattedPublicCode(contactAccountId);
+			if(DoesContactAlreadyExistInTable(contactPublicCode))
+			{
+				showNotifyDlg("ContactKeyAlreadyExists");
+				return;
+			}
+			showAndAddContactsDialog(contactPublicCode);
 		} 
 		catch (ServerNotAvailableException e)
 		{
 			showNotifyDlg("ContactsNoServer");
-		}
-		
+		} 
+		catch (TokenNotFoundException e)
+		{
+			showNotifyDlg("UnableToRetrieveContactFromServer");
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDlg("UnexpectedError");
+		} 
 	}
 
-	private void showAddContactsDialog(String contactAccountId)
+	private boolean DoesContactAlreadyExistInTable(String contactPublicCode)
+	{
+		for(int i =0; i < data.size(); ++i)
+		{
+			ContactsTableData contactData = data.get(i);
+			if(contactData.getPublicCode().equals(contactPublicCode))
+			return true;
+		}
+		return false;
+	}
+	
+	private void showAndAddContactsDialog(String contactPublicCode)
 	{
 		try
 		{
-			PopupController popupController = new PopupController(getMainWindow(), contactAccountId);
+			PopupController popupController = new PopupController(getMainWindow(), contactPublicCode);
 			showControllerInsideModalDialog(popupController, "AddContact");
+			if(popupController.hasContactBeenAccepted())
+			{
+				int verification = popupController.getVerification();
+				String blankNameToStart = "";
+				boolean canSendTo = false;
+				boolean canReceiveFrom = false;
+				ContactsTableData contactData = new ContactsTableData(blankNameToStart, contactPublicCode, canSendTo, canReceiveFrom); 
+				data.add(contactData);
+				clearAccessTokenField();
+			}
 		}
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
 		}
 	}
+
+	private void clearAccessTokenField()
+	{
+		accessTokenField.setText("");
+	}
 	
 	public static class PopupController extends FxController implements Initializable
 	{
-		public PopupController(UiMainWindow mainWindowToUse, String contactAccountIdToUse)
+		public PopupController(UiMainWindow mainWindowToUse, String contactPublicCodeToUse)
 		{
 			super(mainWindowToUse);
-			contactAccountId = contactAccountIdToUse;
+			contactPublicCode = contactPublicCodeToUse;
+			verification=ContactKey.NOT_VERIFIED;
+			contactAccepted = false;
 		}
 		
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1)
 		{
-			try
-			{
-				String contactPublicCode = MartusSecurity.computeFormattedPublicCode(contactAccountId);
-				contactPublicCodeLabel.setText(contactPublicCode);
-			} 
-			catch (InvalidBase64Exception e)
-			{
-				MartusLogger.logException(e);
-				System.exit(1);
-			}
+			contactPublicCodeLabel.setText(contactPublicCode);
 		}
 		
 		@Override
@@ -176,14 +185,27 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		@FXML
 		public void verifyContact()
 		{
-			//FIXME do real work here.
+			verification=ContactKey.VERIFIED_VISUALLY;
+			contactAccepted = true;
 			getStage().close();
 		}
 
 		@FXML
 		private Label contactPublicCodeLabel;
 		
-		private String contactAccountId;
+		public int getVerification()
+		{
+			return verification;
+		}
+		
+		public boolean hasContactBeenAccepted()
+		{
+			return contactAccepted;
+		}
+		
+		private String contactPublicCode;
+		private int verification;
+		private boolean contactAccepted;
 	}
 	
 	@Override
