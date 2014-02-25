@@ -94,7 +94,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		{
 			MartusAccountAccessToken token = new MartusAccountAccessToken(accessTokenField.getText());
 			String contactAccountId = getApp().getMartusAccountIdFromAccessTokenOnServer(token);
-			String ourAccountId =/* "6836.3614.4386.7238.1816";*/ getApp().getAccountId();
+			String ourAccountId = getApp().getAccountId();
 			if(ourAccountId.equals(contactAccountId))
 			{
 				showNotifyDlg("ContactKeyIsOurself");
