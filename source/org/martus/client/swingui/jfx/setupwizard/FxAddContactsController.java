@@ -94,7 +94,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		{
 			MartusAccountAccessToken token = new MartusAccountAccessToken(accessTokenField.getText());
 			String contactAccountId = getApp().getMartusAccountIdFromAccessTokenOnServer(token);
-			String ourAccountId = "6836.3614.4386.7238.1816"; //getApp().getAccountId();
+			String ourAccountId =/* "6836.3614.4386.7238.1816";*/ getApp().getAccountId();
 			if(ourAccountId.equals(contactAccountId))
 			{
 				showNotifyDlg("ContactKeyIsOurself");
@@ -129,19 +129,8 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		try
 		{
 			Stage popupStage = new Stage();
-			popupStage.setTitle("Add Contact");
-	        popupStage.initModality(Modality.WINDOW_MODAL);
-	       
-			FXMLLoader fl = new FXMLLoader();
 			PopupController popupController = new PopupController(getMainWindow(), popupStage, contactAccountId);
-			fl.setController(popupController);
-			fl.setLocation(FxStage.class.getResource(popupController.getFxmlLocation()));
-			fl.load();
-			Parent root = fl.getRoot();
-			
-	        Scene scene = new Scene(root);
-	        popupStage.setScene(scene);
-	        popupStage.showAndWait();
+			showControllerInsideModalDialog(popupController, "Add Contact");
 		}
 		catch (Exception e)
 		{
