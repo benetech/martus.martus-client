@@ -28,7 +28,6 @@ package org.martus.client.swingui.jfx.setupwizard;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -63,22 +62,6 @@ public class FxSetupStorageServerController extends AbstractFxSetupWizardControl
 	}
 
 	@Override
-	public void nextWasPressed(ActionEvent actionEvent)
-	{
-		try
-		{
-			getApp().saveConfigInfo();
-		} 
-		catch (SaveConfigInfoException e)
-		{
-			MartusLogger.logException(e);
-			System.exit(1);
-		}
-		
-		super.nextWasPressed(actionEvent);
-	}
-	
-	@Override
 	public FxController getNextControllerClassName()
 	{
 		return destination;
@@ -94,8 +77,17 @@ public class FxSetupStorageServerController extends AbstractFxSetupWizardControl
 	@FXML
 	public void useDefaultServer()
 	{
-		getApp().getConfigInfo().setServerName(getDefaultServerIp());
-		getApp().getConfigInfo().setServerPublicKey(getDefaultServerPublicKey());
+		try
+		{
+			getApp().getConfigInfo().setServerName(getDefaultServerIp());
+			getApp().getConfigInfo().setServerPublicKey(getDefaultServerPublicKey());
+			getApp().saveConfigInfo();
+		} 
+		catch (SaveConfigInfoException e)
+		{
+			MartusLogger.logException(e);
+			System.exit(1);
+		}
 		
 		destination = new FxAddContactsController(getMainWindow());
 		getWizardStage().next();
@@ -103,21 +95,12 @@ public class FxSetupStorageServerController extends AbstractFxSetupWizardControl
 	
 	private String getDefaultServerIp()
 	{
-		return "54.213.152.140";
+		return IP_FOR_SL1_US;
 	}
 
 	private String getDefaultServerPublicKey()
 	{
-		return "MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAjIX0yCfct1/WQptimL"
-				+ "jK35F3wsW/SEQ8DGdxfMBTZX1GVoOD6zg0d71Ns1ij4FdnOUsD4QCN4Kiay"
-				+ "Q+l28eIU8LL8L5oJClFwsVqgNDvPn8jR/CAbPy9NL0gKHevvX/dciVVCSrg"
-				+ "Oyyc9p9MP05qyekXqVIfLoZNkcXL5tQKrEiqVdJaDEPepPIkQpBgFwF0QZl"
-				+ "J7NdgF4T5wSyEt+fxL7qnZOCqchF8aVbSzAaGLRQEJEtFYTa9mOUCdCLtcn"
-				+ "sdgnj+lLftaV5+8o8ZeUTbyH5H/NlLddboxlI8rNalY7E5f3DltOOmTyjMh"
-				+ "KSaxl9lfIxpfKoeLdYb5bA74BV1AjbwnxahlN4KRZm/7i0RkapKIXZ0Hqus"
-				+ "4JKUG5CJcIybS64ppt8ufCvAEERrZUzrrIDNwv+qob9PYFdiMq1xg+VNrxm"
-				+ "/0RXfjwgXxNjDS07MTQc2w/z1egtsDLSi4dALw69nefS0hbZwbv8dIrN23i"
-				+ "Hn0FNdbz81l1FrELGyh1hRAgMBAAE=";
+		return PUBLIC_KEY_FOR_SL1_US;
 	}
 
 	@FXML
@@ -127,6 +110,19 @@ public class FxSetupStorageServerController extends AbstractFxSetupWizardControl
 		getWizardStage().next();
 	}
 	
+	private static final String IP_FOR_SL1_US = "54.213.152.140";
+	private static final String PUBLIC_KEY_FOR_SL1_US = 
+			"MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAjIX0yCfct1/WQptimL"
+			+ "jK35F3wsW/SEQ8DGdxfMBTZX1GVoOD6zg0d71Ns1ij4FdnOUsD4QCN4Kiay"
+			+ "Q+l28eIU8LL8L5oJClFwsVqgNDvPn8jR/CAbPy9NL0gKHevvX/dciVVCSrg"
+			+ "Oyyc9p9MP05qyekXqVIfLoZNkcXL5tQKrEiqVdJaDEPepPIkQpBgFwF0QZl"
+			+ "J7NdgF4T5wSyEt+fxL7qnZOCqchF8aVbSzAaGLRQEJEtFYTa9mOUCdCLtcn"
+			+ "sdgnj+lLftaV5+8o8ZeUTbyH5H/NlLddboxlI8rNalY7E5f3DltOOmTyjMh"
+			+ "KSaxl9lfIxpfKoeLdYb5bA74BV1AjbwnxahlN4KRZm/7i0RkapKIXZ0Hqus"
+			+ "4JKUG5CJcIybS64ppt8ufCvAEERrZUzrrIDNwv+qob9PYFdiMq1xg+VNrxm"
+			+ "/0RXfjwgXxNjDS07MTQc2w/z1egtsDLSi4dALw69nefS0hbZwbv8dIrN23i"
+			+ "Hn0FNdbz81l1FrELGyh1hRAgMBAAE=";
+
 	@FXML
 	private Button laterButton;
 
