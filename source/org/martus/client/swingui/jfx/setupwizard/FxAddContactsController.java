@@ -119,7 +119,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardController imp
 		} 
 		catch (ServerNotAvailableException e)
 		{
-			showNotifyDlg("retrievenoserver");
+			showNotifyDlg("ContactsNoServer");
 		}
 		
 	}

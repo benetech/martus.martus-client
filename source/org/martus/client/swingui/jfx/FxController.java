@@ -104,12 +104,11 @@ abstract public class FxController implements FxControllerInterface
 		return getMainWindow().getApp();
 	}
 	
-	public void showNotifyDlg(String tag)
+	public void showNotifyDlg(String baseTag)
 	{
-		
-		String title = "";
-		String message = "";
-		JOptionPane.showMessageDialog(getStage().getShell(), message, title, JOptionPane.WARNING_MESSAGE);
+		String title = getLocalization().getWindowTitle("notify" + baseTag);
+		String cause = getLocalization().getFieldLabel("notify" + baseTag + "cause");
+		//JOptionPane.showMessageDialog(getStage().getShell(), message, title, JOptionPane.WARNING_MESSAGE);
 	}
 
 	
