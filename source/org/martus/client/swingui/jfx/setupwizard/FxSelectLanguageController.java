@@ -41,7 +41,7 @@ import org.martus.client.swingui.jfx.FxController;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class FxSelectLanguageController extends AbstractFxSetupWizardController implements Initializable
+public class FxSelectLanguageController extends AbstractFxSetupWizardContentController implements Initializable
 {
 	public FxSelectLanguageController(UiMainWindow mainWindowToUse)
 	{

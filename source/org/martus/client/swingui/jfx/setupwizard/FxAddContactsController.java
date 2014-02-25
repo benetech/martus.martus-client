@@ -61,7 +61,7 @@ import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
-public class FxAddContactsController extends AbstractFxSetupWizardController implements Initializable
+public class FxAddContactsController extends AbstractFxSetupWizardContentController implements Initializable
 {
 	public FxAddContactsController(UiMainWindow mainWindowToUse)
 	{

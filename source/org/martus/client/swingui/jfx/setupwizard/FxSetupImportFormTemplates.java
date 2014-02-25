@@ -31,7 +31,7 @@ import javafx.scene.control.Label;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 
-public class FxSetupImportFormTemplates extends AbstractFxSetupWizardController
+public class FxSetupImportFormTemplates extends AbstractFxSetupWizardContentController
 {
 	public FxSetupImportFormTemplates(UiMainWindow mainWindowToUse)
 	{

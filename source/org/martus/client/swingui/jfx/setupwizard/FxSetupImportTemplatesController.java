@@ -48,7 +48,7 @@ import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.ChoiceItem;
 
 //FIXME this class is under development and is not tied to the wizard 
-public class FxSetupImportTemplatesController extends AbstractFxSetupWizardController implements Initializable
+public class FxSetupImportTemplatesController extends AbstractFxSetupWizardContentController implements Initializable
 {
 	public FxSetupImportTemplatesController(UiMainWindow mainWindowToUse)
 	{
