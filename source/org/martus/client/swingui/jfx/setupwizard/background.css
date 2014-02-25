@@ -1,0 +1,47 @@
+.root {
+}
+
+.button{
+    -fx-border-radius: 5;
+    -fx-padding: 3 6 6 6;
+}
+
+.LeftPanel {
+	-fx-background-color: darkcyan;
+    -fx-padding: 6 6 6 6;
+    -fx-border-color: black;
+}
+
+.TOCTitle {
+	-fx-text-fill: aqua;
+    -fx-padding: 2 2 2 2;
+}
+
+.LeftGrid {
+	-fx-grid-lines-visible: false;
+	-fx-alignment: top-left;
+	-fx-spacing: 10;
+}
+
+.Icon {
+    -fx-padding: 16 16 16 16;
+    -fx-alignment: top-left;
+}
+
+.TOCEntry {
+	-fx-text-fill: aqua;
+    -fx-padding: 2 2 2 2;
+}
+
+.TOCDescription {
+	color: white;
+	-fx-text-fill: white;
+    -fx-padding: 2 2 2 2;
+}
+
+.RightPanel {
+	-fx-background-color: aquamarine;
+    -fx-padding: 6 6 6 6;
+	-fx-spacing: 10;
+}
+
