@@ -24,6 +24,6 @@
             <TableColumn id="publicCodeColumn" fx:id="publicCodeColumn" prefWidth="208.0" text="Access Key" />
             <TableColumn fx:id="selectedTemplateColumn" prefWidth="192.0" text="User Template" />
          </columns>
-      </TableView><Button mnemonicParsing="false" text="X Cancel" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+      </TableView><Button mnemonicParsing="false" onAction="#onCancel" text="X Cancel" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
    </children>
 </GridPane>
