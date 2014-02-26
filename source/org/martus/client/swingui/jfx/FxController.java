@@ -120,7 +120,7 @@ abstract public class FxController implements FxControllerInterface
 		}
 	}
 	
-	public static class PopupNotifyController extends FxController implements Initializable
+	public static class PopupNotifyController extends FxPopupController implements Initializable
 	{
 		public PopupNotifyController(UiMainWindow mainWindowToUse, String notificationTag)
 		{
