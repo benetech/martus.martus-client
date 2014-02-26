@@ -26,16 +26,20 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.setupwizard;
 
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
+
+import org.martus.common.fieldspec.ChoiceItem;
 
 public class ContactsWithTemplatesTableData
 {
-	public ContactsWithTemplatesTableData(String contactNameToUse, String publicCodeToUse, boolean rowSelectedToUse, String selectedTemplateNameToUse)
+	public ContactsWithTemplatesTableData(String contactNameToUse, String publicCodeToUse, boolean rowSelectedToUse, ObservableList<ChoiceItem> selectedTemplateNameToUse)
 	{
 		contactName = new SimpleStringProperty(contactNameToUse);
 		publicCode = new SimpleStringProperty(publicCodeToUse);
 		rowSelected = new SimpleBooleanProperty(rowSelectedToUse);
-		selectedTemplateName = new SimpleStringProperty(selectedTemplateNameToUse);
+		selectedTemplateName = new SimpleListProperty<ChoiceItem>(selectedTemplateNameToUse);
 	}
 	
 	public String getContactName()
@@ -63,23 +67,29 @@ public class ContactsWithTemplatesTableData
 		return rowSelected.get();
 	}
 	
+	public SimpleBooleanProperty getRowSelectedProperty()
+	{
+		return rowSelected;
+	}
+	
 	public void setRowSelected(boolean rowSelectedToUse)
 	{
 		rowSelected.set(rowSelectedToUse);
 	}
 	
-	public String getSelectedTemplateName()
+	public ObservableList<ChoiceItem> getSelectedTemplateName()
 	{
 		return selectedTemplateName.get();
 	}
 	
-	public void setSelectedTemplateName(String selectedTamplateNameToUse)
+	public void setSelectedTemplateName(ObservableList<ChoiceItem> selectedTamplateNameToUse)
 	{
-		selectedTemplateName.set(selectedTamplateNameToUse);
+		selectedTemplateName.clear();
+		selectedTemplateName.addAll(selectedTamplateNameToUse);
 	}
 	
 	private final SimpleStringProperty contactName;
 	private final SimpleStringProperty publicCode;
 	private final SimpleBooleanProperty rowSelected;
-	private final SimpleStringProperty selectedTemplateName;
+	private final SimpleListProperty<ChoiceItem> selectedTemplateName;
 }
