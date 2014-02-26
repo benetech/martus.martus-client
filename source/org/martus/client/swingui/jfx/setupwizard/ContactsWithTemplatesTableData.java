@@ -29,14 +29,15 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import org.martus.common.ContactKey;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class ContactsWithTemplatesTableData
 {
-	public ContactsWithTemplatesTableData(String contactNameToUse, String publicCodeToUse, boolean rowSelectedToUse, ChoiceItem selectedTemplateNameToUse)
+	public ContactsWithTemplatesTableData(ContactKey key, boolean rowSelectedToUse, ChoiceItem selectedTemplateNameToUse) throws Exception
 	{
-		contactName = new SimpleStringProperty(contactNameToUse);
-		publicCode = new SimpleStringProperty(publicCodeToUse);
+		contactName = new SimpleStringProperty(key.getLabel());
+		publicCode = new SimpleStringProperty(key.getPublicCode());
 		rowSelected = new SimpleBooleanProperty(rowSelectedToUse);
 		selectedTemplateName = new SimpleObjectProperty(selectedTemplateNameToUse);
 	}

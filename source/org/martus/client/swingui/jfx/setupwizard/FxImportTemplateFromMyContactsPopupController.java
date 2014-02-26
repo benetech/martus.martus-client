@@ -95,7 +95,7 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 		for (int index = 0; index < contactKey.size(); ++index)
 		{
 			ContactKey key = contactKey.get(index);
-			ContactsWithTemplatesTableData e = new ContactsWithTemplatesTableData(key.getLabel(), key.getPublicCode(), true, new ChoiceItem("", "Choose One..."));
+			ContactsWithTemplatesTableData e = new ContactsWithTemplatesTableData(key, true, new ChoiceItem("", "Choose One..."));
 			data.add(e);
 		}
 		
