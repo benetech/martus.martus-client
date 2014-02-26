@@ -46,6 +46,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.FxStage;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.Exceptions.ServerNotAvailableException;
@@ -208,7 +209,18 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			return contactAccepted;
 		}
 		
+		public void setFxStage(FxStage stageToUse)
+		{
+			fxStage = stageToUse;
+		}
+
+		public FxStage getFxStage()
+		{
+			return fxStage;
+		}
+
 		private String contactPublicCode;
+		private FxStage fxStage;
 		private int verification;
 		private boolean contactAccepted;
 	}
