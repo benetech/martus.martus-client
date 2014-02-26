@@ -46,6 +46,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.FxPopupController;
 import org.martus.client.swingui.jfx.FxStage;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
@@ -160,7 +161,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		accessTokenField.setText("");
 	}
 	
-	public static class PopupController extends FxController implements Initializable
+	public static class PopupController extends FxPopupController implements Initializable
 	{
 		public PopupController(UiMainWindow mainWindowToUse, String contactPublicCodeToUse)
 		{
