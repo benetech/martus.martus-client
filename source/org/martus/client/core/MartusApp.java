@@ -765,6 +765,7 @@ public class MartusApp
 				ContactKey hqContactKey = new ContactKey(defaultHQKeyToAdd.getPublicKey(), defaultHQKeyToAdd.getLabel());
 				hqContactKey.setCanSendTo(true);
 				hqContactKey.setSendToByDefault(true);
+				hqContactKey.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
 				keys.add(hqContactKey);
 			}
 		}
@@ -776,6 +777,7 @@ public class MartusApp
 			{
 				ContactKey hqContactKey = new ContactKey(hqKeyToAdd.getPublicKey(), hqKeyToAdd.getLabel());
 				hqContactKey.setCanSendTo(true);
+				hqContactKey.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
 				keys.add(hqContactKey);
 			}
 		}
@@ -788,6 +790,7 @@ public class MartusApp
 			{
 				ContactKey fdContactKey = new ContactKey(fdKeyToAdd.getPublicKey(), fdKeyToAdd.getLabel());
 				fdContactKey.setCanReceiveFrom(true);
+				fdContactKey.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
 				keys.add(fdContactKey);
 			}
 		}

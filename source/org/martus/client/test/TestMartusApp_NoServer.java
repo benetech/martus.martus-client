@@ -934,6 +934,13 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		FieldDeskKeys allFDs = appWithAccount.getFieldDeskKeys();
 		assertEquals("Should only have 2 FD keys", 2, allFDs.size());
 		assertFalse("Should not incluse ourself as a FD", allFDs.containsKey(ourClientPublicKey));
+		ContactKeys allKeys = appWithAccount.getContactKeys();
+		assertEquals("Should have 5 keys total", 5, allKeys.size());
+		for(int i = 0; i < allKeys.size(); ++i )
+		{
+			ContactKey key = allKeys.get(i);
+			assertEquals("All migrated Keys should have VERIFIED_ENTERED_MANUALLY", ContactKey.VERIFIED_ENTERD_20_DIGITS, key.getVerification());
+		}
 		
 		TRACE_END();
 	}
@@ -1084,15 +1091,19 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		keys.add(hqLegacyContactKey);
 		ContactKey hqContactKey1 = new ContactKey(hqKey1, hqKeylabel1);
 		hqContactKey1.setCanSendTo(true);
+		hqContactKey1.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
 		keys.add(hqContactKey1);
 		ContactKey hqContactKey2 = new ContactKey(hqKey2, hqKeylabel2);
 		hqContactKey2.setCanSendTo(true);
+		hqContactKey2.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
 		keys.add(hqContactKey2);
 		ContactKey fdContactKey1 = new ContactKey(fdKey1, fdKeyLabel1);
 		fdContactKey1.setCanReceiveFrom(true);
+		fdContactKey1.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
 		keys.add(fdContactKey1);
 		ContactKey fdContactKey2 = new ContactKey(fdKey2, fdKeyLabel2);
 		fdContactKey2.setCanReceiveFrom(true);
+		fdContactKey2.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
 		keys.add(fdContactKey2);
 		ContactKeys contactKeys = new ContactKeys(keys);
 		return contactKeys.toStringWithLabel();
