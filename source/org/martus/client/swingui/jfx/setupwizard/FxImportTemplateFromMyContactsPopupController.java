@@ -107,6 +107,12 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 		return "setupwizard/SetupImportTemplateFromMyContactsPopup.fxml";
 	}
 	
+	@FXML
+	private void onCancel()
+	{
+		getStage().close();
+	}
+	
 	private class TemplateComboBoxTableCellFactory implements  Callback<TableColumn<ContactsWithTemplatesTableData, ChoiceItem>, TableCell<ContactsWithTemplatesTableData, ChoiceItem>>
 	{
 		public TemplateComboBoxTableCellFactory()
