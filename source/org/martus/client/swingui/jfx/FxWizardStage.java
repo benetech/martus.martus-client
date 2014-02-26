@@ -39,7 +39,7 @@ import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentCon
 import org.martus.client.swingui.jfx.setupwizard.FxSetupWizardTemplateController;
 import org.martus.common.MartusLogger;
 
-abstract public class FxWizardStage extends FxStage
+abstract public class FxWizardStage extends FxInSwingDialogStage
 {
 	public FxWizardStage(UiMainWindow mainWindowToUse) throws Exception
 	{

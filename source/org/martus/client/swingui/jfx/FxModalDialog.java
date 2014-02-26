@@ -36,7 +36,7 @@ import org.martus.swing.Utilities;
 
 public class FxModalDialog extends JDialog
 {
-	public static void createAndShow(UiMainWindow owner, FxStage stage) throws Exception
+	public static void createAndShow(UiMainWindow owner, FxInSwingDialogStage stage) throws Exception
 	{
 		FxModalDialog dialog = new FxModalDialog(owner);
 		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);

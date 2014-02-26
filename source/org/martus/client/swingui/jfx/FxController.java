@@ -140,19 +140,19 @@ abstract public class FxController
 			getStage().close();
 		}
 
-		public void setFxStage(FxStage stageToUse)
+		public void setFxStage(FxInSwingDialogStage stageToUse)
 		{
 			fxStage = stageToUse;
 		}
 
-		public FxStage getFxStage()
+		public FxInSwingDialogStage getFxStage()
 		{
 			return fxStage;
 		}
 
 		@FXML
 		private Label fxLabel;
-		private FxStage fxStage;
+		private FxInSwingDialogStage fxStage;
 		@FXML
 		private Button fxOkButton;
 		private String baseTag;
@@ -168,7 +168,7 @@ abstract public class FxController
 
 		FXMLLoader fl = new FXMLLoader();
 		fl.setController(controller);
-		fl.setLocation(FxStage.class.getResource(controller.getFxmlLocation()));
+		fl.setLocation(FxInSwingDialogStage.class.getResource(controller.getFxmlLocation()));
 		fl.load();
 		Parent root = fl.getRoot();
 

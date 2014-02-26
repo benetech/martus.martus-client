@@ -32,9 +32,9 @@ import javax.swing.JDialog;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 
-abstract public class FxStage extends JFXPanel
+abstract public class FxInSwingDialogStage extends JFXPanel
 {
-	public FxStage(UiMainWindow mainWindowToUse)
+	public FxInSwingDialogStage(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
 	}
