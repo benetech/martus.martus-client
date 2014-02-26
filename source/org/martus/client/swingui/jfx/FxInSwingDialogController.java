@@ -34,15 +34,15 @@ abstract public class FxInSwingDialogController extends FxController
 		super(mainWindowToUse);
 	}
 
-	public void setFxStage(FxStage stageToUse)
+	public void setFxStage(FxInSwingDialogStage stageToUse)
 	{
 		fxStage = stageToUse;
 	}
 
-	public FxStage getFxStage()
+	public FxInSwingDialogStage getFxStage()
 	{
 		return fxStage;
 	}
 
-	private FxStage fxStage;
+	private FxInSwingDialogStage fxStage;
 }

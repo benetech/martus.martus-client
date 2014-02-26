@@ -47,7 +47,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxPopupController;
-import org.martus.client.swingui.jfx.FxStage;
+import org.martus.client.swingui.jfx.FxInSwingDialogStage;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.MartusLogger;
