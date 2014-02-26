@@ -31,12 +31,12 @@ import javafx.scene.control.Button;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.ContentNavigationHandlerInterface;
-import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.FxInSwingDialogController;
 import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.NavigationButtonsInterface;
 
 
-abstract public class FxWizardTemplateController extends FxController implements NavigationButtonsInterface
+abstract public class FxWizardTemplateController extends FxInSwingDialogController implements NavigationButtonsInterface
 {
 	public FxWizardTemplateController(UiMainWindow mainWindowToUse)
 	{
