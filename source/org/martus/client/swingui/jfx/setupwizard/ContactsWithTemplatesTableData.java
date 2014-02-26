@@ -39,8 +39,7 @@ public class ContactsWithTemplatesTableData
 		contactName = new SimpleStringProperty(contactNameToUse);
 		publicCode = new SimpleStringProperty(publicCodeToUse);
 		rowSelected = new SimpleBooleanProperty(rowSelectedToUse);
-		selectedTemplateName = new SimpleListProperty<ChoiceItem>();
-		selectedTemplateName.addAll(selectedTemplateNameToUse);
+		selectedTemplateName = new SimpleListProperty<ChoiceItem>(selectedTemplateNameToUse);
 	}
 	
 	public String getContactName()
