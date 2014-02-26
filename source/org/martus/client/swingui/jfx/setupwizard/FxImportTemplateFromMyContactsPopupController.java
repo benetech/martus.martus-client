@@ -80,7 +80,7 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 			selectedTemplateColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, ChoiceItem>("selectedTemplateName"));
 			selectedTemplateColumn.setCellFactory(new TemplateComboBoxTableCellFactory());
 			
-			contactsWithTemplatesTableView.setItems(data);
+			contactsWithTemplatesTableView.setItems(contactsWithTemplatesTableData);
 		}
 		catch (Exception e)
 		{
@@ -90,16 +90,16 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 
 	private void fillTableWithContacts() throws Exception
 	{
-		data = FXCollections.observableArrayList();
+		contactsWithTemplatesTableData = FXCollections.observableArrayList();
 		ContactKeys contactKeys = getApp().getContactKeys();
 		for (int index = 0; index < contactKeys.size(); ++index)
 		{
 			ContactKey key = contactKeys.get(index);
 			ContactsWithTemplatesTableData e = new ContactsWithTemplatesTableData(key, true, new ChoiceItem("", "Choose One..."));
-			data.add(e);
+			contactsWithTemplatesTableData.add(e);
 		}
 		
-		System.out.println("data size =" + data.size());
+		System.out.println("data size =" + contactsWithTemplatesTableData.size());
 	}
 	
 	@Override
@@ -188,6 +188,6 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 	@FXML
 	private TableColumn<ContactsWithTemplatesTableData, ChoiceItem> selectedTemplateColumn;
 	
-	private ObservableList<ContactsWithTemplatesTableData> data;
+	private ObservableList<ContactsWithTemplatesTableData> contactsWithTemplatesTableData;
 
 }
