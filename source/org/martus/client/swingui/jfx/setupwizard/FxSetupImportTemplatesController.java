@@ -135,6 +135,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		{
 			try
 			{
+				data = FXCollections.observableArrayList();
 				contactsWithTemplatesTableView.setEditable(true);
 				ContactKeys contactKey = getApp().getContactKeys();
 				for (int index = 0; index < contactKey.size(); ++index)
@@ -194,7 +195,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		@FXML
 		private TableColumn<ContactsWithTemplatesTableData, ChoiceItem> selectedTemplateColumn;
 		
-		private ObservableList<ContactsWithTemplatesTableData> data = FXCollections.observableArrayList();
+		private ObservableList<ContactsWithTemplatesTableData> data;
 	}
 	
 	private static class ToggleChangeListener implements ChangeListener<Toggle>
