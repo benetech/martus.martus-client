@@ -82,16 +82,6 @@ abstract public class FxController implements FxControllerInterface
 		return FxScene.class.getResource(fileLocation);
 	}		
 	
-	public void setFxStage(FxStage stageToUse)
-	{
-		fxStage = stageToUse;
-	}
-	
-	public FxStage getFxStage()
-	{
-		return fxStage;
-	}
-	
 	public void setStage(Stage stageToUse)
 	{
 		stage = stageToUse;
@@ -158,8 +148,19 @@ abstract public class FxController implements FxControllerInterface
 			getStage().close();
 		}
 
+		public void setFxStage(FxStage stageToUse)
+		{
+			fxStage = stageToUse;
+		}
+
+		public FxStage getFxStage()
+		{
+			return fxStage;
+		}
+
 		@FXML
 		private Label fxLabel;
+		private FxStage fxStage;
 		@FXML
 		private Button fxOkButton;
 		private String baseTag;
@@ -185,6 +186,5 @@ abstract public class FxController implements FxControllerInterface
 	}
 
 	private Stage stage;
-	private FxStage fxStage;
 	private UiMainWindow mainWindow;
 }
