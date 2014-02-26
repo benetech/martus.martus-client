@@ -25,17 +25,19 @@ Boston, MA 02111-1307, USA.
  */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import javafx.beans.value.ChangeListener;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.util.Callback;
 
 public class RadioButtonCellFactory implements Callback<TableColumn<ContactsWithTemplatesTableData, Boolean>, TableCell<ContactsWithTemplatesTableData, Boolean>>
 {
-	public RadioButtonCellFactory()
+	public RadioButtonCellFactory(ChangeListener<Toggle> toggleChangeListenerToUse)
 	{
-		System.out.println("boo");
 		group = new ToggleGroup();
+		group.selectedToggleProperty().addListener(toggleChangeListenerToUse);
 	}
 	@Override
 	public TableCell call(final TableColumn param) 
