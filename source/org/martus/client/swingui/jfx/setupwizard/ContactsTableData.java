@@ -36,6 +36,7 @@ public class ContactsTableData
 		publicCode = new SimpleStringProperty(publicCodeToUse);
 		canSendTo = new SimpleBooleanProperty(canSendToToUse);
 		canReceiveFrom = new SimpleBooleanProperty(canRecieveFromToUse);
+		removeContact = new SimpleStringProperty("X");
 	}
 	
 	public String getContactName()
@@ -48,6 +49,16 @@ public class ContactsTableData
 		contactName.set(contactNameToUse);
 	}
 	
+	public String getDeleteContact()
+	{
+		return removeContact.get();
+	}
+	
+	public void setDeleteContact(String removeContactToUse)
+	{
+		removeContact.set(removeContactToUse);
+	}
+
 	public String getPublicCode()
 	{
 		return publicCode.get();
@@ -92,4 +103,5 @@ public class ContactsTableData
 	private final SimpleStringProperty publicCode;
 	private final SimpleBooleanProperty canSendTo;
 	private final SimpleBooleanProperty canReceiveFrom;
+	private final SimpleStringProperty removeContact;
 }
