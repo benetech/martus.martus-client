@@ -63,23 +63,30 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		genericTemplatesComboBox.setItems(FXCollections.observableArrayList(getDateFormatChoices()));
-		customTemplatesComboBox.setItems(FXCollections.observableArrayList(getCustomDropdownChoices()));
+		genericTemplatesComboBox.setItems(FXCollections.observableArrayList(getGenericTemplateChoices()));
+		genericTemplatesComboBox.getSelectionModel().selectFirst();
+		
+		customTemplatesComboBox.setItems(FXCollections.observableArrayList(getImportTemplateChoices()));
+		customTemplatesComboBox.getSelectionModel().selectFirst();
+		
+		genericTemplatesComboBox.setVisible(false);
+		customTemplatesComboBox.setVisible(false);
 	} 
 	
-	private ObservableList<ChoiceItem> getCustomDropdownChoices()
+	private ObservableList<ChoiceItem> getImportTemplateChoices()
 	{
 		Vector<ChoiceItem> choices = new Vector<ChoiceItem>();
-		choices.add(new ChoiceItem(IMPORTF_FROM_CONTACTS_CODE, "Import from My Contacts"));
+		choices.add(new ChoiceItem("f", "Choose One..."));
+		choices.add(new ChoiceItem(IMPORT_FROM_CONTACTS_CODE, "Import from My Contacts"));
 		choices.add(new ChoiceItem(IMPORT_FROM_NEW_CONTACT_CODE, "Import from New Contact"));
 		
 		return FXCollections.observableArrayList(choices);
 	}
 
-	private ObservableList<ChoiceItem> getDateFormatChoices()
+	private ObservableList<ChoiceItem> getGenericTemplateChoices()
 	{
 		Vector<ChoiceItem> choices = new Vector<ChoiceItem>();
-		choices.add(new ChoiceItem("template1", "Template 1"));
+		choices.add(new ChoiceItem("", "Choose a form template"));
 		choices.add(new ChoiceItem("template2", "Template 2"));
 		choices.add(new ChoiceItem("template3", "Template 3"));
 
@@ -90,11 +97,23 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	private void customDropDownSelectionChanged() throws Exception
 	{
 		String selectedCode = customTemplatesComboBox.getSelectionModel().getSelectedItem().getCode();
-		if (selectedCode.equals(IMPORTF_FROM_CONTACTS_CODE));
+		if (selectedCode.equals(IMPORT_FROM_CONTACTS_CODE))
 			importFromContacts();
 		
 		if (selectedCode.equals(IMPORT_FROM_NEW_CONTACT_CODE))
 			importFromNewContact();
+	}
+	
+	@FXML
+	private void radioButtonSelectionChanged()
+	{
+		genericTemplatesComboBox.setVisible(false);
+		customTemplatesComboBox.setVisible(false);
+		if (genericRadioButton.isSelected())
+			genericTemplatesComboBox.setVisible(true);
+		
+		if (downloadCustomRadioButton.isSelected())
+			customTemplatesComboBox.setVisible(true);
 	}
 	
 	private void importFromNewContact() throws Exception
@@ -124,6 +143,6 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	@FXML
 	private RadioButton downloadCustomRadioButton;
 	
-	private static final String IMPORTF_FROM_CONTACTS_CODE = "importFromContacts";
+	private static final String IMPORT_FROM_CONTACTS_CODE = "importFromContacts";
 	private static final String IMPORT_FROM_NEW_CONTACT_CODE = "importFromNewContact";
 }
