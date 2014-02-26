@@ -98,8 +98,6 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 			ContactsWithTemplatesTableData rowData = new ContactsWithTemplatesTableData(contactKey, true, new ChoiceItem("", "Choose One..."));
 			contactsWithTemplatesTableData.add(rowData);
 		}
-		
-		System.out.println("data size =" + contactsWithTemplatesTableData.size());
 	}
 	
 	@Override
