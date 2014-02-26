@@ -25,17 +25,20 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import org.martus.common.ContactKey;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
+
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class ContactsTableData
 {
-	public ContactsTableData(String contactNameToUse, String publicCodeToUse, boolean canSendToToUse, boolean canRecieveFromToUse)
+	public ContactsTableData(ContactKey contact) throws InvalidBase64Exception
 	{
-		contactName = new SimpleStringProperty(contactNameToUse);
-		publicCode = new SimpleStringProperty(publicCodeToUse);
-		canSendTo = new SimpleBooleanProperty(canSendToToUse);
-		canReceiveFrom = new SimpleBooleanProperty(canRecieveFromToUse);
+		contactName = new SimpleStringProperty(contact.getLabel());
+		publicCode = new SimpleStringProperty(contact.getPublicCode());
+		canSendTo = new SimpleBooleanProperty(contact.getCanSendTo());
+		canReceiveFrom = new SimpleBooleanProperty(contact.getCanReceiveFrom());
 		removeContact = new SimpleStringProperty("X");
 	}
 	

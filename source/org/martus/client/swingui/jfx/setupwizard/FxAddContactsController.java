@@ -166,7 +166,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 				showNotifyDlg("ContactKeyAlreadyExists");
 				return;
 			}
-			showAndAddContactsDialog(contactPublicCode);
+			showAndAddContactsDialog(contactAccountId);
 		} 
 		catch (ServerNotAvailableException e)
 		{
@@ -194,19 +194,18 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		return false;
 	}
 	
-	private void showAndAddContactsDialog(String contactPublicCode)
+	private void showAndAddContactsDialog(String contactAccountId)
 	{
 		try
 		{
-			PopupController popupController = new PopupController(getMainWindow(), contactPublicCode);
+			ContactKey newContact = new ContactKey(contactAccountId);
+			PopupController popupController = new PopupController(getMainWindow(), newContact.getPublicCode());
 			showControllerInsideModalDialog(popupController, "AddContact");
 			if(popupController.hasContactBeenAccepted())
 			{
 				int verification = popupController.getVerification();
-				String blankNameToStart = "";
-				boolean canSendTo = false;
-				boolean canReceiveFrom = false;
-				ContactsTableData contactData = new ContactsTableData(blankNameToStart, contactPublicCode, canSendTo, canReceiveFrom); 
+				newContact.setVerification(verification);
+				ContactsTableData contactData = new ContactsTableData(newContact); 
 				data.add(contactData);
 				clearAccessTokenField();
 			}
@@ -352,11 +351,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			for(int i = 0; i < keys.size(); ++i)
 			{
 				ContactKey contact = keys.get(i);
-				String name = contact.getLabel();
-				String publicCode = contact.getPublicCode();
-				boolean canSendTo = contact.getCanSendTo();
-				boolean canReceiveFrom = contact.getCanReceiveFrom();
-				ContactsTableData contactData = new ContactsTableData(name, publicCode, canSendTo, canReceiveFrom); 
+				ContactsTableData contactData = new ContactsTableData(contact); 
 				data.add(contactData);
 			}
 		} 
