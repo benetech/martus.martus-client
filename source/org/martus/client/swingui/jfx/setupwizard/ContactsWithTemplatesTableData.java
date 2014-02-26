@@ -26,20 +26,19 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.setupwizard;
 
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
 
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class ContactsWithTemplatesTableData
 {
-	public ContactsWithTemplatesTableData(String contactNameToUse, String publicCodeToUse, boolean rowSelectedToUse, ObservableList<ChoiceItem> selectedTemplateNameToUse)
+	public ContactsWithTemplatesTableData(String contactNameToUse, String publicCodeToUse, boolean rowSelectedToUse, ChoiceItem selectedTemplateNameToUse)
 	{
 		contactName = new SimpleStringProperty(contactNameToUse);
 		publicCode = new SimpleStringProperty(publicCodeToUse);
 		rowSelected = new SimpleBooleanProperty(rowSelectedToUse);
-		selectedTemplateName = new SimpleListProperty<ChoiceItem>(selectedTemplateNameToUse);
+		selectedTemplateName = new SimpleObjectProperty(selectedTemplateNameToUse);
 	}
 	
 	public String getContactName()
@@ -77,18 +76,18 @@ public class ContactsWithTemplatesTableData
 		rowSelected.set(rowSelectedToUse);
 	}
 	
-	public ObservableList<ChoiceItem> getSelectedTemplateName()
+	public ChoiceItem getSelectedTemplateName()
 	{
 		return selectedTemplateName.get();
 	}
 	
-	public void setSelectedTemplateName(ObservableList<ChoiceItem> selectedTamplateNameToUse)
+	public void setSelectedTemplateName(ChoiceItem selectedTamplateNameToUse)
 	{
-		selectedTemplateName.addAll(selectedTamplateNameToUse);
+		selectedTemplateName.set(selectedTamplateNameToUse);
 	}
 	
 	private final SimpleStringProperty contactName;
 	private final SimpleStringProperty publicCode;
 	private final SimpleBooleanProperty rowSelected;
-	private final SimpleListProperty<ChoiceItem> selectedTemplateName;
+	private final SimpleObjectProperty<ChoiceItem> selectedTemplateName;
 }

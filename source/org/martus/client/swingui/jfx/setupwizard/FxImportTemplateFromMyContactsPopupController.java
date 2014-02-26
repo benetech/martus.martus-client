@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.setupwizard;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Vector;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -34,12 +35,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.Callback;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxPopupController;
@@ -47,6 +50,7 @@ import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomFieldTemplate;
 
 public class FxImportTemplateFromMyContactsPopupController extends FxPopupController implements Initializable
 {
@@ -73,7 +77,7 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 			publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsWithTemplatesTableData>forTableColumn());
 			
 			selectedTemplateColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, ChoiceItem>("selectedTemplateName"));
-			selectedTemplateColumn.setCellFactory(ComboBoxTableCell.<ContactsWithTemplatesTableData, ChoiceItem>forTableColumn());
+			selectedTemplateColumn.setCellFactory(new TemplateComboBoxTableCellFactory());
 			
 			contactsWithTemplatesTableView.setItems(data);
 		}
@@ -85,17 +89,12 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 
 	private void fillTableWithContacts() throws Exception
 	{
-		ObservableList<ChoiceItem> observableList = FXCollections.observableArrayList();
-		observableList.add(new ChoiceItem("", "Choose One..."));
-		observableList.add(new ChoiceItem("NewItem1", "New Item1"));
-		observableList.add(new ChoiceItem("NewItem2", "New Item2"));
-
 		data = FXCollections.observableArrayList();
 		ContactKeys contactKey = getApp().getContactKeys();
 		for (int index = 0; index < contactKey.size(); ++index)
 		{
 			ContactKey key = contactKey.get(index);
-			ContactsWithTemplatesTableData e = new ContactsWithTemplatesTableData(key.getLabel(), key.getPublicCode(), true, observableList);
+			ContactsWithTemplatesTableData e = new ContactsWithTemplatesTableData(key.getLabel(), key.getPublicCode(), true, new ChoiceItem("", "Choose One..."));
 			data.add(e);
 		}
 		
@@ -108,7 +107,48 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 		return "setupwizard/SetupImportTemplateFromMyContactsPopup.fxml";
 	}
 	
-	private static class ToggleChangeListener implements ChangeListener<Toggle>
+	private class TemplateComboBoxTableCellFactory implements  Callback<TableColumn<ContactsWithTemplatesTableData, ChoiceItem>, TableCell<ContactsWithTemplatesTableData, ChoiceItem>>
+	{
+		public TemplateComboBoxTableCellFactory()
+		{
+		}
+
+		@Override
+		public TableCell<ContactsWithTemplatesTableData, ChoiceItem> call(TableColumn<ContactsWithTemplatesTableData, ChoiceItem> param)
+		{
+			return new TemplateComboBoxCell();
+		}
+	}
+	
+	private class TemplateComboBoxCell extends ComboBoxTableCell<ContactsWithTemplatesTableData, ChoiceItem>
+	{
+		public TemplateComboBoxCell()
+		{
+		}
+
+		@Override
+		public void startEdit()
+		{
+			super.startEdit();
+
+			try
+			{
+				Vector<CustomFieldTemplate> templates = getApp().getListOfFormTemplatesOnServer("");
+				getItems().clear();
+				
+				for (CustomFieldTemplate customFieldTemplate : templates)
+				{
+					getItems().add(new ChoiceItem(customFieldTemplate.getTitle(), customFieldTemplate.getTitle()));	
+				}
+			}
+			catch (Exception e)
+			{
+				MartusLogger.logException(e);
+			}
+		}
+	}
+	
+	private class ToggleChangeListener implements ChangeListener<Toggle>
 	{
 		public ToggleChangeListener(TableView<ContactsWithTemplatesTableData> contactsWithTemplatesTableViewToUse)
 		{
@@ -120,17 +160,7 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 		{
 			if (contactsWithTemplatesTableView.getSelectionModel().isEmpty())
 				return;
-			
-			ContactsWithTemplatesTableData dataForRow = contactsWithTemplatesTableView.getSelectionModel().getSelectedItem();
-			dataForRow.setSelectedTemplateName(getAllTemplatesForContact());
-		}
-		
-		private ObservableList<ChoiceItem> getAllTemplatesForContact()
-		{
-			ObservableList<ChoiceItem> observableArrayList = FXCollections.observableArrayList();
-			//ADD contact templates here.  
 
-			return 	observableArrayList;
 		}
 
 		private TableView<ContactsWithTemplatesTableData> contactsWithTemplatesTableView;
