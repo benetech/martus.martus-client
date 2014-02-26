@@ -29,6 +29,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -37,6 +39,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
@@ -136,20 +140,31 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 				for (int index = 0; index < contactKey.size(); ++index)
 				{
 					ContactKey key = contactKey.get(index);
-					data.add(new ContactsWithTemplatesTableData(key.getLabel(), key.getPublicCode(), false, ""));
+					
+					ObservableList<ChoiceItem> observableList = FXCollections.observableArrayList();
+					observableList.add(new ChoiceItem("", "Choose One..."));
+					observableList.add(new ChoiceItem("NewItem1", "New Item1"));
+					observableList.add(new ChoiceItem("NewItem2", "New Item2"));
+
+					ContactsWithTemplatesTableData e = new ContactsWithTemplatesTableData(key.getLabel(), key.getPublicCode(), true, observableList);
+					
+					data.add(e);
 				}
 				
 				System.out.println("data size =" + data.size());
 			
 				contactSelectedColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, Boolean>("rowSelected"));
-				contactSelectedColumn.setCellFactory(new RadioButtonCellFactory());
+				contactSelectedColumn.setCellFactory(new RadioButtonCellFactory(new ToggleChangeListener(contactsWithTemplatesTableView)));
 				
 				contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("contactName"));
 				contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsWithTemplatesTableData>forTableColumn());
 				
 				publicCodeColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("publicCode"));
 				publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsWithTemplatesTableData>forTableColumn());
-
+				
+				selectedTemplateColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, ChoiceItem>("selectedTemplateName"));
+				selectedTemplateColumn.setCellFactory(ComboBoxTableCell.<ContactsWithTemplatesTableData, ChoiceItem>forTableColumn());
+				
 				contactsWithTemplatesTableView.setItems(data);
 			}
 			catch (Exception e)
@@ -176,9 +191,40 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		@FXML
 		private TableColumn<ContactsWithTemplatesTableData, Boolean> contactSelectedColumn;
 		
+		@FXML
+		private TableColumn<ContactsWithTemplatesTableData, ChoiceItem> selectedTemplateColumn;
+		
 		private ObservableList<ContactsWithTemplatesTableData> data = FXCollections.observableArrayList();
 	}
+	
+	private static class ToggleChangeListener implements ChangeListener<Toggle>
+	{
+		public ToggleChangeListener(TableView<ContactsWithTemplatesTableData> contactsWithTemplatesTableViewToUse)
+		{
+			contactsWithTemplatesTableView = contactsWithTemplatesTableViewToUse;
+		}
 
+		@Override
+		public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue)
+		{
+			if (contactsWithTemplatesTableView.getSelectionModel().isEmpty())
+				return;
+			
+			ContactsWithTemplatesTableData dataForRow = contactsWithTemplatesTableView.getSelectionModel().getSelectedItem();
+			dataForRow.setSelectedTemplateName(getAllTemplatesForContact());
+		}
+		
+		private ObservableList<ChoiceItem> getAllTemplatesForContact()
+		{
+			ObservableList<ChoiceItem> observableArrayList = FXCollections.observableArrayList();
+			//ADD contact templates here.  
+
+			return 	observableArrayList;
+		}
+
+		private TableView<ContactsWithTemplatesTableData> contactsWithTemplatesTableView;
+	}
+	
 	@FXML
 	private ComboBox<ChoiceItem> genericTemplatesComboBox;
 	
