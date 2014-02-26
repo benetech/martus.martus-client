@@ -87,7 +87,6 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		Vector<ChoiceItem> choices = new Vector<ChoiceItem>();
 		choices.add(new ChoiceItem("", "Choose a form template"));
 		choices.add(new ChoiceItem("template2", "Template 2"));
-		choices.add(new ChoiceItem("template3", "Template 3"));
 
 		return FXCollections.observableArrayList(choices);
 	}
