@@ -91,10 +91,10 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 	private void fillTableWithContacts() throws Exception
 	{
 		data = FXCollections.observableArrayList();
-		ContactKeys contactKey = getApp().getContactKeys();
-		for (int index = 0; index < contactKey.size(); ++index)
+		ContactKeys contactKeys = getApp().getContactKeys();
+		for (int index = 0; index < contactKeys.size(); ++index)
 		{
-			ContactKey key = contactKey.get(index);
+			ContactKey key = contactKeys.get(index);
 			ContactsWithTemplatesTableData e = new ContactsWithTemplatesTableData(key, true, new ChoiceItem("", "Choose One..."));
 			data.add(e);
 		}
