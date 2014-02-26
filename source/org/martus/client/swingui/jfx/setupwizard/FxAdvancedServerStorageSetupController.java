@@ -43,6 +43,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusSecurity;
 
 public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizardContentController implements Initializable
 {
@@ -58,6 +59,24 @@ public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizar
 	{
 		ipAddressField.textProperty().addListener(new TextFieldChangeHandler());
 		publicCodeField.textProperty().addListener(new TextFieldChangeHandler());
+		
+		ConfigInfo config = getApp().getConfigInfo();
+		ipAddressField.setText(config.getServerName());
+		String serverKey = config.getServerPublicKey();
+		if(serverKey.length() > 0)
+		{
+			try
+			{
+				String publicCode = MartusSecurity.computeFormattedPublicCode(serverKey);
+				publicCodeField.setText(publicCode);
+			}
+			catch(Exception e)
+			{
+				MartusLogger.logException(e);
+				// TODO: Should we display an error here, or just be silent?
+			}
+		}
+		
 		updateButtonStates();
 	}
 
