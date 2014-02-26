@@ -137,10 +137,7 @@ public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizar
 	@Override
 	public FxController getNextControllerClassName()
 	{
-		if(isConnected)
-			return new FxAddContactsController(getMainWindow());
-
-		return new FxSetupBackupYourKeyController(getMainWindow());
+		return new FxAddContactsController(getMainWindow());
 	}
 	
 	protected class TextFieldChangeHandler implements ChangeListener<String>
@@ -175,8 +172,7 @@ public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizar
 		boolean canConnect = (hasIp && hasPublicCode);
 		connectButton.setDisable(!canConnect);
 
-		boolean canContinue = isConnected || (!hasIp && !hasPublicCode);
-		getWizardNavigationHandler().getNextButton().setDisable(!canContinue);
+		getWizardNavigationHandler().getNextButton().setDisable(!isConnected);
 	}
 	
 	private void showError(String text)
