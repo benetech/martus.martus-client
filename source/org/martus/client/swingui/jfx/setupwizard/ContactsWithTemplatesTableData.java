@@ -39,7 +39,8 @@ public class ContactsWithTemplatesTableData
 		contactName = new SimpleStringProperty(contactNameToUse);
 		publicCode = new SimpleStringProperty(publicCodeToUse);
 		rowSelected = new SimpleBooleanProperty(rowSelectedToUse);
-		selectedTemplateName = new SimpleListProperty<ChoiceItem>(selectedTemplateNameToUse);
+		selectedTemplateName = new SimpleListProperty<ChoiceItem>();
+		selectedTemplateName.addAll(selectedTemplateNameToUse);
 	}
 	
 	public String getContactName()
@@ -84,7 +85,6 @@ public class ContactsWithTemplatesTableData
 	
 	public void setSelectedTemplateName(ObservableList<ChoiceItem> selectedTamplateNameToUse)
 	{
-		selectedTemplateName.clear();
 		selectedTemplateName.addAll(selectedTamplateNameToUse);
 	}
 	
