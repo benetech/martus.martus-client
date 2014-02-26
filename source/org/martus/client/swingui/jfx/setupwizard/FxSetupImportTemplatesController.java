@@ -40,7 +40,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.fieldspec.ChoiceItem;
 
-//FIXME this class is under development and is not tied to the wizard 
 public class FxSetupImportTemplatesController extends AbstractFxSetupWizardContentController implements Initializable
 {
 	public FxSetupImportTemplatesController(UiMainWindow mainWindowToUse)
@@ -57,7 +56,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	@Override
 	public FxController getNextControllerClassName()
 	{
-		return new FxSetupUsernamePasswordController(getMainWindow());
+		return new FxSetupBackupYourKeyController(getMainWindow());
 	}
 
 	@Override
