@@ -45,12 +45,14 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
-abstract public class FxController implements FxControllerInterface
+abstract public class FxController
 {
 	public FxController(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
 	}
+	
+	abstract public String getFxmlLocation();
 	
 	public Parent createContents() throws Exception
 	{
@@ -82,16 +84,6 @@ abstract public class FxController implements FxControllerInterface
 		return FxScene.class.getResource(fileLocation);
 	}		
 	
-	public void setStage(Stage stageToUse)
-	{
-		stage = stageToUse;
-	}
-	
-	public Stage getStage()
-	{
-		return stage;
-	}
-
 	public UiMainWindow getMainWindow()
 	{
 		return mainWindow;
@@ -167,7 +159,7 @@ abstract public class FxController implements FxControllerInterface
 	}
 
 	
-	public void showControllerInsideModalDialog(FxController controller, String dialogTitleTag) throws Exception
+	public void showControllerInsideModalDialog(FxPopupController controller, String dialogTitleTag) throws Exception
 	{
 		Stage popupStage = new Stage();
 		controller.setStage(popupStage);
@@ -185,6 +177,5 @@ abstract public class FxController implements FxControllerInterface
 	    popupStage.showAndWait();
 	}
 
-	private Stage stage;
 	private UiMainWindow mainWindow;
 }
