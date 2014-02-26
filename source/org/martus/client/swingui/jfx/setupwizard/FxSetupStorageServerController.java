@@ -70,7 +70,7 @@ public class FxSetupStorageServerController extends AbstractFxSetupWizardContent
 	@FXML
 	public void setupServerLater()
 	{
-		destination = new FxAddContactsController(getMainWindow());
+		destination = new FxSetupImportTemplatesController(getMainWindow());
 		getWizardStage().next();
 	}
 	
