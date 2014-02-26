@@ -76,7 +76,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	private ObservableList<ChoiceItem> getImportTemplateChoices()
 	{
 		Vector<ChoiceItem> choices = new Vector<ChoiceItem>();
-		choices.add(new ChoiceItem("f", "Choose One..."));
+		choices.add(new ChoiceItem("", "Choose One..."));
 		choices.add(new ChoiceItem(IMPORT_FROM_CONTACTS_CODE, "Import from My Contacts"));
 		choices.add(new ChoiceItem(IMPORT_FROM_NEW_CONTACT_CODE, "Import from New Contact"));
 		
