@@ -33,11 +33,11 @@ import javafx.fxml.Initializable;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.ContentNavigationHandlerInterface;
-import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.FxInSwingDialogController;
 import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.NavigationButtonsInterface;
 
-abstract public class AbstractFxSetupWizardContentController extends FxController implements ContentNavigationHandlerInterface, Initializable
+abstract public class AbstractFxSetupWizardContentController extends FxInSwingDialogController implements ContentNavigationHandlerInterface, Initializable
 {
 	public AbstractFxSetupWizardContentController(UiMainWindow mainWindowToUse)
 	{
