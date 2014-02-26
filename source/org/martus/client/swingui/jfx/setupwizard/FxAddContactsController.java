@@ -32,22 +32,26 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.Callback;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
-import org.martus.client.swingui.jfx.FxPopupController;
 import org.martus.client.swingui.jfx.FxInSwingDialogStage;
+import org.martus.client.swingui.jfx.FxPopupController;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.Exceptions.ServerNotAvailableException;
@@ -72,18 +76,75 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		publicCodeColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("publicCode"));
 		canSendToColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("canSendTo"));
 		canReceiveFromColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("canReceiveFrom"));
-		
+		removeContactColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("deleteContact")); 
+
 		contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
 		publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
 		canSendToColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(canSendToColumn));
 		canReceiveFromColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(canReceiveFromColumn));
 
+	      Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> deleteColumnCellFactory = 
+	                createRemoveButtonCallback();
+
+	    removeContactColumn.setCellFactory(deleteColumnCellFactory);
 		contactsTable.setItems(data);
 		loadExistingContactData();
-
 		updateAddContactButtonState();
-		
 		accessTokenField.textProperty().addListener(new AccessTokenChangeHandler());
+	}
+
+	private Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> createRemoveButtonCallback()
+	{
+		return new Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>() 
+		{
+	         @Override
+	         public TableCell call(final TableColumn param) 
+	         {
+	        	 	final TableCell cell = new TableCell() 
+	        	 	{
+				    @Override
+				    public void updateItem(Object item, boolean empty) 
+				    {
+				        super.updateItem(item, empty);
+				        if (empty) 
+				        {
+				            setText(null);
+				            setGraphic(null);
+				        } 
+				        else 
+				        {
+				            final Button removeContactButton = new Button((String)item);
+				            removeContactButton.setStyle("-fx-base: red;");
+				            removeContactButton.setOnAction
+				            (new EventHandler<ActionEvent>() 
+				            		{
+				            			@Override
+				            			public void handle(ActionEvent event) 
+				            			{
+				            				param.getTableView().getSelectionModel().select(getIndex());
+				            				ContactsTableData contactData = getSelectedContact();
+				            				removeContactFromTable(contactData);
+				            			}
+
+				            		}
+				            );
+				            setGraphic(removeContactButton);
+				        	}
+				    	}
+	        	 	};
+	        	 	return cell;
+	         }
+		};
+	}
+	
+	protected void removeContactFromTable(ContactsTableData contactData)
+	{
+		data.remove(contactData);
+	}
+
+	protected ContactsTableData getSelectedContact()
+	{
+		return contactsTable.getSelectionModel().getSelectedItem();
 	}
 	
 	@FXML
@@ -306,7 +367,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		
 	}
 
-	@FXML
+	@FXML 
 	private TableView<ContactsTableData> contactsTable;
 	
 	@FXML
@@ -321,6 +382,9 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	@FXML
 	private TableColumn<ContactsTableData, Boolean> canReceiveFromColumn;
 
+	@FXML
+	private TableColumn<ContactsTableData, String> removeContactColumn;
+	
 	@FXML
 	private TextField accessTokenField;
 	
