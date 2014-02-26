@@ -200,7 +200,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		{
 			ContactKey newContact = new ContactKey(contactAccountId);
 			PopupController popupController = new PopupController(getMainWindow(), newContact.getPublicCode());
-			showControllerInsideModalDialog(popupController, "AddContact");
+			showControllerInsideModalDialog(popupController);
 			if(popupController.hasContactBeenAccepted())
 			{
 				int verification = popupController.getVerification();
@@ -241,6 +241,12 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		public String getFxmlLocation()
 		{
 			return "setupwizard/SetupAddContactPopup.fxml";
+		}
+
+		@Override
+		public String getDialogTitle()
+		{
+			return getLocalization().getWindowTitle("notifyAddContact"); 
 		}
 
 		@FXML
@@ -284,6 +290,8 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		private FxInSwingDialogStage fxStage;
 		private int verification;
 		private boolean contactAccepted;
+
+
 	}
 	
 	@Override

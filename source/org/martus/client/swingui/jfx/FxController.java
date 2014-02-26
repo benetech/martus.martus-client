@@ -104,7 +104,7 @@ abstract public class FxController
 		try
 		{
 			PopupNotifyController popupController = new PopupNotifyController(getMainWindow(), baseTag);
-			showControllerInsideModalDialog(popupController, baseTag);
+			showControllerInsideModalDialog(popupController);
 		} 
 		catch (Exception e)
 		{
@@ -134,6 +134,12 @@ abstract public class FxController
 			return "setupwizard/NotifyPopup.fxml";
 		}
 
+		@Override
+		public String getDialogTitle()
+		{
+			return getLocalization().getWindowTitle("notify"+ baseTag); 
+		}
+
 		@FXML
 		public void okPressed()
 		{
@@ -159,11 +165,11 @@ abstract public class FxController
 	}
 
 	
-	public void showControllerInsideModalDialog(FxPopupController controller, String dialogTitleTag) throws Exception
+	public void showControllerInsideModalDialog(FxPopupController controller) throws Exception
 	{
 		Stage popupStage = new Stage();
 		controller.setStage(popupStage);
-		popupStage.setTitle(getLocalization().getWindowTitle("notify"+dialogTitleTag));
+		popupStage.setTitle(controller.getDialogTitle());
 		popupStage.initModality(Modality.WINDOW_MODAL);
 
 		FXMLLoader fl = new FXMLLoader();

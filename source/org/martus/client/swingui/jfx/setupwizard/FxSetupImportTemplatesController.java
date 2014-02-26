@@ -122,7 +122,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	
 	private void showAddContactsDialog() throws Exception
 	{
-		showControllerInsideModalDialog(new ImportTemplatesFromMyContactsController(getMainWindow()), "ImportTemplate");
+		showControllerInsideModalDialog(new ImportTemplatesFromMyContactsController(getMainWindow()));
 	}
 	
 	private static class ImportTemplatesFromMyContactsController extends FxPopupController implements Initializable
@@ -181,6 +181,12 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 			return "setupwizard/SetupImportTemplateFromMyContactsPopup.fxml";
 		}
 
+		@Override
+		public String getDialogTitle()
+		{
+			return getLocalization().getWindowTitle("notifyImportTemplate"); 
+		}
+
 		@FXML
 		private TableView<ContactsWithTemplatesTableData> contactsWithTemplatesTableView;
 		
@@ -197,6 +203,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		private TableColumn<ContactsWithTemplatesTableData, ChoiceItem> selectedTemplateColumn;
 		
 		private ObservableList<ContactsWithTemplatesTableData> data = FXCollections.observableArrayList();
+
 	}
 	
 	private static class ToggleChangeListener implements ChangeListener<Toggle>
