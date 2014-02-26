@@ -46,6 +46,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.FxPopupController;
 import org.martus.client.swingui.jfx.FxStage;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
@@ -124,7 +125,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		showControllerInsideModalDialog(new ImportTemplatesFromMyContactsController(getMainWindow()), "ImportTemplate");
 	}
 	
-	private static class ImportTemplatesFromMyContactsController extends FxController implements Initializable
+	private static class ImportTemplatesFromMyContactsController extends FxPopupController implements Initializable
 	{
 		public ImportTemplatesFromMyContactsController(UiMainWindow mainWindowToUse) throws Exception
 		{
@@ -180,16 +181,6 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 			return "setupwizard/SetupImportTemplateFromMyContactsPopup.fxml";
 		}
 
-		public void setFxStage(FxStage stageToUse)
-		{
-			fxStage = stageToUse;
-		}
-
-		public FxStage getFxStage()
-		{
-			return fxStage;
-		}
-
 		@FXML
 		private TableView<ContactsWithTemplatesTableData> contactsWithTemplatesTableView;
 		
@@ -202,8 +193,6 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		@FXML
 		private TableColumn<ContactsWithTemplatesTableData, Boolean> contactSelectedColumn;
 
-		private FxStage fxStage;
-		
 		@FXML
 		private TableColumn<ContactsWithTemplatesTableData, ChoiceItem> selectedTemplateColumn;
 		

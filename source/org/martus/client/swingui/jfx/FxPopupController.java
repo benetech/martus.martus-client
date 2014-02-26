@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import javafx.stage.Stage;
+
 import org.martus.client.swingui.UiMainWindow;
 
 abstract public class FxPopupController extends FxController
@@ -33,4 +35,16 @@ abstract public class FxPopupController extends FxController
 	{
 		super(mainWindowToUse);
 	}
+
+	public void setStage(Stage stageToUse)
+	{
+		stage = stageToUse;
+	}
+	
+	public Stage getStage()
+	{
+		return stage;
+	}
+
+	private Stage stage;
 }
