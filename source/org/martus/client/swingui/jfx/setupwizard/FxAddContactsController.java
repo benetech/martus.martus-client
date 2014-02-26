@@ -39,6 +39,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
@@ -67,10 +68,14 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		
 		contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("contactName"));
 		publicCodeColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("publicCode"));
+		canSendToColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("canSendTo"));
+		canReceiveFromColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("canReceiveFrom"));
 		
 		contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
 		publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
-		
+		canSendToColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(canSendToColumn));
+		canReceiveFromColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(canReceiveFromColumn));
+
 		contactsTable.setItems(data);
 		loadExistingContactData();
 
@@ -297,6 +302,12 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	@FXML
 	private TableColumn<ContactsTableData, String> publicCodeColumn;
 	
+	@FXML
+	private TableColumn<ContactsTableData, Boolean> canSendToColumn;
+
+	@FXML
+	private TableColumn<ContactsTableData, Boolean> canReceiveFromColumn;
+
 	@FXML
 	private TextField accessTokenField;
 	

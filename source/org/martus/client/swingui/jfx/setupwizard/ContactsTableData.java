@@ -78,7 +78,17 @@ public class ContactsTableData
 		canReceiveFrom.set(canReceiveFromToUse);
 	}
 	
-	private final SimpleStringProperty contactName;
+    public SimpleBooleanProperty canSendToProperty() 
+    {
+    		return canSendTo;
+    }
+	
+    public SimpleBooleanProperty canReceiveFromProperty() 
+    {
+    		return canReceiveFrom;
+    }
+
+    private final SimpleStringProperty contactName;
 	private final SimpleStringProperty publicCode;
 	private final SimpleBooleanProperty canSendTo;
 	private final SimpleBooleanProperty canReceiveFrom;
