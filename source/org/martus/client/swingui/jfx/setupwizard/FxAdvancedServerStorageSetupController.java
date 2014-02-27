@@ -28,25 +28,56 @@ package org.martus.client.swingui.jfx.setupwizard;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import org.martus.client.core.ConfigInfo;
+import org.martus.client.core.MartusApp;
+import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.common.MartusLogger;
+import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusSecurity;
 
 public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizardContentController implements Initializable
 {
 	public FxAdvancedServerStorageSetupController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+		
+		clearServerStatus();
 	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		ipAddressField.textProperty().addListener(new TextFieldChangeHandler());
+		publicCodeField.textProperty().addListener(new TextFieldChangeHandler());
+		
+		ConfigInfo config = getApp().getConfigInfo();
+		ipAddressField.setText(config.getServerName());
+		String serverKey = config.getServerPublicKey();
+		if(serverKey.length() > 0)
+		{
+			try
+			{
+				String publicCode = MartusSecurity.computeFormattedPublicCode(serverKey);
+				publicCodeField.setText(publicCode);
+			}
+			catch(Exception e)
+			{
+				MartusLogger.logException(e);
+				// TODO: Should we display an error here, or just be silent?
+			}
+		}
+		
+		updateButtonStates();
 	}
 
 	@Override
@@ -58,14 +89,102 @@ public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizar
 	@FXML
 	public void connect()
 	{
+		try
+		{
+			clearServerStatus();
+			
+			MartusApp app = getApp();
+			String ip = ipAddressField.getText();
+			
+			if(!app.isNonSSLServerAvailable(ip))
+			{
+				showError("ConfigNoServer");
+				return;
+			}
+
+			String serverKey = app.getServerPublicKey(ip);
+			String serverPublicCode = MartusCrypto.computePublicCode(serverKey);
+
+			String userEnteredPublicCode = publicCodeField.getText();
+			String normalizedPublicCode = MartusCrypto.removeNonDigits(userEnteredPublicCode);
+			if(!serverPublicCode.equals(normalizedPublicCode))
+			{
+				showError("ServerCodeWrong");
+				return;
+			}
+			
+			ConfigInfo config = getApp().getConfigInfo();
+			config.setServerName(ipAddressField.getText());
+			config.setServerPublicKey(serverKey);
+			getApp().saveConfigInfo();
+			
+			isConnected = true;
+		} 
+		catch (SaveConfigInfoException e)
+		{
+			MartusLogger.logException(e);
+			System.exit(1);
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			System.exit(1);
+		}
+
+		updateButtonStates();
 	}
 	
 	@Override
 	public FxController getNextControllerClassName()
 	{
-		return new FxAddContactsController(getMainWindow());
+		if(isConnected)
+			return new FxAddContactsController(getMainWindow());
+
+		return new FxSetupBackupYourKeyController(getMainWindow());
 	}
 	
+	protected class TextFieldChangeHandler implements ChangeListener<String>
+	{
+		@Override
+		public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2)
+		{
+			clearServerStatus();
+			updateButtonStates();
+		}
+		
+	}
+	
+	protected void clearServerStatus()
+	{
+		isConnected = false;
+	}
+	
+	protected void updateButtonStates()
+	{
+		boolean hasIp = false;
+		boolean hasPublicCode = false;
+		
+		String ip = ipAddressField.getText();
+		if(ip.length() > 0)
+			hasIp = true;
+		
+		String publicCode = publicCodeField.getText();
+		if(publicCode.length() > 0)
+			hasPublicCode = true;
+		
+		boolean canConnect = (hasIp && hasPublicCode);
+		connectButton.setDisable(!canConnect);
+
+		boolean canContinue = isConnected || (!hasIp && !hasPublicCode);
+		getWizardNavigationHandler().getNextButton().setDisable(!canContinue);
+	}
+	
+	private void showError(String text)
+	{
+		MartusLogger.log("Server connection error: " + text);
+		System.exit(1);
+	}
+
 	@FXML
 	private Label statusLabel;
 	
@@ -80,4 +199,6 @@ public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizar
 	
 	@FXML
 	private TextField magicWordField;
+	
+	private boolean isConnected;
 }
