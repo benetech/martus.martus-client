@@ -185,41 +185,48 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	
 	final class TableButtonCallbackHandler implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
 	{
+	final class ButtonCellUpdateHandler extends TableCell
+		{
+			private final TableColumn param;
+			ButtonCellUpdateHandler(TableColumn param)
+			{
+				this.param = param;
+			}
+			@Override
+			public void updateItem(Object item, boolean empty) 
+			{
+			    super.updateItem(item, empty);
+			    if (empty) 
+			    {
+			        setText(null);
+			        setGraphic(null);
+			    } 
+			    else 
+			    {
+			        final Button removeContactButton = new Button((String)item);
+			        removeContactButton.setStyle("-fx-base: red;");
+			        removeContactButton.setOnAction
+			        (new EventHandler<ActionEvent>() 
+			        		{
+			        			@Override
+			        			public void handle(ActionEvent event) 
+			        			{
+			        				param.getTableView().getSelectionModel().select(getIndex());
+			        				ContactsTableData contactData = getSelectedContact();
+			        				removeContactFromTable(contactData);
+			        			}
+
+			        		}
+			        );
+			        setGraphic(removeContactButton);
+			    	}
+				}
+		}
+
 		@Override
 		 public TableCell call(final TableColumn param) 
 		 {
-			 	final TableCell cell = new TableCell() 
-			 	{
-			    @Override
-			    public void updateItem(Object item, boolean empty) 
-			    {
-			        super.updateItem(item, empty);
-			        if (empty) 
-			        {
-			            setText(null);
-			            setGraphic(null);
-			        } 
-			        else 
-			        {
-			            final Button removeContactButton = new Button((String)item);
-			            removeContactButton.setStyle("-fx-base: red;");
-			            removeContactButton.setOnAction
-			            (new EventHandler<ActionEvent>() 
-			            		{
-			            			@Override
-			            			public void handle(ActionEvent event) 
-			            			{
-			            				param.getTableView().getSelectionModel().select(getIndex());
-			            				ContactsTableData contactData = getSelectedContact();
-			            				removeContactFromTable(contactData);
-			            			}
-
-			            		}
-			            );
-			            setGraphic(removeContactButton);
-			        	}
-			    	}
-			 	};
+			 	final TableCell cell = new ButtonCellUpdateHandler(param);
 			 	return cell;
 		 }
 	}
