@@ -1853,7 +1853,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void forceRecheckOfUidsOnServer()
 	{
-		backgroundUploadTimerTask.forceRecheckOfUidsOnServer();
+		if(backgroundUploadTimerTask != null)
+			backgroundUploadTimerTask.forceRecheckOfUidsOnServer();
 	}
 	
 	private TorTransportWrapper getTransport()
