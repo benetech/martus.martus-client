@@ -204,7 +204,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			if(popupController.hasContactBeenAccepted())
 			{
 				int verification = popupController.getVerification();
-				newContact.setVerification(verification);
+				newContact.setVerificationStatus(verification);
 				ContactsTableData contactData = new ContactsTableData(newContact); 
 				data.add(contactData);
 				clearAccessTokenField();
