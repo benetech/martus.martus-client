@@ -318,7 +318,7 @@ public class MartusApp
 		{
 			ContactKey currentContact = allContacts.get(i);
 			if(currentContact.getCanSendTo())
-				hqKeys.add(new HeadquartersKey(currentContact.getPublicKey(),currentContact.getLabel()));
+				hqKeys.add(new HeadquartersKey(currentContact));
 		}
 		return hqKeys;
 	}
@@ -331,7 +331,7 @@ public class MartusApp
 		{
 			ContactKey currentContact = allContacts.get(i);
 			if(currentContact.getSendToByDefault() && currentContact.getCanSendTo())
-				hqKeys.add(new HeadquartersKey(currentContact.getPublicKey(),currentContact.getLabel()));
+				hqKeys.add(new HeadquartersKey(currentContact));
 		}
 		return hqKeys;
 	}
@@ -423,7 +423,7 @@ public class MartusApp
 			{
 				ContactKey currentContact = allContacts.get(i);
 				if(currentContact.getCanReceiveFrom())
-					fdKeys.add(new FieldDeskKey(currentContact.getPublicKey(),currentContact.getLabel()));
+					fdKeys.add(new FieldDeskKey(currentContact));
 			}
 		} 
 		catch (Exception e)
@@ -486,7 +486,7 @@ public class MartusApp
 			HeadquartersKey currentHQ = allHQKeys.get(i);
 			if(!updatedContacts.containsKey(currentHQ.getPublicKey()))
 			{
-				ContactKey newHQContact = new ContactKey(currentHQ.getPublicKey(), currentHQ.getLabel());
+				ContactKey newHQContact = new ContactKey(currentHQ);
 				newHQContact.setCanSendTo(true);
 				newHQContact.setSendToByDefault(isDefaultHQ);
 				updatedContacts.add(newHQContact);
@@ -534,7 +534,7 @@ public class MartusApp
 			FieldDeskKey currentFD = allFDKeys.get(i);
 			if(!updatedContacts.containsKey(currentFD.getPublicKey()))
 			{
-				ContactKey newFDContact = new ContactKey(currentFD.getPublicKey(), currentFD.getLabel());
+				ContactKey newFDContact = new ContactKey(currentFD);
 				newFDContact.setCanReceiveFrom(true);
 				updatedContacts.add(newFDContact);
 			}
@@ -762,7 +762,7 @@ public class MartusApp
 			HeadquartersKey defaultHQKeyToAdd = deprecatedDefaultHqKeys.get(i);
 			if(!defaultHQKeyToAdd.getPublicKey().equals(ourPublicKey))
 			{
-				ContactKey hqContactKey = new ContactKey(defaultHQKeyToAdd.getPublicKey(), defaultHQKeyToAdd.getLabel());
+				ContactKey hqContactKey = new ContactKey(defaultHQKeyToAdd);
 				hqContactKey.setCanSendTo(true);
 				hqContactKey.setSendToByDefault(true);
 				hqContactKey.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
@@ -775,7 +775,7 @@ public class MartusApp
 			if(!hqKeyToAdd.getPublicKey().equals(ourPublicKey)  &&
 					!deprecatedDefaultHqKeys.contains(hqKeyToAdd))
 			{
-				ContactKey hqContactKey = new ContactKey(hqKeyToAdd.getPublicKey(), hqKeyToAdd.getLabel());
+				ContactKey hqContactKey = new ContactKey(hqKeyToAdd);
 				hqContactKey.setCanSendTo(true);
 				hqContactKey.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
 				keys.add(hqContactKey);
@@ -788,7 +788,7 @@ public class MartusApp
 			FieldDeskKey fdKeyToAdd = deprecatedFieldDeskKeys.get(i);
 			if(!fdKeyToAdd.getPublicKey().equals(ourPublicKey))
 			{
-				ContactKey fdContactKey = new ContactKey(fdKeyToAdd.getPublicKey(), fdKeyToAdd.getLabel());
+				ContactKey fdContactKey = new ContactKey(fdKeyToAdd);
 				fdContactKey.setCanReceiveFrom(true);
 				fdContactKey.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
 				keys.add(fdContactKey);

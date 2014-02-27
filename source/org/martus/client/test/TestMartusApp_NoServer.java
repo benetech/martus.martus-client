@@ -1547,6 +1547,10 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("We should still only have 2 HQ accounts", 2, returnedKeysAfterAddingH1andH2asBothHQandDefault.size());
 		HeadquartersKey testKey = returnedKeysAfterAddingH1andH2asBothHQandDefault.get(0);
 		assertEquals("Key1 Label not correct?",sampleLabel1, testKey.getLabel());
+		assertEquals("Key1 should not be verified", ContactKey.NOT_VERIFIED, testKey.getVerification());
+		assertFalse("HQ Key1 Can't Receive From", testKey.getCanReceiveFrom());
+		assertTrue("HQ Key1 Can Send To?", testKey.getCanSendTo());
+
 		String newLabel1 = "Flinstone";
 
 		key1.setLabel(newLabel1);
@@ -1672,6 +1676,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("We should only have 2 FD accounts", 2, returnedKeysAfterAddingBothFDs.size());
 		FieldDeskKey testKey = returnedKeysAfterAddingBothFDs.get(0);
 		assertEquals("Key1 Label not correct?",sampleLabel1, testKey.getLabel());
+		assertEquals("Key1 should not be verified", ContactKey.NOT_VERIFIED, testKey.getVerification());
+		assertTrue("FD Key1 Can't Receive From", testKey.getCanReceiveFrom());
+		assertFalse("FD Key1 Can Send To?", testKey.getCanSendTo());
 		String newLabel1 = "Flinstone";
 
 		key1.setLabel(newLabel1);
@@ -2783,17 +2790,22 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String sampleLabel1 = "Fred";
 		HeadquartersKeys keys = new HeadquartersKeys();
 		HeadquartersKey key1 = new HeadquartersKey(sampleHQKey1, sampleLabel1);
+		
+		key1.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
 		keys.add(key1);
 		appWithAccount.setAndSaveHQKeys(keys,keys);
 		HeadquartersKeys returnedKeys = appWithAccount.getAllHQKeys();
 		HeadquartersKey returnedKey1 = returnedKeys.get(0);
 		assertEquals("Public Key not set?", sampleHQKey1, returnedKey1.getPublicKey());
 		assertEquals("Label not set?", sampleLabel1, returnedKey1.getLabel());
-
+		assertTrue("Should be able to SendTo", returnedKey1.getCanSendTo());
 		HeadquartersKeys returnedDefaultKeys = appWithAccount.getDefaultHQKeys();
 		HeadquartersKey returnedKey2 = returnedDefaultKeys.get(0);
 		assertEquals("Public Key not set?", sampleHQKey1, returnedKey2.getPublicKey());
 		assertEquals("Label not set?", sampleLabel1, returnedKey2.getLabel());
+		assertEquals("Verifiction not set?", ContactKey.VERIFIED_ENTERD_20_DIGITS, returnedKey2.getVerification());
+		assertFalse("Can Receive From set?", returnedKey2.getCanReceiveFrom());
+		assertTrue("Can Send To not set?", returnedKey2.getCanSendTo());
 		
 		Bulletin b1 = appWithAccount.createBulletin();
 		assertEquals("HQ key not set?", 1, b1.getAuthorizedToReadKeys().size());
