@@ -40,6 +40,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
@@ -80,6 +81,8 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		removeContactColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("deleteContact")); 
 
 		contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
+		contactNameColumn.setOnEditCommit(new ContactNameChangeEventHandler());
+		
 		publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
 		canSendToColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(canSendToColumn));
 		canReceiveFromColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(canReceiveFromColumn));
@@ -183,6 +186,15 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		accessTokenField.setText("");
 	}
 	
+	final class ContactNameChangeEventHandler implements EventHandler<CellEditEvent<ContactsTableData, String>>
+	{
+		public void handle(CellEditEvent<ContactsTableData, String> event) 
+		{
+		    int row = event.getTablePosition().getRow();
+			event.getTableView().getItems().get(row).setContactName(event.getNewValue());
+		}
+	}
+
 	final class TableButtonCallbackHandler implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
 	{
 		final class ButtonCellUpdateHandler extends TableCell
