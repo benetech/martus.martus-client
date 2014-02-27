@@ -81,12 +81,11 @@ public class ContactsTableData
 	
 	public void setPublicCode(String publicCodeToUse)
 	{
-		this.publicCode.set(publicCodeToUse);
 	}
 	
 	public void setVerificationStatus(String verificationStatusToUse)
 	{
-		this.verificationStatus.set(verificationStatusToUse);
+		verificationStatus.set(verificationStatusToUse);
 	}
 	
 	public String getVerificationStatus()
