@@ -939,7 +939,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		for(int i = 0; i < allKeys.size(); ++i )
 		{
 			ContactKey key = allKeys.get(i);
-			assertEquals("All migrated Keys should have VERIFIED_ENTERED_MANUALLY", ContactKey.VERIFIED_ENTERD_20_DIGITS, key.getVerification());
+			assertEquals("All migrated Keys should have VERIFIED_ENTERED_MANUALLY", ContactKey.VERIFIED_ENTERED_20_DIGITS, key.getVerification());
 		}
 		
 		TRACE_END();
@@ -1088,23 +1088,23 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		ContactKey hqLegacyContactKey = new ContactKey(getLegacyHQ(), "");
 		hqLegacyContactKey.setCanSendTo(true);
 		hqLegacyContactKey.setSendToByDefault(true);
-		hqLegacyContactKey.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
+		hqLegacyContactKey.setVerification(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 		keys.add(hqLegacyContactKey);
 		ContactKey hqContactKey1 = new ContactKey(hqKey1, hqKeylabel1);
 		hqContactKey1.setCanSendTo(true);
-		hqContactKey1.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
+		hqContactKey1.setVerification(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 		keys.add(hqContactKey1);
 		ContactKey hqContactKey2 = new ContactKey(hqKey2, hqKeylabel2);
 		hqContactKey2.setCanSendTo(true);
-		hqContactKey2.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
+		hqContactKey2.setVerification(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 		keys.add(hqContactKey2);
 		ContactKey fdContactKey1 = new ContactKey(fdKey1, fdKeyLabel1);
 		fdContactKey1.setCanReceiveFrom(true);
-		fdContactKey1.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
+		fdContactKey1.setVerification(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 		keys.add(fdContactKey1);
 		ContactKey fdContactKey2 = new ContactKey(fdKey2, fdKeyLabel2);
 		fdContactKey2.setCanReceiveFrom(true);
-		fdContactKey2.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
+		fdContactKey2.setVerification(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 		keys.add(fdContactKey2);
 		ContactKeys contactKeys = new ContactKeys(keys);
 		return contactKeys.toStringWithLabel();
@@ -2791,7 +2791,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		HeadquartersKeys keys = new HeadquartersKeys();
 		HeadquartersKey key1 = new HeadquartersKey(sampleHQKey1, sampleLabel1);
 		
-		key1.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
+		key1.setVerification(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 		keys.add(key1);
 		appWithAccount.setAndSaveHQKeys(keys,keys);
 		HeadquartersKeys returnedKeys = appWithAccount.getAllHQKeys();
@@ -2803,7 +2803,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		HeadquartersKey returnedKey2 = returnedDefaultKeys.get(0);
 		assertEquals("Public Key not set?", sampleHQKey1, returnedKey2.getPublicKey());
 		assertEquals("Label not set?", sampleLabel1, returnedKey2.getLabel());
-		assertEquals("Verifiction not set?", ContactKey.VERIFIED_ENTERD_20_DIGITS, returnedKey2.getVerification());
+		assertEquals("Verifiction not set?", ContactKey.VERIFIED_ENTERED_20_DIGITS, returnedKey2.getVerification());
 		assertFalse("Can Receive From set?", returnedKey2.getCanReceiveFrom());
 		assertTrue("Can Send To not set?", returnedKey2.getCanSendTo());
 		
