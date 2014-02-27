@@ -187,9 +187,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	{
 		final class ButtonCellUpdateHandler extends TableCell
 		{
-			private final class RemoveButtonHandler
-					implements
-						EventHandler<ActionEvent>
+			final class RemoveButtonHandler implements EventHandler<ActionEvent>
 			{
 				@Override
 				public void handle(ActionEvent event) 
@@ -199,6 +197,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 					removeContactFromTable(contactData);
 				}
 			}
+			
 			ButtonCellUpdateHandler(TableColumn tableColumn)
 			{
 				this.tableColumn = tableColumn;
@@ -217,9 +216,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			    {
 			        final Button removeContactButton = new Button((String)item);
 			        removeContactButton.setStyle("-fx-base: red;");
-			        removeContactButton.setOnAction
-			        (new RemoveButtonHandler()
-			        );
+			        removeContactButton.setOnAction(new RemoveButtonHandler());
 			        setGraphic(removeContactButton);
 			    	}
 			}
@@ -227,11 +224,10 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		}
 
 		@Override
-		 public TableCell call(final TableColumn param) 
-		 {
-			 	final TableCell cell = new ButtonCellUpdateHandler(param);
-			 	return cell;
-		 }
+		public TableCell call(final TableColumn param) 
+		{
+			return new ButtonCellUpdateHandler(param);
+		}
 	}
 
 	public static class PopupController extends FxPopupController implements Initializable
