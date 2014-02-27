@@ -1088,6 +1088,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		ContactKey hqLegacyContactKey = new ContactKey(getLegacyHQ(), "");
 		hqLegacyContactKey.setCanSendTo(true);
 		hqLegacyContactKey.setSendToByDefault(true);
+		hqLegacyContactKey.setVerification(ContactKey.VERIFIED_ENTERD_20_DIGITS);
 		keys.add(hqLegacyContactKey);
 		ContactKey hqContactKey1 = new ContactKey(hqKey1, hqKeylabel1);
 		hqContactKey1.setCanSendTo(true);
