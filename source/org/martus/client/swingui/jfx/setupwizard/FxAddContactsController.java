@@ -96,46 +96,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 
 	private Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> createRemoveButtonCallback()
 	{
-		return new Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>() 
-		{
-	         @Override
-	         public TableCell call(final TableColumn param) 
-	         {
-	        	 	final TableCell cell = new TableCell() 
-	        	 	{
-				    @Override
-				    public void updateItem(Object item, boolean empty) 
-				    {
-				        super.updateItem(item, empty);
-				        if (empty) 
-				        {
-				            setText(null);
-				            setGraphic(null);
-				        } 
-				        else 
-				        {
-				            final Button removeContactButton = new Button((String)item);
-				            removeContactButton.setStyle("-fx-base: red;");
-				            removeContactButton.setOnAction
-				            (new EventHandler<ActionEvent>() 
-				            		{
-				            			@Override
-				            			public void handle(ActionEvent event) 
-				            			{
-				            				param.getTableView().getSelectionModel().select(getIndex());
-				            				ContactsTableData contactData = getSelectedContact();
-				            				removeContactFromTable(contactData);
-				            			}
-
-				            		}
-				            );
-				            setGraphic(removeContactButton);
-				        	}
-				    	}
-	        	 	};
-	        	 	return cell;
-	         }
-		};
+		return new CallbackHandler();
 	}
 	
 	protected void removeContactFromTable(ContactsTableData contactData)
@@ -222,6 +183,47 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		accessTokenField.setText("");
 	}
 	
+	final class CallbackHandler implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
+	{
+		@Override
+		 public TableCell call(final TableColumn param) 
+		 {
+			 	final TableCell cell = new TableCell() 
+			 	{
+			    @Override
+			    public void updateItem(Object item, boolean empty) 
+			    {
+			        super.updateItem(item, empty);
+			        if (empty) 
+			        {
+			            setText(null);
+			            setGraphic(null);
+			        } 
+			        else 
+			        {
+			            final Button removeContactButton = new Button((String)item);
+			            removeContactButton.setStyle("-fx-base: red;");
+			            removeContactButton.setOnAction
+			            (new EventHandler<ActionEvent>() 
+			            		{
+			            			@Override
+			            			public void handle(ActionEvent event) 
+			            			{
+			            				param.getTableView().getSelectionModel().select(getIndex());
+			            				ContactsTableData contactData = getSelectedContact();
+			            				removeContactFromTable(contactData);
+			            			}
+
+			            		}
+			            );
+			            setGraphic(removeContactButton);
+			        	}
+			    	}
+			 	};
+			 	return cell;
+		 }
+	}
+
 	public static class PopupController extends FxPopupController implements Initializable
 	{
 		public PopupController(UiMainWindow mainWindowToUse, String contactPublicCodeToUse)
