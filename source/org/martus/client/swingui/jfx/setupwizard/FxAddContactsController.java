@@ -187,6 +187,18 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	{
 		final class ButtonCellUpdateHandler extends TableCell
 		{
+			private final class RemoveButtonHandler
+					implements
+						EventHandler<ActionEvent>
+			{
+				@Override
+				public void handle(ActionEvent event) 
+				{
+					tableColumn.getTableView().getSelectionModel().select(getIndex());
+					ContactsTableData contactData = getSelectedContact();
+					removeContactFromTable(contactData);
+				}
+			}
 			ButtonCellUpdateHandler(TableColumn tableColumn)
 			{
 				this.tableColumn = tableColumn;
@@ -206,17 +218,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			        final Button removeContactButton = new Button((String)item);
 			        removeContactButton.setStyle("-fx-base: red;");
 			        removeContactButton.setOnAction
-			        (new EventHandler<ActionEvent>() 
-			        		{
-			        			@Override
-			        			public void handle(ActionEvent event) 
-			        			{
-			        				tableColumn.getTableView().getSelectionModel().select(getIndex());
-			        				ContactsTableData contactData = getSelectedContact();
-			        				removeContactFromTable(contactData);
-			        			}
-
-			        		}
+			        (new RemoveButtonHandler()
 			        );
 			        setGraphic(removeContactButton);
 			    	}
