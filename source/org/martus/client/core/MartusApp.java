@@ -1790,7 +1790,10 @@ public class MartusApp
 		String formTemplateData = formTemplate.getExportedTemplateAsBase64String(getSecurity());
 		NetworkResponse response = getCurrentNetworkInterfaceGateway().putFormTemplate(getSecurity(), formTemplateData);
 		if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
+		{
+			MartusLogger.log("Server result code: " + response.getResultCode());
 			throw new ServerNotAvailableException();
+		}
 	}
 	
 	
