@@ -303,7 +303,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	@Override
 	public FxController getNextControllerClassName()
 	{
-		return new FxSetupImportFormTemplates(getMainWindow());
+		return new FxSetupImportTemplatesController(getMainWindow());
 	}
 	
 	protected class AccessTokenChangeHandler implements ChangeListener<String>
