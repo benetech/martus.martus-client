@@ -95,12 +95,12 @@ public class FxSetupStorageServerController extends AbstractFxSetupWizardContent
 	
 	private String getDefaultServerIp()
 	{
-		return IP_FOR_SL1_US;
+		return IP_FOR_SL1_DEV;
 	}
 
 	private String getDefaultServerPublicKey()
 	{
-		return PUBLIC_KEY_FOR_SL1_US;
+		return PUBLIC_KEY_FOR_SL1_DEV;
 	}
 
 	@FXML
@@ -110,8 +110,8 @@ public class FxSetupStorageServerController extends AbstractFxSetupWizardContent
 		getWizardStage().next();
 	}
 	
-	private static final String IP_FOR_SL1_US = "54.213.152.140";
-	private static final String PUBLIC_KEY_FOR_SL1_US = 
+	private static final String IP_FOR_SL1_DEV = "54.213.152.140";
+	private static final String PUBLIC_KEY_FOR_SL1_DEV = 
 			"MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAjIX0yCfct1/WQptimL"
 			+ "jK35F3wsW/SEQ8DGdxfMBTZX1GVoOD6zg0d71Ns1ij4FdnOUsD4QCN4Kiay"
 			+ "Q+l28eIU8LL8L5oJClFwsVqgNDvPn8jR/CAbPy9NL0gKHevvX/dciVVCSrg"
