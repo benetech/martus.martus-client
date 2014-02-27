@@ -25,13 +25,110 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import org.martus.client.core.ConfigInfo;
+import org.martus.client.core.MartusApp;
+import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.clientside.ClientSideNetworkGateway;
+import org.martus.common.MartusLogger;
 
 abstract public class FxSetupWizardAbstractServerSetupController extends AbstractFxSetupWizardContentController
 {
 	public FxSetupWizardAbstractServerSetupController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+	}
+
+	public boolean attemptToConnect(String serverIPAddress, String serverPublicKey, boolean askComplianceAcceptance)
+	{
+		MartusLogger.log("Attempting to connect to: " + serverIPAddress);
+		MartusApp app = getApp();
+		try
+		{
+			getMainWindow().clearStatusMessage();
+			ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, serverPublicKey, getApp().getTransport());
+			
+			if(!getApp().isSSLServerAvailable(gateway))
+			{
+				// FIXME: This should be a confirmation
+				showNotifyDlg("ServerSSLNotResponding");
+				saveServerConfig(serverIPAddress, serverPublicKey, "");
+				return true;
+			}
+
+			String complianceStatement = getServerCompliance(gateway);
+			if(askComplianceAcceptance)
+			{
+				if(complianceStatement.equals(""))
+				{
+					showNotifyDlg("ServerComplianceFailed");
+					saveServerConfig(serverIPAddress, serverPublicKey, "");
+					return true;
+				}
+				
+				if(!acceptCompliance(complianceStatement))
+				{
+					ConfigInfo previousServerInfo = getApp().getConfigInfo();
+
+					//TODO:The following line shouldn't be necessary but without it, the trustmanager 
+					//will reject the old server, we don't know why.
+					ClientSideNetworkGateway.buildGateway(previousServerInfo.getServerName(), previousServerInfo.getServerPublicKey(), getApp().getTransport());
+					
+					if(serverIPAddress.equals(previousServerInfo.getServerName()) &&
+					   serverPublicKey.equals(previousServerInfo.getServerPublicKey()))
+					{
+						getApp().setServerInfo("","","");
+					}
+
+					return false;
+				}
+			}
+
+			getApp().setServerInfo(serverIPAddress, serverPublicKey, complianceStatement);
+			
+			app.getStore().clearOnServerLists();
+			
+			getMainWindow().forceRecheckOfUidsOnServer();
+			app.getStore().clearOnServerLists();
+			getMainWindow().repaint();
+			getMainWindow().setStatusMessageReady();
+			return true;
+		}
+		catch(SaveConfigInfoException e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDlg("ErrorSavingConfig");
+			return false;
+		}
+	}
+	
+	private String getServerCompliance(ClientSideNetworkGateway gateway)
+	{
+		try
+		{
+			return getApp().getServerCompliance(gateway);
+		}
+		catch (Exception e)
+		{
+			return "";
+		}
+	}
+
+	private boolean acceptCompliance(String newServerCompliance)
+	{
+		// FIXME: Actually allow the user to accept/reject
+		showNotifyDlg("ReplaceThisWithAConfirmationDialogShowingTheComplianceStatement");
+		boolean accepted = true;
+		if(!accepted)
+			showNotifyDlg("UserRejectedServerCompliance");
+		
+		return accepted;
+	}
+
+	
+	private void saveServerConfig(String serverIPAddress, String serverPublicKey, String complianceStatement) throws SaveConfigInfoException
+	{
+		getApp().setServerInfo(serverIPAddress, serverPublicKey, complianceStatement);
 	}
 
 }

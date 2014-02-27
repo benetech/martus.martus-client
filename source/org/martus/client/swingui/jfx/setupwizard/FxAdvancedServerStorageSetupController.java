@@ -113,15 +113,7 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 				return;
 			}
 			
-			ConfigInfo config = getApp().getConfigInfo();
-			config.setServerName(ipAddressField.getText());
-			config.setServerPublicKey(serverKey);
-			getApp().saveConfigInfo();
-			
-			isConnected = true;
-			
-			// FIXME: Need to match UiMainWindow.doConfigureServer
-			// with gateway creation, compliance acceptance, etc.
+			isConnected = attemptToConnect(ip, serverKey, true);
 		} 
 		catch (SaveConfigInfoException e)
 		{
@@ -180,8 +172,7 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 	
 	private void showError(String text)
 	{
-		MartusLogger.log("Server connection error: " + text);
-		System.exit(1);
+		showNotifyDlg(text);
 	}
 
 	@FXML

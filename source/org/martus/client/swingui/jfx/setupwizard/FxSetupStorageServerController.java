@@ -32,18 +32,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 
-import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
-import org.martus.common.MartusLogger;
 
 public class FxSetupStorageServerController extends FxSetupWizardAbstractServerSetupController
 {
 	public FxSetupStorageServerController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		
-		destination = null;
 	}
 	
 	@Override
@@ -51,6 +47,7 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 	{
 		super.initialize(rootLocation, bundle);
 		
+		destination = null;
 		getWizardNavigationHandler().getNextButton().setVisible(false);
 		defaultServerButton.setDefaultButton(true);
 	}
@@ -64,33 +61,26 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 	@Override
 	public FxController getNextControllerClassName()
 	{
-		return destination;
+		if(destination != null)
+			return destination;
+
+		if(getApp().isSSLServerAvailable())
+			return new FxAddContactsController(getMainWindow());
+
+		return new FxSetupImportTemplatesController(getMainWindow());
 	}
 	
 	@FXML
 	public void setupServerLater()
 	{
-		destination = new FxSetupImportTemplatesController(getMainWindow());
 		getWizardStage().next();
 	}
 	
 	@FXML
 	public void useDefaultServer()
 	{
-		try
-		{
-			getApp().getConfigInfo().setServerName(getDefaultServerIp());
-			getApp().getConfigInfo().setServerPublicKey(getDefaultServerPublicKey());
-			getApp().saveConfigInfo();
-		} 
-		catch (SaveConfigInfoException e)
-		{
-			MartusLogger.logException(e);
-			System.exit(1);
-		}
-		
-		destination = new FxAddContactsController(getMainWindow());
-		getWizardStage().next();
+		if(attemptToConnect(getDefaultServerIp(), getDefaultServerPublicKey(), false))
+			getWizardStage().next();
 	}
 	
 	private String getDefaultServerIp()
