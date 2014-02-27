@@ -105,7 +105,13 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 	{
 		return "setupwizard/SetupImportTemplateFromMyContactsPopup.fxml";
 	}
-	
+
+	@Override
+	public String getDialogTitle()
+	{
+		return getLocalization().getWindowTitle("notifyImportTemplate"); 
+	}
+
 	@FXML
 	private void onCancel()
 	{

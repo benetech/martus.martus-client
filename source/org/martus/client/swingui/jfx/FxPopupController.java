@@ -45,6 +45,8 @@ abstract public class FxPopupController extends FxController
 	{
 		return stage;
 	}
+	
+	abstract public String getDialogTitle();
 
 	private Stage stage;
 }

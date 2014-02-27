@@ -116,12 +116,12 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	
 	private void importFromNewContact() throws Exception
 	{
-		showControllerInsideModalDialog(new FxSetupTemplateFromNewContactPopupController(getMainWindow()), "ImportTemplate");
+		showControllerInsideModalDialog(new FxSetupTemplateFromNewContactPopupController(getMainWindow()));
 	}
 
 	private void importFromContacts() throws Exception
 	{
-		showControllerInsideModalDialog(new FxImportTemplateFromMyContactsPopupController(getMainWindow()), "ImportTemplate");
+		showControllerInsideModalDialog(new FxImportTemplateFromMyContactsPopupController(getMainWindow()));
 	}
 	
 	@FXML

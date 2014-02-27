@@ -76,6 +76,12 @@ public class FxSetupTemplateFromNewContactPopupController extends FxPopupControl
 		return "setupwizard/SetupTemplateFromNewContactPopup.fxml";
 	}
 
+	@Override
+	public String getDialogTitle()
+	{
+		return getLocalization().getWindowTitle("notifyImportTemplate"); 
+	}
+
 	@FXML
 	private Label formsFromUserMessageLabel;
 	
@@ -88,4 +94,5 @@ public class FxSetupTemplateFromNewContactPopupController extends FxPopupControl
 	
 	@FXML
 	private Button continueButton;
+
 }
