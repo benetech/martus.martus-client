@@ -119,6 +119,9 @@ public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizar
 			getApp().saveConfigInfo();
 			
 			isConnected = true;
+			
+			// FIXME: Need to match UiMainWindow.doConfigureServer
+			// with gateway creation, compliance acceptance, etc.
 		} 
 		catch (SaveConfigInfoException e)
 		{
