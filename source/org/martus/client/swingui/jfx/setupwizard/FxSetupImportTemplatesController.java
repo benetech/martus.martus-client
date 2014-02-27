@@ -63,10 +63,8 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		genericTemplatesComboBox.setItems(FXCollections.observableArrayList(getGenericTemplateChoices()));
-		genericTemplatesComboBox.getSelectionModel().selectFirst();
-		
+
 		customTemplatesComboBox.setItems(FXCollections.observableArrayList(getImportTemplateChoices()));
-		customTemplatesComboBox.getSelectionModel().selectFirst();
 		
 		genericTemplatesComboBox.setVisible(false);
 		customTemplatesComboBox.setVisible(false);
@@ -75,7 +73,6 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	private ObservableList<ChoiceItem> getImportTemplateChoices()
 	{
 		Vector<ChoiceItem> choices = new Vector<ChoiceItem>();
-		choices.add(new ChoiceItem("", "Choose One..."));
 		choices.add(new ChoiceItem(IMPORT_FROM_CONTACTS_CODE, "Import from My Contacts"));
 		choices.add(new ChoiceItem(IMPORT_FROM_NEW_CONTACT_CODE, "Import from New Contact"));
 		
@@ -85,9 +82,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	private ObservableList<ChoiceItem> getGenericTemplateChoices()
 	{
 		Vector<ChoiceItem> choices = new Vector<ChoiceItem>();
-		choices.add(new ChoiceItem("", "Choose a form template"));
-		choices.add(new ChoiceItem("template2", "Template 2"));
-
+		
 		return FXCollections.observableArrayList(choices);
 	}
 	
