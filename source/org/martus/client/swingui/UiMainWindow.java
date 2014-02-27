@@ -1835,7 +1835,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 			new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons);
 			
-			backgroundUploadTimerTask.forceRecheckOfUidsOnServer();
+			forceRecheckOfUidsOnServer();
 			getStore().clearOnServerLists();
 			repaint();
 			setStatusMessageReady();
@@ -1849,6 +1849,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			inConfigServer = false;
 		}
+	}
+
+	public void forceRecheckOfUidsOnServer()
+	{
+		backgroundUploadTimerTask.forceRecheckOfUidsOnServer();
 	}
 	
 	private TorTransportWrapper getTransport()
@@ -2409,7 +2414,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void setStatusMessageTag(String tag)
 	{
-		statusBar.setStatusMessageTag(tag);
+		if(statusBar != null)
+			statusBar.setStatusMessageTag(tag);
 	}
 	
 	public void setStatusMessageReady()
