@@ -48,6 +48,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
 
 import org.martus.client.core.MartusApp;
+import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxInSwingDialogStage;
@@ -305,6 +306,36 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	{
 		return new FxSetupImportTemplatesController(getMainWindow());
 	}
+	
+	public void nextWasPressed(ActionEvent actionEvent)
+	{
+		SaveContacts();
+		super.nextWasPressed(actionEvent);
+	}
+	
+	public void backWasPressed(ActionEvent actionEvent)
+	{
+		SaveContacts();
+		super.backWasPressed(actionEvent);
+	}
+	
+	public void SaveContacts()
+	{
+		ContactKeys allContactsInTable = new ContactKeys();
+		for(int i =0; i < data.size(); ++i)
+		{
+			allContactsInTable.add(data.get(i).getContact());
+		}
+		try
+		{
+			getApp().setContactKeys(allContactsInTable);
+		} 
+		catch (SaveConfigInfoException e)
+		{
+			MartusLogger.logException(e);
+		}
+	}
+	
 	
 	protected class AccessTokenChangeHandler implements ChangeListener<String>
 	{

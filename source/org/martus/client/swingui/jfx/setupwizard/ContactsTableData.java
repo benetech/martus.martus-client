@@ -35,11 +35,23 @@ public class ContactsTableData
 {
 	public ContactsTableData(ContactKey contact) throws InvalidBase64Exception
 	{
+		publicKey = contact.getPublicKey();
 		contactName = new SimpleStringProperty(contact.getLabel());
 		publicCode = new SimpleStringProperty(contact.getPublicCode());
 		canSendTo = new SimpleBooleanProperty(contact.getCanSendTo());
 		canReceiveFrom = new SimpleBooleanProperty(contact.getCanReceiveFrom());
+		verificationStatusCode = contact.getVerificationStatus();
+		verificationStatus = new SimpleStringProperty(Integer.toString(verificationStatusCode));
 		removeContact = new SimpleStringProperty("X");
+	}
+	
+	public ContactKey getContact()
+	{
+		ContactKey contact = new ContactKey(publicKey, contactName.get());
+		contact.setCanReceiveFrom(canReceiveFrom.get());
+		contact.setCanSendTo(canSendTo.get());
+		contact.setVerificationStatus(verificationStatusCode);
+		return contact;
 	}
 	
 	public String getContactName()
@@ -70,6 +82,16 @@ public class ContactsTableData
 	public void setPublicCode(String publicCodeToUse)
 	{
 		this.publicCode.set(publicCodeToUse);
+	}
+	
+	public void setVerificationStatus(String verificationStatusToUse)
+	{
+		this.verificationStatus.set(verificationStatusToUse);
+	}
+	
+	public String getVerificationStatus()
+	{
+		return verificationStatus.get();
 	}
 	
 	public boolean getCanSendTo()
@@ -107,4 +129,7 @@ public class ContactsTableData
 	private final SimpleBooleanProperty canSendTo;
 	private final SimpleBooleanProperty canReceiveFrom;
 	private final SimpleStringProperty removeContact;
+	private final SimpleStringProperty verificationStatus;
+	private String publicKey;
+	private int verificationStatusCode;
 }

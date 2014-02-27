@@ -54,6 +54,7 @@ import org.martus.client.search.TestSearchParser;
 import org.martus.client.search.TestSearchSpec;
 import org.martus.client.search.TestSearchTreeNode;
 import org.martus.client.swingui.grids.TestGridTableModel;
+import org.martus.client.swingui.jfx.setupwizard.TestContactTableData;
 import org.martus.common.utilities.TestMartusFlexidate;
 
 public class TestClient
@@ -80,6 +81,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestChoiceItemSorterByLabelTagType.class));
 		suite.addTest(new TestSuite(TestClientBulletinStore.class));
 		suite.addTest(new TestSuite(TestConfigInfo.class));
+		suite.addTest(new TestSuite(TestContactTableData.class));
 		suite.addTest(new TestSuite(TestCustomFieldsDuplicateLabelChecker.class));
 		suite.addTest(new TestSuite(TestFancySearchHelper.class));
 		suite.addTest(new TestSuite(TestFancySearchTableModel.class));
