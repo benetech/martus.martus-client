@@ -96,7 +96,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 
 	private Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> createRemoveButtonCallback()
 	{
-		return new CallbackHandler();
+		return new TableButtonCallbackHandler();
 	}
 	
 	protected void removeContactFromTable(ContactsTableData contactData)
@@ -183,7 +183,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		accessTokenField.setText("");
 	}
 	
-	final class CallbackHandler implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
+	final class TableButtonCallbackHandler implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
 	{
 		@Override
 		 public TableCell call(final TableColumn param) 
