@@ -23,8 +23,8 @@
 				<ToggleGroup fx:id="chooseTemplateImportMethod" />
 			</toggleGroup>
 	  </RadioButton>
-      <ComboBox fx:id="genericTemplatesComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" xmlns:fx="http://javafx.com/fxml" />
+      <ComboBox fx:id="genericTemplatesComboBox" promptText="Choose a form template" GridPane.columnIndex="1" GridPane.rowIndex="1" xmlns:fx="http://javafx.com/fxml" />
       <RadioButton fx:id="downloadCustomRadioButton" mnemonicParsing="false" onAction="#radioButtonSelectionChanged" text="Download Custom" toggleGroup="$chooseTemplateImportMethod" GridPane.rowIndex="2" />
-      <ComboBox fx:id="customTemplatesComboBox" onAction="#customDropDownSelectionChanged" GridPane.columnIndex="1" GridPane.rowIndex="2" xmlns:fx="http://javafx.com/fxml" /><Label text="Martus comes with 5 generic templates. You can also download a custom template from one of your current contacts or a new contact." wrapText="true" GridPane.columnIndex="1" />
+      <ComboBox fx:id="customTemplatesComboBox" onAction="#customDropDownSelectionChanged" promptText="Choose One..." GridPane.columnIndex="1" GridPane.rowIndex="2" xmlns:fx="http://javafx.com/fxml" /><Label text="Martus comes with 5 generic templates. You can also download a custom template from one of your current contacts or a new contact." wrapText="true" GridPane.columnIndex="1" />
    </children>
 </GridPane>
