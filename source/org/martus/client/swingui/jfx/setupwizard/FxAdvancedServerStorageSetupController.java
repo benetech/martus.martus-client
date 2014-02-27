@@ -45,7 +45,7 @@ import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
 
-public class FxAdvancedServerStorageSetupController extends	AbstractFxSetupWizardContentController implements Initializable
+public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstractServerSetupController implements Initializable
 {
 	public FxAdvancedServerStorageSetupController(UiMainWindow mainWindowToUse)
 	{
