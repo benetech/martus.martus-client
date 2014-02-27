@@ -83,6 +83,7 @@ public class FxSetupSettingsController extends AbstractFxSetupWizardContentContr
 		String delimiter = dateDelimeterComboBox.getSelectionModel().getSelectedItem().getCode();
 		getLocalization().setDateDelimiter(delimiter.charAt(0));
 		getMainWindow().saveConfigInfo();
+		getApp().startOrStopTorAsRequested();
 	}
 	
 	private ObservableList<ChoiceItem> getDateFormatChoices()
