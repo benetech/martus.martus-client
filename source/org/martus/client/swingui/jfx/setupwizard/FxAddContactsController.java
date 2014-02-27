@@ -185,13 +185,13 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	
 	final class TableButtonCallbackHandler implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
 	{
-	final class ButtonCellUpdateHandler extends TableCell
+		final class ButtonCellUpdateHandler extends TableCell
 		{
-			private final TableColumn param;
-			ButtonCellUpdateHandler(TableColumn param)
+			ButtonCellUpdateHandler(TableColumn tableColumn)
 			{
-				this.param = param;
+				this.tableColumn = tableColumn;
 			}
+			
 			@Override
 			public void updateItem(Object item, boolean empty) 
 			{
@@ -211,7 +211,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			        			@Override
 			        			public void handle(ActionEvent event) 
 			        			{
-			        				param.getTableView().getSelectionModel().select(getIndex());
+			        				tableColumn.getTableView().getSelectionModel().select(getIndex());
 			        				ContactsTableData contactData = getSelectedContact();
 			        				removeContactFromTable(contactData);
 			        			}
@@ -220,7 +220,8 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			        );
 			        setGraphic(removeContactButton);
 			    	}
-				}
+			}
+			protected final TableColumn tableColumn;
 		}
 
 		@Override
