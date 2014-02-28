@@ -261,7 +261,6 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			    {
 			    		final Hyperlink verifyContactHyperLink = new Hyperlink((String)item);
 			    		verifyContactHyperLink.setOnAction(new ContactVerifierHandler());
-			    		verifyContactHyperLink.setDisable(true);
 			    		setGraphic(verifyContactHyperLink);
 			    	}
 			}
