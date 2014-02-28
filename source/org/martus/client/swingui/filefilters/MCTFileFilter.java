@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.filefilters;
 
-import org.martus.client.core.MartusApp;
 import org.martus.clientside.FormatFilter;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.CustomFieldTemplate;
