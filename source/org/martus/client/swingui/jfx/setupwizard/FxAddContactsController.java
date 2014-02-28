@@ -37,6 +37,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -258,10 +259,10 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			    } 
 			    else 
 			    {
-			        final Button verifyContactButton = new Button((String)item);
-			        //TODO have this changed dynamically verifyContactButton.setStyle("-fx-base: red;");
-			        verifyContactButton.setOnAction(new ContactVerifierHandler());
-			        setGraphic(verifyContactButton);
+			    		final Hyperlink verifyContactHyperLink = new Hyperlink((String)item);
+			    		verifyContactHyperLink.setOnAction(new ContactVerifierHandler());
+			    		verifyContactHyperLink.setDisable(true);
+			    		setGraphic(verifyContactHyperLink);
 			    	}
 			}
 			protected final TableColumn tableColumn;
