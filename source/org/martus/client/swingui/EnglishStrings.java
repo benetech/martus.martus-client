@@ -114,6 +114,7 @@ public class EnglishStrings
 "wintitle:confirmImportingCustomizationUnknownSigner=Import Customization Template",
 
 "wintitle:notifyAddContact=Add Contact",
+"wintitle:notifyVerifyContact=Verify Contact",
 "wintitle:notifyImportTemplate=Import Template",
 "wintitle:notifyContactsNoServer=Contacts Server",
 
