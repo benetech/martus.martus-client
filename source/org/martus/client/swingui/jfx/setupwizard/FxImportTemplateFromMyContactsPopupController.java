@@ -65,7 +65,6 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 		try
 		{
 			contactsWithTemplatesTableView.setEditable(true);
-			contactsWithTemplatesTableView.setStyle("-fx-table-cell-border-color: transparent;");
 			fillTableWithContacts();
 		
 			contactSelectedColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, Boolean>("rowSelected"));
