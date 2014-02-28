@@ -76,20 +76,24 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		
 		contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("contactName"));
 		publicCodeColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("publicCode"));
+		verificationStatusColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("verificationStatus"));
 		canSendToColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("canSendTo"));
 		canReceiveFromColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("canReceiveFrom"));
 		removeContactColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("deleteContact")); 
 
 		contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
 		contactNameColumn.setOnEditCommit(new ContactNameChangeEventHandler());
-		
-		publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
+
+		Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> verifyContactCellFactory = 
+				createVerifyContactCallback();
+		verificationStatusColumn.setCellFactory(verifyContactCellFactory);
+
+	    publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
 		canSendToColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(canSendToColumn));
 		canReceiveFromColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(canReceiveFromColumn));
 
-	      Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> deleteColumnCellFactory = 
+	    Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> deleteColumnCellFactory = 
 	                createRemoveButtonCallback();
-
 	    removeContactColumn.setCellFactory(deleteColumnCellFactory);
 		contactsTable.setItems(data);
 		loadExistingContactData();
@@ -97,9 +101,14 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		accessTokenField.textProperty().addListener(new AccessTokenChangeHandler());
 	}
 
+	private Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> createVerifyContactCallback()
+	{
+		return new TableColumnVerifyContactCallbackHandler();
+	}
+
 	private Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> createRemoveButtonCallback()
 	{
-		return new TableButtonCallbackHandler();
+		return new TableColumnRemoveButtonCallbackHandler();
 	}
 	
 	protected void removeContactFromTable(ContactsTableData contactData)
@@ -150,11 +159,11 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 
 	private boolean DoesContactAlreadyExistInTable(String contactPublicCode)
 	{
-		for(int i =0; i < data.size(); ++i)
+		for(int i=0; i < data.size(); ++i)
 		{
 			ContactsTableData contactData = data.get(i);
 			if(contactData.getPublicCode().equals(contactPublicCode))
-			return true;
+				return true;
 		}
 		return false;
 	}
@@ -164,15 +173,37 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		try
 		{
 			ContactKey newContact = new ContactKey(contactAccountId);
-			PopupController popupController = new PopupController(getMainWindow(), newContact.getPublicCode());
+			VerifyContactPopupController popupController = new VerifyContactPopupController(getMainWindow(), newContact.getPublicCode());
 			showControllerInsideModalDialog(popupController);
 			if(popupController.hasContactBeenAccepted())
 			{
 				int verification = popupController.getVerification();
 				newContact.setVerificationStatus(verification);
-				ContactsTableData contactData = new ContactsTableData(newContact); 
+				ContactsTableData contactData = new ContactsTableData(newContact, getLocalization()); 
 				data.add(contactData);
 				clearAccessTokenField();
+			}
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+	}
+
+	void verifyContactDialog(int index)
+	{
+		try
+		{
+			ContactKey currentContactSelected = data.get(index).getContact();
+						
+			VerifyContactPopupController popupController = new VerifyContactPopupController(getMainWindow(), currentContactSelected.getPublicCode());
+			showControllerInsideModalDialog(popupController);
+			if(popupController.hasContactBeenAccepted())
+			{
+				int verification = popupController.getVerification();
+				currentContactSelected.setVerificationStatus(verification);
+				ContactsTableData contactData = new ContactsTableData(currentContactSelected, getLocalization()); 
+				data.set(index, contactData);
 			}
 		}
 		catch (Exception e)
@@ -195,7 +226,56 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		}
 	}
 
-	final class TableButtonCallbackHandler implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
+	
+	final class TableColumnVerifyContactCallbackHandler implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
+	{
+		final class TableCellUpdateHandler extends TableCell
+		{
+			final class ContactVerifierHandler implements EventHandler<ActionEvent>
+			{
+				@Override
+				public void handle(ActionEvent event) 
+				{
+					int index = getIndex();
+					verifyContactDialog(index);
+				}
+			}
+			
+			TableCellUpdateHandler(TableColumn tableColumn)
+			{
+				this.tableColumn = tableColumn;
+			}
+			
+			@Override
+			public void updateItem(Object item, boolean empty) 
+			{
+			    super.updateItem(item, empty);
+			    if (empty) 
+			    {
+			        setText(null);
+			        setGraphic(null);
+			    } 
+			    else 
+			    {
+			        final Button verifyContactButton = new Button((String)item);
+			        //TODO have this changed dynamically verifyContactButton.setStyle("-fx-base: red;");
+			        verifyContactButton.setOnAction(new ContactVerifierHandler());
+			        setGraphic(verifyContactButton);
+			    	}
+			}
+			protected final TableColumn tableColumn;
+		}
+
+		@Override
+		public TableCell call(final TableColumn param) 
+		{
+			return new TableCellUpdateHandler(param);
+		}
+		
+	}
+	
+	
+	final class TableColumnRemoveButtonCallbackHandler implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
 	{
 		final class ButtonCellUpdateHandler extends TableCell
 		{
@@ -242,9 +322,9 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		}
 	}
 
-	public static class PopupController extends FxPopupController implements Initializable
+	public static class VerifyContactPopupController extends FxPopupController implements Initializable
 	{
-		public PopupController(UiMainWindow mainWindowToUse, String contactPublicCodeToUse)
+		public VerifyContactPopupController(UiMainWindow mainWindowToUse, String contactPublicCodeToUse)
 		{
 			super(mainWindowToUse);
 			contactPublicCode = contactPublicCodeToUse;
@@ -271,11 +351,13 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		}
 
 		@FXML
-		public void cancelVerify()
+		public void willVerifyLater()
 		{
+			verification=ContactKey.NOT_VERIFIED;
+			contactAccepted = true;
 			getStage().close();
 		}
-
+		
 		@FXML
 		public void verifyContact()
 		{
@@ -391,6 +473,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 
 		addContactButton.setDisable(!canAdd);
 	}
+	
 
 	private boolean isValidAccessToken(String tokenToValidate)
 	{
@@ -410,7 +493,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			for(int i = 0; i < keys.size(); ++i)
 			{
 				ContactKey contact = keys.get(i);
-				ContactsTableData contactData = new ContactsTableData(contact); 
+				ContactsTableData contactData = new ContactsTableData(contact,getLocalization()); 
 				data.add(contactData);
 			}
 		} 
@@ -429,6 +512,9 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	
 	@FXML
 	private TableColumn<ContactsTableData, String> publicCodeColumn;
+	
+	@FXML
+	private TableColumn<ContactsTableData, String> verificationStatusColumn;
 	
 	@FXML
 	private TableColumn<ContactsTableData, Boolean> canSendToColumn;
