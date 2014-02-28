@@ -30,7 +30,7 @@
 }
 
 #BelowTitle {
-	-fx-border-color: Red;
+	-fx-border-color: LightSteelBlue;
 	-fx-border-style: solid;
 	-fx-border-width: 25;
 }
