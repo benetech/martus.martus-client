@@ -25,11 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import org.martus.client.swingui.EnglishStrings;
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.ContactKey;
-import org.martus.common.EnglishCommonStrings;
-import org.martus.common.MiniLocalization;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 import org.martus.util.TestCaseEnhanced;
 
@@ -48,10 +44,7 @@ public class TestContactTableData extends TestCaseEnhanced
 		contactKey.setCanReceiveFrom(false);
 		contactKey.setCanSendTo(true);
 		contactKey.setVerificationStatus(ContactKey.VERIFIED_VISUALLY);
-		MartusLocalization localization = new MartusLocalization(null, EnglishStrings.strings);
-		localization.addEnglishTranslations(EnglishCommonStrings.strings);
-		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
-		ContactsTableData fxmlTableData = new ContactsTableData(contactKey, localization);
+		ContactsTableData fxmlTableData = new ContactsTableData(contactKey);
 
 		ContactKey keyReturned = fxmlTableData.getContact();
 		assertEquals(contactKey.getPublicKey(), keyReturned.getPublicKey());

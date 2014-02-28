@@ -36,6 +36,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -51,6 +52,7 @@ import javafx.util.Callback;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxInSwingDialogStage;
@@ -104,7 +106,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 
 	private Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> createVerifyContactCellFactory()
 	{
-		return new TableColumnVerifyContactCellFactory();
+		return new TableColumnVerifyContactCellFactory(getLocalization());
 	}
 
 	private Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> createRemoveButtonCellFactory()
@@ -180,7 +182,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			{
 				int verification = popupController.getVerification();
 				newContact.setVerificationStatus(verification);
-				ContactsTableData contactData = new ContactsTableData(newContact, getLocalization()); 
+				ContactsTableData contactData = new ContactsTableData(newContact); 
 				data.add(contactData);
 				clearAccessTokenField();
 			}
@@ -204,7 +206,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			{
 				int verification = popupController.getVerification();
 				currentContactSelected.setVerificationStatus(verification);
-				ContactsTableData contactData = new ContactsTableData(currentContactSelected, getLocalization()); 
+				ContactsTableData contactData = new ContactsTableData(currentContactSelected); 
 				data.set(index, contactData);
 			}
 		}
@@ -231,6 +233,12 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	
 	final class TableColumnVerifyContactCellFactory implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
 	{
+		public TableColumnVerifyContactCellFactory(MartusLocalization localizationToUse)
+		{
+			super();
+			localization = localizationToUse;
+		}
+		
 		final class TableCellUpdateHandler extends TableCell
 		{
 			final class ContactVerifierHandler implements EventHandler<ActionEvent>
@@ -259,11 +267,43 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			    } 
 			    else 
 			    {
-			    		final Hyperlink verifyContactHyperLink = new Hyperlink((String)item);
-			    		verifyContactHyperLink.setOnAction(new ContactVerifierHandler());
-			    		setGraphic(verifyContactHyperLink);
+			    		int verificationStatus = (Integer)item;
+			    		String labelText = getVerificationStatusLabel(verificationStatus);
+			    		final Node verificationStatusCell;
+			    		if(verificationStatus == ContactKey.NOT_VERIFIED)
+			    		{
+			    			verificationStatusCell = new Hyperlink(labelText);
+			    			((Hyperlink)verificationStatusCell).setOnAction(new ContactVerifierHandler());
+			    			verificationStatusCell.setStyle("unverified-hyperlink");
+
+			    		}
+			    		else
+			    		{
+			    			verificationStatusCell = new Label(labelText);
+			    			verificationStatusCell.setStyle("verified-label");
+			    		}
+		    			setGraphic(verificationStatusCell);
 			    	}
 			}
+			
+			private String getVerificationStatusLabel(int verificationStatusCode)
+			{
+				String statusCode = null;
+				switch (verificationStatusCode)
+				{
+					case  ContactKey.NOT_VERIFIED:
+						statusCode = localization.getFieldLabel("ContactVerifyNow");
+						break;
+					case  ContactKey.VERIFIED_ENTERED_20_DIGITS:
+					case  ContactKey.VERIFIED_VISUALLY:
+						statusCode = localization.getFieldLabel("ContactVerified");
+						break;
+					default :
+						statusCode = "?";
+				}
+				return statusCode;
+			}
+			
 			protected final TableColumn tableColumn;
 		}
 
@@ -271,7 +311,9 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		public TableCell call(final TableColumn param) 
 		{
 			return new TableCellUpdateHandler(param);
-		}		
+		}	
+		
+		protected MartusLocalization localization;
 	}	
 	
 	final class TableColumnRemoveButtonCellFactory implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
@@ -306,7 +348,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			    else 
 			    {
 			        final Button removeContactButton = new Button((String)item);
-			        removeContactButton.setStyle("-fx-base: red;");
+			        removeContactButton.setStyle("remove-contact-button");
 			        removeContactButton.setOnAction(new RemoveButtonHandler());
 			        setGraphic(removeContactButton);
 			    	}
@@ -500,7 +542,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			for(int i = 0; i < keys.size(); ++i)
 			{
 				ContactKey contact = keys.get(i);
-				ContactsTableData contactData = new ContactsTableData(contact,getLocalization()); 
+				ContactsTableData contactData = new ContactsTableData(contact); 
 				data.add(contactData);
 			}
 		} 

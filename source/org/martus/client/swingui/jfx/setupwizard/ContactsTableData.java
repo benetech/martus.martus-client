@@ -30,47 +30,29 @@ import org.martus.common.ContactKey;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class ContactsTableData
 {
-	public ContactsTableData(ContactKey contact, MartusLocalization localizationToUse) throws InvalidBase64Exception
+	public ContactsTableData(ContactKey contact) throws InvalidBase64Exception
 	{
-		localization = localizationToUse;
 		publicKey = contact.getPublicKey();
 		contactName = new SimpleStringProperty(contact.getLabel());
 		publicCode = new SimpleStringProperty(contact.getPublicCode());
 		canSendTo = new SimpleBooleanProperty(contact.getCanSendTo());
 		canReceiveFrom = new SimpleBooleanProperty(contact.getCanReceiveFrom());
-		verificationStatusCode = contact.getVerificationStatus();
-		verificationStatus = new SimpleStringProperty(getStatusCode());
+		verificationStatus = new SimpleIntegerProperty(contact.getVerificationStatus());
 		removeContact = new SimpleStringProperty("X");
 	}
 	
-	private String getStatusCode()
-	{
-		String statusCode = null;
-		switch (verificationStatusCode)
-		{
-			case  ContactKey.NOT_VERIFIED:
-				statusCode = localization.getFieldLabel("ContactVerifyNow");
-				break;
-			case  ContactKey.VERIFIED_ENTERED_20_DIGITS:
-			case  ContactKey.VERIFIED_VISUALLY:
-				statusCode = localization.getFieldLabel("ContactVerified");
-				break;
-			default :
-				statusCode = "?";
-		}
-		return statusCode;
-	}
 
 	public ContactKey getContact()
 	{
 		ContactKey contact = new ContactKey(publicKey, contactName.get());
 		contact.setCanReceiveFrom(canReceiveFrom.get());
 		contact.setCanSendTo(canSendTo.get());
-		contact.setVerificationStatus(verificationStatusCode);
+		contact.setVerificationStatus(verificationStatus.get());
 		return contact;
 	}
 	
@@ -103,24 +85,14 @@ public class ContactsTableData
 	{
 	}
 	
-	public int getVerificationStatusCode()
-	{
-		return verificationStatusCode;		
-	}
-	
-	public void setVerificationStatusCode(int newStatus)
-	{
-		verificationStatusCode = newStatus;
-		setVerificationStatus(getStatusCode());
-	}
-	private void setVerificationStatus(String verificationStatusToUse)
+	public void setVerificationStatus(int verificationStatusToUse)
 	{
 		verificationStatus.set(verificationStatusToUse);
 	}
 	
-	public String getVerificationStatus()
+	public int getVerificationStatus()
 	{
-		return getStatusCode();
+		return verificationStatus.get();
 	}
 	
 	public boolean getCanSendTo()
@@ -158,9 +130,7 @@ public class ContactsTableData
 	private final SimpleBooleanProperty canSendTo;
 	private final SimpleBooleanProperty canReceiveFrom;
 	private final SimpleStringProperty removeContact;
-	private final SimpleStringProperty verificationStatus;
+	private final SimpleIntegerProperty verificationStatus;
 
-	private MartusLocalization localization;
 	private String publicKey;
-	private int verificationStatusCode;
 }
