@@ -1,4 +1,5 @@
 .root {
+	-fx-background-color: LightSteelBlue;
 }
 
 .button{
@@ -6,42 +7,54 @@
     -fx-padding: 3 6 6 6;
 }
 
-.LeftPanel {
-	-fx-background-color: darkcyan;
-    -fx-padding: 6 6 6 6;
-    -fx-border-color: black;
-}
-
-.TOCTitle {
-	-fx-text-fill: aqua;
-    -fx-padding: 2 2 2 2;
-}
-
-.LeftGrid {
-	-fx-grid-lines-visible: false;
-	-fx-alignment: top-left;
-	-fx-spacing: 10;
-}
-
 .Icon {
     -fx-padding: 16 16 16 16;
     -fx-alignment: top-left;
 }
 
-.TOCEntry {
-	-fx-text-fill: aqua;
-    -fx-padding: 2 2 2 2;
+.form-pane {
+	-fx-background-color: SteelBlue;
+	-fx-padding: 25 25 25 25;
 }
 
-.TOCDescription {
-	color: white;
-	-fx-text-fill: white;
-    -fx-padding: 2 2 2 2;
+.not-used-yet {
+	-fx-background-insets: 25;
+	-fx-insets: 10 10 10 10;
+	-fx-border-insets: 5;
+	-fx-border-color: Red;
+	-fx-border-style: solid;
+	-fx-border-width: 2;
+    -fx-padding: 6 6 6 6;
+	-fx-spacing: 10;
+	-fx-insets: 10 10 10 10;
 }
 
-.RightPanel {
-	-fx-background-color: aquamarine;
+#BelowTitle {
+	-fx-border-color: Red;
+	-fx-border-style: solid;
+	-fx-border-width: 25;
+}
+
+#contentPane {
+}
+
+#topBar {
+	-fx-background-color: MidnightBlue;
+	-fx-text-fill: White;
     -fx-padding: 6 6 6 6;
 	-fx-spacing: 10;
 }
 
+.TopBarStepNumber {
+	-fx-text-fill: White;
+	-fx-font: 20px "Sans-Serif";
+}
+
+.TopBarStepName {
+	-fx-text-fill: DarkGray;
+	-fx-alignment: center-left;
+}
+
+.TopBarArrow {
+	-fx-text-fill: Red;
+}
