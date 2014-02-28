@@ -197,6 +197,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			ContactKey currentContactSelected = data.get(index).getContact();
 						
 			VerifyContactPopupController popupController = new VerifyContactPopupController(getMainWindow(), currentContactSelected.getPublicCode());
+			popupController.setVerificationOnly();
 			showControllerInsideModalDialog(popupController);
 			if(popupController.hasContactBeenAccepted())
 			{
@@ -332,6 +333,11 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			contactAccepted = false;
 		}
 		
+		public void setVerificationOnly()
+		{
+			verifyContact = true;
+		}
+		
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1)
 		{
@@ -347,7 +353,10 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		@Override
 		public String getDialogTitle()
 		{
-			return getLocalization().getWindowTitle("notifyAddContact"); 
+			String title = "notifyAddContact";
+			if(verifyContact)
+				title = "notifyVerifyContact";
+			return getLocalization().getWindowTitle(title); 
 		}
 
 		@FXML
@@ -393,7 +402,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		private FxInSwingDialogStage fxStage;
 		private int verification;
 		private boolean contactAccepted;
-
+		private boolean verifyContact;
 
 	}
 	
