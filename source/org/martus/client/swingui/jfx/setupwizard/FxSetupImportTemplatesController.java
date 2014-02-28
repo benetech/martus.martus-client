@@ -25,20 +25,26 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomFieldTemplate;
 
 public class FxSetupImportTemplatesController extends AbstractFxSetupWizardContentController implements Initializable
 {
@@ -68,6 +74,8 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		
 		genericTemplatesComboBox.setVisible(false);
 		customTemplatesComboBox.setVisible(false);
+		
+		getWizardNavigationHandler().getNextButton().addEventHandler(ActionEvent.ACTION, new NextButtonHandler());
 	} 
 	
 	private ObservableList<ChoiceItem> getImportTemplateChoices()
@@ -81,11 +89,42 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 
 	private ObservableList<ChoiceItem> getGenericTemplateChoices()
 	{
-		Vector<ChoiceItem> choices = new Vector<ChoiceItem>();
-		
-		return FXCollections.observableArrayList(choices);
+		try
+		{
+			Vector<ChoiceItem> choices = new Vector<ChoiceItem>();
+			Vector<CustomFieldTemplate> customTemplates = loadCustomTemplates();
+			for (CustomFieldTemplate customTemplate : customTemplates)
+			{
+				choices.add(new ChoiceItem(customTemplate.getTitle(), customTemplate.getTitle()));
+			}
+
+			return FXCollections.observableArrayList(choices);
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			return FXCollections.observableArrayList();
+		}
 	}
 	
+	private Vector<CustomFieldTemplate> loadCustomTemplates() throws Exception
+	{
+		Vector<CustomFieldTemplate> customTemplates = new Vector<CustomFieldTemplate>();
+		File accountsDirs = getApp().getMartusDataRootDirectory();
+		File[] customTemplateFiles = accountsDirs.listFiles(new MCTFileFilter(getLocalization()));
+		for (File customTemplateFile : customTemplateFiles)
+		{
+			if (customTemplateFile.isDirectory())
+				continue;
+			
+			CustomFieldTemplate customTemplate = new CustomFieldTemplate();
+			customTemplate.importTemplate(getApp().getSecurity(), customTemplateFile);
+			customTemplates.add(customTemplate);
+		}
+		
+		return customTemplates;
+	}
+
 	@FXML
 	private void customDropDownSelectionChanged() throws Exception
 	{
@@ -117,6 +156,19 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	private void importFromContacts() throws Exception
 	{
 		showControllerInsideModalDialog(new FxImportTemplateFromMyContactsPopupController(getMainWindow()));
+	}
+	
+	private class NextButtonHandler implements EventHandler<ActionEvent>
+	{
+		public NextButtonHandler()
+		{
+		}
+
+		@Override
+		public void handle(ActionEvent event)
+		{
+			//FIXME urgent : save imported template when next is clicked?
+		}
 	}
 	
 	@FXML
