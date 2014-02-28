@@ -28,18 +28,20 @@ package org.martus.client.swingui.jfx.setupwizard;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 
 import org.martus.common.ContactKey;
-import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomFieldTemplate;
 
 public class ContactsWithTemplatesTableData
 {
-	public ContactsWithTemplatesTableData(ContactKey key, boolean rowSelectedToUse, ChoiceItem selectedTemplateNameToUse) throws Exception
+	public ContactsWithTemplatesTableData(ContactKey key, boolean rowSelectedToUse, CustomFieldTemplate selectedTemplateNameToUse, ObservableList<CustomFieldTemplate> customFieldTemplatesToChooseFromToUse) throws Exception
 	{
 		contactName = new SimpleStringProperty(key.getLabel());
 		publicCode = new SimpleStringProperty(key.getPublicCode());
 		rowSelected = new SimpleBooleanProperty(rowSelectedToUse);
 		selectedTemplateName = new SimpleObjectProperty(selectedTemplateNameToUse);
+		customFieldTemplatesToChooseFrom = customFieldTemplatesToChooseFromToUse;
 	}
 	
 	public String getContactName()
@@ -77,18 +79,30 @@ public class ContactsWithTemplatesTableData
 		rowSelected.set(rowSelectedToUse);
 	}
 	
-	public ChoiceItem getSelectedTemplateName()
+	public CustomFieldTemplate getSelectedTemplateName()
 	{
 		return selectedTemplateName.get();
 	}
 	
-	public void setSelectedTemplateName(ChoiceItem selectedTamplateNameToUse)
+	public void setSelectedTemplateName(CustomFieldTemplate selectedTamplateNameToUse)
 	{
 		selectedTemplateName.set(selectedTamplateNameToUse);
+	}
+	
+	public void setCustomFieldTemplatesToChooseFrom(ObservableList<CustomFieldTemplate> customFieldTemplatesToChooseFromToUse)
+	{
+		customFieldTemplatesToChooseFrom.clear();
+		customFieldTemplatesToChooseFrom.addAll(customFieldTemplatesToChooseFromToUse);
+	}
+	
+	public ObservableList<CustomFieldTemplate> getCustomFieldTemplateChoices()
+	{
+		return customFieldTemplatesToChooseFrom;
 	}
 	
 	private final SimpleStringProperty contactName;
 	private final SimpleStringProperty publicCode;
 	private final SimpleBooleanProperty rowSelected;
-	private final SimpleObjectProperty<ChoiceItem> selectedTemplateName;
+	private final SimpleObjectProperty<CustomFieldTemplate> selectedTemplateName;
+	private ObservableList<CustomFieldTemplate> customFieldTemplatesToChooseFrom;
 }
