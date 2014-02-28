@@ -86,7 +86,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		contactNameColumn.setOnEditCommit(new ContactNameChangeEventHandler());
 
 		Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> verifyContactCellFactory = 
-				createVerifyContactCallback();
+				createVerifyContactCellFactory();
 		verificationStatusColumn.setCellFactory(verifyContactCellFactory);
 
 	    publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
@@ -94,7 +94,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		canReceiveFromColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(canReceiveFromColumn));
 
 	    Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> deleteColumnCellFactory = 
-	                createRemoveButtonCallback();
+	                createRemoveButtonCellFactory();
 	    removeContactColumn.setCellFactory(deleteColumnCellFactory);
 		contactsTable.setItems(data);
 		loadExistingContactData();
@@ -102,14 +102,14 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		accessTokenField.textProperty().addListener(new AccessTokenChangeHandler());
 	}
 
-	private Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> createVerifyContactCallback()
+	private Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> createVerifyContactCellFactory()
 	{
-		return new TableColumnVerifyContactCallbackHandler();
+		return new TableColumnVerifyContactCellFactory();
 	}
 
-	private Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> createRemoveButtonCallback()
+	private Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> createRemoveButtonCellFactory()
 	{
-		return new TableColumnRemoveButtonCallbackHandler();
+		return new TableColumnRemoveButtonCellFactory();
 	}
 	
 	protected void removeContactFromTable(ContactsTableData contactData)
@@ -229,7 +229,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	}
 
 	
-	final class TableColumnVerifyContactCallbackHandler implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
+	final class TableColumnVerifyContactCellFactory implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
 	{
 		final class TableCellUpdateHandler extends TableCell
 		{
@@ -271,12 +271,10 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		public TableCell call(final TableColumn param) 
 		{
 			return new TableCellUpdateHandler(param);
-		}
-		
-	}
+		}		
+	}	
 	
-	
-	final class TableColumnRemoveButtonCallbackHandler implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
+	final class TableColumnRemoveButtonCellFactory implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
 	{
 		final class ButtonCellUpdateHandler extends TableCell
 		{
