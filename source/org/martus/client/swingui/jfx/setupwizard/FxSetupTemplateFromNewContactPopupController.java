@@ -27,16 +27,27 @@ package org.martus.client.swingui.jfx.setupwizard;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Vector;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
+import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxPopupController;
-import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.Exceptions.ServerNotAvailableException;
+import org.martus.common.MartusAccountAccessToken;
+import org.martus.common.MartusAccountAccessToken.TokenNotFoundException;
+import org.martus.common.MartusLogger;
+import org.martus.common.crypto.MartusSecurity;
+import org.martus.common.fieldspec.CustomFieldTemplate;
+import org.martus.util.TokenReplacement;
 
 public class FxSetupTemplateFromNewContactPopupController extends FxPopupController implements Initializable
 {
@@ -49,11 +60,11 @@ public class FxSetupTemplateFromNewContactPopupController extends FxPopupControl
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		importFromThisConctactLabel.setVisible(false);
-		importFromUserComboBox.setVisible(false);
+		customFieldTemplatesComboBox.setVisible(false);
 		formsFromUserMessageLabel.setVisible(false);
 		continueButton.setVisible(false);
 	}
-
+	
 	@FXML
 	private void onCancel()
 	{
@@ -63,11 +74,74 @@ public class FxSetupTemplateFromNewContactPopupController extends FxPopupControl
 	@FXML
 	private void onSeeForms()
 	{
+		try
+		{
+			MartusAccountAccessToken token = new MartusAccountAccessToken(accessCodeTextField.getText());
+			MartusApp app = getApp();
+			String contactAccountId = app.getMartusAccountIdFromAccessTokenOnServer(token);
+			if(contactAccountId.equals(app.getAccountId()))
+			{
+				showNotifyDlg("ContactKeyIsOurself");
+				return;
+			}
+			
+			formsFromUserMessageLabel.setVisible(true);
+			String formsFromUserMessage = TokenReplacement.replaceToken("Forms from user #userAccessCode", "#userAccessCode", accessCodeTextField.getText());
+			formsFromUserMessageLabel.setText(formsFromUserMessage);
+			
+			String contactPublicCode = MartusSecurity.computeFormattedPublicCode(contactAccountId);
+			ObservableList<CustomFieldTemplate> fieldTemplates = getCustomFieldTemplates(contactPublicCode);
+			
+			customFieldTemplatesComboBox.setVisible(true);
+			customFieldTemplatesComboBox.setItems(fieldTemplates);
+		} 
+		catch (ServerNotAvailableException e)
+		{
+			showNotifyDlg("ContactsNoServer");
+		} 
+		catch (TokenNotFoundException e)
+		{
+			showNotifyDlg("UnableToRetrieveContactFromServer");
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDlg("UnexpectedError");
+		} 
+	}
+
+	//FIXME these two methods are duplicated and need to be pulled up into new super class
+	private ObservableList<CustomFieldTemplate> getCustomFieldTemplates(String contactPublicCode) throws Exception
+	{
+		Vector<Vector<String>> result = getApp().getListOfFormTemplatesOnServer(contactPublicCode);
+
+		return getTitlesFromResults(contactPublicCode, result);
 	}
 	
+	private ObservableList<CustomFieldTemplate> getTitlesFromResults(String publicKey, Vector<Vector<String>> formTemplatesTitlesDescriptionsList) throws Exception
+	{
+		ObservableList<CustomFieldTemplate> customFieldTemplates = FXCollections.observableArrayList();
+		for (Vector<String> titleAndDescriptonVector : formTemplatesTitlesDescriptionsList)
+		{
+			String title = titleAndDescriptonVector.firstElement();
+			customFieldTemplates.add(getApp().getFormTemplateOnServer(publicKey, title));
+		}
+		
+		return customFieldTemplates;
+	}
+
+	@FXML
+	private void comboSelectionChanged()
+	{
+		importFromThisConctactLabel.setVisible(true);
+		continueButton.setVisible(true);
+	}
+
 	@FXML
 	private void onContinue()
 	{
+		CustomFieldTemplate customFieldTemplateToSave = customFieldTemplatesComboBox.getSelectionModel().getSelectedItem();
+		//FIXME urgent, save the template
 	}
 
 	@Override
@@ -86,7 +160,7 @@ public class FxSetupTemplateFromNewContactPopupController extends FxPopupControl
 	private Label formsFromUserMessageLabel;
 	
 	@FXML
-	private ComboBox<ChoiceItem> importFromUserComboBox;
+	private ComboBox<CustomFieldTemplate> customFieldTemplatesComboBox;
 	
 	
 	@FXML
@@ -94,5 +168,7 @@ public class FxSetupTemplateFromNewContactPopupController extends FxPopupControl
 	
 	@FXML
 	private Button continueButton;
-
+	
+	@FXML
+	private TextField accessCodeTextField;
 }
