@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="134.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <Label text="Public Code:" />
+    <Label fx:id="contactPublicCodeLabel" GridPane.columnIndex="1" />
+    <Button mnemonicParsing="false" onAction="#willVerifyLater" prefHeight="33.0" prefWidth="266.0" text="Will Verify Later" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <Button mnemonicParsing="false" onAction="#verifyContact" prefHeight="33.0" prefWidth="275.0" text="Verify!" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+</GridPane>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+  </rowConstraints>
+<children><Label text="Import Form Templates" /><Label text="Form templates help you get started creating bulletins quickly and easily withoutcreating custom forms. These are publicly available forms for your use." wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" /><TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2" xmlns:fx="http://javafx.com/fxml">
+  <columns>
+    <TableColumn minWidth="-1.0" prefWidth="50.0" />
+    <TableColumn prefWidth="200.0" text="Form Name" /><TableColumn minWidth="-Infinity" prefWidth="300.0" text="Description" />
+  </columns>
+</TableView><Button mnemonicParsing="false" text="Import Private Forms" GridPane.rowIndex="3" /><Label fx:id="statusLabel" text="You have selected3 Martus formsand2 privateforms to include in Martus. You canadd additional forms, customize these, or create your own from the Martus desktop" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+</children>
+</GridPane>
