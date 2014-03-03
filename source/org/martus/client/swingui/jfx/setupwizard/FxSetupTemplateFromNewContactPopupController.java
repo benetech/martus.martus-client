@@ -140,8 +140,12 @@ public class FxSetupTemplateFromNewContactPopupController extends FxPopupControl
 	@FXML
 	private void onContinue()
 	{
-		CustomFieldTemplate customFieldTemplateToSave = customFieldTemplatesComboBox.getSelectionModel().getSelectedItem();
-		//FIXME urgent, save the template
+		getStage().close();
+	}
+
+	public CustomFieldTemplate getSelectedCustomFieldTemplate()
+	{
+		return customFieldTemplatesComboBox.getSelectionModel().getSelectedItem();
 	}
 
 	@Override
