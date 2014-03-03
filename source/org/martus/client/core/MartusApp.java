@@ -86,6 +86,7 @@ import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusAccountAccessToken;
+import org.martus.common.MartusConstants;
 import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
 import org.martus.common.MartusAccountAccessToken.TokenNotFoundException;
 import org.martus.common.MartusLogger;
@@ -560,6 +561,22 @@ public class MartusApp
 			updatedContactKeysWithCanReceiveFromAdjusted.add(currentContact);
 		}
 	return updatedContactKeysWithCanReceiveFromAdjusted;
+	}
+
+	public void updateCustomFieldTemplate(CustomFieldTemplate updatedTemplate) throws SaveConfigInfoException, CustomFieldsParseException
+	{
+
+		configInfo.setCustomFieldTopSectionXml(updatedTemplate.getImportedTopSectionText());
+		configInfo.setCustomFieldBottomSectionXml(updatedTemplate.getImportedBottomSectionText());
+		configInfo.setCurrentFormTemplateTitle(updatedTemplate.getTitle());
+		configInfo.setCurrentFormTemplateDescription(updatedTemplate.getDescription());
+		configInfo.setCustomFieldLegacySpecs(MartusConstants.deprecatedCustomFieldSpecs);
+		saveConfigInfo();
+
+		FieldSpecCollection topCollection = FieldCollection.parseXml(updatedTemplate.getImportedTopSectionText());
+		FieldSpecCollection bottomCollection = FieldCollection.parseXml(updatedTemplate.getImportedBottomSectionText());
+		store.setTopSectionFieldSpecs(topCollection);
+		store.setBottomSectionFieldSpecs(bottomCollection);
 	}
 
 	public void saveConfigInfo() throws SaveConfigInfoException
