@@ -35,6 +35,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -66,6 +68,9 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 	{
 		try
 		{
+			continueButton.setVisible(false);
+			continueMessage.setVisible(false);
+			
 			contactsWithTemplatesTableView.setEditable(true);
 			fillTableWithContacts();
 		
@@ -134,6 +139,12 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 	private void onCancel()
 	{
 		getStage().close();
+	}
+	
+	@FXML
+	private void onContinue()
+	{
+		onCancel();
 	}
 	
 	private ObservableList<CustomFieldTemplate> getCustomFieldTemplates(ContactKey contactKey) throws Exception
@@ -238,6 +249,12 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 
 	@FXML
 	private TableColumn<ContactsWithTemplatesTableData, CustomFieldTemplate> selectedTemplateColumn;
+	
+	@FXML
+	private Label continueMessage;
+	
+	@FXML
+	private Button continueButton;
 	
 	private ObservableList<ContactsWithTemplatesTableData> contactsWithTemplatesTableData;
 
