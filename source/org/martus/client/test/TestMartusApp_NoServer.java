@@ -69,6 +69,7 @@ import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.LegacyCustomFields;
+import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MiniLocalization;
 import org.martus.common.ProgressMeterInterface;
@@ -79,6 +80,7 @@ import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.FileDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomFieldTemplate;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
@@ -890,6 +892,63 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		TRACE_END();
 
+	}
+	
+	public void testUpdateCustomFieldTemplate() throws Exception
+	{
+		TRACE_BEGIN("testUpdateCustomFieldTemplate");
+		File file = appWithAccount.getConfigInfoFile();
+		file.delete();
+		appWithAccount.loadConfigInfo();
+
+		ConfigInfo configInfo = appWithAccount.getConfigInfo();
+		ConfigInfo emptyConfigInfo = configInfo;
+		emptyConfigInfo.setCustomFieldLegacySpecs("");
+		ClientBulletinStore store = appWithAccount.getStore();
+		assertEquals("", emptyConfigInfo.getCurrentFormTemplateTitle());
+		assertEquals("", emptyConfigInfo.getCurrentFormTemplateDescription());
+		assertEquals("", emptyConfigInfo.getCustomFieldTopSectionXml());
+		assertEquals("", emptyConfigInfo.getCustomFieldBottomSectionXml());
+		assertEquals("", emptyConfigInfo.getCustomFieldLegacySpecs());
+		store.setTopSectionFieldSpecs(null);
+		store.setBottomSectionFieldSpecs(null);
+		assertNull(store.getTopSectionFieldSpecs());
+		assertNull(store.getBottomSectionFieldSpecs());
+		
+		FieldSpec[] topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray();
+		FieldCollection fields = new FieldCollection(topSpecs);
+		String xmlTop = fields.toString();
+		FieldCollection topSection = new FieldCollection(topSpecs);
+
+		FieldSpec[] bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray();
+		fields = new FieldCollection(bottomSpecs);
+		String xmlBottom = fields.toString();
+		FieldCollection bottomSection = new FieldCollection(bottomSpecs);
+
+		String title = "A new Title";
+		String description = "Some Descritpion";
+		CustomFieldTemplate newTemplate = new CustomFieldTemplate(title, description, topSection, bottomSection);
+		appWithAccount.updateCustomFieldTemplate(newTemplate);
+		configInfo = appWithAccount.getConfigInfo();		
+		assertEquals("Top section should have been set", xmlTop, configInfo.getCustomFieldTopSectionXml());
+		assertEquals("Bottom section should have been set", xmlBottom, configInfo.getCustomFieldBottomSectionXml());
+		assertEquals("Title should have been set", title, configInfo.getCurrentFormTemplateTitle());
+		assertEquals("Description should have been set", description, configInfo.getCurrentFormTemplateDescription());
+		assertEquals("Store's Top section should have been set", xmlTop, store.getTopSectionFieldSpecs().toXml());
+		assertEquals("Store's Bottom section should have been set", xmlBottom, store.getBottomSectionFieldSpecs().toXml());
+		assertEquals(MartusConstants.deprecatedCustomFieldSpecs, emptyConfigInfo.getCustomFieldLegacySpecs());
+		
+		appWithAccount.loadConfigInfo();
+		configInfo = appWithAccount.getConfigInfo();		
+		assertEquals("After Loading Config Info.  Top section should have been set", xmlTop, configInfo.getCustomFieldTopSectionXml());
+		assertEquals("After Loading Config Info.  Bottom section should have been set", xmlBottom, configInfo.getCustomFieldBottomSectionXml());
+		assertEquals("After Loading Config Info.  Title should have been set", title, configInfo.getCurrentFormTemplateTitle());
+		assertEquals("After Loading Config Info.  Description should have been set", description, configInfo.getCurrentFormTemplateDescription());
+		assertEquals("After Loading Config Info.  Store's Top section should have been set", xmlTop, store.getTopSectionFieldSpecs().toXml());
+		assertEquals("After Loading Config Info.  Store's Bottom section should have been set", xmlBottom, store.getBottomSectionFieldSpecs().toXml());
+		assertEquals(MartusConstants.deprecatedCustomFieldSpecs, configInfo.getCustomFieldLegacySpecs());
+		
+		TRACE_END();
 	}
 	
 	public void testContactInfoMigrationHqFdToContacts() throws Exception
