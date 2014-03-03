@@ -161,7 +161,10 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	
 	private void importFromNewContact() throws Exception
 	{
-		showControllerInsideModalDialog(new FxSetupTemplateFromNewContactPopupController(getMainWindow()));
+		FxSetupTemplateFromNewContactPopupController controller = new FxSetupTemplateFromNewContactPopupController(getMainWindow());
+		showControllerInsideModalDialog(controller);
+		CustomFieldTemplate selectedTemplate = controller.getSelectedCustomFieldTemplate();
+		updateSelectedCustomFieldTemplateComponents(selectedTemplate);
 	}
 
 	private void importFromContacts() throws Exception
