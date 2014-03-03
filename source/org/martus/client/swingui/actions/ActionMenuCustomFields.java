@@ -31,14 +31,13 @@ import java.awt.event.ActionEvent;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
-import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiCustomFieldsDlg;
 import org.martus.common.FieldCollection;
-import org.martus.common.FieldSpecCollection;
-import org.martus.common.MartusConstants;
 import org.martus.common.FieldCollection.CustomFieldsParseException;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.fieldspec.BulletinFieldSpecs;
+import org.martus.common.fieldspec.CustomFieldTemplate;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class ActionMenuCustomFields extends UiMenuAction
@@ -64,23 +63,19 @@ public class ActionMenuCustomFields extends UiMenuAction
 		BulletinFieldSpecs newSpecs = getCustomizedFieldsFromUser(existingSpecs);
 		if(newSpecs == null)
 			return;
-			
-		FieldSpecCollection topSectionSpecs = newSpecs.getTopSectionSpecs();
-		FieldSpecCollection bottomSectionSpecs = newSpecs.getBottomSectionSpecs();
-		store.setTopSectionFieldSpecs(topSectionSpecs);
-		store.setBottomSectionFieldSpecs(bottomSectionSpecs);
-		configInfo.setCustomFieldLegacySpecs(MartusConstants.deprecatedCustomFieldSpecs);
-		configInfo.setCustomFieldTopSectionXml(topSectionSpecs.toXml());
-		configInfo.setCustomFieldBottomSectionXml(bottomSectionSpecs.toXml());
-		configInfo.setCurrentFormTemplateTitle(newSpecs.getTitleOfSpecs());
-		configInfo.setCurrentFormTemplateDescription(newSpecs.getDescriptionOfSpecs());
+		
+		CustomFieldTemplate updatedTemplate;
 		try
 		{
-			app.saveConfigInfo();
-		}
-		catch (SaveConfigInfoException e)
+			FieldCollection topSection = new FieldCollection(newSpecs.getTopSectionSpecs());
+			FieldCollection bottomSection = new FieldCollection(newSpecs.getBottomSectionSpecs());
+			updatedTemplate = new CustomFieldTemplate(newSpecs.getTitleOfSpecs(), newSpecs.getDescriptionOfSpecs(), topSection, bottomSection);
+			app.updateCustomFieldTemplate(updatedTemplate);
+		} 
+		catch (Exception e)
 		{
 			mainWindow.notifyDlg("ErrorSavingConfig");
+			return;
 		}
 	}
 
