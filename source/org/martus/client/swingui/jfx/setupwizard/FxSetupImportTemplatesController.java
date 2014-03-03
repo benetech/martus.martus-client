@@ -176,11 +176,11 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		switchFormsLaterLabel.setVisible(true);
 	}
 	
-	private void saveCustomFieldTemplate(CustomFieldTemplate genericCustomFieldTemplate)
+	private void saveCustomFieldTemplate(CustomFieldTemplate customFieldTemplate)
 	{
 		try
 		{
-			getApp().updateCustomFieldTemplate(genericCustomFieldTemplate);
+			getApp().updateCustomFieldTemplate(customFieldTemplate);
 		}
 		catch (Exception e)
 		{
