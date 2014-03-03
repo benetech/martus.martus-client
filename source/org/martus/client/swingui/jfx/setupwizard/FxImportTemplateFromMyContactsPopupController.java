@@ -164,6 +164,11 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 		
 		return customFieldTemplates;
 	}
+	
+	public CustomFieldTemplate getSelectedCustomFieldTemplate()
+	{
+		return contactsWithTemplatesTableView.getSelectionModel().getSelectedItem().getSelectedTemplateName();
+	}
 
 	private class TemplateComboBoxTableCellFactory implements Callback<TableColumn<ContactsWithTemplatesTableData, CustomFieldTemplate>, TableCell<ContactsWithTemplatesTableData, CustomFieldTemplate>>
 	{
@@ -238,5 +243,4 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 	private Button continueButton;
 	
 	private ObservableList<ContactsWithTemplatesTableData> contactsWithTemplatesTableData;
-
 }
