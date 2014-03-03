@@ -75,7 +75,6 @@ public class FxSetupBackupYourKeyController	extends	AbstractFxSetupWizardContent
 		FileChooser fileChooser = new FileChooser();
 		File martusRootDir = getApp().getMartusDataRootDirectory();
 		fileChooser.setInitialDirectory(martusRootDir);
-		fileChooser.setInitialFileName("MartusKeyPairBackup.dat");
 		fileChooser.setTitle("Backup Key File");
 		fileChooser.getExtensionFilters().addAll(
 				new FileChooser.ExtensionFilter("All Files", "*.*"),
