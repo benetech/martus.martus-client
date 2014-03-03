@@ -171,6 +171,18 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		showControllerInsideModalDialog(new FxImportTemplateFromMyContactsPopupController(getMainWindow()));
 	}
 	
+	private void saveCustomFieldTemplate(CustomFieldTemplate genericCustomFieldTemplate)
+	{
+		try
+		{
+			getApp().updateCustomFieldTemplate(genericCustomFieldTemplate);
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+	}
+	
 	private class NextButtonHandler implements EventHandler<ActionEvent>
 	{
 		public NextButtonHandler()
@@ -180,17 +192,10 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		@Override
 		public void handle(ActionEvent event)
 		{
-			try
+			if (genericRadioButton.isSelected())
 			{
-				if (genericRadioButton.isSelected())
-				{
-					CustomFieldTemplate genericCustomFieldTemplate = genericTemplatesComboBox.getSelectionModel().getSelectedItem();
-					getApp().updateCustomFieldTemplate(genericCustomFieldTemplate);
-				}
-			}
-			catch (Exception e)
-			{
-				MartusLogger.logException(e);
+				CustomFieldTemplate genericCustomFieldTemplate = genericTemplatesComboBox.getSelectionModel().getSelectedItem();
+				saveCustomFieldTemplate(genericCustomFieldTemplate);
 			}
 		}
 	}
