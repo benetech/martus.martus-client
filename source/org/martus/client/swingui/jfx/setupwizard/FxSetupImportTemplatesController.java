@@ -133,9 +133,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		if (genericCustomFieldTemplate == null)
 			return;
 		
-		selectedTemplateLabel.setText(TokenReplacement.replaceToken(">Import the #templateName Form", "#templateName", genericCustomFieldTemplate.getTitle()));
-		selectedTemplateLabel.setVisible(true);
-		switchFormsLaterLabel.setVisible(true);
+		updateSelectedCustomFieldTemplateComponents(genericCustomFieldTemplate);
 	}
 
 	@FXML
@@ -169,6 +167,13 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	private void importFromContacts() throws Exception
 	{
 		showControllerInsideModalDialog(new FxImportTemplateFromMyContactsPopupController(getMainWindow()));
+	}
+	
+	private void updateSelectedCustomFieldTemplateComponents(CustomFieldTemplate customFieldTemplate) throws Exception
+	{
+		selectedTemplateLabel.setText(TokenReplacement.replaceToken(">Import the #templateName Form", "#templateName", customFieldTemplate.getTitle()));
+		selectedTemplateLabel.setVisible(true);
+		switchFormsLaterLabel.setVisible(true);
 	}
 	
 	private void saveCustomFieldTemplate(CustomFieldTemplate genericCustomFieldTemplate)
