@@ -74,7 +74,7 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 			fillTableWithContacts();
 		
 			contactSelectedColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, Boolean>("rowSelected"));
-			contactSelectedColumn.setCellFactory(new RadioButtonCellFactory(new ToggleChangeListener(contactsWithTemplatesTableView)));
+			contactSelectedColumn.setCellFactory(new RadioButtonCellFactory());
 			
 			contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("contactName"));
 			contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsWithTemplatesTableData>forTableColumn());
@@ -206,21 +206,6 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 		}
 	}
 	
-	private class ToggleChangeListener implements ChangeListener<Toggle>
-	{
-		public ToggleChangeListener(TableView<ContactsWithTemplatesTableData> contactsWithTemplatesTableViewToUse)
-		{
-			contactsWithTemplatesTableView = contactsWithTemplatesTableViewToUse;
-		}
-
-		@Override
-		public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue)
-		{
-		}
-
-		private TableView<ContactsWithTemplatesTableData> contactsWithTemplatesTableView;
-	}
-
 	@FXML
 	private TableView<ContactsWithTemplatesTableData> contactsWithTemplatesTableView;
 	
