@@ -64,12 +64,11 @@ public class ActionMenuCustomFields extends UiMenuAction
 		if(newSpecs == null)
 			return;
 		
-		CustomFieldTemplate updatedTemplate;
 		try
 		{
 			FieldCollection topSection = new FieldCollection(newSpecs.getTopSectionSpecs());
 			FieldCollection bottomSection = new FieldCollection(newSpecs.getBottomSectionSpecs());
-			updatedTemplate = new CustomFieldTemplate(newSpecs.getTitleOfSpecs(), newSpecs.getDescriptionOfSpecs(), topSection, bottomSection);
+			CustomFieldTemplate updatedTemplate = new CustomFieldTemplate(newSpecs.getTitleOfSpecs(), newSpecs.getDescriptionOfSpecs(), topSection, bottomSection);
 			app.updateCustomFieldTemplate(updatedTemplate);
 		} 
 		catch (Exception e)
