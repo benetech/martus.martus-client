@@ -167,7 +167,11 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 	
 	public CustomFieldTemplate getSelectedCustomFieldTemplate()
 	{
-		return contactsWithTemplatesTableView.getSelectionModel().getSelectedItem().getSelectedTemplateName();
+		ContactsWithTemplatesTableData selectedRowItem = contactsWithTemplatesTableView.getSelectionModel().getSelectedItem();
+		if (selectedRowItem.getRowSelected())
+			return selectedRowItem.getSelectedTemplateName();
+		
+		return null;
 	}
 
 	private class TemplateComboBoxTableCellFactory implements Callback<TableColumn<ContactsWithTemplatesTableData, CustomFieldTemplate>, TableCell<ContactsWithTemplatesTableData, CustomFieldTemplate>>
