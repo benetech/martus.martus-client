@@ -177,6 +177,9 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	
 	private void updateSelectedCustomFieldTemplateComponents(CustomFieldTemplate customFieldTemplate) throws Exception
 	{
+		if (customFieldTemplate == null)
+			return;
+		
 		selectedTemplateLabel.setText(TokenReplacement.replaceToken(">Import the #templateName Form", "#templateName", customFieldTemplate.getTitle()));
 		selectedTemplateLabel.setVisible(true);
 		switchFormsLaterLabel.setVisible(true);
