@@ -1,0 +1,80 @@
+.root {
+	-fx-background-color: LightSteelBlue;
+}
+
+.button{
+    -fx-border-radius: 5;
+    -fx-padding: 3 6 6 6;
+}
+
+.Icon {
+    -fx-padding: 16 16 16 16;
+    -fx-alignment: top-left;
+}
+
+.form-pane {
+	-fx-background-color: SteelBlue;
+	-fx-padding: 25 25 25 25;
+}
+
+.not-used-yet {
+	-fx-background-insets: 25;
+	-fx-insets: 10 10 10 10;
+	-fx-border-insets: 5;
+	-fx-border-color: Red;
+	-fx-border-style: solid;
+	-fx-border-width: 2;
+    -fx-padding: 6 6 6 6;
+	-fx-spacing: 10;
+	-fx-insets: 10 10 10 10;
+}
+
+// Doesn't seem to work. Syntax taken from:
+// http://stackoverflow.com/questions/16857031/javafx-table-row-different-font-with-css
+.verified-label.table-cell  {
+	-fx-text-fill: Green;
+}
+
+// Doesn't seem to work. Syntax taken from:
+// http://stackoverflow.com/questions/16857031/javafx-table-row-different-font-with-css
+.unverified-hyperlink.table-cell  {
+	-fx-text-fill: Red;
+}
+
+// Doesn't seem to work. Syntax taken from:
+// http://download.java.net/jdk8/jfxdocs/javafx/scene/control/Cell.html
+.list-cell .remove-contact-button {
+	-fx-background-color: Red;
+	-fx-base: Red;
+	-fx-text-fill: White;
+}
+
+#BelowTitle {
+	-fx-border-color: LightSteelBlue;
+	-fx-border-style: solid;
+	-fx-border-width: 25;
+}
+
+#contentPane {
+}
+
+#topBar {
+	-fx-background-color: MidnightBlue;
+	-fx-text-fill: White;
+    -fx-padding: 6 6 6 6;
+	-fx-spacing: 10;
+}
+
+.TopBarStepNumber {
+	-fx-text-fill: White;
+	-fx-font: 20px "Sans-Serif";
+}
+
+.TopBarStepName {
+	-fx-text-fill: DarkGray;
+	-fx-alignment: center-left;
+}
+
+.TopBarArrow {
+	-fx-text-fill: Red;
+}
