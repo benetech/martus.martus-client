@@ -37,6 +37,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -45,6 +46,7 @@ import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.CustomFieldTemplate;
+import org.martus.util.TokenReplacement;
 
 public class FxSetupImportTemplatesController extends AbstractFxSetupWizardContentController implements Initializable
 {
@@ -75,6 +77,9 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		
 		genericTemplatesComboBox.setVisible(false);
 		customTemplatesComboBox.setVisible(false);
+		
+		selectedTemplateLabel.setVisible(false);
+		switchFormsLaterLabel.setVisible(false);
 		
 		getWizardNavigationHandler().getNextButton().addEventHandler(ActionEvent.ACTION, new NextButtonHandler());
 	} 
@@ -120,6 +125,18 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		
 		return customTemplates;
 	}
+	
+	@FXML
+	private void genericComboBoxSelectionChanged() throws Exception
+	{
+		CustomFieldTemplate genericCustomFieldTemplate = genericTemplatesComboBox.getSelectionModel().getSelectedItem();
+		if (genericCustomFieldTemplate == null)
+			return;
+		
+		selectedTemplateLabel.setText(TokenReplacement.replaceToken(">Import the #templateName Form", "#templateName", genericCustomFieldTemplate.getTitle()));
+		selectedTemplateLabel.setVisible(true);
+		switchFormsLaterLabel.setVisible(true);
+	}
 
 	@FXML
 	private void customDropDownSelectionChanged() throws Exception
@@ -163,7 +180,18 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		@Override
 		public void handle(ActionEvent event)
 		{
-			//FIXME urgent : save imported template when next is clicked?
+			try
+			{
+				if (genericRadioButton.isSelected())
+				{
+					CustomFieldTemplate genericCustomFieldTemplate = genericTemplatesComboBox.getSelectionModel().getSelectedItem();
+					getApp().updateCustomFieldTemplate(genericCustomFieldTemplate);
+				}
+			}
+			catch (Exception e)
+			{
+				MartusLogger.logException(e);
+			}
 		}
 	}
 	
@@ -178,6 +206,12 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	
 	@FXML
 	private RadioButton downloadCustomRadioButton;
+	
+	@FXML
+	private Label switchFormsLaterLabel;
+	
+	@FXML
+	private Label selectedTemplateLabel;
 	
 	private static final String IMPORT_FROM_CONTACTS_CODE = "importFromContacts";
 	private static final String IMPORT_FROM_NEW_CONTACT_CODE = "importFromNewContact";
