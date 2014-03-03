@@ -76,7 +76,7 @@ public class FxSetupTemplateFromNewContactPopupController extends FxPopupControl
 	{
 		try
 		{
-			MartusAccountAccessToken token = new MartusAccountAccessToken(accessCodeTextField.getText());
+			MartusAccountAccessToken token = new MartusAccountAccessToken(accessTokenTextField.getText());
 			MartusApp app = getApp();
 			String contactAccountId = app.getMartusAccountIdFromAccessTokenOnServer(token);
 			if(contactAccountId.equals(app.getAccountId()))
@@ -86,7 +86,7 @@ public class FxSetupTemplateFromNewContactPopupController extends FxPopupControl
 			}
 			
 			formsFromUserMessageLabel.setVisible(true);
-			String formsFromUserMessage = TokenReplacement.replaceToken("Forms from user #userAccessCode", "#userAccessCode", accessCodeTextField.getText());
+			String formsFromUserMessage = TokenReplacement.replaceToken("Forms from user #userAccessToken", "#userAccessToken", accessTokenTextField.getText());
 			formsFromUserMessageLabel.setText(formsFromUserMessage);
 			
 			String contactPublicCode = MartusSecurity.computeFormattedPublicCode(contactAccountId);
@@ -174,5 +174,5 @@ public class FxSetupTemplateFromNewContactPopupController extends FxPopupControl
 	private Button continueButton;
 	
 	@FXML
-	private TextField accessCodeTextField;
+	private TextField accessTokenTextField;
 }
