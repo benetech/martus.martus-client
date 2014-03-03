@@ -46,7 +46,6 @@ import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
-import javafx.util.StringConverter;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxPopupController;
@@ -199,24 +198,6 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 			getItems().clear();
 			ObservableList<CustomFieldTemplate> customFieldTemplateChoices = data.getCustomFieldTemplateChoices();
 			getItems().addAll(customFieldTemplateChoices);
-		}
-	}
-	
-	private class CustomFieldTemplateToStringConverter extends StringConverter<CustomFieldTemplate>
-	{
-		@Override
-		public String toString(CustomFieldTemplate customFieldTemplate)
-		{
-			if (customFieldTemplate == null)
-				return "";
-			
-			return customFieldTemplate.getTitle();
-		}
-
-		@Override
-		public CustomFieldTemplate fromString(String string)
-		{
-			return null;
 		}
 	}
 	
