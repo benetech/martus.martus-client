@@ -68,6 +68,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		genericTemplatesComboBox.setConverter(new CustomFieldTemplateToStringConverter());
 		genericTemplatesComboBox.setItems(FXCollections.observableArrayList(getGenericTemplateChoices()));
 
 		customTemplatesComboBox.setItems(FXCollections.observableArrayList(getImportTemplateChoices()));
@@ -87,18 +88,13 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		return FXCollections.observableArrayList(choices);
 	}
 
-	private ObservableList<ChoiceItem> getGenericTemplateChoices()
+	private ObservableList<CustomFieldTemplate> getGenericTemplateChoices()
 	{
 		try
 		{
-			Vector<ChoiceItem> choices = new Vector<ChoiceItem>();
 			Vector<CustomFieldTemplate> customTemplates = loadCustomTemplates();
-			for (CustomFieldTemplate customTemplate : customTemplates)
-			{
-				choices.add(new ChoiceItem(customTemplate.getTitle(), customTemplate.getTitle()));
-			}
 
-			return FXCollections.observableArrayList(choices);
+			return FXCollections.observableArrayList(customTemplates);
 		}
 		catch (Exception e)
 		{
@@ -172,7 +168,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	}
 	
 	@FXML
-	private ComboBox<ChoiceItem> genericTemplatesComboBox;
+	private ComboBox<CustomFieldTemplate> genericTemplatesComboBox;
 	
 	@FXML
 	private ComboBox<ChoiceItem> customTemplatesComboBox;
