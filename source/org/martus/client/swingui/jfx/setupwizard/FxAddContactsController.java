@@ -274,13 +274,13 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			    		{
 			    			verificationStatusCell = new Hyperlink(labelText);
 			    			((Hyperlink)verificationStatusCell).setOnAction(new ContactVerifierHandler());
-			    			verificationStatusCell.setStyle("unverified-hyperlink");
+			    			verificationStatusCell.getStyleClass().add("unverified-hyperlink");
 
 			    		}
 			    		else
 			    		{
 			    			verificationStatusCell = new Label(labelText);
-			    			verificationStatusCell.setStyle("verified-label");
+			    			verificationStatusCell.getStyleClass().add("verified-label");
 			    		}
 		    			setGraphic(verificationStatusCell);
 			    	}
@@ -348,7 +348,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			    else 
 			    {
 			        final Button removeContactButton = new Button((String)item);
-			        removeContactButton.setStyle("remove-contact-button");
+			        removeContactButton.getStyleClass().add("remove-contact-button");
 			        removeContactButton.setOnAction(new RemoveButtonHandler());
 			        setGraphic(removeContactButton);
 			    	}

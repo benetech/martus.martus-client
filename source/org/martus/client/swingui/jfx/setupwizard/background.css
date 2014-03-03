@@ -29,25 +29,28 @@
 	-fx-insets: 10 10 10 10;
 }
 
-// Doesn't seem to work. Syntax taken from:
-// http://stackoverflow.com/questions/16857031/javafx-table-row-different-font-with-css
-.verified-label.table-cell  {
-	-fx-text-fill: Green;
-}
-
-// Doesn't seem to work. Syntax taken from:
-// http://stackoverflow.com/questions/16857031/javafx-table-row-different-font-with-css
-.unverified-hyperlink.table-cell  {
-	-fx-text-fill: Red;
-}
-
-// Doesn't seem to work. Syntax taken from:
-// http://download.java.net/jdk8/jfxdocs/javafx/scene/control/Cell.html
-.list-cell .remove-contact-button {
+.table-cell .button .remove-contact-button {
 	-fx-background-color: Red;
 	-fx-base: Red;
 	-fx-text-fill: White;
 }
+
+.table-cell .verified-label  {
+	-fx-text-fill: Green;
+}
+
+.table-cell .hyperlink .unverified-hyperlink:unvisited  {
+	-fx-text-fill: Red;
+}
+
+.table-cell .hyperlink .unverified-hyperlink:visited  {
+	-fx-text-fill: Red;
+}
+
+.table-cell .hyperlink .unverified-hyperlink:hover  {
+	-fx-text-fill: Red;
+}
+
 
 #BelowTitle {
 	-fx-border-color: LightSteelBlue;
