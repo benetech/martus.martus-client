@@ -97,7 +97,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	{
 		try
 		{
-			Vector<CustomFieldTemplate> customTemplates = loadCustomTemplates();
+			Vector<CustomFieldTemplate> customTemplates = loadFormTemplates();
 
 			return FXCollections.observableArrayList(customTemplates);
 		}
@@ -108,7 +108,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		}
 	}
 	
-	private Vector<CustomFieldTemplate> loadCustomTemplates() throws Exception
+	private Vector<CustomFieldTemplate> loadFormTemplates() throws Exception
 	{
 		Vector<CustomFieldTemplate> customTemplates = new Vector<CustomFieldTemplate>();
 		File accountsDirs = getApp().getMartusDataRootDirectory();
