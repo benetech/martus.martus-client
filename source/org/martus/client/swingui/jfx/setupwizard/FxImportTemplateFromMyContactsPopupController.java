@@ -108,7 +108,7 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 		try
 		{
 			//NOTE: Server should return a different error if contact not found
-			ObservableList<CustomFieldTemplate> formTemplates = getCustomFieldTemplates(contactKey);
+			ObservableList<CustomFieldTemplate> formTemplates = getFormTemplates(contactKey);
 			//System.out.println(contactKey.getPublicCode() + "-Connected-" + customFieldTemplates.size());
 			return formTemplates;
 		}
@@ -143,7 +143,7 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 		onCancel();
 	}
 	
-	private ObservableList<CustomFieldTemplate> getCustomFieldTemplates(ContactKey contactKey) throws Exception
+	private ObservableList<CustomFieldTemplate> getFormTemplates(ContactKey contactKey) throws Exception
 	{
 		Vector<Vector<String>> result = getApp().getListOfFormTemplatesOnServer(contactKey.getPublicKey());
 
