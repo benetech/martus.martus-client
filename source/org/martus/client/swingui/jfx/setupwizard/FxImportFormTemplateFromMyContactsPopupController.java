@@ -46,9 +46,11 @@ import javafx.util.Callback;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
+import org.martus.common.Exceptions.AccountNotFoundException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.CustomFieldTemplate;
+import org.martus.util.TokenReplacement;
 
 public class FxImportFormTemplateFromMyContactsPopupController extends AbstractFxImportFormTemplateController implements Initializable
 {
@@ -113,6 +115,11 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		catch (ServerNotAvailableException e)
 		{
 			MartusLogger.logError("Contact not found on server");
+			return FXCollections.observableArrayList();
+		}
+		catch (AccountNotFoundException e)
+		{
+			MartusLogger.logError(TokenReplacement.replaceToken("Account not found on server. Account=#account", "#account", contactKey.getLabel()));
 			return FXCollections.observableArrayList();
 		}
 	}
