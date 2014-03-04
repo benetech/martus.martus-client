@@ -41,7 +41,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -110,14 +109,12 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	
 	private Vector<CustomFieldTemplate> loadFormTemplates() throws Exception
 	{
+		String[] formTemplateFileNames = new String[]{"formtemplates/sampleTemplate.mct", };
 		Vector<CustomFieldTemplate> formTemplates = new Vector<CustomFieldTemplate>();
-		File accountsDirs = getApp().getMartusDataRootDirectory();
-		File[] formTemplateFiles = accountsDirs.listFiles(new MCTFileFilter(getLocalization()));
-		for (File formTemplateFile : formTemplateFiles)
+		for (String formTemplateFileName : formTemplateFileNames)
 		{
-			if (formTemplateFile.isDirectory())
-				continue;
-			
+			URL url = getClass().getResource(formTemplateFileName);
+			File formTemplateFile = new File(url.toURI());
 			CustomFieldTemplate formTemplate = new CustomFieldTemplate();
 			formTemplate.importTemplate(getApp().getSecurity(), formTemplateFile);
 			formTemplates.add(formTemplate);
