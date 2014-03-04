@@ -70,7 +70,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		genericTemplatesComboBox.setConverter(new FormTemplateToStringConverter());
-		genericTemplatesComboBox.setItems(FXCollections.observableArrayList(getGenericTemplateChoices()));
+		genericTemplatesComboBox.setItems(FXCollections.observableArrayList(getDefaultFormTemplateChoices()));
 
 		customTemplatesComboBox.setItems(FXCollections.observableArrayList(getImportTemplateChoices()));
 		
@@ -92,7 +92,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		return FXCollections.observableArrayList(choices);
 	}
 
-	private ObservableList<CustomFieldTemplate> getGenericTemplateChoices()
+	private ObservableList<CustomFieldTemplate> getDefaultFormTemplateChoices()
 	{
 		try
 		{
