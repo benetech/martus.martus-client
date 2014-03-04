@@ -27,7 +27,6 @@ package org.martus.client.swingui.jfx.setupwizard;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Vector;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,14 +44,13 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxPopupController;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.CustomFieldTemplate;
 
-public class FxImportFormTemplateFromMyContactsPopupController extends FxPopupController implements Initializable
+public class FxImportFormTemplateFromMyContactsPopupController extends AbstractFxImportFormTemplateController implements Initializable
 {
 	public FxImportFormTemplateFromMyContactsPopupController(UiMainWindow mainWindowToUse) throws Exception
 	{
@@ -142,26 +140,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends FxPopupCo
 	{
 		onCancel();
 	}
-	
-	private ObservableList<CustomFieldTemplate> getFormTemplates(ContactKey contactKey) throws Exception
-	{
-		Vector<Vector<String>> result = getApp().getListOfFormTemplatesOnServer(contactKey.getPublicKey());
-
-		return getTitlesFromResults(contactKey.getPublicKey(), result);
-	}
-	
-	private ObservableList<CustomFieldTemplate> getTitlesFromResults(String publicKey, Vector<Vector<String>> formTemplatesTitlesDescriptionsList) throws Exception
-	{
-		ObservableList<CustomFieldTemplate> formTemplates = FXCollections.observableArrayList();
-		for (Vector<String> titleAndDescriptonVector : formTemplatesTitlesDescriptionsList)
-		{
-			String title = titleAndDescriptonVector.firstElement();
-			formTemplates.add(getApp().getFormTemplateOnServer(publicKey, title));
-		}
 		
-		return formTemplates;
-	}
-	
 	public CustomFieldTemplate getSelectedFormTemplate()
 	{
 		if (contactsWithTemplatesTableView.getSelectionModel().isEmpty())

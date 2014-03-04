@@ -49,7 +49,7 @@ import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.fieldspec.CustomFieldTemplate;
 import org.martus.util.TokenReplacement;
 
-public class FxSetupFormTemplateFromNewContactPopupController extends FxPopupController implements Initializable
+public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFxImportFormTemplateController implements Initializable
 {
 	public FxSetupFormTemplateFromNewContactPopupController(UiMainWindow mainWindowToUse)
 	{
