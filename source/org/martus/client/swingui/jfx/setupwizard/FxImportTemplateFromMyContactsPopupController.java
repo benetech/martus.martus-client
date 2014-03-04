@@ -188,7 +188,7 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 	{
 		public TemplateComboBoxCell()
 		{
-			super(new CustomFieldTemplateToStringConverter());
+			super(new FormTemplateToStringConverter());
 		}
 		
 		@Override
