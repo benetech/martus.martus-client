@@ -42,6 +42,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.JarURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -1821,11 +1822,24 @@ public class MartusApp
 			throw new ServerNotAvailableException();
 		NetworkResponse response = getCurrentNetworkInterfaceGateway().getListOfFormTemplates(getSecurity(), accountToRetreiveListFrom);
 		if(response.getResultCode().equals(NetworkInterfaceConstants.OK))
-			return response.getResultVector();
+			return getVectorOfVectorsFromResponse(response);
 		if(response.getResultCode().equals(NetworkInterfaceConstants.ACCOUNT_NOT_FOUND))
 			throw new AccountNotFoundException(); 
 		throw new ServerNotAvailableException();
 	}
+	
+	private Vector getVectorOfVectorsFromResponse(NetworkResponse response)
+	{
+		Vector vectorOfObjectArrays = response.getResultVector();
+		Vector vectorOfVectors = new Vector();
+		for(int i = 0; i < vectorOfObjectArrays.size(); ++i)
+		{
+			Object[] listOfTitleAndDescriptions = (Object[]) vectorOfObjectArrays.get(i);
+			vectorOfVectors.add(new Vector(Arrays.asList(listOfTitleAndDescriptions)));
+		}
+		return vectorOfVectors;
+	}
+
 	
 	public CustomFieldTemplate getFormTemplateOnServer(String accountId, String formTitle) throws ServerNotAvailableException, NoFormsAvailableException, MartusSignatureException, IOException, InvalidBase64Exception, FutureVersionException 
 	{
