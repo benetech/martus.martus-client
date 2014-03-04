@@ -110,20 +110,20 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	
 	private Vector<CustomFieldTemplate> loadFormTemplates() throws Exception
 	{
-		Vector<CustomFieldTemplate> customTemplates = new Vector<CustomFieldTemplate>();
+		Vector<CustomFieldTemplate> formTemplates = new Vector<CustomFieldTemplate>();
 		File accountsDirs = getApp().getMartusDataRootDirectory();
-		File[] customTemplateFiles = accountsDirs.listFiles(new MCTFileFilter(getLocalization()));
-		for (File customTemplateFile : customTemplateFiles)
+		File[] formTemplateFiles = accountsDirs.listFiles(new MCTFileFilter(getLocalization()));
+		for (File formTemplateFile : formTemplateFiles)
 		{
-			if (customTemplateFile.isDirectory())
+			if (formTemplateFile.isDirectory())
 				continue;
 			
-			CustomFieldTemplate customTemplate = new CustomFieldTemplate();
-			customTemplate.importTemplate(getApp().getSecurity(), customTemplateFile);
-			customTemplates.add(customTemplate);
+			CustomFieldTemplate formTemplate = new CustomFieldTemplate();
+			formTemplate.importTemplate(getApp().getSecurity(), formTemplateFile);
+			formTemplates.add(formTemplate);
 		}
 		
-		return customTemplates;
+		return formTemplates;
 	}
 	
 	@FXML
