@@ -41,7 +41,7 @@ public class ContactsWithTemplatesTableData
 		publicCode = new SimpleStringProperty(key.getPublicCode());
 		rowSelected = new SimpleBooleanProperty(rowSelectedToUse);
 		selectedFormTemplate = new SimpleObjectProperty(selectedFormTemplateToUse);
-		fieldTemplatesToChooseFrom = customFieldTemplatesToChooseFromToUse;
+		formTemplatesToChooseFrom = customFieldTemplatesToChooseFromToUse;
 	}
 	
 	public String getContactName()
@@ -91,18 +91,18 @@ public class ContactsWithTemplatesTableData
 	
 	public void setFormTemplatesToChooseFrom(ObservableList<CustomFieldTemplate> customFieldTemplatesToChooseFromToUse)
 	{
-		fieldTemplatesToChooseFrom.clear();
-		fieldTemplatesToChooseFrom.addAll(customFieldTemplatesToChooseFromToUse);
+		formTemplatesToChooseFrom.clear();
+		formTemplatesToChooseFrom.addAll(customFieldTemplatesToChooseFromToUse);
 	}
 	
 	public ObservableList<CustomFieldTemplate> getFormTemplateChoices()
 	{
-		return fieldTemplatesToChooseFrom;
+		return formTemplatesToChooseFrom;
 	}
 	
 	private final SimpleStringProperty contactName;
 	private final SimpleStringProperty publicCode;
 	private final SimpleBooleanProperty rowSelected;
 	private final SimpleObjectProperty<CustomFieldTemplate> selectedFormTemplate;
-	private ObservableList<CustomFieldTemplate> fieldTemplatesToChooseFrom;
+	private ObservableList<CustomFieldTemplate> formTemplatesToChooseFrom;
 }
