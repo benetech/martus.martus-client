@@ -62,6 +62,8 @@ import org.martus.clientside.UiLocalization;
 import org.martus.clientside.test.ServerSideNetworkHandlerNotAvailable;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
+import org.martus.common.DammCheckDigitAlgorithm;
+import org.martus.common.DammCheckDigitAlgorithm.CheckDigitInvalidException;
 import org.martus.common.FieldCollection;
 import org.martus.common.FieldDeskKey;
 import org.martus.common.FieldDeskKeys;
@@ -2814,6 +2816,25 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("Not formatted the same", formattedCode, formattedCode2);
 		TRACE_END();
 
+	}
+
+	public void testFormatPublicCode40() throws Exception
+	{
+		TRACE_BEGIN("testFormatPublicCode40");
+		String clientId = appWithAccount.getAccountId();
+		assertNotNull("clientId Null?", clientId);
+		String publicCode = MartusCrypto.computePublicCode40(clientId);
+		assertNotNull("publicCode Null?", publicCode);
+		assertEquals("New Public codes should be 40 characters", 40, publicCode.length());
+		assertEquals("Public Code not correct?","2148157669619698320619603004127606157316", publicCode);
+		DammCheckDigitAlgorithm dammCheck = new DammCheckDigitAlgorithm();
+		assertTrue("Public Code failed Damm Check?", dammCheck.isTokenValid(publicCode));
+		String formattedCode = MartusCrypto.formatPublicCode(publicCode);
+		assertNotEquals("formatted code is the same as the public code?", formattedCode, publicCode);
+		assertEquals("Not formatted correctly", "1234.5678.9012.3456.1234.5678.9012.3456", MartusCrypto.formatPublicCode("12345678901234561234567890123456"));
+		String formattedCode2 = MartusCrypto.computeFormattedPublicCode40(clientId);
+		assertEquals("Not formatted the same", formattedCode, formattedCode2);
+		TRACE_END();
 	}
 
 	public void testRepairOrphans() throws Exception
