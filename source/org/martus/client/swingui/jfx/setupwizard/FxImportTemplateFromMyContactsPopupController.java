@@ -202,7 +202,7 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 				return;
 			
 			getItems().clear();
-			ObservableList<CustomFieldTemplate> customFieldTemplateChoices = data.getCustomFieldTemplateChoices();
+			ObservableList<CustomFieldTemplate> customFieldTemplateChoices = data.getFormTemplateChoices();
 			getItems().addAll(customFieldTemplateChoices);
 		}
 	}
