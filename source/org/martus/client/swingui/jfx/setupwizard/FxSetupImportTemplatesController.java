@@ -41,7 +41,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -71,7 +70,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		genericTemplatesComboBox.setConverter(new FormTemplateToStringConverter());
-		genericTemplatesComboBox.setItems(FXCollections.observableArrayList(getGenericTemplateChoices()));
+		genericTemplatesComboBox.setItems(FXCollections.observableArrayList(getDefaultFormTemplateChoices()));
 
 		customTemplatesComboBox.setItems(FXCollections.observableArrayList(getImportTemplateChoices()));
 		
@@ -93,11 +92,11 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		return FXCollections.observableArrayList(choices);
 	}
 
-	private ObservableList<CustomFieldTemplate> getGenericTemplateChoices()
+	private ObservableList<CustomFieldTemplate> getDefaultFormTemplateChoices()
 	{
 		try
 		{
-			Vector<CustomFieldTemplate> customTemplates = loadCustomTemplates();
+			Vector<CustomFieldTemplate> customTemplates = loadFormTemplates();
 
 			return FXCollections.observableArrayList(customTemplates);
 		}
@@ -108,22 +107,20 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		}
 	}
 	
-	private Vector<CustomFieldTemplate> loadCustomTemplates() throws Exception
+	private Vector<CustomFieldTemplate> loadFormTemplates() throws Exception
 	{
-		Vector<CustomFieldTemplate> customTemplates = new Vector<CustomFieldTemplate>();
-		File accountsDirs = getApp().getMartusDataRootDirectory();
-		File[] customTemplateFiles = accountsDirs.listFiles(new MCTFileFilter(getLocalization()));
-		for (File customTemplateFile : customTemplateFiles)
+		String[] formTemplateFileNames = new String[]{"formtemplates/sampleTemplate.mct", };
+		Vector<CustomFieldTemplate> formTemplates = new Vector<CustomFieldTemplate>();
+		for (String formTemplateFileName : formTemplateFileNames)
 		{
-			if (customTemplateFile.isDirectory())
-				continue;
-			
-			CustomFieldTemplate customTemplate = new CustomFieldTemplate();
-			customTemplate.importTemplate(getApp().getSecurity(), customTemplateFile);
-			customTemplates.add(customTemplate);
+			URL url = getClass().getResource(formTemplateFileName);
+			File formTemplateFile = new File(url.toURI());
+			CustomFieldTemplate formTemplate = new CustomFieldTemplate();
+			formTemplate.importTemplate(getApp().getSecurity(), formTemplateFile);
+			formTemplates.add(formTemplate);
 		}
 		
-		return customTemplates;
+		return formTemplates;
 	}
 	
 	@FXML
@@ -177,12 +174,17 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	
 	private void updateSelectedCustomFieldTemplateComponents(CustomFieldTemplate customFieldTemplate) throws Exception
 	{
-		if (customFieldTemplate == null)
-			return;
+		boolean shouldAllowFormTemplate = false;
+		String loadFormTemplateMessage = "";
+		if (customFieldTemplate != null)
+		{
+			loadFormTemplateMessage = TokenReplacement.replaceToken(">Import the #templateName Form", "#templateName", customFieldTemplate.getTitle());
+			shouldAllowFormTemplate = true;
+		}
 		
-		selectedTemplateLabel.setText(TokenReplacement.replaceToken(">Import the #templateName Form", "#templateName", customFieldTemplate.getTitle()));
-		selectedTemplateLabel.setVisible(true);
-		switchFormsLaterLabel.setVisible(true);
+		selectedTemplateLabel.setText(loadFormTemplateMessage);
+		selectedTemplateLabel.setVisible(shouldAllowFormTemplate);
+		switchFormsLaterLabel.setVisible(shouldAllowFormTemplate);
 	}
 	
 	private void saveCustomFieldTemplate(CustomFieldTemplate customFieldTemplate)
