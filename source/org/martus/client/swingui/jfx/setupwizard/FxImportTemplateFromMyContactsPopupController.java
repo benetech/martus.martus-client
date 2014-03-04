@@ -152,14 +152,14 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 	
 	private ObservableList<CustomFieldTemplate> getTitlesFromResults(String publicKey, Vector<Vector<String>> formTemplatesTitlesDescriptionsList) throws Exception
 	{
-		ObservableList<CustomFieldTemplate> customFieldTemplates = FXCollections.observableArrayList();
+		ObservableList<CustomFieldTemplate> formTemplates = FXCollections.observableArrayList();
 		for (Vector<String> titleAndDescriptonVector : formTemplatesTitlesDescriptionsList)
 		{
 			String title = titleAndDescriptonVector.firstElement();
-			customFieldTemplates.add(getApp().getFormTemplateOnServer(publicKey, title));
+			formTemplates.add(getApp().getFormTemplateOnServer(publicKey, title));
 		}
 		
-		return customFieldTemplates;
+		return formTemplates;
 	}
 	
 	public CustomFieldTemplate getSelectedCustomFieldTemplate()
