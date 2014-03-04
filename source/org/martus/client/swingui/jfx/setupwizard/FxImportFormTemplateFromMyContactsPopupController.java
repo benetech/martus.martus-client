@@ -52,9 +52,9 @@ import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.CustomFieldTemplate;
 
-public class FxImportTemplateFromMyContactsPopupController extends FxPopupController implements Initializable
+public class FxImportFormTemplateFromMyContactsPopupController extends FxPopupController implements Initializable
 {
-	public FxImportTemplateFromMyContactsPopupController(UiMainWindow mainWindowToUse) throws Exception
+	public FxImportFormTemplateFromMyContactsPopupController(UiMainWindow mainWindowToUse) throws Exception
 	{
 		super(mainWindowToUse);
 	}
