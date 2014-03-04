@@ -22,7 +22,7 @@
 			</TableColumn>
             <TableColumn id="contactNameColumn" fx:id="contactNameColumn" prefWidth="164.0" text="Name" />
             <TableColumn id="publicCodeColumn" fx:id="publicCodeColumn" prefWidth="208.0" text="Access Key" />
-            <TableColumn fx:id="selectedTemplateColumn" prefWidth="192.0" text="User Template" />
+            <TableColumn fx:id="formTemplateColumn" prefWidth="192.0" text="User Template" />
          </columns>
       </TableView><Button mnemonicParsing="false" onAction="#onCancel" text="X Cancel" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" /><Button fx:id="continueButton" mnemonicParsing="false" onAction="#onContinue" text="Continue" GridPane.columnIndex="1" GridPane.rowIndex="2" /><Label fx:id="continueMessage" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Import from this contact" GridPane.rowIndex="2" />
    </children>
