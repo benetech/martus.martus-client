@@ -82,8 +82,8 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 			publicCodeColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("publicCode"));
 			publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsWithTemplatesTableData>forTableColumn());
 			
-			selectedTemplateColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, CustomFieldTemplate>("selectedCustomFieldTemplate"));
-			selectedTemplateColumn.setCellFactory(new TemplateComboBoxTableCellFactory());
+			customFieldTemplateColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, CustomFieldTemplate>("selectedCustomFieldTemplate"));
+			customFieldTemplateColumn.setCellFactory(new TemplateComboBoxTableCellFactory());
 			
 			contactsWithTemplatesTableView.setItems(contactsWithTemplatesTableData);
 		}
@@ -223,7 +223,7 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 	private TableColumn<ContactsWithTemplatesTableData, Boolean> contactSelectedColumn;
 
 	@FXML
-	private TableColumn<ContactsWithTemplatesTableData, CustomFieldTemplate> selectedTemplateColumn;
+	private TableColumn<ContactsWithTemplatesTableData, CustomFieldTemplate> customFieldTemplateColumn;
 	
 	@FXML
 	private Label continueMessage;
