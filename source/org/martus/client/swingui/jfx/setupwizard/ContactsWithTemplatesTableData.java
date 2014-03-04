@@ -35,12 +35,12 @@ import org.martus.common.fieldspec.CustomFieldTemplate;
 
 public class ContactsWithTemplatesTableData
 {
-	public ContactsWithTemplatesTableData(ContactKey key, boolean rowSelectedToUse, CustomFieldTemplate selectedCustomFieldTemplateToUse, ObservableList<CustomFieldTemplate> customFieldTemplatesToChooseFromToUse) throws Exception
+	public ContactsWithTemplatesTableData(ContactKey key, boolean rowSelectedToUse, CustomFieldTemplate selectedFormTemplateToUse, ObservableList<CustomFieldTemplate> customFieldTemplatesToChooseFromToUse) throws Exception
 	{
 		contactName = new SimpleStringProperty(key.getLabel());
 		publicCode = new SimpleStringProperty(key.getPublicCode());
 		rowSelected = new SimpleBooleanProperty(rowSelectedToUse);
-		selectedCustomFieldTemplate = new SimpleObjectProperty(selectedCustomFieldTemplateToUse);
+		selectedFormTemplate = new SimpleObjectProperty(selectedFormTemplateToUse);
 		customFieldTemplatesToChooseFrom = customFieldTemplatesToChooseFromToUse;
 	}
 	
@@ -79,14 +79,14 @@ public class ContactsWithTemplatesTableData
 		rowSelected.set(rowSelectedToUse);
 	}
 	
-	public CustomFieldTemplate getSelectedCustomFieldTemplate()
+	public CustomFieldTemplate getSelectedFormTemplate()
 	{
-		return selectedCustomFieldTemplate.get();
+		return selectedFormTemplate.get();
 	}
 	
-	public void setSelectedCustomFieldTemplate(CustomFieldTemplate selectedTamplateNameToUse)
+	public void setSelectedFormTemplate(CustomFieldTemplate selectedTamplateNameToUse)
 	{
-		selectedCustomFieldTemplate.set(selectedTamplateNameToUse);
+		selectedFormTemplate.set(selectedTamplateNameToUse);
 	}
 	
 	public void setCustomFieldTemplatesToChooseFrom(ObservableList<CustomFieldTemplate> customFieldTemplatesToChooseFromToUse)
@@ -103,6 +103,6 @@ public class ContactsWithTemplatesTableData
 	private final SimpleStringProperty contactName;
 	private final SimpleStringProperty publicCode;
 	private final SimpleBooleanProperty rowSelected;
-	private final SimpleObjectProperty<CustomFieldTemplate> selectedCustomFieldTemplate;
+	private final SimpleObjectProperty<CustomFieldTemplate> selectedFormTemplate;
 	private ObservableList<CustomFieldTemplate> customFieldTemplatesToChooseFrom;
 }
