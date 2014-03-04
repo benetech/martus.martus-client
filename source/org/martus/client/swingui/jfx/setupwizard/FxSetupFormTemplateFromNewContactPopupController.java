@@ -27,9 +27,7 @@ package org.martus.client.swingui.jfx.setupwizard;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Vector;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,7 +38,6 @@ import javafx.scene.control.TextField;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxPopupController;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenNotFoundException;
@@ -90,7 +87,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 			formsFromUserMessageLabel.setText(formsFromUserMessage);
 			
 			String contactPublicCode = MartusSecurity.computeFormattedPublicCode(contactAccountId);
-			ObservableList<CustomFieldTemplate> fieldTemplates = getCustomFieldTemplates(contactPublicCode);
+			ObservableList<CustomFieldTemplate> fieldTemplates = getFormTemplates(contactPublicCode);
 			
 			customFieldTemplatesComboBox.setVisible(true);
 			customFieldTemplatesComboBox.setItems(fieldTemplates);
@@ -108,26 +105,6 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 			MartusLogger.logException(e);
 			showNotifyDlg("UnexpectedError");
 		} 
-	}
-
-	//FIXME these two methods are duplicated and need to be pulled up into new super class
-	private ObservableList<CustomFieldTemplate> getCustomFieldTemplates(String contactPublicCode) throws Exception
-	{
-		Vector<Vector<String>> result = getApp().getListOfFormTemplatesOnServer(contactPublicCode);
-
-		return getTitlesFromResults(contactPublicCode, result);
-	}
-	
-	private ObservableList<CustomFieldTemplate> getTitlesFromResults(String publicKey, Vector<Vector<String>> formTemplatesTitlesDescriptionsList) throws Exception
-	{
-		ObservableList<CustomFieldTemplate> customFieldTemplates = FXCollections.observableArrayList();
-		for (Vector<String> titleAndDescriptonVector : formTemplatesTitlesDescriptionsList)
-		{
-			String title = titleAndDescriptonVector.firstElement();
-			customFieldTemplates.add(getApp().getFormTemplateOnServer(publicKey, title));
-		}
-		
-		return customFieldTemplates;
 	}
 
 	@FXML
