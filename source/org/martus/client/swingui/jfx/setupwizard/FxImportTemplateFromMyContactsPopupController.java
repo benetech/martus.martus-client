@@ -164,6 +164,9 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 	
 	public CustomFieldTemplate getSelectedFormTemplate()
 	{
+		if (contactsWithTemplatesTableView.getSelectionModel().isEmpty())
+			return null;
+
 		ContactsWithTemplatesTableData selectedRowItem = contactsWithTemplatesTableView.getSelectionModel().getSelectedItem();
 		if (selectedRowItem.getRowSelected())
 			return selectedRowItem.getSelectedFormTemplate();
