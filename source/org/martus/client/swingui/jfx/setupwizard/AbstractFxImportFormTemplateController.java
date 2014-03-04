@@ -32,7 +32,6 @@ import javafx.collections.ObservableList;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxPopupController;
-import org.martus.common.ContactKey;
 import org.martus.common.fieldspec.CustomFieldTemplate;
 
 abstract public class AbstractFxImportFormTemplateController extends FxPopupController
@@ -42,11 +41,11 @@ abstract public class AbstractFxImportFormTemplateController extends FxPopupCont
 		super(mainWindowToUse);
 	}
 	
-	protected ObservableList<CustomFieldTemplate> getFormTemplates(ContactKey contactKey) throws Exception
+	protected ObservableList<CustomFieldTemplate> getFormTemplates(String publicCode) throws Exception
 	{
-		Vector<Vector<String>> result = getApp().getListOfFormTemplatesOnServer(contactKey.getPublicKey());
+		Vector<Vector<String>> result = getApp().getListOfFormTemplatesOnServer(publicCode);
 
-		return getTitlesFromResults(contactKey.getPublicKey(), result);
+		return getTitlesFromResults(publicCode, result);
 	}
 	
 	private ObservableList<CustomFieldTemplate> getTitlesFromResults(String publicKey, Vector<Vector<String>> formTemplatesTitlesDescriptionsList) throws Exception
