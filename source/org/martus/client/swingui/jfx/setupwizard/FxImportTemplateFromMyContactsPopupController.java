@@ -97,13 +97,13 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 		for (int index = 0; index < contactKeys.size(); ++index)
 		{
 			ContactKey contactKey = contactKeys.get(index);
- 			ObservableList<CustomFieldTemplate> observableArrayList = getCustomTemplatesForContact(contactKey);
+ 			ObservableList<CustomFieldTemplate> observableArrayList = getFormTemplatesForContact(contactKey);
 			ContactsWithTemplatesTableData rowData = new ContactsWithTemplatesTableData(contactKey, true, new CustomFieldTemplate(), observableArrayList);
 			contactsWithTemplatesTableData.add(rowData);
 		}
 	}
 
-	private ObservableList<CustomFieldTemplate> getCustomTemplatesForContact(ContactKey contactKey) throws Exception
+	private ObservableList<CustomFieldTemplate> getFormTemplatesForContact(ContactKey contactKey) throws Exception
 	{
 		try
 		{
