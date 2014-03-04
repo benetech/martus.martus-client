@@ -70,7 +70,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		genericTemplatesComboBox.setConverter(new CustomFieldTemplateToStringConverter());
+		genericTemplatesComboBox.setConverter(new FormTemplateToStringConverter());
 		genericTemplatesComboBox.setItems(FXCollections.observableArrayList(getGenericTemplateChoices()));
 
 		customTemplatesComboBox.setItems(FXCollections.observableArrayList(getImportTemplateChoices()));

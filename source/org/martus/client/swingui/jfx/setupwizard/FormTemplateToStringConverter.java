@@ -29,9 +29,9 @@ import javafx.util.StringConverter;
 
 import org.martus.common.fieldspec.CustomFieldTemplate;
 
-public class CustomFieldTemplateToStringConverter extends StringConverter<CustomFieldTemplate>
+public class FormTemplateToStringConverter extends StringConverter<CustomFieldTemplate>
 {
-	public CustomFieldTemplateToStringConverter()
+	public FormTemplateToStringConverter()
 	{
 	}
 
