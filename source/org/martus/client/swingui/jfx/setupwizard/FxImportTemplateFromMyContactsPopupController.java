@@ -108,9 +108,9 @@ public class FxImportTemplateFromMyContactsPopupController extends FxPopupContro
 		try
 		{
 			//NOTE: Server should return a different error if contact not found
-			ObservableList<CustomFieldTemplate> customFieldTemplates = getCustomFieldTemplates(contactKey);
+			ObservableList<CustomFieldTemplate> formTemplates = getCustomFieldTemplates(contactKey);
 			//System.out.println(contactKey.getPublicCode() + "-Connected-" + customFieldTemplates.size());
-			return customFieldTemplates;
+			return formTemplates;
 		}
 		catch (ServerNotAvailableException e)
 		{
