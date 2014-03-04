@@ -42,7 +42,6 @@ import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenNotFoundException;
 import org.martus.common.MartusLogger;
-import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.fieldspec.CustomFieldTemplate;
 import org.martus.util.TokenReplacement;
 
@@ -86,8 +85,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 			String formsFromUserMessage = TokenReplacement.replaceToken("Forms from user #userAccessToken", "#userAccessToken", accessTokenTextField.getText());
 			formsFromUserMessageLabel.setText(formsFromUserMessage);
 			
-			String contactPublicCode = MartusSecurity.computeFormattedPublicCode(contactAccountId);
-			ObservableList<CustomFieldTemplate> fieldTemplates = getFormTemplates(contactPublicCode);
+			ObservableList<CustomFieldTemplate> fieldTemplates = getFormTemplates(contactAccountId);
 			
 			customFieldTemplatesComboBox.setVisible(true);
 			customFieldTemplatesComboBox.setItems(fieldTemplates);
