@@ -85,18 +85,13 @@ public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardCont
 				}
 			}
 
-			updateErrorLabel(canContinue);
-			
-			getWizardNavigationHandler().getNextButton().setDisable(!canContinue);
-		}
-
-		private void updateErrorLabel(boolean canContinue)
-		{
 			String errorMessage = "";
 			if (!canContinue)
 				errorMessage = "Password must be at least 8 characters, 15 recommened.";
 			
 			getErrorLabel().setText(errorMessage);
+			
+			getWizardNavigationHandler().getNextButton().setDisable(!canContinue);
 		}
 	}
 	
