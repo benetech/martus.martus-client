@@ -30,6 +30,7 @@ import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -72,10 +73,32 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardContentContr
 	private void createAccount() throws Exception
 	{
 		String userNameValue = userNameField.getText();
-		String passwordValue = passwordField.getText();
+		char[] passwordValue = passwordField.getText().toCharArray();
 		
 		StaticAccountCreationData.dispose();
-		getApp().createAccount(userNameValue, passwordValue.toCharArray());
+		
+		Task task = new CreateAccountTask(userNameValue, passwordValue);
+		String busyTitle = getLocalization().getWindowTitle("CreatingAccount");
+		showBusyDlg(busyTitle, task);
+	}
+	
+	private class CreateAccountTask extends Task<Void>
+	{
+		public CreateAccountTask(String userNameToUse, char[] passwordToUse)
+		{
+			userName = userNameToUse;
+			password = passwordToUse;
+		}
+		
+		@Override
+		protected Void call() throws Exception
+		{
+			getApp().createAccount(userName, password);
+			return null;
+		}
+		
+		private String userName;
+		private char[] password;
 	}
 	
 	private boolean isOkToCreateAccount()
