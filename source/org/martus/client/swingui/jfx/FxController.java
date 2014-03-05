@@ -45,7 +45,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
-abstract public class FxController
+abstract public class FxController implements Initializable
 {
 	public FxController(UiMainWindow mainWindowToUse)
 	{
@@ -53,6 +53,11 @@ abstract public class FxController
 	}
 	
 	abstract public String getFxmlLocation();
+	
+	@Override
+	public void initialize(URL location, ResourceBundle bundle)
+	{
+	}
 	
 	public Parent createContents() throws Exception
 	{
@@ -161,8 +166,19 @@ abstract public class FxController
 			getStage().close();
 		}
 
+		public void setFxStage(FxInSwingDialogStage stageToUse)
+		{
+			fxStage = stageToUse;
+		}
+
+		public FxInSwingDialogStage getFxStage()
+		{
+			return fxStage;
+		}
+
 		@FXML
 		private Label fxLabel;
+		private FxInSwingDialogStage fxStage;
 		@FXML
 		private Button fxOkButton;
 		private String baseTag;
@@ -211,6 +227,16 @@ abstract public class FxController
 			getStage().close();
 		}
 
+		public void setFxStage(FxInSwingDialogStage stageToUse)
+		{
+			fxStage = stageToUse;
+		}
+
+		public FxInSwingDialogStage getFxStage()
+		{
+			return fxStage;
+		}
+		
 		public boolean wasYesPressed()
 		{
 			return yesWasPressed;
@@ -218,6 +244,7 @@ abstract public class FxController
 
 		@FXML
 		private Label fxLabel;
+		private FxInSwingDialogStage fxStage;
 		@FXML
 		private Button fxYesButton;
 		@FXML
