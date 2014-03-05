@@ -1593,6 +1593,10 @@ public class EnglishStrings
 "field:NotSorted=(none)",
 "field:ReportNumberOfBulletins=Total Bulletins:",
 
+"title:RemoveContact=Remove Contact",
+"field:RemoveContactLabel1=The following contact will be removed:",
+"field:RemoveContactLabel2=Are you sure you want to do this?",
+
 "field:BulletinViewHeading=Martus Bulletin",
 "field:ViewBulletinHQInfo=#NumberOfHQs# Headquarter account(s) can view this private information",
 "field:ModifyBulletinHQInfo=#NumberOfHQs# Headquarter account(s) will be able to view this private information",
