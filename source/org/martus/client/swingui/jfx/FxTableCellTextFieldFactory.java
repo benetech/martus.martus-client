@@ -49,52 +49,46 @@ public final class FxTableCellTextFieldFactory
 	
 	public static class TextFieldCell extends TableCell<Object,String> 
 	{
-	   private TextField textField;
-	   private StringProperty cellStringPropertyBoundToCurrently = null;
-	   public TextFieldCell() 
-	   {
-	   		textField = new TextField();
-	   		this.setGraphic(textField);
-	   }
+		public TextFieldCell() 
+		{
+			textField = new TextField();
+			this.setGraphic(textField);
+		}
 	   
 		@Override
 		protected void updateItem(String item, boolean empty) 
 		{
 			super.updateItem(item, empty);        
-			if(!empty)
-			{
-				// Show the Text Field
-				this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-		
-				// Retrieve the actual String Property that should be bound to the TextField
-				// If the TextField is currently bound to a different StringProperty
-				// Unbind the old property and rebind to the new one
-				//NOTE: To use this TextField Factory the TableData's SimpleStringProperty must 
-				//      be implemented.  IE:
-				//		public SimpleStringProperty <variableName>Property() { return <variableName>; }
-	            //		without that a cast exception will occur.
-				ObservableValue<String> cellObservableValue = getTableColumn().getCellObservableValue(getIndex());
-				SimpleStringProperty cellsStringProperty = (SimpleStringProperty)cellObservableValue;
-		    
-				if(this.cellStringPropertyBoundToCurrently==null) 
-				{
-					this.cellStringPropertyBoundToCurrently = cellsStringProperty;
-					this.textField.textProperty().bindBidirectional(cellsStringProperty);
-				}
-				else
-				{
-					if(this.cellStringPropertyBoundToCurrently != cellsStringProperty) 
-					{
-						this.textField.textProperty().unbindBidirectional(this.cellStringPropertyBoundToCurrently);
-						this.cellStringPropertyBoundToCurrently = cellsStringProperty;
-						this.textField.textProperty().bindBidirectional(this.cellStringPropertyBoundToCurrently);
-					}
-				}
-			}
-			else 
-			{
+			if(empty)
 				this.setContentDisplay(ContentDisplay.TEXT_ONLY);
+			else
+				bindToOurStringPropertyTextField();
+		}
+
+		private void bindToOurStringPropertyTextField()
+		{
+			this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+			//NOTE: To use this TextField Factory the TableData's SimpleStringProperty must be implemented.  
+			//		IE: public SimpleStringProperty <variableName>Property() { return <variableName>; }
+			ObservableValue<String> cellObservableValue = getTableColumn().getCellObservableValue(getIndex());
+			SimpleStringProperty cellStringProperty = (SimpleStringProperty)cellObservableValue;
+	    
+			if(this.cellStringPropertyBoundToCurrently==null) 
+			{
+				this.cellStringPropertyBoundToCurrently = cellStringProperty;
+				this.textField.textProperty().bindBidirectional(cellStringProperty);
+			}
+			else
+			{
+				if(this.cellStringPropertyBoundToCurrently != cellStringProperty) 
+				{
+					this.textField.textProperty().unbindBidirectional(this.cellStringPropertyBoundToCurrently);
+					this.cellStringPropertyBoundToCurrently = cellStringProperty;
+					this.textField.textProperty().bindBidirectional(this.cellStringPropertyBoundToCurrently);
+				}
 			}
 		}
+		private TextField textField;
+		private StringProperty cellStringPropertyBoundToCurrently;
 	}
 }
