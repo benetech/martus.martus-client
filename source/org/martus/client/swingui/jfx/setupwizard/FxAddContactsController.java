@@ -79,8 +79,8 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		contactNameColumn.setCellFactory(new FxTableCellTextFieldFactory());
 
 		publicCodeColumn.setEditable(false);
-		publicCodeColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("publicCode"));
-	    publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
+		publicCodeColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("publicCode"));
+	    publicCodeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
 		verificationStatusColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("verificationStatus"));
 		verificationStatusColumn.setCellFactory(new TableColumnVerifyContactCellFactory(getLocalization()));
@@ -92,7 +92,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		canReceiveFromColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(canReceiveFromColumn));
 
 		removeContactColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("deleteContact")); 
-	    removeContactColumn.setCellFactory(new TableColumnRemoveButtonCellFactory());
+	    removeContactColumn.setCellFactory(new TableColumnRemoveButtonCellFactory(getLocalization()));
 
 		contactsTable.setItems(data);
 		loadExistingContactData();
@@ -296,6 +296,12 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	
 	final class TableColumnRemoveButtonCellFactory implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
 	{
+		public TableColumnRemoveButtonCellFactory(MartusLocalization localizationToUse)
+		{
+			super();
+			localization = localizationToUse;
+		}
+
 		final class ButtonCellUpdateHandler extends TableCell
 		{
 			final class RemoveButtonHandler implements EventHandler<ActionEvent>
@@ -305,6 +311,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 				{
 					tableColumn.getTableView().getSelectionModel().select(getIndex());
 					ContactsTableData contactData = getSelectedContact();
+					
 					removeContactFromTable(contactData);
 				}
 			}
@@ -339,6 +346,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		{
 			return new ButtonCellUpdateHandler(param);
 		}
+		protected MartusLocalization localization;
 	}
 
 	public static class VerifyContactPopupController extends FxPopupController implements Initializable
@@ -538,7 +546,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	private TableColumn<Object, String> contactNameColumn;
 	
 	@FXML
-	private TableColumn<ContactsTableData, String> publicCodeColumn;
+	private TableColumn<Object, String> publicCodeColumn;
 	
 	@FXML
 	private TableColumn<ContactsTableData, String> verificationStatusColumn;
