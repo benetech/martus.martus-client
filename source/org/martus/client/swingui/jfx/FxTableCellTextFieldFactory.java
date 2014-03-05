@@ -52,7 +52,7 @@ public final class FxTableCellTextFieldFactory
 		public TextFieldCell() 
 		{
 			textField = new TextField();
-			this.setGraphic(textField);
+			setGraphic(textField);
 		}
 	   
 		@Override
@@ -60,31 +60,35 @@ public final class FxTableCellTextFieldFactory
 		{
 			super.updateItem(item, empty);        
 			if(empty)
-				this.setContentDisplay(ContentDisplay.TEXT_ONLY);
+			{
+				setContentDisplay(ContentDisplay.TEXT_ONLY);
+			}
 			else
+			{
+				setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 				bindToOurStringPropertyTextField();
+			}
 		}
 
 		private void bindToOurStringPropertyTextField()
 		{
-			this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 			//NOTE: To use this TextField Factory the TableData's SimpleStringProperty must be implemented.  
 			//		IE: public SimpleStringProperty <variableName>Property() { return <variableName>; }
 			ObservableValue<String> cellObservableValue = getTableColumn().getCellObservableValue(getIndex());
 			SimpleStringProperty cellStringProperty = (SimpleStringProperty)cellObservableValue;
 	    
-			if(this.cellStringPropertyBoundToCurrently==null) 
+			if(cellStringPropertyBoundToCurrently==null) 
 			{
-				this.cellStringPropertyBoundToCurrently = cellStringProperty;
-				this.textField.textProperty().bindBidirectional(cellStringProperty);
+				cellStringPropertyBoundToCurrently = cellStringProperty;
+				textField.textProperty().bindBidirectional(cellStringProperty);
 			}
 			else
 			{
-				if(this.cellStringPropertyBoundToCurrently != cellStringProperty) 
+				if(cellStringPropertyBoundToCurrently != cellStringProperty) 
 				{
-					this.textField.textProperty().unbindBidirectional(this.cellStringPropertyBoundToCurrently);
-					this.cellStringPropertyBoundToCurrently = cellStringProperty;
-					this.textField.textProperty().bindBidirectional(this.cellStringPropertyBoundToCurrently);
+					textField.textProperty().unbindBidirectional(cellStringPropertyBoundToCurrently);
+					cellStringPropertyBoundToCurrently = cellStringProperty;
+					textField.textProperty().bindBidirectional(cellStringPropertyBoundToCurrently);
 				}
 			}
 		}
