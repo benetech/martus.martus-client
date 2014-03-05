@@ -104,12 +104,12 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		}
 	}
 
-	private ObservableList<CustomFieldTemplate> getFormTemplatesForContact(String publicKey) throws Exception
+	private ObservableList<CustomFieldTemplate> getFormTemplatesForContact(ContactKey contactKey) throws Exception
 	{
 		try
 		{
 			//NOTE: Server should return a different error if contact not found
-			ObservableList<CustomFieldTemplate> formTemplates = getFormTemplates(publicKey);
+			ObservableList<CustomFieldTemplate> formTemplates = getFormTemplates(contactKey);
 			return formTemplates;
 		}
 		catch (ServerNotAvailableException e)
@@ -119,7 +119,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		}
 		catch (AccountNotFoundException e)
 		{
-			MartusLogger.logError(TokenReplacement.replaceToken("Account not found on server. Account=#account", "#account", publicKey));
+			MartusLogger.logError(TokenReplacement.replaceToken("Account not found on server. Account=#account", "#account", contactKey.getLabel()));
 			return FXCollections.observableArrayList();
 		}
 	}

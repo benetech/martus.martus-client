@@ -35,14 +35,14 @@ import org.martus.common.fieldspec.CustomFieldTemplate;
 
 public class ContactsWithTemplatesTableData
 {
-	public ContactsWithTemplatesTableData(ContactKey key, boolean rowSelectedToUse, CustomFieldTemplate selectedFormTemplateToUse, ObservableList<CustomFieldTemplate> customFieldTemplatesToChooseFromToUse) throws Exception
+	public ContactsWithTemplatesTableData(ContactKey contactKeyToUse, boolean rowSelectedToUse, CustomFieldTemplate selectedFormTemplateToUse, ObservableList<CustomFieldTemplate> customFieldTemplatesToChooseFromToUse) throws Exception
 	{
-		contactName = new SimpleStringProperty(key.getLabel());
-		publicCode = new SimpleStringProperty(key.getPublicCode());
+		contactName = new SimpleStringProperty(contactKeyToUse.getLabel());
+		publicCode = new SimpleStringProperty(contactKeyToUse.getPublicCode());
 		rowSelected = new SimpleBooleanProperty(rowSelectedToUse);
 		selectedFormTemplate = new SimpleObjectProperty(selectedFormTemplateToUse);
 		formTemplatesToChooseFrom = customFieldTemplatesToChooseFromToUse;
-		publicKey = key.getPublicKey();
+		contactKey = contactKeyToUse;
 	}
 	
 	public String getContactName()
@@ -101,9 +101,9 @@ public class ContactsWithTemplatesTableData
 		return formTemplatesToChooseFrom;
 	}
 	
-	public String getPublicKey()
+	public ContactKey getPublicKey()
 	{
-		return publicKey;
+		return contactKey;
 	}
 	
 	private final SimpleStringProperty contactName;
@@ -111,5 +111,5 @@ public class ContactsWithTemplatesTableData
 	private final SimpleBooleanProperty rowSelected;
 	private final SimpleObjectProperty<CustomFieldTemplate> selectedFormTemplate;
 	private ObservableList<CustomFieldTemplate> formTemplatesToChooseFrom;
-	private String publicKey;
+	private ContactKey contactKey;
 }
