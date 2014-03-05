@@ -182,21 +182,12 @@ abstract public class FxController implements Initializable
 			getStage().close();
 		}
 
-		public void setFxStage(FxInSwingDialogStage stageToUse)
-		{
-			fxStage = stageToUse;
-		}
-
-		public FxInSwingDialogStage getFxStage()
-		{
-			return fxStage;
-		}
-
 		@FXML
 		private Label fxLabel;
-		private FxInSwingDialogStage fxStage;
+
 		@FXML
 		private Button fxOkButton;
+
 		private String baseTag;
 	}
 
@@ -243,16 +234,6 @@ abstract public class FxController implements Initializable
 			getStage().close();
 		}
 
-		public void setFxStage(FxInSwingDialogStage stageToUse)
-		{
-			fxStage = stageToUse;
-		}
-
-		public FxInSwingDialogStage getFxStage()
-		{
-			return fxStage;
-		}
-		
 		public boolean wasYesPressed()
 		{
 			return yesWasPressed;
@@ -260,9 +241,10 @@ abstract public class FxController implements Initializable
 
 		@FXML
 		private Label fxLabel;
-		private FxInSwingDialogStage fxStage;
+
 		@FXML
 		private Button fxYesButton;
+		
 		@FXML
 		private Button fxNoButton;
 		
