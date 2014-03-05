@@ -57,8 +57,6 @@ import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxInSwingDialogStage;
 import org.martus.client.swingui.jfx.FxPopupController;
 import org.martus.client.swingui.jfx.FxTableCellTextFieldFactory;
-import org.martus.client.swingui.jfx.setupwizard.FxAddContactsController.TableColumnRemoveButtonCellFactory;
-import org.martus.client.swingui.jfx.setupwizard.FxAddContactsController.TableColumnVerifyContactCellFactory;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.Exceptions.ServerNotAvailableException;
