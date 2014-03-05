@@ -25,13 +25,12 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import org.martus.client.swingui.MartusLocalization;
-import org.martus.common.ContactKey;
-import org.martus.util.StreamableBase64.InvalidBase64Exception;
-
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+
+import org.martus.common.ContactKey;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class ContactsTableData
 {
@@ -45,7 +44,6 @@ public class ContactsTableData
 		verificationStatus = new SimpleIntegerProperty(contact.getVerificationStatus());
 		removeContact = new SimpleStringProperty("X");
 	}
-	
 
 	public ContactKey getContact()
 	{
@@ -66,7 +64,12 @@ public class ContactsTableData
 		contactName.set(contactNameToUse);
 	}
 	
-	public String getDeleteContact()
+    public SimpleStringProperty contactNameProperty() 
+    { 
+        return contactName; 
+    }
+
+    public String getDeleteContact()
 	{
 		return removeContact.get();
 	}
