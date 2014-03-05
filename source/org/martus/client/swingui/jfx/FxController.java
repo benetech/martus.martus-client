@@ -30,6 +30,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -130,6 +131,21 @@ abstract public class FxController implements Initializable
 			MartusLogger.logException(e);
 		}
 		return false;
+	}
+	
+	public void showBusyDlg(String title, Task task)
+	{
+		try
+		{
+			FxPopupController popupController = new FxBusyController(getMainWindow(), title, task);
+			showControllerInsideModalDialog(popupController);
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			System.exit(1);
+		}
+		
 	}
 
 	public static class PopupNotifyController extends FxPopupController implements Initializable
