@@ -13,8 +13,8 @@
             <TableView id="" fx:id="contactsTable" editable="true" prefHeight="238.0" prefWidth="814.0">
               <columns>
                 <TableColumn id="" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="120.0" text="Contact Name" fx:id="contactNameColumn" />
-                <TableColumn id="" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="225.0" text="Public Code" fx:id="publicCodeColumn" />
-                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="118.0" text="Verified" fx:id="verificationStatusColumn" />
+                <TableColumn id="" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="218.0" text="Public Code" fx:id="publicCodeColumn" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="108.0" text="Verified" fx:id="verificationStatusColumn" />
                 <TableColumn id="" maxWidth="5000.0" minWidth="10.0" prefWidth="49.0" text="Send" fx:id="canSendToColumn" />
                 <TableColumn id="" maxWidth="5000.0" minWidth="10.0" prefWidth="64.0" text="Receive" fx:id="canReceiveFromColumn" />
                 <TableColumn id="" maxWidth="5000.0" minWidth="10.0" prefWidth="62.0" text="Remove" fx:id="removeContactColumn" />
