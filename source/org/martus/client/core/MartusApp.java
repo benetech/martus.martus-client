@@ -2414,6 +2414,11 @@ public class MartusApp
 
 	public boolean isSSLServerAvailable(ClientSideNetworkGateway server)
 	{
+		return isSSLServerAvailableStatic(server);
+	}
+	
+	public static boolean isSSLServerAvailableStatic(ClientSideNetworkGateway server)
+	{
 		try
 		{
 			NetworkResponse response = server.getServerInfo();
