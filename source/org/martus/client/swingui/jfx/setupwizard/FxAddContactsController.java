@@ -57,6 +57,8 @@ import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxInSwingDialogStage;
 import org.martus.client.swingui.jfx.FxPopupController;
 import org.martus.client.swingui.jfx.FxTableCellTextFieldFactory;
+import org.martus.client.swingui.jfx.setupwizard.FxAddContactsController.TableColumnRemoveButtonCellFactory;
+import org.martus.client.swingui.jfx.setupwizard.FxAddContactsController.TableColumnVerifyContactCellFactory;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.Exceptions.ServerNotAvailableException;
@@ -83,9 +85,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	    publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsTableData>forTableColumn());
 
 		verificationStatusColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("verificationStatus"));
-		Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> verifyContactCellFactory = 
-				createVerifyContactCellFactory();
-		verificationStatusColumn.setCellFactory(verifyContactCellFactory);
+		verificationStatusColumn.setCellFactory(new TableColumnVerifyContactCellFactory(getLocalization()));
 
 		canSendToColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("canSendTo"));
 		canSendToColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(canSendToColumn));
@@ -94,9 +94,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		canReceiveFromColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(canReceiveFromColumn));
 
 		removeContactColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("deleteContact")); 
-	    Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> deleteColumnCellFactory = 
-                createRemoveButtonCellFactory();
-	    removeContactColumn.setCellFactory(deleteColumnCellFactory);
+	    removeContactColumn.setCellFactory(new TableColumnRemoveButtonCellFactory());
 
 		contactsTable.setItems(data);
 		loadExistingContactData();
@@ -104,16 +102,6 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		accessTokenField.textProperty().addListener(new AccessTokenChangeHandler());
 	}
 
-	private Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> createVerifyContactCellFactory()
-	{
-		return new TableColumnVerifyContactCellFactory(getLocalization());
-	}
-
-	private Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>> createRemoveButtonCellFactory()
-	{
-		return new TableColumnRemoveButtonCellFactory();
-	}
-	
 	protected void removeContactFromTable(ContactsTableData contactData)
 	{
 		data.remove(contactData);
