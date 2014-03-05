@@ -28,8 +28,6 @@ package org.martus.client.swingui.jfx.setupwizard;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -40,7 +38,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
@@ -59,6 +56,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxInSwingDialogStage;
 import org.martus.client.swingui.jfx.FxPopupController;
+import org.martus.client.swingui.jfx.FxTableCellTextFieldFactory;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.Exceptions.ServerNotAvailableException;
@@ -77,7 +75,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("contactName"));
+		contactNameColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("contactName"));
 		contactNameColumn.setCellFactory(new FxTableCellTextFieldFactory());
 
 		publicCodeColumn.setEditable(false);
@@ -223,69 +221,6 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		accessTokenField.setText("");
 	}
 	
-	//Original code found at http://stackoverflow.com/questions/7880494/tableview-better-editing-through-binding
-	public static class FxTableCellTextFieldFactory  
-		implements Callback<TableColumn<ContactsTableData,String>,TableCell<ContactsTableData,String>> 
-	{
-		
-		@Override
-		public TableCell<ContactsTableData, String> call(TableColumn<ContactsTableData, String> param) 
-		{
-		   TextFieldCell textFieldCell = new TextFieldCell();
-		   return textFieldCell;
-		}
-		
-		public static class TextFieldCell extends TableCell<ContactsTableData,String> 
-		{
-		   private TextField textField;
-		   private StringProperty cellStringPropertyBoundToCurrently = null;
-		   public TextFieldCell() 
-		   {
-		   		textField = new TextField();
-		   		this.setGraphic(textField);
-		   }
-		   
-			@Override
-			protected void updateItem(String item, boolean empty) 
-			{
-				super.updateItem(item, empty);        
-				if(!empty)
-				{
-					// Show the Text Field
-					this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-			
-					// Retrieve the actual String Property that should be bound to the TextField
-					// If the TextField is currently bound to a different StringProperty
-					// Unbind the old property and rebind to the new one
-					//NOTE: To use this TextField Factory the TableData's SimpleStringProperty must 
-					//      be implemented.  IE:
-					//		public SimpleStringProperty <variableName>Property() { return <variableName>; }
-	                //		without that a cast exception will occur.
-					ObservableValue<String> cellObservableValue = getTableColumn().getCellObservableValue(getIndex());
-					SimpleStringProperty cellsStringProperty = (SimpleStringProperty)cellObservableValue;
-			    
-					if(this.cellStringPropertyBoundToCurrently==null) 
-					{
-						this.cellStringPropertyBoundToCurrently = cellsStringProperty;
-						this.textField.textProperty().bindBidirectional(cellsStringProperty);
-					}
-					else
-					{
-						if(this.cellStringPropertyBoundToCurrently != cellsStringProperty) 
-						{
-							this.textField.textProperty().unbindBidirectional(this.cellStringPropertyBoundToCurrently);
-							this.cellStringPropertyBoundToCurrently = cellsStringProperty;
-							this.textField.textProperty().bindBidirectional(this.cellStringPropertyBoundToCurrently);
-						}
-					}
-				}
-				else 
-				{
-					this.setContentDisplay(ContentDisplay.TEXT_ONLY);
-				}
-			}
-		}
-	}
 	
 		
 	final class TableColumnVerifyContactCellFactory implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
@@ -614,7 +549,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	private TableView<ContactsTableData> contactsTable;
 	
 	@FXML
-	private TableColumn<ContactsTableData, String> contactNameColumn;
+	private TableColumn<Object, String> contactNameColumn;
 	
 	@FXML
 	private TableColumn<ContactsTableData, String> publicCodeColumn;
