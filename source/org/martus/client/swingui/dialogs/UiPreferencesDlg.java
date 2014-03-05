@@ -78,11 +78,14 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		ChoiceItem[] delimiterChoices = new ChoiceItem[] {
 			new ChoiceItem("/", localization.getFieldLabel("DateDelimiterSlash")),
 			new ChoiceItem("-", localization.getFieldLabel("DateDelimiterDash")),
-			new ChoiceItem(".", localization.getFieldLabel("DateDelimiterDot")),
+			new ChoiceItem("*", localization.getFieldLabel("DateDelimiterDot")),
 		};
 		delimiterDropdown = new UiChoiceEditor(localization);
 		delimiterDropdown.setChoices(delimiterChoices);
-		delimiterDropdown.setText("" + localization.getDateDelimiter());
+		char dateDelimiter = localization.getDateDelimiter();
+		if(dateDelimiter == '.')
+			dateDelimiter = '*'; //NOTE: JAVA issue using . for setText
+		delimiterDropdown.setText(""+dateDelimiter);
 		
 		ChoiceItem[] calendarChoices = localization.getAvailableCalendarSystems();
 		calendarDropdown = new UiChoiceEditor(localization);
@@ -211,7 +214,10 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner.getCurrentActiveFrame(), localization, languageCodeSelected);
 			localization.setMdyOrder(mdyDropdown.getText());
 			String delimiter = delimiterDropdown.getText();
-			localization.setDateDelimiter(delimiter.charAt(0));
+			char delimeter = delimiter.charAt(0);
+			if(delimeter == '*')
+				delimeter = '.';
+			localization.setDateDelimiter(delimeter);
 			localization.setCurrentCalendarSystem(calendarDropdown.getText());
 			localization.setCurrentLanguageCode(languageDropdown.getText());
 			localization.setAdjustThaiLegacyDates(adjustThai.isSelected());
