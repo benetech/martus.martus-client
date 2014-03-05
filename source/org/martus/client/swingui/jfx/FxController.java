@@ -112,6 +112,21 @@ abstract public class FxController
 		}
 	}
 	
+	public boolean showConfirmationDlg(String title, String message)
+	{
+		try
+		{
+			PopupConfirmationController popupController = new PopupConfirmationController(getMainWindow(), title, message);
+			showControllerInsideModalDialog(popupController);
+			return popupController.wasYesPressed();
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+		return false;
+	}
+
 	public static class PopupNotifyController extends FxPopupController implements Initializable
 	{
 		public PopupNotifyController(UiMainWindow mainWindowToUse, String notificationTag)
@@ -164,6 +179,76 @@ abstract public class FxController
 		private String baseTag;
 	}
 
+	public static class PopupConfirmationController extends FxPopupController implements Initializable
+	{
+		public PopupConfirmationController(UiMainWindow mainWindowToUse, String title, String message)
+		{
+			super(mainWindowToUse);
+			this.title = title;
+			this.message = message;
+		}
+		
+		@Override
+		public void initialize(URL arg0, ResourceBundle arg1)
+		{
+			MartusLocalization localization = getLocalization();
+			fxYesButton.setText(localization.getButtonLabel("yes"));
+			fxNoButton.setText(localization.getButtonLabel("no"));
+			fxLabel.setText(message);
+		}
+		
+		@Override
+		public String getFxmlLocation()
+		{
+			return "setupwizard/ConfirmationPopup.fxml";
+		}
+
+		@Override
+		public String getDialogTitle()
+		{
+			return title; 
+		}
+
+		@FXML
+		public void yesPressed()
+		{
+			yesWasPressed = true;
+			getStage().close();
+		}
+
+		@FXML
+		public void noPressed()
+		{
+			getStage().close();
+		}
+
+		public void setFxStage(FxInSwingDialogStage stageToUse)
+		{
+			fxStage = stageToUse;
+		}
+
+		public FxInSwingDialogStage getFxStage()
+		{
+			return fxStage;
+		}
+		
+		public boolean wasYesPressed()
+		{
+			return yesWasPressed;
+		}
+
+		@FXML
+		private Label fxLabel;
+		private FxInSwingDialogStage fxStage;
+		@FXML
+		private Button fxYesButton;
+		@FXML
+		private Button fxNoButton;
+		
+		private String title;
+		private String message;
+		private boolean yesWasPressed;
+	}
 	
 	public void showControllerInsideModalDialog(FxPopupController controller) throws Exception
 	{
