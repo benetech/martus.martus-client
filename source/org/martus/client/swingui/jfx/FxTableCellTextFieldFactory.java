@@ -77,19 +77,13 @@ public final class FxTableCellTextFieldFactory
 			ObservableValue<String> cellObservableValue = getTableColumn().getCellObservableValue(getIndex());
 			SimpleStringProperty cellStringProperty = (SimpleStringProperty)cellObservableValue;
 	    
-			if(cellStringPropertyBoundToCurrently==null) 
+			if(cellStringPropertyBoundToCurrently != cellStringProperty) 
+				textField.textProperty().unbindBidirectional(cellStringProperty);
+
+			if(cellStringPropertyBoundToCurrently==null || cellStringPropertyBoundToCurrently != cellStringProperty) 
 			{
 				cellStringPropertyBoundToCurrently = cellStringProperty;
-				textField.textProperty().bindBidirectional(cellStringProperty);
-			}
-			else
-			{
-				if(cellStringPropertyBoundToCurrently != cellStringProperty) 
-				{
-					textField.textProperty().unbindBidirectional(cellStringPropertyBoundToCurrently);
-					cellStringPropertyBoundToCurrently = cellStringProperty;
-					textField.textProperty().bindBidirectional(cellStringPropertyBoundToCurrently);
-				}
+				textField.textProperty().bindBidirectional(cellStringPropertyBoundToCurrently);
 			}
 		}
 		private TextField textField;
