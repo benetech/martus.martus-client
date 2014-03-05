@@ -30,6 +30,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -45,7 +46,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
-abstract public class FxController
+abstract public class FxController implements Initializable
 {
 	public FxController(UiMainWindow mainWindowToUse)
 	{
@@ -53,6 +54,11 @@ abstract public class FxController
 	}
 	
 	abstract public String getFxmlLocation();
+	
+	@Override
+	public void initialize(URL location, ResourceBundle bundle)
+	{
+	}
 	
 	public Parent createContents() throws Exception
 	{
@@ -126,6 +132,21 @@ abstract public class FxController
 		}
 		return false;
 	}
+	
+	public void showBusyDlg(String title, Task task)
+	{
+		try
+		{
+			FxPopupController popupController = new FxBusyController(getMainWindow(), title, task);
+			showControllerInsideModalDialog(popupController);
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			System.exit(1);
+		}
+		
+	}
 
 	public static class PopupNotifyController extends FxPopupController implements Initializable
 	{
@@ -163,8 +184,10 @@ abstract public class FxController
 
 		@FXML
 		private Label fxLabel;
+
 		@FXML
 		private Button fxOkButton;
+
 		private String baseTag;
 	}
 
@@ -218,8 +241,10 @@ abstract public class FxController
 
 		@FXML
 		private Label fxLabel;
+
 		@FXML
 		private Button fxYesButton;
+		
 		@FXML
 		private Button fxNoButton;
 		
