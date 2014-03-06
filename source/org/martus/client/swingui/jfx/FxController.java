@@ -133,7 +133,7 @@ abstract public class FxController implements Initializable
 		return false;
 	}
 	
-	public void showBusyDlg(String title, Task task) throws Exception
+	public void showBusyDialog(String title, Task task) throws Exception
 	{
 		FxPopupController popupController = new FxBusyController(getMainWindow(), title, task);
 		showControllerInsideModalDialog(popupController);
