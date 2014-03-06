@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.setupwizard;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,6 +47,7 @@ import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.CustomFieldTemplate;
+import org.martus.common.fieldspec.CustomFieldTemplate.FutureVersionException;
 import org.martus.util.TokenReplacement;
 import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
@@ -117,13 +119,20 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		for (String formTemplateFileName : formTemplateFileNames)
 		{
 			InputStream resourceAsStream = getClass().getResourceAsStream(formTemplateFileName);
-			InputStreamWithSeek withSeek = convertToInputStreamWithSeek(resourceAsStream);
-			CustomFieldTemplate formTemplate = new CustomFieldTemplate();
-			formTemplate.importTemplate(getApp().getSecurity(), withSeek);
+			CustomFieldTemplate formTemplate = importFormTemplate(resourceAsStream);
 			formTemplates.add(formTemplate);
 		}
 		
 		return formTemplates;
+	}
+
+	private CustomFieldTemplate importFormTemplate(InputStream resourceAsStream)
+			throws Exception, FutureVersionException, IOException
+	{
+		InputStreamWithSeek withSeek = convertToInputStreamWithSeek(resourceAsStream);
+		CustomFieldTemplate formTemplate = new CustomFieldTemplate();
+		formTemplate.importTemplate(getApp().getSecurity(), withSeek);
+		return formTemplate;
 	}
 
 	private InputStreamWithSeek convertToInputStreamWithSeek(InputStream resourceAsStream) throws Exception
