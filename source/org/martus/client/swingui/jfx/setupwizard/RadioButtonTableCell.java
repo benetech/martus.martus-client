@@ -27,7 +27,6 @@ package org.martus.client.swingui.jfx.setupwizard;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
@@ -53,7 +52,6 @@ public class RadioButtonTableCell extends TableCell
 		else
 		{
 			radioButton.setToggleGroup(group);
-			radioButton.setSelected((boolean)item);
 			bindToOurBooleanPropertyRadioButton();
 			setGraphic(radioButton);
 		}
