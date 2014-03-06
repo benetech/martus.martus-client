@@ -235,7 +235,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		{
 			try
 			{
-				Task task = new DownloadTemplateListForAccountTask(getApp(), rowData.getPublicKey(), rowData.getFormTemplateChoices());
+				Task task = new DownloadTemplateListForAccountTask(getApp(), rowData.getContactKey(), rowData.getFormTemplateChoices());
 				String busyTitle = getLocalization().getWindowTitle("LoadingTemplates");
 				showBusyDlg(busyTitle, task);
 			} 
@@ -247,7 +247,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 			catch (AccountNotFoundException e)
 			{
 				MartusLogger.logException(e);
-				MartusLogger.logError(TokenReplacement.replaceToken("Account not found on server. Account=#account", "#account", rowData.getPublicKey().getPublicCode()));
+				MartusLogger.logError(TokenReplacement.replaceToken("Account not found on server. Account=#account", "#account", rowData.getContactKey().getPublicCode()));
 			}
 		}
 		

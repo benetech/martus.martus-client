@@ -101,7 +101,7 @@ public class ContactsWithTemplatesTableData
 		return formTemplatesToChooseFrom;
 	}
 	
-	public ContactKey getPublicKey()
+	public ContactKey getContactKey()
 	{
 		return contactKey;
 	}
