@@ -181,6 +181,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
             comboBox.setConverter(new FormTemplateToStringConverter());
             comboBox.addEventHandler(ActionEvent.ACTION, new ComboBoxHandler());
             comboBox.setPromptText("Choose one...");
+            comboBox.setVisible(false);
         }
         
         @Override
@@ -195,6 +196,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
             	if (rowData == null)
             		return;
 
+            	comboBox.visibleProperty().bindBidirectional(rowData.getRowSelectedProperty());
         		comboBox.getItems().clear();
         		comboBox.setItems(rowData.getFormTemplateChoices());
         		setGraphic(comboBox);
