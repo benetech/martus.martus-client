@@ -27,22 +27,20 @@ package org.martus.client.swingui.jfx.setupwizard.tasks;
 
 import org.martus.client.core.MartusApp;
 
-public class CreateAccountTask extends AbstractAppTask
+import javafx.concurrent.Task;
+
+abstract public class AbstractAppTask extends Task<Void>
 {
-	public CreateAccountTask(MartusApp appToUse, String userNameToUse, char[] passwordToUse)
+	public AbstractAppTask(MartusApp appToUse)
 	{
-		super(appToUse);
-		userName = userNameToUse;
-		password = passwordToUse;
+		app = appToUse;
 	}
-	
-	@Override
-	protected Void call() throws Exception
+
+	protected MartusApp getApp()
 	{
-		getApp().createAccount(userName, password);
-		return null;
+		return app;
 	}
-	
-	private String userName;
-	private char[] password;
+
+	protected MartusApp app;
+
 }
