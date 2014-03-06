@@ -25,9 +25,22 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.tasks;
 
+import org.martus.client.core.MartusApp;
+
 import javafx.concurrent.Task;
 
 abstract public class AbstractAppTask extends Task<Void>
 {
+	public AbstractAppTask(MartusApp appToUse)
+	{
+		app = appToUse;
+	}
+
+	protected MartusApp getApp()
+	{
+		return app;
+	}
+
+	protected MartusApp app;
 
 }
