@@ -40,15 +40,15 @@ public class DownloadTemplateListForAccountTask extends AbstractAppTask
 	{
 		super(appToUse);
 		
-		key = keyToUse;
-		list = listToUse;
+		contactKey = keyToUse;
+		formTemplates = listToUse;
 	}
 
 	@Override
 	protected Void call() throws Exception
 	{
-		list.clear();
-		list.addAll(getFormTemplates(key));
+		formTemplates.clear();
+		formTemplates.addAll(getFormTemplates(contactKey));
 		return null;
 	}
 
@@ -77,6 +77,6 @@ public class DownloadTemplateListForAccountTask extends AbstractAppTask
 		return formTemplates;
 	}
 
-	private ContactKey key;
-	private ObservableList<CustomFieldTemplate> list;
+	private ContactKey contactKey;
+	private ObservableList<CustomFieldTemplate> formTemplates;
 }
