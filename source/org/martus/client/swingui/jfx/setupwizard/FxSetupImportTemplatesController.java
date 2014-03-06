@@ -126,16 +126,23 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		return formTemplates;
 	}
 
-	private CustomFieldTemplate importFormTemplate(InputStream resourceAsStream)
-			throws Exception, FutureVersionException, IOException
+	private CustomFieldTemplate importFormTemplate(InputStream resourceAsStream) throws Exception, FutureVersionException, IOException
 	{
-		InputStreamWithSeek withSeek = convertToInputStreamWithSeek(resourceAsStream);
-		CustomFieldTemplate formTemplate = new CustomFieldTemplate();
-		formTemplate.importTemplate(getApp().getSecurity(), withSeek);
-		return formTemplate;
+		InputStreamWithSeek withSeek = new ByteArrayInputStreamWithSeek(convertToInputStreamWithSeek(resourceAsStream));
+		try
+		{
+			CustomFieldTemplate formTemplate = new CustomFieldTemplate();
+			formTemplate.importTemplate(getApp().getSecurity(), withSeek);
+
+			return formTemplate;
+		}
+		finally
+		{
+			withSeek.close();
+		}
 	}
 
-	private InputStreamWithSeek convertToInputStreamWithSeek(InputStream resourceAsStream) throws Exception
+	private byte[] convertToInputStreamWithSeek(InputStream resourceAsStream) throws Exception
 	{
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		try
@@ -146,7 +153,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 				outputStream.write(readBytes);
 			}
 
-			return new ByteArrayInputStreamWithSeek(outputStream.toByteArray());
+			return outputStream.toByteArray();
 		}
 		finally
 		{
