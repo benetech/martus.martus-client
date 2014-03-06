@@ -240,7 +240,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 			{
 				Task task = new DownloadTemplateListForAccountTask(getApp(), rowData.getContactKey(), rowData.getFormTemplateChoices());
 				String busyTitle = getLocalization().getWindowTitle("LoadingTemplates");
-				showBusyDlg(busyTitle, task);
+				showBusyDialog(busyTitle, task);
 			} 
 			catch (ServerNotAvailableException e)
 			{
