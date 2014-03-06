@@ -118,7 +118,7 @@ abstract public class FxController implements Initializable
 		}
 	}
 	
-	public boolean showConfirmationDlg(String title, String message)
+	public boolean showConfirmationDialog(String title, String message)
 	{
 		try
 		{

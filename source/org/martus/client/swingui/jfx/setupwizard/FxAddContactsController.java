@@ -317,7 +317,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 					String contactName = contactData.getContactName();
 					String contactPublicCode = contactData.getPublicCode();
 					String confirmationMessage = String.format("%s\n%s (%s)\n%s",localization.getFieldLabel("RemoveContactLabel1"), contactName, contactPublicCode,localization.getFieldLabel("RemoveContactLabel2"));
-					if(showConfirmationDlg(localization.getWindowTitle("RemoveContact"), confirmationMessage))
+					if(showConfirmationDialog(localization.getWindowTitle("RemoveContact"), confirmationMessage))
 						removeContactFromTable(contactData);
 				}
 			}
