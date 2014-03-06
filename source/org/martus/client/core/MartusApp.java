@@ -1871,8 +1871,16 @@ public class MartusApp
 	{
 		CustomFieldTemplate template = new CustomFieldTemplate();
 		FileInputStreamWithSeek inputStream = new FileInputStreamWithSeek(formTemplateTempFile);
-		template.importTemplate(getSecurity(), inputStream);
-		formTemplateTempFile.delete();
+		try
+		{
+			template.importTemplate(getSecurity(), inputStream);
+			formTemplateTempFile.delete();
+		}
+		finally
+		{
+			inputStream.close();
+		}
+		
 		return template;
 	}
 
