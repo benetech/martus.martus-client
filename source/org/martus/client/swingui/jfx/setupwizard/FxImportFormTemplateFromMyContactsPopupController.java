@@ -72,7 +72,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 			fillTableWithContacts();
 		
 			contactSelectedColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, Boolean>("rowSelected"));
-			contactSelectedColumn.setCellFactory(new RadioButtonCellFactory());
+			contactSelectedColumn.setCellFactory(new FxRadioButtonCellFactory());
 			
 			contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("contactName"));
 			contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsWithTemplatesTableData>forTableColumn());
