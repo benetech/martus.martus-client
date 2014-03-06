@@ -106,6 +106,11 @@ public class ContactsWithTemplatesTableData
 		return contactKey;
 	}
 	
+	public SimpleBooleanProperty rowSelectedProperty()
+    {
+    	return rowSelected;
+    }
+	
 	private final SimpleStringProperty contactName;
 	private final SimpleStringProperty publicCode;
 	private final SimpleBooleanProperty rowSelected;

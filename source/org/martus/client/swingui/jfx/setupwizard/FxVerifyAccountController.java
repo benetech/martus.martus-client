@@ -40,6 +40,7 @@ import javafx.scene.control.TextField;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.setupwizard.tasks.CreateAccountTask;
 import org.martus.common.MartusLogger;
 
 public class FxVerifyAccountController extends AbstractFxSetupWizardContentController implements Initializable
@@ -55,6 +56,8 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardContentContr
 		getWizardNavigationHandler().getNextButton().setDisable(true);
 		userNameField.textProperty().addListener(new LoginChangeHandler());
 		passwordField.textProperty().addListener(new LoginChangeHandler());
+		
+		updateStatus();
 	}
 
 	@Override
@@ -77,43 +80,41 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardContentContr
 		
 		StaticAccountCreationData.dispose();
 		
-		Task task = new CreateAccountTask(userNameValue, passwordValue);
+		Task task = new CreateAccountTask(getApp(), userNameValue, passwordValue);
 		String busyTitle = getLocalization().getWindowTitle("CreatingAccount");
 		showBusyDlg(busyTitle, task);
 	}
 	
-	private class CreateAccountTask extends Task<Void>
+	protected void updateStatus()
 	{
-		public CreateAccountTask(String userNameToUse, char[] passwordToUse)
+		try
 		{
-			userName = userNameToUse;
-			password = passwordToUse;
+			getAccountConfirmLabel().setText("");
+			String userNameValue = userNameField.getText();
+			String passwordValue = passwordField.getText();
+			boolean nameMatches = userNameValue.equals(StaticAccountCreationData.getUserName());
+			boolean passwordMatches = passwordValue.equals(StaticAccountCreationData.getPassword());
+
+			boolean canContinue = nameMatches && passwordMatches;
+			getWizardNavigationHandler().getNextButton().setDisable(!canContinue);
+
+			String status = "";
+			if (!nameMatches)
+				status = "Must enter the same username";
+			else if (!passwordMatches)
+				status = "Must enter the same password";
+			else
+				status = "Username and password match!";
+			
+			getAccountConfirmLabel().setText(status);
+
 		}
-		
-		@Override
-		protected Void call() throws Exception
+		catch (Exception e)
 		{
-			getApp().createAccount(userName, password);
-			return null;
+			MartusLogger.logException(e);
 		}
-		
-		private String userName;
-		private char[] password;
 	}
-	
-	private boolean isOkToCreateAccount()
-	{
-		String userNameValue = userNameField.getText();
-		String passwordValue = passwordField.getText();
-		if (!userNameValue.equals(StaticAccountCreationData.getUserName()))
-			return false;
-		
-		if (!passwordValue.equals(StaticAccountCreationData.getPassword()))
-			return false;
-		
-		return true;
-	}
-	
+
 	private Label getAccountConfirmLabel()
 	{
 		return accountConfirmLabel;
@@ -140,19 +141,9 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardContentContr
 		@Override
 		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 		{
-			try
-			{
-				getAccountConfirmLabel().setText("");
-				boolean shouldBeEnabled = isOkToCreateAccount();
-				getWizardNavigationHandler().getNextButton().setDisable(!shouldBeEnabled);
-				if (shouldBeEnabled)
-					getAccountConfirmLabel().setText("User name and password match!");
-			}
-			catch (Exception e)
-			{
-				MartusLogger.logException(e);
-			}
+			updateStatus();
 		}
+
 	}
 
 	@FXML
