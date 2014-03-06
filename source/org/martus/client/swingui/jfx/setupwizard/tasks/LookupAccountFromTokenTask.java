@@ -23,41 +23,33 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.setupwizard.tasks;
 
-import javafx.stage.Stage;
+import org.martus.client.core.MartusApp;
+import org.martus.common.MartusAccountAccessToken;
 
-import org.martus.client.swingui.UiMainWindow;
 
-abstract public class FxPopupController extends FxController
+public class LookupAccountFromTokenTask extends AbstractAppTask
 {
-	public FxPopupController(UiMainWindow mainWindowToUse)
+	public LookupAccountFromTokenTask(MartusApp appToUse, MartusAccountAccessToken tokenToUse)
 	{
-		super(mainWindowToUse);
-	}
-
-	public void setStage(Stage stageToUse)
-	{
-		stage = stageToUse;
+		super(appToUse);
+		token = tokenToUse;
+		
 	}
 	
-	public Stage getStage()
+	public String getFoundAccountId()
 	{
-		return stage;
-	}
-	
-	public Throwable getThrownException()
-	{
-		return thrownException;
-	}
-	
-	public void setThrownException(Throwable exception)
-	{
-		thrownException = exception;
+		return foundAccountId;
 	}
 
-	abstract public String getDialogTitle();
+	@Override
+	protected Void call() throws Exception
+	{
+		foundAccountId = app.getMartusAccountIdFromAccessTokenOnServer(token);
+		return null;
+	}
 
-	private Stage stage;
-	private Throwable thrownException;
+	private MartusAccountAccessToken token;
+	private String foundAccountId;
 }
