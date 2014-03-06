@@ -153,7 +153,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		ObservableList<ContactsWithTemplatesTableData> tableData = contactsWithTemplatesTableView.getItems();
 		for (ContactsWithTemplatesTableData rowData : tableData)
 		{
-			if (rowData.getSelectedFormTemplate() != null)
+			if (rowData.getRowSelected())
 				return rowData.getSelectedFormTemplate();
 		}
 		
