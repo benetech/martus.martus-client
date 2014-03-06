@@ -64,9 +64,14 @@ public class FxBusyController extends FxBackgroundActivityController
 		public void changed(ObservableValue<? extends State> observable, State oldState, State newState)
 		{
 			if(newState.equals(State.SUCCEEDED))
+			{
 				getStage().close();
+			}
 			else if(newState.equals(State.FAILED))
-				; // FIXME: What should we do here???
+			{
+				setThrownException(task.getException());
+				getStage().close();
+			}
 		}
 	}
 	
@@ -91,5 +96,5 @@ public class FxBusyController extends FxBackgroundActivityController
 	private Button cancelButton;
 	
 	private String title;
-	private Task task;
+	protected Task task;
 }
