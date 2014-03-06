@@ -91,15 +91,16 @@ public class FxSetupSettingsController extends AbstractFxSetupWizardContentContr
 		localization.setMdyOrder(dateFormatSequenceDropDown.getSelectionModel().getSelectedItem().getCode());
 		String delimiter = dateDelimeterComboBox.getSelectionModel().getSelectedItem().getCode();
 		localization.setDateDelimiter(delimiter.charAt(0));
-		//String dateFormat = localization.getCurrentDateFormatCode();
-		//CurrentUiState uiState = getMainWindow().getCurrentUiState();
-		//uiState.setCurrentDateFormat(dateFormat);
-		//getMainWindow().saveCurrentUiState();
+		String dateFormat = localization.getCurrentDateFormatCode();
+		CurrentUiState uiState = getMainWindow().getCurrentUiState();
+		uiState.setCurrentDateFormat(dateFormat);
+		getMainWindow().saveCurrentUiState();
 	}
 
 	private void saveTorConfigurationAndForceBulletinsAllPrivate()
 	{
 		ConfigInfo configInfo = getApp().getConfigInfo();
+		//NOTE: This might belong somewhere else, but for now it's important to set it.
 		configInfo.setForceBulletinsAllPrivate(true);
 		configInfo.setUseInternalTor(userTorCheckBox.isSelected());
 		getMainWindow().saveConfigInfo();
