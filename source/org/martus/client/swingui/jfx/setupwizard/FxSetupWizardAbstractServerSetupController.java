@@ -51,7 +51,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends Abstrac
 			if(!getApp().isSSLServerAvailable(gateway))
 			{
 				// FIXME: This should be a confirmation
-				showNotifyDlg("ServerSSLNotResponding");
+				showNotifyDialog("ServerSSLNotResponding");
 				saveServerConfig(serverIPAddress, serverPublicKey, "");
 				return true;
 			}
@@ -61,7 +61,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends Abstrac
 			{
 				if(complianceStatement.equals(""))
 				{
-					showNotifyDlg("ServerComplianceFailed");
+					showNotifyDialog("ServerComplianceFailed");
 					saveServerConfig(serverIPAddress, serverPublicKey, "");
 					return true;
 				}
@@ -97,7 +97,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends Abstrac
 		catch(SaveConfigInfoException e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDlg("ErrorSavingConfig");
+			showNotifyDialog("ErrorSavingConfig");
 			return false;
 		}
 	}
@@ -117,10 +117,10 @@ abstract public class FxSetupWizardAbstractServerSetupController extends Abstrac
 	private boolean acceptCompliance(String newServerCompliance)
 	{
 		// FIXME: Actually allow the user to accept/reject
-		showNotifyDlg("ReplaceThisWithAConfirmationDialogShowingTheComplianceStatement");
+		showNotifyDialog("ReplaceThisWithAConfirmationDialogShowingTheComplianceStatement");
 		boolean accepted = true;
 		if(!accepted)
-			showNotifyDlg("UserRejectedServerCompliance");
+			showNotifyDialog("UserRejectedServerCompliance");
 		
 		return accepted;
 	}

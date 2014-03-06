@@ -77,7 +77,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 			String contactAccountId = app.getMartusAccountIdFromAccessTokenOnServer(token);
 			if(contactAccountId.equals(app.getAccountId()))
 			{
-				showNotifyDlg("ContactKeyIsOurself");
+				showNotifyDialog("ContactKeyIsOurself");
 				return;
 			}
 			
@@ -92,16 +92,16 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 		} 
 		catch (ServerNotAvailableException e)
 		{
-			showNotifyDlg("ContactsNoServer");
+			showNotifyDialog("ContactsNoServer");
 		} 
 		catch (TokenNotFoundException e)
 		{
-			showNotifyDlg("UnableToRetrieveContactFromServer");
+			showNotifyDialog("UnableToRetrieveContactFromServer");
 		} 
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDlg("UnexpectedError");
+			showNotifyDialog("UnexpectedError");
 		} 
 	}
 

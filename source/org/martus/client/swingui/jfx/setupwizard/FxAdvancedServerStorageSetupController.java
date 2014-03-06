@@ -172,7 +172,7 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 	
 	private void showError(String text)
 	{
-		showNotifyDlg(text);
+		showNotifyDialog(text);
 	}
 
 	@FXML
