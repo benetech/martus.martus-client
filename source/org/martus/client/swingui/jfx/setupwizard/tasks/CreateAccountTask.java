@@ -39,10 +39,15 @@ public class CreateAccountTask extends AbstractAppTask
 	@Override
 	protected Void call() throws Exception
 	{
-		app.createAccount(userName, password);
+		getApp().createAccount(userName, password);
 		return null;
 	}
 	
+	private MartusApp getApp()
+	{
+		return app;
+	}
+
 	private MartusApp app;
 	private String userName;
 	private char[] password;
