@@ -372,7 +372,7 @@ abstract public class UiManageExternalPublicKeysDialog extends JDialog
 					String publicCode = mainWindow.getLocalization().getFieldLabel("Unknown");
 					try
 					{
-						publicCode = key.getPublicCode();
+						publicCode = key.getFormattedPublicCode();
 					}
 					catch(Exception e)
 					{

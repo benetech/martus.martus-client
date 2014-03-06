@@ -38,7 +38,7 @@ public class ContactsWithTemplatesTableData
 	public ContactsWithTemplatesTableData(ContactKey contactKeyToUse, boolean rowSelectedToUse, CustomFieldTemplate selectedFormTemplateToUse, ObservableList<CustomFieldTemplate> customFieldTemplatesToChooseFromToUse) throws Exception
 	{
 		contactName = new SimpleStringProperty(contactKeyToUse.getLabel());
-		publicCode = new SimpleStringProperty(contactKeyToUse.getPublicCode());
+		publicCode = new SimpleStringProperty(contactKeyToUse.getFormattedPublicCode());
 		rowSelected = new SimpleBooleanProperty(rowSelectedToUse);
 		selectedFormTemplate = new SimpleObjectProperty(selectedFormTemplateToUse);
 		formTemplatesToChooseFrom = customFieldTemplatesToChooseFromToUse;

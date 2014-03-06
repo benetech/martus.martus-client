@@ -49,7 +49,7 @@ public class TestContactTableData extends TestCaseEnhanced
 		ContactKey keyReturned = fxmlTableData.getContact();
 		assertEquals(contactKey.getPublicKey(), keyReturned.getPublicKey());
 		assertEquals(publicKey, keyReturned.getPublicKey());
-		assertEquals(contactKey.getPublicCode(), keyReturned.getPublicCode());
+		assertEquals(contactKey.getFormattedPublicCode(), keyReturned.getFormattedPublicCode());
 		assertEquals(contactKey.getLabel(), keyReturned.getLabel());
 		assertEquals(label, keyReturned.getLabel());
 		assertTrue(keyReturned.getCanSendTo());

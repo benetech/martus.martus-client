@@ -158,7 +158,7 @@ public class UiManageFieldDeskKeysDialog extends UiManageExternalPublicKeysDialo
 			FieldDeskKey key = keys.get(i);
 			try 
 			{
-				if(key.getPublicCode().equals(publicCode))
+				if(key.getFormattedPublicCode().equals(publicCode))
 					continue;
 			} 
 			catch (InvalidBase64Exception e) 

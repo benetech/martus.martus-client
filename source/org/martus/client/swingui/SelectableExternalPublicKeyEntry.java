@@ -64,7 +64,7 @@ public class SelectableExternalPublicKeyEntry
 	{
 		try
 		{
-			return key.getPublicCode();
+			return key.getFormattedPublicCode();
 		}
 		catch(InvalidBase64Exception e)
 		{

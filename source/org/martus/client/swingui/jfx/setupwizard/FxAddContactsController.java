@@ -165,7 +165,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		try
 		{
 			ContactKey newContact = new ContactKey(contactAccountId);
-			VerifyContactPopupController popupController = new VerifyContactPopupController(getMainWindow(), newContact.getPublicCode());
+			VerifyContactPopupController popupController = new VerifyContactPopupController(getMainWindow(), newContact.getFormattedPublicCode());
 			showControllerInsideModalDialog(popupController);
 			if(popupController.hasContactBeenAccepted())
 			{
@@ -188,7 +188,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		{
 			ContactKey currentContactSelected = data.get(index).getContact();
 						
-			VerifyContactPopupController popupController = new VerifyContactPopupController(getMainWindow(), currentContactSelected.getPublicCode());
+			VerifyContactPopupController popupController = new VerifyContactPopupController(getMainWindow(), currentContactSelected.getFormattedPublicCode());
 			popupController.setVerificationOnly();
 			showControllerInsideModalDialog(popupController);
 			if(popupController.hasContactBeenAccepted())

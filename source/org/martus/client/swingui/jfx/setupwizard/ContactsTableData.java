@@ -38,7 +38,7 @@ public class ContactsTableData
 	{
 		publicKey = contact.getPublicKey();
 		contactName = new SimpleStringProperty(contact.getLabel());
-		publicCode = new SimpleStringProperty(contact.getPublicCode());
+		publicCode = new SimpleStringProperty(contact.getFormattedPublicCode());
 		canSendTo = new SimpleBooleanProperty(contact.getCanSendTo());
 		canReceiveFrom = new SimpleBooleanProperty(contact.getCanReceiveFrom());
 		verificationStatus = new SimpleIntegerProperty(contact.getVerificationStatus());

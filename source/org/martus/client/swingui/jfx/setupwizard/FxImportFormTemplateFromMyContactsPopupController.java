@@ -250,7 +250,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 			catch (AccountNotFoundException e)
 			{
 				MartusLogger.logException(e);
-				MartusLogger.logError(TokenReplacement.replaceToken("Account not found on server. Account=#account", "#account", rowData.getContactKey().getPublicCode()));
+				MartusLogger.logError(TokenReplacement.replaceToken("Account not found on server. Account=#account", "#account", rowData.getContactKey().getFormattedPublicCode()));
 			}
 		}
 		
