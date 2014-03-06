@@ -167,8 +167,8 @@ public class Martus
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
-			//e.printStatckTrace(System.out);
+			MartusLogger.logException(e);
+			System.exit(0);
 		}
 
     }
