@@ -31,7 +31,7 @@ public class CreateAccountTask extends AbstractAppTask
 {
 	public CreateAccountTask(MartusApp appToUse, String userNameToUse, char[] passwordToUse)
 	{
-		app = appToUse;
+		super(appToUse);
 		userName = userNameToUse;
 		password = passwordToUse;
 	}
@@ -43,12 +43,6 @@ public class CreateAccountTask extends AbstractAppTask
 		return null;
 	}
 	
-	private MartusApp getApp()
-	{
-		return app;
-	}
-
-	private MartusApp app;
 	private String userName;
 	private char[] password;
 }
