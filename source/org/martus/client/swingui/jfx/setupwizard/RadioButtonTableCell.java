@@ -52,7 +52,6 @@ public class RadioButtonTableCell extends TableCell
 		else
 		{
 			radioButton.setToggleGroup(group);
-			radioButton.setSelected((Boolean)item);
 			bindToOurBooleanPropertyRadioButton();
 			setGraphic(radioButton);
 		}
