@@ -30,6 +30,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -45,7 +46,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
-abstract public class FxController
+abstract public class FxController implements Initializable
 {
 	public FxController(UiMainWindow mainWindowToUse)
 	{
@@ -53,6 +54,11 @@ abstract public class FxController
 	}
 	
 	abstract public String getFxmlLocation();
+	
+	@Override
+	public void initialize(URL location, ResourceBundle bundle)
+	{
+	}
 	
 	public Parent createContents() throws Exception
 	{
@@ -112,6 +118,36 @@ abstract public class FxController
 		}
 	}
 	
+	public boolean showConfirmationDlg(String title, String message)
+	{
+		try
+		{
+			PopupConfirmationController popupController = new PopupConfirmationController(getMainWindow(), title, message);
+			showControllerInsideModalDialog(popupController);
+			return popupController.wasYesPressed();
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+		return false;
+	}
+	
+	public void showBusyDlg(String title, Task task)
+	{
+		try
+		{
+			FxPopupController popupController = new FxBusyController(getMainWindow(), title, task);
+			showControllerInsideModalDialog(popupController);
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			System.exit(1);
+		}
+		
+	}
+
 	public static class PopupNotifyController extends FxPopupController implements Initializable
 	{
 		public PopupNotifyController(UiMainWindow mainWindowToUse, String notificationTag)
@@ -146,24 +182,76 @@ abstract public class FxController
 			getStage().close();
 		}
 
-		public void setFxStage(FxInSwingDialogStage stageToUse)
+		@FXML
+		private Label fxLabel;
+
+		@FXML
+		private Button fxOkButton;
+
+		private String baseTag;
+	}
+
+	public static class PopupConfirmationController extends FxPopupController implements Initializable
+	{
+		public PopupConfirmationController(UiMainWindow mainWindowToUse, String title, String message)
 		{
-			fxStage = stageToUse;
+			super(mainWindowToUse);
+			this.title = title;
+			this.message = message;
+		}
+		
+		@Override
+		public void initialize(URL arg0, ResourceBundle arg1)
+		{
+			MartusLocalization localization = getLocalization();
+			fxYesButton.setText(localization.getButtonLabel("yes"));
+			fxNoButton.setText(localization.getButtonLabel("no"));
+			fxLabel.setText(message);
+		}
+		
+		@Override
+		public String getFxmlLocation()
+		{
+			return "setupwizard/ConfirmationPopup.fxml";
 		}
 
-		public FxInSwingDialogStage getFxStage()
+		@Override
+		public String getDialogTitle()
 		{
-			return fxStage;
+			return title; 
+		}
+
+		@FXML
+		public void yesPressed()
+		{
+			yesWasPressed = true;
+			getStage().close();
+		}
+
+		@FXML
+		public void noPressed()
+		{
+			getStage().close();
+		}
+
+		public boolean wasYesPressed()
+		{
+			return yesWasPressed;
 		}
 
 		@FXML
 		private Label fxLabel;
-		private FxInSwingDialogStage fxStage;
-		@FXML
-		private Button fxOkButton;
-		private String baseTag;
-	}
 
+		@FXML
+		private Button fxYesButton;
+		
+		@FXML
+		private Button fxNoButton;
+		
+		private String title;
+		private String message;
+		private boolean yesWasPressed;
+	}
 	
 	public void showControllerInsideModalDialog(FxPopupController controller) throws Exception
 	{
