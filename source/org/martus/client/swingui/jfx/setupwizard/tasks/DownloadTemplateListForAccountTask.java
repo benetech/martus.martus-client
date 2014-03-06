@@ -48,6 +48,7 @@ public class DownloadTemplateListForAccountTask extends AbstractAppTask
 	{
 		formTemplates.clear();
 		fillFormTemplates();
+		
 		return null;
 	}
 
