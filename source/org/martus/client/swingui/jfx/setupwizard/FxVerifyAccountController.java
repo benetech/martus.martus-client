@@ -40,6 +40,7 @@ import javafx.scene.control.TextField;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.setupwizard.tasks.CreateAccountTask;
 import org.martus.common.MartusLogger;
 
 public class FxVerifyAccountController extends AbstractFxSetupWizardContentController implements Initializable
