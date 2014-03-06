@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.setupwizard;
 
 import java.io.File;
 
+import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxScene;
@@ -43,16 +44,19 @@ public class SetupWizardStage extends FxWizardStage
 	@Override
 	protected FxController getFirstController()
 	{
+		UiMainWindow mainWindow = getMainWindow();
 		if(UiMainWindow.isAlphaTester)
 		{
-			if(!getMainWindow().getApp().hasNoAccounts())
+			MartusApp app = mainWindow.getApp();
+			if(!app.hasNoAccounts())
 			{
 				try
 				{
-					getMainWindow().getApp().attemptSignIn("a", "password".toCharArray());
-					getMainWindow().getApp().loadConfigInfo();
-					getMainWindow().getApp().doAfterSigninInitalization();
-					return new FxSetupContactInfoController(getMainWindow());
+					app.attemptSignIn("a", "password".toCharArray());
+					app.loadConfigInfo();
+					mainWindow.initalizeUiState();
+					app.doAfterSigninInitalization();
+					return new FxSetupContactInfoController(mainWindow);
 				} 
 				catch (Exception e)
 				{
@@ -61,7 +65,7 @@ public class SetupWizardStage extends FxWizardStage
 				}
 			}
 		}
-		return new FxSetupUsernamePasswordController(getMainWindow());
+		return new FxSetupUsernamePasswordController(mainWindow);
 	}
 	
 	@Override

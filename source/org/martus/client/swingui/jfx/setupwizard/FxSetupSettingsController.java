@@ -38,10 +38,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 
 import org.martus.client.core.ConfigInfo;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPreferencesDlg;
 import org.martus.client.swingui.jfx.FxController;
-import org.martus.clientside.MtfAwareLocalization;
+import org.martus.clientside.CurrentUiState;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxSetupSettingsController extends AbstractFxSetupWizardContentController implements Initializable
@@ -57,14 +58,15 @@ public class FxSetupSettingsController extends AbstractFxSetupWizardContentContr
 
 		ObservableList<ChoiceItem> dateFormatChoices = getDateFormatChoices();
 		dateFormatSequenceDropDown.setItems(FXCollections.observableArrayList(dateFormatChoices));
-		MtfAwareLocalization localization = getApp().getLocalization();
+		
+		MartusLocalization localization = getLocalization();
 		String dateFormatCode = localization.getMdyOrder();
 		selectItemByCode(dateFormatSequenceDropDown, dateFormatCode);
 		
 		ObservableList<ChoiceItem> dateDelimeterChoices = getDateDelimeterChoices();
 		dateDelimeterComboBox.setItems(FXCollections.observableArrayList(dateDelimeterChoices));
 	
-		String dateDelimeterCode = new String(new char[] {localization.getDateDelimiter()});
+		String dateDelimeterCode = "" + localization.getDateDelimiter();
 		selectItemByCode(dateDelimeterComboBox, dateDelimeterCode);
 	}
 
@@ -79,15 +81,27 @@ public class FxSetupSettingsController extends AbstractFxSetupWizardContentContr
 	@Override
 	public void nextWasPressed(ActionEvent event) 
 	{
-		//NOTE: This might belong somewhere else, but for now it's important to set it 
-		ConfigInfo configInfo = getApp().getConfigInfo();
-		configInfo.setForceBulletinsAllPrivate(true);
-		configInfo.setUseInternalTor(userTorCheckBox.isSelected());
-		
-		MtfAwareLocalization localization = getApp().getLocalization();
+		saveTorConfigurationAndForceBulletinsAllPrivate();
+		saveDateFormatConfiguration();
+	}
+
+	private void saveDateFormatConfiguration()
+	{
+		MartusLocalization localization = getMainWindow().getLocalization();
 		localization.setMdyOrder(dateFormatSequenceDropDown.getSelectionModel().getSelectedItem().getCode());
 		String delimiter = dateDelimeterComboBox.getSelectionModel().getSelectedItem().getCode();
 		localization.setDateDelimiter(delimiter.charAt(0));
+		//String dateFormat = localization.getCurrentDateFormatCode();
+		//CurrentUiState uiState = getMainWindow().getCurrentUiState();
+		//uiState.setCurrentDateFormat(dateFormat);
+		//getMainWindow().saveCurrentUiState();
+	}
+
+	private void saveTorConfigurationAndForceBulletinsAllPrivate()
+	{
+		ConfigInfo configInfo = getApp().getConfigInfo();
+		configInfo.setForceBulletinsAllPrivate(true);
+		configInfo.setUseInternalTor(userTorCheckBox.isSelected());
 		getMainWindow().saveConfigInfo();
 		getApp().startOrStopTorAsRequested();
 	}

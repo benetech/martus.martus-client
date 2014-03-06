@@ -1327,7 +1327,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	private void initalizeUiState()
+	public void initalizeUiState()
 	{
 		uiState = new CurrentUiState();
 		File uiStateFile = getUiStateFile();
