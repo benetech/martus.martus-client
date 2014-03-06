@@ -57,6 +57,7 @@ import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxInSwingDialogStage;
 import org.martus.client.swingui.jfx.FxPopupController;
 import org.martus.client.swingui.jfx.FxTableCellTextFieldFactory;
+import org.martus.client.swingui.jfx.setupwizard.tasks.LookupAccountFromTokenTask;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.Exceptions.ServerNotAvailableException;
@@ -117,7 +118,9 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 		{
 			MartusAccountAccessToken token = new MartusAccountAccessToken(accessTokenField.getText());
 			MartusApp app = getApp();
-			String contactAccountId = app.getMartusAccountIdFromAccessTokenOnServer(token);
+			LookupAccountFromTokenTask task = new LookupAccountFromTokenTask(app, token);
+			showBusyDlg("Finding Account", task);
+			String contactAccountId = task.getFoundAccountId();
 			if(contactAccountId.equals(app.getAccountId()))
 			{
 				showNotifyDlg("ContactKeyIsOurself");

@@ -133,19 +133,10 @@ abstract public class FxController implements Initializable
 		return false;
 	}
 	
-	public void showBusyDlg(String title, Task task)
+	public void showBusyDlg(String title, Task task) throws Exception
 	{
-		try
-		{
-			FxPopupController popupController = new FxBusyController(getMainWindow(), title, task);
-			showControllerInsideModalDialog(popupController);
-		} 
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-			System.exit(1);
-		}
-		
+		FxPopupController popupController = new FxBusyController(getMainWindow(), title, task);
+		showControllerInsideModalDialog(popupController);
 	}
 
 	public static class PopupNotifyController extends FxPopupController implements Initializable
@@ -269,6 +260,8 @@ abstract public class FxController implements Initializable
 		Scene scene = new Scene(root);
 		popupStage.setScene(scene);
 	    popupStage.showAndWait();
+	    if(controller.getThrownException() != null)
+	    	throw (Exception)controller.getThrownException();
 	}
 
 	private UiMainWindow mainWindow;
