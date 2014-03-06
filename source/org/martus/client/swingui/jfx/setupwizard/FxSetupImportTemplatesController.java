@@ -129,16 +129,20 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	private InputStreamWithSeek convertToInputStreamWithSeek(InputStream resourceAsStream) throws Exception
 	{
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		int readBytes = -1;
-		while ((readBytes = resourceAsStream.read()) != -1)
+		try
 		{
-			outputStream.write(readBytes);
+			int readBytes = -1;
+			while ((readBytes = resourceAsStream.read()) != -1)
+			{
+				outputStream.write(readBytes);
+			}
+
+			return new ByteArrayInputStreamWithSeek(outputStream.toByteArray());
 		}
- 
-		InputStreamWithSeek inputStreamWithSeek = new ByteArrayInputStreamWithSeek(outputStream.toByteArray());
-		outputStream.close();
-		
-		return inputStreamWithSeek;
+		finally
+		{
+			outputStream.close();
+		}
 	}
 	
 	@FXML
