@@ -38,6 +38,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.MartusLogger;
@@ -77,15 +78,16 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardContentContr
 		
 		StaticAccountCreationData.dispose();
 		
-		Task task = new CreateAccountTask(userNameValue, passwordValue);
+		Task task = new CreateAccountTask(getApp(), userNameValue, passwordValue);
 		String busyTitle = getLocalization().getWindowTitle("CreatingAccount");
 		showBusyDlg(busyTitle, task);
 	}
 	
-	private class CreateAccountTask extends Task<Void>
+	private static class CreateAccountTask extends Task<Void>
 	{
-		public CreateAccountTask(String userNameToUse, char[] passwordToUse)
+		public CreateAccountTask(MartusApp appToUse, String userNameToUse, char[] passwordToUse)
 		{
+			app = appToUse;
 			userName = userNameToUse;
 			password = passwordToUse;
 		}
@@ -93,10 +95,11 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardContentContr
 		@Override
 		protected Void call() throws Exception
 		{
-			getApp().createAccount(userName, password);
+			app.createAccount(userName, password);
 			return null;
 		}
 		
+		private MartusApp app;
 		private String userName;
 		private char[] password;
 	}
