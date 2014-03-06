@@ -27,9 +27,7 @@ Boston, MA 02111-1307, USA.
 	
 package org.martus.client.swingui.jfx;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.property.Property;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -66,30 +64,15 @@ public final class FxTableCellTextFieldFactory
 			else
 			{
 				setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-				bindToOurStringPropertyTextField();
+				//NOTE: To use this TextField Factory the TableData's SimpleStringProperty must be implemented.  
+				//		IE: public SimpleStringProperty <variableName>Property() { return <variableName>; }
+				Property cellProperty = (Property)getTableColumn().getCellObservableValue(getIndex());
+				Property currentFieldProperty = textField.textProperty();
+				cellStringPropertyBoundToCurrently = FxBindingHelpers.bindToOurPropertyField(cellProperty, currentFieldProperty, cellStringPropertyBoundToCurrently);
 			}
 		}
-
-		private void bindToOurStringPropertyTextField()
-		{
-			//NOTE: To use this TextField Factory the TableData's SimpleStringProperty must be implemented.  
-			//		IE: public SimpleStringProperty <variableName>Property() { return <variableName>; }
-			ObservableValue<String> cellObservableValue = getTableColumn().getCellObservableValue(getIndex());
-			SimpleStringProperty cellStringProperty = (SimpleStringProperty)cellObservableValue;
-	    
-			if(cellStringProperty == cellStringPropertyBoundToCurrently)
-				return;
-			
-			if(cellStringProperty.equals(cellStringPropertyBoundToCurrently))
-				return;
-			
-			if(cellStringPropertyBoundToCurrently != cellStringProperty) 
-				textField.textProperty().unbindBidirectional(cellStringProperty);
-			
-			cellStringPropertyBoundToCurrently = cellStringProperty;
-			textField.textProperty().bindBidirectional(cellStringPropertyBoundToCurrently);
-		}
+		
 		private TextField textField;
-		private StringProperty cellStringPropertyBoundToCurrently;
+		private Property cellStringPropertyBoundToCurrently;
 	}
 }

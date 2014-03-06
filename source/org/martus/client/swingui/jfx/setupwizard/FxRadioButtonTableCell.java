@@ -25,12 +25,12 @@ Boston, MA 02111-1307, USA.
  */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.property.Property;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.ToggleGroup;
+
+import org.martus.client.swingui.jfx.FxBindingHelpers;
 
 public class FxRadioButtonTableCell extends TableCell
 {
@@ -52,30 +52,15 @@ public class FxRadioButtonTableCell extends TableCell
 		else
 		{
 			radioButton.setToggleGroup(group);
-			bindToOurBooleanPropertyRadioButton();
 			setGraphic(radioButton);
+
+			Property cellProperty = (Property)getTableColumn().getCellObservableValue(getIndex());
+			Property currentFieldProperty = radioButton.selectedProperty();
+			cellBooleanPropertyBoundToCurrently = FxBindingHelpers.bindToOurPropertyField(cellProperty, currentFieldProperty, cellBooleanPropertyBoundToCurrently);
 		}
-	}
-
-	private void bindToOurBooleanPropertyRadioButton()
-	{
-		ObservableValue<Boolean> cellObservableValue = getTableColumn().getCellObservableValue(getIndex());
-		SimpleBooleanProperty cellBooleanProperty = (SimpleBooleanProperty)cellObservableValue;
-
-		if(cellBooleanProperty == cellBooleanPropertyBoundToCurrently)
-			return;
-		
-		if(cellBooleanProperty.equals(cellBooleanPropertyBoundToCurrently))
-			return;
-		
-		if(cellBooleanPropertyBoundToCurrently != cellBooleanProperty) 
-			radioButton.selectedProperty().unbindBidirectional(cellBooleanProperty);
-
-		cellBooleanPropertyBoundToCurrently = cellBooleanProperty;
-		radioButton.selectedProperty().bindBidirectional(cellBooleanPropertyBoundToCurrently);
 	}
 
 	private ToggleGroup group;
 	private RadioButton radioButton;
-	private BooleanProperty cellBooleanPropertyBoundToCurrently;
+	private Property cellBooleanPropertyBoundToCurrently;
 }
