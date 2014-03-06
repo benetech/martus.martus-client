@@ -385,7 +385,7 @@ public class MartusApp
 				String publicCode = hqKey.getPublicKey();
 				try
 				{
-					publicCode = hqKey.getPublicCode();
+					publicCode = hqKey.getFormattedPublicCode();
 				}
 				catch (InvalidBase64Exception e)
 				{

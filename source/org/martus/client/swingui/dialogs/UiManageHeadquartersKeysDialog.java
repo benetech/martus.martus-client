@@ -172,7 +172,7 @@ public class UiManageHeadquartersKeysDialog extends UiManageExternalPublicKeysDi
 			HeadquartersKey hqKey = hQKeys.get(i);
 			try 
 			{
-				if(hqKey.getPublicCode().equals(publicCode))
+				if(hqKey.getFormattedPublicCode().equals(publicCode))
 					continue;
 			} 
 			catch (InvalidBase64Exception e) 
