@@ -22,9 +22,13 @@ License along with this program; if not, write to the Free
 Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
-*/
+ */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.ToggleGroup;
@@ -34,18 +38,42 @@ public class RadioButtonTableCell extends TableCell
 	public RadioButtonTableCell(ToggleGroup groupToUse)
 	{
 		group = groupToUse;
+		radioButton = new RadioButton();
 	}
-	
+
 	@Override
 	public void updateItem(Object item, boolean empty) 
 	{
-		if (item != null)
+		super.updateItem(item, empty);
+		if (empty) 
 		{
-			RadioButton choice = new RadioButton();
-			choice.setToggleGroup(group);
-			setGraphic(choice);
+			setText(null);
+			setGraphic(null);
+		}
+		else
+		{
+			radioButton.setToggleGroup(group);
+			radioButton.setSelected((boolean)item);
+			bindToOurBooleanPropertyRadioButton();
+			setGraphic(radioButton);
 		}
 	}
 
+	private void bindToOurBooleanPropertyRadioButton()
+	{
+		ObservableValue<Boolean> cellObservableValue = getTableColumn().getCellObservableValue(getIndex());
+		SimpleBooleanProperty cellStringProperty = (SimpleBooleanProperty)cellObservableValue;
+		if(cellBooleanPropertyBoundToCurrently == cellStringProperty)
+			return;
+
+		if(cellBooleanPropertyBoundToCurrently != cellStringProperty) 
+			radioButton.selectedProperty().unbindBidirectional(cellStringProperty);
+
+		cellBooleanPropertyBoundToCurrently = cellStringProperty;
+		radioButton.selectedProperty().bindBidirectional(cellBooleanPropertyBoundToCurrently);
+	}
+
 	private ToggleGroup group;
+	private RadioButton radioButton;
+	private BooleanProperty cellBooleanPropertyBoundToCurrently;
 }
