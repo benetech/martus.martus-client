@@ -25,25 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.tasks;
 
-import org.martus.client.core.MartusApp;
+import javafx.concurrent.Task;
 
-public class CreateAccountTask extends AbstractAppTask
+abstract public class AbstractAppTask extends Task<Void>
 {
-	public CreateAccountTask(MartusApp appToUse, String userNameToUse, char[] passwordToUse)
-	{
-		app = appToUse;
-		userName = userNameToUse;
-		password = passwordToUse;
-	}
-	
-	@Override
-	protected Void call() throws Exception
-	{
-		app.createAccount(userName, password);
-		return null;
-	}
-	
-	private MartusApp app;
-	private String userName;
-	private char[] password;
+
 }
