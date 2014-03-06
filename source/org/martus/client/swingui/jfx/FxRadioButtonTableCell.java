@@ -23,25 +23,42 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
  */
-package org.martus.client.swingui.jfx.setupwizard;
+package org.martus.client.swingui.jfx;
 
+import javafx.beans.property.Property;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.ToggleGroup;
-import javafx.util.Callback;
 
-public class FxRadioButtonCellFactory implements Callback<TableColumn<ContactsWithTemplatesTableData, Boolean>, TableCell<ContactsWithTemplatesTableData, Boolean>>
+public class FxRadioButtonTableCell extends TableCell
 {
-	public FxRadioButtonCellFactory()
+	public FxRadioButtonTableCell(ToggleGroup groupToUse)
 	{
-		group = new ToggleGroup();
+		group = groupToUse;
+		radioButton = new RadioButton();
 	}
-	
+
 	@Override
-	public TableCell call(final TableColumn param) 
+	public void updateItem(Object item, boolean empty) 
 	{
-		return new FxRadioButtonTableCell(group);
+		super.updateItem(item, empty);
+		if (empty) 
+		{
+			setText(null);
+			setGraphic(null);
+		}
+		else
+		{
+			radioButton.setToggleGroup(group);
+			setGraphic(radioButton);
+
+			Property cellProperty = (Property)getTableColumn().getCellObservableValue(getIndex());
+			Property currentFieldProperty = radioButton.selectedProperty();
+			cellBooleanPropertyBoundToCurrently = FxBindingHelpers.bindToOurPropertyField(cellProperty, currentFieldProperty, cellBooleanPropertyBoundToCurrently);
+		}
 	}
-	
+
 	private ToggleGroup group;
+	private RadioButton radioButton;
+	private Property cellBooleanPropertyBoundToCurrently;
 }

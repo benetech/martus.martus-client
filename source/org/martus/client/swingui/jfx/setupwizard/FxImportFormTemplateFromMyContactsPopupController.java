@@ -48,6 +48,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxRadioButtonCellFactory;
 import org.martus.client.swingui.jfx.setupwizard.tasks.DownloadTemplateListForAccountTask;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
