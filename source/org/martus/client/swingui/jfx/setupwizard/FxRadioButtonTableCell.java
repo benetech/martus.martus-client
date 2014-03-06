@@ -32,9 +32,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.ToggleGroup;
 
-public class RadioButtonTableCell extends TableCell
+public class FxRadioButtonTableCell extends TableCell
 {
-	public RadioButtonTableCell(ToggleGroup groupToUse)
+	public FxRadioButtonTableCell(ToggleGroup groupToUse)
 	{
 		group = groupToUse;
 		radioButton = new RadioButton();
