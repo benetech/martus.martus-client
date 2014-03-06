@@ -1864,6 +1864,11 @@ public class MartusApp
 		output.flush();
 		output.close();
 
+		return importFormTemplate(formTemplateTempFile);
+	}
+
+	private CustomFieldTemplate importFormTemplate(File formTemplateTempFile) throws FutureVersionException, IOException
+	{
 		CustomFieldTemplate template = new CustomFieldTemplate();
 		template.importTemplate(getSecurity(), new FileInputStreamWithSeek(formTemplateTempFile));
 		formTemplateTempFile.delete();
