@@ -54,13 +54,9 @@ public class DownloadTemplateListForAccountTask extends AbstractAppTask
 
 	private ObservableList<CustomFieldTemplate> getFormTemplates(ContactKey contactKeyToUse) throws Exception
 	{
-		return getFormTemplates(contactKeyToUse.getPublicKey());
-	}
-	
-	private ObservableList<CustomFieldTemplate> getFormTemplates(String publicKey) throws Exception
-	{
+		String publicKey = contactKeyToUse.getPublicKey();
 		Vector returnedVectorListOfTemplatesFromServer = getApp().getListOfFormTemplatesOnServer(publicKey);
-
+		
 		return getTitlesFromResults(publicKey, returnedVectorListOfTemplatesFromServer);
 	}
 	
