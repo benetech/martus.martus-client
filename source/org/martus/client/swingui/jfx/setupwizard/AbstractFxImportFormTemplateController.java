@@ -54,13 +54,13 @@ abstract public class AbstractFxImportFormTemplateController extends FxPopupCont
 		return getTitlesFromResults(publicKey, returnedVectorListOfTemplatesFromServer);
 	}
 	
-	private ObservableList<CustomFieldTemplate> getTitlesFromResults(String publicKey, Vector<String[]> returnedVectorListOfTemplatesFromServer) throws Exception
+	private ObservableList<CustomFieldTemplate> getTitlesFromResults(String publicKey, Vector<Vector<String>> returnedVectorListOfTemplatesFromServer) throws Exception
 	{
 		ObservableList<CustomFieldTemplate> formTemplates = FXCollections.observableArrayList();
 		for (int index = 0; index < returnedVectorListOfTemplatesFromServer.size(); ++index)
 		{
-			Object[] titleAndDescrptonVector = returnedVectorListOfTemplatesFromServer.get(index);
-			String title = (String) titleAndDescrptonVector[0];
+			Vector<String> titleAndDescrptonVector = returnedVectorListOfTemplatesFromServer.get(index);
+			String title = titleAndDescrptonVector.get(0);
 			formTemplates.add(getApp().getFormTemplateOnServer(publicKey, title));
 		}
 		
