@@ -25,7 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import java.io.File;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Vector;
@@ -46,6 +47,8 @@ import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.CustomFieldTemplate;
 import org.martus.util.TokenReplacement;
+import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
+import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
 
 public class FxSetupImportTemplatesController extends AbstractFxSetupWizardContentController implements Initializable
 {
@@ -113,14 +116,29 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		Vector<CustomFieldTemplate> formTemplates = new Vector<CustomFieldTemplate>();
 		for (String formTemplateFileName : formTemplateFileNames)
 		{
-			URL url = getClass().getResource(formTemplateFileName);
-			File formTemplateFile = new File(url.toURI());
+			InputStream resourceAsStream = getClass().getResourceAsStream(formTemplateFileName);
+			InputStreamWithSeek withSeek = convertToInputStreamWithSeek(resourceAsStream);
 			CustomFieldTemplate formTemplate = new CustomFieldTemplate();
-			formTemplate.importTemplate(getApp().getSecurity(), formTemplateFile);
+			formTemplate.importTemplate(getApp().getSecurity(), withSeek);
 			formTemplates.add(formTemplate);
 		}
 		
 		return formTemplates;
+	}
+
+	private InputStreamWithSeek convertToInputStreamWithSeek(InputStream resourceAsStream) throws Exception
+	{
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		int readBytes = -1;
+		while ((readBytes = resourceAsStream.read()) != -1)
+		{
+			outputStream.write(readBytes);
+		}
+ 
+		InputStreamWithSeek inputStreamWithSeek = new ByteArrayInputStreamWithSeek(outputStream.toByteArray());
+		outputStream.close();
+		
+		return inputStreamWithSeek;
 	}
 	
 	@FXML
