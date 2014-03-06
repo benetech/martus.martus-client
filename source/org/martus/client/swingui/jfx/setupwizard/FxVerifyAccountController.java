@@ -83,6 +83,22 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardContentContr
 		showBusyDlg(busyTitle, task);
 	}
 	
+	protected void updateStatus()
+	{
+		try
+		{
+			getAccountConfirmLabel().setText("");
+			boolean shouldBeEnabled = isOkToCreateAccount();
+			getWizardNavigationHandler().getNextButton().setDisable(!shouldBeEnabled);
+			if (shouldBeEnabled)
+				getAccountConfirmLabel().setText("User name and password match!");
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+	}
+
 	private boolean isOkToCreateAccount()
 	{
 		String userNameValue = userNameField.getText();
@@ -122,19 +138,9 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardContentContr
 		@Override
 		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 		{
-			try
-			{
-				getAccountConfirmLabel().setText("");
-				boolean shouldBeEnabled = isOkToCreateAccount();
-				getWizardNavigationHandler().getNextButton().setDisable(!shouldBeEnabled);
-				if (shouldBeEnabled)
-					getAccountConfirmLabel().setText("User name and password match!");
-			}
-			catch (Exception e)
-			{
-				MartusLogger.logException(e);
-			}
+			updateStatus();
 		}
+
 	}
 
 	@FXML
