@@ -31,6 +31,7 @@ import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
@@ -240,7 +241,7 @@ public class UiCustomFieldsDlg extends JDialog
 			
 			try
 			{
-				boolean imported = template.importTemplate(security, new FileInputStreamWithSeek(importFile));
+				boolean imported = importFormTemplate(importFile, template);
 				if(imported)
 				{
 					Vector authorizedKeys = getAuthorizedKeys();
@@ -274,6 +275,12 @@ public class UiCustomFieldsDlg extends JDialog
 				mainWindow.unexpectedErrorDlg();
 			}
 			mainWindow.notifyDlg("ErrorImportingCustomizationTemplate");
+		}
+
+		private boolean importFormTemplate(File importFile, CustomFieldTemplate template) throws IOException, FutureVersionException
+		{
+			boolean imported = template.importTemplate(security, new FileInputStreamWithSeek(importFile));
+			return imported;
 		}
 
 		private Object getCreatedBy(String signedBy) throws Exception
