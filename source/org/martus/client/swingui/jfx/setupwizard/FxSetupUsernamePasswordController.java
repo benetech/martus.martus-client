@@ -41,6 +41,7 @@ import javafx.scene.control.Tooltip;
 import org.martus.client.core.MartusUserNameAndPassword;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.common.MartusLogger;
 
 public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardContentController implements Initializable
 {
@@ -70,34 +71,51 @@ public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardCont
 		return errorLabel;
 	}
 
+	public void updateDisplay()
+	{
+		boolean canContinue = false;
+		String errorMessage = "";
+		
+		boolean hasUserName;
+		boolean isPasswordLongEnough;
+		boolean doesAccountExist;
+		try
+		{
+			String candidateUserName = getUserName().getText();
+			hasUserName = candidateUserName.length() > 0;
+			
+			char[] candidatePassword = getPasswordField().getText().toCharArray();
+			isPasswordLongEnough = (candidatePassword.length >= MartusUserNameAndPassword.BASIC_PASSWORD_LENGTH);
+
+			doesAccountExist = getApp().doesAccountExist(candidateUserName, candidatePassword);
+
+			if (!hasUserName)
+				errorMessage = "Must enter a Username.";
+			else if(!isPasswordLongEnough)
+				errorMessage = "Password must be at least 8 characters, 15 recommened.";
+			else if(doesAccountExist)
+				errorMessage = "That account already exists.";
+
+			canContinue = hasUserName && isPasswordLongEnough && !doesAccountExist;
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			errorMessage = "Unexpected error";
+		}
+		
+		getErrorLabel().setText(errorMessage);
+		getWizardNavigationHandler().getNextButton().setDisable(!canContinue);
+	}
+
 	public class LoginChangeHandler implements ChangeListener<String>
 	{
 		@Override
 		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 		{
-			boolean canContinue = false;
-			if(getUserName().getText().length() > 0)
-			{
-				char[] password = getPasswordField().getText().toCharArray();
-				if(password.length >= MartusUserNameAndPassword.BASIC_PASSWORD_LENGTH)
-				{
-					canContinue = true;
-				}
-			}
-
-			updateErrorLabel(canContinue);
-			
-			getWizardNavigationHandler().getNextButton().setDisable(!canContinue);
+			updateDisplay();
 		}
 
-		private void updateErrorLabel(boolean canContinue)
-		{
-			String errorMessage = "";
-			if (!canContinue)
-				errorMessage = "Password must be at least 8 characters, 15 recommened.";
-			
-			getErrorLabel().setText(errorMessage);
-		}
 	}
 	
 	@Override
