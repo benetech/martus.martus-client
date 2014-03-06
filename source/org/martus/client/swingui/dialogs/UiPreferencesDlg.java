@@ -78,13 +78,11 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		ChoiceItem[] delimiterChoices = new ChoiceItem[] {
 			new ChoiceItem("/", localization.getFieldLabel("DateDelimiterSlash")),
 			new ChoiceItem("-", localization.getFieldLabel("DateDelimiterDash")),
-			new ChoiceItem("*", localization.getFieldLabel("DateDelimiterDot")),
+			new ChoiceItem(getCodeForDotDateDelimiter(), localization.getFieldLabel("DateDelimiterDot")),
 		};
 		delimiterDropdown = new UiChoiceEditor(localization);
 		delimiterDropdown.setChoices(delimiterChoices);
-		char dateDelimiter = localization.getDateDelimiter();
-		if(dateDelimiter == '.')
-			dateDelimiter = '*'; //NOTE: JAVA issue using . for setText
+		char dateDelimiter = getDateDelimiter(localization);
 		delimiterDropdown.setText(""+dateDelimiter);
 		
 		ChoiceItem[] calendarChoices = localization.getAvailableCalendarSystems();
@@ -144,7 +142,41 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		Utilities.centerDlg(this);
 		setResizable(true);
 	}
+
+	// NOTE: . is not allowed in UiChoiceEditor 
+	// because it is the delimiter for multi-level dropdowns
+	public char getCharForDotDateDelimiter()
+	{
+		return '*';
+	}
 	
+	// NOTE: . is not allowed in UiChoiceEditor 
+	// because it is the delimiter for multi-level dropdowns
+	public String getCodeForDotDateDelimiter()
+	{
+		return new String(new char[] {getCharForDotDateDelimiter()});
+	}
+
+	// NOTE: . is not allowed in UiChoiceEditor 
+	// because it is the delimiter for multi-level dropdowns
+	public char getDateDelimiter(UiLocalization localization)
+	{
+		char dateDelimiter = localization.getDateDelimiter();
+		if(dateDelimiter == '.')
+			dateDelimiter = getCharForDotDateDelimiter();
+		return dateDelimiter;
+	}
+	
+	// NOTE: . is not allowed in UiChoiceEditor 
+	// because it is the delimiter for multi-level dropdowns
+	public void setDateDelimiter(MartusLocalization localization, String delimiter)
+	{
+		char delimeter = delimiter.charAt(0);
+		if(delimeter == getCharForDotDateDelimiter())
+			delimeter = '.';
+		localization.setDateDelimiter(delimeter);
+	}
+
 	public boolean getResult()
 	{
 		return result;
@@ -214,10 +246,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner.getCurrentActiveFrame(), localization, languageCodeSelected);
 			localization.setMdyOrder(mdyDropdown.getText());
 			String delimiter = delimiterDropdown.getText();
-			char delimeter = delimiter.charAt(0);
-			if(delimeter == '*')
-				delimeter = '.';
-			localization.setDateDelimiter(delimeter);
+			setDateDelimiter(localization, delimiter);
 			localization.setCurrentCalendarSystem(calendarDropdown.getText());
 			localization.setCurrentLanguageCode(languageDropdown.getText());
 			localization.setAdjustThaiLegacyDates(adjustThai.isSelected());
