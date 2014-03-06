@@ -27,7 +27,6 @@ package org.martus.client.swingui.jfx.setupwizard.tasks;
 
 import java.util.Vector;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import org.martus.client.core.MartusApp;
@@ -48,29 +47,26 @@ public class DownloadTemplateListForAccountTask extends AbstractAppTask
 	protected Void call() throws Exception
 	{
 		formTemplates.clear();
-		formTemplates.addAll(getFormTemplates(contactKey));
+		fillFormTemplates(contactKey);
 		return null;
 	}
 
-	private ObservableList<CustomFieldTemplate> getFormTemplates(ContactKey contactKeyToUse) throws Exception
+	private void fillFormTemplates(ContactKey contactKeyToUse) throws Exception
 	{
 		String publicKey = contactKeyToUse.getPublicKey();
 		Vector returnedVectorListOfTemplatesFromServer = getApp().getListOfFormTemplatesOnServer(publicKey);
 		
-		return getTitlesFromResults(publicKey, returnedVectorListOfTemplatesFromServer);
+		fillFormTemplatesFromResults(publicKey, returnedVectorListOfTemplatesFromServer);
 	}
 	
-	private ObservableList<CustomFieldTemplate> getTitlesFromResults(String publicKey, Vector<Vector<String>> returnedVectorListOfTemplatesFromServer) throws Exception
+	private void fillFormTemplatesFromResults(String publicKey, Vector<Vector<String>> returnedVectorListOfTemplatesFromServer) throws Exception
 	{
-		ObservableList<CustomFieldTemplate> formTemplatesToUse = FXCollections.observableArrayList();
 		for (int index = 0; index < returnedVectorListOfTemplatesFromServer.size(); ++index)
 		{
 			Vector<String> titleAndDescrptonVector = returnedVectorListOfTemplatesFromServer.get(index);
 			String title = titleAndDescrptonVector.get(0);
-			formTemplatesToUse.add(getApp().getFormTemplateOnServer(publicKey, title));
+			formTemplates.add(getApp().getFormTemplateOnServer(publicKey, title));
 		}
-		
-		return formTemplatesToUse;
 	}
 
 	private ContactKey contactKey;
