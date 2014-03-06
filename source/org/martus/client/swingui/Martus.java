@@ -168,7 +168,7 @@ public class Martus
 		catch(Exception e)
 		{
 			MartusLogger.logException(e);
-			System.exit(0);
+			System.exit(1);
 		}
 
     }
