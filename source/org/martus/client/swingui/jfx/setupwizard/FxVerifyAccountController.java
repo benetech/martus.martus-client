@@ -56,6 +56,8 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardContentContr
 		getWizardNavigationHandler().getNextButton().setDisable(true);
 		userNameField.textProperty().addListener(new LoginChangeHandler());
 		passwordField.textProperty().addListener(new LoginChangeHandler());
+		
+		updateStatus();
 	}
 
 	@Override
@@ -88,10 +90,24 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardContentContr
 		try
 		{
 			getAccountConfirmLabel().setText("");
-			boolean shouldBeEnabled = isOkToCreateAccount();
-			getWizardNavigationHandler().getNextButton().setDisable(!shouldBeEnabled);
-			if (shouldBeEnabled)
-				getAccountConfirmLabel().setText("User name and password match!");
+			String userNameValue = userNameField.getText();
+			String passwordValue = passwordField.getText();
+			boolean nameMatches = userNameValue.equals(StaticAccountCreationData.getUserName());
+			boolean passwordMatches = passwordValue.equals(StaticAccountCreationData.getPassword());
+
+			boolean canContinue = nameMatches && passwordMatches;
+			getWizardNavigationHandler().getNextButton().setDisable(!canContinue);
+
+			String status = "";
+			if (!nameMatches)
+				status = "Must enter the same username";
+			else if (!passwordMatches)
+				status = "Must enter the same password";
+			else
+				status = "Username and password match!";
+			
+			getAccountConfirmLabel().setText(status);
+
 		}
 		catch (Exception e)
 		{
@@ -99,19 +115,6 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardContentContr
 		}
 	}
 
-	private boolean isOkToCreateAccount()
-	{
-		String userNameValue = userNameField.getText();
-		String passwordValue = passwordField.getText();
-		if (!userNameValue.equals(StaticAccountCreationData.getUserName()))
-			return false;
-		
-		if (!passwordValue.equals(StaticAccountCreationData.getPassword()))
-			return false;
-		
-		return true;
-	}
-	
 	private Label getAccountConfirmLabel()
 	{
 		return accountConfirmLabel;
