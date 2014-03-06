@@ -52,7 +52,7 @@ public class DownloadTemplateListForAccountTask extends AbstractAppTask
 		return null;
 	}
 
-	protected ObservableList<CustomFieldTemplate> getFormTemplates(ContactKey contactKey) throws Exception
+	private ObservableList<CustomFieldTemplate> getFormTemplates(ContactKey contactKey) throws Exception
 	{
 		return getFormTemplates(contactKey.getPublicKey());
 	}
