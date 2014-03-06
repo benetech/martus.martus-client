@@ -280,8 +280,14 @@ public class UiCustomFieldsDlg extends JDialog
 		private boolean importFormTemplate(File importFile, CustomFieldTemplate template) throws IOException, FutureVersionException
 		{
 			FileInputStreamWithSeek inputStream = new FileInputStreamWithSeek(importFile);
-			boolean imported = template.importTemplate(security, inputStream);
-			return imported;
+			try
+			{
+				return template.importTemplate(security, inputStream);
+			}
+			finally
+			{
+				inputStream.close();
+			}
 		}
 
 		private Object getCreatedBy(String signedBy) throws Exception
