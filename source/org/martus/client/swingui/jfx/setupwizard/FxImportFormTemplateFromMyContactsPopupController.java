@@ -28,8 +28,11 @@ package org.martus.client.swingui.jfx.setupwizard;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -45,6 +48,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.setupwizard.tasks.DownloadTemplateListForAccountTask;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.Exceptions.AccountNotFoundException;
@@ -100,27 +104,8 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 			ContactKey contactKey = contactKeys.get(index);
  			ObservableList<CustomFieldTemplate> observableArrayList = FXCollections.observableArrayList();
 			ContactsWithTemplatesTableData rowData = new ContactsWithTemplatesTableData(contactKey, false, new CustomFieldTemplate(), observableArrayList);
+			rowData.getRowSelectedProperty().addListener(new FillComboBoxHandler(rowData));
 			contactsWithTemplatesTableData.add(rowData);
-		}
-	}
-
-	private ObservableList<CustomFieldTemplate> getFormTemplatesForContact(ContactKey contactKey) throws Exception
-	{
-		try
-		{
-			//NOTE: Server should return a different error if contact not found
-			ObservableList<CustomFieldTemplate> formTemplates = getFormTemplates(contactKey);
-			return formTemplates;
-		}
-		catch (ServerNotAvailableException e)
-		{
-			MartusLogger.logError("Contact not found on server");
-			return FXCollections.observableArrayList();
-		}
-		catch (AccountNotFoundException e)
-		{
-			MartusLogger.logError(TokenReplacement.replaceToken("Account not found on server. Account=#account", "#account", contactKey.getPublicCode()));
-			return FXCollections.observableArrayList();
 		}
 	}
 	
@@ -211,7 +196,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
             		return;
 
         		comboBox.getItems().clear();
-        		comboBox.setItems(getFormTemplatesForContact(rowData.getPublicKey()));
+        		comboBox.setItems(rowData.getFormTemplateChoices());
         		setGraphic(comboBox);
         	} 
         	catch (Exception e)
@@ -221,6 +206,52 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
         }
 
         private ComboBox<CustomFieldTemplate> comboBox;
+	}
+	
+	private class FillComboBoxHandler implements ChangeListener<Boolean>
+	{
+		public FillComboBoxHandler(ContactsWithTemplatesTableData rowDataToUse)
+		{
+			rowData = rowDataToUse;
+		}
+
+		@Override
+		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)
+		{
+			if (!newValue)
+				return;
+			
+			try
+			{
+				fillComboBox();
+			}
+			catch (Exception e)
+			{
+				MartusLogger.logException(e);
+			}
+		}
+
+		private void fillComboBox() throws Exception
+		{
+			try
+			{
+				Task task = new DownloadTemplateListForAccountTask(getApp(), rowData.getPublicKey(), rowData.getFormTemplateChoices());
+				String busyTitle = getLocalization().getWindowTitle("LoadingTemplates");
+				showBusyDlg(busyTitle, task);
+			} 
+			catch (ServerNotAvailableException e)
+			{
+				MartusLogger.logException(e);
+				MartusLogger.logError("Contact not found on server");
+			}
+			catch (AccountNotFoundException e)
+			{
+				MartusLogger.logException(e);
+				MartusLogger.logError(TokenReplacement.replaceToken("Account not found on server. Account=#account", "#account", rowData.getPublicKey().getPublicCode()));
+			}
+		}
+		
+		private ContactsWithTemplatesTableData rowData;
 	}
 
 	@FXML
