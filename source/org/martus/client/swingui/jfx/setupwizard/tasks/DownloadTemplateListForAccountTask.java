@@ -66,15 +66,15 @@ public class DownloadTemplateListForAccountTask extends AbstractAppTask
 	
 	private ObservableList<CustomFieldTemplate> getTitlesFromResults(String publicKey, Vector<Vector<String>> returnedVectorListOfTemplatesFromServer) throws Exception
 	{
-		ObservableList<CustomFieldTemplate> formTemplates = FXCollections.observableArrayList();
+		ObservableList<CustomFieldTemplate> formTemplatesToUse = FXCollections.observableArrayList();
 		for (int index = 0; index < returnedVectorListOfTemplatesFromServer.size(); ++index)
 		{
 			Vector<String> titleAndDescrptonVector = returnedVectorListOfTemplatesFromServer.get(index);
 			String title = titleAndDescrptonVector.get(0);
-			formTemplates.add(getApp().getFormTemplateOnServer(publicKey, title));
+			formTemplatesToUse.add(getApp().getFormTemplateOnServer(publicKey, title));
 		}
 		
-		return formTemplates;
+		return formTemplatesToUse;
 	}
 
 	private ContactKey contactKey;
