@@ -73,10 +73,10 @@ import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.PasswordHelper;
 import org.martus.common.BulletinSummary;
 import org.martus.common.BulletinSummary.WrongValueCount;
-import org.martus.common.Exceptions.AccountNotFoundException;
-import org.martus.common.Exceptions.NoFormsAvailableException;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
+import org.martus.common.Exceptions.AccountNotFoundException;
+import org.martus.common.Exceptions.NoFormsAvailableException;
 import org.martus.common.Exceptions.ServerCallFailedException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.FieldCollection;
@@ -88,9 +88,9 @@ import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusAccountAccessToken;
-import org.martus.common.MartusConstants;
 import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
 import org.martus.common.MartusAccountAccessToken.TokenNotFoundException;
+import org.martus.common.MartusConstants;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.BulletinNotFoundException;
@@ -1865,7 +1865,7 @@ public class MartusApp
 		output.close();
 
 		CustomFieldTemplate template = new CustomFieldTemplate();
-		template.importTemplate(getSecurity(), formTemplateTempFile);
+		template.importTemplate(getSecurity(), new FileInputStreamWithSeek(formTemplateTempFile));
 		formTemplateTempFile.delete();
 		return template;
 	}
