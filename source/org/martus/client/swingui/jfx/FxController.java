@@ -105,7 +105,7 @@ abstract public class FxController implements Initializable
 		return getMainWindow().getApp();
 	}
 	
-	public void showNotifyDlg(String baseTag)
+	public void showNotifyDialog(String baseTag)
 	{
 		try
 		{

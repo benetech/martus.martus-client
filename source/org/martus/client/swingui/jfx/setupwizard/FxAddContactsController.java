@@ -123,29 +123,29 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			String contactAccountId = task.getFoundAccountId();
 			if(contactAccountId.equals(app.getAccountId()))
 			{
-				showNotifyDlg("ContactKeyIsOurself");
+				showNotifyDialog("ContactKeyIsOurself");
 				return;
 			}
 			String contactPublicCode = MartusSecurity.computeFormattedPublicCode(contactAccountId);
 			if(DoesContactAlreadyExistInTable(contactPublicCode))
 			{
-				showNotifyDlg("ContactKeyAlreadyExists");
+				showNotifyDialog("ContactKeyAlreadyExists");
 				return;
 			}
 			showAndAddContactsDialog(contactAccountId);
 		} 
 		catch (ServerNotAvailableException e)
 		{
-			showNotifyDlg("ContactsNoServer");
+			showNotifyDialog("ContactsNoServer");
 		} 
 		catch (TokenNotFoundException e)
 		{
-			showNotifyDlg("UnableToRetrieveContactFromServer");
+			showNotifyDialog("UnableToRetrieveContactFromServer");
 		} 
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDlg("UnexpectedError");
+			showNotifyDialog("UnexpectedError");
 		} 
 	}
 
