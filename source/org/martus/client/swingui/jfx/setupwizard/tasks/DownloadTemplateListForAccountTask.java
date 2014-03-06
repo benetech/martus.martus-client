@@ -47,13 +47,13 @@ public class DownloadTemplateListForAccountTask extends AbstractAppTask
 	protected Void call() throws Exception
 	{
 		formTemplates.clear();
-		fillFormTemplates(contactKey);
+		fillFormTemplates();
 		return null;
 	}
 
-	private void fillFormTemplates(ContactKey contactKeyToUse) throws Exception
+	private void fillFormTemplates() throws Exception
 	{
-		String publicKey = contactKeyToUse.getPublicKey();
+		String publicKey = contactKey.getPublicKey();
 		Vector returnedVectorListOfTemplatesFromServer = getApp().getListOfFormTemplatesOnServer(publicKey);
 		
 		fillFormTemplatesFromResults(publicKey, returnedVectorListOfTemplatesFromServer);
