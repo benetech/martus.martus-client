@@ -225,7 +225,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		switchFormsLaterLabel.setVisible(shouldAllowFormTemplate);
 	}
 	
-	private void saveCustomFieldTemplate(CustomFieldTemplate customFieldTemplate)
+	protected void saveCustomFieldTemplate(CustomFieldTemplate customFieldTemplate)
 	{
 		try
 		{
@@ -254,14 +254,14 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		}
 	}
 	
-	@FXML
-	private ComboBox<CustomFieldTemplate> genericTemplatesComboBox;
+	@FXML 
+	protected ComboBox<CustomFieldTemplate> genericTemplatesComboBox;
 	
 	@FXML
 	private ComboBox<ChoiceItem> customTemplatesComboBox;
 	
 	@FXML
-	private RadioButton genericRadioButton;
+	protected RadioButton genericRadioButton;
 	
 	@FXML
 	private RadioButton downloadCustomRadioButton;

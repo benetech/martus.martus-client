@@ -167,6 +167,10 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	
 	private class FormTemplateComboBoxCellFactory implements Callback<TableColumn<ContactsWithTemplatesTableData,CustomFieldTemplate>, TableCell<ContactsWithTemplatesTableData,CustomFieldTemplate>>
 	{
+		public FormTemplateComboBoxCellFactory()
+		{
+		}
+
 		@Override
 		public TableCell<ContactsWithTemplatesTableData, CustomFieldTemplate> call(TableColumn<ContactsWithTemplatesTableData, CustomFieldTemplate> param)
 		{
@@ -272,11 +276,11 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	@FXML
 	private TableColumn<ContactsWithTemplatesTableData, CustomFieldTemplate> formTemplateColumn;
 	
-	@FXML
-	private Label continueMessage;
+	@FXML 
+	protected Label continueMessage;
 	
 	@FXML
-	private Button continueButton;
+	protected Button continueButton;
 	
 	private ObservableList<ContactsWithTemplatesTableData> contactsWithTemplatesTableData;
 }
