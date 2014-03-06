@@ -73,6 +73,7 @@ import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.util.TokenReplacement;
+import org.martus.util.inputstreamwithseek.FileInputStreamWithSeek;
 
 
 public class UiCustomFieldsDlg extends JDialog
@@ -239,7 +240,7 @@ public class UiCustomFieldsDlg extends JDialog
 			
 			try
 			{
-				boolean imported = template.importTemplate(security, importFile);
+				boolean imported = template.importTemplate(security, new FileInputStreamWithSeek(importFile));
 				if(imported)
 				{
 					Vector authorizedKeys = getAuthorizedKeys();
