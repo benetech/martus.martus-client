@@ -266,7 +266,9 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		{
 			try
 			{
-				Task task = new DownloadTemplateListForAccountTask(getApp(), rowData.getContactKey(), rowData.getFormTemplateChoices());
+				ObservableList<CustomFieldTemplate> formTemplateChoices = rowData.getFormTemplateChoices();
+				formTemplateChoices.clear();
+				Task task = new DownloadTemplateListForAccountTask(getApp(), rowData.getContactKey(), formTemplateChoices);
 				MartusLocalization localization = getLocalization();
 				String busyTitle = localization.getWindowTitle("LoadingTemplates");
 				String message = localization.getFieldLabel("LoadingTemplates");
