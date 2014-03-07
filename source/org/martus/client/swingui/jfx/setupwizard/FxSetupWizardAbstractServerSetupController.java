@@ -29,6 +29,7 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.setupwizard.tasks.IsServerAvailableTask;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.MartusLogger;
 
@@ -43,19 +44,30 @@ abstract public class FxSetupWizardAbstractServerSetupController extends Abstrac
 	{
 		MartusLogger.log("Attempting to connect to: " + serverIPAddress);
 		MartusApp app = getApp();
+		getMainWindow().clearStatusMessage();
+		ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, serverPublicKey, getApp().getTransport());
+
 		try
 		{
-			getMainWindow().clearStatusMessage();
-			ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, serverPublicKey, getApp().getTransport());
-			
-			if(!getApp().isSSLServerAvailable(gateway))
+			IsServerAvailableTask task = new IsServerAvailableTask(getApp(), gateway);
+			showTimeoutDialog("*Connecting*", "Attempting to connect to server", task, 15);
+			if(!task.isAvailable())
 			{
 				// FIXME: This should be a confirmation
 				showNotifyDialog("ServerSSLNotResponding");
 				saveServerConfig(serverIPAddress, serverPublicKey, "");
 				return true;
 			}
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDialog("ErrorServerNotAvailable");
+			return false;
+		}
 
+		try
+		{
 			String complianceStatement = getServerCompliance(gateway);
 			if(askComplianceAcceptance)
 			{
@@ -99,7 +111,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends Abstrac
 			MartusLogger.logException(e);
 			showNotifyDialog("ErrorSavingConfig");
 			return false;
-		}
+		} 
 	}
 	
 	private String getServerCompliance(ClientSideNetworkGateway gateway)

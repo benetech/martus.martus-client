@@ -34,6 +34,8 @@ import javafx.scene.control.Hyperlink;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.setupwizard.tasks.IsServerAvailableTask;
+import org.martus.common.MartusLogger;
 
 public class FxSetupStorageServerController extends FxSetupWizardAbstractServerSetupController
 {
@@ -64,10 +66,21 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 		if(destination != null)
 			return destination;
 
-		if(getApp().isSSLServerAvailable())
-			return new FxAddContactsController(getMainWindow());
+		try
+		{
+			IsServerAvailableTask task = new IsServerAvailableTask(getApp());
+			showTimeoutDialog("*Connecting*", "Attempting to connect to server", task, 15);
+			if(task.isAvailable())
+				return new FxAddContactsController(getMainWindow());
 
-		return new FxSetupImportTemplatesController(getMainWindow());
+			return new FxSetupImportTemplatesController(getMainWindow());
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			System.exit(1);
+			return null;
+		}
 	}
 	
 	@FXML
