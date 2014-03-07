@@ -242,17 +242,19 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		@Override
 		public void handle(ActionEvent event)
 		{
+			CustomFieldTemplate formTemplateToSave = null;
 			if (genericRadioButton.isSelected())
 			{
-				CustomFieldTemplate genericCustomFieldTemplate = genericTemplatesComboBox.getSelectionModel().getSelectedItem();
-				saveCustomFieldTemplate(genericCustomFieldTemplate);
+				formTemplateToSave = genericTemplatesComboBox.getSelectionModel().getSelectedItem();
 			}
 			if (downloadCustomRadioButton.isSelected())
 			{
 				AbstractFxImportFormTemplateController controller = customTemplatesComboBox.getSelectionModel().getSelectedItem();
-				CustomFieldTemplate formTemplateFromContact = controller.getSelectedFormTemplate();
-				saveCustomFieldTemplate(formTemplateFromContact);
+				formTemplateToSave = controller.getSelectedFormTemplate();
 			}
+			
+			if (formTemplateToSave != null)
+				saveCustomFieldTemplate(formTemplateToSave);
 		}
 	}
 	
