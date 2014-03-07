@@ -40,16 +40,7 @@ public class FxTimeoutController extends FxBackgroundActivityController
 	public FxTimeoutController(UiMainWindow mainWindowToUse, String titleToUse, String messageToUse, Task taskToUse, int maxSecondsToCompleteTaskToUse)
 	{
 		super(mainWindowToUse, titleToUse, messageToUse, taskToUse);
-		setTimeoutValue(maxSecondsToCompleteTaskToUse);	
-	}
-
-	private void setTimeoutValue(int maxSecondsToCompleteTaskToUse)
-	{
-		currentNumberOfSecondsCompleted = 0;
-		if(maxSecondsToCompleteTaskToUse <= 0)
-			maxSecondsToCompleteTask = DEFAULT_NUMBER_SECONDS_BEFORE_TIMEOUT;
-		else
-			maxSecondsToCompleteTask = maxSecondsToCompleteTaskToUse;
+		maxSecondsToCompleteTask = maxSecondsToCompleteTaskToUse;
 	}
 
 	@Override
@@ -91,5 +82,4 @@ public class FxTimeoutController extends FxBackgroundActivityController
 	protected TimeoutTimerTask backgroundTick;
 
 	final int BACKGROUND_TIMEOUT_CHECK_EVERY_SECOND = 1000;
-	final int DEFAULT_NUMBER_SECONDS_BEFORE_TIMEOUT = 15;
 }
