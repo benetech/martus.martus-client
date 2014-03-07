@@ -94,8 +94,8 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		try
 		{
 			Vector<AbstractFxImportFormTemplateController> choices = new Vector<AbstractFxImportFormTemplateController>();
-			choices.add(new FxSetupFormTemplateFromNewContactPopupController(getMainWindow()));
 			choices.add(new FxImportFormTemplateFromMyContactsPopupController(getMainWindow()));
+			choices.add(new FxSetupFormTemplateFromNewContactPopupController(getMainWindow()));
 
 			return FXCollections.observableArrayList(choices);
 		}
