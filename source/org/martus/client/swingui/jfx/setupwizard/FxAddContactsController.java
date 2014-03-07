@@ -122,8 +122,10 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			MartusLocalization localization = getLocalization();
 			String title = localization.getWindowTitle("FindAccountByToken");
 			String message = localization.getFieldLabel("FindAccountByToken");
-			showBusyDialog(title, message, task);
+			showTimeoutDialog(title, message, task, 15);
 			String contactAccountId = task.getFoundAccountId();
+			if(contactAccountId == null)
+				return; 
 			if(contactAccountId.equals(app.getAccountId()))
 			{
 				showNotifyDialog("ContactKeyIsOurself");
