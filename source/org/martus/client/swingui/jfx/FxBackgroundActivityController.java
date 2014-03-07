@@ -37,6 +37,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -50,8 +52,6 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 		message = messageToUse;
 		task = taskToUse;
 	}
-
-
   	
 	@Override
 	public void initialize(URL location, ResourceBundle bundle)
@@ -59,8 +59,9 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 		super.initialize(location, bundle);
 		fxLabel.setText(message);
 		task.stateProperty().addListener(new TaskStateChangeHandler());	
-		getStage().setOnCloseRequest(new CloseEventHandler());
-
+		Stage stage = getStage();
+		stage.setOnCloseRequest(new CloseEventHandler());
+		stage.initStyle(StageStyle.UNDECORATED);
 
 		Thread thread = new Thread(task);
 		thread.setDaemon(false);
@@ -76,11 +77,11 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 		public void handle(final WindowEvent event) 
 		{
 			event.consume();
-			exiting();
+			forceCloseDialog();
 		}
 	}
 	
-	public void exiting()
+	public void forceCloseDialog()
 	{
 		task.cancel();
 		task = null;
@@ -111,13 +112,13 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 		{
 			if(newState.equals(State.SUCCEEDED))
 			{
-				exiting();
+				forceCloseDialog();
 			}
 			else if(newState.equals(State.FAILED))
 			{
 				if(task != null)
 					setThrownException(task.getException());
-				exiting();
+				forceCloseDialog();
 			}
 		}
 	}
