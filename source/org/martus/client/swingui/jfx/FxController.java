@@ -40,7 +40,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
@@ -142,7 +141,7 @@ abstract public class FxController implements Initializable
 
 	public void showTimeoutDialog(String title, String message, Task task, int maxSecondsToCompleteTask) throws Exception
 	{
-		FxPopupController popupController = new FxBusyController(getMainWindow(), title, message, task);
+		FxPopupController popupController = new FxTimeoutController(getMainWindow(), title, message, task, maxSecondsToCompleteTask);
 		showControllerInsideModalDialog(popupController);
 	}
 
