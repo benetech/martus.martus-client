@@ -28,6 +28,10 @@ package org.martus.client.swingui.jfx;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
+import javafx.concurrent.Worker.State;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -37,11 +41,12 @@ import org.martus.client.swingui.UiMainWindow;
 
 abstract public class FxBackgroundActivityController extends FxPopupController
 {
-	public FxBackgroundActivityController(UiMainWindow mainWindowToUse, String titleToUse, String messageToUse)
+	public FxBackgroundActivityController(UiMainWindow mainWindowToUse, String titleToUse, String messageToUse, Task taskToUse)
 	{
 		super(mainWindowToUse);
 		title = titleToUse;
 		message = messageToUse;
+		task = taskToUse;
 	}
 
 	@Override
@@ -49,6 +54,11 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 	{
 		super.initialize(location, bundle);
 		fxLabel.setText(message);
+		task.stateProperty().addListener(new TaskStateChangeHandler());
+
+		Thread thread = new Thread(task);
+		thread.setDaemon(false);
+		thread.start();
 	}	
 
 	@Override
@@ -57,15 +67,36 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 		return title;
 	}
 
+	@Override
+	public String getFxmlLocation()
+	{
+		return "FxBusy.fxml";
+	}
+
 	public void updateProgressBar(double currentProgress)
 	{
 		fxProgressBar.setProgress(currentProgress);
 	}	
 
+	protected class TaskStateChangeHandler implements ChangeListener<Task.State>
+	{
+		@Override
+		public void changed(ObservableValue<? extends State> observable, State oldState, State newState)
+		{
+			if(newState.equals(State.SUCCEEDED))
+			{
+				getStage().close();
+			}
+			else if(newState.equals(State.FAILED))
+			{
+				setThrownException(task.getException());
+				getStage().close();
+			}
+		}
+	}
+
 	@FXML
 	abstract public void cancelPressed();
-	
-	abstract public String getFxmlLocation();
 	
 	@FXML
 	protected Label fxLabel;	
@@ -74,6 +105,7 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 	@FXML
 	protected Button cancelButton;
 	
+	protected Task task;
 	private String title;
 	private String message;
 }
