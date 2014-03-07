@@ -47,6 +47,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
 
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxRadioButtonCellFactory;
 import org.martus.client.swingui.jfx.setupwizard.tasks.DownloadTemplateListForAccountTask;
@@ -243,8 +244,10 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 			try
 			{
 				Task task = new DownloadTemplateListForAccountTask(getApp(), rowData.getContactKey(), rowData.getFormTemplateChoices());
-				String busyTitle = getLocalization().getWindowTitle("LoadingTemplates");
-				showBusyDialog(busyTitle, task);
+				MartusLocalization localization = getLocalization();
+				String busyTitle = localization.getWindowTitle("LoadingTemplates");
+				String message = localization.getFieldLabel("LoadingTemplates");
+				showBusyDialog(busyTitle, message, task);
 			} 
 			catch (ServerNotAvailableException e)
 			{

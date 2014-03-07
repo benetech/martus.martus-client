@@ -119,7 +119,10 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			MartusAccountAccessToken token = new MartusAccountAccessToken(accessTokenField.getText());
 			MartusApp app = getApp();
 			LookupAccountFromTokenTask task = new LookupAccountFromTokenTask(app, token);
-			showBusyDialog("Finding Account", task);
+			MartusLocalization localization = getLocalization();
+			String title = localization.getWindowTitle("FindAccountByToken");
+			String message = localization.getFieldLabel("FindAccountByToken");
+			showBusyDialog(title, message, task);
 			String contactAccountId = task.getFoundAccountId();
 			if(contactAccountId.equals(app.getAccountId()))
 			{
