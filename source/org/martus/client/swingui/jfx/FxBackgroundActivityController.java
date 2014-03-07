@@ -25,12 +25,55 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+
 import org.martus.client.swingui.UiMainWindow;
 
 abstract public class FxBackgroundActivityController extends FxPopupController
 {
-	public FxBackgroundActivityController(UiMainWindow mainWindowToUse)
+	public FxBackgroundActivityController(UiMainWindow mainWindowToUse, String titleToUse, String messageToUse)
 	{
 		super(mainWindowToUse);
+		title = titleToUse;
+		message = messageToUse;
 	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle bundle)
+	{
+		super.initialize(location, bundle);
+		fxLabel.setText(message);
+	}	
+
+	@Override
+	public String getDialogTitle()
+	{
+		return title;
+	}
+
+	public void updateProgressBar(double currentProgress)
+	{
+		fxProgressBar.setProgress(currentProgress);
+	}	
+
+	@FXML
+	abstract public void cancelPressed();
+	
+	abstract public String getFxmlLocation();
+	
+	@FXML
+	protected Label fxLabel;	
+	@FXML
+	protected ProgressBar fxProgressBar;
+	@FXML
+	protected Button cancelButton;
+	
+	private String title;
+	private String message;
 }

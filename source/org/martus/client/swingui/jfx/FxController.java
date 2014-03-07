@@ -139,6 +139,12 @@ abstract public class FxController implements Initializable
 		showControllerInsideModalDialog(popupController);
 	}
 
+	public void showTimeoutDialog(String title, String message, Task task, int maxSecondsToCompleteTask) throws Exception
+	{
+		FxPopupController popupController = new FxBusyController(getMainWindow(), title, message, task);
+		showControllerInsideModalDialog(popupController);
+	}
+
 	public static class PopupNotifyController extends FxPopupController implements Initializable
 	{
 		public PopupNotifyController(UiMainWindow mainWindowToUse, String notificationTag)

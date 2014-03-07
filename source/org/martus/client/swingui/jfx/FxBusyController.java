@@ -32,10 +32,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.concurrent.Worker.State;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 
 import org.martus.client.swingui.UiMainWindow;
 
@@ -43,23 +39,18 @@ public class FxBusyController extends FxBackgroundActivityController
 {
 	public FxBusyController(UiMainWindow mainWindowToUse, String titleToUse, String messageToUse, Task taskToUse)
 	{
-		super(mainWindowToUse);
-		title = titleToUse;
-		message = messageToUse;
+		super(mainWindowToUse, titleToUse, messageToUse);
 		task = taskToUse;
 	}
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		
 		cancelButton.setVisible(false);
-		fxLabel.setText(message);
+		updateProgressBar(INDETERMINATE);
 		task.stateProperty().addListener(new TaskStateChangeHandler());
-		fxProgressBar.setProgress(-1.0);
-		
-		
+
 		Thread thread = new Thread(task);
 		thread.setDaemon(false);
 		thread.start();
@@ -83,9 +74,8 @@ public class FxBusyController extends FxBackgroundActivityController
 	}
 	
 	@Override
-	public String getDialogTitle()
+	public void cancelPressed()
 	{
-		return title;
 	}
 
 	@Override
@@ -94,21 +84,6 @@ public class FxBusyController extends FxBackgroundActivityController
 		return "FxBusy.fxml";
 	}
 	
-	@FXML
-	public void cancelPressed()
-	{
-	}
-
-	@FXML
-	private Label fxLabel;
-	
-	@FXML
-	private ProgressBar fxProgressBar;
-	
-	@FXML
-	private Button cancelButton;
-	
-	private String title;
-	private String message;
+	private static final double INDETERMINATE = -1.0;
 	protected Task task;
 }
