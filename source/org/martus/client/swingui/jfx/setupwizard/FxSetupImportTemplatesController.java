@@ -41,11 +41,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.util.StringConverter;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.MartusLogger;
-import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.CustomFieldTemplate;
 import org.martus.common.fieldspec.CustomFieldTemplate.FutureVersionException;
 import org.martus.util.TokenReplacement;
@@ -78,6 +78,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		genericTemplatesComboBox.setItems(FXCollections.observableArrayList(getDefaultFormTemplateChoices()));
 
 		customTemplatesComboBox.setItems(FXCollections.observableArrayList(getImportTemplateChoices()));
+		customTemplatesComboBox.setConverter(new ControllerToStringConverter());
 		
 		genericTemplatesComboBox.setVisible(false);
 		customTemplatesComboBox.setVisible(false);
@@ -88,13 +89,21 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		getWizardNavigationHandler().getNextButton().addEventHandler(ActionEvent.ACTION, new NextButtonHandler());
 	} 
 	
-	private ObservableList<ChoiceItem> getImportTemplateChoices()
+	private ObservableList<AbstractFxImportFormTemplateController> getImportTemplateChoices()
 	{
-		Vector<ChoiceItem> choices = new Vector<ChoiceItem>();
-		choices.add(new ChoiceItem(IMPORT_FROM_CONTACTS_CODE, "Import from My Contacts"));
-		choices.add(new ChoiceItem(IMPORT_FROM_NEW_CONTACT_CODE, "Import from New Contact"));
-		
-		return FXCollections.observableArrayList(choices);
+		try
+		{
+			Vector<AbstractFxImportFormTemplateController> choices = new Vector<AbstractFxImportFormTemplateController>();
+			choices.add(new FxSetupFormTemplateFromNewContactPopupController(getMainWindow()));
+			choices.add(new FxImportFormTemplateFromMyContactsPopupController(getMainWindow()));
+
+			return FXCollections.observableArrayList(choices);
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			return FXCollections.observableArrayList();
+		}
 	}
 
 	private ObservableList<CustomFieldTemplate> getDefaultFormTemplateChoices()
@@ -174,12 +183,8 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	@FXML
 	private void customDropDownSelectionChanged() throws Exception
 	{
-		String selectedCode = customTemplatesComboBox.getSelectionModel().getSelectedItem().getCode();
-		if (selectedCode.equals(IMPORT_FROM_CONTACTS_CODE))
-			importFromContacts();
-		
-		if (selectedCode.equals(IMPORT_FROM_NEW_CONTACT_CODE))
-			importFromNewContact();
+		AbstractFxImportFormTemplateController selectedController = customTemplatesComboBox.getSelectionModel().getSelectedItem();
+		importFromContacts(selectedController);
 	}
 	
 	@FXML
@@ -194,17 +199,8 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 			customTemplatesComboBox.setVisible(true);
 	}
 	
-	private void importFromNewContact() throws Exception
+	private void importFromContacts(AbstractFxImportFormTemplateController controller) throws Exception
 	{
-		FxSetupFormTemplateFromNewContactPopupController controller = new FxSetupFormTemplateFromNewContactPopupController(getMainWindow());
-		showControllerInsideModalDialog(controller);
-		CustomFieldTemplate selectedTemplate = controller.getSelectedCustomFieldTemplate();
-		updateSelectedCustomFieldTemplateComponents(selectedTemplate);
-	}
-
-	private void importFromContacts() throws Exception
-	{
-		FxImportFormTemplateFromMyContactsPopupController controller = new FxImportFormTemplateFromMyContactsPopupController(getMainWindow());
 		showControllerInsideModalDialog(controller);
 		CustomFieldTemplate selectedTemplate = controller.getSelectedFormTemplate();
 		updateSelectedCustomFieldTemplateComponents(selectedTemplate);
@@ -246,11 +242,34 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		@Override
 		public void handle(ActionEvent event)
 		{
+			CustomFieldTemplate formTemplateToSave = null;
 			if (genericRadioButton.isSelected())
 			{
-				CustomFieldTemplate genericCustomFieldTemplate = genericTemplatesComboBox.getSelectionModel().getSelectedItem();
-				saveCustomFieldTemplate(genericCustomFieldTemplate);
+				formTemplateToSave = genericTemplatesComboBox.getSelectionModel().getSelectedItem();
 			}
+			if (downloadCustomRadioButton.isSelected())
+			{
+				AbstractFxImportFormTemplateController controller = customTemplatesComboBox.getSelectionModel().getSelectedItem();
+				formTemplateToSave = controller.getSelectedFormTemplate();
+			}
+			
+			if (formTemplateToSave != null)
+				saveCustomFieldTemplate(formTemplateToSave);
+		}
+	}
+	
+	private class ControllerToStringConverter extends StringConverter<AbstractFxImportFormTemplateController>
+	{
+		@Override
+		public String toString(AbstractFxImportFormTemplateController object)
+		{
+			return object.getLabel();
+		}
+
+		@Override
+		public AbstractFxImportFormTemplateController fromString(String string)
+		{
+			return null;
 		}
 	}
 	
@@ -258,7 +277,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	protected ComboBox<CustomFieldTemplate> genericTemplatesComboBox;
 	
 	@FXML
-	private ComboBox<ChoiceItem> customTemplatesComboBox;
+	private ComboBox<AbstractFxImportFormTemplateController> customTemplatesComboBox;
 	
 	@FXML
 	protected RadioButton genericRadioButton;
@@ -271,7 +290,4 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	
 	@FXML
 	private Label selectedTemplateLabel;
-	
-	private static final String IMPORT_FROM_CONTACTS_CODE = "importFromContacts";
-	private static final String IMPORT_FROM_NEW_CONTACT_CODE = "importFromNewContact";
 }
