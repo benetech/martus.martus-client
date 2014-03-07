@@ -108,7 +108,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 			ContactKey contactKey = contactKeys.get(index);
  			ObservableList<CustomFieldTemplate> observableArrayList = FXCollections.observableArrayList();
 			ContactsWithTemplatesTableData rowData = new ContactsWithTemplatesTableData(contactKey, false, new CustomFieldTemplate(), observableArrayList);
-			rowData.getIsContactChosenProperty().addListener(new FillComboBoxHandler(rowData));
+			rowData.isContactChosenProperty().addListener(new FillComboBoxHandler(rowData));
 			contactsWithTemplatesTableData.add(rowData);
 		}
 	}
@@ -210,7 +210,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
             	if (rowData == null)
             		return;
 
-            	comboBox.visibleProperty().bindBidirectional(rowData.getIsContactChosenProperty());
+            	comboBox.visibleProperty().bindBidirectional(rowData.isContactChosenProperty());
         		comboBox.getItems().clear();
         		comboBox.setItems(rowData.getFormTemplateChoices());
         		setGraphic(comboBox);

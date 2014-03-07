@@ -70,11 +70,6 @@ public class ContactsWithTemplatesTableData
 		return isContactChosen.get();
 	}
 	
-	public SimpleBooleanProperty getIsContactChosenProperty()
-	{
-		return isContactChosen;
-	}
-	
 	public void setIsContactChosen(boolean isContactChosenToUse)
 	{
 		isContactChosen.set(isContactChosenToUse);
