@@ -28,10 +28,8 @@ package org.martus.client.swingui.jfx;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
-import javafx.concurrent.Worker.State;
+import javafx.stage.StageStyle;
 
 import org.martus.client.swingui.UiMainWindow;
 
@@ -39,8 +37,7 @@ public class FxBusyController extends FxBackgroundActivityController
 {
 	public FxBusyController(UiMainWindow mainWindowToUse, String titleToUse, String messageToUse, Task taskToUse)
 	{
-		super(mainWindowToUse, titleToUse, messageToUse);
-		task = taskToUse;
+		super(mainWindowToUse, titleToUse, messageToUse, taskToUse);
 	}
 
 	@Override
@@ -49,41 +46,14 @@ public class FxBusyController extends FxBackgroundActivityController
 		super.initialize(location, bundle);
 		cancelButton.setVisible(false);
 		updateProgressBar(INDETERMINATE);
-		task.stateProperty().addListener(new TaskStateChangeHandler());
-
-		Thread thread = new Thread(task);
-		thread.setDaemon(false);
-		thread.start();
+		getStage().initStyle(StageStyle.UNDECORATED);
 	}
 	
-	protected class TaskStateChangeHandler implements ChangeListener<Task.State>
-	{
-		@Override
-		public void changed(ObservableValue<? extends State> observable, State oldState, State newState)
-		{
-			if(newState.equals(State.SUCCEEDED))
-			{
-				getStage().close();
-			}
-			else if(newState.equals(State.FAILED))
-			{
-				setThrownException(task.getException());
-				getStage().close();
-			}
-		}
-	}
 	
 	@Override
 	public void cancelPressed()
 	{
 	}
-
-	@Override
-	public String getFxmlLocation()
-	{
-		return "FxBusy.fxml";
-	}
 	
 	private static final double INDETERMINATE = -1.0;
-	protected Task task;
 }
