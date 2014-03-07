@@ -42,7 +42,7 @@ public class FxBindingHelpers
 		
 		cellPropertyBoundToCurrently = cellProperty;
 		currentFieldProperty.bindBidirectional(cellPropertyBoundToCurrently);
+
 		return cellPropertyBoundToCurrently;
 	}
-
 }

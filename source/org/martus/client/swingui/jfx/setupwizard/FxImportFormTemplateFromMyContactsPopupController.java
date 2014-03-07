@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.setupwizard;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -49,6 +50,7 @@ import javafx.util.Callback;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxBindingHelpers;
 import org.martus.client.swingui.jfx.FxRadioButtonCellFactory;
 import org.martus.client.swingui.jfx.setupwizard.tasks.DownloadTemplateListForAccountTask;
 import org.martus.common.ContactKey;
@@ -205,15 +207,27 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 
         	try
         	{
-            	setGraphic(null);
-            	ContactsWithTemplatesTableData rowData = (ContactsWithTemplatesTableData) getTableRow().getItem();
-            	if (rowData == null)
-            		return;
+        		if (empty) 
+        		{
+        			setText(null);
+        			setGraphic(null);
+        		}
+        		else
+        		{
+        			ContactsWithTemplatesTableData rowData = (ContactsWithTemplatesTableData) getTableRow().getItem();
+        			if (rowData == null)
+        				return;
 
-            	comboBox.visibleProperty().bindBidirectional(rowData.isContactChosenProperty());
-        		comboBox.getItems().clear();
-        		comboBox.setItems(rowData.getFormTemplateChoices());
-        		setGraphic(comboBox);
+        			comboBox.visibleProperty().bindBidirectional(rowData.isContactChosenProperty());
+        			comboBox.getItems().clear();
+        			comboBox.setItems(rowData.getFormTemplateChoices());
+        			setGraphic(comboBox);
+        			
+        			comboBox.valueProperty().bindBidirectional(rowData.selectedFormTemplateProperty());
+        			Property cellProperty = (Property)getTableColumn().getCellObservableValue(getIndex());
+        			Property currentFieldProperty = comboBox.valueProperty();
+        			cellBooleanPropertyBoundToCurrently = FxBindingHelpers.bindToOurPropertyField(cellProperty, currentFieldProperty, cellBooleanPropertyBoundToCurrently);
+        		}
         	} 
         	catch (Exception e)
         	{
@@ -222,6 +236,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
         }
 
         private ComboBox<CustomFieldTemplate> comboBox;
+        private Property cellBooleanPropertyBoundToCurrently;
 	}
 	
 	private class FillComboBoxHandler implements ChangeListener<Boolean>

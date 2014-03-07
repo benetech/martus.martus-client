@@ -106,6 +106,11 @@ public class ContactsWithTemplatesTableData
     	return isContactChosen;
     }
 	
+	public SimpleObjectProperty<CustomFieldTemplate> selectedFormTemplateProperty()
+	{
+		return selectedFormTemplate;
+	}
+	
 	private final SimpleStringProperty contactName;
 	private final SimpleStringProperty publicCode;
 	private final SimpleBooleanProperty isContactChosen;
