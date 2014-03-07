@@ -29,6 +29,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.concurrent.Task;
+import javafx.stage.StageStyle;
 
 import org.martus.client.swingui.UiMainWindow;
 
@@ -45,6 +46,7 @@ public class FxBusyController extends FxBackgroundActivityController
 		super.initialize(location, bundle);
 		cancelButton.setVisible(false);
 		updateProgressBar(INDETERMINATE);
+		getStage().initStyle(StageStyle.UNDECORATED);
 	}
 	
 	
