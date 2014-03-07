@@ -77,7 +77,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 			contactsWithTemplatesTableView.setEditable(true);
 			fillTableWithContacts();
 		
-			contactSelectedColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, Boolean>("rowSelected"));
+			contactSelectedColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, Boolean>("isContactChosen"));
 			contactSelectedColumn.setCellFactory(new FxRadioButtonCellFactory());
 			
 			contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("contactName"));
@@ -108,7 +108,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 			ContactKey contactKey = contactKeys.get(index);
  			ObservableList<CustomFieldTemplate> observableArrayList = FXCollections.observableArrayList();
 			ContactsWithTemplatesTableData rowData = new ContactsWithTemplatesTableData(contactKey, false, new CustomFieldTemplate(), observableArrayList);
-			rowData.getRowSelectedProperty().addListener(new FillComboBoxHandler(rowData));
+			rowData.getIsContactChosenProperty().addListener(new FillComboBoxHandler(rowData));
 			contactsWithTemplatesTableData.add(rowData);
 		}
 	}
@@ -142,7 +142,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		ObservableList<ContactsWithTemplatesTableData> tableData = contactsWithTemplatesTableView.getItems();
 		for (ContactsWithTemplatesTableData rowData : tableData)
 		{
-			if (rowData.getRowSelected())
+			if (rowData.getIsContactChosen())
 				return rowData.getSelectedFormTemplate();
 		}
 		
@@ -210,7 +210,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
             	if (rowData == null)
             		return;
 
-            	comboBox.visibleProperty().bindBidirectional(rowData.getRowSelectedProperty());
+            	comboBox.visibleProperty().bindBidirectional(rowData.getIsContactChosenProperty());
         		comboBox.getItems().clear();
         		comboBox.setItems(rowData.getFormTemplateChoices());
         		setGraphic(comboBox);

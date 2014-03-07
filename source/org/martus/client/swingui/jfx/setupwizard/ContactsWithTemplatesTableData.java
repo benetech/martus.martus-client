@@ -39,7 +39,7 @@ public class ContactsWithTemplatesTableData
 	{
 		contactName = new SimpleStringProperty(contactKeyToUse.getLabel());
 		publicCode = new SimpleStringProperty(contactKeyToUse.getFormattedPublicCode());
-		rowSelected = new SimpleBooleanProperty(rowSelectedToUse);
+		isContactChosen = new SimpleBooleanProperty(rowSelectedToUse);
 		selectedFormTemplate = new SimpleObjectProperty(selectedFormTemplateToUse);
 		formTemplatesToChooseFrom = customFieldTemplatesToChooseFromToUse;
 		contactKey = contactKeyToUse;
@@ -65,19 +65,19 @@ public class ContactsWithTemplatesTableData
 		this.publicCode.set(publicCodeToUse);
 	}
 	
-	public boolean getRowSelected()
+	public boolean getIsContactChosen()
 	{
-		return rowSelected.get();
+		return isContactChosen.get();
 	}
 	
-	public SimpleBooleanProperty getRowSelectedProperty()
+	public SimpleBooleanProperty getIsContactChosenProperty()
 	{
-		return rowSelected;
+		return isContactChosen;
 	}
 	
-	public void setRowSelected(boolean rowSelectedToUse)
+	public void setIsContactChosen(boolean isContactChosenToUse)
 	{
-		rowSelected.set(rowSelectedToUse);
+		isContactChosen.set(isContactChosenToUse);
 	}
 	
 	public CustomFieldTemplate getSelectedFormTemplate()
@@ -106,14 +106,14 @@ public class ContactsWithTemplatesTableData
 		return contactKey;
 	}
 	
-	public SimpleBooleanProperty rowSelectedProperty()
+	public SimpleBooleanProperty isContactChosenProperty()
     {
-    	return rowSelected;
+    	return isContactChosen;
     }
 	
 	private final SimpleStringProperty contactName;
 	private final SimpleStringProperty publicCode;
-	private final SimpleBooleanProperty rowSelected;
+	private final SimpleBooleanProperty isContactChosen;
 	private final SimpleObjectProperty<CustomFieldTemplate> selectedFormTemplate;
 	private ObservableList<CustomFieldTemplate> formTemplatesToChooseFrom;
 	private ContactKey contactKey;
