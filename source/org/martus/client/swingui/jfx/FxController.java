@@ -40,6 +40,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
@@ -256,7 +257,7 @@ abstract public class FxController implements Initializable
 		controller.setStage(popupStage);
 		popupStage.setTitle(controller.getDialogTitle());
 		popupStage.initModality(Modality.WINDOW_MODAL);
-
+		popupStage.initStyle(StageStyle.UNDECORATED);
 		FXMLLoader fl = new FXMLLoader();
 		fl.setController(controller);
 		fl.setLocation(FxInSwingDialogStage.class.getResource(controller.getFxmlLocation()));
