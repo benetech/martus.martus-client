@@ -81,9 +81,11 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 			
 			contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("contactName"));
 			contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsWithTemplatesTableData>forTableColumn());
+			contactNameColumn.setEditable(false);
 			
 			publicCodeColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("publicCode"));
 			publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsWithTemplatesTableData>forTableColumn());
+			publicCodeColumn.setEditable(false);
 			
 			formTemplateColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, CustomFieldTemplate>("selectedFormTemplate"));
 			formTemplateColumn.setCellFactory(new FormTemplateComboBoxCellFactory());
