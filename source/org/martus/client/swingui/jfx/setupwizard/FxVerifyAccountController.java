@@ -38,6 +38,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.CreateAccountTask;
@@ -81,8 +82,10 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardContentContr
 		StaticAccountCreationData.dispose();
 		
 		Task task = new CreateAccountTask(getApp(), userNameValue, passwordValue);
-		String busyTitle = getLocalization().getWindowTitle("CreatingAccount");
-		showBusyDialog(busyTitle, task);
+		MartusLocalization localization = getLocalization();
+		String busyTitle = localization.getWindowTitle("CreatingAccount");
+		String message = localization.getFieldLabel("CreatingAccount");
+		showBusyDialog(busyTitle, message, task);
 	}
 	
 	protected void updateStatus()

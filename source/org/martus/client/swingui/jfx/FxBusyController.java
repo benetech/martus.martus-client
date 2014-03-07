@@ -34,15 +34,18 @@ import javafx.concurrent.Task;
 import javafx.concurrent.Worker.State;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 
 import org.martus.client.swingui.UiMainWindow;
 
 public class FxBusyController extends FxBackgroundActivityController
 {
-	public FxBusyController(UiMainWindow mainWindowToUse, String titleToUse, Task taskToUse)
+	public FxBusyController(UiMainWindow mainWindowToUse, String titleToUse, String messageToUse, Task taskToUse)
 	{
 		super(mainWindowToUse);
 		title = titleToUse;
+		message = messageToUse;
 		task = taskToUse;
 	}
 	
@@ -52,7 +55,11 @@ public class FxBusyController extends FxBackgroundActivityController
 		super.initialize(location, bundle);
 		
 		cancelButton.setVisible(false);
+		fxLabel.setText(message);
 		task.stateProperty().addListener(new TaskStateChangeHandler());
+		fxProgressBar.setProgress(-1.0);
+		
+		
 		Thread thread = new Thread(task);
 		thread.setDaemon(false);
 		thread.start();
@@ -93,8 +100,15 @@ public class FxBusyController extends FxBackgroundActivityController
 	}
 
 	@FXML
+	private Label fxLabel;
+	
+	@FXML
+	private ProgressBar fxProgressBar;
+	
+	@FXML
 	private Button cancelButton;
 	
 	private String title;
+	private String message;
 	protected Task task;
 }

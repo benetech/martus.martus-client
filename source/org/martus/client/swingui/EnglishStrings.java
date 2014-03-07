@@ -357,6 +357,13 @@ public class EnglishStrings
 "wintitle:ReportSearchProgress=Searching...",
 "wintitle:LoadingFieldValuesFromAllBulletins=Loading Values...",
 
+"wintitle:CreatingAccount=Creating Account",
+"field:Please wait while we create your account.",
+"wintitle:LoadingTemplates=Loading Templates",
+"field:LoadingTemplates=Please wait while we retrieve a list of templates from the server.",
+"wintitle:FindAccountByToken=Finding Account",
+"field:FindAccountByToken=Please wait while we find this account on the server.",
+
 "button:help=Help",
 "button:create=Create",
 "button:search=Search",
