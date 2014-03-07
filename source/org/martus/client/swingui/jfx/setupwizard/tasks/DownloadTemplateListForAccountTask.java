@@ -61,7 +61,6 @@ public class DownloadTemplateListForAccountTask extends AbstractAppTask
 	
 	private void fillFormTemplatesFromResults(String publicKey, Vector<Vector<String>> returnedVectorListOfTemplatesFromServer) throws Exception
 	{
-		formTemplates.clear();
 		for (Vector<String> titleAndDescrptonVector : returnedVectorListOfTemplatesFromServer)
 		{
 			String title = titleAndDescrptonVector.get(0);
