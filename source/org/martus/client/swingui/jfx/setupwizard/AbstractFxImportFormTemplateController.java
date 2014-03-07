@@ -66,4 +66,8 @@ abstract public class AbstractFxImportFormTemplateController extends FxPopupCont
 		
 		return formTemplates;
 	}
+	
+	abstract public String getLabel();
+	
+	abstract public CustomFieldTemplate getSelectedFormTemplate();
 }
