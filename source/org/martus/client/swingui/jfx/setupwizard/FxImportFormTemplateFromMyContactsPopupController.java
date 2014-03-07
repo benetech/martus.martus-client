@@ -77,14 +77,16 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 			contactsWithTemplatesTableView.setEditable(true);
 			fillTableWithContacts();
 		
-			contactSelectedColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, Boolean>("rowSelected"));
+			contactSelectedColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, Boolean>("isContactChosen"));
 			contactSelectedColumn.setCellFactory(new FxRadioButtonCellFactory());
 			
 			contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("contactName"));
 			contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsWithTemplatesTableData>forTableColumn());
+			contactNameColumn.setEditable(false);
 			
 			publicCodeColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("publicCode"));
 			publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsWithTemplatesTableData>forTableColumn());
+			publicCodeColumn.setEditable(false);
 			
 			formTemplateColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, CustomFieldTemplate>("selectedFormTemplate"));
 			formTemplateColumn.setCellFactory(new FormTemplateComboBoxCellFactory());
@@ -106,7 +108,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 			ContactKey contactKey = contactKeys.get(index);
  			ObservableList<CustomFieldTemplate> observableArrayList = FXCollections.observableArrayList();
 			ContactsWithTemplatesTableData rowData = new ContactsWithTemplatesTableData(contactKey, false, new CustomFieldTemplate(), observableArrayList);
-			rowData.getRowSelectedProperty().addListener(new FillComboBoxHandler(rowData));
+			rowData.isContactChosenProperty().addListener(new FillComboBoxHandler(rowData));
 			contactsWithTemplatesTableData.add(rowData);
 		}
 	}
@@ -140,11 +142,17 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		ObservableList<ContactsWithTemplatesTableData> tableData = contactsWithTemplatesTableView.getItems();
 		for (ContactsWithTemplatesTableData rowData : tableData)
 		{
-			if (rowData.getRowSelected())
+			if (rowData.getIsContactChosen())
 				return rowData.getSelectedFormTemplate();
 		}
 		
 		return null;
+	}
+	
+	@Override
+	public String getLabel()
+	{
+		return "Import from My Contacts";
 	}
 	
 	private class ComboBoxHandler implements EventHandler<ActionEvent>
@@ -202,7 +210,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
             	if (rowData == null)
             		return;
 
-            	comboBox.visibleProperty().bindBidirectional(rowData.getRowSelectedProperty());
+            	comboBox.visibleProperty().bindBidirectional(rowData.isContactChosenProperty());
         		comboBox.getItems().clear();
         		comboBox.setItems(rowData.getFormTemplateChoices());
         		setGraphic(comboBox);
