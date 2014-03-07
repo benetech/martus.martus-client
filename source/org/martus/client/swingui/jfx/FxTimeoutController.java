@@ -45,11 +45,11 @@ public class FxTimeoutController extends FxBackgroundActivityController
 
 	private void setTimeoutValue(int maxSecondsToCompleteTaskToUse)
 	{
+		currentNumberOfSecondsCompleted = 0;
 		if(maxSecondsToCompleteTaskToUse <= 0)
 			maxSecondsToCompleteTask = DEFAULT_NUMBER_SECONDS_BEFORE_TIMEOUT;
 		else
 			maxSecondsToCompleteTask = maxSecondsToCompleteTaskToUse;
-		currentNumberOfSecondsCompleted = 0;
 	}
 
 	@Override
@@ -69,22 +69,22 @@ public class FxTimeoutController extends FxBackgroundActivityController
 			updateProgressBar(percentLeftBeforeTimedOut);
 			++currentNumberOfSecondsCompleted;
 			if(currentNumberOfSecondsCompleted >= maxSecondsToCompleteTask)
-				exiting();
+				forceCloseDialog();
 		}
 	}
 
 	@Override
-	public void exiting()
+	public void forceCloseDialog()
 	{
 		backgroundTick.cancel();
 		backgroundTick = null;
-		super.exiting();
+		super.forceCloseDialog();
 	}
 
 	@Override
 	public void cancelPressed()
 	{
-		exiting();
+		forceCloseDialog();
 	}
 	protected int maxSecondsToCompleteTask;
 	protected int currentNumberOfSecondsCompleted;
