@@ -47,8 +47,7 @@ public class FxBusyController extends FxBackgroundActivityController
 		cancelButton.setVisible(false);
 		updateProgressBar(INDETERMINATE);
 		getStage().initStyle(StageStyle.UNDECORATED);
-	}
-	
+	}	
 	
 	@Override
 	public void cancelPressed()
