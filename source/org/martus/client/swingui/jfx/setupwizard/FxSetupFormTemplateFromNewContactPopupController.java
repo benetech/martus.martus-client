@@ -118,7 +118,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 		getStage().close();
 	}
 
-	public CustomFieldTemplate getSelectedCustomFieldTemplate()
+	public CustomFieldTemplate getSelectedFormTemplate()
 	{
 		return customFieldTemplatesComboBox.getSelectionModel().getSelectedItem();
 	}
@@ -133,6 +133,12 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 	public String getDialogTitle()
 	{
 		return getLocalization().getWindowTitle("notifyImportTemplate"); 
+	}
+	
+	@Override
+	public String getLabel()
+	{
+		return "Import from New Contact";
 	}
 
 	@FXML

@@ -148,6 +148,12 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		return null;
 	}
 	
+	@Override
+	public String getLabel()
+	{
+		return "Import from My Contacts";
+	}
+	
 	private class ComboBoxHandler implements EventHandler<ActionEvent>
 	{
 		public ComboBoxHandler()
