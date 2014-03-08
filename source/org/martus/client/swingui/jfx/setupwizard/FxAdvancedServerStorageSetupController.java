@@ -37,10 +37,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import org.martus.client.core.ConfigInfo;
-import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.setupwizard.tasks.GetServerPublicKeyTask;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
@@ -93,10 +93,12 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 		{
 			clearServerStatus();
 			
-			MartusApp app = getApp();
 			String ip = ipAddressField.getText();
 			
-			String serverKey = app.getServerPublicKey(ip);
+			GetServerPublicKeyTask task = new GetServerPublicKeyTask(getApp(), ip);
+			showTimeoutDialog("*Connecting*", "Getting server information", task, 60);
+			
+			String serverKey = task.getPublicKey();
 			String serverPublicCode = MartusCrypto.computePublicCode(serverKey);
 
 			String userEnteredPublicCode = publicCodeField.getText();
