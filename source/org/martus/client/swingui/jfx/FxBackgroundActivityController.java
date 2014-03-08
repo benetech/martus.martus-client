@@ -83,8 +83,11 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 	
 	public void forceCloseDialog()
 	{
-		task.cancel();
-		task = null;
+		if(task != null)
+		{
+			task.cancel();
+			task = null;
+		}
 		getStage().close();
 	}
 	

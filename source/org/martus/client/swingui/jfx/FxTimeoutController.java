@@ -59,16 +59,22 @@ public class FxTimeoutController extends FxBackgroundActivityController
 			double percentLeftBeforeTimedOut = 1.0 - percentComplete;
 			updateProgressBar(percentLeftBeforeTimedOut);
 			++currentNumberOfSecondsCompleted;
-			if(currentNumberOfSecondsCompleted >= maxSecondsToCompleteTask)
-				forceCloseDialog();
+			if(currentNumberOfSecondsCompleted > maxSecondsToCompleteTask)
+			{
+				backgroundTick.cancel();
+				//forceCloseDialog(); //TODO figure out how to close this dialog from main thread not this thread.
+			}
 		}
 	}
 
 	@Override
 	public void forceCloseDialog()
 	{
-		backgroundTick.cancel();
-		backgroundTick = null;
+		if(backgroundTick != null)
+		{
+			backgroundTick.cancel();
+			backgroundTick = null;
+		}
 		super.forceCloseDialog();
 	}
 
