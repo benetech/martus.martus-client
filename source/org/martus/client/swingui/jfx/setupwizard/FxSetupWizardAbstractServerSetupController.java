@@ -29,6 +29,7 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.setupwizard.tasks.GetServerComplianceStatementTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.IsServerAvailableTask;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.MartusLogger;
@@ -68,7 +69,9 @@ abstract public class FxSetupWizardAbstractServerSetupController extends Abstrac
 
 		try
 		{
-			String complianceStatement = getServerCompliance(gateway);
+			GetServerComplianceStatementTask task = new GetServerComplianceStatementTask(getApp(), gateway);
+			showTimeoutDialog("*Connecting*", "Getting server compliance statement", task, 60);
+			String complianceStatement = task.getComplianceStatement();
 			if(askComplianceAcceptance)
 			{
 				if(complianceStatement.equals(""))
@@ -112,20 +115,14 @@ abstract public class FxSetupWizardAbstractServerSetupController extends Abstrac
 			showNotifyDialog("ErrorSavingConfig");
 			return false;
 		} 
+		catch(Exception e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDialog("ErrorGettingCompliance");
+			return false;
+		} 
 	}
 	
-	private String getServerCompliance(ClientSideNetworkGateway gateway)
-	{
-		try
-		{
-			return getApp().getServerCompliance(gateway);
-		}
-		catch (Exception e)
-		{
-			return "";
-		}
-	}
-
 	private boolean acceptCompliance(String newServerCompliance)
 	{
 		// FIXME: Actually allow the user to accept/reject
