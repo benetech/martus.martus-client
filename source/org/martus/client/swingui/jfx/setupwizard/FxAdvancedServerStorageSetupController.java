@@ -96,12 +96,6 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 			MartusApp app = getApp();
 			String ip = ipAddressField.getText();
 			
-			if(!app.isNonSSLServerAvailable(ip))
-			{
-				showError("ConfigNoServer");
-				return;
-			}
-
 			String serverKey = app.getServerPublicKey(ip);
 			String serverPublicCode = MartusCrypto.computePublicCode(serverKey);
 
