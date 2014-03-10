@@ -197,7 +197,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		customTemplatesComboBox.setVisible(false);
 		if (genericRadioButton.isSelected())
 		{
-			customTemplatesComboBox.getSelectionModel().clearSelection();
+			clearCustomComboBoxSelectionUsingWorkaround();
 			genericTemplatesComboBox.setVisible(true);
 		}
 		
@@ -206,6 +206,12 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 			genericTemplatesComboBox.getSelectionModel().clearSelection();
 			customTemplatesComboBox.setVisible(true);
 		}
+	}
+
+	private void clearCustomComboBoxSelectionUsingWorkaround()
+	{
+		customTemplatesComboBox.valueProperty().set(null);
+		customTemplatesComboBox.getSelectionModel().clearSelection();
 	}
 	
 	private void importFromContacts(AbstractFxImportFormTemplateController controller) throws Exception
