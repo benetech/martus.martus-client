@@ -34,6 +34,7 @@ import javafx.scene.control.Hyperlink;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.FxController.UserCancelledException;
 import org.martus.client.swingui.jfx.setupwizard.tasks.IsServerAvailableTask;
 import org.martus.common.MartusLogger;
 
@@ -69,12 +70,16 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 		try
 		{
 			IsServerAvailableTask task = new IsServerAvailableTask(getApp());
-			showTimeoutDialog("*Connecting*", "Attempting to connect to server", task, 15);
+			showTimeoutDialog("*Connecting*", "Attempting to connect to server", task, 60);
 			if(task.isAvailable())
 				return new FxAddContactsController(getMainWindow());
 
 			return new FxSetupImportTemplatesController(getMainWindow());
 		} 
+		catch(UserCancelledException e)
+		{
+			return this;
+		}
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);

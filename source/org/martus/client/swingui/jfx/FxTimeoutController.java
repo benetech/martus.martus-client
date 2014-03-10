@@ -81,11 +81,20 @@ public class FxTimeoutController extends FxBackgroundActivityController
 	@Override
 	public void cancelPressed()
 	{
+		userCancelled = true;
 		forceCloseDialog();
 	}
+
+	@Override
+	public boolean didUserCancel()
+	{
+		return userCancelled;
+	}
+	
 	protected int maxSecondsToCompleteTask;
 	protected int currentNumberOfSecondsCompleted;
 	protected TimeoutTimerTask backgroundTick;
+	private boolean userCancelled;
 
 	final int BACKGROUND_TIMEOUT_CHECK_EVERY_SECOND = 1000;
 }

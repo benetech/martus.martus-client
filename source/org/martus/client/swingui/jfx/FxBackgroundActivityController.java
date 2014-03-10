@@ -45,6 +45,7 @@ import org.martus.client.swingui.UiMainWindow;
 
 abstract public class FxBackgroundActivityController extends FxPopupController
 {
+	
 	public FxBackgroundActivityController(UiMainWindow mainWindowToUse, String titleToUse, String messageToUse, Task taskToUse)
 	{
 		super(mainWindowToUse);
@@ -126,6 +127,7 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 		}
 	}
 
+	abstract public boolean didUserCancel();
 	@FXML
 	abstract public void cancelPressed();
 	
