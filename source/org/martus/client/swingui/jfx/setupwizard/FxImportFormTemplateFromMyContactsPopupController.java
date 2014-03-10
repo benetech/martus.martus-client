@@ -219,7 +219,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
         			if (rowData == null)
         				return;
 
-        			comboBox.visibleProperty().bindBidirectional(rowData.isContactChosenProperty());
+        			bindComboBoxVisibilityToRadioButtonSelection(rowData);
         			comboBox.setItems(rowData.getFormTemplateChoices());
         			setGraphic(comboBox);
         			
@@ -234,6 +234,11 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
         		MartusLogger.logException(e);
         	}
         }
+
+		private void bindComboBoxVisibilityToRadioButtonSelection(ContactsWithTemplatesTableData rowData)
+		{
+			comboBox.visibleProperty().bindBidirectional(rowData.isContactChosenProperty());
+		}
 
         private ComboBox<CustomFieldTemplate> comboBox;
         private Property cellBooleanPropertyBoundToCurrently;
