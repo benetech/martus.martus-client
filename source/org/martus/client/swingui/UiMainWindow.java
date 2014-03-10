@@ -862,8 +862,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		if (backupImprovedShareText.length() > 0)
 			return backupImprovedShareText;
-		else
-			return backupShareText;
+		return backupShareText;
 	}
 
 	void notifyClientCompliance()
@@ -1627,13 +1626,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 						  + app.getUserName();
 		String keyDescription = getLocalization().getFieldLabel("AccountInfoPublicKey");
 		String keyContents = app.getAccountId();
-		String codeDescription = getLocalization().getFieldLabel("AccountInfoPublicCode");
-		String formattedCodeContents = null;
+		String codeDescriptionOld = getLocalization().getFieldLabel("AccountInfoPublicCode");
+		String codeDescriptionNew = getLocalization().getFieldLabel("AccountInfoPublicCode40");
+		String formattedCodeContentsOld = null;
+		String formattedCodeContentsNew = null;
 		try
 		{
-			formattedCodeContents = MartusCrypto.computeFormattedPublicCode(keyContents);
+			formattedCodeContentsOld = MartusCrypto.computeFormattedPublicCode(keyContents);
+			formattedCodeContentsNew = MartusCrypto.computeFormattedPublicCode40(keyContents);
 		}
-		catch(InvalidBase64Exception e)
+		catch(Exception e)
 		{
 		}
 
@@ -1654,7 +1656,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		
 		String ok = getLocalization().getButtonLabel("ok");
-		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescription, formattedCodeContents, " ", martusAccountAccessTokenDescription, martusAccountAccessToken, " ", accountDirectory};
+		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescriptionOld, formattedCodeContentsOld, " ", codeDescriptionNew, formattedCodeContentsNew, " ", martusAccountAccessTokenDescription, martusAccountAccessToken, " ", accountDirectory};
 		String[] buttons = {ok};
 
 		new UiNotifyDlg(this, title, contents, buttons);
