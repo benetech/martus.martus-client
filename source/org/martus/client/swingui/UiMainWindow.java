@@ -450,29 +450,41 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		mainWindowInitalizing = true;
 
+		inactivityDetector = new UiInactivityDetector();
+		timeoutChecker = new java.util.Timer(true);
+		timeoutTimerTask = new TimeoutTimerTask();
+
 		if (getApp().hasNoAccounts() || isAlphaTester)
-			startAccountSetupWizard();
+		{
+			if(!startAccountSetupWizard())
+				return false;
+		}
+		else
+		{
+			if(!sessionSignIn())
+				return false;
+
+			startInactivityTimeoutDetection();
+			getApp().startOrStopTorAsRequested();
+		}
 		
-		if(!sessionSignIn())
-			return false;
+		initalizeUiState();
 		
+		doPostSigninAppInitialization();
+
 		try
 		{
 			String accountId = getApp().getSecurity().getPublicKeyString();
-			MartusLogger.log("Public code: " + MartusSecurity.getFormattedPublicCode(accountId) + "\n");
+			MartusLogger.log("Old public code: " + MartusSecurity.computeFormattedPublicCode(accountId) + "\n");
+			MartusLogger.log("New public code: " + MartusCrypto.computeFormattedPublicCode40(accountId));
 		} 
-		catch (InvalidBase64Exception e)
+		catch (Exception e)
 		{
 			MartusLogger.logException(e);
 			// NOTE: This was just informational output, so keep going
 		}
 		
-		timeoutChecker = new java.util.Timer(true);
-		TimeoutTimerTask timeoutTimerTask = new TimeoutTimerTask();
-		timeoutChecker.schedule(timeoutTimerTask, 0, BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS);
-
 		loadConfigInfo();
-		getApp().startOrStopTorAsRequested();
 		if(!createdNewAccount && !justRecovered)
 			askAndBackupKeypairIfRequired();
 		
@@ -534,7 +546,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return true;
     }
 
-	private void startAccountSetupWizard()
+	public void startInactivityTimeoutDetection()
+	{
+		timeoutChecker.schedule(timeoutTimerTask, 0, BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS);
+	}
+
+	private boolean startAccountSetupWizard()
 	{
 		try
 		{
@@ -542,11 +559,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		    Platform.setImplicitExit(false);
 		    
 		    FxModalDialog.createAndShow(this, new SetupWizardStage(this));
+		    return true;
 		} 
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			exitWithoutSavingState();
+			return false;
 		}
 	}
 	
@@ -633,7 +651,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			notMuchWeCanDoAboutIt.printStackTrace();
 		}
-}
+	}
 
 	private boolean sessionSignIn()
 	{
@@ -664,17 +682,20 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				justRecovered = true;
 			}
 	
-			createdNewAccount = false;
+			setCreatedNewAccount(false);
 			if(wantsNewAccount)
 			{
 				if(!createAccount())
 					return false;
-				createdNewAccount = true;
+				setCreatedNewAccount(true);
 			}
 		}
 		
-		initalizeUiState();
-		
+		return true;
+	}
+
+	public void doPostSigninAppInitialization()
+	{
 		try
 		{
 			app.doAfterSigninInitalization();
@@ -695,10 +716,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			askToRepairMissingAccountMapFile();
 		}
-
-		inactivityDetector = new UiInactivityDetector();
-
-		return true;
 	}
     
  	private boolean isAlreadySignedIn()
@@ -919,6 +936,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public ClientBulletinStore getStore()
 	{
 		return getApp().getStore();
+	}
+
+	public void setCreatedNewAccount(boolean didCreateNewAccount)
+	{
+		createdNewAccount = didCreateNewAccount;
 	}
 
 	public void resetCursor()
@@ -3038,6 +3060,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private boolean createdNewAccount;
 	private boolean justRecovered;
 	private BackgroundTimerTask backgroundUploadTimerTask;
+	private TimeoutTimerTask timeoutTimerTask;
 	private Stack cursorStack;
 
 	private static Map<String, File> memorizedFileOpenDirectories;
