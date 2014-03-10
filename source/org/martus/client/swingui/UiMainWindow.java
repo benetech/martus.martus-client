@@ -682,12 +682,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				justRecovered = true;
 			}
 	
-			createdNewAccount = false;
+			setCreatedNewAccount(false);
 			if(wantsNewAccount)
 			{
 				if(!createAccount())
 					return false;
-				createdNewAccount = true;
+				setCreatedNewAccount(true);
 			}
 		}
 		
@@ -937,6 +937,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public ClientBulletinStore getStore()
 	{
 		return getApp().getStore();
+	}
+
+	public void setCreatedNewAccount(boolean didCreateNewAccount)
+	{
+		createdNewAccount = didCreateNewAccount;
 	}
 
 	public void resetCursor()
