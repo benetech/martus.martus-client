@@ -286,6 +286,9 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	{
 		PersistableMap map = new PersistableMap();
 		
+		if(accountsToMapsOfLocalIdsToSetsOfSpecs == null)
+			return map;
+		
 		Collection accountIds = accountsToMapsOfLocalIdsToSetsOfSpecs.keySet();
 		Iterator iter = accountIds.iterator();
 		while(iter.hasNext())
