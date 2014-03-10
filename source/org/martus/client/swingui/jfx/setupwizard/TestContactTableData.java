@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.setupwizard;
 
 import org.martus.common.ContactKey;
-import org.martus.util.StreamableBase64.InvalidBase64Exception;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestContactTableData extends TestCaseEnhanced
@@ -36,7 +35,7 @@ public class TestContactTableData extends TestCaseEnhanced
 		super(name);
 	}
 	
-	public void testBasics() throws InvalidBase64Exception 
+	public void testBasics() throws Exception 
 	{
 		String label = "My HQ";
 		String publicKey = "FakeKey";
@@ -50,6 +49,7 @@ public class TestContactTableData extends TestCaseEnhanced
 		assertEquals(contactKey.getPublicKey(), keyReturned.getPublicKey());
 		assertEquals(publicKey, keyReturned.getPublicKey());
 		assertEquals(contactKey.getFormattedPublicCode(), keyReturned.getFormattedPublicCode());
+		assertEquals(contactKey.getFormattedPublicCode40(), keyReturned.getFormattedPublicCode40());
 		assertEquals(contactKey.getLabel(), keyReturned.getLabel());
 		assertEquals(label, keyReturned.getLabel());
 		assertTrue(keyReturned.getCanSendTo());

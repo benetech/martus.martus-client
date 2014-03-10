@@ -30,15 +30,17 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import org.martus.common.ContactKey;
+import org.martus.common.DammCheckDigitAlgorithm.CheckDigitInvalidException;
+import org.martus.common.crypto.MartusCrypto.CreateDigestException;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class ContactsTableData
 {
-	public ContactsTableData(ContactKey contact) throws InvalidBase64Exception
+	public ContactsTableData(ContactKey contact) throws InvalidBase64Exception, CreateDigestException, CheckDigitInvalidException
 	{
 		publicKey = contact.getPublicKey();
 		contactName = new SimpleStringProperty(contact.getLabel());
-		publicCode = new SimpleStringProperty(contact.getFormattedPublicCode());
+		publicCode = new SimpleStringProperty(contact.getFormattedPublicCode40());
 		canSendTo = new SimpleBooleanProperty(contact.getCanSendTo());
 		canReceiveFrom = new SimpleBooleanProperty(contact.getCanReceiveFrom());
 		verificationStatus = new SimpleIntegerProperty(contact.getVerificationStatus());
