@@ -81,3 +81,8 @@
 .TopBarArrow {
 	-fx-text-fill: Red;
 }
+
+#contacts-table {
+	-fx-table-cell-border-color: transparent;
+
+}

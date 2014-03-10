@@ -10,7 +10,7 @@
       <bottom>
         <VBox prefHeight="230.0" prefWidth="898.0" BorderPane.alignment="CENTER">
           <children>
-            <TableView id="" fx:id="contactsTable" editable="true" prefHeight="238.0" prefWidth="814.0">
+            <TableView id="contacts-table" fx:id="contactsTable" editable="true" prefHeight="238.0" prefWidth="814.0">
               <columns>
                 <TableColumn id="" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="124.0" sortable="false" text="Contact Name" fx:id="contactNameColumn" />
                 <TableColumn editable="false" id="" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="409.0" sortable="false" text="Public Code" fx:id="publicCodeColumn" />
