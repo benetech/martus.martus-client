@@ -193,10 +193,16 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		genericTemplatesComboBox.setVisible(false);
 		customTemplatesComboBox.setVisible(false);
 		if (genericRadioButton.isSelected())
+		{
+			customTemplatesComboBox.getSelectionModel().clearSelection();
 			genericTemplatesComboBox.setVisible(true);
+		}
 		
 		if (downloadCustomRadioButton.isSelected())
+		{
+			genericTemplatesComboBox.getSelectionModel().clearSelection();
 			customTemplatesComboBox.setVisible(true);
+		}
 	}
 	
 	private void importFromContacts(AbstractFxImportFormTemplateController controller) throws Exception
