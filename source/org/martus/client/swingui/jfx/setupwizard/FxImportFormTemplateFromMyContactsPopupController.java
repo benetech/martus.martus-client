@@ -44,6 +44,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
@@ -80,7 +81,9 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 			fillTableWithContacts();
 		
 			contactSelectedColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, Boolean>("isContactChosen"));
-			contactSelectedColumn.setCellFactory(new FxRadioButtonCellFactory());
+			FxRadioButtonCellFactory value = new FxRadioButtonCellFactory();
+			value.selectedToggleProperty().addListener(new ToggleChangeListener());
+			contactSelectedColumn.setCellFactory(value);
 			
 			contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("contactName"));
 			contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsWithTemplatesTableData>forTableColumn());
@@ -173,6 +176,20 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 			
 			continueMessage.setVisible(shouldBeVisible);
 			continueButton.setVisible(shouldBeVisible);
+		}
+	}
+	
+	private class ToggleChangeListener implements ChangeListener<Toggle>
+	{
+		public ToggleChangeListener()
+		{
+		}
+		
+		@Override
+		public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue)
+		{
+			continueMessage.setVisible(false);
+			continueButton.setVisible(false);
 		}
 	}
 	
