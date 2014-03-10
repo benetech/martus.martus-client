@@ -198,6 +198,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
             comboBox.addEventHandler(ActionEvent.ACTION, new ComboBoxHandler());
             comboBox.setPromptText("Choose one...");
             comboBox.setVisible(false);
+            comboBox.setPrefWidth(250.0);
         }
         
         @Override
