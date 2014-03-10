@@ -48,6 +48,10 @@ import org.martus.common.MartusLogger;
 
 abstract public class FxController implements Initializable
 {
+	public static class UserCancelledException extends Exception
+	{
+	}
+
 	public FxController(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
@@ -143,6 +147,8 @@ abstract public class FxController implements Initializable
 	{
 		FxPopupController popupController = new FxTimeoutController(getMainWindow(), title, message, task, maxSecondsToCompleteTask);
 		showControllerInsideModalDialog(popupController);
+		if(((FxTimeoutController)popupController).didUserCancel())
+			throw new UserCancelledException();
 	}
 
 	public static class PopupNotifyController extends FxPopupController implements Initializable

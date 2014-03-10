@@ -52,5 +52,11 @@ public class FxBusyController extends FxBackgroundActivityController
 	{
 	}
 	
+	@Override
+	public boolean didUserCancel()
+	{
+		return false;
+	}
+
 	private static final double INDETERMINATE = -1.0;
 }

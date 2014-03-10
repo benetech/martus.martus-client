@@ -57,6 +57,7 @@ import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxInSwingDialogStage;
 import org.martus.client.swingui.jfx.FxPopupController;
 import org.martus.client.swingui.jfx.FxTableCellTextFieldFactory;
+import org.martus.client.swingui.jfx.FxController.UserCancelledException;
 import org.martus.client.swingui.jfx.setupwizard.tasks.LookupAccountFromTokenTask;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
@@ -122,7 +123,7 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			MartusLocalization localization = getLocalization();
 			String title = localization.getWindowTitle("FindAccountByToken");
 			String message = localization.getFieldLabel("FindAccountByToken");
-			showTimeoutDialog(title, message, task, 15);
+			showTimeoutDialog(title, message, task, 30);
 			String contactAccountId = task.getFoundAccountId();
 			if(contactAccountId == null)
 				return; 
@@ -139,6 +140,10 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 			}
 			showAndAddContactsDialog(contactAccountId);
 		} 
+		catch(UserCancelledException e)
+		{
+			return;
+		}
 		catch (ServerNotAvailableException e)
 		{
 			showNotifyDialog("ContactsNoServer");
