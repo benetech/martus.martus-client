@@ -51,7 +51,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends Abstrac
 		try
 		{
 			IsServerAvailableTask task = new IsServerAvailableTask(getApp(), gateway);
-			showTimeoutDialog("*Connecting*", "Attempting to connect to server", task, 15);
+			showTimeoutDialog("*Connecting*", "Attempting to connect to server", task, 60);
 			if(!task.isAvailable())
 			{
 				// FIXME: This should be a confirmation
@@ -59,6 +59,10 @@ abstract public class FxSetupWizardAbstractServerSetupController extends Abstrac
 				saveServerConfig(serverIPAddress, serverPublicKey, "");
 				return true;
 			}
+		}
+		catch(UserCancelledException e)
+		{
+			return false;
 		}
 		catch (Exception e)
 		{
@@ -108,6 +112,10 @@ abstract public class FxSetupWizardAbstractServerSetupController extends Abstrac
 			getMainWindow().repaint();
 			getMainWindow().setStatusMessageReady();
 			return true;
+		}
+		catch(UserCancelledException e)
+		{
+			return false;
 		}
 		catch(SaveConfigInfoException e)
 		{
