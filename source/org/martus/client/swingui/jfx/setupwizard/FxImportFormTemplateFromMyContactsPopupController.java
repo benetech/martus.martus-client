@@ -220,7 +220,6 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
         				return;
 
         			comboBox.visibleProperty().bindBidirectional(rowData.isContactChosenProperty());
-        			comboBox.getItems().clear();
         			comboBox.setItems(rowData.getFormTemplateChoices());
         			setGraphic(comboBox);
         			
