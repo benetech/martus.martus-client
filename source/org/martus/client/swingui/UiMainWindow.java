@@ -465,6 +465,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				return false;
 
 			startInactivityTimeoutDetection();
+			getApp().startOrStopTorAsRequested();
 		}
 		
 		initalizeUiState();
@@ -484,7 +485,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		
 		loadConfigInfo();
-		getApp().startOrStopTorAsRequested();
 		if(!createdNewAccount && !justRecovered)
 			askAndBackupKeypairIfRequired();
 		
