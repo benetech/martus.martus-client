@@ -261,7 +261,7 @@ abstract public class FxController implements Initializable
 		Stage popupStage = new Stage();
 		controller.setStage(popupStage);
 		popupStage.setTitle(controller.getDialogTitle());
-		popupStage.initModality(Modality.WINDOW_MODAL);
+		popupStage.initModality(Modality.APPLICATION_MODAL);
 		FXMLLoader fl = new FXMLLoader();
 		fl.setController(controller);
 		fl.setLocation(FxInSwingDialogStage.class.getResource(controller.getFxmlLocation()));
