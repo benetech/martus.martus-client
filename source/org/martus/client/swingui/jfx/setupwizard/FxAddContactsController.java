@@ -89,7 +89,6 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	    removeContactColumn.setCellFactory(new TableColumnRemoveButtonCellFactory(getLocalization()));
 
 		contactsTable.setItems(data);
-		contactsTable.setStyle("-fx-table-cell-border-color: transparent;");		
 		loadExistingContactData();
 		updateAddContactButtonState();
 		accessTokenField.textProperty().addListener(new AccessTokenChangeHandler());
