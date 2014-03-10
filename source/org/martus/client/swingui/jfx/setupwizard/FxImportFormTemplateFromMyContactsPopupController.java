@@ -157,9 +157,9 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		return "Import from My Contacts";
 	}
 	
-	private class ComboBoxHandler implements EventHandler<ActionEvent>
+	private class ComboBoxEventHandler implements EventHandler<ActionEvent>
 	{
-		public ComboBoxHandler()
+		public ComboBoxEventHandler()
 		{
 		}
 
@@ -195,7 +195,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
         {
             comboBox = new ComboBox<CustomFieldTemplate>();
             comboBox.setConverter(new FormTemplateToStringConverter());
-            comboBox.addEventHandler(ActionEvent.ACTION, new ComboBoxHandler());
+            comboBox.addEventHandler(ActionEvent.ACTION, new ComboBoxEventHandler());
             comboBox.setPromptText("Choose one...");
             comboBox.setVisible(false);
             comboBox.setPrefWidth(250.0);
