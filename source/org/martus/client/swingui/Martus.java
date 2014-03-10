@@ -162,7 +162,7 @@ public class Martus
 	        if(!window.run())
 	        {
 	        	MartusLogger.log("Exiting after run()");
-	        	System.exit(0);
+	        	window.exitWithoutSavingState();
 	        }
 		}
 		catch(Exception e)
