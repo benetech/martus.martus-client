@@ -44,7 +44,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
@@ -85,12 +84,6 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 
 		verificationStatusColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("verificationStatus"));
 		verificationStatusColumn.setCellFactory(new TableColumnVerifyContactCellFactory(getLocalization()));
-
-		canSendToColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("canSendTo"));
-		canSendToColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(canSendToColumn));
-
-		canReceiveFromColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("canReceiveFrom"));
-		canReceiveFromColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(canReceiveFromColumn));
 
 		removeContactColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("deleteContact")); 
 	    removeContactColumn.setCellFactory(new TableColumnRemoveButtonCellFactory(getLocalization()));
@@ -566,12 +559,6 @@ public class FxAddContactsController extends AbstractFxSetupWizardContentControl
 	@FXML
 	private TableColumn<ContactsTableData, String> verificationStatusColumn;
 	
-	@FXML
-	private TableColumn<ContactsTableData, Boolean> canSendToColumn;
-
-	@FXML
-	private TableColumn<ContactsTableData, Boolean> canReceiveFromColumn;
-
 	@FXML
 	private TableColumn<ContactsTableData, String> removeContactColumn;
 	
