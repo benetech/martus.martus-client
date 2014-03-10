@@ -183,6 +183,9 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	@FXML
 	private void customDropDownSelectionChanged() throws Exception
 	{
+		if (customTemplatesComboBox.getSelectionModel().isEmpty())
+			return;
+		
 		AbstractFxImportFormTemplateController selectedController = customTemplatesComboBox.getSelectionModel().getSelectedItem();
 		importFromContacts(selectedController);
 	}
