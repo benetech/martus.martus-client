@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<VBox>
+			<children>
+				<HBox fx:id="topBar" prefWidth="-Infinity" minWidth="-Infinity">
+					<children>
+						<HBox>
+							<children>
+								<Label styleClass='TopBarStepNumber' text="1" />
+								<Label styleClass='TopBarStepName' text="Create Account" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+								<Label styleClass='TopBarArrow' text="-&gt;" />
+							</children>
+						</HBox>
+						<HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+							<children>
+								<Label styleClass='TopBarStepNumber' text="2" />
+								<Label styleClass='TopBarStepName' text="Settings" />
+								<Label styleClass='TopBarArrow' text="-&gt;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+							</children>
+						</HBox>
+						<HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+							<children>
+								<Label styleClass='TopBarStepNumber' text="3" />
+								<Label styleClass='TopBarStepName' text="Server Setup" />
+								<Label styleClass='TopBarArrow' text="-&gt;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+							</children>
+						</HBox>
+						<HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+							<children>
+								<Label styleClass='TopBarStepNumber' text="4" />
+								<Label styleClass='TopBarStepName' text="Contacts" />
+								<Label styleClass='TopBarArrow' text="-&gt;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+							</children>
+						</HBox>
+						<HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+							<children>
+								<Label styleClass='TopBarStepNumber' text="5" />
+								<Label styleClass='TopBarStepName' text="Import Forms" />
+								<Label styleClass='TopBarArrow' text="-&gt;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
+							</children>
+						</HBox>
+						<HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+							<children>
+								<Label styleClass='TopBarStepNumber' text="6" />
+								<Label styleClass='TopBarStepName' text="Key Backup" />
+							</children>
+						</HBox>
+					</children>
+				</HBox>
+				<BorderPane fx:id="BelowTitle">
+					<center>
+						<BorderPane>
+							<center>
+								<Pane fx:id="contentPane" layoutX="14.0" layoutY="14.0" maxHeight="-Infinity" prefHeight="500.0" prefWidth="600.0" />
+							</center>
+							<bottom>
+								<BorderPane>
+									<left>
+										<Button fx:id="backButton" mnemonicParsing="false" onAction="#backWasPressed" text="Go Back" BorderPane.alignment="CENTER_LEFT" />
+									</left>
+									<right>
+		          						<Button id="" fx:id="nextButton" mnemonicParsing="false" onAction="#nextWasPressed" text="Continue" BorderPane.alignment="CENTER_RIGHT" />
+									</right>
+								</BorderPane>
+							</bottom>
+						</BorderPane>
+					</center>
+					<top>
+					</top>
+					<right>
+						<BorderPane>
+							<bottom>
+								<ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url='@../../dialogs/MartusLogo.png' />
+									</image>
+								</ImageView>
+							</bottom>
+						</BorderPane>
+					</right>
+				</BorderPane>
+			</children>
+		</VBox>
+	</children>
+</AnchorPane>
