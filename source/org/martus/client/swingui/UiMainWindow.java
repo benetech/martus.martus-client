@@ -432,7 +432,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		setCurrentActiveFrame(this);
 		
-		if(Utilities.isMSWindows())
+		if(Utilities.isMSWindows() || Utilities.isLinux())
 		{
 			updateTitle();
 			setVisible(true);
