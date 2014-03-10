@@ -25,18 +25,25 @@ Boston, MA 02111-1307, USA.
  */
 package org.martus.client.swingui.jfx;
 
-import org.martus.client.swingui.jfx.setupwizard.ContactsWithTemplatesTableData;
-
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.util.Callback;
+
+import org.martus.client.swingui.jfx.setupwizard.ContactsWithTemplatesTableData;
 
 public class FxRadioButtonCellFactory implements Callback<TableColumn<ContactsWithTemplatesTableData, Boolean>, TableCell<ContactsWithTemplatesTableData, Boolean>>
 {
 	public FxRadioButtonCellFactory()
 	{
 		group = new ToggleGroup();
+	}
+	
+	public ReadOnlyObjectProperty<Toggle> selectedToggleProperty()
+	{
+		return group.selectedToggleProperty();
 	}
 	
 	@Override
