@@ -57,7 +57,7 @@ import org.martus.client.swingui.jfx.FxInSwingDialogStage;
 import org.martus.client.swingui.jfx.FxPopupController;
 import org.martus.client.swingui.jfx.FxTableCellTextFieldFactory;
 import org.martus.client.swingui.jfx.setupwizard.ContactsTableData;
-import org.martus.client.swingui.jfx.setupwizard.FxSetupImportTemplatesController;
+import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.LookupAccountFromTokenTask;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;

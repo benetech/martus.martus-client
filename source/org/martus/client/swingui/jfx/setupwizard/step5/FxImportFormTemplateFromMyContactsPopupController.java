@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.setupwizard;
+package org.martus.client.swingui.jfx.setupwizard.step5;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -53,6 +53,8 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxBindingHelpers;
 import org.martus.client.swingui.jfx.FxRadioButtonCellFactory;
+import org.martus.client.swingui.jfx.setupwizard.ContactsWithTemplatesTableData;
+import org.martus.client.swingui.jfx.setupwizard.FormTemplateToStringConverter;
 import org.martus.client.swingui.jfx.setupwizard.tasks.DownloadTemplateListForAccountTask;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
@@ -121,7 +123,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/SetupImportTemplateFromMyContactsPopup.fxml";
+		return "setupwizard/step5/SetupImportTemplateFromMyContactsPopup.fxml";
 	}
 
 	@Override

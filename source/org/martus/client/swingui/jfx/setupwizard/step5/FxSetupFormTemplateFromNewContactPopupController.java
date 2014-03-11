@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.setupwizard;
+package org.martus.client.swingui.jfx.setupwizard.step5;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -126,7 +126,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/SetupTemplateFromNewContactPopup.fxml";
+		return "setupwizard/step5/SetupTemplateFromNewContactPopup.fxml";
 	}
 
 	@Override
