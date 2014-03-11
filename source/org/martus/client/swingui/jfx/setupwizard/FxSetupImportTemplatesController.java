@@ -228,14 +228,14 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		}
 	}
 
-	private void importFromContacts(AbstractFxImportFormTemplateController controller) throws Exception
+	protected void importFromContacts(AbstractFxImportFormTemplateController controller) throws Exception
 	{
 		showControllerInsideModalDialog(controller);
 		CustomFieldTemplate selectedTemplate = controller.getSelectedFormTemplate();
 		updateSelectedCustomFieldTemplateComponents(selectedTemplate);
 	}
 	
-	private void updateSelectedCustomFieldTemplateComponents(CustomFieldTemplate customFieldTemplate) throws Exception
+	protected void updateSelectedCustomFieldTemplateComponents(CustomFieldTemplate customFieldTemplate) throws Exception
 	{
 		selectedFormTemplateToSave = customFieldTemplate;
 		boolean shouldAllowFormTemplate = false;
@@ -263,7 +263,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		}
 	}
 	
-	private class CustomTemplatesSelectionChangedHandler implements ChangeListener<AbstractFxImportFormTemplateController>
+	protected class CustomTemplatesSelectionChangedHandler implements ChangeListener<AbstractFxImportFormTemplateController>
 	{
 		@Override
 		public void changed(ObservableValue<? extends AbstractFxImportFormTemplateController> observable, AbstractFxImportFormTemplateController oldValue, AbstractFxImportFormTemplateController newValue)
@@ -284,7 +284,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		}
 	}
 	
-	private class GenericTemplatesSelectionChangedHandler implements ChangeListener<CustomFieldTemplate>
+	protected class GenericTemplatesSelectionChangedHandler implements ChangeListener<CustomFieldTemplate>
 	{
 		@Override
 		public void changed(ObservableValue<? extends CustomFieldTemplate> observable, CustomFieldTemplate oldValue, CustomFieldTemplate newValue)
@@ -319,7 +319,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		}
 	}
 	
-	private class ControllerToStringConverter extends StringConverter<AbstractFxImportFormTemplateController>
+	protected class ControllerToStringConverter extends StringConverter<AbstractFxImportFormTemplateController>
 	{
 		@Override
 		public String toString(AbstractFxImportFormTemplateController object)
@@ -338,7 +338,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	protected ChoiceBox<CustomFieldTemplate> genericTemplatesChoiceBox;
 	
 	@FXML
-	private ChoiceBox<AbstractFxImportFormTemplateController> customTemplatesChoiceBox;
+	protected ChoiceBox<AbstractFxImportFormTemplateController> customTemplatesChoiceBox;
 	
 	@FXML
 	protected RadioButton genericRadioButton;
@@ -352,5 +352,5 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	@FXML
 	private Label selectedTemplateLabel;
 	
-	private CustomFieldTemplate selectedFormTemplateToSave;
+	protected CustomFieldTemplate selectedFormTemplateToSave;
 }
