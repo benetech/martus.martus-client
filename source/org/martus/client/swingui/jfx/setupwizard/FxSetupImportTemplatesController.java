@@ -173,10 +173,10 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	@FXML
 	private void genericComboBoxSelectionChanged() throws Exception
 	{
-		CustomFieldTemplate genericCustomFieldTemplate = genericTemplatesComboBox.getSelectionModel().getSelectedItem();
-		if (genericCustomFieldTemplate == null)
+		if (genericTemplatesComboBox.getSelectionModel().isEmpty())
 			return;
 		
+		CustomFieldTemplate genericCustomFieldTemplate = genericTemplatesComboBox.getSelectionModel().getSelectedItem();
 		updateSelectedCustomFieldTemplateComponents(genericCustomFieldTemplate);
 	}
 
