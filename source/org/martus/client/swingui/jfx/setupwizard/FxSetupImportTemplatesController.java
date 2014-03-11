@@ -211,21 +211,11 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	@FXML
 	private void radioButtonSelectionChanged()
 	{
-		genericTemplatesChoiceBox.setVisible(false);
-		customTemplatesChoiceBox.setVisible(false);
-
 		genericTemplatesChoiceBox.getSelectionModel().clearSelection();
 		customTemplatesChoiceBox.getSelectionModel().clearSelection();
-		
-		if (genericRadioButton.isSelected())
-		{
-			genericTemplatesChoiceBox.setVisible(true);
-		}
-		
-		if (downloadCustomRadioButton.isSelected())
-		{
-			customTemplatesChoiceBox.setVisible(true);
-		}
+
+		genericTemplatesChoiceBox.setVisible(genericRadioButton.isSelected());
+		customTemplatesChoiceBox.setVisible(downloadCustomRadioButton.isSelected());
 	}
 
 	protected void importFromContacts(AbstractFxImportFormTemplateController controller) throws Exception
