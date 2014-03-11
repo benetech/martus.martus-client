@@ -68,7 +68,7 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 
 		try
 		{
-			if(isDefaultServerAvailable())
+			if(isCurrentServerAvailable())
 				return new FxAddContactsController(getMainWindow());
 
 			return new FxSetupImportTemplatesController(getMainWindow());

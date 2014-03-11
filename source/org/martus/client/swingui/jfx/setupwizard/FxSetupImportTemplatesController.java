@@ -97,7 +97,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	{
 		try
 		{
-			downloadCustomRadioButton.setVisible(isDefaultServerAvailable());
+			downloadCustomRadioButton.setVisible(isCurrentServerAvailable());
 		} 
 		catch (Exception e)
 		{
