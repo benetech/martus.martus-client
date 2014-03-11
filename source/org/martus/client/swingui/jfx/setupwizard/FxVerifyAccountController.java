@@ -33,7 +33,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -44,7 +43,7 @@ import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.CreateAccountTask;
 import org.martus.common.MartusLogger;
 
-public class FxVerifyAccountController extends AbstractFxSetupWizardContentController implements Initializable
+public class FxVerifyAccountController extends FxStep1Controller
 {
 	public FxVerifyAccountController(UiMainWindow mainWindowToUse)
 	{

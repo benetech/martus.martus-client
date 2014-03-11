@@ -32,7 +32,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -43,7 +42,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.common.MartusLogger;
 
-public class FxSetupUsernamePasswordController extends AbstractFxSetupWizardContentController implements Initializable
+public class FxSetupUsernamePasswordController extends FxStep1Controller
 {
 	public FxSetupUsernamePasswordController(UiMainWindow mainWindowToUse)
 	{

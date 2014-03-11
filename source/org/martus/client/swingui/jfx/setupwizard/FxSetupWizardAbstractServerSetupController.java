@@ -35,7 +35,7 @@ import org.martus.client.swingui.jfx.setupwizard.tasks.IsServerAvailableTask;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.MartusLogger;
 
-abstract public class FxSetupWizardAbstractServerSetupController extends AbstractFxSetupWizardContentController
+abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3Controller
 {
 	public FxSetupWizardAbstractServerSetupController(UiMainWindow mainWindowToUse)
 	{

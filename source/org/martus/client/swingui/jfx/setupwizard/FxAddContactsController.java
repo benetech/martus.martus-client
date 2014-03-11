@@ -65,7 +65,7 @@ import org.martus.common.MartusAccountAccessToken.TokenNotFoundException;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusSecurity;
 
-public class FxAddContactsController extends AbstractFxSetupWizardContentController implements Initializable
+public class FxAddContactsController extends FxStep4Controller
 {
 	public FxAddContactsController(UiMainWindow mainWindowToUse)
 	{

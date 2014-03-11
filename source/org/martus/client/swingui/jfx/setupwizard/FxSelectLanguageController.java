@@ -33,7 +33,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -41,7 +40,7 @@ import org.martus.client.swingui.jfx.FxController;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class FxSelectLanguageController extends AbstractFxSetupWizardContentController implements Initializable
+public class FxSelectLanguageController extends FxStep6Controller
 {
 	public FxSelectLanguageController(UiMainWindow mainWindowToUse)
 	{

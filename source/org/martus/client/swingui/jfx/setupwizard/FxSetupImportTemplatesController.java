@@ -39,7 +39,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -54,7 +53,7 @@ import org.martus.util.TokenReplacement;
 import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
 
-public class FxSetupImportTemplatesController extends AbstractFxSetupWizardContentController implements Initializable
+public class FxSetupImportTemplatesController extends FxStep5Controller
 {
 	public FxSetupImportTemplatesController(UiMainWindow mainWindowToUse)
 	{
