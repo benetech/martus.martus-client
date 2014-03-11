@@ -87,6 +87,10 @@ public class FxVerifyAccountController extends AbstractFxSetupWizardContentContr
 		String message = localization.getFieldLabel("CreatingAccount");
 		showBusyDialog(busyTitle, message, task);
 		getMainWindow().setCreatedNewAccount(true);
+		
+		getApp().loadConfigInfo();
+		getMainWindow().initalizeUiState();
+		getApp().doAfterSigninInitalization();
 	}
 	
 	protected void updateStatus()
