@@ -51,6 +51,11 @@ public class FxSetupContactInfoController extends AbstractFxSetupWizardContentCo
 
 	public void initialize(URL url, ResourceBundle bundle)
 	{
+		// NOTE: Kind of an odd place for this, but it has to be 
+		// after we have signed in, and this is the earliest 
+		// point in the wizard where we know that is true.
+		getMainWindow().startInactivityTimeoutDetection();
+		
 		getWizardNavigationHandler().getBackButton().setDisable(true);
 
 		authorField.setText(getConfigInfo().getAuthor());
