@@ -23,20 +23,21 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.setupwizard;
+package org.martus.client.swingui.jfx.setupwizard.step4;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 
-abstract public class FxStep5Controller extends AbstractFxSetupWizardContentController
+abstract public class FxStep4Controller extends AbstractFxSetupWizardContentController
 {
-	public FxStep5Controller(UiMainWindow mainWindowToUse)
+	public FxStep4Controller(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
-
+	
 	@Override
 	public int getWizardStepNumber()
 	{
-		return 5;
+		return 4;
 	}
 }

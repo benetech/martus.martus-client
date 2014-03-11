@@ -37,6 +37,7 @@ import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.setupwizard.step2.FxStep2Controller;
 
 public class FxSetupContactInfoController extends FxStep2Controller
 {
