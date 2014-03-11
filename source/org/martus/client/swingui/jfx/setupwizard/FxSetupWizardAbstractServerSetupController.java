@@ -30,6 +30,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.setupwizard.step3.FxStep3Controller;
 import org.martus.client.swingui.jfx.setupwizard.tasks.GetServerComplianceStatementTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.IsServerAvailableTask;
 import org.martus.clientside.ClientSideNetworkGateway;

@@ -46,6 +46,7 @@ import javafx.util.StringConverter;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.setupwizard.step5.FxStep5Controller;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.CustomFieldTemplate;
 import org.martus.common.fieldspec.CustomFieldTemplate.FutureVersionException;

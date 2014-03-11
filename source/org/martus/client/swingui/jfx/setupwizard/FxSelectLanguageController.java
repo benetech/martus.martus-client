@@ -37,6 +37,7 @@ import javafx.scene.control.ChoiceBox;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.setupwizard.step6.FxStep6Controller;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 

@@ -40,6 +40,7 @@ import javafx.scene.control.Tooltip;
 import org.martus.client.core.MartusUserNameAndPassword;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.setupwizard.step1.FxStep1Controller;
 import org.martus.common.MartusLogger;
 
 public class FxSetupUsernamePasswordController extends FxStep1Controller
