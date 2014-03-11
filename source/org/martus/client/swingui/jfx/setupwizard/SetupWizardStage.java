@@ -32,6 +32,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxScene;
 import org.martus.client.swingui.jfx.FxWizardStage;
+import org.martus.client.swingui.jfx.setupwizard.step1.FxSetupUsernamePasswordController;
 import org.martus.common.MartusLogger;
 
 public class SetupWizardStage extends FxWizardStage

@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.setupwizard;
+package org.martus.client.swingui.jfx.setupwizard.step1;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -40,7 +40,8 @@ import javafx.scene.control.TextField;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
-import org.martus.client.swingui.jfx.setupwizard.step1.FxStep1Controller;
+import org.martus.client.swingui.jfx.setupwizard.FxSetupContactInfoController;
+import org.martus.client.swingui.jfx.setupwizard.StaticAccountCreationData;
 import org.martus.client.swingui.jfx.setupwizard.tasks.CreateAccountTask;
 import org.martus.common.MartusLogger;
 
@@ -131,7 +132,7 @@ public class FxVerifyAccountController extends FxStep1Controller
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/VerifyAccount.fxml";
+		return "setupwizard/step1/VerifyAccount.fxml";
 	}
 	
 	@Override
