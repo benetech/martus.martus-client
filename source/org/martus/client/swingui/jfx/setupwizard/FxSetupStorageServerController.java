@@ -68,9 +68,7 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 
 		try
 		{
-			IsServerAvailableTask task = new IsServerAvailableTask(getApp());
-			showTimeoutDialog("*Connecting*", "Attempting to connect to server", task, 60);
-			if(task.isAvailable())
+			if(isDefaultServerAvailable())
 				return new FxAddContactsController(getMainWindow());
 
 			return new FxSetupImportTemplatesController(getMainWindow());
