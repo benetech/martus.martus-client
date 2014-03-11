@@ -54,7 +54,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxBindingHelpers;
 import org.martus.client.swingui.jfx.FxRadioButtonCellFactory;
 import org.martus.client.swingui.jfx.setupwizard.ContactsWithTemplatesTableData;
-import org.martus.client.swingui.jfx.setupwizard.FormTemplateToStringConverter;
 import org.martus.client.swingui.jfx.setupwizard.tasks.DownloadTemplateListForAccountTask;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;

@@ -46,7 +46,6 @@ import javafx.util.StringConverter;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
-import org.martus.client.swingui.jfx.setupwizard.FormTemplateToStringConverter;
 import org.martus.client.swingui.jfx.setupwizard.step6.FxSetupBackupYourKeyController;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.CustomFieldTemplate;
