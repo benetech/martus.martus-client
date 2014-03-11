@@ -104,7 +104,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		catch(Exception e)
 		{
 			MartusLogger.logException(e);
-			getShell().dispose();
+			getMainWindow().exitWithoutSavingState();
 		}
 	}
 
@@ -125,7 +125,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		catch(Exception e)
 		{
 			MartusLogger.logException(e);
-			getShell().dispose();
+			getMainWindow().exitWithoutSavingState();
 		}
 	}
 	
