@@ -64,7 +64,7 @@ import org.martus.util.TokenReplacement;
 
 public class FxImportFormTemplateFromMyContactsPopupController extends AbstractFxImportFormTemplateController implements Initializable
 {
-	public FxImportFormTemplateFromMyContactsPopupController(UiMainWindow mainWindowToUse) throws Exception
+	public FxImportFormTemplateFromMyContactsPopupController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
