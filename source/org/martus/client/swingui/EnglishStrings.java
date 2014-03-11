@@ -1601,7 +1601,7 @@ public class EnglishStrings
 "field:NotSorted=(none)",
 "field:ReportNumberOfBulletins=Total Bulletins:",
 
-"title:RemoveContact=Remove Contact",
+"wintitle:RemoveContact=Remove Contact",
 "field:RemoveContactLabel1=The following contact will be removed:",
 "field:RemoveContactLabel2=Are you sure you want to do this?",
 
