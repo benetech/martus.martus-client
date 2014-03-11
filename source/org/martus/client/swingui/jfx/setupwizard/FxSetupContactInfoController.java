@@ -30,7 +30,6 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import org.martus.client.core.ConfigInfo;
@@ -39,7 +38,7 @@ import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 
-public class FxSetupContactInfoController extends AbstractFxSetupWizardContentController implements Initializable
+public class FxSetupContactInfoController extends FxStep2Controller
 {
 	public FxSetupContactInfoController(UiMainWindow mainWindowToUse)
 	{

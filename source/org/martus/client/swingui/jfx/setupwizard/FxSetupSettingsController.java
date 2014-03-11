@@ -33,10 +33,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.MartusLocalization;
@@ -46,7 +44,7 @@ import org.martus.client.swingui.jfx.FxController;
 import org.martus.clientside.CurrentUiState;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class FxSetupSettingsController extends AbstractFxSetupWizardContentController implements Initializable
+public class FxSetupSettingsController extends FxStep2Controller
 {
 	public FxSetupSettingsController(UiMainWindow mainWindowToUse)
 	{

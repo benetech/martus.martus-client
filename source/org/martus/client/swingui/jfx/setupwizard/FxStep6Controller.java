@@ -33,4 +33,10 @@ abstract public class FxStep6Controller extends AbstractFxSetupWizardContentCont
 	{
 		super(mainWindowToUse);
 	}
+	
+	@Override
+	public int getWizardStepNumber()
+	{
+		return 6;
+	}
 }

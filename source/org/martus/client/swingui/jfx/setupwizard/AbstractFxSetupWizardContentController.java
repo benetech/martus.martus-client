@@ -73,6 +73,8 @@ abstract public class AbstractFxSetupWizardContentController extends FxInSwingDi
 		return (FxWizardStage)getFxStage();
 	}
 	
+	abstract public int getWizardStepNumber();
+	
 	protected boolean isCurrentServerAvailable() throws Exception
 	{
 		IsServerAvailableTask task = new IsServerAvailableTask(getApp());
