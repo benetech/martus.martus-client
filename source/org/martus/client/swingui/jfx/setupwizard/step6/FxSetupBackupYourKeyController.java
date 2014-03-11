@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.setupwizard;
+package org.martus.client.swingui.jfx.setupwizard.step6;
 
 import java.io.File;
 
@@ -33,7 +33,6 @@ import javafx.stage.FileChooser;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
-import org.martus.client.swingui.jfx.setupwizard.step6.FxStep6Controller;
 import org.martus.util.FileTransfer;
 import org.martus.util.FileVerifier;
 import org.martus.util.TokenReplacement;
@@ -60,7 +59,7 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/SetupBackupYourKey.fxml";
+		return "setupwizard/step6/SetupBackupYourKey.fxml";
 	}
 	
 	private void doBackupKeyPairToSingleEncryptedFile() throws Exception 
