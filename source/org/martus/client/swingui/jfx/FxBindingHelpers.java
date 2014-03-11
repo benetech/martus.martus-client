@@ -31,18 +31,20 @@ public class FxBindingHelpers
 {
 	public static Property bindToOurPropertyField(Property cellProperty, Property currentFieldProperty, Property cellPropertyBoundToCurrently)
 	{
-		if(cellProperty == cellPropertyBoundToCurrently)
-			return cellPropertyBoundToCurrently;
-		
-		if(cellProperty.equals(cellPropertyBoundToCurrently))
-			return cellPropertyBoundToCurrently;
-		
-		if(cellPropertyBoundToCurrently != cellProperty) 
-			currentFieldProperty.unbindBidirectional(cellProperty);
-		
-		cellPropertyBoundToCurrently = cellProperty;
-		currentFieldProperty.bindBidirectional(cellPropertyBoundToCurrently);
-
+		if(cellPropertyBoundToCurrently==null) 
+		{
+			cellPropertyBoundToCurrently = cellProperty;
+			currentFieldProperty.bindBidirectional(cellProperty);
+		}
+		else
+		{
+			if(cellPropertyBoundToCurrently != cellProperty) 
+			{
+				currentFieldProperty.unbindBidirectional(cellPropertyBoundToCurrently);
+				cellPropertyBoundToCurrently = cellProperty;
+				currentFieldProperty.bindBidirectional(cellPropertyBoundToCurrently);
+			}
+		}
 		return cellPropertyBoundToCurrently;
 	}
 }
