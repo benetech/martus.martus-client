@@ -89,11 +89,11 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		
 		selectedTemplateLabel.setVisible(false);
 		switchFormsLaterLabel.setVisible(false);
-		safelySetCustomTemplateRadioVisibility();
+		safelyInitializeCustomTemplateRadioVisibility();
 		getWizardNavigationHandler().getNextButton().addEventHandler(ActionEvent.ACTION, new NextButtonHandler());
 	}
 
-	private void safelySetCustomTemplateRadioVisibility()
+	private void safelyInitializeCustomTemplateRadioVisibility()
 	{
 		try
 		{
