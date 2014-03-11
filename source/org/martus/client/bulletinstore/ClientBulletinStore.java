@@ -473,6 +473,9 @@ public class ClientBulletinStore extends BulletinStore
 
 	public synchronized int getFolderCount()
 	{
+		if(folders == null)
+			return 0;
+		
 		return folders.size();
 	}
 
