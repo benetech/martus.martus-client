@@ -11,42 +11,42 @@
       <children>
         <HBox fx:id="topBar" minWidth="-Infinity" prefWidth="-Infinity">
           <children>
-            <HBox>
+            <HBox fx:id="step1">
               <children>
                 <Label styleClass="TopBarStepNumber" text="1" />
                 <Label styleClass="TopBarStepName" text="Create Account" />
-                <Label styleClass="TopBarArrow" text="-&gt;" />
               </children>
             </HBox>
-            <HBox>
+            <Label styleClass="TopBarArrow" text="-&gt;" />
+            <HBox fx:id="step2">
               <children>
                 <Label styleClass="TopBarStepNumber" text="2" />
                 <Label styleClass="TopBarStepName" text="Settings" />
-                <Label styleClass="TopBarArrow" text="-&gt;" />
               </children>
             </HBox>
-            <HBox>
+            <Label styleClass="TopBarArrow" text="-&gt;" />
+            <HBox fx:id="step3">
               <children>
                 <Label styleClass="TopBarStepNumber" text="3" />
                 <Label styleClass="TopBarStepName" text="Server Setup" />
-                <Label styleClass="TopBarArrow" text="-&gt;" />
               </children>
             </HBox>
-            <HBox>
+            <Label styleClass="TopBarArrow" text="-&gt;" />
+            <HBox fx:id="step4">
               <children>
                 <Label styleClass="TopBarStepNumber" text="4" />
                 <Label styleClass="TopBarStepName" text="Contacts" />
-                <Label styleClass="TopBarArrow" text="-&gt;" />
               </children>
             </HBox>
-            <HBox>
+            <Label styleClass="TopBarArrow" text="-&gt;" />
+            <HBox fx:id="step5">
               <children>
                 <Label styleClass="TopBarStepNumber" text="5" />
                 <Label styleClass="TopBarStepName" text="Import Forms" />
-                <Label styleClass="TopBarArrow" text="-&gt;" />
               </children>
             </HBox>
-            <HBox>
+            <Label styleClass="TopBarArrow" text="-&gt;" />
+            <HBox fx:id="step6">
               <children>
                 <Label styleClass="TopBarStepNumber" text="6" />
                 <Label styleClass="TopBarStepName" text="Key Backup" />

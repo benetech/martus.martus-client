@@ -25,48 +25,12 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-
 import org.martus.client.swingui.UiMainWindow;
 
-public class FxSetupWizardTemplateController extends FxWizardTemplateController
+abstract public class FxStep5Controller extends AbstractFxSetupWizardContentController
 {
-	public FxSetupWizardTemplateController(UiMainWindow mainWindowToUse)
+	public FxStep5Controller(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
-	
-	@Override
-	public void initialize(URL location, ResourceBundle bundle)
-	{
-		super.initialize(location, bundle);
-
-		step1.getStyleClass().add("current-step");
-	}
-
-	@Override
-	public String getFxmlLocation()
-	{
-		return "setupwizard/SetupWizardFramework.fxml";
-	}
-	
-	public void setContentPane(AbstractFxSetupWizardContentController contentPaneController) throws Exception
-	{
-		setContentController(contentPaneController);
-		Parent createContents = contentPaneController.createContents();
-		
-		contentPane.getChildren().addAll(createContents);
-	}
-	
-	@FXML
-	protected HBox step1;
-	
-	@FXML
-	private Pane contentPane;	
 }

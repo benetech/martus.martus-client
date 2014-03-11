@@ -58,19 +58,31 @@
 
 #topBar {
 	-fx-background-color: MidnightBlue;
-	-fx-text-fill: White;
+	-fx-text-fill: Orange;
     -fx-padding: 6 6 6 6;
 	-fx-spacing: 10;
 }
 
-.TopBarStepNumber {
+.current-step {
+	-fx-background-color: Pink;
+}
+
+.current-step .TopBarStepNumber {
 	-fx-text-fill: White;
+}
+
+.current-step .TopBarStepName {
+	-fx-text-fill: White;
+}
+
+.TopBarStepNumber {
 	-fx-font: 20px "Sans-Serif";
+	-fx-text-fill: Orange;
 }
 
 .TopBarStepName {
-	-fx-text-fill: DarkGray;
 	-fx-alignment: center-left;
+	-fx-text-fill: Orange;
 }
 
 .TopBarArrow {
