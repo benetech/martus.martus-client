@@ -183,6 +183,9 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	@FXML
 	private void customDropDownSelectionChanged() throws Exception
 	{
+		if (customTemplatesComboBox.getSelectionModel().isEmpty())
+			return;
+		
 		AbstractFxImportFormTemplateController selectedController = customTemplatesComboBox.getSelectionModel().getSelectedItem();
 		importFromContacts(selectedController);
 	}
@@ -193,10 +196,22 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		genericTemplatesComboBox.setVisible(false);
 		customTemplatesComboBox.setVisible(false);
 		if (genericRadioButton.isSelected())
+		{
+			clearCustomComboBoxSelectionUsingWorkaround();
 			genericTemplatesComboBox.setVisible(true);
+		}
 		
 		if (downloadCustomRadioButton.isSelected())
+		{
+			genericTemplatesComboBox.getSelectionModel().clearSelection();
 			customTemplatesComboBox.setVisible(true);
+		}
+	}
+
+	private void clearCustomComboBoxSelectionUsingWorkaround()
+	{
+		customTemplatesComboBox.valueProperty().set(null);
+		customTemplatesComboBox.getSelectionModel().clearSelection();
 	}
 	
 	private void importFromContacts(AbstractFxImportFormTemplateController controller) throws Exception
