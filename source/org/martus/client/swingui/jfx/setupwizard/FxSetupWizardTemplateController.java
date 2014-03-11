@@ -32,6 +32,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxWizardTemplateController;
 
 public class FxSetupWizardTemplateController extends FxWizardTemplateController
 {
