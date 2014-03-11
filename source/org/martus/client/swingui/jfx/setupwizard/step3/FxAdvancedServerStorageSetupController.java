@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.setupwizard;
+package org.martus.client.swingui.jfx.setupwizard.step3;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -40,6 +40,7 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.setupwizard.FxAddContactsController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.GetServerPublicKeyTask;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
@@ -83,7 +84,7 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/AdvancedServerStorageSetup.fxml";
+		return "setupwizard/step3/AdvancedServerStorageSetup.fxml";
 	}
 	
 	@FXML
