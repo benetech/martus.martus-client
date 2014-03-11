@@ -40,8 +40,8 @@ import javafx.scene.control.TextField;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
-import org.martus.client.swingui.jfx.setupwizard.FxSetupContactInfoController;
 import org.martus.client.swingui.jfx.setupwizard.StaticAccountCreationData;
+import org.martus.client.swingui.jfx.setupwizard.step2.FxSetupContactInfoController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.CreateAccountTask;
 import org.martus.common.MartusLogger;
 

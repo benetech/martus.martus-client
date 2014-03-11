@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.setupwizard;
+package org.martus.client.swingui.jfx.setupwizard.step2;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,7 +37,6 @@ import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
-import org.martus.client.swingui.jfx.setupwizard.step2.FxStep2Controller;
 
 public class FxSetupContactInfoController extends FxStep2Controller
 {
@@ -91,7 +90,7 @@ public class FxSetupContactInfoController extends FxStep2Controller
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/SetupContactInfo.fxml";
+		return "setupwizard/step2/SetupContactInfo.fxml";
 	}
 	
 	@Override

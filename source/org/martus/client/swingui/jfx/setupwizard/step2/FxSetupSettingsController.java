@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.setupwizard;
+package org.martus.client.swingui.jfx.setupwizard.step2;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,7 +41,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPreferencesDlg;
 import org.martus.client.swingui.jfx.FxController;
-import org.martus.client.swingui.jfx.setupwizard.step2.FxStep2Controller;
+import org.martus.client.swingui.jfx.setupwizard.FxSetupStorageServerController;
 import org.martus.clientside.CurrentUiState;
 import org.martus.common.fieldspec.ChoiceItem;
 
@@ -130,7 +130,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/SetupSettings.fxml";
+		return "setupwizard/step2/SetupSettings.fxml";
 	}
 	
 	@Override
