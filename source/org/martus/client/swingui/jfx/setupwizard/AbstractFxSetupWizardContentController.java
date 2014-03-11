@@ -36,6 +36,7 @@ import org.martus.client.swingui.jfx.ContentNavigationHandlerInterface;
 import org.martus.client.swingui.jfx.FxInSwingDialogController;
 import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.NavigationButtonsInterface;
+import org.martus.client.swingui.jfx.setupwizard.tasks.IsServerAvailableTask;
 
 abstract public class AbstractFxSetupWizardContentController extends FxInSwingDialogController implements ContentNavigationHandlerInterface, Initializable
 {
@@ -70,6 +71,14 @@ abstract public class AbstractFxSetupWizardContentController extends FxInSwingDi
 	public FxWizardStage getWizardStage()
 	{
 		return (FxWizardStage)getFxStage();
+	}
+	
+	protected boolean isDefaultServerAvailable() throws Exception
+	{
+		IsServerAvailableTask task = new IsServerAvailableTask(getApp());
+		showTimeoutDialog("*Connecting*", "Attempting to connect to server", task, 60);
+		boolean isDefaultServerAvailable = task.isAvailable();
+		return isDefaultServerAvailable;
 	}
 	
 	private NavigationButtonsInterface wizardNavigationHandler;
