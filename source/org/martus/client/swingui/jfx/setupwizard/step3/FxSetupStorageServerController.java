@@ -34,8 +34,8 @@ import javafx.scene.control.Hyperlink;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
-import org.martus.client.swingui.jfx.setupwizard.FxAddContactsController;
 import org.martus.client.swingui.jfx.setupwizard.FxSetupImportTemplatesController;
+import org.martus.client.swingui.jfx.setupwizard.step4.FxAddContactsController;
 import org.martus.common.MartusLogger;
 
 public class FxSetupStorageServerController extends FxSetupWizardAbstractServerSetupController

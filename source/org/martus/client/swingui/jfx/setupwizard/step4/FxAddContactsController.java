@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.setupwizard;
+package org.martus.client.swingui.jfx.setupwizard.step4;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -56,7 +56,8 @@ import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.FxInSwingDialogStage;
 import org.martus.client.swingui.jfx.FxPopupController;
 import org.martus.client.swingui.jfx.FxTableCellTextFieldFactory;
-import org.martus.client.swingui.jfx.setupwizard.step4.FxStep4Controller;
+import org.martus.client.swingui.jfx.setupwizard.ContactsTableData;
+import org.martus.client.swingui.jfx.setupwizard.FxSetupImportTemplatesController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.LookupAccountFromTokenTask;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
@@ -382,7 +383,7 @@ public class FxAddContactsController extends FxStep4Controller
 		@Override
 		public String getFxmlLocation()
 		{
-			return "setupwizard/SetupAddContactPopup.fxml";
+			return "setupwizard/step4/SetupAddContactPopup.fxml";
 		}
 
 		@Override
@@ -444,7 +445,7 @@ public class FxAddContactsController extends FxStep4Controller
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/SetupAddContacts.fxml";
+		return "setupwizard/step4/SetupAddContacts.fxml";
 	}
 	
 	@Override
