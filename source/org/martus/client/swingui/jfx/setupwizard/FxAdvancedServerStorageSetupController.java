@@ -67,7 +67,7 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 		{
 			try
 			{
-				String publicCode = MartusSecurity.computeFormattedPublicCode(serverKey);
+				String publicCode = MartusSecurity.computeFormattedPublicCode40(serverKey);
 				publicCodeField.setText(publicCode);
 			}
 			catch(Exception e)
