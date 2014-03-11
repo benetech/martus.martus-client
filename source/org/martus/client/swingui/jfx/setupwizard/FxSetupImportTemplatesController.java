@@ -89,11 +89,11 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		
 		selectedTemplateLabel.setVisible(false);
 		switchFormsLaterLabel.setVisible(false);
-		safelySetCustomTemplateRadioVisibility();
+		safelyInitializeCustomTemplateRadioVisibility();
 		getWizardNavigationHandler().getNextButton().addEventHandler(ActionEvent.ACTION, new NextButtonHandler());
 	}
 
-	private void safelySetCustomTemplateRadioVisibility()
+	private void safelyInitializeCustomTemplateRadioVisibility()
 	{
 		try
 		{
@@ -107,19 +107,11 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	
 	private ObservableList<AbstractFxImportFormTemplateController> getImportTemplateChoices()
 	{
-		try
-		{
-			Vector<AbstractFxImportFormTemplateController> choices = new Vector<AbstractFxImportFormTemplateController>();
-			choices.add(new FxImportFormTemplateFromMyContactsPopupController(getMainWindow()));
-			choices.add(new FxSetupFormTemplateFromNewContactPopupController(getMainWindow()));
+		Vector<AbstractFxImportFormTemplateController> choices = new Vector<AbstractFxImportFormTemplateController>();
+		choices.add(new FxImportFormTemplateFromMyContactsPopupController(getMainWindow()));
+		choices.add(new FxSetupFormTemplateFromNewContactPopupController(getMainWindow()));
 
-			return FXCollections.observableArrayList(choices);
-		}
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-			return FXCollections.observableArrayList();
-		}
+		return FXCollections.observableArrayList(choices);
 	}
 
 	private ObservableList<CustomFieldTemplate> getDefaultFormTemplateChoices()
