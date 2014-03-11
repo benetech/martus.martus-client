@@ -25,10 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -43,14 +41,6 @@ public class FxSetupWizardTemplateController extends FxWizardTemplateController
 	}
 	
 	@Override
-	public void initialize(URL location, ResourceBundle bundle)
-	{
-		super.initialize(location, bundle);
-
-		step1.getStyleClass().add("current-step");
-	}
-
-	@Override
 	public String getFxmlLocation()
 	{
 		return "setupwizard/SetupWizardFramework.fxml";
@@ -62,11 +52,40 @@ public class FxSetupWizardTemplateController extends FxWizardTemplateController
 		Parent createContents = contentPaneController.createContents();
 		
 		contentPane.getChildren().addAll(createContents);
+
+		int stepNumber = contentPaneController.getWizardStepNumber();
+		Node step = getStep(stepNumber);
+		step.getStyleClass().add("current-step");
 	}
 	
+	private Node getStep(int stepNumber)
+	{
+		switch(stepNumber)
+		{
+			case 1: return step1;
+			case 2: return step2;
+			case 3: return step3;
+			case 4: return step4;
+			case 5: return step5;
+			case 6: return step6;
+		}
+		
+		throw new RuntimeException("Unknown step number: " + stepNumber);
+	}
+
 	@FXML
 	protected HBox step1;
-	
+	@FXML
+	protected HBox step2;
+	@FXML
+	protected HBox step3;
+	@FXML
+	protected HBox step4;
+	@FXML
+	protected HBox step5;
+	@FXML
+	protected HBox step6;
+
 	@FXML
 	private Pane contentPane;	
 }
