@@ -32,13 +32,15 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.util.StringConverter;
@@ -74,14 +76,16 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		genericTemplatesComboBox.setConverter(new FormTemplateToStringConverter());
-		genericTemplatesComboBox.setItems(FXCollections.observableArrayList(getDefaultFormTemplateChoices()));
+		genericTemplatesChoiceBox.setConverter(new FormTemplateToStringConverter());
+		genericTemplatesChoiceBox.setItems(FXCollections.observableArrayList(getDefaultFormTemplateChoices()));
+		genericTemplatesChoiceBox.getSelectionModel().selectedItemProperty().addListener(new GenericTemplatesSelectionChangedHandler());
 
-		customTemplatesComboBox.setItems(FXCollections.observableArrayList(getImportTemplateChoices()));
-		customTemplatesComboBox.setConverter(new ControllerToStringConverter());
+		customTemplatesChoiceBox.setItems(FXCollections.observableArrayList(getImportTemplateChoices()));
+		customTemplatesChoiceBox.setConverter(new ControllerToStringConverter());
+		customTemplatesChoiceBox.getSelectionModel().selectedItemProperty().addListener(new CustomTemplatesSelectionChangedHandler());
 		
-		genericTemplatesComboBox.setVisible(false);
-		customTemplatesComboBox.setVisible(false);
+		genericTemplatesChoiceBox.setVisible(false);
+		customTemplatesChoiceBox.setVisible(false);
 		
 		selectedTemplateLabel.setVisible(false);
 		switchFormsLaterLabel.setVisible(false);
@@ -173,47 +177,45 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	@FXML
 	private void genericComboBoxSelectionChanged() throws Exception
 	{
-		CustomFieldTemplate genericCustomFieldTemplate = genericTemplatesComboBox.getSelectionModel().getSelectedItem();
-		if (genericCustomFieldTemplate == null)
+		if (genericTemplatesChoiceBox.getSelectionModel().isEmpty())
 			return;
 		
+		CustomFieldTemplate genericCustomFieldTemplate = genericTemplatesChoiceBox.getSelectionModel().getSelectedItem();
 		updateSelectedCustomFieldTemplateComponents(genericCustomFieldTemplate);
+		genericTemplatesChoiceBox.getSelectionModel().clearSelection();
 	}
 
 	@FXML
 	private void customDropDownSelectionChanged() throws Exception
 	{
-		if (customTemplatesComboBox.getSelectionModel().isEmpty())
+		if (customTemplatesChoiceBox.getSelectionModel().isEmpty())
 			return;
 		
-		AbstractFxImportFormTemplateController selectedController = customTemplatesComboBox.getSelectionModel().getSelectedItem();
+		AbstractFxImportFormTemplateController selectedController = customTemplatesChoiceBox.getSelectionModel().getSelectedItem();
 		importFromContacts(selectedController);
+		customTemplatesChoiceBox.getSelectionModel().clearSelection();
 	}
 	
 	@FXML
 	private void radioButtonSelectionChanged()
 	{
-		genericTemplatesComboBox.setVisible(false);
-		customTemplatesComboBox.setVisible(false);
+		genericTemplatesChoiceBox.setVisible(false);
+		customTemplatesChoiceBox.setVisible(false);
+
+		genericTemplatesChoiceBox.getSelectionModel().clearSelection();
+		customTemplatesChoiceBox.getSelectionModel().clearSelection();
+		
 		if (genericRadioButton.isSelected())
 		{
-			clearCustomComboBoxSelectionUsingWorkaround();
-			genericTemplatesComboBox.setVisible(true);
+			genericTemplatesChoiceBox.setVisible(true);
 		}
 		
 		if (downloadCustomRadioButton.isSelected())
 		{
-			genericTemplatesComboBox.getSelectionModel().clearSelection();
-			customTemplatesComboBox.setVisible(true);
+			customTemplatesChoiceBox.setVisible(true);
 		}
 	}
 
-	private void clearCustomComboBoxSelectionUsingWorkaround()
-	{
-		customTemplatesComboBox.valueProperty().set(null);
-		customTemplatesComboBox.getSelectionModel().clearSelection();
-	}
-	
 	private void importFromContacts(AbstractFxImportFormTemplateController controller) throws Exception
 	{
 		showControllerInsideModalDialog(controller);
@@ -223,6 +225,7 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	
 	private void updateSelectedCustomFieldTemplateComponents(CustomFieldTemplate customFieldTemplate) throws Exception
 	{
+		selectedFormTemplateToSave = customFieldTemplate;
 		boolean shouldAllowFormTemplate = false;
 		String loadFormTemplateMessage = "";
 		if (customFieldTemplate != null)
@@ -248,6 +251,48 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		}
 	}
 	
+	private class CustomTemplatesSelectionChangedHandler implements ChangeListener<AbstractFxImportFormTemplateController>
+	{
+		@Override
+		public void changed(ObservableValue<? extends AbstractFxImportFormTemplateController> observable, AbstractFxImportFormTemplateController oldValue, AbstractFxImportFormTemplateController newValue)
+		{
+			if (customTemplatesChoiceBox.getSelectionModel().isEmpty())
+				return;
+			
+			try
+			{
+				AbstractFxImportFormTemplateController selectedController = customTemplatesChoiceBox.getSelectionModel().getSelectedItem();
+				importFromContacts(selectedController);
+				customTemplatesChoiceBox.getSelectionModel().clearSelection();
+			}
+			catch (Exception e)
+			{
+				MartusLogger.logException(e);
+			}
+		}
+	}
+	
+	private class GenericTemplatesSelectionChangedHandler implements ChangeListener<CustomFieldTemplate>
+	{
+		@Override
+		public void changed(ObservableValue<? extends CustomFieldTemplate> observable, CustomFieldTemplate oldValue, CustomFieldTemplate newValue)
+		{
+			if (genericTemplatesChoiceBox.getSelectionModel().isEmpty())
+				return;
+
+			try
+			{
+				CustomFieldTemplate genericCustomFieldTemplate = genericTemplatesChoiceBox.getSelectionModel().getSelectedItem();
+				updateSelectedCustomFieldTemplateComponents(genericCustomFieldTemplate);
+				genericTemplatesChoiceBox.getSelectionModel().clearSelection();
+			}
+			catch (Exception e)
+			{
+				MartusLogger.logException(e);
+			}
+		}
+	}
+	
 	private class NextButtonHandler implements EventHandler<ActionEvent>
 	{
 		public NextButtonHandler()
@@ -257,19 +302,8 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 		@Override
 		public void handle(ActionEvent event)
 		{
-			CustomFieldTemplate formTemplateToSave = null;
-			if (genericRadioButton.isSelected())
-			{
-				formTemplateToSave = genericTemplatesComboBox.getSelectionModel().getSelectedItem();
-			}
-			if (downloadCustomRadioButton.isSelected())
-			{
-				AbstractFxImportFormTemplateController controller = customTemplatesComboBox.getSelectionModel().getSelectedItem();
-				formTemplateToSave = controller.getSelectedFormTemplate();
-			}
-			
-			if (formTemplateToSave != null)
-				saveCustomFieldTemplate(formTemplateToSave);
+			if (selectedFormTemplateToSave != null)
+				saveCustomFieldTemplate(selectedFormTemplateToSave);
 		}
 	}
 	
@@ -289,10 +323,10 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	}
 	
 	@FXML 
-	protected ComboBox<CustomFieldTemplate> genericTemplatesComboBox;
+	protected ChoiceBox<CustomFieldTemplate> genericTemplatesChoiceBox;
 	
 	@FXML
-	private ComboBox<AbstractFxImportFormTemplateController> customTemplatesComboBox;
+	private ChoiceBox<AbstractFxImportFormTemplateController> customTemplatesChoiceBox;
 	
 	@FXML
 	protected RadioButton genericRadioButton;
@@ -305,4 +339,6 @@ public class FxSetupImportTemplatesController extends AbstractFxSetupWizardConte
 	
 	@FXML
 	private Label selectedTemplateLabel;
+	
+	private CustomFieldTemplate selectedFormTemplateToSave;
 }
