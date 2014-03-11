@@ -67,7 +67,7 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 		{
 			try
 			{
-				String publicCode = MartusSecurity.computeFormattedPublicCode(serverKey);
+				String publicCode = MartusSecurity.computeFormattedPublicCode40(serverKey);
 				publicCodeField.setText(publicCode);
 			}
 			catch(Exception e)
@@ -100,10 +100,11 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 			
 			String serverKey = task.getPublicKey();
 			String serverPublicCode = MartusCrypto.computePublicCode(serverKey);
+			String serverPublicCode40 = MartusCrypto.computePublicCode40(serverKey);
 
 			String userEnteredPublicCode = publicCodeField.getText();
 			String normalizedPublicCode = MartusCrypto.removeNonDigits(userEnteredPublicCode);
-			if(!serverPublicCode.equals(normalizedPublicCode))
+			if(!(serverPublicCode.equals(normalizedPublicCode) || serverPublicCode40.equals(normalizedPublicCode)))
 			{
 				showError("ServerCodeWrong");
 				return;

@@ -38,8 +38,8 @@
       
       <children>
         <Label layoutX="5.0" layoutY="296.0" text="Date format sequence" />
-        <ComboBox fx:id="dateFormatSequenceDropDown" layoutX="166.0" layoutY="304.0" GridPane.columnIndex="1" xmlns:fx="http://javafx.com/fxml" />
-        <ComboBox fx:id="dateDelimeterComboBox" layoutX="150.0" layoutY="283.0" GridPane.columnIndex="1" GridPane.rowIndex="1" xmlns:fx="http://javafx.com/fxml" />
+        <ChoiceBox fx:id="dateFormatSequenceDropDown" layoutX="166.0" layoutY="304.0" GridPane.columnIndex="1" xmlns:fx="http://javafx.com/fxml" />
+        <ChoiceBox fx:id="dateDelimeterComboBox" layoutX="150.0" layoutY="283.0" GridPane.columnIndex="1" GridPane.rowIndex="1" xmlns:fx="http://javafx.com/fxml" />
         <Label layoutX="52.0" layoutY="309.0" text="Date delimeter" GridPane.rowIndex="1" />
       </children>
     </GridPane>

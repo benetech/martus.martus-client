@@ -35,6 +35,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 
 import org.martus.client.core.ConfigInfo;
@@ -70,12 +71,12 @@ public class FxSetupSettingsController extends AbstractFxSetupWizardContentContr
 		selectItemByCode(dateDelimeterComboBox, dateDelimeterCode);
 	}
 
-	private void selectItemByCode(ComboBox comboBox, String code)
+	private void selectItemByCode(ChoiceBox choiceBox, String code)
 	{
-		ObservableList<ChoiceItem> choices = comboBox.getItems();
+		ObservableList<ChoiceItem> choices = choiceBox.getItems();
 		for(int i = 0; i < choices.size(); ++i)
 			if(choices.get(i).getCode().equals(code))
-				comboBox.getSelectionModel().select(i);
+				choiceBox.getSelectionModel().select(i);
 	}
 	
 	@Override
@@ -143,8 +144,8 @@ public class FxSetupSettingsController extends AbstractFxSetupWizardContentContr
 	private CheckBox userTorCheckBox;
 	
 	@FXML
-	private ComboBox<ChoiceItem> dateFormatSequenceDropDown;
+	private ChoiceBox<ChoiceItem> dateFormatSequenceDropDown;
 	
 	@FXML
-	private ComboBox<ChoiceItem> dateDelimeterComboBox;
+	private ChoiceBox<ChoiceItem> dateDelimeterComboBox;
 }

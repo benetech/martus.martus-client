@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.setupwizard;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.tasks.GetServerComplianceStatementTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.IsServerAvailableTask;
@@ -54,10 +55,12 @@ abstract public class FxSetupWizardAbstractServerSetupController extends Abstrac
 			showTimeoutDialog("*Connecting*", "Attempting to connect to server", task, 60);
 			if(!task.isAvailable())
 			{
-				// FIXME: This should be a confirmation
-				showNotifyDialog("ServerSSLNotResponding");
-				saveServerConfig(serverIPAddress, serverPublicKey, "");
-				return true;
+				//FIXME put in real text/title here.
+				if(showConfirmationDialog("title", "SSL Not responding.  Save this configuration?"))
+				{
+					saveServerConfig(serverIPAddress, serverPublicKey, "");
+					return true;
+				}
 			}
 		}
 		catch(UserCancelledException e)
@@ -133,13 +136,15 @@ abstract public class FxSetupWizardAbstractServerSetupController extends Abstrac
 	
 	private boolean acceptCompliance(String newServerCompliance)
 	{
-		// FIXME: Actually allow the user to accept/reject
-		showNotifyDialog("ReplaceThisWithAConfirmationDialogShowingTheComplianceStatement");
-		boolean accepted = true;
-		if(!accepted)
+		MartusLocalization localization = getLocalization();
+		String title = localization.getWindowTitle("ServerCompliance");
+		String complianceStatementMsg = String.format("%s\n\n%s", localization.getFieldLabel("ServerComplianceDescription"), newServerCompliance);
+		if(!showConfirmationDialog(title, complianceStatementMsg))
+		{
 			showNotifyDialog("UserRejectedServerCompliance");
-		
-		return accepted;
+			return false;
+		}
+		return true;
 	}
 
 	
