@@ -111,9 +111,16 @@ abstract public class FxController implements Initializable
 	
 	public void showNotifyDialog(String baseTag)
 	{
+		String extraMessage = "";
+		showNotifyDialog(baseTag, extraMessage);
+	}
+
+	public void showNotifyDialog(String baseTag, String extraMessage)
+	{
 		try
 		{
 			PopupNotifyController popupController = new PopupNotifyController(getMainWindow(), baseTag);
+			popupController.setExtraMessage(extraMessage);
 			showControllerInsideModalDialog(popupController);
 		} 
 		catch (Exception e)
@@ -157,6 +164,7 @@ abstract public class FxController implements Initializable
 		{
 			super(mainWindowToUse);
 			baseTag = notificationTag;
+			extraMessage = "";
 		}
 		
 		@Override
@@ -164,7 +172,13 @@ abstract public class FxController implements Initializable
 		{
 			MartusLocalization localization = getLocalization();
 			fxOkButton.setText(localization.getButtonLabel("ok"));
-			fxLabel.setText(localization.getFieldLabel("notify"+baseTag+"cause"));
+			String fullMessage = String.format("%s  %s", localization.getFieldLabel("notify"+baseTag+"cause"), extraMessage);
+			fxLabel.setText(fullMessage);
+		}
+		
+		public void setExtraMessage(String extraMessageToUse)
+		{
+			extraMessage = extraMessageToUse;
 		}
 		
 		@Override
@@ -192,6 +206,7 @@ abstract public class FxController implements Initializable
 		private Button fxOkButton;
 
 		private String baseTag;
+		private String extraMessage;
 	}
 
 	public static class PopupConfirmationController extends FxPopupController implements Initializable
