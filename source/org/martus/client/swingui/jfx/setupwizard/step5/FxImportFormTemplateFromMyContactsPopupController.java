@@ -295,7 +295,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 				MartusLocalization localization = getLocalization();
 				String busyTitle = localization.getWindowTitle("LoadingTemplates");
 				String message = localization.getFieldLabel("LoadingTemplates");
-				showBusyDialog(busyTitle, message, task);
+				showTimeoutDialog(busyTitle, message, task, 60);
 			} 
 			catch (ServerNotAvailableException e)
 			{
