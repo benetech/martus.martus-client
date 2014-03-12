@@ -25,13 +25,15 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step5;
 
-import java.util.Vector;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxPopupController;
+import org.martus.client.swingui.jfx.setupwizard.tasks.DownloadTemplateListForAccountTask;
+import org.martus.common.ContactKey;
 import org.martus.common.fieldspec.CustomFieldTemplate;
 
 abstract public class AbstractFxImportFormTemplateController extends FxPopupController
@@ -41,23 +43,15 @@ abstract public class AbstractFxImportFormTemplateController extends FxPopupCont
 		super(mainWindowToUse);
 	}
 	
-	protected ObservableList<CustomFieldTemplate> getFormTemplates(String publicKey) throws Exception
-	{
-		Vector returnedVectorListOfTemplatesFromServer = getApp().getListOfFormTemplatesOnServer(publicKey);
-
-		return getTitlesFromResults(publicKey, returnedVectorListOfTemplatesFromServer);
-	}
-	
-	private ObservableList<CustomFieldTemplate> getTitlesFromResults(String publicKey, Vector<Vector<String>> returnedVectorListOfTemplatesFromServer) throws Exception
+	protected ObservableList<CustomFieldTemplate> getFormTemplates(ContactKey contactKey) throws Exception
 	{
 		ObservableList<CustomFieldTemplate> formTemplates = FXCollections.observableArrayList();
-		for (int index = 0; index < returnedVectorListOfTemplatesFromServer.size(); ++index)
-		{
-			Vector<String> titleAndDescrptonVector = returnedVectorListOfTemplatesFromServer.get(index);
-			String title = titleAndDescrptonVector.get(0);
-			formTemplates.add(getApp().getFormTemplateOnServer(publicKey, title));
-		}
-		
+		Task task = new DownloadTemplateListForAccountTask(getApp(), contactKey, formTemplates);
+		MartusLocalization localization = getLocalization();
+		String busyTitle = localization.getWindowTitle("LoadingTemplates");
+		String message = localization.getFieldLabel("LoadingTemplates");
+		showTimeoutDialog(busyTitle, message, task, 60);
+
 		return formTemplates;
 	}
 	
