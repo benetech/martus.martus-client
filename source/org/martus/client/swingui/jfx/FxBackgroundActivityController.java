@@ -63,7 +63,6 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 		Stage stage = getStage();
 		stage.setOnCloseRequest(new CloseEventHandler());
 		stage.initStyle(StageStyle.UNDECORATED);
-
 		Thread thread = new Thread(task);
 		thread.setDaemon(false);
 		thread.start();

@@ -28,17 +28,17 @@ package org.martus.client.swingui.jfx;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.concurrent.Task;
-
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractAppTask;
 import org.martus.common.ProgressMeterInterface;
 
 
 public class FxProgressController extends FxBackgroundActivityController implements ProgressMeterInterface
 {
-	public FxProgressController(UiMainWindow mainWindowToUse, String titleToUse, String messageToUse, Task taskToUse)
+	public FxProgressController(UiMainWindow mainWindowToUse, String titleToUse, String messageToUse, AbstractAppTask taskToUse)
 	{
 		super(mainWindowToUse, titleToUse, messageToUse, taskToUse);
+		taskToUse.setProgressInterface(this);
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class FxProgressController extends FxBackgroundActivityController impleme
 	@Override
 	public void updateProgressMeter(int currentValue, int maxValue)
 	{
-		double percentComplete = currentValue/maxValue;
+		double percentComplete = (double)currentValue/(double)maxValue;
 		fxProgressBar.setProgress(percentComplete);
 	}
 

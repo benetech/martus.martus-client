@@ -44,6 +44,7 @@ import javafx.stage.Stage;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractAppTask;
 import org.martus.common.MartusLogger;
 
 abstract public class FxController implements Initializable
@@ -152,9 +153,17 @@ abstract public class FxController implements Initializable
 
 	public void showTimeoutDialog(String title, String message, Task task, int maxSecondsToCompleteTask) throws Exception
 	{
-		FxPopupController popupController = new FxTimeoutController(getMainWindow(), title, message, task, maxSecondsToCompleteTask);
+		FxTimeoutController popupController = new FxTimeoutController(getMainWindow(), title, message, task, maxSecondsToCompleteTask);
 		showControllerInsideModalDialog(popupController);
-		if(((FxTimeoutController)popupController).didUserCancel())
+		if(popupController.didUserCancel())
+			throw new UserCancelledException();
+	}
+
+	public void showProgressDialog(String title, String message, AbstractAppTask task) throws Exception
+	{
+		FxProgressController popupController = new FxProgressController(getMainWindow(), title, message, task);
+		showControllerInsideModalDialog(popupController);
+		if(popupController.didUserCancel())
 			throw new UserCancelledException();
 	}
 
