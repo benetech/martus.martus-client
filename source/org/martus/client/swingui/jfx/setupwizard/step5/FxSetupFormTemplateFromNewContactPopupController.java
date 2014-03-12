@@ -40,6 +40,8 @@ import javafx.scene.control.TextField;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.setupwizard.AccessTokenChangeHandler;
+import org.martus.common.ContactKey;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenNotFoundException;
@@ -64,6 +66,9 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 		formTemplateChoiceBox.setVisible(false);
 		formsFromUserMessageLabel.setVisible(false);
 		continueButton.setVisible(false);
+		
+		seeFormTemplatesButton.setDisable(true);
+		accessTokenTextField.textProperty().addListener(new AccessTokenChangeHandler(accessTokenTextField, seeFormTemplatesButton));
 	}
 	
 	@FXML
@@ -90,7 +95,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 			String formsFromUserMessage = TokenReplacement.replaceToken("Forms from user #userAccessToken", "#userAccessToken", accessTokenTextField.getText());
 			formsFromUserMessageLabel.setText(formsFromUserMessage);
 			
-			ObservableList<CustomFieldTemplate> fieldTemplates = getFormTemplates(contactAccountId);
+			ObservableList<CustomFieldTemplate> fieldTemplates = getFormTemplates(new ContactKey(contactAccountId));
 			
 			formTemplateChoiceBox.setVisible(true);
 			formTemplateChoiceBox.setItems(fieldTemplates);
@@ -176,4 +181,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 	
 	@FXML
 	private TextField accessTokenTextField;
+	
+	@FXML
+	private Button seeFormTemplatesButton;
 }

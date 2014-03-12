@@ -33,7 +33,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -49,12 +48,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
 
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxBindingHelpers;
 import org.martus.client.swingui.jfx.FxRadioButtonCellFactory;
 import org.martus.client.swingui.jfx.setupwizard.ContactsWithTemplatesTableData;
-import org.martus.client.swingui.jfx.setupwizard.tasks.DownloadTemplateListForAccountTask;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.Exceptions.AccountNotFoundException;
@@ -291,11 +288,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 			{
 				ObservableList<CustomFieldTemplate> formTemplateChoices = rowData.getFormTemplateChoices();
 				formTemplateChoices.clear();
-				Task task = new DownloadTemplateListForAccountTask(getApp(), rowData.getContactKey(), formTemplateChoices);
-				MartusLocalization localization = getLocalization();
-				String busyTitle = localization.getWindowTitle("LoadingTemplates");
-				String message = localization.getFieldLabel("LoadingTemplates");
-				showTimeoutDialog(busyTitle, message, task, 60);
+				getFormTemplates(rowData.getContactKey(), formTemplateChoices);
 			} 
 			catch (ServerNotAvailableException e)
 			{
