@@ -29,6 +29,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -54,6 +56,8 @@ public class FxSetupSettingsController extends FxStep2Controller
 	
 	public void initialize(URL url, ResourceBundle resourceBundle)
 	{
+		userTorCheckBox.selectedProperty().addListener(new FxCheckboxListener());
+
 		userTorCheckBox.setSelected(getApp().getConfigInfo().useInternalTor());
 
 		ObservableList<ChoiceItem> dateFormatChoices = getDateFormatChoices();
@@ -102,11 +106,19 @@ public class FxSetupSettingsController extends FxStep2Controller
 		ConfigInfo configInfo = getApp().getConfigInfo();
 		//NOTE: This might belong somewhere else, but for now it's important to set it.
 		configInfo.setForceBulletinsAllPrivate(true);
-		configInfo.setUseInternalTor(userTorCheckBox.isSelected());
 		getMainWindow().saveConfigInfo();
-		getApp().startOrStopTorAsRequested();
+		startOrStopTorAsRequested();
 	}
 	
+	protected void startOrStopTorAsRequested()
+	{
+		ConfigInfo configInfo = getApp().getConfigInfo();
+		configInfo.setUseInternalTor(userTorCheckBox.isSelected());
+		getMainWindow().saveConfigInfo();
+		
+		getApp().startOrStopTorAsRequested();
+	}
+
 	private ObservableList<ChoiceItem> getDateFormatChoices()
 	{
 		Vector<ChoiceItem> choices = new Vector<ChoiceItem>();
@@ -126,6 +138,19 @@ public class FxSetupSettingsController extends FxStep2Controller
 
 		return FXCollections.observableArrayList(choices);
 	}
+
+	private final class FxCheckboxListener implements ChangeListener<Boolean>
+	{
+		public FxCheckboxListener()
+		{
+		}
+
+		@Override
+		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) 
+		{
+			startOrStopTorAsRequested();
+		}
+	}
 	
 	@Override
 	public String getFxmlLocation()
@@ -139,8 +164,8 @@ public class FxSetupSettingsController extends FxStep2Controller
 		return new FxSetupStorageServerController(getMainWindow());
 	}
 
-	@FXML
-	private CheckBox userTorCheckBox;
+	@FXML 
+	protected CheckBox userTorCheckBox;
 	
 	@FXML
 	private ChoiceBox<ChoiceItem> dateFormatSequenceDropDown;
