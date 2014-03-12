@@ -26,29 +26,23 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.setupwizard.tasks;
 
 import org.martus.client.core.MartusApp;
-import org.martus.common.ProgressMeterInterface;
 
-import javafx.concurrent.Task;
-
-abstract public class AbstractAppTask extends Task<Void>
+public class TorInitializationTask extends AbstractAppTask
 {
-	public AbstractAppTask(MartusApp appToUse)
+	public TorInitializationTask(MartusApp appToUse)
 	{
-		app = appToUse;
+		super(appToUse);
 	}
 
-	protected MartusApp getApp()
+	@Override
+	protected Void call() throws Exception
 	{
-		return app;
+		app.getTransport().setProgressMeter(progress);
+		app.startOrStopTorAsRequested();
+		while (!app.getTransport().isReady())
+		{
+			Thread.sleep(1000);
+		}
+		return null;
 	}
-
-	public void setProgressInterface(ProgressMeterInterface interfaceToUse)
-	{
-		progress = interfaceToUse;
-	}
-	
-	
-	protected MartusApp app;
-	ProgressMeterInterface progress;
-
 }
