@@ -28,11 +28,13 @@ package org.martus.client.swingui.jfx.setupwizard.step5;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -55,10 +57,11 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		customFieldTemplatesComboBox.setConverter(new FormTemplateToStringConverter());
+		formTemplateChoiceBox.setConverter(new FormTemplateToStringConverter());
+		formTemplateChoiceBox.valueProperty().addListener(new FieldTemplateChoiceChangeHandler());
 		
 		importFromThisConctactLabel.setVisible(false);
-		customFieldTemplatesComboBox.setVisible(false);
+		formTemplateChoiceBox.setVisible(false);
 		formsFromUserMessageLabel.setVisible(false);
 		continueButton.setVisible(false);
 	}
@@ -89,8 +92,8 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 			
 			ObservableList<CustomFieldTemplate> fieldTemplates = getFormTemplates(contactAccountId);
 			
-			customFieldTemplatesComboBox.setVisible(true);
-			customFieldTemplatesComboBox.setItems(fieldTemplates);
+			formTemplateChoiceBox.setVisible(true);
+			formTemplateChoiceBox.setItems(fieldTemplates);
 		} 
 		catch (ServerNotAvailableException e)
 		{
@@ -107,11 +110,10 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 		} 
 	}
 
-	@FXML
-	private void comboSelectionChanged()
+	protected void comboSelectionChanged(boolean isVisible)
 	{
-		importFromThisConctactLabel.setVisible(true);
-		continueButton.setVisible(true);
+		importFromThisConctactLabel.setVisible(isVisible);
+		continueButton.setVisible(isVisible);
 	}
 
 	@FXML
@@ -122,7 +124,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 
 	public CustomFieldTemplate getSelectedFormTemplate()
 	{
-		return customFieldTemplatesComboBox.getSelectionModel().getSelectedItem();
+		return formTemplateChoiceBox.getSelectionModel().getSelectedItem();
 	}
 
 	@Override
@@ -142,12 +144,28 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 	{
 		return "Import from New Contact";
 	}
+	
+	private class FieldTemplateChoiceChangeHandler implements ChangeListener<CustomFieldTemplate>
+	{
+		public FieldTemplateChoiceChangeHandler()
+		{
+		}
+		
+		@Override
+		public void changed(ObservableValue<? extends CustomFieldTemplate> observable, CustomFieldTemplate oldValue, CustomFieldTemplate newValue)
+		{
+			if (newValue != null)
+			{
+				comboSelectionChanged(newValue != null); 
+			}
+		}
+	}
 
 	@FXML
 	private Label formsFromUserMessageLabel;
 	
 	@FXML
-	private ComboBox<CustomFieldTemplate> customFieldTemplatesComboBox;
+	private ChoiceBox<CustomFieldTemplate> formTemplateChoiceBox;
 	
 	
 	@FXML
