@@ -159,10 +159,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 		@Override
 		public void changed(ObservableValue<? extends CustomFieldTemplate> observable, CustomFieldTemplate oldValue, CustomFieldTemplate newValue)
 		{
-			if (newValue != null)
-			{
-				comboSelectionChanged(newValue != null); 
-			}
+			comboSelectionChanged(newValue != null); 
 		}
 	}
 
