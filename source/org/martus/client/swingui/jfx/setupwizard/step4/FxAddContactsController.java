@@ -169,7 +169,7 @@ public class FxAddContactsController extends FxStep4Controller
 		try
 		{
 			ContactKey newContact = new ContactKey(contactAccountId);
-			VerifyContactPopupController popupController = new VerifyContactPopupController(getMainWindow(), newContact.getFormattedPublicCode());
+			VerifyContactPopupController popupController = new VerifyContactPopupController(getMainWindow(), newContact);
 			showControllerInsideModalDialog(popupController);
 			if(popupController.hasContactBeenAccepted())
 			{
@@ -192,7 +192,7 @@ public class FxAddContactsController extends FxStep4Controller
 		{
 			ContactKey currentContactSelected = data.get(index).getContact();
 						
-			VerifyContactPopupController popupController = new VerifyContactPopupController(getMainWindow(), currentContactSelected.getFormattedPublicCode());
+			VerifyContactPopupController popupController = new VerifyContactPopupController(getMainWindow(), currentContactSelected);
 			popupController.setVerificationOnly();
 			showControllerInsideModalDialog(popupController);
 			if(popupController.hasContactBeenAccepted())
@@ -361,10 +361,17 @@ public class FxAddContactsController extends FxStep4Controller
 
 	public static class VerifyContactPopupController extends FxPopupController implements Initializable
 	{
-		public VerifyContactPopupController(UiMainWindow mainWindowToUse, String contactPublicCodeToUse)
+		public VerifyContactPopupController(UiMainWindow mainWindowToUse, ContactKey contactToVerify)
 		{
 			super(mainWindowToUse);
-			contactPublicCode = contactPublicCodeToUse;
+			try
+			{
+				contactPublicCode = contactToVerify.getFormattedPublicCode();
+				contactPublicCode40 = contactToVerify.getFormattedPublicCode40();
+			} catch (Exception e)
+			{
+				MartusLogger.logException(e);
+			} 
 			verification=ContactKey.NOT_VERIFIED;
 			contactAccepted = false;
 		}
@@ -378,6 +385,7 @@ public class FxAddContactsController extends FxStep4Controller
 		public void initialize(URL arg0, ResourceBundle arg1)
 		{
 			contactPublicCodeLabel.setText(contactPublicCode);
+			contactPublicCode40Label.setText(contactPublicCode40);
 		}
 		
 		@Override
@@ -413,6 +421,9 @@ public class FxAddContactsController extends FxStep4Controller
 
 		@FXML
 		private Label contactPublicCodeLabel;
+
+		@FXML
+		private Label contactPublicCode40Label;
 		
 		public int getVerification()
 		{
@@ -435,6 +446,7 @@ public class FxAddContactsController extends FxStep4Controller
 		}
 
 		private String contactPublicCode;
+		private String contactPublicCode40;
 		private FxInSwingDialogStage fxStage;
 		private int verification;
 		private boolean contactAccepted;
