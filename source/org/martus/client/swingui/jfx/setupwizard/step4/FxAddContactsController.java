@@ -126,10 +126,12 @@ public class FxAddContactsController extends FxStep4Controller
 				showNotifyDialog("ContactKeyIsOurself");
 				return;
 			}
-			String contactPublicCode = MartusSecurity.computeFormattedPublicCode(contactAccountId);
+			String contactPublicCode = MartusSecurity.computeFormattedPublicCode40(contactAccountId);
 			if(DoesContactAlreadyExistInTable(contactPublicCode))
 			{
-				showNotifyDialog("ContactKeyAlreadyExists");
+				String contactsName = getContactsNameInTable(contactPublicCode);
+				String contactExistsWithName = String.format("%s: '%s'",getLocalization().getFieldLabel("ContactAlreadyExistsAs"), contactsName);
+				showNotifyDialog("ContactKeyAlreadyExists", contactExistsWithName);
 				return;
 			}
 			ContactsTableData newContact = verifyContact(new ContactKey(contactAccountId), false);
@@ -168,6 +170,18 @@ public class FxAddContactsController extends FxStep4Controller
 		}
 		return false;
 	}
+	
+	private String getContactsNameInTable(String contactPublicCode)
+	{
+		for(int i=0; i < data.size(); ++i)
+		{
+			ContactsTableData contactData = data.get(i);
+			if(contactData.getPublicCode().equals(contactPublicCode))
+				return contactData.getContactName();
+		}
+		return "";
+	}
+	
 
 	ContactsTableData verifyContact(ContactKey currentContact, boolean verifyOnly)
 	{
