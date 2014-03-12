@@ -408,7 +408,6 @@ public class UiCustomFieldsDlg extends JDialog
 			} 
 			catch (Exception e)
 			{
-				MartusLogger.logException(e);
 				mainWindow.notifyDlgBeep("ErrorSavingTemplateToServer");
 			}
 		}

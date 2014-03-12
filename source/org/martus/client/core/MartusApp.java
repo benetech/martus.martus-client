@@ -1802,7 +1802,7 @@ public class MartusApp
 		return AccountId;
 	}
 
-	public void putFormTemplateOnServer(CustomFieldTemplate formTemplate) throws ServerNotAvailableException, MartusSignatureException 
+	public void putFormTemplateOnServer(CustomFieldTemplate formTemplate) throws ServerNotAvailableException, MartusSignatureException, ServerErrorException 
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
@@ -1811,7 +1811,7 @@ public class MartusApp
 		if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
 		{
 			MartusLogger.log("Server result code: " + response.getResultCode());
-			throw new ServerNotAvailableException();
+			throw new ServerErrorException();
 		}
 	}
 	
