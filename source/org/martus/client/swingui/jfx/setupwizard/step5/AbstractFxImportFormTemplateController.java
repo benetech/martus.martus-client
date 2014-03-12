@@ -46,13 +46,18 @@ abstract public class AbstractFxImportFormTemplateController extends FxPopupCont
 	protected ObservableList<CustomFieldTemplate> getFormTemplates(ContactKey contactKey) throws Exception
 	{
 		ObservableList<CustomFieldTemplate> formTemplates = FXCollections.observableArrayList();
+		getFormTemplates(contactKey, formTemplates);
+
+		return formTemplates;
+	}
+
+	protected void getFormTemplates(ContactKey contactKey, ObservableList<CustomFieldTemplate> formTemplates) throws Exception
+	{
 		Task task = new DownloadTemplateListForAccountTask(getApp(), contactKey, formTemplates);
 		MartusLocalization localization = getLocalization();
 		String busyTitle = localization.getWindowTitle("LoadingTemplates");
 		String message = localization.getFieldLabel("LoadingTemplates");
 		showTimeoutDialog(busyTitle, message, task, 60);
-
-		return formTemplates;
 	}
 	
 	abstract public String getLabel();
