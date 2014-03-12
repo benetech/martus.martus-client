@@ -44,6 +44,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPreferencesDlg;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.setupwizard.step3.FxSetupStorageServerController;
+import org.martus.client.swingui.jfx.setupwizard.tasks.TorInitializationTask;
 import org.martus.clientside.CurrentUiState;
 import org.martus.common.fieldspec.ChoiceItem;
 
@@ -85,7 +86,8 @@ public class FxSetupSettingsController extends FxStep2Controller
 	@Override
 	public void nextWasPressed(ActionEvent event) 
 	{
-		saveTorConfigurationAndForceBulletinsAllPrivate();
+		boolean userCancelled = saveTorConfigurationAndForceBulletinsAllPrivate();
+		//TODO is there anyway at this point to abort moving forward?
 		saveDateFormatConfiguration();
 	}
 
@@ -101,22 +103,36 @@ public class FxSetupSettingsController extends FxStep2Controller
 		getMainWindow().saveCurrentUiState();
 	}
 
-	private void saveTorConfigurationAndForceBulletinsAllPrivate()
+	private boolean saveTorConfigurationAndForceBulletinsAllPrivate()
 	{
 		ConfigInfo configInfo = getApp().getConfigInfo();
 		//NOTE: This might belong somewhere else, but for now it's important to set it.
 		configInfo.setForceBulletinsAllPrivate(true);
 		getMainWindow().saveConfigInfo();
-		startOrStopTorAsRequested();
+		return startOrStopTorAsRequested();
 	}
 	
-	protected void startOrStopTorAsRequested()
+	protected boolean startOrStopTorAsRequested()
 	{
 		ConfigInfo configInfo = getApp().getConfigInfo();
 		configInfo.setUseInternalTor(userTorCheckBox.isSelected());
 		getMainWindow().saveConfigInfo();
-		
-		getApp().startOrStopTorAsRequested();
+
+		TorInitializationTask task = new TorInitializationTask(getApp());
+		try
+		{
+			showProgressDialog("*Initalizing Tor*", "Setting Up Tor", task);
+		}
+		catch (UserCancelledException e)
+		{
+			return true;
+		}
+		catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	private ObservableList<ChoiceItem> getDateFormatChoices()
