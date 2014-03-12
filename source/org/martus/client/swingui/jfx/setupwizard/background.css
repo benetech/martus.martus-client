@@ -57,14 +57,19 @@
 }
 
 #topBar {
-	-fx-background-color: MidnightBlue;
-	-fx-text-fill: Orange;
+	-fx-background-color: DarkSlateGray;
     -fx-padding: 6 6 6 6;
 	-fx-spacing: 10;
+	-fx-fill-height: true;
+	-fx-alignment: center-left;
+}
+
+.step {
+	-fx-fill-height: true;
+	-fx-alignment: center-left;
 }
 
 .current-step {
-	-fx-background-color: Pink;
 }
 
 .current-step .TopBarStepNumber {
@@ -76,17 +81,17 @@
 }
 
 .TopBarStepNumber {
+	-fx-text-fill: DarkGray;
 	-fx-font: 20px "Sans-Serif";
-	-fx-text-fill: Orange;
 }
 
 .TopBarStepName {
+	-fx-text-fill: DarkGray;
 	-fx-alignment: center-left;
-	-fx-text-fill: Orange;
 }
 
 .TopBarArrow {
-	-fx-text-fill: Red;
+	-fx-text-fill: DarkGray;
 }
 
 #contacts-table {
