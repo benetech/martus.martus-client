@@ -158,12 +158,8 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		return "Import from My Contacts";
 	}
 	
-	private class ComboBoxEventHandler implements EventHandler<ActionEvent>
+	protected class ComboBoxEventHandler implements EventHandler<ActionEvent>
 	{
-		public ComboBoxEventHandler()
-		{
-		}
-
 		@Override
 		public void handle(ActionEvent event)
 		{
@@ -177,12 +173,8 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		}
 	}
 	
-	private class ToggleChangeListener implements ChangeListener<Toggle>
+	protected class ToggleChangeListener implements ChangeListener<Toggle>
 	{
-		public ToggleChangeListener()
-		{
-		}
-		
 		@Override
 		public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue)
 		{
@@ -191,12 +183,8 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		}
 	}
 	
-	private class FormTemplateComboBoxCellFactory implements Callback<TableColumn<ContactsWithTemplatesTableData,CustomFieldTemplate>, TableCell<ContactsWithTemplatesTableData,CustomFieldTemplate>>
+	protected class FormTemplateComboBoxCellFactory implements Callback<TableColumn<ContactsWithTemplatesTableData,CustomFieldTemplate>, TableCell<ContactsWithTemplatesTableData,CustomFieldTemplate>>
 	{
-		public FormTemplateComboBoxCellFactory()
-		{
-		}
-
 		@Override
 		public TableCell<ContactsWithTemplatesTableData, CustomFieldTemplate> call(TableColumn<ContactsWithTemplatesTableData, CustomFieldTemplate> param)
 		{
