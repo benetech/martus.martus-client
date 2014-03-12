@@ -55,6 +55,8 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		customFieldTemplatesComboBox.setConverter(new FormTemplateToStringConverter());
+		
 		importFromThisConctactLabel.setVisible(false);
 		customFieldTemplatesComboBox.setVisible(false);
 		formsFromUserMessageLabel.setVisible(false);
