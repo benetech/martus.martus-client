@@ -52,6 +52,7 @@ public class AccessTokenChangeHandler implements ChangeListener<String>
 		boolean canAdd = (isValidAccessToken(candidateToken));
 
 		buttonToChangeState.setDisable(!canAdd);
+		buttonToChangeState.setDefaultButton(canAdd);
 	}
 	
 	private boolean isValidAccessToken(String tokenToValidate)
