@@ -156,7 +156,6 @@ import org.martus.swing.UiPopupMenu;
 import org.martus.swing.Utilities;
 import org.martus.swing.Utilities.Delay;
 import org.martus.util.FileVerifier;
-import org.martus.util.StreamableBase64.InvalidBase64Exception;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 import org.martus.util.UnicodeReader;
@@ -432,12 +431,19 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		setCurrentActiveFrame(this);
 		
-		if(Utilities.isMSWindows() || Utilities.isLinux())
+		if(Utilities.isMSWindows())
 		{
 			updateTitle();
 			setVisible(true);
 			Dimension screenSize = Utilities.getViewableScreenSize();
 			setLocation(screenSize.width, screenSize.height);
+		}
+		else if(Utilities.isLinux())
+		{
+			updateTitle();
+			setVisible(true);
+			Dimension screenSize = Utilities.getViewableScreenSize();
+			setLocation(screenSize.width/2, screenSize.height/2);
 		}
 
 		String currentLanguageCode = localization.getCurrentLanguageCode();
