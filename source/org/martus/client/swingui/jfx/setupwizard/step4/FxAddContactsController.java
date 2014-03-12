@@ -132,7 +132,12 @@ public class FxAddContactsController extends FxStep4Controller
 				showNotifyDialog("ContactKeyAlreadyExists");
 				return;
 			}
-			showAndAddContactsDialog(contactAccountId);
+			ContactsTableData newContact = verifyContact(new ContactKey(contactAccountId), false);
+			if(newContact != null)
+			{
+				data.add(newContact);
+				clearAccessTokenField();
+			}
 		} 
 		catch(UserCancelledException e)
 		{
@@ -163,58 +168,34 @@ public class FxAddContactsController extends FxStep4Controller
 		}
 		return false;
 	}
-	
-	private void showAndAddContactsDialog(String contactAccountId)
-	{
-		try
-		{
-			ContactKey newContact = new ContactKey(contactAccountId);
-			VerifyContactPopupController popupController = new VerifyContactPopupController(getMainWindow(), newContact);
-			showControllerInsideModalDialog(popupController);
-			if(popupController.hasContactBeenAccepted())
-			{
-				int verification = popupController.getVerification();
-				newContact.setVerificationStatus(verification);
-				ContactsTableData contactData = new ContactsTableData(newContact); 
-				data.add(contactData);
-				clearAccessTokenField();
-			}
-		}
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-		}
-	}
 
-	void verifyContactDialog(int index)
+	ContactsTableData verifyContact(ContactKey currentContact, boolean verifyOnly)
 	{
 		try
 		{
-			ContactKey currentContactSelected = data.get(index).getContact();
-						
-			VerifyContactPopupController popupController = new VerifyContactPopupController(getMainWindow(), currentContactSelected);
-			popupController.setVerificationOnly();
+			VerifyContactPopupController popupController = new VerifyContactPopupController(getMainWindow(), currentContact);
+			if(verifyOnly)
+				popupController.setVerificationOnly();
+			popupController.showOldPublicCode(true);
 			showControllerInsideModalDialog(popupController);
 			if(popupController.hasContactBeenAccepted())
 			{
 				int verification = popupController.getVerification();
-				currentContactSelected.setVerificationStatus(verification);
-				ContactsTableData contactData = new ContactsTableData(currentContactSelected); 
-				data.set(index, contactData);
+				currentContact.setVerificationStatus(verification);
+				return new ContactsTableData(currentContact); 
 			}
 		}
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
 		}
+		return null;
 	}
 
 	private void clearAccessTokenField()
 	{
 		accessTokenField.setText("");
 	}
-	
-	
 		
 	final class TableColumnVerifyContactCellFactory implements Callback<TableColumn<ContactsTableData, String>, TableCell<ContactsTableData, String>>
 	{
@@ -232,7 +213,11 @@ public class FxAddContactsController extends FxStep4Controller
 				public void handle(ActionEvent event) 
 				{
 					int index = getIndex();
-					verifyContactDialog(index);
+					ContactKey currentContactSelected = data.get(index).getContact();
+					ContactsTableData contactData = verifyContact(currentContactSelected, true);
+					if(contactData != null)
+						data.set(index, contactData);
+
 				}
 			}
 			
@@ -381,11 +366,23 @@ public class FxAddContactsController extends FxStep4Controller
 			verifyContact = true;
 		}
 		
+		public void showOldPublicCode(boolean showOldCode)
+		{
+			showOldPublicCode = showOldCode;
+		}
+		
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1)
 		{
-			contactPublicCodeLabel.setText(contactPublicCode);
 			contactPublicCode40Label.setText(contactPublicCode40);
+			contactPublicCodeLabel.setText(contactPublicCode);
+			contactPublicCodeLabel.setVisible(showOldPublicCode);
+			labelOldPublicCode.setVisible(showOldPublicCode);
+			if(showOldPublicCode)
+				labelVerificationMessage.setText(getLocalization().getFieldLabel("VerifyPublicCodeNewAndOld"));
+			else
+				labelVerificationMessage.setText(getLocalization().getFieldLabel("VerifyPublicCode"));
+
 		}
 		
 		@Override
@@ -425,6 +422,12 @@ public class FxAddContactsController extends FxStep4Controller
 		@FXML
 		private Label contactPublicCode40Label;
 		
+		@FXML
+		private Label labelOldPublicCode;
+		
+		@FXML
+		private Label labelVerificationMessage;
+		
 		public int getVerification()
 		{
 			return verification;
@@ -451,7 +454,7 @@ public class FxAddContactsController extends FxStep4Controller
 		private int verification;
 		private boolean contactAccepted;
 		private boolean verifyContact;
-
+		private boolean showOldPublicCode;
 	}
 	
 	@Override
@@ -582,5 +585,5 @@ public class FxAddContactsController extends FxStep4Controller
 	@FXML
 	private Button addContactButton;
 	
-	private ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
+	protected ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
 }
