@@ -51,19 +51,6 @@ public class AccessTokenChangeHandler implements ChangeListener<String>
 		String candidateToken = accessTokenField.getText();
 		boolean canAdd = (isValidAccessToken(candidateToken));
 
-		if(candidateToken.length() == 0)
-		{
-			buttonToChangeState.setDefaultButton(false);
-		}
-		else if(canAdd)
-		{
-			buttonToChangeState.setDefaultButton(true);
-		}
-		else
-		{
-			buttonToChangeState.setDefaultButton(true);
-		}
-
 		buttonToChangeState.setDisable(!canAdd);
 	}
 	
