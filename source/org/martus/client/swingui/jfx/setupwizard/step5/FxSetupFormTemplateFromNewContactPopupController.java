@@ -150,12 +150,8 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 		return "Import from New Contact";
 	}
 	
-	private class FieldTemplateChoiceChangeHandler implements ChangeListener<CustomFieldTemplate>
+	protected class FieldTemplateChoiceChangeHandler implements ChangeListener<CustomFieldTemplate>
 	{
-		public FieldTemplateChoiceChangeHandler()
-		{
-		}
-		
 		@Override
 		public void changed(ObservableValue<? extends CustomFieldTemplate> observable, CustomFieldTemplate oldValue, CustomFieldTemplate newValue)
 		{
