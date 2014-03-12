@@ -41,7 +41,11 @@ public class FormTemplateToStringConverter extends StringConverter<CustomFieldTe
 		if (customFieldTemplate == null)
 			return "";
 		
-		return customFieldTemplate.getTitle();
+		String title = customFieldTemplate.getTitle();
+		if (title.length() > 0)
+			return title;
+		
+		return "[no title]";
 	}
 
 	@Override
