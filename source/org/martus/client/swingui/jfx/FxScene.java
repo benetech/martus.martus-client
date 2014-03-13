@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx;
 import java.io.File;
 import java.net.URL;
 
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 
@@ -37,7 +38,9 @@ abstract public class FxScene extends Scene
 	{
 		super(new Region());
 		
-		getStylesheets().add(getBestCssLocation(fxmlDirToUse).toExternalForm());
+		ObservableList<String> stylesheets = getStylesheets();
+		String externalForm = getBestCssLocation(fxmlDirToUse).toExternalForm();
+		stylesheets.add(externalForm);
 	}
 
 	private URL getBestCssLocation(File fxmlDirToUse) throws Exception
