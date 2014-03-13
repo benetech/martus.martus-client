@@ -32,6 +32,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 
+import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxController;
 import org.martus.client.swingui.jfx.setupwizard.step4.FxAddContactsController;
@@ -89,6 +90,15 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 	@FXML
 	public void setupServerLater()
 	{
+		try
+		{
+			getApp().setServerInfo("", "", "");
+		} 
+		catch (SaveConfigInfoException e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDialog("ErrorSavingConfig");
+		}
 		getWizardStage().next();
 	}
 	
