@@ -43,10 +43,15 @@ abstract public class ServerCallTask extends TaskWithTimeout
 		gateway = gatewayToUse;
 	}
 
+	public ClientSideNetworkInterface getInterface()
+	{
+		return gateway.getInterface();
+	}
+	
+	@Override
 	public int getMaxSeconds()
 	{
-		ClientSideNetworkInterface ni = gateway.getInterface();
-		return 60;
+		return getInterface().getTimeoutSecondsForOtherCalls();
 	}
 	
 	private ClientSideNetworkGateway gateway;
