@@ -66,6 +66,11 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 		return getMainWindow().getLocalization();
 	}
 
+	public void close()
+	{
+		getShell().setVisible(false);
+	}
+
 	private JDialog shell;
 	private UiMainWindow mainWindow;
 }

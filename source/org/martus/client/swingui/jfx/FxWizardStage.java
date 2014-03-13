@@ -93,7 +93,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 			visitedWizardPagesStack.push(currentController);
 			if(nextController == null)
 			{
-				getShell().setVisible(false);
+				close();
 			}
 			else
 			{
@@ -114,7 +114,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		{
 			if(visitedWizardPagesStack.isEmpty())
 			{
-				getShell().setVisible(false);
+				close();
 			}
 			else
 			{
