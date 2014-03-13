@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx;
 
 import javafx.embed.swing.JFXPanel;
+import javafx.scene.Parent;
 
 import javax.swing.JDialog;
 
@@ -40,9 +41,21 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 	}
 
 	abstract public FxInSwingDialogController getCurrentController() throws Exception;
+	abstract protected FxScene createScene() throws Exception;
+	
 	public void showCurrentScene() throws Exception
 	{
+		if(scene == null)
+		{
+			scene = createScene();
+			setScene(scene);
+		}
 		
+	}
+	
+	public void setSceneRoot(Parent contents)
+	{
+		scene.setRoot(contents);
 	}
 	
 	public void setShell(JDialog shellToUse)
@@ -76,4 +89,5 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 
 	private JDialog shell;
 	private UiMainWindow mainWindow;
+	private FxScene scene;
 }
