@@ -29,7 +29,7 @@ import java.io.File;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.FxInSwingDialogController;
 import org.martus.client.swingui.jfx.FxScene;
 import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.step1.FxSetupUsernamePasswordController;
@@ -44,7 +44,7 @@ public class SetupWizardStage extends FxWizardStage
 	}
 	
 	@Override
-	protected FxController getFirstController()
+	protected FxInSwingDialogController getFirstController()
 	{
 		UiMainWindow mainWindow = getMainWindow();
 		if(UiMainWindow.isAlphaTester)

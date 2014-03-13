@@ -42,7 +42,7 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPreferencesDlg;
-import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.FxInSwingDialogController;
 import org.martus.client.swingui.jfx.setupwizard.step3.FxSetupStorageServerController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.TorInitializationTask;
 import org.martus.clientside.CurrentUiState;
@@ -175,7 +175,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 	}
 	
 	@Override
-	public FxController getNextControllerClassName()
+	public FxInSwingDialogController getNextControllerClassName()
 	{
 		return new FxSetupStorageServerController(getMainWindow());
 	}

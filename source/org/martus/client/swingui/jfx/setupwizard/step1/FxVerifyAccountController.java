@@ -39,7 +39,7 @@ import javafx.scene.control.TextField;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.FxInSwingDialogController;
 import org.martus.client.swingui.jfx.setupwizard.StaticAccountCreationData;
 import org.martus.client.swingui.jfx.setupwizard.step2.FxSetupContactInfoController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.CreateAccountTask;
@@ -136,7 +136,7 @@ public class FxVerifyAccountController extends FxStep1Controller
 	}
 	
 	@Override
-	public FxController getNextControllerClassName()
+	public FxInSwingDialogController getNextControllerClassName()
 	{
 		return new FxSetupContactInfoController(getMainWindow());
 	}
