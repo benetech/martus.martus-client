@@ -59,6 +59,7 @@ import org.martus.client.swingui.jfx.FxTableCellTextFieldFactory;
 import org.martus.client.swingui.jfx.setupwizard.ContactsTableData;
 import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.LookupAccountFromTokenTask;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.Exceptions.ServerNotAvailableException;
@@ -130,7 +131,7 @@ public class FxAddContactsController extends FxStep4Controller
 			if(DoesContactAlreadyExistInTable(contactPublicCode))
 			{
 				String contactsName = getContactsNameInTable(contactPublicCode);
-				String contactExistsWithName = String.format("%s: '%s'",getLocalization().getFieldLabel("ContactAlreadyExistsAs"), contactsName);
+				String contactExistsWithName = UiLocalization.replaceTokenInString(getLocalization().getFieldLabel("ContactAlreadyExistsAs"), "#NAME#", contactsName);
 				showNotifyDialog("ContactKeyAlreadyExists", contactExistsWithName);
 				return;
 			}
