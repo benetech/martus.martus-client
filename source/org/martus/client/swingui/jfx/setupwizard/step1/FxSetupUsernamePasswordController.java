@@ -53,6 +53,7 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{
+		getWizardNavigationHandler().getBackButton().setVisible(false);
 		getWizardNavigationHandler().getNextButton().setDisable(true);
 		getUserName().textProperty().addListener(new LoginChangeHandler());
 		getPasswordField().textProperty().addListener(new LoginChangeHandler());
