@@ -114,6 +114,7 @@ import org.martus.client.swingui.dialogs.UiWarningMessageDlg;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.FxModalDialog;
 import org.martus.client.swingui.jfx.setupwizard.SetupWizardStage;
+import org.martus.client.swingui.jfx.welcome.WelcomeStage;
 import org.martus.client.swingui.spellcheck.SpellCheckerManager;
 import org.martus.client.swingui.tablemodels.DeleteMyServerDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveHQDraftsTableModel;
@@ -563,6 +564,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			// NOTE: Prevent implicit JavaFX shutdown when the only JFX window is closed
 		    Platform.setImplicitExit(false);
+		    
+		    FxModalDialog.createAndShow(this, new WelcomeStage(this));
 		    
 		    FxModalDialog.createAndShow(this, new SetupWizardStage(this));
 		    return true;
