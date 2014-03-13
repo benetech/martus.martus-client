@@ -57,7 +57,7 @@ abstract public class AbstractFxImportFormTemplateController extends FxPopupCont
 		MartusLocalization localization = getLocalization();
 		String busyTitle = localization.getWindowTitle("LoadingTemplates");
 		String message = localization.getFieldLabel("LoadingTemplates");
-		showTimeoutDialog(busyTitle, message, task, 60);
+		showTimeoutDialog(busyTitle, message, task);
 	}
 	
 	abstract public String getLabel();
