@@ -358,7 +358,7 @@ public class EnglishStrings
 "wintitle:LoadingFieldValuesFromAllBulletins=Loading Values...",
 
 "wintitle:CreatingAccount=Creating Account",
-"field:Please wait while we create your account.",
+"field:CreatingAccount=Please wait while we create your account.",
 "wintitle:LoadingTemplates=Loading Templates",
 "field:LoadingTemplates=Please wait while we retrieve a list of templates from the server.",
 "wintitle:FindAccountByToken=Finding Account",
