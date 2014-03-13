@@ -46,6 +46,12 @@ public class IsServerAvailableTask extends ServerCallTask
 	{
 		return isAvailable;
 	}
+	
+	@Override
+	public int getMaxSeconds()
+	{
+		return getInterface().getTimeoutSecondsForGetServerInfo();
+	}
 
 	@Override
 	protected Void call() throws Exception
