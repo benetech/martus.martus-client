@@ -45,7 +45,12 @@ abstract public class ServerCallTask extends TaskWithTimeout
 
 	public ClientSideNetworkInterface getInterface()
 	{
-		return gateway.getInterface();
+		return getGateway().getInterface();
+	}
+	
+	public ClientSideNetworkGateway getGateway()
+	{
+		return gateway;
 	}
 	
 	@Override
