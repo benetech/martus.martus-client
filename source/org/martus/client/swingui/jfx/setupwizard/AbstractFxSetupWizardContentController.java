@@ -77,6 +77,9 @@ abstract public class AbstractFxSetupWizardContentController extends FxInSwingDi
 	
 	protected boolean isCurrentServerAvailable() throws Exception
 	{
+		if(getApp().getCurrentNetworkInterfaceGateway().getInterface() == null)
+			return false;
+		
 		IsServerAvailableTask task = new IsServerAvailableTask(getApp());
 		showTimeoutDialog("*Connecting*", "Attempting to connect to server", task);
 		boolean isDefaultServerAvailable = task.isAvailable();
