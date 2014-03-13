@@ -30,14 +30,13 @@ import java.util.ResourceBundle;
 import java.util.TimerTask;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.setupwizard.tasks.TaskWithTimeout;
 import org.martus.common.MartusUtilities;
-
-import javafx.concurrent.Task;
 
 
 public class FxTimeoutController extends FxBackgroundActivityController
 {
-	public FxTimeoutController(UiMainWindow mainWindowToUse, String titleToUse, String messageToUse, Task taskToUse, int maxSecondsToCompleteTaskToUse)
+	public FxTimeoutController(UiMainWindow mainWindowToUse, String titleToUse, String messageToUse, TaskWithTimeout taskToUse, int maxSecondsToCompleteTaskToUse)
 	{
 		super(mainWindowToUse, titleToUse, messageToUse, taskToUse);
 		maxSecondsToCompleteTask = maxSecondsToCompleteTaskToUse;

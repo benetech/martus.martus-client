@@ -27,7 +27,7 @@ package org.martus.client.swingui.jfx.setupwizard.tasks;
 
 import org.martus.client.core.MartusApp;
 
-public class GetServerPublicKeyTask extends AbstractAppTask
+public class GetServerPublicKeyTask extends TaskWithTimeout
 {
 	public GetServerPublicKeyTask(MartusApp appToUse, String ipToUse)
 	{
