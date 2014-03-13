@@ -32,9 +32,7 @@ public class GetServerComplianceStatementTask extends ServerCallTask
 {
 	public GetServerComplianceStatementTask(MartusApp appToUse, ClientSideNetworkGateway gatewayToUse)
 	{
-		super(appToUse);
-		
-		gateway = gatewayToUse;
+		super(appToUse, gatewayToUse);
 	}
 	
 	public String getComplianceStatement()
@@ -45,10 +43,9 @@ public class GetServerComplianceStatementTask extends ServerCallTask
 	@Override
 	protected Void call() throws Exception
 	{
-		complianceStatement = app.getServerCompliance(gateway);
+		complianceStatement = app.getServerCompliance(getGateway());
 		return null;
 	}
 
-	private ClientSideNetworkGateway gateway;
 	private String complianceStatement;
 }
