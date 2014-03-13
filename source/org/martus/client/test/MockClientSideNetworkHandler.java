@@ -41,6 +41,18 @@ public class MockClientSideNetworkHandler implements ClientSideNetworkInterface
 	{
 	}
 
+	@Override
+	public int getTimeoutSecondsForGetServerInfo() 
+	{
+		return 1;
+	}
+
+	@Override
+	public int getTimeoutSecondsForOtherCalls() 
+	{
+		return 1;
+	}
+	
 	// begin ServerInterface
 	public Vector getServerInfo(Vector reservedForFuture)
 	{
