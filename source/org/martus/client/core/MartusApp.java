@@ -51,7 +51,6 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -1659,7 +1658,7 @@ public class MartusApp
 			}
 		}
 		stopWatch.stop();
-		Logger.global.info("Search took:"+stopWatch.elapsedInSeconds()+" Seconds, " + matchedBulletinUids.size() +" matches found, " +uids.size()+" leafs, "+ revisionsSearched + " revisions were searched.");
+		MartusLogger.log("Search took:"+stopWatch.elapsedInSeconds()+" Seconds, " + matchedBulletinUids.size() +" matches found, " +uids.size()+" leafs, "+ revisionsSearched + " revisions were searched.");
 		
 		return matchedBulletinUids;
 	}
