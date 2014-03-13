@@ -26,10 +26,16 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.setupwizard.tasks;
 
 import org.martus.client.core.MartusApp;
+import org.martus.clientside.ClientSideNetworkGateway;
 
 abstract public class ServerCallTask extends TaskWithTimeout
 {
 	public ServerCallTask(MartusApp appToUse)
+	{
+		this(appToUse, appToUse.getCurrentNetworkInterfaceGateway());
+	}
+
+	public ServerCallTask(MartusApp appToUse, ClientSideNetworkGateway gateway)
 	{
 		super(appToUse);
 	}
