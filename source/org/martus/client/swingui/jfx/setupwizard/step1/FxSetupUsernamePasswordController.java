@@ -39,7 +39,7 @@ import javafx.scene.control.Tooltip;
 
 import org.martus.client.core.MartusUserNameAndPassword;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.FxInSwingDialogController;
 import org.martus.client.swingui.jfx.setupwizard.StaticAccountCreationData;
 import org.martus.common.MartusLogger;
 
@@ -126,7 +126,7 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 	}
 	
 	@Override
-	public FxController getNextControllerClassName()
+	public FxInSwingDialogController getNextControllerClassName()
 	{
 		return new FxVerifyAccountController(getMainWindow());
 	}

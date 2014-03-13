@@ -36,7 +36,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.FxInSwingDialogController;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 
@@ -105,7 +105,7 @@ public class FxSelectLanguageController extends FxStep6Controller
 	}
 	
 	@Override
-	public FxController getNextControllerClassName()
+	public FxInSwingDialogController getNextControllerClassName()
 	{
 		return null;
 	}

@@ -45,7 +45,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	{
 		super(mainWindowToUse);
 	
-		visitedWizardPagesStack = new Stack<FxController>();
+		visitedWizardPagesStack = new Stack<FxInSwingDialogController>();
 		wizardTemplateController = new FxSetupWizardTemplateController(getMainWindow());
 		
 		currentController = getFirstController();
@@ -70,7 +70,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	}
 	
 	@Override
-	public FxController getCurrentController() throws Exception
+	public FxInSwingDialogController getCurrentController() throws Exception
 	{
 		return currentController;
 	}
@@ -88,7 +88,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		try
 		{
 			AbstractFxSetupWizardContentController contentPaneController = (AbstractFxSetupWizardContentController) getCurrentController();
-			FxController nextController = contentPaneController.getNextControllerClassName();
+			FxInSwingDialogController nextController = contentPaneController.getNextControllerClassName();
 
 			visitedWizardPagesStack.push(currentController);
 			if(nextController == null)
@@ -157,16 +157,16 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		private UiMainWindow owner;
 	}
 	
-	abstract protected FxController getFirstController();
+	abstract protected FxInSwingDialogController getFirstController();
 
 	abstract protected FxScene createScene() throws Exception;
 	
 	public static final String NAVIGATION_NEXT = "Next";
 	public static final String NAVIGATION_BACK = "Back";
 
-	private FxController currentController;
+	private FxInSwingDialogController currentController;
 	private FxScene scene;
-	private Stack<FxController> visitedWizardPagesStack;
+	private Stack<FxInSwingDialogController> visitedWizardPagesStack;
 	
 	private FxSetupWizardTemplateController wizardTemplateController;
 }

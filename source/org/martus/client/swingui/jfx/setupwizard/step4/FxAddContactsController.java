@@ -52,7 +52,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.FxInSwingDialogController;
 import org.martus.client.swingui.jfx.FxInSwingDialogStage;
 import org.martus.client.swingui.jfx.FxPopupController;
 import org.martus.client.swingui.jfx.FxTableCellTextFieldFactory;
@@ -478,7 +478,7 @@ public class FxAddContactsController extends FxStep4Controller
 	}
 	
 	@Override
-	public FxController getNextControllerClassName()
+	public FxInSwingDialogController getNextControllerClassName()
 	{
 		return new FxSetupImportTemplatesController(getMainWindow());
 	}

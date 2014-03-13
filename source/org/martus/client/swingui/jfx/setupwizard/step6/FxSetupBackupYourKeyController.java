@@ -32,7 +32,7 @@ import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxController;
+import org.martus.client.swingui.jfx.FxInSwingDialogController;
 import org.martus.util.FileTransfer;
 import org.martus.util.FileVerifier;
 import org.martus.util.TokenReplacement;
@@ -51,7 +51,7 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 	}
 
 	@Override
-	public FxController getNextControllerClassName()
+	public FxInSwingDialogController getNextControllerClassName()
 	{
 		return new FxSelectLanguageController(getMainWindow());
 	}
