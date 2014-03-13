@@ -35,13 +35,17 @@ abstract public class ServerCallTask extends TaskWithTimeout
 		this(appToUse, appToUse.getCurrentNetworkInterfaceGateway());
 	}
 
-	public ServerCallTask(MartusApp appToUse, ClientSideNetworkGateway gateway)
+	public ServerCallTask(MartusApp appToUse, ClientSideNetworkGateway gatewayToUse)
 	{
 		super(appToUse);
+		
+		gateway = gatewayToUse;
 	}
 
 	public int getMaxSeconds()
 	{
 		return 60;
 	}
+	
+	private ClientSideNetworkGateway gateway;
 }
