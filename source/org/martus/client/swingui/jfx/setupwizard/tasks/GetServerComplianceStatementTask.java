@@ -28,7 +28,7 @@ package org.martus.client.swingui.jfx.setupwizard.tasks;
 import org.martus.client.core.MartusApp;
 import org.martus.clientside.ClientSideNetworkGateway;
 
-public class GetServerComplianceStatementTask extends TaskWithTimeout
+public class GetServerComplianceStatementTask extends ServerCallTask
 {
 	public GetServerComplianceStatementTask(MartusApp appToUse, ClientSideNetworkGateway gatewayToUse)
 	{

@@ -27,27 +27,15 @@ package org.martus.client.swingui.jfx.setupwizard.tasks;
 
 import org.martus.client.core.MartusApp;
 
-public class GetServerPublicKeyTask extends ServerCallTask
+abstract public class ServerCallTask extends TaskWithTimeout
 {
-	public GetServerPublicKeyTask(MartusApp appToUse, String ipToUse)
+	public ServerCallTask(MartusApp appToUse)
 	{
 		super(appToUse);
-		
-		ip = ipToUse;
-	}
-	
-	public String getPublicKey()
-	{
-		return serverKey;
 	}
 
-	@Override
-	protected Void call() throws Exception
+	public int getMaxSeconds()
 	{
-		serverKey = app.getServerPublicKey(ip);
-		return null;
+		return 60;
 	}
-
-	private String ip;
-	private String serverKey;
 }
