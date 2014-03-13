@@ -54,6 +54,8 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	@Override
 	public void showCurrentScene() throws Exception
 	{
+		super.showCurrentScene();
+		
 		if(scene == null)
 		{
 			scene = createScene();

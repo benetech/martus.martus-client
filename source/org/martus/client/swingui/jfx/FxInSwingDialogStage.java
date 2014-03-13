@@ -40,7 +40,10 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 	}
 
 	abstract public FxInSwingDialogController getCurrentController() throws Exception;
-	abstract public void showCurrentScene() throws Exception;
+	public void showCurrentScene() throws Exception
+	{
+		
+	}
 	
 	public void setShell(JDialog shellToUse)
 	{
