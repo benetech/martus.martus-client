@@ -594,7 +594,7 @@ public class MartusApp
 		}
 		catch (Exception e)
 		{
-			System.out.println("saveConfigInfo :" + e);
+			MartusLogger.logException(e);
 			throw new SaveConfigInfoException();
 		}
 
