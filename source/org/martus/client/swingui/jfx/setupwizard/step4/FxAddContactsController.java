@@ -190,7 +190,6 @@ public class FxAddContactsController extends FxStep4Controller
 			VerifyContactPopupController popupController = new VerifyContactPopupController(getMainWindow(), currentContact);
 			if(verifyOnly)
 				popupController.setVerificationOnly();
-			popupController.showOldPublicCode(true);
 			showControllerInsideModalDialog(popupController);
 			if(popupController.hasContactBeenAccepted())
 			{
