@@ -93,7 +93,11 @@ abstract public class FxController implements Initializable
 			return fxmlFile.toURI().toURL();
 		}
 
-		return FxScene.class.getResource(fileLocation);
+		URL resource = FxScene.class.getResource(fileLocation);
+		if(resource == null)
+			throw new RuntimeException("Couldn't find " + fileLocation);
+		
+		return resource;
 	}		
 	
 	public UiMainWindow getMainWindow()
