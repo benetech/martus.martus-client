@@ -29,7 +29,6 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.util.HashMap;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -42,9 +41,6 @@ import javax.swing.text.JTextComponent;
 
 import org.martus.client.swingui.fields.UiStringField;
 import org.martus.clientside.UiLocalization;
-import org.martus.common.MartusLogger;
-import org.martus.util.TokenReplacement;
-import org.martus.util.TokenReplacement.TokenInvalidException;
 
 import com.inet.jortho.AddWordAction;
 import com.inet.jortho.MartusSpellCheckerListener;
@@ -146,20 +142,12 @@ public class UiStringFieldContextMenuListener extends MartusSpellCheckerListener
 	@Override
 	protected void addMenuItemAddToDictionary(JTextComponent editor, String word, boolean addSeparator)
 	{
-		String addWordLabel = localization.getMenuLabel("AddToDictionary");
-		HashMap tokenReplacement = new HashMap();
-		tokenReplacement.put("#NewWord#", word);
-		try
-		{
-			addWordLabel = TokenReplacement.replaceTokens(addWordLabel, tokenReplacement);
-		} 
-		catch (TokenInvalidException e)
-		{
-			MartusLogger.logException(e);
-		}
-		Action addWordAction = new AddWordAction(editor, word, addWordLabel);
+		String labelWithToken = localization.getMenuLabel("AddToDictionary");
+		String wordLabel = UiLocalization.replaceTokenInString(labelWithToken, "#NewWord#", word);
+		Action addWordAction = new AddWordAction(editor, word, wordLabel);
 		menu.add(addWordAction);
 	}
+
 
 	private JTextComponent getTextField()
 	{
