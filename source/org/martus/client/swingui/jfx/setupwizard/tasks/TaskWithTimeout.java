@@ -34,8 +34,6 @@ abstract public class TaskWithTimeout extends AbstractAppTask
 		super(appToUse);
 	}
 
-	public int getMaxSeconds()
-	{
-		return 60;
-	}
+	abstract public int getMaxSeconds();
+
 }

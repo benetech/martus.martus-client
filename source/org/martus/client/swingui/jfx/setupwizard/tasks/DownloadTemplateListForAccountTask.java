@@ -33,7 +33,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.common.ContactKey;
 import org.martus.common.fieldspec.CustomFieldTemplate;
 
-public class DownloadTemplateListForAccountTask extends TaskWithTimeout
+public class DownloadTemplateListForAccountTask extends ServerCallTask
 {
 	public DownloadTemplateListForAccountTask(MartusApp appToUse, ContactKey keyToUse, ObservableList<CustomFieldTemplate> listToUse)
 	{

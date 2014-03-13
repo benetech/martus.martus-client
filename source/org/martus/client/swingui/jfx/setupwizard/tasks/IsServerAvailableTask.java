@@ -28,7 +28,7 @@ package org.martus.client.swingui.jfx.setupwizard.tasks;
 import org.martus.client.core.MartusApp;
 import org.martus.clientside.ClientSideNetworkGateway;
 
-public class IsServerAvailableTask extends TaskWithTimeout
+public class IsServerAvailableTask extends ServerCallTask
 {
 	public IsServerAvailableTask(MartusApp appToUse)
 	{
