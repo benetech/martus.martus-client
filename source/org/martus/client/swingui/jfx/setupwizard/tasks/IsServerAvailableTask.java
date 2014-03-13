@@ -37,7 +37,7 @@ public class IsServerAvailableTask extends ServerCallTask
 
 	public IsServerAvailableTask(MartusApp appToUse, ClientSideNetworkGateway gatewayToUse)
 	{
-		super(appToUse);
+		super(appToUse, gatewayToUse);
 		
 		gateway = gatewayToUse;
 	}
