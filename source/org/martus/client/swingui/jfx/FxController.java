@@ -152,9 +152,9 @@ abstract public class FxController implements Initializable
 		showControllerInsideModalDialog(popupController);
 	}
 
-	public void showTimeoutDialog(String title, String message, TaskWithTimeout task, int maxSecondsToCompleteTask) throws Exception
+	public void showTimeoutDialog(String title, String message, TaskWithTimeout task) throws Exception
 	{
-		FxTimeoutController popupController = new FxTimeoutController(getMainWindow(), title, message, task, maxSecondsToCompleteTask);
+		FxTimeoutController popupController = new FxTimeoutController(getMainWindow(), title, message, task, task.getMaxSeconds());
 		showControllerInsideModalDialog(popupController);
 		if(popupController.didUserCancel())
 			throw new UserCancelledException();

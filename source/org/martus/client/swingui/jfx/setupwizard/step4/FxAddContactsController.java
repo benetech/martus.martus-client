@@ -117,7 +117,7 @@ public class FxAddContactsController extends FxStep4Controller
 			MartusLocalization localization = getLocalization();
 			String title = localization.getWindowTitle("FindAccountByToken");
 			String message = localization.getFieldLabel("FindAccountByToken");
-			showTimeoutDialog(title, message, task, 30);
+			showTimeoutDialog(title, message, task);
 			String contactAccountId = task.getFoundAccountId();
 			if(contactAccountId == null)
 				return; 
