@@ -31,7 +31,7 @@ import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
-import org.martus.common.network.NetworkInterface;
+import org.martus.common.network.ClientSideNetworkInterface;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.network.TorTransportWrapper;
 
@@ -65,7 +65,7 @@ public class PingServerAsClient
 		String serverPublicKey = server.getServerPublicKey(new MartusSecurity());
 		System.out.println("server public code: " + MartusCrypto.computeFormattedPublicCode(serverPublicKey));
 
-		NetworkInterface networkInterface = ClientSideNetworkGateway.buildNetworkInterface(ip, serverPublicKey, transport);
+		ClientSideNetworkInterface networkInterface = ClientSideNetworkGateway.buildNetworkInterface(ip, serverPublicKey, transport);
 		ClientSideNetworkGateway gateway = new ClientSideNetworkGateway(networkInterface);
 		NetworkResponse response = gateway.getServerInfo();
 		String sslPingResponse = response.getResultCode();

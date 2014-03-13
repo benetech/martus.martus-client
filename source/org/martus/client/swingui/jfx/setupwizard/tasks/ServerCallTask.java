@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.setupwizard.tasks;
 
 import org.martus.client.core.MartusApp;
 import org.martus.clientside.ClientSideNetworkGateway;
+import org.martus.common.network.ClientSideNetworkInterface;
 
 abstract public class ServerCallTask extends TaskWithTimeout
 {
@@ -44,6 +45,7 @@ abstract public class ServerCallTask extends TaskWithTimeout
 
 	public int getMaxSeconds()
 	{
+		ClientSideNetworkInterface ni = gateway.getInterface();
 		return 60;
 	}
 	
