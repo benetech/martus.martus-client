@@ -319,7 +319,8 @@ public class FxAddContactsController extends FxStep4Controller
 					ContactsTableData contactData = getSelectedContact();
 					String contactName = contactData.getContactName();
 					String contactPublicCode = contactData.getPublicCode();
-					String confirmationMessage = String.format("%s\n%s (%s)\n%s",localization.getFieldLabel("RemoveContactLabel1"), contactName, contactPublicCode,localization.getFieldLabel("RemoveContactLabel2"));
+					String removeContactMessage = UiLocalization.replaceTokenInString(localization.getFieldLabel("RemoveContactLabel"), "#NAME#", contactName);
+					String confirmationMessage = UiLocalization.replaceTokenInString(removeContactMessage, "#PUBLICCODE#", contactPublicCode);
 					if(showConfirmationDialog(localization.getWindowTitle("RemoveContact"), confirmationMessage))
 						removeContactFromTable(contactData);
 				}
