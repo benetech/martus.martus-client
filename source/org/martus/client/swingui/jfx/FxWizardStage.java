@@ -56,18 +56,12 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	{
 		super.showCurrentScene();
 		
-		if(scene == null)
-		{
-			scene = createScene();
-			setScene(scene);
-		}
-		
 		Parent wizardTemplateContents = wizardTemplateController.createContents();
 		AbstractFxSetupWizardContentController contentPaneController = (AbstractFxSetupWizardContentController) getCurrentController();
 		contentPaneController.setFxStage(this);
 		wizardTemplateController.setContentPane(contentPaneController);
 		wizardTemplateController.setFxStage(this);
-		scene.setRoot(wizardTemplateContents);
+		setSceneRoot(wizardTemplateContents);
 		wizardTemplateController.getNextButton().setDefaultButton(true);
 	}
 	
@@ -161,13 +155,10 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	
 	abstract protected FxInSwingDialogController getFirstController();
 
-	abstract protected FxScene createScene() throws Exception;
-	
 	public static final String NAVIGATION_NEXT = "Next";
 	public static final String NAVIGATION_BACK = "Back";
 
 	private FxInSwingDialogController currentController;
-	private FxScene scene;
 	private Stack<FxInSwingDialogController> visitedWizardPagesStack;
 	
 	private FxSetupWizardTemplateController wizardTemplateController;
