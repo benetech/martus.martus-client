@@ -45,6 +45,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractAppTask;
+import org.martus.client.swingui.jfx.setupwizard.tasks.TaskWithTimeout;
 import org.martus.common.MartusLogger;
 
 abstract public class FxController implements Initializable
@@ -151,7 +152,7 @@ abstract public class FxController implements Initializable
 		showControllerInsideModalDialog(popupController);
 	}
 
-	public void showTimeoutDialog(String title, String message, Task task, int maxSecondsToCompleteTask) throws Exception
+	public void showTimeoutDialog(String title, String message, TaskWithTimeout task, int maxSecondsToCompleteTask) throws Exception
 	{
 		FxTimeoutController popupController = new FxTimeoutController(getMainWindow(), title, message, task, maxSecondsToCompleteTask);
 		showControllerInsideModalDialog(popupController);

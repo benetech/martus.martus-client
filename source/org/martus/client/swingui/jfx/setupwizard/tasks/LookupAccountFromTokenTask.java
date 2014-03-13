@@ -29,7 +29,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.common.MartusAccountAccessToken;
 
 
-public class LookupAccountFromTokenTask extends AbstractAppTask
+public class LookupAccountFromTokenTask extends TaskWithTimeout
 {
 	public LookupAccountFromTokenTask(MartusApp appToUse, MartusAccountAccessToken tokenToUse)
 	{

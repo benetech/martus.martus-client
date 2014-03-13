@@ -27,12 +27,12 @@ package org.martus.client.swingui.jfx.setupwizard.step5;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxPopupController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.DownloadTemplateListForAccountTask;
+import org.martus.client.swingui.jfx.setupwizard.tasks.TaskWithTimeout;
 import org.martus.common.ContactKey;
 import org.martus.common.fieldspec.CustomFieldTemplate;
 
@@ -53,7 +53,7 @@ abstract public class AbstractFxImportFormTemplateController extends FxPopupCont
 
 	protected void getFormTemplates(ContactKey contactKey, ObservableList<CustomFieldTemplate> formTemplates) throws Exception
 	{
-		Task task = new DownloadTemplateListForAccountTask(getApp(), contactKey, formTemplates);
+		TaskWithTimeout task = new DownloadTemplateListForAccountTask(getApp(), contactKey, formTemplates);
 		MartusLocalization localization = getLocalization();
 		String busyTitle = localization.getWindowTitle("LoadingTemplates");
 		String message = localization.getFieldLabel("LoadingTemplates");
