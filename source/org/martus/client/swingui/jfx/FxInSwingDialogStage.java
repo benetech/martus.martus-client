@@ -60,14 +60,14 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 		scene.setRoot(contents);
 	}
 	
-	public void setShell(JDialog shellToUse)
+	public void setDialog(JDialog dialogToUse)
 	{
-		shell = shellToUse;
+		dialog = dialogToUse;
 	}
 	
-	public JDialog getShell()
+	public JDialog getDialog()
 	{
-		return shell;
+		return dialog;
 	}
 	
 	public void handleNavigationEvent(String navigationNext)
@@ -86,7 +86,7 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 
 	public void close()
 	{
-		getShell().setVisible(false);
+		getDialog().setVisible(false);
 	}
 
 	public File getExternalFxmlDirectory()
@@ -94,7 +94,7 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 		return getMainWindow().getApp().getFxmlDirectory();
 	}
 
-	private JDialog shell;
+	private JDialog dialog;
 	private UiMainWindow mainWindow;
 	private FxScene scene;
 }
