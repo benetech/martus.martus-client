@@ -98,7 +98,8 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 			ObservableList<CustomFieldTemplate> fieldTemplates = getFormTemplates(new ContactKey(contactAccountId));
 			
 			formTemplateChoiceBox.setVisible(true);
-			formTemplateChoiceBox.setItems(fieldTemplates);
+			ObservableList<CustomFieldTemplate> currentItems = formTemplateChoiceBox.getItems();
+			currentItems.setAll(fieldTemplates);
 		} 
 		catch (ServerNotAvailableException e)
 		{
