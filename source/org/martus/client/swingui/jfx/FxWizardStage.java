@@ -46,7 +46,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		super(mainWindowToUse);
 	
 		visitedWizardPagesStack = new Stack<FxInSwingDialogController>();
-		wizardTemplateController = new FxSetupWizardShellController(getMainWindow());
+		shellController = new FxSetupWizardShellController(getMainWindow());
 		
 		currentController = getFirstController();
 	}
@@ -56,13 +56,14 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	{
 		super.showCurrentScene();
 		
-		Parent wizardTemplateContents = wizardTemplateController.createContents();
+		Parent shellContents = shellController.createContents();
 		AbstractFxSetupWizardContentController contentPaneController = (AbstractFxSetupWizardContentController) getCurrentController();
 		contentPaneController.setStage(this);
-		wizardTemplateController.setContentPane(contentPaneController);
-		wizardTemplateController.setStage(this);
-		setSceneRoot(wizardTemplateContents);
-		wizardTemplateController.getNextButton().setDefaultButton(true);
+		shellController.setContentPane(contentPaneController);
+		shellController.setStage(this);
+		setSceneRoot(shellContents);
+		
+		shellController.getNextButton().setDefaultButton(true);
 	}
 	
 	@Override
@@ -150,5 +151,5 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	private FxInSwingDialogController currentController;
 	private Stack<FxInSwingDialogController> visitedWizardPagesStack;
 	
-	private FxSetupWizardShellController wizardTemplateController;
+	private FxSetupWizardShellController shellController;
 }
