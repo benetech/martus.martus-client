@@ -36,7 +36,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.util.StringConverter;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.ContactKey;
@@ -162,28 +161,6 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 			boolean shouldDisplayContinueButton = getSelectedFormTemplate() != null;
 			continueButton.setVisible(shouldDisplayContinueButton);
 			continueLabel.setVisible(shouldDisplayContinueButton);
-		}
-	}
-	
-	protected class ContactKeyStringConverter extends StringConverter<ContactKey>
-	{
-		@Override
-		public String toString(ContactKey contactKey)
-		{
-			if (contactKey == null)
-				return "";
-			
-			String label = contactKey.getLabel();
-			if (label.length() == 0)
-				return "[No Label]";
-						
-			return label;
-		}
-
-		@Override
-		public ContactKey fromString(String string)
-		{
-			return null;
 		}
 	}
 	
