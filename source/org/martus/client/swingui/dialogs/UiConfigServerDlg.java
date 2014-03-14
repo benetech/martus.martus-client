@@ -26,15 +26,19 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.AbstractAction;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.setupwizard.step3.FxSetupStorageServerController;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
@@ -50,7 +54,6 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 	public UiConfigServerDlg(UiMainWindow owner, ConfigInfo infoToUse)
 	{
 		super(owner, "", true);
-		serverPublicKey = "";
 
 		info = infoToUse;
 		mainWindow = owner;
@@ -62,23 +65,23 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		fieldPublicCode = new UiTextField(25);
 
 		UiParagraphPanel panel = new UiParagraphPanel();
+		
+		UiLabel defaultServerLabel = new UiLabel(localization.getFieldLabel("ChooseDefaultServer"));
+		UiButton defaultButton = new UiButton(new ActionDefaultServer());
+		UiLabel description = new UiLabel(localization.getFieldLabel("DefaultServerDescription"));
+		Box hbox = Box.createHorizontalBox();
+		Utilities.addComponentsRespectingOrientation(hbox, new Component[] {defaultButton, description});
+		panel.addComponents(defaultServerLabel, hbox);
+		
+		
 		panel.addComponents(new UiLabel(localization.getFieldLabel("ServerNameEntry")), fieldIPAddress);
-		serverIPAddress = info.getServerName();
-		fieldIPAddress.setText(serverIPAddress);
-		fieldIPAddress.requestFocus();
-
 		panel.addComponents(new UiLabel(localization.getFieldLabel("ServerPublicCodeEntry")), fieldPublicCode);
-		String knownServerPublicKey = info.getServerPublicKey();
-		String knownServerPublicCode = "";
-		try
-		{
-			if(knownServerPublicKey.length() > 0)
-				knownServerPublicCode = MartusCrypto.computeFormattedPublicCode(knownServerPublicKey);
-		}
-		catch (InvalidBase64Exception e)
-		{
-		}
-		fieldPublicCode.setText(knownServerPublicCode);
+		serverIPAddress = info.getServerName();
+		serverPublicKey = info.getServerPublicKey();
+
+		updateTextFields();
+
+		fieldIPAddress.requestFocus();
 
 		panel.addBlankLine();
 
@@ -93,6 +96,22 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		Utilities.centerDlg(this);
 		setResizable(true);
 		setVisible(true);
+	}
+
+	public void updateTextFields()
+	{
+		fieldIPAddress.setText(serverIPAddress);
+
+		String knownServerPublicCode = "";
+		try
+		{
+			if(serverPublicKey.length() > 0)
+				knownServerPublicCode = MartusCrypto.computeFormattedPublicCode(serverPublicKey);
+		}
+		catch (InvalidBase64Exception e)
+		{
+		}
+		fieldPublicCode.setText(knownServerPublicCode);
 	}
 
 	public boolean getResult()
@@ -114,13 +133,17 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 	{
 		result = false;
 		if(ae.getSource() == ok)
-		{
-			String name = fieldIPAddress.getText();
-			String publicCode = fieldPublicCode.getText();
-			if(!ValidateInformation(name, publicCode))
-				return;
-			result = true;
-		}
+			onOk();
+	}
+	
+	protected void onOk()
+	{
+		String name = fieldIPAddress.getText();
+		String publicCode = fieldPublicCode.getText();
+		if(!ValidateInformation(name, publicCode))
+			return;
+		
+		result = true;
 		dispose();
 	}
 
@@ -160,6 +183,24 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 	{
 		mainWindow.notifyDlg(messageTag);
 		return false;
+	}
+	
+	protected class ActionDefaultServer extends AbstractAction
+	{
+		public ActionDefaultServer()
+		{
+			super(mainWindow.getLocalization().getButtonLabel("ChooseDefaultServer"));
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			serverIPAddress = FxSetupStorageServerController.IP_FOR_SL1_DEV;
+			serverPublicKey = FxSetupStorageServerController.PUBLIC_KEY_FOR_SL1_DEV;
+			updateTextFields();
+			onOk();
+		}
+		
 	}
 
 
