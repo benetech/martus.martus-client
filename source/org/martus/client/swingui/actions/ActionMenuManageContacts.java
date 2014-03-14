@@ -1,8 +1,8 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2014, Beneficent
-Technology, Inc. (Benetech).
+monitoring software. Copyright (C) 2005-2007, Beneficent
+Technology, Inc. (The Benetech Initiative).
 
 Martus is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -23,34 +23,42 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.welcome;
+
+package org.martus.client.swingui.actions;
+
+import java.awt.event.ActionEvent;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.ContentController;
-import org.martus.client.swingui.jfx.FxNonWizardStage;
-import org.martus.client.swingui.jfx.FxScene;
+import org.martus.client.swingui.jfx.FxModalDialog;
+import org.martus.client.swingui.jfx.contacts.ContactsStage;
+import org.martus.common.MartusLogger;
 
-public class WelcomeStage extends FxNonWizardStage
+public class ActionMenuManageContacts extends UiMenuAction
 {
-	public WelcomeStage(UiMainWindow mainWindow) throws Exception
+	public ActionMenuManageContacts(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindow);
+		super(mainWindowToUse, "ManageContacts");
+	}
+
+	public void actionPerformed(ActionEvent ae)
+	{
+		doManageContacts();
+	}
+
+	public void doManageContacts()
+	{
+		if(!mainWindow.reSignIn())
+			return;
 		
-		setShellController(new WelcomeShellController(getMainWindow()));
-		setCurrentController(new FxWelcomeController(getMainWindow()));
+		try
+		{
+		    FxModalDialog.createAndShow(mainWindow, new ContactsStage(mainWindow));
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			mainWindow.unexpectedErrorDlg();
+		}
 	}
-
-	@Override
-	public void showCurrentScene() throws Exception
-	{
-		ContentController contentPaneController = getCurrentController();
-
-		showCurrentPage(contentPaneController);
-	}
-
-	@Override
-	protected FxScene createScene() throws Exception
-	{
-		return new FxScene(getExternalFxmlDirectory(), "welcome/welcome.css");
-	}
+	
 }
