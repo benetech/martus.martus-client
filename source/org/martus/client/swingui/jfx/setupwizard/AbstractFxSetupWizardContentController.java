@@ -63,9 +63,9 @@ abstract public class AbstractFxSetupWizardContentController extends FxInSwingDi
 	{
 	}
 	
-	public void setNavigationHandler(NavigationButtonsInterface wizardNavigationHandlerToUse)
+	public void setNavigationHandler(NavigationButtonsInterface navigationHandlerToUse)
 	{
-		wizardNavigationHandler = wizardNavigationHandlerToUse;
+		wizardNavigationHandler = navigationHandlerToUse;
 	}
 	
 	public FxWizardStage getWizardStage()
