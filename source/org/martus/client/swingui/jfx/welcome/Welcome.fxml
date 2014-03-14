@@ -40,6 +40,5 @@
 <Label text="Backup key" />
 <Label text="Make a copy of your accounts encryption key to restore your account in case of an accident or emergency." />
 
- <Button id="" fx:id="nextButton" mnemonicParsing="false" onAction="#nextWasPressed" text="Get Started" BorderPane.alignment="CENTER_RIGHT" />
 </children></VBox>
 </center></BorderPane>
