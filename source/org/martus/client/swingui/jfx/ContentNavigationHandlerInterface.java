@@ -33,7 +33,7 @@ public interface ContentNavigationHandlerInterface
 	
 	public void backWasPressed(ActionEvent actionEvent);
 
-	public void setWizardNavigationHandler(NavigationButtonsInterface wizardNavigationHandler);
+	public void setNavigationHandler(NavigationButtonsInterface wizardNavigationHandler);
 	
 	public FxInSwingDialogController getNextControllerClassName();
 }
