@@ -38,15 +38,8 @@ public class WelcomeStage extends FxInSwingDialogStage
 	{
 		super(mainWindow);
 		
-		setShellController(new WelcomeShellController(mainWindow));
-		
-		contentController = new FxWelcomeController(getMainWindow());
-	}
-
-	@Override
-	public ContentController getCurrentController() throws Exception
-	{
-		return contentController;
+		setShellController(new WelcomeShellController(getMainWindow()));
+		setCurrentController(new FxWelcomeController(getMainWindow()));
 	}
 
 	@Override
@@ -72,6 +65,4 @@ public class WelcomeStage extends FxInSwingDialogStage
 	{
 		return new WelcomeScene(getExternalFxmlDirectory());
 	}
-
-	private ContentController contentController;
 }
