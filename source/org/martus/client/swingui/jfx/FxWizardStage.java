@@ -45,7 +45,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	{
 		super(mainWindowToUse);
 	
-		visitedWizardPagesStack = new Stack<FxInSwingDialogController>();
+		visitedWizardPagesStack = new Stack<ContentController>();
 		shellController = new FxSetupWizardShellController(getMainWindow());
 		
 		currentController = getFirstController();
@@ -71,13 +71,13 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		setSceneRoot(shellContents);
 	}
 
-	public FxSetupWizardShellController getShellController()
+	public ShellController getShellController()
 	{
 		return shellController;
 	}
 	
 	@Override
-	public FxInSwingDialogController getCurrentController() throws Exception
+	public ContentController getCurrentController() throws Exception
 	{
 		return currentController;
 	}
@@ -87,7 +87,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		try
 		{
 			AbstractFxSetupWizardContentController contentPaneController = (AbstractFxSetupWizardContentController) getCurrentController();
-			FxInSwingDialogController nextController = contentPaneController.getNextController();
+			ContentController nextController = contentPaneController.getNextController();
 
 			visitedWizardPagesStack.push(currentController);
 			if(nextController == null)
@@ -156,10 +156,10 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		private UiMainWindow owner;
 	}
 	
-	abstract protected FxInSwingDialogController getFirstController();
+	abstract protected ContentController getFirstController();
 
-	private FxInSwingDialogController currentController;
-	private Stack<FxInSwingDialogController> visitedWizardPagesStack;
+	private ContentController currentController;
+	private Stack<ContentController> visitedWizardPagesStack;
 	
 	private FxSetupWizardShellController shellController;
 }

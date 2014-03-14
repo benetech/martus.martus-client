@@ -32,6 +32,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.ContentController;
 import org.martus.client.swingui.jfx.FxWizardShellController;
 
 public class FxSetupWizardShellController extends FxWizardShellController
@@ -47,14 +48,15 @@ public class FxSetupWizardShellController extends FxWizardShellController
 		return "setupwizard/SetupWizardShell.fxml";
 	}
 	
-	public void setContentPane(AbstractFxSetupWizardContentController contentPaneController) throws Exception
+	public void setContentPane(ContentController contentPaneController) throws Exception
 	{
-		setContentController(contentPaneController);
+		AbstractFxSetupWizardContentController controller = (AbstractFxSetupWizardContentController) contentPaneController;
+		setContentController(controller);
 		Parent createContents = contentPaneController.createContents();
 		
 		contentPane.getChildren().addAll(createContents);
 
-		int stepNumber = contentPaneController.getWizardStepNumber();
+		int stepNumber = controller.getWizardStepNumber();
 		Node step = getStep(stepNumber);
 		step.getStyleClass().add("current-step");
 	}

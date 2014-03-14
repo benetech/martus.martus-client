@@ -28,9 +28,10 @@ package org.martus.client.swingui.jfx.welcome;
 import javafx.scene.Parent;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxInSwingDialogController;
+import org.martus.client.swingui.jfx.ContentController;
 import org.martus.client.swingui.jfx.FxInSwingDialogStage;
 import org.martus.client.swingui.jfx.FxScene;
+import org.martus.client.swingui.jfx.ShellController;
 
 public class WelcomeStage extends FxInSwingDialogStage
 {
@@ -42,7 +43,7 @@ public class WelcomeStage extends FxInSwingDialogStage
 	}
 
 	@Override
-	public FxInSwingDialogController getCurrentController() throws Exception
+	public ContentController getCurrentController() throws Exception
 	{
 		return contentController;
 	}
@@ -50,12 +51,12 @@ public class WelcomeStage extends FxInSwingDialogStage
 	@Override
 	public void showCurrentScene() throws Exception
 	{
-		FxInSwingDialogController contentPaneController = getCurrentController();
+		ContentController contentPaneController = getCurrentController();
 
 		showCurrentPage(contentPaneController);
 	}
 
-	public void showCurrentPage(FxInSwingDialogController contentPaneController) throws Exception
+	public void showCurrentPage(ContentController contentPaneController) throws Exception
 	{
 		ensureSceneExists();
 		Parent shellContents = getShellController().createContents();
@@ -65,7 +66,7 @@ public class WelcomeStage extends FxInSwingDialogStage
 		setSceneRoot(shellContents);
 	}
 
-	public WelcomeShellController getShellController()
+	public ShellController getShellController()
 	{
 		return shellController;
 	}
@@ -77,5 +78,5 @@ public class WelcomeStage extends FxInSwingDialogStage
 	}
 
 	private WelcomeShellController shellController;
-	private FxInSwingDialogController contentController;
+	private ContentController contentController;
 }
