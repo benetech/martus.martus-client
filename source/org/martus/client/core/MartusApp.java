@@ -319,8 +319,7 @@ public class MartusApp
 		for(int i = 0; i < allContacts.size(); ++i)
 		{
 			ContactKey currentContact = allContacts.get(i);
-			if(currentContact.getCanSendTo())
-				hqKeys.add(new HeadquartersKey(currentContact));
+			hqKeys.add(new HeadquartersKey(currentContact));
 		}
 		return hqKeys;
 	}
@@ -332,7 +331,7 @@ public class MartusApp
 		for(int i = 0; i < allContacts.size(); ++i)
 		{
 			ContactKey currentContact = allContacts.get(i);
-			if(currentContact.getSendToByDefault() && currentContact.getCanSendTo())
+			if(currentContact.getSendToByDefault())
 				hqKeys.add(new HeadquartersKey(currentContact));
 		}
 		return hqKeys;
@@ -424,8 +423,7 @@ public class MartusApp
 			for(int i = 0; i < allContacts.size(); ++i)
 			{
 				ContactKey currentContact = allContacts.get(i);
-				if(currentContact.getCanReceiveFrom())
-					fdKeys.add(new FieldDeskKey(currentContact));
+				fdKeys.add(new FieldDeskKey(currentContact));
 			}
 		} 
 		catch (Exception e)
@@ -1808,9 +1806,6 @@ public class MartusApp
 		String formTemplateData = formTemplate.getExportedTemplateAsBase64String(getSecurity());
 		NetworkResponse response = getCurrentNetworkInterfaceGateway().putFormTemplate(getSecurity(), formTemplateData);
 		String resultCode = response.getResultCode();
-		
-		
-		
 		if(resultCode.equals(NetworkInterfaceConstants.NO_SERVER) || resultCode.equals(NetworkInterfaceConstants.SERVER_DOWN))
 		{
 			MartusLogger.log("Server result code: " + resultCode);
