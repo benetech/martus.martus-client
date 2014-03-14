@@ -31,9 +31,9 @@ import org.martus.client.swingui.jfx.FxScene;
 
 public class WelcomeScene extends FxScene
 {
-	public WelcomeScene(File fxmlDirToUse) throws Exception
+	public WelcomeScene(File fxmlDirToUse, String cssLocationToUse) throws Exception
 	{
-		super(fxmlDirToUse, "welcome/welcome.css");
+		super(fxmlDirToUse, cssLocationToUse);
 	}
 
 }

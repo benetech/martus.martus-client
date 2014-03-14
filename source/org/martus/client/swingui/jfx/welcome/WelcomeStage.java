@@ -51,6 +51,6 @@ public class WelcomeStage extends FxNonWizardStage
 	@Override
 	protected FxScene createScene() throws Exception
 	{
-		return new WelcomeScene(getExternalFxmlDirectory());
+		return new WelcomeScene(getExternalFxmlDirectory(), "welcome/welcome.css");
 	}
 }
