@@ -66,6 +66,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 		formTemplateChoiceBox.setVisible(false);
 		formsFromUserMessageLabel.setVisible(false);
 		continueButton.setVisible(false);
+		noTemplatesAvailableLabel.setVisible(false);
 		
 		seeFormTemplatesButton.setDisable(true);
 		accessTokenTextField.textProperty().addListener(new AccessTokenChangeHandler(accessTokenTextField, seeFormTemplatesButton));
@@ -92,11 +93,18 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 			}
 			
 			formsFromUserMessageLabel.setVisible(true);
+			noTemplatesAvailableLabel.setVisible(false);
 			String formsFromUserMessage = TokenReplacement.replaceToken("Forms from user #userAccessToken", "#userAccessToken", accessTokenTextField.getText());
 			formsFromUserMessageLabel.setText(formsFromUserMessage);
 			
+			formTemplateChoiceBox.setVisible(false);
 			ObservableList<CustomFieldTemplate> fieldTemplates = getFormTemplates(new ContactKey(contactAccountId));
-			
+			if (fieldTemplates.isEmpty())
+			{
+				noTemplatesAvailableLabel.setVisible(true);
+				return;
+			}
+				
 			formTemplateChoiceBox.setVisible(true);
 			ObservableList<CustomFieldTemplate> currentItems = formTemplateChoiceBox.getItems();
 			currentItems.setAll(fieldTemplates);
@@ -178,4 +186,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 	
 	@FXML
 	private Button seeFormTemplatesButton;
+	
+	@FXML
+	protected Label noTemplatesAvailableLabel;
 }
