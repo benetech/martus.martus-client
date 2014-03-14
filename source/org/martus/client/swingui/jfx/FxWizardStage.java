@@ -118,9 +118,9 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	}
 	
 	@Override
-	public void setShell(JDialog shellToUse)
+	public void setDialog(JDialog shellToUse)
 	{
-		super.setShell(shellToUse);
+		super.setDialog(shellToUse);
 		shellToUse.addWindowListener(new WindowCloseHandler(getMainWindow()));
 	}
 	
@@ -134,7 +134,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		@Override
 		public void windowClosing(WindowEvent e)
 		{
-			int result = JOptionPane.showConfirmDialog(getShell(), "Wizard will now close.  Are you sure?", "Confirmation", JOptionPane.YES_NO_OPTION);
+			int result = JOptionPane.showConfirmDialog(getDialog(), "Wizard will now close.  Are you sure?", "Confirmation", JOptionPane.YES_NO_OPTION);
 			if (result == JOptionPane.YES_OPTION)
 			{
 				owner.exitWithoutSavingState();
