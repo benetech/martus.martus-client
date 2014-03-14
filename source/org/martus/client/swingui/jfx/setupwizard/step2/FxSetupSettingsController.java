@@ -87,15 +87,15 @@ public class FxSetupSettingsController extends FxStep2Controller
 	public void nextWasPressed(ActionEvent event) 
 	{
 		saveSettingsToConfigInfo();
-		boolean userCancelled = startOrStopTorPerConfigInfo();
+		boolean didFinishInitalizing = startOrStopTorPerConfigInfo();
 		//TODO is there anyway at this point to abort moving forward?
 	}
 	
 	protected void saveSettingsToConfigInfo()
 	{
 		ConfigInfo configInfo = getApp().getConfigInfo();
+		configInfo.setForceBulletinsAllPrivate(true); //NOTE: is this the best place to do this?
 		saveDateFormatConfiguration();
-		configInfo.setForceBulletinsAllPrivate(true);
 		configInfo.setUseInternalTor(userTorCheckBox.isSelected());
 		getMainWindow().saveConfigInfo();
 	}
@@ -160,7 +160,8 @@ public class FxSetupSettingsController extends FxStep2Controller
 		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) 
 		{
 			saveSettingsToConfigInfo();
-			startOrStopTorPerConfigInfo();
+			boolean didFinishInitalizing = startOrStopTorPerConfigInfo();
+			//TODO un-check TOR if user cancelled.
 		}
 	}
 	
