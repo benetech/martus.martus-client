@@ -57,9 +57,8 @@ public class FxSetupSettingsController extends FxStep2Controller
 	
 	public void initialize(URL url, ResourceBundle resourceBundle)
 	{
-		userTorCheckBox.selectedProperty().addListener(new FxCheckboxListener());
-
 		userTorCheckBox.setSelected(getApp().getConfigInfo().useInternalTor());
+		userTorCheckBox.selectedProperty().addListener(new FxCheckboxListener());
 
 		ObservableList<ChoiceItem> dateFormatChoices = getDateFormatChoices();
 		dateFormatSequenceDropDown.setItems(FXCollections.observableArrayList(dateFormatChoices));
