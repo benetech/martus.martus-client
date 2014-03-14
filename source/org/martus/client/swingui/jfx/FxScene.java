@@ -32,7 +32,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 
-abstract public class FxScene extends Scene
+public class FxScene extends Scene
 {
 	public FxScene(File fxmlDirToUse, String cssLocationToUse) throws Exception
 	{
