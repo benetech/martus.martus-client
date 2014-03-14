@@ -25,8 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.welcome;
 
-import javafx.scene.Parent;
-
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.ContentController;
 import org.martus.client.swingui.jfx.FxInSwingDialogStage;
@@ -48,16 +46,6 @@ public class WelcomeStage extends FxInSwingDialogStage
 		ContentController contentPaneController = getCurrentController();
 
 		showCurrentPage(contentPaneController);
-	}
-
-	public void showCurrentPage(ContentController contentPaneController) throws Exception
-	{
-		ensureSceneExists();
-		Parent shellContents = getShellController().createContents();
-		contentPaneController.setStage(this);
-		getShellController().setContentPane(contentPaneController);
-		getShellController().setStage(this);
-		setSceneRoot(shellContents);
 	}
 
 	@Override

@@ -29,8 +29,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Stack;
 
-import javafx.scene.Parent;
-
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -59,16 +57,6 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		showCurrentPage(contentPaneController);
 		
 		getShellController().getNextButton().setDefaultButton(true);
-	}
-
-	public void showCurrentPage(ContentController contentPaneController) throws Exception
-	{
-		ensureSceneExists();
-		Parent shellContents = getShellController().createContents();
-		contentPaneController.setStage(this);
-		getShellController().setContentPane(contentPaneController);
-		getShellController().setStage(this);
-		setSceneRoot(shellContents);
 	}
 
 	public void next()

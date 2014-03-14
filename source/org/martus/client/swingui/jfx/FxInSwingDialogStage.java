@@ -113,6 +113,16 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 		currentContentController = contentControllerToUse;
 	}
 
+	public void showCurrentPage(ContentController contentPaneController) throws Exception
+	{
+		ensureSceneExists();
+		Parent shellContents = getShellController().createContents();
+		contentPaneController.setStage(this);
+		getShellController().setContentPane(contentPaneController);
+		getShellController().setStage(this);
+		setSceneRoot(shellContents);
+	}
+
 	private JDialog dialog;
 	private UiMainWindow mainWindow;
 	private FxScene scene;
