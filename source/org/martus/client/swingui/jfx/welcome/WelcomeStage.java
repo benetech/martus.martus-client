@@ -31,14 +31,12 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.ContentController;
 import org.martus.client.swingui.jfx.FxInSwingDialogStage;
 import org.martus.client.swingui.jfx.FxScene;
-import org.martus.client.swingui.jfx.ShellController;
 
 public class WelcomeStage extends FxInSwingDialogStage
 {
 	public WelcomeStage(UiMainWindow mainWindow) throws Exception
 	{
-		super(mainWindow);
-		shellController = new WelcomeShellController(getMainWindow());
+		super(mainWindow, new WelcomeShellController(mainWindow));
 		contentController = new FxWelcomeController(getMainWindow());
 	}
 
@@ -66,17 +64,11 @@ public class WelcomeStage extends FxInSwingDialogStage
 		setSceneRoot(shellContents);
 	}
 
-	public ShellController getShellController()
-	{
-		return shellController;
-	}
-
 	@Override
 	protected FxScene createScene() throws Exception
 	{
 		return new WelcomeScene(getExternalFxmlDirectory());
 	}
 
-	private ShellController shellController;
 	private ContentController contentController;
 }
