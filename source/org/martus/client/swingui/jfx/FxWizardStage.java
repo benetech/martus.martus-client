@@ -45,11 +45,10 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	{
 		super(mainWindowToUse);
 		
-		setShellController(new FxSetupWizardShellController(mainWindowToUse));
-	
 		visitedWizardPagesStack = new Stack<ContentController>();
-		
-		currentController = getFirstController();
+
+		setShellController(new FxSetupWizardShellController(getMainWindow()));
+		setCurrentController(getFirstController());
 	}
 	
 	@Override
@@ -72,12 +71,6 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		setSceneRoot(shellContents);
 	}
 
-	@Override
-	public ContentController getCurrentController() throws Exception
-	{
-		return currentController;
-	}
-
 	public void next()
 	{
 		try
@@ -85,14 +78,14 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 			AbstractFxSetupWizardContentController contentPaneController = (AbstractFxSetupWizardContentController) getCurrentController();
 			ContentController nextController = contentPaneController.getNextController();
 
-			visitedWizardPagesStack.push(currentController);
+			visitedWizardPagesStack.push(getCurrentController());
 			if(nextController == null)
 			{
 				close();
 			}
 			else
 			{
-				currentController = nextController;
+				setCurrentController(nextController);
 				showCurrentScene();
 			}
 		}
@@ -113,7 +106,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 			}
 			else
 			{
-				currentController = visitedWizardPagesStack.pop();
+				setCurrentController(visitedWizardPagesStack.pop());
 				showCurrentScene();
 			}
 		}
@@ -154,7 +147,6 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	
 	abstract protected ContentController getFirstController();
 
-	private ContentController currentController;
 	private Stack<ContentController> visitedWizardPagesStack;
 	
 }
