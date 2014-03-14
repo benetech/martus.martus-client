@@ -78,13 +78,13 @@ abstract public class FxWizardTemplateController extends FxInSwingDialogControll
 		return backButton; 
 	}
 	
-	public void setContentController(ContentNavigationHandlerInterface contentNavigationHandlerToUse)
+	public void setContentController(WizardNavigationHandlerInterface contentNavigationHandlerToUse)
 	{
 		contentNavigationHandler = contentNavigationHandlerToUse;
 		contentNavigationHandler.setNavigationHandler(this);
 	}
 	
-	private ContentNavigationHandlerInterface getContentNavigationHandler()
+	private WizardNavigationHandlerInterface getContentNavigationHandler()
 	{
 		return contentNavigationHandler;
 	}
@@ -95,5 +95,5 @@ abstract public class FxWizardTemplateController extends FxInSwingDialogControll
 	@FXML
 	protected Button backButton;
 	
-	private ContentNavigationHandlerInterface contentNavigationHandler;
+	private WizardNavigationHandlerInterface contentNavigationHandler;
 }
