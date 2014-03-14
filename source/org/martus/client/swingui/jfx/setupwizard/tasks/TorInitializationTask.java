@@ -39,12 +39,6 @@ public class TorInitializationTask extends AbstractAppTask
 	{
 		app.getTransport().setProgressMeter(progress);
 		app.startOrStopTorAsRequested();
-		//FIXME: remove this while loop/Sleep and adjust 	task.stateProperty().addListener(new TaskStateChangeHandler());
-		//With some handleTaskComplete override instead of the task ending which causes the Successful state change to trigger
-		while (!app.getTransport().isReady())
-		{
-			Thread.sleep(1000);
-		}
 		return null;
 	}
 }
