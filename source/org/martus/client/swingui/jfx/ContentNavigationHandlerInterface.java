@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
+
 import javafx.event.ActionEvent;
 
 public interface ContentNavigationHandlerInterface
@@ -35,5 +37,5 @@ public interface ContentNavigationHandlerInterface
 
 	public void setNavigationHandler(NavigationButtonsInterface navigationHandler);
 	
-	public FxInSwingDialogController getNextController();
+	public AbstractFxSetupWizardContentController getNextController();
 }

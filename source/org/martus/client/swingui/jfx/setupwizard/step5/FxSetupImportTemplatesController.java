@@ -45,7 +45,7 @@ import javafx.scene.control.RadioButton;
 import javafx.util.StringConverter;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxInSwingDialogController;
+import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.client.swingui.jfx.setupwizard.step6.FxSetupBackupYourKeyController;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.CustomFieldTemplate;
@@ -68,7 +68,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	}
 
 	@Override
-	public FxInSwingDialogController getNextController()
+	public AbstractFxSetupWizardContentController getNextController()
 	{
 		return new FxSetupBackupYourKeyController(getMainWindow());
 	}
