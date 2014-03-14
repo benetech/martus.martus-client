@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.welcome;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.ContentController;
+import org.martus.client.swingui.jfx.FxNonWizardStage;
 import org.martus.client.swingui.jfx.FxScene;
 
 public class WelcomeStage extends FxNonWizardStage
