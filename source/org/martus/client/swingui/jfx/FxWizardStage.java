@@ -36,7 +36,7 @@ import javax.swing.JOptionPane;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
-import org.martus.client.swingui.jfx.setupwizard.FxSetupWizardTemplateController;
+import org.martus.client.swingui.jfx.setupwizard.FxSetupWizardShellController;
 import org.martus.common.MartusLogger;
 
 abstract public class FxWizardStage extends FxInSwingDialogStage
@@ -46,7 +46,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		super(mainWindowToUse);
 	
 		visitedWizardPagesStack = new Stack<FxInSwingDialogController>();
-		wizardTemplateController = new FxSetupWizardTemplateController(getMainWindow());
+		wizardTemplateController = new FxSetupWizardShellController(getMainWindow());
 		
 		currentController = getFirstController();
 	}
@@ -150,5 +150,5 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	private FxInSwingDialogController currentController;
 	private Stack<FxInSwingDialogController> visitedWizardPagesStack;
 	
-	private FxSetupWizardTemplateController wizardTemplateController;
+	private FxSetupWizardShellController wizardTemplateController;
 }
