@@ -61,7 +61,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		getShellController().getNextButton().setDefaultButton(true);
 	}
 
-	public void showCurrentPage(AbstractFxSetupWizardContentController contentPaneController) throws Exception
+	public void showCurrentPage(ContentController contentPaneController) throws Exception
 	{
 		ensureSceneExists();
 		Parent shellContents = getShellController().createContents();
