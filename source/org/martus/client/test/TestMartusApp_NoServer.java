@@ -986,13 +986,13 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("Old Default HQ's should be blank", "", config.getDefaultHQKeysXml());
 		assertEquals("Old FieldDesk's should be blank", "", config.getFieldDeskKeysXml());
 		HeadquartersKeys allHQs = appWithAccount.getAllHQKeys();
-		assertEquals("Should only have 3 keys (HQ1, HQ2, and LegacyHQ)", 3, allHQs.size());
+		assertEquals("Should  have 5 keys (HQ1, HQ2, and LegacyHQ), + 2 FD's all of which are now contacts", 5, allHQs.size());
 		assertFalse("Should not incluse ourself", allHQs.containsKey(ourClientPublicKey));
 		HeadquartersKeys allDefaultHQs = appWithAccount.getDefaultHQKeys();
 		assertEquals("Should only have 2 default keys (HQ1 and LegacyHQ)", 2, allDefaultHQs.size());
 		assertFalse("Should not incluse ourself as default", allDefaultHQs.containsKey(ourClientPublicKey));
 		FieldDeskKeys allFDs = appWithAccount.getFieldDeskKeys();
-		assertEquals("Should only have 2 FD keys", 2, allFDs.size());
+		assertEquals("Should only have 5 FD keys since all now just Contacts", 5, allFDs.size());
 		assertFalse("Should not incluse ourself as a FD", allFDs.containsKey(ourClientPublicKey));
 		ContactKeys allKeys = appWithAccount.getContactKeys();
 		assertEquals("Should have 5 keys total", 5, allKeys.size());
@@ -1340,7 +1340,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		ContactKeys keysReturned = appWithAccount.getContactKeys();
 		assertEquals("Should now have 1 contact", 1, keysReturned.size());
 		assertEquals("Should also have 1 HQ now as well", 1, appWithAccount.getAllHQKeys().size());
-		assertEquals("Should still have 0 FD's as well", 0, appWithAccount.getFieldDeskKeys().size());
+		assertEquals("Should still have 1 FD's as well since a contact is a HQ and a FD", 1, appWithAccount.getFieldDeskKeys().size());
 
 		String sampleFDPublicKey = "FD";
 		String sampleFDLabel = "Wilma";
@@ -1350,8 +1350,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		appWithAccount.setContactKeys(keysReturned);
 		ContactKeys keysReturned2 = appWithAccount.getContactKeys();
 		assertEquals("Should now have 2 contacts", 2, keysReturned2.size());
-		assertEquals("Should still have 1 HQ now as well", 1, appWithAccount.getAllHQKeys().size());
-		assertEquals("Should now have 1 FD's as well", 1, appWithAccount.getFieldDeskKeys().size());
+		assertEquals("Should now have 2 HQ now as well", 2, appWithAccount.getAllHQKeys().size());
+		assertEquals("Should now have 2 FD's as well", 2, appWithAccount.getFieldDeskKeys().size());
 		
 		String sampleNonHqFdKey = "Not HQ Not FD";
 		String sampleNonHqFdLable = "Pebbles";
@@ -1360,8 +1360,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		appWithAccount.setContactKeys(keysReturned2);
 		ContactKeys keysReturned3 = appWithAccount.getContactKeys();
 		assertEquals("Should now have 3 contacts", 3, keysReturned3.size());
-		assertEquals("Should still have 1 HQ", 1, appWithAccount.getAllHQKeys().size());
-		assertEquals("Should still have 1 FD's as well", 1, appWithAccount.getFieldDeskKeys().size());
+		assertEquals("Should also have 3 HQ", 3, appWithAccount.getAllHQKeys().size());
+		assertEquals("Should also have 3 FD's as well", 3, appWithAccount.getFieldDeskKeys().size());
 		
 		ContactKeys emptyKeys = new ContactKeys();
 		appWithAccount.setContactKeys(emptyKeys);
@@ -1429,9 +1429,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		HeadquartersKeys empty = new HeadquartersKeys();
 		appWithAccount.setAndSaveHQKeys(empty, empty);
 		HeadquartersKeys noFallbackKeys = appWithAccount.getAllHQKeysWithFallback();
-		assertEquals(0, noFallbackKeys.size());
+		assertEquals("Even though we set HQKeys to empty they are still our contact so by default is an HQ.",2, noFallbackKeys.size());
 		HeadquartersKeys noDefaultKeys = appWithAccount.getDefaultHQKeysWithFallback();
-		assertEquals(0, noDefaultKeys.size());
+		assertEquals("since we cleared default HQ, this should be 0", 0, noDefaultKeys.size());
 	}
 	
 	public void testGetAndSaveHQKeys() throws Exception
@@ -1499,7 +1499,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		HeadquartersKeys returnedKeys = appWithAccount.getAllHQKeys();
 		assertTrue("We should still have Account1 as an HQ", returnedKeys.contains(key1));
 		assertTrue("We should now have also Account3 as an HQ", returnedKeys.contains(key3));
-		assertFalse("We should not have Account2 anymore as an HQ", returnedKeys.contains(key2));
+		assertTrue("We should not have Account2 anymore as an HQ but new behavior states any Contact is also a HQ", returnedKeys.contains(key2));
 		
 		String sampleHQKey4 = "account4";
 		String sampleLabel4 = "Dino";
@@ -1510,9 +1510,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		HeadquartersKeys returnedKeysAfterNewDefaultAccountWasntIncluded = appWithAccount.getAllHQKeys();
 		assertTrue("We should still have Account1 as an HQ", returnedKeysAfterNewDefaultAccountWasntIncluded.contains(key1));
 		assertTrue("We should still have Account3 as an HQ", returnedKeysAfterNewDefaultAccountWasntIncluded.contains(key3));
-		assertFalse("Account 2 should still not be an HQ", returnedKeysAfterNewDefaultAccountWasntIncluded.contains(key2));
+		assertTrue("Account 2 should still not be an HQ, but since they are a Contact they are a HQ.", returnedKeysAfterNewDefaultAccountWasntIncluded.contains(key2));
 		assertTrue("We should also have Account4 as an HQ", returnedKeysAfterNewDefaultAccountWasntIncluded.contains(key4));
-		assertEquals("We should now have 3 HQ accounts", 3, returnedKeysAfterNewDefaultAccountWasntIncluded.size());
+		assertEquals("We should now have 4 HQ accounts, ie. 4 contacts", 4, returnedKeysAfterNewDefaultAccountWasntIncluded.size());
 		
 		HeadquartersKeys onlyAccount3isHQbutDefaultIsAccount1 = new HeadquartersKeys();
 		onlyAccount3isHQbutDefaultIsAccount1.add(key3);
@@ -1521,9 +1521,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		HeadquartersKeys returnedKeysAfterDefaultWasntIncluded = appWithAccount.getAllHQKeys();
 		assertTrue("We should still have Account1 as an HQ since its a default HQ", returnedKeysAfterDefaultWasntIncluded.contains(key1));
 		assertTrue("We should still have Account3 as an HQ since its included in all HQs", returnedKeysAfterDefaultWasntIncluded.contains(key3));
-		assertFalse("Account 2 should not be an HQ anymore", returnedKeysAfterDefaultWasntIncluded.contains(key2));
-		assertFalse("Account 4 should not be an HQ anymore", returnedKeysAfterDefaultWasntIncluded.contains(key4));
-		assertEquals("We should still only have 2 HQ accounts", 2, returnedKeysAfterDefaultWasntIncluded.size());
+		assertTrue("Account 2 should not be an HQ anymore, except it is a contact still so it is.", returnedKeysAfterDefaultWasntIncluded.contains(key2));
+		assertTrue("Account 4 should not be an HQ anymore, except is is a contact still so it too shoud still exist", returnedKeysAfterDefaultWasntIncluded.contains(key4));
+		assertEquals("We should still only have 4 HQ accounts", 4, returnedKeysAfterDefaultWasntIncluded.size());
 		
 		FieldDeskKeys onlyAccount1and2areFDs = new FieldDeskKeys();
 		FieldDeskKey fDkey1 = new FieldDeskKey(sampleHQKey1, sampleLabel1);
@@ -1711,7 +1711,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		FieldDeskKeys returnedKeys = appWithAccount.getFieldDeskKeys();
 		assertTrue("We should still have Account1 as an FD", returnedKeys.containsKey(sampleFDKey1));
 		assertTrue("We should now have also Account3 as an FD", returnedKeys.containsKey(sampleFDKey3));
-		assertFalse("We should not have Account2 anymore as an FD", returnedKeys.containsKey(sampleFDKey2));
+		assertTrue("We should not have Account2 anymore as a FD, but behavior changed now all Contacts are HQ's and FD's", returnedKeys.containsKey(sampleFDKey2));
 	}
 
 	public void testChangingFDLabels() throws Exception
@@ -1786,7 +1786,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		appWithAccount.setAndSaveHQKeys(empty,empty);
 		assertEquals("HQ not cleared", "", appWithAccount.getConfigInfo().getLegacyHQKey());
-		assertEquals("All HQs not cleared", 0, appWithAccount.getAllHQKeys().size());
+		assertEquals("All HQs not cleared? HQ's may be cleared but You still have a contact", 1, appWithAccount.getAllHQKeys().size());
 		assertEquals("Default HQs not cleared", 0, appWithAccount.getDefaultHQKeys().size());
 	}
 
