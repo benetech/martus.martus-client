@@ -29,8 +29,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Stack;
 
-import javafx.scene.Parent;
-
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -44,11 +42,11 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	public FxWizardStage(UiMainWindow mainWindowToUse) throws Exception
 	{
 		super(mainWindowToUse);
-	
-		visitedWizardPagesStack = new Stack<FxInSwingDialogController>();
-		shellController = new FxSetupWizardShellController(getMainWindow());
 		
-		currentController = getFirstController();
+		visitedWizardPagesStack = new Stack<ContentController>();
+
+		setShellController(new FxSetupWizardShellController(getMainWindow()));
+		setCurrentController(getFirstController());
 	}
 	
 	@Override
@@ -61,42 +59,21 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		getShellController().getNextButton().setDefaultButton(true);
 	}
 
-	public void showCurrentPage(AbstractFxSetupWizardContentController contentPaneController) throws Exception
-	{
-		ensureSceneExists();
-		Parent shellContents = getShellController().createContents();
-		contentPaneController.setStage(this);
-		getShellController().setContentPane(contentPaneController);
-		getShellController().setStage(this);
-		setSceneRoot(shellContents);
-	}
-
-	public FxSetupWizardShellController getShellController()
-	{
-		return shellController;
-	}
-	
-	@Override
-	public FxInSwingDialogController getCurrentController() throws Exception
-	{
-		return currentController;
-	}
-
 	public void next()
 	{
 		try
 		{
 			AbstractFxSetupWizardContentController contentPaneController = (AbstractFxSetupWizardContentController) getCurrentController();
-			FxInSwingDialogController nextController = contentPaneController.getNextController();
+			ContentController nextController = contentPaneController.getNextController();
 
-			visitedWizardPagesStack.push(currentController);
+			visitedWizardPagesStack.push(getCurrentController());
 			if(nextController == null)
 			{
 				close();
 			}
 			else
 			{
-				currentController = nextController;
+				setCurrentController(nextController);
 				showCurrentScene();
 			}
 		}
@@ -117,7 +94,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 			}
 			else
 			{
-				currentController = visitedWizardPagesStack.pop();
+				setCurrentController(visitedWizardPagesStack.pop());
 				showCurrentScene();
 			}
 		}
@@ -156,10 +133,8 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		private UiMainWindow owner;
 	}
 	
-	abstract protected FxInSwingDialogController getFirstController();
+	abstract protected ContentController getFirstController();
 
-	private FxInSwingDialogController currentController;
-	private Stack<FxInSwingDialogController> visitedWizardPagesStack;
+	private Stack<ContentController> visitedWizardPagesStack;
 	
-	private FxSetupWizardShellController shellController;
 }

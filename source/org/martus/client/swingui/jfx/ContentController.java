@@ -23,34 +23,14 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.welcome;
+package org.martus.client.swingui.jfx;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.ContentController;
-import org.martus.client.swingui.jfx.FxNonWizardStage;
-import org.martus.client.swingui.jfx.FxScene;
 
-public class WelcomeStage extends FxNonWizardStage
+abstract public class ContentController extends FxInSwingDialogController
 {
-	public WelcomeStage(UiMainWindow mainWindow) throws Exception
+	public ContentController(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindow);
-		
-		setShellController(new WelcomeShellController(getMainWindow()));
-		setCurrentController(new FxWelcomeController(getMainWindow()));
-	}
-
-	@Override
-	public void showCurrentScene() throws Exception
-	{
-		ContentController contentPaneController = getCurrentController();
-
-		showCurrentPage(contentPaneController);
-	}
-
-	@Override
-	protected FxScene createScene() throws Exception
-	{
-		return new FxScene(getExternalFxmlDirectory(), "welcome/welcome.css");
+		super(mainWindowToUse);
 	}
 }

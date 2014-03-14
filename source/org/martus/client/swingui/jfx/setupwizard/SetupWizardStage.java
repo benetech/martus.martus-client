@@ -27,7 +27,7 @@ package org.martus.client.swingui.jfx.setupwizard;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxInSwingDialogController;
+import org.martus.client.swingui.jfx.ContentController;
 import org.martus.client.swingui.jfx.FxScene;
 import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.step1.FxSetupUsernamePasswordController;
@@ -42,7 +42,7 @@ public class SetupWizardStage extends FxWizardStage
 	}
 	
 	@Override
-	protected FxInSwingDialogController getFirstController()
+	protected ContentController getFirstController()
 	{
 		UiMainWindow mainWindow = getMainWindow();
 		if(UiMainWindow.isAlphaTester)
@@ -71,6 +71,6 @@ public class SetupWizardStage extends FxWizardStage
 	@Override
 	protected FxScene createScene() throws Exception
 	{
-		return new SetupWizardScene(getExternalFxmlDirectory());
+		return new FxScene(getExternalFxmlDirectory(), "setupwizard/background.css");
 	}
 }

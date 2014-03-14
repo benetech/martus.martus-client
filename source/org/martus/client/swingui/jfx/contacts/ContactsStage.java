@@ -23,21 +23,22 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.welcome;
+package org.martus.client.swingui.jfx.contacts;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.ContentController;
 import org.martus.client.swingui.jfx.FxNonWizardStage;
 import org.martus.client.swingui.jfx.FxScene;
+import org.martus.client.swingui.jfx.setupwizard.step4.FxAddContactsController;
 
-public class WelcomeStage extends FxNonWizardStage
+public class ContactsStage extends FxNonWizardStage
 {
-	public WelcomeStage(UiMainWindow mainWindow) throws Exception
+	public ContactsStage(UiMainWindow mainWindow) throws Exception
 	{
 		super(mainWindow);
 		
-		setShellController(new WelcomeShellController(getMainWindow()));
-		setCurrentController(new FxWelcomeController(getMainWindow()));
+		setShellController(new ContactsShellController(getMainWindow()));
+		setCurrentController(new FxAddContactsController(getMainWindow()));
 	}
 
 	@Override
@@ -51,6 +52,6 @@ public class WelcomeStage extends FxNonWizardStage
 	@Override
 	protected FxScene createScene() throws Exception
 	{
-		return new FxScene(getExternalFxmlDirectory(), "welcome/welcome.css");
+		return new FxScene(getExternalFxmlDirectory(), "contacts/contacts.css");
 	}
 }

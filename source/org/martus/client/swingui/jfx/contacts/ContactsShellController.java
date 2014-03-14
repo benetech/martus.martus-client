@@ -23,72 +23,80 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.setupwizard;
+package org.martus.client.swingui.jfx.contacts;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.ContentController;
-import org.martus.client.swingui.jfx.FxWizardShellController;
+import org.martus.client.swingui.jfx.ShellController;
+import org.martus.client.swingui.jfx.WizardNavigationButtonsInterface;
+import org.martus.client.swingui.jfx.WizardNavigationHandlerInterface;
+import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 
-public class FxSetupWizardShellController extends FxWizardShellController
+public class ContactsShellController extends ShellController implements WizardNavigationButtonsInterface
 {
-	public FxSetupWizardShellController(UiMainWindow mainWindowToUse)
+	public ContactsShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
-	
+
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/SetupWizardShell.fxml";
+		return "contacts/ContactsShell.fxml";
 	}
-	
+
 	public void setContentPane(ContentController contentPaneController) throws Exception
 	{
 		AbstractFxSetupWizardContentController controller = (AbstractFxSetupWizardContentController) contentPaneController;
 		setContentController(controller);
-		Parent createContents = contentPaneController.createContents();
-		
-		contentPane.getChildren().addAll(createContents);
 
-		int stepNumber = controller.getWizardStepNumber();
-		Node step = getStep(stepNumber);
-		step.getStyleClass().add("current-step");
+		Parent createContents = contentPaneController.createContents();
+		contentPane.getChildren().addAll(createContents);
+		
 	}
 	
-	private Node getStep(int stepNumber)
+	public void setContentController(WizardNavigationHandlerInterface contentNavigationHandlerToUse)
 	{
-		switch(stepNumber)
-		{
-			case 1: return step1;
-			case 2: return step2;
-			case 3: return step3;
-			case 4: return step4;
-			case 5: return step5;
-			case 6: return step6;
-		}
-		
-		throw new RuntimeException("Unknown step number: " + stepNumber);
+		contentNavigationHandler = contentNavigationHandlerToUse;
+		contentNavigationHandler.setNavigationHandler(this);
+	}
+	
+	@Override
+	public Button getNextButton()
+	{
+		return nextButton;
+	}	
+
+	@Override
+	public Button getBackButton()
+	{
+		return null;
 	}
 
 	@FXML
-	protected HBox step1;
+	protected void onNext(ActionEvent event)
+	{
+		getContentNavigationHandler().nextWasPressed(event);
+		getStage().close();
+	}
+	
+	private WizardNavigationHandlerInterface getContentNavigationHandler()
+	{
+		return contentNavigationHandler;
+	}
+	
 	@FXML
-	protected HBox step2;
-	@FXML
-	protected HBox step3;
-	@FXML
-	protected HBox step4;
-	@FXML
-	protected HBox step5;
-	@FXML
-	protected HBox step6;
+	protected Pane contentPane;
 
 	@FXML
-	private Pane contentPane;	
+	protected Button nextButton;
+
+	private WizardNavigationHandlerInterface contentNavigationHandler;
+
 }
