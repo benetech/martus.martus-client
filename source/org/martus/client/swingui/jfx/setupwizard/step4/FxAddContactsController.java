@@ -133,7 +133,7 @@ public class FxAddContactsController extends FxStep4Controller
 			if(DoesContactAlreadyExistInTable(contactPublicCode))
 			{
 				String contactsName = getContactsNameInTable(contactPublicCode);
-				String contactExistsWithName = TokenReplacement.replaceToken(getLocalization().getFieldLabel("ContactAlreadyExistsAs"), "#NAME#", contactsName);
+				String contactExistsWithName = TokenReplacement.replaceToken(getLocalization().getFieldLabel("ContactAlreadyExistsAs"), "#Name#", contactsName);
 				showNotifyDialog("ContactKeyAlreadyExists", contactExistsWithName);
 				return;
 			}
@@ -322,8 +322,8 @@ public class FxAddContactsController extends FxStep4Controller
 					String contactName = contactData.getContactName();
 					String contactPublicCode = contactData.getPublicCode();
 					HashMap map = new HashMap();
-					map.put("#NAME#", contactName);
-					map.put("#PUBLICCODE#", contactPublicCode);
+					map.put("#Name#", contactName);
+					map.put("#PublicCode#", contactPublicCode);
 					try
 					{
 						String confirmationMessage = TokenReplacement.replaceTokens(localization.getFieldLabel("RemoveContactLabel"), map);
