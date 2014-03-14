@@ -81,7 +81,7 @@ abstract public class FxWizardTemplateController extends FxInSwingDialogControll
 	public void setContentController(ContentNavigationHandlerInterface contentNavigationHandlerToUse)
 	{
 		contentNavigationHandler = contentNavigationHandlerToUse;
-		contentNavigationHandler.setWizardNavigationHandler(this);
+		contentNavigationHandler.setNavigationHandler(this);
 	}
 	
 	private ContentNavigationHandlerInterface getContentNavigationHandler()
