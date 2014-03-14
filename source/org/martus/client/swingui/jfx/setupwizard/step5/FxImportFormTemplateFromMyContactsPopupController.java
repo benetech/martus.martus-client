@@ -135,11 +135,11 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 
 			try
 			{
-				chooseFormTemplateLabel.setVisible(true);
-				templatesChoiceBox.setVisible(true);
 				ObservableList<CustomFieldTemplate> formTemplates = getFormTemplates(newValue);
 				templatesChoiceBox.getItems().clear();
-				templatesChoiceBox.setItems(formTemplates);
+				templatesChoiceBox.getItems().addAll(formTemplates);
+				chooseFormTemplateLabel.setVisible(true);
+				templatesChoiceBox.setVisible(true);
 			}
 			catch (Exception e)
 			{
