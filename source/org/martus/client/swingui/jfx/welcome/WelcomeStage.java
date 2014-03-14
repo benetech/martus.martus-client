@@ -77,6 +77,6 @@ public class WelcomeStage extends FxInSwingDialogStage
 		return new WelcomeScene(getExternalFxmlDirectory());
 	}
 
-	private WelcomeShellController shellController;
+	private ShellController shellController;
 	private ContentController contentController;
 }
