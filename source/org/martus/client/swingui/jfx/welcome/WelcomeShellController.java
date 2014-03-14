@@ -28,10 +28,11 @@ package org.martus.client.swingui.jfx.welcome;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxInSwingDialogController;
+import org.martus.client.swingui.jfx.ContentController;
 import org.martus.client.swingui.jfx.ShellController;
 
 public class WelcomeShellController extends ShellController
@@ -47,13 +48,19 @@ public class WelcomeShellController extends ShellController
 		return "welcome/WelcomeShell.fxml";
 	}
 
-	public void setContentPane(FxInSwingDialogController contentPaneController) throws Exception
+	public void setContentPane(ContentController contentPaneController) throws Exception
 	{
 		Parent createContents = contentPaneController.createContents();
 		
 		contentPane.getChildren().addAll(createContents);
 	}
 	
+	@Override
+	public Button getNextButton()
+	{
+		return nextButton;
+	}	
+
 	@FXML
 	protected void onNext(ActionEvent event)
 	{
@@ -61,5 +68,8 @@ public class WelcomeShellController extends ShellController
 	}
 	
 	@FXML
-	private Pane contentPane;	
+	protected Pane contentPane;
+
+	@FXML
+	protected Button nextButton;
 }
