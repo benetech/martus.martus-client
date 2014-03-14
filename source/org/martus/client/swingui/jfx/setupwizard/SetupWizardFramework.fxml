@@ -60,10 +60,10 @@
               <bottom>
                 <BorderPane>
                   <left>
-                    <Button fx:id="backButton" mnemonicParsing="false" onAction="#backWasPressed" text="Go Back" BorderPane.alignment="CENTER_LEFT" />
+                    <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBack" text="Go Back" BorderPane.alignment="CENTER_LEFT" />
                   </left>
                   <right>
-                    <Button id="" fx:id="nextButton" mnemonicParsing="false" onAction="#nextWasPressed" text="Continue" BorderPane.alignment="CENTER_RIGHT" />
+                    <Button id="" fx:id="nextButton" mnemonicParsing="false" onAction="#onNext" text="Continue" BorderPane.alignment="CENTER_RIGHT" />
                   </right>
                 </BorderPane>
               </bottom>
