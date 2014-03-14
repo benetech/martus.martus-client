@@ -487,7 +487,7 @@ public class FxAddContactsController extends FxStep4Controller
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/step4/ModifyContacts.fxml";
+		return "setupwizard/step4/ManageContacts.fxml";
 	}
 	
 	@Override
