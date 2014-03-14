@@ -93,6 +93,7 @@ public class FxAddContactsController extends FxStep4Controller
 		removeContactColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("deleteContact")); 
 	    removeContactColumn.setCellFactory(new TableColumnRemoveButtonCellFactory(getLocalization()));
 
+	    sendToByDefaultColumn.setVisible(false);
 		contactsTable.setItems(data);
 		loadExistingContactData();
 		updateAddContactButtonState();
@@ -596,6 +597,10 @@ public class FxAddContactsController extends FxStep4Controller
 	
 	@FXML
 	private TableColumn<Object, String> contactNameColumn;
+	
+	@FXML
+	private TableColumn<Object, String> sendToByDefaultColumn;
+	
 	
 	@FXML
 	private TableColumn<Object, String> publicCodeColumn;
