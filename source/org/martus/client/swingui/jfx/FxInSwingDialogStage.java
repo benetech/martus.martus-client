@@ -44,15 +44,15 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 
 	abstract public FxInSwingDialogController getCurrentController() throws Exception;
 	abstract protected FxScene createScene() throws Exception;
+	abstract public void showCurrentScene() throws Exception;
 	
-	public void showCurrentScene() throws Exception
+	public void ensureSceneExists() throws Exception
 	{
 		if(scene == null)
 		{
 			scene = createScene();
 			setScene(scene);
 		}
-		
 	}
 	
 	public void setSceneRoot(Parent contents)
