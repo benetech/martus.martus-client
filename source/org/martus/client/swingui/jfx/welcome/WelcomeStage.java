@@ -50,6 +50,7 @@ public class WelcomeStage extends FxInSwingDialogStage
 	public void showCurrentScene() throws Exception
 	{
 		super.showCurrentScene();
+		
 		FxInSwingDialogController contentPaneController = getCurrentController();
 		contentPaneController.setFxStage(this);
 		Parent contents = contentPaneController.createContents();
