@@ -80,7 +80,7 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 		MartusLocalization localization = getLocalization();
 		fileChooser.getExtensionFilters().addAll(
 				new FileChooser.ExtensionFilter(localization.getFieldLabel("KeyPairFileFilter"), "*.dat"),
-				new FileChooser.ExtensionFilter(localization.getFieldLabel("KeyPairFileFilter"), "*.*"));
+				new FileChooser.ExtensionFilter(localization.getFieldLabel("AllFiles"), "*.*"));
 		File newBackupFile = fileChooser.showSaveDialog(null);
 		if(newBackupFile == null)
 			return;
