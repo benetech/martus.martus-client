@@ -28,73 +28,59 @@ package org.martus.client.swingui.jfx.setupwizard.step5;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.util.Callback;
+import javafx.util.StringConverter;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxBindingHelpers;
-import org.martus.client.swingui.jfx.FxRadioButtonCellFactory;
-import org.martus.client.swingui.jfx.setupwizard.ContactsWithTemplatesTableData;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
-import org.martus.common.Exceptions.AccountNotFoundException;
-import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.CustomFieldTemplate;
-import org.martus.util.TokenReplacement;
 
-public class FxImportFormTemplateFromMyContactsPopupController extends AbstractFxImportFormTemplateController implements Initializable
+public class FxImportFormTemplateFromMyContactsPopupController extends AbstractFxImportFormTemplateController
 {
-	public FxImportFormTemplateFromMyContactsPopupController(UiMainWindow mainWindowToUse)
+	public FxImportFormTemplateFromMyContactsPopupController(UiMainWindow mainWindow)
 	{
-		super(mainWindowToUse);
+		super(mainWindow);
 	}
 	
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1)
+	public void initialize(URL location, ResourceBundle bundle)
+	{
+		super.initialize(location, bundle);
+		
+		continueButton.setVisible(false);
+		continueLabel.setVisible(false);
+		
+		contactsChoiceBox.valueProperty().addListener(new ContactsChangeHandler());
+		contactsChoiceBox.setConverter(new ContactKeyStringConverter());
+		
+		templatesChoiceBox.setVisible(false);
+		templatesChoiceBox.valueProperty().addListener(new TemplatesChangeHandler());
+		templatesChoiceBox.setConverter(new FormTemplateToStringConverter());
+		
+		fillContactsChoiceBox();
+	}
+	
+	private void fillContactsChoiceBox()
 	{
 		try
 		{
-			continueButton.setVisible(false);
-			continueMessage.setVisible(false);
-			
-			contactsWithTemplatesTableView.setEditable(true);
-			fillTableWithContacts();
-		
-			contactSelectedColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, Boolean>("isContactChosen"));
-			FxRadioButtonCellFactory value = new FxRadioButtonCellFactory();
-			value.selectedToggleProperty().addListener(new ToggleChangeListener());
-			contactSelectedColumn.setCellFactory(value);
-			
-			contactNameColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("contactName"));
-			contactNameColumn.setCellFactory(TextFieldTableCell.<ContactsWithTemplatesTableData>forTableColumn());
-			contactNameColumn.setEditable(false);
-			
-			publicCodeColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, String>("publicCode"));
-			publicCodeColumn.setCellFactory(TextFieldTableCell.<ContactsWithTemplatesTableData>forTableColumn());
-			publicCodeColumn.setEditable(false);
-			
-			formTemplateColumn.setCellValueFactory(new PropertyValueFactory<ContactsWithTemplatesTableData, CustomFieldTemplate>("selectedFormTemplate"));
-			formTemplateColumn.setCellFactory(new FormTemplateComboBoxCellFactory());
-			
-			contactsWithTemplatesTableView.setItems(contactsWithTemplatesTableData);
+			ContactKeys contactKeys = getApp().getContactKeys();
+			ObservableList<ContactKey> contactKeysObservableList = FXCollections.observableArrayList();
+			for (int index = 0; index < contactKeys.size(); ++index)
+			{
+				contactKeysObservableList.add(contactKeys.get(index));
+			}
+
+			contactsChoiceBox.setItems(contactKeysObservableList);
 		}
 		catch (Exception e)
 		{
@@ -102,20 +88,6 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		}
 	}
 
-	private void fillTableWithContacts() throws Exception
-	{
-		contactsWithTemplatesTableData = FXCollections.observableArrayList();
-		ContactKeys contactKeys = getApp().getContactKeys();
-		for (int index = 0; index < contactKeys.size(); ++index)
-		{
-			ContactKey contactKey = contactKeys.get(index);
- 			ObservableList<CustomFieldTemplate> observableArrayList = FXCollections.observableArrayList();
-			ContactsWithTemplatesTableData rowData = new ContactsWithTemplatesTableData(contactKey, false, new CustomFieldTemplate(), observableArrayList);
-			rowData.isContactChosenProperty().addListener(new FillComboBoxHandler(rowData));
-			contactsWithTemplatesTableData.add(rowData);
-		}
-	}
-	
 	@Override
 	public String getFxmlLocation()
 	{
@@ -139,176 +111,82 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	{
 		onCancel();
 	}
-		
-	public CustomFieldTemplate getSelectedFormTemplate()
-	{
-		ObservableList<ContactsWithTemplatesTableData> tableData = contactsWithTemplatesTableView.getItems();
-		for (ContactsWithTemplatesTableData rowData : tableData)
-		{
-			if (rowData.getIsContactChosen())
-				return rowData.getSelectedFormTemplate();
-		}
-		
-		return null;
-	}
 	
 	@Override
 	public String getLabel()
 	{
 		return "Import from My Contacts";
 	}
-	
-	protected class ComboBoxEventHandler implements EventHandler<ActionEvent>
+
+	@Override
+	public CustomFieldTemplate getSelectedFormTemplate()
 	{
-		@Override
-		public void handle(ActionEvent event)
-		{
-			boolean shouldBeVisible = true;
-			continueMessage.setVisible(shouldBeVisible);
-			continueButton.setVisible(shouldBeVisible);
-		}
+		return templatesChoiceBox.getSelectionModel().getSelectedItem();
 	}
 	
-	protected class ToggleChangeListener implements ChangeListener<Toggle>
+	protected class ContactsChangeHandler implements ChangeListener<ContactKey>
 	{
 		@Override
-		public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue)
+		public void changed(ObservableValue<? extends ContactKey> observable, ContactKey oldValue, ContactKey newValue)
 		{
-			continueMessage.setVisible(false);
-			continueButton.setVisible(false);
-		}
-	}
-	
-	protected class FormTemplateComboBoxCellFactory implements Callback<TableColumn<ContactsWithTemplatesTableData,CustomFieldTemplate>, TableCell<ContactsWithTemplatesTableData,CustomFieldTemplate>>
-	{
-		@Override
-		public TableCell<ContactsWithTemplatesTableData, CustomFieldTemplate> call(TableColumn<ContactsWithTemplatesTableData, CustomFieldTemplate> param)
-		{
-			return new FormTemplateComboBoxTableCell();
-		}
-	}
-	
-	private class FormTemplateComboBoxTableCell extends TableCell<ContactsWithTemplatesTableData, CustomFieldTemplate>
-	{
-        public FormTemplateComboBoxTableCell()
-        {
-            comboBox = new ComboBox<CustomFieldTemplate>();
-            comboBox.setConverter(new FormTemplateToStringConverter());
-            comboBox.addEventHandler(ActionEvent.ACTION, new ComboBoxEventHandler());
-            comboBox.setPromptText("Choose one...");
-            comboBox.setVisible(false);
-            comboBox.setPrefWidth(250.0);
-        }
-        
-        @Override
-        protected void updateItem(CustomFieldTemplate item, boolean empty)
-        {
-        	super.updateItem(item, empty);
-
-        	try
-        	{
-        		if (empty) 
-        		{
-        			setText(null);
-        			setGraphic(null);
-        		}
-        		else
-        		{
-        			ContactsWithTemplatesTableData rowData = (ContactsWithTemplatesTableData) getTableRow().getItem();
-        			if (rowData == null)
-        				return;
-
-        			bindComboBoxVisibilityToRadioButtonSelection(rowData);
-        			comboBox.setItems(rowData.getFormTemplateChoices());
-        			setGraphic(comboBox);
-        			
-        			comboBox.valueProperty().bindBidirectional(rowData.selectedFormTemplateProperty());
-        			Property cellProperty = (Property)getTableColumn().getCellObservableValue(getIndex());
-        			Property currentFieldProperty = comboBox.valueProperty();
-        			cellBooleanPropertyBoundToCurrently = FxBindingHelpers.bindToOurPropertyField(cellProperty, currentFieldProperty, cellBooleanPropertyBoundToCurrently);
-        		}
-        	} 
-        	catch (Exception e)
-        	{
-        		MartusLogger.logException(e);
-        	}
-        }
-
-		private void bindComboBoxVisibilityToRadioButtonSelection(ContactsWithTemplatesTableData rowData)
-		{
-			comboBox.visibleProperty().bindBidirectional(rowData.isContactChosenProperty());
-		}
-
-        private ComboBox<CustomFieldTemplate> comboBox;
-        private Property cellBooleanPropertyBoundToCurrently;
-	}
-	
-	private class FillComboBoxHandler implements ChangeListener<Boolean>
-	{
-		public FillComboBoxHandler(ContactsWithTemplatesTableData rowDataToUse)
-		{
-			rowData = rowDataToUse;
-		}
-
-		@Override
-		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)
-		{
-			if (!newValue)
+			if (newValue == null)
 				return;
-			
+
 			try
 			{
-				fillComboBox();
+				templatesChoiceBox.setVisible(true);
+				ObservableList<CustomFieldTemplate> formTemplates = getFormTemplates(newValue);
+				templatesChoiceBox.getItems().clear();
+				templatesChoiceBox.setItems(formTemplates);
 			}
 			catch (Exception e)
 			{
 				MartusLogger.logException(e);
 			}
 		}
-
-		private void fillComboBox() throws Exception
-		{
-			try
-			{
-				ObservableList<CustomFieldTemplate> formTemplateChoices = rowData.getFormTemplateChoices();
-				formTemplateChoices.clear();
-				getFormTemplates(rowData.getContactKey(), formTemplateChoices);
-			} 
-			catch (ServerNotAvailableException e)
-			{
-				MartusLogger.logException(e);
-				MartusLogger.logError("Contact not found on server");
-			}
-			catch (AccountNotFoundException e)
-			{
-				MartusLogger.logException(e);
-				MartusLogger.logError(TokenReplacement.replaceToken("Account not found on server. Account=#account", "#account", rowData.getContactKey().getFormattedPublicCode()));
-			}
-		}
-		
-		private ContactsWithTemplatesTableData rowData;
 	}
+	
+	protected class TemplatesChangeHandler implements ChangeListener<CustomFieldTemplate>
+	{
+		@Override
+		public void changed(ObservableValue<? extends CustomFieldTemplate> observable, CustomFieldTemplate oldValue, CustomFieldTemplate newValue)
+		{
+			continueButton.setVisible(true);
+			continueLabel.setVisible(true);
+		}
+	}
+	
+	protected class ContactKeyStringConverter extends StringConverter<ContactKey>
+	{
+		@Override
+		public String toString(ContactKey contactKey)
+		{
+			if (contactKey == null)
+				return "";
+			
+			String label = contactKey.getLabel();
+			if (label.length() == 0)
+				return "[No Label]";
+						
+			return label;
+		}
 
-	@FXML
-	private TableView<ContactsWithTemplatesTableData> contactsWithTemplatesTableView;
+		@Override
+		public ContactKey fromString(String string)
+		{
+			return null;
+		}
+	}
 	
 	@FXML
-	private TableColumn<ContactsWithTemplatesTableData, String> contactNameColumn;
+	private ChoiceBox<ContactKey> contactsChoiceBox;
 	
 	@FXML
-	private TableColumn<ContactsWithTemplatesTableData, String> publicCodeColumn;
+	private ChoiceBox<CustomFieldTemplate> templatesChoiceBox;
 	
 	@FXML
-	private TableColumn<ContactsWithTemplatesTableData, Boolean> contactSelectedColumn;
-
-	@FXML
-	private TableColumn<ContactsWithTemplatesTableData, CustomFieldTemplate> formTemplateColumn;
-	
-	@FXML 
-	protected Label continueMessage;
+	private Label continueLabel;
 	
 	@FXML
-	protected Button continueButton;
-	
-	private ObservableList<ContactsWithTemplatesTableData> contactsWithTemplatesTableData;
+	private Button continueButton;
 }
