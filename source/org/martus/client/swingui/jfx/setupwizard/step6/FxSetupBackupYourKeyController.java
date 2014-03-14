@@ -31,6 +31,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.util.FileTransfer;
@@ -76,8 +77,10 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 		File martusRootDir = getApp().getMartusDataRootDirectory();
 		fileChooser.setInitialDirectory(martusRootDir);
 		fileChooser.setTitle("Backup Key File");
+		MartusLocalization localization = getLocalization();
 		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter(getLocalization().getFieldLabel("KeyPairFileFilter"), "*.dat"));
+				new FileChooser.ExtensionFilter(localization.getFieldLabel("KeyPairFileFilter"), "*.dat"),
+				new FileChooser.ExtensionFilter(localization.getFieldLabel("KeyPairFileFilter"), "*.*"));
 		File newBackupFile = fileChooser.showSaveDialog(null);
 		if(newBackupFile == null)
 			return;
