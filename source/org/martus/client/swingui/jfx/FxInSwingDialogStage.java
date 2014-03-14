@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import java.io.File;
+
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 
@@ -85,6 +87,11 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 	public void close()
 	{
 		getShell().setVisible(false);
+	}
+
+	public File getExternalFxmlDirectory()
+	{
+		return getMainWindow().getApp().getFxmlDirectory();
 	}
 
 	private JDialog shell;
