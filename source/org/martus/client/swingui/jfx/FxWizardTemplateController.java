@@ -41,7 +41,7 @@ abstract public class FxWizardTemplateController extends FxInSwingDialogControll
 	
 	private FxWizardStage getWizardStage()
 	{
-		return (FxWizardStage) getFxStage();
+		return (FxWizardStage) getStage();
 	}
 
 	@FXML
