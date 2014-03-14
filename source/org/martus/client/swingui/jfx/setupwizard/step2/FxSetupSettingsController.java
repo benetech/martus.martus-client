@@ -85,9 +85,17 @@ public class FxSetupSettingsController extends FxStep2Controller
 	@Override
 	public void nextWasPressed(ActionEvent event) 
 	{
-		boolean userCancelled = saveTorConfigurationAndForceBulletinsAllPrivate();
+		setForceBulletinsAllPrivate();
+		boolean userCancelled = startOrStopTorAsRequested();
 		//TODO is there anyway at this point to abort moving forward?
 		saveDateFormatConfiguration();
+	}
+
+	private void setForceBulletinsAllPrivate()
+	{
+		ConfigInfo configInfo = getApp().getConfigInfo();
+		configInfo.setForceBulletinsAllPrivate(true);
+		getMainWindow().saveConfigInfo();
 	}
 
 	private void saveDateFormatConfiguration()
@@ -102,15 +110,6 @@ public class FxSetupSettingsController extends FxStep2Controller
 		getMainWindow().saveCurrentUiState();
 	}
 
-	private boolean saveTorConfigurationAndForceBulletinsAllPrivate()
-	{
-		ConfigInfo configInfo = getApp().getConfigInfo();
-		//NOTE: This might belong somewhere else, but for now it's important to set it.
-		configInfo.setForceBulletinsAllPrivate(true);
-		getMainWindow().saveConfigInfo();
-		return startOrStopTorAsRequested();
-	}
-	
 	protected boolean startOrStopTorAsRequested()
 	{
 		ConfigInfo configInfo = getApp().getConfigInfo();
