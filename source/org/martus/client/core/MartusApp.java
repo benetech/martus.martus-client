@@ -1807,9 +1807,18 @@ public class MartusApp
 			throw new ServerNotAvailableException();
 		String formTemplateData = formTemplate.getExportedTemplateAsBase64String(getSecurity());
 		NetworkResponse response = getCurrentNetworkInterfaceGateway().putFormTemplate(getSecurity(), formTemplateData);
-		if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
+		String resultCode = response.getResultCode();
+		
+		
+		
+		if(resultCode.equals(NetworkInterfaceConstants.NO_SERVER) || resultCode.equals(NetworkInterfaceConstants.SERVER_DOWN))
 		{
-			MartusLogger.log("Server result code: " + response.getResultCode());
+			MartusLogger.log("Server result code: " + resultCode);
+			throw new ServerNotAvailableException();
+		}
+		if(!resultCode.equals(NetworkInterfaceConstants.OK))
+		{
+			MartusLogger.log("Server result code: " + resultCode);
 			throw new ServerErrorException();
 		}
 	}
