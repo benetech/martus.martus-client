@@ -123,14 +123,14 @@ public class FxSetupSettingsController extends FxStep2Controller
 		}
 		catch (UserCancelledException e)
 		{
-			return true;
+			return false;
 		}
 		catch (Exception e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
+		return true;
 	}
 
 	private ObservableList<ChoiceItem> getDateFormatChoices()
