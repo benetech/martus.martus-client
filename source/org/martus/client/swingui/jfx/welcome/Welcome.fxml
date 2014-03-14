@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<left>
+    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../../dialogs/MartusLogo.png" />
+      </image>
+    </ImageView>
+</left>
+<center><VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+<children>
+
+<Label text="Get started with Martus!" />
+<Label text="Securing your digital documentation" />
+
+<Label text="This wizard will walk you through the steps necessary to set up Martus, so that you can safely store and share your human rights documentation" />
+<Label text="" />
+
+<Label text="Account Creation:" />
+<Label text="Your information will be kept safe, with a password protected, encrypted account." />
+
+<Label text="Settings:" />
+<Label text="Establish your system settings for the use of Tor (a tool to help hide network activity) and dates." />
+
+<Label text="Server Setup:" />
+<Label text="Backup your information to a secure server" />
+
+<Label text="Contacts" />
+<Label text="Send and receive information from other Martus users of your choice" />
+
+<Label text="Import Form Template" />
+<Label text="Select a form template to create Martus forms With" />
+
+<Label text="Backup key" />
+<Label text="Make a copy of your accounts encryption key to restore your account in case of an accident or emergency." />
+
+</children></VBox>
+</center></BorderPane>
