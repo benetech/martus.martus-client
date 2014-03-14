@@ -159,7 +159,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		@Override
 		public void changed(ObservableValue<? extends CustomFieldTemplate> observable, CustomFieldTemplate oldValue, CustomFieldTemplate newValue)
 		{
-			boolean shouldDisplayContinueButton = newValue != null;
+			boolean shouldDisplayContinueButton = getSelectedFormTemplate() != null;
 			continueButton.setVisible(shouldDisplayContinueButton);
 			continueLabel.setVisible(shouldDisplayContinueButton);
 		}
