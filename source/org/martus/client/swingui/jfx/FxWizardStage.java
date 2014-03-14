@@ -54,10 +54,10 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	@Override
 	public void showCurrentScene() throws Exception
 	{
-		super.showCurrentScene();
-		
 		AbstractFxSetupWizardContentController contentPaneController = (AbstractFxSetupWizardContentController) getCurrentController();
 
+		super.showCurrentScene();
+		
 		Parent shellContents = shellController.createContents();
 		contentPaneController.setStage(this);
 		shellController.setContentPane(contentPaneController);
