@@ -42,7 +42,6 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 		mainWindow = mainWindowToUse;
 	}
 
-	abstract public FxInSwingDialogController getCurrentController() throws Exception;
 	abstract protected FxScene createScene() throws Exception;
 	abstract public void showCurrentScene() throws Exception;
 	
@@ -94,7 +93,39 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 		return getMainWindow().getApp().getFxmlDirectory();
 	}
 
+	public ShellController getShellController()
+	{
+		return shellController;
+	}
+	
+	public void setShellController(ShellController controller)
+	{
+		shellController = controller;
+	}
+	
+	public ContentController getCurrentController() throws Exception
+	{
+		return currentContentController;
+	}
+
+	public void setCurrentController(ContentController contentControllerToUse)
+	{
+		currentContentController = contentControllerToUse;
+	}
+
+	public void showCurrentPage(ContentController contentPaneController) throws Exception
+	{
+		ensureSceneExists();
+		Parent shellContents = getShellController().createContents();
+		contentPaneController.setStage(this);
+		getShellController().setContentPane(contentPaneController);
+		getShellController().setStage(this);
+		setSceneRoot(shellContents);
+	}
+
 	private JDialog dialog;
 	private UiMainWindow mainWindow;
 	private FxScene scene;
+	private ShellController shellController;
+	private ContentController currentContentController;
 }

@@ -32,11 +32,13 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 
-abstract public class FxScene extends Scene
+public class FxScene extends Scene
 {
-	public FxScene(File fxmlDirToUse) throws Exception
+	public FxScene(File fxmlDirToUse, String cssLocationToUse) throws Exception
 	{
 		super(new Region());
+		
+		cssLocation = cssLocationToUse;
 		
 		ObservableList<String> stylesheets = getStylesheets();
 		String externalForm = getBestCssLocation(fxmlDirToUse).toExternalForm();
@@ -48,5 +50,10 @@ abstract public class FxScene extends Scene
 		return FxController.getBestFile(fxmlDirToUse, getCssLocation());
 	}
 
-	abstract protected String getCssLocation();
+	public String getCssLocation()
+	{
+		return cssLocation;
+	}
+	
+	private String cssLocation;
 }
