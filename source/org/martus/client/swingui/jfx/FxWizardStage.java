@@ -58,9 +58,9 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		
 		Parent wizardTemplateContents = wizardTemplateController.createContents();
 		AbstractFxSetupWizardContentController contentPaneController = (AbstractFxSetupWizardContentController) getCurrentController();
-		contentPaneController.setFxStage(this);
+		contentPaneController.setStage(this);
 		wizardTemplateController.setContentPane(contentPaneController);
-		wizardTemplateController.setFxStage(this);
+		wizardTemplateController.setStage(this);
 		setSceneRoot(wizardTemplateContents);
 		wizardTemplateController.getNextButton().setDefaultButton(true);
 	}

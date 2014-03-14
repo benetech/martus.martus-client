@@ -46,6 +46,6 @@ public class FxWelcomeController extends FxInSwingDialogController
 	@FXML
 	protected void nextWasPressed()
 	{
-		getFxStage().close();
+		getStage().close();
 	}
 }

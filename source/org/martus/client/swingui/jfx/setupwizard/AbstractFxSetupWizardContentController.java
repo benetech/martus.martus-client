@@ -70,7 +70,7 @@ abstract public class AbstractFxSetupWizardContentController extends FxInSwingDi
 	
 	public FxWizardStage getWizardStage()
 	{
-		return (FxWizardStage)getFxStage();
+		return (FxWizardStage)getStage();
 	}
 	
 	abstract public int getWizardStepNumber();
