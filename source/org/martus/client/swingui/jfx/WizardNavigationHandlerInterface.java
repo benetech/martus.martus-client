@@ -29,7 +29,7 @@ import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentCon
 
 import javafx.event.ActionEvent;
 
-public interface ContentNavigationHandlerInterface
+public interface WizardNavigationHandlerInterface
 {
 	public void nextWasPressed(ActionEvent actionEvent);
 	
