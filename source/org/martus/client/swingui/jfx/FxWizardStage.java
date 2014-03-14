@@ -43,10 +43,9 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 {
 	public FxWizardStage(UiMainWindow mainWindowToUse) throws Exception
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, new FxSetupWizardShellController(mainWindowToUse));
 	
 		visitedWizardPagesStack = new Stack<ContentController>();
-		shellController = new FxSetupWizardShellController(getMainWindow());
 		
 		currentController = getFirstController();
 	}
@@ -71,11 +70,6 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		setSceneRoot(shellContents);
 	}
 
-	public ShellController getShellController()
-	{
-		return shellController;
-	}
-	
 	@Override
 	public ContentController getCurrentController() throws Exception
 	{
@@ -161,5 +155,4 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	private ContentController currentController;
 	private Stack<ContentController> visitedWizardPagesStack;
 	
-	private ShellController shellController;
 }
