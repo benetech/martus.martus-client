@@ -57,6 +57,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		
 		continueButton.setVisible(false);
 		continueLabel.setVisible(false);
+		noTemplatesAvailableLabel.setVisible(false);
 		
 		contactsChoiceBox.valueProperty().addListener(new ContactsChangeHandler());
 		contactsChoiceBox.setConverter(new ContactKeyStringConverter());
@@ -129,19 +130,23 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		@Override
 		public void changed(ObservableValue<? extends ContactKey> observable, ContactKey oldValue, ContactKey newValue)
 		{
-			if (newValue == null)
-			{
-				chooseFormTemplateLabel.setVisible(false);
-				templatesChoiceBox.setVisible(false);
-				templatesChoiceBox.getItems().clear();
+			noTemplatesAvailableLabel.setVisible(false);
+			chooseFormTemplateLabel.setVisible(false);
+			templatesChoiceBox.setVisible(false);
+			templatesChoiceBox.getItems().clear();
 
+			if (newValue == null)
 				return;
-			}
 
 			try
 			{
 				ObservableList<CustomFieldTemplate> formTemplates = getFormTemplates(newValue);
-				templatesChoiceBox.getItems().clear();
+				if (formTemplates.isEmpty())
+				{
+					noTemplatesAvailableLabel.setVisible(true);
+					return;
+				}
+					
 				templatesChoiceBox.getItems().addAll(formTemplates);
 				chooseFormTemplateLabel.setVisible(true);
 				templatesChoiceBox.setVisible(true);
@@ -178,4 +183,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	
 	@FXML
 	protected Label chooseFormTemplateLabel;
+	
+	@FXML
+	protected Label noTemplatesAvailableLabel;
 }
