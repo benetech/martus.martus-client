@@ -568,6 +568,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		    FxModalDialog.createAndShow(this, new WelcomeStage(this));
 		    
 		    FxModalDialog.createAndShow(this, new SetupWizardStage(this));
+
 		    return true;
 		} 
 		catch (Exception e)
