@@ -48,14 +48,14 @@ abstract public class FxWizardTemplateController extends FxInSwingDialogControll
 	protected void nextWasPressed(ActionEvent event)
 	{
 		getContentNavigationHandler().nextWasPressed(event);
-		getWizardStage().handleNavigationEvent(FxWizardStage.NAVIGATION_NEXT);
+		getWizardStage().next();
 	}
 	
 	@FXML
 	protected void backWasPressed(ActionEvent event) 
 	{
 		getContentNavigationHandler().backWasPressed(event);
-		getWizardStage().handleNavigationEvent(FxWizardStage.NAVIGATION_BACK);
+		getWizardStage().back();
 	}
 	
 	protected void disableNext()
