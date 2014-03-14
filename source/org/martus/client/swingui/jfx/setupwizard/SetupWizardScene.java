@@ -31,8 +31,8 @@ import org.martus.client.swingui.jfx.FxScene;
 
 public class SetupWizardScene extends FxScene
 {
-	public SetupWizardScene(File fxmlDirToUse) throws Exception
+	public SetupWizardScene(File fxmlDirToUse, String cssLocationToUse) throws Exception
 	{
-		super(fxmlDirToUse, "setupwizard/background.css");
+		super(fxmlDirToUse, cssLocationToUse);
 	}
 }
