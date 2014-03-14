@@ -1518,7 +1518,7 @@ public class EnglishStrings
 "field:ReportNumberOfBulletins=Total Bulletins:",
 
 "wintitle:RemoveContact=Remove Contact",
-"field:RemoveContactLabel=The following contact will be removed.\nName: #Name#\nPublic Code: #PublicCode#.\n\nAre you sure you want to do this?",
+"field:RemoveContactLabel=The following contact will be removed.\n\nName: #Name#\nPublic Code: #PublicCode#.\n\nAre you sure you want to do this?",
 
 "filed:AllFiles=All Files",
 "field:BulletinViewHeading=Martus Bulletin",
