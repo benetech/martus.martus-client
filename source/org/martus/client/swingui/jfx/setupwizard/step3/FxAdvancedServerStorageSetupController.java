@@ -132,7 +132,7 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 	}
 	
 	@Override
-	public FxInSwingDialogController getNextControllerClassName()
+	public FxInSwingDialogController getNextController()
 	{
 		return new FxAddContactsController(getMainWindow());
 	}

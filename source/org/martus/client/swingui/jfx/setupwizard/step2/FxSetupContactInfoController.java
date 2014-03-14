@@ -94,7 +94,7 @@ public class FxSetupContactInfoController extends FxStep2Controller
 	}
 	
 	@Override
-	public FxInSwingDialogController getNextControllerClassName()
+	public FxInSwingDialogController getNextController()
 	{
 		return new FxSetupSettingsController(getMainWindow());
 	}

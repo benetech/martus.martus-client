@@ -126,7 +126,7 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 	}
 	
 	@Override
-	public FxInSwingDialogController getNextControllerClassName()
+	public FxInSwingDialogController getNextController()
 	{
 		return new FxVerifyAccountController(getMainWindow());
 	}

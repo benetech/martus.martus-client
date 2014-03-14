@@ -35,5 +35,5 @@ public interface ContentNavigationHandlerInterface
 
 	public void setNavigationHandler(NavigationButtonsInterface navigationHandler);
 	
-	public FxInSwingDialogController getNextControllerClassName();
+	public FxInSwingDialogController getNextController();
 }

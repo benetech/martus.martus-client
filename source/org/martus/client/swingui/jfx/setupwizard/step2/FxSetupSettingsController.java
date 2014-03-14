@@ -175,7 +175,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 	}
 	
 	@Override
-	public FxInSwingDialogController getNextControllerClassName()
+	public FxInSwingDialogController getNextController()
 	{
 		return new FxSetupStorageServerController(getMainWindow());
 	}

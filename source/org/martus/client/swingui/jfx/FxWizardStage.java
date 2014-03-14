@@ -76,7 +76,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		try
 		{
 			AbstractFxSetupWizardContentController contentPaneController = (AbstractFxSetupWizardContentController) getCurrentController();
-			FxInSwingDialogController nextController = contentPaneController.getNextControllerClassName();
+			FxInSwingDialogController nextController = contentPaneController.getNextController();
 
 			visitedWizardPagesStack.push(currentController);
 			if(nextController == null)
