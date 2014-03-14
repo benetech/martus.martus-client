@@ -37,10 +37,9 @@ import org.martus.client.swingui.UiMainWindow;
 
 abstract public class FxInSwingDialogStage extends JFXPanel
 {
-	public FxInSwingDialogStage(UiMainWindow mainWindowToUse, ShellController shellToUse)
+	public FxInSwingDialogStage(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
-		shellController = shellToUse;
 	}
 
 	abstract public ContentController getCurrentController() throws Exception;
@@ -98,6 +97,11 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 	public ShellController getShellController()
 	{
 		return shellController;
+	}
+	
+	public void setShellController(ShellController controller)
+	{
+		shellController = controller;
 	}
 	
 	private JDialog dialog;

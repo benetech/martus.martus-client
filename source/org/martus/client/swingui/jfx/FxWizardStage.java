@@ -43,7 +43,9 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 {
 	public FxWizardStage(UiMainWindow mainWindowToUse) throws Exception
 	{
-		super(mainWindowToUse, new FxSetupWizardShellController(mainWindowToUse));
+		super(mainWindowToUse);
+		
+		setShellController(new FxSetupWizardShellController(mainWindowToUse));
 	
 		visitedWizardPagesStack = new Stack<ContentController>();
 		

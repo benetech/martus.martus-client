@@ -36,7 +36,10 @@ public class WelcomeStage extends FxInSwingDialogStage
 {
 	public WelcomeStage(UiMainWindow mainWindow) throws Exception
 	{
-		super(mainWindow, new WelcomeShellController(mainWindow));
+		super(mainWindow);
+		
+		setShellController(new WelcomeShellController(mainWindow));
+		
 		contentController = new FxWelcomeController(getMainWindow());
 	}
 
