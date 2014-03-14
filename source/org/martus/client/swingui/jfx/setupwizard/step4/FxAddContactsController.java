@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.setupwizard.step4;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -59,7 +60,6 @@ import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentCon
 import org.martus.client.swingui.jfx.setupwizard.ContactsTableData;
 import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.LookupAccountFromTokenTask;
-import org.martus.clientside.UiLocalization;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.Exceptions.ServerNotAvailableException;
@@ -67,6 +67,8 @@ import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenNotFoundException;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusSecurity;
+import org.martus.util.TokenReplacement;
+import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class FxAddContactsController extends FxStep4Controller
 {
@@ -131,7 +133,7 @@ public class FxAddContactsController extends FxStep4Controller
 			if(DoesContactAlreadyExistInTable(contactPublicCode))
 			{
 				String contactsName = getContactsNameInTable(contactPublicCode);
-				String contactExistsWithName = UiLocalization.replaceTokenInString(getLocalization().getFieldLabel("ContactAlreadyExistsAs"), "#NAME#", contactsName);
+				String contactExistsWithName = TokenReplacement.replaceToken(getLocalization().getFieldLabel("ContactAlreadyExistsAs"), "#NAME#", contactsName);
 				showNotifyDialog("ContactKeyAlreadyExists", contactExistsWithName);
 				return;
 			}
@@ -319,10 +321,20 @@ public class FxAddContactsController extends FxStep4Controller
 					ContactsTableData contactData = getSelectedContact();
 					String contactName = contactData.getContactName();
 					String contactPublicCode = contactData.getPublicCode();
-					String removeContactMessage = UiLocalization.replaceTokenInString(localization.getFieldLabel("RemoveContactLabel"), "#NAME#", contactName);
-					String confirmationMessage = UiLocalization.replaceTokenInString(removeContactMessage, "#PUBLICCODE#", contactPublicCode);
-					if(showConfirmationDialog(localization.getWindowTitle("RemoveContact"), confirmationMessage))
-						removeContactFromTable(contactData);
+					HashMap map = new HashMap();
+					map.put("#NAME#", contactName);
+					map.put("#PUBLICCODE#", contactPublicCode);
+					try
+					{
+						String confirmationMessage = TokenReplacement.replaceTokens(localization.getFieldLabel("RemoveContactLabel"), map);
+						if(showConfirmationDialog(localization.getWindowTitle("RemoveContact"), confirmationMessage))
+							removeContactFromTable(contactData);
+					} 
+					catch (TokenInvalidException e)
+					{
+						MartusLogger.logException(e);
+						showNotifyDialog("UnexpectedError");
+					}
 				}
 			}
 			
