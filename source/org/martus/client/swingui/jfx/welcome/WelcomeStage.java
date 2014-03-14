@@ -61,10 +61,8 @@ public class WelcomeStage extends FxInSwingDialogStage
 	@Override
 	protected FxScene createScene() throws Exception
 	{
-		File fxmlDir = getMainWindow().getApp().getFxmlDirectory();
-		
-		return new WelcomeScene(fxmlDir);
+		return new WelcomeScene(getExternalFxmlDirectory());
 	}
-	
+
 	private FxWelcomeController controller;
 }
