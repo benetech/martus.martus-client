@@ -23,29 +23,14 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.welcome;
-
-import javafx.fxml.FXML;
+package org.martus.client.swingui.jfx;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.ContentController;
 
-public class FxWelcomeController extends ContentController
+abstract public class ContentController extends FxInSwingDialogController
 {
-	public FxWelcomeController(UiMainWindow mainWindowToUse)
+	public ContentController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-	}
-
-	@Override
-	public String getFxmlLocation()
-	{
-		return "welcome/Welcome.fxml";
-	}
-
-	@FXML
-	protected void nextWasPressed()
-	{
-		getStage().close();
 	}
 }
