@@ -71,6 +71,6 @@ public class SetupWizardStage extends FxWizardStage
 	@Override
 	protected FxScene createScene() throws Exception
 	{
-		return new SetupWizardScene(getExternalFxmlDirectory(), "setupwizard/background.css");
+		return new FxScene(getExternalFxmlDirectory(), "setupwizard/background.css");
 	}
 }
