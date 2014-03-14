@@ -105,7 +105,7 @@ public class FxSelectLanguageController extends FxStep6Controller
 	}
 	
 	@Override
-	public FxInSwingDialogController getNextControllerClassName()
+	public FxInSwingDialogController getNextController()
 	{
 		return null;
 	}

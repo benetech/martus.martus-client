@@ -68,7 +68,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	}
 
 	@Override
-	public FxInSwingDialogController getNextControllerClassName()
+	public FxInSwingDialogController getNextController()
 	{
 		return new FxSetupBackupYourKeyController(getMainWindow());
 	}

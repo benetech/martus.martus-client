@@ -63,7 +63,7 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 	}
 
 	@Override
-	public FxInSwingDialogController getNextControllerClassName()
+	public FxInSwingDialogController getNextController()
 	{
 		if(destination != null)
 			return destination;

@@ -51,7 +51,7 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 	}
 
 	@Override
-	public FxInSwingDialogController getNextControllerClassName()
+	public FxInSwingDialogController getNextController()
 	{
 		return new FxSelectLanguageController(getMainWindow());
 	}

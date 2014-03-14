@@ -479,7 +479,7 @@ public class FxAddContactsController extends FxStep4Controller
 	}
 	
 	@Override
-	public FxInSwingDialogController getNextControllerClassName()
+	public FxInSwingDialogController getNextController()
 	{
 		return new FxSetupImportTemplatesController(getMainWindow());
 	}
