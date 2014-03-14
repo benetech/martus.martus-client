@@ -33,13 +33,7 @@ public class WelcomeScene extends FxScene
 {
 	public WelcomeScene(File fxmlDirToUse) throws Exception
 	{
-		super(fxmlDirToUse);
-	}
-
-	@Override
-	protected String getCssLocation()
-	{
-		return "welcome/welcome.css";
+		super(fxmlDirToUse, "welcome/welcome.css");
 	}
 
 }
