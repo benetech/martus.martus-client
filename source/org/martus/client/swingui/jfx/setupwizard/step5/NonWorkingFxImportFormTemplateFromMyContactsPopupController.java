@@ -60,9 +60,9 @@ import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.CustomFieldTemplate;
 import org.martus.util.TokenReplacement;
 
-public class FxImportFormTemplateFromMyContactsPopupController extends AbstractFxImportFormTemplateController implements Initializable
+public class NonWorkingFxImportFormTemplateFromMyContactsPopupController extends AbstractFxImportFormTemplateController implements Initializable
 {
-	public FxImportFormTemplateFromMyContactsPopupController(UiMainWindow mainWindowToUse)
+	public NonWorkingFxImportFormTemplateFromMyContactsPopupController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
