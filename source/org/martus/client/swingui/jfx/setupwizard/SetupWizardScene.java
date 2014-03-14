@@ -33,12 +33,6 @@ public class SetupWizardScene extends FxScene
 {
 	public SetupWizardScene(File fxmlDirToUse) throws Exception
 	{
-		super(fxmlDirToUse);
-	}
-
-	@Override
-	protected String getCssLocation()
-	{
-		return "setupwizard/background.css";
+		super(fxmlDirToUse, "setupwizard/background.css");
 	}
 }
