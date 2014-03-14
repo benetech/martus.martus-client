@@ -25,10 +25,13 @@ Boston, MA 02111-1307, USA.
  */
 package org.martus.client.swingui.jfx;
 
-import javafx.beans.property.Property;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.ToggleGroup;
+import org.martus.client.swingui.jfx.setupwizard.ContactsWithTemplatesTableData;
 
 public class FxRadioButtonTableCell extends TableCell
 {
@@ -49,16 +52,25 @@ public class FxRadioButtonTableCell extends TableCell
 		}
 		else
 		{
+			setText(null);
 			radioButton.setToggleGroup(group);
 			setGraphic(radioButton);
-
-			Property cellProperty = (Property)getTableColumn().getCellObservableValue(getIndex());
-			Property currentFieldProperty = radioButton.selectedProperty();
-			cellBooleanPropertyBoundToCurrently = FxBindingHelpers.bindToOurPropertyField(cellProperty, currentFieldProperty, cellBooleanPropertyBoundToCurrently);
+			radioButton.selectedProperty().addListener(new RadioButtonChangeHandler()); 
+		}
+	}
+	
+	protected class RadioButtonChangeHandler implements ChangeListener<Boolean>
+	{
+		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) 
+		{
+			if (getTableRow().getIndex() < 0)
+				return;
+			
+			ContactsWithTemplatesTableData contactsWithTemplatesTableData = (ContactsWithTemplatesTableData)getTableView().getItems().get(getTableRow().getIndex());
+			contactsWithTemplatesTableData.setIsContactChosen(newValue);
 		}
 	}
 
 	private ToggleGroup group;
 	private RadioButton radioButton;
-	private Property cellBooleanPropertyBoundToCurrently;
 }

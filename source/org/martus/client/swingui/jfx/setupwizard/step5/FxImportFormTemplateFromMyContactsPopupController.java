@@ -163,11 +163,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		@Override
 		public void handle(ActionEvent event)
 		{
-			ComboBox<CustomFieldTemplate> comboBox = (ComboBox) event.getSource();
 			boolean shouldBeVisible = true;
-			if (comboBox.getSelectionModel().isEmpty())
-				shouldBeVisible = false;
-			
 			continueMessage.setVisible(shouldBeVisible);
 			continueButton.setVisible(shouldBeVisible);
 		}
