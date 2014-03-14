@@ -25,47 +25,40 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.welcome;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxInSwingDialogController;
-import org.martus.client.swingui.jfx.FxInSwingDialogStage;
-import org.martus.client.swingui.jfx.FxScene;
 
-public class WelcomeStage extends FxInSwingDialogStage
+public class WelcomeShellController extends FxInSwingDialogController
 {
-	public WelcomeStage(UiMainWindow mainWindow) throws Exception
+	public WelcomeShellController(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindow);
-		shellController = new WelcomeShellController(getMainWindow());
-		contentController = new FxWelcomeController(getMainWindow());
+		super(mainWindowToUse);
 	}
 
 	@Override
-	public FxInSwingDialogController getCurrentController() throws Exception
+	public String getFxmlLocation()
 	{
-		return contentController;
+		return "welcome/WelcomeShell.fxml";
 	}
 
-	@Override
-	public void showCurrentScene() throws Exception
+	public void setContentPane(FxInSwingDialogController contentPaneController) throws Exception
 	{
-		super.showCurrentScene();
+		Parent createContents = contentPaneController.createContents();
 		
-		Parent shellContents = shellController.createContents();
-		FxInSwingDialogController contentPaneController = getCurrentController();
-		contentPaneController.setStage(this);
-		shellController.setContentPane(contentPaneController);
-		shellController.setStage(this);
-		setSceneRoot(shellContents);
+		contentPane.getChildren().addAll(createContents);
 	}
-
-	@Override
-	protected FxScene createScene() throws Exception
+	
+	@FXML
+	protected void onNext(ActionEvent event)
 	{
-		return new WelcomeScene(getExternalFxmlDirectory());
+		getStage().close();
 	}
-
-	private WelcomeShellController shellController;
-	private FxInSwingDialogController contentController;
+	
+	@FXML
+	private Pane contentPane;	
 }
