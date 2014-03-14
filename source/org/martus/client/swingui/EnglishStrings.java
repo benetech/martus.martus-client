@@ -341,7 +341,7 @@ public class EnglishStrings
 
 "field:VerifyPublicCodeNewAndOld=Please verify one of the public codes below depending on which public code you received from your contact.  You may visually verify either code, you don't need to verify both.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.",
 "field:VerifyPublicCode=Please verify the public code below against the one you received from your contact.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.",
-"field:ContactAlreadyExistsAs=This contact currently has the name: '#NAME#'",
+"field:ContactAlreadyExistsAs=This contact currently has the name: '#Name#'",
 "button:help=Help",
 "button:create=Create",
 "button:search=Search",
@@ -1518,7 +1518,7 @@ public class EnglishStrings
 "field:ReportNumberOfBulletins=Total Bulletins:",
 
 "wintitle:RemoveContact=Remove Contact",
-"field:RemoveContactLabel=The following contact will be removed.\nName: #NAME#\nPublic Code: #PUBLICCODE#.\n\nAre you sure you want to do this?",
+"field:RemoveContactLabel=The following contact will be removed.\nName: #Name#\nPublic Code: #PublicCode#.\n\nAre you sure you want to do this?",
 
 
 "field:BulletinViewHeading=Martus Bulletin",
