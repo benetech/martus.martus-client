@@ -161,5 +161,5 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	private ContentController currentController;
 	private Stack<ContentController> visitedWizardPagesStack;
 	
-	private FxSetupWizardShellController shellController;
+	private ShellController shellController;
 }
