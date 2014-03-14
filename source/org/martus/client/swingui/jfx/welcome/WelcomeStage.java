@@ -52,8 +52,9 @@ public class WelcomeStage extends FxInSwingDialogStage
 	{
 		super.showCurrentScene();
 		
-		Parent shellContents = shellController.createContents();
 		FxInSwingDialogController contentPaneController = getCurrentController();
+
+		Parent shellContents = shellController.createContents();
 		contentPaneController.setStage(this);
 		shellController.setContentPane(contentPaneController);
 		shellController.setStage(this);
