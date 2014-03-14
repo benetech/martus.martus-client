@@ -1520,7 +1520,7 @@ public class EnglishStrings
 "wintitle:RemoveContact=Remove Contact",
 "field:RemoveContactLabel=The following contact will be removed.\nName: #Name#\nPublic Code: #PublicCode#.\n\nAre you sure you want to do this?",
 
-
+"filed:AllFiles=All Files",
 "field:BulletinViewHeading=Martus Bulletin",
 "field:RemoveMartusFromSystemWarning=WARNING!",
 "field:RemoveMartusFromSystemMultipleAccountsWarning1=IMPORTANT: There are other Martus accounts on this system.",
