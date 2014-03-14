@@ -131,7 +131,13 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		public void changed(ObservableValue<? extends ContactKey> observable, ContactKey oldValue, ContactKey newValue)
 		{
 			if (newValue == null)
+			{
+				chooseFormTemplateLabel.setVisible(false);
+				templatesChoiceBox.setVisible(false);
+				templatesChoiceBox.getItems().clear();
+
 				return;
+			}
 
 			try
 			{
