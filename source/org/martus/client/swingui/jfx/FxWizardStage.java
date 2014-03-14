@@ -71,14 +71,6 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		return currentController;
 	}
 
-	public void handleNavigationEvent(String navigationType)
-	{
-		if(navigationType.equals(NAVIGATION_BACK))
-			back();
-		else if(navigationType.equals(NAVIGATION_NEXT))
-			next();
-	}
-	
 	public void next()
 	{
 		try
@@ -104,7 +96,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		}
 	}
 
-	private void back()
+	public void back()
 	{
 		try
 		{
@@ -154,9 +146,6 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	}
 	
 	abstract protected FxInSwingDialogController getFirstController();
-
-	public static final String NAVIGATION_NEXT = "Next";
-	public static final String NAVIGATION_BACK = "Back";
 
 	private FxInSwingDialogController currentController;
 	private Stack<FxInSwingDialogController> visitedWizardPagesStack;
