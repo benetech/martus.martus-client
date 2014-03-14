@@ -46,6 +46,7 @@ import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentCon
 import org.martus.client.swingui.jfx.setupwizard.step3.FxSetupStorageServerController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.TorInitializationTask;
 import org.martus.clientside.CurrentUiState;
+import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxSetupSettingsController extends FxStep2Controller
@@ -85,16 +86,17 @@ public class FxSetupSettingsController extends FxStep2Controller
 	@Override
 	public void nextWasPressed(ActionEvent event) 
 	{
-		setForceBulletinsAllPrivate();
-		boolean userCancelled = startOrStopTorAsRequested();
+		saveSettingsToConfigInfo();
+		boolean userCancelled = startOrStopTorPerConfigInfo();
 		//TODO is there anyway at this point to abort moving forward?
-		saveDateFormatConfiguration();
 	}
-
-	private void setForceBulletinsAllPrivate()
+	
+	protected void saveSettingsToConfigInfo()
 	{
 		ConfigInfo configInfo = getApp().getConfigInfo();
+		saveDateFormatConfiguration();
 		configInfo.setForceBulletinsAllPrivate(true);
+		configInfo.setUseInternalTor(userTorCheckBox.isSelected());
 		getMainWindow().saveConfigInfo();
 	}
 
@@ -110,12 +112,8 @@ public class FxSetupSettingsController extends FxStep2Controller
 		getMainWindow().saveCurrentUiState();
 	}
 
-	protected boolean startOrStopTorAsRequested()
+	protected boolean startOrStopTorPerConfigInfo()
 	{
-		ConfigInfo configInfo = getApp().getConfigInfo();
-		configInfo.setUseInternalTor(userTorCheckBox.isSelected());
-		getMainWindow().saveConfigInfo();
-
 		TorInitializationTask task = new TorInitializationTask(getApp());
 		try
 		{
@@ -127,8 +125,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 		}
 		catch (Exception e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			MartusLogger.logException(e);
 		}
 		return true;
 	}
@@ -162,7 +159,8 @@ public class FxSetupSettingsController extends FxStep2Controller
 		@Override
 		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) 
 		{
-			startOrStopTorAsRequested();
+			saveSettingsToConfigInfo();
+			startOrStopTorPerConfigInfo();
 		}
 	}
 	
