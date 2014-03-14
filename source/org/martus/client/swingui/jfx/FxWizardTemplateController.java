@@ -32,7 +32,7 @@ import javafx.scene.control.Button;
 import org.martus.client.swingui.UiMainWindow;
 
 
-abstract public class FxWizardTemplateController extends FxInSwingDialogController implements NavigationButtonsInterface
+abstract public class FxWizardTemplateController extends FxInSwingDialogController implements WizardNavigationButtonsInterface
 {
 	public FxWizardTemplateController(UiMainWindow mainWindowToUse)
 	{
