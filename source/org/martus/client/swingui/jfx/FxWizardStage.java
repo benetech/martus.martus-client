@@ -56,8 +56,9 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	{
 		super.showCurrentScene();
 		
-		Parent shellContents = shellController.createContents();
 		AbstractFxSetupWizardContentController contentPaneController = (AbstractFxSetupWizardContentController) getCurrentController();
+
+		Parent shellContents = shellController.createContents();
 		contentPaneController.setStage(this);
 		shellController.setContentPane(contentPaneController);
 		shellController.setStage(this);
