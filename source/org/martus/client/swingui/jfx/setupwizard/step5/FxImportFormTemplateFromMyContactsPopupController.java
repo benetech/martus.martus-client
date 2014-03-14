@@ -28,12 +28,20 @@ package org.martus.client.swingui.jfx.setupwizard.step5;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.util.StringConverter;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.ContactKey;
+import org.martus.common.ContactKeys;
+import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.CustomFieldTemplate;
 
 public class FxImportFormTemplateFromMyContactsPopupController extends AbstractFxImportFormTemplateController
@@ -50,6 +58,34 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		
 		continueButton.setVisible(false);
 		continueLabel.setVisible(false);
+		
+		contactsChoiceBox.valueProperty().addListener(new ContactsChangeHandler());
+		contactsChoiceBox.setConverter(new ContactKeyStringConverter());
+		
+		templatesChoiceBox.setVisible(false);
+		templatesChoiceBox.valueProperty().addListener(new TemplatesChangeHandler());
+		templatesChoiceBox.setConverter(new FormTemplateToStringConverter());
+		
+		fillContactsChoiceBox();
+	}
+	
+	private void fillContactsChoiceBox()
+	{
+		try
+		{
+			ContactKeys contactKeys = getApp().getContactKeys();
+			ObservableList<ContactKey> contactKeysObservableList = FXCollections.observableArrayList();
+			for (int index = 0; index < contactKeys.size(); ++index)
+			{
+				contactKeysObservableList.add(contactKeys.get(index));
+			}
+
+			contactsChoiceBox.setItems(contactKeysObservableList);
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
 	}
 
 	@Override
@@ -85,14 +121,68 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	@Override
 	public CustomFieldTemplate getSelectedFormTemplate()
 	{
-		return null;
+		return templatesChoiceBox.getSelectionModel().getSelectedItem();
+	}
+	
+	protected class ContactsChangeHandler implements ChangeListener<ContactKey>
+	{
+		@Override
+		public void changed(ObservableValue<? extends ContactKey> observable, ContactKey oldValue, ContactKey newValue)
+		{
+			if (newValue == null)
+				return;
+
+			try
+			{
+				templatesChoiceBox.setVisible(true);
+				ObservableList<CustomFieldTemplate> formTemplates = getFormTemplates(newValue);
+				templatesChoiceBox.getItems().clear();
+				templatesChoiceBox.setItems(formTemplates);
+			}
+			catch (Exception e)
+			{
+				MartusLogger.logException(e);
+			}
+		}
+	}
+	
+	protected class TemplatesChangeHandler implements ChangeListener<CustomFieldTemplate>
+	{
+		@Override
+		public void changed(ObservableValue<? extends CustomFieldTemplate> observable, CustomFieldTemplate oldValue, CustomFieldTemplate newValue)
+		{
+			continueButton.setVisible(true);
+			continueLabel.setVisible(true);
+		}
+	}
+	
+	protected class ContactKeyStringConverter extends StringConverter<ContactKey>
+	{
+		@Override
+		public String toString(ContactKey contactKey)
+		{
+			if (contactKey == null)
+				return "";
+			
+			String label = contactKey.getLabel();
+			if (label.length() == 0)
+				return "[No Label]";
+						
+			return label;
+		}
+
+		@Override
+		public ContactKey fromString(String string)
+		{
+			return null;
+		}
 	}
 	
 	@FXML
-	private ChoiceBox contactsChoiceBox;
+	private ChoiceBox<ContactKey> contactsChoiceBox;
 	
 	@FXML
-	private ChoiceBox templatesChoiceBox;
+	private ChoiceBox<CustomFieldTemplate> templatesChoiceBox;
 	
 	@FXML
 	private Label continueLabel;
