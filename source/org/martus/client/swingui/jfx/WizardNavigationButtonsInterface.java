@@ -27,7 +27,7 @@ package org.martus.client.swingui.jfx;
 
 import javafx.scene.control.Button;
 
-public interface NavigationButtonsInterface
+public interface WizardNavigationButtonsInterface
 {
 	public Button getNextButton();
 	

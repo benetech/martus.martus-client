@@ -35,7 +35,7 @@ public interface ContentNavigationHandlerInterface
 	
 	public void backWasPressed(ActionEvent actionEvent);
 
-	public void setNavigationHandler(NavigationButtonsInterface navigationHandler);
+	public void setNavigationHandler(WizardNavigationButtonsInterface navigationHandler);
 	
 	public AbstractFxSetupWizardContentController getNextController();
 }

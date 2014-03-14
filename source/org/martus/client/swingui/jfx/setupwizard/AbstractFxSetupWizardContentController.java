@@ -35,7 +35,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.ContentNavigationHandlerInterface;
 import org.martus.client.swingui.jfx.FxInSwingDialogController;
 import org.martus.client.swingui.jfx.FxWizardStage;
-import org.martus.client.swingui.jfx.NavigationButtonsInterface;
+import org.martus.client.swingui.jfx.WizardNavigationButtonsInterface;
 import org.martus.client.swingui.jfx.setupwizard.tasks.IsServerAvailableTask;
 
 abstract public class AbstractFxSetupWizardContentController extends FxInSwingDialogController implements ContentNavigationHandlerInterface, Initializable
@@ -50,7 +50,7 @@ abstract public class AbstractFxSetupWizardContentController extends FxInSwingDi
 	{
 	}
 	
-	public NavigationButtonsInterface getWizardNavigationHandler()
+	public WizardNavigationButtonsInterface getWizardNavigationHandler()
 	{
 		return wizardNavigationHandler;
 	}
@@ -63,7 +63,7 @@ abstract public class AbstractFxSetupWizardContentController extends FxInSwingDi
 	{
 	}
 	
-	public void setNavigationHandler(NavigationButtonsInterface navigationHandlerToUse)
+	public void setNavigationHandler(WizardNavigationButtonsInterface navigationHandlerToUse)
 	{
 		wizardNavigationHandler = navigationHandlerToUse;
 	}
@@ -86,5 +86,5 @@ abstract public class AbstractFxSetupWizardContentController extends FxInSwingDi
 		return isDefaultServerAvailable;
 	}
 	
-	private NavigationButtonsInterface wizardNavigationHandler;
+	private WizardNavigationButtonsInterface wizardNavigationHandler;
 }
