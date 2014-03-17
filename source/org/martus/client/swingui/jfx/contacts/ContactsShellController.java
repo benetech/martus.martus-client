@@ -70,7 +70,7 @@ public class ContactsShellController extends ShellController implements WizardNa
 	@Override
 	public Button getNextButton()
 	{
-		return nextButton;
+		return doneButton;
 	}	
 
 	@Override
@@ -80,7 +80,7 @@ public class ContactsShellController extends ShellController implements WizardNa
 	}
 
 	@FXML
-	protected void onNext(ActionEvent event)
+	protected void onDone(ActionEvent event)
 	{
 		getContentNavigationHandler().nextWasPressed(event);
 		getStage().close();
@@ -95,7 +95,7 @@ public class ContactsShellController extends ShellController implements WizardNa
 	protected Pane contentPane;
 
 	@FXML
-	protected Button nextButton;
+	protected Button doneButton;
 
 	private WizardNavigationHandlerInterface contentNavigationHandler;
 
