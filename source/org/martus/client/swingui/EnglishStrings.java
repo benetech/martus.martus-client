@@ -397,7 +397,7 @@ public class EnglishStrings
 "button:RecoverAccountTab=Restore Account",
 "button:RecoverAccountByShare=Restore account from multiple disks",
 "button:RecoverAccountByBackup=Restore account from backup key file",
-"button:ConfigurePublicKeysView=View",
+
 "button:BulletinDetails=Bulletin Details...",
 "button:ViewPreviousBulletinVersion=View Selected Version...",
 "button:RetrieveAllVersions=Retrieve all bulletin versions",
@@ -1606,8 +1606,7 @@ public class EnglishStrings
 "menu:AddPermissions=Update Headquarters Access...",
 "button:FileDialogOkImportHeadquartersPublicKey=Import",
 "button:AddPermissions=Update Headquarters Access",
-"button:ConfigureHQsAdd=Add...",
-"button:ConfigureHQsRemove=Remove",
+
 "field:confirmClearHQInformationcause=You have chosen to remove the selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  New versions of sealed bulletins will not be able to be viewed by the removed Headquarters, but any old versions of sealed bulletins that already are on a Headquarters' computer will still be viewable by the Headquarters.",
 "field:confirmClearHQInformationeffect=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.",
 "menu:ManageContacts=Manage Contacts",
