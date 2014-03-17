@@ -28,14 +28,14 @@ package org.martus.client.swingui.jfx.setupwizard.tasks;
 import org.martus.client.core.MartusApp;
 import org.martus.clientside.ClientSideNetworkGateway;
 
-public class IsCompliantServerAvailableTask extends ServerCallTask
+public class IsAvailableServerCompliantTask extends ServerCallTask
 {
-	public IsCompliantServerAvailableTask(MartusApp appToUse)
+	public IsAvailableServerCompliantTask(MartusApp appToUse)
 	{
 		this(appToUse, appToUse.getCurrentNetworkInterfaceGateway());
 	}
 
-	public IsCompliantServerAvailableTask(MartusApp appToUse, ClientSideNetworkGateway gatewayToUse)
+	public IsAvailableServerCompliantTask(MartusApp appToUse, ClientSideNetworkGateway gatewayToUse)
 	{
 		super(appToUse, gatewayToUse);
 		
