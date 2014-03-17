@@ -78,7 +78,7 @@ abstract public class AbstractFxSetupWizardContentController extends ContentCont
 	protected boolean isCurrentServerAvailable() throws Exception
 	{
 		if(getWizardStage().hasServerAvailabilityBeenInitialized())
-			return getWizardStage().isDefaultServerAvailable();
+			return getWizardStage().checkIfCurrentServerIsAvailable();
 
 		if(getApp().getCurrentNetworkInterfaceGateway().getInterface() == null)
 			return false;

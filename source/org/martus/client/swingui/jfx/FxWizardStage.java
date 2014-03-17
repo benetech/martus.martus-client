@@ -112,7 +112,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		shellToUse.addWindowListener(new WindowCloseHandler(getMainWindow()));
 	}
 	
-	public boolean isDefaultServerAvailable()
+	public boolean checkIfCurrentServerIsAvailable()
 	{
 		return serverAvailibilityState.equals(SERVER_STATE_AVAILABLE);
 	}
