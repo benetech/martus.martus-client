@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="218.0" prefWidth="744.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <Button mnemonicParsing="false" onAction="#willVerifyLater" prefHeight="33.0" prefWidth="186.0" text="Will Verify Later" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <children>
+        <Button mnemonicParsing="false" onAction="#verifyContact" prefHeight="33.0" prefWidth="177.0" text="Verify!" />
+      </children>
+    </HBox>
+    <Label text="Public Code:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <Label fx:id="contactPublicCode40Label" prefHeight="33.0" prefWidth="576.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <Label fx:id="labelOldPublicCode" text="Public Code (old):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <Label fx:id="contactPublicCodeLabel" prefHeight="33.0" prefWidth="566.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <Label fx:id="labelVerificationMessage" prefHeight="81.0" prefWidth="581.0" text="" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="192.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="610.0" minWidth="10.0" prefWidth="610.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="117.0" minHeight="10.0" prefHeight="115.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+</GridPane>
