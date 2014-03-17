@@ -112,6 +112,23 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		shellToUse.addWindowListener(new WindowCloseHandler(getMainWindow()));
 	}
 	
+	public boolean isDefaultServerAvailable()
+	{
+		return serverAvailibilityState.equals(AVAILABLE_SERVER_STATE);
+	}
+	
+	public void setDefaultServerIsAvailable(boolean isServerAvailable)
+	{
+		serverAvailibilityState = NOT_AVAILABLE_SERVER_STATE;
+		if (isServerAvailable)
+			serverAvailibilityState = "IsAvailable";
+	}
+	
+	public boolean hasServerAvailabilityBeenInitialized()
+	{
+		return serverAvailibilityState != NOT_INTILIALIZED_SERVER_STATE;
+	}
+	
 	private class WindowCloseHandler extends WindowAdapter
 	{
 		public WindowCloseHandler(UiMainWindow ownerToUse)
@@ -136,5 +153,10 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	abstract protected ContentController getFirstController();
 
 	private Stack<ContentController> visitedWizardPagesStack;
-	
+
+	private String serverAvailibilityState;
+
+	private static final String NOT_INTILIALIZED_SERVER_STATE = null;
+	private static final String NOT_AVAILABLE_SERVER_STATE = "";
+	private static final String AVAILABLE_SERVER_STATE = "IsAvailable";
 }
