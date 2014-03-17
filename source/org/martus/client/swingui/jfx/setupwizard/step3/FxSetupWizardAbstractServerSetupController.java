@@ -30,7 +30,6 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.setupwizard.tasks.GetServerComplianceStatementTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.IsServerAvailableTask;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.MartusLogger;
@@ -49,9 +48,9 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		getMainWindow().clearStatusMessage();
 		ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, serverPublicKey, getApp().getTransport());
 
+		IsServerAvailableTask task = new IsServerAvailableTask(getApp(), gateway);
 		try
 		{
-			IsServerAvailableTask task = new IsServerAvailableTask(getApp(), gateway);
 			showTimeoutDialog("*Connecting*", "Attempting to connect to server", task);
 			if(!task.isAvailable())
 			{
@@ -76,7 +75,6 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 
 		try
 		{
-			GetServerComplianceStatementTask task = new GetServerComplianceStatementTask(getApp(), gateway);
 			showTimeoutDialog("*Connecting*", "Getting server compliance statement", task);
 			String complianceStatement = task.getComplianceStatement();
 			if(askComplianceAcceptance)

@@ -47,6 +47,11 @@ public class IsServerAvailableTask extends ServerCallTask
 		return isAvailable;
 	}
 	
+	public String getComplianceStatement()
+	{
+		return complianceStatement;
+	}
+	
 	@Override
 	public int getMaxSeconds()
 	{
@@ -56,10 +61,13 @@ public class IsServerAvailableTask extends ServerCallTask
 	@Override
 	protected Void call() throws Exception
 	{
+		complianceStatement = app.getServerCompliance(getGateway());
 		isAvailable = getApp().isSSLServerAvailable(gateway);
+		
 		return null;
 	}
 
 	private ClientSideNetworkGateway gateway;
 	private boolean isAvailable;
+	private String complianceStatement;
 }
