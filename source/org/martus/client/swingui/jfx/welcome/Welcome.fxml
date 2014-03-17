@@ -35,10 +35,10 @@
 <Label text="Send and receive information from other Martus users of your choice" />
 
 <Label text="Import Form Template" />
-<Label text="Select a form template to create Martus forms With" />
+<Label text="***Select a form template to create Martus forms with" />
 
 <Label text="Backup key" />
-<Label text="Make a copy of your accounts encryption key to restore your account in case of an accident or emergency." />
+<Label text=" Make a copy of your account's encryption key to restore your account in case of an accident or emergency." />
 
 </children></VBox>
 </center></BorderPane>

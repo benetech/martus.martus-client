@@ -17,6 +17,15 @@
 	-fx-padding: 25 25 25 25;
 }
 
+.web-view {
+	-fx-background-color: LightSteelBlue;
+}
+
+.sidebar-hint {
+	background-color: LightSteelBlue;
+	font: 9px "Sans-Serif";
+}
+
 .not-used-yet {
 	-fx-background-insets: 25;
 	-fx-insets: 10 10 10 10;

@@ -36,12 +36,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 import org.martus.client.core.MartusUserNameAndPassword;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.client.swingui.jfx.setupwizard.StaticAccountCreationData;
 import org.martus.common.MartusLogger;
+import org.w3c.dom.Document;
 
 public class FxSetupUsernamePasswordController extends FxStep1Controller
 {
@@ -58,6 +61,16 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 		getUserName().textProperty().addListener(new LoginChangeHandler());
 		getPasswordField().textProperty().addListener(new LoginChangeHandler());
 		hintLabel.setTooltip(new Tooltip("Create secure passwords by using numbers, letters and sympbols."));
+		String hintText = getLocalization().getFieldLabel("CreateAccountTipsHtml");
+		try
+		{
+			getWizardStage().getWizardShellController().setSideBarHintHtml(hintText);
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDialog("UnexpectedError");
+		}
 	}
 
 	@Override

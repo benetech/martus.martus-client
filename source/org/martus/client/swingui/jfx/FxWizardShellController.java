@@ -25,9 +25,14 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 import org.martus.client.swingui.UiMainWindow;
 
@@ -84,6 +89,14 @@ abstract public class FxWizardShellController extends ShellController implements
 		contentNavigationHandler.setNavigationHandler(this);
 	}
 	
+	public void setSideBarHintHtml(String hintText) throws Exception
+	{
+		WebEngine engine = sidebarHints.getEngine();
+		URL cssUrl = getScene().getBestCssLocation();
+		engine.setUserStyleSheetLocation(cssUrl.toExternalForm());
+		engine.loadContent("<div class='sidebar-hint'>" + hintText + "</div>");
+	}
+
 	private WizardNavigationHandlerInterface getContentNavigationHandler()
 	{
 		return contentNavigationHandler;
@@ -95,5 +108,8 @@ abstract public class FxWizardShellController extends ShellController implements
 	@FXML
 	protected Button backButton;
 	
+	@FXML
+	protected WebView sidebarHints;
+
 	private WizardNavigationHandlerInterface contentNavigationHandler;
 }
