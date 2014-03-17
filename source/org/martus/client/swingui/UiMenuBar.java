@@ -38,7 +38,6 @@ import org.martus.client.swingui.actions.ActionMenuBackupMyKeyPair;
 import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
 import org.martus.client.swingui.actions.ActionMenuCharts;
 import org.martus.client.swingui.actions.ActionMenuManageContacts;
-import org.martus.client.swingui.actions.ActionMenuConfigureHeadquartersKeys;
 import org.martus.client.swingui.actions.ActionMenuConfigureSpellCheck;
 import org.martus.client.swingui.actions.ActionMenuContactInfo;
 import org.martus.client.swingui.actions.ActionMenuCopyBulletins;
@@ -60,7 +59,6 @@ import org.martus.client.swingui.actions.ActionMenuFoldersOrganize;
 import org.martus.client.swingui.actions.ActionMenuHelp;
 import org.martus.client.swingui.actions.ActionMenuImportBulletins;
 import org.martus.client.swingui.actions.ActionMenuImportMba;
-import org.martus.client.swingui.actions.ActionMenuManageFieldDeskKeys;
 import org.martus.client.swingui.actions.ActionMenuModifyBulletin;
 import org.martus.client.swingui.actions.ActionMenuPasteBulletins;
 import org.martus.client.swingui.actions.ActionMenuPreferences;
@@ -178,8 +176,6 @@ public class UiMenuBar extends JMenuBar
 		tools.add(new ActionMenuExportMyPublicKey(mainWindow));
 		tools.addSeparator();
 		tools.add(new ActionMenuManageContacts(mainWindow));
-		tools.add(new ActionMenuConfigureHeadquartersKeys(mainWindow));
-		tools.add(new ActionMenuManageFieldDeskKeys(mainWindow));
 		
 		UiMenu help = new UiMenu(localization.getMenuLabel("help"));
 		help.add(new ActionMenuHelp(mainWindow));
