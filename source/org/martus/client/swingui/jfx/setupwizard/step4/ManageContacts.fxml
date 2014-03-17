@@ -31,11 +31,8 @@
               <children>
                 <Label text="Access Token:" />
                 <TextField id="" fx:id="accessTokenField" promptText="Access Token" />
-                <Button id="" fx:id="addContactButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addContact" prefWidth="155.0" text="Add Contact...">
-                  <graphic>
-                    <Separator prefWidth="235.0" />
-                  </graphic>
-                </Button>
+                <Separator prefWidth="38.0" />
+                <Button id="" fx:id="addContactButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addContact" prefWidth="155.0" text="Add Contact..." />
               </children>
             </HBox>
           </children>
