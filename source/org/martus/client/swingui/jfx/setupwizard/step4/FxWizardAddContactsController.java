@@ -45,6 +45,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
@@ -86,6 +87,9 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		publicCodeColumn.setEditable(false);
 		publicCodeColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("publicCode"));
 	    publicCodeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
+		sendToByDefaultColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("sendToByDefault"));
+		sendToByDefaultColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(sendToByDefaultColumn));
 
 		verificationStatusColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("verificationStatus"));
 		verificationStatusColumn.setCellFactory(new TableColumnVerifyContactCellFactory(getLocalization()));
@@ -605,7 +609,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	protected TableColumn<Object, String> contactNameColumn;
 	
 	@FXML
-	protected TableColumn<Object, Boolean> sendToByDefaultColumn;
+	protected TableColumn<ContactsTableData, Boolean> sendToByDefaultColumn;
 	
 	
 	@FXML
