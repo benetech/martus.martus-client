@@ -1590,6 +1590,8 @@ public class EnglishStrings
 "field:BackgroundPrinting=Preparing Report...",
 "field:BackgroundWorking=Working...",
 
+"wintitle:ImportContactPublicKey=Import Contact Key",
+"button:AddContactFromServer=Add Contact From Server...",
 
 "wintitle:confirmClearHQInformation=Confirm Removal of Headquarters",
 "wintitle:notifyAddPermissionsZeroBulletinsOurs=Update headquarters access to Bulletins",

@@ -50,7 +50,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
 
-import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -63,10 +62,12 @@ import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesCon
 import org.martus.client.swingui.jfx.setupwizard.tasks.LookupAccountFromTokenTask;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
+import org.martus.common.DammCheckDigitAlgorithm.CheckDigitInvalidException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenNotFoundException;
 import org.martus.common.MartusLogger;
+import org.martus.common.crypto.MartusCrypto.CreateDigestException;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
@@ -120,8 +121,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		try
 		{
 			MartusAccountAccessToken token = new MartusAccountAccessToken(accessTokenField.getText());
-			MartusApp app = getApp();
-			LookupAccountFromTokenTask task = new LookupAccountFromTokenTask(app, token);
+			LookupAccountFromTokenTask task = new LookupAccountFromTokenTask(getApp(), token);
 			MartusLocalization localization = getLocalization();
 			String title = localization.getWindowTitle("FindAccountByToken");
 			String message = localization.getFieldLabel("FindAccountByToken");
@@ -129,25 +129,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			String contactAccountId = task.getFoundAccountId();
 			if(contactAccountId == null)
 				return; 
-			if(contactAccountId.equals(app.getAccountId()))
-			{
-				showNotifyDialog("ContactKeyIsOurself");
-				return;
-			}
-			String contactPublicCode = MartusSecurity.computeFormattedPublicCode40(contactAccountId);
-			if(DoesContactAlreadyExistInTable(contactPublicCode))
-			{
-				String contactsName = getContactsNameInTable(contactPublicCode);
-				String contactExistsWithName = TokenReplacement.replaceToken(getLocalization().getFieldLabel("ContactAlreadyExistsAs"), "#Name#", contactsName);
-				showNotifyDialog("ContactKeyAlreadyExists", contactExistsWithName);
-				return;
-			}
-			ContactsTableData newContact = verifyContact(new ContactKey(contactAccountId), false);
-			if(newContact != null)
-			{
-				data.add(newContact);
-				clearAccessTokenField();
-			}
+			verifyContactAndAddToTable(contactAccountId);
 		} 
 		catch(UserCancelledException e)
 		{
@@ -168,7 +150,36 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		} 
 	}
 
-	private boolean DoesContactAlreadyExistInTable(String contactPublicCode)
+	protected void verifyContactAndAddToTable(String contactAccountId) throws CheckDigitInvalidException, CreateDigestException, TokenInvalidException
+	{
+		if(contactAccountId.equals(getApp().getAccountId()))
+		{
+			showNotifyDialog("ContactKeyIsOurself");
+			return;
+		}
+		String contactPublicCode = MartusSecurity.computeFormattedPublicCode40(contactAccountId);
+		if(DoesContactAlreadyExistInTable(contactPublicCode))
+		{
+			showContactAlreadyExists(contactPublicCode);
+			return;
+		}
+		ContactsTableData newContact = verifyContact(new ContactKey(contactAccountId), false);
+		if(newContact != null)
+		{
+			data.add(newContact);
+			clearAccessTokenField();
+		}
+	}
+
+	protected void showContactAlreadyExists(String contactPublicCode)
+			throws TokenInvalidException
+	{
+		String contactsName = getContactsNameInTable(contactPublicCode);
+		String contactExistsWithName = TokenReplacement.replaceToken(getLocalization().getFieldLabel("ContactAlreadyExistsAs"), "#Name#", contactsName);
+		showNotifyDialog("ContactKeyAlreadyExists", contactExistsWithName);
+	}
+
+	protected boolean DoesContactAlreadyExistInTable(String contactPublicCode)
 	{
 		for(int i=0; i < data.size(); ++i)
 		{
@@ -501,7 +512,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	{
 		return new FxSetupImportTemplatesController(getMainWindow());
 	}
-	
+
 	public void nextWasPressed(ActionEvent actionEvent)
 	{
 		SaveContacts();
@@ -636,4 +647,5 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	protected ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
 	
 	private boolean showOldPublicCode;
+
 }
