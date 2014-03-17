@@ -48,9 +48,9 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		getMainWindow().clearStatusMessage();
 		ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, serverPublicKey, getApp().getTransport());
 
-		IsCompliantServerAvailableTask task = new IsCompliantServerAvailableTask(getApp(), gateway);
 		try
 		{
+			IsCompliantServerAvailableTask task = new IsCompliantServerAvailableTask(getApp(), gateway);
 			showTimeoutDialog("*Connecting*", "Attempting to connect to server", task);
 			if(!task.isAvailable())
 			{
