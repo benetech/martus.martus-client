@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <children><BorderPane>
+<top><Label text="Settings" BorderPane.alignment="TOP_LEFT" />
+</top>
+<center><VBox BorderPane.alignment="CENTER">
+<children>
+    <GridPane prefHeight="162.0" prefWidth="564.0" xmlns:fx="http://javafx.com/fxml">
+      <columnConstraints>
+        <ColumnConstraints hgrow="NEVER" maxWidth="369.0" minWidth="10.0" prefWidth="369.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="287.0" minWidth="10.0" prefWidth="216.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="108.0" minHeight="0.0" prefHeight="28.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="231.0" minHeight="0.0" prefHeight="26.0" vgrow="SOMETIMES" />
+        <RowConstraints />
+        <RowConstraints />
+      </rowConstraints>
+      <children>
+        <CheckBox fx:id="userTorCheckBox" mnemonicParsing="false" text="Use Tor" GridPane.rowIndex="1" />
+        <TextArea editable="false" layoutX="115.0" layoutY="100.0" prefHeight="108.0" text="Turn Tor ON if you wish to hide that you are connecting to a Martus server.This may help reach the Martus servers if they are blocked from your location. NOTE: this will slow sending of bulletins.Read more about Tor at: https://www.torproject.orgYou can turn Tor ON or OFF at any time by clicking the icon shown abovein the upper right corner of the Martus desktop." wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+      </children>
+    </GridPane>
+    <GridPane layoutY="200.0" xmlns:fx="http://javafx.com/fxml">
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" />
+        <ColumnConstraints hgrow="SOMETIMES" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+      
+      <children>
+        <Label layoutX="5.0" layoutY="296.0" text="Date format sequence" />
+        <ChoiceBox fx:id="dateFormatSequenceDropDown" layoutX="166.0" layoutY="304.0" GridPane.columnIndex="1" xmlns:fx="http://javafx.com/fxml" />
+        <ChoiceBox fx:id="dateDelimeterComboBox" layoutX="150.0" layoutY="283.0" GridPane.columnIndex="1" GridPane.rowIndex="1" xmlns:fx="http://javafx.com/fxml" />
+        <Label layoutX="52.0" layoutY="309.0" text="Date delimeter" GridPane.rowIndex="1" />
+      </children>
+    </GridPane>
+</children></VBox>
+</center></BorderPane>
+  </children>
+</AnchorPane>
