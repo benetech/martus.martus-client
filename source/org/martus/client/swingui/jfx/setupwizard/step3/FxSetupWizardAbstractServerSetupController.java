@@ -61,21 +61,6 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 					return true;
 				}
 			}
-		}
-		catch(UserCancelledException e)
-		{
-			return false;
-		}
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-			showNotifyDialog("ErrorServerNotAvailable");
-			return false;
-		}
-
-		try
-		{
-			showTimeoutDialog("*Connecting*", "Getting server compliance statement", task);
 			String complianceStatement = task.getComplianceStatement();
 			if(askComplianceAcceptance)
 			{
