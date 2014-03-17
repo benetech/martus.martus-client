@@ -44,6 +44,14 @@ abstract public class FxWizardShellController extends ShellController implements
 		super(mainWindowToUse);
 	}
 	
+	@Override
+	public void initialize(URL location, ResourceBundle bundle)
+	{
+		super.initialize(location, bundle);
+		
+		sidebarHints.setVisible(false);
+	}
+	
 	private FxWizardStage getWizardStage()
 	{
 		return (FxWizardStage) getStage();
@@ -95,6 +103,7 @@ abstract public class FxWizardShellController extends ShellController implements
 		URL cssUrl = getScene().getBestCssLocation();
 		engine.setUserStyleSheetLocation(cssUrl.toExternalForm());
 		engine.loadContent("<div class='sidebar-hint'>" + hintText + "</div>");
+		sidebarHints.setVisible(true);
 	}
 
 	private WizardNavigationHandlerInterface getContentNavigationHandler()
