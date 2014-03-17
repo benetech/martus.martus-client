@@ -1,0 +1,100 @@
+.root {
+	-fx-background-color: LightSteelBlue;
+}
+
+.button{
+    -fx-border-radius: 5;
+    -fx-padding: 3 6 6 6;
+}
+
+.Icon {
+    -fx-padding: 16 16 16 16;
+    -fx-alignment: top-left;
+}
+
+.form-pane {
+	-fx-background-color: SteelBlue;
+	-fx-padding: 25 25 25 25;
+}
+
+.not-used-yet {
+	-fx-background-insets: 25;
+	-fx-insets: 10 10 10 10;
+	-fx-border-insets: 5;
+	-fx-border-color: Red;
+	-fx-border-style: solid;
+	-fx-border-width: 2;
+    -fx-padding: 6 6 6 6;
+	-fx-spacing: 10;
+	-fx-insets: 10 10 10 10;
+}
+
+.table-cell .button .remove-contact-button {
+	-fx-background-color: Red;
+	-fx-base: Red;
+	-fx-text-fill: White;
+}
+
+.table-cell .verified-label  {
+	-fx-text-fill: Green;
+}
+
+.table-cell .hyperlink .unverified-hyperlink:hover  {
+	-fx-background-color: Red;
+ }
+
+.table-cell .hyperlink .unverified-hyperlink  {
+	-fx-background-color: Red;
+ }
+
+#BelowTitle {
+	-fx-border-color: LightSteelBlue;
+	-fx-border-style: solid;
+	-fx-border-width: 25;
+}
+
+#contentPane {
+}
+
+#topBar {
+	-fx-background-color: DarkSlateGray;
+    -fx-padding: 6 6 6 6;
+	-fx-spacing: 10;
+	-fx-fill-height: true;
+	-fx-alignment: center-left;
+}
+
+.step {
+	-fx-fill-height: true;
+	-fx-alignment: center-left;
+}
+
+.current-step {
+}
+
+.current-step .TopBarStepNumber {
+	-fx-text-fill: White;
+}
+
+.current-step .TopBarStepName {
+	-fx-text-fill: White;
+}
+
+.TopBarStepNumber {
+	-fx-text-fill: DarkGray;
+	-fx-font: 20px "Sans-Serif";
+}
+
+.TopBarStepName {
+	-fx-text-fill: DarkGray;
+	-fx-alignment: center-left;
+}
+
+.TopBarArrow {
+	-fx-text-fill: DarkGray;
+}
+
+#contacts-table {
+	-fx-table-cell-border-color: transparent;
+
+}
