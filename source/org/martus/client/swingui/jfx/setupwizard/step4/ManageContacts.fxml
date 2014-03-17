@@ -26,7 +26,7 @@
         <VBox prefHeight="93.0" prefWidth="672.0">
           <children>
             <Label fx:id="fxAddManageContactLabel" text="Add Contacts" />
-            <Label prefHeight="91.0" prefWidth="640.0" text="To send bulletins to your contacts, you will need their public code. You will also want to share your public code with your contacts so they can verify your key. You can add contacts from the Martus desktop if you don't know them now." wrapText="true" />
+            <Label id="fxAddManageContactsDescription" fx:id="fxAddManageContactsDescriptionLabel" prefHeight="91.0" prefWidth="640.0" text="To send bulletins to your contacts, you will need their public code. You will also want to share your public code with your contacts so they can verify your key. You can add contacts from the Martus desktop if you don't know them now." wrapText="true" />
             <HBox prefHeight="53.0" prefWidth="839.0">
               <children>
                 <Label text="Access Token:" />
