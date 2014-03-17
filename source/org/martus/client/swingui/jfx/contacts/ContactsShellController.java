@@ -86,6 +86,13 @@ public class ContactsShellController extends ShellController implements WizardNa
 		getStage().close();
 	}
 	
+	@FXML
+	protected void importContactFromFile(ActionEvent event)
+	{
+		FxManageContactsController controller = (FxManageContactsController) getContentNavigationHandler();
+		controller.importContactFromFile();
+	}
+	
 	private WizardNavigationHandlerInterface getContentNavigationHandler()
 	{
 		return contentNavigationHandler;
