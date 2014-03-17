@@ -114,19 +114,19 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	
 	public boolean isDefaultServerAvailable()
 	{
-		return serverAvailibilityState.equals(AVAILABLE_SERVER_STATE);
+		return serverAvailibilityState.equals(SERVER_STATE_AVAILABLE);
 	}
 	
 	public void setDefaultServerIsAvailable(boolean isServerAvailable)
 	{
-		serverAvailibilityState = NOT_AVAILABLE_SERVER_STATE;
+		serverAvailibilityState = SERVER_STATE_NOT_AVAILABLE;
 		if (isServerAvailable)
 			serverAvailibilityState = "IsAvailable";
 	}
 	
 	public boolean hasServerAvailabilityBeenInitialized()
 	{
-		return serverAvailibilityState != NOT_INTILIALIZED_SERVER_STATE;
+		return serverAvailibilityState != SERVER_STATE_NOT_INTILIALIZED;
 	}
 	
 	private class WindowCloseHandler extends WindowAdapter
@@ -156,7 +156,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 
 	private String serverAvailibilityState;
 
-	private static final String NOT_INTILIALIZED_SERVER_STATE = null;
-	private static final String NOT_AVAILABLE_SERVER_STATE = "";
-	private static final String AVAILABLE_SERVER_STATE = "IsAvailable";
+	private static final String SERVER_STATE_NOT_INTILIALIZED = null;
+	private static final String SERVER_STATE_NOT_AVAILABLE = "";
+	private static final String SERVER_STATE_AVAILABLE = "IsAvailable";
 }
