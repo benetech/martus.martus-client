@@ -51,7 +51,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		try
 		{
 			IsCompliantServerAvailableTask task = new IsCompliantServerAvailableTask(getApp(), gateway);
-			showTimeoutDialog("*Connecting*", "Attempting to connect to server", task);
+			showTimeoutDialog("*Connecting*", "Attempting to connect to server and checking compliance", task);
 			if(!task.isAvailable())
 			{
 				//FIXME put in real text/title here.
