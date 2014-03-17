@@ -38,16 +38,17 @@ public class FxScene extends Scene
 	{
 		super(new Region());
 		
+		fxmlDirectory = fxmlDirToUse;
 		cssLocation = cssLocationToUse;
 		
 		ObservableList<String> stylesheets = getStylesheets();
-		String externalForm = getBestCssLocation(fxmlDirToUse).toExternalForm();
+		String externalForm = getBestCssLocation().toExternalForm();
 		stylesheets.add(externalForm);
 	}
 
-	private URL getBestCssLocation(File fxmlDirToUse) throws Exception
+	public URL getBestCssLocation() throws Exception
 	{
-		return FxController.getBestFile(fxmlDirToUse, getCssLocation());
+		return FxController.getBestFile(fxmlDirectory, getCssLocation());
 	}
 
 	public String getCssLocation()
@@ -55,5 +56,6 @@ public class FxScene extends Scene
 		return cssLocation;
 	}
 	
+	private File fxmlDirectory;
 	private String cssLocation;
 }
