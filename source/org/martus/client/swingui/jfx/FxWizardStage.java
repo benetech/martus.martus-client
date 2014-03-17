@@ -129,6 +129,11 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		return serverAvailibilityState != SERVER_STATE_NOT_INITILIALIZED;
 	}
 	
+	public FxWizardShellController getWizardShellController()
+	{
+		return (FxWizardShellController)getShellController();
+	}
+	
 	private class WindowCloseHandler extends WindowAdapter
 	{
 		public WindowCloseHandler(UiMainWindow ownerToUse)
