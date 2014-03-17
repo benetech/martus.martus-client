@@ -29,7 +29,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.ContentController;
 import org.martus.client.swingui.jfx.FxNonWizardStage;
 import org.martus.client.swingui.jfx.FxScene;
-import org.martus.client.swingui.jfx.setupwizard.step4.FxWizardAddContactsController;
 
 public class ContactsStage extends FxNonWizardStage
 {
