@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="345.0" prefWidth="845.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <BorderPane prefHeight="345.0" prefWidth="682.0">
+      <bottom>
+        <VBox prefHeight="230.0" prefWidth="898.0" BorderPane.alignment="CENTER">
+          <children>
+            <TableView id="contacts-table" fx:id="contactsTable" editable="true" prefHeight="251.0" prefWidth="684.0">
+              <columns>
+                <TableColumn id="" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="106.0" sortable="true" text="Contact Name" fx:id="contactNameColumn" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="177.0" text="Send To by Default" fx:id="sendToByDefaultColumn" />
+                <TableColumn editable="false" id="" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="394.0" sortable="true" text="Public Code" fx:id="publicCodeColumn" />
+                <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="81.0" resizable="false" sortable="true" text="Verified" fx:id="verificationStatusColumn" />
+                <TableColumn editable="false" id="" maxWidth="5000.0" minWidth="10.0" prefWidth="62.0" resizable="false" sortable="false" text="Remove" fx:id="removeContactColumn" />
+              </columns>
+            </TableView>
+          </children>
+        </VBox>
+      </bottom>
+      <top>
+        <VBox prefHeight="93.0" prefWidth="672.0">
+          <children>
+            <Label fx:id="fxAddManageContactLabel" text="Add Contacts" />
+            <Label id="fxAddManageContactsDescription" fx:id="fxAddManageContactsDescriptionLabel" prefHeight="91.0" prefWidth="640.0" text="To send bulletins to your contacts, you will need their public code. You will also want to share your public code with your contacts so they can verify your key. You can add contacts from the Martus desktop if you don't know them now." wrapText="true" />
+            <HBox prefHeight="53.0" prefWidth="839.0">
+              <children>
+                <Label text="Access Token:" />
+                <TextField id="" fx:id="accessTokenField" promptText="Access Token" />
+                <Separator prefWidth="38.0" />
+                <Button id="" fx:id="addContactButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addContact" prefWidth="155.0" text="Add Contact..." />
+              </children>
+            </HBox>
+          </children>
+        </VBox>
+      </top>
+    </BorderPane>
+  </children>
+</VBox>
