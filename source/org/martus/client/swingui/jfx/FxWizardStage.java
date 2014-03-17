@@ -117,7 +117,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		return serverAvailibilityState.equals(SERVER_STATE_AVAILABLE);
 	}
 	
-	public void setDefaultServerIsAvailable(boolean isServerAvailable)
+	public void setCurrentServerIsAvailable(boolean isServerAvailable)
 	{
 		serverAvailibilityState = SERVER_STATE_NOT_AVAILABLE;
 		if (isServerAvailable)
