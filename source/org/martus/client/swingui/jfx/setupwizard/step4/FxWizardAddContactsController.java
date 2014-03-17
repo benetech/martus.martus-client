@@ -605,7 +605,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	protected TableColumn<Object, String> contactNameColumn;
 	
 	@FXML
-	protected TableColumn<Object, String> sendToByDefaultColumn;
+	protected TableColumn<Object, Boolean> sendToByDefaultColumn;
 	
 	
 	@FXML

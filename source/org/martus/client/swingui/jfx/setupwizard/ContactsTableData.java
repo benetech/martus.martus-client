@@ -41,6 +41,7 @@ public class ContactsTableData
 		publicKey = contact.getPublicKey();
 		contactName = new SimpleStringProperty(contact.getLabel());
 		publicCode = new SimpleStringProperty(contact.getFormattedPublicCode40());
+		sendToByDefault = new SimpleBooleanProperty(contact.getSendToByDefault());
 		canSendTo = new SimpleBooleanProperty(contact.getCanSendTo());
 		canReceiveFrom = new SimpleBooleanProperty(contact.getCanReceiveFrom());
 		verificationStatus = new SimpleIntegerProperty(contact.getVerificationStatus());
@@ -50,6 +51,7 @@ public class ContactsTableData
 	public ContactKey getContact()
 	{
 		ContactKey contact = new ContactKey(publicKey, contactName.get());
+		contact.setSendToByDefault(sendToByDefault.get());
 		contact.setCanReceiveFrom(canReceiveFrom.get());
 		contact.setCanSendTo(canSendTo.get());
 		contact.setVerificationStatus(verificationStatus.get());
@@ -130,8 +132,24 @@ public class ContactsTableData
     		return canReceiveFrom;
     }
 
-    private final SimpleStringProperty contactName;
+	public boolean getSendToByDefault()
+	{
+		return sendToByDefault.get();
+	}
+	
+	public void setSendToByDefault(boolean sendToByDefaultToUse)
+	{
+		sendToByDefault.set(sendToByDefaultToUse);
+	}
+	
+	public SimpleBooleanProperty sendToByDefaultProperty() 
+	{
+		return sendToByDefault;
+	}
+
+	private final SimpleStringProperty contactName;
 	private final SimpleStringProperty publicCode;
+	private final SimpleBooleanProperty sendToByDefault;
 	private final SimpleBooleanProperty canSendTo;
 	private final SimpleBooleanProperty canReceiveFrom;
 	private final SimpleStringProperty removeContact;
