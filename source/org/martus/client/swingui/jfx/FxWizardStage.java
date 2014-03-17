@@ -157,6 +157,6 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	private String serverAvailibilityState;
 
 	private static final String SERVER_STATE_NOT_INITILIALIZED = null;
-	private static final String SERVER_STATE_NOT_AVAILABLE = "";
+	private static final String SERVER_STATE_NOT_AVAILABLE = "IsNotAvailable";
 	private static final String SERVER_STATE_AVAILABLE = "IsAvailable";
 }
