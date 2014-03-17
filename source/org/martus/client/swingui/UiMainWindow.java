@@ -458,7 +458,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		mainWindowInitalizing = true;
 
 		inactivityDetector = new UiInactivityDetector();
-		timeoutChecker = new java.util.Timer(true);
 		timeoutTimerTask = new TimeoutTimerTask();
 
 		if (getApp().hasNoAccounts() || isAlphaTester)
@@ -555,7 +554,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void startInactivityTimeoutDetection()
 	{
-		timeoutChecker.schedule(timeoutTimerTask, 0, BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS);
+		if(timeoutChecker == null)
+		{
+			timeoutChecker = new java.util.Timer(true);
+			timeoutChecker.schedule(timeoutTimerTask, 0, BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS);
+			MartusLogger.log("Inactivity timer started");
+		}
 	}
 
 	private boolean startAccountSetupWizard()

@@ -28,6 +28,8 @@ package org.martus.client.swingui.jfx;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractAppTask;
 import org.martus.common.ProgressMeterInterface;
@@ -77,6 +79,16 @@ public class FxProgressController extends FxBackgroundActivityController impleme
 	{
 		double percentComplete = (double)currentValue/(double)maxValue;
 		fxProgressBar.setProgress(percentComplete);
+		if(currentValue == maxValue)
+			Platform.runLater(new CloseThisDialog());
+	}
+
+	class CloseThisDialog implements Runnable
+	{
+		public void run()
+		{
+			forceCloseDialog();
+		}
 	}
 
 	@Override
@@ -89,6 +101,11 @@ public class FxProgressController extends FxBackgroundActivityController impleme
 	public void hideProgressMeter()
 	{
 		fxProgressBar.setVisible(false);
+	}
+	
+	@Override
+	public void taskSucceeded()
+	{
 	}
 	
 	protected int currentProgressMade;

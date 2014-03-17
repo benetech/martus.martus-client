@@ -23,22 +23,32 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.setupwizard.tasks;
+package org.martus.client.swingui.jfx.contacts;
 
-import org.martus.client.core.MartusApp;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class TorInitializationTask extends AbstractAppTask
+import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.setupwizard.step4.FxWizardAddContactsController;
+
+
+public class FxManageContactsController extends FxWizardAddContactsController
 {
-	public TorInitializationTask(MartusApp appToUse)
+
+	public FxManageContactsController(UiMainWindow mainWindowToUse)
 	{
-		super(appToUse);
+		super(mainWindowToUse);
 	}
 
 	@Override
-	protected Void call() throws Exception
+	public void initialize(URL location, ResourceBundle resources)
 	{
-		app.getTransport().setProgressMeter(progress);
-		app.startOrStopTorAsRequested();
-		return null;
+		super.initialize(location, resources);
+		sendToByDefaultColumn.setVisible(true);
+		MartusLocalization localization = getLocalization();
+		fxAddManageContactLabel.setText(localization.getFieldLabel("ManageContacts"));
+		fxAddManageContactsDescriptionLabel.setText(localization.getFieldLabel("ManageContactsDescription"));
+		showOldPublicCodeDuringVerification();
 	}
 }

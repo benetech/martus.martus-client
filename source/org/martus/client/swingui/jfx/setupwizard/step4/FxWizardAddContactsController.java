@@ -45,6 +45,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
@@ -70,9 +71,9 @@ import org.martus.common.crypto.MartusSecurity;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 
-public class FxAddContactsController extends FxStep4Controller
+public class FxWizardAddContactsController extends FxStep4Controller
 {
-	public FxAddContactsController(UiMainWindow mainWindowToUse)
+	public FxWizardAddContactsController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
@@ -87,12 +88,16 @@ public class FxAddContactsController extends FxStep4Controller
 		publicCodeColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("publicCode"));
 	    publicCodeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
+		sendToByDefaultColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("sendToByDefault"));
+		sendToByDefaultColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(sendToByDefaultColumn));
+
 		verificationStatusColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("verificationStatus"));
 		verificationStatusColumn.setCellFactory(new TableColumnVerifyContactCellFactory(getLocalization()));
 
 		removeContactColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("deleteContact")); 
 	    removeContactColumn.setCellFactory(new TableColumnRemoveButtonCellFactory(getLocalization()));
 
+	    sendToByDefaultColumn.setVisible(false);
 		contactsTable.setItems(data);
 		loadExistingContactData();
 		updateAddContactButtonState();
@@ -193,6 +198,7 @@ public class FxAddContactsController extends FxStep4Controller
 			VerifyContactPopupController popupController = new VerifyContactPopupController(getMainWindow(), currentContact);
 			if(verifyOnly)
 				popupController.setVerificationOnly();
+			popupController.showOldPublicCode(showOldPublicCode);
 			showControllerInsideModalDialog(popupController);
 			if(popupController.hasContactBeenAccepted())
 			{
@@ -415,7 +421,7 @@ public class FxAddContactsController extends FxStep4Controller
 		@Override
 		public String getFxmlLocation()
 		{
-			return "setupwizard/step4/SetupAddContactPopup.fxml";
+			return "setupwizard/step4/VerifyContactPopup.fxml";
 		}
 
 		@Override
@@ -487,7 +493,7 @@ public class FxAddContactsController extends FxStep4Controller
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/step4/SetupAddContacts.fxml";
+		return "setupwizard/step4/ManageContacts.fxml";
 	}
 	
 	@Override
@@ -590,27 +596,44 @@ public class FxAddContactsController extends FxStep4Controller
 		}
 		
 	}
+	
+	protected void showOldPublicCodeDuringVerification()
+	{
+		showOldPublicCode = true;
+	}
 
 	@FXML 
-	private TableView<ContactsTableData> contactsTable;
+	protected TableView<ContactsTableData> contactsTable;
 	
 	@FXML
-	private TableColumn<Object, String> contactNameColumn;
+	protected TableColumn<Object, String> contactNameColumn;
 	
 	@FXML
-	private TableColumn<Object, String> publicCodeColumn;
+	protected TableColumn<ContactsTableData, Boolean> sendToByDefaultColumn;
+	
 	
 	@FXML
-	private TableColumn<ContactsTableData, String> verificationStatusColumn;
+	protected TableColumn<Object, String> publicCodeColumn;
 	
 	@FXML
-	private TableColumn<ContactsTableData, String> removeContactColumn;
+	protected TableColumn<ContactsTableData, String> verificationStatusColumn;
 	
 	@FXML
-	private TextField accessTokenField;
+	protected TableColumn<ContactsTableData, String> removeContactColumn;
 	
 	@FXML
-	private Button addContactButton;
+	protected TextField accessTokenField;
+	
+	@FXML
+	protected Button addContactButton;
+	
+	@FXML
+	protected Label fxAddManageContactLabel;
+	
+	@FXML
+	protected Label fxAddManageContactsDescriptionLabel;
 	
 	protected ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
+	
+	private boolean showOldPublicCode;
 }

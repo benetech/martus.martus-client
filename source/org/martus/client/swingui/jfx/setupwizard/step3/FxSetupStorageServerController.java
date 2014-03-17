@@ -35,7 +35,7 @@ import javafx.scene.control.Hyperlink;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
-import org.martus.client.swingui.jfx.setupwizard.step4.FxAddContactsController;
+import org.martus.client.swingui.jfx.setupwizard.step4.FxWizardAddContactsController;
 import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
 import org.martus.common.MartusLogger;
 
@@ -71,7 +71,7 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 		try
 		{
 			if(isCurrentServerAvailable())
-				return new FxAddContactsController(getMainWindow());
+				return new FxWizardAddContactsController(getMainWindow());
 
 			return new FxSetupImportTemplatesController(getMainWindow());
 		} 
@@ -126,8 +126,8 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 		getWizardStage().next();
 	}
 	
-	private static final String IP_FOR_SL1_DEV = "54.213.152.140";
-	private static final String PUBLIC_KEY_FOR_SL1_DEV = 
+	public static final String IP_FOR_SL1_DEV = "54.213.152.140";
+	public static final String PUBLIC_KEY_FOR_SL1_DEV = 
 			"MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAjIX0yCfct1/WQptimL"
 			+ "jK35F3wsW/SEQ8DGdxfMBTZX1GVoOD6zg0d71Ns1ij4FdnOUsD4QCN4Kiay"
 			+ "Q+l28eIU8LL8L5oJClFwsVqgNDvPn8jR/CAbPy9NL0gKHevvX/dciVVCSrg"

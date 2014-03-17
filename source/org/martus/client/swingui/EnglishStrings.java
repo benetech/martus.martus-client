@@ -1312,6 +1312,9 @@ public class EnglishStrings
 "field:AccountInfoDirectory=Account Directory: ",
 "field:AccountAccessToken=Martus Account Access Token: ",
 "field:NameOfExportedFile=Please enter a name for the file you wish to export.",
+"field:ChooseDefaultServer=Default Server",
+"button:ChooseDefaultServer=Use Default Server",
+"field:DefaultServerDescription=To use the default server, press this button.",
 "field:ServerNameEntry=Server name or IP address:",
 "field:ServerPublicCodeEntry=Server Public Identification Code:",
 "field:ServerMagicWordEntry=Server Magic Word:",
@@ -1518,7 +1521,10 @@ public class EnglishStrings
 "field:ReportNumberOfBulletins=Total Bulletins:",
 
 "wintitle:RemoveContact=Remove Contact",
-"field:RemoveContactLabel=The following contact will be removed.\nName: #Name#\nPublic Code: #PublicCode#.\n\nAre you sure you want to do this?",
+"field:RemoveContactLabel=The following contact will be removed.\n\nName: #Name#\nPublic Code: #PublicCode#.\n\nAre you sure you want to do this?",
+
+"field:ManageContacts=Manage Contacts",
+"field:ManageContactsDescription=To send bulletins to your contacts, you will need their public code. You will also want to share your public code with your contacts so they can verify your key.",
 
 "filed:AllFiles=All Files",
 "field:BulletinViewHeading=Martus Bulletin",

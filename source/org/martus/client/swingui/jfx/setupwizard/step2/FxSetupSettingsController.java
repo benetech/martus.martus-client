@@ -46,6 +46,7 @@ import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentCon
 import org.martus.client.swingui.jfx.setupwizard.step3.FxSetupStorageServerController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.TorInitializationTask;
 import org.martus.clientside.CurrentUiState;
+import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxSetupSettingsController extends FxStep2Controller
@@ -57,9 +58,8 @@ public class FxSetupSettingsController extends FxStep2Controller
 	
 	public void initialize(URL url, ResourceBundle resourceBundle)
 	{
-		userTorCheckBox.selectedProperty().addListener(new FxCheckboxListener());
-
 		userTorCheckBox.setSelected(getApp().getConfigInfo().useInternalTor());
+		userTorCheckBox.selectedProperty().addListener(new FxCheckboxListener());
 
 		ObservableList<ChoiceItem> dateFormatChoices = getDateFormatChoices();
 		dateFormatSequenceDropDown.setItems(FXCollections.observableArrayList(dateFormatChoices));
@@ -86,9 +86,18 @@ public class FxSetupSettingsController extends FxStep2Controller
 	@Override
 	public void nextWasPressed(ActionEvent event) 
 	{
-		boolean userCancelled = saveTorConfigurationAndForceBulletinsAllPrivate();
+		saveSettingsToConfigInfo();
+		boolean didFinishInitalizing = startOrStopTorPerConfigInfo();
 		//TODO is there anyway at this point to abort moving forward?
+	}
+	
+	protected void saveSettingsToConfigInfo()
+	{
+		ConfigInfo configInfo = getApp().getConfigInfo();
+		configInfo.setForceBulletinsAllPrivate(true); //NOTE: is this the best place to do this?
 		saveDateFormatConfiguration();
+		configInfo.setUseInternalTor(userTorCheckBox.isSelected());
+		getMainWindow().saveConfigInfo();
 	}
 
 	private void saveDateFormatConfiguration()
@@ -103,21 +112,8 @@ public class FxSetupSettingsController extends FxStep2Controller
 		getMainWindow().saveCurrentUiState();
 	}
 
-	private boolean saveTorConfigurationAndForceBulletinsAllPrivate()
+	protected boolean startOrStopTorPerConfigInfo()
 	{
-		ConfigInfo configInfo = getApp().getConfigInfo();
-		//NOTE: This might belong somewhere else, but for now it's important to set it.
-		configInfo.setForceBulletinsAllPrivate(true);
-		getMainWindow().saveConfigInfo();
-		return startOrStopTorAsRequested();
-	}
-	
-	protected boolean startOrStopTorAsRequested()
-	{
-		ConfigInfo configInfo = getApp().getConfigInfo();
-		configInfo.setUseInternalTor(userTorCheckBox.isSelected());
-		getMainWindow().saveConfigInfo();
-
 		TorInitializationTask task = new TorInitializationTask(getApp());
 		try
 		{
@@ -125,14 +121,13 @@ public class FxSetupSettingsController extends FxStep2Controller
 		}
 		catch (UserCancelledException e)
 		{
-			return true;
+			return false;
 		}
 		catch (Exception e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			MartusLogger.logException(e);
 		}
-		return false;
+		return true;
 	}
 
 	private ObservableList<ChoiceItem> getDateFormatChoices()
@@ -164,7 +159,9 @@ public class FxSetupSettingsController extends FxStep2Controller
 		@Override
 		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) 
 		{
-			startOrStopTorAsRequested();
+			saveSettingsToConfigInfo();
+			boolean didFinishInitalizing = startOrStopTorPerConfigInfo();
+			//TODO un-check TOR if user cancelled.
 		}
 	}
 	

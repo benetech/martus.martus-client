@@ -106,7 +106,12 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 	public void updateProgressBar(double currentProgress)
 	{
 		fxProgressBar.setProgress(currentProgress);
-	}	
+	}
+	
+	public void taskSucceeded()
+	{
+		forceCloseDialog();
+	}
 
 	protected class TaskStateChangeHandler implements ChangeListener<Task.State>
 	{
@@ -115,7 +120,7 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 		{
 			if(newState.equals(State.SUCCEEDED))
 			{
-				forceCloseDialog();
+				taskSucceeded();
 			}
 			else if(newState.equals(State.FAILED))
 			{
