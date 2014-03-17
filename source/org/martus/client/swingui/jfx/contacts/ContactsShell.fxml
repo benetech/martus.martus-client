@@ -5,19 +5,19 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="842.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
-            <BorderPane>
-              <center>
-                <Pane fx:id="contentPane" maxHeight="-Infinity" prefHeight="500.0" prefWidth="683.0" />
-              </center>
-              <bottom>
-                <BorderPane>
-                  <right>
-                    <Button id="" fx:id="nextButton" mnemonicParsing="false" onAction="#onNext" text="OK" BorderPane.alignment="CENTER_RIGHT" />
-                  </right>
-                </BorderPane>
-              </bottom>
-            </BorderPane>
+    <BorderPane layoutX="0.0" layoutY="0.0" prefWidth="828.0">
+      <bottom>
+        <BorderPane>
+          <right>
+            <Button id="" fx:id="doneButton" mnemonicParsing="false" onAction="#onDone" prefHeight="35.0" prefWidth="110.0" text="Done" BorderPane.alignment="CENTER_RIGHT" />
+          </right>
+        </BorderPane>
+      </bottom>
+      <center>
+        <Pane fx:id="contentPane" maxHeight="-Infinity" prefHeight="375.0" prefWidth="828.0" />
+      </center>
+    </BorderPane>
   </children>
 </AnchorPane>
