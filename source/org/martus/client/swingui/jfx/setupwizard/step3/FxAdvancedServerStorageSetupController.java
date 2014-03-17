@@ -40,7 +40,7 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
-import org.martus.client.swingui.jfx.setupwizard.step4.FxAddContactsController;
+import org.martus.client.swingui.jfx.setupwizard.step4.FxWizardAddContactsController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.GetServerPublicKeyTask;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
@@ -134,7 +134,7 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 	@Override
 	public AbstractFxSetupWizardContentController getNextController()
 	{
-		return new FxAddContactsController(getMainWindow());
+		return new FxWizardAddContactsController(getMainWindow());
 	}
 	
 	protected class TextFieldChangeHandler implements ChangeListener<String>

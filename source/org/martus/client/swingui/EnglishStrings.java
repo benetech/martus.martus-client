@@ -1523,6 +1523,9 @@ public class EnglishStrings
 "wintitle:RemoveContact=Remove Contact",
 "field:RemoveContactLabel=The following contact will be removed.\n\nName: #Name#\nPublic Code: #PublicCode#.\n\nAre you sure you want to do this?",
 
+"field:ManageContacts=Manage Contacts",
+"field:ManageContactsDescription=To send bulletins to your contacts, you will need their public code. You will also want to share your public code with your contacts so they can verify your key.",
+
 "filed:AllFiles=All Files",
 "field:BulletinViewHeading=Martus Bulletin",
 "field:RemoveMartusFromSystemWarning=WARNING!",

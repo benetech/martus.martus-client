@@ -70,9 +70,9 @@ import org.martus.common.crypto.MartusSecurity;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 
-public class FxAddContactsController extends FxStep4Controller
+public class FxWizardAddContactsController extends FxStep4Controller
 {
-	public FxAddContactsController(UiMainWindow mainWindowToUse)
+	public FxWizardAddContactsController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
@@ -194,6 +194,7 @@ public class FxAddContactsController extends FxStep4Controller
 			VerifyContactPopupController popupController = new VerifyContactPopupController(getMainWindow(), currentContact);
 			if(verifyOnly)
 				popupController.setVerificationOnly();
+			popupController.showOldPublicCode(showOldPublicCode);
 			showControllerInsideModalDialog(popupController);
 			if(popupController.hasContactBeenAccepted())
 			{
@@ -591,31 +592,44 @@ public class FxAddContactsController extends FxStep4Controller
 		}
 		
 	}
+	
+	protected void showOldPublicCodeDuringVerification()
+	{
+		showOldPublicCode = true;
+	}
 
 	@FXML 
-	private TableView<ContactsTableData> contactsTable;
+	protected TableView<ContactsTableData> contactsTable;
 	
 	@FXML
-	private TableColumn<Object, String> contactNameColumn;
+	protected TableColumn<Object, String> contactNameColumn;
 	
 	@FXML
-	private TableColumn<Object, String> sendToByDefaultColumn;
+	protected TableColumn<Object, String> sendToByDefaultColumn;
 	
 	
 	@FXML
-	private TableColumn<Object, String> publicCodeColumn;
+	protected TableColumn<Object, String> publicCodeColumn;
 	
 	@FXML
-	private TableColumn<ContactsTableData, String> verificationStatusColumn;
+	protected TableColumn<ContactsTableData, String> verificationStatusColumn;
 	
 	@FXML
-	private TableColumn<ContactsTableData, String> removeContactColumn;
+	protected TableColumn<ContactsTableData, String> removeContactColumn;
 	
 	@FXML
-	private TextField accessTokenField;
+	protected TextField accessTokenField;
 	
 	@FXML
-	private Button addContactButton;
+	protected Button addContactButton;
+	
+	@FXML
+	protected Label fxAddManageContactLabel;
+	
+	@FXML
+	protected Label fxAddManageContactsDescriptionLabel;
 	
 	protected ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
+	
+	private boolean showOldPublicCode;
 }

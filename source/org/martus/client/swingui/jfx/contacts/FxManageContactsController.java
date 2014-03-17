@@ -25,33 +25,30 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.contacts;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.ContentController;
-import org.martus.client.swingui.jfx.FxNonWizardStage;
-import org.martus.client.swingui.jfx.FxScene;
 import org.martus.client.swingui.jfx.setupwizard.step4.FxWizardAddContactsController;
 
-public class ContactsStage extends FxNonWizardStage
+
+public class FxManageContactsController extends FxWizardAddContactsController
 {
-	public ContactsStage(UiMainWindow mainWindow) throws Exception
+
+	public FxManageContactsController(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindow);
-		
-		setShellController(new ContactsShellController(getMainWindow()));
-		setCurrentController(new FxManageContactsController(getMainWindow()));
+		super(mainWindowToUse);
 	}
 
 	@Override
-	public void showCurrentScene() throws Exception
+	public void initialize(URL location, ResourceBundle resources)
 	{
-		ContentController contentPaneController = getCurrentController();
-
-		showCurrentPage(contentPaneController);
-	}
-
-	@Override
-	protected FxScene createScene() throws Exception
-	{
-		return new FxScene(getExternalFxmlDirectory(), "contacts/contacts.css");
+		super.initialize(location, resources);
+		sendToByDefaultColumn.setVisible(true);
+		MartusLocalization localization = getLocalization();
+		fxAddManageContactLabel.setText(localization.getFieldLabel("ManageContacts"));
+		fxAddManageContactsDescriptionLabel.setText(localization.getFieldLabel("ManageContactsDescription"));
+		showOldPublicCodeDuringVerification();
 	}
 }
