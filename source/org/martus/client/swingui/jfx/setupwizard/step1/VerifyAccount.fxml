@@ -3,28 +3,42 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
+
 
 <AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <GridPane xmlns:fx="http://javafx.com/fxml">
-      <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="267.0" minWidth="10.0" prefWidth="160.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="319.0" minWidth="10.0" prefWidth="319.0" />
-      </columnConstraints>
-      <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
-      </rowConstraints>
-      <children>
-        <Label prefHeight="34.0" prefWidth="403.0" text="Verify your Account" GridPane.columnSpan="2147483647" />
-        <Label text="Confirm User Name" GridPane.rowIndex="1" />
-        <Label text="Confirm Password" GridPane.rowIndex="2" />
-        <TextField fx:id="userNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <Label fx:id="accountConfirmLabel" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-      </children>
-    </GridPane>
+    <BorderPane>
+	  <top>
+        <Label text="Verify your Account" BorderPane.alignment="TOP_LEFT" />
+	  </top>
+	  <center>
+		  <VBox>
+		    <children>
+			    <GridPane xmlns:fx="http://javafx.com/fxml">
+			      <columnConstraints>
+			        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" maxWidth="-Infinity" />
+			        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"  />
+			      </columnConstraints>
+			      <rowConstraints>
+			        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+			        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+			      </rowConstraints>
+			      <children>
+			        <Label text="Confirm User Name"  />
+			        <TextField fx:id="userNameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+			        <Label text="Confirm Password" GridPane.rowIndex="1" />
+			        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+			      </children>
+			    </GridPane>
+		        <Label fx:id="errorLabel"  />
+		        <Label fx:id="accountConfirmLabel" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+			  </children>
+			</VBox>			    
+		</center>
+		<bottom>
+			<WebView fx:id="rememberPasswordHint" prefHeight="200" maxHeight="200" maxWidth="600" />
+		</bottom>
+	</BorderPane>
   </children>
 </AnchorPane>

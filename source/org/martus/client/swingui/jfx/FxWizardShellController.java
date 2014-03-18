@@ -102,7 +102,7 @@ abstract public class FxWizardShellController extends ShellController implements
 		WebEngine engine = sidebarHints.getEngine();
 		URL cssUrl = getScene().getBestCssLocation();
 		engine.setUserStyleSheetLocation(cssUrl.toExternalForm());
-		engine.loadContent("<div class='sidebar-hint'>" + hintText + "</div>");
+		engine.loadContent("<div class='wv-sidebar-hint'>" + hintText + "</div>");
 		sidebarHints.setVisible(true);
 	}
 

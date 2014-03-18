@@ -36,6 +36,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.web.WebView;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -59,6 +60,19 @@ public class FxVerifyAccountController extends FxStep1Controller
 		userNameField.textProperty().addListener(new LoginChangeHandler());
 		passwordField.textProperty().addListener(new LoginChangeHandler());
 		
+		try
+		{
+			String cssLocation = getScene().getBestCssLocation().toExternalForm();
+			rememberPasswordHint.getEngine().setUserStyleSheetLocation(cssLocation);
+			String rememberPasswordHintHtml = getLocalization().getFieldLabel("RememberPasswordTipsHtml");
+			rememberPasswordHint.getEngine().loadContent("<div class='wv-bottom-alert'>" + rememberPasswordHintHtml + "</div>");
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDialog("UnexpectedError");
+		}
+
 		updateStatus();
 	}
 
@@ -163,4 +177,7 @@ public class FxVerifyAccountController extends FxStep1Controller
 	
 	@FXML
 	private Label accountConfirmLabel;
+
+	@FXML
+	private WebView rememberPasswordHint;
 }

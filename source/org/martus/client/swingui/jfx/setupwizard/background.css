@@ -17,13 +17,19 @@
 	-fx-padding: 25 25 25 25;
 }
 
-.web-view {
+#sidebar-hints {
 	-fx-background-color: LightSteelBlue;
+	-fx-padding: 25 25 25 25;
 }
 
-.sidebar-hint {
+.wv-sidebar-hint {
 	background-color: LightSteelBlue;
 	font: 9px "Sans-Serif";
+}
+
+.wv-bottom-alert {
+	background-color: Red;
+	color: White;
 }
 
 .not-used-yet {
