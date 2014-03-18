@@ -1565,6 +1565,7 @@ public class EnglishStrings
 		"<li>Use a combination of alphabet characters, numbers, and special characters (such as !@#$%^&*).</li>" +
 		"<li>Use a combination of uppercase (capital) and lowercase characters if you use a case-sensitive language. </li>" +
 		"</ul></p>",
+"field:RememberPasswordTipsHtml=When creating a user name and password, please be aware there is no way to retrieve your username and password if you forget it. This is for your safety. Note: later in this wizard, you will be led through a key backup process, that will help mitigate this situation.",
 "field:LoadingFieldValuesFromAllBulletins=Processing bulletin",
 "field:LoadingFieldValuesFromAllBulletinsExplanation=Scanning all bulletins to create a list of all the values in #FieldName#",
 

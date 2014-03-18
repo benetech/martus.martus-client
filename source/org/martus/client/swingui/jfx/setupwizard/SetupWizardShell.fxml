@@ -76,7 +76,7 @@
           <right>
             <BorderPane>
               <top>
-				<WebView fx:id="sidebarHints" maxHeight="350" prefWidth="200.0" />
+				<WebView fx:id="sidebarHints" id='sidebar-hints' maxHeight="350" prefWidth="200.0" />
               </top>
               <bottom>
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">

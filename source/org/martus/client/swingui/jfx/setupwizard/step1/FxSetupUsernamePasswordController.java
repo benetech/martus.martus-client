@@ -36,6 +36,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.web.WebView;
 
 import org.martus.client.core.MartusUserNameAndPassword;
 import org.martus.client.swingui.UiMainWindow;
@@ -58,10 +59,24 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 		getUserName().textProperty().addListener(new LoginChangeHandler());
 		getPasswordField().textProperty().addListener(new LoginChangeHandler());
 		hintLabel.setTooltip(new Tooltip("Create secure passwords by using numbers, letters and sympbols."));
-		String sidebarHintText = getLocalization().getFieldLabel("CreateAccountTipsHtml");
+
 		try
 		{
+			String sidebarHintText = getLocalization().getFieldLabel("CreateAccountTipsHtml");
 			getWizardStage().getWizardShellController().setSideBarHintHtml(sidebarHintText);
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDialog("UnexpectedError");
+		}
+		
+		try
+		{
+			String cssLocation = getScene().getBestCssLocation().toExternalForm();
+			rememberPasswordHint.getEngine().setUserStyleSheetLocation(cssLocation);
+			String rememberPasswordHintHtml = getLocalization().getFieldLabel("RememberPasswordTipsHtml");
+			rememberPasswordHint.getEngine().loadContent("<div class='wv-bottom-alert'>" + rememberPasswordHintHtml + "</div>");
 		} 
 		catch (Exception e)
 		{
@@ -172,4 +187,7 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 	
 	@FXML
 	private Label hintLabel;
+
+	@FXML
+	private WebView rememberPasswordHint;
 }
