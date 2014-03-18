@@ -32,6 +32,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.tasks.IsAvailableServerCompliantTask;
 import org.martus.clientside.ClientSideNetworkGateway;
+import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusLogger;
 
 abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3Controller
@@ -108,7 +109,13 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 			MartusLogger.logException(e);
 			showNotifyDialog("ErrorSavingConfig");
 			return false;
-		} 
+		}
+		catch(ServerNotAvailableException e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDialog("ErrorServerOffline");
+			return false;
+		}
 		catch(Exception e)
 		{
 			MartusLogger.logException(e);

@@ -253,6 +253,13 @@ public class EnglishStrings
 "wintitle:notifyRetrieveCompleted=Retrieve Complete",
 "field:notifyRetrieveCompletedcause=Retrieving bulletins from the server is complete",
 
+"wintitle:notifyErrorGettingCompliance=Error Getting Compliance Statement",
+"field:notifyErrorGettingCompliancecause=An error occured while trying to connect to the server.",
+
+
+"wintitle:notifyErrorServerOffline=Unable to Connect to Server",
+"field:notifyErrorServerOfflinecause=Unable to connect to the server.",
+
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
 "wintitle:inputservermagicword=Request Upload Permission",
