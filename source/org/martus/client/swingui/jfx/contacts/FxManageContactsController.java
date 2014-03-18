@@ -76,11 +76,11 @@ public class FxManageContactsController extends FxWizardAddContactsController
 			{
 				String publicKeyString = getMainWindow().getApp().extractPublicInfo(importFile);
 				verifyContactAndAddToTable(publicKeyString);
-			}
+			} 	
 			catch (Exception e)
 			{
 				MartusLogger.logException(e);
-				showNotifyDialog("UnexpectedError");
+				showNotifyDialog("PublicInfoFileError");
 			} 
 	}
 }
