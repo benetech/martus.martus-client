@@ -39,6 +39,7 @@ import javax.swing.table.DefaultTableModel;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.packet.BulletinHistory;
@@ -101,7 +102,7 @@ public class UiBulletinDetailsDialog extends JDialog
 		for(int clone = 0; clone < extendedHistory.size(); ++clone)
 		{
 			ExtendedHistoryEntry entry = extendedHistory.getHistory(clone);
-			String publicCode = MartusCrypto.computeFormattedPublicCode(entry.getClonedFromAccountId());
+			String publicCode = MartusCrypto.computeFormattedPublicCode40(entry.getClonedFromAccountId());
 			String label = getLocalization().getFieldLabel("PreviousAuthor");
 
 			HashMap tokenReplacement = new HashMap();
@@ -253,11 +254,11 @@ public class UiBulletinDetailsDialog extends JDialog
 	{
 		try
 		{
-			return MartusCrypto.computeFormattedPublicCode(bulletin.getAccount());
+			return MartusCrypto.computeFormattedPublicCode40(bulletin.getAccount());
 		}
-		catch (InvalidBase64Exception e)
+		catch (Exception e)
 		{
-			e.printStackTrace();
+			MartusLogger.logException(e);
 			return "";
 		}		
 	}

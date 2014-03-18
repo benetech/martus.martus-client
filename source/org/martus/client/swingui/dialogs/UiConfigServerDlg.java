@@ -106,9 +106,9 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		try
 		{
 			if(serverPublicKey.length() > 0)
-				knownServerPublicCode = MartusCrypto.computeFormattedPublicCode(serverPublicKey);
+				knownServerPublicCode = MartusCrypto.computeFormattedPublicCode40(serverPublicKey);
 		}
-		catch (InvalidBase64Exception e)
+		catch (Exception e)
 		{
 		}
 		fieldPublicCode.setText(knownServerPublicCode);

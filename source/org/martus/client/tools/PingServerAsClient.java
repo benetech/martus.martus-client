@@ -63,7 +63,8 @@ public class PingServerAsClient
 			System.exit(2);
 		
 		String serverPublicKey = server.getServerPublicKey(new MartusSecurity());
-		System.out.println("server public code: " + MartusCrypto.computeFormattedPublicCode(serverPublicKey));
+		System.out.println("server public code (old): " + MartusCrypto.computeFormattedPublicCode(serverPublicKey));
+		System.out.println("server public code (new): " + MartusCrypto.computeFormattedPublicCode40(serverPublicKey));
 
 		ClientSideNetworkInterface networkInterface = ClientSideNetworkGateway.buildNetworkInterface(ip, serverPublicKey, transport);
 		ClientSideNetworkGateway gateway = new ClientSideNetworkGateway(networkInterface);
