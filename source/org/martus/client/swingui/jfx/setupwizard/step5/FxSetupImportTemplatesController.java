@@ -131,7 +131,14 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	
 	private Vector<CustomFieldTemplate> loadFormTemplates() throws Exception
 	{
-		String[] formTemplateFileNames = new String[]{"formtemplates/sampleTemplate.mct", };
+		String[] formTemplateFileNames = new String[]
+		{
+			"formtemplates/Amnesty-Urgent-Actions.mct", 
+			"formtemplates/Journalist-Example.mct", 
+			"formtemplates/Martus-Customization-Example.mct", 
+			"formtemplates/UN-Disappearances.mct", 
+			"formtemplates/UN-Special-Rapporteur-Executions.mct", 
+		};
 		Vector<CustomFieldTemplate> formTemplates = new Vector<CustomFieldTemplate>();
 		for (String formTemplateFileName : formTemplateFileNames)
 		{
