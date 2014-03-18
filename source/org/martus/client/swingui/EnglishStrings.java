@@ -1371,7 +1371,7 @@ public class EnglishStrings
 	"   122 - Reusable Choices lists cannot have the same Label\n" +
 	"   123 - Lower-level reusable choice code has no matching higher-level code\n" +
 	"   200 - All fields empty\n" +
-	"   201 - Unrecognized Headquarters created this template\n" +
+	"   201 - Unrecognized Contact created this template\n" +
 	"   202 - Security validation error\n" +
 	"   203 - File Error\n" +
 	"   204 - Imported XML Missing Field",
@@ -1613,8 +1613,8 @@ public class EnglishStrings
 "button:AddContactFromServer=Add Contact From Server...",
 
 "wintitle:confirmClearHQInformation=Confirm Removal of Contact",
-"wintitle:notifyAddPermissionsZeroBulletinsOurs=Update headquarters access to Forms",
-"wintitle:notifyAddPermissionsZeroHeadquartersSelected=No Headquarters Selected",
+"wintitle:notifyAddPermissionsZeroBulletinsOurs=Update Contacts access to Forms",
+"wintitle:notifyAddPermissionsZeroHeadquartersSelected=No Contacts Selected",
 "wintitle:RetrieveHQSealedBulletinProgress=Retrieving Forms",
 "wintitle:RetrieveHQDraftBulletinProgress=Retrieving Forms",
 "wintitle:RetrieveHQSealedBulletinSummaries=Retrieving Form Summaries",
@@ -1641,7 +1641,7 @@ public class EnglishStrings
 "field:BulletinHeadQuartersHQInfoForModify=The selected contacts' account(s) will be able to view the private information in this form, or send this form to a server, after you save it.\n\nTo add a new contact's account use the Tools: Manage Contacts menu option.",
 "field:BulletinHeadQuartersHQLabel=Label",
 "field:BulletinHeadQuartersHeadquarters=Contacts",
-"field:QuickEraseWillRemoveItems=Delete your Martus key, bulletins, folders, and configuration information (such as your contacts, server, and custom field settings).",
+"field:QuickEraseWillRemoveItems=Delete your Martus key, forms, folders, and configuration information (such as your contacts, server, and custom field settings).",
 "field:_Section_BulletinSectionHeadquarters=Contacts",
 "field:HeadQuartersSelected=Selected?",
 "field:ConfigureHeadQuartersDefault=Default?",
@@ -1655,21 +1655,21 @@ public class EnglishStrings
 "wintitle:confirmCloneUnverifiedFDBulletinAsMine=Confirm Create Copy of Form",
 
 
-"wintitle:RetrieveHQSealedBulletins=Retrieve Sealed Bulletins from My Contacts",
-"wintitle:RetrieveHQDraftBulletins=Retrieve My Draft Bulletins from My Contacts",
+"wintitle:RetrieveHQSealedBulletins=Retrieve Sealed Forms from My Contacts",
+"wintitle:RetrieveHQDraftBulletins=Retrieve Draft Forms from My Contacts",
 
 
 
-"menu:RetrieveHQSealedBulletins=Retrieve Sealed Bulletins from My Contacts",
-"menu:RetrieveHQDraftBulletins=Retrieve Draft Bulletins from My Contacts",
+"menu:RetrieveHQSealedBulletins=Retrieve Sealed Forms from My Contacts",
+"menu:RetrieveHQDraftBulletins=Retrieve Draft Forms from My Contacts",
 "folder:%RetrievedFieldOfficeBulletin=Received Forms",
 "folder:%RetrievedFieldOfficeBulletinDraft=Received Draft Forms",
 "field:confirmCloneUnverifiedFDBulletinAsMinecause=You have chosen to modify a form that was created by a contact that has not been verified, so the form could contain incorrect information or potentially damaging attachments. We recommend that you verify this account before continuing (See Tools > Manage Contacts).",
 "field:confirmCloneUnverifiedFDBulletinAsMineeffect=Clicking on Yes to continue with the modify operation will create a new form that contains a copy of all the same information.  You will be the official author of this new form, so you will become responsible for all the content. Any private data in it will only be visible to you (and any contacts accounts you have shared this with).  The original form will remain unchanged.",
-"field:RetrieveHQSealedBulletinProgress=Retrieving Sealed Bulletins from Contacts",
-"field:RetrieveHQDraftBulletinProgress=Retrieving Draft Bulletins from Contacts",
-"field:RetrieveHQSealedBulletinSummaries=Retrieving Sealed Bulletin Summaries from Contacts",
-"field:RetrieveHQDraftBulletinSummaries=Retrieving Draft Bulletin Summaries from Contacts",
+"field:RetrieveHQSealedBulletinProgress=Retrieving Sealed Forms from Contacts",
+"field:RetrieveHQDraftBulletinProgress=Retrieving Draft Forms from Contacts",
+"field:RetrieveHQSealedBulletinSummaries=Retrieving Sealed Form Summaries from Contacts",
+"field:RetrieveHQDraftBulletinSummaries=Retrieving Draft Form Summaries from Contacts",
 "field:TemplateCreatedByFieldDesk=Contact #Name#",
 "field:UnverifiedFDAttachment=The account that created this form has not been verified, so there is an increased chance that this attachment could be dangerous. We recommend that you verify this Contact's account before you #action# this attachment (See Tools > Manage Contacts). Opening this attachment could put your computer at risk. ",
 "field:statusCheckingForNewFieldOfficeBulletins=Checking for new forms from Contacts...",
