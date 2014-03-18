@@ -513,13 +513,13 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		return new FxSetupImportTemplatesController(getMainWindow());
 	}
 
-	public void nextWasPressed(ActionEvent actionEvent)
+	public void nextWasPressed(ActionEvent actionEvent) throws Exception
 	{
 		SaveContacts();
 		super.nextWasPressed(actionEvent);
 	}
 	
-	public void backWasPressed(ActionEvent actionEvent)
+	public void backWasPressed(ActionEvent actionEvent) throws Exception
 	{
 		SaveContacts();
 		super.backWasPressed(actionEvent);

@@ -102,6 +102,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
+			showNotifyDialog("UnexpectedError");
 		}
 	} 
 	
