@@ -43,6 +43,7 @@ import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentCon
 import org.martus.client.swingui.jfx.setupwizard.step4.FxWizardAddContactsController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.GetServerPublicKeyTask;
 import org.martus.common.MartusLogger;
+import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
 
@@ -120,12 +121,17 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 		catch (SaveConfigInfoException e)
 		{
 			MartusLogger.logException(e);
-			System.exit(1);
-		} 
+			showNotifyDialog("ErrorSavingFile");
+		}
+		catch (ServerNotAvailableException e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDialog("ServerNotAvailable");
+		}
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			System.exit(1);
+			showNotifyDialog("UnexpectedError");
 		}
 
 		updateButtonStates();

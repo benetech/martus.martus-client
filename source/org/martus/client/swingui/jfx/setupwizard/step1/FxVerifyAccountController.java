@@ -77,16 +77,9 @@ public class FxVerifyAccountController extends FxStep1Controller
 	}
 
 	@Override
-	public void nextWasPressed(ActionEvent event) 
+	public void nextWasPressed(ActionEvent event) throws Exception
 	{
-		try
-		{
-			createAccount();
-		}
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-		}
+		createAccount();
 	}
 
 	private void createAccount() throws Exception

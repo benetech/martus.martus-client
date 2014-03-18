@@ -31,9 +31,9 @@ import javafx.event.ActionEvent;
 
 public interface WizardNavigationHandlerInterface
 {
-	public void nextWasPressed(ActionEvent actionEvent);
+	public void nextWasPressed(ActionEvent actionEvent) throws Exception;
 	
-	public void backWasPressed(ActionEvent actionEvent);
+	public void backWasPressed(ActionEvent actionEvent) throws Exception;
 
 	public void setNavigationHandler(WizardNavigationButtonsInterface navigationHandler);
 	

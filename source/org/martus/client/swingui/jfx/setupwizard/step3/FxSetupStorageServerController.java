@@ -82,8 +82,8 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			System.exit(1);
-			return null;
+			showNotifyDialog("UnexpectedError");
+			return this;
 		}
 	}
 	

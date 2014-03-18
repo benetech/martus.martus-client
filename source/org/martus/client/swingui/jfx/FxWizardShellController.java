@@ -35,6 +35,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.MartusLogger;
 
 
 abstract public class FxWizardShellController extends ShellController implements WizardNavigationButtonsInterface
@@ -60,15 +61,31 @@ abstract public class FxWizardShellController extends ShellController implements
 	@FXML
 	protected void onNext(ActionEvent event)
 	{
-		getContentNavigationHandler().nextWasPressed(event);
-		getWizardStage().next();
+		try
+		{
+			getContentNavigationHandler().nextWasPressed(event);
+			getWizardStage().next();
+		}
+		catch(Exception e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDialog("UnexpectedError");
+		}
 	}
 	
 	@FXML
 	protected void onBack(ActionEvent event) 
 	{
-		getContentNavigationHandler().backWasPressed(event);
-		getWizardStage().back();
+		try
+		{
+			getContentNavigationHandler().backWasPressed(event);
+			getWizardStage().back();
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDialog("UnknownError");
+		}
 	}
 	
 	protected void disableNext()
