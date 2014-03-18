@@ -40,6 +40,14 @@ public class GetServerPublicKeyTask extends ServerCallTask
 	{
 		return serverKey;
 	}
+	
+	@Override
+	public int getMaxSeconds()
+	{
+		// NOTE: Overriding because this call doesn't use a normal gateway
+		// FIXME: Why is it actually waiting 120 seconds, rather than 30?
+		return 120;
+	}
 
 	@Override
 	protected Void call() throws Exception
