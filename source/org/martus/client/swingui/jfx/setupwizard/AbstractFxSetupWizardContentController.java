@@ -55,11 +55,11 @@ abstract public class AbstractFxSetupWizardContentController extends ContentCont
 		return wizardNavigationHandler;
 	}
 	
-	public void nextWasPressed(ActionEvent actionEvent)
+	public void nextWasPressed(ActionEvent actionEvent) throws Exception
 	{
 	}
 	
-	public void backWasPressed(ActionEvent actionEvent)
+	public void backWasPressed(ActionEvent actionEvent) throws Exception
 	{
 	}
 	

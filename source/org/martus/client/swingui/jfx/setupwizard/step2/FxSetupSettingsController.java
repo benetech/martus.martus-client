@@ -88,7 +88,8 @@ public class FxSetupSettingsController extends FxStep2Controller
 	{
 		saveSettingsToConfigInfo();
 		boolean didFinishInitalizing = startOrStopTorPerConfigInfo();
-		//TODO is there anyway at this point to abort moving forward?
+		if(!didFinishInitalizing)
+			throw new RuntimeException("Error initializing");
 	}
 	
 	protected void saveSettingsToConfigInfo()

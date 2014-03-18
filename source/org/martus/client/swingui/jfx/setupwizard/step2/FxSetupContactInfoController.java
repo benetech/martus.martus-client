@@ -62,19 +62,11 @@ public class FxSetupContactInfoController extends FxStep2Controller
 	}
 
 	@Override
-	public void nextWasPressed(ActionEvent event) 
+	public void nextWasPressed(ActionEvent event) throws SaveConfigInfoException 
 	{
 		getConfigInfo().setAuthor(getFontHelper().getStorable(authorField.getText()));
 		getConfigInfo().setOrganization(getFontHelper().getStorable(organizationField.getText()));
-		try
-		{
-			getApp().saveConfigInfo();
-		} 
-		catch (SaveConfigInfoException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		getApp().saveConfigInfo();
 	}
 
 	private UiFontEncodingHelper getFontHelper()
