@@ -7,10 +7,10 @@
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
     <Label text="Backup Your Key" />
-    <Label text="Your Public Code is a 20-digit code generated when you created this account.You will need give it to others for them to read your bulletins and to restore youraccount in case you forget your username or password.Martus offers 2 methods of backup. You may choose either, but both is safest." wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+    <Label text="Your Public Code is a 40-digit code generated when you created this account. You will need give it to others for them to read your bulletins and to restore your account in case you forget your username or password." wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
     <Button mnemonicParsing="false" onAction="#createSingelEncryptedFile" text="Create Single, Encrypted File" GridPane.rowIndex="2" />
-    <Label text="This is easiest, but requires your usernameand password to restore your account." wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-    <Label fx:id="backupMessageLabel" text="MartusKeyPairBackup.dat created." GridPane.rowIndex="3" />
+    <Label text="This is easiest, but requires your user name and password to restore your account." wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <Label fx:id="backupMessageLabel" text="" GridPane.rowIndex="3" />
     <Label text="It is strongly recommended you at least create the single, encrypted file now." wrapText="true" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
   </children>
   <columnConstraints>
