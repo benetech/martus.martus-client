@@ -177,6 +177,9 @@ public class ClientBulletinStore extends BulletinStore
 	
 	private void createKnownFieldSpecCache()
 	{
+		if(knownFieldSpecCache != null)
+			return;
+		
 		knownFieldSpecCache = new KnownFieldSpecCache(getDatabase(), getSignatureGenerator());
 		addCache(knownFieldSpecCache);
 	}
