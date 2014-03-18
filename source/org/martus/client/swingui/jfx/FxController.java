@@ -132,6 +132,7 @@ abstract public class FxController implements Initializable
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
+			showNotifyDialog("UnexpectedError");
 		}
 	}
 	
@@ -146,6 +147,7 @@ abstract public class FxController implements Initializable
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
+			showNotifyDialog("UnexpectedError");
 		}
 		return false;
 	}
@@ -301,7 +303,7 @@ abstract public class FxController implements Initializable
 		popupStage.setScene(scene);
 	    popupStage.showAndWait();
 	    if(controller.getThrownException() != null)
-	    		throw (Exception)controller.getThrownException();
+	    	throw (Exception)controller.getThrownException();
 	}
 
 	private UiMainWindow mainWindow;
