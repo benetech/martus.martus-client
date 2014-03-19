@@ -116,9 +116,9 @@ public class FxVerifyAccountController extends FxStep1Controller
 
 			String status = "";
 			if (!nameMatches)
-				status = "Must enter the same username";
+				status = "Warning: You must enter the same username you entered on the previous screen.";
 			else if (!passwordMatches)
-				status = "Must enter the same password";
+				status = "Warning: You must enter the same password you entered on the previous screen.";
 			else
 				status = "Username and password match!";
 			
