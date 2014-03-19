@@ -92,7 +92,7 @@ public class FxSelectLanguageController extends FxStep6Controller
 			String languageName = getLocalization().getLanguageName(currentCode);
 			getLocalization().setCurrentLanguageCode(currentLanguageCode);
 			String languageNameInCurrentLanguage = getLocalization().getLanguageName(currentCode);
-			String completeLanguageNativeAndInCurrentLanguage = String.format("%s,  %s", languageName, languageNameInCurrentLanguage);
+			String completeLanguageNativeAndInCurrentLanguage = String.format("%s / %s", languageName, languageNameInCurrentLanguage);
 			if(currentCode.equals(currentLanguageCode))
 				completeLanguageNativeAndInCurrentLanguage = languageName;
 			languageChoices.add(new ChoiceItem(currentCode, completeLanguageNativeAndInCurrentLanguage));
