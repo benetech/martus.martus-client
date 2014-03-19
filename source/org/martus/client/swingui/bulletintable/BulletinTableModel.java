@@ -32,7 +32,6 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiFontEncodingHelper;
-import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;

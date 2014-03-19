@@ -32,7 +32,6 @@ import java.util.Set;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.core.ZawgyiLabelUtilities;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.ReusableChoices;
