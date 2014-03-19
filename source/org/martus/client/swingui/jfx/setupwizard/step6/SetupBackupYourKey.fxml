@@ -4,24 +4,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<BorderPane xmlns:fx="http://javafx.com/fxml">
+<top>
+<Label>Backup Your Key</Label>
+</top>
+<center>
+<VBox prefWidth="650">
   <children>
-    <Label text="Backup Your Key" />
-    <Label text="Your Public Code is a 40-digit code generated when you created this account. You will need give it to others for them to read your bulletins and to restore your account in case you forget your username or password." wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+    <Label text="Your encryption key was created when you created your account. You will want to back it up, to be able restore your account." 
+    	wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
     <Button mnemonicParsing="false" onAction="#createSingelEncryptedFile" text="Create Single, Encrypted File" GridPane.rowIndex="2" />
-    <Label text="This is easiest, but requires your user name and password to restore your account." wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <Label text="Create Single, Encrypted File (this still requires remembering your username and password to restore your account)." wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
     <Label fx:id="backupMessageLabel" text="" GridPane.rowIndex="3" />
-    <Label text="It is strongly recommended you at least create the single, encrypted file now." wrapText="true" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
   </children>
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-</GridPane>
+</VBox>
+</center>
+</BorderPane>
