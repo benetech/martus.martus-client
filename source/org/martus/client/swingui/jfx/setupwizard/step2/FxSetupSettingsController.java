@@ -81,7 +81,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 				+ "using Tor may help reach the servers. "
 				+ "Read more about Tor at: "
 				+ "<a href='https://www.torproject.org'>https://www.torproject.org</a>";
-		torDescriptionWebView.getEngine().loadContent(torDescriptionHtml);
+		torDescriptionWebView.getEngine().loadContent("<div class='wv-tor-description'>" + torDescriptionHtml + "</div>");
 		
 		try
 		{
