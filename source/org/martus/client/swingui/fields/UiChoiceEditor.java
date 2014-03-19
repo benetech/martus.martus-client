@@ -47,7 +47,6 @@ import org.martus.common.ListOfReusableChoicesLists;
 import org.martus.common.MiniLocalization;
 import org.martus.common.ReusableChoices;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.utilities.BurmeseUtilities;
 import org.martus.swing.FontHandler;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.UiLanguageDirection;

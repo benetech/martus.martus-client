@@ -38,7 +38,6 @@ import org.martus.common.GridData;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
-import org.martus.common.utilities.BurmeseUtilities;
 import org.xml.sax.SAXException;
 
 public class UiGridEditor extends UiEditableGrid 

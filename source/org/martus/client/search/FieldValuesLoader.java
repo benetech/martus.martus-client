@@ -32,7 +32,6 @@ import java.util.Vector;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.SafeReadableBulletin;
-import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;

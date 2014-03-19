@@ -47,7 +47,6 @@ import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiTextField;
 import org.martus.swing.Utilities;
-import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class UiConfigServerDlg extends JDialog implements ActionListener
 {
