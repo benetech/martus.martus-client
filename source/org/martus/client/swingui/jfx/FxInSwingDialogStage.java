@@ -25,12 +25,16 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
@@ -63,6 +67,22 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 	public void setDialog(JDialog dialogToUse)
 	{
 		dialog = dialogToUse;
+		getDialog().addWindowListener(createWindowCloseHandler());
+	}
+
+	public WindowListener createWindowCloseHandler()
+	{
+		return new DefaultWindowCloseHandler();
+	}
+	
+	class DefaultWindowCloseHandler extends WindowAdapter
+	{
+		@Override
+		public void windowClosing(WindowEvent e)
+		{
+			super.windowClosing(e);
+			close();
+		}
 	}
 	
 	public JDialog getDialog()

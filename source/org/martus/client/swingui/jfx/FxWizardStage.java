@@ -27,9 +27,9 @@ package org.martus.client.swingui.jfx;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.Stack;
 
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -104,12 +104,11 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 			getMainWindow().exitWithoutSavingState();
 		}
 	}
-	
+
 	@Override
-	public void setDialog(JDialog shellToUse)
+	public WindowListener createWindowCloseHandler()
 	{
-		super.setDialog(shellToUse);
-		shellToUse.addWindowListener(new WindowCloseHandler(getMainWindow()));
+		return new WindowCloseHandler(getMainWindow());
 	}
 	
 	public boolean checkIfCurrentServerIsAvailable()
