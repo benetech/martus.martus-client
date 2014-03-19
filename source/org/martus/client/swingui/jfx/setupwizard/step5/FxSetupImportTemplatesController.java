@@ -99,7 +99,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		templatesOverviewWebView.getEngine().loadContent("<div class='wv-templates-overview'>" + overviewHtml + "</div>");
 		try
 		{
-			String sidebarHintHtml = " You can switch form templates later inside of Martus, "
+			String sidebarHintHtml = "You can switch form templates later inside of Martus, "
 					+ "if you need one different from what you select here.";
 			getWizardStage().getWizardShellController().setSideBarHintHtml(sidebarHintHtml);
 		} 
