@@ -3,6 +3,16 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml">
+<top>
+<Label>Import Forms</Label>
+</top>
+<center>
+<VBox prefWidth="650">
+<children>
+  	<WebView fx:id="templatesOverviewWebView" prefHeight="100" />
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <columnConstraints>
@@ -28,3 +38,7 @@
       <ChoiceBox fx:id="customTemplatesChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="2" xmlns:fx="http://javafx.com/fxml" /><Label text="Martus comes with 5 generic templates. You can also download a custom template from one of your current contacts or a new contact." wrapText="true" GridPane.columnIndex="1" /><Label fx:id="selectedTemplateLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" /><Label fx:id="switchFormsLaterLabel" text="You can switch forms later" GridPane.columnIndex="1" GridPane.rowIndex="4" />
    </children>
 </GridPane>
+</children>
+</VBox>
+</center>
+</BorderPane>
