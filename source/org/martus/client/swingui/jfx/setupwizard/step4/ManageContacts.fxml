@@ -3,12 +3,25 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
 
-<VBox prefHeight="345.0" prefWidth="845.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<VBox prefHeight="445.0" prefWidth="650" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
-    <BorderPane prefHeight="345.0" prefWidth="682.0">
-      <bottom>
-        <VBox prefHeight="230.0" prefWidth="898.0" BorderPane.alignment="CENTER">
+    <Label fx:id="fxAddManageContactLabel" text="Contacts" />
+  	<WebView fx:id="contactsOverviewWebView" prefHeight="200" />
+    <BorderPane >
+      <top>
+        <HBox prefHeight="53.0" >
+          <children>
+            <Label text="Access Token:" />
+            <TextField id="" fx:id="accessTokenField" promptText="Access Token" />
+            <Separator prefWidth="38.0" />
+            <Button id="" fx:id="addContactButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addContact" prefWidth="259.0" text="Add Contact..." />
+          </children>
+        </HBox>
+      </top>
+      <center>
+        <VBox BorderPane.alignment="CENTER">
           <children>
             <TableView id="contacts-table" fx:id="contactsTable" editable="true" prefHeight="251.0" prefWidth="684.0">
               <columns>
@@ -21,23 +34,7 @@
             </TableView>
           </children>
         </VBox>
-      </bottom>
-      <top>
-        <VBox prefHeight="93.0" prefWidth="672.0">
-          <children>
-            <Label fx:id="fxAddManageContactLabel" text="Add Contacts" />
-            <Label id="fxAddManageContactsDescription" fx:id="fxAddManageContactsDescriptionLabel" prefHeight="91.0" prefWidth="640.0" text="To send bulletins to your contacts, you will need their public code. You will also want to share your public code with your contacts so they can verify your key. You can add contacts from the Martus desktop if you don't know them now." wrapText="true" />
-            <HBox prefHeight="53.0" prefWidth="839.0">
-              <children>
-                <Label text="Access Token:" />
-                <TextField id="" fx:id="accessTokenField" promptText="Access Token" />
-                <Separator prefWidth="38.0" />
-                <Button id="" fx:id="addContactButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addContact" prefWidth="259.0" text="Add Contact..." />
-              </children>
-            </HBox>
-          </children>
-        </VBox>
-      </top>
+      </center>
     </BorderPane>
   </children>
 </VBox>
