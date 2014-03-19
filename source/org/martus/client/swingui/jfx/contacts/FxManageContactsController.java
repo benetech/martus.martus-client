@@ -52,7 +52,6 @@ public class FxManageContactsController extends FxWizardAddContactsController
 		sendToByDefaultColumn.setVisible(true);
 		MartusLocalization localization = getLocalization();
 		fxAddManageContactLabel.setText(localization.getFieldLabel("ManageContacts"));
-		fxAddManageContactsDescriptionLabel.setText(localization.getFieldLabel("ManageContactsDescription"));
 		showOldPublicCodeDuringVerification();
 		addContactButton.setText(localization.getButtonLabel("AddContactFromServer"));
 	}
