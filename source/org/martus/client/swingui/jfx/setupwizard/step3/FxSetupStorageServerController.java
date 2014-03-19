@@ -31,6 +31,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.web.WebView;
 
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
@@ -54,6 +55,26 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 		destination = null;
 		getWizardNavigationHandler().getNextButton().setVisible(false);
 		defaultServerButton.setDefaultButton(true);
+		
+		String serverDescriptionHtml = "<p>Connect to the Martus server to:<ul>" +
+				"<li>Backup your documents on the Martus server in case your computer is lost or stolen</li>" + 
+				"<li>Easily retrieve the public keys of your contacts, so you can send them bulletins</li>" +
+				"<li>Import form templates from your contacts</li></ul></p>";
+		serverDescriptionWebView.getEngine().loadContent("<div class='wv-server-description'>" + serverDescriptionHtml + "</div>");
+		
+		try
+		{
+			String sidebarHintHtml = "The files you store on Martus server are completely encrypted "
+					+ "using 3072-bit key encryption. "
+					+ "This means even Martus server administrators cannot read your files.";
+			getWizardStage().getWizardShellController().setSideBarHintHtml(sidebarHintHtml);
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDialog("UnexpectedError");
+		}
+		
 	}
 
 	@Override
@@ -147,6 +168,10 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 
 	@FXML
 	private Hyperlink advancedHyperlink;
+	
+	@FXML
+	private WebView serverDescriptionWebView;
+	
 	
 	private AbstractFxSetupWizardContentController destination;
 }
