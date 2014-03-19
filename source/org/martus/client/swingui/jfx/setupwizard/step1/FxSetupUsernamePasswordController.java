@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.setupwizard.step1;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -119,6 +120,8 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 				errorMessage = "Must enter a Username.";
 			else if(!isPasswordLongEnough)
 				errorMessage = "Password must be at least 8 characters, 15 recommened.";
+			else if(areSame(candidateUserName, candidatePassword))
+				errorMessage = getLocalization().getFieldLabel("notifyPasswordMatchesUserNamecause");
 			else if(doesAccountExist)
 				errorMessage = "That account already exists.";
 
@@ -132,6 +135,12 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 		
 		getErrorLabel().setText(errorMessage);
 		getWizardNavigationHandler().getNextButton().setDisable(!canContinue);
+	}
+
+	private boolean areSame(String candidateUserName, char[] candidatePassword)
+	{
+		char[] username = candidateUserName.toCharArray();
+		return Arrays.equals(username, candidatePassword);
 	}
 
 	public class LoginChangeHandler implements ChangeListener<String>
