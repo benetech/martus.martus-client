@@ -241,7 +241,7 @@ public class EnglishStrings
 "wintitle:notifyContactKeyAlreadyExists=Contact Account Already Exists",
 "field:notifyContactKeyAlreadyExistscause=You have already added this contact.",
 "wintitle:notifyUnableToRetrieveContactFromServer=Unable To Retrieve Contact Info",
-"field:notifyUnableToRetrieveContactFromServercause=We were unable to retrieve the contact information from the server for this token.  A Martus server may be temporarily down, please try again later.",
+"field:notifyUnableToRetrieveContactFromServercause=This token is not recognized by this server.",
 
 "wintitle:notifyTemplateSavedToServer=Save Template To Server",
 "field:notifyTemplateSavedToServercause=Successfully saved form template to your account on the server.",
