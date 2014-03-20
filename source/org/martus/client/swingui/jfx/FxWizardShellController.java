@@ -31,8 +31,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
@@ -49,8 +47,6 @@ abstract public class FxWizardShellController extends ShellController implements
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		
-		sidebarHints.setVisible(false);
 	}
 	
 	private FxWizardStage getWizardStage()
@@ -114,15 +110,6 @@ abstract public class FxWizardShellController extends ShellController implements
 		contentNavigationHandler.setNavigationHandler(this);
 	}
 	
-	public void setSideBarHintHtml(String hintText) throws Exception
-	{
-		WebEngine engine = sidebarHints.getEngine();
-		URL cssUrl = getScene().getBestCssLocation();
-		engine.setUserStyleSheetLocation(cssUrl.toExternalForm());
-		engine.loadContent("<div class='wv-sidebar-hint'>" + hintText + "</div>");
-		sidebarHints.setVisible(true);
-	}
-
 	private WizardNavigationHandlerInterface getContentNavigationHandler()
 	{
 		return contentNavigationHandler;
@@ -134,8 +121,5 @@ abstract public class FxWizardShellController extends ShellController implements
 	@FXML
 	protected Button backButton;
 	
-	@FXML
-	protected WebView sidebarHints;
-
 	private WizardNavigationHandlerInterface contentNavigationHandler;
 }

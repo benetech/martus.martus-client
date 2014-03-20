@@ -91,18 +91,8 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		switchFormsLaterLabel.setVisible(false);
 		safelyInitializeCustomTemplateRadioVisibility();
 		getWizardNavigationHandler().getNextButton().addEventHandler(ActionEvent.ACTION, new NextButtonHandler());
-
-		try
-		{
-			String sidebarHintHtml = "You can switch form templates later inside of Martus, "
-					+ "if you need one different from what you select here.";
-			getWizardStage().getWizardShellController().setSideBarHintHtml(sidebarHintHtml);
-		} 
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-			showNotifyDialog(getWizardStage(), "UnexpectedError");
-		}
+		
+		getWizardNavigationHandler().setNodeVisible("sidebarHintTemplates");
 	}
 
 	private void safelyInitializeCustomTemplateRadioVisibility()
@@ -353,6 +343,9 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	
 	@FXML
 	private Label selectedTemplateLabel;
+	
+	@FXML
+	private Label sidebarHintTemplates;
 	
 	protected CustomFieldTemplate selectedFormTemplateToSave;
 }

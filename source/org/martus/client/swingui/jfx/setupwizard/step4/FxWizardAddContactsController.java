@@ -103,20 +103,8 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		loadExistingContactData();
 		updateAddContactButtonState();
 		accessTokenField.textProperty().addListener(new AccessTokenChangeHandler());
-		try
-		{
-			String sidebarHintHtml = " If someone wishes to send you information, "
-					+ "provide them with your access code and public code. "
-					+ "Once you have completed this wizard, "
-					+ "you will be able to get your 7-digit access code, "
-					+ "and public code, to share with others.";
-			getWizardStage().getWizardShellController().setSideBarHintHtml(sidebarHintHtml);
-		} 
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-			showNotifyDialog(getWizardStage(), "UnexpectedError");
-		}
+		
+		getWizardNavigationHandler().setNodeVisible("sidebarHintContacts");
 	}
 
 	protected void removeContactFromTable(ContactsTableData contactData)
@@ -657,6 +645,9 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	
 	@FXML
 	protected Label fxAddManageContactsDescriptionLabel;
+	
+	@FXML
+	protected Label sidebarHintContacts;
 	
 	protected ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
 	
