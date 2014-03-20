@@ -37,7 +37,7 @@
 			</VBox>			    
 		</center>
 		<bottom>
-			<WebView fx:id="rememberPasswordHint" prefHeight="200" maxHeight="200" maxWidth="600" />
+			<Label text="When creating a user name and password, please be aware there is no way to retrieve your username and password if you forget it. This is for your safety. Note: later in this wizard, you will be led through a key backup process, that will help mitigate this situation." prefHeight="200" maxHeight="200" maxWidth="600" wrapText="true"/>
 		</bottom>
 	</BorderPane>
   </children>
