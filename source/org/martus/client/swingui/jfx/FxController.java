@@ -40,7 +40,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
@@ -310,12 +309,6 @@ abstract public class FxController implements Initializable
 		File fxmlDir = getApp().getFxmlDirectory();
 		URL css = FxController.getBestFile(fxmlDir, "popup.css");
 		scene.getStylesheets().add(css.toExternalForm());
-		popupStage.setResizable(false);
-		popupStage.initStyle(StageStyle.UNDECORATED);
-		popupStage.setWidth(wizardPanel.getDialog().getWidth());
-		popupStage.setHeight(wizardPanel.getDialog().getHeight());
-		popupStage.setX(wizardPanel.getDialog().getLocation().getX());
-		popupStage.setY(wizardPanel.getDialog().getLocation().getY());
 		popupStage.setScene(scene);
 	    popupStage.showAndWait();
 	    if(controller.getThrownException() != null)
