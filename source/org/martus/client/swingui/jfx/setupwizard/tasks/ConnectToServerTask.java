@@ -55,7 +55,7 @@ public class ConnectToServerTask extends ServerCallTask
 	@Override
 	public int getMaxSeconds()
 	{
-		return getInterface().getTimeoutSecondsForGetServerInfo();
+		return getInterface().getTimeoutSecondsForGetServerInfo() * 2;
 	}
 
 	@Override
