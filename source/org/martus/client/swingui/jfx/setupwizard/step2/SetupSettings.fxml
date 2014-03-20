@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <children><BorderPane>
+<top><Label text="Settings" BorderPane.alignment="TOP_LEFT" />
+</top>
+<center><VBox BorderPane.alignment="CENTER">
+<children>
+  <VBox styleClass="tor-settings-box">
+    <Label text="Tor Settings" />
+	<Label text="In this section, set the Martus system defaults for your use of Tor and for date formatting." />
+	<WebView fx:id="torDescriptionWebView" prefWidth="564" prefHeight="100"/>
+    <CheckBox fx:id="userTorCheckBox" mnemonicParsing="false" text="Use Tor" />
+  </VBox>
+  <VBox styleClass="date-settings-box">
+    <Label text="Date Settings" />
+    <GridPane layoutY="200.0" xmlns:fx="http://javafx.com/fxml">
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" />
+        <ColumnConstraints hgrow="SOMETIMES" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+      
+      <children>
+        <Label layoutX="5.0" layoutY="296.0" text="Date format sequence" />
+        <ChoiceBox fx:id="dateFormatSequenceDropDown" layoutX="166.0" layoutY="304.0" GridPane.columnIndex="1" xmlns:fx="http://javafx.com/fxml" />
+        <ChoiceBox fx:id="dateDelimeterComboBox" layoutX="150.0" layoutY="283.0" GridPane.columnIndex="1" GridPane.rowIndex="1" xmlns:fx="http://javafx.com/fxml" />
+        <Label layoutX="52.0" layoutY="309.0" text="Date delimeter" GridPane.rowIndex="1" />
+      </children>
+    </GridPane>
+  </VBox>
+</children></VBox>
+</center></BorderPane>
+  </children>
+</AnchorPane>
