@@ -156,7 +156,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	{
 		if(contactAccountId.equals(getApp().getAccountId()))
 		{
-			showNotifyDialog(getWizardStage(), "ContactKeyIsOurself");
+			showNotifyDialog(getStage(), "ContactKeyIsOurself");
 			return;
 		}
 		String contactPublicCode = MartusSecurity.computeFormattedPublicCode40(contactAccountId);
@@ -178,7 +178,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	{
 		String contactsName = getContactsNameInTable(contactPublicCode);
 		String contactExistsWithName = TokenReplacement.replaceToken(getLocalization().getFieldLabel("ContactAlreadyExistsAs"), "#Name#", contactsName);
-		showNotifyDialog(getWizardStage(), "ContactKeyAlreadyExists", contactExistsWithName);
+		showNotifyDialog(getStage(), "ContactKeyAlreadyExists", contactExistsWithName);
 	}
 
 	protected boolean DoesContactAlreadyExistInTable(String contactPublicCode)
@@ -212,7 +212,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			if(verifyOnly)
 				popupController.setVerificationOnly();
 			popupController.showOldPublicCode(showOldPublicCode);
-			showControllerInsideModalDialog(getWizardStage(), popupController);
+			showControllerInsideModalDialog(getStage(), popupController);
 			if(popupController.hasContactBeenAccepted())
 			{
 				int verification = popupController.getVerification();
@@ -346,13 +346,13 @@ public class FxWizardAddContactsController extends FxStep4Controller
 					try
 					{
 						String confirmationMessage = TokenReplacement.replaceTokens(localization.getFieldLabel("RemoveContactLabel"), map);
-						if(showConfirmationDialog(getWizardStage(), localization.getWindowTitle("RemoveContact"), confirmationMessage))
+						if(showConfirmationDialog(getStage(), localization.getWindowTitle("RemoveContact"), confirmationMessage))
 							removeContactFromTable(contactData);
 					} 
 					catch (TokenInvalidException e)
 					{
 						MartusLogger.logException(e);
-						showNotifyDialog(getWizardStage(), "UnexpectedError");
+						showNotifyDialog(getStage(), "UnexpectedError");
 					}
 				}
 			}

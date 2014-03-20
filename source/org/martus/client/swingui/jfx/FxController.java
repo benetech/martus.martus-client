@@ -142,7 +142,7 @@ abstract public class FxController implements Initializable
 		}
 	}
 	
-	public boolean showConfirmationDialog(FxWizardStage wizardPanel, String title, String message)
+	public boolean showConfirmationDialog(FxInSwingDialogStage wizardPanel, String title, String message)
 	{
 		try
 		{
