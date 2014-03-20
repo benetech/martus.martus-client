@@ -3,7 +3,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.web.*?>
 
 <AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <children>
@@ -12,7 +11,7 @@
 	<center>
     <VBox>
       <children>
-		<WebView fx:id="serverDescriptionWebView" prefWidth="564" prefHeight="150" />
+		<Label text="Connect to the Martus server to:" wrapText="true" /><Label text="- Backup your documents on the Martus server in case your computer is lost or stolen" wrapText="true" /><Label text="- Easily retrieve the public keys of your contacts, so you can send them bulletins" wrapText="true" /><Label text="- Import form templates from your contacts" wrapText="true" />
 		<GridPane>
 		  <columnConstraints>
 		    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
