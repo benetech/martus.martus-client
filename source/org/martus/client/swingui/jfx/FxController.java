@@ -123,15 +123,21 @@ abstract public class FxController implements Initializable
 
 	public void showNotifyDialog(String baseTag, String extraMessage)
 	{
+		++notifyDialogDepth;
 		try
 		{
 			PopupNotifyController popupController = new PopupNotifyController(getMainWindow(), baseTag);
 			popupController.setExtraMessage(extraMessage);
 			showControllerInsideModalDialog(popupController);
+			--notifyDialogDepth;
 		} 
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
+			if(notifyDialogDepth > 3)
+			{
+				getMainWindow().exitWithoutSavingState();
+			}
 			showNotifyDialog("UnexpectedError");
 		}
 	}
@@ -300,6 +306,9 @@ abstract public class FxController implements Initializable
 		Parent root = fl.getRoot();
 
 		Scene scene = new Scene(root);
+		File fxmlDir = getApp().getFxmlDirectory();
+		URL css = FxController.getBestFile(fxmlDir, "popup.css");
+		scene.getStylesheets().add(css.toExternalForm());
 		popupStage.setScene(scene);
 	    popupStage.showAndWait();
 	    if(controller.getThrownException() != null)
@@ -307,4 +316,5 @@ abstract public class FxController implements Initializable
 	}
 
 	private UiMainWindow mainWindow;
+	private static int notifyDialogDepth;
 }
