@@ -48,7 +48,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.web.WebView;
 import javafx.util.Callback;
 
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
@@ -104,15 +103,6 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		loadExistingContactData();
 		updateAddContactButtonState();
 		accessTokenField.textProperty().addListener(new AccessTokenChangeHandler());
-		
-		String overviewHtml = "<p>To send information through Martus to your contacts, "
-				+ "you need their public key. "
-				+ "You can pull their public keys off of the Martus server using their 7 digit access token. "
-				+ "You can verify that you have pulled the correct key, by using their key's public code. </p>"
-				+ "<p>Ask your contacts for the access token, and public code to add your contacts here. "
-				+ "If you do not have this information now, "
-				+ "you will be able to add contacts later from the Martus desktop client. </p>";
-		contactsOverviewWebView.getEngine().loadContent("<div class='wv-contacts-overview'>" + overviewHtml + "</div>");
 		try
 		{
 			String sidebarHintHtml = " If someone wishes to send you information, "
@@ -667,9 +657,6 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	
 	@FXML
 	protected Label fxAddManageContactsDescriptionLabel;
-	
-	@FXML
-	protected WebView contactsOverviewWebView;
 	
 	protected ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
 	
