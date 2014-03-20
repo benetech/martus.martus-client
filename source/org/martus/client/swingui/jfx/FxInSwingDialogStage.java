@@ -34,7 +34,6 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;

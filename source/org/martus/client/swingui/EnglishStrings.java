@@ -1559,19 +1559,6 @@ public class EnglishStrings
 "field:ExportProgress=Exporting",
 "field:ImportExportBulletinTitle=Bulletin",
 "field:DataIsHidden=(Press the + button to show the hidden information)",
-"field:CreateAccountTipsHtml=<p>UserName Tips:<ul> " +
-		"<li>Your User Name can contain letters, numbers, punctuation and spaces.</li>" +
-		"<li>It should have between 8-50 characters, and it is case sensitive. " +
-		"<li>Remember to choose a username you can remember.</li>" +
-		"</ul></p>" +
-		"<p>Password Tips:<ul>" + 
-		"<li>Do not use your username</li>" +
-		"<li>Do not use a single dictionary word</li>" +
-		"<li>Use at at least 15 characters for most security (8 are required)</li>" +
-		"<li>Use a combination of alphabet characters, numbers, and special characters (such as !@#$%^&*).</li>" +
-		"<li>Use a combination of uppercase (capital) and lowercase characters if you use a case-sensitive language. </li>" +
-		"</ul></p>",
-"field:RememberPasswordTipsHtml=When creating a user name and password, please be aware there is no way to retrieve your username and password if you forget it. This is for your safety. Note: later in this wizard, you will be led through a key backup process, that will help mitigate this situation.",
 "field:LoadingFieldValuesFromAllBulletins=Processing bulletin",
 "field:LoadingFieldValuesFromAllBulletinsExplanation=Scanning all bulletins to create a list of all the values in #FieldName#",
 
