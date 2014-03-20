@@ -69,7 +69,7 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("UnexpectedError");
+			showNotifyDialog(getWizardStage(), "UnexpectedError");
 		}
 		
 		try
@@ -82,7 +82,7 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("UnexpectedError");
+			showNotifyDialog(getWizardStage(), "UnexpectedError");
 		}
 	}
 

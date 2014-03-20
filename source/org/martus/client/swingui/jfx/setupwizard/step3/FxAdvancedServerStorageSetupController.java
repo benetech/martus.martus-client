@@ -98,7 +98,7 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 			String ip = ipAddressField.getText();
 			
 			GetServerPublicKeyTask task = new GetServerPublicKeyTask(getApp(), ip);
-			showTimeoutDialog("*Connecting*", "Getting server information", task);
+			showTimeoutDialog(getWizardStage(), "*Connecting*", "Getting server information", task);
 			
 			String serverKey = task.getPublicKey();
 			String serverPublicCode = MartusCrypto.computePublicCode(serverKey);
@@ -121,17 +121,17 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 		catch (SaveConfigInfoException e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("ErrorSavingFile");
+			showNotifyDialog(getWizardStage(), "ErrorSavingFile");
 		}
 		catch (ServerNotAvailableException e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("ServerNotAvailable");
+			showNotifyDialog(getWizardStage(), "ServerNotAvailable");
 		}
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("UnexpectedError");
+			showNotifyDialog(getWizardStage(), "UnexpectedError");
 		}
 
 		updateButtonStates();
@@ -180,7 +180,7 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 	
 	private void showError(String text)
 	{
-		showNotifyDialog(text);
+		showNotifyDialog(getWizardStage(), text);
 	}
 
 	@FXML

@@ -94,7 +94,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("UnexpectedError");
+			showNotifyDialog(getWizardStage(), "UnexpectedError");
 		}
 	}
 
@@ -141,7 +141,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 		TorInitializationTask task = new TorInitializationTask(getApp());
 		try
 		{
-			showProgressDialog("*Initalizing Tor*", "Setting Up Tor", task);
+			showProgressDialog(getWizardStage(), "*Initalizing Tor*", "Setting Up Tor", task);
 		}
 		catch (UserCancelledException e)
 		{
@@ -150,7 +150,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("UnexpectedError");
+			showNotifyDialog(getWizardStage(), "UnexpectedError");
 		}
 		return true;
 	}

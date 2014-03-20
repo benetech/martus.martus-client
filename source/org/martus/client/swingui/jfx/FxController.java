@@ -40,6 +40,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
@@ -115,20 +116,20 @@ abstract public class FxController implements Initializable
 		return getMainWindow().getApp();
 	}
 	
-	public void showNotifyDialog(String baseTag)
+	public void showNotifyDialog(FxWizardStage wizardPanel, String baseTag)
 	{
 		String extraMessage = "";
-		showNotifyDialog(baseTag, extraMessage);
+		showNotifyDialog(wizardPanel, baseTag, extraMessage);
 	}
 
-	public void showNotifyDialog(String baseTag, String extraMessage)
+	public void showNotifyDialog(FxWizardStage wizardPanel, String baseTag, String extraMessage)
 	{
 		++notifyDialogDepth;
 		try
 		{
 			PopupNotifyController popupController = new PopupNotifyController(getMainWindow(), baseTag);
 			popupController.setExtraMessage(extraMessage);
-			showControllerInsideModalDialog(popupController);
+			showControllerInsideModalDialog(wizardPanel, popupController);
 			--notifyDialogDepth;
 		} 
 		catch (Exception e)
@@ -138,44 +139,44 @@ abstract public class FxController implements Initializable
 			{
 				getMainWindow().exitWithoutSavingState();
 			}
-			showNotifyDialog("UnexpectedError");
+			showNotifyDialog(wizardPanel, "UnexpectedError");
 		}
 	}
 	
-	public boolean showConfirmationDialog(String title, String message)
+	public boolean showConfirmationDialog(FxWizardStage wizardPanel, String title, String message)
 	{
 		try
 		{
 			PopupConfirmationController popupController = new PopupConfirmationController(getMainWindow(), title, message);
-			showControllerInsideModalDialog(popupController);
+			showControllerInsideModalDialog(wizardPanel, popupController);
 			return popupController.wasYesPressed();
 		} 
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("UnexpectedError");
+			showNotifyDialog(wizardPanel, "UnexpectedError");
 		}
 		return false;
 	}
 	
-	public void showBusyDialog(String title, String message, Task task) throws Exception
+	public void showBusyDialog(String title, String message, Task task, FxWizardStage wizardPanel) throws Exception
 	{
 		FxPopupController popupController = new FxBusyController(getMainWindow(), title, message, task);
-		showControllerInsideModalDialog(popupController);
+		showControllerInsideModalDialog(wizardPanel, popupController);
 	}
 
-	public void showTimeoutDialog(String title, String message, TaskWithTimeout task) throws Exception
+	public void showTimeoutDialog(FxWizardStage wizardPanel, String title, String message, TaskWithTimeout task) throws Exception
 	{
 		FxTimeoutController popupController = new FxTimeoutController(getMainWindow(), title, message, task, task.getMaxSeconds());
-		showControllerInsideModalDialog(popupController);
+		showControllerInsideModalDialog(wizardPanel, popupController);
 		if(popupController.didUserCancel())
 			throw new UserCancelledException();
 	}
 
-	public void showProgressDialog(String title, String message, AbstractAppTask task) throws Exception
+	public void showProgressDialog(FxWizardStage wizardPanel, String title, String message, AbstractAppTask task) throws Exception
 	{
 		FxProgressController popupController = new FxProgressController(getMainWindow(), title, message, task);
-		showControllerInsideModalDialog(popupController);
+		showControllerInsideModalDialog(wizardPanel, popupController);
 		if(popupController.didUserCancel())
 			throw new UserCancelledException();
 	}
@@ -293,7 +294,7 @@ abstract public class FxController implements Initializable
 		private boolean yesWasPressed;
 	}
 	
-	public void showControllerInsideModalDialog(FxPopupController controller) throws Exception
+	public void showControllerInsideModalDialog(FxWizardStage wizardPanel, FxPopupController controller) throws Exception
 	{
 		Stage popupStage = new Stage();
 		controller.setStage(popupStage);
@@ -309,6 +310,12 @@ abstract public class FxController implements Initializable
 		File fxmlDir = getApp().getFxmlDirectory();
 		URL css = FxController.getBestFile(fxmlDir, "popup.css");
 		scene.getStylesheets().add(css.toExternalForm());
+		popupStage.setResizable(false);
+		popupStage.initStyle(StageStyle.UNDECORATED);
+		popupStage.setWidth(wizardPanel.getDialog().getWidth());
+		popupStage.setHeight(wizardPanel.getDialog().getHeight());
+		popupStage.setX(wizardPanel.getDialog().getLocation().getX());
+		popupStage.setY(wizardPanel.getDialog().getLocation().getY());
 		popupStage.setScene(scene);
 	    popupStage.showAndWait();
 	    if(controller.getThrownException() != null)

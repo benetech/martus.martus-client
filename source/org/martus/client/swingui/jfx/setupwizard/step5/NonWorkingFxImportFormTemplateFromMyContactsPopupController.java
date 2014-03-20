@@ -51,6 +51,7 @@ import javafx.util.Callback;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxBindingHelpers;
 import org.martus.client.swingui.jfx.FxRadioButtonCellFactory;
+import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.ContactsWithTemplatesTableData;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
@@ -62,9 +63,9 @@ import org.martus.util.TokenReplacement;
 
 public class NonWorkingFxImportFormTemplateFromMyContactsPopupController extends AbstractFxImportFormTemplateController implements Initializable
 {
-	public NonWorkingFxImportFormTemplateFromMyContactsPopupController(UiMainWindow mainWindowToUse)
+	public NonWorkingFxImportFormTemplateFromMyContactsPopupController(UiMainWindow mainWindowToUse, FxWizardStage wizardPanelToUse)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, wizardPanelToUse);
 	}
 	
 	@Override

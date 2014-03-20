@@ -72,7 +72,7 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("UnexpectedError");
+			showNotifyDialog(getWizardStage(), "UnexpectedError");
 		}
 		
 	}
@@ -103,7 +103,7 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("UnexpectedError");
+			showNotifyDialog(getWizardStage(), "UnexpectedError");
 			return this;
 		}
 	}
@@ -118,7 +118,7 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 		catch (SaveConfigInfoException e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("ErrorSavingConfig");
+			showNotifyDialog(getWizardStage(), "ErrorSavingConfig");
 		}
 		getWizardStage().next();
 	}

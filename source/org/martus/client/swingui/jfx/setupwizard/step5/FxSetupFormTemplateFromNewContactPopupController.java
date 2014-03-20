@@ -40,6 +40,7 @@ import javafx.scene.control.TextField;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.AccessTokenChangeHandler;
 import org.martus.common.ContactKey;
 import org.martus.common.Exceptions.ServerNotAvailableException;
@@ -51,9 +52,9 @@ import org.martus.util.TokenReplacement;
 
 public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFxImportFormTemplateController implements Initializable
 {
-	public FxSetupFormTemplateFromNewContactPopupController(UiMainWindow mainWindowToUse)
+	public FxSetupFormTemplateFromNewContactPopupController(UiMainWindow mainWindowToUse, FxWizardStage wizardPanelToUse)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, wizardPanelToUse);
 	}
 	
 	@Override
@@ -88,7 +89,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 			String contactAccountId = app.getMartusAccountIdFromAccessTokenOnServer(token);
 			if(contactAccountId.equals(app.getAccountId()))
 			{
-				showNotifyDialog("ContactKeyIsOurself");
+				showNotifyDialog(getWizardStage(), "ContactKeyIsOurself");
 				return;
 			}
 			
@@ -111,16 +112,16 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 		} 
 		catch (ServerNotAvailableException e)
 		{
-			showNotifyDialog("ContactsNoServer");
+			showNotifyDialog(getWizardStage(), "ContactsNoServer");
 		} 
 		catch (TokenNotFoundException e)
 		{
-			showNotifyDialog("UnableToRetrieveContactFromServer");
+			showNotifyDialog(getWizardStage(), "UnableToRetrieveContactFromServer");
 		} 
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("UnexpectedError");
+			showNotifyDialog(getWizardStage(), "UnexpectedError");
 		} 
 	}
 
