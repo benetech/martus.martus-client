@@ -2395,6 +2395,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		statusBar = new UiStatusBar(getLocalization());		
 		getTransport().setProgressMeter(statusBar.getTorProgressMeter());
 		getContentPane().add(statusBar, BorderLayout.SOUTH ); 
+		// NOTE: re-start Tor here in case it was turned on in the wizard
+		getApp().startOrStopTorAsRequested();
 		
 		MartusLogger.logEndProcess("Initializing views");
 
