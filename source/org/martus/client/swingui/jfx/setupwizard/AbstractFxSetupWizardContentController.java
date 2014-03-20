@@ -85,10 +85,10 @@ abstract public class AbstractFxSetupWizardContentController extends ContentCont
 		
 		IsAvailableServerCompliantTask task = new IsAvailableServerCompliantTask(getApp());
 		showTimeoutDialog(getWizardStage(), "*Connecting*", "Attempting to connect to server", task);
-		boolean isDefaultServerAvailable = task.isAvailable();
-		getWizardStage().setCurrentServerIsAvailable(isDefaultServerAvailable);
+		boolean isServerAvailable = task.isAvailable();
+		getWizardStage().setCurrentServerIsAvailable(isServerAvailable);
 		
-		return isDefaultServerAvailable;
+		return isServerAvailable;
 	}
 	
 	private WizardNavigationButtonsInterface wizardNavigationHandler;
