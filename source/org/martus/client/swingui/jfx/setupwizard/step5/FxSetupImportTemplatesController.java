@@ -42,7 +42,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.web.WebView;
 import javafx.util.StringConverter;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -93,10 +92,6 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		safelyInitializeCustomTemplateRadioVisibility();
 		getWizardNavigationHandler().getNextButton().addEventHandler(ActionEvent.ACTION, new NextButtonHandler());
 
-		String overviewHtml = "Martus allows you to create and share custom forms. Get started by selecting a form template. "
-				+ "Martus comes with 5 generic templates. "
-				+ "You can also download a custom template from one of your current contacts or a new contact. ";
-		templatesOverviewWebView.getEngine().loadContent("<div class='wv-templates-overview'>" + overviewHtml + "</div>");
 		try
 		{
 			String sidebarHintHtml = "You can switch form templates later inside of Martus, "
@@ -358,9 +353,6 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	
 	@FXML
 	private Label selectedTemplateLabel;
-	
-	@FXML
-	private WebView templatesOverviewWebView;
 	
 	protected CustomFieldTemplate selectedFormTemplateToSave;
 }
