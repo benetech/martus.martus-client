@@ -150,6 +150,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
+			showNotifyDialog("UnexpectedError");
 		}
 		return true;
 	}
