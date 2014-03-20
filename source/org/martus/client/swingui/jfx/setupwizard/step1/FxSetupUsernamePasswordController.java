@@ -106,6 +106,7 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 		boolean hasUserName;
 		boolean isPasswordLongEnough;
 		boolean doesAccountExist;
+		boolean usernameSameAsPassword;
 		try
 		{
 			String candidateUserName = getUserName().getText();
@@ -115,17 +116,18 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 			isPasswordLongEnough = (candidatePassword.length >= MartusUserNameAndPassword.BASIC_PASSWORD_LENGTH);
 
 			doesAccountExist = getApp().doesAccountExist(candidateUserName, candidatePassword);
+			usernameSameAsPassword = areSame(candidateUserName, candidatePassword);
 
 			if (!hasUserName)
 				errorMessage = "Must enter a Username.";
 			else if(!isPasswordLongEnough)
 				errorMessage = "Password must be at least 8 characters, 15 recommened.";
-			else if(areSame(candidateUserName, candidatePassword))
+			else if(usernameSameAsPassword)
 				errorMessage = getLocalization().getFieldLabel("notifyPasswordMatchesUserNamecause");
 			else if(doesAccountExist)
 				errorMessage = "That account already exists.";
 
-			canContinue = hasUserName && isPasswordLongEnough && !doesAccountExist;
+			canContinue = hasUserName && isPasswordLongEnough && !doesAccountExist && !usernameSameAsPassword;
 		} 
 		catch (Exception e)
 		{
