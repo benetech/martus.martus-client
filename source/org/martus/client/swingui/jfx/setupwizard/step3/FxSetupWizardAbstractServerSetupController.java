@@ -58,7 +58,9 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 				//FIXME put in real text/title here.
 				if(showConfirmationDialog(getWizardStage(), "title", "SSL Not responding.  Save this configuration?"))
 				{
+					//FIXME since the task throws server not found, can this code ever even be hit?
 					saveServerConfig(serverIPAddress, serverPublicKey, "");
+					getWizardStage().setCurrentServerIsAvailable(false);
 					return true;
 				}
 			}
@@ -69,6 +71,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 				{
 					showNotifyDialog(getWizardStage(), "ServerComplianceFailed");
 					saveServerConfig(serverIPAddress, serverPublicKey, "");
+					getWizardStage().setCurrentServerIsAvailable(false);
 					return true;
 				}
 				
@@ -86,6 +89,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 						getApp().setServerInfo("","","");
 					}
 
+					getWizardStage().setCurrentServerIsAvailable(false);
 					return false;
 				}
 			}
@@ -98,6 +102,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 			app.getStore().clearOnServerLists();
 			getMainWindow().repaint();
 			getMainWindow().setStatusMessageReady();
+			getWizardStage().setCurrentServerIsAvailable(true);
 			return true;
 		}
 		catch(UserCancelledException e)
@@ -108,18 +113,21 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		{
 			MartusLogger.logException(e);
 			showNotifyDialog(getWizardStage(), "ErrorSavingConfig");
+			getWizardStage().setCurrentServerIsAvailable(false);
 			return false;
 		}
 		catch(ServerNotAvailableException e)
 		{
 			MartusLogger.logException(e);
 			showNotifyDialog(getWizardStage(), "ErrorServerOffline");
+			getWizardStage().setCurrentServerIsAvailable(false);
 			return false;
 		}
 		catch(Exception e)
 		{
 			MartusLogger.logException(e);
 			showNotifyDialog(getWizardStage(), "ErrorGettingCompliance");
+			getWizardStage().setCurrentServerIsAvailable(false);
 			return false;
 		} 
 	}
