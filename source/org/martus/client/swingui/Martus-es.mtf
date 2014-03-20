@@ -35,7 +35,7 @@
 -8a69-button:ConfigureHQsReLabel=Cambiar título
 
 #______________________________=Remove
--e963-button:ConfigureHQsRemove=Remover
+-e963-button:ConfigureHQsRemove=Eliminar
 
 #___________________________________=View
 -69bd-button:ConfigurePublicKeysView=Ver
@@ -170,7 +170,7 @@
 -d7da-button:RecoverAccountTab=Restaurar cuenta
 
 #_________________________________=Remove
--e963-button:RemoveFieldFromReport=Remover
+-e963-button:RemoveFieldFromReport=Eliminar
 
 #_________________________=Reset Contents
 -6f62-button:ResetContents=Revertir contenido
@@ -923,7 +923,7 @@
 -23dc-field:QuickEraseWillExitMartus=Salir de Martus al terminar.
 
 #_______________________________________=This will NOT remove any bulletins from the server, any Martus files copied outside of the Martus directory, or any of your bulletins or Martus files on another computer.
--8ee9-field:QuickEraseWillNotRemoveItems=Esto NO removerá ningún boletín del servidor, archivos que haya copiado fuera de la carpeta de Martus, o sus archivos y boletines de Martus que esten en otra computadora.
+-8ee9-field:QuickEraseWillNotRemoveItems=Esto NO eliminará ningún boletín del servidor, archivos que haya copiado fuera de la carpeta de Martus, o sus archivos y boletines de Martus que esten en otra computadora.
 
 #____________________________________=Delete your Martus key, bulletins, folders, and configuration information (such as your Headquarters, server, and custom field settings).
 -cf3b-field:QuickEraseWillRemoveItems=Elimine su archivo de llaves, boletines, carpetas y configuración (tal como cuentas de oficinas centrales, servidores y campos personalizados).
@@ -953,7 +953,7 @@
 -2001-field:RemoveMartusWillUninstall=Desinstalar el programa Martus.
 
 #_____________________________=The following server will be removed:
--5316-field:RemoveServerLabel1=El siguiente servidor va a ser removido:
+-5316-field:RemoveServerLabel1=El siguiente servidor va a ser eliminado:
 
 #_____________________________=Are you sure you want to do this?
 -bfb8-field:RemoveServerLabel2=¿Está seguro que quiere hacer esto?
@@ -1241,7 +1241,7 @@
 -9054-field:confirmAddingPermissionsToBulletinsCanceleffect=Si hace esto, los boletines que ya han sido tratados tendrán el nuevo acceso de la cuenta de oficina central, pero otros boletines seleccionados no lo tendrán.
 
 #_______________________________________________=Save your password encrypted key backup file to a single floppy disk or other removable media.  Then store this disk in a safe place. You will use this disk, with your username and password, to restore your data if your system files are ever damaged.  To restore this password-protected key in the future, select 'Restore Account' and 'Restore account from backup key file' when signing into Martus.
--e692-field:confirmBackupKeyPairInformationcause=Guarde la copia de seguridad cifrada de su llave con su contraseña a un medio removible, como un disquete. Guarde el medio removible en un lugar seguro. Va a necesitar este disco y su nombre de usuario y contraseña, para restaurar su cuenta de Martus e información en caso de que su computadorao su contenido sea dañado. Para restaurar su cuenta de esta copia de seguridad, elija 'Restaurar cuenta' y luego 'Restaurar cuenta de una copia de seguridad de su llave ' al iniciar Martus.
+-e692-field:confirmBackupKeyPairInformationcause=Guarde la copia de seguridad cifrada de su llave con su contraseña a un medio removible, como un disquete. Guarde el medio removible en un lugar seguro. Va a necesitar este disco y su nombre de usuario y contraseña, para restaurar su cuenta de Martus e información en caso de que su computadora o su contenido sea dañado. Para restaurar su cuenta de esta copia de seguridad, elija 'Restaurar cuenta' y luego 'Restaurar cuenta de una copia de seguridad de su llave ' al iniciar Martus.
 
 #________________________________________________=Choosing Yes will begin the backup process.
 -0b47-field:confirmBackupKeyPairInformationeffect=Oprima Sí para iniciar la copia de seguridad
@@ -1295,7 +1295,7 @@
 -5b61-field:confirmCancelShareVerifyeffect=Oprima Sí para salir del proceso de verificación.
 
 #_________________________________________=You have chosen to remove the selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  New versions of sealed bulletins will not be able to be viewed by the removed Headquarters, but any old versions of sealed bulletins that already are on a Headquarters' computer will still be viewable by the Headquarters.
--0004-field:confirmClearHQInformationcause=Ha elegido eleminar las cuentas de oficinas centrales seleccionadas. Cualquier boletín guardado existente aún será visible por las antiguas oficinas centrales. Si quiere desautorizar para las oficinas centrales el acceso a visionado de borradores de boletines previamente creados, estos deben ser re-guardados después de revocar las oficinas centrales. Las nuevas versiones de boletines sellados no podrán verse por las oficinas centrales eliminadas, pero cualquier versión antigua de boletines sellados que ya estén en las máquinas de las oficinas centrales, aún serán visibles por estos.
+-0004-field:confirmClearHQInformationcause=Ha elegido eliminar las cuentas de oficinas centrales seleccionadas. Cualquier boletín guardado existente aún será visible por las antiguas oficinas centrales. Si quiere desautorizar para las oficinas centrales el acceso a visionado de borradores de boletines previamente creados, estos deben ser re-guardados después de revocar las oficinas centrales. Las nuevas versiones de boletines sellados no podrán verse por las oficinas centrales eliminadas, pero cualquier versión antigua de boletines sellados que ya estén en las máquinas de las oficinas centrales, aún serán visibles por estos.
 
 #__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
 -4a87-field:confirmClearHQInformationeffect=Al oprimir Sí, los boletines que selle o borradores que guarde en el futuro no podrán ser vistos por la oficina central.
@@ -1451,7 +1451,7 @@
 -86eb-field:confirmRedoWeakPasswordeffect=Oprima Sí para continuar con la contraseña que eligió.
 
 #_______________________________________=You have chosen to remove the selected attachments from this bulletin.
--a1a7-field:confirmRemoveAttachmentcause=Escogió remover los archivos adjuntos seleccionados de este boletín.
+-a1a7-field:confirmRemoveAttachmentcause=Escogió eliminar los archivos adjuntos seleccionados de este boletín.
 
 #________________________________________=The selected attachments will be permanently removed from this bulletin.
 -3252-field:confirmRemoveAttachmenteffect=Los archivos adjuntos seleccionados va a ser eliminados permanentemente de este boletín.
@@ -2213,7 +2213,7 @@ field:translationVersion=Español 4.4
 -3fc8-field:warningDeleteMultipleBulletins=Escogió eliminar permanentemente boletines de la carpeta de boletines desechados. No podrá pegar estos boletines aún si han sido copiados o cortados recientemente. Si los envió a un servidor, estos permanecerán en el servidor. Esta acción sólo los elimina de esta computadora.
 
 #___________________________________________________=NOTE: Copies of one or more of these bulletins exist in one or more other folders. Those copies will not be removed.
--7d03-field:warningDeleteMultipleBulletinsWithCopies=NOTA: Existen una o más copias de estos boletines en otras carpetas. Esas copias no serán removidas.
+-7d03-field:warningDeleteMultipleBulletinsWithCopies=NOTA: Existen una o más copias de estos boletines en otras carpetas. Esas copias no serán eliminadas.
 
 #_______________________________________________=WARNING: One or more of these bulletins have not been sent to a server since they were last modified. Deleting them will prevent the latest changes from being backed up.
 -97ce-field:warningDeleteMultipleUnsentBulletins=ADVERTENCIA: Uno o más de estos boletines no han sido enviados a un servidor desde la última vez que fueron modificados. Los últimos cambios a estos boletines no van a ser guardados si es que los elimina.
@@ -2222,13 +2222,13 @@ field:translationVersion=Español 4.4
 -06b6-field:warningDeleteSingleBulletin=Escogió eliminar permanentemente este boletín de la carpeta de boletines desechados. No podrá pegar este boletín aún si lo ha copiado o cortado recientemente. Si lo envió a un servidor, éste permanecerá en el servidor. Esta acción sólo lo elimina de esta computadora.
 
 #________________________________________________=NOTE: A copy of this bulletin exists in one or more other folders, and those copies will not be removed.
--c4bc-field:warningDeleteSingleBulletinWithCopies=NOTA: Existe una copia de este boletín en otras carpetas. Esas copias no serán removidas.
+-c4bc-field:warningDeleteSingleBulletinWithCopies=NOTA: Existe una copia de este boletín en otras carpetas. Esas copias no serán eliminadas.
 
 #____________________________________________=WARNING: This bulletin has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.
 -523e-field:warningDeleteSingleUnsentBulletin=ADVERTENCIA: Este boletín no ha sido enviado a un servidor desde la última vez que fue modificado. Los últimos cambios a este boletín no van a ser guardados si lo elimina.
 
 #_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.  If you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.
--711f-field:warningUnofficialTranslation=ADVERTENCIA: Esta traducción no fue creada por el equipo de Martus, y puede que no sea confiable. Si solo quiere usar traducciones oficiales, salga de Martus, remueva el archivo #UseUnofficialTranslationFiles# de su carpeta de Martus y vuelva a iniciar el progama Martus.
+-711f-field:warningUnofficialTranslation=ADVERTENCIA: Esta traducción no fue creada por el equipo de Martus, y puede que no sea confiable. Si solo quiere usar traducciones oficiales, salga de Martus, elimine el archivo #UseUnofficialTranslationFiles# de su carpeta de Martus y vuelva a iniciar el programa Martus.
 
 #__________________=Web Page
 -0163-field:webpage=Sitio web
@@ -2510,10 +2510,10 @@ field:translationVersion=Español 4.4
 -07c3-menu:QuickEraseDeleteMyDataOnly=Eliminar mis datos
 
 #________________________________=Delete All Data And Remove Martus
--a0f7-menu:QuickEraseRemoveMartus=Eliminar todos los datos y remover Martus
+-a0f7-menu:QuickEraseRemoveMartus=Eliminar todos los datos y eliminar Martus
 
 #______________________=Remove Martus Server
--dc3d-menu:RemoveServer=Remover el servidor Martus
+-dc3d-menu:RemoveServer=Eliminar el servidor Martus
 
 #______________________=Rename Folder
 -5e31-menu:RenameFolder=Renombrar carpeta
@@ -2984,7 +2984,7 @@ field:translationVersion=Español 4.4
 -31b5-wintitle:RemoveMartsFromThisComputer=Eliminar Martus de esta computadora
 
 #__________________________=Remove Server
--49c2-wintitle:RemoveServer=Remover servidor
+-49c2-wintitle:RemoveServer=Eliminar servidor
 
 #____________________________________=Reports
 -88bc-wintitle:ReportChooseSortFields=Reportes
@@ -3188,7 +3188,7 @@ field:translationVersion=Español 4.4
 -41f7-wintitle:confirmRemoveFieldDeskKeys=Confirmar eliminación de oficina(s) regional(es)
 
 #_________________________________=Delete All Data and Remove Martus
--6fef-wintitle:confirmRemoveMartus=Eliminar todos los datos y remover Martus
+-6fef-wintitle:confirmRemoveMartus=Eliminar todos los datos y eliminar Martus
 
 #_________________________________________=All Data Private
 -61f8-wintitle:confirmReportIncludePrivate=Toda la información es privada
@@ -3434,7 +3434,7 @@ field:translationVersion=Español 4.4
 -fabf-wintitle:notifyErrorWritingFile=Error al escribir archivo
 
 #_________________________________________=Server Removed
--1820-wintitle:notifyExistingServerRemoved=Servidor removido
+-1820-wintitle:notifyExistingServerRemoved=Servidor eliminado
 
 #__________________________________=Export Bulletins
 -a86c-wintitle:notifyExportComplete=Exportar boletines
