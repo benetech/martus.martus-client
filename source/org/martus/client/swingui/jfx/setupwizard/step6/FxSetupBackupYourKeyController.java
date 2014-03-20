@@ -68,7 +68,7 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("UnexpectedError");
+			showNotifyDialog(getWizardStage(), "UnexpectedError");
 		}
 	}
 	

@@ -70,7 +70,7 @@ public class FxVerifyAccountController extends FxStep1Controller
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("UnexpectedError");
+			showNotifyDialog(getWizardStage(), "UnexpectedError");
 		}
 
 		updateStatus();
@@ -93,7 +93,7 @@ public class FxVerifyAccountController extends FxStep1Controller
 		MartusLocalization localization = getLocalization();
 		String busyTitle = localization.getWindowTitle("CreatingAccount");
 		String message = localization.getFieldLabel("CreatingAccount");
-		showBusyDialog(busyTitle, message, task);
+		showBusyDialog(busyTitle, message, task, getWizardStage());
 		getMainWindow().setCreatedNewAccount(true);
 		
 		getApp().loadConfigInfo();

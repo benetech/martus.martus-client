@@ -69,7 +69,7 @@ abstract public class FxWizardShellController extends ShellController implements
 		catch(Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("UnexpectedError");
+			showNotifyDialog(getWizardStage(), "UnexpectedError");
 		}
 	}
 	
@@ -84,7 +84,7 @@ abstract public class FxWizardShellController extends ShellController implements
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("UnknownError");
+			showNotifyDialog(getWizardStage(), "UnknownError");
 		}
 	}
 	

@@ -106,7 +106,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("UnexpectedError");
+			showNotifyDialog(getWizardStage(), "UnexpectedError");
 		}
 	}
 
@@ -119,15 +119,15 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("UnexpectedError");
+			showNotifyDialog(getWizardStage(), "UnexpectedError");
 		}
 	} 
 	
 	private ObservableList<AbstractFxImportFormTemplateController> getImportTemplateChoices()
 	{
 		Vector<AbstractFxImportFormTemplateController> choices = new Vector<AbstractFxImportFormTemplateController>();
-		choices.add(new FxImportFormTemplateFromMyContactsPopupController(getMainWindow()));
-		choices.add(new FxSetupFormTemplateFromNewContactPopupController(getMainWindow()));
+		choices.add(new FxImportFormTemplateFromMyContactsPopupController(getMainWindow(), getWizardStage()));
+		choices.add(new FxSetupFormTemplateFromNewContactPopupController(getMainWindow(), getWizardStage()));
 
 		return FXCollections.observableArrayList(choices);
 	}
@@ -237,7 +237,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 
 	protected void importFromContacts(AbstractFxImportFormTemplateController controller) throws Exception
 	{
-		showControllerInsideModalDialog(controller);
+		showControllerInsideModalDialog(getWizardStage(), controller);
 		CustomFieldTemplate selectedTemplate = controller.getSelectedFormTemplate();
 		updateSelectedCustomFieldTemplateComponents(selectedTemplate);
 	}

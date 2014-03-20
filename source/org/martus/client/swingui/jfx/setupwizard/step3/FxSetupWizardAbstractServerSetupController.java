@@ -52,11 +52,11 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		try
 		{
 			IsAvailableServerCompliantTask task = new IsAvailableServerCompliantTask(getApp(), gateway);
-			showTimeoutDialog("*Connecting*", "Attempting to connect to server and checking compliance", task);
+			showTimeoutDialog(getWizardStage(), "*Connecting*", "Attempting to connect to server and checking compliance", task);
 			if(!task.isAvailable())
 			{
 				//FIXME put in real text/title here.
-				if(showConfirmationDialog("title", "SSL Not responding.  Save this configuration?"))
+				if(showConfirmationDialog(getWizardStage(), "title", "SSL Not responding.  Save this configuration?"))
 				{
 					saveServerConfig(serverIPAddress, serverPublicKey, "");
 					return true;
@@ -67,7 +67,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 			{
 				if(complianceStatement.equals(""))
 				{
-					showNotifyDialog("ServerComplianceFailed");
+					showNotifyDialog(getWizardStage(), "ServerComplianceFailed");
 					saveServerConfig(serverIPAddress, serverPublicKey, "");
 					return true;
 				}
@@ -107,19 +107,19 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		catch(SaveConfigInfoException e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("ErrorSavingConfig");
+			showNotifyDialog(getWizardStage(), "ErrorSavingConfig");
 			return false;
 		}
 		catch(ServerNotAvailableException e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("ErrorServerOffline");
+			showNotifyDialog(getWizardStage(), "ErrorServerOffline");
 			return false;
 		}
 		catch(Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("ErrorGettingCompliance");
+			showNotifyDialog(getWizardStage(), "ErrorGettingCompliance");
 			return false;
 		} 
 	}
@@ -129,9 +129,9 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		MartusLocalization localization = getLocalization();
 		String title = localization.getWindowTitle("ServerCompliance");
 		String complianceStatementMsg = String.format("%s\n\n%s", localization.getFieldLabel("ServerComplianceDescription"), newServerCompliance);
-		if(!showConfirmationDialog(title, complianceStatementMsg))
+		if(!showConfirmationDialog(getWizardStage(), title, complianceStatementMsg))
 		{
-			showNotifyDialog("UserRejectedServerCompliance");
+			showNotifyDialog(getWizardStage(), "UserRejectedServerCompliance");
 			return false;
 		}
 		return true;
