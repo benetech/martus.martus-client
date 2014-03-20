@@ -76,7 +76,28 @@
           <right>
             <BorderPane>
               <top>
-				<WebView fx:id="sidebarHints" id='sidebar-hints' maxHeight="350" prefWidth="200.0" />
+              	<StackPane maxHeight="350" prefWidth="200.0">
+              		<Label fx:id="hintLabel" wrapText="true" />
+              		<VBox id="sidebarHintAccount" visible="false" >
+              			<children>
+							<Label wrapText="true" text="UserName Tips:" />
+							<Label wrapText="true" text="- Your username can contain letters, numbers, punctuation and spaces." />
+							<Label wrapText="true" text="- It should have between 8-50 characters, and it is case sensitive." />
+							<Label wrapText="true" text="- Remember to choose a username you can remember." />
+							<Label wrapText="true" text="Password Tips:" />
+							<Label wrapText="true" text="- Do not use your username" />
+							<Label wrapText="true" text="- Do not use a single dictionary word" />
+							<Label wrapText="true" text="- Use at at least 15 characters for most security (8 are required)" />
+							<Label wrapText="true" text="- Use a combination of alphabet characters, numbers, and special characters (such as !@#$%^*&amp;)" />
+							<Label wrapText="true" text="- Use a combination of uppercase (capital) and lowercase characters if you use a case-sensitive language." />
+              			</children>
+              		</VBox>
+					<Label id="sidebarHintTor" visible="false" wrapText="true" text="Turning Tor on here establishes the default setting for your use of Tor when in Martus. You can also, turn Tor ON or OFF at any time inside the Martus desktop application. Note: Using Tor will slow sending of bulletins." />
+					<Label id="sidebarHintServer" visible="false" wrapText="true" text="The files you store on Martus server are completely encrypted using 3072-bit key encryption. This means even Martus server administrators cannot read your files." />
+					<Label id="sidebarHintContacts" visible="false" wrapText="true" text=" If someone wishes to send you information, provide them with your access code and public code. Once you have completed this wizard, you will be able to get your 7-digit access code, and public code, to share with others." />
+					<Label id="sidebarHintTemplates" visible="false" wrapText="true" text="You can switch form templates later inside of Martus, if you need one different from what you select here." />
+					<Label id="sidebarHintBackupKey" visible="false" wrapText="true" text="Be sure to save a copy of key to a secure location, that is separate from the computer you currently have Martus installed on, so you have it in case of an emergency. Martus offers another method of backup: 5-key backup. If you forget your username or password, there is no way for you to access the forms you have created or any of the data on your computer unless you have performed a multi-file key backup. You will be prompted later to create a 5 key backup. It is strongly encouraged that you do so." />
+              	</StackPane>
               </top>
               <bottom>
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">

@@ -73,19 +73,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 	
 		String dateDelimeterCode = "" + localization.getDateDelimiter();
 		selectItemByCode(dateDelimeterComboBox, dateDelimeterCode);
-		try
-		{
-			String sidebarTorHintHtml = "<p>Turning Tor on here establishes the default setting "
-					+ "for your use of Tor when in Martus. "
-					+ "You can also, turn Tor ON or OFF at any time inside the Martus desktop application.</p>"
-					+ "<p>Note: Using Tor will slow sending of bulletins.</p>";
-			getWizardStage().getWizardShellController().setSideBarHintHtml(sidebarTorHintHtml);
-		} 
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-			showNotifyDialog(getWizardStage(), "UnexpectedError");
-		}
+		getWizardNavigationHandler().setNodeVisible("sidebarHintTor");
 	}
 
 	private void selectItemByCode(ChoiceBox choiceBox, String code)

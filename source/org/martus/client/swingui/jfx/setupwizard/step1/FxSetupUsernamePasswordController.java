@@ -59,17 +59,7 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 		getUserName().textProperty().addListener(new LoginChangeHandler());
 		getPasswordField().textProperty().addListener(new LoginChangeHandler());
 		hintLabel.setTooltip(new Tooltip("Create secure passwords by using numbers, letters and sympbols."));
-
-		try
-		{
-			String sidebarHintText = getLocalization().getFieldLabel("CreateAccountTipsHtml");
-			getWizardStage().getWizardShellController().setSideBarHintHtml(sidebarHintText);
-		} 
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-			showNotifyDialog(getWizardStage(), "UnexpectedError");
-		}
+		getWizardNavigationHandler().setNodeVisible("sidebarHintAccount");
 	}
 
 	@Override
