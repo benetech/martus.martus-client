@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.setupwizard;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
@@ -76,6 +77,15 @@ public class FxSetupWizardShellController extends FxWizardShellController
 		throw new RuntimeException("Unknown step number: " + stepNumber);
 	}
 
+	@Override
+	public Label getHintLabel()
+	{
+		return hintLabel;
+	}
+
+	@FXML
+	protected Label hintLabel;
+	
 	@FXML
 	protected HBox step1;
 	@FXML

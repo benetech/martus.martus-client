@@ -36,7 +36,6 @@ import javafx.stage.FileChooser;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
-import org.martus.common.MartusLogger;
 import org.martus.util.FileTransfer;
 import org.martus.util.FileVerifier;
 import org.martus.util.TokenReplacement;
@@ -52,24 +51,7 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 	public void initialize(URL rootLocation, ResourceBundle bundle)
 	{
 		super.initialize(rootLocation, bundle);
-		try
-		{
-			String sidebarHintHtml = "<p>Be sure to save a copy of key to a secure location, "
-					+ "that is separate from the computer you currently have Martus installed on, "
-					+ "so you have it in case of an emergency.</p>"
-					+ "<p>Martus offers another method of backup: 5-key backup. "
-					+ "If you forget your username or password, "
-					+ "there is no way for you to access the forms you have created or "
-					+ "any of the data on your computer unless you have performed a multi-file key backup. "
-					+ "You will be prompted later to create a 5 key backup. "
-					+ "It is strongly encouraged that you do so.</p>";
-			getWizardStage().getWizardShellController().setSideBarHintHtml(sidebarHintHtml);
-		} 
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-			showNotifyDialog(getWizardStage(), "UnexpectedError");
-		}
+		getWizardNavigationHandler().setNodeVisible("sidebarHintBackupKey");
 	}
 	
 	@FXML
@@ -128,4 +110,7 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 	
 	@FXML
 	private Label backupMessageLabel;
+	
+	@FXML
+	private Label sidebarHintBackupKey;
 }
