@@ -37,7 +37,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.web.WebView;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.MartusLocalization;
@@ -74,15 +73,6 @@ public class FxSetupSettingsController extends FxStep2Controller
 	
 		String dateDelimeterCode = "" + localization.getDateDelimiter();
 		selectItemByCode(dateDelimeterComboBox, dateDelimeterCode);
-		
-		String torDescriptionHtml = "Tor is a security tool you can use "
-				+ "to hide your identity when connecting to sites on the internet. "
-				+ "If Martus servers are blocked from your location, "
-				+ "using Tor may help reach the servers. "
-				+ "Read more about Tor at: "
-				+ "<a href='https://www.torproject.org'>https://www.torproject.org</a>";
-		torDescriptionWebView.getEngine().loadContent("<div class='wv-tor-description'>" + torDescriptionHtml + "</div>");
-		
 		try
 		{
 			String sidebarTorHintHtml = "<p>Turning Tor on here establishes the default setting "
@@ -210,7 +200,4 @@ public class FxSetupSettingsController extends FxStep2Controller
 	
 	@FXML
 	private ChoiceBox<ChoiceItem> dateDelimeterComboBox;
-	
-	@FXML
-	private WebView torDescriptionWebView;
 }
