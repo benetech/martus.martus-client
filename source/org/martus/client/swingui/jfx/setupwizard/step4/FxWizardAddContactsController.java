@@ -127,7 +127,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			MartusLocalization localization = getLocalization();
 			String title = localization.getWindowTitle("FindAccountByToken");
 			String message = localization.getFieldLabel("FindAccountByToken");
-			showTimeoutDialog(getWizardStage(), title, message, task);
+			showTimeoutDialog(getStage(), title, message, task);
 			String contactAccountId = task.getFoundAccountId();
 			if(contactAccountId == null)
 				return; 
@@ -139,16 +139,16 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		}
 		catch (ServerNotAvailableException e)
 		{
-			showNotifyDialog(getWizardStage(), "ContactsNoServer");
+			showNotifyDialog(getStage(), "ContactsNoServer");
 		} 
 		catch (TokenNotFoundException e)
 		{
-			showNotifyDialog(getWizardStage(), "UnableToRetrieveContactFromServer");
+			showNotifyDialog(getStage(), "UnableToRetrieveContactFromServer");
 		} 
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog(getWizardStage(), "UnexpectedError");
+			showNotifyDialog(getStage(), "UnexpectedError");
 		} 
 	}
 
