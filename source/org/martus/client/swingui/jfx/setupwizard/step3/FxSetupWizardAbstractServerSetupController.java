@@ -30,7 +30,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.setupwizard.tasks.IsAvailableServerCompliantTask;
+import org.martus.client.swingui.jfx.setupwizard.tasks.ConnectToServerTask;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusLogger;
@@ -51,7 +51,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 
 		try
 		{
-			IsAvailableServerCompliantTask task = new IsAvailableServerCompliantTask(getApp(), gateway);
+			ConnectToServerTask task = new ConnectToServerTask(getApp(), gateway);
 			showTimeoutDialog(getWizardStage(), "*Connecting*", "Attempting to connect to server and checking compliance", task);
 			if(!task.isAvailable())
 			{
