@@ -112,6 +112,9 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 		if(newBackupFile == null)
 			return;
 
+		if(!newBackupFile.getName().contains("."))
+			newBackupFile = new File(newBackupFile.getAbsolutePath() + ".dat");
+		
 		FileTransfer.copyFile(keypairFile, newBackupFile);
 		if(FileVerifier.verifyFiles(keypairFile, newBackupFile))
 		{
