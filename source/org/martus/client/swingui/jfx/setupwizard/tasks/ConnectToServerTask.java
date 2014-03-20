@@ -62,8 +62,8 @@ public class ConnectToServerTask extends ServerCallTask
 	protected Void call() throws Exception
 	{
 		isAvailable = getApp().isSSLServerAvailable(gateway);
-		complianceStatement = app.getServerCompliance(getGateway());
-		
+		if (isAvailable)
+			complianceStatement = app.getServerCompliance(getGateway());
 		
 		return null;
 	}
