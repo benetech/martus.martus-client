@@ -11,7 +11,7 @@
 <center>
 <VBox prefWidth="650">
 <children>
-  	<Label fx:id="templatesOverviewWebView" prefHeight="100" text="Martus allows you to create and share custom forms. Get started by selecting a form template. Martus comes with 5 generic templates. You can also download a custom template from one of your current contacts or a new contact. " wrapText="true" />
+  	<Label fx:id="templatesOverviewLabel" prefHeight="100" text="Martus allows you to create and share custom forms. Get started by selecting a form template. Martus comes with 5 generic templates. You can also download a custom template from one of your current contacts or a new contact. " wrapText="true" />
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <columnConstraints>
