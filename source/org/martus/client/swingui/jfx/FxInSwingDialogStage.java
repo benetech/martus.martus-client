@@ -75,16 +75,6 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 		return new WindowCloseHandler(getMainWindow());
 	}
 	
-	class DefaultWindowCloseHandler extends WindowAdapter
-	{
-		@Override
-		public void windowClosing(WindowEvent e)
-		{
-			super.windowClosing(e);
-			close();
-		}
-	}
-	
 	public JDialog getDialog()
 	{
 		return dialog;
