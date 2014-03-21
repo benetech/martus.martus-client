@@ -181,7 +181,6 @@
 	-fx-stroke-width: 2;
 	-fx-stroke: White;
 	-fx-font: 24px "Helvetica";
-  -fx-font-weight: bold;
 }
 
 .current-step .TopBarStepName {
@@ -189,7 +188,6 @@
 	-fx-stroke-width: 2;
 	-fx-stroke: White;
 	-fx-font: 13px "Helvetica";
-  -fx-font-weight: bold;
 }
 
 .TopBarStepNumber {
@@ -210,7 +208,6 @@
 
 .TopBarArrow {
 	-fx-text-fill: #707e87;
-  -fx-font-weight: 900;
   -fx-padding: 0 4 4 4;
 	-fx-font: 38px "Helvetica";
 }
