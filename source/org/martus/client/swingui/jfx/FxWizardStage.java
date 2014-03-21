@@ -25,12 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.Stack;
-
-import javax.swing.JOptionPane;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
@@ -105,12 +100,6 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		}
 	}
 
-	@Override
-	public WindowListener createWindowCloseHandler()
-	{
-		return new WindowCloseHandler(getMainWindow());
-	}
-	
 	public boolean checkIfCurrentServerIsAvailable()
 	{
 		return serverAvailibilityState.equals(SERVER_STATE_AVAILABLE);
@@ -131,27 +120,6 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	public FxWizardShellController getWizardShellController()
 	{
 		return (FxWizardShellController)getShellController();
-	}
-	
-	private class WindowCloseHandler extends WindowAdapter
-	{
-		public WindowCloseHandler(UiMainWindow ownerToUse)
-		{
-			owner = ownerToUse;
-		}
-
-		@Override
-		public void windowClosing(WindowEvent e)
-		{
-			int result = JOptionPane.showConfirmDialog(getDialog(), "Wizard will now close.  Are you sure?", "Confirmation", JOptionPane.YES_NO_OPTION);
-			if (result == JOptionPane.YES_OPTION)
-			{
-				owner.exitWithoutSavingState();
-				super.windowClosing(e);
-			}
-		}
-		
-		private UiMainWindow owner;
 	}
 	
 	abstract protected ContentController getFirstController();

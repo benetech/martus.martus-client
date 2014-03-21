@@ -34,6 +34,7 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
@@ -71,7 +72,7 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 
 	public WindowListener createWindowCloseHandler()
 	{
-		return new DefaultWindowCloseHandler();
+		return new WindowCloseHandler(getMainWindow());
 	}
 	
 	class DefaultWindowCloseHandler extends WindowAdapter
@@ -151,6 +152,27 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 	public FxScene getFxScene()
 	{
 		return scene;
+	}
+	
+	private class WindowCloseHandler extends WindowAdapter
+	{
+		public WindowCloseHandler(UiMainWindow ownerToUse)
+		{
+			owner = ownerToUse;
+		}
+
+		@Override
+		public void windowClosing(WindowEvent e)
+		{
+			int result = JOptionPane.showConfirmDialog(getDialog(), "Wizard will now close.  Are you sure?", "Confirmation", JOptionPane.YES_NO_OPTION);
+			if (result == JOptionPane.YES_OPTION)
+			{
+				owner.exitWithoutSavingState();
+				super.windowClosing(e);
+			}
+		}
+		
+		private UiMainWindow owner;
 	}
 
 	private JDialog dialog;
