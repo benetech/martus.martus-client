@@ -1,14 +1,15 @@
-﻿# Martus Client Translation File
-# Language code:  es
-# Language name:  
-# Translated by:
+# Martus Client Translation File
+# Language code:  fa
+# Language name:  Farsi
+# Translated by:  Ali Jamshidi
 # Exported date:  
-# Client version:  Martus\nReport-Msgid-Bugs-To: info@martus.org\nPOT-Creation-Date: 2013-11-11 13:14:57 -0800\nPO-Revision-Date: 2014-02-10 23:06+0000\nLast-Translator: martus <martus-translations@benespace.org>\nLanguage-Team: Persian (http://www.transifex.com/projects/p/martus/language/fa/)\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nLanguage: fa\nPlural-Forms: nplurals=1; plural=0;\n
+# Client version:  Martus\nReport-Msgid-Bugs-To: info@martus.org\nPOT-Creation-Date: 2013-11-11 13:14:57 -0800\nPO-Revision-Date: 2014-03-17 18:58+0000\nLast-Translator: martus <martus-translations@benespace.org>\nLanguage-Team: Persian (http://www.transifex.com/projects/p/martus/language/fa/)\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nLanguage: fa\nPlural-Forms: nplurals=1; plural=0;\n
 # Client build:
 # *** This MTF file was converted from a PO file
+!right-to-left
 
 #____________________________=Add
--61cc-button:AddFieldToReport= افزودن
+-61cc-button:AddFieldToReport=افزودن
 
 #__________________________=Update Headquarters Access
 -5029-button:AddPermissions=بروزرسانی دسترسی دفتر مرکزی
@@ -20,16 +21,16 @@
 -2678-button:AppendEmptyGridRow=افزودن سطر 
 
 #________________=Back
--b52b-button:Back= به عقب
+-b52b-button:Back=به عقب
 
 #___________________________=Bulletin Details...
--d012-button:BulletinDetails= جزئیات بولتن
+-d012-button:BulletinDetails=جزئیات بولتن
 
 #_____________________=Close Help
 -8624-button:CloseHelp=بستن راهنما
 
 #___________________________=Add...
--2cce-button:ConfigureHQsAdd=افزودن....
+-2cce-button:ConfigureHQsAdd=افزودن...
 
 #_______________________________=Change Label
 -8a69-button:ConfigureHQsReLabel=تغییراتیکت
@@ -44,19 +45,19 @@
 -2e02-button:Continue=ادامه
 
 #_______________________=Create a new chart template
--9ef9-button:CreateChart=ایجاد یک قالب جدید برای جدول 
+-9ef9-button:CreateChart=ایجاد یک قالب جدید برای نمودار
 
 #____________________________=Create New Page Report
--1d7a-button:CreatePageReport= ایجاد صفحه گزارش جدید
+-1d7a-button:CreatePageReport=ایجاد صفحه گزارش جدید
 
 #_______________________________=Create New Tabular Report
--34ee-button:CreateTabularReport= ایجاد گزارش جدولی جدید
+-34ee-button:CreateTabularReport=ایجاد گزارش جدولی جدید
 
 #__________________=Delete
 -f6fd-button:Delete=حذف
 
 #_________________________________=Delete Selected Row
--5e2f-button:DeleteSelectedGridRow=حذف سطر  انتخاب شده 
+-5e2f-button:DeleteSelectedGridRow=حذف سطر انتخاب شده
 
 #______________________________=Delete
 -f6fd-button:DeleteServerDrafts=حذف
@@ -71,10 +72,10 @@
 -6492-button:FieldLabel=اتیکت حیطه
 
 #____________________=Tag
--9829-button:FieldTag= برچسب
+-9829-button:FieldTag=برچسب
 
 #_____________________=Type
--3deb-button:FieldType= نوع
+-3deb-button:FieldType=نوع
 
 #_____________________________________=Add Attachment
 -f3aa-button:FileDialogOkAddAttachment=اضافه کردن پیوست
@@ -101,16 +102,16 @@
 -3cbe-button:FileDialogOkRestoreFromKeyPair=بازگرداندن
 
 #___________________________=Down
--bf93-button:FolderOrderDown= پائین
+-bf93-button:FolderOrderDown=پائین
 
 #_________________________=Up
--2038-button:FolderOrderUp= بالا
+-2038-button:FolderOrderUp=بالا
 
 #___________________________________=Include Private Data
 -e6dc-button:IncludePrivateBulletins=شامل داده های خصوصی
 
 #______________________________=Insert Row
--9f53-button:InsertEmptyGridRow= درج سطر 
+-9f53-button:InsertEmptyGridRow=درج سطر 
 
 #_________________=Leave
 -7e35-button:Leave=ترک
@@ -170,7 +171,7 @@
 -d7da-button:RecoverAccountTab=بازگرداندن حساب کاربری
 
 #_________________________________=Remove
--e963-button:RemoveFieldFromReport= حذف
+-e963-button:RemoveFieldFromReport=حذف
 
 #_________________________=Reset Contents
 -6f62-button:ResetContents=تنظیم مجدد محتویات به حالت اولیه
@@ -182,7 +183,7 @@
 -3449-button:RetrieveLatestBulletinRevisionOnly=بازیابی تنها آخرین نخسه موجود بولتن
 
 #____________________=Display an existing chart
--7d62-button:RunChart=نمایش هرگونه جدول موجود
+-7d62-button:RunChart=نمایش هرگونه نمودار موجود
 
 #_____________________=Use Existing Report Format
 -b052-button:RunReport=استفاده از قالب گزارشگیری موجود
@@ -197,7 +198,7 @@
 -c70c-button:SearchSameRowsOnly=مشخصات شبکه ستونی در صفحه جستجورا به داده های  به یک سطر شبکه  بولتن تطبیق کن. برای دریافت اطلاعات بیشتر در مورد این گزینه پیشرفته، صفحه جستجوی راهنما را ببینید.
 
 #________________________=Select
--8598-button:SelectReport= انتخاب
+-8598-button:SelectReport=انتخاب
 
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=پذیرفتن
@@ -209,7 +210,7 @@
 -2dc6-button:ShowGridExpanded=نمایش به صورت گسترده
 
 #__________________________=Show as Grid
--172d-button:ShowGridNormal= نمایش شبکه ای
+-172d-button:ShowGridNormal=نمایش شبکه ای
 
 #__________________=Sign In
 -f849-button:SignIn=ورود 
@@ -275,7 +276,7 @@
 -34d8-button:hideattachment=پنهان کردن
 
 #_______________________________=OK
--9ce3-button:inputCustomFieldsok= تایید
+-9ce3-button:inputCustomFieldsok=تایید
 
 #____________________________________=OK
 -9ce3-button:inputGetFieldDeskLabelok=تایید
@@ -284,7 +285,7 @@
 -9ce3-button:inputGetHQLabelok=تایید
 
 #___________________________________=OK
--9ce3-button:inputGetShareFileNameok= تایید
+-9ce3-button:inputGetShareFileNameok=تایید
 
 #___________________________________=Import
 -d6fb-button:inputImportPublicCodeok=وارد کردن
@@ -299,13 +300,13 @@
 -bce0-button:inputsearchok=جستجو
 
 #__________________________________=OK
--9ce3-button:inputservermagicwordok= تایید
+-9ce3-button:inputservermagicwordok=تایید
 
 #_____________________________=OK
--9ce3-button:inputservernameok=  تایید
+-9ce3-button:inputservernameok=تایید
 
 #___________________________________=OK
--9ce3-button:inputserverpubliccodeok=  تایید
+-9ce3-button:inputserverpubliccodeok=تایید
 
 #________________________________=Load From File
 -30fe-button:loadTemplateFromFile=بارگذاری از طریق فایل
@@ -314,16 +315,16 @@
 -9fe4-button:modify=اصلاح کردن
 
 #______________=No
--816c-button:no= خیر
+-816c-button:no=خیر
 
 #______________=OK
--9ce3-button:ok= تایید
+-9ce3-button:ok=تایید
 
 #_________________=Print
--5b22-button:print= چاپ
+-5b22-button:print=چاپ
 
 #____________________________=Remove
--e963-button:removeattachment= حذف
+-e963-button:removeattachment=حذف
 
 #____________________=Retrieve
 -eb55-button:retrieve=بازیابی
@@ -350,7 +351,7 @@
 -69bd-button:viewattachment=مشاهده
 
 #_______________=Yes
--5397-button:yes= بله
+-5397-button:yes=بله
 
 #_______________________________=Account Directory:
 -c354-field:AccountInfoDirectory=پوشه حساب کاربری
@@ -374,25 +375,25 @@
 -bc78-field:AttachmentSizeUnknown=ناشناخته
 
 #_________________________=Author (required)
--4a0b-field:AuthorRequired=مولف ( الزامی)
+-4a0b-field:AuthorRequired=مولف (الزامی)
 
 #_____________________________=Preparing Report...
 -7651-field:BackgroundPrinting=در حال آماده سازی گزارش...
 
 #______________________________=Searching...
--ba2b-field:BackgroundSearching= در حال جستجو...
+-ba2b-field:BackgroundSearching=در حال جستجو...
 
 #____________________________=Sorting Bulletins...
 -5a5a-field:BackgroundSorting=در حال مرتب سازی یولتن ها...
 
 #____________________________=Working...
--049a-field:BackgroundWorking= در حال کار...
+-049a-field:BackgroundWorking=در حال کار...
 
 #___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you'll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #TotalNumberOfFilesInBackup# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
--ff3d-field:BackupKeyPairGeneralInfo=شما برای اینکه قادر به خواندن اطلاعات خصوصی بولتن ها باشید یا اینکه بولتن جدیدی را ایجاد کنید، نیاز به کلید خود خواهید داشت. برای اینکه اطمینان داشته باشید همیشه به داده های خود دسترسی دارید، بسیار مهم است که از کلید خود یک نسخه پشتیبان تهیه نمایید. Martus دو روش برای تهیه نسخه پشتیبان از کلید شما را ارائه می دهد، که هر کدام از آنها میتواند مورد استفاده قرار گیردد. ولی ما به شدت توصیه میکنیم که از هردو روش برای تهیه نسخه پشتیبان استفاده کنید. روش اول یک نسخه پشتیبان که توسط رمز عبور شما رمزگذاری میشود را در یک دیسکت قابل حمل ( مثل: دیسکت، دیسك فشرده، حافظه USB)  یا یک حافظه بر روی شبکه ذخیره مینماید. روش دوم از کلید شما به تعداد #TotalNumberOfFilesInBackup# نسخه پشتیبان قطعه قطعه شده مجزا ( توسط رمز عبور شما رمزگذاری نشده ) تهیه کرده و در چندین حافظه قابل حمل ذخیره مینماید.\n
+-ff3d-field:BackupKeyPairGeneralInfo=شما برای اینکه قادر به خواندن اطلاعات خصوصی بولتن ها باشید یا اینکه بولتن جدیدی را ایجاد کنید، نیاز به کلید خود خواهید داشت. برای اینکه اطمینان داشته باشید همیشه به داده های خود دسترسی دارید، بسیار مهم است که از کلید خود یک نسخه پشتیبان تهیه نمایید. Martus دو روش برای تهیه نسخه پشتیبان از کلید شما را ارائه می دهد، که هر کدام از آنها میتواند مورد استفاده قرار گیردد. ولی ما به شدت توصیه میکنیم که از هردو روش برای تهیه نسخه پشتیبان استفاده کنید. روش اول یک نسخه پشتیبان که توسط رمز عبور شما رمزگذاری میشود را در یک دیسکت قابل حمل (مثل: دیسکت، دیسك فشرده، حافظه USB)  یا یک حافظه بر روی شبکه ذخیره مینماید. روش دوم از کلید شما به تعداد #TotalNumberOfFilesInBackup# نسخه پشتیبان قطعه قطعه شده مجزا (توسط رمز عبور شما رمزگذاری نشده) تهیه کرده و در چندین حافظه قابل حمل ذخیره مینماید.\n
 
 #________________________________________________=This method breaks up your key into #TotalNumberOfFilesInBackup# pieces, any #MinimumNumberOfFilesNeededForRecovery# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #TotalNumberOfFilesInBackup# files have been written to removable media disks, you should distribute them to #TotalNumberOfFilesInBackup# different people whom you will remember, but each of whom don't know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #MinimumNumberOfFilesNeededForRecovery# of the original #TotalNumberOfFilesInBackup# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n
--9551-field:BackupKeyPairToSecretShareInformation=این روش کلید شما را به #TotalNumberOfFilesInBackup# تقسیم میکند، تعداد #MinimumNumberOfFilesNeededForRecovery# از آنها برای بازسازی کلید، بدون درخواست رمزعبور نیاز خواهد بود. اگر شما نام کاربری و یا رمز عبور خود را فراموش کرده باشید، این روش تنها راهی است که شما میتوانید از طریق آن، کلید خود را بازیابی کنید.  زمانی که همه #TotalNumberOfFilesInBackup# فایل بر روی دیسکت های قابل حمل ذخیره شدند، شما باید آنها را در اختیار #TotalNumberOfFilesInBackup# نفر متفاوت قرار دهید، این  افراد باید اشخاصی باشند که شما به یاد خواهید داشت ولی هیچ کدام از آنها نمیدانند که فایل دیگر در نزد کیست. هرگز دو دیسک را در کنار هم نگهداری نکنید. برای بازیابی کلید خود، ابتدا تعداد #MinimumNumberOfFilesNeededForRecovery# از مجموع #TotalNumberOfFilesInBackup# دیسکت را تهیه کرده و سپس بر روی \" بازگرداندن حساب کاربری\" و \" بازگرداندن حساب کاربری از طریق چندین دیسک\" در هنگام ورود به Martus کلیک نمایید.\n
+-9551-field:BackupKeyPairToSecretShareInformation=این روش کلید شما را به #TotalNumberOfFilesInBackup# تقسیم میکند، تعداد #MinimumNumberOfFilesNeededForRecovery# از آنها برای بازسازی کلید، بدون درخواست رمزعبور نیاز خواهد بود. اگر شما نام کاربری و یا رمز عبور خود را فراموش کرده باشید، این روش تنها راهی است که شما میتوانید از طریق آن، کلید خود را بازیابی کنید.  زمانی که همه #TotalNumberOfFilesInBackup# فایل بر روی دیسکت های قابل حمل ذخیره شدند، شما باید آنها را در اختیار #TotalNumberOfFilesInBackup# نفر متفاوت قرار دهید، این  افراد باید اشخاصی باشند که شما به یاد خواهید داشت ولی هیچ کدام از آنها نمیدانند که فایل دیگر در نزد کیست. هرگز دو دیسک را در کنار هم نگهداری نکنید. برای بازیابی کلید خود، ابتدا تعداد #MinimumNumberOfFilesNeededForRecovery# از مجموع #TotalNumberOfFilesInBackup# دیسکت را تهیه کرده و سپس بر روی ' بازگرداندن حساب کاربری' و ' بازگرداندن حساب کاربری از طریق چندین دیسک' در هنگام ورود به Martus کلیک نمایید.\n
 
 #____________________________________________________=Please insert disk #
 -b877-field:BackupRecoverKeyPairInsertNextDiskMessage=لطفا دیسک # را داخل کنید
@@ -413,10 +414,10 @@
 -90cc-field:BulletinDetailsHistory=سوابق
 
 #________________________________________=(in progress)
--60dc-field:BulletinDetailsInProgressDate=( در حال انجام)
+-60dc-field:BulletinDetailsInProgressDate=(در حال انجام)
 
 #_________________________________________=(in progress)
--60dc-field:BulletinDetailsInProgressTitle=( در حال انجام)
+-60dc-field:BulletinDetailsInProgressTitle=(در حال انجام)
 
 #_____________________________________=(unknown)
 -d4bd-field:BulletinDetailsUnknownDate=(ناشناخته)
@@ -467,7 +468,7 @@
 -c567-field:BulletinStatus=وضعیت بولتن:
 
 #______________________________________=Created by an UNVERIFIED Field Desk
--4188-field:BulletinUnverifiedFieldDesk=توسط یک شعبه کاری  تایید نشده ساخته شده است
+-4188-field:BulletinUnverifiedFieldDesk=توسط یک شعبه کاری تایید نشده ساخته شده است
 
 #________________________________=Version
 -2da6-field:BulletinVersionNumber=نسخه
@@ -482,7 +483,7 @@
 -9ad6-field:BulletinXmlFileFilter=فایل های بولتن (*xml.)
 
 #_________________________=Calendar type
--87e7-field:CalendarSystem= نوع تقویم
+-87e7-field:CalendarSystem=نوع تقویم
 
 #_______________________________=Afghan (1384-03-10)
 -c4b5-field:CalendarSystemAfghan=افغانی (1384-03-10)
@@ -491,10 +492,10 @@
 -784a-field:CalendarSystemGregorian=پیش فرض (2005-05-31)
 
 #________________________________=Persian (1384-03-10)
--2f3e-field:CalendarSystemPersian= فارسی (1384-03-10)
+-2f3e-field:CalendarSystemPersian=فارسی (1384-03-10)
 
 #_____________________________=Thai Solar (2548-05-31)
--2be4-field:CalendarSystemThai= تایلندی (2548-05-31)
+-2be4-field:CalendarSystemThai=تایلندی (2548-05-31)
 
 #_________________________=Chart produced #Date#
 -fb8c-field:ChartCreatedOn=نمودار در #Date# ساخته شده است
@@ -512,16 +513,16 @@
 -cf89-field:ChartPrivateFieldsNotice=لطفا در نظر داشته باشید که هر گونه اطلاعات مروبط به بولتن های Martus که در نمودار ها قرار داشته باشند، رمزگذاری نخواهند شد،\nو هر شخصی که نسخه ای از خروجی نمودار ها را داشته باشد میتواند همه اطلاعات را مشاهده کند.\nدر هنگام انتخاب یک حوزه که دارای اطلاعات خصوصی است، احیتاط و دقت لازم را داشته باشید.
 
 #______________________________________________=Note: Chart shows number of Martus bulletins matching search criteria.
--dee3-field:ChartSelectedBulletinsDisclaimerBar= توجه داشته باشید:  نمودار تعداد بولتن های Martus با مشخصات درخواستی را نشان می دهد.
+-dee3-field:ChartSelectedBulletinsDisclaimerBar=توجه داشته باشید:  نمودار تعداد بولتن های Martus با مشخصات درخواستی را نشان می دهد.
 
 #______________________________________________=Note: Chart shows % of Martus bulletins matching search criteria.
--b721-field:ChartSelectedBulletinsDisclaimerPie= توجه داشته باشید:  نمودار تعداد % بولتن های Martus با مشخصات درخواستی را نشان می دهد.
+-b721-field:ChartSelectedBulletinsDisclaimerPie=توجه داشته باشید:  نمودار تعداد % بولتن های Martus با مشخصات درخواستی را نشان می دهد.
 
 #___________________________=Martus Bulletin Counts
 -5582-field:ChartSeriesTitle=شمارش بولتن های Martus
 
 #________________________=Subtitle (optional)
--4104-field:ChartSubtitle= زیرنویس (اختیاری) 
+-4104-field:ChartSubtitle=زیرنویس (اختیاری) 
 
 #_____________________=Martus Bulletins by #SelectedField#
 -1933-field:ChartTitle=بولتن های Martus مربوط به #SelectedField# 
@@ -563,7 +564,7 @@
 -6bd3-field:ConfigureHQsCurrentHQs=دفاتر مرکزی کنونی
 
 #_______________________________________=Default?
--0e2c-field:ConfigureHeadQuartersDefault= پیش فرض؟
+-0e2c-field:ConfigureHeadQuartersDefault=پیش فرض؟
 
 #_______________________________________=This information will be available to anyone who can view your public bulletin information, or anyone with administrative rights on the server. \n\nThis allows people to contact you for further information.
 -930c-field:ContactInfoFutureUseOfFields=این اطلاعات در دسترس  هر کسی که قادر به مشاهده اطلاعات عمومی بولتن های شما باشد، قرار خواهد داشت، یا هر کسی با با حقوق مدیریتی بر روی سرور.\n\n این اجازه می دهد تا مردم برای کسب اطلاعات بیشتر با شما  تماس بگیرند.
@@ -575,19 +576,19 @@
 -e924-field:ContactInfoUpdateLater=شما می توانید هر یک از این اطلاعات را بعدا تغییر دهید، با انتخاب گزینه ها /اطلاعات تماس.
 
 #__________________________________=The layout of the bulletins is dictated by an XML document.  The document must begin with <CustomFields> and end with </CustomFields>. By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
--0399-field:CreateCustomFieldsHelp1=صفحه بندی بولتن ها توسط یک سند XML  دیکته میشود. سند باید با یک <CustomFields> شروع شده و با یک </CustomFields> به پایان برسد. بطور پیش فرض بخش های بولتن های استاندارد در بالای بخش سفارشی اعلامیه نمایان میگردد، اما در صورت تمایل آنها قابل جابجایی خواهند بود. با این حال چهار بخش قابل جابجایی نخواهند بود : (مولف) 'author' ، (تاریخ ورود) 'entrydate' ، ( زبان ) 'language' ، ( عنوان ) 'title'\n
+-0399-field:CreateCustomFieldsHelp1=صفحه بندی بولتن ها توسط یک سند XML  دیکته میشود. سند باید با یک <CustomFields> شروع شده و با یک </CustomFields> به پایان برسد. بطور پیش فرض بخش های بولتن های استاندارد در بالای بخش سفارشی اعلامیه نمایان میگردد، اما در صورت تمایل آنها قابل جابجایی خواهند بود. با این حال چهار بخش قابل جابجایی نخواهند بود : (مولف) 'author'، (تاریخ ورود) 'entrydate'، (زبان) 'language'، (عنوان) 'title'\n\n
 
 #__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', 'STRING', and 'SECTION'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'VictimsName', 'EyeColorChoice', etc.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nYou can create sections (which you can hide/unhide) in your bulletins using a SECTION field type.  \n\nYou can put multiple fields on a single row in your bulletin by using <KeepWithPrevious/> in the field definition.\n\nYou can require certain fields or grid columns to be entered before saving a bulletin by using </RequiredField> in the field definition.\n\nYou can restrict standard or custom date fields, date grid columns, date range fields, and date range grid columns by using <MinimumDate> and/or <MaximumDate> tags with a date in YYYY-MM-DD format. NOTE: The year must always be a 'Gregorian' year like 2009, even if Martus is configured to use Thai or Afghan or Persian dates. A blank date, shown as <MaximumDate/>, means 'today', although it may allow one day earlier or later, due to time zone issues. \n\nYou can populate drop-down lists (either inside or outside of a grid) in three ways - 1) by entering a list of <Choices> values in the field definition, 2) with values that have been entered in a grid elsewhere in your bulletin by using <DataSource> (sometimes called \"data-driven dropdowns\"), and 3) by creating a list of \"Reusable Choices\" that can be referred to by more than one field.  See examples below for the correct XML definition syntax to use.\n\nYou can set a default value for text and dropdown list fields by using <DefaultValue>ddd</DefaultValue>. For dropdowns, you must use a value already in the list of choices you defined. For Reusable Choices dropdowns it can be a partial or complete code, with each level separated by dots (for a location dropdown that has both Region and City levels, you could pick the default to be at either level, e.g. either R1 or R1.C1, see example below). Default values can be set for both standard and custom fields, but are NOT allowed for BOOLEAN, DATE, DATERANGE, GRID, LANGUAGE, MESSAGE, and SECTION field types, and are not allowed for dropdowns where the values in the list are based on data entered in another field.(i.e. data-driven dropdowns).  Please note that default values are only applied when a new bulletin is created, not when a new version of a bulletin is created, so that the value of the field in the previous version is not overwritten.  This means that default values entered in a bulletin using an earlier customization will be kept even if you create a new version of the bulletin with an updated customization that has a new default value\n\n Additional Comments\n\n1. XML is case-sensitive ('Witness' is not the same as 'witness')\n\n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING\" is not valid. It must be 'STRING' or \"STRING\")\n\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n\n4.  Use \"MESSAGE\" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n\n5.  Dropdowns using a \"Reusable Choices\" list can have multiple levels (e.g. for locations that might have Region and City), different fields can use one or more of the levels, and the number of levels is not limited.\n\n6. Both STRING and MULTILINE fields are text fields.  STRING fields will expand to fit the size of the text you enter, while MULTILINE fields have a scrollbar so that the field doesn't exceed its original height.\n\n7.  A GRID can contain columns of various types:  BOOLEAN, DATE, DATERANGE, DROPDOWN, and STRING. When you're entering data into a grid, press Enter to create a new line, press Tab to advance to the next cell, and double-click to copy and paste text.\n\n8.  You can update your customization if the information you are collecting over time changes, for example by adding new fields.  If you are changing fields in a customization, you should think about how you will want to search/report on bulletins created with the old customization as well as new bulletins you create with the new customization, and try to make the changes so that you can search/report on all bulletins at the same time.  Changing field types may cause your searching/reporting to be more complex, so we always recommend that you test out creating bulletins with a new customization and searching/reporting on both old and new bulletins before officially updating the customization for your project.  When you change customizations, Martus will do its best to update the old formatted data to the new customization if you create a new version of a bulletin with the old customization.  If you add completely new fields but don't change any of the old fields, the new version of the bulletin will have all the old fields filled in as they were in the previous version, and the new fields will be blank and you can fill them in.  If you delete fields, the new version of the bulletin will not contain those fields, but you can go back to see the deleted fields in the previous version if it was a sealed bulletin instead of a draft (by hitting the Bulletin Details button in the Header section of the bulletin), and copy any info from the old version into a different field in the new one if desired.  You have to be very careful if you make changes to the customization definitions of old fields.  If you keep the same tag and label, but change the type of field, Martus may be able to transfer the old data into the new field type, but not in all cases.  For example, if you change field type from DROPDOWN to STRING, the data will be transferred over, but if you change from STRING to BOOLEAN, the data will be lost. If you change from a DATE to DATERANGE, your data will be transferred, but if you change from DATERANGE to DATE, you will lose the end date from your earlier data. DROPDOWN and GRID fields are subject to additional rules regarding the modification of dropdown options/values and grid columns. If you add options/values to a dropdown list, the old data will be transferred over. But if you modify or delete an option/value, all bulletins for which that option was selected will lose that data. If you want to add columns to a grid, please make sure to do so at the end of the old grid definition and not in the middle, or the old data will not be transferred to the new version of the bulletin. If you change fields and lose old data in the new version as a result, please note that you can go back to see the deleted data in the previous version if it was a sealed bulletin instead of a draft (by hitting the Bulletin Details button in the Header section of the bulletin), and copy any info from the old version into a different field in the new one if desired. In this release, if you want to change the number of levels in a \"Reusable Choices\" dropdown field when updating a customization, you should also change the field tag and/or label so that they are more easily distinguished from each other in searching and reporting.  If you do not, the search/report results may be confusing since fields with the same label/tag will be treated differently due to them having a different number of levels.\n\nSee examples below and if you need additional help with customization, please email help@martus.org.\n\n
--659f-field:CreateCustomFieldsHelp2=نکاتی پیرامون بخش کرکره ای\" گزینه های قابل استفاده مجدد \" :\n1-\tبخش های کرکره ای که ازلیست\" گزینه های قابل استفاده مجدد \" استفاده میکنند، می توانند سطوح مختلفی داشته باشند. ( مثل: موقعیت هایی که هم دارای منطقه هستند و هم شهر) بخش های مختلف میتوانند از یک یا چند سطح استفاده کنند.( مثل: اگر شما منطقه و شهر را تعیین کرده باشید، همچنین میتوانید بخشی داشته باشید که تنها دارای سطح منطقه باشد و بخش دیگری داشته باشید که هر دو سطح را استفاده میکند) و شما نیاز نیست که همه سطوح را برای همه ورودی ها مشخص کنید.( مثال : شما ممکن است که برای برخی از شهر های بزرگ ، محله ها را به عنوان مقادیر سطوح پایینی تعیین کرده باشید، ولی همه شهر های بزرگ ممکن است نیاز به تعیین محله نداشته باشند) تعداد سطوح توسط Martus محدود نشده است ولی لطفا در نظر داشته باشید در صورتی که شما مقدار بسیار زیادی داده درلیست تعاریف داشته باشید، یا مقدار بسیار زیادی سطوح تعریف شده، کارایی عملیاتی برخی از بولتن های Martus ممکن است تحت تاثیر قرار گیرد.\n\n2- در این نسخه، ما توصیه میکنیم، در صورتی که میخواهید تعداد سطوح را در بخش \" گزینه های قابل استفاده مجدد \" در هنگام به روز رسانی یک بخش سفارشی شده، تغییر دهید، برچسب و اتیکت آن بخش را هم تغییر دهید، طوری که آنها به آسانی از یکدیگر در حین جستجو و گزارش گیری متمایز باشند. اگر شما این کار را انجام ندهید، نتیجه جستجو و گزارش ممکن است گیج کننده باشد از آنجایی که بخش های دارای برچسب و اتیکت مشابه، با توجه به داشتن تعداد متفاوت از سطوح، به شکل متفاوتی مورد تلقی قرار خواهند گرفت.\n\n3- کد های \" گزینه های قابل استفاده مجدد \" محدودیت های مشابه همانند برچسب بخش ها دارند، آنها میتوانند در هر زبانی باشند اما نمیتوانند شامل فاصله، کاراکتر های خاص و یا نقطه باشند. \n\n4- لطفا اطمینان حاصل کنید که اگر بخش سفارشی سازی شده خود را مورد ویرایش قرار دادید، از کد های مشابه درلیست گزینه های قابل استفاده مجدد استفاده نکنید. مگر اینکه شما غلط املایی ها را در برچسب ها تصیح میکنید. چرا که استفاده کد های مشابه برای اتیکت های متفاوت می تواند باعث سردرگمی در هنگام جستجو و یا گزارش گیری از آن بخش ها شود. در حالت ایده آل شما باید از کدهایی استفاده کنید که عددی نیستند، اما حروف اختصاری معنی دار مربوط به اتیکت هستند، بنابراین در صورتی که شما بخش سفارشی سازی را در آینده به روز رسانی کنید،  هیچ سردرگمی به وجود نخواهد آمد که آنها برای چه هستند. ( مثال: استفاده از 2 یا 3 حروف مخفف مشخص سازی موقعیت به جای استفاده از اعداد ) برای اطلاعات بیشتر پیرامون اینکه چطور کد ها و اتیکت ها بر روی جستجو تاثیر خواهند گذاشت، بخش راهنمای \" جستجو \" را ببینید.\n\n5- شما نمیتوانید از چندین سطح/ گزینه های قابل استفاده مجدد کرکره ای به عنوان منبع داده برای یک بخش کرکره ای دیگر در داخل یا خارج از شبکه استفاده کنید. اگر شما سعی به انجام اینکار داشته باشید، با یک پیغام خطا روبرو خواهید شد.\n\n\n6- لطفا به خاطر داشته باشید، زمانی که شما فایل سفارشی سازی شده XML را همراه با یک لیست گزینه های قابل استفاده مجدد برای بخش های کرکره ای ذخیره مکنید،  وقتی XML  را بارگذاری کنید، Martus آن تعاریف انتخابی را به پایین XML جابجا خواهد کرد.\n
+-659f-field:CreateCustomFieldsHelp2=برای اضافه کردن حیطه، جای که می خواهید حیطه اضافه شود کلیک کنید. نوع حیطه ای که می خواهید را بنویسید: BOOLEAN، DATE، DATERANGE، DROPDOWN، GRID ،LANGUAGE MESSAGE، MULTILINE، SECTION یا STRING.\n\nهر حیطه باید یک اسم خاص به صورت برچسب ('tag') داشته باشد،‌ به غیر از آنهایی که درحال حاضر در نرم افزار موجود است (نام می تواند به هر زبانی باشد از جمله فارسی اما نمی شود از کاراکترهای شکلی و یا فاصله استفاده کرد). به عنوان مثال می توانید از ('نام_قربانیان') استفاده کنید.\n\nبه هر حیطه می بایست عنوانی داده شود که در متن بولتن درج خواهد شد. به عنوان مثال 'نام_اولین_شاهد'. برای مشاهده بیشتر مثال های زیر را مشاهده کنید. می توانید با استفاده از SECTION قسمت جدیدی در بولتن خود ایجاد کنید (که پنهان و یا آشکار) ‌باشد.. درصورت نیازهر قسمت شامل حیطه های مختلفی می تواند باشد.\n\nدر تعریف یک حیطه می توانید از چندین زیرمجموعه دیگر نیز استفاده کنید <KeepWithPrevious/>.\n\nقبل از ذخیره کردن حیطه توسط <RequiredField/> نیاز به یک حیطه مشخص و یا ستون برای تعریف کردن آن دارید.\n\nمی توان بازه در تاریخ حیطه ها و ستون تاریخ با استفاده از فرمت <MinimumDate><MaximumDate> وبا توضیح yyy-mm-dd داشت.جای خالی برای تاریخ (</MaximumDate>یا<MaximumDate/><MaximumDate>) به معنای 'امروز' است و همچنین به معنای یک روز دیرتر و یا زودتر از تاریخ روز می باشد. نکته: تاریخ ها در تنظیمات شخصی میباست میلادی باشد، حتی اگر نرم افزار Martus طبق تاریخ ایرانی باشد.\n\nمی توانید لیست انتخابی خود را به ۳مدل طراحی کنید. 1 – با اضافه کردن <Choices> در قسمت تعریف یک حیطه. 2 – با وراد کردن عدد یا حرفی که در جای دیگری از بولتن وارد شده است با استفاده از <DataSource> (همچنین "data-driven dropdowns" می گویند). 3 – با داشتن "Reusable Choices" می توانید به بیش از یک حیطه مرتبط بشوید. به مثال های زیر از یک XML درست توجه کنید.\n\nمی توانید متن پیش فرض با <DefaultValue>ddd<DefaultValue/> برای لیست کنار حیطه خود تعریف کنید (به جای ddd متنی که مورد نظر است را وارد کنید). برای لیست کنار حیطه، باید از مضمونی استفاده کنید که قبل تر در حیطه خود تعریف کرده اید. برای لیست sReusable Choice می تواند قسمتی و یا کل کد ها باشد، که هر قسمت با یک نقطه جدا می شود (برای جایگاه قرار گرفتن لیست که برای هم منطقه هم شهر، می بایست یک پیش فرض برای هرکدام درنظر بگیرد مثلا R1 یا R1.C1. لطفا به مثال های زیر توجه کنید). متن پیش فرض می تواند برای هم حیطه استاندارد هم حیطه با تنظیمات شخصی در نظر گرفته شود، اما شما نمی توانید برای حیطههای زیر تنظیماتی را درنظر بگیرد و همچنین نمی تواند لیستی برای این حیطه ها در نظر بگیرد: BOOLEAN، DATE، DATERANGE، GRID، LANGUAGE، MESSAGE  و SECTION. در نظر داشته باشید تنظیمات جدید برای طراحی یک بولتن جدید اعمال خواهد شد نه برای نسخه جدید از یک بولتن. این به این معناست که اگر تنظیمات را تغییر دهیدحیطه هایی که برای طراحی یک بولتن داشته اید ثابت می ماند.\n\nاطلاعات بیشتر\n\n1 - در زبان برنامه نویسی XML حروف بزرگ و کوچک در تایپ لاتین موثر است.\n\n2 – علامت نقل قول تکی و یا دوتایی فرقی نمی کند در حالتی که هردو علامت یکسان باشد.\n\n3 – حیطه BOOLEAN مثل گزینه انتخابی بلی/خیر هنگام ویرایش کردن یک بولتن برای چاپ و یا پیش نمایش ظاهر می شود.\n\n4 – استفاده از حیطه MESSAGE یک راهنماست برای نحوی وارد کردن داده ها، گذاشتن یادداشت و در همه بولتن ها وجود دارد.\n\n5 - لیست "Reusable Choices" می تواند ردیف های مختلف داشته باشد (به عنوان مثال برای موقعیت می توان شهر و منتطقه را شامل شود)، در حیطه های مختلف می توان از یک یا چند ردیف استفاده کرد. تعداد ردیف ها محدودیت ندارد در Martus.\n\n6 – هر دو STRING and MULTILINE حیطه های نوشتاری هستنتد.\n\n7 – وقتی اطلاعات را وارد یک جدول کردید و برای وارد کردن خط جدید کلید Enter را بزنید، رفتن به خانه بعدی جدول کلید Tab را بزنید و برای کپی کردن یک خانه روی آن دوبارکلیک کنید و متن را Pastr کنید. یک جدول شامل ستون های مختلفی است: BOOLEAN، DATE، DATERANGE، DROPDOWN و STRING.\n\n8 – می توانید تنظیمات خود را در صورت تغییر کردنشان به روز رسانی کنید، به عنوان مثال حیطه جدید اضافه کنید.اگر حیطه را در تنظیمات شخصیتان تغییر دهید باید در نظر داشته باشید که چگونه می خواهید با تنظیمات پیش فرض/یا تنظیمات قبلی خودتان بولتنی را جستجو کنید و یا از آن گزارشی را تهیه کنید. همچین بولتن های جدید که با تنظیمات جدید شما ایجاد شده اند و شما می بایست در نظر داشته باشید که چگونه آنها را می خواهید جستجو کنید و یا گزاش تهیه کنید. وقتی تنظیمات نرم افزار را تغییر می دهید، اگر یک نسخه جدید از بولتن های قدیمی بخواهید ایجاد کنید Martus فرمت داده های قدیمی را به فرمت جدید تغییر می دهد. اگر شما یک حیطه کاملا جدید بسازید اما هیچ یک از حیطه های قدیمی را تغییر ندهید ؛ نسخه جدید بولتن حیطه قدیمی را مانند نسخه قدیمی خود پر می کند و حیطه های جدید خالی می ماند و در صورت نیاز می توانید آنها را تکمیل کنید. اگر حیطه های قدیمی را حذف کنید، نسخه جدید بولتن ها آن حیطه ها را نخواهد داشت اما نسخه های قدیمی که به صورت مهر و موم شدهذخیره شده اند (نسخه پیش نویس خیر) حیطه ها را خواهند داشت. با رفتن به قسمت جزئیات بولتن در قسمت پایین عنوان هر بولتن می توانید هر اطلاعاتی که از نسخه پیشین یک بولتن می خواهید در حیطه جدید نسخه جدید بولتن هم باشد، داشته باشید. مراقب باشید اگر در تعاریف حیطه ها در  تنظیمات تغییراتی ایجاد می کنید. اگر از همان برچسب برچسبو عنوان اتیکت در بولتن استفاده می کنید اما نوع و موضوع حیطه را تغییر داده اید، Martus ممکن است که داده های قدیمی را به حیطه جدید انتقال دهد، اما نه در همه موضوعات. به عنوان مثال: الف. اگر عنوان حیطه را از DROPDOWN به STRING عوض کنید داده ها تغییر خواهد کرد اما؛ ب. اگر STRING را به BOOLEAN تغییر دهید، اطلاعات از بین می رود؛ پ. اگر از DATE به DATERANGE تغییر کند اطلاعات تغییر خواهد کرد اما؛ ت. اگر DATERANGE به DATE تغییر داده شود، تاریخ اولیه داده ها را از دست خواهید داد. حیطه های DROPDOWN (منوی کشویی) و GRID (شبکه) با توجه به تغییراتی که در انتخاب ها یا ارزش های منوی کشویی و ستون های شبکه ایجاد می شوند، مشمول قوانین اضافه هستند. اگر: الف. اگر عنوان / اندازه ای را اضافه کنید، داده های قدیمی شما هم تاثیر می پذیرند اما؛ ب. اگر عنوان و یا اندازه ای را حذف کنید، بولتنی که انتخاب کرده اید داده هایش حذف می شود؛ پ. اگر می خواهید ستون و یا جدولی اضافه کنید، مطمن شوید که در انتهای وارد کردن اطلاعات باشد و نه در نیمه آن که اطلاعات قدیم شما محفوظ بماند و تحت تاثیر قرار نگیرد. اگر بولتنی را به صورت مهر و موم شده ذخیره کرده باشید، و بعد از تغییر حیطه داده های خود را از دست دادید می توانید به نسخه پیشین بولتن خود برگردید و داده هایی که از دست داده اید را مجددا داشته باشید (با زدن جزئیات بولتن در بالای صفحه بولتن جزیئات و تغییرات قبلی را می توانید ببنید و آنها را کپی کنید و به حیطه جدید انتقال دهید). برای این استخراج، اگر می خواهید طبقات "Reusable Choices" را در تنظیمات خود تغییر دهید می بایست برچسب حیطه/ عنوان اتیکتاش را نیز تغییر دهید که به سادگی قابل تشخیص و جستجو کردن باشد. اگر تغییر در برچسب و عنوان حیطه ندهید هنگام جستجو کردن و تهیه گزارش به خاطر داشتن طبقات مختلف سردرگم خواهید شد. \n\n
 
 #___________________________________= Notes on \"Reusable Choices\" dropdown fields:\n\n 1. Dropdowns using a \"Reusable Choices\" list can have multiple levels (e.g. for locations that might have Region and City), different fields can use one or more of the levels (e.g. if you have defined Region and City levels, you could have a field that just uses the Region level, and another field that uses both levels), and you do not need to define all levels for all entries (e.g. you could have defined Neighborhood values as a lower level for some larger Cities, but not all Cities need to have Neighborhoods defined).  The number of levels is not limited by Martus, but please note that if you have large amounts of data in your definitions lists, or a large number of levels, performance of certain Martus bulletin operations may be affected.\n\n 2. In this release, we recommend that if you want to change the number of levels in a \"Reusable Choices\" dropdown field when updating a customization, you also change the field tag and/or label so that they are more easily distinguished from each other in searching and reporting.  If you do not, the search/report results may be confusing since fields with the same label/tag will be treated differently due to them having a different number of levels.\n\n 3. \"Reusable Choices\" codes have the same restrictions that field tags do; they can be in any language, but cannot contain spaces, special characters, or punctuation.\n\n 4. Please make sure to not use the same codes in Reusable Choices lists if you edit your customizations unless you are just fixing typos in the labels, because using the same code for different labels can cause confusion when searching or reporting on those fields. Ideally you should use codes that are not numeric, but are letters that are a meaningful abbreviation of the label so there is no confusion over what they stand for if you update the customization at a later date (e.g. use 2 or 3 letter abbreviations for locations instead of numbers).  See the \"Search\" Help screen for more information about how code and label choices can affect searching on these fields.\n\n 5. You cannot use a multiple level / reusable choice dropdown as a data source for another dropdown inside or outside of grids. If you try to do this you will see an error message.\n\n 6. Please note that when you save customization XML with a Reusable Choices list for dropdown fields, Martus will move those choice definitions to the bottom of the XML when you reload it.\n\n
--77ae-field:CreateCustomFieldsHelp2b=نکاتی پیرامون بخش کرکره ای\" گزینه های قابل استفاده مجدد \" :\n1-\tبخش های کرکره ای که ازلیست\" گزینه های قابل استفاده مجدد \" استفاده میکنند، می توانند سطوح مختلفی داشته باشند. ( مثل: موقعیت هایی که هم دارای منطقه هستند و هم شهر) بخش های مختلف میتوانند از یک یا چند سطح استفاده کنند.( مثل: اگر شما منطقه و شهر را تعیین کرده باشید، همچنین میتوانید بخشی داشته باشید که تنها دارای سطح منطقه باشد و بخش دیگری داشته باشید که هر دو سطح را استفاده میکند) و شما نیاز نیست که همه سطوح را برای همه ورودی ها مشخص کنید.( مثال : شما ممکن است که برای برخی از شهر های بزرگ ، محله ها را به عنوان مقادیر سطوح پایینی تعیین کرده باشید، ولی همه شهر های بزرگ ممکن است نیاز به تعیین محله نداشته باشند) تعداد سطوح توسط Martus محدود نشده است ولی لطفا در نظر داشته باشید در صورتی که شما مقدار بسیار زیادی داده درلیست تعاریف داشته باشید، یا مقدار بسیار زیادی سطوح تعریف شده، کارایی عملیاتی برخی از بولتن های Martus ممکن است تحت تاثیر قرار گیرد.\n\n2- در این نسخه، ما توصیه میکنیم، در صورتی که میخواهید تعداد سطوح را در بخش \" گزینه های قابل استفاده مجدد \" در هنگام به روز رسانی یک بخش سفارشی شده، تغییر دهید، برچسب و اتیکت آن بخش را هم تغییر دهید، طوری که آنها به آسانی از یکدیگر در حین جستجو و گزارش گیری متمایز باشند. اگر شما این کار را انجام ندهید، نتیجه جستجو و گزارش ممکن است گیج کننده باشد از آنجایی که بخش های دارای برچسب و اتیکت مشابه، با توجه به داشتن تعداد متفاوت از سطوح، به شکل متفاوتی مورد تلقی قرار خواهند گرفت.\n\n3- کد های \" گزینه های قابل استفاده مجدد \" محدودیت های مشابه همانند برچسب بخش ها دارند، آنها میتوانند در هر زبانی باشند اما نمیتوانند شامل فاصله، کاراکتر های خاص و یا نقطه باشند. \n\n4- لطفا اطمینان حاصل کنید که اگر بخش سفارشی سازی شده خود را مورد ویرایش قرار دادید، از کد های مشابه درلیست گزینه های قابل استفاده مجدد استفاده نکنید. مگر اینکه شما غلط املایی ها را در برچسب ها تصیح میکنید. چرا که استفاده کد های مشابه برای اتیکت های متفاوت می تواند باعث سردرگمی در هنگام جستجو و یا گزارش گیری از آن بخش ها شود. در حالت ایده آل شما باید از کدهایی استفاده کنید که عددی نیستند، اما حروف اختصاری معنی دار مربوط به اتیکت هستند، بنابراین در صورتی که شما بخش سفارشی سازی را در آینده به روز رسانی کنید،  هیچ سردرگمی به وجود نخواهد آمد که آنها برای چه هستند. ( مثال: استفاده از 2 یا 3 حروف مخفف مشخص سازی موقعیت به جای استفاده از اعداد ) برای اطلاعات بیشتر پیرامون اینکه چطور کد ها و اتیکت ها بر روی جستجو تاثیر خواهند گذاشت، بخش راهنمای \" جستجو \" را ببینید.\n\n5- شما نمیتوانید از چندین سطح/ گزینه های قابل استفاده مجدد کرکره ای به عنوان منبع داده برای یک بخش کرکره ای دیگر در داخل یا خارج از شبکه استفاده کنید. اگر شما سعی به انجام اینکار داشته باشید، با یک پیغام خطا روبرو خواهید شد.\n\n\n6- لطفا به خاطر داشته باشید، زمانی که شما فایل سفارشی سازی شده XML را همراه با یک لیست گزینه های قابل استفاده مجدد برای بخش های کرکره ای ذخیره مکنید،  وقتی XML  را بارگذاری کنید، Martus آن تعاریف انتخابی را به پایین XML جابجا خواهد کرد.\n
+-77ae-field:CreateCustomFieldsHelp2b=نکاتی پیرامون بخش کرکره ای "گزینه های قابل استفاده مجدد":\n\n1 - بخش های کرکره ای که ازلیست "گزینه های قابل استفاده مجدد" استفاده میکنند، می توانند سطوح مختلفی داشته باشند. (مثل: موقعیت هایی که هم دارای منطقه هستند و هم شهر) بخش های مختلف میتوانند از یک یا چند سطح استفاده کنند.(مثل: اگر شما منطقه و شهر را تعیین کرده باشید، همچنین میتوانید بخشی داشته باشید که تنها دارای سطح منطقه باشد و بخش دیگری داشته باشید که هر دو سطح را استفاده میکند) و شما نیاز نیست که همه سطوح را برای همه ورودی ها مشخص کنید.(مثال: شما ممکن است که برای برخی از شهر های بزرگ، محله ها را به عنوان مقادیر سطوح پایینی تعیین کرده باشید، ولی همه شهر های بزرگ ممکن است نیاز به تعیین محله نداشته باشند) تعداد سطوح توسط Martus محدود نشده است ولی لطفا در نظر داشته باشید در صورتی که شما مقدار بسیار زیادی داده درلیست تعاریف داشته باشید، یا مقدار بسیار زیادی سطوح تعریف شده، کارایی عملیاتی برخی از بولتن های Martus ممکن است تحت تاثیر قرار گیرد.\n\n2 - در این نسخه، ما توصیه میکنیم، در صورتی که میخواهید تعداد سطوح را در بخش " گزینه های قابل استفاده مجدد " در هنگام به روز رسانی یک بخش سفارشی شده، تغییر دهید، برچسب و اتیکت آن بخش را هم تغییر دهید، طوری که آنها به آسانی از یکدیگر در حین جستجو و گزارش گیری متمایز باشند. اگر شما این کار را انجام ندهید، نتیجه جستجو و گزارش ممکن است گیج کننده باشد از آنجایی که بخش های دارای برچسب و اتیکت مشابه، با توجه به داشتن تعداد متفاوت از سطوح، به شکل متفاوتی مورد تلقی قرار خواهند گرفت.\n\n3 - کد های "گزینه های قابل استفاده مجدد" محدودیت های مشابه همانند برچسب بخش ها دارند، آنها میتوانند در هر زبانی باشند اما نمیتوانند شامل فاصله، کاراکتر های خاص و یا نقطه باشند.\n\n4 - لطفا اطمینان حاصل کنید که اگر بخش سفارشی سازی شده خود را مورد ویرایش قرار دادید، از کد های مشابه درلیست گزینه های قابل استفاده مجدد استفاده نکنید. مگر اینکه شما غلط املایی ها را در برچسب ها تصیح میکنید. چرا که استفاده کد های مشابه برای اتیکت های متفاوت می تواند باعث سردرگمی در هنگام جستجو و یا گزارش گیری از آن بخش ها شود. در حالت ایده آل شما باید از کدهایی استفاده کنید که عددی نیستند، اما حروف اختصاری معنی دار مربوط به اتیکت هستند، بنابراین در صورتی که شما بخش سفارشی سازی را در آینده به روز رسانی کنید،  هیچ سردرگمی به وجود نخواهد آمد که آنها برای چه هستند. (مثال: استفاده از 2 یا 3 حروف مخفف مشخص سازی موقعیت به جای استفاده از اعداد) برای اطلاعات بیشتر پیرامون اینکه چطور کد ها و اتیکت ها بر روی جستجو تاثیر خواهند گذاشت، بخش راهنمای "جستجو" را ببینید.\n\n5 - شما نمیتوانید از چندین سطح/گزینه های قابل استفاده مجدد کرکره ای به عنوان منبع داده برای یک بخش کرکره ای دیگر در داخل یا خارج از شبکه استفاده کنید. اگر شما سعی به انجام اینکار داشته باشید، با یک پیغام خطا روبرو خواهید شد.\n\n6 - لطفا به خاطر داشته باشید، زمانی که شما فایل سفارشی سازی شده XML را همراه با یک لیست گزینه های قابل استفاده مجدد برای بخش های کرکره ای ذخیره مکنید،  وقتی XML  را بارگذاری کنید، Martus آن تعاریف انتخابی را به پایین XML جابجا خواهد کرد.\n\n
 
 #__________________________________=\n<Field type='SECTION'>\n<Tag>summarysection</Tag>\n<Label>Summary Section</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>office</Tag>\n<Label>Regional office collecting the data</Label>\n<DefaultValue>Region 3 field office</DefaultValue>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>BulletinSource</Tag>\n<Label>Source of bulletin information</Label>\n<RequiredField/>\n<DefaultValue>Media/Press</DefaultValue>\n<Choices>\n<Choice>Media/Press</Choice>\n<Choice>Legal Report</Choice>\n<Choice>Personal Interview</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>SpecifyOther</Tag>\n<Label>If Source = \"Other\", please specify:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>IntervieweeName</Tag>\n<Label>Interviewee Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>IntervieweeLanguage</Tag>\n<Label>Interviewee Speaks</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>InterviewDates</Tag>\n<Label>Date(s) of interview(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anonymous</Tag>\n<Label>Does interviewee wish to remain anonymous?</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>AdditionalInfo</Tag>\n<Label>Is interviewee willing to give additional information if needed?</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Testify</Tag>\n<Label>Is interviewee willing to testify?</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>EventLocation</Tag>\n<Label>Event Location</Label>\n<DefaultValue>R1</DefaultValue>\n  <UseReusableChoices code='RegionChoices'></UseReusableChoices>\n  <UseReusableChoices code='CityChoices'></UseReusableChoices>\n</Field>\n\n<Field type='SECTION'>\n<Tag>peoplesection</Tag>\n<Label>People Section</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>VictimInformationGrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label><MinimumDate>1910-01-01</MinimumDate><MaximumDate/></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label><RequiredField/>\n<Choices>\n<Choice>Male</Choice>\n<Choice>Female</Choice>\n<Choice>Unknown</Choice>\n</Choices></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Region of Birth</Label>\n  <UseReusableChoices code='RegionChoices'></UseReusableChoices></Column>\n<Column type='STRING'><Tag></Tag><Label>Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MessageProfession</Tag>\n<Label>Profession History Table Note</Label>\n<Message>If you have information about a person who has had different professions over time, enter multiple rows with the same First and Last Names and show the date ranges for each profession on a separate row.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>ProfessionHistoryGrid</Tag>\n<Label>Profession History</Label>\n<GridSpecDetails>\n<Column type='DROPDOWN'><Tag></Tag><Label>First Name</Label>\n <DataSource>\n <GridFieldTag>VictimInformationGrid</GridFieldTag>\n <GridColumnLabel>First Name</GridColumnLabel>\n </DataSource>\n</Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Last Name</Label>\n <DataSource>\n <GridFieldTag>VictimInformationGrid</GridFieldTag>\n <GridColumnLabel>Last Name</GridColumnLabel>\n </DataSource>\n</Column>\n<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label><MaximumDate/></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MULTILINE'>\n<Tag>narrative</Tag>\n<Label>Narrative description of events</Label>\n<DefaultValue>What happened in detail is as follows:</DefaultValue>\n</Field>\n\n\n<ReusableChoices code='RegionChoices' label='Region'>\n  <Choice code='R1' label='Region 1'></Choice>\n  <Choice code='R2' label='Region 2'></Choice>\n  <Choice code='R3' label='Region 3'></Choice>\n</ReusableChoices>\n\n<ReusableChoices code='CityChoices' label='City'>\n  <Choice code='R1.C1' label='City 1'></Choice>\n  <Choice code='R1.C2' label='City 2'></Choice>\n  <Choice code='R2.C3' label='City 3'></Choice>\n  <Choice code='R2.C4' label='City 4'></Choice>\n  <Choice code='R3.C5' label='City 5'></Choice>\n  <Choice code='R3.C6' label='City 6'></Choice>\n</ReusableChoices>
--e5f0-field:CreateCustomFieldsHelp3=\n<Field type='SECTION'>\n<Tag>بخش خلاصه</Tag>\n<Label> بخش خلاصه</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>دفتر</Tag>\n<Label> دفتر منطقه ای جمع آوری داده ها</Label>\n<DefaultValue> دفتر منطقه 3</DefaultValue>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>منبع بولتن</Tag>\n<Label> منبع اطلاعات بولتن</Label>\n<RequiredField/>\n<DefaultValue> رسانه ها/مطبوعات</DefaultValue>\n<Choices>\n<Choice> رسانه ها/ مطبوعات</Choice>\n<Choice>گزارش حقوقی</Choice>\n<Choice> مصاحبه شخصی</Choice>\n<Choice> دیگر</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag> دیگر را مشخص کنید</Tag>\n<Label> اگرمنبع=\"دیگر\"است، لطفا مشخص کنید: </Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>نام مصاحبه شونده</Tag>\n<Label> نام مصاحبه شونده</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>زبان مصاحب هشونده</Tag>\n<Label> مصاحبه شونده صحبت می کند</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>تاریخ مصاحبه</Tag>\n<Label> تاریخ(های) مصاحبه(ها)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag> ناشناس</Tag>\n<Label> مصاحبه شونده تمایل دارد ناشناس باقی بماند؟</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag> اطلاعات اضافی</Tag>\n <Label>  آیا در صورت نیاز، مصاحبه شونده مایل به دادن اطلاعات اضافی است؟</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag> شهادت</Tag>\n<Label> آیا مصاحبه شونده حاضر به شهادت دادن است؟</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag> محل رویداد</Tag>\n<Label> محل رویداد</Label>\n<DefaultValue>منطقه1</DefaultValue>\n<UseReusableChoices code='انتخاب منطقه'></UseReusableChoices>\n<UseReusableChoices code='انتخاب شهر'></UseReusableChoices>\n</Field>\n\n<Field type='SECTION'>\n<Tag>بخش مردم</Tag>\n<Label>بخش مردم</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag> شبکه اطلاعات قربانی </Tag>\n<Label> اطلاعات قربانی </Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label> نام </Label></Column>\n<Column type='STRING'><Tag></Tag><Label> نام خانوادگی </Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label> شناسایی شده است؟ </Label></Column>\n<Column type='DATE'><Tag></Tag><Label> تاریخ تولد </Label><MinimumDate>1366-01-01</MinimumDate><MaximumDate/></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>جنسیت</Label><RequiredField/>\n<Choices>\n<Choice> مذکر</Choice>\n<Choice> مؤنث</Choice>\n<Choice> ناشناخته</Choice>\n</Choices></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>منطقه محل تولد</Label>\n  <UseReusableChoices code='گزینه_های_منطقه'></UseReusableChoices></Column>\n<Column type='STRING'><Tag></Tag><Label> قومیت </Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag> پیام حرفه </Tag>\n<Label>  جدول یاداشت سوابق کاری</Label>\n<Message> اگر شما اطلاعاتی در مورد شخصی دارید که در طی زمان دارای چند حرفه و شغل بوده است، چند سطر جدید با همان نام و نام خانوادگی ایجاد کنید و برای هر سطر محدوده تاریخ فعال بودن در هر شغل را مشخص کنید. </Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>شبکه سوابق کاری</Tag>\n<Label> سوابق کاری </Label>\n<GridSpecDetails>\n<Column type='DROPDOWN'><Tag></Tag><Label>نان</Label>\n <DataSource>\n <GridFieldTag> شبکه اطلاعات قربانی </GridFieldTag>\n <GridColumnLabel> نام </GridColumnLabel>\n </DataSource>\n</Column>\n<Column type='DROPDOWN'><Tag></Tag><Label> نام خانوادگی </Label>\n <DataSource>\n <GridFieldTag> شبکه اطلاعات قربانی </GridFieldTag>\n <GridColumnLabel> نام خانوادگی </GridColumnLabel>\n </DataSource>\n</Column>\n<Column type='STRING'><Tag></Tag><Label> شغل</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label> تاریخ اشتغال </Label><MaximumDate/></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MULTILINE'>\n<Tag> روایت </Tag>\n<Label> شرح روایت از وقایع </Label>\n<DefaultValue> جزئیات آنچه رخ داده به شرح زیر است:: </DefaultValue>\n</Field>\n\n\n<ReusableChoices code='انتخاب منطقه' label='منطقه'>\n  <Choice code='منطقه1' label='منطقه 1'></Choice>\n  <Choice code='منطقه2' label='منطقه 2'></Choice>\n  <Choice code='منطقه3' label='منطقه 3'></Choice>\n</ReusableChoices>\n\n<ReusableChoices code='انتخاب شهر' label=' شهر '>\n  <Choice code='منطقه1.شهر1' label=' شهر  1'></Choice>\n  <Choice code='منطقه1.شهر2' label='شهر  2'></Choice>\n  <Choice code='منطقه2.شهر3' label='شهر  3'></Choice>\n  <Choice code='منطقه2.شهر4' label='شهر  4'></Choice>\n  <Choice code='منطقه3.شهر5' label='شهر  5'></Choice>\n  <Choice code='منطقه3.شهر6' label='شهر  6'></Choice>\n</ReusableChoices>
+-e5f0-field:CreateCustomFieldsHelp3=\n<Field type='SECTION'>\n<Tag>بخش_خلاصه</Tag>\n<Label>بخش خلاصه</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>دفتر</Tag>\n<Label>دفتر منطقه ای جمع آوری داده ها</Label>\n<DefaultValue>دفتر منطقه 3</DefaultValue>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>منبع_بولتن</Tag>\n<Label>منبع اطلاعات بولتن</Label>\n<RequiredField/>\n<DefaultValue>رسانه ها/مطبوعات</DefaultValue>\n<Choices>\n<Choice>رسانه ها/مطبوعات</Choice>\n<Choice>گزارش حقوقی</Choice>\n<Choice>مصاحبه شخصی</Choice>\n<Choice>دیگر</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>دیگر_را-مشخص_کنید</Tag>\n<Label>اگرمنبع="دیگر"است، لطفا مشخص کنید:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>نام_مصاحبه_شونده</Tag>\n<Label>نام مصاحبه شونده</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>زبان_مصاحب_هشونده</Tag>\n<Label>مصاحبه شونده صحبت می کند</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>تاریخ_مصاحبه</Tag>\n<Label>تاریخ(های) مصاحبه(ها)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>ناشناس</Tag>\n<Label>مصاحبه شونده تمایل دارد ناشناس باقی بماند؟</Label>\n</Field>\n<Field type='BOOLEAN'>\n<Tag>اطلاعات_اضافی</Tag>\n<Label>آیا در صورت نیاز، مصاحبه شونده مایل به دادن اطلاعات اضافی است؟</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>شهادت</Tag>\n<Label>آیا مصاحبه شونده حاضر به شهادت دادن است؟</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>محل_رویداد</Tag>\n<Label>محل رویداد</Label>\n<DefaultValue>منطقه1</DefaultValue>\n<UseReusableChoices code='انتخاب_منطقه'></UseReusableChoices>\n<UseReusableChoices code='انتخاب_شهر'></UseReusableChoices>\n</Field>\n\n<Field type='SECTION'>\n<Tag>بخش_مردم</Tag>\n<Label>بخش مردم</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>شبکه_اطلاعات_قربانی</Tag>\n<Label>اطلاعات قربانی</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>نام</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>نام خانوادگی</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>شناسایی شده است؟</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>تاریخ تولد</Label><MinimumDate>1366-01-01</MinimumDate><MaximumDate/></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>جنسیت</Label><RequiredField/>\n<Choices>\n<Choice>مذکر</Choice>\n<Choice>مؤنث</Choice>\n<Choice>ناشناخته</Choice>\n</Choices></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>منطقه محل تولد</Label>\n  <UseReusableChoices code='انتخاب_منطقه'></UseReusableChoices></Column>\n<Column type='STRING'><Tag></Tag><Label>قومیت</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>پیام_حرفه</Tag>\n<Label>جدول یاداشت سوابق کاری</Label>\n<Message>اگر شما اطلاعاتی در مورد شخصی دارید که در طی زمان دارای چند حرفه و شغل بوده است، چند سطر جدید با همان نام و نام خانوادگی ایجاد کنید و برای هر سطر محدوده تاریخ فعال بودن در هر شغل را مشخص کنید.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>شبکه_سوابق_کاری</Tag>\n<Label>سوابق کاری</Label>\n<GridSpecDetails>\n<Column type='DROPDOWN'><Tag></Tag><Label>نان</Label>\n <DataSource>\n <GridFieldTag>شبکه_اطلاعات_قربانی</GridFieldTag>\n <GridColumnLabel>نام</GridColumnLabel>\n </DataSource>\n</Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>نام خانوادگی</Label>\n <DataSource>\n <GridFieldTag>شبکه_اطلاعات_قربانی</GridFieldTag>\n <GridColumnLabel>نام خانوادگی</GridColumnLabel>\n </DataSource>\n</Column>\n<Column type='STRING'><Tag></Tag><Label>شغل</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>تاریخ اشتغال</Label><MaximumDate/></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MULTILINE'>\n<Tag>روایت</Tag>\n<Label>شرح روایت از وقایع</Label>\n<DefaultValue>جزئیات آنچه رخ داده به شرح زیر است:</DefaultValue>\n</Field>\n\n\n<ReusableChoices code='انتخاب_منطقه' label='منطقه'>\n  <Choice code='منطقه1' label='منطقه1'></Choice>\n  <Choice code='منطقه2' label='منطقه2'></Choice>\n  <Choice code='منطقه3' label='منطقه3'></Choice>\n</ReusableChoices>\n\n<ReusableChoices code='انتخاب_شهر' label='شهر'>\n  <Choice code='منطقه1.شهر1' label='شهر1'></Choice>\n  <Choice code='منطقه1.شهر2' label='شهر2'></Choice>\n  <Choice code='منطقه2.شهر3' label='شهر3'></Choice>\n  <Choice code='منطقه2.شهر4' label='شهر4'></Choice>\n  <Choice code='منطقه3.شهر5' label='شهر5'></Choice>\n  <Choice code='منطقه3.شهر6' label='شهر6'></Choice>\n</ReusableChoices>
 
 #____________________________________=Please enter your new username and password.
--aec2-field:CreateNewUserNamePassword= لطفا نام کاربری و رمز عبور جدید را وارد کنید. 
+-aec2-field:CreateNewUserNamePassword=لطفا نام کاربری و رمز عبور جدید را وارد کنید. 
 
 #_________________________________=Bottom (always Private) Pane of Bulletin
 -f953-field:CustomXMLBottomSection=بخش پایینی(همیشه خصوصی) بخشی از بولتن
@@ -596,37 +597,37 @@
 -e596-field:CustomXMLTopSection=بخش بالایی از یک بولتن
 
 #__________________________________________=Customization Template Files (*.mct)
--47e8-field:CustomizationTemplateFileFilter= سفارشی سازی قالب فایل  (*.mct)
+-47e8-field:CustomizationTemplateFileFilter=سفارشی سازی قالب فایل  (*.mct)
 
 #_______________________=(Press the + button to show the hidden information)
 -045b-field:DataIsHidden=(کلید + را فشار دهید تا اطلاعات پنهان شده را نمایش دهید)
 
 #________________________=Date delimiter
--36d4-field:DateDelimiter= تاریخ حائل 
+-36d4-field:DateDelimiter=تاریخ حائل 
 
 #____________________________=Dash (00-00-00)
--997c-field:DateDelimiterDash= خط تیره  (00-00-00)
+-997c-field:DateDelimiterDash=خط تیره  (00-00-00)
 
 #___________________________=Dot (00.00.00)
--66ea-field:DateDelimiterDot= نقطه (00.00.00)
+-66ea-field:DateDelimiterDot=نقطه (00.00.00)
 
 #_____________________________=Slash (00/00/00)
--404d-field:DateDelimiterSlash= نشان ممیز(00/00/00)
+-404d-field:DateDelimiterSlash=نشان ممیز(00/00/00)
 
 #____________________=Exact Date
 -8a81-field:DateExact=تاريخ دقيق
 
 #___________________________=Unknown
--bc78-field:DateNotSpecified= ناشناخته
+-bc78-field:DateNotSpecified=ناشناخته
 
 #______________________=Day
--987b-field:DatePartDay= روز
+-987b-field:DatePartDay=روز
 
 #________________________=Month
--082b-field:DatePartMonth= ماه
+-082b-field:DatePartMonth=ماه
 
 #_______________________=Year
--879e-field:DatePartYear= سال
+-879e-field:DatePartYear=سال
 
 #____________________=Date Range
 -6bb4-field:DateRange=محدوده تاریخ
@@ -638,7 +639,7 @@
 -fea7-field:DateRangeTemplateend=#FieldLabel# (پایان)
 
 #_____________________________=Default Details
--4a82-field:DefaultDetailFiles= جزئیات پیش فرض
+-4a82-field:DefaultDetailFiles=جزئیات پیش فرض
 
 #__________________________________________=chart.jpeg
 -4a06-field:DefaultPrintChartToDiskFileName=نمودار.jpeg
@@ -650,7 +651,7 @@
 -ce4c-field:DeleteBulletinFileMsg1=این بولتن ازاین فایل وارد Martus شده است :
 
 #_________________________________=Do you want to delete the original file, or leave it in place?
--3425-field:DeleteBulletinFileMsg2= آیا مایل هستید که فایل اصلی را  پاک کنید یا اینکه آنرا در محل خود رها کنید؟
+-3425-field:DeleteBulletinFileMsg2=آیا مایل هستید که فایل اصلی را  پاک کنید یا اینکه آنرا در محل خود رها کنید؟
 
 #_____________________=Delete?
 -042d-field:DeleteFlag=حذف شود؟
@@ -659,7 +660,7 @@
 -5c38-field:DeleteKeypair=حذف فایل کلید
 
 #____________________________________=You can only delete draft bulletins from the server that are not currently on your computer.
--8ded-field:DeleteServerDraftsMessage= شما فقط می توانید پیش نویس بولتنهایی را از سرورپاک کنید که در حال حاضر برروی دستگاه رایانه شما قرار ندارند.
+-8ded-field:DeleteServerDraftsMessage=شما فقط می توانید پیش نویس بولتنهایی را از سرورپاک کنید که در حال حاضر برروی دستگاه رایانه شما قرار ندارند.
 
 #______________________=Do not prompt
 -448d-field:DonotPrompt=مجدد نمایش نده
@@ -671,7 +672,7 @@
 -3f09-field:DuplicateLabelsInCustomTemplate=اتیکت های زیر بیش از یک بار در قالب شما ظاهر می شوند. 
 
 #__________________________________________________=Do you want to save this template with the duplicate labels?
--79bc-field:DuplicateLabelsInCustomTemplateContinue= آیا شما مایل هستید که این  قالب را همراه با اتیکت های تکراری ذخیره نمایید؟
+-79bc-field:DuplicateLabelsInCustomTemplateContinue=آیا شما مایل هستید که این  قالب را همراه با اتیکت های تکراری ذخیره نمایید؟
 
 #________________________________=Unable to back up the key file on this disk.
 -bda3-field:ErrorBackingupKeyPair=امکان پشتیبانگیری از فایل کلید بر روی این دیسک فراهم نیست.
@@ -689,13 +690,13 @@
 -64b8-field:ErrorCustomFieldHeader4=اتیکت
 
 #____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag\n   102 - A previous Tag already exists with this name\n   103 - Label cannot be blank\n   104 - Unrecognized Field Type\n   105 - A label was found in a standard field\n   106 - XML Parse Error (e.g. mismatched quotation marks or bracket syntax)\n   107 - Tag or Code contains illegal characters (e.g. spaces or punctuation)\n   108 - Duplicate entry in Dropdown field\n   109 - No Choices in Dropdown field\n   110 - System/Standard field tag cannot be used for custom field\n   111 - Standard field in top pane cannot be placed in bottom (always Private) pane\n   112 - Standard field in bottom (always Private) pane cannot be placed in the top pane\n   113 - Data Source Grid not found in same pane as resulting dropdown field\n   114 - Unknown Data Source Grid Column Label\n   115 - Dropdown cannot have both choices and data source\n   116 - Invalid date must be in ISO format YYYY-MM-DD\n   117 - No Reusable Choices list defined for Dropdown\n   118 - Reusable dropdown definition missing code value.  Please verify that the definition looks like the following:\n         <UseReusableChoices code='FieldChoices'></UseReusableChoices>\n   119 - Reusable choice must have a code and label\n   120 - Dropdown data source cannot be a single or multiple level dropdown with Reusable Choices\n   121 - Default value is not valid for this field\n   122 - Reusable Choices lists cannot have the same Label\n   123 - Lower-level reusable choice code has no matching higher-level code\n   200 - All fields empty\n   201 - Unrecognized Headquarters created this template\n   202 - Security validation error\n   203 - File Error\n   204 - Imported XML Missing Field
--85ea-field:ErrorCustomFields=در تعاریف بخش های سفارشی خطایی وجود دارد. هر خطا با کدهای زیر مشخص شده است: \n 100- بخشی الزامی فراموش شده است\n 101- بخش مورد نظر دارای برچسب صحیح نمیباشد\n 102-  برچسبی از قبل در حال حاضر با این نام وجود دارد \n 103- اتیکت نمیتواند خالی باشد\n 104- نوع بخش ناشناخته است\n 105- یک اتیکت در بخش استاندارد پیدا شد\n 106-  خطای تجزیه و تحلیل در XML ( عدم تطابق در علامت های نقل قول و یا  نحو پایه )\n 107- برچسب یا کد دارای کاراکترهای غیرقانونی میباشند( فاصله یا نقطه گذاری )\n 108- درج اطلاعات تکراری در بخش کرکره ای\n 109-  بدون انتخاب دربخش کرکره ای\n 110- برچسب مربوط به سیستم/ بخش استاندارد نمیتواند دربخش های سفارشی مورد استفاده قرار گیرد\n 111- بخش بالایی قالب به هیچ وجه قابل جابجایی به بخش پایینی ( همیشه خصوصی ) قالب نمباشد\n 112- بخش پایینی قالب  ( همیشه خصوصی ) به هیچ وجه قابل جابجایی به بخش بالایی قالب نمباشد\n 113- به واسطه بخش کرکره ای منبع داده های شبکه در همان قالب یافت نشد \n 114- اتیکت مربوط به  ستون منبع داده های شبکه ناشناخته است\n 115- بخش  کرکره ای نمیتواند هم دارای گزینه و هم منبع داده باشد\n 116-  تاریخ نامعتبر است و  باید در فرمت ISO باشد YYYY-MM-DD\n 117- هیچ لیست قابل استقفاده مجدد برای بخش های کرکره ای تعریف نشده است\n 118- تعریف ارزش کد مربوط به بخش کرکره ای درج نشده است، لطفا بررسی کنید که تعریف به شکل زیر باشد: \n <UseReusableChoices code='FieldChoices'></UseReusableChoices> \n 119- گزینه قابل استفاده مجدد باید داری کد و اتیکت باشد\n 120-  منبع داده کرکره ای نمیتواند دارای یک یا چند سطح کرکره همراه با گزینه های قابل استفاده مجدد باشد\n 121-  مقدار پیش فرض برای این بخش معتبر نیست \n 122- لیست های گزینه های قابل استفاده مجدد نمیتوانند دارای اتیکت یکسان باشند\n 123-  سطح پایین تر گزینه قابل استفاده مجدد  هیچ تطبیقی با کد  سطح بالاتر ندارد\n 200- همه بخش ها خالی هستند\n 201- این قالب توسط یک دفتر مرکزی نامعتبر ایجاد شده است\n 202- خطا در حین  اعتبار سنجی امنیتی \n 203- خطا در فایل \n 204-XML  وارد شده بخشی را کم دارد
+-85ea-field:ErrorCustomFields=در تعاریف بخش های سفارشی خطایی وجود دارد. هر خطا با کدهای زیر مشخص شده است: \n 100- بخشی الزامی فراموش شده است\n 101- بخش مورد نظر دارای برچسب صحیح نمیباشد\n 102- برچسبی از قبل در حال حاضر با این نام وجود دارد \n 103- اتیکت نمیتواند خالی باشد\n 104- نوع بخش ناشناخته است\n 105- یک اتیکت در بخش استاندارد پیدا شد\n 106- خطای تجزیه و تحلیل در XML (عدم تطابق در علامت های نقل قول و یا  نحو پایه)\n 107- برچسب یا کد دارای کاراکترهای غیرقانونی میباشند (فاصله یا نقطه گذاری)\n 108- درج اطلاعات تکراری در بخش کرکره ای\n 109- بدون انتخاب دربخش کرکره ای\n 110- برچسب مربوط به سیستم/ بخش استاندارد نمیتواند دربخش های سفارشی مورد استفاده قرار گیرد\n 111- بخش بالایی قالب به هیچ وجه قابل جابجایی به بخش پایینی (همیشه خصوصی) قالب نمباشد\n 112- بخش پایینی قالب  (همیشه خصوصی) به هیچ وجه قابل جابجایی به بخش بالایی قالب نمباشد\n 113- به واسطه بخش کرکره ای منبع داده های شبکه در همان قالب یافت نشد \n 114- اتیکت مربوط به  ستون منبع داده های شبکه ناشناخته است\n 115- بخش  کرکره ای نمیتواند هم دارای گزینه و هم منبع داده باشد\n 116- تاریخ نامعتبر است و  باید در فرمت ISO باشد YYYY-MM-DD\n 117- هیچ لیست قابل استقفاده مجدد برای بخش های کرکره ای تعریف نشده است\n 118- تعریف ارزش کد مربوط به بخش کرکره ای درج نشده است، لطفا بررسی کنید که تعریف به شکل زیر باشد: \n <UseReusableChoices code='FieldChoices'></UseReusableChoices> \n 119- گزینه قابل استفاده مجدد باید داری کد و اتیکت باشد\n 120- منبع داده کرکره ای نمیتواند دارای یک یا چند سطح کرکره همراه با گزینه های قابل استفاده مجدد باشد\n 121- مقدار پیش فرض برای این بخش معتبر نیست \n 122- لیست های گزینه های قابل استفاده مجدد نمیتوانند دارای اتیکت یکسان باشند\n 123- سطح پایین تر گزینه قابل استفاده مجدد  هیچ تطبیقی با کد  سطح بالاتر ندارد\n 200- همه بخش ها خالی هستند\n 201- این قالب توسط یک دفتر مرکزی نامعتبر ایجاد شده است\n 202- خطا در حین  اعتبار سنجی امنیتی \n 203- خطا در فایل \n 204-XML  وارد شده بخشی را کم دارد
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
--db93-field:ErrorPreviousBackupShareExists= فایل پشتیبان قبلی وجود دارد. شما باید هر فایل را بر روی یک دیسک  قابل حمل مربوط به خود ذخیره نمایید. 
+-db93-field:ErrorPreviousBackupShareExists=فایل پشتیبان قبلی وجود دارد. شما باید هر فایل را بر روی یک دیسک  قابل حمل مربوط به خود ذخیره نمایید. 
 
 #_____________________________________________=No appropriate backup file was found on this disk, please try a different disk.
--618a-field:ErrorRecoverNoAppropriateFileFound= فایل پشتیبان مناسب در این دیسک پیدا نشد، لطفا یک دیسک متفاوت را امتحان کنید.
+-618a-field:ErrorRecoverNoAppropriateFileFound=فایل پشتیبان مناسب در این دیسک پیدا نشد، لطفا یک دیسک متفاوت را امتحان کنید.
 
 #________________________________=An error occurred reading this key backup file.
 -b106-field:ErrorRecoverShareDisk=در هنگام خواندن فایل مربوط به پشتیبان کلید،خطایی رخ داده است.
@@ -710,10 +711,10 @@
 -d390-field:ExportAllVersions=در هنگام استخراج همه نسخه های مربوط به هربولتن را قرار بده
 
 #____________________________=Include attachments in export
--1a48-field:ExportAttachments=هنگام استخراج ، فایل های پیوست شده را نیز قرار بده
+-1a48-field:ExportAttachments=هنگام استخراج، فایل های پیوست شده را نیز قرار بده
 
 #________________________________=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.  These files can then be used to import the Martus bulletin information into another application.\n\n  You could also use this XML file to import these bulletins back into Martus (as new unique bulletins) if desired.  Please email help@martus.org if you need assistance with this type of importing.
--a8c0-field:ExportBulletinDetails=اطلاعات بولتن های انتخابی ( لیست شده در زیر) به یک فایل XML در مقصدی که مشخص کرده اید استخراج خواهند شد. این فایل ها را میتوانید برای وارد کردن اطلاعات بولتن Martus به یک برنامه دیگر استفاده نمایید.\n\nشما همچنین در صورت تماییل میتوانید از این فایل XML برای واردکردن این بولتن ها به Martus ( به عنوان بولتن های منحصر به فرد جدید ) استفاده نمایید. در صورتی که نیاز به کمک پیرامون این نوع وارد کردن دارید با ایمیل email help@martus.org تماس بگیرید.
+-a8c0-field:ExportBulletinDetails=اطلاعات بولتن های انتخابی (لیست شده در زیر) به یک فایل XML در مقصدی که مشخص کرده اید استخراج خواهند شد. این فایل ها را میتوانید برای وارد کردن اطلاعات بولتن Martus به یک برنامه دیگر استفاده نمایید.\n\nشما همچنین در صورت تماییل میتوانید از این فایل XML برای واردکردن این بولتن ها به Martus (به عنوان بولتن های منحصر به فرد جدید) استفاده نمایید. در صورتی که نیاز به کمک پیرامون این نوع وارد کردن دارید با ایمیل email help@martus.org تماس بگیرید.
 
 #____________________________=Include private data in export
 -4bb6-field:ExportPrivateData=هنگام استخراج، داده های خصوصی را نیز قرار بده
@@ -725,25 +726,25 @@
 -0b4e-field:ExportedBulletins=استخراج بولتن ها انجام شد
 
 #______________________________=---Overview---\n\nMartus searches all versions of every bulletin (both public and private, sealed and draft) in every folder, including the Discarded Bulletins folder.  When the search is completed, the Search Results folder lists copies of the bulletins found in your search.\n\nYou can search for words in any language.  Martus searches are not case-sensitive in English and other purely Latin character languages, so it doesn't matter whether a word is capitalized or not.\n\nSearches include attachment filenames, but not content of attachments.\n\nYou can search both standard and custom fields.\n\n
--42b4-field:FancySearchHelpMsg1=--- بررسی اجمالی ---\n\n Martus تمامی نسخه های هر بولتن (هم عمومی و هم خصوصی ، مهروموم شده و پیش نویس)  در هر پوشه ، از جمله پوشه بولتن های دور انداخته شده را جستجو میکند.  زمانی که جستجو تکمیل شد، پوشه نتایج جستجو ، نسخه بولتن های یافت شده در جستجو را لیست میکند.\n\n شما میتوانید برای جستجوی کلمات ، از هر زبانی استفاده کنید. جستجوی Martus حساس به حروف در زبان انگلیسیو یا دیگر کاراکتر های زبان های لاتین  نیست ، بنابراین مهم نیست که یک کلمه با حروف بزرگ است یا خیر.\n\nجستجو شامل نام فایل های پیوست است، اما نه محتوای پیوست ها.\n\nشما می توانید هر دو بخش های استاندارد و سفارشی را جستجو کنید.\n
+-42b4-field:FancySearchHelpMsg1=--- بررسی اجمالی ---\n\n Martus تمامی نسخه های هر بولتن (هم عمومی و هم خصوصی، مهروموم شده و پیش نویس)  در هر پوشه، از جمله پوشه بولتن های دور انداخته شده را جستجو میکند.  زمانی که جستجو تکمیل شد، پوشه نتایج جستجو، نسخه بولتن های یافت شده در جستجو را لیست میکند.\n\n شما میتوانید برای جستجوی کلمات، از هر زبانی استفاده کنید. جستجوی Martus حساس به حروف در زبان انگلیسیو یا دیگر کاراکتر های زبان های لاتین  نیست، بنابراین مهم نیست که یک کلمه با حروف بزرگ است یا خیر.\n\nجستجو شامل نام فایل های پیوست است، اما نه محتوای پیوست ها.\n\nشما می توانید هر دو بخش های استاندارد و سفارشی را جستجو کنید.\n
 
 #______________________________=---Search tips---\n\nMartus will find any text you enter whether it's a complete word or part of a larger word. For example, if you search for the word prison, you'll see bulletins that include the words prison, imprison, and imprisonment. Likewise, if you search for the word prison, Martus will find bulletins that include attachments with names such as photos-prison.jpg and prisoners-report.doc.\n\nTo search for an exact phrase, type it with quotation marks around the phrase  (e.g.  \"Witness Testimony\"). If you do not put quotation marks around the phrase, Martus will search for the words individually.\n\nUse the word \"#Or#\" to broaden your search, or the word \"#And#\" to narrow it.  You can use the #And# / #Or# dropdowns to specify different fields you want search across (e.g. you want to search for bulletins that have \"Last Saved Date\" in the last week and have a certain author).  If you want to search on multiple text values within a single bulletin field, you can use #Or# or #And# in-between words in the \"Search For...\" entry box.  For example, if you search \"Any Field\" for:\n   prison #Or# jail\nyou'll see a list of bulletins that contain either word anywhere in the bulletin. If you search for:\n   prison #And# assault \nyou'll see a list of bulletins that contain both words. The keyword \"#And#\" is implied, so if you search for:\n   prison assault \nMartus will find bulletins the same bulletins as if you searched for:\n   prison #And# assault\n\nWhen you use both \"#And#\" and \"#Or#\", your search terms are grouped from the beginning of your list (either across bulletin fields or within a particular field). For example, if you enter:\n   prison #Or# jail #And# trial \nin the \"Search For...\" entry box, Martus will search for any bulletins that contain either of the words prison or jail, and also contain the word trial. But if you enter:\n   prison #And# jail #Or# trial \nMartus will search for any bulletins that contain both the words prison and jail, or contain the word trial.\n
--ec7d-field:FancySearchHelpMsg2=---نکاتی پیرامون جستجو---\n\nMartus هر متنی را که شما وارد کنید، چه یک کلمه کامل باشد و یا بخشی از از کلمه بزرگتر را پیدا خواهد کرد. برای مثال،  اگر شما کلمه زندان را جستجو کنید، شما همه بولتن هایی که کلمه زندان را در خود دارند، زندانی و حبس را خواهید دید. به همین ترتیب، اگر شما کلمه زندان را جستجو کنید، Martus بولتن هایی را که دارای پیوست هایی با نام های مانند photos-prison.jpg و prisoners-report.doc باشند را هم در نتایج جستجو پیدا خواهد کرد.\n\nبرای جستجوی دقیق یک عبارت ، آنرا در بین علامت نقل قول تایپ کنید ( مانند: \"شهادت شاهدان\" ). اگر شما علامت نقل قول در اطراف عبارت را قرار ندهید، Martus  کلمات را به صورت جداگانه جستجو خواهد کرد.\n\nاز کلمه  \\\"#Or#\\\" برای گسترش جستجوی شما ، یا از کلمه \\\"#And#\\\" محدود کردن آن استفاده کنید. شما میتوانید از ابزار کشویی  #And# / #Or#برای تعیین بخش های مختلف که می خواهید جستجودر انها انجام شود، استفاده کنید. ( به عنوان مثال : شما میخواهید بولتن هایی را جستجو کنید که دارای\\ \" آخرین تاریخ ذخیره شده\\\" در هفته گذشته و دارای نویسنده خاصی هستند ) اگر شما میخواهید در یک بولتن خاص به جستجوی چندین مقادر بگردید، شما میتوانید از  #Or# یا #And# در بین کلمات درجعبه \"Search For...\" استفاده کنید. برای مثال، اگر شما \" هر بخشی \" را برای کلمه :\n   زندان #Or# زندانی\nجستجو کنید، شما لیستی از بولتن هایی را خواهید دید که شامل هر یک از این کلمات هستند.اگر شما جستجو کنید :\n   زندان #And# حمله\nشما لیست بولتن هایی را خواهید دید که دارای هر دوی این کلمات باشند.کلمه کلیدی \"#And#\" ضمنی است، بنابراین اگر شما\n   حمله به زندان\nرا جستجو کنید، Martus همان بولتن هایی را پیدا خواهد کرد که اگر \n   حمله به زندان #And# زندان را جستجو میکردید.\n\nزمانی که شما هر دوی   \\\"#And#\\\" و \\\"#Or#\\\"را استفاده کنید، شرایط جستجو از ابتدای لیست شما گروه بندی میشوند. ( یا درسراسر بخش های بولتن و یا دربخش خاص ) به عنوان مثال، اگر شما در\\\" جعبه جستجو برای... \\\"\n   زندان #Or# یا زندانی  #And# محاکمه\nرا وارد کنید، Martus به دنبال هرگونه بولتنی  خواهد بود که شامل هر کدام از کلمات زندان و یا زندانی و همچنین شامل کلمه محاکمه باشند. اما اگر شما وارد کنید :\n   زندان #And# زندانی  #Or# محاکمه\nMartus هرگونه بولتنی را جستجو خواهد کرد که دارای هر دو کلمه زندانی و زندان باشند و یا کلمه محاکمه.\n
+-ec7d-field:FancySearchHelpMsg2=--- نکاتی پیرامون جستجو ---\n\nMartus هر متنی را که شما وارد کنید، چه یک کلمه کامل باشد و یا بخشی از از کلمه بزرگتر را پیدا خواهد کرد. برای مثال،  اگر شما کلمه زندان را جستجو کنید، شما همه بولتن هایی که کلمه زندان را در خود دارند، زندانی و حبس را خواهید دید. به همین ترتیب، اگر شما کلمه زندان را جستجو کنید، Martus بولتن هایی را که دارای پیوست هایی با نام های مانند photos-prison.jpg و prisoners-report.doc باشند را هم در نتایج جستجو پیدا خواهد کرد.\n\nبرای جستجوی دقیق یک عبارت، آنرا در بین علامت نقل قول تایپ کنید (مانند: "شهادت شاهدان"). اگر شما علامت نقل قول در اطراف عبارت را قرار ندهید، Martus  کلمات را به صورت جداگانه جستجو خواهد کرد.\n\nاز کلمه  "#Or#" برای گسترش جستجوی شما، یا از کلمه "#And#" محدود کردن آن استفاده کنید. شما میتوانید از ابزار کشویی  #And# / #Or# برای تعیین بخش های مختلف که می خواهید جستجودر انها انجام شود، استفاده کنید. (به عنوان مثال: شما میخواهید بولتن هایی را جستجو کنید که دارای"آخرین تاریخ ذخیره شده" در هفته گذشته و دارای نویسنده خاصی هستند) اگر شما میخواهید در یک بولتن خاص به جستجوی چندین مقادر بگردید، شما میتوانید از  #Or# یا #And# در بین کلمات درجعبه "Search For... " استفاده کنید. برای مثال، اگر شما "هر بخشی" را برای کلمه :\n   زندان #Or# زندانی\nجستجو کنید، شما لیستی از بولتن هایی را خواهید دید که شامل هر یک از این کلمات هستند.اگر شما جستجو کنید :\n   زندان #And# حمله\nشما لیست بولتن هایی را خواهید دید که دارای هر دوی این کلمات باشند.کلمه کلیدی "#And#" ضمنی است، بنابراین اگر شما\n   حمله به زندان\nرا جستجو کنید، Martus همان بولتن هایی را پیدا خواهد کرد که اگر \n   حمله به زندان #And# زندان را جستجو میکردید.\n\nزمانی که شما هر دوی   "#And#" و "#Or#"را استفاده کنید، شرایط جستجو از ابتدای لیست شما گروه بندی میشوند. (یا درسراسر بخش های بولتن و یا دربخش خاص) به عنوان مثال، اگر شما در" جعبه جستجو برای... "\n   زندان #Or# یا زندانی  #And# محاکمه\nرا وارد کنید، Martus به دنبال هرگونه بولتنی  خواهد بود که شامل هر کدام از کلمات زندان و یا زندانی و همچنین شامل کلمه محاکمه باشند. اما اگر شما وارد کنید :\n   زندان #And# زندانی  #Or# محاکمه\nMartus هرگونه بولتنی را جستجو خواهد کرد که دارای هر دو کلمه زندانی و زندان باشند و یا کلمه محاکمه.\n
 
 #______________________________=You can use the word #Or# or #And#, or you can use the English words \"#OrEnglish#\" and \"#AndEnglish#\" to search.\n\nYou need to put spaces before and after any #Or# / #And# keywords you use in your search.\n
--1573-field:FancySearchHelpMsg3=شما میتوانید از  #Or# یا  #And#، یا از کلمات انگلیسی \"#OrEnglish#\" و \"#AndEnglish#\" برای جستجو استفاده کنید.\n\nشما نیاز خواهید داشت تا یک فاصله قبل و بعد از هر کدام  #Or# / #And#که در جستجوی خود استفاده میکنید، قرار دهید. \n
+-1573-field:FancySearchHelpMsg3=شما میتوانید از  #Or# یا  #And#، یا از کلمات انگلیسی "#OrEnglish#" و "#AndEnglish#" برای جستجو استفاده کنید.\n\nشما نیاز خواهید داشت تا یک فاصله قبل و بعد از هر کدام  #Or# / #And#که در جستجوی خود استفاده میکنید، قرار دهید. \n
 
 #______________________________=If you want all of your grid search criteria to be met in a single bulletin grid row, please check the \"Match grid column specifications\" checkbox. For example, if you want to search for a specific victim name in a single row in your bulletins created after a certain date, select the checkbox and enter the following fields in the Search screen: \"Victim Information: First Name\" = x and \"Victim Information: Last Name\" = y and \"Date Created\" >= YYYY-Mon-DD. If you do not select the \"Match grid column specifications\" checkbox, Martus will find bulletins created after your specified date where any row has the first name you specified and any other row has the last name specified, but not necessarily in the same bulletin row (you could have a row with \"First Name\" = x and \"Last Name\" = b, and a different row with \"First Name\" = a and \"Last Name\" = y, and Martus will find that bulletin as matching the search because you did not specify that it had to match in a single row)\n\n
--2a0a-field:FancySearchHelpMsg4=اگر می خواهید همه شرایط جستجوی مشبک تان در یک سطر مشبک رویداد خبری یکجا قرار داده شود، لطفا قوطی مارک دار \" مشخصات ستون مشبک را مطابقت دهید\" . بطور مثال اگر در رویدادهای خبری ایجاد شده پس از یک تاریخ معین می خواهید برای نام یک قربانی مشخص در یک سطر فردی جستجو کنید، قوطی مارک را انتخاب کنید و در صحفه نمایش جستجو ساحات ذیل را وارد کنید: \"معلومات قربانی: اسم\" = x و \"معلومات قربانی: تخلص\" = y و \"تاریخ ایجاد\" >= روز/ماه/سال  اگر گزینه قوطی مارک دار \" مشخصات ستون مشبک را مطابقت دهید\" را انتخاب نکنید، Martus رویدادهای خبری ایجاد شده بعد از تاریخ مشخص کرده شما جایی که یک سطر نام مشخص کرده شما را و سطر دیگر تخلص مشخص کرده شما را در بر داشته باشد، پیدا خواهد کرد، اما باید در عین رویداد خبری باشد) شما می توانید یک سطر با \"First Name\" = x and \"Last Name\" = b و سطر دیگر با\"First Name\" = a  (\"اسم اول\") و  \"Last Name\" = y (\"تخلص\") داشته باشید، و Martus رویدادهای خبری همخوان با جستجوی شما را پیدا خواهد کرد زیرا شما مشخص نساخته بودید تا در یک سطر فردی باید همخوانی داشته باشند.)\n\n
+-2a0a-field:FancySearchHelpMsg4=اگر می خواهید همه شرایط جستجوی مشبک تان در یک سطر مشبک رویداد خبری یکجا قرار داده شود، لطفا قوطی مارک دار " مشخصات ستون مشبک را مطابقت دهید". بطور مثال اگر در رویدادهای خبری ایجاد شده پس از یک تاریخ معین می خواهید برای نام یک قربانی مشخص در یک سطر فردی جستجو کنید، قوطی مارک را انتخاب کنید و در صحفه نمایش جستجو ساحات ذیل را وارد کنید: "معلومات قربانی: اسم" = x و"معلومات قربانی: تخلص" = y و "تاریخ ایجاد" >= روز/ماه/سال  اگر گزینه قوطی مارک دار" مشخصات ستون مشبک را مطابقت دهید" را انتخاب نکنید، Martus رویدادهای خبری ایجاد شده بعد از تاریخ مشخص کرده شما جایی که یک سطر نام مشخص کرده شما را و سطر دیگر تخلص مشخص کرده شما را در بر داشته باشد، پیدا خواهد کرد، اما باید در عین رویداد خبری باشد) شما می توانید یک سطر با "First Name" = x and "Last Name" = b و سطر دیگر با"First Name" = a  ("اسم اول") و  "Last Name" = y ("تخلص") داشته باشید، و Martus رویدادهای خبری همخوان با جستجوی شما را پیدا خواهد کرد زیرا شما مشخص نساخته بودید تا در یک سطر فردی باید همخوانی داشته باشند.)\n\n
 
 #______________________________= Additional Search Notes:\n\n 1. Because Martus searches all rows of any grid (table) fields for your criteria, it may find bulletins where one grid row matches your criteria but other rows do not.  For example you could have a bulletin with a grid that has a location field in it and you have multiple rows of data in the grid with locations A, B, and C.  If you search for bulletins where location != C (does not equal C), Martus will find that bulletin because there are 2 rows in the bulletin grid where the location is not C, even though there is one row where the locations IS C.\n\n 2. In this release, if you are searching on a multi-level dropdown, all searches are exact matches, not partial or \"starts with\" matches.  This means that you have to pick the exact level at which you want to be searching.  For example, an \"Event Location\" field that has three levels (Region/City/Neighborhood) will have three entries in the search field list:  Event Location: Region, Event Location: City, and Event Location: Neighborhood.  So if you want to find any bulletins that have an Event Location anywhere in Region X (regardless of the City), you have to pick the \"Event Location: Region\" field to search on and pick Region X off the dropdown list choices. If you pick Event Location: City to search on and then pick Region X but leave the City level blank, Martus will only find entries where there was no City data entered  (City was blank), as opposed to ANY location with Region X regardless of what data was entered at the City level.\n\n 3. If you do not see your search terms/dates in the final version of the bulletin displayed in the Search Results folder, your criteria may have been matched in an earlier version of the bulletin.  You can access previous versions by clicking the \"Bulletin Details...\" button at the top of the bulletin.  To search only the most recent versions of bulletins, select Only Search Most Recent Versions of Bulletins in the Search dialog box.\n\n 4. If you have fields in different bulletins or from different customizations that are exactly the same, Martus will combine them in any Search and Report field lists.  And while Martus warns you about duplicate labels where you are creating a new bulletin customization, it is possible that over time, you may have bulletins with different customizations that ended up with the same labels (e.g. maybe you changed a text field to a dropdown field but kept the same label).  In these cases, Martus will display both fields in the search screen, and try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists.  Also, if you have fields with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same.  So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion. Please see the \"Customize Fields\" Help screen for more guidelines on creating fields for searching.\n\n 5. You may sometimes see duplicate entries in dropdown list search criteria values in the search screen.  If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria dropdown list options are the labels for each list entry, but the codes you defined determine how many entries there will be in the search dropdown list (see the \"Customize Fields\" Help screen for more information about creating custom dropdown fields). So if you have different Reusable Choices codes with the same label in different bulletin customizations in your account, the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like \"label1\" and your search will be on bulletins that have that label, regardless of which code the customization had for the label).  And if you have the same Reusable Choices code with different labels in different bulletin customizations in your account, the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like \"label1; label2\" and your search will be on bulletins that have either of those labels).\n\nFor additional help with searching, email help@martus.org.
--c989-field:FancySearchHelpMsg5=نکات بیشتر در مورد جستجو:\n\n1- از آنجایی که Martus همه ردیف ها در هر جدولی برای  معیارتعریفی  شما جستجو میکند، ممکن است بولتن هایی را پیدا کند که یک سطر از جدولی با معیار تعریفی شما تظابق داشته باشد و در سطر دیگری تطابق نداشته باشد. برای مثال شما ممکن است بولتنی داشته باشید با یک جدول که دارای یک بخش موقعیت در خود داشته باشد ، چندین سطر از داده هایی در جدول با موقعیت های A,   B,  و C. اگر شما به دنبال بولتن هایی بگردید که موقعیت آنها != C ( با C مساوی نیست ) Martus آن بولتن را پیدا خواهد کرد چرا که در آنجا 2 سطر در جدول بولتن وجود دارند که موقعیت های C  نیست، حتی اگر یک سطر که در آن موقعیت  C است.\n\n2- در این نسخه، اگر شما دریک بخش کرکره ای چند سطحی جستجو میکنید، تمام جستجوها دقیقا تطبیق می کنند، نه جزئی از یا موارد مشابه \"شروع می شود با\" این بدان معنی است که شما باید سطحی را که میخواهید در آن جستجو انجام بگیرد را به صورت دقیق انتخاب کنید. برای مثال یک بخش \" موقعیت رویداد \" که دارای 3 سطح است (منطقه / شهر/ محله) سه ورودی در لیست جستجو خواهد داشت: موقعیت رویداد: منطقه، موقعیت رویداد : شهر و موقعیت رویداد: محله.\n\n بنابراین اگر شما میخواهید هر بولتنی را که دارای هر موقعیتی در منطقه X است را جستجو کنید (صرف نظر از شهر ) ، شما باید گزینه \" موقعیت رویداد: منطقه\" را در جستجو و منطقه X  را از لیست کشویی انتخاب کنید. اگر شما گزینه موقعیت رویداد:شهر را در جستجو و سپس منطقه X را انتخاب کنید اما بخش شهر را خالی بگذارید، Martus تنها به دنبال داده هایی خواهد گشت که در آنها شهری وارد نشده باشد ( بخش شهر خالی باشد) به شکل مخالف به هر منطقه ای با موقعیت X بدون در نظر گرفتن اینکه چه اطلاعاتی در بخش شهر وارد شده باشد.\n\n3- اگر شما نمیتوانید شرایط/ تاریخ ها را در نسخه نهایی بولتن که درپوشه  نتیجه جستجو نمایش داده شده است را ببینید، معیارهای تعیین شده ممکن است با یک نسخه قدیمی تر بولتن همسان بوده باشد. شما میتوانید با کلیک کردن بر روی گزینه \" جزئیات بولتن...\" در بالای بولتن، به این نسخه قدیمی تر دسترسی پیدا کنید. برای جستجو فقط در جدید ترین نسخه از بولتن ها، گزینه فقط جستجوی جدیدترین نسخه بولتن ها را در جعبه جستجو انتخاب کنید.\n\n4- اگر شما در بولتن ها متفاوت یا سفارشی سازی شده متفاوت دارای بخش هایی هستید که با هم یکسان و مشابه هستند، Martus آنها را در هر جستجویی و گزارش لیست بخش ها ترکیب خواهد کرد. و در حالی که Martus به شما در مورد اتیکت های تکراری  در زمان ایجاد بولتن های سفارشی سازی شده ، هشدار میدهد، این امکان وجود دارد که در طول زمان شما دارای بولتن های سفارشی سازی شده متفاوتی هستید که دارای اتیکت های مشابه هستند. ( به عنوان مثال شاید شما یک بخش متنی را به یک بخش کر کره ای تغییر داده باشید ولی همان اتیکت مشابه را استفاده کرده اید) در این موارد، Martus هر دو بخش را در نتیجه جستجو نمایش خواهد داد و سعی خواهد کرد به شما کمک کند تا از طریق نمایش نوع بخش و برچسب ، تفاوت بین بخش ها را تشخیص بدهید. همچنین اگر شما دارای بخش هایی با برچسب مشابه باشید ولی اتیکت  یا نوع بخش ها متفاوت باشند، Martus ممکن است تلاش کند از برچسب و نوع بخش برای تعیین تفاوت بخش ها در جایی که یکسان تعریف شده باشند، استفاده کند. بنابراین ما شما را تشویق میکنیم که در زمان سفارشی سازی بخش ها، اتیکت ها و برچسب ها را به صورت دقیق مربوط به هر کدام تعیین کنید تا از هر گونه سردرگمی جلوگیری کنید. لطفا بخش راهنمای \" سفارشی سازی بخش ها \" را برای دستورالعمل های بیشتر در مورد ایجاد بخش ها برای جستجو، مشاهده نمایید.\n\n5- شما ممکن است گاهی موارد تکراری در لیست کرکره ای در بخش جستجو مشاهده کنید. اگر شما یک بخش کرکره ای قابل استفاده مجدد برای جستجو انتخاب کنید، مقادیری که به عنوان معیارهای لیست کرکره ای نمایش داده میشوند، اتیکت های هر کدام از لیست ها خواهند بود، اما کد هایی که شما معرفی میکنید تعین کننده تعداد ورودی ها در لیست کرکره ای خواهند بود. (راهنمای \" سفارشی سازی بخش ها \" را برای اطلاعات بیشتر پیرامون ایجاد بخش های کرکره ای سفارشی مشاهده نمایید)\n\nبنابراین اگر شما دارای کدهای متفاوت قابل استفاده مجدد با اتیکت مشابه در سفارشی سازی بولتن ها در حساب کاربری خود هستید، اتیکت ها دو بار در لیست کرکره ای جستجو نمایش داده خواهند شد( مانند: اگر شما از اتیکت 1 برای هر دو کد 1 و کد 2 استفاده کرده باشید، شما دو مورد را در بخش کرکرده ای جستجو خواهید دید که شبیه به \" اتیکت 1\" است و جستجوی شما بر روی بولتن هایی خواهد بود که این اتیکت را دارا هستند، بدون در نظر گرفتن اینکه بخش سفارشی کدام کد را برای اتیکت داشته است). و اگر شمادر حساب کاربری خود دارای کد انتخابی قابل استفاده یکسان هستید که دارای اتیکت های متفاوت در بولتن های سفارشی متفاوت هستند، لیست کرکره ای جستجو برای آن کد هر دوی مقادیر را که توسط ویرگول مجزا شده اند را نمایش خواهد داد. ( مانند : اگر شما کد1 را برای هردو اتیکت 1 و اتیکت 2 استفاده کنید، شما یک خروجی در بخش کرکرده ای جستجو خواهید دید که شبیه به این خواهد بود : \" اتیکت 1؛ اتیکت 2\" و جستجوی شما برروی بولتن هایی خواهد بود که هر کدام از آن اتیکت ها را داشته باشند).\n\nبرای دریافت راهنمایی بیشتر پیرامون جستجو با ایمیل : help@martus.org تماس برقرار نمایید.
+-c989-field:FancySearchHelpMsg5=نکات بیشتر در مورد جستجو:\n\n1- از آنجایی که Martus همه ردیف ها در هر جدولی برای  معیارتعریفی  شما جستجو میکند، ممکن است بولتن هایی را پیدا کند که یک سطر از جدولی با معیار تعریفی شما تظابق داشته باشد و در سطر دیگری تطابق نداشته باشد. برای مثال شما ممکن است بولتنی داشته باشید با یک جدول که دارای یک بخش موقعیت در خود داشته باشد، چندین سطر از داده هایی در جدول با موقعیت های B, A و C. اگر شما به دنبال بولتن هایی بگردید که موقعیت آنها != C (با C مساوی نیست) Martus آن بولتن را پیدا خواهد کرد چرا که در آنجا 2 سطر در جدول بولتن وجود دارند که موقعیت های C  نیست، حتی اگر یک سطر که در آن موقعیت  C است.\n\n2- در این نسخه، اگر شما دریک بخش کرکره ای چند سطحی جستجو میکنید، تمام جستجوها دقیقا تطبیق می کنند، نه جزئی از یا موارد مشابه "شروع می شود با" این بدان معنی است که شما باید سطحی را که میخواهید در آن جستجو انجام بگیرد را به صورت دقیق انتخاب کنید. برای مثال یک بخش "موقعیت رویداد" که دارای 3 سطح است (منطقه / شهر/ محله) سه ورودی در لیست جستجو خواهد داشت: موقعیت رویداد: منطقه، موقعیت رویداد: شهر و موقعیت رویداد: محله.\n\n بنابراین اگر شما میخواهید هر بولتنی را که دارای هر موقعیتی در منطقه X است را جستجو کنید (صرف نظر از شهر)، شما باید گزینه " موقعیت رویداد: منطقه" را در جستجو و منطقه X  را از لیست کشویی انتخاب کنید. اگر شما گزینه موقعیت رویداد:شهر را در جستجو و سپس منطقه X را انتخاب کنید اما بخش شهر را خالی بگذارید، Martus تنها به دنبال داده هایی خواهد گشت که در آنها شهری وارد نشده باشد (بخش شهر خالی باشد) به شکل مخالف به هر منطقه ای با موقعیت X بدون در نظر گرفتن اینکه چه اطلاعاتی در بخش شهر وارد شده باشد.\n\n3- اگر شما نمیتوانید شرایط/ تاریخ ها را در نسخه نهایی بولتن که درپوشه  نتیجه جستجو نمایش داده شده است را ببینید، معیارهای تعیین شده ممکن است با یک نسخه قدیمی تر بولتن همسان بوده باشد. شما میتوانید با کلیک کردن بر روی گزینه "جزئیات بولتن..." در بالای بولتن، به این نسخه قدیمی تر دسترسی پیدا کنید. برای جستجو فقط در جدید ترین نسخه از بولتن ها، گزینه فقط جستجوی جدیدترین نسخه بولتن ها را در جعبه جستجو انتخاب کنید.\n\n4- اگر شما در بولتن ها متفاوت یا سفارشی سازی شده متفاوت دارای بخش هایی هستید که با هم یکسان و مشابه هستند، Martus آنها را در هر جستجویی و گزارش لیست بخش ها ترکیب خواهد کرد. و در حالی که Martus به شما در مورد اتیکت های تکراری  در زمان ایجاد بولتن های سفارشی سازی شده، هشدار میدهد، این امکان وجود دارد که در طول زمان شما دارای بولتن های سفارشی سازی شده متفاوتی هستید که دارای اتیکت های مشابه هستند. (به عنوان مثال شاید شما یک بخش متنی را به یک بخش کر کره ای تغییر داده باشید ولی همان اتیکت مشابه را استفاده کرده اید) در این موارد، Martus هر دو بخش را در نتیجه جستجو نمایش خواهد داد و سعی خواهد کرد به شما کمک کند تا از طریق نمایش نوع بخش و برچسب، تفاوت بین بخش ها را تشخیص بدهید. همچنین اگر شما دارای بخش هایی با برچسب مشابه باشید ولی اتیکت  یا نوع بخش ها متفاوت باشند، Martus ممکن است تلاش کند از برچسب و نوع بخش برای تعیین تفاوت بخش ها در جایی که یکسان تعریف شده باشند، استفاده کند. بنابراین ما شما را تشویق میکنیم که در زمان سفارشی سازی بخش ها، اتیکت ها و برچسب ها را به صورت دقیق مربوط به هر کدام تعیین کنید تا از هر گونه سردرگمی جلوگیری کنید. لطفا بخش راهنمای "سفارشی سازی بخش ها" را برای دستورالعمل های بیشتر در مورد ایجاد بخش ها برای جستجو، مشاهده نمایید.\n\n5- شما ممکن است گاهی موارد تکراری در لیست کرکره ای در بخش جستجو مشاهده کنید. اگر شما یک بخش کرکره ای قابل استفاده مجدد برای جستجو انتخاب کنید، مقادیری که به عنوان معیارهای لیست کرکره ای نمایش داده میشوند، اتیکت های هر کدام از لیست ها خواهند بود، اما کد هایی که شما معرفی میکنید تعین کننده تعداد ورودی ها در لیست کرکره ای خواهند بود. (راهنمای "سفارشی سازی بخش ها" را برای اطلاعات بیشتر پیرامون ایجاد بخش های کرکره ای سفارشی مشاهده نمایید)\n\nبنابراین اگر شما دارای کدهای متفاوت قابل استفاده مجدد با اتیکت مشابه در سفارشی سازی بولتن ها در حساب کاربری خود هستید، اتیکت ها دو بار در لیست کرکره ای جستجو نمایش داده خواهند شد (مانند: اگر شما از اتیکت 1 برای هر دو کد 1 و کد 2 استفاده کرده باشید، شما دو مورد را در بخش کرکرده ای جستجو خواهید دید که شبیه به "اتیکت 1" است و جستجوی شما بر روی بولتن هایی خواهد بود که این اتیکت را دارا هستند، بدون در نظر گرفتن اینکه بخش سفارشی کدام کد را برای اتیکت داشته است). و اگر شمادر حساب کاربری خود دارای کد انتخابی قابل استفاده یکسان هستید که دارای اتیکت های متفاوت در بولتن های سفارشی متفاوت هستند، لیست کرکره ای جستجو برای آن کد هر دوی مقادیر را که توسط ویرگول مجزا شده اند را نمایش خواهد داد. (مانند: اگر شما کد1 را برای هردو اتیکت 1 و اتیکت 2 استفاده کنید، شما یک خروجی در بخش کرکرده ای جستجو خواهید دید که شبیه به این خواهد بود: "اتیکت 1؛ اتیکت 2" و جستجوی شما برروی بولتن هایی خواهد بود که هر کدام از آن اتیکت ها را داشته باشند).\n\nبرای دریافت راهنمایی بیشتر پیرامون جستجو با ایمیل :help@martus.org تماس برقرار نمایید.
 
 #___________________________=Yes/No
--9f62-field:FieldTypeBOOLEAN= بله/خیر
+-9f62-field:FieldTypeBOOLEAN=بله/خیر
 
 #________________________=Date
--eb9a-field:FieldTypeDATE= تاریخ
+-eb9a-field:FieldTypeDATE=تاریخ
 
 #_____________________________=Date Range
 -6bb4-field:FieldTypeDATERANGE=محدوده تاریخ
@@ -755,7 +756,7 @@
 -be86-field:FieldTypeGRID=شبکه/جدول
 
 #____________________________=Language
--89b8-field:FieldTypeLANGUAGE= زبان
+-89b8-field:FieldTypeLANGUAGE=زبان
 
 #___________________________=Message
 -68f4-field:FieldTypeMESSAGE=پیغام
@@ -764,7 +765,7 @@
 -c0c1-field:FieldTypeMULTILINE=متن با نوار پیمایش
 
 #__________________________=Text
--c332-field:FieldTypeSTRING= متن
+-c332-field:FieldTypeSTRING=متن
 
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
 -02b6-field:GetShareFileNameDescription=این نام فایل باید منحصر به فرد و شخصی برای شما باشد، اما ما پیشنهاد میکنیم از اسم خودتان استفاده نکنید. هریک از فایل ها با این نام و شماره توالی تولید خواهند شد.
@@ -821,7 +822,7 @@
 -90ab-field:ImportProgress=در حال وارد کردن
 
 #_____________________________=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?
--abb2-field:IncludePrivateData= #TotalBulletins# بولتن ها  برای چاپ انتخاب شدند. #AllPrivateBulletins# عدد از آنها خصوصی هستند. \nچه مواردی را میخواهید در هنگام چاپ شامل بولتن ها نمایید؟
+-abb2-field:IncludePrivateData=#TotalBulletins# بولتن ها  برای چاپ انتخاب شدند. #AllPrivateBulletins# عدد از آنها خصوصی هستند. \nچه مواردی را میخواهید در هنگام چاپ شامل بولتن ها نمایید؟
 
 #_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
 -a747-field:IncompatibleMtfVersion=نسخه ای از این ترجمه با این نسخه از Martus سازگار نیست. به شما توصیه می شود تا از این نسخه ترجمه استفاده نکرده و برای دریافت نسخه مناسب، به (http://www.martus.org/downloads) مراجعه نمایید.
@@ -836,7 +837,7 @@
 -b11a-field:JPEGFileFilter=JPEG (*.jpeg, *.jpg)
 
 #____________________________=Martus Key (*.dat)
--798b-field:KeyPairFileFilter=کلید Martus: (*.dat)
+-798b-field:KeyPairFileFilter=کلید (Martus (*.dat
 
 #_____________________________________________=Processing bulletin
 -a044-field:LoadingFieldValuesFromAllBulletins=در حال پردازش بولتن
@@ -845,19 +846,19 @@
 -dee7-field:LoadingFieldValuesFromAllBulletinsExplanation=در حال جستجو در همه بولتن ها برای ایجاد یک لیست از همه مقادیر در  #FieldName#
 
 #________________________=Martus Bulletin Archive (*.mba)
--919c-field:MBAFileFilter=آرشیو بولتن Martus (*.mba)
+-919c-field:MBAFileFilter=آرشیو بولتن (Martus (*.mba 
 
 #_______________________________________=Martus Report Format (.mrf)
--62cd-field:MartusReportFormatFileFilter=قالب بندی صفحات گزارش Martus(.mrf)
+-62cd-field:MartusReportFormatFileFilter=قالب بندی صفحات گزارش (Martus (.mrf 
 
 #_____________________________________=Martus Search Specification (.mss)
--76c0-field:MartusSearchSpecFileFilter=خصوصیات جستجوگر Martus  (.mss)
+-76c0-field:MartusSearchSpecFileFilter=خصوصیات جستجوگر (Martus (.mss 
 
 #_______________________=Warning: Portions may be missing or damaged
 -00a9-field:MayBeDamaged=هشدار: بخش هایی ممکن است از دست رفته یا آسیب دیده باشند
 
 #_______________________________=#NumberOfHQs# Headquarter account(s) will be able to view this private information
--da24-field:ModifyBulletinHQInfo=#NumberOfHQs# حساب (های ) دفاتر مرکزی قادر به مشاهده اطلاعات خصوصی خواهند بود
+-da24-field:ModifyBulletinHQInfo=#NumberOfHQs# حساب (های) دفاتر مرکزی قادر به مشاهده اطلاعات خصوصی خواهند بود
 
 #_____________________________=Please enter a name for the file you wish to export.
 -95ed-field:NameOfExportedFile=لطفا برای فايل مورد نظر که تصمیم به استخراج دارید، یک نام وارد نمایید.
@@ -887,7 +888,7 @@
 -3a8c-field:OnlineHelpTOCMessage=موضوع ها:
 
 #__________________________________________=Click on topic to display details.
--2a14-field:OnlineHelpTOCMessageDescription= روی یک موضوع  کلیک کنید تا جزئیات نمایش داده شود.
+-2a14-field:OnlineHelpTOCMessageDescription=روی یک موضوع  کلیک کنید تا جزئیات نمایش داده شود.
 
 #_______________________________=Organization (required)
 -2f27-field:OrganizationRequired=سازمان (الزامی)
@@ -896,7 +897,7 @@
 -b511-field:OrganizeReportFields=حوزه هایی را که میخواهید در گزارش شما وجود داشته باشند را افزوده و سپس ترتیب آنها را به صورتی که میخواهید چاپ شوند مشخص نمایید. 
 
 #____________________________________=Use embedded Tor (Using Tor can improve security but may be slower than not using Tor)
--aaff-field:PreferencesUseInternalTor=استفاده از Tor جاسازی شده ( استفاده از Tor میتواند امنیت شما را افزایش داده و در عین حال ممکن است سرعت شما را کاهش دهد )
+-aaff-field:PreferencesUseInternalTor=استفاده از Tor جاسازی شده (استفاده از Tor میتواند امنیت شما را افزایش داده و در عین حال ممکن است سرعت شما را کاهش دهد)
 
 #_____________________________=Preparing Bulletins...
 -deac-field:PreparingBulletins=در حال آماده سازی بولتن ها...
@@ -923,10 +924,10 @@
 -23dc-field:QuickEraseWillExitMartus=خروج از برنامه Martus پس از اتمام.
 
 #_______________________________________=This will NOT remove any bulletins from the server, any Martus files copied outside of the Martus directory, or any of your bulletins or Martus files on another computer.
--8ee9-field:QuickEraseWillNotRemoveItems=این هیچ بولتنی را از روی سرور حذف نخواهد کرد، هر نوع فایل Martus که به خارج از پوشه Martus تکثیر شده باشد ، یا هر یک از بولتن های شما و یا فایل های Martus برای روی یک رایانه دیگرو
+-8ee9-field:QuickEraseWillNotRemoveItems=این هیچ بولتنی را از روی سرور حذف نخواهد کرد، هر نوع فایل Martus که به خارج از پوشه Martus تکثیر شده باشد، یا هر یک از بولتن های شما و یا فایل های Martus برای روی یک رایانه دیگرو
 
 #____________________________________=Delete your Martus key, bulletins, folders, and configuration information (such as your Headquarters, server, and custom field settings).
--cf3b-field:QuickEraseWillRemoveItems=حذف کلید Martus ، همه بولتن ها، پوشه ها و اطلاعات مربوط به تنظیمات (همچون دفاتر مرکزی، سرور و همینطور تنظیمات مربوط به بخش های سفارشی)
+-cf3b-field:QuickEraseWillRemoveItems=حذف کلید Martus، همه بولتن ها، پوشه ها و اطلاعات مربوط به تنظیمات (همچون دفاتر مرکزی، سرور و همینطور تنظیمات مربوط به بخش های سفارشی)
 
 #_________________________=Restore your existing account from a backup file.
 -c2a2-field:RecoverAccount=بازگرداندن حساب قبلی خود توسط یک فایل پشتیبان.
@@ -1025,19 +1026,19 @@
 -bcaa-field:SearchAnyField=--هر حیطه ای--
 
 #____________________________________=Press Enter to create a new row in the search query.
--8f11-field:SearchBulletinAddingRules=برای ایجاد یک سطر جدید در بخش سوال های ابزار جستجو، Enter  را فشار دهید.
+-8f11-field:SearchBulletinAddingRules=برای ایجاد یک سطر جدید در بخش سوال های ابزار جستجو، آن درج سطر را انتخاب کرده را فشار دهید.
 
 #_____________________________=Click '#SearchHelpButton#' to get additional information on searching.
 -eb4b-field:SearchBulletinHelp=روی '#SearchHelpButton#' کلیک کرده تا اطلاعات بیشتری را پیرامون جستجو دریافت نمایید.
 
 #______________________________=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNOTE: Bulletins that appear only in the Discarded folder will not be searched.
--3fd2-field:SearchBulletinRules=برای هر سطر یک حیطه انتخاب کنید جهت جستجو ( یا برای مطابقت با هربخش را انتخاب کنید ) انتخاب کنید چه نوع مقايسه انجام شود وسپس یک مقدار برای جستجو وارد کنید.\n\nتوجه داشته باشید: بولتن هایی که در پوشه دور انداخته شده ها قرار داشته باشند قابل جستجو نخواهند بود.
+-3fd2-field:SearchBulletinRules=برای هر سطر یک حیطه انتخاب کنید جهت جستجو (یا برای مطابقت با هربخش را انتخاب کنید) انتخاب کنید چه نوع مقايسه انجام شود وسپس یک مقدار برای جستجو وارد کنید.\n\nتوجه داشته باشید: بولتن هایی که در پوشه دور انداخته شده ها قرار داشته باشند قابل جستجو نخواهند بود.
 
 #______________________=Search for:
 -0c73-field:SearchEntry=جستجو برای:
 
 #______________________=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.
--998d-field:SearchFound= #NumberBulletinsFound# عدد از بولتن ها با جستجو مطابقت داشته و به پوشه نتایج جستجو افزوده شدند.
+-998d-field:SearchFound=#NumberBulletinsFound# عدد از بولتن ها با جستجو مطابقت داشته و به پوشه نتایج جستجو افزوده شدند.
 
 #________________________________=Field(s) to search
 -9acd-field:SearchGridHeaderField=حیطه(های)  برای جستجو
@@ -1073,7 +1074,7 @@
 -aa94-field:ServerNameEntry=نام سرور یا آدرس IP:
 
 #_____________________________________________=Server needs to be configured.
--26de-field:ServerNotConfiguredProgressMessage= نیازاست که سرور پیکربندی شود.
+-26de-field:ServerNotConfiguredProgressMessage=نیازاست که سرور پیکربندی شود.
 
 #________________________________=Server Public Identification Code:
 -0cf3-field:ServerPublicCodeEntry=کد شناسایی عمومی سرور:
@@ -1103,7 +1104,7 @@
 -5316-field:StatusRetrieving=در حال بازیابی...
 
 #__________________________=Details
--dc3d-field:TemplateDetails= جزئیات
+-dc3d-field:TemplateDetails=جزئیات
 
 #__________________________=Embedded Tor Active
 -a7ea-field:TorStatusActive=Tor جاسازی شده فعال است
@@ -1130,7 +1131,7 @@
 -5ea8-field:UntitledBulletin=بولتن بدون عنوان است
 
 #_________________________________=The account that created this bulletin has not been verified, so there is an increased chance that this attachment could be dangerous. We recommend that you verify this Field Desk account before you #action# this attachment (See Tools > Configure Field Desks). Opening this attachment could put your computer at risk.
--e736-field:UnverifiedFDAttachment=حساب کاربری که این بولتن ها را ایجاد کرده تایید نشده است، بنابراین این احتمال افزایش پیدا کرده است که فایل های پیوست شده ممکن است خطرناک باشند. ما پیشنهاد میکنیم قبل از اینکه شما فایل های پیوست را #action# بکنید، حساب شعبه کاری را مورد بررسی و تایید قرار دهید ( جعبه ابزارها> پیکربندی شعبات کاری را ببینید) باز کردن این فایل های پیوست میتوانند رایانه شما را در معرض خطر قرار دهد.
+-e736-field:UnverifiedFDAttachment=حساب کاربری که این بولتن ها را ایجاد کرده تایید نشده است، بنابراین این احتمال افزایش پیدا کرده است که فایل های پیوست شده ممکن است خطرناک باشند. ما پیشنهاد میکنیم قبل از اینکه شما فایل های پیوست را #action# بکنید، حساب شعبه کاری را مورد بررسی و تایید قرار دهید (جعبه ابزارها > پیکربندی شعبات کاری را ببینید) باز کردن این فایل های پیوست میتوانند رایانه شما را در معرض خطر قرار دهد.
 
 #______________________________________=Upload Failed
 -88c1-field:UploadFailedProgressMessage=بارگذاری موفق آمیز نبود
@@ -1151,7 +1152,7 @@
 -7ae6-field:VirtualKeyboardBackSpace=بازگشت به عقب
 
 #______________________________=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\\/?|;:~
--25df-field:VirtualKeyboardKeys=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\\/?|;:~خ ج ک ب ی ر ل ف ق ث ی ب ل غ ن ق ض ص ش ظ ط ز
+-25df-field:VirtualKeyboardKeys=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\\/?|;:~خجکبیرلفقثیبلغنقضصشظطز
 
 #_______________________________=Space
 -6d8c-field:VirtualKeyboardSpace=فاصله
@@ -1177,11 +1178,11 @@
 #_________________________________=Attachments
 -6771-field:_AttachmentsTopSection=پیوست ها
 
-#________________________________= 
--da39-field:_SectionBottomSection= 
+#________________________________=
+-da39-field:_SectionBottomSection=
 
-#_____________________________= 
--da39-field:_SectionTopSection= 
+#_____________________________=
+-da39-field:_SectionTopSection=
 
 #_________________________________________=Header
 -3134-field:_Section_BulletinSectionHeader=سر صفحه
@@ -1241,7 +1242,7 @@
 -9054-field:confirmAddingPermissionsToBulletinsCanceleffect=اگر اینکار را انجام دهید، بولتن هایی که در حال حاضر پردازش شده اند، به دفتر مرکزی جدید دسترسی خواهند داشت، اما دیگر بولتن های انتخاب شده دسترسی نخواهند داشت.
 
 #_______________________________________________=Save your password encrypted key backup file to a single floppy disk or other removable media.  Then store this disk in a safe place. You will use this disk, with your username and password, to restore your data if your system files are ever damaged.  To restore this password-protected key in the future, select 'Restore Account' and 'Restore account from backup key file' when signing into Martus.
--e692-field:confirmBackupKeyPairInformationcause=نسخه پشتیبان کلید رمز عبور خود را به صورت رمزگذاری شده در یک دیسکت یا حافظه قابل حمل ذخیره کرده و سپس این دیسکت را در جایی امن نگاه دارید. شما از این دسکت به همراه نام کاربری و رمز عبور خود برای بازیابی داده ها در صورت خراب شدن فایل های سیستم شما استفاده خواهید کرد. برای بازیابی این کلید محافظت شده توسط رمز عبور در آینده، \" بازگرداندن حساب کاربری\" و \"بازگرداندن حساب کاربری از طریق فایل کلید پشتیبان\" در زمان ورد به Martus استفاده نمایید.
+-e692-field:confirmBackupKeyPairInformationcause=نسخه پشتیبان کلید رمز عبور خود را به صورت رمزگذاری شده در یک دیسکت یا حافظه قابل حمل ذخیره کرده و سپس این دیسکت را در جایی امن نگاه دارید. شما از این دسکت به همراه نام کاربری و رمز عبور خود برای بازیابی داده ها در صورت خراب شدن فایل های سیستم شما استفاده خواهید کرد. برای بازیابی این کلید محافظت شده توسط رمز عبور در آینده، ' بازگرداندن حساب کاربری' و 'بازگرداندن حساب کاربری از طریق فایل کلید پشتیبان' در زمان ورد به Martus استفاده نمایید.
 
 #________________________________________________=Choosing Yes will begin the backup process.
 -0b47-field:confirmBackupKeyPairInformationeffect=با انتخاب گزینه بله، فرآیند تهیه نسخه پشتیبان آغاز خواهد شد.
@@ -1295,7 +1296,7 @@
 -5b61-field:confirmCancelShareVerifyeffect=با انتخاب گزینه بله، شما ار محله تایید هویت خارج خواهید شد.
 
 #_________________________________________=You have chosen to remove the selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  New versions of sealed bulletins will not be able to be viewed by the removed Headquarters, but any old versions of sealed bulletins that already are on a Headquarters' computer will still be viewable by the Headquarters.
--0004-field:confirmClearHQInformationcause=شما حذف حساب های  دفاتر مرکزی انتخاب شده را برگزیده اید. هر گونه بولتن موجود ذخیره شده ، هنوز هم توسط دفاترمرکزی قدیمی قابل مشاهده خواهند بود. اگر تصمیم دارید تا اجازه ندهید تا دفاتر مرکزی دسترسی به بولتن های پیش نویسی که قبلا ایجاد شده اند، نداشته باشند، آنها باید مجدد پس از لغو دفاتر مرکزی ذخیره شوند. نسخه جدید مهروموم شده بولتن ها قابل دسترسی توسط دفاتر مرکزی حذف شده نخواهند بود، اما هر گونه نسخه قدیمی مهرو موم شده بولتن ها که هم اکنون بر روی رایانه یک دفتر مرکزی موجود میباشد، هنوز هم توسط آن دفتر مرکزی قابل مشاهده خواهد بود.
+-0004-field:confirmClearHQInformationcause=شما حذف حساب های  دفاتر مرکزی انتخاب شده را برگزیده اید. هر گونه بولتن موجود ذخیره شده، هنوز هم توسط دفاترمرکزی قدیمی قابل مشاهده خواهند بود. اگر تصمیم دارید تا اجازه ندهید تا دفاتر مرکزی دسترسی به بولتن های پیش نویسی که قبلا ایجاد شده اند، نداشته باشند، آنها باید مجدد پس از لغو دفاتر مرکزی ذخیره شوند. نسخه جدید مهروموم شده بولتن ها قابل دسترسی توسط دفاتر مرکزی حذف شده نخواهند بود، اما هر گونه نسخه قدیمی مهرو موم شده بولتن ها که هم اکنون بر روی رایانه یک دفتر مرکزی موجود میباشد، هنوز هم توسط آن دفتر مرکزی قابل مشاهده خواهد بود.
 
 #__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
 -4a87-field:confirmClearHQInformationeffect=با کلیک روی گزینه بله، هرگونه بولتن پیش نویس یا مهر موم شده که در آینده ذخیره شود، دیگر توسط دفتر مرکزی شما قبل در دسترس نخواهد بود.
@@ -1304,7 +1305,7 @@
 -b384-field:confirmCloneBulletinAsMinecause=شما تصمیم به ویرایش  بولتنی کرده اید که  توسط فرد دیگری ایجاد شده است.
 
 #___________________________________________=Clicking on Yes will create a new bulletin that contains a copy of all the same information. You will be the official author of this new bulletin, and any private data in it will only be visible by you (and your Headquarters accounts, if you have any). The original bulletin will remain unchanged.
--4034-field:confirmCloneBulletinAsMineeffect=کلیک بر روی بله موجب ایجاد بک بولتن جدید خواهد شد که حاوی یک نسخه از همان اطلاعات خواهد بود.شما مولف رسمی بولتن جدید خواهید بود و هر گونه داده خصوصی موجود در آن تنها در دسترس شما خواهد بود.( و همینطور حساب های دفاتر مرکزی شما، در صورتی که شما همچین حساب هایی داشته باشید) نسخه اصلی بولتن بدون هیچ تغییر باقی خواهد ماند. 
+-4034-field:confirmCloneBulletinAsMineeffect=کلیک بر روی بله موجب ایجاد بک بولتن جدید خواهد شد که حاوی یک نسخه از همان اطلاعات خواهد بود.شما مولف رسمی بولتن جدید خواهید بود و هر گونه داده خصوصی موجود در آن تنها در دسترس شما خواهد بود.(و همینطور حساب های دفاتر مرکزی شما، در صورتی که شما همچین حساب هایی داشته باشید) نسخه اصلی بولتن بدون هیچ تغییر باقی خواهد ماند. 
 
 #___________________________________________=You have chosen to modify one of your sealed bulletins, thus creating a new version of that bulletin.
 -fcb6-field:confirmCloneMySealedAsDraftcause=شما ویرایش یکی از بولتن های مهر و موم شده خود را انتخاب کرده اید، بنابراین یک نسخه جدید از این بولتن ایجاد خواهد شد.
@@ -1313,10 +1314,10 @@
 -198c-field:confirmCloneMySealedAsDrafteffect=با کلیک روی گزینه بله، نسخه جدیدی از این بولتن را ایجاد خواهید کرد که در حقیقت شامل اطلاعات یکسانی با بولتن اولیه میباشد. 
 
 #______________________________________________________=You have chosen to modify a bulletin that was created by a field desk account that has not been verified, so the bulletin could contain incorrect information or potentially damaging attachments. We recommend that you verify this account before continuing (See Tools > Configure Field Desks).
--61d5-field:confirmCloneUnverifiedFDBulletinAsMinecause=شما تصمیم به ویرایش یک بولتنی گرفته اید که توسط یک حساب شعبه کاری ایجاد شده و این حساب شعبه کاری مورد تایید قرار نگرفته است، بنابراین بولتن ممکن است دارای اطلاعات نادرست و یا فایل های پیوست مخرب باشد. ما توصیه میکنیم قبل از ادامه ، ابتدا این حساب را مورد بررسی و تایید قرار دهید. ( بخش جعبه ابزار> پیکربندی شعبات کاری  را ببینید ).
+-61d5-field:confirmCloneUnverifiedFDBulletinAsMinecause=شما تصمیم به ویرایش یک بولتنی گرفته اید که توسط یک حساب شعبه کاری ایجاد شده و این حساب شعبه کاری مورد تایید قرار نگرفته است، بنابراین بولتن ممکن است دارای اطلاعات نادرست و یا فایل های پیوست مخرب باشد. ما توصیه میکنیم قبل از ادامه، ابتدا این حساب را مورد بررسی و تایید قرار دهید. (بخش جعبه ابزار > پیکربندی شعبات کاری  را ببینید).
 
 #_______________________________________________________=Clicking on Yes to continue with the modify operation will create a new bulletin that contains a copy of all the same information.  You will be the official author of this new bulletin, so you will become responsible for all the content. Any private data in it will only be visible to you (and your Headquarters accounts, if you have any).  The original bulletin will remain unchanged.
--0603-field:confirmCloneUnverifiedFDBulletinAsMineeffect=کلیک بر روی بله موجب ادامه عملیات ویرایس شده و  یک بولتن جدیدایجاد خواهد کرد که حاوی یک نسخه از همان اطلاعات خواهد بود.شما مولف رسمی بولتن جدید خواهید بود، بنابراین شما مسئول در برار  تمام محتویات خواهید بود.هر گونه داده خصوصی موجود در آن تنها در دسترس شما خواهد بود.( و همینطور حساب های دفاتر مرکزی شما، در صورتی که شما همچین حساب هایی داشته باشید) نسخه اصلی بولتن بدون هیچ تغییر باقی خواهد ماند.
+-0603-field:confirmCloneUnverifiedFDBulletinAsMineeffect=کلیک بر روی بله موجب ادامه عملیات ویرایس شده و  یک بولتن جدیدایجاد خواهد کرد که حاوی یک نسخه از همان اطلاعات خواهد بود.شما مولف رسمی بولتن جدید خواهید بود، بنابراین شما مسئول در برار  تمام محتویات خواهید بود.هر گونه داده خصوصی موجود در آن تنها در دسترس شما خواهد بود.(و همینطور حساب های دفاتر مرکزی شما، در صورتی که شما همچین حساب هایی داشته باشید) نسخه اصلی بولتن بدون هیچ تغییر باقی خواهد ماند.
 
 #______________________________________=The date range you entered is invalid because the end date occurs before the begin date.
 -7ea3-field:confirmDateRageInvalidcause=محدوده تاریخی را که  شما وارد کرده اید معتبر نیست، زیرا تاریخ پایان قبل از تاریخ شروع  درج شده است.
@@ -1385,13 +1386,13 @@
 -9273-field:confirmLoadingFieldValuesFromAllBulletinsCanceleffect=این حیطه همچنان قابلیت مورد جستجو قرار گرفتن همچون یک متن را خواهد داشت.
 
 #_______________________________________________________=This account was created with an older release of Martus, which was unaware of multiple sealed bulletin versions. We need to update your system to recognize bulletins with versions.  The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.
--d89c-field:confirmNeedsBulletinVersioningMigrationcause=این حساب کاربری توسط یک نسخه قدیمی Martus ایجاد شده است که از امکان داشتن چندین نسخه مهر و موم شده بولتن ها برخوردار نبوده است. ما نیاز خواهیم داشت تا سیتسم شما را به روز رسانی کنیم تا قادر به شناسانی بولتنها با نسخه های متعدد باشد. جابجایی به صورت خودکار ، سریع و ایمن انجام خواهد شد. شما قادر به اجرای این نسخه Martus نخواهید بود مگر اینکه اجازه این انتقال  را بدهید.
+-d89c-field:confirmNeedsBulletinVersioningMigrationcause=این حساب کاربری توسط یک نسخه قدیمی Martus ایجاد شده است که از امکان داشتن چندین نسخه مهر و موم شده بولتن ها برخوردار نبوده است. ما نیاز خواهیم داشت تا سیتسم شما را به روز رسانی کنیم تا قادر به شناسانی بولتنها با نسخه های متعدد باشد. جابجایی به صورت خودکار، سریع و ایمن انجام خواهد شد. شما قادر به اجرای این نسخه Martus نخواهید بود مگر اینکه اجازه این انتقال  را بدهید.
 
 #________________________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
 -2a34-field:confirmNeedsBulletinVersioningMigrationeffect=در صورتی که پاسخ شما بله باشد، اجازه روند انتقال را خواهد داد، پاسخ خیر، باعث خروج از Martus خواهد شد.
 
 #___________________________________________=This account was created with an older release of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.
--3e24-field:confirmNeedsFolderMigrationcause=این حساب کاربری توسط یک نسخه قدیمی Martus ایجاد شده است که مجموعه دیگری از پوشه ها استفاده میکرده است. این پوشه ها نیاز به انتقال به قالب جدید دارند. جابجایی به صورت خودکار ، سریع و ایمن انجام خواهد شد. شما قادر به اجرای این نسخه Martus نخواهید بود مگر اینکه اجازه این انتقال  را بدهید.
+-3e24-field:confirmNeedsFolderMigrationcause=این حساب کاربری توسط یک نسخه قدیمی Martus ایجاد شده است که مجموعه دیگری از پوشه ها استفاده میکرده است. این پوشه ها نیاز به انتقال به قالب جدید دارند. جابجایی به صورت خودکار، سریع و ایمن انجام خواهد شد. شما قادر به اجرای این نسخه Martus نخواهید بود مگر اینکه اجازه این انتقال  را بدهید.
 
 #____________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
 -2a34-field:confirmNeedsFolderMigrationeffect=در صورتی که پاسخ شما بله باشد، اجازه روند انتقال را خواهد داد، پاسخ خیر، باعث خروج از Martus خواهد شد.
@@ -1415,22 +1416,22 @@
 -0863-field:confirmOverWriteExistingFileeffect=فایل موجود حذف خواهد شد و با اطلاعات جدید جایگزین خواهد شد.
 
 #__________________________________________=One or more bulletins will not be printed because all the information is private, and you marked the \"Print only public information\" box.
--50c0-field:confirmPrintAllPrivateDatacause= یک یا چند بولتن به دلیل اینکه همه اطلاعات درج شده در آنها خصوصی بوده و شما گزینه \" چاپ فقط اطلاعات عمومی\" را انتخاب کرده اید،  چاپ نخواهند شد.
+-50c0-field:confirmPrintAllPrivateDatacause=یک یا چند بولتن به دلیل اینکه همه اطلاعات درج شده در آنها خصوصی بوده و شما گزینه " چاپ فقط اطلاعات عمومی" را انتخاب کرده اید،  چاپ نخواهند شد.
 
 #___________________________________________=Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the \"Include private information\" box. Answering '#PrintContinue#' will print only the public information in the bulletins and skip those bulletins which are all private.
--935c-field:confirmPrintAllPrivateDataeffect=پاسخ  '#PrintBack#' به شما این اجازه را خواهد داد تا به صفحه قبلی بازگشته ، بنابراین شما قادر خواهید بود تا جعبه \" شامل اطلاعات خصوصی \" را انتخاب کنید. پاسخ '#PrintContinue#' تنها اطلاعات عمومی موجود در بولتن را چاپ کرده و از بولتن های دارای اطلاعات خصوصی صرف نظر خواهد کرد.
+-935c-field:confirmPrintAllPrivateDataeffect=پاسخ  '#PrintBack#' به شما این اجازه را خواهد داد تا به صفحه قبلی بازگشته، بنابراین شما قادر خواهید بود تا جعبه " شامل اطلاعات خصوصی " را انتخاب کنید. پاسخ '#PrintContinue#' تنها اطلاعات عمومی موجود در بولتن را چاپ کرده و از بولتن های دارای اطلاعات خصوصی صرف نظر خواهد کرد.
 
 #_____________________________________=Since you have changed from the default print tray your print out may be incorrect, if you also changed the size of paper used.  You must first select the paper tray and then select the paper size in that order, for both to get set correctly.  If you only wanted to change the paper tray then disregard this message and select 'No'.
--401e-field:confirmPrinterWarningcause=از آنجایی که شما چاپ پیش فرض  را تغییر داده اید،نتیجه چاپ شما ممکن است نادرست باشد، همینطور اگر شما اندازه کاغذ خود را هم تغییر داده باشید. شما باید ابتدا نوع کاغذ خود را انتخاب کرده و سپس ابعاد آن را انتخاب کنید تا به ترتیب هر دو درست تنظیم شوند. اگر شما فقط میخواهید نوع کاغذ را عوض کنید، این پیغام را نادیده گرفته گزینه \" خیر \" را انتخاب کنید.
+-401e-field:confirmPrinterWarningcause=از آنجایی که شما چاپ پیش فرض  را تغییر داده اید،نتیجه چاپ شما ممکن است نادرست باشد، همینطور اگر شما اندازه کاغذ خود را هم تغییر داده باشید. شما باید ابتدا نوع کاغذ خود را انتخاب کرده و سپس ابعاد آن را انتخاب کنید تا به ترتیب هر دو درست تنظیم شوند. اگر شما فقط میخواهید نوع کاغذ را عوض کنید، این پیغام را نادیده گرفته گزینه ' خیر ' را انتخاب کنید.
 
 #______________________________________=Clicking on Yes will bring back the Printer Dialog so you can reselect your default paper tray and size.  Clicking on 'No' will print the document.
--824f-field:confirmPrinterWarningeffect=کلیک کردن روی گزینه بله، پنجره مربوط به تنظیمات پرینتر مجدد بازگردانده شده و شما قادر خواهید بود تا کاغذ پیش فرض و اندازه انرا مجدد انتخاب نمایید. کلیک کردن روی گزینه \"خیر\" سند را چاپ خواهد کرد.
+-824f-field:confirmPrinterWarningeffect=کلیک کردن روی گزینه بله، پنجره مربوط به تنظیمات پرینتر مجدد بازگردانده شده و شما قادر خواهید بود تا کاغذ پیش فرض و اندازه انرا مجدد انتخاب نمایید. کلیک کردن روی گزینه 'خیر' سند را چاپ خواهد کرد.
 
 #_______________________________________________=Please Note: There are bulletins that have not been sent to a server. If you continue these bulletins will be lost.
 -1c29-field:confirmQuickEraseOutboxNotEmptycause=لطفا توجه داشته باشید: بولتن هایی وجود دارند که به سرور ارسال نشده اند. در صورت ادامه، این بولتن ها از دست خواهند رفت.
 
 #________________________________________________=Clicking on Yes will bring you to a confirmation dialog, Clicking on No will return you to Martus without erasing anything.
--ffe3-field:confirmQuickEraseOutboxNotEmptyeffect= کلیک کردن روی گزینه بله  شما را به یک پنجره محاوره ای تایید خواهد آورد. کلیک روی خیر، بدون پاک کردن چیزی،  شما به Martus بازخواهید گشت.
+-ffe3-field:confirmQuickEraseOutboxNotEmptyeffect=کلیک کردن روی گزینه بله  شما را به یک پنجره محاوره ای تایید خواهد آورد. کلیک روی خیر، بدون پاک کردن چیزی،  شما به Martus بازخواهید گشت.
 
 #___________________________________________=Welcome to Martus.  What would you like to do?
 -dd0e-field:confirmRecoverUsingKeySharecause=به Martus خوش آمدید. مایل به انجام چه کاری هستید؟
@@ -1457,7 +1458,7 @@
 -3252-field:confirmRemoveAttachmenteffect=فایل های پیوستی انتخاب شده برای همیشه از این بولتن حذف خواهند شد.
 
 #__________________________________________=You have chosen to remove the selected Field Desk account(s).
--6ab9-field:confirmRemoveFieldDeskKeyscause=شما تصمیم گرفته اید شعبه کاری (یا شعبات کاری ) انتخاب شده را حذف نمایید.
+-6ab9-field:confirmRemoveFieldDeskKeyscause=شما تصمیم گرفته اید شعبه کاری (یا شعبات کاری) انتخاب شده را حذف نمایید.
 
 #___________________________________________=By clicking on Yes, bulletins created by those accounts will no longer be indicated as having been authored by a Field Desk
 -0c34-field:confirmRemoveFieldDeskKeyseffect=در صورت کلیک روی گزینه بله، بولتن های ایجاد شده توسط آن حساب های کاربری دیگر به عنوان نوشته شده توسط یک شعبه کاری نشان داده نخواهند شد. 
@@ -1472,10 +1473,10 @@
 -9f83-field:confirmReportIncludePrivatecause=هیچ بولتنی با اطلاعات عمومی وجود ندارد. اطلاعات خصوصی را شامل شود؟
 
 #____________________________________________=Press 'Include Private Data' to continue with private data included, or press 'Cancel' to exit and return to Martus.
--c1bb-field:confirmReportIncludePrivateeffect='شامل داده های خصوصی\" را فشار دهید تا با داده های خصوصی شامل شده ادامه دهید، یا \" لغو\" را فشار دهید تا خارج شده و به Martus بازگردید.
+-c1bb-field:confirmReportIncludePrivateeffect='شامل داده های خصوصی' را فشار دهید تا با داده های خصوصی شامل شده ادامه دهید، یا ' لغو' را فشار دهید تا خارج شده و به Martus بازگردید.
 
 #_________________________________________________=The search in progress will be stopped immediately.
--c6a2-field:confirmReportSearchProgressCancelcause=جستجوی در حال اجرا ، بلافاصله متوقف خواهد شد.
+-c6a2-field:confirmReportSearchProgressCancelcause=جستجوی در حال اجرا، بلافاصله متوقف خواهد شد.
 
 #__________________________________________________=If you do this, the report will only include the bulletins that have been found so far.
 -4aa4-field:confirmReportSearchProgressCanceleffect=اگر شما این کار را انجام دهید، این گزارش تنها شامل بولتن هایی خواهد بود که تا کنون پیدا شده اند.
@@ -1487,13 +1488,13 @@
 -9c28-field:confirmRequestToSendContactInfoToServereffect=با کلیک روی گزینه بله، اطلاعات تماس شما به سرور فعلی ارسال خواهد شد.
 
 #__________________________________________=This will reset the current Default Details contents to the original contents. After resetting the contents, you should review them to be sure they are correct.
--37bf-field:confirmResetDefaultDetailscause=این باعث میشود که  محتویات اطلاعات  فعلی به حالت اولیه و اصلی پیش فرض بازگردانده شود. پس از بازنشانی مطالب ، شما باید آنها را بررسی کرده تا  صحت و درستی اطلاعات مطمئن شوید.
+-37bf-field:confirmResetDefaultDetailscause=این باعث میشود که  محتویات اطلاعات  فعلی به حالت اولیه و اصلی پیش فرض بازگردانده شود. پس از بازنشانی مطالب، شما باید آنها را بررسی کرده تا  صحت و درستی اطلاعات مطمئن شوید.
 
 #___________________________________________=After you review the contents, you can accept them, modify them, or press cancel to keep the existing default details.
 -bbcf-field:confirmResetDefaultDetailseffect=پس از بازبینی مطالب، شما می توانید آنها را قبول کرده، ویرایش کرده و یا لغو را فشار دهید تا مطالب پیش فرض را نگاه دارید.
 
 #____________________________________________=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#Titles#
--050c-field:confirmRetrieveNewerVersionscause=این بولتن ( ها ) انتخاب شده برای بازیابی جدید تر از نسخه هایی هستند که در حال حاضر در این رایانه وجود دارد:\n\n#Titles#
+-050c-field:confirmRetrieveNewerVersionscause=این بولتن (ها) انتخاب شده برای بازیابی جدید تر از نسخه هایی هستند که در حال حاضر در این رایانه وجود دارد:\n\n#Titles#
 
 #_____________________________________________=Each older version will be replaced by the newer version from the server.
 -1d86-field:confirmRetrieveNewerVersionseffect=هر یک از نسخه های قدیمی با نسخه های جدیدتر کوجود بر روی  سرور جایگزین می شوند.
@@ -1520,7 +1521,7 @@
 -a3fe-field:confirmSendWithPublicDatacause=شما  ذخیره یک بولتن تکمیل شده را انتخاب کرده اید.
 
 #__________________________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization. If you have sent your contact information to the server, that contact information will also be displayed with each public bulletin on the Martus Search Engine.\n\nIf there is information you do not want to be publicly available, either move that data to the bottom (always Private) pane of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.
--43ee-field:confirmSendWithPublicDataeffect=این به صورت همیشگی بولتن را مهروموم خواهد کرد و شما دیگر اجازه هرگونه ویرایش را در آینده نخواهید داشت جز اینکه نسخه جدیدی از این بولتن را ایجاد کنید.\n\nاطلاعات عمومی موجود در این بولتن در موتور جستجوی Martus منتشر خواهد شد و ممکن است توسط افرادی که خارج از سازمان شما هستند قابل مشاهده باشد. در صورتی که شما اطلاعات تماس خود را به سرور ارسال کرده باشید، این اطلاعات تماس نیز همراه با هر بولتن عمومی در موتور جستجوی Martus نمایش داده خواهد شد.\n\nاگر اطلاعاتی وجود دارد که شما مایل نیستید که برای عموم دردسترس باشند، یا آن داده ها را به چهارچوب پایینی بولتن جابجا کنید( همیشه خصوصی) و یا گزینه \" نگهداری همه اطلاعات به صورت خصوصی \" را قبل از ذخیره بولتن انتخاب کنید.
+-43ee-field:confirmSendWithPublicDataeffect=این به صورت همیشگی بولتن را مهروموم خواهد کرد و شما دیگر اجازه هرگونه ویرایش را در آینده نخواهید داشت جز اینکه نسخه جدیدی از این بولتن را ایجاد کنید.\n\nاطلاعات عمومی موجود در این بولتن در موتور جستجوی Martus منتشر خواهد شد و ممکن است توسط افرادی که خارج از سازمان شما هستند قابل مشاهده باشد. در صورتی که شما اطلاعات تماس خود را به سرور ارسال کرده باشید، این اطلاعات تماس نیز همراه با هر بولتن عمومی در موتور جستجوی Martus نمایش داده خواهد شد.\n\nاگر اطلاعاتی وجود دارد که شما مایل نیستید که برای عموم دردسترس باشند، یا آن داده ها را به چهارچوب پایینی بولتن جابجا کنید(همیشه خصوصی) و یا گزینه ' نگهداری همه اطلاعات به صورت خصوصی ' را قبل از ذخیره بولتن انتخاب کنید.
 
 #_____________________________________________=Martus software is unable to determine whether this server complies with the official guidelines for operating a secure and reliable Martus server.
 -ab16-field:confirmServerComplianceFailedcause=نرم افزار Martus قادر به تعیین  این نيست که آیا این سرور با دستورالعمل های رسمی برای یک سرور امن و قابل اعتماد Martus مطابقت دارد یا خیر.
@@ -1535,10 +1536,10 @@
 -9ff2-field:confirmSetImportPublicKeyeffect=با کلیک کردن روی گزینه بله،  شما اجازه دیدن همه بخش های بولتن ها را به این سرویس گیرنده خواهید داد.
 
 #__________________________________________________________=The bulletin entitled \"#Title#\" already exists in this system.  Do you wish to delete the old bulletin and replace it with this bulletin?
--2692-field:confirmUnAuthoredBulletinDeleteBeforePastecause=بولتن تحت عنوان \"#Title #\" در حال حاضر در این سیستم وجود دارد.آیا شما مایل به حذف بولتن قدیمی و جایگزینی آن با این بولتن هستید؟
+-2692-field:confirmUnAuthoredBulletinDeleteBeforePastecause=بولتن تحت عنوان "#Title #" در حال حاضر در این سیستم وجود دارد.آیا شما مایل به حذف بولتن قدیمی و جایگزینی آن با این بولتن هستید؟
 
 #___________________________________________________________=Answering Yes will replace the old bulletin with this bulletin.  Answering on No will leave the original bulletin and skip this file.
--6bf3-field:confirmUnAuthoredBulletinDeleteBeforePasteeffect=پاسخ \"بلی\" بولتن قدیمی با این بولتن جایگزین خواهدکرد. در صورت پاسخ خیر، نسخه اصلی بولتن را بدون تغییر رها کرده واز این پرونده رد میشود.
+-6bf3-field:confirmUnAuthoredBulletinDeleteBeforePasteeffect=پاسخ 'بلی' بولتن قدیمی با این بولتن جایگزین خواهدکرد. در صورت پاسخ خیر، نسخه اصلی بولتن را بدون تغییر رها کرده واز این پرونده رد میشود.
 
 #____________________________________________________=Key restore failed, we suggest you try again with a different backup file.
 -f6c1-field:confirmUnableToRecoverFromBackupFilecause=بازگرداندن کلید موفقیت آمیز نبود، ما پیشنهاد می کنیم که شما دوباره با یک فایل پشتیبان متفاوت امتحان کنید.
@@ -1550,7 +1551,7 @@
 -b1b6-field:confirmUndoCustomFieldscause=شما بازگرداندن استاندارد مجموعه  حیطه هایی از Martus را انتخاب کرده اید.
 
 #________________________________________=New bulletins created with this account will not have any custom fields.
--bf33-field:confirmUndoCustomFieldseffect=بولتن های جدید ایجاد شده با این حساب کاربری، هیچگونه حیطه سفارشی سازی شده ای نخواهند داشت .
+-bf33-field:confirmUndoCustomFieldseffect=بولتن های جدید ایجاد شده با این حساب کاربری، هیچگونه حیطه سفارشی سازی شده ای نخواهند داشت.
 
 #_____________________________________=Please Note: There are bulletins that have not been sent to a server.  Do you still want to exit?
 -d0f3-field:confirmUploadRemindercause=لطفا توجه داشته باشید:  بولتن هایی وجود دارند که هنوز به سرور فرستاده نشده اند. آیا همپنان میخواهید که خارج شوید؟
@@ -1607,7 +1608,7 @@
 -3425-field:confirmbackupIncompleteImprovedShareNeeded=Martus امنیت مربوط به چندین قطعه کلید پشتیبان را بهبود بخشیده است، برای حفظ امنیت حساب کاربری خود و همچنین امکان دسترسی به داده های خود در صورت فراموش کردن رمز عبور، لطفا یک مجموعه جدید از کلید فایل های پشتیبان را تهیه کنید و کلید های قدیمی را حذف یا از بین ببرید. 
 
 #_____________________________________________=A multiple disk backup of your key has yet to be created.
--b185-field:confirmbackupIncompleteShareNeeded= هنوز مجموعه چند دیسک پشتیبان از کلید شما ایجاد نشده است.
+-b185-field:confirmbackupIncompleteShareNeeded=هنوز مجموعه چند دیسک پشتیبان از کلید شما ایجاد نشده است.
 
 #___________________________________=You have chosen to permanently delete a folder.
 -76fa-field:confirmdeletefoldercause=شما حذف  یک پوشه را به طور دایمی  انتخاب کرده اید.
@@ -1622,10 +1623,10 @@
 -8571-field:confirmgeneralBackupKeyPairMsgeffect=انتخاب گزینه بله، شما را درمرحل پشتیبان گیری راهنمایی خواهد کرد، انتخاب گزینه خیر از این مرحله مهم صرف نظر خواهد کرد.
 
 #_________________________________________=The text \"#SearchString#\" was not found.  Do you wish to search from the beginning?
--25f6-field:confirmhelpStringNotFoundcause=متن \"#SearchString#\" پیدا نشد.  آیا مایلید جستجو را  از ابتداآغاز کنید؟
+-25f6-field:confirmhelpStringNotFoundcause=متن "#SearchString#" پیدا نشد.  آیا مایلید جستجو را  از ابتداآغاز کنید؟
 
 #__________________________________________=Clicking on Yes will search for \"#SearchString#\" from the beginning.
--0981-field:confirmhelpStringNotFoundeffect=کلیک روی گزینه بله، مجدد اقدام به جستجوی  \"#SearchString#\" خواهد کرد.
+-0981-field:confirmhelpStringNotFoundeffect=کلیک روی گزینه بله، مجدد اقدام به جستجوی  "#SearchString#" خواهد کرد.
 
 #_____________________=Confirming...
 -a4f3-field:confirming=در حال تایید...
@@ -1688,7 +1689,7 @@
 -fea8-field:inputImportPublicKeyentry=کد عمومی مربوط به این حساب کاربری را وارد نمایید:
 
 #____________________________________=If you want to request permission to upload to this server, enter the 'magic word' now:
--3ea8-field:inputservermagicwordentry=اگر شما خواهان دریافت مجوز بارگذاری به این سرور هستید، \"کلمه جادویی\" را هم اکنون وارد نمایید:
+-3ea8-field:inputservermagicwordentry=اگر شما خواهان دریافت مجوز بارگذاری به این سرور هستید، 'کلمه جادویی' را هم اکنون وارد نمایید:
 
 #___________________=Keywords
 -f530-field:keywords=واژه های کليدی
@@ -1709,7 +1710,7 @@
 -438b-field:messageErrorDateInFuturecause=این تاریخ در آینده رخ می دهد:
 
 #_____________________________________________=This date range has an end date that is earlier than the start date: #FieldLabel#
--4952-field:messageErrorDateRangeInvertedcause=این محدوده تاریخ ، دارای  تاریخ پایانی است که زودتر از تاریخ شروع است : #FieldLabel#
+-4952-field:messageErrorDateRangeInvertedcause=این محدوده تاریخ، دارای  تاریخ پایانی است که زودتر از تاریخ شروع است : #FieldLabel#
 
 #________________________________________=Dates entered in '#FieldLabel#' cannot be earlier than #MinimumDate#
 -db1c-field:messageErrorDateTooEarlycause=تاریخ های وارد شده در '#FieldLabel#' نمیتوانند زود تر از #MinimumDate# باشند.
@@ -1775,7 +1776,7 @@
 -3dbb-field:notifyDeleteServerDraftsNonecause=هیچ بولتنی انتخاب نشده است
 
 #______________________________________________=All of the selected draft bulletins have been deleted from the server.
--aee3-field:notifyDeleteServerDraftsWorkedcause=همه بولتن های پیش نویس انتخاب شده ، از روی سرور حذف شدند.
+-aee3-field:notifyDeleteServerDraftsWorkedcause=همه بولتن های پیش نویس انتخاب شده، از روی سرور حذف شدند.
 
 #_____________________________________________=One or more bulletins cannot be moved to that folder, because it already exists in that folder.
 -178b-field:notifyDropErrorBulletinExistscause=امکان جابجایی یک یا تعدادی از بولتن ها به آن فولدر وجود ندارد، چراکه  در حال حاضر در این پوشه وجود دارند.
@@ -1784,7 +1785,7 @@
 -834b-field:notifyDropErrorBulletinOldercause=امکان جابجایی یک یا تعدادی از بولتن ها به آن فولدر وجود ندارد، چراکه یک نسخه جدیدتر از این بولتن در حال حاضر  وجود دارد.
 
 #________________________________=An unexpected error occurred while moving the bulletin(s). One or more files may be damaged.
--9ca2-field:notifyDropErrorscause=هنگام جابجایی بولتن ( ها ) یک خطای غیر منتظره رخ داده است . یک یا چندین فایل ممکن است خراب شده باشند.
+-9ca2-field:notifyDropErrorscause=هنگام جابجایی بولتن (ها) یک خطای غیر منتظره رخ داده است. یک یا چندین فایل ممکن است خراب شده باشند.
 
 #____________________________________________=An unexpected error occurred in generating the key backup files.
 -d237-field:notifyErrorBackingUpKeySharecause=هنگام ایجاد فایل های پشتیبان کلید، یک خطای غیر منتظره رخ داده است.
@@ -1853,7 +1854,7 @@
 -2a84-field:notifyErrorWritingFilecause=هنگام نوشتن فایل خطایی رخ داده است. بررسی کنید تا مطمئن شوید که دیسک پر نشده باشد و یا در مقابل نوشتن محافظت نشده باشد.
 
 #___________________________________________=You will have to select a server for any bulletins to be backed up to that server, or to retrieve bulletins from that server.
--83c4-field:notifyExistingServerRemovedcause=شما برای اینکه قادر به ذخیره و تهیه نسخه پشتیبان از بولتن ها بر روی سرور باشید، یا اینکه بتوانید بولتن ها را بازیابی کنید ، ابتدا باید یک سرور را انتخاب کنید. 
+-83c4-field:notifyExistingServerRemovedcause=شما برای اینکه قادر به ذخیره و تهیه نسخه پشتیبان از بولتن ها بر روی سرور باشید، یا اینکه بتوانید بولتن ها را بازیابی کنید، ابتدا باید یک سرور را انتخاب کنید. 
 
 #______________________________________________________=Exported #BulletinsExported# of #TotalBulletinsToExport# bulletins.  Unfortunately #AttachmentsNotExported# attachments were not exported due to errors.
 -2a40-field:notifyExportCompleteMissingAttachmentscause=تعداد #BulletinsExported# از مجموع #TotalBulletinsToExport# بولتن ها استخراج شدند. متاسفانه فایل پیوست #AttachmentsNotExported# به دلیل بروز خطایی استخراج نشده است.
@@ -1880,7 +1881,7 @@
 -7237-field:notifyFieldDeskLabelDuplicatecause=اتیکتی که شما تایپ کرده اید قبلا به یکی از شعبات کاری اختصاص داده شده است. لطفاً ازیک اتیکت دیگر استفاده کنید.
 
 #___________________________________________=The original files have not been deleted from your computer, you must delete them manually if you wish.
--8965-field:notifyFilesWillNotBeDeletedcause=فایل های اصلی از رایانه شما حذف نشده اند. در صورت تمایل ،شما باید آنها را بصورت دستی حذف کنید.
+-8965-field:notifyFilesWillNotBeDeletedcause=فایل های اصلی از رایانه شما حذف نشده اند. در صورت تمایل،شما باید آنها را بصورت دستی حذف کنید.
 
 #___________________________________________=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.
 -73de-field:notifyFolderMigrationFailedcause=در هنگام تبدیل پوشه ها خطایی رخ داده است. شما همچنان میتوانید از Martus استفاده نمایید، اما اگر پوشه ارسالی یا پوشه پیش نویس ها هنوز وجود دارند، از آنها استفاده نکنید.
@@ -1946,7 +1947,7 @@
 -0acb-field:notifyPasswordMatchesUserNamecause=رمز عبور شما نمی تواند نام کاربری شما هم باشد
 
 #_____________________________________________________=One or more bulletins cannot be pasted in that folder, because they already exist in this folder.
--6181-field:notifyPasteErrorBulletinAlreadyExistscause= به دلیل اینکه این بولتن ها در حال حاضر در این پوشه وجود دارند ، یک یا چند بولتن به اینپوشه جا به جا نشدند.
+-6181-field:notifyPasteErrorBulletinAlreadyExistscause=به دلیل اینکه این بولتن ها در حال حاضر در این پوشه وجود دارند، یک یا چند بولتن به اینپوشه جا به جا نشدند.
 
 #_____________________________________________=One or more bulletins cannot be pasted in that folder, because a newer version of this bulletin already exists.
 -cbb5-field:notifyPasteErrorBulletinOldercause=به دلیل اینکه نسخه جدیدتری از این بولتن در حال حاضر موجود میباشد، یک یا چند بولتن به این پوشه جا به جا نشدند.
@@ -1982,7 +1983,7 @@
 -f50c-field:notifyRecoveryOfKeyShareCompletecause=شما با موفقیت کلید خود را ازطریق فایل های پشتیبان،بازگردانی کردید.  بسیار مهم است که شما در حال حاضر  فایل های پشتیبان را دوباره توزیع کنید. ما همچنین به شما توصیه میکنیم که از کلید خود به شکل یک فایل رمز عبور دا رو کد گذاری شده، نسخه پشتیبان تهیه نمایید، اگر نیاز به تهیه چندین فایل پشتیبان ندارید.
 
 #_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your user name and password and restore your key so you can log in normally and access your account.
--4a6f-field:notifyRecoveryProcessBackupFilecause=برای بازگرداندن کلید خود، ابتدا شما باید فایل های نسخه پشتیبان را قبلا ذخیره کردید، پیدا کنید. با استفاده ازجعبه گفتگوی \" بازگرداندن کلید از طریق فایل نسخه پشتیبان\" فایل را بر روی دیسکت سخت رایانه خود، یک دیسکت بر روی شبکه یا یک دیسکت قابل حمل پیدا کرده و سپس روی دکمه باز باز کلیک کنید. Martus سپس از شما نام کاربری و رمز عبور را سوال کرده و کلید شما را بازمیگرداند. بنابراین شما میتوانید به سیستم وارد شده و به صورت عادی به حساب خود دسترسی داشته باشید.
+-4a6f-field:notifyRecoveryProcessBackupFilecause=برای بازگرداندن کلید خود، ابتدا شما باید فایل های نسخه پشتیبان را قبلا ذخیره کردید، پیدا کنید. با استفاده ازجعبه گفتگوی ' بازگرداندن کلید از طریق فایل نسخه پشتیبان' فایل را بر روی دیسکت سخت رایانه خود، یک دیسکت بر روی شبکه یا یک دیسکت قابل حمل پیدا کرده و سپس روی دکمه باز باز کلیک کنید. Martus سپس از شما نام کاربری و رمز عبور را سوال کرده و کلید شما را بازمیگرداند. بنابراین شما میتوانید به سیستم وارد شده و به صورت عادی به حساب خود دسترسی داشته باشید.
 
 #_____________________________________________=You will now have to provide #MinimumNumberOfFilesNeededForRecovery# out of the #TotalNumberOfFilesInBackup# files you previously saved when you backed up your key.
 -f571-field:notifyRecoveryProcessKeySharecause=شما در حال حاضر باید تعداد #MinimumNumberOfFilesNeededForRecovery# از مجموع #TotalNumberOfFilesInBackup# فایل را که قبلا هنگام ذخیره نسخه های پشتیبان تهیه کرده بودید را ارائه دهید.
@@ -2003,7 +2004,7 @@
 -d248-field:notifyResendErrorNotAuthorizedToSendcause=به دلیل اینکه شما مجوز بارگذاری ندارید، یک یا چند بولتن مجدد ارسال نشدند. 
 
 #_________________________________=One or more bulletins were unable to be resent due to an unexpected error.
--28b0-field:notifyResendErrorcause=به دیلیل بروز یک خطای غیر منتظره ، یک یا چند بولتن مجدد ارسال  نشدند. 
+-28b0-field:notifyResendErrorcause=به دیلیل بروز یک خطای غیر منتظره، یک یا چند بولتن مجدد ارسال  نشدند. 
 
 #______________________________________=Bulletin download cancelled.  Some bulletins may have already been downloaded.
 -87b3-field:notifyRetrieveCanceledcause=دریافت بولتن لغو شد. ممکن است  برخی از بولتن ها در حال حاضر دریافت شده باشند.
@@ -2024,7 +2025,7 @@
 -3e55-field:notifyRetrieveInProgresscause=یک عملیات بازیابی در حال حاضر در حال انجام است. تا زمانی که به پایان نرسد، شما نمی توانید بازیابی دیگری را شروع کنید.
 
 #____________________________________________________=Preview not yet available for this bulletin. Please wait until the information has been retrieved from the server, and then try again.
--8fd7-field:notifyRetrievePreviewNotAvailableYetcause= امکان پیش نمایش كردن هنوز برای این بولتن فراهم نمیباشد.  لطفاً صبر کنید تا اطلاعات از سرور بازیابی شوند و سپس مجدد تلاش کنید.
+-8fd7-field:notifyRetrievePreviewNotAvailableYetcause=امکان پیش نمایش كردن هنوز برای این بولتن فراهم نمیباشد.  لطفاً صبر کنید تا اطلاعات از سرور بازیابی شوند و سپس مجدد تلاش کنید.
 
 #________________________________________________=Errors occurred while retrieving bulletin summaries.  Some of the bulletins on the server will not be shown.
 -6f6f-field:notifyRetrievedOnlySomeSummariescause=هنگام بازیابی خلاصه های بولتن خطایی رخ داده است. برخی از بولتن های موجود بر روی سرور نشان داده نخواهند شد.
@@ -2054,7 +2055,7 @@
 -8dc9-field:notifyServerSSLNotRespondingcause=امکان ایجاد ارتباط امن با سرور پشتیبان گیری Martus فراهم نیست.\n\nMartus قادر به ایجاد ارتباط با سرور با استفاده هر کدام از دو درگاه  میباشد. وقتی تلاش میکنید که به این سرور متصل شوید، هیچ کدام از درگاه ها در دسترس نیستند، احتمالا به خاطر اینکه هر دو درگاه توسط فایروال و یا سرویس دهنده اینترنت محلی مسدود شده اند. \n\nما توصیه میکنیم که هر گونه فایروالی که بر روی رایانه شما قرار دارد پیکربندی شود تا  مجوز ارتباطات خروجی را بر روی هر دو درگاه TCP درگاه 443 و 987 فراهم نماید.لطفا با مدیر شبكه داخلی یا کارکنان  پشتیبانی فنی تماس بگیرید تا از صحت اینکه فایروال شما این اجازه را میدهد اطمینان حاصل نمایید.\n\nاگر مشکل ادامه یابد، شاید شما نیاز داشته باشد تا سرور دیگری را انتخاب کنید.
 
 #____________________________________________=Unable to save the selected attachment for some reason.  Try saving it to a different file.
--4a93-field:notifyUnableToSaveAttachmentcause=بنا به برخی از دلایل ، امکان ذخیره فایل پیوست انتخاب شده نیست. ذخیره آنرا در یک فایل دیگر امتحان کنید. 
+-4a93-field:notifyUnableToSaveAttachmentcause=بنا به برخی از دلایل، امکان ذخیره فایل پیوست انتخاب شده نیست. ذخیره آنرا در یک فایل دیگر امتحان کنید. 
 
 #____________________________________________=Unable to view the selected attachment for some reason.
 -db36-field:notifyUnableToViewAttachmentcause=بنا به دلایلی امکان مشاهده فایل های پیوست انتخاب شده فراهم نیست.
@@ -2063,7 +2064,7 @@
 -3cb4-field:notifyUnexpectedErrorcause=یک خطای غیر منتظره رخ داده است. لطفا این مشکل را به help@martus.org  گزارش دهید.
 
 #_________________________________________________________=An error occurred during upload, and the bulletin:'#BulletinTitle#' has not been sent to the server.  You may try and resend the bulletin later.
--4325-field:notifyUploadFailedBulletinNotSentToServercause=در هنگام بارگذاری خطایی رخ داده است و بولتن: '#BulletinTitle#' به سرور ارسال نشده است. شما میتوانید برای ارسال مجدد بولتن ،بعدا تلاش کنید.
+-4325-field:notifyUploadFailedBulletinNotSentToServercause=در هنگام بارگذاری خطایی رخ داده است و بولتن: '#BulletinTitle#' به سرور ارسال نشده است. شما میتوانید برای ارسال مجدد بولتن،بعدا تلاش کنید.
 
 #_______________________________________=The user name you chose already exists on this system, please choose a different user name.
 -bbb0-field:notifyUserAlreadyExistscause=نام کاربری که شما انتخاب کرده اید در حال حاضر در این سیستم موجود می باشد، لطفا نام کاربر متفاوتی را انتخاب کنید.
@@ -2084,7 +2085,7 @@
 -08cf-field:notifyViewKeyDetailscause=اتیکت:  #Label#\n\nکد عمومی:  #PublicCode#\n\nشناسه عمومی حساب کاربری:  #PublicKey#
 
 #_____________________________________=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create bulletins that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.
--da34-field:notifyWelcomeToMartuscause=خوش آمدید!\nبرای شروع استفاده از Martus، یک حساب کاربری ایجاد کنید. هرگونه نام کاربری که دوست دارید انتخاب کنید و همچنین یک رمز عبور که حاوی حدااقل 8 کاراکتر باشد. هنگام ایجاد نام کاربری و رمز عبور، اطلاعات زیر را در ذهن نگه دارید:\n\n*  ما توصیه میکنیم از رمز عبوری استفاده کنید که حداقل 15 کاراکتر باشد.\n* شامل کاراکتر هایی باشد که نه حرف هستند و نه اعداد.\n* ( استفاده از نقطه و یا دیگر کاراکتر های خاص)\n* از رمز عبوری استفاده کنید که افراد دیگر قادر به حدس آن نباشند.\n* هر کسی که از نام کاربری و رمز عبور شما اطلاع داشته باشد قادر به مشاهده بولتن های شما خواهد بود.\n* و همچنین میتواند به جای شما اقدام به تهیه بولتن هایی کند که دیگران تصور کنند شما آنها را ایجاد کرده اید.\n* نام کاربری و رمز عبور خود را یاداشت کنید و در یک محل امن نگاه دارید.\n* شما هربار که Martus را اجرا کنید، نیاز به وارد کردن نام کاربری و رمز عبور خواهید داشت.\n* Martus گاهی برای اطمینان از اینکه شخص دیگری از حساب شما استفاده نمیکند، از شما خواهد خواست تا نام کاربری و رمز عبور خود را مجدد بعد از وورد به سیستم، مجدد وارد کنید.\n\nمهم: شما تنها کسی هستید که دسترسی به نام کاربری و رمز عبور خود دارید، در صورتی که شما هر کدام از آنها را فراموش کنید، شما دیگر قادر به بازیابی داده های خود نخواهید بود. نام کاربری و رمز عبور شما در هیج کجا ذخیره نشده و یا نسخه پشتیبانی از آنها تهییه نخواهد شد، بنابراین آنها قابل بازیابی نخواهند بود.
+-da34-field:notifyWelcomeToMartuscause=خوش آمدید!\nبرای شروع استفاده از Martus، یک حساب کاربری ایجاد کنید. هرگونه نام کاربری که دوست دارید انتخاب کنید و همچنین یک رمز عبور که حاوی حدااقل 8 کاراکتر باشد. هنگام ایجاد نام کاربری و رمز عبور، اطلاعات زیر را در ذهن نگه دارید:\n\n*  ما توصیه میکنیم از رمز عبوری استفاده کنید که حداقل 15 کاراکتر باشد.\n* شامل کاراکتر هایی باشد که نه حرف هستند و نه اعداد.\n* (استفاده از نقطه و یا دیگر کاراکتر های خاص)\n* از رمز عبوری استفاده کنید که افراد دیگر قادر به حدس آن نباشند.\n* هر کسی که از نام کاربری و رمز عبور شما اطلاع داشته باشد قادر به مشاهده بولتن های شما خواهد بود.\n* و همچنین میتواند به جای شما اقدام به تهیه بولتن هایی کند که دیگران تصور کنند شما آنها را ایجاد کرده اید.\n* نام کاربری و رمز عبور خود را یاداشت کنید و در یک محل امن نگاه دارید.\n* شما هربار که Martus را اجرا کنید، نیاز به وارد کردن نام کاربری و رمز عبور خواهید داشت.\n* Martus گاهی برای اطمینان از اینکه شخص دیگری از حساب شما استفاده نمیکند، از شما خواهد خواست تا نام کاربری و رمز عبور خود را مجدد بعد از وورد به سیستم، مجدد وارد کنید.\n\nمهم: شما تنها کسی هستید که دسترسی به نام کاربری و رمز عبور خود دارید، در صورتی که شما هر کدام از آنها را فراموش کنید، شما دیگر قادر به بازیابی داده های خود نخواهید بود. نام کاربری و رمز عبور شما در هیج کجا ذخیره نشده و یا نسخه پشتیبانی از آنها تهییه نخواهد شد، بنابراین آنها قابل بازیابی نخواهند بود.
 
 #_____________________________________=The current Martus Server has refused to accept your contact info
 -156f-field:notifycontactRejectedcause=سرور کنونی Martus از قبول اطلاعات تماس شما امتناع کرده است.
@@ -2200,7 +2201,7 @@ field:translationVersion=اسپانیایی 4.4
 #___________________=Username
 -84c2-field:username=نام کاربری
 
-#________________________________=Please wait to sign in again ...
+#________________________________=Please wait to sign in again...
 -d901-field:waitAfterFailedSignIn=لطفا منتظر بمانید تا دوباره وارد سیستم شوید...
 
 #____________________________________=Loading Martus.  Please wait...
@@ -2225,7 +2226,7 @@ field:translationVersion=اسپانیایی 4.4
 -c4bc-field:warningDeleteSingleBulletinWithCopies=توجه داشته باشید: یک نسخه از این بولتن در یک یا چند پوشه دیگر موجود است و آن نسخه ها حذف نخواهند شد.
 
 #____________________________________________=WARNING: This bulletin has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.
--523e-field:warningDeleteSingleUnsentBulletin=هشدار: به دلیل اینکه این بولتن  در لحظه آخر تغییر یافته ، به سرور ارسال نشده است. حذف آن باعث خواهد شد تا از آخرین تغییرات اعمال شده، نسخه پشتیبان تهیه نگردد.
+-523e-field:warningDeleteSingleUnsentBulletin=هشدار: به دلیل اینکه این بولتن  در لحظه آخر تغییر یافته، به سرور ارسال نشده است. حذف آن باعث خواهد شد تا از آخرین تغییرات اعمال شده، نسخه پشتیبان تهیه نگردد.
 
 #_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.  If you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.
 -711f-field:warningUnofficialTranslation=هشدار: این ترجمه توسط تیم Martus ایجاد نشده است و و بنابراین ممکن است قابل اعتماد نباشد. اگر شما فقط می خواهید از ترجمه رسمی استفاده کنید، از Martus خارج شده و فایل #UseUnofficialTranslationFiles# را از پوشه Martus حذف کرده و سپس Martus  را مجدد اجرا نمایید.
@@ -2780,7 +2781,7 @@ field:translationVersion=اسپانیایی 4.4
 -8b15-wintitle:BackupSecretShareCompleteInformation=تهیه نسخه پشتیبان انجام شد
 
 #___________________________________=Bulletin Details
--6fa9-wintitle:BulletinDetailsDialog= جزئیات بولتن
+-6fa9-wintitle:BulletinDetailsDialog=جزئیات بولتن
 
 #_____________________________=Bulletin Preview
 -9d3b-wintitle:BulletinPreview=پیش نمایش بولتن
@@ -2873,7 +2874,7 @@ field:translationVersion=اسپانیایی 4.4
 -53b6-wintitle:FancySearchHelp=جستجوی راهنما
 
 #_____________________________________=Add Attachment
--f3aa-wintitle:FileDialogAddAttachment=افزودن پیوست
+-f3aa-wintitle:FileDialogAddAttachment=اضافه کردن پیوست
 
 #_______________________________________=Export Bulletins
 -a86c-wintitle:FileDialogExportBulletins=استخراج بولتن ها
@@ -3494,7 +3495,7 @@ field:translationVersion=اسپانیایی 4.4
 -08ad-wintitle:notifyInvalidServerCode=کد عمومی سرور نامعتبر است
 
 #_____________________________________=Invalid Server Name or IP Address
--3376-wintitle:notifyInvalidServerName=نام سرور یا آدرس  IP نامعبتر است
+-3376-wintitle:notifyInvalidServerName=نام سرور یا آدرس IP نامعبتر است
 
 #________________________________________=No Field Desks Selected
 -cab7-wintitle:notifyNoFieldDesksSelected=هیچ شعبه کاری انتخاب نشده است
@@ -3512,7 +3513,7 @@ field:translationVersion=اسپانیایی 4.4
 -446e-wintitle:notifyNoReportFieldsSelected=ایجاد گزارش
 
 #_____________________________________________=Load Values
--5c10-wintitle:notifyNonStringFieldRowSelected= بارگذاری مقادیر
+-5c10-wintitle:notifyNonStringFieldRowSelected=بارگذاری مقادیر
 
 #________________________________________=Reports
 -88bc-wintitle:notifyNotValidReportFormat=گزارش ها
