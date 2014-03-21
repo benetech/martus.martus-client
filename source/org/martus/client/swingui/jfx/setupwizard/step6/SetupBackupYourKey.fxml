@@ -6,12 +6,12 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml">
 <top>
-<Label>Backup Your Key</Label>
+<Label styleClass="headingLevel1">Backup Your Key</Label>
 </top>
 <center>
 <VBox prefWidth="650">
   <children>
-    <Label text="Your encryption key was created when you created your account. You will want to back it up, to be able restore your account." 
+    <Label styleClass="step" text="Your encryption key was created when you created your account. You will want to back it up, to be able restore your account."
     	wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
     <Button mnemonicParsing="false" onAction="#createSingelEncryptedFile" text="Create Single, Encrypted File" GridPane.rowIndex="2" />
     <Label text="Create Single, Encrypted File (this still requires remembering your username and password to restore your account)." wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />

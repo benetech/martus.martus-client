@@ -9,9 +9,12 @@
 <AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <BorderPane>
-	  <top>
-        <Label text="Verify your Account" BorderPane.alignment="TOP_LEFT" />
-	  </top>
+			<top>
+				<VBox styleClass="mainTextBox">
+					<Label styleClass="headingLevel1" text="Create an Account" BorderPane.alignment="TOP_LEFT" />
+					<Label styleClass="mainTextBoxText" text="When creating a user name and password for your account, please be aware there is no way to retrieve your username and password if you forget it. This is for your safety." maxWidth="600" wrapText="true"/>
+				</VBox>
+			</top>
 	  <center>
 		  <VBox>
 		    <children>
@@ -25,19 +28,19 @@
 			        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 			      </rowConstraints>
 			      <children>
-			        <Label text="Confirm User Name"  />
+			        <Label styleClass="headingLevel3" text="Confirm User Name"  />
 			        <TextField fx:id="userNameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-			        <Label text="Confirm Password" GridPane.rowIndex="1" />
+			        <Label styleClass="headingLevel3" text="Confirm Password" GridPane.rowIndex="1" />
 			        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 			      </children>
 			    </GridPane>
-		        <Label fx:id="errorLabel"  />
-		        <Label fx:id="accountConfirmLabel" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+		        <Label styleClass="errorText" fx:id="errorLabel"  />
+		        <Label styleClass="errorText" fx:id="accountConfirmLabel" GridPane.columnSpan="2" GridPane.rowIndex="3" />
 			  </children>
-			</VBox>			    
+			</VBox>
 		</center>
 		<bottom>
-			<Label text="When creating a user name and password, please be aware there is no way to retrieve your username and password if you forget it. This is for your safety. Note: later in this wizard, you will be led through a key backup process, that will help mitigate this situation." prefHeight="200" maxHeight="200" maxWidth="600" wrapText="true"/>
+			<Label styleClass="hintText" text="Note: Later in this wizard, you will be led through a process to backup your account key. This will help protect your account from loss." prefHeight="200" maxHeight="200" maxWidth="600" wrapText="true"/>
 		</bottom>
 	</BorderPane>
   </children>
