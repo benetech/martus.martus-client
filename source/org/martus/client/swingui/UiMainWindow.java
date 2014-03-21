@@ -460,7 +460,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		inactivityDetector = new UiInactivityDetector();
 		timeoutTimerTask = new TimeoutTimerTask();
 
-		if (getApp().hasNoAccounts() || isAlphaTester)
+		if (getApp().hasNoAccounts())
 		{
 			if(!startAccountSetupWizard())
 				return false;
@@ -699,7 +699,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			setCreatedNewAccount(false);
 			if(wantsNewAccount)
 			{
-				if(!createAccount())
+				if(!startAccountSetupWizard())
 					return false;
 				setCreatedNewAccount(true);
 			}
@@ -2523,30 +2523,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				UiPasswordField.scrubData(userPassword);
 			}
 		}
-	}
-
-	private boolean createAccount()
-	{
-		notifyDlg("WelcomeToMartus");
-		UiCreateNewAccountProcess newUserInfo = new UiCreateNewAccountProcess(this, "");
-		if(!newUserInfo.isDataValid())
-			return false;
-		String userName = newUserInfo.getUserName();
-		char[] userPassword = newUserInfo.getPassword();
-
-		UiModelessBusyDlg waitingForKeyPair = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitingForKeyPairGeneration"));
-		try
-		{
-			app.createAccount(userName ,userPassword);
-		}
-		catch(Exception e)
-		{
-			waitingForKeyPair.endDialog();
-			notifyDlg("CreateAccountFailed");
-			return false;
-		}
-		waitingForKeyPair.endDialog();
-		return true;
 	}
 
 	private boolean doUploadReminderOnExit()

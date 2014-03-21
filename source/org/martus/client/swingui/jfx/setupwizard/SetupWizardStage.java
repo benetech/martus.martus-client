@@ -25,14 +25,11 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
-import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.ContentController;
 import org.martus.client.swingui.jfx.FxScene;
 import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.step1.FxSetupUsernamePasswordController;
-import org.martus.client.swingui.jfx.setupwizard.step2.FxSetupContactInfoController;
-import org.martus.common.MartusLogger;
 
 public class SetupWizardStage extends FxWizardStage
 {
@@ -45,26 +42,6 @@ public class SetupWizardStage extends FxWizardStage
 	protected ContentController getFirstController()
 	{
 		UiMainWindow mainWindow = getMainWindow();
-		if(UiMainWindow.isAlphaTester)
-		{
-			MartusApp app = mainWindow.getApp();
-			if(!app.hasNoAccounts())
-			{
-				try
-				{
-					app.attemptSignIn("a", "password".toCharArray());
-					app.loadConfigInfo();
-					mainWindow.initalizeUiState();
-					app.doAfterSigninInitalization();
-					return new FxSetupContactInfoController(mainWindow);
-				} 
-				catch (Exception e)
-				{
-					MartusLogger.logException(e);
-					System.exit(1);
-				}
-			}
-		}
 		return new FxSetupUsernamePasswordController(mainWindow);
 	}
 	
