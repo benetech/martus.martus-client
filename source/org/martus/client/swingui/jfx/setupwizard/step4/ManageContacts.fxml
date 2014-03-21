@@ -6,16 +6,16 @@
 
 <VBox prefHeight="445.0" prefWidth="650" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
-    <Label fx:id="fxAddManageContactLabel" text="Contacts" />
-  	<Label fx:id="contactsOverviewLabel" prefHeight="200" text="To send information through Martus to your contacts, you need their public key. You can pull their public keys off of the Martus server using their 7 digit access token. You can verify that you have pulled the correct key, by using their key's public code.  Ask your contacts for the access token, and public code to add your contacts here. If you do not have this information now, you will be able to add contacts later from the Martus desktop client." wrapText="true" />
+    <Label styleClass="headingLevel1" fx:id="fxAddManageContactLabel" text="Contacts" />
+  	<Label styleClass="mainTextBoxText" fx:id="contactsOverviewLabel" prefHeight="200" text="To send information through Martus to your contacts, you need their public key. You can pull their public keys off of the Martus server using their 7 digit access token. You can verify that you have pulled the correct key, by using their key's public code.  Ask your contacts for the access token, and public code to add your contacts here. If you do not have this information now, you will be able to add contacts later from the Martus desktop client." wrapText="true" />
     <BorderPane >
       <top>
         <HBox prefHeight="53.0" >
           <children>
-            <Label text="Access Token:" />
+            <Label styleClass="headingLevel3" text="Access Token:" />
             <TextField id="" fx:id="accessTokenField" promptText="Access Token" />
             <Separator prefWidth="38.0" />
-            <Button id="" fx:id="addContactButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addContact" prefWidth="259.0" text="Add Contact..." />
+            <Button styleClass="button_guided_action" id="" fx:id="addContactButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addContact" prefWidth="259.0" text="Add Contact..." />
           </children>
         </HBox>
       </top>
