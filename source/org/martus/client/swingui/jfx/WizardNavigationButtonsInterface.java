@@ -31,6 +31,4 @@ public interface WizardNavigationButtonsInterface
 {
 	public Button getNextButton();
 	public Button getBackButton();
-	
-	public void setNodeVisible(String fxId);
 }

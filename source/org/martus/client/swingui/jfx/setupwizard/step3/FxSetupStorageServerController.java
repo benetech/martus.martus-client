@@ -54,7 +54,6 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 		destination = null;
 		getWizardNavigationHandler().getNextButton().setVisible(false);
 		defaultServerButton.setDefaultButton(true);
-		getWizardNavigationHandler().setNodeVisible("sidebarHintServer");
 	}
 
 	@Override
