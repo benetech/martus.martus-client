@@ -74,6 +74,11 @@ abstract public class AbstractFxSetupWizardContentController extends ContentCont
 	}
 	
 	abstract public int getWizardStepNumber();
+
+	public String getSidebarFxmlLocation()
+	{
+		return "setupwizard/DefaultSidebar.fxml";
+	}
 	
 	protected boolean isCurrentServerAvailable() throws Exception
 	{

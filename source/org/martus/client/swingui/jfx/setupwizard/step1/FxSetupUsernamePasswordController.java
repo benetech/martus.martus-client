@@ -59,7 +59,6 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 		getUserName().textProperty().addListener(new LoginChangeHandler());
 		getPasswordField().textProperty().addListener(new LoginChangeHandler());
 		hintLabel.setTooltip(new Tooltip("Create secure passwords by using numbers, letters and sympbols."));
-		getWizardNavigationHandler().setNodeVisible("sidebarHintAccount");
 	}
 
 	@Override
@@ -135,6 +134,12 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 	public String getFxmlLocation()
 	{
 		return "setupwizard/step1/SetupUsernamePassword.fxml";
+	}
+	
+	@Override
+	public String getSidebarFxmlLocation()
+	{
+		return "setupwizard/step1/SetupUsernamePasswordSidebar.fxml";
 	}
 	
 	@Override

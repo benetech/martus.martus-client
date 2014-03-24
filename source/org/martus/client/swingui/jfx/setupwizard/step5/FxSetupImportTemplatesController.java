@@ -91,8 +91,6 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		switchFormsLaterLabel.setVisible(false);
 		safelyInitializeCustomTemplateRadioVisibility();
 		getWizardNavigationHandler().getNextButton().addEventHandler(ActionEvent.ACTION, new NextButtonHandler());
-		
-		getWizardNavigationHandler().setNodeVisible("sidebarHintTemplates");
 	}
 
 	private void safelyInitializeCustomTemplateRadioVisibility()

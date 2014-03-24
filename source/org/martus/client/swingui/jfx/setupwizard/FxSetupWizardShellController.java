@@ -25,7 +25,10 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import java.net.URL;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -56,6 +59,11 @@ public class FxSetupWizardShellController extends FxWizardShellController
 		Parent createContents = contentPaneController.createContents();
 		
 		contentPane.getChildren().addAll(createContents);
+		
+		URL url = getBestFxmlLocation(controller.getSidebarFxmlLocation());
+		FXMLLoader sidebarLoader = new FXMLLoader(url);
+		Node sideBarNode = (Node) sidebarLoader.load();
+		sidebarPane.getChildren().addAll(sideBarNode);
 
 		int stepNumber = controller.getWizardStepNumber();
 		Node step = getStep(stepNumber);
@@ -100,5 +108,8 @@ public class FxSetupWizardShellController extends FxWizardShellController
 	protected HBox step6;
 
 	@FXML
-	private Pane contentPane;	
+	private Pane contentPane;
+	
+	@FXML
+	private Pane sidebarPane;
 }

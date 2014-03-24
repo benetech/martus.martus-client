@@ -73,7 +73,6 @@ public class FxSetupSettingsController extends FxStep2Controller
 	
 		String dateDelimeterCode = "" + localization.getDateDelimiter();
 		selectItemByCode(dateDelimeterComboBox, dateDelimeterCode);
-		getWizardNavigationHandler().setNodeVisible("sidebarHintTor");
 	}
 
 	private void selectItemByCode(ChoiceBox choiceBox, String code)

@@ -103,8 +103,6 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		loadExistingContactData();
 		updateAddContactButtonState();
 		accessTokenField.textProperty().addListener(new AccessTokenChangeHandler());
-		
-		getWizardNavigationHandler().setNodeVisible("sidebarHintContacts");
 	}
 
 	protected void removeContactFromTable(ContactsTableData contactData)

@@ -51,7 +51,6 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 	public void initialize(URL rootLocation, ResourceBundle bundle)
 	{
 		super.initialize(rootLocation, bundle);
-		getWizardNavigationHandler().setNodeVisible("sidebarHintBackupKey");
 	}
 	
 	@FXML

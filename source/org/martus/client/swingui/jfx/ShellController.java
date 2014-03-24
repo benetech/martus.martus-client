@@ -25,12 +25,10 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.MartusLogger;
 
 abstract public class ShellController extends FxInSwingDialogController
 {
@@ -39,19 +37,6 @@ abstract public class ShellController extends FxInSwingDialogController
 		super(mainWindowToUse);
 	}
 
-	public void setNodeVisible(String nodeFxId)
-	{
-		String id = "#" + nodeFxId;
-		Node node = getScene().lookup(id);
-		if(node == null)
-		{
-			MartusLogger.log("nodeSetVisible couldn't find node: " + id);
-			return;
-		}
-		
-		getHintLabel().setText(((Label)node).getText());
-	}
-	
 	abstract public Label getHintLabel();
 	abstract public void setContentPane(ContentController contentController) throws Exception;
 	abstract public Button getNextButton();
