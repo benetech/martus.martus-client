@@ -74,8 +74,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		}
 		catch(Exception e)
 		{
-			MartusLogger.logException(e);
-			getMainWindow().exitWithoutSavingState();
+			handleNavigationException(e);
 		}
 	}
 
@@ -95,16 +94,21 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		}
 		catch(Exception e)
 		{
-			try
-			{
-				MartusLogger.logException(e);
-				getCurrentController().showNotifyDialog(this, "UnexpectedError");
-			}
-			catch(Exception exceptionShowingErrorDialog)
-			{
-				MartusLogger.logException(exceptionShowingErrorDialog);
-				getMainWindow().exitWithoutSavingState();
-			}
+			handleNavigationException(e);
+		}
+	}
+
+	public void handleNavigationException(Exception e)
+	{
+		MartusLogger.logException(e);
+		try
+		{
+			getCurrentController().showNotifyDialog(this, "UnexpectedError");
+		}
+		catch(Exception exceptionShowingErrorDialog)
+		{
+			MartusLogger.logException(exceptionShowingErrorDialog);
+			getMainWindow().exitWithoutSavingState();
 		}
 	}
 
