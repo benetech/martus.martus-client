@@ -95,8 +95,16 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		}
 		catch(Exception e)
 		{
-			MartusLogger.logException(e);
-			getMainWindow().exitWithoutSavingState();
+			try
+			{
+				MartusLogger.logException(e);
+				getCurrentController().showNotifyDialog(this, "UnexpectedError");
+			}
+			catch(Exception exceptionShowingErrorDialog)
+			{
+				MartusLogger.logException(exceptionShowingErrorDialog);
+				getMainWindow().exitWithoutSavingState();
+			}
 		}
 	}
 
