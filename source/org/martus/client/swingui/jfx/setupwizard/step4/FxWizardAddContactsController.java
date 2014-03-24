@@ -48,6 +48,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
@@ -82,6 +83,9 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		//TODO remove this and figure out a better solution in FXML
+		contactsVbox.setMaxWidth(MAX_TABLE_WIDTH_IN_WIZARD);
+		
 		contactNameColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("contactName"));
 		contactNameColumn.setCellFactory(new FxTableCellTextFieldFactory());
 
@@ -653,8 +657,12 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	@FXML
 	protected Label sidebarHintContacts;
 	
+	@FXML
+	protected VBox contactsVbox;
+	
 	protected ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
 	
 	private boolean showOldPublicCode;
 
+	private static final int MAX_TABLE_WIDTH_IN_WIZARD = 660;
 }

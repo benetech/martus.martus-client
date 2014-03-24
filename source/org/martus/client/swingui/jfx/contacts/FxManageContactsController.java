@@ -49,6 +49,9 @@ public class FxManageContactsController extends FxWizardAddContactsController
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		super.initialize(location, resources);
+		//TODO remove this and figure out a better solution in FXML
+		contactsVbox.setMaxWidth(MAX_WIDTH_CONTACTS_TABLE);
+
 		sendToByDefaultColumn.setVisible(true);
 		MartusLocalization localization = getLocalization();
 		fxAddManageContactLabel.setText(localization.getFieldLabel("ManageContacts"));
@@ -82,4 +85,5 @@ public class FxManageContactsController extends FxWizardAddContactsController
 				showNotifyDialog(getWizardStage(), "PublicInfoFileError");
 			} 
 	}
+	private static final int MAX_WIDTH_CONTACTS_TABLE = 960;
 }
