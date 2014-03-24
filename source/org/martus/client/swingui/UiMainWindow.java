@@ -195,27 +195,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		UiModelessBusyDlg splashScreen = new UiModelessBusyDlg(new ImageIcon(UiAboutDlg.class.getResource("MartusLogo.png")));
 
 		// Pop up a nag screen if this is an unofficial private release
-//		int secondsToWait = 0;
-//		try
-//		{
-//			MultiCalendar today = new MultiCalendar();
-//			MultiCalendar startTimer = MultiCalendar.createFromGregorianYearMonthDay(2012, 6, 20);
-//			secondsToWait = 2 * MultiCalendar.daysBetween(startTimer, today);
-//			
-//			new UiNotifyDlg(this, "Martus - Test Version", 
-//					new String[] {"THIS IS AN UNOFFICIAL TEST VERSION OF MARTUS",
-//					"\nAs more time passes, it will take longer and longer to start up.\n\n" +
-//					"Please contact info@martus.org with any questions"}, 
-//					new String[] {"OK"});
-//			
-//			MartusLogger.log("Test version sleeping " + secondsToWait + " seconds...");
-//			Thread.sleep(secondsToWait * 1000L);
-//			MartusLogger.log("Awake");
-//		} 
-//		catch (InterruptedException e)
-//		{
-//			MartusLogger.logException(e);
-//		}
+			new UiNotifyDlg(this, "Martus - Test Version", 
+					new String[] {"THIS IS A PRE-RELEASE TEST VERSION OF MARTUS.",
+					"Please contact info@martus.org with any feedback or questions."}, 
+					new String[] {"OK"});
+			
 		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setCurrentActiveFrame(this);
