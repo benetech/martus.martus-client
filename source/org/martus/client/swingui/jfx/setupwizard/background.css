@@ -213,6 +213,19 @@
 }
 
 #contacts-table {
-	-fx-table-cell-border-color: transparent;
+	-fx-table-cell-border-color: #e6e7e9;
+	-fx-font: 13px "Helvetica";
+	-fx-text-fill: #4c5e70;
+}
 
+.tableRow {
+	-fx-table-cell-border-color: transparent;
+	-fx-font: 13px "Helvetica";
+	-fx-text-fill: #4c5e70;
+	-fx-background-color: #9ba5ae;
+}
+
+.radioButtonText {
+	-fx-font: 13px "Helvetica";
+	-fx-text-fill: #4c5e70;
 }
