@@ -72,7 +72,7 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 
 	public WindowListener createWindowCloseHandler()
 	{
-		return new WindowCloseHandler(getMainWindow());
+		return new WindowCloseHandler();
 	}
 	
 	public JDialog getDialog()
@@ -144,25 +144,23 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 		return scene;
 	}
 	
-	private class WindowCloseHandler extends WindowAdapter
+	protected void handleDialogClose()
 	{
-		public WindowCloseHandler(UiMainWindow ownerToUse)
-		{
-			owner = ownerToUse;
-		}
-
+		mainWindow.exitWithoutSavingState();
+	}
+	
+	protected class WindowCloseHandler extends WindowAdapter
+	{
 		@Override
 		public void windowClosing(WindowEvent e)
 		{
 			int result = JOptionPane.showConfirmDialog(getDialog(), "Wizard will now close.  Are you sure?", "Confirmation", JOptionPane.YES_NO_OPTION);
 			if (result == JOptionPane.YES_OPTION)
 			{
-				owner.exitWithoutSavingState();
+				handleDialogClose();
 				super.windowClosing(e);
 			}
 		}
-		
-		private UiMainWindow owner;
 	}
 
 	private JDialog dialog;

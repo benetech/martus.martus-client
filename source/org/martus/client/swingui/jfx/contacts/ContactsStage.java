@@ -53,4 +53,10 @@ public class ContactsStage extends FxNonWizardStage
 	{
 		return new FxScene(getExternalFxmlDirectory(), "contacts/contacts.css");
 	}
+	
+	@Override
+	protected void handleDialogClose()
+	{
+		close();
+	}
 }
