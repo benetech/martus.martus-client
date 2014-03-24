@@ -80,8 +80,14 @@ abstract public class FxController implements Initializable
 
 	private URL getBestFxmlLocation() throws Exception
 	{
+		String fxmlLocation = getFxmlLocation();
+		return getBestFxmlLocation(fxmlLocation);
+	}
+
+	public URL getBestFxmlLocation(String fxmlLocation) throws Exception
+	{
 		File fxmlDir = getApp().getFxmlDirectory();
-		return getBestFile(fxmlDir, getFxmlLocation());
+		return getBestFile(fxmlDir, fxmlLocation);
 	}
 
 	public static URL getBestFile(File fxmlDir, String fileLocation) throws MalformedURLException
