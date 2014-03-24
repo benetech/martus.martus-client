@@ -194,8 +194,8 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			serverIPAddress = FxSetupStorageServerController.IP_FOR_SL1_DEV;
-			serverPublicKey = FxSetupStorageServerController.PUBLIC_KEY_FOR_SL1_DEV;
+			serverIPAddress = FxSetupStorageServerController.IP_FOR_SL1_IE;
+			serverPublicKey = FxSetupStorageServerController.PUBLIC_KEY_FOR_SL1_IE;
 			updateTextFields();
 			onOk();
 		}
