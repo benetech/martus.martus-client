@@ -61,6 +61,12 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 	{
 		return "setupwizard/step3/SetupStorageServer.fxml";
 	}
+	
+	@Override
+	public String getSidebarFxmlLocation()
+	{
+		return "setupwizard/step3/SetupStorageServerSidebar.fxml";
+	}
 
 	@Override
 	public AbstractFxSetupWizardContentController getNextController()

@@ -71,6 +71,12 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 		return "setupwizard/step6/SetupBackupYourKey.fxml";
 	}
 	
+	@Override
+	public String getSidebarFxmlLocation()
+	{
+		return "setupwizard/step6/SetupBackupYourKeySidebar.fxml";
+	}
+	
 	private void doBackupKeyPairToSingleEncryptedFile() throws Exception 
 	{
 		backupMessageLabel.setText("");

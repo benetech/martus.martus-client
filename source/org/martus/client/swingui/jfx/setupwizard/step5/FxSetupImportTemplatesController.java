@@ -66,6 +66,12 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	{
 		return "setupwizard/step5/SetupImportTemplate.fxml";
 	}
+	
+	@Override
+	public String getSidebarFxmlLocation()
+	{
+		return "setupwizard/step5/SetupImportTemplateSidebar.fxml";
+	}
 
 	@Override
 	public AbstractFxSetupWizardContentController getNextController()

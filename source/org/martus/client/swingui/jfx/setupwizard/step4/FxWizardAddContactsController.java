@@ -508,6 +508,12 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	}
 	
 	@Override
+	public String getSidebarFxmlLocation()
+	{
+		return "setupwizard/step4/ManageContactsSidebar.fxml";
+	}
+	
+	@Override
 	public AbstractFxSetupWizardContentController getNextController()
 	{
 		return new FxSetupImportTemplatesController(getMainWindow());

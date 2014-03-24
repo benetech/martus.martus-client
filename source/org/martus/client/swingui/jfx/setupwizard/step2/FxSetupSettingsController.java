@@ -174,6 +174,12 @@ public class FxSetupSettingsController extends FxStep2Controller
 	}
 	
 	@Override
+	public String getSidebarFxmlLocation()
+	{
+		return "setupwizard/step2/SetupSettingsSidebar.fxml";
+	}
+	
+	@Override
 	public AbstractFxSetupWizardContentController getNextController()
 	{
 		return new FxSetupStorageServerController(getMainWindow());
