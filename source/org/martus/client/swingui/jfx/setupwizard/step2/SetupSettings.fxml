@@ -9,16 +9,20 @@
   <children>
   	<BorderPane>
 		<top>
-			<Label styleClass="headingLevel3" text="In this section, set the Martus system defaults for your use of Tor and for date formatting." />
+			<VBox styleClass="mainTextBox">
+				<Label styleClass="headingLevel1" text="Settings" />
+				<Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="In this section, set the Martus system defaults for your use of Tor and for date formatting." />
+			</VBox>
 		</top>
 		<center>
 			<VBox BorderPane.alignment="CENTER">
 				<children>
 				  <VBox styleClass="mainTextBox">
-						<Label styleClass="headingLevel1" text="Your Tor Settings." />
+						<Label styleClass="headingLevel1" text="Your Tor Settings" />
 						<Label styleClass="mainTextBoxText" text="Tor is a security tool you can use to hide your identity when connecting to sites on the internet. If Martus servers are blocked from your location, using Tor may help reach the servers. Read more about Tor at: https://www.torproject.org" prefWidth="564" prefHeight="100" wrapText="true"/>
 				    <CheckBox styleClass="mainText" fx:id="userTorCheckBox" mnemonicParsing="false" text="Use Tor" />
 				  </VBox>
+
 				  <VBox styleClass="mainTextBox">
 				    <Label styleClass="headingLevel1" text="Date Settings" />
 				    <GridPane layoutY="200.0" xmlns:fx="http://javafx.com/fxml">

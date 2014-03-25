@@ -4,28 +4,34 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane prefHeight="196.0" prefWidth="582.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
-  <children>
-    <Label text="Advanced Server Storage Setup" GridPane.columnSpan="2" />
-    <Label minHeight="-Infinity" minWidth="-Infinity" prefWidth="551.0" text="To store your bulletins on a specific server, you will need the server'sIP address, the public code and the magic word for this server.If you are connecting to a Martus server, contactMartusfor this info.If you are connecting to your organization's server, contact your administrator" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-    <Label text="IP Address" GridPane.rowIndex="3" />
-    <TextField fx:id="ipAddressField" promptText="enter your server's IP address" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-    <Label text="Public Code" GridPane.rowIndex="4" />
-    <Label text="Magic Word" GridPane.rowIndex="5" />
-    <TextField fx:id="publicCodeField" promptText="enter your server's public code" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-    <TextField fx:id="magicWordField" prefWidth="262.0" promptText="enter your server's magic word" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-    <Button fx:id="connectButton" mnemonicParsing="false" onAction="#connect" text="Connect" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-    <Label fx:id="statusLabel" GridPane.rowIndex="2" />
-  </children>
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="293.0" prefWidth="111.0" />
-    <ColumnConstraints maxWidth="461.0" minWidth="155.0" prefWidth="454.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
-    <RowConstraints vgrow="SOMETIMES" />
-    <RowConstraints vgrow="SOMETIMES" />
-    <RowConstraints vgrow="SOMETIMES" />
-  </rowConstraints>
-</GridPane>
+<BorderPane>
+	<top>
+		<VBox styleClass="mainTextBox">
+			<Label styleClass="headingLevel1" text="Advanced Server Setup" />
+			<Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="To store your bulletins on a specific server, you will need the server's IP address, the public code and the magic word for this server. If you are connecting to a Martus server, contactMartusfor this info. If you are connecting to your organization's server, contact your administrator" />
+		</VBox>
+	</top>
+	<center>
+		<GridPane prefHeight="196.0" prefWidth="582.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+		  <children>
+		    <Label fx:id="statusLabel" GridPane.rowIndex="0" />
+		    <Button fx:id="connectButton" mnemonicParsing="false" onAction="#connect" text="Connect" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+		    <Label text="IP Address" GridPane.rowIndex="1" />
+		    <TextField fx:id="ipAddressField" promptText="enter your server's IP address" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+		    <Label text="Public Code" GridPane.rowIndex="2" />
+		    <TextField fx:id="publicCodeField" promptText="enter your server's public code" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+		    <Label text="Magic Word" GridPane.rowIndex="3" />
+		    <TextField fx:id="magicWordField" prefWidth="262.0" promptText="enter your server's magic word" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+		  </children>
+		  <columnConstraints>
+		    <ColumnConstraints hgrow="SOMETIMES" maxWidth="293.0" prefWidth="111.0" />
+		    <ColumnConstraints maxWidth="461.0" minWidth="155.0" prefWidth="454.0" />
+		  </columnConstraints>
+		  <rowConstraints>
+		    <RowConstraints vgrow="SOMETIMES" />
+		    <RowConstraints vgrow="SOMETIMES" />
+		    <RowConstraints vgrow="SOMETIMES" />
+		  </rowConstraints>
+		</GridPane>
+	</center>
+</BorderPane>
