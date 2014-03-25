@@ -22,28 +22,28 @@
       <GridPane>
          <children>
             <Label styleClass="mainText" text="This wizard will walk you through the steps necessary to set up Martus, so that you can safely store and share your human rights documentation" wrapText="true" GridPane.columnSpan="3" />
-            
+
             <Label styleClass="stepNumber" text="1" GridPane.rowIndex="1" />
             <Label styleClass="headingLevel3" text="Account Creation:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label styleClass="mainText" text="Your information will be kept safe, with a password protected, encrypted account." wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            
+
             <Label styleClass="mainText" text="Establish your system settings for the use of Tor (a tool to help hide network activity) and dates." wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Label styleClass="stepNumber" text="2" GridPane.rowIndex="2" />
             <Label styleClass="headingLevel3" text="Settings:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            
+
             <Label styleClass="mainText" text="Backup your information to a secure server" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <Label styleClass="headingLevel3" text="Server Setup:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label styleClass="stepNumber" text="3" GridPane.rowIndex="3" />
-            
+
             <Label styleClass="mainText" text="Send and receive information from other Martus users of your choice" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <Label styleClass="headingLevel3" text="Contacts" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label styleClass="stepNumber" text="4" GridPane.rowIndex="4" />
-            
-            <Label styleClass="mainText" text="***Select a form template to create Martus forms with" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+
+            <Label styleClass="mainText" text="Select a template for creating Martus forms." wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <Label styleClass="headingLevel3" text="Import Form Template" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label styleClass="stepNumber" text="5" GridPane.rowIndex="5" />
-            
-            <Label styleClass="mainText" text=" Make a copy of your account's encryption key to restore your account in case of an accident or emergency." wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+
+            <Label styleClass="mainText" text="Make a copy of your account's encryption key to ensure continued access to your account." wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="6" />
             <Label styleClass="headingLevel3" text="Backup key" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label styleClass="stepNumber" text="6" GridPane.rowIndex="6" />
          </children>
@@ -61,7 +61,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
          </rowConstraints>
-         
+
       </GridPane>
    </center>
    <left>
