@@ -3,9 +3,7 @@
 }
 
 .button {
-		-fx-background-color:
-        #797769,
-       linear-gradient(#e2c92f, #797769);
+		-fx-background-color: #797769, linear-gradient(#e2c92f, #797769);
 		-fx-border-radius: 5;
 		-fx-text-fill: #4c5e70;
 		-fx-alignment: center;
@@ -40,8 +38,7 @@
 	-fx-stroke-width: 10;
 	-fx-stroke: White;
 	-fx-font: 20px "Arial Black";
-  -fx-font-weight: bold;
-	-fx-padding: 0 5 10 5;
+  	-fx-font-weight: bold;
 }
 
 .headingLevel2 {
@@ -50,10 +47,7 @@
 	-fx-stroke: #4c5e70;
 	-fx-font: 20px "Arial Black";
   -fx-font-weight: bold;
-	-fx-padding: 10 5 10 5;
 }
-
-
 
 .headingLevel3 {
 	-fx-text-fill: #e2c92f;
@@ -64,8 +58,6 @@
 	-fx-padding: 10 5 10 5;
 }
 
-
-
 .stepNumber {
 	-fx-text-fill: #707e87;
 	-fx-stroke-width: 2;
@@ -73,7 +65,6 @@
 	-fx-font: 24px "Helvetica";
 	-fx-padding: 0 3 0 3;
 }
-
 
 .mainText {
 	-fx-text-fill: White;
