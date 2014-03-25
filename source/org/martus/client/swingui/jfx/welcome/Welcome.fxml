@@ -1,50 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-<left>
-    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-        <Image url="@../../dialogs/MartusLogoTransparentBackground.png" />
-      </image>
-    </ImageView>
-</left>
-<center><VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-<children>
-
-<Label styleClass="headingLevel1" text="Get started with Martus!" />
-<Label styleClass="headingLevel2" text="Securing your digital documentation" />
-
-<Label styleClass="mainText" text="This wizard will walk you through the steps necessary to set up Martus, so that you can safely store and share your human rights documentation" />
-<Label text="" />
-
-<Label styleClass="stepNumber"  text="1" />
-<Label styleClass="headingLevel3"  text="Account Creation:" />
-<Label styleClass="mainText"  text="Your information will be kept safe, with a password protected, encrypted account." />
-
-<Label styleClass="stepNumber"  text="2" />
-<Label styleClass="headingLevel3" text="Settings:" />
-<Label styleClass="mainText"  text="Establish your system settings for the use of Tor (a tool to help hide network activity) and dates." />
-
-<Label styleClass="stepNumber"  text="3" />
-<Label styleClass="headingLevel3" text="Server Setup:" />
-<Label styleClass="mainText" text="Backup your information to a secure server" />
-
-<Label styleClass="stepNumber"  text="4" />
-<Label styleClass="headingLevel3" text="Contacts" />
-<Label styleClass="mainText"  text="Send and receive information from other Martus users of your choice" />
-
-<Label styleClass="stepNumber"  text="5" />
-<Label styleClass="headingLevel3" text="Import Form Template" />
-<Label styleClass="mainText"  text="***Select a form template to create Martus forms with" />
-
-<Label styleClass="stepNumber"  text="6" />
-<Label styleClass="headingLevel3" text="Backup key" />
-<Label styleClass="mainText"  text=" Make a copy of your account's encryption key to restore your account in case of an accident or emergency." />
-
-</children></VBox>
-</center></BorderPane>
+<GridPane prefHeight="471.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label styleClass="headingLevel1" text="Get started with Martus!" GridPane.columnIndex="1" GridPane.columnSpan="3" />
+      <Label styleClass="headingLevel2" text="Securing your digital documentation" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+      <Label styleClass="mainText" text="This wizard will walk you through the steps necessary to set up Martus, so that you can safely store and share your human rights documentation" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.rowSpan="2" />
+      <ImageView fitHeight="130.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+         <image>
+            <Image url="@../../dialogs/MartusLogoTransparentBackground.png" />
+         </image>
+      </ImageView>
+      <Label styleClass="stepNumber" text="1" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Label styleClass="headingLevel3" text="Account Creation:" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+      <Label styleClass="mainText" text="Your information will be kept safe, with a password protected, encrypted account." wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+      <Label styleClass="stepNumber" text="2" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Label styleClass="headingLevel3" text="Settings:" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+      <Label styleClass="mainText" text="Establish your system settings for the use of Tor (a tool to help hide network activity) and dates." wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+      <Label styleClass="stepNumber" text="3" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      <Label styleClass="headingLevel3" text="Server Setup:" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+      <Label styleClass="mainText" text="Backup your information to a secure server" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+      <Label styleClass="stepNumber" text="4" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+      <Label styleClass="headingLevel3" text="Contacts" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+      <Label styleClass="mainText" text="Send and receive information from other Martus users of your choice" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+      <Label styleClass="stepNumber" text="5" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+      <Label styleClass="headingLevel3" text="Import Form Template" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+      <Label styleClass="mainText" text="***Select a form template to create Martus forms with" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+      <Label styleClass="stepNumber" text="6" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+      <Label styleClass="headingLevel3" text="Backup key" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+      <Label styleClass="mainText" text=" Make a copy of your account's encryption key to restore your account in case of an accident or emergency." wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+   </children>
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="160.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="0.0" prefWidth="31.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.0" minWidth="0.0" prefWidth="241.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="551.0" minWidth="215.0" prefWidth="372.0" />
+   </columnConstraints>
+</GridPane>
