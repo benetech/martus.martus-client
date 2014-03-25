@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane>
+<BorderPane prefWidth="660">
 	<top>
 		<VBox styleClass="mainTextBox">
 			<Label styleClass="headingLevel1" text="Advanced Server Setup" />
