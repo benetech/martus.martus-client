@@ -18,8 +18,8 @@
             <ChoiceBox fx:id="genericTemplatesChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <RadioButton fx:id="downloadCustomRadioButton" mnemonicParsing="false" onAction="#radioButtonSelectionChanged" styleClass="radioButtonText" text="Download Custom" toggleGroup="$chooseTemplateImportMethod" GridPane.rowIndex="2" />
             <ChoiceBox fx:id="customTemplatesChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="selectedTemplateLabel" styleClass="hintText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label fx:id="switchFormsLaterLabel" styleClass="hintText" text="Successfully loaded a form. You can switch forms later" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="selectedTemplateLabel" wrapText="true" styleClass="hintText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="switchFormsLaterLabel" wrapText="true" styleClass="hintText" text="Successfully loaded a form. You can switch forms later" GridPane.columnIndex="1" GridPane.rowIndex="4" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
