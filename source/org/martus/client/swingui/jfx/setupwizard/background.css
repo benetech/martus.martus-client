@@ -78,9 +78,10 @@
 .mainTextBox {
 	-fx-background-color: #9ba5ae;
   -fx-width: 80%;
-  -fx-padding: 25 10 15 10;
+  -fx-padding: 25 10 35 10;
 	-fx-alignment: center-left;
 	-fx-background-radius: 7.0;
+	-fx-background-insets: 0 0 20 0;
 }
 
 .mainTextBoxText {
