@@ -69,14 +69,14 @@
                 </BorderPane>
               </bottom>
               <center>
-                <Pane fx:id="contentPane" maxHeight="-Infinity" prefHeight="500.0" prefWidth="683.0" />
+                <Pane fx:id="contentPane" maxHeight="-Infinity" prefHeight="500.0" prefWidth="660.0" />
               </center>
             </BorderPane>
           </center>
           <right>
             <BorderPane>
               <top>
-                <Pane fx:id="sidebarPane" maxHeight="350" prefWidth="200.0" />
+                <Pane fx:id="sidebarPane" maxHeight="300" prefWidth="200.0" />
               </top>
               <bottom>
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">

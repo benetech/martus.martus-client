@@ -17,9 +17,9 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
    </rowConstraints>
    <children>
-      <Label text="Import from a new contact" /><Button mnemonicParsing="false" onAction="#onCancel" text="X Cancel" GridPane.columnIndex="2" /><Label text="Enter Access Token" GridPane.rowIndex="1" />
+      <Label styleClass="headingLevel1" text="Import from a new contact" /><Button mnemonicParsing="false" onAction="#onCancel" text="X Cancel" GridPane.columnIndex="2" /><Label styleClass="headingLevel3" text="Enter Access Token" GridPane.rowIndex="1" />
       <TextField fx:id="accessTokenTextField" promptText="Access Token" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Button fx:id="seeFormTemplatesButton" mnemonicParsing="false" onAction="#onSeeForms" text="See Forms" GridPane.columnIndex="2" GridPane.rowIndex="1" /><Label fx:id="formsFromUserMessageLabel" GridPane.rowIndex="2" />
-      <Label fx:id="importFromThisConctactLabel" text="Import from this contact" GridPane.columnIndex="1" GridPane.rowIndex="3" /><Button fx:id="continueButton" mnemonicParsing="false" onAction="#onContinue" text="Continue" GridPane.columnIndex="2" GridPane.rowIndex="3" /><ChoiceBox fx:id="formTemplateChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="2" xmlns:fx="http://javafx.com/fxml" /><Label fx:id="noTemplatesAvailableLabel" text="No Templates Available" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Label styleClass="headingLevel3"  fx:id="importFromThisConctactLabel" text="Import from this contact" GridPane.columnIndex="1" GridPane.rowIndex="3" /><Button fx:id="continueButton" mnemonicParsing="false" onAction="#onContinue" text="Continue" GridPane.columnIndex="2" GridPane.rowIndex="3" /><ChoiceBox fx:id="formTemplateChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="2" xmlns:fx="http://javafx.com/fxml" /><Label styleClass="headingLevel3"  fx:id="noTemplatesAvailableLabel" text="No Templates Available" GridPane.columnIndex="1" GridPane.rowIndex="2" />
    </children>
 </GridPane>
