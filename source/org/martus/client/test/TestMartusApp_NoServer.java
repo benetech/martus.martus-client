@@ -1097,8 +1097,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	private String getOldConfigInfoHQKeys()
 	{
 		Vector keys = new Vector();
-		keys.add(new HeadquartersKey(hqKey1, hqKeylabel1));
-		keys.add(new HeadquartersKey(hqKey2, hqKeylabel2));
+		HeadquartersKey hq1 = new HeadquartersKey(hqKey1, hqKeylabel1);
+		hq1.setCanReceiveFrom(true);
+		keys.add(hq1);
+		HeadquartersKey hq2 = new HeadquartersKey(hqKey2, hqKeylabel2);
+		hq2.setCanReceiveFrom(true);
+		keys.add(hq2);
 		HeadquartersKeys contactKeys = new HeadquartersKeys(keys);
 		return contactKeys.toStringWithLabel();
 	}
@@ -1146,24 +1150,24 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		Vector keys = new Vector();
 		ContactKey hqLegacyContactKey = new ContactKey(getLegacyHQ(), "");
-		hqLegacyContactKey.setCanSendTo(true);
 		hqLegacyContactKey.setSendToByDefault(true);
+		hqLegacyContactKey.setCanReceiveFrom(false);
 		hqLegacyContactKey.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 		keys.add(hqLegacyContactKey);
 		ContactKey hqContactKey1 = new ContactKey(hqKey1, hqKeylabel1);
-		hqContactKey1.setCanSendTo(true);
+		hqContactKey1.setCanReceiveFrom(false);
 		hqContactKey1.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 		keys.add(hqContactKey1);
 		ContactKey hqContactKey2 = new ContactKey(hqKey2, hqKeylabel2);
-		hqContactKey2.setCanSendTo(true);
+		hqContactKey2.setCanReceiveFrom(false);
 		hqContactKey2.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 		keys.add(hqContactKey2);
 		ContactKey fdContactKey1 = new ContactKey(fdKey1, fdKeyLabel1);
-		fdContactKey1.setCanReceiveFrom(true);
+		fdContactKey1.setCanSendTo(false);
 		fdContactKey1.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 		keys.add(fdContactKey1);
 		ContactKey fdContactKey2 = new ContactKey(fdKey2, fdKeyLabel2);
-		fdContactKey2.setCanReceiveFrom(true);
+		fdContactKey2.setCanSendTo(false);
 		fdContactKey2.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 		keys.add(fdContactKey2);
 		ContactKeys contactKeys = new ContactKeys(keys);
