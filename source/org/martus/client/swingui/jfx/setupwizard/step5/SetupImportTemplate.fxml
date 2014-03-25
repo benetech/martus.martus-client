@@ -37,7 +37,7 @@
 			</toggleGroup>
 	  </RadioButton>
       <ChoiceBox fx:id="genericTemplatesChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="1" xmlns:fx="http://javafx.com/fxml" />
-      <RadioButton fx:id="downloadCustomRadioButton" mnemonicParsing="false" onAction="#radioButtonSelectionChanged" text="Download Custom" toggleGroup="$chooseTemplateImportMethod" GridPane.rowIndex="2" />
+      <RadioButton styleClass="radioButtonText" fx:id="downloadCustomRadioButton" mnemonicParsing="false" onAction="#radioButtonSelectionChanged" text="Download Custom" toggleGroup="$chooseTemplateImportMethod" GridPane.rowIndex="2" />
       <ChoiceBox fx:id="customTemplatesChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="2" xmlns:fx="http://javafx.com/fxml" /><Label fx:id="selectedTemplateLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" /><Label fx:id="switchFormsLaterLabel" styleClass="hintText" text="You can switch forms later" GridPane.columnIndex="1" GridPane.rowIndex="4" />
    </children>
 </GridPane>

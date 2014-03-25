@@ -10,7 +10,7 @@
   <children>
     <GridPane id="fxGridPane" alignment="TOP_CENTER" layoutX="14.0" layoutY="14.0" prefHeight="235.0" prefWidth="572.0">
       <children>
-        <Label fx:id="fxLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="133.0" prefWidth="558.0" text="" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label styleClass="headingLevel3"  fx:id="fxLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="133.0" prefWidth="558.0" text="" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
           <children>
             <ProgressBar fx:id="fxProgressBar" disable="false" prefHeight="24.0" prefWidth="572.0" progress="0.0" />
