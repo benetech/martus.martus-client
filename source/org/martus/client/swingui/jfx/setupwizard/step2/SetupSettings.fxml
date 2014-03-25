@@ -9,7 +9,7 @@
   <children>
   	<BorderPane>
 		<top>
-			<VBox styleClass="notMainTextBox">
+			<VBox styleClass="mainTextBox">
 				<Label styleClass="headingLevel1" text="Settings" />
 				<Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="In this section, set the Martus system defaults for your use of Tor and for date formatting." />
 			</VBox>
