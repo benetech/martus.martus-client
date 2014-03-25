@@ -81,7 +81,7 @@
               <bottom>
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                    <Image url="@../../dialogs/MartusLogo.png" />
+                    <Image url="@../../dialogs/MartusLogoTransparentBackground.png" />
                   </image>
                 </ImageView>
               </bottom>
