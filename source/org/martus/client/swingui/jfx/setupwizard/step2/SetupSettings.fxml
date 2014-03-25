@@ -10,7 +10,6 @@
   	<BorderPane>
 		<top>
 			<VBox styleClass="notMainTextBox">
-				<Label styleClass="headingLevel1" text="Settings" />
 				<Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="In this section, set the Martus system defaults for your use of Tor and for date formatting." />
 			</VBox>
 		</top>
@@ -34,7 +33,7 @@
 				        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 				        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 				      </rowConstraints>
-				
+
 				      <children>
 				        <Label styleClass="headingLevel3" layoutX="5.0" layoutY="296.0" text="Date format sequence" />
 				        <ChoiceBox fx:id="dateFormatSequenceDropDown" layoutX="166.0" layoutY="304.0" GridPane.columnIndex="1" xmlns:fx="http://javafx.com/fxml" />
