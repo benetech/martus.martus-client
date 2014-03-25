@@ -45,9 +45,9 @@ public class ContactKeyStringConverter extends StringConverter<ContactKey>
 					
 		try
 		{
-			return contactKey.getFormattedPublicCode();
+			return contactKey.getFormattedPublicCode40();
 		} 
-		catch (InvalidBase64Exception e)
+		catch (Exception e)
 		{
 			MartusLogger.logException(e);
 			return "[Error]";
