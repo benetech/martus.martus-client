@@ -13,11 +13,11 @@
         <Button styleClass="button_guided_action" mnemonicParsing="false" onAction="#verifyContact" prefHeight="33.0" prefWidth="177.0" text="Verify!" />
       </children>
     </HBox>
-    <Label text="Public Code:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-    <Label fx:id="contactPublicCode40Label" prefHeight="33.0" prefWidth="576.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <Label styleClass="headingLevel2" text="Public Code:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <Label styleClass="headingLevel3" fx:id="contactPublicCode40Label" prefHeight="33.0" prefWidth="576.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
     <Label fx:id="labelOldPublicCode" text="Public Code (old):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-    <Label fx:id="contactPublicCodeLabel" prefHeight="33.0" prefWidth="566.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-    <Label fx:id="labelVerificationMessage" prefHeight="81.0" prefWidth="581.0" text="" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <Label styleClass="headingLevel3" fx:id="contactPublicCodeLabel" prefHeight="33.0" prefWidth="566.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <Label styleClass="mainText" fx:id="labelVerificationMessage" prefHeight="81.0" prefWidth="581.0" text="" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="192.0" />
