@@ -119,6 +119,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 		try
 		{
 			showProgressDialog(getWizardStage(), "*Initalizing Tor*", "Setting Up Tor", task);
+			return true;
 		}
 		catch (UserCancelledException e)
 		{
@@ -128,8 +129,8 @@ public class FxSetupSettingsController extends FxStep2Controller
 		{
 			MartusLogger.logException(e);
 			showNotifyDialog(getWizardStage(), "UnexpectedError");
+			return false;
 		}
-		return true;
 	}
 
 	private ObservableList<ChoiceItem> getDateFormatChoices()

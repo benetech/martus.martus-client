@@ -229,3 +229,10 @@
 	-fx-font: 13px "Helvetica";
 	-fx-text-fill: #4c5e70;
 }
+
+.choiceBox {
+	-fx-text-fill: white;
+  -fx-padding: 0 4 4 4;
+	-fx-font: 15px "Arial Black";
+	-fx-background-color: Red;
+}
