@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml">
+<top>
+<Label styleClass="headingLevel1">Backup Your Key</Label>
+</top>
+<center>
+<VBox prefWidth="650">
+  <children>
+    <Label styleClass="mainText" text="Your encryption key was created when you created your account. You will want to back it up, to be able restore your account."
+    	wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+    <Button mnemonicParsing="false" onAction="#createSingelEncryptedFile" text="Create Single, Encrypted File" GridPane.rowIndex="2" />
+    <Label styleClass="mainText" text="Create Single, Encrypted File (this still requires remembering your username and password to restore your account)." wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <Label fx:id="backupMessageLabel" text="" GridPane.rowIndex="3" />
+  </children>
+</VBox>
+</center>
+</BorderPane>
