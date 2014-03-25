@@ -6,37 +6,42 @@
 <?import javafx.scene.web.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <children><BorderPane>
-<top><Label styleClass="headingLevel3" text="In this section, set the Martus system defaults for your use of Tor and for date formatting." />
-</top>
-<center><VBox BorderPane.alignment="CENTER">
-<children>
-  <VBox styleClass="mainTextBox">
-		<Label styleClass="headingLevel1" text="Your Tor Settings." />
-		<Label styleClass="mainTextBoxText" text="Tor is a security tool you can use to hide your identity when connecting to sites on the internet. If Martus servers are blocked from your location, using Tor may help reach the servers. Read more about Tor at: https://www.torproject.org" prefWidth="564" prefHeight="100" wrapText="true"/>
-    <CheckBox styleClass="mainText" fx:id="userTorCheckBox" mnemonicParsing="false" text="Use Tor" />
-  </VBox>
-  <VBox styleClass="mainTextBox">
-    <Label styleClass="headingLevel1" text="Date Settings" />
-    <GridPane layoutY="200.0" xmlns:fx="http://javafx.com/fxml">
-      <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" />
-        <ColumnConstraints hgrow="SOMETIMES" />
-      </columnConstraints>
-      <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      </rowConstraints>
-
-      <children>
-        <Label styleClass="headingLevel3" layoutX="5.0" layoutY="296.0" text="Date format sequence" />
-        <ChoiceBox fx:id="dateFormatSequenceDropDown" layoutX="166.0" layoutY="304.0" GridPane.columnIndex="1" xmlns:fx="http://javafx.com/fxml" />
-        <ChoiceBox fx:id="dateDelimeterComboBox" layoutX="150.0" layoutY="283.0" GridPane.columnIndex="1" GridPane.rowIndex="1" xmlns:fx="http://javafx.com/fxml" />
-        <Label styleClass="headingLevel3" layoutX="52.0" layoutY="309.0" text="Date delimeter" GridPane.rowIndex="1" />
-      </children>
-    </GridPane>
-  </VBox>
-</children></VBox>
-</center></BorderPane>
+  <children>
+  	<BorderPane>
+		<top>
+			<Label styleClass="headingLevel3" text="In this section, set the Martus system defaults for your use of Tor and for date formatting." />
+		</top>
+		<center>
+			<VBox BorderPane.alignment="CENTER">
+				<children>
+				  <VBox styleClass="mainTextBox">
+						<Label styleClass="headingLevel1" text="Your Tor Settings." />
+						<Label styleClass="mainTextBoxText" text="Tor is a security tool you can use to hide your identity when connecting to sites on the internet. If Martus servers are blocked from your location, using Tor may help reach the servers. Read more about Tor at: https://www.torproject.org" prefWidth="564" prefHeight="100" wrapText="true"/>
+				    <CheckBox styleClass="mainText" fx:id="userTorCheckBox" mnemonicParsing="false" text="Use Tor" />
+				  </VBox>
+				  <VBox styleClass="mainTextBox">
+				    <Label styleClass="headingLevel1" text="Date Settings" />
+				    <GridPane layoutY="200.0" xmlns:fx="http://javafx.com/fxml">
+				      <columnConstraints>
+				        <ColumnConstraints hgrow="SOMETIMES" />
+				        <ColumnConstraints hgrow="SOMETIMES" />
+				      </columnConstraints>
+				      <rowConstraints>
+				        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+				        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+				      </rowConstraints>
+				
+				      <children>
+				        <Label styleClass="headingLevel3" layoutX="5.0" layoutY="296.0" text="Date format sequence" />
+				        <ChoiceBox fx:id="dateFormatSequenceDropDown" layoutX="166.0" layoutY="304.0" GridPane.columnIndex="1" xmlns:fx="http://javafx.com/fxml" />
+				        <ChoiceBox fx:id="dateDelimeterComboBox" layoutX="150.0" layoutY="283.0" GridPane.columnIndex="1" GridPane.rowIndex="1" xmlns:fx="http://javafx.com/fxml" />
+				        <Label styleClass="headingLevel3" layoutX="52.0" layoutY="309.0" text="Date delimeter" GridPane.rowIndex="1" />
+				      </children>
+				    </GridPane>
+				  </VBox>
+				</children>
+			</VBox>
+		</center>
+	</BorderPane>
   </children>
 </AnchorPane>
