@@ -55,6 +55,17 @@
 
 
 
+.headingLevel3 {
+	-fx-text-fill: #e2c92f;
+	-fx-stroke-width: 10;
+	-fx-stroke: #4c5e70;
+	-fx-font: 16px "Arial Black";
+  -fx-font-weight: bold;
+	-fx-padding: 10 5 10 5;
+}
+
+
+
 .stepNumber {
 	-fx-text-fill: #707e87;
 	-fx-stroke-width: 2;

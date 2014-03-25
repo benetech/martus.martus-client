@@ -22,22 +22,28 @@
 <Label styleClass="mainText" text="This wizard will walk you through the steps necessary to set up Martus, so that you can safely store and share your human rights documentation" />
 <Label text="" />
 
-<Label styleClass="headingLevel2"  text="Account Creation:" />
+<Label styleClass="stepNumber"  text="1" />
+<Label styleClass="headingLevel3"  text="Account Creation:" />
 <Label styleClass="mainText"  text="Your information will be kept safe, with a password protected, encrypted account." />
 
-<Label styleClass="headingLevel2" text="Settings:" />
+<Label styleClass="stepNumber"  text="2" />
+<Label styleClass="headingLevel3" text="Settings:" />
 <Label styleClass="mainText"  text="Establish your system settings for the use of Tor (a tool to help hide network activity) and dates." />
 
-<Label styleClass="headingLevel2" text="Server Setup:" />
+<Label styleClass="stepNumber"  text="3" />
+<Label styleClass="headingLevel3" text="Server Setup:" />
 <Label styleClass="mainText" text="Backup your information to a secure server" />
 
-<Label styleClass="headingLevel2" text="Contacts" />
+<Label styleClass="stepNumber"  text="4" />
+<Label styleClass="headingLevel3" text="Contacts" />
 <Label styleClass="mainText"  text="Send and receive information from other Martus users of your choice" />
 
-<Label styleClass="headingLevel2" text="Import Form Template" />
+<Label styleClass="stepNumber"  text="5" />
+<Label styleClass="headingLevel3" text="Import Form Template" />
 <Label styleClass="mainText"  text="***Select a form template to create Martus forms with" />
 
-<Label styleClass="headingLevel2" text="Backup key" />
+<Label styleClass="stepNumber"  text="6" />
+<Label styleClass="headingLevel3" text="Backup key" />
 <Label styleClass="mainText"  text=" Make a copy of your account's encryption key to restore your account in case of an accident or emergency." />
 
 </children></VBox>
