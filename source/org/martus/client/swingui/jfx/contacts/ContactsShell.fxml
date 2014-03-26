@@ -14,7 +14,7 @@
             <Button mnemonicParsing="false" onAction="#importContactFromFile" prefHeight="35.0" prefWidth="313.0" text="Import Contact From File..." />
           </left>
           <right>
-            <Button id="" fx:id="closeButton" mnemonicParsing="false" onAction="#onClose" prefHeight="35.0" prefWidth="110.0" text="Close" BorderPane.alignment="CENTER_RIGHT" />
+            <Button id="" fx:id="closeButton" mnemonicParsing="false" onAction="#onClose" prefHeight="35.0" prefWidth="280.0" text="Save and Close" BorderPane.alignment="CENTER_RIGHT" />
           </right>
         </BorderPane>
       </bottom>
