@@ -107,7 +107,7 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 		FileTransfer.copyFile(keypairFile, newBackupFile);
 		if(FileVerifier.verifyFiles(keypairFile, newBackupFile))
 		{
-			String message = TokenReplacement.replaceToken("#backupFileName created.", "#backupFileName", newBackupFile.getName());
+			String message = TokenReplacement.replaceToken(localization.getFieldLabel("SingleEncryptedKeyBackupCreated"), "#backupFileName", newBackupFile.getName());
 			backupMessageLabel.setText(message);
 			getApp().getConfigInfo().setBackedUpKeypairEncrypted(true);
 			getApp().saveConfigInfo();
