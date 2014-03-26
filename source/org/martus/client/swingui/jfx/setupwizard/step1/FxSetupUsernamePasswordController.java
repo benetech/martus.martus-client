@@ -96,7 +96,7 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 			if (!hasUserName)
 				errorMessage = "Must enter a Username.";
 			else if(!isPasswordLongEnough)
-				errorMessage = "Password must be at least 8 characters, 15 recommened.";
+				errorMessage = "Password must be at least 8 characters, 15 recommended.";
 			else if(usernameSameAsPassword)
 				errorMessage = getLocalization().getFieldLabel("notifyPasswordMatchesUserNamecause");
 			else if(doesAccountExist)

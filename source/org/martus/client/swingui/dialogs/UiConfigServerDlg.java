@@ -133,6 +133,8 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		result = false;
 		if(ae.getSource() == ok)
 			onOk();
+		else
+			dispose();
 	}
 	
 	protected void onOk()

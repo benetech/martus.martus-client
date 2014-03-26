@@ -963,6 +963,8 @@ public class EnglishStrings
 "field:notifyErrorUpdatingDictionarycause=Unable to update the dictionary. Be sure the word list is in the correct format.",
 "field:SpellCheckUserDictionaryInstructions=The following words have been added to the user dictionary. \nYou can delete or edit them here, or you can add more words. \nEach word must be on a line by itself.",
 
+"field:SingleEncryptedKeyBackupCreated=Single, Encrypted File #backupFileName created (this still requires remembering your username and password to restore your account).",
+
 "field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",
 "field:IncompatibleMtfVersionProgram=Martus Software Version: #ProgramVersionNumber#",
@@ -1513,7 +1515,7 @@ public class EnglishStrings
 "field:MartusSearchSpecFileFilter=Martus Search Specification (.mss)",
 "field:MBAFileFilter=Martus Bulletin Archive (*.mba)",
 "field:JPEGFileFilter=JPEG (*.jpeg, *.jpg)",
-"field:KeyPairFileFilter=Martus Key (*.mpi)",
+"field:KeyPairFileFilter=Martus Key (*.dat)",
 "field:HtmlFileFilter=HTML (*.html, *.htm)",
 "field:CustomXMLTopSection=Top Pane of Bulletin",
 "field:CustomXMLBottomSection=Bottom (always Private) Pane of Bulletin",
@@ -1526,6 +1528,7 @@ public class EnglishStrings
 "field:RemoveContactLabel=The following contact will be removed.\n\nName: #Name#\nPublic Code: #PublicCode#.\n\nAre you sure you want to do this?",
 
 "field:ManageContacts=Manage Contacts",
+"field:ManageContactsOverview=To send information through Martus to your contacts, you need their public key. You can pull their public keys off of the Martus server using their 7 digit access token. You can verify that you have pulled the correct key, by using their key's public code.  Ask your contacts for the access token, and public code to add your contacts here.",
 
 "filed:AllFiles=All Files",
 "field:BulletinViewHeading=Martus Bulletin",

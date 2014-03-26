@@ -140,23 +140,51 @@
 	-fx-insets: 10 10 10 10;
 }
 
+.table-view {
+  -fx-base: #9ba5ae;
+  -fx-control-inner-background: transparent;
+  -fx-background-color: transparent;
+  -fx-table-cell-border-color: white;
+  -fx-table-header-border-color: transparent;
+  -fx-padding: 5;
+}
+
+
+.table-view .column-header-background {
+    -fx-background-color: #9ba5ae;
+}
+
+
+.table-view .column-header {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color:
+        transparent
+        transparent
+        derive(-fx-base, 80%)
+        transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+
+.table-cell {
+	-fx-background-color: transparent;
+	-fx-text-fill: #4c5e70;
+}
+
 .table-cell .button .remove-contact-button {
-	-fx-background-color: Red;
-	-fx-base: Red;
-	-fx-text-fill: White;
+		-fx-background-color:Red;
+		-fx-border-radius: 5;
+		-fx-text-fill: White;
+		-fx-alignment: center;
+		-fx-font: 15px "Helvetica";
+		-fx-padding: 3 5 3 5;
 }
 
 .table-cell .verified-label  {
 	-fx-text-fill: Green;
 }
 
-.table-cell .hyperlink .unverified-hyperlink:hover  {
-	-fx-background-color: Red;
- }
-
-.table-cell .hyperlink .unverified-hyperlink  {
-	-fx-background-color: Red;
- }
 
 #BelowTitle {
 	-fx-border-color: #e6e7e9;
@@ -210,7 +238,7 @@
 .TopBarArrow {
 	-fx-text-fill: #707e87;
   -fx-padding: 0 4 4 4;
-	-fx-font: 38px "Helvetica";
+	-fx-font: 20px "Arial Black";
 }
 
 #contacts-table {
@@ -219,12 +247,6 @@
 	-fx-text-fill: #4c5e70;
 }
 
-.tableRow {
-	-fx-table-cell-border-color: transparent;
-	-fx-font: 13px "Helvetica";
-	-fx-text-fill: #4c5e70;
-	-fx-background-color: #9ba5ae;
-}
 
 .radioButtonText {
 	-fx-font: 13px "Helvetica";

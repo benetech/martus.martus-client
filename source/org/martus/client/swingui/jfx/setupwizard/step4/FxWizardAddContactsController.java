@@ -652,7 +652,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	protected Label fxAddManageContactLabel;
 	
 	@FXML
-	protected Label fxAddManageContactsDescriptionLabel;
+	protected Label contactsOverviewLabel;
 	
 	@FXML
 	protected Label sidebarHintContacts;

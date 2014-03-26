@@ -35,6 +35,7 @@ import javafx.stage.FileChooser;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiMainWindow.KeyPairFormatFilter;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.util.FileTransfer;
 import org.martus.util.FileVerifier;
@@ -91,21 +92,22 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 		File martusRootDir = getApp().getMartusDataRootDirectory();
 		fileChooser.setInitialDirectory(martusRootDir);
 		fileChooser.setTitle("Backup Key File");
+		KeyPairFormatFilter keyPairFilter = getMainWindow().getKeyPairFormatFilter();
 		MartusLocalization localization = getLocalization();
 		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter(localization.getFieldLabel("KeyPairFileFilter"), "*.dat"),
+				new FileChooser.ExtensionFilter(keyPairFilter.getDescription(), keyPairFilter.getWildCardExtension()),
 				new FileChooser.ExtensionFilter(localization.getFieldLabel("AllFiles"), "*.*"));
 		File newBackupFile = fileChooser.showSaveDialog(null);
 		if(newBackupFile == null)
 			return;
 
 		if(!newBackupFile.getName().contains("."))
-			newBackupFile = new File(newBackupFile.getAbsolutePath() + ".dat");
+			newBackupFile = new File(newBackupFile.getAbsolutePath() + keyPairFilter.getExtension());
 		
 		FileTransfer.copyFile(keypairFile, newBackupFile);
 		if(FileVerifier.verifyFiles(keypairFile, newBackupFile))
 		{
-			String message = TokenReplacement.replaceToken("#backupFileName created.", "#backupFileName", newBackupFile.getName());
+			String message = TokenReplacement.replaceToken(localization.getFieldLabel("SingleEncryptedKeyBackupCreated"), "#backupFileName", newBackupFile.getName());
 			backupMessageLabel.setText(message);
 			getApp().getConfigInfo().setBackedUpKeypairEncrypted(true);
 			getApp().saveConfigInfo();
