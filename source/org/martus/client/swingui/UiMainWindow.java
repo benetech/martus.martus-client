@@ -2308,7 +2308,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		public String getWildCardExtension()
 		{
-			return "*" + MartusApp.SHARE_KEYPAIR_FILENAME_EXTENSION;
+			return "*" + getExtension();
 		}
 
 		@Override
