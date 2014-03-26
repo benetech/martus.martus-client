@@ -40,8 +40,6 @@ public class TestContactTableData extends TestCaseEnhanced
 		String label = "My HQ";
 		String publicKey = "FakeKey";
 		ContactKey contactKey = new ContactKey(publicKey, label);
-		contactKey.setCanReceiveFrom(false);
-		contactKey.setCanSendTo(true);
 		contactKey.setVerificationStatus(ContactKey.VERIFIED_VISUALLY);
 		ContactsTableData fxmlTableData = new ContactsTableData(contactKey);
 
@@ -53,7 +51,7 @@ public class TestContactTableData extends TestCaseEnhanced
 		assertEquals(contactKey.getLabel(), keyReturned.getLabel());
 		assertEquals(label, keyReturned.getLabel());
 		assertTrue(keyReturned.getCanSendTo());
-		assertFalse(keyReturned.getCanReceiveFrom());
+		assertTrue("New:All HQ and FD keys now can Send To / can Receive From",keyReturned.getCanReceiveFrom());
 		assertEquals(ContactKey.VERIFIED_VISUALLY, keyReturned.getVerificationStatus());
 	}
 }
