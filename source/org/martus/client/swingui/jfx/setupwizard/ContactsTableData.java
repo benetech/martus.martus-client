@@ -52,8 +52,6 @@ public class ContactsTableData
 	{
 		ContactKey contact = new ContactKey(publicKey, contactName.get());
 		contact.setSendToByDefault(sendToByDefault.get());
-		contact.setCanReceiveFrom(canReceiveFrom.get());
-		contact.setCanSendTo(canSendTo.get());
 		contact.setVerificationStatus(verificationStatus.get());
 		return contact;
 	}

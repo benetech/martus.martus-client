@@ -487,7 +487,6 @@ public class MartusApp
 			if(!updatedContacts.containsKey(currentHQ.getPublicKey()))
 			{
 				ContactKey newHQContact = new ContactKey(currentHQ);
-				newHQContact.setCanSendTo(true);
 				newHQContact.setSendToByDefault(isDefaultHQ);
 				updatedContacts.add(newHQContact);
 			}
@@ -503,17 +502,10 @@ public class MartusApp
 			String publicKey = currentContact.getPublicKey();
 		
 			if(allHQKeys.containsKey(publicKey))
-			{
-				currentContact.setCanSendTo(true);
 				currentContact.setLabel(allHQKeys.getLabelIfPresent(publicKey));
-			}
-			else
-			{
-				currentContact.setCanSendTo(false);
-			}
+
 			if(defaultKeys.containsKey(publicKey))
 			{
-				currentContact.setCanSendTo(true);
 				currentContact.setSendToByDefault(true);
 				currentContact.setLabel(defaultKeys.getLabelIfPresent(publicKey));
 			}
@@ -535,7 +527,6 @@ public class MartusApp
 			if(!updatedContacts.containsKey(currentFD.getPublicKey()))
 			{
 				ContactKey newFDContact = new ContactKey(currentFD);
-				newFDContact.setCanReceiveFrom(true);
 				updatedContacts.add(newFDContact);
 			}
 		}
@@ -549,14 +540,7 @@ public class MartusApp
 			ContactKey currentContact = originalContacts.get(i);
 			String publicKey = currentContact.getPublicKey();
 			if(allFDKeys.containsKey(publicKey))
-			{
-				currentContact.setCanReceiveFrom(true);
 				currentContact.setLabel(allFDKeys.getLabelIfPresent(publicKey));
-			}
-			else
-			{
-				currentContact.setCanReceiveFrom(false);
-			}
 			updatedContactKeysWithCanReceiveFromAdjusted.add(currentContact);
 		}
 	return updatedContactKeysWithCanReceiveFromAdjusted;
@@ -779,7 +763,6 @@ public class MartusApp
 			if(!defaultHQKeyToAdd.getPublicKey().equals(ourPublicKey))
 			{
 				ContactKey hqContactKey = new ContactKey(defaultHQKeyToAdd);
-				hqContactKey.setCanSendTo(true);
 				hqContactKey.setSendToByDefault(true);
 				hqContactKey.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 				keys.add(hqContactKey);
@@ -792,7 +775,6 @@ public class MartusApp
 					!deprecatedDefaultHqKeys.contains(hqKeyToAdd))
 			{
 				ContactKey hqContactKey = new ContactKey(hqKeyToAdd);
-				hqContactKey.setCanSendTo(true);
 				hqContactKey.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 				keys.add(hqContactKey);
 			}
@@ -805,7 +787,6 @@ public class MartusApp
 			if(!fdKeyToAdd.getPublicKey().equals(ourPublicKey))
 			{
 				ContactKey fdContactKey = new ContactKey(fdKeyToAdd);
-				fdContactKey.setCanReceiveFrom(true);
 				fdContactKey.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 				keys.add(fdContactKey);
 			}
