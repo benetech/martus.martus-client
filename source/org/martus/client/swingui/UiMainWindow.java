@@ -2299,8 +2299,18 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 	
-	class KeyPairFormatFilter extends FormatFilter
+	public KeyPairFormatFilter getKeyPairFormatFilter()
 	{
+		return new KeyPairFormatFilter();
+	}
+	
+	public class KeyPairFormatFilter extends FormatFilter
+	{
+		public String getWildCardExtension()
+		{
+			return "*" + MartusApp.SHARE_KEYPAIR_FILENAME_EXTENSION;
+		}
+
 		@Override
 		public String getExtension()
 		{
