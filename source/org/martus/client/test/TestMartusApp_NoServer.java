@@ -1098,10 +1098,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		Vector keys = new Vector();
 		HeadquartersKey hq1 = new HeadquartersKey(hqKey1, hqKeylabel1);
-		hq1.setCanReceiveFrom(true);
 		keys.add(hq1);
 		HeadquartersKey hq2 = new HeadquartersKey(hqKey2, hqKeylabel2);
-		hq2.setCanReceiveFrom(true);
 		keys.add(hq2);
 		HeadquartersKeys contactKeys = new HeadquartersKeys(keys);
 		return contactKeys.toStringWithLabel();
@@ -1151,23 +1149,18 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		Vector keys = new Vector();
 		ContactKey hqLegacyContactKey = new ContactKey(getLegacyHQ(), "");
 		hqLegacyContactKey.setSendToByDefault(true);
-		hqLegacyContactKey.setCanReceiveFrom(false);
 		hqLegacyContactKey.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 		keys.add(hqLegacyContactKey);
 		ContactKey hqContactKey1 = new ContactKey(hqKey1, hqKeylabel1);
-		hqContactKey1.setCanReceiveFrom(false);
 		hqContactKey1.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 		keys.add(hqContactKey1);
 		ContactKey hqContactKey2 = new ContactKey(hqKey2, hqKeylabel2);
-		hqContactKey2.setCanReceiveFrom(false);
 		hqContactKey2.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 		keys.add(hqContactKey2);
 		ContactKey fdContactKey1 = new ContactKey(fdKey1, fdKeyLabel1);
-		fdContactKey1.setCanSendTo(false);
 		fdContactKey1.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 		keys.add(fdContactKey1);
 		ContactKey fdContactKey2 = new ContactKey(fdKey2, fdKeyLabel2);
-		fdContactKey2.setCanSendTo(false);
 		fdContactKey2.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
 		keys.add(fdContactKey2);
 		ContactKeys contactKeys = new ContactKeys(keys);
@@ -1338,7 +1331,6 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String sampleHQLabel = "Fred";
 		ContactKeys keys = new ContactKeys();
 		ContactKey hqKey = new ContactKey(sampleHQPublicKey, sampleHQLabel);
-		hqKey.setCanSendTo(true);
 		keys.add(hqKey);
 		appWithAccount.setContactKeys(keys);
 		ContactKeys keysReturned = appWithAccount.getContactKeys();
@@ -1349,7 +1341,6 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String sampleFDPublicKey = "FD";
 		String sampleFDLabel = "Wilma";
 		ContactKey fdKey = new ContactKey(sampleFDPublicKey, sampleFDLabel);
-		fdKey.setCanReceiveFrom(true);
 		keysReturned.add(fdKey);
 		appWithAccount.setContactKeys(keysReturned);
 		ContactKeys keysReturned2 = appWithAccount.getContactKeys();
@@ -1472,31 +1463,31 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("Should have 3 contacts now total", 3, allNewContacts.size());
 		ContactKey contactKey1 = allNewContacts.get(0);
 		if(contactKey1.getLabel().equals(sampleLabel1))
-			verifyContactInfo(sampleHQKey1, contactKey1, true, false);
+			verifyContactInfo(sampleHQKey1, contactKey1);
 		else if(contactKey1.getLabel().equals(sampleLabel2))
-			verifyContactInfo(sampleHQKey2, contactKey1, false, false);
+			verifyContactInfo(sampleHQKey2, contactKey1);
 		else if(contactKey1.getLabel().equals(sampleLabel3))
-			verifyContactInfo(sampleHQKey3, contactKey1, true, false);
+			verifyContactInfo(sampleHQKey3, contactKey1);
 		else
 			fail("ContactKey1 not found?");
 		
 		ContactKey contactKey2 = allNewContacts.get(1);
 		if(contactKey2.getLabel().equals(sampleLabel1))
-			verifyContactInfo(sampleHQKey1, contactKey2, true, false);
+			verifyContactInfo(sampleHQKey1, contactKey2);
 		else if(contactKey2.getLabel().equals(sampleLabel2))
-			verifyContactInfo(sampleHQKey2, contactKey2, false, false);
+			verifyContactInfo(sampleHQKey2, contactKey2);
 		else if(contactKey2.getLabel().equals(sampleLabel3))
-			verifyContactInfo(sampleHQKey3, contactKey2, true, false);
+			verifyContactInfo(sampleHQKey3, contactKey2);
 		else
 			fail("ContactKey2 not found?");
 
 		ContactKey contactKey3 = allNewContacts.get(2);
 		if(contactKey3.getLabel().equals(sampleLabel1))
-			verifyContactInfo(sampleHQKey1, contactKey3, true, false);
+			verifyContactInfo(sampleHQKey1, contactKey3);
 		else if(contactKey3.getLabel().equals(sampleLabel2))
-			verifyContactInfo(sampleHQKey2, contactKey3, false, false);
+			verifyContactInfo(sampleHQKey2, contactKey3);
 		else if(contactKey3.getLabel().equals(sampleLabel3))
-			verifyContactInfo(sampleHQKey3, contactKey3, true, false);
+			verifyContactInfo(sampleHQKey3, contactKey3);
 		else
 			fail("ContactKey3 not found?");
 		
@@ -1540,49 +1531,49 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("Should have 4 contacts now total", 4, newContactsWithFDsAndHQs.size());
 		contactKey1 = newContactsWithFDsAndHQs.get(0);
 		if(contactKey1.getLabel().equals(sampleLabel1))
-			verifyContactInfo(sampleHQKey1, contactKey1, true, true);
+			verifyContactInfo(sampleHQKey1, contactKey1);
 		else if(contactKey1.getLabel().equals(sampleLabel2))
-			verifyContactInfo(sampleHQKey2, contactKey1, false, true);
+			verifyContactInfo(sampleHQKey2, contactKey1);
 		else if(contactKey1.getLabel().equals(sampleLabel3))
-			verifyContactInfo(sampleHQKey3, contactKey1, true, false);
+			verifyContactInfo(sampleHQKey3, contactKey1);
 		else if(contactKey1.getLabel().equals(sampleLabel4))
-			verifyContactInfo(sampleHQKey4, contactKey1, false, false);
+			verifyContactInfo(sampleHQKey4, contactKey1);
 		else
 			fail("ContactKey1 not found?");
 		
 		contactKey2 = newContactsWithFDsAndHQs.get(0);
 		if(contactKey2.getLabel().equals(sampleLabel1))
-			verifyContactInfo(sampleHQKey1, contactKey2, true, true);
+			verifyContactInfo(sampleHQKey1, contactKey2);
 		else if(contactKey2.getLabel().equals(sampleLabel2))
-			verifyContactInfo(sampleHQKey2, contactKey2, false, true);
+			verifyContactInfo(sampleHQKey2, contactKey2);
 		else if(contactKey2.getLabel().equals(sampleLabel3))
-			verifyContactInfo(sampleHQKey3, contactKey2, true, false);
+			verifyContactInfo(sampleHQKey3, contactKey2);
 		else if(contactKey2.getLabel().equals(sampleLabel4))
-			verifyContactInfo(sampleHQKey4, contactKey2, false, false);
+			verifyContactInfo(sampleHQKey4, contactKey2);
 		else
 			fail("ContactKey2 not found?");
 		
 		contactKey3 = newContactsWithFDsAndHQs.get(0);
 		if(contactKey3.getLabel().equals(sampleLabel1))
-			verifyContactInfo(sampleHQKey1, contactKey3, true, true);
+			verifyContactInfo(sampleHQKey1, contactKey3);
 		else if(contactKey3.getLabel().equals(sampleLabel2))
-			verifyContactInfo(sampleHQKey2, contactKey3, false, true);
+			verifyContactInfo(sampleHQKey2, contactKey3);
 		else if(contactKey3.getLabel().equals(sampleLabel3))
-			verifyContactInfo(sampleHQKey3, contactKey3, true, false);
+			verifyContactInfo(sampleHQKey3, contactKey3);
 		else if(contactKey3.getLabel().equals(sampleLabel4))
-			verifyContactInfo(sampleHQKey4, contactKey3, false, false);
+			verifyContactInfo(sampleHQKey4, contactKey3);
 		else
 			fail("ContactKey3 not found?");
 
 		ContactKey contactKey4 = newContactsWithFDsAndHQs.get(0);
 		if(contactKey4.getLabel().equals(sampleLabel1))
-			verifyContactInfo(sampleHQKey1, contactKey4, true, true);
+			verifyContactInfo(sampleHQKey1, contactKey4);
 		else if(contactKey4.getLabel().equals(sampleLabel2))
-			verifyContactInfo(sampleHQKey2, contactKey4, false, true);
+			verifyContactInfo(sampleHQKey2, contactKey4);
 		else if(contactKey4.getLabel().equals(sampleLabel3))
-			verifyContactInfo(sampleHQKey3, contactKey4, true, false);
+			verifyContactInfo(sampleHQKey3, contactKey4);
 		else if(contactKey4.getLabel().equals(sampleLabel4))
-			verifyContactInfo(sampleHQKey4, contactKey4, false, false);
+			verifyContactInfo(sampleHQKey4, contactKey4);
 		else
 			fail("ContactKey4 not found?");
 	}
@@ -1612,8 +1603,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		HeadquartersKey testKey = returnedKeysAfterAddingH1andH2asBothHQandDefault.get(0);
 		assertEquals("Key1 Label not correct?",sampleLabel1, testKey.getLabel());
 		assertEquals("Key1 should not be verified", ContactKey.NOT_VERIFIED, testKey.getVerificationStatus());
-		assertFalse("HQ Key1 Can't Receive From", testKey.getCanReceiveFrom());
-		assertTrue("HQ Key1 Can Send To?", testKey.getCanSendTo());
+		assertTrue("HQ Key1 Can't Receive From", testKey.getCanReceiveFrom());
+		assertTrue("HQ Key1 Can't Send To?", testKey.getCanSendTo());
 
 		String newLabel1 = "Flinstone";
 
@@ -1684,31 +1675,31 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("Should have 3 contacts now total", 3, allNewContacts.size());
 		ContactKey contactKey1 = allNewContacts.get(0);
 		if(contactKey1.getLabel().equals(sampleLabel1))
-			verifyContactInfo(sampleFDKey1, contactKey1, false, true);
+			verifyContactInfo(sampleFDKey1, contactKey1);
 		else if(contactKey1.getLabel().equals(sampleLabel2))
-			verifyContactInfo(sampleFDKey2, contactKey1, false, false);
+			verifyContactInfo(sampleFDKey2, contactKey1);
 		else if(contactKey1.getLabel().equals(sampleLabel3))
-			verifyContactInfo(sampleFDKey3, contactKey1, false, true);
+			verifyContactInfo(sampleFDKey3, contactKey1);
 		else
 			fail("ContactKey1 not found?");
 		
 		ContactKey contactKey2 = allNewContacts.get(1);
 		if(contactKey2.getLabel().equals(sampleLabel1))
-			verifyContactInfo(sampleFDKey1, contactKey2, false, true);
+			verifyContactInfo(sampleFDKey1, contactKey2);
 		else if(contactKey2.getLabel().equals(sampleLabel2))
-			verifyContactInfo(sampleFDKey2, contactKey2, false, false);
+			verifyContactInfo(sampleFDKey2, contactKey2);
 		else if(contactKey2.getLabel().equals(sampleLabel3))
-			verifyContactInfo(sampleFDKey3, contactKey2, false, true);
+			verifyContactInfo(sampleFDKey3, contactKey2);
 		else
 			fail("ContactKey2 not found?");
 
 		ContactKey contactKey3 = allNewContacts.get(2);
 		if(contactKey3.getLabel().equals(sampleLabel1))
-			verifyContactInfo(sampleFDKey1, contactKey3, false, true);
+			verifyContactInfo(sampleFDKey1, contactKey3);
 		else if(contactKey3.getLabel().equals(sampleLabel2))
-			verifyContactInfo(sampleFDKey2, contactKey3, false, false);
+			verifyContactInfo(sampleFDKey2, contactKey3);
 		else if(contactKey3.getLabel().equals(sampleLabel3))
-			verifyContactInfo(sampleFDKey3, contactKey3, false, true);
+			verifyContactInfo(sampleFDKey3, contactKey3);
 		else
 			fail("ContactKey3 not found?");
 		
@@ -1742,7 +1733,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("Key1 Label not correct?",sampleLabel1, testKey.getLabel());
 		assertEquals("Key1 should not be verified", ContactKey.NOT_VERIFIED, testKey.getVerificationStatus());
 		assertTrue("FD Key1 Can't Receive From", testKey.getCanReceiveFrom());
-		assertFalse("FD Key1 Can Send To?", testKey.getCanSendTo());
+		assertTrue("FD Key1 Can't Send To?", testKey.getCanSendTo());
 		String newLabel1 = "Flinstone";
 
 		key1.setLabel(newLabel1);
@@ -1760,11 +1751,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("Key1 Label not changed?",newLabel1, testKey2.getLabel());
 	}	
 	
-	private void verifyContactInfo(String publicKey, ContactKey contactKey, boolean canSendTo, boolean canReceiveFrom)
+	private void verifyContactInfo(String publicKey, ContactKey contactKey)
 	{
 		assertEquals(publicKey + ": Public Code doesn't match?", publicKey, contactKey.getPublicKey());
-		assertEquals(publicKey + ": Can Send To doesn't match?", canSendTo, contactKey.getCanSendTo());
-		assertEquals(publicKey + ": Can Receive From doesn't match?", canReceiveFrom, contactKey.getCanReceiveFrom());
 	}
 	
 	public void testClearHQKey() throws Exception
@@ -2887,7 +2876,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("Public Key not set?", sampleHQKey1, returnedKey2.getPublicKey());
 		assertEquals("Label not set?", sampleLabel1, returnedKey2.getLabel());
 		assertEquals("Verifiction not set?", ContactKey.VERIFIED_ENTERED_20_DIGITS, returnedKey2.getVerificationStatus());
-		assertFalse("Can Receive From set?", returnedKey2.getCanReceiveFrom());
+		assertTrue("Can Receive From not set?", returnedKey2.getCanReceiveFrom());
 		assertTrue("Can Send To not set?", returnedKey2.getCanSendTo());
 		
 		Bulletin b1 = appWithAccount.createBulletin();
