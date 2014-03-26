@@ -7,7 +7,7 @@
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="218.0" prefWidth="744.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
-    <Button mnemonicParsing="false" onAction="#willVerifyLater" prefHeight="33.0" prefWidth="186.0" text="Will Verify Later" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <Button mnemonicParsing="false" onAction="#willVerifyLater" prefHeight="33.0" prefWidth="186.0" text="Later" GridPane.columnIndex="0" GridPane.rowIndex="4" />
     <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
       <children>
         <Button styleClass="button_guided_action" mnemonicParsing="false" onAction="#verifyContact" prefHeight="33.0" prefWidth="177.0" text="Verify!" />
