@@ -4,19 +4,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml">
-<top>
-<Label styleClass="headingLevel1">Backup Your Key</Label>
-</top>
-<center>
-<VBox prefWidth="600">
-  <children>
-    <Label styleClass="mainText" text="Your encryption key was created when you created your account. You will want to back it up, to be able restore your account."
-    	wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-    <Button mnemonicParsing="false" onAction="#createSingelEncryptedFile" text="Create Single, Encrypted File" GridPane.rowIndex="2" />
-    <Label styleClass="mainText" text="Create Single, Encrypted File (this still requires remembering your username and password to restore your account)." wrapText="true" minHeight="150" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-    <Label fx:id="backupMessageLabel" text="" GridPane.rowIndex="3" />
-  </children>
-</VBox>
-</center>
+<BorderPane prefHeight="229.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <center>
+    <VBox prefWidth="600.0">
+      <children>
+        <Label prefHeight="47.0" prefWidth="600.0" styleClass="mainText" text="Your encryption key was created when you created your account. You will want to back it up, to be able restore your account." wrapText="true" />
+        <Label text="" />
+        <Button mnemonicParsing="false" onAction="#createSingelEncryptedFile" text="Create Single, Encrypted File" />
+        <Label id="backupMessageLabel" minHeight="54.0" prefHeight="54.0" prefWidth="600.0" styleClass="mainText" text="Create Single, Encrypted File (this still requires remembering your username and password to restore your account)." wrapText="true" />
+        <Label fx:id="backupMessageLabel" prefHeight="68.0" prefWidth="586.0" text="" wrapText="true" />
+      </children>
+    </VBox>
+  </center>
+  <top>
+    <Label styleClass="headingLevel1" />
+  </top>
 </BorderPane>
