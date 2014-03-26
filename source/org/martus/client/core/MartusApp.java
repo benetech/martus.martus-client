@@ -1048,7 +1048,7 @@ public class MartusApp
 
 	private void extractMatchingFileTypesFromJar(File mlpFile, File targetDirectory, String filesBeginningWith, String filesEndingWith)
 	{
-		if(JarVerifier.verify(mlpFile, false) != JarVerifier.JAR_VERIFIED_TRUE)
+		if(JarVerifier.verify(mlpFile, true) != JarVerifier.JAR_VERIFIED_TRUE)
 			return;
 		JarFile jar = null;
 		try
