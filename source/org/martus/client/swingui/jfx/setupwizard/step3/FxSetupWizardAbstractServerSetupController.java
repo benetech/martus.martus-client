@@ -62,6 +62,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 				if(showConfirmationDialog(wizardStage, "title", "SSL Not responding.  Save this configuration?"))
 				{
 					//FIXME since the task throws server not found, can this code ever even be hit?
+					saveServerConfig(serverIPAddress, serverPublicKey, "");
 					return;
 				}
 				return; //Nothing to do here, timed out.
