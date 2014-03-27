@@ -34,6 +34,7 @@ import javafx.scene.control.Hyperlink;
 
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.client.swingui.jfx.setupwizard.step4.FxWizardAddContactsController;
 import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
@@ -111,8 +112,10 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 	@FXML
 	public void useDefaultServer()
 	{
-		if(attemptToConnect(getDefaultServerIp(), getDefaultServerPublicKey(), false))
-			getWizardStage().next();
+		attemptToConnect(getDefaultServerIp(), getDefaultServerPublicKey(), false);
+		FxWizardStage wizardStage = getWizardStage();
+		if(wizardStage.hasServerAvailabilityBeenInitialized())
+			wizardStage.next();
 	}
 	
 	private String getDefaultServerIp()

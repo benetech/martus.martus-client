@@ -30,6 +30,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.tasks.ConnectToServerTask;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.Exceptions.ServerNotAvailableException;
@@ -42,37 +43,38 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		super(mainWindowToUse);
 	}
 
-	public boolean attemptToConnect(String serverIPAddress, String serverPublicKey, boolean askComplianceAcceptance)
+	public void attemptToConnect(String serverIPAddress, String serverPublicKey, boolean askComplianceAcceptance)
 	{
 		MartusLogger.log("Attempting to connect to: " + serverIPAddress);
 		MartusApp app = getApp();
 		getMainWindow().clearStatusMessage();
 		ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, serverPublicKey, getApp().getTransport());
 
+		FxWizardStage wizardStage = getWizardStage();
 		try
 		{
 			ConnectToServerTask task = new ConnectToServerTask(getApp(), gateway);
-			showTimeoutDialog(getWizardStage(), "*Connecting*", "Attempting to connect to server and checking compliance", task);
+			showTimeoutDialog(wizardStage, "*Connecting*", "Attempting to connect to server and checking compliance", task);
 			if(!task.isAvailable())
 			{
+				wizardStage.setCurrentServerIsAvailable(false);
 				//FIXME put in real text/title here.
-				if(showConfirmationDialog(getWizardStage(), "title", "SSL Not responding.  Save this configuration?"))
+				if(showConfirmationDialog(wizardStage, "title", "SSL Not responding.  Save this configuration?"))
 				{
 					//FIXME since the task throws server not found, can this code ever even be hit?
-					saveServerConfig(serverIPAddress, serverPublicKey, "");
-					getWizardStage().setCurrentServerIsAvailable(false);
-					return true;
+					return;
 				}
+				return; //Nothing to do here, timed out.
 			}
 			String complianceStatement = task.getComplianceStatement();
 			if(askComplianceAcceptance)
 			{
 				if(complianceStatement.equals(""))
 				{
-					showNotifyDialog(getWizardStage(), "ServerComplianceFailed");
+					showNotifyDialog(wizardStage, "ServerComplianceFailed");
 					saveServerConfig(serverIPAddress, serverPublicKey, "");
-					getWizardStage().setCurrentServerIsAvailable(false);
-					return true;
+					wizardStage.setCurrentServerIsAvailable(false);
+					return;
 				}
 				
 				if(!acceptCompliance(complianceStatement))
@@ -89,8 +91,8 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 						getApp().setServerInfo("","","");
 					}
 
-					getWizardStage().setCurrentServerIsAvailable(false);
-					return false;
+					wizardStage.setCurrentServerIsAvailable(false);
+					return;
 				}
 			}
 
@@ -102,33 +104,29 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 			app.getStore().clearOnServerLists();
 			getMainWindow().repaint();
 			getMainWindow().setStatusMessageReady();
-			getWizardStage().setCurrentServerIsAvailable(true);
-			return true;
+			wizardStage.setCurrentServerIsAvailable(true);
 		}
 		catch(UserCancelledException e)
 		{
-			return false;
+			wizardStage.setCurrentServerIsAvailable(false);
 		}
 		catch(SaveConfigInfoException e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog(getWizardStage(), "ErrorSavingConfig");
-			getWizardStage().setCurrentServerIsAvailable(false);
-			return false;
+			showNotifyDialog(wizardStage, "ErrorSavingConfig");
+			wizardStage.setCurrentServerIsAvailable(false);
 		}
 		catch(ServerNotAvailableException e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog(getWizardStage(), "ErrorServerOffline");
-			getWizardStage().setCurrentServerIsAvailable(false);
-			return false;
+			showNotifyDialog(wizardStage, "ErrorServerOffline");
+			wizardStage.setCurrentServerIsAvailable(false);
 		}
 		catch(Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog(getWizardStage(), "ErrorGettingCompliance");
-			getWizardStage().setCurrentServerIsAvailable(false);
-			return false;
+			showNotifyDialog(wizardStage, "ErrorGettingCompliance");
+			wizardStage.setCurrentServerIsAvailable(false);
 		} 
 	}
 	
