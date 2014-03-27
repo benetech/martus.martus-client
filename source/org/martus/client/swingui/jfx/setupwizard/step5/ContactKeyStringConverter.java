@@ -29,7 +29,7 @@ import javafx.util.StringConverter;
 
 import org.martus.common.ContactKey;
 import org.martus.common.MartusLogger;
-import org.martus.util.StreamableBase64.InvalidBase64Exception;
+
 
 public class ContactKeyStringConverter extends StringConverter<ContactKey>
 {
@@ -40,12 +40,16 @@ public class ContactKeyStringConverter extends StringConverter<ContactKey>
 			return "";
 		
 		String label = contactKey.getLabel();
-		if (label.length() > 0)
-			return label;
 					
 		try
 		{
-			return contactKey.getFormattedPublicCode40();
+			String contactsCompleteName;
+			String publicCode = contactKey.getFormattedPublicCode40();
+			if(label.length() > 0)
+				contactsCompleteName = String.format("%s (%s)", label, publicCode);
+			else
+				contactsCompleteName = publicCode;
+			return contactsCompleteName;
 		} 
 		catch (Exception e)
 		{
