@@ -52,8 +52,6 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 	public FxAdvancedServerStorageSetupController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		
-		clearServerStatus();
 	}
 	
 	@Override
@@ -93,8 +91,6 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 	{
 		try
 		{
-			clearServerStatus();
-			
 			String ip = ipAddressField.getText();
 			
 			GetServerPublicKeyTask task = new GetServerPublicKeyTask(getApp(), ip);
@@ -112,29 +108,34 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 				return;
 			}
 			
-			isConnected = attemptToConnect(ip, serverKey, true);
+			attemptToConnect(ip, serverKey, true);
 		} 
 		catch(UserCancelledException e)
 		{
-			return;
+			getWizardStage().setCurrentServerIsAvailable(false);
 		}
 		catch (SaveConfigInfoException e)
 		{
+			getWizardStage().setCurrentServerIsAvailable(false);
 			MartusLogger.logException(e);
 			showNotifyDialog(getWizardStage(), "ErrorSavingFile");
 		}
 		catch (ServerNotAvailableException e)
 		{
+			getWizardStage().setCurrentServerIsAvailable(false);
 			MartusLogger.logException(e);
 			showNotifyDialog(getWizardStage(), "ServerNotAvailable");
 		}
 		catch (Exception e)
 		{
+			getWizardStage().setCurrentServerIsAvailable(false);
 			MartusLogger.logException(e);
 			showNotifyDialog(getWizardStage(), "UnexpectedError");
 		}
-
-		updateButtonStates();
+		finally
+		{
+			updateButtonStates();
+		}
 	}
 	
 	@Override
@@ -148,15 +149,9 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 		@Override
 		public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2)
 		{
-			clearServerStatus();
 			updateButtonStates();
 		}
 		
-	}
-	
-	protected void clearServerStatus()
-	{
-		isConnected = false;
 	}
 	
 	protected void updateButtonStates()
@@ -175,7 +170,7 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 		boolean canConnect = (hasIp && hasPublicCode);
 		connectButton.setDisable(!canConnect);
 
-		getWizardNavigationHandler().getNextButton().setDisable(!isConnected);
+		getWizardNavigationHandler().getNextButton().setDisable(!getWizardStage().checkIfCurrentServerIsAvailable());
 	}
 	
 	private void showError(String text)
@@ -197,6 +192,4 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 	
 	@FXML
 	private TextField magicWordField;
-	
-	private boolean isConnected;
 }
