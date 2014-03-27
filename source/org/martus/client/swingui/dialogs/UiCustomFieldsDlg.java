@@ -393,6 +393,8 @@ public class UiCustomFieldsDlg extends JDialog
 			}
 			if(!checkForDuplicateLabels())
 				return;
+			if(!mainWindow.confirmDlg("UploadPublicTemplateToServerWarning"))
+				return;
 			try
 			{
 				FieldCollection specTop = new FieldCollection(FieldCollection.parseXml(topXml));

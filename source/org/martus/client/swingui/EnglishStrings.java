@@ -649,6 +649,7 @@ public class EnglishStrings
 "wintitle:SealingSelectedBulletins=Sealing Bulletins...",
 "field:SealingSelectedBulletins=Sealing Bulletins...",
 
+
 "field:AddingPermissionsToBulletins=Updating access...",
 "wintitle:confirmAddingPermissionsToBulletinsCancel=Cancel",
 "field:confirmAddingPermissionsToBulletinsCancelcause=The operation will be stopped immediately.",
@@ -833,6 +834,12 @@ public class EnglishStrings
 
 "field:confirmImportingCustomizationUnknownSignercause=This template was not created by a known account. You should carefully review the fields to make sure the template is suitable. You will be able to cancel the template editing to restore the earlier template.",
 "field:confirmImportingCustomizationUnknownSignereffect=To see the template contents, continue with the import.",
+
+"wintitle:confirmUploadPublicTemplateToServerWarning=Send Template to Server",
+"field:confirmUploadPublicTemplateToServerWarningcause=Anyone who has (or can guess) your access token will be able to download and see everything in this template.  If you upload your template, someone could potentially see what data you're collecting (but won't be able to see the data itself).",
+"field:confirmUploadPublicTemplateToServerWarningeffect=By continuing, you understand your template details are publicly available on the server.",
+
+
 
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
 "field:notifyDropErrorBulletinOldercause=One or more bulletins cannot be moved to that folder, because a newer version of this bulletin already exists.",
