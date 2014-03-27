@@ -34,7 +34,7 @@ public class UiConstants
 	public static final String programName = "Martus(TM)";
 	public static String versionLabel = "pre-4.5";
 	public static final String copyrightSymbol = "\u00A9 "; 
-	public static final String copyright = copyrightSymbol + "Copyright 2001-2013, Beneficent Technology, Inc. (The Benetech Initiative)";
+	public static final String copyright = copyrightSymbol + "Copyright 2001-2014, Beneficent Technology, Inc. (The Benetech Initiative)";
 	public static final String website = "(Benetech, at www.benetech.org)";
 
 }
