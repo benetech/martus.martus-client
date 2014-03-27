@@ -61,7 +61,7 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		
 		setTitle(localization.getWindowTitle("ConfigServer"));
 		fieldIPAddress = new UiTextField(25);
-		fieldPublicCode = new UiTextField(25);
+		fieldPublicCode = new UiTextField(40);
 
 		UiParagraphPanel panel = new UiParagraphPanel();
 		
