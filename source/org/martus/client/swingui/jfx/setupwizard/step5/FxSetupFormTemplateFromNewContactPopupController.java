@@ -134,12 +134,15 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 	@FXML
 	private void onContinue()
 	{
+		templateChosen = true;
 		getStage().close();
 	}
 
 	public CustomFieldTemplate getSelectedFormTemplate()
 	{
-		return formTemplateChoiceBox.getSelectionModel().getSelectedItem();
+		if(templateChosen)
+			return formTemplateChoiceBox.getSelectionModel().getSelectedItem();
+		return null;
 	}
 
 	@Override
@@ -190,4 +193,6 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 	
 	@FXML
 	protected Label noTemplatesAvailableLabel;
+	
+	private boolean templateChosen;
 }

@@ -111,6 +111,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	@FXML
 	private void onContinue()
 	{
+		templateChosen = true;
 		onCancel();
 	}
 	
@@ -123,7 +124,9 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	@Override
 	public CustomFieldTemplate getSelectedFormTemplate()
 	{
-		return templatesChoiceBox.getSelectionModel().getSelectedItem();
+		if(templateChosen)
+			return templatesChoiceBox.getSelectionModel().getSelectedItem();
+		return null;
 	}
 	
 	protected class ContactsChangeHandler implements ChangeListener<ContactKey>
@@ -138,7 +141,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 
 			if (newValue == null)
 				return;
-
+			
 			try
 			{
 				ObservableList<CustomFieldTemplate> formTemplates = getFormTemplates(newValue);
@@ -164,12 +167,16 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		@Override
 		public void changed(ObservableValue<? extends CustomFieldTemplate> observable, CustomFieldTemplate oldValue, CustomFieldTemplate newValue)
 		{
-			boolean shouldDisplayContinueButton = getSelectedFormTemplate() != null;
-			continueButton.setVisible(shouldDisplayContinueButton);
-			continueLabel.setVisible(shouldDisplayContinueButton);
+			comboSelectionChanged(newValue != null); 
 		}
 	}
-	
+
+	protected void comboSelectionChanged(boolean isVisible)
+	{
+		continueLabel.setVisible(isVisible);
+		continueButton.setVisible(isVisible);
+	}
+
 	@FXML
 	private ChoiceBox<ContactKey> contactsChoiceBox;
 	
@@ -187,4 +194,6 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	
 	@FXML
 	protected Label noTemplatesAvailableLabel;
+	
+	private boolean templateChosen;
 }
