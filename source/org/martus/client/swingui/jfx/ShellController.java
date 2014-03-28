@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 
 import org.martus.client.swingui.UiMainWindow;
 
@@ -37,7 +36,6 @@ abstract public class ShellController extends FxInSwingDialogController
 		super(mainWindowToUse);
 	}
 
-	abstract public Label getHintLabel();
 	abstract public void setContentPane(ContentController contentController) throws Exception;
 	abstract public Button getNextButton();
 }
