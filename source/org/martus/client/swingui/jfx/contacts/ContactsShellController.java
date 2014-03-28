@@ -29,7 +29,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -98,16 +97,6 @@ public class ContactsShellController extends ShellController implements WizardNa
 	{
 		return contentNavigationHandler;
 	}
-
-	@Override
-	public Label getHintLabel()
-	{
-		return hintLabel;
-	}
-
-	@FXML
-	protected Label hintLabel;
-	
 
 	@FXML
 	protected Pane contentPane;
