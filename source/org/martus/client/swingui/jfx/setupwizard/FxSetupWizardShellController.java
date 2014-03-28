@@ -38,6 +38,7 @@ import javafx.scene.layout.Pane;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.ContentController;
 import org.martus.client.swingui.jfx.FxWizardShellController;
+import org.martus.client.swingui.jfx.FxmlLoaderWithController;
 
 public class FxSetupWizardShellController extends FxWizardShellController
 {
@@ -61,7 +62,7 @@ public class FxSetupWizardShellController extends FxWizardShellController
 		contentPane.getChildren().addAll(createContents);
 		
 		URL url = getBestFxmlLocation(controller.getSidebarFxmlLocation());
-		FXMLLoader sidebarLoader = new FXMLLoader(url);
+		FxmlLoaderWithController sidebarLoader = new FxmlLoaderWithController(controller, url);
 		Node sideBarNode = (Node) sidebarLoader.load();
 		sidebarPane.getChildren().addAll(sideBarNode);
 
