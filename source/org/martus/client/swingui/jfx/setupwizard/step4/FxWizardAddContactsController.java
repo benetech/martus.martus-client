@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.setupwizard.step4;
 
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -51,6 +52,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
+import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -60,6 +62,7 @@ import org.martus.client.swingui.jfx.FxTableCellTextFieldFactory;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.client.swingui.jfx.setupwizard.ContactsTableData;
 import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
+import org.martus.client.swingui.jfx.setupwizard.tasks.GetAccountTokenFromServerTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.LookupAccountFromTokenTask;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
@@ -68,6 +71,7 @@ import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenNotFoundException;
 import org.martus.common.MartusLogger;
+import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CreateDigestException;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.util.TokenReplacement;
@@ -622,6 +626,44 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	{
 		showOldPublicCode = true;
 	}
+	
+	@FXML 
+	void onGetToken()
+	{
+		MartusApp martusApp = getApp();
+		if(accountToken == null)
+		{
+			try
+			{
+				GetAccountTokenFromServerTask task = new GetAccountTokenFromServerTask(martusApp);
+				showTimeoutDialog(getStage(), "*Connecting*", "Attempting to connect to server to retrieve Token", task);
+				accountToken = task.getToken();
+			}
+			catch (Exception e)
+			{
+				MartusLogger.logException(e);
+				showNotifyDialog(getStage(), "UnexpectedError");
+				return;
+			}
+		}			
+		try
+		{
+			String tokenData = accountToken.getToken();
+			String publicCode = MartusCrypto.computeFormattedPublicCode40(martusApp.getAccountId());
+				
+			Map tokenReplacement = new HashMap();
+			tokenReplacement.put("#Token#", tokenData);
+			tokenReplacement.put("#PublicCode#", publicCode);
+			String tokenWithPublicCode = TokenReplacement.replaceTokens(getLocalization().getFieldLabel("ShowTokenAndPublicCode"), tokenReplacement);
+			showNotifyDialog(getStage(), "ShowTokenAndPublicCode", tokenWithPublicCode);
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDialog(getStage(), "UnexpectedError");
+		}
+			
+	}
 
 	@FXML 
 	protected TableView<ContactsTableData> contactsTable;
@@ -663,6 +705,8 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	protected ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
 	
 	private boolean showOldPublicCode;
+	
+	private MartusAccountAccessToken accountToken;
 
 	private static final int MAX_TABLE_WIDTH_IN_WIZARD = 660;
 }
