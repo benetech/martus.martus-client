@@ -51,13 +51,13 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, serverPublicKey, getApp().getTransport());
 
 		FxWizardStage wizardStage = getWizardStage();
+		wizardStage.setCurrentServerIsAvailable(false);
 		try
 		{
 			ConnectToServerTask task = new ConnectToServerTask(getApp(), gateway);
 			showTimeoutDialog(wizardStage, "*Connecting*", "Attempting to connect to server and checking compliance", task);
 			if(!task.isAvailable())
 			{
-				wizardStage.setCurrentServerIsAvailable(false);
 				//FIXME put in real text/title here.
 				if(showConfirmationDialog(wizardStage, "title", "SSL Not responding.  Save this configuration?"))
 				{
@@ -74,7 +74,6 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 				{
 					showNotifyDialog(wizardStage, "ServerComplianceFailed");
 					saveServerConfig(serverIPAddress, serverPublicKey, "");
-					wizardStage.setCurrentServerIsAvailable(false);
 					return;
 				}
 				
@@ -91,8 +90,6 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 					{
 						getApp().setServerInfo("","","");
 					}
-
-					wizardStage.setCurrentServerIsAvailable(false);
 					return;
 				}
 			}
@@ -109,25 +106,21 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		}
 		catch(UserCancelledException e)
 		{
-			wizardStage.setCurrentServerIsAvailable(false);
 		}
 		catch(SaveConfigInfoException e)
 		{
 			MartusLogger.logException(e);
 			showNotifyDialog(wizardStage, "ErrorSavingConfig");
-			wizardStage.setCurrentServerIsAvailable(false);
 		}
 		catch(ServerNotAvailableException e)
 		{
 			MartusLogger.logException(e);
 			showNotifyDialog(wizardStage, "ErrorServerOffline");
-			wizardStage.setCurrentServerIsAvailable(false);
 		}
 		catch(Exception e)
 		{
 			MartusLogger.logException(e);
 			showNotifyDialog(wizardStage, "ErrorGettingCompliance");
-			wizardStage.setCurrentServerIsAvailable(false);
 		} 
 	}
 	
