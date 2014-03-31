@@ -41,6 +41,7 @@ import javafx.scene.layout.VBox;
 
 import org.martus.client.core.MartusUserNameAndPassword;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.WizardNavigationButtonsInterface;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.client.swingui.jfx.setupwizard.StaticAccountCreationData;
 import org.martus.common.MartusLogger;
@@ -59,6 +60,7 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 			initializeMainContentPane();
 		else
 			initializeSidebarContentPane();
+		
 	}
 
 	private void initializeSidebarContentPane()
@@ -69,17 +71,26 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 	private void initializeMainContentPane()
 	{
 		hasMainContentPaneBeenInitialized = true;
-		getWizardNavigationHandler().getBackButton().setVisible(false);
-		getWizardNavigationHandler().getNextButton().setDisable(true);
-		getUserName().textProperty().addListener(new LoginChangeHandler());
-		getPasswordField().textProperty().addListener(new LoginChangeHandler());
+		WizardNavigationButtonsInterface wizardNavigationHandler = getWizardNavigationHandler();
+		wizardNavigationHandler.getBackButton().setVisible(false);
+		wizardNavigationHandler.getNextButton().setDisable(true);
+		userName.textProperty().addListener(new LoginChangeHandler());
+		userName.focusedProperty().addListener(new UserNameFocusListener());      		
+		passwordField.textProperty().addListener(new LoginChangeHandler());
+		passwordField.focusedProperty().addListener(new PasswordFocusListener());      
 		hintLabel.setTooltip(new Tooltip("Create secure passwords by using numbers, letters and sympbols."));
 	}
 
-	private void setUserNameTipVisible(boolean bSetUserNameTipVisible)
+	protected void setUserNameTipVisible(boolean bSetUserNameTipVisible)
 	{
 		fxVBoxUserNameTips.setVisible(bSetUserNameTipVisible);
 		fxVBoxPasswordTips.setVisible(!bSetUserNameTipVisible);
+	}
+
+	protected void setPasswordTipVisible(boolean bSetPasswordTipVisible)
+	{
+		fxVBoxPasswordTips.setVisible(bSetPasswordTipVisible);
+		fxVBoxUserNameTips.setVisible(!bSetPasswordTipVisible);
 	}
 
 	@Override
@@ -148,8 +159,27 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 		{
 			updateDisplay();
 		}
-
 	}
+	
+	
+	public class PasswordFocusListener implements ChangeListener<Boolean>
+	{
+		@Override
+		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)
+		{
+			setPasswordTipVisible(newValue);
+		}
+	}
+	
+	public class UserNameFocusListener implements ChangeListener<Boolean>
+	{
+		@Override
+		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)
+		{
+			setUserNameTipVisible(newValue);
+		}
+	}
+
 	
 	@Override
 	public String getFxmlLocation()
