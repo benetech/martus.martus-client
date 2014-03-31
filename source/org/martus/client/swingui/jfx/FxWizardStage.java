@@ -114,7 +114,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 
 	public boolean checkIfCurrentServerIsAvailable()
 	{
-		if(serverAvailibilityState == SERVER_STATE_NOT_INITILIALIZED)
+		if(serverAvailibilityState == SERVER_STATE_NOT_INITIALIZED)
 			return false;
 		return serverAvailibilityState.equals(SERVER_STATE_AVAILABLE);
 	}
@@ -128,7 +128,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	
 	public boolean hasServerAvailabilityBeenInitialized()
 	{
-		return serverAvailibilityState != SERVER_STATE_NOT_INITILIALIZED;
+		return serverAvailibilityState != SERVER_STATE_NOT_INITIALIZED;
 	}
 	
 	public FxWizardShellController getWizardShellController()
@@ -142,7 +142,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 
 	private String serverAvailibilityState;
 
-	private static final String SERVER_STATE_NOT_INITILIALIZED = null;
+	private static final String SERVER_STATE_NOT_INITIALIZED = null;
 	private static final String SERVER_STATE_NOT_AVAILABLE = "IsNotAvailable";
 	private static final String SERVER_STATE_AVAILABLE = "IsAvailable";
 }
