@@ -85,7 +85,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	}
 	
 	@Override
-	public void initialize(URL location, ResourceBundle resources)
+	public void initializeMainContentPane()
 	{
 		//TODO remove this and figure out a better solution in FXML
 		contactsVbox.setMaxWidth(MAX_TABLE_WIDTH_IN_WIZARD);

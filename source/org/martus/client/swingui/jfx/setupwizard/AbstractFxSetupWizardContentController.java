@@ -45,8 +45,24 @@ abstract public class AbstractFxSetupWizardContentController extends ContentCont
 		super(mainWindowToUse);
 	}
 	
-	@Override
-	public void initialize(URL rootLocation, ResourceBundle bundle)
+	
+	public void initialize(URL arg0, ResourceBundle arg1)
+	{
+		super.initialize(arg0, arg1);
+		if(!hasMainContentPaneBeenInitialized)
+		{
+			initializeMainContentPane();
+			hasMainContentPaneBeenInitialized = true;
+		}
+		else
+		{
+			initializeSidebarContentPane();
+		}
+	}
+	
+	abstract public void initializeMainContentPane();
+
+	public void initializeSidebarContentPane()
 	{
 	}
 	
@@ -97,4 +113,6 @@ abstract public class AbstractFxSetupWizardContentController extends ContentCont
 	}
 	
 	private WizardNavigationButtonsInterface wizardNavigationHandler;
+	private boolean hasMainContentPaneBeenInitialized;
+
 }

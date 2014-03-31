@@ -25,9 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step3;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -55,7 +52,7 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 	}
 	
 	@Override
-	public void initialize(URL location, ResourceBundle resources)
+	public void initializeMainContentPane()
 	{
 		ipAddressField.textProperty().addListener(new TextFieldChangeHandler());
 		publicCodeField.textProperty().addListener(new TextFieldChangeHandler());

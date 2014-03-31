@@ -25,9 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step3;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -48,10 +45,8 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 	}
 	
 	@Override
-	public void initialize(URL rootLocation, ResourceBundle bundle)
+	public void initializeMainContentPane()
 	{
-		super.initialize(rootLocation, bundle);
-		
 		destination = null;
 		getWizardNavigationHandler().getNextButton().setVisible(false);
 		defaultServerButton.setDefaultButton(true);

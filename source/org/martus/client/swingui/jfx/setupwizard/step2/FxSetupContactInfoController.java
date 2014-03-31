@@ -25,9 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step2;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -48,7 +45,7 @@ public class FxSetupContactInfoController extends FxStep2Controller
 		fontHelper = new UiFontEncodingHelper(getConfigInfo().getDoZawgyiConversion());
 	}
 
-	public void initialize(URL url, ResourceBundle bundle)
+	public void initializeMainContentPane()
 	{
 		// NOTE: Kind of an odd place for this, but it has to be 
 		// after we have signed in, and this is the earliest 

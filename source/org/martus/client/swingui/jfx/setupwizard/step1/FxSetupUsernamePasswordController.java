@@ -54,23 +54,8 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 	}
 	
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1)
+	public void initializeMainContentPane()
 	{
-		if(!hasMainContentPaneBeenInitialized)
-			initializeMainContentPane();
-		else
-			initializeSidebarContentPane();
-		
-	}
-
-	private void initializeSidebarContentPane()
-	{
-		setUserNameTipVisible(true);
-	}
-
-	private void initializeMainContentPane()
-	{
-		hasMainContentPaneBeenInitialized = true;
 		WizardNavigationButtonsInterface wizardNavigationHandler = getWizardNavigationHandler();
 		wizardNavigationHandler.getBackButton().setVisible(false);
 		wizardNavigationHandler.getNextButton().setDisable(true);
@@ -79,6 +64,12 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 		passwordField.textProperty().addListener(new LoginChangeHandler());
 		passwordField.focusedProperty().addListener(new PasswordFocusListener());      
 		hintLabel.setTooltip(new Tooltip("Create secure passwords by using numbers, letters and sympbols."));
+	}
+
+	@Override
+	public void initializeSidebarContentPane()
+	{
+		setUserNameTipVisible(true);
 	}
 
 	protected void setUserNameTipVisible(boolean bSetUserNameTipVisible)
@@ -236,7 +227,4 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 
 	@FXML
 	private VBox fxVBoxPasswordTips;
-	
-	private boolean hasMainContentPaneBeenInitialized;
-
 }

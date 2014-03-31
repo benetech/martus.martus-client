@@ -56,7 +56,7 @@ public class FxSelectLanguageController extends FxStep6Controller
 			getLocalization().setCurrentLanguageCode(selectedLanguageCode);
 	}
 	
-	public void initialize(URL url, ResourceBundle resourceBundle)
+	public void initializeMainContentPane()
 	{
 		ObservableList<ChoiceItem> availableLanguages = FXCollections.observableArrayList(getAvailableLanguages());
 		languagesDropdown.setItems(availableLanguages);
