@@ -125,7 +125,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 		} 
 	}
 
-	protected void comboSelectionChanged(boolean isVisible)
+	protected void updateButtonVisibility(boolean isVisible)
 	{
 		importFromThisConctactLabel.setVisible(isVisible);
 		continueButton.setVisible(isVisible);
@@ -134,13 +134,13 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 	@FXML
 	private void onContinue()
 	{
-		templateChosen = true;
+		wasTemplateChosen = true;
 		getStage().close();
 	}
 
 	public CustomFieldTemplate getSelectedFormTemplate()
 	{
-		if(templateChosen)
+		if(wasTemplateChosen)
 			return formTemplateChoiceBox.getSelectionModel().getSelectedItem();
 		return null;
 	}
@@ -168,7 +168,8 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 		@Override
 		public void changed(ObservableValue<? extends CustomFieldTemplate> observable, CustomFieldTemplate oldValue, CustomFieldTemplate newValue)
 		{
-			comboSelectionChanged(newValue != null); 
+			boolean isVisible = newValue != null;
+			updateButtonVisibility(isVisible); 
 		}
 	}
 
@@ -194,5 +195,5 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 	@FXML
 	protected Label noTemplatesAvailableLabel;
 	
-	private boolean templateChosen;
+	private boolean wasTemplateChosen;
 }

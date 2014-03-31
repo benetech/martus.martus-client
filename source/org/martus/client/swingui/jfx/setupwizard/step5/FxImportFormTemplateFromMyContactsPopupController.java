@@ -111,7 +111,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	@FXML
 	private void onContinue()
 	{
-		templateChosen = true;
+		wasTemplateChosen = true;
 		onCancel();
 	}
 	
@@ -124,7 +124,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	@Override
 	public CustomFieldTemplate getSelectedFormTemplate()
 	{
-		if(templateChosen)
+		if(wasTemplateChosen)
 			return templatesChoiceBox.getSelectionModel().getSelectedItem();
 		return null;
 	}
@@ -167,11 +167,12 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		@Override
 		public void changed(ObservableValue<? extends CustomFieldTemplate> observable, CustomFieldTemplate oldValue, CustomFieldTemplate newValue)
 		{
-			comboSelectionChanged(newValue != null); 
+			boolean isVisible = newValue != null;
+			updateButtonVisibility(isVisible); 
 		}
 	}
 
-	protected void comboSelectionChanged(boolean isVisible)
+	protected void updateButtonVisibility(boolean isVisible)
 	{
 		continueLabel.setVisible(isVisible);
 		continueButton.setVisible(isVisible);
@@ -195,5 +196,5 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	@FXML
 	protected Label noTemplatesAvailableLabel;
 	
-	private boolean templateChosen;
+	private boolean wasTemplateChosen;
 }
