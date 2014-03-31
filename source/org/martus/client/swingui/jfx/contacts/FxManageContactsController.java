@@ -26,8 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.contacts;
 
 import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import javafx.stage.FileChooser;
 
@@ -46,9 +44,9 @@ public class FxManageContactsController extends FxWizardAddContactsController
 	}
 
 	@Override
-	public void initialize(URL location, ResourceBundle resources)
+	public void initializeMainContentPane()
 	{
-		super.initialize(location, resources);
+		super.initializeMainContentPane();
 		//TODO remove this and figure out a better solution in FXML
 		contactsVbox.setMaxWidth(MAX_WIDTH_CONTACTS_TABLE);
 

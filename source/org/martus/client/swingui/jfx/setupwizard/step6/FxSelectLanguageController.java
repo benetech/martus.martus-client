@@ -25,8 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step6;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.Vector;
 
 import javafx.collections.FXCollections;
