@@ -841,7 +841,7 @@ public class EnglishStrings
 "field:confirmImportingCustomizationUnknownSignereffect=To see the template contents, continue with the import.",
 
 "wintitle:confirmUploadPublicTemplateToServerWarning=Send Template to Server",
-"field:confirmUploadPublicTemplateToServerWarningcause=Anyone who has (or can guess) your access token will be able to download it from the server and see everything in this template.  If you upload your template, someone could potentially see the structure of the data you're collecting (but won't be able to see the data itself).",
+"field:confirmUploadPublicTemplateToServerWarningcause=Anyone who has (or can guess) your access token will be able to download it from the server and see everything in this template. If you upload your template, someone could potentially see the structure of the data you're collecting (but won't be able to see the data itself).",
 "field:confirmUploadPublicTemplateToServerWarningeffect=By continuing, you understand your template details are publicly available on the server.",
 
 
