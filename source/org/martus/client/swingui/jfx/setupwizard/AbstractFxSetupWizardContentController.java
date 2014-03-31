@@ -46,7 +46,7 @@ abstract public class AbstractFxSetupWizardContentController extends ContentCont
 	}
 	
 	
-	public void initialize(URL arg0, ResourceBundle arg1)
+	final public void initialize(URL arg0, ResourceBundle arg1)
 	{
 		super.initialize(arg0, arg1);
 		if(!hasMainContentPaneBeenInitialized)
