@@ -97,16 +97,18 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 	@FXML
 	public void setupServerLater()
 	{
+		FxWizardStage wizardStage = getWizardStage();
 		try
 		{
 			getApp().setServerInfo("", "", "");
+			wizardStage.setCurrentServerIsAvailable(false);
 		} 
 		catch (SaveConfigInfoException e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog(getWizardStage(), "ErrorSavingConfig");
+			showNotifyDialog(wizardStage, "ErrorSavingConfig");
 		}
-		getWizardStage().next();
+		wizardStage.next();
 	}
 	
 	@FXML
