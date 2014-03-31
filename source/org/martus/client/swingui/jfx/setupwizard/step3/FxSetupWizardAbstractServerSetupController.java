@@ -58,10 +58,8 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 			showTimeoutDialog(wizardStage, "*Connecting*", "Attempting to connect to server and checking compliance", task);
 			if(!task.isAvailable())
 			{
-				//FIXME put in real text/title here.
 				if(showConfirmationDialog(wizardStage, "title", "SSL Not responding.  Save this configuration?"))
 				{
-					//FIXME since the task throws server not found, can this code ever even be hit?
 					saveServerConfig(serverIPAddress, serverPublicKey, "");
 					return;
 				}
