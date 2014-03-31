@@ -37,6 +37,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.layout.VBox;
 
 import org.martus.client.core.MartusUserNameAndPassword;
 import org.martus.client.swingui.UiMainWindow;
@@ -54,11 +55,31 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{
+		if(!hasMainContentPaneBeenInitialized)
+			initializeMainContentPane();
+		else
+			initializeSidebarContentPane();
+	}
+
+	private void initializeSidebarContentPane()
+	{
+		setUserNameTipVisible(true);
+	}
+
+	private void initializeMainContentPane()
+	{
+		hasMainContentPaneBeenInitialized = true;
 		getWizardNavigationHandler().getBackButton().setVisible(false);
 		getWizardNavigationHandler().getNextButton().setDisable(true);
 		getUserName().textProperty().addListener(new LoginChangeHandler());
 		getPasswordField().textProperty().addListener(new LoginChangeHandler());
 		hintLabel.setTooltip(new Tooltip("Create secure passwords by using numbers, letters and sympbols."));
+	}
+
+	private void setUserNameTipVisible(boolean bSetUserNameTipVisible)
+	{
+		fxVBoxUserNameTips.setVisible(bSetUserNameTipVisible);
+		fxVBoxPasswordTips.setVisible(!bSetUserNameTipVisible);
 	}
 
 	@Override
@@ -179,4 +200,13 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 	
 	@FXML
 	private Label hintLabel;
+	
+	@FXML
+	private VBox fxVBoxUserNameTips;
+
+	@FXML
+	private VBox fxVBoxPasswordTips;
+	
+	private boolean hasMainContentPaneBeenInitialized;
+
 }
