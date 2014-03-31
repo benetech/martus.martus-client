@@ -25,8 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step2;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.Vector;
 
 import javafx.beans.value.ChangeListener;
@@ -56,7 +54,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 		super(mainWindowToUse);
 	}
 	
-	public void initialize(URL url, ResourceBundle resourceBundle)
+	public void initializeMainContentPane()
 	{
 		userTorCheckBox.setSelected(getApp().getConfigInfo().useInternalTor());
 		userTorCheckBox.selectedProperty().addListener(new FxCheckboxListener());

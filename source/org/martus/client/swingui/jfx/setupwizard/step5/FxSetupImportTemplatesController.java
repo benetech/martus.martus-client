@@ -28,8 +28,6 @@ package org.martus.client.swingui.jfx.setupwizard.step5;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.Vector;
 
 import javafx.beans.value.ChangeListener;
@@ -80,7 +78,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	}
 
 	@Override
-	public void initialize(URL location, ResourceBundle resources)
+	public void initializeMainContentPane()
 	{
 		genericTemplatesChoiceBox.setConverter(new FormTemplateToStringConverter());
 		genericTemplatesChoiceBox.setItems(FXCollections.observableArrayList(getDefaultFormTemplateChoices()));

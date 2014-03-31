@@ -26,8 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.setupwizard.step6;
 
 import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -49,9 +47,8 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 	}
 	
 	@Override
-	public void initialize(URL rootLocation, ResourceBundle bundle)
+	public void initializeMainContentPane()
 	{
-		super.initialize(rootLocation, bundle);
 	}
 	
 	@FXML

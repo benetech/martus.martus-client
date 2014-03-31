@@ -25,9 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step1;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
@@ -53,7 +50,7 @@ public class FxVerifyAccountController extends FxStep1Controller
 	}
 
 	@Override
-	public void initialize(URL location, ResourceBundle resources)
+	public void initializeMainContentPane()
 	{
 		getWizardNavigationHandler().getNextButton().setDisable(true);
 		userNameField.textProperty().addListener(new LoginChangeHandler());
