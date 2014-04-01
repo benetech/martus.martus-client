@@ -4,4 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Label styleClass="errorText" maxWidth="235" wrapText="true" text="Turning Tor on here establishes the default setting for your use of Tor when in Martus. You can also, turn Tor ON or OFF at any time inside the Martus desktop application. Note: Using Tor will slow sending of bulletins." />
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <Label prefHeight="73.0" prefWidth="235.0" text="" />
+    <Label maxWidth="235.0" styleClass="errorText" text="Turning Tor on here establishes the default setting for your use of Tor when in Martus. You can also, turn Tor ON or OFF at any time inside the Martus desktop application. Note: Using Tor will slow sending of bulletins." wrapText="true" />
+  </children>
+</VBox>
