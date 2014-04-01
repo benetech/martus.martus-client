@@ -82,12 +82,13 @@ public class FxSetupSettingsController extends FxStep2Controller
 	}
 	
 	@Override
-	public void nextWasPressed(ActionEvent event) 
+	public void nextWasPressed(ActionEvent event) throws Exception
 	{
 		saveSettingsToConfigInfo();
 		boolean didFinishInitalizing = startOrStopTorPerConfigInfo();
 		if(!didFinishInitalizing)
 			throw new RuntimeException("Error initializing");
+		super.nextWasPressed(event);
 	}
 	
 	protected void saveSettingsToConfigInfo()

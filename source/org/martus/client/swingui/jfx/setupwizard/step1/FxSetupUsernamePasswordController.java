@@ -83,10 +83,11 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 	}
 
 	@Override
-	public void nextWasPressed(ActionEvent event) 
+	public void nextWasPressed(ActionEvent event) throws Exception
 	{
 		StaticAccountCreationData.setUserName(getUserName().getText());
 		StaticAccountCreationData.setPassword(getPasswordField().getText().toCharArray());
+		super.nextWasPressed(event);
 	}
 	
 	private Label getErrorLabel()
