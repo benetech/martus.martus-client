@@ -75,9 +75,8 @@ public class FxVerifyAccountController extends FxStep1Controller
 		
 		Task task = new CreateAccountTask(getApp(), userNameValue, passwordValue);
 		MartusLocalization localization = getLocalization();
-		String busyTitle = localization.getWindowTitle("CreatingAccount");
 		String message = localization.getFieldLabel("CreatingAccount");
-		showBusyDialog(busyTitle, message, task, getWizardStage());
+		showBusyDialog(message, task, getWizardStage());
 		getMainWindow().setCreatedNewAccount(true);
 		
 		getApp().loadConfigInfo();

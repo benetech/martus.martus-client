@@ -131,9 +131,8 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			MartusAccountAccessToken token = new MartusAccountAccessToken(accessTokenField.getText());
 			LookupAccountFromTokenTask task = new LookupAccountFromTokenTask(getApp(), token);
 			MartusLocalization localization = getLocalization();
-			String title = localization.getWindowTitle("FindAccountByToken");
 			String message = localization.getFieldLabel("FindAccountByToken");
-			showTimeoutDialog(getStage(), title, message, task);
+			showTimeoutDialog(getStage(), message, task);
 			String contactAccountId = task.getFoundAccountId();
 			if(contactAccountId == null)
 				return; 
@@ -636,7 +635,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			try
 			{
 				GetAccountTokenFromServerTask task = new GetAccountTokenFromServerTask(martusApp);
-				showTimeoutDialog(getStage(), "*Connecting*", "Attempting to connect to server to retrieve Token", task);
+				showTimeoutDialog(getStage(), "Attempting to connect to server to retrieve Token", task);
 				accountToken = task.getToken();
 			}
 			catch (Exception e)

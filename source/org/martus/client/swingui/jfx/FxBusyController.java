@@ -34,9 +34,9 @@ import org.martus.client.swingui.UiMainWindow;
 
 public class FxBusyController extends FxBackgroundActivityController
 {
-	public FxBusyController(UiMainWindow mainWindowToUse, String titleToUse, String messageToUse, Task taskToUse)
+	public FxBusyController(UiMainWindow mainWindowToUse, String messageToUse, Task taskToUse)
 	{
-		super(mainWindowToUse, titleToUse, messageToUse, taskToUse);
+		super(mainWindowToUse, messageToUse, taskToUse);
 	}
 
 	@Override
