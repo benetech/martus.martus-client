@@ -4,4 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Label maxWidth="235" styleClass="errorText" wrapText="true" text="The files you store on Martus server are completely encrypted using 3072-bit key encryption. This means even Martus server administrators cannot read your files." />
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <Label prefHeight="152.0" prefWidth="235.0" text="" />
+    <Label maxWidth="235.0" styleClass="errorText" text="The files you store on Martus server are completely encrypted using 3072-bit key encryption. This means even Martus server administrators cannot read your files." wrapText="true" />
+  </children>
+</VBox>
