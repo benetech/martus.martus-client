@@ -57,15 +57,14 @@ abstract public class AbstractFxSetupWizardContentController extends ContentCont
 		else
 		{
 			initializeSidebarContentPane();
-			setBothSideBarAndMainContentPainHasBeenInitialized();
 		}
 	}
 	
-	private void setBothSideBarAndMainContentPainHasBeenInitialized()
+	private void clearHasBeenInitialized()
 	{
 		hasMainContentPaneBeenInitialized = false;
 	}
-	
+ 
 	abstract public void initializeMainContentPane();
 
 	public void initializeSidebarContentPane()
@@ -79,10 +78,12 @@ abstract public class AbstractFxSetupWizardContentController extends ContentCont
 	
 	public void nextWasPressed(ActionEvent actionEvent) throws Exception
 	{
+		clearHasBeenInitialized();
 	}
 	
 	public void backWasPressed(ActionEvent actionEvent) throws Exception
 	{
+		clearHasBeenInitialized();
 	}
 	
 	public void setNavigationHandler(WizardNavigationButtonsInterface navigationHandlerToUse)

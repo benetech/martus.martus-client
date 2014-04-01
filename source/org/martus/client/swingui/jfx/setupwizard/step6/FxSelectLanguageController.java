@@ -46,12 +46,13 @@ public class FxSelectLanguageController extends FxStep6Controller
 	}
 	
 	@Override
-	public void nextWasPressed(ActionEvent event)
+	public void nextWasPressed(ActionEvent event) throws Exception
 	{
 		String selectedLanguageCode = languagesDropdown.getSelectionModel().getSelectedItem().getCode();
 		
 		if (MtfAwareLocalization.isRecognizedLanguage(selectedLanguageCode))
 			getLocalization().setCurrentLanguageCode(selectedLanguageCode);
+		super.nextWasPressed(event);
 	}
 	
 	public void initializeMainContentPane()

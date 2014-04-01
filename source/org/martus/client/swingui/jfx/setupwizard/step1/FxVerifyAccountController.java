@@ -63,6 +63,7 @@ public class FxVerifyAccountController extends FxStep1Controller
 	public void nextWasPressed(ActionEvent event) throws Exception
 	{
 		createAccount();
+		super.nextWasPressed(event);
 	}
 
 	private void createAccount() throws Exception
