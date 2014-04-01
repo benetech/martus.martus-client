@@ -57,7 +57,13 @@ abstract public class AbstractFxSetupWizardContentController extends ContentCont
 		else
 		{
 			initializeSidebarContentPane();
+			setBothSideBarAndMainContentPainHasBeenInitialized();
 		}
+	}
+	
+	private void setBothSideBarAndMainContentPainHasBeenInitialized()
+	{
+		hasMainContentPaneBeenInitialized = false;
 	}
 	
 	abstract public void initializeMainContentPane();
