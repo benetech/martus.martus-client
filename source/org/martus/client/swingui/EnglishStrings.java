@@ -352,6 +352,11 @@ public class EnglishStrings
 "field:notifyShowTokenAndPublicCodecause=",
 "wintitle:notifyShowTokenAndPublicCode=Account Token and Public Code",
 
+"field:AttemptToConnectToServer=Attempting to connect to server and checking compliance",
+"wintitle:ServerNotRespondingSaveConfiguration=Server Not Responding",
+"field:ServerNotRespondingSaveConfiguration=Server not responding. Would you like to save this server configuration for later?",
+
+
 "button:help=Help",
 "button:create=Create",
 "button:search=Search",

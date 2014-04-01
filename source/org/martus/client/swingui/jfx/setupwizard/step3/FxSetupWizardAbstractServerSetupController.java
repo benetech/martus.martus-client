@@ -55,10 +55,14 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		try
 		{
 			ConnectToServerTask task = new ConnectToServerTask(getApp(), gateway);
-			showTimeoutDialog(wizardStage, "*Connecting*", "Attempting to connect to server and checking compliance", task);
+			MartusLocalization localization = getLocalization();
+			String connectingToServerMsg = localization.getFieldLabel("AttemptToConnectToServer");
+			showTimeoutDialog(wizardStage, "", connectingToServerMsg, task);
 			if(!task.isAvailable())
 			{
-				if(showConfirmationDialog(wizardStage, "title", "SSL Not responding.  Save this configuration?"))
+				String serverNotRespondingSaveConfigurationTitle = localization.getWindowTitle("ServerNotRespondingSaveConfiguration");
+				String serverNotRespondingSaveConfigurationMessage = localization.getFieldLabel("ServerNotRespondingSaveConfiguration");
+				if(showConfirmationDialog(wizardStage, serverNotRespondingSaveConfigurationTitle,serverNotRespondingSaveConfigurationMessage))
 				{
 					saveServerConfig(serverIPAddress, serverPublicKey, "");
 					return;
