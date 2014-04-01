@@ -36,9 +36,9 @@ import org.martus.common.MartusUtilities;
 
 public class FxTimeoutController extends FxBackgroundActivityController
 {
-	public FxTimeoutController(UiMainWindow mainWindowToUse, String titleToUse, String messageToUse, TaskWithTimeout taskToUse, int maxSecondsToCompleteTaskToUse)
+	public FxTimeoutController(UiMainWindow mainWindowToUse, String messageToUse, TaskWithTimeout taskToUse, int maxSecondsToCompleteTaskToUse)
 	{
-		super(mainWindowToUse, titleToUse, messageToUse, taskToUse);
+		super(mainWindowToUse, messageToUse, taskToUse);
 		maxSecondsToCompleteTask = maxSecondsToCompleteTaskToUse;
 	}
 

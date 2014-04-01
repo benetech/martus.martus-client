@@ -46,10 +46,9 @@ import org.martus.client.swingui.UiMainWindow;
 abstract public class FxBackgroundActivityController extends FxPopupController
 {
 	
-	public FxBackgroundActivityController(UiMainWindow mainWindowToUse, String titleToUse, String messageToUse, Task taskToUse)
+	public FxBackgroundActivityController(UiMainWindow mainWindowToUse, String messageToUse, Task taskToUse)
 	{
 		super(mainWindowToUse);
-		title = titleToUse;
 		message = messageToUse;
 		task = taskToUse;
 	}
@@ -94,7 +93,7 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 	@Override
 	public String getDialogTitle()
 	{
-		return title;
+		return "";
 	}
 
 	@Override
@@ -143,6 +142,5 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 	protected Button cancelButton;
 	
 	protected Task task;
-	private String title;
 	private String message;
 }

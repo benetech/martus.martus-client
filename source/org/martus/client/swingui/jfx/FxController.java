@@ -164,23 +164,23 @@ abstract public class FxController implements Initializable
 		return false;
 	}
 	
-	public void showBusyDialog(String title, String message, Task task, FxInSwingDialogStage wizardPanel) throws Exception
+	public void showBusyDialog(String message, Task task, FxInSwingDialogStage wizardPanel) throws Exception
 	{
-		FxPopupController popupController = new FxBusyController(getMainWindow(), title, message, task);
+		FxPopupController popupController = new FxBusyController(getMainWindow(), message, task);
 		showControllerInsideModalDialog(wizardPanel, popupController);
 	}
 
-	public void showTimeoutDialog(FxInSwingDialogStage wizardPanel, String title, String message, TaskWithTimeout task) throws Exception
+	public void showTimeoutDialog(FxInSwingDialogStage wizardPanel, String message, TaskWithTimeout task) throws Exception
 	{
-		FxTimeoutController popupController = new FxTimeoutController(getMainWindow(), title, message, task, task.getMaxSeconds());
+		FxTimeoutController popupController = new FxTimeoutController(getMainWindow(), message, task, task.getMaxSeconds());
 		showControllerInsideModalDialog(wizardPanel, popupController);
 		if(popupController.didUserCancel())
 			throw new UserCancelledException();
 	}
 
-	public void showProgressDialog(FxWizardStage wizardPanel, String title, String message, AbstractAppTask task) throws Exception
+	public void showProgressDialog(FxWizardStage wizardPanel, String message, AbstractAppTask task) throws Exception
 	{
-		FxProgressController popupController = new FxProgressController(getMainWindow(), title, message, task);
+		FxProgressController popupController = new FxProgressController(getMainWindow(), message, task);
 		showControllerInsideModalDialog(wizardPanel, popupController);
 		if(popupController.didUserCancel())
 			throw new UserCancelledException();

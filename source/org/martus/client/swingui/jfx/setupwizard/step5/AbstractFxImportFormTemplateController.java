@@ -58,9 +58,8 @@ abstract public class AbstractFxImportFormTemplateController extends FxPopupCont
 	{
 		TaskWithTimeout task = new DownloadTemplateListForAccountTask(getApp(), contactKey, formTemplates);
 		MartusLocalization localization = getLocalization();
-		String busyTitle = localization.getWindowTitle("LoadingTemplates");
 		String message = localization.getFieldLabel("LoadingTemplates");
-		showTimeoutDialog(getWizardStage(), busyTitle, message, task);
+		showTimeoutDialog(getWizardStage(), message, task);
 	}
 	
 	protected FxWizardStage getWizardStage()

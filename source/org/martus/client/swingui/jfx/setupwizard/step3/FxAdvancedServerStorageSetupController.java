@@ -91,7 +91,7 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 			String ip = ipAddressField.getText();
 			
 			GetServerPublicKeyTask task = new GetServerPublicKeyTask(getApp(), ip);
-			showTimeoutDialog(getWizardStage(), "*Connecting*", "Getting server information", task);
+			showTimeoutDialog(getWizardStage(), "Getting server information", task);
 			
 			String serverKey = task.getPublicKey();
 			String serverPublicCode = MartusCrypto.computePublicCode(serverKey);

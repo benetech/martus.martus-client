@@ -337,11 +337,8 @@ public class EnglishStrings
 "wintitle:ReportSearchProgress=Searching...",
 "wintitle:LoadingFieldValuesFromAllBulletins=Loading Values...",
 
-"wintitle:CreatingAccount=Creating Account",
 "field:CreatingAccount=Please wait. Your account's encryption key is being created.",
-"wintitle:LoadingTemplates=Loading Templates",
 "field:LoadingTemplates=Please wait while we retrieve a list of templates from the server.",
-"wintitle:FindAccountByToken=Finding Account",
 "field:FindAccountByToken=Please wait while we find this account on the server.",
 
 "field:VerifyPublicCodeNewAndOld=Please verify one of the public codes below depending on which public code you received from your contact.  You may visually verify either code, you don't need to verify both.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.",

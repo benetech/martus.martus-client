@@ -37,9 +37,9 @@ import org.martus.common.ProgressMeterInterface;
 
 public class FxProgressController extends FxBackgroundActivityController implements ProgressMeterInterface
 {
-	public FxProgressController(UiMainWindow mainWindowToUse, String titleToUse, String messageToUse, AbstractAppTask taskToUse)
+	public FxProgressController(UiMainWindow mainWindowToUse, String messageToUse, AbstractAppTask taskToUse)
 	{
-		super(mainWindowToUse, titleToUse, messageToUse, taskToUse);
+		super(mainWindowToUse, messageToUse, taskToUse);
 		taskToUse.setProgressInterface(this);
 	}
 

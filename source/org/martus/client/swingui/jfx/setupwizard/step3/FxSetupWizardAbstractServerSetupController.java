@@ -57,7 +57,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 			ConnectToServerTask task = new ConnectToServerTask(getApp(), gateway);
 			MartusLocalization localization = getLocalization();
 			String connectingToServerMsg = localization.getFieldLabel("AttemptToConnectToServer");
-			showTimeoutDialog(wizardStage, "", connectingToServerMsg, task);
+			showTimeoutDialog(wizardStage, connectingToServerMsg, task);
 			if(!task.isAvailable())
 			{
 				String serverNotRespondingSaveConfigurationTitle = localization.getWindowTitle("ServerNotRespondingSaveConfiguration");
@@ -67,7 +67,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 					saveServerConfig(serverIPAddress, serverPublicKey, "");
 					return;
 				}
-				return; //Nothing to do here, timed out.
+				return; 
 			}
 			String complianceStatement = task.getComplianceStatement();
 			if(askComplianceAcceptance)
