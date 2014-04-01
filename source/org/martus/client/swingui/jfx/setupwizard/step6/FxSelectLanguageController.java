@@ -80,24 +80,14 @@ public class FxSelectLanguageController extends FxStep6Controller
 
 	private ObservableList<ChoiceItem> getAvailableLanguages()
 	{
-		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
 		ChoiceItem[] allUILanguagesSupported = getLocalization().getUiLanguages();
 		Vector<ChoiceItem> languageChoices = new Vector<ChoiceItem>();
 		for(int i = 0; i < allUILanguagesSupported.length; ++i)
 		{
 			String currentCode = allUILanguagesSupported[i].getCode();
-			getLocalization().setCurrentLanguageCode(currentCode);
 			String languageName = getLocalization().getLanguageName(currentCode);
-			getLocalization().setCurrentLanguageCode(currentLanguageCode);
-			String languageNameInCurrentLanguage = getLocalization().getLanguageName(currentCode);
-			String completeLanguageNativeAndInCurrentLanguage = String.format("%s / %s", languageName, languageNameInCurrentLanguage);
-			if(currentCode.equals(currentLanguageCode))
-				completeLanguageNativeAndInCurrentLanguage = languageName;
-			languageChoices.add(new ChoiceItem(currentCode, completeLanguageNativeAndInCurrentLanguage));
+			languageChoices.add(new ChoiceItem(currentCode, languageName));
 		}
-		
-		getLocalization().setCurrentLanguageCode(currentLanguageCode);
-
 		return FXCollections.observableArrayList(languageChoices);
 	}
 
