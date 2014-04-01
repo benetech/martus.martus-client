@@ -13,7 +13,7 @@
         <HBox id="fxLowerHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
           <children>
             <Button id="fxOkButton" fx:id="fxYesButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#yesPressed" prefHeight="42.999900000002526" prefWidth="148.0" text="" />
-            <Separator prefWidth="200.0" />
+            <Separator prefWidth="200.0" visible="false" />
             <Button id="fxCancelButton" fx:id="fxNoButton" mnemonicParsing="false" onAction="#noPressed" prefHeight="43.0" prefWidth="181.0" text="" />
           </children>
         </HBox>
