@@ -102,7 +102,7 @@ public class FxSwitchButton extends Label
 		    else
 		    {
 		        InnerShadow shadow = new InnerShadow();
-		       setEffect(shadow);
+		        setEffect(shadow);
 		        setText("      ");
 		        setStyle("-fx-background-color: #e6e7e9;-fx-text-fill:darkgray; -fx-background-radius: 10;");
 		        setContentDisplay(ContentDisplay.LEFT);
