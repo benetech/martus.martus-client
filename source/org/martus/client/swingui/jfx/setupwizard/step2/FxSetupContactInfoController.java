@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step2;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
@@ -58,12 +57,12 @@ public class FxSetupContactInfoController extends FxStep2Controller
 	}
 
 	@Override
-	public void nextWasPressed(ActionEvent event) throws Exception 
+	public void nextWasPressed() throws Exception 
 	{
 		getConfigInfo().setAuthor(getFontHelper().getStorable(authorField.getText()));
 		getConfigInfo().setOrganization(getFontHelper().getStorable(organizationField.getText()));
 		getApp().saveConfigInfo();
-		super.nextWasPressed(event);
+		super.nextWasPressed();
 	}
 
 	private UiFontEncodingHelper getFontHelper()

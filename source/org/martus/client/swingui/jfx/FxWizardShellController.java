@@ -59,7 +59,7 @@ abstract public class FxWizardShellController extends ShellController implements
 	{
 		try
 		{
-			getContentNavigationHandler().nextWasPressed(event);
+			getContentNavigationHandler().nextWasPressed();
 			getWizardStage().next();
 		}
 		catch(Exception e)
