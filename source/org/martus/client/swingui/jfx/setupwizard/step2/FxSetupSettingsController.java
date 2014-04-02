@@ -31,7 +31,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.Pane;
@@ -85,13 +84,13 @@ public class FxSetupSettingsController extends FxStep2Controller
 	}
 	
 	@Override
-	public void nextWasPressed(ActionEvent event) throws Exception
+	public void nextWasPressed() throws Exception
 	{
 		saveSettingsToConfigInfo();
 		boolean didFinishInitalizing = startOrStopTorPerConfigInfo();
 		if(!didFinishInitalizing)
 			throw new RuntimeException("Error initializing");
-		super.nextWasPressed(event);
+		super.nextWasPressed();
 	}
 	
 	protected void saveSettingsToConfigInfo()

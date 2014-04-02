@@ -28,7 +28,6 @@ package org.martus.client.swingui.jfx.setupwizard;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -76,7 +75,7 @@ abstract public class AbstractFxSetupWizardContentController extends ContentCont
 		return wizardNavigationHandler;
 	}
 	
-	public void nextWasPressed(ActionEvent actionEvent) throws Exception
+	public void nextWasPressed() throws Exception
 	{
 		clearHasBeenInitialized();
 	}

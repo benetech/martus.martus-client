@@ -28,7 +28,6 @@ package org.martus.client.swingui.jfx.setupwizard.step1;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -60,10 +59,10 @@ public class FxVerifyAccountController extends FxStep1Controller
 	}
 
 	@Override
-	public void nextWasPressed(ActionEvent event) throws Exception
+	public void nextWasPressed() throws Exception
 	{
 		createAccount();
-		super.nextWasPressed(event);
+		super.nextWasPressed();
 	}
 
 	private void createAccount() throws Exception

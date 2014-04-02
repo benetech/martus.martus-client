@@ -27,11 +27,9 @@ package org.martus.client.swingui.jfx;
 
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 
-import javafx.event.ActionEvent;
-
 public interface WizardNavigationHandlerInterface
 {
-	public void nextWasPressed(ActionEvent actionEvent) throws Exception;
+	public void nextWasPressed() throws Exception;
 	
 	public void backWasPressed() throws Exception;
 
