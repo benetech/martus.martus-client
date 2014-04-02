@@ -37,13 +37,18 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.effect.InnerShadow;
 
 public class FxSwitchButton extends Label
 {
 	   public FxSwitchButton()
 	    {
 	        Button switchBtn = new Button();
+	        switchBtn.setStyle("-fx-background-color: lightgray; -fx-background-insets: 1; -fx-background-radius: 30;");
+	        InnerShadow shadow = new InnerShadow();
+	        switchBtn.setEffect(shadow);
 	        switchBtn.setOnAction(new ButtonEventHandler());
+	        switchBtn.setGraphicTextGap(0.2);
 	        setGraphic(switchBtn);
 	        switchedOn.addListener(new ButtonPressedChangeListener());
 	    }
@@ -88,14 +93,14 @@ public class FxSwitchButton extends Label
 		{
 		    if (newValue)
 		    {
-		        setText("ON");
-		        setStyle("-fx-background-color: green;-fx-text-fill:white;");
+		        setText(" ON");
+		        setStyle("-fx-background-color: green;-fx-text-fill:darkgray;  -fx-background-radius: 10;");
 		        setContentDisplay(ContentDisplay.RIGHT);
 		    }
 		    else
 		    {
-		        setText("OFF");
-		        setStyle("-fx-background-color: grey;-fx-text-fill:black;");
+		        setText("OFF ");
+		        setStyle("-fx-background-color: grey;-fx-text-fill:darkgray; -fx-background-radius: 10;");
 		        setContentDisplay(ContentDisplay.LEFT);
 		    }
 		}
