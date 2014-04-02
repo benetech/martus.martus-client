@@ -30,7 +30,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 import org.martus.client.core.ConfigInfo;
-import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
