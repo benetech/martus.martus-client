@@ -103,7 +103,7 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 			MartusLogger.logException(e);
 			showNotifyDialog(wizardStage, "ErrorSavingConfig");
 		}
-		wizardStage.next();
+		getWizardNavigationHandler().doNext();
 	}
 	
 	@FXML
@@ -112,7 +112,7 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 		attemptToConnect(getDefaultServerIp(), getDefaultServerPublicKey(), false);
 		FxWizardStage wizardStage = getWizardStage();
 		if(wizardStage.hasServerAvailabilityBeenInitialized())
-			wizardStage.next();
+			getWizardNavigationHandler().doNext();
 	}
 	
 	private String getDefaultServerIp()
@@ -129,7 +129,7 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 	public void advancedServerSettings()
 	{
 		destination = new FxAdvancedServerStorageSetupController(getMainWindow());
-		getWizardStage().next();
+		getWizardNavigationHandler().doNext();
 	}
 	
 	public static final String IP_FOR_SL1_IE = "54.72.26.74";

@@ -78,6 +78,12 @@ public class ContactsShellController extends ShellController implements WizardNa
 	{
 		return null;
 	}
+	
+	@Override
+	public void doNext()
+	{
+		throw new RuntimeException("Not implemented");
+	}
 
 	@FXML
 	protected void onClose(ActionEvent event) throws Exception
