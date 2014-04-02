@@ -65,14 +65,15 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 
 		UiParagraphPanel panel = new UiParagraphPanel();
 		
-		UiLabel defaultServerLabel = new UiLabel(localization.getFieldLabel("ChooseDefaultServer"));
+		UiLabel defaultServerHeading = new UiLabel(localization.getFieldLabel("DefaultServerHeading"));
 		UiButton defaultButton = new UiButton(new ActionDefaultServer());
-		UiLabel description = new UiLabel(localization.getFieldLabel("DefaultServerDescription"));
-		Box hbox = Box.createHorizontalBox();
-		Utilities.addComponentsRespectingOrientation(hbox, new Component[] {defaultButton, description});
-		panel.addComponents(defaultServerLabel, hbox);
+		panel.addLabelOnly(defaultServerHeading);
+		panel.addLabelOnly(defaultButton);
 		
 		
+		panel.addBlankLine();
+		UiLabel advanceServerSetupHeading = new UiLabel(localization.getFieldLabel("AdvanceServerSetupHeading"));
+		panel.addLabelOnly(advanceServerSetupHeading);
 		panel.addComponents(new UiLabel(localization.getFieldLabel("ServerNameEntry")), fieldIPAddress);
 		panel.addComponents(new UiLabel(localization.getFieldLabel("ServerPublicCodeEntry")), fieldPublicCode);
 		serverIPAddress = info.getServerName();
