@@ -81,7 +81,7 @@ abstract public class AbstractFxSetupWizardContentController extends ContentCont
 		clearHasBeenInitialized();
 	}
 	
-	public void backWasPressed(ActionEvent actionEvent) throws Exception
+	public void backWasPressed() throws Exception
 	{
 		clearHasBeenInitialized();
 	}

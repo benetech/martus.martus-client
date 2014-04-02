@@ -33,7 +33,7 @@ public interface WizardNavigationHandlerInterface
 {
 	public void nextWasPressed(ActionEvent actionEvent) throws Exception;
 	
-	public void backWasPressed(ActionEvent actionEvent) throws Exception;
+	public void backWasPressed() throws Exception;
 
 	public void setNavigationHandler(WizardNavigationButtonsInterface navigationHandler);
 	

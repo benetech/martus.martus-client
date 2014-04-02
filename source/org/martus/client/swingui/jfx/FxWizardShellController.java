@@ -74,7 +74,7 @@ abstract public class FxWizardShellController extends ShellController implements
 	{
 		try
 		{
-			getContentNavigationHandler().backWasPressed(event);
+			getContentNavigationHandler().backWasPressed();
 			getWizardStage().back();
 		} 
 		catch (Exception e)
