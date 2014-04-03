@@ -43,15 +43,15 @@ public class FxSwitchButton extends Label
 {
 	   public FxSwitchButton()
 	    {
-	        Button switchBtn = new Button();
-	        switchBtn.setStyle("-fx-background-color: lightgray; -fx-background-insets: 1; -fx-background-radius: 5;");
-	        switchBtn.setMinWidth(30);
-	        switchBtn.setPrefWidth(30);
+	        Button switchButton = new Button();
+	        switchButton.setStyle("-fx-background-color: lightgray; -fx-background-insets: 1; -fx-background-radius: 5;");
+	        switchButton.setMinWidth(30);
+	        switchButton.setPrefWidth(30);
 	        InnerShadow shadow = new InnerShadow();
-	        switchBtn.setEffect(shadow);
-	        switchBtn.setOnAction(new ButtonEventHandler());
-	        switchBtn.setGraphicTextGap(0.2);
-	        setGraphic(switchBtn);
+	        switchButton.setEffect(shadow);
+	        switchButton.setOnAction(new ButtonEventHandler());
+	        switchButton.setGraphicTextGap(0.2);
+	        setGraphic(switchButton);
 	        switchedOn.addListener(new ButtonPressedChangeListener());
 	    }
 
