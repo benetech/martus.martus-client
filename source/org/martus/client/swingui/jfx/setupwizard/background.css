@@ -265,7 +265,7 @@
 	-fx-text-fill: #4c5e70;
 }
 
-..choice-box {
+.choice-box {
 		-fx-background-color:
         #797769,
        linear-gradient(#35536b, #597489);
