@@ -353,6 +353,11 @@ public class EnglishStrings
 "wintitle:ServerNotRespondingSaveConfiguration=Server Not Responding",
 "field:ServerNotRespondingSaveConfiguration=Server not responding. Would you like to save this server configuration for later?",
 
+"wintitle:ExitWizard=Exit Martus Wizard",
+"field:ExitWizard=Your changes will be lost and Martus will exit, are you sure you want to do this?",
+
+"wintitle:ExitManageContacts=Exit Manage Contacts",
+"field:ExitManageContacts=Your changes will be lost, are you sure you want to do this?",
 
 "button:help=Help",
 "button:create=Create",
