@@ -194,13 +194,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		cursorStack = new Stack();
 		UiModelessBusyDlg splashScreen = new UiModelessBusyDlg(new ImageIcon(UiAboutDlg.class.getResource("MartusLogo.png")));
 
-		// Pop up a nag screen if this is an unofficial private release
-			new UiNotifyDlg(this, "Martus - Test Version", 
-					new String[] {"THIS IS A PRE-RELEASE TEST VERSION OF MARTUS.",
-					"Please contact info@martus.org with any feedback or questions."}, 
-					new String[] {"OK"});
-			
-		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setCurrentActiveFrame(this);
 		try
@@ -214,6 +207,21 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			initializationErrorExitMartusDlg(e.getMessage());
 		}
 		UiMainWindow.updateIcon(this);
+
+		// Pop up a nag screen if this is an unofficial private release
+		// NOTE NAG screen now could be localized
+		new UiNotifyDlg(this, "Martus - Test Version", 
+				new String[] {"THIS IS A PRE-RELEASE TEST VERSION OF MARTUS.",
+				"Please contact info@martus.org with any feedback or questions."}, 
+				new String[] {"OK"});
+		
+		final String javaVersion = System.getProperty("java.version");
+		final String maximumJavaVersion = "1.7.9";
+		if(javaVersion.compareTo(maximumJavaVersion) >= 0)
+		{
+			displayIncorrectVersionJava("8", "7");
+			System.exit(2);
+		}
 		
 		File timeoutDebug = new File(getApp().getMartusDataRootDirectory(), "timeout.1min");
 		if(timeoutDebug.exists())
@@ -238,6 +246,18 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		setGlassPane(new WindowObscurer());
 	}
 	
+	public void displayIncorrectVersionJava(String highVersionJava, String expectedVersionJava)
+	{
+		String title = localization.getWindowTitle("IncompatibleJavaVersion");
+		String warningMessage = localization.getFieldLabel("IncompatibleJavaVersion");
+		String buttonMessage = localization.getButtonLabel("ok");
+		Toolkit.getDefaultToolkit().beep();
+		HashMap map = new HashMap();
+		map.put("#HighVersion#", highVersionJava);
+		map.put("#ExpectedVersion#", expectedVersionJava);
+		new UiNotifyDlg(this, title, new String[]{warningMessage}, new String[]{buttonMessage}, map);
+	}
+
 	private void warnIfCryptoJarsNotLoaded() throws Exception
 	{
 		URL jceJarURL = MartusJarVerification.getJarURL(Cipher.class);
