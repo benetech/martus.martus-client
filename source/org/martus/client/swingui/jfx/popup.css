@@ -2,7 +2,11 @@
 	-fx-background-color: #e6e7e9;
 }
 
-
+.BackgroundTaskMainPanel {
+	-fx-padding: 5 35 5 35;
+	-fx-spacing: 20;
+	-fx-alignment: BOTTOM_CENTER;
+}
 
 .button {
 
