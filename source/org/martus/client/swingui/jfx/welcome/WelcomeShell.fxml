@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+            <BorderPane>
+              <center>
+                <Pane fx:id="contentPane" maxHeight="-Infinity" prefHeight="500.0" prefWidth="850.0"></Pane>
+              </center>
+              <bottom>
+                <BorderPane>
+<center>
+                    <Button id="" fx:id="nextButton" mnemonicParsing="false" onAction="#onNext" text="Get Started" BorderPane.alignment="CENTER_RIGHT">
+</Button>
+</center>
+                </BorderPane>
+              </bottom>
+            </BorderPane>
+  </children>
+</AnchorPane>
