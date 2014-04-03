@@ -108,6 +108,8 @@ public class FxWizardAddContactsController extends FxStep4Controller
 
 	    sendToByDefaultColumn.setVisible(false);
 		contactsTable.setItems(data);
+		Label noContacts = new Label(getLocalization().getFieldLabel("NoContactsInTable"));
+		contactsTable.setPlaceholder(noContacts);
 		loadExistingContactData();
 		updateAddContactButtonState();
 		accessTokenField.textProperty().addListener(new AccessTokenChangeHandler());
