@@ -1330,9 +1330,10 @@ public class EnglishStrings
 "field:AccountInfoDirectory=Account Directory: ",
 "field:AccountAccessToken=Martus Account Access Token: ",
 "field:NameOfExportedFile=Please enter a name for the file you wish to export.",
-"field:ChooseDefaultServer=Default Server",
+"field:DefaultServerHeading=Default Server",
+"field:AdvanceServerSetupHeading=Advance Server Setup",
+
 "button:ChooseDefaultServer=Use Default Server",
-"field:DefaultServerDescription=To use the default server, press this button.",
 "field:ServerNameEntry=Server name or IP address:",
 "field:ServerPublicCodeEntry=Server Public Identification Code:",
 "field:ServerMagicWordEntry=Server Magic Word:",

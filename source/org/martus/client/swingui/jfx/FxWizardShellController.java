@@ -57,9 +57,14 @@ abstract public class FxWizardShellController extends ShellController implements
 	@FXML
 	protected void onNext(ActionEvent event)
 	{
+		doNext();
+	}
+
+	public void doNext()
+	{
 		try
 		{
-			getContentNavigationHandler().nextWasPressed(event);
+			getContentNavigationHandler().nextWasPressed();
 			getWizardStage().next();
 		}
 		catch(Exception e)
@@ -72,9 +77,14 @@ abstract public class FxWizardShellController extends ShellController implements
 	@FXML
 	protected void onBack(ActionEvent event) 
 	{
+		doBack();
+	}
+
+	public void doBack()
+	{
 		try
 		{
-			getContentNavigationHandler().backWasPressed(event);
+			getContentNavigationHandler().backWasPressed();
 			getWizardStage().back();
 		} 
 		catch (Exception e)

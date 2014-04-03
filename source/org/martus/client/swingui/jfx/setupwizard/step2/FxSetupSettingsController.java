@@ -25,21 +25,23 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step2;
 
+import java.awt.Desktop;
+import java.io.IOException;
 import java.util.Vector;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.Pane;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPreferencesDlg;
+import org.martus.client.swingui.jfx.FxSwitchButton;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.client.swingui.jfx.setupwizard.step3.FxSetupStorageServerController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.TorInitializationTask;
@@ -56,8 +58,10 @@ public class FxSetupSettingsController extends FxStep2Controller
 	
 	public void initializeMainContentPane()
 	{
-		userTorCheckBox.setSelected(getApp().getConfigInfo().useInternalTor());
-		userTorCheckBox.selectedProperty().addListener(new FxCheckboxListener());
+		torSwitchButton = new FxSwitchButton();
+		switchButtonPane.getChildren().add(torSwitchButton);
+		torSwitchButton.setSelected(getApp().getConfigInfo().useInternalTor());
+		torSwitchButton.switchOnProperty().addListener(new FxCheckboxListener());
 
 		ObservableList<ChoiceItem> dateFormatChoices = getDateFormatChoices();
 		dateFormatSequenceDropDown.setItems(FXCollections.observableArrayList(dateFormatChoices));
@@ -82,13 +86,13 @@ public class FxSetupSettingsController extends FxStep2Controller
 	}
 	
 	@Override
-	public void nextWasPressed(ActionEvent event) throws Exception
+	public void nextWasPressed() throws Exception
 	{
 		saveSettingsToConfigInfo();
 		boolean didFinishInitalizing = startOrStopTorPerConfigInfo();
 		if(!didFinishInitalizing)
 			throw new RuntimeException("Error initializing");
-		super.nextWasPressed(event);
+		super.nextWasPressed();
 	}
 	
 	protected void saveSettingsToConfigInfo()
@@ -96,7 +100,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 		ConfigInfo configInfo = getApp().getConfigInfo();
 		configInfo.setForceBulletinsAllPrivate(true); //NOTE: is this the best place to do this?
 		saveDateFormatConfiguration();
-		configInfo.setUseInternalTor(userTorCheckBox.isSelected());
+		configInfo.setUseInternalTor(torSwitchButton.isSelected());
 		getMainWindow().saveConfigInfo();
 	}
 
@@ -184,13 +188,29 @@ public class FxSetupSettingsController extends FxStep2Controller
 	{
 		return new FxSetupStorageServerController(getMainWindow());
 	}
-
-	@FXML 
-	protected CheckBox userTorCheckBox;
 	
+	@FXML 
+	private void OnLinkTorProject()
+	{
+		try
+		{
+			String url = "https://www.torproject.org";
+			Desktop.getDesktop().browse(java.net.URI.create(url));
+		} 
+		catch (IOException e)
+		{
+			MartusLogger.logException(e);
+		}
+	}
+
 	@FXML
 	private ChoiceBox<ChoiceItem> dateFormatSequenceDropDown;
 	
 	@FXML
 	private ChoiceBox<ChoiceItem> dateDelimeterComboBox;
+	
+	@FXML
+	protected Pane switchButtonPane;
+	
+	private FxSwitchButton torSwitchButton;
 }

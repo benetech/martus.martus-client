@@ -29,7 +29,6 @@ import java.util.Vector;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 
@@ -46,13 +45,13 @@ public class FxSelectLanguageController extends FxStep6Controller
 	}
 	
 	@Override
-	public void nextWasPressed(ActionEvent event) throws Exception
+	public void nextWasPressed() throws Exception
 	{
 		String selectedLanguageCode = languagesDropdown.getSelectionModel().getSelectedItem().getCode();
 		
 		if (MtfAwareLocalization.isRecognizedLanguage(selectedLanguageCode))
 			getLocalization().setCurrentLanguageCode(selectedLanguageCode);
-		super.nextWasPressed(event);
+		super.nextWasPressed();
 	}
 	
 	public void initializeMainContentPane()

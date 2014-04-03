@@ -54,7 +54,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		getShellController().getNextButton().setDefaultButton(true);
 	}
 
-	public void next()
+	protected void next()
 	{
 		try
 		{
@@ -78,7 +78,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		}
 	}
 
-	public void back()
+	protected void back()
 	{
 		try
 		{
