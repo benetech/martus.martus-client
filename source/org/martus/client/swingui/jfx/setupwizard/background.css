@@ -13,6 +13,23 @@
 		-fx-padding: 5 35 5 35;
 }
 
+.button:hover {
+		-fx-background-color: Green;
+		-fx-border-radius: 5;
+		-fx-text-fill: White;
+		-fx-alignment: center;
+		-fx-font: 17px "Helvetica";
+		-fx-padding: 5 35 5 35;
+}
+
+.button:pressed {
+		-fx-background-color: DarkGreen;
+		-fx-border-radius: 5;
+		-fx-text-fill: White;
+		-fx-alignment: center;
+		-fx-font: 17px "Helvetica";
+		-fx-padding: 5 35 5 35;
+}
 
 .button_not_main_action {
 		-fx-background-color:
