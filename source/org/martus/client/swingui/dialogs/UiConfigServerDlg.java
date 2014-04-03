@@ -64,6 +64,8 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		UiParagraphPanel panel = new UiParagraphPanel();
 		
 		UiLabel defaultServerHeading = new UiLabel(localization.getFieldLabel("DefaultServerHeading"));
+		defaultServerHeading.makeHeading();
+		
 		UiButton defaultButton = new UiButton(new ActionDefaultServer());
 		panel.addLabelOnly(defaultServerHeading);
 		panel.addLabelOnly(defaultButton);
@@ -71,6 +73,8 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		
 		panel.addBlankLine();
 		UiLabel advanceServerSetupHeading = new UiLabel(localization.getFieldLabel("AdvanceServerSetupHeading"));
+		advanceServerSetupHeading.makeHeading();
+		advanceServerSetupHeading.makeBold();
 		panel.addLabelOnly(advanceServerSetupHeading);
 		panel.addComponents(new UiLabel(localization.getFieldLabel("ServerNameEntry")), fieldIPAddress);
 		panel.addComponents(new UiLabel(localization.getFieldLabel("ServerPublicCodeEntry")), fieldPublicCode);
