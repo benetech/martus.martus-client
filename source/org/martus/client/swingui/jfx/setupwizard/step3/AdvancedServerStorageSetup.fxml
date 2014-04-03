@@ -8,7 +8,7 @@
 	<top>
 		<VBox styleClass="mainTextBox">
 			<Label styleClass="headingLevel1" text="Advanced Server Setup" />
-			<Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="To store your bulletins on a specific server, you will need the server's IP address, the public code and the magic word for this server. If you are connecting to a Martus server, contactMartusfor this info. If you are connecting to your organization's server, contact your administrator" />
+			<Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="To store your bulletins on a specific server, you will need the IP address, public code, and magic word for the server. If you are connecting to a Martus server, email info@martus.org for this info. If you are connecting to your organization's server, contact your administrator." />
 		</VBox>
 	</top>
 	<center>
