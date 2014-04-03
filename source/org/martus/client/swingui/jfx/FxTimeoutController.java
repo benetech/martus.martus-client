@@ -55,8 +55,7 @@ public class FxTimeoutController extends FxBackgroundActivityController
 		public void run()
 		{
 			double percentComplete = (double)currentNumberOfSecondsCompleted/(double)maxSecondsToCompleteTask;
-			double percentLeftBeforeTimedOut = 1.0 - percentComplete;
-			updateProgressBar(percentLeftBeforeTimedOut);
+			updateProgressBar(percentComplete);
 			++currentNumberOfSecondsCompleted;
 			if(currentNumberOfSecondsCompleted > maxSecondsToCompleteTask)
 			{

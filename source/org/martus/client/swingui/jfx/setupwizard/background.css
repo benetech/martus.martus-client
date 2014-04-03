@@ -13,6 +13,7 @@
 		-fx-padding: 5 35 5 35;
 }
 
+
 .button_not_main_action {
 		-fx-background-color:
         #797769,
@@ -264,9 +265,12 @@
 	-fx-text-fill: #4c5e70;
 }
 
-.choiceBox {
-	-fx-text-fill: white;
-  -fx-padding: 0 4 4 4;
-	-fx-font: 15px "Helvetica";
-	-fx-background-color: Red;
-}
+.choice-box {
+		-fx-background-color:
+        #797769,
+       linear-gradient(#35536b, #597489);
+        }
+       
+.choice-box .label {
+     -fx-text-fill: white; 
+}       

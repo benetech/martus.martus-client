@@ -29,7 +29,6 @@ import java.util.Arrays;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -83,11 +82,11 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 	}
 
 	@Override
-	public void nextWasPressed(ActionEvent event) throws Exception
+	public void nextWasPressed() throws Exception
 	{
 		StaticAccountCreationData.setUserName(getUserName().getText());
 		StaticAccountCreationData.setPassword(getPasswordField().getText().toCharArray());
-		super.nextWasPressed(event);
+		super.nextWasPressed();
 	}
 	
 	private Label getErrorLabel()
