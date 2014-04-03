@@ -4,8 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefWidth="235.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
-  <Label prefHeight="197.0" prefWidth="235.0" text="" />
-  <Label maxWidth="235.0" styleClass="errorText" text="You can switch form templates later inside of Martus, if you need one different from what you select here." wrapText="true" />
-  <Label maxWidth="235.0" styleClass="errorText" text="Please note, you can change templates, but you will not be able to import templates from the server, outside of the account creation process at this time." wrapText="true" />
+<VBox prefWidth="235">
+	<Label styleClass="errorText" maxWidth="235" wrapText="true" text="You can switch form templates later inside of Martus, if you need one different from what you select here." />
+	<Label styleClass="errorText" maxWidth="235" wrapText="true" text="Please note, you can change templates, but you will not be able to import templates from the server, outside of the account creation process at this time." />
 </VBox>

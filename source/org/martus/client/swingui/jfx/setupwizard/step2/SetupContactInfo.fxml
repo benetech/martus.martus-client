@@ -32,7 +32,7 @@
 		      <children>
 		        <Label styleClass="headingLevel3" text="Author:" GridPane.rowIndex="0" />
 		        <TextField id="" fx:id="authorField" prefHeight="26.0" prefWidth="373.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-		        <Label styleClass="headingLevel3"  text="Organization" GridPane.rowIndex="1" />
+		        <Label styleClass="headingLevel3"  text="Organization:" GridPane.rowIndex="1" />
 		        <TextField id="" fx:id="organizationField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 		      </children>
 		    </GridPane>
