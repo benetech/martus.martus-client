@@ -39,7 +39,7 @@
 	-fx-text-fill: White;
 	-fx-stroke-width: 10;
 	-fx-stroke: White;
-	-fx-font: 20px "Arial Black";
+	-fx-font: 23px "Helvetica Bold";
   -fx-font-weight: bold;
 	-fx-padding: 0 5 10 5;
 }
@@ -48,14 +48,14 @@
 	-fx-text-fill: #4c5e70;
 	-fx-stroke-width: 10;
 	-fx-stroke: #4c5e70;
-	-fx-font: 20px "Arial Black";
+	-fx-font: 23px "Helvetica Bold";
   -fx-font-weight: bold;
 	-fx-padding: 10 5 10 5;
 }
 
 .headingLevel3 {
 	-fx-text-fill: #4c5e70;
-	-fx-font: 11px "Arial Black";
+	-fx-font: 13px "Helvetica Bold";
   -fx-font-weight: bold;
 	-fx-padding: 5 3 5 3;
 }
@@ -63,8 +63,7 @@
 
 #topBar {
 	-fx-background-color: #4c5e70;
-  -fx-width: 100%;
-  -fx-padding: 6 6 6 6;
+  -fx-padding: 6 25 6 25;
 	-fx-spacing: 10;
 	-fx-alignment: center-left;
 }
@@ -87,7 +86,7 @@
 .mainTextBoxText {
 	-fx-text-fill: #4c5e70;
 	-fx-alignment: center-left;
-	-fx-font: 11px "Arial Black";
+	-fx-font: 11px "Helvetica";
 }
 
 .hintText {
@@ -113,8 +112,23 @@
 }
 
 #sidebar-hints {
-	-fx-background-color: #e6e7e9;
+	-fx-background-color: #6a6a6a;
 	-fx-border: none;
+  -fx-width: 100%;
+  -fx-padding: 10 10 10 10;
+	-fx-alignment: center-left;
+	-fx-background-radius: 7.0;
+	-fx-background-insets: 0 0 20 0;
+}
+
+.sidebar {
+	-fx-background-color: #6a6a6a;
+	-fx-border: none;
+  -fx-width: 100%;
+  -fx-padding: 10 10 10 10;
+	-fx-alignment: center-left;
+	-fx-background-radius: 7.0;
+	-fx-background-insets: 0 0 20 0;
 }
 
 .wv-sidebar-hint {
@@ -207,38 +221,35 @@
 
 .current-step .TopBarStepNumber {
 	-fx-text-fill: White;
-	-fx-stroke-width: 2;
-	-fx-stroke: White;
-	-fx-font: 24px "Helvetica";
+	-fx-font: 27px "Helvetica";
+  -fx-font-weight: bold;
 }
 
 .current-step .TopBarStepName {
 	-fx-text-fill: White;
-	-fx-stroke-width: 2;
-	-fx-stroke: White;
-	-fx-font: 13px "Helvetica";
+	-fx-font: 15px "Helvetica";
+  -fx-font-weight: bold;
 }
 
 .TopBarStepNumber {
 	-fx-text-fill: #707e87;
-	-fx-stroke-width: 2;
-	-fx-stroke: #707e87;
-	-fx-font: 24px "Helvetica";
-	-fx-padding: 0 3 0 3;
+	-fx-font: 27px "Helvetica";
+	-fx-padding: 0 5 0 3;
+  -fx-font-weight: bold;
 }
 
 .TopBarStepName {
 	-fx-text-fill: #707e87;
 	-fx-alignment: center-left;
-	-fx-stroke: #707e87;
-	-fx-stroke-width: 2;
-	-fx-font: 13px "Helvetica";
+	-fx-font: 15px "Helvetica";
+  -fx-font-weight: bold;
 }
 
 .TopBarArrow {
 	-fx-text-fill: #707e87;
-  -fx-padding: 0 4 4 4;
-	-fx-font: 20px "Arial Black";
+  -fx-padding: 4 4 4 4;
+	-fx-font: 26px "Helvetica";
+  -fx-font-weight: bold;
 }
 
 #contacts-table {
@@ -256,6 +267,6 @@
 .choiceBox {
 	-fx-text-fill: white;
   -fx-padding: 0 4 4 4;
-	-fx-font: 15px "Arial Black";
+	-fx-font: 15px "Helvetica";
 	-fx-background-color: Red;
 }
