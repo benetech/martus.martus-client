@@ -25,6 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.contacts;
 
+import javax.swing.JOptionPane;
+
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.ContentController;
 import org.martus.client.swingui.jfx.FxNonWizardStage;
@@ -59,4 +62,17 @@ public class ContactsStage extends FxNonWizardStage
 	{
 		close();
 	}
+	
+	@Override
+	protected boolean confirmExit()
+	{
+		MartusLocalization localization = getMainWindow().getLocalization();
+		String title = localization.getWindowTitle("ExitManageContacts");
+		String message = localization.getFieldLabel("ExitManageContacts");
+		int result = JOptionPane.showConfirmDialog(getDialog(), message, title, JOptionPane.YES_NO_OPTION);
+		if (result == JOptionPane.YES_OPTION)
+			return true;
+		return false;
+	}
+	
 }

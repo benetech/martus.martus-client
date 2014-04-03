@@ -53,4 +53,10 @@ public class WelcomeStage extends FxNonWizardStage
 	{
 		return new FxScene(getExternalFxmlDirectory(), "welcome/welcome.css");
 	}
+	
+	@Override
+	protected boolean confirmExit()
+	{
+		return true;
+	}
 }

@@ -25,6 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard;
 
+import javax.swing.JOptionPane;
+
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.ContentController;
 import org.martus.client.swingui.jfx.FxScene;
@@ -41,13 +44,24 @@ public class SetupWizardStage extends FxWizardStage
 	@Override
 	protected ContentController getFirstController()
 	{
-		UiMainWindow mainWindow = getMainWindow();
-		return new FxSetupUsernamePasswordController(mainWindow);
+		return new FxSetupUsernamePasswordController(getMainWindow());
 	}
 	
 	@Override
 	protected FxScene createScene() throws Exception
 	{
 		return new FxScene(getExternalFxmlDirectory(), "setupwizard/background.css");
+	}
+	
+	@Override
+	protected boolean confirmExit()
+	{
+		MartusLocalization localization = getMainWindow().getLocalization();
+		String title = localization.getWindowTitle("ExitWizard");
+		String message = localization.getFieldLabel("ExitWizard");
+		int result = JOptionPane.showConfirmDialog(getDialog(), message, title, JOptionPane.YES_NO_OPTION);
+		if (result == JOptionPane.YES_OPTION)
+			return true;
+		return false;
 	}
 }

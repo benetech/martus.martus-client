@@ -34,7 +34,6 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
@@ -49,6 +48,7 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 
 	abstract protected FxScene createScene() throws Exception;
 	abstract public void showCurrentScene() throws Exception;
+	abstract protected boolean confirmExit();
 	
 	public void ensureSceneExists() throws Exception
 	{
@@ -155,8 +155,7 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 		@Override
 		public void windowClosing(WindowEvent e)
 		{
-			int result = JOptionPane.showConfirmDialog(getDialog(), "Wizard will now close.  Are you sure?", "Confirmation", JOptionPane.YES_NO_OPTION);
-			if (result == JOptionPane.YES_OPTION)
+			if(confirmExit())
 			{
 				handleDialogClose();
 				super.windowClosing(e);
