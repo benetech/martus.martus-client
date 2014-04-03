@@ -1307,6 +1307,9 @@ public class EnglishStrings
 "field:warningDeleteMultipleBulletinsWithCopies=NOTE: Copies of one or more of these bulletins exist in one or more other folders. Those copies will not be removed.",
 "field:warningUnofficialTranslation=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.  If you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.",
 
+"wintitle:IncompatibleJavaVersion=Incompatible Java Version",
+"field:IncompatibleJavaVersion=The current version of Martus cannot run with Java #HighVersion#. Please use Java #ExpectedVersion# or lower to run Martus.",
+
 "field:username=Username",
 "field:password1=Password",
 "field:password2=(same password again)",
