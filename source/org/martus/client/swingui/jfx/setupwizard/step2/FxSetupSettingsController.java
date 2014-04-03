@@ -167,7 +167,8 @@ public class FxSetupSettingsController extends FxStep2Controller
 		{
 			saveSettingsToConfigInfo();
 			boolean didFinishInitalizing = startOrStopTorPerConfigInfo();
-			//TODO un-check TOR if user cancelled.
+			if(newValue && !didFinishInitalizing)
+				torSwitchButton.setSelected(false);
 		}
 	}
 	
@@ -212,5 +213,5 @@ public class FxSetupSettingsController extends FxStep2Controller
 	@FXML
 	protected Pane switchButtonPane;
 	
-	private FxSwitchButton torSwitchButton;
+	protected FxSwitchButton torSwitchButton;
 }
