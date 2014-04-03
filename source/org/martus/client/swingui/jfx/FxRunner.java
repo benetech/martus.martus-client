@@ -25,10 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.MartusLogger;
-
-import sun.security.action.GetLongAction;
 
 public class FxRunner implements Runnable
 {
