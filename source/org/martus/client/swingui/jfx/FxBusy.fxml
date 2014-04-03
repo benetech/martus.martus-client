@@ -6,30 +6,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="263.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<VBox styleClass="BackgroundTaskMainPanel" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
-    <GridPane id="fxGridPane" alignment="TOP_CENTER" layoutX="14.0" layoutY="14.0" prefHeight="235.0" prefWidth="572.0">
-      <children>
-        <Label styleClass="headingLevel3"  fx:id="fxLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="133.0" prefWidth="558.0" text="" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
-          <children>
-            <ProgressBar fx:id="fxProgressBar" disable="false" prefHeight="24.0" prefWidth="572.0" progress="0.0" />
-          </children>
-        </HBox>
-        <HBox id="fxLowerHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
-          <children>
-            <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelPressed" prefHeight="42.999900000002526" prefWidth="148.0" text="Cancel" />
-          </children>
-        </HBox>
-      </children>
-      <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      </columnConstraints>
-      <rowConstraints>
-        <RowConstraints maxHeight="178.0" minHeight="10.0" prefHeight="178.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
-      </rowConstraints>
-    </GridPane>
+    <Label styleClass="headingLevel3"  fx:id="fxLabel" text="" textAlignment="CENTER" wrapText="true" />
+    <ProgressBar fx:id="fxProgressBar" disable="false" prefHeight="24.0" prefWidth="360.0" progress="0.0" />
+    <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelPressed" text="Cancel" />
   </children>
-</AnchorPane>
+</VBox>
