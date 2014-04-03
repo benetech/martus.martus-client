@@ -42,8 +42,8 @@ public class FxRunner implements Runnable
 		} 
 		catch (Exception e)
 		{
-			stage.getMainWindow().unexpectedErrorDlg();
 			MartusLogger.logException(e);
+			stage.getMainWindow().unexpectedErrorDlg();
 			System.exit(1);
 		}
 	}
