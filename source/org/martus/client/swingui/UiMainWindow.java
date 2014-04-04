@@ -192,7 +192,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		
 		cursorStack = new Stack();
-		UiModelessBusyDlg splashScreen = new UiModelessBusyDlg(new ImageIcon(UiAboutDlg.class.getResource("MartusLogo.png")));
+		UiModelessBusyDlg splashScreen = new UiModelessBusyDlg(new ImageIcon(UiAboutDlg.class.getResource("Martus-logo-black-text-160x72.png")));
 
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setCurrentActiveFrame(this);
@@ -2913,7 +2913,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	static public Image getMartusIconImage()
 	{
-		URL imageURL = UiMainWindow.class.getResource("Martus.png");
+		URL imageURL = UiMainWindow.class.getResource("dialogs/Martus-swoosh-64x64.png");
 		if(imageURL == null)
 			return null;
 		ImageIcon imageicon = new ImageIcon(imageURL);
