@@ -350,8 +350,8 @@ public class EnglishStrings
 "wintitle:notifyShowTokenAndPublicCode=Account Token and Public Code",
 
 "field:AttemptToConnectToServer=Attempting to connect to server and checking compliance",
-"wintitle:ServerNotRespondingSaveConfiguration=Server Not Responding",
-"field:ServerNotRespondingSaveConfiguration=Server not responding. Would you like to save this server configuration for later?",
+"wintitle:ServerNotRespondingSaveConfiguration=Server Not Available",
+"field:ServerNotRespondingSaveConfiguration=A connection to the server was not made. This could be because the server is not available, you have entered an incorrect IP or Public Code, or access is blocked. Would you like to save this server configuration for later?",
 
 "wintitle:ExitWizard=Exit Martus Wizard",
 "field:ExitWizard=Your changes will be lost and Martus will exit, are you sure you want to do this?",
