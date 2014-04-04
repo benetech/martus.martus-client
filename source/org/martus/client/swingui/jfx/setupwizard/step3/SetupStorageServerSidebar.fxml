@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Label maxWidth="235" styleClass="errorText" wrapText="true" text="The files you store on Martus server are completely encrypted using 3072-bit key encryption. This means even Martus server administrators cannot read your files." />
