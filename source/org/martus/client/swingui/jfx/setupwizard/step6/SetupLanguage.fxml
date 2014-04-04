@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" prefWidth="660" maxWidth="660" >
+<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" prefWidth="660" maxWidth="660" >
   <children>
     <VBox id="LeftBox" layoutX="2.0" layoutY="3.0">
       <children>
