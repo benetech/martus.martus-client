@@ -1,5 +1,7 @@
 .root {
 	-fx-background-color: #e6e7e9;
+  -fx-font-family: "Helvetica";
+  -fx-line-height: 28px inherit;
 }
 
 .button {
@@ -9,7 +11,7 @@
 		-fx-border-radius: 5;
 		-fx-text-fill: White;
 		-fx-alignment: center;
-		-fx-font: 17px "Helvetica";
+		-fx-font-size: 17px;
 		-fx-padding: 5 35 5 35;
 }
 
@@ -18,7 +20,7 @@
 		-fx-border-radius: 5;
 		-fx-text-fill: White;
 		-fx-alignment: center;
-		-fx-font: 17px "Helvetica";
+		-fx-font-size: 17px;
 		-fx-padding: 5 35 5 35;
 }
 
@@ -27,7 +29,7 @@
 		-fx-border-radius: 5;
 		-fx-text-fill: White;
 		-fx-alignment: center;
-		-fx-font: 17px "Helvetica";
+		-fx-font-size: 17px;
 		-fx-padding: 5 35 5 35;
 }
 
@@ -38,7 +40,7 @@
 		-fx-border-radius: 5;
 		-fx-text-fill: #4c5e70;
 		-fx-alignment: center;
-		-fx-font: 17px "Helvetica";
+		-fx-font-size: 17px;
 		-fx-padding: 5 35 5 35;
 }
 
@@ -49,32 +51,28 @@
 		-fx-border-radius: 5;
 		-fx-text-fill: #4c5e70;
 		-fx-alignment: center;
-		-fx-font: 17px "Helvetica";
+		-fx-font-size: 17px;
 		-fx-padding: 5 35 5 35;
 }
 
 .headingLevel1 {
-	-fx-text-fill: White;
-	-fx-stroke-width: 10;
-	-fx-stroke: White;
-	-fx-font: 23px "Helvetica Bold";
+	-fx-font-size: 24px;
   -fx-font-weight: bold;
+	-fx-text-fill: White;
 	-fx-padding: 0 5 10 5;
 }
 
 .headingLevel2 {
-	-fx-text-fill: #4c5e70;
-	-fx-stroke-width: 10;
-	-fx-stroke: #4c5e70;
-	-fx-font: 23px "Helvetica Bold";
   -fx-font-weight: bold;
+	-fx-text-fill: #4c5e70;
+	-fx-font-size: 24px;
 	-fx-padding: 10 5 10 5;
 }
 
 .headingLevel3 {
-	-fx-text-fill: #4c5e70;
-	-fx-font: 13px "Helvetica Bold";
   -fx-font-weight: bold;
+	-fx-text-fill: #4c5e70;
+	-fx-font-size: 13px;
 	-fx-padding: 5 3 5 3;
 }
 
@@ -89,13 +87,13 @@
 .mainText {
 	-fx-text-fill: #4c5e70;
 	-fx-alignment: center-left;
-	-fx-font: 13px "Helvetica";
+	-fx-font-size: 13px;
+	-fx-padding: 0 10 0 10;
 }
 
 .mainTextBox {
 	-fx-background-color: #9ba5ae;
-  -fx-width: 80%;
-  -fx-padding: 25 10 35 10;
+  -fx-padding: 25 10 25 10;
 	-fx-alignment: center-left;
 	-fx-background-radius: 7.0;
 	-fx-background-insets: 0 0 20 0;
@@ -104,19 +102,20 @@
 .mainTextBoxText {
 	-fx-text-fill: #4c5e70;
 	-fx-alignment: center-left;
-	-fx-font: 11px "Helvetica";
+	-fx-font-size: 13px;
+	-fx-padding: 0 10 0 7;
 }
 
 .hintText {
 	-fx-text-fill: #4c5e70;
 	-fx-alignment: center-left;
-	-fx-font: 13px "Helvetica";
+	-fx-font-size: 13px;
 }
 
 .errorText {
 	-fx-text-fill: #638a4b;
 	-fx-alignment: center-left;
-	-fx-font: 13px "Arial Bold";
+	-fx-font-size: 13px;
 }
 
 .Icon {
@@ -129,15 +128,7 @@
 	-fx-padding: 25 25 25 25;
 }
 
-#sidebar-hints {
-	-fx-background-color: #6a6a6a;
-	-fx-border: none;
-  -fx-width: 100%;
-  -fx-padding: 10 10 10 10;
-	-fx-alignment: center-left;
-	-fx-background-radius: 7.0;
-	-fx-background-insets: 0 0 20 0;
-}
+
 
 .sidebar {
 	-fx-background-color: #6a6a6a;
@@ -146,8 +137,20 @@
   -fx-padding: 10 10 10 10;
 	-fx-alignment: center-left;
 	-fx-background-radius: 7.0;
-	-fx-background-insets: 0 0 20 0;
 }
+
+.sidebarText {
+	-fx-text-fill: White;
+	-fx-font-size: 11px;
+  -fx-font-weight: bold;
+}
+
+.sidebarTextHeading1 {
+	-fx-text-fill: White;
+  -fx-font-weight: bold;
+	-fx-font-size: 13px;
+}
+
 
 .wv-sidebar-hint {
 	background-color: #e6e7e9;
@@ -209,7 +212,7 @@
 		-fx-border-radius: 5;
 		-fx-text-fill: White;
 		-fx-alignment: center;
-		-fx-font: 15px "Helvetica";
+		-fx-font-size: 15px;
 		-fx-padding: 3 5 3 5;
 }
 
@@ -239,7 +242,7 @@
 
 .current-step .TopBarStepNumber {
 	-fx-text-fill: White;
-	-fx-font: 27px "Helvetica";
+	-fx-font-size: 27px;
   -fx-font-weight: bold;
 }
 
@@ -251,7 +254,7 @@
 
 .TopBarStepNumber {
 	-fx-text-fill: #707e87;
-	-fx-font: 27px "Helvetica";
+	-fx-font-size: 27px;
 	-fx-padding: 0 5 0 3;
   -fx-font-weight: bold;
 }
@@ -259,26 +262,26 @@
 .TopBarStepName {
 	-fx-text-fill: #707e87;
 	-fx-alignment: center-left;
-	-fx-font: 15px "Helvetica";
+	-fx-font-size: 15px;
   -fx-font-weight: bold;
 }
 
 .TopBarArrow {
 	-fx-text-fill: #707e87;
   -fx-padding: 4 4 4 4;
-	-fx-font: 26px "Helvetica";
+	-fx-font-size: 26px;
   -fx-font-weight: bold;
 }
 
 #contacts-table {
 	-fx-table-cell-border-color: #e6e7e9;
-	-fx-font: 13px "Helvetica";
+	-fx-font-size: 13px;
 	-fx-text-fill: #4c5e70;
 }
 
 
 .radioButtonText {
-	-fx-font: 13px "Helvetica";
+	-fx-font-size: 13px;
 	-fx-text-fill: #4c5e70;
 }
 
@@ -287,7 +290,7 @@
         #797769,
        linear-gradient(#35536b, #597489);
         }
-       
+
 .choice-box .label {
-     -fx-text-fill: white; 
-}       
+     -fx-text-fill: white;
+}
