@@ -53,6 +53,7 @@ public class FxSwitchButton extends Label
 	        switchButton.setGraphicTextGap(0.2);
 	        setGraphic(switchButton);
 	        switchedOn.addListener(new ButtonPressedChangeListener());
+	        displayOffPosition();
 	    }
 
 	    public SimpleBooleanProperty switchOnProperty() 
@@ -94,21 +95,27 @@ public class FxSwitchButton extends Label
 		public void changed(ObservableValue<? extends Boolean> oldValue, Boolean currentValue, Boolean newValue)
 		{
 		    if (newValue)
-		    {
-		        setText(" ON");
-		        setStyle("-fx-background-color: green;-fx-text-fill:darkgray;  -fx-background-radius: 10;");
-		        setContentDisplay(ContentDisplay.RIGHT);
-		    }
+		        displayOnPosition();
 		    else
-		    {
-		        InnerShadow shadow = new InnerShadow();
-		        setEffect(shadow);
-		        setText("      ");
-		        setStyle("-fx-background-color: #e6e7e9;-fx-text-fill:darkgray; -fx-background-radius: 10;");
-		        setContentDisplay(ContentDisplay.LEFT);
-		    }
+		        displayOffPosition();
 		}
 	}
+
+	protected void displayOnPosition()
+	{
+		setText(" ON");
+		setStyle("-fx-background-color: green;-fx-text-fill:darkgray;  -fx-background-radius: 10;");
+		setContentDisplay(ContentDisplay.RIGHT);
+	}
+
+	protected void displayOffPosition()
+	{
+		InnerShadow shadow = new InnerShadow();
+		setEffect(shadow);
+		setText("      ");
+		setStyle("-fx-background-color: #e6e7e9;-fx-text-fill:darkgray; -fx-background-radius: 10;");
+		setContentDisplay(ContentDisplay.LEFT);
+	}
  
-    SimpleBooleanProperty switchedOn = new SimpleBooleanProperty(true);
+    SimpleBooleanProperty switchedOn = new SimpleBooleanProperty(false);
 }
