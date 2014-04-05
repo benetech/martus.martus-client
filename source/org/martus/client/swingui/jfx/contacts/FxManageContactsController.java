@@ -53,7 +53,7 @@ public class FxManageContactsController extends FxWizardAddContactsController
 		sendToByDefaultColumn.setVisible(true);
 		MartusLocalization localization = getLocalization();
 		fxAddManageContactLabel.setText(localization.getFieldLabel("ManageContacts"));
-		contactsOverviewLabel.setText(localization.getFieldLabel("ManageContactsOverview"));
+//		contactsOverviewLabel.setText(localization.getFieldLabel("ManageContactsOverview"));
 		showOldPublicCodeDuringVerification();
 		addContactButton.setText(localization.getButtonLabel("AddContactFromServer"));
 	}
@@ -84,5 +84,12 @@ public class FxManageContactsController extends FxWizardAddContactsController
 				showNotifyDialog(getWizardStage(), "PublicInfoFileError");
 			} 
 	}
+	
+	@Override
+	public String getFxmlLocation()
+	{
+		return "contacts/ManageContacts.fxml";
+	}
+	
 	private static final int MAX_WIDTH_CONTACTS_TABLE = 960;
 }
