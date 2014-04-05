@@ -1551,7 +1551,6 @@ public class EnglishStrings
 "field:RemoveContactLabel=The following contact will be removed.\n\nName: #Name#\nPublic Code: #PublicCode#.\n\nAre you sure you want to do this?",
 
 "field:ManageContacts=Manage Contacts",
-"field:ManageContactsOverview=To send information through Martus to your contacts, you need their public key. You can pull their public keys off of the Martus server using their 7 digit access token. You can verify that you have pulled the correct key, by using their key's public code.  Ask your contacts for the access token, and public code to add your contacts here.",
 
 "filed:AllFiles=All Files",
 "field:BulletinViewHeading=Martus Bulletin",
