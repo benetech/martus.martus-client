@@ -8,7 +8,7 @@
   <children>
 	<BorderPane>
 		<top>
-			<VBox styleClass="mainTextBox">
+			<VBox styleClass="mainTextBox" prefWidth="635" maxWidth="635">
 				<Label styleClass="headingLevel1" text="Server Setup" />
 				<Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="Connect to the Martus server to:" />
 				<Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="- Backup your documents on the Martus server in case your computer is lost or stolen" />
@@ -17,10 +17,10 @@
 			</VBox>
 		</top>
 		<center>
-			<GridPane>
+			<GridPane prefWidth="635">
 			 	<columnConstraints>
-				   	<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-				   	<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+				   	<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="400.0" />
+				   	<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
 			 	</columnConstraints>
 			 	<rowConstraints>
 				  	<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -28,9 +28,11 @@
 				   	<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 			  	</rowConstraints>
 				<children>
-					<Label styleClass="mainText" text="No thanks. I'll complete this step later." />
-					<Button fx:id="laterButton" mnemonicParsing="false" onAction="#setupServerLater" text="Set up server later" GridPane.rowIndex="1" />
-					<Button styleClass="button_guided_action" fx:id="defaultServerButton" mnemonicParsing="false" onAction="#useDefaultServer" text="Use default server" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+					<VBox maxWidth="220" minHeight="100" prefHeight="100">
+					</VBox>
+					<Label maxWidth="220" wrapText="true" styleClass="mainText" text="No thanks. I'll complete this step later." />
+					<Button styleClass="button_not_main_action" fx:id="laterButton" mnemonicParsing="false" onAction="#setupServerLater" text="Set up server later" GridPane.rowIndex="1" />
+					<Button fx:id="defaultServerButton" mnemonicParsing="false" onAction="#useDefaultServer" text="Use default server" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 					<Hyperlink fx:id="advancedHyperlink" onAction="#advancedServerSettings" text="Advanced server settings" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 				</children>
 			</GridPane>

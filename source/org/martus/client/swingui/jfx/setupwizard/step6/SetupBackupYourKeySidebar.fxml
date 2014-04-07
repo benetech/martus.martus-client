@@ -4,7 +4,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefWidth="235">
-	<Label maxWidth="235"  styleClass="errorText" wrapText="true" text="Be sure to save a copy of key to a secure location, that is separate from the computer you currently have Martus installed on, so you have it in case of an emergency. " />
-	<Label maxWidth="235"  styleClass="errorText" wrapText="true" text="Martus offers another method of backup: 5-key backup. If you forget your username or password, there is no way for you to access the forms you have created or any of the data on your computer unless you have performed a multi-file key backup. You will be prompted later to create a 5 key backup. It is strongly encouraged that you do so." />
+<VBox styleClass="outerSidebar" prefWidth="300.0" maxWidth="300">
+<VBox  styleClass="sidebar" prefWidth="200.0" maxWidth="200">
+	<Label styleClass="sidebarText" wrapText="true" text="Be sure to save a copy of key to a secure location, that is separate from the computer you currently have Martus installed on, so you have it in case of an emergency. " />
+	<Label />
+	<Label styleClass="sidebarText" wrapText="true" text="Martus offers another method of backup: 5-key backup. If you forget your username or password, there is no way for you to access the forms you have created or any of the data on your computer unless you have performed a multi-file key backup. You will be prompted later to create a 5 key backup. It is strongly encouraged that you do so." />
+</VBox>
 </VBox>
