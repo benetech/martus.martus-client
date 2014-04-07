@@ -215,14 +215,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				"Please contact info@martus.org with any feedback or questions."}, 
 				new String[] {"OK"});
 		
-		final String javaVersion = System.getProperty("java.version");
-		final String maximumJavaVersion = "1.7.9";
-		if(javaVersion.compareTo(maximumJavaVersion) >= 0)
-		{
-			displayIncorrectVersionJava("8", "7");
-			System.exit(2);
-		}
-		
 		File timeoutDebug = new File(getApp().getMartusDataRootDirectory(), "timeout.1min");
 		if(timeoutDebug.exists())
 		{
