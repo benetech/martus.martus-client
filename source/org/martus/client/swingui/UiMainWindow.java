@@ -258,21 +258,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		boolean foundBcJce = (foundAt >= 0);
 		MartusLogger.log("warnIfCryptoJarsNotLoaded Cipher: " + urlString);
 
-		if(Version.isRunningUnderOpenJDK())
+		if(foundBcJce)
 		{
-			if(foundBcJce)
-			{
-				String hintsToSolve = "Make sure Xbootclasspath does not contain bc-jce.jar";
-				JOptionPane.showMessageDialog(null, "When running under OpenJDK, bc-jce.jar cannot be used\n\n" + hintsToSolve);
-			}
-		}
-		else
-		{
-			if(!foundBcJce)
-			{
-				String hintsToSolve = "Xbootclasspath might be incorrect; bc-jce.jar might be missing from Martus/lib/ext";
-				JOptionPane.showMessageDialog(null, "Didn't load bc-jce.jar\n\n" + hintsToSolve);
-			}
+			String hintsToSolve = "Make sure Xbootclasspath does not contain bc-jce.jar";
+			JOptionPane.showMessageDialog(null, "When running under OpenJDK, bc-jce.jar cannot be used\n\n" + hintsToSolve);
 		}
 		
 		try
