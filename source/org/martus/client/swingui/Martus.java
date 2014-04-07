@@ -28,6 +28,7 @@ package org.martus.client.swingui;
 
 import java.awt.Toolkit;
 import java.io.File;
+import java.lang.reflect.Field;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
@@ -136,6 +137,7 @@ public class Martus
 		
 		try
 		{
+			disableCryptoRestrictions();
 			if(Utilities.isMSWindows())
 				UIManager.put("Application.useSystemFontSettings", new Boolean(false));
 
@@ -172,6 +174,29 @@ public class Martus
 		}
 
     }
+
+	private static void disableCryptoRestrictions() throws Exception
+	{
+		Field gate = Class.forName("javax.crypto.JceSecurity").getDeclaredField("isRestricted");
+		gate.setAccessible(true);
+		gate.setBoolean(null, false);
+		
+		// NOTE: The following was mentioned in a web article, 
+		// but it's not clear if/why it is needed
+		// http://stackoverflow.com/questions/14156522/using-encryption-that-would-need-java-policy-files-in-openjre
+//		Field allPerm = Class.forName("javax.crypto.CryptoAllPermission").getDeclaredField("INSTANCE");
+//		allPerm.setAccessible(true);
+//		Object accessAllAreasCard = allPerm.get(null);
+//		final Constructor<?> constructor = Class.forName("javax.crypto.CryptoPermissions").getDeclaredConstructor();
+//		constructor.setAccessible(true);
+//		Object coll = constructor.newInstance();
+//		Method addPerm = Class.forName("javax.crypto.CryptoPermissions").getDeclaredMethod("add", java.security.Permission.class);
+//		addPerm.setAccessible(true);
+//		addPerm.invoke(coll, accessAllAreasCard);
+//		Field defaultPolicy = Class.forName("javax.crypto.JceSecurity").getDeclaredField("defaultPolicy");
+//		defaultPolicy.setAccessible(true);
+//		defaultPolicy.set(null, coll);
+	}
 
 	private static int findOption(Vector options, String optionText)
 	{
