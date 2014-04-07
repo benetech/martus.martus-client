@@ -4,7 +4,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefWidth="235">
-	<Label styleClass="errorText" maxWidth="235" wrapText="true" text="You can switch form templates later inside of Martus, if you need one different from what you select here." />
-	<Label styleClass="errorText" maxWidth="235" wrapText="true" text="Please note, you can change templates, but you will not be able to import templates from the server, outside of the account creation process at this time." />
+<VBox styleClass="outerSidebar" prefWidth="300.0" maxWidth="300">
+<VBox  styleClass="sidebar" prefWidth="200.0" maxWidth="200">
+	<Label styleClass="sidebarText" wrapText="true" text="You can switch form templates later inside of Martus, if you need one different from what you select here." />
+	<Label />
+	<Label styleClass="sidebarText" wrapText="true" text="Note: you can change templates, but you will not be able to import templates from the server, outside of the account creation process at this time." />
+</VBox>
 </VBox>

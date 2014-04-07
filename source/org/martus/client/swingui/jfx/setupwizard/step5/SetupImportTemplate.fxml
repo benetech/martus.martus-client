@@ -39,8 +39,8 @@
   <top>
     <VBox prefWidth="600.0" styleClass="mainTextBox">
       <children>
-        <Label styleClass="headingLevel1" />
-        <Label fx:id="templatesOverviewLabel" prefHeight="100.0" styleClass="mainText" text="Martus allows you to create and share custom forms. Get started by selecting a form template. Martus comes with 5 generic templates. You can also download a custom template from one of your current contacts or a new contact." wrapText="true" />
+        <Label styleClass="headingLevel1" text="Import Form Templates" />
+        <Label fx:id="templatesOverviewLabel" styleClass="mainText" text="Martus allows you to create and share custom forms. Get started by selecting a form template. Martus comes with 5 generic templates. You can also download a custom template from one of your current contacts or a new contact." wrapText="true" />
       </children>
     </VBox>
   </top>
