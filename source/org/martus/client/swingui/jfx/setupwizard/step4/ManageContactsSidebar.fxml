@@ -4,9 +4,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="304.0" prefWidth="235.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<VBox styleClass="outerSidebar" prefWidth="300.0" maxWidth="300">
+<VBox  styleClass="sidebar" prefWidth="200.0" maxWidth="200">
   <Label maxWidth="235.0" styleClass="errorText" text="If someone wishes to send you information, provide them with your access code and public code." wrapText="true" />
   <Label maxWidth="235.0" styleClass="errorText" text="Be sure to securely communicate your access token and public code. Use OTR chat, encrypted email, face-to-face, or other communication channels you feel safe about." wrapText="true" />
   <Label prefHeight="39.0" prefWidth="235.0" styleClass="errorText" text="Get your 7-digit access token and public code to share with others." wrapText="true" />
   <Hyperlink id="" onAction="#onGetToken" prefHeight="23.0" prefWidth="235.0" styleClass="errorText" text="Your Token and Code" wrapText="true" />
+</VBox>
 </VBox>
