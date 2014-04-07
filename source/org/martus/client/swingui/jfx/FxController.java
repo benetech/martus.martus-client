@@ -306,6 +306,7 @@ abstract public class FxController implements Initializable
 		popupStage.setTitle(controller.getDialogTitle());
 		popupStage.initModality(Modality.APPLICATION_MODAL);
 		FXMLLoader fl = new FXMLLoader();
+		fl.setResources(new MartusResourceBundle(getLocalization()));
 		fl.setController(controller);
 		fl.setLocation(FxInSwingDialogStage.class.getResource(controller.getFxmlLocation()));
 		fl.load();
