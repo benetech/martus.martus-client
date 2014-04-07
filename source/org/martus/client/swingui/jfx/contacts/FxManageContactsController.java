@@ -51,11 +51,7 @@ public class FxManageContactsController extends FxWizardAddContactsController
 		contactsVbox.setMaxWidth(MAX_WIDTH_CONTACTS_TABLE);
 
 		sendToByDefaultColumn.setVisible(true);
-		MartusLocalization localization = getLocalization();
-		fxAddManageContactLabel.setText(localization.getFieldLabel("ManageContacts"));
-//		contactsOverviewLabel.setText(localization.getFieldLabel("ManageContactsOverview"));
 		showOldPublicCodeDuringVerification();
-		addContactButton.setText(localization.getButtonLabel("AddContactFromServer"));
 	}
 
 	public void importContactFromFile()
