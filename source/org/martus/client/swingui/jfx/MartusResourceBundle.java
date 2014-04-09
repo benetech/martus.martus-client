@@ -47,12 +47,12 @@ public class MartusResourceBundle extends ResourceBundle
 	@Override
 	protected Object handleGetObject(String key)
 	{
-		String[] controlWithKey = key.split("\\.");
-		String control = controlWithKey[0];
+		String[] prefixAndKey = key.split("\\.");
+		String control = prefixAndKey[0];
 		if(control.equals(BUTTON_CONTROL))
-			return localization.getButtonLabel(controlWithKey[1]);
+			return localization.getButtonLabel(prefixAndKey[1]);
 		if(control.equals(TITLE_CONTROL))
-			return localization.getWindowTitle(controlWithKey[1]);
+			return localization.getWindowTitle(prefixAndKey[1]);
 		return localization.getFieldLabel(key);
 	}
 
