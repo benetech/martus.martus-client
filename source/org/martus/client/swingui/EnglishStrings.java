@@ -1673,8 +1673,8 @@ public class EnglishStrings
 
 "menu:RetrieveHQSealedBulletins=Retrieve Sealed Bulletins from My Contacts",
 "menu:RetrieveHQDraftBulletins=Retrieve Draft Bulletins from My Contacts",
-"folder:%RetrievedFieldOfficeBulletin=Received Bulletins",
-"folder:%RetrievedFieldOfficeBulletinDraft=Received Draft Bulletins",
+"folder:%RetrievedFieldOfficeBulletin=Contacts Sealed Bulletins",
+"folder:%RetrievedFieldOfficeBulletinDraft=Contacts Draft Bulletins",
 "field:confirmCloneUnverifiedFDBulletinAsMinecause=You have chosen to modify a bulletin that was created by a contact that has not been verified, so the bulletin could contain incorrect information or potentially damaging attachments. We recommend that you verify this account before continuing (See Tools > Manage Contacts).",
 "field:confirmCloneUnverifiedFDBulletinAsMineeffect=Clicking on Yes to continue with the modify operation will create a new bulletin that contains a copy of all the same information.  You will be the official author of this new bulletin, so you will become responsible for all the content. Any private data in it will only be visible to you (and any contacts accounts you have shared this with).  The original bulletin will remain unchanged.",
 "field:RetrieveHQSealedBulletinProgress=Retrieving Sealed Bulletins from Contacts",
