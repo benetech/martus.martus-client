@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox styleClass="outerSidebar" prefWidth="300.0" maxWidth="300">
+<VBox  styleClass="sidebar" prefWidth="200.0" maxWidth="200">
+<Label styleClass="sidebarText" wrapText="true" text="The files you store on Martus server are completely encrypted using 3072-bit key encryption. This means even Martus server administrators cannot read your files." />
+</VBox>
+</VBox>
