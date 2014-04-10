@@ -10,7 +10,7 @@
   	<VBox styleClass="mainTextBox" prefWidth="635" maxWidth="635">
 			<children>
 				<Label styleClass="headingLevel1" text="Backup Your Key" />
-        <Label prefHeight="47.0" prefWidth="600.0" styleClass="mainText" text="Your encryption key was created when you created your account. You will want to back it up, to be able restore your account." wrapText="true" />
+        <Label prefWidth="600.0" styleClass="mainText" text="Your encryption key was created when you created your account. You will want to back it up, to be able restore your account." wrapText="true" />
 			</children>
 		</VBox>
  	</top>

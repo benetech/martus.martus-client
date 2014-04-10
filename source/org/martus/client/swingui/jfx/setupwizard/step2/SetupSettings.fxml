@@ -26,13 +26,13 @@
                       <Insets right="10.0" fx:id="x1" />
                     </padding>
                   </HBox>
-                  <ChoiceBox fx:id="dateFormatSequenceDropDown" GridPane.columnIndex="1" />
+                  <ChoiceBox fx:id="dateFormatSequenceDropDown" prefWidth="175.0" GridPane.columnIndex="1" />
                   <HBox alignment="CENTER_RIGHT" padding="$x1" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
                     <children>
                       <Label styleClass="headingLevel3" text="Date delimeter" />
                     </children>
                   </HBox>
-                  <ChoiceBox fx:id="dateDelimeterComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="dateDelimeterComboBox" prefWidth="175.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 </children>
                 <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="326.0" prefWidth="194.0" />
@@ -54,7 +54,7 @@
               <children>
                 <Label styleClass="headingLevel1" text="Your Tor Settings" />
                 <Label prefWidth="15.0" text="" />
-                <Hyperlink onAction="#OnLinkTorProject" prefHeight="28.0" text="torproject.org" />
+                <Hyperlink onAction="#OnLinkTorProject" prefHeight="28.0" text="torproject.org" underline="true" />
               </children>
             </HBox>
             <Label text="" />

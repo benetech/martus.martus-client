@@ -207,3 +207,8 @@
   -fx-padding: 0 4 4 4;
 	-fx-font: 38px "Helvetica";
 }
+
+
+.popupMargin {
+  -fx-padding: 25 25 25 25;
+}
