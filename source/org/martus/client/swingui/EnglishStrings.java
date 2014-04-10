@@ -345,7 +345,7 @@ public class EnglishStrings
 "field:VerifyPublicCode=Please verify the public code below against the one you received from your contact.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.",
 "field:ContactAlreadyExistsAs=This contact currently has the name: '#Name#'",
 
-"field:ShowTokenAndPublicCode=Access Token:#Token#\nPublic Code:#PublicCode#",
+"field:ShowTokenAndPublicCode=Access Token: #Token#\nPublic Code: #PublicCode#",
 "field:notifyShowTokenAndPublicCodecause=",
 "wintitle:notifyShowTokenAndPublicCode=Account Token and Public Code",
 
