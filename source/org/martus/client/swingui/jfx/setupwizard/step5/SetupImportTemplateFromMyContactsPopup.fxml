@@ -10,7 +10,7 @@
   <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="187.0" prefWidth="790.0">
     <children>
       <Label fx:id="continueLabel" styleClass="headingLevel3" text="Import from this contact" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-      <Label styleClass="headingLevel3" text="Choose a Contact" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+      <Label fx:id="chooseContactLabel" styleClass="headingLevel3" text="Choose a Contact" GridPane.columnIndex="0" GridPane.rowIndex="1" />
       <ChoiceBox fx:id="contactsChoiceBox" prefWidth="557.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Label fx:id="chooseFormTemplateLabel" styleClass="headingLevel3" text="Choose a Form" GridPane.columnIndex="0" GridPane.rowIndex="2" />
       <ChoiceBox fx:id="templatesChoiceBox" prefWidth="557.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />

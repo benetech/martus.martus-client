@@ -176,6 +176,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	{
 		continueLabel.setVisible(isVisible);
 		continueButton.setVisible(isVisible);
+		chooseContactLabel.setVisible(!isVisible);
 	}
 
 	@FXML
@@ -187,6 +188,9 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	@FXML
 	protected Label continueLabel;
 	
+	@FXML
+	protected Label chooseContactLabel;
+
 	@FXML
 	protected Button continueButton;
 	
