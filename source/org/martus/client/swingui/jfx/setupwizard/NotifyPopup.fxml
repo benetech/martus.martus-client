@@ -8,7 +8,6 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="263.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
-		<VBox styleClass="popupMargin">
     <GridPane id="fxGridPane" alignment="TOP_CENTER" layoutX="14.0" layoutY="14.0" prefHeight="235.0" prefWidth="572.0">
       <children>
         <HBox id="fxLowerHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
@@ -26,6 +25,5 @@
         <RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-		</VBox>
   </children>
 </AnchorPane>
