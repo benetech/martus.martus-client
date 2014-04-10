@@ -8,10 +8,9 @@
 <VBox minWidth="725.0" prefWidth="761.0" spacing="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
 <VBox styleClass="popupMargin">
   <children>
-	        <Label styleClass="headingLevel3" text="Public Code" />
-    <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="218.0" prefWidth="744.0">
+	<Label styleClass="headingLevel2" text="Public Code" />
+    <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="218.0" prefWidth="694.0">
       <children>
-        <Label styleClass="headingLevel2" text="Public Code:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <Label fx:id="contactPublicCode40Label" prefHeight="33.0" prefWidth="576.0" styleClass="headingLevel3" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         <Label fx:id="labelOldPublicCode" text="Public Code (old):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <Label fx:id="contactPublicCodeLabel" prefHeight="33.0" prefWidth="566.0" styleClass="headingLevel3" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -28,7 +27,7 @@
         <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <HBox prefHeight="33.0" prefWidth="744.0">
+    <HBox prefHeight="33.0" prefWidth="694.0">
       <children>
         <Button mnemonicParsing="false" onAction="#willVerifyLater" prefHeight="33.0" prefWidth="265.0" text="Will Verify Later" />
         <Label prefWidth="301.0" visible="false" />
