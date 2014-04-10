@@ -71,6 +71,7 @@ public final class FxTableCellTextFieldFactory
 				Property currentFieldProperty = textField.textProperty();
 				cellStringPropertyBoundToCurrently = FxBindingHelpers.bindToOurPropertyField(cellProperty, currentFieldProperty, cellStringPropertyBoundToCurrently);
 			}
+			textField.setMinHeight(15);
 			if(item != null && item.length() > 0)
 			{
 				textField.setStyle("-fx-background-color: #e6e7e9; -fx-text-fill: Black;");
