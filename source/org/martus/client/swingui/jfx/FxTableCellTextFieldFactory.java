@@ -50,13 +50,14 @@ public final class FxTableCellTextFieldFactory
 		public TextFieldCell() 
 		{
 			textField = new TextField();
+			textField.setStyle("-fx-background-color: #e6e7e9; -fx-text-fill: Black;");
 			setGraphic(textField);
 		}
 	   
 		@Override
 		protected void updateItem(String item, boolean empty) 
 		{
-			super.updateItem(item, empty);        
+			super.updateItem(item, empty);  
 			if(empty)
 			{
 				setContentDisplay(ContentDisplay.TEXT_ONLY);
@@ -69,6 +70,15 @@ public final class FxTableCellTextFieldFactory
 				Property cellProperty = (Property)getTableColumn().getCellObservableValue(getIndex());
 				Property currentFieldProperty = textField.textProperty();
 				cellStringPropertyBoundToCurrently = FxBindingHelpers.bindToOurPropertyField(cellProperty, currentFieldProperty, cellStringPropertyBoundToCurrently);
+			}
+			textField.setMinHeight(15);
+			if(item != null && item.length() > 0)
+			{
+				textField.setStyle("-fx-background-color: #e6e7e9; -fx-text-fill: Black;");
+			}
+			else
+			{
+				textField.setStyle("-fx-background-color: white; -fx-text-fill: Black;");
 			}
 		}
 		

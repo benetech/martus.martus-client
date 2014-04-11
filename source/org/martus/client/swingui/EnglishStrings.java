@@ -345,13 +345,13 @@ public class EnglishStrings
 "field:VerifyPublicCode=Please verify the public code below against the one you received from your contact.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.",
 "field:ContactAlreadyExistsAs=This contact currently has the name: '#Name#'",
 
-"field:ShowTokenAndPublicCode=Access Token:#Token#\nPublic Code:#PublicCode#",
+"field:ShowTokenAndPublicCode=Access Token: #Token#\nPublic Code: #PublicCode#",
 "field:notifyShowTokenAndPublicCodecause=",
 "wintitle:notifyShowTokenAndPublicCode=Account Token and Public Code",
 
 "field:AttemptToConnectToServer=Attempting to connect to server and checking compliance",
 "wintitle:ServerNotRespondingSaveConfiguration=Server Not Available",
-"field:ServerNotRespondingSaveConfiguration=A connection to the server was not made. This could be because the server is not available, you have entered an incorrect IP or Public Code, or access is blocked. Would you like to save this server configuration for later?",
+"field:ServerNotRespondingSaveConfiguration=A connection to the server was not made. This could be because the server is not available, you have entered an incorrect IP or Public Code, the server is blocked, or your Internet connection is down. Would you like to save this server configuration for later?",
 
 "wintitle:ExitWizard=Exit Martus Wizard",
 "field:ExitWizard=Your changes will be lost and Martus will exit, are you sure you want to do this?",
@@ -1707,15 +1707,12 @@ public class EnglishStrings
 "button:VerifyContactLater=Will Verify Later",
 "button:VerifyContactNow=Verify!",
 
-"field:HelpForTokenAndPublicCode=If someone wishes to send you information, provide them with your access code and public code.",
-"field:WarningOnTokenAndPublicCodeSecurity=Be sure to securely communicate your access token and public code. Use OTR chat, encrypted email, face-to-face, or other communication channels you feel safe about.",
-"field:ObtainTokenFromServer=Get your 7-digit access token and public code to share with others.",
-"field:LinkToTokenAndPublicCode=Your Token and Code",
+"field:HelpForTokenAndPublicCode=If someone wishes to send you information, provide them with your access token and public code.",
+"field:WarningOnTokenAndPublicCodeSecurity=Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information.",
+"field:LinkToTokenAndPublicCode=Get your Token and Code",
 
 "field:ManageContactsHeading=Contacts",
 "field:ManageContactsDescription=To send information through Martus to your contacts, you need their public key. You can pull their public keys off of the Martus server using their 7 digit access token. You can verify that you have pulled the correct key, by using their key's public code.  Ask your contacts for the access token, and public code to add your contacts here. If you do not have this information now, you will be able to add contacts later from the Martus desktop client.",
-"field:=",
-"field:=",
 
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Saved Bulletins",

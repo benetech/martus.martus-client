@@ -5,16 +5,17 @@
 <?import javafx.scene.layout.*?>
 
 <VBox prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
-  <Label styleClass="headingLevel3" text="Import from my contacts" />
+<VBox styleClass="popupMargin">
+  <Label styleClass="headingLevel2" text="Import from my contacts" />
   <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="187.0" prefWidth="790.0">
     <children>
       <Label fx:id="continueLabel" styleClass="headingLevel3" text="Import from this contact" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-      <Label styleClass="headingLevel3" text="Choose a Contact" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+      <Label fx:id="chooseContactLabel" styleClass="headingLevel3" text="Choose a Contact" GridPane.columnIndex="0" GridPane.rowIndex="1" />
       <ChoiceBox fx:id="contactsChoiceBox" prefWidth="557.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Label fx:id="chooseFormTemplateLabel" styleClass="headingLevel3" text="Choose a Form" GridPane.columnIndex="0" GridPane.rowIndex="2" />
       <ChoiceBox fx:id="templatesChoiceBox" prefWidth="557.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Label fx:id="noTemplatesAvailableLabel" styleClass="headingLevel3" text="No Templates Available" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Button mnemonicParsing="false" onAction="#onCancel" text="X Cancel" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+      <Button mnemonicParsing="false" onAction="#onCancel" text="Cancel" GridPane.columnIndex="0" GridPane.rowIndex="3" />
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <children>
           <Button fx:id="continueButton" mnemonicParsing="false" onAction="#onContinue" text="Continue" textAlignment="LEFT" />
@@ -32,4 +33,5 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
   </GridPane>
+</VBox>
 </VBox>

@@ -4,15 +4,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="181.0" prefWidth="608.999977929685" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
-  <children>
-    <Label styleClass="headingLevel3" text="Import from a new contact" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-    <Label styleClass="headingLevel3" text="Enter Access Token" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+<VBox>
+<VBox styleClass="popupMargin">
+<children>
+    <Label styleClass="headingLevel2" text="Import from a new contact" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+	<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="181.0" prefWidth="608.999977929685" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+	  <children>
+    		<Label styleClass="headingLevel3" text="Enter Access Token" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="1" />
     <TextField fx:id="accessTokenTextField" promptText="Access Token" GridPane.columnIndex="1" GridPane.rowIndex="1" />
     <Label fx:id="formsFromUserMessageLabel" GridPane.columnIndex="0" GridPane.rowIndex="2" />
     <ChoiceBox fx:id="formTemplateChoiceBox" prefWidth="289.0000999999975" GridPane.columnIndex="1" GridPane.rowIndex="2" />
     <Label fx:id="noTemplatesAvailableLabel" styleClass="headingLevel3" text="No Templates Available" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-    <Button mnemonicParsing="false" onAction="#onCancel" text="X Cancel" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <Button mnemonicParsing="false" onAction="#onCancel" text="Cancel" GridPane.columnIndex="0" GridPane.rowIndex="3" />
     <Label fx:id="importFromThisConctactLabel" styleClass="headingLevel3" text="Import from this contact" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
     <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
       <children>
@@ -37,3 +40,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
 </GridPane>
+</children>
+
+</VBox>
+</VBox>

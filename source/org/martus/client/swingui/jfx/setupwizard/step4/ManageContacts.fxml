@@ -6,15 +6,17 @@
 
 <VBox prefHeight="445.0" prefWidth="860" fx:id="contactsVbox" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
+		<VBox styleClass="mainTextBox" prefWidth="655" maxWidth="655">
     <Label styleClass="headingLevel1" fx:id="fxAddManageContactLabel" text="%ManageContactsHeading" />
-  	<Label styleClass="mainTextBoxText" fx:id="contactsOverviewLabel" text="%ManageContactsDescription" wrapText="true" />
+  	<Label prefHeight="100" styleClass="mainTextBoxText" fx:id="contactsOverviewLabel" text="%ManageContactsDescription" wrapText="true" />
+    </VBox>
     <BorderPane >
       <top>
         <HBox prefHeight="53.0" >
           <children>
             <Label styleClass="headingLevel3" text="%ManageContactsAccessToken" />
             <TextField id="" fx:id="accessTokenField" promptText="%ManageContactsAccessTokenNotSet" />
-            <Separator prefWidth="38.0" />
+            <Label prefWidth="38.0" />
             <Button styleClass="button_guided_action" id="" fx:id="addContactButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addContact" prefWidth="259.0" text="%Button.ManageContactsAddContact" />
           </children>
         </HBox>

@@ -6,9 +6,8 @@
 
 <VBox styleClass="outerSidebar" prefWidth="300.0" maxWidth="300">
 <VBox  styleClass="sidebar" prefWidth="200.0" maxWidth="200">
-  <Label maxWidth="235.0" styleClass="errorText" text="%HelpForTokenAndPublicCode" wrapText="true" />
-  <Label maxWidth="235.0" styleClass="errorText" text="%WarningOnTokenAndPublicCodeSecurity" wrapText="true" />
-  <Label prefHeight="39.0" prefWidth="235.0" styleClass="errorText" text="%ObtainTokenFromServer" wrapText="true" />
-  <Hyperlink id="" onAction="#onGetToken" prefHeight="23.0" prefWidth="235.0" styleClass="errorText" text="%LinkToTokenAndPublicCode" wrapText="true" />
+  <Label styleClass="sidebarText" text="%HelpForTokenAndPublicCode" wrapText="true" />
+  <Label styleClass="sidebarText" text="%WarningOnTokenAndPublicCodeSecurity" wrapText="true" />
+  <Hyperlink id="" onAction="#onGetToken" prefHeight="23.0" styleClass="sidebarText" text="%LinkToTokenAndPublicCode" wrapText="true" underline="true" />
 </VBox>
 </VBox>
