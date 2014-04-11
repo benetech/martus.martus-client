@@ -48,10 +48,10 @@ public class MartusResourceBundle extends ResourceBundle
 	protected Object handleGetObject(String key)
 	{
 		String[] prefixAndKey = key.split("\\.");
-		String control = prefixAndKey[0];
-		if(control.equals(BUTTON_CONTROL))
+		String prefix = prefixAndKey[0];
+		if(prefix.equals(BUTTON_CONTROL))
 			return localization.getButtonLabel(prefixAndKey[1]);
-		if(control.equals(TITLE_CONTROL))
+		if(prefix.equals(TITLE_CONTROL))
 			return localization.getWindowTitle(prefixAndKey[1]);
 		return localization.getFieldLabel(key);
 	}
