@@ -25,16 +25,44 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import java.net.URL;
+import java.util.Enumeration;
+import java.util.ResourceBundle;
 
-import javafx.fxml.FXMLLoader;
+import org.martus.client.swingui.MartusLocalization;
 
-public class FxmlLoaderWithController extends FXMLLoader
+
+public class MartusResourceBundle extends ResourceBundle
 {
-	public FxmlLoaderWithController(FxController controllerToUse, URL resourceAsUrl)
+	public MartusResourceBundle(MartusLocalization localizationToUse)
 	{
-		super(resourceAsUrl, new MartusResourceBundle(controllerToUse.getLocalization()));
-		
-		setController(controllerToUse);
+		localization = localizationToUse;
 	}
+	
+	@Override
+	public boolean containsKey(String key)
+	{
+		return true;
+	}
+	
+	@Override
+	protected Object handleGetObject(String key)
+	{
+		String[] prefixAndKey = key.split("\\.");
+		String prefix = prefixAndKey[0];
+		if(prefix.equals(BUTTON_CONTROL))
+			return localization.getButtonLabel(prefixAndKey[1]);
+		if(prefix.equals(TITLE_CONTROL))
+			return localization.getWindowTitle(prefixAndKey[1]);
+		return localization.getFieldLabel(key);
+	}
+
+	@Override
+	public Enumeration<String> getKeys()
+	{
+		return null;
+	}
+
+	private MartusLocalization localization;
+	private static final String BUTTON_CONTROL = "Button";
+	private static final String TITLE_CONTROL = "Title";
 }
