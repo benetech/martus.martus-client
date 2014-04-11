@@ -6,18 +6,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="contactsVbox" prefHeight="451.0" prefWidth="860.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<VBox fx:id="contactsVbox" prefWidth="860.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
+		<VBox styleClass="mainTextBox">
     <Label fx:id="fxAddManageContactLabel" styleClass="headingLevel1" text="Contacts">
-      <font>
-        <Font name="System Bold" size="17.0" />
-      </font>
     </Label>
-    <Label text="" />
-    <Label id="contactsOverviewLabel" prefHeight="53.0" prefWidth="840.0" styleClass="mainTextBoxText" text="To send information through Martus to your contacts, you can pull their public key off of the Martus server using their access token. You can verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add your contacts here." wrapText="true" />
-    <Label prefHeight="53.0" prefWidth="840.0" text="If someone wishes to send you information through Martus, provide them with your access token and public code. Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information." wrapText="true" />
-    <Label text="You can find your access token and public code to share with others under Help &gt; View My Account Details." />
-    <Label text="" />
+    <Label id="contactsOverviewLabel" prefWidth="840.0" styleClass="mainTextBoxText" text="To send information through Martus to your contacts, you can pull their public key off of the Martus server using their access token. You can verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add your contacts here." wrapText="true" />
+</VBox>
+    <Label prefWidth="840.0" styleClass="mainText" text="If someone wishes to send you information through Martus, provide them with your access token and public code. Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information." wrapText="true" />
+	 <Label />
+    <Label styleClass="mainText"  text="You can find your access token and public code to share with others under Help &gt; View My Account Details." />
+	 <Label />
     <BorderPane>
       <center>
         <VBox BorderPane.alignment="CENTER">
@@ -39,8 +38,8 @@
           <children>
             <Label styleClass="headingLevel3" text="Access Token:" />
             <TextField id="" fx:id="accessTokenField" promptText="Access Token" />
-            <Separator prefWidth="38.0" visible="false" />
-            <Button id="" fx:id="addContactButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addContact" prefWidth="259.0" styleClass="button_guided_action" text="Add Contact..." />
+            <Label prefWidth="38.0" visible="false" />
+            <Button id="" fx:id="addContactButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addContact" prefWidth="259.0" styleClass="button_guided_action" text="Add Contact" />
           </children>
         </HBox>
       </top>

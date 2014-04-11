@@ -21,7 +21,8 @@
   			<Label text="" />
     		<Button mnemonicParsing="false" onAction="#createSingelEncryptedFile" text="Create Single, Encrypted File" />
     		<Label id="backupMessageLabel" minHeight="54.0" prefHeight="54.0" prefWidth="600.0" styleClass="mainText" text="Note: this backup method still requires remembering your username and password to restore your account." wrapText="true" />
-    		<Label fx:id="backupMessageLabel" prefHeight="68.0" prefWidth="586.0" text="" wrapText="true" />
+				<Label />
+    		<Label styleClass="hintText" fx:id="backupMessageLabel" prefHeight="100" prefWidth="600.0" text="" wrapText="true" />
 			</children>
 		</VBox>
   </center>

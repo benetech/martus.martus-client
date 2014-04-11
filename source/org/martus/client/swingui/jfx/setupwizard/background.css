@@ -67,7 +67,6 @@
 .button_guided_action:pressed {
 	-fx-background-color:
         linear-gradient(DarkGreen 0%, Green  50%, Green 51%, DarkGreen 100%);
-	-fx-effect: innershadow( three-pass-box , Black , 2 , 2.0 , 2, 2 );
 	-fx-font-weight: bold;
 	-fx-border-radius: 5;
 	-fx-text-fill: White;
@@ -110,6 +109,13 @@
 	-fx-alignment: center-left;
 	-fx-font-size: 13px;
 	-fx-font-weight: bold;
+	-fx-padding: 0 10 0 10;
+}
+
+.mainTextNotBold {
+	-fx-text-fill: #4c5e70;
+	-fx-alignment: center-left;
+	-fx-font-size: 13px;
 	-fx-padding: 0 10 0 10;
 }
 
@@ -258,7 +264,6 @@
 }
 
 
-
 .step {
 	-fx-fill-height: true;
 	-fx-alignment: center-left;
@@ -306,6 +311,7 @@
 .radioButtonText {
 	-fx-font-size: 13px;
 	-fx-text-fill: #4c5e70;
+  -fx-padding: 0 0 0 25;
 }
 
 .choice-box {

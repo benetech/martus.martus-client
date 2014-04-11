@@ -6,7 +6,7 @@
 
 <VBox styleClass="outerSidebar" prefWidth="300.0" maxWidth="300">
 <VBox  styleClass="sidebar" prefWidth="200.0" maxWidth="200">
-  <Label styleClass="sidebarText" text="If someone wishes to send you information, provide them with your access code and public code." wrapText="true" />
+  <Label styleClass="sidebarText" text="If someone wishes to send you information, provide them with your access token and public code." wrapText="true" />
 <Label />
   <Label styleClass="sidebarText" text="Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information." wrapText="true" />
 <Label />
