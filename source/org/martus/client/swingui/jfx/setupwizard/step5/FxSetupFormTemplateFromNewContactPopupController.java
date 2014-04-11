@@ -160,7 +160,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 	@Override
 	public String getLabel()
 	{
-		return "Import from New Contact";
+		return getLocalization().getFieldLabel("DownloadTemplateFromMartusUser");
 	}
 	
 	protected class FieldTemplateChoiceChangeHandler implements ChangeListener<CustomFieldTemplate>

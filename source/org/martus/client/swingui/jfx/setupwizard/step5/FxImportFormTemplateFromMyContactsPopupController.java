@@ -118,7 +118,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	@Override
 	public String getLabel()
 	{
-		return "Import from My Contacts";
+		return getLocalization().getFieldLabel("DownloadTemplateFromMyContacts");
 	}
 
 	@Override
