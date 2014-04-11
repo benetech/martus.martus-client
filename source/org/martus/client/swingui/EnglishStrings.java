@@ -1687,7 +1687,32 @@ public class EnglishStrings
 "field:statusNewFieldOfficeBulletins=New bulletins found on server",
 "field:preferencesCheckFieldOfficeBulletins=Automatically check for new bulletins from Contacts",
 
+"field:ManageContacts=Manage Contacts",
+"field:ManageContactsOverview1=To send information through Martus to your contacts, you can pull their public key off of the Martus server using their access token. You can verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add your contacts here.",
+"field:ManageContactsOverview2=If someone wishes to send you information through Martus, provide them with your access token and public code. Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information.",
+"field:ManageContactsOverview3=You can find your access token and public code to share with others under Help &gt; View My Account Details.",
+"button:ManageContactsName=Contact Name",
+"button:ManageContactsSendToByDefault=Send To by Default",
+"button:ManageContactsPublicCode=Public Code",
+"button:ManageContactsVerified=Verified",
+"button:ManageContactsRemove=Remove",
+"field:ManageContactsAccessToken=Access Token:",
+"field:ManageContactsAccessTokenNotSet=Access Token",
+"button:ManageContactsAddContact=Add Contact...",
+"button:ManageContactsImportFromFile=Import Contact From File...",
+"button:ManageContactsSaveClose=Save and Close",
 
+"field:VerifyContactPublicCode=Public Code:",
+"field:VerifyContactPublicCodeOld=Public Code:",
+"button:VerifyContactLater=Will Verify Later",
+"button:VerifyContactNow=Verify!",
+
+"field:HelpForTokenAndPublicCode=If someone wishes to send you information, provide them with your access token and public code.",
+"field:WarningOnTokenAndPublicCodeSecurity=Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information.",
+"field:LinkToTokenAndPublicCode=Get your Token and Code",
+
+"field:ManageContactsHeading=Contacts",
+"field:ManageContactsDescription=To send information through Martus to your contacts, you need their public key. You can pull their public keys off of the Martus server using their 7 digit access token. You can verify that you have pulled the correct key, by using their key's public code.  Ask your contacts for the access token, and public code to add your contacts here. If you do not have this information now, you will be able to add contacts later from the Martus desktop client.",
 
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Saved Bulletins",
