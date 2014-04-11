@@ -63,9 +63,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 		formTemplateChoiceBox.setConverter(new FormTemplateToStringConverter());
 		formTemplateChoiceBox.valueProperty().addListener(new FieldTemplateChoiceChangeHandler());
 		
-		importFromThisConctactLabel.setVisible(false);
 		formTemplateChoiceBox.setVisible(false);
-		formsFromUserMessageLabel.setVisible(false);
 		continueButton.setVisible(false);
 		noTemplatesAvailableLabel.setVisible(false);
 		
@@ -93,10 +91,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 				return;
 			}
 			
-			formsFromUserMessageLabel.setVisible(true);
 			noTemplatesAvailableLabel.setVisible(false);
-			String formsFromUserMessage = TokenReplacement.replaceToken("Forms from user #userAccessToken", "#userAccessToken", accessTokenTextField.getText());
-			formsFromUserMessageLabel.setText(formsFromUserMessage);
 			
 			formTemplateChoiceBox.setVisible(false);
 			ObservableList<CustomFieldTemplate> fieldTemplates = getFormTemplates(new ContactKey(contactAccountId));
@@ -127,7 +122,6 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 
 	protected void updateButtonVisibility(boolean isVisible)
 	{
-		importFromThisConctactLabel.setVisible(isVisible);
 		continueButton.setVisible(isVisible);
 	}
 
@@ -172,16 +166,10 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 			updateButtonVisibility(isVisible); 
 		}
 	}
-
-	@FXML
-	private Label formsFromUserMessageLabel;
 	
 	@FXML
 	private ChoiceBox<CustomFieldTemplate> formTemplateChoiceBox;
 	
-	
-	@FXML
-	private Label importFromThisConctactLabel;
 	
 	@FXML
 	private Button continueButton;
