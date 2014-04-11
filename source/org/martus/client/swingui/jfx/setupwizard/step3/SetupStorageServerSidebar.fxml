@@ -6,6 +6,6 @@
 
 <VBox styleClass="outerSidebar" prefWidth="300.0" maxWidth="300">
 <VBox  styleClass="sidebar" prefWidth="200.0" maxWidth="200">
-<Label styleClass="sidebarText" wrapText="true" text="The data you store on Martus servers are completely encrypted using 3072-bit encryption. This means even Martus server administrators cannot read your files." />
+<Label styleClass="sidebarText" wrapText="true" text="The data you store on Martus servers are completely encrypted using 3072-bit encryption. This means even Martus server administrators cannot read your data." />
 </VBox>
 </VBox>

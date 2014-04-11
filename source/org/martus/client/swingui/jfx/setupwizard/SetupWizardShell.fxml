@@ -84,7 +84,7 @@
                     <Image url="@../../dialogs/Martus-logo-black-text-160x72.png" />
                   </image>
 <BorderPane.margin>
-<Insets left="45.0" />
+<Insets left="30.0" />
 </BorderPane.margin>
                 </ImageView>
               </bottom>

@@ -108,8 +108,7 @@
 .mainText {
 	-fx-text-fill: #4c5e70;
 	-fx-alignment: center-left;
-	-fx-font-size: 13px;
-	-fx-font-weight: bold;
+	-fx-font-size: 12px;
 	-fx-padding: 0 10 0 10;
 }
 
@@ -325,4 +324,9 @@
 
 .pageMargin {
   -fx-padding: 25 25 25 25;
+}
+
+
+.leftMargin {
+  -fx-padding: 0 0 0 25;
 }
