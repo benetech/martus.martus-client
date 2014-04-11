@@ -57,7 +57,6 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		super.initialize(location, bundle);
 		
 		continueButton.setVisible(false);
-		continueLabel.setVisible(false);
 		noTemplatesAvailableLabel.setVisible(false);
 		
 		contactsChoiceBox.valueProperty().addListener(new ContactsChangeHandler());
@@ -174,9 +173,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 
 	protected void updateButtonVisibility(boolean isVisible)
 	{
-		continueLabel.setVisible(isVisible);
 		continueButton.setVisible(isVisible);
-		chooseContactLabel.setVisible(!isVisible);
 	}
 
 	@FXML
@@ -184,9 +181,6 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	
 	@FXML
 	protected ChoiceBox<CustomFieldTemplate> templatesChoiceBox;
-	
-	@FXML
-	protected Label continueLabel;
 	
 	@FXML
 	protected Label chooseContactLabel;
