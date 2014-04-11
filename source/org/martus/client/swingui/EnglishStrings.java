@@ -617,7 +617,9 @@ public class EnglishStrings
 "field:OrganizeReportFields=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.",
 "field:SkippingBulletinsNotOurs=NOTE: Bulletins authored by other accounts cannot be changed using this command, " +
 	"so they are not included in the list above.",
-
+"field:DownloadTemplateFromMartusUser=Download from Another Martus User",
+"field:DownloadTemplateFromMyContacts=Download from my Contacts",
+	
 "field:ContactVerifyNow=Verify Now",
 "field:ContactVerified=Verified",
 

@@ -5,21 +5,24 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.9998779296875" prefWidth="842.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="910.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
-    <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="565.0" prefWidth="828.0" styleClass="pageMargin">
+    <BorderPane layoutX="0.0" layoutY="0.0" prefWidth="910.0" styleClass="pageMargin">
       <bottom>
-        <BorderPane>
+        <BorderPane prefHeight="300" prefWidth="910.0">
           <left>
-            <Button mnemonicParsing="false" onAction="#importContactFromFile" prefHeight="35.0" prefWidth="313.0" text="%Button.ManageContactsImportFromFile" />
+          		<Label prefWidth="25.0"></Label>
           </left>
+          <center>
+		        <Button mnemonicParsing="false" onAction="#importContactFromFile" prefHeight="35.0" prefWidth="280.0" text="Import Contact From File" BorderPane.alignment="CENTER_LEFT" />
+          </center>
           <right>
             <Button id="" fx:id="closeButton" mnemonicParsing="false" onAction="#onClose" prefHeight="35.0" prefWidth="280.0" text="%Button.ManageContactsSaveClose" BorderPane.alignment="CENTER_RIGHT" />
           </right>
         </BorderPane>
       </bottom>
       <center>
-        <Pane fx:id="contentPane" maxHeight="-Infinity" prefHeight="408.0" prefWidth="828.0" />
+        <Pane fx:id="contentPane" maxHeight="-Infinity" prefHeight="408.0" prefWidth="840.0" />
       </center>
     </BorderPane>
   </children>
