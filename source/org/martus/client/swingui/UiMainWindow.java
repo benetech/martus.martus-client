@@ -136,7 +136,6 @@ import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.MiniLocalization;
-import org.martus.common.Version;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
@@ -215,14 +214,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				"Please contact info@martus.org with any feedback or questions."}, 
 				new String[] {"OK"});
 		
-		final String javaVersion = System.getProperty("java.version");
-		final String maximumJavaVersion = "1.7.9";
-		if(javaVersion.compareTo(maximumJavaVersion) >= 0)
-		{
-			displayIncorrectVersionJava("8", "7");
-			System.exit(2);
-		}
-		
 		File timeoutDebug = new File(getApp().getMartusDataRootDirectory(), "timeout.1min");
 		if(timeoutDebug.exists())
 		{
@@ -266,21 +257,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		boolean foundBcJce = (foundAt >= 0);
 		MartusLogger.log("warnIfCryptoJarsNotLoaded Cipher: " + urlString);
 
-		if(Version.isRunningUnderOpenJDK())
+		if(foundBcJce)
 		{
-			if(foundBcJce)
-			{
-				String hintsToSolve = "Make sure Xbootclasspath does not contain bc-jce.jar";
-				JOptionPane.showMessageDialog(null, "When running under OpenJDK, bc-jce.jar cannot be used\n\n" + hintsToSolve);
-			}
-		}
-		else
-		{
-			if(!foundBcJce)
-			{
-				String hintsToSolve = "Xbootclasspath might be incorrect; bc-jce.jar might be missing from Martus/lib/ext";
-				JOptionPane.showMessageDialog(null, "Didn't load bc-jce.jar\n\n" + hintsToSolve);
-			}
+			String hintsToSolve = "Make sure Xbootclasspath does not contain bc-jce.jar";
+			JOptionPane.showMessageDialog(null, "bc-jce.jar cannot be used\n\n" + hintsToSolve);
 		}
 		
 		try
