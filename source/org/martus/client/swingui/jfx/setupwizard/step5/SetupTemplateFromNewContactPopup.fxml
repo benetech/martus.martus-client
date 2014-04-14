@@ -7,7 +7,7 @@
 <VBox>
 <VBox styleClass="popupMargin">
 <children>
-    <Label styleClass="headingLevel2" text="Import from a new contact" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <Label styleClass="headingLevel2" text="Download from Another Martus User" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 	<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="181.0" prefWidth="608.999977929685" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
 	  <children>
     		<Label styleClass="headingLevel3" text="Enter Access Token" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="1" />
