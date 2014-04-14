@@ -36,13 +36,11 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-import org.martus.client.core.MartusJarVerification;
 import org.martus.clientside.ClientPortOverride;
 import org.martus.common.MartusLogger;
 import org.martus.common.VersionBuildDate;
 import org.martus.swing.UiOptionPane;
 import org.martus.swing.Utilities;
-import org.miradi.main.ClassPathHacker;
 import org.miradi.main.RuntimeJarLoader;
 
 public class Martus
@@ -196,18 +194,6 @@ public class Martus
 			return;
 		}
 		
-		try
-		{
-			@SuppressWarnings("unused")
-			javafx.scene.paint.Color c = javafx.scene.paint.Color.BLUE;
-			
-			MartusLogger.log("JavaFX already present");
-		}
-		catch(NoClassDefFoundError e)
-		{
-			addJavaFxJarToClasspath();
-		}
-
 		String jarSubdirectoryName = "ThirdParty";
 		System.out.println("Running Martus from " + martusJarDirectory);
 		File thirdPartyDirectory = new File(martusJarDirectory, jarSubdirectoryName);
@@ -215,21 +201,6 @@ public class Martus
 			RuntimeJarLoader.addJarsInSubdirectoryToClasspath(thirdPartyDirectory, getThirdPartyJarNames());
 	}
 
-	public static void addJavaFxJarToClasspath() throws Exception
-	{
-		MartusLogger.log("Adding JavaFX to classpath");
-
-		URL javaRuntimeURL = MartusJarVerification.getJarURL(String.class);
-		String urlString = javaRuntimeURL.toString();
-		String withoutJarPrefix = urlString.replace("jar:", "");
-		
-		int jarAt = withoutJarPrefix.indexOf("rt.jar");
-		String directory = withoutJarPrefix.substring(0, jarAt);
-		URL jfxURL = new URL(directory + "jfxrt.jar");
-		MartusLogger.log("Adding JavaFX jar: " + jfxURL.toExternalForm());
-		ClassPathHacker.addURL(jfxURL);
-	}
-	
 	private static String[] getThirdPartyJarNames()
 	{
 		return new String[] {
