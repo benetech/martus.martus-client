@@ -59,7 +59,7 @@ public class MartusJarVerification
 		if(foundBcJce)
 		{
 			String hintsToSolve = "Make sure Xbootclasspath does not contain bc-jce.jar";
-			throw new RuntimeException("When running under OpenJDK, bc-jce.jar cannot be used\n\n" + hintsToSolve);
+			throw new RuntimeException("bc-jce.jar cannot be used\n\n" + hintsToSolve);
 		}
 		
 		URL bcprovJarURL = getJarURL(RSAEngine.class);

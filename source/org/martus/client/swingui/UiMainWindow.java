@@ -260,7 +260,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(foundBcJce)
 		{
 			String hintsToSolve = "Make sure Xbootclasspath does not contain bc-jce.jar";
-			JOptionPane.showMessageDialog(null, "When running under OpenJDK, bc-jce.jar cannot be used\n\n" + hintsToSolve);
+			JOptionPane.showMessageDialog(null, "bc-jce.jar cannot be used\n\n" + hintsToSolve);
 		}
 		
 		try
