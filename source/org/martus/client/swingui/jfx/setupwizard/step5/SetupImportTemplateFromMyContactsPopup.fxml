@@ -6,7 +6,7 @@
 
 <VBox prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
 <VBox styleClass="popupMargin">
-  <Label styleClass="headingLevel2" text="Import from my contacts" />
+  <Label styleClass="headingLevel2" text="Download from my contacts" />
   <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="187.0" prefWidth="790.0">
     <children>
       <Label styleClass="headingLevel3" text="Choose a Contact" GridPane.columnIndex="0" GridPane.rowIndex="1" />
