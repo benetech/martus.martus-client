@@ -82,16 +82,14 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 				if(!acceptCompliance(complianceStatement))
 				{
 					ConfigInfo previousServerInfo = getApp().getConfigInfo();
-
+					String previousServerName = previousServerInfo.getServerName();
+					String previousServerKey = previousServerInfo.getServerPublicKey();
+					String previousServerCompliance = previousServerInfo.getServerCompliance();
+	
 					//TODO:The following line shouldn't be necessary but without it, the trustmanager 
 					//will reject the old server, we don't know why.
-					ClientSideNetworkGateway.buildGateway(previousServerInfo.getServerName(), previousServerInfo.getServerPublicKey(), getApp().getTransport());
-					
-					if(serverIPAddress.equals(previousServerInfo.getServerName()) &&
-					   serverPublicKey.equals(previousServerInfo.getServerPublicKey()))
-					{
-						getApp().setServerInfo("","","");
-					}
+					ClientSideNetworkGateway.buildGateway(previousServerName, previousServerKey, getApp().getTransport());
+					getApp().setServerInfo(previousServerName,previousServerKey,previousServerCompliance);
 					return;
 				}
 			}
