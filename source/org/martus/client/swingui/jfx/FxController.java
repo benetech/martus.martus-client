@@ -38,6 +38,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -252,7 +253,8 @@ abstract public class FxController implements Initializable
 			MartusLocalization localization = getLocalization();
 			fxYesButton.setText(localization.getButtonLabel("yes"));
 			fxNoButton.setText(localization.getButtonLabel("no"));
-			fxLabel.setText(message);
+			textArea.setText(message);
+			textArea.setEditable(false);
 		}
 		
 		@Override
@@ -286,7 +288,7 @@ abstract public class FxController implements Initializable
 		}
 
 		@FXML
-		private Label fxLabel;
+		private TextArea textArea;
 
 		@FXML
 		private Button fxYesButton;

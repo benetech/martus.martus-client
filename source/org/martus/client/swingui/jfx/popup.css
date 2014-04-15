@@ -28,7 +28,24 @@
 
 }
 
+.text-area {
+	-fx-background-color: white;
+	-fx-text-background-color: #9ba5ae;
+	-fx-text-fill: #4c5e70;
+	-fx-border-style: none;
+	-fx-font-size: 13px;
+	-fx-font-weight: bold;
+}
 
+.text-area .scroll-pane .content{
+    -fx-background-color: #e6e7e9;
+	-fx-border-style: none;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: #e6e7e9;
+	-fx-border-style: none;
+}
 
 .button_not_main_action {
 
