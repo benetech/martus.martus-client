@@ -54,7 +54,7 @@ public class FxVerifyAccountController extends FxStep1Controller
 		getWizardNavigationHandler().getNextButton().setDisable(true);
 		userNameField.textProperty().addListener(new LoginChangeHandler());
 		passwordField.textProperty().addListener(new LoginChangeHandler());
-		
+		userNameField.requestFocus();
 		updateStatus();
 	}
 
