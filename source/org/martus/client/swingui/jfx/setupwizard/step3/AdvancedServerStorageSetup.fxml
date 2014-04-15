@@ -5,12 +5,14 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane  prefWidth="635" maxWidth="635">
-	<top>
-		<VBox styleClass="mainTextBox" prefWidth="635" maxWidth="635">
-			<Label styleClass="headingLevel1" text="Advanced Server Setup" />
-			<Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="To store your bulletins on a specific server, you will need the IP address, public code, and magic word for the server. If you are connecting to a Martus server, email info@martus.org for this info. If you are connecting to your organization's server, contact your administrator." />
-		</VBox>
-	</top>
+ 	<top>
+ 		<VBox styleClass="mainTextBox" prefWidth="635" maxWidth="635">
+      <Label styleClass="headingLevel1" text="Advanced Server Setup" />
+      <Label maxWidth="600.0" styleClass="mainTextBoxText"  wrapText="true" text="To store your bulletins on a specific server, you will need the IP address, public code, and magic word for the server." />
+      <Hyperlink onAction="#onLinkMailTo" styleClass="mainTextBoxText"  wrapText="true" text="If you are connecting to a Martus server, email info@martus.org for this info." />
+      <Label styleClass="mainTextBoxText" wrapText="true" text="If you are connecting to your organization's server, contact your administrator." />
+    </VBox>
+    </top>
 	<center>
 		<GridPane prefHeight="200.0" prefWidth="660" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
 		  <columnConstraints>
