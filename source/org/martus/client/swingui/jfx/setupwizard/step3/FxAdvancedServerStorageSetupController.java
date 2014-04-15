@@ -25,6 +25,11 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step3;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -82,6 +87,20 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 	public String getFxmlLocation()
 	{
 		return "setupwizard/step3/AdvancedServerStorageSetup.fxml";
+	}
+	
+	@FXML
+	private void onLinkMailTo()
+	{
+		try
+		{
+			Desktop desktop = Desktop.getDesktop(); 
+			desktop.mail(new URI("mailto:info@martus.org"));
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
 	}
 	
 	@FXML
