@@ -54,6 +54,7 @@ public class FxSetupContactInfoController extends FxStep2Controller
 
 		authorField.setText(getConfigInfo().getAuthor());
 		organizationField.setText(getConfigInfo().getOrganization());
+		authorField.requestFocus();
 	}
 
 	@Override
