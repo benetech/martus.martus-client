@@ -319,9 +319,14 @@ abstract public class FxController implements Initializable
 		URL css = FxController.getBestFile(fxmlDir, "popup.css");
 		scene.getStylesheets().add(css.toExternalForm());
 		popupStage.setScene(scene);
-	    popupStage.showAndWait();
+	    showModalPopupStage(popupStage);
 	    if(controller.getThrownException() != null)
 	    	throw (Exception)controller.getThrownException();
+	}
+
+	protected void showModalPopupStage(Stage popupStage)
+	{
+		popupStage.showAndWait();
 	}
 
 	private UiMainWindow mainWindow;
