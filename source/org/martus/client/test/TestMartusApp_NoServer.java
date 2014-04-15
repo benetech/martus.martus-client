@@ -1005,6 +1005,66 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_END();
 	}
 
+	public void testContactInfoMigrationDefaultHqAndHqFdToContacts() throws Exception
+	{
+		TRACE_BEGIN("testContactInfoMigrationDefaultHqAndHqFdToContacts");
+		File file = appWithAccount.getConfigInfoFile();
+		file.delete();
+		assertEquals(false, file.exists());
+		createOldV44WithSameLegacyDefaultHQConfigInfoFileWithSampleData(file);
+		appWithAccount.loadConfigInfo();
+		ConfigInfo config = appWithAccount.getConfigInfo();
+		assertTrue("ConfigInfo file wasn't converted?", config.getVersion() >= ConfigInfo.VERSION_WITH_CONTACT_KEYS);
+		assertEquals("LegacyHQ should be blank", "", config.getLegacyHQKey());
+		assertEquals("Old Default HQ Keys should be blank", "", config.getDefaultHQKeysXml());
+		assertEquals("Old HQ's should be blank", "", config.getAllHQKeysXml());
+		assertEquals("Old FieldDesk's should be blank", "", config.getFieldDeskKeysXml());
+		HeadquartersKeys hqKeys = appWithAccount.getAllHQKeys();
+		assertEquals("Should have 1 Legacy/Default HQ, 2 normal HQs, and 2 FD's", 5, hqKeys.size());		
+		TRACE_END();
+}
+
+	public void createOldV44WithSameLegacyDefaultHQConfigInfoFileWithSampleData(File file) throws Exception
+	{
+	ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		DataOutputStream out = new DataOutputStream(outputStream);
+		out.writeShort(ConfigInfo.VERSION_WITH_CONTACT_KEYS - 1);
+		out.writeUTF("author");
+		out.writeUTF("org");
+		out.writeUTF("email");
+		out.writeUTF("web");
+		out.writeUTF("phone");
+		out.writeUTF("address\nline2");
+		out.writeUTF("server name");
+		out.writeUTF("details\ndetail2");
+		out.writeUTF(getLegacyHQ());
+		out.writeUTF("server pub key");
+		out.writeBoolean(false);
+		out.writeUTF("I am compliant");
+		out.writeUTF("language;author;custom,Custom Field;title;entrydate");
+		out.writeUTF("");
+		out.writeBoolean(true);
+		out.writeBoolean(true);
+		out.writeBoolean(true);
+		out.writeUTF(getOldConfigInfoHQKeysWithKey(getLegacyHQ(), "Legacy"));
+		out.writeBoolean(true);
+		out.writeUTF(getLegacyHQKeyXml()); //Default HQ
+		out.writeUTF("");
+		out.writeBoolean(true);
+		ConfigInfo.writeLongString(out, "");
+		ConfigInfo.writeLongString(out, "");
+		out.writeBoolean(false);
+		ConfigInfo.writeLongString(out, getOldConfigInfoFieldDeskKeysXml());
+		out.writeBoolean(true);
+		out.writeBoolean(false);
+		out.writeInt(0);
+		out.flush();
+		out.close();
+		byte[] encryptedInfo = outputStream.toByteArray();
+		File signatureFile = appWithAccount.getConfigInfoSignatureFile();
+		appWithAccount.encryptAndWriteFileAndSignatureFile(file, signatureFile, encryptedInfo);
+	}
+
 	public void createOldConfigInfoFileWithSampleData(File file)
 			throws Exception
 		{
@@ -1071,7 +1131,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 			out.writeBoolean(true);
 			out.writeBoolean(true);
 			out.writeBoolean(true);
-			out.writeUTF(getOldConfigInfoHQKeysWithKey(clientPublicKey));
+			out.writeUTF(getOldConfigInfoHQKeysWithKey(clientPublicKey, "Our self"));
 			out.writeBoolean(true);
 			out.writeUTF(getOldDefaultHQWithKey(clientPublicKey));
 			out.writeUTF("");
@@ -1094,6 +1154,14 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		return "LegacyHQ";
 	}
+	
+	private String getLegacyHQKeyXml()
+	{
+		HeadquartersKey legacyHq = new HeadquartersKey(getLegacyHQ());
+		HeadquartersKeys contactKeys = new HeadquartersKeys(legacyHq);
+		return contactKeys.toStringWithLabel();
+	}
+
 	private String getOldConfigInfoHQKeys()
 	{
 		Vector keys = new Vector();
@@ -1106,12 +1174,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	}
 	
 	
-	private String getOldConfigInfoHQKeysWithKey(String clientKeyToIncludeAswell)
+	private String getOldConfigInfoHQKeysWithKey(String clientKeyToIncludeAswell, String clientLabel)
 	{
 		Vector keys = new Vector();
 		keys.add(new HeadquartersKey(hqKey1, hqKeylabel1));
 		keys.add(new HeadquartersKey(hqKey2, hqKeylabel2));
-		keys.add(new HeadquartersKey(clientKeyToIncludeAswell, "Our self"));
+		keys.add(new HeadquartersKey(clientKeyToIncludeAswell, clientLabel));
 		HeadquartersKeys contactKeys = new HeadquartersKeys(keys);
 		return contactKeys.toStringWithLabel();
 	}

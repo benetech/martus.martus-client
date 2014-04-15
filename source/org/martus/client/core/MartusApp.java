@@ -755,28 +755,30 @@ public class MartusApp
 			if(!deprecatedDefaultHqKeys.containsKey(legacyHQKey))
 				deprecatedDefaultHqKeys.add(legacyHQ);
 		}
-		Vector keys = new Vector();
-		
+		ContactKeys contactKeys = new ContactKeys();
+
 		for(int i = 0; i < deprecatedDefaultHqKeys.size(); ++i)
 		{
 			HeadquartersKey defaultHQKeyToAdd = deprecatedDefaultHqKeys.get(i);
-			if(!defaultHQKeyToAdd.getPublicKey().equals(ourPublicKey))
+			String publicKey = defaultHQKeyToAdd.getPublicKey();
+			if(!publicKey.equals(ourPublicKey) && !contactKeys.containsKey(publicKey))
 			{
 				ContactKey hqContactKey = new ContactKey(defaultHQKeyToAdd);
 				hqContactKey.setSendToByDefault(true);
 				hqContactKey.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
-				keys.add(hqContactKey);
+				contactKeys.add(hqContactKey);
 			}
 		}
+		
 		for(int i = 0; i < deprecatedHqKeys.size(); ++i)
 		{
 			HeadquartersKey hqKeyToAdd = deprecatedHqKeys.get(i);
-			if(!hqKeyToAdd.getPublicKey().equals(ourPublicKey)  &&
-					!deprecatedDefaultHqKeys.contains(hqKeyToAdd))
+			String publicKey = hqKeyToAdd.getPublicKey();
+			if(!publicKey.equals(ourPublicKey)  && !contactKeys.containsKey(publicKey))
 			{
 				ContactKey hqContactKey = new ContactKey(hqKeyToAdd);
 				hqContactKey.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
-				keys.add(hqContactKey);
+				contactKeys.add(hqContactKey);
 			}
 		}
 
@@ -784,14 +786,15 @@ public class MartusApp
 		for(int i = 0; i < deprecatedFieldDeskKeys.size(); ++i)
 		{
 			FieldDeskKey fdKeyToAdd = deprecatedFieldDeskKeys.get(i);
-			if(!fdKeyToAdd.getPublicKey().equals(ourPublicKey))
+			String publicKey = fdKeyToAdd.getPublicKey();
+			if(!publicKey.equals(ourPublicKey) && !contactKeys.containsKey(publicKey))
 			{
 				ContactKey fdContactKey = new ContactKey(fdKeyToAdd);
 				fdContactKey.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
-				keys.add(fdContactKey);
+				contactKeys.add(fdContactKey);
 			}
 		}
-		ContactKeys contactKeys = new ContactKeys(keys);
+		
 		configInfo.setContactKeysXml(contactKeys.toString());
 		configInfo.setAllHQKeysXml("");
 		configInfo.setFieldDeskKeysXml("");
