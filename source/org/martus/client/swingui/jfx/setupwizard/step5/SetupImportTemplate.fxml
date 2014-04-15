@@ -15,9 +15,9 @@
                 <ToggleGroup fx:id="chooseTemplateImportMethod" />
               </toggleGroup>
             </RadioButton>
-            <ChoiceBox fx:id="genericTemplatesChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="genericTemplatesChoiceBox" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <RadioButton fx:id="downloadCustomRadioButton" mnemonicParsing="false" onAction="#radioButtonSelectionChanged" styleClass="radioButtonText" text="Download Custom" toggleGroup="$chooseTemplateImportMethod" GridPane.rowIndex="2" />
-            <ChoiceBox fx:id="customTemplatesChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="customTemplatesChoiceBox" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="selectedTemplateLabel" wrapText="true" styleClass="hintText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label fx:id="switchFormsLaterLabel" wrapText="true" styleClass="hintText" text="You can switch forms later" GridPane.columnIndex="1" GridPane.rowIndex="4" />
           </children>
