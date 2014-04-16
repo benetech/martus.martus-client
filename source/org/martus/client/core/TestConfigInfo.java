@@ -69,16 +69,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertFalse("A blank config Info can't be new", info.isNewVersion());
 	}
 
-	public void testHasEnoughContactInfo() throws Exception
-	{
-		ConfigInfo info = new ConfigInfo();
-		info.setAuthor("fred");
-		assertEquals("author isn't enough contact info?", true, info.hasEnoughContactInfo());
-		info.setAuthor("");
-		info.setOrganization("whatever");
-		assertEquals("organization isn't enough contact info?", true, info.hasEnoughContactInfo());
-	}
-
 	public void testLoadVersions() throws Exception
 	{
 		for(short version = 1; version <= ConfigInfo.VERSION; ++version)
@@ -313,7 +303,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
 	{
-		assertEquals(label + ": Full has contact info", false, info.hasEnoughContactInfo());
 		assertEquals(label + ": sampleSource", "", info.getAuthor());
 		assertEquals(label + ": sampleOrg", "", info.getOrganization());
 		assertEquals(label + ": sampleEmail", "", info.getEmail());
@@ -347,7 +336,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
 	{
 		label = label + " (" + VERSION + ")";
-		assertEquals(label + ": Full has contact info", true, info.hasEnoughContactInfo());
 		assertEquals(label + ": sampleSource", sampleAuthor, info.getAuthor());
 		assertEquals(label + ": sampleOrg", sampleOrg, info.getOrganization());
 		assertEquals(label + ": sampleEmail", sampleEmail, info.getEmail());

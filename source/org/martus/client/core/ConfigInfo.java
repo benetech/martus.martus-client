@@ -47,17 +47,6 @@ public class ConfigInfo
 		clear();
 	}
 
-	public boolean hasEnoughContactInfo()
-	{
-		if(author != null && author.length() > 0)
-			return true;
-
-		if(organization != null && organization.length() > 0)
-			return true;
-
-		return false;
-	}
-
 	public void setAuthor(String newSource)		{ author = newSource; }
 	public void setOrganization(String newOrg)		{ organization = newOrg; }
 	public void setEmail(String newEmail)			{ email = newEmail; }

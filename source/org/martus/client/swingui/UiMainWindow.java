@@ -500,8 +500,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		MartusLogger.log("reloadPendingRetrieveQueue");
 		reloadPendingRetrieveQueue();
 		
-		requestContactInfo();
-		
 		try
 		{
 			SpellCheckerManager.initializeSpellChecker(this);
@@ -618,13 +616,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	private void requestContactInfo()
-	{
-		ConfigInfo info = app.getConfigInfo();
-		if(!info.hasEnoughContactInfo())
-			doContactInfo();
-	}
-	
 	private void reloadPendingRetrieveQueue()
 	{
 		try
