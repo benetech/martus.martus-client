@@ -162,6 +162,8 @@ import org.martus.util.UnicodeReader;
 import org.martus.util.language.LanguageOptions;
 import org.martus.util.xml.XmlUtilities;
 
+import com.apple.eawt.Application;
+
 public class UiMainWindow extends JFrame implements ClipboardOwner
 {
 	public UiMainWindow() throws Exception
@@ -2895,7 +2897,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		Image image = getMartusIconImage();
 		if(image != null)
-			window.setIconImage(image);
+		{
+			window.setIconImage(image); //Linux & Windows
+			Application.getApplication().setDockIconImage(image);	//Mac		
+		}
 	}
 
 	public void setCurrentActiveFrame(JFrame currentActiveFrame)
