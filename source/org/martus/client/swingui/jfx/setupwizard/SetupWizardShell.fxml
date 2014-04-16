@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="660" minHeight="-Infinity" prefWidth="660" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <VBox>
+      <children>
+        <HBox fx:id="topBar" minWidth="960" prefWidth="960">
+          <children>
+            <HBox fx:id="step1" styleClass="step">
+              <children>
+                <Label styleClass="TopBarStepNumber" text="1" />
+                <Label styleClass="TopBarStepName" text="Create Account" />
+              </children>
+            </HBox>
+            <Label styleClass="TopBarArrow" text="➔" />
+            <HBox fx:id="step2" styleClass="step">
+              <children>
+                <Label styleClass="TopBarStepNumber" text="2" />
+                <Label styleClass="TopBarStepName" text="Settings" />
+              </children>
+            </HBox>
+            <Label styleClass="TopBarArrow" text="➔" />
+            <HBox fx:id="step3" styleClass="step">
+              <children>
+                <Label styleClass="TopBarStepNumber" text="3" />
+                <Label styleClass="TopBarStepName" text="Server Setup" />
+              </children>
+            </HBox>
+            <Label styleClass="TopBarArrow" text="➔" />
+            <HBox fx:id="step4" styleClass="step">
+              <children>
+                <Label styleClass="TopBarStepNumber" text="4" />
+                <Label styleClass="TopBarStepName" text="Contacts" />
+              </children>
+            </HBox>
+            <Label styleClass="TopBarArrow" text="➔" />
+            <HBox fx:id="step5" styleClass="step">
+              <children>
+                <Label styleClass="TopBarStepNumber" text="5" />
+                <Label styleClass="TopBarStepName" text="Import Forms" />
+              </children>
+            </HBox>
+            <Label styleClass="TopBarArrow" text="➔" />
+            <HBox fx:id="step6" styleClass="step">
+              <children>
+                <Label styleClass="TopBarStepNumber" text="6" />
+                <Label styleClass="TopBarStepName" text="Key Backup" />
+              </children>
+            </HBox>
+          </children>
+        </HBox>
+        <BorderPane fx:id="BelowTitle">
+          <center>
+            <BorderPane>
+              <bottom>
+                <BorderPane maxWidth="635" prefWidth="635">
+                  <left>
+                    <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBack" text="Go Back" BorderPane.alignment="CENTER_LEFT" />
+                  </left>
+                  <right>
+                    <Button id="" fx:id="nextButton" mnemonicParsing="false" onAction="#onNext" text="Continue" BorderPane.alignment="CENTER_RIGHT" />
+                  </right>
+                </BorderPane>
+              </bottom>
+              <center>
+                <Pane fx:id="contentPane" maxHeight="-Infinity" prefHeight="500.0" prefWidth="660.0" />
+              </center>
+            </BorderPane>
+          </center>
+          <right>
+            <BorderPane>
+              <top>
+                <Pane fx:id="sidebarPane" maxWidth="300" prefHeight="300.0" prefWidth="300.0" />
+              </top>
+              <bottom>
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../../dialogs/Martus-logo-black-text-160x72.png" />
+                  </image>
+<BorderPane.margin>
+<Insets left="30.0" />
+</BorderPane.margin>
+                </ImageView>
+              </bottom>
+            </BorderPane>
+          </right>
+        </BorderPane>
+      </children>
+    </VBox>
+  </children>
+</AnchorPane>
