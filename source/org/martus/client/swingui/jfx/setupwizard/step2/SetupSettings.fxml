@@ -16,7 +16,7 @@
             <VBox styleClass="mainTextBox" prefWidth="635" maxWidth="635">
               <Label styleClass="headingLevel1" text="Your Display Settings" />
               <Label text="" />
-              <GridPane>
+              <GridPane  vgap="10.0" >
                 <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="30.000099999997474" prefWidth="185.0" spacing="0.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <children>
@@ -48,8 +48,8 @@
         </VBox>
       </center>
       <top>
-        <VBox prefHeight="181.0" styleClass="notMainTextBox">
-          <VBox prefHeight="181.0" styleClass="mainTextBox" prefWidth="635" maxWidth="635">
+        <VBox prefHeight="200.0" styleClass="notMainTextBox">
+          <VBox prefHeight="200.0" styleClass="mainTextBox" prefWidth="635" maxWidth="635">
             <HBox prefHeight="37.0" prefWidth="660.0">
               <children>
                 <Label styleClass="headingLevel1" text="Your Tor Settings" />
@@ -60,9 +60,9 @@
             <Label text="" />
             <HBox prefHeight="144.0" prefWidth="561.0">
               <children>
-                <Label prefHeight="30.0" prefWidth="59.000099999997474" styleClass="headingLevel3" text="Use Tor" />
+                <Label prefHeight="30.0" prefWidth="59" styleClass="headingLevel3" text="Use Tor" />
                 <Pane fx:id="switchButtonPane" prefHeight="40.0" prefWidth="80.0" />
-                <Label prefWidth="450.0" styleClass="mainTextBoxText" text="Tor is a security tool you can use to hide your identity when connecting to sites on the internet. If Martus servers are blocked from your location, using Tor may help reach the servers." wrapText="true" />
+                <Label  prefHeight="80.0" prefWidth="450.0" styleClass="mainTextBoxText" text="Tor is a security tool you can use to hide your identity when connecting to sites on the internet. If Martus servers are blocked from your location, using Tor may help reach the servers." wrapText="true" />
               </children>
             </HBox>
           </VBox>
