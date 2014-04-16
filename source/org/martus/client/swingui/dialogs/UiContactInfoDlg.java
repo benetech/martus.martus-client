@@ -93,8 +93,6 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		
 		StringBuffer helpmsg = new StringBuffer();
 		helpmsg.append(localization.getFieldLabel("ContactInfoFutureUseOfFields"));
-		helpmsg.append("\n\n");
-		helpmsg.append(localization.getFieldLabel("ContactInfoUpdateLater"));
 		UiWrappedTextArea infoFuture = new UiWrappedTextArea(helpmsg.toString(), 30);
 		panel.addOnNewLine(infoFuture);
 
