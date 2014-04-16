@@ -14,10 +14,10 @@
           		<Label prefWidth="25.0"></Label>
           </left>
           <center>
-		        <Button mnemonicParsing="false" onAction="#importContactFromFile" prefHeight="35.0" prefWidth="280.0" text="Import Contact From File" BorderPane.alignment="CENTER_LEFT" />
+		        <Button mnemonicParsing="false" onAction="#importContactFromFile" prefHeight="35.0" prefWidth="280.0" text="%Button.ImportContactFromFile" BorderPane.alignment="CENTER_LEFT" />
           </center>
           <right>
-            <Button id="" fx:id="closeButton" mnemonicParsing="false" onAction="#onClose" prefHeight="35.0" prefWidth="280.0" text="%Button.ManageContactsSaveClose" BorderPane.alignment="CENTER_RIGHT" />
+            <Button id="" fx:id="closeButton" mnemonicParsing="false" onAction="#onClose" prefHeight="35.0" prefWidth="280.0" text="%Button.ContactsSaveClose" BorderPane.alignment="CENTER_RIGHT" />
           </right>
         </BorderPane>
       </bottom>

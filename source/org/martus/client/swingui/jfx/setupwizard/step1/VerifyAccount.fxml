@@ -11,8 +11,8 @@
     <BorderPane>
 			<top>
 				<VBox styleClass="mainTextBox">
-					<Label styleClass="headingLevel1" text="Create an Account" BorderPane.alignment="TOP_LEFT" />
-					<Label styleClass="mainTextBoxText" text="When creating a user name and password for your account, please be aware there is no way to retrieve your username and password if you forget it. This is for your safety." maxWidth="600" wrapText="true"/>
+					<Label styleClass="headingLevel1" text="%CreateUser" BorderPane.alignment="TOP_LEFT" />
+					<Label styleClass="mainTextBoxText" text="%CreateUserInstructions" maxWidth="600" wrapText="true"/>
 				</VBox>
 			</top>
 	  <center>
@@ -28,9 +28,9 @@
 			        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 			      </rowConstraints>
 			      <children>
-			        <Label styleClass="headingLevel3" text="Confirm User Name"  />
+			        <Label styleClass="headingLevel3" text="%ConfirmUserName"  />
 			        <TextField fx:id="userNameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-			        <Label styleClass="headingLevel3" text="Confirm Password" GridPane.rowIndex="1" />
+			        <Label styleClass="headingLevel3" text="%ConfirmPassword" GridPane.rowIndex="1" />
 			        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 			      </children>
 			    </GridPane>
@@ -40,7 +40,7 @@
 			</VBox>
 		</center>
 		<bottom>
-			<Label styleClass="hintText" text="Note: Later in this wizard, you will be led through a process to backup your account key. This will help protect your account from loss." prefHeight="200" maxHeight="200" maxWidth="600" wrapText="true"/>
+			<Label styleClass="hintText" text="%BackupAccountInfo" prefHeight="200" maxHeight="200" maxWidth="600" wrapText="true"/>
 		</bottom>
 	</BorderPane>
   </children>
