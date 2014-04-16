@@ -231,7 +231,8 @@
         transparent
         derive(-fx-base, 80%)
         transparent;
-    -fx-border-insets: 0 10 1 0;
+    -fx-border-insets: 0 5 1 0;
+    -fx-font-size: 11;
 }
 
 
@@ -240,13 +241,31 @@
 	-fx-text-fill: #4c5e70;
 }
 
-.table-cell .button .remove-contact-button {
-		-fx-background-color:Red;
-		-fx-border-radius: 5;
-		-fx-text-fill: White;
-		-fx-alignment: center;
-		-fx-font-size: 15px;
-		-fx-padding: 3 5 3 5;
+.remove-contact-button {
+        -fx-background-color:Red;
+        -fx-border-radius: 5;
+        -fx-text-fill: White;
+        -fx-alignment: center;
+        -fx-font-size: 15px;
+        -fx-padding: 3 5 3 5;
+}
+
+.remove-contact-button:hover {
+        -fx-background-color:#638a4b;
+        -fx-border-radius: 5;
+        -fx-text-fill: White;
+        -fx-alignment: center;
+        -fx-font-size: 15px;
+        -fx-padding: 3 5 3 5;
+}
+
+.remove-contact-button:pressed {
+        -fx-background-color:DarkGreen;
+        -fx-border-radius: 5;
+        -fx-text-fill: White;
+        -fx-alignment: center;
+        -fx-font-size: 15px;
+        -fx-padding: 3 5 3 5;
 }
 
 .table-cell .verified-label  {
@@ -306,7 +325,6 @@
 	-fx-font-size: 13px;
 	-fx-text-fill: #4c5e70;
 }
-
 
 .radioButtonText {
 	-fx-font-size: 13px;
