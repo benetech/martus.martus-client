@@ -90,6 +90,14 @@ public class FxProgressController extends FxBackgroundActivityController impleme
 			forceCloseDialog();
 		}
 	}
+	
+	class ProgressMeterHider implements Runnable
+	{
+		public void run()
+		{
+			fxProgressBar.setVisible(false);
+		}
+	}
 
 	@Override
 	public boolean shouldExit()
@@ -100,7 +108,7 @@ public class FxProgressController extends FxBackgroundActivityController impleme
 	@Override
 	public void hideProgressMeter()
 	{
-		fxProgressBar.setVisible(false);
+		Platform.runLater(new ProgressMeterHider());
 	}
 	
 	@Override
