@@ -25,6 +25,18 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javafx.application.Platform;
+import javafx.stage.Stage;
+
+import javax.swing.JDialog;
+
 import org.martus.client.swingui.UiMainWindow;
 
 abstract public class FxInSwingDialogController extends FxController
@@ -47,6 +59,84 @@ abstract public class FxInSwingDialogController extends FxController
 	public FxScene getScene()
 	{
 		return getStage().getFxScene();
+	}
+	
+	protected void showModalPopupStage(Stage popupStage)
+	{
+		Runnable fronter = new Fronter(popupStage);
+
+		JDialog dialog = getStage().getDialog();
+		dialog.addWindowListener(new DialogWindowHandler(fronter));
+		
+		Component glassPane = dialog.getGlassPane();
+		GlassPaneMouseHandler glassPaneMouseHandler = new GlassPaneMouseHandler(fronter);
+		glassPane.addMouseListener(glassPaneMouseHandler);
+		glassPane.setBackground(Color.RED);
+		glassPane.setVisible(true);
+		try
+		{
+			popupStage.showAndWait();
+		}
+		finally
+		{
+			glassPane.setVisible(false);
+			glassPane.removeMouseListener(glassPaneMouseHandler);
+		}
+	}
+	
+	private static class DialogWindowHandler extends WindowAdapter
+	{
+		public DialogWindowHandler(Runnable runOnFocusGained)
+		{
+			task = runOnFocusGained;
+		}
+		
+		@Override
+		public void windowDeiconified(WindowEvent e)
+		{
+			Platform.runLater(task);
+		}
+
+		@Override
+		public void windowActivated(WindowEvent e)
+		{
+			Platform.runLater(task);
+		}
+
+		private Runnable task;
+	}
+
+	private static class GlassPaneMouseHandler extends MouseAdapter
+	{
+		public GlassPaneMouseHandler(Runnable runOnClick)
+		{
+			task = runOnClick;
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e)
+		{
+			super.mouseClicked(e);
+			Platform.runLater(task);
+		}
+		
+		private Runnable task;
+	}
+	
+	private static class Fronter implements Runnable
+	{
+		public Fronter(Stage popupStageToUse)
+		{
+			popupStage = popupStageToUse;
+		}
+		
+		@Override
+		public void run()
+		{
+			popupStage.toFront();
+		}
+		
+		private Stage popupStage;
 	}
 
 	private FxInSwingDialogStage stage;
