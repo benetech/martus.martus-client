@@ -80,7 +80,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	@Override
 	public void initializeMainContentPane()
 	{
-		genericTemplatesChoiceBox.setConverter(new FormTemplateToStringConverter());
+		genericTemplatesChoiceBox.setConverter(new FormTemplateToStringConverter(getLocalization()));
 		genericTemplatesChoiceBox.setItems(FXCollections.observableArrayList(getDefaultFormTemplateChoices()));
 		genericTemplatesChoiceBox.getSelectionModel().selectedItemProperty().addListener(new GenericTemplatesSelectionChangedHandler());
 

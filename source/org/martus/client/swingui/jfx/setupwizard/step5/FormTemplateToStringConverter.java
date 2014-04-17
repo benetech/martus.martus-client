@@ -27,12 +27,14 @@ package org.martus.client.swingui.jfx.setupwizard.step5;
 
 import javafx.util.StringConverter;
 
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.fieldspec.CustomFieldTemplate;
 
 public class FormTemplateToStringConverter extends StringConverter<CustomFieldTemplate>
 {
-	public FormTemplateToStringConverter()
+	public FormTemplateToStringConverter(MartusLocalization localizationToUse)
 	{
+		localization = localizationToUse;
 	}
 
 	@Override
@@ -45,7 +47,7 @@ public class FormTemplateToStringConverter extends StringConverter<CustomFieldTe
 		if (title.length() > 0)
 			return title;
 		
-		return "[no title]";
+		return localization.getFieldLabel("NoFormTemplateTitle");
 	}
 
 	@Override
@@ -53,4 +55,6 @@ public class FormTemplateToStringConverter extends StringConverter<CustomFieldTe
 	{
 		return null;
 	}
+	
+	private MartusLocalization localization;
 }

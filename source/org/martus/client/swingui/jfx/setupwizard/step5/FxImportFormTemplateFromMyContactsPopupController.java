@@ -65,7 +65,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		chooseFormTemplateLabel.setVisible(false);
 		templatesChoiceBox.setVisible(false);
 		templatesChoiceBox.valueProperty().addListener(new TemplatesChangeHandler());
-		templatesChoiceBox.setConverter(new FormTemplateToStringConverter());
+		templatesChoiceBox.setConverter(new FormTemplateToStringConverter(getLocalization()));
 		
 		fillContactsChoiceBox();
 	}
