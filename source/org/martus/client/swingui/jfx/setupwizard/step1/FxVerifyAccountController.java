@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.setupwizard.step1;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -96,15 +97,26 @@ public class FxVerifyAccountController extends FxStep1Controller
 			boolean canContinue = nameMatches && passwordMatches;
 			getWizardNavigationHandler().getNextButton().setDisable(!canContinue);
 
-			String status = "";
+			String statusMessage = "";
+			MartusLocalization localization = getLocalization();
+			String styleTag = "errorText";
 			if (!nameMatches)
-				status = "Warning: You must enter the same username you entered on the previous screen.";
+			{
+				statusMessage = localization.getFieldLabel("notifyusernamessdontmatchcause");
+			}
 			else if (!passwordMatches)
-				status = "Warning: You must enter the same password you entered on the previous screen.";
+			{
+				statusMessage = localization.getFieldLabel("notifypasswordsdontmatchcause");
+			}
 			else
-				status = "Username and password match!";
-			
-			getAccountConfirmLabel().setText(status);
+			{
+				styleTag = "hintText";
+				statusMessage = localization.getFieldLabel("UserNameAndPasswordMatches");
+			}
+			ObservableList<String> styleClassForInformationMessage = getAccountConfirmLabel().getStyleClass();
+			styleClassForInformationMessage.clear();
+			styleClassForInformationMessage.add(styleTag);
+			getAccountConfirmLabel().setText(statusMessage);
 
 		}
 		catch (Exception e)

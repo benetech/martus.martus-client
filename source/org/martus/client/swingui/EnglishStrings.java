@@ -867,8 +867,8 @@ public class EnglishStrings
 "field:notifyDeleteServerDraftsNonecause=No bulletins were selected",
 "field:notifyretrievenoservercause=The current server is not responding or may need to be configured from the server menu.",
 "field:notifyContactsNoServercause=The current server is not responding or may need to be configured from the server menu.",
-"field:notifypasswordsdontmatchcause=You must enter the same password twice",
-"field:notifyusernamessdontmatchcause=You must enter the same username twice",
+"field:notifypasswordsdontmatchcause=Warning: You must enter the same password you entered on the previous screen.",
+"field:notifyusernamessdontmatchcause=Warning: You must enter the same user name you entered on the previous screen.",
 "field:notifyUserNameBlankcause=User Name must not be blank",
 "field:notifyPasswordInvalidcause=Not a valid password, passwords must be at least 8 characters long, 15 recommended.",
 "field:notifyPasswordMatchesUserNamecause=Your password can not be your username",
@@ -1732,6 +1732,7 @@ public class EnglishStrings
 
 "field:ConfirmAccountUserName=Confirm User Name",
 "field:ConfirmPassword=Confirm Password",
+"field:UserNameAndPasswordMatches=Username and password match!",
 
 "field:VerifyContactPublicCode=Public Code:",
 "field:VerifyContactPublicCodeOld=Public Code:",
