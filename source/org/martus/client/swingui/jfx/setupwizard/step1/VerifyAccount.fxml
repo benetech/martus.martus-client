@@ -11,8 +11,8 @@
     <BorderPane>
 			<top>
 				<VBox styleClass="mainTextBox">
-					<Label styleClass="headingLevel1" text="%CreateUser" BorderPane.alignment="TOP_LEFT" />
-					<Label styleClass="mainTextBoxText" text="%CreateUserInstructions" maxWidth="600" wrapText="true"/>
+					<Label styleClass="headingLevel1" text="%CreateAccount" BorderPane.alignment="TOP_LEFT" />
+					<Label styleClass="mainTextBoxText" text="%CreateAccountInstructions" maxWidth="600" wrapText="true"/>
 				</VBox>
 			</top>
 	  <center>
@@ -28,7 +28,7 @@
 			        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 			      </rowConstraints>
 			      <children>
-			        <Label styleClass="headingLevel3" text="%ConfirmUserName"  />
+			        <Label styleClass="headingLevel3" text="%ConfirmAccountUserName"  />
 			        <TextField fx:id="userNameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 			        <Label styleClass="headingLevel3" text="%ConfirmPassword" GridPane.rowIndex="1" />
 			        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
