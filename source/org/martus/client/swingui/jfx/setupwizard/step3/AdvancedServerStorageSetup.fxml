@@ -7,10 +7,10 @@
 <BorderPane  prefWidth="635" maxWidth="635">
  	<top>
  		<VBox styleClass="mainTextBox" prefWidth="635" maxWidth="635">
-      <Label styleClass="headingLevel1" text="Advanced Server Setup" />
-      <Label maxWidth="600.0" styleClass="mainTextBoxText"  wrapText="true" text="To store your bulletins on a specific server, you will need the IP address, public code, and magic word for the server." />
-      <Hyperlink onAction="#onLinkMailTo" styleClass="mainTextBoxText"  wrapText="true" text="If you are connecting to a Martus server, email info@martus.org for this info." />
-      <Label styleClass="mainTextBoxText" wrapText="true" text="If you are connecting to your organization's server, contact your administrator." />
+      <Label styleClass="headingLevel1" text="%AdvanceServerSetup" />
+      <Label maxWidth="600.0" styleClass="mainTextBoxText"  wrapText="true" text="%AdvanceServerInformation" />
+      <Hyperlink onAction="#onLinkMailTo" styleClass="mainTextBoxText"  wrapText="true" text="%AdvanceMartusServerMailTo" />
+      <Label styleClass="mainTextBoxText" wrapText="true" text="%AdvanceOrganizationServer" />
     </VBox>
     </top>
 	<center>
@@ -20,14 +20,14 @@
 		    <ColumnConstraints maxWidth="515.0" minWidth="155.0" prefWidth="515.0" />
 		  </columnConstraints>
 		  <children>
-		    <Label styleClass="headingLevel3" text="IP Address:" GridPane.rowIndex="0" />
-		    <TextField fx:id="ipAddressField" promptText="enter your server's IP address" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-		    <Label styleClass="headingLevel3" text="Public Code:" GridPane.rowIndex="1" />
-		    <TextField fx:id="publicCodeField" promptText="enter your server's public code" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-		    <Label styleClass="headingLevel3" text="Magic Word:" GridPane.rowIndex="2" />
-		    <TextField fx:id="magicWordField" prefWidth="262.0" promptText="enter your server's magic word" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+		    <Label styleClass="headingLevel3" text="%ServerNameEntry" GridPane.rowIndex="0" />
+		    <TextField fx:id="ipAddressField" promptText="%ServerNameEntryInformation" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+		    <Label styleClass="headingLevel3" text="%PublicCode" GridPane.rowIndex="1" />
+		    <TextField fx:id="publicCodeField" promptText="%ServerPublicCodeEntryInformation" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+		    <Label styleClass="headingLevel3" text="%ServerMagicWordEntry" GridPane.rowIndex="2" />
+		    <TextField fx:id="magicWordField" prefWidth="262.0" promptText="%ServerMagicWordEntryInformation" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 		    <Label styleClass="headingLevel3" fx:id="statusLabel" GridPane.rowIndex="3" />
-		    <Button fx:id="connectButton" mnemonicParsing="false" onAction="#connect" text="Connect" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+		    <Button fx:id="connectButton" mnemonicParsing="false" onAction="#connect" text="%ConnectToAdvanceServer" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 		  </children>
 		</GridPane>
 	</center>
