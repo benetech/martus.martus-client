@@ -12,7 +12,7 @@
       <bottom>
         <BorderPane>
           <left>
-            <Button id="" fx:id="nextButton" mnemonicParsing="false" onAction="#onNext" text="Get Started" BorderPane.alignment="CENTER_RIGHT">
+            <Button id="" fx:id="nextButton" mnemonicParsing="false" onAction="#onNext" text="%Button.GetStarted" BorderPane.alignment="CENTER_RIGHT">
               <BorderPane.margin>
                 <Insets left="265.0" />
               </BorderPane.margin>

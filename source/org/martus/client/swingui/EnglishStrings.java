@@ -1702,13 +1702,33 @@ public class EnglishStrings
 "button:ImportContactFromFile=Import Contact From File...",
 "button:ContactsSaveClose=Save and Close",
 
+"field:Step1=1",
+"field:Step2=2",
+"field:Step3=3",
+"field:Step4=4",
+"field:Step5=5",
+"field:Step6=6",
+
+"field:WelcomeMessage1=Get started with Martus!",
+"field:WelcomeMessage2=Securing your digital documentation",
+"field:WelcomeMessage3=This wizard will walk you through the steps necessary to set up Martus, so that you can safely store and share your human rights documentation.",
 
 "field:WizardStep1=Create Account",
+"field:WizardStep1Detailed=Account Creation",
+"field:WizardStep1Information=Your information will be kept safe, with a password protected, encrypted account.",
 "field:WizardStep2=Settings",
+"field:WizardStep2Information=Establish your system settings for the use of Tor (a tool to help hide network activity) and dates.",
 "field:WizardStep3=Server Setup",
+"field:WizardStep3Information=Backup your information to a secure server.  Backup your information to a secure server.",
 "field:WizardStep4=Contacts",
+"field:WizardStep4Information=Send and receive information from other Martus users of your choice.",
 "field:WizardStep5=Import Forms",
+"field:WizardStep5Detailed=Import Form Template",
+"field:WizardStep5Information=Select a template for creating Martus forms.",
 "field:WizardStep6=Key Backup",
+"field:WizardStep6Detailed=Backup key",
+"field:WizardStep6Information=Make a copy of your account's encryption key to ensure continued access to your account.",
+"button:GetStarted=Get Started",
 "button:GoBack=Go Back",
 
 "field:CreateAccount=Create an Account",
@@ -1745,6 +1765,7 @@ public class EnglishStrings
 
 "field:ManageContactsHeading=Contacts",
 "field:ManageContactsDescription=To send information through Martus to your contacts, you need their public key. You can pull their public keys off of the Martus server using their 7 digit access token. You can verify that you have pulled the correct key, by using their key's public code.  Ask your contacts for the access token, and public code to add your contacts here. If you do not have this information now, you will be able to add contacts later from the Martus desktop client.",
+
 
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Saved Bulletins",
