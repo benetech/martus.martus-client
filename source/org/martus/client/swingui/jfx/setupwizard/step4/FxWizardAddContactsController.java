@@ -637,7 +637,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			try
 			{
 				GetAccountTokenFromServerTask task = new GetAccountTokenFromServerTask(martusApp);
-				showTimeoutDialog(getStage(), getLocalization().getFieldLabel("ConnectingToSeverToRetrieveToken"), task);
+				showTimeoutDialog(getStage(), getLocalization().getFieldLabel("ConnectingToServerToRetrieveToken"), task);
 				accountToken = task.getToken();
 			}
 			catch (Exception e)
