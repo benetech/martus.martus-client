@@ -26,9 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.setupwizard.step3;
 
 import java.awt.Desktop;
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -45,8 +43,8 @@ import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.client.swingui.jfx.setupwizard.step4.FxWizardAddContactsController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.GetServerPublicKeyTask;
-import org.martus.common.MartusLogger;
 import org.martus.common.Exceptions.ServerNotAvailableException;
+import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
 
@@ -111,7 +109,7 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 			String ip = ipAddressField.getText();
 			
 			GetServerPublicKeyTask task = new GetServerPublicKeyTask(getApp(), ip);
-			showTimeoutDialog(getWizardStage(), "Getting server information", task);
+			showTimeoutDialog(getWizardStage(), getLocalization().getFieldLabel("GettingServerInformation"), task);
 			
 			String serverKey = task.getPublicKey();
 			String serverPublicCode = MartusCrypto.computePublicCode(serverKey);
@@ -193,9 +191,9 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 		getWizardNavigationHandler().getNextButton().setDisable(!getWizardStage().checkIfCurrentServerIsAvailable());
 	}
 	
-	private void showError(String text)
+	private void showError(String errorTag)
 	{
-		showNotifyDialog(getWizardStage(), text);
+		showNotifyDialog(getWizardStage(), errorTag);
 	}
 
 	@FXML

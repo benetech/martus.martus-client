@@ -9,11 +9,11 @@
 	<BorderPane>
 		<top>
 			<VBox styleClass="mainTextBox" prefWidth="635" maxWidth="635">
-				<Label styleClass="headingLevel1" text="Server Setup" />
-				<Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="Connect to the Martus server to:" />
-				<Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="- Backup your documents on the Martus server in case your computer is lost or stolen" />
-				<Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="- Easily retrieve the public keys of your contacts, so you can send them bulletins" />
-				<Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="- Import form templates from your contacts" />
+				<Label styleClass="headingLevel1" text="%ServerSetup" />
+				<Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="%ConnectMartusServerReasons1" />
+				<Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="%ConnectMartusServerReasons2" />
+				<Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="%ConnectMartusServerReasons3" />
+				<Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="%ConnectMartusServerReasons4" />
 			</VBox>
 		</top>
 		<center>
@@ -28,11 +28,11 @@
 				   	<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 			  	</rowConstraints>
 				<children>
-					<Label maxWidth="220" minHeight="125" wrapText="true" styleClass="mainTextNotBold" text="No thanks. I'll complete this step later." />
+					<Label maxWidth="220" minHeight="125" wrapText="true" styleClass="mainTextNotBold" text="%SetupServerLaterInformation" />
 					<Label />
-					<Button styleClass="button_not_main_action" fx:id="laterButton" mnemonicParsing="false" onAction="#setupServerLater" text="Set up server later" GridPane.rowIndex="1" />
-					<Button fx:id="defaultServerButton" mnemonicParsing="false" onAction="#useDefaultServer" text="Use default server" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-					<Hyperlink styleClass="bigLink" underline="true" fx:id="advancedHyperlink" onAction="#advancedServerSettings" text="Advanced server settings" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+					<Button styleClass="button_not_main_action" fx:id="laterButton" mnemonicParsing="false" onAction="#setupServerLater" text="%SetupServerLater" GridPane.rowIndex="1" />
+					<Button fx:id="defaultServerButton" mnemonicParsing="false" onAction="#useDefaultServer" text="%UseDefaultServer" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+					<Hyperlink styleClass="bigLink" underline="true" fx:id="advancedHyperlink" onAction="#advancedServerSettings" text="%SetupAdvanceServer" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 				</children>
 			</GridPane>
 		</center>
