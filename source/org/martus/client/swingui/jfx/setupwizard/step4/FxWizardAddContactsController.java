@@ -655,8 +655,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			Map tokenReplacement = new HashMap();
 			tokenReplacement.put("#Token#", tokenData);
 			tokenReplacement.put("#PublicCode#", publicCode);
-			String tokenWithPublicCode = TokenReplacement.replaceTokens(getLocalization().getFieldLabel("ShowTokenAndPublicCode"), tokenReplacement);
-			showNotifyDialog(getStage(), "ShowTokenAndPublicCode", tokenWithPublicCode);
+			showNotifyDialog(getStage(), "ShowTokenAndPublicCode", tokenReplacement);
 		} 
 		catch (Exception e)
 		{
