@@ -349,8 +349,8 @@ public class EnglishStrings
 "field:notifyShowTokenAndPublicCodecause=",
 "wintitle:notifyShowTokenAndPublicCode=Account Token and Public Code",
 
-"field:AttemptToConnectToServer=Attempting to connect to server and checking compliance",
-"field:AttemptToConnectToServerNoCompliance=Attempting to connect to server",
+"field:AttemptToConnectToServerAndGetCompliance=Attempting to connect to server and checking compliance",
+"field:AttemptToConnectToServer=Attempting to connect to server",
 "wintitle:ServerNotRespondingSaveConfiguration=Server Not Available",
 "field:ServerNotRespondingSaveConfiguration=A connection to the server was not made. This could be because the server is not available, you have entered an incorrect IP or Public Code, the server is blocked, or your Internet connection is down. Would you like to save this server configuration for later?",
 "field:ConnectingToSeverToRetrieveToken=Attempting to connect to the server and retrieve your Token.",

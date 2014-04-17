@@ -56,7 +56,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		{
 			ConnectToServerTask task = new ConnectToServerTask(getApp(), gateway);
 			MartusLocalization localization = getLocalization();
-			String connectingToServerMsg = localization.getFieldLabel("AttemptToConnectToServer");
+			String connectingToServerMsg = localization.getFieldLabel("AttemptToConnectToServerAndGetCompliance");
 			showTimeoutDialog(wizardStage, connectingToServerMsg, task);
 			if(!task.isAvailable())
 			{
