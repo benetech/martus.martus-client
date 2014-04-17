@@ -36,7 +36,7 @@ import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class ContactsTableData
 {
-	public ContactsTableData(ContactKey contact) throws InvalidBase64Exception, CreateDigestException, CheckDigitInvalidException
+	public ContactsTableData(ContactKey contact, String removeButtonText) throws InvalidBase64Exception, CreateDigestException, CheckDigitInvalidException
 	{
 		publicKey = contact.getPublicKey();
 		contactName = new SimpleStringProperty(contact.getLabel());
@@ -45,7 +45,7 @@ public class ContactsTableData
 		canSendTo = new SimpleBooleanProperty(contact.getCanSendTo());
 		canReceiveFrom = new SimpleBooleanProperty(contact.getCanReceiveFrom());
 		verificationStatus = new SimpleIntegerProperty(contact.getVerificationStatus());
-		removeContact = new SimpleStringProperty("X");
+		removeContact = new SimpleStringProperty(removeButtonText);
 	}
 
 	public ContactKey getContact()
