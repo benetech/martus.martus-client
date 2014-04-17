@@ -26,7 +26,7 @@
             <Label styleClass="mainText" text="%WelcomeMessage3" wrapText="true" GridPane.columnSpan="3" />
 
             <Label styleClass="stepNumber" text="%Step1" GridPane.rowIndex="1" />
-            <Label styleClass="headingLevel3" text="%WizardStep1Detailed" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label styleClass="headingLevel3" text="%WizardStep1Heading" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label styleClass="mainText" text="%WizardStep1Information" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
 
             <Label styleClass="stepNumber" text="%Step2" GridPane.rowIndex="2" />
@@ -42,11 +42,11 @@
             <Label styleClass="mainText" text="%WizardStep4Information" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
 
             <Label styleClass="stepNumber" text="%Step5" GridPane.rowIndex="5" />
-            <Label styleClass="headingLevel3" text="%WizardStep5Detailed" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label styleClass="headingLevel3" text="%WizardStep5Heading" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label styleClass="mainText" text="%WizardStep5Information" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="5" />
 
             <Label styleClass="stepNumber" text="%Step6" GridPane.rowIndex="6" />
-            <Label styleClass="headingLevel3" text="%WizardStep6Detailed" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label styleClass="headingLevel3" text="%WizardStep6Heading" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label styleClass="mainText" text="%WizardStep6Information" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="6" />
          </children>
          <columnConstraints>
