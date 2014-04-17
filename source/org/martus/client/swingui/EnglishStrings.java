@@ -355,6 +355,7 @@ public class EnglishStrings
 "field:ServerNotRespondingSaveConfiguration=A connection to the server was not made. This could be because the server is not available, you have entered an incorrect IP or Public Code, the server is blocked, or your Internet connection is down. Would you like to save this server configuration for later?",
 "field:ConnectingToServerToRetrieveToken=Attempting to connect to the server and retrieve your Token.",
 
+"field:NoFormTemplateTitle=[no title]",
 
 "wintitle:ExitWizard=Exit Martus Wizard",
 "field:ExitWizard=Your changes will be lost and Martus will exit, are you sure you want to do this?",

@@ -60,7 +60,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		formTemplateChoiceBox.setConverter(new FormTemplateToStringConverter());
+		formTemplateChoiceBox.setConverter(new FormTemplateToStringConverter(getLocalization()));
 		formTemplateChoiceBox.valueProperty().addListener(new FieldTemplateChoiceChangeHandler());
 		
 		formTemplateChoiceBox.setVisible(false);
