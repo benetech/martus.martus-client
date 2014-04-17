@@ -111,7 +111,7 @@ abstract public class AbstractFxSetupWizardContentController extends ContentCont
 			return false;
 		
 		ConnectToServerTask task = new ConnectToServerTask(getApp());
-		showTimeoutDialog(getWizardStage(), getLocalization().getFieldLabel("AttemptToConnectToServerNoCompliance"), task);
+		showTimeoutDialog(getWizardStage(), getLocalization().getFieldLabel("AttemptToConnectToServer"), task);
 		boolean isServerAvailable = task.isAvailable();
 		getWizardStage().setCurrentServerIsAvailable(isServerAvailable);
 		
