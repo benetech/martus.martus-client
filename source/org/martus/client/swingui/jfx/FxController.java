@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.concurrent.Task;
@@ -49,6 +50,8 @@ import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractAppTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.TaskWithTimeout;
 import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
+import org.martus.util.TokenReplacement;
+import org.martus.util.TokenReplacement.TokenInvalidException;
 
 abstract public class FxController implements Initializable
 {
@@ -125,17 +128,31 @@ abstract public class FxController implements Initializable
 	
 	public void showNotifyDialog(FxInSwingDialogStage wizardPanel, String baseTag)
 	{
-		String extraMessage = "";
-		showNotifyDialog(wizardPanel, baseTag, extraMessage);
+		String noExtraMessage = "";
+		Map tokenReplacement = null;
+		showNotifyDialog(wizardPanel, baseTag, noExtraMessage, tokenReplacement);
+	}
+	
+	public void showNotifyDialog(FxInSwingDialogStage wizardPanel, String baseTag, Map tokenReplacement)
+	{
+		String noExtraMessage = "";
+		showNotifyDialog(wizardPanel, baseTag, noExtraMessage, tokenReplacement);
 	}
 
 	public void showNotifyDialog(FxInSwingDialogStage wizardPanel, String baseTag, String extraMessage)
+	{
+		Map noTokenReplacement = null;
+		showNotifyDialog(wizardPanel, baseTag, extraMessage, noTokenReplacement);
+	}
+
+	public void showNotifyDialog(FxInSwingDialogStage wizardPanel, String baseTag, String extraMessage, Map tokenReplacement)
 	{
 		++notifyDialogDepth;
 		try
 		{
 			PopupNotifyController popupController = new PopupNotifyController(getMainWindow(), baseTag);
 			popupController.setExtraMessage(extraMessage);
+			popupController.setTokenReplacement(tokenReplacement);
 			showControllerInsideModalDialog(wizardPanel, popupController);
 			--notifyDialogDepth;
 		} 
@@ -195,6 +212,7 @@ abstract public class FxController implements Initializable
 			super(mainWindowToUse);
 			baseTag = notificationTag;
 			extraMessage = "";
+			tokenReplacement = null;
 		}
 		
 		@Override
@@ -202,29 +220,38 @@ abstract public class FxController implements Initializable
 		{
 			MartusLocalization localization = getLocalization();
 			fxOkButton.setText(localization.getButtonLabel("ok"));
-			String fieldLabel = localization.getFieldLabel("notify"+baseTag+"cause");
-			String fullMessage;
-			if(IsEmptyField(fieldLabel))
-				fullMessage = extraMessage;
-			else
-				fullMessage = String.format("%s  %s", fieldLabel, extraMessage);
+			String fieldLabelRaw = localization.getFieldLabel("notify"+baseTag+"cause");
+			String fieldLabel = fieldLabelRaw;
+			if(tokenReplacement != null)
+			{
+				try
+				{
+					fieldLabel = TokenReplacement.replaceTokens(fieldLabelRaw, tokenReplacement);
+				} 
+				catch (TokenInvalidException e)
+				{
+					MartusLogger.logException(e);
+				}
+			}
+			
+			String fullMessage = fieldLabel;
+			if(extraMessage.length()>0)
+			{
+				fullMessage += " ";
+				fullMessage += extraMessage;
+			}
 			fxLabel.setText(fullMessage);
 			
-		}
-		
-		private boolean IsEmptyField(String fieldText)
-		{
-			if(fieldText.isEmpty())
-				return true;
-			String emptyTranslationText = MiniLocalization.NotTranslatedBeginCharacter + MiniLocalization.NotTranslatedEndCharacter;
-			if(fieldText.equals(emptyTranslationText))
-				return true;
-			return false;
 		}
 		
 		public void setExtraMessage(String extraMessageToUse)
 		{
 			extraMessage = extraMessageToUse;
+		}
+		
+		public void setTokenReplacement(Map tokenReplacementMapToUse)
+		{
+			tokenReplacement = tokenReplacementMapToUse;
 		}
 		
 		@Override
@@ -253,6 +280,7 @@ abstract public class FxController implements Initializable
 
 		private String baseTag;
 		private String extraMessage;
+		private Map tokenReplacement;
 	}
 
 	public static class PopupConfirmationController extends FxPopupController implements Initializable
