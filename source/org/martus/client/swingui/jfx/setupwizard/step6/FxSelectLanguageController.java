@@ -32,6 +32,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.clientside.MtfAwareLocalization;
@@ -82,34 +83,35 @@ public class FxSelectLanguageController extends FxStep6Controller
 
 	private ObservableList<ChoiceItem> getAvailableLanguages()
 	{
-		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
-		ChoiceItem[] allUILanguagesSupported = getLocalization().getUiLanguages();
+		MartusLocalization localization = getLocalization();
+		String currentLanguageCode = localization.getCurrentLanguageCode();
+		ChoiceItem[] allUILanguagesSupported = localization.getUiLanguages();
 		Vector<ChoiceItem> languageChoices = new Vector<ChoiceItem>();
-		try
+		for(int i = 0; i < allUILanguagesSupported.length; ++i)
 		{
-			for(int i = 0; i < allUILanguagesSupported.length; ++i)
+			String thisCode = allUILanguagesSupported[i].getCode();
+			String thisLanguageName = "";
+			try
 			{
-				String currentCode = allUILanguagesSupported[i].getCode();
-				getLocalization().setCurrentLanguageCode(currentCode);
-				String languageName = getLocalization().getLanguageName(currentCode);
-				getLocalization().setCurrentLanguageCode(currentLanguageCode);
-				String languageNameInCurrentLanguage = getLocalization().getLanguageName(currentCode);
-
-				String completeLanguageNativeAndInCurrentLanguage;
-				if(currentCode.equals(currentLanguageCode) || currentCode.equals(MiniLocalization.BURMESE))
-					completeLanguageNativeAndInCurrentLanguage = languageNameInCurrentLanguage;
-				else
-					completeLanguageNativeAndInCurrentLanguage = String.format("%s / %s", languageName, languageNameInCurrentLanguage);
-				languageChoices.add(new ChoiceItem(currentCode, completeLanguageNativeAndInCurrentLanguage));
+				localization.setCurrentLanguageCode(thisCode);
+				thisLanguageName = localization.getLanguageName(thisCode);
+			} 
+			catch (Exception e)
+			{
+				MartusLogger.logException(e);
 			}
-		} 
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-		}
-		finally
-		{
-			getLocalization().setCurrentLanguageCode(currentLanguageCode);
+			finally
+			{
+				localization.setCurrentLanguageCode(currentLanguageCode);
+			}
+			String languageNameInCurrentLanguage = localization.getLanguageName(thisCode);
+
+			String completeLanguageNativeAndInCurrentLanguage;
+			if(thisCode.equals(currentLanguageCode) || thisCode.equals(MiniLocalization.BURMESE))
+				completeLanguageNativeAndInCurrentLanguage = languageNameInCurrentLanguage;
+			else
+				completeLanguageNativeAndInCurrentLanguage = String.format("%s / %s", thisLanguageName, languageNameInCurrentLanguage);
+			languageChoices.add(new ChoiceItem(thisCode, completeLanguageNativeAndInCurrentLanguage));
 		}
 		return FXCollections.observableArrayList(languageChoices);
 	}
