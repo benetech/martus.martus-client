@@ -96,10 +96,6 @@ public class FxSelectLanguageController extends FxStep6Controller
 				localization.setCurrentLanguageCode(thisCode);
 				thisLanguageName = localization.getLanguageName(thisCode);
 			} 
-			catch (Exception e)
-			{
-				MartusLogger.logException(e);
-			}
 			finally
 			{
 				localization.setCurrentLanguageCode(currentLanguageCode);
