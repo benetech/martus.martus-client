@@ -37,6 +37,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
 
 import org.martus.client.core.MartusUserNameAndPassword;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.WizardNavigationButtonsInterface;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
@@ -60,7 +61,7 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 		userName.focusedProperty().addListener(new UserNameFocusListener());      		
 		passwordField.textProperty().addListener(new LoginChangeHandler());
 		passwordField.focusedProperty().addListener(new PasswordFocusListener());      
-		hintLabel.setTooltip(new Tooltip("Create secure passwords by using numbers, letters and sympbols."));
+		hintLabel.setTooltip(new Tooltip(getLocalization().getFieldLabel("PasswordTipGeneral")));
 	}
 
 	@Override
@@ -113,15 +114,16 @@ public class FxSetupUsernamePasswordController extends FxStep1Controller
 
 			doesAccountExist = getApp().doesAccountExist(candidateUserName, candidatePassword);
 			usernameSameAsPassword = areSame(candidateUserName, candidatePassword);
-
+			
+			MartusLocalization localization = getLocalization();
 			if (!hasUserName)
-				errorMessage = "Must enter a Username.";
+				errorMessage = localization.getFieldLabel("notifyUserNameBlankcause");
 			else if(!isPasswordLongEnough)
-				errorMessage = "Password must be at least 8 characters, 15 recommended.";
+				errorMessage = localization.getFieldLabel("notifyPasswordInvalidcause");
 			else if(usernameSameAsPassword)
-				errorMessage = getLocalization().getFieldLabel("notifyPasswordMatchesUserNamecause");
+				errorMessage = localization.getFieldLabel("notifyPasswordMatchesUserNamecause");
 			else if(doesAccountExist)
-				errorMessage = "That account already exists.";
+				errorMessage = localization.getFieldLabel("notifyUserAlreadyExistscause");
 
 			canContinue = hasUserName && isPasswordLongEnough && !doesAccountExist && !usernameSameAsPassword;
 		} 
