@@ -49,7 +49,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractAppTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.TaskWithTimeout;
 import org.martus.common.MartusLogger;
-import org.martus.common.MiniLocalization;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 
@@ -231,6 +230,7 @@ abstract public class FxController implements Initializable
 				catch (TokenInvalidException e)
 				{
 					MartusLogger.logException(e);
+					throw new RuntimeException(e);
 				}
 			}
 			
