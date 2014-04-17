@@ -236,7 +236,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		String loadFormTemplateMessage = "";
 		if (customFieldTemplate != null)
 		{
-			loadFormTemplateMessage = TokenReplacement.replaceToken("Successfully imported the #templateName Form", "#templateName", customFieldTemplate.getTitle());
+			loadFormTemplateMessage = TokenReplacement.replaceToken(getLocalization().getFieldLabel("SuccessfullyImportedForm"), "#templateName", customFieldTemplate.getTitle());
 			shouldAllowFormTemplate = true;
 		}
 		
