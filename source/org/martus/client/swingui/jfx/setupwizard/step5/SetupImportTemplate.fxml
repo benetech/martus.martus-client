@@ -10,16 +10,16 @@
       <children>
         <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0">
           <children>
-            <RadioButton fx:id="genericRadioButton" mnemonicParsing="false" onAction="#radioButtonSelectionChanged" styleClass="radioButtonText" text="Generic" GridPane.rowIndex="1">
+            <RadioButton fx:id="genericRadioButton" mnemonicParsing="false" onAction="#radioButtonSelectionChanged" styleClass="radioButtonText" text="%Button.GenericForms" GridPane.rowIndex="1">
               <toggleGroup>
                 <ToggleGroup fx:id="chooseTemplateImportMethod" />
               </toggleGroup>
             </RadioButton>
             <ChoiceBox fx:id="genericTemplatesChoiceBox" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <RadioButton fx:id="downloadCustomRadioButton" mnemonicParsing="false" onAction="#radioButtonSelectionChanged" styleClass="radioButtonText" text="Download Custom" toggleGroup="$chooseTemplateImportMethod" GridPane.rowIndex="2" />
+            <RadioButton fx:id="downloadCustomRadioButton" mnemonicParsing="false" onAction="#radioButtonSelectionChanged" styleClass="radioButtonText" text="%Button.CustomForms" toggleGroup="$chooseTemplateImportMethod" GridPane.rowIndex="2" />
             <ChoiceBox fx:id="customTemplatesChoiceBox" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="selectedTemplateLabel" wrapText="true" styleClass="hintText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label fx:id="switchFormsLaterLabel" wrapText="true" styleClass="hintText" text="You can switch forms later" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="switchFormsLaterLabel" wrapText="true" styleClass="hintText" text="%FormsHint" GridPane.columnIndex="1" GridPane.rowIndex="4" />
           </children>
 
           <columnConstraints>
@@ -40,8 +40,8 @@
   <top>
     <VBox prefWidth="600.0" styleClass="mainTextBox">
       <children>
-        <Label styleClass="headingLevel1" text="Import Form Templates" />
-        <Label fx:id="templatesOverviewLabel" styleClass="mainText" text="Martus allows you to create and share custom forms for data entry. Get started by selecting a form template if desired. Martus comes with several generic form templates you can use. You can also download a custom template from one of your current contacts or another Martus user." wrapText="true" />
+        <Label styleClass="headingLevel1" text="%ImportFormTemplates" />
+        <Label fx:id="templatesOverviewLabel" styleClass="mainText" text="%ImportFormTemplateHelp" wrapText="true" />
       </children>
     </VBox>
   </top>

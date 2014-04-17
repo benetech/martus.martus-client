@@ -355,11 +355,6 @@ public class EnglishStrings
 "field:ServerNotRespondingSaveConfiguration=A connection to the server was not made. This could be because the server is not available, you have entered an incorrect IP or Public Code, the server is blocked, or your Internet connection is down. Would you like to save this server configuration for later?",
 "field:ConnectingToServerToRetrieveToken=Attempting to connect to the server and retrieve your Token.",
 
-"field:NoFormTemplateTitle=[no title]",
-
-"wintitle:ExitWizard=Exit Martus Wizard",
-"field:ExitWizard=Your changes will be lost and Martus will exit, are you sure you want to do this?",
-
 "wintitle:ExitManageContacts=Exit Manage Contacts",
 "field:ExitManageContacts=Your changes will be lost, are you sure you want to do this?",
 
@@ -1710,6 +1705,9 @@ public class EnglishStrings
 "button:ImportContactFromFile=Import Contact From File...",
 "button:ContactsSaveClose=Save and Close",
 
+"wintitle:ExitWizard=Exit Martus Wizard",
+"field:ExitWizard=Your changes will be lost and Martus will exit, are you sure you want to do this?",
+
 "field:Step1=1",
 "field:Step2=2",
 "field:Step3=3",
@@ -1802,6 +1800,23 @@ public class EnglishStrings
 
 "field:ManageContactsHeading=Contacts",
 "field:ManageContactsDescription=To send information through Martus to your contacts, you need their public key. You can pull their public keys off of the Martus server using their 7 digit access token. You can verify that you have pulled the correct key, by using their key's public code.  Ask your contacts for the access token, and public code to add your contacts here. If you do not have this information now, you will be able to add contacts later from the Martus desktop client.",
+
+"field:NoFormTemplateTitle=[no title]",
+"button:GenericForms=Generic",
+"button:CustomForms=Download Custom",
+"field:FormsHint=You can switch forms later",
+"field:ImportFormTemplates=Import Form Templates",
+"field:ImportFormTemplateHelp=Martus allows you to create and share custom forms for data entry. Get started by selecting a form template if desired. Martus comes with several generic form templates you can use. You can also download a custom template from one of your current contacts or another Martus user.",
+"field:DownloadFromContacts=Download from my contacts",
+"field:ChooseContact=Choose a Contact",
+"field:ChooseForm=Choose a Form",
+"field:NoTemplatesAvailable=No Templates Available",
+"field:FormTemplatesTip1=You can load and switch to other form templates later inside of Martus, if you do not have access to a server now, or you need one that is different from what you select here.",
+"field:FormTemplatesTip2=Note: you can change templates, but you will not be able to import templates from the server, outside of the account creation process at this time.",
+"field:DownloadFormFromAnotherUser=Download from Another Martus User",
+"field:EnterAccessToken=Enter Access Token",
+"button:SeeForms=See Forms",
+"field:SuccessfullyImportedForm=Successfully imported the #templateName Form",
 
 
 "folder:%OutBox=Unsent Bulletins",
