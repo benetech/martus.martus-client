@@ -48,6 +48,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractAppTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.TaskWithTimeout;
 import org.martus.common.MartusLogger;
+import org.martus.common.MiniLocalization;
 
 abstract public class FxController implements Initializable
 {
@@ -201,8 +202,24 @@ abstract public class FxController implements Initializable
 		{
 			MartusLocalization localization = getLocalization();
 			fxOkButton.setText(localization.getButtonLabel("ok"));
-			String fullMessage = String.format("%s  %s", localization.getFieldLabel("notify"+baseTag+"cause"), extraMessage);
+			String fieldLabel = localization.getFieldLabel("notify"+baseTag+"cause");
+			String fullMessage;
+			if(IsEmptyField(fieldLabel))
+				fullMessage = extraMessage;
+			else
+				fullMessage = String.format("%s  %s", fieldLabel, extraMessage);
 			fxLabel.setText(fullMessage);
+			
+		}
+		
+		private boolean IsEmptyField(String fieldText)
+		{
+			if(fieldText.isEmpty())
+				return true;
+			String emptyTranslationText = MiniLocalization.NotTranslatedBeginCharacter + MiniLocalization.NotTranslatedEndCharacter;
+			if(fieldText.equals(emptyTranslationText))
+				return true;
+			return false;
 		}
 		
 		public void setExtraMessage(String extraMessageToUse)
