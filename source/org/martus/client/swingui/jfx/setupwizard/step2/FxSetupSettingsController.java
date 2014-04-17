@@ -121,7 +121,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 		TorInitializationTask task = new TorInitializationTask(getApp());
 		try
 		{
-			showProgressDialog(getWizardStage(), "Setting Up Tor", task);
+			showProgressDialog(getWizardStage(), getLocalization().getFieldLabel("SettingUpTor"), task);
 			return true;
 		}
 		catch (UserCancelledException e)

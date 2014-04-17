@@ -14,13 +14,13 @@
           <children>
             <Label prefHeight="28.0" text="" />
             <VBox styleClass="mainTextBox" prefWidth="635" maxWidth="635">
-              <Label styleClass="headingLevel1" text="Your Display Settings" />
+              <Label styleClass="headingLevel1" text="%DisplaySettings" />
               <Label text="" />
               <GridPane  vgap="10.0" >
                 <children>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="30.000099999997474" prefWidth="185.0" spacing="0.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="185.0" spacing="0.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <children>
-                      <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headingLevel3" text="Date format sequence" />
+                      <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headingLevel3" text="%mdyOrder" />
                     </children>
                     <padding>
                       <Insets right="10.0" fx:id="x1" />
@@ -29,7 +29,7 @@
                   <ChoiceBox fx:id="dateFormatSequenceDropDown" prefWidth="175.0" GridPane.columnIndex="1" />
                   <HBox alignment="CENTER_RIGHT" padding="$x1" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
                     <children>
-                      <Label styleClass="headingLevel3" text="Date delimeter" />
+                      <Label styleClass="headingLevel3" text="%DateDelimiter" />
                     </children>
                   </HBox>
                   <ChoiceBox fx:id="dateDelimeterComboBox" prefWidth="175.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -52,7 +52,7 @@
           <VBox prefHeight="200.0" styleClass="mainTextBox" prefWidth="635" maxWidth="635">
             <HBox prefHeight="37.0" prefWidth="660.0">
               <children>
-                <Label styleClass="headingLevel1" text="Your Tor Settings" />
+                <Label styleClass="headingLevel1" text="%TorSettings" />
                 <Label prefWidth="15.0" text="" />
                 <Hyperlink onAction="#OnLinkTorProject" prefHeight="28.0" text="torproject.org" underline="true" />
               </children>
@@ -60,9 +60,9 @@
             <Label text="" />
             <HBox prefHeight="144.0" prefWidth="561.0">
               <children>
-                <Label prefHeight="30.0" prefWidth="59" styleClass="headingLevel3" text="Use Tor" />
+                <Label prefHeight="30.0" prefWidth="59" styleClass="headingLevel3" text="%UseTor" />
                 <Pane fx:id="switchButtonPane" prefHeight="40.0" prefWidth="80.0" />
-                <Label  prefHeight="80.0" prefWidth="450.0" styleClass="mainTextBoxText" text="Tor is a security tool you can use to hide your identity when connecting to sites on the internet. If Martus servers are blocked from your location, using Tor may help reach the servers." wrapText="true" />
+                <Label  prefHeight="80.0" prefWidth="450.0" styleClass="mainTextBoxText" text="" wrapText="true" />
               </children>
             </HBox>
           </VBox>

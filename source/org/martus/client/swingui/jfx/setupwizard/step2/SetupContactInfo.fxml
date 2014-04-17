@@ -9,8 +9,8 @@
     <BorderPane>
 		<top>
 			<VBox styleClass="mainTextBox">
-				<Label styleClass="headingLevel1" text="Account Contact Information" />
-		        <Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="This information is optional and is used to prepopulate your bulletins for your convenience. It is stored on your local computer and not sent to the Martus server." />
+				<Label styleClass="headingLevel1" text="%AccountContact" />
+		        <Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="%AccountContactInformation" />
 			</VBox>
 		</top>
 		<center>
@@ -24,9 +24,9 @@
 			        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 			      </rowConstraints>
 		      <children>
-		        <Label styleClass="headingLevel3" text="Author:" GridPane.rowIndex="0" />
+		        <Label styleClass="headingLevel3" text="%Author" GridPane.rowIndex="0" />
 		        <TextField id="" fx:id="authorField" prefHeight="26.0" prefWidth="373.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-		        <Label styleClass="headingLevel3"  text="Organization:" GridPane.rowIndex="1" />
+		        <Label styleClass="headingLevel3"  text="%Organization" GridPane.rowIndex="1" />
 		        <TextField id="" fx:id="organizationField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 		      </children>
 		    </GridPane>

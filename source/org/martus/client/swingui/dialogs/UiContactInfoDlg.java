@@ -81,10 +81,10 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		infoRequired.setRows(2);
 		panel.addOnNewLine(infoRequired);
 
-		String authorPrompt = localization.getFieldLabel("AuthorRequired");
+		String authorPrompt = localization.getFieldLabel("Author");
 		panel.addComponents(new UiLabel(authorPrompt), source);
 
-		String organizationPrompt = localization.getFieldLabel("OrganizationRequired");
+		String organizationPrompt = localization.getFieldLabel("Organization");
 		panel.addComponents(new UiLabel(organizationPrompt), organization);
 		panel.addComponents(new UiLabel(localization.getFieldLabel("email")), email);
 		panel.addComponents(new UiLabel(localization.getFieldLabel("webpage")), webpage);
