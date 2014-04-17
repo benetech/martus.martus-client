@@ -41,7 +41,7 @@ public class TestContactTableData extends TestCaseEnhanced
 		String publicKey = "FakeKey";
 		ContactKey contactKey = new ContactKey(publicKey, label);
 		contactKey.setVerificationStatus(ContactKey.VERIFIED_VISUALLY);
-		ContactsTableData fxmlTableData = new ContactsTableData(contactKey,"X");
+		ContactsTableData fxmlTableData = new ContactsTableData(contactKey);
 
 		ContactKey keyReturned = fxmlTableData.getContact();
 		assertEquals(contactKey.getPublicKey(), keyReturned.getPublicKey());
