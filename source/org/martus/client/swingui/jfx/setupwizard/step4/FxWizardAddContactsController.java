@@ -224,7 +224,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			{
 				int verification = popupController.getVerification();
 				currentContact.setVerificationStatus(verification);
-				return new ContactsTableData(currentContact); 
+				return new ContactsTableData(currentContact, getLocalization().getButtonLabel("Remove")); 
 			}
 		}
 		catch (Exception e)
@@ -612,7 +612,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			for(int i = 0; i < keys.size(); ++i)
 			{
 				ContactKey contact = keys.get(i);
-				ContactsTableData contactData = new ContactsTableData(contact); 
+				ContactsTableData contactData = new ContactsTableData(contact, getLocalization().getButtonLabel("Remove")); 
 				data.add(contactData);
 			}
 		} 

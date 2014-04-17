@@ -350,6 +350,7 @@ public class EnglishStrings
 "wintitle:notifyShowTokenAndPublicCode=Account Token and Public Code",
 
 "field:AttemptToConnectToServer=Attempting to connect to server and checking compliance",
+"field:AttemptToConnectToServerNoCompliance=Attempting to connect to server",
 "wintitle:ServerNotRespondingSaveConfiguration=Server Not Available",
 "field:ServerNotRespondingSaveConfiguration=A connection to the server was not made. This could be because the server is not available, you have entered an incorrect IP or Public Code, the server is blocked, or your Internet connection is down. Would you like to save this server configuration for later?",
 
@@ -1765,6 +1766,8 @@ public class EnglishStrings
 
 "field:ManageContactsHeading=Contacts",
 "field:ManageContactsDescription=To send information through Martus to your contacts, you need their public key. You can pull their public keys off of the Martus server using their 7 digit access token. You can verify that you have pulled the correct key, by using their key's public code.  Ask your contacts for the access token, and public code to add your contacts here. If you do not have this information now, you will be able to add contacts later from the Martus desktop client.",
+
+"button:Remove=X",
 
 
 "folder:%OutBox=Unsent Bulletins",
