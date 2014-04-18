@@ -79,18 +79,18 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 	{
 		backupMessageLabel.setText("");
 		File keypairFile = getApp().getCurrentKeyPairFile();
+		MartusLocalization localization = getLocalization();
 		if(keypairFile.length() > UiMainWindow.MAX_KEYPAIRFILE_SIZE)
 		{
-			backupMessageLabel.setText("keypair file too large!");
+			backupMessageLabel.setText(localization.getFieldLabel("KeypairTooLarge"));
 			return;
 		}
 
 		FileChooser fileChooser = new FileChooser();
 		File martusRootDir = getApp().getMartusDataRootDirectory();
 		fileChooser.setInitialDirectory(martusRootDir);
-		fileChooser.setTitle("Backup Key File");
+		fileChooser.setTitle(localization.getWindowTitle("FileDialogSaveKeyPair"));
 		KeyPairFormatFilter keyPairFilter = getMainWindow().getKeyPairFormatFilter();
-		MartusLocalization localization = getLocalization();
 		fileChooser.getExtensionFilters().addAll(
 				new FileChooser.ExtensionFilter(keyPairFilter.getDescription(), keyPairFilter.getWildCardExtension()),
 				new FileChooser.ExtensionFilter(localization.getFieldLabel("AllFiles"), "*.*"));

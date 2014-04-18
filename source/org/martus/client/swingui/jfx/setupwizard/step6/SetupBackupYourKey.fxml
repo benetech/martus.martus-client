@@ -8,8 +8,8 @@
   <top>
     <VBox maxWidth="635.0" prefWidth="635.0" styleClass="mainTextBox">
       <children>
-        <Label styleClass="headingLevel1" text="Backup Your Key" />
-        <Label prefWidth="600.0" styleClass="mainText" text="Your encryption key was created when you created your account. You will want to back it up, to be able restore your account." wrapText="true" />
+        <Label styleClass="headingLevel1" text="%BackupYourKey" />
+        <Label prefWidth="600.0" styleClass="mainText" text="%BackupYorrKeyInformation" wrapText="true" />
       </children>
     </VBox>
   </top>
@@ -17,8 +17,8 @@
     <VBox>
       <children>
         <Label minHeight="40.0" text="" />
-        <Button mnemonicParsing="false" onAction="#createSingelEncryptedFile" text="Create Single, Encrypted File" />
-        <Label id="backupMessageLabel" minHeight="54.0" prefHeight="54.0" prefWidth="600.0" styleClass="mainText" text="Note: this backup method still requires remembering your username and password to restore your account." wrapText="true" />
+        <Button mnemonicParsing="false" onAction="#createSingelEncryptedFile" text="%Button.CreateSingleEncryptedFile" />
+        <Label id="backupMessageLabel" minHeight="54.0" prefHeight="54.0" prefWidth="600.0" styleClass="mainText" text="%CreateSingleEncryptedFileInformation" wrapText="true" />
         <Label fx:id="backupMessageLabel" minHeight="75.0" prefHeight="75.0" prefWidth="600.0" styleClass="hintText" text="" wrapText="true" />
       </children>
     </VBox>

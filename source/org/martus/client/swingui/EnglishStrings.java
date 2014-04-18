@@ -1817,6 +1817,15 @@ public class EnglishStrings
 "button:SeeForms=See Forms",
 "field:SuccessfullyImportedForm=Successfully imported the #templateName Form",
 
+"field:KeypairTooLarge=keypair file too large!",
+"field:BackupYourKey=Backup Your Key",
+"field:BackupYorrKeyInformation=Your encryption key was created when you created your account. You will want to back it up, to be able restore your account.",
+"button:CreateSingleEncryptedFile=Create Single, Encrypted File",
+"field:CreateSingleEncryptedFileInformation=Note: this backup method still requires remembering your username and password to restore your account.",
+"field:BackupYourKeyTip1=Be sure to save a copy of your account key to a secure location that is different from the computer where you currently have Martus installed, so you have it if you need to restore your account.",
+"field:BackupYourKeyTip2=Martus also offers a way to back up your key in 5 separate pieces, which is the only way for you to access your Martus account and data if you forget your user name and password. You will be prompted to create the 5 piece backup after completing your account setup and we strongly encourage you to do so.",
+
+"field:ChooseLanguage=Choose a Language",
 
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Saved Bulletins",
