@@ -36,7 +36,6 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.clientside.MtfAwareLocalization;
-import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 
@@ -124,6 +123,7 @@ public class FxSelectLanguageController extends FxStep6Controller
 		return null;
 	}
 	
-	@FXML // fx:id="languagesDropdown"
-	private ChoiceBox<ChoiceItem> languagesDropdown; // Value injected by FXMLLoader
+	@FXML 
+	private ChoiceBox<ChoiceItem> languagesDropdown; 
+	
 }

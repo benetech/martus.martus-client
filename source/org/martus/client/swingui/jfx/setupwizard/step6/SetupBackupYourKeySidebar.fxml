@@ -6,8 +6,8 @@
 
 <VBox styleClass="outerSidebar" prefWidth="300.0" maxWidth="300">
 <VBox  styleClass="sidebar" prefWidth="200.0" maxWidth="200">
-	<Label styleClass="sidebarText" wrapText="true" text="Be sure to save a copy of your account key to a secure location that is different from the computer where you currently have Martus installed, so you have it if you need to restore your account." />
+	<Label styleClass="sidebarText" wrapText="true" text="%BackupYourKeyTip1" />
 	<Label />
-	<Label styleClass="sidebarText" wrapText="true" text="Martus also offers a way to back up your key in 5 separate pieces, which is the only way for you to access your Martus account and data if you forget your user name and password. You will be prompted to create the 5 piece backup after completing your account setup and we strongly encourage you to do so." />
+	<Label styleClass="sidebarText" wrapText="true" text="%BackupYourKeyTip2" />
 </VBox>
 </VBox>
