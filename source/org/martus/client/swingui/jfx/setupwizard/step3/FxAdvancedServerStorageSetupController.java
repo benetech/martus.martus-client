@@ -142,7 +142,7 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 		{
 			getWizardStage().setCurrentServerIsAvailable(false);
 			MartusLogger.logException(e);
-			showNotifyDialog(getWizardStage(), "ServerNotAvailable");
+			showNotifyDialog(getWizardStage(), "AdvanceServerNotResponding");
 		}
 		catch (Exception e)
 		{

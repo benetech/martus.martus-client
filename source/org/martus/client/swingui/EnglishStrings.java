@@ -350,8 +350,10 @@ public class EnglishStrings
 
 "field:AttemptToConnectToServerAndGetCompliance=Attempting to connect to server and checking compliance",
 "field:AttemptToConnectToServer=Attempting to connect to server",
+"wintitle:notifyAdvanceServerNotResponding=Server Not Available",
+"field:notifyAdvanceServerNotRespondingcause=A connection to the server was not made. This could be because the server is not available, you have entered an incorrect IP, the server is blocked, or your Internet connection is down.",
 "wintitle:ServerNotRespondingSaveConfiguration=Server Not Available",
-"field:ServerNotRespondingSaveConfiguration=A connection to the server was not made. This could be because the server is not available, you have entered an incorrect IP or Public Code, the server is blocked, or your Internet connection is down. Would you like to save this server configuration for later?",
+"field:ServerNotRespondingSaveConfiguration=A connection to the server was not made. This could be because the server is not available, the server is blocked, or your Internet connection is down. Would you like to save this server configuration for later?",
 "field:ConnectingToServerToRetrieveToken=Attempting to connect to the server and retrieve your Token.",
 
 "wintitle:ExitManageContacts=Exit Manage Contacts",
