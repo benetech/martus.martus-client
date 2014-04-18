@@ -9,7 +9,7 @@
     <VBox maxWidth="635.0" prefWidth="635.0" styleClass="mainTextBox">
       <children>
         <Label styleClass="headingLevel1" text="%BackupYourKey" />
-        <Label prefWidth="600.0" styleClass="mainText" text="%BackupYorrKeyInformation" wrapText="true" />
+        <Label prefWidth="600.0" styleClass="mainText" text="%BackupYourKeyInformation" wrapText="true" />
       </children>
     </VBox>
   </top>
