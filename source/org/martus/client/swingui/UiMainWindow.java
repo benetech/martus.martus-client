@@ -644,12 +644,18 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private boolean sessionSignIn()
 	{
-		boolean wantsNewAccount = false;
 		int result = signIn(UiSigninDlg.INITIAL); 
 		if(result == UiSigninDlg.CANCEL)
 			return false;
 		if(result == UiSigninDlg.NEW_ACCOUNT)
-			wantsNewAccount = true;
+		{
+			setCreatedNewAccount(false);
+			startAccountSetupWizard();
+			if(!isAlreadySignedIn())
+				return false;
+
+			setCreatedNewAccount(true);
+		}
 		if(result == UiSigninDlg.RECOVER_ACCOUNT_BY_SHARE)
 		{	
 			UiBackupRecoverSharedKeyPair recover = new UiBackupRecoverSharedKeyPair(this);
@@ -665,15 +671,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			justRecovered = true;
 		}
 
-		setCreatedNewAccount(false);
-		if(wantsNewAccount)
-		{
-			startAccountSetupWizard();
-			if(!isAlreadySignedIn())
-				return false;
-			setCreatedNewAccount(true);
-		}
-		
 		return true;
 	}
 
