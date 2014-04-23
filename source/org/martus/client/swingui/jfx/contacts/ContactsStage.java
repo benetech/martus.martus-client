@@ -58,12 +58,6 @@ public class ContactsStage extends FxNonWizardStage
 	}
 	
 	@Override
-	protected void handleDialogClose()
-	{
-		close();
-	}
-	
-	@Override
 	protected boolean confirmExit()
 	{
 		MartusLocalization localization = getMainWindow().getLocalization();

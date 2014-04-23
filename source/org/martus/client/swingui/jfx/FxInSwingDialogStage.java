@@ -147,7 +147,7 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 	
 	protected void handleDialogClose()
 	{
-		mainWindow.exitWithoutSavingState();
+		close();
 	}
 	
 	protected class WindowCloseHandler extends WindowAdapter

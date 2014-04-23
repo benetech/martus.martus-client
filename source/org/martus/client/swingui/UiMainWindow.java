@@ -447,10 +447,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		if (getApp().hasNoAccounts())
 		{
-			if(!startAccountSetupWizard())
+			startAccountSetupWizard();
+			if(!getApp().isSignedIn())
 				return false;
 		}
-		else
+
+		if(!getApp().isSignedIn())
 		{
 			if(!sessionSignIn())
 				return false;
