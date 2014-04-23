@@ -32,6 +32,7 @@ import javafx.application.Platform;
 import javax.swing.JDialog;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.WindowObscurer;
 import org.martus.swing.Utilities;
 
 public class FxModalDialog extends JDialog
@@ -47,7 +48,9 @@ public class FxModalDialog extends JDialog
 		Platform.runLater(new FxRunner(stage));
 
 		Utilities.centerDlg(dialog);
+		owner.setCurrentActiveDialog(dialog);
 		dialog.setVisible(true);
+		owner.setCurrentActiveDialog(null);
 	}
 	
 	private FxModalDialog(UiMainWindow owner)
@@ -55,5 +58,7 @@ public class FxModalDialog extends JDialog
 		super(owner);
 
 		setModal(true);
+		
+		setGlassPane(new WindowObscurer());
 	}
 }
