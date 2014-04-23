@@ -645,33 +645,41 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private boolean sessionSignIn()
 	{
 		int result = signIn(UiSigninDlg.INITIAL); 
-		if(result == UiSigninDlg.CANCEL)
-			return false;
-		if(result == UiSigninDlg.NEW_ACCOUNT)
+		switch(result)
 		{
-			setCreatedNewAccount(false);
-			startAccountSetupWizard();
-			if(!isAlreadySignedIn())
+			case UiSigninDlg.CANCEL:
 				return false;
-
-			setCreatedNewAccount(true);
+			case UiSigninDlg.NEW_ACCOUNT:
+			{
+				setCreatedNewAccount(false);
+				startAccountSetupWizard();
+				if(!isAlreadySignedIn())
+					return false;
+	
+				setCreatedNewAccount(true);
+				return true;
+			}
+			case UiSigninDlg.RECOVER_ACCOUNT_BY_SHARE:
+			{	
+				UiBackupRecoverSharedKeyPair recover = new UiBackupRecoverSharedKeyPair(this);
+				if(!recover.recoverKeyPairFromMultipleUnencryptedFiles())
+					return false;
+				justRecovered = true;
+				return true;
+			}
+			case UiSigninDlg.RECOVER_ACCOUNT_BY_BACKUP_FILE:
+			{
+				UiRecoverKeyPairFromBackup recover = new UiRecoverKeyPairFromBackup(this);
+				if(!recover.recoverPrivateKey())
+					return false;
+				justRecovered = true;
+				return true;
+			}
+			default:
+			{
+				throw new RuntimeException("Unknown signin result: " + result);
+			}
 		}
-		if(result == UiSigninDlg.RECOVER_ACCOUNT_BY_SHARE)
-		{	
-			UiBackupRecoverSharedKeyPair recover = new UiBackupRecoverSharedKeyPair(this);
-			if(!recover.recoverKeyPairFromMultipleUnencryptedFiles())
-				return false;
-			justRecovered = true;
-		}
-		if(result == UiSigninDlg.RECOVER_ACCOUNT_BY_BACKUP_FILE)
-		{
-			UiRecoverKeyPairFromBackup recover = new UiRecoverKeyPairFromBackup(this);
-			if(!recover.recoverPrivateKey())
-				return false;
-			justRecovered = true;
-		}
-
-		return true;
 	}
 
 	public void doPostSigninAppInitialization()
