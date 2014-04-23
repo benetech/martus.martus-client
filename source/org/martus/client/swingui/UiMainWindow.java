@@ -195,7 +195,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		UiModelessBusyDlg splashScreen = new UiModelessBusyDlg(new ImageIcon(UiAboutDlg.class.getResource("Martus-logo-black-text-160x72.png")));
 
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		setCurrentActiveFrame(this);
 		try
 		{
 			localization = new MartusLocalization(MartusApp.getTranslationsDirectory(), getAllEnglishStrings());
@@ -2827,8 +2826,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			public void run()
 			{
 				waitingForSignin = true;
-				getCurrentActiveFrame().getGlassPane().setVisible(true);
-				getCurrentActiveFrame().setState(ICONIFIED);
+				JFrame frame = getCurrentActiveFrame();
+				if(frame != null)
+				{
+					frame.getGlassPane().setVisible(true);
+					frame.setState(ICONIFIED);
+				}
+				JDialog dialog = getCurrentActiveDialog();
+				if(dialog != null)
+				{
+					dialog.getGlassPane().setVisible(true);
+				}
 				if(signIn(UiSigninDlg.TIMED_OUT) != UiSigninDlg.SIGN_IN)
 				{
 					System.out.println("Cancelled from timeout signin");
@@ -2840,10 +2848,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 					initializeViews();
 					mainWindowInitalizing = false;
 				}
-				getCurrentActiveFrame().getGlassPane().setVisible(false);
-				getCurrentActiveFrame().setVisible(true);
-				getCurrentActiveFrame().setEnabled(true);
-				getCurrentActiveFrame().setState(NORMAL);
+				if(frame != null)
+				{
+					frame.getGlassPane().setVisible(false);
+					frame.setVisible(true);
+					frame.setEnabled(true);
+					frame.setState(NORMAL);
+				}
+				if(dialog != null)
+				{
+					dialog.getGlassPane().setVisible(false);
+				}
 				waitingForSignin = false;
 			}
 		}
@@ -2912,6 +2927,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public JFrame getCurrentActiveFrame()
 	{
 		return currentActiveFrame;
+	}
+	
+	public void setCurrentActiveDialog(JDialog newActiveDialog)
+	{
+		currentActiveDialog = newActiveDialog;
+	}
+	
+	public JDialog getCurrentActiveDialog()
+	{
+		return currentActiveDialog;
 	}
 	
 	private int getTextFieldColumns(int windowWidth) 
@@ -3022,6 +3047,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	MartusLocalization localization;
 
 	private JFrame currentActiveFrame;
+	private JDialog currentActiveDialog;
 	boolean inConfigServer;
 	boolean preparingToExitMartus;
 	private FileLock lockToPreventTwoInstances; 
