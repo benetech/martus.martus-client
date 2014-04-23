@@ -646,8 +646,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		boolean wantsNewAccount = false;
 		int signInType = UiSigninDlg.INITIAL;
-		if(!app.doesAnyAccountExist())
-			signInType = UiSigninDlg.INITIAL_NEW_RECOVER_ACCOUNT;
 		
 		int result = signIn(signInType); 
 		if(result == UiSigninDlg.CANCEL)
