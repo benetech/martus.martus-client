@@ -645,10 +645,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private boolean sessionSignIn()
 	{
 		int result = signIn(UiSigninDlg.INITIAL); 
+		if(result== UiSigninDlg.CANCEL)
+			return false;
+		
 		switch(result)
 		{
-			case UiSigninDlg.CANCEL:
-				return false;
 			case UiSigninDlg.NEW_ACCOUNT:
 			{
 				setCreatedNewAccount(false);
