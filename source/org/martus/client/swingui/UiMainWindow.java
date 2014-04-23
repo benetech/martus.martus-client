@@ -677,7 +677,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			setCreatedNewAccount(false);
 			if(wantsNewAccount)
 			{
-				if(!startAccountSetupWizard())
+				startAccountSetupWizard();
+				if(!isAlreadySignedIn())
 					return false;
 				setCreatedNewAccount(true);
 			}
