@@ -1806,7 +1806,7 @@ public class MartusApp
 	}
 	
 	
-	public Vector getListOfFormTemplatesOnServer(String accountToRetreiveListFrom) throws ServerNotAvailableException, MartusSignatureException, AccountNotFoundException
+	public Vector getListOfFormTemplatesOnServer(String accountToRetreiveListFrom) throws ServerNotAvailableException, MartusSignatureException, AccountNotFoundException, ServerErrorException
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
@@ -1815,6 +1815,8 @@ public class MartusApp
 			return getVectorOfVectorsFromResponse(response);
 		if(response.getResultCode().equals(NetworkInterfaceConstants.ACCOUNT_NOT_FOUND))
 			throw new AccountNotFoundException(); 
+		if(response.getResultCode().equals(NetworkInterfaceConstants.SERVER_ERROR))
+			throw new ServerErrorException();
 		throw new ServerNotAvailableException();
 	}
 	
