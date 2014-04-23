@@ -649,35 +649,33 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(!app.doesAnyAccountExist())
 			signInType = UiSigninDlg.INITIAL_NEW_RECOVER_ACCOUNT;
 		
-		{
-			int result = signIn(signInType); 
-			if(result == UiSigninDlg.CANCEL)
+		int result = signIn(signInType); 
+		if(result == UiSigninDlg.CANCEL)
+			return false;
+		if(result == UiSigninDlg.NEW_ACCOUNT)
+			wantsNewAccount = true;
+		if(result == UiSigninDlg.RECOVER_ACCOUNT_BY_SHARE)
+		{	
+			UiBackupRecoverSharedKeyPair recover = new UiBackupRecoverSharedKeyPair(this);
+			if(!recover.recoverKeyPairFromMultipleUnencryptedFiles())
 				return false;
-			if(result == UiSigninDlg.NEW_ACCOUNT)
-				wantsNewAccount = true;
-			if(result == UiSigninDlg.RECOVER_ACCOUNT_BY_SHARE)
-			{	
-				UiBackupRecoverSharedKeyPair recover = new UiBackupRecoverSharedKeyPair(this);
-				if(!recover.recoverKeyPairFromMultipleUnencryptedFiles())
-					return false;
-				justRecovered = true;
-			}
-			if(result == UiSigninDlg.RECOVER_ACCOUNT_BY_BACKUP_FILE)
-			{
-				UiRecoverKeyPairFromBackup recover = new UiRecoverKeyPairFromBackup(this);
-				if(!recover.recoverPrivateKey())
-					return false;
-				justRecovered = true;
-			}
-	
-			setCreatedNewAccount(false);
-			if(wantsNewAccount)
-			{
-				startAccountSetupWizard();
-				if(!isAlreadySignedIn())
-					return false;
-				setCreatedNewAccount(true);
-			}
+			justRecovered = true;
+		}
+		if(result == UiSigninDlg.RECOVER_ACCOUNT_BY_BACKUP_FILE)
+		{
+			UiRecoverKeyPairFromBackup recover = new UiRecoverKeyPairFromBackup(this);
+			if(!recover.recoverPrivateKey())
+				return false;
+			justRecovered = true;
+		}
+
+		setCreatedNewAccount(false);
+		if(wantsNewAccount)
+		{
+			startAccountSetupWizard();
+			if(!isAlreadySignedIn())
+				return false;
+			setCreatedNewAccount(true);
 		}
 		
 		return true;
