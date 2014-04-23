@@ -645,9 +645,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private boolean sessionSignIn()
 	{
 		boolean wantsNewAccount = false;
-		int signInType = UiSigninDlg.INITIAL;
-		
-		int result = signIn(signInType); 
+		int result = signIn(UiSigninDlg.INITIAL); 
 		if(result == UiSigninDlg.CANCEL)
 			return false;
 		if(result == UiSigninDlg.NEW_ACCOUNT)
