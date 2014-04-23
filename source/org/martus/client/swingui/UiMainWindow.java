@@ -644,43 +644,46 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private boolean sessionSignIn()
 	{
-		int result = signIn(UiSigninDlg.INITIAL); 
-		if(result== UiSigninDlg.CANCEL)
-			return false;
-		
-		switch(result)
+		while(!isAlreadySignedIn())
 		{
-			case UiSigninDlg.NEW_ACCOUNT:
-			{
-				setCreatedNewAccount(false);
-				startAccountSetupWizard();
-				if(!isAlreadySignedIn())
-					return false;
-	
-				setCreatedNewAccount(true);
+			int result = signIn(UiSigninDlg.INITIAL); 
+			if(result== UiSigninDlg.CANCEL)
+				return false;
+			if(result == UiSigninDlg.SIGN_IN)
 				return true;
-			}
-			case UiSigninDlg.RECOVER_ACCOUNT_BY_SHARE:
-			{	
-				UiBackupRecoverSharedKeyPair recover = new UiBackupRecoverSharedKeyPair(this);
-				if(!recover.recoverKeyPairFromMultipleUnencryptedFiles())
-					return false;
-				justRecovered = true;
-				return true;
-			}
-			case UiSigninDlg.RECOVER_ACCOUNT_BY_BACKUP_FILE:
+			
+			switch(result)
 			{
-				UiRecoverKeyPairFromBackup recover = new UiRecoverKeyPairFromBackup(this);
-				if(!recover.recoverPrivateKey())
-					return false;
-				justRecovered = true;
-				return true;
-			}
-			default:
-			{
-				throw new RuntimeException("Unknown signin result: " + result);
+				case UiSigninDlg.NEW_ACCOUNT:
+				{
+					setCreatedNewAccount(false);
+					startAccountSetupWizard();
+					if(isAlreadySignedIn())
+						setCreatedNewAccount(true);
+					break;
+				}
+				case UiSigninDlg.RECOVER_ACCOUNT_BY_SHARE:
+				{	
+					UiBackupRecoverSharedKeyPair recover = new UiBackupRecoverSharedKeyPair(this);
+					if(recover.recoverKeyPairFromMultipleUnencryptedFiles())
+						justRecovered = true;
+					break;
+				}
+				case UiSigninDlg.RECOVER_ACCOUNT_BY_BACKUP_FILE:
+				{
+					UiRecoverKeyPairFromBackup recover = new UiRecoverKeyPairFromBackup(this);
+					if(recover.recoverPrivateKey())
+						justRecovered = true;
+					break;
+				}
+				default:
+				{
+					throw new RuntimeException("Unknown signin result: " + result);
+				}
 			}
 		}
+		
+		return true;
 	}
 
 	public void doPostSigninAppInitialization()
