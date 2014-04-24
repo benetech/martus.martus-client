@@ -37,6 +37,7 @@ import javafx.stage.Stage;
 
 import javax.swing.JDialog;
 
+import org.martus.client.swingui.TranslucentWindowObscurer;
 import org.martus.client.swingui.UiMainWindow;
 
 abstract public class FxInSwingDialogController extends FxController
@@ -68,10 +69,10 @@ abstract public class FxInSwingDialogController extends FxController
 		JDialog dialog = getStage().getDialog();
 		dialog.addWindowListener(new DialogWindowHandler(fronter));
 		
-		Component glassPane = dialog.getGlassPane();
+		Component glassPane = new TranslucentWindowObscurer();
+		dialog.setGlassPane(glassPane);
 		GlassPaneMouseHandler glassPaneMouseHandler = new GlassPaneMouseHandler(fronter);
 		glassPane.addMouseListener(glassPaneMouseHandler);
-		glassPane.setBackground(Color.RED);
 		glassPane.setVisible(true);
 		try
 		{
