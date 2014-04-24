@@ -2480,7 +2480,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				if(mode==UiSigninDlg.INITIAL || mode == UiSigninDlg.INITIAL_NEW_RECOVER_ACCOUNT)
 					signinDlg = new UiInitialSigninDlg(getLocalization(), getCurrentUiState(), getCurrentActiveFrame(), mode, userName, userPassword);
 				else
-					signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), getCurrentActiveFrame(), mode, userName, userPassword);
+				{
+					if(getCurrentActiveDialog() != null)
+						signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), (JFrame)null, mode, userName, userPassword);
+					else
+						signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), getCurrentActiveFrame(), mode, userName, userPassword);
+				}
 				userChoice = signinDlg.getUserChoice();
 				userName = signinDlg.getNameText();
 				userPassword = signinDlg.getPassword();
@@ -2496,7 +2501,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				else
 				{	
 					app.attemptReSignIn(userName, userPassword);
-					getCurrentActiveFrame().setState(NORMAL);
 				}
 				return UiSigninDlg.SIGN_IN;
 			}
@@ -2787,7 +2791,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			try 
 			{
-				if(!hasTimedOut())
+				if(!hasTimedOut() || waitingForSignin)
 					return;
 				
 				MartusLogger.log(MartusLogger.getMemoryStatistics());
@@ -2804,7 +2808,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				System.gc();
 				MartusLogger.log(MartusLogger.getMemoryStatistics());
 
-				SwingUtilities.invokeAndWait(new ThreadedSignin());
+				waitingForSignin = true;
+				SwingUtilities.invokeLater(new ThreadedSignin());
 			} 
 			catch (Throwable e) 
 			{
@@ -2825,16 +2830,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			public void run()
 			{
-				waitingForSignin = true;
 				JFrame frame = getCurrentActiveFrame();
 				if(frame != null)
 				{
+					frame.setGlassPane(new WindowObscurer());
 					frame.getGlassPane().setVisible(true);
-					frame.setState(ICONIFIED);
 				}
 				JDialog dialog = getCurrentActiveDialog();
 				if(dialog != null)
 				{
+					dialog.setGlassPane(new WindowObscurer());
 					dialog.getGlassPane().setVisible(true);
 				}
 				if(signIn(UiSigninDlg.TIMED_OUT) != UiSigninDlg.SIGN_IN)
@@ -2843,17 +2848,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 					exitWithoutSavingState();
 				}
 				MartusLogger.log("Restoring active frame");
-				if(mainWindowInitalizing)
-				{
-					initializeViews();
-					mainWindowInitalizing = false;
-				}
 				if(frame != null)
 				{
 					frame.getGlassPane().setVisible(false);
-					frame.setVisible(true);
-					frame.setEnabled(true);
-					frame.setState(NORMAL);
 				}
 				if(dialog != null)
 				{
