@@ -82,7 +82,7 @@ class BackgroundTimerTask extends TimerTask
 	
 	public void run()
 	{
-		if(mainWindow.mainWindowInitalizing)
+		if(mainWindow.isMainWindowInitalizing())
 		{
 			MartusLogger.log("Waiting to contact server until startup is complete");
 			return;
