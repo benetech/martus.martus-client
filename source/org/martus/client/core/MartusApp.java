@@ -162,9 +162,6 @@ public class MartusApp
 			martusDataRootDirectory = dataDirectoryToUse;
 
 			transport = TorTransportWrapper.create();
-			File torDirectory = getOrchidDirectory();
-			torDirectory.mkdirs();
-			transport.setTorDataDirectory(torDirectory);
 			
 			if(cryptoToUse == null)
 				cryptoToUse = new MartusSecurity();
@@ -660,9 +657,14 @@ public class MartusApp
 			currentNetworkInterfaceHandler.setTimeoutGetServerInfo(newTimeout);
 
 		if(isTorEnabled)
-			transport.start();
+		{
+			File torDirectory = getOrchidDirectory();
+			transport.start(torDirectory);
+		}
 		else
+		{
 			transport.stop();
+		}
 	}
 
 	private byte[] verifyAndReadSignedFile(File dataFile, File sigFile) throws Exception
