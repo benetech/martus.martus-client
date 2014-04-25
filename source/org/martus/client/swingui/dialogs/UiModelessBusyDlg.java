@@ -29,11 +29,14 @@ package org.martus.client.swingui.dialogs;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.border.LineBorder;
+import javax.swing.border.Border;
+
 import org.martus.swing.UiLabel;
 import org.martus.swing.Utilities;
 
@@ -55,7 +58,12 @@ public class UiModelessBusyDlg extends JDialog
 
 	public void showDlg(JComponent displayItem)
 	{
-		getRootPane().setBorder(new LineBorder(Color.black, 5));
+		Border blackBorder = BorderFactory.createLineBorder(Color.black, 5);
+		int vPadding = 20;
+		int hPadding = vPadding * 2;
+		Border emptyBorder = BorderFactory.createEmptyBorder(vPadding, hPadding, vPadding, hPadding);
+		Border compoundBorder = BorderFactory.createCompoundBorder(blackBorder, emptyBorder);
+		getRootPane().setBorder(compoundBorder);
 		getContentPane().add(displayItem, BorderLayout.CENTER);
 		setUndecorated(true);
 		Utilities.centerDlg(this);
