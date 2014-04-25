@@ -1695,7 +1695,7 @@ public class EnglishStrings
 "field:ManageContactsOverview2=If someone wishes to send you information through Martus, provide them with your access token and public code. Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information.",
 "field:AddContactInstructions=To send information through Martus to your contacts, pull their public key from the Martus server using their access token. Verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add them here. If you do not have this information now, you will be able to add contacts later.",
 
-"button:ContactsName=Contact Name",
+"button:ContactName=Contact Name",
 "button:SendToByDefault=Send To by Default",
 "button:PublicCode=Public Code",
 "button:ContactVerified=Verified",
