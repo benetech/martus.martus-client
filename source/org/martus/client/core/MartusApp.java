@@ -659,7 +659,8 @@ public class MartusApp
 		if(isTorEnabled)
 		{
 			File torDirectory = getOrchidDirectory();
-			transport.start(torDirectory);
+			transport.setTorDataDirectory(torDirectory);
+			transport.start();
 		}
 		else
 		{
