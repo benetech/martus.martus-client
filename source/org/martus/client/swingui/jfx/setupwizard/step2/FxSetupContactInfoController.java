@@ -48,7 +48,7 @@ public class FxSetupContactInfoController extends FxStep2Controller
 		// NOTE: Kind of an odd place for this, but it has to be 
 		// after we have signed in, and this is the earliest 
 		// point in the wizard where we know that is true.
-		getMainWindow().startInactivityTimeoutDetection();
+		getMainWindow().doPostSigninAppInitialization();
 		
 		getWizardNavigationHandler().getBackButton().setDisable(true);
 

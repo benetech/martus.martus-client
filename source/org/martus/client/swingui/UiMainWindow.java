@@ -457,12 +457,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				return false;
 
 			startInactivityTimeoutDetection();
+			doPostSigninAppInitialization();
 			getApp().startOrStopTorAsRequested();
 		}
 		
 		initalizeUiState();
 		
-		doPostSigninAppInitialization();
 
 		try
 		{
@@ -689,6 +689,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		try
 		{
+			startInactivityTimeoutDetection();
 			app.doAfterSigninInitalization();
 		}
 		catch (MartusAppInitializationException e1)

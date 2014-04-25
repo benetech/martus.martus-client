@@ -161,8 +161,6 @@ public class MartusApp
 		{
 			martusDataRootDirectory = dataDirectoryToUse;
 
-			transport = TorTransportWrapper.create();
-			
 			if(cryptoToUse == null)
 				cryptoToUse = new MartusSecurity();
 
@@ -206,6 +204,12 @@ public class MartusApp
 
 	public TorTransportWrapper getTransport()
 	{
+		if(transport == null)
+		{
+			String errorText = "getTransport called before transport created";
+			MartusLogger.logError(errorText);
+			throw new RuntimeException(errorText);
+		}
 		return transport;
 	}
 
@@ -659,12 +663,12 @@ public class MartusApp
 		if(isTorEnabled)
 		{
 			File torDirectory = getOrchidDirectory();
-			transport.setTorDataDirectory(torDirectory);
-			transport.start();
+			getTransport().setTorDataDirectory(torDirectory);
+			getTransport().start();
 		}
 		else
 		{
-			transport.stop();
+			getTransport().stop();
 		}
 	}
 
@@ -831,6 +835,7 @@ public class MartusApp
 	public void doAfterSigninInitalization() throws MartusAppInitializationException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
 	{
 		store.doAfterSigninInitialization(getCurrentAccountDirectory());
+		transport = TorTransportWrapper.create();
 	}
 	
 	public File getFxmlDirectory()
@@ -1701,7 +1706,7 @@ public class MartusApp
 		if(serverName.length() == 0)
 			return false;
 
-		NonSSLNetworkAPI server = new ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer(serverName, transport);
+		NonSSLNetworkAPI server = new ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer(serverName, getTransport());
 		return ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer.isNonSSLServerAvailable(server);
 	}
 
@@ -1725,7 +1730,7 @@ public class MartusApp
 
 	public String getServerPublicKey(String serverName) throws Exception
 	{
-		ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer server = new ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer(serverName, transport);
+		ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer server = new ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer(serverName, getTransport());
 		return getServerPublicKey(server);
 	}
 
@@ -2471,7 +2476,7 @@ public class MartusApp
 	{
 		String ourServer = getServerName();
 		String ourServerPublicKey = getConfigInfo().getServerPublicKey();
-		return ClientSideNetworkGateway.buildNetworkInterface(ourServer,ourServerPublicKey, transport);
+		return ClientSideNetworkGateway.buildNetworkInterface(ourServer,ourServerPublicKey, getTransport());
 	}
 
 	private void invalidateCurrentHandlerAndGateway()
