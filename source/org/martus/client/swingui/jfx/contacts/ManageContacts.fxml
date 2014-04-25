@@ -33,7 +33,7 @@
         <HBox prefHeight="53.0">
           <children>
             <Label styleClass="headingLevel3" text="%AccessToken" />
-            <TextField id="" fx:id="accessTokenField" promptText="%AccessTokenNotSet" />
+            <TextField id="" fx:id="accessTokenField" promptText="%AccessTokenInstructions" />
             <Label prefWidth="38.0" visible="false" />
             <Button id="" fx:id="addContactButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addContact" prefWidth="259.0" styleClass="button_guided_action" text="%Button.AddContact" />
           </children>
