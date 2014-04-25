@@ -348,7 +348,7 @@ public class EnglishStrings
 "field:notifyShowTokenAndPublicCodecause=Access Token: #Token#\nPublic Code: #PublicCode#",
 "wintitle:notifyShowTokenAndPublicCode=Account Token and Public Code",
 
-"field:AttemptToConnectToServerAndGetCompliance=Attempting to connect to server and checking compliance",
+"field:AttemptToConnectToServerAndGetCompliance=Attempting to connect to server",
 "field:AttemptToConnectToServer=Attempting to connect to server",
 "wintitle:notifyAdvanceServerNotResponding=Server Not Available",
 "field:notifyAdvanceServerNotRespondingcause=A connection to the server was not made. This could be because the server is not available, you have entered an incorrect IP, the server is blocked, or your Internet connection is down.",
