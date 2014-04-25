@@ -662,8 +662,6 @@ public class MartusApp
 
 		if(isTorEnabled)
 		{
-			File torDirectory = getOrchidDirectory();
-			getTransport().setTorDataDirectory(torDirectory);
 			getTransport().start();
 		}
 		else
@@ -836,6 +834,8 @@ public class MartusApp
 	{
 		store.doAfterSigninInitialization(getCurrentAccountDirectory());
 		transport = TorTransportWrapper.create();
+		File torDirectory = getOrchidDirectory();
+		getTransport().setTorDataDirectory(torDirectory);
 	}
 	
 	public File getFxmlDirectory()
