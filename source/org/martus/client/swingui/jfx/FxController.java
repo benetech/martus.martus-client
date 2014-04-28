@@ -361,7 +361,7 @@ abstract public class FxController implements Initializable
 
 		Scene scene = new Scene(root);
 		File fxmlDir = getApp().getFxmlDirectory();
-		URL css = FxController.getBestFile(fxmlDir, "popup.css");
+		URL css = FxController.getBestFile(fxmlDir, "css/popup.css");
 		scene.getStylesheets().add(css.toExternalForm());
 		popupStage.setScene(scene);
 	    showModalPopupStage(popupStage);
