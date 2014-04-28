@@ -137,7 +137,7 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 		getShellController().setStage(this);
 		getShellController().setContentPane(contentPaneController);
 		setSceneRoot(shellContents);
-		getFxScene().applyStyleSheet();
+		getFxScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
 	}
 
 	public FxScene getFxScene()

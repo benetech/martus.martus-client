@@ -40,11 +40,9 @@ public class FxScene extends Scene
 		
 		fxmlDirectory = fxmlDirToUse;
 		cssLocation = cssLocationToUse;
-		
-		applyStyleSheet();
 	}
 
-	public void applyStyleSheet() throws Exception
+	public void applyStyleSheet(String languageCode) throws Exception
 	{
 		ObservableList<String> stylesheets = getStylesheets();
 		String externalForm = getBestCssLocation().toExternalForm();
