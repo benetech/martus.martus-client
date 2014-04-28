@@ -1,11 +1,11 @@
 BorderPane {
     -fx-font-family: "Helvetica";
-    -fx-line-height: 28px inherit;
+    -fx-line-height: 21px inherit;
 }
 
 .root {
     -fx-background-color: #253342;
-    -fx-font-size: 17px;
+    -fx-font-size: 13px;
 }
 
 .button {
@@ -23,7 +23,7 @@ BorderPane {
 	-fx-font-weight: bold;
 	-fx-text-fill: White;
 	-fx-alignment: center;
-	-fx-font-size: 17px;
+	-fx-font-size: 13px;
 	-fx-padding: 5 35 5 35;
 }
 
@@ -34,39 +34,39 @@ BorderPane {
 	-fx-border-radius: 5;
 	-fx-text-fill: White;
 	-fx-alignment: center;
-	-fx-font-size: 17px;
+	-fx-font-size: 13px;
 	-fx-padding: 5 35 5 35;
 }
 
 .headingLevel1 {
     -fx-text-fill: White;
-    -fx-font-size: 36px;
+    -fx-font-size: 27px;
 }
 
 .headingLevel2 {
     -fx-text-fill: #e2c92f;
-    -fx-font-size: 21px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
 }
 
 .headingLevel3 {
     -fx-text-fill: #e2c92f;
     -fx-font-weight: bold;
-    -fx-font-size: 18px;
+    -fx-font-size: 13px;
     -fx-alignment: top-left;
     -fx-padding: 10 0 0 0;
 }
 
 .stepNumber {
     -fx-text-fill: #707e87;
-    -fx-font-size: 24px;
+    -fx-font-size: 18px;
     -fx-font-weight: bold;
     -fx-padding: 10 0 0 0;
 }
 
 .mainText {
     -fx-text-fill: White;
-    -fx-font-size: 14px;
+    -fx-font-size: 11px;
     -fx-line-height: 18px;
     -fx-padding: 10 0 0 0;
 }
