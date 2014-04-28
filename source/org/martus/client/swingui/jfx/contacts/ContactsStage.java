@@ -54,7 +54,7 @@ public class ContactsStage extends FxNonWizardStage
 	@Override
 	protected FxScene createScene() throws Exception
 	{
-		return new FxScene(getExternalFxmlDirectory(), "contacts/contacts.css");
+		return new FxScene(getExternalFxmlDirectory(), "Contacts.css");
 	}
 	
 	@Override
