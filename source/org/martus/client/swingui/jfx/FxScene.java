@@ -45,11 +45,11 @@ public class FxScene extends Scene
 	public void applyStyleSheet(String languageCode) throws Exception
 	{
 		ObservableList<String> stylesheets = getStylesheets();
-		String externalForm = getBestCssLocation().toExternalForm();
+		String externalForm = getBestCssLocation(languageCode).toExternalForm();
 		stylesheets.add(externalForm);
 	}
 
-	public URL getBestCssLocation() throws Exception
+	public URL getBestCssLocation(String languageCode) throws Exception
 	{
 		return FxController.getBestFile(fxmlDirectory, "css/" + getCssLocation());
 	}
