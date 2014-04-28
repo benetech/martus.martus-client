@@ -94,7 +94,7 @@ abstract public class FxController implements Initializable
 		return getBestFile(fxmlDir, fxmlLocation);
 	}
 
-	public static URL getBestFile(File fxmlDir, String fileLocation) throws MalformedURLException
+	public static URL getBestFile(File fxmlDir, String fileLocation) throws Exception
 	{
 		File fxmlFile = new File(fxmlDir, fileLocation);
 		if (fxmlFile.exists())
@@ -105,10 +105,18 @@ abstract public class FxController implements Initializable
 
 		URL resource = FxScene.class.getResource(fileLocation);
 		if(resource == null)
-			throw new RuntimeException("Couldn't find " + fileLocation);
+			throw new ResourceNotFoundException("Couldn't find " + fileLocation);
 		
 		return resource;
 	}		
+	
+	public static class ResourceNotFoundException extends Exception
+	{
+		public ResourceNotFoundException(String message)
+		{
+			super(message);
+		}
+	}
 	
 	public UiMainWindow getMainWindow()
 	{
