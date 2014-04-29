@@ -40,13 +40,19 @@ public class FxScene extends Scene
 	public FxScene(File fxmlDirToUse, String cssLocationToUse) throws Exception
 	{
 		super(new Region());
-		NodeOrientation orientation = NodeOrientation.LEFT_TO_RIGHT;
-		if(LanguageOptions.isRightToLeftLanguage())
-			orientation = NodeOrientation.RIGHT_TO_LEFT;
+		NodeOrientation orientation = getNodeOrientationBasedOnLanguage();
 		setNodeOrientation(orientation);
 		
 		fxmlDirectory = fxmlDirToUse;
 		cssLocation = cssLocationToUse;
+	}
+
+	public static NodeOrientation getNodeOrientationBasedOnLanguage()
+	{
+		NodeOrientation orientation = NodeOrientation.LEFT_TO_RIGHT;
+		if(LanguageOptions.isRightToLeftLanguage())
+			orientation = NodeOrientation.RIGHT_TO_LEFT;
+		return orientation;
 	}
 
 	public void applyStyleSheet(String languageCode) throws Exception
