@@ -367,6 +367,7 @@ abstract public class FxController implements Initializable
 		Parent root = fl.getRoot();
 
 		Scene scene = new Scene(root);
+		scene.setNodeOrientation(FxScene.getNodeOrientationBasedOnLanguage());
 		File fxmlDir = getApp().getFxmlDirectory();
 		URL css = FxController.getBestCss(fxmlDir, getLocalization().getCurrentLanguageCode(), "popup.css");
 		scene.getStylesheets().add(css.toExternalForm());
