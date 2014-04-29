@@ -586,9 +586,9 @@ public class MartusApp
 		startOrStopTorAsRequested();
 	}
 
-	public void saveStateWithoutPrompting() throws IOException
+	public void saveStateWithoutPrompting() throws Exception
 	{
-		orchidStore.saveStore(getOrchidCacheFile());
+		orchidStore.saveStore(getOrchidCacheFile(), getSecurity());
 	}
 
 	public void encryptAndWriteFileAndSignatureFile(File file, File signatureFile,
@@ -847,7 +847,7 @@ public class MartusApp
 		store.doAfterSigninInitialization(dataDirectory, database);
 		try
 		{
-			orchidStore.loadStore(getOrchidCacheFile());
+			orchidStore.loadStore(getOrchidCacheFile(), getSecurity());
 			transport = TorTransportWrapper.create(orchidStore);
 		} 
 		catch (Exception e)
