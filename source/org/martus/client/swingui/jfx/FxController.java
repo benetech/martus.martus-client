@@ -369,7 +369,7 @@ abstract public class FxController implements Initializable
 		Scene scene = new Scene(root);
 		scene.setNodeOrientation(FxScene.getNodeOrientationBasedOnLanguage());
 		File fxmlDir = getApp().getFxmlDirectory();
-		URL css = FxController.getBestCss(fxmlDir, getLocalization().getCurrentLanguageCode(), "popup.css");
+		URL css = FxController.getBestCss(fxmlDir, getLocalization().getCurrentLanguageCode(), "Popup.css");
 		scene.getStylesheets().add(css.toExternalForm());
 		popupStage.setScene(scene);
 	    showModalPopupStage(popupStage);
