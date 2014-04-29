@@ -53,8 +53,7 @@ public class FxScene extends Scene
 
 	public URL getBestCssLocation(String languageCode) throws Exception
 	{
-		File directory = fxmlDirectory;
-		return getBestCssLocation(languageCode, directory);
+		return getBestCssLocation(languageCode, fxmlDirectory);
 	}
 
 	public URL getBestCssLocation(String languageCode, File directory)
