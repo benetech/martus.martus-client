@@ -28,8 +28,6 @@ package org.martus.client.swingui.jfx;
 import java.io.File;
 import java.net.URL;
 
-import org.martus.client.swingui.jfx.FxController.ResourceNotFoundException;
-
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
@@ -53,20 +51,7 @@ public class FxScene extends Scene
 
 	public URL getBestCssLocation(String languageCode) throws Exception
 	{
-		return getBestCss(fxmlDirectory, languageCode, getCssLocation());
-	}
-
-	public static URL getBestCss(File directory, String languageCode,
-			String cssLocation2) throws Exception
-	{
-		try
-		{
-			return FxController.getBestFile(directory, "css/" + languageCode + "/" + cssLocation2);
-		}
-		catch(ResourceNotFoundException expectedForMostLanguages)
-		{
-			return FxController.getBestFile(directory, "css/" + cssLocation2);
-		}
+		return FxController.getBestCss(fxmlDirectory, languageCode, getCssLocation());
 	}
 
 	public String getCssLocation()
