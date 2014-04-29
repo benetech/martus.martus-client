@@ -382,6 +382,19 @@ abstract public class FxController implements Initializable
 		popupStage.showAndWait();
 	}
 
+	public static URL getBestCss(File directory, String languageCode,
+			String cssLocation2) throws Exception
+	{
+		try
+		{
+			return getBestFile(directory, "css/" + languageCode + "/" + cssLocation2);
+		}
+		catch(ResourceNotFoundException expectedForMostLanguages)
+		{
+			return getBestFile(directory, "css/" + cssLocation2);
+		}
+	}
+
 	private UiMainWindow mainWindow;
 	private static int notifyDialogDepth;
 }
