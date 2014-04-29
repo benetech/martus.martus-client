@@ -34,13 +34,10 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiLocalization;
-import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.Database;
-import org.martus.common.database.FileDatabase.MissingAccountMapException;
-import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.common.test.UnicodeConstants;
 import org.martus.util.DirectoryUtils;
@@ -73,23 +70,23 @@ public class MockMartusApp extends MartusApp
 
 		}
 
-	private static MockMartusApp create(File fakeDataDirectory, MartusCrypto crypto) throws MartusAppInitializationException, IOException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException 
+	private static MockMartusApp create(File fakeDataDirectory, MartusCrypto crypto) throws Exception 
 	{
 		UiLocalization emptyLocalization = createFakeLocalization(fakeDataDirectory);
 		return create(fakeDataDirectory, crypto, emptyLocalization);
 	}
 
-	private static MockMartusApp create(File fakeDataDirectory, MartusCrypto crypto, UiLocalization emptyLocalization) throws MartusAppInitializationException, IOException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException 
+	private static MockMartusApp create(File fakeDataDirectory, MartusCrypto crypto, UiLocalization emptyLocalization) throws Exception 
 	{
 		MockMartusApp app = new MockMartusApp(crypto, fakeDataDirectory, emptyLocalization);
 		initializeMockApp(app, fakeDataDirectory);
 		return app;
 	}
 
-	public static void initializeMockApp(MockMartusApp app, File fakeDataDirectory) throws IOException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
+	public static void initializeMockApp(MockMartusApp app, File fakeDataDirectory) throws Exception
 	{
 		app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
-		app.store.doAfterSigninInitialization(fakeDataDirectory, new MockClientDatabase());
+		app.doAfterSigninInitalization(fakeDataDirectory, new MockClientDatabase());
 		app.store.createFieldSpecCacheFromDatabase();
 	}
 
@@ -183,10 +180,10 @@ public class MockMartusApp extends MartusApp
 		if(retrieveFile.exists())
 			throw new IOException("RetrieveFile");
 		
-		File orchidDirectory = getOrchidDirectory();
-		DirectoryUtils.deleteEntireDirectoryTree(orchidDirectory);
-		if(orchidDirectory.exists())
-			throw new IOException("Orchid directory " + orchidDirectory.getPath());
+		File orchidCacheFile = getOrchidCacheFile();
+		orchidCacheFile.delete();
+		if(orchidCacheFile.exists())
+			throw new IOException("Orchid cache file " + orchidCacheFile.getPath());
 		
 		rootDir.delete();
 		if(rootDir.exists())

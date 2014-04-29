@@ -107,6 +107,7 @@ import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
 import org.martus.common.crypto.MartusSecurity;
+import org.martus.common.database.Database;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -115,6 +116,7 @@ import org.martus.common.fieldspec.CustomFieldTemplate.FutureVersionException;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.network.ClientSideNetworkInterface;
+import org.martus.common.network.MartusOrchidDirectoryStore;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.network.NonSSLNetworkAPI;
@@ -175,7 +177,7 @@ public class MartusApp
 			if(shouldUseUnofficialTranslations())
 				localization.includeOfficialLanguagesOnly = false;
 			currentRetrieveCommand = new RetrieveCommand();
-			
+			orchidStore = new MartusOrchidDirectoryStore();
 		}
 		catch(MartusCrypto.CryptoInitializationException e)
 		{
@@ -197,9 +199,9 @@ public class MartusApp
 		UpdateDocsIfNecessaryFromMLPFiles();
 	}
 
-	public File getOrchidDirectory()
+	public File getOrchidCacheFile()
 	{
-		return new File(getMartusDataRootDirectory(), "orchid");
+		return new File(getCurrentAccountDirectory(), "OrchidCache.dat");
 	}
 
 	public TorTransportWrapper getTransport()
@@ -584,6 +586,11 @@ public class MartusApp
 		startOrStopTorAsRequested();
 	}
 
+	public void saveStateWithoutPrompting() throws IOException
+	{
+		orchidStore.saveStore(getOrchidCacheFile());
+	}
+
 	public void encryptAndWriteFileAndSignatureFile(File file, File signatureFile,
 			byte[] plainText) throws Exception
 	{
@@ -832,12 +839,24 @@ public class MartusApp
 
 	public void doAfterSigninInitalization() throws MartusAppInitializationException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
 	{
-		store.doAfterSigninInitialization(getCurrentAccountDirectory());
-		transport = TorTransportWrapper.create();
-		File torDirectory = getOrchidDirectory();
-		getTransport().setTorDataDirectory(torDirectory);
+		doAfterSigninInitalization(getCurrentAccountDirectory(), store.createDatabase(getCurrentAccountDirectory()));
 	}
 	
+	public void doAfterSigninInitalization(File dataDirectory,	Database database) throws MartusAppInitializationException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
+	{
+		store.doAfterSigninInitialization(dataDirectory, database);
+		try
+		{
+			orchidStore.loadStore(getOrchidCacheFile());
+			transport = TorTransportWrapper.create(orchidStore);
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			throw new MartusAppInitializationException("Error initializing Tor transport");
+		}
+	}
+
 	public File getFxmlDirectory()
 	{
 		return new File (getMartusDataRootDirectory(), FXML_DIRECTORY_NAME);
@@ -2557,6 +2576,7 @@ public class MartusApp
 	public String currentUserName;
 	private int maxNewFolders;
 	public RetrieveCommand currentRetrieveCommand;
+	private MartusOrchidDirectoryStore orchidStore;
 	private TorTransportWrapper transport;
 
 	public static final String PUBLIC_INFO_EXTENSION = ".mpi";

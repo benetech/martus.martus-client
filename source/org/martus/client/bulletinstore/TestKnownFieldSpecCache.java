@@ -121,12 +121,14 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		assertEquals("save didn't add specs?", expectedCountAfterSaveOrImport, cache.getAllKnownFieldSpecs().size());
 
 		File zipFile = createTempFile();
-		BulletinZipUtilities.exportBulletinPacketsFromDatabaseToZipFile(app.getStore().getDatabase(), toImport.getDatabaseKey(), zipFile, security);
-		app.getStore().destroyBulletin(toImport);
+		ClientBulletinStore store = app.getStore();
+		BulletinZipUtilities.exportBulletinPacketsFromDatabaseToZipFile(store.getDatabase(), toImport.getDatabaseKey(), zipFile, security);
+		store.destroyBulletin(toImport);
 		Set specsAfterDelete = cache.getAllKnownFieldSpecs();
 		assertEquals("didn't remove specs from deleted bulletin?", 0, specsAfterDelete.size());
 		
-		app.getStore().importBulletinZipFile(new ZipFile(zipFile));
+		ZipFile zip = new ZipFile(zipFile);
+		store.importBulletinZipFile(zip);
 		Set specsAfterImport = cache.getAllKnownFieldSpecs();
 		assertEquals("didn't include imported specs?", expectedCountAfterSaveOrImport, specsAfterImport.size());
 	}

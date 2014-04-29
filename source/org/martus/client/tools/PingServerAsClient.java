@@ -49,7 +49,7 @@ public class PingServerAsClient
 	{
 		processArgs(args);
 		
-		TorTransportWrapper transport = TorTransportWrapper.create();
+		TorTransportWrapper transport = TorTransportWrapper.createWithoutPersistentStore();
 		ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer server = new ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer(ip, transport);
 		if(!ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer.isNonSSLServerAvailable(server))
 		{
