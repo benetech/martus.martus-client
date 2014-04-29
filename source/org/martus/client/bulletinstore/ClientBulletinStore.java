@@ -101,9 +101,15 @@ public class ClientBulletinStore extends BulletinStore
 	
 	public void doAfterSigninInitialization(File dataRootDirectory) throws FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
 	{
+		Database db = createDatabase(dataRootDirectory);
+		doAfterSigninInitialization(dataRootDirectory, db);
+	}
+
+	public Database createDatabase(File dataRootDirectory)
+	{
 		File dbDirectory = new File(dataRootDirectory, "packets");
 		Database db = new ClientFileDatabase(dbDirectory, getSignatureGenerator());
-		doAfterSigninInitialization(dataRootDirectory, db);
+		return db;
 	}
 
 	public void doAfterSigninInitialization(File dataRootDirectory, Database db) throws FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException

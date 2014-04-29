@@ -149,7 +149,7 @@ public class ServerLoader {
 
     private boolean verifyServer() throws Exception
     {
-	    TorTransportWrapper transport = TorTransportWrapper.create();
+	    TorTransportWrapper transport = TorTransportWrapper.createWithoutPersistentStore();
         NonSSLNetworkAPIWithHelpers server = new ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer(serverIP, transport);
         try
         {

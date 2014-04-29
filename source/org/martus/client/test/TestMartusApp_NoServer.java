@@ -2191,6 +2191,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 			String username1 = "name";
 			createAccount(app, username1);
 			String realAccountId1 = app.getAccountId();
+			app.doAfterSigninInitalization();
 			saveConfigInfo(app);
 			
 			String username2 = "other";
