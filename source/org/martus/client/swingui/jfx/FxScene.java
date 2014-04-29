@@ -63,7 +63,7 @@ public class FxScene extends Scene
 		return getBestCss(directory, languageCode, cssLocation2);
 	}
 
-	public URL getBestCss(File directory, String languageCode,
+	public static URL getBestCss(File directory, String languageCode,
 			String cssLocation2) throws Exception
 	{
 		try
