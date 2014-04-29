@@ -28,7 +28,10 @@ package org.martus.client.swingui.jfx;
 import java.io.File;
 import java.net.URL;
 
+import org.martus.util.language.LanguageOptions;
+
 import javafx.collections.ObservableList;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 
@@ -37,6 +40,10 @@ public class FxScene extends Scene
 	public FxScene(File fxmlDirToUse, String cssLocationToUse) throws Exception
 	{
 		super(new Region());
+		NodeOrientation orientation = NodeOrientation.LEFT_TO_RIGHT;
+		if(LanguageOptions.isRightToLeftLanguage())
+			orientation = NodeOrientation.RIGHT_TO_LEFT;
+		setNodeOrientation(orientation);
 		
 		fxmlDirectory = fxmlDirToUse;
 		cssLocation = cssLocationToUse;
