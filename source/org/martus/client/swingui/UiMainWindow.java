@@ -1286,13 +1286,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			saveStateWithoutPrompting();
 		}
-		catch(IOException e)
+		catch(Exception e)
 		{
+			MartusLogger.logException(e);
 			notifyDlg("ErrorSavingState");
 		}
 	}
 
-	void saveStateWithoutPrompting() throws IOException
+	void saveStateWithoutPrompting() throws Exception
 	{
 		getApp().saveStateWithoutPrompting();
 		String folderName = folders.getSelectedFolderName();
