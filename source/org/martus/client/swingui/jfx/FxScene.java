@@ -53,13 +53,14 @@ public class FxScene extends Scene
 
 	public URL getBestCssLocation(String languageCode) throws Exception
 	{
+		File directory = fxmlDirectory;
 		try
 		{
-			return FxController.getBestFile(fxmlDirectory, "css/" + languageCode + "/" + getCssLocation());
+			return FxController.getBestFile(directory, "css/" + languageCode + "/" + getCssLocation());
 		}
 		catch(ResourceNotFoundException expectedForMostLanguages)
 		{
-			return FxController.getBestFile(fxmlDirectory, "css/" + getCssLocation());
+			return FxController.getBestFile(directory, "css/" + getCssLocation());
 		}
 	}
 
