@@ -44,6 +44,7 @@ import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.AccessTokenChangeHandler;
 import org.martus.common.ContactKey;
 import org.martus.common.Exceptions.ServerNotAvailableException;
+import org.martus.common.Exceptions.ServerNotCompatibleException;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenNotFoundException;
 import org.martus.common.MartusLogger;
@@ -109,6 +110,10 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 		{
 			showNotifyDialog(getWizardStage(), "ContactsNoServer");
 		} 
+		catch (ServerNotCompatibleException e)
+		{
+			showNotifyDialog(getWizardStage(), "ServerNotCompatible");
+		}
 		catch (TokenNotFoundException e)
 		{
 			showNotifyDialog(getWizardStage(), "UnableToRetrieveContactFromServer");
