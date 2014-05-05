@@ -54,6 +54,7 @@ import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.clientside.FormatFilter;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.Exceptions.ServerNotAvailableException;
+import org.martus.common.Exceptions.ServerNotCompatibleException;
 import org.martus.common.FieldCollection;
 import org.martus.common.FieldDeskKeys;
 import org.martus.common.FieldSpecCollection;
@@ -403,6 +404,10 @@ public class UiCustomFieldsDlg extends JDialog
 				mainWindow.getApp().putFormTemplateOnServer(template1);
 				mainWindow.notifyDlg("TemplateSavedToServer");
 			} 
+			catch (ServerNotCompatibleException e)
+			{
+				mainWindow.notifyDlgBeep("ServerNotCompatible");
+			}
 			catch (ServerNotAvailableException e)
 			{
 				mainWindow.notifyDlgBeep("ServerNotAvailable");
