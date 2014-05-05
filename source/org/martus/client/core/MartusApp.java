@@ -78,6 +78,7 @@ import org.martus.common.Exceptions.AccountNotFoundException;
 import org.martus.common.Exceptions.NoFormsAvailableException;
 import org.martus.common.Exceptions.ServerCallFailedException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
+import org.martus.common.Exceptions.ServerNotCompatibleException;
 import org.martus.common.FieldCollection;
 import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.FieldDeskKey;
@@ -1776,12 +1777,14 @@ public class MartusApp
 		return false;
 	}
 	
-	public MartusAccountAccessToken getMartusAccountAccessTokenFromServer() throws TokenInvalidException, ServerNotAvailableException, MartusSignatureException 
+	public MartusAccountAccessToken getMartusAccountAccessTokenFromServer() throws TokenInvalidException, ServerNotAvailableException, MartusSignatureException, ServerNotCompatibleException 
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
 
 		NetworkResponse response = getCurrentNetworkInterfaceGateway().getMartusAccountAccessToken(getSecurity());
+		if(response.getResultCode().equals(NetworkInterfaceConstants.SERVER_NOT_COMPATIBLE))
+			throw new ServerNotCompatibleException();
 		if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
 			throw new ServerNotAvailableException();
 			
@@ -1792,16 +1795,18 @@ public class MartusApp
 		return new MartusAccountAccessToken(ourTokenString);
 	}
 
-	public String getMartusAccountIdFromAccessTokenOnServer(MartusAccountAccessToken tokenToUse) throws TokenNotFoundException, ServerNotAvailableException, MartusSignatureException 
+	public String getMartusAccountIdFromAccessTokenOnServer(MartusAccountAccessToken tokenToUse) throws TokenNotFoundException, ServerNotAvailableException, MartusSignatureException, ServerNotCompatibleException 
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
 
 		NetworkResponse response = getCurrentNetworkInterfaceGateway().getMartusAccountIdFromAccessToken(getSecurity(), tokenToUse);
+		if(response.getResultCode().equals(NetworkInterfaceConstants.NO_TOKEN_AVAILABLE))
+			throw new TokenNotFoundException();
+		if(response.getResultCode().equals(NetworkInterfaceConstants.SERVER_NOT_COMPATIBLE))
+			throw new ServerNotCompatibleException();
 		if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
 		{
-			if(response.getResultCode().equals(NetworkInterfaceConstants.NO_TOKEN_AVAILABLE))
-				throw new TokenNotFoundException();
 			throw new ServerNotAvailableException();
 		}
 					

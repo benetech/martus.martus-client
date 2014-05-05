@@ -47,6 +47,7 @@ import org.martus.common.BulletinSummary;
 import org.martus.common.BulletinSummary.WrongValueCount;
 import org.martus.common.Exceptions.ServerCallFailedException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
+import org.martus.common.Exceptions.ServerNotCompatibleException;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusLogger;
 import org.martus.common.ProgressMeterInterface;
@@ -472,6 +473,10 @@ class BackgroundTimerTask extends TimerTask
 			getApp().saveConfigInfo();
 			alreadyGotMartusAccountAccessToken = true;
 		} 
+		catch (ServerNotCompatibleException e)
+		{
+			MartusLogger.log("Server does not support getting token");
+		}
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);

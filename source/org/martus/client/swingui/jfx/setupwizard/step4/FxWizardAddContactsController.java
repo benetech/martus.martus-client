@@ -68,6 +68,7 @@ import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.DammCheckDigitAlgorithm.CheckDigitInvalidException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
+import org.martus.common.Exceptions.ServerNotCompatibleException;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenNotFoundException;
 import org.martus.common.MartusLogger;
@@ -148,6 +149,10 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		{
 			showNotifyDialog(getStage(), "ContactsNoServer");
 		} 
+		catch (ServerNotCompatibleException e)
+		{
+			showNotifyDialog(getStage(), "ServerNotCompatible");
+		}
 		catch (TokenNotFoundException e)
 		{
 			showNotifyDialog(getStage(), "UnableToRetrieveContactFromServer");

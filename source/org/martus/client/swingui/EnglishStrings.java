@@ -249,6 +249,8 @@ public class EnglishStrings
 "field:notifyServerNotAvailablecause=Server not available.",
 "wintitle:notifyErrorSavingTemplateToServer=Save Template To Server",
 "field:notifyErrorSavingTemplateToServercause=Unexpected error saving template to server.",
+"wintitle:notifyServerNotCompatible=Server Error",
+"field:notifyServerNotCompatiblecause=This server does not support this feature.",
 
 "wintitle:notifyRetrieveCompleted=Retrieve Complete",
 "field:notifyRetrieveCompletedcause=Retrieving bulletins from the server is complete",
