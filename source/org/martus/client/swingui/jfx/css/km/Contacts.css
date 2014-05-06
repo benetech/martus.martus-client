@@ -290,7 +290,7 @@
 
 .current-step .TopBarStepNumber {
 	-fx-text-fill: White;
-	-fx-font-size: 13px;
+	-fx-font-size: 16px;
 }
 
 .current-step .TopBarStepName {
@@ -300,14 +300,14 @@
 
 .TopBarStepNumber {
 	-fx-text-fill: #707e87;
-	-fx-font-size: 13px;
+	-fx-font-size: 16px;
 	-fx-padding: 0 5 0 3;
 }
 
 .TopBarStepName {
 	-fx-text-fill: #707e87;
 	-fx-alignment: center-left;
-	-fx-font-size: 13px;
+	-fx-font-size: 15px;
 }
 
 .TopBarArrow {
