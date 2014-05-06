@@ -1,6 +1,6 @@
 .root {
 	-fx-background-color: #e6e7e9;
-  -fx-font-family: "Helvetica";
+  -fx-font-family: "Zawgyi-One";
   -fx-line-height: 28px inherit;
 }
 
@@ -180,7 +180,7 @@
 
 .wv-sidebar-hint {
 	background-color: #e6e7e9;
-	font: 9px "Helvetica";
+	font: 9px "Zawgyi-One";
 	border: none;
 }
 
@@ -290,30 +290,30 @@
 
 .current-step .TopBarStepNumber {
 	-fx-text-fill: White;
-	-fx-font-size: 13px;
+	-fx-font-size: 11px;
 }
 
 .current-step .TopBarStepName {
 	-fx-text-fill: White;
-	-fx-font-size: 13px;
+	-fx-font-size: 11px;
 }
 
 .TopBarStepNumber {
 	-fx-text-fill: #707e87;
-	-fx-font-size: 13px;
+	-fx-font-size: 11px;
 	-fx-padding: 0 5 0 3;
 }
 
 .TopBarStepName {
 	-fx-text-fill: #707e87;
 	-fx-alignment: center-left;
-	-fx-font-size: 13px;
+	-fx-font-size: 11px;
 }
 
 .TopBarArrow {
 	-fx-text-fill: #707e87;
   -fx-padding: 4 4 4 4;
-	-fx-font-size: 13px;
+	-fx-font-size: 11px;
   -fx-font-weight: bold;
 }
 
