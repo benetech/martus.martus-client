@@ -28,7 +28,6 @@
 				   	<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 			  	</rowConstraints>
 				<children>
-					<Label maxWidth="220" minHeight="125" wrapText="true" styleClass="mainTextNotBold" text="%SetupServerLaterInformation" />
 					<Label />
 					<Button styleClass="button_not_main_action" fx:id="laterButton" mnemonicParsing="false" onAction="#setupServerLater" text="%SetupServerLater" GridPane.rowIndex="1" />
 					<Button fx:id="defaultServerButton" mnemonicParsing="false" onAction="#useDefaultServer" text="%UseDefaultServer" GridPane.columnIndex="1" GridPane.rowIndex="1" />
