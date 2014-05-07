@@ -1766,7 +1766,7 @@ public class EnglishStrings
 
 "field:VerifyContactPublicCode=Public Code:",
 "field:VerifyContactPublicCodeOld=Public Code:",
-"button:VerifyContactLater=Will Verify Later",
+"button:VerifyContactLater=Verify Later",
 "button:VerifyContactNow=Verify!",
 
 "field:SettingUpTor=Setting Up Tor.",
