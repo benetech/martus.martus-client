@@ -1792,7 +1792,6 @@ public class EnglishStrings
 "field:ConnectMartusServerReasons3=- Easily retrieve the public keys of your contacts, so you can send them bulletins",
 "field:ConnectMartusServerReasons4=- Import form templates from your contacts",
 "field:SetupServerLater=Set up server later",
-"field:SetupServerLaterInformation=No thanks. I'll complete this step later.",
 "field:UseDefaultServer=Use default server",
 "field:SetupAdvanceServer=Advanced server settings",
 "field:SetupServerTips=The data you store on Martus servers are completely encrypted using 3072-bit encryption. This means even Martus server administrators cannot read your data.",
