@@ -454,10 +454,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(!getApp().isSignedIn())
 		{
 			if(!sessionSignIn())
-			{
-				MartusLogger.log("DEBUGGING MARTUSDEV-232: did not sign in.  Returning false");
 				return false;
-			}
 
 			startInactivityTimeoutDetection();
 			doPostSigninAppInitialization();
@@ -555,12 +552,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			// NOTE: Prevent implicit JavaFX shutdown when the only JFX window is closed
 		    Platform.setImplicitExit(false);
-		    MartusLogger.log("DEBUGGING MARTUSDEV-232: starting welcome page");
+
 		    FxModalDialog.createAndShow(this, new WelcomeStage(this));
-		    MartusLogger.log("DEBUGGING MARTUSDEV-232: welcome page has been closed");
 		    
 		    FxModalDialog.createAndShow(this, new SetupWizardStage(this));
-		    MartusLogger.log("DEBUGGING MARTUSDEV-232: wizard page has been closed");
 		} 
 		catch (Exception e)
 		{
@@ -650,7 +645,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		while(!isAlreadySignedIn())
 		{
-			MartusLogger.log("DEBUGGING MARTUSDEV-232: Attempting to sign in");
 			int result = signIn(UiSigninDlg.INITIAL); 
 			if(result== UiSigninDlg.CANCEL)
 				return false;
@@ -938,7 +932,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void setCreatedNewAccount(boolean didCreateNewAccount)
 	{
-		MartusLogger.log("DEBUGGING MARTUSDEV-232: setting new account created to: " + didCreateNewAccount);
 		createdNewAccount = didCreateNewAccount;
 	}
 
