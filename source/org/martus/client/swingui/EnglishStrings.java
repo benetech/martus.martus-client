@@ -1722,6 +1722,7 @@ public class EnglishStrings
 "field:WelcomeMessage2=Securing your digital documentation",
 "field:WelcomeMessage3=This wizard will walk you through the steps necessary to set up Martus, so that you can safely store and share your human rights documentation.",
 
+"field:StepArrow=➔",
 "field:WizardStep1=Create Account",
 "field:WizardStep1Heading=Account Creation",
 "field:WizardStep1Information=Your information will be kept safe, with a password protected, encrypted account.",

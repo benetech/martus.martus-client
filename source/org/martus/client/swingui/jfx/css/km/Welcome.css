@@ -52,14 +52,14 @@ BorderPane {
 .headingLevel3 {
     -fx-text-fill: #e2c92f;
     -fx-font-weight: bold;
-    -fx-font-size: 12px;
+    -fx-font-size: 14px;
     -fx-alignment: top-left;
     -fx-padding: 10 0 0 0;
 }
 
 .stepNumber {
     -fx-text-fill: #707e87;
-    -fx-font-size: 12px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-padding: 10 0 0 0;
 }

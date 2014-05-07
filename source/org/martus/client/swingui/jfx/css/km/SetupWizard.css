@@ -11,7 +11,7 @@
 		-fx-border-radius: 5;
 		-fx-text-fill: White;
 		-fx-alignment: center;
-		-fx-font-size: 14px;
+		-fx-font-size: 17px;
 		-fx-padding: 5 35 5 35;
 }
 
@@ -20,7 +20,7 @@
 		-fx-border-radius: 5;
 		-fx-text-fill: White;
 		-fx-alignment: center;
-		-fx-font-size: 14px;
+		-fx-font-size: 17px;
 		-fx-padding: 5 35 5 35;
 }
 
@@ -29,7 +29,7 @@
 		-fx-border-radius: 5;
 		-fx-text-fill: White;
 		-fx-alignment: center;
-		-fx-font-size: 14px;
+		-fx-font-size: 17px;
 		-fx-padding: 5 35 5 35;
 }
 
@@ -40,7 +40,7 @@
 		-fx-border-radius: 5;
 		-fx-text-fill: Black;
 		-fx-alignment: center;
-		-fx-font-size: 14px;
+		-fx-font-size: 17px;
 		-fx-padding: 5 35 5 35;
 }
 
@@ -60,19 +60,18 @@
 	-fx-font-weight: bold;
 	-fx-text-fill: White;
 	-fx-alignment: center;
-	-fx-font-size: 14px;
+	-fx-font-size: 17px;
 	-fx-padding: 5 35 5 35;
 }
 
 .button_guided_action:pressed {
 	-fx-background-color:
         linear-gradient(DarkGreen 0%, Green  50%, Green 51%, DarkGreen 100%);
-	-fx-effect: innershadow( three-pass-box , Black , 2 , 2.0 , 2, 2 );
 	-fx-font-weight: bold;
 	-fx-border-radius: 5;
 	-fx-text-fill: White;
 	-fx-alignment: center;
-	-fx-font-size: 14px;
+	-fx-font-size: 17px;
 	-fx-padding: 5 35 5 35;
 }
 
@@ -108,7 +107,15 @@
 .mainText {
 	-fx-text-fill: #4c5e70;
 	-fx-alignment: center-left;
-	-fx-font-size: 12px;
+	-fx-font-size: 13px;
+	-fx-font-weight: bold;
+	-fx-padding: 0 10 0 10;
+}
+
+.mainTextNotBold {
+	-fx-text-fill: #4c5e70;
+	-fx-alignment: center-left;
+	-fx-font-size: 13px;
 	-fx-padding: 0 10 0 10;
 }
 
@@ -229,12 +236,10 @@
 }
 
 
-
 .table-cell {
 	-fx-background-color: transparent;
 	-fx-text-fill: #4c5e70;
 }
-
 
 .remove-contact-button {
         -fx-background-color:Red;
@@ -263,7 +268,6 @@
         -fx-padding: 3 5 3 5;
 }
 
-
 .table-cell .verified-label  {
 	-fx-text-fill: Green;
 }
@@ -279,7 +283,6 @@
 }
 
 
-
 .step {
 	-fx-fill-height: true;
 	-fx-alignment: center-left;
@@ -290,7 +293,7 @@
 
 .current-step .TopBarStepNumber {
 	-fx-text-fill: White;
-	-fx-font-size: 13px;
+	-fx-font-size: 16px;
 }
 
 .current-step .TopBarStepName {
@@ -300,7 +303,7 @@
 
 .TopBarStepNumber {
 	-fx-text-fill: #707e87;
-	-fx-font-size: 13px;
+	-fx-font-size: 16px;
 	-fx-padding: 0 5 0 3;
 }
 
@@ -323,10 +326,10 @@
 	-fx-text-fill: #4c5e70;
 }
 
-
 .radioButtonText {
 	-fx-font-size: 13px;
 	-fx-text-fill: #4c5e70;
+  -fx-padding: 0 0 0 25;
 }
 
 .choice-box {
@@ -336,19 +339,10 @@
         }
 
 .choice-box .label {
-     -fx-text-fill: white;
+     -fx-text-fill: black;
 }
 
 .bigLink {
 	-fx-font-size: 15px;
 	-fx-text-fill: Black;
-}
-
-.pageMargin {
-  -fx-padding: 25 25 25 25;
-}
-
-
-.leftMargin {
-  -fx-padding: 0 0 0 25;
 }
