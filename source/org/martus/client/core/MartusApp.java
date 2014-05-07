@@ -845,11 +845,18 @@ public class MartusApp
 	
 	public void doAfterSigninInitalization(File dataDirectory,	Database database) throws MartusAppInitializationException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
 	{
+		if(isInitialized)
+		{
+			MartusLogger.log("MartusApp.doAfterSigninInitalization called again");
+			return;
+		}
+		
 		store.doAfterSigninInitialization(dataDirectory, database);
 		try
 		{
 			orchidStore.loadStore(getOrchidCacheFile(), getSecurity());
 			transport = TorTransportWrapper.create(orchidStore);
+			isInitialized = true;
 		} 
 		catch (Exception e)
 		{
@@ -2587,6 +2594,7 @@ public class MartusApp
 	public RetrieveCommand currentRetrieveCommand;
 	private MartusOrchidDirectoryStore orchidStore;
 	private TorTransportWrapper transport;
+	private boolean isInitialized;
 
 	public static final String PUBLIC_INFO_EXTENSION = ".mpi";
 	public static final String MARTUS_IMPORT_EXPORT_EXTENSION = ".xml";
