@@ -645,6 +645,16 @@ public class FxWizardAddContactsController extends FxStep4Controller
 				showTimeoutDialog(getStage(), getLocalization().getFieldLabel("ConnectingToServerToRetrieveToken"), task);
 				accountToken = task.getToken();
 			}
+			catch (ServerNotCompatibleException e)
+			{
+				showNotifyDialog(getStage(), "ServerNotCompatible");
+				return;
+			}
+			catch (ServerNotAvailableException e)
+			{
+				showNotifyDialog(getStage(), "ServerNotAvailable");
+				return;
+			}
 			catch (Exception e)
 			{
 				MartusLogger.logException(e);
