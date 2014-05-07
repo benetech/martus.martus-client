@@ -550,7 +550,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			// NOTE: Prevent implicit JavaFX shutdown when the only JFX window is closed
 		    Platform.setImplicitExit(false);
-		    
+
 		    FxModalDialog.createAndShow(this, new WelcomeStage(this));
 		    
 		    FxModalDialog.createAndShow(this, new SetupWizardStage(this));
