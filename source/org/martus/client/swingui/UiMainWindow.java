@@ -447,8 +447,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if (getApp().hasNoAccounts())
 		{
 			startAccountSetupWizard();
-			if(!getApp().isSignedIn())
-				return false;
 		}
 
 		if(!getApp().isSignedIn())
@@ -643,9 +641,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private boolean sessionSignIn()
 	{
+		int mode = UiSigninDlg.INITIAL_NEW_RECOVER_ACCOUNT;
+		if(getApp().doesAnyAccountExist())
+			mode = UiSigninDlg.INITIAL;
+		
 		while(!isAlreadySignedIn())
 		{
-			int result = signIn(UiSigninDlg.INITIAL); 
+			int result = signIn(mode); 
 			if(result== UiSigninDlg.CANCEL)
 				return false;
 			if(result == UiSigninDlg.SIGN_IN)
