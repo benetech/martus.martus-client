@@ -1709,7 +1709,7 @@ public class EnglishStrings
 "button:ContactsSaveClose=Save and Close",
 
 "wintitle:ExitWizard=Exit Martus Wizard",
-"field:ExitWizard=Your changes will be lost and Martus will exit, are you sure you want to do this?",
+"field:ExitWizard=If you close this wizard now, you will not be able to return and use it to complete this account's setup (however, you can access the wizard to create other new accounts).",
 
 "field:Step1=1",
 "field:Step2=2",
