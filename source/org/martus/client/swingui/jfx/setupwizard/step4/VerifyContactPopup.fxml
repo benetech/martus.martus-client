@@ -29,9 +29,9 @@
     </GridPane>
     <HBox prefHeight="33.0" prefWidth="694.0">
       <children>
-        <Button mnemonicParsing="false" onAction="#willVerifyLater" prefHeight="33.0" prefWidth="265.0" text="%Button.VerifyContactLater" />
+        <Button mnemonicParsing="false" onAction="#verifyContact" prefHeight="33.0" prefWidth="177.0" styleClass="button_guided_action" text="%Button.VerifyContactNow" textAlignment="CENTER" />
         <Label prefWidth="301.0" visible="false" />
-        <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#verifyContact" prefHeight="33.0" prefWidth="177.0" styleClass="button_guided_action" text="%Button.VerifyContactNow" textAlignment="CENTER" />
+        <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#willVerifyLater" prefHeight="33.0" prefWidth="265.0" text="%Button.VerifyContactLater" />
       </children>
     </HBox>
   </children>
