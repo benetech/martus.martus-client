@@ -1654,7 +1654,7 @@ public class EnglishStrings
 "field:ViewBulletinHQInfo=#NumberOfHQs# Contact account(s) can view this private information",
 "field:ModifyBulletinHQInfo=#NumberOfHQs# Contact account(s) will be able to view this private information",
 "field:BulletinHeadQuartersHQInfoForView=The following Contact account(s) can view the private information in this bulletin, and can send this bulletin to a server.",
-"field:BulletinHeadQuartersHQInfoForModify=The selected contacts' account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new contact's account use the Tools: Manage Contacts menu option.",
+"field:BulletinHeadQuartersHQInfoForModify=The selected contacts' account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new contact's account use the Tools > Manage Contacts menu option.",
 "field:BulletinHeadQuartersHQLabel=Label",
 "field:BulletinHeadQuartersHeadquarters=Contacts",
 "field:QuickEraseWillRemoveItems=Delete your Martus key, bulletins, folders, and configuration information (such as your contacts, server, and custom field settings).",
