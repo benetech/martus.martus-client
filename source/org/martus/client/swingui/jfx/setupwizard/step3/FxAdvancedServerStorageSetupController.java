@@ -124,6 +124,14 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 			}
 			
 			attemptToConnect(ip, serverKey, true);
+			
+			String magicWord = magicWordField.getText();
+			if(!getApp().requestServerUploadRights(magicWord))
+			{
+				showNotifyDialog(getWizardStage(), "ErrorServerOffline");
+				return;
+			}
+
 			FxWizardStage wizardStage = getWizardStage();
 			if(wizardStage.checkIfCurrentServerIsAvailable())
 				getWizardNavigationHandler().doNext();
