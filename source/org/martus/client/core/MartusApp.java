@@ -1761,18 +1761,22 @@ public class MartusApp
 		return getServerPublicKey(server);
 	}
 
-	public String getServerPublicKey(NonSSLNetworkAPIWithHelpers server) throws
-		ServerNotAvailableException,
-		PublicInformationInvalidException
+	public String getServerPublicKey(NonSSLNetworkAPIWithHelpers server) throws ServerNotAvailableException, PublicInformationInvalidException
 	{
 		return server.getServerPublicKey(getSecurity());
 	}
 
 	public boolean requestServerUploadRights(String magicWord)
 	{
+		ClientSideNetworkGateway gateWay = getCurrentNetworkInterfaceGateway();
+		return requestServerUploadRights(gateWay, magicWord);
+	}
+
+	public boolean requestServerUploadRights(ClientSideNetworkGateway gateWay, String magicWord)
+	{
 		try
 		{
-			NetworkResponse response = getCurrentNetworkInterfaceGateway().getUploadRights(getSecurity(), magicWord);
+			NetworkResponse response = gateWay.getUploadRights(getSecurity(), magicWord);
 			if(response.getResultCode().equals(NetworkInterfaceConstants.OK))
 				return true;
 		}

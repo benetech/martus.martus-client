@@ -45,6 +45,11 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 
 	public void attemptToConnect(String serverIPAddress, String serverPublicKey, boolean askComplianceAcceptance)
 	{
+		attemptToConnect(serverIPAddress, serverPublicKey, askComplianceAcceptance, "");
+	}
+	
+	public void attemptToConnect(String serverIPAddress, String serverPublicKey, boolean askComplianceAcceptance, String magicWord)
+	{
 		MartusLogger.log("Attempting to connect to: " + serverIPAddress);
 		MartusApp app = getApp();
 		getMainWindow().clearStatusMessage();
@@ -54,7 +59,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		wizardStage.setCurrentServerIsAvailable(false);
 		try
 		{
-			ConnectToServerTask task = new ConnectToServerTask(getApp(), gateway);
+			ConnectToServerTask task = new ConnectToServerTask(getApp(), gateway, magicWord);
 			MartusLocalization localization = getLocalization();
 			String connectingToServerMsg = localization.getFieldLabel("AttemptToConnectToServerAndGetCompliance");
 			showTimeoutDialog(wizardStage, connectingToServerMsg, task);
@@ -68,6 +73,11 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 					return;
 				}
 				return; 
+			}
+			if(!task.isAllowedToUpload())
+			{
+				showNotifyDialog(getWizardStage(), "ErrorServerOffline");
+				return;
 			}
 			String complianceStatement = task.getComplianceStatement();
 			if(askComplianceAcceptance)
