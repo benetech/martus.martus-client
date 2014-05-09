@@ -32,14 +32,15 @@ public class ConnectToServerTask extends ServerCallTask
 {
 	public ConnectToServerTask(MartusApp appToUse)
 	{
-		this(appToUse, appToUse.getCurrentNetworkInterfaceGateway());
+		this(appToUse, appToUse.getCurrentNetworkInterfaceGateway(), "");
 	}
 
-	public ConnectToServerTask(MartusApp appToUse, ClientSideNetworkGateway gatewayToUse)
+	public ConnectToServerTask(MartusApp appToUse, ClientSideNetworkGateway gatewayToUse, String magicWordToUse)
 	{
 		super(appToUse, gatewayToUse);
 		
 		gateway = gatewayToUse;
+		magicWord = magicWordToUse;
 	}
 	
 	public boolean isAvailable()
@@ -50,6 +51,11 @@ public class ConnectToServerTask extends ServerCallTask
 	public String getComplianceStatement()
 	{
 		return complianceStatement;
+	}
+	
+	public boolean isAllowedToUpload()
+	{
+		return isAllowedToUpload;
 	}
 	
 	@Override
@@ -63,7 +69,10 @@ public class ConnectToServerTask extends ServerCallTask
 	{
 		isAvailable = getApp().isSSLServerAvailable(gateway);
 		if (isAvailable)
+		{
 			complianceStatement = app.getServerCompliance(getGateway());
+			isAllowedToUpload = getApp().requestServerUploadRights(getGateway(), magicWord);
+		}
 		
 		return null;
 	}
@@ -71,4 +80,6 @@ public class ConnectToServerTask extends ServerCallTask
 	private ClientSideNetworkGateway gateway;
 	private boolean isAvailable;
 	private String complianceStatement;
+	private String magicWord;
+	private boolean isAllowedToUpload; 
 }
