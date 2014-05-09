@@ -56,6 +56,9 @@ public class SetupWizardStage extends FxWizardStage
 	@Override
 	protected boolean confirmExit()
 	{
+		if (!getApp().isSignedIn())
+			return true;
+		
 		MartusLocalization localization = getMainWindow().getLocalization();
 		String title = localization.getWindowTitle("ExitWizard");
 		String message = localization.getFieldLabel("ExitWizard");
