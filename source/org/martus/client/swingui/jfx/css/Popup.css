@@ -28,6 +28,15 @@
 
 }
 
+.button:hover {
+		-fx-background-color: #638a4b;
+		-fx-border-radius: 5;
+		-fx-text-fill: White;
+		-fx-alignment: center;
+		-fx-font-size: 17px;
+		-fx-padding: 5 35 5 35;
+}
+
 .text-area {
 	-fx-background-color: white;
 	-fx-text-background-color: #9ba5ae;
