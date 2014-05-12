@@ -213,7 +213,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		return new MdyToStorableLabelConverter().buildMdyLabel(localization, mdyOrder);
 	}
 	
-	public static String buildMdyLabelWithoutZawgyiConversion(MiniLocalization localization, String mdyOrder)
+	public static String buildMdyLabel(MiniLocalization localization, String mdyOrder)
 	{
 		return new MdyToLabelConverter().buildMdyLabel(localization, mdyOrder);
 	}
