@@ -275,13 +275,18 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 				dateParts.add(" ");
 				String translated = localization.getFieldLabel("DatePart" + tag);
 				
-				String storableSinceThisIsInADropdown = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion()).getStorable(translated);
+				String storableSinceThisIsInADropdown = getStorable(translated);
 				dateParts.add(storableSinceThisIsInADropdown);
 			}
 			dateParts.add(" ");
 
 			String label = Utilities.createStringRespectingOrientation(dateParts);
 			return label;
+		}
+
+		private String getStorable(String translated)
+		{
+			return new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion()).getStorable(translated);
 		}
 	}
 
