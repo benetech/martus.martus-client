@@ -139,9 +139,9 @@ public class FxSetupSettingsController extends FxStep2Controller
 	private ObservableList<ChoiceItem> getDateFormatChoices()
 	{
 		Vector<ChoiceItem> choices = new Vector<ChoiceItem>();
-		choices.add(new ChoiceItem("ymd", UiPreferencesDlg.buildMdyLabelWithoutZawgyiConversion(getLocalization(), "ymd")));
-		choices.add(new ChoiceItem("mdy", UiPreferencesDlg.buildMdyLabelWithoutZawgyiConversion(getLocalization(), "mdy")));
-		choices.add(new ChoiceItem("dmy", UiPreferencesDlg.buildMdyLabelWithoutZawgyiConversion(getLocalization(), "dmy")));
+		choices.add(new ChoiceItem("ymd", UiPreferencesDlg.buildMdyLabel(getLocalization(), "ymd")));
+		choices.add(new ChoiceItem("mdy", UiPreferencesDlg.buildMdyLabel(getLocalization(), "mdy")));
+		choices.add(new ChoiceItem("dmy", UiPreferencesDlg.buildMdyLabel(getLocalization(), "dmy")));
 
 		return FXCollections.observableArrayList(choices);
 	}
