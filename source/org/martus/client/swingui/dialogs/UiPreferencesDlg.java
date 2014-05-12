@@ -212,6 +212,11 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	{
 		return new MdyToLabelConverter().buildMdyLabel(localization, mdyOrder);
 	}
+	
+	public static String buildMdyLabelWithoutZawgyiConversion(MiniLocalization localization, String mdyOrder)
+	{
+		return new MdyToLabelConverterWithoutZawgyiConversion().buildMdyLabel(localization, mdyOrder);
+	}
 
 	public void actionPerformed(ActionEvent ae)
 	{
@@ -290,7 +295,15 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			return new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion()).getStorable(translated);
 		}
 	}
-
+	
+	private static class MdyToLabelConverterWithoutZawgyiConversion extends AbstractMdyToLabelConverter 
+	{
+		@Override
+		protected String getStorable(String translated)
+		{
+			return translated;
+		}
+	}
 
 	UiMainWindow owner;
 	UiChoiceEditor languageDropdown;
