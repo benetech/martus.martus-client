@@ -210,29 +210,8 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 
 	public static String buildMdyLabel(MiniLocalization localization, String mdyOrder)
 	{
-		Vector dateParts = new Vector(); 
-		for(int i = 0; i < mdyOrder.length(); ++i)
-		{
-			String tag = "Unknown";
-			char thisPart = mdyOrder.charAt(i);
-			switch(thisPart)
-			{
-				case 'y': tag = "Year"; break;
-				case 'm': tag = "Month"; break;
-				case 'd': tag = "Day"; break;
-			}
-			dateParts.add(" ");
-			String translated = localization.getFieldLabel("DatePart" + tag);
-			
-			String storableSinceThisIsInADropdown = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion()).getStorable(translated);
-			dateParts.add(storableSinceThisIsInADropdown);
-		}
-		dateParts.add(" ");
-
-		String label = Utilities.createStringRespectingOrientation(dateParts);
-		return label;
+		return new MdyToLabelConverter().buildMdyLabel(localization, mdyOrder);
 	}
-
 
 	public void actionPerformed(ActionEvent ae)
 	{
@@ -270,6 +249,39 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		if (languageCode.equals(MtfAwareLocalization.BURMESE))
 		{
 			useZawgyiFont.setSelected(true);
+		}
+	}
+	
+	private static abstract class AbstractMdyToLabelConverter
+	{
+		abstract protected String buildMdyLabel(MiniLocalization localization, String mdyOrder);
+	}
+	
+	private static class MdyToLabelConverter extends AbstractMdyToLabelConverter 
+	{
+		protected String buildMdyLabel(MiniLocalization localization, String mdyOrder)
+		{
+			Vector dateParts = new Vector(); 
+			for(int i = 0; i < mdyOrder.length(); ++i)
+			{
+				String tag = "Unknown";
+				char thisPart = mdyOrder.charAt(i);
+				switch(thisPart)
+				{
+					case 'y': tag = "Year"; break;
+					case 'm': tag = "Month"; break;
+					case 'd': tag = "Day"; break;
+				}
+				dateParts.add(" ");
+				String translated = localization.getFieldLabel("DatePart" + tag);
+				
+				String storableSinceThisIsInADropdown = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion()).getStorable(translated);
+				dateParts.add(storableSinceThisIsInADropdown);
+			}
+			dateParts.add(" ");
+
+			String label = Utilities.createStringRespectingOrientation(dateParts);
+			return label;
 		}
 	}
 
