@@ -339,6 +339,11 @@
        linear-gradient(#35536b, #597489);
         }
 
+.choice-box .context-menu {
+  -fx-background-color: #e6e7e9;
+  -fx-effect: null;
+}
+
 .choice-box .label {
      -fx-text-fill: black;
 }
