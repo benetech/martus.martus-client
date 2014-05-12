@@ -210,7 +210,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 
 	public static String buildMdyLabel(MiniLocalization localization, String mdyOrder)
 	{
-		return new MdyToLabelConverter().buildMdyLabel(localization, mdyOrder);
+		return new MdyToStorableLabelConverter().buildMdyLabel(localization, mdyOrder);
 	}
 	
 	public static String buildMdyLabelWithoutZawgyiConversion(MiniLocalization localization, String mdyOrder)
@@ -287,7 +287,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		abstract protected String getStorable(String translated);
 	}
 	
-	private static class MdyToLabelConverter extends AbstractMdyToLabelConverter 
+	private static class MdyToStorableLabelConverter extends AbstractMdyToLabelConverter 
 	{
 		@Override
 		protected String getStorable(String translated)
