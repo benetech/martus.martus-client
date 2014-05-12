@@ -254,11 +254,6 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	
 	private static abstract class AbstractMdyToLabelConverter
 	{
-		abstract protected String buildMdyLabel(MiniLocalization localization, String mdyOrder);
-	}
-	
-	private static class MdyToLabelConverter extends AbstractMdyToLabelConverter 
-	{
 		protected String buildMdyLabel(MiniLocalization localization, String mdyOrder)
 		{
 			Vector dateParts = new Vector(); 
@@ -283,8 +278,14 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			String label = Utilities.createStringRespectingOrientation(dateParts);
 			return label;
 		}
-
-		private String getStorable(String translated)
+		
+		abstract protected String getStorable(String translated);
+	}
+	
+	private static class MdyToLabelConverter extends AbstractMdyToLabelConverter 
+	{
+		@Override
+		protected String getStorable(String translated)
 		{
 			return new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion()).getStorable(translated);
 		}
