@@ -205,10 +205,10 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	private String buildMdyLabel(String mdyOrder)
 	{
 		MiniLocalization localization = owner.getLocalization();
-		return buildMdyLabel(localization, mdyOrder);
+		return buildStorableMdyLabel(localization, mdyOrder);
 	}
 
-	public static String buildMdyLabel(MiniLocalization localization, String mdyOrder)
+	public static String buildStorableMdyLabel(MiniLocalization localization, String mdyOrder)
 	{
 		return new MdyToStorableLabelConverter().buildMdyLabel(localization, mdyOrder);
 	}
