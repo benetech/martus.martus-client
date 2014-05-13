@@ -535,17 +535,17 @@ public class FxWizardAddContactsController extends FxStep4Controller
 
 	public void nextWasPressed() throws Exception
 	{
-		SaveContacts();
+		saveContacts();
 		super.nextWasPressed();
 	}
 	
 	public void backWasPressed() throws Exception
 	{
-		SaveContacts();
+		saveContacts();
 		super.backWasPressed();
 	}
 	
-	public void SaveContacts()
+	public void saveContacts()
 	{
 		ContactKeys allContactsInTable = new ContactKeys();
 		for(int i =0; i < data.size(); ++i)
