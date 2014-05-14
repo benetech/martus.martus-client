@@ -553,9 +553,9 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		for(int i =0; i < data.size(); ++i)
 		{
 			ContactKey contact = data.get(i).getContact();
-			String label = contact.getLabel();
+			String displayableLabel = contact.getLabel();
 			boolean doZawgyiConversion = FontHandler.isDoZawgyiConversion();
-			String storableLabel = new UiFontEncodingHelper(doZawgyiConversion).getStorable(label);
+			String storableLabel = new UiFontEncodingHelper(doZawgyiConversion).getStorable(displayableLabel);
 			contact.setLabel(storableLabel);
 			
 			allContactsInTable.add(contact);
