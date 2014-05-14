@@ -42,14 +42,14 @@ public class ContactKeyStringConverter extends StringConverter<ContactKey>
 		if (contactKey == null)
 			return "";
 		
-		String label = contactKey.getLabel();
-		label = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion()).getDisplayable(label);			
+		String storableLabel = contactKey.getLabel();
+		String displayableLabel = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion()).getDisplayable(storableLabel);			
 		try
 		{
 			String contactsCompleteName;
 			String publicCode = contactKey.getFormattedPublicCode40();
-			if(label.length() > 0)
-				contactsCompleteName = String.format("%s (%s)", label, publicCode);
+			if(displayableLabel.length() > 0)
+				contactsCompleteName = String.format("%s (%s)", displayableLabel, publicCode);
 			else
 				contactsCompleteName = publicCode;
 			return contactsCompleteName;
