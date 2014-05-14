@@ -62,7 +62,7 @@
               <children>
                 <Label prefHeight="30.0" prefWidth="59" styleClass="headingLevel3" text="%UseTor" />
                 <Pane fx:id="switchButtonPane" prefHeight="40.0" prefWidth="80.0" />
-                <Label  prefHeight="80.0" prefWidth="450.0" styleClass="mainTextBoxText" text="" wrapText="true" />
+                <Label  prefHeight="80.0" prefWidth="450.0" styleClass="mainTextBoxText" text="%PreferencesWhyUseTor" wrapText="true" />
               </children>
             </HBox>
           </VBox>
