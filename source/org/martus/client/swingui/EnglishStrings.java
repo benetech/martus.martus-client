@@ -593,6 +593,7 @@ public class EnglishStrings
 "field:preferencesUseZawgyi=Use Zawgyi font for Burmese display and input",
 "field:preferencesAllPrivate=Prevent creating public bulletins",
 "field:PreferencesUseInternalTor=Use embedded Tor (Using Tor can improve security but may be slower than not using Tor)",
+"field:PreferencesWhyUseTor=Turn Tor ON if you wish to hide that you are connecting to a Martus server. This may help reach the Martus servers if they are blocked from your location.",
 "field:CustomizationTemplateFileFilter=Customization Template Files (*.mct)",
 "field:SearchGridHeaderField=Field(s) to search",
 "field:SearchGridHeaderOp=Compare how?",
