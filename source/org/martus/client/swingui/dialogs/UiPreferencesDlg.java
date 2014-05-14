@@ -257,7 +257,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		}
 	}
 	
-	private static abstract class AbstractMdyToLabelConverter
+	protected static abstract class AbstractMdyToLabelConverter
 	{
 		protected String buildMdyLabel(MiniLocalization localization, String mdyOrder)
 		{
@@ -287,7 +287,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		abstract protected String getStorable(String translated);
 	}
 	
-	private static class MdyToStorableLabelConverter extends AbstractMdyToLabelConverter 
+	protected static class MdyToStorableLabelConverter extends AbstractMdyToLabelConverter 
 	{
 		@Override
 		protected String getStorable(String translated)
@@ -296,7 +296,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		}
 	}
 	
-	private static class MdyToLabelConverter extends AbstractMdyToLabelConverter 
+	protected static class MdyToLabelConverter extends AbstractMdyToLabelConverter 
 	{
 		@Override
 		protected String getStorable(String translated)
