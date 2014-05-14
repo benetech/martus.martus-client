@@ -27,8 +27,11 @@ package org.martus.client.swingui.jfx.setupwizard.step5;
 
 import javafx.util.StringConverter;
 
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.common.ContactKey;
 import org.martus.common.MartusLogger;
+import org.martus.swing.FontHandler;
+
 
 
 public class ContactKeyStringConverter extends StringConverter<ContactKey>
@@ -40,7 +43,7 @@ public class ContactKeyStringConverter extends StringConverter<ContactKey>
 			return "";
 		
 		String label = contactKey.getLabel();
-					
+		label = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion()).getDisplayable(label);			
 		try
 		{
 			String contactsCompleteName;
