@@ -29,9 +29,11 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.common.ContactKey;
 import org.martus.common.DammCheckDigitAlgorithm.CheckDigitInvalidException;
 import org.martus.common.crypto.MartusCrypto.CreateDigestException;
+import org.martus.swing.FontHandler;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class ContactsTableData
@@ -39,7 +41,7 @@ public class ContactsTableData
 	public ContactsTableData(ContactKey contact) throws InvalidBase64Exception, CreateDigestException, CheckDigitInvalidException
 	{
 		publicKey = contact.getPublicKey();
-		contactName = new SimpleStringProperty(contact.getLabel());
+		contactName = new SimpleStringProperty(getDisplayableContactName(contact));
 		publicCode = new SimpleStringProperty(contact.getFormattedPublicCode40());
 		sendToByDefault = new SimpleBooleanProperty(contact.getSendToByDefault());
 		canSendTo = new SimpleBooleanProperty(contact.getCanSendTo());
@@ -50,10 +52,28 @@ public class ContactsTableData
 
 	public ContactKey getContact()
 	{
-		ContactKey contact = new ContactKey(publicKey, contactName.get());
+		String storableLabel = getStorableContactName();
+		ContactKey contact = new ContactKey(publicKey, storableLabel);
 		contact.setSendToByDefault(sendToByDefault.get());
 		contact.setVerificationStatus(verificationStatus.get());
 		return contact;
+	}
+
+	private String getStorableContactName()
+	{
+		return getUiFontEncodingHelper().getStorable(contactName.get());
+	}
+
+	private String getDisplayableContactName(ContactKey contact)
+	{
+		return getUiFontEncodingHelper().getDisplayable(contact.getLabel());
+	}
+
+	private UiFontEncodingHelper getUiFontEncodingHelper()
+	{
+		boolean doZawgyiConversion = FontHandler.isDoZawgyiConversion();
+		
+		return new UiFontEncodingHelper(doZawgyiConversion);
 	}
 	
 	public String getContactName()

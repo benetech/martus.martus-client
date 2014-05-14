@@ -55,7 +55,6 @@ import javafx.util.Callback;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
-import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxInSwingDialogStage;
 import org.martus.client.swingui.jfx.FxPopupController;
@@ -76,7 +75,6 @@ import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CreateDigestException;
 import org.martus.common.crypto.MartusSecurity;
-import org.martus.swing.FontHandler;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 
@@ -553,11 +551,6 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		for(int i =0; i < data.size(); ++i)
 		{
 			ContactKey contact = data.get(i).getContact();
-			String displayableLabel = contact.getLabel();
-			boolean doZawgyiConversion = FontHandler.isDoZawgyiConversion();
-			String storableLabel = new UiFontEncodingHelper(doZawgyiConversion).getStorable(displayableLabel);
-			contact.setLabel(storableLabel);
-			
 			allContactsInTable.add(contact);
 		}
 		try
