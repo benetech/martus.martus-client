@@ -100,7 +100,6 @@ import org.martus.common.MartusUtilities.PublicInformationInvalidException;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.MiniLocalization;
 import org.martus.common.ProgressMeterInterface;
-import org.martus.common.Version;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.DecryptionException;
@@ -153,7 +152,7 @@ public class MartusApp
 	
 	public MartusApp(MtfAwareLocalization localizationToUse) throws MartusAppInitializationException
 	{
-		this(null, determineMartusDataRootDirectory(), localizationToUse);
+		this(null, MartusConstants.determineMartusDataRootDirectory(), localizationToUse);
 	}
 
 	public MartusApp(MartusCrypto cryptoToUse, File dataDirectoryToUse, MtfAwareLocalization localizationToUse) throws MartusAppInitializationException
@@ -1158,7 +1157,7 @@ public class MartusApp
 
 	public static File getTranslationsDirectory()
 	{
-		return determineMartusDataRootDirectory();
+		return MartusConstants.determineMartusDataRootDirectory();
 	}
 
 	public File getCurrentKeyPairFile()
@@ -2527,27 +2526,6 @@ public class MartusApp
 	private String getServerName()
 	{
 		return configInfo.getServerName();
-	}
-
-	private static File determineMartusDataRootDirectory()
-	{
-		String dir;
-		if(Version.isRunningUnderWindows())
-		{
-			dir = "C:/Martus/";
-		}
-		else
-		{
-			String userHomeDir = System.getProperty("user.home");
-			dir = userHomeDir + "/.Martus/";
-		}
-		File file = new File(dir);
-		if(!file.exists())
-		{
-			file.mkdirs();
-		}
-
-		return file;
 	}
 
 	public void saveBulletin(Bulletin bulletinToSave, BulletinFolder outboxToUse) throws Exception
