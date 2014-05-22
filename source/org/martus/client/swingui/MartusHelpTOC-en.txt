@@ -37,7 +37,7 @@
 6f. Placing bulletins on the desktop
 6g. Retrieving sealed bulletins
 6h. Retrieving draft bulletins
-6i. Retrieving bulletins created by field desks
+6i. Retrieving bulletins created by Contacts
 6j. Viewing earlier versions of a bulletin
 6k. Viewing and saving attachments
 6l. Viewing damaged bulletins
@@ -55,7 +55,7 @@
 9c. Restoring your key
 9d. Using your password wisely
 9e. Using safe computing practices
-9f. Sharing your private data with colleagues
+9f. Sharing your private data with Contacts
 9g. Enabling other accounts to send your bulletins to a server
 9h. Changing your user name or password
 10. Customizing Martus
