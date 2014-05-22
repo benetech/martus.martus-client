@@ -478,6 +478,11 @@ class BackgroundTimerTask extends TimerTask
 			alreadyGotMartusAccountAccessToken = true;
 			MartusLogger.log("Server does not support getting token");
 		}
+		catch (ServerNotAvailableException e)
+		{
+			alreadyGotMartusAccountAccessToken = true;
+			MartusLogger.log("Server not available to get token");
+		}
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
