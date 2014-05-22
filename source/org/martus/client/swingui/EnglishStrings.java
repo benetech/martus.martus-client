@@ -1731,7 +1731,7 @@ public class EnglishStrings
 "field:WizardStep2=Settings",
 "field:WizardStep2Information=Establish your system settings for the use of Tor (a tool to help hide network activity) and dates.",
 "field:WizardStep3=Server Setup",
-"field:WizardStep3Information=Backup your information to a secure server.  Backup your information to a secure server.",
+"field:WizardStep3Information=Backup your information to a secure server.",
 "field:WizardStep4=Contacts",
 "field:WizardStep4Information=Send and receive information from other Martus users of your choice.",
 "field:WizardStep5=Import Forms",
