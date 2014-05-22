@@ -1805,7 +1805,7 @@ public class MartusApp
 		return new MartusAccountAccessToken(ourTokenString);
 	}
 
-	public String getMartusAccountIdFromAccessTokenOnServer(MartusAccountAccessToken tokenToUse) throws TokenNotFoundException, ServerNotAvailableException, MartusSignatureException, ServerNotCompatibleException 
+	public String getMartusAccountIdFromAccessTokenOnServer(MartusAccountAccessToken tokenToUse) throws TokenNotFoundException, ServerNotAvailableException, MartusSignatureException, ServerNotCompatibleException, ServerCallFailedException 
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
@@ -1815,6 +1815,8 @@ public class MartusApp
 			throw new TokenNotFoundException();
 		if(response.getResultCode().equals(NetworkInterfaceConstants.SERVER_NOT_COMPATIBLE))
 			throw new ServerNotCompatibleException();
+		if(response.getResultCode().equals(NetworkInterfaceConstants.SERVER_ERROR))
+			throw new ServerCallFailedException();
 		if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
 		{
 			throw new ServerNotAvailableException();
