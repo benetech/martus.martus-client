@@ -234,6 +234,128 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		setGlassPane(new WindowObscurer());
 	}
 	
+	public boolean run()
+	{
+		setCurrentActiveFrame(this);
+		
+		if(Utilities.isMSWindows())
+		{
+			updateTitle();
+			setVisible(true);
+			Dimension screenSize = Utilities.getViewableScreenSize();
+			setLocation(screenSize.width, screenSize.height);
+		}
+		else if(Utilities.isLinux())
+		{
+			updateTitle();
+			setVisible(true);
+			Dimension screenSize = Utilities.getViewableScreenSize();
+			setLocation(screenSize.width/2, screenSize.height/2);
+		}
+
+		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
+		FontSetter.setDefaultFont(currentLanguageCode.equals(MtfAwareLocalization.BURMESE));
+		displayDefaultUnofficialTranslationMessageIfNecessary(currentActiveFrame, getLocalization(), currentLanguageCode);
+		displayIncompatibleMtfVersionWarningMessageIfNecessary(currentActiveFrame, getLocalization(), getLocalization().getCurrentLanguageCode());
+		
+		preventTwoInstances();
+		notifyClientCompliance();
+
+		mainWindowInitalizing = true;
+
+		inactivityDetector = new UiInactivityDetector();
+		timeoutTimerTask = new TimeoutTimerTask();
+
+		if (getApp().hasNoAccounts())
+		{
+			startAccountSetupWizard();
+		}
+
+		if(!getApp().isSignedIn())
+		{
+			if(!sessionSignIn())
+				return false;
+
+			startInactivityTimeoutDetection();
+			doPostSigninAppInitialization();
+			getApp().startOrStopTorAsRequested();
+		}
+		
+		getSession().initalizeUiState();
+		
+
+		try
+		{
+			String accountId = getApp().getSecurity().getPublicKeyString();
+			MartusLogger.log("Old public code: " + MartusSecurity.computeFormattedPublicCode(accountId) + "\n");
+			MartusLogger.log("New public code: " + MartusCrypto.computeFormattedPublicCode40(accountId));
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			// NOTE: This was just informational output, so keep going
+		}
+		
+		loadConfigInfo();
+		if(!createdNewAccount && !justRecovered)
+			askAndBackupKeypairIfRequired();
+		
+		UiModelessBusyDlg waitingForBulletinsToLoad = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitingForBulletinsToLoad"));
+		try
+		{
+			if(!loadFoldersAndBulletins())
+				return false;
+	
+			initializeViews();
+			restoreState();
+		}
+		catch(Exception e)
+		{
+			MartusLogger.logException(e);
+			unexpectedErrorDlg();
+		}
+		finally
+		{
+			waitingForBulletinsToLoad.endDialog();
+		}
+
+		MartusLogger.log("reloadPendingRetrieveQueue");
+		reloadPendingRetrieveQueue();
+		
+		try
+		{
+			SpellCheckerManager.initializeSpellChecker(this);
+		} 
+		catch (MalformedURLException e)
+		{
+			MartusLogger.logException(e);
+			notifyDlg("ErrorInitializingSpellChecker");
+			System.exit(1);
+		}
+		
+		MartusLogger.log("Ready to show main window");
+		addWindowListener(new WindowEventHandler());
+		if(timeoutTimerTask.waitingForSignin)
+		{
+			setLocation(100000, 0);
+			setSize(0,0);
+			setEnabled(false);
+		}
+		else
+		{
+			MartusLogger.log("Showing main window");
+			setVisible(true);
+			toFront();
+			mainWindowInitalizing = false;
+		}
+		
+
+		createBackgroundUploadTasks();
+
+		MartusLogger.log("Initialization complete");
+		return true;
+    }
+
 	public void displayIncorrectVersionJava(String highVersionJava, String expectedVersionJava)
 	{
 		String title = getLocalization().getWindowTitle("IncompatibleJavaVersion");
@@ -365,128 +487,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		return originalMessage;
 	}
-
-	public boolean run()
-	{
-		setCurrentActiveFrame(this);
-		
-		if(Utilities.isMSWindows())
-		{
-			updateTitle();
-			setVisible(true);
-			Dimension screenSize = Utilities.getViewableScreenSize();
-			setLocation(screenSize.width, screenSize.height);
-		}
-		else if(Utilities.isLinux())
-		{
-			updateTitle();
-			setVisible(true);
-			Dimension screenSize = Utilities.getViewableScreenSize();
-			setLocation(screenSize.width/2, screenSize.height/2);
-		}
-
-		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
-		FontSetter.setDefaultFont(currentLanguageCode.equals(MtfAwareLocalization.BURMESE));
-		displayDefaultUnofficialTranslationMessageIfNecessary(currentActiveFrame, getLocalization(), currentLanguageCode);
-		displayIncompatibleMtfVersionWarningMessageIfNecessary(currentActiveFrame, getLocalization(), getLocalization().getCurrentLanguageCode());
-		
-		preventTwoInstances();
-		notifyClientCompliance();
-
-		mainWindowInitalizing = true;
-
-		inactivityDetector = new UiInactivityDetector();
-		timeoutTimerTask = new TimeoutTimerTask();
-
-		if (getApp().hasNoAccounts())
-		{
-			startAccountSetupWizard();
-		}
-
-		if(!getApp().isSignedIn())
-		{
-			if(!sessionSignIn())
-				return false;
-
-			startInactivityTimeoutDetection();
-			doPostSigninAppInitialization();
-			getApp().startOrStopTorAsRequested();
-		}
-		
-		getSession().initalizeUiState();
-		
-
-		try
-		{
-			String accountId = getApp().getSecurity().getPublicKeyString();
-			MartusLogger.log("Old public code: " + MartusSecurity.computeFormattedPublicCode(accountId) + "\n");
-			MartusLogger.log("New public code: " + MartusCrypto.computeFormattedPublicCode40(accountId));
-		} 
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-			// NOTE: This was just informational output, so keep going
-		}
-		
-		loadConfigInfo();
-		if(!createdNewAccount && !justRecovered)
-			askAndBackupKeypairIfRequired();
-		
-		UiModelessBusyDlg waitingForBulletinsToLoad = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitingForBulletinsToLoad"));
-		try
-		{
-			if(!loadFoldersAndBulletins())
-				return false;
-	
-			initializeViews();
-			restoreState();
-		}
-		catch(Exception e)
-		{
-			MartusLogger.logException(e);
-			unexpectedErrorDlg();
-		}
-		finally
-		{
-			waitingForBulletinsToLoad.endDialog();
-		}
-
-		MartusLogger.log("reloadPendingRetrieveQueue");
-		reloadPendingRetrieveQueue();
-		
-		try
-		{
-			SpellCheckerManager.initializeSpellChecker(this);
-		} 
-		catch (MalformedURLException e)
-		{
-			MartusLogger.logException(e);
-			notifyDlg("ErrorInitializingSpellChecker");
-			System.exit(1);
-		}
-		
-		MartusLogger.log("Ready to show main window");
-		addWindowListener(new WindowEventHandler());
-		if(timeoutTimerTask.waitingForSignin)
-		{
-			setLocation(100000, 0);
-			setSize(0,0);
-			setEnabled(false);
-		}
-		else
-		{
-			MartusLogger.log("Showing main window");
-			setVisible(true);
-			toFront();
-			mainWindowInitalizing = false;
-		}
-		
-
-		createBackgroundUploadTasks();
-
-		MartusLogger.log("Initialization complete");
-		return true;
-    }
 
 	public void startInactivityTimeoutDetection()
 	{
