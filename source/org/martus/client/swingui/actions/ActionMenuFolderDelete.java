@@ -39,7 +39,7 @@ public class ActionMenuFolderDelete extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		getMainPane().doDeleteFolder();
+		doDeleteFolder();
 	}
 
 	public boolean isEnabled()
@@ -47,4 +47,8 @@ public class ActionMenuFolderDelete extends UiMenuAction
 		return mainWindow.canModifyCurrentFolder();
 	}
 
+	public void doDeleteFolder()
+	{
+		getFolderTreePane().deleteCurrentFolderIfPossible();
+	}
 }
