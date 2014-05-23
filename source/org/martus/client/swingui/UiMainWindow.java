@@ -528,7 +528,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private void createBackgroundUploadTasks()
 	{
 		uploader = new java.util.Timer(true);
-		backgroundUploadTimerTask = new BackgroundTimerTask(this, statusBar);
+		backgroundUploadTimerTask = new BackgroundTimerTask(this, getStatusBar());
 		uploader.schedule(backgroundUploadTimerTask, 0, BACKGROUND_UPLOAD_CHECK_MILLIS);
 
 		errorChecker = new javax.swing.Timer(10*1000, new UploadErrorChecker());
@@ -2282,9 +2282,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		folderSplitter.setInitialDividerLocation(getUiState().getCurrentFolderSplitterPosition());
 
 		mainPane.add(folderSplitter);
-		statusBar = new UiStatusBar(getLocalization());		
-		getTransport().setProgressMeter(statusBar.getTorProgressMeter());
-		mainPane.add(statusBar, BorderLayout.SOUTH ); 
+		setStatusBar(new UiStatusBar(getLocalization()));		
+		getTransport().setProgressMeter(getStatusBar().getTorProgressMeter());
+		mainPane.add(getStatusBar(), BorderLayout.SOUTH ); 
 		// NOTE: re-start Tor here in case it was turned on in the wizard
 		getApp().startOrStopTorAsRequested();
 		
@@ -2345,8 +2345,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void setStatusMessageTag(String tag)
 	{
-		if(statusBar != null)
-			statusBar.setStatusMessageTag(tag);
+		if(getStatusBar() != null)
+			getStatusBar().setStatusMessageTag(tag);
 	}
 	
 	public void setStatusMessageReady()
@@ -2970,6 +2970,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return getMainPane().getPreviewSplitter();
 	}
 
+	private UiStatusBar getStatusBar()
+	{
+		return statusBar;
+	}
+
+	private void setStatusBar(UiStatusBar statusBar)
+	{
+		this.statusBar = statusBar;
+	}
+	
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
