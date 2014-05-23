@@ -2249,6 +2249,28 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		MartusLogger.logBeginProcess("Initializing views");
 		updateTitle();
 
+		setWindowSizeAndState();
+
+		getUiState().setCurrentAppDimension(getSize());
+		mainPane = new UiMainPane(this);
+		setContentPane(mainPane);
+
+		getPreviewSplitter().setDividerLocation(getUiState().getCurrentPreviewSplitterPosition());
+		getFolderSplitter().setInitialDividerLocation(getUiState().getCurrentFolderSplitterPosition());
+
+		getTransport().setProgressMeter(getStatusBar().getTorProgressMeter());
+		// NOTE: re-start Tor here in case it was turned on in the wizard
+		getApp().startOrStopTorAsRequested();
+		
+		MartusLogger.logEndProcess("Initializing views");
+
+		MartusLogger.logBeginProcess("Checking server status");
+		checkServerStatus();	
+		MartusLogger.logEndProcess("Checking server status");
+	}
+
+	public void setWindowSizeAndState()
+	{
 		Dimension screenSize = Utilities.getViewableScreenSize();
 		Dimension appDimension = getUiState().getCurrentAppDimension();
 		Point appPosition = getUiState().getCurrentAppPosition();
@@ -2268,23 +2290,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			setSize(screenSize.width - 50 , screenSize.height - 50);
 			Utilities.maximizeWindow(this);
 		}
-
-		getUiState().setCurrentAppDimension(getSize());
-		mainPane = new UiMainPane(this);
-		setContentPane(mainPane);
-
-		getPreviewSplitter().setDividerLocation(getUiState().getCurrentPreviewSplitterPosition());
-		getFolderSplitter().setInitialDividerLocation(getUiState().getCurrentFolderSplitterPosition());
-
-		getTransport().setProgressMeter(getStatusBar().getTorProgressMeter());
-		// NOTE: re-start Tor here in case it was turned on in the wizard
-		getApp().startOrStopTorAsRequested();
-		
-		MartusLogger.logEndProcess("Initializing views");
-
-		MartusLogger.logBeginProcess("Checking server status");
-		checkServerStatus();	
-		MartusLogger.logEndProcess("Checking server status");
 	}
 
 	private void updateTitle() {
