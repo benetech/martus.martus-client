@@ -31,7 +31,10 @@ import java.awt.GridLayout;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 
+import org.martus.client.swingui.bulletincomponent.UiBulletinPreviewPane;
+import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiPopupMenu;
 
@@ -41,6 +44,10 @@ public class UiMainPane extends JPanel
 	{
 		setLayout(new BorderLayout());
 		setComponentOrientation(UiLanguageDirection.getComponentOrientation());
+
+		previewPane = new UiBulletinPreviewPane(mainWindowToUse);
+		bulletinsTable = new UiBulletinTablePane(mainWindowToUse);
+		previewSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, getBulletinsTable(), getPreviewPane());
 
 		add(createTopStuff(mainWindowToUse), BorderLayout.NORTH);
 	}
@@ -105,6 +112,25 @@ public class UiMainPane extends JPanel
 		this.menuBar = menuBar;
 	}
 	
+	public UiBulletinTablePane getBulletinsTable()
+	{
+		return bulletinsTable;
+	}
+
+	public UiBulletinPreviewPane getPreviewPane()
+	{
+		return previewPane;
+	}
+
+	public JSplitPane getPreviewSplitter()
+	{
+		return previewSplitter;
+	}
+
 	private UiMenuBar menuBar;
 	private UiToolBar toolBar;
+
+	private JSplitPane previewSplitter;
+	private UiBulletinTablePane bulletinsTable;
+	private UiBulletinPreviewPane previewPane;
 }
