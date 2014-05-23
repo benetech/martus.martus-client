@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -2282,9 +2281,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		folderSplitter.setInitialDividerLocation(getUiState().getCurrentFolderSplitterPosition());
 
 		mainPane.add(folderSplitter);
-		setStatusBar(new UiStatusBar(getLocalization()));		
 		getTransport().setProgressMeter(getStatusBar().getTorProgressMeter());
-		mainPane.add(getStatusBar(), BorderLayout.SOUTH ); 
 		// NOTE: re-start Tor here in case it was turned on in the wizard
 		getApp().startOrStopTorAsRequested();
 		
@@ -2972,14 +2969,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private UiStatusBar getStatusBar()
 	{
-		return statusBar;
+		return getMainPane().getStatusBar();
 	}
 
-	private void setStatusBar(UiStatusBar statusBar)
-	{
-		this.statusBar = statusBar;
-	}
-	
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
@@ -3000,8 +2992,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private UiMainPane mainPane;
 	private FolderSplitPane folderSplitter;
 	private UiFolderTreePane folderTreePane;
-
-	private UiStatusBar statusBar;
 
 	private java.util.Timer uploader;
 	private java.util.Timer timeoutChecker;
