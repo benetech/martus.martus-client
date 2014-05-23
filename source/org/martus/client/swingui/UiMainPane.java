@@ -105,6 +105,16 @@ public class UiMainPane extends JPanel
 		getFolderTreePane().createNewFolder();
 	}
 	
+	public void doRenameFolder()
+	{
+		getFolderTreePane().renameCurrentFolder();
+	}
+	
+	public void doDeleteFolder()
+	{
+		getFolderTreePane().deleteCurrentFolderIfPossible();
+	}
+	
 
 	
 	
