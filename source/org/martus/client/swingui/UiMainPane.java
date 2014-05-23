@@ -156,7 +156,7 @@ public class UiMainPane extends JPanel
 		return folderTreePane;
 	}
 
-	class FolderSplitPane extends JSplitPane
+	static class FolderSplitPane extends JSplitPane
 	{
 		public FolderSplitPane(int newOrientation, Component newLeftComponent, Component newRightComponent) 
 		{
@@ -174,7 +174,7 @@ public class UiMainPane extends JPanel
 			if(previousLocation != location)
 			{
 				previousLocation = location;
-				getPreviewPane().repaint();
+				getTopLevelAncestor().repaint();
 			}
 		}
 		int previousLocation = -1;
