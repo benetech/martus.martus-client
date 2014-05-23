@@ -147,7 +147,6 @@ import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.XmlPacketLoader;
 import org.martus.swing.FontHandler;
-import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiOptionPane;
 import org.martus.swing.UiPasswordField;
@@ -2272,7 +2271,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		mainPane = new UiMainPane();
 		setContentPane(mainPane);
-		mainPane.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 		
 		updateTitle();
 		
