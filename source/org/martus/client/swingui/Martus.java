@@ -90,7 +90,7 @@ public class Martus
 		if(foundFoldersUnsorted >= 0)
 		{
 			System.out.println(options.get(foundFoldersUnsorted));
-			UiMainWindow.defaultFoldersUnsorted = true;
+			UiSession.defaultFoldersUnsorted = true;
 			options.remove(foundFoldersUnsorted);
 		}
 		
