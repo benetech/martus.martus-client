@@ -2978,20 +2978,22 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public static final String STATUS_SERVER_NOT_CONFIGURED = "ServerNotConfiguredProgressMessage";
 
 	private UiSession session;
+	
 	UiBulletinPreviewPane preview;
 	private JSplitPane previewSplitter;
 	private FolderSplitPane folderSplitter;
 	private UiBulletinTablePane table;
 	private UiFolderTreePane folderTreePane;
+
+	private UiMenuBar menuBar;
+	private UiToolBar toolBar;
+	UiStatusBar statusBar;
+
 	private java.util.Timer uploader;
 	private java.util.Timer timeoutChecker;
 	private javax.swing.Timer errorChecker;
 	String uploadResult;
 	UiInactivityDetector inactivityDetector;
-
-	private UiMenuBar menuBar;
-	private UiToolBar toolBar;
-	UiStatusBar statusBar;
 
 	private JFrame currentActiveFrame;
 	private JDialog currentActiveDialog;
