@@ -956,6 +956,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean isCurrentFolderEmpty()
 	{
+		if(getBulletinsTable() == null)
+			return true;
 		if(getBulletinsTable().getBulletinCount() == 0)
 			return true;
 		return false;
@@ -2245,14 +2247,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		updateTitle();
 		MartusLogger.logBeginProcess("Initializing views");
 
-		setPreviewPane(new UiBulletinPreviewPane(this));
-		setBulletinsTable(new UiBulletinTablePane(this));
 		folderTreePane = new UiFolderTreePane(this);
 
 		mainPane = new UiMainPane(this);
 		setContentPane(mainPane);
 
-		setPreviewSplitter(new JSplitPane(JSplitPane.VERTICAL_SPLIT, getBulletinsTable(), getPreviewPane()));
 		getPreviewSplitter().setDividerLocation(getUiState().getCurrentPreviewSplitterPosition());
 
 		if(LanguageOptions.isRightToLeftLanguage())
@@ -2660,11 +2659,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean isAnyBulletinSelected()
 	{
+		if(getBulletinsTable() == null)
+			return false;
+		
 		return (getBulletinsTable().getSelectedBulletinUids().length > 0);
 	}
 
 	public boolean isOnlyOneBulletinSelected()
 	{
+		if(getBulletinsTable() == null)
+			return false;
+		
 		return (getBulletinsTable().getSelectedBulletinUids().length == 1);
 	}
 	
@@ -2949,33 +2954,22 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private UiBulletinTablePane getBulletinsTable()
 	{
-		return bulletinsTable;
+		if(getMainPane() == null)
+			return null;
+		
+		return getMainPane().getBulletinsTable();
 	}
 
-	private void setBulletinsTable(UiBulletinTablePane table)
-	{
-		this.bulletinsTable = table;
-	}
-	
 	private UiBulletinPreviewPane getPreviewPane()
 	{
-		return previewPane;
+		return getMainPane().getPreviewPane();
 	}
 
-	private void setPreviewPane(UiBulletinPreviewPane preview)
-	{
-		this.previewPane = preview;
-	}
-	
 	private JSplitPane getPreviewSplitter()
 	{
-		return previewSplitter;
+		return getMainPane().getPreviewSplitter();
 	}
 
-	private void setPreviewSplitter(JSplitPane previewSplitter)
-	{
-		this.previewSplitter = previewSplitter;
-	}
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
@@ -2994,10 +2988,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private UiSession session;
 
 	private UiMainPane mainPane;
-	private UiBulletinPreviewPane previewPane;
-	private JSplitPane previewSplitter;
 	private FolderSplitPane folderSplitter;
-	private UiBulletinTablePane bulletinsTable;
 	private UiFolderTreePane folderTreePane;
 
 	UiStatusBar statusBar;
