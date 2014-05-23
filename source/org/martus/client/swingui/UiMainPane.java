@@ -100,11 +100,6 @@ public class UiMainPane extends JPanel
 		return menu;
 	}
 	
-	public void doRenameFolder()
-	{
-		getFolderTreePane().renameCurrentFolder();
-	}
-	
 	public void doDeleteFolder()
 	{
 		getFolderTreePane().deleteCurrentFolderIfPossible();
