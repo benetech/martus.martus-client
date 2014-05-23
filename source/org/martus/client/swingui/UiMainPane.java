@@ -70,10 +70,10 @@ public class UiMainPane extends JPanel
 		JPanel topStuff = new JPanel(false);
 		topStuff.setLayout(new GridLayout(2, 1));
 
-		setMenuBar(new UiMenuBar(mainWindowToUse));
+		menuBar = new UiMenuBar(mainWindowToUse);
 		topStuff.add(getMartusMenuBar());
 
-		setToolBar(new UiToolBar(mainWindowToUse));
+		toolBar = new UiToolBar(mainWindowToUse);
 		topStuff.add(getToolBar());
 
 		return topStuff;
@@ -110,21 +110,11 @@ public class UiMainPane extends JPanel
 		return toolBar;
 	}
 
-	private void setToolBar(UiToolBar toolBar)
-	{
-		this.toolBar = toolBar;
-	}
-
 	private UiMenuBar getMartusMenuBar()
 	{
 		return menuBar;
 	}
 
-	private void setMenuBar(UiMenuBar menuBar)
-	{
-		this.menuBar = menuBar;
-	}
-	
 	public UiBulletinTablePane getBulletinsTable()
 	{
 		return bulletinsTable;
