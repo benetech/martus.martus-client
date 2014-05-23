@@ -94,7 +94,6 @@ import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
 import org.martus.client.swingui.dialogs.UiOnlineHelpDlg;
 import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
 import org.martus.client.swingui.dialogs.UiRemoveServerDlg;
-import org.martus.client.swingui.dialogs.UiServerSummariesDeleteDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesRetrieveDlg;
 import org.martus.client.swingui.dialogs.UiShowScrollableTextDlg;
@@ -1826,53 +1825,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	public void deleteServerDrafts(RetrieveTableModel model,
-						String dlgTitleTag, String summariesProgressTag)
-	{
 
-		try
-		{
-			UiServerSummariesDlg summariesDlg = new UiServerSummariesDeleteDlg(this, model, dlgTitleTag);
-			Vector uidList = displaySummariesDialog(model, dlgTitleTag, summariesProgressTag, summariesDlg);
-			if(uidList == null)
-				return;
-
-			setWaitingCursor();
-			try
-			{
-				String result = getApp().deleteServerDraftBulletins(uidList);
-				if(!result.equals(NetworkInterfaceConstants.OK))
-				{
-					notifyDlg("DeleteServerDraftsFailed");
-					return;
-				}
-
-				notifyDlg("DeleteServerDraftsWorked");
-			}
-			finally
-			{
-				resetCursor();
-			}
-		}
-		catch (MartusCrypto.MartusSignatureException e)
-		{
-			notifyDlg("UnexpectedError");
-			return;
-		}
-		catch (Packet.WrongAccountException e)
-		{
-			notifyDlg("UnexpectedError");
-			return;
-		}
-		catch(ServerErrorException e)
-		{
-			notifyDlg("ServerError");
-			return;
-		}
-	}
-
-
-	private Vector displaySummariesDialog(RetrieveTableModel model, String dlgTitleTag, String summariesProgressTag, UiServerSummariesDlg summariesDlg) throws ServerErrorException
+	public Vector displaySummariesDialog(RetrieveTableModel model, String dlgTitleTag, String summariesProgressTag, UiServerSummariesDlg summariesDlg) throws ServerErrorException
 	{
 		RetrieveSummariesProgressMeter progressHandler = new RetrieveSummariesProgressMeter();
 		setWaitingCursor();	
