@@ -2251,7 +2251,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		setWindowSizeAndState();
 
-		getUiState().setCurrentAppDimension(getSize());
 		mainPane = new UiMainPane(this);
 		setContentPane(mainPane);
 
@@ -2290,6 +2289,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			setSize(screenSize.width - 50 , screenSize.height - 50);
 			Utilities.maximizeWindow(this);
 		}
+		
+		getUiState().setCurrentAppDimension(getSize());
 	}
 
 	private void updateTitle() {
