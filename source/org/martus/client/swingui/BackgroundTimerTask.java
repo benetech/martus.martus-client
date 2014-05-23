@@ -63,7 +63,8 @@ class BackgroundTimerTask extends TimerTask
 	public BackgroundTimerTask(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
-		ProgressMeterInterface progressMeter = mainWindow.statusBar.getBackgroundProgressMeter();
+		UiStatusBar statusBar = mainWindow.statusBar;
+		ProgressMeterInterface progressMeter = statusBar.getBackgroundProgressMeter();
 		uploader = new BackgroundUploader(mainWindow.getApp(), progressMeter);
 		retriever = new BackgroundRetriever(mainWindow.getApp(), progressMeter);
 		if(mainWindow.isServerConfigured())
