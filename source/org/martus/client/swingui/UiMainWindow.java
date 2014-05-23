@@ -196,8 +196,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		try
 		{
-			localization = new MartusLocalization(MartusApp.getTranslationsDirectory(), UiSession.getAllEnglishStrings());
-			setApp(new MartusApp(localization));
+			setLocalization(new MartusLocalization(MartusApp.getTranslationsDirectory(), UiSession.getAllEnglishStrings()));
+			setApp(new MartusApp(getLocalization()));
 			initializeCurrentLanguage();
 		}
 		catch(MartusApp.MartusAppInitializationException e)
@@ -238,9 +238,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void displayIncorrectVersionJava(String highVersionJava, String expectedVersionJava)
 	{
-		String title = localization.getWindowTitle("IncompatibleJavaVersion");
-		String warningMessage = localization.getFieldLabel("IncompatibleJavaVersion");
-		String buttonMessage = localization.getButtonLabel("ok");
+		String title = getLocalization().getWindowTitle("IncompatibleJavaVersion");
+		String warningMessage = getLocalization().getFieldLabel("IncompatibleJavaVersion");
+		String buttonMessage = getLocalization().getButtonLabel("ok");
 		Toolkit.getDefaultToolkit().beep();
 		HashMap map = new HashMap();
 		map.put("#HighVersion#", highVersionJava);
@@ -301,20 +301,20 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		if(previouslySavedState.getCurrentLanguage() != "")
 		{	
-			localization.setCurrentLanguageCode(previouslySavedState.getCurrentLanguage());
-			localization.setCurrentDateFormatCode(previouslySavedState.getCurrentDateFormat());
+			getLocalization().setCurrentLanguageCode(previouslySavedState.getCurrentLanguage());
+			getLocalization().setCurrentDateFormatCode(previouslySavedState.getCurrentDateFormat());
 		}
 		
-		if(localization.getCurrentLanguageCode()== null)
-			MartusApp.setInitialUiDefaultsFromFileIfPresent(localization, new File(getApp().getMartusDataRootDirectory(),"DefaultUi.txt"));
+		if(getLocalization().getCurrentLanguageCode()== null)
+			MartusApp.setInitialUiDefaultsFromFileIfPresent(getLocalization(), new File(getApp().getMartusDataRootDirectory(),"DefaultUi.txt"));
 		
-		if(localization.getCurrentLanguageCode()== null)
+		if(getLocalization().getCurrentLanguageCode()== null)
 		{
-			localization.setCurrentLanguageCode(MtfAwareLocalization.ENGLISH);
-			localization.setDateFormatFromLanguage();
+			getLocalization().setCurrentLanguageCode(MtfAwareLocalization.ENGLISH);
+			getLocalization().setDateFormatFromLanguage();
 		}
 
-		if (MtfAwareLocalization.BURMESE.equals(localization.getCurrentLanguageCode()))
+		if (MtfAwareLocalization.BURMESE.equals(getLocalization().getCurrentLanguageCode()))
 			FontSetter.setUIFont(FontHandler.BURMESE_FONT);
 	}
 
@@ -418,10 +418,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			setLocation(screenSize.width/2, screenSize.height/2);
 		}
 
-		String currentLanguageCode = localization.getCurrentLanguageCode();
+		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
 		FontSetter.setDefaultFont(currentLanguageCode.equals(MtfAwareLocalization.BURMESE));
-		displayDefaultUnofficialTranslationMessageIfNecessary(currentActiveFrame, localization, currentLanguageCode);
-		displayIncompatibleMtfVersionWarningMessageIfNecessary(currentActiveFrame, localization, localization.getCurrentLanguageCode());
+		displayDefaultUnofficialTranslationMessageIfNecessary(currentActiveFrame, getLocalization(), currentLanguageCode);
+		displayIncompatibleMtfVersionWarningMessageIfNecessary(currentActiveFrame, getLocalization(), getLocalization().getCurrentLanguageCode());
 		
 		preventTwoInstances();
 		notifyClientCompliance();
@@ -834,19 +834,19 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		boolean hasBackedUpImprovedShare = info.hasBackedUpImprovedKeypairShare();
 		if(!hasBackedUpEncrypted || !hasBackedUpShare || !hasBackedUpImprovedShare)
 		{
-			String generalMsg = localization.getFieldLabel("confirmgeneralBackupKeyPairMsgcause");
-			String generalMsgEffect = localization.getFieldLabel("confirmgeneralBackupKeyPairMsgeffect");
+			String generalMsg = getLocalization().getFieldLabel("confirmgeneralBackupKeyPairMsgcause");
+			String generalMsgEffect = getLocalization().getFieldLabel("confirmgeneralBackupKeyPairMsgeffect");
 			String backupEncrypted = "";
 			String backupShare = "";
 			String backupImprovedShare = "";
 			if(!hasBackedUpEncrypted)
-				backupEncrypted = localization.getFieldLabel("confirmbackupIncompleteEncryptedNeeded");
+				backupEncrypted = getLocalization().getFieldLabel("confirmbackupIncompleteEncryptedNeeded");
 			if(!hasBackedUpShare)
-				backupShare = localization.getFieldLabel("confirmbackupIncompleteShareNeeded");
+				backupShare = getLocalization().getFieldLabel("confirmbackupIncompleteShareNeeded");
 			if (hasBackedUpShare && !hasBackedUpImprovedShare)
-				backupImprovedShare = localization.getFieldLabel("confirmbackupIncompleteImprovedShareNeeded");
+				backupImprovedShare = getLocalization().getFieldLabel("confirmbackupIncompleteImprovedShareNeeded");
 			String[] contents = new String[] {generalMsg, "", backupEncrypted, "", getBackupShareText(backupImprovedShare, backupShare), "", generalMsgEffect};
-			if(confirmDlg(getCurrentActiveFrame(), localization.getWindowTitle("askToBackupKeyPair"), contents))
+			if(confirmDlg(getCurrentActiveFrame(), getLocalization().getWindowTitle("askToBackupKeyPair"), contents))
 			{
 				if(!hasBackedUpEncrypted)
 					askToBackupKeyPairEncryptedSingleFile();
@@ -1089,19 +1089,19 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public String getConfirmEffectText(String baseTag)
 	{
-		String effect = localization.getFieldLabel("confirm" + baseTag + "effect");
+		String effect = getLocalization().getFieldLabel("confirm" + baseTag + "effect");
 		return effect;
 	}
 
 	public String getConfirmCauseText(String baseTag)
 	{
-		String cause = localization.getFieldLabel("confirm" + baseTag + "cause");
+		String cause = getLocalization().getFieldLabel("confirm" + baseTag + "cause");
 		return cause;
 	}
 
 	public String getConfirmDialogTitle(String baseTag)
 	{
-		String title = localization.getWindowTitle("confirm" + baseTag);
+		String title = getLocalization().getWindowTitle("confirm" + baseTag);
 		return title;
 	}
 
@@ -1342,10 +1342,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return;
 		}
 		uiState.load(uiStateFile);
-		localization.setCurrentDateFormatCode(uiState.getCurrentDateFormat());
-		localization.setCurrentCalendarSystem(uiState.getCurrentCalendarSystem());
-		localization.setAdjustThaiLegacyDates(uiState.getAdjustThaiLegacyDates());
-		localization.setAdjustPersianLegacyDates(uiState.getAdjustPersianLegacyDates());
+		getLocalization().setCurrentDateFormatCode(uiState.getCurrentDateFormat());
+		getLocalization().setCurrentCalendarSystem(uiState.getCurrentCalendarSystem());
+		getLocalization().setAdjustThaiLegacyDates(uiState.getAdjustThaiLegacyDates());
+		getLocalization().setAdjustPersianLegacyDates(uiState.getAdjustPersianLegacyDates());
 	}
 
 	private void copyLocalizationSettingsToUiState()
@@ -2645,9 +2645,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			bulletins.add(selectedFolder.getBulletinSorted(i));
 		}
-		String defaultFileName = MartusUtilities.createValidFileName(selectedFolder.getLocalizedName(localization));
+		String defaultFileName = MartusUtilities.createValidFileName(selectedFolder.getLocalizedName(getLocalization()));
 		if(defaultFileName.length() == 0)
-			defaultFileName = localization.getFieldLabel("ExportedBulletins");
+			defaultFileName = getLocalization().getFieldLabel("ExportedBulletins");
 		new UiExportBulletinsDlg(this, bulletins, defaultFileName);
 	}
 
@@ -2663,7 +2663,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			Vector bulletins = getSelectedBulletins("ExportZeroBulletins");
 			if(bulletins == null)
 				return;
-			String defaultFileName = localization.getFieldLabel("ExportedBulletins");
+			String defaultFileName = getLocalization().getFieldLabel("ExportedBulletins");
 			if(bulletins.size()==1)
 				defaultFileName = ((Bulletin)bulletins.get(0)).toFileName();
 			new UiExportBulletinsDlg(this, bulletins, defaultFileName);
@@ -3015,6 +3015,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		this.app = app;
 	}
+	void setLocalization(MartusLocalization localization)
+	{
+		this.localization = localization;
+	}
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
@@ -3037,7 +3041,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private UiMenuBar menuBar;
 	private UiToolBar toolBar;
 	UiStatusBar statusBar;
-	MartusLocalization localization;
+	private MartusLocalization localization;
 
 	private JFrame currentActiveFrame;
 	private JDialog currentActiveDialog;
