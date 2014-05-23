@@ -102,7 +102,7 @@ public class UiMenuBar extends JMenuBar
 		file.add(new ActionMenuExportBulletins(mainWindow));
 		
 		file.add(new ActionMenuImportBulletins(mainWindow));
-		if(UiMainWindow.isAlphaTester)
+		if(UiSession.isAlphaTester)
 		{
 			file.add(new ActionMenuExportMba(mainWindow));
 			file.add(new ActionMenuImportMba(mainWindow));
