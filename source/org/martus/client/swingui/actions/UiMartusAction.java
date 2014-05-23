@@ -84,5 +84,10 @@ abstract public class UiMartusAction extends AbstractAction
 		getBulletinsTable().doModifyBulletin();
 	}
 
+	public void doSelectAllBulletins()
+	{
+		getBulletinsTable().doSelectAllBulletins();	
+	}
+
 	UiMainWindow mainWindow;
 }

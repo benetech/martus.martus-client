@@ -40,7 +40,7 @@ public class ActionMenuSelectAllBulletins extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doSelectAllBulletins();
+		doSelectAllBulletins();
 	}
 
 	public boolean isEnabled()

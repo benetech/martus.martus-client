@@ -1307,11 +1307,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getBulletinsTable().selectFirstBulletin();
 	}
 	
-	public void doSelectAllBulletins()
-	{
-		getBulletinsTable().doSelectAllBulletins();	
-	}
-
 	public void doCutBulletins()
 	{
 		getBulletinsTable().doCutBulletins();
