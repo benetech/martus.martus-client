@@ -39,7 +39,7 @@ public class ActionMenuFoldersOrganize extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doOrganizeFolders();
+		getMainPane().doOrganizeFolders(getMainWindow());
 	}
 
 	public boolean isEnabled()
