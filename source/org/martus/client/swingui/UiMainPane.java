@@ -100,6 +100,14 @@ public class UiMainPane extends JPanel
 		return menu;
 	}
 	
+	public void doCreateFolder()
+	{
+		getFolderTreePane().createNewFolder();
+	}
+	
+
+	
+	
 	public AbstractAction getActionMenuPaste()
 	{
 		return getMartusMenuBar().actionMenuPasteBulletins;

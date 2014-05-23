@@ -39,7 +39,7 @@ public class ActionMenuFolderCreate extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doCreateFolder();
+		getMainPane().doCreateFolder();
 	}
 
 }
