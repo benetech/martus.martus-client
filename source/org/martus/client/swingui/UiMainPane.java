@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GridLayout;
 
 import javax.swing.AbstractAction;
@@ -35,8 +36,10 @@ import javax.swing.JSplitPane;
 
 import org.martus.client.swingui.bulletincomponent.UiBulletinPreviewPane;
 import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
+import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiPopupMenu;
+import org.martus.util.language.LanguageOptions;
 
 public class UiMainPane extends JPanel
 {
@@ -49,10 +52,18 @@ public class UiMainPane extends JPanel
 		bulletinsTable = new UiBulletinTablePane(mainWindowToUse);
 		previewSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, getBulletinsTable(), getPreviewPane());
 
+		folderTreePane = new UiFolderTreePane(mainWindowToUse);
+
+		if(LanguageOptions.isRightToLeftLanguage())
+			folderSplitter = new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, getPreviewSplitter(), getFolderTreePane());
+		else
+			folderSplitter = new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, getFolderTreePane(), getPreviewSplitter());
+
 		statusBar = new UiStatusBar(mainWindowToUse.getLocalization());		
-		add(getStatusBar(), BorderLayout.SOUTH ); 
 
 		add(createTopStuff(mainWindowToUse), BorderLayout.NORTH);
+		add(getFolderSplitter(), BorderLayout.CENTER);
+		add(getStatusBar(), BorderLayout.SOUTH ); 
 	}
 
 	private JComponent createTopStuff(UiMainWindow mainWindowToUse)
@@ -135,11 +146,47 @@ public class UiMainPane extends JPanel
 		return statusBar;
 	}
 
+	public FolderSplitPane getFolderSplitter()
+	{
+		return folderSplitter;
+	}
+
+	public UiFolderTreePane getFolderTreePane()
+	{
+		return folderTreePane;
+	}
+
+	class FolderSplitPane extends JSplitPane
+	{
+		public FolderSplitPane(int newOrientation, Component newLeftComponent, Component newRightComponent) 
+		{
+			super(newOrientation, newLeftComponent, newRightComponent);
+		}
+
+		public void setInitialDividerLocation(int location)
+		{
+			super.setDividerLocation(location);
+		}
+
+		public void setDividerLocation(int location) 
+		{
+			super.setDividerLocation(location);
+			if(previousLocation != location)
+			{
+				previousLocation = location;
+				getPreviewPane().repaint();
+			}
+		}
+		int previousLocation = -1;
+	}
+	
 
 	private UiMenuBar menuBar;
 	private UiToolBar toolBar;
 	private UiStatusBar statusBar;
 
+	private FolderSplitPane folderSplitter;
+	private UiFolderTreePane folderTreePane;
 	private JSplitPane previewSplitter;
 	private UiBulletinTablePane bulletinsTable;
 	private UiBulletinPreviewPane previewPane;
