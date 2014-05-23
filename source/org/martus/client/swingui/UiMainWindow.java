@@ -935,7 +935,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void folderSelectionHasChanged(BulletinFolder f)
 	{
 		setWaitingCursor();
-		if(defaultFoldersUnsorted)
+		if(UiSession.defaultFoldersUnsorted)
 			f.sortBy("");
 		table.setFolder(f);
 		resetCursor();
@@ -1285,7 +1285,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		try
 		{
 			String sortTag = getUiState().getCurrentSortTag();
-			if(defaultFoldersUnsorted)
+			if(UiSession.defaultFoldersUnsorted)
 				sortTag = "";
 			folder.sortBy(sortTag);
 			if(folder.getSortDirection() != getUiState().getCurrentSortDirection())
@@ -3011,7 +3011,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private static final int BACKGROUND_UPLOAD_CHECK_MILLIS = 5*1000;
 	private static final int BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS = 5*1000;
 	private static final int TIME_BETWEEN_FIELD_OFFICE_CHECKS_SECONDS = 60 * 60;
-	public static boolean defaultFoldersUnsorted;
 	public static boolean isAlphaTester;
 
 	boolean mainWindowInitalizing;
