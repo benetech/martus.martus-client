@@ -30,11 +30,16 @@ import javax.swing.AbstractAction;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
+import org.martus.client.core.SortableBulletinList;
+import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.SearchThread;
 import org.martus.client.swingui.UiMainPane;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
+import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
+import org.martus.common.fieldspec.MiniFieldSpec;
 
 abstract public class UiMartusAction extends AbstractAction
 {
@@ -87,6 +92,38 @@ abstract public class UiMartusAction extends AbstractAction
 	public void doSelectAllBulletins()
 	{
 		getBulletinsTable().doSelectAllBulletins();	
+	}
+
+	public SortableBulletinList doSearch()
+	{
+		try
+		{
+			SearchTreeNode searchTree = getMainWindow().askUserForSearchCriteria();
+			if(searchTree == null)
+				return null;
+			
+			MiniFieldSpec[] sortSpecs = new MiniFieldSpec[0];
+			return doSearch(searchTree, sortSpecs);
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			getMainWindow().notifyDlg("UnexpectedError");
+			return null;
+		}
+	}
+
+	public SortableBulletinList doSearch(SearchTreeNode searchTree, MiniFieldSpec[] sortSpecs) throws Exception
+	{
+		return doSearch(searchTree, sortSpecs, new MiniFieldSpec[0], "SearchProgress");
+	}
+	
+	public SortableBulletinList doSearch(SearchTreeNode searchTree, MiniFieldSpec[] sortSpecs, MiniFieldSpec[] extraSpecs, String progressDialogTag) throws Exception
+	{
+		UiProgressWithCancelDlg dlg = new UiProgressWithCancelDlg(getMainWindow(), progressDialogTag);
+		SearchThread thread = new SearchThread(getMainWindow(), searchTree, sortSpecs, extraSpecs);
+		getMainWindow().doBackgroundWork(thread, dlg);
+		return thread.getResults();
 	}
 
 	UiMainWindow mainWindow;

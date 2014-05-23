@@ -40,7 +40,7 @@ public class ActionMenuSearch extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		SortableBulletinList bulletinIdsFromSearch = mainWindow.doSearch();
+		SortableBulletinList bulletinIdsFromSearch = doSearch();
 		mainWindow.updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
 	}
 

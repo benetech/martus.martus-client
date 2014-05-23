@@ -134,7 +134,6 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
-import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.TorTransportWrapper;
 import org.martus.common.packet.Packet;
@@ -1322,38 +1321,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getBulletinsTable().doPasteBulletins();
 	}
 	
-	public SortableBulletinList doSearch()
-	{
-		try
-		{
-			SearchTreeNode searchTree = askUserForSearchCriteria();
-			if(searchTree == null)
-				return null;
-			
-			MiniFieldSpec[] sortSpecs = new MiniFieldSpec[0];
-			return doSearch(searchTree, sortSpecs);
-		} 
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			notifyDlg("UnexpectedError");
-			return null;
-		}
-	}
-
-	public SortableBulletinList doSearch(SearchTreeNode searchTree, MiniFieldSpec[] sortSpecs) throws Exception
-	{
-		return doSearch(searchTree, sortSpecs, new MiniFieldSpec[0], "SearchProgress");
-	}
-	
-	public SortableBulletinList doSearch(SearchTreeNode searchTree, MiniFieldSpec[] sortSpecs, MiniFieldSpec[] extraSpecs, String progressDialogTag) throws Exception
-	{
-		UiProgressWithCancelDlg dlg = new UiProgressWithCancelDlg(this, progressDialogTag);
-		SearchThread thread = new SearchThread(this, searchTree, sortSpecs, extraSpecs);
-		doBackgroundWork(thread, dlg);
-		return thread.getResults();
-	}
-
 	public void doBackgroundWork(WorkerProgressThread worker, UiProgressWithCancelDlg progressDialog) throws Exception
 	{
 		setWaitingCursor();
@@ -1386,33 +1353,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			resetCursor();
 		}
-	}
-	
-	static class SearchThread extends WorkerProgressThread
-	{
-		public SearchThread(UiMainWindow mainWindowToUse, SearchTreeNode searchTreeToUse, MiniFieldSpec[] sortSpecsToUse, MiniFieldSpec[] extraSpecsToUse)
-		{
-			mainWindow = mainWindowToUse;
-			searchTree = searchTreeToUse;
-			sortSpecs = sortSpecsToUse;
-			extraSpecs = extraSpecsToUse;
-		}
-		
-		public void doTheWorkWithNO_SWING_CALLS()
-		{
-			searchResults = mainWindow.getApp().search(searchTree, sortSpecs, extraSpecs, mainWindow.getUiState().searchFinalBulletinsOnly(), mainWindow.getUiState().searchSameRowsOnly(), getProgressMeter());
-		}
-		
-		public SortableBulletinList getResults()
-		{
-			return searchResults;
-		}
-		
-		UiMainWindow mainWindow;
-		SearchTreeNode searchTree;
-		MiniFieldSpec[] sortSpecs;
-		MiniFieldSpec[] extraSpecs;
-		SortableBulletinList searchResults;
 	}
 	
 	public SearchTreeNode askUserForSearchCriteria() throws ParseException
