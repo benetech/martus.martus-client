@@ -29,6 +29,8 @@ package org.martus.client.swingui.actions;
 import java.awt.event.ActionEvent;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.tablemodels.DeleteMyServerDraftsTableModel;
+import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 
 public class ActionMenuDeleteMyServerDraftBulletins extends UiMenuAction
 {
@@ -39,7 +41,16 @@ public class ActionMenuDeleteMyServerDraftBulletins extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doDeleteServerDraftBulletins();
+		doDeleteServerDraftBulletins();
+	}
+
+	public void doDeleteServerDraftBulletins()
+	{
+		String dlgTitleTag = "DeleteMyDraftsFromServer";
+		String summariesProgressTag = "RetrieveMyDraftBulletinSummaries";
+
+		RetrieveTableModel model = new DeleteMyServerDraftsTableModel(getApp(), getLocalization());
+		getMainWindow().deleteServerDrafts(model, dlgTitleTag, summariesProgressTag);
 	}
 
 }
