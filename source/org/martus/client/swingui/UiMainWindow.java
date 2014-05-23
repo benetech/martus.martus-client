@@ -3001,11 +3001,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private java.util.Timer uploader;
 	private java.util.Timer timeoutChecker;
 	private javax.swing.Timer errorChecker;
+	private BackgroundTimerTask backgroundUploadTimerTask;
+	private TimeoutTimerTask timeoutTimerTask;
 	String uploadResult;
 	UiInactivityDetector inactivityDetector;
 
 	private JFrame currentActiveFrame;
 	private JDialog currentActiveDialog;
+	
 	boolean inConfigServer;
 	boolean preparingToExitMartus;
 	private FileLock lockToPreventTwoInstances; 
@@ -3015,8 +3018,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	boolean mainWindowInitalizing;
 	private boolean createdNewAccount;
 	private boolean justRecovered;
-	private BackgroundTimerTask backgroundUploadTimerTask;
-	private TimeoutTimerTask timeoutTimerTask;
 	private Stack cursorStack;
 
 	private static Map<String, File> memorizedFileOpenDirectories;
