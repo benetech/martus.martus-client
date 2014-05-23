@@ -1322,11 +1322,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getBulletinsTable().doPasteBulletins();
 	}
 	
-	public void doDiscardBulletins()
-	{
-		getBulletinsTable().doDiscardBulletins();
-	}
-	
 	public SortableBulletinList doSearch()
 	{
 		try
