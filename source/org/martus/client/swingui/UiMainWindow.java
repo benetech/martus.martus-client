@@ -2269,12 +2269,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	void initializeViews()
 	{
+		updateTitle();
+		MartusLogger.logBeginProcess("Initializing views");
+
 		mainPane = new UiMainPane();
 		setContentPane(mainPane);
-		
-		updateTitle();
-		
-		MartusLogger.logBeginProcess("Initializing views");
 
 		preview = new UiBulletinPreviewPane(this);
 		table = new UiBulletinTablePane(this);
