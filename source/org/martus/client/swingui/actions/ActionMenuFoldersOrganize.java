@@ -27,8 +27,11 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
+import java.util.Vector;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.dialogs.UiSetFolderOrderDlg;
+import org.martus.client.swingui.foldertree.UiFolderTreePane;
 
 public class ActionMenuFoldersOrganize extends UiMenuAction
 {
@@ -39,7 +42,7 @@ public class ActionMenuFoldersOrganize extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		getMainPane().doOrganizeFolders(getMainWindow());
+		doOrganizeFolders();
 	}
 
 	public boolean isEnabled()
@@ -47,4 +50,31 @@ public class ActionMenuFoldersOrganize extends UiMenuAction
 		return true;
 	}
 
+	public void doOrganizeFolders()
+	{
+		Vector originalOrderFolders = getFolderTreePane().getAllFolders();
+		UiSetFolderOrderDlg dlg = new UiSetFolderOrderDlg(mainWindow, originalOrderFolders);
+		dlg.setVisible(true);
+		if(!dlg.okPressed())
+			return;
+
+		Vector reOrderedFolders = new Vector();
+		for(int i = originalOrderFolders.size()-1; i >=0; --i)
+		{
+			reOrderedFolders.add(originalOrderFolders.get(i));
+		}
+		try
+		{
+			getFolderTreePane().setFolderOrder(dlg.getNewFolderOrder());
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	private UiFolderTreePane getFolderTreePane()
+	{
+		return getMainPane().getFolderTreePane();
+	}
 }
