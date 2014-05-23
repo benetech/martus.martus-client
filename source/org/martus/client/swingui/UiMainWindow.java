@@ -528,7 +528,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private void createBackgroundUploadTasks()
 	{
 		uploader = new java.util.Timer(true);
-		backgroundUploadTimerTask = new BackgroundTimerTask(this);
+		backgroundUploadTimerTask = new BackgroundTimerTask(this, statusBar);
 		uploader.schedule(backgroundUploadTimerTask, 0, BACKGROUND_UPLOAD_CHECK_MILLIS);
 
 		errorChecker = new javax.swing.Timer(10*1000, new UploadErrorChecker());
@@ -2991,7 +2991,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private FolderSplitPane folderSplitter;
 	private UiFolderTreePane folderTreePane;
 
-	UiStatusBar statusBar;
+	private UiStatusBar statusBar;
 
 	private java.util.Timer uploader;
 	private java.util.Timer timeoutChecker;
