@@ -162,7 +162,6 @@ import org.martus.util.UnicodeReader;
 import org.martus.util.language.LanguageOptions;
 import org.martus.util.xml.XmlUtilities;
 
-
 public class UiMainWindow extends JFrame implements ClipboardOwner
 {
 	public UiMainWindow() throws Exception
