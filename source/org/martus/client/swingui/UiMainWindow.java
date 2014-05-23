@@ -85,7 +85,6 @@ import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
 import org.martus.client.swingui.dialogs.UiAboutDlg;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.dialogs.UiConfigServerDlg;
-import org.martus.client.swingui.dialogs.UiContactInfoDlg;
 import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
 import org.martus.client.swingui.dialogs.UiExportBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiFancySearchDlg;
@@ -1517,18 +1516,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	}
 
-	public boolean doContactInfo()
-	{
-		ConfigInfo info = getApp().getConfigInfo();
-		UiContactInfoDlg setupContactDlg = new UiContactInfoDlg(this, info);
-		boolean pressedOk = setupContactDlg.getResult();
-		// the following is required (for unknown reasons)
-		// to get the window to redraw after the dialog
-		// is closed. Yuck! kbs.
-		repaint();
-		return pressedOk;
-	}
-	
 	public void doRemoveServer()
 	{
 		offerToCancelRetrieveInProgress();
