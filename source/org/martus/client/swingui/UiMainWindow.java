@@ -1225,47 +1225,47 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void setCurrentDefaultKeyboardVirtual(boolean keyboard)
 	{
-		uiState.setCurrentDefaultKeyboardVirtual(keyboard);
+		getUiState().setCurrentDefaultKeyboardVirtual(keyboard);
 	}
 
 	public boolean isCurrentDefaultKeyboardVirtual()
 	{
-		return uiState.isCurrentDefaultKeyboardVirtual();
+		return getUiState().isCurrentDefaultKeyboardVirtual();
 	}
 
 	public Dimension getBulletinEditorDimension()
 	{
-		return uiState.getCurrentEditorDimension();
+		return getUiState().getCurrentEditorDimension();
 	}
 
 	public Point getBulletinEditorPosition()
 	{
-		return uiState.getCurrentEditorPosition();
+		return getUiState().getCurrentEditorPosition();
 	}
 
 	public boolean isBulletinEditorMaximized()
 	{
-		return uiState.isCurrentEditorMaximized();
+		return getUiState().isCurrentEditorMaximized();
 	}
 
 	public void setBulletinEditorDimension(Dimension size)
 	{
-		uiState.setCurrentEditorDimension(size);
+		getUiState().setCurrentEditorDimension(size);
 	}
 
 	public void setBulletinEditorPosition(Point position)
 	{
-		uiState.setCurrentEditorPosition(position);
+		getUiState().setCurrentEditorPosition(position);
 	}
 
 	public void setBulletinEditorMaximized(boolean maximized)
 	{
-		uiState.setCurrentEditorMaximized(maximized);
+		getUiState().setCurrentEditorMaximized(maximized);
 	}
 
 	public void saveCurrentUiState()
 	{
-		uiState.save(getUiStateFile());
+		getUiState().save(getUiStateFile());
 	}
 
 	public void saveState()
@@ -1286,26 +1286,26 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getApp().saveStateWithoutPrompting();
 		String folderName = folders.getSelectedFolderName();
 		BulletinFolder folder = getStore().findFolder(folderName);
-		uiState.setCurrentFolder(folderName);
+		getUiState().setCurrentFolder(folderName);
 		copyLocalizationSettingsToUiState();
 		if(folder != null)
 		{
-			uiState.setCurrentSortTag(folder.sortedBy());
-			uiState.setCurrentSortDirection(folder.getSortDirection());
-			uiState.setCurrentBulletinPosition(table.getCurrentBulletinIndex());
+			getUiState().setCurrentSortTag(folder.sortedBy());
+			getUiState().setCurrentSortDirection(folder.getSortDirection());
+			getUiState().setCurrentBulletinPosition(table.getCurrentBulletinIndex());
 		}
-		uiState.setCurrentPreviewSplitterPosition(previewSplitter.getDividerLocation());
-		uiState.setCurrentFolderSplitterPosition(folderSplitter.getDividerLocation());
-		uiState.setCurrentAppDimension(getSize());
-		uiState.setCurrentAppPosition(getLocation());
+		getUiState().setCurrentPreviewSplitterPosition(previewSplitter.getDividerLocation());
+		getUiState().setCurrentFolderSplitterPosition(folderSplitter.getDividerLocation());
+		getUiState().setCurrentAppDimension(getSize());
+		getUiState().setCurrentAppPosition(getLocation());
 		boolean isMaximized = getExtendedState()==MAXIMIZED_BOTH;
-		uiState.setCurrentAppMaximized(isMaximized);
+		getUiState().setCurrentAppMaximized(isMaximized);
 		saveCurrentUiState();
 	}
 
 	public void restoreState()
 	{
-		String folderName = uiState.getCurrentFolder();
+		String folderName = getUiState().getCurrentFolder();
 		BulletinFolder folder = getStore().findFolder(folderName);
 
 		if(folder == null)
@@ -1316,11 +1316,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		try
 		{
-			String sortTag = uiState.getCurrentSortTag();
+			String sortTag = getUiState().getCurrentSortTag();
 			if(defaultFoldersUnsorted)
 				sortTag = "";
 			folder.sortBy(sortTag);
-			if(folder.getSortDirection() != uiState.getCurrentSortDirection())
+			if(folder.getSortDirection() != getUiState().getCurrentSortDirection())
 				folder.sortBy(sortTag);
 			folders.selectFolder(folderName);
 		}
@@ -1332,28 +1332,28 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void initalizeUiState()
 	{
-		uiState = new CurrentUiState();
+		setUiState(new CurrentUiState());
 		File uiStateFile = getUiStateFile();
 		if(!uiStateFile.exists())
 		{
 			copyLocalizationSettingsToUiState();
-			uiState.save(uiStateFile);
+			getUiState().save(uiStateFile);
 			return;
 		}
-		uiState.load(uiStateFile);
-		getLocalization().setCurrentDateFormatCode(uiState.getCurrentDateFormat());
-		getLocalization().setCurrentCalendarSystem(uiState.getCurrentCalendarSystem());
-		getLocalization().setAdjustThaiLegacyDates(uiState.getAdjustThaiLegacyDates());
-		getLocalization().setAdjustPersianLegacyDates(uiState.getAdjustPersianLegacyDates());
+		getUiState().load(uiStateFile);
+		getLocalization().setCurrentDateFormatCode(getUiState().getCurrentDateFormat());
+		getLocalization().setCurrentCalendarSystem(getUiState().getCurrentCalendarSystem());
+		getLocalization().setAdjustThaiLegacyDates(getUiState().getAdjustThaiLegacyDates());
+		getLocalization().setAdjustPersianLegacyDates(getUiState().getAdjustPersianLegacyDates());
 	}
 
 	private void copyLocalizationSettingsToUiState()
 	{
-		uiState.setCurrentLanguage(getLocalization().getCurrentLanguageCode());
-		uiState.setCurrentDateFormat(getLocalization().getCurrentDateFormatCode());
-		uiState.setCurrentCalendarSystem(getLocalization().getCurrentCalendarSystem());
-		uiState.setCurrentAdjustThaiLegacyDates(getLocalization().getAdjustThaiLegacyDates());
-		uiState.setCurrentAdjustPersianLegacyDates(getLocalization().getAdjustPersianLegacyDates());
+		getUiState().setCurrentLanguage(getLocalization().getCurrentLanguageCode());
+		getUiState().setCurrentDateFormat(getLocalization().getCurrentDateFormatCode());
+		getUiState().setCurrentCalendarSystem(getLocalization().getCurrentCalendarSystem());
+		getUiState().setCurrentAdjustThaiLegacyDates(getLocalization().getAdjustThaiLegacyDates());
+		getUiState().setCurrentAdjustPersianLegacyDates(getLocalization().getAdjustPersianLegacyDates());
 	}
 
 	public void selectBulletinInCurrentFolderIfExists(UniversalId id)
@@ -1548,7 +1548,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		public void doTheWorkWithNO_SWING_CALLS()
 		{
-			searchResults = mainWindow.getApp().search(searchTree, sortSpecs, extraSpecs, mainWindow.uiState.searchFinalBulletinsOnly(), mainWindow.uiState.searchSameRowsOnly(), getProgressMeter());
+			searchResults = mainWindow.getApp().search(searchTree, sortSpecs, extraSpecs, mainWindow.getUiState().searchFinalBulletinsOnly(), mainWindow.getUiState().searchSameRowsOnly(), getProgressMeter());
 		}
 		
 		public SortableBulletinList getResults()
@@ -1566,9 +1566,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public SearchTreeNode askUserForSearchCriteria() throws ParseException
 	{
 		UiFancySearchDlg searchDlg = new UiFancySearchDlg(this);
-		searchDlg.setSearchFinalBulletinsOnly(uiState.searchFinalBulletinsOnly());
-		searchDlg.setSearchSameRowsOnly(uiState.searchSameRowsOnly());
-		String searchString = uiState.getSearchString();
+		searchDlg.setSearchFinalBulletinsOnly(getUiState().searchFinalBulletinsOnly());
+		searchDlg.setSearchSameRowsOnly(getUiState().searchSameRowsOnly());
+		String searchString = getUiState().getSearchString();
 		JSONObject search = new JSONObject();
 		if(searchString.startsWith("{"))
 			search = new JSONObject(searchString);
@@ -1578,9 +1578,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return null;
 		
 
-		uiState.setSearchFinalBulletinsOnly(searchDlg.searchFinalBulletinsOnly());
-		uiState.setSearchSameRowsOnly(searchDlg.searchSameRowsOnly());
-		uiState.setSearchString(searchDlg.getSearchAsJson().toString());
+		getUiState().setSearchFinalBulletinsOnly(searchDlg.searchFinalBulletinsOnly());
+		getUiState().setSearchSameRowsOnly(searchDlg.searchSameRowsOnly());
+		getUiState().setSearchString(searchDlg.getSearchAsJson().toString());
 		return searchDlg.getSearchTree();
 	}
 
@@ -2340,7 +2340,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getContentPane().add(createTopStuff(), BorderLayout.NORTH);
 
 		previewSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, table, preview);
-		previewSplitter.setDividerLocation(uiState.getCurrentPreviewSplitterPosition());
+		previewSplitter.setDividerLocation(getUiState().getCurrentPreviewSplitterPosition());
 
 		if(LanguageOptions.isRightToLeftLanguage())
 			folderSplitter = new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, previewSplitter, folders);
@@ -2348,14 +2348,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			folderSplitter = new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, folders, previewSplitter);
 
 		Dimension screenSize = Utilities.getViewableScreenSize();
-		Dimension appDimension = uiState.getCurrentAppDimension();
-		Point appPosition = uiState.getCurrentAppPosition();
+		Dimension appDimension = getUiState().getCurrentAppDimension();
+		Point appPosition = getUiState().getCurrentAppPosition();
 		boolean showMaximized = false;
 		if(Utilities.isValidScreenPosition(screenSize, appDimension, appPosition))
 		{
 			setLocation(appPosition);
 			setSize(appDimension);
-			if(uiState.isCurrentAppMaximized())
+			if(getUiState().isCurrentAppMaximized())
 				showMaximized = true;
 		}
 		else
@@ -2366,8 +2366,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			Utilities.maximizeWindow(this);
 		}
 
-		uiState.setCurrentAppDimension(getSize());
-		folderSplitter.setInitialDividerLocation(uiState.getCurrentFolderSplitterPosition());
+		getUiState().setCurrentAppDimension(getSize());
+		folderSplitter.setInitialDividerLocation(getUiState().getCurrentFolderSplitterPosition());
 
 		getContentPane().add(folderSplitter);
 		statusBar = new UiStatusBar(getLocalization());		
@@ -2885,7 +2885,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public CurrentUiState getCurrentUiState()
 	{
-		return uiState;
+		return getUiState();
 	}
 	
 	static public Image getMartusIconImage()
@@ -3019,6 +3019,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return session;
 	}
 	
+	CurrentUiState getUiState()
+	{
+		return uiState;
+	}
+
+	void setUiState(CurrentUiState uiState)
+	{
+		this.uiState = uiState;
+	}
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
@@ -3026,7 +3035,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public static final String STATUS_SERVER_NOT_CONFIGURED = "ServerNotConfiguredProgressMessage";
 
 	private UiSession session;
-	CurrentUiState uiState;
+	private CurrentUiState uiState;
 	UiBulletinPreviewPane preview;
 	private JSplitPane previewSplitter;
 	private FolderSplitPane folderSplitter;
