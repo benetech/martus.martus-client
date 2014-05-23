@@ -128,7 +128,6 @@ import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.FormatFilter;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiUtilities;
-import org.martus.common.EnglishCommonStrings;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusLogger;
@@ -197,7 +196,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		try
 		{
-			localization = new MartusLocalization(MartusApp.getTranslationsDirectory(), getAllEnglishStrings());
+			localization = new MartusLocalization(MartusApp.getTranslationsDirectory(), UiSession.getAllEnglishStrings());
 			setApp(new MartusApp(localization));
 			initializeCurrentLanguage();
 		}
@@ -293,18 +292,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			JOptionPane.showMessageDialog(null, "This Martus Jar is not signed, so cannot be verified");
 		}
-	}
-
-	public static String[] getAllEnglishStrings()
-	{
-		String[] clientStrings = EnglishStrings.strings;
-		int lenghtClient = clientStrings.length;
-		String[] commonStrings = EnglishCommonStrings.strings;
-		int lenghtCommon = commonStrings.length;
-		String[] allEnglishStrings = new String[lenghtCommon+lenghtClient];
-		System.arraycopy(clientStrings,0,allEnglishStrings,0,lenghtClient);
-		System.arraycopy(commonStrings,0,allEnglishStrings,lenghtClient,lenghtCommon);
-		return allEnglishStrings;
 	}
 
 	private void initializeCurrentLanguage()
@@ -3033,7 +3020,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public static final String STATUS_CONNECTING = "StatusConnecting";
 	public static final String STATUS_NO_SERVER_AVAILABLE = "NoServerAvailableProgressMessage";
 	public static final String STATUS_SERVER_NOT_CONFIGURED = "ServerNotConfiguredProgressMessage";
-	
+
 	private MartusApp app;
 	CurrentUiState uiState;
 	UiBulletinPreviewPane preview;
