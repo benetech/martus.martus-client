@@ -1160,22 +1160,22 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public UiPopupMenu getPopupMenu()
 	{
 		UiPopupMenu menu = new UiPopupMenu();
-		menu.add(menuBar.actionMenuModifyBulletin);
+		menu.add(getMartusMenuBar().actionMenuModifyBulletin);
 		menu.addSeparator();
-		menu.add(menuBar.actionMenuCutBulletins);
-		menu.add(menuBar.actionMenuCopyBulletins);
-		menu.add(menuBar.actionMenuPasteBulletins);
-		menu.add(menuBar.actionMenuSelectAllBulletins);
+		menu.add(getMartusMenuBar().actionMenuCutBulletins);
+		menu.add(getMartusMenuBar().actionMenuCopyBulletins);
+		menu.add(getMartusMenuBar().actionMenuPasteBulletins);
+		menu.add(getMartusMenuBar().actionMenuSelectAllBulletins);
 		menu.addSeparator();
-		menu.add(menuBar.actionMenuDiscardBulletins);
+		menu.add(getMartusMenuBar().actionMenuDiscardBulletins);
 		menu.addSeparator();
-		menu.add(menuBar.actionMenuResendBulletins);
+		menu.add(getMartusMenuBar().actionMenuResendBulletins);
 		return menu;
 	}
 	
 	public AbstractAction getActionMenuPaste()
 	{
-		return menuBar.actionMenuPasteBulletins;
+		return getMartusMenuBar().actionMenuPasteBulletins;
 	}
 
 
@@ -1323,8 +1323,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		JPanel topStuff = new JPanel(false);
 		topStuff.setLayout(new GridLayout(2, 1));
 
-		menuBar = new UiMenuBar(this);
-		topStuff.add(menuBar);
+		setMenuBar(new UiMenuBar(this));
+		topStuff.add(getMartusMenuBar());
 
 		setToolBar(new UiToolBar(this));
 		topStuff.add(getToolBar());
@@ -2978,6 +2978,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private void setToolBar(UiToolBar toolBar)
 	{
 		this.toolBar = toolBar;
+	}
+	private UiMenuBar getMartusMenuBar()
+	{
+		return menuBar;
+	}
+
+	private void setMenuBar(UiMenuBar menuBar)
+	{
+		this.menuBar = menuBar;
 	}
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
