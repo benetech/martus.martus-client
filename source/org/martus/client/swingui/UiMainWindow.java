@@ -1322,17 +1322,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getBulletinsTable().doPasteBulletins();
 	}
 	
-	public void doResendBulletins()
-	{		
-		if (!isServerConfigured())
-		{
-			notifyDlg(this, "retrievenoserver", "ResendBulletins");
-			return;
-		}	
-		
-		getBulletinsTable().doResendBulletins();
-	}
-
 	public void doDiscardBulletins()
 	{
 		getBulletinsTable().doDiscardBulletins();
