@@ -38,7 +38,7 @@ import javax.swing.SwingConstants;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiConstants;
-import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiSession;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusUtilities;
@@ -223,7 +223,7 @@ public class TestLocalization extends TestCaseEnhanced
 	
 	public void testGetAllEnglishStrings() throws Exception
 	{
-		MartusLocalization localization = new MartusLocalization(createTempDirectory(), UiMainWindow.getAllEnglishStrings());
+		MartusLocalization localization = new MartusLocalization(createTempDirectory(), UiSession.getAllEnglishStrings());
 		assertEquals("Martus Human Rights Bulletin System", localization.getLabel("en", "wintitle", "main"));
 		assertEquals("or", localization.getLabel("en", "keyword", "or"));
 		assertEquals("-Other-", localization.getLabel("en", "language", "?"));
@@ -233,7 +233,7 @@ public class TestLocalization extends TestCaseEnhanced
 	public void testGetTranslationFileAllowUnofficial() throws Exception
 	{
 		File translationDirectory = createTempDirectory();
-		MartusLocalization tmpLocalization = new MartusLocalization(translationDirectory, UiMainWindow.getAllEnglishStrings());
+		MartusLocalization tmpLocalization = new MartusLocalization(translationDirectory, UiSession.getAllEnglishStrings());
 		tmpLocalization.includeOfficialLanguagesOnly = false;
 		String languageCode = "ff";
 		assertNull("Language doesn't exists should return null", tmpLocalization.getTranslationFile(languageCode));
@@ -358,7 +358,7 @@ public class TestLocalization extends TestCaseEnhanced
 	public void testAddedMLPLanguagePackWhenWeAllowUnofficialTranslations() throws Exception
 	{
 		File translationDirectory = createTempDirectory();
-		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, UiMainWindow.getAllEnglishStrings());
+		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, UiSession.getAllEnglishStrings());
 		myLocalization.includeOfficialLanguagesOnly = false;
 
 		String someTestLanguageCode = "xx";
@@ -378,7 +378,7 @@ public class TestLocalization extends TestCaseEnhanced
 		assertTrue("We should be using a Language Pack", myLocalization.isTranslationInsideMLP());
 
 		File translationDirectory2 = createTempDirectory();
-		MartusLocalization myLocalization2 = new MartusLocalization(translationDirectory2, UiMainWindow.getAllEnglishStrings());
+		MartusLocalization myLocalization2 = new MartusLocalization(translationDirectory2, UiSession.getAllEnglishStrings());
 		myLocalization2.includeOfficialLanguagesOnly = false;
 		File mlpTestLanguage = new File(translationDirectory2,UiLocalization.getMlpkFilename(someTestLanguageCode));
 		mlpTestLanguage.deleteOnExit();
@@ -399,7 +399,7 @@ public class TestLocalization extends TestCaseEnhanced
 	public void testAddedMLPLanguagePackWhenWeAllowONLYOfficialTranslations() throws Exception
 	{
 		File translationDirectory = createTempDirectory();
-		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, UiMainWindow.getAllEnglishStrings());
+		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, UiSession.getAllEnglishStrings());
 
 		String someTestLanguageCode = "xx";
 		boolean foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
@@ -444,7 +444,7 @@ public class TestLocalization extends TestCaseEnhanced
 	
 	public void testDoesTranslationMatchProgramVersion() throws Exception
 	{
-		MartusLocalization myLocalization = new MartusLocalization(testTranslationDirectory, UiMainWindow.getAllEnglishStrings());
+		MartusLocalization myLocalization = new MartusLocalization(testTranslationDirectory, UiSession.getAllEnglishStrings());
 		myLocalization.setCurrentLanguageCode(MartusLocalization.ENGLISH);
 		String translationVersion = myLocalization.getTranslationVersionNumber(myLocalization.getCurrentLanguageCode());
 		String rawProgramVersion = UiConstants.versionLabel;
@@ -457,7 +457,7 @@ public class TestLocalization extends TestCaseEnhanced
 
 		File translationDirectory = createTempDirectory();
 		translationDirectory.deleteOnExit();
-		MartusLocalization myLocalization2 = new MartusLocalization(translationDirectory, UiMainWindow.getAllEnglishStrings());
+		MartusLocalization myLocalization2 = new MartusLocalization(translationDirectory, UiSession.getAllEnglishStrings());
 		myLocalization2.setCurrentLanguageCode(MartusLocalization.ENGLISH);
 		assertTrue(myLocalization2.doesTranslationVersionMatchProgramVersion(MartusLocalization.ENGLISH, UiConstants.versionLabel));
 		assertTrue(myLocalization2.doesTranslationVersionMatchProgramVersion("XY", UiConstants.versionLabel));
@@ -516,7 +516,7 @@ public class TestLocalization extends TestCaseEnhanced
 	
 	public void testExtractVersion()
 	{
-		MartusLocalization myLocalization = new MartusLocalization(testTranslationDirectory, UiMainWindow.getAllEnglishStrings());
+		MartusLocalization myLocalization = new MartusLocalization(testTranslationDirectory, UiSession.getAllEnglishStrings());
 		String englishVersion = "2.8.1";
 		String englishEntireVersion = "Version: " + englishVersion + "Internal";
 		String extractedVersion = myLocalization.extractVersionNumber(englishEntireVersion);
@@ -534,7 +534,7 @@ public class TestLocalization extends TestCaseEnhanced
 	
 	public void testHasVersionNumber()
 	{
-		MartusLocalization myLocalization = new MartusLocalization(testTranslationDirectory, UiMainWindow.getAllEnglishStrings());
+		MartusLocalization myLocalization = new MartusLocalization(testTranslationDirectory, UiSession.getAllEnglishStrings());
 		assertTrue(myLocalization.hasVersionNumber("English 2.8"));
 		assertTrue(myLocalization.hasVersionNumber("English 2.8 Internal"));
 		assertTrue(myLocalization.hasVersionNumber("English 4 Internal"));

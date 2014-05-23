@@ -55,7 +55,7 @@ import org.martus.client.search.SearchParser;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
-import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiSession;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.PasswordHelper;
 import org.martus.clientside.UiLocalization;
@@ -111,7 +111,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		mockSecurityForApp = MockMartusSecurity.createClient();
 
-		testAppLocalization = new MartusLocalization(null, UiMainWindow.getAllEnglishStrings());
+		testAppLocalization = new MartusLocalization(null, UiSession.getAllEnglishStrings());
 		testAppLocalization.setCurrentLanguageCode("en");
 		appWithAccount = MockMartusApp.create(mockSecurityForApp, getName());
 		appWithAccount.setSSLNetworkInterfaceHandlerForTesting(new ServerSideNetworkHandlerNotAvailable());
