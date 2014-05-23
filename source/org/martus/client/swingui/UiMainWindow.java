@@ -110,7 +110,6 @@ import org.martus.client.swingui.jfx.welcome.WelcomeStage;
 import org.martus.client.swingui.spellcheck.SpellCheckerManager;
 import org.martus.client.swingui.tablemodels.DeleteMyServerDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveHQDraftsTableModel;
-import org.martus.client.swingui.tablemodels.RetrieveHQTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.CurrentUiState;
@@ -1788,21 +1787,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				System.out.println("doContactInfo: Unable to Save ConfigInfo" + e);
 			}
 		}
-	}
-
-	public void doRetrieveHQBulletins()
-	{
-		offerToCancelRetrieveInProgress();
-		if(isRetrieveInProgress())
-			return;
-		
-		String dlgTitleTag = "RetrieveHQSealedBulletins";
-		String summariesProgressTag = "RetrieveHQSealedBulletinSummaries";
-		String retrieverProgressTag = "RetrieveHQSealedBulletinProgress";
-		String folderName = getApp().getNameOfFolderRetrievedFieldOfficeSealed();
-
-		RetrieveTableModel model = new RetrieveHQTableModel(getApp(), getLocalization());
-		retrieveBulletins(model, folderName, dlgTitleTag, summariesProgressTag, retrieverProgressTag);
 	}
 
 	public void doRetrieveHQDraftsBulletins()
