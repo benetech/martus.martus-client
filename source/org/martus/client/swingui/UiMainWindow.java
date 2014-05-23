@@ -2270,8 +2270,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	void initializeViews()
 	{
-		getContentPane().removeAll();
-		getContentPane().setComponentOrientation(UiLanguageDirection.getComponentOrientation());
+		mainPane = new UiMainPane();
+		setContentPane(mainPane);
+		mainPane.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
+		
 		updateTitle();
 		
 		MartusLogger.logBeginProcess("Initializing views");
@@ -2279,7 +2281,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		preview = new UiBulletinPreviewPane(this);
 		table = new UiBulletinTablePane(this);
 		folderTreePane = new UiFolderTreePane(this);
-		getContentPane().add(createTopStuff(), BorderLayout.NORTH);
+		mainPane.add(createTopStuff(), BorderLayout.NORTH);
 
 		previewSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, table, preview);
 		previewSplitter.setDividerLocation(getUiState().getCurrentPreviewSplitterPosition());
@@ -2311,10 +2313,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getUiState().setCurrentAppDimension(getSize());
 		folderSplitter.setInitialDividerLocation(getUiState().getCurrentFolderSplitterPosition());
 
-		getContentPane().add(folderSplitter);
+		mainPane.add(folderSplitter);
 		statusBar = new UiStatusBar(getLocalization());		
 		getTransport().setProgressMeter(statusBar.getTorProgressMeter());
-		getContentPane().add(statusBar, BorderLayout.SOUTH ); 
+		mainPane.add(statusBar, BorderLayout.SOUTH ); 
 		// NOTE: re-start Tor here in case it was turned on in the wizard
 		getApp().startOrStopTorAsRequested();
 		
@@ -2987,7 +2989,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private static final int TIME_BETWEEN_FIELD_OFFICE_CHECKS_SECONDS = 60 * 60;
 
 	private UiSession session;
-	
+
+	private UiMainPane mainPane;
 	UiBulletinPreviewPane preview;
 	private JSplitPane previewSplitter;
 	private FolderSplitPane folderSplitter;
