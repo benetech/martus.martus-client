@@ -80,7 +80,6 @@ import org.martus.client.core.RetrieveCommand;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.search.SearchTreeNode;
-import org.martus.client.swingui.UiMainPane.FolderSplitPane;
 import org.martus.client.swingui.bulletincomponent.UiBulletinPreviewPane;
 import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
 import org.martus.client.swingui.dialogs.UiAboutDlg;
