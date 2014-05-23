@@ -39,7 +39,7 @@ public class ActionMenuFolderRename extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		getMainPane().doRenameFolder();
+		doRenameFolder();
 	}
 
 	public boolean isEnabled()
@@ -47,4 +47,9 @@ public class ActionMenuFolderRename extends UiMenuAction
 		return mainWindow.canModifyCurrentFolder();
 	}
 
+	public void doRenameFolder()
+	{
+		getFolderTreePane().renameCurrentFolder();
+	}
+	
 }
