@@ -29,10 +29,13 @@ import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 
+import org.martus.swing.UiLanguageDirection;
+
 public class UiMainPane extends JPanel
 {
 	public UiMainPane()
 	{
 		setLayout(new BorderLayout());
+		setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 	}
 }
