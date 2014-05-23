@@ -31,7 +31,6 @@ import java.util.Vector;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiSetFolderOrderDlg;
-import org.martus.client.swingui.foldertree.UiFolderTreePane;
 
 public class ActionMenuFoldersOrganize extends UiMenuAction
 {
@@ -71,10 +70,5 @@ public class ActionMenuFoldersOrganize extends UiMenuAction
 		{
 			e.printStackTrace();
 		}
-	}
-
-	private UiFolderTreePane getFolderTreePane()
-	{
-		return getMainPane().getFolderTreePane();
 	}
 }

@@ -39,7 +39,12 @@ public class ActionMenuFolderCreate extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		getMainPane().doCreateFolder();
+		doCreateFolder();
 	}
 
+	public void doCreateFolder()
+	{
+		getFolderTreePane().createNewFolder();
+	}
+	
 }
