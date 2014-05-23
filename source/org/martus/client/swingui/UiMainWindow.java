@@ -92,7 +92,6 @@ import org.martus.client.swingui.dialogs.UiImportBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
 import org.martus.client.swingui.dialogs.UiOnlineHelpDlg;
-import org.martus.client.swingui.dialogs.UiPreferencesDlg;
 import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
 import org.martus.client.swingui.dialogs.UiRemoveServerDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesDeleteDlg;
@@ -1494,26 +1493,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return getPreviewPane().getView().getWidth();
 	}
 
-	public void doPreferences()
+	public void respondToPreferencesChanges()
 	{
-		saveState();
-		UiPreferencesDlg dlg = new UiPreferencesDlg(this);
-		dlg.setVisible(true);
-		if(dlg.getResult())
-		{
-			getApp().getConfigInfo().setForceBulletinsAllPrivate(dlg.isAllPrivateChecked());
-			getApp().getConfigInfo().setCheckForFieldOfficeBulletins(dlg.isCheckFieldOfficeBulletinsChecked());
-			getApp().getConfigInfo().setUseZawgyiFont(dlg.isUseZawgyiFont());
-			getApp().getConfigInfo().setUseInternalTor(dlg.isUseInternalTorChecked());
-			saveConfigInfo();
-			FontSetter.setDefaultFont(dlg.isUseZawgyiFont());
-			initializeViews();
-			restoreState();
-			getTransport().updateStatus();
-			backgroundUploadTimerTask.setWaitingForServer();
-			setVisible(true);
-		}
-
+		initializeViews();
+		restoreState();
+		getTransport().updateStatus();
+		backgroundUploadTimerTask.setWaitingForServer();
+		setVisible(true);
 	}
 
 	public void doRemoveServer()
@@ -2869,4 +2855,5 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public static int timeoutInXSeconds;
 	private static Map<String, File> memorizedFileOpenDirectories;
+
 }

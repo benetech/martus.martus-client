@@ -28,7 +28,9 @@ package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
 
+import org.martus.client.core.FontSetter;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.dialogs.UiPreferencesDlg;
 
 public class ActionMenuPreferences extends UiMenuAction
 {
@@ -39,7 +41,25 @@ public class ActionMenuPreferences extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doPreferences();
+		doPreferences();
+	}
+
+	public void doPreferences()
+	{
+		getMainWindow().saveState();
+		UiPreferencesDlg dlg = new UiPreferencesDlg(getMainWindow());
+		dlg.setVisible(true);
+		if(dlg.getResult())
+		{
+			getApp().getConfigInfo().setForceBulletinsAllPrivate(dlg.isAllPrivateChecked());
+			getApp().getConfigInfo().setCheckForFieldOfficeBulletins(dlg.isCheckFieldOfficeBulletinsChecked());
+			getApp().getConfigInfo().setUseZawgyiFont(dlg.isUseZawgyiFont());
+			getApp().getConfigInfo().setUseInternalTor(dlg.isUseInternalTorChecked());
+			getMainWindow().saveConfigInfo();
+			FontSetter.setDefaultFont(dlg.isUseZawgyiFont());
+			getMainWindow().respondToPreferencesChanges();
+		}
+
 	}
 
 }
