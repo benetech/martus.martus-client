@@ -28,7 +28,9 @@ package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
 
+import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.dialogs.UiContactInfoDlg;
 
 public class ActionMenuContactInfo extends UiMenuAction
 {
@@ -39,7 +41,19 @@ public class ActionMenuContactInfo extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doContactInfo();
+		doContactInfo();
 	}
 
+	public boolean doContactInfo()
+	{
+		ConfigInfo info = getApp().getConfigInfo();
+		UiContactInfoDlg setupContactDlg = new UiContactInfoDlg(getMainWindow(), info);
+		boolean pressedOk = setupContactDlg.getResult();
+		// the following is required (for unknown reasons)
+		// to get the window to redraw after the dialog
+		// is closed. Yuck! kbs.
+		getMainWindow().repaint();
+		return pressedOk;
+	}
+	
 }
