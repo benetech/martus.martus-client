@@ -27,10 +27,17 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
+import java.util.Vector;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.dialogs.UiServerSummariesDeleteDlg;
+import org.martus.client.swingui.dialogs.UiServerSummariesDlg;
 import org.martus.client.swingui.tablemodels.DeleteMyServerDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
+import org.martus.common.MartusUtilities.ServerErrorException;
+import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.network.NetworkInterfaceConstants;
+import org.martus.common.packet.Packet;
 
 public class ActionMenuDeleteMyServerDraftBulletins extends UiMenuAction
 {
@@ -50,7 +57,54 @@ public class ActionMenuDeleteMyServerDraftBulletins extends UiMenuAction
 		String summariesProgressTag = "RetrieveMyDraftBulletinSummaries";
 
 		RetrieveTableModel model = new DeleteMyServerDraftsTableModel(getApp(), getLocalization());
-		getMainWindow().deleteServerDrafts(model, dlgTitleTag, summariesProgressTag);
+		deleteServerDrafts(model, dlgTitleTag, summariesProgressTag);
+	}
+
+	public void deleteServerDrafts(RetrieveTableModel model,
+			String dlgTitleTag, String summariesProgressTag)
+	{
+
+		try
+		{
+			UiServerSummariesDlg summariesDlg = new UiServerSummariesDeleteDlg(
+					getMainWindow(), model, dlgTitleTag);
+			Vector uidList = getMainWindow().displaySummariesDialog(model, dlgTitleTag,
+					summariesProgressTag, summariesDlg);
+			if (uidList == null)
+				return;
+
+			getMainWindow().setWaitingCursor();
+			try
+			{
+				String result = getApp().deleteServerDraftBulletins(uidList);
+				if (!result.equals(NetworkInterfaceConstants.OK))
+				{
+					getMainWindow().notifyDlg("DeleteServerDraftsFailed");
+					return;
+				}
+
+				getMainWindow().notifyDlg("DeleteServerDraftsWorked");
+			} 
+			finally
+			{
+				getMainWindow().resetCursor();
+			}
+		} 
+		catch (MartusCrypto.MartusSignatureException e)
+		{
+			getMainWindow().notifyDlg("UnexpectedError");
+			return;
+		} 
+		catch (Packet.WrongAccountException e)
+		{
+			getMainWindow().notifyDlg("UnexpectedError");
+			return;
+		} 
+		catch (ServerErrorException e)
+		{
+			getMainWindow().notifyDlg("ServerError");
+			return;
+		}
 	}
 
 }
