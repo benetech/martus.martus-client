@@ -2246,8 +2246,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	void initializeViews()
 	{
-		updateTitle();
 		MartusLogger.logBeginProcess("Initializing views");
+		updateTitle();
 
 		Dimension screenSize = Utilities.getViewableScreenSize();
 		Dimension appDimension = getUiState().getCurrentAppDimension();
