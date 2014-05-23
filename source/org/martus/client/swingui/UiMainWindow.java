@@ -2956,15 +2956,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		this.table = table;
 	}
-	UiBulletinPreviewPane getPreviewPane()
+	
+	private UiBulletinPreviewPane getPreviewPane()
 	{
 		return preview;
 	}
 
-	void setPreviewPane(UiBulletinPreviewPane preview)
+	private void setPreviewPane(UiBulletinPreviewPane preview)
 	{
 		this.preview = preview;
 	}
+	
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
