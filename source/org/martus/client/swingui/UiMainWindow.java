@@ -1349,16 +1349,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getBulletinsTable().doDiscardBulletins();
 	}
 	
-	public void doRenameFolder()
-	{
-		getFolderTreePane().renameCurrentFolder();
-	}
-	
-	public void doDeleteFolder()
-	{
-		getFolderTreePane().deleteCurrentFolderIfPossible();
-	}
-	
 	public void doOrganizeFolders()
 	{
 		Vector originalOrderFolders = getFolderTreePane().getAllFolders();

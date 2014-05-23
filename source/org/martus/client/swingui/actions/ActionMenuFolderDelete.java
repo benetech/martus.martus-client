@@ -39,7 +39,7 @@ public class ActionMenuFolderDelete extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doDeleteFolder();
+		getMainPane().doDeleteFolder();
 	}
 
 	public boolean isEnabled()
