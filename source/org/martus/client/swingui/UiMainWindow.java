@@ -30,7 +30,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -60,11 +59,9 @@ import javafx.application.Platform;
 import javax.crypto.Cipher;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
@@ -312,6 +309,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			MartusLogger.logException(e);
 			unexpectedErrorDlg();
+			System.exit(1);
 		}
 		finally
 		{
@@ -910,7 +908,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void bulletinSelectionHasChanged()
 	{
 		Bulletin b = table.getSingleSelectedBulletin();
-		getToolBar().updateEnabledStatuses();
+		getMainPane().updateEnabledStatuses();
 		preview.setCurrentBulletin(b);
 	}
 
@@ -1159,23 +1157,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public UiPopupMenu getPopupMenu()
 	{
-		UiPopupMenu menu = new UiPopupMenu();
-		menu.add(getMartusMenuBar().actionMenuModifyBulletin);
-		menu.addSeparator();
-		menu.add(getMartusMenuBar().actionMenuCutBulletins);
-		menu.add(getMartusMenuBar().actionMenuCopyBulletins);
-		menu.add(getMartusMenuBar().actionMenuPasteBulletins);
-		menu.add(getMartusMenuBar().actionMenuSelectAllBulletins);
-		menu.addSeparator();
-		menu.add(getMartusMenuBar().actionMenuDiscardBulletins);
-		menu.addSeparator();
-		menu.add(getMartusMenuBar().actionMenuResendBulletins);
-		return menu;
+		return getMainPane().getPopupMenu();
 	}
 	
 	public AbstractAction getActionMenuPaste()
 	{
-		return getMartusMenuBar().actionMenuPasteBulletins;
+		return getMainPane().getActionMenuPaste();
 	}
 
 
@@ -1318,20 +1305,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		table.selectFirstBulletin();
 	}
 	
-	private JComponent createTopStuff()
-	{
-		JPanel topStuff = new JPanel(false);
-		topStuff.setLayout(new GridLayout(2, 1));
-
-		setMenuBar(new UiMenuBar(this));
-		topStuff.add(getMartusMenuBar());
-
-		setToolBar(new UiToolBar(this));
-		topStuff.add(getToolBar());
-
-		return topStuff;
-	}
-
 	public void doModifyBulletin()
 	{
 		table.doModifyBulletin();
@@ -2272,13 +2245,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		updateTitle();
 		MartusLogger.logBeginProcess("Initializing views");
 
-		mainPane = new UiMainPane();
-		setContentPane(mainPane);
-
 		preview = new UiBulletinPreviewPane(this);
 		table = new UiBulletinTablePane(this);
 		folderTreePane = new UiFolderTreePane(this);
-		mainPane.add(createTopStuff(), BorderLayout.NORTH);
+
+		mainPane = new UiMainPane(this);
+		setContentPane(mainPane);
 
 		previewSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, table, preview);
 		previewSplitter.setDividerLocation(getUiState().getCurrentPreviewSplitterPosition());
@@ -2970,24 +2942,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getSession().initalizeUiState();
 	}
 
-	private UiToolBar getToolBar()
+	private UiMainPane getMainPane()
 	{
-		return toolBar;
+		return mainPane;
 	}
 
-	private void setToolBar(UiToolBar toolBar)
-	{
-		this.toolBar = toolBar;
-	}
-	private UiMenuBar getMartusMenuBar()
-	{
-		return menuBar;
-	}
-
-	private void setMenuBar(UiMenuBar menuBar)
-	{
-		this.menuBar = menuBar;
-	}
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
@@ -3012,8 +2971,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private UiBulletinTablePane table;
 	private UiFolderTreePane folderTreePane;
 
-	private UiMenuBar menuBar;
-	private UiToolBar toolBar;
 	UiStatusBar statusBar;
 
 	private java.util.Timer uploader;

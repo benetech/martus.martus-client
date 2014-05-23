@@ -26,16 +26,85 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import org.martus.swing.UiLanguageDirection;
+import org.martus.swing.UiPopupMenu;
 
 public class UiMainPane extends JPanel
 {
-	public UiMainPane()
+	public UiMainPane(UiMainWindow mainWindowToUse)
 	{
 		setLayout(new BorderLayout());
 		setComponentOrientation(UiLanguageDirection.getComponentOrientation());
+
+		add(createTopStuff(mainWindowToUse), BorderLayout.NORTH);
 	}
+
+	private JComponent createTopStuff(UiMainWindow mainWindowToUse)
+	{
+		JPanel topStuff = new JPanel(false);
+		topStuff.setLayout(new GridLayout(2, 1));
+
+		setMenuBar(new UiMenuBar(mainWindowToUse));
+		topStuff.add(getMartusMenuBar());
+
+		setToolBar(new UiToolBar(mainWindowToUse));
+		topStuff.add(getToolBar());
+
+		return topStuff;
+	}
+
+	public void updateEnabledStatuses()
+	{
+		getToolBar().updateEnabledStatuses();
+	}
+
+	public UiPopupMenu getPopupMenu()
+	{
+		UiPopupMenu menu = new UiPopupMenu();
+		menu.add(getMartusMenuBar().actionMenuModifyBulletin);
+		menu.addSeparator();
+		menu.add(getMartusMenuBar().actionMenuCutBulletins);
+		menu.add(getMartusMenuBar().actionMenuCopyBulletins);
+		menu.add(getMartusMenuBar().actionMenuPasteBulletins);
+		menu.add(getMartusMenuBar().actionMenuSelectAllBulletins);
+		menu.addSeparator();
+		menu.add(getMartusMenuBar().actionMenuDiscardBulletins);
+		menu.addSeparator();
+		menu.add(getMartusMenuBar().actionMenuResendBulletins);
+		return menu;
+	}
+	
+	public AbstractAction getActionMenuPaste()
+	{
+		return getMartusMenuBar().actionMenuPasteBulletins;
+	}
+
+	private UiToolBar getToolBar()
+	{
+		return toolBar;
+	}
+
+	private void setToolBar(UiToolBar toolBar)
+	{
+		this.toolBar = toolBar;
+	}
+
+	private UiMenuBar getMartusMenuBar()
+	{
+		return menuBar;
+	}
+
+	private void setMenuBar(UiMenuBar menuBar)
+	{
+		this.menuBar = menuBar;
+	}
+	
+	private UiMenuBar menuBar;
+	private UiToolBar toolBar;
 }
