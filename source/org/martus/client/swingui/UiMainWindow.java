@@ -3011,14 +3011,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	boolean inConfigServer;
 	boolean preparingToExitMartus;
-	private FileLock lockToPreventTwoInstances; 
-	private FileOutputStream lockStream;
-	public static int timeoutInXSeconds;
-	public int timeBetweenFieldOfficeChecksSeconds;
-	boolean mainWindowInitalizing;
 	private boolean createdNewAccount;
 	private boolean justRecovered;
+	boolean mainWindowInitalizing;
+
+	private FileLock lockToPreventTwoInstances; 
+	private FileOutputStream lockStream;
+	public int timeBetweenFieldOfficeChecksSeconds;
 	private Stack cursorStack;
 
+	public static int timeoutInXSeconds;
 	private static Map<String, File> memorizedFileOpenDirectories;
 }
