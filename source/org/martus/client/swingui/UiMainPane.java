@@ -49,6 +49,9 @@ public class UiMainPane extends JPanel
 		bulletinsTable = new UiBulletinTablePane(mainWindowToUse);
 		previewSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, getBulletinsTable(), getPreviewPane());
 
+		statusBar = new UiStatusBar(mainWindowToUse.getLocalization());		
+		add(getStatusBar(), BorderLayout.SOUTH ); 
+
 		add(createTopStuff(mainWindowToUse), BorderLayout.NORTH);
 	}
 
@@ -127,8 +130,15 @@ public class UiMainPane extends JPanel
 		return previewSplitter;
 	}
 
+	public UiStatusBar getStatusBar()
+	{
+		return statusBar;
+	}
+
+
 	private UiMenuBar menuBar;
 	private UiToolBar toolBar;
+	private UiStatusBar statusBar;
 
 	private JSplitPane previewSplitter;
 	private UiBulletinTablePane bulletinsTable;
