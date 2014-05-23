@@ -40,7 +40,7 @@ public class ActionSearch extends UiButtonAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		SortableBulletinList bulletinIdsFromSearch = mainWindow.doSearch();
+		SortableBulletinList bulletinIdsFromSearch = doSearch();
 		if(bulletinIdsFromSearch == null)
 			return;
 		
