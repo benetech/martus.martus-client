@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.GridLayout;
 
 import javax.swing.AbstractAction;
@@ -155,31 +154,6 @@ public class UiMainPane extends JPanel
 	{
 		return folderTreePane;
 	}
-
-	static class FolderSplitPane extends JSplitPane
-	{
-		public FolderSplitPane(int newOrientation, Component newLeftComponent, Component newRightComponent) 
-		{
-			super(newOrientation, newLeftComponent, newRightComponent);
-		}
-
-		public void setInitialDividerLocation(int location)
-		{
-			super.setDividerLocation(location);
-		}
-
-		public void setDividerLocation(int location) 
-		{
-			super.setDividerLocation(location);
-			if(previousLocation != location)
-			{
-				previousLocation = location;
-				getTopLevelAncestor().repaint();
-			}
-		}
-		int previousLocation = -1;
-	}
-	
 
 	private UiMenuBar menuBar;
 	private UiToolBar toolBar;
