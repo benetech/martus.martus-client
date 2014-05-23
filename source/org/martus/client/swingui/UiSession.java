@@ -25,9 +25,15 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui;
 
+import java.io.File;
+
+import org.martus.client.core.FontSetter;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.MartusAppInitializationException;
+import org.martus.clientside.CurrentUiState;
+import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.EnglishCommonStrings;
+import org.martus.swing.FontHandler;
 
 
 public class UiSession
@@ -36,6 +42,69 @@ public class UiSession
 	{
 		setLocalization(new MartusLocalization(MartusApp.getTranslationsDirectory(), UiSession.getAllEnglishStrings()));
 		app = new MartusApp(getLocalization());
+		initializeCurrentLanguage();
+	}
+
+	public void initalizeUiState()
+	{
+		uiState = new CurrentUiState();
+		File uiStateFile = getUiStateFile();
+		if(!uiStateFile.exists())
+		{
+			copyLocalizationSettingsToUiState();
+			getUiState().save(uiStateFile);
+			return;
+		}
+		getUiState().load(uiStateFile);
+		getLocalization().setCurrentDateFormatCode(getUiState().getCurrentDateFormat());
+		getLocalization().setCurrentCalendarSystem(getUiState().getCurrentCalendarSystem());
+		getLocalization().setAdjustThaiLegacyDates(getUiState().getAdjustThaiLegacyDates());
+		getLocalization().setAdjustPersianLegacyDates(getUiState().getAdjustPersianLegacyDates());
+	}
+
+	public File getUiStateFile()
+	{
+		if(getApp().isSignedIn())
+			return getApp().getUiStateFileForAccount(getApp().getCurrentAccountDirectory());
+		return new File(getApp().getMartusDataRootDirectory(), "UiState.dat");
+	}
+	
+	public void saveCurrentUiState()
+	{
+		getUiState().save(getUiStateFile());
+	}
+
+	public void copyLocalizationSettingsToUiState()
+	{
+		getUiState().setCurrentLanguage(getLocalization().getCurrentLanguageCode());
+		getUiState().setCurrentDateFormat(getLocalization().getCurrentDateFormatCode());
+		getUiState().setCurrentCalendarSystem(getLocalization().getCurrentCalendarSystem());
+		getUiState().setCurrentAdjustThaiLegacyDates(getLocalization().getAdjustThaiLegacyDates());
+		getUiState().setCurrentAdjustPersianLegacyDates(getLocalization().getAdjustPersianLegacyDates());
+	}
+
+	private void initializeCurrentLanguage()
+	{
+		CurrentUiState previouslySavedState = new CurrentUiState();
+		previouslySavedState.load(getUiStateFile());
+		
+		if(previouslySavedState.getCurrentLanguage() != "")
+		{	
+			getLocalization().setCurrentLanguageCode(previouslySavedState.getCurrentLanguage());
+			getLocalization().setCurrentDateFormatCode(previouslySavedState.getCurrentDateFormat());
+		}
+		
+		if(getLocalization().getCurrentLanguageCode()== null)
+			MartusApp.setInitialUiDefaultsFromFileIfPresent(getLocalization(), new File(getApp().getMartusDataRootDirectory(),"DefaultUi.txt"));
+		
+		if(getLocalization().getCurrentLanguageCode()== null)
+		{
+			getLocalization().setCurrentLanguageCode(MtfAwareLocalization.ENGLISH);
+			getLocalization().setDateFormatFromLanguage();
+		}
+
+		if (MtfAwareLocalization.BURMESE.equals(getLocalization().getCurrentLanguageCode()))
+			FontSetter.setUIFont(FontHandler.BURMESE_FONT);
 	}
 
 	public static String[] getAllEnglishStrings()
@@ -65,7 +134,13 @@ public class UiSession
 		return app;
 	}
 
+	CurrentUiState getUiState()
+	{
+		return uiState;
+	}
+
 	private MartusLocalization localization;
 	private MartusApp app;
+	private CurrentUiState uiState;
 
 }

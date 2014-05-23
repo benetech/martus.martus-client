@@ -197,7 +197,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		try
 		{
 			session = new UiSession();
-			initializeCurrentLanguage();
 		}
 		catch(MartusApp.MartusAppInitializationException e)
 		{
@@ -230,7 +229,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		splashScreen.endDialog();
 		
-		initalizeUiState();
+		getSession().initalizeUiState();
 		
 		setGlassPane(new WindowObscurer());
 	}
@@ -293,37 +292,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	private void initializeCurrentLanguage()
-	{
-		CurrentUiState previouslySavedState = new CurrentUiState();
-		previouslySavedState.load(getUiStateFile());
-		
-		if(previouslySavedState.getCurrentLanguage() != "")
-		{	
-			getLocalization().setCurrentLanguageCode(previouslySavedState.getCurrentLanguage());
-			getLocalization().setCurrentDateFormatCode(previouslySavedState.getCurrentDateFormat());
-		}
-		
-		if(getLocalization().getCurrentLanguageCode()== null)
-			MartusApp.setInitialUiDefaultsFromFileIfPresent(getLocalization(), new File(getApp().getMartusDataRootDirectory(),"DefaultUi.txt"));
-		
-		if(getLocalization().getCurrentLanguageCode()== null)
-		{
-			getLocalization().setCurrentLanguageCode(MtfAwareLocalization.ENGLISH);
-			getLocalization().setDateFormatFromLanguage();
-		}
-
-		if (MtfAwareLocalization.BURMESE.equals(getLocalization().getCurrentLanguageCode()))
-			FontSetter.setUIFont(FontHandler.BURMESE_FONT);
-	}
-
-	public File getUiStateFile()
-	{
-		if(getApp().isSignedIn())
-			return getApp().getUiStateFileForAccount(getApp().getCurrentAccountDirectory());
-		return new File(getApp().getMartusDataRootDirectory(), "UiState.dat");
-	}
-	
 	static public void displayDefaultUnofficialTranslationMessageIfNecessary(JFrame owner, MtfAwareLocalization localization, String languageCodeToTest)
 	{
 		if(localization.isOfficialTranslation(languageCodeToTest))
@@ -445,7 +413,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			getApp().startOrStopTorAsRequested();
 		}
 		
-		initalizeUiState();
+		getSession().initalizeUiState();
 		
 
 		try
@@ -1265,7 +1233,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void saveCurrentUiState()
 	{
-		getUiState().save(getUiStateFile());
+		getSession().saveCurrentUiState();
 	}
 
 	public void saveState()
@@ -1287,7 +1255,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String folderName = folders.getSelectedFolderName();
 		BulletinFolder folder = getStore().findFolder(folderName);
 		getUiState().setCurrentFolder(folderName);
-		copyLocalizationSettingsToUiState();
+		getSession().copyLocalizationSettingsToUiState();
 		if(folder != null)
 		{
 			getUiState().setCurrentSortTag(folder.sortedBy());
@@ -1328,32 +1296,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			System.out.println("UiMainWindow.restoreState: " + e);
 		}
-	}
-
-	public void initalizeUiState()
-	{
-		setUiState(new CurrentUiState());
-		File uiStateFile = getUiStateFile();
-		if(!uiStateFile.exists())
-		{
-			copyLocalizationSettingsToUiState();
-			getUiState().save(uiStateFile);
-			return;
-		}
-		getUiState().load(uiStateFile);
-		getLocalization().setCurrentDateFormatCode(getUiState().getCurrentDateFormat());
-		getLocalization().setCurrentCalendarSystem(getUiState().getCurrentCalendarSystem());
-		getLocalization().setAdjustThaiLegacyDates(getUiState().getAdjustThaiLegacyDates());
-		getLocalization().setAdjustPersianLegacyDates(getUiState().getAdjustPersianLegacyDates());
-	}
-
-	private void copyLocalizationSettingsToUiState()
-	{
-		getUiState().setCurrentLanguage(getLocalization().getCurrentLanguageCode());
-		getUiState().setCurrentDateFormat(getLocalization().getCurrentDateFormatCode());
-		getUiState().setCurrentCalendarSystem(getLocalization().getCurrentCalendarSystem());
-		getUiState().setCurrentAdjustThaiLegacyDates(getLocalization().getAdjustThaiLegacyDates());
-		getUiState().setCurrentAdjustPersianLegacyDates(getLocalization().getAdjustPersianLegacyDates());
 	}
 
 	public void selectBulletinInCurrentFolderIfExists(UniversalId id)
@@ -3021,13 +2963,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	CurrentUiState getUiState()
 	{
-		return uiState;
+		return getSession().getUiState();
 	}
 
-	void setUiState(CurrentUiState uiState)
+	public void initalizeUiState()
 	{
-		this.uiState = uiState;
+		getSession().initalizeUiState();
 	}
+
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
@@ -3035,7 +2978,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public static final String STATUS_SERVER_NOT_CONFIGURED = "ServerNotConfiguredProgressMessage";
 
 	private UiSession session;
-	private CurrentUiState uiState;
 	UiBulletinPreviewPane preview;
 	private JSplitPane previewSplitter;
 	private FolderSplitPane folderSplitter;
