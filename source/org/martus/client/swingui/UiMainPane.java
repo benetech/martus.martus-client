@@ -100,10 +100,6 @@ public class UiMainPane extends JPanel
 		return menu;
 	}
 	
-	public void doDeleteFolder()
-	{
-		getFolderTreePane().deleteCurrentFolderIfPossible();
-	}
 	
 	
 
