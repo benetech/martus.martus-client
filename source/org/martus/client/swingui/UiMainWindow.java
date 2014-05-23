@@ -2959,12 +2959,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	private UiBulletinPreviewPane getPreviewPane()
 	{
-		return preview;
+		return previewPane;
 	}
 
 	private void setPreviewPane(UiBulletinPreviewPane preview)
 	{
-		this.preview = preview;
+		this.previewPane = preview;
 	}
 	
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
@@ -2985,7 +2985,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private UiSession session;
 
 	private UiMainPane mainPane;
-	private UiBulletinPreviewPane preview;
+	private UiBulletinPreviewPane previewPane;
 	private JSplitPane previewSplitter;
 	private FolderSplitPane folderSplitter;
 	private UiBulletinTablePane table;
