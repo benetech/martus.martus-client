@@ -3011,8 +3011,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private static final int BACKGROUND_UPLOAD_CHECK_MILLIS = 5*1000;
 	private static final int BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS = 5*1000;
 	private static final int TIME_BETWEEN_FIELD_OFFICE_CHECKS_SECONDS = 60 * 60;
-	public static boolean isAlphaTester;
-
 	boolean mainWindowInitalizing;
 	private boolean createdNewAccount;
 	private boolean justRecovered;

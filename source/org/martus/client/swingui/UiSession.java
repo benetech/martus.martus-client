@@ -142,6 +142,7 @@ public class UiSession
 	private MartusLocalization localization;
 	private MartusApp app;
 	private CurrentUiState uiState;
+	public static boolean isAlphaTester;
 	
 	public static boolean defaultFoldersUnsorted;
 

@@ -98,7 +98,7 @@ public class Martus
 		if(foundAlphaTester >= 0)
 		{
 			System.out.println(options.get(foundAlphaTester));
-			UiMainWindow.isAlphaTester = true;
+			UiSession.isAlphaTester = true;
 			options.remove(foundAlphaTester);
 		}
 		
