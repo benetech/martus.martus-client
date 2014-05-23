@@ -27,6 +27,7 @@ package org.martus.client.swingui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
@@ -35,6 +36,7 @@ import javax.swing.JSplitPane;
 
 import org.martus.client.swingui.bulletincomponent.UiBulletinPreviewPane;
 import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
+import org.martus.client.swingui.dialogs.UiSetFolderOrderDlg;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiPopupMenu;
@@ -113,6 +115,29 @@ public class UiMainPane extends JPanel
 	public void doDeleteFolder()
 	{
 		getFolderTreePane().deleteCurrentFolderIfPossible();
+	}
+	
+	public void doOrganizeFolders(UiMainWindow mainWindow)
+	{
+		Vector originalOrderFolders = getFolderTreePane().getAllFolders();
+		UiSetFolderOrderDlg dlg = new UiSetFolderOrderDlg(mainWindow, originalOrderFolders);
+		dlg.setVisible(true);
+		if(!dlg.okPressed())
+			return;
+
+		Vector reOrderedFolders = new Vector();
+		for(int i = originalOrderFolders.size()-1; i >=0; --i)
+		{
+			reOrderedFolders.add(originalOrderFolders.get(i));
+		}
+		try
+		{
+			getFolderTreePane().setFolderOrder(dlg.getNewFolderOrder());
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 

@@ -99,7 +99,6 @@ import org.martus.client.swingui.dialogs.UiRemoveServerDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesDeleteDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesRetrieveDlg;
-import org.martus.client.swingui.dialogs.UiSetFolderOrderDlg;
 import org.martus.client.swingui.dialogs.UiShowScrollableTextDlg;
 import org.martus.client.swingui.dialogs.UiSigninDlg;
 import org.martus.client.swingui.dialogs.UiSplashDlg;
@@ -1347,29 +1346,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void doDiscardBulletins()
 	{
 		getBulletinsTable().doDiscardBulletins();
-	}
-	
-	public void doOrganizeFolders()
-	{
-		Vector originalOrderFolders = getFolderTreePane().getAllFolders();
-		UiSetFolderOrderDlg dlg = new UiSetFolderOrderDlg(this, originalOrderFolders);
-		dlg.setVisible(true);
-		if(!dlg.okPressed())
-			return;
-
-		Vector reOrderedFolders = new Vector();
-		for(int i = originalOrderFolders.size()-1; i >=0; --i)
-		{
-			reOrderedFolders.add(originalOrderFolders.get(i));
-		}
-		try
-		{
-			getFolderTreePane().setFolderOrder(dlg.getNewFolderOrder());
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
 	}
 	
 	public SortableBulletinList doSearch()
