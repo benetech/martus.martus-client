@@ -910,7 +910,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void bulletinSelectionHasChanged()
 	{
 		Bulletin b = table.getSingleSelectedBulletin();
-		toolBar.updateEnabledStatuses();
+		getToolBar().updateEnabledStatuses();
 		preview.setCurrentBulletin(b);
 	}
 
@@ -1326,8 +1326,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		menuBar = new UiMenuBar(this);
 		topStuff.add(menuBar);
 
-		toolBar = new UiToolBar(this);
-		topStuff.add(toolBar);
+		setToolBar(new UiToolBar(this));
+		topStuff.add(getToolBar());
 
 		return topStuff;
 	}
@@ -2970,6 +2970,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getSession().initalizeUiState();
 	}
 
+	private UiToolBar getToolBar()
+	{
+		return toolBar;
+	}
+
+	private void setToolBar(UiToolBar toolBar)
+	{
+		this.toolBar = toolBar;
+	}
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
