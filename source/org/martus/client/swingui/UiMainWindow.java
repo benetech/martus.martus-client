@@ -2949,12 +2949,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private UiBulletinTablePane getBulletinsTable()
 	{
-		return table;
+		return bulletinsTable;
 	}
 
 	private void setBulletinsTable(UiBulletinTablePane table)
 	{
-		this.table = table;
+		this.bulletinsTable = table;
 	}
 	
 	private UiBulletinPreviewPane getPreviewPane()
@@ -2988,7 +2988,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private UiBulletinPreviewPane previewPane;
 	private JSplitPane previewSplitter;
 	private FolderSplitPane folderSplitter;
-	private UiBulletinTablePane table;
+	private UiBulletinTablePane bulletinsTable;
 	private UiFolderTreePane folderTreePane;
 
 	UiStatusBar statusBar;
