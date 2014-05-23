@@ -1248,7 +1248,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			getUiState().setCurrentSortDirection(folder.getSortDirection());
 			getUiState().setCurrentBulletinPosition(getBulletinsTable().getCurrentBulletinIndex());
 		}
-		getUiState().setCurrentPreviewSplitterPosition(previewSplitter.getDividerLocation());
+		getUiState().setCurrentPreviewSplitterPosition(getPreviewSplitter().getDividerLocation());
 		getUiState().setCurrentFolderSplitterPosition(folderSplitter.getDividerLocation());
 		getUiState().setCurrentAppDimension(getSize());
 		getUiState().setCurrentAppPosition(getLocation());
@@ -2252,13 +2252,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		mainPane = new UiMainPane(this);
 		setContentPane(mainPane);
 
-		previewSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, getBulletinsTable(), getPreviewPane());
-		previewSplitter.setDividerLocation(getUiState().getCurrentPreviewSplitterPosition());
+		setPreviewSplitter(new JSplitPane(JSplitPane.VERTICAL_SPLIT, getBulletinsTable(), getPreviewPane()));
+		getPreviewSplitter().setDividerLocation(getUiState().getCurrentPreviewSplitterPosition());
 
 		if(LanguageOptions.isRightToLeftLanguage())
-			folderSplitter = new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, previewSplitter, folderTreePane);
+			folderSplitter = new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, getPreviewSplitter(), folderTreePane);
 		else
-			folderSplitter = new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, folderTreePane, previewSplitter);
+			folderSplitter = new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, folderTreePane, getPreviewSplitter());
 
 		Dimension screenSize = Utilities.getViewableScreenSize();
 		Dimension appDimension = getUiState().getCurrentAppDimension();
@@ -2967,6 +2967,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		this.previewPane = preview;
 	}
 	
+	private JSplitPane getPreviewSplitter()
+	{
+		return previewSplitter;
+	}
+
+	private void setPreviewSplitter(JSplitPane previewSplitter)
+	{
+		this.previewSplitter = previewSplitter;
+	}
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
