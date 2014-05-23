@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui;
 
+import org.martus.client.core.MartusApp;
 import org.martus.common.EnglishCommonStrings;
 
 
@@ -32,6 +33,7 @@ public class UiSession
 {
 	public UiSession()
 	{
+		setLocalization(new MartusLocalization(MartusApp.getTranslationsDirectory(), UiSession.getAllEnglishStrings()));
 	}
 
 	public static String[] getAllEnglishStrings()
@@ -45,4 +47,17 @@ public class UiSession
 		System.arraycopy(commonStrings,0,allEnglishStrings,lenghtClient,lenghtCommon);
 		return allEnglishStrings;
 	}
+
+	private void setLocalization(MartusLocalization martusLocalization)
+	{
+		localization = martusLocalization;
+	}
+
+	public MartusLocalization getLocalization()
+	{
+		return localization;
+	}
+
+	private MartusLocalization localization;
+
 }
