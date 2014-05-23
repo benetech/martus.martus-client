@@ -196,7 +196,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		try
 		{
-			setApp(new MartusApp(getLocalization()));
+			session = new UiSession();
 			initializeCurrentLanguage();
 		}
 		catch(MartusApp.MartusAppInitializationException e)
@@ -905,7 +905,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
     public MartusApp getApp()
     {
-		return app;
+		return getSession().getApp();
 	}
 	
 	public MartusLocalization getLocalization()
@@ -3009,12 +3009,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return memorizedFileOpenDirectories;
 	}
 
-
-	private void setApp(MartusApp app)
-	{
-		this.app = app;
-	}
-	
 	void setLocalization(MartusLocalization localization)
 	{
 		getSession().getLocalization();
@@ -3032,7 +3026,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public static final String STATUS_SERVER_NOT_CONFIGURED = "ServerNotConfiguredProgressMessage";
 
 	private UiSession session;
-	private MartusApp app;
 	CurrentUiState uiState;
 	UiBulletinPreviewPane preview;
 	private JSplitPane previewSplitter;
