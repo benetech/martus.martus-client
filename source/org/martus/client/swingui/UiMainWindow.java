@@ -943,18 +943,18 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void folderContentsHaveChanged(BulletinFolder f)
 	{
-		folders.folderContentsHaveChanged(f);
+		folderTreePane.folderContentsHaveChanged(f);
 		table.folderContentsHaveChanged(f);
 	}
 
 	public void folderTreeContentsHaveChanged()
 	{
-		folders.folderTreeContentsHaveChanged();
+		folderTreePane.folderTreeContentsHaveChanged();
 	}
 
 	public boolean isDiscardedFolderSelected()
 	{
-		return folders.getSelectedFolderName().equals(getApp().getStore().getFolderDiscarded().getName());
+		return folderTreePane.getSelectedFolderName().equals(getApp().getStore().getFolderDiscarded().getName());
 	}
 
 	public boolean isCurrentFolderEmpty()
@@ -997,12 +997,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void selectFolder(BulletinFolder folder)
 	{
-		folders.selectFolder(folder.getName());
+		folderTreePane.selectFolder(folder.getName());
 	}
 
 	public void selectSearchFolder()
 	{
-		folders.selectFolder(getStore().getSearchFolderName());
+		folderTreePane.selectFolder(getStore().getSearchFolderName());
 	}
 
 	public void selectNewCurrentBulletin(int currentPosition)
@@ -1252,7 +1252,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	void saveStateWithoutPrompting() throws Exception
 	{
 		getApp().saveStateWithoutPrompting();
-		String folderName = folders.getSelectedFolderName();
+		String folderName = folderTreePane.getSelectedFolderName();
 		BulletinFolder folder = getStore().findFolder(folderName);
 		getUiState().setCurrentFolder(folderName);
 		getSession().copyLocalizationSettingsToUiState();
@@ -1290,7 +1290,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			folder.sortBy(sortTag);
 			if(folder.getSortDirection() != getUiState().getCurrentSortDirection())
 				folder.sortBy(sortTag);
-			folders.selectFolder(folderName);
+			folderTreePane.selectFolder(folderName);
 		}
 		catch(Exception e)
 		{
@@ -1300,7 +1300,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void selectBulletinInCurrentFolderIfExists(UniversalId id)
 	{
-		String selectedFolderName = folders.getSelectedFolderName();
+		String selectedFolderName = folderTreePane.getSelectedFolderName();
 		BulletinFolder currentFolder = getApp().getStore().findFolder(selectedFolderName);
 		if(currentFolder == null)
 		{
@@ -1376,22 +1376,22 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void doCreateFolder()
 	{
-		folders.createNewFolder();
+		folderTreePane.createNewFolder();
 	}
 	
 	public void doRenameFolder()
 	{
-		folders.renameCurrentFolder();
+		folderTreePane.renameCurrentFolder();
 	}
 	
 	public void doDeleteFolder()
 	{
-		folders.deleteCurrentFolderIfPossible();
+		folderTreePane.deleteCurrentFolderIfPossible();
 	}
 	
 	public void doOrganizeFolders()
 	{
-		Vector originalOrderFolders = folders.getAllFolders();
+		Vector originalOrderFolders = folderTreePane.getAllFolders();
 		UiSetFolderOrderDlg dlg = new UiSetFolderOrderDlg(this, originalOrderFolders);
 		dlg.setVisible(true);
 		if(!dlg.okPressed())
@@ -1404,7 +1404,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		try
 		{
-			folders.setFolderOrder(dlg.getNewFolderOrder());
+			folderTreePane.setFolderOrder(dlg.getNewFolderOrder());
 		}
 		catch(Exception e)
 		{
@@ -1533,8 +1533,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getApp().updateSearchFolder(matchedBulletinsFromSearch);
 		ClientBulletinStore store = getStore();
 		BulletinFolder searchFolder = store.findFolder(store.getSearchFolderName());
-		folders.folderTreeContentsHaveChanged();
-		folders.folderContentsHaveChanged(searchFolder);
+		folderTreePane.folderTreeContentsHaveChanged();
+		folderTreePane.folderContentsHaveChanged(searchFolder);
 		int bulletinsFound = searchFolder.getBulletinCount();
 		if(bulletinsFound > 0)
 		{
@@ -2278,16 +2278,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		preview = new UiBulletinPreviewPane(this);
 		table = new UiBulletinTablePane(this);
-		folders = new UiFolderTreePane(this);
+		folderTreePane = new UiFolderTreePane(this);
 		getContentPane().add(createTopStuff(), BorderLayout.NORTH);
 
 		previewSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, table, preview);
 		previewSplitter.setDividerLocation(getUiState().getCurrentPreviewSplitterPosition());
 
 		if(LanguageOptions.isRightToLeftLanguage())
-			folderSplitter = new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, previewSplitter, folders);
+			folderSplitter = new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, previewSplitter, folderTreePane);
 		else
-			folderSplitter = new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, folders, previewSplitter);
+			folderSplitter = new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, folderTreePane, previewSplitter);
 
 		Dimension screenSize = Utilities.getViewableScreenSize();
 		Dimension appDimension = getUiState().getCurrentAppDimension();
@@ -2594,7 +2594,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public BulletinFolder getSelectedFolder()
 	{
-		return folders.getSelectedFolder();
+		return folderTreePane.getSelectedFolder();
 	}
 
 	public void doExportBulletins()
@@ -2982,7 +2982,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private JSplitPane previewSplitter;
 	private FolderSplitPane folderSplitter;
 	private UiBulletinTablePane table;
-	private UiFolderTreePane folders;
+	private UiFolderTreePane folderTreePane;
 	private java.util.Timer uploader;
 	private java.util.Timer timeoutChecker;
 	private javax.swing.Timer errorChecker;
