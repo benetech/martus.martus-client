@@ -112,7 +112,6 @@ import org.martus.client.swingui.tablemodels.DeleteMyServerDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveHQDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveHQTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyDraftsTableModel;
-import org.martus.client.swingui.tablemodels.RetrieveMyTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.CurrentUiState;
@@ -1633,7 +1632,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return getApp().getTransport();
 	}
 
-	private void offerToCancelRetrieveInProgress()
+	public void offerToCancelRetrieveInProgress()
 	{
 		if(!isRetrieveInProgress())
 			return;
@@ -1657,7 +1656,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		setStatusMessageReady();
 	}
 
-	private boolean isRetrieveInProgress()
+	public boolean isRetrieveInProgress()
 	{
 		return getApp().getCurrentRetrieveCommand().getRemainingToRetrieveCount() > 0;
 	}
@@ -1792,21 +1791,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	public void doRetrieveMySealedBulletins()
-	{
-		offerToCancelRetrieveInProgress();
-		if(isRetrieveInProgress())
-			return;
-		
-		String dlgTitleTag = "RetrieveMySealedBulletins";
-		String summariesProgressTag = "RetrieveMySealedBulletinSummaries";
-		String retrieverProgressTag = "RetrieveMySealedBulletinProgress";
-		String folderName = getApp().getNameOfFolderRetrievedSealed();
-
-		RetrieveTableModel model = new RetrieveMyTableModel(getApp(), getLocalization());
-		retrieveBulletins(model, folderName, dlgTitleTag, summariesProgressTag, retrieverProgressTag);
-	}
-
 	public void doRetrieveMyDraftBulletins()
 	{
 		offerToCancelRetrieveInProgress();
@@ -1861,7 +1845,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		deleteServerDrafts(model, dlgTitleTag, summariesProgressTag);
 	}
 
-	private void retrieveBulletins(RetrieveTableModel model, String folderName,
+	public void retrieveBulletins(RetrieveTableModel model, String folderName,
 						String dlgTitleTag, String summariesProgressTag, String retrieverProgressTag)
 	{
 		if(isRetrieveInProgress())
