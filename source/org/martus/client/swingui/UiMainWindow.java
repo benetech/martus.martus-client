@@ -108,7 +108,6 @@ import org.martus.client.swingui.jfx.FxModalDialog;
 import org.martus.client.swingui.jfx.setupwizard.SetupWizardStage;
 import org.martus.client.swingui.jfx.welcome.WelcomeStage;
 import org.martus.client.swingui.spellcheck.SpellCheckerManager;
-import org.martus.client.swingui.tablemodels.DeleteMyServerDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.CurrentUiState;
@@ -1788,15 +1787,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	public void doDeleteServerDraftBulletins()
-	{
-		String dlgTitleTag = "DeleteMyDraftsFromServer";
-		String summariesProgressTag = "RetrieveMyDraftBulletinSummaries";
-
-		RetrieveTableModel model = new DeleteMyServerDraftsTableModel(getApp(), getLocalization());
-		deleteServerDrafts(model, dlgTitleTag, summariesProgressTag);
-	}
-
 	public void retrieveBulletins(RetrieveTableModel model, String folderName,
 						String dlgTitleTag, String summariesProgressTag, String retrieverProgressTag)
 	{
@@ -1836,7 +1826,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	private void deleteServerDrafts(RetrieveTableModel model,
+	public void deleteServerDrafts(RetrieveTableModel model,
 						String dlgTitleTag, String summariesProgressTag)
 	{
 
