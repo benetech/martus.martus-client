@@ -33,6 +33,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainPane;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
 
 abstract public class UiMartusAction extends AbstractAction
@@ -71,6 +72,16 @@ abstract public class UiMartusAction extends AbstractAction
 	protected UiFolderTreePane getFolderTreePane()
 	{
 		return getMainPane().getFolderTreePane();
+	}
+
+	protected UiBulletinTablePane getBulletinsTable()
+	{
+		return getMainPane().getBulletinsTable();
+	}
+
+	public void doModifyBulletin()
+	{
+		getBulletinsTable().doModifyBulletin();
 	}
 
 	UiMainWindow mainWindow;
