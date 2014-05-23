@@ -939,18 +939,18 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void folderContentsHaveChanged(BulletinFolder f)
 	{
-		folderTreePane.folderContentsHaveChanged(f);
+		getFolderTreePane().folderContentsHaveChanged(f);
 		getBulletinsTable().folderContentsHaveChanged(f);
 	}
 
 	public void folderTreeContentsHaveChanged()
 	{
-		folderTreePane.folderTreeContentsHaveChanged();
+		getFolderTreePane().folderTreeContentsHaveChanged();
 	}
 
 	public boolean isDiscardedFolderSelected()
 	{
-		return folderTreePane.getSelectedFolderName().equals(getApp().getStore().getFolderDiscarded().getName());
+		return getFolderTreePane().getSelectedFolderName().equals(getApp().getStore().getFolderDiscarded().getName());
 	}
 
 	public boolean isCurrentFolderEmpty()
@@ -995,12 +995,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void selectFolder(BulletinFolder folder)
 	{
-		folderTreePane.selectFolder(folder.getName());
+		getFolderTreePane().selectFolder(folder.getName());
 	}
 
 	public void selectSearchFolder()
 	{
-		folderTreePane.selectFolder(getStore().getSearchFolderName());
+		getFolderTreePane().selectFolder(getStore().getSearchFolderName());
 	}
 
 	public void selectNewCurrentBulletin(int currentPosition)
@@ -1239,7 +1239,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	void saveStateWithoutPrompting() throws Exception
 	{
 		getApp().saveStateWithoutPrompting();
-		String folderName = folderTreePane.getSelectedFolderName();
+		String folderName = getFolderTreePane().getSelectedFolderName();
 		BulletinFolder folder = getStore().findFolder(folderName);
 		getUiState().setCurrentFolder(folderName);
 		getSession().copyLocalizationSettingsToUiState();
@@ -1277,7 +1277,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			folder.sortBy(sortTag);
 			if(folder.getSortDirection() != getUiState().getCurrentSortDirection())
 				folder.sortBy(sortTag);
-			folderTreePane.selectFolder(folderName);
+			getFolderTreePane().selectFolder(folderName);
 		}
 		catch(Exception e)
 		{
@@ -1287,7 +1287,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void selectBulletinInCurrentFolderIfExists(UniversalId id)
 	{
-		String selectedFolderName = folderTreePane.getSelectedFolderName();
+		String selectedFolderName = getFolderTreePane().getSelectedFolderName();
 		BulletinFolder currentFolder = getApp().getStore().findFolder(selectedFolderName);
 		if(currentFolder == null)
 		{
@@ -1349,22 +1349,22 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void doCreateFolder()
 	{
-		folderTreePane.createNewFolder();
+		getFolderTreePane().createNewFolder();
 	}
 	
 	public void doRenameFolder()
 	{
-		folderTreePane.renameCurrentFolder();
+		getFolderTreePane().renameCurrentFolder();
 	}
 	
 	public void doDeleteFolder()
 	{
-		folderTreePane.deleteCurrentFolderIfPossible();
+		getFolderTreePane().deleteCurrentFolderIfPossible();
 	}
 	
 	public void doOrganizeFolders()
 	{
-		Vector originalOrderFolders = folderTreePane.getAllFolders();
+		Vector originalOrderFolders = getFolderTreePane().getAllFolders();
 		UiSetFolderOrderDlg dlg = new UiSetFolderOrderDlg(this, originalOrderFolders);
 		dlg.setVisible(true);
 		if(!dlg.okPressed())
@@ -1377,7 +1377,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		try
 		{
-			folderTreePane.setFolderOrder(dlg.getNewFolderOrder());
+			getFolderTreePane().setFolderOrder(dlg.getNewFolderOrder());
 		}
 		catch(Exception e)
 		{
@@ -1506,8 +1506,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getApp().updateSearchFolder(matchedBulletinsFromSearch);
 		ClientBulletinStore store = getStore();
 		BulletinFolder searchFolder = store.findFolder(store.getSearchFolderName());
-		folderTreePane.folderTreeContentsHaveChanged();
-		folderTreePane.folderContentsHaveChanged(searchFolder);
+		getFolderTreePane().folderTreeContentsHaveChanged();
+		getFolderTreePane().folderContentsHaveChanged(searchFolder);
 		int bulletinsFound = searchFolder.getBulletinCount();
 		if(bulletinsFound > 0)
 		{
@@ -2246,7 +2246,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		updateTitle();
 		MartusLogger.logBeginProcess("Initializing views");
 
-		folderTreePane = new UiFolderTreePane(this);
+		setFolderTreePane(new UiFolderTreePane(this));
 
 		mainPane = new UiMainPane(this);
 		setContentPane(mainPane);
@@ -2254,9 +2254,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getPreviewSplitter().setDividerLocation(getUiState().getCurrentPreviewSplitterPosition());
 
 		if(LanguageOptions.isRightToLeftLanguage())
-			setFolderSplitter(new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, getPreviewSplitter(), folderTreePane));
+			setFolderSplitter(new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, getPreviewSplitter(), getFolderTreePane()));
 		else
-			setFolderSplitter(new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, folderTreePane, getPreviewSplitter()));
+			setFolderSplitter(new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, getFolderTreePane(), getPreviewSplitter()));
 
 		Dimension screenSize = Utilities.getViewableScreenSize();
 		Dimension appDimension = getUiState().getCurrentAppDimension();
@@ -2561,7 +2561,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public BulletinFolder getSelectedFolder()
 	{
-		return folderTreePane.getSelectedFolder();
+		return getFolderTreePane().getSelectedFolder();
 	}
 
 	public void doExportBulletins()
@@ -2981,6 +2981,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		this.folderSplitter = folderSplitter;
 	}
+	
+	private UiFolderTreePane getFolderTreePane()
+	{
+		return folderTreePane;
+	}
+
+	private void setFolderTreePane(UiFolderTreePane folderTreePane)
+	{
+		this.folderTreePane = folderTreePane;
+	}
+	
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
