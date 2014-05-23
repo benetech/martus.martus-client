@@ -1349,11 +1349,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getBulletinsTable().doDiscardBulletins();
 	}
 	
-	public void doCreateFolder()
-	{
-		getFolderTreePane().createNewFolder();
-	}
-	
 	public void doRenameFolder()
 	{
 		getFolderTreePane().renameCurrentFolder();
@@ -2923,7 +2918,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getSession().initalizeUiState();
 	}
 
-	private UiMainPane getMainPane()
+	public UiMainPane getMainPane()
 	{
 		return mainPane;
 	}

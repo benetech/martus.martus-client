@@ -31,6 +31,7 @@ import javax.swing.AbstractAction;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.UiMainPane;
 import org.martus.client.swingui.UiMainWindow;
 
 abstract public class UiMartusAction extends AbstractAction
@@ -61,5 +62,10 @@ abstract public class UiMartusAction extends AbstractAction
 		return mainWindow;
 	}
 	
+	protected UiMainPane getMainPane()
+	{
+		return getMainWindow().getMainPane();
+	}
+
 	UiMainWindow mainWindow;
 }
