@@ -196,7 +196,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		try
 		{
-			setLocalization(new MartusLocalization(MartusApp.getTranslationsDirectory(), UiSession.getAllEnglishStrings()));
 			setApp(new MartusApp(getLocalization()));
 			initializeCurrentLanguage();
 		}
@@ -911,7 +910,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public MartusLocalization getLocalization()
 	{
-		return localization;
+		return getSession().getLocalization();
 	}
 
 	public ClientBulletinStore getStore()
@@ -3015,16 +3014,24 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		this.app = app;
 	}
+	
 	void setLocalization(MartusLocalization localization)
 	{
-		this.localization = localization;
+		getSession().getLocalization();
 	}
+	
+	private UiSession getSession()
+	{
+		return session;
+	}
+	
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
 	public static final String STATUS_NO_SERVER_AVAILABLE = "NoServerAvailableProgressMessage";
 	public static final String STATUS_SERVER_NOT_CONFIGURED = "ServerNotConfiguredProgressMessage";
 
+	private UiSession session;
 	private MartusApp app;
 	CurrentUiState uiState;
 	UiBulletinPreviewPane preview;
@@ -3041,7 +3048,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private UiMenuBar menuBar;
 	private UiToolBar toolBar;
 	UiStatusBar statusBar;
-	private MartusLocalization localization;
 
 	private JFrame currentActiveFrame;
 	private JDialog currentActiveDialog;
