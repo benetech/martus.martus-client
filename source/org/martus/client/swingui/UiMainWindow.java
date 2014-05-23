@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -81,6 +80,7 @@ import org.martus.client.core.RetrieveCommand;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.search.SearchTreeNode;
+import org.martus.client.swingui.UiMainPane.FolderSplitPane;
 import org.martus.client.swingui.bulletincomponent.UiBulletinPreviewPane;
 import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
 import org.martus.client.swingui.dialogs.UiAboutDlg;
@@ -950,6 +950,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean isDiscardedFolderSelected()
 	{
+		if(getFolderTreePane() == null)
+			return false;
+		
 		return getFolderTreePane().getSelectedFolderName().equals(getApp().getStore().getFolderDiscarded().getName());
 	}
 
@@ -2246,18 +2249,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		updateTitle();
 		MartusLogger.logBeginProcess("Initializing views");
 
-		setFolderTreePane(new UiFolderTreePane(this));
-
-		mainPane = new UiMainPane(this);
-		setContentPane(mainPane);
-
-		getPreviewSplitter().setDividerLocation(getUiState().getCurrentPreviewSplitterPosition());
-
-		if(LanguageOptions.isRightToLeftLanguage())
-			setFolderSplitter(new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, getPreviewSplitter(), getFolderTreePane()));
-		else
-			setFolderSplitter(new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, getFolderTreePane(), getPreviewSplitter()));
-
 		Dimension screenSize = Utilities.getViewableScreenSize();
 		Dimension appDimension = getUiState().getCurrentAppDimension();
 		Point appPosition = getUiState().getCurrentAppPosition();
@@ -2271,6 +2262,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		else
 			showMaximized = true;
+		
 		if(showMaximized)
 		{
 			setSize(screenSize.width - 50 , screenSize.height - 50);
@@ -2278,9 +2270,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 
 		getUiState().setCurrentAppDimension(getSize());
+		mainPane = new UiMainPane(this);
+		setContentPane(mainPane);
+
+		getPreviewSplitter().setDividerLocation(getUiState().getCurrentPreviewSplitterPosition());
 		getFolderSplitter().setInitialDividerLocation(getUiState().getCurrentFolderSplitterPosition());
 
-		mainPane.add(getFolderSplitter());
 		getTransport().setProgressMeter(getStatusBar().getTorProgressMeter());
 		// NOTE: re-start Tor here in case it was turned on in the wizard
 		getApp().startOrStopTorAsRequested();
@@ -2296,30 +2291,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		setTitle(getLocalization().getWindowTitle("main"));
 	}
 
-	class FolderSplitPane extends JSplitPane
-	{
-		public FolderSplitPane(int newOrientation, Component newLeftComponent, Component newRightComponent) 
-		{
-			super(newOrientation, newLeftComponent, newRightComponent);
-		}
-
-		public void setInitialDividerLocation(int location)
-		{
-			super.setDividerLocation(location);
-		}
-
-		public void setDividerLocation(int location) 
-		{
-			super.setDividerLocation(location);
-			if(previousLocation != location)
-			{
-				previousLocation = location;
-				getPreviewPane().repaint();
-			}
-		}
-		int previousLocation = -1;
-	}
-	
 	public void checkServerStatus()
 	{		
 		if (!getApp().isServerConfigured())
@@ -2561,6 +2532,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public BulletinFolder getSelectedFolder()
 	{
+		if(getFolderTreePane() == null)
+			return null;
+		
 		return getFolderTreePane().getSelectedFolder();
 	}
 
@@ -2974,24 +2948,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private FolderSplitPane getFolderSplitter()
 	{
-		return folderSplitter;
+		return getMainPane().getFolderSplitter();
 	}
 
-	private void setFolderSplitter(FolderSplitPane folderSplitter)
-	{
-		this.folderSplitter = folderSplitter;
-	}
-	
 	private UiFolderTreePane getFolderTreePane()
 	{
-		return folderTreePane;
+		if(getMainPane() == null)
+			return null;
+		
+		return getMainPane().getFolderTreePane();
 	}
 
-	private void setFolderTreePane(UiFolderTreePane folderTreePane)
-	{
-		this.folderTreePane = folderTreePane;
-	}
-	
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
@@ -3010,8 +2977,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private UiSession session;
 
 	private UiMainPane mainPane;
-	private FolderSplitPane folderSplitter;
-	private UiFolderTreePane folderTreePane;
 
 	private java.util.Timer uploader;
 	private java.util.Timer timeoutChecker;
