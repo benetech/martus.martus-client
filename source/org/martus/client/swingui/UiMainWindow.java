@@ -198,7 +198,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		try
 		{
 			localization = new MartusLocalization(MartusApp.getTranslationsDirectory(), getAllEnglishStrings());
-			app = new MartusApp(localization);
+			setApp(new MartusApp(localization));
 			initializeCurrentLanguage();
 		}
 		catch(MartusApp.MartusAppInitializationException e)
@@ -319,7 +319,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		
 		if(localization.getCurrentLanguageCode()== null)
-			MartusApp.setInitialUiDefaultsFromFileIfPresent(localization, new File(app.getMartusDataRootDirectory(),"DefaultUi.txt"));
+			MartusApp.setInitialUiDefaultsFromFileIfPresent(localization, new File(getApp().getMartusDataRootDirectory(),"DefaultUi.txt"));
 		
 		if(localization.getCurrentLanguageCode()== null)
 		{
@@ -333,9 +333,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public File getUiStateFile()
 	{
-		if(app.isSignedIn())
-			return app.getUiStateFileForAccount(app.getCurrentAccountDirectory());
-		return new File(app.getMartusDataRootDirectory(), "UiState.dat");
+		if(getApp().isSignedIn())
+			return getApp().getUiStateFileForAccount(getApp().getCurrentAccountDirectory());
+		return new File(getApp().getMartusDataRootDirectory(), "UiState.dat");
 	}
 	
 	static public void displayDefaultUnofficialTranslationMessageIfNecessary(JFrame owner, MtfAwareLocalization localization, String languageCodeToTest)
@@ -588,12 +588,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		try
 		{
-			app.loadConfigInfo();
-			if(app.getConfigInfo().isNewVersion())
+			getApp().loadConfigInfo();
+			if(getApp().getConfigInfo().isNewVersion())
 			{
 				if(!confirmDlg("NewerConfigInfoFileFound"))
 					exitWithoutSavingState();
-				app.saveConfigInfo();
+				getApp().saveConfigInfo();
 			}			
 		}
 		catch (LoadConfigInfoException e)
@@ -607,7 +607,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		if(createdNewAccount)
 		{
-			File bulletinDefaultDetailsFile = app.getBulletinDefaultDetailsFile();
+			File bulletinDefaultDetailsFile = getApp().getBulletinDefaultDetailsFile();
 			if(bulletinDefaultDetailsFile.exists())
 				updateBulletinDetails(bulletinDefaultDetailsFile);
 		}
@@ -617,7 +617,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		try
 		{
-			app.loadRetrieveCommand();
+			getApp().loadRetrieveCommand();
 			return;
 		}
 		catch(RetrieveCommand.DataVersionException e)
@@ -631,7 +631,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		try
 		{
-			app.cancelBackgroundRetrieve();
+			getApp().cancelBackgroundRetrieve();
 		} 
 		catch (Exception notMuchWeCanDoAboutIt)
 		{
@@ -692,7 +692,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		try
 		{
 			startInactivityTimeoutDetection();
-			app.doAfterSigninInitalization();
+			getApp().doAfterSigninInitalization();
 		}
 		catch (MartusAppInitializationException e1)
 		{
@@ -723,8 +723,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			exitWithoutSavingState();
 		try 
 		{
-			app.getStore().signAccountMap();
-			app.doAfterSigninInitalization();
+			getApp().getStore().signAccountMap();
+			getApp().doAfterSigninInitalization();
 			
 		} 
 		catch (Exception e) 
@@ -739,8 +739,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			exitWithoutSavingState();
 		try 
 		{
-			app.getStore().deleteAllBulletins();
-			app.doAfterSigninInitalization();
+			getApp().getStore().deleteAllBulletins();
+			getApp().doAfterSigninInitalization();
 		} 
 		catch (Exception e) 
 		{
@@ -769,7 +769,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private File getLockFile()
 	{
-		return new File(app.getMartusDataRootDirectory(), "lock");
+		return new File(getApp().getMartusDataRootDirectory(), "lock");
 	}
 	
 	public void unLock()
@@ -794,7 +794,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private boolean loadFoldersAndBulletins() throws Exception
 	{
 		MartusLogger.logBeginProcess("quarantineUnreadableBulletins");
-		int quarantineCount = app.quarantineUnreadableBulletins();
+		int quarantineCount = getApp().quarantineUnreadableBulletins();
 		MartusLogger.logEndProcess("quarantineUnreadableBulletins");
 		if(quarantineCount > 0)
 			notifyDlg("FoundDamagedBulletins");
@@ -802,7 +802,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		loadFieldSpecCache();
 
 		MartusLogger.logBeginProcess("loadFolders");
-		app.loadFolders();
+		getApp().loadFolders();
 		MartusLogger.logEndProcess("loadFolders");
 		if(getStore().needsFolderMigration())
 		{
@@ -821,12 +821,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		
 		MartusLogger.logBeginProcess("repairOrphans");
-		int orphanCount = app.repairOrphans();
+		int orphanCount = getApp().repairOrphans();
 		MartusLogger.logEndProcess("repairOrphans");
 		if(orphanCount > 0)
 			notifyDlg("FoundOrphans");
 
-		ConfigInfo configInfo = app.getConfigInfo();
+		ConfigInfo configInfo = getApp().getConfigInfo();
 		if(!configInfo.isBulletinVersioningAware())
 		{
 			if(!confirmDlg("NeedsBulletinVersioningMigration"))
@@ -841,7 +841,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	private void askAndBackupKeypairIfRequired()
 	{
-		ConfigInfo info = app.getConfigInfo();
+		ConfigInfo info = getApp().getConfigInfo();
 		boolean hasBackedUpEncrypted = info.hasUserBackedUpKeypairEncrypted();
 		boolean hasBackedUpShare = info.hasUserBackedUpKeypairShare();
 		boolean hasBackedUpImprovedShare = info.hasBackedUpImprovedKeypairShare();
@@ -1000,7 +1000,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean isDiscardedFolderSelected()
 	{
-		return folders.getSelectedFolderName().equals(app.getStore().getFolderDiscarded().getName());
+		return folders.getSelectedFolderName().equals(getApp().getStore().getFolderDiscarded().getName());
 	}
 
 	public boolean isCurrentFolderEmpty()
@@ -1373,7 +1373,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void selectBulletinInCurrentFolderIfExists(UniversalId id)
 	{
 		String selectedFolderName = folders.getSelectedFolderName();
-		BulletinFolder currentFolder = app.getStore().findFolder(selectedFolderName);
+		BulletinFolder currentFolder = getApp().getStore().findFolder(selectedFolderName);
 		if(currentFolder == null)
 		{
 			System.out.println("Current folder is null: " + selectedFolderName);
@@ -1602,7 +1602,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		if(matchedBulletinsFromSearch == null)
 			return;
-		app.updateSearchFolder(matchedBulletinsFromSearch);
+		getApp().updateSearchFolder(matchedBulletinsFromSearch);
 		ClientBulletinStore store = getStore();
 		BulletinFolder searchFolder = store.findFolder(store.getSearchFolderName());
 		folders.folderTreeContentsHaveChanged();
@@ -1641,9 +1641,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		String title = getLocalization().getWindowTitle("AccountInfo");
 		String userName = getLocalization().getFieldLabel("AccountInfoUserName")
-						  + app.getUserName();
+						  + getApp().getUserName();
 		String keyDescription = getLocalization().getFieldLabel("AccountInfoPublicKey");
-		String keyContents = app.getAccountId();
+		String keyContents = getApp().getAccountId();
 		String codeDescriptionOld = getLocalization().getFieldLabel("AccountInfoPublicCode");
 		String codeDescriptionNew = getLocalization().getFieldLabel("AccountInfoPublicCode40");
 		String formattedCodeContentsOld = null;
@@ -1662,7 +1662,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String martusAccountAccessTokenDescription = getLocalization().getFieldLabel("AccountAccessToken");
 		try
 		{
-			MartusAccountAccessToken accountToken = app.getConfigInfo().getCurrentMartusAccountAccessToken();
+			MartusAccountAccessToken accountToken = getApp().getConfigInfo().getCurrentMartusAccountAccessToken();
 			martusAccountAccessToken = accountToken.getToken();
 		} 
 		catch (Exception e)
@@ -1670,7 +1670,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			MartusLogger.logException(e);
 		} 
 		
-		String accountDirectory = getLocalization().getFieldLabel("AccountInfoDirectory") + app.getCurrentAccountDirectory();
+		String accountDirectory = getLocalization().getFieldLabel("AccountInfoDirectory") + getApp().getCurrentAccountDirectory();
 		
 		
 		String ok = getLocalization().getButtonLabel("ok");
@@ -1686,13 +1686,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		InputStream helpStreamTOC = null;
 		String currentLanguage = getLocalization().getCurrentLanguageCode();
 
-		helpStream = app.getHelpMain(currentLanguage);
+		helpStream = getApp().getHelpMain(currentLanguage);
 		if(helpStream != null)
-			helpStreamTOC = app.getHelpTOC(currentLanguage);
+			helpStreamTOC = getApp().getHelpTOC(currentLanguage);
 		else
 		{
-			helpStream = app.getHelpMain(MtfAwareLocalization.ENGLISH);
-			helpStreamTOC = app.getHelpTOC(MtfAwareLocalization.ENGLISH);
+			helpStream = getApp().getHelpMain(MtfAwareLocalization.ENGLISH);
+			helpStreamTOC = getApp().getHelpTOC(MtfAwareLocalization.ENGLISH);
 		}
 
 		UiOnlineHelpDlg dlg = new UiOnlineHelpDlg(this, "Help", helpStream, "OnlineHelpMessage", helpStreamTOC, "OnlineHelpTOCMessage");
@@ -1724,10 +1724,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		dlg.setVisible(true);
 		if(dlg.getResult())
 		{
-			app.getConfigInfo().setForceBulletinsAllPrivate(dlg.isAllPrivateChecked());
-			app.getConfigInfo().setCheckForFieldOfficeBulletins(dlg.isCheckFieldOfficeBulletinsChecked());
-			app.getConfigInfo().setUseZawgyiFont(dlg.isUseZawgyiFont());
-			app.getConfigInfo().setUseInternalTor(dlg.isUseInternalTorChecked());
+			getApp().getConfigInfo().setForceBulletinsAllPrivate(dlg.isAllPrivateChecked());
+			getApp().getConfigInfo().setCheckForFieldOfficeBulletins(dlg.isCheckFieldOfficeBulletinsChecked());
+			getApp().getConfigInfo().setUseZawgyiFont(dlg.isUseZawgyiFont());
+			getApp().getConfigInfo().setUseInternalTor(dlg.isUseInternalTorChecked());
 			saveConfigInfo();
 			FontSetter.setDefaultFont(dlg.isUseZawgyiFont());
 			initializeViews();
@@ -1741,7 +1741,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean doContactInfo()
 	{
-		ConfigInfo info = app.getConfigInfo();
+		ConfigInfo info = getApp().getConfigInfo();
 		UiContactInfoDlg setupContactDlg = new UiContactInfoDlg(this, info);
 		boolean pressedOk = setupContactDlg.getResult();
 		// the following is required (for unknown reasons)
@@ -1760,14 +1760,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(!reSignIn())
 			return;
 		
-		ConfigInfo info = app.getConfigInfo();
+		ConfigInfo info = getApp().getConfigInfo();
 		UiRemoveServerDlg removeDlg = new UiRemoveServerDlg(this, info);
 		if (!removeDlg.isYesButtonPressed())
 			return;
 
 		try
 		{
-			app.setServerInfo("","","");
+			getApp().setServerInfo("","","");
 			clearStatusMessage();
 			repaint();
 		}
@@ -1791,7 +1791,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		try
 		{
 			clearStatusMessage();
-			ConfigInfo previousServerInfo = app.getConfigInfo();
+			ConfigInfo previousServerInfo = getApp().getConfigInfo();
 			UiConfigServerDlg serverInfoDlg = new UiConfigServerDlg(this, previousServerInfo);
 			if(!serverInfoDlg.getResult())
 				return;		
@@ -1799,7 +1799,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			String serverPublicKey = serverInfoDlg.getServerPublicKey();
 			ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, serverPublicKey, getTransport());
 			
-			if(!app.isSSLServerAvailable(gateway))
+			if(!getApp().isSSLServerAvailable(gateway))
 			{
 				notifyDlg("ServerSSLNotResponding");
 				return;
@@ -1816,14 +1816,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				if(serverIPAddress.equals(previousServerInfo.getServerName()) &&
 				   serverPublicKey.equals(previousServerInfo.getServerPublicKey()))
 				{
-					app.setServerInfo("","","");
+					getApp().setServerInfo("","","");
 				}
 				return;
 			}
 			getStore().clearOnServerLists();
 			boolean magicAccepted = false;
-			app.setServerInfo(serverIPAddress, serverPublicKey, newServerCompliance);
-			if(app.requestServerUploadRights(""))
+			getApp().setServerInfo(serverIPAddress, serverPublicKey, newServerCompliance);
+			if(getApp().requestServerUploadRights(""))
 				magicAccepted = true;
 			else
 			{
@@ -1832,7 +1832,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 					String magicWord = getStringInput("servermagicword", "", "", "");
 					if(magicWord == null)
 						break;
-					if(app.requestServerUploadRights(magicWord))
+					if(getApp().requestServerUploadRights(magicWord))
 					{
 						magicAccepted = true;
 						break;
@@ -1915,7 +1915,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		try
 		{
-			return app.getServerCompliance(gateway);
+			return getApp().getServerCompliance(gateway);
 		}
 		catch (Exception e)
 		{
@@ -1936,7 +1936,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		try
 		{
-			app.saveConfigInfo();
+			getApp().saveConfigInfo();
 		}
 		catch (MartusApp.SaveConfigInfoException e)
 		{
@@ -1946,13 +1946,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean isServerConfigured()
 	{
-		return app.getConfigInfo().isServerConfigured();
+		return getApp().getConfigInfo().isServerConfigured();
 	}
 
 	public boolean reSignIn()
 	{
 		int result = signIn(UiSigninDlg.SECURITY_VALIDATE);
-		if(!app.isSignedIn())
+		if(!getApp().isSignedIn())
 			exitWithoutSavingState();
 		if(result == UiSigninDlg.SIGN_IN)
 			return true;
@@ -1964,12 +1964,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		if(!reSignIn())
 			return;
-		if(!getAndSaveUserNamePassword(app.getCurrentKeyPairFile()))
+		if(!getAndSaveUserNamePassword(getApp().getCurrentKeyPairFile()))
 			return;
 		try
 		{
-			app.getConfigInfo().setBackedUpKeypairEncrypted(false);
-			app.saveConfigInfo();
+			getApp().getConfigInfo().setBackedUpKeypairEncrypted(false);
+			getApp().saveConfigInfo();
 		}
 		catch (SaveConfigInfoException e)
 		{
@@ -1982,11 +1982,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	boolean getAndSaveUserNamePassword(File keyPairFile) 
 	{
-		String originalUserName = app.getUserName();
+		String originalUserName = getApp().getUserName();
 		UiCreateNewAccountProcess newUserInfo = new UiCreateNewAccountProcess(this, originalUserName);
 		if(!newUserInfo.isDataValid())
 			return false;
-		File accountsHashOfUserNameFile = app.getUserNameHashFile(keyPairFile.getParentFile());
+		File accountsHashOfUserNameFile = getApp().getUserNameHashFile(keyPairFile.getParentFile());
 		accountsHashOfUserNameFile.delete();
 		return saveKeyPairFile(keyPairFile, newUserInfo.getUserName(), newUserInfo.getPassword());
 	}
@@ -1995,8 +1995,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		try
 		{
-			app.writeKeyPairFileWithBackup(keyPairFile, userName, userPassword);
-			app.attemptSignIn(userName, userPassword);
+			getApp().writeKeyPairFileWithBackup(keyPairFile, userName, userPassword);
+			getApp().attemptSignIn(userName, userPassword);
 		}
 		catch(Exception e)
 		{
@@ -2010,8 +2010,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void updateBulletinDetails(File defaultFile)
 	{
-		ConfigInfo info = app.getConfigInfo();
-		File details = app.getBulletinDefaultDetailsFile();
+		ConfigInfo info = getApp().getConfigInfo();
+		File details = getApp().getBulletinDefaultDetailsFile();
 		UiTemplateDlg templateDlg = new UiTemplateDlg(this, info, details);
 		try
 		{
@@ -2032,7 +2032,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			try
 			{
-				app.saveConfigInfo();
+				getApp().saveConfigInfo();
 			}
 			catch (MartusApp.SaveConfigInfoException e)
 			{
@@ -2050,9 +2050,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String dlgTitleTag = "RetrieveMySealedBulletins";
 		String summariesProgressTag = "RetrieveMySealedBulletinSummaries";
 		String retrieverProgressTag = "RetrieveMySealedBulletinProgress";
-		String folderName = app.getNameOfFolderRetrievedSealed();
+		String folderName = getApp().getNameOfFolderRetrievedSealed();
 
-		RetrieveTableModel model = new RetrieveMyTableModel(app, getLocalization());
+		RetrieveTableModel model = new RetrieveMyTableModel(getApp(), getLocalization());
 		retrieveBulletins(model, folderName, dlgTitleTag, summariesProgressTag, retrieverProgressTag);
 	}
 
@@ -2065,9 +2065,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String dlgTitleTag = "RetrieveMyDraftBulletins";
 		String summariesProgressTag = "RetrieveMyDraftBulletinSummaries";
 		String retrieverProgressTag = "RetrieveMyDraftBulletinProgress";
-		String folderName = app.getNameOfFolderRetrievedDraft();
+		String folderName = getApp().getNameOfFolderRetrievedDraft();
 
-		RetrieveTableModel model = new RetrieveMyDraftsTableModel(app, getLocalization());
+		RetrieveTableModel model = new RetrieveMyDraftsTableModel(getApp(), getLocalization());
 		retrieveBulletins(model, folderName, dlgTitleTag, summariesProgressTag, retrieverProgressTag);
 	}
 
@@ -2080,9 +2080,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String dlgTitleTag = "RetrieveHQSealedBulletins";
 		String summariesProgressTag = "RetrieveHQSealedBulletinSummaries";
 		String retrieverProgressTag = "RetrieveHQSealedBulletinProgress";
-		String folderName = app.getNameOfFolderRetrievedFieldOfficeSealed();
+		String folderName = getApp().getNameOfFolderRetrievedFieldOfficeSealed();
 
-		RetrieveTableModel model = new RetrieveHQTableModel(app, getLocalization());
+		RetrieveTableModel model = new RetrieveHQTableModel(getApp(), getLocalization());
 		retrieveBulletins(model, folderName, dlgTitleTag, summariesProgressTag, retrieverProgressTag);
 	}
 
@@ -2095,9 +2095,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String dlgTitleTag = "RetrieveHQDraftBulletins";
 		String summariesProgressTag = "RetrieveHQDraftBulletinSummaries";
 		String retrieverProgressTag = "RetrieveHQDraftBulletinProgress";
-		String folderName = app.getNameOfFolderRetrievedFieldOfficeDraft();
+		String folderName = getApp().getNameOfFolderRetrievedFieldOfficeDraft();
 
-		RetrieveTableModel model = new RetrieveHQDraftsTableModel(app, getLocalization());
+		RetrieveTableModel model = new RetrieveHQDraftsTableModel(getApp(), getLocalization());
 		retrieveBulletins(model, folderName, dlgTitleTag, summariesProgressTag, retrieverProgressTag);
 	}
 
@@ -2106,7 +2106,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String dlgTitleTag = "DeleteMyDraftsFromServer";
 		String summariesProgressTag = "RetrieveMyDraftBulletinSummaries";
 
-		RetrieveTableModel model = new DeleteMyServerDraftsTableModel(app, getLocalization());
+		RetrieveTableModel model = new DeleteMyServerDraftsTableModel(getApp(), getLocalization());
 		deleteServerDrafts(model, dlgTitleTag, summariesProgressTag);
 	}
 
@@ -2126,12 +2126,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(uidList == null)
 				return;
 			
-			app.createOrFindFolder(folderName);
-			app.getStore().saveFolders();
+			getApp().createOrFindFolder(folderName);
+			getApp().getStore().saveFolders();
 			folderTreeContentsHaveChanged();
 
 			RetrieveCommand command = new RetrieveCommand(folderName, uidList);
-			app.startBackgroundRetrieve(command);
+			getApp().startBackgroundRetrieve(command);
 			
 			setStatusMessageTag(STATUS_RETRIEVING);
 			
@@ -2163,7 +2163,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			setWaitingCursor();
 			try
 			{
-				String result = app.deleteServerDraftBulletins(uidList);
+				String result = getApp().deleteServerDraftBulletins(uidList);
 				if(!result.equals(NetworkInterfaceConstants.OK))
 				{
 					notifyDlg("DeleteServerDraftsFailed");
@@ -2213,7 +2213,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private boolean retrieveSummaries(RetrieveTableModel model, String dlgTitleTag, RetrieveSummariesProgressMeter progressHandler) throws ServerErrorException
 	{
-		if(!app.isSSLServerAvailable())
+		if(!getApp().isSSLServerAvailable())
 		{
 			notifyDlg(this, "retrievenoserver", dlgTitleTag);
 			return false;
@@ -2249,7 +2249,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void doBackupKeyPairToSingleEncryptedFile() 
 	{
-		File keypairFile = app.getCurrentKeyPairFile();
+		File keypairFile = getApp().getCurrentKeyPairFile();
 		if(keypairFile.length() > MAX_KEYPAIRFILE_SIZE)
 		{
 			System.out.println("keypair file too large!");
@@ -2277,8 +2277,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(FileVerifier.verifyFiles(keypairFile, newBackupFile))
 			{
 				notifyDlg("OperationCompleted");
-				app.getConfigInfo().setBackedUpKeypairEncrypted(true);
-				app.saveConfigInfo();
+				getApp().getConfigInfo().setBackedUpKeypairEncrypted(true);
+				getApp().saveConfigInfo();
 			}
 			else
 			{
@@ -2332,7 +2332,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		try
 		{
-			app.setAndSaveHQKeys(allHQKeys, defaultHQKeys);
+			getApp().setAndSaveHQKeys(allHQKeys, defaultHQKeys);
 		}
 		catch(MartusApp.SaveConfigInfoException e)
 		{
@@ -2427,14 +2427,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void checkServerStatus()
 	{		
-		if (!app.isServerConfigured())
+		if (!getApp().isServerConfigured())
 		{	
 			setStatusMessageTag(STATUS_SERVER_NOT_CONFIGURED);
 			return;
 		}
 	
 		ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();		
-		if(app.isSSLServerAvailable(gateway))
+		if(getApp().isSSLServerAvailable(gateway))
 			setStatusMessageReady();	
 		else
 			setStatusMessageTag(STATUS_NO_SERVER_AVAILABLE);			
@@ -2501,11 +2501,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			{
 				if(mode == UiSigninDlg.INITIAL)
 				{	
-					app.attemptSignIn(userName, userPassword);
+					getApp().attemptSignIn(userName, userPassword);
 				}
 				else
 				{	
-					app.attemptReSignIn(userName, userPassword);
+					getApp().attemptReSignIn(userName, userPassword);
 				}
 				return UiSigninDlg.SIGN_IN;
 			}
@@ -2524,14 +2524,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private boolean doUploadReminderOnExit()
 	{
 		boolean dontExitApplication = false;
-		if(!app.isSealedOutboxEmpty())
+		if(!getApp().isSealedOutboxEmpty())
 		{
 			if(confirmDlg("UploadReminder"))
-				app.resetLastUploadRemindedTime();
+				getApp().resetLastUploadRemindedTime();
 			else
 				dontExitApplication = true;
 		}
-		else if(!app.isDraftOutboxEmpty())
+		else if(!getApp().isDraftOutboxEmpty())
 		{
 			if(!confirmDlg("DraftUploadReminder"))
 				dontExitApplication = true;
@@ -2603,7 +2603,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		try
 		{
-			Bulletin b = app.createBulletin();
+			Bulletin b = getApp().createBulletin();
 			modifyBulletin(b);
 		}
 		catch(Exception e)
@@ -2736,27 +2736,27 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public boolean getBulletinsAlwaysPrivate()
 	{
-		return app.getConfigInfo().shouldForceBulletinsAllPrivate();
+		return getApp().getConfigInfo().shouldForceBulletinsAllPrivate();
 	}
 
 	public boolean getCheckFieldOfficeBulletins()
 	{
-		return app.getConfigInfo().getCheckForFieldOfficeBulletins();
+		return getApp().getConfigInfo().getCheckForFieldOfficeBulletins();
 	}
 
     public boolean getUseZawgyiFont()
 	{
-		return app.getConfigInfo().getUseZawgyiFont();
+		return getApp().getConfigInfo().getUseZawgyiFont();
 	}
 
 	public boolean getDoZawgyiConversion()
 	{
-	 	return app.getConfigInfo().getDoZawgyiConversion();
+	 	return getApp().getConfigInfo().getDoZawgyiConversion();
 	}
 	
 	public boolean getUseInternalTor()
 	{
-		return app.getConfigInfo().useInternalTor();
+		return getApp().getConfigInfo().useInternalTor();
 	}
 
 	public boolean isAnyBulletinSelected()
@@ -3024,6 +3024,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	}
 
 
+	private void setApp(MartusApp app)
+	{
+		this.app = app;
+	}
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
