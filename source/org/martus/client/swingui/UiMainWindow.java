@@ -909,13 +909,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		Bulletin b = getBulletinsTable().getSingleSelectedBulletin();
 		getMainPane().updateEnabledStatuses();
-		preview.setCurrentBulletin(b);
+		getPreviewPane().setCurrentBulletin(b);
 	}
 
 	public void bulletinContentsHaveChanged(Bulletin b)
 	{
 		getBulletinsTable().bulletinContentsHaveChanged(b);
-		preview.bulletinContentsHaveChanged(b);
+		getPreviewPane().bulletinContentsHaveChanged(b);
 	}
 	
 	public void allFolderContentsHaveChanged()
@@ -1300,7 +1300,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void forceRebuildOfPreview()
 	{
-		preview.setCurrentBulletin(null);
+		getPreviewPane().setCurrentBulletin(null);
 		getBulletinsTable().currentFolderContentsHaveChanged();
 		getBulletinsTable().selectFirstBulletin();
 	}
@@ -1614,7 +1614,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public int getPreviewWidth()
 	{
-		return preview.getView().getWidth();
+		return getPreviewPane().getView().getWidth();
 	}
 
 	public void doPreferences()
@@ -2245,14 +2245,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		updateTitle();
 		MartusLogger.logBeginProcess("Initializing views");
 
-		preview = new UiBulletinPreviewPane(this);
+		setPreviewPane(new UiBulletinPreviewPane(this));
 		setBulletinsTable(new UiBulletinTablePane(this));
 		folderTreePane = new UiFolderTreePane(this);
 
 		mainPane = new UiMainPane(this);
 		setContentPane(mainPane);
 
-		previewSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, getBulletinsTable(), preview);
+		previewSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, getBulletinsTable(), getPreviewPane());
 		previewSplitter.setDividerLocation(getUiState().getCurrentPreviewSplitterPosition());
 
 		if(LanguageOptions.isRightToLeftLanguage())
@@ -2318,7 +2318,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(previousLocation != location)
 			{
 				previousLocation = location;
-				preview.repaint();
+				getPreviewPane().repaint();
 			}
 		}
 		int previousLocation = -1;
@@ -2956,6 +2956,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		this.table = table;
 	}
+	UiBulletinPreviewPane getPreviewPane()
+	{
+		return preview;
+	}
+
+	void setPreviewPane(UiBulletinPreviewPane preview)
+	{
+		this.preview = preview;
+	}
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
@@ -2974,7 +2983,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private UiSession session;
 
 	private UiMainPane mainPane;
-	UiBulletinPreviewPane preview;
+	private UiBulletinPreviewPane preview;
 	private JSplitPane previewSplitter;
 	private FolderSplitPane folderSplitter;
 	private UiBulletinTablePane table;
