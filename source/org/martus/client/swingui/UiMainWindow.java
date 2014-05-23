@@ -1250,7 +1250,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			getUiState().setCurrentBulletinPosition(getBulletinsTable().getCurrentBulletinIndex());
 		}
 		getUiState().setCurrentPreviewSplitterPosition(getPreviewSplitter().getDividerLocation());
-		getUiState().setCurrentFolderSplitterPosition(folderSplitter.getDividerLocation());
+		getUiState().setCurrentFolderSplitterPosition(getFolderSplitter().getDividerLocation());
 		getUiState().setCurrentAppDimension(getSize());
 		getUiState().setCurrentAppPosition(getLocation());
 		boolean isMaximized = getExtendedState()==MAXIMIZED_BOTH;
@@ -2254,9 +2254,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getPreviewSplitter().setDividerLocation(getUiState().getCurrentPreviewSplitterPosition());
 
 		if(LanguageOptions.isRightToLeftLanguage())
-			folderSplitter = new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, getPreviewSplitter(), folderTreePane);
+			setFolderSplitter(new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, getPreviewSplitter(), folderTreePane));
 		else
-			folderSplitter = new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, folderTreePane, getPreviewSplitter());
+			setFolderSplitter(new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, folderTreePane, getPreviewSplitter()));
 
 		Dimension screenSize = Utilities.getViewableScreenSize();
 		Dimension appDimension = getUiState().getCurrentAppDimension();
@@ -2278,9 +2278,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 
 		getUiState().setCurrentAppDimension(getSize());
-		folderSplitter.setInitialDividerLocation(getUiState().getCurrentFolderSplitterPosition());
+		getFolderSplitter().setInitialDividerLocation(getUiState().getCurrentFolderSplitterPosition());
 
-		mainPane.add(folderSplitter);
+		mainPane.add(getFolderSplitter());
 		getTransport().setProgressMeter(getStatusBar().getTorProgressMeter());
 		// NOTE: re-start Tor here in case it was turned on in the wizard
 		getApp().startOrStopTorAsRequested();
@@ -2855,7 +2855,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public int getPreviewTextFieldColumns()
 	{
-		int dividerLocation = folderSplitter.getDividerLocation();
+		int dividerLocation = getFolderSplitter().getDividerLocation();
 		int previewWindowWidth = Utilities.getViewableScreenSize().width - dividerLocation;
 		if(LanguageOptions.isRightToLeftLanguage())
 			previewWindowWidth = dividerLocation;
@@ -2972,6 +2972,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return getMainPane().getStatusBar();
 	}
 
+	private FolderSplitPane getFolderSplitter()
+	{
+		return folderSplitter;
+	}
+
+	private void setFolderSplitter(FolderSplitPane folderSplitter)
+	{
+		this.folderSplitter = folderSplitter;
+	}
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
