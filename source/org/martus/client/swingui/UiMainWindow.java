@@ -2289,35 +2289,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return thread.getBulletins();
 	}
 	
-	static class BulletinGetterThread extends WorkerThread
-	{
-		public BulletinGetterThread(ClientBulletinStore storeToUse, UniversalId[] uidsToGet)
-		{
-			store = storeToUse;
-			uids = uidsToGet;
-			bulletins = new Vector();
-		}
-		
-		public Vector getBulletins()
-		{
-			return bulletins;
-		}
-
-		public void doTheWorkWithNO_SWING_CALLS() throws Exception
-		{
-			for (int i = 0; i < uids.length; i++)
-			{
-				UniversalId uid = uids[i];
-				Bulletin b = store.getBulletinRevision(uid);
-				bulletins.add(b);
-			}
-		}
-	
-		private ClientBulletinStore store;
-		private UniversalId[] uids;
-		private Vector bulletins;
-	}
-	
 	public boolean getBulletinsAlwaysPrivate()
 	{
 		return getApp().getConfigInfo().shouldForceBulletinsAllPrivate();
