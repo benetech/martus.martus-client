@@ -1702,27 +1702,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	}
 
 
-	public void doChangeUserNamePassword()
-	{
-		if(!reSignIn())
-			return;
-		if(!getAndSaveUserNamePassword(getApp().getCurrentKeyPairFile()))
-			return;
-		try
-		{
-			getApp().getConfigInfo().setBackedUpKeypairEncrypted(false);
-			getApp().saveConfigInfo();
-		}
-		catch (SaveConfigInfoException e)
-		{
-			notifyDlg("ErrorSavingConfig");
-			e.printStackTrace();
-		}
-		notifyDlg("RewriteKeyPairSaved");
-		askToBackupKeyPairEncryptedSingleFile();
-	}
-
-	boolean getAndSaveUserNamePassword(File keyPairFile) 
+	public boolean getAndSaveUserNamePassword(File keyPairFile) 
 	{
 		String originalUserName = getApp().getUserName();
 		UiCreateNewAccountProcess newUserInfo = new UiCreateNewAccountProcess(this, originalUserName);
