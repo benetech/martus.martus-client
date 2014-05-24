@@ -2398,7 +2398,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return FileDialogHelpers.doFileSaveDialog(getCurrentActiveFrame(), title, defaultDirectory, defaultFilename, filter, getLocalization());
 	}
 
-	private Map<String, File> getMemorizedFileOpenDirectories()
+	public static Map<String, File> getMemorizedFileOpenDirectories()
 	{
 		if(memorizedFileOpenDirectories == null)
 			memorizedFileOpenDirectories = new HashMap<String, File>();
