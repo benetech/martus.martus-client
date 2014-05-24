@@ -316,7 +316,7 @@ public class ActionMenuCharts extends UiMenuAction
 	{
 		String defaultFilename = getLocalization().getFieldLabel("DefaultPrintChartToDiskFileName");
 		FormatFilter jpegFilter = new JPEGFilter();
-		File destination = mainWindow.doFileSaveDialog("PrintToFile", defaultFilename, jpegFilter);
+		File destination = mainWindow.showFileSaveDialog("PrintToFile", defaultFilename, jpegFilter);
 		return destination;
 	}
 	

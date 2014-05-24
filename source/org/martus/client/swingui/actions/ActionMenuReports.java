@@ -216,7 +216,7 @@ public class ActionMenuReports extends ActionPrint
 	File askForReportFileToSaveTo()
 	{
 		FormatFilter filter = new ReportFormatFilter(getLocalization());
-		return mainWindow.doFileSaveDialog("SaveReportFormat", filter);
+		return mainWindow.showFileSaveDialog("SaveReportFormat", filter);
 	}
 
 	void runReport(ReportAnswers answers) throws Exception
