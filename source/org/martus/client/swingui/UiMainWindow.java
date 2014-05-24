@@ -84,7 +84,6 @@ import org.martus.client.swingui.bulletincomponent.UiBulletinPreviewPane;
 import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
 import org.martus.client.swingui.dialogs.UiAboutDlg;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
-import org.martus.client.swingui.dialogs.UiConfigServerDlg;
 import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
 import org.martus.client.swingui.dialogs.UiFancySearchDlg;
 import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
@@ -1493,99 +1492,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	}
 
 	
-	public void doConfigureServer()
-	{
-		offerToCancelRetrieveInProgress();
-		if(isRetrieveInProgress())
-			return;
-		
-		
-		if(!reSignIn())
-			return;
-		inConfigServer = true;
-		try
-		{
-			clearStatusMessage();
-			ConfigInfo previousServerInfo = getApp().getConfigInfo();
-			UiConfigServerDlg serverInfoDlg = new UiConfigServerDlg(this, previousServerInfo);
-			if(!serverInfoDlg.getResult())
-				return;		
-			String serverIPAddress = serverInfoDlg.getServerIPAddress();
-			String serverPublicKey = serverInfoDlg.getServerPublicKey();
-			ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, serverPublicKey, getTransport());
-			
-			if(!getApp().isSSLServerAvailable(gateway))
-			{
-				notifyDlg("ServerSSLNotResponding");
-				return;
-			}
-		
-			String newServerCompliance = getServerCompliance(gateway);
-			if(!confirmServerCompliance("ServerComplianceDescription", newServerCompliance))
-			{
-				//TODO:The following line shouldn't be necessary but without it, the trustmanager 
-				//will reject the old server, we don't know why.
-				ClientSideNetworkGateway.buildGateway(previousServerInfo.getServerName(), previousServerInfo.getServerPublicKey(), getTransport());
-				
-				notifyDlg("UserRejectedServerCompliance");
-				if(serverIPAddress.equals(previousServerInfo.getServerName()) &&
-				   serverPublicKey.equals(previousServerInfo.getServerPublicKey()))
-				{
-					getApp().setServerInfo("","","");
-				}
-				return;
-			}
-			getStore().clearOnServerLists();
-			boolean magicAccepted = false;
-			getApp().setServerInfo(serverIPAddress, serverPublicKey, newServerCompliance);
-			if(getApp().requestServerUploadRights(""))
-				magicAccepted = true;
-			else
-			{
-				while (true)
-				{
-					String magicWord = getStringInput("servermagicword", "", "", "");
-					if(magicWord == null)
-						break;
-					if(getApp().requestServerUploadRights(magicWord))
-					{
-						magicAccepted = true;
-						break;
-					}
-					notifyDlg("magicwordrejected");
-				}
-			}
-		
-			String title = getLocalization().getWindowTitle("ServerSelectionResults");
-			String serverSelected = getLocalization().getFieldLabel("ServerSelectionResults") + serverIPAddress;
-			String uploadGranted = "";
-			if(magicAccepted)
-				uploadGranted = getLocalization().getFieldLabel("ServerAcceptsUploads");
-			else
-				uploadGranted = getLocalization().getFieldLabel("ServerDeclinesUploads");
-		
-			String ok = getLocalization().getButtonLabel("ok");
-			String[] contents = {serverSelected, uploadGranted};
-			String[] buttons = {ok};
-		
-			new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons);
-			
-			forceRecheckOfUidsOnServer();
-			getStore().clearOnServerLists();
-			repaint();
-			setStatusMessageReady();
-		}
-		catch(SaveConfigInfoException e)
-		{
-			e.printStackTrace();
-			notifyDlg("ErrorSavingConfig");
-		}
-		finally
-		{
-			inConfigServer = false;
-		}
-	}
-
 	public void forceRecheckOfUidsOnServer()
 	{
 		if(backgroundUploadTimerTask != null)
@@ -1626,7 +1532,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return getApp().getCurrentRetrieveCommand().getRemainingToRetrieveCount() > 0;
 	}
 	
-	private String getServerCompliance(ClientSideNetworkGateway gateway)
+	public String getServerCompliance(ClientSideNetworkGateway gateway)
 	{
 		try
 		{
@@ -1638,7 +1544,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	boolean confirmServerCompliance(String descriptionTag, String newServerCompliance)
+	public boolean confirmServerCompliance(String descriptionTag, String newServerCompliance)
 	{
 		if(newServerCompliance.equals(""))
 			return confirmDlg("ServerComplianceFailed");
@@ -2605,7 +2511,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private JFrame currentActiveFrame;
 	private JDialog currentActiveDialog;
 	
-	boolean inConfigServer;
+	public boolean inConfigServer;
 	boolean preparingToExitMartus;
 	private boolean createdNewAccount;
 	private boolean justRecovered;
