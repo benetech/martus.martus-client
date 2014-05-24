@@ -121,7 +121,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 	File askForDestinationFile()
 	{
 		FormatFilter filter = new BulletinXmlFileFilter(mainWindow.getLocalization());
-		return mainWindow.doFileSaveDialog("ExportBulletins", defaultFileName, filter);
+		return mainWindow.showFileSaveDialog("ExportBulletins", defaultFileName, filter);
 	}
 
 	boolean userWantsToExportPrivate()

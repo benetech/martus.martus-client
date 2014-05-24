@@ -45,7 +45,7 @@ class AddHandler implements ActionListener
 	
 	public void actionPerformed(ActionEvent ae)
 	{
-		File file = mainWindow.doFileOpenDialogWithDirectoryMemory("AddAttachment", FileDialogHelpers.NO_FILTER);
+		File file = mainWindow.showFileOpenDialogWithDirectoryMemory("AddAttachment", FileDialogHelpers.NO_FILTER);
 		if(file == null)
 			return;
 		

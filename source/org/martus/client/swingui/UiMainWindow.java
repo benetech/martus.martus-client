@@ -1886,7 +1886,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		
 		String defaultBackupFilename = "MartusKeyPairBackup.dat";
-		File newBackupFile = doFileSaveDialog("SaveKeyPair", defaultBackupFilename, new KeyPairFormatFilter());
+		File newBackupFile = showFileSaveDialog("SaveKeyPair", defaultBackupFilename, new KeyPairFormatFilter());
 		if(newBackupFile == null)
 			return;
 
@@ -2504,21 +2504,21 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return getTextFieldColumns(Utilities.getViewableScreenSize().width);
 	}
 	
-	public File doFileOpenDialog(String fileDialogCategory, FileFilter filter)
+	public File showFileOpenDialog(String fileDialogCategory, FileFilter filter)
 	{
-		return internalDoFileOpenDialog(fileDialogCategory, null, filter);
+		return internalShowFileOpenDialog(fileDialogCategory, null, filter);
 	}
 	
-	public File doFileOpenDialogWithDirectoryMemory(String fileDialogCategory, FileFilter filter)
+	public File showFileOpenDialogWithDirectoryMemory(String fileDialogCategory, FileFilter filter)
 	{
 		File directory = getMemorizedFileOpenDirectories().get(fileDialogCategory);
-		File file = internalDoFileOpenDialog(fileDialogCategory, directory, filter);
+		File file = internalShowFileOpenDialog(fileDialogCategory, directory, filter);
 		if(file != null)
 			getMemorizedFileOpenDirectories().put(fileDialogCategory, file.getParentFile());
 		return file;
 	}
 	
-	private File internalDoFileOpenDialog(String fileDialogCategory, File directory, FileFilter filter)
+	private File internalShowFileOpenDialog(String fileDialogCategory, File directory, FileFilter filter)
 	{
 		String title = getLocalization().getWindowTitle("FileDialog" + fileDialogCategory);
 		String okButtonLabel = getLocalization().getButtonLabel("FileDialogOk" + fileDialogCategory);
@@ -2527,26 +2527,26 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return FileDialogHelpers.doFileOpenDialog(getCurrentActiveFrame(), title, okButtonLabel, directory, filter);
 	}
 	
-	public File doFileSaveDialogNoFilterWithDirectoryMemory(String fileDialogCategory, String defaultFilename)
+	public File showFileSaveDialogNoFilterWithDirectoryMemory(String fileDialogCategory, String defaultFilename)
 	{
 		File directory = getMemorizedFileOpenDirectories().get(fileDialogCategory);
-		File file = internalDoFileSaveDialog(fileDialogCategory, directory, defaultFilename, null);
+		File file = internalShowFileSaveDialog(fileDialogCategory, directory, defaultFilename, null);
 		if(file != null)
 			getMemorizedFileOpenDirectories().put(fileDialogCategory, file.getParentFile());
 		return file;
 	}
 
-	public File doFileSaveDialog(String fileDialogCategory, FormatFilter filter)
+	public File showFileSaveDialog(String fileDialogCategory, FormatFilter filter)
 	{
-		return doFileSaveDialog(fileDialogCategory, "", filter);
+		return showFileSaveDialog(fileDialogCategory, "", filter);
 	}
 	
-	public File doFileSaveDialog(String fileDialogCategory, String defaultFilename, FormatFilter filter)
+	public File showFileSaveDialog(String fileDialogCategory, String defaultFilename, FormatFilter filter)
 	{
-		return internalDoFileSaveDialog(fileDialogCategory, null, defaultFilename, filter);
+		return internalShowFileSaveDialog(fileDialogCategory, null, defaultFilename, filter);
 	}
 	
-	private File internalDoFileSaveDialog(String fileDialogCategory, File defaultDirectory, String defaultFilename, FormatFilter filter)
+	private File internalShowFileSaveDialog(String fileDialogCategory, File defaultDirectory, String defaultFilename, FormatFilter filter)
 	{
 		String title = getLocalization().getWindowTitle("FileDialog" + fileDialogCategory);
 		if(defaultDirectory == null)
