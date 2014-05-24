@@ -28,6 +28,7 @@ package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
 
+import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 
 public class ActionMenuChangeUserNamePassword extends UiMenuAction
@@ -39,7 +40,28 @@ public class ActionMenuChangeUserNamePassword extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doChangeUserNamePassword();
+		doChangeUserNamePassword();
+	}
+
+	public void doChangeUserNamePassword()
+	{
+		if(!getMainWindow().reSignIn())
+			return;
+		
+		if(!getMainWindow().getAndSaveUserNamePassword(getApp().getCurrentKeyPairFile()))
+			return;
+		try
+		{
+			getApp().getConfigInfo().setBackedUpKeypairEncrypted(false);
+			getApp().saveConfigInfo();
+		}
+		catch (SaveConfigInfoException e)
+		{
+			getMainWindow().notifyDlg("ErrorSavingConfig");
+			e.printStackTrace();
+		}
+		getMainWindow().notifyDlg("RewriteKeyPairSaved");
+		getMainWindow().askToBackupKeyPairEncryptedSingleFile();
 	}
 
 }
