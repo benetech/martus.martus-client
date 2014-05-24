@@ -26,6 +26,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.martus.client.core.FontSetter;
 import org.martus.client.core.MartusApp;
@@ -139,11 +141,19 @@ public class UiSession
 		return uiState;
 	}
 
+	public static Map<String, File> getMemorizedFileOpenDirectories()
+	{
+		if(memorizedFileOpenDirectories == null)
+			memorizedFileOpenDirectories = new HashMap<String, File>();
+		return memorizedFileOpenDirectories;
+	}
+
 	private MartusLocalization localization;
 	private MartusApp app;
 	private CurrentUiState uiState;
 	public static boolean isAlphaTester;
 	
 	public static boolean defaultFoldersUnsorted;
+	private static Map<String, File> memorizedFileOpenDirectories;
 
 }
