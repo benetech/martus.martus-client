@@ -2117,7 +2117,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	private boolean doUploadReminderOnExit()
+	private boolean showRelevantUploadReminder()
 	{
 		boolean dontExitApplication = false;
 		if(!getApp().isSealedOutboxEmpty())
@@ -2139,7 +2139,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		if(createdNewAccount)
 			askAndBackupKeypairIfRequired();
-		if(doUploadReminderOnExit())
+		if(showRelevantUploadReminder())
 			return;
 		
 		try
