@@ -91,7 +91,6 @@ import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
 import org.martus.client.swingui.dialogs.UiOnlineHelpDlg;
 import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
-import org.martus.client.swingui.dialogs.UiRemoveServerDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesRetrieveDlg;
 import org.martus.client.swingui.dialogs.UiShowScrollableTextDlg;
@@ -1491,32 +1490,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getTransport().updateStatus();
 		backgroundUploadTimerTask.setWaitingForServer();
 		setVisible(true);
-	}
-
-	public void doRemoveServer()
-	{
-		offerToCancelRetrieveInProgress();
-		if(isRetrieveInProgress())
-			return;
-		
-		if(!reSignIn())
-			return;
-		
-		ConfigInfo info = getApp().getConfigInfo();
-		UiRemoveServerDlg removeDlg = new UiRemoveServerDlg(this, info);
-		if (!removeDlg.isYesButtonPressed())
-			return;
-
-		try
-		{
-			getApp().setServerInfo("","","");
-			clearStatusMessage();
-			repaint();
-		}
-		catch(Exception e)
-		{
-			notifyDlg("ErrorSavingConfig");
-		}
 	}
 
 	
