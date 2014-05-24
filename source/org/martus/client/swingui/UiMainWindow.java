@@ -2355,10 +2355,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public File showFileOpenDialogWithDirectoryMemory(String fileDialogCategory, FileFilter filter)
 	{
-		File directory = getMemorizedFileOpenDirectories().get(fileDialogCategory);
+		File directory = UiSession.getMemorizedFileOpenDirectories().get(fileDialogCategory);
 		File file = internalShowFileOpenDialog(fileDialogCategory, directory, filter);
 		if(file != null)
-			getMemorizedFileOpenDirectories().put(fileDialogCategory, file.getParentFile());
+			UiSession.getMemorizedFileOpenDirectories().put(fileDialogCategory, file.getParentFile());
 		return file;
 	}
 	
@@ -2373,10 +2373,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public File showFileSaveDialogNoFilterWithDirectoryMemory(String fileDialogCategory, String defaultFilename)
 	{
-		File directory = getMemorizedFileOpenDirectories().get(fileDialogCategory);
+		File directory = UiSession.getMemorizedFileOpenDirectories().get(fileDialogCategory);
 		File file = internalShowFileSaveDialog(fileDialogCategory, directory, defaultFilename, null);
 		if(file != null)
-			getMemorizedFileOpenDirectories().put(fileDialogCategory, file.getParentFile());
+			UiSession.getMemorizedFileOpenDirectories().put(fileDialogCategory, file.getParentFile());
 		return file;
 	}
 
@@ -2396,13 +2396,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(defaultDirectory == null)
 			defaultDirectory = getApp().getCurrentAccountDirectory();
 		return FileDialogHelpers.doFileSaveDialog(getCurrentActiveFrame(), title, defaultDirectory, defaultFilename, filter, getLocalization());
-	}
-
-	public static Map<String, File> getMemorizedFileOpenDirectories()
-	{
-		if(memorizedFileOpenDirectories == null)
-			memorizedFileOpenDirectories = new HashMap<String, File>();
-		return memorizedFileOpenDirectories;
 	}
 
 	void setLocalization(MartusLocalization localization)
@@ -2508,6 +2501,5 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private Stack cursorStack;
 
 	public static int timeoutInXSeconds;
-	private static Map<String, File> memorizedFileOpenDirectories;
 
 }
