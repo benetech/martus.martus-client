@@ -1293,21 +1293,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getBulletinsTable().selectFirstBulletin();
 	}
 	
-	public void doCutBulletins()
-	{
-		getBulletinsTable().doCutBulletins();
-	}
-
-	public void doCopyBulletins()
-	{
-		getBulletinsTable().doCopyBulletins();
-	}
-
-	public void doPasteBulletins()
-	{
-		getBulletinsTable().doPasteBulletins();
-	}
-	
 	public void doBackgroundWork(WorkerProgressThread worker, UiProgressWithCancelDlg progressDialog) throws Exception
 	{
 		setWaitingCursor();
