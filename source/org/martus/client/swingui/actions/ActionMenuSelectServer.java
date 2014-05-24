@@ -28,7 +28,12 @@ package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
 
+import org.martus.client.core.ConfigInfo;
+import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.dialogs.UiConfigServerDlg;
+import org.martus.clientside.ClientSideNetworkGateway;
+import org.martus.swing.UiNotifyDlg;
 
 public class ActionMenuSelectServer extends UiMenuAction
 {
@@ -39,7 +44,100 @@ public class ActionMenuSelectServer extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doConfigureServer();
+		doConfigureServer();
+	}
+
+	public void doConfigureServer()
+	{
+		getMainWindow().offerToCancelRetrieveInProgress();
+		if(getMainWindow().isRetrieveInProgress())
+			return;
+		
+		if(!getMainWindow().reSignIn())
+			return;
+		
+		getMainWindow().inConfigServer = true;
+		try
+		{
+			getMainWindow().clearStatusMessage();
+			ConfigInfo previousServerInfo = getApp().getConfigInfo();
+			UiConfigServerDlg serverInfoDlg = new UiConfigServerDlg(getMainWindow(), previousServerInfo);
+			if(!serverInfoDlg.getResult())
+				return;		
+			String serverIPAddress = serverInfoDlg.getServerIPAddress();
+			String serverPublicKey = serverInfoDlg.getServerPublicKey();
+			ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, serverPublicKey, getApp().getTransport());
+			
+			if(!getApp().isSSLServerAvailable(gateway))
+			{
+				getMainWindow().notifyDlg("ServerSSLNotResponding");
+				return;
+			}
+		
+			String newServerCompliance = getMainWindow().getServerCompliance(gateway);
+			if(!getMainWindow().confirmServerCompliance("ServerComplianceDescription", newServerCompliance))
+			{
+				//TODO:The following line shouldn't be necessary but without it, the trustmanager 
+				//will reject the old server, we don't know why.
+				ClientSideNetworkGateway.buildGateway(previousServerInfo.getServerName(), previousServerInfo.getServerPublicKey(), getApp().getTransport());
+				
+				getMainWindow().notifyDlg("UserRejectedServerCompliance");
+				if(serverIPAddress.equals(previousServerInfo.getServerName()) &&
+				   serverPublicKey.equals(previousServerInfo.getServerPublicKey()))
+				{
+					getApp().setServerInfo("","","");
+				}
+				return;
+			}
+			getStore().clearOnServerLists();
+			boolean magicAccepted = false;
+			getApp().setServerInfo(serverIPAddress, serverPublicKey, newServerCompliance);
+			if(getApp().requestServerUploadRights(""))
+				magicAccepted = true;
+			else
+			{
+				while (true)
+				{
+					String magicWord = getMainWindow().getStringInput("servermagicword", "", "", "");
+					if(magicWord == null)
+						break;
+					if(getApp().requestServerUploadRights(magicWord))
+					{
+						magicAccepted = true;
+						break;
+					}
+					getMainWindow().notifyDlg("magicwordrejected");
+				}
+			}
+		
+			String title = getLocalization().getWindowTitle("ServerSelectionResults");
+			String serverSelected = getLocalization().getFieldLabel("ServerSelectionResults") + serverIPAddress;
+			String uploadGranted = "";
+			if(magicAccepted)
+				uploadGranted = getLocalization().getFieldLabel("ServerAcceptsUploads");
+			else
+				uploadGranted = getLocalization().getFieldLabel("ServerDeclinesUploads");
+		
+			String ok = getLocalization().getButtonLabel("ok");
+			String[] contents = {serverSelected, uploadGranted};
+			String[] buttons = {ok};
+		
+			new UiNotifyDlg(getMainWindow().getCurrentActiveFrame(), title, contents, buttons);
+			
+			getMainWindow().forceRecheckOfUidsOnServer();
+			getStore().clearOnServerLists();
+			getMainWindow().repaint();
+			getMainWindow().setStatusMessageReady();
+		}
+		catch(SaveConfigInfoException e)
+		{
+			e.printStackTrace();
+			getMainWindow().notifyDlg("ErrorSavingConfig");
+		}
+		finally
+		{
+			getMainWindow().inConfigServer = false;
+		}
 	}
 
 }
