@@ -86,7 +86,6 @@ import org.martus.client.swingui.dialogs.UiAboutDlg;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.dialogs.UiConfigServerDlg;
 import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
-import org.martus.client.swingui.dialogs.UiExportBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiFancySearchDlg;
 import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
@@ -116,7 +115,6 @@ import org.martus.clientside.UiUtilities;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusLogger;
-import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.MiniLocalization;
@@ -2239,27 +2237,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		setEnabled(true);
 		setVisible(true);
 		setCurrentActiveFrame(this);
-	}
-
-	public void doExportFolder()
-	{
-	
-		BulletinFolder selectedFolder = getSelectedFolder();
-		int bulletinCount = selectedFolder.getBulletinCount();
-		if(bulletinCount == 0)
-		{
-			notifyDlg("ExportFolderEmpty");
-			return;
-		}
-		Vector bulletins = new Vector();
-		for (int i = 0; i < bulletinCount; ++i)
-		{
-			bulletins.add(selectedFolder.getBulletinSorted(i));
-		}
-		String defaultFileName = MartusUtilities.createValidFileName(selectedFolder.getLocalizedName(getLocalization()));
-		if(defaultFileName.length() == 0)
-			defaultFileName = getLocalization().getFieldLabel("ExportedBulletins");
-		new UiExportBulletinsDlg(this, bulletins, defaultFileName);
 	}
 
 	public BulletinFolder getSelectedFolder()
