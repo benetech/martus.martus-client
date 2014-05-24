@@ -2270,25 +2270,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return getFolderTreePane().getSelectedFolder();
 	}
 
-	public void doExportBulletins()
-	{
-		try
-		{
-			Vector bulletins = getSelectedBulletins("ExportZeroBulletins");
-			if(bulletins == null)
-				return;
-			String defaultFileName = getLocalization().getFieldLabel("ExportedBulletins");
-			if(bulletins.size()==1)
-				defaultFileName = ((Bulletin)bulletins.get(0)).toFileName();
-			new UiExportBulletinsDlg(this, bulletins, defaultFileName);
-		} 
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-			unexpectedErrorDlg();
-		}
-	}
-	
 	
 	public Vector getSelectedBulletins(String tagZeroBulletinsSelected) throws Exception
 	{
