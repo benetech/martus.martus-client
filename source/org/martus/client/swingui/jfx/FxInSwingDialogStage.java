@@ -50,8 +50,13 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 	
 	public void setDialog(JDialog dialogToUse)
 	{
-		window = dialogToUse;
+		setWindow(dialogToUse);
 		getDialog().addWindowListener(createWindowCloseHandler());
+	}
+
+	public void setWindow(Window dialogToUse)
+	{
+		window = dialogToUse;
 	}
 
 	public WindowListener createWindowCloseHandler()
