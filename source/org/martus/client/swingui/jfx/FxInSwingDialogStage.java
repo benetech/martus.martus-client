@@ -63,10 +63,6 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 		return (JDialog) getWindow();
 	}
 
-	public void handleNavigationEvent(String navigationNext)
-	{
-	}
-
 	public UiMainWindow getMainWindow()
 	{
 		return mainWindow;
