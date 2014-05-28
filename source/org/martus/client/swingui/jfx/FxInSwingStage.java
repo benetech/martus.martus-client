@@ -30,11 +30,23 @@ import java.awt.Window;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 
+import org.martus.client.swingui.UiMainWindow;
+
 public abstract class FxInSwingStage extends JFXPanel
 {
+	public FxInSwingStage(UiMainWindow mainWindowToUse)
+	{
+		mainWindow = mainWindowToUse;
+	}
+
 	abstract protected FxScene createScene() throws Exception;
 	abstract public void showCurrentScene() throws Exception;
 
+	public UiMainWindow getMainWindow()
+	{
+		return mainWindow;
+	}
+	
 	public FxScene getFxScene()
 	{
 		return scene;
@@ -65,6 +77,7 @@ public abstract class FxInSwingStage extends JFXPanel
 		return window;
 	}
 
+	private UiMainWindow mainWindow;
 	private FxScene scene;
 	private Window window;
 }
