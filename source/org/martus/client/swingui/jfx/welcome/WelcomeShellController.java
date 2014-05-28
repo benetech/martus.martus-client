@@ -64,7 +64,7 @@ public class WelcomeShellController extends ShellController
 	@FXML
 	protected void onNext(ActionEvent event)
 	{
-		getStage().close();
+		getFxInSwingDialogStage().close();
 	}
 	
 	@FXML

@@ -51,7 +51,7 @@ abstract public class FxWizardShellController extends ShellController implements
 	
 	private FxWizardStage getWizardStage()
 	{
-		return (FxWizardStage) getStage();
+		return (FxWizardStage) getFxInSwingDialogStage();
 	}
 
 	@FXML

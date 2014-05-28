@@ -89,7 +89,7 @@ public class ContactsShellController extends ShellController implements WizardNa
 	protected void onClose(ActionEvent event) throws Exception
 	{
 		getContentNavigationHandler().nextWasPressed();
-		getStage().close();
+		getFxInSwingDialogStage().close();
 	}
 	
 	@FXML

@@ -53,14 +53,14 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 		stage = stageToUse;
 	}
 
-	public FxInSwingDialogStage getStage()
+	public FxInSwingDialogStage getFxInSwingDialogStage()
 	{
 		return stage;
 	}
 
 	public FxScene getScene()
 	{
-		return getStage().getFxScene();
+		return getFxInSwingDialogStage().getFxScene();
 	}
 	
 	protected void showModalPopupStage(Stage popupStage)
@@ -102,7 +102,7 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 
 	public Window getWindow()
 	{
-		return getStage().getDialog();
+		return getFxInSwingDialogStage().getDialog();
 	}
 
 	public void installGlassPane(Component glassPane)
