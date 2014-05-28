@@ -36,13 +36,14 @@ import javax.swing.JSplitPane;
 import org.martus.client.swingui.bulletincomponent.UiBulletinPreviewPane;
 import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
+import org.martus.clientside.CurrentUiState;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiPopupMenu;
 import org.martus.util.language.LanguageOptions;
 
 public class UiMainPane extends JPanel
 {
-	public UiMainPane(UiMainWindow mainWindowToUse)
+	public UiMainPane(UiMainWindow mainWindowToUse, CurrentUiState currentUiState)
 	{
 		setLayout(new BorderLayout());
 		setComponentOrientation(UiLanguageDirection.getComponentOrientation());
@@ -63,6 +64,9 @@ public class UiMainPane extends JPanel
 		add(createTopStuff(mainWindowToUse), BorderLayout.NORTH);
 		add(getFolderSplitter(), BorderLayout.CENTER);
 		add(getStatusBar(), BorderLayout.SOUTH ); 
+		
+		getPreviewSplitter().setDividerLocation(currentUiState.getCurrentPreviewSplitterPosition());
+		getFolderSplitter().setInitialDividerLocation(currentUiState.getCurrentFolderSplitterPosition());
 	}
 
 	private JComponent createTopStuff(UiMainWindow mainWindowToUse)
