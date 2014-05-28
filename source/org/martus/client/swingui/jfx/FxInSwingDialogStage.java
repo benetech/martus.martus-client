@@ -50,7 +50,7 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 	
 	public void setDialog(JDialog dialogToUse)
 	{
-		dialog = dialogToUse;
+		window = dialogToUse;
 		getDialog().addWindowListener(createWindowCloseHandler());
 	}
 
@@ -66,7 +66,7 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 
 	public Window getWindow()
 	{
-		return dialog;
+		return window;
 	}
 	
 	public void handleNavigationEvent(String navigationNext)
@@ -147,7 +147,7 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 		}
 	}
 
-	private Window dialog;
+	private Window window;
 	private UiMainWindow mainWindow;
 	private ShellController shellController;
 	private ContentController currentContentController;
