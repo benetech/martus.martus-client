@@ -102,7 +102,7 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 
 	public Window getWindow()
 	{
-		return getFxInSwingDialogStage().getWindow();
+		return getStage().getWindow();
 	}
 
 	public void installGlassPane(Component glassPane)
