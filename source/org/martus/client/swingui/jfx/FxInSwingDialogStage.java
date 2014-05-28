@@ -60,6 +60,11 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 	
 	public JDialog getDialog()
 	{
+		return getWindow();
+	}
+
+	public JDialog getWindow()
+	{
 		return dialog;
 	}
 	
