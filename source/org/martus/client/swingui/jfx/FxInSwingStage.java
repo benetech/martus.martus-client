@@ -28,10 +28,10 @@ package org.martus.client.swingui.jfx;
 import java.awt.Window;
 import java.io.File;
 
-import javax.swing.JDialog;
-
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
+
+import javax.swing.JDialog;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
@@ -102,30 +102,30 @@ public abstract class FxInSwingStage extends JFXPanel
 		return getMainWindow().getApp().getFxmlDirectory();
 	}
 
-	public ShellController getShellController()
+	public FxShellController getShellController()
 	{
 		return shellController;
 	}
 
-	public void setShellController(ShellController controller)
+	public void setShellController(FxShellController controller)
 	{
 		shellController = controller;
 	}
 
-	public ContentController getCurrentController() throws Exception
+	public FxContentController getCurrentController() throws Exception
 	{
 		return currentContentController;
 	}
 
-	public void setCurrentController(ContentController contentControllerToUse)
+	public void setCurrentController(FxContentController contentControllerToUse)
 	{
 		currentContentController = contentControllerToUse;
 	}
 
-	public void showCurrentPage(ContentController contentPaneController) throws Exception
+	public void showCurrentPage(FxContentController contentPaneController) throws Exception
 	{
 		ensureSceneExists();
-		contentPaneController.setStage(this);
+		contentPaneController.setShellController(getShellController());
 		Parent shellContents = getShellController().createContents();
 		getShellController().setStage(this);
 		getShellController().setContentPane(contentPaneController);
@@ -136,6 +136,6 @@ public abstract class FxInSwingStage extends JFXPanel
 	private UiMainWindow mainWindow;
 	private FxScene scene;
 	private Window window;
-	private ShellController shellController;
-	private ContentController currentContentController;
+	private FxShellController shellController;
+	private FxContentController currentContentController;
 }

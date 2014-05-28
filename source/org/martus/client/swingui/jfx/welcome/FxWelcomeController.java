@@ -28,9 +28,9 @@ package org.martus.client.swingui.jfx.welcome;
 import javafx.fxml.FXML;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.ContentController;
+import org.martus.client.swingui.jfx.FxContentController;
 
-public class FxWelcomeController extends ContentController
+public class FxWelcomeController extends FxContentController
 {
 	public FxWelcomeController(UiMainWindow mainWindowToUse)
 	{
@@ -46,6 +46,11 @@ public class FxWelcomeController extends ContentController
 	@FXML
 	protected void nextWasPressed()
 	{
-		getFxInSwingDialogStage().close();
+		getWelcomeShellController().onNext(null);
+	}
+
+	private WelcomeShellController getWelcomeShellController()
+	{
+		return (WelcomeShellController) getShellController();
 	}
 }

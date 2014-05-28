@@ -39,7 +39,7 @@ import javafx.stage.Stage;
 import org.martus.client.swingui.TranslucentWindowObscurer;
 import org.martus.client.swingui.UiMainWindow;
 
-public abstract class FxInSwingController extends FxController
+public abstract class FxInSwingController extends FxShellController
 {
 	public FxInSwingController(UiMainWindow mainWindowToUse)
 	{
@@ -47,6 +47,11 @@ public abstract class FxInSwingController extends FxController
 	}
 
 	abstract public void installGlassPane(Component glassPane);
+
+	public FxInSwingStage getStage()
+	{
+		return stage;
+	}
 
 	public void setStage(FxInSwingStage stageToUse)
 	{
@@ -83,11 +88,6 @@ public abstract class FxInSwingController extends FxController
 			
 			glassPane.setVisible(false);
 		}
-	}
-
-	public FxInSwingStage getStage()
-	{
-		return stage;
 	}
 
 	public FxScene getScene()

@@ -25,17 +25,27 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import javafx.scene.control.Button;
+import java.awt.Component;
+
+import javax.swing.JFrame;
 
 import org.martus.client.swingui.UiMainWindow;
 
-abstract public class ShellController extends FxInSwingDialogController
+public abstract class FxInSwingFrameController extends FxInSwingController
 {
-	public ShellController(UiMainWindow mainWindowToUse)
+	public FxInSwingFrameController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
 
-	abstract public void setContentPane(ContentController contentController) throws Exception;
-	abstract public Button getNextButton();
+	@Override
+	public void installGlassPane(Component glassPane)
+	{
+		getFrame().setGlassPane(glassPane);
+	}
+
+	private JFrame getFrame()
+	{
+		return (JFrame) getWindow();
+	}
 }
