@@ -30,7 +30,6 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 
-import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 
 import javax.swing.JDialog;
@@ -39,7 +38,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 
-abstract public class FxInSwingDialogStage extends JFXPanel
+abstract public class FxInSwingDialogStage extends FxInSwingStage
 {
 	public FxInSwingDialogStage(UiMainWindow mainWindowToUse)
 	{
