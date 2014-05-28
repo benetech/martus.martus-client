@@ -135,7 +135,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			LookupAccountFromTokenTask task = new LookupAccountFromTokenTask(getApp(), token);
 			MartusLocalization localization = getLocalization();
 			String message = localization.getFieldLabel("FindAccountByToken");
-			showTimeoutDialog(getStage(), message, task);
+			showTimeoutDialog(getFxInSwingDialogStage(), message, task);
 			String contactAccountId = task.getFoundAccountId();
 			if(contactAccountId == null)
 				return; 
@@ -147,20 +147,20 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		}
 		catch (ServerNotAvailableException e)
 		{
-			showNotifyDialog(getStage(), "ContactsNoServer");
+			showNotifyDialog(getFxInSwingDialogStage(), "ContactsNoServer");
 		} 
 		catch (ServerNotCompatibleException e)
 		{
-			showNotifyDialog(getStage(), "ServerNotCompatible");
+			showNotifyDialog(getFxInSwingDialogStage(), "ServerNotCompatible");
 		}
 		catch (TokenNotFoundException e)
 		{
-			showNotifyDialog(getStage(), "UnableToRetrieveContactFromServer");
+			showNotifyDialog(getFxInSwingDialogStage(), "UnableToRetrieveContactFromServer");
 		} 
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog(getStage(), "UnexpectedError");
+			showNotifyDialog(getFxInSwingDialogStage(), "UnexpectedError");
 		} 
 	}
 
@@ -168,7 +168,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	{
 		if(contactAccountId.equals(getApp().getAccountId()))
 		{
-			showNotifyDialog(getStage(), "ContactKeyIsOurself");
+			showNotifyDialog(getFxInSwingDialogStage(), "ContactKeyIsOurself");
 			return;
 		}
 		String contactPublicCode = MartusSecurity.computeFormattedPublicCode40(contactAccountId);
@@ -190,7 +190,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	{
 		String contactsName = getContactsNameInTable(contactPublicCode);
 		String contactExistsWithName = TokenReplacement.replaceToken(getLocalization().getFieldLabel("ContactAlreadyExistsAs"), "#Name#", contactsName);
-		showNotifyDialog(getStage(), "ContactKeyAlreadyExists", contactExistsWithName);
+		showNotifyDialog(getFxInSwingDialogStage(), "ContactKeyAlreadyExists", contactExistsWithName);
 	}
 
 	protected boolean DoesContactAlreadyExistInTable(String contactPublicCode)
@@ -224,7 +224,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			if(verifyOnly)
 				popupController.setVerificationOnly();
 			popupController.showOldPublicCode(showOldPublicCode);
-			showControllerInsideModalDialog(getStage(), popupController);
+			showControllerInsideModalDialog(getFxInSwingDialogStage(), popupController);
 			if(popupController.hasContactBeenAccepted())
 			{
 				int verification = popupController.getVerification();
@@ -358,13 +358,13 @@ public class FxWizardAddContactsController extends FxStep4Controller
 					try
 					{
 						String confirmationMessage = TokenReplacement.replaceTokens(localization.getFieldLabel("RemoveContactLabel"), map);
-						if(showConfirmationDialog(getStage(), localization.getWindowTitle("RemoveContact"), confirmationMessage))
+						if(showConfirmationDialog(getFxInSwingDialogStage(), localization.getWindowTitle("RemoveContact"), confirmationMessage))
 							removeContactFromTable(contactData);
 					} 
 					catch (TokenInvalidException e)
 					{
 						MartusLogger.logException(e);
-						showNotifyDialog(getStage(), "UnexpectedError");
+						showNotifyDialog(getFxInSwingDialogStage(), "UnexpectedError");
 					}
 				}
 			}
@@ -643,23 +643,23 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			try
 			{
 				GetAccountTokenFromServerTask task = new GetAccountTokenFromServerTask(martusApp);
-				showTimeoutDialog(getStage(), getLocalization().getFieldLabel("ConnectingToServerToRetrieveToken"), task);
+				showTimeoutDialog(getFxInSwingDialogStage(), getLocalization().getFieldLabel("ConnectingToServerToRetrieveToken"), task);
 				accountToken = task.getToken();
 			}
 			catch (ServerNotCompatibleException e)
 			{
-				showNotifyDialog(getStage(), "ServerNotCompatible");
+				showNotifyDialog(getFxInSwingDialogStage(), "ServerNotCompatible");
 				return;
 			}
 			catch (ServerNotAvailableException e)
 			{
-				showNotifyDialog(getStage(), "ServerNotAvailable");
+				showNotifyDialog(getFxInSwingDialogStage(), "ServerNotAvailable");
 				return;
 			}
 			catch (Exception e)
 			{
 				MartusLogger.logException(e);
-				showNotifyDialog(getStage(), "UnexpectedError");
+				showNotifyDialog(getFxInSwingDialogStage(), "UnexpectedError");
 				return;
 			}
 		}			
@@ -671,12 +671,12 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			Map tokenReplacement = new HashMap();
 			tokenReplacement.put("#Token#", tokenData);
 			tokenReplacement.put("#PublicCode#", publicCode);
-			showNotifyDialog(getStage(), "ShowTokenAndPublicCode", tokenReplacement);
+			showNotifyDialog(getFxInSwingDialogStage(), "ShowTokenAndPublicCode", tokenReplacement);
 		} 
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog(getStage(), "UnexpectedError");
+			showNotifyDialog(getFxInSwingDialogStage(), "UnexpectedError");
 		}
 			
 	}
