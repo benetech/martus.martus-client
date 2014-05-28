@@ -96,6 +96,12 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 
 	public JDialog getDialog()
 	{
+		JDialog window = getWindow();
+		return window;
+	}
+
+	public JDialog getWindow()
+	{
 		JDialog window = getStage().getDialog();
 		return window;
 	}
