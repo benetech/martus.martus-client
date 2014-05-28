@@ -1819,11 +1819,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		setWindowSizeAndState();
 
-		mainPane = new UiMainPane(this);
+		mainPane = new UiMainPane(this, getUiState());
 		setContentPane(mainPane);
-
-		getPreviewSplitter().setDividerLocation(getUiState().getCurrentPreviewSplitterPosition());
-		getFolderSplitter().setInitialDividerLocation(getUiState().getCurrentFolderSplitterPosition());
 
 		getTransport().setProgressMeter(getStatusBar().getTorProgressMeter());
 		// NOTE: re-start Tor here in case it was turned on in the wizard
