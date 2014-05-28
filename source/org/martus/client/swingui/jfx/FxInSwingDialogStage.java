@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import java.awt.Window;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -60,10 +61,10 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 	
 	public JDialog getDialog()
 	{
-		return getWindow();
+		return (JDialog) getWindow();
 	}
 
-	public JDialog getWindow()
+	public Window getWindow()
 	{
 		return dialog;
 	}
