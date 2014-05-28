@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx;
 
 import java.awt.Component;
+import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -96,11 +97,11 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 
 	public JDialog getDialog()
 	{
-		JDialog window = getWindow();
+		JDialog window = (JDialog) getWindow();
 		return window;
 	}
 
-	public JDialog getWindow()
+	public Window getWindow()
 	{
 		JDialog window = getStage().getDialog();
 		return window;
