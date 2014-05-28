@@ -27,6 +27,8 @@ package org.martus.client.swingui.jfx;
 
 import java.awt.Window;
 
+import javax.swing.JDialog;
+
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 
@@ -75,6 +77,11 @@ public abstract class FxInSwingStage extends JFXPanel
 	public Window getWindow()
 	{
 		return window;
+	}
+
+	public JDialog getDialog()
+	{
+		return (JDialog) getWindow();
 	}
 
 	private UiMainWindow mainWindow;

@@ -58,11 +58,6 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 		return new WindowCloseHandler();
 	}
 	
-	public JDialog getDialog()
-	{
-		return (JDialog) getWindow();
-	}
-
 	public MartusApp getApp()
 	{
 		return getMainWindow().getApp();
