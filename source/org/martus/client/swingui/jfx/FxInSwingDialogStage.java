@@ -45,23 +45,7 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 		mainWindow = mainWindowToUse;
 	}
 
-	abstract protected FxScene createScene() throws Exception;
-	abstract public void showCurrentScene() throws Exception;
 	abstract protected boolean confirmExit();
-	
-	public void ensureSceneExists() throws Exception
-	{
-		if(scene == null)
-		{
-			scene = createScene();
-			setScene(scene);
-		}
-	}
-	
-	public void setSceneRoot(Parent contents)
-	{
-		scene.setRoot(contents);
-	}
 	
 	public void setDialog(JDialog dialogToUse)
 	{
@@ -139,11 +123,6 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 		getFxScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
 	}
 
-	public FxScene getFxScene()
-	{
-		return scene;
-	}
-	
 	protected void handleDialogClose()
 	{
 		close();
@@ -164,7 +143,6 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 
 	private JDialog dialog;
 	private UiMainWindow mainWindow;
-	private FxScene scene;
 	private ShellController shellController;
 	private ContentController currentContentController;
 }

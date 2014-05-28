@@ -26,8 +26,32 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx;
 
 import javafx.embed.swing.JFXPanel;
+import javafx.scene.Parent;
 
-public class FxInSwingStage extends JFXPanel
+public abstract class FxInSwingStage extends JFXPanel
 {
+	public FxScene getFxScene()
+	{
+		return scene;
+	}
+	
+	abstract protected FxScene createScene() throws Exception;
+	abstract public void showCurrentScene() throws Exception;
 
+	public void ensureSceneExists() throws Exception
+	{
+		if(scene == null)
+		{
+			scene = createScene();
+			setScene(scene);
+		}
+	}
+	
+	public void setSceneRoot(Parent contents)
+	{
+		scene.setRoot(contents);
+	}
+	
+
+	private FxScene scene;
 }
