@@ -40,7 +40,7 @@ import javax.swing.JDialog;
 import org.martus.client.swingui.TranslucentWindowObscurer;
 import org.martus.client.swingui.UiMainWindow;
 
-abstract public class FxInSwingDialogController extends FxController
+abstract public class FxInSwingDialogController extends FxInSwingController
 {
 	public FxInSwingDialogController(UiMainWindow mainWindowToUse)
 	{
