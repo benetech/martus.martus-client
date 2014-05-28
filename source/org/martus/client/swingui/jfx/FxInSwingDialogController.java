@@ -58,11 +58,6 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 		return (FxInSwingDialogStage) getStage();
 	}
 
-	public FxScene getScene()
-	{
-		return getStage().getFxScene();
-	}
-	
 	protected void showModalPopupStage(Stage popupStage)
 	{
 		Runnable fronter = new Fronter(popupStage);
@@ -98,11 +93,6 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 	public JDialog getDialog()
 	{
 		return (JDialog) getWindow();
-	}
-
-	public Window getWindow()
-	{
-		return getStage().getWindow();
 	}
 
 	public void installGlassPane(Component glassPane)
