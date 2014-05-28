@@ -100,6 +100,8 @@ import org.martus.client.swingui.dialogs.UiTemplateDlg;
 import org.martus.client.swingui.dialogs.UiWarningMessageDlg;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.FxModalDialog;
+import org.martus.client.swingui.jfx.FxRunner;
+import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.setupwizard.SetupWizardStage;
 import org.martus.client.swingui.jfx.welcome.WelcomeStage;
 import org.martus.client.swingui.spellcheck.SpellCheckerManager;
@@ -211,6 +213,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getSession().initalizeUiState();
 		
 		setGlassPane(new WindowObscurer());
+
+		addWindowListener(new WindowEventHandler());
 	}
 	
 	public boolean run()
@@ -314,7 +318,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		
 		MartusLogger.log("Ready to show main window");
-		addWindowListener(new WindowEventHandler());
 		if(timeoutTimerTask.waitingForSignin)
 		{
 			setLocation(100000, 0);
@@ -1820,7 +1823,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		setWindowSizeAndState();
 
 		mainPane = new UiMainPane(this, getUiState());
-		setContentPane(mainPane);
+		FxMainStage stage = new FxMainStage(this);
+		Platform.runLater(new FxRunner(stage));
+
+		if(UiSession.isJavaFx)
+			setContentPane(stage);
+		else
+			setContentPane(mainPane);
 
 		getTransport().setProgressMeter(getStatusBar().getTorProgressMeter());
 		// NOTE: re-start Tor here in case it was turned on in the wizard
