@@ -36,7 +36,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
 
-abstract public class FxWizardShellController extends ShellController implements WizardNavigationButtonsInterface
+abstract public class FxWizardShellController extends FxInSwingDialogController implements WizardNavigationButtonsInterface
 {
 	public FxWizardShellController(UiMainWindow mainWindowToUse)
 	{
@@ -49,7 +49,7 @@ abstract public class FxWizardShellController extends ShellController implements
 		super.initialize(location, bundle);
 	}
 	
-	private FxWizardStage getWizardStage()
+	public FxWizardStage getWizardStage()
 	{
 		return (FxWizardStage) getFxInSwingDialogStage();
 	}
@@ -70,7 +70,7 @@ abstract public class FxWizardShellController extends ShellController implements
 		catch(Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog(getWizardStage(), "UnexpectedError");
+			showNotifyDialog("UnexpectedError");
 		}
 	}
 	
@@ -90,7 +90,7 @@ abstract public class FxWizardShellController extends ShellController implements
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog(getWizardStage(), "UnknownError");
+			showNotifyDialog("UnknownError");
 		}
 	}
 	

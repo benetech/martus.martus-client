@@ -25,12 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import org.martus.client.swingui.UiMainWindow;
 
-abstract public class ContentController extends FxInSwingDialogController
+public interface FxStage
 {
-	public ContentController(UiMainWindow mainWindowToUse)
-	{
-		super(mainWindowToUse);
-	}
+
 }

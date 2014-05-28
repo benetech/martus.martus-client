@@ -32,13 +32,13 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.ContentController;
-import org.martus.client.swingui.jfx.ShellController;
+import org.martus.client.swingui.jfx.FxContentController;
+import org.martus.client.swingui.jfx.FxInSwingDialogController;
 import org.martus.client.swingui.jfx.WizardNavigationButtonsInterface;
 import org.martus.client.swingui.jfx.WizardNavigationHandlerInterface;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 
-public class ContactsShellController extends ShellController implements WizardNavigationButtonsInterface
+public class ContactsShellController extends FxInSwingDialogController implements WizardNavigationButtonsInterface
 {
 	public ContactsShellController(UiMainWindow mainWindowToUse)
 	{
@@ -51,7 +51,7 @@ public class ContactsShellController extends ShellController implements WizardNa
 		return "contacts/ContactsShell.fxml";
 	}
 
-	public void setContentPane(ContentController contentPaneController) throws Exception
+	public void setContentPane(FxContentController contentPaneController) throws Exception
 	{
 		AbstractFxSetupWizardContentController controller = (AbstractFxSetupWizardContentController) contentPaneController;
 		setContentController(controller);

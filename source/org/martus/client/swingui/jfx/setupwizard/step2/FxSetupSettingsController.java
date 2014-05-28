@@ -121,7 +121,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 		TorInitializationTask task = new TorInitializationTask(getApp());
 		try
 		{
-			showProgressDialog(getWizardStage(), getLocalization().getFieldLabel("SettingUpTor"), task);
+			showProgressDialog(getLocalization().getFieldLabel("SettingUpTor"), task);
 			return true;
 		}
 		catch (UserCancelledException e)
@@ -131,7 +131,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog(getWizardStage(), "UnexpectedError");
+			showNotifyDialog("UnexpectedError");
 			return false;
 		}
 	}

@@ -38,7 +38,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	{
 		super(mainWindowToUse);
 		
-		visitedWizardPagesStack = new Stack<ContentController>();
+		visitedWizardPagesStack = new Stack<FxContentController>();
 
 		setShellController(new FxSetupWizardShellController(getMainWindow()));
 		setCurrentController(getFirstController());
@@ -51,16 +51,16 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 
 		showCurrentPage(contentPaneController);
 		
-		getShellController().getNextButton().setDefaultButton(true);
+		getWizardShellController().getNextButton().setDefaultButton(true);
 	}
 
 	protected void next()
 	{
 		try
 		{
-			ContentController currentController = getCurrentController();
+			FxContentController currentController = getCurrentController();
 			AbstractFxSetupWizardContentController contentPaneController = (AbstractFxSetupWizardContentController) currentController;
-			ContentController nextController = contentPaneController.getNextController();
+			FxContentController nextController = contentPaneController.getNextController();
 			visitedWizardPagesStack.push(currentController);
 			if(nextController == null)
 			{
@@ -103,7 +103,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		MartusLogger.logException(e);
 		try
 		{
-			getCurrentController().showNotifyDialog(this, "UnexpectedError");
+			getCurrentController().showNotifyDialog("UnexpectedError");
 		}
 		catch(Exception exceptionShowingErrorDialog)
 		{
@@ -136,9 +136,9 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		return (FxWizardShellController)getShellController();
 	}
 	
-	abstract protected ContentController getFirstController();
+	abstract protected FxContentController getFirstController();
 
-	private Stack<ContentController> visitedWizardPagesStack;
+	private Stack<FxContentController> visitedWizardPagesStack;
 
 	private String serverAvailibilityState;
 

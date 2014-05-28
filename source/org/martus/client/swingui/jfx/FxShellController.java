@@ -23,52 +23,18 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.welcome;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
+package org.martus.client.swingui.jfx;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxContentController;
-import org.martus.client.swingui.jfx.FxInSwingDialogController;
 
-public class WelcomeShellController extends FxInSwingDialogController
+public abstract class FxShellController extends FxController
 {
-	public WelcomeShellController(UiMainWindow mainWindowToUse)
+	public FxShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
 
-	@Override
-	public String getFxmlLocation()
-	{
-		return "welcome/WelcomeShell.fxml";
-	}
-
-	public void setContentPane(FxContentController contentPaneController) throws Exception
-	{
-		Parent createContents = contentPaneController.createContents();
-		
-		contentPane.getChildren().addAll(createContents);
-	}
-	
-	public Button getNextButton()
-	{
-		return nextButton;
-	}	
-
-	@FXML
-	protected void onNext(ActionEvent event)
-	{
-		getFxInSwingDialogStage().close();
-	}
-	
-	@FXML
-	protected Pane contentPane;
-
-	@FXML
-	protected Button nextButton;
+	abstract public FxInSwingStage getStage();
+	abstract public void setStage(FxInSwingStage stageToUse);
+	abstract public void setContentPane(FxContentController contentController) throws Exception;
 }

@@ -31,13 +31,14 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.ContentController;
+import org.martus.client.swingui.jfx.FxContentController;
+import org.martus.client.swingui.jfx.FxWizardShellController;
 import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.WizardNavigationButtonsInterface;
 import org.martus.client.swingui.jfx.WizardNavigationHandlerInterface;
 import org.martus.client.swingui.jfx.setupwizard.tasks.ConnectToServerTask;
 
-abstract public class AbstractFxSetupWizardContentController extends ContentController implements WizardNavigationHandlerInterface, Initializable
+abstract public class AbstractFxSetupWizardContentController extends FxContentController implements WizardNavigationHandlerInterface, Initializable
 {
 	public AbstractFxSetupWizardContentController(UiMainWindow mainWindowToUse)
 	{
@@ -92,7 +93,8 @@ abstract public class AbstractFxSetupWizardContentController extends ContentCont
 	
 	public FxWizardStage getWizardStage()
 	{
-		return (FxWizardStage)getFxInSwingDialogStage();
+		FxWizardShellController shellController = (FxWizardShellController) getShellController();
+		return shellController.getWizardStage();
 	}
 	
 	abstract public int getWizardStepNumber();
@@ -111,7 +113,7 @@ abstract public class AbstractFxSetupWizardContentController extends ContentCont
 			return false;
 		
 		ConnectToServerTask task = new ConnectToServerTask(getApp());
-		showTimeoutDialog(getWizardStage(), getLocalization().getFieldLabel("AttemptToConnectToServer"), task);
+		showTimeoutDialog(getLocalization().getFieldLabel("AttemptToConnectToServer"), task);
 		boolean isServerAvailable = task.isAvailable();
 		getWizardStage().setCurrentServerIsAvailable(isServerAvailable);
 		
