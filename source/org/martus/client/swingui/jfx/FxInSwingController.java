@@ -33,4 +33,17 @@ public abstract class FxInSwingController extends FxController
 	{
 		super(mainWindowToUse);
 	}
+
+	public void setStage(FxInSwingStage stageToUse)
+	{
+		stage = stageToUse;
+	}
+
+	public FxInSwingStage getStage()
+	{
+		return stage;
+	}
+
+	private FxInSwingStage stage;
+
 }
