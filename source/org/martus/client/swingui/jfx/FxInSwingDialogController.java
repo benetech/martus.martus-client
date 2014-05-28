@@ -66,13 +66,13 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 	{
 		Runnable fronter = new Fronter(popupStage);
 
-		JDialog dialog = getStage().getDialog();
+		JDialog dialog = getDialog();
 		DialogWindowHandler windowHandler = new DialogWindowHandler(fronter);
 		dialog.addWindowListener(windowHandler);
 		dialog.addWindowFocusListener(windowHandler);
 		
 		Component glassPane = new TranslucentWindowObscurer();
-		getStage().getDialog().setGlassPane(glassPane);
+		installGlassPane(glassPane);
 		GlassPaneMouseHandler glassPaneMouseHandler = new GlassPaneMouseHandler(fronter);
 		glassPane.addMouseListener(glassPaneMouseHandler);
 		glassPane.addMouseMotionListener(glassPaneMouseHandler);
@@ -92,6 +92,16 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 			
 			glassPane.setVisible(false);
 		}
+	}
+
+	public JDialog getDialog()
+	{
+		return getStage().getDialog();
+	}
+
+	public void installGlassPane(Component glassPane)
+	{
+		getDialog().setGlassPane(glassPane);
 	}
 	
 	private static class DialogWindowHandler extends WindowAdapter implements MouseMotionListener
