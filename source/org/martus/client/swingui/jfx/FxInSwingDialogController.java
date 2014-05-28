@@ -48,7 +48,7 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 		super(mainWindowToUse);
 	}
 
-	public void setFxInSwingDialogStage(FxInSwingDialogStage stageToUse)
+	public void setFxInSwingDialogStage(FxInSwingStage stageToUse)
 	{
 		setStage(stageToUse);
 	}
