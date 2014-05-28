@@ -53,19 +53,9 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 		setStage(stageToUse);
 	}
 
-	public void setStage(FxInSwingStage stageToUse)
-	{
-		stage = stageToUse;
-	}
-
 	public FxInSwingDialogStage getFxInSwingDialogStage()
 	{
 		return (FxInSwingDialogStage) getStage();
-	}
-
-	public FxInSwingStage getStage()
-	{
-		return stage;
 	}
 
 	public FxScene getScene()
@@ -204,6 +194,4 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 		
 		private Stage popupStage;
 	}
-
-	private FxInSwingStage stage;
 }
