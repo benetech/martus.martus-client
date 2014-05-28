@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
-import java.awt.Window;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -54,11 +53,6 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 		getDialog().addWindowListener(createWindowCloseHandler());
 	}
 
-	public void setWindow(Window dialogToUse)
-	{
-		window = dialogToUse;
-	}
-
 	public WindowListener createWindowCloseHandler()
 	{
 		return new WindowCloseHandler();
@@ -69,11 +63,6 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 		return (JDialog) getWindow();
 	}
 
-	public Window getWindow()
-	{
-		return window;
-	}
-	
 	public void handleNavigationEvent(String navigationNext)
 	{
 	}
@@ -152,7 +141,6 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 		}
 	}
 
-	private Window window;
 	private UiMainWindow mainWindow;
 	private ShellController shellController;
 	private ContentController currentContentController;
