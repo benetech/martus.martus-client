@@ -28,13 +28,9 @@ package org.martus.client.swingui.jfx;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.File;
-
-import javafx.scene.Parent;
 
 import javax.swing.JDialog;
 
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 
 abstract public class FxInSwingDialogStage extends FxInSwingStage
@@ -57,50 +53,9 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 		return new WindowCloseHandler();
 	}
 	
-	public MartusLocalization getLocalization()
-	{
-		return getMainWindow().getLocalization();
-	}
-
 	public void close()
 	{
 		getDialog().setVisible(false);
-	}
-
-	public File getExternalFxmlDirectory()
-	{
-		return getMainWindow().getApp().getFxmlDirectory();
-	}
-
-	public ShellController getShellController()
-	{
-		return shellController;
-	}
-	
-	public void setShellController(ShellController controller)
-	{
-		shellController = controller;
-	}
-	
-	public ContentController getCurrentController() throws Exception
-	{
-		return currentContentController;
-	}
-
-	public void setCurrentController(ContentController contentControllerToUse)
-	{
-		currentContentController = contentControllerToUse;
-	}
-
-	public void showCurrentPage(ContentController contentPaneController) throws Exception
-	{
-		ensureSceneExists();
-		contentPaneController.setFxInSwingDialogStage(this);
-		Parent shellContents = getShellController().createContents();
-		getShellController().setFxInSwingDialogStage(this);
-		getShellController().setContentPane(contentPaneController);
-		setSceneRoot(shellContents);
-		getFxScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
 	}
 
 	protected void handleDialogClose()
@@ -120,7 +75,4 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 			}
 		}
 	}
-
-	private ShellController shellController;
-	private ContentController currentContentController;
 }
