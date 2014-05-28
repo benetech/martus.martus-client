@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import java.awt.Window;
+
 import org.martus.client.swingui.UiMainWindow;
 
 public abstract class FxInSwingController extends FxController
@@ -42,6 +44,16 @@ public abstract class FxInSwingController extends FxController
 	public FxInSwingStage getStage()
 	{
 		return stage;
+	}
+
+	public FxScene getScene()
+	{
+		return getStage().getFxScene();
+	}
+
+	public Window getWindow()
+	{
+		return getStage().getWindow();
 	}
 
 	private FxInSwingStage stage;
