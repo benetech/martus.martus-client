@@ -30,9 +30,9 @@ import javafx.fxml.FXML;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxContentController;
 
-public class FxWelcomeController extends FxContentController
+public class FxWelcomeContentController extends FxContentController
 {
-	public FxWelcomeController(UiMainWindow mainWindowToUse)
+	public FxWelcomeContentController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
