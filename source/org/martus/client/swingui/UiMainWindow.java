@@ -2440,6 +2440,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private UiStatusBar getStatusBar()
 	{
+		if(getMainPane() == null)
+			return null;
+		
 		return getMainPane().getStatusBar();
 	}
 
