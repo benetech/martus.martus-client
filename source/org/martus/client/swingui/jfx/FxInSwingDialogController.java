@@ -95,6 +95,7 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 		return (JDialog) getWindow();
 	}
 
+	@Override
 	public void installGlassPane(Component glassPane)
 	{
 		getDialog().setGlassPane(glassPane);

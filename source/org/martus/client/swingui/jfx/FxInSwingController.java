@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import java.awt.Component;
 import java.awt.Window;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -35,6 +36,8 @@ public abstract class FxInSwingController extends FxController
 	{
 		super(mainWindowToUse);
 	}
+
+	abstract public void installGlassPane(Component glassPane);
 
 	public void setStage(FxInSwingStage stageToUse)
 	{
@@ -57,5 +60,6 @@ public abstract class FxInSwingController extends FxController
 	}
 
 	private FxInSwingStage stage;
+
 
 }
