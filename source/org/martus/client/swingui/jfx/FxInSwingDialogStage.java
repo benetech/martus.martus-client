@@ -42,7 +42,7 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 {
 	public FxInSwingDialogStage(UiMainWindow mainWindowToUse)
 	{
-		mainWindow = mainWindowToUse;
+		super(mainWindowToUse);
 	}
 
 	abstract protected boolean confirmExit();
@@ -63,11 +63,6 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 		return (JDialog) getWindow();
 	}
 
-	public UiMainWindow getMainWindow()
-	{
-		return mainWindow;
-	}
-	
 	public MartusApp getApp()
 	{
 		return getMainWindow().getApp();
@@ -137,7 +132,6 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 		}
 	}
 
-	private UiMainWindow mainWindow;
 	private ShellController shellController;
 	private ContentController currentContentController;
 }
