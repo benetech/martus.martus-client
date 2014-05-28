@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx;
 
 import java.awt.Window;
+import java.io.File;
 
 import javax.swing.JDialog;
 
@@ -33,6 +34,7 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 
 public abstract class FxInSwingStage extends JFXPanel
@@ -90,7 +92,50 @@ public abstract class FxInSwingStage extends JFXPanel
 		return getMainWindow().getApp();
 	}
 
+	public MartusLocalization getLocalization()
+	{
+		return getMainWindow().getLocalization();
+	}
+
+	public File getExternalFxmlDirectory()
+	{
+		return getMainWindow().getApp().getFxmlDirectory();
+	}
+
+	public ShellController getShellController()
+	{
+		return shellController;
+	}
+
+	public void setShellController(ShellController controller)
+	{
+		shellController = controller;
+	}
+
+	public ContentController getCurrentController() throws Exception
+	{
+		return currentContentController;
+	}
+
+	public void setCurrentController(ContentController contentControllerToUse)
+	{
+		currentContentController = contentControllerToUse;
+	}
+
+	public void showCurrentPage(ContentController contentPaneController) throws Exception
+	{
+		ensureSceneExists();
+		contentPaneController.setFxInSwingDialogStage(this);
+		Parent shellContents = getShellController().createContents();
+		getShellController().setFxInSwingDialogStage(this);
+		getShellController().setContentPane(contentPaneController);
+		setSceneRoot(shellContents);
+		getFxScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
+	}
+
 	private UiMainWindow mainWindow;
 	private FxScene scene;
 	private Window window;
+	private ShellController shellController;
+	private ContentController currentContentController;
 }
