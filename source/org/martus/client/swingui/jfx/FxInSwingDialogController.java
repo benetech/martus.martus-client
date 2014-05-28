@@ -55,14 +55,9 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 
 	public FxInSwingDialogStage getStage()
 	{
-		return getFxInSwingDialogStage();
-	}
-
-	public FxInSwingDialogStage getFxInSwingDialogStage()
-	{
 		return stage;
 	}
-	
+
 	public FxScene getScene()
 	{
 		return getStage().getFxScene();
