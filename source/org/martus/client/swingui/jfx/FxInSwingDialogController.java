@@ -72,7 +72,7 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 		dialog.addWindowFocusListener(windowHandler);
 		
 		Component glassPane = new TranslucentWindowObscurer();
-		dialog.setGlassPane(glassPane);
+		getStage().getDialog().setGlassPane(glassPane);
 		GlassPaneMouseHandler glassPaneMouseHandler = new GlassPaneMouseHandler(fronter);
 		glassPane.addMouseListener(glassPaneMouseHandler);
 		glassPane.addMouseMotionListener(glassPaneMouseHandler);
