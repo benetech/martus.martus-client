@@ -60,7 +60,7 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 
 	public FxScene getScene()
 	{
-		return getFxInSwingDialogStage().getFxScene();
+		return getStage().getFxScene();
 	}
 	
 	protected void showModalPopupStage(Stage popupStage)
