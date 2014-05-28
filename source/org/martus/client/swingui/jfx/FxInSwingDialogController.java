@@ -67,7 +67,7 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 	{
 		Runnable fronter = new Fronter(popupStage);
 
-		JDialog dialog = getDialog();
+		Window dialog = getWindow();
 		DialogWindowHandler windowHandler = new DialogWindowHandler(fronter);
 		dialog.addWindowListener(windowHandler);
 		dialog.addWindowFocusListener(windowHandler);
