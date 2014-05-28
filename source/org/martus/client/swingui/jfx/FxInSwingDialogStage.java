@@ -147,7 +147,7 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 		}
 	}
 
-	private JDialog dialog;
+	private Window dialog;
 	private UiMainWindow mainWindow;
 	private ShellController shellController;
 	private ContentController currentContentController;
