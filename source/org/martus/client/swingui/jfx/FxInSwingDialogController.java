@@ -200,5 +200,5 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 		private Stage popupStage;
 	}
 
-	private FxInSwingDialogStage stage;
+	private FxInSwingStage stage;
 }
