@@ -34,7 +34,6 @@ import javafx.scene.Parent;
 
 import javax.swing.JDialog;
 
-import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 
@@ -58,11 +57,6 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 		return new WindowCloseHandler();
 	}
 	
-	public MartusApp getApp()
-	{
-		return getMainWindow().getApp();
-	}
-
 	public MartusLocalization getLocalization()
 	{
 		return getMainWindow().getLocalization();
