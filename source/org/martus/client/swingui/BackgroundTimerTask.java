@@ -64,11 +64,19 @@ class BackgroundTimerTask extends TimerTask
 	{
 		mainWindow = mainWindowToUse;
 		statusBar = statusBarToUse;
-		ProgressMeterInterface progressMeter = statusBar.getBackgroundProgressMeter();
+		ProgressMeterInterface progressMeter = getProgressMeter();
 		uploader = new BackgroundUploader(mainWindow.getApp(), progressMeter);
 		retriever = new BackgroundRetriever(mainWindow.getApp(), progressMeter);
 		if(mainWindow.isServerConfigured())
 			setWaitingForServer();
+	}
+
+	public ProgressMeterInterface getProgressMeter()
+	{
+		if(statusBar == null)
+			return null;
+		
+		return statusBar.getBackgroundProgressMeter();
 	}
 	
 	public void forceRecheckOfUidsOnServer()
@@ -145,7 +153,7 @@ class BackgroundTimerTask extends TimerTask
 	
 	private void doRetrievingOrUploading() throws Exception
 	{
-		final UiProgressMeter progressMeter = statusBar.getBackgroundProgressMeter();
+		final ProgressMeterInterface progressMeter = getProgressMeter();
 		if(retriever.hasWorkToDo())
 		{
 			if(!isServerAvailable())

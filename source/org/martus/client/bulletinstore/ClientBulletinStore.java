@@ -498,6 +498,9 @@ public class ClientBulletinStore extends BulletinStore
 
 	public synchronized BulletinFolder findFolder(String name)
 	{
+		if(name == null)
+			return null;
+		
 		for(int index=0; index < getFolderCount(); ++index)
 		{
 			BulletinFolder folder = getFolder(index);
