@@ -1,8 +1,8 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2005-2007, Beneficent
-Technology, Inc. (The Benetech Initiative).
+monitoring software. Copyright (C) 2014, Beneficent
+Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -23,42 +23,9 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-
 package org.martus.client.swingui.actions;
 
-import java.awt.event.ActionEvent;
-
-import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxModalDialog;
-import org.martus.client.swingui.jfx.contacts.ContactsStage;
-import org.martus.common.MartusLogger;
-
-public class ActionMenuManageContacts extends UiMenuAction implements ActionDoer
+public interface ActionDoer
 {
-	public ActionMenuManageContacts(UiMainWindow mainWindowToUse)
-	{
-		super(mainWindowToUse, "ManageContacts");
-	}
-
-	public void actionPerformed(ActionEvent ae)
-	{
-		doAction();
-	}
-
-	public void doAction()
-	{
-		if(!mainWindow.reSignIn())
-			return;
-		
-		try
-		{
-		    FxModalDialog.createAndShow(mainWindow, new ContactsStage(mainWindow));
-		} 
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-			mainWindow.unexpectedErrorDlg();
-		}
-	}
-	
+	public void doAction();
 }

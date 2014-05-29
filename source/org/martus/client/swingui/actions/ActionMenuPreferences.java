@@ -32,7 +32,7 @@ import org.martus.client.core.FontSetter;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPreferencesDlg;
 
-public class ActionMenuPreferences extends UiMenuAction
+public class ActionMenuPreferences extends UiMenuAction implements ActionDoer
 {
 	public ActionMenuPreferences(UiMainWindow mainWindowToUse)
 	{
@@ -41,10 +41,10 @@ public class ActionMenuPreferences extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		doPreferences();
+		doAction();
 	}
 
-	public void doPreferences()
+	public void doAction()
 	{
 		getMainWindow().saveState();
 		UiPreferencesDlg dlg = new UiPreferencesDlg(getMainWindow());
@@ -59,7 +59,5 @@ public class ActionMenuPreferences extends UiMenuAction
 			FontSetter.setDefaultFont(dlg.isUseZawgyiFont());
 			getMainWindow().respondToPreferencesChanges();
 		}
-
 	}
-
 }
