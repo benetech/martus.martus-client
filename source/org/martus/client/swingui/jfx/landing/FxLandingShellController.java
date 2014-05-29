@@ -25,7 +25,16 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+
+import javax.swing.SwingUtilities;
+
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
+import org.martus.client.swingui.actions.ActionMenuManageContacts;
+import org.martus.client.swingui.actions.ActionMenuPreferences;
+import org.martus.client.swingui.actions.ActionMenuSelectServer;
 import org.martus.client.swingui.jfx.FxContentController;
 import org.martus.client.swingui.jfx.FxInSwingFrameController;
 
@@ -46,6 +55,52 @@ public class FxLandingShellController extends FxInSwingFrameController
 	public void setContentPane(FxContentController contentController) throws Exception
 	{
 		
+	}
+
+	@FXML
+	private void onPreferences(ActionEvent event)
+	{
+		doAction(new ActionMenuPreferences(getMainWindow()));
+	}
+
+	@FXML
+	private void onManageContacts(ActionEvent event)
+	{
+		doAction(new ActionMenuManageContacts(getMainWindow()));
+	}
+
+	@FXML
+	private void onConfigureServer(ActionEvent event)
+	{
+		doAction(new ActionMenuSelectServer(getMainWindow()));
+	}
+
+	private static class Doer implements Runnable
+	{
+		public Doer(ActionDoer doerToRun)
+		{
+			doer = doerToRun;
+		}
+		
+		@Override
+		public void run()
+		{
+			doer.doAction();
+		}
+		
+		private ActionDoer doer;
+	}
+	
+	public void doAction(ActionDoer doer)
+	{
+		try
+		{
+			SwingUtilities.invokeLater(new Doer(doer));
+		} 
+		catch (Exception e)
+		{
+			getMainWindow().unexpectedErrorDlg();
+		}
 	}
 
 }

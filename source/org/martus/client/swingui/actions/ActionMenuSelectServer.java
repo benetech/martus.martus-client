@@ -35,7 +35,7 @@ import org.martus.client.swingui.dialogs.UiConfigServerDlg;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.swing.UiNotifyDlg;
 
-public class ActionMenuSelectServer extends UiMenuAction
+public class ActionMenuSelectServer extends UiMenuAction implements ActionDoer
 {
 	public ActionMenuSelectServer(UiMainWindow mainWindowToUse)
 	{
@@ -44,10 +44,10 @@ public class ActionMenuSelectServer extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		doConfigureServer();
+		doAction();
 	}
 
-	public void doConfigureServer()
+	public void doAction()
 	{
 		getMainWindow().offerToCancelRetrieveInProgress();
 		if(getMainWindow().isRetrieveInProgress())

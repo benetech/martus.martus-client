@@ -22,11 +22,14 @@
     </Menu>
     <Menu mnemonicParsing="false" text="Settings">
       <items>
-        <MenuItem mnemonicParsing="false" text="Server" /><MenuItem mnemonicParsing="false" text="System Preferences" /><MenuItem mnemonicParsing="false" text="Tor Preferences" />
+        <MenuItem mnemonicParsing="false" text="Server" onAction="#onConfigureServer" />
+        <MenuItem mnemonicParsing="false" text="System Preferences" onAction="#onPreferences" />
+        <MenuItem mnemonicParsing="false" text="Tor Preferences" />
       </items>
     </Menu><Menu mnemonicParsing="false" text="Contacts">
   <items>
-    <MenuItem mnemonicParsing="false" text="Manage Contacts" /><MenuItem mnemonicParsing="false" text="Import From File" />
+    <MenuItem mnemonicParsing="false" text="Manage Contacts"  onAction="#onManageContacts" />
+    <MenuItem mnemonicParsing="false" text="Import From File"/>
   </items>
 </Menu>
   </menus>
