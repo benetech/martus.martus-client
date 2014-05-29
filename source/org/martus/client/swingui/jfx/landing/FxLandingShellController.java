@@ -32,6 +32,9 @@ import javax.swing.SwingUtilities;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
+import org.martus.client.swingui.actions.ActionMenuBackupMyKeyPair;
+import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
+import org.martus.client.swingui.actions.ActionMenuContactInfo;
 import org.martus.client.swingui.actions.ActionMenuManageContacts;
 import org.martus.client.swingui.actions.ActionMenuPreferences;
 import org.martus.client.swingui.actions.ActionMenuSelectServer;
@@ -73,6 +76,24 @@ public class FxLandingShellController extends FxInSwingFrameController
 	private void onConfigureServer(ActionEvent event)
 	{
 		doAction(new ActionMenuSelectServer(getMainWindow()));
+	}
+	
+	@FXML
+	private void onChangeUsernameAndPassword(ActionEvent event)
+	{
+		doAction(new ActionMenuChangeUserNamePassword(getMainWindow()));
+	}
+	
+	@FXML
+	private void onContactInformation(ActionEvent event)
+	{
+		doAction(new ActionMenuContactInfo(getMainWindow()));
+	}
+	
+	@FXML
+	private void onBackupKeypair(ActionEvent event)
+	{
+		doAction(new ActionMenuBackupMyKeyPair(getMainWindow()));
 	}
 
 	private static class Doer implements Runnable
