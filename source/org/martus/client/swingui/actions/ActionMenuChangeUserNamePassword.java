@@ -31,7 +31,7 @@ import java.awt.event.ActionEvent;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 
-public class ActionMenuChangeUserNamePassword extends UiMenuAction
+public class ActionMenuChangeUserNamePassword extends UiMenuAction implements ActionDoer
 {
 	public ActionMenuChangeUserNamePassword(UiMainWindow mainWindowToUse)
 	{
@@ -40,10 +40,10 @@ public class ActionMenuChangeUserNamePassword extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		doChangeUserNamePassword();
+		doAction();
 	}
 
-	public void doChangeUserNamePassword()
+	public void doAction()
 	{
 		if(!getMainWindow().reSignIn())
 			return;

@@ -17,7 +17,10 @@
     </Menu>
     <Menu mnemonicParsing="false" styleClass="menu-item" text="Account">
       <items>
-        <MenuItem mnemonicParsing="false" styleClass="menu-item" text="Change Username and Password" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Create New" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Contact Information" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Backup Key" />
+        <MenuItem mnemonicParsing="false" styleClass="menu-item" text="Change Username and Password" onAction="#onChangeUsernameAndPassword" />
+        <MenuItem mnemonicParsing="false" styleClass="menu-item" text="Create New" />
+        <MenuItem mnemonicParsing="false" styleClass="menu-item" text="Contact Information" onAction="#onContactInformation" />
+        <MenuItem mnemonicParsing="false" styleClass="menu-item" text="Backup Key" onAction="#onBackupKeypair" />
       </items>
     </Menu>
     <Menu mnemonicParsing="false" text="Settings">
