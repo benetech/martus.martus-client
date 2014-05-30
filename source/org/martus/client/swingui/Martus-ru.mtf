@@ -2,9 +2,9 @@
 # Language code:  ru
 # Language name:  Russian
 # Translated by:  Inna Kremen
-# Exported date:  Fri Nov 22 16:01:14 PST 2013
-# Client version: 4.4
-# Client build:   2013-11-05.3298
+# Exported date:  Fri May 30 14:11:06 PDT 2014
+# Client version: pre-4.5
+# Client build:   2014-05-29.3405
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -100,11 +100,17 @@
 #!right-to-left
 #
 
+#______________________=Add Contact...
+-8f02-button:AddContact=Add Contact...
+
+#________________________________=Add Contact From Server...
+-6495-button:AddContactFromServer=Add Contact From Server...
+
 #____________________________=Add
 -61cc-button:AddFieldToReport=Добавить
 
-#__________________________=Update Headquarters Access
--5029-button:AddPermissions=Изменить доступ для центральных учетных записей
+#__________________________=Update Contact's Access
+-ba05-button:AddPermissions=Изменить доступ для центральных учетных записей
 
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=Показать все сводки на данном сервере и на данном компьютере
@@ -118,20 +124,23 @@
 #___________________________=Bulletin Details...
 -d012-button:BulletinDetails=Сведения о сводке...
 
+#_______________________________=Use Default Server
+-7a68-button:ChooseDefaultServer=Use Default Server
+
 #_____________________=Close Help
 -8624-button:CloseHelp=Закрыть справку
 
-#___________________________=Add...
--2cce-button:ConfigureHQsAdd=Добавить...
+#_______________________=Contact Name
+-8a42-button:ContactName=Contact Name
 
-#_______________________________=Change Label
--8a69-button:ConfigureHQsReLabel=Изменить метку
+#_________________________=Remove
+-e963-button:ContactRemove=Remove
 
-#______________________________=Remove
--e963-button:ConfigureHQsRemove=Удалить
+#___________________________=Verified
+-aed3-button:ContactVerified=Verified
 
-#___________________________________=View
--69bd-button:ConfigurePublicKeysView=Просмотр
+#_____________________________=Save and Close
+-7af7-button:ContactsSaveClose=Save and Close
 
 #____________________=Continue
 -2e02-button:Continue=Продолжить
@@ -142,8 +151,14 @@
 #____________________________=Create New Page Report
 -1d7a-button:CreatePageReport=Создать новый постраничный отчет
 
+#_____________________________________=Create Single, Encrypted File
+-b8c6-button:CreateSingleEncryptedFile=Create Single, Encrypted File
+
 #_______________________________=Create New Tabular Report
 -34ee-button:CreateTabularReport=Создать новый табличный отчет
+
+#_______________________=Download Custom
+-da95-button:CustomForms=Download Custom
 
 #__________________=Delete
 -f6fd-button:Delete=Удалить
@@ -156,9 +171,6 @@
 
 #_________________________________=Show bulletins that are only on the server.
 -b795-button:DownloadableSummaries=Показать сводки, имеющиеся только на сервере
-
-#______________________________=Change Label
--8a69-button:EditFieldDeskLabel=Изменить метку
 
 #______________________=Field Label
 -6492-button:FieldLabel=Метка поля
@@ -178,9 +190,6 @@
 #___________________________________________=Import
 -d6fb-button:FileDialogOkImportCustomization=Импортировать
 
-#________________________________________________=Import
--d6fb-button:FileDialogOkImportFieldDeskPublicKey=Импортировать
-
 #___________________________________________________=Import
 -d6fb-button:FileDialogOkImportHeadquartersPublicKey=Импортировать
 
@@ -198,6 +207,18 @@
 
 #_________________________=Up
 -2038-button:FolderOrderUp=Вверх
+
+#________________________=Generic
+-ff76-button:GenericForms=Generic
+
+#______________________=Get Started
+-bd2c-button:GetStarted=Get Started
+
+#__________________=Go Back
+-f03e-button:GoBack=Go Back
+
+#_________________________________=Import Contact From File...
+-eaff-button:ImportContactFromFile=Import Contact From File...
 
 #___________________________________=Include Private Data
 -e6dc-button:IncludePrivateBulletins=Включая конфиденциальные данные
@@ -250,6 +271,9 @@
 #________________________________=Both Public and Private Data
 -8685-button:PublicAndPrivateData=Общие и конфиденциальные данные
 
+#______________________=Public Code
+-a1a2-button:PublicCode=Public Code
+
 #______________________=Public Data Only
 -4baa-button:PublicOnly=Только общие данные
 
@@ -289,8 +313,14 @@
 #______________________________=Match grid column specifications in the search screen to a single row of bulletin grid data. See the search Help screen for additional guidance on this advanced option.
 -c70c-button:SearchSameRowsOnly=Искать в сводке строки таблицы, соответствующие всем критериям поиска. Дополнительная информация – в окне справки по поиску.
 
+#____________________=See Forms
+-fac4-button:SeeForms=See Forms
+
 #________________________=Select
 -8598-button:SelectReport=Выбрать
+
+#___________________________=Send To by Default
+-03aa-button:SendToByDefault=Send To by Default
 
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=Принять
@@ -312,6 +342,12 @@
 
 #______________________________=Use Old
 -91ea-button:UseOldCustomFields=Использовать прежние
+
+#______________________________=Verify Later
+-aedf-button:VerifyContactLater=Verify Later
+
+#____________________________=Verify!
+-7a46-button:VerifyContactNow=Verify!
 
 #_______________________________________=View Selected Version...
 -f943-button:ViewPreviousBulletinVersion=Просмотр выбранной версии...
@@ -361,6 +397,9 @@
 #________________________=Import Template
 -6d2d-button:customImport=Импорт шаблона
 
+#______________________________=Send Template to Server
+-c3eb-button:customSendToServer=Send Template to Server
+
 #________________=Help
 -c47a-button:help=Справка
 
@@ -370,17 +409,8 @@
 #_______________________________=OK
 -9ce3-button:inputCustomFieldsok=OK
 
-#____________________________________=OK
--9ce3-button:inputGetFieldDeskLabelok=OK
-
-#_____________________________=OK
--9ce3-button:inputGetHQLabelok=OK
-
 #___________________________________=OK
 -9ce3-button:inputGetShareFileNameok=OK
-
-#___________________________________=Import
--d6fb-button:inputImportPublicCodeok=Импортировать
 
 #__________________________________=Import
 -d6fb-button:inputImportPublicKeyok=Импортировать
@@ -445,11 +475,29 @@
 #_______________=Yes
 -5397-button:yes=Да
 
+#______________________=Access Token:
+-c45e-field:AccessToken=Access Token:
+
+#__________________________________=Access Token
+-0d23-field:AccessTokenInstructions=Access Token
+
+#_____________________________=Martus Account Access Token: 
+-dc84-field:AccountAccessToken=Martus Account Access Token: 
+
+#_________________________=Account Contact Information
+-c89a-field:AccountContact=Account Contact Information
+
+#____________________________________=This information is optional and is used to prepopulate your bulletins for your convenience. It is stored on your local computer and not sent to the Martus server.
+-b5a0-field:AccountContactInformation=This information is optional and is used to prepopulate your bulletins for your convenience. It is stored on your local computer and not sent to the Martus server.
+
 #_______________________________=Account Directory: 
 -c354-field:AccountInfoDirectory=Каталог учетной записи:
 
-#________________________________=Public Code:
--63bc-field:AccountInfoPublicCode=Общий код:
+#________________________________=Public Code (Old):
+-5662-field:AccountInfoPublicCode=Общий код:
+
+#__________________________________=Public Code (New):
+-a871-field:AccountInfoPublicCode40=Public Code (New):
 
 #_______________________________=Public Account Id:
 -6723-field:AccountInfoPublicKey=Общий идентификатор учетной записи:
@@ -457,17 +505,47 @@
 #______________________________=User Name: 
 -b58e-field:AccountInfoUserName=Имя пользователя: 
 
-#_________________________________=This allows you to update headquarters access to existing bulletins. Each of the bulletins in the list below will be modified to add the selected headquarters accounts. If a bulletin is sealed, a new version will be created.
--aa30-field:AddPermissionsOverview=Эта команда служит для изменения настроек доступа центральных учетных записей к имеющимся сводкам. Каждая сводка, перечисленная ниже, будет изменена так, что выбранные центральные учетные записи получат к ней доступ. Если это чистовая сводка, будет создана ее новая версия.
+#______________________________________=create a user name
+-591c-field:AccountUserNameInstructions=create a user name
+
+#_________________________________=To send information through Martus to your contacts, pull their public key from the Martus server using their access token. Verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add them here. If you do not have this information now, you will be able to add contacts later.
+-70e8-field:AddContactInstructions=To send information through Martus to your contacts, pull their public key from the Martus server using their access token. Verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add them here. If you do not have this information now, you will be able to add contacts later.
+
+#______________________=Contacts
+-b0dd-field:AddContacts=Contacts
+
+#_________________________________=This allows you to update your contacts' access to existing bulletins. Each of the bulletins in the list below will be modified to add the selected contacts' accounts. If a bulletin is sealed, a new version will be created.
+-a2b9-field:AddPermissionsOverview=Эта команда служит для изменения настроек доступа центральных учетных записей к имеющимся сводкам. Каждая сводка, перечисленная ниже, будет изменена так, что выбранные центральные учетные записи получат к ней доступ. Если это чистовая сводка, будет создана ее новая версия.
 
 #_______________________________________=Updating access...
 -958f-field:AddingPermissionsToBulletins=Изменение доступа...
 
+#____________________________________=If you are connecting to a Martus server, email info@martus.org for this info.
+-5104-field:AdvanceMartusServerMailTo=If you are connecting to a Martus server, email info@martus.org for this info.
+
+#____________________________________=If you are connecting to your organization's server, contact your administrator.
+-1eae-field:AdvanceOrganizationServer=If you are connecting to your organization's server, contact your administrator.
+
+#___________________________________=To store your bulletins on a specific server, you will need the IP address, public code, and magic word for the server.
+-105d-field:AdvanceServerInformation=To store your bulletins on a specific server, you will need the IP address, public code, and magic word for the server.
+
+#_____________________________=Advanced Server Setup
+-6421-field:AdvanceServerSetup=Advanced Server Setup
+
+#____________________________________=Advanced Server Setup
+-6421-field:AdvanceServerSetupHeading=Advanced Server Setup
+
 #________________________________=Unknown
 -bc78-field:AttachmentSizeUnknown=Неизвестно
 
-#_________________________=Author (required)
--4a0b-field:AuthorRequired=Автор (обязательно)
+#___________________________________=Attempting to connect to server
+-e9ba-field:AttemptToConnectToServer=Attempting to connect to server
+
+#___________________________________________________=Attempting to connect to server
+-e9ba-field:AttemptToConnectToServerAndGetCompliance=Attempting to connect to server
+
+#_________________=Author:
+-8445-field:Author=Author:
 
 #_____________________________=Preparing Report...
 -7651-field:BackgroundPrinting=Подготовка отчета...
@@ -481,6 +559,9 @@
 #____________________________=Working...
 -049a-field:BackgroundWorking=Работа...
 
+#____________________________=Note: Later in this wizard, you will be led through a process to backup your account key. This will help protect your account from loss.
+-50c2-field:BackupAccountInfo=Note: Later in this wizard, you will be led through a process to backup your account key. This will help protect your account from loss.
+
 #___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you'll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #TotalNumberOfFilesInBackup# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
 -ff3d-field:BackupKeyPairGeneralInfo=Ваш ключ необходим для чтения конфиденциальной информации из Ваших сводок и для создания новых сводок.  Чтобы Вам был гарантирован постоянный доступ к Вашим данным, очень важно сохранить резервную копию Вашего ключа.\n\nMartus предлагает два метода сохранения. Можно использовать любой метод, но мы настоятельно рекомендуем воспользоваться обоими.  Первый метод - создать один файл резервной копии, зашифрованный паролем, на сменном носителе (например, на дискете, на компакт-диске, на USB-носителе) или на сетевом диске; второй метод - сохранить ключ, разбив его на #TotalNumberOfFilesInBackup# частей (не зашифрованных Вашим паролем), которые записываются на отдельные дискеты (или другие сменные носители).\n
 
@@ -492,6 +573,18 @@
 
 #_______________________________________________=Backup complete, please give each disk to someone you trust, so that if you forget your user name and/or password in the future you can recreate your account.  You will need #MinimumNumberOfFilesNeededForRecovery# of these disks to recreate your account.
 -fba9-field:BackupSecretShareCompleteInformation=Сохранение выполнено. Раздайте диски людям, которым Вы доверяете. Тогда Вы сможете восстановить свою учетную запись, если забудете имя или пароль.  Для восстановления учетной записи Вам понадобятся #MinimumNumberOfFilesNeededForRecovery# дисков из этого набора.
+
+#________________________=Backup Your Key
+-a49a-field:BackupYourKey=Backup Your Key
+
+#___________________________________=Your encryption key was created when you created your account. You will want to back it up, to be able restore your account.
+-d0a2-field:BackupYourKeyInformation=Your encryption key was created when you created your account. You will want to back it up, to be able restore your account.
+
+#____________________________=Be sure to save a copy of your account key to a secure location that is different from the computer where you currently have Martus installed, so you have it if you need to restore your account.
+-0204-field:BackupYourKeyTip1=Be sure to save a copy of your account key to a secure location that is different from the computer where you currently have Martus installed, so you have it if you need to restore your account.
+
+#____________________________=Martus also offers a way to back up your key in 5 separate pieces, which is the only way for you to access your Martus account and data if you forget your user name and password. You will be prompted to create the 5 piece backup after completing your account setup and we strongly encourage you to do so.
+-4c58-field:BackupYourKeyTip2=Martus also offers a way to back up your key in 5 separate pieces, which is the only way for you to access your Martus account and data if you forget your user name and password. You will be prompted to create the 5 piece backup after completing your account setup and we strongly encourage you to do so.
 
 #__________________________________________=Author Public Code
 -01c7-field:BulletinDetailsAuthorPublicCode=Общий код автора
@@ -532,17 +625,17 @@
 #__________________________________=Warning: Some information in this bulletin is not visible
 -eba1-field:BulletinHasUnknownStuff=Предупреждение: Информация в сводке отображена не полностью
 
-#______________________________________________=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new Headquarters account use the Tools/Configure Headquarters menu option.
--6702-field:BulletinHeadQuartersHQInfoForModify=Выбранные центральные учетные записи получат право просматривать конфиденциальную информацию в данной сводке, а также отправлять сводку на сервер после того, как Вы сохраните ее.\n\nЧтобы добавить новую центральную учетную запись, используйте команду "Настройка центральных учетных записей" меню Сервис.
+#______________________________________________=The selected contacts' account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new contact's account use the Tools > Manage Contacts menu option.
+-af20-field:BulletinHeadQuartersHQInfoForModify=Выбранные центральные учетные записи получат право просматривать конфиденциальную информацию в данной сводке, а также отправлять сводку на сервер после того, как Вы сохраните ее.\n\nЧтобы добавить новую центральную учетную запись, используйте команду "Настройка центральных учетных записей" меню Сервис.
 
-#____________________________________________=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.
--e728-field:BulletinHeadQuartersHQInfoForView=Следующие центральные учетные записи имеют право просматривать конфиденциальную информацию в данной сводке, а также отправлять сводку на сервер.
+#____________________________________________=The following Contact account(s) can view the private information in this bulletin, and can send this bulletin to a server.
+-89eb-field:BulletinHeadQuartersHQInfoForView=Следующие центральные учетные записи имеют право просматривать конфиденциальную информацию в данной сводке, а также отправлять сводку на сервер.
 
 #______________________________________=Label
 -7434-field:BulletinHeadQuartersHQLabel=Метка
 
-#___________________________________________=Headquarters
--6222-field:BulletinHeadQuartersHeadquarters=Центральные учетные записи
+#___________________________________________=Contacts
+-b0dd-field:BulletinHeadQuartersHeadquarters=Центральные учетные записи
 
 #_____________________=Bulletin Id:
 -a081-field:BulletinId=Идентификатор сводки:
@@ -550,8 +643,8 @@
 #____________________________=Last Saved
 -eb05-field:BulletinLastSaved=Сохранена 
 
-#___________________________=Field Desk Bulletin
--f61d-field:BulletinNotYours=Сводка создана периферийной учетной записью
+#___________________________=Contact Bulletin
+-c778-field:BulletinNotYours=Сводка создана периферийной учетной записью
 
 #_______________________=Size (Kb)
 -fa2e-field:BulletinSize=Размер (Кб)
@@ -559,8 +652,8 @@
 #_________________________=Bulletin Status:
 -c567-field:BulletinStatus=Состояние сводки:
 
-#______________________________________=Created by an UNVERIFIED Field Desk
--4188-field:BulletinUnverifiedFieldDesk=Создана НЕДОВЕРЕННОЙ периферийной учетной записью
+#______________________________________=Created by an UNKNOWN Contact
+-23a5-field:BulletinUnverifiedFieldDesk=Создана НЕДОВЕРЕННОЙ периферийной учетной записью
 
 #________________________________=Version
 -2da6-field:BulletinVersionNumber=Версия
@@ -634,8 +727,17 @@
 #__________________________=Martus Bulletin Count
 -0d40-field:ChartYAxisTitle=Счетчик сводок Martus
 
-#__________________________________=Select the headquarters listed below that you want to add to all the bulletins listed above.
--23a1-field:ChooseHeadquartersToAdd=Выберите из списка учетную запись, которую Вы желаете назначить центральной для всех сводок, перечисленных выше.
+#________________________=Choose a Contact
+-93d3-field:ChooseContact=Choose a Contact
+
+#_____________________=Choose a Form
+-8abd-field:ChooseForm=Choose a Form
+
+#__________________________________=Select the contacts listed below that you want to add to all the bulletins listed above.
+-a965-field:ChooseHeadquartersToAdd=Выберите из списка учетную запись, которую Вы желаете назначить центральной для всех сводок, перечисленных выше.
+
+#_________________________=Choose a Language
+-254a-field:ChooseLanguage=Choose a Language
 
 #_____________________________=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. 
 -e4a8-field:ChooseReportFields=Удерживая нажатой клавишу Ctrl или Shift, выделите мышью поля или столбцы, которые будут включены в отчет.
@@ -646,32 +748,65 @@
 #______________________________=Row #
 -4946-field:ColumnGridRowNumber=Строка №
 
-#_______________________________=These Field Desk accounts are those you trust to send you their private bulletin information and attachments. Any Field Desk bulletins you receive from accounts not on this list will be marked as from an unverified account.
--bbc7-field:ConfigureFDsOverview=Вы доверяете перечисленным периферийным учетным записям направлять Вам конфиденциальные данные и вложения из их сводок. Любая сводка, полученная от периферийной учетной записи, не включенной в данный список, будет помечена как полученная из недоверенного источника.
-
 #____________________________________________=Public Code
 -a1a2-field:ConfigureHQColumnHeaderPublicCode=Общий код
-
-#_________________________________=Current Headquarters
--6bd3-field:ConfigureHQsCurrentHQs=Настроенные центральные учетные записи
 
 #_______________________________________=Default?
 -0e2c-field:ConfigureHeadQuartersDefault=По умолчанию?
 
-#_______________________________________=This information will be available to anyone who can view your public bulletin information, or anyone with administrative rights on the server. \n\nThis allows people to contact you for further information.
--930c-field:ContactInfoFutureUseOfFields=Эти данные будут доступны каждому, кто имеет доступ к общей информации из Ваших сводок или наделен правами администратора сервера.\nЭто позволит лицам, заинтересованным в подробной информации, связаться с Вами.
+#_________________________________=Confirm User Name
+-e804-field:ConfirmAccountUserName=Confirm User Name
 
-#____________________________________=This information identifies your organization.\nYou must enter either an Author or Organization, and both are shown in every bulletin you create.
--ea39-field:ContactInfoRequiredFields=Эти данные определяют Вашу организацию.\nЗаполните либо поле "Автор", либо поле "Организация". Оба поля будут показаны во всех сводках, которые Вы создаете.
+#__________________________=Confirm Password
+-c2d4-field:ConfirmPassword=Confirm Password
 
-#_________________________________=You can change any of this information later, by choosing Options/Contact Info.
--e924-field:ContactInfoUpdateLater=Вы всегда сможете изменить эти данные с помощью команды "Контактные данные" меню "Параметры". 
+#______________________________________=Connect to the Martus server to:
+-ae9b-field:ConnectMartusServerReasons1=Connect to the Martus server to:
+
+#______________________________________=- Backup your documents on the Martus server in case your computer is lost or stolen
+-5824-field:ConnectMartusServerReasons2=- Backup your documents on the Martus server in case your computer is lost or stolen
+
+#______________________________________=- Easily retrieve the public keys of your contacts, so you can send them bulletins
+-e451-field:ConnectMartusServerReasons3=- Easily retrieve the public keys of your contacts, so you can send them bulletins
+
+#______________________________________=- Import form templates from your contacts
+-d2ed-field:ConnectMartusServerReasons4=- Import form templates from your contacts
+
+#_________________________________=Connect
+-b654-field:ConnectToAdvanceServer=Connect
+
+#____________________________________________=Attempting to connect to the server and retrieve your Token.
+-7e13-field:ConnectingToServerToRetrieveToken=Attempting to connect to the server and retrieve your Token.
+
+#_________________________________=This contact currently has the name: '#Name#'
+-cbc4-field:ContactAlreadyExistsAs=This contact currently has the name: '#Name#'
+
+#_______________________________________=This information is optional and is used to prepopulate your bulletins for your convenience. It is stored on your local computer and not sent to the Martus server.
+-b5a0-field:ContactInfoFutureUseOfFields=Эти данные будут доступны каждому, кто имеет доступ к общей информации из Ваших сводок или наделен правами администратора сервера.\nЭто позволит лицам, заинтересованным в подробной информации, связаться с Вами.
+
+#____________________________________=This information identifies your organization.\nYou may enter either an Author, Organization, or both, and both are shown in every bulletin you create.
+-3937-field:ContactInfoRequiredFields=Эти данные определяют Вашу организацию.\nЗаполните либо поле "Автор", либо поле "Организация". Оба поля будут показаны во всех сводках, которые Вы создаете.
+
+#__________________________=Verified
+-aed3-field:ContactVerified=Verified
+
+#___________________________=Verify Now
+-b8b4-field:ContactVerifyNow=Verify Now
+
+#________________________=Create an Account
+-d48e-field:CreateAccount=Create an Account
+
+#____________________________________=When creating a user name and password for your account, please be aware there is no way to retrieve your user name and password if you forget it. This is for your safety.
+-8108-field:CreateAccountInstructions=When creating a user name and password for your account, please be aware there is no way to retrieve your user name and password if you forget it. This is for your safety.
+
+#________________________________=User Name:
+-784c-field:CreateAccountUserName=User Name:
 
 #__________________________________=The layout of the bulletins is dictated by an XML document.  The document must begin with <CustomFields> and end with </CustomFields>. By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
 -0399-field:CreateCustomFieldsHelp1=Вид сводки определяется в документе формата XML. Документ должен начинаться с тега <CustomFields> и заканчиваться тегом </CustomFields>. По умолчанию описания стандартных полей сводки появляются вверху экрана редактирования описаний полей, но при желании можно переместить их.  Однако четыре следующих обязательных элемента не могут быть исключены из списка полей: 'author' (имя автора), 'entrydate' (дата создания сводки), 'language'(язык) и 'title'(заголовок).\n\n
 
 #__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', 'STRING', and 'SECTION'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'VictimsName', 'EyeColorChoice', etc.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nYou can create sections (which you can hide/unhide) in your bulletins using a SECTION field type.  \n\nYou can put multiple fields on a single row in your bulletin by using <KeepWithPrevious/> in the field definition.\n\nYou can require certain fields or grid columns to be entered before saving a bulletin by using </RequiredField> in the field definition.\n\nYou can restrict standard or custom date fields, date grid columns, date range fields, and date range grid columns by using <MinimumDate> and/or <MaximumDate> tags with a date in YYYY-MM-DD format. NOTE: The year must always be a 'Gregorian' year like 2009, even if Martus is configured to use Thai or Afghan or Persian dates. A blank date, shown as <MaximumDate/>, means 'today', although it may allow one day earlier or later, due to time zone issues. \n\nYou can populate drop-down lists (either inside or outside of a grid) in three ways - 1) by entering a list of <Choices> values in the field definition, 2) with values that have been entered in a grid elsewhere in your bulletin by using <DataSource> (sometimes called "data-driven dropdowns"), and 3) by creating a list of "Reusable Choices" that can be referred to by more than one field.  See examples below for the correct XML definition syntax to use.\n\nYou can set a default value for text and dropdown list fields by using <DefaultValue>ddd</DefaultValue>. For dropdowns, you must use a value already in the list of choices you defined. For Reusable Choices dropdowns it can be a partial or complete code, with each level separated by dots (for a location dropdown that has both Region and City levels, you could pick the default to be at either level, e.g. either R1 or R1.C1, see example below). Default values can be set for both standard and custom fields, but are NOT allowed for BOOLEAN, DATE, DATERANGE, GRID, LANGUAGE, MESSAGE, and SECTION field types, and are not allowed for dropdowns where the values in the list are based on data entered in another field.(i.e. data-driven dropdowns).  Please note that default values are only applied when a new bulletin is created, not when a new version of a bulletin is created, so that the value of the field in the previous version is not overwritten.  This means that default values entered in a bulletin using an earlier customization will be kept even if you create a new version of the bulletin with an updated customization that has a new default value\n\n Additional Comments\n\n1. XML is case-sensitive ('Witness' is not the same as 'witness')\n\n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING")\n\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n\n4.  Use "MESSAGE" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n\n5.  Dropdowns using a "Reusable Choices" list can have multiple levels (e.g. for locations that might have Region and City), different fields can use one or more of the levels, and the number of levels is not limited.\n\n6. Both STRING and MULTILINE fields are text fields.  STRING fields will expand to fit the size of the text you enter, while MULTILINE fields have a scrollbar so that the field doesn't exceed its original height.\n\n7.  A GRID can contain columns of various types:  BOOLEAN, DATE, DATERANGE, DROPDOWN, and STRING. When you're entering data into a grid, press Enter to create a new line, press Tab to advance to the next cell, and double-click to copy and paste text.\n\n8.  You can update your customization if the information you are collecting over time changes, for example by adding new fields.  If you are changing fields in a customization, you should think about how you will want to search/report on bulletins created with the old customization as well as new bulletins you create with the new customization, and try to make the changes so that you can search/report on all bulletins at the same time.  Changing field types may cause your searching/reporting to be more complex, so we always recommend that you test out creating bulletins with a new customization and searching/reporting on both old and new bulletins before officially updating the customization for your project.  When you change customizations, Martus will do its best to update the old formatted data to the new customization if you create a new version of a bulletin with the old customization.  If you add completely new fields but don't change any of the old fields, the new version of the bulletin will have all the old fields filled in as they were in the previous version, and the new fields will be blank and you can fill them in.  If you delete fields, the new version of the bulletin will not contain those fields, but you can go back to see the deleted fields in the previous version if it was a sealed bulletin instead of a draft (by hitting the Bulletin Details button in the Header section of the bulletin), and copy any info from the old version into a different field in the new one if desired.  You have to be very careful if you make changes to the customization definitions of old fields.  If you keep the same tag and label, but change the type of field, Martus may be able to transfer the old data into the new field type, but not in all cases.  For example, if you change field type from DROPDOWN to STRING, the data will be transferred over, but if you change from STRING to BOOLEAN, the data will be lost. If you change from a DATE to DATERANGE, your data will be transferred, but if you change from DATERANGE to DATE, you will lose the end date from your earlier data. DROPDOWN and GRID fields are subject to additional rules regarding the modification of dropdown options/values and grid columns. If you add options/values to a dropdown list, the old data will be transferred over. But if you modify or delete an option/value, all bulletins for which that option was selected will lose that data. If you want to add columns to a grid, please make sure to do so at the end of the old grid definition and not in the middle, or the old data will not be transferred to the new version of the bulletin. If you change fields and lose old data in the new version as a result, please note that you can go back to see the deleted data in the previous version if it was a sealed bulletin instead of a draft (by hitting the Bulletin Details button in the Header section of the bulletin), and copy any info from the old version into a different field in the new one if desired. In this release, if you want to change the number of levels in a "Reusable Choices" dropdown field when updating a customization, you should also change the field tag and/or label so that they are more easily distinguished from each other in searching and reporting.  If you do not, the search/report results may be confusing since fields with the same label/tag will be treated differently due to them having a different number of levels.\n\nSee examples below and if you need additional help with customization, please email help@martus.org.\n\n
--659f-field:CreateCustomFieldsHelp2=Чтобы создать пользовательское (нестандартное) поле, прежде всего задайте желаемый тип поля. Возможные типы: 'BOOLEAN'(логический), 'DATE'(дата), 'DATERANGE'(интервал дат), 'DROPDOWN'(выпадающий список), 'GRID'(таблица), 'LANGUAGE'(язык), 'MESSAGE'(сообщение), 'MULTILINE'(многострочный экран редактирования), 'STRING'(редактируемая строка) и 'SECTION'(раздел).\n\nКаждое пользовательское поле должно иметь свой уникальный идентификационный тег. В качестве такого тега может использоваться любое слово (кроме тех, которые уже зарезервированы системой - например, 'author' (автор), 'summary'(краткая информация), 'location'(место события), 'title'(заголовок) и т.д.) Тег не может содержать пробелы и специальные символы. Например, возможны теги 'ИмяПострадавшего', 'ЦветГлаз' и т.д.\n\nЗатем следует определить метку поля, которая будет выводиться рядом с пользовательским полем.  Например, возможна метка "Имя 1-го свидетеля".\n\nВы можете создавать в своих сводках разделы (которые можно отображать или скрывать по Вашему желанию), иcпользуя тип поля SECTION. \n\nМожно размещать несколько полей в одной строке сводки, используя в определении поля параметр <KeepWithPrevious/>.\n\nМожно задать условие, чтобы сводку невозможно было сохранить, если определенные поля оставлены пустыми. Для этого в определении соответствующих полей используется параметр <RequiredField/>.\n\nКак в стандартных, так и в пользовательских полях типа "дата", а также в колонках таблиц формата "дата", интервалах дат и колонках таблиц типа "интервал дат" можно ограничить самую раннюю и самую позднюю возможную дату, используя теги <MinimumDate> и/или <MaximumDate> с соответствующими значениями дат в формате ГГГГ-ММ-ДД. ПРИМЕЧАНИЕ: Год следует указывать только по грегорианскому календарю, например 2009, даже если Martus настроен на использование афганского, персидского или тайского календаря. Пустое значение даты (когда тег выглядит как <MaximumDate/>) означает текущую дату, хотя иногда может смещаться на день раньше либо на день позже в силу различия часовых поясов.\n\nВыпадающие списки (в том числе входящие в таблицу) могут заполняться тремя способами: 1) с помощью списка значений <Choices>, задаваемого в определении поля; 2) с помощью значений, задаваемых в таблице, которая может находиться в любом месте сводки (для этого в определении поля выпадающего списка используется параметр <DataSource>) – иногда такой список называют "управляемым данными" ("data-driven dropdown"); 3) путем создания списка "Многократно используемые варианты" ("Reusable Choices"), на который могут ссылаться одно или более полей. Ниже приводятся примеры правильного использования XML-синтаксиса в определениях полей.\n\nДля текстовых полей и выпадающих списков можно задать значение по умолчанию, используя код <DefaultValue>значение_по_умолчанию</DefaultValue>. Для выпадающих списков это должно быть одно из значений, определенных ранее в списке вариантов. Для выпадающих списков, ссылающихся на многократно используемые варианты, может применяться полный или частичный код, в котором уровни разделяются точками (например, если список определяется для места события и имеет уровни "Регион" и "Город", значение по умолчанию может быть взято с любого уровня: например, лмбо Р1, либо Р1.Г1 – см. пример ниже). Значения по умолчанию могут задаваться как для стандартных, так и для пользовательских полей, но НЕ для полей типа 'BOOLEAN'(логический), 'DATE'(дата), 'DATERANGE'(интервал дат), 'GRID'(таблица), 'LANGUAGE'(язык), 'MESSAGE'(сообщение) и 'SECTION'(раздел), и НЕ для выпадающих списков, управляемых данными, вводимыми в другое поле. Обратите внимание, что заданные значения по умолчанию используются только при создании новой сводки, а не новой версии сводки; в последнем случае изначально сохраняется значение поля из предыдущей версии. Тем самым, если сводка создавалась при одной настройке полей (с конкретными заданными значениями по умолчанию), а затем настройка полей была изменена и заданы новые значения по умолчанию, при создании новой версии данной сводки всё равно сохранятся значения по умолчанию, введенные при более ранней настройке полей.\n\nДополнительные пояснения\n1. XML различает прописные и строчные буквы (например, 'Свидетель' и 'свидетель' - не одно и то же)\n2. Cлово, обозначающее тип поля, может заключаться в одиночные или парные кавычки (кавычки перед словом и после него должны быть одинаковыми, например, можно набрать 'STRING' или "STRING", но не 'STRING")\n3. Поле типа "BOOLEAN" (логического) будет выводиться в виде флажка в окне редактирования и в виде "Да/Нет" при распечатке или предварительном просмотре.\n4. Используйте поля типа "MESSAGE" (сообщение), чтобы пояснять, как вводятся данные, или создавать комментарии (примечания), которые будут выводиться в каждой сводке.\n5. Выпадающие списки с многократно используемыми вариантами могут иметь несколько уровней (например, для места события уровни могут обозначать регион и город); различные поля могут использовать один или более уровней, количество уровней не ограничивается.\n\n6. Поля типа STRING (строка) и MULTILINE (многострочный экран редактирования) являются текстовыми. Высота поля типа STRING при заполнении меняется в зависимости от размера вводимого текста, в то время как в поле типа MULTILINE появляется полоса прокрутки, а исходная высота поля не меняется. \n\n7. Таблица (поле типа GRID) может содержать столбцы различных типов: BOOLEAN, DATE, DATERANGE, DROPDOWN и/или STRING. При вводе данных в таблицу нажимайте клавишу Enter для создания новой строки таблицы, клавишу Tab – для перехода к следующей ячейке. Для копирования и вставки текста дважды щелкните мышью. \n\nНиже приводятся примеры полей:\n\n>
+-659f-field:CreateCustomFieldsHelp2=Чтобы создать пользовательское (нестандартное) поле, прежде всего задайте желаемый тип поля. Возможные типы: 'BOOLEAN'(логический), 'DATE'(дата), 'DATERANGE'(интервал дат), 'DROPDOWN'(выпадающий список), 'GRID'(таблица), 'LANGUAGE'(язык), 'MESSAGE'(сообщение), 'MULTILINE'(многострочный экран редактирования), 'STRING'(редактируемая строка) и 'SECTION'(раздел).\n\nКаждое пользовательское поле должно иметь свой уникальный идентификационный тег. В качестве такого тега может использоваться любое слово (кроме тех, которые уже зарезервированы системой - например, 'author' (автор), 'summary'(краткая информация), 'location'(место события), 'title'(заголовок) и т.д.) Тег не может содержать пробелы и специальные символы. Например, возможны теги 'ИмяПострадавшего', 'ЦветГлаз' и т.д.\n\nЗатем следует определить метку поля, которая будет выводиться рядом с пользовательским полем.  Например, возможна метка "Имя 1-го свидетеля".\n\nВы можете создавать в своих сводках разделы (которые можно отображать или скрывать по Вашему желанию), иcпользуя тип поля SECTION. \n\nМожно размещать несколько полей в одной строке сводки, используя в определении поля параметр <KeepWithPrevious/>.\n\nМожно задать условие, чтобы сводку невозможно было сохранить, если определенные поля оставлены пустыми. Для этого в определении соответствующих полей используется параметр <RequiredField/>.\n\nКак в стандартных, так и в пользовательских полях типа "дата", а также в колонках таблиц формата "дата", интервалах дат и колонках таблиц типа "интервал дат" можно ограничить самую раннюю и самую позднюю возможную дату, используя теги <MinimumDate> и/или <MaximumDate> с соответствующими значениями дат в формате ГГГГ-ММ-ДД. ПРИМЕЧАНИЕ: Год следует указывать только по грегорианскому календарю, например 2009, даже если Martus настроен на использование афганского, персидского или тайского календаря. Пустое значение даты (когда тег выглядит как <MaximumDate/>) означает текущую дату, хотя иногда может смещаться на день раньше либо на день позже в силу различия часовых поясов.\n\nВыпадающие списки (в том числе входящие в таблицу) могут заполняться тремя способами: 1) с помощью списка значений <Choices>, задаваемого в определении поля; 2) с помощью значений, задаваемых в таблице, которая может находиться в любом месте сводки (для этого в определении поля выпадающего списка используется параметр <DataSource>) – иногда такой список называют "управляемым данными" ("data-driven dropdown"); 3) путем создания списка "Многократно используемые варианты" ("Reusable Choices"), на который могут ссылаться одно или более полей. Ниже приводятся примеры правильного использования XML-синтаксиса в определениях полей.\n\nДля текстовых полей и выпадающих списков можно задать значение по умолчанию, используя код <DefaultValue>значение_по_умолчанию</DefaultValue>. Для выпадающих списков это должно быть одно из значений, определенных ранее в списке вариантов. Для выпадающих списков, ссылающихся на многократно используемые варианты, может применяться полный или частичный код, в котором уровни разделяются точками (например, если список определяется для места события и имеет уровни "Регион" и "Город", значение по умолчанию может быть взято с любого уровня: например, лмбо Р1, либо Р1.Г1 – см. пример ниже). Значения по умолчанию могут задаваться как для стандартных, так и для пользовательских полей, но НЕ для полей типа 'BOOLEAN'(логический), 'DATE'(дата), 'DATERANGE'(интервал дат), 'GRID'(таблица), 'LANGUAGE'(язык), 'MESSAGE'(сообщение) и 'SECTION'(раздел), и НЕ для выпадающих списков, управляемых данными, вводимыми в другое поле. Обратите внимание, что заданные значения по умолчанию используются только при создании новой сводки, а не новой версии сводки; в последнем случае изначально сохраняется значение поля из предыдущей версии. Тем самым, если сводка создавалась при одной настройке полей (с конкретными заданными значениями по умолчанию), а затем настройка полей была изменена и заданы новые значения по умолчанию, при создании новой версии данной сводки всё равно сохранятся значения по умолчанию, введенные при более ранней настройке полей.\n\nДополнительные пояснения\n1. XML различает прописные и строчные буквы (например, 'Свидетель' и 'свидетель' - не одно и то же)\n2. Cлово, обозначающее тип поля, может заключаться в одиночные или парные кавычки (кавычки перед словом и после него должны быть одинаковыми, например, можно набрать 'STRING' или "STRING", но не 'STRING")\n3. Поле типа "BOOLEAN" (логического) будет выводиться в виде флажка в окне редактирования и в виде "Да/Нет" при распечатке или предварительном просмотре.\n4. Используйте поля типа "MESSAGE" (сообщение), чтобы пояснять, как вводятся данные, или создавать комментарии (примечания), которые будут выводиться в каждой сводке.\n5. Выпадающие списки с многократно используемыми вариантами могут иметь несколько уровней (например, для места события уровни могут обозначать регион и город); различные поля могут использовать один или более уровней, количество уровней не ограничивается.\n\n6. Поля типа STRING (строка) и MULTILINE (многострочный экран редактирования) являются текстовыми. Высота поля типа STRING при заполнении меняется в зависимости от размера вводимого текста, в то время как в поле типа MULTILINE появляется полоса прокрутки, а исходная высота поля не меняется. \n\n7. Таблица (поле типа GRID) может содержать столбцы различных типов: BOOLEAN, DATE, DATERANGE, DROPDOWN и/или STRING. При вводе данных в таблицу нажимайте клавишу Enter для создания новой строки таблицы, клавишу Tab – для перехода к следующей ячейке. Для копирования и вставки текста дважды щелкните мышью. \n\nНиже приводятся примеры полей:\n\n
 
 #___________________________________= Notes on "Reusable Choices" dropdown fields:\n\n 1. Dropdowns using a "Reusable Choices" list can have multiple levels (e.g. for locations that might have Region and City), different fields can use one or more of the levels (e.g. if you have defined Region and City levels, you could have a field that just uses the Region level, and another field that uses both levels), and you do not need to define all levels for all entries (e.g. you could have defined Neighborhood values as a lower level for some larger Cities, but not all Cities need to have Neighborhoods defined).  The number of levels is not limited by Martus, but please note that if you have large amounts of data in your definitions lists, or a large number of levels, performance of certain Martus bulletin operations may be affected.\n\n 2. In this release, we recommend that if you want to change the number of levels in a "Reusable Choices" dropdown field when updating a customization, you also change the field tag and/or label so that they are more easily distinguished from each other in searching and reporting.  If you do not, the search/report results may be confusing since fields with the same label/tag will be treated differently due to them having a different number of levels.\n\n 3. "Reusable Choices" codes have the same restrictions that field tags do; they can be in any language, but cannot contain spaces, special characters, or punctuation.\n\n 4. Please make sure to not use the same codes in Reusable Choices lists if you edit your customizations unless you are just fixing typos in the labels, because using the same code for different labels can cause confusion when searching or reporting on those fields. Ideally you should use codes that are not numeric, but are letters that are a meaningful abbreviation of the label so there is no confusion over what they stand for if you update the customization at a later date (e.g. use 2 or 3 letter abbreviations for locations instead of numbers).  See the "Search" Help screen for more information about how code and label choices can affect searching on these fields.\n\n 5. You cannot use a multiple level / reusable choice dropdown as a data source for another dropdown inside or outside of grids. If you try to do this you will see an error message.\n\n 6. Please note that when you save customization XML with a Reusable Choices list for dropdown fields, Martus will move those choice definitions to the bottom of the XML when you reload it.\n\n
 -77ae-field:CreateCustomFieldsHelp2b= Пояснения по выпадающим спискам с вариантами многократного использования:\n\n 1. Такие списки могут иметь несколько уровней (напр., для места события возможны уровни Регион и Город); в различных полях может использоваться один или более уровней (напр., если Вы задали уровни Регион и Город, Вы можете задать поле, использующее только уровень Регион, и другое поле, использующее оба уровня); при этом нет необходимости задавать все уровни для всех элементов списка (напр., для некоторых значений уровня Город, соответствующих крупным городам, Вы можете задать следующий уровень - Пригород - с соответствующими вариантами значений, но Вы не обязаны задавать Пригород для всех значений уровня Город). Количество уровней списка в Martus не ограничивается, но большие объемы данных в списках вариантов значений или большое количество уровней в списках могут повлиять на выполнение некоторых операций со сводками Martus.\n\n 2. При работе с данным выпуском программы рекомендуется, если Вы желаете изменить количество уровней в поле выпадающего списка с вариантами многократного использования, изменить также тег и/или метку соответствующего поля, с тем чтобы при поиске и составлении отчетов поля легче было отличить друг от друга.  Если Вы не измените тег и/или метку, это может привести к путанице в результатах поиска или отчетах, так как поля с одинаковыми тегами и метками, различающиеся по количеству уровней в них, будут обрабатываться по-разному.\n\n 3. На коды вариантов многократного использования накладываются те же ограничения, что и на теги полей; такие коды могут задаваться на любом языке, но не могут содержать пробелы, специальные символы или знаки препинания.\n\n 4. При редактировании настроек убедитесь, что Вы не используете прежние коды в списках с вариантами многократного использования (за исключением случаев, когда Вы просто исправляете опечатки в метках), так как использование одного и того же кода в сочетании с различными метками может вызвать путаницу при поиске или составлении отчетов по соответствующим полям. В идеальном варианте следует использовать не цифровые коды, а буквенные сочетания, представляющие собой значимые аббревиатуры соответствующих меток; тогда не возникнет путаницы в том, что они обозначают, если Вы позже измените настройки (напр., для обозначения места события лучше использовать не цифры, а сочетания из двух-трех букв).  Более подробно о том, как варианты кодов и меток могут повлиять на функцию поиска по соответствующему полю, рассказано в справке по поиску.\n\n 5. Нельзя использовать список с вариантами многократного использования, в том числе многоуровневый, как источник данных для другого списка, в том числе находящегося внутри таблицы. При нарушении этого запрета выдается сообщение об ошибке.\n\n 6. Обратите внимание, что, если Вы сохраните XML-файл настроек со списком вариантов многократного использования для выпадающих списков, при последующей загрузке этого файла Martus переместит определения этих вариантов в нижнюю часть XML-документа.\n\n
@@ -681,6 +816,12 @@
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=Введите Ваше новое имя пользователя и новый пароль.
+
+#_______________________________________________=Note: this backup method still requires remembering your username and password to restore your account.
+-ebc4-field:CreateSingleEncryptedFileInformation=Note: this backup method still requires remembering your username and password to restore your account.
+
+#__________________________=Please wait. Your account's encryption key is being created.
+-cae1-field:CreatingAccount=Please wait. Your account's encryption key is being created.
 
 #_________________________________=Bottom (always Private) Pane of Bulletin
 -f953-field:CustomXMLBottomSection=Нижняя (всегда конфиденциальная) часть сводки
@@ -739,6 +880,9 @@
 #_____________________________________=bulletins.html
 -a4f1-field:DefaultPrintToDiskFileName=сводки.html
 
+#_______________________________=Default Server
+-6d35-field:DefaultServerHeading=Default Server
+
 #_________________________________=This bulletin has been pasted into Martus from the file:
 -ce4c-field:DeleteBulletinFileMsg1=Эта сводка вставлена в Martus из файла:
 
@@ -754,8 +898,23 @@
 #____________________________________=You can only delete draft bulletins from the server that are not currently on your computer.
 -8ded-field:DeleteServerDraftsMessage=Вы можете удалять с сервера только черновые сводки, которых сейчас нет на Вашем компьютере.
 
+#__________________________=Your Display Settings
+-9d27-field:DisplaySettings=Your Display Settings
+
 #______________________=Do not prompt
 -448d-field:DonotPrompt=Без запроса
+
+#______________________________________=Download from Another Martus User
+-4afb-field:DownloadFormFromAnotherUser=Download from Another Martus User
+
+#_______________________________=Download from my contacts
+-1cb9-field:DownloadFromContacts=Download from my contacts
+
+#_________________________________________=Download from Another Martus User
+-4afb-field:DownloadTemplateFromMartusUser=Download from Another Martus User
+
+#_________________________________________=Download from my Contacts
+-7410-field:DownloadTemplateFromMyContacts=Download from my Contacts
 
 #__________________________=Labels
 -2228-field:DuplicateLabels=Метки
@@ -765,6 +924,9 @@
 
 #__________________________________________________=Do you want to save this template with the duplicate labels?
 -79bc-field:DuplicateLabelsInCustomTemplateContinue=Хотите сохранить шаблон с повторяющимися метками?
+
+#___________________________=Enter Access Token
+-4f8c-field:EnterAccessToken=Enter Access Token
 
 #________________________________=Unable to back up the key file on this disk.
 -bda3-field:ErrorBackingupKeyPair=Невозможно сохранить файл ключа на данный диск.
@@ -781,8 +943,8 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=МЕТКА
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag\n   102 - A previous Tag already exists with this name\n   103 - Label cannot be blank\n   104 - Unrecognized Field Type\n   105 - A label was found in a standard field\n   106 - XML Parse Error (e.g. mismatched quotation marks or bracket syntax)\n   107 - Tag or Code contains illegal characters (e.g. spaces or punctuation)\n   108 - Duplicate entry in Dropdown field\n   109 - No Choices in Dropdown field\n   110 - System/Standard field tag cannot be used for custom field\n   111 - Standard field in top pane cannot be placed in bottom (always Private) pane\n   112 - Standard field in bottom (always Private) pane cannot be placed in the top pane\n   113 - Data Source Grid not found in same pane as resulting dropdown field\n   114 - Unknown Data Source Grid Column Label\n   115 - Dropdown cannot have both choices and data source\n   116 - Invalid date must be in ISO format YYYY-MM-DD\n   117 - No Reusable Choices list defined for Dropdown\n   118 - Reusable dropdown definition missing code value.  Please verify that the definition looks like the following:\n         <UseReusableChoices code='FieldChoices'></UseReusableChoices>\n   119 - Reusable choice must have a code and label\n   120 - Dropdown data source cannot be a single or multiple level dropdown with Reusable Choices\n   121 - Default value is not valid for this field\n   122 - Reusable Choices lists cannot have the same Label\n   123 - Lower-level reusable choice code has no matching higher-level code\n   200 - All fields empty\n   201 - Unrecognized Headquarters created this template\n   202 - Security validation error\n   203 - File Error\n   204 - Imported XML Missing Field
--85ea-field:ErrorCustomFields=При настройке полей допущена ошибка. Типы ошибок обозначаются следующими кодами:\n   100 - Отсутствует обязательное стандартное поле.\n   101 - Тег поля отсутствует или задан неверно.\n   102 - Тег с этим именем уже был задан ранее.\n   103 - Метка пользовательского поля отсутствует.\n   104 - Невозможно распознать тип поля.\n   105 - Стандартному полю присвоена метка.\n   106 – Синтаксическая ошибка формата XML (напр., непарная кавычка или скобка).\n   107 - Тег или код содержит недопустимые символы (напр., пробелы или знаки препинания).\n   108 - Дублирование элемента в выпадающем списке.\n   109 - В выпадающем списке отсутствуют элементы (варианты выбора). \n   110 – Тег системного (стандартного) поля нельзя применять в пользовательском поле.\n   111 – Стандартное поле верхней части сводки не может размещаться в ее нижней (всегда конфиденциальной) части.\n   112 - Стандартное поле нижней (всегда конфиденциальной) части сводки не может размещаться в ее верхней части.\n   113 – Таблица, предлагаемая в качестве источника данных для выпадающего списка, не найдена в той же части сводки (верхней либо нижней), в которой находится сам список.\n   114 – Неизвестная метка колонки таблицы – источника данных.\n   115 – Список не может содержать одновременно фиксированные значения вариантов и значения из внешнего источника.\n   116 – Неверная датаю Задайте дату в формате ISO (ГГГГ-ММ-ДД)\n   117 – Для выпадающего списка не заданы варианты многократного использования \n   118 – В определении варианта многократного использования отсутствует значение кода.  Убедитесь, что определение задано следующим образом:\n         <UseReusableChoices code='Варианты'></UseReusableChoices>\n   119 – Вариант многократного использования должен иметь код и метку\n   120 – Выпадающий список (одно- или многоуровневый) с вариантами многократного использования не может служить источником данных для другого выпадающего списка\n   121 – Для данного поля задано неверное значение по умолчанию\n   122 – Списки вариантов многократного использования не могут иметь одну и ту же метку\n   123 – Для кода нижнего уровня варианта многократного использования отсутствует соответствующий код верхнего уровня\n   200 - Все поля пустые.\n   201 - Невозможно распознать центральную учетную запись, создавшую данный шаблон.\n   202 - Ошибка при проверке защиты.\n   203 - Ошибка файла.\n   204 - Поле отсутствует в импортируемом XML-файле.
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag\n   102 - A previous Tag already exists with this name\n   103 - Label cannot be blank\n   104 - Unrecognized Field Type\n   105 - A label was found in a standard field\n   106 - XML Parse Error (e.g. mismatched quotation marks or bracket syntax)\n   107 - Tag or Code contains illegal characters (e.g. spaces or punctuation)\n   108 - Duplicate entry in Dropdown field\n   109 - No Choices in Dropdown field\n   110 - System/Standard field tag cannot be used for custom field\n   111 - Standard field in top pane cannot be placed in bottom (always Private) pane\n   112 - Standard field in bottom (always Private) pane cannot be placed in the top pane\n   113 - Data Source Grid not found in same pane as resulting dropdown field\n   114 - Unknown Data Source Grid Column Label\n   115 - Dropdown cannot have both choices and data source\n   116 - Invalid date must be in ISO format YYYY-MM-DD\n   117 - No Reusable Choices list defined for Dropdown\n   118 - Reusable dropdown definition missing code value.  Please verify that the definition looks like the following:\n         <UseReusableChoices code='FieldChoices'></UseReusableChoices>\n   119 - Reusable choice must have a code and label\n   120 - Dropdown data source cannot be a single or multiple level dropdown with Reusable Choices\n   121 - Default value is not valid for this field\n   122 - Reusable Choices lists cannot have the same Label\n   123 - Lower-level reusable choice code has no matching higher-level code\n   200 - All fields empty\n   201 - Unrecognized Contact created this template\n   202 - Security validation error\n   203 - File Error\n   204 - Imported XML Missing Field
+-8bd5-field:ErrorCustomFields=При настройке полей допущена ошибка. Типы ошибок обозначаются следующими кодами:\n   100 - Отсутствует обязательное стандартное поле.\n   101 - Тег поля отсутствует или задан неверно.\n   102 - Тег с этим именем уже был задан ранее.\n   103 - Метка пользовательского поля отсутствует.\n   104 - Невозможно распознать тип поля.\n   105 - Стандартному полю присвоена метка.\n   106 – Синтаксическая ошибка формата XML (напр., непарная кавычка или скобка).\n   107 - Тег или код содержит недопустимые символы (напр., пробелы или знаки препинания).\n   108 - Дублирование элемента в выпадающем списке.\n   109 - В выпадающем списке отсутствуют элементы (варианты выбора). \n   110 – Тег системного (стандартного) поля нельзя применять в пользовательском поле.\n   111 – Стандартное поле верхней части сводки не может размещаться в ее нижней (всегда конфиденциальной) части.\n   112 - Стандартное поле нижней (всегда конфиденциальной) части сводки не может размещаться в ее верхней части.\n   113 – Таблица, предлагаемая в качестве источника данных для выпадающего списка, не найдена в той же части сводки (верхней либо нижней), в которой находится сам список.\n   114 – Неизвестная метка колонки таблицы – источника данных.\n   115 – Список не может содержать одновременно фиксированные значения вариантов и значения из внешнего источника.\n   116 – Неверная датаю Задайте дату в формате ISO (ГГГГ-ММ-ДД)\n   117 – Для выпадающего списка не заданы варианты многократного использования \n   118 – В определении варианта многократного использования отсутствует значение кода.  Убедитесь, что определение задано следующим образом:\n         <UseReusableChoices code='Варианты'></UseReusableChoices>\n   119 – Вариант многократного использования должен иметь код и метку\n   120 – Выпадающий список (одно- или многоуровневый) с вариантами многократного использования не может служить источником данных для другого выпадающего списка\n   121 – Для данного поля задано неверное значение по умолчанию\n   122 – Списки вариантов многократного использования не могут иметь одну и ту же метку\n   123 – Для кода нижнего уровня варианта многократного использования отсутствует соответствующий код верхнего уровня\n   200 - Все поля пустые.\n   201 - Невозможно распознать центральную учетную запись, создавшую данный шаблон.\n   202 - Ошибка при проверке защиты.\n   203 - Ошибка файла.\n   204 - Поле отсутствует в импортируемом XML-файле.
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=На диске уже есть файл разбивки резервной копии ключа. Сохраняйте файлы разбивки на отдельных дисках.
@@ -796,8 +958,14 @@
 #_____________________________________=An error occurred verifying this key backup file.
 -df17-field:ErrorVerifyingKeyPairShare=При проверке данного файла разбивки ключа произошла ошибка.
 
+#_____________________________=Your changes will be lost, are you sure you want to do this?
+-62c3-field:ExitManageContacts=Your changes will be lost, are you sure you want to do this?
+
 #___________________________=Exit when complete
 -30e3-field:ExitWhenComplete=Выйти после завершения
+
+#_____________________=If you close this wizard now, you will not be able to return and use it to complete this account's setup \n(however, you can access the wizard to create other new accounts).\n\nAre you sure you want to close the wizard?
+-986a-field:ExitWizard=If you close this wizard now, you will not be able to return and use it to complete this account's setup \n(however, you can access the wizard to create other new accounts).\n\nAre you sure you want to close the wizard?
 
 #____________________________=Include all versions of each bulletin in export
 -d390-field:ExportAllVersions=Экспортировать все версии каждой сводки
@@ -829,7 +997,7 @@
 #______________________________=If you want all of your grid search criteria to be met in a single bulletin grid row, please check the "Match grid column specifications" checkbox. For example, if you want to search for a specific victim name in a single row in your bulletins created after a certain date, select the checkbox and enter the following fields in the Search screen: "Victim Information: First Name" = x and "Victim Information: Last Name" = y and "Date Created" >= YYYY-Mon-DD. If you do not select the "Match grid column specifications" checkbox, Martus will find bulletins created after your specified date where any row has the first name you specified and any other row has the last name specified, but not necessarily in the same bulletin row (you could have a row with "First Name" = x and "Last Name" = b, and a different row with "First Name" = a and "Last Name" = y, and Martus will find that bulletin as matching the search because you did not specify that it had to match in a single row)\n\n
 -2a0a-field:FancySearchHelpMsg4=Если Вы желаете найти в таблице строки, соответствующие всем заданным Вами критериям поиска, пометьте флажок “Искать в сводке строки таблицы, соответствующие всем критериям поиска”. Например, если Вы хотите найти данные по конкретному имени пострадавшего, приведенной в строке таблицы в сводках, созданных Вами начиная с определенной даты, пометьте этот флажок и введите в окне поиска следующие критерии: "Сведения о пострадавших: Имя" = И1, "Сведения о пострадавших: Фамилия" = Ф1, "Дата создания сводки " >= ГГГГ-Мес-ДД. Если Вы не пометите флажок "Искать в сводке строки таблицы, соответствующие всем критериям поиска", Martus найдет все сводки, созданные начиная с заданной Вами даты, где в таблице сведений о пострадавших хотя бы в одной строке фигурирует заданное Вами имя и хотя бы в одной строке (не обязательно в той же) – заданная Вами фамилия. В Вашей таблице может упоминаться один пострадавший с именем И1 и фамилией Ф2, а другой – с фамилией Ф1 и именем И2; если не было отмечено, что искомые строки таблицы должны соответствовать всем критериям, Martus найдет эту сводку.\n\n
 
-#______________________________=Additional Search Notes:\n\n 1. Because Martus searches all rows of any grid (table) fields for your criteria, it may find bulletins where one grid row matches your criteria but other rows do not.  For example you could have a bulletin with a grid that has a location field in it and you have multiple rows of data in the grid with locations A, B, and C.  If you search for bulletins where location != C (does not equal C), Martus will find that bulletin because there are 2 rows in the bulletin grid where the location is not C, even though there is one row where the locations IS C.\n\n 2. In this release, if you are searching on a multi-level dropdown, all searches are exact matches, not partial or "starts with" matches.  This means that you have to pick the exact level at which you want to be searching.  For example, an "Event Location" field that has three levels (Region/City/Neighborhood) will have three entries in the search field list:  Event Location: Region, Event Location: City, and Event Location: Neighborhood.  So if you want to find any bulletins that have an Event Location anywhere in Region X (regardless of the City), you have to pick the "Event Location: Region" field to search on and pick Region X off the dropdown list choices. If you pick Event Location: City to search on and then pick Region X but leave the City level blank, Martus will only find entries where there was no City data entered  (City was blank), as opposed to ANY location with Region X regardless of what data was entered at the City level.\n\n 3. If you do not see your search terms/dates in the final version of the bulletin displayed in the Search Results folder, your criteria may have been matched in an earlier version of the bulletin.  You can access previous versions by clicking the "Bulletin Details..." button at the top of the bulletin.  To search only the most recent versions of bulletins, select Only Search Most Recent Versions of Bulletins in the Search dialog box.\n\n 4. If you have fields in different bulletins or from different customizations that are exactly the same, Martus will combine them in any Search and Report field lists.  And while Martus warns you about duplicate labels where you are creating a new bulletin customization, it is possible that over time, you may have bulletins with different customizations that ended up with the same labels (e.g. maybe you changed a text field to a dropdown field but kept the same label).  In these cases, Martus will display both fields in the search screen, and try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists.  Also, if you have fields with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same.  So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion. Please see the "Customize Fields" Help screen for more guidelines on creating fields for searching.\n\n 5. You may sometimes see duplicate entries in dropdown list search criteria values in the search screen.  If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria dropdown list options are the labels for each list entry, but the codes you defined determine how many entries there will be in the search dropdown list (see the "Customize Fields" Help screen for more information about creating custom dropdown fields). So if you have different Reusable Choices codes with the same label in different bulletin customizations in your account, the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like "label1" and your search will be on bulletins that have that label, regardless of which code the customization had for the label).  And if you have the same Reusable Choices code with different labels in different bulletin customizations in your account, the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like "label1; label2" and your search will be on bulletins that have either of those labels).\n\nFor additional help with searching, email help@martus.org.
+#______________________________= Additional Search Notes:\n\n 1. Because Martus searches all rows of any grid (table) fields for your criteria, it may find bulletins where one grid row matches your criteria but other rows do not.  For example you could have a bulletin with a grid that has a location field in it and you have multiple rows of data in the grid with locations A, B, and C.  If you search for bulletins where location != C (does not equal C), Martus will find that bulletin because there are 2 rows in the bulletin grid where the location is not C, even though there is one row where the locations IS C.\n\n 2. In this release, if you are searching on a multi-level dropdown, all searches are exact matches, not partial or "starts with" matches.  This means that you have to pick the exact level at which you want to be searching.  For example, an "Event Location" field that has three levels (Region/City/Neighborhood) will have three entries in the search field list:  Event Location: Region, Event Location: City, and Event Location: Neighborhood.  So if you want to find any bulletins that have an Event Location anywhere in Region X (regardless of the City), you have to pick the "Event Location: Region" field to search on and pick Region X off the dropdown list choices. If you pick Event Location: City to search on and then pick Region X but leave the City level blank, Martus will only find entries where there was no City data entered  (City was blank), as opposed to ANY location with Region X regardless of what data was entered at the City level.\n\n 3. If you do not see your search terms/dates in the final version of the bulletin displayed in the Search Results folder, your criteria may have been matched in an earlier version of the bulletin.  You can access previous versions by clicking the "Bulletin Details..." button at the top of the bulletin.  To search only the most recent versions of bulletins, select Only Search Most Recent Versions of Bulletins in the Search dialog box.\n\n 4. If you have fields in different bulletins or from different customizations that are exactly the same, Martus will combine them in any Search and Report field lists.  And while Martus warns you about duplicate labels where you are creating a new bulletin customization, it is possible that over time, you may have bulletins with different customizations that ended up with the same labels (e.g. maybe you changed a text field to a dropdown field but kept the same label).  In these cases, Martus will display both fields in the search screen, and try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists.  Also, if you have fields with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same.  So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion. Please see the "Customize Fields" Help screen for more guidelines on creating fields for searching.\n\n 5. You may sometimes see duplicate entries in dropdown list search criteria values in the search screen.  If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria dropdown list options are the labels for each list entry, but the codes you defined determine how many entries there will be in the search dropdown list (see the "Customize Fields" Help screen for more information about creating custom dropdown fields). So if you have different Reusable Choices codes with the same label in different bulletin customizations in your account, the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like "label1" and your search will be on bulletins that have that label, regardless of which code the customization had for the label).  And if you have the same Reusable Choices code with different labels in different bulletin customizations in your account, the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like "label1; label2" and your search will be on bulletins that have either of those labels).\n\nFor additional help with searching, email help@martus.org.
 -c989-field:FancySearchHelpMsg5=Дополнительные пояснения по поиску: \n\n 1. Так как  Martus осуществляет поиск по Вашим критериям во всех строках любой таблицы, в результате поиска могут быть найдены сводки, в которых одна строка какой-либо таблицы содержит данные, соответствующие Вашим критериям поиска, а другие строки таких данных не содержат.  Например, Вы можете создать сводку с таблицей, имеющей поле для места события, и в различных строках этой таблицы будут упоминаться три разных места событий: А, Б и В.   Если Вы зададите критерий поиска: location != В (место события не совпадает с В), Martus найдет эту сводку, так как в ней имеются 2 табличные строки, где место события не совпадает с В, несмотря на то, что в той же сводке и в той же таблице есть строка, где место события как раз совпадает с В.\n\n 2. Данный выпуск программного обеспечения при поиске по многоуровневому выпадающему списку выдает результат только при точном совпадении, а не при частичном или при совпадении начальных символов.  Это означает, что нужно точно указать уровень списка, по которому будет вестись поиск.  Например, пусть список "Место события" имеет три уровня: Регион, Город и Пригород. Тогда в поле поиска будет три параметра для поиска:  "Место события: Регион", "Место события: Город" и "Место события: Пригород".  Если Вы хотите найти все сводки о событиях, происходивших в регионе Р1 независимо от города, следует выбрать поле поиска "Место события: Регион" и из списка предлагаемых вариантов выбрать Р1. Если Вы выберете поле поиска "Место события: Город", а в списке вариантов выберите значение Р1 для уровня Регион и оставите пустым уровень Город, Martus найдет только сводки, в которых не были введены данные для уровня Город, а не ВСЕ сводки, где регион для места события совпадает с Р1 независимо от того, какие данные были введены на уровне Город.\n\n 3. Если в окончательной версии сводки, отображенной в папке "Найденные", Вы не находите текст или даты, которые искали, это может означать, что соответствующие данные имелись в более ранней версии данной сводки.  Доступ к ее предыдущим версиям можно получить, нажав кнопку "Сведения о сводке..." в верхней части сводки.  Чтобы поиск велся только по последним версиям всех сводок, выберите в диалоговом окне поиска опцию "Искать только в последних версиях сводок".\n\n 4. Если в различных сводках или пользовательских настройках имеются одинаковые поля, Martus будет сочетать их в любом списке полей для поиска или составления отчета.  Несмотря на то, что Martus выдает предупреждение насчет дублирования меток при изменении пользовательской настройки полей, бывает, что после нескольких изменений настроек метки всё же оказываются продублированы (напр., Вы можете заменить текстовое поле выпадающим списком, а метку этого поля оставить без изменений).  В таких случаях Martus отображает в окне поиска оба поля и пытается помочь пользователю их различить, указывая тип и тег поля в списке полей для выбора.  Если имеются поля с одним и темже тегом, но разного типа или с разными метками, Martus может использовать тип и тег поля, чтобы попытаться определить, не подразумевалось ли под различными полями одно и то же.  Мы советуем, чтобы избежать всякой путаницы, четко связывать между собой тип и тег каждого поля в пользовательской настройке. Более подробные советы по  созданию пользовательских полей даны в справке по настройке полей.\n\n 5. Иногда в выпадающем списке вариантов для выбора критериев поиска могут дублироваться варианты.  Если Вы выбираете в качестве поля поиска выпадающий список с вариантами многоразового использования, то в списке для выбора критериев поиска будут отображаться метки для каждого варианта из списка, а количество вариантов, отображаемых в выпадающем списке при поиске, зависит от заданных Вами кодов (подробнее о создании пользовательских выпадающих списков рассказано в справке по настройке полей). Таким образом, если Вы под своей учетной записью создавали различные настройки пользовательских полей, соответствующие метки дважды отобразятся в выпадающем списке для выбора критериев поиска (т.е. если Вы для вариантов с кодами "код1" и "код2" использовали одну и ту же метку "метка1", в выпадающем списке для поиска слово "метка1" повторится дважды, а поиск будет осуществляться по сводкам с соответствующей меткой независимо от того, какому коду она соответствовала в настройке полей для той или иной сводки).  Если же Вы в различных настройках полей, создававшихся под одной и той же учетной записью, задавали для какого-либо варианта многократного использования один и тот же код и разные метки, то выпадающий список поиска по данному коду отобразит оба значения меток в одном элементе, разделяя их точкой с запятой (т.е. если Вы задавали код "код1" то в сочетании с меткой "метка1", то с меткой "метка2", Вы увидите в выпадающем списке элемент "метка1; метка2", а поиск будет вестись по сводкам, содержащим любую из этих меток).\n\nЗа дополнительной помощью по поиску обращайтесь по электронной почте help@martus.org.
 
 #___________________________=Yes/No
@@ -859,20 +1027,29 @@
 #__________________________=Text
 -c332-field:FieldTypeSTRING=Текст
 
+#_____________________________=Please wait while we find this account on the server.
+-6ec9-field:FindAccountByToken=Please wait while we find this account on the server.
+
+#____________________________=You can load and switch to other form templates later inside of Martus, if you do not have access to a server now, or you need one that is different from what you select here.
+-2a63-field:FormTemplatesTip1=You can load and switch to other form templates later inside of Martus, if you do not have access to a server now, or you need one that is different from what you select here.
+
+#____________________________=Note: you can change templates, but you will not be able to import templates from the server, outside of the account creation process at this time.
+-16a2-field:FormTemplatesTip2=Note: you can change templates, but you will not be able to import templates from the server, outside of the account creation process at this time.
+
+#____________________=You can switch forms later
+-a78d-field:FormsHint=You can switch forms later
+
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
 -02b6-field:GetShareFileNameDescription=Имя файла должно быть уникальным и понятным для Вас. Не рекомендуем называть файл Вашим именем пользователя.  Каждый создаваемый файл будет иметь это имя и порядковый номер.
+
+#___________________________________=Getting server information
+-90d2-field:GettingServerInformation=Getting server information
 
 #__________________________=(not currently configured)
 -462b-field:HQNotConfigured=(в данный момент не заданы)
 
-#_________________________=Headquarters
--6222-field:HQSummaryLabel=Центральная учетная запись
-
-#__________________________=Default Headquarters accounts will be selected for each new bulletin or version.
--ea13-field:HQsSetAsDefault=Центральные учетные записи, для которых установлена пометка в поле "по умолчанию", получат права доступа ко всем новым сводкам и новым версиям сводок.
-
-#________________________________=These Headquarters accounts are allowed to view the private information in this bulletin, and to send this bulletin to a server on your behalf.
--2274-field:HQsSetAsProxyUploader=Эти центральные учетные записи имеют право на чтение конфиденциальных данных в сводке и на отправку сводок на сервер от Вашего имени.
+#_________________________=Contacts
+-b0dd-field:HQSummaryLabel=Центральная учетная запись
 
 #_______________________________=Selected?
 -9c09-field:HeadQuartersSelected=Выбрать?
@@ -892,6 +1069,9 @@
 #_______________________________________=etc...
 -5e9b-field:HelpExampleEtcDefaultDetails=и т.д...
 
+#____________________________________=If someone wishes to send you information, provide them with your access token and public code.
+-9b9d-field:HelpForTokenAndPublicCode=If someone wishes to send you information, provide them with your access token and public code.
+
 #____________________________________=When choosing a password, it is important not to use a password that is easy to guess like names, important dates of events or simple words.  Try adding numbers to random letters and making the password long.  Remember your password, but do not share it.  No one else has access to the password if you forget it, so if you write it down, put it in a safe place.
 -65cc-field:HelpOnCreatingNewPassword=Не задавайте в качестве пароля простые слова, которые легко угадать: имена, важные даты и т.п. Сделайте пароль длиннее, используйте случайные сочетания букв и цифр. Запомните свой пароль, но не сообщайте его другим - тогда, даже если Вы забудете свой пароль, никто другой не сможет им воспользоваться. Если Вы записали пароль, храните запись в надежном месте.
 
@@ -910,11 +1090,20 @@
 #____________________________________=Bulletin
 -6ef0-field:ImportExportBulletinTitle=Сводка
 
+#_________________________________=Martus allows you to create and share custom forms for data entry. Get started by selecting a form template if desired. Martus comes with several generic form templates you can use. You can also download a custom template from one of your current contacts or another Martus user.
+-8a1b-field:ImportFormTemplateHelp=Martus allows you to create and share custom forms for data entry. Get started by selecting a form template if desired. Martus comes with several generic form templates you can use. You can also download a custom template from one of your current contacts or another Martus user.
+
+#______________________________=Import Form Templates
+-6d6d-field:ImportFormTemplates=Import Form Templates
+
 #_________________________=Importing
 -90ab-field:ImportProgress=Импортированные
 
 #_____________________________=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?
 -abb2-field:IncludePrivateData=Для печати выбрано #TotalBulletins# сводок.  #AllPrivateBulletins# из них полностью конфиденциальные.\n Что включить в распечатку?
+
+#__________________________________=The current version of Martus cannot run with Java #HighVersion#. Please use Java #ExpectedVersion# or lower to run Martus.
+-7927-field:IncompatibleJavaVersion=The current version of Martus cannot run with Java #HighVersion#. Please use Java #ExpectedVersion# or lower to run Martus.
 
 #_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
 -a747-field:IncompatibleMtfVersion=Данная версия перевода не соответствует используемой версии Martus.  Рекомендуем Вам не пользоваться этим переводом в дальнейшем и найти нужную версию перевода на странице загрузки (http://www.martus.org/downloads).
@@ -931,14 +1120,38 @@
 #____________________________=Martus Key (*.dat)
 -798b-field:KeyPairFileFilter=Ключ Martus (*.dat)
 
+#__________________________=keypair file too large!
+-50c8-field:KeypairTooLarge=keypair file too large!
+
+#___________________________________=Get your Token and Code
+-13ff-field:LinkToTokenAndPublicCode=Get your Token and Code
+
 #_____________________________________________=Processing bulletin
 -a044-field:LoadingFieldValuesFromAllBulletins=Обработка сводки
 
 #________________________________________________________=Scanning all bulletins to create a list of all the values in #FieldName#
 -dee7-field:LoadingFieldValuesFromAllBulletinsExplanation=Просмотр всех сводок для создания списка всех значений поля #FieldName#
 
+#___________________________=Please wait while we retrieve a list of templates from the server.
+-6307-field:LoadingTemplates=Please wait while we retrieve a list of templates from the server.
+
 #________________________=Martus Bulletin Archive (*.mba)
 -919c-field:MBAFileFilter=Архив сводок Martus (*.mba)
+
+#_________________________=Manage Contacts
+-88c0-field:ManageContacts=Manage Contacts
+
+#____________________________________=To send information through Martus to your contacts, you need their public key. You can pull their public keys off of the Martus server using their 7 digit access token. You can verify that you have pulled the correct key, by using their key's public code.  Ask your contacts for the access token, and public code to add your contacts here. If you do not have this information now, you will be able to add contacts later from the Martus desktop client.
+-86ae-field:ManageContactsDescription=To send information through Martus to your contacts, you need their public key. You can pull their public keys off of the Martus server using their 7 digit access token. You can verify that you have pulled the correct key, by using their key's public code.  Ask your contacts for the access token, and public code to add your contacts here. If you do not have this information now, you will be able to add contacts later from the Martus desktop client.
+
+#________________________________=Contacts
+-b0dd-field:ManageContactsHeading=Contacts
+
+#__________________________________=To send information through Martus to your contacts, you can pull their public key off of the Martus server using their access token. You can verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add your contacts here.
+-35f4-field:ManageContactsOverview1=To send information through Martus to your contacts, you can pull their public key off of the Martus server using their access token. You can verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add your contacts here.
+
+#__________________________________=If someone wishes to send you information through Martus, provide them with your access token and public code. Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information.
+-f9fd-field:ManageContactsOverview2=If someone wishes to send you information through Martus, provide them with your access token and public code. Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information.
 
 #_______________________________________=Martus Report Format (.mrf)
 -62cd-field:MartusReportFormatFileFilter=Формат отчета Martus (.mrf)
@@ -949,17 +1162,26 @@
 #_______________________=Warning: Portions may be missing or damaged
 -00a9-field:MayBeDamaged=Предупреждение: Информация может быть частично потеряна или повреждена
 
-#_______________________________=#NumberOfHQs# Headquarter account(s) will be able to view this private information
--da24-field:ModifyBulletinHQInfo=Правом просмотра данной конфиденциальной информации будут обладать #NumberOfHQs# центральных учетных записей 
+#_______________________________=#NumberOfHQs# Contact account(s) will be able to view this private information
+-4ccb-field:ModifyBulletinHQInfo=Правом просмотра данной конфиденциальной информации будут обладать #NumberOfHQs# центральных учетных записей 
 
 #_____________________________=Please enter a name for the file you wish to export.
 -95ed-field:NameOfExportedFile=Введите имя файла, который Вы хотите экспортировать.
 
-#__________________________=No Headquarters accounts selected for this bulletin.
--2b9f-field:NoHQsConfigured=Для данной сводки центральные учетные записи не заданы.
+#____________________________=No Contacts.
+-91ef-field:NoContactsInTable=No Contacts.
+
+#______________________________=[no title]
+-6e34-field:NoFormTemplateTitle=[no title]
+
+#__________________________=No Contact accounts selected for this bulletin.
+-0255-field:NoHQsConfigured=Для данной сводки центральные учетные записи не заданы.
 
 #___________________________________________=Server Not Available
 -c79c-field:NoServerAvailableProgressMessage=Сервер недоступен
+
+#_______________________________=No Templates Available
+-6305-field:NoTemplatesAvailable=No Templates Available
 
 #_____________________________=Remember: Entering your password using the regular keyboard may reduce security.
 -55fa-field:NormalKeyboardMsg1=Напоминаем: ввод пароля с обычной клавиатуры ослабляет защиту информации.
@@ -982,14 +1204,44 @@
 #__________________________________________=Click on topic to display details.
 -2a14-field:OnlineHelpTOCMessageDescription=Для просмотра подробной информации щелкните мышью по названию темы.
 
-#_______________________________=Organization (required)
--2f27-field:OrganizationRequired=Организация (обязательно)
+#_______________________=Organization:
+-6da9-field:Organization=Organization:
 
 #_______________________________=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.
 -b511-field:OrganizeReportFields=Добавьте в отчет поля по своему выбору и затем расположите их в том порядке, в каком Вы желаете их распечатать.
 
+#___________________=Password:
+-be81-field:Password=Password:
+
+#_______________________________=create a password
+-b61b-field:PasswordInstructions=create a password
+
+#_______________________=- Do not use your user name
+-b415-field:PasswordTip1=- Do not use your user name
+
+#_______________________=- Do not use a single dictionary word
+-6002-field:PasswordTip2=- Do not use a single dictionary word
+
+#_______________________=- Use at least 15 characters for most security (8 are required)
+-fab7-field:PasswordTip3=- Use at least 15 characters for most security (8 are required)
+
+#_______________________=- Use a combination of alphabet characters, numbers, and special characters (such as !@#$%^*&amp;)
+-3d55-field:PasswordTip4=- Use a combination of alphabet characters, numbers, and special characters (such as !@#$%^*&amp;)
+
+#_______________________=- Use a combination of uppercase (capital) and lowercase characters if you use a case-sensitive language.
+-9278-field:PasswordTip5=- Use a combination of uppercase (capital) and lowercase characters if you use a case-sensitive language.
+
+#_____________________________=Create secure passwords by using numbers, letters and symbols.
+-fb50-field:PasswordTipGeneral=Create secure passwords by using numbers, letters and symbols.
+
+#_______________________=Password Tips:
+-42ae-field:PasswordTips=Password Tips:
+
 #____________________________________=Use embedded Tor (Using Tor can improve security but may be slower than not using Tor)
 -aaff-field:PreferencesUseInternalTor=Использовать встроенный Tor (использование Tor может повысить безопасность, но замедлить работу)
+
+#_______________________________=Turn Tor ON if you wish to hide that you are connecting to a Martus server. This may help reach the Martus servers if they are blocked from your location.
+-f174-field:PreferencesWhyUseTor=Turn Tor ON if you wish to hide that you are connecting to a Martus server. This may help reach the Martus servers if they are blocked from your location.
 
 #_____________________________=Preparing Bulletins...
 -deac-field:PreparingBulletins=Подготовка сводок... 
@@ -1006,6 +1258,9 @@
 #_______________________________=You can print the bulletin contents to a printer or to a file.
 -48ad-field:PrintToPrinterOrDisk=Вы можете распечатать содержимое сводки на принтере или сохранить в файл на диске.
 
+#_____________________=Public Code:
+-63bc-field:PublicCode=Public Code:
+
 #_________________________________=Public Information Files (*.mpi)
 -bd0c-field:PublicInformationFiles=Файлы общедоступной информации (*.mpi)
 
@@ -1018,14 +1273,17 @@
 #_______________________________________=This will NOT remove any bulletins from the server, any Martus files copied outside of the Martus directory, or any of your bulletins or Martus files on another computer.
 -8ee9-field:QuickEraseWillNotRemoveItems=НЕ БУДУТ УДАЛЕНЫ: какие-либо сводки на сервере; какие-либо файлы Martus, находящиеся за пределами каталога Martus; какие-либо Ваши сводки или файлы Martus, находящиеся на любом другом компьютере.
 
-#____________________________________=Delete your Martus key, bulletins, folders, and configuration information (such as your Headquarters, server, and custom field settings).
--cf3b-field:QuickEraseWillRemoveItems=Будут удалены: Ваш ключ Martus, сводки, папки, а также настроечные данные (такие как Ваши центральные учетные записи, настройки сервера, пользовательские поля).
+#____________________________________=Delete your Martus key, bulletins, folders, and configuration information (such as your contacts, server, and custom field settings).
+-3329-field:QuickEraseWillRemoveItems=Будут удалены: Ваш ключ Martus, сводки, папки, а также настроечные данные (такие как Ваши центральные учетные записи, настройки сервера, пользовательские поля).
 
 #_________________________=Restore your existing account from a backup file.
 -c2a2-field:RecoverAccount=Восстановление существующей учетной записи по резервной копии.
 
 #______________________________=Another part of the shared key is required to complete this process.
 -668c-field:RecoverShareKeyPair=Для завершения процесса требуется другая часть данной разбивки ключа.
+
+#_____________________________=The following contact will be removed.\n\nName: #Name#\nPublic Code: #PublicCode#.\n\nAre you sure you want to do this?
+-ff2d-field:RemoveContactLabel=The following contact will be removed.\n\nName: #Name#\nPublic Code: #PublicCode#.\n\nAre you sure you want to do this?
 
 #_________________________________________________________=IMPORTANT: There are other Martus accounts on this system.
 -e62e-field:RemoveMartusFromSystemMultipleAccountsWarning1=ВАЖНО: В данной системе имеются другие учетные записи Martus.
@@ -1075,17 +1333,17 @@
 #______________________________=Print Summary Counts Only
 -9ca4-field:ReportSummariesOnly=Печать значений счетчиков
 
-#__________________________________________=Retrieving Field Desk Draft Bulletins
--c881-field:RetrieveHQDraftBulletinProgress=Загрузка черновых сводок периферийных учетных записей
+#__________________________________________=Retrieving Draft Bulletins from Contacts
+-cf94-field:RetrieveHQDraftBulletinProgress=Загрузка черновых сводок периферийных учетных записей
 
-#___________________________________________=Retrieving Field Desk Draft Bulletin Summaries
--b700-field:RetrieveHQDraftBulletinSummaries=Загрузка краткой информации из черновых сводок периферийных учетных записей
+#___________________________________________=Retrieving Draft Bulletin Summaries from Contacts
+-2bcf-field:RetrieveHQDraftBulletinSummaries=Загрузка краткой информации из черновых сводок периферийных учетных записей
 
-#___________________________________________=Retrieving Field Desk Sealed Bulletins
--d2bb-field:RetrieveHQSealedBulletinProgress=Загрузка чистовых сводок периферийных учетных записей
+#___________________________________________=Retrieving Sealed Bulletins from Contacts
+-4e29-field:RetrieveHQSealedBulletinProgress=Загрузка чистовых сводок периферийных учетных записей
 
-#____________________________________________=Retrieving Field Desk Sealed Bulletin Summaries
--0221-field:RetrieveHQSealedBulletinSummaries=Загрузка краткой информации из чистовых сводок периферийных учетных записей
+#____________________________________________=Retrieving Sealed Bulletin Summaries from Contacts
+-a331-field:RetrieveHQSealedBulletinSummaries=Загрузка краткой информации из чистовых сводок периферийных учетных записей
 
 #__________________________________________=Retrieving My Draft Bulletins
 -61c0-field:RetrieveMyDraftBulletinProgress=Загрузка собственных черновых сводок
@@ -1159,23 +1417,53 @@
 #________________________________=You will not be allowed to upload bulletins to this server.
 -3a97-field:ServerDeclinesUploads=Вам не разрешено отправлять сводки на этот сервер.
 
-#_______________________________=Server Magic Word:
--ad90-field:ServerMagicWordEntry=Волшебное слово сервера:
+#_______________________________=Magic Word:
+-7ba0-field:ServerMagicWordEntry=Волшебное слово сервера:
 
-#__________________________=Server name or IP address:
--aa94-field:ServerNameEntry=Имя или IP-адрес сервера:
+#__________________________________________=enter your server's magic word
+-0481-field:ServerMagicWordEntryInformation=enter your server's magic word
+
+#__________________________=IP Address:
+-4e30-field:ServerNameEntry=Имя или IP-адрес сервера:
+
+#_____________________________________=enter your server's IP address
+-4cb2-field:ServerNameEntryInformation=enter your server's IP address
 
 #_____________________________________________=Server needs to be configured.
 -26de-field:ServerNotConfiguredProgressMessage=Требуется настроить сервер.
 
-#________________________________=Server Public Identification Code:
--0cf3-field:ServerPublicCodeEntry=Общий идентификационный код сервера:
+#_______________________________________________=A connection to the server was not made. This could be because the server is not available, the server is blocked, or your Internet connection is down. Would you like to save this server configuration for later?
+-24f7-field:ServerNotRespondingSaveConfiguration=A connection to the server was not made. This could be because the server is not available, the server is blocked, or your Internet connection is down. Would you like to save this server configuration for later?
+
+#________________________________=Server Public Code:
+-f3d1-field:ServerPublicCodeEntry=Общий идентификационный код сервера:
+
+#___________________________________________=enter your server's public code
+-b02c-field:ServerPublicCodeEntryInformation=enter your server's public code
 
 #_________________________________=The following server has been selected:
 -d09b-field:ServerSelectionResults=Выбран следующий сервер:
 
+#______________________=Server Setup
+-3db1-field:ServerSetup=Server Setup
+
 #_________________________=To change a folder's position, select the folder name and use the #MoveFolderUp# / #MoveFolderDown# buttons.
 -4497-field:SetFolderOrder=Чтобы изменить положение папки, выделите ее имя и используйте кнопки #MoveFolderUp# и #MoveFolderDown#.
+
+#_______________________=Setting Up Tor.
+-6cc3-field:SettingUpTor=Setting Up Tor.
+
+#_____________________________=Advanced server settings
+-5ebb-field:SetupAdvanceServer=Advanced server settings
+
+#___________________________=Set up server later
+-0739-field:SetupServerLater=Set up server later
+
+#__________________________=The data you store on Martus servers are completely encrypted using 3072-bit encryption. This means even Martus server administrators cannot read your data.
+-6a66-field:SetupServerTips=The data you store on Martus servers are completely encrypted using 3072-bit encryption. This means even Martus server administrators cannot read your data.
+
+#__________________________________________=Single, Encrypted File #backupFileName created (this still requires remembering your username and password to restore your account).
+-4689-field:SingleEncryptedKeyBackupCreated=Single, Encrypted File #backupFileName created (this still requires remembering your username and password to restore your account).
 
 #___________________________________=NOTE: Bulletins authored by other accounts cannot be changed using this command, so they are not included in the list above.
 -250a-field:SkippingBulletinsNotOurs=ПРИМЕЧАНИЕ: Данная команда не может изменить сводки, созданные другими учетными записями. Поэтому они не указаны выше.
@@ -1195,8 +1483,47 @@
 #___________________________=Retrieving...
 -5316-field:StatusRetrieving=Загрузка...
 
+#________________=1
+-356a-field:Step1=1
+
+#________________=2
+-da4b-field:Step2=2
+
+#________________=3
+-77de-field:Step3=3
+
+#________________=4
+-1b64-field:Step4=4
+
+#________________=5
+-ac34-field:Step5=5
+
+#________________=6
+-c1df-field:Step6=6
+
+#____________________=➔
+-a53b-field:StepArrow=➔
+
+#___________________________________=Successfully imported the #templateName Form
+-de98-field:SuccessfullyImportedForm=Successfully imported the #templateName Form
+
+#_____________________________________=Contact #Name#
+-bdb2-field:TemplateCreatedByFieldDesk=Contact #Name#
+
+#________________________________________=Contacts #Name#
+-b7dd-field:TemplateCreatedByHeadquarters=Contacts #Name#
+
+#_______________________________________=this account
+-ac76-field:TemplateCreatedByThisAccount=this account
+
+#___________________________________=an unknown account
+-fe29-field:TemplateCreatedByUnknown=an unknown account
+
 #__________________________=Details
 -dc3d-field:TemplateDetails=Подробности
+
+#______________________=Your Tor Settings
+-4656-field:TorSettings=Your Tor Settings
 
 #__________________________=Embedded Tor Active
 -a7ea-field:TorStatusActive=Встроенный Tor активен
@@ -1206,6 +1533,12 @@
 
 #________________________________=Embedded Tor Initializing
 -13e0-field:TorStatusInitializing=Встроенный Tor инициализируется
+
+#__________________=Turning Tor on here establishes the default setting for your use of Tor when in Martus. You can also, turn Tor ON or OFF at any time inside the Martus desktop application.
+-e344-field:TorTip1=Turning Tor on here establishes the default setting for your use of Tor when in Martus. You can also, turn Tor ON or OFF at any time inside the Martus desktop application.
+
+#__________________=Note: Using Tor will slow sending and receiving of bulletins.
+-034e-field:TorTip2=Note: Using Tor will slow sending and receiving of bulletins.
 
 #__________________________=Uninstall Martus
 -08ea-field:UninstallMartus=Удаление программы Martus
@@ -1222,8 +1555,8 @@
 #___________________________=Untitled Bulletin
 -5ea8-field:UntitledBulletin=Безымянная сводка
 
-#_________________________________=The account that created this bulletin has not been verified, so there is an increased chance that this attachment could be dangerous. We recommend that you verify this Field Desk account before you #action# this attachment (See Tools > Configure Field Desks). Opening this attachment could put your computer at risk. 
--e736-field:UnverifiedFDAttachment=Учетная запись, создавшая данную сводку, не проверялась; тем вероятнее наличие в данном вложении угрозы для безопасности. Рекомендуем Вам проверить данную периферийную учетную запись перед тем, как #action# данное вложение (см. Инструменты > Настройка периферийной учетной записи. Открытие данного влождения может угрожать безопасности Вашего компьютера.
+#_________________________________=The Martus account that created this bulletin has not been verified, so there is an increased chance that this attachment could be dangerous. We recommend that you verify this Contact's account before you #action# this attachment (See Tools > Manage Contacts). Opening this attachment could put your computer at risk. 
+-f04b-field:UnverifiedFDAttachment=Учетная запись, создавшая данную сводку, не проверялась; тем вероятнее наличие в данном вложении угрозы для безопасности. Рекомендуем Вам проверить данную периферийную учетную запись перед тем, как #action# данное вложение (см. Инструменты > Настройка периферийной учетной записи. Открытие данного влождения может угрожать безопасности Вашего компьютера.
 
 #______________________________________=Upload Failed
 -88c1-field:UploadFailedProgressMessage=Ошибка отправки данных
@@ -1234,11 +1567,47 @@
 #__________________________________=Sending Sealed Bulletin
 -6231-field:UploadingSealedBulletin=Отправка чистовой сводки
 
+#___________________________=Use default server
+-9894-field:UseDefaultServer=Use default server
+
+#_________________=Use Tor
+-bc93-field:UseTor=Use Tor
+
+#_____________________________=Tor is a security tool you can use to hide your identity when connecting to sites on the Internet. If Martus servers are blocked from your location, using Tor may help reach the servers.
+-6339-field:UseTorInstructions=Tor is a security tool you can use to hide your identity when connecting to sites on the Internet. If Martus servers are blocked from your location, using Tor may help reach the servers.
+
+#_____________________________________=Username and password match!
+-7dc3-field:UserNameAndPasswordMatches=Username and password match!
+
+#_______________________=- Your user name can contain letters, numbers, punctuation and spaces.
+-3b6f-field:UserNameTip1=- Your user name can contain letters, numbers, punctuation and spaces.
+
+#_______________________=- It should have between 8-50 characters, and it is case sensitive.
+-3180-field:UserNameTip2=- It should have between 8-50 characters, and it is case sensitive.
+
+#_______________________=- Remember to choose a user name you can remember.
+-fb91-field:UserNameTip3=- Remember to choose a user name you can remember.
+
+#_______________________=User Name Tips:
+-c9d5-field:UserNameTips=User Name Tips:
+
+#__________________________________=Public Code:
+-63bc-field:VerifyContactPublicCode=Public Code:
+
+#_____________________________________=Public Code:
+-63bc-field:VerifyContactPublicCodeOld=Public Code:
+
+#___________________________=Please verify the public code below against the one you received from your contact.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.
+-ec88-field:VerifyPublicCode=Please verify the public code below against the one you received from your contact.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.
+
+#____________________________________=Please verify one of the public codes below depending on which public code you received from your contact.  You may visually verify either code, you don't need to verify both.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.
+-2d38-field:VerifyPublicCodeNewAndOld=Please verify one of the public codes below depending on which public code you received from your contact.  You may visually verify either code, you don't need to verify both.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.
+
 #_______________________________=view
 -8f3a-field:ViewAttachmentAction=просмотреть
 
-#_____________________________=#NumberOfHQs# Headquarter account(s) can view this private information
--5ffa-field:ViewBulletinHQInfo=Право на просмотр данной конфиденциальной информации имеют #NumberOfHQs# центральные учетные записи
+#_____________________________=#NumberOfHQs# Contact account(s) can view this private information
+-4386-field:ViewBulletinHQInfo=Право на просмотр данной конфиденциальной информации имеют #NumberOfHQs# центральные учетные записи
 
 #___________________________________=Back Space
 -7ae6-field:VirtualKeyboardBackSpace=Back Space
@@ -1255,11 +1624,68 @@
 #_____________________________________=(Enter using regular keyboard)
 -6332-field:VirtualUserNameDescription=(Ввод с обычной клавиатуры)
 
+#______________________________________________=Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information.
+-3e7b-field:WarningOnTokenAndPublicCodeSecurity=Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information.
+
 #____________________=No
 -816c-field:WasSentNo=Нет
 
 #_____________________=Yes
 -5397-field:WasSentYes=Да
+
+#__________________________=Get started with Martus!
+-c6af-field:WelcomeMessage1=Get started with Martus!
+
+#__________________________=Securing your digital documentation
+-d196-field:WelcomeMessage2=Securing your digital documentation
+
+#__________________________=This wizard will walk you through the steps necessary to set up Martus, so that you can safely store and share your human rights documentation.
+-078c-field:WelcomeMessage3=This wizard will walk you through the steps necessary to set up Martus, so that you can safely store and share your human rights documentation.
+
+#______________________=Create Account
+-eff4-field:WizardStep1=Create Account
+
+#_____________________________=Account Creation
+-05cc-field:WizardStep1Heading=Account Creation
+
+#_________________________________=Your information will be kept safe, with a password protected, encrypted account.
+-f3b9-field:WizardStep1Information=Your information will be kept safe, with a password protected, encrypted account.
+
+#______________________=Settings
+-c7f7-field:WizardStep2=Settings
+
+#_________________________________=Establish your system settings for the use of Tor (a tool to help hide network activity) and dates.
+-3bb3-field:WizardStep2Information=Establish your system settings for the use of Tor (a tool to help hide network activity) and dates.
+
+#______________________=Server Setup
+-3db1-field:WizardStep3=Server Setup
+
+#_________________________________=Backup your information to a secure server.
+-d130-field:WizardStep3Information=Backup your information to a secure server.
+
+#______________________=Contacts
+-b0dd-field:WizardStep4=Contacts
+
+#_________________________________=Send and receive information from other Martus users of your choice.
+-d76d-field:WizardStep4Information=Send and receive information from other Martus users of your choice.
+
+#______________________=Import Forms
+-cf9d-field:WizardStep5=Import Forms
+
+#_____________________________=Import Form Template
+-2f11-field:WizardStep5Heading=Import Form Template
+
+#_________________________________=Select a template for creating Martus forms.
+-22ff-field:WizardStep5Information=Select a template for creating Martus forms.
+
+#______________________=Key Backup
+-f8a1-field:WizardStep6=Key Backup
+
+#_____________________________=Backup key
+-1ab8-field:WizardStep6Heading=Backup key
+
+#_________________________________=Make a copy of your account's encryption key to ensure continued access to your account.
+-bb2f-field:WizardStep6Information=Make a copy of your account's encryption key to ensure continued access to your account.
 
 #__________________________=Unknown
 -bc78-field:YearUnspecified=Неизвестно
@@ -1279,8 +1705,8 @@
 #_________________________________________=Header
 -3134-field:_Section_BulletinSectionHeader=Заголовок
 
-#_______________________________________________=Headquarters
--6222-field:_Section_BulletinSectionHeadquarters=Центральная учетная запись
+#_______________________________________________=Contacts
+-b0dd-field:_Section_BulletinSectionHeadquarters=Центральная учетная запись
 
 #_________________________=Last Saved
 -eb05-field:_lastSavedDate=Последнее сохранение
@@ -1309,8 +1735,8 @@
 #______________________________=software version
 -f2cc-field:aboutDlgVersionInfo=Версия: 
 
-#__________________=Mailing Address
--e6af-field:address=Почтовый адрес
+#__________________=Mailing Address:
+-22f5-field:address=Почтовый адрес
 
 #_____________________=Keep ALL Information Private
 -9b5e-field:allprivate=ВСЕ данные конфиденциальные
@@ -1387,17 +1813,17 @@
 #_________________________________________=By choosing Yes, you will exit this verification step.
 -5b61-field:confirmCancelShareVerifyeffect=Нажмите "Да", чтобы завершить процесс проверки на данной стадии.
 
-#_________________________________________=You have chosen to remove the selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  New versions of sealed bulletins will not be able to be viewed by the removed Headquarters, but any old versions of sealed bulletins that already are on a Headquarters' computer will still be viewable by the Headquarters.
--0004-field:confirmClearHQInformationcause=Вы выбрали отмену прав доступа для центральной учетной записи. Все существующие сводки, сохраненные ранее, будут по-прежнему видимы пользователю учетной записи, являвшейся центральной по отношению к Вашей. Чтобы лишить пользователя текущей центральной учетной записи прав доступа к черновым сводкам, созданным ранее, их нужно сохранить заново после отмены прав этой учетной записи как центральной. Новые версии чистовых сводок будут недоступны для пользователя бывшей центральной учетной записи, однако все прежние версии чистовых сводок, уже загруженные на компьютер пользователя этой учетной записи, будут по-прежнему видимы для него.
+#_________________________________________=You have chosen to remove the selected contact's accounts.  Any existing saved bulletins will still be visible by the old contact.  If you want to disallow this contact's viewing access to previously created Draft bulletins they must be re-saved after deleting the contact.  New versions of sealed bulletins will not be able to be viewed by the removed contact, but any old versions of sealed bulletins that already are on that contact's computer will still be viewable by the contact.
+-0551-field:confirmClearHQInformationcause=Вы выбрали отмену прав доступа для центральной учетной записи. Все существующие сводки, сохраненные ранее, будут по-прежнему видимы пользователю учетной записи, являвшейся центральной по отношению к Вашей. Чтобы лишить пользователя текущей центральной учетной записи прав доступа к черновым сводкам, созданным ранее, их нужно сохранить заново после отмены прав этой учетной записи как центральной. Новые версии чистовых сводок будут недоступны для пользователя бывшей центральной учетной записи, однако все прежние версии чистовых сводок, уже загруженные на компьютер пользователя этой учетной записи, будут по-прежнему видимы для него.
 
-#__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
--4a87-field:confirmClearHQInformationeffect=Нажмите "Да", чтобы в дальнейшем сводки, которые Вы сохраните или отправите на сервер в чистовом виде, были невидимы для пользователя учетной записи, которая в данный момент обладает правами центральной учетной записи по отношению к Вашей.
+#__________________________________________=By clicking on Yes, any draft or sealed bulletin saved in the future will no longer be accessible by your Contacts.
+-5f1e-field:confirmClearHQInformationeffect=Нажмите "Да", чтобы в дальнейшем сводки, которые Вы сохраните или отправите на сервер в чистовом виде, были невидимы для пользователя учетной записи, которая в данный момент обладает правами центральной учетной записи по отношению к Вашей.
 
 #__________________________________________=You have chosen to modify a bulletin that was created by someone else.
 -b384-field:confirmCloneBulletinAsMinecause=Вы хотите изменить сводку, созданную другим пользователем.
 
-#___________________________________________=Clicking on Yes will create a new bulletin that contains a copy of all the same information. You will be the official author of this new bulletin, and any private data in it will only be visible by you (and your Headquarters accounts, if you have any). The original bulletin will remain unchanged.
--4034-field:confirmCloneBulletinAsMineeffect=Нажмите "Да", чтобы создать новую сводку, в которой будет скопирована вся информация. Вы будете являться официальным автором новой сводки, и все личные данные в ней будут видимы только для Вас (и для пользователей Ваших центральных учетных записей, если таковые имеются). Исходная сводка останется неизменной.
+#___________________________________________=Clicking on Yes will create a new bulletin that contains a copy of all the same information. You will be the official author of this new bulletin, and any private data in it will only be visible by you (and your Contact's accounts that you have shared the bulletin with). The original bulletin will remain unchanged.
+-a8d1-field:confirmCloneBulletinAsMineeffect=Нажмите "Да", чтобы создать новую сводку, в которой будет скопирована вся информация. Вы будете являться официальным автором новой сводки, и все личные данные в ней будут видимы только для Вас (и для пользователей Ваших центральных учетных записей, если таковые имеются). Исходная сводка останется неизменной.
 
 #___________________________________________=You have chosen to modify one of your sealed bulletins, thus creating a new version of that bulletin.
 -fcb6-field:confirmCloneMySealedAsDraftcause=Вы выбрали изменение одной из Ваших чистовых сводок. Тем самым будет создана новая версия этой сводки.
@@ -1405,11 +1831,11 @@
 #____________________________________________=Clicking on Yes will create a new version of this bulletin that initially contains all the same information.
 -198c-field:confirmCloneMySealedAsDrafteffect=Нажмите "Да", чтобы создать новую версию сводки, в которой первоначально будет содержаться вся информация, имеющаяся в предыдущей версии. 
 
-#______________________________________________________=You have chosen to modify a bulletin that was created by a field desk account that has not been verified, so the bulletin could contain incorrect information or potentially damaging attachments. We recommend that you verify this account before continuing (See Tools > Configure Field Desks).
--61d5-field:confirmCloneUnverifiedFDBulletinAsMinecause=Вы выбрали изменение сводки, созданной периферийной учетной записью, не подтвержденной как доверенная. Такая сводка может содержать неверную информацию или потенциально угрожающие вложения. Рекомендуем Вам проверить данную учеиную запись перед продолжением работы (см. Инструменты > Настройка периферийной учетной записи.
+#______________________________________________________=You have chosen to modify a bulletin that was created by a Martus user that has not been verified, so the bulletin could contain incorrect information or potentially damaging attachments. We recommend that you verify this account before continuing (See Tools > Manage Contacts).
+-b8d8-field:confirmCloneUnverifiedFDBulletinAsMinecause=Вы выбрали изменение сводки, созданной периферийной учетной записью, не подтвержденной как доверенная. Такая сводка может содержать неверную информацию или потенциально угрожающие вложения. Рекомендуем Вам проверить данную учеиную запись перед продолжением работы (см. Инструменты > Настройка периферийной учетной записи.
 
-#_______________________________________________________=Clicking on Yes to continue with the modify operation will create a new bulletin that contains a copy of all the same information.  You will be the official author of this new bulletin, so you will become responsible for all the content. Any private data in it will only be visible to you (and your Headquarters accounts, if you have any).  The original bulletin will remain unchanged.
--0603-field:confirmCloneUnverifiedFDBulletinAsMineeffect=Нажмите "Да", чтобы создать новую сводку, в которой будет скопирована вся информация. Вы будете являться официальным автором новой сводки, и все личные данные в ней будут видимы только для Вас (и для пользователей Ваших центральных учетных записей, если таковые имеются). Исходная сводка останется неизменной.
+#_______________________________________________________=Clicking on Yes to continue with the modify operation will create a new bulletin that contains a copy of all the same information.  You will be the official author of this new bulletin, so you will become responsible for all the content. Any private data in it will only be visible to you (and any contacts accounts you have shared this with).  The original bulletin will remain unchanged.
+-1b54-field:confirmCloneUnverifiedFDBulletinAsMineeffect=Нажмите "Да", чтобы создать новую сводку, в которой будет скопирована вся информация. Вы будете являться официальным автором новой сводки, и все личные данные в ней будут видимы только для Вас (и для пользователей Ваших центральных учетных записей, если таковые имеются). Исходная сводка останется неизменной.
 
 #______________________________________=The date range you entered is invalid because the end date occurs before the begin date.
 -7ea3-field:confirmDateRageInvalidcause=Задан неверный интервал дат: конечная дата предшествует начальной.
@@ -1459,11 +1885,11 @@
 #_________________________________________=If you continue with the export, any unknown information will not be exported.
 -232e-field:confirmExportUnknownTagseffect=Если Вы выберете продолжение экспорта, нераспознанная информация не будет экспортирована.
 
-#_______________________________________________=You have chosen to treat this account as a Field Desk.
--862f-field:confirmImportFieldDeskPublicKeycause=Вы выбрали доверять данной периферийной учетной записи.
+#__________________________________________________________=This template was not created by a known account. You should carefully review the fields to make sure the template is suitable. You will be able to cancel the template editing to restore the earlier template.
+-c062-field:confirmImportingCustomizationUnknownSignercause=This template was not created by a known account. You should carefully review the fields to make sure the template is suitable. You will be able to cancel the template editing to restore the earlier template.
 
-#________________________________________________=By clicking on Yes, you will cause all bulletins created by this account to be marked as having been created by a trusted account.
--b003-field:confirmImportFieldDeskPublicKeyeffect=Нажмите "Да", чтобы все сводки, созданные данной учетной записью, отмечались как созданные доверенной учетной записью.
+#___________________________________________________________=To see the template contents, continue with the import.
+-36e9-field:confirmImportingCustomizationUnknownSignereffect=To see the template contents, continue with the import.
 
 #_________________________________________________=A key file already exists for this account.  Do you wish to overwrite it?
 -6829-field:confirmKeyPairFileExistsOverWritecause=Файл ключа для данной учетной записи уже существует. Хотите заменить его?
@@ -1549,12 +1975,6 @@
 #________________________________________=The selected attachments will be permanently removed from this bulletin.
 -3252-field:confirmRemoveAttachmenteffect=Выделенные вложения будут удалены из сводки без возможности восстановления.
 
-#__________________________________________=You have chosen to remove the selected Field Desk account(s).
--6ab9-field:confirmRemoveFieldDeskKeyscause=Вы выбрали удаление отмеченных периферийных учетных записей.
-
-#___________________________________________=By clicking on Yes, bulletins created by those accounts will no longer be indicated as having been authored by a Field Desk
--0c34-field:confirmRemoveFieldDeskKeyseffect=Нажмите "Да", чтобы сводки, созданные этими учетными записями, больше не отображались как сводки от периферийных учетных записей.
-
 #___________________________________=You are about to delete all Martus data from this computer.
 -af45-field:confirmRemoveMartuscause=Вы собираетесь удалить с компьютера все данные, относящиеся к Martus.
 
@@ -1572,12 +1992,6 @@
 
 #__________________________________________________=If you do this, the report will only include the bulletins that have been found so far.
 -4aa4-field:confirmReportSearchProgressCanceleffect=В этом случае в списке результатов поиска будут приведены только сводки, найденные к настойщему моменту.
-
-#_______________________________________________________=Do you want to have your contact information sent to the current server?  This information may be sent to other servers, and will be viewable by anyone who has access to your public bulletin information or anyone with administrative rights on the server.
--496d-field:confirmRequestToSendContactInfoToServercause=Хотите ли Вы отправить свои контактные данные на текущий сервер? Эти данные могут быть перенаправлены на другие серверы и будут доступны любому, кто имеет доступ к Вашим общим данным в сводках или наделен правами администратора данного сервера.
-
-#________________________________________________________=Clicking on Yes will send your contact information to the current server.
--9c28-field:confirmRequestToSendContactInfoToServereffect=Нажмите "Да", чтобы отправить свои контактные данные на текущий сервер.
 
 #__________________________________________=This will reset the current Default Details contents to the original contents. After resetting the contents, you should review them to be sure they are correct.
 -37bf-field:confirmResetDefaultDetailscause=В поле "Подробности" будет восстановлен исходный текст шаблона поля. Просмотрите поле снова, чтобы убедиться в правильности содержащейся в нем информации.
@@ -1645,6 +2059,12 @@
 #________________________________________=New bulletins created with this account will not have any custom fields.
 -bf33-field:confirmUndoCustomFieldseffect=Сводки, создаваемые данной учетной записью в дальнейшем, не будут содержать полей, определенных пользователем.
 
+#__________________________________________________________=Anyone who has (or can guess) your access token will be able to download it from the server and see everything in this template. If you upload your template, someone could potentially see the structure of the data you're collecting (but won't be able to see the data itself).
+-8503-field:confirmUploadPublicTemplateToServerWarningcause=Anyone who has (or can guess) your access token will be able to download it from the server and see everything in this template. If you upload your template, someone could potentially see the structure of the data you're collecting (but won't be able to see the data itself).
+
+#___________________________________________________________=By continuing, you understand your template details are publicly available on the server.
+-751e-field:confirmUploadPublicTemplateToServerWarningeffect=By continuing, you understand your template details are publicly available on the server.
+
 #_____________________________________=Please Note: There are bulletins that have not been sent to a server.  Do you still want to exit?
 -d0f3-field:confirmUploadRemindercause=Внимание! В вашей папке исходящих имеются сводки, не отправленные на сервер. Вы по-прежнему хотите выйти из программы?
 
@@ -1684,8 +2104,8 @@
 #____________________________________________________=Warning! Using the regular keyboard to enter your password greatly reduces the security of the Martus system, and could make it easier for an attacker to view your private data.
 -f068-field:confirmWarningSwitchToNormalKeyboardcause=Предупреждение! Ввод пароля с обычной клавиатуры значительно снижает безопасность Martus и может облегчить посторонним несанкционированный доступ к Вашим конфиденциальным данным.
 
-#_____________________________________________________=If this is a Headquarters computer, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.
--4379-field:confirmWarningSwitchToNormalKeyboardeffect=Если данный компьютер является центральным по отношению к другим учетным записям, использовать экранную клавиатуру особенно важно, так как в противном случае посторонний может получить без Вашей санкции доступ ко всем конфиденциальным данным, которые разрешено просматривать Вам.
+#_____________________________________________________=If you have been sent this bulletin from one of your contacts, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.
+-24d9-field:confirmWarningSwitchToNormalKeyboardeffect=Если данный компьютер является центральным по отношению к другим учетным записям, использовать экранную клавиатуру особенно важно, так как в противном случае посторонний может получить без Вашей санкции доступ ко всем конфиденциальным данным, которые разрешено просматривать Вам.
 
 #_________________________________________________=This XML file was created by a newer version of Martus.
 -4241-field:confirmXmlSchemaNewerImportAnywaycause=Данный XML-файл создан более поздней версией Martus.
@@ -1750,8 +2170,8 @@
 #________________________=Disconnecting...
 -257e-field:disconnecting=Отсоединение...
 
-#________________=Email Address
--09ba-field:email=Адрес электронной почты
+#________________=Email Address:
+-852c-field:email=Адрес электронной почты
 
 #____________________=Date Created
 -dda2-field:entrydate=Дата создания сводки
@@ -1762,20 +2182,17 @@
 #_________________________=Dates of Event
 -a13c-field:eventdaterange=Временной интервал для даты события
 
+#_______________________________________=Description
+-55f8-field:inputCustomFieldsDescription=Description
+
 #________________________________=Enter the XML representation for the layout of new and modified bulletins.
 -cf9a-field:inputCustomFieldsInfo=Введите XML-представление для настройки полей в новых и редактируемых сводках.
 
-#______________________________________=Enter the label you wish to associate with this Field Desk.
--268e-field:inputGetFieldDeskLabelentry=Введите метку, ассоциированную с данной периферийной учетной записью.
-
-#_______________________________=Enter the label you wish to associate with this Headquarters.
--ba5f-field:inputGetHQLabelentry=Введите метку, ассоциированную с данной центральной учетной записью.
+#_________________________________=Title
+-768e-field:inputCustomFieldsTitle=Title
 
 #_____________________________________=Enter the name of the file you wish to export.
 -6507-field:inputGetShareFileNameentry=Введите имя файла для экспорта.
-
-#_____________________________________=Enter the Public Code for the account being imported:
--83fb-field:inputImportPublicCodeentry=Введите общий идентификационный ключ для импортируемой учетной записи:
 
 #____________________________________=Enter the Public Code for this account:
 -fea8-field:inputImportPublicKeyentry=Введите общий идентификационный ключ для данной учетной записи:
@@ -1816,14 +2233,14 @@
 #_________________________________=The current server has sent this message:
 -fd76-field:messageServerNewscause=Текущий сервер отправил сообщение следующего содержания:
 
-#______________________________________=The Public Code does not match the one you entered.
--040a-field:notifyAccountCodeWrongcause=Введенный общий идентификационный код неверен.
-
 #_____________________________________________________=Must select at least one bulletin that was created by this account
 -f7c7-field:notifyAddPermissionsZeroBulletinsOurscause=Выделите хотя бы одну сводку, созданную данной учетной записью
 
-#____________________________________________________________=Must select at least one headquarters account
--deb1-field:notifyAddPermissionsZeroHeadquartersSelectedcause=Выделите хотя бы одну центральную учетную запись
+#____________________________________________________________=Must select at least one contact's account
+-9f77-field:notifyAddPermissionsZeroHeadquartersSelectedcause=Выделите хотя бы одну центральную учетную запись
+
+#________________________________________________=A connection to the server was not made. This could be because the server is not available, you have entered an incorrect IP, the server is blocked, or your Internet connection is down.
+-4028-field:notifyAdvanceServerNotRespondingcause=A connection to the server was not made. This could be because the server is not available, you have entered an incorrect IP, the server is blocked, or your Internet connection is down.
 
 #____________________________________=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.
 -614e-field:notifyAlreadyRunningcause=На компьютере уже запущена программа Martus. Завершите работу запущенного экземпляра программы, прежде чем запускать ее заново.
@@ -1851,6 +2268,15 @@
 
 #______________________________________________________=Please confirm that the default details retrieved are correct.
 -af6b-field:notifyConfirmCorrectDefaultDetailsDatacause=Подтвердите правильность загруженной информации, которая будет помещаться в поле "Подробности" по умолчанию.
+
+#_____________________________________________=You have already added this contact.
+-8184-field:notifyContactKeyAlreadyExistscause=You have already added this contact.
+
+#_________________________________________=You cannot add yourself as a contact.
+-af4b-field:notifyContactKeyIsOurselfcause=You cannot add yourself as a contact.
+
+#______________________________________=The current server is not responding or may need to be configured from the server menu.
+-9b3c-field:notifyContactsNoServercause=The current server is not responding or may need to be configured from the server menu.
 
 #_________________________________________=An error occurred while trying to create your account.
 -c8e7-field:notifyCreateAccountFailedcause=В процессе создания учетной записи произошла ошибка.
@@ -1893,6 +2319,9 @@
 
 #_________________________________________________________=There was an error saving your template.
 -88ed-field:notifyErrorExportingCustomizationTemplatecause=При сохранении шаблона произошла ошибка.
+
+#____________________________________________=An error occured while trying to connect to the server.
+-7955-field:notifyErrorGettingCompliancecause=An error occured while trying to connect to the server.
 
 #___________________________________________________=This XML file was created by a newer version of Martus and cannot be read by this version.  You must upgrade to the newer version of Martus to import this file.
 -c6cb-field:notifyErrorImportingBulletinsTooNewcause=Данный XML-файл создан более поздней версией Martus и не может быть прочтен данной версией программы.  Для импорта файла обновите версию Martus.
@@ -1939,6 +2368,12 @@
 #______________________________________=Unable to save current screen layout.
 -2bad-field:notifyErrorSavingStatecause=Невозможно сохранить текущий макет экрана.
 
+#_________________________________________________=Unexpected error saving template to server.
+-6e61-field:notifyErrorSavingTemplateToServercause=Unexpected error saving template to server.
+
+#________________________________________=Unable to connect to the server.
+-595b-field:notifyErrorServerOfflinecause=Unable to connect to the server.
+
 #_____________________________________________=Unable to update the dictionary. Be sure the word list is in the correct format.
 -6486-field:notifyErrorUpdatingDictionarycause=Обновление словаря невозможно. Убедитесь, что формат списка слов правилен.
 
@@ -1966,12 +2401,6 @@
 #___________________________________________________________=Successfully exported customization template.
 -aed9-field:notifyExportingCustomizationTemplateSuccesscause=Шаблон настройки полей успешно сохранен.
 
-#_______________________________________________=You have already added this account as a Field Desk.
--b783-field:notifyFieldDeskKeyAlreadyExistscause=Вы уже добавили данную учетную запись как периферийную.
-
-#_____________________________________________=The label you entered is already assigned to another Field Desk account.  Please use a different label.
--7237-field:notifyFieldDeskLabelDuplicatecause=Введенная метка уже присвоена другой периферийной учетной записи. Используйте другую метку.
-
 #___________________________________________=The original files have not been deleted from your computer, you must delete them manually if you wish.
 -8965-field:notifyFilesWillNotBeDeletedcause=Исходные файлы не были удалены с Вашего компьютера; при желании Вы можете удалить их самостоятельно.
 
@@ -1984,12 +2413,6 @@
 #__________________________________=One or more bulletins were not in any folder. These lost bulletins have been placed into the Recovered Bulletins folder.
 -0b0c-field:notifyFoundOrphanscause=Найдена сводка или сводки, не помещенные в какую-либо папку. Эти потерянные сводки размещены в папке "Восстановленные сводки".
 
-#_______________________________________=You have already added this account to your Headquarters list.
--0785-field:notifyHQKeyAlradyExistscause=Данная учетная запись уже добавлена к Вашему списку центральных учетных записей.
-
-#_______________________________________________=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.
--91ca-field:notifyHeadquarterLabelDuplicatecause=Введенная Вами метка уже присвоена другой центральной учетной записи. Введите другую метку.
-
 #________________________________________________=Not all bulletins were imported.  The following bulletins had problems during import.\n\n#ImportBulletinsNotImported#
 -9768-field:notifyImportBulletinsNotImportedcause=Импортированы не все сводки. Проблемы возникли при импорте следующих сводок.\n\n#ImportBulletinsNotImported#
 
@@ -1999,8 +2422,8 @@
 #______________________________________________=Not all attachments were imported.  The following bulletins had problems importing these attachments.\n\n#ImportMissingAttachments#
 -4e91-field:notifyImportMissingAttachmentscause=Импортированы не все вложения.  Проблемы возникли при импорте следующих вложений из сводок.\n\n#ImportMissingAttachments#
 
-#___________________________________________________________=Successfully imported customization template.
--c78c-field:notifyImportingCustomizationTemplateSuccesscause=Импорт шаблона настройки полей успешно завершен.
+#___________________________________________________________=Successfully imported a customization template that was created by #CreatedBy#.
+-16f2-field:notifyImportingCustomizationTemplateSuccesscause=Импорт шаблона настройки полей успешно завершен.
 
 #_______________________________________=You must have a server public code.
 -2fde-field:notifyInvalidServerCodecause=Требуется общий код сервера.
@@ -2008,14 +2431,8 @@
 #_______________________________________=You must have a server name or IP address.
 -984b-field:notifyInvalidServerNamecause=Требуется имя или IP-адрес сервера.
 
-#__________________________________________=Please select a Field Desk first.
--b792-field:notifyNoFieldDesksSelectedcause=Вначале выберите периферийную учетную запись.
-
 #_______________________________________=No row selected.
 -7b20-field:notifyNoGridRowSelectedcause=Не выделена строка.
-
-#___________________________________=Please select a Headquarters first.
--1d19-field:notifyNoHQsSelectedcause=Вначале выберите центральную учетную запись.
 
 #___________________________________________=No folder specified.  You must enter a folder you wish the files to be imported into.  This folder can already exist in the system, or can be a new folder.
 -05f7-field:notifyNoImportFileSpecifiedcause=Не указана папка. Укажите папку, в которую следует импортировать файлы. Эта папка может быть новой или уже иметься в системе.
@@ -2032,8 +2449,8 @@
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=Операция выполнена.
 
-#_____________________________________=Not a valid password, passwords must be at least 8 characters long
--c9fa-field:notifyPasswordInvalidcause=Неверный пароль.
+#_____________________________________=Not a valid password, passwords must be at least 8 characters long, 15 recommended.
+-6148-field:notifyPasswordInvalidcause=Неверный пароль.
 
 #_____________________________________________=Your password can not be your username
 -0acb-field:notifyPasswordMatchesUserNamecause=Ваше имя пользователя не может использоваться в качестве пароля
@@ -2143,8 +2560,23 @@
 #_______________________________________=The Server has responded with invalid account information.
 -76c7-field:notifyServerInfoInvalidcause=В ответе сервера содержится несоответствующая информация об учетной записи.
 
+#________________________________________=Server not available.
+-45bd-field:notifyServerNotAvailablecause=Server not available.
+
+#_________________________________________=This server does not support this feature.
+-0b42-field:notifyServerNotCompatiblecause=This server does not support this feature.
+
 #____________________________________________=Unable to make a secure connection with the Martus backup server.\n\nMartus can connect to a server using either of two ports.  When trying to connect to this server, neither port is accessible, probably because both ports are being blocked by a local firewall or by your ISP.\n\nWe recommend that any firewalls be configured to allow outgoing connections on both TCP port 443 and 987.  Please contact your LAN administrator or office technical support staff to verify that your firewall configuration allows this.\n\nIf the problem persists, you may need to select a different server.
 -8dc9-field:notifyServerSSLNotRespondingcause=Установить безопасное соединение с сервером невозможно.\n\nMartus может соединиться с сервером через один из двух портов.  При попытке соединения с данным сервером оба порта недоступны. Возможно, они блокированы локальным брандмауэром или Вашим провайдером Интернета.\n\nРекомендуем настроить все брандмауэры так, чтобы разрешалось выходное подключение к двум портам TCP: 443 и 987.  Для проверки или изменения настроек брандмауэра свяжитесь с администратором локальной сети или с Вашей службой технической поддержки.\n\nВозможно, Вам понадобится использовать другой сервер.
+
+#____________________________________________=Access Token: #Token#\nPublic Code: #PublicCode#
+-20d8-field:notifyShowTokenAndPublicCodecause=Access Token: #Token#\nPublic Code: #PublicCode#
+
+#___________________________________________=Successfully saved form template to your account on the server.
+-f995-field:notifyTemplateSavedToServercause=Successfully saved form template to your account on the server.
+
+#_______________________________________________________=This token is not recognized by this server.
+-7b0c-field:notifyUnableToRetrieveContactFromServercause=This token is not recognized by this server.
 
 #____________________________________________=Unable to save the selected attachment for some reason.  Try saving it to a different file.
 -4a93-field:notifyUnableToSaveAttachmentcause=Невозможно выполнить сохранение выбранного вложения. Попробуйте сохранить вложение в другой файл.
@@ -2194,8 +2626,8 @@
 #_______________________________________=The Server has rejected your request. The magic word is probably not correct.
 -2baa-field:notifymagicwordrejectedcause=Сервер отклонил Ваш запрос. Возможно, неверное волшебное слово.
 
-#________________________________________=You must enter the same password twice
--dcba-field:notifypasswordsdontmatchcause=Вы должны дважды ввести один и тот же пароль
+#________________________________________=Warning: You must enter the same password you entered on the previous screen.
+-2a81-field:notifypasswordsdontmatchcause=Вы должны дважды ввести один и тот же пароль
 
 #____________________________________=Error: Unable to retrieve bulletins from the server
 -33d7-field:notifyretrievefailedcause=Ошибка: Невозможна загрузка сводок с сервера
@@ -2215,8 +2647,8 @@
 #____________________________________=The current Martus Server has refused to accept a bulletin
 -8629-field:notifyuploadrejectedcause=Текущий сервер Martus отказал в приеме сводки
 
-#_________________________________________=You must enter the same username twice
--8812-field:notifyusernamessdontmatchcause=Введите дважды одно и то же имя пользователя
+#_________________________________________=Warning: You must enter the same user name you entered on the previous screen.
+-597e-field:notifyusernamessdontmatchcause=Введите дважды одно и то же имя пользователя
 
 #_______________________=Organization
 -5192-field:organization=Организация
@@ -2230,8 +2662,8 @@
 #____________________=(same password again)
 -71c7-field:password2=(повторите пароль)
 
-#________________=Phone Number
--ab25-field:phone=Номер телефона
+#________________=Phone Number:
+-846e-field:phone=Номер телефона
 
 #___________________________________=Automatically adjust legacy Afghan/Persian dates
 -396e-field:preferencesAdjustPersian=Автоматическая корректировка унаследованных афганских/персидских дат
@@ -2242,8 +2674,8 @@
 #________________________________=Prevent creating public bulletins
 -7c9e-field:preferencesAllPrivate=Запретить создание общедоступных сводок 
 
-#_______________________________________________=Automatically check for new Field Desk bulletins
--982a-field:preferencesCheckFieldOfficeBulletins=Автоматическая проверка новых сводок от периферийных учетных записей
+#_______________________________________________=Automatically check for new bulletins from Contacts
+-1b26-field:preferencesCheckFieldOfficeBulletins=Автоматическая проверка новых сводок от периферийных учетных записей
 
 #_______________________________=Use Zawgyi font for Burmese display and input
 -f739-field:preferencesUseZawgyi=Использовать шрифт Zawgyi для ввода и вывода текста на бирманском языке
@@ -2269,11 +2701,11 @@
 #_________________=Status
 -bae7-field:status=Состояние
 
-#___________________________________________________=Checking for new Field Desk bulletins...
--68ab-field:statusCheckingForNewFieldOfficeBulletins=Проверка новых сводок от периферийных учетных записей...
+#___________________________________________________=Checking for new bulletins from Contacts...
+-a74c-field:statusCheckingForNewFieldOfficeBulletins=Проверка новых сводок от периферийных учетных записей...
 
-#________________________________________=New Field Desk bulletins found on server
--a71e-field:statusNewFieldOfficeBulletins=На сервере есть новые сводки от периферийных учетных записей
+#________________________________________=New bulletins found on server
+-8fef-field:statusNewFieldOfficeBulletins=На сервере есть новые сводки от периферийных учетных записей
 
 #__________________=Summary
 -12b7-field:summary=Краткое содержание
@@ -2287,7 +2719,7 @@
 #________________=Title
 -768e-field:title=Заголовок
 
-#_____________________________=Russian 4.4
+#_____________________________=Russian pre-4.5
 field:translationVersion=Русский 4.4
 
 #___________________=Username
@@ -2323,8 +2755,11 @@ field:translationVersion=Русский 4.4
 #_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.  If you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.
 -711f-field:warningUnofficialTranslation=ПРЕДУПРЕЖДЕНИЕ:  Данный перевод создан не разработчиками Martus и может быть недостоверным. Если Вы хотите использовать только официальные переводы, выйдите из Martus, удалите из своего каталога Martus файл #UseUnofficialTranslationFiles# и запустите Martus заново.
 
-#__________________=Web Page
--0163-field:webpage=Веб-страница
+#__________________=Web Page:
+-cfeb-field:webpage=Веб-страница
+
+#___________________=All Files
+-af3d-filed:AllFiles=All Files
 
 #_____________________________=Damaged Bulletins
 -32db-folder:%DamagedBulletins=Поврежденные
@@ -2341,11 +2776,11 @@ field:translationVersion=Русский 4.4
 #_______________________________=Recovered Bulletins
 -f926-folder:%RecoveredBulletins=Восстановленные
 
-#_________________________________________=Field Desk Bulletins
--647f-folder:%RetrievedFieldOfficeBulletin=Сводки периферийных учетных записей
+#_________________________________________=Contacts Sealed Bulletins
+-e011-folder:%RetrievedFieldOfficeBulletin=Сводки периферийных учетных записей
 
-#______________________________________________=Field Desk Draft Bulletins
--204a-folder:%RetrievedFieldOfficeBulletinDraft=Черновики периферийных учетных записей
+#______________________________________________=Contacts Draft Bulletins
+-5160-folder:%RetrievedFieldOfficeBulletinDraft=Черновики периферийных учетных записей
 
 #________________________________=Retrieved Bulletins
 -6539-folder:%RetrievedMyBulletin=Загруженные
@@ -2524,8 +2959,8 @@ field:translationVersion=Русский 4.4
 #________________=Chinese
 -15dc-language:zh=Китайский
 
-#________________________=Update Headquarters Access...
--fe87-menu:AddPermissions=Изменить доступ для центральных учетных записей...
+#________________________=Update Contact's Access...
+-1462-menu:AddPermissions=Изменить доступ для центральных учетных записей...
 
 #_________________________=Add '#NewWord#' to User Dictionary
 -0ca4-menu:AddToDictionary=Добавить '#NewWord#' в пользовательский словарь
@@ -2535,9 +2970,6 @@ field:translationVersion=Русский 4.4
 
 #________________=Charts
 -8610-menu:Charts=Диаграммы
-
-#______________________=Configure Headquarters
--bf2f-menu:ConfigureHQs=Настройка центральных учетных записей
 
 #_____________________________=Spell Checking
 -5cf2-menu:ConfigureSpellCheck=Проверка правописания
@@ -2584,8 +3016,8 @@ field:translationVersion=Русский 4.4
 #_________________________=Import Bulletins
 -4094-menu:ImportBulletins=Импорт сводок
 
-#__________________________=Configure Field Desks
--b043-menu:ManageFieldDesks=Настройка периферийных учетных записей
+#________________________=Manage Contacts
+-88c0-menu:ManageContacts=Manage Contacts
 
 #_________________________________=More Suggestions
 -a25a-menu:MoreSpellingSuggestions=Дополнительные варианты
@@ -2617,11 +3049,11 @@ field:translationVersion=Русский 4.4
 #_________________________=Resend Bulletin(s)
 -21a8-menu:ResendBulletins=Отправить сводки на сервер заново
 
-#__________________________________=Retrieve Field Desk Draft Bulletins
--a45d-menu:RetrieveHQDraftBulletins=Загрузить черновые сводки периферийных учетных записей
+#__________________________________=Retrieve Draft Bulletins from My Contacts
+-9bdc-menu:RetrieveHQDraftBulletins=Загрузить черновые сводки периферийных учетных записей
 
-#___________________________________=Retrieve Field Desk Sealed Bulletins
--2e56-menu:RetrieveHQSealedBulletins=Загрузить чистовые сводки периферийных учетных записей
+#___________________________________=Retrieve Sealed Bulletins from My Contacts
+-6b08-menu:RetrieveHQSealedBulletins=Загрузить чистовые сводки периферийных учетных записей
 
 #___________________________________=Retrieve My Draft Bulletins
 -eea7-menu:RetrieveMyDraftsBulletins=Загрузить собственные черновые сводки
@@ -2857,11 +3289,11 @@ field:translationVersion=Русский 4.4
 #_________________________=Account Information
 -0cbd-wintitle:AccountInfo=Свойства учетной записи
 
-#____________________________=Update headquarters access to Bulletins
--5def-wintitle:AddPermissions=Изменение доступа центральных учетных записей к сводкам
+#____________________________=Update your contacts' access to Bulletins
+-8369-wintitle:AddPermissions=Изменение доступа центральных учетных записей к сводкам
 
-#__________________________________________=Update headquarters access to Bulletins
--5def-wintitle:AddingPermissionsToBulletins=Изменение доступа центральных учетных записей к сводкам 
+#__________________________________________=Update your Contacts' access to Bulletins
+-88d1-wintitle:AddingPermissionsToBulletins=Изменение доступа центральных учетных записей к сводкам 
 
 #______________________________________=Backup Key Information
 -f733-wintitle:BackupKeyPairGeneralInfo=Информация: Сохранение ключа
@@ -2889,9 +3321,6 @@ field:translationVersion=Русский 4.4
 
 #__________________________=Server Configuration
 -add5-wintitle:ConfigServer=Настройка сервера
-
-#__________________________=Configure Headquarters Accounts
--3419-wintitle:ConfigureHQs=Настройка центральных учетных записей
 
 #_________________________________=Configure Spell Checking
 -b0ce-wintitle:ConfigureSpellCheck=Настройка проверки правописания
@@ -2953,6 +3382,12 @@ field:translationVersion=Русский 4.4
 #________________________________________=Verification Error
 -5e89-wintitle:ErrorVerifyingKeyPairShare=Ошибка при проверке
 
+#________________________________=Exit Manage Contacts
+-04b1-wintitle:ExitManageContacts=Exit Manage Contacts
+
+#________________________=Exit Martus Wizard
+-5bc6-wintitle:ExitWizard=Exit Martus Wizard
+
 #_____________________________=Export Bulletins
 -a86c-wintitle:ExportBulletins=Экспорт сводок
 
@@ -2986,11 +3421,8 @@ field:translationVersion=Русский 4.4
 #___________________________________________=Import Customization Template
 -0188-wintitle:FileDialogImportCustomization=Импорт шаблона настроек
 
-#________________________________________________=Import Field Desk Public Information File
--de53-wintitle:FileDialogImportFieldDeskPublicKey=Импорт файла общих данных периферийной учетной записи
-
-#___________________________________________________=Import Headquarters Account
--a41c-wintitle:FileDialogImportHeadquartersPublicKey=Импорт центральной учетной записи
+#___________________________________________________=Add a contact
+-51ad-wintitle:FileDialogImportHeadquartersPublicKey=Импорт центральной учетной записи
 
 #_________________________________=Import Martus Bulletin Archive
 -f1a0-wintitle:FileDialogImportMBA=Импорт архива сводок Martus
@@ -3022,11 +3454,17 @@ field:translationVersion=Русский 4.4
 #_____________________________=Import Bulletins
 -4094-wintitle:ImportBulletins=Импорт сводок
 
+#____________________________________=Import Contact Key
+-e3a4-wintitle:ImportContactPublicKey=Import Contact Key
+
 #____________________________=Importing Bulletins
 -2c20-wintitle:ImportProgress=Импортируются сводки
 
 #________________________________=Include Private Data
 -e6dc-wintitle:IncludePrivateData=Включение конфиденциальных данных
+
+#_____________________________________=Incompatible Java Version
+-4301-wintitle:IncompatibleJavaVersion=Incompatible Java Version
 
 #____________________________________=Incompatible Translation Version
 -e91d-wintitle:IncompatibleMtfVersion=Несовместимая версия перевода
@@ -3039,9 +3477,6 @@ field:translationVersion=Русский 4.4
 
 #________________________________________________=Loading Values...
 -2752-wintitle:LoadingFieldValuesFromAllBulletins=Загрузка значений
-
-#_________________________________=Configure Field Desk Accounts
--6d27-wintitle:ManageFieldDeskKeys=Настройка периферийных учетных записей
 
 #__________________________=Martus SignIn
 -0615-wintitle:MartusSignIn=Вход в систему Martus
@@ -3073,6 +3508,9 @@ field:translationVersion=Русский 4.4
 #_________________________________=Restore from Backup Disk
 -f910-wintitle:RecoverShareKeyPair=Восстановление ключа с дисков
 
+#___________________________=Remove Contact
+-7f9a-wintitle:RemoveContact=Remove Contact
+
 #_________________________________________=Remove Martus From This Computer
 -31b5-wintitle:RemoveMartsFromThisComputer=Удаление программы Martus с компьютера
 
@@ -3094,8 +3532,8 @@ field:translationVersion=Русский 4.4
 #______________________________________________=Retrieving Bulletin Summaries
 -2a45-wintitle:RetrieveHQDraftBulletinSummaries=Загрузка краткой информации из сводок
 
-#______________________________________=Retrieve Field Desk Draft Bulletins
--a45d-wintitle:RetrieveHQDraftBulletins=Загрузка черновых сводок периферийных учетных записей
+#______________________________________=Retrieve Draft Bulletins from My Contacts
+-9bdc-wintitle:RetrieveHQDraftBulletins=Загрузка черновых сводок периферийных учетных записей
 
 #______________________________________________=Retrieving Bulletins
 -b7aa-wintitle:RetrieveHQSealedBulletinProgress=Загрузка сводок
@@ -3103,8 +3541,8 @@ field:translationVersion=Русский 4.4
 #_______________________________________________=Retrieving Bulletin Summaries
 -2a45-wintitle:RetrieveHQSealedBulletinSummaries=Загрузка краткой информации из сводок
 
-#_______________________________________=Retrieve Field Desk Sealed Bulletins
--2e56-wintitle:RetrieveHQSealedBulletins=Загрузка чистовых сводок периферийных учетных записей
+#_______________________________________=Retrieve Sealed Bulletins from My Contacts
+-6b08-wintitle:RetrieveHQSealedBulletins=Загрузка чистовых сводок периферийных учетных записей
 
 #_____________________________________________=Retrieving Bulletins
 -b7aa-wintitle:RetrieveMyDraftBulletinProgress=Загрузка сводок
@@ -3151,6 +3589,9 @@ field:translationVersion=Русский 4.4
 #________________________=Server News: Message #CurrentNewsItem# of #MaxNewsItems#
 -7177-wintitle:ServerNews=Новости сервера: сообщение #CurrentNewsItem# из #MaxNewsItems#
 
+#__________________________________________________=Server Not Available
+-c79c-wintitle:ServerNotRespondingSaveConfiguration=Server Not Available
+
 #____________________________________=Server Configuration Results
 -788c-wintitle:ServerSelectionResults=Результаты настройки сервера
 
@@ -3196,8 +3637,8 @@ field:translationVersion=Русский 4.4
 #______________________________________=Cancel Verification
 -8a03-wintitle:confirmCancelShareVerify=Отмена проверки
 
-#_______________________________________=Confirm Removal of Headquarters
--2574-wintitle:confirmClearHQInformation=Подтверждение отмены прав центральной учетной записи
+#_______________________________________=Confirm Removal of Contact
+-55fc-wintitle:confirmClearHQInformation=Подтверждение отмены прав центральной учетной записи
 
 #________________________________________=Confirm Create Copy of Someone Else's Bulletin
 -7a92-wintitle:confirmCloneBulletinAsMine=Подтверждение создания копии сводки, созданной другим лицом
@@ -3232,8 +3673,8 @@ field:translationVersion=Русский 4.4
 #______________________________________=Export Bulletins
 -a86c-wintitle:confirmExportUnknownTags=Экспортировать сводки
 
-#_____________________________________________=Import Account Public Information
--b678-wintitle:confirmImportFieldDeskPublicKey=Импорт общих данных учетной записи
+#________________________________________________________=Import Customization Template
+-0188-wintitle:confirmImportingCustomizationUnknownSigner=Import Customization Template
 
 #_______________________________________________=Key file Exists
 -493d-wintitle:confirmKeyPairFileExistsOverWrite=Файл ключа уже существует
@@ -3277,9 +3718,6 @@ field:translationVersion=Русский 4.4
 #_____________________________________=Confirm Remove Attachments
 -8739-wintitle:confirmRemoveAttachment=Подтверждение удаления вложений
 
-#________________________________________=Confirm Removal of Field Desk(s)
--41f7-wintitle:confirmRemoveFieldDeskKeys=Подтверждение удаления периферийных учетных записей
-
 #_________________________________=Delete All Data and Remove Martus
 -6fef-wintitle:confirmRemoveMartus=Удаление всех данных и программы Martus
 
@@ -3288,9 +3726,6 @@ field:translationVersion=Русский 4.4
 
 #_______________________________________________=Cancel Search
 -5109-wintitle:confirmReportSearchProgressCancel=Отмена поиска
-
-#_____________________________________________________=Request to Send Contact Info to Server
--4f40-wintitle:confirmRequestToSendContactInfoToServer=Запрос на отправку контактных данных на сервер
 
 #________________________________________=Reset Contents
 -6f62-wintitle:confirmResetDefaultDetails=Возврат к исходному содержанию
@@ -3324,6 +3759,9 @@ field:translationVersion=Русский 4.4
 
 #_____________________________________=Customize Fields
 -1cb1-wintitle:confirmUndoCustomFields=Настройка полей
+
+#________________________________________________________=Send Template to Server
+-c3eb-wintitle:confirmUploadPublicTemplateToServerWarning=Send Template to Server
 
 #___________________________________=Upload Reminder
 -5b14-wintitle:confirmUploadReminder=Загрузка напоминания
@@ -3370,17 +3808,8 @@ field:translationVersion=Русский 4.4
 #_______________________________=Customize Fields
 -1cb1-wintitle:inputCustomFields=Настройка полей
 
-#____________________________________=Field Desk Label
--f770-wintitle:inputGetFieldDeskLabel=Метка периферийной учетной записи
-
-#_____________________________=Headquarters Label
--5c50-wintitle:inputGetHQLabel=Метка центральной учетной записи
-
 #___________________________________=Default Backup File Name
 -ac3c-wintitle:inputGetShareFileName=Файл разбивки: имя по умолчанию
-
-#___________________________________=Import Account Public Information
--b678-wintitle:inputImportPublicCode=Импорт общих данных учетной записи
 
 #__________________________________=Import Account Public Information
 -b678-wintitle:inputImportPublicKey=Импорт общих данных учетной записи
@@ -3397,14 +3826,17 @@ field:translationVersion=Русский 4.4
 #__________________=Martus Human Rights Bulletin System
 -e5ae-wintitle:main=Martus - Система сводок по правам человека
 
-#____________________________________=Incorrect Public Code
--f994-wintitle:notifyAccountCodeWrong=Неверный общий код
+#______________________________=Add Contact
+-d7f5-wintitle:notifyAddContact=Add Contact
 
-#___________________________________________________=Update headquarters access to Bulletins
--5def-wintitle:notifyAddPermissionsZeroBulletinsOurs=Изменение доступа центральных учетных записей к сводкам
+#___________________________________________________=Update Contacts access to Bulletins
+-a027-wintitle:notifyAddPermissionsZeroBulletinsOurs=Изменение доступа центральных учетных записей к сводкам
 
-#__________________________________________________________=No Headquarters Selected
--9140-wintitle:notifyAddPermissionsZeroHeadquartersSelected=Не выбраны центральные учетные записи
+#__________________________________________________________=No Contacts Selected
+-e057-wintitle:notifyAddPermissionsZeroHeadquartersSelected=Не выбраны центральные учетные записи
+
+#______________________________________________=Server Not Available
+-c79c-wintitle:notifyAdvanceServerNotResponding=Server Not Available
 
 #__________________________________=Martus Already Running
 -cfce-wintitle:notifyAlreadyRunning=Программа Martus уже запущена
@@ -3432,6 +3864,15 @@ field:translationVersion=Русский 4.4
 
 #____________________________________________________=Confirm Correct Default Details Content
 -c770-wintitle:notifyConfirmCorrectDefaultDetailsData=Подтверждение исправления шаблона для поля "Подробности"
+
+#___________________________________________=Contact Account Already Exists
+-bc30-wintitle:notifyContactKeyAlreadyExists=Contact Account Already Exists
+
+#_______________________________________=Contact Account Is Yourself
+-6e39-wintitle:notifyContactKeyIsOurself=Contact Account Is Yourself
+
+#____________________________________=Contacts Server
+-b01e-wintitle:notifyContactsNoServer=Contacts Server
 
 #_______________________________________=Error Creating New Account
 -1141-wintitle:notifyCreateAccountFailed=Ошибка при создании учетной записи
@@ -3474,6 +3915,9 @@ field:translationVersion=Русский 4.4
 
 #_______________________________________________________=Error Exporting Template
 -f4cc-wintitle:notifyErrorExportingCustomizationTemplate=Ошибка при экспорте шаблона
+
+#__________________________________________=Error Getting Compliance Statement
+-f6b2-wintitle:notifyErrorGettingCompliance=Error Getting Compliance Statement
 
 #___________________________________________=Error Importing Bulletins
 -aeb8-wintitle:notifyErrorImportingBulletins=Ошибка при импорте сводок
@@ -3520,6 +3964,12 @@ field:translationVersion=Русский 4.4
 #____________________________________=Error Saving State
 -884d-wintitle:notifyErrorSavingState=Ошибка сохранения состояния
 
+#_______________________________________________=Save Template To Server
+-b3a3-wintitle:notifyErrorSavingTemplateToServer=Save Template To Server
+
+#______________________________________=Unable to Connect to Server
+-1b07-wintitle:notifyErrorServerOffline=Unable to Connect to Server
+
 #___________________________________________=Error
 -7f2f-wintitle:notifyErrorUpdatingDictionary=Ошибка
 
@@ -3547,12 +3997,6 @@ field:translationVersion=Русский 4.4
 #_________________________________________________________=Exporting Template Succeeded
 -b648-wintitle:notifyExportingCustomizationTemplateSuccess=Шаблон успешно экспортирован
 
-#_____________________________________________=Field Desk Account Already Exists
--eaf1-wintitle:notifyFieldDeskKeyAlreadyExists=Периферийная учетная запись уже существует
-
-#___________________________________________=Field Desk Label
--f770-wintitle:notifyFieldDeskLabelDuplicate=Метка периферийной учетной записи
-
 #_________________________________________=Files Not Deleted
 -a001-wintitle:notifyFilesWillNotBeDeleted=Файлы не удалены
 
@@ -3565,12 +4009,6 @@ field:translationVersion=Русский 4.4
 #________________________________=Recovered Lost Bulletins
 -704d-wintitle:notifyFoundOrphans=Восстановление потерянных сводок
 
-#_____________________________________=Headquarters Key Already Exists
--03e9-wintitle:notifyHQKeyAlradyExists=Ключ центральной учетной записи уже существует
-
-#_____________________________________________=Headquarter Label Invalid
--106b-wintitle:notifyHeadquarterLabelDuplicate=Неверная метка
-
 #______________________________________________=Warning Bulletins Not Imported
 -59d8-wintitle:notifyImportBulletinsNotImported=Предупреждение: сводки не импортированы
 
@@ -3579,6 +4017,9 @@ field:translationVersion=Русский 4.4
 
 #____________________________________________=Warning Missing Attachments
 -79ef-wintitle:notifyImportMissingAttachments=Предупреждение: отсутствуют вложения
+
+#__________________________________=Import Template
+-6d2d-wintitle:notifyImportTemplate=Import Template
 
 #_________________________________________________________=Importing Template Succeeded
 -ac8c-wintitle:notifyImportingCustomizationTemplateSuccess=Шаблон успешно импортирован
@@ -3589,14 +4030,8 @@ field:translationVersion=Русский 4.4
 #_____________________________________=Invalid Server Name or IP Address
 -3376-wintitle:notifyInvalidServerName=Неверное имя или IP-адрес сервера
 
-#________________________________________=No Field Desks Selected
--cab7-wintitle:notifyNoFieldDesksSelected=Периферийные учетные записи не выбраны
-
 #_____________________________________=No Row Selected
 -28fe-wintitle:notifyNoGridRowSelected=Не выделена строка
-
-#_________________________________=No Headquarters Selected
--9140-wintitle:notifyNoHQsSelected=Центральные учетные записи не выбраны
 
 #_________________________________________=No Folder Specified
 -4b6e-wintitle:notifyNoImportFileSpecified=Не указана папка
@@ -3724,8 +4159,23 @@ field:translationVersion=Русский 4.4
 #_____________________________________=Server Response Invalid
 -77bd-wintitle:notifyServerInfoInvalid=Неприемлемый ответ сервера
 
+#______________________________________=Save Template To Server
+-b3a3-wintitle:notifyServerNotAvailable=Save Template To Server
+
+#_______________________________________=Server Error
+-076a-wintitle:notifyServerNotCompatible=Server Error
+
 #__________________________________________=Unable to connect
 -8207-wintitle:notifyServerSSLNotResponding=Соединение невозможно
+
+#__________________________________________=Account Token and Public Code
+-8db5-wintitle:notifyShowTokenAndPublicCode=Account Token and Public Code
+
+#_________________________________________=Save Template To Server
+-b3a3-wintitle:notifyTemplateSavedToServer=Save Template To Server
+
+#_____________________________________________________=Unable To Retrieve Contact Info
+-df02-wintitle:notifyUnableToRetrieveContactFromServer=Unable To Retrieve Contact Info
 
 #__________________________________________=Saving Attachment Failed
 -fdf7-wintitle:notifyUnableToSaveAttachment=Невозможно сохранить вложение
@@ -3747,6 +4197,9 @@ field:translationVersion=Русский 4.4
 
 #________________________________________________=Server Compliance Statement
 -20f8-wintitle:notifyUserRejectedServerCompliance=Объявление о соответствии сервера
+
+#_________________________________=Verify Contact
+-3117-wintitle:notifyVerifyContact=Verify Contact
 
 #____________________________________________=Verification Succeeded
 -9195-wintitle:notifyVerifyKeyPairSharePassed=Проверка выполнена

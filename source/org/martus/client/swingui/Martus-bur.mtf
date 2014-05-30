@@ -2,9 +2,9 @@
 # Language code:  bur
 # Language name:  Burmese
 # Translated by:  Solveware, Global Arena 
-# Exported date:  Fri Oct 25 14:09:28 PDT 2013
-# Client version: pre-4.4
-# Client build:   2013-10-24.3291
+# Exported date:  Fri May 30 14:10:13 PDT 2014
+# Client version: pre-4.5
+# Client build:   2014-05-29.3405
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -100,11 +100,17 @@
 #!right-to-left
 #
 
+#______________________=Add Contact...
+-8f02-button:AddContact=Add Contact...
+
+#________________________________=Add Contact From Server...
+-6495-button:AddContactFromServer=Add Contact From Server...
+
 #____________________________=Add
 -61cc-button:AddFieldToReport=ထည့္သြင္းရန္
 
-#__________________________=Update Headquarters Access
--5029-button:AddPermissions=ပင္မသို႔ဝင္ေရာက္နိုင္မွဳကို ျပဳျပင္မြမ္းမံျခင္း လုပ္ပါ။
+#__________________________=Update Contact's Access
+-ba05-button:AddPermissions=ပင္မသို႔ဝင္ေရာက္နိုင္မွဳကို ျပဳျပင္မြမ္းမံျခင္း လုပ္ပါ။
 
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=ဆာဗာႏွင့္ကြန္ပ်ဴတာေပၚတြင္ရွိေသာ စာေစာင္မ်ားအားလုံးကိုျပပါ။
@@ -118,20 +124,23 @@
 #___________________________=Bulletin Details...
 -d012-button:BulletinDetails=စာေစာင္ အေသးစိတ္…
 
+#_______________________________=Use Default Server
+-7a68-button:ChooseDefaultServer=Use Default Server
+
 #_____________________=Close Help
 -8624-button:CloseHelp=အကူအညီ ပိတ္ရန္
 
-#___________________________=Add...
--2cce-button:ConfigureHQsAdd=ထည့္သြင္းရန္...
+#_______________________=Contact Name
+-8a42-button:ContactName=Contact Name
 
-#_______________________________=Change Label
--8a69-button:ConfigureHQsReLabel=ထိပ္စီးစာသားေျပာင္းရန္
+#_________________________=Remove
+-e963-button:ContactRemove=Remove
 
-#______________________________=Remove
--e963-button:ConfigureHQsRemove=ဖယ္ရွားရန္
+#___________________________=Verified
+-aed3-button:ContactVerified=Verified
 
-#___________________________________=View
--69bd-button:ConfigurePublicKeysView=ၾကည့္ရန္
+#_____________________________=Save and Close
+-7af7-button:ContactsSaveClose=Save and Close
 
 #____________________=Continue
 -2e02-button:Continue=ဆက္သြားရန္
@@ -142,8 +151,14 @@
 #____________________________=Create New Page Report
 -1d7a-button:CreatePageReport=အစီရင္ခံစာ စာမ်က္ႏွာပုံစံ အသစ္တည္ေဆာက္ရန္
 
+#_____________________________________=Create Single, Encrypted File
+-b8c6-button:CreateSingleEncryptedFile=Create Single, Encrypted File
+
 #_______________________________=Create New Tabular Report
 -34ee-button:CreateTabularReport=အစီရင္ခံစာ ဇယားပုံစံ အသစ္တည္ေဆာက္ရန္
+
+#_______________________=Download Custom
+-da95-button:CustomForms=Download Custom
 
 #__________________=Delete
 -f6fd-button:Delete=ဖ်က္ရန္
@@ -156,9 +171,6 @@
 
 #_________________________________=Show bulletins that are only on the server.
 -b795-button:DownloadableSummaries=ဆာဗာတြင္ရွိေသာ စာေစာင္မ်ားသာ ျပရန္။
-
-#______________________________=Change Label
--8a69-button:EditFieldDeskLabel=အညြန္းေျပာင္းရန္
 
 #______________________=Field Label
 -6492-button:FieldLabel=သိုမွီးခ်က္ အညြန္း
@@ -178,9 +190,6 @@
 #___________________________________________=Import
 -d6fb-button:FileDialogOkImportCustomization=တင္သြင္းရန္
 
-#________________________________________________=Import
--d6fb-button:FileDialogOkImportFieldDeskPublicKey=တင္သြင္းရန္
-
 #___________________________________________________=Import
 -d6fb-button:FileDialogOkImportHeadquartersPublicKey=တင္သြင္းရန္
 
@@ -198,6 +207,18 @@
 
 #_________________________=Up
 -2038-button:FolderOrderUp=အေပၚသို႔
+
+#________________________=Generic
+-ff76-button:GenericForms=Generic
+
+#______________________=Get Started
+-bd2c-button:GetStarted=Get Started
+
+#__________________=Go Back
+-f03e-button:GoBack=Go Back
+
+#_________________________________=Import Contact From File...
+-eaff-button:ImportContactFromFile=Import Contact From File...
 
 #___________________________________=Include Private Data
 -e6dc-button:IncludePrivateBulletins=လၽွိဳ႔ဝွက္ အခ်က္အလက္မ်ား ထည့္သြင္းရန္
@@ -250,6 +271,9 @@
 #________________________________=Both Public and Private Data
 -8685-button:PublicAndPrivateData=အမ်ားဆိုင္ႏွင့္ လၽွိဳ႔ဝွက္ အခ်က္အလက္ ႏွစ္မ်ိဳးစလုံး
 
+#______________________=Public Code
+-a1a2-button:PublicCode=Public Code
+
 #______________________=Public Data Only
 -4baa-button:PublicOnly=အမ်ားႏွင့္ဆိုင္ေသာ အခ်က္အလက္မ်ားသာ
 
@@ -289,8 +313,14 @@
 #______________________________=Match grid column specifications in the search screen to a single row of bulletin grid data. See the search Help screen for additional guidance on this advanced option.
 -c70c-button:SearchSameRowsOnly=ရွာေဖြ မ်က္ႏွာျပင္တြင္ ဂရစ္ေကာ္လံ သတ္မွတ္ခ်က္မ်ားသည္ စာေစာင္ဂရစ္ အခ်က္အလက္၏ တန္းတစ္ခုတည္းႏွင့္ ကိုက္ညီပါေစ။ ဤအဆင့္ျမင့္ ေရြးစရာႏွင့္ပတ္သက္သည့္ ထပ္ေလာင္း လမ္းညႊန္မွုမ်ားအတြက္ ရွာေဖြ မ်က္ႏွာျပင္တြင္ အကူအညီကို ၾကည့္ပါ။ 
 
+#____________________=See Forms
+-fac4-button:SeeForms=See Forms
+
 #________________________=Select
 -8598-button:SelectReport=ေရြးခ်ယ္ရန္
+
+#___________________________=Send To by Default
+-03aa-button:SendToByDefault=Send To by Default
 
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=လက္ခံရန္
@@ -312,6 +342,12 @@
 
 #______________________________=Use Old
 -91ea-button:UseOldCustomFields=အေဟာင္းကို သုံးရန္
+
+#______________________________=Verify Later
+-aedf-button:VerifyContactLater=Verify Later
+
+#____________________________=Verify!
+-7a46-button:VerifyContactNow=Verify!
 
 #_______________________________________=View Selected Version...
 -f943-button:ViewPreviousBulletinVersion=ေရြးခ်ယ္ထားေသာ မူကြဲကို ၾကည့္ရန္...
@@ -361,6 +397,9 @@
 #________________________=Import Template
 -6d2d-button:customImport=ပုံစံခြင္ တင္သြင္းရန္
 
+#______________________________=Send Template to Server
+-c3eb-button:customSendToServer=Send Template to Server
+
 #________________=Help
 -c47a-button:help=အကူအညီ
 
@@ -370,17 +409,8 @@
 #_______________________________=OK
 -9ce3-button:inputCustomFieldsok=OK
 
-#____________________________________=OK
--9ce3-button:inputGetFieldDeskLabelok=OK
-
-#_____________________________=OK
--9ce3-button:inputGetHQLabelok=OK
-
 #___________________________________=OK
 -9ce3-button:inputGetShareFileNameok=OK
-
-#___________________________________=Import
--d6fb-button:inputImportPublicCodeok=တင္သြင္းရန္
 
 #__________________________________=Import
 -d6fb-button:inputImportPublicKeyok=တင္သြင္းရန္
@@ -445,11 +475,29 @@
 #_______________=Yes
 -5397-button:yes=Yes
 
+#______________________=Access Token:
+-c45e-field:AccessToken=Access Token:
+
+#__________________________________=Access Token
+-0d23-field:AccessTokenInstructions=Access Token
+
+#_____________________________=Martus Account Access Token: 
+-dc84-field:AccountAccessToken=Martus Account Access Token: 
+
+#_________________________=Account Contact Information
+-c89a-field:AccountContact=Account Contact Information
+
+#____________________________________=This information is optional and is used to prepopulate your bulletins for your convenience. It is stored on your local computer and not sent to the Martus server.
+-b5a0-field:AccountContactInformation=This information is optional and is used to prepopulate your bulletins for your convenience. It is stored on your local computer and not sent to the Martus server.
+
 #_______________________________=Account Directory: 
 -c354-field:AccountInfoDirectory=အေကာင့္ လမ္းညႊန္
 
-#________________________________=Public Code:
--63bc-field:AccountInfoPublicCode=အမ်ားဆိုင္ ကုဒ္နံပါတ္ 
+#________________________________=Public Code (Old):
+-5662-field:AccountInfoPublicCode=အမ်ားဆိုင္ ကုဒ္နံပါတ္ 
+
+#__________________________________=Public Code (New):
+-a871-field:AccountInfoPublicCode40=Public Code (New):
 
 #_______________________________=Public Account Id:
 -6723-field:AccountInfoPublicKey=အမ်ားဆိုင္အေကာင့္စဥ္ 
@@ -457,17 +505,47 @@
 #______________________________=User Name: 
 -b58e-field:AccountInfoUserName=သုံးစြဲသူအမည္ 
 
-#_________________________________=This allows you to update headquarters access to existing bulletins. Each of the bulletins in the list below will be modified to add the selected headquarters accounts. If a bulletin is sealed, a new version will be created.
--aa30-field:AddPermissionsOverview=ဤသိုျပဳလုပ္ျခင္းသည္ သင့္အား လက္ရွိစာေစာင္မ်ားသို႔ ပင္မမ်ား ဝင္ေရာက္မွုကို ျပဳျပင္မြမ္းမံျခင္း လုပ္နိုင္ပါသည္။ေအာက္ပါစာရင္းရွိ စာေစာင္တစ္ခုစီကို ေရြးခ်ယ္ထားသည့္ ပင္မမ်ားကို ထပ္ထည့္ရန္ ျပဳျပင္မြမ္းမံလိမ့္မည္။ အကယ္၍စာေစာင္ကို ခ်ိတ္ပိတ္ထားပါက ဗားရွင္းအသစ္ ဖန္တီးေပးလိမ့္မည္။
+#______________________________________=create a user name
+-591c-field:AccountUserNameInstructions=create a user name
+
+#_________________________________=To send information through Martus to your contacts, pull their public key from the Martus server using their access token. Verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add them here. If you do not have this information now, you will be able to add contacts later.
+-70e8-field:AddContactInstructions=To send information through Martus to your contacts, pull their public key from the Martus server using their access token. Verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add them here. If you do not have this information now, you will be able to add contacts later.
+
+#______________________=Contacts
+-b0dd-field:AddContacts=Contacts
+
+#_________________________________=This allows you to update your contacts' access to existing bulletins. Each of the bulletins in the list below will be modified to add the selected contacts' accounts. If a bulletin is sealed, a new version will be created.
+-a2b9-field:AddPermissionsOverview=ဤသိုျပဳလုပ္ျခင္းသည္ သင့္အား လက္ရွိစာေစာင္မ်ားသို႔ ပင္မမ်ား ဝင္ေရာက္မွုကို ျပဳျပင္မြမ္းမံျခင္း လုပ္နိုင္ပါသည္။ေအာက္ပါစာရင္းရွိ စာေစာင္တစ္ခုစီကို ေရြးခ်ယ္ထားသည့္ ပင္မမ်ားကို ထပ္ထည့္ရန္ ျပဳျပင္မြမ္းမံလိမ့္မည္။ အကယ္၍စာေစာင္ကို ခ်ိတ္ပိတ္ထားပါက ဗားရွင္းအသစ္ ဖန္တီးေပးလိမ့္မည္။
 
 #_______________________________________=Updating access...
 -958f-field:AddingPermissionsToBulletins=ဝင္ေရာက္မွုကို ျပဳျပင္မြမ္းမံျခင္း လုပ္ပါေနသည္...
 
+#____________________________________=If you are connecting to a Martus server, email info@martus.org for this info.
+-5104-field:AdvanceMartusServerMailTo=If you are connecting to a Martus server, email info@martus.org for this info.
+
+#____________________________________=If you are connecting to your organization's server, contact your administrator.
+-1eae-field:AdvanceOrganizationServer=If you are connecting to your organization's server, contact your administrator.
+
+#___________________________________=To store your bulletins on a specific server, you will need the IP address, public code, and magic word for the server.
+-105d-field:AdvanceServerInformation=To store your bulletins on a specific server, you will need the IP address, public code, and magic word for the server.
+
+#_____________________________=Advanced Server Setup
+-6421-field:AdvanceServerSetup=Advanced Server Setup
+
+#____________________________________=Advanced Server Setup
+-6421-field:AdvanceServerSetupHeading=Advanced Server Setup
+
 #________________________________=Unknown
 -bc78-field:AttachmentSizeUnknown=အမ်ိဳးအမည္မသိ
 
-#_________________________=Author (required)
--4a0b-field:AuthorRequired=ေရးသားသူ (လိုအပ္သည္)
+#___________________________________=Attempting to connect to server
+-e9ba-field:AttemptToConnectToServer=Attempting to connect to server
+
+#___________________________________________________=Attempting to connect to server
+-e9ba-field:AttemptToConnectToServerAndGetCompliance=Attempting to connect to server
+
+#_________________=Author:
+-8445-field:Author=Author:
 
 #_____________________________=Preparing Report...
 -7651-field:BackgroundPrinting=အစီရင္ခံစာ ျပင္ဆင္ေနသည္...
@@ -481,17 +559,32 @@
 #____________________________=Working...
 -049a-field:BackgroundWorking=လုပ္ငန္းေဆာင္ရြက္ေနသည္...
 
+#____________________________=Note: Later in this wizard, you will be led through a process to backup your account key. This will help protect your account from loss.
+-50c2-field:BackupAccountInfo=Note: Later in this wizard, you will be led through a process to backup your account key. This will help protect your account from loss.
+
 #___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you'll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #TotalNumberOfFilesInBackup# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
 -ff3d-field:BackupKeyPairGeneralInfo=သင္၏လ်ိွဳ႔ဝွက္စာေစာင္မွ သတင္းအခ်က္အလက္မ်ားကို ဖတ္ရွုရန္ သို႔မဟုတ္ စာေစာင္အသစ္မ်ား တည္ေဆာက္ရန္အတြက္ ေသာ့ကို လိုအပ္ပါသည္။ သင္၏အခ်က္အလက္မ်ားသို႔ အျမဲတမ္း ဝင္ေရာက္ခြင့္ရွိေနေၾကာင္း ေသခ်ာေစရန္အတြက္ သင္၏ေသာ့ကို မိတၱဴပြားျခင္းက အလြန္အေရးႀကီးပါသည္။ \n\n သင့္ေသာ့ကို မိတၱဴကူးပြားျခင္းအတြက္ နည္းလမ္းႏွစ္ခုကို Martus က ပံ့ပိုးေပးထားၿပီး မည္သည့္နည္းကိုမဆို အသုံးျပဳနိုင္ပါသည္။ ပထမနည္းလမ္းမွာ စကားဝွက္ လၽွိဳ ႔ဝွက္စာျဖင့္ေရးသားထားသည့္ တစ္ခုတည္းေသာမိတၱဴပြားေသာ့ဖိုင္ကို ေရႊ႕ေျပာင္းနိုင္ေသာမီဒီယာမ်ားေပၚတြင္ တည္ေဆာက္သိမ္းဆည္းထားျခင္းျဖစ္သည္။ (ဥပမာ - Floppy disk ၊ CD ၊ USB သိုေလွာင္႐ုံ ) သို႔မဟုတ္ ကြန္ယက္ Drive တစ္ခုအတြင္း၌ တည္ေဆာက္ျခင္းျဖစ္သည္။ ဒုတိယနည္းလမ္းမွာ ေသာ့ကို #TotalNumberOfFilesInBackup# အတြင္းတြင္ အစိတ္အပိုင္းမ်ားအျဖစ္ (သင့္စကားဝွက္ လၽွိုဳ ႔ဝွက္စာျဖင့္ေရးသားထားျခင္းမဟုတ္ပါ) Floppy disk အေျမာက္အျမားေပၚတြင္ မိတၱဴကူးပြားထားျခင္းျဖစ္သည္ (အျခားေရႊ႕ေျပာင္းနိုင္ေသာ မီဒီယာမ်ားေပၚတြင္လည္း သိမ္းဆည္းနိုင္ပါသည္)။ \n
 
 #________________________________________________=This method breaks up your key into #TotalNumberOfFilesInBackup# pieces, any #MinimumNumberOfFilesNeededForRecovery# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #TotalNumberOfFilesInBackup# files have been written to removable media disks, you should distribute them to #TotalNumberOfFilesInBackup# different people whom you will remember, but each of whom don't know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #MinimumNumberOfFilesNeededForRecovery# of the original #TotalNumberOfFilesInBackup# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n
--9551-field:BackupKeyPairToSecretShareInformation=ဤနည္းသည္ သင္၏ေသာ့ကို #TotalNumberOfFilesInBackup#အစိတ္အပိုင္းမ်ားအျဖစ္သို႔ ျဖန္႔ခြဲလိုက္ပါသည္။ စကားဝွက္မသုံးဘဲ ေသာ့ျပန္လည္တည္ေဆာက္လၽွင္ #MinimumNumberOfFilesNeededForRecovery# တို႔အနက္မွ စာတြဲတစ္ခုခုကို လိုအပ္မည္ျဖစ္သည္။ ဝင္ေရာက္ရန္အမည္ႏွင့္ စကားဝွက္တို႔ကို ေမ့ေလ်ာ့သြားခဲ့ပါက ေသာ့ျပန္လည္ေဖာ္ထုတ္ျခင္းအတြက္ ဤနည္းသည္ တစ္ခုတည္းေသာနည္းလမ္းပင္ျဖစ္သည္။ \n\n အကယ္၍ #TotalNumberOfFilesInBackup# စာတြဲမ်ားကို ေျပာင္းေရႊ႕နိုင္ေသာ မီဒီယာ ဒစ္မ်ားေပၚတြင္ ေရးသားထည့္သြင္းထားပါက ၎  #TotalNumberOfFilesInBackup# သင္မွတ္မိနိုင္သည့္ လူအမ်ားထံသို႔ ခြဲေဝျဖန္႔ေပးထားသင့္ပါသည္။ သို႔ေသာ္ သင္ေပးထားသည့္ ထိုလူမ်ားမွာ က်န္စာတြဲမ်ားအား သင္ မည္သူ႔အားေပးထားသည္ကို မသိသင့္ၾကေပ။ \n\n ေသာ့ျပန္လည္ေဖာ္ထုတ္ရန္အတြက္ ပထမဦးဆုံး မူလ #TotalNumberOfFilesInBackup# ဒစ္မ်ားမွ #MinimumNumberOfFilesNeededForRecovery# ကို ျပန္လည္ရယူရေပမည္။ ထို႔ေနာက္ Martus သို႔ ဝင္ေရာက္သည့္အခါတြင္ ‘အေကာင့္ကို ျပန္လည္ေဖာ္ထုတ္ရန္’ ႏွင့္ ‘သိုုေလွာင္ရာ (Disk) အေျမာက္အမ်ားမွ အေကာင့္ကို ျပန္လည္ေဖာ္ထုတ္ရန္’ တို႔ကို ေရြးခ်ယ္မွတ္သားပါ။ \n>
+-9551-field:BackupKeyPairToSecretShareInformation=ဤနည္းသည္ သင္၏ေသာ့ကို #TotalNumberOfFilesInBackup#အစိတ္အပိုင္းမ်ားအျဖစ္သို႔ ျဖန္႔ခြဲလိုက္ပါသည္။ စကားဝွက္မသုံးဘဲ ေသာ့ျပန္လည္တည္ေဆာက္လၽွင္ #MinimumNumberOfFilesNeededForRecovery# တို႔အနက္မွ စာတြဲတစ္ခုခုကို လိုအပ္မည္ျဖစ္သည္။ ဝင္ေရာက္ရန္အမည္ႏွင့္ စကားဝွက္တို႔ကို ေမ့ေလ်ာ့သြားခဲ့ပါက ေသာ့ျပန္လည္ေဖာ္ထုတ္ျခင္းအတြက္ ဤနည္းသည္ တစ္ခုတည္းေသာနည္းလမ္းပင္ျဖစ္သည္။ \n\n အကယ္၍ #TotalNumberOfFilesInBackup# စာတြဲမ်ားကို ေျပာင္းေရႊ႕နိုင္ေသာ မီဒီယာ ဒစ္မ်ားေပၚတြင္ ေရးသားထည့္သြင္းထားပါက ၎  #TotalNumberOfFilesInBackup# သင္မွတ္မိနိုင္သည့္ လူအမ်ားထံသို႔ ခြဲေဝျဖန္႔ေပးထားသင့္ပါသည္။ သို႔ေသာ္ သင္ေပးထားသည့္ ထိုလူမ်ားမွာ က်န္စာတြဲမ်ားအား သင္ မည္သူ႔အားေပးထားသည္ကို မသိသင့္ၾကေပ။ \n\n ေသာ့ျပန္လည္ေဖာ္ထုတ္ရန္အတြက္ ပထမဦးဆုံး မူလ #TotalNumberOfFilesInBackup# ဒစ္မ်ားမွ #MinimumNumberOfFilesNeededForRecovery# ကို ျပန္လည္ရယူရေပမည္။ ထို႔ေနာက္ Martus သို႔ ဝင္ေရာက္သည့္အခါတြင္ ‘အေကာင့္ကို ျပန္လည္ေဖာ္ထုတ္ရန္’ ႏွင့္ ‘သိုုေလွာင္ရာ (Disk) အေျမာက္အမ်ားမွ အေကာင့္ကို ျပန္လည္ေဖာ္ထုတ္ရန္’ တို႔ကို ေရြးခ်ယ္မွတ္သားပါ။ \n
 
 #____________________________________________________=Please insert disk #
 -b877-field:BackupRecoverKeyPairInsertNextDiskMessage=သိုုေလွာင္ရာ (Disk) ထည့္ပါ #
 
 #_______________________________________________=Backup complete, please give each disk to someone you trust, so that if you forget your user name and/or password in the future you can recreate your account.  You will need #MinimumNumberOfFilesNeededForRecovery# of these disks to recreate your account.
 -fba9-field:BackupSecretShareCompleteInformation=မိတၱဴပြားကူးယူျခင္း ၿပီးဆုံးပါၿပီ။ သိုုေလွာင္ရာ (Disk) မ်ားအား သင္ယုံၾကည္စိတ္ခ်ရသူမ်ားသို႔ တစ္ခုစီခြဲေဝအပ္ႏွံပါ။ သို႔မွသာ သင္၏ သုံးစြဲသူအမည္ ႏွင့္/သို႔မဟုတ္ စကားဝွက္တို႔ကို ေနာင္တစ္ခ်ိန္တြင္ ေမ့ေလ်ာ့သြားသည့္အခါ သင့္အေကာင့္ကို ျပန္လည္တည္ေဆာက္နိုင္ေပမည္။ သင့္အေကာင့္ကို ျပန္လည္တည္ေဆာက္ရာတြင္ အဆိုပါ ဒစ္ မ်ားမွ #MinimumNumberOfFilesNeededForRecovery# ကို လိုအပ္ေပသည္။
+
+#________________________=Backup Your Key
+-a49a-field:BackupYourKey=Backup Your Key
+
+#___________________________________=Your encryption key was created when you created your account. You will want to back it up, to be able restore your account.
+-d0a2-field:BackupYourKeyInformation=Your encryption key was created when you created your account. You will want to back it up, to be able restore your account.
+
+#____________________________=Be sure to save a copy of your account key to a secure location that is different from the computer where you currently have Martus installed, so you have it if you need to restore your account.
+-0204-field:BackupYourKeyTip1=Be sure to save a copy of your account key to a secure location that is different from the computer where you currently have Martus installed, so you have it if you need to restore your account.
+
+#____________________________=Martus also offers a way to back up your key in 5 separate pieces, which is the only way for you to access your Martus account and data if you forget your user name and password. You will be prompted to create the 5 piece backup after completing your account setup and we strongly encourage you to do so.
+-4c58-field:BackupYourKeyTip2=Martus also offers a way to back up your key in 5 separate pieces, which is the only way for you to access your Martus account and data if you forget your user name and password. You will be prompted to create the 5 piece backup after completing your account setup and we strongly encourage you to do so.
 
 #__________________________________________=Author Public Code
 -01c7-field:BulletinDetailsAuthorPublicCode=ေရးသားသူ၏ အမ်ားဆိုင္ကုဒ္နံပါတ္
@@ -532,17 +625,17 @@
 #__________________________________=Warning: Some information in this bulletin is not visible
 -eba1-field:BulletinHasUnknownStuff=သတိေပးခ်က္း ဤစာေစာင္အတြင္းမွ သတင္းအခ်က္အလက္အခ်ိဳ႕ မေတြ႕ရနိုင္ပါ
 
-#______________________________________________=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new Headquarters account use the Tools/Configure Headquarters menu option.
--6702-field:BulletinHeadQuartersHQInfoForModify=ေရြးခ်ယ္ထားေသာ ပင္မအေကာင့္(မ်ား)သည္ ဤစာေစာင္အတြင္းရွိ လၽွိုဳ ႔ဝွက္သတင္းအခ်က္အလက္မ်ားကို ၾကည့္ရွုနိုင္ၾကေပမည္။ သို႔မဟုတ္ သင္သိမ္းဆည္းၿပီးသည့္အခါ ဤစာေစာင္အား ဆာဗာသို႔ ေပးပို႔နိုင္ၾကေပမည္။ \n\nပင္မအေကာင့္အသစ္တစ္ခု ထည့္သြင္းရန္ အသုံးခ်နိုင္ေသာကိရိယာမ်ား/ဆက္သြယ္တပ္ဆင္ပါ ဟူေသာ ေရြးခ်ယ္ရန္အခြင့္အလမ္းမ်ား စာရင္းကို အသုံးျပဳပါ။
+#______________________________________________=The selected contacts' account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new contact's account use the Tools > Manage Contacts menu option.
+-af20-field:BulletinHeadQuartersHQInfoForModify=ေရြးခ်ယ္ထားေသာ ပင္မအေကာင့္(မ်ား)သည္ ဤစာေစာင္အတြင္းရွိ လၽွိုဳ ႔ဝွက္သတင္းအခ်က္အလက္မ်ားကို ၾကည့္ရွုနိုင္ၾကေပမည္။ သို႔မဟုတ္ သင္သိမ္းဆည္းၿပီးသည့္အခါ ဤစာေစာင္အား ဆာဗာသို႔ ေပးပို႔နိုင္ၾကေပမည္။ \n\nပင္မအေကာင့္အသစ္တစ္ခု ထည့္သြင္းရန္ အသုံးခ်နိုင္ေသာကိရိယာမ်ား/ဆက္သြယ္တပ္ဆင္ပါ ဟူေသာ ေရြးခ်ယ္ရန္အခြင့္အလမ္းမ်ား စာရင္းကို အသုံးျပဳပါ။ 
 
-#____________________________________________=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.
--e728-field:BulletinHeadQuartersHQInfoForView=ေအာက္ပါ ပင္မအေကာင့္(မ်ား)သည္ ဤစာေစာင္အတြင္းမွ လၽွိုဳ ႔ဝွက္သတင္းအခ်က္အလက္မ်ားကို ၾကည့္ရွုျခင္းႏွင့္ ဤစာေစာင္အား ဆာဗာသို႔ ေပးပို႔ျခင္းတို႔ကို ေဆာင္ရြက္နိုင္ပါသည္။
+#____________________________________________=The following Contact account(s) can view the private information in this bulletin, and can send this bulletin to a server.
+-89eb-field:BulletinHeadQuartersHQInfoForView=ေအာက္ပါ ပင္မအေကာင့္(မ်ား)သည္ ဤစာေစာင္အတြင္းမွ လၽွိုဳ ႔ဝွက္သတင္းအခ်က္အလက္မ်ားကို ၾကည့္ရွုျခင္းႏွင့္ ဤစာေစာင္အား ဆာဗာသို႔ ေပးပို႔ျခင္းတို႔ကို ေဆာင္ရြက္နိုင္ပါသည္။
 
 #______________________________________=Label
 -7434-field:BulletinHeadQuartersHQLabel=အညႊန္းစာသား
 
-#___________________________________________=Headquarters
--6222-field:BulletinHeadQuartersHeadquarters=ပင္မ
+#___________________________________________=Contacts
+-b0dd-field:BulletinHeadQuartersHeadquarters=ပင္မ
 
 #_____________________=Bulletin Id:
 -a081-field:BulletinId=စာေစာင္စဥ္
@@ -550,8 +643,8 @@
 #____________________________=Last Saved
 -eb05-field:BulletinLastSaved=ေနာက္ဆုံး သိမ္းဆည္းခဲ့ျခင္း
 
-#___________________________=Field Desk Bulletin
--f61d-field:BulletinNotYours=အဖြဲ႔ခြဲမ်ားမွ စာေစာင္
+#___________________________=Contact Bulletin
+-c778-field:BulletinNotYours=အဖြဲ႔ခြဲမ်ားမွ စာေစာင္
 
 #_______________________=Size (Kb)
 -fa2e-field:BulletinSize=အရြယ္အစား(Kb)
@@ -559,8 +652,8 @@
 #_________________________=Bulletin Status:
 -c567-field:BulletinStatus=စာေစာင္ အေနအထား
 
-#______________________________________=Created by an UNVERIFIED Field Desk
--4188-field:BulletinUnverifiedFieldDesk=မစစ္ေဆးရေသာအဖြဲ႔ခြဲတခုုျဖင့္ တည္ေဆာက္ျခင္း
+#______________________________________=Created by an UNKNOWN Contact
+-23a5-field:BulletinUnverifiedFieldDesk=မစစ္ေဆးရေသာအဖြဲ႔ခြဲတခုုျဖင့္ တည္ေဆာက္ျခင္း
 
 #________________________________=Version
 -2da6-field:BulletinVersionNumber=မူကြဲ
@@ -634,8 +727,17 @@
 #__________________________=Martus Bulletin Count
 -0d40-field:ChartYAxisTitle=Martus စာေစာင္အေရအတြက္
 
-#__________________________________=Select the headquarters listed below that you want to add to all the bulletins listed above.
--23a1-field:ChooseHeadquartersToAdd=အထက္ တြင္စာရင္းျပဳစုထားေသာ စာေစာင္မ်ားထဲသို သင္ ထပ္ထည့္လိုသည့္ ေအာက္တြင္စာရင္းျပဳစုထားေသာ ပင္မ မ်ားကို ေရြးခ်ယ္ပါ။
+#________________________=Choose a Contact
+-93d3-field:ChooseContact=Choose a Contact
+
+#_____________________=Choose a Form
+-8abd-field:ChooseForm=Choose a Form
+
+#__________________________________=Select the contacts listed below that you want to add to all the bulletins listed above.
+-a965-field:ChooseHeadquartersToAdd=အထက္ တြင္စာရင္းျပဳစုထားေသာ စာေစာင္မ်ားထဲသို သင္ ထပ္ထည့္လိုသည့္ ေအာက္တြင္စာရင္းျပဳစုထားေသာ ပင္မ မ်ားကို ေရြးခ်ယ္ပါ။
+
+#_________________________=Choose a Language
+-254a-field:ChooseLanguage=Choose a Language
 
 #_____________________________=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. 
 -e4a8-field:ChooseReportFields=ဤ အစီရင္ခံစာတြင္ ေပၚေနမည့္ သိုမွီးခ်က္မ်ား (ေကာ္လံမ်ား)ကို ေရြးခ်ယ္သတ္မွတ္ရန္ CTRL-CLICK သို႔မဟုတ္ SHIFT-CLICK ကို သုံးပါ
@@ -646,26 +748,59 @@
 #______________________________=Row #
 -4946-field:ColumnGridRowNumber=အတန္း #
 
-#_______________________________=These Field Desk accounts are those you trust to send you their private bulletin information and attachments. Any Field Desk bulletins you receive from accounts not on this list will be marked as from an unverified account.
--bbc7-field:ConfigureFDsOverview=ဤအဖြဲ႔ခြဲဖိုုင္ အေကာင့္မ်ားဟာ သင့္ကိုုယံုုၾကည့္ေသာ လူေတြထံမွ ငုုင္းတိုု႔၏ အသင္းအခ်က္မ်ားႏွင့္ ပူတဲြဖိုုင္မ်ားကိုုေပးရန္ျဖစ္သည္။ သင္ရရွိလာမွ် အဖ႔ြဲခဲြစာေစာင္မ်ား စရင္းထဲတြင္ ပါဝင္ေသာ အေကာင့္မ်ားမွ မဟုုတ္ပါက မေသခ်ာေသာအေကာင့္တခုုအျဖစ္သတ္မွတ္ေပးလိမ့္မည္။
-
 #____________________________________________=Public Code
 -a1a2-field:ConfigureHQColumnHeaderPublicCode=အမ်ားဆိုင္ ကုဒ္နံပါတ္
-
-#_________________________________=Current Headquarters
--6bd3-field:ConfigureHQsCurrentHQs=လက္ရွိ ပင္မမ်ား
 
 #_______________________________________=Default?
 -0e2c-field:ConfigureHeadQuartersDefault=ပုံေသသတ္မွတ္ခ်က္လား?
 
-#_______________________________________=This information will be available to anyone who can view your public bulletin information, or anyone with administrative rights on the server. \n\nThis allows people to contact you for further information.
--930c-field:ContactInfoFutureUseOfFields=အမ်ားႏွင့္ဆိုုင္ေသာစာေစာင္သတင္းအခ်က္အလက္မ်ား ဤသတင္းအခ်က္အလက္မ်ား သင့္ရဲ့အခ်က္ကိုုၾကည့္ရွုုနိဳင္ေသာ မည္သူမဆိုု သုုိ႔မဟုုတ္ ဆာဗာေပၚတြင္ \n\nဦးေဆာင္သူႏွင့္ဆက္ႏြယ္ေသာ တစ္ဦးေယာက္တိုု႔မွ ၾကည့္ရွဳနိုုင္ေပလိမ့္မည္
+#_________________________________=Confirm User Name
+-e804-field:ConfirmAccountUserName=Confirm User Name
 
-#____________________________________=This information identifies your organization.\nYou must enter either an Author or Organization, and both are shown in every bulletin you create.
--ea39-field:ContactInfoRequiredFields=ဤသတင္းအခ်က္အလက္မ်ားသည္ သင္၏ အဖြဲ႕အစည္းကို ထင္ဟပ္ေနပါသည္။\nေရးသားသူ သို႔မဟုတ္ အဖြဲ႕အစည္း အမည္တစ္ခု ထည့္သြင္းရပါမည္။ ထိုႏွစ္ခုစလုံးကို သင္တည္ေဆာက္သည့္ စာေစာင္တိုင္းတြင္ ေဖာ္ျပထားပါမည္။
+#__________________________=Confirm Password
+-c2d4-field:ConfirmPassword=Confirm Password
 
-#_________________________________=You can change any of this information later, by choosing Options/Contact Info.
--e924-field:ContactInfoUpdateLater=ေရြးခ်ယ္ရန္အခြင့္အလမ္းမ်ား (Options)/ဆက္သြယ္ရန္ သတင္းအခ်က္အလက္မ်ား (Contact Info)ကိုေရြးခ်ယ္ျခင္းျဖင့္ ဤသတင္းအခ်က္အလက္ကို ေနာင္အခါ ေျပာင္းလဲနိုင္ပါသည္။
+#______________________________________=Connect to the Martus server to:
+-ae9b-field:ConnectMartusServerReasons1=Connect to the Martus server to:
+
+#______________________________________=- Backup your documents on the Martus server in case your computer is lost or stolen
+-5824-field:ConnectMartusServerReasons2=- Backup your documents on the Martus server in case your computer is lost or stolen
+
+#______________________________________=- Easily retrieve the public keys of your contacts, so you can send them bulletins
+-e451-field:ConnectMartusServerReasons3=- Easily retrieve the public keys of your contacts, so you can send them bulletins
+
+#______________________________________=- Import form templates from your contacts
+-d2ed-field:ConnectMartusServerReasons4=- Import form templates from your contacts
+
+#_________________________________=Connect
+-b654-field:ConnectToAdvanceServer=Connect
+
+#____________________________________________=Attempting to connect to the server and retrieve your Token.
+-7e13-field:ConnectingToServerToRetrieveToken=Attempting to connect to the server and retrieve your Token.
+
+#_________________________________=This contact currently has the name: '#Name#'
+-cbc4-field:ContactAlreadyExistsAs=This contact currently has the name: '#Name#'
+
+#_______________________________________=This information is optional and is used to prepopulate your bulletins for your convenience. It is stored on your local computer and not sent to the Martus server.
+-b5a0-field:ContactInfoFutureUseOfFields=အမ်ားႏွင့္ဆိုုင္ေသာစာေစာင္သတင္းအခ်က္အလက္မ်ား ဤသတင္းအခ်က္အလက္မ်ား သင့္ရဲ့အခ်က္ကိုုၾကည့္ရွုုနိဳင္ေသာ မည္သူမဆိုု သုုိ႔မဟုုတ္ ဆာဗာေပၚတြင္ \n\nဦးေဆာင္သူႏွင့္ဆက္ႏြယ္ေသာ တစ္ဦးေယာက္တိုု႔မွ ၾကည့္ရွဳနိုုင္ေပလိမ့္မည္
+
+#____________________________________=This information identifies your organization.\nYou may enter either an Author, Organization, or both, and both are shown in every bulletin you create.
+-3937-field:ContactInfoRequiredFields=ဤသတင္းအခ်က္အလက္မ်ားသည္ သင္၏ အဖြဲ႕အစည္းကို ထင္ဟပ္ေနပါသည္။\nေရးသားသူ သို႔မဟုတ္ အဖြဲ႕အစည္း အမည္တစ္ခု ထည့္သြင္းရပါမည္။ ထိုႏွစ္ခုစလုံးကို သင္တည္ေဆာက္သည့္ စာေစာင္တိုင္းတြင္ ေဖာ္ျပထားပါမည္။
+
+#__________________________=Verified
+-aed3-field:ContactVerified=Verified
+
+#___________________________=Verify Now
+-b8b4-field:ContactVerifyNow=Verify Now
+
+#________________________=Create an Account
+-d48e-field:CreateAccount=Create an Account
+
+#____________________________________=When creating a user name and password for your account, please be aware there is no way to retrieve your user name and password if you forget it. This is for your safety.
+-8108-field:CreateAccountInstructions=When creating a user name and password for your account, please be aware there is no way to retrieve your user name and password if you forget it. This is for your safety.
+
+#________________________________=User Name:
+-784c-field:CreateAccountUserName=User Name:
 
 #__________________________________=The layout of the bulletins is dictated by an XML document.  The document must begin with <CustomFields> and end with </CustomFields>. By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
 -0399-field:CreateCustomFieldsHelp1=စာေစာင္မ်ား၏ အခင္းအက်င္းကို XML စာပိုဒ္ျဖင့္ သတ္မွတ္ခိုင္းေစပါသည္။ စာေစာင္သည္ <CustomFields> (စိတ္ႀကိဳက္နယ္ပယ္မ်ား) ႏွင့္ အစျပဳရမည္ျဖစ္ၿပီး </CustomFields> ႏွင့္ အဆုံးသတ္ရမည္ ျဖစ္သည္။ ပုံေသအားျဖင့္ စာေစာင္ စံသိုမွီးခ်က္မ်ားသည္ စိတ္ႀကိဳက္သိုမွီးခ်က္ ေၾကျငာစာ၏ အေပၚပိုင္းတြင္ ေပၚေနပါမည္၊ သို႔ေသာ္ အလိုရွိပါက ၎တို႔ကို ေရႊ႕နိုင္ပါသည္။ မည္သို႔ဆိုေစ၊ ေအာက္ပါ သိုမွီးခ်က္ ၄ခု ျဖစ္ေသာ 'author'(စာေရးသူ)၊ 'entrydate' (ထည့္သြင္းသည့္ေန႔စြဲ)၊ 'language' (ဘာသာစကား) ႏွင့္ 'title' (ေခါင္းစီး) တို႔ကိုမူ ဖယ္ရွား၍မရေပ။\n\n
@@ -681,6 +816,12 @@
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=သုံးစြဲသူအမည္အသစ္ႏွင့္ စကားဝွက္အသစ္ကို ထည့္သြင္းပါ။
+
+#_______________________________________________=Note: this backup method still requires remembering your username and password to restore your account.
+-ebc4-field:CreateSingleEncryptedFileInformation=Note: this backup method still requires remembering your username and password to restore your account.
+
+#__________________________=Please wait. Your account's encryption key is being created.
+-cae1-field:CreatingAccount=Please wait. Your account's encryption key is being created.
 
 #_________________________________=Bottom (always Private) Pane of Bulletin
 -f953-field:CustomXMLBottomSection=စာေစာင္၏ ေအာက္ပိုင္း အကြက္ (အျမဲတမ္းလၽွိုဳ႔ဝွက္က႑)
@@ -739,6 +880,9 @@
 #_____________________________________=bulletins.html
 -a4f1-field:DefaultPrintToDiskFileName=စာေစာငမ်ား.html
 
+#_______________________________=Default Server
+-6d35-field:DefaultServerHeading=Default Server
+
 #_________________________________=This bulletin has been pasted into Martus from the file:
 -ce4c-field:DeleteBulletinFileMsg1=ဤစာေစာင္ကို စာတြဲအတြင္းမွ Martus အတြင္းသို႔ ျဖတ္ကူးပြားခ်ထားပါသည္ :
 
@@ -754,8 +898,23 @@
 #____________________________________=You can only delete draft bulletins from the server that are not currently on your computer.
 -8ded-field:DeleteServerDraftsMessage=ကြန္ပ်ဴတာေပၚတြင္ ေလာေလာဆည္မရွိသည့္ ဆာဗာမွ မူၾကမ္းစာေစာင္မ်ား ကိုသာ ဖ်က္ပစ္နိုင္ပါသည္။
 
+#__________________________=Your Display Settings
+-9d27-field:DisplaySettings=Your Display Settings
+
 #______________________=Do not prompt
 -448d-field:DonotPrompt=သတိေပးျခင္း မျပဳပါႏွင့္
+
+#______________________________________=Download from Another Martus User
+-4afb-field:DownloadFormFromAnotherUser=Download from Another Martus User
+
+#_______________________________=Download from my contacts
+-1cb9-field:DownloadFromContacts=Download from my contacts
+
+#_________________________________________=Download from Another Martus User
+-4afb-field:DownloadTemplateFromMartusUser=Download from Another Martus User
+
+#_________________________________________=Download from my Contacts
+-7410-field:DownloadTemplateFromMyContacts=Download from my Contacts
 
 #__________________________=Labels
 -2228-field:DuplicateLabels=အညႊန္းစာသားမ်ား
@@ -765,6 +924,9 @@
 
 #__________________________________________________=Do you want to save this template with the duplicate labels?
 -79bc-field:DuplicateLabelsInCustomTemplateContinue=ဤပုံစံခြင္ကို မိတၱဴပြား အညႊန္းစာသားမ်ားျဖင့္ သိမ္းဆည္းလိုပါသလား?
+
+#___________________________=Enter Access Token
+-4f8c-field:EnterAccessToken=Enter Access Token
 
 #________________________________=Unable to back up the key file on this disk.
 -bda3-field:ErrorBackingupKeyPair=ေသာ့စာတြဲကို ဤ သိုုေလွာင္ရံုု (Disk) ေပၚတြင္ မိတၱဴကူးပြား၍ မရပါ။
@@ -781,8 +943,8 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=အညႊန္းစာသား
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag\n   102 - A previous Tag already exists with this name\n   103 - Label cannot be blank\n   104 - Unrecognized Field Type\n   105 - A label was found in a standard field\n   106 - XML Parse Error (e.g. mismatched quotation marks or bracket syntax)\n   107 - Tag or Code contains illegal characters (e.g. spaces or punctuation)\n   108 - Duplicate entry in Dropdown field\n   109 - No Choices in Dropdown field\n   110 - System/Standard field tag cannot be used for custom field\n   111 - Standard field in top pane cannot be placed in bottom (always Private) pane\n   112 - Standard field in bottom (always Private) pane cannot be placed in the top pane\n   113 - Data Source Grid not found in same pane as resulting dropdown field\n   114 - Unknown Data Source Grid Column Label\n   115 - Dropdown cannot have both choices and data source\n   116 - Invalid date must be in ISO format YYYY-MM-DD\n   117 - No Reusable Choices list defined for Dropdown\n   118 - Reusable dropdown definition missing code value.  Please verify that the definition looks like the following:\n         <UseReusableChoices code='FieldChoices'></UseReusableChoices>\n   119 - Reusable choice must have a code and label\n   120 - Dropdown data source cannot be a single or multiple level dropdown with Reusable Choices\n   121 - Default value is not valid for this field\n   122 - Reusable Choices lists cannot have the same Label\n   123 - Lower-level reusable choice code has no matching higher-level code\n   200 - All fields empty\n   201 - Unrecognized Headquarters created this template\n   202 - Security validation error\n   203 - File Error\n   204 - Imported XML Missing Field
--85ea-field:ErrorCustomFields=စိတ္ႀကိဳက္သိုမွီးခ်က္ သတ္မွတ္မွုတြင္ အခက္အခဲတစ္ခု ၾကဳံေတြ႕ေနရပါသည္။ ျပႆနာ တစ္ခုခ်င္းစီအား ေအာက္ပါကုဒ္မ်ားျဖင့္ ကိုယ္စားျပဳ ေဖာ္ျပထားပါသည္။ \n   100 - လိုအပ္ေသာ စံသိုမွီးခ်က္မ်ား ေပ်ာက္ဆုံးေနသည္။ \n   101 - စိတ္ႀကိဳက္သိုမွီးခ်က္တြင္ မွန္ကန္ေသာ စာညႊန္းမရွိပါ။ \n   102 - ဤအမည္ျဖင့္ စာညႊန္းတစ္ခု ယခင္ကတည္းက ရွိႏွင့္ၿပီးသားျဖစ္ပါသည္။ \n   103 - စိတ္ႀကိဳက္သိုမွီးခ်က္တြင္ အညႊန္းစာသား မပါရွိပါ။ \n   104 - အသိအမွတ္မျပဳေသာ သိုမွီးခ်က္ အမ်ိဳးအစားျဖစ္သည္။ \n   105 - စံသိုမွီးခ်က္တြင္ အညႊန္းစာသားတစ္ခု ေတြ႕ရွိရပါသည္။ \n   106 - XML Parse ခ်ိဳ႕ယြင္းမွု(ဥပမာ တြဲဖက္မညီသည့္ မ်က္ေတာင္အဖြင့္ အပိတ္ အမွတ္အသား သိုမဟုတ္ ကြင္း ဝါက်အထားအသို) ျဖစ္သည္။ \n   107 - စာညႊန္းတြင္ တရားမဝင္ေသာ စာသားသေကၤတမ်ား ပါဝင္ေနသည္(ဥပမာ ဟင္းလင္းေနရာ သိုမဟုတ္ ဝါက်အျဖတ္အေတာက္)။ \n   108 -သိုမွီးခ်က္ ေရြးခ်ယ္ရန္ တြင္ ပုံတူမိတၱဴပြားႏွစ္ခု ထည့္သြင္းထားသည္။ \n   109 - သိုမွီးခ်က္ ေရြးခ်ယ္ရန္တြင္ ေရြးခ်ယ္မွုမ်ား ေပးမထားပါ။ \n   110 - စိတ္ႀကိဳက္သိုမွီးခ်က္တြင္ စနစ္/စံ သိုမွီးခ်က္စာညႊန္းမ်ား အသုံးျပဳ၍မရပါ။ \n   111 - အေပၚပိုင္းရွိအမ်ားဆိုင္ စံသိုမွီးခ်က္ကို ေအာက္ေျခပိုင္း အျမဲလၽွို႔ဝွက္ က႑တြင္ မထားရပါ။ \n   112 - အျမဲ လၽွို႔ဝွက္ စံသိုမွီးခ်က္ကို အေပၚပိုင္းတြင္ မထားရပါ။ \n   113 - ဆြဲခ်နယ္ပယ္ သက္ေရာက္မွုအျဖစ္ အခ်က္အလက္ရင္းျမစ္ဂရစ္ တူညီေသာအပိုင္းတြင္ မေတြ ရပါ။ \n   114 - မသိရွိေသာ အခ်က္အလက္ရင္းျမစ္ဂရစ္ ေကာ္လံ အမွတ္အသား \n   115 - ဆြဲခ်တြင္ ေရြးခ်ယ္မွုမ်ားႏွင့္ အခ်က္အလက္ရင္းျမစ္ႏွစ္ခုစလုံး မရွိပါ။ \n   116 - တရားမဝင္ ရက္စြဲသည္ ISO ပုံစံ ႏွစ္-လ-ရက္ ျဖစ္ရမည္။\n   117 - ဆြဲခ်စာရင္းအတြက္ ျပန္လည္အသုံးျပဳနိုင္ေသာ ေရြးခ်ယ္မွုစာရင္းမ်ား သတ္မွတ္ထားျခင္းမရွိပါ။ \n   118 - ျပန္လည္အသုံးျပဳနိုင္ေသာ ဆြဲခ်သတ္မွတ္ခ်က္တြင္ ကုဒ္တန္ဖိုး ေပ်ာက္ဆုံးေနသည္။ သတ္မွတ္ခ်က္မ်ားသည္ ေအာက္ပါပုံစံမ်ားကဲ့သို႔ တူညီေၾကာင္း အတည္ျပဳေပးပါ။\n         <UseReusableChoices code='FieldChoices'></UseReusableChoices>\n   119 - ျပန္လည္အသုံးျပဳနိုင္ေသာ ေရြးခ်ယ္စရာမ်ားသည္ ကုဒ္ႏွင့္ အမွတ္အသားမ်ား ပါကိုပါရမည္။ \n   120 - ဆြဲခ်အခ်က္အလက္ အရင္းအျမစ္မ်ားသည္ ျပန္လည္အသုံးခ်နိုင္ေသာ ေရြးခ်ယ္စရာမ်ားပါဝင္ေသာ တစ္ခု သို႔မဟုတ္ တစ္ခုထက္ပိုေသာ ဆြဲခ်အဆင့္မ်ားျဖစ္ရမည္။ \n   121 - ပုံေသတန္ဖိုးမ်ားသည္ ဤနယ္ပယ္အတြက္ အက်ဳံးမဝင္ပါ။ \n   122 - ျပန္လည္အသုံးျပဳနိုင္ေသာ ေရြးခ်ယ္စရာစာရင္းမ်ားသည္ တူညီေသာ အမွတ္အသားမရွိရပါ။ \n   123 - အဆင့္နိမ့္ေသာ ျပန္လည္အသုံးျပဳနိုင္သည့္ ေရြးခ်ယ္စရာ ကုဒ္ႏွင့္ ကိုက္ညီေသာ အဆင့္ျမင့္ကုဒ္ မရွိပါ။ \n   200 - သိုမွီးခ်က္မ်ားအားလုံး လစ္လပ္ေနသည္။ \n   201 - အသိအမွတ္မျပဳထားေသာ ပင္မက ဤပုံစံခြင္ကို တည္ေဆာက္ထားပါသည္။ \n   202 - လုံျခဳံမွုခိုင္မာေရးခ်ိဳ႕ယြင္းခ်က္ျဖစ္ပါသည္။ \n   203 - စာတြဲ ခ်ိဳ႕ယြင္းခ်က္ ျဖစ္ပါသည္။ \n   204 - တင္သြင္းလာသည့္ XML တြင္ သိုမွီးခ်က္ ေပ်ာက္ဆုံးေနသည္။
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag\n   102 - A previous Tag already exists with this name\n   103 - Label cannot be blank\n   104 - Unrecognized Field Type\n   105 - A label was found in a standard field\n   106 - XML Parse Error (e.g. mismatched quotation marks or bracket syntax)\n   107 - Tag or Code contains illegal characters (e.g. spaces or punctuation)\n   108 - Duplicate entry in Dropdown field\n   109 - No Choices in Dropdown field\n   110 - System/Standard field tag cannot be used for custom field\n   111 - Standard field in top pane cannot be placed in bottom (always Private) pane\n   112 - Standard field in bottom (always Private) pane cannot be placed in the top pane\n   113 - Data Source Grid not found in same pane as resulting dropdown field\n   114 - Unknown Data Source Grid Column Label\n   115 - Dropdown cannot have both choices and data source\n   116 - Invalid date must be in ISO format YYYY-MM-DD\n   117 - No Reusable Choices list defined for Dropdown\n   118 - Reusable dropdown definition missing code value.  Please verify that the definition looks like the following:\n         <UseReusableChoices code='FieldChoices'></UseReusableChoices>\n   119 - Reusable choice must have a code and label\n   120 - Dropdown data source cannot be a single or multiple level dropdown with Reusable Choices\n   121 - Default value is not valid for this field\n   122 - Reusable Choices lists cannot have the same Label\n   123 - Lower-level reusable choice code has no matching higher-level code\n   200 - All fields empty\n   201 - Unrecognized Contact created this template\n   202 - Security validation error\n   203 - File Error\n   204 - Imported XML Missing Field
+-8bd5-field:ErrorCustomFields=စိတ္ႀကိဳက္သိုမွီးခ်က္ သတ္မွတ္မွုတြင္ အခက္အခဲတစ္ခု ၾကဳံေတြ႕ေနရပါသည္။ ျပႆနာ တစ္ခုခ်င္းစီအား ေအာက္ပါကုဒ္မ်ားျဖင့္ ကိုယ္စားျပဳ ေဖာ္ျပထားပါသည္။ \n   100 - လိုအပ္ေသာ စံသိုမွီးခ်က္မ်ား ေပ်ာက္ဆုံးေနသည္။ \n   101 - စိတ္ႀကိဳက္သိုမွီးခ်က္တြင္ မွန္ကန္ေသာ စာညႊန္းမရွိပါ။ \n   102 - ဤအမည္ျဖင့္ စာညႊန္းတစ္ခု ယခင္ကတည္းက ရွိႏွင့္ၿပီးသားျဖစ္ပါသည္။ \n   103 - စိတ္ႀကိဳက္သိုမွီးခ်က္တြင္ အညႊန္းစာသား မပါရွိပါ။ \n   104 - အသိအမွတ္မျပဳေသာ သိုမွီးခ်က္ အမ်ိဳးအစားျဖစ္သည္။ \n   105 - စံသိုမွီးခ်က္တြင္ အညႊန္းစာသားတစ္ခု ေတြ႕ရွိရပါသည္။ \n   106 - XML Parse ခ်ိဳ႕ယြင္းမွု(ဥပမာ တြဲဖက္မညီသည့္ မ်က္ေတာင္အဖြင့္ အပိတ္ အမွတ္အသား သိုမဟုတ္ ကြင္း ဝါက်အထားအသို) ျဖစ္သည္။ \n   107 - စာညႊန္းတြင္ တရားမဝင္ေသာ စာသားသေကၤတမ်ား ပါဝင္ေနသည္(ဥပမာ ဟင္းလင္းေနရာ သိုမဟုတ္ ဝါက်အျဖတ္အေတာက္)။ \n   108 -သိုမွီးခ်က္ ေရြးခ်ယ္ရန္ တြင္ ပုံတူမိတၱဴပြားႏွစ္ခု ထည့္သြင္းထားသည္။ \n   109 - သိုမွီးခ်က္ ေရြးခ်ယ္ရန္တြင္ ေရြးခ်ယ္မွုမ်ား ေပးမထားပါ။ \n   110 - စိတ္ႀကိဳက္သိုမွီးခ်က္တြင္ စနစ္/စံ သိုမွီးခ်က္စာညႊန္းမ်ား အသုံးျပဳ၍မရပါ။ \n   111 - အေပၚပိုင္းရွိအမ်ားဆိုင္ စံသိုမွီးခ်က္ကို ေအာက္ေျခပိုင္း အျမဲလၽွို႔ဝွက္ က႑တြင္ မထားရပါ။ \n   112 - အျမဲ လၽွို႔ဝွက္ စံသိုမွီးခ်က္ကို အေပၚပိုင္းတြင္ မထားရပါ။ \n   113 - ဆြဲခ်နယ္ပယ္ သက္ေရာက္မွုအျဖစ္ အခ်က္အလက္ရင္းျမစ္ဂရစ္ တူညီေသာအပိုင္းတြင္ မေတြ ရပါ။ \n   114 - မသိရွိေသာ အခ်က္အလက္ရင္းျမစ္ဂရစ္ ေကာ္လံ အမွတ္အသား \n   115 - ဆြဲခ်တြင္ ေရြးခ်ယ္မွုမ်ားႏွင့္ အခ်က္အလက္ရင္းျမစ္ႏွစ္ခုစလုံး မရွိပါ။ \n   116 - တရားမဝင္ ရက္စြဲသည္ ISO ပုံစံ ႏွစ္-လ-ရက္ ျဖစ္ရမည္။\n   117 - ဆြဲခ်စာရင္းအတြက္ ျပန္လည္အသုံးျပဳနိုင္ေသာ ေရြးခ်ယ္မွုစာရင္းမ်ား သတ္မွတ္ထားျခင္းမရွိပါ။ \n   118 - ျပန္လည္အသုံးျပဳနိုင္ေသာ ဆြဲခ်သတ္မွတ္ခ်က္တြင္ ကုဒ္တန္ဖိုး ေပ်ာက္ဆုံးေနသည္။ သတ္မွတ္ခ်က္မ်ားသည္ ေအာက္ပါပုံစံမ်ားကဲ့သို႔ တူညီေၾကာင္း အတည္ျပဳေပးပါ။\n         <UseReusableChoices code='FieldChoices'></UseReusableChoices>\n   119 - ျပန္လည္အသုံးျပဳနိုင္ေသာ ေရြးခ်ယ္စရာမ်ားသည္ ကုဒ္ႏွင့္ အမွတ္အသားမ်ား ပါကိုပါရမည္။ \n   120 - ဆြဲခ်အခ်က္အလက္ အရင္းအျမစ္မ်ားသည္ ျပန္လည္အသုံးခ်နိုင္ေသာ ေရြးခ်ယ္စရာမ်ားပါဝင္ေသာ တစ္ခု သို႔မဟုတ္ တစ္ခုထက္ပိုေသာ ဆြဲခ်အဆင့္မ်ားျဖစ္ရမည္။ \n   121 - ပုံေသတန္ဖိုးမ်ားသည္ ဤနယ္ပယ္အတြက္ အက်ဳံးမဝင္ပါ။ \n   122 - ျပန္လည္အသုံးျပဳနိုင္ေသာ ေရြးခ်ယ္စရာစာရင္းမ်ားသည္ တူညီေသာ အမွတ္အသားမရွိရပါ။ \n   123 - အဆင့္နိမ့္ေသာ ျပန္လည္အသုံးျပဳနိုင္သည့္ ေရြးခ်ယ္စရာ ကုဒ္ႏွင့္ ကိုက္ညီေသာ အဆင့္ျမင့္ကုဒ္ မရွိပါ။ \n   200 - သိုမွီးခ်က္မ်ားအားလုံး လစ္လပ္ေနသည္။ \n   201 - အသိအမွတ္မျပဳထားေသာ ပင္မက ဤပုံစံခြင္ကို တည္ေဆာက္ထားပါသည္။ \n   202 - လုံျခဳံမွုခိုင္မာေရးခ်ိဳ႕ယြင္းခ်က္ျဖစ္ပါသည္။ \n   203 - စာတြဲ ခ်ိဳ႕ယြင္းခ်က္ ျဖစ္ပါသည္။ \n   204 - တင္သြင္းလာသည့္ XML တြင္ သိုမွီးခ်က္ ေပ်ာက္ဆုံးေနသည္။
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=ယခင္ မိတၱဴကူးပြားထားသည့္ စာတြဲတစ္ခု ရွိေနပါသည္။ စာတြဲအသီးသီးကို ၎တို႔ႏွင့္သက္ဆိုင္ရာ ေရႊ႕ေျပာင္းနိုင္ေသာ ဒစ္ မ်ားေပၚတြင္ သိမ္းဆည္းထားရပါမည္။
@@ -796,8 +958,14 @@
 #_____________________________________=An error occurred verifying this key backup file.
 -df17-field:ErrorVerifyingKeyPairShare=ဤမိတၱဴပြား ေသာ့စာတြဲကို စစ္ေဆးရာတြင္ အမွားအယြင္းတခုုျဖစ္ေနသည္။ 
 
+#_____________________________=Your changes will be lost, are you sure you want to do this?
+-62c3-field:ExitManageContacts=Your changes will be lost, are you sure you want to do this?
+
 #___________________________=Exit when complete
 -30e3-field:ExitWhenComplete=လုပ္ငန္းၿပီးဆုံးလၽွင္ ထြက္ရန္
+
+#_____________________=If you close this wizard now, you will not be able to return and use it to complete this account's setup \n(however, you can access the wizard to create other new accounts).\n\nAre you sure you want to close the wizard?
+-986a-field:ExitWizard=If you close this wizard now, you will not be able to return and use it to complete this account's setup \n(however, you can access the wizard to create other new accounts).\n\nAre you sure you want to close the wizard?
 
 #____________________________=Include all versions of each bulletin in export
 -d390-field:ExportAllVersions=တင္ပို႔ရာတြင္ စာေစာင္တိုင္း၏ဗားရွင္းအားလံုးပါ၀င္ေစပါ။
@@ -859,20 +1027,29 @@
 #__________________________=Text
 -c332-field:FieldTypeSTRING=စာသား
 
+#_____________________________=Please wait while we find this account on the server.
+-6ec9-field:FindAccountByToken=Please wait while we find this account on the server.
+
+#____________________________=You can load and switch to other form templates later inside of Martus, if you do not have access to a server now, or you need one that is different from what you select here.
+-2a63-field:FormTemplatesTip1=You can load and switch to other form templates later inside of Martus, if you do not have access to a server now, or you need one that is different from what you select here.
+
+#____________________________=Note: you can change templates, but you will not be able to import templates from the server, outside of the account creation process at this time.
+-16a2-field:FormTemplatesTip2=Note: you can change templates, but you will not be able to import templates from the server, outside of the account creation process at this time.
+
+#____________________=You can switch forms later
+-a78d-field:FormsHint=You can switch forms later
+
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
 -02b6-field:GetShareFileNameDescription=ဤစာတြဲအမည္သည္ အၿပိဳင္မရွိထူးျခားၿပီး သင့္ကို ကိုယ္စားျပဳနိုင္ရပါမည္။ သို႔ေသာ္ သုံးစြဲသူအမည္ကို အသုံးမျပဳရန္ တိုက္တြန္းပါသည္။ စာတြဲတိုင္းအား ဤအမည္ႏွင့္ ၎၏နံပါတ္စဥ္တို႔ျဖင့္ သတ္မွတ္ေဆာင္ရြက္သြားပါမည္။
+
+#___________________________________=Getting server information
+-90d2-field:GettingServerInformation=Getting server information
 
 #__________________________=(not currently configured)
 -462b-field:HQNotConfigured=(ေလာေလာဆည္တြင္ ဆက္သြယ္တပ္ဆင္ထားျခင္း မရွိေသးပါ)
 
-#_________________________=Headquarters
--6222-field:HQSummaryLabel=ပင္မမ်ား
-
-#__________________________=Default Headquarters accounts will be selected for each new bulletin or version.
--ea13-field:HQsSetAsDefault=စာေစာင္ သို႔မဟုတ္ မူကြဲအားလုံးအတြက္ ပုံေသ ပင္မအေကာင့္မ်ားကို ေရြးခ်ယ္သြားမည္။
-
-#________________________________=These Headquarters accounts are allowed to view the private information in this bulletin, and to send this bulletin to a server on your behalf.
--2274-field:HQsSetAsProxyUploader=ဤပင္မ အေကာင့္မ်ားကို ဤ စာေစာင္အတြင္းမွ လၽွိုဳ႔ဝွက္သတင္းအခ်က္အလက္မ်ားကို ၾကည့္ရွုရန္၊ ဤစာေစာင္ကို ဆာဗာသို႔ သင့္ကိုယ္စား ေပးပို႔ရန္ ခြင့္ျပဳထားပါသည္။
+#_________________________=Contacts
+-b0dd-field:HQSummaryLabel=ပင္မမ်ား
 
 #_______________________________=Selected?
 -9c09-field:HeadQuartersSelected=ေရြးခ်ယ္ထားပါသလား?
@@ -892,6 +1069,9 @@
 #_______________________________________=etc...
 -5e9b-field:HelpExampleEtcDefaultDetails=စသည္ျဖင့္ …
 
+#____________________________________=If someone wishes to send you information, provide them with your access token and public code.
+-9b9d-field:HelpForTokenAndPublicCode=If someone wishes to send you information, provide them with your access token and public code.
+
 #____________________________________=When choosing a password, it is important not to use a password that is easy to guess like names, important dates of events or simple words.  Try adding numbers to random letters and making the password long.  Remember your password, but do not share it.  No one else has access to the password if you forget it, so if you write it down, put it in a safe place.
 -65cc-field:HelpOnCreatingNewPassword=စကားဝွက္ေရြးခ်ယ္ရာတြင္ အမည္မ်ား၊ အေရးႀကီးျဖစ္ရပ္မ်ား၏ ေန႔စြဲမ်ား၊ ရိုးစင္းေသာစကားလုံးမ်ား စသည့္ အလြယ္တကူခန္႔မွန္းနိုင္ေသာ စကားလုံးမ်ား မသုံးရန္ အေရးႀကီးပါသည္။ က်ပန္းစာလုံးမ်ားတြင္ နံပါတ္မ်ား ထည့္သြင္းျခင္းမ်ိဳးျဖင့္ စကားဝွက္ပိုရွည္လာေစရန္ ဖန္တီးသင့္ပါသည္။ စကားဝွက္ကို မွတ္ထားရန္လိုေသာ္လည္း မၽွေဝျခင္းမျပဳသင့္ပါ။ စကားဝွက္ကို သင္ကိုယ္တိုင္ေမ့ေနပါက မည္သူမၽွ ဝင္ေရာက္ခြင့္ရမည္ မဟုတ္ပါ။ စကားဝွက္ကို ေရးခ်ထားပါကလည္း လုံျခဳံစိတ္ခ်ရေသာ ေနရာတြင္ ထားပါ။
 
@@ -910,11 +1090,20 @@
 #____________________________________=Bulletin
 -6ef0-field:ImportExportBulletinTitle=စာေစာင္္
 
+#_________________________________=Martus allows you to create and share custom forms for data entry. Get started by selecting a form template if desired. Martus comes with several generic form templates you can use. You can also download a custom template from one of your current contacts or another Martus user.
+-8a1b-field:ImportFormTemplateHelp=Martus allows you to create and share custom forms for data entry. Get started by selecting a form template if desired. Martus comes with several generic form templates you can use. You can also download a custom template from one of your current contacts or another Martus user.
+
+#______________________________=Import Form Templates
+-6d6d-field:ImportFormTemplates=Import Form Templates
+
 #_________________________=Importing
 -90ab-field:ImportProgress=တင္သြင္းေနသည္
 
 #_____________________________=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?
 -abb2-field:IncludePrivateData=#TotalBulletins# စာေစာင္မ်ားကို ပုံႏွိပ္ရန္ ေရြးခ်ယ္ထားပါသည္။ ၎တို႔အနက္မွ #AllPrivateBulletins# အားလုံးသည္ လၽွို႔ဝွက္မ်ားျဖစ္သည္။\n ပုံႏွိပ္သည့္အခါ မည္သည္တို႔ကို ထည့္သြင္းလိုပါသလဲ?
+
+#__________________________________=The current version of Martus cannot run with Java #HighVersion#. Please use Java #ExpectedVersion# or lower to run Martus.
+-7927-field:IncompatibleJavaVersion=The current version of Martus cannot run with Java #HighVersion#. Please use Java #ExpectedVersion# or lower to run Martus.
 
 #_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
 -a747-field:IncompatibleMtfVersion=ဤဘာသာျပန္မူကြဲသည္ Martus ၏ ဤမူကြဲႏွင့္ လိုက္ေလ်ာညီေထြမွု မရွိပါ။ ဤဘာသာျပန္မူကြဲကို ဆက္လက္သုံးစြဲျခင္းမျပဳရန္ တိုက္တြန္းပါသည္။ သင့္ေလ်ာ္ေသာမူကြဲ ရရွိနိုင္ရန္ http://www.martus.org/downloads သို႔သြားပါ။
@@ -931,14 +1120,38 @@
 #____________________________=Martus Key (*.dat)
 -798b-field:KeyPairFileFilter=Martus ေသာ့ဖိုုင ္(*.dat)
 
+#__________________________=keypair file too large!
+-50c8-field:KeypairTooLarge=keypair file too large!
+
+#___________________________________=Get your Token and Code
+-13ff-field:LinkToTokenAndPublicCode=Get your Token and Code
+
 #_____________________________________________=Processing bulletin
 -a044-field:LoadingFieldValuesFromAllBulletins=အခ်က္လက္မ်ားအား အလုပ္လုပ္ေနသည္
 
 #________________________________________________________=Scanning all bulletins to create a list of all the values in #FieldName#
 -dee7-field:LoadingFieldValuesFromAllBulletinsExplanation=#FieldName# တြင္ တန္ဖိုးအားလုံး၏ စာရင္းကို ဖန္တီးရန္ ေၾကျငာခ်က္အားလုံးကို ဖတ္ယူသည္။
 
+#___________________________=Please wait while we retrieve a list of templates from the server.
+-6307-field:LoadingTemplates=Please wait while we retrieve a list of templates from the server.
+
 #________________________=Martus Bulletin Archive (*.mba)
 -919c-field:MBAFileFilter=Martus စာေစာင္မ်ား ေမာ္ကြန္း (*.mba)
+
+#_________________________=Manage Contacts
+-88c0-field:ManageContacts=Manage Contacts
+
+#____________________________________=To send information through Martus to your contacts, you need their public key. You can pull their public keys off of the Martus server using their 7 digit access token. You can verify that you have pulled the correct key, by using their key's public code.  Ask your contacts for the access token, and public code to add your contacts here. If you do not have this information now, you will be able to add contacts later from the Martus desktop client.
+-86ae-field:ManageContactsDescription=To send information through Martus to your contacts, you need their public key. You can pull their public keys off of the Martus server using their 7 digit access token. You can verify that you have pulled the correct key, by using their key's public code.  Ask your contacts for the access token, and public code to add your contacts here. If you do not have this information now, you will be able to add contacts later from the Martus desktop client.
+
+#________________________________=Contacts
+-b0dd-field:ManageContactsHeading=Contacts
+
+#__________________________________=To send information through Martus to your contacts, you can pull their public key off of the Martus server using their access token. You can verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add your contacts here.
+-35f4-field:ManageContactsOverview1=To send information through Martus to your contacts, you can pull their public key off of the Martus server using their access token. You can verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add your contacts here.
+
+#__________________________________=If someone wishes to send you information through Martus, provide them with your access token and public code. Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information.
+-f9fd-field:ManageContactsOverview2=If someone wishes to send you information through Martus, provide them with your access token and public code. Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information.
 
 #_______________________________________=Martus Report Format (.mrf)
 -62cd-field:MartusReportFormatFileFilter=Martus အစီရင္ခံစာ အျပင္အဆင္ (.mrf)
@@ -949,17 +1162,26 @@
 #_______________________=Warning: Portions may be missing or damaged
 -00a9-field:MayBeDamaged=သတိေပးခ်က္ : အခ်ိဳ႕အပိုင္းမ်ား ေပ်ာက္ဆုံး သို႔မဟုတ္ ပ်က္စီးေနမည္။
 
-#_______________________________=#NumberOfHQs# Headquarter account(s) will be able to view this private information
--da24-field:ModifyBulletinHQInfo=ဤလွ်ိဳ႔ဝွက္သတင္းအခ်က္အလက္မ်ားကို ပင္မ အေကာင့္(မ်ား) #NumberOfHQs# မွ ၾကည့္ရွု၍ ရနိုင္ပါသည္။
+#_______________________________=#NumberOfHQs# Contact account(s) will be able to view this private information
+-4ccb-field:ModifyBulletinHQInfo=ဤလွ်ိဳ႔ဝွက္သတင္းအခ်က္အလက္မ်ားကို ပင္မ အေကာင့္(မ်ား) #NumberOfHQs# မွ ၾကည့္ရွု၍ ရနိုင္ပါသည္။
 
 #_____________________________=Please enter a name for the file you wish to export.
 -95ed-field:NameOfExportedFile=ထုတ္လုပ္ေပးပို႔လိုေသာ စာတြဲ၏ အမည္တစ္ခုကို ထည့္သြင္းပါ။
 
-#__________________________=No Headquarters accounts selected for this bulletin.
--2b9f-field:NoHQsConfigured=ဤ စာေစာင္အတြက္ ပင္မ အေကာင့္မ်ား မေရြးရေသးပါ။
+#____________________________=No Contacts.
+-91ef-field:NoContactsInTable=No Contacts.
+
+#______________________________=[no title]
+-6e34-field:NoFormTemplateTitle=[no title]
+
+#__________________________=No Contact accounts selected for this bulletin.
+-0255-field:NoHQsConfigured=ဤ စာေစာင္အတြက္ ပင္မ အေကာင့္မ်ား မေရြးရေသးပါ။
 
 #___________________________________________=Server Not Available
 -c79c-field:NoServerAvailableProgressMessage=ဆာဗာ မရွိပါ
+
+#_______________________________=No Templates Available
+-6305-field:NoTemplatesAvailable=No Templates Available
 
 #_____________________________=Remember: Entering your password using the regular keyboard may reduce security.
 -55fa-field:NormalKeyboardMsg1=မွတ္ရန္ : ပုံမွန္ကီးဘုတ္ကို အသုံးျပဳၿပီး စကားဝွက္ကို ထည့္သြင္းပါက လုံျခဳံစိတ္ခ်မွဳကို ေလ်ာ့က်ေစသည္။
@@ -982,14 +1204,44 @@
 #__________________________________________=Click on topic to display details.
 -2a14-field:OnlineHelpTOCMessageDescription=အေသးစိတ္ေဖာ္ျပေပးရန္ အေၾကာင္းအရာေခါင္းစီးေပၚတြင္ ခလုတ္ႏွိပ္ပါ။
 
-#_______________________________=Organization (required)
--2f27-field:OrganizationRequired=အဖြဲ႕အစည္း (လိုအပ္သည္)
+#_______________________=Organization:
+-6da9-field:Organization=Organization:
 
 #_______________________________=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.
 -b511-field:OrganizeReportFields=အစီရင္ခံစာထဲတြင္ ေဖာ္ျပေစလိုေသာ သိုမွီးခ်က္မ်ား ထည့္ပါ။ ထို႔ေနာက္ ၎တို႔ကို ပုံႏွိပ္ေပးေစလိုသည့္ အစီအစဥ္အတိုင္း စီပါ။
 
+#___________________=Password:
+-be81-field:Password=Password:
+
+#_______________________________=create a password
+-b61b-field:PasswordInstructions=create a password
+
+#_______________________=- Do not use your user name
+-b415-field:PasswordTip1=- Do not use your user name
+
+#_______________________=- Do not use a single dictionary word
+-6002-field:PasswordTip2=- Do not use a single dictionary word
+
+#_______________________=- Use at least 15 characters for most security (8 are required)
+-fab7-field:PasswordTip3=- Use at least 15 characters for most security (8 are required)
+
+#_______________________=- Use a combination of alphabet characters, numbers, and special characters (such as !@#$%^*&amp;)
+-3d55-field:PasswordTip4=- Use a combination of alphabet characters, numbers, and special characters (such as !@#$%^*&amp;)
+
+#_______________________=- Use a combination of uppercase (capital) and lowercase characters if you use a case-sensitive language.
+-9278-field:PasswordTip5=- Use a combination of uppercase (capital) and lowercase characters if you use a case-sensitive language.
+
+#_____________________________=Create secure passwords by using numbers, letters and symbols.
+-fb50-field:PasswordTipGeneral=Create secure passwords by using numbers, letters and symbols.
+
+#_______________________=Password Tips:
+-42ae-field:PasswordTips=Password Tips:
+
 #____________________________________=Use embedded Tor (Using Tor can improve security but may be slower than not using Tor)
 -aaff-field:PreferencesUseInternalTor=Tor ကို အသံုးျပဳပါ (Tor ကိုသံုးျခင္းျဖင့္ လံုၿခံဳမႈကို အားေကာင္းႏုိင္ေစေသာ္လည္း Tor ကို အသံုးမျပဳခင္ထက္ ေႏွးေကြးေစသည္)
+
+#_______________________________=Turn Tor ON if you wish to hide that you are connecting to a Martus server. This may help reach the Martus servers if they are blocked from your location.
+-f174-field:PreferencesWhyUseTor=Turn Tor ON if you wish to hide that you are connecting to a Martus server. This may help reach the Martus servers if they are blocked from your location.
 
 #_____________________________=Preparing Bulletins...
 -deac-field:PreparingBulletins=စာေစာင္မ်ားကို အသင့္ျပင္ဆင္ေနသည္...
@@ -1006,6 +1258,9 @@
 #_______________________________=You can print the bulletin contents to a printer or to a file.
 -48ad-field:PrintToPrinterOrDisk=စာေစာင္ပါ အေၾကာင္းအရာမ်ားကို ပုံႏွိပ္စက္မွတစ္ဆင့္ ပုံႏွိပ္နိုင္ပါသည္။ သို႔မဟုတ္ စာတြဲတစ္ခုသို႔ ေပးပို႔နိုင္ပါသည္။
 
+#_____________________=Public Code:
+-63bc-field:PublicCode=Public Code:
+
 #_________________________________=Public Information Files (*.mpi)
 -bd0c-field:PublicInformationFiles=အမ်ားဆိုုင္ သတင္းအခ်က္အလက္ဖိုုင္မ်ား (*.mpi)
 
@@ -1018,14 +1273,17 @@
 #_______________________________________=This will NOT remove any bulletins from the server, any Martus files copied outside of the Martus directory, or any of your bulletins or Martus files on another computer.
 -8ee9-field:QuickEraseWillNotRemoveItems=ဤသို႔ေဆာင္ရြက္ျခင္းေၾကာင့္ မည္သည့္စာေစာင္ကိုမၽွ၊ Martus လမ္းညႊန္ျပင္ပတြင္ မိတၱဴကူးပြားထားသည့္ မည္သည့္ Martus စာတြဲကိုမၽွ၊ မည္သည့္စာေစာင္ကိုမၽွ၊ သို႔မဟုတ္ အျခားကြန္ပ်ဴတာေပၚမွ မည္သည့္ Martus စာတြဲကိုမၽွ ဖယ္ရွားသြားမည္ မဟုတ္ပါ။
 
-#____________________________________=Delete your Martus key, bulletins, folders, and configuration information (such as your Headquarters, server, and custom field settings).
--cf3b-field:QuickEraseWillRemoveItems=Martus ေသာ့ ၊ စာေစာင္မ်ား၊ စာတြဲစုမ်ားႏွင့္ ဆက္သြယ္တပ္ဆင္မွုဆိုင္ရာ သတင္းအခ်က္အလက္မ်ား (ဥပမာ ပင္မ ၊ ဆာဗာႏွင့္ စိတ္ႀကိဳက္သိုမွီးခ်က္ဆက္တင္မ်ား) ကို ဖ်က္ပစ္ပါ။
+#____________________________________=Delete your Martus key, bulletins, folders, and configuration information (such as your contacts, server, and custom field settings).
+-3329-field:QuickEraseWillRemoveItems=Martus ေသာ့ ၊ စာေစာင္မ်ား၊ စာတြဲစုမ်ားႏွင့္ ဆက္သြယ္တပ္ဆင္မွုဆိုင္ရာ သတင္းအခ်က္အလက္မ်ား (ဥပမာ ပင္မ ၊ ဆာဗာႏွင့္ စိတ္ႀကိဳက္သိုမွီးခ်က္ဆက္တင္မ်ား) ကို ဖ်က္ပစ္ပါ။
 
 #_________________________=Restore your existing account from a backup file.
 -c2a2-field:RecoverAccount=လက္ရွိ အေကာင့္ကို ကူးပြားထားသည့္ စာတြဲတစ္ခုအတြင္းမွ ျပန္လည္ေဖာ္ထုတ္ပါ။
 
 #______________________________=Another part of the shared key is required to complete this process.
 -668c-field:RecoverShareKeyPair=လုုပ္ေဆာင္ခ်က္ျပီးဆံုုးရန္အတြက္ ျဖန္႔ေဝထားေသာ တျခားေသာ ေသာ့ဖိုုင္အစိတ္အပိုုင္းလိုုအပ္ေနပါသည္။
+
+#_____________________________=The following contact will be removed.\n\nName: #Name#\nPublic Code: #PublicCode#.\n\nAre you sure you want to do this?
+-ff2d-field:RemoveContactLabel=The following contact will be removed.\n\nName: #Name#\nPublic Code: #PublicCode#.\n\nAre you sure you want to do this?
 
 #_________________________________________________________=IMPORTANT: There are other Martus accounts on this system.
 -e62e-field:RemoveMartusFromSystemMultipleAccountsWarning1=သတိျပဳရန္ : ဤစနစ္တြင္ အျခား Martus အေကာင့္မ်ား ရွိေနေသးသည္။
@@ -1075,17 +1333,17 @@
 #______________________________=Print Summary Counts Only
 -9ca4-field:ReportSummariesOnly=အက်ဥ္းခ်ဳပ္ ေဖာ္ျပခ်က္မ်ားကိုသာ ပုံႏွိပ္ရန္
 
-#__________________________________________=Retrieving Field Desk Draft Bulletins
--c881-field:RetrieveHQDraftBulletinProgress=အဖြဲ႔ခြဲမ်ားမွ စာေစာင္ မူၾကမ္းမ်ားကို ျပန္လည္ရယူေနသည္
+#__________________________________________=Retrieving Draft Bulletins from Contacts
+-cf94-field:RetrieveHQDraftBulletinProgress=အဖြဲ႔ခြဲမ်ားမွ စာေစာင္ မူၾကမ္းမ်ားကို ျပန္လည္ရယူေနသည္
 
-#___________________________________________=Retrieving Field Desk Draft Bulletin Summaries
--b700-field:RetrieveHQDraftBulletinSummaries=အဖြဲ႔ခြဲမ်ားမွ စာေစာင္မူၾကမ္း အက်ဥ္းခ်ဳပ္မ်ားကို ျပန္လည္ရယူေနသည္
+#___________________________________________=Retrieving Draft Bulletin Summaries from Contacts
+-2bcf-field:RetrieveHQDraftBulletinSummaries=အဖြဲ႔ခြဲမ်ားမွ စာေစာင္မူၾကမ္း အက်ဥ္းခ်ဳပ္မ်ားကို ျပန္လည္ရယူေနသည္
 
-#___________________________________________=Retrieving Field Desk Sealed Bulletins
--d2bb-field:RetrieveHQSealedBulletinProgress=အဖြဲ႔ခြဲမ်ားမွ ခ်ိတ္ပိတ္ စာေစာင္မ်ားကို ျပန္လည္ရယူေနသည္
+#___________________________________________=Retrieving Sealed Bulletins from Contacts
+-4e29-field:RetrieveHQSealedBulletinProgress=အဖြဲ႔ခြဲမ်ားမွ ခ်ိတ္ပိတ္ စာေစာင္မ်ားကို ျပန္လည္ရယူေနသည္
 
-#____________________________________________=Retrieving Field Desk Sealed Bulletin Summaries
--0221-field:RetrieveHQSealedBulletinSummaries=အဖြဲ႔ခြဲြဲမ်ားမွ ခ်ိတ္ပိတ္စာေစာင္ အက်ဥ္းခ်ဳပ္မ်ားကို ျပန္လည္ရယူေနသည္
+#____________________________________________=Retrieving Sealed Bulletin Summaries from Contacts
+-a331-field:RetrieveHQSealedBulletinSummaries=အဖြဲ႔ခြဲြဲမ်ားမွ ခ်ိတ္ပိတ္စာေစာင္ အက်ဥ္းခ်ဳပ္မ်ားကို ျပန္လည္ရယူေနသည္
 
 #__________________________________________=Retrieving My Draft Bulletins
 -61c0-field:RetrieveMyDraftBulletinProgress=ကိုယ္ပိုင္စာေစာင္ မူၾကမ္းမ်ားကို ျပန္လည္ရယူေနသည္ 
@@ -1159,23 +1417,53 @@
 #________________________________=You will not be allowed to upload bulletins to this server.
 -3a97-field:ServerDeclinesUploads=ဤ ဆာဗာသို႔ စာေစာင္မ်ား ေပးပို႔ထည့္သြင္းရန္ ခြင့္မျပဳပါ။
 
-#_______________________________=Server Magic Word:
--ad90-field:ServerMagicWordEntry=ဆာဗာ ပဥၥလက္စကားဝွက္ :
+#_______________________________=Magic Word:
+-7ba0-field:ServerMagicWordEntry=ဆာဗာ ပဥၥလက္စကားဝွက္ :
 
-#__________________________=Server name or IP address:
--aa94-field:ServerNameEntry=ဆာဗာအမည္ သို႔မဟုတ္ IP လိပ္စာ :
+#__________________________________________=enter your server's magic word
+-0481-field:ServerMagicWordEntryInformation=enter your server's magic word
+
+#__________________________=IP Address:
+-4e30-field:ServerNameEntry=ဆာဗာအမည္ သို႔မဟုတ္ IP လိပ္စာ :
+
+#_____________________________________=enter your server's IP address
+-4cb2-field:ServerNameEntryInformation=enter your server's IP address
 
 #_____________________________________________=Server needs to be configured.
 -26de-field:ServerNotConfiguredProgressMessage=ဆာဗာကို ဆက္သြယ္တပ္ဆင္ရန္ လိုအပ္ပါသည္။
 
-#________________________________=Server Public Identification Code:
--0cf3-field:ServerPublicCodeEntry=ဆာဗာ၏ အမ်ားဆိုင္ သက္ေသခံကုဒ္နံပါတ္ :
+#_______________________________________________=A connection to the server was not made. This could be because the server is not available, the server is blocked, or your Internet connection is down. Would you like to save this server configuration for later?
+-24f7-field:ServerNotRespondingSaveConfiguration=A connection to the server was not made. This could be because the server is not available, the server is blocked, or your Internet connection is down. Would you like to save this server configuration for later?
+
+#________________________________=Server Public Code:
+-f3d1-field:ServerPublicCodeEntry=ဆာဗာ၏ အမ်ားဆိုင္ သက္ေသခံကုဒ္နံပါတ္ :
+
+#___________________________________________=enter your server's public code
+-b02c-field:ServerPublicCodeEntryInformation=enter your server's public code
 
 #_________________________________=The following server has been selected:
 -d09b-field:ServerSelectionResults=ေအာက္ပါဆာဗာကို ေရြးခ်ယ္ၿပီးျဖစ္ပါသည္ :
 
+#______________________=Server Setup
+-3db1-field:ServerSetup=Server Setup
+
 #_________________________=To change a folder's position, select the folder name and use the #MoveFolderUp# / #MoveFolderDown# buttons.
 -4497-field:SetFolderOrder=စာတြဲစု၏ တည္ေနရာကို ေျပာင္းလဲရန္ စာတြဲစုအမည္ကို အမွတ္အသားျပဳပါ။ ထို႔ေနာက္ #MoveFolderUp# / #MoveFolderDown# ခလုတ္မ်ားကို အသုံးျပဳပါ။
+
+#_______________________=Setting Up Tor.
+-6cc3-field:SettingUpTor=Setting Up Tor.
+
+#_____________________________=Advanced server settings
+-5ebb-field:SetupAdvanceServer=Advanced server settings
+
+#___________________________=Set up server later
+-0739-field:SetupServerLater=Set up server later
+
+#__________________________=The data you store on Martus servers are completely encrypted using 3072-bit encryption. This means even Martus server administrators cannot read your data.
+-6a66-field:SetupServerTips=The data you store on Martus servers are completely encrypted using 3072-bit encryption. This means even Martus server administrators cannot read your data.
+
+#__________________________________________=Single, Encrypted File #backupFileName created (this still requires remembering your username and password to restore your account).
+-4689-field:SingleEncryptedKeyBackupCreated=Single, Encrypted File #backupFileName created (this still requires remembering your username and password to restore your account).
 
 #___________________________________=NOTE: Bulletins authored by other accounts cannot be changed using this command, so they are not included in the list above.
 -250a-field:SkippingBulletinsNotOurs=မွတ္ခ်က : အျခားအေကာင့္မ်ားက ေရးသားေသာ စာေစာင္မ်ားကို ဤအမိန္ေပးမွု ျဖင့္ေျပာင္းလဲမရပါ။ထိုေၾကာင့္ ၎တိုသည္ အထက္ေဖာ္ျပပါဇယားတြင္မပါဝင္ပါ။။
@@ -1195,8 +1483,47 @@
 #___________________________=Retrieving...
 -5316-field:StatusRetrieving=ျပန္လည္ရယူေနသည္ …
 
+#________________=1
+-356a-field:Step1=1
+
+#________________=2
+-da4b-field:Step2=2
+
+#________________=3
+-77de-field:Step3=3
+
+#________________=4
+-1b64-field:Step4=4
+
+#________________=5
+-ac34-field:Step5=5
+
+#________________=6
+-c1df-field:Step6=6
+
+#____________________=➔
+-a53b-field:StepArrow=➔
+
+#___________________________________=Successfully imported the #templateName Form
+-de98-field:SuccessfullyImportedForm=Successfully imported the #templateName Form
+
+#_____________________________________=Contact #Name#
+-bdb2-field:TemplateCreatedByFieldDesk=Contact #Name#
+
+#________________________________________=Contacts #Name#
+-b7dd-field:TemplateCreatedByHeadquarters=Contacts #Name#
+
+#_______________________________________=this account
+-ac76-field:TemplateCreatedByThisAccount=this account
+
+#___________________________________=an unknown account
+-fe29-field:TemplateCreatedByUnknown=an unknown account
+
 #__________________________=Details
 -dc3d-field:TemplateDetails=အေသးစိတ္
+
+#______________________=Your Tor Settings
+-4656-field:TorSettings=Your Tor Settings
 
 #__________________________=Embedded Tor Active
 -a7ea-field:TorStatusActive=Tor လုုပ္ေဆာင္ေနသည္
@@ -1206,6 +1533,12 @@
 
 #________________________________=Embedded Tor Initializing
 -13e0-field:TorStatusInitializing=Tor ျပန္လည္လုုပ္ေဆာင္ေနပါသည္
+
+#__________________=Turning Tor on here establishes the default setting for your use of Tor when in Martus. You can also, turn Tor ON or OFF at any time inside the Martus desktop application.
+-e344-field:TorTip1=Turning Tor on here establishes the default setting for your use of Tor when in Martus. You can also, turn Tor ON or OFF at any time inside the Martus desktop application.
+
+#__________________=Note: Using Tor will slow sending and receiving of bulletins.
+-034e-field:TorTip2=Note: Using Tor will slow sending and receiving of bulletins.
 
 #__________________________=Uninstall Martus
 -08ea-field:UninstallMartus=Martus ကို ျပန္ျဖဳတ္ရန္
@@ -1222,8 +1555,8 @@
 #___________________________=Untitled Bulletin
 -5ea8-field:UntitledBulletin=ေခါင္းစဥ္တပ္မထားေသာ စာေစာင္
 
-#_________________________________=The account that created this bulletin has not been verified, so there is an increased chance that this attachment could be dangerous. We recommend that you verify this Field Desk account before you #action# this attachment (See Tools > Configure Field Desks). Opening this attachment could put your computer at risk. 
--e736-field:UnverifiedFDAttachment=ဤစာေစာင္ကိုုတည္ေဆာက္ထားေသာ အေကာင့္ဟာ ေသခ်ာေရရာမွဳ မရွိပါ။ ထိုု႔ေၾကာင့္ ဤပူတြဲဖိုုင္သည္ အႏၳာရာယ္ျဖစ္ေစရန္အတြက္ အခြင့္အလမ္းတခုုကိုုတိုုးပြားေစသည္။ #action#  မစတင္မည္ အဖြဲ႔ခြဲအေကာင့္အား ေသခ်ာေအာင္လုုပ္ေဆာင္ရန္အတြက္ အၾကံျပဳပါသည္။ (ကိရိယာမ်ား> ျပဳျပင္အဖြဲ႔ခြဲမ်ား). ဤပူတြဲဖိုုင္အား ဖြင့္ထားျခင္းသည္ သင့္ကြန္ပ်ဴတာအား ခက္ခဲမွဳျဖစ္ေစပါသည္။
+#_________________________________=The Martus account that created this bulletin has not been verified, so there is an increased chance that this attachment could be dangerous. We recommend that you verify this Contact's account before you #action# this attachment (See Tools > Manage Contacts). Opening this attachment could put your computer at risk. 
+-f04b-field:UnverifiedFDAttachment=ဤစာေစာင္ကိုုတည္ေဆာက္ထားေသာ အေကာင့္ဟာ ေသခ်ာေရရာမွဳ မရွိပါ။ ထိုု႔ေၾကာင့္ ဤပူတြဲဖိုုင္သည္ အႏၳာရာယ္ျဖစ္ေစရန္အတြက္ အခြင့္အလမ္းတခုုကိုုတိုုးပြားေစသည္။ #action#  မစတင္မည္ အဖြဲ႔ခြဲအေကာင့္အား ေသခ်ာေအာင္လုုပ္ေဆာင္ရန္အတြက္ အၾကံျပဳပါသည္။ (ကိရိယာမ်ား > ျပဳျပင္အဖြဲ႔ခြဲမ်ား). ဤပူတြဲဖိုုင္အား ဖြင့္ထားျခင္းသည္ သင့္ကြန္ပ်ဴတာအား ခက္ခဲမွဳျဖစ္ေစပါသည္။
 
 #______________________________________=Upload Failed
 -88c1-field:UploadFailedProgressMessage=ေပးပို႔ထည့္သြင္းမွဳ မေအာင္ျမင္ပါ
@@ -1234,11 +1567,47 @@
 #__________________________________=Sending Sealed Bulletin
 -6231-field:UploadingSealedBulletin=ခ်ိတ္ပိတ္စာေစာင္ ေပးပို႔ေနသည္
 
+#___________________________=Use default server
+-9894-field:UseDefaultServer=Use default server
+
+#_________________=Use Tor
+-bc93-field:UseTor=Use Tor
+
+#_____________________________=Tor is a security tool you can use to hide your identity when connecting to sites on the Internet. If Martus servers are blocked from your location, using Tor may help reach the servers.
+-6339-field:UseTorInstructions=Tor is a security tool you can use to hide your identity when connecting to sites on the Internet. If Martus servers are blocked from your location, using Tor may help reach the servers.
+
+#_____________________________________=Username and password match!
+-7dc3-field:UserNameAndPasswordMatches=Username and password match!
+
+#_______________________=- Your user name can contain letters, numbers, punctuation and spaces.
+-3b6f-field:UserNameTip1=- Your user name can contain letters, numbers, punctuation and spaces.
+
+#_______________________=- It should have between 8-50 characters, and it is case sensitive.
+-3180-field:UserNameTip2=- It should have between 8-50 characters, and it is case sensitive.
+
+#_______________________=- Remember to choose a user name you can remember.
+-fb91-field:UserNameTip3=- Remember to choose a user name you can remember.
+
+#_______________________=User Name Tips:
+-c9d5-field:UserNameTips=User Name Tips:
+
+#__________________________________=Public Code:
+-63bc-field:VerifyContactPublicCode=Public Code:
+
+#_____________________________________=Public Code:
+-63bc-field:VerifyContactPublicCodeOld=Public Code:
+
+#___________________________=Please verify the public code below against the one you received from your contact.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.
+-ec88-field:VerifyPublicCode=Please verify the public code below against the one you received from your contact.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.
+
+#____________________________________=Please verify one of the public codes below depending on which public code you received from your contact.  You may visually verify either code, you don't need to verify both.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.
+-2d38-field:VerifyPublicCodeNewAndOld=Please verify one of the public codes below depending on which public code you received from your contact.  You may visually verify either code, you don't need to verify both.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.
+
 #_______________________________=view
 -8f3a-field:ViewAttachmentAction=ၾကည့္ရန္
 
-#_____________________________=#NumberOfHQs# Headquarter account(s) can view this private information
--5ffa-field:ViewBulletinHQInfo=ဤလွ်ိဳ႔ဝွက္သတင္းအခ်က္အလက္မ်ားကို ပင္မ အေကာင့္(မ်ား) #NumberOfHQs#  က ၾကည့္ရွုနိုင္သည္ 
+#_____________________________=#NumberOfHQs# Contact account(s) can view this private information
+-4386-field:ViewBulletinHQInfo=ဤလွ်ိဳ႔ဝွက္သတင္းအခ်က္အလက္မ်ားကို ပင္မ အေကာင့္(မ်ား) #NumberOfHQs#  က ၾကည့္ရွုနိုင္သည္ 
 
 #___________________________________=Back Space
 -7ae6-field:VirtualKeyboardBackSpace=ေနာက္ကြက္လပ္ျဖည့္ ခလုပ္
@@ -1255,11 +1624,68 @@
 #_____________________________________=(Enter using regular keyboard)
 -6332-field:VirtualUserNameDescription=(ပုံမွန္ကီးဘုတ္ကို အသုံးျပဳ၍ ထည့္သြင္းပါ)
 
+#______________________________________________=Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information.
+-3e7b-field:WarningOnTokenAndPublicCodeSecurity=Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information.
+
 #____________________=No
 -816c-field:WasSentNo=No
 
 #_____________________=Yes
 -5397-field:WasSentYes=Yes
+
+#__________________________=Get started with Martus!
+-c6af-field:WelcomeMessage1=Get started with Martus!
+
+#__________________________=Securing your digital documentation
+-d196-field:WelcomeMessage2=Securing your digital documentation
+
+#__________________________=This wizard will walk you through the steps necessary to set up Martus, so that you can safely store and share your human rights documentation.
+-078c-field:WelcomeMessage3=This wizard will walk you through the steps necessary to set up Martus, so that you can safely store and share your human rights documentation.
+
+#______________________=Create Account
+-eff4-field:WizardStep1=Create Account
+
+#_____________________________=Account Creation
+-05cc-field:WizardStep1Heading=Account Creation
+
+#_________________________________=Your information will be kept safe, with a password protected, encrypted account.
+-f3b9-field:WizardStep1Information=Your information will be kept safe, with a password protected, encrypted account.
+
+#______________________=Settings
+-c7f7-field:WizardStep2=Settings
+
+#_________________________________=Establish your system settings for the use of Tor (a tool to help hide network activity) and dates.
+-3bb3-field:WizardStep2Information=Establish your system settings for the use of Tor (a tool to help hide network activity) and dates.
+
+#______________________=Server Setup
+-3db1-field:WizardStep3=Server Setup
+
+#_________________________________=Backup your information to a secure server.
+-d130-field:WizardStep3Information=Backup your information to a secure server.
+
+#______________________=Contacts
+-b0dd-field:WizardStep4=Contacts
+
+#_________________________________=Send and receive information from other Martus users of your choice.
+-d76d-field:WizardStep4Information=Send and receive information from other Martus users of your choice.
+
+#______________________=Import Forms
+-cf9d-field:WizardStep5=Import Forms
+
+#_____________________________=Import Form Template
+-2f11-field:WizardStep5Heading=Import Form Template
+
+#_________________________________=Select a template for creating Martus forms.
+-22ff-field:WizardStep5Information=Select a template for creating Martus forms.
+
+#______________________=Key Backup
+-f8a1-field:WizardStep6=Key Backup
+
+#_____________________________=Backup key
+-1ab8-field:WizardStep6Heading=Backup key
+
+#_________________________________=Make a copy of your account's encryption key to ensure continued access to your account.
+-bb2f-field:WizardStep6Information=Make a copy of your account's encryption key to ensure continued access to your account.
 
 #__________________________=Unknown
 -bc78-field:YearUnspecified=အမ်ိဳးအမည္မသိ 
@@ -1279,8 +1705,8 @@
 #_________________________________________=Header
 -3134-field:_Section_BulletinSectionHeader=ေခါင္းစီး
 
-#_______________________________________________=Headquarters
--6222-field:_Section_BulletinSectionHeadquarters=ပင္မမ်ား
+#_______________________________________________=Contacts
+-b0dd-field:_Section_BulletinSectionHeadquarters=ပင္မမ်ား
 
 #_________________________=Last Saved
 -eb05-field:_lastSavedDate=ေနာက္ဆုံး သိမ္းဆည္းခဲ့သည္
@@ -1309,8 +1735,8 @@
 #______________________________=software version
 -f2cc-field:aboutDlgVersionInfo=ေဆာ့ဖ္ဝဲ မူကြဲ
 
-#__________________=Mailing Address
--e6af-field:address=စာေပးပို႔ရန္ လိပ္စာ
+#__________________=Mailing Address:
+-22f5-field:address=စာေပးပို႔ရန္ လိပ္စာ
 
 #_____________________=Keep ALL Information Private
 -9b5e-field:allprivate=သတင္းအခ်က္အလက္အားလုံးအား လၽွိုဳ႔ဝွက္အျဖစ္ ထိန္းသိမ္းထားရန္
@@ -1387,17 +1813,17 @@
 #_________________________________________=By choosing Yes, you will exit this verification step.
 -5b61-field:confirmCancelShareVerifyeffect=Yes ကို ေရြးခ်ယ္ပါက မွန္ကန္မွုခိုင္မာေစေရးစစ္ေဆးျခင္း အဆင့္မွ ထြက္သြားပါလိမ့္မည္။
 
-#_________________________________________=You have chosen to remove the selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  New versions of sealed bulletins will not be able to be viewed by the removed Headquarters, but any old versions of sealed bulletins that already are on a Headquarters' computer will still be viewable by the Headquarters.
--0004-field:confirmClearHQInformationcause=သတ္မွတ္ေပးထားေသာ ပင္မ အေကာင့္အားလုံးကို ဖယ္ရွားပစ္ရန္ ေရြးခ်ယ္ထားပါသည္။ ပင္မ အေဟာင္းမ်ားသည္ သိမ္းဆည္းထားသည့္ မည္သည့္ လက္ရွိစာေစာင္ကိုမဆို ျမင္ေတြ႕နိုင္ၾကပါေသးသည္။ ယခင္တည္ေဆာက္ထားခဲ့ေသာ မူၾကမ္းစာေစာင္မ်ားကို ပင္မ မ်ားက ဝင္ေရာက္ၾကည့္ရွုနိုင္ခြင့္အား ႐ုပ္သိမ္းလိုလၽွင္ ပင္မ မ်ားအား ႐ုပ္သိမ္းၿပီးသည္ႏွင့္ ၎စာေစာင္မ်ားကို တစ္ဖန္ျပန္၍သိမ္းဆည္းရပါမည္။ ခ်ိပ္ပိတ္စာေစာင္မ်ား၏ မူကြဲအသစ္မ်ားကို ပင္မ မ်ားက ဝင္ေရာက္ၾကည့္ရွု၍ မရနိုင္ေတာ့ေပ။ သို႔ေသာ္ ပင္မ ကြန္ပ်ဴတာေပၚသို႔ ေရာက္ရွိၿပီးျဖစ္ေသာ ခ်ိပ္ပိတ္စာေစာင္မ်ား၏ မူကြဲအသစ္မ်ားကိုမူ ပင္မ မ်ားက ၾကည့္ရွုနိုင္ျခင္းမရွိေစရဟု ျပန္လည္ျပင္ဆင္၍ မရနိုင္ေတာ့ေပ။
+#_________________________________________=You have chosen to remove the selected contact's accounts.  Any existing saved bulletins will still be visible by the old contact.  If you want to disallow this contact's viewing access to previously created Draft bulletins they must be re-saved after deleting the contact.  New versions of sealed bulletins will not be able to be viewed by the removed contact, but any old versions of sealed bulletins that already are on that contact's computer will still be viewable by the contact.
+-0551-field:confirmClearHQInformationcause=သတ္မွတ္ေပးထားေသာ ပင္မ အေကာင့္အားလုံးကို ဖယ္ရွားပစ္ရန္ ေရြးခ်ယ္ထားပါသည္။ ပင္မ အေဟာင္းမ်ားသည္ သိမ္းဆည္းထားသည့္ မည္သည့္ လက္ရွိစာေစာင္ကိုမဆို ျမင္ေတြ႕နိုင္ၾကပါေသးသည္။ ယခင္တည္ေဆာက္ထားခဲ့ေသာ မူၾကမ္းစာေစာင္မ်ားကို ပင္မ မ်ားက ဝင္ေရာက္ၾကည့္ရွုနိုင္ခြင့္အား ႐ုပ္သိမ္းလိုလၽွင္ ပင္မ မ်ားအား ႐ုပ္သိမ္းၿပီးသည္ႏွင့္ ၎စာေစာင္မ်ားကို တစ္ဖန္ျပန္၍သိမ္းဆည္းရပါမည္။ ခ်ိပ္ပိတ္စာေစာင္မ်ား၏ မူကြဲအသစ္မ်ားကို ပင္မ မ်ားက ဝင္ေရာက္ၾကည့္ရွု၍ မရနိုင္ေတာ့ေပ။ သို႔ေသာ္ ပင္မ ကြန္ပ်ဴတာေပၚသို႔ ေရာက္ရွိၿပီးျဖစ္ေသာ ခ်ိပ္ပိတ္စာေစာင္မ်ား၏ မူကြဲအသစ္မ်ားကိုမူ ပင္မ မ်ားက ၾကည့္ရွုနိုင္ျခင္းမရွိေစရဟု ျပန္လည္ျပင္ဆင္၍ မရနိုင္ေတာ့ေပ။
 
-#__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
--4a87-field:confirmClearHQInformationeffect=Yes ကို ခလုတ္ႏွိပ္လၽွင္ ေနာင္တစ္ခ်ိန္တြင္ သိမ္းဆည္းမည့္ မည္သည့္မူၾကမ္း သို႔မဟုတ္ ခ်ိတ္ပိတ္စာေစာင္မ်ားကို သင္၏ ပင္မ မွ ဝင္ေရာက္နိုင္ေတာ့မည္မဟုတ္ေပ။
+#__________________________________________=By clicking on Yes, any draft or sealed bulletin saved in the future will no longer be accessible by your Contacts.
+-5f1e-field:confirmClearHQInformationeffect=Yes ကို ခလုတ္ႏွိပ္လၽွင္ ေနာင္တစ္ခ်ိန္တြင္ သိမ္းဆည္းမည့္ မည္သည့္မူၾကမ္း သို႔မဟုတ္ ခ်ိတ္ပိတ္စာေစာင္မ်ားကို သင္၏ ပင္မ မွ ဝင္ေရာက္နိုင္ေတာ့မည္မဟုတ္ေပ။
 
 #__________________________________________=You have chosen to modify a bulletin that was created by someone else.
 -b384-field:confirmCloneBulletinAsMinecause=အျခားတစ္စုံတစ္ေယာက္မွ တည္ေဆာက္ထားေသာ စာေစာင္ တစ္ခုကို ျပဳျပင္ေရးသားရန္ ေရြးခ်ယ္ထားပါသည္။
 
-#___________________________________________=Clicking on Yes will create a new bulletin that contains a copy of all the same information. You will be the official author of this new bulletin, and any private data in it will only be visible by you (and your Headquarters accounts, if you have any). The original bulletin will remain unchanged.
--4034-field:confirmCloneBulletinAsMineeffect=Yes ကို ခလုတ္ႏွိပ္လၽွင္ တူညီေသာသတင္းအခ်က္အလက္ အားလုံး၏ မိတၱဴပါဝင္သည့္ စာေစာင္အသစ္တစ္ခုကို တည္ေဆာက္ေပးပါမည္။ သင္သည္ ဤစာေစာင္အသစ္၏ ေရးသားသူ တရားဝင္ ျဖစ္သြားၿပီး ၎စာေစာင္အတြင္းရွိ လၽွို႔ဝွက္အခ်က္အလက္မ်ားကိုလည္း သင္တစ္ဦးတည္းကသာ (ပင္မ ရွိက ၎ပါ) ျမင္ရေပမည္။ မူလစာေစာင္မွာမူ မေျပာင္းလဲဘဲ ယခင္အတိုင္းတည္ရွိေနေပမည္။
+#___________________________________________=Clicking on Yes will create a new bulletin that contains a copy of all the same information. You will be the official author of this new bulletin, and any private data in it will only be visible by you (and your Contact's accounts that you have shared the bulletin with). The original bulletin will remain unchanged.
+-a8d1-field:confirmCloneBulletinAsMineeffect=Yes ကို ခလုတ္ႏွိပ္လၽွင္ တူညီေသာသတင္းအခ်က္အလက္ အားလုံး၏ မိတၱဴပါဝင္သည့္ စာေစာင္အသစ္တစ္ခုကို တည္ေဆာက္ေပးပါမည္။ သင္သည္ ဤစာေစာင္အသစ္၏ ေရးသားသူ တရားဝင္ ျဖစ္သြားၿပီး ၎စာေစာင္အတြင္းရွိ လၽွို႔ဝွက္အခ်က္အလက္မ်ားကိုလည္း သင္တစ္ဦးတည္းကသာ (ပင္မ ရွိက ၎ပါ) ျမင္ရေပမည္။ မူလစာေစာင္မွာမူ မေျပာင္းလဲဘဲ ယခင္အတိုင္းတည္ရွိေနေပမည္။
 
 #___________________________________________=You have chosen to modify one of your sealed bulletins, thus creating a new version of that bulletin.
 -fcb6-field:confirmCloneMySealedAsDraftcause=ခ်ိတ္ပိတ္စာေစာင္တစ္ခုကို ျပဳျပင္ေရးသားရန္ ေရြးခ်ယ္ထားပါသည္။ ထို႔ေၾကာင့္ အဆိုပါစာေစာင္၏ မူကြဲအသစ္တစ္ခုကို တည္ေဆာက္ေစပါသည္။
@@ -1405,11 +1831,11 @@
 #____________________________________________=Clicking on Yes will create a new version of this bulletin that initially contains all the same information.
 -198c-field:confirmCloneMySealedAsDrafteffect=Yes ကို ခလုတ္ႏွိပ္လၽွင္ အဆိုပါစာေစာင္၏ တူညီေသာ သတင္းအခ်က္အလက္မ်ား ကနဦးပါဝင္သည့္ မူကြဲအသစ္တစ္ခုကို တည္ေဆာက္ေပးပါမည္။
 
-#______________________________________________________=You have chosen to modify a bulletin that was created by a field desk account that has not been verified, so the bulletin could contain incorrect information or potentially damaging attachments. We recommend that you verify this account before continuing (See Tools > Configure Field Desks).
--61d5-field:confirmCloneUnverifiedFDBulletinAsMinecause=မစစ္ေဆးရေသးေသာ အဖြဲ႔ခြဲအေကာင့္တခုုမွ တည္ေဆာက္ထားေသာ စာေစာင္တခုုအား ျပဳျပင္မြမ္မံရန္သင္ ေရြးခ်ယ္ထားျပီးျဖစ္သည္၊ ထိုုေၾကာင့္ စာေစာင္တြင္ မမွန္ကန္ေသာ သတင္းအခ်က္အလက္ ပါဝင္ေနျခင္း သုုိ႔မဟုုတ္ ပူတြဲဖိုု္င္မ်ား ပ်က္စီးေစေသာ အလားအလာရွိသည္။ (ကိရိယာမ်ား > ျပဳျပင္အဖြဲ႔ခြဲမ်ား)။
+#______________________________________________________=You have chosen to modify a bulletin that was created by a Martus user that has not been verified, so the bulletin could contain incorrect information or potentially damaging attachments. We recommend that you verify this account before continuing (See Tools > Manage Contacts).
+-b8d8-field:confirmCloneUnverifiedFDBulletinAsMinecause=မစစ္ေဆးရေသးေသာ အဖြဲ႔ခြဲအေကာင့္တခုုမွ တည္ေဆာက္ထားေသာ စာေစာင္တခုုအား ျပဳျပင္မြမ္မံရန္သင္ ေရြးခ်ယ္ထားျပီးျဖစ္သည္၊ ထိုုေၾကာင့္ စာေစာင္တြင္ မမွန္ကန္ေသာ သတင္းအခ်က္အလက္ ပါဝင္ေနျခင္း သုုိ႔မဟုုတ္ ပူတြဲဖိုု္င္မ်ား ပ်က္စီးေစေသာ အလားအလာရွိသည္။ (ကိရိယာမ်ား > ျပဳျပင္အဖြဲ႔ခြဲမ်ား)။
 
-#_______________________________________________________=Clicking on Yes to continue with the modify operation will create a new bulletin that contains a copy of all the same information.  You will be the official author of this new bulletin, so you will become responsible for all the content. Any private data in it will only be visible to you (and your Headquarters accounts, if you have any).  The original bulletin will remain unchanged.
--0603-field:confirmCloneUnverifiedFDBulletinAsMineeffect=Yes ကိုု ႏွိပ္ေနျခင္းအားျဖင့္ ျပဳျပင္ထားေသာစာေစာင္္အသစ္တခုုအား ဆက္လက္လုုပ္ေဆာင္ေစျပီး တူညီေသာသတင္းအခ်က္အလက္မ်ားအားလံုုးအား မိတၱဴကူးတခုု ပါဝင္မွဳမ်ားျဖစ္ေစပါသည္။ သင္သည္ ဤစာေစာင္္အသစ္တခုု၏ တရားဝင္းေရးသားေသာသူ ျဖစ္ေစျပီး ထိုု႔ေၾကာင့္ ပါဝင္မွဳပမာဏအားလံုုးအတြက္ သင္သည္ တာဝန္ရွိသူတစ္ဦးျဖစ္လာေပလိမ့္မည္။ ၎ထဲတြင္ ပါဝင္ေသာ မည့္သည့္ ကိုုယ္ပိုုင္အခ်က္မဆိုု သင္တစ္ေယာက္တည္းတြင္သာ ေပၚလြင္ေစျပီး ျပီးေနာက္ သင့္ ပင္မအေကာင့္မ်ား၊ သင့္မွာ တစ္စံုုတရာရွိခဲ့လွ်င္). မူးရင္းစာေစာင္မွာ ျပဳျပင္ေျပာင္းလဲျခင္းမရွိပဲ က်န္ရွိေနလိမ့္မည္။
+#_______________________________________________________=Clicking on Yes to continue with the modify operation will create a new bulletin that contains a copy of all the same information.  You will be the official author of this new bulletin, so you will become responsible for all the content. Any private data in it will only be visible to you (and any contacts accounts you have shared this with).  The original bulletin will remain unchanged.
+-1b54-field:confirmCloneUnverifiedFDBulletinAsMineeffect=Yes ကိုု ႏွိပ္ေနျခင္းအားျဖင့္ ျပဳျပင္ထားေသာစာေစာင္္အသစ္တခုုအား ဆက္လက္လုုပ္ေဆာင္ေစျပီး တူညီေသာသတင္းအခ်က္အလက္မ်ားအားလံုုးအား မိတၱဴကူးတခုု ပါဝင္မွဳမ်ားျဖစ္ေစပါသည္။ သင္သည္ ဤစာေစာင္္အသစ္တခုု၏ တရားဝင္းေရးသားေသာသူ ျဖစ္ေစျပီး ထိုု႔ေၾကာင့္ ပါဝင္မွဳပမာဏအားလံုုးအတြက္ သင္သည္ တာဝန္ရွိသူတစ္ဦးျဖစ္လာေပလိမ့္မည္။ ၎ထဲတြင္ ပါဝင္ေသာ မည့္သည့္ ကိုုယ္ပိုုင္အခ်က္မဆိုု သင္တစ္ေယာက္တည္းတြင္သာ ေပၚလြင္ေစျပီး ျပီးေနာက္ သင့္ ပင္မအေကာင့္မ်ား၊ သင့္မွာ တစ္စံုုတရာရွိခဲ့လွ်င္). မူးရင္းစာေစာင္မွာ ျပဳျပင္ေျပာင္းလဲျခင္းမရွိပဲ က်န္ရွိေနလိမ့္မည္။
 
 #______________________________________=The date range you entered is invalid because the end date occurs before the begin date.
 -7ea3-field:confirmDateRageInvalidcause=ထည့္သြင္းထားေသာ ေန႔စြဲတာသည္ သုံးမရပါ။ အဆုံးေန႔စြဲသည္ အစေန႔စြဲမတိုင္မီ ေပၚေပါက္ေနသည္။
@@ -1441,7 +1867,7 @@
 #_________________________________________=Customizing fields is an advanced operation. You should only proceed if you are certain that you understand the feature.
 -518e-field:confirmEnterCustomFieldseffect=သိုမွီးခ်က္မ်ားအား စိတ္တိုင္းက်ဖန္တီးျခင္းသည္ အထူးလုပ္ငန္း တစ္ခုျဖစ္သည္။ ၎၏သဘာဝကို ေသခ်ာနားလည္မွသာ ဆက္လက္လုပ္ကိုင္္သင့္သည္။
 
-#_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked>-#.dat' where # is the sequence number in the disk set previously created.
+#_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked-#.dat' where # is the sequence number in the disk set previously created.
 -2e41-field:confirmErrorRecoverIvalidFileNamecause=သင္ေရြးခ်ယ္ထားေသာ စာတြဲမွာ ေသာ့မိတၱဴပြား အုပ္စုတြင္ပါဝင္ေသာ အစိတ္အပိုင္း မဟုတ္ပါ။ အဆိုပါစာတြဲမ်ားကို '<သင္ေရြးထားေသာအမည္>-#.dat' ဟုအမည္ေပးထားၿပီး # ဆိုသည္မွာ ယခင္ တည္ေဆာက္ခဲ့ေသာ ဒစ္ အုပ္စု၏ နံပါတ္အစဥ္ ျဖစ္ပါသည္။
 
 #__________________________________________________=Choosing yes will bring up the file selection dialog again so you may pick a different file.
@@ -1459,11 +1885,11 @@
 #_________________________________________=If you continue with the export, any unknown information will not be exported.
 -232e-field:confirmExportUnknownTagseffect=ထုတ္လုပ္ေပးပို႔ျခင္း ဆက္သြားမည္ဆိုလၽွင္ အမ်ိဳးအမည္မသိ သတင္းအခ်က္အလက္မ်ားအားလုံးကို ထုတ္လုပ္ေပးပို႔မည္မဟုတ္ပါ။
 
-#_______________________________________________=You have chosen to treat this account as a Field Desk.
--862f-field:confirmImportFieldDeskPublicKeycause=အဖြဲ႔ခြဲတခုုအျဖစ္ ျပဳမွဳရန္ ဤအေကာင့္အား သင္ေရြးခ်ယ္ထားျပီးျဖစ္သည္
+#__________________________________________________________=This template was not created by a known account. You should carefully review the fields to make sure the template is suitable. You will be able to cancel the template editing to restore the earlier template.
+-c062-field:confirmImportingCustomizationUnknownSignercause=This template was not created by a known account. You should carefully review the fields to make sure the template is suitable. You will be able to cancel the template editing to restore the earlier template.
 
-#________________________________________________=By clicking on Yes, you will cause all bulletins created by this account to be marked as having been created by a trusted account.
--b003-field:confirmImportFieldDeskPublicKeyeffect=Yes ကိုု ႏွိပ္ျခင္းအားျဖင့္ ဤအေကာင္ျဖင့္ တည္ေဆာက္ထားေသာ စာေစာင္္မ်ားအား ယံုုၾကည္သည့္ အေကာင့္တခုုျဖင့္ မွတ္သားထားျခင္းကိုု ျဖစ္ပါသည္
+#___________________________________________________________=To see the template contents, continue with the import.
+-36e9-field:confirmImportingCustomizationUnknownSignereffect=To see the template contents, continue with the import.
 
 #_________________________________________________=A key file already exists for this account.  Do you wish to overwrite it?
 -6829-field:confirmKeyPairFileExistsOverWritecause=ဤအေကာင့္အတြက္ ေသာ့စာတြဲတစ္ခု ရွိႏွင့္ၿပီးသား ျဖစ္ပါသည္။ ၎ကို ထပ္ေလာင္းေရးသားလိုပါသလား?
@@ -1549,12 +1975,6 @@
 #________________________________________=The selected attachments will be permanently removed from this bulletin.
 -3252-field:confirmRemoveAttachmenteffect=သတ္မွတ္ထားေသာ ပူးတြဲပါမ်ားကို ဤစာေစာင္မွ ထာဝရ ဖယ္ရွားသြားပါမည္။
 
-#__________________________________________=You have chosen to remove the selected Field Desk account(s).
--6ab9-field:confirmRemoveFieldDeskKeyscause=အဖြဲ႔ခြဲအေကာင့္(မ်ား)အား ဖယ္ရွားရန္အတြက္ သင္ေရြးခ်ယ္ျပီးျဖစ္သည္။ 
-
-#___________________________________________=By clicking on Yes, bulletins created by those accounts will no longer be indicated as having been authored by a Field Desk
--0c34-field:confirmRemoveFieldDeskKeyseffect=Yes ကိုု ႏွိပ္ျခင္းအားျဖင့္ ထုုိအေကာင့္မ်ားျဖင့္ တည္ေဆာက္ထားေသာ အခ်က္အလက္မ်ား အဖြဲ႔ခြဲတခုုျဖင့္ ေရးသားထားျခင္းကိုု ျပသားထားျခင္းၾကာရွည္ခံမည္မဟုုတ္ပါ။
-
 #___________________________________=You are about to delete all Martus data from this computer.
 -af45-field:confirmRemoveMartuscause=ဤကြန္ပ်ဴတာမွ Martus အခ်က္အလက္အားလုံးကို ဖ်က္ပစ္ ေတာ့မည့္ဆဲဆဲ ျဖစ္ပါသည္။
 
@@ -1572,12 +1992,6 @@
 
 #__________________________________________________=If you do this, the report will only include the bulletins that have been found so far.
 -4aa4-field:confirmReportSearchProgressCanceleffect=အကယ္၍သင္ဤအရာကို လုပ္ေဆာင္ပါက အစီရင္ခစာတြင္  ယခုအထိ ရွာေဖြေတြရွိေသာ စာေစာင္မ်ားသာ ပါရွိပါမည္။
-
-#_______________________________________________________=Do you want to have your contact information sent to the current server?  This information may be sent to other servers, and will be viewable by anyone who has access to your public bulletin information or anyone with administrative rights on the server.
--496d-field:confirmRequestToSendContactInfoToServercause=ယခုုလက္ရွိ ဆာဗာတြင္ သင့္ရဲ့ ဆက္သြယ္ရန္ သတင္းအခ်က္အလက္မ်ားအားလံုုးကိုု ေပးပိုု႔ေစလိုုပါသလား? ဤသတင္းအခ်က္အလက္မ်ား အျခားေသာ  ဆာဗာမ်ားသုုိ႔ေပးပိုု႔ခဲ့ျခင္း ျဖစ္နိဳင္ေခ်ရွိျပီး သင့္အေကာင့္မွ အမ်ားႏွင့္ဆိုုင္ေသာစာေစာင္သတင္းအခ်က္အလက္မ်ားကိုု မည္သူမဆိုု ၾကည့္ရွုုနိဳင္ေပမည္ (သိုု႔မဟုုတ္) ဆာဗာထိန္းခ်ဳပ္သူတစ္ဦးေယာက္မွလည္း ၾကည့္ရွုုုနိဳင္ေပလိမ့္မည္။
-
-#________________________________________________________=Clicking on Yes will send your contact information to the current server.
--9c28-field:confirmRequestToSendContactInfoToServereffect=Yes ကို ခလုတ္ႏွိပ္လၽွင္ သင္၏ ဆက္သြယ္ရန္ သတင္းအခ်က္အလက္မ်ားကို လက္ရွိဆာဗာသို႔ ေပးပို႔သြားပါမည္။
 
 #__________________________________________=This will reset the current Default Details contents to the original contents. After resetting the contents, you should review them to be sure they are correct.
 -37bf-field:confirmResetDefaultDetailscause=ဤသို႔ျပဳလုပ္ျခင္းသည္ လက္ရွိ ပုံေသသတ္မွတ္ခ်က္ အေသးစိတ္မ်ား မာတိကာကို မူလမာတိကာသို႔ ျပန္လည္ျပင္ဆင္သြားပါမည္။ မာတိကာမ်ား ျပန္လည္ျပင္ဆင္ၿပီးသည့္အခါ မွန္ကန္ေၾကာင္း ျပန္လည္စစ္ေဆးသင့္ပါသည္။
@@ -1645,6 +2059,12 @@
 #________________________________________=New bulletins created with this account will not have any custom fields.
 -bf33-field:confirmUndoCustomFieldseffect=ဤအေကာင့္မွ တည္ေဆာက္ထားေသာ စာေစာင္အသစ္မ်ားတြင္ မည္သည့္ စိတ္ႀကိဳက္သိုမွီးခ်က္မၽွ မပါပါ။
 
+#__________________________________________________________=Anyone who has (or can guess) your access token will be able to download it from the server and see everything in this template. If you upload your template, someone could potentially see the structure of the data you're collecting (but won't be able to see the data itself).
+-8503-field:confirmUploadPublicTemplateToServerWarningcause=Anyone who has (or can guess) your access token will be able to download it from the server and see everything in this template. If you upload your template, someone could potentially see the structure of the data you're collecting (but won't be able to see the data itself).
+
+#___________________________________________________________=By continuing, you understand your template details are publicly available on the server.
+-751e-field:confirmUploadPublicTemplateToServerWarningeffect=By continuing, you understand your template details are publicly available on the server.
+
 #_____________________________________=Please Note: There are bulletins that have not been sent to a server.  Do you still want to exit?
 -d0f3-field:confirmUploadRemindercause=မွတ္ခ်က္ : ဆာဗာသို႔ မေပးပို႔ရေသးေသာ စာေစာင္မ်ား ရွိေနပါေသးသည္။ ထြက္သြားခ်င္ပါေသးသလား?
 
@@ -1684,8 +2104,8 @@
 #____________________________________________________=Warning! Using the regular keyboard to enter your password greatly reduces the security of the Martus system, and could make it easier for an attacker to view your private data.
 -f068-field:confirmWarningSwitchToNormalKeyboardcause=သတိေပးခ်က္! ပုံမွန္ကီးဘုတ္ကို အသုံးျပဳၿပီး စကားဝွက္ထည့္သြင္းျခင္းသည္ Martus စနစ္၏ လုံျခဳံစိတ္ခ်ရမွုကို အလြန္အမင္း ေလ်ာ့က်ေစပါသည္။ ထို႔အျပင္ သင္၏ လၽွိုဳ႔ဝွက္အခ်က္အလက္မ်ားကို မသမာသူတစ္ဦးမွ ဝင္ေရာက္ၾကည့္ရွုနိုင္ေရးကိုလည္း ပိုမိုလြယ္ကူေစပါသည္။
 
-#_____________________________________________________=If this is a Headquarters computer, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.
--4379-field:confirmWarningSwitchToNormalKeyboardeffect=ဤကြန္ပ်ဴတာသည္ ပင္မ ျဖစ္လၽွင္ ဖန္သားျပင္ကီးဘုတ္သုံးစြဲေရးသည္ အလြန္အေရးႀကီးပါသည္။ သင္ၾကည့္ရွုရန္ခြင့္ေပးထားေသာ လၽွိုဳ႔ဝွက္အခ်က္အလက္မ်ားအားလုံးကို မသမာသူ တစ္ဦးဦးမွ ဝင္ေရာက္ခြင့္ ရသြားနိုင္ေသာေၾကာင့္ျဖစ္သည္။
+#_____________________________________________________=If you have been sent this bulletin from one of your contacts, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.
+-24d9-field:confirmWarningSwitchToNormalKeyboardeffect=ဤကြန္ပ်ဴတာသည္ ပင္မ ျဖစ္လၽွင္ ဖန္သားျပင္ကီးဘုတ္သုံးစြဲေရးသည္ အလြန္အေရးႀကီးပါသည္။ သင္ၾကည့္ရွုရန္ခြင့္ေပးထားေသာ လၽွိုဳ႔ဝွက္အခ်က္အလက္မ်ားအားလုံးကို မသမာသူ တစ္ဦးဦးမွ ဝင္ေရာက္ခြင့္ ရသြားနိုင္ေသာေၾကာင့္ျဖစ္သည္။
 
 #_________________________________________________=This XML file was created by a newer version of Martus.
 -4241-field:confirmXmlSchemaNewerImportAnywaycause=ဤ XML ဖိုင္ကို ပိုသစ္ေသာ Martus ဗားရွင္းျဖင့္ ဖန္တီးထားသည္
@@ -1750,8 +2170,8 @@
 #________________________=Disconnecting...
 -257e-field:disconnecting=ဆက္သြယ္မွဳကိုျဖတ္ေတာက္ေနသည္…
 
-#________________=Email Address
--09ba-field:email=အီးေမးလ္ လိပ္စာ
+#________________=Email Address:
+-852c-field:email=အီးေမးလ္ လိပ္စာ
 
 #____________________=Date Created
 -dda2-field:entrydate=တည္ေဆာက္သည့္ေန႔စြဲ
@@ -1762,20 +2182,17 @@
 #_________________________=Dates of Event
 -a13c-field:eventdaterange=ျဖစ္ပြားသည့္ေန႔စြဲမ်ား
 
+#_______________________________________=Description
+-55f8-field:inputCustomFieldsDescription=Description
+
 #________________________________=Enter the XML representation for the layout of new and modified bulletins.
 -cf9a-field:inputCustomFieldsInfo=အသစ္ႏွင့္ ျပဳျပင္ေရးသားထားသည့္ စာေစာင္မ်ား၏ အခင္းအက်င္းအတြက္ XML ကိုယ္စားျပဳခ်က္မ်ားကို ထည့္သြင္းပါ။
 
-#______________________________________=Enter the label you wish to associate with this Field Desk.
--268e-field:inputGetFieldDeskLabelentry=ဤအဖြဲ႔ခြဲႏွင့္ တြဲဖက္ေဖာ္ျပေစလိုေသာ အညႊန္းစာသားကို ထည့္သြင္းပါ။
-
-#_______________________________=Enter the label you wish to associate with this Headquarters.
--ba5f-field:inputGetHQLabelentry=ဤ ပင္မ ႏွင့္ တြဲဖက္ေဖာ္ျပေစလိုေသာ အညႊန္းစာသားကို ထည့္သြင္းပါ။
+#_________________________________=Title
+-768e-field:inputCustomFieldsTitle=Title
 
 #_____________________________________=Enter the name of the file you wish to export.
 -6507-field:inputGetShareFileNameentry=ထုတ္လုပ္ေပးပို႔လိုေသာ စာတြဲအမည္ကို ထည့္သြင္းပါ။
-
-#_____________________________________=Enter the Public Code for the account being imported:
--83fb-field:inputImportPublicCodeentry=ဤအေကာင့္အတြက္ အမ်ားဆိုင္ သက္ေသခံကုဒ္နံပါတ္ကို ထည့္သြင္းပါ :
 
 #____________________________________=Enter the Public Code for this account:
 -fea8-field:inputImportPublicKeyentry=ဤအေကာင့္အတြက္ အမ်ားႏွင့္ဆိုုင္ေသာ ကုုဒ္ထည့္သြင္းပါ
@@ -1816,14 +2233,14 @@
 #_________________________________=The current server has sent this message:
 -fd76-field:messageServerNewscause=လက္ရွိဆာဗာမွ ဤသတင္းစကားကို ေပးပို႔လာပါသည္ :
 
-#______________________________________=The Public Code does not match the one you entered.
--040a-field:notifyAccountCodeWrongcause=အမ်ားဆိုင္ကုဒ္နံပါတ္သည္ သင္ထည့္သြင္းထားသည္ႏွင့္ ကိုက္ညီမွု မရွိပါ။
-
 #_____________________________________________________=Must select at least one bulletin that was created by this account
 -f7c7-field:notifyAddPermissionsZeroBulletinsOurscause=ဤအေကာင့္က ဖန္တီးထားသည့္ အနည္းဆုံး စာေစာင္တစ္ခု ေရြးရမည္။
 
-#____________________________________________________________=Must select at least one headquarters account
--deb1-field:notifyAddPermissionsZeroHeadquartersSelectedcause=အနည္းဆုံး ပင္မအေကာင့္တစ္ခု ေရြးရမည္။
+#____________________________________________________________=Must select at least one contact's account
+-9f77-field:notifyAddPermissionsZeroHeadquartersSelectedcause=အနည္းဆုံး ပင္မအေကာင့္တစ္ခု ေရြးရမည္။
+
+#________________________________________________=A connection to the server was not made. This could be because the server is not available, you have entered an incorrect IP, the server is blocked, or your Internet connection is down.
+-4028-field:notifyAdvanceServerNotRespondingcause=A connection to the server was not made. This could be because the server is not available, you have entered an incorrect IP, the server is blocked, or your Internet connection is down.
 
 #____________________________________=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.
 -614e-field:notifyAlreadyRunningcause=Martus ေဆာ့ဖ္ဝဲမိတၱဴတစ္ခု ဤကြန္ပ်ဴတာတြင္ လုပ္ငန္းလည္ပတ္ႏွင့္ၿပီးသား ျဖစ္ပါသည္။ မိတၱဴအသစ္တစ္ခု မစတင္မီ ၎ကို ပိတ္ရပါမည္။
@@ -1851,6 +2268,15 @@
 
 #______________________________________________________=Please confirm that the default details retrieved are correct.
 -af6b-field:notifyConfirmCorrectDefaultDetailsDatacause=ျပန္လည္ရယူထားေသာ ပုံေသသတ္မွတ္ထားသည့္ အေသးစိတ္မ်ား မွန္ကန္ေၾကာင္း အတည္ျပဳစစ္ေဆးပါ။
+
+#_____________________________________________=You have already added this contact.
+-8184-field:notifyContactKeyAlreadyExistscause=You have already added this contact.
+
+#_________________________________________=You cannot add yourself as a contact.
+-af4b-field:notifyContactKeyIsOurselfcause=You cannot add yourself as a contact.
+
+#______________________________________=The current server is not responding or may need to be configured from the server menu.
+-9b3c-field:notifyContactsNoServercause=The current server is not responding or may need to be configured from the server menu.
 
 #_________________________________________=An error occurred while trying to create your account.
 -c8e7-field:notifyCreateAccountFailedcause=သင့္အေကာင့္ တည္ေဆာက္ရာတြင္ အခက္အခဲတစ္ခု ၾကဳံေတြ႕ေနရပါသည္။
@@ -1893,6 +2319,9 @@
 
 #_________________________________________________________=There was an error saving your template.
 -88ed-field:notifyErrorExportingCustomizationTemplatecause=ပုံစံခြင္အား သိမ္းဆည္းရာတြင္ အခက္အခဲတစ္ခု ရွိေနပါသည္။
+
+#____________________________________________=An error occured while trying to connect to the server.
+-7955-field:notifyErrorGettingCompliancecause=An error occured while trying to connect to the server.
 
 #___________________________________________________=This XML file was created by a newer version of Martus and cannot be read by this version.  You must upgrade to the newer version of Martus to import this file.
 -c6cb-field:notifyErrorImportingBulletinsTooNewcause=ဤ XML ဖိုင္ကို ပိုသစ္ေသာ Martus ဗားရွင္းက ဖန္တီးၿပီး ဤဗားရွင္းျဖင့္ ဖတ္မရနိုင္ပါ။ ဤဖိုင္ကို တင္သြင္းရန္ သင့္အေနျဖင့္ ပိုသစ္ေသာ Martus ဗားရွင္းကို အဆင့္ျမႇင့္ရပါမည္။
@@ -1939,6 +2368,12 @@
 #______________________________________=Unable to save current screen layout.
 -2bad-field:notifyErrorSavingStatecause=လက္ရွိ ဖန္သားျပင္ အခင္းအက်င္းကို သိမ္းဆည္း၍ မရပါ။
 
+#_________________________________________________=Unexpected error saving template to server.
+-6e61-field:notifyErrorSavingTemplateToServercause=Unexpected error saving template to server.
+
+#________________________________________=Unable to connect to the server.
+-595b-field:notifyErrorServerOfflinecause=Unable to connect to the server.
+
 #_____________________________________________=Unable to update the dictionary. Be sure the word list is in the correct format.
 -6486-field:notifyErrorUpdatingDictionarycause=အဘိဓာန္ကိုအဆင့္ျမင့္၍မရပါ။ စာလံုးစာရင္းသည္မွန္ကန္ေသာပံုစံတြင္ရိွေအာင္ ေသခ်ာျပဳလုပ္ပါ။
 
@@ -1966,12 +2401,6 @@
 #___________________________________________________________=Successfully exported customization template.
 -aed9-field:notifyExportingCustomizationTemplateSuccesscause=စိတ္ႀကိဳက္ဖန္တီးထားသည့္ ပုံစံခြင္ကို ေအာင္ျမင္စြာ ထုတ္လုပ္ေပးပို႔ၿပီးပါၿပီ။
 
-#_______________________________________________=You have already added this account as a Field Desk.
--b783-field:notifyFieldDeskKeyAlreadyExistscause=အဖြဲ႔ခြဲခုုအျဖစ္ ဤအေကာင့္ႏွင့္ သင္ ျဖည့္ဆည္းထားျပီးျဖစ္သည္။
-
-#_____________________________________________=The label you entered is already assigned to another Field Desk account.  Please use a different label.
--7237-field:notifyFieldDeskLabelDuplicatecause=သင္ ဝင္ေရာက္ေသာအညႊန္းမွာ အျခားေသာအဖြဲ႔ခြဲအေကာင့္တြင္ ေပးျပီးသားျဖစ္သည္။ ေက်းဇူးျပဳျပီး မတူကြဲျပားေသာ အညႊန္းတခုုကိုု အသံုုးျပဳပါ။
-
 #___________________________________________=The original files have not been deleted from your computer, you must delete them manually if you wish.
 -8965-field:notifyFilesWillNotBeDeletedcause=သင့္ကြန္ပ်ဴတာမွ မူလစာတြဲမ်ားကို မဖ်က္ပစ္ရေသးပါ။ ဖ်က္ခ်င္ပါက ၎တို႔ကို မိမိဘာသာ ဖ်က္ပစ္ရပါမည္။
 
@@ -1984,12 +2413,6 @@
 #__________________________________=One or more bulletins were not in any folder. These lost bulletins have been placed into the Recovered Bulletins folder.
 -0b0c-field:notifyFoundOrphanscause=တစ္ခု သို႔မဟုတ္ တစ္ခုထက္ပိုေသာ စာေစာင္မ်ားကို မည္သည့္စာတြဲစုတြင္မၽွ ရွာမေတြ႕ပါ။ အဆိုပါ ဆုံးရွံဳးသြားေသာ စာေစာင္မ်ားကို ျပန္လည္ေကာင္းမြန္ေစရန္ျပဳျပင္ထားသည့္ စာတြဲစုထဲ၌ ေနရာခ်ထားၿပီးပါၿပီ။
 
-#_______________________________________=You have already added this account to your Headquarters list.
--0785-field:notifyHQKeyAlradyExistscause=ပင္မ စာရင္းထဲတြင္ ဤအေကာင့္အား ထည့္သြင္းၿပီး ျဖစ္ပါသည္။
-
-#_______________________________________________=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.
--91ca-field:notifyHeadquarterLabelDuplicatecause=သင္ထည့္သြင္းလိုက္ေသာ ပင္မ အညႊန္းစာသားသည္ အျခား ပင္မ အေကာင့္တစ္ခုအတြက္ တာဝန္ေပးၿပီးသား ျဖစ္ေနပါသည္။ အျခား အညႊန္းစာသားတစ္ခု သုံးစြဲပါ။
-
 #________________________________________________=Not all bulletins were imported.  The following bulletins had problems during import.\n\n#ImportBulletinsNotImported#
 -9768-field:notifyImportBulletinsNotImportedcause=စာေစာင္အားလုံး တင္သြင္းခဲ့ျခင္း မဟုတ္ပါ။ ေအာက္ပါစာေစာင္မ်ား တင္သြင္းရာတြင္ ျပႆနာမ်ား ရွိေနပါသည္။ \n\n#ImportBulletinsNotImported#
 
@@ -1999,8 +2422,8 @@
 #______________________________________________=Not all attachments were imported.  The following bulletins had problems importing these attachments.\n\n#ImportMissingAttachments#
 -4e91-field:notifyImportMissingAttachmentscause=ပူးတြဲပါအားလုံး တင္သြင္းခဲ့ျခင္း မဟုတ္ပါ။ ေအာက္ပါ ပူးတြဲပါမ်ား တင္သြင္းရာတြင္ ျပႆနာမ်ား ရွိေနပါသည္။ \n\n#ImportMissingAttachments#
 
-#___________________________________________________________=Successfully imported customization template.
--c78c-field:notifyImportingCustomizationTemplateSuccesscause=စိတ္ႀကိဳက္ဖန္တီးထားသည့္ ပုံစံခြင္ကို ေအာင္ျမင္စြာ တင္သြင္းၿပီးပါၿပီ။
+#___________________________________________________________=Successfully imported a customization template that was created by #CreatedBy#.
+-16f2-field:notifyImportingCustomizationTemplateSuccesscause=စိတ္ႀကိဳက္ဖန္တီးထားသည့္ ပုံစံခြင္ကို ေအာင္ျမင္စြာ တင္သြင္းၿပီးပါၿပီ။
 
 #_______________________________________=You must have a server public code.
 -2fde-field:notifyInvalidServerCodecause=ဆာဗာ၏ အမ်ားဆိုင္ကုဒ္နံပါတ္ ရွိရပါမည္။
@@ -2008,14 +2431,8 @@
 #_______________________________________=You must have a server name or IP address.
 -984b-field:notifyInvalidServerNamecause=ဆာဗာအမည္ သို႔မဟုတ္ IP လိပ္စာ ရွိရပါမည္။
 
-#__________________________________________=Please select a Field Desk first.
--b792-field:notifyNoFieldDesksSelectedcause=ေက်းဇူးျပဳျပီး အဖြဲ႔ခြဲခုုတခုုအရင္ေရြးရန္။
-
 #_______________________________________=No row selected.
 -7b20-field:notifyNoGridRowSelectedcause=ေရြးခ်ယ္ထားေသာ အတန္း မရွိပါ။
-
-#___________________________________=Please select a Headquarters first.
--1d19-field:notifyNoHQsSelectedcause=ပင္မ တစ္ခုကို အရင္ ေရြးခ်ယ္ပါ။
 
 #___________________________________________=No folder specified.  You must enter a folder you wish the files to be imported into.  This folder can already exist in the system, or can be a new folder.
 -05f7-field:notifyNoImportFileSpecifiedcause=စာတြဲစုသတ္မွတ္ထားျခင္း မရွိပါ။ တင္သြင္းမည့္စာတြဲမ်ား ထည့္ထားေစလိုသည့္ စာတြဲစုတစ္ခုကို ထည့္သြင္းရပါမည္။ အဆိုပါစာတြဲစုသည္ ဤကြန္ပ်ဴတာနည္းစနစ္တြင္ တည္ရွိႏွင့္ၿပီးသား ျဖစ္နိုင္ပါသည္။ သို႔မဟုတ္ စာတြဲစုအသစ္တစ္ခု ျဖစ္နိုင္ပါသည္။
@@ -2032,8 +2449,8 @@
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=လုပ္ငန္းတာဝန္ ၿပီးဆုံးသြားပါၿပီ။
 
-#_____________________________________=Not a valid password, passwords must be at least 8 characters long
--c9fa-field:notifyPasswordInvalidcause=အသုံးျပဳ၍ရသည့္ စကားဝွက္ မဟုတ္ပါ။ စကားဝွက္မ်ားသည္ အနည္းဆုံး စာလုံးသေကၤတ ၈ လုံးစာ ရွည္လ်ားရပါမည္။
+#_____________________________________=Not a valid password, passwords must be at least 8 characters long, 15 recommended.
+-6148-field:notifyPasswordInvalidcause=အသုံးျပဳ၍ရသည့္ စကားဝွက္ မဟုတ္ပါ။ စကားဝွက္မ်ားသည္ အနည္းဆုံး စာလုံးသေကၤတ ၈ လုံးစာ ရွည္လ်ားရပါမည္။
 
 #_____________________________________________=Your password can not be your username
 -0acb-field:notifyPasswordMatchesUserNamecause=စကားဝွက္သည္ သုံးစြဲသူအမည္ မျဖစ္သင့္ပါ။
@@ -2143,8 +2560,23 @@
 #_______________________________________=The Server has responded with invalid account information.
 -76c7-field:notifyServerInfoInvalidcause=သုံးမရေသာ ဆာဗာမွ တုန္႔ျပန္ထားသည့္ အေကာင့္ သတင္းအခ်က္အလက္မ်ားသည္ သုံးစြဲ၍မရပါ။
 
+#________________________________________=Server not available.
+-45bd-field:notifyServerNotAvailablecause=Server not available.
+
+#_________________________________________=This server does not support this feature.
+-0b42-field:notifyServerNotCompatiblecause=This server does not support this feature.
+
 #____________________________________________=Unable to make a secure connection with the Martus backup server.\n\nMartus can connect to a server using either of two ports.  When trying to connect to this server, neither port is accessible, probably because both ports are being blocked by a local firewall or by your ISP.\n\nWe recommend that any firewalls be configured to allow outgoing connections on both TCP port 443 and 987.  Please contact your LAN administrator or office technical support staff to verify that your firewall configuration allows this.\n\nIf the problem persists, you may need to select a different server.
 -8dc9-field:notifyServerSSLNotRespondingcause=Martus ၏ မိတၱဴပြား ဆာဗာႏွင့္ လုံျခဳံစိတ္ခ်ရေသာ ဆက္သြယ္ေဆာင္ရြက္မွု တည္ေဆာက္၍မရပါ။ \n\n ပို႔တ္ႏွစ္ခုအနက္မွ တစ္ခုခုကိုသုံး၍ အဆိုပါဆာဗာႏွင့္ Martus က ခ်ိတ္ဆက္ေပးနိုင္ပါသည္။ ထို ပို႔တ္ႏွစ္ခုစလုံးကို local firewall သို႔မဟုတ္ အင္တာနက္ဝန္ေဆာင္မွုပံ့ပိုးသူမွ တားျမစ္ထားသျဖင့္ ထိုပို႔တ္ႏွစ္ခုစလုံးကို ဤဆာဗာသို႔ ဆက္သြယ္ေနစဥ္အတြင္း ဝင္ေရာက္၍မရပါ။ \n\n တပ္ဆင္ထားသည့္ firewall မ်ားသည္ TCP ပို႔တ္ 443  ႏွင့္ 987 တို႔မွ ျပင္ပထြက္ခြာ ဆက္သြယ္မွုမ်ားကို ခြင့္ျပဳေပးထားရန္ အႀကံျပဳအပ္ပါသည္။ firewall တပ္ဆင္မွုမ်ားသည္ ထိုအခ်က္ကို ခြင့္ျပဳထားေၾကာင္း ေသခ်ာေစရန္အတြက္ LAN ႀကီးၾကပ္အုပ္ခ်ဳပ္သူကိုလည္းေကာင္း သို႔မဟုတ္ နည္းပညာပံ့ပိုးေပးသူ ႐ုံးတြင္းဝန္ထမ္းကိုလည္းေကာင္း ဆက္သြယ္ေဆာင္ရြက္ပါ။ \n\n အကယ္၍ ျပႆနာဆက္ရွိေနေသးသည္ဆိုပါက အျခားဆာဗာတစ္ခုအား ေျပာင္းလဲေရြးခ်ယ္ေပးရပါမည္။
+
+#____________________________________________=Access Token: #Token#\nPublic Code: #PublicCode#
+-20d8-field:notifyShowTokenAndPublicCodecause=Access Token: #Token#\nPublic Code: #PublicCode#
+
+#___________________________________________=Successfully saved form template to your account on the server.
+-f995-field:notifyTemplateSavedToServercause=Successfully saved form template to your account on the server.
+
+#_______________________________________________________=This token is not recognized by this server.
+-7b0c-field:notifyUnableToRetrieveContactFromServercause=This token is not recognized by this server.
 
 #____________________________________________=Unable to save the selected attachment for some reason.  Try saving it to a different file.
 -4a93-field:notifyUnableToSaveAttachmentcause=ေရြးခ်ဳယ္ထားေသာ ပူးတြဲပါကို အေၾကာင္းေၾကာင္းေၾကာင့္ သိမ္းဆည္း၍မရပါ။
@@ -2194,8 +2626,8 @@
 #_______________________________________=The Server has rejected your request. The magic word is probably not correct.
 -2baa-field:notifymagicwordrejectedcause=သင့္ေတာင္းဆိုမွဳအား ဆာဗာက ျငင္းပယ္ထားပါသည္။ ပဥၥလက္စကားဝွက္ မမွန္ျခင္းေၾကာင့္ ျဖစ္နိုင္ပါသည္။
 
-#________________________________________=You must enter the same password twice
--dcba-field:notifypasswordsdontmatchcause=တူညီေသာ စကားဝွက္ကို ႏွစ္ႀကိမ္ ထည့္သြင္းရပါမည္
+#________________________________________=Warning: You must enter the same password you entered on the previous screen.
+-2a81-field:notifypasswordsdontmatchcause=တူညီေသာ စကားဝွက္ကို ႏွစ္ႀကိမ္ ထည့္သြင္းရပါမည္
 
 #____________________________________=Error: Unable to retrieve bulletins from the server
 -33d7-field:notifyretrievefailedcause=အခက္အခဲသတိေပးခ်က္ : စာေစာင္မ်ားကို ဆာဗာမွ ျပန္လည္ရယူရန္ မျဖစ္နိုင္ပါ
@@ -2215,8 +2647,8 @@
 #____________________________________=The current Martus Server has refused to accept a bulletin
 -8629-field:notifyuploadrejectedcause=လက္ရွိ Martus ဆာဗာသည္ စာေစာင္တစ္ခု လက္ခံရန္ ျငင္းပယ္ထားပါသည္
 
-#_________________________________________=You must enter the same username twice
--8812-field:notifyusernamessdontmatchcause=တူညီေသာသုံးစြဲသူအမည္ကို ႏွစ္ႀကိမ္ ထည့္သြင္းရပါမည္
+#_________________________________________=Warning: You must enter the same user name you entered on the previous screen.
+-597e-field:notifyusernamessdontmatchcause=တူညီေသာသုံးစြဲသူအမည္ကို ႏွစ္ႀကိမ္ ထည့္သြင္းရပါမည္
 
 #_______________________=Organization
 -5192-field:organization=အဖြဲ႕အစည္း
@@ -2230,8 +2662,8 @@
 #____________________=(same password again)
 -71c7-field:password2=(တူညီေသာစကားဝွက္ကို တစ္ဖန္ျပန္ရိုက္ပါ)
 
-#________________=Phone Number
--ab25-field:phone=ဖုန္းနံပါတ္
+#________________=Phone Number:
+-846e-field:phone=ဖုန္းနံပါတ္
 
 #___________________________________=Automatically adjust legacy Afghan/Persian dates
 -396e-field:preferencesAdjustPersian=အာဖဂန္/ပါရွဲန္း ေန႔စြဲမ်ားကို အလိုအေလ်ာက္ ခ်ိန္ညႇိေပးရန္
@@ -2242,8 +2674,8 @@
 #________________________________=Prevent creating public bulletins
 -7c9e-field:preferencesAllPrivate=အမ်ားဆိုင္စာေစာင္မ်ား တည္ေဆာက္ျခင္းအား တားဆီးေပးရန္
 
-#_______________________________________________=Automatically check for new Field Desk bulletins
--982a-field:preferencesCheckFieldOfficeBulletins=အဖြဲ႔ခြဲမ်ားမွ စာေစာင္အသစ္မ်ားကို အလိုအေလ်ာက္ စစ္ေဆးေပးပါ
+#_______________________________________________=Automatically check for new bulletins from Contacts
+-1b26-field:preferencesCheckFieldOfficeBulletins=အဖြဲ႔ခြဲမ်ားမွ စာေစာင္အသစ္မ်ားကို အလိုအေလ်ာက္ စစ္ေဆးေပးပါ
 
 #_______________________________=Use Zawgyi font for Burmese display and input
 -f739-field:preferencesUseZawgyi=ျမန္မစာထည့္သြင္းရန္ႏွင့္ ေဖာ္ျပရန္အတြက္ ေဇာ္ဂ်ီေဖာင့္ကုုိ အသံုုးျပဳပါ။
@@ -2269,11 +2701,11 @@
 #_________________=Status
 -bae7-field:status=အေနအထား
 
-#___________________________________________________=Checking for new Field Desk bulletins...
--68ab-field:statusCheckingForNewFieldOfficeBulletins=အဖြဲ႔ခြဲမ်ားမွ စာေစာင္အသစ္မ်ားအား စစ္ေဆးေနသည္…
+#___________________________________________________=Checking for new bulletins from Contacts...
+-a74c-field:statusCheckingForNewFieldOfficeBulletins=အဖြဲ႔ခြဲမ်ားမွ စာေစာင္အသစ္မ်ားအား စစ္ေဆးေနသည္…
 
-#________________________________________=New Field Desk bulletins found on server
--a71e-field:statusNewFieldOfficeBulletins=အဖြဲ႔ခြဲမ်ားမွ စာေစာင္အသစ္မ်ားကို ဆာဗာတြင္ ေတြ႔ရွိသည္
+#________________________________________=New bulletins found on server
+-8fef-field:statusNewFieldOfficeBulletins=အဖြဲ႔ခြဲမ်ားမွ စာေစာင္အသစ္မ်ားကို ဆာဗာတြင္ ေတြ႔ရွိသည္
 
 #__________________=Summary
 -12b7-field:summary=အက်ဥ္းခ်ဳပ္
@@ -2287,7 +2719,7 @@
 #________________=Title
 -768e-field:title=ေခါင္းစဥ္
 
-#_____________________________=Burmese pre-4.4
+#_____________________________=Burmese pre-4.5
 field:translationVersion=ျမန္မာ 4.4
 
 #___________________=Username
@@ -2323,8 +2755,11 @@ field:translationVersion=ျမန္မာ 4.4
 #_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.  If you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.
 -711f-field:warningUnofficialTranslation=သတိေပးခ်က္ : ဤဘာသာျပန္မွုသည္ Martus အဖြဲ႔မွ တည္ေဆာက္ထားျခင္း မဟုတ္ပါ။ ထို႔ေၾကာင့္ ယုံၾကည္၍ မရနိုင္ပါ။ တရားဝင္ ဘာသာျပန္မွဳမ်ားကိုသာ အသုံးျပဳလိုပါက Martus မွ ထြက္ပါ။ #UseUnofficialTranslationFiles# စာတြဲကို သင့္ Martus လမ္းညႊန္ထဲမွ ဖယ္ရွားလိုက္ပါ။ ထို႔ေနာက္ Martus ကို ျပန္လည္စတင္ပါ။
 
-#__________________=Web Page
--0163-field:webpage=ကြန္ရက္(web)စာမ်က္ႏွာ
+#__________________=Web Page:
+-cfeb-field:webpage=ကြန္ရက္(web)စာမ်က္ႏွာ
+
+#___________________=All Files
+-af3d-filed:AllFiles=All Files
 
 #_____________________________=Damaged Bulletins
 -32db-folder:%DamagedBulletins=ပ်က္စီးစာေစာင္မ်ား
@@ -2341,11 +2776,11 @@ field:translationVersion=ျမန္မာ 4.4
 #_______________________________=Recovered Bulletins
 -f926-folder:%RecoveredBulletins=ျပန္လည္ေကာင္းမြန္ေစရန္ ျပဳျပင္ထားသည့္ စာေစာင္မ်ား
 
-#_________________________________________=Field Desk Bulletins
--647f-folder:%RetrievedFieldOfficeBulletin=အဖြဲ႔ခြဲမ်ားမွ စာေစာင္မ်ား
+#_________________________________________=Contacts Sealed Bulletins
+-e011-folder:%RetrievedFieldOfficeBulletin=အဖြဲ႔ခြဲမ်ားမွ စာေစာင္မ်ား
 
-#______________________________________________=Field Desk Draft Bulletins
--204a-folder:%RetrievedFieldOfficeBulletinDraft=အဖြဲ႔ခြဲမ်ားမွ မူၾကမ္းစာေစာင္မ်ား
+#______________________________________________=Contacts Draft Bulletins
+-5160-folder:%RetrievedFieldOfficeBulletinDraft=အဖြဲ႔ခြဲမ်ားမွ မူၾကမ္းစာေစာင္မ်ား
 
 #________________________________=Retrieved Bulletins
 -6539-folder:%RetrievedMyBulletin=ျပန္လည္ရယူထားေသာ စာေစာင္မ်ား
@@ -2524,8 +2959,8 @@ field:translationVersion=ျမန္မာ 4.4
 #________________=Chinese
 -15dc-language:zh=တ႐ုတ္
 
-#________________________=Update Headquarters Access...
--fe87-menu:AddPermissions=ပင္မသို႔ဝင္ေရာက္မွုကို အပ္ဒိတ္ လုပ္ပါ...
+#________________________=Update Contact's Access...
+-1462-menu:AddPermissions=ပင္မသို႔ဝင္ေရာက္မွုကို အပ္ဒိတ္ လုပ္ပါ...
 
 #_________________________=Add '#NewWord#' to User Dictionary
 -0ca4-menu:AddToDictionary=ထည့္ပါ '#NewWord#' အသံုးျပဳသူအဘိဓာန္တြင္
@@ -2535,9 +2970,6 @@ field:translationVersion=ျမန္မာ 4.4
 
 #________________=Charts
 -8610-menu:Charts=ကားခ်ပ္မ်ား
-
-#______________________=Configure Headquarters
--bf2f-menu:ConfigureHQs=ပင္မကို ဆက္သြယ္တပ္ဆင္ပါ
 
 #_____________________________=Spell Checking
 -5cf2-menu:ConfigureSpellCheck=သတ္ပံုစစ္ေဆးျခင္း
@@ -2584,8 +3016,8 @@ field:translationVersion=ျမန္မာ 4.4
 #_________________________=Import Bulletins
 -4094-menu:ImportBulletins=စာေစာင္မ်ားကို တင္သြင္းရန္
 
-#__________________________=Configure Field Desks
--b043-menu:ManageFieldDesks=အဖြဲ႔ခြဲမ်ား ျပန္လည္ျပဳျပင္ရန္
+#________________________=Manage Contacts
+-88c0-menu:ManageContacts=Manage Contacts
 
 #_________________________________=More Suggestions
 -a25a-menu:MoreSpellingSuggestions=ထပ္မံအႀကံျပဳခ်က္မ်ား
@@ -2617,11 +3049,11 @@ field:translationVersion=ျမန္မာ 4.4
 #_________________________=Resend Bulletin(s)
 -21a8-menu:ResendBulletins=စာေစာင္(မ်ား)ကို ျပန္လည္ေပးပို႔ရန္
 
-#__________________________________=Retrieve Field Desk Draft Bulletins
--a45d-menu:RetrieveHQDraftBulletins=အဖြဲ႔ခြဲမ်ားမွ မူၾကမ္းစာေစာင္မ်ားကို ျပန္လည္ရယူရန္
+#__________________________________=Retrieve Draft Bulletins from My Contacts
+-9bdc-menu:RetrieveHQDraftBulletins=အဖြဲ႔ခြဲမ်ားမွ မူၾကမ္းစာေစာင္မ်ားကို ျပန္လည္ရယူရန္
 
-#___________________________________=Retrieve Field Desk Sealed Bulletins
--2e56-menu:RetrieveHQSealedBulletins=အဖြဲ႔ခြဲမ်ားမွ ခ်ိပ္ပိတ္စာေစာင္မ်ားကို ျပန္လည္ရယူရန္
+#___________________________________=Retrieve Sealed Bulletins from My Contacts
+-6b08-menu:RetrieveHQSealedBulletins=အဖြဲ႔ခြဲမ်ားမွ ခ်ိပ္ပိတ္စာေစာင္မ်ားကို ျပန္လည္ရယူရန္
 
 #___________________________________=Retrieve My Draft Bulletins
 -eea7-menu:RetrieveMyDraftsBulletins=ကၽြန္ုပ္၏ မူၾကမ္းစာေစာင္မ်ားကို ျပန္လည္ရယူရန္
@@ -2857,11 +3289,11 @@ field:translationVersion=ျမန္မာ 4.4
 #_________________________=Account Information
 -0cbd-wintitle:AccountInfo=အေကာင့္ဆိုင္ရာ သတင္းအခ်က္အလက္မ်ား
 
-#____________________________=Update headquarters access to Bulletins
--5def-wintitle:AddPermissions=စာေစာင္မ်ားသို႔ ပင္မမ်ား ဝင္ေရာက္မွဳကို ျပန္လည္မြမ္းမံျခင္း လုပ္ရန္။ 
+#____________________________=Update your contacts' access to Bulletins
+-8369-wintitle:AddPermissions=စာေစာင္မ်ားသို႔ ပင္မမ်ား ဝင္ေရာက္မွဳကို ျပန္လည္မြမ္းမံျခင္း လုပ္ရန္။ 
 
-#__________________________________________=Update headquarters access to Bulletins
--5def-wintitle:AddingPermissionsToBulletins=စာေစာင္မ်ားသို႔ ပင္မမ်ား ဝင္ေရာက္မွဳကို ျပန္လည္မြမ္းမံျခင္း လုပ္ပါ။ 
+#__________________________________________=Update your Contacts' access to Bulletins
+-88d1-wintitle:AddingPermissionsToBulletins=စာေစာင္မ်ားသို႔ ပင္မမ်ား ဝင္ေရာက္မွဳကို ျပန္လည္မြမ္းမံျခင္း လုပ္ပါ။ 
 
 #______________________________________=Backup Key Information
 -f733-wintitle:BackupKeyPairGeneralInfo=ေသာ့မိတၱဴပြားဆိုင္ရာ သတင္းအခ်က္အလက္မ်ား
@@ -2889,9 +3321,6 @@ field:translationVersion=ျမန္မာ 4.4
 
 #__________________________=Server Configuration
 -add5-wintitle:ConfigServer=ဆာဗာဆက္သြယ္တပ္ဆင္မွဳ
-
-#__________________________=Configure Headquarters Accounts
--3419-wintitle:ConfigureHQs=ပင္မ အယ္ဒီတာ
 
 #_________________________________=Configure Spell Checking
 -b0ce-wintitle:ConfigureSpellCheck=သတ္ပံုမ်ား စစ္ေဆးေနသည္
@@ -2953,6 +3382,12 @@ field:translationVersion=ျမန္မာ 4.4
 #________________________________________=Verification Error
 -5e89-wintitle:ErrorVerifyingKeyPairShare=မွန္ကန္ေၾကာင္းစစ္ေဆးမွဳ မွားယြင္း
 
+#________________________________=Exit Manage Contacts
+-04b1-wintitle:ExitManageContacts=Exit Manage Contacts
+
+#________________________=Exit Martus Wizard
+-5bc6-wintitle:ExitWizard=Exit Martus Wizard
+
 #_____________________________=Export Bulletins
 -a86c-wintitle:ExportBulletins=စာေစာင္မ်ားကိုု ထုတ္လုပ္ေပးပို႔ရန္္
 
@@ -2986,11 +3421,8 @@ field:translationVersion=ျမန္မာ 4.4
 #___________________________________________=Import Customization Template
 -0188-wintitle:FileDialogImportCustomization=ပံုုစံခြင္ တင္သြင္းရန္
 
-#________________________________________________=Import Field Desk Public Information File
--de53-wintitle:FileDialogImportFieldDeskPublicKey=အမ်ားႏွင့္သက္ဆိုုင္ေသာ သတင္းအခ်က္အလက္အဖြဲ႔ခြဲဖိုုင္မ်ား တင္သြင္းရန္
-
-#___________________________________________________=Import Headquarters Account
--a41c-wintitle:FileDialogImportHeadquartersPublicKey=ပင္မအေကာင့္မ်ား တင္သြင္းရန္
+#___________________________________________________=Add a contact
+-51ad-wintitle:FileDialogImportHeadquartersPublicKey=ပင္မအေကာင့္မ်ား တင္သြင္းရန္
 
 #_________________________________=Import Martus Bulletin Archive
 -f1a0-wintitle:FileDialogImportMBA=Martus စာေစာင္မ်ား ေမာ္ကြန္း တင္သြင္းရန္
@@ -3022,11 +3454,17 @@ field:translationVersion=ျမန္မာ 4.4
 #_____________________________=Import Bulletins
 -4094-wintitle:ImportBulletins=စာေစာင္မ်ား တင္သြင္း
 
+#____________________________________=Import Contact Key
+-e3a4-wintitle:ImportContactPublicKey=Import Contact Key
+
 #____________________________=Importing Bulletins
 -2c20-wintitle:ImportProgress=စာေစာင္မ်ား တင္သြင္းေနသည္
 
 #________________________________=Include Private Data
 -e6dc-wintitle:IncludePrivateData=လၽွိုဳ႔ဝွက္အခ်က္အလက္မ်ားကို ထည့္သြင္းပါ
+
+#_____________________________________=Incompatible Java Version
+-4301-wintitle:IncompatibleJavaVersion=Incompatible Java Version
 
 #____________________________________=Incompatible Translation Version
 -e91d-wintitle:IncompatibleMtfVersion=လိုက္ေလ်ာညီေထြမွဳမရွိေသာ ဘာသာျပန္မူကြဲ
@@ -3039,9 +3477,6 @@ field:translationVersion=ျမန္မာ 4.4
 
 #________________________________________________=Loading Values...
 -2752-wintitle:LoadingFieldValuesFromAllBulletins=တန္ဖိုးမ်ားကို ရွာေဖြလုပ္ေဆာင္ေနသည္…
-
-#_________________________________=Configure Field Desk Accounts
--6d27-wintitle:ManageFieldDeskKeys=အဖြဲ႔ခြဲအေကာင့္မ်ား ျပန္လည္ျပဳျပင္ရန္
 
 #__________________________=Martus SignIn
 -0615-wintitle:MartusSignIn=Martus သို႔ ဝင္ေရာက္ရန္
@@ -3073,6 +3508,9 @@ field:translationVersion=ျမန္မာ 4.4
 #_________________________________=Restore from Backup Disk
 -f910-wintitle:RecoverShareKeyPair=မိတၱဴပြား သိုုေလွာင္ရံုု (Disk) အတြင္းမွ ျပန္လည္ရယူပါ
 
+#___________________________=Remove Contact
+-7f9a-wintitle:RemoveContact=Remove Contact
+
 #_________________________________________=Remove Martus From This Computer
 -31b5-wintitle:RemoveMartsFromThisComputer=Martus ကို ဤကြန္ပ်ဴတာမွ ဖယ္ရွားပါ
 
@@ -3094,8 +3532,8 @@ field:translationVersion=ျမန္မာ 4.4
 #______________________________________________=Retrieving Bulletin Summaries
 -2a45-wintitle:RetrieveHQDraftBulletinSummaries=စာေစာင္အက်ဥ္းခ်ဳပ္မ်ား ျပန္လည္ရယူေနသည္
 
-#______________________________________=Retrieve Field Desk Draft Bulletins
--a45d-wintitle:RetrieveHQDraftBulletins=အဖြဲ႕ခြဲမ်ားမွ စာေစာင္မ်ား ျပန္လည္ရယူေနသည္
+#______________________________________=Retrieve Draft Bulletins from My Contacts
+-9bdc-wintitle:RetrieveHQDraftBulletins=အဖြဲ႕ခြဲမ်ားမွ စာေစာင္မ်ား ျပန္လည္ရယူေနသည္
 
 #______________________________________________=Retrieving Bulletins
 -b7aa-wintitle:RetrieveHQSealedBulletinProgress=စာေစာင္မ်ား ျပန္လည္ရယူေနသည္
@@ -3103,8 +3541,8 @@ field:translationVersion=ျမန္မာ 4.4
 #_______________________________________________=Retrieving Bulletin Summaries
 -2a45-wintitle:RetrieveHQSealedBulletinSummaries=စာေစာင္အက်ဥ္းခ်ဳပ္မ်ား ျပန္လည္ရယူေနသည္
 
-#_______________________________________=Retrieve Field Desk Sealed Bulletins
--2e56-wintitle:RetrieveHQSealedBulletins=အဖြဲ႔ခြဲမ်ားမွ ခ်ိပ္ပိတ္စာေစာင္မ်ား ျပန္လည္ရယူေနသည္
+#_______________________________________=Retrieve Sealed Bulletins from My Contacts
+-6b08-wintitle:RetrieveHQSealedBulletins=အဖြဲ႔ခြဲမ်ားမွ ခ်ိပ္ပိတ္စာေစာင္မ်ား ျပန္လည္ရယူေနသည္
 
 #_____________________________________________=Retrieving Bulletins
 -b7aa-wintitle:RetrieveMyDraftBulletinProgress=စာေစာင္မ်ားျပန္လည္ရယူေနသည္
@@ -3151,6 +3589,9 @@ field:translationVersion=ျမန္မာ 4.4
 #________________________=Server News: Message #CurrentNewsItem# of #MaxNewsItems#
 -7177-wintitle:ServerNews=ဆာဗာ သတင္း : #MaxNewsItems# ၏ #CurrentNewsItem# သတင္းစကား
 
+#__________________________________________________=Server Not Available
+-c79c-wintitle:ServerNotRespondingSaveConfiguration=Server Not Available
+
 #____________________________________=Server Configuration Results
 -788c-wintitle:ServerSelectionResults=ဆာဗာဆက္သြယ္တပ္ဆင္မွဳရလဒ္မ်ား
 
@@ -3196,8 +3637,8 @@ field:translationVersion=ျမန္မာ 4.4
 #______________________________________=Cancel Verification
 -8a03-wintitle:confirmCancelShareVerify=မွန္ကန္ခိုင္မာမွုစစ္ေဆးျခင္းကို ရပ္ဆိုင္းရန္
 
-#_______________________________________=Confirm Removal of Headquarters
--2574-wintitle:confirmClearHQInformation=ပင္မ ဖယ္ရွားမွဳကို  အတည္ျပဳေပးရန္
+#_______________________________________=Confirm Removal of Contact
+-55fc-wintitle:confirmClearHQInformation=ပင္မ ဖယ္ရွားမွဳကို  အတည္ျပဳေပးရန္
 
 #________________________________________=Confirm Create Copy of Someone Else's Bulletin
 -7a92-wintitle:confirmCloneBulletinAsMine=အျခားတစ္ေယာက္၏ စာေစာင္ကို မိတၱဴတည္ေဆာက္ျခင္းအား အတည္ျပဳေပးရန္
@@ -3232,8 +3673,8 @@ field:translationVersion=ျမန္မာ 4.4
 #______________________________________=Export Bulletins
 -a86c-wintitle:confirmExportUnknownTags=စာေစာင္မ်ားကို ထုတ္လုပ္ေပးပို႔ရန္
 
-#_____________________________________________=Import Account Public Information
--b678-wintitle:confirmImportFieldDeskPublicKey=အမ်ားဆိုုင္ေသာသတင္းအခ်က္အလက္ အေကာင့္တင္သြင္းရန္
+#________________________________________________________=Import Customization Template
+-0188-wintitle:confirmImportingCustomizationUnknownSigner=Import Customization Template
 
 #_______________________________________________=Key file Exists
 -493d-wintitle:confirmKeyPairFileExistsOverWrite=ေသာ့စာတြဲ တည္ရွိေနသည္
@@ -3277,9 +3718,6 @@ field:translationVersion=ျမန္မာ 4.4
 #_____________________________________=Confirm Remove Attachments
 -8739-wintitle:confirmRemoveAttachment=ပူးတြဲပါမ်ားဖယ္ရွားျခင္းကို အတည္ျပဳေပးရန္
 
-#________________________________________=Confirm Removal of Field Desk(s)
--41f7-wintitle:confirmRemoveFieldDeskKeys=အဖြဲ႔ခြဲအားဖယ္ရွားျခင္းကိုု အတည္ျပဳရန္
-
 #_________________________________=Delete All Data and Remove Martus
 -6fef-wintitle:confirmRemoveMartus=အခ်က္အလက္အားလုံးအားဖ်က္ပစ္ၿပီး Martus ကို ဖယ္ရွားရန္
 
@@ -3288,9 +3726,6 @@ field:translationVersion=ျမန္မာ 4.4
 
 #_______________________________________________=Cancel Search
 -5109-wintitle:confirmReportSearchProgressCancel=ရွာေဖြျခင္းကို ရပ္ဆိုင္းရန္
-
-#_____________________________________________________=Request to Send Contact Info to Server
--4f40-wintitle:confirmRequestToSendContactInfoToServer=ဆက္သြယ္ရန္သတင္းအခ်က္အလက္မ်ား ဆာဗာသို႔ေပးပို႔ရန္ေတာင္းဆိုရန္
 
 #________________________________________=Reset Contents
 -6f62-wintitle:confirmResetDefaultDetails=မာတိကာမ်ားကို ျပန္လည္ျပင္ဆင္ရန္
@@ -3324,6 +3759,9 @@ field:translationVersion=ျမန္မာ 4.4
 
 #_____________________________________=Customize Fields
 -1cb1-wintitle:confirmUndoCustomFields=စိတ္ႀကိဳက္သိုမွီးခ်က္မ်ား
+
+#________________________________________________________=Send Template to Server
+-c3eb-wintitle:confirmUploadPublicTemplateToServerWarning=Send Template to Server
 
 #___________________________________=Upload Reminder
 -5b14-wintitle:confirmUploadReminder=ေပးပို႔တင္သြင္းမွဳသတိေပးခ်က္
@@ -3370,17 +3808,8 @@ field:translationVersion=ျမန္မာ 4.4
 #_______________________________=Customize Fields
 -1cb1-wintitle:inputCustomFields=စိတ္ႀကိဳက္သိုမွီးခ်က္မ်ား
 
-#____________________________________=Field Desk Label
--f770-wintitle:inputGetFieldDeskLabel=အဖြဲ႔ခြဲ အညႊန္း
-
-#_____________________________=Headquarters Label
--5c50-wintitle:inputGetHQLabel=ပင္မ အညႊန္းစာသား
-
 #___________________________________=Default Backup File Name
 -ac3c-wintitle:inputGetShareFileName=ပုံေသသတ္မွတ္ထားသည့္ မိတၱဴပြားစာတြဲအမည္
-
-#___________________________________=Import Account Public Information
--b678-wintitle:inputImportPublicCode=ပင္မ အမ်ားဆိုင္အေကာင့္စဥ္ကို တင္သြင္းပါ
 
 #__________________________________=Import Account Public Information
 -b678-wintitle:inputImportPublicKey=အမ်ားဆိုုင္ေသာသတင္းအခ်က္အလက္ အေကာင့္တင္သြင္းရန္
@@ -3397,14 +3826,17 @@ field:translationVersion=ျမန္မာ 4.4
 #__________________=Martus Human Rights Bulletin System
 -e5ae-wintitle:main=Martus လူ႔အခြင့္အေရး စာေစာင္မ်ား ထိန္းသိမ္းမွဳစနစ္
 
-#____________________________________=Incorrect Public Code
--f994-wintitle:notifyAccountCodeWrong=အမ်ားဆိုင္ကုဒ္နံပါတ္ မမွန္ပါ
+#______________________________=Add Contact
+-d7f5-wintitle:notifyAddContact=Add Contact
 
-#___________________________________________________=Update headquarters access to Bulletins
--5def-wintitle:notifyAddPermissionsZeroBulletinsOurs=စာေစာင္မ်ားသို႔ ပင္မဝင္ေရာက္မွဳကို ျပန္လည္မြမ္းမံျခင္း လုပ္ရန္။ 
+#___________________________________________________=Update Contacts access to Bulletins
+-a027-wintitle:notifyAddPermissionsZeroBulletinsOurs=စာေစာင္မ်ားသို႔ ပင္မဝင္ေရာက္မွဳကို ျပန္လည္မြမ္းမံျခင္း လုပ္ရန္။ 
 
-#__________________________________________________________=No Headquarters Selected
--9140-wintitle:notifyAddPermissionsZeroHeadquartersSelected=ပင္မမ်ားကို ေရြးခ်ယ္မထားပါ
+#__________________________________________________________=No Contacts Selected
+-e057-wintitle:notifyAddPermissionsZeroHeadquartersSelected=ပင္မမ်ားကို ေရြးခ်ယ္မထားပါ
+
+#______________________________________________=Server Not Available
+-c79c-wintitle:notifyAdvanceServerNotResponding=Server Not Available
 
 #__________________________________=Martus Already Running
 -cfce-wintitle:notifyAlreadyRunning=Martus ၏လုပ္ငန္းမ်ား လည္ပတ္လ်က္ရွိပါသည္ 
@@ -3432,6 +3864,15 @@ field:translationVersion=ျမန္မာ 4.4
 
 #____________________________________________________=Confirm Correct Default Details Content
 -c770-wintitle:notifyConfirmCorrectDefaultDetailsData=ပုံေသသတ္မွတ္ထားသည့္ မာတိကာအေသးစိတ္ မွန္ကန္ေၾကာင္း အတည္ျပဳေပးရန္
+
+#___________________________________________=Contact Account Already Exists
+-bc30-wintitle:notifyContactKeyAlreadyExists=Contact Account Already Exists
+
+#_______________________________________=Contact Account Is Yourself
+-6e39-wintitle:notifyContactKeyIsOurself=Contact Account Is Yourself
+
+#____________________________________=Contacts Server
+-b01e-wintitle:notifyContactsNoServer=Contacts Server
 
 #_______________________________________=Error Creating New Account
 -1141-wintitle:notifyCreateAccountFailed=အေကာင့္ အသစ္ တစ္ခု တည္ေဆာက္ရာတြင္ အခက္အခဲရွိေနသည္
@@ -3474,6 +3915,9 @@ field:translationVersion=ျမန္မာ 4.4
 
 #_______________________________________________________=Error Exporting Template
 -f4cc-wintitle:notifyErrorExportingCustomizationTemplate=ပံုုစံခြင္ တင္းသြင္းမွဳ မွားယြင္းေနသည္
+
+#__________________________________________=Error Getting Compliance Statement
+-f6b2-wintitle:notifyErrorGettingCompliance=Error Getting Compliance Statement
 
 #___________________________________________=Error Importing Bulletins
 -aeb8-wintitle:notifyErrorImportingBulletins=စာေစာင္မ်ား တင္သြင္းစဥ္ အခက္အခဲရွိေနပါသည္
@@ -3520,6 +3964,12 @@ field:translationVersion=ျမန္မာ 4.4
 #____________________________________=Error Saving State
 -884d-wintitle:notifyErrorSavingState=အခက္အခဲသိမ္းဆည္းမွဳ အေျခအေန
 
+#_______________________________________________=Save Template To Server
+-b3a3-wintitle:notifyErrorSavingTemplateToServer=Save Template To Server
+
+#______________________________________=Unable to Connect to Server
+-1b07-wintitle:notifyErrorServerOffline=Unable to Connect to Server
+
 #___________________________________________=Error
 -7f2f-wintitle:notifyErrorUpdatingDictionary=မွားယြင္းခ်က္
 
@@ -3547,12 +3997,6 @@ field:translationVersion=ျမန္မာ 4.4
 #_________________________________________________________=Exporting Template Succeeded
 -b648-wintitle:notifyExportingCustomizationTemplateSuccess=ပုံစံခြင္ကို ထုတ္လုပ္ေပးပို႔ေနသည္
 
-#_____________________________________________=Field Desk Account Already Exists
--eaf1-wintitle:notifyFieldDeskKeyAlreadyExists=အဖြဲ႔ခြဲအေကာင့္ ရွိႏွင့္ေနျပီးသားျဖစ္သည္
-
-#___________________________________________=Field Desk Label
--f770-wintitle:notifyFieldDeskLabelDuplicate=အဖြဲ႔ခြဲအညႊန္း
-
 #_________________________________________=Files Not Deleted
 -a001-wintitle:notifyFilesWillNotBeDeleted=စာတြဲမ်ားကို မဖ်က္ရေသးပါ
 
@@ -3565,12 +4009,6 @@ field:translationVersion=ျမန္မာ 4.4
 #________________________________=Recovered Lost Bulletins
 -704d-wintitle:notifyFoundOrphans=ျပန္လည္ေကာင္းမြန္ေစရန္ျပဳျပင္ထားသည့္ ေပ်ာက္ဆုံးစာေစာင္မ်ား
 
-#_____________________________________=Headquarters Key Already Exists
--03e9-wintitle:notifyHQKeyAlradyExists=ပင္မ ေသာ့ တည္ရွိႏွင့္ၿပီးသားျဖစ္သည္
-
-#_____________________________________________=Headquarter Label Invalid
--106b-wintitle:notifyHeadquarterLabelDuplicate=ပင္မ အညႊန္းစာသားသည္ သုံးမရပါ
-
 #______________________________________________=Warning Bulletins Not Imported
 -59d8-wintitle:notifyImportBulletinsNotImported=စာေစာင္မ်ား မတင္သြင္းရေသးေၾကာင္း သတိေပးခ်က္
 
@@ -3579,6 +4017,9 @@ field:translationVersion=ျမန္မာ 4.4
 
 #____________________________________________=Warning Missing Attachments
 -79ef-wintitle:notifyImportMissingAttachments=ပူးတြဲပါမ်ားေပ်ာက္ဆုံးေနေၾကာင္း သတိေပးခ်က္
+
+#__________________________________=Import Template
+-6d2d-wintitle:notifyImportTemplate=Import Template
 
 #_________________________________________________________=Importing Template Succeeded
 -ac8c-wintitle:notifyImportingCustomizationTemplateSuccess=ပုံစံခြင္တင္သြင္းမွဳ ၿပီးပါၿပီ
@@ -3589,14 +4030,8 @@ field:translationVersion=ျမန္မာ 4.4
 #_____________________________________=Invalid Server Name or IP Address
 -3376-wintitle:notifyInvalidServerName=ဆာဗာအမည္ သို႔မဟုတ္ IP လိပ္စာသည္ သုံးမရပါ
 
-#________________________________________=No Field Desks Selected
--cab7-wintitle:notifyNoFieldDesksSelected=အဖြဲ႔ခြဲမ်ား မေရြးထားပါ
-
 #_____________________________________=No Row Selected
 -28fe-wintitle:notifyNoGridRowSelected=ေရြးခ်ယ္ထားေသာ အတန္း မရွိပါ
-
-#_________________________________=No Headquarters Selected
--9140-wintitle:notifyNoHQsSelected=ေရြးခ်ယ္ထားေသာ ပင္မ မရွိပါ
 
 #_________________________________________=No Folder Specified
 -4b6e-wintitle:notifyNoImportFileSpecified=သတ္မွတ္ထားေသာ စာတြဲစု မရွိပါ
@@ -3724,8 +4159,23 @@ field:translationVersion=ျမန္မာ 4.4
 #_____________________________________=Server Response Invalid
 -77bd-wintitle:notifyServerInfoInvalid=ဆာဗာမွ တုန္႔ျပန္မွဳ မရပါ
 
+#______________________________________=Save Template To Server
+-b3a3-wintitle:notifyServerNotAvailable=Save Template To Server
+
+#_______________________________________=Server Error
+-076a-wintitle:notifyServerNotCompatible=Server Error
+
 #__________________________________________=Unable to connect
 -8207-wintitle:notifyServerSSLNotResponding=ဆက္သြယ္၍မရပါ
+
+#__________________________________________=Account Token and Public Code
+-8db5-wintitle:notifyShowTokenAndPublicCode=Account Token and Public Code
+
+#_________________________________________=Save Template To Server
+-b3a3-wintitle:notifyTemplateSavedToServer=Save Template To Server
+
+#_____________________________________________________=Unable To Retrieve Contact Info
+-df02-wintitle:notifyUnableToRetrieveContactFromServer=Unable To Retrieve Contact Info
 
 #__________________________________________=Saving Attachment Failed
 -fdf7-wintitle:notifyUnableToSaveAttachment=ပူးတြဲပါမ်ားသိမ္းဆည္းျခင္း မေအာင္ျမင္ပါ
@@ -3747,6 +4197,9 @@ field:translationVersion=ျမန္မာ 4.4
 
 #________________________________________________=Server Compliance Statement
 -20f8-wintitle:notifyUserRejectedServerCompliance=ဆာဗာ၏ ကိုက္ညီမွဳ ျပဌာန္းခ်က္
+
+#_________________________________=Verify Contact
+-3117-wintitle:notifyVerifyContact=Verify Contact
 
 #____________________________________________=Verification Succeeded
 -9195-wintitle:notifyVerifyKeyPairSharePassed=မွန္ကန္မွဳစစ္ေဆးျခင္း ၿပီးပါၿပီ
