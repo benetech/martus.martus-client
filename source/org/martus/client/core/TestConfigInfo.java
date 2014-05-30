@@ -201,6 +201,39 @@ public class TestConfigInfo extends TestCaseEnhanced
 			
 		}
 	}
+	
+	public void testLoadingOldInvalidToken() throws Exception
+	{
+		class LaxMartusAccountAccessToken extends MartusAccountAccessToken
+		{
+			public LaxMartusAccountAccessToken(String newToken) throws TokenInvalidException
+			{
+				super(newToken);
+			}
+
+			@Override
+			public boolean isValid(String tokenToValidate)
+			{
+				return true;
+			}
+		}
+		
+		ConfigInfo info = new ConfigInfo();
+		info.setEmail("Anything but blank");
+		Vector invalidToken = new Vector();
+		invalidToken.add(new LaxMartusAccountAccessToken("blah blah")); 
+		info.setMartusAccountAccessTokens(invalidToken);
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		info.save(out);
+		out.close();
+		
+		ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
+		ConfigInfo loaded = ConfigInfo.load(in);
+		in.close();
+		
+		assertEquals(info.getEmail(), loaded.getEmail());
+		assertEquals(0, loaded.getMartusAccountAccessTokens().size());
+	}
 
 	public void testGetContactInfo() throws Exception
 	{
