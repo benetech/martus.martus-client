@@ -1822,6 +1822,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			getStore().clearOnServerLists();
 			boolean magicAccepted = false;
 			app.setServerInfo(serverIPAddress, serverPublicKey, newServerCompliance);
+			backgroundUploadTimerTask.setNeedToGetAccessToken();
 			if(app.requestServerUploadRights(""))
 				magicAccepted = true;
 			else

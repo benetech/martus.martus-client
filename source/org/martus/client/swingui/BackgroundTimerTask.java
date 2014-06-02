@@ -459,12 +459,22 @@ class BackgroundTimerTask extends TimerTask
 		}
 	}
 	
+	public void setNeedToGetAccessToken()
+	{
+		nextCheckForToken = 0;
+	}
+	
 	public void getMartusAccountAccessToken()
 	{
-		if(alreadyGotMartusAccountAccessToken)
+		if(checkingForToken)
+			return;
+		long now = System.currentTimeMillis();
+		if(now < nextCheckForToken)
 			return;
 		if(!isServerAvailable())
 			return;
+		
+		checkingForToken = true;
 		try
 		{
 			MartusAccountAccessToken currentTokenFromServer = getApp().getMartusAccountAccessTokenFromServer();
@@ -472,21 +482,24 @@ class BackgroundTimerTask extends TimerTask
 			ConfigInfo config = getApp().getConfigInfo();
 			config.setCurrentMartusAccountAccessToken(currentTokenFromServer);
 			getApp().saveConfigInfo();
-			alreadyGotMartusAccountAccessToken = true;
+			nextCheckForToken = Long.MAX_VALUE;
 		} 
 		catch (ServerNotCompatibleException e)
 		{
-			alreadyGotMartusAccountAccessToken = true;
 			MartusLogger.log("Server does not support getting token");
-		}
-		catch (ServerNotAvailableException e)
-		{
-			// Nothing we can/should do about it...try again later
+			nextCheckForToken = Long.MAX_VALUE;
 		}
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
+			nextCheckForToken = System.currentTimeMillis() + IN_A_FEW_MINUTES_IN_MILLIS;
 		} 
+		finally
+		{
+			checkingForToken = false;
+		}
+		
+		MartusLogger.log("Will check for token again in " + (nextCheckForToken - now) / 60000 + " minutes"); 
 	}
 
 	public void checkForNewsFromServer()
@@ -623,18 +636,21 @@ class BackgroundTimerTask extends TimerTask
 		return getApp().getStore();
 	}
 	
+	private static final long IN_A_FEW_MINUTES_IN_MILLIS = 10 * 60 * 1000;
+
 	UiMainWindow mainWindow;
 	BackgroundUploader uploader;
 	BackgroundRetriever retriever;
 
 	long nextCheckForFieldOfficeBulletins;
+	long nextCheckForToken;
 	
 	boolean waitingForServer;
 	boolean alreadyCheckedCompliance;
 	boolean inComplianceDialog;
 	boolean alreadyGotNews;
-	boolean alreadyGotMartusAccountAccessToken;
 	boolean gotUpdatedOnServerUids;
 	boolean checkingForNewFieldOfficeBulletins;
+	private boolean checkingForToken;
 }
 
