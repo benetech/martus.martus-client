@@ -18,7 +18,7 @@
     <Menu mnemonicParsing="false" styleClass="menu-item" text="Account">
       <items>
         <MenuItem mnemonicParsing="false" styleClass="menu-item" text="Change Username and Password" onAction="#onChangeUsernameAndPassword" />
-        <MenuItem mnemonicParsing="false" styleClass="menu-item" text="Create New" />
+        <MenuItem mnemonicParsing="false" styleClass="menu-item" text="Create New" onAction="#onCreateNewAccount" />
         <MenuItem mnemonicParsing="false" styleClass="menu-item" text="Contact Information" onAction="#onContactInformation" />
         <MenuItem mnemonicParsing="false" styleClass="menu-item" text="Backup Key" onAction="#onBackupKeypair" />
       </items>
@@ -106,7 +106,7 @@
 <GridPane.margin>
 <Insets left="75.0" top="10.0" />
 </GridPane.margin>
-</ToggleButton><Button mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="+ Create" textFill="#f7f7f7" GridPane.columnIndex="1">
+</ToggleButton><Button mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="+ Create" textFill="#f7f7f7" GridPane.columnIndex="1"  onAction="#onCreateNewBulletin">
 <font>
 <Font name="Helvetica" size="14.0" />
 </font>
