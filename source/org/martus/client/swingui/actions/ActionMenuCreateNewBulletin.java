@@ -30,7 +30,7 @@ import java.awt.event.ActionEvent;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public class ActionMenuCreateNewBulletin extends UiMenuAction
+public class ActionMenuCreateNewBulletin extends UiMenuAction implements ActionDoer
 {
 	public ActionMenuCreateNewBulletin(UiMainWindow mainWindowToUse)
 	{
@@ -39,7 +39,11 @@ public class ActionMenuCreateNewBulletin extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.createBulletin();
+		doAction();
 	}
 
+	public void doAction()
+	{
+		mainWindow.createBulletin();
+	}
 }

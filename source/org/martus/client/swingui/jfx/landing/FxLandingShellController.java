@@ -35,6 +35,7 @@ import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.actions.ActionMenuBackupMyKeyPair;
 import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
 import org.martus.client.swingui.actions.ActionMenuContactInfo;
+import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
 import org.martus.client.swingui.actions.ActionMenuManageContacts;
 import org.martus.client.swingui.actions.ActionMenuPreferences;
 import org.martus.client.swingui.actions.ActionMenuSelectServer;
@@ -82,6 +83,18 @@ public class FxLandingShellController extends FxInSwingFrameController
 	private void onChangeUsernameAndPassword(ActionEvent event)
 	{
 		doAction(new ActionMenuChangeUserNamePassword(getMainWindow()));
+	}
+	
+	@FXML
+	private void onCreateNewAccount(ActionEvent event)
+	{
+		//TODO: add doAction
+	}
+	
+	@FXML
+	private void onCreateNewBulletin(ActionEvent event)
+	{
+		doAction(new ActionMenuCreateNewBulletin(getMainWindow()));
 	}
 	
 	@FXML
