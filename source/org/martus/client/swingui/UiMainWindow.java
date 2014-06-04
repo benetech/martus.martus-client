@@ -2201,7 +2201,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(uids.length == 0)
 		{
 			notifyDlg(tagZeroBulletinsSelected);
-			return null;
+			return new Vector();
 		}
 		return getBulletins(uids);
 	}
