@@ -941,7 +941,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void folderContentsHaveChanged(BulletinFolder f)
 	{
-		getFolderTreePane().folderContentsHaveChanged(f);
+		UiFolderTreePane folderTreePane = getFolderTreePane();
+		if(folderTreePane != null)
+			folderTreePane.folderContentsHaveChanged(f);
 		UiBulletinTablePane bulletinsTablePane = getBulletinsTablePane();
 		if(bulletinsTablePane == null)
 			return;
@@ -950,7 +952,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void folderTreeContentsHaveChanged()
 	{
-		getFolderTreePane().folderTreeContentsHaveChanged();
+		UiFolderTreePane folderTreePane = getFolderTreePane();
+		if(folderTreePane != null)
+			folderTreePane.folderTreeContentsHaveChanged();
 	}
 
 	public boolean isDiscardedFolderSelected()
@@ -1004,12 +1008,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void selectFolder(BulletinFolder folder)
 	{
-		getFolderTreePane().selectFolder(folder.getName());
+		UiFolderTreePane folderTreePane = getFolderTreePane();
+		if(folderTreePane != null)
+			folderTreePane.selectFolder(folder.getName());
 	}
 
 	public void selectSearchFolder()
 	{
-		getFolderTreePane().selectFolder(getStore().getSearchFolderName());
+		UiFolderTreePane folderTreePane = getFolderTreePane();
+		if(folderTreePane != null)
+			folderTreePane.selectFolder(getStore().getSearchFolderName());
 	}
 
 	public void selectNewCurrentBulletin(int currentPosition)
@@ -1297,9 +1305,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public String getSelectedFolderName()
 	{
-		if(getFolderTreePane() == null)
+		UiFolderTreePane folderTreePane = getFolderTreePane();
+		if(folderTreePane == null)
 			return null;
-		return getFolderTreePane().getSelectedFolderName();
+		return folderTreePane.getSelectedFolderName();
 	}
 
 	public void restoreState()
@@ -1321,7 +1330,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			folder.sortBy(sortTag);
 			if(folder.getSortDirection() != getUiState().getCurrentSortDirection())
 				folder.sortBy(sortTag);
-			getFolderTreePane().selectFolder(folderName);
+			UiFolderTreePane folderTreePane = getFolderTreePane();
+			if(folderTreePane != null)
+				folderTreePane.selectFolder(folderName);
 		}
 		catch(Exception e)
 		{
@@ -1422,8 +1433,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getApp().updateSearchFolder(matchedBulletinsFromSearch);
 		ClientBulletinStore store = getStore();
 		BulletinFolder searchFolder = store.findFolder(store.getSearchFolderName());
-		getFolderTreePane().folderTreeContentsHaveChanged();
-		getFolderTreePane().folderContentsHaveChanged(searchFolder);
+		UiFolderTreePane folderTreePane = getFolderTreePane();
+		if(folderTreePane == null)
+			return;
+		folderTreePane.folderTreeContentsHaveChanged();
+		folderTreePane.folderContentsHaveChanged(searchFolder);
 		int bulletinsFound = searchFolder.getBulletinCount();
 		if(bulletinsFound > 0)
 		{
@@ -2170,10 +2184,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public BulletinFolder getSelectedFolder()
 	{
-		if(getFolderTreePane() == null)
+		UiFolderTreePane folderTreePane = getFolderTreePane();
+		if(folderTreePane == null)
 			return null;
 		
-		return getFolderTreePane().getSelectedFolder();
+		return folderTreePane.getSelectedFolder();
 	}
 
 	
