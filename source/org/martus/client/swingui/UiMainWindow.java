@@ -888,20 +888,32 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void allBulletinsInCurrentFolderHaveChanged()
 	{
-		getBulletinsTable().allBulletinsInCurrentFolderHaveChanged();
+		UiBulletinTablePane bulletinsTable = getBulletinsTable();
+		if(bulletinsTable != null)
+			bulletinsTable.allBulletinsInCurrentFolderHaveChanged();
 	}
 
 	public void bulletinSelectionHasChanged()
 	{
-		Bulletin b = getBulletinsTable().getSingleSelectedBulletin();
+		UiBulletinTablePane bulletinsTable = getBulletinsTable();
+		if(bulletinsTable == null)
+			return;
+		Bulletin b = bulletinsTable.getSingleSelectedBulletin();
+		if(mainPane == null)
+			return;
 		getMainPane().updateEnabledStatuses();
 		getPreviewPane().setCurrentBulletin(b);
 	}
 
 	public void bulletinContentsHaveChanged(Bulletin b)
 	{
-		getBulletinsTable().bulletinContentsHaveChanged(b);
-		getPreviewPane().bulletinContentsHaveChanged(b);
+		UiBulletinTablePane bulletinsTable = getBulletinsTable();
+		if(bulletinsTable == null)
+			return;
+		bulletinsTable.bulletinContentsHaveChanged(b);
+		UiBulletinPreviewPane previewPane = getPreviewPane();
+		if(previewPane != null)
+			previewPane.bulletinContentsHaveChanged(b);
 	}
 	
 	public void allFolderContentsHaveChanged()
@@ -920,14 +932,20 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		setWaitingCursor();
 		if(UiSession.defaultFoldersUnsorted)
 			f.sortBy("");
-		getBulletinsTable().setFolder(f);
+		UiBulletinTablePane bulletinsTable = getBulletinsTable();
+		if(bulletinsTable == null)
+			return;
+		bulletinsTable.setFolder(f);
 		resetCursor();
 	}
 
 	public void folderContentsHaveChanged(BulletinFolder f)
 	{
 		getFolderTreePane().folderContentsHaveChanged(f);
-		getBulletinsTable().folderContentsHaveChanged(f);
+		UiBulletinTablePane bulletinsTable = getBulletinsTable();
+		if(bulletinsTable == null)
+			return;
+		bulletinsTable.folderContentsHaveChanged(f);
 	}
 
 	public void folderTreeContentsHaveChanged()
@@ -945,9 +963,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean isCurrentFolderEmpty()
 	{
-		if(getBulletinsTable() == null)
+		UiBulletinTablePane bulletinsTable = getBulletinsTable();
+		if(bulletinsTable == null)
 			return true;
-		if(getBulletinsTable().getBulletinCount() == 0)
+		if(bulletinsTable.getBulletinCount() == 0)
 			return true;
 		return false;
 	}
@@ -995,10 +1014,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void selectNewCurrentBulletin(int currentPosition)
 	{
+		UiBulletinTablePane bulletinsTable = getBulletinsTable();
+		if(bulletinsTable == null)
+			return;
 		if(currentPosition == -1)
-			getBulletinsTable().selectLastBulletin();
+			bulletinsTable.selectLastBulletin();
 		else
-			getBulletinsTable().setCurrentBulletinIndex(currentPosition);
+			bulletinsTable.setCurrentBulletinIndex(currentPosition);
 	}
 
 	public boolean confirmDlgBeep(String baseTag)
@@ -1231,20 +1253,23 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getApp().saveStateWithoutPrompting();
 		String folderName = getSelectedFolderName();
 		BulletinFolder folder = getStore().findFolder(folderName);
-		getUiState().setCurrentFolder(folderName);
+		CurrentUiState uiState = getUiState();
+		uiState.setCurrentFolder(folderName);
 		getSession().copyLocalizationSettingsToUiState();
 		if(folder != null)
 		{
-			getUiState().setCurrentSortTag(folder.sortedBy());
-			getUiState().setCurrentSortDirection(folder.getSortDirection());
-			getUiState().setCurrentBulletinPosition(getBulletinsTable().getCurrentBulletinIndex());
+			uiState.setCurrentSortTag(folder.sortedBy());
+			uiState.setCurrentSortDirection(folder.getSortDirection());
+			UiBulletinTablePane bulletinsTable = getBulletinsTable();
+			if(bulletinsTable != null)
+				uiState.setCurrentBulletinPosition(bulletinsTable.getCurrentBulletinIndex());
 		}
-		getUiState().setCurrentPreviewSplitterPosition(getPreviewSplitterDividerLocation());
-		getUiState().setCurrentFolderSplitterPosition(getFolderSplitterDividerLocation());
-		getUiState().setCurrentAppDimension(getSize());
-		getUiState().setCurrentAppPosition(getLocation());
+		uiState.setCurrentPreviewSplitterPosition(getPreviewSplitterDividerLocation());
+		uiState.setCurrentFolderSplitterPosition(getFolderSplitterDividerLocation());
+		uiState.setCurrentAppDimension(getSize());
+		uiState.setCurrentAppPosition(getLocation());
 		boolean isMaximized = getExtendedState()==MAXIMIZED_BOTH;
-		getUiState().setCurrentAppMaximized(isMaximized);
+		uiState.setCurrentAppMaximized(isMaximized);
 		saveCurrentUiState();
 	}
 
@@ -1315,14 +1340,24 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		int position = currentFolder.find(id);
 		if(position != -1)
-			getBulletinsTable().setCurrentBulletinIndex(position);
+		{
+			UiBulletinTablePane bulletinsTable = getBulletinsTable();
+			if(bulletinsTable == null)
+				return;
+			bulletinsTable.setCurrentBulletinIndex(position);
+		}
 	}
 
 	public void forceRebuildOfPreview()
 	{
-		getPreviewPane().setCurrentBulletin(null);
-		getBulletinsTable().currentFolderContentsHaveChanged();
-		getBulletinsTable().selectFirstBulletin();
+		UiBulletinPreviewPane previewPane = getPreviewPane();
+		if(previewPane == null)
+			previewPane.setCurrentBulletin(null);
+		UiBulletinTablePane bulletinsTable = getBulletinsTable();
+		if(bulletinsTable == null)
+			return;
+		bulletinsTable.currentFolderContentsHaveChanged();
+		bulletinsTable.selectFirstBulletin();
 	}
 	
 	public void doBackgroundWork(WorkerProgressThread worker, UiProgressWithCancelDlg progressDialog) throws Exception
@@ -1496,7 +1531,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public int getPreviewWidth()
 	{
-		return getPreviewPane().getView().getWidth();
+		UiBulletinPreviewPane previewPane = getPreviewPane();
+		if(previewPane == null)
+			return 0;
+		return previewPane.getView().getWidth();
 	}
 
 	public void respondToPreferencesChanges()
@@ -2141,7 +2179,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public Vector getSelectedBulletins(String tagZeroBulletinsSelected) throws Exception
 	{
-		UniversalId[] uids = getBulletinsTable().getSelectedBulletinUids();
+		UiBulletinTablePane bulletinsTable = getBulletinsTable();
+		if(bulletinsTable == null)
+			return null;
+		UniversalId[] uids = bulletinsTable.getSelectedBulletinUids();
 		if(uids.length == 0)
 		{
 			notifyDlg(tagZeroBulletinsSelected);
@@ -2184,18 +2225,20 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean isAnyBulletinSelected()
 	{
-		if(getBulletinsTable() == null)
+		UiBulletinTablePane bulletinsTable = getBulletinsTable();
+		if(bulletinsTable == null)
 			return false;
 		
-		return (getBulletinsTable().getSelectedBulletinUids().length > 0);
+		return (bulletinsTable.getSelectedBulletinUids().length > 0);
 	}
 
 	public boolean isOnlyOneBulletinSelected()
 	{
-		if(getBulletinsTable() == null)
+		UiBulletinTablePane bulletinsTable = getBulletinsTable();
+		if(bulletinsTable == null)
 			return false;
 		
-		return (getBulletinsTable().getSelectedBulletinUids().length == 1);
+		return (bulletinsTable.getSelectedBulletinUids().length == 1);
 	}
 	
 	static public String getDisplayVersionInfo(MiniLocalization localization)
@@ -2480,6 +2523,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private UiBulletinPreviewPane getPreviewPane()
 	{
+		if(getMainPane() == null)
+			return null;
 		return getMainPane().getPreviewPane();
 	}
 
