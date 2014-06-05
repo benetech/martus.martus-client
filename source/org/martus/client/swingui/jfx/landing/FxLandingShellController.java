@@ -27,18 +27,12 @@ package org.martus.client.swingui.jfx.landing;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ToggleButton;
 
 import javax.swing.SwingUtilities;
 
+import org.martus.client.swingui.actions.*;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionDoer;
-import org.martus.client.swingui.actions.ActionMenuBackupMyKeyPair;
-import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
-import org.martus.client.swingui.actions.ActionMenuContactInfo;
-import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
-import org.martus.client.swingui.actions.ActionMenuManageContacts;
-import org.martus.client.swingui.actions.ActionMenuPreferences;
-import org.martus.client.swingui.actions.ActionMenuSelectServer;
 import org.martus.client.swingui.jfx.FxContentController;
 import org.martus.client.swingui.jfx.FxInSwingFrameController;
 
@@ -58,7 +52,13 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@Override
 	public void setContentPane(FxContentController contentController) throws Exception
 	{
-		
+		updateTorStatus();
+	}
+
+	private void updateTorStatus()
+	{
+		boolean useInternalTor = getApp().getConfigInfo().useInternalTor();
+		toggleButtonTor.setSelected(useInternalTor);
 	}
 
 	@FXML
@@ -96,6 +96,15 @@ public class FxLandingShellController extends FxInSwingFrameController
 	{
 		doAction(new ActionMenuCreateNewBulletin(getMainWindow()));
 	}
+	
+	@FXML
+	private void onTor(ActionEvent event)
+	{
+		//TODO toggle TOR on/off
+		updateTorStatus();
+		doAction(new ActionMenuStopStartTor(getMainWindow()));
+	}
+	
 	
 	@FXML
 	private void onContactInformation(ActionEvent event)
@@ -136,5 +145,8 @@ public class FxLandingShellController extends FxInSwingFrameController
 			getMainWindow().unexpectedErrorDlg();
 		}
 	}
+
+	@FXML
+	protected ToggleButton toggleButtonTor;
 
 }
