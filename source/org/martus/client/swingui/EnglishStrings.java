@@ -455,6 +455,8 @@ public class EnglishStrings
 "button:ShowGridNormal=Show as Grid",
 
 "button:IncludePrivateBulletins=Include Private Data",
+"button:SettingOn=On",
+"button:SettingOff=Off",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
