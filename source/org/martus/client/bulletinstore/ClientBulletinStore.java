@@ -1458,6 +1458,14 @@ public class ClientBulletinStore extends BulletinStore
 		return createEmptyBulletin(getTopSectionFieldSpecs(), getBottomSectionFieldSpecs());
 	}
 	
+	public Bulletin createEmptyBulletin(Bulletin.BulletinType bulletinType) throws Exception
+	{
+		MartusCrypto accountSecurity = getSignatureGenerator();
+		UniversalId bhpId = BulletinHeaderPacket.createUniversalId(accountSecurity, bulletinType);
+		Bulletin b = new Bulletin(getSignatureGenerator(), bhpId, getTopSectionFieldSpecs(), getBottomSectionFieldSpecs());
+		return b;
+	}
+
 	public Bulletin createEmptyBulletin(FieldSpecCollection topSectionSpecs, FieldSpecCollection bottomSectionSpecs) throws Exception
 	{
 		Bulletin b = new Bulletin(getSignatureGenerator(), topSectionSpecs, bottomSectionSpecs);
