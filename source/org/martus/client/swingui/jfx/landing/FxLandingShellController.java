@@ -31,7 +31,9 @@ import javafx.scene.control.ToggleButton;
 
 import javax.swing.SwingUtilities;
 
+import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.actions.*;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxContentController;
 import org.martus.client.swingui.jfx.FxInSwingFrameController;
@@ -59,6 +61,15 @@ public class FxLandingShellController extends FxInSwingFrameController
 	{
 		boolean useInternalTor = getApp().getConfigInfo().useInternalTor();
 		toggleButtonTor.setSelected(useInternalTor);
+		MartusLocalization localization = getMainWindow().getLocalization();
+		if(useInternalTor)
+		{
+			toggleButtonTor.setText(localization.getButtonLabel("SettingOn"));
+		}
+		else
+		{
+			toggleButtonTor.setText(localization.getButtonLabel("SettingOff"));
+		}
 	}
 
 	@FXML
@@ -100,11 +111,20 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@FXML
 	private void onTor(ActionEvent event)
 	{
-		//TODO toggle TOR on/off
-		updateTorStatus();
+		toggleTorStatus();
 		doAction(new ActionMenuStopStartTor(getMainWindow()));
 	}
-	
+
+	private void toggleTorStatus()
+	{
+		ConfigInfo configInfo = getApp().getConfigInfo();
+		boolean previouslyUsingTor = configInfo.useInternalTor();
+		boolean currentlyUsingTor = !previouslyUsingTor;
+		configInfo.setUseInternalTor(currentlyUsingTor);
+		getMainWindow().saveConfigInfo();
+		toggleButtonTor.setSelected(currentlyUsingTor);
+		updateTorStatus();
+	}	
 	
 	@FXML
 	private void onContactInformation(ActionEvent event)
