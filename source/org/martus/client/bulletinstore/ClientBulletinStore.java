@@ -1460,9 +1460,7 @@ public class ClientBulletinStore extends BulletinStore
 	
 	public Bulletin createEmptyBulletin(Bulletin.BulletinType bulletinType) throws Exception
 	{
-		MartusCrypto accountSecurity = getSignatureGenerator();
-		UniversalId bhpId = BulletinHeaderPacket.createUniversalId(accountSecurity, bulletinType);
-		Bulletin b = new Bulletin(getSignatureGenerator(), bhpId, getTopSectionFieldSpecs(), getBottomSectionFieldSpecs());
+		Bulletin b = new Bulletin(getSignatureGenerator(), bulletinType, getTopSectionFieldSpecs(), getBottomSectionFieldSpecs());
 		return b;
 	}
 
