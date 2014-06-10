@@ -25,33 +25,28 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.fxml.Initializable;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxContentController;
-import org.martus.client.swingui.jfx.FxInSwingFrameStage;
-import org.martus.client.swingui.jfx.FxScene;
 
-public class FxMainStage extends FxInSwingFrameStage
+public abstract class AbstractFxLandingContentController
+		extends FxContentController implements Initializable
 {
-	public FxMainStage(UiMainWindow mainWindowToUse)
+	public AbstractFxLandingContentController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+	}
+	
+	abstract public void initializeMainContentPane();
+
+	final public void initialize(URL arg0, ResourceBundle arg1)
+	{
+		super.initialize(arg0, arg1);
+		initializeMainContentPane();
+	}
 		
-		setShellController(new FxLandingShellController(getMainWindow()));
-		setCurrentController(new ViewItemsController(getMainWindow()));
-	}
-
-	@Override
-	public void showCurrentScene() throws Exception
-	{
-		FxContentController contentPaneController = getCurrentController();
-
-		showCurrentPage(contentPaneController);
-	}
-
-	@Override
-	protected FxScene createScene() throws Exception
-	{
-		return new FxScene(getExternalFxmlDirectory(), "Landing.css");
-	}
-
 }
