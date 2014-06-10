@@ -27,14 +27,24 @@ package org.martus.client.swingui.jfx.landing;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.AnchorPane;
 
 import javax.swing.SwingUtilities;
 
 import org.martus.client.core.ConfigInfo;
-import org.martus.client.swingui.actions.*;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
+import org.martus.client.swingui.actions.ActionMenuBackupMyKeyPair;
+import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
+import org.martus.client.swingui.actions.ActionMenuContactInfo;
+import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
+import org.martus.client.swingui.actions.ActionMenuManageContacts;
+import org.martus.client.swingui.actions.ActionMenuPreferences;
+import org.martus.client.swingui.actions.ActionMenuSelectServer;
+import org.martus.client.swingui.actions.ActionMenuStopStartTor;
 import org.martus.client.swingui.jfx.FxContentController;
 import org.martus.client.swingui.jfx.FxInSwingFrameController;
 
@@ -55,6 +65,8 @@ public class FxLandingShellController extends FxInSwingFrameController
 	public void setContentPane(FxContentController contentController) throws Exception
 	{
 		updateTorStatus();
+		Parent createContents = contentController.createContents();
+		mainContentPane.getChildren().addAll(createContents);
 	}
 
 	private void updateTorStatus()
@@ -168,5 +180,8 @@ public class FxLandingShellController extends FxInSwingFrameController
 
 	@FXML
 	protected ToggleButton toggleButtonTor;
+	
+	@FXML
+	protected AnchorPane mainContentPane;
 
 }
