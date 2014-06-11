@@ -23,28 +23,35 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.landing;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import org.martus.common.bulletin.Bulletin;
+import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.util.TestCaseEnhanced;
 
-import org.martus.client.swingui.UiMainWindow;
-
-public abstract class FxShellController extends FxController
+public class TestBulletinTableData extends TestCaseEnhanced
 {
-	public FxShellController(UiMainWindow mainWindowToUse)
+
+	public TestBulletinTableData(String name)
 	{
-		super(mainWindowToUse);
-	}
-	
-	@Override
-	public void initialize(URL location, ResourceBundle bundle)
-	{
-		initializeMainContentPane();
+		super(name);
 	}
 
-	abstract public void initializeMainContentPane();
-	abstract public FxInSwingStage getStage();
-	abstract public void setStage(FxInSwingStage stageToUse);
-	abstract public void setContentPane(FxContentController contentController) throws Exception;
+	public void testBasics() throws Exception
+	{
+		String title = "My Title";
+		String author = "Goofy";
+		String lastSavedDate = "Today";
+		boolean onServer = true;
+		MockMartusSecurity security = new MockMartusSecurity();
+		Bulletin b = new Bulletin(security);
+		b.set(Bulletin.TAGTITLE, title);
+		b.set(Bulletin.TAGAUTHOR, author);
+		b.set(Bulletin.TAGLASTSAVED, lastSavedDate);
+		BulletinTableData data = new BulletinTableData(b);
+		assertEquals(title, data.getTitle());
+		assertEquals(author, data.getAuthor());
+		assertEquals(lastSavedDate, data.getDateSaved());
+		assertEquals(onServer, data.isServer());
+	}
 }

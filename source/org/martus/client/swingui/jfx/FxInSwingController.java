@@ -48,6 +48,11 @@ public abstract class FxInSwingController extends FxShellController
 
 	abstract public void installGlassPane(Component glassPane);
 
+	@Override
+	public void initializeMainContentPane()
+	{
+	}
+
 	public FxInSwingStage getStage()
 	{
 		return stage;

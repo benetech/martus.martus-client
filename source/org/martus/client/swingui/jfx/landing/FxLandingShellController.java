@@ -25,6 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -60,11 +63,16 @@ public class FxLandingShellController extends FxInSwingFrameController
 	{
 		return "landing/LandingShell.fxml";
 	}
+	
+	@Override
+	public void initializeMainContentPane()
+	{
+		updateTorStatus();
+	}
 
 	@Override
 	public void setContentPane(FxContentController contentController) throws Exception
 	{
-		updateTorStatus();
 		Parent createContents = contentController.createContents();
 		mainContentPane.getChildren().addAll(createContents);
 	}
