@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.util.TestCaseEnhanced;
@@ -41,17 +42,18 @@ public class TestBulletinTableData extends TestCaseEnhanced
 	{
 		String title = "My Title";
 		String author = "Goofy";
-		String lastSavedDate = "Today";
 		boolean onServer = true;
 		MockMartusSecurity security = new MockMartusSecurity();
+		MiniLocalization localization = new MiniLocalization();
 		Bulletin b = new Bulletin(security);
 		b.set(Bulletin.TAGTITLE, title);
 		b.set(Bulletin.TAGAUTHOR, author);
-		b.set(Bulletin.TAGLASTSAVED, lastSavedDate);
-		BulletinTableData data = new BulletinTableData(b);
+		b.getBulletinHeaderPacket().updateLastSavedTime();
+		BulletinTableData data = new BulletinTableData(b, onServer, localization);
 		assertEquals(title, data.getTitle());
 		assertEquals(author, data.getAuthor());
-		assertEquals(lastSavedDate, data.getDateSaved());
-		assertEquals(onServer, data.isServer());
+		long lastSavedTime = b.getBulletinHeaderPacket().getLastSavedTime();
+		assertEquals(localization.formatDateTime(lastSavedTime), data.getDateSaved());
+		assertEquals(onServer, data.isOnServer());
 	}
 }

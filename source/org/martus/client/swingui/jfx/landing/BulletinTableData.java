@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 
 import javafx.beans.property.SimpleBooleanProperty;
@@ -32,12 +33,13 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class BulletinTableData
 {
-	public BulletinTableData(Bulletin bulletin)
+	public BulletinTableData(Bulletin bulletin, boolean onServer, MiniLocalization localization)
 	{
 		title = new SimpleStringProperty(bulletin.get(Bulletin.TAGTITLE));
 		author = new SimpleStringProperty(bulletin.get(Bulletin.TAGAUTHOR));
-		dateSaved = new SimpleStringProperty(bulletin.get(Bulletin.TAGLASTSAVED));
-		onServer = new SimpleBooleanProperty(false);
+		long dateLastSaved = bulletin.getBulletinHeaderPacket().getLastSavedTime();
+		dateSaved = new SimpleStringProperty(localization.formatDateTime(dateLastSaved));
+		this.onServer = new SimpleBooleanProperty(onServer);
 	}
 	
 	public String getTitle()
@@ -70,7 +72,7 @@ public class BulletinTableData
         return dateSaved; 
     }
 
-	public boolean isServer()
+	public boolean isOnServer()
 	{
 		return onServer.get();
 	}
