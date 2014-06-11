@@ -25,7 +25,19 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.MartusLogger;
+import org.martus.common.bulletin.Bulletin;
 
 public class ViewItemsController extends AbstractFxLandingContentController
 {
@@ -38,6 +50,44 @@ public class ViewItemsController extends AbstractFxLandingContentController
 	@Override
 	public void initializeMainContentPane()
 	{
+		onServerColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableData, Boolean>("onServer"));
+		onServerColumn.setCellFactory(CheckBoxTableCell.<BulletinTableData>forTableColumn(onServerColumn));
+		authorColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("author"));
+		authorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		titleColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("title"));
+		titleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		dateSavedColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("dateSaved"));
+		dateSavedColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		itemsTable.setItems(data);
+		loadBulletinData();
+
+		Label noBulletins = new Label(getLocalization().getFieldLabel("NoBulletinsInTable"));
+		itemsTable.setPlaceholder(noBulletins);
+	}
+
+	private void loadBulletinData()
+	{
+		data.clear();
+		try
+		{
+			//TODO Use Real Bulletins
+			Bulletin test = new Bulletin(getApp().getSecurity());
+			test.set(Bulletin.TAGTITLE, "Foosball just a game?");
+			test.set(Bulletin.TAGAUTHOR, "Chuck");
+			test.getBulletinHeaderPacket().updateLastSavedTime();
+			BulletinTableData bulletinData = new BulletinTableData(test, true, getLocalization()); 
+			data.add(bulletinData);
+			test.set(Bulletin.TAGTITLE, "How to score with your goalie");
+			test.set(Bulletin.TAGAUTHOR, "Charles");
+			test.getBulletinHeaderPacket().updateLastSavedTime();
+			BulletinTableData bulletinData2 = new BulletinTableData(test, false, getLocalization()); 
+			data.add(bulletinData2);
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+		
 	}
 
 	@Override
@@ -46,5 +96,21 @@ public class ViewItemsController extends AbstractFxLandingContentController
 		return "landing/FxTableViewItems.fxml";
 	}
 
+	@FXML 
+	protected TableView<BulletinTableData> itemsTable;
 
+	@FXML
+	protected TableColumn<BulletinTableData, Boolean> onServerColumn;
+
+	@FXML
+	protected TableColumn<Object, String> authorColumn;
+
+	@FXML
+	protected TableColumn<Object, String> titleColumn;
+
+	@FXML
+	protected TableColumn<Object, String> dateSavedColumn;	
+
+	protected ObservableList<BulletinTableData> data = FXCollections.observableArrayList();
+	
 }
