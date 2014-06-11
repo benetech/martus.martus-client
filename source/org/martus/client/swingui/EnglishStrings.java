@@ -1345,6 +1345,7 @@ public class EnglishStrings
 "field:DefaultServerHeading=Default Server",
 "field:AdvanceServerSetupHeading=Advanced Server Setup",
 "field:NoContactsInTable=No Contacts.",
+"field:NoBulletinsInTable=No Bulletins.",
 "button:ChooseDefaultServer=Use Default Server",
 "field:ServerNameEntry=IP Address:",
 "field:ServerNameEntryInformation=enter your server's IP address",

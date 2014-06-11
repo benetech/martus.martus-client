@@ -4,14 +4,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <content>
-      <TableView fx:id="itemsTable" prefHeight="398.0" prefWidth="598.0">
+      <TableView fx:id="itemsTable" prefHeight="398.0" prefWidth="675.0">
         <columns>
           <TableColumn fx:id="onServerColumn" editable="false" prefWidth="87.0" text="On Server" />
             <TableColumn fx:id="authorColumn" editable="false" prefWidth="123.0" text="Author" />
           <TableColumn fx:id="titleColumn" editable="false" prefWidth="284.0" text="Title" />
-            <TableColumn fx:id="dateSavedColumn" editable="false" prefWidth="102.0" text="Date Saved" />
+            <TableColumn fx:id="dateSavedColumn" editable="false" prefWidth="180.0" text="Date Saved" />
         </columns>
       </TableView>
    </content>
