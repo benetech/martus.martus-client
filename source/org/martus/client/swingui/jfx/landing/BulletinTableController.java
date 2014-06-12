@@ -33,6 +33,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -47,7 +48,6 @@ import org.martus.common.packet.UniversalId;
 
 public class BulletinTableController extends AbstractFxLandingContentController
 {
-
 	public BulletinTableController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
@@ -58,13 +58,16 @@ public class BulletinTableController extends AbstractFxLandingContentController
 	{
 		onServerColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableData, Boolean>(BulletinTableData.ON_SERVER_PROPERTY_NAME));
 		onServerColumn.setCellFactory(CheckBoxTableCell.<BulletinTableData>forTableColumn(onServerColumn));
-		authorColumn.setCellValueFactory(new PropertyValueFactory<Object, String>(BulletinTableData.AUTHOR_PROPERTY_NAME));
-		authorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-		titleColumn.setCellValueFactory(new PropertyValueFactory<Object, String>(BulletinTableData.TITLE_PROPERTY_NAME));
-		titleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-		dateSavedColumn.setCellValueFactory(new PropertyValueFactory<Object, String>(BulletinTableData.DATE_SAVDED_PROPERTY_NAME));
-		dateSavedColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		authorColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableData, String>(BulletinTableData.AUTHOR_PROPERTY_NAME));
+		authorColumn.setCellFactory(TextFieldTableCell.<BulletinTableData>forTableColumn());
+		titleColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableData, String>(BulletinTableData.TITLE_PROPERTY_NAME));
+		titleColumn.setCellFactory(TextFieldTableCell.<BulletinTableData>forTableColumn());
+		dateSavedColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableData, String>(BulletinTableData.DATE_SAVDED_PROPERTY_NAME));
+		dateSavedColumn.setCellFactory(TextFieldTableCell.<BulletinTableData>forTableColumn());
 		itemsTable.setItems(data);
+		
+		Label noBulletins = new Label(getLocalization().getFieldLabel("NoBulletinsInTable"));
+		itemsTable.setPlaceholder(noBulletins);
 		try
 		{
 			loadBulletinData();
@@ -74,9 +77,12 @@ public class BulletinTableController extends AbstractFxLandingContentController
 			MartusLogger.logException(e);
 			throw new RuntimeException();
 		}
+	}
 
-		Label noBulletins = new Label(getLocalization().getFieldLabel("NoBulletinsInTable"));
-		itemsTable.setPlaceholder(noBulletins);
+	private void sortByMostRecentBulletins()
+	{
+		dateSavedColumn.setSortType(SortType.DESCENDING);
+		itemsTable.getSortOrder().add(dateSavedColumn);
 	}
 
 	private void loadBulletinData() throws Exception
@@ -93,9 +99,9 @@ public class BulletinTableController extends AbstractFxLandingContentController
 			BulletinTableData bulletinData = new BulletinTableData(bulletin, onServer, localization);
 			data.add(bulletinData);		
 		}
-		
+		sortByMostRecentBulletins();
 	}
-
+	
 	@Override
 	public String getFxmlLocation()
 	{
@@ -109,13 +115,13 @@ public class BulletinTableController extends AbstractFxLandingContentController
 	protected TableColumn<BulletinTableData, Boolean> onServerColumn;
 
 	@FXML
-	protected TableColumn<Object, String> authorColumn;
+	protected TableColumn<BulletinTableData, String> authorColumn;
 
 	@FXML
-	protected TableColumn<Object, String> titleColumn;
+	protected TableColumn<BulletinTableData, String> titleColumn;
 
 	@FXML
-	protected TableColumn<Object, String> dateSavedColumn;	
+	protected TableColumn<BulletinTableData, String> dateSavedColumn;	
 
 	protected ObservableList<BulletinTableData> data = FXCollections.observableArrayList();
 	
