@@ -33,8 +33,6 @@ import javafx.scene.layout.AnchorPane;
 
 import javax.swing.SwingUtilities;
 
-import org.martus.client.core.ConfigInfo;
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.actions.ActionMenuBackupMyKeyPair;

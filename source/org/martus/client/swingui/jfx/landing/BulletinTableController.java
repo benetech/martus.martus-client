@@ -39,10 +39,10 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 
-public class ViewItemsController extends AbstractFxLandingContentController
+public class BulletinTableController extends AbstractFxLandingContentController
 {
 
-	public ViewItemsController(UiMainWindow mainWindowToUse)
+	public BulletinTableController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
@@ -59,35 +59,35 @@ public class ViewItemsController extends AbstractFxLandingContentController
 		dateSavedColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("dateSaved"));
 		dateSavedColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		itemsTable.setItems(data);
-		loadBulletinData();
+		try
+		{
+			loadBulletinData();
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			throw new RuntimeException();
+		}
 
 		Label noBulletins = new Label(getLocalization().getFieldLabel("NoBulletinsInTable"));
 		itemsTable.setPlaceholder(noBulletins);
 	}
 
-	private void loadBulletinData()
+	private void loadBulletinData() throws Exception
 	{
 		data.clear();
-		try
-		{
-			//TODO Use Real Bulletins
-			Bulletin test = new Bulletin(getApp().getSecurity());
-			test.set(Bulletin.TAGTITLE, "Foosball just a game?");
-			test.set(Bulletin.TAGAUTHOR, "Chuck");
-			test.getBulletinHeaderPacket().updateLastSavedTime();
-			BulletinTableData bulletinData = new BulletinTableData(test, true, getLocalization()); 
-			data.add(bulletinData);
-			test.set(Bulletin.TAGTITLE, "How to score with your goalie");
-			test.set(Bulletin.TAGAUTHOR, "Charles");
-			test.getBulletinHeaderPacket().updateLastSavedTime();
-			BulletinTableData bulletinData2 = new BulletinTableData(test, false, getLocalization()); 
-			data.add(bulletinData2);
-		} 
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-		}
-		
+		//TODO Use Real Bulletins
+		Bulletin test = new Bulletin(getApp().getSecurity());
+		test.set(Bulletin.TAGTITLE, "Foosball just a game?");
+		test.set(Bulletin.TAGAUTHOR, "Chuck");
+		test.getBulletinHeaderPacket().updateLastSavedTime();
+		BulletinTableData bulletinData = new BulletinTableData(test, true, getLocalization()); 
+		data.add(bulletinData);
+		test.set(Bulletin.TAGTITLE, "How to score with your goalie");
+		test.set(Bulletin.TAGAUTHOR, "Charles");
+		test.getBulletinHeaderPacket().updateLastSavedTime();
+		BulletinTableData bulletinData2 = new BulletinTableData(test, false, getLocalization()); 
+		data.add(bulletinData2);
 	}
 
 	@Override
