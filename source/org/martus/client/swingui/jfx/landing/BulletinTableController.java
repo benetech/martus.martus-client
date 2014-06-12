@@ -25,6 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -35,9 +38,12 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.packet.UniversalId;
 
 public class BulletinTableController extends AbstractFxLandingContentController
 {
@@ -76,18 +82,18 @@ public class BulletinTableController extends AbstractFxLandingContentController
 	private void loadBulletinData() throws Exception
 	{
 		data.clear();
-		//TODO Use Real Bulletins
-		Bulletin test = new Bulletin(getApp().getSecurity());
-		test.set(Bulletin.TAGTITLE, "Foosball just a game?");
-		test.set(Bulletin.TAGAUTHOR, "Chuck");
-		test.getBulletinHeaderPacket().updateLastSavedTime();
-		BulletinTableData bulletinData = new BulletinTableData(test, true, getLocalization()); 
-		data.add(bulletinData);
-		test.set(Bulletin.TAGTITLE, "How to score with your goalie");
-		test.set(Bulletin.TAGAUTHOR, "Charles");
-		test.getBulletinHeaderPacket().updateLastSavedTime();
-		BulletinTableData bulletinData2 = new BulletinTableData(test, false, getLocalization()); 
-		data.add(bulletinData2);
+		ClientBulletinStore clientBulletinStore = getApp().getStore();
+		Set allBulletinUids = clientBulletinStore.getAllBulletinLeafUids();
+		MiniLocalization localization = getLocalization();
+		for(Iterator iter = allBulletinUids.iterator(); iter.hasNext();)
+		{
+			UniversalId leafBulletinUid = (UniversalId) iter.next();
+			Bulletin bulletin = clientBulletinStore.getBulletinRevision(leafBulletinUid);
+			boolean onServer = clientBulletinStore.isProbablyOnServer(leafBulletinUid);
+			BulletinTableData bulletinData = new BulletinTableData(bulletin, onServer, localization);
+			data.add(bulletinData);		
+		}
+		
 	}
 
 	@Override
