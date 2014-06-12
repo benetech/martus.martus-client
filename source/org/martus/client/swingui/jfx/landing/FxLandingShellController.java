@@ -76,17 +76,6 @@ public class FxLandingShellController extends FxInSwingFrameController
 
 	private void updateTorStatus()
 	{
-		boolean useInternalTor = getApp().getConfigInfo().useInternalTor();
-		toggleButtonTor.setSelected(useInternalTor);
-		MartusLocalization localization = getMainWindow().getLocalization();
-		if(useInternalTor)
-		{
-			toggleButtonTor.setText(localization.getButtonLabel("SettingOn"));
-		}
-		else
-		{
-			toggleButtonTor.setText(localization.getButtonLabel("SettingOff"));
-		}
 	}
 
 	@FXML
@@ -134,13 +123,6 @@ public class FxLandingShellController extends FxInSwingFrameController
 
 	private void toggleTorStatus()
 	{
-		ConfigInfo configInfo = getApp().getConfigInfo();
-		boolean previouslyUsingTor = configInfo.useInternalTor();
-		boolean currentlyUsingTor = !previouslyUsingTor;
-		configInfo.setUseInternalTor(currentlyUsingTor);
-		getMainWindow().saveConfigInfo();
-		toggleButtonTor.setSelected(currentlyUsingTor);
-		updateTorStatus();
 	}	
 	
 	@FXML
