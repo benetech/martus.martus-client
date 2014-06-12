@@ -50,13 +50,13 @@ public class BulletinTableController extends AbstractFxLandingContentController
 	@Override
 	public void initializeMainContentPane()
 	{
-		onServerColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableData, Boolean>("onServer"));
+		onServerColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableData, Boolean>(BulletinTableData.ON_SERVER_PROPERTY_NAME));
 		onServerColumn.setCellFactory(CheckBoxTableCell.<BulletinTableData>forTableColumn(onServerColumn));
-		authorColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("author"));
+		authorColumn.setCellValueFactory(new PropertyValueFactory<Object, String>(BulletinTableData.AUTHOR_PROPERTY_NAME));
 		authorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-		titleColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("title"));
+		titleColumn.setCellValueFactory(new PropertyValueFactory<Object, String>(BulletinTableData.TITLE_PROPERTY_NAME));
 		titleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-		dateSavedColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("dateSaved"));
+		dateSavedColumn.setCellValueFactory(new PropertyValueFactory<Object, String>(BulletinTableData.DATE_SAVDED_PROPERTY_NAME));
 		dateSavedColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		itemsTable.setItems(data);
 		try
