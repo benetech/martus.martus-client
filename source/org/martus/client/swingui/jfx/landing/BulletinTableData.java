@@ -82,6 +82,12 @@ public class BulletinTableData
     		return onServer;
     }
 
+    
+    static public final String TITLE_PROPERTY_NAME = "title";
+    static public final String AUTHOR_PROPERTY_NAME = "author";
+    static public final String DATE_SAVDED_PROPERTY_NAME = "dateSaved";
+    static public final String ON_SERVER_PROPERTY_NAME = "onServer";
+    
     private final SimpleStringProperty title;
 	private final SimpleStringProperty author;
 	private final SimpleStringProperty dateSaved;
