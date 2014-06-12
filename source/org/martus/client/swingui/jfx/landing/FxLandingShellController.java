@@ -117,14 +117,9 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@FXML
 	private void onTor(ActionEvent event)
 	{
-		toggleTorStatus();
 		doAction(new ActionMenuStopStartTor(getMainWindow()));
 	}
 
-	private void toggleTorStatus()
-	{
-	}	
-	
 	@FXML
 	private void onContactInformation(ActionEvent event)
 	{
