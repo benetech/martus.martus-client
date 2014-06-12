@@ -44,8 +44,6 @@ public class ContactsTableData
 		contactName = new SimpleStringProperty(getDisplayableContactName(contact));
 		publicCode = new SimpleStringProperty(contact.getFormattedPublicCode40());
 		sendToByDefault = new SimpleBooleanProperty(contact.getSendToByDefault());
-		canSendTo = new SimpleBooleanProperty(contact.getCanSendTo());
-		canReceiveFrom = new SimpleBooleanProperty(contact.getCanReceiveFrom());
 		verificationStatus = new SimpleIntegerProperty(contact.getVerificationStatus());
 		removeContact = new SimpleStringProperty("X");
 	}
@@ -91,12 +89,12 @@ public class ContactsTableData
         return contactName; 
     }
 
-    public String getDeleteContact()
+    public String getRemoveContact()
 	{
 		return removeContact.get();
 	}
 	
-	public void setDeleteContact(String removeContactToUse)
+	public void setRemoveContact(String removeContactToUse)
 	{
 		removeContact.set(removeContactToUse);
 	}
@@ -120,36 +118,6 @@ public class ContactsTableData
 		return verificationStatus.get();
 	}
 	
-	public boolean getCanSendTo()
-	{
-		return canSendTo.get();
-	}
-	
-	public void setCanSendTo(boolean canSendToToUse)
-	{
-		canSendTo.set(canSendToToUse);
-	}
-	
-	public boolean getCanReceiveFrom()
-	{
-		return canReceiveFrom.get();
-	}
-	
-	public void setCanReceiveFrom(boolean canReceiveFromToUse)
-	{
-		canReceiveFrom.set(canReceiveFromToUse);
-	}
-	
-    public SimpleBooleanProperty canSendToProperty() 
-    {
-    		return canSendTo;
-    }
-	
-    public SimpleBooleanProperty canReceiveFromProperty() 
-    {
-    		return canReceiveFrom;
-    }
-
 	public boolean getSendToByDefault()
 	{
 		return sendToByDefault.get();
@@ -165,11 +133,15 @@ public class ContactsTableData
 		return sendToByDefault;
 	}
 
+	public static final String CONTACT_NAME_PROPERTY_NAME = "contactName";
+	public static final String PUBLIC_CODE_PROPERTY_NAME = "publicCode";
+	public static final String SEND_TO_BY_DEFAULT_PROPERTY_NAME = "sendToByDefault";
+	public static final String REMOVE_CONTACT_PROPERTY_NAME = "removeContact"; //THIS LOOKS WRONG
+	public static final String VERIFICATION_STATUS_PROPERTY_NAME = "verificationStatus";
+
 	private final SimpleStringProperty contactName;
 	private final SimpleStringProperty publicCode;
 	private final SimpleBooleanProperty sendToByDefault;
-	private final SimpleBooleanProperty canSendTo;
-	private final SimpleBooleanProperty canReceiveFrom;
 	private final SimpleStringProperty removeContact;
 	private final SimpleIntegerProperty verificationStatus;
 

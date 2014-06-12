@@ -91,20 +91,20 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		//TODO remove this and figure out a better solution in FXML
 		contactsVbox.setMaxWidth(MAX_TABLE_WIDTH_IN_WIZARD);
 		
-		contactNameColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("contactName"));
+		contactNameColumn.setCellValueFactory(new PropertyValueFactory<Object, String>(ContactsTableData.CONTACT_NAME_PROPERTY_NAME));
 		contactNameColumn.setCellFactory(new FxTableCellTextFieldFactory());
 
 		publicCodeColumn.setEditable(false);
-		publicCodeColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("publicCode"));
+		publicCodeColumn.setCellValueFactory(new PropertyValueFactory<Object, String>(ContactsTableData.PUBLIC_CODE_PROPERTY_NAME));
 	    publicCodeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
-		sendToByDefaultColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>("sendToByDefault"));
+		sendToByDefaultColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, Boolean>(ContactsTableData.SEND_TO_BY_DEFAULT_PROPERTY_NAME));
 		sendToByDefaultColumn.setCellFactory(CheckBoxTableCell.<ContactsTableData>forTableColumn(sendToByDefaultColumn));
 
-		verificationStatusColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("verificationStatus"));
+		verificationStatusColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>(ContactsTableData.VERIFICATION_STATUS_PROPERTY_NAME));
 		verificationStatusColumn.setCellFactory(new TableColumnVerifyContactCellFactory(getLocalization()));
 
-		removeContactColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>("deleteContact")); 
+		removeContactColumn.setCellValueFactory(new PropertyValueFactory<ContactsTableData, String>(ContactsTableData.REMOVE_CONTACT_PROPERTY_NAME)); 
 	    removeContactColumn.setCellFactory(new TableColumnRemoveButtonCellFactory(getLocalization()));
 
 	    sendToByDefaultColumn.setVisible(false);
