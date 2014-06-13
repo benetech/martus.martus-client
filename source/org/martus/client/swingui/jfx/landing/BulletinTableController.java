@@ -30,6 +30,7 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -38,6 +39,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
@@ -48,6 +51,7 @@ import org.martus.common.packet.UniversalId;
 
 public class BulletinTableController extends AbstractFxLandingContentController
 {
+
 	public BulletinTableController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
@@ -64,10 +68,11 @@ public class BulletinTableController extends AbstractFxLandingContentController
 		titleColumn.setCellFactory(TextFieldTableCell.<BulletinTableData>forTableColumn());
 		dateSavedColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableData, String>(BulletinTableData.DATE_SAVDED_PROPERTY_NAME));
 		dateSavedColumn.setCellFactory(TextFieldTableCell.<BulletinTableData>forTableColumn());
-		itemsTable.setItems(data);
-		
+
 		Label noBulletins = new Label(getLocalization().getFieldLabel("NoBulletinsInTable"));
 		itemsTable.setPlaceholder(noBulletins);
+		itemsTable.setItems(data);
+		itemsTable.setOnMouseClicked(new TableMouseEventHandler());		
 		try
 		{
 			loadBulletinData();
@@ -102,12 +107,40 @@ public class BulletinTableController extends AbstractFxLandingContentController
 		sortByMostRecentBulletins();
 	}
 	
+	protected void editBulletin()
+	{
+		BulletinTableData selectedBulletinData = itemsTable.getSelectionModel().getSelectedItem();
+		UniversalId bulletinUid = selectedBulletinData.getUniversalId();
+		MartusLogger.log(bulletinUid.getLocalId().toString());
+	}
+	
+	private final class TableMouseEventHandler implements EventHandler<MouseEvent>
+	{
+		private static final int MOUSE_DOUBLE_CLICK = 2;
+
+		public TableMouseEventHandler()
+		{
+		}
+
+		@Override
+		public void handle(MouseEvent mouseEvent) 
+		{
+		    if(mouseEvent.getButton().equals(MouseButton.PRIMARY))
+		    {
+		    		if(mouseEvent.getClickCount() == MOUSE_DOUBLE_CLICK)
+		        {
+		            editBulletin();
+		        }
+		    }
+		}
+	}
+
 	@Override
 	public String getFxmlLocation()
 	{
 		return "landing/FxTableViewItems.fxml";
 	}
-
+	
 	@FXML 
 	protected TableView<BulletinTableData> itemsTable;
 
