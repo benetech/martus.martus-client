@@ -94,18 +94,24 @@ public class BulletinTableController extends AbstractFxLandingContentController
 	private void loadBulletinData() throws Exception
 	{
 		data.clear();
-		ClientBulletinStore clientBulletinStore = getApp().getStore();
-		Set allBulletinUids = clientBulletinStore.getAllBulletinLeafUids();
-		MiniLocalization localization = getLocalization();
+		Set allBulletinUids = getApp().getStore().getAllBulletinLeafUids();
 		for(Iterator iter = allBulletinUids.iterator(); iter.hasNext();)
 		{
 			UniversalId leafBulletinUid = (UniversalId) iter.next();
-			Bulletin bulletin = clientBulletinStore.getBulletinRevision(leafBulletinUid);
-			boolean onServer = clientBulletinStore.isProbablyOnServer(leafBulletinUid);
-			BulletinTableData bulletinData = new BulletinTableData(bulletin, onServer, localization);
+			BulletinTableData bulletinData = getUpdatedBulletinData(leafBulletinUid);
 			data.add(bulletinData);		
 		}
 		sortByMostRecentBulletins();
+	}
+
+	private BulletinTableData getUpdatedBulletinData(UniversalId leafBulletinUid)
+	{
+		ClientBulletinStore clientBulletinStore = getApp().getStore();
+		Bulletin bulletin = clientBulletinStore.getBulletinRevision(leafBulletinUid);
+		boolean onServer = clientBulletinStore.isProbablyOnServer(leafBulletinUid);
+		MiniLocalization localization = getLocalization();
+		BulletinTableData bulletinData = new BulletinTableData(bulletin, onServer, localization);
+		return bulletinData;
 	}
 	
 	protected void editBulletin()
@@ -116,6 +122,13 @@ public class BulletinTableController extends AbstractFxLandingContentController
 		UiBulletinHelper bulletinHelper = new UiBulletinHelper(getMainWindow());
 		//FIXME: If this function has to bring up a confirmation dialog (ie.to clone a sealed bulletin) the UI will freeze 
 		bulletinHelper.doModifyBulletin(bulletinSelected);
+	}
+
+	public void bulletinContentsHaveChanged(Bulletin bulletinUpdated)
+	{
+		int index = itemsTable.getSelectionModel().getSelectedIndex();
+		BulletinTableData updatedBulletinData = getUpdatedBulletinData(bulletinUpdated.getUniversalId());
+		data.set(index, updatedBulletinData);
 	}
 	
 	private final class TableMouseEventHandler implements EventHandler<MouseEvent>
