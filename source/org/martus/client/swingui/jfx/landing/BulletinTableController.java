@@ -43,6 +43,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletintable.UiBulletinHelper;
 import org.martus.common.MartusLogger;
@@ -124,11 +125,26 @@ public class BulletinTableController extends AbstractFxLandingContentController
 		bulletinHelper.doModifyBulletin(bulletinSelected);
 	}
 
+	//TODO this needs to be called from ActionMenuSearch but must execute within an FX application thread
+	public void updateSearchResultsTable(SortableBulletinList searchResults)
+	{
+		data.clear();
+		UniversalId[] foundUids = searchResults.getUniversalIds();
+		for (int i = 0; i < foundUids.length; i++)
+		{
+			BulletinTableData bulletinData = getUpdatedBulletinData(foundUids[i]);
+			data.add(bulletinData);		
+		}
+		itemsTable.sort();
+	}
+	
+	//TODO this needs to be called from UiMainWindow but must execute within an FX application thread
 	public void bulletinContentsHaveChanged(Bulletin bulletinUpdated)
 	{
 		int index = itemsTable.getSelectionModel().getSelectedIndex();
 		BulletinTableData updatedBulletinData = getUpdatedBulletinData(bulletinUpdated.getUniversalId());
 		data.set(index, updatedBulletinData);
+		itemsTable.sort();
 	}
 	
 	private final class TableMouseEventHandler implements EventHandler<MouseEvent>

@@ -26,22 +26,64 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.actions;
 
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxContentController;
+import org.martus.client.swingui.jfx.landing.BulletinTableController;
+import org.martus.client.swingui.jfx.landing.FxMainStage;
+import org.martus.clientside.CurrentUiState;
+import org.martus.common.MartusLogger;
 
-public class ActionMenuSearch extends UiMenuAction
+public class ActionMenuSearch extends UiMenuAction implements ActionDoer
 {
 	public ActionMenuSearch(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse, "search");
+		searchString = null;
+	}
+
+	public ActionMenuSearch(UiMainWindow mainWindowToUse, String simpleSearch)
+	{
+		super(mainWindowToUse, "search");
+		CurrentUiState uiState = getMainWindow().getUiState();
+		uiState.setSearchFinalBulletinsOnly(true);
+		uiState.setSearchSameRowsOnly(false);
+		searchString = simpleSearch;
 	}
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		SortableBulletinList bulletinIdsFromSearch = doSearch();
-		mainWindow.updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
+		doAction();
 	}
 
+	@Override
+	public void doAction()
+	{
+		if(searchString == null)
+		{
+			SortableBulletinList bulletinIdsFromSearch = doSearch();
+			mainWindow.updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
+			return;
+		}
+		SortableBulletinList bulletinIdsFromSearch = doSearch(searchString);
+		Container contentPane = mainWindow.getContentPane();
+		if (contentPane instanceof FxMainStage)
+		{
+			FxMainStage mainStage = (FxMainStage) contentPane;
+			try
+			{
+				FxContentController controller = mainStage.getCurrentController();
+				((BulletinTableController)controller).updateSearchResultsTable(bulletinIdsFromSearch);
+			} 
+			catch (Exception e)
+			{
+				MartusLogger.logException(e);
+			}
+		}
+	}
+
+	private String searchString;
 }

@@ -62,7 +62,7 @@
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
-<children><Button alignment="CENTER_RIGHT" mnemonicParsing="false" style="-fx-background-color: #77bad0; -fx-background-radius: 0px;" text="Search" textAlignment="CENTER" textFill="#f7f7f7" GridPane.columnIndex="5">
+<children><Button alignment="CENTER_RIGHT" mnemonicParsing="false" style="-fx-background-color: #77bad0; -fx-background-radius: 0px;" onAction="#onSearch" text="Search" textAlignment="CENTER" textFill="#f7f7f7" GridPane.columnIndex="5">
 <font>
 <Font name="Helvetica" size="14.0" />
 </font>
@@ -71,7 +71,7 @@
 </GridPane.margin>
 <opaqueInsets>
 <Insets />
-</opaqueInsets></Button><TextField maxWidth="160.0" minHeight="27.0" prefWidth="150.0" style="-fx-background-radius: 0px;" GridPane.columnIndex="5">
+</opaqueInsets></Button><TextField fx:id="searchText" maxWidth="160.0" minHeight="27.0" prefWidth="150.0" style="-fx-background-radius: 0px;" GridPane.columnIndex="5">
 <GridPane.margin>
 <Insets top="11.0" />
 </GridPane.margin></TextField><ToggleButton fx:id="toggleButtonTor" mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="On" textFill="#f5f5f5" GridPane.columnIndex="4" onAction="#onTor">
