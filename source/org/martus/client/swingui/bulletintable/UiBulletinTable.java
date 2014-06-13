@@ -43,7 +43,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Vector;
 
 import javax.swing.JPopupMenu;
@@ -65,7 +64,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WorkerThread;
 import org.martus.client.swingui.foldertree.FolderNode;
 import org.martus.clientside.UiLocalization;
-import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiNotifyDlg;
@@ -267,115 +265,9 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 
 	public void doModifyBulletin()
 	{
-		try
-		{
-			Bulletin original = getSingleSelectedBulletin();
-			if(original == null)
-				return;
-
-			String myAccountId = mainWindow.getApp().getAccountId();
-			boolean isMine = myAccountId.equals(original.getAccount());
-			boolean isSealed = original.isSealed();
-			boolean isVerifiedFieldDeskBulletin = mainWindow.getApp().isVerifiedFieldDeskAccount(original.getAccount());
-
-			if(!isMine)
-			{
-				if(isVerifiedFieldDeskBulletin)
-				{
-					if(!mainWindow.confirmDlg("CloneBulletinAsMine"))
-						return;
-				}
-				else
-				{
-					if(!mainWindow.confirmDlg("CloneUnverifiedFDBulletinAsMine"))
-						return;
-				}
-			}
-			
-			if(isMySealed(isMine, isSealed))
-			{
-				if(!mainWindow.confirmDlg("CloneMySealedAsDraft"))
-					return;
-			}
-			
-			if(original.hasUnknownTags() || original.hasUnknownCustomField())
-			{
-				if(!mainWindow.confirmDlg("EditBulletinWithUnknownTags"))
-					return;
-			}
-			
-			Bulletin bulletinToModify = original; 
-			if(isMyDraft(isMine, isSealed))
-				bulletinToModify = updateFieldSpecsIfNecessary(original);
-			else if(needsCloneToEdit(isMine, isSealed))
-				bulletinToModify = createCloneAndUpdateFieldSpecsIfNecessary(original);
-			bulletinToModify.allowOnlyTheseAuthorizedKeysToRead(mainWindow.getApp().getAllHQKeys());
-			bulletinToModify.addAuthorizedToReadKeys(mainWindow.getApp().getDefaultHQKeysWithFallback());
-			mainWindow.modifyBulletin(bulletinToModify);
-		}
-		catch(Exception e)
-		{
-			mainWindow.notifyDlg("UnexpectedError");
-		}
-
-	}
-
-	private boolean isMySealed(boolean isMine, boolean isSealed)
-	{
-		return isMine && isSealed;
-	}
-	
-	private boolean isMyDraft(boolean isMine, boolean isSealed)
-	{
-		return isMine && !isSealed;
-	}
-	
-	private boolean needsCloneToEdit(boolean isMine, boolean isSealed)
-	{
-		return isSealed || !isMine;
-	}
-
-	private Bulletin updateFieldSpecsIfNecessary(Bulletin original) throws Exception
-	{
-		ClientBulletinStore store = mainWindow.getApp().getStore();
-		if(store.bulletinHasCurrentFieldSpecs(original))
-			return original;
-		if(confirmUpdateFieldsDlg("UseBulletinsDraftCustomFields"))
-			return original;
-		FieldSpecCollection publicFieldSpecsToUse = store.getTopSectionFieldSpecs();
-		FieldSpecCollection privateFieldSpecsToUse = store.getBottomSectionFieldSpecs();
-		return store.createDraftClone(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
-	}
-
-	private Bulletin createCloneAndUpdateFieldSpecsIfNecessary(Bulletin original) throws Exception
-	{
-		ClientBulletinStore store = mainWindow.getApp().getStore();
-		FieldSpecCollection publicFieldSpecsToUse = store.getTopSectionFieldSpecs();
-		FieldSpecCollection privateFieldSpecsToUse = store.getBottomSectionFieldSpecs();
-		if(!store.bulletinHasCurrentFieldSpecs(original))
-		{
-			if(confirmUpdateFieldsDlg("UseBulletinsCustomFields"))
-			{
-				publicFieldSpecsToUse = original.getTopSectionFieldSpecs();
-				privateFieldSpecsToUse = original.getBottomSectionFieldSpecs();
-			}
-		}
-
-		Bulletin bulletinToModify = store.createNewDraft(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
-		return bulletinToModify;
-	}
-	
-	private boolean confirmUpdateFieldsDlg(String baseTag)
-	{
-		MartusLocalization localization = mainWindow.getLocalization();
-		String useOld = localization.getButtonLabel("UseOldCustomFields");
-		String useNew = localization.getButtonLabel("UseNewCustomFields");
-		String[] buttons = {useOld, useNew};
-		HashMap tokenReplacement = new HashMap();
-		tokenReplacement.put("#UseOldCustomFields#", useOld);
-		tokenReplacement.put("#UseNewCustomFields#", useNew);
-
-		return mainWindow.confirmCustomButtonsDlg(mainWindow, baseTag, buttons, tokenReplacement);
+		Bulletin selectedBulletin = getSingleSelectedBulletin();
+		UiBulletinHelper uiHelper = new UiBulletinHelper(mainWindow);
+		uiHelper.doModifyBulletin(selectedBulletin);
 	}
 
 	public void doCutBulletins()
