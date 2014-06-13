@@ -44,6 +44,7 @@ import javafx.scene.input.MouseEvent;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.bulletintable.UiBulletinHelper;
 import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -111,7 +112,10 @@ public class BulletinTableController extends AbstractFxLandingContentController
 	{
 		BulletinTableData selectedBulletinData = itemsTable.getSelectionModel().getSelectedItem();
 		UniversalId bulletinUid = selectedBulletinData.getUniversalId();
-		MartusLogger.log(bulletinUid.getLocalId().toString());
+		Bulletin bulletinSelected = getApp().getStore().getBulletinRevision(bulletinUid);
+		UiBulletinHelper bulletinHelper = new UiBulletinHelper(getMainWindow());
+		//FIXME: If this function has to bring up a confirmation dialog (ie.to clone a sealed bulletin) the UI will freeze 
+		bulletinHelper.doModifyBulletin(bulletinSelected);
 	}
 	
 	private final class TableMouseEventHandler implements EventHandler<MouseEvent>
