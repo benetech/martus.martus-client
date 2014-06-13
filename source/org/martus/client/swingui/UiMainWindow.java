@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
+import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -102,6 +103,7 @@ import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.FxModalDialog;
 import org.martus.client.swingui.jfx.FxRunner;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
+import org.martus.client.swingui.jfx.landing.BulletinTableController;
 import org.martus.client.swingui.jfx.setupwizard.SetupWizardStage;
 import org.martus.client.swingui.jfx.welcome.WelcomeStage;
 import org.martus.client.swingui.spellcheck.SpellCheckerManager;
@@ -907,6 +909,21 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void bulletinContentsHaveChanged(Bulletin b)
 	{
+		
+		Container pane = getContentPane();
+		if(pane instanceof FxMainStage)
+		{
+			try
+			{
+				//TODO may need to also check to see if the CurrentController is of type BulletinTableController
+				((BulletinTableController)((FxMainStage)pane).getCurrentController()).bulletinContentsHaveChanged(b);
+			}
+			catch (Exception e)
+			{
+				MartusLogger.logException(e);
+			}
+			return;
+		}
 		UiBulletinTablePane bulletinsTablePane = getBulletinsTablePane();
 		if(bulletinsTablePane == null)
 			return;
