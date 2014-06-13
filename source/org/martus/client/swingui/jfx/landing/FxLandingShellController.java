@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.landing;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 
@@ -41,6 +42,7 @@ import org.martus.client.swingui.actions.ActionMenuContactInfo;
 import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
 import org.martus.client.swingui.actions.ActionMenuManageContacts;
 import org.martus.client.swingui.actions.ActionMenuPreferences;
+import org.martus.client.swingui.actions.ActionMenuSearch;
 import org.martus.client.swingui.actions.ActionMenuSelectServer;
 import org.martus.client.swingui.actions.ActionMenuStopStartTor;
 import org.martus.client.swingui.jfx.FxContentController;
@@ -107,6 +109,13 @@ public class FxLandingShellController extends FxInSwingFrameController
 	}
 	
 	@FXML
+	private void onSearch(ActionEvent event)
+	{
+		String searchString = searchText.getText();
+		doAction(new  ActionMenuSearch(getMainWindow(), searchString));
+	}
+
+	@FXML
 	private void onCreateNewBulletin(ActionEvent event)
 	{
 		doAction(new ActionMenuCreateNewBulletin(getMainWindow()));
@@ -159,6 +168,9 @@ public class FxLandingShellController extends FxInSwingFrameController
 		}
 	}
 
+	@FXML
+	protected TextField searchText;
+	
 	@FXML
 	protected ToggleButton toggleButtonTor;
 	

@@ -2530,7 +2530,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return session;
 	}
 	
-	CurrentUiState getUiState()
+	public CurrentUiState getUiState()
 	{
 		return getSession().getUiState();
 	}

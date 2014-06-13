@@ -39,6 +39,10 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
 import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
+import org.martus.clientside.CurrentUiState;
+import org.martus.common.MartusLogger;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeUnknown;
 import org.martus.common.fieldspec.MiniFieldSpec;
 
 abstract public class UiMartusAction extends AbstractAction
@@ -107,7 +111,23 @@ abstract public class UiMartusAction extends AbstractAction
 		} 
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			MartusLogger.logException(e);
+			getMainWindow().notifyDlg("UnexpectedError");
+			return null;
+		}
+	}
+	
+	public SortableBulletinList doSearch(String simpleSearchString)
+	{
+		SearchTreeNode simpleSearchNode = new SearchTreeNode(FieldSpec.createFieldSpec("",new FieldTypeUnknown()),"", simpleSearchString);
+		MiniFieldSpec[] sortSpecs = new MiniFieldSpec[0];
+		try
+		{
+			return doSearch(simpleSearchNode, sortSpecs);
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
 			getMainWindow().notifyDlg("UnexpectedError");
 			return null;
 		}
