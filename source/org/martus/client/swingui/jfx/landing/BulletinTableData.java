@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.landing;
 
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.packet.UniversalId;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -35,11 +36,17 @@ public class BulletinTableData
 {
 	public BulletinTableData(Bulletin bulletin, boolean onServer, MiniLocalization localization)
 	{
+		uId = bulletin.getUniversalId();
 		title = new SimpleStringProperty(bulletin.get(Bulletin.TAGTITLE));
 		author = new SimpleStringProperty(bulletin.get(Bulletin.TAGAUTHOR));
 		long dateLastSaved = bulletin.getBulletinHeaderPacket().getLastSavedTime();
 		dateSaved = new SimpleStringProperty(localization.formatDateTime(dateLastSaved));
 		this.onServer = new SimpleBooleanProperty(onServer);
+	}
+	
+	public UniversalId getUniversalId()
+	{
+		return uId;
 	}
 	
 	public String getTitle()
@@ -92,5 +99,5 @@ public class BulletinTableData
 	private final SimpleStringProperty author;
 	private final SimpleStringProperty dateSaved;
 	private final SimpleBooleanProperty onServer;
-
+	private final UniversalId uId;
 }
