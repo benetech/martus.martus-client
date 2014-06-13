@@ -154,6 +154,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 		} 
 		catch (Exception e)
 		{
+			//FIXME: Calling this will hang the FX UI
 			getMainWindow().unexpectedErrorDlg();
 		}
 	}
