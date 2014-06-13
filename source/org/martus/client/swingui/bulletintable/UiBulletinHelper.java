@@ -37,7 +37,7 @@ import org.martus.common.bulletin.Bulletin;
 public class UiBulletinHelper
 {
 	
-	UiBulletinHelper(UiMainWindow mainWindowToUse)
+	public UiBulletinHelper(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
 	}
