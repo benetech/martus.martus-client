@@ -910,13 +910,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void bulletinContentsHaveChanged(Bulletin b)
 	{
 		
-		Container pane = getContentPane();
-		if(pane instanceof FxMainStage)
+		FxMainStage stage = getMainStage();
+		if(stage != null)
 		{
 			try
 			{
-				//TODO may need to also check to see if the CurrentController is of type BulletinTableController
-				((BulletinTableController)((FxMainStage)pane).getCurrentController()).bulletinContentsHaveChanged(b);
+				((BulletinTableController)stage.getCurrentController()).bulletinContentsHaveChanged(b);
 			}
 			catch (Exception e)
 			{
@@ -1922,9 +1921,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		if(UiSession.isJavaFx)
 		{
-			FxMainStage stage = new FxMainStage(this);
-			Platform.runLater(new FxRunner(stage));
-			setContentPane(stage);
+			mainStage = new FxMainStage(this);
+			Platform.runLater(new FxRunner(mainStage));
+			setContentPane(mainStage);
+			
 		}
 		else
 		{
@@ -2544,6 +2544,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		return mainPane;
 	}
+	
+	public FxMainStage getMainStage()
+	{
+		return mainStage;
+	}
 
 	private UiBulletinTablePane getBulletinsTablePane()
 	{
@@ -2610,6 +2615,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private UiSession session;
 
 	private UiMainPane mainPane;
+	private FxMainStage mainStage;
 
 	private java.util.Timer uploader;
 	private java.util.Timer timeoutChecker;
