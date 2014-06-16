@@ -74,7 +74,6 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		Label noBulletins = new Label(getLocalization().getFieldLabel("NoBulletinsInTable"));
 		itemsTable.setPlaceholder(noBulletins);
 		itemsTable.setItems(data);
-		itemsTable.setOnMouseClicked(new TableMouseEventHandler());		
 		try
 		{
 			loadBulletinData();
@@ -147,27 +146,21 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		itemsTable.sort();
 	}
 	
-	private final class TableMouseEventHandler implements EventHandler<MouseEvent>
+
+	@FXML
+	public void onMouseClick(MouseEvent mouseEvent) 
 	{
-		private static final int MOUSE_DOUBLE_CLICK = 2;
-
-		public TableMouseEventHandler()
-		{
-		}
-
-		@Override
-		public void handle(MouseEvent mouseEvent) 
-		{
-		    if(mouseEvent.getButton().equals(MouseButton.PRIMARY))
-		    {
-		    		if(mouseEvent.getClickCount() == MOUSE_DOUBLE_CLICK)
-		        {
-		            editBulletin();
-		        }
-		    }
-		}
+	    if(mouseEvent.getButton().equals(MouseButton.PRIMARY))
+	    {
+		    final int MOUSE_DOUBLE_CLICK = 2;
+	    		if(mouseEvent.getClickCount() == MOUSE_DOUBLE_CLICK)
+	        {
+	            editBulletin();
+	        }
+	    }
 	}
-
+	
+	
 	@Override
 	public String getFxmlLocation()
 	{
