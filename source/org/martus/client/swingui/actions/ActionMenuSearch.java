@@ -69,14 +69,13 @@ public class ActionMenuSearch extends UiMenuAction implements ActionDoer
 			return;
 		}
 		SortableBulletinList bulletinIdsFromSearch = doSearch(searchString);
-		Container contentPane = mainWindow.getContentPane();
-		if (contentPane instanceof FxMainStage)
+		FxMainStage stage = mainWindow.getMainStage();
+		if (stage != null)
 		{
-			FxMainStage mainStage = (FxMainStage) contentPane;
 			try
 			{
-				FxContentController controller = mainStage.getCurrentController();
-				((BulletinTableController)controller).updateSearchResultsTable(bulletinIdsFromSearch);
+				BulletinTableController controller = (BulletinTableController)stage.getCurrentController();
+				controller.updateSearchResultsTable(bulletinIdsFromSearch);
 			} 
 			catch (Exception e)
 			{
