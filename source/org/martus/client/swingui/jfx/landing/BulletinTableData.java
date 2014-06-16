@@ -36,7 +36,7 @@ public class BulletinTableData
 {
 	public BulletinTableData(Bulletin bulletin, boolean onServer, MiniLocalization localization)
 	{
-		uId = bulletin.getUniversalId();
+		uid = bulletin.getUniversalId();
 		title = new SimpleStringProperty(bulletin.get(Bulletin.TAGTITLE));
 		author = new SimpleStringProperty(bulletin.get(Bulletin.TAGAUTHOR));
 		long dateLastSaved = bulletin.getBulletinHeaderPacket().getLastSavedTime();
@@ -46,7 +46,7 @@ public class BulletinTableData
 	
 	public UniversalId getUniversalId()
 	{
-		return uId;
+		return uid;
 	}
 	
 	public String getTitle()
@@ -99,5 +99,5 @@ public class BulletinTableData
 	private final SimpleStringProperty author;
 	private final SimpleStringProperty dateSaved;
 	private final SimpleBooleanProperty onServer;
-	private final UniversalId uId;
+	private final UniversalId uid;
 }
