@@ -37,7 +37,7 @@ public class FxMainStage extends FxInSwingFrameStage
 		super(mainWindowToUse);
 		
 		setShellController(new FxLandingShellController(getMainWindow()));
-		setCurrentController(new BulletinTableController(getMainWindow()));
+		setCurrentController(new BulletinsListController(getMainWindow()));
 	}
 
 	@Override

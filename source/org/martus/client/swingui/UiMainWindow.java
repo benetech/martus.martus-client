@@ -103,7 +103,7 @@ import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.FxModalDialog;
 import org.martus.client.swingui.jfx.FxRunner;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
-import org.martus.client.swingui.jfx.landing.BulletinTableController;
+import org.martus.client.swingui.jfx.landing.BulletinsListController;
 import org.martus.client.swingui.jfx.setupwizard.SetupWizardStage;
 import org.martus.client.swingui.jfx.welcome.WelcomeStage;
 import org.martus.client.swingui.spellcheck.SpellCheckerManager;
@@ -915,7 +915,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			try
 			{
-				((BulletinTableController)stage.getCurrentController()).bulletinContentsHaveChanged(b);
+				((BulletinsListController)stage.getCurrentController()).bulletinContentsHaveChanged(b);
 			}
 			catch (Exception e)
 			{
