@@ -34,10 +34,10 @@ import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 
-public class UiBulletinHelper
+public class ModifyBulletinActionDoer
 {
 	
-	public UiBulletinHelper(UiMainWindow mainWindowToUse)
+	public ModifyBulletinActionDoer(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
 	}
