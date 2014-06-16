@@ -32,7 +32,7 @@ import java.awt.event.ActionEvent;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxContentController;
-import org.martus.client.swingui.jfx.landing.BulletinTableController;
+import org.martus.client.swingui.jfx.landing.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.clientside.CurrentUiState;
 import org.martus.common.MartusLogger;
@@ -74,7 +74,7 @@ public class ActionMenuSearch extends UiMenuAction implements ActionDoer
 		{
 			try
 			{
-				BulletinTableController controller = (BulletinTableController)stage.getCurrentController();
+				BulletinsListController controller = (BulletinsListController)stage.getCurrentController();
 				controller.updateSearchResultsTable(bulletinIdsFromSearch);
 			} 
 			catch (Exception e)

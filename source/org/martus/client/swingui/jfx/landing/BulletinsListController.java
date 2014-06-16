@@ -51,10 +51,10 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
-public class BulletinTableController extends AbstractFxLandingContentController
+public class BulletinsListController extends AbstractFxLandingContentController
 {
 
-	public BulletinTableController(UiMainWindow mainWindowToUse)
+	public BulletinsListController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
