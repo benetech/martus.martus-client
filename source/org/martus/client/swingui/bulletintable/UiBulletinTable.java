@@ -266,7 +266,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 	public void doModifyBulletin()
 	{
 		Bulletin selectedBulletin = getSingleSelectedBulletin();
-		UiBulletinHelper uiHelper = new UiBulletinHelper(mainWindow);
+		ModifyBulletinActionDoer uiHelper = new ModifyBulletinActionDoer(mainWindow);
 		uiHelper.doModifyBulletin(selectedBulletin);
 	}
 
