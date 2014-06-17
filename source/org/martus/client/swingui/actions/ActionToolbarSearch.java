@@ -31,9 +31,9 @@ import java.awt.event.ActionEvent;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 
-public class ActionSearch extends UiButtonAction
+public class ActionToolbarSearch extends UiButtonAction
 {
-	public ActionSearch(UiMainWindow mainWindowToUse)
+	public ActionToolbarSearch(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse, "search");
 	}
