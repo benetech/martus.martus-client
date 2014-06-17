@@ -1,7 +1,7 @@
 /*
 
-The Martus(tm) free, social justice documentation and
 monitoring software. Copyright (C) 2014, Beneficent
+The Martus(tm) free, social justice documentation and
 Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
@@ -47,6 +47,7 @@ import javafx.scene.input.MouseEvent;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
 import org.martus.client.swingui.bulletintable.ModifyBulletinActionDoer;
 import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
@@ -123,9 +124,8 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		bulletinEditingIndex = selectionModel.getSelectedIndex();
 		UniversalId bulletinUid = selectedBulletinData.getUniversalId();
 		Bulletin bulletinSelected = getApp().getStore().getBulletinRevision(bulletinUid);
-		ModifyBulletinActionDoer bulletinHelper = new ModifyBulletinActionDoer(getMainWindow());
-		//FIXME: If this function has to bring up a confirmation dialog (ie.to clone a sealed bulletin) the UI will freeze 
-		bulletinHelper.doModifyBulletin(bulletinSelected);
+		UiMainWindow mainWindow = getMainWindow();
+		FxLandingShellController.doAction(new ActionMenuModifyFxBulletin(mainWindow, bulletinSelected), mainWindow);
 	}
 
 	public void updateSearchResultsTable(SortableBulletinList searchResults)
