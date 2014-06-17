@@ -109,7 +109,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 	}
 	
 	@FXML
-	private void onSearch(ActionEvent event)
+	private void onQuickSearch(ActionEvent event)
 	{
 		String searchString = searchText.getText();
 		doAction(new  ActionMenuSearch(getMainWindow(), searchString));
