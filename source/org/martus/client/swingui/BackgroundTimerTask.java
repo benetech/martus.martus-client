@@ -477,6 +477,7 @@ class BackgroundTimerTask extends TimerTask
 		try
 		{
 			MartusAccountAccessToken currentTokenFromServer = getApp().getMartusAccountAccessTokenFromServer();
+			MartusLogger.log("Got my token from server: " + currentTokenFromServer);
 			ConfigInfo config = getApp().getConfigInfo();
 			config.setCurrentMartusAccountAccessToken(currentTokenFromServer);
 			getApp().saveConfigInfo();
@@ -489,8 +490,7 @@ class BackgroundTimerTask extends TimerTask
 		}
 		catch (ServerNotAvailableException e)
 		{
-			alreadyGotMartusAccountAccessToken = true;
-			MartusLogger.log("Server not available to get token");
+			// Nothing we can/should do about it...try again later
 		}
 		catch (Exception e)
 		{

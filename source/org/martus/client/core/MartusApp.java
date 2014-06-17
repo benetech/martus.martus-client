@@ -1787,7 +1787,7 @@ public class MartusApp
 		return false;
 	}
 	
-	public MartusAccountAccessToken getMartusAccountAccessTokenFromServer() throws TokenInvalidException, ServerNotAvailableException, MartusSignatureException, ServerNotCompatibleException 
+	public MartusAccountAccessToken getMartusAccountAccessTokenFromServer() throws TokenInvalidException, ServerNotAvailableException, MartusSignatureException, ServerNotCompatibleException, ServerErrorException 
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
@@ -1795,6 +1795,8 @@ public class MartusApp
 		NetworkResponse response = getCurrentNetworkInterfaceGateway().getMartusAccountAccessToken(getSecurity());
 		if(response.getResultCode().equals(NetworkInterfaceConstants.SERVER_NOT_COMPATIBLE))
 			throw new ServerNotCompatibleException();
+		if(response.getResultCode().equals(NetworkInterfaceConstants.SERVER_ERROR))
+			throw new ServerErrorException();
 		if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
 			throw new ServerNotAvailableException();
 			
