@@ -47,6 +47,7 @@ import org.martus.client.swingui.actions.ActionMenuSelectServer;
 import org.martus.client.swingui.actions.ActionMenuStopStartTor;
 import org.martus.client.swingui.jfx.FxContentController;
 import org.martus.client.swingui.jfx.FxInSwingFrameController;
+import org.martus.common.bulletin.Bulletin;
 
 public class FxLandingShellController extends FxInSwingFrameController
 {
@@ -163,7 +164,18 @@ public class FxLandingShellController extends FxInSwingFrameController
 		} 
 		catch (Exception e)
 		{
-			//FIXME: Calling this will hang the FX UI
+			SwingUtilities.invokeLater(new ShowErrorDialogDoer());
+		}
+	}
+	
+	private class ShowErrorDialogDoer implements Runnable
+	{
+		public ShowErrorDialogDoer()
+		{
+		}
+
+		public void run()
+		{
 			getMainWindow().unexpectedErrorDlg();
 		}
 	}
