@@ -50,7 +50,6 @@ public class ActionMenuSearch extends UiMenuAction implements ActionDoer
 		super(mainWindowToUse, "search");
 		CurrentUiState uiState = getMainWindow().getUiState();
 		uiState.setSearchFinalBulletinsOnly(true);
-		uiState.setSearchSameRowsOnly(false);
 		searchString = simpleSearch;
 	}
 
