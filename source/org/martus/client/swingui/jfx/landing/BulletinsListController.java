@@ -28,6 +28,8 @@ package org.martus.client.swingui.jfx.landing;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.swing.SwingUtilities;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -104,7 +106,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		sortByMostRecentBulletins();
 	}
 
-	private BulletinTableData getCurrentBulletinData(UniversalId leafBulletinUid)
+	protected BulletinTableData getCurrentBulletinData(UniversalId leafBulletinUid)
 	{
 		ClientBulletinStore clientBulletinStore = getApp().getStore();
 		Bulletin bulletin = clientBulletinStore.getBulletinRevision(leafBulletinUid);
@@ -139,14 +141,26 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		itemsTable.sort();
 	}
 	
-	//TODO this needs to be called from UiMainWindow but must execute within an FX application thread
 	public void bulletinContentsHaveChanged(Bulletin bulletinUpdated)
 	{
-		BulletinTableData updatedBulletinData = getCurrentBulletinData(bulletinUpdated.getUniversalId());
-		data.set(bulletinEditingIndex, updatedBulletinData);
-		itemsTable.sort();
+		SwingUtilities.invokeLater(new UpdateBulletinDoer(bulletinUpdated));
 	}
 	
+	private class UpdateBulletinDoer implements Runnable
+	{
+		public UpdateBulletinDoer(Bulletin bulletinToUpdate)
+		{
+			bulletin = bulletinToUpdate;
+		}
+		
+		public void run()
+		{
+			BulletinTableData updatedBulletinData = getCurrentBulletinData(bulletin.getUniversalId());
+			data.set(bulletinEditingIndex, updatedBulletinData);
+			itemsTable.sort();
+		}
+		public Bulletin bulletin;
+	}
 
 	@FXML
 	public void onMouseClick(MouseEvent mouseEvent) 
@@ -185,5 +199,5 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	protected ObservableList<BulletinTableData> data = FXCollections.observableArrayList();
 	
-	private int bulletinEditingIndex;
+	protected int bulletinEditingIndex;
 }
