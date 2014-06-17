@@ -260,7 +260,13 @@ public class ConfigInfo
 					catch (TokenInvalidException e)
 					{
 						MartusLogger.log("ConfigInfo.Load MartusAccountAccessToken Invalid: " + rawToken);
-						throw new IOException();
+						// NOTE: We would like to throw here, but that 
+						// would have the side effect of wiping out all 
+						// config info any time the token validity rules 
+						// change, such as from beta pre-4.5 to the 
+						// 4.5 release. So at least for now, we will just 
+						// log the error and blank out the old token.
+						loadedTokens = new Vector();
 					}
 				}
 				loaded.setMartusAccountAccessTokens(loadedTokens);
