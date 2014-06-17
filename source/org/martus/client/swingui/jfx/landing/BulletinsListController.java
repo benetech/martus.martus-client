@@ -128,18 +128,34 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		bulletinHelper.doModifyBulletin(bulletinSelected);
 	}
 
-	//TODO this needs to be called from ActionMenuSearch but must execute within an FX application thread
 	public void updateSearchResultsTable(SortableBulletinList searchResults)
 	{
-		data.clear();
-		UniversalId[] foundUids = searchResults.getUniversalIds();
-		for (int i = 0; i < foundUids.length; i++)
-		{
-			BulletinTableData bulletinData = getCurrentBulletinData(foundUids[i]);
-			data.add(bulletinData);		
-		}
-		itemsTable.sort();
+		SwingUtilities.invokeLater(new updateSearchResultsDoer(searchResults));
 	}
+	
+	private class updateSearchResultsDoer implements Runnable
+	{
+		public updateSearchResultsDoer(SortableBulletinList searchResults)
+		{
+			results = searchResults;
+		}
+
+		@Override
+		public void run()
+		{
+			data.clear();
+			UniversalId[] foundUids = results.getUniversalIds();
+			for (int i = 0; i < foundUids.length; i++)
+			{
+				BulletinTableData bulletinData = getCurrentBulletinData(foundUids[i]);
+				data.add(bulletinData);		
+			}
+			itemsTable.sort();
+		}
+		
+		private SortableBulletinList results;
+	}
+	
 	
 	public void bulletinContentsHaveChanged(Bulletin bulletinUpdated)
 	{
