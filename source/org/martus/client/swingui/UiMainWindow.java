@@ -187,10 +187,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		// Pop up a nag screen if this is an unofficial private release
 		// NOTE NAG screen now could be localized
-		new UiNotifyDlg(this, "Martus - Test Version", 
-				new String[] {"THIS IS A PRE-RELEASE TEST VERSION OF MARTUS.",
-				"Please contact info@martus.org with any feedback or questions."}, 
-				new String[] {"OK"});
+//		new UiNotifyDlg(this, "Martus - Test Version", 
+//				new String[] {"THIS IS A PRE-RELEASE TEST VERSION OF MARTUS.",
+//				"Please contact info@martus.org with any feedback or questions."}, 
+//				new String[] {"OK"});
 		
 		File timeoutDebug = new File(getApp().getMartusDataRootDirectory(), "timeout.1min");
 		if(timeoutDebug.exists())
