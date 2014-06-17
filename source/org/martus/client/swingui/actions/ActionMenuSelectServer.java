@@ -92,6 +92,7 @@ public class ActionMenuSelectServer extends UiMenuAction implements ActionDoer
 			getStore().clearOnServerLists();
 			boolean magicAccepted = false;
 			getApp().setServerInfo(serverIPAddress, serverPublicKey, newServerCompliance);
+			getMainWindow().setNeedToGetAccessToken();
 			if(getApp().requestServerUploadRights(""))
 				magicAccepted = true;
 			else

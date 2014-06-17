@@ -2595,6 +2595,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return getMainPane().getFolderTreePane();
 	}
 
+	public void setNeedToGetAccessToken()
+	{
+		backgroundUploadTimerTask.setNeedToGetAccessToken();
+	}
+
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
