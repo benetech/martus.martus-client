@@ -35,6 +35,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -115,7 +116,9 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	
 	protected void editBulletin()
 	{
-		BulletinTableData selectedBulletinData = itemsTable.getSelectionModel().getSelectedItem();
+		TableViewSelectionModel<BulletinTableData> selectionModel = itemsTable.getSelectionModel();
+		BulletinTableData selectedBulletinData = selectionModel.getSelectedItem();
+		bulletinEditingIndex = selectionModel.getSelectedIndex();
 		UniversalId bulletinUid = selectedBulletinData.getUniversalId();
 		Bulletin bulletinSelected = getApp().getStore().getBulletinRevision(bulletinUid);
 		ModifyBulletinActionDoer bulletinHelper = new ModifyBulletinActionDoer(getMainWindow());
@@ -139,9 +142,8 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	//TODO this needs to be called from UiMainWindow but must execute within an FX application thread
 	public void bulletinContentsHaveChanged(Bulletin bulletinUpdated)
 	{
-		int index = itemsTable.getSelectionModel().getSelectedIndex();
 		BulletinTableData updatedBulletinData = getCurrentBulletinData(bulletinUpdated.getUniversalId());
-		data.set(index, updatedBulletinData);
+		data.set(bulletinEditingIndex, updatedBulletinData);
 		itemsTable.sort();
 	}
 	
@@ -183,4 +185,5 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	protected ObservableList<BulletinTableData> data = FXCollections.observableArrayList();
 	
+	private int bulletinEditingIndex;
 }
