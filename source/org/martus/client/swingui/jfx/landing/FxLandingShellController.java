@@ -47,7 +47,6 @@ import org.martus.client.swingui.actions.ActionMenuSelectServer;
 import org.martus.client.swingui.actions.ActionMenuStopStartTor;
 import org.martus.client.swingui.jfx.FxContentController;
 import org.martus.client.swingui.jfx.FxInSwingFrameController;
-import org.martus.common.bulletin.Bulletin;
 
 public class FxLandingShellController extends FxInSwingFrameController
 {
