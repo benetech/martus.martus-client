@@ -130,12 +130,12 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	public void updateSearchResultsTable(SortableBulletinList searchResults)
 	{
-		SwingUtilities.invokeLater(new updateSearchResultsDoer(searchResults));
+		SwingUtilities.invokeLater(new UpdateSearchResultsHandler(searchResults));
 	}
 	
-	private class updateSearchResultsDoer implements Runnable
+	private class UpdateSearchResultsHandler implements Runnable
 	{
-		public updateSearchResultsDoer(SortableBulletinList searchResults)
+		public UpdateSearchResultsHandler(SortableBulletinList searchResults)
 		{
 			results = searchResults;
 		}
@@ -159,12 +159,12 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	
 	public void bulletinContentsHaveChanged(Bulletin bulletinUpdated)
 	{
-		SwingUtilities.invokeLater(new UpdateBulletinDoer(bulletinUpdated));
+		SwingUtilities.invokeLater(new BulletinTableChangeHandler(bulletinUpdated));
 	}
 	
-	private class UpdateBulletinDoer implements Runnable
+	private class BulletinTableChangeHandler implements Runnable
 	{
-		public UpdateBulletinDoer(Bulletin bulletinToUpdate)
+		public BulletinTableChangeHandler(Bulletin bulletinToUpdate)
 		{
 			bulletin = bulletinToUpdate;
 		}

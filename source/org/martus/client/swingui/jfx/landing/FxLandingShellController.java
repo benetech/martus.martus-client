@@ -163,13 +163,14 @@ public class FxLandingShellController extends FxInSwingFrameController
 		} 
 		catch (Exception e)
 		{
-			SwingUtilities.invokeLater(new ShowErrorDialogDoer());
+			SwingUtilities.invokeLater(new ShowErrorDialogHandler());
 		}
 	}
 	
-	private class ShowErrorDialogDoer implements Runnable
+	private class ShowErrorDialogHandler
+	implements Runnable
 	{
-		public ShowErrorDialogDoer()
+		public ShowErrorDialogHandler()
 		{
 		}
 
