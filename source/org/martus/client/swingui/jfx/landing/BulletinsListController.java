@@ -30,7 +30,6 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -98,13 +97,13 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		for(Iterator iter = allBulletinUids.iterator(); iter.hasNext();)
 		{
 			UniversalId leafBulletinUid = (UniversalId) iter.next();
-			BulletinTableData bulletinData = getUpdatedBulletinData(leafBulletinUid);
+			BulletinTableData bulletinData = getCurrentBulletinData(leafBulletinUid);
 			data.add(bulletinData);		
 		}
 		sortByMostRecentBulletins();
 	}
 
-	private BulletinTableData getUpdatedBulletinData(UniversalId leafBulletinUid)
+	private BulletinTableData getCurrentBulletinData(UniversalId leafBulletinUid)
 	{
 		ClientBulletinStore clientBulletinStore = getApp().getStore();
 		Bulletin bulletin = clientBulletinStore.getBulletinRevision(leafBulletinUid);
@@ -131,7 +130,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		UniversalId[] foundUids = searchResults.getUniversalIds();
 		for (int i = 0; i < foundUids.length; i++)
 		{
-			BulletinTableData bulletinData = getUpdatedBulletinData(foundUids[i]);
+			BulletinTableData bulletinData = getCurrentBulletinData(foundUids[i]);
 			data.add(bulletinData);		
 		}
 		itemsTable.sort();
@@ -141,7 +140,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	public void bulletinContentsHaveChanged(Bulletin bulletinUpdated)
 	{
 		int index = itemsTable.getSelectionModel().getSelectedIndex();
-		BulletinTableData updatedBulletinData = getUpdatedBulletinData(bulletinUpdated.getUniversalId());
+		BulletinTableData updatedBulletinData = getCurrentBulletinData(bulletinUpdated.getUniversalId());
 		data.set(index, updatedBulletinData);
 		itemsTable.sort();
 	}
