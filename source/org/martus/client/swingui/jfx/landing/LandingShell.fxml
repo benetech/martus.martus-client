@@ -62,7 +62,7 @@
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
-<children><Button alignment="CENTER_RIGHT" mnemonicParsing="false" style="-fx-background-color: #77bad0; -fx-background-radius: 0px;" onAction="#onSearch" text="Search" textAlignment="CENTER" textFill="#f7f7f7" GridPane.columnIndex="5">
+<children><Button alignment="CENTER_RIGHT" mnemonicParsing="false" style="-fx-background-color: #77bad0; -fx-background-radius: 0px;" onAction="#onQuickSearch" text="Search" textAlignment="CENTER" textFill="#f7f7f7" GridPane.columnIndex="5">
 <font>
 <Font name="Helvetica" size="14.0" />
 </font>
