@@ -42,7 +42,7 @@ import org.martus.client.swingui.actions.ActionMenuContactInfo;
 import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
 import org.martus.client.swingui.actions.ActionMenuManageContacts;
 import org.martus.client.swingui.actions.ActionMenuPreferences;
-import org.martus.client.swingui.actions.ActionMenuSearch;
+import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.actions.ActionMenuSelectServer;
 import org.martus.client.swingui.actions.ActionMenuStopStartTor;
 import org.martus.client.swingui.jfx.FxContentController;
@@ -112,7 +112,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 	private void onQuickSearch(ActionEvent event)
 	{
 		String searchString = searchText.getText();
-		doAction(new  ActionMenuSearch(getMainWindow(), searchString));
+		doAction(new  ActionMenuQuickSearch(getMainWindow(), searchString));
 	}
 
 	@FXML

@@ -27,19 +27,36 @@ package org.martus.client.swingui.actions;
 
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.landing.BulletinsListController;
+import org.martus.client.swingui.jfx.landing.FxMainStage;
+import org.martus.clientside.CurrentUiState;
+import org.martus.common.MartusLogger;
 
-public class ActionMenuSearch extends ActionSearch
+public class ActionMenuQuickSearch extends ActionSearch
 {
-	public ActionMenuSearch(UiMainWindow mainWindowToUse)
+
+	public ActionMenuQuickSearch(UiMainWindow mainWindowToUse, String simpleSearch)
 	{
 		super(mainWindowToUse);
+		CurrentUiState uiState = getMainWindow().getUiState();
+		uiState.setSearchFinalBulletinsOnly(true);
+		searchString = simpleSearch;
 	}
 
 	@Override
 	public void doAction()
 	{
-		SortableBulletinList bulletinIdsFromSearch = doSearch();
-		mainWindow.updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
-		return;
-	}	
+		try
+		{
+			SortableBulletinList bulletinIdsFromSearch = doSearch(searchString);
+			FxMainStage stage = mainWindow.getMainStage();
+			BulletinsListController controller = (BulletinsListController)stage.getCurrentController();
+			controller.updateSearchResultsTable(bulletinIdsFromSearch);
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+	}
+	private String searchString;
 }
