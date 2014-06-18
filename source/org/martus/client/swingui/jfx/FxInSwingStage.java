@@ -32,10 +32,13 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 
 import javax.swing.JDialog;
+import javax.swing.SwingUtilities;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
+import org.martus.common.MartusLogger;
 
 public abstract class FxInSwingStage extends JFXPanel
 {
@@ -132,8 +135,50 @@ public abstract class FxInSwingStage extends JFXPanel
 		setSceneRoot(shellContents);
 		getFxScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
 	}
+	
+	public void doAction(ActionDoer doer)
+	{
+		try
+		{
+			SwingUtilities.invokeLater(new Doer(doer));
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			SwingUtilities.invokeLater(new ShowErrorDialogHandler());
+		}
+	}
+	
+	private class Doer implements Runnable
+	{
+		public Doer(ActionDoer doerToRun)
+		{
+			doer = doerToRun;
+		}
+		
+		@Override
+		public void run()
+		{
+			doer.doAction();
+		}
+		
+		private ActionDoer doer;
+	}
 
-	private UiMainWindow mainWindow;
+	private class ShowErrorDialogHandler implements Runnable
+	{
+		public ShowErrorDialogHandler()
+		{
+		}
+
+		public void run()
+		{
+			mainWindow.unexpectedErrorDlg();
+		}
+	}
+	
+
+	protected UiMainWindow mainWindow;
 	private FxScene scene;
 	private Window window;
 	private FxShellController shellController;

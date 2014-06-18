@@ -28,8 +28,6 @@ package org.martus.client.swingui.jfx.landing;
 import java.util.Iterator;
 import java.util.Set;
 
-import javax.swing.SwingUtilities;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -44,11 +42,12 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
+import javax.swing.SwingUtilities;
+
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
-import org.martus.client.swingui.bulletintable.ModifyBulletinActionDoer;
 import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -124,8 +123,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		bulletinEditingIndex = selectionModel.getSelectedIndex();
 		UniversalId bulletinUid = selectedBulletinData.getUniversalId();
 		Bulletin bulletinSelected = getApp().getStore().getBulletinRevision(bulletinUid);
-		UiMainWindow mainWindow = getMainWindow();
-		FxLandingShellController.doAction(new ActionMenuModifyFxBulletin(mainWindow, bulletinSelected), mainWindow);
+		getShellController().getStage().doAction(new ActionMenuModifyFxBulletin(getMainWindow(), bulletinSelected));
 	}
 
 	public void updateSearchResultsTable(SortableBulletinList searchResults)
