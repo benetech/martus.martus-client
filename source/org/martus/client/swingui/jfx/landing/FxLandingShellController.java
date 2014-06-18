@@ -25,13 +25,20 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
+import java.util.Iterator;
+import java.util.Vector;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuBackupMyKeyPair;
 import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
@@ -44,12 +51,14 @@ import org.martus.client.swingui.actions.ActionMenuSelectServer;
 import org.martus.client.swingui.actions.ActionMenuStopStartTor;
 import org.martus.client.swingui.jfx.FxContentController;
 import org.martus.client.swingui.jfx.FxInSwingFrameController;
+import org.martus.common.MartusLogger;
 
 public class FxLandingShellController extends FxInSwingFrameController
 {
 	public FxLandingShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+		caseListProvider = new CaseListProvider();
 	}
 
 	@Override
@@ -62,6 +71,21 @@ public class FxLandingShellController extends FxInSwingFrameController
 	public void initializeMainContentPane()
 	{
 		updateTorStatus();
+		updateCases();
+	}
+
+	private void updateCases()
+	{
+		caseListProvider.clear();
+		Vector visibleFolders = getApp().getStore().getAllVisibleFolders();
+		MartusLocalization localization = getLocalization();
+		for(Iterator f = visibleFolders.iterator(); f.hasNext();)
+		{
+			BulletinFolder folder = (BulletinFolder) f.next();
+			CaseList caseList = new CaseList(folder.getLocalizedName(localization));
+			caseListProvider.add(caseList);
+		}
+		casesListView.setItems(caseListProvider);
 	}
 
 	@Override
@@ -134,6 +158,13 @@ public class FxLandingShellController extends FxInSwingFrameController
 	{
 		getStage().doAction(new ActionMenuBackupMyKeyPair(getMainWindow()));
 	}
+	
+	@FXML
+	private void OnCasesMouseClicked(MouseEvent mouseEvent)
+	{
+		CaseList selectedCase = caseListProvider.get(casesListView.getSelectionModel().getSelectedIndex());
+		MartusLogger.log("selected" + selectedCase);
+	}
 
 	@FXML
 	protected TextField searchText;
@@ -143,5 +174,9 @@ public class FxLandingShellController extends FxInSwingFrameController
 	
 	@FXML
 	protected AnchorPane mainContentPane;
+	
+	@FXML
+	protected ListView<CaseList> casesListView;
 
+	private CaseListProvider caseListProvider;
 }

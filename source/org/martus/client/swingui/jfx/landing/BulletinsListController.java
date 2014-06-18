@@ -56,7 +56,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	public BulletinsListController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		source = new BulletinTableProvider();
+		bulletinTableProvider = new BulletinTableProvider();
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 		Label noBulletins = new Label(getLocalization().getFieldLabel("NoBulletinsInTable"));
 		itemsTable.setPlaceholder(noBulletins);
-		itemsTable.setItems(source);
+		itemsTable.setItems(bulletinTableProvider);
 		loadBulletinData();
 	}
 
@@ -85,13 +85,13 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	protected void loadBulletinData()
 	{
-		source.clear();
+		bulletinTableProvider.clear();
 		Set allBulletinUids = getApp().getStore().getAllBulletinLeafUids();
 		for(Iterator iter = allBulletinUids.iterator(); iter.hasNext();)
 		{
 			UniversalId leafBulletinUid = (UniversalId) iter.next();
 			BulletinTableRowData bulletinData = getCurrentBulletinData(leafBulletinUid);
-			source.add(bulletinData);		
+			bulletinTableProvider.add(bulletinData);		
 		}
 		sortByMostRecentBulletins();
 	}
@@ -129,12 +129,12 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		@Override
 		public void run()
 		{
-			source.clear();
+			bulletinTableProvider.clear();
 			UniversalId[] foundUids = results.getUniversalIds();
 			for (int i = 0; i < foundUids.length; i++)
 			{
 				BulletinTableRowData bulletinData = getCurrentBulletinData(foundUids[i]);
-				source.add(bulletinData);		
+				bulletinTableProvider.add(bulletinData);		
 			}
 			itemsTable.sort();
 		}
@@ -167,7 +167,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 			}
 			else
 			{
-				source.set(bulletinIndexInTable, updatedBulletinData);
+				bulletinTableProvider.set(bulletinIndexInTable, updatedBulletinData);
 			}
 		}
 		public Bulletin bulletin;
@@ -175,9 +175,9 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	
 	protected int getBulletinIndexInTable(UniversalId id)
 	{
-		for (int currentIndex = 0; currentIndex < source.size(); currentIndex++)
+		for (int currentIndex = 0; currentIndex < bulletinTableProvider.size(); currentIndex++)
 		{
-			if(id.equals(source.get(currentIndex).getUniversalId()))
+			if(id.equals(bulletinTableProvider.get(currentIndex).getUniversalId()))
 				return currentIndex;
 		}
 		return BULLETIN_NOT_IN_TABLE;
@@ -220,5 +220,5 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	@FXML
 	protected TableColumn<BulletinTableRowData, String> dateSavedColumn;	
 
-	protected BulletinTableProvider source;
+	protected BulletinTableProvider bulletinTableProvider;
 }
