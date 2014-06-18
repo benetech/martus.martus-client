@@ -907,12 +907,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void bulletinContentsHaveChanged(Bulletin b)
 	{
-		
 		FxMainStage stage = getMainStage();
 		if(stage != null)
 		{
 			try
 			{
+				//TODO this is really for preview, also we shouldn't have to do this, the FX class should be the observer
+				//     for folderContents and BulletinContents HasChanged.
 				((BulletinsListController)stage.getCurrentController()).bulletinContentsHaveChanged(b);
 			}
 			catch (Exception e)

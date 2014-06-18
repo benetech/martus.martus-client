@@ -63,14 +63,14 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	@Override
 	public void initializeMainContentPane()
 	{
-		onServerColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableData, Boolean>(BulletinTableData.ON_SERVER_PROPERTY_NAME));
-		onServerColumn.setCellFactory(CheckBoxTableCell.<BulletinTableData>forTableColumn(onServerColumn));
-		authorColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableData, String>(BulletinTableData.AUTHOR_PROPERTY_NAME));
-		authorColumn.setCellFactory(TextFieldTableCell.<BulletinTableData>forTableColumn());
-		titleColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableData, String>(BulletinTableData.TITLE_PROPERTY_NAME));
-		titleColumn.setCellFactory(TextFieldTableCell.<BulletinTableData>forTableColumn());
-		dateSavedColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableData, String>(BulletinTableData.DATE_SAVDED_PROPERTY_NAME));
-		dateSavedColumn.setCellFactory(TextFieldTableCell.<BulletinTableData>forTableColumn());
+		onServerColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, Boolean>(BulletinTableRowData.ON_SERVER_PROPERTY_NAME));
+		onServerColumn.setCellFactory(CheckBoxTableCell.<BulletinTableRowData>forTableColumn(onServerColumn));
+		authorColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.AUTHOR_PROPERTY_NAME));
+		authorColumn.setCellFactory(TextFieldTableCell.<BulletinTableRowData>forTableColumn());
+		titleColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.TITLE_PROPERTY_NAME));
+		titleColumn.setCellFactory(TextFieldTableCell.<BulletinTableRowData>forTableColumn());
+		dateSavedColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.DATE_SAVDED_PROPERTY_NAME));
+		dateSavedColumn.setCellFactory(TextFieldTableCell.<BulletinTableRowData>forTableColumn());
 
 		Label noBulletins = new Label(getLocalization().getFieldLabel("NoBulletinsInTable"));
 		itemsTable.setPlaceholder(noBulletins);
@@ -91,25 +91,25 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		for(Iterator iter = allBulletinUids.iterator(); iter.hasNext();)
 		{
 			UniversalId leafBulletinUid = (UniversalId) iter.next();
-			BulletinTableData bulletinData = getCurrentBulletinData(leafBulletinUid);
+			BulletinTableRowData bulletinData = getCurrentBulletinData(leafBulletinUid);
 			data.add(bulletinData);		
 		}
 		sortByMostRecentBulletins();
 	}
 
-	protected BulletinTableData getCurrentBulletinData(UniversalId leafBulletinUid)
+	protected BulletinTableRowData getCurrentBulletinData(UniversalId leafBulletinUid)
 	{
 		ClientBulletinStore clientBulletinStore = getApp().getStore();
 		Bulletin bulletin = clientBulletinStore.getBulletinRevision(leafBulletinUid);
 		boolean onServer = clientBulletinStore.isProbablyOnServer(leafBulletinUid);
 		MiniLocalization localization = getLocalization();
-		BulletinTableData bulletinData = new BulletinTableData(bulletin, onServer, localization);
+		BulletinTableRowData bulletinData = new BulletinTableRowData(bulletin, onServer, localization);
 		return bulletinData;
 	}
 	
 	protected void editBulletin()
 	{
-		TableViewSelectionModel<BulletinTableData> selectionModel = itemsTable.getSelectionModel();
+		TableViewSelectionModel<BulletinTableRowData> selectionModel = itemsTable.getSelectionModel();
 		UniversalId bulletinUid = selectionModel.getSelectedItem().getUniversalId();
 		Bulletin bulletinSelected = getApp().getStore().getBulletinRevision(bulletinUid);
 		getShellController().getStage().doAction(new ActionMenuModifyFxBulletin(getMainWindow(), bulletinSelected));
@@ -134,7 +134,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 			UniversalId[] foundUids = results.getUniversalIds();
 			for (int i = 0; i < foundUids.length; i++)
 			{
-				BulletinTableData bulletinData = getCurrentBulletinData(foundUids[i]);
+				BulletinTableRowData bulletinData = getCurrentBulletinData(foundUids[i]);
 				data.add(bulletinData);		
 			}
 			itemsTable.sort();
@@ -146,6 +146,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	
 	public void bulletinContentsHaveChanged(Bulletin bulletinUpdated)
 	{
+		//TODO this will be for a Preview Window Update
 		SwingUtilities.invokeLater(new BulletinTableChangeHandler(bulletinUpdated));
 	}
 	
@@ -159,7 +160,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		public void run()
 		{
 			UniversalId bulletinId = bulletin.getUniversalId();
-			BulletinTableData updatedBulletinData = getCurrentBulletinData(bulletinId);
+			BulletinTableRowData updatedBulletinData = getCurrentBulletinData(bulletinId);
 			int bulletinIndexInTable = getBulletinIndexInTable(bulletinId);
 			if(bulletinIndexInTable == BULLETIN_NOT_IN_TABLE)
 			{
@@ -206,19 +207,19 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	final int BULLETIN_NOT_IN_TABLE = -1;
 	
 	@FXML 
-	protected TableView<BulletinTableData> itemsTable;
+	protected TableView<BulletinTableRowData> itemsTable;
 
 	@FXML
-	protected TableColumn<BulletinTableData, Boolean> onServerColumn;
+	protected TableColumn<BulletinTableRowData, Boolean> onServerColumn;
 
 	@FXML
-	protected TableColumn<BulletinTableData, String> authorColumn;
+	protected TableColumn<BulletinTableRowData, String> authorColumn;
 
 	@FXML
-	protected TableColumn<BulletinTableData, String> titleColumn;
+	protected TableColumn<BulletinTableRowData, String> titleColumn;
 
 	@FXML
-	protected TableColumn<BulletinTableData, String> dateSavedColumn;	
+	protected TableColumn<BulletinTableRowData, String> dateSavedColumn;	
 
-	protected ObservableList<BulletinTableData> data = FXCollections.observableArrayList();
+	protected ObservableList<BulletinTableRowData> data = FXCollections.observableArrayList();
 }
