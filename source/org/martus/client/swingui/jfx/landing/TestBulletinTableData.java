@@ -49,7 +49,7 @@ public class TestBulletinTableData extends TestCaseEnhanced
 		b.set(Bulletin.TAGTITLE, title);
 		b.set(Bulletin.TAGAUTHOR, author);
 		b.getBulletinHeaderPacket().updateLastSavedTime();
-		BulletinTableData data = new BulletinTableData(b, onServer, localization);
+		BulletinTableRowData data = new BulletinTableRowData(b, onServer, localization);
 		assertEquals(title, data.getTitle());
 		assertEquals(author, data.getAuthor());
 		long lastSavedTime = b.getBulletinHeaderPacket().getLastSavedTime();

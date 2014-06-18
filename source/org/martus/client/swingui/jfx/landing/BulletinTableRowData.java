@@ -32,9 +32,9 @@ import org.martus.common.packet.UniversalId;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class BulletinTableData
+public class BulletinTableRowData
 {
-	public BulletinTableData(Bulletin bulletin, boolean onServer, MiniLocalization localization)
+	public BulletinTableRowData(Bulletin bulletin, boolean onServer, MiniLocalization localization)
 	{
 		uid = bulletin.getUniversalId();
 		title = new SimpleStringProperty(bulletin.get(Bulletin.TAGTITLE));
