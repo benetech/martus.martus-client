@@ -48,7 +48,6 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
-import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
@@ -76,15 +75,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		Label noBulletins = new Label(getLocalization().getFieldLabel("NoBulletinsInTable"));
 		itemsTable.setPlaceholder(noBulletins);
 		itemsTable.setItems(data);
-		try
-		{
-			loadBulletinData();
-		} 
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-			throw new RuntimeException();
-		}
+		loadBulletinData();
 	}
 
 	private void sortByMostRecentBulletins()
@@ -93,7 +84,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		itemsTable.getSortOrder().add(dateSavedColumn);
 	}
 
-	private void loadBulletinData() throws Exception
+	protected void loadBulletinData()
 	{
 		data.clear();
 		Set allBulletinUids = getApp().getStore().getAllBulletinLeafUids();
@@ -119,9 +110,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	protected void editBulletin()
 	{
 		TableViewSelectionModel<BulletinTableData> selectionModel = itemsTable.getSelectionModel();
-		BulletinTableData selectedBulletinData = selectionModel.getSelectedItem();
-		bulletinEditingIndex = selectionModel.getSelectedIndex();
-		UniversalId bulletinUid = selectedBulletinData.getUniversalId();
+		UniversalId bulletinUid = selectionModel.getSelectedItem().getUniversalId();
 		Bulletin bulletinSelected = getApp().getStore().getBulletinRevision(bulletinUid);
 		getShellController().getStage().doAction(new ActionMenuModifyFxBulletin(getMainWindow(), bulletinSelected));
 	}
@@ -169,11 +158,29 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		
 		public void run()
 		{
-			BulletinTableData updatedBulletinData = getCurrentBulletinData(bulletin.getUniversalId());
-			data.set(bulletinEditingIndex, updatedBulletinData);
-			itemsTable.sort();
+			UniversalId bulletinId = bulletin.getUniversalId();
+			BulletinTableData updatedBulletinData = getCurrentBulletinData(bulletinId);
+			int bulletinIndexInTable = getBulletinIndexInTable(bulletinId);
+			if(bulletinIndexInTable == BULLETIN_NOT_IN_TABLE)
+			{
+				loadBulletinData();
+			}
+			else
+			{
+				data.set(bulletinIndexInTable, updatedBulletinData);
+			}
 		}
 		public Bulletin bulletin;
+	}
+	
+	protected int getBulletinIndexInTable(UniversalId id)
+	{
+		for (int currentIndex = 0; currentIndex < data.size(); currentIndex++)
+		{
+			if(id.equals(data.get(currentIndex).getUniversalId()))
+				return currentIndex;
+		}
+		return BULLETIN_NOT_IN_TABLE;
 	}
 
 	@FXML
@@ -196,6 +203,8 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		return "landing/FxTableViewItems.fxml";
 	}
 	
+	final int BULLETIN_NOT_IN_TABLE = -1;
+	
 	@FXML 
 	protected TableView<BulletinTableData> itemsTable;
 
@@ -212,6 +221,4 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	protected TableColumn<BulletinTableData, String> dateSavedColumn;	
 
 	protected ObservableList<BulletinTableData> data = FXCollections.observableArrayList();
-	
-	protected int bulletinEditingIndex;
 }
