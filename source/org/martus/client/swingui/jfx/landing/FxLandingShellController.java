@@ -81,29 +81,25 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@FXML
 	private void onPreferences(ActionEvent event)
 	{
-		UiMainWindow mainWindow = getMainWindow();
-		doAction(new ActionMenuPreferences(mainWindow), mainWindow);
+		getStage().doAction(new ActionMenuPreferences(getMainWindow()));
 	}
 
 	@FXML
 	private void onManageContacts(ActionEvent event)
 	{
-		UiMainWindow mainWindow = getMainWindow();
-		doAction(new ActionMenuManageContacts(mainWindow), mainWindow);
+		getStage().doAction(new ActionMenuManageContacts(getMainWindow()));
 	}
 
 	@FXML
 	private void onConfigureServer(ActionEvent event)
 	{
-		UiMainWindow mainWindow = getMainWindow();
-		doAction(new ActionMenuSelectServer(mainWindow), mainWindow);
+		getStage().doAction(new ActionMenuSelectServer(getMainWindow()));
 	}
 	
 	@FXML
 	private void onChangeUsernameAndPassword(ActionEvent event)
 	{
-		UiMainWindow mainWindow = getMainWindow();
-		doAction(new ActionMenuChangeUserNamePassword(mainWindow), mainWindow);
+		getStage().doAction(new ActionMenuChangeUserNamePassword(getMainWindow()));
 	}
 	
 	@FXML
@@ -115,79 +111,31 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@FXML
 	private void onQuickSearch(ActionEvent event)
 	{
-		String searchString = searchText.getText();
-		UiMainWindow mainWindow = getMainWindow();
-		doAction(new  ActionMenuQuickSearch(mainWindow, searchString), mainWindow);
+		getStage().doAction(new  ActionMenuQuickSearch(getMainWindow(), searchText.getText()));
 	}
 
 	@FXML
 	private void onCreateNewBulletin(ActionEvent event)
 	{
-		UiMainWindow mainWindow = getMainWindow();
-		doAction(new ActionMenuCreateNewBulletin(mainWindow), mainWindow);
+		getStage().doAction(new ActionMenuCreateNewBulletin(getMainWindow()));
 	}
 	
 	@FXML
 	private void onTor(ActionEvent event)
 	{
-		UiMainWindow mainWindow = getMainWindow();
-		doAction(new ActionMenuStopStartTor(mainWindow), mainWindow);
+		getStage().doAction(new ActionMenuStopStartTor(getMainWindow()));
 	}
 
 	@FXML
 	private void onContactInformation(ActionEvent event)
 	{
-		UiMainWindow mainWindow = getMainWindow();
-		doAction(new ActionMenuContactInfo(mainWindow), mainWindow);
+		getStage().doAction(new ActionMenuContactInfo(getMainWindow()));
 	}
 	
 	@FXML
 	private void onBackupKeypair(ActionEvent event)
 	{
-		UiMainWindow mainWindow = getMainWindow();
-		doAction(new ActionMenuBackupMyKeyPair(mainWindow), mainWindow);
-	}
-
-	private static class Doer implements Runnable
-	{
-		public Doer(ActionDoer doerToRun)
-		{
-			doer = doerToRun;
-		}
-		
-		@Override
-		public void run()
-		{
-			doer.doAction();
-		}
-		
-		private ActionDoer doer;
-	}
-	
-	public static void doAction(ActionDoer doer, UiMainWindow uiMainWindow)
-	{
-		try
-		{
-			SwingUtilities.invokeLater(new Doer(doer));
-		} 
-		catch (Exception e)
-		{
-			SwingUtilities.invokeLater(new ShowErrorDialogHandler(uiMainWindow));
-		}
-	}
-	
-	private static class ShowErrorDialogHandler implements Runnable
-	{
-		public ShowErrorDialogHandler(UiMainWindow mainWindowToUse)
-		{
-			mainWindow = mainWindowToUse;
-		}
-
-		public void run()
-		{
-			mainWindow.unexpectedErrorDlg();
-		}
-		UiMainWindow mainWindow;
+		getStage().doAction(new ActionMenuBackupMyKeyPair(getMainWindow()));
 	}
 
 	@FXML
