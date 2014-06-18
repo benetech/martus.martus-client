@@ -163,7 +163,7 @@ public class ActionMenuCharts extends UiMenuAction
 			
 			MiniFieldSpec fieldToCount = answers.getFieldToCount();
 			MiniFieldSpec[] extraSpecs = new MiniFieldSpec[] { fieldToCount };
-			SortableBulletinList sortableList = getMainWindow().doSearch(searchTree, extraSpecs, new MiniFieldSpec[]{}, "ReportSearchProgress");
+			SortableBulletinList sortableList = doSearch(searchTree, extraSpecs, new MiniFieldSpec[]{}, "ReportSearchProgress");
 			if(sortableList == null)
 				return;
 
@@ -316,7 +316,7 @@ public class ActionMenuCharts extends UiMenuAction
 	{
 		String defaultFilename = getLocalization().getFieldLabel("DefaultPrintChartToDiskFileName");
 		FormatFilter jpegFilter = new JPEGFilter();
-		File destination = mainWindow.doFileSaveDialog("PrintToFile", defaultFilename, jpegFilter);
+		File destination = mainWindow.showFileSaveDialog("PrintToFile", defaultFilename, jpegFilter);
 		return destination;
 	}
 	

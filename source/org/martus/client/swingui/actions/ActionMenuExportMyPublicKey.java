@@ -52,7 +52,7 @@ public class ActionMenuExportMyPublicKey extends UiMenuAction
 		try
 		{
 			FormatFilter filter = new PublicInfoFileFilter(getLocalization());  
-			File file = mainWindow.doFileSaveDialog("ExportPublicKey", filter);
+			File file = mainWindow.showFileSaveDialog("ExportPublicKey", filter);
 			if(file == null)
 				return;
 			

@@ -27,8 +27,12 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
+import java.util.Vector;
 
+import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.dialogs.UiExportBulletinsDlg;
+import org.martus.common.MartusUtilities;
 
 public class ActionMenuExportFolder extends UiMenuAction
 {
@@ -39,7 +43,28 @@ public class ActionMenuExportFolder extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doExportFolder();
+		doExportFolder();
+	}
+
+	public void doExportFolder()
+	{
+	
+		BulletinFolder selectedFolder = getMainWindow().getSelectedFolder();
+		int bulletinCount = selectedFolder.getBulletinCount();
+		if(bulletinCount == 0)
+		{
+			getMainWindow().notifyDlg("ExportFolderEmpty");
+			return;
+		}
+		Vector bulletins = new Vector();
+		for (int i = 0; i < bulletinCount; ++i)
+		{
+			bulletins.add(selectedFolder.getBulletinSorted(i));
+		}
+		String defaultFileName = MartusUtilities.createValidFileName(selectedFolder.getLocalizedName(getLocalization()));
+		if(defaultFileName.length() == 0)
+			defaultFileName = getLocalization().getFieldLabel("ExportedBulletins");
+		new UiExportBulletinsDlg(getMainWindow(), bulletins, defaultFileName);
 	}
 
 }

@@ -233,7 +233,7 @@ public class UiCustomFieldsDlg extends JDialog
 		public void actionPerformed(ActionEvent ae)
 		{
 			FileFilter filter = new MCTFileFilter(mainWindow.getLocalization());
-			File importFile = mainWindow.doFileOpenDialog("ImportCustomization", filter);
+			File importFile = mainWindow.showFileOpenDialog("ImportCustomization", filter);
 			if(importFile == null)
 				return;
 
@@ -361,7 +361,7 @@ public class UiCustomFieldsDlg extends JDialog
 				return;
 			
 			FormatFilter filter = new MCTFileFilter(mainWindow.getLocalization());
-			File destFile = mainWindow.doFileSaveDialog("ExportCustomization", filter);
+			File destFile = mainWindow.showFileSaveDialog("ExportCustomization", filter);
 			if(destFile == null)
 				return;
 			

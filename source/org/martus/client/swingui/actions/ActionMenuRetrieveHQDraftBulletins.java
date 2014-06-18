@@ -29,6 +29,8 @@ package org.martus.client.swingui.actions;
 import java.awt.event.ActionEvent;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.tablemodels.RetrieveHQDraftsTableModel;
+import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 
 public class ActionMenuRetrieveHQDraftBulletins extends UiMenuAction
 {
@@ -39,7 +41,22 @@ public class ActionMenuRetrieveHQDraftBulletins extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doRetrieveHQDraftsBulletins();
+		doRetrieveHQDraftsBulletins();
+	}
+
+	public void doRetrieveHQDraftsBulletins()
+	{
+		getMainWindow().offerToCancelRetrieveInProgress();
+		if(getMainWindow().isRetrieveInProgress())
+			return;
+		
+		String dlgTitleTag = "RetrieveHQDraftBulletins";
+		String summariesProgressTag = "RetrieveHQDraftBulletinSummaries";
+		String retrieverProgressTag = "RetrieveHQDraftBulletinProgress";
+		String folderName = getApp().getNameOfFolderRetrievedFieldOfficeDraft();
+
+		RetrieveTableModel model = new RetrieveHQDraftsTableModel(getApp(), getLocalization());
+		getMainWindow().retrieveBulletins(model, folderName, dlgTitleTag, summariesProgressTag, retrieverProgressTag);
 	}
 
 }

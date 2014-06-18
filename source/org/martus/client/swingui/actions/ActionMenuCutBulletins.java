@@ -40,7 +40,7 @@ public class ActionMenuCutBulletins extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doCutBulletins();
+		getBulletinsTable().doCutBulletins();
 	}
 
 	public boolean isEnabled()

@@ -63,7 +63,7 @@ public class ActionMenuExportMba extends UiMenuAction
 			
 			String defaultFilename = bulletin.toFileName();
 			FormatFilter filter = new MartusBulletinArchiveFileFilter(getLocalization());
-			File destination = getMainWindow().doFileSaveDialog("ExportMBA", defaultFilename, filter);
+			File destination = getMainWindow().showFileSaveDialog("ExportMBA", defaultFilename, filter);
 			if(destination == null)
 				return;
 			

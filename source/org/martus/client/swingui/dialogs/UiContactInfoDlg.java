@@ -101,8 +101,6 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		getContentPane().add(scroller);
 		getRootPane().setDefaultButton(ok);
 		Utilities.centerDlg(this);
-		setVisible(true);
-		toFront();
 	}
 
 	private void setInitialValues()

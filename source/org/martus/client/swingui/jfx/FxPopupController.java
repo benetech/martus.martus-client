@@ -29,7 +29,7 @@ import javafx.stage.Stage;
 
 import org.martus.client.swingui.UiMainWindow;
 
-abstract public class FxPopupController extends FxController
+abstract public class FxPopupController extends FxContentController
 {
 	public FxPopupController(UiMainWindow mainWindowToUse)
 	{

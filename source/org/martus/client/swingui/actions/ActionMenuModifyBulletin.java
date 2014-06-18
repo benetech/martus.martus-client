@@ -39,7 +39,7 @@ public class ActionMenuModifyBulletin extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doModifyBulletin();
+		doModifyBulletin();
 	}
 
 	public boolean isEnabled()

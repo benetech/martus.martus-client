@@ -498,6 +498,9 @@ public class ClientBulletinStore extends BulletinStore
 
 	public synchronized BulletinFolder findFolder(String name)
 	{
+		if(name == null)
+			return null;
+		
 		for(int index=0; index < getFolderCount(); ++index)
 		{
 			BulletinFolder folder = getFolder(index);
@@ -1455,6 +1458,12 @@ public class ClientBulletinStore extends BulletinStore
 		return createEmptyBulletin(getTopSectionFieldSpecs(), getBottomSectionFieldSpecs());
 	}
 	
+	public Bulletin createEmptyBulletin(Bulletin.BulletinType bulletinType) throws Exception
+	{
+		Bulletin b = new Bulletin(getSignatureGenerator(), bulletinType, getTopSectionFieldSpecs(), getBottomSectionFieldSpecs());
+		return b;
+	}
+
 	public Bulletin createEmptyBulletin(FieldSpecCollection topSectionSpecs, FieldSpecCollection bottomSectionSpecs) throws Exception
 	{
 		Bulletin b = new Bulletin(getSignatureGenerator(), topSectionSpecs, bottomSectionSpecs);

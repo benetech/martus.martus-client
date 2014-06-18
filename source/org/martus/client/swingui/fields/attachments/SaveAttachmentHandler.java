@@ -63,7 +63,7 @@ class SaveAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		
 		String fileName = proxy.getLabel();
 
-		File outputFile = getMainWindow().doFileSaveDialogNoFilterWithDirectoryMemory("SaveAttachment", fileName);
+		File outputFile = getMainWindow().showFileSaveDialogNoFilterWithDirectoryMemory("SaveAttachment", fileName);
 		if(outputFile == null)
 			return;
 		
