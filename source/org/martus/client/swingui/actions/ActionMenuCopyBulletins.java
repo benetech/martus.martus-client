@@ -39,7 +39,7 @@ public class ActionMenuCopyBulletins extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doCopyBulletins();
+		getBulletinsTable().doCopyBulletins();
 	}
 
 	public boolean isEnabled()

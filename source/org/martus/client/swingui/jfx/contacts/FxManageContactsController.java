@@ -77,7 +77,7 @@ public class FxManageContactsController extends FxWizardAddContactsController
 			catch (Exception e)
 			{
 				MartusLogger.logException(e);
-				showNotifyDialog(getWizardStage(), "PublicInfoFileError");
+				showNotifyDialog("PublicInfoFileError");
 			} 
 	}
 	

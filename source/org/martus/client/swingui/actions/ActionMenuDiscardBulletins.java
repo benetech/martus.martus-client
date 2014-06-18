@@ -40,7 +40,7 @@ public class ActionMenuDiscardBulletins extends UiMenuAction
 	public void actionPerformed(ActionEvent ae)
 	{
 		if(isEnabled())
-			mainWindow.doDiscardBulletins();
+			doDiscardBulletins();
 	}
 
 	public boolean isEnabled()
@@ -64,4 +64,9 @@ public class ActionMenuDiscardBulletins extends UiMenuAction
 		return super.getValue(key);
 	}
 
+	public void doDiscardBulletins()
+	{
+		getBulletinsTable().doDiscardBulletins();
+	}
+	
 }

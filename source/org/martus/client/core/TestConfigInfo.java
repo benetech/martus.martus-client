@@ -201,6 +201,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 			
 		}
 	}
+
 	
 	public void testLoadingOldInvalidToken() throws Exception
 	{

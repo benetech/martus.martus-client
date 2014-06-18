@@ -28,7 +28,9 @@ package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
 
+import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.dialogs.UiRemoveServerDlg;
 
 public class ActionMenuRemoveServer extends UiMenuAction
 {
@@ -39,7 +41,33 @@ public class ActionMenuRemoveServer extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doRemoveServer();
+		doRemoveServer();
+	}
+
+	public void doRemoveServer()
+	{
+		getMainWindow().offerToCancelRetrieveInProgress();
+		if(getMainWindow().isRetrieveInProgress())
+			return;
+		
+		if(!getMainWindow().reSignIn())
+			return;
+		
+		ConfigInfo info = getApp().getConfigInfo();
+		UiRemoveServerDlg removeDlg = new UiRemoveServerDlg(getMainWindow(), info);
+		if (!removeDlg.isYesButtonPressed())
+			return;
+
+		try
+		{
+			getApp().setServerInfo("","","");
+			getMainWindow().clearStatusMessage();
+			getMainWindow().repaint();
+		}
+		catch(Exception e)
+		{
+			getMainWindow().notifyDlg("ErrorSavingConfig");
+		}
 	}
 
 }

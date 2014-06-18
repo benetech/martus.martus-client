@@ -111,7 +111,7 @@ public class ActionPrint extends UiMenuAction
 	{
 		String defaultFilename = getLocalization().getFieldLabel("DefaultPrintToDiskFileName");
 		FormatFilter filter = new HtmlFilter();
-		File destination = mainWindow.doFileSaveDialog("PrintToFile", defaultFilename, filter);
+		File destination = mainWindow.showFileSaveDialog("PrintToFile", defaultFilename, filter);
 		return destination;
 		
 	}

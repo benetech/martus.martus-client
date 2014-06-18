@@ -64,7 +64,7 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 	private File getFileToImport()
 	{
 		FormatFilter importFilter = new BulletinXmlFileFilter(mainWindow.getLocalization());
-		return mainWindow.doFileOpenDialog("ImportBulletins", importFilter);
+		return mainWindow.showFileOpenDialog("ImportBulletins", importFilter);
 	}	
 	
 	private void constructDialog()

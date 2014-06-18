@@ -33,7 +33,7 @@ import org.martus.client.swingui.jfx.FxModalDialog;
 import org.martus.client.swingui.jfx.contacts.ContactsStage;
 import org.martus.common.MartusLogger;
 
-public class ActionMenuManageContacts extends UiMenuAction
+public class ActionMenuManageContacts extends UiMenuAction implements ActionDoer
 {
 	public ActionMenuManageContacts(UiMainWindow mainWindowToUse)
 	{
@@ -42,10 +42,10 @@ public class ActionMenuManageContacts extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		doManageContacts();
+		doAction();
 	}
 
-	public void doManageContacts()
+	public void doAction()
 	{
 		if(!mainWindow.reSignIn())
 			return;

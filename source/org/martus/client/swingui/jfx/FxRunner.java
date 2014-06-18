@@ -29,7 +29,7 @@ import org.martus.common.MartusLogger;
 
 public class FxRunner implements Runnable
 {
-	public FxRunner(FxInSwingDialogStage stageToUse)
+	public FxRunner(FxInSwingStage stageToUse)
 	{
 		stage = stageToUse;
 	}
@@ -48,5 +48,5 @@ public class FxRunner implements Runnable
 		}
 	}
 	
-	private FxInSwingDialogStage stage;
+	private FxInSwingStage stage;
 }

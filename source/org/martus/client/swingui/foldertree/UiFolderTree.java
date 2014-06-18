@@ -131,18 +131,6 @@ class UiFolderTree extends JTree implements TreeSelectionListener
 			{
 				parent.deleteCurrentFolderIfPossible();
 			}
-			if(e.isControlDown())
-			{
-				observer.setWaitingCursor();
-				if(e.getKeyCode() == KeyEvent.VK_X)
-					observer.doCutBulletins();
-				if(e.getKeyCode() == KeyEvent.VK_C)
-					observer.doCopyBulletins();
-				if(e.getKeyCode() == KeyEvent.VK_V)
-					observer.doPasteBulletins();
-				observer.resetCursor();
-			}			
-			
 		}
 	}
 	

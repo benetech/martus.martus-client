@@ -60,14 +60,23 @@ import org.martus.common.packet.UniversalId;
 
 class BackgroundTimerTask extends TimerTask
 {
-	public BackgroundTimerTask(UiMainWindow mainWindowToUse)
+	public BackgroundTimerTask(UiMainWindow mainWindowToUse, UiStatusBar statusBarToUse)
 	{
 		mainWindow = mainWindowToUse;
-		ProgressMeterInterface progressMeter = mainWindow.statusBar.getBackgroundProgressMeter();
+		statusBar = statusBarToUse;
+		ProgressMeterInterface progressMeter = getProgressMeter();
 		uploader = new BackgroundUploader(mainWindow.getApp(), progressMeter);
 		retriever = new BackgroundRetriever(mainWindow.getApp(), progressMeter);
 		if(mainWindow.isServerConfigured())
 			setWaitingForServer();
+	}
+
+	public ProgressMeterInterface getProgressMeter()
+	{
+		if(statusBar == null)
+			return null;
+		
+		return statusBar.getBackgroundProgressMeter();
 	}
 	
 	public void forceRecheckOfUidsOnServer()
@@ -144,7 +153,7 @@ class BackgroundTimerTask extends TimerTask
 	
 	private void doRetrievingOrUploading() throws Exception
 	{
-		final UiProgressMeter progressMeter = mainWindow.statusBar.getBackgroundProgressMeter();
+		final ProgressMeterInterface progressMeter = getProgressMeter();
 		if(retriever.hasWorkToDo())
 		{
 			if(!isServerAvailable())
@@ -641,7 +650,8 @@ class BackgroundTimerTask extends TimerTask
 	UiMainWindow mainWindow;
 	BackgroundUploader uploader;
 	BackgroundRetriever retriever;
-
+	private UiStatusBar statusBar;
+	
 	long nextCheckForFieldOfficeBulletins;
 	long nextCheckForToken;
 	
