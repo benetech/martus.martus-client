@@ -33,7 +33,7 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.network.ClientSideNetworkInterface;
 import org.martus.common.network.NetworkResponse;
-import org.martus.common.network.TorTransportWrapper;
+import org.martus.common.network.OrchidTransportWrapper;
 
 public class PingServerAsClient
 {
@@ -49,7 +49,7 @@ public class PingServerAsClient
 	{
 		processArgs(args);
 		
-		TorTransportWrapper transport = TorTransportWrapper.createWithoutPersistentStore();
+		OrchidTransportWrapper transport = OrchidTransportWrapper.createWithoutPersistentStore();
 		ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer server = new ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer(ip, transport);
 		if(!ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer.isNonSSLServerAvailable(server))
 		{
