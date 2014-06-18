@@ -132,26 +132,26 @@ abstract public class FxController implements Initializable
 		return getMainWindow().getApp();
 	}
 	
-	public void showNotifyDialog(FxInSwingDialogStage wizardPanel, String baseTag)
+	public void showNotifyDialog(String baseTag)
 	{
 		String noExtraMessage = "";
 		Map tokenReplacement = null;
-		showNotifyDialog(wizardPanel, baseTag, noExtraMessage, tokenReplacement);
+		showNotifyDialog(baseTag, noExtraMessage, tokenReplacement);
 	}
 	
-	public void showNotifyDialog(FxInSwingDialogStage wizardPanel, String baseTag, Map tokenReplacement)
+	public void showNotifyDialog(String baseTag, Map tokenReplacement)
 	{
 		String noExtraMessage = "";
-		showNotifyDialog(wizardPanel, baseTag, noExtraMessage, tokenReplacement);
+		showNotifyDialog(baseTag, noExtraMessage, tokenReplacement);
 	}
 
-	public void showNotifyDialog(FxInSwingDialogStage wizardPanel, String baseTag, String extraMessage)
+	public void showNotifyDialog(String baseTag, String extraMessage)
 	{
 		Map noTokenReplacement = null;
-		showNotifyDialog(wizardPanel, baseTag, extraMessage, noTokenReplacement);
+		showNotifyDialog(baseTag, extraMessage, noTokenReplacement);
 	}
 
-	public void showNotifyDialog(FxInSwingDialogStage wizardPanel, String baseTag, String extraMessage, Map tokenReplacement)
+	public void showNotifyDialog(String baseTag, String extraMessage, Map tokenReplacement)
 	{
 		++notifyDialogDepth;
 		try
@@ -159,7 +159,7 @@ abstract public class FxController implements Initializable
 			PopupNotifyController popupController = new PopupNotifyController(getMainWindow(), baseTag);
 			popupController.setExtraMessage(extraMessage);
 			popupController.setTokenReplacement(tokenReplacement);
-			showControllerInsideModalDialog(wizardPanel, popupController);
+			showControllerInsideModalDialog(popupController);
 			--notifyDialogDepth;
 		} 
 		catch (Exception e)
@@ -169,44 +169,44 @@ abstract public class FxController implements Initializable
 			{
 				getMainWindow().exitWithoutSavingState();
 			}
-			showNotifyDialog(wizardPanel, "UnexpectedError");
+			showNotifyDialog("UnexpectedError");
 		}
 	}
 	
-	public boolean showConfirmationDialog(FxInSwingDialogStage wizardPanel, String title, String message)
+	public boolean showConfirmationDialog(String title, String message)
 	{
 		try
 		{
 			PopupConfirmationController popupController = new PopupConfirmationController(getMainWindow(), title, message);
-			showControllerInsideModalDialog(wizardPanel, popupController);
+			showControllerInsideModalDialog(popupController);
 			return popupController.wasYesPressed();
 		} 
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog(wizardPanel, "UnexpectedError");
+			showNotifyDialog("UnexpectedError");
 		}
 		return false;
 	}
 	
-	public void showBusyDialog(String message, Task task, FxInSwingDialogStage wizardPanel) throws Exception
+	public void showBusyDialog(String message, Task task, FxInSwingStage wizardPanel) throws Exception
 	{
 		FxPopupController popupController = new FxBusyController(getMainWindow(), message, task);
-		showControllerInsideModalDialog(wizardPanel, popupController);
+		showControllerInsideModalDialog(popupController);
 	}
 
-	public void showTimeoutDialog(FxInSwingDialogStage wizardPanel, String message, TaskWithTimeout task) throws Exception
+	public void showTimeoutDialog(String message, TaskWithTimeout task) throws Exception
 	{
 		FxTimeoutController popupController = new FxTimeoutController(getMainWindow(), message, task, task.getMaxSeconds());
-		showControllerInsideModalDialog(wizardPanel, popupController);
+		showControllerInsideModalDialog(popupController);
 		if(popupController.didUserCancel())
 			throw new UserCancelledException();
 	}
 
-	public void showProgressDialog(FxWizardStage wizardPanel, String message, AbstractAppTask task) throws Exception
+	public void showProgressDialog(String message, AbstractAppTask task) throws Exception
 	{
 		FxProgressController popupController = new FxProgressController(getMainWindow(), message, task);
-		showControllerInsideModalDialog(wizardPanel, popupController);
+		showControllerInsideModalDialog(popupController);
 		if(popupController.didUserCancel())
 			throw new UserCancelledException();
 	}
@@ -353,7 +353,7 @@ abstract public class FxController implements Initializable
 		private boolean yesWasPressed;
 	}
 	
-	public void showControllerInsideModalDialog(FxInSwingDialogStage wizardPanel, FxPopupController controller) throws Exception
+	public void showControllerInsideModalDialog(FxPopupController controller) throws Exception
 	{
 		Stage popupStage = new Stage();
 		controller.setStage(popupStage);

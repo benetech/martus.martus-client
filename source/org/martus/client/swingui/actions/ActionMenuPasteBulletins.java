@@ -39,7 +39,7 @@ public class ActionMenuPasteBulletins extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doPasteBulletins();
+		getBulletinsTable().doPasteBulletins();
 	}
 	
 	public boolean isEnabled()

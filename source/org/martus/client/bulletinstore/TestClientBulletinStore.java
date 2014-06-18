@@ -1619,6 +1619,28 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
 	}
 
+	public void testImportRecordZipFile() throws Exception
+	{
+		TRACE("testImportRecordZipFile");
+		File tempFile = createTempFile();
+
+		Bulletin b = testStore.createEmptyBulletin(Bulletin.BulletinType.RECORD);
+		assertEquals(b.getBulletinHeaderPacket().getBulletinType(), Bulletin.BulletinType.RECORD);
+		BulletinForTesting.saveToFile(db,b, tempFile, testStore.getSignatureVerifier());
+		UniversalId originalUid = b.getUniversalId();
+
+		BulletinFolder folder = testStore.createFolder("test");
+		testStore.importZipFileBulletin(tempFile, folder, true);
+		assertEquals("Didn't fully import?", 1, testStore.getBulletinCount());
+		assertNotNull("Not same ID?", testStore.getBulletinRevision(originalUid));
+
+		testStore.importZipFileBulletin(tempFile, folder, false);
+		assertEquals("Not different IDs?", 2, testStore.getBulletinCount());
+		Bulletin retrievedBulletin = testStore.getBulletinRevision(originalUid);
+		assertEquals("not of type RECORD?", retrievedBulletin.getBulletinHeaderPacket().getBulletinType(), Bulletin.BulletinType.RECORD);
+
+	}
+
 	public void testImportZipFileWithAttachmentDraft() throws Exception
 	{
 		TRACE("testImportZipFileWithAttachmentDraft");

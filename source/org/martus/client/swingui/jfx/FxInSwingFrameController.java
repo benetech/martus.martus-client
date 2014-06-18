@@ -23,29 +23,29 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.welcome;
+package org.martus.client.swingui.jfx;
 
-import javafx.fxml.FXML;
+import java.awt.Component;
+
+import javax.swing.JFrame;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.ContentController;
 
-public class FxWelcomeController extends ContentController
+public abstract class FxInSwingFrameController extends FxInSwingController
 {
-	public FxWelcomeController(UiMainWindow mainWindowToUse)
+	public FxInSwingFrameController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
 
 	@Override
-	public String getFxmlLocation()
+	public void installGlassPane(Component glassPane)
 	{
-		return "welcome/Welcome.fxml";
+		getFrame().setGlassPane(glassPane);
 	}
 
-	@FXML
-	protected void nextWasPressed()
+	private JFrame getFrame()
 	{
-		getStage().close();
+		return (JFrame) getWindow();
 	}
 }

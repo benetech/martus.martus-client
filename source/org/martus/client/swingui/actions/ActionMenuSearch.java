@@ -1,8 +1,8 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2005-2007, Beneficent
-Technology, Inc. (The Benetech Initiative).
+monitoring software. Copyright (C) 2014, Beneficent
+Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -23,25 +23,23 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-
 package org.martus.client.swingui.actions;
-
-import java.awt.event.ActionEvent;
 
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 
-public class ActionMenuSearch extends UiMenuAction
+public class ActionMenuSearch extends ActionSearch
 {
 	public ActionMenuSearch(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindowToUse, "search");
+		super(mainWindowToUse);
 	}
 
-	public void actionPerformed(ActionEvent ae)
+	@Override
+	public void doAction()
 	{
-		SortableBulletinList bulletinIdsFromSearch = mainWindow.doSearch();
+		SortableBulletinList bulletinIdsFromSearch = doSearch();
 		mainWindow.updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
-	}
-
+		return;
+	}	
 }
