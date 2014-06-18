@@ -122,7 +122,7 @@ import org.martus.common.network.NetworkResponse;
 import org.martus.common.network.NonSSLNetworkAPI;
 import org.martus.common.network.NonSSLNetworkAPIWithHelpers;
 import org.martus.common.network.ServerSideNetworkInterface;
-import org.martus.common.network.TorTransportWrapper;
+import org.martus.common.network.OrchidTransportWrapper;
 import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.FieldDataPacket;
@@ -204,7 +204,7 @@ public class MartusApp
 		return new File(getCurrentAccountDirectory(), "OrchidCache.dat");
 	}
 
-	public TorTransportWrapper getTransport()
+	public OrchidTransportWrapper getTransport()
 	{
 		if(transport == null)
 		{
@@ -854,7 +854,7 @@ public class MartusApp
 		try
 		{
 			orchidStore.loadStore(getOrchidCacheFile(), getSecurity());
-			transport = TorTransportWrapper.create(orchidStore);
+			transport = OrchidTransportWrapper.create(orchidStore);
 			isInitialized = true;
 		} 
 		catch (Exception e)
@@ -2579,7 +2579,7 @@ public class MartusApp
 	private int maxNewFolders;
 	public RetrieveCommand currentRetrieveCommand;
 	private MartusOrchidDirectoryStore orchidStore;
-	private TorTransportWrapper transport;
+	private OrchidTransportWrapper transport;
 	private boolean isInitialized;
 
 	public static final String PUBLIC_INFO_EXTENSION = ".mpi";

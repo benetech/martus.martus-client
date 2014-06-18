@@ -125,7 +125,7 @@ import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.network.NetworkInterfaceConstants;
-import org.martus.common.network.TorTransportWrapper;
+import org.martus.common.network.OrchidTransportWrapper;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.XmlPacketLoader;
@@ -1582,7 +1582,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			backgroundUploadTimerTask.forceRecheckOfUidsOnServer();
 	}
 	
-	private TorTransportWrapper getTransport()
+	private OrchidTransportWrapper getTransport()
 	{
 		return getApp().getTransport();
 	}
