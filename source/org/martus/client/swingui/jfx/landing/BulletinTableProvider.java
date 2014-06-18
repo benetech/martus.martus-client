@@ -30,44 +30,44 @@ import java.util.ArrayList;
 import javafx.collections.ModifiableObservableListBase;
 
 
-public class CaseListSource extends ModifiableObservableListBase<CaseList>
+public class BulletinTableProvider extends ModifiableObservableListBase<BulletinTableRowData>
 {
+
+	public BulletinTableProvider()
+	{
+		data = new ArrayList<BulletinTableRowData>(INITIAL_NUMBER_OF_ELEMENTS);
+	}
 	
-	public CaseListSource()
+	@Override
+	protected void doAdd(int index, BulletinTableRowData element)
 	{
-		cases = new ArrayList<CaseList>(INITIAL_NUMBER_OF_CASES);
+		data.add(index, element);
 	}
 
 	@Override
-	protected void doAdd(int index, CaseList caseToAdd)
+	protected BulletinTableRowData doRemove(int index)
 	{
-		cases.add(index, caseToAdd);
+		return (BulletinTableRowData) data.remove(index);
 	}
 
 	@Override
-	protected CaseList doRemove(int index)
+	protected BulletinTableRowData doSet(int index, BulletinTableRowData element)
 	{
-		return (CaseList) cases.remove(index);
+		return (BulletinTableRowData) data.set(index, element);
 	}
 
 	@Override
-	protected CaseList doSet(int index, CaseList caseToSet)
+	public BulletinTableRowData get(int index)
 	{
-		return (CaseList) cases.set(index, caseToSet);
-	}
-
-	@Override
-	public CaseList get(int index)
-	{
-		return (CaseList) cases.get(index);
+		return (BulletinTableRowData) data.get(index);
 	}
 
 	@Override
 	public int size()
 	{
-		return cases.size();
+		return data.size();
 	}
 	
-	final int INITIAL_NUMBER_OF_CASES = 50;
-	ArrayList cases;
+	final int INITIAL_NUMBER_OF_ELEMENTS = 1000;
+	ArrayList data;
 }
