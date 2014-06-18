@@ -36,6 +36,12 @@ public class CaseList
 	{
 		return caseName;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return caseName;
+	}
 
 	String caseName;
 }
