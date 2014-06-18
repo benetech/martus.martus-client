@@ -28,46 +28,24 @@ package org.martus.client.swingui.jfx;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.File;
-
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.Parent;
 
 import javax.swing.JDialog;
 
-import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 
-abstract public class FxInSwingDialogStage extends JFXPanel
+abstract public class FxInSwingDialogStage extends FxInSwingStage
 {
 	public FxInSwingDialogStage(UiMainWindow mainWindowToUse)
 	{
-		mainWindow = mainWindowToUse;
+		super(mainWindowToUse);
 	}
 
-	abstract protected FxScene createScene() throws Exception;
-	abstract public void showCurrentScene() throws Exception;
 	abstract protected boolean confirmExit();
-	
-	public void ensureSceneExists() throws Exception
-	{
-		if(scene == null)
-		{
-			scene = createScene();
-			setScene(scene);
-		}
-	}
-	
-	public void setSceneRoot(Parent contents)
-	{
-		scene.setRoot(contents);
-	}
 	
 	public void setDialog(JDialog dialogToUse)
 	{
-		dialog = dialogToUse;
-		getDialog().addWindowListener(createWindowCloseHandler());
+		setWindow(dialogToUse);
+		getWindow().addWindowListener(createWindowCloseHandler());
 	}
 
 	public WindowListener createWindowCloseHandler()
@@ -75,76 +53,11 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 		return new WindowCloseHandler();
 	}
 	
-	public JDialog getDialog()
-	{
-		return dialog;
-	}
-	
-	public void handleNavigationEvent(String navigationNext)
-	{
-	}
-
-	public UiMainWindow getMainWindow()
-	{
-		return mainWindow;
-	}
-	
-	public MartusApp getApp()
-	{
-		return getMainWindow().getApp();
-	}
-
-	public MartusLocalization getLocalization()
-	{
-		return getMainWindow().getLocalization();
-	}
-
 	public void close()
 	{
 		getDialog().setVisible(false);
 	}
 
-	public File getExternalFxmlDirectory()
-	{
-		return getMainWindow().getApp().getFxmlDirectory();
-	}
-
-	public ShellController getShellController()
-	{
-		return shellController;
-	}
-	
-	public void setShellController(ShellController controller)
-	{
-		shellController = controller;
-	}
-	
-	public ContentController getCurrentController() throws Exception
-	{
-		return currentContentController;
-	}
-
-	public void setCurrentController(ContentController contentControllerToUse)
-	{
-		currentContentController = contentControllerToUse;
-	}
-
-	public void showCurrentPage(ContentController contentPaneController) throws Exception
-	{
-		ensureSceneExists();
-		contentPaneController.setStage(this);
-		Parent shellContents = getShellController().createContents();
-		getShellController().setStage(this);
-		getShellController().setContentPane(contentPaneController);
-		setSceneRoot(shellContents);
-		getFxScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
-	}
-
-	public FxScene getFxScene()
-	{
-		return scene;
-	}
-	
 	protected void handleDialogClose()
 	{
 		close();
@@ -162,10 +75,4 @@ abstract public class FxInSwingDialogStage extends JFXPanel
 			}
 		}
 	}
-
-	private JDialog dialog;
-	private UiMainWindow mainWindow;
-	private FxScene scene;
-	private ShellController shellController;
-	private ContentController currentContentController;
 }

@@ -90,7 +90,7 @@ public class Martus
 		if(foundFoldersUnsorted >= 0)
 		{
 			System.out.println(options.get(foundFoldersUnsorted));
-			UiMainWindow.defaultFoldersUnsorted = true;
+			UiSession.defaultFoldersUnsorted = true;
 			options.remove(foundFoldersUnsorted);
 		}
 		
@@ -98,8 +98,16 @@ public class Martus
 		if(foundAlphaTester >= 0)
 		{
 			System.out.println(options.get(foundAlphaTester));
-			UiMainWindow.isAlphaTester = true;
+			UiSession.isAlphaTester = true;
 			options.remove(foundAlphaTester);
+		}
+		
+		int foundJavaFx = options.indexOf("--javafx");
+		if(foundJavaFx >= 0)
+		{
+			System.out.println(options.get(foundJavaFx));
+			UiSession.isJavaFx = true;
+			options.remove(foundJavaFx);
 		}
 		
 		UiMainWindow.timeoutInXSeconds = DEFAULT_TIMEOUT_SECONDS;

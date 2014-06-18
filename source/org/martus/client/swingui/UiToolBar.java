@@ -32,7 +32,7 @@ import javax.swing.JToolBar;
 import org.martus.client.swingui.actions.ActionCreate;
 import org.martus.client.swingui.actions.ActionModify;
 import org.martus.client.swingui.actions.ActionPrint;
-import org.martus.client.swingui.actions.ActionSearch;
+import org.martus.client.swingui.actions.ActionToolbarSearch;
 import org.martus.swing.UiLanguageDirection;
 
 public class UiToolBar extends JToolBar
@@ -64,7 +64,7 @@ public class UiToolBar extends JToolBar
 	{
 		actionCreate = new ActionCreate(mainWindow);
 		actionEdit = new ActionModify(mainWindow);
-		actionSearch = new ActionSearch(mainWindow);
+		actionSearch = new ActionToolbarSearch(mainWindow);
 		actionPrint = ActionPrint.createWithButtonLabel(mainWindow);
 	}
 

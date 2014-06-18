@@ -41,6 +41,7 @@ import org.martus.client.bulletinstore.ExportBulletins;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiBulletinTitleListComponent;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiSession;
 import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
 import org.martus.clientside.FormatFilter;
 import org.martus.clientside.UiLocalization;
@@ -100,7 +101,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		upperStuff.addSpace();
 		upperStuff.add(includeAttachments);
 		upperStuff.addSpace();
-		if(UiMainWindow.isAlphaTester)
+		if(UiSession.isAlphaTester)
 		{
 			upperStuff.add(includeAllVersions);
 			upperStuff.addSpace();
@@ -120,7 +121,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 	File askForDestinationFile()
 	{
 		FormatFilter filter = new BulletinXmlFileFilter(mainWindow.getLocalization());
-		return mainWindow.doFileSaveDialog("ExportBulletins", defaultFileName, filter);
+		return mainWindow.showFileSaveDialog("ExportBulletins", defaultFileName, filter);
 	}
 
 	boolean userWantsToExportPrivate()

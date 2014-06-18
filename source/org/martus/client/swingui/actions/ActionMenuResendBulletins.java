@@ -40,7 +40,7 @@ public class ActionMenuResendBulletins extends UiMenuAction
 	public void actionPerformed(ActionEvent ae)
 	{
 		if(isEnabled())
-			mainWindow.doResendBulletins();
+			doResendBulletins();
 	}
 
 	public boolean isEnabled()
@@ -48,6 +48,17 @@ public class ActionMenuResendBulletins extends UiMenuAction
 		if(mainWindow.isDiscardedFolderSelected())
 			return false;
 		return mainWindow.isAnyBulletinSelected();
+	}
+
+	public void doResendBulletins()
+	{		
+		if (!getMainWindow().isServerConfigured())
+		{
+			getMainWindow().notifyDlg(getMainWindow(), "retrievenoserver", "ResendBulletins");
+			return;
+		}	
+		
+		getBulletinsTable().doResendBulletins();
 	}
 
 }

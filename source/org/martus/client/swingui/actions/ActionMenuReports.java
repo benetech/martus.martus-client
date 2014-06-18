@@ -216,7 +216,7 @@ public class ActionMenuReports extends ActionPrint
 	File askForReportFileToSaveTo()
 	{
 		FormatFilter filter = new ReportFormatFilter(getLocalization());
-		return mainWindow.doFileSaveDialog("SaveReportFormat", filter);
+		return mainWindow.showFileSaveDialog("SaveReportFormat", filter);
 	}
 
 	void runReport(ReportAnswers answers) throws Exception
@@ -234,7 +234,7 @@ public class ActionMenuReports extends ActionPrint
 		FieldSpec allPrivateSpec = FieldSpec.createStandardField(Bulletin.PSEUDOFIELD_ALL_PRIVATE, new FieldTypeBoolean());
 		MiniFieldSpec allPrivateMiniSpec = new MiniFieldSpec(allPrivateSpec);
 		MiniFieldSpec[] extraTags = {allPrivateMiniSpec};
-		SortableBulletinList sortableList = mainWindow.doSearch(searchTree, sortTags, extraTags, "ReportSearchProgress");
+		SortableBulletinList sortableList = doSearch(searchTree, sortTags, extraTags, "ReportSearchProgress");
 		if(sortableList == null)
 			return;
 		

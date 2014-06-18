@@ -23,19 +23,35 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
-
-import javafx.scene.control.Button;
+package org.martus.client.swingui.jfx.landing;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxContentController;
+import org.martus.client.swingui.jfx.FxInSwingFrameStage;
+import org.martus.client.swingui.jfx.FxScene;
 
-abstract public class ShellController extends FxInSwingDialogController
+public class FxMainStage extends FxInSwingFrameStage
 {
-	public ShellController(UiMainWindow mainWindowToUse)
+	public FxMainStage(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+		
+		setShellController(new FxLandingShellController(getMainWindow()));
+		setCurrentController(new BulletinsListController(getMainWindow()));
 	}
 
-	abstract public void setContentPane(ContentController contentController) throws Exception;
-	abstract public Button getNextButton();
+	@Override
+	public void showCurrentScene() throws Exception
+	{
+		FxContentController contentPaneController = getCurrentController();
+
+		showCurrentPage(contentPaneController);
+	}
+
+	@Override
+	protected FxScene createScene() throws Exception
+	{
+		return new FxScene(getExternalFxmlDirectory(), "Landing.css");
+	}
+
 }

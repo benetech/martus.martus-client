@@ -33,6 +33,7 @@ import java.io.InputStream;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiSession;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinLoader;
@@ -59,7 +60,7 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		if(panel.isImageInline)
 			return;
 		
-		if(!Utilities.isMSWindows() && !Utilities.isMacintosh() && !UiMainWindow.isAlphaTester)
+		if(!Utilities.isMSWindows() && !Utilities.isMacintosh() && !UiSession.isAlphaTester)
 		{
 			getMainWindow().notifyDlg("ViewAttachmentNotAvailable");
 			return;
@@ -149,7 +150,7 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		else if(Utilities.isMacintosh())
 			return new String[] {"open", fileToLaunch};
 
-		else if(UiMainWindow.isAlphaTester) 
+		else if(UiSession.isAlphaTester) 
 			return new String[] {"firefox", fileToLaunch};
 		
 		throw new RuntimeException("Launch not supported on this operating system");

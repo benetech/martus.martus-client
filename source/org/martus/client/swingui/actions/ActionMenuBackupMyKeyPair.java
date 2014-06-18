@@ -31,7 +31,7 @@ import org.martus.client.swingui.UiBackupRecoverSharedKeyPair;
 import org.martus.client.swingui.UiMainWindow;
 
 
-public class ActionMenuBackupMyKeyPair extends UiMenuAction
+public class ActionMenuBackupMyKeyPair extends UiMenuAction implements ActionDoer
 {
 	public ActionMenuBackupMyKeyPair(UiMainWindow mainWindowToUse)
 	{
@@ -39,6 +39,11 @@ public class ActionMenuBackupMyKeyPair extends UiMenuAction
 	}
 	
 	public void actionPerformed(ActionEvent ae)
+	{
+		doAction();
+	}
+
+	public void doAction()
 	{
 		if(!mainWindow.reSignIn())
 			return;

@@ -26,7 +26,9 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
+
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.dialogs.UiImportBulletinsDlg;
 
 public class ActionMenuImportBulletins extends UiMenuAction
 {
@@ -37,7 +39,12 @@ public class ActionMenuImportBulletins extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doImportBulletins();
+		doImportBulletins();
 	}
 
+	public void doImportBulletins()
+	{
+		new UiImportBulletinsDlg(getMainWindow());
+	}
+	
 }

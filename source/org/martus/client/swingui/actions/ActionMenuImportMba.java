@@ -87,7 +87,7 @@ public class ActionMenuImportMba extends UiMenuAction
 	private File getFileToImport()
 	{
 		MartusBulletinArchiveFileFilter filter = new MartusBulletinArchiveFileFilter(getLocalization());
-		File importFile = mainWindow.doFileOpenDialogWithDirectoryMemory("ImportMBA", filter);
+		File importFile = mainWindow.showFileOpenDialogWithDirectoryMemory("ImportMBA", filter);
 		return importFile;
 	}
 

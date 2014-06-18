@@ -29,6 +29,8 @@ package org.martus.client.swingui.actions;
 import java.awt.event.ActionEvent;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.tablemodels.RetrieveHQTableModel;
+import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 
 public class ActionMenuRetrieveHQSealedBulletins extends UiMenuAction
 {
@@ -39,7 +41,22 @@ public class ActionMenuRetrieveHQSealedBulletins extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doRetrieveHQBulletins();
+		doRetrieveHQBulletins();
+	}
+
+	public void doRetrieveHQBulletins()
+	{
+		getMainWindow().offerToCancelRetrieveInProgress();
+		if(getMainWindow().isRetrieveInProgress())
+			return;
+		
+		String dlgTitleTag = "RetrieveHQSealedBulletins";
+		String summariesProgressTag = "RetrieveHQSealedBulletinSummaries";
+		String retrieverProgressTag = "RetrieveHQSealedBulletinProgress";
+		String folderName = getApp().getNameOfFolderRetrievedFieldOfficeSealed();
+
+		RetrieveTableModel model = new RetrieveHQTableModel(getApp(), getLocalization());
+		getMainWindow().retrieveBulletins(model, folderName, dlgTitleTag, summariesProgressTag, retrieverProgressTag);
 	}
 
 }

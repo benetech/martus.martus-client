@@ -197,7 +197,7 @@ public class UiBackupRecoverSharedKeyPair
 		File firstShareFile = null;
 		while(true)
 		{
-			firstShareFile = mainWindow.doFileOpenDialog("RecoverSharedKeyPair", null);
+			firstShareFile = mainWindow.showFileOpenDialog("RecoverSharedKeyPair", null);
 			if(firstShareFile != null)
 			{
 				if(getRootKeyShareFileName(firstShareFile) != null)

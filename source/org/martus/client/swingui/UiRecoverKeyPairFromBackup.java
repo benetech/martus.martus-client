@@ -52,7 +52,7 @@ public class UiRecoverKeyPairFromBackup
 		mainWindow.notifyDlg("RecoveryProcessBackupFile");
 		while(true)
 		{
-			File backupFile = mainWindow.doFileOpenDialogWithDirectoryMemory("RestoreFromKeyPair", FileDialogHelpers.NO_FILTER);
+			File backupFile = mainWindow.showFileOpenDialogWithDirectoryMemory("RestoreFromKeyPair", FileDialogHelpers.NO_FILTER);
 			if (backupFile == null)
 				return false;
 			

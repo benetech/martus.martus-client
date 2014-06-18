@@ -106,7 +106,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog(getWizardStage(), "UnexpectedError");
+			showNotifyDialog("UnexpectedError");
 		}
 	} 
 	
@@ -224,7 +224,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 
 	protected void importFromContacts(AbstractFxImportFormTemplateController controller) throws Exception
 	{
-		showControllerInsideModalDialog(getWizardStage(), controller);
+		showControllerInsideModalDialog(controller);
 		CustomFieldTemplate selectedTemplate = controller.getSelectedFormTemplate();
 		updateSelectedCustomFieldTemplateComponents(selectedTemplate);
 	}

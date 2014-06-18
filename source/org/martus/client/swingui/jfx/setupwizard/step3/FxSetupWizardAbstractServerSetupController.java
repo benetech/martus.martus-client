@@ -62,12 +62,12 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 			ConnectToServerTask task = new ConnectToServerTask(getApp(), gateway, magicWord);
 			MartusLocalization localization = getLocalization();
 			String connectingToServerMsg = localization.getFieldLabel("AttemptToConnectToServerAndGetCompliance");
-			showTimeoutDialog(wizardStage, connectingToServerMsg, task);
+			showTimeoutDialog(connectingToServerMsg, task);
 			if(!task.isAvailable())
 			{
 				String serverNotRespondingSaveConfigurationTitle = localization.getWindowTitle("ServerNotRespondingSaveConfiguration");
 				String serverNotRespondingSaveConfigurationMessage = localization.getFieldLabel("ServerNotRespondingSaveConfiguration");
-				if(showConfirmationDialog(wizardStage, serverNotRespondingSaveConfigurationTitle,serverNotRespondingSaveConfigurationMessage))
+				if(showConfirmationDialog(serverNotRespondingSaveConfigurationTitle, serverNotRespondingSaveConfigurationMessage))
 				{
 					saveServerConfig(serverIPAddress, serverPublicKey, "");
 					return;
@@ -76,7 +76,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 			}
 			if(!task.isAllowedToUpload())
 			{
-				showNotifyDialog(getWizardStage(), "ErrorServerOffline");
+				showNotifyDialog("ErrorServerOffline");
 				return;
 			}
 			String complianceStatement = task.getComplianceStatement();
@@ -84,7 +84,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 			{
 				if(complianceStatement.equals(""))
 				{
-					showNotifyDialog(wizardStage, "ServerComplianceFailed");
+					showNotifyDialog("ServerComplianceFailed");
 					saveServerConfig(serverIPAddress, serverPublicKey, "");
 					return;
 				}
@@ -120,17 +120,17 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		catch(SaveConfigInfoException e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog(wizardStage, "ErrorSavingConfig");
+			showNotifyDialog("ErrorSavingConfig");
 		}
 		catch(ServerNotAvailableException e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog(wizardStage, "ErrorServerOffline");
+			showNotifyDialog("ErrorServerOffline");
 		}
 		catch(Exception e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog(wizardStage, "ErrorGettingCompliance");
+			showNotifyDialog("ErrorGettingCompliance");
 		} 
 	}
 	
@@ -139,9 +139,9 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		MartusLocalization localization = getLocalization();
 		String title = localization.getWindowTitle("ServerCompliance");
 		String complianceStatementMsg = String.format("%s\n\n%s", localization.getFieldLabel("ServerComplianceDescription"), newServerCompliance);
-		if(!showConfirmationDialog(getWizardStage(), title, complianceStatementMsg))
+		if(!showConfirmationDialog(title, complianceStatementMsg))
 		{
-			showNotifyDialog(getWizardStage(), "UserRejectedServerCompliance");
+			showNotifyDialog("UserRejectedServerCompliance");
 			return false;
 		}
 		return true;
