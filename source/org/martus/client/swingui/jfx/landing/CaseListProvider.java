@@ -30,36 +30,36 @@ import java.util.ArrayList;
 import javafx.collections.ModifiableObservableListBase;
 
 
-public class CaseListProvider extends ModifiableObservableListBase<CaseList>
+public class CaseListProvider extends ModifiableObservableListBase<CaseListItem>
 {
 	
 	public CaseListProvider()
 	{
-		cases = new ArrayList<CaseList>(INITIAL_NUMBER_OF_CASES);
+		cases = new ArrayList<CaseListItem>();
 	}
 
 	@Override
-	protected void doAdd(int index, CaseList caseToAdd)
+	protected void doAdd(int index, CaseListItem caseToAdd)
 	{
 		cases.add(index, caseToAdd);
 	}
 
 	@Override
-	protected CaseList doRemove(int index)
+	protected CaseListItem doRemove(int index)
 	{
-		return (CaseList) cases.remove(index);
+		return (CaseListItem) cases.remove(index);
 	}
 
 	@Override
-	protected CaseList doSet(int index, CaseList caseToSet)
+	protected CaseListItem doSet(int index, CaseListItem caseToSet)
 	{
-		return (CaseList) cases.set(index, caseToSet);
+		return (CaseListItem) cases.set(index, caseToSet);
 	}
 
 	@Override
-	public CaseList get(int index)
+	public CaseListItem get(int index)
 	{
-		return (CaseList) cases.get(index);
+		return (CaseListItem) cases.get(index);
 	}
 
 	@Override
@@ -67,7 +67,5 @@ public class CaseListProvider extends ModifiableObservableListBase<CaseList>
 	{
 		return cases.size();
 	}
-	
-	final int INITIAL_NUMBER_OF_CASES = 50;
 	ArrayList cases;
 }

@@ -25,9 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
-public class CaseList
+public class CaseListItem
 {
-	CaseList(String name)
+	CaseListItem(String name)
 	{
 		caseName = name;
 	}
