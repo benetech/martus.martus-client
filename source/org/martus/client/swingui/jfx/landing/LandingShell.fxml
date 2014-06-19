@@ -50,77 +50,93 @@
 <VBox.margin>
 <Insets bottom="1.0" top="1.0" />
 </VBox.margin>
-<children><GridPane>
-  <columnConstraints>
-<ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
-<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
-<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-<ColumnConstraints hgrow="SOMETIMES" maxWidth="115.0" minWidth="10.0" prefWidth="115.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="240.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-<children><Button alignment="CENTER_RIGHT" mnemonicParsing="false" style="-fx-background-color: #77bad0; -fx-background-radius: 0px;" onAction="#onQuickSearch" text="Search" textAlignment="CENTER" textFill="#f7f7f7" GridPane.columnIndex="5">
-<font>
-<Font name="Helvetica" size="14.0" />
-</font>
-<GridPane.margin>
-<Insets left="160.0" top="10.0" />
-</GridPane.margin>
-<opaqueInsets>
-<Insets />
-</opaqueInsets></Button><TextField fx:id="searchText" maxWidth="160.0" minHeight="27.0" prefWidth="150.0" style="-fx-background-radius: 0px;" GridPane.columnIndex="5">
-<GridPane.margin>
-<Insets top="11.0" />
-</GridPane.margin></TextField><ToggleButton fx:id="toggleButtonTor" mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="On" textFill="#f5f5f5" GridPane.columnIndex="4" onAction="#onTor">
-<font>
-<Font name="Helvetica" size="14.0" />
-</font>
-<GridPane.margin>
-<Insets left="45.0" top="10.0" />
-</GridPane.margin></ToggleButton><Text fill="#353535" strokeType="OUTSIDE" strokeWidth="0.0" text="Backup:" GridPane.columnIndex="3">
-<font>
-<Font name="Helvetica" size="14.0" />
-</font>
-<GridPane.margin>
-<Insets left="10.0" top="10.0" />
-</GridPane.margin></Text><Text fill="#353535" strokeType="OUTSIDE" strokeWidth="0.0" text="Tor:" GridPane.columnIndex="4">
-<font>
-<Font name="Helvetica" size="14.0" />
-</font>
-<GridPane.margin>
-<Insets left="10.0" top="10.0" />
-</GridPane.margin>
-</Text><ImageView fitHeight="33.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
-<image>
-<Image url="@../logo-fixed/Martus-Logo-Black-103x46.png" />
-</image>
-<GridPane.margin>
-<Insets left="10.0" top="10.0" />
-</GridPane.margin></ImageView><ToggleButton mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="On" textFill="#f7f7f7" GridPane.columnIndex="3">
-<font>
-<Font name="Helvetica" size="14.0" />
-</font>
-<GridPane.margin>
-<Insets left="75.0" top="10.0" />
-</GridPane.margin>
-</ToggleButton><Button mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="+ Create" textFill="#f7f7f7" GridPane.columnIndex="1"  onAction="#onCreateNewBulletin">
-<font>
-<Font name="Helvetica" size="14.0" />
-</font>
-<GridPane.margin>
-<Insets left="10.0" top="10.0" />
-</GridPane.margin></Button><Button mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="Import" textFill="#f7f7f7" GridPane.columnIndex="1">
-<font>
-<Font name="Helvetica" size="14.0" />
-</font>
-<GridPane.margin>
-<Insets left="100.0" top="10.0" />
-</GridPane.margin>
-</Button>
-</children>
+<children>
+<GridPane>
+	<columnConstraints>
+		<ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+		<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+		<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+		<ColumnConstraints hgrow="SOMETIMES" maxWidth="115.0" minWidth="10.0" prefWidth="115.0" />
+	    <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
+	    <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="240.0" />
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+	</rowConstraints>
+	<children>
+		<Button alignment="CENTER_RIGHT" mnemonicParsing="false" style="-fx-background-color: #77bad0; -fx-background-radius: 0px;" onAction="#onQuickSearch" text="Search" textAlignment="CENTER" textFill="#f7f7f7" GridPane.columnIndex="5">
+			<font>
+				<Font name="Helvetica" size="14.0" />
+			</font>
+			<GridPane.margin>
+				<Insets left="160.0" top="10.0" />
+			</GridPane.margin>
+			<opaqueInsets>
+				<Insets />
+			</opaqueInsets>
+		</Button>
+		<TextField fx:id="searchText" maxWidth="160.0" minHeight="27.0" prefWidth="150.0" style="-fx-background-radius: 0px;" GridPane.columnIndex="5">
+			<GridPane.margin>
+				<Insets top="11.0" />
+			</GridPane.margin>
+		</TextField>
+		<ToggleButton fx:id="toggleButtonTor" mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="On" textFill="#f5f5f5" GridPane.columnIndex="4" onAction="#onTor">
+			<font>
+				<Font name="Helvetica" size="14.0" />
+			</font>
+			<GridPane.margin>
+				<Insets left="45.0" top="10.0" />
+			</GridPane.margin>
+		</ToggleButton>
+		<Text fill="#353535" strokeType="OUTSIDE" strokeWidth="0.0" text="Backup:" GridPane.columnIndex="3">
+			<font>
+			<Font name="Helvetica" size="14.0" />
+			</font>
+			<GridPane.margin>
+			<Insets left="10.0" top="10.0" />
+			</GridPane.margin>
+		</Text>
+		<Text fill="#353535" strokeType="OUTSIDE" strokeWidth="0.0" text="Tor:" GridPane.columnIndex="4">
+			<font>
+			<Font name="Helvetica" size="14.0" />
+			</font>
+			<GridPane.margin>
+			<Insets left="10.0" top="10.0" />
+			</GridPane.margin>
+		</Text>
+		<ImageView fitHeight="33.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@../logo-fixed/Martus-Logo-Black-103x46.png" />
+			</image>
+			<GridPane.margin>
+				<Insets left="10.0" top="10.0" />
+			</GridPane.margin>
+		</ImageView>
+		<ToggleButton mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="On" textFill="#f7f7f7" GridPane.columnIndex="3">
+			<font>
+				<Font name="Helvetica" size="14.0" />
+			</font>
+			<GridPane.margin>
+				<Insets left="75.0" top="10.0" />
+			</GridPane.margin>
+		</ToggleButton>
+		<Button mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="+ Create" textFill="#f7f7f7" GridPane.columnIndex="1"  onAction="#onCreateNewBulletin">
+			<font>
+				<Font name="Helvetica" size="14.0" />
+			</font>
+			<GridPane.margin>
+				<Insets left="10.0" top="10.0" />
+			</GridPane.margin>
+		</Button>
+		<Button mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="Import" textFill="#f7f7f7" GridPane.columnIndex="1">
+			<font>
+				<Font name="Helvetica" size="14.0" />
+			</font>
+			<GridPane.margin>
+				<Insets left="100.0" top="10.0" />
+			</GridPane.margin>
+		</Button>
+	</children>
 </GridPane>
 </children></VBox><SplitPane dividerPositions="0.29797979797979796" focusTraversable="true" minWidth="920.0" prefHeight="360.0" prefWidth="920.0" style="-fx-box-border: transparent; -fx-box-border: 0px;">
   <items>
