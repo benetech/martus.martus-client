@@ -25,8 +25,53 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
+import java.util.ArrayList;
 
+import javafx.collections.ModifiableObservableListBase;
 
-public class CaseListProvider extends ArrayObservableList<CaseListItem>
+public class ArrayObservableList<E> extends ModifiableObservableListBase<E>
 {
+
+	public ArrayObservableList()
+	{
+		this(INITIAL_ARRAY_CAPACITY);
+	}
+	
+	public ArrayObservableList(int initialCapacity)
+	{
+		arrayList = new ArrayList<>(initialCapacity);
+	}
+
+	@Override
+	protected void doAdd(int index, E itemToAdd)
+	{
+		arrayList.add(index, itemToAdd);
+	}
+
+	@Override
+	protected E doRemove(int index)
+	{
+		return (E) arrayList.remove(index);
+	}
+
+	@Override
+	protected E doSet(int index, E set)
+	{
+		return (E) arrayList.set(index, set);
+	}
+
+	@Override
+	public E get(int index)
+	{
+		return (E) arrayList.get(index);
+	}
+
+	@Override
+	public int size()
+	{
+		return arrayList.size();
+	}
+	
+	static final int INITIAL_ARRAY_CAPACITY = 10;
+	private ArrayList arrayList;
 }
