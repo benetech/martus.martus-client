@@ -65,9 +65,9 @@ class BackgroundTimerTask extends TimerTask
 		mainWindow = mainWindowToUse;
 		statusBar = statusBarToUse;
 		ProgressMeterInterface progressMeter = getProgressMeter();
-		uploader = new BackgroundUploader(mainWindow.getApp(), progressMeter);
-		retriever = new BackgroundRetriever(mainWindow.getApp(), progressMeter);
-		if(mainWindow.isServerConfigured())
+		uploader = new BackgroundUploader(getApp(), progressMeter);
+		retriever = new BackgroundRetriever(getApp(), progressMeter);
+		if(mainWindow.isServerConfigured() && getApp().getTransport().isOnline())
 			setWaitingForServer();
 	}
 
@@ -135,6 +135,10 @@ class BackgroundTimerTask extends TimerTask
 	{
 		if(!mainWindow.isServerConfigured())
 			mainWindow.clearStatusMessage();
+		else if(!getApp().getTransport().isOnline())
+		{
+			mainWindow.setStatusMessageTag(UiMainWindow.STATUS_SERVER_OFFLINE_MODE);
+		}
 		else if(isServerAvailable())
 		{
 			mainWindow.setStatusMessageReady();

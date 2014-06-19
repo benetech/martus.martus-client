@@ -564,6 +564,7 @@ public class EnglishStrings
 "field:RetrieveMyDraftBulletinProgress=Retrieving My Draft Bulletins",
 "field:NoServerAvailableProgressMessage=Server Not Available",
 "field:ServerNotConfiguredProgressMessage=Server needs to be configured.",
+"field:OfflineModeProgressMessage=Offline",
 "field:UploadFailedProgressMessage=Upload Failed",
 "field:ChunkProgressStatusMessage=Download Progress",
 "field:RetrieveMySealedBulletinSummaries=Retrieving My Sealed Bulletin Summaries",
