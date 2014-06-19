@@ -26,6 +26,14 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
+
+import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.core.MartusApp;
+import org.martus.common.MiniLocalization;
+import org.martus.common.bulletin.Bulletin;
+import org.martus.common.packet.UniversalId;
 
 import javafx.collections.ModifiableObservableListBase;
 
@@ -33,9 +41,31 @@ import javafx.collections.ModifiableObservableListBase;
 public class BulletinTableProvider extends ModifiableObservableListBase<BulletinTableRowData>
 {
 
-	public BulletinTableProvider()
+	public BulletinTableProvider(MartusApp mainApp)
 	{
-		data = new ArrayList<BulletinTableRowData>(INITIAL_NUMBER_OF_ELEMENTS);
+		app = mainApp;
+		data = new ArrayList<BulletinTableRowData>(INITIAL_CAPACITY);
+	}
+	
+	public void loadBulletinData(Set bulletinUids)
+	{
+		clear();
+		for(Iterator iter = bulletinUids.iterator(); iter.hasNext();)
+		{
+			UniversalId leafBulletinUid = (UniversalId) iter.next();
+			BulletinTableRowData bulletinData = getCurrentBulletinData(leafBulletinUid);
+			add(bulletinData);		
+		}
+	}
+
+	protected BulletinTableRowData getCurrentBulletinData(UniversalId leafBulletinUid)
+	{
+		ClientBulletinStore clientBulletinStore = app.getStore();
+		Bulletin bulletin = clientBulletinStore.getBulletinRevision(leafBulletinUid);
+		boolean onServer = clientBulletinStore.isProbablyOnServer(leafBulletinUid);
+		MiniLocalization localization = app.getLocalization();
+		BulletinTableRowData bulletinData = new BulletinTableRowData(bulletin, onServer, localization);
+		return bulletinData;
 	}
 	
 	@Override
@@ -68,6 +98,7 @@ public class BulletinTableProvider extends ModifiableObservableListBase<Bulletin
 		return data.size();
 	}
 	
-	final int INITIAL_NUMBER_OF_ELEMENTS = 1000;
-	ArrayList data;
+	final int INITIAL_CAPACITY = 1000;
+	private ArrayList data;
+	private MartusApp app;
 }
