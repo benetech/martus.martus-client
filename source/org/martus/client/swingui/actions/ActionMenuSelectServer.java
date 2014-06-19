@@ -77,8 +77,9 @@ public class ActionMenuSelectServer extends UiMenuAction implements ActionDoer
 			String newServerCompliance = getMainWindow().getServerCompliance(gateway);
 			if(!getMainWindow().confirmServerCompliance("ServerComplianceDescription", newServerCompliance))
 			{
-				//TODO:The following line shouldn't be necessary but without it, the trustmanager 
-				//will reject the old server, we don't know why.
+				//FIXME: Since TrustManager is global (part of socket factory), after 
+				// contacting the potential new server, we have to reset everything 
+				// back to the old server. Really, TM shouldn't behave like a global. 
 				ClientSideNetworkGateway.buildGateway(previousServerInfo.getServerName(), previousServerInfo.getServerPublicKey(), getApp().getTransport());
 				
 				getMainWindow().notifyDlg("UserRejectedServerCompliance");
