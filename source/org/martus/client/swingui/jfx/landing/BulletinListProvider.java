@@ -43,6 +43,11 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 		app = mainApp;
 	}
 	
+	protected void loadAllBulletins()
+	{
+		loadBulletinData(app.getStore().getAllBulletinLeafUids());
+	}
+
 	public void loadBulletinData(Set bulletinUids)
 	{
 		clear();
@@ -63,7 +68,37 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 		BulletinTableRowData bulletinData = new BulletinTableRowData(bulletin, onServer, localization);
 		return bulletinData;
 	}
-	
+
+	protected int findBulletinIndexInTable(UniversalId uid)
+	{
+		for (int currentIndex = 0; currentIndex < size(); currentIndex++)
+		{
+			if(uid.equals(get(currentIndex).getUniversalId()))
+				return currentIndex;
+		}
+		return BULLETIN_NOT_IN_TABLE;
+	}
+
+	public boolean updateBulletin(Bulletin bulletin)
+	{
+		boolean shouldResortTable = false;
+		UniversalId bulletinId = bulletin.getUniversalId();
+		BulletinTableRowData updatedBulletinData = getCurrentBulletinData(bulletinId);
+		int bulletinIndexInTable = findBulletinIndexInTable(bulletinId);
+		if(bulletinIndexInTable <= BULLETIN_NOT_IN_TABLE)
+		{
+			loadAllBulletins();
+			shouldResortTable = true;
+		}
+		else
+		{
+			set(bulletinIndexInTable, updatedBulletinData);
+			shouldResortTable = false;
+		}
+		return shouldResortTable;
+	}
+
+	final int BULLETIN_NOT_IN_TABLE = -1;
 	static final int INITIAL_CAPACITY = 1000;
 	private MartusApp app;
 }

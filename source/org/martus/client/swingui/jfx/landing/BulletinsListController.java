@@ -27,7 +27,6 @@ package org.martus.client.swingui.jfx.landing;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import javafx.fxml.FXML;
@@ -44,11 +43,9 @@ import javafx.scene.input.MouseEvent;
 
 import javax.swing.SwingUtilities;
 
-import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
-import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
@@ -76,23 +73,16 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		Label noBulletins = new Label(getLocalization().getFieldLabel("NoBulletinsInTable"));
 		itemsTable.setPlaceholder(noBulletins);
 		itemsTable.setItems(bulletinTableProvider);
-		loadBulletinData();
+		bulletinTableProvider.loadAllBulletins();
+		sortByMostRecentBulletins();
 	}
 
-	private void sortByMostRecentBulletins()
+	protected void sortByMostRecentBulletins()
 	{
 		dateSavedColumn.setSortType(SortType.DESCENDING);
 		itemsTable.getSortOrder().add(dateSavedColumn);
 	}
 
-	protected void loadBulletinData()
-	{
-		Set allBulletinUids = getApp().getStore().getAllBulletinLeafUids();
-		bulletinTableProvider.loadBulletinData(allBulletinUids);
-		sortByMostRecentBulletins();
-	}
-
-	
 	protected void editBulletin()
 	{
 		TableViewSelectionModel<BulletinTableRowData> selectionModel = itemsTable.getSelectionModel();
@@ -140,31 +130,13 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		
 		public void run()
 		{
-			UniversalId bulletinId = bulletin.getUniversalId();
-			BulletinTableRowData updatedBulletinData = bulletinTableProvider.getCurrentBulletinData(bulletinId);
-			int bulletinIndexInTable = findBulletinIndexInTable(bulletinId);
-			if(bulletinIndexInTable <= BULLETIN_NOT_IN_TABLE)
-			{
-				loadBulletinData();
-			}
-			else
-			{
-				bulletinTableProvider.set(bulletinIndexInTable, updatedBulletinData);
-			}
+			boolean shouldResortTable = bulletinTableProvider.updateBulletin(bulletin);
+			if(shouldResortTable)
+				sortByMostRecentBulletins();
 		}
 		public Bulletin bulletin;
 	}
 	
-	protected int findBulletinIndexInTable(UniversalId uid)
-	{
-		for (int currentIndex = 0; currentIndex < bulletinTableProvider.size(); currentIndex++)
-		{
-			if(uid.equals(bulletinTableProvider.get(currentIndex).getUniversalId()))
-				return currentIndex;
-		}
-		return BULLETIN_NOT_IN_TABLE;
-	}
-
 	@FXML
 	public void onMouseClick(MouseEvent mouseEvent) 
 	{
@@ -185,7 +157,6 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		return "landing/FxTableViewItems.fxml";
 	}
 	
-	final int BULLETIN_NOT_IN_TABLE = -1;
 	
 	@FXML 
 	protected TableView<BulletinTableRowData> itemsTable;
