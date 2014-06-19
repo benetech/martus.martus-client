@@ -160,8 +160,8 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		{
 			UniversalId bulletinId = bulletin.getUniversalId();
 			BulletinTableRowData updatedBulletinData = getCurrentBulletinData(bulletinId);
-			int bulletinIndexInTable = getBulletinIndexInTable(bulletinId);
-			if(bulletinIndexInTable == BULLETIN_NOT_IN_TABLE)
+			int bulletinIndexInTable = findBulletinIndexInTable(bulletinId);
+			if(bulletinIndexInTable <= BULLETIN_NOT_IN_TABLE)
 			{
 				loadBulletinData();
 			}
@@ -173,11 +173,11 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		public Bulletin bulletin;
 	}
 	
-	protected int getBulletinIndexInTable(UniversalId id)
+	protected int findBulletinIndexInTable(UniversalId uid)
 	{
 		for (int currentIndex = 0; currentIndex < bulletinTableProvider.size(); currentIndex++)
 		{
-			if(id.equals(bulletinTableProvider.get(currentIndex).getUniversalId()))
+			if(uid.equals(bulletinTableProvider.get(currentIndex).getUniversalId()))
 				return currentIndex;
 		}
 		return BULLETIN_NOT_IN_TABLE;
