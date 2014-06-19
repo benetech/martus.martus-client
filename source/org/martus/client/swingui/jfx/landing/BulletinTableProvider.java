@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -35,16 +34,13 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
-import javafx.collections.ModifiableObservableListBase;
-
-
-public class BulletinTableProvider extends ModifiableObservableListBase<BulletinTableRowData>
+public class BulletinTableProvider extends ArrayObservableList<BulletinTableRowData>
 {
 
 	public BulletinTableProvider(MartusApp mainApp)
 	{
+		super(INITIAL_CAPACITY);
 		app = mainApp;
-		data = new ArrayList<BulletinTableRowData>(INITIAL_CAPACITY);
 	}
 	
 	public void loadBulletinData(Set bulletinUids)
@@ -68,37 +64,6 @@ public class BulletinTableProvider extends ModifiableObservableListBase<Bulletin
 		return bulletinData;
 	}
 	
-	@Override
-	protected void doAdd(int index, BulletinTableRowData element)
-	{
-		data.add(index, element);
-	}
-
-	@Override
-	protected BulletinTableRowData doRemove(int index)
-	{
-		return (BulletinTableRowData) data.remove(index);
-	}
-
-	@Override
-	protected BulletinTableRowData doSet(int index, BulletinTableRowData element)
-	{
-		return (BulletinTableRowData) data.set(index, element);
-	}
-
-	@Override
-	public BulletinTableRowData get(int index)
-	{
-		return (BulletinTableRowData) data.get(index);
-	}
-
-	@Override
-	public int size()
-	{
-		return data.size();
-	}
-	
-	final int INITIAL_CAPACITY = 1000;
-	private ArrayList data;
+	static final int INITIAL_CAPACITY = 1000;
 	private MartusApp app;
 }
