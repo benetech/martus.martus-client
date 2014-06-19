@@ -1740,6 +1740,9 @@ public class MartusApp
 	{
 		if(currentNetworkInterfaceHandler == null && !isServerConfigured())
 			return false;
+		
+		if(!getTransport().isOnline())
+			return false;
 
 		return isSSLServerAvailable(getCurrentNetworkInterfaceGateway());
 	}
