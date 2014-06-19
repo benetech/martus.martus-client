@@ -669,11 +669,11 @@ public class MartusApp
 
 		if(isTorEnabled)
 		{
-			getTransport().start();
+			getTransport().startTor();
 		}
 		else
 		{
-			getTransport().stop();
+			getTransport().stopTor();
 		}
 	}
 
