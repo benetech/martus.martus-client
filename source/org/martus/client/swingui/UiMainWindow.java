@@ -108,6 +108,7 @@ import org.martus.client.swingui.jfx.welcome.WelcomeStage;
 import org.martus.client.swingui.spellcheck.SpellCheckerManager;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.clientside.ClientSideNetworkGateway;
+import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpc;
 import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.FormatFilter;
@@ -192,6 +193,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 //				"Please contact info@martus.org with any feedback or questions."}, 
 //				new String[] {"OK"});
 		
+		restrictToOnlyTestServers();
+		
 		File timeoutDebug = new File(getApp().getMartusDataRootDirectory(), "timeout.1min");
 		if(timeoutDebug.exists())
 		{
@@ -217,6 +220,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		addWindowListener(new WindowEventHandler());
 	}
 	
+	private void restrictToOnlyTestServers()
+	{
+		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("127.0.0.1");
+		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("localhost");
+		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("sl1-dev");
+		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("54.213.152.140"); // sl1-dev
+		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("aws-dev");
+		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("54.245.101.104"); // aws-dev
+	}
+
 	public boolean run()
 	{
 		setCurrentActiveFrame(this);
