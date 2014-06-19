@@ -83,7 +83,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 		for(Iterator f = visibleFolders.iterator(); f.hasNext();)
 		{
 			BulletinFolder folder = (BulletinFolder) f.next();
-			CaseList caseList = new CaseList(folder.getLocalizedName(localization));
+			CaseListItem caseList = new CaseListItem(folder.getLocalizedName(localization));
 			caseListProvider.add(caseList);
 		}
 		casesListView.setItems(caseListProvider);
@@ -168,7 +168,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@FXML
 	private void OnCasesMouseClicked(MouseEvent mouseEvent)
 	{
-		CaseList selectedCase = caseListProvider.get(casesListView.getSelectionModel().getSelectedIndex());
+		CaseListItem selectedCase = caseListProvider.get(casesListView.getSelectionModel().getSelectedIndex());
 		MartusLogger.log("selected" + selectedCase);
 	}
 
@@ -182,7 +182,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 	protected AnchorPane mainContentPane;
 	
 	@FXML
-	protected ListView<CaseList> casesListView;
+	protected ListView<CaseListItem> casesListView;
 
 	private CaseListProvider caseListProvider;
 }
