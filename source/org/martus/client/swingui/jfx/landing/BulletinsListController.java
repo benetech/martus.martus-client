@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -56,7 +58,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	public BulletinsListController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		bulletinTableProvider = new BulletinTableProvider();
+		bulletinTableProvider = new BulletinTableProvider(getApp());
 	}
 
 	@Override
@@ -85,26 +87,11 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	protected void loadBulletinData()
 	{
-		bulletinTableProvider.clear();
 		Set allBulletinUids = getApp().getStore().getAllBulletinLeafUids();
-		for(Iterator iter = allBulletinUids.iterator(); iter.hasNext();)
-		{
-			UniversalId leafBulletinUid = (UniversalId) iter.next();
-			BulletinTableRowData bulletinData = getCurrentBulletinData(leafBulletinUid);
-			bulletinTableProvider.add(bulletinData);		
-		}
+		bulletinTableProvider.loadBulletinData(allBulletinUids);
 		sortByMostRecentBulletins();
 	}
 
-	protected BulletinTableRowData getCurrentBulletinData(UniversalId leafBulletinUid)
-	{
-		ClientBulletinStore clientBulletinStore = getApp().getStore();
-		Bulletin bulletin = clientBulletinStore.getBulletinRevision(leafBulletinUid);
-		boolean onServer = clientBulletinStore.isProbablyOnServer(leafBulletinUid);
-		MiniLocalization localization = getLocalization();
-		BulletinTableRowData bulletinData = new BulletinTableRowData(bulletin, onServer, localization);
-		return bulletinData;
-	}
 	
 	protected void editBulletin()
 	{
@@ -129,13 +116,8 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		@Override
 		public void run()
 		{
-			bulletinTableProvider.clear();
-			UniversalId[] foundUids = results.getUniversalIds();
-			for (int i = 0; i < foundUids.length; i++)
-			{
-				BulletinTableRowData bulletinData = getCurrentBulletinData(foundUids[i]);
-				bulletinTableProvider.add(bulletinData);		
-			}
+			Set foundUids = new HashSet(Arrays.asList(results.getUniversalIds()));
+			bulletinTableProvider.loadBulletinData(foundUids);
 			itemsTable.sort();
 		}
 		
@@ -159,7 +141,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		public void run()
 		{
 			UniversalId bulletinId = bulletin.getUniversalId();
-			BulletinTableRowData updatedBulletinData = getCurrentBulletinData(bulletinId);
+			BulletinTableRowData updatedBulletinData = bulletinTableProvider.getCurrentBulletinData(bulletinId);
 			int bulletinIndexInTable = findBulletinIndexInTable(bulletinId);
 			if(bulletinIndexInTable <= BULLETIN_NOT_IN_TABLE)
 			{
