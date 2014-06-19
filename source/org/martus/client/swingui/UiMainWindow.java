@@ -1936,12 +1936,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			mainStage = new FxMainStage(this);
 			Platform.runLater(new FxRunner(mainStage));
 			setContentPane(mainStage);
-			
+			getApp().getTransport().setIsOnline(true);
 		}
 		else
 		{
 			mainPane = new UiMainPane(this, getUiState());
 			setContentPane(mainPane);
+			getApp().getTransport().setIsOnline(true);
 		}
 
 		getTransport().setProgressMeter(getTorProgressMeter());
@@ -1998,6 +1999,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if (!getApp().isServerConfigured())
 		{	
 			setStatusMessageTag(STATUS_SERVER_NOT_CONFIGURED);
+			return;
+		}
+		
+		if(!getApp().getTransport().isOnline())
+		{
+			setStatusMessageTag(STATUS_SERVER_OFFLINE_MODE);
 			return;
 		}
 	
@@ -2619,6 +2626,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public static final String STATUS_CONNECTING = "StatusConnecting";
 	public static final String STATUS_NO_SERVER_AVAILABLE = "NoServerAvailableProgressMessage";
 	public static final String STATUS_SERVER_NOT_CONFIGURED = "ServerNotConfiguredProgressMessage";
+	public static final String STATUS_SERVER_OFFLINE_MODE = "OfflineModeProgressMessage";
 
 	public static final int MINIMUM_TEXT_FIELD_WIDTH = 30;
 	private static final int TESTING_TIMEOUT_60_SECONDS = 60;

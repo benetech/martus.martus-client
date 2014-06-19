@@ -669,11 +669,11 @@ public class MartusApp
 
 		if(isTorEnabled)
 		{
-			getTransport().start();
+			getTransport().startTor();
 		}
 		else
 		{
-			getTransport().stop();
+			getTransport().stopTor();
 		}
 	}
 
@@ -1739,6 +1739,9 @@ public class MartusApp
 	public boolean isSSLServerAvailable()
 	{
 		if(currentNetworkInterfaceHandler == null && !isServerConfigured())
+			return false;
+		
+		if(!getTransport().isOnline())
 			return false;
 
 		return isSSLServerAvailable(getCurrentNetworkInterfaceGateway());
