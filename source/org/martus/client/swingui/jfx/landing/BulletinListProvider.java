@@ -34,10 +34,10 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
-public class BulletinTableProvider extends ArrayObservableList<BulletinTableRowData>
+public class BulletinListProvider extends ArrayObservableList<BulletinTableRowData>
 {
 
-	public BulletinTableProvider(MartusApp mainApp)
+	public BulletinListProvider(MartusApp mainApp)
 	{
 		super(INITIAL_CAPACITY);
 		app = mainApp;

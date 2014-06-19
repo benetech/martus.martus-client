@@ -58,7 +58,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	public BulletinsListController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		bulletinTableProvider = new BulletinTableProvider(getApp());
+		bulletinTableProvider = new BulletinListProvider(getApp());
 	}
 
 	@Override
@@ -202,5 +202,5 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	@FXML
 	protected TableColumn<BulletinTableRowData, String> dateSavedColumn;	
 
-	protected BulletinTableProvider bulletinTableProvider;
+	protected BulletinListProvider bulletinTableProvider;
 }
