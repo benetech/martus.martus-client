@@ -40,6 +40,7 @@ import javafx.scene.layout.AnchorPane;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.actions.ActionMenuBackupMyKeyPair;
 import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
 import org.martus.client.swingui.actions.ActionMenuContactInfo;
@@ -99,28 +100,33 @@ public class FxLandingShellController extends FxInSwingFrameController
 	{
 	}
 
+	private void doAction(ActionDoer doer)
+	{
+		getStage().doAction(doer);
+	}
+	
 	@FXML
 	private void onPreferences(ActionEvent event)
 	{
-		getStage().doAction(new ActionMenuPreferences(getMainWindow()));
+		doAction(new ActionMenuPreferences(getMainWindow()));
 	}
 
 	@FXML
 	private void onManageContacts(ActionEvent event)
 	{
-		getStage().doAction(new ActionMenuManageContacts(getMainWindow()));
+		doAction(new ActionMenuManageContacts(getMainWindow()));
 	}
 
 	@FXML
 	private void onConfigureServer(ActionEvent event)
 	{
-		getStage().doAction(new ActionMenuSelectServer(getMainWindow()));
+		doAction(new ActionMenuSelectServer(getMainWindow()));
 	}
 	
 	@FXML
 	private void onChangeUsernameAndPassword(ActionEvent event)
 	{
-		getStage().doAction(new ActionMenuChangeUserNamePassword(getMainWindow()));
+		doAction(new ActionMenuChangeUserNamePassword(getMainWindow()));
 	}
 	
 	@FXML
@@ -132,31 +138,31 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@FXML
 	private void onQuickSearch(ActionEvent event)
 	{
-		getStage().doAction(new  ActionMenuQuickSearch(getMainWindow(), searchText.getText()));
+		doAction(new  ActionMenuQuickSearch(getMainWindow(), searchText.getText()));
 	}
 
 	@FXML
 	private void onCreateNewBulletin(ActionEvent event)
 	{
-		getStage().doAction(new ActionMenuCreateNewBulletin(getMainWindow()));
+		doAction(new ActionMenuCreateNewBulletin(getMainWindow()));
 	}
 	
 	@FXML
 	private void onTor(ActionEvent event)
 	{
-		getStage().doAction(new ActionMenuStopStartTor(getMainWindow()));
+		doAction(new ActionMenuStopStartTor(getMainWindow()));
 	}
 
 	@FXML
 	private void onContactInformation(ActionEvent event)
 	{
-		getStage().doAction(new ActionMenuContactInfo(getMainWindow()));
+		doAction(new ActionMenuContactInfo(getMainWindow()));
 	}
 	
 	@FXML
 	private void onBackupKeypair(ActionEvent event)
 	{
-		getStage().doAction(new ActionMenuBackupMyKeyPair(getMainWindow()));
+		doAction(new ActionMenuBackupMyKeyPair(getMainWindow()));
 	}
 	
 	@FXML
