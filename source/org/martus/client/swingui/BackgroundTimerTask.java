@@ -135,7 +135,7 @@ class BackgroundTimerTask extends TimerTask
 	{
 		if(!mainWindow.isServerConfigured())
 			mainWindow.clearStatusMessage();
-		else if(getApp().getTransport().isOnline())
+		else if(!getApp().getTransport().isOnline())
 		{
 			mainWindow.setStatusMessageTag(UiMainWindow.STATUS_SERVER_OFFLINE_MODE);
 		}
