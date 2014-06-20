@@ -333,6 +333,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setContactKeysXml(sampleContactKeysXml);
 		info.setCurrentFormTemplateTitle(sampleCurrentFormTemplateTitle);
 		info.setCurrentFormTemplateDescription(sampleCurrentFormTemplateDescription);
+		info.setIsNetworkOnline(sampleIsNetworkOnline);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -511,7 +512,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getCurrentFormTemplateDescription());
 		}
 		if(VERSION >= 22)
-			assertEquals(label + ": sampleNetworkOnline", sampleNetworkOnline, info.isNetworkOnline());
+			assertEquals(label + ": sampleNetworkOnline", sampleIsNetworkOnline, info.isNetworkOnline());
 		else
 			assertEquals(label + ": sampleNetworkOnline", true, info.isNetworkOnline());
 	}
@@ -633,7 +634,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		}
 		if(VERSION >= 22)
 		{
-			out.writeBoolean(sampleNetworkOnline);
+			out.writeBoolean(sampleIsNetworkOnline);
 		}
 		out.close();
 		return outputStream.toByteArray();
@@ -699,6 +700,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final String sampleCurrentFormTemplateTitle = "Sample Title for this Template";
 	final String sampleCurrentFormTemplateDescription = "Sample Description for this template.";
 //Version 22
-	final boolean sampleNetworkOnline = true;
+	final boolean sampleIsNetworkOnline = false; // NOTE: Defaults to true
 		
 }
