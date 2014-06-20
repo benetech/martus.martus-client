@@ -67,6 +67,7 @@ import org.martus.client.swingui.jfx.setupwizard.tasks.LookupAccountFromTokenTas
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.DammCheckDigitAlgorithm.CheckDigitInvalidException;
+import org.martus.common.Exceptions.NetworkOfflineException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.Exceptions.ServerNotCompatibleException;
 import org.martus.common.MartusAccountAccessToken;
@@ -141,6 +142,10 @@ public class FxWizardAddContactsController extends FxStep4Controller
 				return; 
 			verifyContactAndAddToTable(contactAccountId);
 		} 
+		catch(NetworkOfflineException e)
+		{
+			showNotifyDialog("ErrorNetworkOffline");
+		}
 		catch(UserCancelledException e)
 		{
 			return;
@@ -645,6 +650,10 @@ public class FxWizardAddContactsController extends FxStep4Controller
 				GetAccountTokenFromServerTask task = new GetAccountTokenFromServerTask(martusApp);
 				showTimeoutDialog(getLocalization().getFieldLabel("ConnectingToServerToRetrieveToken"), task);
 				accountToken = task.getToken();
+			}
+			catch (NetworkOfflineException e)
+			{
+				showNotifyDialog("ErrorNetworkOffline");
 			}
 			catch (ServerNotCompatibleException e)
 			{

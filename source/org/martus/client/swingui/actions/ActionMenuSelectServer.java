@@ -33,6 +33,8 @@ import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiConfigServerDlg;
 import org.martus.clientside.ClientSideNetworkGateway;
+import org.martus.common.Exceptions.NetworkOfflineException;
+import org.martus.common.MartusLogger;
 import org.martus.swing.UiNotifyDlg;
 
 public class ActionMenuSelectServer extends UiMenuAction implements ActionDoer
@@ -131,10 +133,19 @@ public class ActionMenuSelectServer extends UiMenuAction implements ActionDoer
 			getMainWindow().repaint();
 			getMainWindow().setStatusMessageReady();
 		}
+		catch(NetworkOfflineException e)
+		{
+			getMainWindow().notifyDlg("ErrorNetworkOffline");
+		}
 		catch(SaveConfigInfoException e)
 		{
 			e.printStackTrace();
 			getMainWindow().notifyDlg("ErrorSavingConfig");
+		}
+		catch(Exception e)
+		{
+			MartusLogger.logException(e);
+			getMainWindow().unexpectedErrorDlg();
 		}
 		finally
 		{

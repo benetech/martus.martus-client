@@ -32,6 +32,7 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveBulletinsDlg;
+import org.martus.common.MartusLogger;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.packet.UniversalId;
@@ -49,8 +50,17 @@ public class Retriever
 
 	public void retrieveBulletins(Vector uidList, BulletinFolder retrievedFolder)
 	{
-		if(!app.isSSLServerAvailable())
+		try
 		{
+			if(!app.isSSLServerAvailable())
+			{
+				result = NetworkInterfaceConstants.NO_SERVER;
+				return;
+			}
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
 			result = NetworkInterfaceConstants.NO_SERVER;
 			return;
 		}

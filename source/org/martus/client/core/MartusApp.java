@@ -74,7 +74,9 @@ import org.martus.common.BulletinSummary;
 import org.martus.common.BulletinSummary.WrongValueCount;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
+import org.martus.common.Exceptions;
 import org.martus.common.Exceptions.AccountNotFoundException;
+import org.martus.common.Exceptions.NetworkOfflineException;
 import org.martus.common.Exceptions.NoFormsAvailableException;
 import org.martus.common.Exceptions.ServerCallFailedException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
@@ -121,8 +123,8 @@ import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.network.NonSSLNetworkAPI;
 import org.martus.common.network.NonSSLNetworkAPIWithHelpers;
-import org.martus.common.network.ServerSideNetworkInterface;
 import org.martus.common.network.OrchidTransportWrapper;
+import org.martus.common.network.ServerSideNetworkInterface;
 import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.FieldDataPacket;
@@ -1736,15 +1738,27 @@ public class MartusApp
 		return ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer.isNonSSLServerAvailable(server);
 	}
 
-	public boolean isSSLServerAvailable()
+	public boolean isSSLServerAvailable() throws Exception
 	{
 		if(currentNetworkInterfaceHandler == null && !isServerConfigured())
 			return false;
 		
 		if(!getTransport().isOnline())
-			return false;
+			throw new NetworkOfflineException();
 
-		return isSSLServerAvailable(getCurrentNetworkInterfaceGateway());
+		try
+		{
+			return isSSLServerAvailable(getCurrentNetworkInterfaceGateway());
+		}
+		catch (NetworkOfflineException e)
+		{
+			return false;
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			return false;
+		}
 	}
 	
 	public boolean isServerConfigured()
@@ -1790,7 +1804,7 @@ public class MartusApp
 		return false;
 	}
 	
-	public MartusAccountAccessToken getMartusAccountAccessTokenFromServer() throws TokenInvalidException, ServerNotAvailableException, MartusSignatureException, ServerNotCompatibleException, ServerErrorException 
+	public MartusAccountAccessToken getMartusAccountAccessTokenFromServer() throws Exception 
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
@@ -1800,6 +1814,8 @@ public class MartusApp
 			throw new ServerNotCompatibleException();
 		if(response.getResultCode().equals(NetworkInterfaceConstants.SERVER_ERROR))
 			throw new ServerErrorException();
+		if(response.getResultCode().equals(NetworkInterfaceConstants.TRANSPORT_OFFLINE))
+			throw new Exceptions.NetworkOfflineException();
 		if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
 			throw new ServerNotAvailableException();
 			
@@ -1810,7 +1826,7 @@ public class MartusApp
 		return new MartusAccountAccessToken(ourTokenString);
 	}
 
-	public String getMartusAccountIdFromAccessTokenOnServer(MartusAccountAccessToken tokenToUse) throws TokenNotFoundException, ServerNotAvailableException, MartusSignatureException, ServerNotCompatibleException, ServerCallFailedException 
+	public String getMartusAccountIdFromAccessTokenOnServer(MartusAccountAccessToken tokenToUse) throws Exception 
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
@@ -1835,7 +1851,7 @@ public class MartusApp
 		return AccountId;
 	}
 
-	public void putFormTemplateOnServer(CustomFieldTemplate formTemplate) throws ServerNotAvailableException, MartusSignatureException, ServerErrorException, ServerNotCompatibleException 
+	public void putFormTemplateOnServer(CustomFieldTemplate formTemplate) throws Exception 
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
@@ -1859,7 +1875,7 @@ public class MartusApp
 	}
 	
 	
-	public Vector getListOfFormTemplatesOnServer(String accountToRetreiveListFrom) throws ServerNotAvailableException, MartusSignatureException, AccountNotFoundException, ServerErrorException
+	public Vector getListOfFormTemplatesOnServer(String accountToRetreiveListFrom) throws Exception
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
@@ -1886,7 +1902,7 @@ public class MartusApp
 	}
 
 	
-	public CustomFieldTemplate getFormTemplateOnServer(String accountId, String formTitle) throws ServerNotAvailableException, NoFormsAvailableException, MartusSignatureException, IOException, InvalidBase64Exception, FutureVersionException 
+	public CustomFieldTemplate getFormTemplateOnServer(String accountId, String formTitle) throws Exception 
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
@@ -1932,18 +1948,23 @@ public class MartusApp
 	
 	public Vector getNewsFromServer()
 	{
-		if(!isSSLServerAvailable())
-			return new Vector();
-
 		try
 		{
+			if(!isSSLServerAvailable())
+				return new Vector();
+
 			NetworkResponse response = getCurrentNetworkInterfaceGateway().getNews(getSecurity(), UiConstants.versionLabel);
 			if(response.getResultCode().equals(NetworkInterfaceConstants.OK))
 				return response.getResultVector();
 		}
-		catch (MartusSignatureException e)
+		catch (NetworkOfflineException e)
 		{
-			System.out.println("MartusApp.getNewsFromServer :" + e);
+			// Nothing to do 
+		}
+		catch (Exception e)
+		{
+			// TODO: Should let the user know something went wrong
+			MartusLogger.logException(e);
 		}
 		return new Vector();
 	}
@@ -1951,10 +1972,11 @@ public class MartusApp
 	public String getServerCompliance(ClientSideNetworkGateway gateway) 
 		throws ServerCallFailedException, ServerNotAvailableException
 	{
-		if(!isSSLServerAvailable(gateway))
-			throw new ServerNotAvailableException();
 		try
 		{
+			if(!isSSLServerAvailable(gateway))
+				throw new ServerNotAvailableException();
+
 			NetworkResponse response = gateway.getServerCompliance(getSecurity());
 			if(response.getResultCode().equals(NetworkInterfaceConstants.OK))
 				return (String)response.getResultVector().get(0);
@@ -1976,7 +1998,7 @@ public class MartusApp
 		store.moveBulletin(b, outbox, damaged);		
 	}
 
-	public Vector downloadFieldOfficeAccountIds() throws ServerErrorException
+	public Vector downloadFieldOfficeAccountIds() throws Exception
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerErrorException();
@@ -2471,7 +2493,7 @@ public class MartusApp
 		setSSLNetworkInterfaceHandlerForTesting(new MockClientSideNetworkHandler(server));
 	}
 
-	public boolean isSSLServerAvailable(ClientSideNetworkGateway server)
+	public boolean isSSLServerAvailable(ClientSideNetworkGateway server) throws Exception
 	{
 		return isSSLServerAvailableStatic(server);
 	}

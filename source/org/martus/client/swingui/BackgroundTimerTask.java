@@ -152,7 +152,14 @@ class BackgroundTimerTask extends TimerTask
 
 	private boolean isServerAvailable()
 	{
-		return (getApp().isSSLServerAvailable());
+		try
+		{
+			return (getApp().isSSLServerAvailable());
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
 	}
 	
 	private void doRetrievingOrUploading() throws Exception
