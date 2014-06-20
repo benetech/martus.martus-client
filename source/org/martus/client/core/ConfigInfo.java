@@ -127,7 +127,7 @@ public class ConfigInfo
 	public String getContactKeysXml() {return contactKeysXml;}
 	public String getCurrentFormTemplateTitle()  { return currentFormTemplateTitle;}
 	public String getCurrentFormTemplateDescription()  { return currentFormTemplateDescription;}
-	public boolean getIsNetworkOnline() { return isNetworkOnline; }
+	public boolean isNetworkOnline() { return isNetworkOnline; }
 	
 
 	public boolean isServerConfigured()
