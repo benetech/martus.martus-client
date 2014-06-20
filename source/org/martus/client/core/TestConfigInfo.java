@@ -511,9 +511,9 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getCurrentFormTemplateDescription());
 		}
 		if(VERSION >= 22)
-			assertEquals(label + ": sampleNetworkOnline", sampleNetworkOnline, info.getIsNetworkOnline());
+			assertEquals(label + ": sampleNetworkOnline", sampleNetworkOnline, info.isNetworkOnline());
 		else
-			assertEquals(label + ": sampleNetworkOnline", true, info.getIsNetworkOnline());
+			assertEquals(label + ": sampleNetworkOnline", true, info.isNetworkOnline());
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
