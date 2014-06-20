@@ -28,7 +28,6 @@ package org.martus.client.swingui.tablemodels;
 
 import org.martus.client.core.MartusApp;
 import org.martus.common.MiniLocalization;
-import org.martus.common.MartusUtilities.ServerErrorException;
 
 
 
@@ -39,7 +38,7 @@ public class RetrieveMyDraftsTableModel extends RetrieveTableModelNonHQ
 		super(appToUse, localizationToUse);
 	}
 
-	public void populateAllSummariesList() throws ServerErrorException
+	public void populateAllSummariesList() throws Exception
 	{
 		getMyDraftSummaries();
 	}

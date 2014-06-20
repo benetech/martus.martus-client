@@ -30,15 +30,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.Random;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.clientside.ClientSideNetworkGateway;
-import org.martus.common.ContactInfo;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.FileTooLargeException;
 import org.martus.common.ProgressMeterInterface;
@@ -158,16 +155,17 @@ public class BackgroundUploader
 	BackgroundUploader.UploadResult uploadOneBulletin(BulletinFolder uploadFromFolder)
 	{
 		UploadResult uploadResult = new UploadResult();
-	
-		if(!app.isSSLServerAvailable())
-			return uploadResult;
-	
-		int index = new Random().nextInt(uploadFromFolder.getBulletinCount());
 		ClientBulletinStore store = app.getStore();
-		Bulletin b = store.chooseBulletinToUpload(uploadFromFolder, index);
-		uploadResult.uid = b.getUniversalId();
+	
 		try
 		{
+			if(!app.isSSLServerAvailable())
+				return uploadResult;
+		
+			int index = new Random().nextInt(uploadFromFolder.getBulletinCount());
+			Bulletin b = store.chooseBulletinToUpload(uploadFromFolder, index);
+			uploadResult.uid = b.getUniversalId();
+
 			uploadResult.result = uploadBulletin(b);
 			if(uploadResult.result == null)
 				return uploadResult;
@@ -232,53 +230,6 @@ public class BackgroundUploader
 		return response.getResultCode();
 	}
 
-	UploadResult sendContactInfoToServer()
-	{
-		BackgroundUploader.UploadResult uploadResult = new BackgroundUploader.UploadResult();
-		uploadResult.result = CONTACT_INFO_NOT_SENT;
-		
-		if(!app.isSSLServerAvailable())
-			return uploadResult;
-	
-		String result = "";
-		ConfigInfo configInfo = app.getConfigInfo();
-		try
-		{
-			MartusCrypto signer = app.getSecurity();
-			ContactInfo contactInfo = createContactInfo(configInfo);
-			Vector contactInfoVector = contactInfo.getSignedEncodedVector(signer);
-			result = putContactInfoOnServer(contactInfoVector);
-		}
-		catch (MartusCrypto.MartusSignatureException e)
-		{
-			System.out.println("MartusApp.sendContactInfoToServer Sig Error:" + e);
-			return uploadResult;
-		}
-		catch (UnsupportedEncodingException e)
-		{
-			System.out.println("MartusApp.sendContactInfoToServer Encoding Error:" + e);
-			return uploadResult;
-		}
-		if(!result.equals(NetworkInterfaceConstants.OK))
-		{
-			System.out.println("MartusApp.sendContactInfoToServer failure:" + result);
-			return uploadResult;
-		}
-		System.out.println("Contact info successfully sent to server");
-		uploadResult.result = result;
-	
-		try
-		{
-			app.saveConfigInfo();
-		}
-		catch (SaveConfigInfoException e)
-		{
-			System.out.println("MartusApp:putContactInfoOnServer Failed to save contactinfo locally:" + e);
-			e.printStackTrace();
-		}
-		return uploadResult;
-	}
-
 	public static class UploadResult
 	{
 		public UniversalId uid;
@@ -286,16 +237,6 @@ public class BackgroundUploader
 		public String exceptionThrown;
 		public boolean isHopelesslyDamaged;
 		public boolean bulletinNotSentAndRemovedFromQueue;
-	}
-	
-	private ContactInfo createContactInfo(ConfigInfo sourceOfInfo)
-	{
-		return new ContactInfo(sourceOfInfo.getAuthor(),
-				sourceOfInfo.getOrganization(),
-				sourceOfInfo.getEmail(),
-				sourceOfInfo.getWebPage(),
-				sourceOfInfo.getPhone(),
-				sourceOfInfo.getAddress());
 	}
 	
 	public static final String CONTACT_INFO_NOT_SENT="Contact Info Not Sent";

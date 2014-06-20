@@ -28,7 +28,6 @@ package org.martus.client.swingui.tablemodels;
 
 import org.martus.client.core.MartusApp;
 import org.martus.common.MiniLocalization;
-import org.martus.common.MartusUtilities.ServerErrorException;
 
 public class DeleteMyServerDraftsTableModel extends RetrieveTableModel
 {
@@ -43,7 +42,7 @@ public class DeleteMyServerDraftsTableModel extends RetrieveTableModel
 		COLUMN_BULLETIN_SIZE = columnCount++;
 	}
 
-	public void populateAllSummariesList() throws ServerErrorException
+	public void populateAllSummariesList() throws Exception
 	{
 		getMyDraftSummaries();
 	}
