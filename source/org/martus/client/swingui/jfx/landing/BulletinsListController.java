@@ -29,6 +29,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -73,6 +74,12 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		Label noBulletins = new Label(getLocalization().getFieldLabel("NoBulletinsInTable"));
 		itemsTable.setPlaceholder(noBulletins);
 		itemsTable.setItems(bulletinTableProvider);
+
+		loadAllBulletinsAndSortByMostRecent();
+	}
+
+	public void loadAllBulletinsAndSortByMostRecent()
+	{
 		bulletinTableProvider.loadAllBulletins();
 		sortByMostRecentBulletins();
 	}
@@ -80,7 +87,10 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	protected void sortByMostRecentBulletins()
 	{
 		dateSavedColumn.setSortType(SortType.DESCENDING);
-		itemsTable.getSortOrder().add(dateSavedColumn);
+		ObservableList<TableColumn<BulletinTableRowData, ?>> sortOrder = itemsTable.getSortOrder();
+		sortOrder.clear();
+		sortOrder.add(dateSavedColumn);
+		itemsTable.sort();
 	}
 
 	protected void editBulletin()

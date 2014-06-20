@@ -194,9 +194,23 @@ public class FxLandingShellController extends FxInSwingFrameController
 			MartusLogger.logException(e);
 			throw new RuntimeException();
 		}
-
 	}
 
+	@FXML
+	public void onLogoClicked(MouseEvent mouseEvent) 
+	{
+		try
+		{
+			BulletinsListController bulletinListController = (BulletinsListController)getStage().getCurrentController();
+			bulletinListController.loadAllBulletinsAndSortByMostRecent();
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			throw new RuntimeException();
+		}
+	}
+	
 	@FXML
 	protected TextField searchText;
 	
