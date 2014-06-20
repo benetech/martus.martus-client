@@ -127,6 +127,8 @@ public class ConfigInfo
 	public String getContactKeysXml() {return contactKeysXml;}
 	public String getCurrentFormTemplateTitle()  { return currentFormTemplateTitle;}
 	public String getCurrentFormTemplateDescription()  { return currentFormTemplateDescription;}
+	public boolean getIsNetworkOnline() { return isNetworkOnline; }
+	
 
 	public boolean isServerConfigured()
 	{
@@ -170,6 +172,7 @@ public class ConfigInfo
 		contactKeysXml = "";
 		currentFormTemplateTitle = "";
 		currentFormTemplateDescription = "";
+		isNetworkOnline = true;
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException
@@ -356,7 +359,7 @@ public class ConfigInfo
 		return new String(bytes, "UTF-8");
 	}
 	
-	public static final short VERSION = 21;
+	public static final short VERSION = 22;
 
 	//Version 1
 	private short version;
@@ -413,5 +416,6 @@ public class ConfigInfo
 	//Version 21
 	private String currentFormTemplateTitle;
 	private String currentFormTemplateDescription;
-	
+	//Version 22
+	private boolean isNetworkOnline;
 }
