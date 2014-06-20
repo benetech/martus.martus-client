@@ -117,6 +117,7 @@ import org.martus.clientside.UiUtilities;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusLogger;
+import org.martus.common.Exceptions.NetworkOfflineException;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.MiniLocalization;
@@ -1797,12 +1798,27 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private boolean retrieveSummaries(RetrieveTableModel model, String dlgTitleTag, RetrieveSummariesProgressMeter progressHandler) throws ServerErrorException
 	{
-		if(!getApp().isSSLServerAvailable())
+		try
 		{
-			notifyDlg(this, "retrievenoserver", dlgTitleTag);
+			if(!getApp().isSSLServerAvailable())
+			{
+				notifyDlg(this, "retrievenoserver", dlgTitleTag);
+				return false;
+			}
+			model.initialize(progressHandler);
+		} 
+		catch (NetworkOfflineException e)
+		{
+			notifyDlg("ErrorNetworkOffline");
 			return false;
 		}
-		model.initialize(progressHandler);
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			unexpectedErrorDlg();
+			return false;
+		}
+
 		if(progressHandler.shouldExit())
 			return false;
 		try
@@ -2010,11 +2026,26 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return;
 		}
 	
-		ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();		
-		if(getApp().isSSLServerAvailable(gateway))
-			setStatusMessageReady();	
-		else
-			setStatusMessageTag(STATUS_NO_SERVER_AVAILABLE);			
+		ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();
+		try
+		{
+			if(getApp().isSSLServerAvailable(gateway))
+			{
+				setStatusMessageReady();
+				return;
+			}
+		}
+		catch(NetworkOfflineException e)
+		{
+			setStatusMessageTag(STATUS_SERVER_OFFLINE_MODE);
+			return;
+		}
+		catch(Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+
+		setStatusMessageTag(STATUS_NO_SERVER_AVAILABLE);
 	}
 	
 	public void clearStatusMessage()

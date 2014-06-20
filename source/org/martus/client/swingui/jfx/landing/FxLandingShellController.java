@@ -73,6 +73,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@Override
 	public void initializeMainContentPane()
 	{
+		updateOnlineStatus();
 		updateTorStatus();
 		updateCases();
 	}
@@ -100,6 +101,13 @@ public class FxLandingShellController extends FxInSwingFrameController
 
 	private void updateTorStatus()
 	{
+	}
+	
+	private void updateOnlineStatus()
+	{
+		boolean isOnline = getApp().getTransport().isOnline();
+		String text = isOnline ? "On" : "Off";
+		toolbarButtonOnline.setText(text);
 	}
 
 	private void doAction(ActionDoer doer)
@@ -156,8 +164,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 		boolean oldState = transport.isOnline();
 		boolean newState = !oldState;
 		transport.setIsOnline(newState);
-		String text = newState ? "On" : "Off";
-		toolbarButtonOnline.setText(text);
+		updateOnlineStatus();
 		//FIXME: Need to save to config
 	}
 

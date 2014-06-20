@@ -30,7 +30,6 @@ import java.util.Vector;
 
 import org.martus.client.core.MartusApp;
 import org.martus.common.MiniLocalization;
-import org.martus.common.MartusUtilities.ServerErrorException;
 
 
 
@@ -41,7 +40,7 @@ public class RetrieveHQTableModel extends RetrieveTableModelHQ
 		super(appToUse, localizationToUse);
 	}
 
-	public void populateAllSummariesList() throws ServerErrorException
+	public void populateAllSummariesList() throws Exception
 	{
 		Vector accounts = app.downloadFieldOfficeAccountIds();
 		for(int a = 0; a < accounts.size(); ++a)

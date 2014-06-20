@@ -262,6 +262,9 @@ public class EnglishStrings
 "wintitle:notifyErrorServerOffline=Unable to Connect to Server",
 "field:notifyErrorServerOfflinecause=Unable to connect to the server.",
 
+"wintitle:notifyErrorNetworkOffline=Network Offline",
+"field:notifyErrorNetworkOfflinecause=Martus is currently in offline mode.",
+
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
 "wintitle:inputservermagicword=Request Upload Permission",
