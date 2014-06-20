@@ -130,8 +130,8 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		
 		public void run()
 		{
-			boolean shouldResortTable = bulletinTableProvider.updateBulletin(bulletin);
-			if(shouldResortTable)
+			boolean shouldReSortTable = bulletinTableProvider.updateBulletin(bulletin);
+			if(shouldReSortTable)
 				sortByMostRecentBulletins();
 		}
 		public Bulletin bulletin;
