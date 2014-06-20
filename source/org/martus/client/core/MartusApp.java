@@ -1362,6 +1362,11 @@ public class MartusApp
 		return store.createOrFindFolder(name);
 	}
 
+	public BulletinFolder findFolder(String name)
+	{
+		return store.findFolder(name);
+	}
+
 	public void setMaxNewFolders(int numFolders)
 	{
 		maxNewFolders = numFolders;
