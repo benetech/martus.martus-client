@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx;
 
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
 public class FxRunner implements Runnable
@@ -43,10 +44,20 @@ public class FxRunner implements Runnable
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			stage.getMainWindow().unexpectedErrorDlg();
+			if(!shouldAbortImmediatelyOnError)
+			{
+				UiMainWindow mainWindow = stage.getMainWindow();
+				mainWindow.unexpectedErrorDlg();
+			}
 			System.exit(1);
 		}
 	}
 	
+	public void setAbortImmediatelyOnError()
+	{
+		shouldAbortImmediatelyOnError = true;
+	}
+
 	private FxInSwingStage stage;
+	private boolean shouldAbortImmediatelyOnError;
 }
