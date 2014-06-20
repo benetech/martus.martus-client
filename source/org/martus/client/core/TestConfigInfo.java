@@ -56,7 +56,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 		
-		assertEquals(21, ConfigInfo.VERSION);
+		assertEquals(22, ConfigInfo.VERSION);
 
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
@@ -510,6 +510,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleCurrentFormTemplateTitle", "", info.getCurrentFormTemplateTitle());
 			assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getCurrentFormTemplateDescription());
 		}
+		if(VERSION >= 22)
+			assertEquals(label + ": sampleNetworkOnline", sampleNetworkOnline, info.getIsNetworkOnline());
+		else
+			assertEquals(label + ": sampleNetworkOnline", true, info.getIsNetworkOnline());
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -627,6 +631,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 			ConfigInfo.writeLongString(out, sampleCurrentFormTemplateTitle);
 			ConfigInfo.writeLongString(out, sampleCurrentFormTemplateDescription);
 		}
+		if(VERSION >= 22)
+		{
+			out.writeBoolean(sampleNetworkOnline);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -690,5 +698,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 //Version 21
 	final String sampleCurrentFormTemplateTitle = "Sample Title for this Template";
 	final String sampleCurrentFormTemplateDescription = "Sample Description for this template.";
+//Version 22
+	final boolean sampleNetworkOnline = true;
 		
 }
