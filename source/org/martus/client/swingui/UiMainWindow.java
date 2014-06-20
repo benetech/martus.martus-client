@@ -1288,10 +1288,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	void saveStateWithoutPrompting() throws Exception
 	{
 		getApp().saveStateWithoutPrompting();
+		
+		CurrentUiState uiState = getUiState();
+
 		String folderName = getSelectedFolderName();
 		BulletinFolder folder = getStore().findFolder(folderName);
-		CurrentUiState uiState = getUiState();
+		if(folder == null)
+			folderName = "";
+		
 		uiState.setCurrentFolder(folderName);
+		
 		getSession().copyLocalizationSettingsToUiState();
 		if(folder != null)
 		{
