@@ -66,7 +66,7 @@ abstract public class RetrieveTableModel extends UiTableModel
 		allSummaries = new Vector();
 	}
 	
-	public void initialize(RetrieveSummariesProgressMeter progressHandlerToUse) throws ServerErrorException
+	public void initialize(RetrieveSummariesProgressMeter progressHandlerToUse) throws Exception
 	{
 		MartusLogger.logBeginProcess("Initializing Retrieve dialog");
 		setProgressDialog(progressHandlerToUse);
@@ -78,7 +78,7 @@ abstract public class RetrieveTableModel extends UiTableModel
 		populateMissingSummaryDataFromServer(this);
 	}
 	
-	abstract protected void populateAllSummariesList() throws ServerErrorException;
+	abstract protected void populateAllSummariesList() throws Exception;
 	
 	public MartusApp getApp()
 	{
@@ -319,33 +319,33 @@ abstract public class RetrieveTableModel extends UiTableModel
 		return false;
 	}
 
-	public void getMySealedSummaries() throws ServerErrorException
+	public void getMySealedSummaries() throws Exception
 	{
 		String accountId = app.getAccountId();
 		SummaryRetriever retriever = new SealedSummaryRetriever(app, accountId);
 		retrieveSummaries(accountId, retriever);
 	}
 
-	public void getMyDraftSummaries() throws ServerErrorException
+	public void getMyDraftSummaries() throws Exception
 	{
 		String accountId = app.getAccountId();
 		SummaryRetriever retriever = new DraftSummaryRetriever(app, accountId);
 		retrieveSummaries(accountId, retriever);
 	}
 
-	public void getFieldOfficeSealedSummaries(String fieldOfficeAccountId) throws ServerErrorException
+	public void getFieldOfficeSealedSummaries(String fieldOfficeAccountId) throws Exception
 	{
 		SummaryRetriever retriever = new SealedSummaryRetriever(app, fieldOfficeAccountId);
 		retrieveSummaries(fieldOfficeAccountId, retriever);
 	}
 
-	public void getFieldOfficeDraftSummaries(String fieldOfficeAccountId) throws ServerErrorException
+	public void getFieldOfficeDraftSummaries(String fieldOfficeAccountId) throws Exception
 	{
 		SummaryRetriever retriever = new DraftSummaryRetriever(app, fieldOfficeAccountId);
 		retrieveSummaries(fieldOfficeAccountId, retriever);
 	}
 
-	private void retrieveSummaries(String accountId, SummaryRetriever retriever) throws ServerErrorException
+	private void retrieveSummaries(String accountId, SummaryRetriever retriever) throws Exception
 	{
 		Vector summaryStrings = getSummaryStringsFromServer(retriever);
 		Vector bulletinSummaries = buildSummariesFromStrings(accountId, summaryStrings);
@@ -354,7 +354,7 @@ abstract public class RetrieveTableModel extends UiTableModel
 		allSummaries.addAll(bulletinSummaries);
 	}
 
-	private Vector getSummaryStringsFromServer(SummaryRetriever retriever) throws ServerErrorException
+	private Vector getSummaryStringsFromServer(SummaryRetriever retriever) throws Exception
 	{
 		try
 		{
@@ -659,7 +659,7 @@ abstract public class RetrieveTableModel extends UiTableModel
 			accountId = accountIdToUse;
 		}
 		
-		NetworkResponse getSummaries() throws MartusSignatureException, ServerErrorException
+		NetworkResponse getSummaries() throws Exception
 		{
 			if(!app.isSSLServerAvailable())
 				throw new ServerErrorException("No server");
