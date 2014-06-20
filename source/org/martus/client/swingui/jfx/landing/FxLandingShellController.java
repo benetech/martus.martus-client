@@ -31,6 +31,7 @@ import java.util.Vector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
@@ -53,6 +54,7 @@ import org.martus.client.swingui.actions.ActionMenuStopStartTor;
 import org.martus.client.swingui.jfx.FxContentController;
 import org.martus.client.swingui.jfx.FxInSwingFrameController;
 import org.martus.common.MartusLogger;
+import org.martus.common.network.OrchidTransportWrapper;
 
 public class FxLandingShellController extends FxInSwingFrameController
 {
@@ -148,6 +150,18 @@ public class FxLandingShellController extends FxInSwingFrameController
 	}
 	
 	@FXML
+	private void onOnline(ActionEvent event)
+	{
+		OrchidTransportWrapper transport = getApp().getTransport();
+		boolean oldState = transport.isOnline();
+		boolean newState = !oldState;
+		transport.setIsOnline(newState);
+		String text = newState ? "On" : "Off";
+		toolbarButtonOnline.setText(text);
+		//FIXME: Need to save to config
+	}
+
+	@FXML
 	private void onTor(ActionEvent event)
 	{
 		doAction(new ActionMenuStopStartTor(getMainWindow()));
@@ -176,7 +190,10 @@ public class FxLandingShellController extends FxInSwingFrameController
 	protected TextField searchText;
 	
 	@FXML
-	protected ToggleButton toggleButtonTor;
+	protected Button toolbarButtonOnline;
+	
+	@FXML
+	protected ToggleButton toolbarButtonTor;
 	
 	@FXML
 	protected AnchorPane mainContentPane;
