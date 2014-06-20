@@ -25,11 +25,20 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.swingui.MartusLocalization;
+
 public class CaseListItem
 {
-	CaseListItem(String name)
+	CaseListItem(BulletinFolder folder, MartusLocalization localization)
 	{
-		caseName = name;
+		caseName = folder.getName();
+		caseNameLocalized = folder.getLocalizedName(localization);
+	}
+	
+	public String getNameLocalized()
+	{
+		return caseNameLocalized;
 	}
 	
 	public String getName()
@@ -40,8 +49,9 @@ public class CaseListItem
 	@Override
 	public String toString()
 	{
-		return caseName;
+		return getNameLocalized();
 	}
 
-	String caseName;
+	final String caseName;
+	final String caseNameLocalized;
 }

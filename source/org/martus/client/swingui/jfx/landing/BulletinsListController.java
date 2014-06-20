@@ -107,13 +107,17 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		public void run()
 		{
 			Set foundUids = new HashSet(Arrays.asList(results.getUniversalIds()));
-			bulletinTableProvider.loadBulletinData(foundUids);
-			itemsTable.sort();
+			loadBulletinData(foundUids);
 		}
 		
 		private SortableBulletinList results;
 	}
 	
+	public void loadBulletinData(Set bulletinUids)
+	{
+		bulletinTableProvider.loadBulletinData(bulletinUids);
+		itemsTable.sort();
+	}
 	
 	public void bulletinContentsHaveChanged(Bulletin bulletinUpdated)
 	{
