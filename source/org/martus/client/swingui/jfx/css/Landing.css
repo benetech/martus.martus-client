@@ -26,3 +26,28 @@
 /*    -fx-padding: 0.666667em 0.083333em 0.666667em 0.083333em;  8 1 8 1 */
     -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em; /* 4 1 8 1 */
 }
+
+.toolbarHBox {
+	-fx-fill-height: true;
+	-fx-alignment: center-right;
+}
+
+.toolbarLabel {
+	-fx-text-fill: #4c5e70;
+	-fx-alignment: center-right;
+	-fx-font-family: Helvetica;
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+/*	-fx-padding: 0, 20, 10, 20;*/
+}
+
+.toolbarButton {
+	-fx-background-color: #77bad0;
+	-fx-text-fill: #f7f7f7;
+	-fx-font-family: Helvetica;
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+/*	-fx-padding: 10, 10, 10, 10;*/
+/*	-fx-background-insets: 10, 0, 10, 0;*/
+}
+

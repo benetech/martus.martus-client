@@ -61,13 +61,10 @@
 								<ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
 								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
 								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-								<ColumnConstraints hgrow="SOMETIMES" maxWidth="115.0" minWidth="10.0" prefWidth="115.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="115.0" />
 							    <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
 							    <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="240.0" />
 							</columnConstraints>
-							<rowConstraints>
-								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-							</rowConstraints>
 							<children>
 								<ImageView fitHeight="33.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
 									<image>
@@ -93,22 +90,12 @@
 										<Insets left="100.0" top="10.0" />
 									</GridPane.margin>
 								</Button>
-								<Text fill="#353535" strokeType="OUTSIDE" strokeWidth="0.0" text="Backup:" GridPane.columnIndex="3">
-									<font>
-									<Font name="Helvetica" size="14.0" />
-									</font>
-									<GridPane.margin>
-									<Insets left="10.0" top="10.0" />
-									</GridPane.margin>
-								</Text>
-								<ToggleButton mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="On" textFill="#f7f7f7" GridPane.columnIndex="3">
-									<font>
-										<Font name="Helvetica" size="14.0" />
-									</font>
-									<GridPane.margin>
-										<Insets left="75.0" top="10.0" />
-									</GridPane.margin>
-								</ToggleButton>
+								<HBox styleClass="toolbarHBox" GridPane.columnIndex="3" >
+									<children>
+										<Label text="Backup:" styleClass="toolbarLabel" />
+										<Button fx:id="toolbarButtonOnline" styleClass="toolbarButton" onAction="#onOnline" mnemonicParsing="false" minWidth="50"  />
+									</children>
+								</HBox>
 								<Text fill="#353535" strokeType="OUTSIDE" strokeWidth="0.0" text="Tor:" GridPane.columnIndex="4">
 									<font>
 									<Font name="Helvetica" size="14.0" />
@@ -117,7 +104,7 @@
 									<Insets left="10.0" top="10.0" />
 									</GridPane.margin>
 								</Text>
-								<ToggleButton fx:id="toggleButtonTor" mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="On" textFill="#f5f5f5" GridPane.columnIndex="4" onAction="#onTor">
+								<ToggleButton fx:id="toolbarButtonTor" mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="On" textFill="#f5f5f5" GridPane.columnIndex="4" onAction="#onTor">
 									<font>
 										<Font name="Helvetica" size="14.0" />
 									</font>
