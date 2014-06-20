@@ -66,7 +66,7 @@
 							    <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="240.0" />
 							</columnConstraints>
 							<children>
-								<ImageView fitHeight="33.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
+								<ImageView fitHeight="33.0" fitWidth="97.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true">
 									<image>
 										<Image url="@../images/Martus-logo-white-text-120x54.png" />
 									</image>
