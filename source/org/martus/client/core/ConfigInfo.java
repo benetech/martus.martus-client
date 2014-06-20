@@ -82,6 +82,7 @@ public class ConfigInfo
 	public void setContactKeysXml(String contactKeysXml){this.contactKeysXml = contactKeysXml;}
 	public void setCurrentFormTemplateTitle(String netFormTemplateTitle) { currentFormTemplateTitle = netFormTemplateTitle; }
 	public void setCurrentFormTemplateDescription(String netFormTemplateDescription) { currentFormTemplateDescription = netFormTemplateDescription; }
+	public void setIsNetworkOnline(boolean newState) { isNetworkOnline = newState; }
 
 	public void clearLegacyHQKey()						{ deprecatedLegacyHQKey = ""; }
 
@@ -283,6 +284,10 @@ public class ConfigInfo
 			 	loaded.currentFormTemplateTitle = readLongString(in);
 			 	loaded.currentFormTemplateDescription = readLongString(in);
 			}
+			if(loaded.version >= 22)
+			{
+				loaded.isNetworkOnline = in.readBoolean();
+			}
 		}
 		finally
 		{
@@ -335,6 +340,7 @@ public class ConfigInfo
 			writeLongString(out,contactKeysXml);
 			writeLongString(out, currentFormTemplateTitle);
 			writeLongString(out, currentFormTemplateDescription);
+			out.writeBoolean(isNetworkOnline);
 		}
 		finally
 		{

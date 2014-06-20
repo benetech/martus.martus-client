@@ -39,6 +39,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.core.ConfigInfo;
+import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
@@ -105,7 +107,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 	
 	private void updateOnlineStatus()
 	{
-		boolean isOnline = getApp().getTransport().isOnline();
+		boolean isOnline = getApp().getConfigInfo().isNetworkOnline();
 		String text = isOnline ? "On" : "Off";
 		toolbarButtonOnline.setText(text);
 	}
@@ -160,12 +162,30 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@FXML
 	private void onOnline(ActionEvent event)
 	{
-		OrchidTransportWrapper transport = getApp().getTransport();
-		boolean oldState = transport.isOnline();
-		boolean newState = !oldState;
-		transport.setIsOnline(newState);
-		updateOnlineStatus();
-		//FIXME: Need to save to config
+		try
+		{
+			ConfigInfo configInfo = getApp().getConfigInfo();
+			boolean oldState = configInfo.isNetworkOnline();
+			boolean newState = !oldState;
+			
+			configInfo.setIsNetworkOnline(newState);
+			getApp().saveConfigInfo();
+
+			OrchidTransportWrapper transport = getApp().getTransport();
+			transport.setIsOnline(newState);
+			
+			updateOnlineStatus();
+		} 
+		catch (SaveConfigInfoException e)
+		{
+			MartusLogger.logException(e);
+			getMainWindow().notifyDlg("ErrorSavingConfig");
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			getMainWindow().unexpectedErrorDlg();
+		}
 	}
 
 	@FXML

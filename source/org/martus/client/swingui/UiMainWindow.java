@@ -1960,13 +1960,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			fxRunner.setAbortImmediatelyOnError();
 			Platform.runLater(fxRunner);
 			setContentPane(mainStage);
-			getApp().getTransport().setIsOnline(true);
 		}
 		else
 		{
 			mainPane = new UiMainPane(this, getUiState());
 			setContentPane(mainPane);
-			getApp().getTransport().setIsOnline(true);
 		}
 
 		getTransport().setProgressMeter(getTorProgressMeter());
