@@ -144,8 +144,7 @@ public abstract class FxInSwingStage extends JFXPanel
 		} 
 		catch (Exception e)
 		{
-			MartusLogger.logException(e);
-			SwingUtilities.invokeLater(new ShowErrorDialogHandler());
+			SwingUtilities.invokeLater(new ShowErrorDialogHandler(e));
 		}
 	}
 	
@@ -167,16 +166,24 @@ public abstract class FxInSwingStage extends JFXPanel
 
 	private class ShowErrorDialogHandler implements Runnable
 	{
-		public ShowErrorDialogHandler()
+		public ShowErrorDialogHandler(Exception e)
 		{
+			exceptionToReport = e;
 		}
 
 		public void run()
 		{
+			MartusLogger.logException(exceptionToReport);
 			mainWindow.unexpectedErrorDlg();
 		}
+		Exception exceptionToReport;
 	}
 	
+	public void 	logAndNotifyUnexpectedError(Exception e)
+	{
+		SwingUtilities.invokeLater(new ShowErrorDialogHandler(e));
+	}
+
 
 	protected UiMainWindow mainWindow;
 	private FxScene scene;
