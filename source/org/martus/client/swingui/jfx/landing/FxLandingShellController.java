@@ -183,8 +183,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 		}
 		catch (Exception e)
 		{
-			MartusLogger.logException(e);
-			getMainWindow().unexpectedErrorDlg();
+			getStage().logAndNotifyUnexpectedError(e);
 		}
 	}
 
@@ -218,8 +217,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 		} 
 		catch (Exception e)
 		{
-			MartusLogger.logException(e);
-			throw new RuntimeException();
+			getStage().logAndNotifyUnexpectedError(e);
 		}
 	}
 
@@ -233,8 +231,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 		} 
 		catch (Exception e)
 		{
-			MartusLogger.logException(e);
-			throw new RuntimeException();
+			getStage().logAndNotifyUnexpectedError(e);
 		}
 	}
 	
