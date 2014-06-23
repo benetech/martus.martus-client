@@ -29,6 +29,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -41,8 +42,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-
-import javax.swing.SwingUtilities;
 
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
@@ -110,7 +109,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	public void updateSearchResultsTable(SortableBulletinList searchResults)
 	{
-		SwingUtilities.invokeLater(new UpdateSearchResultsHandler(searchResults));
+		Platform.runLater(new UpdateSearchResultsHandler(searchResults));
 	}
 	
 	private class UpdateSearchResultsHandler implements Runnable
@@ -139,7 +138,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	public void bulletinContentsHaveChanged(Bulletin bulletinUpdated)
 	{
 		//TODO this will be for a Preview Window Update
-		SwingUtilities.invokeLater(new BulletinTableChangeHandler(bulletinUpdated));
+		Platform.runLater(new BulletinTableChangeHandler(bulletinUpdated));
 	}
 	
 	private class BulletinTableChangeHandler implements Runnable
