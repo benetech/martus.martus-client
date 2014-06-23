@@ -47,6 +47,7 @@ import javax.swing.SwingUtilities;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
+import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
@@ -96,7 +97,13 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	protected void editBulletin()
 	{
 		TableViewSelectionModel<BulletinTableRowData> selectionModel = itemsTable.getSelectionModel();
-		UniversalId bulletinUid = selectionModel.getSelectedItem().getUniversalId();
+		BulletinTableRowData selectedItem = selectionModel.getSelectedItem();
+		if(selectedItem == null)
+		{
+			MartusLogger.log("Attempted to edit with nothing selected");
+			return;
+		}
+		UniversalId bulletinUid = selectedItem.getUniversalId();
 		Bulletin bulletinSelected = getApp().getStore().getBulletinRevision(bulletinUid);
 		getShellController().getStage().doAction(new ActionMenuModifyFxBulletin(getMainWindow(), bulletinSelected));
 	}
