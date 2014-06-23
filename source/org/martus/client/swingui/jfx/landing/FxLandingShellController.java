@@ -171,9 +171,6 @@ public class FxLandingShellController extends FxInSwingFrameController
 			configInfo.setIsNetworkOnline(newState);
 			getApp().saveConfigInfo();
 
-			OrchidTransportWrapper transport = getApp().getTransport();
-			transport.setIsOnline(newState);
-			
 			updateOnlineStatus();
 		} 
 		catch (SaveConfigInfoException e)
