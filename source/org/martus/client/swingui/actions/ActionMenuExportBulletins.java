@@ -60,8 +60,7 @@ public class ActionMenuExportBulletins extends UiMenuAction
 		} 
 		catch (Exception e)
 		{
-			MartusLogger.logException(e);
-			getMainWindow().unexpectedErrorDlg();
+			getMainWindow().unexpectedErrorDlg(e);
 		}
 	}
 	

@@ -272,8 +272,7 @@ public class UiCustomFieldsDlg extends JDialog
 			}
 			catch(Exception e)
 			{
-				MartusLogger.logException(e);
-				mainWindow.unexpectedErrorDlg();
+				mainWindow.unexpectedErrorDlg(e);
 			}
 			mainWindow.notifyDlg("ErrorImportingCustomizationTemplate");
 		}

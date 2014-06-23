@@ -56,8 +56,7 @@ public class ActionMenuManageContacts extends UiMenuAction implements ActionDoer
 		} 
 		catch (Exception e)
 		{
-			MartusLogger.logException(e);
-			mainWindow.unexpectedErrorDlg();
+			mainWindow.unexpectedErrorDlg(e);
 		}
 	}
 	
