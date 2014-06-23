@@ -173,8 +173,7 @@ public abstract class FxInSwingStage extends JFXPanel
 
 		public void run()
 		{
-			MartusLogger.logException(exceptionToReport);
-			mainWindow.unexpectedErrorDlg();
+			mainWindow.unexpectedErrorDlg(exceptionToReport);
 		}
 		Exception exceptionToReport;
 	}

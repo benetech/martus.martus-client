@@ -68,8 +68,7 @@ public class ActionMenuSealSelectedBulletins extends UiMenuAction
 		} 
 		catch (Exception e)
 		{
-			MartusLogger.logException(e);
-			mainWindow.unexpectedErrorDlg();
+			mainWindow.unexpectedErrorDlg(e);
 		}
 	}
 

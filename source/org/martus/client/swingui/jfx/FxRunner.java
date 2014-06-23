@@ -46,8 +46,7 @@ public class FxRunner implements Runnable
 			MartusLogger.logException(e);
 			if(!shouldAbortImmediatelyOnError)
 			{
-				UiMainWindow mainWindow = stage.getMainWindow();
-				mainWindow.unexpectedErrorDlg();
+				stage.getMainWindow().unexpectedErrorDlg(e);
 			}
 			System.exit(1);
 		}

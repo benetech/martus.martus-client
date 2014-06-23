@@ -308,8 +308,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		catch(Exception e)
 		{
-			MartusLogger.logException(e);
-			unexpectedErrorDlg();
+			unexpectedErrorDlg(e);
 			System.exit(1);
 		}
 		finally
@@ -1136,8 +1135,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		notifyDlg(parent, baseTag);
 	}
 	
-	public void unexpectedErrorDlg()
+	public void unexpectedErrorDlg(Exception e)
 	{
+		MartusLogger.logException(e);
 		notifyDlg("UnexpectedError");
 	}
 
@@ -1820,8 +1820,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		catch (Exception e)
 		{
-			MartusLogger.logException(e);
-			unexpectedErrorDlg();
+			unexpectedErrorDlg(e);
 			return false;
 		}
 

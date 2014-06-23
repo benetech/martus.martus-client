@@ -144,8 +144,7 @@ public class ActionMenuSelectServer extends UiMenuAction implements ActionDoer
 		}
 		catch(Exception e)
 		{
-			MartusLogger.logException(e);
-			getMainWindow().unexpectedErrorDlg();
+			getMainWindow().unexpectedErrorDlg(e);
 		}
 		finally
 		{

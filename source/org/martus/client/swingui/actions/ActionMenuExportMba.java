@@ -71,8 +71,7 @@ public class ActionMenuExportMba extends UiMenuAction
 		} 
 		catch (Exception e)
 		{
-			MartusLogger.logException(e);
-			mainWindow.unexpectedErrorDlg();
+			mainWindow.unexpectedErrorDlg(e);
 		}
 	}
 
