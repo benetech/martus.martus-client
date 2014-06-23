@@ -206,6 +206,10 @@ class BackgroundTimerTask extends TimerTask
 		{
 			tag = UiMainWindow.STATUS_SERVER_NOT_CONFIGURED;
 		}
+		else if(!mainWindow.getApp().getTransport().isOnline())
+		{
+			tag = UiMainWindow.STATUS_SERVER_OFFLINE_MODE;
+		}
 		else
 		{					
 			uploadResult = uploader.backgroundUpload(); 
