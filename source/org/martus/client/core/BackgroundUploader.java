@@ -36,6 +36,7 @@ import java.util.Vector;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.clientside.ClientSideNetworkGateway;
+import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.FileTooLargeException;
 import org.martus.common.ProgressMeterInterface;
@@ -92,7 +93,8 @@ public class BackgroundUploader
 			BulletinZipUtilities.exportBulletinPacketsFromDatabaseToZipFile(db, headerKey, tempFile, security);
 			
 			String tag = getUploadProgressTag(b);
-			progressMeter.setStatusMessage(tag);
+			if(progressMeter != null)
+				progressMeter.setStatusMessage(tag);
 			return uploadBulletinZipFile(uid, tempFile);
 		}
 		finally
@@ -208,6 +210,7 @@ public class BackgroundUploader
 		} 
 		catch (Exception e)
 		{
+			MartusLogger.logException(e);
 			uploadResult.exceptionThrown = e.toString();
 			uploadResult.bulletinNotSentAndRemovedFromQueue = true;
 		}
