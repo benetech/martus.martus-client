@@ -114,10 +114,10 @@ import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.FormatFilter;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiUtilities;
+import org.martus.common.Exceptions.NetworkOfflineException;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusLogger;
-import org.martus.common.Exceptions.NetworkOfflineException;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.MiniLocalization;
@@ -274,8 +274,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				return false;
 
 			startInactivityTimeoutDetection();
+			loadConfigInfo();
 			doPostSigninAppInitialization();
-			getApp().startOrStopTorAsRequested();
 		}
 		
 		getSession().initalizeUiState();
@@ -293,7 +293,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			// NOTE: This was just informational output, so keep going
 		}
 		
-		loadConfigInfo();
 		if(!createdNewAccount && !justRecovered)
 			askAndBackupKeypairIfRequired();
 		
