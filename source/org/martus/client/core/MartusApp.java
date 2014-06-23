@@ -585,7 +585,15 @@ public class MartusApp
 			throw new SaveConfigInfoException();
 		}
 
+		turnNetworkOnOrOffAsRequested();
 		startOrStopTorAsRequested();
+	}
+
+	public void turnNetworkOnOrOffAsRequested()
+	{
+		boolean shouldBeOnline = configInfo.isNetworkOnline();
+		getTransport().setIsOnline(shouldBeOnline);
+		MartusLogger.log("Online status set to " + shouldBeOnline);
 	}
 
 	public void saveStateWithoutPrompting() throws Exception
@@ -857,6 +865,9 @@ public class MartusApp
 		{
 			orchidStore.loadStore(getOrchidCacheFile(), getSecurity());
 			transport = OrchidTransportWrapper.create(orchidStore);
+			turnNetworkOnOrOffAsRequested();
+			startOrStopTorAsRequested();
+
 			isInitialized = true;
 		} 
 		catch (Exception e)
