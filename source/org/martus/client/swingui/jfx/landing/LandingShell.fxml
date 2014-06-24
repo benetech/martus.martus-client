@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="960.0" style="-fx-background-color: #1a1a1a;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<MenuBar fx:id="global_menu" minHeight="30.0" minWidth="490.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="490.0" style="-fx-background-color: #1a1a1a, -fx-text-fill white; -fx-background-color: #1a1a1a;" stylesheets="@main.css">
+			<menus>
+    			<Menu mnemonicParsing="false" styleClass="menu_style" text="Help">
+      				<items>
+        				<MenuItem mnemonicParsing="false" styleClass="menu-item" text="What is Martus" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Getting Started" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="FAQs" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Installation Wizard" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Support Documentation" />
+      				</items>
+    			</Menu>
+				<Menu mnemonicParsing="false" styleClass="menu-item" text="Account">
+					<items>
+					<MenuItem mnemonicParsing="false" styleClass="menu-item" text="Change Username and Password" onAction="#onChangeUsernameAndPassword" />
+					<MenuItem mnemonicParsing="false" styleClass="menu-item" text="Create New" onAction="#onCreateNewAccount" />
+					<MenuItem mnemonicParsing="false" styleClass="menu-item" text="Contact Information" onAction="#onContactInformation" />
+					<MenuItem mnemonicParsing="false" styleClass="menu-item" text="Backup Key" onAction="#onBackupKeypair" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Settings">
+				<items>
+				<MenuItem mnemonicParsing="false" text="Server" onAction="#onConfigureServer" />
+				<MenuItem mnemonicParsing="false" text="System Preferences" onAction="#onPreferences" />
+				<MenuItem mnemonicParsing="false" text="Tor Preferences" />
+				</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Contacts">
+				<items>
+				<MenuItem mnemonicParsing="false" text="Manage Contacts"  onAction="#onManageContacts" />
+				<MenuItem mnemonicParsing="false" text="Import From File"/>
+				</items>
+				</Menu>
+			</menus>
+			<VBox.margin>
+				<Insets right="10.0" />
+			</VBox.margin>
+			<padding>
+				<Insets left="1.0" />
+			</padding>
+		</MenuBar>
+		<VBox prefHeight="480.0" prefWidth="960.0" style="-fx-background-color: #1a1a1a;">
+			<VBox.margin>
+				<Insets bottom="20.0" left="20.0" right="20.0" />
+			</VBox.margin>
+			<children>
+				<VBox prefHeight="2.0" prefWidth="920.0" style="-fx-background-color: #77bad0;" />
+				<VBox prefHeight="40.0" prefWidth="920.0" style="-fx-background-color: #e6e6e6;">
+					<VBox.margin>
+					<Insets bottom="1.0" top="1.0" />
+					</VBox.margin>
+					<children>
+						<GridPane>
+							<columnConstraints>
+								<ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="115.0" />
+							    <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
+							    <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="240.0" />
+							</columnConstraints>
+							<children>
+								<ImageView fitHeight="33.0" fitWidth="97.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="@../images/Martus-logo-white-text-120x54.png" />
+									</image>
+									<GridPane.margin>
+										<Insets left="10.0" top="10.0" />
+									</GridPane.margin>
+								</ImageView>
+								<Button mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="+ Create" textFill="#f7f7f7" GridPane.columnIndex="1"  onAction="#onCreateNewBulletin">
+									<font>
+										<Font name="Helvetica" size="14.0" />
+									</font>
+									<GridPane.margin>
+										<Insets left="10.0" top="10.0" />
+									</GridPane.margin>
+								</Button>
+								<Button mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="Import" textFill="#f7f7f7" GridPane.columnIndex="1">
+									<font>
+										<Font name="Helvetica" size="14.0" />
+									</font>
+									<GridPane.margin>
+										<Insets left="100.0" top="10.0" />
+									</GridPane.margin>
+								</Button>
+								<HBox styleClass="toolbarHBox" GridPane.columnIndex="3" >
+									<children>
+										<Label text="Backup:" styleClass="toolbarLabel" />
+										<Button fx:id="toolbarButtonOnline" styleClass="toolbarButton" onAction="#onOnline" mnemonicParsing="false" minWidth="50"  />
+									</children>
+								</HBox>
+								<Text fill="#353535" strokeType="OUTSIDE" strokeWidth="0.0" text="Tor:" GridPane.columnIndex="4">
+									<font>
+									<Font name="Helvetica" size="14.0" />
+									</font>
+									<GridPane.margin>
+									<Insets left="10.0" top="10.0" />
+									</GridPane.margin>
+								</Text>
+								<ToggleButton fx:id="toolbarButtonTor" mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="On" textFill="#f5f5f5" GridPane.columnIndex="4" onAction="#onTor">
+									<font>
+										<Font name="Helvetica" size="14.0" />
+									</font>
+									<GridPane.margin>
+										<Insets left="45.0" top="10.0" />
+									</GridPane.margin>
+								</ToggleButton>
+								<Button alignment="CENTER_RIGHT" mnemonicParsing="false" style="-fx-background-color: #77bad0; -fx-background-radius: 0px;" onAction="#onQuickSearch" text="Search" textAlignment="CENTER" textFill="#f7f7f7" GridPane.columnIndex="5">
+									<font>
+										<Font name="Helvetica" size="14.0" />
+									</font>
+									<GridPane.margin>
+										<Insets left="160.0" top="10.0" />
+									</GridPane.margin>
+									<opaqueInsets>
+										<Insets />
+									</opaqueInsets>
+								</Button>
+								<TextField fx:id="searchText" maxWidth="160.0" minHeight="27.0" prefWidth="150.0" style="-fx-background-radius: 0px;" GridPane.columnIndex="5">
+									<GridPane.margin>
+										<Insets top="11.0" />
+									</GridPane.margin>
+								</TextField>
+							</children>
+						</GridPane>
+					</children>
+				</VBox>
+				<SplitPane dividerPositions="0.29797979797979796" focusTraversable="true" minWidth="920.0" prefHeight="360.0" prefWidth="920.0" style="-fx-box-border: transparent; -fx-box-border: 0px;">
+					<items>
+						<AnchorPane maxWidth="300.0" minHeight="-Infinity" minWidth="270.0" prefHeight="370.0" prefWidth="300.0" style="-fx-background-color: #353535;">
+							<children>
+								<Button layoutX="44.33837890625" layoutY="24.0" maxHeight="45.0" maxWidth="300.0" minHeight="45.0" minWidth="270.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="270.0" style="-fx-background-color: #353535; -fx-background-radius: 1px; -fx-border-color: #606060;" text="Records" textFill="#f5f5f5" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+									<font>
+										<Font name="Helvetica" size="18.0" />
+									</font>
+								</Button>
+								<ImageView fitHeight="40.0" fitWidth="30.0" layoutX="12.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+									<Image url="@../images/list.png" />
+									</image>
+								</ImageView>
+								<Button layoutY="45.0" maxHeight="45.0" maxWidth="300.0" minHeight="45.0" minWidth="270.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="270.0" style="-fx-background-color: #353535; -fx-background-radius: 1px; -fx-border-color: #606060;" text="Files" textFill="#f5f5f5" AnchorPane.bottomAnchor="290.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
+									<font>
+									<Font name="Helvetica" size="18.0" />
+									</font>
+								</Button>
+								<ImageView fitHeight="40.0" fitWidth="30.0" layoutX="12.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+									<Image url="@../images/attachment.png" />
+									</image>
+								</ImageView>
+		                        <Label alignment="CENTER" layoutX="12.0" layoutY="102.0" prefHeight="40.0" prefWidth="246.0" text="Cases" textAlignment="CENTER" textFill="WHITE">
+		                           <font>
+		                              <Font size="18.0" />
+		                           </font>
+		                        </Label>
+                        		<ListView fx:id="casesListView" layoutX="7.0" layoutY="142.0" onMouseClicked="#OnCasesMouseClicked" prefHeight="232.0" prefWidth="256.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="142.0" />
+							</children>
+						</AnchorPane>
+    					<AnchorPane fx:id="mainContentPane" minHeight="380.0" minWidth="620.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #bdbdbd;" />
+  					</items>
+				</SplitPane>
+			</children>
+		</VBox>
+	</children>
+</VBox>
