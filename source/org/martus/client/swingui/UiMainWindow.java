@@ -223,6 +223,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	private void restrictToOnlyTestServers()
 	{
+		// NOTE: For now, only allow connecting to servers which we can completely 
+		// delete all user data from if necessary. So NOT .29 or .114.
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("127.0.0.1");
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("localhost");
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("sl1-dev");
