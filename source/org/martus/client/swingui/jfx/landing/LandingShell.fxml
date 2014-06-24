@@ -96,22 +96,12 @@
 										<Button fx:id="toolbarButtonOnline" styleClass="toolbarButton" onAction="#onOnline" mnemonicParsing="false" minWidth="50"  />
 									</children>
 								</HBox>
-								<Text fill="#353535" strokeType="OUTSIDE" strokeWidth="0.0" text="Tor:" GridPane.columnIndex="4">
-									<font>
-									<Font name="Helvetica" size="14.0" />
-									</font>
-									<GridPane.margin>
-									<Insets left="10.0" top="10.0" />
-									</GridPane.margin>
-								</Text>
-								<ToggleButton fx:id="toolbarButtonTor" mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="On" textFill="#f5f5f5" GridPane.columnIndex="4" onAction="#onTor">
-									<font>
-										<Font name="Helvetica" size="14.0" />
-									</font>
-									<GridPane.margin>
-										<Insets left="45.0" top="10.0" />
-									</GridPane.margin>
-								</ToggleButton>
+								<HBox styleClass="toolbarHBox" GridPane.columnIndex="4" >
+									<children>
+										<Label text="Tor:" styleClass="toolbarLabel" />
+										<Button fx:id="toolbarButtonTor" styleClass="toolbarButton" onAction="#onTor" mnemonicParsing="false" minWidth="50"  />
+									</children>
+								</HBox>
 								<Button alignment="CENTER_RIGHT" mnemonicParsing="false" style="-fx-background-color: #77bad0; -fx-background-radius: 0px;" onAction="#onQuickSearch" text="Search" textAlignment="CENTER" textFill="#f7f7f7" GridPane.columnIndex="5">
 									<font>
 										<Font name="Helvetica" size="14.0" />
