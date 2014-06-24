@@ -1997,6 +1997,10 @@ public class MartusApp
 			if(response.getResultCode().equals(NetworkInterfaceConstants.OK))
 				return (String)response.getResultVector().get(0);
 		}
+		catch (ServerNotAvailableException e)
+		{
+			throw e;
+		}
 		catch (Exception e)
 		{
 			//System.out.println("MartusApp.getServerCompliance :" + e);
