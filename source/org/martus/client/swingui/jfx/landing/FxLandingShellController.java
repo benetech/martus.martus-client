@@ -34,7 +34,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -52,7 +51,6 @@ import org.martus.client.swingui.actions.ActionMenuManageContacts;
 import org.martus.client.swingui.actions.ActionMenuPreferences;
 import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.actions.ActionMenuSelectServer;
-import org.martus.client.swingui.actions.ActionMenuStopStartTor;
 import org.martus.client.swingui.jfx.FxContentController;
 import org.martus.client.swingui.jfx.FxInSwingFrameController;
 import org.martus.common.MartusLogger;
@@ -103,11 +101,16 @@ public class FxLandingShellController extends FxInSwingFrameController
 
 	private void updateTorStatus()
 	{
+		OrchidTransportWrapper transport = getApp().getTransport();
+		boolean isTorRequested = transport.isTorEnabled();
+
+		String text = isTorRequested ? "On" : "Off";
+		toolbarButtonTor.setText(text);
 	}
 	
 	private void updateOnlineStatus()
 	{
-		boolean isOnline = getApp().getConfigInfo().isNetworkOnline();
+		boolean isOnline = getApp().getTransport().isOnline();
 		String text = isOnline ? "On" : "Off";
 		toolbarButtonOnline.setText(text);
 	}
@@ -162,10 +165,10 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@FXML
 	private void onOnline(ActionEvent event)
 	{
+		boolean oldState = getApp().getTransport().isOnline();
 		try
 		{
 			ConfigInfo configInfo = getApp().getConfigInfo();
-			boolean oldState = configInfo.isNetworkOnline();
 			boolean newState = !oldState;
 			
 			configInfo.setIsNetworkOnline(newState);
@@ -187,7 +190,26 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@FXML
 	private void onTor(ActionEvent event)
 	{
-		doAction(new ActionMenuStopStartTor(getMainWindow()));
+		boolean oldState = getApp().getTransport().isTorEnabled();
+		try
+		{
+			ConfigInfo configInfo = getApp().getConfigInfo();
+			boolean newState = !oldState;
+			
+			configInfo.setUseInternalTor(newState);
+			getApp().saveConfigInfo();
+
+			updateTorStatus();
+		} 
+		catch (SaveConfigInfoException e)
+		{
+			MartusLogger.logException(e);
+			getMainWindow().notifyDlg("ErrorSavingConfig");
+		}
+		catch (Exception e)
+		{
+			getStage().logAndNotifyUnexpectedError(e);
+		}
 	}
 
 	@FXML
@@ -239,7 +261,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 	protected Button toolbarButtonOnline;
 	
 	@FXML
-	protected ToggleButton toolbarButtonTor;
+	protected Button toolbarButtonTor;
 	
 	@FXML
 	protected AnchorPane mainContentPane;
