@@ -233,6 +233,12 @@ public class FxLandingShellController extends FxInSwingFrameController
 	}
 	
 	@FXML
+	protected void onFolderSettings(MouseEvent mouseEvent) 
+	{
+		
+	}
+	
+	@FXML
 	protected TextField searchText;
 	
 	@FXML
