@@ -261,9 +261,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@FXML
 	public void onFolderSettingsClicked(MouseEvent mouseEvent) 
 	{
-		UiMainWindow mainWindow = getMainWindow();
-		FxFolderSettingsController folderSettingsController = new FxFolderSettingsController(mainWindow);
-		doAction(new ActionDialogWithClose(mainWindow, folderSettingsController));
+		doAction(new FxFolderSettingsController(getMainWindow()));
 	}
 	
 	private final int INVALID_INDEX = -1;

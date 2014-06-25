@@ -30,9 +30,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxContentController;
 
-public class FxFolderSettingsController extends FxContentController
+public class FxFolderSettingsController extends DialogWithCloseController
 {
 	public FxFolderSettingsController(UiMainWindow mainWindowToUse)
 	{
