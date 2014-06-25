@@ -28,15 +28,17 @@ package org.martus.client.swingui.jfx;
 import java.io.File;
 import java.net.URL;
 
-import org.martus.util.language.LanguageOptions;
-
 import javafx.collections.ObservableList;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 
+import org.martus.client.swingui.MartusLocalization;
+import org.martus.util.language.LanguageOptions;
+
 public class FxScene extends Scene
 {
+	private static final String MARTUS_CSS = "Martus.css";
 	public FxScene(File fxmlDirToUse, String cssLocationToUse) throws Exception
 	{
 		super(new Region());
@@ -58,13 +60,28 @@ public class FxScene extends Scene
 	public void applyStyleSheet(String languageCode) throws Exception
 	{
 		ObservableList<String> stylesheets = getStylesheets();
-		String externalForm = getBestCss(languageCode).toExternalForm();
-		stylesheets.add(externalForm);
+		if(!languageCode.equals(MartusLocalization.ENGLISH))
+		{
+			stylesheets.add(getMartusCss(MartusLocalization.ENGLISH).toExternalForm());
+			stylesheets.add(getBestCss(MartusLocalization.ENGLISH).toExternalForm());
+		}		
+		URL cssUrl = getMartusCss(languageCode);
+		if(new File(cssUrl.toURI()).exists())
+			stylesheets.add(cssUrl.toExternalForm());
+
+		cssUrl = getBestCss(languageCode);
+		if(new File(cssUrl.toURI()).exists())
+			stylesheets.add(cssUrl.toExternalForm());
 	}
 
 	public URL getBestCss(String languageCode) throws Exception
 	{
 		return FxController.getBestCss(fxmlDirectory, languageCode, getCssLocation());
+	}
+
+	public URL getMartusCss(String languageCode) throws Exception
+	{
+		return FxController.getBestCss(fxmlDirectory, languageCode, MARTUS_CSS);
 	}
 
 	public String getCssLocation()

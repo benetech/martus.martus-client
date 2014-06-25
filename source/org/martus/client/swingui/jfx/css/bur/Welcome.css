@@ -12,6 +12,7 @@ BorderPane {
     -fx-background-color: #253342,linear-gradient(#FFFF66, #666600);
     -fx-border-radius: 5;
     -fx-text-fill: #4c5e70;
+	-fx-font-size: 13px;
     -fx-font-weight: bold;
     -fx-alignment: center;
     -fx-padding: 5 35 5 35;

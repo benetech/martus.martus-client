@@ -8,35 +8,6 @@
 	-fx-alignment: BOTTOM_CENTER;
 }
 
-.button {
-
-		-fx-background-color:
-
-        #797769,
-
-       linear-gradient(#35536b, #597489);
-
-		-fx-border-radius: 5;
-
-		-fx-text-fill: White;
-
-		-fx-alignment: center;
-
-		-fx-font: 17px "Helvetica";
-
-		-fx-padding: 5 35 5 35;
-
-}
-
-.button:hover {
-		-fx-background-color: #638a4b;
-		-fx-border-radius: 5;
-		-fx-text-fill: White;
-		-fx-alignment: center;
-		-fx-font-size: 17px;
-		-fx-padding: 5 35 5 35;
-}
-
 .text-area {
 	-fx-background-color: white;
 	-fx-text-background-color: #9ba5ae;
@@ -55,50 +26,6 @@
     -fx-background-color: #e6e7e9;
 	-fx-border-style: none;
 }
-
-.button_not_main_action {
-
-		-fx-background-color:
-
-        #797769,
-
-       linear-gradient(#35536b, #597489);
-
-		-fx-border-radius: 5;
-
-		-fx-text-fill: #4c5e70;
-
-		-fx-alignment: center;
-
-		-fx-font: 17px "Helvetica";
-
-		-fx-padding: 5 35 5 35;
-
-}
-
-
-
-.button_guided_action {
-
-		-fx-background-color:
-
-        #797769,
-
-       linear-gradient(#e2c92f, #797769);
-
-		-fx-border-radius: 5;
-
-		-fx-text-fill: #4c5e70;
-
-		-fx-alignment: center;
-
-		-fx-font: 17px "Helvetica";
-
-		-fx-padding: 5 35 5 35;
-
-}
-
-
 
 .headingLevel1 {
 
