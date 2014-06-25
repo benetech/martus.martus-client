@@ -255,9 +255,8 @@ public class FxLandingShellController extends FxInSwingFrameController
 	}
 	
 	@FXML
-	protected void onFolderSettings(MouseEvent mouseEvent) 
+	public void onFolderSettingsClicked(MouseEvent mouseEvent) 
 	{
-		
 	}
 	
 	@FXML

@@ -165,9 +165,9 @@
                            <children>
                               <Button mnemonicParsing="false" text="+" />
                               <Button mnemonicParsing="false" text="-" />
-                              <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0">
+                              <Button mnemonicParsing="false" onMouseClicked="#onFolderSettingsClicked" prefHeight="30.0" prefWidth="31.0">
                                  <graphic>
-                                    <ImageView fitHeight="20.0" fitWidth="22.0" onMouseClicked="#onFolderSettings" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../images/cog.png" />
                                        </image>
