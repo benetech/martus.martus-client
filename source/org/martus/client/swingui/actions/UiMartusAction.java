@@ -39,7 +39,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
 import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
-import org.martus.clientside.CurrentUiState;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeUnknown;
