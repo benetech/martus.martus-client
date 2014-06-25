@@ -314,7 +314,7 @@ class BackgroundTimerTask extends TimerTask
 		if(!isServerAvailable())
 			return;
 		mainWindow.setStatusMessageTag(UiMainWindow.STATUS_CONNECTING);
-		System.out.println("Entering BackgroundUploadTimerTask.getUpdatedListOfBulletinsOnServer");
+		MartusLogger.logBeginProcess("BackgroundUploadTimerTask.getUpdatedListOfBulletinsOnServer");
 		String myAccountId = getApp().getAccountId();
 		HashSet summariesOnServer = new HashSet(1000);
 		try
@@ -335,11 +335,11 @@ class BackgroundTimerTask extends TimerTask
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
+			MartusLogger.logException(e);
 		}
 		gotUpdatedOnServerUids = true;
 		
-		System.out.println("Exiting BackgroundUploadTimerTask.getUpdatedListOfBulletinsOnServer");
+		MartusLogger.logEndProcess("BackgroundUploadTimerTask.getUpdatedListOfBulletinsOnServer");
 		mainWindow.setStatusMessageReady();
 	}
 
@@ -352,7 +352,7 @@ class BackgroundTimerTask extends TimerTask
 		if(NetworkInterfaceConstants.OK.equals(myFieldOfficesResponse.getResultCode()))
 		{
 			Vector fieldOfficeAccounts = myFieldOfficesResponse.getResultVector();
-			System.out.println("My FO accounts: " + fieldOfficeAccounts.size());
+			MartusLogger.log("My FO accounts: " + fieldOfficeAccounts.size());
 			for(int i = 0; i < fieldOfficeAccounts.size(); ++i)
 			{
 				String fieldOfficeAccountId = (String)fieldOfficeAccounts.get(i);
@@ -371,7 +371,7 @@ class BackgroundTimerTask extends TimerTask
 
 		Vector draftSummaries = tryToGetDraftBulletinSummariesFromServer(accountId);
 		summariesOnServer.addAll(draftSummaries);
-		System.out.println("Adding summaries from server: " + summariesOnServer.size());
+		MartusLogger.log("Adding summaries from server: " + summariesOnServer.size());
 		return summariesOnServer;
 	}
 
