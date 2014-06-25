@@ -1,9 +1,4 @@
-.root {
-	-fx-background-color: #e6e7e9;
-  -fx-font-family: "Helvetica";
-  -fx-line-height: 28px inherit;
-}
-
+/*Button font size 14 not 17 like in Martus.css*/
 .button {
 		-fx-background-color:
         #797769,
