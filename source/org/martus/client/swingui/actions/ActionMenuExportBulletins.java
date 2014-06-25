@@ -31,7 +31,6 @@ import java.util.Vector;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiExportBulletinsDlg;
-import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 
 public class ActionMenuExportBulletins extends UiMenuAction

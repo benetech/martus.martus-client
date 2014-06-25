@@ -30,9 +30,6 @@ import java.awt.event.ActionEvent;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletintable.ModifyBulletinActionDoer;
-import org.martus.client.swingui.jfx.FxModalDialog;
-import org.martus.client.swingui.jfx.contacts.ContactsStage;
-import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 
 public class ActionMenuModifyFxBulletin extends UiMenuAction implements ActionDoer

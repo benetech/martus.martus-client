@@ -32,7 +32,6 @@ import java.util.Vector;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
 import org.martus.clientside.FormatFilter;
-import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinZipUtilities;
 import org.martus.common.database.DatabaseKey;
