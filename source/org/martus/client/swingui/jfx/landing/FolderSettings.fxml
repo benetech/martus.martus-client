@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER_LEFT">
+         <children>
+            <ImageView fitHeight="30.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/cog.png" />
+               </image>
+            </ImageView>
+            <Label text="   " />
+            <Label alignment="CENTER" styleClass="headingLevel1" text="Case Management" />
+         </children>
+      </HBox>
+      <Label />
+      <HBox prefWidth="600.0">
+         <children>
+            <Label text="     " />
+            <ChoiceBox fx:id="fxFolderChoiceBox" />
+            <Label text="     " />
+            <TextField fx:id="fxFolderCustomTextField" promptText="Custom Name" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
