@@ -229,7 +229,10 @@ public class FxLandingShellController extends FxInSwingFrameController
 	{
 		try
 		{
-			CaseListItem selectedCase = caseListProvider.get(casesListView.getSelectionModel().getSelectedIndex());
+			int selectedIndex = casesListView.getSelectionModel().getSelectedIndex();
+			if(selectedIndex == INVALID_INDEX)
+				return;
+			CaseListItem selectedCase = caseListProvider.get(selectedIndex);
 			BulletinFolder folder = getApp().findFolder(selectedCase.getName());
 			BulletinsListController bulletinListController = (BulletinsListController)getStage().getCurrentController();
 			bulletinListController.loadBulletinData(folder.getAllUniversalIdsUnsorted());
@@ -254,11 +257,16 @@ public class FxLandingShellController extends FxInSwingFrameController
 		}
 	}
 	
+	
 	@FXML
 	public void onFolderSettingsClicked(MouseEvent mouseEvent) 
 	{
+		UiMainWindow mainWindow = getMainWindow();
+		FxFolderSettingsController folderSettingsController = new FxFolderSettingsController(mainWindow);
+		doAction(new ActionDialogWithClose(mainWindow, folderSettingsController));
 	}
 	
+	private final int INVALID_INDEX = -1;
 	@FXML
 	protected TextField searchText;
 	
