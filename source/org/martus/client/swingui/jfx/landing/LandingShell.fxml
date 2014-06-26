@@ -84,7 +84,6 @@
 								<HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="163.0" styleClass="toolbarHBox" GridPane.columnIndex="3">
 									<children>
 										<Label contentDisplay="CENTER" styleClass="toolbarLabel" text="Server:" />
-                              <Label text="  " />
 										<Button fx:id="toolbarButtonOnline" contentDisplay="CENTER" minWidth="28.0" mnemonicParsing="false" onAction="#onOnline" styleClass="toolbarButton" />
 									</children>
                            <opaqueInsets>
@@ -94,7 +93,6 @@
  						<HBox alignment="CENTER_LEFT" styleClass="toolbarHBox" GridPane.columnIndex="4" >
 									<children>
 										<Label text="Tor:" styleClass="toolbarLabel" />
-										<Label text="  " />
  										<Button fx:id="toolbarButtonTor" styleClass="toolbarButton" onAction="#onTor" mnemonicParsing="false" minWidth="50"  />
                            			</children>
                         </HBox>
