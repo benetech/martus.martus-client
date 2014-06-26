@@ -34,6 +34,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.jfx.FxController.ResourceNotFoundException;
 import org.martus.util.language.LanguageOptions;
 
 public class FxScene extends Scene
@@ -59,19 +60,29 @@ public class FxScene extends Scene
 
 	public void applyStyleSheet(String languageCode) throws Exception
 	{
-		ObservableList<String> stylesheets = getStylesheets();
+		applyLanguageStyleSheet(MartusLocalization.ENGLISH);
 		if(!languageCode.equals(MartusLocalization.ENGLISH))
+			applyLanguageStyleSheet(languageCode);
+	}
+	
+	private void applyLanguageStyleSheet(String languageCode) throws Exception
+	{
+		ObservableList<String> stylesheets = getStylesheets();
+		try
 		{
-			stylesheets.add(getMartusCss(MartusLocalization.ENGLISH).toExternalForm());
-			stylesheets.add(getBestCss(MartusLocalization.ENGLISH).toExternalForm());
-		}		
-		URL cssUrl = getMartusCss(languageCode);
-		if(new File(cssUrl.toURI()).exists())
-			stylesheets.add(cssUrl.toExternalForm());
-
-		cssUrl = getBestCss(languageCode);
-		if(new File(cssUrl.toURI()).exists())
-			stylesheets.add(cssUrl.toExternalForm());
+			stylesheets.add(getMartusCss(languageCode).toExternalForm());
+		}
+		catch (ResourceNotFoundException ignoreNonExistentCssForLanguageSpecific)
+		{
+		}
+		
+		try
+		{
+			stylesheets.add(getBestCss(languageCode).toExternalForm());
+		}
+		catch (ResourceNotFoundException ignoreNonExistentCssForLanguageSpecific)
+		{
+		}
 	}
 
 	public URL getBestCss(String languageCode) throws Exception

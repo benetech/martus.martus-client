@@ -80,3 +80,28 @@
 	-fx-padding: 5 35 5 35;
 }
 
+/************/
+/* Headings */
+/************/
+
+.headingLevel1 {
+	-fx-font-size: 24px;
+  -fx-font-weight: bold;
+	-fx-text-fill: Black;
+	-fx-padding: 0 5 10 5;
+}
+
+.headingLevel2 {
+  -fx-font-weight: bold;
+	-fx-text-fill: #4c5e70;
+	-fx-font-size: 24px;
+	-fx-padding: 10 5 10 5;
+}
+
+.headingLevel3 {
+  -fx-font-weight: bold;
+	-fx-text-fill: #4c5e70;
+	-fx-font-size: 13px;
+	-fx-padding: 5 3 5 3;
+}
+
