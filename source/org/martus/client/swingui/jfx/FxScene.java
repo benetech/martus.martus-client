@@ -26,15 +26,12 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx;
 
 import java.io.File;
-import java.net.URL;
 
 import javafx.collections.ObservableList;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 
-import org.martus.client.swingui.MartusLocalization;
-import org.martus.client.swingui.jfx.FxController.ResourceNotFoundException;
 import org.martus.util.language.LanguageOptions;
 
 public class FxScene extends Scene
