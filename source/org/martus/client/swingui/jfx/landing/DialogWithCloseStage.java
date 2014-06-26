@@ -48,7 +48,7 @@ public class DialogWithCloseStage extends FxNonWizardStage
 	@Override
 	protected FxScene createScene() throws Exception
 	{
-		return new FxScene(getExternalFxmlDirectory(), "DialogWithClose.css");
+		return new FxScene(getExternalFxmlDirectory(), null);
 	}
 
 	@Override
