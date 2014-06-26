@@ -60,12 +60,16 @@ public class FxScene extends Scene
 
 	public void applyStyleSheet(String languageCode) throws Exception
 	{
+		applyMasterLanguageStyleSheet(MartusLocalization.ENGLISH);
+		if(!languageCode.equals(MartusLocalization.ENGLISH))
+			applyMasterLanguageStyleSheet(languageCode);
+		
 		applyLanguageStyleSheet(MartusLocalization.ENGLISH);
 		if(!languageCode.equals(MartusLocalization.ENGLISH))
 			applyLanguageStyleSheet(languageCode);
 	}
 	
-	private void applyLanguageStyleSheet(String languageCode) throws Exception
+	private void applyMasterLanguageStyleSheet(String languageCode) throws Exception
 	{
 		ObservableList<String> stylesheets = getStylesheets();
 		try
@@ -75,7 +79,11 @@ public class FxScene extends Scene
 		catch (ResourceNotFoundException ignoreNonExistentCssForLanguageSpecific)
 		{
 		}
-		
+	}
+
+	private void applyLanguageStyleSheet(String languageCode) throws Exception
+	{
+		ObservableList<String> stylesheets = getStylesheets();
 		try
 		{
 			stylesheets.add(getBestCss(languageCode).toExternalForm());
