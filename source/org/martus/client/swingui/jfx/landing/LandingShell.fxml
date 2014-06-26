@@ -66,6 +66,15 @@
 							    <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="240.0" />
 							</columnConstraints>
 							<children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+      								<ImageView fitHeight="33.0" fitWidth="97.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true">
+      									<image>
+      										<Image url="@../images/Martus-logo-white-text-120x54.png" />
+      									</image>
+      								</ImageView>
+                           </children>
+                        </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <children>
       								<Button mnemonicParsing="false" onAction="#onCreateNewBulletin" style="-fx-background-color: #77bad0;" text="+ Create" textFill="#f7f7f7">
@@ -108,15 +117,6 @@
       										<Insets />
       									</opaqueInsets>
       								</Button>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-      								<ImageView fitHeight="33.0" fitWidth="97.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true">
-      									<image>
-      										<Image url="@../images/Martus-logo-white-text-120x54.png" />
-      									</image>
-      								</ImageView>
                            </children>
                         </HBox>
 							</children>
