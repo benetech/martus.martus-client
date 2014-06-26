@@ -39,7 +39,6 @@ import org.martus.util.language.LanguageOptions;
 
 public class FxScene extends Scene
 {
-	private static final String MARTUS_CSS = "Martus.css";
 	public FxScene(File fxmlDirToUse, String cssLocationToUse) throws Exception
 	{
 		super(new Region());
@@ -60,49 +59,10 @@ public class FxScene extends Scene
 
 	public void applyStyleSheet(String languageCode) throws Exception
 	{
-		applyMasterLanguageStyleSheet(MartusLocalization.ENGLISH);
-		if(!languageCode.equals(MartusLocalization.ENGLISH))
-			applyMasterLanguageStyleSheet(languageCode);
-		
-		applyLanguageStyleSheet(MartusLocalization.ENGLISH);
-		if(!languageCode.equals(MartusLocalization.ENGLISH))
-			applyLanguageStyleSheet(languageCode);
+		ObservableList<String> stylesheets = getStylesheets();
+		FxController.applyStyleSheets(stylesheets, fxmlDirectory, languageCode, cssLocation);
 	}
 	
-	private void applyMasterLanguageStyleSheet(String languageCode) throws Exception
-	{
-		ObservableList<String> stylesheets = getStylesheets();
-		try
-		{
-			stylesheets.add(getMartusCss(languageCode).toExternalForm());
-		}
-		catch (ResourceNotFoundException ignoreNonExistentCssForLanguageSpecific)
-		{
-		}
-	}
-
-	private void applyLanguageStyleSheet(String languageCode) throws Exception
-	{
-		ObservableList<String> stylesheets = getStylesheets();
-		try
-		{
-			stylesheets.add(getBestCss(languageCode).toExternalForm());
-		}
-		catch (ResourceNotFoundException ignoreNonExistentCssForLanguageSpecific)
-		{
-		}
-	}
-
-	public URL getBestCss(String languageCode) throws Exception
-	{
-		return FxController.getBestCss(fxmlDirectory, languageCode, getCssLocation());
-	}
-
-	public URL getMartusCss(String languageCode) throws Exception
-	{
-		return FxController.getBestCss(fxmlDirectory, languageCode, MARTUS_CSS);
-	}
-
 	public String getCssLocation()
 	{
 		return cssLocation;
