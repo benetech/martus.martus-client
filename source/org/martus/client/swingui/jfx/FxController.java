@@ -30,6 +30,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,6 +54,9 @@ import org.martus.util.TokenReplacement.TokenInvalidException;
 
 abstract public class FxController implements Initializable
 {
+	private static final String POPUP_CSS = "Popup.css";
+	private static final String MARTUS_CSS = "Martus.css";
+
 	public static class UserCancelledException extends Exception
 	{
 	}
@@ -90,7 +94,10 @@ abstract public class FxController implements Initializable
 	public URL getBestFxmlLocation(String fxmlLocation) throws Exception
 	{
 		File fxmlDir = getApp().getFxmlDirectory();
-		return getBestFile(fxmlDir, fxmlLocation);
+		URL fxmlURL = getBestFile(fxmlDir, fxmlLocation);
+		if(fxmlURL == null)		
+			throw new ResourceNotFoundException("Couldn't find " + fxmlLocation);
+		return fxmlURL;
 	}
 
 	public static URL getBestFile(File fxmlDir, String fileLocation) throws Exception
@@ -102,11 +109,7 @@ abstract public class FxController implements Initializable
 			return fxmlFile.toURI().toURL();
 		}
 
-		URL resource = FxScene.class.getResource(fileLocation);
-		if(resource == null)
-			throw new ResourceNotFoundException("Couldn't find " + fileLocation);
-		
-		return resource;
+		return FxScene.class.getResource(fileLocation);
 	}		
 	
 	public static class ResourceNotFoundException extends Exception
@@ -369,8 +372,7 @@ abstract public class FxController implements Initializable
 		Scene scene = new Scene(root);
 		scene.setNodeOrientation(FxScene.getNodeOrientationBasedOnLanguage());
 		File fxmlDir = getApp().getFxmlDirectory();
-		URL css = FxController.getBestCss(fxmlDir, getLocalization().getCurrentLanguageCode(), "Popup.css");
-		scene.getStylesheets().add(css.toExternalForm());
+		FxController.applyStyleSheets(scene.getStylesheets(), fxmlDir, getLocalization().getCurrentLanguageCode(), POPUP_CSS);
 		popupStage.setScene(scene);
 	    showModalPopupStage(popupStage);
 	    if(controller.getThrownException() != null)
@@ -381,18 +383,41 @@ abstract public class FxController implements Initializable
 	{
 		popupStage.showAndWait();
 	}
-
-	public static URL getBestCss(File directory, String languageCode,
-			String cssLocation2) throws Exception
+	
+	static public void applyStyleSheets(ObservableList<String> stylesheets, File directory, String languageCode, String cssLocation) throws Exception
 	{
-		try
+		applyMasterMartusStyleSheets(stylesheets, directory, languageCode);
+		if(cssLocation == null)
+			return;
+		applyPageSpecificStyleSheets(stylesheets, directory, languageCode, cssLocation);
+	}
+
+	private static void applyMasterMartusStyleSheets(ObservableList<String> stylesheets, File directory,
+			String languageCode) throws Exception
+	{
+		applyPageSpecificStyleSheets(stylesheets, directory, languageCode, MARTUS_CSS);
+	}
+
+	private static void applyPageSpecificStyleSheets( ObservableList<String> stylesheets, File directory,
+			String languageCode, String cssLocation) throws Exception
+	{
+		stylesheets.add(getBestCss(directory, MartusLocalization.ENGLISH, cssLocation).toExternalForm());
+		if(!languageCode.equals(MartusLocalization.ENGLISH))
 		{
-			return getBestFile(directory, "css/" + languageCode + "/" + cssLocation2);
+			URL fxpageLanguageCss = getBestCss(directory, languageCode, cssLocation);
+			if(fxpageLanguageCss != null)
+				stylesheets.add(fxpageLanguageCss.toExternalForm());
 		}
-		catch(ResourceNotFoundException expectedForMostLanguages)
-		{
-			return getBestFile(directory, "css/" + cssLocation2);
-		}
+	}
+
+
+	
+	public static URL getBestCss(File directory, String languageCode,
+			String cssLocation) throws Exception
+	{
+		if(languageCode.equals(MartusLocalization.ENGLISH))
+			return getBestFile(directory, "css/" + cssLocation);
+		return getBestFile(directory, "css/" + languageCode + "/" + cssLocation);
 	}
 
 	private UiMainWindow mainWindow;
