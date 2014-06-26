@@ -37,6 +37,10 @@ public class FxFolderSettingsController extends DialogWithCloseController
 	{
 		super(mainWindowToUse);
 	}
+	
+	public void initialize()
+	{
+	}
 
 	@Override
 	public String getFxmlLocation()
