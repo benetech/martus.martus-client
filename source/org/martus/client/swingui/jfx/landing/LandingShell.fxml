@@ -58,15 +58,24 @@
 					<children>
 						<GridPane hgap="5.0">
 							<columnConstraints>
-								<ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
-								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
-								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="115.0" />
-							    <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
-							    <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="240.0" />
+								<ColumnConstraints hgrow="SOMETIMES"  />
+								<ColumnConstraints hgrow="SOMETIMES"  />
+								<ColumnConstraints hgrow="SOMETIMES"  />
+								<ColumnConstraints hgrow="SOMETIMES"  />
+							    <ColumnConstraints hgrow="SOMETIMES"  />
+							    <ColumnConstraints hgrow="SOMETIMES"  />
 							</columnConstraints>
 							<children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                        <HBox alignment="CENTER" prefHeight="100.0" >
+                           <children>
+      								<ImageView fitHeight="33.0" fitWidth="97.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true">
+      									<image>
+      										<Image url="@../images/Martus-logo-white-text-120x54.png" />
+      									</image>
+      								</ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" GridPane.columnIndex="1">
                            <children>
       								<Button mnemonicParsing="false" onAction="#onCreateNewBulletin" style="-fx-background-color: #77bad0;" text="+ Create" textFill="#f7f7f7">
       									<font>
@@ -81,10 +90,9 @@
       								</Button>
                            </children>
                         </HBox>
-								<HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="163.0" styleClass="toolbarHBox" GridPane.columnIndex="3">
+								<HBox alignment="CENTER_LEFT" prefHeight="32.0" styleClass="toolbarHBox" GridPane.columnIndex="3">
 									<children>
 										<Label contentDisplay="CENTER" styleClass="toolbarLabel" text="Server:" />
-                              <Label text="  " />
 										<Button fx:id="toolbarButtonOnline" contentDisplay="CENTER" minWidth="28.0" mnemonicParsing="false" onAction="#onOnline" styleClass="toolbarButton" />
 									</children>
                            <opaqueInsets>
@@ -94,11 +102,10 @@
  						<HBox alignment="CENTER_LEFT" styleClass="toolbarHBox" GridPane.columnIndex="4" >
 									<children>
 										<Label text="Tor:" styleClass="toolbarLabel" />
-										<Label text="  " />
  										<Button fx:id="toolbarButtonTor" styleClass="toolbarButton" onAction="#onTor" mnemonicParsing="false" minWidth="50"  />
                            			</children>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="5">
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" GridPane.columnIndex="5">
                            <children>
       								<TextField fx:id="searchText" maxWidth="160.0" minHeight="27.0" prefWidth="150.0" style="-fx-background-radius: 0px;" />
                               <Label text="   " />
@@ -110,15 +117,6 @@
       										<Insets />
       									</opaqueInsets>
       								</Button>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-      								<ImageView fitHeight="33.0" fitWidth="97.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true">
-      									<image>
-      										<Image url="@../images/Martus-logo-white-text-120x54.png" />
-      									</image>
-      								</ImageView>
                            </children>
                         </HBox>
 							</children>
