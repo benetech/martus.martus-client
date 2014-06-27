@@ -56,7 +56,9 @@ import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.actions.ActionMenuSelectServer;
 import org.martus.client.swingui.jfx.FxContentController;
 import org.martus.client.swingui.jfx.FxInSwingFrameController;
+import org.martus.client.swingui.jfx.landing.FxFolderSettingsController.FolderNotFoundException;
 import org.martus.common.MartusLogger;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.network.OrchidTransportWrapper;
 
 public class FxLandingShellController extends FxInSwingFrameController
@@ -85,7 +87,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 	private void updateCases()
 	{
 		ConfigInfo config = getApp().getConfigInfo();
-		folderNameIndex = config.getFolderLabelIndex();
+		folderNameCode = config.getFolderLabelCode();
 		folderNameUserDefined = config.getFolderLabelCustomName();
 		updateFolderLabel();
 		
@@ -266,19 +268,19 @@ public class FxLandingShellController extends FxInSwingFrameController
 		}
 	}
 
-	private final class FolderNameIndexListener implements ChangeListener<Number>
+	private final class FolderNameChoiceBoxListener implements ChangeListener<ChoiceItem>
 	{
-		public FolderNameIndexListener()
+		public FolderNameChoiceBoxListener()
 		{
 		}
 
-		@Override public void changed(ObservableValue<? extends Number> observableValue, Number original, Number newValue) 
+		@Override public void changed(ObservableValue<? extends ChoiceItem> observableValue, ChoiceItem originalItem, ChoiceItem newItem) 
 		{
-			folderNameIndex = newValue.intValue();
+			folderNameCode = newItem.getCode();
 			updateFolderLabel();
 		}
 	}
-	
+
 	private final class FolderCustomNameListener implements ChangeListener<String>
 	{
 		public FolderCustomNameListener()
@@ -294,35 +296,23 @@ public class FxLandingShellController extends FxInSwingFrameController
 
 	protected void updateFolderLabel()
 	{
-		String folderLabelName = "";
-		MartusLocalization localization = getMainWindow().getLocalization();
-		switch(folderNameIndex)
+		try
 		{
-			case FxFolderSettingsController.FolderNameIncidents:
-				folderLabelName = localization.getFieldLabel("FolderNameIncidents");
-				break;
-			case FxFolderSettingsController.FolderNameProjects:
-				folderLabelName = localization.getFieldLabel("FolderNameProjects");
-				break;
-			case FxFolderSettingsController.FolderNameCustom:
-				folderLabelName = folderNameUserDefined;
-				break;
-			case FxFolderSettingsController.FolderNameCases:
-			default:
-				folderLabelName = localization.getFieldLabel("FolderNameCases");
-				break;
+			folderNameLabel.setText(FxFolderSettingsController.getFolderLabel(getLocalization(),folderNameCode, folderNameUserDefined));
+		} 
+		catch (FolderNotFoundException e)
+		{
+			getStage().logAndNotifyUnexpectedError(e);
 		}
-		folderNameLabel.setText(folderLabelName);
 	}
 
 	
 	@FXML
 	public void onFolderSettingsClicked(MouseEvent mouseEvent) 
 	{
-		FxFolderSettingsController folderManagementDoer = 
-				new FxFolderSettingsController(getMainWindow(), new FolderNameIndexListener(), new FolderCustomNameListener());
-		folderManagementDoer.setInitialFolderName(folderNameIndex, folderNameUserDefined);
-		doAction(folderManagementDoer);
+		folderManagement = new FxFolderSettingsController(getMainWindow(), new FolderNameChoiceBoxListener(), new FolderCustomNameListener());
+		folderManagement.setInitialFolderName(folderNameCode, folderNameUserDefined);
+		doAction(folderManagement);
 	}
 	
 	private final int INVALID_INDEX = -1;
@@ -345,6 +335,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 	protected Label folderNameLabel;
 
 	private CaseListProvider caseListProvider;
-	protected int folderNameIndex;
+	protected String folderNameCode;
 	protected String folderNameUserDefined;
+	protected FxFolderSettingsController folderManagement;
 }
