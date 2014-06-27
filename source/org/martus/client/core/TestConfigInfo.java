@@ -56,7 +56,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 		
-		assertEquals(22, ConfigInfo.VERSION);
+		assertEquals(23, ConfigInfo.VERSION);
 
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
@@ -334,6 +334,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setCurrentFormTemplateTitle(sampleCurrentFormTemplateTitle);
 		info.setCurrentFormTemplateDescription(sampleCurrentFormTemplateDescription);
 		info.setIsNetworkOnline(sampleIsNetworkOnline);
+		info.setFolderLabelIndex(sampleFolderLabelIndex);
+		info.setFolderLabelCustomName(sampleFolderLabelCustomName);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -366,6 +368,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleContactKeysXml", "", info.getContactKeysXml());
 		assertEquals(label + ": sampleCurrentFormTemplateTitle", "", info.getCurrentFormTemplateTitle());
 		assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getCurrentFormTemplateDescription());
+		assertEquals(label + ": sampleFolderLabelIndex", 0, info.getFolderLabelIndex());
+		assertEquals(label + ": sampleFolderLabelCustomName", "", info.getFolderLabelCustomName());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -515,6 +519,16 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleNetworkOnline", sampleIsNetworkOnline, info.isNetworkOnline());
 		else
 			assertEquals(label + ": sampleNetworkOnline", true, info.isNetworkOnline());
+		if(VERSION >= 23)
+		{
+			assertEquals(label + ": sampleFolderLabelIndex", sampleFolderLabelIndex, info.getFolderLabelIndex());
+			assertEquals(label + ": sampleFolderLabelCustomName", sampleFolderLabelCustomName, info.getFolderLabelCustomName());
+		}
+		else
+		{
+			assertEquals(label + ": sampleFolderLabelIndex", 0, info.getFolderLabelIndex());
+			assertEquals(label + ": sampleFolderLabelCustomName", "", info.getFolderLabelCustomName());
+		}
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -636,6 +650,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			out.writeBoolean(sampleIsNetworkOnline);
 		}
+		if(VERSION >= 23)
+		{
+			out.writeInt(sampleFolderLabelIndex);
+			out.writeUTF(sampleFolderLabelCustomName);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -701,5 +720,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final String sampleCurrentFormTemplateDescription = "Sample Description for this template.";
 //Version 22
 	final boolean sampleIsNetworkOnline = false; // NOTE: Defaults to true
+//Version 23
+	final int sampleFolderLabelIndex = 2;
+	final String sampleFolderLabelCustomName = "My Cases";
 		
 }

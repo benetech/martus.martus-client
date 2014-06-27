@@ -84,6 +84,11 @@ public class FxLandingShellController extends FxInSwingFrameController
 
 	private void updateCases()
 	{
+		ConfigInfo config = getApp().getConfigInfo();
+		folderNameIndex = config.getFolderLabelIndex();
+		folderNameUserDefined = config.getFolderLabelCustomName();
+		updateFolderLabel();
+		
 		caseListProvider.clear();
 		Vector visibleFolders = getApp().getStore().getAllVisibleFolders();
 		MartusLocalization localization = getLocalization();
@@ -270,7 +275,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 		@Override public void changed(ObservableValue<? extends Number> observableValue, Number original, Number newValue) 
 		{
 			folderNameIndex = newValue.intValue();
-			updateFolderName();
+			updateFolderLabel();
 		}
 	}
 	
@@ -283,11 +288,11 @@ public class FxLandingShellController extends FxInSwingFrameController
 		@Override public void changed(ObservableValue<? extends String> observableValue, String original, String newLabel) 
 		{
 			folderNameUserDefined = newLabel;
-			updateFolderName();
+			updateFolderLabel();
 		}
 	}
 
-	protected void updateFolderName()
+	protected void updateFolderLabel()
 	{
 		String folderLabelName = "";
 		MartusLocalization localization = getMainWindow().getLocalization();

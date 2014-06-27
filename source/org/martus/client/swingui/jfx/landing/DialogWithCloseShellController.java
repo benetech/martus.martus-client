@@ -45,6 +45,7 @@ public class DialogWithCloseShellController extends FxInSwingDialogController
 	{
 		Parent createContents = contentController.createContents();
 		contentPane.getChildren().addAll(createContents);
+		
 	}
 
 	@Override
@@ -56,6 +57,7 @@ public class DialogWithCloseShellController extends FxInSwingDialogController
 	@FXML
 	public void onCloseClicked()
 	{
+		getStage().getCurrentController().exitingController();
 		getFxInSwingDialogStage().close();
 	}
 	
