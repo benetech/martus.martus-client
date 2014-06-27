@@ -83,7 +83,7 @@ public class ConfigInfo
 	public void setCurrentFormTemplateTitle(String netFormTemplateTitle) { currentFormTemplateTitle = netFormTemplateTitle; }
 	public void setCurrentFormTemplateDescription(String netFormTemplateDescription) { currentFormTemplateDescription = netFormTemplateDescription; }
 	public void setIsNetworkOnline(boolean newState) { isNetworkOnline = newState; }
-	public void setFolderLabelIndex(int newIndex) { folderLabelIndex = newIndex; }
+	public void setFolderLabelCode(String newCode) { folderLabelCode = newCode; }
 	public void setFolderLabelCustomName(String newName) { folderLabelCustomName = newName; }
 
 	public void clearLegacyHQKey()						{ deprecatedLegacyHQKey = ""; }
@@ -131,7 +131,7 @@ public class ConfigInfo
 	public String getCurrentFormTemplateTitle()  { return currentFormTemplateTitle;}
 	public String getCurrentFormTemplateDescription()  { return currentFormTemplateDescription;}
 	public boolean isNetworkOnline() { return isNetworkOnline; }
-	public int getFolderLabelIndex() { return folderLabelIndex; }
+	public String getFolderLabelCode() { return folderLabelCode; }
 	public String getFolderLabelCustomName() { return folderLabelCustomName; }
 	
 
@@ -178,6 +178,7 @@ public class ConfigInfo
 		currentFormTemplateTitle = "";
 		currentFormTemplateDescription = "";
 		isNetworkOnline = true;
+		folderLabelCode = "";
 		folderLabelCustomName = "";
 	}
 
@@ -295,7 +296,7 @@ public class ConfigInfo
 			}
 			if(loaded.version >= 23)
 			{
-				loaded.folderLabelIndex = in.readInt();
+				loaded.folderLabelCode = in.readUTF();
 				loaded.folderLabelCustomName = in.readUTF();
 			}
 		}
@@ -351,7 +352,7 @@ public class ConfigInfo
 			writeLongString(out, currentFormTemplateTitle);
 			writeLongString(out, currentFormTemplateDescription);
 			out.writeBoolean(isNetworkOnline);
-			out.writeInt(folderLabelIndex);
+			out.writeUTF(folderLabelCode);
 			out.writeUTF(folderLabelCustomName);
 		}
 		finally
@@ -437,6 +438,6 @@ public class ConfigInfo
 	//Version 22
 	private boolean isNetworkOnline;
 	//Version 23
-	private int folderLabelIndex;
+	private String folderLabelCode;
 	private String folderLabelCustomName;
 }
