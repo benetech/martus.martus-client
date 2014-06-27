@@ -42,6 +42,7 @@ public class DialogWithCloseStage extends FxNonWizardStage
 	@Override
 	protected boolean confirmExit()
 	{
+		getCurrentController().exitingController();
 		return true;
 	}
 

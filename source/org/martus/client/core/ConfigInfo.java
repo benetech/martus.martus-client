@@ -83,6 +83,8 @@ public class ConfigInfo
 	public void setCurrentFormTemplateTitle(String netFormTemplateTitle) { currentFormTemplateTitle = netFormTemplateTitle; }
 	public void setCurrentFormTemplateDescription(String netFormTemplateDescription) { currentFormTemplateDescription = netFormTemplateDescription; }
 	public void setIsNetworkOnline(boolean newState) { isNetworkOnline = newState; }
+	public void setFolderLabelIndex(int newIndex) { folderLabelIndex = newIndex; }
+	public void setFolderLabelCustomName(String newName) { folderLabelCustomName = newName; }
 
 	public void clearLegacyHQKey()						{ deprecatedLegacyHQKey = ""; }
 
@@ -129,6 +131,8 @@ public class ConfigInfo
 	public String getCurrentFormTemplateTitle()  { return currentFormTemplateTitle;}
 	public String getCurrentFormTemplateDescription()  { return currentFormTemplateDescription;}
 	public boolean isNetworkOnline() { return isNetworkOnline; }
+	public int getFolderLabelIndex() { return folderLabelIndex; }
+	public String getFolderLabelCustomName() { return folderLabelCustomName; }
 	
 
 	public boolean isServerConfigured()
@@ -174,6 +178,7 @@ public class ConfigInfo
 		currentFormTemplateTitle = "";
 		currentFormTemplateDescription = "";
 		isNetworkOnline = true;
+		folderLabelCustomName = "";
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException
@@ -288,6 +293,11 @@ public class ConfigInfo
 			{
 				loaded.isNetworkOnline = in.readBoolean();
 			}
+			if(loaded.version >= 23)
+			{
+				loaded.folderLabelIndex = in.readInt();
+				loaded.folderLabelCustomName = in.readUTF();
+			}
 		}
 		finally
 		{
@@ -341,6 +351,8 @@ public class ConfigInfo
 			writeLongString(out, currentFormTemplateTitle);
 			writeLongString(out, currentFormTemplateDescription);
 			out.writeBoolean(isNetworkOnline);
+			out.writeInt(folderLabelIndex);
+			out.writeUTF(folderLabelCustomName);
 		}
 		finally
 		{
@@ -365,7 +377,7 @@ public class ConfigInfo
 		return new String(bytes, "UTF-8");
 	}
 	
-	public static final short VERSION = 22;
+	public static final short VERSION = 23;
 
 	//Version 1
 	private short version;
@@ -424,4 +436,7 @@ public class ConfigInfo
 	private String currentFormTemplateDescription;
 	//Version 22
 	private boolean isNetworkOnline;
+	//Version 23
+	private int folderLabelIndex;
+	private String folderLabelCustomName;
 }

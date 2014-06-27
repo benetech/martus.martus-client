@@ -114,7 +114,7 @@ public abstract class FxInSwingStage extends JFXPanel
 		shellController = controller;
 	}
 
-	public FxContentController getCurrentController() throws Exception
+	public FxContentController getCurrentController()
 	{
 		return currentContentController;
 	}
