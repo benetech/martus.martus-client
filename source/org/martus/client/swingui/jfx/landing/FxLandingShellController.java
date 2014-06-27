@@ -28,10 +28,13 @@ package org.martus.client.swingui.jfx.landing;
 import java.util.Iterator;
 import java.util.Vector;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -62,6 +65,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 	{
 		super(mainWindowToUse);
 		caseListProvider = new CaseListProvider();
+		folderNameUserDefined = "Custom";
 	}
 
 	@Override
@@ -256,12 +260,50 @@ public class FxLandingShellController extends FxInSwingFrameController
 			getStage().logAndNotifyUnexpectedError(e);
 		}
 	}
+
+	private final class FolderNameIndexListener implements ChangeListener<Number>
+	{
+		public FolderNameIndexListener()
+		{
+		}
+
+		@Override public void changed(ObservableValue<? extends Number> observableValue, Number original, Number newValue) 
+		{
+			folderNameIndex = newValue.intValue();
+			updateFolderName();
+		}
+	}
 	
+	protected void updateFolderName()
+	{
+		String folderLabelName = "";
+		MartusLocalization localization = getMainWindow().getLocalization();
+		switch(folderNameIndex)
+		{
+			case FxFolderSettingsController.FolderNameIncidents:
+				folderLabelName = localization.getFieldLabel("FolderNameIncidents");
+				break;
+			case FxFolderSettingsController.FolderNameProjects:
+				folderLabelName = localization.getFieldLabel("FolderNameProjects");
+				break;
+			case FxFolderSettingsController.FolderNameCustom:
+				folderLabelName = folderNameUserDefined;
+				break;
+			case FxFolderSettingsController.FolderNameCases:
+			default:
+				folderLabelName = localization.getFieldLabel("FolderNameCases");
+				break;
+		}
+		folderNameLabel.setText(folderLabelName);
+	}
+
 	
 	@FXML
 	public void onFolderSettingsClicked(MouseEvent mouseEvent) 
 	{
-		doAction(new FxFolderSettingsController(getMainWindow()));
+		FxFolderSettingsController folderManagementDoer = new FxFolderSettingsController(getMainWindow(), new FolderNameIndexListener());
+		folderManagementDoer.setInitialFolderName(folderNameIndex, folderNameUserDefined);
+		doAction(folderManagementDoer);
 	}
 	
 	private final int INVALID_INDEX = -1;
@@ -279,6 +321,11 @@ public class FxLandingShellController extends FxInSwingFrameController
 	
 	@FXML
 	protected ListView<CaseListItem> casesListView;
+	
+	@FXML
+	protected Label folderNameLabel;
 
 	private CaseListProvider caseListProvider;
+	protected int folderNameIndex;
+	protected String folderNameUserDefined;
 }

@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
+import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -36,27 +37,18 @@ import org.martus.client.swingui.UiMainWindow;
 
 public class FxFolderSettingsController extends DialogWithCloseController
 {
-	public FxFolderSettingsController(UiMainWindow mainWindowToUse)
+	public FxFolderSettingsController(UiMainWindow mainWindowToUse, ChangeListener folderNameIndexListenertoUse)
 	{
 		super(mainWindowToUse);
 		currentFolderNameChoice = FolderNameCases;
 		customFolderName = "";
+		folderNameIndexListener = folderNameIndexListenertoUse;
 	}
 	
 	public void setInitialFolderName(int folderNameIndex, String customFolderNameToUse)
 	{
 		currentFolderNameChoice = folderNameIndex;
 		customFolderName = customFolderNameToUse;
-	}
-	
-	public int getSelectedFolderIndex()
-	{
-		return fxFolderChoiceBox.getSelectionModel().getSelectedIndex();
-	}
-	
-	public String getCustomFolderName()
-	{
-		return fxFolderCustomTextField.getText();
 	}
 	
 	public void initialize()
@@ -72,7 +64,9 @@ public class FxFolderSettingsController extends DialogWithCloseController
 		fxFolderCustomTextField.setText(customFolderName);
 
 		fxFolderChoiceBox.setItems(folderNameChoices);
-		fxFolderChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new FolderNameChoiceBoxListener());
+		ReadOnlyIntegerProperty selectedIndexProperty = fxFolderChoiceBox.getSelectionModel().selectedIndexProperty();
+		selectedIndexProperty.addListener(new FolderNameChoiceBoxListener());
+		selectedIndexProperty.addListener(folderNameIndexListener);
 		fxFolderChoiceBox.getSelectionModel().select(currentFolderNameChoice);
 		
 	}
@@ -113,12 +107,13 @@ public class FxFolderSettingsController extends DialogWithCloseController
 	@FXML
 	TextField fxFolderCustomTextField;
 	
-	public final int FolderNameCases = 0; 
-	public final int FolderNameIncidents = 1; 
-	public final int FolderNameProjects = 2; 
-	public final int FolderNameCustom = 3; 
+	public static final int FolderNameCases = 0; 
+	public static final int FolderNameIncidents = 1; 
+	public static final int FolderNameProjects = 2; 
+	public static final int FolderNameCustom = 3; 
 	
 	private static final String LOCATION_FOLDER_SETTINGS_FXML = "landing/FolderSettings.fxml";
 	private int currentFolderNameChoice;
 	private String customFolderName;
+	private ChangeListener folderNameIndexListener;
 }
