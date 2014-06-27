@@ -37,12 +37,13 @@ import org.martus.client.swingui.UiMainWindow;
 
 public class FxFolderSettingsController extends DialogWithCloseController
 {
-	public FxFolderSettingsController(UiMainWindow mainWindowToUse, ChangeListener folderNameIndexListenertoUse)
+	public FxFolderSettingsController(UiMainWindow mainWindowToUse, ChangeListener folderLabelIndexListenertoUse, ChangeListener folderCustomLabelListenerToUse)
 	{
 		super(mainWindowToUse);
 		currentFolderNameChoice = FolderNameCases;
 		customFolderName = "";
-		folderNameIndexListener = folderNameIndexListenertoUse;
+		folderLabelIndexListener = folderLabelIndexListenertoUse;
+		folderCustomLabelListener = folderCustomLabelListenerToUse;
 	}
 	
 	public void setInitialFolderName(int folderNameIndex, String customFolderNameToUse)
@@ -61,12 +62,13 @@ public class FxFolderSettingsController extends DialogWithCloseController
 		folderNameChoices.add(localization.getFieldLabel("FolderNameProjects"));
 		folderNameChoices.add(localization.getFieldLabel("FolerNameUserDefined"));
 		
+		fxFolderCustomTextField.textProperty().addListener(folderCustomLabelListener);
 		fxFolderCustomTextField.setText(customFolderName);
 
 		fxFolderChoiceBox.setItems(folderNameChoices);
 		ReadOnlyIntegerProperty selectedIndexProperty = fxFolderChoiceBox.getSelectionModel().selectedIndexProperty();
 		selectedIndexProperty.addListener(new FolderNameChoiceBoxListener());
-		selectedIndexProperty.addListener(folderNameIndexListener);
+		selectedIndexProperty.addListener(folderLabelIndexListener);
 		fxFolderChoiceBox.getSelectionModel().select(currentFolderNameChoice);
 		
 	}
@@ -115,5 +117,6 @@ public class FxFolderSettingsController extends DialogWithCloseController
 	private static final String LOCATION_FOLDER_SETTINGS_FXML = "landing/FolderSettings.fxml";
 	private int currentFolderNameChoice;
 	private String customFolderName;
-	private ChangeListener folderNameIndexListener;
+	private ChangeListener folderLabelIndexListener;
+	private ChangeListener folderCustomLabelListener;
 }

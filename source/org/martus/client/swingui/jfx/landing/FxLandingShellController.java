@@ -65,7 +65,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 	{
 		super(mainWindowToUse);
 		caseListProvider = new CaseListProvider();
-		folderNameUserDefined = "Custom";
+		folderNameUserDefined = "";
 	}
 
 	@Override
@@ -274,6 +274,19 @@ public class FxLandingShellController extends FxInSwingFrameController
 		}
 	}
 	
+	private final class FolderCustomNameListener implements ChangeListener<String>
+	{
+		public FolderCustomNameListener()
+		{
+		}
+
+		@Override public void changed(ObservableValue<? extends String> observableValue, String original, String newLabel) 
+		{
+			folderNameUserDefined = newLabel;
+			updateFolderName();
+		}
+	}
+
 	protected void updateFolderName()
 	{
 		String folderLabelName = "";
@@ -301,7 +314,8 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@FXML
 	public void onFolderSettingsClicked(MouseEvent mouseEvent) 
 	{
-		FxFolderSettingsController folderManagementDoer = new FxFolderSettingsController(getMainWindow(), new FolderNameIndexListener());
+		FxFolderSettingsController folderManagementDoer = 
+				new FxFolderSettingsController(getMainWindow(), new FolderNameIndexListener(), new FolderCustomNameListener());
 		folderManagementDoer.setInitialFolderName(folderNameIndex, folderNameUserDefined);
 		doAction(folderManagementDoer);
 	}
