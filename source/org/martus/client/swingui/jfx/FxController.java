@@ -401,10 +401,12 @@ abstract public class FxController implements Initializable
 	private static void applyPageSpecificStyleSheets( ObservableList<String> stylesheets, File directory,
 			String languageCode, String cssLocation) throws Exception
 	{
-		URL fxpageEnglishCssUrl = getBestCss(directory, MartusLocalization.ENGLISH, cssLocation);
-		if(fxpageEnglishCssUrl == null)
-			throw new ResourceNotFoundException("Couldn't find :" + directory + "/" + cssLocation);
-		stylesheets.add(fxpageEnglishCssUrl.toExternalForm());
+		URL englishCssUrl = getBestCss(directory, MartusLocalization.ENGLISH, cssLocation);
+		if(englishCssUrl == null)
+			throw new ResourceNotFoundException(
+					"Couldn't find :" + directory + "/" + cssLocation);
+		
+		stylesheets.add(englishCssUrl.toExternalForm());
 		if(!languageCode.equals(MartusLocalization.ENGLISH))
 		{
 			URL fxpageLanguageCssUrl = getBestCss(directory, languageCode, cssLocation);
