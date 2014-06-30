@@ -49,41 +49,36 @@ public class FxFolderSettingsController extends DialogWithCloseController
 	public FxFolderSettingsController(UiMainWindow mainWindowToUse, ChangeListener folderLabelIndexListenertoUse, ChangeListener folderCustomLabelListenerToUse)
 	{
 		super(mainWindowToUse);
-		initialFolderNameChoiceCode = FOLDER_CODE_DEFAULT;
-		initialCustomFolderName = "";
+		ConfigInfo config = mainWindowToUse.getApp().getConfigInfo();
+		folderNameCustom = config.getFolderLabelCustomName();
+		folderNameCode = config.getFolderLabelCode();
+		if(folderNameCode.isEmpty())
+			folderNameCode = FOLDER_CODE_DEFAULT;
 		folderLabelIndexListener = folderLabelIndexListenertoUse;
 		folderCustomLabelListener = folderCustomLabelListenerToUse;
 	}
 	
-	public void setInitialFolderName(String folderNameCode, String customFolderNameToUse)
-	{
-		initialCustomFolderName = customFolderNameToUse;
-		if(folderNameCode.isEmpty())
-			initialFolderNameChoiceCode = FOLDER_CODE_DEFAULT;
-		else
-			initialFolderNameChoiceCode = folderNameCode;
-	}
-	
 	public void initialize()
 	{
-		fxFolderCustomTextField.setText(initialCustomFolderName);
-		ObservableList<ChoiceItem> folderNameChoices = getFolderLabelChoices(getMainWindow().getLocalization(), initialCustomFolderName);
+		ObservableList<ChoiceItem> folderNameChoices = getFolderLabelChoices(getMainWindow().getLocalization(), folderNameCustom);
 		fxFolderChoiceBox.setItems(folderNameChoices);
 		try
 		{
-			ChoiceItem initialChoice = getChoiceItem(folderNameChoices, initialFolderNameChoiceCode);
+			ChoiceItem initialChoice = getChoiceItem(folderNameChoices, folderNameCode);
 			fxFolderChoiceBox.getSelectionModel().select(initialChoice);
-			updateCustomFolder(initialChoice);
+			updateCustomFolder();
 		} 
 		catch (FolderNotFoundException e)
 		{
 			getShellController().getStage().logAndNotifyUnexpectedError(e);
 		}
-		
-		fxFolderCustomTextField.textProperty().addListener(folderCustomLabelListener);
 		ReadOnlyObjectProperty<ChoiceItem> selectedItemProperty = fxFolderChoiceBox.getSelectionModel().selectedItemProperty();
 		selectedItemProperty.addListener(new FolderNameChoiceBoxListener());
 		selectedItemProperty.addListener(folderLabelIndexListener);
+		
+		fxFolderCustomTextField.setText(folderNameCustom);
+		fxFolderCustomTextField.textProperty().addListener(new FolderNameCustomLabelListener());
+		fxFolderCustomTextField.textProperty().addListener(folderCustomLabelListener);
 	}
 	
 	private ChoiceItem getChoiceItem(ObservableList<ChoiceItem> folderNameChoices, String folderCode) throws FolderNotFoundException
@@ -122,13 +117,26 @@ public class FxFolderSettingsController extends DialogWithCloseController
 
 		@Override public void changed(ObservableValue<? extends ChoiceItem> observableValue, ChoiceItem originalItem, ChoiceItem newItem) 
 		{
-			updateCustomFolder(newItem);
+			folderNameCode = newItem.getCode();
+			updateCustomFolder();
 		}
 	}
 	
-	protected void updateCustomFolder(ChoiceItem currentSelectedItem)
+	private final class FolderNameCustomLabelListener implements ChangeListener<String>
 	{
-		if(currentSelectedItem.getCode().equals(FOLDER_CODE_CUSTOM))
+		public FolderNameCustomLabelListener()
+		{
+		}
+
+		@Override public void changed(ObservableValue<? extends String> observableValue, String original, String newLabel) 
+		{
+			folderNameCustom = newLabel;
+		}
+	}
+	
+	protected void updateCustomFolder()
+	{
+		if(folderNameCode.equals(FOLDER_CODE_CUSTOM))
 		{
 			fxFolderCustomTextField.setVisible(true);
 		}
@@ -149,13 +157,11 @@ public class FxFolderSettingsController extends DialogWithCloseController
 		return folderChoices;
 	}	
 		
-	public static String getFolderLabel(MartusLocalization localization, String folderCodeToFind, String customFolderLabel) throws FolderNotFoundException
+	public String getFolderLabel(String folderCodeToFind) throws FolderNotFoundException
 	{
 		if(folderCodeToFind.equals(FOLDER_CODE_CUSTOM))
-			return customFolderLabel;
-		ObservableList<ChoiceItem> folderChoices = getFolderLabelChoices(localization, customFolderLabel);
-		if(folderCodeToFind.isEmpty())
-			folderCodeToFind = FOLDER_CODE_DEFAULT; 
+			return folderNameCustom;
+		ObservableList<ChoiceItem> folderChoices = getFolderLabelChoices(getMainWindow().getLocalization(), folderNameCustom);
 		for (Iterator iterator = folderChoices.iterator(); iterator.hasNext();)
 		{
 			ChoiceItem folder = (ChoiceItem) iterator.next();
@@ -184,8 +190,8 @@ public class FxFolderSettingsController extends DialogWithCloseController
 	public static final String FOLDER_CODE_DEFAULT = FOLDER_CODE_CASES;
 	
 	private static final String LOCATION_FOLDER_SETTINGS_FXML = "landing/FolderSettings.fxml";
-	private String initialFolderNameChoiceCode;
-	private String initialCustomFolderName;
+	protected String folderNameCode;
+	protected String folderNameCustom;
 	private ChangeListener folderLabelIndexListener;
 	private ChangeListener folderCustomLabelListener;
 }
