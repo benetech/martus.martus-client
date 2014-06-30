@@ -30,25 +30,21 @@ import java.awt.event.ActionEvent;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public class ActionMenuFolderDelete extends UiMenuAction
+public class ActionMenuSwingFolderCreate extends UiMenuAction
 {
-	public ActionMenuFolderDelete(UiMainWindow mainWindowToUse)
+	public ActionMenuSwingFolderCreate(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindowToUse, "DeleteFolder");
+		super(mainWindowToUse, "CreateNewFolder");
 	}
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		doDeleteFolder();
+		doCreateFolder();
 	}
 
-	public boolean isEnabled()
+	public void doCreateFolder()
 	{
-		return mainWindow.canModifyCurrentFolder();
+		getFolderTreePane().createNewFolder();
 	}
-
-	public void doDeleteFolder()
-	{
-		getFolderTreePane().deleteCurrentFolderIfPossible();
-	}
+	
 }

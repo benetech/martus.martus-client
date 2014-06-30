@@ -51,8 +51,8 @@ import org.martus.client.swingui.actions.ActionMenuExportBulletins;
 import org.martus.client.swingui.actions.ActionMenuExportFolder;
 import org.martus.client.swingui.actions.ActionMenuExportMba;
 import org.martus.client.swingui.actions.ActionMenuExportMyPublicKey;
-import org.martus.client.swingui.actions.ActionMenuFolderCreate;
-import org.martus.client.swingui.actions.ActionMenuFolderDelete;
+import org.martus.client.swingui.actions.ActionMenuSwingFolderCreate;
+import org.martus.client.swingui.actions.ActionMenuSwingFolderDelete;
 import org.martus.client.swingui.actions.ActionMenuFolderRename;
 import org.martus.client.swingui.actions.ActionMenuFoldersOrganize;
 import org.martus.client.swingui.actions.ActionMenuHelp;
@@ -135,7 +135,7 @@ public class UiMenuBar extends JMenuBar
 		folders.addMenuListener(folderMenuListener);
 		folderMenuListener.initalize();
 
-		folders.add(new ActionMenuFolderCreate(mainWindow));
+		folders.add(new ActionMenuSwingFolderCreate(mainWindow));
 		folders.add(actionMenuFolderRename);
 		folders.add(actionMenuFolderDelete);
 		folders.add(actionMenuFolderOrganize);
@@ -294,7 +294,7 @@ public class UiMenuBar extends JMenuBar
 		actionMenuResendBulletins = new ActionMenuResendBulletins(mainWindow);
 		
 		actionMenuFolderRename = new ActionMenuFolderRename(mainWindow);
-		actionMenuFolderDelete = new ActionMenuFolderDelete(mainWindow);
+		actionMenuFolderDelete = new ActionMenuSwingFolderDelete(mainWindow);
 		actionMenuFolderOrganize = new ActionMenuFoldersOrganize(mainWindow);
 		
 		actionMenuAddPermissions = new ActionMenuAddPermissions(mainWindow);
