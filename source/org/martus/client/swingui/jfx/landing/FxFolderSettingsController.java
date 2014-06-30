@@ -60,7 +60,7 @@ public class FxFolderSettingsController extends DialogWithCloseController
 	
 	public void initialize()
 	{
-		ObservableList<ChoiceItem> folderNameChoices = getFolderLabelChoices(getMainWindow().getLocalization(), folderNameCustom);
+		ObservableList<ChoiceItem> folderNameChoices = getFolderLabelChoices(getMainWindow().getLocalization());
 		fxFolderChoiceBox.setItems(folderNameChoices);
 		try
 		{
@@ -146,7 +146,7 @@ public class FxFolderSettingsController extends DialogWithCloseController
 		}
 	}
 	
-	private static ObservableList<ChoiceItem> getFolderLabelChoices(MartusLocalization localization, String customFolderName)
+	private static ObservableList<ChoiceItem> getFolderLabelChoices(MartusLocalization localization)
 	{
 		ObservableList<ChoiceItem> folderChoices = FXCollections.observableArrayList();
 
@@ -161,14 +161,8 @@ public class FxFolderSettingsController extends DialogWithCloseController
 	{
 		if(folderCodeToFind.equals(FOLDER_CODE_CUSTOM))
 			return folderNameCustom;
-		ObservableList<ChoiceItem> folderChoices = getFolderLabelChoices(getMainWindow().getLocalization(), folderNameCustom);
-		for (Iterator iterator = folderChoices.iterator(); iterator.hasNext();)
-		{
-			ChoiceItem folder = (ChoiceItem) iterator.next();
-			if(folder.getCode().equals(folderCodeToFind))
-				return folder.getLabel();
-		}
-		throw new FolderNotFoundException();
+		ObservableList<ChoiceItem> folderChoices = getFolderLabelChoices(getMainWindow().getLocalization());
+		return getChoiceItem(folderChoices, folderCodeToFind).getLabel();
 	}
 	
 	@Override
