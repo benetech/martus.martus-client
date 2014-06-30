@@ -67,7 +67,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 	{
 		super(mainWindowToUse);
 		caseListProvider = new CaseListProvider();
-		folderNameUserDefined = "";
+		folderManagement = new FxFolderSettingsController(getMainWindow(), new FolderNameChoiceBoxListener(), new FolderCustomNameListener());
 	}
 
 	@Override
@@ -86,10 +86,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 
 	private void updateCases()
 	{
-		ConfigInfo config = getApp().getConfigInfo();
-		folderNameCode = config.getFolderLabelCode();
-		folderNameUserDefined = config.getFolderLabelCustomName();
-		updateFolderLabel();
+		updateFolderLabel(getApp().getConfigInfo().getFolderLabelCode());
 		
 		caseListProvider.clear();
 		Vector visibleFolders = getApp().getStore().getAllVisibleFolders();
@@ -276,8 +273,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 
 		@Override public void changed(ObservableValue<? extends ChoiceItem> observableValue, ChoiceItem originalItem, ChoiceItem newItem) 
 		{
-			folderNameCode = newItem.getCode();
-			updateFolderLabel();
+			updateFolderLabel(newItem.getCode());
 		}
 	}
 
@@ -289,16 +285,15 @@ public class FxLandingShellController extends FxInSwingFrameController
 
 		@Override public void changed(ObservableValue<? extends String> observableValue, String original, String newLabel) 
 		{
-			folderNameUserDefined = newLabel;
-			updateFolderLabel();
+			folderNameLabel.setText(newLabel);
 		}
 	}
 
-	protected void updateFolderLabel()
+	protected void updateFolderLabel(String folderNameCode)
 	{
 		try
 		{
-			folderNameLabel.setText(FxFolderSettingsController.getFolderLabel(getLocalization(),folderNameCode, folderNameUserDefined));
+			folderNameLabel.setText(folderManagement.getFolderLabel(folderNameCode));
 		} 
 		catch (FolderNotFoundException e)
 		{
@@ -310,8 +305,6 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@FXML
 	public void onFolderSettingsClicked(MouseEvent mouseEvent) 
 	{
-		folderManagement = new FxFolderSettingsController(getMainWindow(), new FolderNameChoiceBoxListener(), new FolderCustomNameListener());
-		folderManagement.setInitialFolderName(folderNameCode, folderNameUserDefined);
 		doAction(folderManagement);
 	}
 	
@@ -335,7 +328,5 @@ public class FxLandingShellController extends FxInSwingFrameController
 	protected Label folderNameLabel;
 
 	private CaseListProvider caseListProvider;
-	protected String folderNameCode;
-	protected String folderNameUserDefined;
 	protected FxFolderSettingsController folderManagement;
 }
