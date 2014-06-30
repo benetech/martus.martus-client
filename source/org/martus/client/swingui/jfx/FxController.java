@@ -407,11 +407,12 @@ abstract public class FxController implements Initializable
 					"Couldn't find :" + directory + "/" + cssLocation);
 		
 		stylesheets.add(englishCssUrl.toExternalForm());
+		
 		if(!languageCode.equals(MartusLocalization.ENGLISH))
 		{
-			URL fxpageLanguageCssUrl = getBestCss(directory, languageCode, cssLocation);
-			if(fxpageLanguageCssUrl != null)
-				stylesheets.add(fxpageLanguageCssUrl.toExternalForm());
+			URL languageCssUrl = getBestCss(directory, languageCode, cssLocation);
+			if(languageCssUrl != null)
+				stylesheets.add(languageCssUrl.toExternalForm());
 		}
 	}
 
