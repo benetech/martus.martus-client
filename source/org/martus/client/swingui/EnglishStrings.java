@@ -1846,6 +1846,8 @@ public class EnglishStrings
 "field:FolderNameIncidents=Incidents",
 "field:FolderNameProjects=Projects",
 "field:FolerNameUserDefined=Custom Name",
+"field:FolderName=Folder Name",
+"field:HintEnterFolderName=Enter Folder Name",
 
 "field:ChooseLanguage=Choose a Language",
 

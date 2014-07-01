@@ -5,11 +5,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER_LEFT">
          <children>
-            <ImageView fitHeight="30.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/cog.png" />
                </image>
@@ -19,7 +19,7 @@
          </children>
       </HBox>
       <Label />
-      <HBox alignment="CENTER_LEFT" prefWidth="600.0">
+      <HBox alignment="CENTER_LEFT">
          <children>
             <Label text="     " />
             <Label styleClass="headingLevel2" text="%MainFolderLabel" />
