@@ -169,9 +169,9 @@
                         		<ListView fx:id="casesListView" layoutX="7.0" layoutY="195.0" onMouseClicked="#OnCasesMouseClicked" prefHeight="146.0" prefWidth="256.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="195.0" />
                         <HBox layoutY="353.0">
                            <children>
-                              <Button mnemonicParsing="false" text="+" />
-                              <Button mnemonicParsing="false" text="-" />
-                              <Button mnemonicParsing="false" onMouseClicked="#onFolderSettingsClicked" prefHeight="30.0" prefWidth="31.0">
+                               <Button mnemonicParsing="false" onMouseClicked="#onFolderNewClicked" text="+" />
+                               <Button mnemonicParsing="false" onMouseClicked="#onFolderDeleteClicked" text="-" />
+                               <Button mnemonicParsing="false" onMouseClicked="#onFolderSettingsClicked" prefHeight="30.0" prefWidth="31.0">
                                  <graphic>
                                     <ImageView fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                        <image>

@@ -23,35 +23,42 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.landing;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxContentController;
+import org.martus.client.swingui.jfx.FxNonWizardStage;
+import org.martus.client.swingui.jfx.FxScene;
 
-public abstract class FxContentController extends FxController
+abstract public class DialogStage extends FxNonWizardStage
 {
-	public FxContentController(UiMainWindow mainWindowToUse)
+	public DialogStage(UiMainWindow mainWindowToUse, FxContentController controllerToUse)
 	{
 		super(mainWindowToUse);
+		setShellController();
+		setCurrentController(controllerToUse);
 	}
 	
-	public FxShellController getShellController()
+	abstract public void setShellController();
+	
+
+	@Override
+	protected boolean confirmExit()
 	{
-		return shellController;
+		getCurrentController().exitingController();
+		return true;
 	}
-	
-	public void setShellController(FxShellController shellControllerToUse)
+
+	@Override
+	protected FxScene createScene() throws Exception
 	{
-		shellController = shellControllerToUse;
+		return new FxScene(getExternalFxmlDirectory(), null);
 	}
-	
-	public void save()
+
+	@Override
+	public void showCurrentScene() throws Exception
 	{
+		FxContentController contentPaneController = getCurrentController();
+		showCurrentPage(contentPaneController);
 	}
-	
-	public void exitingController()
-	{
-	}
-	
-	
-	private FxShellController shellController;
 }
