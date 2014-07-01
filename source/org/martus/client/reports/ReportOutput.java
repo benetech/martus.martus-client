@@ -175,7 +175,6 @@ public class ReportOutput extends Writer implements Printable
 	
 	int[] computeStartingPages(PageFormat pf)
 	{
-		int printedPage = 0;
 		int[] pagesPer = new int[getPageCount()];
 		for(int page = 0; page < getPageCount(); ++page)
 		{
@@ -183,7 +182,6 @@ public class ReportOutput extends Writer implements Printable
 			UiLabel viewer = createPrintableComponent(pageText);
 			int pagesForThisStoredPage = PrintUtilities.computePageCountWithinComponent(pf, viewer);
 			pagesPer[page] = pagesForThisStoredPage;
-			printedPage += pagesForThisStoredPage;
 		}
 		
 		return pagesPer;
