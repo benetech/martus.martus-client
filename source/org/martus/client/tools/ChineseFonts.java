@@ -38,7 +38,6 @@ public class ChineseFonts
 		// Determine which fonts support Chinese here ...
 		Vector chinesefonts = new Vector();
 		Font[] allfonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
-		int fontcount = 0;
 		String chinesesample = "\u4e00";
 		for (int j = 0; j < allfonts.length; j++) 
 		{
@@ -46,7 +45,6 @@ public class ChineseFonts
 			{ 
 			    chinesefonts.add(allfonts[j].getFontName());
 			}
-			fontcount++;
 		}
 		
 		int count = chinesefonts.size();

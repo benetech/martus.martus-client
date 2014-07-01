@@ -97,14 +97,12 @@ public class KurdishTest
 		// Determine which fonts support Chinese here ...
 		Vector fonts = new Vector();
 		Font[] allfonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
-		int fontcount = 0;
 		for (int j = 0; j < allfonts.length; j++) 
 		{
 			if (allfonts[j].canDisplay(sampleCharacter)) 
 			{ 
 			    fonts.add(allfonts[j].getFontName());
 			}
-			fontcount++;
 		}
 		
 		int count = fonts.size();
