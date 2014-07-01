@@ -32,7 +32,7 @@ import javafx.scene.control.TextField;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.swingui.UiMainWindow;
 
-public class FxFolderCreateController extends DialogWithOkCancelController
+public class FxFolderCreateController extends DialogWithOkCancelContentController
 {
 
 	public FxFolderCreateController(UiMainWindow mainWindowToUse)
