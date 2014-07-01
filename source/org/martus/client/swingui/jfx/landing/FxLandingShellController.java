@@ -82,9 +82,10 @@ public class FxLandingShellController extends FxInSwingFrameController
 		updateOnlineStatus();
 		updateTorStatus();
 		updateCases();
+		casesListView.getSelectionModel().selectedItemProperty().addListener(new CaseListChangeListener());
 	}
 
-	private void updateCases()
+	protected void updateCases()
 	{
 		updateFolderLabel(getApp().getConfigInfo().getFolderLabelCode());
 		
@@ -98,6 +99,19 @@ public class FxLandingShellController extends FxInSwingFrameController
 			caseListProvider.add(caseList);
 		}
 		casesListView.setItems(caseListProvider);
+	}
+	
+	protected void selectCase(String caseName)
+	{
+		for (Iterator iterator = caseListProvider.iterator(); iterator.hasNext();)
+		{
+			CaseListItem caseItem = (CaseListItem) iterator.next();
+			if(caseItem.caseNameLocalized.equals(caseName))
+			{
+				casesListView.scrollTo(caseItem);
+				casesListView.getSelectionModel().select(caseItem);
+			}
+		}
 	}
 
 	@Override
@@ -232,24 +246,6 @@ public class FxLandingShellController extends FxInSwingFrameController
 		doAction(new ActionMenuBackupMyKeyPair(getMainWindow()));
 	}
 	
-	@FXML
-	private void OnCasesMouseClicked(MouseEvent mouseEvent)
-	{
-		try
-		{
-			int selectedIndex = casesListView.getSelectionModel().getSelectedIndex();
-			if(selectedIndex == INVALID_INDEX)
-				return;
-			CaseListItem selectedCase = caseListProvider.get(selectedIndex);
-			BulletinFolder folder = getApp().findFolder(selectedCase.getName());
-			BulletinsListController bulletinListController = (BulletinsListController)getStage().getCurrentController();
-			bulletinListController.loadBulletinData(folder.getAllUniversalIdsUnsorted());
-		} 
-		catch (Exception e)
-		{
-			getStage().logAndNotifyUnexpectedError(e);
-		}
-	}
 
 	@FXML
 	public void onLogoClicked(MouseEvent mouseEvent) 
@@ -311,7 +307,43 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@FXML
 	public void onFolderNewClicked(MouseEvent mouseEvent) 
 	{
-		doAction(new FxFolderCreateController(getMainWindow()));
+		FxFolderCreateController createNewFolder = new FxFolderCreateController(getMainWindow());
+		createNewFolder.addFolderChangeListener(new FolderChangeListener());
+		doAction(createNewFolder);
+	}
+	
+	class CaseListChangeListener implements ChangeListener<CaseListItem>
+	{
+
+		@Override
+		public void changed(ObservableValue<? extends CaseListItem> observalue	,
+				CaseListItem previousCase, CaseListItem newCase)
+		{
+			try
+			{
+				int selectedIndex = casesListView.getSelectionModel().getSelectedIndex();
+				if(selectedIndex == INVALID_INDEX)
+					return;
+				CaseListItem selectedCase = caseListProvider.get(selectedIndex);
+				BulletinFolder folder = getApp().findFolder(selectedCase.getName());
+				BulletinsListController bulletinListController = (BulletinsListController)getStage().getCurrentController();
+				bulletinListController.loadBulletinData(folder.getAllUniversalIdsUnsorted());
+			} 
+			catch (Exception e)
+			{
+				getStage().logAndNotifyUnexpectedError(e);
+			}
+		}
+		
+	}
+	
+	class FolderChangeListener implements ChangeListener<String>
+	{
+		public void changed(ObservableValue<? extends String> observableValue, String oldFolderName, String newFolderName)
+		{
+			updateCases();
+			selectCase(newFolderName);
+		}		
 	}
 
 	@FXML
@@ -339,6 +371,6 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@FXML
 	protected Label folderNameLabel;
 
-	private CaseListProvider caseListProvider;
+	protected CaseListProvider caseListProvider;
 	protected FxFolderSettingsController folderManagement;
 }

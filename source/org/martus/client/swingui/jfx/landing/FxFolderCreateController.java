@@ -25,12 +25,12 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.MartusLogger;
 
 public class FxFolderCreateController extends DialogWithOkCancelController
 {
@@ -39,6 +39,12 @@ public class FxFolderCreateController extends DialogWithOkCancelController
 	{
 		super(mainWindowToUse);
 	}
+	
+	public void addFolderChangeListener(ChangeListener folderListenerToUse)
+	{
+		folderListener = folderListenerToUse;
+	}
+		
 
 	@Override
 	public void initialize()
@@ -53,7 +59,7 @@ public class FxFolderCreateController extends DialogWithOkCancelController
 		if(newFolder == null)
 			return; //TODO notify user unable to create folder
 		
-		//TODO Notify LandingShell controller Folder contents have changed.
+		folderListener.changed(null, null, newFolder.getName());
 	}
 
 	@Override
@@ -66,5 +72,5 @@ public class FxFolderCreateController extends DialogWithOkCancelController
 	private TextField folderName;
 
 	private static final String LOCATION_FOLDER_CREATE_FXML = "landing/FolderCreate.fxml";
-
+	private ChangeListener folderListener;
 }
