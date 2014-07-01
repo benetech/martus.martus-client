@@ -44,11 +44,11 @@ public abstract class FxContentController extends FxController
 		shellController = shellControllerToUse;
 	}
 	
-	public void save()
+	protected void save()
 	{
 	}
 	
-	public void exitingController()
+	public void close()
 	{
 	}
 	

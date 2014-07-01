@@ -46,13 +46,13 @@ public class DialogWithOkCancelShellController extends DialogShellController
 	@FXML
 	public void onOkClicked()
 	{
-		saveAndCloseStageAndController();
+		saveAndClose();
 	}
 	
 	@FXML
 	public void onCancelClicked()
 	{
-		closeStageAndController();
+		close();
 	}
 	
 	private static final String LOCATION_DIALOG_WITH_OK_CANCEL_SHELL = "landing/DialogWithOkCancelShell.fxml";
