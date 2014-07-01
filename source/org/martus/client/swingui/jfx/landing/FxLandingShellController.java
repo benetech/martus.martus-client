@@ -308,6 +308,18 @@ public class FxLandingShellController extends FxInSwingFrameController
 		doAction(folderManagement);
 	}
 	
+	@FXML
+	public void onFolderNewClicked(MouseEvent mouseEvent) 
+	{
+		doAction(new FxFolderCreateController(getMainWindow()));
+	}
+
+	@FXML
+	public void onFolderDeleteClicked(MouseEvent mouseEvent) 
+	{
+		//TODO implement this
+	}
+	
 	private final int INVALID_INDEX = -1;
 	@FXML
 	protected TextField searchText;
