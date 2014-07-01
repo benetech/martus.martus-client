@@ -271,14 +271,14 @@ public class FieldChoicesByLabel
 		return (SearchFieldTreeNode[]) reusableDropdownNodes.toArray(new SearchFieldTreeNode[0]);
 	}
 
-	private void addSimilarNodes(SearchFieldTreeNode parent, SearchableFieldChoiceItem[] choices, int startAt, MiniLocalization localization)
+	private void addSimilarNodes(SearchFieldTreeNode parent, SearchableFieldChoiceItem[] choices, int startAt, MiniLocalization localizationToUse)
 	{
 		String label = parent.toString();
 		int index = startAt;
 		while(index < choices.length && choices[index].getSpec().getLabel().equals(label))
 		{
 			SearchableFieldChoiceItem choice = choices[index];
-			parent.add(new SearchFieldTreeNode(choice, localization));
+			parent.add(new SearchFieldTreeNode(choice, localizationToUse));
 			++index;
 		}
 		
