@@ -121,20 +121,25 @@ public class FxLandingShellController extends FxInSwingFrameController
 		mainContentPane.getChildren().addAll(createContents);
 	}
 
+	private String getStatusMessage(Boolean state)
+	{
+		MartusLocalization localization = getLocalization();
+		String on = localization.getButtonLabel("On");
+		String off = localization.getButtonLabel("Off");
+		return state ? on : off;
+	}
+
 	private void updateTorStatus()
 	{
 		OrchidTransportWrapper transport = getApp().getTransport();
 		boolean isTorRequested = transport.isTorEnabled();
-
-		String text = isTorRequested ? "On" : "Off";
-		toolbarButtonTor.setText(text);
+		toolbarButtonTor.setText(getStatusMessage(isTorRequested));
 	}
 	
 	private void updateOnlineStatus()
 	{
 		boolean isOnline = getApp().getTransport().isOnline();
-		String text = isOnline ? "On" : "Off";
-		toolbarButtonOnline.setText(text);
+		toolbarButtonOnline.setText(getStatusMessage(isOnline));
 	}
 
 	private void doAction(ActionDoer doer)

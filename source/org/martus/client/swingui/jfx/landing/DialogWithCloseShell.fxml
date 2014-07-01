@@ -8,7 +8,7 @@
    <bottom>
       <HBox alignment="BOTTOM_RIGHT" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onMouseClicked="#onCloseClicked" text="Close" />
+            <Button mnemonicParsing="false" onMouseClicked="#onCloseClicked" text="%Button.close" />
          </children>
       </HBox>
    </bottom>
