@@ -115,21 +115,21 @@ public class FieldChoicesByLabel
 		return specs;
 	}
 	
-	public TreeNode asTree(MiniLocalization localization)
+	public TreeNode asTree(MiniLocalization localizationToUse)
 	{
-		Collections.sort(allChoices, new ChoiceItemSorterByLabelTagType(localization));
+		Collections.sort(allChoices, new ChoiceItemSorterByLabelTagType(localizationToUse));
 		mergeSimilarDropdowns();
 		sortAllChoicesWithinDropdowns();
 
-		SearchFieldTreeNode root = new SearchFieldTreeNode("", localization);
+		SearchFieldTreeNode root = new SearchFieldTreeNode("", localizationToUse);
 		SearchableFieldChoiceItem[] choices = getChoicesAsArray();
 		int index = 0;
 		while(index < choices.length)
 		{
 			String label = choices[index].getSpec().getLabel();
-			SearchFieldTreeNode node = new SearchFieldTreeNode(label, localization);
-			node.add(new SearchFieldTreeNode(choices[index], localization));
-			addSimilarNodes(node, choices, index + 1, localization);
+			SearchFieldTreeNode node = new SearchFieldTreeNode(label, localizationToUse);
+			node.add(new SearchFieldTreeNode(choices[index], localizationToUse));
+			addSimilarNodes(node, choices, index + 1, localizationToUse);
 			index += node.getChildCount();
 			node = pullUpIfOnlyOneChild(node);
 			differentiateChildNodes(node);
