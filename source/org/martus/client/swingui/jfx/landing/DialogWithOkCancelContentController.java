@@ -34,10 +34,10 @@ import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.FxContentController;
 import org.martus.client.swingui.jfx.FxModalDialog;
 
-public abstract class DialogWithCloseController extends FxContentController  implements ActionDoer
+public abstract class DialogWithOkCancelContentController extends FxContentController implements ActionDoer
 {
 
-	public DialogWithCloseController(UiMainWindow mainWindowToUse)
+	public DialogWithOkCancelContentController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
@@ -57,7 +57,7 @@ public abstract class DialogWithCloseController extends FxContentController  imp
 		UiMainWindow mainWindow = getMainWindow();
 		try
 		{
-			FxModalDialog.createAndShow(mainWindow, new DialogWithCloseStage(mainWindow, this));
+			FxModalDialog.createAndShow(mainWindow, new DialogWithOkCancelStage(mainWindow, this));
 		} 
 		catch (Exception e)
 		{

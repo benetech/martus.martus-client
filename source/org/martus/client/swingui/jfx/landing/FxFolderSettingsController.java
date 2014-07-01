@@ -42,7 +42,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class FxFolderSettingsController extends DialogWithCloseController
+public class FxFolderSettingsController extends DialogWithCloseContentController
 {
 	public static class FolderNotFoundException extends Exception {}
 	
