@@ -25,27 +25,15 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
-import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxContentController;
-import org.martus.client.swingui.jfx.FxInSwingDialogController;
-
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.layout.Pane;
 
-public class DialogWithCloseShellController extends FxInSwingDialogController 
+import org.martus.client.swingui.UiMainWindow;
+
+public class DialogWithCloseShellController extends DialogShellController 
 {
 	public DialogWithCloseShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-	}
-
-	@Override
-	public void setContentPane(FxContentController contentController) throws Exception
-	{
-		Parent createContents = contentController.createContents();
-		contentPane.getChildren().addAll(createContents);
-		
 	}
 
 	@Override
@@ -57,12 +45,9 @@ public class DialogWithCloseShellController extends FxInSwingDialogController
 	@FXML
 	public void onCloseClicked()
 	{
-		getStage().getCurrentController().exitingController();
-		getFxInSwingDialogStage().close();
+		closeStageAndController();
 	}
-	
+
 	private static final String LOCATION_DIALOG_WITH_CLOSE_SHELL = "landing/DialogWithCloseShell.fxml";
 
-	@FXML
-	Pane contentPane;
 }

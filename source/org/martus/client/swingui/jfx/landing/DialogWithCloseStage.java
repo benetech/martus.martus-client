@@ -27,35 +27,17 @@ package org.martus.client.swingui.jfx.landing;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.FxContentController;
-import org.martus.client.swingui.jfx.FxNonWizardStage;
-import org.martus.client.swingui.jfx.FxScene;
 
-public class DialogWithCloseStage extends FxNonWizardStage
+public class DialogWithCloseStage extends DialogStage
 {
 	public DialogWithCloseStage(UiMainWindow mainWindowToUse, FxContentController controllerToUse)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, controllerToUse);
+	}
+
+	@Override
+	public void setShellController()
+	{
 		setShellController(new DialogWithCloseShellController(getMainWindow()));
-		setCurrentController(controllerToUse);
-	}
-
-	@Override
-	protected boolean confirmExit()
-	{
-		getCurrentController().exitingController();
-		return true;
-	}
-
-	@Override
-	protected FxScene createScene() throws Exception
-	{
-		return new FxScene(getExternalFxmlDirectory(), null);
-	}
-
-	@Override
-	public void showCurrentScene() throws Exception
-	{
-		FxContentController contentPaneController = getCurrentController();
-		showCurrentPage(contentPaneController);
 	}
 }

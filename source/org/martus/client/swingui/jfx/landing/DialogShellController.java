@@ -23,35 +23,31 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.landing;
+
+import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.FxContentController;
+import org.martus.client.swingui.jfx.FxInSwingDialogController;
 
-public abstract class FxContentController extends FxController
+abstract public class DialogShellController extends FxInSwingDialogController 
 {
-	public FxContentController(UiMainWindow mainWindowToUse)
+	public DialogShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
-	
-	public FxShellController getShellController()
+
+	@Override
+	public void setContentPane(FxContentController contentController) throws Exception
 	{
-		return shellController;
+		Parent createContents = contentController.createContents();
+		contentPane.getChildren().addAll(createContents);
+		
 	}
-	
-	public void setShellController(FxShellController shellControllerToUse)
-	{
-		shellController = shellControllerToUse;
-	}
-	
-	public void save()
-	{
-	}
-	
-	public void exitingController()
-	{
-	}
-	
-	
-	private FxShellController shellController;
+
+	@FXML
+	Pane contentPane;
 }
