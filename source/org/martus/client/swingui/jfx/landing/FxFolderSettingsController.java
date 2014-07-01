@@ -92,8 +92,7 @@ public class FxFolderSettingsController extends DialogWithCloseController
 		throw new FolderNotFoundException();
 	}
 	
-	@Override
-	public void exitingController()
+	@Override public void save()
 	{
 		try
 		{
