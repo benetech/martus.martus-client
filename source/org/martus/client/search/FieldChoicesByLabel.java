@@ -100,9 +100,9 @@ public class FieldChoicesByLabel
 		return (ChoiceItem[])allChoices.toArray(new ChoiceItem[0]);
 	}
 	
-	public FieldSpec[] asArray(MiniLocalization localization)
+	public FieldSpec[] asArray(MiniLocalization localizationToUse)
 	{
-		Collections.sort(allChoices, new ChoiceItemSorterByLabelTagType(localization));
+		Collections.sort(allChoices, new ChoiceItemSorterByLabelTagType(localizationToUse));
 		mergeSimilarDropdowns();
 
 		FieldSpec[] specs = new FieldSpec[allChoices.size()]; 
