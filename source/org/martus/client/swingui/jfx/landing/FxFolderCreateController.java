@@ -26,10 +26,14 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing;
 
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 
 public class FxFolderCreateController extends DialogWithOkCancelContentController
@@ -40,15 +44,26 @@ public class FxFolderCreateController extends DialogWithOkCancelContentControlle
 		super(mainWindowToUse);
 	}
 	
-	public void addFolderChangeListener(ChangeListener folderListenerToUse)
+	public void addFolderCreatedListener(ChangeListener folderListenerToUse)
 	{
-		folderListener = folderListenerToUse;
+		folderCreatedListener = folderListenerToUse;
 	}
 		
 
 	@Override
 	public void initialize()
 	{
+		MartusLocalization localization = getLocalization();
+		String defaultFolderNewName = localization.getFieldLabel("defaultCaseName");
+		folderName.textProperty().addListener(new FolderNameChangeListener());
+		folderName.setText(defaultFolderNewName);
+		getStage().setOkButtonText(localization.getButtonLabel("CreateFolder"));
+	}
+
+	private DialogWithOkCancelStage getStage()
+	{
+		DialogWithOkCancelStage stage = (DialogWithOkCancelStage)getShellController().getStage();
+		return stage;
 	}
 	
 	@Override
@@ -59,7 +74,7 @@ public class FxFolderCreateController extends DialogWithOkCancelContentControlle
 		if(newFolder == null)
 			return; //TODO notify user unable to create folder
 		
-		folderListener.changed(null, null, newFolder.getName());
+		folderCreatedListener.changed(null, null, newFolder.getName());
 	}
 
 	@Override
@@ -68,9 +83,59 @@ public class FxFolderCreateController extends DialogWithOkCancelContentControlle
 		return LOCATION_FOLDER_CREATE_FXML;
 	}
 	
+	private void setHintFolderErrorText(String hintText)
+	{
+		hintFolderError.setText(hintText);
+	}
+	
+	private void clearHintFolderErrorText()
+	{
+		setHintFolderErrorText("");
+	}
+
+	protected void updateButtonStatusAndFolderHint(String newFolderName)
+	{
+		MartusLocalization localization = getLocalization();
+		ClientBulletinStore store = getMainWindow().getStore();
+		boolean isOkButtonDisabled = false;
+		if(!store.isFolderNameValid(newFolderName))
+		{
+			setHintFolderErrorText(localization.getFieldLabel("HintFolderNameInvalid"));
+			isOkButtonDisabled = true;
+		}
+		else if(store.doesFolderNameAlreadyExist(newFolderName))
+		{
+			setHintFolderErrorText(localization.getFieldLabel("HintFolderNameAlreadyExists"));
+			isOkButtonDisabled = true;
+		}
+		else
+		{
+			clearHintFolderErrorText();
+		}
+		getStage().setOkButtonDisabled(isOkButtonDisabled);
+	}
+	
+	private class FolderNameChangeListener implements ChangeListener<String>
+	{
+		public FolderNameChangeListener()
+		{
+		}
+
+		@Override
+		public void changed(ObservableValue<? extends String> observableValue,
+				String oldFolderName, String newFolderName)
+		{
+			updateButtonStatusAndFolderHint(newFolderName);
+		}
+		
+	}
+	
 	@FXML
 	private TextField folderName;
+	
+	@FXML
+	private Label hintFolderError;
 
 	private static final String LOCATION_FOLDER_CREATE_FXML = "landing/FolderCreate.fxml";
-	private ChangeListener folderListener;
+	private ChangeListener folderCreatedListener;
 }

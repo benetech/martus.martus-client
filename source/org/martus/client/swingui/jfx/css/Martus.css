@@ -105,3 +105,13 @@
 	-fx-padding: 5 3 5 3;
 }
 
+/********/
+/* Text */
+/********/
+
+.errorText {
+	-fx-text-fill: #FF2819;
+	-fx-alignment: center-left;
+	-fx-font-size: 13px;
+}
+

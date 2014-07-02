@@ -55,8 +55,18 @@ public class DialogWithOkCancelShellController extends DialogShellController
 		close();
 	}
 	
+	protected void setOkButtonText(String newText)
+	{
+		ok.setText(newText);
+	}
+	
+	protected void setOkButtonSetDisabled(boolean isDisabled)
+	{
+		ok.setDisable(isDisabled);
+	}
+	
 	private static final String LOCATION_DIALOG_WITH_OK_CANCEL_SHELL = "landing/DialogWithOkCancelShell.fxml";
 	
 	@FXML
-	protected Button ok;
+	private Button ok;
 }

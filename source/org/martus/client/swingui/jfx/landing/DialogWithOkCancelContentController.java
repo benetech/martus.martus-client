@@ -36,7 +36,6 @@ import org.martus.client.swingui.jfx.FxModalDialog;
 
 public abstract class DialogWithOkCancelContentController extends FxContentController implements ActionDoer
 {
-
 	public DialogWithOkCancelContentController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
@@ -50,7 +49,7 @@ public abstract class DialogWithOkCancelContentController extends FxContentContr
 	}
 	
 	abstract public void initialize();
-
+	
 	@Override
 	public void doAction()
 	{

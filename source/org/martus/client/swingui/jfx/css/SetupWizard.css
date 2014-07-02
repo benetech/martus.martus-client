@@ -49,12 +49,6 @@
 	-fx-font-size: 13px;
 }
 
-.errorText {
-	-fx-text-fill: #FF2819;
-	-fx-alignment: center-left;
-	-fx-font-size: 13px;
-}
-
 .Icon {
     -fx-padding: 16 16 16 16;
     -fx-alignment: top-left;

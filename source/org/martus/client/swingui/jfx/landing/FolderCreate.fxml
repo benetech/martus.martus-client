@@ -8,9 +8,11 @@
    <children>
       <HBox>
          <children>
-            <Label text="%FolderName" />
-            <TextField fx:id="folderName" promptText="%HintEnterFolderName" />
+            <Label text="%FolderCreateNewName" />
+            <TextField fx:id="folderName" prefWidth="300.0" promptText="%HintEnterFolderName" />
          </children>
       </HBox>
+      <Label />
+      <Label fx:id="hintFolderError" styleClass="errorText" />
    </children>
 </VBox>
