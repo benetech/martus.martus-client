@@ -29,7 +29,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 
 public class ConfirmationController extends DialogWithOkCancelContentController
