@@ -57,6 +57,11 @@ public abstract class FxInSwingController extends FxShellController
 	{
 		return stage;
 	}
+	
+	public void logAndNotifyUnexpectedError(Exception e)
+	{
+		stage.logAndNotifyUnexpectedError(e);
+	}
 
 	public void setStage(FxInSwingStage stageToUse)
 	{

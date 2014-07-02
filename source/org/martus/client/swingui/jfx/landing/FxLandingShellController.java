@@ -210,7 +210,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 		}
 		catch (Exception e)
 		{
-			getStage().logAndNotifyUnexpectedError(e);
+			logAndNotifyUnexpectedError(e);
 		}
 	}
 
@@ -235,7 +235,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 		}
 		catch (Exception e)
 		{
-			getStage().logAndNotifyUnexpectedError(e);
+			logAndNotifyUnexpectedError(e);
 		}
 	}
 
@@ -262,7 +262,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 		} 
 		catch (Exception e)
 		{
-			getStage().logAndNotifyUnexpectedError(e);
+			logAndNotifyUnexpectedError(e);
 		}
 	}
 
@@ -298,7 +298,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 		} 
 		catch (FolderNotFoundException e)
 		{
-			getStage().logAndNotifyUnexpectedError(e);
+			logAndNotifyUnexpectedError(e);
 		}
 	}
 
@@ -336,7 +336,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 			} 
 			catch (Exception e)
 			{
-				getStage().logAndNotifyUnexpectedError(e);
+				logAndNotifyUnexpectedError(e);
 			}
 		}
 		
@@ -354,10 +354,23 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@FXML
 	public void onFolderDeleteClicked(MouseEvent mouseEvent) 
 	{
-		ConfirmationController deleteFolder = new ConfirmationController(getMainWindow(), "deletefolder");
+		CaseListItem folder = casesListView.getSelectionModel().getSelectedItem();
+		if(folder == null)
+			return; //TODO shouldn't happen fix this so that delete is not available if no folder is selected.
+		String folderToDeletesName = folder.caseNameLocalized;
+		FxFolderDeleteController deleteFolder = new FxFolderDeleteController(getMainWindow(), folderToDeletesName);
+		deleteFolder.addFolderDeletedListener(new FolderDeletedListener());
 		doAction(deleteFolder);
 	}
 	
+	class FolderDeletedListener implements ChangeListener<Boolean>
+	{
+		public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldFolderName, Boolean newlyCreatedFoldersName)
+		{
+			updateCases();
+		}		
+	}
+
 	private final int INVALID_INDEX = -1;
 	@FXML
 	protected TextField searchText;

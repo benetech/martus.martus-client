@@ -1856,6 +1856,10 @@ public class EnglishStrings
 "field:HintFolderNameAlreadyExists=This name is already in the system.  Please choose a unique name.",
 "field:HintFolderNameInvalid=You must enter a valid folder name.",
 "button:CreateFolder=Create",
+"button:DeleteFolder=Delete",
+"wintitle:DeleteFolder=Delete",
+"field:DeleteFolderMessage=You are about to delete #FolderName#",
+"field:DeleteAssociatedFilesInFolder=Delete associated files?",
 
 "field:ChooseLanguage=Choose a Language",
 
