@@ -354,7 +354,8 @@ public class FxLandingShellController extends FxInSwingFrameController
 	@FXML
 	public void onFolderDeleteClicked(MouseEvent mouseEvent) 
 	{
-		//TODO implement this
+		ConfirmationController deleteFolder = new ConfirmationController(getMainWindow(), "deletefolder");
+		doAction(deleteFolder);
 	}
 	
 	private final int INVALID_INDEX = -1;
