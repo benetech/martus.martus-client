@@ -1850,8 +1850,12 @@ public class EnglishStrings
 "field:FolderNameIncidents=Incidents",
 "field:FolderNameProjects=Projects",
 "field:FolerNameUserDefined=Custom Name",
-"field:FolderName=Folder Name",
-"field:HintEnterFolderName=Enter Folder Name",
+"field:FolderCreateNewName=Name:",
+"field:HintEnterFolderName=Enter Name",
+"field:defaultCaseName=Untitled",
+"field:HintFolderNameAlreadyExists=This name is already in the system.  Please choose a unique name.",
+"field:HintFolderNameInvalid=You must enter a valid folder name.",
+"button:CreateFolder=Create",
 
 "field:ChooseLanguage=Choose a Language",
 

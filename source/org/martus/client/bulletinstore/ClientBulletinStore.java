@@ -93,6 +93,7 @@ import org.xml.sax.SAXParseException;
 */
 public class ClientBulletinStore extends BulletinStore
 {
+	private static final String SPACE = " ";
 	public ClientBulletinStore(MartusCrypto cryptoToUse)
 	{
 		setSignatureGenerator(cryptoToUse);
@@ -425,7 +426,7 @@ public class ClientBulletinStore extends BulletinStore
 
 	public boolean isFolderNameValid(String newName)
 	{
-		if (newName.length() == 0 || newName.startsWith(" "))
+		if (newName.length() == 0 || newName.startsWith(SPACE) || newName.endsWith(SPACE))
 			return false;
 			
 		char[] strOfArray = newName.toCharArray();								
@@ -434,6 +435,14 @@ public class ClientBulletinStore extends BulletinStore
 			if (!MartusUtilities.isValidCharInFolder(strOfArray[i]))
 				return false;
 		}	
+		return true;
+	}
+	
+	public boolean doesFolderNameAlreadyExist(String name)
+	{
+		BulletinFolder folder = findFolder(name);
+		if (folder == null) 
+			return false;
 		return true;
 	}
 

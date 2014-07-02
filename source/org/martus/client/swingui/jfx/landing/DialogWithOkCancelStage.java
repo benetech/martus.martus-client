@@ -34,6 +34,16 @@ public class DialogWithOkCancelStage extends DialogStage
 	{
 		super(mainWindowToUse, controllerToUse);
 	}
+	
+	public void setOkButtonText(String newText)
+	{
+		((DialogWithOkCancelShellController)getShellController()).setOkButtonText(newText);
+	}
+	
+	public void setOkButtonDisabled(boolean isDisabled)
+	{
+		((DialogWithOkCancelShellController)getShellController()).setOkButtonSetDisabled(isDisabled);
+	}
 
 	@Override
 	public void setShellController()

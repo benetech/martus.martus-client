@@ -134,6 +134,22 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("wrong account?", security.getPublicKeyString(), b.getAccount());
 	}
     
+    public void testIsFolderNameValid() throws Exception
+    {
+		MockBulletinStore clientStore = new MockBulletinStore(security);
+		String emptyFolderName = "";
+		String folderNameStartingWithSpace = " myFolder";
+		String folderNameEndingWithSpace = "myFolder ";
+		String validFolderName = "Some Folder Name";
+		String invalidCharacterInFolderName = "Folder\nName"; 
+
+		assertFalse("empty folder name is valid?", clientStore.isFolderNameValid(emptyFolderName));
+		assertFalse("folders starting with a space is valid?", clientStore.isFolderNameValid(folderNameStartingWithSpace));
+		assertTrue("a valid folder name is not valid?", clientStore.isFolderNameValid(validFolderName));
+		assertFalse("a folder with an invalid character is valid?", clientStore.isFolderNameValid(invalidCharacterInFolderName));
+		assertFalse("folders ending with a space is valid?", clientStore.isFolderNameValid(folderNameEndingWithSpace));
+    }
+    
     public void testGetAllVisibleFolders() throws Exception
 	{
 		MockBulletinStore clientStore = new MockBulletinStore(security);
@@ -768,8 +784,9 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals(false, testStore.renameFolder("abc", " abcd"));
 		assertEquals(f3, testStore.findFolder("abc"));
 		
-		assertEquals(true, testStore.renameFolder("abc", "ab cd "));
-		assertEquals(f3, testStore.findFolder("ab cd "));
+		assertEquals(false, testStore.renameFolder("abc", "ab cd "));
+		assertEquals(true, testStore.renameFolder("abc", "ab cd"));
+		assertEquals(f3, testStore.findFolder("ab cd"));
 		
 		
 		BulletinFolder f4 = testStore.createFolder("folder1");

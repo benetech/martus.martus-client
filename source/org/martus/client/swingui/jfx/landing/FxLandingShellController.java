@@ -313,7 +313,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 	public void onFolderNewClicked(MouseEvent mouseEvent) 
 	{
 		FxFolderCreateController createNewFolder = new FxFolderCreateController(getMainWindow());
-		createNewFolder.addFolderChangeListener(new FolderChangeListener());
+		createNewFolder.addFolderCreatedListener(new FolderCreatedListener());
 		doAction(createNewFolder);
 	}
 	
@@ -342,12 +342,12 @@ public class FxLandingShellController extends FxInSwingFrameController
 		
 	}
 	
-	class FolderChangeListener implements ChangeListener<String>
+	class FolderCreatedListener implements ChangeListener<String>
 	{
-		public void changed(ObservableValue<? extends String> observableValue, String oldFolderName, String newFolderName)
+		public void changed(ObservableValue<? extends String> observableValue, String oldFolderName, String newlyCreatedFoldersName)
 		{
 			updateCases();
-			selectCase(newFolderName);
+			selectCase(newlyCreatedFoldersName);
 		}		
 	}
 
