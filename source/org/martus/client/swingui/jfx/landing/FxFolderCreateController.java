@@ -60,12 +60,6 @@ public class FxFolderCreateController extends DialogWithOkCancelContentControlle
 		getStage().setOkButtonText(localization.getButtonLabel("CreateFolder"));
 	}
 
-	private DialogWithOkCancelStage getStage()
-	{
-		DialogWithOkCancelStage stage = (DialogWithOkCancelStage)getShellController().getStage();
-		return stage;
-	}
-	
 	@Override
 	public void save()
 	{
