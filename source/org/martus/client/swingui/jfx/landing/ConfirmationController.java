@@ -61,10 +61,10 @@ public class ConfirmationController extends DialogWithOkCancelContentController
 	}
 	
 	@FXML 
-	Label messageTitle;
+	private Label messageTitle;
 	
 	@FXML 
-	TextArea messageTextArea;
+	private TextArea messageTextArea;
 
 	private String confirmationMessageTag;
 	}
