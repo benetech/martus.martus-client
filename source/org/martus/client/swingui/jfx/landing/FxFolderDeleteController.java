@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
+import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.util.TokenReplacement;
@@ -38,10 +39,10 @@ import javafx.scene.control.TextArea;
 
 public class FxFolderDeleteController extends DialogWithOkCancelContentController
 {
-	public FxFolderDeleteController(UiMainWindow mainWindowToUse, String folderNameToDeleteToUse)
+	public FxFolderDeleteController(UiMainWindow mainWindowToUse, BulletinFolder folderToDeleteToUse)
 	{
 		super(mainWindowToUse);
-		folderNameToDelete = folderNameToDeleteToUse;
+		folderToDelete = folderToDeleteToUse;
 	}
 
 	public void addFolderDeletedListener(ChangeListener folderListenerToUse)
@@ -59,7 +60,7 @@ public class FxFolderDeleteController extends DialogWithOkCancelContentControlle
 		String deleteFolderMessage = localization.getFieldLabel("DeleteFolderMessage");
 		try
 		{
-			String fullMessage = TokenReplacement.replaceToken(deleteFolderMessage, "#FolderName#", folderNameToDelete);
+			String fullMessage = TokenReplacement.replaceToken(deleteFolderMessage, "#FolderName#", folderToDelete.getLocalizedName(localization));
 			messageTextArea.setText(fullMessage);
 		} 
 		catch (TokenInvalidException e)
@@ -80,8 +81,11 @@ public class FxFolderDeleteController extends DialogWithOkCancelContentControlle
 	public void save()
 	{
 		Boolean deleteBulletinsAsWell = deleteAssociatedFiles.isSelected();
-		folderDeletedListener.changed(null, null, deleteBulletinsAsWell);
-		getApp().getStore().deleteFolder(folderNameToDelete);
+		boolean folderWasDeleted = getApp().getStore().deleteFolder(folderToDelete.getName());
+		if(folderWasDeleted)
+			folderDeletedListener.changed(null, null, deleteBulletinsAsWell);
+		else
+			showNotifyDialog("ErrorDeletingFolder");
 	}
 
 	private static final String LOCATION_FOLDER_DELETE_FXML = "landing/FolderDelete.fxml";
@@ -93,9 +97,8 @@ public class FxFolderDeleteController extends DialogWithOkCancelContentControlle
 	private TextArea messageTextArea;
 
 	@FXML
-	CheckBox deleteAssociatedFiles;
+	private CheckBox deleteAssociatedFiles;
 	
-	private String folderNameToDelete;
-	private ChangeListener folderDeletedListener;
-	
+	private ChangeListener folderDeletedListener;	
+	private BulletinFolder folderToDelete;
 }

@@ -1860,6 +1860,10 @@ public class EnglishStrings
 "wintitle:DeleteFolder=Delete",
 "field:DeleteFolderMessage=You are about to delete #FolderName#",
 "field:DeleteAssociatedFilesInFolder=Delete associated files?",
+"field:notifyUnableToCreateFoldercause=Unable to create Folder.",
+"wintitle:notifyUnableToCreateFolder=Error Creating Folder",
+"field:notifyErrorDeletingFoldercause=Unable to delete Folder.",
+"wintitle:notifyErrorDeletingFolder=Error Deleting Folder",
 
 "field:ChooseLanguage=Choose a Language",
 
