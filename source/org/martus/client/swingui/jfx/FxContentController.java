@@ -52,6 +52,10 @@ public abstract class FxContentController extends FxController
 	{
 	}
 	
+	public void logAndNotifyUnexpectedError(Exception e)
+	{
+		shellController.getStage().logAndNotifyUnexpectedError(e);
+	}
 	
 	private FxShellController shellController;
 }

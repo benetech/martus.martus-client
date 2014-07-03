@@ -30,6 +30,7 @@ import java.awt.Component;
 import javax.swing.JFrame;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
 
 public abstract class FxInSwingFrameController extends FxInSwingController
 {
@@ -48,4 +49,9 @@ public abstract class FxInSwingFrameController extends FxInSwingController
 	{
 		return (JFrame) getWindow();
 	}
+
+	protected void doAction(ActionDoer doer)
+	{
+		getStage().doAction(doer);
+	}	
 }
