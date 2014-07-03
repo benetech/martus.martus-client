@@ -170,7 +170,7 @@
                         <HBox layoutY="353.0">
                            <children>
                                <Button mnemonicParsing="false" onMouseClicked="#onFolderNewClicked" text="+" />
-                               <Button mnemonicParsing="false" onMouseClicked="#onFolderDeleteClicked" text="-" />
+                               <Button mnemonicParsing="false" fx:id="deleteFolderButton" onMouseClicked="#onFolderDeleteClicked" text="-" />
                                <Button mnemonicParsing="false" onMouseClicked="#onFolderSettingsClicked" prefHeight="30.0" prefWidth="31.0">
                                  <graphic>
                                     <ImageView fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">

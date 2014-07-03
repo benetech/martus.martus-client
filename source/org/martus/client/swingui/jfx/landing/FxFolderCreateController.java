@@ -38,7 +38,6 @@ import org.martus.client.swingui.UiMainWindow;
 
 public class FxFolderCreateController extends DialogWithOkCancelContentController
 {
-
 	public FxFolderCreateController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
@@ -47,8 +46,7 @@ public class FxFolderCreateController extends DialogWithOkCancelContentControlle
 	public void addFolderCreatedListener(ChangeListener folderListenerToUse)
 	{
 		folderCreatedListener = folderListenerToUse;
-	}
-		
+	}	
 
 	@Override
 	public void initialize()
@@ -66,8 +64,10 @@ public class FxFolderCreateController extends DialogWithOkCancelContentControlle
 		String newFolderName = folderName.getText();
 		BulletinFolder newFolder = getApp().createUniqueFolder(newFolderName);
 		if(newFolder == null)
-			return; //TODO notify user unable to create folder
-		
+		{
+			showNotifyDialog("UnableToCreateFolder");
+			return; 
+		}
 		folderCreatedListener.changed(null, null, newFolder.getName());
 	}
 

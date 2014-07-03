@@ -41,6 +41,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
@@ -81,37 +82,77 @@ public class FxLandingShellController extends FxInSwingFrameController
 	{
 		updateOnlineStatus();
 		updateTorStatus();
-		updateCases();
+		updateCasesSelectDefaultCase();
 		casesListView.getSelectionModel().selectedItemProperty().addListener(new CaseListChangeListener());
 	}
 
-	protected void updateCases()
+	protected void updateCasesSelectDefaultCase()
 	{
-		updateFolderLabel(getApp().getConfigInfo().getFolderLabelCode());
-		
+		updateCases(DEFAULT_SELECTED_CASE_NAME);
+	}
+
+	protected void updateCases(String caseNameToSelect)
+	{
+		updateFolderLabelFromCode(getApp().getConfigInfo().getFolderLabelCode());
 		caseListProvider.clear();
 		Vector visibleFolders = getApp().getStore().getAllVisibleFolders();
 		MartusLocalization localization = getLocalization();
 		for(Iterator f = visibleFolders.iterator(); f.hasNext();)
 		{
 			BulletinFolder folder = (BulletinFolder) f.next();
+			if(folder.getName().equals(caseNameToSelect))
+				updateButtons(folder);
 			CaseListItem caseList = new CaseListItem(folder, localization);
 			caseListProvider.add(caseList);
 		}
 		casesListView.setItems(caseListProvider);
+		selectCase(caseNameToSelect);
 	}
 	
-	protected void selectCase(String caseName)
+	protected void updateCaseList()
+	{
+		try
+		{
+			int selectedIndex = casesListView.getSelectionModel().getSelectedIndex();
+			if(selectedIndex == INVALID_INDEX)
+				return;
+			CaseListItem selectedCase = caseListProvider.get(selectedIndex);
+			BulletinFolder folder = getApp().findFolder(selectedCase.getName());
+			updateButtons(folder);
+			BulletinsListController bulletinListController = (BulletinsListController)getStage().getCurrentController();
+			bulletinListController.loadBulletinData(folder.getAllUniversalIdsUnsorted());
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
+	
+	private void selectCase(String caseName)
 	{
 		for (Iterator iterator = caseListProvider.iterator(); iterator.hasNext();)
 		{
 			CaseListItem caseItem = (CaseListItem) iterator.next();
-			if(caseItem.caseNameLocalized.equals(caseName))
+			if(caseItem.caseName.equals(caseName))
 			{
-				casesListView.scrollTo(caseItem);
-				casesListView.getSelectionModel().select(caseItem);
+				selectCaseAndScrollInView(caseItem);
+				break;
 			}
 		}
+	}
+
+	private void selectCaseAndScrollInView(CaseListItem caseToSelect)
+	{
+		casesListView.getSelectionModel().select(caseToSelect);
+		casesListView.scrollTo(caseToSelect);
+	}
+
+	private void updateButtons(BulletinFolder folder)
+	{
+		if(folder.canDelete())
+			deleteFolderButton.setDisable(false);
+		else
+			deleteFolderButton.setDisable(true);
 	}
 
 	@Override
@@ -274,10 +315,11 @@ public class FxLandingShellController extends FxInSwingFrameController
 
 		@Override public void changed(ObservableValue<? extends ChoiceItem> observableValue, ChoiceItem originalItem, ChoiceItem newItem) 
 		{
-			updateFolderLabel(newItem.getCode());
+			updateFolderLabelFromCode(newItem.getCode());
 		}
 	}
 
+	
 	private final class FolderCustomNameListener implements ChangeListener<String>
 	{
 		public FolderCustomNameListener()
@@ -286,11 +328,16 @@ public class FxLandingShellController extends FxInSwingFrameController
 
 		@Override public void changed(ObservableValue<? extends String> observableValue, String original, String newLabel) 
 		{
-			folderNameLabel.setText(newLabel);
+			updateFolderLabelName(newLabel);
 		}
 	}
 
-	protected void updateFolderLabel(String folderNameCode)
+	protected void updateFolderLabelName(String newLabel)
+	{
+		folderNameLabel.setText(newLabel);
+	}
+
+	protected void updateFolderLabelFromCode(String folderNameCode)
 	{
 		try
 		{
@@ -319,46 +366,28 @@ public class FxLandingShellController extends FxInSwingFrameController
 	
 	class CaseListChangeListener implements ChangeListener<CaseListItem>
 	{
-
 		@Override
 		public void changed(ObservableValue<? extends CaseListItem> observalue	,
 				CaseListItem previousCase, CaseListItem newCase)
 		{
-			try
-			{
-				int selectedIndex = casesListView.getSelectionModel().getSelectedIndex();
-				if(selectedIndex == INVALID_INDEX)
-					return;
-				CaseListItem selectedCase = caseListProvider.get(selectedIndex);
-				BulletinFolder folder = getApp().findFolder(selectedCase.getName());
-				BulletinsListController bulletinListController = (BulletinsListController)getStage().getCurrentController();
-				bulletinListController.loadBulletinData(folder.getAllUniversalIdsUnsorted());
-			} 
-			catch (Exception e)
-			{
-				logAndNotifyUnexpectedError(e);
-			}
+			updateCaseList();
 		}
-		
 	}
 	
 	class FolderCreatedListener implements ChangeListener<String>
 	{
 		public void changed(ObservableValue<? extends String> observableValue, String oldFolderName, String newlyCreatedFoldersName)
 		{
-			updateCases();
-			selectCase(newlyCreatedFoldersName);
+			updateCases(newlyCreatedFoldersName);
 		}		
 	}
 
 	@FXML
 	public void onFolderDeleteClicked(MouseEvent mouseEvent) 
 	{
-		CaseListItem folder = casesListView.getSelectionModel().getSelectedItem();
-		if(folder == null)
-			return; //TODO shouldn't happen fix this so that delete is not available if no folder is selected.
-		String folderToDeletesName = folder.caseNameLocalized;
-		FxFolderDeleteController deleteFolder = new FxFolderDeleteController(getMainWindow(), folderToDeletesName);
+		CaseListItem folderItem = casesListView.getSelectionModel().getSelectedItem();
+		BulletinFolder folder = getApp().getStore().findFolder(folderItem.caseName);
+		FxFolderDeleteController deleteFolder = new FxFolderDeleteController(getMainWindow(), folder);
 		deleteFolder.addFolderDeletedListener(new FolderDeletedListener());
 		doAction(deleteFolder);
 	}
@@ -367,29 +396,33 @@ public class FxLandingShellController extends FxInSwingFrameController
 	{
 		public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldFolderName, Boolean newlyCreatedFoldersName)
 		{
-			updateCases();
+			updateCasesSelectDefaultCase();
 		}		
 	}
 
 	private final int INVALID_INDEX = -1;
 	@FXML
-	protected TextField searchText;
+	private TextField searchText;
 	
 	@FXML
-	protected Button toolbarButtonOnline;
+	private Button toolbarButtonOnline;
 	
 	@FXML
-	protected Button toolbarButtonTor;
+	private Button toolbarButtonTor;
 	
 	@FXML
-	protected AnchorPane mainContentPane;
+	private AnchorPane mainContentPane;
 	
 	@FXML
-	protected ListView<CaseListItem> casesListView;
+	private Button deleteFolderButton;
 	
 	@FXML
-	protected Label folderNameLabel;
+	private ListView<CaseListItem> casesListView;
+	
+	@FXML
+	private Label folderNameLabel;
 
-	protected CaseListProvider caseListProvider;
-	protected FxFolderSettingsController folderManagement;
+	private String DEFAULT_SELECTED_CASE_NAME = ClientBulletinStore.SAVED_FOLDER;
+	private CaseListProvider caseListProvider;
+	private FxFolderSettingsController folderManagement;
 }
