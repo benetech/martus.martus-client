@@ -58,7 +58,7 @@ public class FxFolderSettingsController extends DialogWithCloseContentController
 	{
 		ObservableList<ChoiceItem> folderNameChoices = getFolderLabelChoices(getMainWindow().getLocalization());
 		fxFolderChoiceBox.setItems(folderNameChoices);
-		String folderNameCustom = getConfigInfo().getFolderLabelCustomName();
+		String folderNameCustom = config.getFolderLabelCustomName();
 		try
 		{
 			String folderNameCode = config.getFolderLabelCode();
@@ -107,6 +107,17 @@ public class FxFolderSettingsController extends DialogWithCloseContentController
 		}
 	}
 	
+	protected void setFolderLabelCode(String code)
+	{
+		config.setFolderLabelCode(code);
+		updateCustomFolder();
+	}
+	
+	protected void setFolderLabelCustomName(String customName)
+	{
+		config.setFolderLabelCustomName(customName);
+	}
+	
 	private final class FolderNameChoiceBoxListener implements ChangeListener<ChoiceItem>
 	{
 		public FolderNameChoiceBoxListener()
@@ -115,8 +126,7 @@ public class FxFolderSettingsController extends DialogWithCloseContentController
 
 		@Override public void changed(ObservableValue<? extends ChoiceItem> observableValue, ChoiceItem originalItem, ChoiceItem newItem) 
 		{
-			getConfigInfo().setFolderLabelCode(newItem.getCode());
-			updateCustomFolder();
+			setFolderLabelCode(newItem.getCode());
 		}
 	}
 	
@@ -128,7 +138,7 @@ public class FxFolderSettingsController extends DialogWithCloseContentController
 
 		@Override public void changed(ObservableValue<? extends String> observableValue, String original, String newLabel) 
 		{
-			getConfigInfo().setFolderLabelCustomName(newLabel);
+			setFolderLabelCustomName(newLabel);
 		}
 	}
 	
@@ -169,11 +179,6 @@ public class FxFolderSettingsController extends DialogWithCloseContentController
 		return LOCATION_FOLDER_SETTINGS_FXML;
 	}
 	
-	protected ConfigInfo getConfigInfo()
-	{
-		return config;
-	}
-
 	@FXML
 	ChoiceBox<ChoiceItem> fxFolderChoiceBox;
 	
