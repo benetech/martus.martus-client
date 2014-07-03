@@ -58,15 +58,15 @@
 					<children>
 						<GridPane hgap="5.0">
 							<columnConstraints>
-								<ColumnConstraints hgrow="SOMETIMES"  />
-								<ColumnConstraints hgrow="SOMETIMES"  />
-								<ColumnConstraints hgrow="SOMETIMES"  />
-								<ColumnConstraints hgrow="SOMETIMES"  />
-							    <ColumnConstraints hgrow="SOMETIMES"  />
-							    <ColumnConstraints hgrow="SOMETIMES"  />
+								<ColumnConstraints hgrow="SOMETIMES" />
+								<ColumnConstraints hgrow="SOMETIMES" />
+								<ColumnConstraints hgrow="SOMETIMES" />
+								<ColumnConstraints hgrow="SOMETIMES" />
+							    <ColumnConstraints hgrow="SOMETIMES" />
+							    <ColumnConstraints hgrow="SOMETIMES" />
 							</columnConstraints>
 							<children>
-                        <HBox alignment="CENTER" prefHeight="100.0" >
+                        <HBox alignment="CENTER" prefHeight="100.0">
                            <children>
       								<ImageView fitHeight="33.0" fitWidth="97.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true">
       									<image>
@@ -103,14 +103,14 @@
                               <Insets />
                            </opaqueInsets>
 								</HBox>
- 						<HBox alignment="CENTER_LEFT" styleClass="toolbarHBox" GridPane.columnIndex="4" >
+ 						<HBox alignment="CENTER_LEFT" styleClass="toolbarHBox" GridPane.columnIndex="4">
 									<children>
 										<Label styleClass="toolbarLabel" text="%Tor">
                                  			<padding>
                                     				<Insets right="5.0" />
                                  			</padding>
                                  		</Label>
- 										<Button fx:id="toolbarButtonTor" styleClass="toolbarButton" onAction="#onTor" mnemonicParsing="false" minWidth="50"  />
+ 										<Button fx:id="toolbarButtonTor" minWidth="50" mnemonicParsing="false" onAction="#onTor" styleClass="toolbarButton" />
                            			</children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" GridPane.columnIndex="5">
@@ -137,64 +137,10 @@
 						</GridPane>
 					</children>
 				</VBox>
-				<SplitPane dividerPositions="0.29797979797979796" focusTraversable="true" minWidth="920.0" prefHeight="360.0" prefWidth="920.0" style="-fx-box-border: transparent; -fx-box-border: 0px;">
+				<SplitPane dividerPositions="0.07" focusTraversable="true" minWidth="920.0" prefHeight="360.0" prefWidth="920.0" style="-fx-box-border: transparent; -fx-box-border: 0px;">
 					<items>
-						<AnchorPane maxWidth="300.0" minHeight="-Infinity" minWidth="270.0" prefHeight="370.0" prefWidth="300.0" style="-fx-background-color: #353535;">
-							<children>
-								<Button layoutX="44.33837890625" layoutY="24.0" maxHeight="45.0" maxWidth="300.0" minHeight="45.0" minWidth="270.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="270.0" style="-fx-background-color: #353535; -fx-background-radius: 1px; -fx-border-color: #606060;" text="Records" textFill="#f5f5f5" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-									<font>
-										<Font name="Helvetica" size="18.0" />
-									</font>
-								</Button>
-								<ImageView fitHeight="40.0" fitWidth="30.0" layoutX="12.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-									<image>
-									<Image url="@../images/list.png" />
-									</image>
-								</ImageView>
-								<Button layoutY="45.0" maxHeight="45.0" maxWidth="300.0" minHeight="45.0" minWidth="270.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="270.0" style="-fx-background-color: #353535; -fx-background-radius: 1px; -fx-border-color: #606060;" text="Files" textFill="#f5f5f5" AnchorPane.bottomAnchor="290.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
-									<font>
-									<Font name="Helvetica" size="18.0" />
-									</font>
-								</Button>
-								<ImageView fitHeight="40.0" fitWidth="30.0" layoutX="12.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
-									<image>
-									<Image url="@../images/attachment.png" />
-									</image>
-								</ImageView>
-		                        <Label fx:id="folderNameLabel" alignment="CENTER" layoutX="12.0" layoutY="150.0" prefHeight="40.0" prefWidth="246.0" text="Cases" textAlignment="CENTER" textFill="WHITE">
-		                           <font>
-		                              <Font size="18.0" />
-		                           </font>
-		                        </Label>
-                        		<ListView fx:id="casesListView" layoutX="7.0" layoutY="195.0" prefHeight="146.0" prefWidth="256.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="195.0" />
-                        <HBox layoutY="353.0">
-                           <children>
-                               <Button mnemonicParsing="false" onMouseClicked="#onFolderNewClicked" text="+" />
-                               <Button mnemonicParsing="false" fx:id="deleteFolderButton" onMouseClicked="#onFolderDeleteClicked" text="-" />
-                               <Button mnemonicParsing="false" onMouseClicked="#onFolderSettingsClicked" prefHeight="30.0" prefWidth="31.0">
-                                 <graphic>
-                                    <ImageView fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../images/cog.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                           </children>
-                        </HBox>
-                        <Button layoutY="90.0" maxHeight="45.0" maxWidth="300.0" minHeight="45.0" minWidth="270.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="270.0" style="-fx-background-color: #353535; -fx-background-radius: 1px; -fx-border-color: #606060;" text="Notes" textFill="#f5f5f5">
-                           <font>
-                              <Font name="Helvetica" size="18.0" />
-                           </font>
-                        </Button>
-                        <ImageView fitHeight="40.0" fitWidth="30.0" layoutX="12.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/note.png" />
-                           </image>
-                        </ImageView>
-							</children>
-						</AnchorPane>
-    					<AnchorPane fx:id="mainContentPane" minHeight="380.0" minWidth="620.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #bdbdbd;" />
+                  		<Pane fx:id="sideContentPane" prefHeight="200.0" prefWidth="200.0" />
+    						<Pane fx:id="mainContentPane" minHeight="380.0" minWidth="620.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #bdbdbd;" />
   					</items>
 				</SplitPane>
 			</children>

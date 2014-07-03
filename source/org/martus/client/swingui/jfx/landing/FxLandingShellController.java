@@ -25,28 +25,23 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
-import java.util.Iterator;
-import java.util.Vector;
+import java.io.IOException;
+import java.net.URL;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
-import org.martus.client.bulletinstore.BulletinFolder;
-import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.actions.ActionMenuBackupMyKeyPair;
 import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
 import org.martus.client.swingui.actions.ActionMenuContactInfo;
@@ -57,9 +52,8 @@ import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.actions.ActionMenuSelectServer;
 import org.martus.client.swingui.jfx.FxContentController;
 import org.martus.client.swingui.jfx.FxInSwingFrameController;
-import org.martus.client.swingui.jfx.landing.FxFolderSettingsController.FolderNotFoundException;
+import org.martus.client.swingui.jfx.FxmlLoaderWithController;
 import org.martus.common.MartusLogger;
-import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.network.OrchidTransportWrapper;
 
 public class FxLandingShellController extends FxInSwingFrameController
@@ -67,8 +61,6 @@ public class FxLandingShellController extends FxInSwingFrameController
 	public FxLandingShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		caseListProvider = new CaseListProvider();
-		folderManagement = new FxFolderSettingsController(getMainWindow(), new FolderNameChoiceBoxListener(), new FolderCustomNameListener());
 	}
 
 	@Override
@@ -82,86 +74,33 @@ public class FxLandingShellController extends FxInSwingFrameController
 	{
 		updateOnlineStatus();
 		updateTorStatus();
-		updateCasesSelectDefaultCase();
-		casesListView.getSelectionModel().selectedItemProperty().addListener(new CaseListChangeListener());
-	}
-
-	protected void updateCasesSelectDefaultCase()
-	{
-		updateCases(DEFAULT_SELECTED_CASE_NAME);
-	}
-
-	protected void updateCases(String caseNameToSelect)
-	{
-		updateFolderLabelFromCode(getApp().getConfigInfo().getFolderLabelCode());
-		caseListProvider.clear();
-		Vector visibleFolders = getApp().getStore().getAllVisibleFolders();
-		MartusLocalization localization = getLocalization();
-		for(Iterator f = visibleFolders.iterator(); f.hasNext();)
-		{
-			BulletinFolder folder = (BulletinFolder) f.next();
-			if(folder.getName().equals(caseNameToSelect))
-				updateButtons(folder);
-			CaseListItem caseList = new CaseListItem(folder, localization);
-			caseListProvider.add(caseList);
-		}
-		casesListView.setItems(caseListProvider);
-		selectCase(caseNameToSelect);
 	}
 	
-	protected void updateCaseList()
-	{
-		try
-		{
-			int selectedIndex = casesListView.getSelectionModel().getSelectedIndex();
-			if(selectedIndex == INVALID_INDEX)
-				return;
-			CaseListItem selectedCase = caseListProvider.get(selectedIndex);
-			BulletinFolder folder = getApp().findFolder(selectedCase.getName());
-			updateButtons(folder);
-			BulletinsListController bulletinListController = (BulletinsListController)getStage().getCurrentController();
-			bulletinListController.loadBulletinData(folder.getAllUniversalIdsUnsorted());
-		} 
-		catch (Exception e)
-		{
-			logAndNotifyUnexpectedError(e);
-		}
-	}
-	
-	private void selectCase(String caseName)
-	{
-		for (Iterator iterator = caseListProvider.iterator(); iterator.hasNext();)
-		{
-			CaseListItem caseItem = (CaseListItem) iterator.next();
-			if(caseItem.caseName.equals(caseName))
-			{
-				selectCaseAndScrollInView(caseItem);
-				break;
-			}
-		}
-	}
-
-	private void selectCaseAndScrollInView(CaseListItem caseToSelect)
-	{
-		casesListView.getSelectionModel().select(caseToSelect);
-		casesListView.scrollTo(caseToSelect);
-	}
-
-	private void updateButtons(BulletinFolder folder)
-	{
-		if(folder.canDelete())
-			deleteFolderButton.setDisable(false);
-		else
-			deleteFolderButton.setDisable(true);
-	}
-
 	@Override
 	public void setContentPane(FxContentController contentController) throws Exception
 	{
 		Parent createContents = contentController.createContents();
 		mainContentPane.getChildren().addAll(createContents);
+		
+		setupCaseManagementSidebar();
 	}
 
+	private void setupCaseManagementSidebar() throws Exception, IOException
+	{
+		FxCaseManagementController caseManagementSideBar = new FxCaseManagementController(getMainWindow());
+		caseManagementSideBar.setShellController(getStage().getShellController());
+		URL url = getBestFxmlLocation(caseManagementSideBar.getFxmlLocation());
+		FxmlLoaderWithController sidebarLoader = new FxmlLoaderWithController(caseManagementSideBar, url);
+		Node sideBarNode = (Node) sidebarLoader.load();
+		sideContentPane.getChildren().addAll(sideBarNode);
+	}
+
+	@FXML
+	private void onPreferences(ActionEvent event)
+	{
+		doAction(new ActionMenuPreferences(getMainWindow()));
+	}
+	
 	private String getStatusMessage(Boolean state)
 	{
 		MartusLocalization localization = getLocalization();
@@ -181,17 +120,6 @@ public class FxLandingShellController extends FxInSwingFrameController
 	{
 		boolean isOnline = getApp().getTransport().isOnline();
 		toolbarButtonOnline.setText(getStatusMessage(isOnline));
-	}
-
-	private void doAction(ActionDoer doer)
-	{
-		getStage().doAction(doer);
-	}
-	
-	@FXML
-	private void onPreferences(ActionEvent event)
-	{
-		doAction(new ActionMenuPreferences(getMainWindow()));
 	}
 
 	@FXML
@@ -307,100 +235,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 		}
 	}
 
-	private final class FolderNameChoiceBoxListener implements ChangeListener<ChoiceItem>
-	{
-		public FolderNameChoiceBoxListener()
-		{
-		}
 
-		@Override public void changed(ObservableValue<? extends ChoiceItem> observableValue, ChoiceItem originalItem, ChoiceItem newItem) 
-		{
-			updateFolderLabelFromCode(newItem.getCode());
-		}
-	}
-
-	
-	private final class FolderCustomNameListener implements ChangeListener<String>
-	{
-		public FolderCustomNameListener()
-		{
-		}
-
-		@Override public void changed(ObservableValue<? extends String> observableValue, String original, String newLabel) 
-		{
-			updateFolderLabelName(newLabel);
-		}
-	}
-
-	protected void updateFolderLabelName(String newLabel)
-	{
-		folderNameLabel.setText(newLabel);
-	}
-
-	protected void updateFolderLabelFromCode(String folderNameCode)
-	{
-		try
-		{
-			folderNameLabel.setText(folderManagement.getFolderLabel(folderNameCode));
-		} 
-		catch (FolderNotFoundException e)
-		{
-			logAndNotifyUnexpectedError(e);
-		}
-	}
-
-	
-	@FXML
-	public void onFolderSettingsClicked(MouseEvent mouseEvent) 
-	{
-		doAction(folderManagement);
-	}
-	
-	@FXML
-	public void onFolderNewClicked(MouseEvent mouseEvent) 
-	{
-		FxFolderCreateController createNewFolder = new FxFolderCreateController(getMainWindow());
-		createNewFolder.addFolderCreatedListener(new FolderCreatedListener());
-		doAction(createNewFolder);
-	}
-	
-	class CaseListChangeListener implements ChangeListener<CaseListItem>
-	{
-		@Override
-		public void changed(ObservableValue<? extends CaseListItem> observalue	,
-				CaseListItem previousCase, CaseListItem newCase)
-		{
-			updateCaseList();
-		}
-	}
-	
-	class FolderCreatedListener implements ChangeListener<String>
-	{
-		public void changed(ObservableValue<? extends String> observableValue, String oldFolderName, String newlyCreatedFoldersName)
-		{
-			updateCases(newlyCreatedFoldersName);
-		}		
-	}
-
-	@FXML
-	public void onFolderDeleteClicked(MouseEvent mouseEvent) 
-	{
-		CaseListItem folderItem = casesListView.getSelectionModel().getSelectedItem();
-		BulletinFolder folder = getApp().getStore().findFolder(folderItem.caseName);
-		FxFolderDeleteController deleteFolder = new FxFolderDeleteController(getMainWindow(), folder);
-		deleteFolder.addFolderDeletedListener(new FolderDeletedListener());
-		doAction(deleteFolder);
-	}
-	
-	class FolderDeletedListener implements ChangeListener<Boolean>
-	{
-		public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldFolderName, Boolean newlyCreatedFoldersName)
-		{
-			updateCasesSelectDefaultCase();
-		}		
-	}
-
-	private final int INVALID_INDEX = -1;
 	@FXML
 	private TextField searchText;
 	
@@ -411,18 +246,10 @@ public class FxLandingShellController extends FxInSwingFrameController
 	private Button toolbarButtonTor;
 	
 	@FXML
-	private AnchorPane mainContentPane;
+	private Pane sideContentPane;
 	
 	@FXML
-	private Button deleteFolderButton;
+	private Pane mainContentPane;
 	
-	@FXML
-	private ListView<CaseListItem> casesListView;
 	
-	@FXML
-	private Label folderNameLabel;
-
-	private String DEFAULT_SELECTED_CASE_NAME = ClientBulletinStore.SAVED_FOLDER;
-	private CaseListProvider caseListProvider;
-	private FxFolderSettingsController folderManagement;
 }
