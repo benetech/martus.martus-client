@@ -1871,7 +1871,7 @@ public class EnglishStrings
 "field:ChooseLanguage=Choose a Language",
 
 "folder:%OutBox=Unsent Bulletins",
-"folder:%Sent=Retrieved",
+"folder:%Sent=Sent",
 "folder:%Draft=Old Draft Bulletins",
 "folder:%Discarded=Discarded Bulletins",
 "folder:%RetrievedMyBulletin=Retrieved Bulletins",
