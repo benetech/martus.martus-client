@@ -51,7 +51,9 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	public FxCaseManagementController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		caseListProvider = new CaseListProvider();
+		caseListProviderAll = new CaseListProvider();
+		caseListProviderOpen = new CaseListProvider();
+		caseListProviderClosed = new CaseListProvider();
 		folderManagement = new FxFolderSettingsController(getMainWindow(), new FolderNameChoiceBoxListener(), new FolderCustomNameListener());
 	}
 
@@ -59,7 +61,11 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	public void initializeMainContentPane()
 	{
 		updateCasesSelectDefaultCase();
-		casesListViewAll.getSelectionModel().selectedItemProperty().addListener(new CaseListChangeListener());
+		CaseListChangeListener caseListChangeListener = new CaseListChangeListener();
+		casesListViewAll.getSelectionModel().selectedItemProperty().addListener(caseListChangeListener);
+		casesListViewOpen.getSelectionModel().selectedItemProperty().addListener(caseListChangeListener);
+		casesListViewClosed.getSelectionModel().selectedItemProperty().addListener(caseListChangeListener);
+		casesTabPane.getSelectionModel().selectedItemProperty().addListener(new caseTabeListener());
 	}
 
 	@Override
@@ -75,14 +81,38 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 
 	protected void updateCasesSelectDefaultCase()
 	{
+		setCurrentlyViewedCaseList(tabCaseAll);
 		casesTabPane.getSelectionModel().select(tabCaseAll);
 		updateCases(DEFAULT_SELECTED_CASE_NAME);
 	}
+	
+	protected void setCurrentlyViewedCaseList(Tab currentlyViewedCaseTab)
+	{
+		if(currentlyViewedCaseTab.equals(tabCaseOpen))
+		{
+			currentCasesListView = casesListViewOpen;
+			currentCaseListProvider = caseListProviderOpen;
+		}
+		else if (currentlyViewedCaseTab.equals(tabCaseClosed))
+		{
+			currentCasesListView = casesListViewClosed;
+			currentCaseListProvider = caseListProviderClosed;
+		}
+		else
+		{
+			currentCasesListView = casesListViewAll;
+			currentCaseListProvider = caseListProviderAll;
+		}
+		updateCaseList();
+	}
+
 
 	protected void updateCases(String caseNameToSelect)
 	{
 		updateFolderLabelFromCode(getApp().getConfigInfo().getFolderLabelCode());
-		caseListProvider.clear();
+		caseListProviderAll.clear();
+		caseListProviderOpen.clear();
+		caseListProviderClosed.clear();
 		Vector visibleFolders = getApp().getStore().getAllVisibleFolders();
 		MartusLocalization localization = getLocalization();
 		for(Iterator f = visibleFolders.iterator(); f.hasNext();)
@@ -93,9 +123,15 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 			if(folder.getName().equals(caseNameToSelect))
 				updateButtons(folder);
 			CaseListItem caseList = new CaseListItem(folder, localization);
-			caseListProvider.add(caseList);
+			caseListProviderAll.add(caseList);
+			if(folder.isClosed())
+				caseListProviderClosed.add(caseList);
+			else
+				caseListProviderOpen.add(caseList);
 		}
-		casesListViewAll.setItems(caseListProvider);
+		casesListViewAll.setItems(caseListProviderAll);
+		casesListViewOpen.setItems(caseListProviderOpen);
+		casesListViewClosed.setItems(caseListProviderClosed);
 		orderCases();
 		selectCase(caseNameToSelect);
 	}
@@ -116,10 +152,10 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	{
 		try
 		{
-			int selectedIndex = casesListViewAll.getSelectionModel().getSelectedIndex();
+			int selectedIndex = currentCasesListView.getSelectionModel().getSelectedIndex();
 			if(selectedIndex == INVALID_INDEX)
 				return;
-			CaseListItem selectedCase = caseListProvider.get(selectedIndex);
+			CaseListItem selectedCase = currentCaseListProvider.get(selectedIndex);
 			BulletinFolder folder = getApp().findFolder(selectedCase.getName());
 			updateButtons(folder);
 			
@@ -134,7 +170,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 
 	private void selectCase(String caseName)
 	{
-		for (Iterator iterator = caseListProvider.iterator(); iterator.hasNext();)
+		for (Iterator iterator = currentCaseListProvider.iterator(); iterator.hasNext();)
 		{
 			CaseListItem caseItem = (CaseListItem) iterator.next();
 			if(caseItem.caseName.equals(caseName))
@@ -147,8 +183,8 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 
 	private void selectCaseAndScrollInView(CaseListItem caseToSelect)
 	{
-		casesListViewAll.getSelectionModel().select(caseToSelect);
-		casesListViewAll.scrollTo(caseToSelect);
+		currentCasesListView.getSelectionModel().select(caseToSelect);
+		currentCasesListView.scrollTo(caseToSelect);
 	}
 
 	private void updateButtons(BulletinFolder folder)
@@ -176,6 +212,8 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	private void orderCases()
 	{
 		java.util.Collections.sort(casesListViewAll.getItems(), new CaseComparitor());		
+		java.util.Collections.sort(casesListViewOpen.getItems(), new CaseComparitor());		
+		java.util.Collections.sort(casesListViewClosed.getItems(), new CaseComparitor());		
 	}
 	
 	private final class CaseComparitor implements java.util.Comparator<CaseListItem>
@@ -191,8 +229,12 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		}
 	}
 
-	class CaseListChangeListener implements ChangeListener<CaseListItem>
+	private class CaseListChangeListener implements ChangeListener<CaseListItem>
 	{
+		public CaseListChangeListener()
+		{
+		}
+
 		@Override
 		public void changed(ObservableValue<? extends CaseListItem> observalue	,
 				CaseListItem previousCase, CaseListItem newCase)
@@ -201,8 +243,25 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		}
 	}
 	
-	class FolderCreatedListener implements ChangeListener<String>
+	private class caseTabeListener implements ChangeListener<Tab>
 	{
+		public caseTabeListener()
+		{
+		}
+
+		@Override
+		public void changed(ObservableValue<? extends Tab> observableValue, Tab previousTab, Tab currentTab)
+		{
+			setCurrentlyViewedCaseList(currentTab);
+		}
+	}
+	
+	private class FolderCreatedListener implements ChangeListener<String>
+	{
+		public FolderCreatedListener()
+		{
+		}
+
 		public void changed(ObservableValue<? extends String> observableValue, String oldFolderName, String newlyCreatedFoldersName)
 		{
 			updateCases(newlyCreatedFoldersName);
@@ -212,7 +271,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	@FXML
 	public void onFolderDeleteClicked(MouseEvent mouseEvent) 
 	{
-		CaseListItem folderItem = casesListViewAll.getSelectionModel().getSelectedItem();
+		CaseListItem folderItem = currentCasesListView.getSelectionModel().getSelectedItem();
 		BulletinFolder folder = getApp().getStore().findFolder(folderItem.caseName);
 		FxFolderDeleteController deleteFolder = new FxFolderDeleteController(getMainWindow(), folder);
 		deleteFolder.addFolderDeletedListener(new FolderDeletedListener());
@@ -301,7 +360,11 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	@FXML
 	private Button deleteFolderButton;
 
-	private CaseListProvider caseListProvider;
+	private CaseListProvider caseListProviderAll;
+	private CaseListProvider caseListProviderOpen;
+	private CaseListProvider caseListProviderClosed;
 	private FxFolderSettingsController folderManagement;
-
-}
+	
+	private ListView<CaseListItem> currentCasesListView;
+	private CaseListProvider currentCaseListProvider;
+	}
