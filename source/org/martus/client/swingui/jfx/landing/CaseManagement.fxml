@@ -35,7 +35,37 @@
               <Font size="18.0" />
            </font>
         </Label>
-		<ListView fx:id="casesListView" layoutX="7.0" layoutY="195.0" prefHeight="146.0" prefWidth="256.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="195.0" />
+      <TabPane fx:id="casesTabPane" layoutY="194.0" prefHeight="159.0" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tabCaseOpen" text="%Button.CaseOpen">
+            <content>
+            		<Pane>
+                     <children>
+                  		<ListView fx:id="casesListViewOpen" prefHeight="128.0" prefWidth="300.0" />
+                     </children>
+            		</Pane>
+            </content>
+          </Tab>
+          <Tab fx:id="tabCaseAll" text="%Button.CaseAll">
+            <content>
+            		<Pane>
+                     <children>
+                  		<ListView fx:id="casesListViewAll" prefHeight="128.0" prefWidth="300.0"/>
+                     </children>
+            		</Pane>
+            </content>
+          </Tab>
+            <Tab fx:id="TabCaseClosed" text="%Button.CaseClosed">
+              <content>
+       				<Pane>
+                          <children>
+                  		<ListView fx:id="casesListViewClosed" prefHeight="128.0" prefWidth="300.0" />
+                     </children>
+            		</Pane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
 		<HBox layoutY="353.0">
 		   <children>
 		       <Button mnemonicParsing="false" onMouseClicked="#onFolderNewClicked" text="+" />

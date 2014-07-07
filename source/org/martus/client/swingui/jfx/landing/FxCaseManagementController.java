@@ -34,6 +34,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 
 import org.martus.client.bulletinstore.BulletinFolder;
@@ -57,7 +59,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	public void initializeMainContentPane()
 	{
 		updateCasesSelectDefaultCase();
-		casesListView.getSelectionModel().selectedItemProperty().addListener(new CaseListChangeListener());
+		casesListViewAll.getSelectionModel().selectedItemProperty().addListener(new CaseListChangeListener());
 	}
 
 	@Override
@@ -73,6 +75,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 
 	protected void updateCasesSelectDefaultCase()
 	{
+		casesTabPane.getSelectionModel().select(tabCaseAll);
 		updateCases(DEFAULT_SELECTED_CASE_NAME);
 	}
 
@@ -92,7 +95,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 			CaseListItem caseList = new CaseListItem(folder, localization);
 			caseListProvider.add(caseList);
 		}
-		casesListView.setItems(caseListProvider);
+		casesListViewAll.setItems(caseListProvider);
 		orderCases();
 		selectCase(caseNameToSelect);
 	}
@@ -113,7 +116,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	{
 		try
 		{
-			int selectedIndex = casesListView.getSelectionModel().getSelectedIndex();
+			int selectedIndex = casesListViewAll.getSelectionModel().getSelectedIndex();
 			if(selectedIndex == INVALID_INDEX)
 				return;
 			CaseListItem selectedCase = caseListProvider.get(selectedIndex);
@@ -144,8 +147,8 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 
 	private void selectCaseAndScrollInView(CaseListItem caseToSelect)
 	{
-		casesListView.getSelectionModel().select(caseToSelect);
-		casesListView.scrollTo(caseToSelect);
+		casesListViewAll.getSelectionModel().select(caseToSelect);
+		casesListViewAll.scrollTo(caseToSelect);
 	}
 
 	private void updateButtons(BulletinFolder folder)
@@ -172,7 +175,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	
 	private void orderCases()
 	{
-		java.util.Collections.sort(casesListView.getItems(), new CaseComparitor());		
+		java.util.Collections.sort(casesListViewAll.getItems(), new CaseComparitor());		
 	}
 	
 	private final class CaseComparitor implements java.util.Comparator<CaseListItem>
@@ -209,7 +212,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	@FXML
 	public void onFolderDeleteClicked(MouseEvent mouseEvent) 
 	{
-		CaseListItem folderItem = casesListView.getSelectionModel().getSelectedItem();
+		CaseListItem folderItem = casesListViewAll.getSelectionModel().getSelectedItem();
 		BulletinFolder folder = getApp().getStore().findFolder(folderItem.caseName);
 		FxFolderDeleteController deleteFolder = new FxFolderDeleteController(getMainWindow(), folder);
 		deleteFolder.addFolderDeletedListener(new FolderDeletedListener());
@@ -271,8 +274,27 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	private String DEFAULT_SELECTED_CASE_NAME = ClientBulletinStore.SAVED_FOLDER;
 
 	@FXML
-	private ListView<CaseListItem> casesListView;
+	private ListView<CaseListItem> casesListViewAll;
 	
+	@FXML
+	private ListView<CaseListItem> casesListViewOpen;
+
+	@FXML
+	private ListView<CaseListItem> casesListViewClosed;
+	
+	@FXML
+	private TabPane casesTabPane;
+	
+	@FXML
+	private Tab tabCaseAll;
+	
+	@FXML
+	private Tab tabCaseOpen;
+
+	@FXML
+	private Tab tabCaseClosed;
+
+
 	@FXML
 	private Label folderNameLabel;
 
