@@ -85,6 +85,8 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		for(Iterator f = visibleFolders.iterator(); f.hasNext();)
 		{
 			BulletinFolder folder = (BulletinFolder) f.next();
+			if(shouldNotShowFolder(folder))
+				continue;
 			if(folder.getName().equals(caseNameToSelect))
 				updateButtons(folder);
 			CaseListItem caseList = new CaseListItem(folder, localization);
@@ -93,6 +95,19 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		casesListView.setItems(caseListProvider);
 		selectCase(caseNameToSelect);
 	}
+	
+	private boolean shouldNotShowFolder(BulletinFolder folder)
+	{
+		ClientBulletinStore store = getApp().getStore();
+		String searchFolder = store.getSearchFolderName();
+		if(folder.getName().equals(searchFolder))
+			return true;
+		BulletinFolder discarded = store.getFolderDiscarded();
+		if(folder.equals(discarded))
+			return true;
+		return false;
+	}
+	
 	protected void updateCaseList()
 	{
 		try
