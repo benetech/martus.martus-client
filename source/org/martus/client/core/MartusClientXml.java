@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.core;
 
+import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.common.MartusXml;
 
 public class MartusClientXml
@@ -41,12 +42,14 @@ public class MartusClientXml
 		return MartusXml.getTagEnd(MartusClientXml.tagFolderList);
 	}
 
-	public static String getFolderTagStart(String name)
+	public static String getFolderTagStart(BulletinFolder folder)
 	{
+		String attributeNames[] = {MartusClientXml.attrFolderName, MartusClientXml.attrFolderClosed};
+		String attributeValues[] = { folder.getName(), Boolean.toString(folder.isClosed())};
 		return MartusXml.getTagStart(
 			MartusClientXml.tagFolder,
-			MartusClientXml.attrFolder,
-			name);
+			attributeNames,
+			attributeValues);
 	}
 
 	public static String getFolderTagEnd()
@@ -59,7 +62,8 @@ public class MartusClientXml
 	public final static String tagFolderList = "FolderList";
 
 	public final static String tagFolder = "Folder";
-	public final static String attrFolder = "name";
+	public final static String attrFolderName = "name";
+	public final static String attrFolderClosed = "closed";
 
 	public final static String tagId = "Id";
 }

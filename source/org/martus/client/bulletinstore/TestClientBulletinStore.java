@@ -1164,13 +1164,13 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
 		BulletinFolder folder = testStore.createFolder("Test");
 		String xml = testStore.folderToXml(folder);
-		assertEquals(MartusClientXml.getFolderTagStart("Test") + MartusClientXml.getFolderTagEnd(), xml);
+		assertEquals(MartusClientXml.getFolderTagStart(folder) + MartusClientXml.getFolderTagEnd(), xml);
 
 		Bulletin b = testStore.createEmptyBulletin();
 		testStore.saveBulletin(b);
 		folder.add(b);
 		xml = testStore.folderToXml(folder);
-		assertStartsWith(MartusClientXml.getFolderTagStart("Test"), xml);
+		assertStartsWith(MartusClientXml.getFolderTagStart(folder), xml);
 		assertContains(MartusXml.getIdTag(folder.getBulletinSorted(0).getUniversalIdString()), xml);
 		assertEndsWith(MartusClientXml.getFolderTagEnd(), xml);
 
@@ -1227,12 +1227,23 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		TRACE("testLoadXmlFolders");
 
 		int count = testStore.getFolderCount();
-		String xml = "<FolderList><Folder name='one'></Folder><Folder name='two'></Folder></FolderList>";
+		String xml = "<FolderList><Folder name='closed' closed='true'></Folder><Folder name='open' closed='false'></Folder><Folder name='noOpenCloseStatus'></Folder></FolderList>";
 		testStore.internalLoadFolders(xml);
-		assertEquals(count+2, testStore.getFolderCount());
-		assertNotNull("Folder one must exist", testStore.findFolder("one"));
-		assertNotNull("Folder two must exist", testStore.findFolder("two"));
-		assertNull("Folder three must not exist", testStore.findFolder("three"));
+		assertEquals(count+3, testStore.getFolderCount());
+		
+		BulletinFolder noOpenCloseStatus = testStore.findFolder("noOpenCloseStatus");
+		assertNotNull("Folder 'noOpenCloseStatus' must exist", noOpenCloseStatus);
+		assertTrue("Folder not open?", noOpenCloseStatus.isOpen());
+
+		BulletinFolder openFolder = testStore.findFolder("open");
+		assertNotNull("Folder 'open' must exist", openFolder);
+		assertTrue("Folder not open?", openFolder.isOpen());	
+		
+		BulletinFolder closedFolder = testStore.findFolder("closed");
+		assertNotNull("Folder 'closed' must exist", closedFolder);
+		assertTrue("Folder not closed?", closedFolder.isClosed());
+				
+		assertNull("Folder 'someNonExistentFolder' must not exist", testStore.findFolder("someNonExistentFolder"));
 	}
 
 	public void testLoadXmlLegacyFolders() throws Exception

@@ -96,6 +96,28 @@ public class TestBulletinFolder extends TestCaseEnhanced
 		folder.setName("Different");
 		assertEquals("Boring", folder.getName());
 	}
+	
+	public void testOpenClosed() throws Exception
+	{
+		ClientBulletinStore store = new MockBulletinStore();
+
+		final String name = "a New folder name";
+		BulletinFolder folder = store.createFolder(name);
+		assertTrue("New Folder should be open", folder.isOpen());
+		assertFalse("New Folder should not be closed", folder.isClosed());
+		folder.setClosed();
+		assertFalse("A closed Folder should not be open", folder.isOpen());
+		assertTrue("A closed Folder should be closed", folder.isClosed());
+		folder.setOpen();
+		assertTrue("A reopened Folder should be open", folder.isOpen());
+		assertFalse("A reopened Folder should not be closed", folder.isClosed());
+		folder.setClosed();
+
+		store.saveFolders();
+		store.loadFolders();
+		BulletinFolder savedFolder = store.findFolder(name);
+		assertTrue("reloaded closed Folder not closed initially?", savedFolder.isClosed());
+	}
 
 	public void testCanDelete() throws Exception
 	{
