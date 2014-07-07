@@ -1864,6 +1864,9 @@ public class EnglishStrings
 "wintitle:notifyUnableToCreateFolder=Error Creating Folder",
 "field:notifyErrorDeletingFoldercause=Unable to delete Folder.",
 "wintitle:notifyErrorDeletingFolder=Error Deleting Folder",
+"button:CaseOpen=Open",
+"button:CaseAll=All",
+"button:CaseClosed=Closed",
 
 "field:ChooseLanguage=Choose a Language",
 
