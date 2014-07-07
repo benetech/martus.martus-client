@@ -93,6 +93,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 			caseListProvider.add(caseList);
 		}
 		casesListView.setItems(caseListProvider);
+		orderCases();
 		selectCase(caseNameToSelect);
 	}
 	
@@ -169,6 +170,24 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		doAction(createNewFolder);
 	}
 	
+	private void orderCases()
+	{
+		java.util.Collections.sort(casesListView.getItems(), new CaseComparitor());		
+	}
+	
+	private final class CaseComparitor implements java.util.Comparator<CaseListItem>
+	{
+		public CaseComparitor()
+		{
+		}
+
+		@Override
+		public int compare(CaseListItem case1, CaseListItem case2) 
+		{
+			return case1.getNameLocalized().compareToIgnoreCase(case2.getNameLocalized());
+		}
+	}
+
 	class CaseListChangeListener implements ChangeListener<CaseListItem>
 	{
 		@Override
