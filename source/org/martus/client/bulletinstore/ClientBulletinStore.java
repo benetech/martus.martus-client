@@ -1194,7 +1194,7 @@ public class ClientBulletinStore extends BulletinStore
 	public synchronized String folderToXml(BulletinFolder folder)
 	{
 		StringBuffer xml = new StringBuffer();
-		xml.append(MartusClientXml.getFolderTagStart(folder.getName()));
+		xml.append(MartusClientXml.getFolderTagStart(folder));
 		Set unsortedBulletinList = folder.getAllUniversalIdsUnsorted();
 		for(Iterator iter = unsortedBulletinList.iterator(); iter.hasNext();)
 		{
@@ -1278,12 +1278,15 @@ public class ClientBulletinStore extends BulletinStore
 		
 		public void startDocument(Attributes attrs)
 		{
-			String name = attrs.getValue(MartusClientXml.attrFolder);
+			String name = attrs.getValue(MartusClientXml.attrFolderName);
 			String convertedName = convertLegacyFolder(name);
 			if(!convertedName.equals(name))
 				store.setNeedsLegacyFolderConversion();
 					
 			folder = store.createOrFindFolder(convertedName);
+			String closedStatus = attrs.getValue(MartusClientXml.attrFolderClosed);
+			if(closedStatus != null && closedStatus.equals(Boolean.toString(true)))
+				folder.setClosed();
 		}
 
 		public SimpleXmlDefaultLoader startElement(String tag)

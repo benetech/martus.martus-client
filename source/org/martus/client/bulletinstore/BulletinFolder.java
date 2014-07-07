@@ -214,7 +214,27 @@ public class BulletinFolder
 		needSortedIdList();
 		return sortedIdList.indexOf(id);
 	}
+	
+	public boolean isClosed()
+	{
+		return isClosed;
+	}
+	
+	public boolean isOpen()
+	{
+		return !isClosed;
+	}
+	
+	public void setClosed()
+	{
+		isClosed = true;
+	}
 
+	public void setOpen()
+	{
+		isClosed = false;
+	}
+	
 	public static boolean isNameVisible(String folderName)
 	{
 		return !folderName.startsWith("*");
@@ -305,4 +325,6 @@ public class BulletinFolder
 	private boolean canDelete = true;
 	private String sortTag = "eventdate";
 	private int sortDir = ASCENDING;
+	
+	private boolean isClosed;
 }
