@@ -59,7 +59,6 @@ import org.martus.common.FieldCollection;
 import org.martus.common.FieldDeskKeys;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKeys;
-import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.BulletinFieldSpecs;
