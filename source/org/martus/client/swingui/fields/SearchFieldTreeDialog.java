@@ -37,7 +37,6 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.event.TreeSelectionEvent;
 
-import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.search.FieldValuesLoader;
 import org.martus.client.search.SaneCollator;
 import org.martus.client.swingui.MartusLocalization;
@@ -233,11 +232,6 @@ public class SearchFieldTreeDialog extends FieldTreeDialog
 		public synchronized HashSet getLoadedValues()
 		{
 			return loadedValues;
-		}
-
-		private ClientBulletinStore getStore()
-		{
-			return mainWindow.getApp().getStore();
 		}
 
 		private UiMainWindow mainWindow;
