@@ -954,6 +954,7 @@ public class ClientBulletinStore extends BulletinStore
 			byte[] bytes = xml.getBytes("UTF-8");
 			ByteArrayInputStream in = new ByteArrayInputStream(bytes);
 
+			getFoldersFile().getParentFile().mkdirs();
 			FileOutputStream out = new FileOutputStream(getFoldersFile());
 			try
 			{
