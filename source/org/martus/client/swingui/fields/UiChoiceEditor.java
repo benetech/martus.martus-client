@@ -93,7 +93,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 				choiceText = choiceItem.toString();
 
 			String displayString = choiceText + spaceSoValueWontBeHiddenIfEmpty;
-			displayString  = fontHelper.getDisplayable(displayString);
+			displayString  = getFontHelper().getDisplayable(displayString);
 			Component cellRenderer = super.getListCellRendererComponent(list, displayString, index, isSelected,
 					cellHasFocus);
 			cellRenderer.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
@@ -303,6 +303,11 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	public JComponent[] getFocusableComponents()
 	{
 		return (JComponent[])comboBoxes.toArray(new JComponent[0]);
+	}
+	
+	UiFontEncodingHelper getFontHelper()
+	{
+		return fontHelper;
 	}
 
 	public void setActions(EnterAction enterActionToUse, SpaceAction spaceActionToUse, TabAction tabActionToUse, ShiftTabAction shiftTabActionToUse)
