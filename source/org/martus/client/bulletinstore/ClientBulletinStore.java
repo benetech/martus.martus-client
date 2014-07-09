@@ -955,10 +955,16 @@ public class ClientBulletinStore extends BulletinStore
 			ByteArrayInputStream in = new ByteArrayInputStream(bytes);
 
 			FileOutputStream out = new FileOutputStream(getFoldersFile());
-			if(getSignatureGenerator() == null)
-				return;
-			getSignatureGenerator().encrypt(in, out);
-			out.close();
+			try
+			{
+				if(getSignatureGenerator() == null)
+					return;
+				getSignatureGenerator().encrypt(in, out);
+			}
+			finally
+			{
+				out.close();
+			}
 		}
 		catch(UnsupportedEncodingException e)
 		{
