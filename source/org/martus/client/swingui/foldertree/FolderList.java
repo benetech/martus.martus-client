@@ -39,19 +39,19 @@ public class FolderList extends DefaultTreeModel
 	{
 		super(new FolderTreeNode("?", localizationToUse));
 		localization = localizationToUse;
-		root = (FolderTreeNode)getRoot();
+		rootAsFolderTreeNode = (FolderTreeNode)getRoot();
 	}
 
 	public int getCount()
 	{
-		return root.getChildCount();
+		return rootAsFolderTreeNode.getChildCount();
 	}
 
 	public void loadFolders(ClientBulletinStore store)
 	{
 		while(getCount() > 0)
 		{
-			FolderTreeNode item = (FolderTreeNode)getChild(root, 0);
+			FolderTreeNode item = (FolderTreeNode)getChild(rootAsFolderTreeNode, 0);
 			removeNodeFromParent(item);
 		}
 
@@ -61,7 +61,7 @@ public class FolderList extends DefaultTreeModel
 		{
 			String folderName = (String)visibleFolderNames.get(f);
 			FolderTreeNode item = new FolderTreeNode(folderName, localization);
-			insertNodeInto(item, root, getCount());
+			insertNodeInto(item, rootAsFolderTreeNode, getCount());
 		}
 	}
 
@@ -73,7 +73,7 @@ public class FolderList extends DefaultTreeModel
 
 	public FolderTreeNode getNode(int index)
 	{
-		return (FolderTreeNode)getChild(root, index);
+		return (FolderTreeNode)getChild(rootAsFolderTreeNode, index);
 	}
 
 	public FolderTreeNode findFolderByInternalName(String folderName)
@@ -88,6 +88,6 @@ public class FolderList extends DefaultTreeModel
 	}
 
 
-	FolderTreeNode root;
-	UiLocalization localization;
+	private FolderTreeNode rootAsFolderTreeNode;
+	private UiLocalization localization;
 }
