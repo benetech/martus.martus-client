@@ -34,7 +34,6 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WorkerProgressThread;
 import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
-import org.martus.common.MartusLogger;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.bulletin.Bulletin;
 
