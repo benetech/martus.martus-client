@@ -860,7 +860,16 @@ public class MartusApp
 			return;
 		}
 		
-		store.doAfterSigninInitialization(dataDirectory, database);
+		try
+		{
+			store.doAfterSigninInitialization(dataDirectory, database);
+		}
+		catch(Exception e)
+		{
+			MartusLogger.logException(e);
+			throw new MartusAppInitializationException("Error initializing store");
+		}
+		
 		try
 		{
 			orchidStore.loadStore(getOrchidCacheFile(), getSecurity());
