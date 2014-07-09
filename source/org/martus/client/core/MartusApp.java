@@ -864,6 +864,18 @@ public class MartusApp
 		{
 			store.doAfterSigninInitialization(dataDirectory, database);
 		}
+		catch(FileVerificationException e)
+		{
+			throw(e);
+		}
+		catch(MissingAccountMapException e)
+		{
+			throw(e);
+		}
+		catch(MissingAccountMapSignatureException e)
+		{
+			throw(e);
+		}
 		catch(Exception e)
 		{
 			MartusLogger.logException(e);
