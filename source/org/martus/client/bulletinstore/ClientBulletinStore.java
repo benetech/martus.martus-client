@@ -50,7 +50,6 @@ import org.martus.common.BulletinSummary;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
-import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusXml;
 import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.bulletin.Bulletin;
@@ -63,8 +62,6 @@ import org.martus.common.database.ClientFileDatabase;
 import org.martus.common.database.Database;
 import org.martus.common.database.Database.RecordHiddenException;
 import org.martus.common.database.DatabaseKey;
-import org.martus.common.database.FileDatabase.MissingAccountMapException;
-import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHeaderPacket;
@@ -100,7 +97,7 @@ public class ClientBulletinStore extends BulletinStore
 		bulletinDataCache = new PartialBulletinCache(getTagsOfCachedFields());
 	}
 	
-	public void doAfterSigninInitialization(File dataRootDirectory) throws FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
+	public void doAfterSigninInitialization(File dataRootDirectory) throws Exception
 	{
 		Database db = createDatabase(dataRootDirectory);
 		doAfterSigninInitialization(dataRootDirectory, db);
@@ -113,7 +110,7 @@ public class ClientBulletinStore extends BulletinStore
 		return db;
 	}
 
-	public void doAfterSigninInitialization(File dataRootDirectory, Database db) throws FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
+	public void doAfterSigninInitialization(File dataRootDirectory, Database db) throws Exception
 	{
 		super.doAfterSigninInitialization(dataRootDirectory, db);
 		
