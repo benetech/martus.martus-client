@@ -249,7 +249,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			}
 		}
 
-	private void determineStateOfZawgyiCheckbox(String languageCode)
+	void determineStateOfZawgyiCheckbox(String languageCode)
 	{
 		if (languageCode.equals(MtfAwareLocalization.BURMESE))
 		{
