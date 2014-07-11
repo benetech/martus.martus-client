@@ -1143,7 +1143,11 @@ public class ClientBulletinStore extends BulletinStore
 					}
 					catch (RecordHiddenException shouldNeverHappen)
 					{
-						shouldNeverHappen.printStackTrace();
+						MartusLogger.logException(shouldNeverHappen);
+					}
+					catch(Exception e2)
+					{
+						MartusLogger.logException(e2);
 					}
 				}
 			}
