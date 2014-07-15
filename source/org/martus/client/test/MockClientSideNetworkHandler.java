@@ -161,6 +161,12 @@ public class MockClientSideNetworkHandler implements ClientSideNetworkInterface
 		return fixedParameters;
 	}
 
+	@Override
+	public Vector listAvailableRevisionsSince(String myAccountId, Vector parameters, String signature)
+	{
+		return server.listAvailableRevisionsSince(myAccountId, parameters, signature);
+	}
+
 	private ServerSideNetworkInterface server;
 
 }
