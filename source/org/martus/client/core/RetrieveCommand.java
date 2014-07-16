@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.core;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -63,7 +64,7 @@ public class RetrieveCommand
 		this(NO_FOLDER, new Vector());
 	}
 	
-	public RetrieveCommand(String destinationFolderName, Vector uidsToRetrieve)
+	public RetrieveCommand(String destinationFolderName, Collection uidsToRetrieve)
 	{
 		folderName = destinationFolderName;
 		uidsRemainingToRetrieve = new Vector();
