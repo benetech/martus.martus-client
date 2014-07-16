@@ -2672,7 +2672,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public static final int MAX_KEYPAIRFILE_SIZE = 32000;
 	private static final int BACKGROUND_UPLOAD_CHECK_MILLIS = 5*1000;
 	private static final int BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS = 5*1000;
-	private static final int TIME_BETWEEN_FIELD_OFFICE_CHECKS_SECONDS = 60 * 60;
+	private static final int TIME_BETWEEN_FIELD_OFFICE_CHECKS_SECONDS = 60;
 
 	private UiSession session;
 
