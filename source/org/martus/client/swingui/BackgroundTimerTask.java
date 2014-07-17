@@ -38,11 +38,11 @@ import javax.swing.SwingUtilities;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.core.BackgroundRetriever;
-import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
-import org.martus.client.core.RetrieveCommand;
+import org.martus.client.network.BackgroundRetriever;
+import org.martus.client.network.BackgroundUploader;
+import org.martus.client.network.RetrieveCommand;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.BulletinSummary;
 import org.martus.common.BulletinSummary.WrongValueCount;

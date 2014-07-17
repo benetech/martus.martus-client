@@ -31,8 +31,8 @@ import java.util.Vector;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
-import org.martus.client.core.BackgroundRetriever;
-import org.martus.client.core.RetrieveCommand;
+import org.martus.client.network.BackgroundRetriever;
+import org.martus.client.network.RetrieveCommand;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.crypto.MartusCrypto;
