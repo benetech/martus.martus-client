@@ -29,7 +29,6 @@ package org.martus.client.swingui;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.TimerTask;
 import java.util.Vector;
@@ -42,7 +41,7 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.network.BackgroundRetriever;
 import org.martus.client.network.BackgroundUploader;
-import org.martus.client.network.RetrieveCommand;
+import org.martus.client.network.SyncBulletinRetriever;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.BulletinSummary;
 import org.martus.common.BulletinSummary.WrongValueCount;
@@ -54,13 +53,10 @@ import org.martus.common.MartusLogger;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.database.DatabaseKey;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
-import org.martus.common.network.ShortServerBulletinSummary;
 import org.martus.common.network.SummaryOfAvailableBulletins;
 import org.martus.common.packet.UniversalId;
-import org.martus.common.utilities.DateUtilities;
 import org.miradi.utils.EnhancedJsonObject;
 
 class BackgroundTimerTask extends TimerTask
@@ -72,6 +68,7 @@ class BackgroundTimerTask extends TimerTask
 		ProgressMeterInterface progressMeter = getProgressMeter();
 		uploader = new BackgroundUploader(getApp(), progressMeter);
 		retriever = new BackgroundRetriever(getApp(), progressMeter);
+		syncRetriever = new SyncBulletinRetriever();
 		if(mainWindow.isServerConfigured() && getApp().getTransport().isOnline())
 			setWaitingForServer();
 	}
@@ -256,17 +253,23 @@ class BackgroundTimerTask extends TimerTask
 	
 	private void checkForNewFieldOfficeBulletins()
 	{
+		if(syncRetriever.hadException())
+		{
+			// NOTE: Disable sync for the rest of this session
+			nextCheckForFieldOfficeBulletins = Long.MAX_VALUE;
+
+			// FIXME: Need to let user know syncing is disabled
+			Exception e = syncRetriever.getAndClearException();
+			mainWindow.unexpectedErrorDlg(e);
+		}
 		if(!getApp().getConfigInfo().getCheckForFieldOfficeBulletins())
 			return;
 		if(System.currentTimeMillis() < nextCheckForFieldOfficeBulletins)
 			return;
 		if(!isServerAvailable())
 			return;
-		if(retriever.hasWorkToDo())
+		if(syncRetriever.isBusy())
 			return;
-		
-		if(nextTimestampToAskForAvailableBulletins== null)
-			nextTimestampToAskForAvailableBulletins = "";
 		
 		checkingForNewFieldOfficeBulletins = true;
 		boolean foundNew = false;
@@ -275,30 +278,21 @@ class BackgroundTimerTask extends TimerTask
 			mainWindow.setStatusMessageTag("statusCheckingForNewFieldOfficeBulletins");
 			ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();
 			MartusCrypto security = getApp().getSecurity();
+			String nextTimestampToAskForAvailableBulletins = syncRetriever.getNextTimestampToAskForAvailableBulletins();
 			NetworkResponse response = gateway.listAvailableRevisionsSince(security, nextTimestampToAskForAvailableBulletins);
-			if(response.getResultCode().equals(NetworkInterfaceConstants.OK))
-			{
-				String resultJson = (String) response.getResultVector().get(0);
-				EnhancedJsonObject json = new EnhancedJsonObject(resultJson);
-				SummaryOfAvailableBulletins summary = new SummaryOfAvailableBulletins(json);
-				Set<UniversalId> uidsToRetrieve = getUidsWeShouldDownload(summary);
-				foundNew = (uidsToRetrieve.size() > 0);
-				MartusLogger.log("Found " + summary.size() + " new bulletins of which we want " + uidsToRetrieve.size());
-				RetrieveCommand command = new RetrieveCommand(ClientBulletinStore.RETRIEVED_FOLDER, uidsToRetrieve);
-				getApp().startBackgroundRetrieve(command);
-				mainWindow.setStatusMessageTag(UiMainWindow.STATUS_RETRIEVING);
-
-				if(!foundNew)
-					nextTimestampToAskForAvailableBulletins = summary.getNextServerTimestamp();
-			}
-			else
+			if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
 			{
 				throw new ServerNotAvailableException();
 			}
+
+			String resultJson = (String) response.getResultVector().get(0);
+			EnhancedJsonObject json = new EnhancedJsonObject(resultJson);
+			SummaryOfAvailableBulletins summary = new SummaryOfAvailableBulletins(json);
+			syncRetriever.startRetrieve(getApp(), summary);
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
+			mainWindow.unexpectedErrorDlg(e);
 		}
 		finally
 		{
@@ -313,61 +307,6 @@ class BackgroundTimerTask extends TimerTask
 			mainWindow.setStatusMessageReady();
 	}
 	
-	private Set<UniversalId> getUidsWeShouldDownload(SummaryOfAvailableBulletins availableBulletins) throws Exception
-	{
-		Set<UniversalId> uids = new HashSet<UniversalId>();
-		Iterator<String> accountsIterator = availableBulletins.getAccountIds().iterator();
-		while(accountsIterator.hasNext())
-		{
-			String accountId = accountsIterator.next();
-			Set<UniversalId> uidsForAccount = getUidsWeShouldDownload(availableBulletins, accountId);
-			uids.addAll(uidsForAccount);
-		}
-		
-		return uids;
-	}
-
-	public Set<UniversalId> getUidsWeShouldDownload(SummaryOfAvailableBulletins availableBulletins, String accountId) throws Exception
-	{
-		Set<UniversalId> uidsForAccount = new HashSet<UniversalId>();
-		Iterator<ShortServerBulletinSummary> bulletinIterator = availableBulletins.getSummaries(accountId).iterator();
-		while(bulletinIterator.hasNext())
-		{
-			ShortServerBulletinSummary bulletinSummary = bulletinIterator.next();
-			if(shouldDownload(accountId, bulletinSummary))
-			{
-				UniversalId uid = UniversalId.createFromAccountAndLocalId(accountId, bulletinSummary.getLocalId());
-				uidsForAccount.add(uid);
-			}
-		}
-		return uidsForAccount;
-	}
-
-	private boolean shouldDownload(String accountId, ShortServerBulletinSummary summary) throws Exception
-	{
-		UniversalId uid = UniversalId.createFromAccountAndLocalId(accountId, summary.getLocalId());
-		DatabaseKey key = DatabaseKey.createLegacyKey(uid);
-		if(!getStore().doesBulletinRevisionExist(key))
-			return true;
-
-		String lastModifiedIsoDateTime = summary.getLastModified();
-		long serverLastModified = DateUtilities.parseIsoDateTime(lastModifiedIsoDateTime).getTime();
-		Bulletin localBulletin = getStore().getBulletinRevision(uid);
-		long localLastModified = localBulletin.getLastSavedTime();
-		
-		String myAccountId = getApp().getSecurity().getPublicKeyString();
-		boolean isMyBulletin = (myAccountId.equals(accountId));
-		boolean serverCopyIsNewer = serverLastModified > localLastModified;
-		if(serverCopyIsNewer)
-			return true;
-		
-		boolean serverCopyIsOlder = serverLastModified < localLastModified;
-		if(!isMyBulletin && serverCopyIsOlder)
-			return true;
-		
-		return false;
-	}
-
 	private void getUpdatedListOfBulletinsOnServer()
 	{
 		if(gotUpdatedOnServerUids)
@@ -723,11 +662,10 @@ class BackgroundTimerTask extends TimerTask
 	
 	private static final long IN_A_FEW_MINUTES_IN_MILLIS = 10 * 60 * 1000;
 	
-	private static String nextTimestampToAskForAvailableBulletins;
-
 	UiMainWindow mainWindow;
 	BackgroundUploader uploader;
 	BackgroundRetriever retriever;
+	private SyncBulletinRetriever syncRetriever;
 	private UiStatusBar statusBar;
 	
 	long nextCheckForFieldOfficeBulletins;
