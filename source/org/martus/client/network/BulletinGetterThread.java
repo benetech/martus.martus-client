@@ -23,15 +23,16 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui;
+package org.martus.client.network;
 
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.swingui.WorkerThread;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
-class BulletinGetterThread extends WorkerThread
+public class BulletinGetterThread extends WorkerThread
 {
 	public BulletinGetterThread(ClientBulletinStore storeToUse, UniversalId[] uidsToGet)
 	{

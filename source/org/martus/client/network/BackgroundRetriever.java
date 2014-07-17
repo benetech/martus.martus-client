@@ -24,8 +24,9 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.core;
+package org.martus.client.network;
 
+import org.martus.client.core.MartusApp;
 import org.martus.common.ProgressMeterInterface;
 
 public class BackgroundRetriever

@@ -59,6 +59,7 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.network.RetrieveCommand;
 import org.martus.client.reports.ReportFormatFilter;
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchTreeNode;
@@ -2031,7 +2032,7 @@ public class MartusApp
 		throw new ServerCallFailedException();
 	}
 
-	void moveBulletinToDamaged(BulletinFolder outbox, UniversalId uid)
+	public void moveBulletinToDamaged(BulletinFolder outbox, UniversalId uid)
 	{
 		System.out.println("Moving bulletin to damaged");
 		BulletinFolder damaged = createOrFindFolder(store.getNameOfFolderDamaged());

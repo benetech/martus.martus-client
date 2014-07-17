@@ -24,7 +24,7 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.core;
+package org.martus.client.network;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,6 +35,7 @@ import java.util.Vector;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.core.MartusApp;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;

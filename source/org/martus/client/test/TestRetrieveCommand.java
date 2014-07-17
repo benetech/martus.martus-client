@@ -30,7 +30,7 @@ import java.util.NoSuchElementException;
 import java.util.Vector;
 
 import org.json.JSONObject;
-import org.martus.client.core.RetrieveCommand;
+import org.martus.client.network.RetrieveCommand;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.test.UniversalIdForTesting;
 import org.martus.util.TestCaseEnhanced;
