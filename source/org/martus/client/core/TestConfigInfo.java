@@ -53,11 +53,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 
 	public void testBasics()
 	{
+		assertEquals(24, ConfigInfo.VERSION);
+
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 		
-		assertEquals(23, ConfigInfo.VERSION);
-
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
 	
@@ -73,9 +73,17 @@ public class TestConfigInfo extends TestCaseEnhanced
 	{
 		for(short version = 1; version <= ConfigInfo.VERSION; ++version)
 		{
-			byte[] data = createFileWithSampleData(version);
-			ByteArrayInputStream inputStream = new ByteArrayInputStream(data);
-			verifyLoadSpecificVersion(inputStream, version);
+			try
+			{
+				byte[] data = createFileWithSampleData(version);
+				ByteArrayInputStream inputStream = new ByteArrayInputStream(data);
+				verifyLoadSpecificVersion(inputStream, version);
+			} 
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				fail("Exception loading version " + version + ": " + e.getMessage());
+			}
 		}
 	}
 
@@ -336,6 +344,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setIsNetworkOnline(sampleIsNetworkOnline);
 		info.setFolderLabelCode(sampleFolderLabelCode);
 		info.setFolderLabelCustomName(sampleFolderLabelCustomName);
+		info.setSyncStatusJson(sampleSyncStatusJson);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -370,6 +379,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getCurrentFormTemplateDescription());
 		assertEquals(label + ": sampleFolderLabelIndex", "", info.getFolderLabelCode());
 		assertEquals(label + ": sampleFolderLabelCustomName", "", info.getFolderLabelCustomName());
+		assertEquals(label + ": sampleSyncStatusJson", "", info.getSyncStatusJson());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -529,6 +539,14 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleFolderLabelCode", "", info.getFolderLabelCode());
 			assertEquals(label + ": sampleFolderLabelCustomName", "", info.getFolderLabelCustomName());
 		}
+		if(VERSION >= 24)
+		{
+			assertEquals(label + ": sampleSyncStatusJson", sampleSyncStatusJson, info.getSyncStatusJson());
+		}
+		else
+		{
+			assertEquals(label + ": sampleSyncStatusJson", "", info.getSyncStatusJson());
+		}
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -655,6 +673,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 			out.writeUTF(sampleFolderLabelCode);
 			out.writeUTF(sampleFolderLabelCustomName);
 		}
+		if(VERSION >= 24)
+		{
+			ConfigInfo.writeLongString(out, sampleSyncStatusJson);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -723,5 +745,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 //Version 23
 	final String sampleFolderLabelCode = "projects";
 	final String sampleFolderLabelCustomName = "My Cases";
-		
+//Version 24
+	final String sampleSyncStatusJson = "{ }";
 }
