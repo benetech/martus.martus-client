@@ -53,6 +53,12 @@ public class MockClientSideNetworkHandler implements ClientSideNetworkInterface
 		return 1;
 	}
 	
+	@Override
+	public String getServerIpAddress()
+	{
+		return null;
+	}
+	
 	// begin ServerInterface
 	public Vector getServerInfo(Vector reservedForFuture)
 	{
