@@ -227,6 +227,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		// NOTE: For now, only allow connecting to servers which we can completely 
 		// delete all user data from if necessary. So NOT .29 or .114.
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("127.0.0.1");
+		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("127.0.0.2");
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("localhost");
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("sl1-dev");
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("54.213.152.140"); // sl1-dev
@@ -348,7 +349,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		
 
-		createBackgroundUploadTasks();
+		try
+		{
+			createBackgroundUploadTasks();
+		} 
+		catch (Exception e)
+		{
+			unexpectedErrorDlg(e);
+			System.exit(1);
+		}
 
 		MartusLogger.log("Initialization complete");
 		return true;
@@ -526,7 +535,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		MartusLogger.logEndProcess("loadFieldSpecCache");
 	}
 	
-	private void createBackgroundUploadTasks()
+	private void createBackgroundUploadTasks() throws Exception
 	{
 		uploader = new java.util.Timer(true);
 		backgroundUploadTimerTask = new BackgroundTimerTask(this, getStatusBar());

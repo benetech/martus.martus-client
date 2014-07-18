@@ -37,6 +37,7 @@ import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.database.DatabaseKey;
+import org.martus.common.network.ClientSideNetworkInterface;
 import org.martus.common.network.ServerBulletinSummary;
 import org.martus.common.network.ShortServerBulletinSummary;
 import org.martus.common.network.SummaryOfAvailableBulletins;
@@ -45,16 +46,18 @@ import org.martus.common.utilities.DateUtilities;
 
 interface ThreadMonitor
 {
-	void updateNextTimestamp(String nextTimestamp);
+	void updateNextTimestamp(String nextTimestamp) throws Exception;
 	void threadHasFinished();
 	void threadHadException(Exception e);
 }
 
 public class SyncBulletinRetriever implements ThreadMonitor
 {
-	public SyncBulletinRetriever()
+	public SyncBulletinRetriever(MartusApp appToUse) throws Exception
 	{
-		nextTimestampToRetrieve = "";
+		app = appToUse;
+		String jsonString = app.getConfigInfo().getSyncStatusJson();
+		syncStatus = new SyncStatus(jsonString);
 	}
 	
 	public boolean isBusy()
@@ -75,11 +78,15 @@ public class SyncBulletinRetriever implements ThreadMonitor
 	}
 	
 	@Override
-	public void updateNextTimestamp(String nextTimestamp)
+	public void updateNextTimestamp(String nextTimestamp) throws Exception
 	{
-		MartusLogger.log("Setting next timestamp to " + nextTimestamp);
-		nextTimestampToRetrieve = nextTimestamp;
-		// FIXME: Update in configinfo
+		String server = getServer();
+
+		syncStatus.setServerTimestamp(server, nextTimestamp);
+		String newSyncStatusJson = syncStatus.toJsonString();
+		MartusLogger.log("UpdateNextTimestamp " + server + ": " + newSyncStatusJson);
+		app.getConfigInfo().setSyncStatusJson(newSyncStatusJson);
+		app.saveConfigInfo();
 	}
 
 	@Override
@@ -96,10 +103,10 @@ public class SyncBulletinRetriever implements ThreadMonitor
 	
 	public String getNextTimestampToAskForAvailableBulletins()
 	{
-		return nextTimestampToRetrieve;
+		return syncStatus.getServerTimestamp(getServer());
 	}
 
-	public void startRetrieve(MartusApp app, SummaryOfAvailableBulletins bulletinsToRetrieve) throws Exception
+	public void startRetrieve(SummaryOfAvailableBulletins bulletinsToRetrieve) throws Exception
 	{
 		if(isBusy())
 			throw new AlreadyRetrievingException();
@@ -108,6 +115,12 @@ public class SyncBulletinRetriever implements ThreadMonitor
 		new Thread(actualRetriever).start();
 	}
 	
+	private String getServer()
+	{
+		ClientSideNetworkInterface csni = app.getCurrentNetworkInterfaceGateway().getInterface();
+		return csni.getServerIpAddress();
+	}
+
 	private static class ActualRetrieverThread implements Runnable
 	{
 		public ActualRetrieverThread(MartusApp appToUse, ThreadMonitor monitorToUse, SummaryOfAvailableBulletins bulletinsToRetrieve) throws Exception
@@ -255,9 +268,10 @@ public class SyncBulletinRetriever implements ThreadMonitor
 	public static class AlreadyRetrievingException extends Exception
 	{
 	}
-	
+
+	private MartusApp app;
 	private Runnable actualRetriever;
-	private String nextTimestampToRetrieve;
+	private SyncStatus syncStatus; 
 	private Exception exceptionToReport;
 }
 

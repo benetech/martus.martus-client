@@ -61,14 +61,14 @@ import org.miradi.utils.EnhancedJsonObject;
 
 class BackgroundTimerTask extends TimerTask
 {
-	public BackgroundTimerTask(UiMainWindow mainWindowToUse, UiStatusBar statusBarToUse)
+	public BackgroundTimerTask(UiMainWindow mainWindowToUse, UiStatusBar statusBarToUse) throws Exception
 	{
 		mainWindow = mainWindowToUse;
 		statusBar = statusBarToUse;
 		ProgressMeterInterface progressMeter = getProgressMeter();
 		uploader = new BackgroundUploader(getApp(), progressMeter);
 		retriever = new BackgroundRetriever(getApp(), progressMeter);
-		syncRetriever = new SyncBulletinRetriever();
+		syncRetriever = new SyncBulletinRetriever(getApp());
 		if(mainWindow.isServerConfigured() && getApp().getTransport().isOnline())
 			setWaitingForServer();
 	}
@@ -255,8 +255,7 @@ class BackgroundTimerTask extends TimerTask
 	{
 		if(syncRetriever.hadException())
 		{
-			// NOTE: Disable sync for the rest of this session
-			nextCheckForFieldOfficeBulletins = Long.MAX_VALUE;
+			disableSync();
 
 			// FIXME: Need to let user know syncing is disabled
 			Exception e = syncRetriever.getAndClearException();
@@ -280,15 +279,27 @@ class BackgroundTimerTask extends TimerTask
 			MartusCrypto security = getApp().getSecurity();
 			String nextTimestampToAskForAvailableBulletins = syncRetriever.getNextTimestampToAskForAvailableBulletins();
 			NetworkResponse response = gateway.listAvailableRevisionsSince(security, nextTimestampToAskForAvailableBulletins);
-			if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
+			String resultCode = response.getResultCode();
+			if(resultCode.equals(NetworkInterfaceConstants.SERVER_DOWN))
 			{
 				throw new ServerNotAvailableException();
+			}
+			else if(resultCode.equals(NetworkInterfaceConstants.SERVER_NOT_COMPATIBLE))
+			{
+				MartusLogger.log("Sync disabled because server does not support that feature");
+				disableSync();
+				return;
+			}
+			else if(!resultCode.equals(NetworkInterfaceConstants.OK))
+			{
+				MartusLogger.log("Unexpected network response: " + resultCode);
+				throw new ServerCallFailedException();
 			}
 
 			String resultJson = (String) response.getResultVector().get(0);
 			EnhancedJsonObject json = new EnhancedJsonObject(resultJson);
 			SummaryOfAvailableBulletins summary = new SummaryOfAvailableBulletins(json);
-			syncRetriever.startRetrieve(getApp(), summary);
+			syncRetriever.startRetrieve(summary);
 		}
 		catch(Exception e)
 		{
@@ -298,13 +309,17 @@ class BackgroundTimerTask extends TimerTask
 		{
 			nextCheckForFieldOfficeBulletins = System.currentTimeMillis() + (1000 * mainWindow.timeBetweenFieldOfficeChecksSeconds);
 			checkingForNewFieldOfficeBulletins = false;
+
+			if(foundNew)
+				mainWindow.setStatusMessageTag("statusNewFieldOfficeBulletins");
+			else
+				mainWindow.setStatusMessageReady();
 		}
+	}
 
-
-		if(foundNew)
-			mainWindow.setStatusMessageTag("statusNewFieldOfficeBulletins");
-		else
-			mainWindow.setStatusMessageReady();
+	public void disableSync()
+	{
+		nextCheckForFieldOfficeBulletins = Long.MAX_VALUE;
 	}
 	
 	private void getUpdatedListOfBulletinsOnServer()
