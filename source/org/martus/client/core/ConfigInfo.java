@@ -85,6 +85,8 @@ public class ConfigInfo
 	public void setIsNetworkOnline(boolean newState) { isNetworkOnline = newState; }
 	public void setFolderLabelCode(String newCode) { folderLabelCode = newCode; }
 	public void setFolderLabelCustomName(String newName) { folderLabelCustomName = newName; }
+	public void setSyncStatusJson(String newSyncStatusJson) { syncStatusJson = newSyncStatusJson; }
+
 
 	public void clearLegacyHQKey()						{ deprecatedLegacyHQKey = ""; }
 
@@ -133,6 +135,7 @@ public class ConfigInfo
 	public boolean isNetworkOnline() { return isNetworkOnline; }
 	public String getFolderLabelCode() { return folderLabelCode; }
 	public String getFolderLabelCustomName() { return folderLabelCustomName; }
+	public String getSyncStatusJson() {	return syncStatusJson; }
 	
 
 	public boolean isServerConfigured()
@@ -180,6 +183,7 @@ public class ConfigInfo
 		isNetworkOnline = true;
 		folderLabelCode = "";
 		folderLabelCustomName = "";
+		syncStatusJson = "";
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException
@@ -299,6 +303,10 @@ public class ConfigInfo
 				loaded.folderLabelCode = in.readUTF();
 				loaded.folderLabelCustomName = in.readUTF();
 			}
+			if(loaded.version >= 24)
+			{
+				loaded.syncStatusJson = readLongString(in);
+			}
 		}
 		finally
 		{
@@ -354,6 +362,7 @@ public class ConfigInfo
 			out.writeBoolean(isNetworkOnline);
 			out.writeUTF(folderLabelCode);
 			out.writeUTF(folderLabelCustomName);
+			writeLongString(out, syncStatusJson);
 		}
 		finally
 		{
@@ -378,7 +387,7 @@ public class ConfigInfo
 		return new String(bytes, "UTF-8");
 	}
 	
-	public static final short VERSION = 23;
+	public static final short VERSION = 24;
 
 	//Version 1
 	private short version;
@@ -440,4 +449,6 @@ public class ConfigInfo
 	//Version 23
 	private String folderLabelCode;
 	private String folderLabelCustomName;
+	//Version 24
+	private String syncStatusJson;
 }
