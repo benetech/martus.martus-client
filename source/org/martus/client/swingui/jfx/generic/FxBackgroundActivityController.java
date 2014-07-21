@@ -99,7 +99,7 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 	@Override
 	public String getFxmlLocation()
 	{
-		return "FxBusy.fxml";
+		return "generic/FxBusy.fxml";
 	}
 
 	public void updateProgressBar(double currentProgress)
