@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.landing;
+package org.martus.client.swingui.jfx.generic;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -65,7 +65,7 @@ public class DialogWithOkCancelShellController extends DialogShellController
 		ok.setDisable(isDisabled);
 	}
 	
-	private static final String LOCATION_DIALOG_WITH_OK_CANCEL_SHELL = "landing/DialogWithOkCancelShell.fxml";
+	private static final String LOCATION_DIALOG_WITH_OK_CANCEL_SHELL = "generic/DialogWithOkCancelShell.fxml";
 	
 	@FXML
 	private Button ok;

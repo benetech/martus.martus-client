@@ -23,21 +23,30 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.landing;
+package org.martus.client.swingui.jfx.generic;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxContentController;
 
-public class DialogWithCloseStage extends DialogStage
+public class DialogWithOkCancelStage extends DialogStage
 {
-	public DialogWithCloseStage(UiMainWindow mainWindowToUse, FxContentController controllerToUse)
+	public DialogWithOkCancelStage(UiMainWindow mainWindowToUse, FxContentController controllerToUse)
 	{
 		super(mainWindowToUse, controllerToUse);
+	}
+	
+	public void setOkButtonText(String newText)
+	{
+		((DialogWithOkCancelShellController)getShellController()).setOkButtonText(newText);
+	}
+	
+	public void setOkButtonDisabled(boolean isDisabled)
+	{
+		((DialogWithOkCancelShellController)getShellController()).setOkButtonSetDisabled(isDisabled);
 	}
 
 	@Override
 	public void setShellController()
 	{
-		setShellController(new DialogWithCloseShellController(getMainWindow()));
+		setShellController(new DialogWithOkCancelShellController(getMainWindow()));
 	}
 }

@@ -22,32 +22,55 @@ License along with this program; if not, write to the Free
 Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
-*/
-package org.martus.client.swingui.jfx.landing;
+ */
 
-import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.layout.Pane;
+package org.martus.client.swingui.jfx.generic;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxContentController;
-import org.martus.client.swingui.jfx.generic.FxInSwingDialogController;
+import org.martus.client.swingui.actions.ActionDoer;
 
-abstract public class DialogShellController extends FxInSwingDialogController 
+public abstract class DialogWithOkCancelContentController extends FxContentController implements ActionDoer
 {
-	public DialogShellController(UiMainWindow mainWindowToUse)
+	public DialogWithOkCancelContentController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
 
 	@Override
-	public void setContentPane(FxContentController contentController) throws Exception
+	public void initialize(URL location, ResourceBundle bundle)
 	{
-		Parent createContents = contentController.createContents();
-		contentPane.getChildren().addAll(createContents);
-		
+		super.initialize(location, bundle);
+		initialize();
+	}
+	
+	abstract public void initialize();
+	
+	public DialogWithOkCancelStage getStage()
+	{
+		return (DialogWithOkCancelStage)getShellController().getStage();
+	}
+	
+	public void logAndNotifyUnexpectedError(Exception e)
+	{
+		getStage().logAndNotifyUnexpectedError(e);
 	}
 
-	@FXML
-	Pane contentPane;
+	
+	
+	@Override
+	public void doAction()
+	{
+		UiMainWindow mainWindow = getMainWindow();
+		try
+		{
+			FxModalDialog.createAndShow(mainWindow, new DialogWithOkCancelStage(mainWindow, this));
+		} 
+		catch (Exception e)
+		{
+			mainWindow.unexpectedErrorDlg(e);
+		}
+	}
 }
