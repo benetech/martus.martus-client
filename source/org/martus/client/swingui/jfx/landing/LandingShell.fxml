@@ -70,7 +70,7 @@
                            <children>
       								<ImageView fitHeight="33.0" fitWidth="97.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true">
       									<image>
-      										<Image url="@../images/Martus-logo-white-text-120x54.png" />
+      										<Image url="@/org/martus/client/swingui/jfx/images/Martus-logo-white-text-120x54.png" />
       									</image>
       								</ImageView>
                            </children>
