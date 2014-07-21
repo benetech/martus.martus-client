@@ -52,6 +52,7 @@ import org.martus.client.swingui.actions.ActionMenuSelectServer;
 import org.martus.client.swingui.jfx.generic.FxContentController;
 import org.martus.client.swingui.jfx.generic.FxInSwingFrameController;
 import org.martus.client.swingui.jfx.generic.FxmlLoaderWithController;
+import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 import org.martus.common.MartusLogger;
 import org.martus.common.network.OrchidTransportWrapper;
 

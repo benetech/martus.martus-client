@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.landing;
+package org.martus.client.swingui.jfx.landing.cases;
 
 import java.util.Iterator;
 import java.util.Vector;
@@ -43,7 +43,9 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
-import org.martus.client.swingui.jfx.landing.FxFolderSettingsController.FolderNotFoundException;
+import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
+import org.martus.client.swingui.jfx.landing.BulletinsListController;
+import org.martus.client.swingui.jfx.landing.cases.FxFolderSettingsController.FolderNotFoundException;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxCaseManagementController extends AbstractFxLandingContentController
@@ -328,7 +330,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		}
 	}
 
-	public static final String LOCATION_CASE_MANAGEMENT_FXML = "landing/CaseManagement.fxml";
+	public static final String LOCATION_CASE_MANAGEMENT_FXML = "landing/cases/CaseManagement.fxml";
 	private final int INVALID_INDEX = -1;
 	private String DEFAULT_SELECTED_CASE_NAME = ClientBulletinStore.SAVED_FOLDER;
 

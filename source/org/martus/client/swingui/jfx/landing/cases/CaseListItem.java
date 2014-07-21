@@ -23,10 +23,35 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.landing;
+package org.martus.client.swingui.jfx.landing.cases;
 
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.swingui.MartusLocalization;
 
-
-public class CaseListProvider extends ArrayObservableList<CaseListItem>
+public class CaseListItem
 {
+	CaseListItem(BulletinFolder folder, MartusLocalization localization)
+	{
+		caseName = folder.getName();
+		caseNameLocalized = folder.getLocalizedName(localization);
+	}
+	
+	public String getNameLocalized()
+	{
+		return caseNameLocalized;
+	}
+	
+	public String getName()
+	{
+		return caseName;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return getNameLocalized();
+	}
+
+	final String caseName;
+	final String caseNameLocalized;
 }

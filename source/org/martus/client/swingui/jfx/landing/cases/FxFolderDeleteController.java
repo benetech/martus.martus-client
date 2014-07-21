@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.landing;
+package org.martus.client.swingui.jfx.landing.cases;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.swingui.MartusLocalization;
@@ -89,7 +89,7 @@ public class FxFolderDeleteController extends DialogWithOkCancelContentControlle
 			showNotifyDialog("ErrorDeletingFolder");
 	}
 
-	private static final String LOCATION_FOLDER_DELETE_FXML = "landing/FolderDelete.fxml";
+	private static final String LOCATION_FOLDER_DELETE_FXML = "landing/cases/FolderDelete.fxml";
 
 	@FXML 
 	private Label messageTitle;
