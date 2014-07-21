@@ -22,35 +22,29 @@ License along with this program; if not, write to the Free
 Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
- */
-package org.martus.client.swingui.jfx.generic;
+*/
+package org.martus.client.swingui.jfx.generic.data;
 
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleGroup;
-import javafx.util.Callback;
+import javafx.beans.property.Property;
 
-import org.martus.client.swingui.jfx.setupwizard.ContactsWithTemplatesTableData;
-
-public class FxRadioButtonCellFactory implements Callback<TableColumn<ContactsWithTemplatesTableData, Boolean>, TableCell<ContactsWithTemplatesTableData, Boolean>>
+public class FxBindingHelpers
 {
-	public FxRadioButtonCellFactory()
+	public static Property bindToOurPropertyField(Property cellProperty, Property currentFieldProperty, Property cellPropertyBoundToCurrently)
 	{
-		group = new ToggleGroup();
+		if(cellPropertyBoundToCurrently==null) 
+		{
+			cellPropertyBoundToCurrently = cellProperty;
+			currentFieldProperty.bindBidirectional(cellProperty);
+		}
+		else
+		{
+			if(cellPropertyBoundToCurrently != cellProperty) 
+			{
+				currentFieldProperty.unbindBidirectional(cellPropertyBoundToCurrently);
+				cellPropertyBoundToCurrently = cellProperty;
+				currentFieldProperty.bindBidirectional(cellPropertyBoundToCurrently);
+			}
+		}
+		return cellPropertyBoundToCurrently;
 	}
-	
-	public ReadOnlyObjectProperty<Toggle> selectedToggleProperty()
-	{
-		return group.selectedToggleProperty();
-	}
-	
-	@Override
-	public TableCell call(final TableColumn param) 
-	{
-		return new FxRadioButtonTableCell(group);
-	}
-	
-	private ToggleGroup group;
 }

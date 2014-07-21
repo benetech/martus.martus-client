@@ -27,6 +27,8 @@ Boston, MA 02111-1307, USA.
 	
 package org.martus.client.swingui.jfx.generic;
 
+import org.martus.client.swingui.jfx.generic.data.FxBindingHelpers;
+
 import javafx.beans.property.Property;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.TableCell;

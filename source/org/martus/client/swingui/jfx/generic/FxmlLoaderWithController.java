@@ -27,6 +27,8 @@ package org.martus.client.swingui.jfx.generic;
 
 import java.net.URL;
 
+import org.martus.client.swingui.jfx.generic.data.MartusResourceBundle;
+
 import javafx.fxml.FXMLLoader;
 
 public class FxmlLoaderWithController extends FXMLLoader

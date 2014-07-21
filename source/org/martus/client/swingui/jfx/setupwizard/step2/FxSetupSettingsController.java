@@ -41,7 +41,7 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPreferencesDlg;
-import org.martus.client.swingui.jfx.generic.FxSwitchButton;
+import org.martus.client.swingui.jfx.generic.controls.FxSwitchButton;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.client.swingui.jfx.setupwizard.step3.FxSetupStorageServerController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.TorInitializationTask;
