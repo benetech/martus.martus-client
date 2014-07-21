@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.landing;
+package org.martus.client.swingui.jfx.landing.cases;
 
 import java.util.Iterator;
 
@@ -192,7 +192,7 @@ public class FxFolderSettingsController extends DialogWithCloseContentController
 	public static final String FOLDER_CODE_CUSTOM = "custom"; 
 	public static final String FOLDER_CODE_DEFAULT = FOLDER_CODE_CASES;
 	
-	private static final String LOCATION_FOLDER_SETTINGS_FXML = "landing/FolderSettings.fxml";
+	private static final String LOCATION_FOLDER_SETTINGS_FXML = "landing/cases/FolderSettings.fxml";
 	private ConfigInfo config;
 	private ChangeListener folderLabelIndexListener;
 	private ChangeListener folderCustomLabelListener;

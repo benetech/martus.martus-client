@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.landing;
+package org.martus.client.swingui.jfx.landing.cases;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -131,6 +131,6 @@ public class FxFolderCreateController extends DialogWithOkCancelContentControlle
 	@FXML
 	private Label hintFolderError;
 
-	private static final String LOCATION_FOLDER_CREATE_FXML = "landing/FolderCreate.fxml";
+	private static final String LOCATION_FOLDER_CREATE_FXML = "landing/cases/FolderCreate.fxml";
 	private ChangeListener folderCreatedListener;
 }
