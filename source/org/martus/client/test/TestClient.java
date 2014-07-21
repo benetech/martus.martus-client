@@ -54,7 +54,7 @@ import org.martus.client.search.TestSearchParser;
 import org.martus.client.search.TestSearchSpec;
 import org.martus.client.search.TestSearchTreeNode;
 import org.martus.client.swingui.grids.TestGridTableModel;
-import org.martus.client.swingui.jfx.landing.TestBulletinTableData;
+import org.martus.client.swingui.jfx.landing.bulletins.TestBulletinTableData;
 import org.martus.client.swingui.jfx.setupwizard.TestContactTableData;
 import org.martus.common.utilities.TestMartusFlexidate;
 

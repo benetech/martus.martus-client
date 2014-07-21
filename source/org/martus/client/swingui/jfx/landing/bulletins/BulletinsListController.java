@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.landing;
+package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -46,6 +46,7 @@ import javafx.scene.input.MouseEvent;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
+import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
@@ -174,7 +175,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	@Override
 	public String getFxmlLocation()
 	{
-		return "landing/FxTableViewItems.fxml";
+		return "landing/bulletins/FxTableViewItems.fxml";
 	}
 	
 	

@@ -23,13 +23,14 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.landing;
+package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.util.Iterator;
 import java.util.Set;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.jfx.landing.ArrayObservableList;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;

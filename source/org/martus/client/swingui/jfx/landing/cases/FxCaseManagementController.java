@@ -44,7 +44,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
-import org.martus.client.swingui.jfx.landing.BulletinsListController;
+import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.FxFolderSettingsController.FolderNotFoundException;
 import org.martus.common.fieldspec.ChoiceItem;
 
