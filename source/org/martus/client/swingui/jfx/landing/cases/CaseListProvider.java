@@ -25,7 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.cases;
 
-import org.martus.client.swingui.jfx.generic.ArrayObservableList;
+import org.martus.client.swingui.jfx.generic.data.ArrayObservableList;
 
 
 
