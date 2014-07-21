@@ -30,7 +30,7 @@ import java.util.Set;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.jfx.landing.ArrayObservableList;
+import org.martus.client.swingui.jfx.generic.ArrayObservableList;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
