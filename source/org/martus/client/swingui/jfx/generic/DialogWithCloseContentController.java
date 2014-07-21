@@ -22,32 +22,44 @@ License along with this program; if not, write to the Free
 Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
-*/
-package org.martus.client.swingui.jfx.landing;
+ */
 
-import javafx.fxml.FXML;
+package org.martus.client.swingui.jfx.generic;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
 
-public class DialogWithCloseShellController extends DialogShellController 
+public abstract class DialogWithCloseContentController extends FxContentController  implements ActionDoer
 {
-	public DialogWithCloseShellController(UiMainWindow mainWindowToUse)
+
+	public DialogWithCloseContentController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
 
 	@Override
-	public String getFxmlLocation()
+	public void initialize(URL location, ResourceBundle bundle)
 	{
-		return LOCATION_DIALOG_WITH_CLOSE_SHELL;
+		super.initialize(location, bundle);
+		initialize();
 	}
 	
-	@FXML
-	public void onCloseClicked()
+	abstract public void initialize();
+
+	@Override
+	public void doAction()
 	{
-		saveAndClose();
+		UiMainWindow mainWindow = getMainWindow();
+		try
+		{
+			FxModalDialog.createAndShow(mainWindow, new DialogWithCloseStage(mainWindow, this));
+		} 
+		catch (Exception e)
+		{
+			mainWindow.unexpectedErrorDlg(e);
+		}
 	}
-
-	private static final String LOCATION_DIALOG_WITH_CLOSE_SHELL = "landing/DialogWithCloseShell.fxml";
-
 }

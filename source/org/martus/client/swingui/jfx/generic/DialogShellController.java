@@ -23,31 +23,29 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.landing;
+package org.martus.client.swingui.jfx.generic;
+
+import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxContentController;
 
-public class DialogWithOkCancelStage extends DialogStage
+abstract public class DialogShellController extends FxInSwingDialogController 
 {
-	public DialogWithOkCancelStage(UiMainWindow mainWindowToUse, FxContentController controllerToUse)
+	public DialogShellController(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindowToUse, controllerToUse);
-	}
-	
-	public void setOkButtonText(String newText)
-	{
-		((DialogWithOkCancelShellController)getShellController()).setOkButtonText(newText);
-	}
-	
-	public void setOkButtonDisabled(boolean isDisabled)
-	{
-		((DialogWithOkCancelShellController)getShellController()).setOkButtonSetDisabled(isDisabled);
+		super(mainWindowToUse);
 	}
 
 	@Override
-	public void setShellController()
+	public void setContentPane(FxContentController contentController) throws Exception
 	{
-		setShellController(new DialogWithOkCancelShellController(getMainWindow()));
+		Parent createContents = contentController.createContents();
+		contentPane.getChildren().addAll(createContents);
+		
 	}
+
+	@FXML
+	Pane contentPane;
 }

@@ -23,12 +23,9 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.landing;
+package org.martus.client.swingui.jfx.generic;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxContentController;
-import org.martus.client.swingui.jfx.generic.FxNonWizardStage;
-import org.martus.client.swingui.jfx.generic.FxScene;
 
 abstract public class DialogStage extends FxNonWizardStage
 {

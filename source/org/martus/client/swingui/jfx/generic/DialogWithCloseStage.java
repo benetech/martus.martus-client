@@ -22,46 +22,21 @@ License along with this program; if not, write to the Free
 Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
- */
-
-package org.martus.client.swingui.jfx.landing;
-
-import java.net.URL;
-import java.util.ResourceBundle;
+*/
+package org.martus.client.swingui.jfx.generic;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionDoer;
-import org.martus.client.swingui.jfx.generic.FxContentController;
-import org.martus.client.swingui.jfx.generic.FxModalDialog;
 
-public abstract class DialogWithCloseContentController extends FxContentController  implements ActionDoer
+public class DialogWithCloseStage extends DialogStage
 {
-
-	public DialogWithCloseContentController(UiMainWindow mainWindowToUse)
+	public DialogWithCloseStage(UiMainWindow mainWindowToUse, FxContentController controllerToUse)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, controllerToUse);
 	}
 
 	@Override
-	public void initialize(URL location, ResourceBundle bundle)
+	public void setShellController()
 	{
-		super.initialize(location, bundle);
-		initialize();
-	}
-	
-	abstract public void initialize();
-
-	@Override
-	public void doAction()
-	{
-		UiMainWindow mainWindow = getMainWindow();
-		try
-		{
-			FxModalDialog.createAndShow(mainWindow, new DialogWithCloseStage(mainWindow, this));
-		} 
-		catch (Exception e)
-		{
-			mainWindow.unexpectedErrorDlg(e);
-		}
+		setShellController(new DialogWithCloseShellController(getMainWindow()));
 	}
 }
