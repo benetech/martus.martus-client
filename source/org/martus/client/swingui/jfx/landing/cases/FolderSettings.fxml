@@ -11,7 +11,7 @@
          <children>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/cog.png" />
+                  <Image url="@/org/martus/client/swingui/jfx/images/cog.png" />
                </image>
             </ImageView>
             <Label text="   " />
