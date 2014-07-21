@@ -30,8 +30,8 @@ import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxContentController;
-import org.martus.client.swingui.jfx.FxInSwingDialogController;
+import org.martus.client.swingui.jfx.generic.FxContentController;
+import org.martus.client.swingui.jfx.generic.FxInSwingDialogController;
 
 abstract public class DialogShellController extends FxInSwingDialogController 
 {

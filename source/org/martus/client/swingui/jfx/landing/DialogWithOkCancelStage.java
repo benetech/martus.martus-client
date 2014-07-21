@@ -26,7 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxContentController;
+import org.martus.client.swingui.jfx.generic.FxContentController;
 
 public class DialogWithOkCancelStage extends DialogStage
 {

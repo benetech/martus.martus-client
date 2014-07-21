@@ -23,56 +23,14 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
-
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-
-import javax.swing.JDialog;
+package org.martus.client.swingui.jfx.generic;
 
 import org.martus.client.swingui.UiMainWindow;
 
-abstract public class FxInSwingDialogStage extends FxInSwingStage
+abstract public class FxNonWizardStage extends FxInSwingDialogStage
 {
-	public FxInSwingDialogStage(UiMainWindow mainWindowToUse)
+	public FxNonWizardStage(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-	}
-
-	abstract protected boolean confirmExit();
-	
-	public void setDialog(JDialog dialogToUse)
-	{
-		setWindow(dialogToUse);
-		getWindow().addWindowListener(createWindowCloseHandler());
-	}
-
-	public WindowListener createWindowCloseHandler()
-	{
-		return new WindowCloseHandler();
-	}
-	
-	public void close()
-	{
-		getDialog().setVisible(false);
-	}
-
-	protected void handleDialogClose()
-	{
-		close();
-	}
-	
-	protected class WindowCloseHandler extends WindowAdapter
-	{
-		@Override
-		public void windowClosing(WindowEvent e)
-		{
-			if(confirmExit())
-			{
-				handleDialogClose();
-				super.windowClosing(e);
-			}
-		}
 	}
 }

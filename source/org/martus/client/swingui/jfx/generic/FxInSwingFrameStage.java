@@ -23,39 +23,15 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.generic;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public abstract class FxContentController extends FxController
+public abstract class FxInSwingFrameStage extends FxInSwingStage
 {
-	public FxContentController(UiMainWindow mainWindowToUse)
+	public FxInSwingFrameStage(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
-	
-	public FxShellController getShellController()
-	{
-		return shellController;
-	}
-	
-	public void setShellController(FxShellController shellControllerToUse)
-	{
-		shellController = shellControllerToUse;
-	}
-	
-	protected void save()
-	{
-	}
-	
-	public void close()
-	{
-	}
-	
-	public void logAndNotifyUnexpectedError(Exception e)
-	{
-		shellController.getStage().logAndNotifyUnexpectedError(e);
-	}
-	
-	private FxShellController shellController;
+
 }

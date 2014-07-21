@@ -23,46 +23,40 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.generic;
 
-import java.util.Enumeration;
+import java.net.URL;
 import java.util.ResourceBundle;
 
-import org.martus.client.swingui.MartusLocalization;
+import javafx.concurrent.Task;
 
+import org.martus.client.swingui.UiMainWindow;
 
-public class MartusResourceBundle extends ResourceBundle
+public class FxBusyController extends FxBackgroundActivityController
 {
-	public MartusResourceBundle(MartusLocalization localizationToUse)
+	public FxBusyController(UiMainWindow mainWindowToUse, String messageToUse, Task taskToUse)
 	{
-		localization = localizationToUse;
-	}
-	
-	@Override
-	public boolean containsKey(String key)
-	{
-		return true;
-	}
-	
-	@Override
-	protected Object handleGetObject(String key)
-	{
-		String[] prefixAndKey = key.split("\\.");
-		String prefix = prefixAndKey[0];
-		if(prefix.equals(BUTTON_CONTROL))
-			return localization.getButtonLabel(prefixAndKey[1]);
-		if(prefix.equals(TITLE_CONTROL))
-			return localization.getWindowTitle(prefixAndKey[1]);
-		return localization.getFieldLabel(key);
+		super(mainWindowToUse, messageToUse, taskToUse);
 	}
 
 	@Override
-	public Enumeration<String> getKeys()
+	public void initialize(URL location, ResourceBundle bundle)
 	{
-		return null;
+		super.initialize(location, bundle);
+		cancelButton.setVisible(false);
+		updateProgressBar(INDETERMINATE);
+	}	
+	
+	@Override
+	public void cancelPressed()
+	{
+	}
+	
+	@Override
+	public boolean didUserCancel()
+	{
+		return false;
 	}
 
-	private MartusLocalization localization;
-	private static final String BUTTON_CONTROL = "Button";
-	private static final String TITLE_CONTROL = "Title";
+	private static final double INDETERMINATE = -1.0;
 }

@@ -34,9 +34,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxContentController;
-import org.martus.client.swingui.jfx.FxWizardShellController;
-import org.martus.client.swingui.jfx.FxmlLoaderWithController;
+import org.martus.client.swingui.jfx.generic.FxContentController;
+import org.martus.client.swingui.jfx.generic.FxWizardShellController;
+import org.martus.client.swingui.jfx.generic.FxmlLoaderWithController;
 
 public class FxSetupWizardShellController extends FxWizardShellController
 {

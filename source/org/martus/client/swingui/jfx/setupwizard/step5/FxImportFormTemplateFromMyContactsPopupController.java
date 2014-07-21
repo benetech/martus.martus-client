@@ -38,7 +38,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxWizardStage;
+import org.martus.client.swingui.jfx.generic.FxWizardStage;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.MartusLogger;

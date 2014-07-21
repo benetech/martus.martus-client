@@ -23,40 +23,35 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.generic;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.awt.Component;
 
-import javafx.concurrent.Task;
+import javax.swing.JFrame;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
 
-public class FxBusyController extends FxBackgroundActivityController
+public abstract class FxInSwingFrameController extends FxInSwingController
 {
-	public FxBusyController(UiMainWindow mainWindowToUse, String messageToUse, Task taskToUse)
+	public FxInSwingFrameController(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindowToUse, messageToUse, taskToUse);
+		super(mainWindowToUse);
 	}
 
 	@Override
-	public void initialize(URL location, ResourceBundle bundle)
+	public void installGlassPane(Component glassPane)
 	{
-		super.initialize(location, bundle);
-		cancelButton.setVisible(false);
-		updateProgressBar(INDETERMINATE);
+		getFrame().setGlassPane(glassPane);
+	}
+
+	private JFrame getFrame()
+	{
+		return (JFrame) getWindow();
+	}
+
+	protected void doAction(ActionDoer doer)
+	{
+		getStage().doAction(doer);
 	}	
-	
-	@Override
-	public void cancelPressed()
-	{
-	}
-	
-	@Override
-	public boolean didUserCancel()
-	{
-		return false;
-	}
-
-	private static final double INDETERMINATE = -1.0;
 }

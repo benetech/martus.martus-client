@@ -23,18 +23,28 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.generic;
 
-import java.net.URL;
+import javafx.beans.property.Property;
 
-import javafx.fxml.FXMLLoader;
-
-public class FxmlLoaderWithController extends FXMLLoader
+public class FxBindingHelpers
 {
-	public FxmlLoaderWithController(FxController controllerToUse, URL resourceAsUrl)
+	public static Property bindToOurPropertyField(Property cellProperty, Property currentFieldProperty, Property cellPropertyBoundToCurrently)
 	{
-		super(resourceAsUrl, new MartusResourceBundle(controllerToUse.getLocalization()));
-		
-		setController(controllerToUse);
+		if(cellPropertyBoundToCurrently==null) 
+		{
+			cellPropertyBoundToCurrently = cellProperty;
+			currentFieldProperty.bindBidirectional(cellProperty);
+		}
+		else
+		{
+			if(cellPropertyBoundToCurrently != cellProperty) 
+			{
+				currentFieldProperty.unbindBidirectional(cellPropertyBoundToCurrently);
+				cellPropertyBoundToCurrently = cellProperty;
+				currentFieldProperty.bindBidirectional(cellPropertyBoundToCurrently);
+			}
+		}
+		return cellPropertyBoundToCurrently;
 	}
 }

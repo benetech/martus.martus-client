@@ -22,35 +22,47 @@ License along with this program; if not, write to the Free
 Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
- */
-package org.martus.client.swingui.jfx;
+*/
+package org.martus.client.swingui.jfx.generic;
 
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleGroup;
-import javafx.util.Callback;
+import java.util.Enumeration;
+import java.util.ResourceBundle;
 
-import org.martus.client.swingui.jfx.setupwizard.ContactsWithTemplatesTableData;
+import org.martus.client.swingui.MartusLocalization;
 
-public class FxRadioButtonCellFactory implements Callback<TableColumn<ContactsWithTemplatesTableData, Boolean>, TableCell<ContactsWithTemplatesTableData, Boolean>>
+
+public class MartusResourceBundle extends ResourceBundle
 {
-	public FxRadioButtonCellFactory()
+	public MartusResourceBundle(MartusLocalization localizationToUse)
 	{
-		group = new ToggleGroup();
-	}
-	
-	public ReadOnlyObjectProperty<Toggle> selectedToggleProperty()
-	{
-		return group.selectedToggleProperty();
+		localization = localizationToUse;
 	}
 	
 	@Override
-	public TableCell call(final TableColumn param) 
+	public boolean containsKey(String key)
 	{
-		return new FxRadioButtonTableCell(group);
+		return true;
 	}
 	
-	private ToggleGroup group;
+	@Override
+	protected Object handleGetObject(String key)
+	{
+		String[] prefixAndKey = key.split("\\.");
+		String prefix = prefixAndKey[0];
+		if(prefix.equals(BUTTON_CONTROL))
+			return localization.getButtonLabel(prefixAndKey[1]);
+		if(prefix.equals(TITLE_CONTROL))
+			return localization.getWindowTitle(prefixAndKey[1]);
+		return localization.getFieldLabel(key);
+	}
+
+	@Override
+	public Enumeration<String> getKeys()
+	{
+		return null;
+	}
+
+	private MartusLocalization localization;
+	private static final String BUTTON_CONTROL = "Button";
+	private static final String TITLE_CONTROL = "Title";
 }

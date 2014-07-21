@@ -29,8 +29,8 @@ package org.martus.client.swingui.actions;
 import java.awt.event.ActionEvent;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxModalDialog;
 import org.martus.client.swingui.jfx.contacts.ContactsStage;
+import org.martus.client.swingui.jfx.generic.FxModalDialog;
 
 public class ActionMenuManageContacts extends UiMenuAction implements ActionDoer
 {

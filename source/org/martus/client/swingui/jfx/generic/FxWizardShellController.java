@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.generic;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,6 +33,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.WizardNavigationButtonsInterface;
+import org.martus.client.swingui.jfx.WizardNavigationHandlerInterface;
 import org.martus.common.MartusLogger;
 
 

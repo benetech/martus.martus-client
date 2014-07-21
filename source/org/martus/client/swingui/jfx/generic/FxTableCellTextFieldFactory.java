@@ -25,7 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 //Modified: original from http://stackoverflow.com/questions/7880494/tableview-better-editing-through-binding
 	
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.generic;
 
 import javafx.beans.property.Property;
 import javafx.scene.control.ContentDisplay;

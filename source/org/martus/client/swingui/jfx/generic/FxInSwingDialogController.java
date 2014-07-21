@@ -23,14 +23,47 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.generic;
+
+import java.awt.Component;
+
+import javax.swing.JDialog;
 
 import org.martus.client.swingui.UiMainWindow;
 
-abstract public class FxNonWizardStage extends FxInSwingDialogStage
+abstract public class FxInSwingDialogController extends FxInSwingController
 {
-	public FxNonWizardStage(UiMainWindow mainWindowToUse)
+	public FxInSwingDialogController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
+
+	public FxInSwingDialogStage getFxInSwingDialogStage()
+	{
+		return (FxInSwingDialogStage) getStage();
+	}
+
+	public JDialog getDialog()
+	{
+		return (JDialog) getWindow();
+	}
+
+	@Override
+	public void installGlassPane(Component glassPane)
+	{
+		getDialog().setGlassPane(glassPane);
+	}
+	
+	protected void saveAndClose()
+	{
+		getStage().getCurrentController().save();
+		close();
+	}
+	
+	protected void close()
+	{
+		getStage().getCurrentController().close();
+		getFxInSwingDialogStage().close();
+	}
+	
 }

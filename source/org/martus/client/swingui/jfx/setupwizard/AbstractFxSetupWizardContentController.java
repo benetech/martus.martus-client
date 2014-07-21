@@ -31,11 +31,11 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxContentController;
-import org.martus.client.swingui.jfx.FxWizardShellController;
-import org.martus.client.swingui.jfx.FxWizardStage;
 import org.martus.client.swingui.jfx.WizardNavigationButtonsInterface;
 import org.martus.client.swingui.jfx.WizardNavigationHandlerInterface;
+import org.martus.client.swingui.jfx.generic.FxContentController;
+import org.martus.client.swingui.jfx.generic.FxWizardShellController;
+import org.martus.client.swingui.jfx.generic.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.tasks.ConnectToServerTask;
 
 abstract public class AbstractFxSetupWizardContentController extends FxContentController implements WizardNavigationHandlerInterface, Initializable

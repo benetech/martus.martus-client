@@ -23,56 +23,36 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.generic;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.TimerTask;
+
+import javafx.application.Platform;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.setupwizard.tasks.TaskWithTimeout;
-import org.martus.common.MartusUtilities;
+import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractAppTask;
+import org.martus.common.ProgressMeterInterface;
 
 
-public class FxTimeoutController extends FxBackgroundActivityController
+public class FxProgressController extends FxBackgroundActivityController implements ProgressMeterInterface
 {
-	public FxTimeoutController(UiMainWindow mainWindowToUse, String messageToUse, TaskWithTimeout taskToUse, int maxSecondsToCompleteTaskToUse)
+	public FxProgressController(UiMainWindow mainWindowToUse, String messageToUse, AbstractAppTask taskToUse)
 	{
 		super(mainWindowToUse, messageToUse, taskToUse);
-		maxSecondsToCompleteTask = maxSecondsToCompleteTaskToUse;
+		taskToUse.setProgressInterface(this);
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		backgroundTick = new TimeoutTimerTask();
-		MartusUtilities.startTimer(backgroundTick, BACKGROUND_TIMEOUT_CHECK_EVERY_SECOND);
-	}
-
-	class TimeoutTimerTask extends TimerTask
-	{
-		public void run()
-		{
-			double percentComplete = (double)currentNumberOfSecondsCompleted/(double)maxSecondsToCompleteTask;
-			updateProgressBar(percentComplete);
-			++currentNumberOfSecondsCompleted;
-			if(currentNumberOfSecondsCompleted > maxSecondsToCompleteTask)
-			{
-				backgroundTick.cancel();
-				//forceCloseDialog(); //TODO figure out how to close this dialog from main thread not this thread.
-			}
-		}
+		updateProgressBar(0.0);
 	}
 
 	@Override
 	public void forceCloseDialog()
 	{
-		if(backgroundTick != null)
-		{
-			backgroundTick.cancel();
-			backgroundTick = null;
-		}
 		super.forceCloseDialog();
 	}
 
@@ -89,10 +69,54 @@ public class FxTimeoutController extends FxBackgroundActivityController
 		return userCancelled;
 	}
 	
-	protected int maxSecondsToCompleteTask;
-	protected int currentNumberOfSecondsCompleted;
-	protected TimeoutTimerTask backgroundTick;
+	@Override
+	public void setStatusMessage(String message)
+	{
+	}
+
+	@Override
+	public void updateProgressMeter(int currentValue, int maxValue)
+	{
+		double percentComplete = (double)currentValue/(double)maxValue;
+		fxProgressBar.setProgress(percentComplete);
+		if(currentValue == maxValue)
+			Platform.runLater(new CloseThisDialog());
+	}
+
+	class CloseThisDialog implements Runnable
+	{
+		public void run()
+		{
+			forceCloseDialog();
+		}
+	}
+	
+	class ProgressMeterHider implements Runnable
+	{
+		public void run()
+		{
+			fxProgressBar.setVisible(false);
+		}
+	}
+
+	@Override
+	public boolean shouldExit()
+	{
+		return userCancelled;
+	}
+
+	@Override
+	public void hideProgressMeter()
+	{
+		Platform.runLater(new ProgressMeterHider());
+	}
+	
+	@Override
+	public void taskSucceeded()
+	{
+	}
+	
+	protected int currentProgressMade;
 	private boolean userCancelled;
 
-	final int BACKGROUND_TIMEOUT_CHECK_EVERY_SECOND = 1000;
 }

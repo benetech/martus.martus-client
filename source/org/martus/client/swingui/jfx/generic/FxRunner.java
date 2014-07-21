@@ -23,28 +23,39 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.generic;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import org.martus.common.MartusLogger;
 
-import org.martus.client.swingui.UiMainWindow;
-
-public abstract class FxShellController extends FxController
+public class FxRunner implements Runnable
 {
-	public FxShellController(UiMainWindow mainWindowToUse)
+	public FxRunner(FxInSwingStage stageToUse)
 	{
-		super(mainWindowToUse);
+		stage = stageToUse;
 	}
 	
-	@Override
-	public void initialize(URL location, ResourceBundle bundle)
+	public void run()
 	{
-		initializeMainContentPane();
+		try
+		{
+			stage.showCurrentScene();
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			if(!shouldAbortImmediatelyOnError)
+			{
+				stage.getMainWindow().unexpectedErrorDlg(e);
+			}
+			System.exit(1);
+		}
+	}
+	
+	public void setAbortImmediatelyOnError()
+	{
+		shouldAbortImmediatelyOnError = true;
 	}
 
-	abstract public void initializeMainContentPane();
-	abstract public FxInSwingStage getStage();
-	abstract public void setStage(FxInSwingStage stageToUse);
-	abstract public void setContentPane(FxContentController contentController) throws Exception;
+	private FxInSwingStage stage;
+	private boolean shouldAbortImmediatelyOnError;
 }

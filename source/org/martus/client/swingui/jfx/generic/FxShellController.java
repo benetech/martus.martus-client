@@ -23,15 +23,28 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.generic;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public abstract class FxInSwingFrameStage extends FxInSwingStage
+public abstract class FxShellController extends FxController
 {
-	public FxInSwingFrameStage(UiMainWindow mainWindowToUse)
+	public FxShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle bundle)
+	{
+		initializeMainContentPane();
+	}
 
+	abstract public void initializeMainContentPane();
+	abstract public FxInSwingStage getStage();
+	abstract public void setStage(FxInSwingStage stageToUse);
+	abstract public void setContentPane(FxContentController contentController) throws Exception;
 }

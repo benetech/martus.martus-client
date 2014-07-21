@@ -27,7 +27,7 @@ Boston, MA 02111-1307, USA.
  Original code from 
  http://stackoverflow.com/questions/17467137/how-can-i-create-a-switch-button-in-javafx
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.generic;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
