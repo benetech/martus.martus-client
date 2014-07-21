@@ -32,10 +32,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxContentController;
-import org.martus.client.swingui.jfx.FxInSwingDialogController;
 import org.martus.client.swingui.jfx.WizardNavigationButtonsInterface;
 import org.martus.client.swingui.jfx.WizardNavigationHandlerInterface;
+import org.martus.client.swingui.jfx.generic.FxContentController;
+import org.martus.client.swingui.jfx.generic.FxInSwingDialogController;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 
 public class ContactsShellController extends FxInSwingDialogController implements WizardNavigationButtonsInterface

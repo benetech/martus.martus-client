@@ -30,8 +30,8 @@ import javafx.collections.ObservableList;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxPopupController;
-import org.martus.client.swingui.jfx.FxWizardStage;
+import org.martus.client.swingui.jfx.generic.FxPopupController;
+import org.martus.client.swingui.jfx.generic.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.tasks.DownloadTemplateListForAccountTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.TaskWithTimeout;
 import org.martus.common.ContactKey;

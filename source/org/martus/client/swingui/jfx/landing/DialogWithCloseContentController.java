@@ -31,8 +31,8 @@ import java.util.ResourceBundle;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
-import org.martus.client.swingui.jfx.FxContentController;
-import org.martus.client.swingui.jfx.FxModalDialog;
+import org.martus.client.swingui.jfx.generic.FxContentController;
+import org.martus.client.swingui.jfx.generic.FxModalDialog;
 
 public abstract class DialogWithCloseContentController extends FxContentController  implements ActionDoer
 {

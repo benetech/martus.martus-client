@@ -23,42 +23,41 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.generic;
 
-import java.awt.Dimension;
-
-import javafx.application.Platform;
-
-import javax.swing.JDialog;
+import javafx.stage.Stage;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.WindowObscurer;
-import org.martus.swing.Utilities;
 
-public class FxModalDialog extends JDialog
+abstract public class FxPopupController extends FxContentController
 {
-	public static void createAndShow(UiMainWindow owner, FxInSwingDialogStage stage) throws Exception
+	public FxPopupController(UiMainWindow mainWindowToUse)
 	{
-		FxModalDialog dialog = new FxModalDialog(owner);
-		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		dialog.getContentPane().setPreferredSize(new Dimension(960, 640));
-		dialog.pack();
-		dialog.getContentPane().add(stage);
-		stage.setDialog(dialog);
-		Platform.runLater(new FxRunner(stage));
+		super(mainWindowToUse);
+	}
 
-		Utilities.centerDlg(dialog);
-		owner.setCurrentActiveDialog(dialog);
-		dialog.setVisible(true);
-		owner.setCurrentActiveDialog(null);
+	public void setStage(Stage stageToUse)
+	{
+		stage = stageToUse;
 	}
 	
-	private FxModalDialog(UiMainWindow owner)
+	public Stage getStage()
 	{
-		super(owner);
-
-		setModal(true);
-		
-		setGlassPane(new WindowObscurer());
+		return stage;
 	}
+	
+	public Throwable getThrownException()
+	{
+		return thrownException;
+	}
+	
+	public void setThrownException(Throwable exception)
+	{
+		thrownException = exception;
+	}
+
+	abstract public String getDialogTitle();
+
+	private Stage stage;
+	private Throwable thrownException;
 }

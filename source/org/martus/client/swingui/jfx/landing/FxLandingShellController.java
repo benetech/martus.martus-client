@@ -49,9 +49,9 @@ import org.martus.client.swingui.actions.ActionMenuManageContacts;
 import org.martus.client.swingui.actions.ActionMenuPreferences;
 import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.actions.ActionMenuSelectServer;
-import org.martus.client.swingui.jfx.FxContentController;
-import org.martus.client.swingui.jfx.FxInSwingFrameController;
-import org.martus.client.swingui.jfx.FxmlLoaderWithController;
+import org.martus.client.swingui.jfx.generic.FxContentController;
+import org.martus.client.swingui.jfx.generic.FxInSwingFrameController;
+import org.martus.client.swingui.jfx.generic.FxmlLoaderWithController;
 import org.martus.common.MartusLogger;
 import org.martus.common.network.OrchidTransportWrapper;
 

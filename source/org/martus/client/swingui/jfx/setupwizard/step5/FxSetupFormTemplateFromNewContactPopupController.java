@@ -40,7 +40,7 @@ import javafx.scene.control.TextField;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxWizardStage;
+import org.martus.client.swingui.jfx.generic.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.AccessTokenChangeHandler;
 import org.martus.common.ContactKey;
 import org.martus.common.Exceptions.ServerNotAvailableException;

@@ -23,39 +23,39 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.generic;
 
-import org.martus.common.MartusLogger;
+import org.martus.client.swingui.UiMainWindow;
 
-public class FxRunner implements Runnable
+public abstract class FxContentController extends FxController
 {
-	public FxRunner(FxInSwingStage stageToUse)
+	public FxContentController(UiMainWindow mainWindowToUse)
 	{
-		stage = stageToUse;
+		super(mainWindowToUse);
 	}
 	
-	public void run()
+	public FxShellController getShellController()
 	{
-		try
-		{
-			stage.showCurrentScene();
-		} 
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-			if(!shouldAbortImmediatelyOnError)
-			{
-				stage.getMainWindow().unexpectedErrorDlg(e);
-			}
-			System.exit(1);
-		}
+		return shellController;
 	}
 	
-	public void setAbortImmediatelyOnError()
+	public void setShellController(FxShellController shellControllerToUse)
 	{
-		shouldAbortImmediatelyOnError = true;
+		shellController = shellControllerToUse;
 	}
-
-	private FxInSwingStage stage;
-	private boolean shouldAbortImmediatelyOnError;
+	
+	protected void save()
+	{
+	}
+	
+	public void close()
+	{
+	}
+	
+	public void logAndNotifyUnexpectedError(Exception e)
+	{
+		shellController.getStage().logAndNotifyUnexpectedError(e);
+	}
+	
+	private FxShellController shellController;
 }

@@ -23,35 +23,56 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx;
+package org.martus.client.swingui.jfx.generic;
 
-import java.awt.Component;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionDoer;
 
-public abstract class FxInSwingFrameController extends FxInSwingController
+abstract public class FxInSwingDialogStage extends FxInSwingStage
 {
-	public FxInSwingFrameController(UiMainWindow mainWindowToUse)
+	public FxInSwingDialogStage(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
 
-	@Override
-	public void installGlassPane(Component glassPane)
+	abstract protected boolean confirmExit();
+	
+	public void setDialog(JDialog dialogToUse)
 	{
-		getFrame().setGlassPane(glassPane);
+		setWindow(dialogToUse);
+		getWindow().addWindowListener(createWindowCloseHandler());
 	}
 
-	private JFrame getFrame()
+	public WindowListener createWindowCloseHandler()
 	{
-		return (JFrame) getWindow();
+		return new WindowCloseHandler();
+	}
+	
+	public void close()
+	{
+		getDialog().setVisible(false);
 	}
 
-	protected void doAction(ActionDoer doer)
+	protected void handleDialogClose()
 	{
-		getStage().doAction(doer);
-	}	
+		close();
+	}
+	
+	protected class WindowCloseHandler extends WindowAdapter
+	{
+		@Override
+		public void windowClosing(WindowEvent e)
+		{
+			if(confirmExit())
+			{
+				handleDialogClose();
+				super.windowClosing(e);
+			}
+		}
+	}
 }

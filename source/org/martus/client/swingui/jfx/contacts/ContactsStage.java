@@ -29,9 +29,9 @@ import javax.swing.JOptionPane;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxContentController;
-import org.martus.client.swingui.jfx.FxNonWizardStage;
-import org.martus.client.swingui.jfx.FxScene;
+import org.martus.client.swingui.jfx.generic.FxContentController;
+import org.martus.client.swingui.jfx.generic.FxNonWizardStage;
+import org.martus.client.swingui.jfx.generic.FxScene;
 
 public class ContactsStage extends FxNonWizardStage
 {

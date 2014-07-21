@@ -26,9 +26,9 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxContentController;
-import org.martus.client.swingui.jfx.FxNonWizardStage;
-import org.martus.client.swingui.jfx.FxScene;
+import org.martus.client.swingui.jfx.generic.FxContentController;
+import org.martus.client.swingui.jfx.generic.FxNonWizardStage;
+import org.martus.client.swingui.jfx.generic.FxScene;
 
 abstract public class DialogStage extends FxNonWizardStage
 {

@@ -39,7 +39,7 @@ import javafx.scene.control.TextField;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.FxWizardStage;
+import org.martus.client.swingui.jfx.generic.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.client.swingui.jfx.setupwizard.step4.FxWizardAddContactsController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.GetServerPublicKeyTask;
