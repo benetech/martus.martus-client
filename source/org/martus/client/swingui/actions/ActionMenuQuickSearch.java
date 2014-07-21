@@ -27,8 +27,8 @@ package org.martus.client.swingui.actions;
 
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.landing.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
+import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.clientside.CurrentUiState;
 import org.martus.common.MartusLogger;
 

@@ -29,6 +29,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxContentController;
 import org.martus.client.swingui.jfx.generic.FxInSwingFrameStage;
 import org.martus.client.swingui.jfx.generic.FxScene;
+import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 
 public class FxMainStage extends FxInSwingFrameStage
 {
