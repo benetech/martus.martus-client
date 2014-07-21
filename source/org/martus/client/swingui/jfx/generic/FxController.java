@@ -109,7 +109,7 @@ abstract public class FxController implements Initializable
 			return fxmlFile.toURI().toURL();
 		}
 
-		return FxScene.class.getResource(fileLocation);
+		return FxController.class.getResource("/org/martus/client/swingui/jfx/" + fileLocation);
 	}		
 	
 	public static class ResourceNotFoundException extends Exception
@@ -365,7 +365,8 @@ abstract public class FxController implements Initializable
 		FXMLLoader fl = new FXMLLoader();
 		fl.setResources(new MartusResourceBundle(getLocalization()));
 		fl.setController(controller);
-		fl.setLocation(FxInSwingDialogStage.class.getResource(controller.getFxmlLocation()));
+		URL fxmlUrl = getBestFxmlLocation(controller.getFxmlLocation());
+		fl.setLocation(fxmlUrl);
 		fl.load();
 		Parent root = fl.getRoot();
 
