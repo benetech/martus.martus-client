@@ -50,10 +50,6 @@ abstract public class FxInSwingContentController extends FxContentController
 	{
 	}
 	
-	public void close()
-	{
-	}
-	
 	public void logAndNotifyUnexpectedError(Exception e)
 	{
 		getStage().logAndNotifyUnexpectedError(e);

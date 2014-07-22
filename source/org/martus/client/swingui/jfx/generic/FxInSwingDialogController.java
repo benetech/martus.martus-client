@@ -62,7 +62,6 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 	
 	protected void close()
 	{
-		getStage().getCurrentController().close();
 		getFxInSwingDialogStage().close();
 	}
 	
