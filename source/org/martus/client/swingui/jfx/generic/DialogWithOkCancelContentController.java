@@ -36,7 +36,7 @@ public abstract class DialogWithOkCancelContentController extends FxInSwingConte
 		super(mainWindowToUse);
 	}
 
-	public DialogWithOkCancelStage getStage()
+	public DialogWithOkCancelStage getOkCancelStage()
 	{
 		return (DialogWithOkCancelStage)getShellController().getStage();
 	}

@@ -56,7 +56,7 @@ public class FxFolderCreateController extends DialogWithOkCancelContentControlle
 		String defaultFolderNewName = localization.getFieldLabel("defaultCaseName");
 		folderName.textProperty().addListener(new FolderNameChangeListener());
 		folderName.setText(defaultFolderNewName);
-		getStage().setOkButtonText(localization.getButtonLabel("CreateFolder"));
+		getOkCancelStage().setOkButtonText(localization.getButtonLabel("CreateFolder"));
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public class FxFolderCreateController extends DialogWithOkCancelContentControlle
 		{
 			clearHintFolderErrorText();
 		}
-		getStage().setOkButtonDisabled(isOkButtonDisabled);
+		getOkCancelStage().setOkButtonDisabled(isOkButtonDisabled);
 	}
 	
 	private class FolderNameChangeListener implements ChangeListener<String>
