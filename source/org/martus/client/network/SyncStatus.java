@@ -48,7 +48,7 @@ public class SyncStatus
 		while(it.hasNext())
 		{
 			String server = (String) it.next();
-			String timestamp = serversToTimestamps.optString(JSON_KEY_SERVERS_TO_TIMESTAMPS);
+			String timestamp = serversToTimestamps.optString(server);
 			serverToTimestampMap.put(server, timestamp);
 		}
 	}
