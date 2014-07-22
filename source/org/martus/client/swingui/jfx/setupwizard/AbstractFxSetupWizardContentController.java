@@ -31,7 +31,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.WizardNavigationButtonsInterface;
 import org.martus.client.swingui.jfx.WizardNavigationHandlerInterface;
 import org.martus.client.swingui.jfx.generic.FxInSwingContentController;
-import org.martus.client.swingui.jfx.generic.FxWizardShellController;
 import org.martus.client.swingui.jfx.generic.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.tasks.ConnectToServerTask;
 
