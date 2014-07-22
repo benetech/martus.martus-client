@@ -68,7 +68,7 @@ public class FxFolderDeleteController extends DialogWithOkCancelContentControlle
 		{
 			logAndNotifyUnexpectedError(e);
 		}
-		getStage().setOkButtonText(localization.getButtonLabel("DeleteFolder"));
+		getOkCancelStage().setOkButtonText(localization.getButtonLabel("DeleteFolder"));
 		deleteAssociatedFiles.selectedProperty().set(false);
 	}
 
