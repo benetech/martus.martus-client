@@ -39,7 +39,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 import org.martus.client.core.MartusApp;
@@ -293,69 +292,6 @@ abstract public class FxController implements Initializable
 		private Map tokenReplacement;
 	}
 
-	public static class PopupConfirmationController extends FxPopupController implements Initializable
-	{
-		public PopupConfirmationController(UiMainWindow mainWindowToUse, String title, String message)
-		{
-			super(mainWindowToUse);
-			this.title = title;
-			this.message = message;
-		}
-		
-		@Override
-		public void initialize()
-		{
-			MartusLocalization localization = getLocalization();
-			fxYesButton.setText(localization.getButtonLabel("yes"));
-			fxNoButton.setText(localization.getButtonLabel("no"));
-			textArea.setText(message);
-			textArea.setEditable(false);
-		}
-		
-		@Override
-		public String getFxmlLocation()
-		{
-			return "setupwizard/ConfirmationPopup.fxml";
-		}
-
-		@Override
-		public String getDialogTitle()
-		{
-			return title; 
-		}
-
-		@FXML
-		public void yesPressed()
-		{
-			yesWasPressed = true;
-			getStage().close();
-		}
-
-		@FXML
-		public void noPressed()
-		{
-			getStage().close();
-		}
-
-		public boolean wasYesPressed()
-		{
-			return yesWasPressed;
-		}
-
-		@FXML
-		private TextArea textArea;
-
-		@FXML
-		private Button fxYesButton;
-		
-		@FXML
-		private Button fxNoButton;
-		
-		private String title;
-		private String message;
-		private boolean yesWasPressed;
-	}
-	
 	public void showControllerInsideModalDialog(FxPopupController controller) throws Exception
 	{
 		FxStage popupStage = new FxStage(mainWindow, controller);
