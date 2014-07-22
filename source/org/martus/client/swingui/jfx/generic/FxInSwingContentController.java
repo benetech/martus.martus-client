@@ -36,7 +36,7 @@ abstract public class FxInSwingContentController extends FxContentController
 		super(mainWindowToUse);
 	}
 
-	public FxShellController getShellController()
+	private FxShellController getShellController()
 	{
 		return shellController;
 	}
