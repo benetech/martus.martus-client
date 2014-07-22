@@ -71,7 +71,7 @@ public class FxFolderSettingsController extends DialogWithCloseContentController
 		} 
 		catch (FolderNotFoundException e)
 		{
-			getShellController().getStage().logAndNotifyUnexpectedError(e);
+			logAndNotifyUnexpectedError(e);
 		}
 		ReadOnlyObjectProperty<ChoiceItem> selectedItemProperty = fxFolderChoiceBox.getSelectionModel().selectedItemProperty();
 		selectedItemProperty.addListener(new FolderNameChoiceBoxListener());
@@ -104,7 +104,7 @@ public class FxFolderSettingsController extends DialogWithCloseContentController
 		} 
 		catch (SaveConfigInfoException e)
 		{
-			getShellController().getStage().logAndNotifyUnexpectedError(e);
+			logAndNotifyUnexpectedError(e);
 		}
 	}
 	
