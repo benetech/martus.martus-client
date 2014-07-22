@@ -39,6 +39,7 @@ public class FxBusyController extends FxBackgroundActivityController
 	@Override
 	public void initialize()
 	{
+		super.initialize();
 		cancelButton.setVisible(false);
 		updateProgressBar(INDETERMINATE);
 	}	

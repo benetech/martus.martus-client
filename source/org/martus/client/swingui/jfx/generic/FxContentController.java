@@ -45,9 +45,7 @@ public abstract class FxContentController extends FxController
 		initialize();
 	}
 	
-	public void initialize()
-	{
-	}
+	abstract public void initialize();
 	
 	public FxShellController getShellController()
 	{

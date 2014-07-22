@@ -38,6 +38,11 @@ public class FxWelcomeContentController extends FxContentController
 	}
 
 	@Override
+	public void initialize()
+	{
+	}
+
+	@Override
 	public String getFxmlLocation()
 	{
 		return "welcome/Welcome.fxml";
@@ -53,4 +58,5 @@ public class FxWelcomeContentController extends FxContentController
 	{
 		return (WelcomeShellController) getShellController();
 	}
+
 }

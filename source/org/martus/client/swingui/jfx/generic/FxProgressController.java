@@ -43,6 +43,7 @@ public class FxProgressController extends FxBackgroundActivityController impleme
 	@Override
 	public void initialize()
 	{
+		super.initialize();
 		updateProgressBar(0.0);
 	}
 
