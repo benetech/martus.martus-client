@@ -34,7 +34,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
@@ -55,7 +54,7 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 	{
 		fxLabel.setText(message);
 		task.stateProperty().addListener(new TaskStateChangeHandler());	
-		Stage stage = getStage();
+		FxStage stage = getStage();
 		stage.setOnCloseRequest(new CloseEventHandler());
 		stage.initStyle(StageStyle.UNDECORATED);
 		Thread thread = new Thread(task);

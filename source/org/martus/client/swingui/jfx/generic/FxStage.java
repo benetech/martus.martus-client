@@ -25,8 +25,44 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
-public interface FxStage
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
+
+
+public class FxStage extends Stage implements VirtualStage
 {
+	public FxStage(UiMainWindow mainWindowToUse, FxPopupController controllerToUse)
+	{
+		mainWindow = mainWindowToUse;
+		controller = controllerToUse;
+		controller.setStage(this);
 
+		setTitle(controller.getDialogTitle());
+		initModality(Modality.APPLICATION_MODAL);
+	}
+
+	@Override
+	public void doAction(ActionDoer doer)
+	{
+		// NOTE: We are already on the JavaFX thread
+		doer.doAction();
+	}
+
+	@Override
+	public void logAndNotifyUnexpectedError(Exception e)
+	{
+		mainWindow.unexpectedErrorDlg(e);
+	}
+
+	@Override
+	public FxController getCurrentController()
+	{
+		return controller;
+	}
+	
+	private UiMainWindow mainWindow;
+	private FxPopupController controller;
 }

@@ -60,7 +60,7 @@ abstract public class FxInSwingContentController extends FxContentController
 		getStage().doAction(doer);
 	}
 
-	protected FxInSwingStage getStage()
+	protected VirtualStage getStage()
 	{
 		return getShellController().getStage();
 	}
