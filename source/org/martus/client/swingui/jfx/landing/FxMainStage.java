@@ -55,4 +55,10 @@ public class FxMainStage extends FxInSwingFrameStage
 		return new FxScene(getExternalFxmlDirectory(), "Landing.css");
 	}
 
+	@Override
+	public void close()
+	{
+		// FIXME: Should we actually close mainWindow here, or 
+		// does that not make any sense?
+	}
 }

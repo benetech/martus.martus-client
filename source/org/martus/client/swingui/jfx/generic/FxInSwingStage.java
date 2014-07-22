@@ -39,7 +39,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 
-public abstract class FxInSwingStage extends JFXPanel
+public abstract class FxInSwingStage extends JFXPanel implements VirtualStage
 {
 	public FxInSwingStage(UiMainWindow mainWindowToUse)
 	{

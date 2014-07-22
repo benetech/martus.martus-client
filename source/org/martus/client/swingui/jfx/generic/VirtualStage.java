@@ -25,37 +25,12 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
-import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
 
-abstract public class FxPopupController extends FxContentController
+public interface VirtualStage
 {
-	public FxPopupController(UiMainWindow mainWindowToUse)
-	{
-		super(mainWindowToUse);
-	}
-
-	public void setStage(FxStage stageToUse)
-	{
-		stage = stageToUse;
-	}
-	
-	public FxStage getStage()
-	{
-		return stage;
-	}
-	
-	public Throwable getThrownException()
-	{
-		return thrownException;
-	}
-	
-	public void setThrownException(Throwable exception)
-	{
-		thrownException = exception;
-	}
-
-	abstract public String getDialogTitle();
-
-	private FxStage stage;
-	private Throwable thrownException;
+	public void close();
+	public void doAction(ActionDoer doer);
+	public void logAndNotifyUnexpectedError(Exception e);
+	public FxController getCurrentController();
 }

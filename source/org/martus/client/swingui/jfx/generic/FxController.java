@@ -40,7 +40,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import org.martus.client.core.MartusApp;
@@ -359,10 +358,7 @@ abstract public class FxController implements Initializable
 	
 	public void showControllerInsideModalDialog(FxPopupController controller) throws Exception
 	{
-		Stage popupStage = new Stage();
-		controller.setStage(popupStage);
-		popupStage.setTitle(controller.getDialogTitle());
-		popupStage.initModality(Modality.APPLICATION_MODAL);
+		FxStage popupStage = new FxStage(mainWindow, controller);
 		FXMLLoader fl = new FXMLLoader();
 		fl.setResources(new MartusResourceBundle(getLocalization()));
 		fl.setController(controller);
