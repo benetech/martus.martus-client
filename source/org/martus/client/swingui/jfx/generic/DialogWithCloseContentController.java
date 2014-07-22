@@ -29,7 +29,7 @@ package org.martus.client.swingui.jfx.generic;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 
-public abstract class DialogWithCloseContentController extends FxContentController  implements ActionDoer
+public abstract class DialogWithCloseContentController extends FxInSwingContentController  implements ActionDoer
 {
 
 	public DialogWithCloseContentController(UiMainWindow mainWindowToUse)

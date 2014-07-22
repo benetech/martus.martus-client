@@ -28,9 +28,9 @@ package org.martus.client.swingui.jfx.welcome;
 import javafx.fxml.FXML;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxContentController;
+import org.martus.client.swingui.jfx.generic.FxInSwingContentController;
 
-public class FxWelcomeContentController extends FxContentController
+public class FxWelcomeContentController extends FxInSwingContentController
 {
 	public FxWelcomeContentController(UiMainWindow mainWindowToUse)
 	{
