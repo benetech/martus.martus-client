@@ -22,27 +22,17 @@ License along with this program; if not, write to the Free
 Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
-*/
-package org.martus.client.swingui.jfx.landing;
+ */
 
-import javafx.fxml.Initializable;
+package org.martus.client.swingui.jfx.generic;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxInSwingContentController;
 
-public abstract class AbstractFxLandingContentController
-		extends FxInSwingContentController implements Initializable
+abstract public class FxInSwingContentController extends FxContentController
 {
-	public AbstractFxLandingContentController(UiMainWindow mainWindowToUse)
+	public FxInSwingContentController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
-	
-	abstract public void initializeMainContentPane();
 
-	final public void initialize()
-	{
-		initializeMainContentPane();
-	}
-		
 }
