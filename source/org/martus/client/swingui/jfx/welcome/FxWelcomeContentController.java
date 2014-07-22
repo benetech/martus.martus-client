@@ -51,12 +51,12 @@ public class FxWelcomeContentController extends FxInSwingContentController
 	@FXML
 	protected void nextWasPressed()
 	{
-		getWelcomeShellController().onNext(null);
+		getWelcomeStage().close();
 	}
 
-	private WelcomeShellController getWelcomeShellController()
+	private WelcomeStage getWelcomeStage()
 	{
-		return (WelcomeShellController) getShellController();
+		return (WelcomeStage) getStage();
 	}
 
 }
