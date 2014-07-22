@@ -89,8 +89,7 @@ abstract public class AbstractFxSetupWizardContentController extends FxInSwingCo
 	
 	public FxWizardStage getWizardStage()
 	{
-		FxWizardShellController shellController = (FxWizardShellController) getShellController();
-		return shellController.getWizardStage();
+		return (FxWizardStage) getStage();
 	}
 	
 	abstract public int getWizardStepNumber();
