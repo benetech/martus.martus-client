@@ -226,7 +226,7 @@ abstract public class FxController implements Initializable
 		}
 		
 		@Override
-		public void initialize(URL arg0, ResourceBundle arg1)
+		public void initialize()
 		{
 			MartusLocalization localization = getLocalization();
 			fxOkButton.setText(localization.getButtonLabel("ok"));
@@ -304,7 +304,7 @@ abstract public class FxController implements Initializable
 		}
 		
 		@Override
-		public void initialize(URL arg0, ResourceBundle arg1)
+		public void initialize()
 		{
 			MartusLocalization localization = getLocalization();
 			fxYesButton.setText(localization.getButtonLabel("yes"));

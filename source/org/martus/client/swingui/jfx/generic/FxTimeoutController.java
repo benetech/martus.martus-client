@@ -25,8 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.TimerTask;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -43,9 +41,8 @@ public class FxTimeoutController extends FxBackgroundActivityController
 	}
 
 	@Override
-	public void initialize(URL location, ResourceBundle bundle)
+	public void initialize()
 	{
-		super.initialize(location, bundle);
 		backgroundTick = new TimeoutTimerTask();
 		MartusUtilities.startTimer(backgroundTick, BACKGROUND_TIMEOUT_CHECK_EVERY_SECOND);
 	}

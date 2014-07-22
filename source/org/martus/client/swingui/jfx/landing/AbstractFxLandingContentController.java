@@ -25,9 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.fxml.Initializable;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -43,9 +40,8 @@ public abstract class AbstractFxLandingContentController
 	
 	abstract public void initializeMainContentPane();
 
-	final public void initialize(URL arg0, ResourceBundle arg1)
+	final public void initialize()
 	{
-		super.initialize(arg0, arg1);
 		initializeMainContentPane();
 	}
 		

@@ -25,10 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step4;
 
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -435,7 +433,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		}
 		
 		@Override
-		public void initialize(URL arg0, ResourceBundle arg1)
+		public void initialize()
 		{
 			contactPublicCode40Label.setText(contactPublicCode40);
 			contactPublicCodeLabel.setText(contactPublicCode);

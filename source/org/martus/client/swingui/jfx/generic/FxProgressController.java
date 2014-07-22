@@ -25,9 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.application.Platform;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -44,9 +41,8 @@ public class FxProgressController extends FxBackgroundActivityController impleme
 	}
 
 	@Override
-	public void initialize(URL location, ResourceBundle bundle)
+	public void initialize()
 	{
-		super.initialize(location, bundle);
 		updateProgressBar(0.0);
 	}
 
