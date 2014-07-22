@@ -56,12 +56,17 @@ abstract public class FxInSwingContentController extends FxContentController
 	
 	public void logAndNotifyUnexpectedError(Exception e)
 	{
-		shellController.getStage().logAndNotifyUnexpectedError(e);
+		getStage().logAndNotifyUnexpectedError(e);
 	}
 	
 	protected void doAction(ActionDoer doer)
 	{
-		getShellController().getStage().doAction(doer);
+		getStage().doAction(doer);
+	}
+
+	protected FxInSwingStage getStage()
+	{
+		return getShellController().getStage();
 	}
 
 	private FxShellController shellController;
