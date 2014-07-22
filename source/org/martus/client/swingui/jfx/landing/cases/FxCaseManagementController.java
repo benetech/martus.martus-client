@@ -155,7 +155,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 			BulletinFolder folder = getApp().findFolder(selectedCase.getName());
 			updateButtons(folder);
 			
-			BulletinsListController bulletinListController = (BulletinsListController)getShellController().getStage().getCurrentController();
+			BulletinsListController bulletinListController = (BulletinsListController)getStage().getCurrentController();
 			bulletinListController.loadBulletinData(folder.getAllUniversalIdsUnsorted());
 		} 
 		catch (Exception e)

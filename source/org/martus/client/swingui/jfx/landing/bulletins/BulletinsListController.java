@@ -105,7 +105,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		}
 		UniversalId bulletinUid = selectedItem.getUniversalId();
 		Bulletin bulletinSelected = getApp().getStore().getBulletinRevision(bulletinUid);
-		getShellController().getStage().doAction(new ActionMenuModifyFxBulletin(getMainWindow(), bulletinSelected));
+		getStage().doAction(new ActionMenuModifyFxBulletin(getMainWindow(), bulletinSelected));
 	}
 
 	public void updateSearchResultsTable(SortableBulletinList searchResults)
