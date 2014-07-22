@@ -53,12 +53,6 @@ public abstract class DialogWithOkCancelContentController extends FxContentContr
 		return (DialogWithOkCancelStage)getShellController().getStage();
 	}
 	
-	public void logAndNotifyUnexpectedError(Exception e)
-	{
-		getStage().logAndNotifyUnexpectedError(e);
-	}
-
-	
 	
 	@Override
 	public void doAction()
