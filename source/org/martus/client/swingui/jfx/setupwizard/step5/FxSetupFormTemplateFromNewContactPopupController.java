@@ -25,9 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step5;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -59,7 +56,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 	}
 	
 	@Override
-	public void initialize(URL location, ResourceBundle resources)
+	public void initialize()
 	{
 		formTemplateChoiceBox.setConverter(new FormTemplateToStringConverter(getLocalization()));
 		formTemplateChoiceBox.valueProperty().addListener(new FieldTemplateChoiceChangeHandler());

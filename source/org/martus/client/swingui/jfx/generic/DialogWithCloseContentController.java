@@ -26,9 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.jfx.generic;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 
@@ -39,15 +36,6 @@ public abstract class DialogWithCloseContentController extends FxContentControll
 	{
 		super(mainWindowToUse);
 	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle bundle)
-	{
-		super.initialize(location, bundle);
-		initialize();
-	}
-	
-	abstract public void initialize();
 
 	@Override
 	public void doAction()
