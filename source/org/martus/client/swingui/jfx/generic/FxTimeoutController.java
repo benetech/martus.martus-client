@@ -43,6 +43,7 @@ public class FxTimeoutController extends FxBackgroundActivityController
 	@Override
 	public void initialize()
 	{
+		super.initialize();
 		backgroundTick = new TimeoutTimerTask();
 		MartusUtilities.startTimer(backgroundTick, BACKGROUND_TIMEOUT_CHECK_EVERY_SECOND);
 	}
