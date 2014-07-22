@@ -32,13 +32,10 @@ import java.util.ResourceBundle;
 
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import org.martus.client.core.MartusApp;
@@ -48,8 +45,6 @@ import org.martus.client.swingui.jfx.generic.data.MartusResourceBundle;
 import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractAppTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.TaskWithTimeout;
 import org.martus.common.MartusLogger;
-import org.martus.util.TokenReplacement;
-import org.martus.util.TokenReplacement.TokenInvalidException;
 
 abstract public class FxController implements Initializable
 {
@@ -204,85 +199,6 @@ abstract public class FxController implements Initializable
 		showControllerInsideModalDialog(popupController);
 		if(popupController.didUserCancel())
 			throw new UserCancelledException();
-	}
-
-	public static class PopupNotifyController extends FxPopupController implements Initializable
-	{
-		public PopupNotifyController(UiMainWindow mainWindowToUse, String notificationTag)
-		{
-			super(mainWindowToUse);
-			baseTag = notificationTag;
-			extraMessage = "";
-			tokenReplacement = null;
-		}
-		
-		@Override
-		public void initialize()
-		{
-			MartusLocalization localization = getLocalization();
-			fxOkButton.setText(localization.getButtonLabel("ok"));
-			String fieldLabelRaw = localization.getFieldLabel("notify"+baseTag+"cause");
-			String fieldLabel = fieldLabelRaw;
-			if(tokenReplacement != null)
-			{
-				try
-				{
-					fieldLabel = TokenReplacement.replaceTokens(fieldLabelRaw, tokenReplacement);
-				} 
-				catch (TokenInvalidException e)
-				{
-					MartusLogger.logException(e);
-					throw new RuntimeException(e);
-				}
-			}
-			
-			String fullMessage = fieldLabel;
-			if(extraMessage.length()>0)
-			{
-				fullMessage += " ";
-				fullMessage += extraMessage;
-			}
-			fxLabel.setText(fullMessage);
-			
-		}
-		
-		public void setExtraMessage(String extraMessageToUse)
-		{
-			extraMessage = extraMessageToUse;
-		}
-		
-		public void setTokenReplacement(Map tokenReplacementMapToUse)
-		{
-			tokenReplacement = tokenReplacementMapToUse;
-		}
-		
-		@Override
-		public String getFxmlLocation()
-		{
-			return "setupwizard/NotifyPopup.fxml";
-		}
-
-		@Override
-		public String getDialogTitle()
-		{
-			return getLocalization().getWindowTitle("notify"+ baseTag); 
-		}
-
-		@FXML
-		public void okPressed()
-		{
-			getStage().close();
-		}
-
-		@FXML
-		private Label fxLabel;
-
-		@FXML
-		private Button fxOkButton;
-
-		private String baseTag;
-		private String extraMessage;
-		private Map tokenReplacement;
 	}
 
 	public void showControllerInsideModalDialog(FxPopupController controller) throws Exception
