@@ -114,17 +114,17 @@ public abstract class FxInSwingStage extends JFXPanel
 		shellController = controller;
 	}
 
-	public FxContentController getCurrentController()
+	public FxInSwingContentController getCurrentController()
 	{
 		return currentContentController;
 	}
 
-	public void setCurrentController(FxContentController contentControllerToUse)
+	public void setCurrentController(FxInSwingContentController contentControllerToUse)
 	{
 		currentContentController = contentControllerToUse;
 	}
 
-	public void showCurrentPage(FxContentController contentPaneController) throws Exception
+	public void showCurrentPage(FxInSwingContentController contentPaneController) throws Exception
 	{
 		ensureSceneExists();
 		contentPaneController.setShellController(getShellController());
@@ -187,5 +187,5 @@ public abstract class FxInSwingStage extends JFXPanel
 	private FxScene scene;
 	private Window window;
 	private FxShellController shellController;
-	private FxContentController currentContentController;
+	private FxInSwingContentController currentContentController;
 }

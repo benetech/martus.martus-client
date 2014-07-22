@@ -38,7 +38,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	{
 		super(mainWindowToUse);
 		
-		visitedWizardPagesStack = new Stack<FxContentController>();
+		visitedWizardPagesStack = new Stack<FxInSwingContentController>();
 
 		setShellController(new FxSetupWizardShellController(getMainWindow()));
 		setCurrentController(getFirstController());
@@ -58,9 +58,9 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	{
 		try
 		{
-			FxContentController currentController = getCurrentController();
+			FxInSwingContentController currentController = getCurrentController();
 			AbstractFxSetupWizardContentController contentPaneController = (AbstractFxSetupWizardContentController) currentController;
-			FxContentController nextController = contentPaneController.getNextController();
+			FxInSwingContentController nextController = contentPaneController.getNextController();
 			visitedWizardPagesStack.push(currentController);
 			if(nextController == null)
 			{
@@ -136,9 +136,9 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		return (FxWizardShellController)getShellController();
 	}
 	
-	abstract protected FxContentController getFirstController();
+	abstract protected FxInSwingContentController getFirstController();
 
-	private Stack<FxContentController> visitedWizardPagesStack;
+	private Stack<FxInSwingContentController> visitedWizardPagesStack;
 
 	private String serverAvailibilityState;
 

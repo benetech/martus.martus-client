@@ -29,7 +29,7 @@ import org.martus.client.swingui.UiMainWindow;
 
 public class DialogWithOkCancelStage extends DialogStage
 {
-	public DialogWithOkCancelStage(UiMainWindow mainWindowToUse, FxContentController controllerToUse)
+	public DialogWithOkCancelStage(UiMainWindow mainWindowToUse, FxInSwingContentController controllerToUse)
 	{
 		super(mainWindowToUse, controllerToUse);
 	}
