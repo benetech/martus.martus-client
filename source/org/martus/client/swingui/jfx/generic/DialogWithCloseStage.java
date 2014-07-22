@@ -29,7 +29,7 @@ import org.martus.client.swingui.UiMainWindow;
 
 public class DialogWithCloseStage extends DialogStage
 {
-	public DialogWithCloseStage(UiMainWindow mainWindowToUse, FxContentController controllerToUse)
+	public DialogWithCloseStage(UiMainWindow mainWindowToUse, FxInSwingContentController controllerToUse)
 	{
 		super(mainWindowToUse, controllerToUse);
 	}

@@ -29,7 +29,7 @@ import org.martus.client.swingui.UiMainWindow;
 
 abstract public class DialogStage extends FxNonWizardStage
 {
-	public DialogStage(UiMainWindow mainWindowToUse, FxContentController controllerToUse)
+	public DialogStage(UiMainWindow mainWindowToUse, FxInSwingContentController controllerToUse)
 	{
 		super(mainWindowToUse);
 		setShellController();
@@ -55,7 +55,7 @@ abstract public class DialogStage extends FxNonWizardStage
 	@Override
 	public void showCurrentScene() throws Exception
 	{
-		FxContentController contentPaneController = getCurrentController();
+		FxInSwingContentController contentPaneController = getCurrentController();
 		showCurrentPage(contentPaneController);
 	}
 }

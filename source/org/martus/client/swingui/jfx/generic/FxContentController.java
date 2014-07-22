@@ -29,7 +29,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionDoer;
 
 public abstract class FxContentController extends FxController
 {
@@ -47,33 +46,4 @@ public abstract class FxContentController extends FxController
 	
 	abstract public void initialize();
 	
-	public FxShellController getShellController()
-	{
-		return shellController;
-	}
-	
-	public void setShellController(FxShellController shellControllerToUse)
-	{
-		shellController = shellControllerToUse;
-	}
-	
-	protected void save()
-	{
-	}
-	
-	public void close()
-	{
-	}
-	
-	public void logAndNotifyUnexpectedError(Exception e)
-	{
-		shellController.getStage().logAndNotifyUnexpectedError(e);
-	}
-	
-	protected void doAction(ActionDoer doer)
-	{
-		getShellController().getStage().doAction(doer);
-	}
-
-	private FxShellController shellController;
 }
