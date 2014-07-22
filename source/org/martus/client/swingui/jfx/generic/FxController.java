@@ -53,13 +53,6 @@ import org.martus.util.TokenReplacement.TokenInvalidException;
 
 abstract public class FxController implements Initializable
 {
-	private static final String POPUP_CSS = "Popup.css";
-	private static final String MARTUS_CSS = "Martus.css";
-
-	public static class UserCancelledException extends Exception
-	{
-	}
-
 	public FxController(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
@@ -349,8 +342,6 @@ abstract public class FxController implements Initializable
 				stylesheets.add(languageCssUrl.toExternalForm());
 		}
 	}
-
-
 	
 	public static URL getBestCss(File directory, String languageCode,
 			String cssLocation) throws Exception
@@ -359,6 +350,13 @@ abstract public class FxController implements Initializable
 			return getBestFile(directory, "css/" + cssLocation);
 		return getBestFile(directory, "css/" + languageCode + "/" + cssLocation);
 	}
+
+	public static class UserCancelledException extends Exception
+	{
+	}
+
+	private static final String POPUP_CSS = "Popup.css";
+	private static final String MARTUS_CSS = "Martus.css";
 
 	private UiMainWindow mainWindow;
 	private static int notifyDialogDepth;
