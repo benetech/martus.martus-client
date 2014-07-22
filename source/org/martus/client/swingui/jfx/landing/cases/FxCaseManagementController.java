@@ -42,7 +42,6 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.FxFolderSettingsController.FolderNotFoundException;
@@ -74,11 +73,6 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	public String getFxmlLocation()
 	{
 		return LOCATION_CASE_MANAGEMENT_FXML;
-	}
-
-	protected void doAction(ActionDoer doer)
-	{
-		getShellController().getStage().doAction(doer);
 	}
 
 	protected void updateCasesSelectDefaultCase()

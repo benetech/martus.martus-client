@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.generic;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
 
 public abstract class FxContentController extends FxController
 {
@@ -57,5 +58,10 @@ public abstract class FxContentController extends FxController
 		shellController.getStage().logAndNotifyUnexpectedError(e);
 	}
 	
+	protected void doAction(ActionDoer doer)
+	{
+		getShellController().getStage().doAction(doer);
+	}
+
 	private FxShellController shellController;
 }
