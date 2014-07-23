@@ -46,7 +46,7 @@ abstract public class FxInSwingContentController extends FxContentController
 		shellController = shellControllerToUse;
 	}
 	
-	protected void save()
+	public void save()
 	{
 	}
 	
