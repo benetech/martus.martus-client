@@ -42,6 +42,14 @@ public class ContactsStage extends FxNonWizardStage
 	}
 
 	@Override
+	public void showCurrentPage() throws Exception
+	{
+		// NOTE: Special case for Contacts because it is still treated 
+		// as a wizard page
+		showCurrentPage(getCurrentController());
+	}
+	
+	@Override
 	protected String getCssName()
 	{
 		return "Contacts.css";

@@ -35,8 +35,8 @@ public class DialogWithCloseStage extends DialogStage
 	}
 
 	@Override
-	public void setShellController()
+	public void createShellController(FxController contentController)
 	{
-		setShellController(new DialogWithCloseShellController(getMainWindow()));
+		setShellController(new DialogWithCloseShellController(getMainWindow(), contentController));
 	}
 }

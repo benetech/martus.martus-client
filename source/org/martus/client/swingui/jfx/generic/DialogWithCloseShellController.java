@@ -31,9 +31,9 @@ import org.martus.client.swingui.UiMainWindow;
 
 public class DialogWithCloseShellController extends DialogShellController 
 {
-	public DialogWithCloseShellController(UiMainWindow mainWindowToUse)
+	public DialogWithCloseShellController(UiMainWindow mainWindowToUse, FxController contentController)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, contentController);
 	}
 
 	@Override

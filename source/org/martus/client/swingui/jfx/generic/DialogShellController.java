@@ -31,11 +31,11 @@ import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
 
-abstract public class DialogShellController extends FxInSwingShellController 
+abstract public class DialogShellController extends FxNonWizardShellController 
 {
-	public DialogShellController(UiMainWindow mainWindowToUse)
+	public DialogShellController(UiMainWindow mainWindowToUse, FxController contentController)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, contentController);
 	}
 
 	@Override

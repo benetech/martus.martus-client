@@ -32,9 +32,9 @@ import org.martus.client.swingui.UiMainWindow;
 
 public class DialogWithOkCancelShellController extends DialogShellController 
 {
-	public DialogWithOkCancelShellController(UiMainWindow mainWindowToUse)
+	public DialogWithOkCancelShellController(UiMainWindow mainWindowToUse, FxController contentController)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, contentController);
 	}
 
 	@Override

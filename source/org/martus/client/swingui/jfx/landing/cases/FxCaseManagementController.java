@@ -43,6 +43,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
+import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.FxFolderSettingsController.FolderNotFoundException;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -153,9 +154,12 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 				return;
 			CaseListItem selectedCase = currentCaseListProvider.get(selectedIndex);
 			BulletinFolder folder = getApp().findFolder(selectedCase.getName());
+			if(folder == null)
+				return;
 			updateButtons(folder);
 			
-			BulletinsListController bulletinListController = (BulletinsListController)getStage().getCurrentController();
+			FxMainStage stage = (FxMainStage) getStage();
+			BulletinsListController bulletinListController = stage.getBulletinsListController();
 			bulletinListController.loadBulletinData(folder.getAllUniversalIdsUnsorted());
 		} 
 		catch (Exception e)

@@ -129,6 +129,16 @@ public abstract class FxInSwingStage extends JFXPanel implements VirtualStage
 
 	abstract public void showCurrentPage() throws Exception;
 
+	public void showTheOnlyPage() throws Exception
+	{
+		ensureSceneExists();
+		getShellController().setStage(this);
+		Parent shellContents = getShellController().createContents();
+
+		setSceneRoot(shellContents);
+		getFxScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
+	}
+	
 	public void showCurrentPage(FxController contentPaneController) throws Exception
 	{
 		ensureSceneExists();

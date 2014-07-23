@@ -50,7 +50,7 @@ public class ActionMenuQuickSearch extends ActionSearch
 		{
 			SortableBulletinList bulletinIdsFromSearch = doSearch(searchString);
 			FxMainStage stage = mainWindow.getMainStage();
-			BulletinsListController controller = (BulletinsListController)stage.getCurrentController();
+			BulletinsListController controller = stage.getBulletinsListController();
 			controller.updateSearchResultsTable(bulletinIdsFromSearch);
 		} 
 		catch (Exception e)
