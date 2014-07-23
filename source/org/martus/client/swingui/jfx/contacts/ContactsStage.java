@@ -44,7 +44,7 @@ public class ContactsStage extends FxNonWizardStage
 	}
 
 	@Override
-	public void showCurrentScene() throws Exception
+	public void showCurrentPage() throws Exception
 	{
 		FxInSwingContentController contentPaneController = getCurrentController();
 

@@ -42,7 +42,7 @@ public class FxMainStage extends FxInSwingFrameStage
 	}
 
 	@Override
-	public void showCurrentScene() throws Exception
+	public void showCurrentPage() throws Exception
 	{
 		FxInSwingContentController contentPaneController = getCurrentController();
 

@@ -45,7 +45,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	}
 	
 	@Override
-	public void showCurrentScene() throws Exception
+	public void showCurrentPage() throws Exception
 	{
 		AbstractFxSetupWizardContentController contentPaneController = (AbstractFxSetupWizardContentController) getCurrentController();
 
@@ -69,7 +69,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 			else
 			{
 				setCurrentController(nextController);
-				showCurrentScene();
+				showCurrentPage();
 			}
 		}
 		catch(Exception e)
@@ -89,7 +89,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 			else
 			{
 				setCurrentController(visitedWizardPagesStack.pop());
-				showCurrentScene();
+				showCurrentPage();
 			}
 		}
 		catch(Exception e)
