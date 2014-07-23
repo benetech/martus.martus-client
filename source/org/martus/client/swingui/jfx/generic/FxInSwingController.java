@@ -47,9 +47,13 @@ public abstract class FxInSwingController extends FxController implements FxShel
 	public FxInSwingController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+		glassPaneInstaller = new GlassPaneInstaller(this);
 	}
-
-	abstract public void installGlassPane(Component glassPane);
+	
+	public void installGlassPane(Component glassPane)
+	{
+		glassPaneInstaller.installGlassPane(glassPane);
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle bundle)
@@ -215,4 +219,5 @@ public abstract class FxInSwingController extends FxController implements FxShel
 	}
 
 	private FxInSwingStage stage;
+	private GlassPaneInstaller glassPaneInstaller;
 }

@@ -25,12 +25,42 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
-import org.martus.client.swingui.UiMainWindow;
+import java.awt.Component;
+import java.awt.Window;
 
-abstract public class FxInSwingDialogController extends FxInSwingController
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+
+public class GlassPaneInstaller
 {
-	public FxInSwingDialogController(UiMainWindow mainWindowToUse)
+	public GlassPaneInstaller(FxInSwingController controllerToUse)
 	{
-		super(mainWindowToUse);
+		controller = controllerToUse;
 	}
+
+	final public void installGlassPane(Component glassPane)
+	{
+		Window window = controller.getWindow();
+		if(window instanceof JFrame)
+		{
+			JFrame frame = (JFrame) window;
+			frame.setGlassPane(glassPane);
+		}
+		else if(window instanceof JDialog)
+		{
+			JDialog dialog = (JDialog) window;
+			dialog.setGlassPane(glassPane);
+		}
+		else
+		{
+			throw new RuntimeException("Unknown type for glass pane: " + window.getClass());
+		}
+	}
+
+	protected Window getWindow()
+	{
+		return controller.getWindow();
+	}
+	
+	private FxInSwingController controller;
 }

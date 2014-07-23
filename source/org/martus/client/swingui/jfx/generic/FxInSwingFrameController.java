@@ -25,10 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
-import java.awt.Component;
-
-import javax.swing.JFrame;
-
 import org.martus.client.swingui.UiMainWindow;
 
 public abstract class FxInSwingFrameController extends FxInSwingController
@@ -37,15 +33,4 @@ public abstract class FxInSwingFrameController extends FxInSwingController
 	{
 		super(mainWindowToUse);
 	}
-
-	@Override
-	public void installGlassPane(Component glassPane)
-	{
-		getFrame().setGlassPane(glassPane);
-	}
-
-	private JFrame getFrame()
-	{
-		return (JFrame) getWindow();
-	}	
 }
