@@ -42,9 +42,9 @@ import org.martus.client.swingui.TranslucentWindowObscurer;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 
-public abstract class FxInSwingController extends FxController implements FxShellController
+public abstract class FxInSwingShellController extends FxController implements FxShellController
 {
-	public FxInSwingController(UiMainWindow mainWindowToUse)
+	public FxInSwingShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 		glassPaneInstaller = new GlassPaneInstaller(this);
