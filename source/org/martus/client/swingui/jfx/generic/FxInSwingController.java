@@ -124,7 +124,7 @@ public abstract class FxInSwingController extends FxController implements FxShel
 
 	protected void saveAndClose()
 	{
-		getSwingStage().getCurrentController().save();
+		getStage().getCurrentController().save();
 		close();
 	}
 
