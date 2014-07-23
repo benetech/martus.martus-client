@@ -26,7 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.welcome;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxInSwingContentController;
+import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxNonWizardStage;
 
 public class WelcomeStage extends FxNonWizardStage
@@ -42,7 +42,7 @@ public class WelcomeStage extends FxNonWizardStage
 	@Override
 	public void showCurrentPage() throws Exception
 	{
-		FxInSwingContentController contentPaneController = getCurrentController();
+		FxController contentPaneController = getCurrentController();
 
 		showCurrentPage(contentPaneController);
 	}
