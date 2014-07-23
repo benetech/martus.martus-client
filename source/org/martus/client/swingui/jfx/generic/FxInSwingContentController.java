@@ -36,16 +36,6 @@ abstract public class FxInSwingContentController extends FxContentController
 		super(mainWindowToUse);
 	}
 
-	private FxShellController getShellController()
-	{
-		return shellController;
-	}
-	
-	public void setShellController(FxShellController shellControllerToUse)
-	{
-		shellController = shellControllerToUse;
-	}
-	
 	public void save()
 	{
 	}
@@ -60,10 +50,4 @@ abstract public class FxInSwingContentController extends FxContentController
 		getStage().doAction(doer);
 	}
 
-	protected VirtualStage getStage()
-	{
-		return getShellController().getStage();
-	}
-
-	private FxShellController shellController;
 }

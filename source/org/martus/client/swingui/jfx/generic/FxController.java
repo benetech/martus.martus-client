@@ -64,6 +64,21 @@ abstract public class FxController implements Initializable
 	{
 	}
 	
+	private FxShellController getShellController()
+	{
+		return shellController;
+	}
+	
+	public void setShellController(FxShellController shellControllerToUse)
+	{
+		shellController = shellControllerToUse;
+	}
+	
+	protected VirtualStage getStage()
+	{
+		return getShellController().getStage();
+	}
+
 	public Parent createContents() throws Exception
 	{
 		return (Parent)createLoader().load();
@@ -280,4 +295,6 @@ abstract public class FxController implements Initializable
 
 	private UiMainWindow mainWindow;
 	private static int notifyDialogDepth;
+	private FxShellController shellController;
+
 }
