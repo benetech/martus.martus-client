@@ -29,7 +29,8 @@ import javafx.scene.Parent;
 
 public abstract interface FxShellController 
 {
-	public FxInSwingStage getStage();
+	public VirtualStage getStage();
+	public FxInSwingStage getSwingStage();
 	public void setStage(FxInSwingStage stageToUse);
 	public void setContentPane(FxContentController contentController) throws Exception;
 	public Parent createContents() throws Exception;
