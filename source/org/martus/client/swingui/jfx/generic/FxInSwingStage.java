@@ -129,7 +129,7 @@ public abstract class FxInSwingStage extends JFXPanel implements VirtualStage
 		currentContentController = contentControllerToUse;
 	}
 
-	public void showCurrentPage(FxInSwingContentController contentPaneController) throws Exception
+	public void showCurrentPage(FxController contentPaneController) throws Exception
 	{
 		ensureSceneExists();
 		contentPaneController.setShellController(getShellController());
