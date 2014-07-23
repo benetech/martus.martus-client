@@ -32,7 +32,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxContentController;
+import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 
 public class WelcomeShellController extends FxInSwingController
@@ -48,7 +48,7 @@ public class WelcomeShellController extends FxInSwingController
 		return "welcome/WelcomeShell.fxml";
 	}
 
-	public void setContentPane(FxContentController contentPaneController) throws Exception
+	public void setContentPane(FxController contentPaneController) throws Exception
 	{
 		Parent createContents = contentPaneController.createContents();
 		

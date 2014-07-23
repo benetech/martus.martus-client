@@ -39,7 +39,7 @@ abstract public class DialogShellController extends FxInSwingController
 	}
 
 	@Override
-	public void setContentPane(FxContentController contentController) throws Exception
+	public void setContentPane(FxController contentController) throws Exception
 	{
 		Parent createContents = contentController.createContents();
 		contentPane.getChildren().addAll(createContents);
