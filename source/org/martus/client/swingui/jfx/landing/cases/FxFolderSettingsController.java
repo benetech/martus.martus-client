@@ -45,7 +45,13 @@ import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxFolderSettingsController extends DialogWithCloseContentController
 {
-	public static class FolderNotFoundException extends Exception {}
+	public static class FolderNotFoundException extends Exception
+	{
+		public FolderNotFoundException(String message)
+		{
+			super(message);
+		}
+	}
 	
 	public FxFolderSettingsController(UiMainWindow mainWindowToUse, ChangeListener folderLabelIndexListenertoUse, ChangeListener folderCustomLabelListenerToUse)
 	{
@@ -90,7 +96,7 @@ public class FxFolderSettingsController extends DialogWithCloseContentController
 			if(folderItem.getCode().equals(folderCode))
 				return folderItem;
 		}
-		throw new FolderNotFoundException();
+		throw new FolderNotFoundException("Not found: " + folderCode);
 	}
 	
 	@Override public void save()
