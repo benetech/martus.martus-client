@@ -55,6 +55,10 @@ abstract public class FxController implements Initializable
 	
 	abstract public String getFxmlLocation();
 	
+	public void save()
+	{
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle bundle)
 	{
