@@ -59,8 +59,13 @@ public abstract class FxInSwingController extends FxController implements FxShel
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 	}
+	
+	public VirtualStage getStage()
+	{
+		return getSwingStage();
+	}
 
-	public FxInSwingStage getStage()
+	public FxInSwingStage getSwingStage()
 	{
 		return stage;
 	}
@@ -109,12 +114,12 @@ public abstract class FxInSwingController extends FxController implements FxShel
 
 	public FxScene getScene()
 	{
-		return getStage().getFxScene();
+		return getSwingStage().getFxScene();
 	}
 
 	public Window getWindow()
 	{
-		return getStage().getWindow();
+		return getSwingStage().getWindow();
 	}
 
 	protected void doAction(ActionDoer doer)
@@ -124,7 +129,7 @@ public abstract class FxInSwingController extends FxController implements FxShel
 
 	protected void saveAndClose()
 	{
-		getStage().getCurrentController().save();
+		getSwingStage().getCurrentController().save();
 		close();
 	}
 

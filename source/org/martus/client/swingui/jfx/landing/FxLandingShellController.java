@@ -90,7 +90,7 @@ public class FxLandingShellController extends FxInSwingController
 	private void setupCaseManagementSidebar() throws Exception, IOException
 	{
 		FxCaseManagementController caseManagementSideBar = new FxCaseManagementController(getMainWindow());
-		caseManagementSideBar.setShellController(getStage().getShellController());
+		caseManagementSideBar.setShellController(getSwingStage().getShellController());
 		URL url = getBestFxmlLocation(caseManagementSideBar.getFxmlLocation());
 		FxmlLoaderWithController sidebarLoader = new FxmlLoaderWithController(caseManagementSideBar, url);
 		Node sideBarNode = (Node) sidebarLoader.load();
