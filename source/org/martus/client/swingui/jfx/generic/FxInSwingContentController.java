@@ -32,7 +32,7 @@ import java.util.ResourceBundle;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 
-abstract public class FxInSwingContentController extends FxContentController
+abstract public class FxInSwingContentController extends FxController
 {
 	public FxInSwingContentController(UiMainWindow mainWindowToUse)
 	{

@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
 
 import org.martus.client.swingui.UiMainWindow;
 
-abstract public class FxPopupController extends FxContentController
+abstract public class FxPopupController extends FxController
 {
 	public FxPopupController(UiMainWindow mainWindowToUse)
 	{
