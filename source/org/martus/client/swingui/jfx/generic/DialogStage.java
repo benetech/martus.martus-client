@@ -32,11 +32,11 @@ abstract public class DialogStage extends FxNonWizardStage
 	public DialogStage(UiMainWindow mainWindowToUse, FxInSwingContentController controllerToUse)
 	{
 		super(mainWindowToUse);
-		setShellController();
+		createShellController(controllerToUse);
 		setCurrentController(controllerToUse);
 	}
 	
-	abstract public void setShellController();
+	abstract public void createShellController(FxController contentController);
 	
 
 	@Override

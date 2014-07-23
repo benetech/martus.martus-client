@@ -34,8 +34,7 @@ public class WelcomeStage extends FxNonWizardStage
 	{
 		super(mainWindow);
 		
-		setShellController(new WelcomeShellController(getMainWindow()));
-		setCurrentController(new FxWelcomeContentController(getMainWindow()));
+		setShellController(new WelcomeShellController(getMainWindow(), new FxWelcomeContentController(getMainWindow())));
 	}
 
 	@Override

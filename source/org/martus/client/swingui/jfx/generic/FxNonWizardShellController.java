@@ -25,19 +25,26 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import javafx.scene.Parent;
+
 import org.martus.client.swingui.UiMainWindow;
 
-abstract public class FxNonWizardStage extends FxInSwingDialogStage
+public abstract class FxNonWizardShellController extends FxInSwingShellController
 {
-	public FxNonWizardStage(UiMainWindow mainWindowToUse)
+	public FxNonWizardShellController(UiMainWindow mainWindowToUse, FxController contentControllerToUse)
 	{
 		super(mainWindowToUse);
+		contentController = contentControllerToUse;
 	}
 
 	@Override
-	public void showCurrentPage() throws Exception
+	public Parent createContents() throws Exception
 	{
-		showTheOnlyPage();
+		Parent shellContents = super.createContents();
+		contentController.setShellController(this);
+		setContentPane(contentController);
+		return shellContents;
 	}
-
+	
+	FxController contentController;
 }

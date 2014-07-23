@@ -35,8 +35,8 @@ public class FxMainStage extends FxInSwingFrameStage
 	{
 		super(mainWindowToUse);
 		
-		setShellController(new FxLandingShellController(getMainWindow()));
-		setCurrentController(new BulletinsListController(getMainWindow()));
+		bulletinsListController = new BulletinsListController(getMainWindow());
+		setShellController(new FxLandingShellController(getMainWindow(), bulletinsListController));
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class FxMainStage extends FxInSwingFrameStage
 	@Override
 	public void showCurrentPage() throws Exception
 	{
-		showCurrentPage(getCurrentController());
+		showTheOnlyPage();
 	}
 
 	@Override
@@ -57,4 +57,11 @@ public class FxMainStage extends FxInSwingFrameStage
 		// FIXME: Should we actually close mainWindow here, or 
 		// does that not make any sense?
 	}
+	
+	public BulletinsListController getBulletinsListController()
+	{
+		return bulletinsListController;
+	}
+
+	private BulletinsListController bulletinsListController;
 }

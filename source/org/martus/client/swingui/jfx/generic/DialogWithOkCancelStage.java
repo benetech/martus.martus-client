@@ -45,8 +45,8 @@ public class DialogWithOkCancelStage extends DialogStage
 	}
 
 	@Override
-	public void setShellController()
+	public void createShellController(FxController contentController)
 	{
-		setShellController(new DialogWithOkCancelShellController(getMainWindow()));
+		setShellController(new DialogWithOkCancelShellController(getMainWindow(), contentController));
 	}
 }

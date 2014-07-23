@@ -33,13 +33,13 @@ import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
-import org.martus.client.swingui.jfx.generic.FxInSwingShellController;
+import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 
-public class WelcomeShellController extends FxInSwingShellController
+public class WelcomeShellController extends FxNonWizardShellController
 {
-	public WelcomeShellController(UiMainWindow mainWindowToUse)
+	public WelcomeShellController(UiMainWindow mainWindowToUse, FxController contentController)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, contentController);
 	}
 
 	@Override
