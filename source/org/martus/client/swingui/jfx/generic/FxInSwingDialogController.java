@@ -49,15 +49,4 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 		getDialog().setGlassPane(glassPane);
 	}
 	
-	protected void saveAndClose()
-	{
-		getStage().getCurrentController().save();
-		close();
-	}
-	
-	protected void close()
-	{
-		getStage().close();
-	}
-	
 }

@@ -118,6 +118,17 @@ public abstract class FxInSwingController extends FxController implements FxShel
 		getStage().doAction(doer);
 	}
 
+	protected void saveAndClose()
+	{
+		getStage().getCurrentController().save();
+		close();
+	}
+
+	protected void close()
+	{
+		getStage().close();
+	}
+
 	protected static class DialogWindowHandler extends WindowAdapter implements MouseMotionListener
 	{
 		public DialogWindowHandler(Runnable runOnFocusGained)
