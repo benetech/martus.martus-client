@@ -28,7 +28,6 @@ package org.martus.client.swingui.jfx.landing;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingContentController;
 import org.martus.client.swingui.jfx.generic.FxInSwingFrameStage;
-import org.martus.client.swingui.jfx.generic.FxScene;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 
 public class FxMainStage extends FxInSwingFrameStage
@@ -50,9 +49,9 @@ public class FxMainStage extends FxInSwingFrameStage
 	}
 
 	@Override
-	protected FxScene createScene() throws Exception
+	protected String getCssName()
 	{
-		return new FxScene(getExternalFxmlDirectory(), "Landing.css");
+		return "Landing.css";
 	}
 
 	@Override

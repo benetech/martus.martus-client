@@ -46,9 +46,9 @@ abstract public class DialogStage extends FxNonWizardStage
 	}
 
 	@Override
-	protected FxScene createScene() throws Exception
+	protected String getCssName()
 	{
-		return new FxScene(getExternalFxmlDirectory(), null);
+		return null;
 	}
 
 	@Override

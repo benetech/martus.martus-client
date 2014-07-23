@@ -30,7 +30,6 @@ import javax.swing.JOptionPane;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingContentController;
-import org.martus.client.swingui.jfx.generic.FxScene;
 import org.martus.client.swingui.jfx.generic.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.step1.FxSetupUsernamePasswordController;
 
@@ -48,9 +47,9 @@ public class SetupWizardStage extends FxWizardStage
 	}
 	
 	@Override
-	protected FxScene createScene() throws Exception
+	protected String getCssName()
 	{
-		return new FxScene(getExternalFxmlDirectory(), "SetupWizard.css");
+		return "SetupWizard.css";
 	}
 	
 	@Override
