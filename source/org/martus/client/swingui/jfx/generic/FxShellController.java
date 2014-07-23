@@ -25,16 +25,12 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
-import org.martus.client.swingui.UiMainWindow;
+import javafx.scene.Parent;
 
-public abstract class FxShellController extends FxController
+public abstract interface FxShellController 
 {
-	public FxShellController(UiMainWindow mainWindowToUse)
-	{
-		super(mainWindowToUse);
-	}
-	
-	abstract public FxInSwingStage getStage();
-	abstract public void setStage(FxInSwingStage stageToUse);
-	abstract public void setContentPane(FxContentController contentController) throws Exception;
+	public FxInSwingStage getStage();
+	public void setStage(FxInSwingStage stageToUse);
+	public void setContentPane(FxContentController contentController) throws Exception;
+	public Parent createContents() throws Exception;
 }

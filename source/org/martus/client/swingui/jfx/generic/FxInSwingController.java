@@ -41,7 +41,7 @@ import javafx.stage.Stage;
 import org.martus.client.swingui.TranslucentWindowObscurer;
 import org.martus.client.swingui.UiMainWindow;
 
-public abstract class FxInSwingController extends FxShellController
+public abstract class FxInSwingController extends FxController implements FxShellController
 {
 	public FxInSwingController(UiMainWindow mainWindowToUse)
 	{
