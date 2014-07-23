@@ -40,6 +40,7 @@ import javafx.stage.Stage;
 
 import org.martus.client.swingui.TranslucentWindowObscurer;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
 
 public abstract class FxInSwingController extends FxController implements FxShellController
 {
@@ -110,6 +111,11 @@ public abstract class FxInSwingController extends FxController implements FxShel
 	public Window getWindow()
 	{
 		return getStage().getWindow();
+	}
+
+	protected void doAction(ActionDoer doer)
+	{
+		getStage().doAction(doer);
 	}
 
 	protected static class DialogWindowHandler extends WindowAdapter implements MouseMotionListener
