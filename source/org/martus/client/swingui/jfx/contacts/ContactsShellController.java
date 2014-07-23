@@ -35,10 +35,10 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.WizardNavigationButtonsInterface;
 import org.martus.client.swingui.jfx.WizardNavigationHandlerInterface;
 import org.martus.client.swingui.jfx.generic.FxContentController;
-import org.martus.client.swingui.jfx.generic.FxInSwingDialogController;
+import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 
-public class ContactsShellController extends FxInSwingDialogController implements WizardNavigationButtonsInterface
+public class ContactsShellController extends FxInSwingController implements WizardNavigationButtonsInterface
 {
 	public ContactsShellController(UiMainWindow mainWindowToUse)
 	{

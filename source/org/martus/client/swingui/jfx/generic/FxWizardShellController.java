@@ -38,7 +38,7 @@ import org.martus.client.swingui.jfx.WizardNavigationHandlerInterface;
 import org.martus.common.MartusLogger;
 
 
-abstract public class FxWizardShellController extends FxInSwingDialogController implements WizardNavigationButtonsInterface
+abstract public class FxWizardShellController extends FxInSwingController implements WizardNavigationButtonsInterface
 {
 	public FxWizardShellController(UiMainWindow mainWindowToUse)
 	{

@@ -33,9 +33,9 @@ import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxContentController;
-import org.martus.client.swingui.jfx.generic.FxInSwingDialogController;
+import org.martus.client.swingui.jfx.generic.FxInSwingController;
 
-public class WelcomeShellController extends FxInSwingDialogController
+public class WelcomeShellController extends FxInSwingController
 {
 	public WelcomeShellController(UiMainWindow mainWindowToUse)
 	{
