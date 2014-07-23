@@ -46,6 +46,12 @@ public class FxMainStage extends FxInSwingFrameStage
 	}
 
 	@Override
+	public void showCurrentPage() throws Exception
+	{
+		showCurrentPage(getCurrentController());
+	}
+
+	@Override
 	public void close()
 	{
 		// FIXME: Should we actually close mainWindow here, or 
