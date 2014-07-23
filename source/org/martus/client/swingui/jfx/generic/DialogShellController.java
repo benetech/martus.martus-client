@@ -31,7 +31,7 @@ import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
 
-abstract public class DialogShellController extends FxInSwingDialogController 
+abstract public class DialogShellController extends FxInSwingController 
 {
 	public DialogShellController(UiMainWindow mainWindowToUse)
 	{
