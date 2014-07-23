@@ -52,11 +52,6 @@ public abstract class FxInSwingStage extends JFXPanel implements VirtualStage
 	}
 
 	abstract protected String getCssName();
-	public void showCurrentPage() throws Exception
-	{
-		showCurrentPage(getCurrentController());
-	}
-
 	public UiMainWindow getMainWindow()
 	{
 		return mainWindow;
@@ -131,6 +126,8 @@ public abstract class FxInSwingStage extends JFXPanel implements VirtualStage
 	{
 		currentContentController = contentControllerToUse;
 	}
+
+	abstract public void showCurrentPage() throws Exception;
 
 	public void showCurrentPage(FxController contentPaneController) throws Exception
 	{
