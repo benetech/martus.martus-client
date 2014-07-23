@@ -38,7 +38,7 @@ public class FxRunner implements Runnable
 	{
 		try
 		{
-			stage.showCurrentScene();
+			stage.showCurrentPage();
 		} 
 		catch (Exception e)
 		{

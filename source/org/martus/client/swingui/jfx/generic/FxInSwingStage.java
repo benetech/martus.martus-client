@@ -47,7 +47,7 @@ public abstract class FxInSwingStage extends JFXPanel implements VirtualStage
 	}
 
 	abstract protected FxScene createScene() throws Exception;
-	abstract public void showCurrentScene() throws Exception;
+	abstract public void showCurrentPage() throws Exception;
 
 	public UiMainWindow getMainWindow()
 	{
