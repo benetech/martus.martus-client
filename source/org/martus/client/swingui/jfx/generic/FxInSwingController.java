@@ -112,11 +112,6 @@ public abstract class FxInSwingController extends FxController implements FxShel
 		}
 	}
 
-	public FxScene getScene()
-	{
-		return getSwingStage().getFxScene();
-	}
-
 	public Window getWindow()
 	{
 		return getSwingStage().getWindow();
