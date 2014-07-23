@@ -31,7 +31,6 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingContentController;
 import org.martus.client.swingui.jfx.generic.FxNonWizardStage;
-import org.martus.client.swingui.jfx.generic.FxScene;
 
 public class ContactsStage extends FxNonWizardStage
 {
@@ -52,9 +51,9 @@ public class ContactsStage extends FxNonWizardStage
 	}
 
 	@Override
-	protected FxScene createScene() throws Exception
+	protected String getCssName()
 	{
-		return new FxScene(getExternalFxmlDirectory(), "Contacts.css");
+		return "Contacts.css";
 	}
 	
 	@Override
