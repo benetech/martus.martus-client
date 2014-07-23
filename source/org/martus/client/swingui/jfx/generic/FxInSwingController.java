@@ -32,6 +32,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -49,7 +51,7 @@ public abstract class FxInSwingController extends FxShellController
 	abstract public void installGlassPane(Component glassPane);
 
 	@Override
-	public void initializeMainContentPane()
+	public void initialize(URL location, ResourceBundle bundle)
 	{
 	}
 

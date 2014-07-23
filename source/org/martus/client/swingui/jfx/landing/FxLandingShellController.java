@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.landing;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -71,7 +72,7 @@ public class FxLandingShellController extends FxInSwingFrameController
 	}
 	
 	@Override
-	public void initializeMainContentPane()
+	public void initialize(URL location, ResourceBundle bundle)
 	{
 		updateOnlineStatus();
 		updateTorStatus();

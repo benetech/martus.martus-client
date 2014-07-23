@@ -25,9 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import org.martus.client.swingui.UiMainWindow;
 
 public abstract class FxShellController extends FxController
@@ -37,13 +34,6 @@ public abstract class FxShellController extends FxController
 		super(mainWindowToUse);
 	}
 	
-	@Override
-	public void initialize(URL location, ResourceBundle bundle)
-	{
-		initializeMainContentPane();
-	}
-
-	abstract public void initializeMainContentPane();
 	abstract public FxInSwingStage getStage();
 	abstract public void setStage(FxInSwingStage stageToUse);
 	abstract public void setContentPane(FxContentController contentController) throws Exception;
