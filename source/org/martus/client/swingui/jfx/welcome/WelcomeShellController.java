@@ -63,7 +63,7 @@ public class WelcomeShellController extends FxInSwingDialogController
 	@FXML
 	protected void onNext(ActionEvent event)
 	{
-		getFxInSwingDialogStage().close();
+		getStage().close();
 	}
 	
 	@FXML

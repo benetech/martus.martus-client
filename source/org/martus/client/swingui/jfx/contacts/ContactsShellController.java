@@ -89,7 +89,7 @@ public class ContactsShellController extends FxInSwingDialogController implement
 	protected void onClose(ActionEvent event) throws Exception
 	{
 		getContentNavigationHandler().nextWasPressed();
-		getFxInSwingDialogStage().close();
+		getStage().close();
 	}
 	
 	@FXML
