@@ -34,7 +34,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxContentController;
+import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxWizardShellController;
 import org.martus.client.swingui.jfx.generic.FxmlLoaderWithController;
 
@@ -51,7 +51,7 @@ public class FxSetupWizardShellController extends FxWizardShellController
 		return "setupwizard/SetupWizardShell.fxml";
 	}
 	
-	public void setContentPane(FxContentController contentPaneController) throws Exception
+	public void setContentPane(FxController contentPaneController) throws Exception
 	{
 		AbstractFxSetupWizardContentController controller = (AbstractFxSetupWizardContentController) contentPaneController;
 		setContentController(controller);

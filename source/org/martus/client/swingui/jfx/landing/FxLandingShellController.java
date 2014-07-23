@@ -50,7 +50,7 @@ import org.martus.client.swingui.actions.ActionMenuManageContacts;
 import org.martus.client.swingui.actions.ActionMenuPreferences;
 import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.actions.ActionMenuSelectServer;
-import org.martus.client.swingui.jfx.generic.FxContentController;
+import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.FxmlLoaderWithController;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
@@ -79,7 +79,7 @@ public class FxLandingShellController extends FxInSwingController
 	}
 	
 	@Override
-	public void setContentPane(FxContentController contentController) throws Exception
+	public void setContentPane(FxController contentController) throws Exception
 	{
 		Parent createContents = contentController.createContents();
 		mainContentPane.getChildren().addAll(createContents);

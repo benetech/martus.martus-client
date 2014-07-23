@@ -34,7 +34,7 @@ import javafx.scene.layout.Pane;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.WizardNavigationButtonsInterface;
 import org.martus.client.swingui.jfx.WizardNavigationHandlerInterface;
-import org.martus.client.swingui.jfx.generic.FxContentController;
+import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 
@@ -51,7 +51,7 @@ public class ContactsShellController extends FxInSwingController implements Wiza
 		return "contacts/ContactsShell.fxml";
 	}
 
-	public void setContentPane(FxContentController contentPaneController) throws Exception
+	public void setContentPane(FxController contentPaneController) throws Exception
 	{
 		AbstractFxSetupWizardContentController controller = (AbstractFxSetupWizardContentController) contentPaneController;
 		setContentController(controller);
