@@ -38,11 +38,6 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 		super(mainWindowToUse);
 	}
 
-	public FxInSwingDialogStage getFxInSwingDialogStage()
-	{
-		return (FxInSwingDialogStage) getStage();
-	}
-
 	public JDialog getDialog()
 	{
 		return (JDialog) getWindow();
@@ -62,7 +57,7 @@ abstract public class FxInSwingDialogController extends FxInSwingController
 	
 	protected void close()
 	{
-		getFxInSwingDialogStage().close();
+		getStage().close();
 	}
 	
 }
