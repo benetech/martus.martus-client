@@ -51,10 +51,4 @@ abstract public class DialogStage extends FxNonWizardStage
 		return null;
 	}
 
-	@Override
-	public void showCurrentPage() throws Exception
-	{
-		FxController contentPaneController = getCurrentController();
-		showCurrentPage(contentPaneController);
-	}
 }

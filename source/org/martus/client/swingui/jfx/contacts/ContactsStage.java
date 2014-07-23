@@ -29,7 +29,6 @@ import javax.swing.JOptionPane;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxNonWizardStage;
 
 public class ContactsStage extends FxNonWizardStage
@@ -40,14 +39,6 @@ public class ContactsStage extends FxNonWizardStage
 		
 		setShellController(new ContactsShellController(getMainWindow()));
 		setCurrentController(new FxManageContactsController(getMainWindow()));
-	}
-
-	@Override
-	public void showCurrentPage() throws Exception
-	{
-		FxController contentPaneController = getCurrentController();
-
-		showCurrentPage(contentPaneController);
 	}
 
 	@Override
