@@ -39,8 +39,9 @@ abstract public class DialogShellController extends FxShellWithSingleContentCont
 	}
 
 	@Override
-	public void loadAndIntegrateContentPane(FxController contentController) throws Exception
+	public void loadAndIntegrateContentPane() throws Exception
 	{
+		FxController contentController = getContentController();
 		Parent createContents = contentController.createContents();
 		contentPane.getChildren().addAll(createContents);
 		
