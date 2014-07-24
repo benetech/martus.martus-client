@@ -25,43 +25,20 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
-import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.layout.Pane;
-
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxFlexibleShellController;
+import org.martus.client.swingui.jfx.generic.FxController;
 
-public class SettingsController extends FxFlexibleShellController
+public class SystemSettingsController extends FxController
 {
-	public SettingsController(UiMainWindow mainWindowToUse)
+	public SystemSettingsController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-	}
-	
-	@Override
-	public Parent createContents() throws Exception
-	{
-		Parent shellContents = super.createContents();
-		loadControllerAndEmbedInPane(new ServerSettingsController(getMainWindow()), serverContentPane);
-		loadControllerAndEmbedInPane(new SystemSettingsController(getMainWindow()), systemContentPane);
-		loadControllerAndEmbedInPane(new TorSettingsController(getMainWindow()), torContentPane);
-		
-		return shellContents;
 	}
 
 	@Override
 	public String getFxmlLocation()
 	{
-		return "landing/general/Settings.fxml";
+		return "landing/general/SettingsForSystem.fxml";
 	}
 
-	@FXML
-	private Pane serverContentPane;
-
-	@FXML
-	private Pane systemContentPane;
-
-	@FXML
-	private Pane torContentPane;
 }

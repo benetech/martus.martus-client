@@ -8,17 +8,18 @@
   <tabs>
     <Tab text="Server">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        <AnchorPane fx:id="serverContentPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
       </content>
     </Tab>
     <Tab text="System">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        <AnchorPane fx:id="systemContentPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
       </content>
-    </Tab><Tab text="Tor">
-  <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-  </content>
-</Tab>
+    </Tab>
+    <Tab text="Tor">
+	  <content>
+	    <AnchorPane fx:id="torContentPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+	  </content>
+	</Tab>
   </tabs>
 </TabPane>
