@@ -29,8 +29,8 @@ import org.martus.client.swingui.UiMainWindow;
 
 public abstract class FxFlexibleShellController extends FxNonWizardShellController
 {
-	public FxFlexibleShellController(UiMainWindow mainWindowToUse, FxController contentControllerToUse)
+	public FxFlexibleShellController(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindowToUse, contentControllerToUse);
+		super(mainWindowToUse);
 	}
 }

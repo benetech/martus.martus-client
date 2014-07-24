@@ -25,12 +25,34 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import javafx.scene.Parent;
+
 import org.martus.client.swingui.UiMainWindow;
 
 public abstract class FxShellWithSingleContentController extends FxNonWizardShellController
 {
 	public FxShellWithSingleContentController(UiMainWindow mainWindowToUse, FxController contentControllerToUse)
 	{
-		super(mainWindowToUse, contentControllerToUse);
+		super(mainWindowToUse);
+		contentController = contentControllerToUse;
 	}
+
+	@Override
+	public Parent createContents() throws Exception
+	{
+		Parent shellContents = super.createContents();
+		if(contentController != null)
+		{
+			contentController.setShellController(this);
+			loadAndIntegrateContentPane(contentController);
+		}
+		return shellContents;
+	}
+
+	public FxController getContentController()
+	{
+		return contentController;
+	}
+	
+	private FxController contentController;
 }
