@@ -25,8 +25,18 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.SingleSelectionModel;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
+import org.martus.common.fieldspec.ChoiceItem;
 
 public class ServerSettingsController extends FxController
 {
@@ -34,11 +44,44 @@ public class ServerSettingsController extends FxController
 	{
 		super(mainWindowToUse);
 	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle bundle)
+	{
+		super.initialize(location, bundle);
+		
+		ObservableList<ChoiceItem> choices = createChoices();
+		automaticSyncFrequency.setItems(choices);
+		selectByCode(automaticSyncFrequency, "0");
+	}
 
+	private static void selectByCode(ChoiceBox choiceBox, String codeToFind)
+	{
+		ObservableChoiceItemList choices = new ObservableChoiceItemList(choiceBox.getItems());
+		ChoiceItem current = choices.findByCode(codeToFind);
+		SingleSelectionModel model = choiceBox.getSelectionModel();
+		model.select(current);
+	}
+
+	private ObservableList<ChoiceItem> createChoices()
+	{
+		ObservableList<ChoiceItem> choices = new ObservableChoiceItemList();
+
+		choices.add(new ChoiceItem("0", getLocalization().getFieldLabel("SyncFrequencyNever")));
+		choices.add(new ChoiceItem("-1", getLocalization().getFieldLabel("SyncFrequencyOnStartup")));
+		choices.add(new ChoiceItem("60", getLocalization().getFieldLabel("SyncFrequencyOneHour")));
+		choices.add(new ChoiceItem("15", getLocalization().getFieldLabel("SyncFrequencyFifteenMinutes")));
+		choices.add(new ChoiceItem("1", getLocalization().getFieldLabel("SyncFrequencyOneMinute")));
+		
+		return choices;
+	}
+	
 	@Override
 	public String getFxmlLocation()
 	{
 		return "landing/general/SettingsForServer.fxml";
 	}
 
+	@FXML
+	private ChoiceBox automaticSyncFrequency;
 }
