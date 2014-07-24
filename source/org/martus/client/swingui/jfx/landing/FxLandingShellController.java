@@ -52,7 +52,7 @@ import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.actions.ActionMenuSelectServer;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
 import org.martus.client.swingui.jfx.generic.FxController;
-import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
+import org.martus.client.swingui.jfx.generic.FxShellWithSingleContentController;
 import org.martus.client.swingui.jfx.generic.FxmlLoaderWithController;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
@@ -60,7 +60,7 @@ import org.martus.client.swingui.jfx.landing.general.SettingsController;
 import org.martus.common.MartusLogger;
 import org.martus.common.network.OrchidTransportWrapper;
 
-public class FxLandingShellController extends FxNonWizardShellController
+public class FxLandingShellController extends FxShellWithSingleContentController
 {
 	public FxLandingShellController(UiMainWindow mainWindowToUse, FxController contentController)
 	{

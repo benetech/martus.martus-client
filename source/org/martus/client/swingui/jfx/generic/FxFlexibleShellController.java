@@ -25,27 +25,12 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
-import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.layout.Pane;
-
 import org.martus.client.swingui.UiMainWindow;
 
-abstract public class DialogShellController extends FxShellWithSingleContentController 
+public abstract class FxFlexibleShellController extends FxNonWizardShellController
 {
-	public DialogShellController(UiMainWindow mainWindowToUse, FxController contentController)
+	public FxFlexibleShellController(UiMainWindow mainWindowToUse, FxController contentControllerToUse)
 	{
-		super(mainWindowToUse, contentController);
+		super(mainWindowToUse, contentControllerToUse);
 	}
-
-	@Override
-	public void loadAndIntegrateContentPane(FxController contentController) throws Exception
-	{
-		Parent createContents = contentController.createContents();
-		contentPane.getChildren().addAll(createContents);
-		
-	}
-
-	@FXML
-	Pane contentPane;
 }
