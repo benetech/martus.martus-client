@@ -29,14 +29,8 @@ import org.martus.client.swingui.UiMainWindow;
 
 public class DialogWithCloseStage extends DialogStage
 {
-	public DialogWithCloseStage(UiMainWindow mainWindowToUse, FxInSwingContentController controllerToUse)
+	public DialogWithCloseStage(UiMainWindow mainWindowToUse, FxNonWizardShellController controllerToUse)
 	{
 		super(mainWindowToUse, controllerToUse);
-	}
-
-	@Override
-	public void createShellController(FxController contentController)
-	{
-		setShellController(new DialogWithCloseShellController(getMainWindow(), contentController));
 	}
 }

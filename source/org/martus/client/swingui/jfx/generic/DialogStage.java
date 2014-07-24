@@ -29,15 +29,12 @@ import org.martus.client.swingui.UiMainWindow;
 
 abstract public class DialogStage extends FxNonWizardStage
 {
-	public DialogStage(UiMainWindow mainWindowToUse, FxInSwingContentController controllerToUse)
+	public DialogStage(UiMainWindow mainWindowToUse, FxNonWizardShellController controllerToUse)
 	{
 		super(mainWindowToUse);
-		createShellController(controllerToUse);
+		setShellController(controllerToUse);
 	}
 	
-	abstract public void createShellController(FxController contentController);
-	
-
 	@Override
 	protected boolean confirmExit()
 	{

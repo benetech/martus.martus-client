@@ -42,6 +42,9 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
+import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
+import org.martus.client.swingui.jfx.generic.DialogWithOkCancelShellController;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
@@ -198,7 +201,8 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	@FXML
 	public void onFolderSettingsClicked(MouseEvent mouseEvent) 
 	{
-		doAction(folderManagement);
+		ActionDoer shellController = new DialogWithCloseShellController(getMainWindow(), folderManagement);
+		doAction(shellController);
 	}
 	
 	@FXML
@@ -206,7 +210,8 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	{
 		FxFolderCreateController createNewFolder = new FxFolderCreateController(getMainWindow());
 		createNewFolder.addFolderCreatedListener(new FolderCreatedListener());
-		doAction(createNewFolder);
+		ActionDoer shellController = new DialogWithOkCancelShellController(getMainWindow(), createNewFolder);
+		doAction(shellController);
 	}
 	
 	private void orderCases()
@@ -275,7 +280,8 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		BulletinFolder folder = getApp().getStore().findFolder(folderItem.caseName);
 		FxFolderDeleteController deleteFolder = new FxFolderDeleteController(getMainWindow(), folder);
 		deleteFolder.addFolderDeletedListener(new FolderDeletedListener());
-		doAction(deleteFolder);
+		ActionDoer shellController = new DialogWithOkCancelShellController(getMainWindow(), deleteFolder);
+		doAction(shellController);
 	}
 	
 	class FolderDeletedListener implements ChangeListener<Boolean>
