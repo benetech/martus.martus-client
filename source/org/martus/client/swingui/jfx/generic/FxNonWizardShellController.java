@@ -42,7 +42,7 @@ public abstract class FxNonWizardShellController extends FxInSwingShellControlle
 	{
 		Parent shellContents = super.createContents();
 		contentController.setShellController(this);
-		setContentPane(contentController);
+		loadAndIntegrateContentPane(contentController);
 		return shellContents;
 	}
 

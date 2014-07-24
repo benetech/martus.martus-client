@@ -79,7 +79,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	}
 	
 	@Override
-	public void setContentPane(FxController contentController) throws Exception
+	public void loadAndIntegrateContentPane(FxController contentController) throws Exception
 	{
 		Parent createContents = contentController.createContents();
 		mainContentPane.getChildren().addAll(createContents);

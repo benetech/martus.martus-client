@@ -145,7 +145,7 @@ public abstract class FxInSwingStage extends JFXPanel implements VirtualStage
 		contentPaneController.setShellController(getShellController());
 		Parent shellContents = getShellController().createContents();
 		getShellController().setStage(this);
-		getShellController().setContentPane(contentPaneController);
+		getShellController().loadAndIntegrateContentPane(contentPaneController);
 		setSceneRoot(shellContents);
 		getFxScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
 	}

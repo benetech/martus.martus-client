@@ -51,7 +51,7 @@ public class FxSetupWizardShellController extends FxWizardShellController
 		return "setupwizard/SetupWizardShell.fxml";
 	}
 	
-	public void setContentPane(FxController contentPaneController) throws Exception
+	public void loadAndIntegrateContentPane(FxController contentPaneController) throws Exception
 	{
 		AbstractFxSetupWizardContentController controller = (AbstractFxSetupWizardContentController) contentPaneController;
 		setContentController(controller);
