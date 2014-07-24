@@ -49,8 +49,10 @@ public abstract class FxShellWithSingleContentController extends FxNonWizardShel
 
 	public void loadAndIntegrateContentPane() throws Exception
 	{
-		Parent createContents = contentController.createContents();
-		getContentPane().getChildren().addAll(createContents);
+		FxController embeddedContentController = contentController;
+		Pane destinationPane = getContentPane();
+		Parent createContents = embeddedContentController.createContents();
+		destinationPane.getChildren().addAll(createContents);
 	}
 
 	abstract protected Pane getContentPane();
