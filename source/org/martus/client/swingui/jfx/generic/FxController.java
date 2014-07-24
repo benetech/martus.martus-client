@@ -36,6 +36,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import org.martus.client.core.MartusApp;
@@ -246,6 +247,12 @@ abstract public class FxController implements Initializable
 		popupStage.showAndWait();
 	}
 	
+	public void loadControllerAndEmbedInPane(FxController embeddedContentController, Pane destinationPane) throws Exception
+	{
+		Parent createContents = embeddedContentController.createContents();
+		destinationPane.getChildren().addAll(createContents);
+	}
+
 	static public void applyStyleSheets(ObservableList<String> stylesheets, File directory, String languageCode, String cssLocation) throws Exception
 	{
 		applyMasterMartusStyleSheets(stylesheets, directory, languageCode);
