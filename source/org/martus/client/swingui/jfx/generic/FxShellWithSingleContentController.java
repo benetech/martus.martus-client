@@ -42,11 +42,11 @@ public abstract class FxShellWithSingleContentController extends FxNonWizardShel
 	{
 		Parent shellContents = super.createContents();
 		contentController.setShellController(this);
-		loadAndIntegrateContentPane(contentController);
+		loadAndIntegrateContentPane();
 		return shellContents;
 	}
 
-	abstract protected void loadAndIntegrateContentPane(FxController contentController2) throws Exception;
+	abstract protected void loadAndIntegrateContentPane() throws Exception;
 
 	public FxController getContentController()
 	{

@@ -49,9 +49,10 @@ public class WelcomeShellController extends FxShellWithSingleContentController
 	}
 
 	@Override
-	public void loadAndIntegrateContentPane(FxController contentPaneController) throws Exception
+	public void loadAndIntegrateContentPane() throws Exception
 	{
-		Parent createContents = contentPaneController.createContents();
+		FxController contentController = getContentController();
+		Parent createContents = contentController.createContents();
 		
 		contentPane.getChildren().addAll(createContents);
 	}

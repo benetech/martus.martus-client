@@ -81,8 +81,9 @@ public class FxLandingShellController extends FxShellWithSingleContentController
 	}
 	
 	@Override
-	public void loadAndIntegrateContentPane(FxController contentController) throws Exception
+	public void loadAndIntegrateContentPane() throws Exception
 	{
+		FxController contentController = getContentController();
 		Parent createContents = contentController.createContents();
 		mainContentPane.getChildren().addAll(createContents);
 		
