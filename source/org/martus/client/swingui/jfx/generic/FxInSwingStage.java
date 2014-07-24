@@ -129,14 +129,6 @@ public abstract class FxInSwingStage extends JFXPanel implements VirtualStage
 		getFxScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
 	}
 	
-	public void loadAndShowCurrentWizardPage(FxController contentPaneController) throws Exception
-	{
-		loadAndShowShell();
-		
-		contentPaneController.setShellController(getShellController());
-		getShellController().loadAndIntegrateContentPane(contentPaneController);
-	}
-	
 	public void doAction(ActionDoer doer)
 	{
 		try

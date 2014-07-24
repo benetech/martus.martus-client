@@ -61,6 +61,14 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		getWizardShellController().getNextButton().setDefaultButton(true);
 	}
 
+	public void loadAndShowCurrentWizardPage(FxController contentPaneController) throws Exception
+	{
+		loadAndShowShell();
+		
+		contentPaneController.setShellController(getShellController());
+		getWizardShellController().loadAndIntegrateContentPane(contentPaneController);
+	}
+	
 	protected void next()
 	{
 		try

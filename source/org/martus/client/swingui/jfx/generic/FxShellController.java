@@ -32,6 +32,5 @@ public abstract interface FxShellController
 	public VirtualStage getStage();
 	public FxInSwingStage getSwingStage();
 	public void setStage(FxInSwingStage stageToUse);
-	public void loadAndIntegrateContentPane(FxController contentController) throws Exception;
 	public Parent createContents() throws Exception;
 }

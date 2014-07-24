@@ -55,6 +55,8 @@ abstract public class FxWizardShellController extends FxInSwingShellController i
 	{
 		return (FxWizardStage) getSwingStage();
 	}
+	
+	abstract public void loadAndIntegrateContentPane(FxController contentPaneController) throws Exception;
 
 	@FXML
 	protected void onNext(ActionEvent event)
