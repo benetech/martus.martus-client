@@ -48,7 +48,7 @@ public class ContactsStage extends FxNonWizardStage
 	{
 		// NOTE: Special case for Contacts because it is still treated 
 		// as a wizard page
-		loadAndShowCurrentPage(contentController);
+		loadAndShowCurrentWizardPage(contentController);
 	}
 	
 	@Override
