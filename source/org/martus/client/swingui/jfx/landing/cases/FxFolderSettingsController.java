@@ -40,10 +40,10 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.DialogWithCloseContentController;
+import org.martus.client.swingui.jfx.generic.FxInSwingContentController;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class FxFolderSettingsController extends DialogWithCloseContentController
+public class FxFolderSettingsController extends FxInSwingContentController
 {
 	public static class FolderNotFoundException extends Exception
 	{
