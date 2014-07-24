@@ -61,7 +61,8 @@ public class DialogWithOkCancelShellController extends DialogShellController imp
 	@FXML
 	public void onOkClicked()
 	{
-		saveAndClose();
+		getContentController().save();
+		close();
 	}
 	
 	@FXML
