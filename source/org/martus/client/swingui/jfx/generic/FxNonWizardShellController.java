@@ -45,6 +45,17 @@ public abstract class FxNonWizardShellController extends FxInSwingShellControlle
 		setContentPane(contentController);
 		return shellContents;
 	}
+
+	@Override
+	public FxController getCurrentContentController()
+	{
+		return getContentController();
+	}
 	
-	FxController contentController;
+	public FxController getContentController()
+	{
+		return contentController;
+	}
+	
+	private FxController contentController;
 }

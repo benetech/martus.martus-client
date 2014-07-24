@@ -32,5 +32,4 @@ public interface VirtualStage
 	public void close();
 	public void doAction(ActionDoer doer);
 	public void logAndNotifyUnexpectedError(Exception e);
-	public FxController getCurrentController();
 }

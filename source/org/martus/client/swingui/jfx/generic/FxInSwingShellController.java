@@ -124,9 +124,11 @@ public abstract class FxInSwingShellController extends FxController implements F
 
 	protected void saveAndClose()
 	{
-		getStage().getCurrentController().save();
+		getCurrentContentController().save();
 		close();
 	}
+
+	abstract public FxController getCurrentContentController();
 
 	protected void close()
 	{
