@@ -1701,10 +1701,10 @@ public class EnglishStrings
 "field:statusNewFieldOfficeBulletins=New bulletins found on server",
 "field:preferencesCheckFieldOfficeBulletins=Automatically check for new bulletins from Contacts",
 "field:SyncFrequencyNever=Never",
-"field:SyncFrequencyOnStartup=When Martus starts",
+"field:SyncFrequencyOnStartup=Once per session",
 "field:SyncFrequencyOneHour=Every 60 minutes",
 "field:SyncFrequencyFifteenMinutes=Every 15 minutes",
-"field:SyncFrequencyOneMinute=Every minute",
+"field:SyncFrequencyTwoMinutes=Every 2 minutes",
 
 "field:AddContacts=Contacts",
 "field:ManageContactsOverview1=To send information through Martus to your contacts, you can pull their public key off of the Martus server using their access token. You can verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add your contacts here.",
