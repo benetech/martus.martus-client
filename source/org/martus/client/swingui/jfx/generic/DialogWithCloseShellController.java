@@ -28,12 +28,27 @@ package org.martus.client.swingui.jfx.generic;
 import javafx.fxml.FXML;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
 
-public class DialogWithCloseShellController extends DialogShellController 
+public class DialogWithCloseShellController extends DialogShellController implements ActionDoer
 {
 	public DialogWithCloseShellController(UiMainWindow mainWindowToUse, FxController contentController)
 	{
 		super(mainWindowToUse, contentController);
+	}
+
+	@Override
+	public void doAction()
+	{
+		UiMainWindow mainWindow = getMainWindow();
+		try
+		{
+			FxModalDialog.createAndShow(mainWindow, new DialogWithCloseStage(mainWindow, this));
+		} 
+		catch (Exception e)
+		{
+			mainWindow.unexpectedErrorDlg(e);
+		}
 	}
 
 	@Override

@@ -29,7 +29,7 @@ import org.martus.client.swingui.UiMainWindow;
 
 public class DialogWithOkCancelStage extends DialogStage
 {
-	public DialogWithOkCancelStage(UiMainWindow mainWindowToUse, FxInSwingContentController controllerToUse)
+	public DialogWithOkCancelStage(UiMainWindow mainWindowToUse, FxNonWizardShellController controllerToUse)
 	{
 		super(mainWindowToUse, controllerToUse);
 	}
@@ -44,9 +44,4 @@ public class DialogWithOkCancelStage extends DialogStage
 		((DialogWithOkCancelShellController)getShellController()).setOkButtonSetDisabled(isDisabled);
 	}
 
-	@Override
-	public void createShellController(FxController contentController)
-	{
-		setShellController(new DialogWithOkCancelShellController(getMainWindow(), contentController));
-	}
 }

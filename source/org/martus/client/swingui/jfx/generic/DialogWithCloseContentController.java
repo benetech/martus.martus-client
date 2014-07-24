@@ -27,9 +27,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.generic;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionDoer;
 
-public abstract class DialogWithCloseContentController extends FxInSwingContentController  implements ActionDoer
+public abstract class DialogWithCloseContentController extends FxInSwingContentController
 {
 
 	public DialogWithCloseContentController(UiMainWindow mainWindowToUse)
@@ -37,17 +36,4 @@ public abstract class DialogWithCloseContentController extends FxInSwingContentC
 		super(mainWindowToUse);
 	}
 
-	@Override
-	public void doAction()
-	{
-		UiMainWindow mainWindow = getMainWindow();
-		try
-		{
-			FxModalDialog.createAndShow(mainWindow, new DialogWithCloseStage(mainWindow, this));
-		} 
-		catch (Exception e)
-		{
-			mainWindow.unexpectedErrorDlg(e);
-		}
-	}
 }
