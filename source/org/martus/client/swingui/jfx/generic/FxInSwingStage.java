@@ -117,16 +117,6 @@ public abstract class FxInSwingStage extends JFXPanel implements VirtualStage
 		shellController = controller;
 	}
 
-	public FxInSwingContentController getCurrentController()
-	{
-		return currentContentController;
-	}
-
-	public void setCurrentController(FxInSwingContentController contentControllerToUse)
-	{
-		currentContentController = contentControllerToUse;
-	}
-
 	abstract public void showCurrentPage() throws Exception;
 
 	public void showTheOnlyPage() throws Exception
@@ -202,5 +192,4 @@ public abstract class FxInSwingStage extends JFXPanel implements VirtualStage
 	private FxScene scene;
 	private Window window;
 	private FxShellController shellController;
-	private FxInSwingContentController currentContentController;
 }
