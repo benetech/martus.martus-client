@@ -27,7 +27,6 @@ package org.martus.client.swingui.jfx.welcome;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
@@ -49,12 +48,9 @@ public class WelcomeShellController extends FxShellWithSingleContentController
 	}
 
 	@Override
-	public void loadAndIntegrateContentPane() throws Exception
+	protected Pane getContentPane()
 	{
-		FxController contentController = getContentController();
-		Parent createContents = contentController.createContents();
-		
-		contentPane.getChildren().addAll(createContents);
+		return contentPane;
 	}
 	
 	public Button getNextButton()

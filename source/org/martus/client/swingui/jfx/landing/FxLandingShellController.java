@@ -32,7 +32,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -83,13 +82,17 @@ public class FxLandingShellController extends FxShellWithSingleContentController
 	@Override
 	public void loadAndIntegrateContentPane() throws Exception
 	{
-		FxController contentController = getContentController();
-		Parent createContents = contentController.createContents();
-		mainContentPane.getChildren().addAll(createContents);
+		super.loadAndIntegrateContentPane();
 		
 		setupCaseManagementSidebar();
 	}
 
+	@Override
+	protected Pane getContentPane()
+	{
+		return mainContentPane;
+	}
+	
 	private void setupCaseManagementSidebar() throws Exception, IOException
 	{
 		FxCaseManagementController caseManagementSideBar = new FxCaseManagementController(getMainWindow());
