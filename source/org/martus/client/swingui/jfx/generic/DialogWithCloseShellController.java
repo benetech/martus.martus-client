@@ -60,7 +60,7 @@ public class DialogWithCloseShellController extends DialogShellController implem
 	@FXML
 	public void onCloseClicked()
 	{
-		saveAndClose();
+		close();
 	}
 
 	private static final String LOCATION_DIALOG_WITH_CLOSE_SHELL = "generic/DialogWithCloseShell.fxml";
