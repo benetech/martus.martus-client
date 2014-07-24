@@ -44,6 +44,16 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		setCurrentController(getFirstController());
 	}
 	
+	public FxInSwingContentController getCurrentController()
+	{
+		return currentContentController;
+	}
+
+	public void setCurrentController(FxInSwingContentController contentControllerToUse)
+	{
+		currentContentController = contentControllerToUse;
+	}
+
 	@Override
 	public void showCurrentPage() throws Exception
 	{
@@ -138,6 +148,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	private Stack<FxInSwingContentController> visitedWizardPagesStack;
 
 	private String serverAvailibilityState;
+	private FxInSwingContentController currentContentController;
 
 	private static final String SERVER_STATE_NOT_INITIALIZED = null;
 	private static final String SERVER_STATE_NOT_AVAILABLE = "IsNotAvailable";
