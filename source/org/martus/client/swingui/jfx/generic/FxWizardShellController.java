@@ -116,7 +116,7 @@ abstract public class FxWizardShellController extends FxInSwingShellController i
 		return backButton; 
 	}
 	
-	public void setContentController(WizardNavigationHandlerInterface contentNavigationHandlerToUse)
+	public void setContentNavigationHandler(WizardNavigationHandlerInterface contentNavigationHandlerToUse)
 	{
 		contentNavigationHandler = contentNavigationHandlerToUse;
 		contentNavigationHandler.setNavigationHandler(this);

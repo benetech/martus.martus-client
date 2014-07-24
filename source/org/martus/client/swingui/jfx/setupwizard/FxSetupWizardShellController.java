@@ -54,7 +54,7 @@ public class FxSetupWizardShellController extends FxWizardShellController
 	public void loadAndIntegrateContentPane(FxController contentPaneController) throws Exception
 	{
 		AbstractFxSetupWizardContentController controller = (AbstractFxSetupWizardContentController) contentPaneController;
-		setContentController(controller);
+		setContentNavigationHandler(controller);
 		Parent createContents = contentPaneController.createContents();
 		
 		contentPane.getChildren().addAll(createContents);

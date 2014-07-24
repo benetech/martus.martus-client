@@ -54,14 +54,14 @@ public class ContactsShellController extends FxWizardShellController implements 
 	public void loadAndIntegrateContentPane(FxController contentPaneController) throws Exception
 	{
 		AbstractFxSetupWizardContentController controller = (AbstractFxSetupWizardContentController) contentPaneController;
-		setContentController(controller);
+		setContentNavigationHandler(controller);
 
 		Parent createContents = contentPaneController.createContents();
 		contentPane.getChildren().addAll(createContents);
 		
 	}
 	
-	public void setContentController(WizardNavigationHandlerInterface contentNavigationHandlerToUse)
+	public void setContentNavigationHandler(WizardNavigationHandlerInterface contentNavigationHandlerToUse)
 	{
 		contentNavigationHandler = contentNavigationHandlerToUse;
 		contentNavigationHandler.setNavigationHandler(this);
