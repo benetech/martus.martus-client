@@ -26,9 +26,9 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.general;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.generic.FxFlexibleShellController;
 
-public class SettingsController extends FxController
+public class SettingsController extends FxFlexibleShellController
 {
 	public SettingsController(UiMainWindow mainWindowToUse)
 	{

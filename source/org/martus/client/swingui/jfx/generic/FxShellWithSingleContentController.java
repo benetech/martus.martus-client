@@ -46,6 +46,8 @@ public abstract class FxShellWithSingleContentController extends FxNonWizardShel
 		return shellContents;
 	}
 
+	abstract protected void loadAndIntegrateContentPane(FxController contentController2) throws Exception;
+
 	public FxController getContentController()
 	{
 		return contentController;
