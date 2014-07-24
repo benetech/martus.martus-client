@@ -37,8 +37,11 @@ public class ContactsStage extends FxNonWizardStage
 	{
 		super(mainWindow);
 		
-		setShellController(new ContactsShellController(getMainWindow()));
-		setCurrentController(new FxManageContactsController(getMainWindow()));
+		ContactsShellController shellController = new ContactsShellController(getMainWindow());
+		FxManageContactsController contentController = new FxManageContactsController(getMainWindow());
+
+		setShellController(shellController);
+		setCurrentController(contentController);
 	}
 
 	@Override
