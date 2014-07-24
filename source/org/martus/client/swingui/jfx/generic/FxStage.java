@@ -34,10 +34,9 @@ import org.martus.client.swingui.actions.ActionDoer;
 
 public class FxStage extends Stage implements VirtualStage
 {
-	public FxStage(UiMainWindow mainWindowToUse, FxPopupController controllerToUse)
+	public FxStage(UiMainWindow mainWindowToUse, FxPopupController controller)
 	{
 		mainWindow = mainWindowToUse;
-		controller = controllerToUse;
 		controller.setStage(this);
 
 		setTitle(controller.getDialogTitle());
@@ -57,12 +56,5 @@ public class FxStage extends Stage implements VirtualStage
 		mainWindow.unexpectedErrorDlg(e);
 	}
 
-	@Override
-	public FxController getCurrentController()
-	{
-		return controller;
-	}
-	
 	private UiMainWindow mainWindow;
-	private FxPopupController controller;
 }

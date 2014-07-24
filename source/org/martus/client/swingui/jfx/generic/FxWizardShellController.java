@@ -127,6 +127,12 @@ abstract public class FxWizardShellController extends FxInSwingShellController i
 		return contentNavigationHandler;
 	}
 	
+	@Override
+	public FxController getCurrentContentController()
+	{
+		return getWizardStage().getCurrentController();
+	}
+	
 	@FXML
 	protected Button nextButton;
 	
