@@ -33,7 +33,6 @@ abstract public class DialogStage extends FxNonWizardStage
 	{
 		super(mainWindowToUse);
 		createShellController(controllerToUse);
-		setCurrentController(controllerToUse);
 	}
 	
 	abstract public void createShellController(FxController contentController);
