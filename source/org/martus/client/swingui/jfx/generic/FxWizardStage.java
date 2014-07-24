@@ -57,7 +57,7 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	@Override
 	public void showCurrentPage() throws Exception
 	{
-		loadAndShowCurrentPage(getCurrentController());
+		loadAndShowCurrentWizardPage(getCurrentController());
 		getWizardShellController().getNextButton().setDefaultButton(true);
 	}
 
