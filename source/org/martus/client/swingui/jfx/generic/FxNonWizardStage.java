@@ -37,7 +37,7 @@ abstract public class FxNonWizardStage extends FxInSwingDialogStage
 	@Override
 	public void showCurrentPage() throws Exception
 	{
-		showTheOnlyPage();
+		loadAndShowShell();
 	}
 
 }

@@ -48,7 +48,7 @@ public class FxMainStage extends FxInSwingFrameStage
 	@Override
 	public void showCurrentPage() throws Exception
 	{
-		showTheOnlyPage();
+		loadAndShowShell();
 	}
 
 	@Override
