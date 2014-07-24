@@ -52,7 +52,7 @@ public class ServerSettingsController extends FxController
 		
 		ObservableList<ChoiceItem> choices = createChoices();
 		automaticSyncFrequency.setItems(choices);
-		selectByCode(automaticSyncFrequency, "0");
+		selectByCode(automaticSyncFrequency, NEVER);
 	}
 
 	private static void selectByCode(ChoiceBox choiceBox, String codeToFind)
@@ -67,11 +67,11 @@ public class ServerSettingsController extends FxController
 	{
 		ObservableList<ChoiceItem> choices = new ObservableChoiceItemList();
 
-		choices.add(new ChoiceItem("0", getLocalization().getFieldLabel("SyncFrequencyNever")));
-		choices.add(new ChoiceItem("-1", getLocalization().getFieldLabel("SyncFrequencyOnStartup")));
+		choices.add(new ChoiceItem(NEVER, getLocalization().getFieldLabel("SyncFrequencyNever")));
+		choices.add(new ChoiceItem(ON_STARTUP, getLocalization().getFieldLabel("SyncFrequencyOnStartup")));
 		choices.add(new ChoiceItem("60", getLocalization().getFieldLabel("SyncFrequencyOneHour")));
 		choices.add(new ChoiceItem("15", getLocalization().getFieldLabel("SyncFrequencyFifteenMinutes")));
-		choices.add(new ChoiceItem("1", getLocalization().getFieldLabel("SyncFrequencyOneMinute")));
+		choices.add(new ChoiceItem("2", getLocalization().getFieldLabel("SyncFrequencyTwoMinutes")));
 		
 		return choices;
 	}
@@ -81,6 +81,9 @@ public class ServerSettingsController extends FxController
 	{
 		return "landing/general/SettingsForServer.fxml";
 	}
+	
+	private final static String NEVER = "Never";
+	private final static String ON_STARTUP = "OnStartup";
 
 	@FXML
 	private ChoiceBox automaticSyncFrequency;
