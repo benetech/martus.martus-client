@@ -48,7 +48,6 @@ import org.martus.client.swingui.jfx.generic.DialogWithOkCancelShellController;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
-import org.martus.client.swingui.jfx.landing.cases.FxFolderSettingsController.FolderNotFoundException;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxCaseManagementController extends AbstractFxLandingContentController
@@ -59,7 +58,6 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		caseListProviderAll = new CaseListProvider();
 		caseListProviderOpen = new CaseListProvider();
 		caseListProviderClosed = new CaseListProvider();
-		folderManagement = new FxFolderSettingsController(getMainWindow(), new FolderNameChoiceBoxListener(), new FolderCustomNameListener());
 	}
 
 	@Override
@@ -109,7 +107,12 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 
 	protected void updateCases(String caseNameToSelect)
 	{
-		updateFolderLabelFromCode(getApp().getConfigInfo().getFolderLabelCode());
+		String code = getApp().getConfigInfo().getFolderLabelCode();
+		String custom = getApp().getConfigInfo().getFolderLabelCustomName();
+
+		String folderLabel = FxFolderSettingsController.getFoldersHeading(code, custom, getLocalization());
+		updateFolderLabelFromCode(folderLabel);
+
 		caseListProviderAll.clear();
 		caseListProviderOpen.clear();
 		caseListProviderClosed.clear();
@@ -201,6 +204,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	@FXML
 	public void onFolderSettingsClicked(MouseEvent mouseEvent) 
 	{
+		FxFolderSettingsController folderManagement = new FxFolderSettingsController(getMainWindow(), new FolderNameChoiceBoxListener(), new FolderCustomNameListener());
 		ActionDoer shellController = new DialogWithCloseShellController(getMainWindow(), folderManagement);
 		doAction(shellController);
 	}
@@ -300,7 +304,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 
 		@Override public void changed(ObservableValue<? extends ChoiceItem> observableValue, ChoiceItem originalItem, ChoiceItem newItem) 
 		{
-			updateFolderLabelFromCode(newItem.getCode());
+			updateFolderLabelFromCode(newItem.getLabel());
 		}
 	}
 
@@ -322,16 +326,9 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		folderNameLabel.setText(newLabel);
 	}
 
-	protected void updateFolderLabelFromCode(String folderNameCode)
+	protected void updateFolderLabelFromCode(String heading)
 	{
-		try
-		{
-			folderNameLabel.setText(folderManagement.getFolderLabel(folderNameCode));
-		} 
-		catch (FolderNotFoundException e)
-		{
-			logAndNotifyUnexpectedError(e);
-		}
+		folderNameLabel.setText(heading);
 	}
 
 	public static final String LOCATION_CASE_MANAGEMENT_FXML = "landing/cases/CaseManagement.fxml";
@@ -369,7 +366,6 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	private CaseListProvider caseListProviderAll;
 	private CaseListProvider caseListProviderOpen;
 	private CaseListProvider caseListProviderClosed;
-	private FxFolderSettingsController folderManagement;
 	
 	private ListView<CaseListItem> currentCasesListView;
 	private CaseListProvider currentCaseListProvider;
