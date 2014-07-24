@@ -48,6 +48,7 @@ public class WelcomeShellController extends FxShellWithSingleContentController
 		return "welcome/WelcomeShell.fxml";
 	}
 
+	@Override
 	public void loadAndIntegrateContentPane(FxController contentPaneController) throws Exception
 	{
 		Parent createContents = contentPaneController.createContents();
