@@ -41,11 +41,8 @@ public abstract class FxShellWithSingleContentController extends FxNonWizardShel
 	public Parent createContents() throws Exception
 	{
 		Parent shellContents = super.createContents();
-		if(contentController != null)
-		{
-			contentController.setShellController(this);
-			loadAndIntegrateContentPane(contentController);
-		}
+		contentController.setShellController(this);
+		loadAndIntegrateContentPane(contentController);
 		return shellContents;
 	}
 
