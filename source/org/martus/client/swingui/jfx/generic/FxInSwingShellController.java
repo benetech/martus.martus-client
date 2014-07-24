@@ -122,8 +122,6 @@ public abstract class FxInSwingShellController extends FxController implements F
 		getStage().doAction(doer);
 	}
 
-	abstract public FxController getCurrentContentController();
-
 	protected void close()
 	{
 		getStage().close();

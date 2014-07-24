@@ -49,12 +49,6 @@ public abstract class FxNonWizardShellController extends FxInSwingShellControlle
 		return shellContents;
 	}
 
-	@Override
-	public FxController getCurrentContentController()
-	{
-		return getContentController();
-	}
-	
 	public FxController getContentController()
 	{
 		return contentController;
