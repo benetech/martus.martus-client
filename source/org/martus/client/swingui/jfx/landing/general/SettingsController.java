@@ -23,42 +23,22 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.generic;
-
-import javafx.scene.Parent;
+package org.martus.client.swingui.jfx.landing.general;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.generic.FxController;
 
-public abstract class FxNonWizardShellController extends FxInSwingShellController
+public class SettingsController extends FxController
 {
-	public FxNonWizardShellController(UiMainWindow mainWindowToUse, FxController contentControllerToUse)
+	public SettingsController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		contentController = contentControllerToUse;
 	}
 
 	@Override
-	public Parent createContents() throws Exception
+	public String getFxmlLocation()
 	{
-		Parent shellContents = super.createContents();
-		if(contentController != null)
-		{
-			contentController.setShellController(this);
-			loadAndIntegrateContentPane(contentController);
-		}
-		return shellContents;
+		return "landing/general/Settings.fxml";
 	}
 
-	@Override
-	public FxController getCurrentContentController()
-	{
-		return getContentController();
-	}
-	
-	public FxController getContentController()
-	{
-		return contentController;
-	}
-	
-	private FxController contentController;
 }
