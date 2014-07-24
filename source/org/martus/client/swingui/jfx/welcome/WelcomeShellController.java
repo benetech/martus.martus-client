@@ -48,7 +48,7 @@ public class WelcomeShellController extends FxNonWizardShellController
 		return "welcome/WelcomeShell.fxml";
 	}
 
-	public void setContentPane(FxController contentPaneController) throws Exception
+	public void loadAndIntegrateContentPane(FxController contentPaneController) throws Exception
 	{
 		Parent createContents = contentPaneController.createContents();
 		

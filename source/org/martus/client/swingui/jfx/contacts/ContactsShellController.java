@@ -51,7 +51,7 @@ public class ContactsShellController extends FxWizardShellController implements 
 		return "contacts/ContactsShell.fxml";
 	}
 
-	public void setContentPane(FxController contentPaneController) throws Exception
+	public void loadAndIntegrateContentPane(FxController contentPaneController) throws Exception
 	{
 		AbstractFxSetupWizardContentController controller = (AbstractFxSetupWizardContentController) contentPaneController;
 		setContentController(controller);
