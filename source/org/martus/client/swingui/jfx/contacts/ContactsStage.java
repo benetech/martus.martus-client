@@ -38,7 +38,7 @@ public class ContactsStage extends FxNonWizardStage
 		super(mainWindow);
 		
 		shellController = new ContactsShellController(getMainWindow());
-		FxManageContactsController contentController = new FxManageContactsController(getMainWindow());
+		contentController = new FxManageContactsController(getMainWindow());
 
 		setShellController(shellController);
 		setCurrentController(contentController);
@@ -49,7 +49,7 @@ public class ContactsStage extends FxNonWizardStage
 	{
 		// NOTE: Special case for Contacts because it is still treated 
 		// as a wizard page
-		showCurrentPage(getCurrentController());
+		showCurrentPage(contentController);
 	}
 	
 	@Override
@@ -71,4 +71,5 @@ public class ContactsStage extends FxNonWizardStage
 	}
 	
 	private ContactsShellController shellController;
+	private FxManageContactsController contentController;
 }
