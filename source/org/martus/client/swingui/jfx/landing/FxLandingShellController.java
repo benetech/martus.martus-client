@@ -50,11 +50,13 @@ import org.martus.client.swingui.actions.ActionMenuManageContacts;
 import org.martus.client.swingui.actions.ActionMenuPreferences;
 import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.actions.ActionMenuSelectServer;
+import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 import org.martus.client.swingui.jfx.generic.FxmlLoaderWithController;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
+import org.martus.client.swingui.jfx.landing.general.SettingsController;
 import org.martus.common.MartusLogger;
 import org.martus.common.network.OrchidTransportWrapper;
 
@@ -122,6 +124,14 @@ public class FxLandingShellController extends FxNonWizardShellController
 	{
 		boolean isOnline = getApp().getTransport().isOnline();
 		toolbarButtonOnline.setText(getStatusMessage(isOnline));
+	}
+	
+	@FXML
+	private void onSettings(ActionEvent event)
+	{
+		SettingsController settingsController = new SettingsController(getMainWindow());
+		DialogWithCloseShellController shellController = new DialogWithCloseShellController(getMainWindow(), settingsController);
+		doAction(shellController);
 	}
 
 	@FXML
