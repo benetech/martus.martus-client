@@ -28,14 +28,19 @@ package org.martus.client.swingui.jfx.landing.general;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.SingleSelectionModel;
 
+import org.martus.client.core.MartusApp;
+import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
+import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class ServerSettingsController extends FxController
@@ -52,7 +57,34 @@ public class ServerSettingsController extends FxController
 		
 		ObservableList<ChoiceItem> choices = createChoices();
 		automaticSyncFrequency.setItems(choices);
-		selectByCode(automaticSyncFrequency, NEVER);
+		String currentCode = getApp().getConfigInfo().getSyncFrequency();
+		selectByCode(automaticSyncFrequency, currentCode);
+		automaticSyncFrequency.getSelectionModel().selectedItemProperty().addListener(new SyncFrequencyChangeHandler(getApp()));
+	}
+	
+	static class SyncFrequencyChangeHandler implements ChangeListener<ChoiceItem>
+	{
+		public SyncFrequencyChangeHandler(MartusApp appToUse)
+		{
+			app = appToUse;
+		}
+		
+		@Override
+		public void changed(ObservableValue<? extends ChoiceItem> observable, ChoiceItem oldValue, ChoiceItem newValue)
+		{
+			try
+			{
+				app.getConfigInfo().setSyncFrequency(newValue.getCode());
+				app.saveConfigInfo();
+			} 
+			catch (SaveConfigInfoException e)
+			{
+				// FIXME: Need to let user know this failed
+				MartusLogger.logException(e);
+			}
+		}
+		
+		private MartusApp app;
 	}
 
 	private static void selectByCode(ChoiceBox choiceBox, String codeToFind)
@@ -82,7 +114,7 @@ public class ServerSettingsController extends FxController
 		return "landing/general/SettingsForServer.fxml";
 	}
 	
-	private final static String NEVER = "Never";
+	private final static String NEVER = "";
 	private final static String ON_STARTUP = "OnStartup";
 
 	@FXML
