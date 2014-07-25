@@ -114,8 +114,8 @@ public class ServerSettingsController extends FxController
 		return "landing/general/SettingsForServer.fxml";
 	}
 	
-	private final static String NEVER = "";
-	private final static String ON_STARTUP = "OnStartup";
+	public final static String NEVER = "";
+	public final static String ON_STARTUP = "OnStartup";
 
 	@FXML
 	private ChoiceBox automaticSyncFrequency;
