@@ -36,6 +36,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.clientside.MtfAwareLocalization;
+import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 
@@ -94,7 +95,12 @@ public class FxSelectLanguageController extends FxStep6Controller
 			{
 				localization.setCurrentLanguageCode(thisCode);
 				thisLanguageName = localization.getLanguageName(thisCode);
-			} 
+			}
+			catch(Exception e)
+			{
+				MartusLogger.log("Error loading language " + thisCode);
+				throw(e);
+			}
 			finally
 			{
 				localization.setCurrentLanguageCode(currentLanguageCode);
