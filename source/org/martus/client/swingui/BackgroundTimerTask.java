@@ -42,6 +42,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.network.BackgroundRetriever;
 import org.martus.client.network.BackgroundUploader;
 import org.martus.client.network.SyncBulletinRetriever;
+import org.martus.client.swingui.jfx.landing.general.ServerSettingsController;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.BulletinSummary;
 import org.martus.common.BulletinSummary.WrongValueCount;
@@ -261,8 +262,11 @@ class BackgroundTimerTask extends TimerTask
 			Exception e = syncRetriever.getAndClearException();
 			mainWindow.unexpectedErrorDlg(e);
 		}
-		if(!getApp().getConfigInfo().getCheckForFieldOfficeBulletins())
+		String syncFrequency = getApp().getConfigInfo().getSyncFrequency();
+		if(syncFrequency.length() == 0)
 			return;
+		if(hasUserRequestedMoreFrequentSyncs(syncFrequency))
+			nextCheckForFieldOfficeBulletins = 0;
 		if(System.currentTimeMillis() < nextCheckForFieldOfficeBulletins)
 			return;
 		if(!isServerAvailable())
@@ -307,7 +311,10 @@ class BackgroundTimerTask extends TimerTask
 		}
 		finally
 		{
-			nextCheckForFieldOfficeBulletins = System.currentTimeMillis() + (1000 * mainWindow.timeBetweenFieldOfficeChecksSeconds);
+			long delayBeforeNextSyncMinutes = getSyncDelayMinutes(syncFrequency);
+			MartusLogger.log("Next sync in " + delayBeforeNextSyncMinutes + " minutes");
+			long delayBeforeNextSyncMillis = delayBeforeNextSyncMinutes * 60 * 1000;
+			nextCheckForFieldOfficeBulletins = System.currentTimeMillis() + delayBeforeNextSyncMillis;
 			checkingForNewFieldOfficeBulletins = false;
 
 			if(foundNew)
@@ -315,6 +322,22 @@ class BackgroundTimerTask extends TimerTask
 			else
 				mainWindow.setStatusMessageReady();
 		}
+	}
+
+	public boolean hasUserRequestedMoreFrequentSyncs(String syncFrequency)
+	{
+		int syncDelayMillis = getSyncDelayMinutes(syncFrequency) * 60 * 1000;
+		long nextRequestedSync = System.currentTimeMillis() + syncDelayMillis;
+		return (nextRequestedSync < nextCheckForFieldOfficeBulletins);
+	}
+
+	private int getSyncDelayMinutes(String syncFrequency)
+	{
+		if(syncFrequency.equals(ServerSettingsController.ON_STARTUP))
+			return Integer.MAX_VALUE;
+		
+		int syncMinutes = Integer.parseInt(syncFrequency);
+		return syncMinutes;
 	}
 
 	public void disableSync()
