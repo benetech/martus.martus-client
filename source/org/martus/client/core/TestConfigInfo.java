@@ -53,7 +53,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 
 	public void testBasics()
 	{
-		assertEquals(24, ConfigInfo.VERSION);
+		assertEquals(25, ConfigInfo.VERSION);
 
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
@@ -345,6 +345,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setFolderLabelCode(sampleFolderLabelCode);
 		info.setFolderLabelCustomName(sampleFolderLabelCustomName);
 		info.setSyncStatusJson(sampleSyncStatusJson);
+		info.setSyncFrequency(sampleSyncFrequency);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -380,6 +381,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleFolderLabelIndex", "", info.getFolderLabelCode());
 		assertEquals(label + ": sampleFolderLabelCustomName", "", info.getFolderLabelCustomName());
 		assertEquals(label + ": sampleSyncStatusJson", "", info.getSyncStatusJson());
+		assertEquals(label + ": sampleSyncFrequency", "", info.getSyncFrequency());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -547,6 +549,14 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			assertEquals(label + ": sampleSyncStatusJson", "", info.getSyncStatusJson());
 		}
+		if(VERSION >= 25)
+		{
+			assertEquals(label + ": sampleSyncFrequency", sampleSyncFrequency, info.getSyncFrequency());
+		}
+		else
+		{
+			assertEquals(label + ": sampleSyncFrequency", "", info.getSyncFrequency());
+		}
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -677,6 +687,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			ConfigInfo.writeLongString(out, sampleSyncStatusJson);
 		}
+		if(VERSION >= 25)
+		{
+			out.writeUTF(sampleSyncFrequency);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -747,4 +761,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final String sampleFolderLabelCustomName = "My Cases";
 //Version 24
 	final String sampleSyncStatusJson = "{ }";
+//Version 25
+	final String sampleSyncFrequency = "60";
 }
