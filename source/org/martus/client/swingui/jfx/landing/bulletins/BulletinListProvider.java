@@ -105,6 +105,9 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 
 	public void loadBulletinData(Set bulletinUids)
 	{
+		// FIXME: To avoid the bulletin list flickering, 
+		// we should just add or remove as needed, instead of 
+		// clearing and re-populating from scratch
 		clear();
 		for(Iterator iter = bulletinUids.iterator(); iter.hasNext();)
 		{
