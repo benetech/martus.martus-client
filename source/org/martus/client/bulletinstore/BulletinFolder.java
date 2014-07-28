@@ -53,11 +53,22 @@ public class BulletinFolder
 
 		rawIdList = new HashSet();
 		sortedIdList = null;
+		listeners = new HashSet();
 	}
 
 	public ClientBulletinStore getStore()
 	{
 		return store;
+	}
+	
+	public void addFolderContentsListener(FolderContentsListener listener)
+	{
+		listeners.add(listener);
+	}
+	
+	public void removeFolderContentsListener(FolderContentsListener listener)
+	{
+		listeners.remove(listener);
 	}
 
 	public synchronized void setName(String newName)
@@ -65,6 +76,7 @@ public class BulletinFolder
 		if(canRename)
 		{
 			name = newName;
+			listeners.forEach(listener -> listener.folderWasRenamed(newName));
 		}
 	}
 
@@ -141,6 +153,7 @@ public class BulletinFolder
 
 		rawIdList.add(id);
 		insertIntoSortedList(id);
+		listeners.forEach(listener -> listener.bulletinWasAdded(id));
 	}
 
 	public synchronized void remove(UniversalId id)
@@ -150,11 +163,12 @@ public class BulletinFolder
 		rawIdList.remove(id);
 		if(sortedIdList != null)
 			sortedIdList.remove(id);
+		listeners.forEach(listener -> listener.bulletinWasAdded(id));
 	}
 
 	public synchronized void removeAll()
 	{
-		rawIdList.clear();
+		rawIdList.forEach(uid -> remove(uid));
 		sortedIdList = null;
 	}
 	
@@ -302,6 +316,7 @@ public class BulletinFolder
 		sortedIdList = new Vector();
 		for(int i = 0; i < uids.length; ++i)
 			sortedIdList.add(uids[i]);
+		listeners.forEach(listener -> listener.folderWasSorted());
 		MartusLogger.logEndProcess("sortFolder");
 	}
 
@@ -319,7 +334,7 @@ public class BulletinFolder
 	private ClientBulletinStore store;
 	private String name;
 
-	private Set rawIdList;
+	private Set<UniversalId> rawIdList;
 	private Vector sortedIdList;
 	private boolean canRename = true;
 	private boolean canDelete = true;
@@ -327,4 +342,5 @@ public class BulletinFolder
 	private int sortDir = ASCENDING;
 	
 	private boolean isClosed;
+	private HashSet<FolderContentsListener> listeners;
 }
