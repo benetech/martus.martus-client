@@ -30,6 +30,7 @@ import java.util.Set;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.bulletinstore.FolderContentsListener;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.jfx.generic.data.ArrayObservableList;
 import org.martus.client.swingui.jfx.landing.FolderSelectionListener;
@@ -37,24 +38,69 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
-public class BulletinListProvider extends ArrayObservableList<BulletinTableRowData> implements FolderSelectionListener
+public class BulletinListProvider extends ArrayObservableList<BulletinTableRowData> implements FolderSelectionListener, FolderContentsListener
 {
-
 	public BulletinListProvider(MartusApp mainApp)
 	{
 		super(INITIAL_CAPACITY);
 		app = mainApp;
+		setFolder(null);
 	}
 	
 	@Override
-	public void folderWasSelected(BulletinFolder folder)
+	public void folderWasSelected(BulletinFolder newFolder)
 	{
-		loadBulletinData(folder.getAllUniversalIdsUnsorted());
+		setFolder(newFolder);
+	}
+
+	public void setFolder(BulletinFolder newFolder)
+	{
+		if(folder != null)
+			folder.removeFolderContentsListener(this);
+		folder = newFolder;
+		if(folder != null)
+			folder.addFolderContentsListener(this);
+		updateContents();
+	}
+
+	private void updateContents()
+	{
+		loadBulletinData(getUniversalIds());
+	}
+
+	private Set getUniversalIds()
+	{
+		if(folder == null)
+			return app.getStore().getAllBulletinLeafUids();
+		return folder.getAllUniversalIdsUnsorted();
+	}
+
+	@Override
+	public void folderWasRenamed(String newName)
+	{
+	}
+
+	@Override
+	public void bulletinWasAdded(UniversalId added)
+	{
+		updateContents();
+	}
+
+	@Override
+	public void bulletinWasRemoved(UniversalId removed)
+	{
+		updateContents();
+	}
+
+	@Override
+	public void folderWasSorted()
+	{
+		updateContents();
 	}
 
 	protected void loadAllBulletins()
 	{
-		loadBulletinData(app.getStore().getAllBulletinLeafUids());
+		setFolder(null);
 	}
 
 	public void loadBulletinData(Set bulletinUids)
@@ -111,4 +157,5 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 	private static final int INITIAL_CAPACITY = 1000;
 	
 	private MartusApp app;
+	private BulletinFolder folder;
 }
