@@ -246,8 +246,7 @@ public class FxLandingShellController extends FxShellWithSingleContentController
 	{
 		try
 		{
-			FxMainStage stage = (FxMainStage) getStage();
-			BulletinsListController bulletinListController = stage.getBulletinsListController();
+			BulletinsListController bulletinListController = getBulletinsListController();
 			bulletinListController.loadAllBulletinsAndSortByMostRecent();
 		} 
 		catch (Exception e)
