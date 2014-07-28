@@ -64,6 +64,11 @@ public class FxLandingShellController extends FxShellWithSingleContentController
 	{
 		super(mainWindowToUse, contentController);
 	}
+	
+	public BulletinsListController getBulletinsListController()
+	{
+		return (BulletinsListController) getContentController();
+	}
 
 	@Override
 	public String getFxmlLocation()
@@ -266,6 +271,4 @@ public class FxLandingShellController extends FxShellWithSingleContentController
 	
 	@FXML
 	private Pane mainContentPane;
-	
-	
 }
