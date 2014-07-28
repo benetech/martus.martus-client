@@ -251,6 +251,7 @@ abstract public class FxController implements Initializable
 	{
 		Parent createContents = embeddedContentController.createContents();
 		destinationPane.getChildren().addAll(createContents);
+		embeddedContentController.setShellController(getShellController());
 	}
 
 	static public void applyStyleSheets(ObservableList<String> stylesheets, File directory, String languageCode, String cssLocation) throws Exception
