@@ -32,6 +32,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -50,7 +51,7 @@ import org.martus.client.swingui.actions.ActionMenuPreferences;
 import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.actions.ActionMenuSelectServer;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
-import org.martus.client.swingui.jfx.generic.FxShellWithSingleContentController;
+import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 import org.martus.client.swingui.jfx.generic.FxmlLoaderWithController;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
@@ -58,16 +59,18 @@ import org.martus.client.swingui.jfx.landing.general.SettingsController;
 import org.martus.common.MartusLogger;
 import org.martus.common.network.OrchidTransportWrapper;
 
-public class FxLandingShellController extends FxShellWithSingleContentController
+public class FxLandingShellController extends FxNonWizardShellController
 {
 	public FxLandingShellController(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindowToUse, new BulletinsListController(mainWindowToUse));
+		super(mainWindowToUse);
+		bulletinsListController = new BulletinsListController(mainWindowToUse);
+		bulletinsListController.setShellController(this);
 	}
 	
 	public BulletinsListController getBulletinsListController()
 	{
-		return (BulletinsListController) getContentController();
+		return bulletinsListController;
 	}
 
 	@Override
@@ -84,19 +87,16 @@ public class FxLandingShellController extends FxShellWithSingleContentController
 	}
 	
 	@Override
-	public void loadAndIntegrateContentPane() throws Exception
+	public Parent createContents() throws Exception
 	{
-		super.loadAndIntegrateContentPane();
+		Parent contents = super.createContents();
 		
+		loadControllerAndEmbedInPane(bulletinsListController, mainContentPane);
 		setupCaseManagementSidebar();
+		
+		return contents;
 	}
 
-	@Override
-	protected Pane getContentPane()
-	{
-		return mainContentPane;
-	}
-	
 	private void setupCaseManagementSidebar() throws Exception, IOException
 	{
 		FxCaseManagementController caseManagementSideBar = new FxCaseManagementController(getMainWindow());
@@ -270,4 +270,6 @@ public class FxLandingShellController extends FxShellWithSingleContentController
 	
 	@FXML
 	private Pane mainContentPane;
+	
+	private BulletinsListController bulletinsListController;
 }

@@ -47,6 +47,7 @@ public abstract class FxInSwingShellController extends FxController implements F
 	public FxInSwingShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+		setShellController(this);
 		glassPaneInstaller = new GlassPaneInstaller(this);
 	}
 	
