@@ -265,8 +265,9 @@ class BackgroundTimerTask extends TimerTask
 		String syncFrequency = getApp().getConfigInfo().getSyncFrequency();
 		if(syncFrequency.length() == 0)
 			return;
-		if(hasUserRequestedMoreFrequentSyncs(syncFrequency))
+		if(hasUserChangedSyncFrequency(syncFrequency))
 			nextCheckForFieldOfficeBulletins = 0;
+		lastKnownSyncFrequencyMinutes = syncFrequency;
 		if(System.currentTimeMillis() < nextCheckForFieldOfficeBulletins)
 			return;
 		if(!isServerAvailable())
@@ -324,11 +325,9 @@ class BackgroundTimerTask extends TimerTask
 		}
 	}
 
-	public boolean hasUserRequestedMoreFrequentSyncs(String syncFrequency)
+	public boolean hasUserChangedSyncFrequency(String syncFrequency)
 	{
-		int syncDelayMillis = getSyncDelayMinutes(syncFrequency) * 60 * 1000;
-		long nextRequestedSync = System.currentTimeMillis() + syncDelayMillis;
-		return (nextRequestedSync < nextCheckForFieldOfficeBulletins);
+		return (!syncFrequency.equals(lastKnownSyncFrequencyMinutes));
 	}
 
 	private int getSyncDelayMinutes(String syncFrequency)
@@ -716,5 +715,6 @@ class BackgroundTimerTask extends TimerTask
 	boolean gotUpdatedOnServerUids;
 	boolean checkingForNewFieldOfficeBulletins;
 	private boolean checkingForToken;
+	private String lastKnownSyncFrequencyMinutes;
 }
 
