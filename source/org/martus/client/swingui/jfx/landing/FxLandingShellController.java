@@ -90,7 +90,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 		Parent contents = super.createContents();
 		
 		FxCaseManagementController caseManagementSideBar = new FxCaseManagementController(getMainWindow());
-		caseManagementSideBar.addFolderSelectionListener(bulletinsListController);
+		caseManagementSideBar.addFolderSelectionListener(bulletinListProvider);
 		
 		loadControllerAndEmbedInPane(caseManagementSideBar, sideContentPane);
 		loadControllerAndEmbedInPane(bulletinsListController, mainContentPane);

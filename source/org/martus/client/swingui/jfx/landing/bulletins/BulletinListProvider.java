@@ -28,14 +28,16 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.jfx.generic.data.ArrayObservableList;
+import org.martus.client.swingui.jfx.landing.FolderSelectionListener;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
-public class BulletinListProvider extends ArrayObservableList<BulletinTableRowData>
+public class BulletinListProvider extends ArrayObservableList<BulletinTableRowData> implements FolderSelectionListener
 {
 
 	public BulletinListProvider(MartusApp mainApp)
@@ -44,6 +46,12 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 		app = mainApp;
 	}
 	
+	@Override
+	public void folderWasSelected(BulletinFolder folder)
+	{
+		loadBulletinData(folder.getAllUniversalIdsUnsorted());
+	}
+
 	protected void loadAllBulletins()
 	{
 		loadBulletinData(app.getStore().getAllBulletinLeafUids());
