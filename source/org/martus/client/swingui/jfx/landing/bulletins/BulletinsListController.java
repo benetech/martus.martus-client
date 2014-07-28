@@ -53,7 +53,7 @@ import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
-public class BulletinsListController extends AbstractFxLandingContentController implements FolderSelectionListener
+public class BulletinsListController extends AbstractFxLandingContentController
 {
 
 	public BulletinsListController(UiMainWindow mainWindowToUse, BulletinListProvider bulletinListProviderToUse)
@@ -79,12 +79,6 @@ public class BulletinsListController extends AbstractFxLandingContentController 
 		itemsTable.setItems(bulletinTableProvider);
 
 		loadAllBulletinsAndSortByMostRecent();
-	}
-
-	@Override
-	public void folderWasSelected(BulletinFolder folder)
-	{
-		loadBulletinData(folder.getAllUniversalIdsUnsorted());
 	}
 
 	public void loadAllBulletinsAndSortByMostRecent()
