@@ -25,7 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.cases;
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.Vector;
 
 import javafx.beans.value.ChangeListener;
@@ -46,8 +48,7 @@ import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
 import org.martus.client.swingui.jfx.generic.DialogWithOkCancelShellController;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
-import org.martus.client.swingui.jfx.landing.FxMainStage;
-import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
+import org.martus.client.swingui.jfx.landing.FolderSelectionListener;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxCaseManagementController extends AbstractFxLandingContentController
@@ -55,6 +56,8 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	public FxCaseManagementController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+		
+		listeners = new HashSet<FolderSelectionListener>();
 		caseListProviderAll = new CaseListProvider();
 		caseListProviderOpen = new CaseListProvider();
 		caseListProviderClosed = new CaseListProvider();
@@ -75,6 +78,16 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	public String getFxmlLocation()
 	{
 		return LOCATION_CASE_MANAGEMENT_FXML;
+	}
+
+	public void addFolderSelectionListener(FolderSelectionListener listener)
+	{
+		listeners.add(listener);
+	}
+	
+	public void removeFolderSelectionListener(FolderSelectionListener listener)
+	{
+		listeners.remove(listener);
 	}
 
 	protected void updateCasesSelectDefaultCase()
@@ -164,9 +177,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 				return;
 			updateButtons(folder);
 			
-			FxMainStage stage = (FxMainStage) getStage();
-			BulletinsListController bulletinListController = stage.getBulletinsListController();
-			bulletinListController.loadBulletinData(folder.getAllUniversalIdsUnsorted());
+			listeners.forEach(listener -> listener.folderWasSelected(folder));
 		} 
 		catch (Exception e)
 		{
@@ -369,4 +380,5 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	
 	private ListView<CaseListItem> currentCasesListView;
 	private CaseListProvider currentCaseListProvider;
-	}
+	private Set<FolderSelectionListener> listeners;
+}
