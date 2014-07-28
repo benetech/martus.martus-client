@@ -345,7 +345,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setFolderLabelCode(sampleFolderLabelCode);
 		info.setFolderLabelCustomName(sampleFolderLabelCustomName);
 		info.setSyncStatusJson(sampleSyncStatusJson);
-		info.setSyncFrequency(sampleSyncFrequency);
+		info.setSyncFrequencyMinutes(sampleSyncFrequency);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -381,7 +381,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleFolderLabelIndex", "", info.getFolderLabelCode());
 		assertEquals(label + ": sampleFolderLabelCustomName", "", info.getFolderLabelCustomName());
 		assertEquals(label + ": sampleSyncStatusJson", "", info.getSyncStatusJson());
-		assertEquals(label + ": sampleSyncFrequency", "", info.getSyncFrequency());
+		assertEquals(label + ": sampleSyncFrequency", "", info.getSyncFrequencyMinutes());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -551,11 +551,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 		}
 		if(VERSION >= 25)
 		{
-			assertEquals(label + ": sampleSyncFrequency", sampleSyncFrequency, info.getSyncFrequency());
+			assertEquals(label + ": sampleSyncFrequency", sampleSyncFrequency, info.getSyncFrequencyMinutes());
 		}
 		else
 		{
-			assertEquals(label + ": sampleSyncFrequency", "", info.getSyncFrequency());
+			assertEquals(label + ": sampleSyncFrequency", "", info.getSyncFrequencyMinutes());
 		}
 	}
 
