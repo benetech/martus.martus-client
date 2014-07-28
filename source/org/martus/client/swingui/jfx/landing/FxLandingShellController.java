@@ -92,19 +92,10 @@ public class FxLandingShellController extends FxNonWizardShellController
 		Parent contents = super.createContents();
 		
 		loadControllerAndEmbedInPane(bulletinsListController, mainContentPane);
-		setupCaseManagementSidebar();
+		FxCaseManagementController caseManagementSideBar = new FxCaseManagementController(getMainWindow());
+		loadControllerAndEmbedInPane(caseManagementSideBar, sideContentPane);
 		
 		return contents;
-	}
-
-	private void setupCaseManagementSidebar() throws Exception, IOException
-	{
-		FxCaseManagementController caseManagementSideBar = new FxCaseManagementController(getMainWindow());
-		caseManagementSideBar.setShellController(getSwingStage().getShellController());
-		URL url = getBestFxmlLocation(caseManagementSideBar.getFxmlLocation());
-		FxmlLoaderWithController sidebarLoader = new FxmlLoaderWithController(caseManagementSideBar, url);
-		Node sideBarNode = (Node) sidebarLoader.load();
-		sideContentPane.getChildren().addAll(sideBarNode);
 	}
 
 	@FXML
