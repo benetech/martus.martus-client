@@ -36,7 +36,7 @@ public class FxMainStage extends FxInSwingFrameStage
 		super(mainWindowToUse);
 		
 		bulletinsListController = new BulletinsListController(getMainWindow());
-		FxLandingShellController shellController = new FxLandingShellController(getMainWindow(), bulletinsListController);
+		shellController = new FxLandingShellController(getMainWindow(), bulletinsListController);
 		setShellController(shellController);
 	}
 
@@ -65,4 +65,5 @@ public class FxMainStage extends FxInSwingFrameStage
 	}
 
 	private BulletinsListController bulletinsListController;
+	private FxLandingShellController shellController;
 }
