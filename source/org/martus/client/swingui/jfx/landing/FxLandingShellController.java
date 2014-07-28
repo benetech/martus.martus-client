@@ -62,7 +62,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	public FxLandingShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		BulletinListProvider bulletinListProvider = new BulletinListProvider(getApp());
+		bulletinListProvider = new BulletinListProvider(getApp());
 		bulletinsListController = new BulletinsListController(mainWindowToUse, bulletinListProvider);
 	}
 	
@@ -263,4 +263,5 @@ public class FxLandingShellController extends FxNonWizardShellController
 	private Pane mainContentPane;
 	
 	private BulletinsListController bulletinsListController;
+	private BulletinListProvider bulletinListProvider;
 }
