@@ -50,6 +50,7 @@ import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.actions.ActionMenuSelectServer;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
+import org.martus.client.swingui.jfx.landing.bulletins.BulletinListProvider;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 import org.martus.client.swingui.jfx.landing.general.SettingsController;
@@ -61,7 +62,8 @@ public class FxLandingShellController extends FxNonWizardShellController
 	public FxLandingShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		bulletinsListController = new BulletinsListController(mainWindowToUse);
+		BulletinListProvider bulletinListProvider = new BulletinListProvider(getApp());
+		bulletinsListController = new BulletinsListController(mainWindowToUse, bulletinListProvider);
 	}
 	
 	public BulletinsListController getBulletinsListController()
