@@ -86,7 +86,7 @@ public class ConfigInfo
 	public void setFolderLabelCode(String newCode) { folderLabelCode = newCode; }
 	public void setFolderLabelCustomName(String newName) { folderLabelCustomName = newName; }
 	public void setSyncStatusJson(String newSyncStatusJson) { syncStatusJson = newSyncStatusJson; }
-	public void setSyncFrequency(String newSyncFrequency) { syncFrequency = newSyncFrequency; }
+	public void setSyncFrequencyMinutes(String newSyncFrequency) { syncFrequencyMinutes = newSyncFrequency; }
 
 
 	public void clearLegacyHQKey()						{ deprecatedLegacyHQKey = ""; }
@@ -137,7 +137,7 @@ public class ConfigInfo
 	public String getFolderLabelCode() { return folderLabelCode; }
 	public String getFolderLabelCustomName() { return folderLabelCustomName; }
 	public String getSyncStatusJson() {	return syncStatusJson; }
-	public String getSyncFrequency() {	return syncFrequency; }
+	public String getSyncFrequencyMinutes() {	return syncFrequencyMinutes; }
 	
 
 	public boolean isServerConfigured()
@@ -186,7 +186,7 @@ public class ConfigInfo
 		folderLabelCode = "";
 		folderLabelCustomName = "";
 		syncStatusJson = "";
-		syncFrequency = "";
+		syncFrequencyMinutes = "";
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException
@@ -312,7 +312,7 @@ public class ConfigInfo
 			}
 			if(loaded.version >= 25)
 			{
-				loaded.syncFrequency = in.readUTF();
+				loaded.syncFrequencyMinutes = in.readUTF();
 			}
 		}
 		finally
@@ -370,7 +370,7 @@ public class ConfigInfo
 			out.writeUTF(folderLabelCode);
 			out.writeUTF(folderLabelCustomName);
 			writeLongString(out, syncStatusJson);
-			out.writeUTF(syncFrequency);
+			out.writeUTF(syncFrequencyMinutes);
 		}
 		finally
 		{
@@ -460,5 +460,5 @@ public class ConfigInfo
 	//Version 24
 	private String syncStatusJson;
 	//Version 25
-	private String syncFrequency;
+	private String syncFrequencyMinutes;
 }

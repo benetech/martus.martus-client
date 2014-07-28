@@ -57,7 +57,7 @@ public class ServerSettingsController extends FxController
 		
 		ObservableList<ChoiceItem> choices = createChoices();
 		automaticSyncFrequency.setItems(choices);
-		String currentCode = getApp().getConfigInfo().getSyncFrequency();
+		String currentCode = getApp().getConfigInfo().getSyncFrequencyMinutes();
 		selectByCode(automaticSyncFrequency, currentCode);
 		automaticSyncFrequency.getSelectionModel().selectedItemProperty().addListener(new SyncFrequencyChangeHandler(getApp()));
 	}
@@ -74,7 +74,7 @@ public class ServerSettingsController extends FxController
 		{
 			try
 			{
-				app.getConfigInfo().setSyncFrequency(newValue.getCode());
+				app.getConfigInfo().setSyncFrequencyMinutes(newValue.getCode());
 				app.saveConfigInfo();
 			} 
 			catch (SaveConfigInfoException e)

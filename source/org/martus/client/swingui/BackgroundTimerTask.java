@@ -262,7 +262,7 @@ class BackgroundTimerTask extends TimerTask
 			Exception e = syncRetriever.getAndClearException();
 			mainWindow.unexpectedErrorDlg(e);
 		}
-		String syncFrequency = getApp().getConfigInfo().getSyncFrequency();
+		String syncFrequency = getApp().getConfigInfo().getSyncFrequencyMinutes();
 		if(syncFrequency.length() == 0)
 			return;
 		if(hasUserChangedSyncFrequency(syncFrequency))
