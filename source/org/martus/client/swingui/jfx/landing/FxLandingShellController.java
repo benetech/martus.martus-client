@@ -60,9 +60,9 @@ import org.martus.common.network.OrchidTransportWrapper;
 
 public class FxLandingShellController extends FxShellWithSingleContentController
 {
-	public FxLandingShellController(UiMainWindow mainWindowToUse, BulletinsListController contentController)
+	public FxLandingShellController(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindowToUse, contentController);
+		super(mainWindowToUse, new BulletinsListController(mainWindowToUse));
 	}
 	
 	public BulletinsListController getBulletinsListController()
