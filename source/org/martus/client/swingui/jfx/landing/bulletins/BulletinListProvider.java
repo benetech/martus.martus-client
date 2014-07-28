@@ -99,7 +99,8 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 		return shouldReSortTable;
 	}
 
-	final int BULLETIN_NOT_IN_TABLE = -1;
-	static final int INITIAL_CAPACITY = 1000;
+	private static final int BULLETIN_NOT_IN_TABLE = -1;
+	private static final int INITIAL_CAPACITY = 1000;
+	
 	private MartusApp app;
 }
