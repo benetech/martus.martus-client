@@ -56,10 +56,10 @@ import org.martus.common.packet.UniversalId;
 public class BulletinsListController extends AbstractFxLandingContentController implements FolderSelectionListener
 {
 
-	public BulletinsListController(UiMainWindow mainWindowToUse)
+	public BulletinsListController(UiMainWindow mainWindowToUse, BulletinListProvider bulletinListProviderToUse)
 	{
 		super(mainWindowToUse);
-		bulletinTableProvider = new BulletinListProvider(getApp());
+		bulletinTableProvider = bulletinListProviderToUse;
 	}
 
 	@Override
