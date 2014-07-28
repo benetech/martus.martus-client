@@ -43,12 +43,10 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
-import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
-import org.martus.client.swingui.jfx.landing.FolderSelectionListener;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
