@@ -25,13 +25,11 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -52,7 +50,6 @@ import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.actions.ActionMenuSelectServer;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
-import org.martus.client.swingui.jfx.generic.FxmlLoaderWithController;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 import org.martus.client.swingui.jfx.landing.general.SettingsController;
@@ -65,7 +62,6 @@ public class FxLandingShellController extends FxNonWizardShellController
 	{
 		super(mainWindowToUse);
 		bulletinsListController = new BulletinsListController(mainWindowToUse);
-		bulletinsListController.setShellController(this);
 	}
 	
 	public BulletinsListController getBulletinsListController()
@@ -91,9 +87,10 @@ public class FxLandingShellController extends FxNonWizardShellController
 	{
 		Parent contents = super.createContents();
 		
-		loadControllerAndEmbedInPane(bulletinsListController, mainContentPane);
 		FxCaseManagementController caseManagementSideBar = new FxCaseManagementController(getMainWindow());
 		loadControllerAndEmbedInPane(caseManagementSideBar, sideContentPane);
+
+		loadControllerAndEmbedInPane(bulletinsListController, mainContentPane);
 		
 		return contents;
 	}
