@@ -1,7 +1,18 @@
+.menu-bar
+{
+	-fx-background-color: #1a1a1a;
+}
+
+.menu-bar .label
+{
+	-fx-text-fill: #f7f7f7 ;
+	-fx-font-face: Helvetica;
+}
+
 .menu .label
 {
-    -fx-text-fill: #f7f7f7 ;
-		-fx-font-face: Helvetica;
+	-fx-text-fill: #f7f7f7 ;
+	-fx-font-face: Helvetica;
 }
 
 .menu-item {
