@@ -7,55 +7,52 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="960.0" style="-fx-background-color: #1a1a1a;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-	<children>
-		<MenuBar fx:id="global_menu" minHeight="30.0" minWidth="490.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="490.0" style="-fx-background-color: #1a1a1a, -fx-text-fill white; -fx-background-color: #1a1a1a;" stylesheets="@main.css">
-			<menus>
-    			<Menu mnemonicParsing="false" styleClass="menu_style" text="Help">
-      				<items>
-        				<MenuItem mnemonicParsing="false" styleClass="menu-item" text="What is Martus" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Getting Started" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="FAQs" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Installation Wizard" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Support Documentation" />
-      				</items>
-    			</Menu>
-				<Menu mnemonicParsing="false" styleClass="menu-item" text="Account">
-					<items>
-					<MenuItem mnemonicParsing="false" onAction="#onSettings" styleClass="menu-item" text="Settings (placeholder)" />
-					<MenuItem mnemonicParsing="false" onAction="#onChangeUsernameAndPassword" styleClass="menu-item" text="Change Username and Password" />
-					<MenuItem mnemonicParsing="false" onAction="#onCreateNewAccount" styleClass="menu-item" text="Create New" />
-					<MenuItem mnemonicParsing="false" onAction="#onContactInformation" styleClass="menu-item" text="Contact Information" />
-					<MenuItem mnemonicParsing="false" onAction="#onBackupKeypair" styleClass="menu-item" text="Backup Key" />
-					</items>
-				</Menu>
-				<Menu mnemonicParsing="false" text="Settings">
-				<items>
-					<MenuItem mnemonicParsing="false" onAction="#onSettings" styleClass="menu-item" text="Settings (placeholder)" />
-					<MenuItem mnemonicParsing="false" onAction="#onConfigureServer" text="Server" />
-					<MenuItem mnemonicParsing="false" onAction="#onPreferences" text="System Preferences" />
-					<MenuItem mnemonicParsing="false" text="Tor Preferences" />
-				</items>
-				</Menu>
-				<Menu mnemonicParsing="false" text="Contacts">
-				<items>
-				<MenuItem mnemonicParsing="false" onAction="#onManageContacts" text="Manage Contacts" />
-				<MenuItem mnemonicParsing="false" text="Import From File" />
-				</items>
-				</Menu>
-			</menus>
-			<VBox.margin>
-				<Insets right="10.0" />
-			</VBox.margin>
-			<padding>
-				<Insets left="1.0" />
-			</padding>
-		</MenuBar>
-		<VBox prefHeight="480.0" prefWidth="960.0" style="-fx-background-color: #1a1a1a;">
-			<VBox.margin>
-				<Insets bottom="20.0" left="20.0" right="20.0" />
-			</VBox.margin>
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<top>
+		<HBox alignment="CENTER_RIGHT" styleClass="menu-bar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+			<children>
+				<MenuBar fx:id="global_menu" >
+					<menus>
+						<Menu mnemonicParsing="false" text="Contacts">
+							<items>
+							<MenuItem mnemonicParsing="false" onAction="#onManageContacts" text="Manage Contacts" />
+							<MenuItem mnemonicParsing="false" text="Import From File" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Settings">
+							<items>
+								<MenuItem mnemonicParsing="false" onAction="#onSettings" styleClass="menu-item" text="Settings (placeholder)" />
+								<MenuItem mnemonicParsing="false" onAction="#onConfigureServer" text="Server" />
+								<MenuItem mnemonicParsing="false" onAction="#onPreferences" text="System Preferences" />
+								<MenuItem mnemonicParsing="false" text="Tor Preferences" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" styleClass="menu-item" text="Account">
+							<items>
+							<MenuItem mnemonicParsing="false" onAction="#onSettings" styleClass="menu-item" text="Settings (placeholder)" />
+							<MenuItem mnemonicParsing="false" onAction="#onChangeUsernameAndPassword" styleClass="menu-item" text="Change Username and Password" />
+							<MenuItem mnemonicParsing="false" onAction="#onCreateNewAccount" styleClass="menu-item" text="Create New" />
+							<MenuItem mnemonicParsing="false" onAction="#onContactInformation" styleClass="menu-item" text="Contact Information" />
+							<MenuItem mnemonicParsing="false" onAction="#onBackupKeypair" styleClass="menu-item" text="Backup Key" />
+							</items>
+						</Menu>
+		    			<Menu mnemonicParsing="false" styleClass="menu_style" text="Help">
+		      				<items>
+		        				<MenuItem mnemonicParsing="false" styleClass="menu-item" text="What is Martus" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Getting Started" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="FAQs" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Installation Wizard" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Support Documentation" />
+		      				</items>
+		    			</Menu>
+					</menus>
+				</MenuBar>
+			</children>
+		</HBox>
+	</top>
+	<center>
+		<VBox>
 			<children>
 				<VBox prefHeight="2.0" prefWidth="920.0" style="-fx-background-color: #77bad0;" />
 				<VBox prefHeight="40.0" prefWidth="920.0" style="-fx-background-color: #e6e6e6;">
 					<VBox.margin>
-					<Insets bottom="1.0" top="1.0" />
+						<Insets bottom="1.0" top="1.0" />
 					</VBox.margin>
 					<children>
 						<GridPane hgap="5.0">
@@ -72,7 +69,7 @@
                            <children>
       								<ImageView fitHeight="33.0" fitWidth="97.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true">
       									<image>
-      										<Image url="@/org/martus/client/swingui/jfx/images/Martus-logo-white-text-120x54.png" />
+      										<Image url="@../../dialogs/Martus-logo-white-text-160x72.png" />
       									</image>
       								</ImageView>
                            </children>
@@ -147,5 +144,5 @@
 				</SplitPane>
 			</children>
 		</VBox>
-	</children>
-</VBox>
+	</center>
+</BorderPane>
