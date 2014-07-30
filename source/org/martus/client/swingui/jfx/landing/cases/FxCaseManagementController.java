@@ -315,7 +315,10 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 
 		@Override public void changed(ObservableValue<? extends ChoiceItem> observableValue, ChoiceItem originalItem, ChoiceItem newItem) 
 		{
-			updateFolderLabelFromCode(newItem.getLabel());
+			String code = newItem.getCode();
+			String customLabel = getApp().getConfigInfo().getFolderLabelCustomName();
+			String folderLabel = FxFolderSettingsController.getFoldersHeading(code, customLabel, getLocalization());
+			updateFolderLabelFromCode(folderLabel);
 		}
 	}
 
