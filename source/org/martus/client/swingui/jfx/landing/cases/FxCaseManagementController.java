@@ -124,7 +124,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		String custom = getApp().getConfigInfo().getFolderLabelCustomName();
 
 		String folderLabel = FxFolderSettingsController.getFoldersHeading(code, custom, getLocalization());
-		updateFolderLabelFromCode(folderLabel);
+		updateFoldersLabel(folderLabel);
 
 		caseListProviderAll.clear();
 		caseListProviderOpen.clear();
@@ -318,7 +318,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 			String code = newItem.getCode();
 			String customLabel = getApp().getConfigInfo().getFolderLabelCustomName();
 			String folderLabel = FxFolderSettingsController.getFoldersHeading(code, customLabel, getLocalization());
-			updateFolderLabelFromCode(folderLabel);
+			updateFoldersLabel(folderLabel);
 		}
 	}
 
@@ -340,7 +340,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		folderNameLabel.setText(newLabel);
 	}
 
-	protected void updateFolderLabelFromCode(String heading)
+	protected void updateFoldersLabel(String heading)
 	{
 		folderNameLabel.setText(heading);
 	}
