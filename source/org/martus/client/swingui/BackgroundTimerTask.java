@@ -72,6 +72,7 @@ class BackgroundTimerTask extends TimerTask
 		syncRetriever = new SyncBulletinRetriever(getApp());
 		if(mainWindow.isServerConfigured() && getApp().getTransport().isOnline())
 			setWaitingForServer();
+		isSyncEnabled = true;
 	}
 
 	public ProgressMeterInterface getProgressMeter()
@@ -254,19 +255,30 @@ class BackgroundTimerTask extends TimerTask
 	
 	private void checkForNewFieldOfficeBulletins()
 	{
-		if(syncRetriever.hadException())
-		{
-			disableSync();
-
-			// FIXME: Need to let user know syncing is disabled
-			Exception e = syncRetriever.getAndClearException();
-			mainWindow.unexpectedErrorDlg(e);
-		}
 		String syncFrequency = getApp().getConfigInfo().getSyncFrequencyMinutes();
 		if(syncFrequency.length() == 0)
 			return;
 		if(hasUserChangedSyncFrequency(syncFrequency))
+		{
 			nextCheckForFieldOfficeBulletins = 0;
+			isSyncEnabled = true;
+		}
+
+		if(!isSyncEnabled)
+			return;
+
+		if(syncRetriever.hadException())
+		{
+			disableSync();
+
+			Exception e = syncRetriever.getAndClearException();
+			MartusLogger.logException(e);
+
+			String baseTag = "SyncDisabledDueToError";
+			UiMainWindow.showNotifyDlgOnSwingThread(mainWindow, baseTag);
+			return;
+		}
+		
 		lastKnownSyncFrequencyMinutes = syncFrequency;
 		if(System.currentTimeMillis() < nextCheckForFieldOfficeBulletins)
 			return;
@@ -341,7 +353,7 @@ class BackgroundTimerTask extends TimerTask
 
 	public void disableSync()
 	{
-		nextCheckForFieldOfficeBulletins = Long.MAX_VALUE;
+		isSyncEnabled = false;
 	}
 	
 	private void getUpdatedListOfBulletinsOnServer()
@@ -707,7 +719,8 @@ class BackgroundTimerTask extends TimerTask
 	
 	long nextCheckForFieldOfficeBulletins;
 	long nextCheckForToken;
-	
+
+	private boolean isSyncEnabled;
 	boolean waitingForServer;
 	boolean alreadyCheckedCompliance;
 	boolean inComplianceDialog;

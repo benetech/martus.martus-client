@@ -1150,6 +1150,28 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		MartusLogger.logException(e);
 		notifyDlg("UnexpectedError");
 	}
+	
+	private static class Notifier implements Runnable
+	{
+		public Notifier(UiMainWindow mainWindowToUse, String baseTagToUse)
+		{
+			mainWindow = mainWindowToUse;
+			baseTag = baseTagToUse;
+		}
+		
+		public void run()
+		{
+			mainWindow.notifyDlg(baseTag); 
+		}
+
+		private UiMainWindow mainWindow;
+		private String baseTag;
+	}
+
+	public static void showNotifyDlgOnSwingThread(UiMainWindow mainWindowToUse, String baseTag)
+	{
+		SwingUtilities.invokeLater(new Notifier(mainWindowToUse, baseTag));
+	}
 
 	public void notifyDlg(String baseTag)
 	{
