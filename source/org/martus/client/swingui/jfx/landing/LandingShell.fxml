@@ -47,9 +47,9 @@
 		</HBox>
 	</top>
 	<center>
-		<VBox>
-			<children>
-				<VBox prefHeight="2.0" prefWidth="920.0" style="-fx-background-color: #77bad0;" />
+		<BorderPane>
+			<top>
+<!--				<VBox prefHeight="2.0" prefWidth="920.0" style="-fx-background-color: #77bad0;" />-->
 				<VBox prefHeight="40.0" prefWidth="920.0" style="-fx-background-color: #e6e6e6;">
 					<VBox.margin>
 						<Insets bottom="1.0" top="1.0" />
@@ -136,13 +136,15 @@
 						</GridPane>
 					</children>
 				</VBox>
-				<SplitPane dividerPositions="0.07" focusTraversable="true" minWidth="920.0" prefHeight="360.0" prefWidth="920.0" style="-fx-box-border: transparent; -fx-box-border: 0px;">
+			</top>
+			<center>
+				<SplitPane dividerPositions="0.2" focusTraversable="true" >
 					<items>
-                  		<Pane fx:id="sideContentPane" prefHeight="200.0" prefWidth="200.0" />
-    						<Pane fx:id="mainContentPane" minHeight="380.0" minWidth="620.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #bdbdbd;" />
+						<Pane fx:id="sideContentPane" />
+						<Pane fx:id="mainContentPane" />
   					</items>
 				</SplitPane>
-			</children>
-		</VBox>
+			</center>
+		</BorderPane>
 	</center>
 </BorderPane>
