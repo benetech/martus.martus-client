@@ -168,7 +168,8 @@ public class BulletinFolder
 
 	public synchronized void removeAll()
 	{
-		rawIdList.forEach(uid -> remove(uid));
+		Set<UniversalId> idsToRemove = new HashSet<UniversalId>(rawIdList);
+		idsToRemove.forEach(uid -> remove(uid));
 		sortedIdList = null;
 	}
 	
