@@ -75,7 +75,7 @@ abstract public class FxController implements Initializable
 		shellController = shellControllerToUse;
 	}
 	
-	protected VirtualStage getStage()
+	public VirtualStage getStage()
 	{
 		return getShellController().getStage();
 	}
