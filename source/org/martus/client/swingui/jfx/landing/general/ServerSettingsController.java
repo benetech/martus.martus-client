@@ -40,7 +40,6 @@ import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
-import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class ServerSettingsController extends FxController
@@ -62,7 +61,7 @@ public class ServerSettingsController extends FxController
 		automaticSyncFrequency.getSelectionModel().selectedItemProperty().addListener(new SyncFrequencyChangeHandler(getApp()));
 	}
 	
-	static class SyncFrequencyChangeHandler implements ChangeListener<ChoiceItem>
+	class SyncFrequencyChangeHandler implements ChangeListener<ChoiceItem>
 	{
 		public SyncFrequencyChangeHandler(MartusApp appToUse)
 		{
@@ -79,8 +78,7 @@ public class ServerSettingsController extends FxController
 			} 
 			catch (SaveConfigInfoException e)
 			{
-				// FIXME: Need to let user know this failed
-				MartusLogger.logException(e);
+				getStage().logAndNotifyUnexpectedError(e);
 			}
 		}
 		
