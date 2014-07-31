@@ -609,7 +609,7 @@ public class MartusApp
 		encryptAndWriteFileAndSignatureFile(file, signatureFile, plainText, security);
 	}
 
-	public void encryptAndWriteFileAndSignatureFile(File file, File signatureFile, byte[] plainText, MartusCrypto security) throws Exception
+	public static void encryptAndWriteFileAndSignatureFile(File file, File signatureFile, byte[] plainText, MartusCrypto security) throws Exception
 	{
 		ByteArrayInputStream encryptedInputStream = new ByteArrayInputStream(plainText);
 		FileOutputStream fileOutputStream = new FileOutputStream(file);
