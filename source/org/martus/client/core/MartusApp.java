@@ -602,11 +602,15 @@ public class MartusApp
 		orchidStore.saveStore(getOrchidCacheFile(), getSecurity());
 	}
 
-	public void encryptAndWriteFileAndSignatureFile(File file, File signatureFile,
-			byte[] plainText) throws Exception
+	public void encryptAndWriteFileAndSignatureFile(File file, File signatureFile, byte[] plainText) throws Exception
 	{
 		MartusCrypto security = getSecurity();
 
+		encryptAndWriteFileAndSignatureFile(file, signatureFile, plainText, security);
+	}
+
+	public void encryptAndWriteFileAndSignatureFile(File file, File signatureFile, byte[] plainText, MartusCrypto security) throws Exception
+	{
 		ByteArrayInputStream encryptedInputStream = new ByteArrayInputStream(plainText);
 		FileOutputStream fileOutputStream = new FileOutputStream(file);
 		security.encrypt(encryptedInputStream, fileOutputStream);
