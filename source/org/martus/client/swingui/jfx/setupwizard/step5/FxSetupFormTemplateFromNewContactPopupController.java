@@ -45,7 +45,7 @@ import org.martus.common.Exceptions.ServerNotCompatibleException;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenNotFoundException;
 import org.martus.common.MartusLogger;
-import org.martus.common.fieldspec.CustomFieldTemplate;
+import org.martus.common.fieldspec.FormTemplate;
 
 
 public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFxImportFormTemplateController implements Initializable
@@ -92,7 +92,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 			noTemplatesAvailableLabel.setVisible(false);
 			
 			formTemplateChoiceBox.setVisible(false);
-			ObservableList<CustomFieldTemplate> fieldTemplates = getFormTemplates(new ContactKey(contactAccountId));
+			ObservableList<FormTemplate> fieldTemplates = getFormTemplates(new ContactKey(contactAccountId));
 			if (fieldTemplates.isEmpty())
 			{
 				noTemplatesAvailableLabel.setVisible(true);
@@ -100,7 +100,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 			}
 				
 			formTemplateChoiceBox.setVisible(true);
-			ObservableList<CustomFieldTemplate> currentItems = formTemplateChoiceBox.getItems();
+			ObservableList<FormTemplate> currentItems = formTemplateChoiceBox.getItems();
 			currentItems.setAll(fieldTemplates);
 		} 
 		catch (ServerNotAvailableException e)
@@ -134,7 +134,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 		getStage().close();
 	}
 
-	public CustomFieldTemplate getSelectedFormTemplate()
+	public FormTemplate getSelectedFormTemplate()
 	{
 		if(wasTemplateChosen)
 			return formTemplateChoiceBox.getSelectionModel().getSelectedItem();
@@ -159,10 +159,10 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 		return getLocalization().getFieldLabel("DownloadTemplateFromMartusUser");
 	}
 	
-	protected class FieldTemplateChoiceChangeHandler implements ChangeListener<CustomFieldTemplate>
+	protected class FieldTemplateChoiceChangeHandler implements ChangeListener<FormTemplate>
 	{
 		@Override
-		public void changed(ObservableValue<? extends CustomFieldTemplate> observable, CustomFieldTemplate oldValue, CustomFieldTemplate newValue)
+		public void changed(ObservableValue<? extends FormTemplate> observable, FormTemplate oldValue, FormTemplate newValue)
 		{
 			boolean isVisible = newValue != null;
 			updateButtonVisibility(isVisible); 
@@ -170,7 +170,7 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 	}
 	
 	@FXML
-	private ChoiceBox<CustomFieldTemplate> formTemplateChoiceBox;
+	private ChoiceBox<FormTemplate> formTemplateChoiceBox;
 	
 	
 	@FXML

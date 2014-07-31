@@ -37,7 +37,7 @@ import org.martus.common.FieldCollection;
 import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.fieldspec.BulletinFieldSpecs;
-import org.martus.common.fieldspec.CustomFieldTemplate;
+import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class ActionMenuCustomFields extends UiMenuAction
@@ -68,7 +68,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 		{
 			FieldCollection topSection = new FieldCollection(newSpecs.getTopSectionSpecs());
 			FieldCollection bottomSection = new FieldCollection(newSpecs.getBottomSectionSpecs());
-			CustomFieldTemplate updatedTemplate = new CustomFieldTemplate(newSpecs.getTitleOfSpecs(), newSpecs.getDescriptionOfSpecs(), topSection, bottomSection);
+			FormTemplate updatedTemplate = new FormTemplate(newSpecs.getTitleOfSpecs(), newSpecs.getDescriptionOfSpecs(), topSection, bottomSection);
 			app.updateCustomFieldTemplate(updatedTemplate);
 		} 
 		catch (Exception e)

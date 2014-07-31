@@ -63,8 +63,8 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.BulletinFieldSpecs;
 import org.martus.common.fieldspec.CustomFieldError;
-import org.martus.common.fieldspec.CustomFieldTemplate;
-import org.martus.common.fieldspec.CustomFieldTemplate.FutureVersionException;
+import org.martus.common.fieldspec.FormTemplate;
+import org.martus.common.fieldspec.FormTemplate.FutureVersionException;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
@@ -236,7 +236,7 @@ public class UiCustomFieldsDlg extends JDialog
 			if(importFile == null)
 				return;
 
-			CustomFieldTemplate template = new CustomFieldTemplate();
+			FormTemplate template = new FormTemplate();
 			
 			
 			try
@@ -276,7 +276,7 @@ public class UiCustomFieldsDlg extends JDialog
 			mainWindow.notifyDlg("ErrorImportingCustomizationTemplate");
 		}
 
-		private boolean importFormTemplate(File importFile, CustomFieldTemplate template) throws IOException, FutureVersionException
+		private boolean importFormTemplate(File importFile, FormTemplate template) throws IOException, FutureVersionException
 		{
 			FileInputStreamWithSeek inputStream = new FileInputStreamWithSeek(importFile);
 			try
@@ -363,7 +363,7 @@ public class UiCustomFieldsDlg extends JDialog
 			if(destFile == null)
 				return;
 			
-			CustomFieldTemplate template = new CustomFieldTemplate();
+			FormTemplate template = new FormTemplate();
 			MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
 			String formTemplateTitle = titleField.getText();
 			String formTemplateDescription = descriptionField.getText();
@@ -398,7 +398,7 @@ public class UiCustomFieldsDlg extends JDialog
 			{
 				FieldCollection specTop = new FieldCollection(FieldCollection.parseXml(topXml));
 				FieldCollection specBottom = new FieldCollection(FieldCollection.parseXml(bottomXml));
-				CustomFieldTemplate template1 = new CustomFieldTemplate(titleField.getText(), descriptionField.getText(), specTop, specBottom);
+				FormTemplate template1 = new FormTemplate(titleField.getText(), descriptionField.getText(), specTop, specBottom);
 				mainWindow.getApp().putFormTemplateOnServer(template1);
 				mainWindow.notifyDlg("TemplateSavedToServer");
 			} 
@@ -437,7 +437,7 @@ public class UiCustomFieldsDlg extends JDialog
 	
 	public boolean validateXml(String xmlToValidateTopSection, String xmlToValidateBottomSection)
 	{
-		CustomFieldTemplate template = new CustomFieldTemplate();
+		FormTemplate template = new FormTemplate();
 		if(template.isvalidTemplateXml(xmlToValidateTopSection, xmlToValidateBottomSection))
 			return true;
 
@@ -448,7 +448,7 @@ public class UiCustomFieldsDlg extends JDialog
 	
 	
 
-	void displayXMLError(CustomFieldTemplate template)
+	void displayXMLError(FormTemplate template)
 	{
 		Vector errors = template.getErrors();
 		if(errors == null)

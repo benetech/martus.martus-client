@@ -31,11 +31,11 @@ import javafx.collections.ObservableList;
 
 import org.martus.client.core.MartusApp;
 import org.martus.common.ContactKey;
-import org.martus.common.fieldspec.CustomFieldTemplate;
+import org.martus.common.fieldspec.FormTemplate;
 
 public class DownloadTemplateListForAccountTask extends ServerCallTask
 {
-	public DownloadTemplateListForAccountTask(MartusApp appToUse, ContactKey keyToUse, ObservableList<CustomFieldTemplate> listToUse)
+	public DownloadTemplateListForAccountTask(MartusApp appToUse, ContactKey keyToUse, ObservableList<FormTemplate> listToUse)
 	{
 		super(appToUse);
 		
@@ -69,5 +69,5 @@ public class DownloadTemplateListForAccountTask extends ServerCallTask
 	}
 
 	private ContactKey contactKey;
-	private ObservableList<CustomFieldTemplate> formTemplates;
+	private ObservableList<FormTemplate> formTemplates;
 }

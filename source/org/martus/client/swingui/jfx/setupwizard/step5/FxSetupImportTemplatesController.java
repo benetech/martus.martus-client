@@ -46,8 +46,8 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.client.swingui.jfx.setupwizard.step6.FxSetupBackupYourKeyController;
 import org.martus.common.MartusLogger;
-import org.martus.common.fieldspec.CustomFieldTemplate;
-import org.martus.common.fieldspec.CustomFieldTemplate.FutureVersionException;
+import org.martus.common.fieldspec.FormTemplate;
+import org.martus.common.fieldspec.FormTemplate.FutureVersionException;
 import org.martus.util.TokenReplacement;
 import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
@@ -119,11 +119,11 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		return FXCollections.observableArrayList(choices);
 	}
 
-	private ObservableList<CustomFieldTemplate> getDefaultFormTemplateChoices()
+	private ObservableList<FormTemplate> getDefaultFormTemplateChoices()
 	{
 		try
 		{
-			Vector<CustomFieldTemplate> customTemplates = loadFormTemplates();
+			Vector<FormTemplate> customTemplates = loadFormTemplates();
 
 			return FXCollections.observableArrayList(customTemplates);
 		}
@@ -134,7 +134,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		}
 	}
 	
-	private Vector<CustomFieldTemplate> loadFormTemplates() throws Exception
+	private Vector<FormTemplate> loadFormTemplates() throws Exception
 	{
 		String[] formTemplateFileNames = new String[]
 		{
@@ -144,23 +144,23 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 			"formtemplates/UN-Disappearances.mct", 
 			"formtemplates/UN-Special-Rapporteur-Executions.mct", 
 		};
-		Vector<CustomFieldTemplate> formTemplates = new Vector<CustomFieldTemplate>();
+		Vector<FormTemplate> formTemplates = new Vector<FormTemplate>();
 		for (String formTemplateFileName : formTemplateFileNames)
 		{
 			InputStream resourceAsStream = getClass().getResourceAsStream(formTemplateFileName);
-			CustomFieldTemplate formTemplate = importFormTemplate(resourceAsStream);
+			FormTemplate formTemplate = importFormTemplate(resourceAsStream);
 			formTemplates.add(formTemplate);
 		}
 		
 		return formTemplates;
 	}
 
-	private CustomFieldTemplate importFormTemplate(InputStream resourceAsStream) throws Exception, FutureVersionException, IOException
+	private FormTemplate importFormTemplate(InputStream resourceAsStream) throws Exception, FutureVersionException, IOException
 	{
 		InputStreamWithSeek withSeek = new ByteArrayInputStreamWithSeek(convertToInputStreamWithSeek(resourceAsStream));
 		try
 		{
-			CustomFieldTemplate formTemplate = new CustomFieldTemplate();
+			FormTemplate formTemplate = new FormTemplate();
 			formTemplate.importTemplate(getApp().getSecurity(), withSeek);
 
 			return formTemplate;
@@ -196,7 +196,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		if (genericTemplatesChoiceBox.getSelectionModel().isEmpty())
 			return;
 		
-		CustomFieldTemplate genericCustomFieldTemplate = genericTemplatesChoiceBox.getSelectionModel().getSelectedItem();
+		FormTemplate genericCustomFieldTemplate = genericTemplatesChoiceBox.getSelectionModel().getSelectedItem();
 		updateSelectedCustomFieldTemplateComponents(genericCustomFieldTemplate);
 		genericTemplatesChoiceBox.getSelectionModel().clearSelection();
 	}
@@ -225,11 +225,11 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	protected void importFromContacts(AbstractFxImportFormTemplateController controller) throws Exception
 	{
 		showControllerInsideModalDialog(controller);
-		CustomFieldTemplate selectedTemplate = controller.getSelectedFormTemplate();
+		FormTemplate selectedTemplate = controller.getSelectedFormTemplate();
 		updateSelectedCustomFieldTemplateComponents(selectedTemplate);
 	}
 	
-	protected void updateSelectedCustomFieldTemplateComponents(CustomFieldTemplate customFieldTemplate) throws Exception
+	protected void updateSelectedCustomFieldTemplateComponents(FormTemplate customFieldTemplate) throws Exception
 	{
 		selectedFormTemplateToSave = customFieldTemplate;
 		boolean shouldAllowFormTemplate = false;
@@ -245,7 +245,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		switchFormsLaterLabel.setVisible(shouldAllowFormTemplate);
 	}
 	
-	protected void saveCustomFieldTemplate(CustomFieldTemplate customFieldTemplate)
+	protected void saveCustomFieldTemplate(FormTemplate customFieldTemplate)
 	{
 		try
 		{
@@ -278,17 +278,17 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		}
 	}
 	
-	protected class GenericTemplatesSelectionChangedHandler implements ChangeListener<CustomFieldTemplate>
+	protected class GenericTemplatesSelectionChangedHandler implements ChangeListener<FormTemplate>
 	{
 		@Override
-		public void changed(ObservableValue<? extends CustomFieldTemplate> observable, CustomFieldTemplate oldValue, CustomFieldTemplate newValue)
+		public void changed(ObservableValue<? extends FormTemplate> observable, FormTemplate oldValue, FormTemplate newValue)
 		{
 			if (genericTemplatesChoiceBox.getSelectionModel().isEmpty())
 				return;
 
 			try
 			{
-				CustomFieldTemplate genericCustomFieldTemplate = genericTemplatesChoiceBox.getSelectionModel().getSelectedItem();
+				FormTemplate genericCustomFieldTemplate = genericTemplatesChoiceBox.getSelectionModel().getSelectedItem();
 				updateSelectedCustomFieldTemplateComponents(genericCustomFieldTemplate);
 				genericTemplatesChoiceBox.getSelectionModel().clearSelection();
 			}
@@ -329,7 +329,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	}
 	
 	@FXML 
-	protected ChoiceBox<CustomFieldTemplate> genericTemplatesChoiceBox;
+	protected ChoiceBox<FormTemplate> genericTemplatesChoiceBox;
 	
 	@FXML
 	protected ChoiceBox<AbstractFxImportFormTemplateController> customTemplatesChoiceBox;
@@ -349,5 +349,5 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	@FXML
 	private Label sidebarHintTemplates;
 	
-	protected CustomFieldTemplate selectedFormTemplateToSave;
+	protected FormTemplate selectedFormTemplateToSave;
 }
