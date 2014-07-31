@@ -288,8 +288,8 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 
 			try
 			{
-				FormTemplate genericCustomFieldTemplate = genericTemplatesChoiceBox.getSelectionModel().getSelectedItem();
-				updateSelectedFormTemplateComponents(genericCustomFieldTemplate);
+				FormTemplate genericFormTemplate = genericTemplatesChoiceBox.getSelectionModel().getSelectedItem();
+				updateSelectedFormTemplateComponents(genericFormTemplate);
 				genericTemplatesChoiceBox.getSelectionModel().clearSelection();
 			}
 			catch (Exception e)
