@@ -107,10 +107,6 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		allPrivate.setText(localization.getFieldLabel("preferencesAllPrivate"));
 		allPrivate.setSelected(owner.getBulletinsAlwaysPrivate());
 		
-		checkFieldOfficeBulletins = new UiCheckBox();
-		checkFieldOfficeBulletins.setText(localization.getFieldLabel("preferencesCheckFieldOfficeBulletins"));
-		checkFieldOfficeBulletins.setSelected(owner.getCheckFieldOfficeBulletins());
-		
 		useInternalTor = new UiCheckBox();
 		useInternalTor.setText(localization.getFieldLabel("PreferencesUseInternalTor"));
 		useInternalTor.setSelected(owner.getUseInternalTor());
@@ -126,7 +122,6 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 
 		preferences.addBlankLine();
 		preferences.addOnNewLine(allPrivate);
-		preferences.addOnNewLine(checkFieldOfficeBulletins);
 		preferences.addOnNewLine(useInternalTor);
 		preferences.addBlankLine();
 		
@@ -187,11 +182,6 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		return allPrivate.isSelected();
 	}
 	
-	public boolean isCheckFieldOfficeBulletinsChecked()
-	{
-		return checkFieldOfficeBulletins.isSelected();
-	}
-
     public boolean isUseZawgyiFont()
     {
         return useZawgyiFont.isSelected();
@@ -314,7 +304,6 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	private UiCheckBox adjustPersian;
 	private UiCheckBox useZawgyiFont;
 	private UiCheckBox allPrivate;
-	private UiCheckBox checkFieldOfficeBulletins;
 	private UiCheckBox useInternalTor;
 	private JButton ok;
 	private JButton cancel;

@@ -2322,11 +2322,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return getApp().getConfigInfo().shouldForceBulletinsAllPrivate();
 	}
 
-	public boolean getCheckFieldOfficeBulletins()
-	{
-		return getApp().getConfigInfo().getCheckForFieldOfficeBulletins();
-	}
-
     public boolean getUseZawgyiFont()
 	{
 		return getApp().getConfigInfo().getUseZawgyiFont();

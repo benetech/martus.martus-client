@@ -330,7 +330,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setAllHQKeysXml(sampleAllHQKeysXml);
 		info.setBulletinVersioningAware(sampleBulletinVersioningAware);
 		info.setDefaultHQKeysXml(sampleDefaultHQKeysXml);
-		info.setCheckForFieldOfficeBulletins(sampleCheckForFieldOfficeBulletins);
 		info.setCustomFieldTopSectionXml(sampleCustomFieldTopSectionXml);
 		info.setCustomFieldBottomSectionXml(sampleCustomFieldBottomSectionXml);
 		info.setUseZawgyiFont(sampleUseZawgyi);
@@ -368,7 +367,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleAllHQKeysXml", "", info.getAllHQKeysXml());
 		assertEquals(label + ": sampleBulletinVersioningAware", true, info.isBulletinVersioningAware());
 		assertEquals(label + ": sampleDefaultHQKeysXml", "", info.getDefaultHQKeysXml());
-		assertEquals(label + ": sampleCheckForFieldOfficeBulletins", false, info.getCheckForFieldOfficeBulletins());
 		assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getCustomFieldTopSectionXml());
 		assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
 		assertEquals(label + ": sampleFieldDeskKeysXml", "", info.getFieldDeskKeysXml());
@@ -461,11 +459,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 		else if(VERSION < 12)
 			assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
 
-		if(VERSION >= 13)
-			assertEquals(label + ": sampleCheckForFieldOfficeBulletins", sampleCheckForFieldOfficeBulletins, info.getCheckForFieldOfficeBulletins());	
-		else
-			assertEquals(label + ": sampleCheckForFieldOfficeBulletins", false, info.getCheckForFieldOfficeBulletins());
-		
 		if(VERSION >= 14)
 		{
 			assertEquals(label + ": sampleCustomFieldTopSectionXml", sampleCustomFieldTopSectionXml, info.getCustomFieldTopSectionXml());
@@ -633,7 +626,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		}
 		if(VERSION >= 13)
 		{
-			out.writeBoolean(sampleCheckForFieldOfficeBulletins);
+			out.writeBoolean(false); //Not used sampleCheckForFieldOfficeBulletins
 		}
 		if(VERSION >= 14)
 		{
@@ -735,7 +728,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 //Version 12
 	final String sampleLegacyCustomFieldBottomSectionXml = "<CustomFields></CustomFields>";
 //Version 13
-	final boolean sampleCheckForFieldOfficeBulletins = true;
+	//final boolean sampleCheckForFieldOfficeBulletins = true;
 //Version 14
 	final String sampleCustomFieldTopSectionXml = longString;
 	final String sampleCustomFieldBottomSectionXml = longString;
