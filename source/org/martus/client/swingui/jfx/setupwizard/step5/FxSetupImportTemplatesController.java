@@ -229,14 +229,14 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		updateSelectedFormTemplateComponents(selectedTemplate);
 	}
 	
-	protected void updateSelectedFormTemplateComponents(FormTemplate customFieldTemplate) throws Exception
+	protected void updateSelectedFormTemplateComponents(FormTemplate template) throws Exception
 	{
-		selectedFormTemplateToSave = customFieldTemplate;
+		selectedFormTemplateToSave = template;
 		boolean shouldAllowFormTemplate = false;
 		String loadFormTemplateMessage = "";
-		if (customFieldTemplate != null)
+		if (template != null)
 		{
-			loadFormTemplateMessage = TokenReplacement.replaceToken(getLocalization().getFieldLabel("SuccessfullyImportedForm"), "#templateName", customFieldTemplate.getTitle());
+			loadFormTemplateMessage = TokenReplacement.replaceToken(getLocalization().getFieldLabel("SuccessfullyImportedForm"), "#templateName", template.getTitle());
 			shouldAllowFormTemplate = true;
 		}
 		
