@@ -33,6 +33,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Vector;
 
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleBooleanProperty;
+
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusLogger;
@@ -67,7 +70,7 @@ public class ConfigInfo
 	public void setDefaultHQKeysXml(String defaultHQKeysXml){this.deprecatedDefaultHQKeysXml = defaultHQKeysXml;}
 	public void setCustomFieldTopSectionXml(String newXml)	{customFieldTopSectionXml = newXml;}
 	public void setCustomFieldBottomSectionXml(String newXml)	{customFieldBottomSectionXml = newXml;}
-	public void setUseZawgyiFont(boolean newUseZawgyiFont){useZawgyiFont = newUseZawgyiFont;}
+	public void setUseZawgyiFont(boolean newUseZawgyiFont){useZawgyiFontProperty.setValue(newUseZawgyiFont);}
 	public void setFieldDeskKeysXml(String newFieldDeskKeysXml) { deprecatedFieldDeskKeysXml = newFieldDeskKeysXml; }
 	public void setBackedUpImprovedKeypairShare(boolean newBackedUpImprovedKeypairShare) {backedUpImprovedKeypairShare = newBackedUpImprovedKeypairShare;}
 	public void setUseInternalTor(boolean newUseInternalTor) { useInternalTor = newUseInternalTor;}
@@ -111,7 +114,8 @@ public class ConfigInfo
 	public String getDefaultHQKeysXml()		{return deprecatedDefaultHQKeysXml;}
 	public String getCustomFieldTopSectionXml()	{return customFieldTopSectionXml;}
 	public String getCustomFieldBottomSectionXml() {return customFieldBottomSectionXml;}
-	public boolean getUseZawgyiFont() {return useZawgyiFont;}
+	public boolean getUseZawgyiFont() {return useZawgyiFontProperty.getValue();}
+	public Property<Boolean> getUseZawgyiFontProperty() {return useZawgyiFontProperty;}
 	public String getFieldDeskKeysXml() { return deprecatedFieldDeskKeysXml; }
 	public boolean hasBackedUpImprovedKeypairShare() {return backedUpImprovedKeypairShare;}
 	public boolean getDoZawgyiConversion() {return true;}
@@ -172,7 +176,7 @@ public class ConfigInfo
 		deprecatedDefaultHQKeysXml = "";
 		customFieldTopSectionXml = "";
 		customFieldBottomSectionXml = "";
-		useZawgyiFont = false;
+		useZawgyiFontProperty = new SimpleBooleanProperty();
 		deprecatedFieldDeskKeysXml = "";
 		backedUpImprovedKeypairShare = false;
 		useInternalTor = false;
@@ -250,7 +254,7 @@ public class ConfigInfo
 			}
 
             if(loaded.version >= 15)
-                loaded.useZawgyiFont = in.readBoolean();
+                loaded.useZawgyiFontProperty.setValue(in.readBoolean());
             
             if(loaded.version >= 16)
             	loaded.deprecatedFieldDeskKeysXml = readLongString(in);
@@ -351,7 +355,7 @@ public class ConfigInfo
 			out.writeBoolean(false); //checkForFieldOfficeBulletins
 			writeLongString(out, customFieldTopSectionXml);
 			writeLongString(out, customFieldBottomSectionXml);
-            out.writeBoolean(useZawgyiFont);
+            out.writeBoolean(useZawgyiFontProperty.getValue());
             writeLongString(out, deprecatedFieldDeskKeysXml);
 			out.writeBoolean(backedUpImprovedKeypairShare);
 			out.writeBoolean(useInternalTor);
@@ -435,7 +439,7 @@ public class ConfigInfo
 	private String customFieldTopSectionXml;
 	private String customFieldBottomSectionXml;
     //Version 15
-    private boolean useZawgyiFont; 
+    private Property <Boolean>  useZawgyiFontProperty; 
     //Version 16
     private String deprecatedFieldDeskKeysXml;
 	//Version 17
