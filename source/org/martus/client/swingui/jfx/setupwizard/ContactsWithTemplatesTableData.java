@@ -35,13 +35,13 @@ import org.martus.common.fieldspec.FormTemplate;
 
 public class ContactsWithTemplatesTableData
 {
-	public ContactsWithTemplatesTableData(ContactKey contactKeyToUse, boolean rowSelectedToUse, FormTemplate selectedFormTemplateToUse, ObservableList<FormTemplate> customFieldTemplatesToChooseFromToUse) throws Exception
+	public ContactsWithTemplatesTableData(ContactKey contactKeyToUse, boolean rowSelectedToUse, FormTemplate selectedFormTemplateToUse, ObservableList<FormTemplate> formTemplatesToChooseFromToUse) throws Exception
 	{
 		contactName = new SimpleStringProperty(contactKeyToUse.getLabel());
 		publicCode = new SimpleStringProperty(contactKeyToUse.getFormattedPublicCode());
 		isContactChosen = new SimpleBooleanProperty(rowSelectedToUse);
 		selectedFormTemplate = new SimpleObjectProperty(selectedFormTemplateToUse);
-		formTemplatesToChooseFrom = customFieldTemplatesToChooseFromToUse;
+		formTemplatesToChooseFrom = formTemplatesToChooseFromToUse;
 		contactKey = contactKeyToUse;
 	}
 	
