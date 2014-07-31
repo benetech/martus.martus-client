@@ -81,7 +81,7 @@ import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.FileDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.CustomFieldTemplate;
+import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
@@ -928,7 +928,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		String title = "A new Title";
 		String description = "Some Descritpion";
-		CustomFieldTemplate newTemplate = new CustomFieldTemplate(title, description, topSection, bottomSection);
+		FormTemplate newTemplate = new FormTemplate(title, description, topSection, bottomSection);
 		appWithAccount.updateCustomFieldTemplate(newTemplate);
 		configInfo = appWithAccount.getConfigInfo();		
 		assertEquals("Top section should have been set", xmlTop, configInfo.getCustomFieldTopSectionXml());

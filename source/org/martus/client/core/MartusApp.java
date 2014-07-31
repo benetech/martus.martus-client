@@ -114,8 +114,8 @@ import org.martus.common.database.Database;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.CustomFieldTemplate;
-import org.martus.common.fieldspec.CustomFieldTemplate.FutureVersionException;
+import org.martus.common.fieldspec.FormTemplate;
+import org.martus.common.fieldspec.FormTemplate.FutureVersionException;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.network.ClientSideNetworkInterface;
@@ -552,7 +552,7 @@ public class MartusApp
 	return updatedContactKeysWithCanReceiveFromAdjusted;
 	}
 
-	public void updateCustomFieldTemplate(CustomFieldTemplate updatedTemplate) throws SaveConfigInfoException, CustomFieldsParseException
+	public void updateCustomFieldTemplate(FormTemplate updatedTemplate) throws SaveConfigInfoException, CustomFieldsParseException
 	{
 
 		configInfo.setCustomFieldTopSectionXml(updatedTemplate.getImportedTopSectionText());
@@ -1889,7 +1889,7 @@ public class MartusApp
 		return AccountId;
 	}
 
-	public void putFormTemplateOnServer(CustomFieldTemplate formTemplate) throws Exception 
+	public void putFormTemplateOnServer(FormTemplate formTemplate) throws Exception 
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
@@ -1940,7 +1940,7 @@ public class MartusApp
 	}
 
 	
-	public CustomFieldTemplate getFormTemplateOnServer(String accountId, String formTitle) throws Exception 
+	public FormTemplate getFormTemplateOnServer(String accountId, String formTitle) throws Exception 
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
@@ -1966,9 +1966,9 @@ public class MartusApp
 		return importFormTemplate(formTemplateTempFile);
 	}
 
-	private CustomFieldTemplate importFormTemplate(File formTemplateTempFile) throws FutureVersionException, IOException
+	private FormTemplate importFormTemplate(File formTemplateTempFile) throws FutureVersionException, IOException
 	{
-		CustomFieldTemplate template = new CustomFieldTemplate();
+		FormTemplate template = new FormTemplate();
 		FileInputStreamWithSeek inputStream = new FileInputStreamWithSeek(formTemplateTempFile);
 		try
 		{

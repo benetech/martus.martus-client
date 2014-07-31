@@ -39,7 +39,7 @@ import org.martus.client.swingui.jfx.generic.FxWizardStage;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.MartusLogger;
-import org.martus.common.fieldspec.CustomFieldTemplate;
+import org.martus.common.fieldspec.FormTemplate;
 
 public class FxImportFormTemplateFromMyContactsPopupController extends AbstractFxImportFormTemplateController
 {
@@ -116,7 +116,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	}
 
 	@Override
-	public CustomFieldTemplate getSelectedFormTemplate()
+	public FormTemplate getSelectedFormTemplate()
 	{
 		if(wasTemplateChosen)
 			return templatesChoiceBox.getSelectionModel().getSelectedItem();
@@ -138,7 +138,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 			
 			try
 			{
-				ObservableList<CustomFieldTemplate> formTemplates = getFormTemplates(newValue);
+				ObservableList<FormTemplate> formTemplates = getFormTemplates(newValue);
 				if (formTemplates.isEmpty())
 				{
 					noTemplatesAvailableLabel.setVisible(true);
@@ -156,10 +156,10 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 		}
 	}
 	
-	protected class TemplatesChangeHandler implements ChangeListener<CustomFieldTemplate>
+	protected class TemplatesChangeHandler implements ChangeListener<FormTemplate>
 	{
 		@Override
-		public void changed(ObservableValue<? extends CustomFieldTemplate> observable, CustomFieldTemplate oldValue, CustomFieldTemplate newValue)
+		public void changed(ObservableValue<? extends FormTemplate> observable, FormTemplate oldValue, FormTemplate newValue)
 		{
 			boolean isVisible = newValue != null;
 			updateButtonVisibility(isVisible); 
@@ -175,7 +175,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	private ChoiceBox<ContactKey> contactsChoiceBox;
 	
 	@FXML
-	protected ChoiceBox<CustomFieldTemplate> templatesChoiceBox;
+	protected ChoiceBox<FormTemplate> templatesChoiceBox;
 	
 	@FXML
 	protected Label chooseContactLabel;

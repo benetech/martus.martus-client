@@ -35,7 +35,7 @@ import org.martus.client.swingui.jfx.generic.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.tasks.DownloadTemplateListForAccountTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.TaskWithTimeout;
 import org.martus.common.ContactKey;
-import org.martus.common.fieldspec.CustomFieldTemplate;
+import org.martus.common.fieldspec.FormTemplate;
 
 abstract public class AbstractFxImportFormTemplateController extends FxPopupController
 {
@@ -46,15 +46,15 @@ abstract public class AbstractFxImportFormTemplateController extends FxPopupCont
 		wizardPanel = wizardPanelToUse;
 	}
 	
-	protected ObservableList<CustomFieldTemplate> getFormTemplates(ContactKey contactKey) throws Exception
+	protected ObservableList<FormTemplate> getFormTemplates(ContactKey contactKey) throws Exception
 	{
-		ObservableList<CustomFieldTemplate> formTemplates = FXCollections.observableArrayList();
+		ObservableList<FormTemplate> formTemplates = FXCollections.observableArrayList();
 		getFormTemplates(contactKey, formTemplates);
 
 		return formTemplates;
 	}
 
-	protected void getFormTemplates(ContactKey contactKey, ObservableList<CustomFieldTemplate> formTemplates) throws Exception
+	protected void getFormTemplates(ContactKey contactKey, ObservableList<FormTemplate> formTemplates) throws Exception
 	{
 		TaskWithTimeout task = new DownloadTemplateListForAccountTask(getApp(), contactKey, formTemplates);
 		MartusLocalization localization = getLocalization();
@@ -69,7 +69,7 @@ abstract public class AbstractFxImportFormTemplateController extends FxPopupCont
 	
 	abstract public String getLabel();
 	
-	abstract public CustomFieldTemplate getSelectedFormTemplate();
+	abstract public FormTemplate getSelectedFormTemplate();
 	
 	private FxWizardStage wizardPanel;
 }
