@@ -698,6 +698,25 @@ public class MartusApp
 		return plainText;
 	}
 	
+	private boolean isSignatureFileValid(File dataFile, File sigFile, String accountId) throws FileNotFoundException, IOException, MartusSignatureException 
+	{
+		byte[] signature =	new byte[(int)sigFile.length()];
+		FileInputStream inSignature = new FileInputStream(sigFile);
+		inSignature.read(signature);
+		inSignature.close();
+
+		FileInputStream inData = new FileInputStream(dataFile);
+		try
+		{
+			boolean verified = getSecurity().isValidSignatureOfStream(accountId, inData, signature);
+			return verified;
+		}
+		finally
+		{
+			inData.close();
+		}
+	}
+
 	public void writeSignedUserDictionary(String string) throws Exception
 	{
 		encryptAndWriteFileAndSignatureFile(getDictionaryFile(), getDictionarySignatureFile(), string.getBytes("UTF-8"));
@@ -738,25 +757,6 @@ public class MartusApp
 	}
 
 	
-	private boolean isSignatureFileValid(File dataFile, File sigFile, String accountId) throws FileNotFoundException, IOException, MartusSignatureException 
-	{
-		byte[] signature =	new byte[(int)sigFile.length()];
-		FileInputStream inSignature = new FileInputStream(sigFile);
-		inSignature.read(signature);
-		inSignature.close();
-
-		FileInputStream inData = new FileInputStream(dataFile);
-		try
-		{
-			boolean verified = getSecurity().isValidSignatureOfStream(accountId, inData, signature);
-			return verified;
-		}
-		finally
-		{
-			inData.close();
-		}
-	}
-
 	private void migrateToUsingContactKeys() throws Exception
 	{
 		String legacyHQKey = configInfo.getLegacyHQKey();
