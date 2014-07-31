@@ -249,7 +249,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	{
 		try
 		{
-			getApp().updateCustomFieldTemplate(customFieldTemplate);
+			getApp().updateFormTemplate(customFieldTemplate);
 		}
 		catch (Exception e)
 		{

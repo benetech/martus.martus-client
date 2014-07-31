@@ -929,7 +929,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String title = "A new Title";
 		String description = "Some Descritpion";
 		FormTemplate newTemplate = new FormTemplate(title, description, topSection, bottomSection);
-		appWithAccount.updateCustomFieldTemplate(newTemplate);
+		appWithAccount.updateFormTemplate(newTemplate);
 		configInfo = appWithAccount.getConfigInfo();		
 		assertEquals("Top section should have been set", xmlTop, configInfo.getCustomFieldTopSectionXml());
 		assertEquals("Bottom section should have been set", xmlBottom, configInfo.getCustomFieldBottomSectionXml());
