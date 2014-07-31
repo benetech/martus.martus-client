@@ -147,7 +147,6 @@ import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
 import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.FileInputStreamWithSeek;
-import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.ZipEntryInputStreamWithSeekThatClosesZipFile;
 
 public class MartusApp
@@ -678,49 +677,13 @@ public class MartusApp
 	{
 		MartusCrypto security = getSecurity();
 		
-		return verifySignatureAndDecryptFile(dataFile, sigFile, security);
+		return MartusCrypto.verifySignatureAndDecryptFile(dataFile, sigFile, security);
 	}
 
-	public static byte[] verifySignatureAndDecryptFile(File dataFile, File sigFile, MartusCrypto security) throws Exception
-	{
-		String accountId = security.getPublicKeyString();
-		if(!isSignatureFileValid(dataFile, sigFile, accountId, security))
-			throw new SignatureVerificationException();
-
-		InputStreamWithSeek encryptedInputStream = new FileInputStreamWithSeek(dataFile);
-		ByteArrayOutputStream plainTextStream = new ByteArrayOutputStream();
-		security.decrypt(encryptedInputStream, plainTextStream);
-
-		byte[] plainText = plainTextStream.toByteArray();
-
-		plainTextStream.close();
-		encryptedInputStream.close();
-		return plainText;
-	}
-	
 	private boolean isSignatureFileValid(File dataFile, File sigFile, String accountId) throws Exception 
 	{
 		MartusCrypto security = getSecurity();
-		return isSignatureFileValid(dataFile, sigFile, accountId, security);
-	}
-
-	public static boolean isSignatureFileValid(File dataFile, File sigFile, String accountId, MartusCrypto security) throws Exception
-	{
-		byte[] signature =	new byte[(int)sigFile.length()];
-		FileInputStream inSignature = new FileInputStream(sigFile);
-		inSignature.read(signature);
-		inSignature.close();
-
-		FileInputStream inData = new FileInputStream(dataFile);
-		try
-		{
-			boolean verified = security.isValidSignatureOfStream(accountId, inData, signature);
-			return verified;
-		}
-		finally
-		{
-			inData.close();
-		}
+		return MartusCrypto.isSignatureFileValid(dataFile, sigFile, accountId, security);
 	}
 
 	public void writeSignedUserDictionary(String string) throws Exception
