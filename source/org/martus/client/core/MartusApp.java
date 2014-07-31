@@ -698,9 +698,14 @@ public class MartusApp
 		return plainText;
 	}
 	
-	private boolean isSignatureFileValid(File dataFile, File sigFile, String accountId) throws FileNotFoundException, IOException, MartusSignatureException 
+	private boolean isSignatureFileValid(File dataFile, File sigFile, String accountId) throws Exception 
 	{
 		MartusCrypto security = getSecurity();
+		return isSignatureFileValid(dataFile, sigFile, accountId, security);
+	}
+
+	public boolean isSignatureFileValid(File dataFile, File sigFile, String accountId, MartusCrypto security) throws Exception
+	{
 		byte[] signature =	new byte[(int)sigFile.length()];
 		FileInputStream inSignature = new FileInputStream(sigFile);
 		inSignature.read(signature);
