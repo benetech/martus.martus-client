@@ -52,7 +52,6 @@ public class ActionMenuPreferences extends UiMenuAction implements ActionDoer
 		if(dlg.getResult())
 		{
 			getApp().getConfigInfo().setForceBulletinsAllPrivate(dlg.isAllPrivateChecked());
-			getApp().getConfigInfo().setCheckForFieldOfficeBulletins(dlg.isCheckFieldOfficeBulletinsChecked());
 			getApp().getConfigInfo().setUseZawgyiFont(dlg.isUseZawgyiFont());
 			getApp().getConfigInfo().setUseInternalTor(dlg.isUseInternalTorChecked());
 			getMainWindow().saveConfigInfo();

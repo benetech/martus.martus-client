@@ -65,7 +65,6 @@ public class ConfigInfo
 	public void setAllHQKeysXml(String allHQKeysXml){this.deprecatedAllHQKeysXml = allHQKeysXml;}
 	public void setBulletinVersioningAware(boolean newBulletinVersioningAware){this.bulletinVersioningAware = newBulletinVersioningAware;}
 	public void setDefaultHQKeysXml(String defaultHQKeysXml){this.deprecatedDefaultHQKeysXml = defaultHQKeysXml;}
-	public void setCheckForFieldOfficeBulletins(boolean newCheckForBulletins){checkForFieldOfficeBulletins = newCheckForBulletins;}
 	public void setCustomFieldTopSectionXml(String newXml)	{customFieldTopSectionXml = newXml;}
 	public void setCustomFieldBottomSectionXml(String newXml)	{customFieldBottomSectionXml = newXml;}
 	public void setUseZawgyiFont(boolean newUseZawgyiFont){useZawgyiFont = newUseZawgyiFont;}
@@ -110,7 +109,6 @@ public class ConfigInfo
 	public String getAllHQKeysXml()		{return deprecatedAllHQKeysXml;}
 	public boolean isBulletinVersioningAware()	{return bulletinVersioningAware;}
 	public String getDefaultHQKeysXml()		{return deprecatedDefaultHQKeysXml;}
-	public boolean getCheckForFieldOfficeBulletins() {return checkForFieldOfficeBulletins;}
 	public String getCustomFieldTopSectionXml()	{return customFieldTopSectionXml;}
 	public String getCustomFieldBottomSectionXml() {return customFieldBottomSectionXml;}
 	public boolean getUseZawgyiFont() {return useZawgyiFont;}
@@ -243,7 +241,7 @@ public class ConfigInfo
 				loaded.customFieldBottomSectionXml = in.readUTF(); //legacyCustomFieldBottomSectionXml
 
 			if(loaded.version >= 13)
-				loaded.checkForFieldOfficeBulletins = in.readBoolean();
+				in.readBoolean(); //checkForFieldOfficeBulletins not used
 
 			if(loaded.version >= 14)
 			{
@@ -350,7 +348,7 @@ public class ConfigInfo
 			out.writeBoolean(bulletinVersioningAware);
 			out.writeUTF(deprecatedDefaultHQKeysXml);
 			out.writeUTF(""); //legacyCustomFieldBottomSectionXml
-			out.writeBoolean(checkForFieldOfficeBulletins);
+			out.writeBoolean(false); //checkForFieldOfficeBulletins
 			writeLongString(out, customFieldTopSectionXml);
 			writeLongString(out, customFieldBottomSectionXml);
             out.writeBoolean(useZawgyiFont);
@@ -432,12 +430,12 @@ public class ConfigInfo
 	//Version 12
 		// was: private String legacyCustomFieldBottomSectionXml;
 	//Version 13
-	private boolean checkForFieldOfficeBulletins;
+		// was: private boolean checkForFieldOfficeBulletins;
 	//Version 14
 	private String customFieldTopSectionXml;
 	private String customFieldBottomSectionXml;
     //Version 15
-    private boolean useZawgyiFont;
+    private boolean useZawgyiFont; 
     //Version 16
     private String deprecatedFieldDeskKeysXml;
 	//Version 17
