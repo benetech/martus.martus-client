@@ -36,10 +36,12 @@ import java.util.Vector;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleBooleanProperty;
 
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
+import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class ConfigInfo
@@ -378,6 +380,16 @@ public class ConfigInfo
 		{
 			out.close();
 		}
+	}
+
+	public FormTemplate getCurrentFormTemplate() throws Exception
+	{
+		String title = getCurrentFormTemplateTitle();
+		String description = getCurrentFormTemplateDescription();
+		FieldSpecCollection top = MartusApp.getCustomFieldSpecsTopSection(this);
+		FieldSpecCollection bottom = MartusApp.getCustomFieldSpecsBottomSection(this);
+		FormTemplate existing = new FormTemplate(title, description, top, bottom);
+		return existing;
 	}
 
 	public static void writeLongString(DataOutputStream out, String data) throws IOException
