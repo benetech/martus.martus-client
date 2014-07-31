@@ -245,7 +245,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		switchFormsLaterLabel.setVisible(shouldAllowFormTemplate);
 	}
 	
-	protected void saveCustomFieldTemplate(FormTemplate customFieldTemplate)
+	protected void saveFormTemplate(FormTemplate customFieldTemplate)
 	{
 		try
 		{
@@ -309,7 +309,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		public void handle(ActionEvent event)
 		{
 			if (selectedFormTemplateToSave != null)
-				saveCustomFieldTemplate(selectedFormTemplateToSave);
+				saveFormTemplate(selectedFormTemplateToSave);
 		}
 	}
 	
