@@ -700,6 +700,7 @@ public class MartusApp
 	
 	private boolean isSignatureFileValid(File dataFile, File sigFile, String accountId) throws FileNotFoundException, IOException, MartusSignatureException 
 	{
+		MartusCrypto security = getSecurity();
 		byte[] signature =	new byte[(int)sigFile.length()];
 		FileInputStream inSignature = new FileInputStream(sigFile);
 		inSignature.read(signature);
@@ -708,7 +709,7 @@ public class MartusApp
 		FileInputStream inData = new FileInputStream(dataFile);
 		try
 		{
-			boolean verified = getSecurity().isValidSignatureOfStream(accountId, inData, signature);
+			boolean verified = security.isValidSignatureOfStream(accountId, inData, signature);
 			return verified;
 		}
 		finally
