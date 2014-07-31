@@ -85,10 +85,10 @@ public class ContactsWithTemplatesTableData
 		selectedFormTemplate.set(selectedTamplateNameToUse);
 	}
 	
-	public void setFormTemplatesToChooseFrom(ObservableList<FormTemplate> customFieldTemplatesToChooseFromToUse)
+	public void setFormTemplatesToChooseFrom(ObservableList<FormTemplate> formTemplatesToChooseFromToUse)
 	{
 		formTemplatesToChooseFrom.clear();
-		formTemplatesToChooseFrom.addAll(customFieldTemplatesToChooseFromToUse);
+		formTemplatesToChooseFrom.addAll(formTemplatesToChooseFromToUse);
 	}
 	
 	public ObservableList<FormTemplate> getFormTemplateChoices()
