@@ -473,9 +473,15 @@ public class TestConfigInfo extends TestCaseEnhanced
 		}
 
 		if(VERSION >= 15)
+		{
 			assertEquals(label + ": sampleUseZawgyi", sampleUseZawgyi, info.getUseZawgyiFont());
+			assertEquals(label + ": UseZawgyiFontProperty", new Boolean(sampleUseZawgyi), info.getUseZawgyiFontProperty().getValue());
+		}
 		else
+		{
 			assertEquals(label + ": sampleUseZawgyi", false, info.getUseZawgyiFont());
+			assertEquals(label + ": UseZawgyiFontProperty", new Boolean(false), info.getUseZawgyiFontProperty().getValue());
+		}
 		
 		if(VERSION >= 16)
 			assertEquals(label + ": sampleFieldDeskKeys", sampleFieldDeskKeysXml, info.getFieldDeskKeysXml());
