@@ -606,25 +606,7 @@ public class MartusApp
 	{
 		MartusCrypto security = getSecurity();
 
-		encryptAndWriteFileAndSignatureFile(file, signatureFile, plainText, security);
-	}
-
-	public static void encryptAndWriteFileAndSignatureFile(File file, File signatureFile, byte[] plainText, MartusCrypto security) throws Exception
-	{
-		ByteArrayInputStream encryptedInputStream = new ByteArrayInputStream(plainText);
-		FileOutputStream fileOutputStream = new FileOutputStream(file);
-		security.encrypt(encryptedInputStream, fileOutputStream);
-
-		fileOutputStream.close();
-		encryptedInputStream.close();
-
-		FileInputStream in = new FileInputStream(file);
-		byte[] signature = security.createSignatureOfStream(in);
-		in.close();
-
-		FileOutputStream out = new FileOutputStream(signatureFile);
-		out.write(signature);
-		out.close();
+		MartusSecurity.encryptAndWriteFileAndSignatureFile(file, signatureFile, plainText, security);
 	}
 
 	public void loadConfigInfo() throws LoadConfigInfoException
