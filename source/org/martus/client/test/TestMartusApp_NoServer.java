@@ -895,9 +895,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 	}
 	
-	public void testUpdateCustomFieldTemplate() throws Exception
+	public void testUpdateFormTemplate() throws Exception
 	{
-		TRACE_BEGIN("testUpdateCustomFieldTemplate");
+		TRACE_BEGIN("testUpdateFormTemplate");
 		File file = appWithAccount.getConfigInfoFile();
 		file.delete();
 		appWithAccount.loadConfigInfo();
