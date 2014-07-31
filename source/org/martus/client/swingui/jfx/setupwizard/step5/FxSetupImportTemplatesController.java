@@ -197,7 +197,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 			return;
 		
 		FormTemplate genericFormTemplate = genericTemplatesChoiceBox.getSelectionModel().getSelectedItem();
-		updateSelectedCustomFieldTemplateComponents(genericFormTemplate);
+		updateSelectedFormTemplateComponents(genericFormTemplate);
 		genericTemplatesChoiceBox.getSelectionModel().clearSelection();
 	}
 
@@ -226,10 +226,10 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	{
 		showControllerInsideModalDialog(controller);
 		FormTemplate selectedTemplate = controller.getSelectedFormTemplate();
-		updateSelectedCustomFieldTemplateComponents(selectedTemplate);
+		updateSelectedFormTemplateComponents(selectedTemplate);
 	}
 	
-	protected void updateSelectedCustomFieldTemplateComponents(FormTemplate customFieldTemplate) throws Exception
+	protected void updateSelectedFormTemplateComponents(FormTemplate customFieldTemplate) throws Exception
 	{
 		selectedFormTemplateToSave = customFieldTemplate;
 		boolean shouldAllowFormTemplate = false;
@@ -289,7 +289,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 			try
 			{
 				FormTemplate genericCustomFieldTemplate = genericTemplatesChoiceBox.getSelectionModel().getSelectedItem();
-				updateSelectedCustomFieldTemplateComponents(genericCustomFieldTemplate);
+				updateSelectedFormTemplateComponents(genericCustomFieldTemplate);
 				genericTemplatesChoiceBox.getSelectionModel().clearSelection();
 			}
 			catch (Exception e)
