@@ -604,9 +604,7 @@ public class MartusApp
 
 	public void encryptAndWriteFileAndSignatureFile(File file, File signatureFile, byte[] plainText) throws Exception
 	{
-		MartusCrypto security = getSecurity();
-
-		MartusSecurity.encryptAndWriteFileAndSignatureFile(file, signatureFile, plainText, security);
+		getSecurity().encryptAndWriteFileAndSignatureFile(file, signatureFile, plainText);
 	}
 
 	public void loadConfigInfo() throws LoadConfigInfoException
