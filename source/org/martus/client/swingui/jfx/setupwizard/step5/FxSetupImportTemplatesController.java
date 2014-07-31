@@ -245,11 +245,11 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		switchFormsLaterLabel.setVisible(shouldAllowFormTemplate);
 	}
 	
-	protected void saveFormTemplate(FormTemplate customFieldTemplate)
+	protected void saveFormTemplate(FormTemplate template)
 	{
 		try
 		{
-			getApp().updateFormTemplate(customFieldTemplate);
+			getApp().updateFormTemplate(template);
 		}
 		catch (Exception e)
 		{
