@@ -678,6 +678,11 @@ public class MartusApp
 	{
 		MartusCrypto security = getSecurity();
 		
+		return verifySignatureAndDecryptFile(dataFile, sigFile, security);
+	}
+
+	public byte[] verifySignatureAndDecryptFile(File dataFile, File sigFile, MartusCrypto security) throws Exception
+	{
 		String accountId = security.getPublicKeyString();
 		if(!isSignatureFileValid(dataFile, sigFile, accountId))
 			throw new SignatureVerificationException();
