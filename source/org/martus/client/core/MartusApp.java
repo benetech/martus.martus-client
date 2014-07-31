@@ -676,13 +676,15 @@ public class MartusApp
 
 	private byte[] verifyAndReadSignedFile(File dataFile, File sigFile) throws Exception
 	{
-		String accountId = getSecurity().getPublicKeyString();
+		MartusCrypto security = getSecurity();
+		
+		String accountId = security.getPublicKeyString();
 		if(!isSignatureFileValid(dataFile, sigFile, accountId))
 			throw new SignatureVerificationException();
 
 		InputStreamWithSeek encryptedInputStream = new FileInputStreamWithSeek(dataFile);
 		ByteArrayOutputStream plainTextStream = new ByteArrayOutputStream();
-		getSecurity().decrypt(encryptedInputStream, plainTextStream);
+		security.decrypt(encryptedInputStream, plainTextStream);
 
 		byte[] plainText = plainTextStream.toByteArray();
 
