@@ -196,8 +196,8 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		if (genericTemplatesChoiceBox.getSelectionModel().isEmpty())
 			return;
 		
-		FormTemplate genericCustomFieldTemplate = genericTemplatesChoiceBox.getSelectionModel().getSelectedItem();
-		updateSelectedCustomFieldTemplateComponents(genericCustomFieldTemplate);
+		FormTemplate genericFormTemplate = genericTemplatesChoiceBox.getSelectionModel().getSelectedItem();
+		updateSelectedCustomFieldTemplateComponents(genericFormTemplate);
 		genericTemplatesChoiceBox.getSelectionModel().clearSelection();
 	}
 
