@@ -38,12 +38,12 @@ public class FormTemplateToStringConverter extends StringConverter<FormTemplate>
 	}
 
 	@Override
-	public String toString(FormTemplate customFieldTemplate)
+	public String toString(FormTemplate formTemplate)
 	{
-		if (customFieldTemplate == null)
+		if (formTemplate == null)
 			return "";
 		
-		String title = customFieldTemplate.getTitle();
+		String title = formTemplate.getTitle();
 		if (title.length() > 0)
 			return title;
 		
