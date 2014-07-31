@@ -605,15 +605,17 @@ public class MartusApp
 	public void encryptAndWriteFileAndSignatureFile(File file, File signatureFile,
 			byte[] plainText) throws Exception
 	{
+		MartusCrypto security = getSecurity();
+
 		ByteArrayInputStream encryptedInputStream = new ByteArrayInputStream(plainText);
 		FileOutputStream fileOutputStream = new FileOutputStream(file);
-		getSecurity().encrypt(encryptedInputStream, fileOutputStream);
+		security.encrypt(encryptedInputStream, fileOutputStream);
 
 		fileOutputStream.close();
 		encryptedInputStream.close();
 
 		FileInputStream in = new FileInputStream(file);
-		byte[] signature = getSecurity().createSignatureOfStream(in);
+		byte[] signature = security.createSignatureOfStream(in);
 		in.close();
 
 		FileOutputStream out = new FileOutputStream(signatureFile);
