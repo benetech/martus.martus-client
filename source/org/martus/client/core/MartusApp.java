@@ -552,7 +552,7 @@ public class MartusApp
 	return updatedContactKeysWithCanReceiveFromAdjusted;
 	}
 
-	public void updateCustomFieldTemplate(FormTemplate updatedTemplate) throws SaveConfigInfoException, CustomFieldsParseException
+	public void updateFormTemplate(FormTemplate updatedTemplate) throws SaveConfigInfoException, CustomFieldsParseException
 	{
 
 		configInfo.setCustomFieldTopSectionXml(updatedTemplate.getImportedTopSectionText());
