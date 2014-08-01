@@ -916,19 +916,17 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertNull(store.getTopSectionFieldSpecs());
 		assertNull(store.getBottomSectionFieldSpecs());
 		
-		FieldSpec[] topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray();
+		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
 		FieldCollection fields = new FieldCollection(topSpecs);
 		String xmlTop = fields.toString();
-		FieldCollection topSection = new FieldCollection(topSpecs);
 
-		FieldSpec[] bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray();
+		FieldSpecCollection bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		fields = new FieldCollection(bottomSpecs);
 		String xmlBottom = fields.toString();
-		FieldCollection bottomSection = new FieldCollection(bottomSpecs);
 
 		String title = "A new Title";
 		String description = "Some Descritpion";
-		FormTemplate newTemplate = new FormTemplate(title, description, topSection, bottomSection);
+		FormTemplate newTemplate = new FormTemplate(title, description, topSpecs, bottomSpecs);
 		appWithAccount.updateFormTemplate(newTemplate);
 		configInfo = appWithAccount.getConfigInfo();		
 		assertEquals("Top section should have been set", xmlTop, configInfo.getCustomFieldTopSectionXml());
