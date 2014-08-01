@@ -33,11 +33,15 @@ import java.io.IOException;
 import java.util.Vector;
 
 import org.martus.common.ContactInfo;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.util.StreamableBase64;
@@ -67,6 +71,36 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.clear();
 		verifyEmptyInfo(info, "clear");
 		assertFalse("A blank config Info can't be new", info.isNewVersion());
+	}
+	
+	public void testGetCurrentFormTemplate() throws Exception
+	{
+		ConfigInfo configInfo = new ConfigInfo();
+
+		FormTemplate emptyTemplate = configInfo.getCurrentFormTemplate();
+		assertEquals(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().toXml(), emptyTemplate.getImportedTopSectionText());
+		assertEquals(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().toXml(), emptyTemplate.getImportedBottomSectionText());
+
+		String title = "title";
+		configInfo.setCurrentFormTemplateTitle(title);
+		
+		String description = "description";
+		configInfo.setCurrentFormTemplateDescription(description);
+		
+		FieldSpecCollection top = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		top.add(FieldSpec.createCustomField("tagtop", "labeltop", new FieldTypeNormal()));
+		configInfo.setCustomFieldTopSectionXml(top.toXml());
+
+		FieldSpecCollection bottom = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
+		bottom.add(FieldSpec.createCustomField("tagbottom", "labelbottom", new FieldTypeNormal()));
+		configInfo.setCustomFieldBottomSectionXml(bottom.toXml());
+		
+		FormTemplate template = configInfo.getCurrentFormTemplate();
+		assertEquals(title, template.getTitle());
+		assertEquals(description, template.getDescription());
+		assertEquals(top.toXml(), template.getImportedTopSectionText());
+		assertEquals(bottom.toXml(), template.getImportedBottomSectionText());
+
 	}
 
 	public void testLoadVersions() throws Exception
