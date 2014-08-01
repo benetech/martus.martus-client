@@ -528,9 +528,15 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleBackedUpImprovedKeypairShare", false, info.hasBackedUpImprovedKeypairShare());
 
 		if(VERSION >= 18)
+		{
 			assertEquals(label + ": sampleUseInternalTor", sampleUseInternalTor, info.useInternalTor());
+			assertEquals(label + ": UseInternalTorProperty", new Boolean(sampleUseInternalTor), info.useInternalTorProperty().getValue());
+		}
 		else
+		{
 			assertEquals(label + ": sampleUseInternalTor", false, info.useInternalTor());
+			assertEquals(label + ": UseInternalTorProperty", new Boolean(false), info.useInternalTorProperty().getValue());
+		}
 
 		if(VERSION >= 19)
 		{

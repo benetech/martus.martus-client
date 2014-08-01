@@ -75,7 +75,7 @@ public class ConfigInfo
 	public void setUseZawgyiFont(boolean newUseZawgyiFont){useZawgyiFontProperty.setValue(newUseZawgyiFont);}
 	public void setFieldDeskKeysXml(String newFieldDeskKeysXml) { deprecatedFieldDeskKeysXml = newFieldDeskKeysXml; }
 	public void setBackedUpImprovedKeypairShare(boolean newBackedUpImprovedKeypairShare) {backedUpImprovedKeypairShare = newBackedUpImprovedKeypairShare;}
-	public void setUseInternalTor(boolean newUseInternalTor) { useInternalTor = newUseInternalTor;}
+	public void setUseInternalTor(boolean newUseInternalTor) { useInternalTorProperty.setValue(newUseInternalTor);}
 	public void setMartusAccountAccessTokens(Vector newTokens) { martusAccountAccessTokens = newTokens;} 
 	public void setCurrentMartusAccountAccessToken(MartusAccountAccessToken newToken) 
 	{
@@ -121,7 +121,8 @@ public class ConfigInfo
 	public String getFieldDeskKeysXml() { return deprecatedFieldDeskKeysXml; }
 	public boolean hasBackedUpImprovedKeypairShare() {return backedUpImprovedKeypairShare;}
 	public boolean getDoZawgyiConversion() {return true;}
-	public boolean useInternalTor() {return useInternalTor;}
+	public boolean useInternalTor() {return useInternalTorProperty.getValue();}
+	public Property<Boolean> useInternalTorProperty() {return useInternalTorProperty;}
 	public Vector getMartusAccountAccessTokens() { return martusAccountAccessTokens;}
 	public boolean hasMartusAccountAccessToken() 
 	{
@@ -181,7 +182,7 @@ public class ConfigInfo
 		useZawgyiFontProperty = new SimpleBooleanProperty();
 		deprecatedFieldDeskKeysXml = "";
 		backedUpImprovedKeypairShare = false;
-		useInternalTor = false;
+		useInternalTorProperty = new SimpleBooleanProperty();
 		martusAccountAccessTokens.clear(); 
 		contactKeysXml = "";
 		currentFormTemplateTitle = "";
@@ -265,7 +266,7 @@ public class ConfigInfo
 				loaded.backedUpImprovedKeypairShare = in.readBoolean();
 			
 			if(loaded.version >= 18)
-				loaded.useInternalTor = in.readBoolean();
+				loaded.useInternalTorProperty.setValue(in.readBoolean());
 			
 			if(loaded.version >= 19)
 			{
@@ -360,7 +361,7 @@ public class ConfigInfo
             out.writeBoolean(useZawgyiFontProperty.getValue());
             writeLongString(out, deprecatedFieldDeskKeysXml);
 			out.writeBoolean(backedUpImprovedKeypairShare);
-			out.writeBoolean(useInternalTor);
+			out.writeBoolean(useInternalTorProperty.getValue());
 			int numTokens = martusAccountAccessTokens.size(); 
 			out.writeInt(numTokens);
 			for(int i = 0; i < numTokens; ++i)
@@ -457,7 +458,7 @@ public class ConfigInfo
 	//Version 17
 	private boolean backedUpImprovedKeypairShare;
 	//Version 18
-	private boolean useInternalTor;
+	private Property <Boolean> useInternalTorProperty;
 	//Version 19
 	private Vector martusAccountAccessTokens;
 	//Version 20
