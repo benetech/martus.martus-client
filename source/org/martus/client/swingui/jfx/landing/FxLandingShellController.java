@@ -28,10 +28,14 @@ package org.martus.client.swingui.jfx.landing;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.Property;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -55,7 +59,6 @@ import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 import org.martus.client.swingui.jfx.landing.general.SettingsController;
 import org.martus.common.MartusLogger;
-import org.martus.common.network.OrchidTransportWrapper;
 
 public class FxLandingShellController extends FxNonWizardShellController
 {
@@ -81,6 +84,10 @@ public class FxLandingShellController extends FxNonWizardShellController
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		updateOnlineStatus();
+		torEnabledBinder = new CheckBox();
+		Property<Boolean> configInfoUseInternalTorProperty = getApp().getConfigInfo().useInternalTorProperty();
+		torEnabledBinder.selectedProperty().bindBidirectional(configInfoUseInternalTorProperty);
+		torEnabledBinder.selectedProperty().addListener(new FxCheckboxListener());
 		updateTorStatus();
 	}
 	
@@ -112,11 +119,24 @@ public class FxLandingShellController extends FxNonWizardShellController
 		return state ? on : off;
 	}
 
-	private void updateTorStatus()
+	protected void updateTorStatus()
 	{
-		OrchidTransportWrapper transport = getApp().getTransport();
-		boolean isTorRequested = transport.isTorEnabled();
-		toolbarButtonTor.setText(getStatusMessage(isTorRequested));
+		//OrchidTransportWrapper transport = getApp().getTransport();
+		//boolean isTorRequested = transport.isTorEnabled();
+		toolbarButtonTor.setText(getStatusMessage(torEnabledBinder.isSelected()));
+	}
+
+	private final class FxCheckboxListener implements ChangeListener<Boolean>
+	{
+		public FxCheckboxListener()
+		{
+		}
+
+		@Override
+		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) 
+		{
+			updateTorStatus();
+		}
 	}
 	
 	private void updateOnlineStatus()
@@ -200,13 +220,13 @@ public class FxLandingShellController extends FxNonWizardShellController
 		boolean oldState = getApp().getTransport().isTorEnabled();
 		try
 		{
-			ConfigInfo configInfo = getApp().getConfigInfo();
+			//ConfigInfo configInfo = getApp().getConfigInfo();
 			boolean newState = !oldState;
-			
-			configInfo.setUseInternalTor(newState);
+			//configInfo.setUseInternalTor(newState);
+			torEnabledBinder.setSelected(newState);
 			getApp().saveConfigInfo();
 
-			updateTorStatus();
+//			updateTorStatus();
 		} 
 		catch (SaveConfigInfoException e)
 		{
@@ -255,13 +275,15 @@ public class FxLandingShellController extends FxNonWizardShellController
 	
 	@FXML
 	private Button toolbarButtonTor;
+	private CheckBox torEnabledBinder;
 	
 	@FXML
 	private Pane sideContentPane;
-	
+
 	@FXML
 	private Pane mainContentPane;
 	
 	private BulletinsListController bulletinsListController;
 	private BulletinListProvider bulletinListProvider;
+	
 }
