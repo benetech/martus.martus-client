@@ -28,6 +28,10 @@ package org.martus.client.swingui.jfx.landing;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
+import javafx.beans.property.Property;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -82,6 +86,11 @@ public class FxLandingShellController extends FxNonWizardShellController
 	{
 		updateOnlineStatus();
 		updateTorStatus();
+		Property<Boolean> configInfoUseInternalTorProperty = getApp().getConfigInfo().useInternalTorProperty();
+		TorChangeListener torChangeListener = new TorChangeListener();
+		configInfoUseInternalTorProperty.addListener(torChangeListener);
+		Property<Boolean> orchidTransportWrapperTorProperty = getApp().getTransport().getIsTorActiveProperty();
+		orchidTransportWrapperTorProperty.addListener(torChangeListener);
 	}
 	
 	@Override
@@ -112,13 +121,37 @@ public class FxLandingShellController extends FxNonWizardShellController
 		return state ? on : off;
 	}
 
-	private void updateTorStatus()
+	protected void updateTorStatus()
 	{
 		OrchidTransportWrapper transport = getApp().getTransport();
-		boolean isTorRequested = transport.isTorEnabled();
-		toolbarButtonTor.setText(getStatusMessage(isTorRequested));
+		boolean isTorEnabled = transport.isTorEnabled();
+		toolbarButtonTor.setText(getStatusMessage(isTorEnabled));
 	}
 	
+	class UpdateTorStatusLater implements Runnable
+	{
+		public void run()
+		{
+			updateTorStatus();
+		}
+	}
+
+	
+	private final class TorChangeListener implements ChangeListener<Boolean>
+	{
+		public TorChangeListener()
+		{
+			updateTorStatus = new UpdateTorStatusLater();
+		}
+
+		@Override
+		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) 
+		{
+			Platform.runLater(updateTorStatus);
+		}
+		private Runnable updateTorStatus;
+	}
+
 	private void updateOnlineStatus()
 	{
 		boolean isOnline = getApp().getTransport().isOnline();
@@ -205,8 +238,6 @@ public class FxLandingShellController extends FxNonWizardShellController
 			
 			configInfo.setUseInternalTor(newState);
 			getApp().saveConfigInfo();
-
-			updateTorStatus();
 		} 
 		catch (SaveConfigInfoException e)
 		{
@@ -265,3 +296,4 @@ public class FxLandingShellController extends FxNonWizardShellController
 	private BulletinsListController bulletinsListController;
 	private BulletinListProvider bulletinListProvider;
 }
+
