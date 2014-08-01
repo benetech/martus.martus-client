@@ -99,7 +99,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 			{
 				if(mainWindow.confirmDlg("UndoCustomFields"))
 				{
-					existingSpecs.setTopSectionSpecs(StandardFieldSpecs.getDefaultTopSetionFieldSpecs());
+					existingSpecs.setTopSectionSpecs(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
 					existingSpecs.setBottomSectionSpecs(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 					existingSpecs.setTitleOfSpecs("");
 					existingSpecs.setDescriptionOfSpecs("");

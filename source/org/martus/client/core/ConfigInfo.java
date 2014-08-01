@@ -170,7 +170,7 @@ public class ConfigInfo
 		deprecatedLegacyHQKey = "";
 		deprecatedSendContactInfoToServer = false;
 		serverCompliance = "";
-		customFieldLegacySpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultTopSetionFieldSpecs());
+		customFieldLegacySpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
 		forceBulletinsAllPrivate = false;
 		backedUpKeypairEncrypted = false;
 		backedUpKeypairShare = false;

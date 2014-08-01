@@ -288,7 +288,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	originalBulletin.setDraft();
     	{
     		Bulletin newFieldSpecsBulletin = testStore.createDraftClone(originalBulletin, customPublicSpecs, customPrivateSpecs);
-	    	assertEquals("wrong public field specs for untouched original?", StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray().length, originalBulletin.getTopSectionFieldSpecs().size());
+	    	assertEquals("wrong public field specs for untouched original?", StandardFieldSpecs.getDefaultTopSectionFieldSpecs().asArray().length, originalBulletin.getTopSectionFieldSpecs().size());
 	    	assertEquals("wrong private field specs for untouched original?", StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray().length, originalBulletin.getBottomSectionFieldSpecs().size());
 	    	assertEquals("wrong account?", testStore.getAccountId(), newFieldSpecsBulletin.getAccount());
 	    	assertEquals("not same local id?", id, newFieldSpecsBulletin.getLocalId());
@@ -444,7 +444,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     
 	public void testGetStandardFieldNames()
 	{
-		FieldSpec[] publicFields = StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray();
+		FieldSpec[] publicFields = StandardFieldSpecs.getDefaultTopSectionFieldSpecs().asArray();
 		Set publicTags = new HashSet();
 		for(int i = 0; i < publicFields.length; ++i)
 			publicTags.add(publicFields[i].getTag());
@@ -1000,7 +1000,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	
 	public void testAddBulletinToFolderRemovesAncestors() throws Exception
 	{
-		FieldSpecCollection publicFields = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection publicFields = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		FieldSpecCollection privateFields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		
 		BulletinFolder aFolder = testStore.createFolder("blah");
@@ -1048,7 +1048,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	
 	public void testAddOriginalBulletinToFolderWithNewerVersion() throws Exception
 	{
-		FieldSpecCollection publicFields = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection publicFields = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		FieldSpecCollection privateFields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		MockBulletinStore clientStore = new MockBulletinStore(security);
 		Bulletin original = clientStore.createEmptyBulletin();
@@ -1082,7 +1082,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	
 	public void testAddingBulletinVersionThenOriginalToVisibleAndInvisibleFolders() throws Exception
 	{
-		FieldSpecCollection publicFields = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection publicFields = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		FieldSpecCollection privateFields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		MockBulletinStore clientStore = new MockBulletinStore(security);
 		Bulletin original = clientStore.createEmptyBulletin();
@@ -1120,7 +1120,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
 	public void testAddingBulletinOriginalThenNewVersionToVisibleAndInvisibleFolders() throws Exception
 	{
-		FieldSpecCollection publicFields = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection publicFields = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		FieldSpecCollection privateFields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		MockBulletinStore clientStore = new MockBulletinStore(security);
 		Bulletin original = clientStore.createEmptyBulletin();
