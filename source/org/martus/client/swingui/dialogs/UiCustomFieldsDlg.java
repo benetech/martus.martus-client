@@ -253,8 +253,8 @@ public class UiCustomFieldsDlg extends JDialog
 				
 				if(imported)
 				{
-					topSectionXmlTextArea.setText(template.getImportedTopSectionText());
-					bottomSectionXmlTextArea.setText(template.getImportedBottomSectionText());
+					topSectionXmlTextArea.setText(template.getTopSectionXml());
+					bottomSectionXmlTextArea.setText(template.getBottomSectionXml());
 					titleField.setText(template.getTitle());
 					descriptionField.setText(template.getDescription());
 					String signedBy = template.getSignedBy();
