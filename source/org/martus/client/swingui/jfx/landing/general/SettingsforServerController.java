@@ -42,9 +42,9 @@ import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class ServerSettingsController extends FxController
+public class SettingsforServerController extends FxController
 {
-	public ServerSettingsController(UiMainWindow mainWindowToUse)
+	public SettingsforServerController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}

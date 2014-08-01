@@ -28,9 +28,9 @@ package org.martus.client.swingui.jfx.landing.general;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
 
-public class SystemSettingsController extends FxController
+public class SettingsForTorController extends FxController
 {
-	public SystemSettingsController(UiMainWindow mainWindowToUse)
+	public SettingsForTorController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
@@ -38,7 +38,7 @@ public class SystemSettingsController extends FxController
 	@Override
 	public String getFxmlLocation()
 	{
-		return "landing/general/SettingsForSystem.fxml";
+		return "landing/general/SettingsForTor.fxml";
 	}
 
 }
