@@ -29,6 +29,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.Property;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 
@@ -50,8 +52,18 @@ public class SettingsforSystemController extends FxController
 		super.initialize(location, bundle);
 		Property<Boolean> configInfoUseZawayiFontProperty = getApp().getConfigInfo().getUseZawgyiFontProperty();
 		useZawgyiFont.selectedProperty().bindBidirectional(configInfoUseZawayiFontProperty);
+		useZawgyiFont.selectedProperty().addListener(new BooleanChangeListener());
 	}
-
+	
+	public class BooleanChangeListener implements ChangeListener<Boolean>
+	{
+		@Override
+		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue,Boolean newValue)
+		{
+			save();
+		}
+	}	
+	
 	@Override
 	public void save()
 	{
