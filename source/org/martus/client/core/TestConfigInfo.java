@@ -78,8 +78,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo configInfo = new ConfigInfo();
 
 		FormTemplate emptyTemplate = configInfo.getCurrentFormTemplate();
-		assertEquals(StandardFieldSpecs.getDefaultTopSectionFieldSpecs().toXml(), emptyTemplate.getImportedTopSectionText());
-		assertEquals(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().toXml(), emptyTemplate.getImportedBottomSectionText());
+		assertEquals(StandardFieldSpecs.getDefaultTopSectionFieldSpecs().toXml(), emptyTemplate.getTopSectionXml());
+		assertEquals(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().toXml(), emptyTemplate.getBottomSectionXml());
 
 		String title = "title";
 		configInfo.setCurrentFormTemplateTitle(title);
@@ -98,8 +98,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 		FormTemplate template = configInfo.getCurrentFormTemplate();
 		assertEquals(title, template.getTitle());
 		assertEquals(description, template.getDescription());
-		assertEquals(top.toXml(), template.getImportedTopSectionText());
-		assertEquals(bottom.toXml(), template.getImportedBottomSectionText());
+		assertEquals(top.toXml(), template.getTopSectionXml());
+		assertEquals(bottom.toXml(), template.getBottomSectionXml());
 
 	}
 

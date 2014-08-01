@@ -554,15 +554,15 @@ public class MartusApp
 	public void updateFormTemplate(FormTemplate updatedTemplate) throws SaveConfigInfoException, CustomFieldsParseException
 	{
 
-		configInfo.setCustomFieldTopSectionXml(updatedTemplate.getImportedTopSectionText());
-		configInfo.setCustomFieldBottomSectionXml(updatedTemplate.getImportedBottomSectionText());
+		configInfo.setCustomFieldTopSectionXml(updatedTemplate.getTopSectionXml());
+		configInfo.setCustomFieldBottomSectionXml(updatedTemplate.getBottomSectionXml());
 		configInfo.setCurrentFormTemplateTitle(updatedTemplate.getTitle());
 		configInfo.setCurrentFormTemplateDescription(updatedTemplate.getDescription());
 		configInfo.setCustomFieldLegacySpecs(MartusConstants.deprecatedCustomFieldSpecs);
 		saveConfigInfo();
 
-		FieldSpecCollection topCollection = FieldCollection.parseXml(updatedTemplate.getImportedTopSectionText());
-		FieldSpecCollection bottomCollection = FieldCollection.parseXml(updatedTemplate.getImportedBottomSectionText());
+		FieldSpecCollection topCollection = FieldCollection.parseXml(updatedTemplate.getTopSectionXml());
+		FieldSpecCollection bottomCollection = FieldCollection.parseXml(updatedTemplate.getBottomSectionXml());
 		store.setTopSectionFieldSpecs(topCollection);
 		store.setBottomSectionFieldSpecs(bottomCollection);
 	}
