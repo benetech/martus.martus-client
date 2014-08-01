@@ -106,7 +106,7 @@ public class TestSafeReadableBulletin extends TestCaseEnhanced
 		FieldSpec[] customBottomSpecs = {
 			FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal()),	
 		};
-		Bulletin b = new Bulletin(security, StandardFieldSpecs.getDefaultTopSetionFieldSpecs(), new FieldSpecCollection(customBottomSpecs));
+		Bulletin b = new Bulletin(security, StandardFieldSpecs.getDefaultTopSectionFieldSpecs(), new FieldSpecCollection(customBottomSpecs));
 		b.set(tag, sampleData);
 		b.set(Bulletin.TAGAUTHOR, sampleAuthor);
 		

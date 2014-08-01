@@ -65,7 +65,7 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 		this(owner, owner.getLocalization(), "BulletinPreview");
 
 		UiBulletinComponentViewSection view = new UiBulletinComponentViewSection(owner, Bulletin.TOP_SECTION);
-		FieldSpecCollection standardFieldTags = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection standardFieldTags = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		
 		view.createLabelsAndFields(standardFieldTags, null);
 		view.copyDataFromPacket(fdp);

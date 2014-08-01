@@ -78,7 +78,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo configInfo = new ConfigInfo();
 
 		FormTemplate emptyTemplate = configInfo.getCurrentFormTemplate();
-		assertEquals(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().toXml(), emptyTemplate.getImportedTopSectionText());
+		assertEquals(StandardFieldSpecs.getDefaultTopSectionFieldSpecs().toXml(), emptyTemplate.getImportedTopSectionText());
 		assertEquals(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().toXml(), emptyTemplate.getImportedBottomSectionText());
 
 		String title = "title";
@@ -87,7 +87,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		String description = "description";
 		configInfo.setCurrentFormTemplateDescription(description);
 		
-		FieldSpecCollection top = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection top = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		top.add(FieldSpec.createCustomField("tagtop", "labeltop", new FieldTypeNormal()));
 		configInfo.setCustomFieldTopSectionXml(top.toXml());
 
@@ -734,7 +734,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		return outputStream.toByteArray();
 	}
 	
-	private final String defaultCustomFieldSpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultTopSetionFieldSpecs());
+	private final String defaultCustomFieldSpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
 
 	private final static String longString = createLongSampleString();
 	

@@ -148,7 +148,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	
 	public void testExportingFieldSpecs() throws Exception
 	{
-		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		FieldSpecCollection bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		String choice1 = "choice A";
 		String choice2 = "choice B";
@@ -311,7 +311,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 				"</GridSpecDetails>" +
 				"</Field></CustomFields>";
 		GridFieldSpec newSpec = (GridFieldSpec)FieldCollection.parseXml(xmlFieldType).get(0); 
-		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray(), newSpec);				
+		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSectionFieldSpecs().asArray(), newSpec);				
 		
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.setAllPrivate(false);
@@ -340,7 +340,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	
 	public void testExportReusableChoices() throws Exception
 	{
-		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		String choicesCode = "ChoicesCode";
 		String choicesLabel = "ChoicesLabel";
 		String choice1Code = "a";
@@ -651,7 +651,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 			"<Label>" + label2 + "</Label></Field></CustomFields>";
 		FieldSpec newSpec2 = FieldCollection.parseXml(xmlFieldType).get(0); 
 		FieldSpec[] extraFieldSpecs = {newSpec1, newSpec2};
-		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray(), extraFieldSpecs);
+		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSectionFieldSpecs().asArray(), extraFieldSpecs);
 		
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.setAllPrivate(false);
@@ -708,7 +708,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		FieldSpec newSpec2 = FieldCollection.parseXml(xmlFieldType).get(0); 
 
 		FieldSpec[] extraFieldSpecs = {newSpec1, newSpec2};
-		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray(), extraFieldSpecs);
+		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSectionFieldSpecs().asArray(), extraFieldSpecs);
 		
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.setAllPrivate(false);				
@@ -797,7 +797,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	
 	public void testEndToEndExportAndThenImport() throws Exception
 	{
-		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		FieldSpecCollection bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		String choice1 = "choice A";
 		String choice2 = "choice B";

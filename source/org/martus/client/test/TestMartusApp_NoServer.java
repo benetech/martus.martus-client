@@ -916,7 +916,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertNull(store.getTopSectionFieldSpecs());
 		assertNull(store.getBottomSectionFieldSpecs());
 		
-		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		FieldCollection fields = new FieldCollection(topSpecs);
 		String xmlTop = fields.toString();
 

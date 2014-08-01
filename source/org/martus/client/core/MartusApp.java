@@ -2024,7 +2024,7 @@ public class MartusApp
 	public FieldDataPacket retrieveFieldDataPacketFromServer(UniversalId bulletinId, String dataPacketLocalId) throws Exception
 	{
 		UniversalId packetUid = UniversalId.createFromAccountAndLocalId(bulletinId.getAccountId(), dataPacketLocalId);
-		FieldDataPacket fdp = new FieldDataPacket(packetUid, StandardFieldSpecs.getDefaultTopSetionFieldSpecs());
+		FieldDataPacket fdp = new FieldDataPacket(packetUid, StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
 		populatePacketFromServer(fdp, bulletinId.getLocalId());
 		return fdp;
 	}
