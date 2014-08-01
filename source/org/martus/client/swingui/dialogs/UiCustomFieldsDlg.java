@@ -396,8 +396,8 @@ public class UiCustomFieldsDlg extends JDialog
 				return;
 			try
 			{
-				FieldCollection specTop = new FieldCollection(FieldCollection.parseXml(topXml));
-				FieldCollection specBottom = new FieldCollection(FieldCollection.parseXml(bottomXml));
+				FieldSpecCollection specTop = new FieldCollection(FieldCollection.parseXml(topXml)).getSpecs();
+				FieldSpecCollection specBottom = new FieldCollection(FieldCollection.parseXml(bottomXml)).getSpecs();
 				FormTemplate template1 = new FormTemplate(titleField.getText(), descriptionField.getText(), specTop, specBottom);
 				mainWindow.getApp().putFormTemplateOnServer(template1);
 				mainWindow.notifyDlg("TemplateSavedToServer");

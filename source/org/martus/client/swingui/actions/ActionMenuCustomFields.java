@@ -66,8 +66,8 @@ public class ActionMenuCustomFields extends UiMenuAction
 		
 		try
 		{
-			FieldCollection topSection = new FieldCollection(newSpecs.getTopSectionSpecs());
-			FieldCollection bottomSection = new FieldCollection(newSpecs.getBottomSectionSpecs());
+			FieldSpecCollection topSection = newSpecs.getTopSectionSpecs();
+			FieldSpecCollection bottomSection = newSpecs.getBottomSectionSpecs();
 			FormTemplate updatedTemplate = new FormTemplate(newSpecs.getTitleOfSpecs(), newSpecs.getDescriptionOfSpecs(), topSection, bottomSection);
 			app.updateFormTemplate(updatedTemplate);
 		} 
