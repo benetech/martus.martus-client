@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.landing;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -35,7 +36,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -59,6 +59,7 @@ import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 import org.martus.client.swingui.jfx.landing.general.SettingsController;
 import org.martus.common.MartusLogger;
+import org.martus.common.network.OrchidTransportWrapper;
 
 public class FxLandingShellController extends FxNonWizardShellController
 {
@@ -84,11 +85,12 @@ public class FxLandingShellController extends FxNonWizardShellController
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		updateOnlineStatus();
-		torEnabledBinder = new CheckBox();
-		Property<Boolean> configInfoUseInternalTorProperty = getApp().getConfigInfo().useInternalTorProperty();
-		torEnabledBinder.selectedProperty().bindBidirectional(configInfoUseInternalTorProperty);
-		torEnabledBinder.selectedProperty().addListener(new FxCheckboxListener());
 		updateTorStatus();
+		Property<Boolean> configInfoUseInternalTorProperty = getApp().getConfigInfo().useInternalTorProperty();
+		TorChangeListener torChangeListener = new TorChangeListener();
+		configInfoUseInternalTorProperty.addListener(torChangeListener);
+		Property<Boolean> orchidTransportWrapperTorProperty = getApp().getTransport().getIsTorActiveProperty();
+		orchidTransportWrapperTorProperty.addListener(torChangeListener);
 	}
 	
 	@Override
@@ -121,24 +123,35 @@ public class FxLandingShellController extends FxNonWizardShellController
 
 	protected void updateTorStatus()
 	{
-		//OrchidTransportWrapper transport = getApp().getTransport();
-		//boolean isTorRequested = transport.isTorEnabled();
-		toolbarButtonTor.setText(getStatusMessage(torEnabledBinder.isSelected()));
+		OrchidTransportWrapper transport = getApp().getTransport();
+		boolean isTorEnabled = transport.isTorEnabled();
+		toolbarButtonTor.setText(getStatusMessage(isTorEnabled));
+	}
+	
+	class UpdateTorStatusLater implements Runnable
+	{
+		public void run()
+		{
+			updateTorStatus();
+		}
 	}
 
-	private final class FxCheckboxListener implements ChangeListener<Boolean>
+	
+	private final class TorChangeListener implements ChangeListener<Boolean>
 	{
-		public FxCheckboxListener()
+		public TorChangeListener()
 		{
+			updateTorStatus = new UpdateTorStatusLater();
 		}
 
 		@Override
 		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) 
 		{
-			updateTorStatus();
+			Platform.runLater(updateTorStatus);
 		}
+		private Runnable updateTorStatus;
 	}
-	
+
 	private void updateOnlineStatus()
 	{
 		boolean isOnline = getApp().getTransport().isOnline();
@@ -220,13 +233,11 @@ public class FxLandingShellController extends FxNonWizardShellController
 		boolean oldState = getApp().getTransport().isTorEnabled();
 		try
 		{
-			//ConfigInfo configInfo = getApp().getConfigInfo();
+			ConfigInfo configInfo = getApp().getConfigInfo();
 			boolean newState = !oldState;
-			//configInfo.setUseInternalTor(newState);
-			torEnabledBinder.setSelected(newState);
+			
+			configInfo.setUseInternalTor(newState);
 			getApp().saveConfigInfo();
-
-//			updateTorStatus();
 		} 
 		catch (SaveConfigInfoException e)
 		{
@@ -275,15 +286,14 @@ public class FxLandingShellController extends FxNonWizardShellController
 	
 	@FXML
 	private Button toolbarButtonTor;
-	private CheckBox torEnabledBinder;
 	
 	@FXML
 	private Pane sideContentPane;
-
+	
 	@FXML
 	private Pane mainContentPane;
 	
 	private BulletinsListController bulletinsListController;
 	private BulletinListProvider bulletinListProvider;
-	
 }
+
