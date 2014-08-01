@@ -25,8 +25,17 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.beans.property.Property;
+import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
+
+import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.common.MartusLogger;
 
 public class SettingsforSystemController extends FxController
 {
@@ -36,9 +45,34 @@ public class SettingsforSystemController extends FxController
 	}
 
 	@Override
+	public void initialize(URL location, ResourceBundle bundle)
+	{
+		super.initialize(location, bundle);
+		Property<Boolean> configInfoUseZawayiFontProperty = getApp().getConfigInfo().getUseZawgyiFontProperty();
+		useZawgyiFont.selectedProperty().bindBidirectional(configInfoUseZawayiFontProperty);
+	}
+
+	@Override
+	public void save()
+	{
+		try
+		{
+			getApp().saveConfigInfo();
+		} 
+		catch (SaveConfigInfoException e)
+		{
+			MartusLogger.logException(e);
+			getMainWindow().notifyDlg("ErrorSavingConfig");
+		}
+		super.save();
+	}
+
+	@Override
 	public String getFxmlLocation()
 	{
 		return "landing/general/SettingsForSystem.fxml";
 	}
 
+	@FXML 
+	private CheckBox useZawgyiFont;
 }
