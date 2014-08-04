@@ -87,8 +87,9 @@ public class FxLandingShellController extends FxNonWizardShellController
 		super.initialize(location, bundle);
 		updateOnlineStatus();
 		updateTorStatus();
-		Property<Boolean> configInfoUseInternalTorProperty = getApp().getConfigInfo().useInternalTorProperty();
+
 		TorChangeListener torChangeListener = new TorChangeListener();
+		Property<Boolean> configInfoUseInternalTorProperty = getApp().getConfigInfo().useInternalTorProperty();
 		configInfoUseInternalTorProperty.addListener(torChangeListener);
 		Property<Boolean> orchidTransportWrapperTorProperty = getApp().getTransport().getIsTorActiveProperty();
 		orchidTransportWrapperTorProperty.addListener(torChangeListener);
@@ -142,15 +143,18 @@ public class FxLandingShellController extends FxNonWizardShellController
 	{
 		public TorChangeListener()
 		{
-			updateTorStatus = new UpdateTorStatusLater();
 		}
 
 		@Override
 		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) 
 		{
-			Platform.runLater(updateTorStatus);
+			runUpdateOnFxThread();
 		}
-		private Runnable updateTorStatus;
+
+		private void runUpdateOnFxThread()
+		{
+			Platform.runLater(new UpdateTorStatusLater());
+		}
 	}
 
 	private void updateOnlineStatus()
