@@ -59,6 +59,7 @@ public abstract class FxInSwingShellController extends FxController implements F
 	@Override
 	public void initialize(URL location, ResourceBundle bundle)
 	{
+		super.initialize(location, bundle);
 	}
 	
 	public VirtualStage getStage()

@@ -84,6 +84,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	@Override
 	public void initialize(URL location, ResourceBundle bundle)
 	{
+		super.initialize(location, bundle);
 		updateOnlineStatus();
 		updateTorStatus();
 		Property<Boolean> configInfoUseInternalTorProperty = getApp().getConfigInfo().useInternalTorProperty();
