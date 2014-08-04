@@ -74,7 +74,7 @@ public class SettingsforSystemController extends FxController
 		catch (SaveConfigInfoException e)
 		{
 			MartusLogger.logException(e);
-			getMainWindow().notifyDlg("ErrorSavingConfig");
+			showNotifyDialog("ErrorSavingConfig");
 		}
 		super.save();
 	}
