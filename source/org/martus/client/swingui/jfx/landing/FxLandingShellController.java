@@ -220,7 +220,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 		catch (SaveConfigInfoException e)
 		{
 			MartusLogger.logException(e);
-			getMainWindow().notifyDlg("ErrorSavingConfig");
+			showNotifyDialog("ErrorSavingConfig");
 		}
 		catch (Exception e)
 		{
@@ -243,7 +243,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 		catch (SaveConfigInfoException e)
 		{
 			MartusLogger.logException(e);
-			getMainWindow().notifyDlg("ErrorSavingConfig");
+			showNotifyDialog("ErrorSavingConfig");
 		}
 		catch (Exception e)
 		{
