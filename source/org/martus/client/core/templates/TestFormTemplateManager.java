@@ -77,7 +77,7 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 		}
 	}
 	
-	public void testCreateWithoutExisting() throws Exception
+	public void testCreateNewDirectory() throws Exception
 	{
 		File tempDirectory = createTempDirectory();
 		try
