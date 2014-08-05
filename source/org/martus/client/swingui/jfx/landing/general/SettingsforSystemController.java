@@ -50,20 +50,9 @@ public class SettingsforSystemController extends FxController
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		Property<Boolean> configInfoUseZawayiFontProperty = getApp().getConfigInfo().getUseZawgyiFontProperty();
-		useZawgyiFont.selectedProperty().bindBidirectional(configInfoUseZawayiFontProperty);
-		useZawgyiFont.selectedProperty().addListener(new BooleanChangeListener());
-	}
-	
-	public class BooleanChangeListener implements ChangeListener<Boolean>
-	{
-		@Override
-		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue,Boolean newValue)
-		{
-			save();
-		}
-	}	
-	
+		useZawgyiFont.selectedProperty().setValue(getApp().getConfigInfo().getUseZawgyiFont());
+	} 
+		
 	@Override
 	public void save()
 	{
@@ -83,6 +72,13 @@ public class SettingsforSystemController extends FxController
 	public String getFxmlLocation()
 	{
 		return "landing/general/SettingsForSystem.fxml";
+	}
+	
+	@FXML
+	public void onSaveChanges()
+	{
+		getApp().getConfigInfo().setUseZawgyiFont(useZawgyiFont.selectedProperty().getValue());
+		save();
 	}
 
 	@FXML 

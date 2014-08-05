@@ -14,7 +14,7 @@
 <children><Label text="Select Language: ">
 <HBox.margin>
 <Insets top="10.0" />
-</HBox.margin></Label><ChoiceBox prefWidth="150.0" /><CheckBox id="useZawgyiFont" mnemonicParsing="false" text="Use Zawgyi font for Burmese [show if burmese selected]">
+</HBox.margin></Label><ChoiceBox prefWidth="150.0" /><CheckBox fx:id="useZawgyiFont" mnemonicParsing="false" text="Use Zawgyi font for Burmese [show if burmese selected]">
 <HBox.margin>
 <Insets left="10.0" />
 </HBox.margin></CheckBox>
@@ -36,7 +36,7 @@
 </GridPane><CheckBox mnemonicParsing="false" text="[display Thai or Persion checkbox option based on selections above]">
 <VBox.margin>
 <Insets top="10.0" />
-</VBox.margin></CheckBox><Button mnemonicParsing="false" text="Save Changes">
+</VBox.margin></CheckBox><Button mnemonicParsing="false" onMouseClicked="#onSaveChanges" text="Save Changes">
 <VBox.margin>
 <Insets top="50.0" />
 </VBox.margin></Button>
