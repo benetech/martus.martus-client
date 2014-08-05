@@ -26,8 +26,13 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.core.templates;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Set;
 
+import org.martus.common.FieldSpecCollection;
+import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.fieldspec.FormTemplate;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.TestCaseEnhanced;
 
@@ -37,16 +42,48 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 	{
 		super(name);
 	}
-
-	public void testBasics() throws Exception
+	
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		
+		security = MockMartusSecurity.createClient();
+	}
+	
+	public void testCreateFails() throws Exception
+	{
+		File badDirectory = createTempFile();
+		try
+		{
+			FormTemplateManager.openExisting(security, badDirectory);
+			fail("Should have thrown for not a directory");
+		}
+		catch(FileNotFoundException ignoreExpected)
+		{
+		}
+		finally
+		{
+			badDirectory.delete();
+		}
+		
+		try
+		{
+			FormTemplateManager.openExisting(security, badDirectory);
+			fail("Should have thrown for not existing");
+		}
+		catch(FileNotFoundException ignoreExpected)
+		{
+		}
+	}
+	
+	public void testCreateWithoutExisting() throws Exception
 	{
 		File tempDirectory = createTempDirectory();
 		try
 		{
 			File templateDirectory = new File(tempDirectory, "templates");
-			FormTemplateManager manager = new FormTemplateManager(templateDirectory);
-			
-			assertFalse(manager.exists());
+			FormTemplateManager manager = FormTemplateManager.createNewDirectory(security, templateDirectory, null);
 			
 			Set<String> names = manager.getAvailableTemplateNames();
 			assertEquals(1, names.size());
@@ -59,4 +96,30 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 			DirectoryUtils.deleteEntireDirectoryTree(tempDirectory);
 		}
 	}
+
+	public void testCreateWithExisting() throws Exception
+	{
+		File tempDirectory = createTempDirectory();
+		try
+		{
+			File templateDirectory = new File(tempDirectory, "templates");
+			String title = "title";
+			String description = "description";
+			FieldSpecCollection top = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+			FieldSpecCollection bottom = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
+			FormTemplate template = new FormTemplate(title, description, top, bottom);
+			FormTemplateManager manager = FormTemplateManager.createNewDirectory(security, templateDirectory, template);
+			
+			Set<String> names = manager.getAvailableTemplateNames();
+			assertEquals(2, names.size());
+			
+		}
+		finally
+		{
+			DirectoryUtils.deleteEntireDirectoryTree(tempDirectory);
+		}
+	}
+	
+	public MockMartusSecurity security;
 }
+
