@@ -27,12 +27,16 @@ package org.martus.client.core.templates;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.Set;
 
 import org.martus.common.FieldSpecCollection;
+import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.StandardFieldSpecs;
+import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.TestCaseEnhanced;
 
@@ -127,11 +131,34 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 			FormTemplateManager manager = FormTemplateManager.createNewDirectory(security, templateDirectory, null);
 			
 			assertEquals(1, manager.getAvailableTemplateNames().size());
-			FormTemplate template = createFormTemplate("t1", "d1");
+
+			String title = "t1";
+			FormTemplate template = createFormTemplate(title, "d1");
 			manager.putTemplate(template);
 			assertEquals(2, manager.getAvailableTemplateNames().size());
-			FormTemplate got = manager.getTemplate(template.getTitle());
+			FormTemplate got = manager.getTemplate(title);
 			assertEquals(template.getDescription(), got.getDescription());
+			
+			String filename = FormTemplateManager.getTemplateFilename(title);
+			File templateFile = new File(templateDirectory, filename);
+			FileOutputStream out = new FileOutputStream(templateFile, true);
+			out.write(5);
+			out.close();
+			try
+			{
+				manager.getTemplate(title);
+				fail("Should have thrown for bad sig");
+			}
+			catch(SignatureVerificationException ignoreExpected)
+			{
+			}
+			
+			manager = FormTemplateManager.openExisting(security, templateDirectory);
+			PrintStream dest = MartusLogger.getDestination();
+			MartusLogger.disableLogging();
+			assertEquals(1, manager.getAvailableTemplateNames().size());
+			MartusLogger.setDestination(dest);
+			
 		}
 		finally
 		{
