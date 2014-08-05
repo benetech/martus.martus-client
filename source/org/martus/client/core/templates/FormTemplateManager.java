@@ -84,12 +84,18 @@ public class FormTemplateManager
 
 	private FormTemplate loadEncryptedTemplate(File dataFile) throws Exception
 	{
-		File sigFile = new File(dataFile.getParentFile(), dataFile.getName() + SIG_EXTENSION);
+		File sigFile = getSignatureFileFor(dataFile);
 		byte[] plaintextTemplateBytes = MartusSecurity.verifySignatureAndDecryptFile(dataFile, sigFile, security);
 		ByteArrayInputStreamWithSeek plainTextTemplateBytesIn = new ByteArrayInputStreamWithSeek(plaintextTemplateBytes);
 		FormTemplate template = new FormTemplate();
 		template.importTemplate(security, plainTextTemplateBytesIn);
 		return template;
+	}
+
+	public File getSignatureFileFor(File dataFile)
+	{
+		File sigFile = new File(dataFile.getParentFile(), dataFile.getName() + SIG_EXTENSION);
+		return sigFile;
 	}
 
 	public boolean isEmctFile(File file)
