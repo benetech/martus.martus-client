@@ -105,9 +105,7 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 			File templateDirectory = new File(tempDirectory, "templates");
 			String title = "title";
 			String description = "description";
-			FieldSpecCollection top = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
-			FieldSpecCollection bottom = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
-			FormTemplate template = new FormTemplate(title, description, top, bottom);
+			FormTemplate template = createFormTemplate(title, description);
 			FormTemplateManager manager = FormTemplateManager.createNewDirectory(security, templateDirectory, template);
 			
 			Set<String> names = manager.getAvailableTemplateNames();
@@ -118,6 +116,14 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 		{
 			DirectoryUtils.deleteEntireDirectoryTree(tempDirectory);
 		}
+	}
+
+	private FormTemplate createFormTemplate(String title, String description) throws Exception
+	{
+		FieldSpecCollection top = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		FieldSpecCollection bottom = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
+		FormTemplate template = new FormTemplate(title, description, top, bottom);
+		return template;
 	}
 	
 	public MockMartusSecurity security;
