@@ -824,6 +824,8 @@ public class MartusApp
 			return;
 		}
 		
+		initializeOrchid();
+
 		try
 		{
 			store.doAfterSigninInitialization(dataDirectory, database);
@@ -847,6 +849,10 @@ public class MartusApp
 			throw new MartusAppInitializationException("Error initializing store");
 		}
 		
+	}
+
+	public void initializeOrchid() throws MartusAppInitializationException
+	{
 		try
 		{
 			orchidStore.loadStore(getOrchidCacheFile(), getSecurity());
@@ -867,6 +873,21 @@ public class MartusApp
 	{
 		File templateDirectory = getTemplateDirectory();
 		formTemplateManager = FormTemplateManager.createOrOpen(getSecurity(), templateDirectory);
+		if(!configInfo.getDidTemplateMigration())
+			migrateTemplateToFormTemplateManager();
+	}
+
+	private void migrateTemplateToFormTemplateManager() throws Exception
+	{
+		if(configInfo.hasCurrentFormTemplate())
+		{
+			MartusLogger.log("Migrating template from config");
+			FormTemplate template = configInfo.getCurrentFormTemplate();
+			formTemplateManager.putTemplate(template);
+		}
+		
+		configInfo.setDidTemplateMigration(true);
+		saveConfigInfo();
 	}
 
 	private File getTemplateDirectory()
