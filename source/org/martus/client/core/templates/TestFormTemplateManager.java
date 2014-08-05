@@ -60,7 +60,7 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 		File badDirectory = createTempFile();
 		try
 		{
-			FormTemplateManager.openExisting(security, badDirectory);
+			FormTemplateManager.createOrOpen(security, badDirectory);
 			fail("Should have thrown for not a directory");
 		}
 		catch(FileNotFoundException ignoreExpected)
@@ -70,50 +70,20 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 		{
 			badDirectory.delete();
 		}
-		
-		try
-		{
-			FormTemplateManager.openExisting(security, badDirectory);
-			fail("Should have thrown for not existing");
-		}
-		catch(FileNotFoundException ignoreExpected)
-		{
-		}
 	}
 	
-	public void testCreateNewDirectoryWithoutExisting() throws Exception
+	public void testCreateNewDirectory() throws Exception
 	{
 		File tempDirectory = createTempDirectory();
 		try
 		{
 			File templateDirectory = new File(tempDirectory, "templates");
-			FormTemplateManager manager = FormTemplateManager.createNewDirectory(security, templateDirectory, null);
+			FormTemplateManager manager = FormTemplateManager.createOrOpen(security, templateDirectory);
 			
 			Set<String> names = manager.getAvailableTemplateNames();
 			assertEquals(1, names.size());
 			String onlyTemplateName = names.iterator().next();
 			assertEquals(FormTemplateManager.MARTUS_DEFAULT_FORM_TEMPLATE_NAME, onlyTemplateName);
-			
-		}
-		finally
-		{
-			DirectoryUtils.deleteEntireDirectoryTree(tempDirectory);
-		}
-	}
-
-	public void testCreateNewDirectoryWithExisting() throws Exception
-	{
-		File tempDirectory = createTempDirectory();
-		try
-		{
-			File templateDirectory = new File(tempDirectory, "templates");
-			String title = "title";
-			String description = "description";
-			FormTemplate template = createFormTemplate(title, description);
-			FormTemplateManager manager = FormTemplateManager.createNewDirectory(security, templateDirectory, template);
-			
-			Set<String> names = manager.getAvailableTemplateNames();
-			assertEquals(2, names.size());
 			
 		}
 		finally
@@ -128,7 +98,7 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 		try
 		{
 			File templateDirectory = new File(tempDirectory, "templates");
-			FormTemplateManager manager = FormTemplateManager.createNewDirectory(security, templateDirectory, null);
+			FormTemplateManager manager = FormTemplateManager.createOrOpen(security, templateDirectory);
 			
 			assertEquals(1, manager.getAvailableTemplateNames().size());
 
@@ -153,7 +123,7 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 			{
 			}
 			
-			manager = FormTemplateManager.openExisting(security, templateDirectory);
+			manager = FormTemplateManager.createOrOpen(security, templateDirectory);
 			PrintStream dest = MartusLogger.getDestination();
 			MartusLogger.disableLogging();
 			assertEquals(1, manager.getAvailableTemplateNames().size());

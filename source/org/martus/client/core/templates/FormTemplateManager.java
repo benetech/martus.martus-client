@@ -40,22 +40,11 @@ import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
 
 public class FormTemplateManager
 {
-	public static FormTemplateManager openExisting(MartusCrypto cryptoToUse, File directoryToUse) throws Exception
+	public static FormTemplateManager createOrOpen(MartusCrypto cryptoToUse, File directoryToUse) throws Exception
 	{
-		return new FormTemplateManager(cryptoToUse, directoryToUse);
-	}
-	
-	public static FormTemplateManager createNewDirectory(MartusCrypto cryptoToUse, File directoryToUse, FormTemplate existingFormTemplate) throws Exception
-	{
-		if(directoryToUse.exists())
-			throw new DirectoryAlreadyExistsException("Already exists: " + directoryToUse.getAbsolutePath());
-		
 		directoryToUse.mkdirs();
 		
 		FormTemplateManager formTemplateManager = new FormTemplateManager(cryptoToUse, directoryToUse);
-		
-		if(existingFormTemplate != null)
-			formTemplateManager.saveEncryptedTemplate(existingFormTemplate);
 		
 		return formTemplateManager;
 	}
