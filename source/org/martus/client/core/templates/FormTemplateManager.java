@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.fieldspec.FormTemplate;
@@ -79,8 +80,15 @@ public class FormTemplateManager
 		File[] emctFiles = directory.listFiles(file -> isEmctFile(file));
 		for (File file : emctFiles)
 		{
-			FormTemplate template = loadEncryptedTemplate(file);
-			available.add(template.getTitle());
+			try
+			{
+				FormTemplate template = loadEncryptedTemplate(file);
+				available.add(template.getTitle());
+			}
+			catch(Exception e)
+			{
+				MartusLogger.logException(e);
+			}
 		}
 		return available;
 	}
@@ -104,7 +112,7 @@ public class FormTemplateManager
 		return template;
 	}
 
-	private File getSignatureFileFor(File dataFile)
+	public static File getSignatureFileFor(File dataFile)
 	{
 		File sigFile = new File(dataFile.getParentFile(), dataFile.getName() + SIG_EXTENSION);
 		return sigFile;
@@ -130,7 +138,12 @@ public class FormTemplateManager
 
 	private File getTemplateFile(String title)
 	{
-		return new File(directory, FormTemplate.calculateFileNameFromString(title, ENCRYPTED_MCT_EXTENSION));
+		return new File(directory, getTemplateFilename(title));
+	}
+
+	public static String getTemplateFilename(String title)
+	{
+		return FormTemplate.calculateFileNameFromString(title, ENCRYPTED_MCT_EXTENSION);
 	}
 
 	public static class DirectoryAlreadyExistsException extends IOException
