@@ -59,6 +59,18 @@ public class FormTemplateManager
 		return formTemplateManager;
 	}
 	
+	public void putTemplate(FormTemplate template) throws Exception
+	{
+		saveEncryptedTemplate(template);
+	}
+	
+	public FormTemplate getTemplate(String title) throws Exception
+	{
+		File file = getTemplateFile(title);
+		FormTemplate template = loadEncryptedTemplate(file);
+		return template;
+	}
+
 	private FormTemplateManager(MartusCrypto cryptoToUse, File directoryToUse) throws Exception
 	{
 		if(!directoryToUse.isDirectory())
@@ -111,9 +123,14 @@ public class FormTemplateManager
 		byte[] plaintextSignedBytes = plaintextSignedBytesOut.toByteArray();
 
 		String title = formTemplate.getTitle();
-		File file = new File(directory, FormTemplate.calculateFileNameFromString(title, ENCRYPTED_MCT_EXTENSION));
+		File file = getTemplateFile(title);
 		File signatureFile = getSignatureFileFor(file);
 		security.encryptAndWriteFileAndSignatureFile(file, signatureFile, plaintextSignedBytes);
+	}
+
+	private File getTemplateFile(String title)
+	{
+		return new File(directory, FormTemplate.calculateFileNameFromString(title, ENCRYPTED_MCT_EXTENSION));
 	}
 
 	public static class DirectoryAlreadyExistsException extends IOException
