@@ -57,7 +57,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 
 	public void testBasics()
 	{
-		assertEquals(25, ConfigInfo.VERSION);
+		assertEquals(26, ConfigInfo.VERSION);
 
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
@@ -379,6 +379,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setFolderLabelCustomName(sampleFolderLabelCustomName);
 		info.setSyncStatusJson(sampleSyncStatusJson);
 		info.setSyncFrequencyMinutes(sampleSyncFrequency);
+		info.setDidTemplateMigration(sampleDidTemplateMigration);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -414,6 +415,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleFolderLabelCustomName", "", info.getFolderLabelCustomName());
 		assertEquals(label + ": sampleSyncStatusJson", "", info.getSyncStatusJson());
 		assertEquals(label + ": sampleSyncFrequency", "", info.getSyncFrequencyMinutes());
+		assertEquals(label + ": sampleDidMigrateTemplates", false, info.getDidTemplateMigration());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -596,6 +598,14 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			assertEquals(label + ": sampleSyncFrequency", "", info.getSyncFrequencyMinutes());
 		}
+		if(VERSION >= 26)
+		{
+			assertEquals(label + ": sampleDidTemplateMigration", sampleDidTemplateMigration, info.getDidTemplateMigration());
+		}
+		else
+		{
+			assertEquals(label + ": sampleDidTemplateMigration", false, info.getDidTemplateMigration());
+		}
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -730,6 +740,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			out.writeUTF(sampleSyncFrequency);
 		}
+		if(VERSION >= 26)
+		{
+			out.writeBoolean(sampleDidTemplateMigration);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -802,4 +816,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final String sampleSyncStatusJson = "{ }";
 //Version 25
 	final String sampleSyncFrequency = "60";
+//Version 26
+	final boolean sampleDidTemplateMigration = true;
 }

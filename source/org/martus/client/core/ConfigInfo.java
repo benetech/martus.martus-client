@@ -91,6 +91,7 @@ public class ConfigInfo
 	public void setFolderLabelCustomName(String newName) { folderLabelCustomName = newName; }
 	public void setSyncStatusJson(String newSyncStatusJson) { syncStatusJson = newSyncStatusJson; }
 	public void setSyncFrequencyMinutes(String newSyncFrequency) { syncFrequencyMinutes = newSyncFrequency; }
+	public void setDidTemplateMigration(boolean newValue) { didTemplateMigrationProperty.setValue(newValue); }
 
 
 	public void clearLegacyHQKey()						{ deprecatedLegacyHQKey = ""; }
@@ -143,7 +144,7 @@ public class ConfigInfo
 	public String getFolderLabelCustomName() { return folderLabelCustomName; }
 	public String getSyncStatusJson() {	return syncStatusJson; }
 	public String getSyncFrequencyMinutes() {	return syncFrequencyMinutes; }
-	
+	public boolean getDidTemplateMigration() { return didTemplateMigrationProperty.getValue(); }
 
 	public boolean isServerConfigured()
 	{
@@ -192,6 +193,7 @@ public class ConfigInfo
 		folderLabelCustomName = "";
 		syncStatusJson = "";
 		syncFrequencyMinutes = "";
+		didTemplateMigrationProperty = new SimpleBooleanProperty();
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException
@@ -319,6 +321,10 @@ public class ConfigInfo
 			{
 				loaded.syncFrequencyMinutes = in.readUTF();
 			}
+			if(loaded.version >= 26)
+			{
+				loaded.didTemplateMigrationProperty.setValue(in.readBoolean());
+			}
 		}
 		finally
 		{
@@ -376,6 +382,7 @@ public class ConfigInfo
 			out.writeUTF(folderLabelCustomName);
 			writeLongString(out, syncStatusJson);
 			out.writeUTF(syncFrequencyMinutes);
+			out.writeBoolean(didTemplateMigrationProperty.getValue());
 		}
 		finally
 		{
@@ -410,7 +417,7 @@ public class ConfigInfo
 		return new String(bytes, "UTF-8");
 	}
 	
-	public static final short VERSION = 25;
+	public static final short VERSION = 26;
 
 	//Version 1
 	private short version;
@@ -476,4 +483,6 @@ public class ConfigInfo
 	private String syncStatusJson;
 	//Version 25
 	private String syncFrequencyMinutes;
+	//Version 26
+	private Property<Boolean> didTemplateMigrationProperty;
 }
