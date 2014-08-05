@@ -73,7 +73,7 @@ public class FormTemplateManager
 		HashSet<String> available = new HashSet<String>();
 		available.add(MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
 		
-		File[] mctFiles = directory.listFiles(file -> isMctFile(file));
+		File[] mctFiles = directory.listFiles(file -> isEmctFile(file));
 		for (File file : mctFiles)
 		{
 			FormTemplate template = loadEncryptedTemplate(file);
@@ -92,7 +92,7 @@ public class FormTemplateManager
 		return template;
 	}
 
-	public boolean isMctFile(File file)
+	public boolean isEmctFile(File file)
 	{
 		return file.getName().toLowerCase().endsWith(ENCRYPTED_MCT_EXTENSION);
 	}
