@@ -389,6 +389,23 @@ public class ConfigInfo
 			out.close();
 		}
 	}
+	
+	public boolean hasCurrentFormTemplate()
+	{
+		if(getDidTemplateMigration())
+			return false;
+		
+		if(getCurrentFormTemplateTitle().length() > 0)
+			return true;
+		if(getCurrentFormTemplateDescription().length() > 0)
+			return true;
+		if(getCustomFieldTopSectionXml().length() > 0)
+			return true;
+		if(getCustomFieldBottomSectionXml().length() > 0)
+			return true;
+		
+		return false;
+	}
 
 	public FormTemplate getCurrentFormTemplate() throws Exception
 	{
