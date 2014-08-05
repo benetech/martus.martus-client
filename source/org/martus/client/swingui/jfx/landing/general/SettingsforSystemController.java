@@ -28,16 +28,22 @@ package org.martus.client.swingui.jfx.landing.general;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.setupwizard.step6.FxSelectLanguageController;
+import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.MartusLogger;
+import org.martus.common.MiniLocalization;
+import org.martus.common.fieldspec.ChoiceItem;
 
 public class SettingsforSystemController extends FxController
 {
@@ -51,8 +57,37 @@ public class SettingsforSystemController extends FxController
 	{
 		super.initialize(location, bundle);
 		useZawgyiFont.selectedProperty().setValue(getApp().getConfigInfo().getUseZawgyiFont());
+		initializeLanguageChoices();
+
 	} 
 		
+	private void initializeLanguageChoices()
+	{
+		ObservableList<ChoiceItem> availableLanguages = FXCollections.observableArrayList(FxSelectLanguageController.getAvailableLanguages(getLocalization()));
+		languageSelection.setItems(availableLanguages);
+		ChoiceItem currentLanguageChoiceItem = FxSelectLanguageController.findCurrentLanguageChoiceItem(getLocalization());
+		languageSelection.getSelectionModel().selectedItemProperty().addListener(new LanguageSelectionListener());
+		languageSelection.getSelectionModel().select(currentLanguageChoiceItem);
+	}
+	
+	class LanguageSelectionListener implements ChangeListener<ChoiceItem>
+	{
+		@Override
+		public void changed(ObservableValue<? extends ChoiceItem> observableValue,
+				ChoiceItem oldItem, ChoiceItem newItem)
+		{
+			updateZawgyiFont(newItem);
+		}
+	}
+	
+	protected void updateZawgyiFont(ChoiceItem itemSelected)
+	{
+		if(itemSelected.getCode().equals(MiniLocalization.BURMESE))
+			useZawgyiFont.setVisible(true);
+		else
+			useZawgyiFont.setVisible(false);
+	}
+
 	@Override
 	public void save()
 	{
@@ -78,9 +113,28 @@ public class SettingsforSystemController extends FxController
 	public void onSaveChanges()
 	{
 		getApp().getConfigInfo().setUseZawgyiFont(useZawgyiFont.selectedProperty().getValue());
+		String selectedLanguageCode = languageSelection.getSelectionModel().getSelectedItem().getCode();
+		if (MtfAwareLocalization.isRecognizedLanguage(selectedLanguageCode))
+			getLocalization().setCurrentLanguageCode(selectedLanguageCode);
+
 		save();
 	}
 
 	@FXML 
 	private CheckBox useZawgyiFont;
+	
+	@FXML
+	private CheckBox useThaiPersianLegacyDates;
+	
+	@FXML
+	private ChoiceBox<ChoiceItem> languageSelection;
+	
+	@FXML
+	private ChoiceBox dateFormat;
+	
+	@FXML
+	private ChoiceBox dateDelimiter;
+	
+	@FXML
+	private ChoiceBox calendarType;
 }
