@@ -92,13 +92,13 @@ public class FormTemplateManager
 		return template;
 	}
 
-	public File getSignatureFileFor(File dataFile)
+	private File getSignatureFileFor(File dataFile)
 	{
 		File sigFile = new File(dataFile.getParentFile(), dataFile.getName() + SIG_EXTENSION);
 		return sigFile;
 	}
 
-	public boolean isEmctFile(File file)
+	private boolean isEmctFile(File file)
 	{
 		return file.getName().toLowerCase().endsWith(ENCRYPTED_MCT_EXTENSION);
 	}
