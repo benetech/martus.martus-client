@@ -127,7 +127,6 @@ public class FormTemplateManager
 	public static final String MARTUS_DEFAULT_FORM_TEMPLATE_NAME = "%DefaultFormTemplateName";
 	private static final String ENCRYPTED_MCT_EXTENSION = ".emct";
 	private static final String SIG_EXTENSION = ".sig";
-	private static final String ENCRYPTED_MCT_SIG_EXTENSION = ENCRYPTED_MCT_EXTENSION + SIG_EXTENSION;
 	
 	private MartusCrypto security;
 	private File directory;
