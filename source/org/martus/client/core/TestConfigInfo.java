@@ -166,6 +166,17 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals("should have reverted", server, info.getServerName());
 	}
 
+	public void testTemplates() throws Exception
+	{
+		ConfigInfo info = new ConfigInfo();
+		
+		assertFalse(info.hasCurrentFormTemplate());
+		setConfigToSampleData(info, ConfigInfo.VERSION);
+		assertFalse(info.hasCurrentFormTemplate());
+		info.setDidTemplateMigration(false);
+		assertTrue(info.hasCurrentFormTemplate());
+	}
+	
 	public void testRemoveHQKey() throws Exception
 	{
 		ConfigInfo info = new ConfigInfo();
