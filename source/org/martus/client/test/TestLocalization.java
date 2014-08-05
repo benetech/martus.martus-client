@@ -39,6 +39,7 @@ import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiSession;
+import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusUtilities;
@@ -116,6 +117,7 @@ public class TestLocalization extends TestCaseEnhanced
 	private void verifyDefaultDateFormat(String languageCode, String mdyOrder, char delimiter)
 	{
 		MiniLocalization localization = new MiniLocalization();
+		localization.setLanguageSettingsProvider(new CurrentUiState());
 		localization.setCurrentLanguageCode(languageCode);
 		localization.setDateFormatFromLanguage();
 		assertEquals("wrong mdy order for " + languageCode + "? ", mdyOrder, localization.getMdyOrder());
@@ -156,6 +158,7 @@ public class TestLocalization extends TestCaseEnhanced
 		tmpDir.deleteOnExit();
 		
 		MartusLocalization directionalLanguages = new MartusLocalization(tmpDir, EnglishTestStrings.strings);
+		directionalLanguages.setLanguageSettingsProvider(new CurrentUiState());
 		directionalLanguages.includeOfficialLanguagesOnly = false;
 		directionalLanguages.setCurrentLanguageCode("en");
 		assertFalse("English is a Left To Right language.", LanguageOptions.isRightToLeftLanguage());
@@ -278,6 +281,7 @@ public class TestLocalization extends TestCaseEnhanced
 	{
 		File translationDirectory = createTempDirectory();
 		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, EnglishStrings.strings);
+		myLocalization.setLanguageSettingsProvider(new CurrentUiState());
 		myLocalization.includeOfficialLanguagesOnly = false;
 		assertTrue("Default English should always be trusted.", myLocalization.isOfficialTranslation("en"));
 
@@ -302,6 +306,7 @@ public class TestLocalization extends TestCaseEnhanced
 	{
 		File translationDirectory = createTempDirectory();
 		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, EnglishStrings.strings);
+		myLocalization.setLanguageSettingsProvider(new CurrentUiState());
 
 		String someTestLanguageCode = "zz";
 		
@@ -379,6 +384,7 @@ public class TestLocalization extends TestCaseEnhanced
 
 		File translationDirectory2 = createTempDirectory();
 		MartusLocalization myLocalization2 = new MartusLocalization(translationDirectory2, UiSession.getAllEnglishStrings());
+		myLocalization2.setLanguageSettingsProvider(new CurrentUiState());
 		myLocalization2.includeOfficialLanguagesOnly = false;
 		File mlpTestLanguage = new File(translationDirectory2,UiLocalization.getMlpkFilename(someTestLanguageCode));
 		mlpTestLanguage.deleteOnExit();
@@ -426,6 +432,7 @@ public class TestLocalization extends TestCaseEnhanced
 
 		File translationDirectory2 = createTempDirectory();
 		MartusLocalization myLocalization2 = new MartusLocalization(translationDirectory2, EnglishStrings.strings);
+		myLocalization2.setLanguageSettingsProvider(new CurrentUiState());
 		File someTestLanguage2 = new File(translationDirectory2,UiLocalization.getMlpkFilename(someTestLanguageCode));
 		someTestLanguage2.deleteOnExit();
 		copyResourceFileToLocalFile(someTestLanguage2, "Martus-xx-notSigned.mlp");
