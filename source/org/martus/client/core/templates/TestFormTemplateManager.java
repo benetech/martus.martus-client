@@ -27,12 +27,16 @@ package org.martus.client.core.templates;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.Set;
 
 import org.martus.common.FieldSpecCollection;
+import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.StandardFieldSpecs;
+import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.TestCaseEnhanced;
 
@@ -56,7 +60,7 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 		File badDirectory = createTempFile();
 		try
 		{
-			FormTemplateManager.openExisting(security, badDirectory);
+			FormTemplateManager.createOrOpen(security, badDirectory);
 			fail("Should have thrown for not a directory");
 		}
 		catch(FileNotFoundException ignoreExpected)
@@ -66,24 +70,15 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 		{
 			badDirectory.delete();
 		}
-		
-		try
-		{
-			FormTemplateManager.openExisting(security, badDirectory);
-			fail("Should have thrown for not existing");
-		}
-		catch(FileNotFoundException ignoreExpected)
-		{
-		}
 	}
 	
-	public void testCreateWithoutExisting() throws Exception
+	public void testCreateNewDirectory() throws Exception
 	{
 		File tempDirectory = createTempDirectory();
 		try
 		{
 			File templateDirectory = new File(tempDirectory, "templates");
-			FormTemplateManager manager = FormTemplateManager.createNewDirectory(security, templateDirectory, null);
+			FormTemplateManager manager = FormTemplateManager.createOrOpen(security, templateDirectory);
 			
 			Set<String> names = manager.getAvailableTemplateNames();
 			assertEquals(1, names.size());
@@ -97,27 +92,56 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 		}
 	}
 
-	public void testCreateWithExisting() throws Exception
+	public void testSaveAndLoad() throws Exception
 	{
 		File tempDirectory = createTempDirectory();
 		try
 		{
 			File templateDirectory = new File(tempDirectory, "templates");
-			String title = "title";
-			String description = "description";
-			FieldSpecCollection top = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
-			FieldSpecCollection bottom = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
-			FormTemplate template = new FormTemplate(title, description, top, bottom);
-			FormTemplateManager manager = FormTemplateManager.createNewDirectory(security, templateDirectory, template);
+			FormTemplateManager manager = FormTemplateManager.createOrOpen(security, templateDirectory);
 			
-			Set<String> names = manager.getAvailableTemplateNames();
-			assertEquals(2, names.size());
+			assertEquals(1, manager.getAvailableTemplateNames().size());
+
+			String title = "t1";
+			FormTemplate template = createFormTemplate(title, "d1");
+			manager.putTemplate(template);
+			assertEquals(2, manager.getAvailableTemplateNames().size());
+			FormTemplate got = manager.getTemplate(title);
+			assertEquals(template.getDescription(), got.getDescription());
+			
+			String filename = FormTemplateManager.getTemplateFilename(title);
+			File templateFile = new File(templateDirectory, filename);
+			FileOutputStream out = new FileOutputStream(templateFile, true);
+			out.write(5);
+			out.close();
+			try
+			{
+				manager.getTemplate(title);
+				fail("Should have thrown for bad sig");
+			}
+			catch(SignatureVerificationException ignoreExpected)
+			{
+			}
+			
+			manager = FormTemplateManager.createOrOpen(security, templateDirectory);
+			PrintStream dest = MartusLogger.getDestination();
+			MartusLogger.disableLogging();
+			assertEquals(1, manager.getAvailableTemplateNames().size());
+			MartusLogger.setDestination(dest);
 			
 		}
 		finally
 		{
 			DirectoryUtils.deleteEntireDirectoryTree(tempDirectory);
 		}
+	}
+	
+	private FormTemplate createFormTemplate(String title, String description) throws Exception
+	{
+		FieldSpecCollection top = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		FieldSpecCollection bottom = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
+		FormTemplate template = new FormTemplate(title, description, top, bottom);
+		return template;
 	}
 	
 	public MockMartusSecurity security;

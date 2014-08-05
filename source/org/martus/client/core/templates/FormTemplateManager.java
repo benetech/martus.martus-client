@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.fieldspec.FormTemplate;
@@ -39,26 +40,48 @@ import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
 
 public class FormTemplateManager
 {
-	public static FormTemplateManager openExisting(MartusCrypto cryptoToUse, File directoryToUse) throws Exception
+	public static FormTemplateManager createOrOpen(MartusCrypto cryptoToUse, File directoryToUse) throws Exception
 	{
-		return new FormTemplateManager(cryptoToUse, directoryToUse);
-	}
-	
-	public static FormTemplateManager createNewDirectory(MartusCrypto cryptoToUse, File directoryToUse, FormTemplate existingFormTemplate) throws Exception
-	{
-		if(directoryToUse.exists())
-			throw new DirectoryAlreadyExistsException("Already exists: " + directoryToUse.getAbsolutePath());
-		
 		directoryToUse.mkdirs();
 		
 		FormTemplateManager formTemplateManager = new FormTemplateManager(cryptoToUse, directoryToUse);
 		
-		if(existingFormTemplate != null)
-			formTemplateManager.saveEncryptedTemplate(existingFormTemplate);
-		
 		return formTemplateManager;
 	}
 	
+	public void putTemplate(FormTemplate template) throws Exception
+	{
+		saveEncryptedTemplate(template);
+	}
+	
+	public FormTemplate getTemplate(String title) throws Exception
+	{
+		File file = getTemplateFile(title);
+		FormTemplate template = loadEncryptedTemplate(file);
+		return template;
+	}
+
+	public Set<String> getAvailableTemplateNames() throws Exception
+	{
+		HashSet<String> available = new HashSet<String>();
+		available.add(MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
+		
+		File[] emctFiles = directory.listFiles(file -> isEmctFile(file));
+		for (File file : emctFiles)
+		{
+			try
+			{
+				FormTemplate template = loadEncryptedTemplate(file);
+				available.add(template.getTitle());
+			}
+			catch(Exception e)
+			{
+				MartusLogger.logException(e);
+			}
+		}
+		return available;
+	}
+
 	private FormTemplateManager(MartusCrypto cryptoToUse, File directoryToUse) throws Exception
 	{
 		if(!directoryToUse.isDirectory())
@@ -68,23 +91,9 @@ public class FormTemplateManager
 		directory = directoryToUse;
 	}
 	
-	public Set<String> getAvailableTemplateNames() throws Exception
-	{
-		HashSet<String> available = new HashSet<String>();
-		available.add(MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
-		
-		File[] mctFiles = directory.listFiles(file -> isMctFile(file));
-		for (File file : mctFiles)
-		{
-			FormTemplate template = loadEncryptedTemplate(file);
-			available.add(template.getTitle());
-		}
-		return available;
-	}
-
 	private FormTemplate loadEncryptedTemplate(File dataFile) throws Exception
 	{
-		File sigFile = new File(dataFile.getParentFile(), dataFile.getName() + SIG_EXTENSION);
+		File sigFile = getSignatureFileFor(dataFile);
 		byte[] plaintextTemplateBytes = MartusSecurity.verifySignatureAndDecryptFile(dataFile, sigFile, security);
 		ByteArrayInputStreamWithSeek plainTextTemplateBytesIn = new ByteArrayInputStreamWithSeek(plaintextTemplateBytes);
 		FormTemplate template = new FormTemplate();
@@ -92,7 +101,13 @@ public class FormTemplateManager
 		return template;
 	}
 
-	public boolean isMctFile(File file)
+	public static File getSignatureFileFor(File dataFile)
+	{
+		File sigFile = new File(dataFile.getParentFile(), dataFile.getName() + SIG_EXTENSION);
+		return sigFile;
+	}
+
+	private boolean isEmctFile(File file)
 	{
 		return file.getName().toLowerCase().endsWith(ENCRYPTED_MCT_EXTENSION);
 	}
@@ -105,9 +120,19 @@ public class FormTemplateManager
 		byte[] plaintextSignedBytes = plaintextSignedBytesOut.toByteArray();
 
 		String title = formTemplate.getTitle();
-		File file = new File(directory, FormTemplate.calculateFileNameFromString(title, ENCRYPTED_MCT_EXTENSION));
-		File signatureFile = new File(directory, FormTemplate.calculateFileNameFromString(title, ENCRYPTED_MCT_SIG_EXTENSION));
+		File file = getTemplateFile(title);
+		File signatureFile = getSignatureFileFor(file);
 		security.encryptAndWriteFileAndSignatureFile(file, signatureFile, plaintextSignedBytes);
+	}
+
+	private File getTemplateFile(String title)
+	{
+		return new File(directory, getTemplateFilename(title));
+	}
+
+	public static String getTemplateFilename(String title)
+	{
+		return FormTemplate.calculateFileNameFromString(title, ENCRYPTED_MCT_EXTENSION);
 	}
 
 	public static class DirectoryAlreadyExistsException extends IOException
@@ -121,7 +146,6 @@ public class FormTemplateManager
 	public static final String MARTUS_DEFAULT_FORM_TEMPLATE_NAME = "%DefaultFormTemplateName";
 	private static final String ENCRYPTED_MCT_EXTENSION = ".emct";
 	private static final String SIG_EXTENSION = ".sig";
-	private static final String ENCRYPTED_MCT_SIG_EXTENSION = ENCRYPTED_MCT_EXTENSION + SIG_EXTENSION;
 	
 	private MartusCrypto security;
 	private File directory;
