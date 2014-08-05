@@ -58,10 +58,11 @@ public class UiSession
 			return;
 		}
 		getUiState().load(uiStateFile);
-		getLocalization().setCurrentDateFormatCode(getUiState().getCurrentDateFormat());
-		getLocalization().setCurrentCalendarSystem(getUiState().getCurrentCalendarSystem());
-		getLocalization().setAdjustThaiLegacyDates(getUiState().getAdjustThaiLegacyDates());
-		getLocalization().setAdjustPersianLegacyDates(getUiState().getAdjustPersianLegacyDates());
+		getLocalization().setLanguageSettingsProvider(uiState);
+		//getLocalization().setCurrentDateFormatCode(getUiState().getCurrentDateFormat());
+		//getLocalization().setCurrentCalendarSystem(getUiState().getCurrentCalendarSystem());
+		//getLocalization().setAdjustThaiLegacyDates(getUiState().getAdjustThaiLegacyDates());
+		//getLocalization().setAdjustPersianLegacyDates(getUiState().getAdjustPersianLegacyDates());
 	}
 
 	public File getUiStateFile()
@@ -107,6 +108,9 @@ public class UiSession
 
 		if (MtfAwareLocalization.BURMESE.equals(getLocalization().getCurrentLanguageCode()))
 			FontSetter.setUIFont(FontHandler.BURMESE_FONT);
+		
+		getLocalization().setLanguageSettingsProvider(previouslySavedState);
+
 	}
 
 	public static String[] getAllEnglishStrings()

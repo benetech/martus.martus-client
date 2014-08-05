@@ -56,6 +56,7 @@ import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiSession;
+import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.PasswordHelper;
 import org.martus.clientside.UiLocalization;
@@ -112,6 +113,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		mockSecurityForApp = MockMartusSecurity.createClient();
 
 		testAppLocalization = new MartusLocalization(null, UiSession.getAllEnglishStrings());
+		testAppLocalization.setLanguageSettingsProvider(new CurrentUiState());
 		testAppLocalization.setCurrentLanguageCode("en");
 		appWithAccount = MockMartusApp.create(mockSecurityForApp, getName());
 		appWithAccount.setSSLNetworkInterfaceHandlerForTesting(new ServerSideNetworkHandlerNotAvailable());
@@ -283,6 +285,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testGetDefaultLanguageForNewBulletin()
 	{
 		MiniLocalization localization = appWithAccount.getLocalization();
+		localization.setLanguageSettingsProvider(new CurrentUiState());
 		String originalLanguage = localization.getCurrentLanguageCode();
 		assertNull("language not null by default?", originalLanguage);
 		
@@ -542,6 +545,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testSetDefaultUiState() throws Exception
 	{
 		MartusLocalization testLocalization = new MartusLocalization(null, noEnglishStrings);
+		testLocalization.setLanguageSettingsProvider(new CurrentUiState());
 		File tmpFile = createTempFile();
 		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
 		assertNull("File doesn't exist localization should not be set.  Using DefaultUi.txt depends on the language not being set in this case.", testLocalization.getCurrentLanguageCode());
