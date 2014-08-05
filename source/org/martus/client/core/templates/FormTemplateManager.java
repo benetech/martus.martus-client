@@ -28,14 +28,15 @@ package org.martus.client.core.templates;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.fieldspec.FormTemplate;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
 
 public class FormTemplateManager
@@ -51,13 +52,29 @@ public class FormTemplateManager
 	
 	public void putTemplate(FormTemplate template) throws Exception
 	{
+		if(template.getTitle().length() == 0)
+			throw new InvalidTemplateNameException("Name cannot be blank");
+		
 		saveEncryptedTemplate(template);
 	}
 	
 	public FormTemplate getTemplate(String title) throws Exception
 	{
+		if(title.length() == 0)
+		{
+			return createDefaultFormTemplate();
+		}
+		
 		File file = getTemplateFile(title);
 		FormTemplate template = loadEncryptedTemplate(file);
+		return template;
+	}
+
+	private FormTemplate createDefaultFormTemplate() throws Exception
+	{
+		FieldSpecCollection top = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		FieldSpecCollection bottom = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
+		FormTemplate template = new FormTemplate("", "", top, bottom);
 		return template;
 	}
 
@@ -135,9 +152,9 @@ public class FormTemplateManager
 		return FormTemplate.calculateFileNameFromString(title, ENCRYPTED_MCT_EXTENSION);
 	}
 
-	public static class DirectoryAlreadyExistsException extends IOException
+	public static class InvalidTemplateNameException extends Exception
 	{
-		public DirectoryAlreadyExistsException(String message)
+		public InvalidTemplateNameException(String message)
 		{
 			super(message);
 		}

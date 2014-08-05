@@ -31,6 +31,7 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.Set;
 
+import org.martus.client.core.templates.FormTemplateManager.InvalidTemplateNameException;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MockMartusSecurity;
@@ -129,6 +130,39 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 			assertEquals(1, manager.getAvailableTemplateNames().size());
 			MartusLogger.setDestination(dest);
 			
+		}
+		finally
+		{
+			DirectoryUtils.deleteEntireDirectoryTree(tempDirectory);
+		}
+	}
+	
+	public void testDefaultTemplate() throws Exception
+	{
+		File tempDirectory = createTempDirectory();
+		try
+		{
+			File templateDirectory = new File(tempDirectory, "templates");
+			FormTemplateManager manager = FormTemplateManager.createOrOpen(security, templateDirectory);
+			
+			FormTemplate defaultTemplate = manager.getTemplate("");
+			assertEquals("", defaultTemplate.getTitle());
+			assertEquals("", defaultTemplate.getDescription());
+			FieldSpecCollection top = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+			assertEquals(top.toXml(), defaultTemplate.getTopSectionXml());
+			FieldSpecCollection bottom = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
+			assertEquals(bottom.toXml(), defaultTemplate.getBottomSectionXml());
+
+			String title = "";
+			FormTemplate template = createFormTemplate(title, "d1");
+			try
+			{
+				manager.putTemplate(template);
+				fail("Should have thrown trying to put template with no title");
+			}
+			catch(InvalidTemplateNameException ignoreExpected)
+			{
+			}
 		}
 		finally
 		{
