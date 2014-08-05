@@ -73,8 +73,8 @@ public class FormTemplateManager
 		HashSet<String> available = new HashSet<String>();
 		available.add(MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
 		
-		File[] mctFiles = directory.listFiles(file -> isEmctFile(file));
-		for (File file : mctFiles)
+		File[] emctFiles = directory.listFiles(file -> isEmctFile(file));
+		for (File file : emctFiles)
 		{
 			FormTemplate template = loadEncryptedTemplate(file);
 			available.add(template.getTitle());
