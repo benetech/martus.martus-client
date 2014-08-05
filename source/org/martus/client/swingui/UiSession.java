@@ -59,10 +59,6 @@ public class UiSession
 		}
 		getUiState().load(uiStateFile);
 		getLocalization().setLanguageSettingsProvider(uiState);
-		//getLocalization().setCurrentDateFormatCode(getUiState().getCurrentDateFormat());
-		//getLocalization().setCurrentCalendarSystem(getUiState().getCurrentCalendarSystem());
-		//getLocalization().setAdjustThaiLegacyDates(getUiState().getAdjustThaiLegacyDates());
-		//getLocalization().setAdjustPersianLegacyDates(getUiState().getAdjustPersianLegacyDates());
 	}
 
 	public File getUiStateFile()
