@@ -883,6 +883,10 @@ public class MartusApp
 		{
 			MartusLogger.log("Migrating template from config");
 			FormTemplate template = configInfo.getCurrentFormTemplate();
+			if(template.getTitle().length() == 0)
+			{
+				template.setTitle(localization.getFieldLabel("NoFormTemplateTitle"));
+			}
 			formTemplateManager.putTemplate(template);
 		}
 		
@@ -2540,6 +2544,9 @@ public class MartusApp
 	{
 		try
 		{
+			if(server.getInterface() == null)
+				return false;
+			
 			NetworkResponse response = server.getServerInfo();
 			if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
 				return false;
