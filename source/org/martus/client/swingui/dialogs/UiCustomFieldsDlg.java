@@ -184,6 +184,13 @@ public class UiCustomFieldsDlg extends JDialog
 		{
 			try 
 			{
+				titleResult = titleField.getText();
+				if(titleResult.length() == 0)
+				{
+					mainWindow.notifyDlg("Cannot save template without a title (JavaFX won't have this error dialog");
+					return;
+				}
+
 				String topText = topSectionXmlTextArea.getText();
 				String bottomText = bottomSectionXmlTextArea.getText();
 				topText = fontHelper.getStorable(topText);
@@ -194,7 +201,6 @@ public class UiCustomFieldsDlg extends JDialog
 					return;
 				topSectionXmlResult = topText;
 				bottomSectionXmlResult = bottomText;
-				titleResult = titleField.getText();
 				descriptionResult = descriptionField.getText();
 			} 
 			catch (Exception e) 
