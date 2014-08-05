@@ -112,7 +112,7 @@ public class FormTemplateManager
 
 		String title = formTemplate.getTitle();
 		File file = new File(directory, FormTemplate.calculateFileNameFromString(title, ENCRYPTED_MCT_EXTENSION));
-		File signatureFile = new File(directory, FormTemplate.calculateFileNameFromString(title, ENCRYPTED_MCT_SIG_EXTENSION));
+		File signatureFile = getSignatureFileFor(file);
 		security.encryptAndWriteFileAndSignatureFile(file, signatureFile, plaintextSignedBytes);
 	}
 
