@@ -562,10 +562,7 @@ public class MartusApp
 		configInfo.setCustomFieldLegacySpecs(MartusConstants.deprecatedCustomFieldSpecs);
 		saveConfigInfo();
 
-		FieldSpecCollection topCollection = FieldCollection.parseXml(updatedTemplate.getTopSectionXml());
-		FieldSpecCollection bottomCollection = FieldCollection.parseXml(updatedTemplate.getBottomSectionXml());
-		store.setTopSectionFieldSpecs(topCollection);
-		store.setBottomSectionFieldSpecs(bottomCollection);
+		store.setFormTemplate(updatedTemplate);
 	}
 
 	public void saveConfigInfo() throws SaveConfigInfoException
@@ -629,10 +626,11 @@ public class MartusApp
 			
 			FieldSpecCollection specsTop = getCustomFieldSpecsTopSection(configInfo);
 			removeSpaceLikeCharactersFromTags(specsTop);
-			store.setTopSectionFieldSpecs(specsTop);
 			FieldSpecCollection specsBottom = getCustomFieldSpecsBottomSection(configInfo);
 			removeSpaceLikeCharactersFromTags(specsBottom);
-			store.setBottomSectionFieldSpecs(specsBottom);
+			
+			FormTemplate template = configInfo.getCurrentFormTemplate();
+			store.setFormTemplate(template);
 			
 			String languageCode = localization.getCurrentLanguageCode();
 			if (languageCode != null && languageCode.equals(MtfAwareLocalization.BURMESE))
@@ -790,15 +788,17 @@ public class MartusApp
 		loadConfigInfo();
 	}
 
-	public static FieldSpecCollection getCustomFieldSpecsTopSection(ConfigInfo configInfo) throws CustomFieldsParseException
+	public static FieldSpecCollection getCustomFieldSpecsTopSection(ConfigInfo configInfo) throws Exception
 	{
 		String xmlSpecs = configInfo.getCustomFieldTopSectionXml();
 		if(xmlSpecs.length() > 0)
 			return FieldCollection.parseXml(xmlSpecs);
 			
 		String legacySpecs = configInfo.getCustomFieldLegacySpecs();
-		FieldSpecCollection specs = LegacyCustomFields.parseFieldSpecsFromString(legacySpecs);
-		return specs;
+		if(legacySpecs.length() > 0)
+			return LegacyCustomFields.parseFieldSpecsFromString(legacySpecs);
+		
+		return StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 	}
 
 	public static FieldSpecCollection getCustomFieldSpecsBottomSection(ConfigInfo configInfo) throws CustomFieldsParseException

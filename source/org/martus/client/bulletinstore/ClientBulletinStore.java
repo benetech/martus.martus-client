@@ -63,6 +63,7 @@ import org.martus.common.database.Database;
 import org.martus.common.database.Database.RecordHiddenException;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.field.MartusField;
+import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.BulletinHistory;
@@ -1100,16 +1101,12 @@ public class ClientBulletinStore extends BulletinStore
 		createSystemFolders();
 	}
 	
-	public void setTopSectionFieldSpecs(FieldSpecCollection newFieldSpecs)
+	public void setFormTemplate(FormTemplate newFormTemplate)
 	{
-		topSectionFieldSpecs = newFieldSpecs;
+		topSectionFieldSpecs = newFormTemplate.getTopFields();
+		bottomSectionFieldSpecs = newFormTemplate.getBottomFields();
 	}
 	
-	public void setBottomSectionFieldSpecs(FieldSpecCollection newFieldSpecs)
-	{
-		bottomSectionFieldSpecs = newFieldSpecs;
-	}
-
 	public int quarantineUnreadableBulletins()
 	{
 		class Quarantiner implements Database.PacketVisitor
