@@ -551,7 +551,7 @@ public class MartusApp
 	return updatedContactKeysWithCanReceiveFromAdjusted;
 	}
 
-	public void updateFormTemplate(FormTemplate updatedTemplate) throws SaveConfigInfoException, CustomFieldsParseException
+	public void updateFormTemplate(FormTemplate updatedTemplate) throws Exception
 	{
 
 		configInfo.setCustomFieldTopSectionXml(updatedTemplate.getTopSectionXml());
@@ -561,7 +561,7 @@ public class MartusApp
 		configInfo.setCustomFieldLegacySpecs(MartusConstants.deprecatedCustomFieldSpecs);
 		saveConfigInfo();
 
-		store.setFormTemplate(updatedTemplate);
+		store.saveNewFormTemplate(updatedTemplate);
 	}
 
 	public void saveConfigInfo() throws SaveConfigInfoException
