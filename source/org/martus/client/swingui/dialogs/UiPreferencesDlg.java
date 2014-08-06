@@ -223,8 +223,6 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			setDateDelimiter(localization, delimiter);
 			localization.setCurrentCalendarSystem(calendarDropdown.getText());
 			localization.setCurrentLanguageCode(languageDropdown.getText());
-			localization.setAdjustThaiLegacyDates(adjustThai.isSelected());
-			localization.setAdjustPersianLegacyDates(adjustPersian.isSelected());
 			result = true;
 		}
 		dispose();
