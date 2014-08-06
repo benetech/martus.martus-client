@@ -356,7 +356,9 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			if(!validateXml(topSectionXmlTextArea.getText(), bottomSectionXmlTextArea.getText()))
+			String topXml = topSectionXmlTextArea.getText();
+			String bottomXml = bottomSectionXmlTextArea.getText();
+			if(!validateXml(topXml, bottomXml))
 			{
 				mainWindow.notifyDlg("ErrorExportingCustomizationTemplate");
 				return;
@@ -373,7 +375,7 @@ public class UiCustomFieldsDlg extends JDialog
 			MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
 			String formTemplateTitle = titleField.getText();
 			String formTemplateDescription = descriptionField.getText();
-			if(template.exportTemplate(securityTemp, destFile, topSectionXmlTextArea.getText(), bottomSectionXmlTextArea.getText(), formTemplateTitle, formTemplateDescription))
+			if(template.exportTemplate(securityTemp, destFile, topXml, bottomXml, formTemplateTitle, formTemplateDescription))
 			{
 				mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
 			}
