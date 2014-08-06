@@ -59,7 +59,6 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
-import org.martus.client.core.templates.FormTemplateManager;
 import org.martus.client.network.RetrieveCommand;
 import org.martus.client.reports.ReportFormatFilter;
 import org.martus.client.search.BulletinSearcher;
@@ -829,7 +828,9 @@ public class MartusApp
 		try
 		{
 			store.doAfterSigninInitialization(dataDirectory, database);
-			initializeFormTemplateManager();
+
+			if(!configInfo.getDidTemplateMigration())
+				migrateTemplateToFormTemplateManager();
 		}
 		catch(FileVerificationException e)
 		{
@@ -869,14 +870,6 @@ public class MartusApp
 		}
 	}
 
-	private void initializeFormTemplateManager() throws Exception
-	{
-		File templateDirectory = getTemplateDirectory();
-		formTemplateManager = FormTemplateManager.createOrOpen(getSecurity(), templateDirectory);
-		if(!configInfo.getDidTemplateMigration())
-			migrateTemplateToFormTemplateManager();
-	}
-
 	private void migrateTemplateToFormTemplateManager() throws Exception
 	{
 		if(configInfo.hasCurrentFormTemplate())
@@ -887,21 +880,11 @@ public class MartusApp
 			{
 				template.setTitle(localization.getFieldLabel("NoFormTemplateTitle"));
 			}
-			formTemplateManager.putTemplate(template);
+			store.saveNewFormTemplate(template);
 		}
 		
 		configInfo.setDidTemplateMigration(true);
 		saveConfigInfo();
-	}
-
-	private File getTemplateDirectory()
-	{
-		return getTemplatesDirectoryForAccount(getCurrentAccountDirectory());
-	}
-
-	protected File getTemplatesDirectoryForAccount(File accountDirectory)
-	{
-		return new File(accountDirectory, TEMPLATE_DIRECTORY_NAME);
 	}
 
 	public File getFxmlDirectory()
@@ -2645,7 +2628,6 @@ public class MartusApp
 	protected File currentAccountDirectory;
 	protected MtfAwareLocalization localization;
 	public ClientBulletinStore store;
-	private FormTemplateManager formTemplateManager;
 	private HashMap fieldExpansionStates;
 	private HashMap gridExpansionStates;
 	private ConfigInfo configInfo;
@@ -2669,7 +2651,6 @@ public class MartusApp
 	public static final String DOCUMENTS_DIRECTORY_NAME = "Docs";
 	public static final String USE_UNOFFICIAL_TRANSLATIONS_NAME = "use_unofficial_translations.txt";
 	private static final String FXML_DIRECTORY_NAME = "fxml";
-	private static final String TEMPLATE_DIRECTORY_NAME = "templates";
 	private final int MAXFOLDERS = 50;
 	public int serverChunkSize = NetworkInterfaceConstants.CLIENT_MAX_CHUNK_SIZE;
 }

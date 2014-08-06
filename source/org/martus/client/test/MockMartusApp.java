@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.clientside.MtfAwareLocalization;
@@ -175,7 +176,7 @@ public class MockMartusApp extends MartusApp
 
 		// NOTE: We need to delete the top-level templates directory, 
 		// not the current account templates directory
-		File templatesDir = getTemplatesDirectoryForAccount(getMartusDataRootDirectory());
+		File templatesDir = new File(getMartusDataRootDirectory(), ClientBulletinStore.TEMPLATE_DIRECTORY_NAME);
 		DirectoryUtils.deleteEntireDirectoryTree(templatesDir);
 		if(templatesDir.exists())
 			throw new IOException("TemplatesDirectory");
