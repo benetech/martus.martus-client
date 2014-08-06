@@ -41,7 +41,6 @@ import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
-import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.setupwizard.step2.FxSetupSettingsController;
 import org.martus.client.swingui.jfx.setupwizard.step6.FxSelectLanguageController;
