@@ -390,7 +390,7 @@ public class ConfigInfo
 		}
 	}
 	
-	public boolean hasCurrentFormTemplate()
+	public boolean hasLegacyFormTemplate()
 	{
 		if(getDidTemplateMigration())
 			return false;
