@@ -115,6 +115,7 @@ public class SettingsforSystemController extends FxController
 	{
 		getApp().getConfigInfo().setUseZawgyiFont(useZawgyiFont.selectedProperty().getValue());
 		String selectedLanguageCode = languageSelection.getSelectionModel().getSelectedItem().getCode();
+		//TODO is this check really needed?
 		if (MtfAwareLocalization.isRecognizedLanguage(selectedLanguageCode))
 		{
 			getStage().doAction(new ActionDisplayMTFWarningsIfNecessary(getMainWindow(), selectedLanguageCode));
