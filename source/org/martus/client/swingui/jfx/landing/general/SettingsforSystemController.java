@@ -38,6 +38,7 @@ import javafx.scene.control.ChoiceBox;
 
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.setupwizard.step6.FxSelectLanguageController;
 import org.martus.clientside.MtfAwareLocalization;
@@ -115,10 +116,29 @@ public class SettingsforSystemController extends FxController
 		getApp().getConfigInfo().setUseZawgyiFont(useZawgyiFont.selectedProperty().getValue());
 		String selectedLanguageCode = languageSelection.getSelectionModel().getSelectedItem().getCode();
 		if (MtfAwareLocalization.isRecognizedLanguage(selectedLanguageCode))
+		{
+			getStage().doAction(new ActionDisplayMTFWarningsIfNecessary(getMainWindow(), selectedLanguageCode));
 			getLocalization().setCurrentLanguageCode(selectedLanguageCode);
-
+		}
 		save();
 	}
+	
+	public class ActionDisplayMTFWarningsIfNecessary implements ActionDoer
+	{
+		public ActionDisplayMTFWarningsIfNecessary(UiMainWindow mainWindowToUse, String selectedLanguageToCheck)
+		{
+			mainWindow = mainWindowToUse;
+			selectedLanguageCode = selectedLanguageToCheck;
+		}
+
+		public void doAction()
+		{
+			UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(mainWindow.getCurrentActiveFrame(), getLocalization(), selectedLanguageCode);
+			UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(mainWindow.getCurrentActiveFrame(), getLocalization(), selectedLanguageCode);
+		}		
+		private UiMainWindow mainWindow;
+		private String selectedLanguageCode;
+	}	
 
 	@FXML 
 	private CheckBox useZawgyiFont;
