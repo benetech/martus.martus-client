@@ -917,7 +917,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("", emptyConfigInfo.getCustomFieldTopSectionXml());
 		assertEquals("", emptyConfigInfo.getCustomFieldBottomSectionXml());
 		assertEquals("", emptyConfigInfo.getCustomFieldLegacySpecs());
-		store.setFormTemplate(configInfo.getCurrentFormTemplate());
+		store.setFormTemplate(configInfo.getLegacyFormTemplate());
 		
 		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		FieldCollection fields = new FieldCollection(topSpecs);
