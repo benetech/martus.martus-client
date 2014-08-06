@@ -385,9 +385,11 @@ public class UiCustomFieldsDlg extends JDialog
 
 		public void exportTemplate(File destFile, String title, String description, String topXml, String bottomXml) throws Exception
 		{
-			FormTemplate template = new FormTemplate();
+			FieldSpecCollection top = FieldCollection.parseXml(topXml);
+			FieldSpecCollection bottom = FieldCollection.parseXml(bottomXml);
+			FormTemplate template = new FormTemplate(title, description, top, bottom);
 			MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
-			if(template.exportTemplate(securityTemp, destFile, topXml, bottomXml, title, description))
+			if(template.exportTemplate(securityTemp, destFile))
 			{
 				mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
 			}
