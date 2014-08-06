@@ -829,9 +829,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_END();
 	}
 	
-	public void testContactInfo() throws Exception
+	public void testConfigInfo() throws Exception
 	{
-		TRACE_BEGIN("testContactInfo");
+		TRACE_BEGIN("testConfigInfo");
 
 		File file = appWithAccount.getConfigInfoFile();
 		file.delete();
