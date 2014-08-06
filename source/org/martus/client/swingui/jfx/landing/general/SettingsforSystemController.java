@@ -84,9 +84,15 @@ public class SettingsforSystemController extends FxController
 	protected void updateZawgyiFont(ChoiceItem itemSelected)
 	{
 		if(itemSelected.getCode().equals(MiniLocalization.BURMESE))
-			useZawgyiFont.setVisible(true);
+		{
+			useZawgyiFont.selectedProperty().setValue(true);
+			useZawgyiFont.setDisable(true);
+		}
 		else
-			useZawgyiFont.setVisible(false);
+		{
+			useZawgyiFont.selectedProperty().setValue(false);
+			useZawgyiFont.setDisable(false);
+		}
 	}
 
 	@Override
