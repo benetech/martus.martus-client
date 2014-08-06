@@ -869,7 +869,7 @@ public class MartusApp
 
 	private void migrateTemplateToFormTemplateManager() throws Exception
 	{
-		if(configInfo.hasCurrentFormTemplate())
+		if(configInfo.hasLegacyFormTemplate())
 		{
 			MartusLogger.log("Migrating template from config");
 			FormTemplate template = configInfo.getLegacyFormTemplate();

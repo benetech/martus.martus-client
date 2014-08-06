@@ -170,11 +170,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 	{
 		ConfigInfo info = new ConfigInfo();
 		
-		assertFalse(info.hasCurrentFormTemplate());
+		assertFalse(info.hasLegacyFormTemplate());
 		setConfigToSampleData(info, ConfigInfo.VERSION);
-		assertFalse(info.hasCurrentFormTemplate());
+		assertFalse(info.hasLegacyFormTemplate());
 		info.setDidTemplateMigration(false);
-		assertTrue(info.hasCurrentFormTemplate());
+		assertTrue(info.hasLegacyFormTemplate());
 	}
 	
 	public void testRemoveHQKey() throws Exception
