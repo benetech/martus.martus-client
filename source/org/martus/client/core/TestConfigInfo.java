@@ -73,11 +73,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertFalse("A blank config Info can't be new", info.isNewVersion());
 	}
 	
-	public void testGetCurrentFormTemplate() throws Exception
+	public void testGetLegacyFormTemplate() throws Exception
 	{
 		ConfigInfo configInfo = new ConfigInfo();
 
-		FormTemplate emptyTemplate = configInfo.getCurrentFormTemplate();
+		FormTemplate emptyTemplate = configInfo.getLegacyFormTemplate();
 		assertEquals(StandardFieldSpecs.getDefaultTopSectionFieldSpecs().toXml(), emptyTemplate.getTopSectionXml());
 		assertEquals(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().toXml(), emptyTemplate.getBottomSectionXml());
 
@@ -95,7 +95,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		bottom.add(FieldSpec.createCustomField("tagbottom", "labelbottom", new FieldTypeNormal()));
 		configInfo.setCustomFieldBottomSectionXml(bottom.toXml());
 		
-		FormTemplate template = configInfo.getCurrentFormTemplate();
+		FormTemplate template = configInfo.getLegacyFormTemplate();
 		assertEquals(title, template.getTitle());
 		assertEquals(description, template.getDescription());
 		assertEquals(top.toXml(), template.getTopSectionXml());

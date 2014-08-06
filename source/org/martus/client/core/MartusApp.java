@@ -872,7 +872,7 @@ public class MartusApp
 		if(configInfo.hasCurrentFormTemplate())
 		{
 			MartusLogger.log("Migrating template from config");
-			FormTemplate template = configInfo.getCurrentFormTemplate();
+			FormTemplate template = configInfo.getLegacyFormTemplate();
 			if(template.getTitle().length() == 0)
 			{
 				template.setTitle(localization.getFieldLabel("NoFormTemplateTitle"));

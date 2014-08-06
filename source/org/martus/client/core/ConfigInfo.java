@@ -407,7 +407,7 @@ public class ConfigInfo
 		return false;
 	}
 
-	public FormTemplate getCurrentFormTemplate() throws Exception
+	public FormTemplate getLegacyFormTemplate() throws Exception
 	{
 		String title = getCurrentFormTemplateTitle();
 		String description = getCurrentFormTemplateDescription();
