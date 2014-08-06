@@ -628,9 +628,6 @@ public class MartusApp
 			FieldSpecCollection specsBottom = getCustomFieldSpecsBottomSection(configInfo);
 			removeSpaceLikeCharactersFromTags(specsBottom);
 			
-			FormTemplate template = configInfo.getCurrentFormTemplate();
-			store.setFormTemplate(template);
-			
 			String languageCode = localization.getCurrentLanguageCode();
 			if (languageCode != null && languageCode.equals(MtfAwareLocalization.BURMESE))
 				configInfo.setUseZawgyiFont(true);
