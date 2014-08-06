@@ -59,6 +59,7 @@ import org.martus.common.FieldCollection;
 import org.martus.common.FieldDeskKeys;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKeys;
+import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.BulletinFieldSpecs;
@@ -376,10 +377,12 @@ public class UiCustomFieldsDlg extends JDialog
 			try
 			{
 				exportTemplate(destFile, title, description, topXml, bottomXml);
+				mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
 			} 
 			catch (Exception e)
 			{
-				mainWindow.unexpectedErrorDlg(e);
+				MartusLogger.logException(e);
+				mainWindow.notifyDlg("ErrorExportingCustomizationTemplate");
 			}
 		}
 
@@ -389,15 +392,7 @@ public class UiCustomFieldsDlg extends JDialog
 			FieldSpecCollection bottom = FieldCollection.parseXml(bottomXml);
 			FormTemplate template = new FormTemplate(title, description, top, bottom);
 			MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
-			if(template.exportTemplate(securityTemp, destFile))
-			{
-				mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
-			}
-			else
-			{
-				displayXMLError(template);
-				mainWindow.notifyDlg("ErrorExportingCustomizationTemplate");
-			}
+			template.exportTemplate(securityTemp, destFile);
 		}
 	}
 
