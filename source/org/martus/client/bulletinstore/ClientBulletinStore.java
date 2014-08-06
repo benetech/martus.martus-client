@@ -45,6 +45,7 @@ import java.util.Vector;
 import java.util.zip.ZipFile;
 
 import org.martus.client.core.MartusClientXml;
+import org.martus.client.core.templates.FormTemplateManager;
 import org.martus.client.swingui.bulletintable.BulletinTableModel;
 import org.martus.common.BulletinSummary;
 import org.martus.common.FieldSpecCollection;
@@ -64,7 +65,6 @@ import org.martus.common.database.Database.RecordHiddenException;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FormTemplate;
-import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.Packet;
@@ -117,8 +117,7 @@ public class ClientBulletinStore extends BulletinStore
 		
 		initializeFolders();
 
-		topSectionFieldSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
-		bottomSectionFieldSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
+		initializeFormTemplateManager();
 		
 		loadCache();
 		
@@ -1539,6 +1538,23 @@ public class ClientBulletinStore extends BulletinStore
 		return (String[])tags.toArray(new String[0]);
 	}
 
+	public void saveNewFormTemplate(FormTemplate template) throws Exception
+	{
+		formTemplateManager.putTemplate(template);
+	}
+
+	private void initializeFormTemplateManager() throws Exception
+	{
+		File templateDirectory = getTemplateDirectory();
+		formTemplateManager = FormTemplateManager.createOrOpen(getSignatureGenerator(), templateDirectory);
+		setFormTemplate(formTemplateManager.getMartusDefaultTemplate());
+	}
+
+	private File getTemplateDirectory()
+	{
+		return new File(getStoreRootDir(), TEMPLATE_DIRECTORY_NAME);
+	}
+
 	public static final String SAVED_FOLDER = "%Sent";
 	public static final String DISCARDED_FOLDER = "%Discarded";
 	public static final String SEARCH_RESULTS_BULLETIN_FOLDER = "%SearchResults";
@@ -1563,6 +1579,8 @@ public class ClientBulletinStore extends BulletinStore
 	private static final String OBSOLETE_CACHE_FILE_NAME = "sfcache.dat";
 	private static final String FIELD_SPEC_CACHE_FILE_NAME = "fscache.dat";
 
+	public static final String TEMPLATE_DIRECTORY_NAME = "templates";
+
 	private Vector folders;
 	private BulletinFolder folderSaved;
 	private BulletinFolder folderDiscarded;
@@ -1574,4 +1592,5 @@ public class ClientBulletinStore extends BulletinStore
 	private FieldSpecCollection bottomSectionFieldSpecs;
 	PartialBulletinCache bulletinDataCache;
 	KnownFieldSpecCache knownFieldSpecCache;
+	private FormTemplateManager formTemplateManager;
 }

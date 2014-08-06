@@ -70,6 +70,11 @@ public class FormTemplateManager
 		return template;
 	}
 
+	public FormTemplate getMartusDefaultTemplate() throws Exception
+	{
+		return createDefaultFormTemplate();
+	}
+
 	public static FormTemplate createDefaultFormTemplate() throws Exception
 	{
 		FieldSpecCollection top = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
