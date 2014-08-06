@@ -78,8 +78,6 @@ public class UiSession
 		getUiState().setCurrentLanguage(getLocalization().getCurrentLanguageCode());
 		getUiState().setCurrentDateFormat(getLocalization().getCurrentDateFormatCode());
 		getUiState().setCurrentCalendarSystem(getLocalization().getCurrentCalendarSystem());
-		getUiState().setCurrentAdjustThaiLegacyDates(getLocalization().getAdjustThaiLegacyDates());
-		getUiState().setCurrentAdjustPersianLegacyDates(getLocalization().getAdjustPersianLegacyDates());
 	}
 
 	private void initializeCurrentLanguage()
