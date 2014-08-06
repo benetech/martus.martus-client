@@ -149,12 +149,16 @@ public class MockMartusApp extends MartusApp
 		if(getBackupFile(defaultKeyPair).exists())
 			throw new IOException("getBackupFile ");
 
-		File configInfo = getConfigInfoFile();
+		// NOTE: We need to delete the top-level configinfo file, 
+		// not the current account confinginfo file
+		File configInfo = getConfigInfoFileForAccount(getMartusDataRootDirectory());
 		configInfo.delete();
 		if(configInfo.exists())
 			throw new IOException("configInfo");
 
-		File sigFile = getConfigInfoSignatureFile();
+		// NOTE: We need to delete the top-level configinfo sig file,
+		// not the current account configinfo sig file
+		File sigFile = getConfigInfoSignatureFileForAccount(getMartusDataRootDirectory());
 		sigFile.delete();
 		if(sigFile.exists())
 			throw new IOException("sigFile");
@@ -168,6 +172,13 @@ public class MockMartusApp extends MartusApp
 		DirectoryUtils.deleteEntireDirectoryTree(accountsDir);
 		if(accountsDir.exists())
 			throw new IOException("AccountsDirectory");
+
+		// NOTE: We need to delete the top-level templates directory, 
+		// not the current account templates directory
+		File templatesDir = getTemplatesDirectoryForAccount(getMartusDataRootDirectory());
+		DirectoryUtils.deleteEntireDirectoryTree(templatesDir);
+		if(templatesDir.exists())
+			throw new IOException("TemplatesDirectory");
 
 		File rootDir = getMartusDataRootDirectory();
 		File hashFile = getUserNameHashFile(rootDir);
