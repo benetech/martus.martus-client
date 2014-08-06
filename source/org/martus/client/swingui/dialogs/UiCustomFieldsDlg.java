@@ -372,10 +372,10 @@ public class UiCustomFieldsDlg extends JDialog
 				return;
 			
 			MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
-			String formTemplateTitle = titleField.getText();
-			String formTemplateDescription = descriptionField.getText();
+			String title = titleField.getText();
+			String description = descriptionField.getText();
 			FormTemplate template = new FormTemplate();
-			if(template.exportTemplate(securityTemp, destFile, topXml, bottomXml, formTemplateTitle, formTemplateDescription))
+			if(template.exportTemplate(securityTemp, destFile, topXml, bottomXml, title, description))
 			{
 				mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
 			}
