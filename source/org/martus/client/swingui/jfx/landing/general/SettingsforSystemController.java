@@ -36,11 +36,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 
+import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
+import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.setupwizard.step2.FxSetupSettingsController;
 import org.martus.client.swingui.jfx.setupwizard.step6.FxSelectLanguageController;
+import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
@@ -58,13 +63,39 @@ public class SettingsforSystemController extends FxController
 	{
 		super.initialize(location, bundle);
 		useZawgyiFont.selectedProperty().setValue(getApp().getConfigInfo().getUseZawgyiFont());
-		initializeLanguageChoices();
-
+		MartusLocalization localization = getLocalization();
+		initializeLanguageChoices(localization);
+		initializeDateFormatChoices(localization);
+		initializeDateDilimeterChoices(localization);
+		initializeCalendarChoices(localization);
 	} 
 		
-	private void initializeLanguageChoices()
+	private void initializeCalendarChoices(MartusLocalization localization)
 	{
-		ObservableList<ChoiceItem> availableLanguages = FXCollections.observableArrayList(FxSelectLanguageController.getAvailableLanguages(getLocalization()));
+		ChoiceItem[] calendarChoices = localization.getAvailableCalendarSystems();
+		calendarType.setItems(FXCollections.observableArrayList(calendarChoices));
+		FxSetupSettingsController.selectItemByCode(calendarType, localization.getCurrentCalendarSystem());
+	}
+
+	private void initializeDateDilimeterChoices(MartusLocalization localization)
+	{
+		ObservableList<ChoiceItem> dateDelimeterChoices = FxSetupSettingsController.getDateDelimeterChoices(localization);
+		dateDelimiter.setItems(FXCollections.observableArrayList(dateDelimeterChoices));
+		String dateDelimeterCode = "" + localization.getDateDelimiter();
+		FxSetupSettingsController.selectItemByCode(dateDelimiter, dateDelimeterCode);
+	}
+
+	private void initializeDateFormatChoices(MartusLocalization localization)
+	{
+		ObservableList<ChoiceItem> dateFormatChoices = FxSetupSettingsController.getDateFormatChoices(localization);
+		dateFormat.setItems(FXCollections.observableArrayList(dateFormatChoices));
+		String dateFormatCode = localization.getMdyOrder();
+		FxSetupSettingsController.selectItemByCode(dateFormat, dateFormatCode);
+	}
+
+	private void initializeLanguageChoices(MartusLocalization localization)
+	{
+		ObservableList<ChoiceItem> availableLanguages = FXCollections.observableArrayList(FxSelectLanguageController.getAvailableLanguages(localization));
 		languageSelection.setItems(availableLanguages);
 		ChoiceItem currentLanguageChoiceItem = FxSelectLanguageController.findCurrentLanguageChoiceItem(getLocalization());
 		languageSelection.getSelectionModel().selectedItemProperty().addListener(new LanguageSelectionListener());
@@ -101,6 +132,7 @@ public class SettingsforSystemController extends FxController
 		try
 		{
 			getApp().saveConfigInfo();
+			getMainWindow().saveCurrentUiState();
 		} 
 		catch (SaveConfigInfoException e)
 		{
@@ -119,13 +151,23 @@ public class SettingsforSystemController extends FxController
 	@FXML
 	public void onSaveChanges()
 	{
-		getApp().getConfigInfo().setUseZawgyiFont(useZawgyiFont.selectedProperty().getValue());
+		MartusLocalization localization = getLocalization();
+		ConfigInfo configInfo = getApp().getConfigInfo();
+		configInfo.setUseZawgyiFont(useZawgyiFont.selectedProperty().getValue());
+		localization.setMdyOrder(dateFormat.getSelectionModel().getSelectedItem().getCode());
+		String delimiter = dateDelimiter.getSelectionModel().getSelectedItem().getCode();
+		localization.setDateDelimiter(delimiter.charAt(0));
+		
+		CurrentUiState uiState = getMainWindow().getCurrentUiState();
+		uiState.setCurrentDateFormat(localization.getCurrentDateFormatCode());
+		uiState.setCurrentCalendarSystem(calendarType.getSelectionModel().getSelectedItem().getCode());
+		
 		String selectedLanguageCode = languageSelection.getSelectionModel().getSelectedItem().getCode();
 		//TODO is this check really needed?
 		if (MtfAwareLocalization.isRecognizedLanguage(selectedLanguageCode))
 		{
 			getStage().doAction(new ActionDisplayMTFWarningsIfNecessary(getMainWindow(), selectedLanguageCode));
-			getLocalization().setCurrentLanguageCode(selectedLanguageCode);
+			localization.setCurrentLanguageCode(selectedLanguageCode);
 		}
 		save();
 	}
@@ -151,17 +193,14 @@ public class SettingsforSystemController extends FxController
 	private CheckBox useZawgyiFont;
 	
 	@FXML
-	private CheckBox useThaiPersianLegacyDates;
-	
-	@FXML
 	private ChoiceBox<ChoiceItem> languageSelection;
 	
 	@FXML
-	private ChoiceBox dateFormat;
+	private ChoiceBox<ChoiceItem> dateFormat;
 	
 	@FXML
-	private ChoiceBox dateDelimiter;
+	private ChoiceBox<ChoiceItem> dateDelimiter;
 	
 	@FXML
-	private ChoiceBox calendarType;
+	private ChoiceBox<ChoiceItem> calendarType;
 }
