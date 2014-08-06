@@ -70,7 +70,7 @@ public class FormTemplateManager
 		return template;
 	}
 
-	private FormTemplate createDefaultFormTemplate() throws Exception
+	public static FormTemplate createDefaultFormTemplate() throws Exception
 	{
 		FieldSpecCollection top = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		FieldSpecCollection bottom = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
