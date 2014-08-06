@@ -896,7 +896,12 @@ public class MartusApp
 
 	private File getTemplateDirectory()
 	{
-		return new File(getCurrentAccountDirectory(), TEMPLATE_DIRECTORY_NAME);
+		return getTemplatesDirectoryForAccount(getCurrentAccountDirectory());
+	}
+
+	protected File getTemplatesDirectoryForAccount(File accountDirectory)
+	{
+		return new File(accountDirectory, TEMPLATE_DIRECTORY_NAME);
 	}
 
 	public File getFxmlDirectory()
