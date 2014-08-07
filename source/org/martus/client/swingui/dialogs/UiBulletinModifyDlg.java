@@ -37,6 +37,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.HashMap;
 
+import javafx.application.Platform;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -48,11 +50,15 @@ import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiSession;
 import org.martus.client.swingui.WindowObscurer;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSection;
 import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
+import org.martus.client.swingui.jfx.generic.FxInSwingFrameStage;
+import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
+import org.martus.client.swingui.jfx.generic.FxRunner;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
@@ -86,6 +92,14 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			draft.addActionListener(this);
 			cancel = new UiButton(localization.getButtonLabel("cancel"));
 			cancel.addActionListener(this);
+
+			if(UiSession.isJavaFx)
+			{
+				headerStage = new FxHeaderStage(observerToUse);
+				FxRunner fxRunner = new FxRunner(headerStage);
+				fxRunner.setAbortImmediatelyOnError();
+				Platform.runLater(fxRunner);
+			}
 
 			addScrollerView();
 
@@ -132,7 +146,10 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		scroller.getVerticalScrollBar().setFocusable(false);
 		scroller.getViewport().add(view);
 		scroller.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(scroller, BorderLayout.CENTER);
+		if(headerStage != null)
+			getContentPane().add(headerStage, BorderLayout.BEFORE_FIRST_LINE);
 		getContentPane().invalidate();
 		getContentPane().doLayout();
 	}
@@ -347,18 +364,66 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			
 		cleanupAndExit();
 	}
+	
+	class FxHeaderShellController extends FxNonWizardShellController
+	{
+		public FxHeaderShellController(UiMainWindow mainWindowToUse)
+		{
+			super(mainWindowToUse);
+		}
 
+		@Override
+		public String getFxmlLocation()
+		{
+			return "landing/BulletinEditorHeader.fxml";
+		}
+	}
 
-	Bulletin bulletin;
-	UiMainWindow observer;
+	class FxHeaderStage extends FxInSwingFrameStage
+	{
+		public FxHeaderStage(UiMainWindow mainWindowToUse)
+		{
+			super(mainWindowToUse);
+			
+			shellController = new FxHeaderShellController(getMainWindow());
+			setShellController(shellController);
+			
+			// NOTE: setPreferredSize seems to be required, unfortunately
+			setPreferredSize(new Dimension(1, 40));
+		}
+		
+		@Override
+		public void close()
+		{
+			// NOTE: The header does not have permission to close this dialog
+		}
 
-	UiBulletinComponent view;
-	UiScrollPane scroller;
+		@Override
+		protected String getCssName()
+		{
+			return "Landing.css";
+		}
 
-	JButton send;
-	JButton draft;
-	JButton cancel;
+		@Override
+		public void showCurrentPage() throws Exception
+		{
+			loadAndShowShell();
+		}
+		
+		private FxHeaderShellController shellController;
+	}
 
-	boolean wasBulletinSavedFlag;
+	private Bulletin bulletin;
+	private UiMainWindow observer;
+
+	private UiBulletinComponent view;
+	private UiScrollPane scroller;
+	private FxHeaderStage headerStage;
+
+	private JButton send;
+	private JButton draft;
+	private JButton cancel;
+
+	private boolean wasBulletinSavedFlag;
 }
 
