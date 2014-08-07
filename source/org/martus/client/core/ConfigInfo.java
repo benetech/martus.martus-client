@@ -70,8 +70,8 @@ public class ConfigInfo
 	public void setAllHQKeysXml(String allHQKeysXml){this.deprecatedAllHQKeysXml = allHQKeysXml;}
 	public void setBulletinVersioningAware(boolean newBulletinVersioningAware){this.bulletinVersioningAware = newBulletinVersioningAware;}
 	public void setDefaultHQKeysXml(String defaultHQKeysXml){this.deprecatedDefaultHQKeysXml = defaultHQKeysXml;}
-	public void setCustomFieldTopSectionXml(String newXml)	{customFieldTopSectionXml = newXml;}
-	public void setCustomFieldBottomSectionXml(String newXml)	{customFieldBottomSectionXml = newXml;}
+	public void deprecatedSetCustomFieldTopSectionXml(String newXml)	{customFieldTopSectionXml = newXml;}
+	public void deprecatedSetCustomFieldBottomSectionXml(String newXml)	{customFieldBottomSectionXml = newXml;}
 	public void setUseZawgyiFont(boolean newUseZawgyiFont){useZawgyiFontProperty.setValue(newUseZawgyiFont);}
 	public void setFieldDeskKeysXml(String newFieldDeskKeysXml) { deprecatedFieldDeskKeysXml = newFieldDeskKeysXml; }
 	public void setBackedUpImprovedKeypairShare(boolean newBackedUpImprovedKeypairShare) {backedUpImprovedKeypairShare = newBackedUpImprovedKeypairShare;}
@@ -84,8 +84,8 @@ public class ConfigInfo
 		setMartusAccountAccessTokens(tokenList);
 	}
 	public void setContactKeysXml(String contactKeysXml){this.contactKeysXml = contactKeysXml;}
-	public void setCurrentFormTemplateTitle(String netFormTemplateTitle) { currentFormTemplateTitle = netFormTemplateTitle; }
-	public void setCurrentFormTemplateDescription(String netFormTemplateDescription) { currentFormTemplateDescription = netFormTemplateDescription; }
+	public void deprecatedSetCurrentFormTemplateTitle(String netFormTemplateTitle) { currentFormTemplateTitle = netFormTemplateTitle; }
+	public void deprecatedSetCurrentFormTemplateDescription(String netFormTemplateDescription) { currentFormTemplateDescription = netFormTemplateDescription; }
 	public void setIsNetworkOnline(boolean newState) { isNetworkOnline = newState; }
 	public void setFolderLabelCode(String newCode) { folderLabelCode = newCode; }
 	public void setFolderLabelCustomName(String newName) { folderLabelCustomName = newName; }

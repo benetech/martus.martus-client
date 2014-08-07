@@ -82,18 +82,18 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().toXml(), emptyTemplate.getBottomSectionXml());
 
 		String title = "title";
-		configInfo.setCurrentFormTemplateTitle(title);
+		configInfo.deprecatedSetCurrentFormTemplateTitle(title);
 		
 		String description = "description";
-		configInfo.setCurrentFormTemplateDescription(description);
+		configInfo.deprecatedSetCurrentFormTemplateDescription(description);
 		
 		FieldSpecCollection top = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		top.add(FieldSpec.createCustomField("tagtop", "labeltop", new FieldTypeNormal()));
-		configInfo.setCustomFieldTopSectionXml(top.toXml());
+		configInfo.deprecatedSetCustomFieldTopSectionXml(top.toXml());
 
 		FieldSpecCollection bottom = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		bottom.add(FieldSpec.createCustomField("tagbottom", "labelbottom", new FieldTypeNormal()));
-		configInfo.setCustomFieldBottomSectionXml(bottom.toXml());
+		configInfo.deprecatedSetCustomFieldBottomSectionXml(bottom.toXml());
 		
 		FormTemplate template = configInfo.getLegacyFormTemplate();
 		assertEquals(title, template.getTitle());
@@ -336,8 +336,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 	public void testLongStrings() throws Exception
 	{
 		ConfigInfo info = new ConfigInfo();
-		info.setCustomFieldTopSectionXml(longString);
-		info.setCustomFieldBottomSectionXml(longString);
+		info.deprecatedSetCustomFieldTopSectionXml(longString);
+		info.deprecatedSetCustomFieldBottomSectionXml(longString);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		info.save(out);
 		ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
@@ -375,16 +375,16 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setAllHQKeysXml(sampleAllHQKeysXml);
 		info.setBulletinVersioningAware(sampleBulletinVersioningAware);
 		info.setDefaultHQKeysXml(sampleDefaultHQKeysXml);
-		info.setCustomFieldTopSectionXml(sampleCustomFieldTopSectionXml);
-		info.setCustomFieldBottomSectionXml(sampleCustomFieldBottomSectionXml);
+		info.deprecatedSetCustomFieldTopSectionXml(sampleCustomFieldTopSectionXml);
+		info.deprecatedSetCustomFieldBottomSectionXml(sampleCustomFieldBottomSectionXml);
 		info.setUseZawgyiFont(sampleUseZawgyi);
 		info.setFieldDeskKeysXml(sampleFieldDeskKeysXml);
 		info.setBackedUpImprovedKeypairShare(sampleBackedUpImprovedKeypairShare);
 		info.setUseInternalTor(sampleUseInternalTor);
 		info.setMartusAccountAccessTokens(sampleMartusAccountAccessTokens);
 		info.setContactKeysXml(sampleContactKeysXml);
-		info.setCurrentFormTemplateTitle(sampleCurrentFormTemplateTitle);
-		info.setCurrentFormTemplateDescription(sampleCurrentFormTemplateDescription);
+		info.deprecatedSetCurrentFormTemplateTitle(sampleCurrentFormTemplateTitle);
+		info.deprecatedSetCurrentFormTemplateDescription(sampleCurrentFormTemplateDescription);
 		info.setIsNetworkOnline(sampleIsNetworkOnline);
 		info.setFolderLabelCode(sampleFolderLabelCode);
 		info.setFolderLabelCustomName(sampleFolderLabelCustomName);
