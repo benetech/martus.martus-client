@@ -615,11 +615,6 @@ public class MartusApp
 			configInfo = ConfigInfo.load(plainTextConfigInputStream);
 			plainTextConfigInputStream.close();
 			
-			FieldSpecCollection specsTop = getCustomFieldSpecsTopSection(configInfo);
-			removeSpaceLikeCharactersFromTags(specsTop);
-			FieldSpecCollection specsBottom = getCustomFieldSpecsBottomSection(configInfo);
-			removeSpaceLikeCharactersFromTags(specsBottom);
-			
 			String languageCode = localization.getCurrentLanguageCode();
 			if (languageCode != null && languageCode.equals(MtfAwareLocalization.BURMESE))
 				configInfo.setUseZawgyiFont(true);
