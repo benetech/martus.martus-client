@@ -71,9 +71,9 @@ public class SettingsforServerController extends FxController
 
 	private void initializeServerInfo()
 	{
-		String publicKey = getApp().getConfigInfo().getServerPublicKey();
+		serverPublicKey = getApp().getConfigInfo().getServerPublicKey();
 		String ipAddress = getApp().getConfigInfo().getServerName();
-		updateServerInfo(ipAddress, publicKey);
+		updateServerInfo(ipAddress, serverPublicKey);
 	}
 
 	private void updateServerInfo(String ipAddress, String publicKey)
@@ -165,7 +165,17 @@ public class SettingsforServerController extends FxController
 		boolean askComplianceAcceptance = !ipAddress.equals(FxSetupStorageServerController.getDefaultServerIp());
 		if(attemptToConnect(ipAddress, publicCode, askComplianceAcceptance))
 		{
-			//TODO SAVE Changes
+			MartusApp app = getApp();
+			app.getConfigInfo().setServerPublicKey(serverPublicKey);
+			app.getConfigInfo().setServerName(ipAddress);
+			try
+			{
+				app.saveConfigInfo();
+			} 
+			catch (SaveConfigInfoException e)
+			{
+				getStage().logAndNotifyUnexpectedError(e);
+			}
 		}
 	}
 	
@@ -179,25 +189,20 @@ public class SettingsforServerController extends FxController
 			GetServerPublicKeyTask getPublicKeyTask = new GetServerPublicKeyTask(getApp(), serverIPAddress);
 			showTimeoutDialog(getLocalization().getFieldLabel("GettingServerInformation"), getPublicKeyTask);
 			
-			String serverPublicKey = getPublicKeyTask.getPublicKey();
-			if(!FxAdvancedServerStorageSetupController.doesPublicCodeMatch(serverPublicKey, publicCode))
+			String newServerPublicKey = getPublicKeyTask.getPublicKey();
+			if(!FxAdvancedServerStorageSetupController.doesPublicCodeMatch(newServerPublicKey, publicCode))
 			{
 				showNotifyDialog("ServerCodeWrong");
 				return false;
 			}
-			ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, serverPublicKey, getApp().getTransport());
+			ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, newServerPublicKey, getApp().getTransport());
 			ConnectToServerTask connectToServerTask = new ConnectToServerTask(getApp(), gateway, "");
 			MartusLocalization localization = getLocalization();
 			String connectingToServerMsg = localization.getFieldLabel("AttemptToConnectToServerAndGetCompliance");
 			showTimeoutDialog(connectingToServerMsg, connectToServerTask);
 			if(!connectToServerTask.isAvailable())
 			{
-				String serverNotRespondingSaveConfigurationTitle = localization.getWindowTitle("ServerNotRespondingSaveConfiguration");
-				String serverNotRespondingSaveConfigurationMessage = localization.getFieldLabel("ServerNotRespondingSaveConfiguration");
-				if(showConfirmationDialog(serverNotRespondingSaveConfigurationTitle, serverNotRespondingSaveConfigurationMessage))
-				{
-					return false;
-				}
+				showNotifyDialog("AdvanceServerNotResponding");
 				return false; 
 			}
 			if(!connectToServerTask.isAllowedToUpload())
@@ -229,7 +234,7 @@ public class SettingsforServerController extends FxController
 				}
 			}
 
-			app.setServerInfo(serverIPAddress, serverPublicKey, complianceStatement);
+			app.setServerInfo(serverIPAddress, newServerPublicKey, complianceStatement);
 			
 			app.getStore().clearOnServerLists();
 			
@@ -237,6 +242,7 @@ public class SettingsforServerController extends FxController
 			app.getStore().clearOnServerLists();
 			getMainWindow().repaint();
 			getMainWindow().setStatusMessageReady();
+			serverPublicKey = newServerPublicKey;
 			return true;
 		}
 		catch(UserCancelledException e)
@@ -250,7 +256,7 @@ public class SettingsforServerController extends FxController
 		catch (ServerNotAvailableException e)
 		{
 			MartusLogger.logException(e);
-			showNotifyDialog("ServerNotResponding");
+			showNotifyDialog("AdvanceServerNotResponding");
 		}
 		catch (Exception e)
 		{
@@ -294,5 +300,6 @@ public class SettingsforServerController extends FxController
 	@FXML
 	private CheckBox automaticallyDownloadFromServer;
 	
+	private String serverPublicKey;
 	
 }
