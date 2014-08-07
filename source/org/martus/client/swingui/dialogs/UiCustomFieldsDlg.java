@@ -121,22 +121,22 @@ public class UiCustomFieldsDlg extends JDialog
 		Component buttonsToAdd[] = {vBox, Box.createHorizontalGlue(), ok, cancel, help};  
 		Utilities.addComponentsRespectingOrientation(buttons, buttonsToAdd);
 		
-		topSectionXmlTextArea = createXMLTextArea(bulletinFieldSpecs.getTopSectionSpecs());
+		topSectionXmlTextArea = createXMLTextArea(bulletinFieldSpecs.getTopFields());
 		topSectionXmlTextArea.setCaretPosition(0);
 		UiScrollPane topSectionTextPane = new UiScrollPane(topSectionXmlTextArea);
 
-		bottomSectionXmlTextArea = createXMLTextArea(bulletinFieldSpecs.getBottomSectionSpecs());
+		bottomSectionXmlTextArea = createXMLTextArea(bulletinFieldSpecs.getBottomFields());
 		bottomSectionXmlTextArea.setCaretPosition(0);
 		UiScrollPane bottomSectionTextPane = new UiScrollPane(bottomSectionXmlTextArea);
 
 		UiLabel titleLabel = new UiLabel(localization.getFieldLabel("inputCustomFieldsTitle"));
 		titleField = new UiTextField();
-		titleField.setText(bulletinFieldSpecs.getTitleOfSpecs());
+		titleField.setText(bulletinFieldSpecs.getTitle());
 		Box titleBox = createLabelAndTextFieldBox(titleLabel, titleField);
 
 		UiLabel descriptionLabel = new UiLabel(localization.getFieldLabel("inputCustomFieldsDescription"));
 		descriptionField = new UiTextField();
-		descriptionField.setText(bulletinFieldSpecs.getDescriptionOfSpecs());
+		descriptionField.setText(bulletinFieldSpecs.getDescription());
 		Box descriptionBox = createLabelAndTextFieldBox(descriptionLabel, descriptionField);
 		
 		JPanel customFieldsPanel = new JPanel();
