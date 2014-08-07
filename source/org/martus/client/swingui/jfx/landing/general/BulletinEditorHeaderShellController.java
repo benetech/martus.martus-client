@@ -38,6 +38,6 @@ public class BulletinEditorHeaderShellController extends FxNonWizardShellControl
 	@Override
 	public String getFxmlLocation()
 	{
-		return "landing/BulletinEditorHeader.fxml";
+		return "landing/general/BulletinEditorHeader.fxml";
 	}
 }
