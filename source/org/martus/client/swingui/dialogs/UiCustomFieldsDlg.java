@@ -227,6 +227,8 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
+			titleResult = "";
+			descriptionResult = "";
 			topSectionXmlResult = "";
 			bottomSectionXmlResult = "";
 			dispose();
