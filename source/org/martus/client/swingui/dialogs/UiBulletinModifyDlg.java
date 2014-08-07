@@ -56,9 +56,8 @@ import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSection;
 import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
-import org.martus.client.swingui.jfx.generic.FxInSwingFrameStage;
 import org.martus.client.swingui.jfx.generic.FxRunner;
-import org.martus.client.swingui.jfx.landing.general.BulletinEditorHeaderShellController;
+import org.martus.client.swingui.jfx.landing.general.BulletinEditorHeaderStage;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
@@ -365,40 +364,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		cleanupAndExit();
 	}
 	
-	public static class BulletinEditorHeaderStage extends FxInSwingFrameStage
-	{
-		public BulletinEditorHeaderStage(UiMainWindow mainWindowToUse)
-		{
-			super(mainWindowToUse);
-			
-			shellController = new BulletinEditorHeaderShellController(getMainWindow());
-			setShellController(shellController);
-			
-			// NOTE: setPreferredSize seems to be required, unfortunately
-			setPreferredSize(new Dimension(1, 40));
-		}
-		
-		@Override
-		public void close()
-		{
-			// NOTE: The header does not have permission to close this dialog
-		}
-
-		@Override
-		protected String getCssName()
-		{
-			return "Landing.css";
-		}
-
-		@Override
-		public void showCurrentPage() throws Exception
-		{
-			loadAndShowShell();
-		}
-		
-		private BulletinEditorHeaderShellController shellController;
-	}
-
 	private Bulletin bulletin;
 	private UiMainWindow observer;
 
