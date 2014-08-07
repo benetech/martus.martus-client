@@ -666,6 +666,8 @@ public class EnglishStrings
 "field:notifyChartCompletedcause=Printing complete",
 "wintitle:notifyChartUnknownError=Charts",
 "field:notifyChartUnknownErrorcause=An unknown error has occurred",
+"wintitle:notifyRestartMartusForLanguageChange=Martus Restart Required",
+"field:notifyRestartMartusForLanguageChangecause=Please restart martus to see the language you have chosen.",
 
 "wintitle:PreparingBulletins=Preparing Bulletins...",
 "field:PreparingBulletins=Preparing Bulletins...",
