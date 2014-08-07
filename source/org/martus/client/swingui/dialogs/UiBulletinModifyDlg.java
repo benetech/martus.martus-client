@@ -365,7 +365,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		cleanupAndExit();
 	}
 	
-	class BulletinEditorHeaderShellController extends FxNonWizardShellController
+	static class BulletinEditorHeaderShellController extends FxNonWizardShellController
 	{
 		public BulletinEditorHeaderShellController(UiMainWindow mainWindowToUse)
 		{
@@ -379,7 +379,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		}
 	}
 
-	class BulletinEditorHeaderStage extends FxInSwingFrameStage
+	static class BulletinEditorHeaderStage extends FxInSwingFrameStage
 	{
 		public BulletinEditorHeaderStage(UiMainWindow mainWindowToUse)
 		{
