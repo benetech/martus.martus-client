@@ -988,14 +988,19 @@ public class ClientBulletinStore extends BulletinStore
 		return new File(AccountDir, "MartusFolders.dat");
 	}
 
+	private FormTemplate getCurrentFormTemplate()
+	{
+		return formTemplateManager.getCurrentFormTemplate();
+	}
+
 	public FieldSpecCollection getBottomSectionFieldSpecs()
 	{
-		return bottomSectionFieldSpecs;
+		return getCurrentFormTemplate().getBottomFields();
 	}
 
 	public FieldSpecCollection getTopSectionFieldSpecs()
 	{
-		return topSectionFieldSpecs;
+		return getCurrentFormTemplate().getTopFields();
 	}
 
 	public synchronized BulletinFolder createOrFindFolder(String name)
@@ -1100,10 +1105,9 @@ public class ClientBulletinStore extends BulletinStore
 		createSystemFolders();
 	}
 	
-	public void setFormTemplate(FormTemplate newFormTemplate)
+	public void setFormTemplate(String formTemplateTitle) throws Exception
 	{
-		topSectionFieldSpecs = newFormTemplate.getTopFields();
-		bottomSectionFieldSpecs = newFormTemplate.getBottomFields();
+		formTemplateManager.setCurrentFormTemplate(formTemplateTitle);
 	}
 	
 	public int quarantineUnreadableBulletins()
@@ -1547,7 +1551,6 @@ public class ClientBulletinStore extends BulletinStore
 	{
 		File templateDirectory = getTemplateDirectory();
 		formTemplateManager = FormTemplateManager.createOrOpen(getSignatureGenerator(), templateDirectory);
-		setFormTemplate(formTemplateManager.getMartusDefaultTemplate());
 	}
 
 	private File getTemplateDirectory()
@@ -1588,8 +1591,6 @@ public class ClientBulletinStore extends BulletinStore
 	private BulletinFolder folderSealedOutbox;
 	private boolean loadedLegacyFolders;
 
-	private FieldSpecCollection topSectionFieldSpecs;
-	private FieldSpecCollection bottomSectionFieldSpecs;
 	PartialBulletinCache bulletinDataCache;
 	KnownFieldSpecCache knownFieldSpecCache;
 	private FormTemplateManager formTemplateManager;

@@ -50,6 +50,11 @@ public class FormTemplateManager
 		return formTemplateManager;
 	}
 	
+	public FormTemplate getCurrentFormTemplate()
+	{
+		return cachedCurrentFormTemplate;
+	}
+
 	public void putTemplate(FormTemplate template) throws Exception
 	{
 		if(template.getTitle().length() == 0)
@@ -104,6 +109,23 @@ public class FormTemplateManager
 		return available;
 	}
 
+	public void setCurrentFormTemplate(String newCurrentTitle) throws Exception
+	{
+		if(!doesTemplateExist(newCurrentTitle))
+			throw new FileNotFoundException("No such template: " + newCurrentTitle);
+		
+		cachedCurrentFormTemplate = getTemplate(newCurrentTitle);
+	}
+	
+	private boolean doesTemplateExist(String title)
+	{
+		if(title.length() == 0)
+			return true;
+		
+		File file = getTemplateFile(title);
+		return (file.exists());
+	}
+
 	private FormTemplateManager(MartusCrypto cryptoToUse, File directoryToUse) throws Exception
 	{
 		if(!directoryToUse.isDirectory())
@@ -111,6 +133,7 @@ public class FormTemplateManager
 		
 		security = cryptoToUse;
 		directory = directoryToUse;
+		cachedCurrentFormTemplate = createDefaultFormTemplate();
 	}
 	
 	private FormTemplate loadEncryptedTemplate(File dataFile) throws Exception
@@ -171,4 +194,5 @@ public class FormTemplateManager
 	
 	private MartusCrypto security;
 	private File directory;
+	private FormTemplate cachedCurrentFormTemplate;
 }

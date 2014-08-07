@@ -35,7 +35,6 @@ import org.apache.velocity.VelocityContext;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.SortableBulletinList;
-import org.martus.client.core.templates.FormTemplateManager;
 import org.martus.client.test.MockMartusApp;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.LegacyCustomFields;
@@ -279,9 +278,9 @@ public class TestReportRunner extends TestCaseEnhanced
 		dropdown.setLabel("Dropdown");
 		dropdown.addReusableChoicesCode(choices.getCode());
 		specs.add(dropdown);
-		FormTemplate template = FormTemplateManager.createDefaultFormTemplate();
-		template.setTopFields(specs);
-		app.getStore().setFormTemplate(template);
+		FormTemplate template = new FormTemplate("title", "", specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		app.getStore().saveNewFormTemplate(template);
+		app.getStore().setFormTemplate(template.getTitle());
 		
 		Bulletin b1 = app.createBulletin();
 		b1.set(dropdown.getTag(), "a");

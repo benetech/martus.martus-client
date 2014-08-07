@@ -870,14 +870,6 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("should have reloaded", "blah", appWithAccount.getConfigInfo().getAuthor());
 		assertEquals("should have reloaded Top section", xmlTop, appWithAccount.getConfigInfo().getCustomFieldTopSectionXml());
 		assertEquals("should have reloaded Bottom section", xmlBottom, appWithAccount.getConfigInfo().getCustomFieldBottomSectionXml());
-		FieldSpecCollection topSpecsFromStore = appWithAccount.getStore().getTopSectionFieldSpecs();
-		fields = topSpecsFromStore;
-		String xmlTopFromStore = fields.toXml();
-		assertEquals("Store doesn't have updated Top section?", xmlTop, xmlTopFromStore);
-		FieldSpecCollection bottomSpecsFromStore = appWithAccount.getStore().getBottomSectionFieldSpecs();
-		fields = bottomSpecsFromStore;
-		String xmlBottomFromStore = fields.toXml();
-		assertEquals("store doesn't have updated Bottom section?", xmlBottom, xmlBottomFromStore);
 
 		File sigFile = appWithAccount.getConfigInfoSignatureFile();
 		sigFile.delete();
@@ -917,7 +909,6 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("", emptyConfigInfo.getCustomFieldTopSectionXml());
 		assertEquals("", emptyConfigInfo.getCustomFieldBottomSectionXml());
 		assertEquals("", emptyConfigInfo.getCustomFieldLegacySpecs());
-		store.setFormTemplate(configInfo.getLegacyFormTemplate());
 		
 		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		FieldCollection fields = new FieldCollection(topSpecs);
