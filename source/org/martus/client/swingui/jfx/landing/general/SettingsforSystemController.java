@@ -96,9 +96,9 @@ public class SettingsforSystemController extends FxController
 	{
 		ObservableList<ChoiceItem> availableLanguages = FXCollections.observableArrayList(FxSelectLanguageController.getAvailableLanguages(localization));
 		languageSelection.setItems(availableLanguages);
-		ChoiceItem currentLanguageChoiceItem = FxSelectLanguageController.findCurrentLanguageChoiceItem(getLocalization());
+		originalLanguageChoiceItem = FxSelectLanguageController.findCurrentLanguageChoiceItem(getLocalization());
 		languageSelection.getSelectionModel().selectedItemProperty().addListener(new LanguageSelectionListener());
-		languageSelection.getSelectionModel().select(currentLanguageChoiceItem);
+		languageSelection.getSelectionModel().select(originalLanguageChoiceItem);
 	}
 	
 	class LanguageSelectionListener implements ChangeListener<ChoiceItem>
@@ -165,6 +165,8 @@ public class SettingsforSystemController extends FxController
 		//TODO is this check really needed?
 		if (MtfAwareLocalization.isRecognizedLanguage(selectedLanguageCode))
 		{
+			if(!originalLanguageChoiceItem.getCode().equals(selectedLanguageCode))
+				showNotifyDialog("RestartMartusForLanguageChange");
 			getStage().doAction(new ActionDisplayMTFWarningsIfNecessary(getMainWindow(), selectedLanguageCode));
 			localization.setCurrentLanguageCode(selectedLanguageCode);
 		}
@@ -193,6 +195,7 @@ public class SettingsforSystemController extends FxController
 	
 	@FXML
 	private ChoiceBox<ChoiceItem> languageSelection;
+	private ChoiceItem originalLanguageChoiceItem;
 	
 	@FXML
 	private ChoiceBox<ChoiceItem> dateFormat;
@@ -202,4 +205,5 @@ public class SettingsforSystemController extends FxController
 	
 	@FXML
 	private ChoiceBox<ChoiceItem> calendarType;
+
 }
