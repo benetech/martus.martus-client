@@ -34,7 +34,6 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiCustomFieldsDlg;
 import org.martus.common.FieldCollection;
-import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.StandardFieldSpecs;
@@ -112,17 +111,12 @@ public class ActionMenuCustomFields extends UiMenuAction
 				{
 					newTopSectionSpecs = FieldCollection.parseXml(newTopSectionCustomFieldXml);
 					newBottomSectionSpecs = FieldCollection.parseXml(newBottomSectionCustomFieldXml);
+					return new FormTemplate(newTitle, newDescription, newTopSectionSpecs, newBottomSectionSpecs);
 				}
-				catch(CustomFieldsParseException e)
+				catch(Exception e)
 				{
-					e.printStackTrace();
+					getMainWindow().unexpectedErrorDlg(e);
 				}
-				FormTemplate newTemplate = new FormTemplate();
-				newTemplate.setTopFields(newTopSectionSpecs);
-				newTemplate.setBottomFields(newBottomSectionSpecs);
-				newTemplate.setTitle(newTitle);
-				newTemplate.setDescription(newDescription);
-				return newTemplate;
 			}
 		}
 	}
