@@ -34,6 +34,7 @@ public class FxMainStage extends FxInSwingFrameStage
 	public FxMainStage(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+		setWindow(getMainWindow());
 		
 		shellController = new FxLandingShellController(getMainWindow());
 		setShellController(shellController);
