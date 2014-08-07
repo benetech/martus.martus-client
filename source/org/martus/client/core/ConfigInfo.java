@@ -115,8 +115,8 @@ public class ConfigInfo
 	public String getAllHQKeysXml()		{return deprecatedAllHQKeysXml;}
 	public boolean isBulletinVersioningAware()	{return bulletinVersioningAware;}
 	public String getDefaultHQKeysXml()		{return deprecatedDefaultHQKeysXml;}
-	public String getCustomFieldTopSectionXml()	{return customFieldTopSectionXml;}
-	public String getCustomFieldBottomSectionXml() {return customFieldBottomSectionXml;}
+	public String getNoLongerUsedCustomFieldTopSectionXml()	{return customFieldTopSectionXml;}
+	public String getNoLongerUsedCustomFieldBottomSectionXml() {return customFieldBottomSectionXml;}
 	public boolean getUseZawgyiFont() {return useZawgyiFontProperty.getValue();}
 	public Property<Boolean> getUseZawgyiFontProperty() {return useZawgyiFontProperty;}
 	public String getFieldDeskKeysXml() { return deprecatedFieldDeskKeysXml; }
@@ -137,8 +137,8 @@ public class ConfigInfo
 		return (MartusAccountAccessToken)martusAccountAccessTokens.get(0);
 	} 
 	public String getContactKeysXml() {return contactKeysXml;}
-	public String getCurrentFormTemplateTitle()  { return currentFormTemplateTitle;}
-	public String getCurrentFormTemplateDescription()  { return currentFormTemplateDescription;}
+	public String getNoLongerUsedCurrentFormTemplateTitle()  { return currentFormTemplateTitle;}
+	public String getNoLongerUsedCurrentFormTemplateDescription()  { return currentFormTemplateDescription;}
 	public boolean isNetworkOnline() { return isNetworkOnline; }
 	public String getFolderLabelCode() { return folderLabelCode; }
 	public String getFolderLabelCustomName() { return folderLabelCustomName; }
@@ -395,13 +395,13 @@ public class ConfigInfo
 		if(getDidTemplateMigration())
 			return false;
 		
-		if(getCurrentFormTemplateTitle().length() > 0)
+		if(getNoLongerUsedCurrentFormTemplateTitle().length() > 0)
 			return true;
-		if(getCurrentFormTemplateDescription().length() > 0)
+		if(getNoLongerUsedCurrentFormTemplateDescription().length() > 0)
 			return true;
-		if(getCustomFieldTopSectionXml().length() > 0)
+		if(getNoLongerUsedCustomFieldTopSectionXml().length() > 0)
 			return true;
-		if(getCustomFieldBottomSectionXml().length() > 0)
+		if(getNoLongerUsedCustomFieldBottomSectionXml().length() > 0)
 			return true;
 		
 		return false;
@@ -409,8 +409,8 @@ public class ConfigInfo
 
 	public FormTemplate getLegacyFormTemplate() throws Exception
 	{
-		String title = getCurrentFormTemplateTitle();
-		String description = getCurrentFormTemplateDescription();
+		String title = getNoLongerUsedCurrentFormTemplateTitle();
+		String description = getNoLongerUsedCurrentFormTemplateDescription();
 		FieldSpecCollection top = MartusApp.getCustomFieldSpecsTopSection(this);
 		FieldSpecCollection bottom = MartusApp.getCustomFieldSpecsBottomSection(this);
 		FormTemplate existing = new FormTemplate(title, description, top, bottom);

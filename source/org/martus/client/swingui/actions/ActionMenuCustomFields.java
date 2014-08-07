@@ -58,8 +58,8 @@ public class ActionMenuCustomFields extends UiMenuAction
 		existingSpecs.setTopSectionSpecs(store.getTopSectionFieldSpecs());
 		existingSpecs.setBottomSectionSpecs(store.getBottomSectionFieldSpecs());
 		ConfigInfo configInfo = app.getConfigInfo();
-		existingSpecs.setTitleOfSpecs(configInfo.getCurrentFormTemplateTitle());
-		existingSpecs.setDescriptionOfSpecs(configInfo.getCurrentFormTemplateDescription());
+		existingSpecs.setTitleOfSpecs(configInfo.getNoLongerUsedCurrentFormTemplateTitle());
+		existingSpecs.setDescriptionOfSpecs(configInfo.getNoLongerUsedCurrentFormTemplateDescription());
 		BulletinFieldSpecs newSpecs = getCustomizedFieldsFromUser(existingSpecs);
 		if(newSpecs == null)
 			return;
