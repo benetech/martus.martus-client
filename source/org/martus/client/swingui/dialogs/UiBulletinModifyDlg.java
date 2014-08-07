@@ -365,7 +365,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		cleanupAndExit();
 	}
 	
-	static class BulletinEditorHeaderStage extends FxInSwingFrameStage
+	public static class BulletinEditorHeaderStage extends FxInSwingFrameStage
 	{
 		public BulletinEditorHeaderStage(UiMainWindow mainWindowToUse)
 		{
