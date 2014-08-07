@@ -65,7 +65,7 @@ public class SettingsforSystemController extends FxController
 		MartusLocalization localization = getLocalization();
 		initializeLanguageChoices(localization);
 		initializeDateFormatChoices(localization);
-		initializeDateDilimeterChoices(localization);
+		initializeDateDelimiterChoices(localization);
 		initializeCalendarChoices(localization);
 	} 
 		
@@ -76,7 +76,7 @@ public class SettingsforSystemController extends FxController
 		FxSetupSettingsController.selectItemByCode(calendarType, localization.getCurrentCalendarSystem());
 	}
 
-	private void initializeDateDilimeterChoices(MartusLocalization localization)
+	private void initializeDateDelimiterChoices(MartusLocalization localization)
 	{
 		ObservableList<ChoiceItem> dateDelimeterChoices = FxSetupSettingsController.getDateDelimeterChoices(localization);
 		dateDelimiter.setItems(FXCollections.observableArrayList(dateDelimeterChoices));
