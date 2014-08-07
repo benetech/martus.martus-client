@@ -554,6 +554,7 @@ public class MartusApp
 	public void updateFormTemplate(FormTemplate updatedTemplate) throws Exception
 	{
 		store.saveNewFormTemplate(updatedTemplate);
+		store.selectFormTemplateAsDefault(updatedTemplate.getTitle());
 	}
 
 	public void saveConfigInfo() throws SaveConfigInfoException

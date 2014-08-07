@@ -988,7 +988,7 @@ public class ClientBulletinStore extends BulletinStore
 		return new File(AccountDir, "MartusFolders.dat");
 	}
 
-	private FormTemplate getCurrentFormTemplate()
+	public FormTemplate getCurrentFormTemplate()
 	{
 		return formTemplateManager.getCurrentFormTemplate();
 	}
@@ -1550,6 +1550,11 @@ public class ClientBulletinStore extends BulletinStore
 	public void saveNewFormTemplate(FormTemplate template) throws Exception
 	{
 		formTemplateManager.putTemplate(template);
+	}
+
+	public void selectFormTemplateAsDefault(String title) throws Exception
+	{
+		formTemplateManager.setCurrentFormTemplate(title);
 	}
 
 	private void initializeFormTemplateManager() throws Exception
