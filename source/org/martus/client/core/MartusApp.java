@@ -553,14 +553,6 @@ public class MartusApp
 
 	public void updateFormTemplate(FormTemplate updatedTemplate) throws Exception
 	{
-
-		configInfo.setCustomFieldTopSectionXml(updatedTemplate.getTopSectionXml());
-		configInfo.setCustomFieldBottomSectionXml(updatedTemplate.getBottomSectionXml());
-		configInfo.setCurrentFormTemplateTitle(updatedTemplate.getTitle());
-		configInfo.setCurrentFormTemplateDescription(updatedTemplate.getDescription());
-		configInfo.setCustomFieldLegacySpecs(MartusConstants.deprecatedCustomFieldSpecs);
-		saveConfigInfo();
-
 		store.saveNewFormTemplate(updatedTemplate);
 	}
 
@@ -622,11 +614,6 @@ public class MartusApp
 			ByteArrayInputStream plainTextConfigInputStream = new ByteArrayInputStream(plainTextConfigInfo);
 			configInfo = ConfigInfo.load(plainTextConfigInputStream);
 			plainTextConfigInputStream.close();
-			
-			FieldSpecCollection specsTop = getCustomFieldSpecsTopSection(configInfo);
-			removeSpaceLikeCharactersFromTags(specsTop);
-			FieldSpecCollection specsBottom = getCustomFieldSpecsBottomSection(configInfo);
-			removeSpaceLikeCharactersFromTags(specsBottom);
 			
 			String languageCode = localization.getCurrentLanguageCode();
 			if (languageCode != null && languageCode.equals(MtfAwareLocalization.BURMESE))
@@ -786,7 +773,7 @@ public class MartusApp
 
 	public static FieldSpecCollection getCustomFieldSpecsTopSection(ConfigInfo configInfo) throws Exception
 	{
-		String xmlSpecs = configInfo.getCustomFieldTopSectionXml();
+		String xmlSpecs = configInfo.getNoLongerUsedCustomFieldTopSectionXml();
 		if(xmlSpecs.length() > 0)
 			return FieldCollection.parseXml(xmlSpecs);
 			
@@ -799,7 +786,7 @@ public class MartusApp
 
 	public static FieldSpecCollection getCustomFieldSpecsBottomSection(ConfigInfo configInfo) throws CustomFieldsParseException
 	{
-		String xmlSpecs = configInfo.getCustomFieldBottomSectionXml();
+		String xmlSpecs = configInfo.getNoLongerUsedCustomFieldBottomSectionXml();
 		if(xmlSpecs.length() > 0)
 			return FieldCollection.parseXml(xmlSpecs);
 			

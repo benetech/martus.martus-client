@@ -82,18 +82,18 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().toXml(), emptyTemplate.getBottomSectionXml());
 
 		String title = "title";
-		configInfo.setCurrentFormTemplateTitle(title);
+		configInfo.deprecatedSetCurrentFormTemplateTitle(title);
 		
 		String description = "description";
-		configInfo.setCurrentFormTemplateDescription(description);
+		configInfo.deprecatedSetCurrentFormTemplateDescription(description);
 		
 		FieldSpecCollection top = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		top.add(FieldSpec.createCustomField("tagtop", "labeltop", new FieldTypeNormal()));
-		configInfo.setCustomFieldTopSectionXml(top.toXml());
+		configInfo.deprecatedSetCustomFieldTopSectionXml(top.toXml());
 
 		FieldSpecCollection bottom = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		bottom.add(FieldSpec.createCustomField("tagbottom", "labelbottom", new FieldTypeNormal()));
-		configInfo.setCustomFieldBottomSectionXml(bottom.toXml());
+		configInfo.deprecatedSetCustomFieldBottomSectionXml(bottom.toXml());
 		
 		FormTemplate template = configInfo.getLegacyFormTemplate();
 		assertEquals(title, template.getTitle());
@@ -336,14 +336,14 @@ public class TestConfigInfo extends TestCaseEnhanced
 	public void testLongStrings() throws Exception
 	{
 		ConfigInfo info = new ConfigInfo();
-		info.setCustomFieldTopSectionXml(longString);
-		info.setCustomFieldBottomSectionXml(longString);
+		info.deprecatedSetCustomFieldTopSectionXml(longString);
+		info.deprecatedSetCustomFieldBottomSectionXml(longString);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		info.save(out);
 		ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
 		ConfigInfo loaded = ConfigInfo.load(in);
-		assertEquals("Didn't restore long string for top?", info.getCustomFieldTopSectionXml(), loaded.getCustomFieldTopSectionXml());
-		assertEquals("Didn't restore long string for bottom?", info.getCustomFieldBottomSectionXml(), loaded.getCustomFieldBottomSectionXml());
+		assertEquals("Didn't restore long string for top?", info.getNoLongerUsedCustomFieldTopSectionXml(), loaded.getNoLongerUsedCustomFieldTopSectionXml());
+		assertEquals("Didn't restore long string for bottom?", info.getNoLongerUsedCustomFieldBottomSectionXml(), loaded.getNoLongerUsedCustomFieldBottomSectionXml());
 	}
 
 	private static String createLongSampleString() 
@@ -375,16 +375,16 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setAllHQKeysXml(sampleAllHQKeysXml);
 		info.setBulletinVersioningAware(sampleBulletinVersioningAware);
 		info.setDefaultHQKeysXml(sampleDefaultHQKeysXml);
-		info.setCustomFieldTopSectionXml(sampleCustomFieldTopSectionXml);
-		info.setCustomFieldBottomSectionXml(sampleCustomFieldBottomSectionXml);
+		info.deprecatedSetCustomFieldTopSectionXml(sampleCustomFieldTopSectionXml);
+		info.deprecatedSetCustomFieldBottomSectionXml(sampleCustomFieldBottomSectionXml);
 		info.setUseZawgyiFont(sampleUseZawgyi);
 		info.setFieldDeskKeysXml(sampleFieldDeskKeysXml);
 		info.setBackedUpImprovedKeypairShare(sampleBackedUpImprovedKeypairShare);
 		info.setUseInternalTor(sampleUseInternalTor);
 		info.setMartusAccountAccessTokens(sampleMartusAccountAccessTokens);
 		info.setContactKeysXml(sampleContactKeysXml);
-		info.setCurrentFormTemplateTitle(sampleCurrentFormTemplateTitle);
-		info.setCurrentFormTemplateDescription(sampleCurrentFormTemplateDescription);
+		info.deprecatedSetCurrentFormTemplateTitle(sampleCurrentFormTemplateTitle);
+		info.deprecatedSetCurrentFormTemplateDescription(sampleCurrentFormTemplateDescription);
 		info.setIsNetworkOnline(sampleIsNetworkOnline);
 		info.setFolderLabelCode(sampleFolderLabelCode);
 		info.setFolderLabelCustomName(sampleFolderLabelCustomName);
@@ -413,15 +413,15 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleAllHQKeysXml", "", info.getAllHQKeysXml());
 		assertEquals(label + ": sampleBulletinVersioningAware", true, info.isBulletinVersioningAware());
 		assertEquals(label + ": sampleDefaultHQKeysXml", "", info.getDefaultHQKeysXml());
-		assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getCustomFieldTopSectionXml());
-		assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
+		assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getNoLongerUsedCustomFieldTopSectionXml());
+		assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getNoLongerUsedCustomFieldBottomSectionXml());
 		assertEquals(label + ": sampleFieldDeskKeysXml", "", info.getFieldDeskKeysXml());
 		assertEquals(label + ": sampleBackedUpImprovedKeypairShare", false, info.hasBackedUpImprovedKeypairShare());
 		assertEquals(label + ": sampleUseInternalTor", false, info.useInternalTor());
 		assertEquals(label + ": sampleMartusAccountAccessTokens", 0, info.getMartusAccountAccessTokens().size());
 		assertEquals(label + ": sampleContactKeysXml", "", info.getContactKeysXml());
-		assertEquals(label + ": sampleCurrentFormTemplateTitle", "", info.getCurrentFormTemplateTitle());
-		assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getCurrentFormTemplateDescription());
+		assertEquals(label + ": sampleCurrentFormTemplateTitle", "", info.getNoLongerUsedCurrentFormTemplateTitle());
+		assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getNoLongerUsedCurrentFormTemplateDescription());
 		assertEquals(label + ": sampleFolderLabelIndex", "", info.getFolderLabelCode());
 		assertEquals(label + ": sampleFolderLabelCustomName", "", info.getFolderLabelCustomName());
 		assertEquals(label + ": sampleSyncStatusJson", "", info.getSyncStatusJson());
@@ -466,9 +466,9 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldLegacySpecs());
 
 		if(VERSION >= 6 && VERSION < 14)
-			assertEquals(label + ": sampleCustomFieldTopSectionXml", sampleLegacyCustomFieldTopSectionXml, info.getCustomFieldTopSectionXml());	
+			assertEquals(label + ": sampleCustomFieldTopSectionXml", sampleLegacyCustomFieldTopSectionXml, info.getNoLongerUsedCustomFieldTopSectionXml());	
 		else if(VERSION < 6)
-			assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getCustomFieldTopSectionXml());
+			assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getNoLongerUsedCustomFieldTopSectionXml());
 		
 		if(VERSION >= 7)
 			assertEquals(label + ": sampleForceAllPrivate", sampleForceAllPrivate, info.shouldForceBulletinsAllPrivate());
@@ -502,21 +502,21 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleDefaultHQKeysXml", "", info.getDefaultHQKeysXml());
 			
 		if(VERSION >= 12 && VERSION < 14)
-			assertEquals(label + ": sampleCustomFieldBottomSectionXml", sampleLegacyCustomFieldBottomSectionXml, info.getCustomFieldBottomSectionXml());	
+			assertEquals(label + ": sampleCustomFieldBottomSectionXml", sampleLegacyCustomFieldBottomSectionXml, info.getNoLongerUsedCustomFieldBottomSectionXml());	
 		else if(VERSION < 12)
-			assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
+			assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getNoLongerUsedCustomFieldBottomSectionXml());
 
 		if(VERSION >= 14)
 		{
-			assertEquals(label + ": sampleCustomFieldTopSectionXml", sampleCustomFieldTopSectionXml, info.getCustomFieldTopSectionXml());
-			assertEquals(label + ": sampleCustomFieldBottomSectionXml", sampleCustomFieldBottomSectionXml, info.getCustomFieldBottomSectionXml());
+			assertEquals(label + ": sampleCustomFieldTopSectionXml", sampleCustomFieldTopSectionXml, info.getNoLongerUsedCustomFieldTopSectionXml());
+			assertEquals(label + ": sampleCustomFieldBottomSectionXml", sampleCustomFieldBottomSectionXml, info.getNoLongerUsedCustomFieldBottomSectionXml());
 		}
 		else
 		{
 			if(VERSION < 6)
-				assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getCustomFieldTopSectionXml());
+				assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getNoLongerUsedCustomFieldTopSectionXml());
 			if(VERSION < 12)
-				assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
+				assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getNoLongerUsedCustomFieldBottomSectionXml());
 		}
 
 		if(VERSION >= 15)
@@ -571,13 +571,13 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleContactKeys", "", info.getContactKeysXml());
 		if(VERSION >= 21)
 		{
-			assertEquals(label + ": sampleCurrentFormTemplateTitle", sampleCurrentFormTemplateTitle, info.getCurrentFormTemplateTitle());
-			assertEquals(label + ": sampleCurrentFormTemplateDescription", sampleCurrentFormTemplateDescription, info.getCurrentFormTemplateDescription());
+			assertEquals(label + ": sampleCurrentFormTemplateTitle", sampleCurrentFormTemplateTitle, info.getNoLongerUsedCurrentFormTemplateTitle());
+			assertEquals(label + ": sampleCurrentFormTemplateDescription", sampleCurrentFormTemplateDescription, info.getNoLongerUsedCurrentFormTemplateDescription());
 		}
 		else
 		{
-			assertEquals(label + ": sampleCurrentFormTemplateTitle", "", info.getCurrentFormTemplateTitle());
-			assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getCurrentFormTemplateDescription());
+			assertEquals(label + ": sampleCurrentFormTemplateTitle", "", info.getNoLongerUsedCurrentFormTemplateTitle());
+			assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getNoLongerUsedCurrentFormTemplateDescription());
 		}
 		if(VERSION >= 22)
 			assertEquals(label + ": sampleNetworkOnline", sampleIsNetworkOnline, info.isNetworkOnline());

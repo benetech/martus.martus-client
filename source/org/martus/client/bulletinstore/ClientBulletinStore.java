@@ -1542,6 +1542,11 @@ public class ClientBulletinStore extends BulletinStore
 		return (String[])tags.toArray(new String[0]);
 	}
 
+	public FormTemplate getFormTemplate(String title) throws Exception
+	{
+		return formTemplateManager.getTemplate(title);
+	}
+
 	public void saveNewFormTemplate(FormTemplate template) throws Exception
 	{
 		formTemplateManager.putTemplate(template);

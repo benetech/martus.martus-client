@@ -71,7 +71,6 @@ import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.LegacyCustomFields;
-import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MiniLocalization;
 import org.martus.common.ProgressMeterInterface;
@@ -82,10 +81,9 @@ import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.FileDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
@@ -522,7 +520,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String newFields = "new,label;another,show";
 		FieldSpecCollection newSpecs = LegacyCustomFields.parseFieldSpecsFromString(newFields);
 		FieldCollection convertedFields = new FieldCollection(newSpecs.asArray());
-		convertedInfo.setCustomFieldBottomSectionXml(convertedFields.toString());
+		convertedInfo.deprecatedSetCustomFieldBottomSectionXml(convertedFields.toString());
 		FieldCollection fields = new FieldCollection(MartusApp.getCustomFieldSpecsBottomSection(convertedInfo));
 
 		FieldCollection expected = new FieldCollection(LegacyCustomFields.parseFieldSpecsFromString(newFields));
@@ -535,7 +533,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String newFields = "new,label;another,show";
 		FieldSpecCollection newSpecs = LegacyCustomFields.parseFieldSpecsFromString(newFields);
 		FieldCollection convertedFields = new FieldCollection(newSpecs.asArray());
-		convertedInfo.setCustomFieldTopSectionXml(convertedFields.toString());
+		convertedInfo.deprecatedSetCustomFieldTopSectionXml(convertedFields.toString());
 		FieldCollection fields = new FieldCollection(MartusApp.getCustomFieldSpecsTopSection(convertedInfo));
 
 		FieldCollection expected = new FieldCollection(LegacyCustomFields.parseFieldSpecsFromString(newFields));
@@ -844,32 +842,14 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		originalInfo.setAuthor("blah");
 		assertEquals("should have been set", "blah", appWithAccount.getConfigInfo().getAuthor());
 	
-		FieldSpec topSpec = FieldSpec.createCustomField("TopTag", "Top Label", new FieldTypeMultiline()); 
-		FieldSpecCollection fields = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
-		fields.add(topSpec);
-		String xmlTop = fields.toXml();
-		originalInfo.setCustomFieldTopSectionXml(xmlTop);
-		assertEquals("Top section should have been set", xmlTop, appWithAccount.getConfigInfo().getCustomFieldTopSectionXml());
-
-		FieldSpec bottomSpec = FieldSpec.createCustomField("BottomTag", "Bottom Label", new FieldTypeMultiline());
-		fields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
-		fields.add(bottomSpec);
-		String xmlBottom = fields.toXml();
-		originalInfo.setCustomFieldBottomSectionXml(xmlBottom);
-		assertEquals("Bottom section should have been set", xmlBottom, appWithAccount.getConfigInfo().getCustomFieldBottomSectionXml());
-
 		appWithAccount.saveConfigInfo();
 		assertEquals("should still be there", "blah", appWithAccount.getConfigInfo().getAuthor());
-		assertEquals("Top section should still be there", xmlTop, appWithAccount.getConfigInfo().getCustomFieldTopSectionXml());
-		assertEquals("Bottom section should still be there", xmlBottom, appWithAccount.getConfigInfo().getCustomFieldBottomSectionXml());
 		assertEquals("save didn't work!", true, file.exists());
 
 		originalInfo.setAuthor("something else");
 		appWithAccount.loadConfigInfo();
 		assertNotNull("ContactInfo null", appWithAccount.getConfigInfo());
 		assertEquals("should have reloaded", "blah", appWithAccount.getConfigInfo().getAuthor());
-		assertEquals("should have reloaded Top section", xmlTop, appWithAccount.getConfigInfo().getCustomFieldTopSectionXml());
-		assertEquals("should have reloaded Bottom section", xmlBottom, appWithAccount.getConfigInfo().getCustomFieldBottomSectionXml());
 
 		File sigFile = appWithAccount.getConfigInfoSignatureFile();
 		sigFile.delete();
@@ -896,19 +876,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testUpdateFormTemplate() throws Exception
 	{
 		TRACE_BEGIN("testUpdateFormTemplate");
-		File file = appWithAccount.getConfigInfoFile();
-		file.delete();
-		appWithAccount.loadConfigInfo();
 
-		ConfigInfo configInfo = appWithAccount.getConfigInfo();
-		ConfigInfo emptyConfigInfo = configInfo;
-		emptyConfigInfo.setCustomFieldLegacySpecs("");
 		ClientBulletinStore store = appWithAccount.getStore();
-		assertEquals("", emptyConfigInfo.getCurrentFormTemplateTitle());
-		assertEquals("", emptyConfigInfo.getCurrentFormTemplateDescription());
-		assertEquals("", emptyConfigInfo.getCustomFieldTopSectionXml());
-		assertEquals("", emptyConfigInfo.getCustomFieldBottomSectionXml());
-		assertEquals("", emptyConfigInfo.getCustomFieldLegacySpecs());
 		
 		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		FieldCollection fields = new FieldCollection(topSpecs);
@@ -922,24 +891,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String description = "Some Descritpion";
 		FormTemplate newTemplate = new FormTemplate(title, description, topSpecs, bottomSpecs);
 		appWithAccount.updateFormTemplate(newTemplate);
-		configInfo = appWithAccount.getConfigInfo();		
-		assertEquals("Top section should have been set", xmlTop, configInfo.getCustomFieldTopSectionXml());
-		assertEquals("Bottom section should have been set", xmlBottom, configInfo.getCustomFieldBottomSectionXml());
-		assertEquals("Title should have been set", title, configInfo.getCurrentFormTemplateTitle());
-		assertEquals("Description should have been set", description, configInfo.getCurrentFormTemplateDescription());
-		assertEquals("Store's Top section should have been set", xmlTop, store.getTopSectionFieldSpecs().toXml());
-		assertEquals("Store's Bottom section should have been set", xmlBottom, store.getBottomSectionFieldSpecs().toXml());
-		assertEquals(MartusConstants.deprecatedCustomFieldSpecs, emptyConfigInfo.getCustomFieldLegacySpecs());
-		
-		appWithAccount.loadConfigInfo();
-		configInfo = appWithAccount.getConfigInfo();		
-		assertEquals("After Loading Config Info.  Top section should have been set", xmlTop, configInfo.getCustomFieldTopSectionXml());
-		assertEquals("After Loading Config Info.  Bottom section should have been set", xmlBottom, configInfo.getCustomFieldBottomSectionXml());
-		assertEquals("After Loading Config Info.  Title should have been set", title, configInfo.getCurrentFormTemplateTitle());
-		assertEquals("After Loading Config Info.  Description should have been set", description, configInfo.getCurrentFormTemplateDescription());
-		assertEquals("After Loading Config Info.  Store's Top section should have been set", xmlTop, store.getTopSectionFieldSpecs().toXml());
-		assertEquals("After Loading Config Info.  Store's Bottom section should have been set", xmlBottom, store.getBottomSectionFieldSpecs().toXml());
-		assertEquals(MartusConstants.deprecatedCustomFieldSpecs, configInfo.getCustomFieldLegacySpecs());
+
+		FormTemplate savedTemplate = store.getFormTemplate(title);
+		assertEquals(title, savedTemplate.getTitle());
+		assertEquals(description, savedTemplate.getDescription());
+		assertEquals(xmlTop, savedTemplate.getTopSectionXml());
+		assertEquals(xmlBottom, savedTemplate.getBottomSectionXml());
 		
 		TRACE_END();
 	}
@@ -2562,14 +2519,18 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testEncryptPublicData() throws Exception
 	{
 		TRACE_BEGIN("testEncryptPublicData");
-		File temp = createTempDirectory();
 		MartusCrypto security = MockMartusSecurity.createClient();
-		String[] emptyTranslations = {};
-		MartusApp app = new MartusApp(security, temp, new MartusLocalization(temp,emptyTranslations));
-		app.doAfterSigninInitalization();
-		app.getStore().createFieldSpecCacheFromDatabase();
-		app.getStore().deleteAllData();
-		assertEquals("App Not Encypting Public?", true, app.getStore().mustEncryptPublicData());
+		MartusApp app = MockMartusApp.create(security, getName());
+		try
+		{
+			app.doAfterSigninInitalization();
+			app.getStore().createFieldSpecCacheFromDatabase();
+			assertEquals("App Not Encypting Public?", true, app.getStore().mustEncryptPublicData());
+		}
+		finally
+		{
+			DirectoryUtils.deleteEntireDirectoryTree(app.getMartusDataRootDirectory());
+		}
 
 		TRACE_END();
 	}
