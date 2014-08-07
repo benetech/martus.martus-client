@@ -36,7 +36,6 @@ import org.martus.client.swingui.dialogs.UiCustomFieldsDlg;
 import org.martus.common.FieldCollection;
 import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.FieldSpecCollection;
-import org.martus.common.fieldspec.BulletinFieldSpecs;
 import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
@@ -54,13 +53,13 @@ public class ActionMenuCustomFields extends UiMenuAction
 		
 		MartusApp app = mainWindow.getApp();
 		ClientBulletinStore store = app.getStore();
-		BulletinFieldSpecs existingSpecs = new BulletinFieldSpecs();
+		FormTemplate existingSpecs = new FormTemplate();
 		existingSpecs.setTopFields(store.getTopSectionFieldSpecs());
 		existingSpecs.setBottomFields(store.getBottomSectionFieldSpecs());
 		ConfigInfo configInfo = app.getConfigInfo();
 		existingSpecs.setTitle(configInfo.getNoLongerUsedCurrentFormTemplateTitle());
 		existingSpecs.setDescription(configInfo.getNoLongerUsedCurrentFormTemplateDescription());
-		BulletinFieldSpecs newSpecs = getCustomizedFieldsFromUser(existingSpecs);
+		FormTemplate newSpecs = getCustomizedFieldsFromUser(existingSpecs);
 		if(newSpecs == null)
 			return;
 		
@@ -78,7 +77,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 		}
 	}
 
-	private BulletinFieldSpecs getCustomizedFieldsFromUser(BulletinFieldSpecs existingSpecs)
+	private FormTemplate getCustomizedFieldsFromUser(FormTemplate existingSpecs)
 	{
 		while(true)
 		{
@@ -118,7 +117,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 				{
 					e.printStackTrace();
 				}
-				BulletinFieldSpecs newFieldSpecs = new BulletinFieldSpecs();
+				FormTemplate newFieldSpecs = new FormTemplate();
 				newFieldSpecs.setTopFields(newTopSectionSpecs);
 				newFieldSpecs.setBottomFields(newBottomSectionSpecs);
 				newFieldSpecs.setTitle(newTitle);
