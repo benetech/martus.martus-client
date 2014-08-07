@@ -82,10 +82,9 @@ import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.FileDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
@@ -844,32 +843,14 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		originalInfo.setAuthor("blah");
 		assertEquals("should have been set", "blah", appWithAccount.getConfigInfo().getAuthor());
 	
-		FieldSpec topSpec = FieldSpec.createCustomField("TopTag", "Top Label", new FieldTypeMultiline()); 
-		FieldSpecCollection fields = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
-		fields.add(topSpec);
-		String xmlTop = fields.toXml();
-		originalInfo.deprecatedSetCustomFieldTopSectionXml(xmlTop);
-		assertEquals("Top section should have been set", xmlTop, appWithAccount.getConfigInfo().getCustomFieldTopSectionXml());
-
-		FieldSpec bottomSpec = FieldSpec.createCustomField("BottomTag", "Bottom Label", new FieldTypeMultiline());
-		fields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
-		fields.add(bottomSpec);
-		String xmlBottom = fields.toXml();
-		originalInfo.deprecatedSetCustomFieldBottomSectionXml(xmlBottom);
-		assertEquals("Bottom section should have been set", xmlBottom, appWithAccount.getConfigInfo().getCustomFieldBottomSectionXml());
-
 		appWithAccount.saveConfigInfo();
 		assertEquals("should still be there", "blah", appWithAccount.getConfigInfo().getAuthor());
-		assertEquals("Top section should still be there", xmlTop, appWithAccount.getConfigInfo().getCustomFieldTopSectionXml());
-		assertEquals("Bottom section should still be there", xmlBottom, appWithAccount.getConfigInfo().getCustomFieldBottomSectionXml());
 		assertEquals("save didn't work!", true, file.exists());
 
 		originalInfo.setAuthor("something else");
 		appWithAccount.loadConfigInfo();
 		assertNotNull("ContactInfo null", appWithAccount.getConfigInfo());
 		assertEquals("should have reloaded", "blah", appWithAccount.getConfigInfo().getAuthor());
-		assertEquals("should have reloaded Top section", xmlTop, appWithAccount.getConfigInfo().getCustomFieldTopSectionXml());
-		assertEquals("should have reloaded Bottom section", xmlBottom, appWithAccount.getConfigInfo().getCustomFieldBottomSectionXml());
 
 		File sigFile = appWithAccount.getConfigInfoSignatureFile();
 		sigFile.delete();
