@@ -554,10 +554,10 @@ public class MartusApp
 	public void updateFormTemplate(FormTemplate updatedTemplate) throws Exception
 	{
 
-		configInfo.setCustomFieldTopSectionXml(updatedTemplate.getTopSectionXml());
-		configInfo.setCustomFieldBottomSectionXml(updatedTemplate.getBottomSectionXml());
-		configInfo.setCurrentFormTemplateTitle(updatedTemplate.getTitle());
-		configInfo.setCurrentFormTemplateDescription(updatedTemplate.getDescription());
+		configInfo.deprecatedSetCustomFieldTopSectionXml(updatedTemplate.getTopSectionXml());
+		configInfo.deprecatedSetCustomFieldBottomSectionXml(updatedTemplate.getBottomSectionXml());
+		configInfo.deprecatedSetCurrentFormTemplateTitle(updatedTemplate.getTitle());
+		configInfo.deprecatedSetCurrentFormTemplateDescription(updatedTemplate.getDescription());
 		configInfo.setCustomFieldLegacySpecs(MartusConstants.deprecatedCustomFieldSpecs);
 		saveConfigInfo();
 

@@ -522,7 +522,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String newFields = "new,label;another,show";
 		FieldSpecCollection newSpecs = LegacyCustomFields.parseFieldSpecsFromString(newFields);
 		FieldCollection convertedFields = new FieldCollection(newSpecs.asArray());
-		convertedInfo.setCustomFieldBottomSectionXml(convertedFields.toString());
+		convertedInfo.deprecatedSetCustomFieldBottomSectionXml(convertedFields.toString());
 		FieldCollection fields = new FieldCollection(MartusApp.getCustomFieldSpecsBottomSection(convertedInfo));
 
 		FieldCollection expected = new FieldCollection(LegacyCustomFields.parseFieldSpecsFromString(newFields));
@@ -535,7 +535,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String newFields = "new,label;another,show";
 		FieldSpecCollection newSpecs = LegacyCustomFields.parseFieldSpecsFromString(newFields);
 		FieldCollection convertedFields = new FieldCollection(newSpecs.asArray());
-		convertedInfo.setCustomFieldTopSectionXml(convertedFields.toString());
+		convertedInfo.deprecatedSetCustomFieldTopSectionXml(convertedFields.toString());
 		FieldCollection fields = new FieldCollection(MartusApp.getCustomFieldSpecsTopSection(convertedInfo));
 
 		FieldCollection expected = new FieldCollection(LegacyCustomFields.parseFieldSpecsFromString(newFields));
@@ -848,14 +848,14 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		FieldSpecCollection fields = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		fields.add(topSpec);
 		String xmlTop = fields.toXml();
-		originalInfo.setCustomFieldTopSectionXml(xmlTop);
+		originalInfo.deprecatedSetCustomFieldTopSectionXml(xmlTop);
 		assertEquals("Top section should have been set", xmlTop, appWithAccount.getConfigInfo().getCustomFieldTopSectionXml());
 
 		FieldSpec bottomSpec = FieldSpec.createCustomField("BottomTag", "Bottom Label", new FieldTypeMultiline());
 		fields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		fields.add(bottomSpec);
 		String xmlBottom = fields.toXml();
-		originalInfo.setCustomFieldBottomSectionXml(xmlBottom);
+		originalInfo.deprecatedSetCustomFieldBottomSectionXml(xmlBottom);
 		assertEquals("Bottom section should have been set", xmlBottom, appWithAccount.getConfigInfo().getCustomFieldBottomSectionXml());
 
 		appWithAccount.saveConfigInfo();
