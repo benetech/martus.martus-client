@@ -95,7 +95,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 			if(UiSession.isJavaFx)
 			{
-				headerStage = new FxHeaderStage(observerToUse);
+				headerStage = new BulletinEditorHeaderStage(observerToUse);
 				FxRunner fxRunner = new FxRunner(headerStage);
 				fxRunner.setAbortImmediatelyOnError();
 				Platform.runLater(fxRunner);
@@ -365,9 +365,9 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		cleanupAndExit();
 	}
 	
-	class FxHeaderShellController extends FxNonWizardShellController
+	class BulletinEditorHeaderShellController extends FxNonWizardShellController
 	{
-		public FxHeaderShellController(UiMainWindow mainWindowToUse)
+		public BulletinEditorHeaderShellController(UiMainWindow mainWindowToUse)
 		{
 			super(mainWindowToUse);
 		}
@@ -379,13 +379,13 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		}
 	}
 
-	class FxHeaderStage extends FxInSwingFrameStage
+	class BulletinEditorHeaderStage extends FxInSwingFrameStage
 	{
-		public FxHeaderStage(UiMainWindow mainWindowToUse)
+		public BulletinEditorHeaderStage(UiMainWindow mainWindowToUse)
 		{
 			super(mainWindowToUse);
 			
-			shellController = new FxHeaderShellController(getMainWindow());
+			shellController = new BulletinEditorHeaderShellController(getMainWindow());
 			setShellController(shellController);
 			
 			// NOTE: setPreferredSize seems to be required, unfortunately
@@ -410,7 +410,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			loadAndShowShell();
 		}
 		
-		private FxHeaderShellController shellController;
+		private BulletinEditorHeaderShellController shellController;
 	}
 
 	private Bulletin bulletin;
@@ -418,7 +418,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 	private UiBulletinComponent view;
 	private UiScrollPane scroller;
-	private FxHeaderStage headerStage;
+	private BulletinEditorHeaderStage headerStage;
 
 	private JButton send;
 	private JButton draft;
