@@ -115,12 +115,12 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 			getWizardNavigationHandler().doNext();
 	}
 	
-	private String getDefaultServerIp()
+	static public String getDefaultServerIp()
 	{
 		return IP_FOR_SL1_IE;
 	}
 
-	private String getDefaultServerPublicKey()
+	static public String getDefaultServerPublicKey()
 	{
 		return PUBLIC_KEY_FOR_SL1_IE;
 	}
