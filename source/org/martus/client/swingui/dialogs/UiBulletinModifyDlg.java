@@ -57,8 +57,8 @@ import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSect
 import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.jfx.generic.FxInSwingFrameStage;
-import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 import org.martus.client.swingui.jfx.generic.FxRunner;
+import org.martus.client.swingui.jfx.landing.general.BulletinEditorHeaderShellController;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
@@ -365,20 +365,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		cleanupAndExit();
 	}
 	
-	static class BulletinEditorHeaderShellController extends FxNonWizardShellController
-	{
-		public BulletinEditorHeaderShellController(UiMainWindow mainWindowToUse)
-		{
-			super(mainWindowToUse);
-		}
-
-		@Override
-		public String getFxmlLocation()
-		{
-			return "landing/BulletinEditorHeader.fxml";
-		}
-	}
-
 	static class BulletinEditorHeaderStage extends FxInSwingFrameStage
 	{
 		public BulletinEditorHeaderStage(UiMainWindow mainWindowToUse)
