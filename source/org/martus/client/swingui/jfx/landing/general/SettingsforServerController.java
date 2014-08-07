@@ -32,14 +32,26 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.TextField;
 
+import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
+import org.martus.client.swingui.jfx.setupwizard.step3.FxAdvancedServerStorageSetupController;
+import org.martus.client.swingui.jfx.setupwizard.step3.FxSetupStorageServerController;
+import org.martus.client.swingui.jfx.setupwizard.tasks.ConnectToServerTask;
+import org.martus.client.swingui.jfx.setupwizard.tasks.GetServerPublicKeyTask;
+import org.martus.clientside.ClientSideNetworkGateway;
+import org.martus.common.Exceptions.ServerNotAvailableException;
+import org.martus.common.MartusLogger;
+import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class SettingsforServerController extends FxController
@@ -53,11 +65,37 @@ public class SettingsforServerController extends FxController
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		
-		ObservableList<ChoiceItem> choices = createChoices();
-		automaticSyncFrequency.setItems(choices);
-		String currentCode = getApp().getConfigInfo().getSyncFrequencyMinutes();
-		selectByCode(automaticSyncFrequency, currentCode);
+		initializeSyncFrequency();
+		initializeServerInfo();
+	}
+
+	private void initializeServerInfo()
+	{
+		String publicKey = getApp().getConfigInfo().getServerPublicKey();
+		String ipAddress = getApp().getConfigInfo().getServerName();
+		updateServerInfo(ipAddress, publicKey);
+	}
+
+	private void updateServerInfo(String ipAddress, String publicKey)
+	{
+		try
+		{
+			String publicCode = MartusCrypto.computeFormattedPublicCode40(publicKey);
+			serverIpAddress.setText(ipAddress);
+			serverPublicCode.setText(publicCode);
+		} 
+		catch (Exception e)
+		{
+			getStage().logAndNotifyUnexpectedError(e);
+		} 
+	}
+
+	private void initializeSyncFrequency()
+	{
+		ObservableList<ChoiceItem> autoMaticSyncChoices = createChoices();
+		automaticSyncFrequency.setItems(autoMaticSyncChoices);
+		String currentSyncFrequency = getApp().getConfigInfo().getSyncFrequencyMinutes();
+		selectByCode(automaticSyncFrequency, currentSyncFrequency);
 		automaticSyncFrequency.getSelectionModel().selectedItemProperty().addListener(new SyncFrequencyChangeHandler(getApp()));
 	}
 	
@@ -112,9 +150,149 @@ public class SettingsforServerController extends FxController
 		return "landing/general/SettingsForServer.fxml";
 	}
 	
+	@FXML
+	public void onConnectToDefaultServer()
+	{
+		updateServerInfo(FxSetupStorageServerController.getDefaultServerIp(),
+						 FxSetupStorageServerController.getDefaultServerPublicKey());
+	}
+	
+	@FXML
+	public void onSaveServerSetupChanges()
+	{
+		String ipAddress = serverIpAddress.getText();
+		String publicCode = serverPublicCode.getText();
+		boolean askComplianceAcceptance = !ipAddress.equals(FxSetupStorageServerController.getDefaultServerIp());
+		if(attemptToConnect(ipAddress, publicCode, askComplianceAcceptance))
+		{
+			//TODO SAVE Changes
+		}
+	}
+	
+	private boolean attemptToConnect(String serverIPAddress, String publicCode, boolean askComplianceAcceptance)
+	{
+		MartusLogger.log("Attempting to connect to: " + serverIPAddress);
+		MartusApp app = getApp();
+		getMainWindow().clearStatusMessage();
+		try
+		{
+			GetServerPublicKeyTask getPublicKeyTask = new GetServerPublicKeyTask(getApp(), serverIPAddress);
+			showTimeoutDialog(getLocalization().getFieldLabel("GettingServerInformation"), getPublicKeyTask);
+			
+			String serverPublicKey = getPublicKeyTask.getPublicKey();
+			if(!FxAdvancedServerStorageSetupController.doesPublicCodeMatch(serverPublicKey, publicCode))
+			{
+				showNotifyDialog("ServerCodeWrong");
+				return false;
+			}
+			ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, serverPublicKey, getApp().getTransport());
+			ConnectToServerTask connectToServerTask = new ConnectToServerTask(getApp(), gateway, "");
+			MartusLocalization localization = getLocalization();
+			String connectingToServerMsg = localization.getFieldLabel("AttemptToConnectToServerAndGetCompliance");
+			showTimeoutDialog(connectingToServerMsg, connectToServerTask);
+			if(!connectToServerTask.isAvailable())
+			{
+				String serverNotRespondingSaveConfigurationTitle = localization.getWindowTitle("ServerNotRespondingSaveConfiguration");
+				String serverNotRespondingSaveConfigurationMessage = localization.getFieldLabel("ServerNotRespondingSaveConfiguration");
+				if(showConfirmationDialog(serverNotRespondingSaveConfigurationTitle, serverNotRespondingSaveConfigurationMessage))
+				{
+					return false;
+				}
+				return false; 
+			}
+			if(!connectToServerTask.isAllowedToUpload())
+			{
+				showNotifyDialog("ErrorServerOffline");
+				return false;
+			}
+			String complianceStatement = connectToServerTask.getComplianceStatement();
+			if(askComplianceAcceptance)
+			{
+				if(complianceStatement.equals(""))
+				{
+					showNotifyDialog("ServerComplianceFailed");
+					return false;
+				}
+				
+				if(!acceptCompliance(complianceStatement))
+				{
+					ConfigInfo previousServerInfo = app.getConfigInfo();
+					String previousServerName = previousServerInfo.getServerName();
+					String previousServerKey = previousServerInfo.getServerPublicKey();
+					String previousServerCompliance = previousServerInfo.getServerCompliance();
+	
+					//TODO:The following line shouldn't be necessary but without it, the trustmanager 
+					//will reject the old server, we don't know why.
+					ClientSideNetworkGateway.buildGateway(previousServerName, previousServerKey, getApp().getTransport());
+					getApp().setServerInfo(previousServerName,previousServerKey,previousServerCompliance);
+					return false;
+				}
+			}
+
+			app.setServerInfo(serverIPAddress, serverPublicKey, complianceStatement);
+			
+			app.getStore().clearOnServerLists();
+			
+			getMainWindow().forceRecheckOfUidsOnServer();
+			app.getStore().clearOnServerLists();
+			getMainWindow().repaint();
+			getMainWindow().setStatusMessageReady();
+			return true;
+		}
+		catch(UserCancelledException e)
+		{
+		}
+		catch (SaveConfigInfoException e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDialog("ErrorSavingFile");
+		}
+		catch (ServerNotAvailableException e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDialog("ServerNotResponding");
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDialog("UnexpectedError");
+		}
+		
+		return false;
+	}
+	
+	private boolean acceptCompliance(String newServerCompliance)
+	{
+		MartusLocalization localization = getLocalization();
+		String title = localization.getWindowTitle("ServerCompliance");
+		String complianceStatementMsg = String.format("%s\n\n%s", localization.getFieldLabel("ServerComplianceDescription"), newServerCompliance);
+		if(!showConfirmationDialog(title, complianceStatementMsg))
+		{
+			showNotifyDialog("UserRejectedServerCompliance");
+			return false;
+		}
+		return true;
+	}
+	
+
+	@FXML
+	public void onSaveServerPreferenceChanges()
+	{
+	}
+
 	public final static String NEVER = "";
 	public final static String ON_STARTUP = "OnStartup";
 
 	@FXML
 	private ChoiceBox automaticSyncFrequency;
+	@FXML
+	private TextField serverIpAddress;
+	@FXML
+	private TextField serverPublicCode;
+	@FXML
+	private CheckBox serverDefaultToOn;
+	@FXML
+	private CheckBox automaticallyDownloadFromServer;
+	
+	
 }
