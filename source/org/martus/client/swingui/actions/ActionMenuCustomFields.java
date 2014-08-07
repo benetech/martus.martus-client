@@ -29,7 +29,6 @@ package org.martus.client.swingui.actions;
 import java.awt.event.ActionEvent;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiCustomFieldsDlg;
@@ -52,21 +51,23 @@ public class ActionMenuCustomFields extends UiMenuAction
 		
 		MartusApp app = mainWindow.getApp();
 		ClientBulletinStore store = app.getStore();
-		FormTemplate existingTemplate = new FormTemplate();
-		existingTemplate.setTopFields(store.getTopSectionFieldSpecs());
-		existingTemplate.setBottomFields(store.getBottomSectionFieldSpecs());
-		ConfigInfo configInfo = app.getConfigInfo();
-		existingTemplate.setTitle(configInfo.getNoLongerUsedCurrentFormTemplateTitle());
-		existingTemplate.setDescription(configInfo.getNoLongerUsedCurrentFormTemplateDescription());
-		FormTemplate newSpecs = getCustomizedFieldsFromUser(existingTemplate);
-		if(newSpecs == null)
+		FormTemplate existingTemplate = null;
+		try
+		{
+			existingTemplate = store.getCurrentFormTemplate();
+		}
+		catch(Exception e)
+		{
+			mainWindow.unexpectedErrorDlg(e);
+			return;
+		}
+
+		FormTemplate updatedTemplate = getCustomizedFieldsFromUser(existingTemplate);
+		if(updatedTemplate == null)
 			return;
 		
 		try
 		{
-			FieldSpecCollection topSection = newSpecs.getTopFields();
-			FieldSpecCollection bottomSection = newSpecs.getBottomFields();
-			FormTemplate updatedTemplate = new FormTemplate(newSpecs.getTitle(), newSpecs.getDescription(), topSection, bottomSection);
 			app.updateFormTemplate(updatedTemplate);
 		} 
 		catch (Exception e)
