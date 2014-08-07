@@ -53,13 +53,13 @@ public class ActionMenuCustomFields extends UiMenuAction
 		
 		MartusApp app = mainWindow.getApp();
 		ClientBulletinStore store = app.getStore();
-		FormTemplate existingSpecs = new FormTemplate();
-		existingSpecs.setTopFields(store.getTopSectionFieldSpecs());
-		existingSpecs.setBottomFields(store.getBottomSectionFieldSpecs());
+		FormTemplate existingTemplate = new FormTemplate();
+		existingTemplate.setTopFields(store.getTopSectionFieldSpecs());
+		existingTemplate.setBottomFields(store.getBottomSectionFieldSpecs());
 		ConfigInfo configInfo = app.getConfigInfo();
-		existingSpecs.setTitle(configInfo.getNoLongerUsedCurrentFormTemplateTitle());
-		existingSpecs.setDescription(configInfo.getNoLongerUsedCurrentFormTemplateDescription());
-		FormTemplate newSpecs = getCustomizedFieldsFromUser(existingSpecs);
+		existingTemplate.setTitle(configInfo.getNoLongerUsedCurrentFormTemplateTitle());
+		existingTemplate.setDescription(configInfo.getNoLongerUsedCurrentFormTemplateDescription());
+		FormTemplate newSpecs = getCustomizedFieldsFromUser(existingTemplate);
 		if(newSpecs == null)
 			return;
 		
@@ -77,11 +77,11 @@ public class ActionMenuCustomFields extends UiMenuAction
 		}
 	}
 
-	private FormTemplate getCustomizedFieldsFromUser(FormTemplate existingSpecs)
+	private FormTemplate getCustomizedFieldsFromUser(FormTemplate existingTemplate)
 	{
 		while(true)
 		{
-			UiCustomFieldsDlg inputDlg = new UiCustomFieldsDlg(mainWindow, existingSpecs);
+			UiCustomFieldsDlg inputDlg = new UiCustomFieldsDlg(mainWindow, existingTemplate);
 			inputDlg.setFocusToInputField();
 			inputDlg.setVisible(true);
 			String newTopSectionCustomFieldXml = inputDlg.getTopSectionXml();
@@ -98,10 +98,10 @@ public class ActionMenuCustomFields extends UiMenuAction
 			{
 				if(mainWindow.confirmDlg("UndoCustomFields"))
 				{
-					existingSpecs.setTopFields(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
-					existingSpecs.setBottomFields(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
-					existingSpecs.setTitle("");
-					existingSpecs.setDescription("");
+					existingTemplate.setTopFields(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
+					existingTemplate.setBottomFields(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+					existingTemplate.setTitle("");
+					existingTemplate.setDescription("");
 				}					
 			}
 			else
@@ -117,12 +117,12 @@ public class ActionMenuCustomFields extends UiMenuAction
 				{
 					e.printStackTrace();
 				}
-				FormTemplate newFieldSpecs = new FormTemplate();
-				newFieldSpecs.setTopFields(newTopSectionSpecs);
-				newFieldSpecs.setBottomFields(newBottomSectionSpecs);
-				newFieldSpecs.setTitle(newTitle);
-				newFieldSpecs.setDescription(newDescription);
-				return newFieldSpecs;
+				FormTemplate newTemplate = new FormTemplate();
+				newTemplate.setTopFields(newTopSectionSpecs);
+				newTemplate.setBottomFields(newBottomSectionSpecs);
+				newTemplate.setTitle(newTitle);
+				newTemplate.setDescription(newDescription);
+				return newTemplate;
 			}
 		}
 	}

@@ -79,7 +79,7 @@ import org.martus.util.inputstreamwithseek.FileInputStreamWithSeek;
 
 public class UiCustomFieldsDlg extends JDialog
 {
-	public UiCustomFieldsDlg(UiMainWindow owner, FormTemplate bulletinFieldSpecs)
+	public UiCustomFieldsDlg(UiMainWindow owner, FormTemplate existingTemplate)
 	{
 		super(owner, "", true);
 		mainWindow = owner; 
@@ -120,22 +120,22 @@ public class UiCustomFieldsDlg extends JDialog
 		Component buttonsToAdd[] = {vBox, Box.createHorizontalGlue(), ok, cancel, help};  
 		Utilities.addComponentsRespectingOrientation(buttons, buttonsToAdd);
 		
-		topSectionXmlTextArea = createXMLTextArea(bulletinFieldSpecs.getTopFields());
+		topSectionXmlTextArea = createXMLTextArea(existingTemplate.getTopFields());
 		topSectionXmlTextArea.setCaretPosition(0);
 		UiScrollPane topSectionTextPane = new UiScrollPane(topSectionXmlTextArea);
 
-		bottomSectionXmlTextArea = createXMLTextArea(bulletinFieldSpecs.getBottomFields());
+		bottomSectionXmlTextArea = createXMLTextArea(existingTemplate.getBottomFields());
 		bottomSectionXmlTextArea.setCaretPosition(0);
 		UiScrollPane bottomSectionTextPane = new UiScrollPane(bottomSectionXmlTextArea);
 
 		UiLabel titleLabel = new UiLabel(localization.getFieldLabel("inputCustomFieldsTitle"));
 		titleField = new UiTextField();
-		titleField.setText(bulletinFieldSpecs.getTitle());
+		titleField.setText(existingTemplate.getTitle());
 		Box titleBox = createLabelAndTextFieldBox(titleLabel, titleField);
 
 		UiLabel descriptionLabel = new UiLabel(localization.getFieldLabel("inputCustomFieldsDescription"));
 		descriptionField = new UiTextField();
-		descriptionField.setText(bulletinFieldSpecs.getDescription());
+		descriptionField.setText(existingTemplate.getDescription());
 		Box descriptionBox = createLabelAndTextFieldBox(descriptionLabel, descriptionField);
 		
 		JPanel customFieldsPanel = new JPanel();
