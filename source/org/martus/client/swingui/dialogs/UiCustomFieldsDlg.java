@@ -62,7 +62,6 @@ import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.fieldspec.BulletinFieldSpecs;
 import org.martus.common.fieldspec.CustomFieldError;
 import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.FormTemplate.FutureVersionException;
@@ -80,7 +79,7 @@ import org.martus.util.inputstreamwithseek.FileInputStreamWithSeek;
 
 public class UiCustomFieldsDlg extends JDialog
 {
-	public UiCustomFieldsDlg(UiMainWindow owner, BulletinFieldSpecs bulletinFieldSpecs)
+	public UiCustomFieldsDlg(UiMainWindow owner, FormTemplate bulletinFieldSpecs)
 	{
 		super(owner, "", true);
 		mainWindow = owner; 
