@@ -57,12 +57,14 @@ public class FormTemplateManager
 		
 		security = cryptoToUse;
 		directory = directoryToUse;
-		cachedCurrentFormTemplate = createDefaultFormTemplate();
+
+		templateNames = loadTemplateNames();
+		currentTemplateName = "";
 	}
 	
-	public FormTemplate getCurrentFormTemplate()
+	public FormTemplate getCurrentFormTemplate() throws Exception
 	{
-		return cachedCurrentFormTemplate;
+		return getTemplate(currentTemplateName);
 	}
 
 	public void putTemplate(FormTemplate template) throws Exception
@@ -75,19 +77,15 @@ public class FormTemplateManager
 	
 	public FormTemplate getTemplate(String title) throws Exception
 	{
-		if(title.length() == 0)
-		{
+		if(title.equals(MARTUS_DEFAULT_FORM_TEMPLATE_NAME))
 			return createDefaultFormTemplate();
-		}
 		
-		File file = getTemplateFile(title);
-		FormTemplate template = loadEncryptedTemplate(file);
-		return template;
+		return loadEncryptedTemplate(getTemplateFile(title));
 	}
 
 	public FormTemplate getMartusDefaultTemplate() throws Exception
 	{
-		return createDefaultFormTemplate();
+		return getTemplate(MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
 	}
 
 	public static FormTemplate createDefaultFormTemplate() throws Exception
@@ -99,6 +97,11 @@ public class FormTemplateManager
 	}
 
 	public Set<String> getAvailableTemplateNames() throws Exception
+	{
+		return templateNames;
+	}
+	
+	public Set<String> loadTemplateNames() throws Exception
 	{
 		HashSet<String> available = new HashSet<String>();
 		available.add(MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
@@ -123,17 +126,13 @@ public class FormTemplateManager
 	{
 		if(!doesTemplateExist(newCurrentTitle))
 			throw new FileNotFoundException("No such template: " + newCurrentTitle);
-		
-		cachedCurrentFormTemplate = getTemplate(newCurrentTitle);
+
+		currentTemplateName = newCurrentTitle;
 	}
 	
 	private boolean doesTemplateExist(String title)
 	{
-		if(title.length() == 0)
-			return true;
-		
-		File file = getTemplateFile(title);
-		return (file.exists());
+		return templateNames.contains(title);
 	}
 
 	private FormTemplate loadEncryptedTemplate(File dataFile) throws Exception
@@ -168,6 +167,8 @@ public class FormTemplateManager
 		File file = getTemplateFile(title);
 		File signatureFile = getSignatureFileFor(file);
 		security.encryptAndWriteFileAndSignatureFile(file, signatureFile, plaintextSignedBytes);
+		
+		templateNames.add(title);
 	}
 
 	private File getTemplateFile(String title)
@@ -188,11 +189,12 @@ public class FormTemplateManager
 		}
 	}
 
-	public static final String MARTUS_DEFAULT_FORM_TEMPLATE_NAME = "%DefaultFormTemplateName";
+	public static final String MARTUS_DEFAULT_FORM_TEMPLATE_NAME = "";
 	private static final String ENCRYPTED_MCT_EXTENSION = ".emct";
 	private static final String SIG_EXTENSION = ".sig";
 	
 	private MartusCrypto security;
 	private File directory;
-	private FormTemplate cachedCurrentFormTemplate;
+	private Set<String> templateNames;
+	private String currentTemplateName;
 }

@@ -37,7 +37,6 @@ import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.StandardFieldSpecs;
-import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.TestCaseEnhanced;
 
@@ -115,21 +114,12 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 			FileOutputStream out = new FileOutputStream(templateFile, true);
 			out.write(5);
 			out.close();
-			try
-			{
-				manager.getTemplate(title);
-				fail("Should have thrown for bad sig");
-			}
-			catch(SignatureVerificationException ignoreExpected)
-			{
-			}
 			
-			manager = FormTemplateManager.createOrOpen(security, templateDirectory);
 			PrintStream dest = MartusLogger.getDestination();
 			MartusLogger.disableLogging();
+			manager = FormTemplateManager.createOrOpen(security, templateDirectory);
 			assertEquals(1, manager.getAvailableTemplateNames().size());
 			MartusLogger.setDestination(dest);
-			
 		}
 		finally
 		{
