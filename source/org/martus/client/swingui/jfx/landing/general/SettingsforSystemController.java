@@ -41,7 +41,7 @@ import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
-import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.setupwizard.step2.FxSetupSettingsController;
 import org.martus.client.swingui.jfx.setupwizard.step6.FxSelectLanguageController;
 import org.martus.clientside.CurrentUiState;
@@ -50,7 +50,7 @@ import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class SettingsforSystemController extends FxController
+public class SettingsforSystemController extends FxInSwingController
 {
 	public SettingsforSystemController(UiMainWindow mainWindowToUse)
 	{
