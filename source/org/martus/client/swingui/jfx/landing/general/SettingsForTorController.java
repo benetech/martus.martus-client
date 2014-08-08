@@ -37,12 +37,12 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.controls.FxSwitchButton;
 import org.martus.client.swingui.jfx.setupwizard.tasks.TorInitializationTask;
 import org.martus.common.MartusLogger;
 
-public class SettingsForTorController extends FxController
+public class SettingsForTorController extends FxInSwingController
 {
 	public SettingsForTorController(UiMainWindow mainWindowToUse)
 	{
