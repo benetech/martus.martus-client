@@ -988,17 +988,17 @@ public class ClientBulletinStore extends BulletinStore
 		return new File(AccountDir, "MartusFolders.dat");
 	}
 
-	public FormTemplate getCurrentFormTemplate()
+	public FormTemplate getCurrentFormTemplate() throws Exception
 	{
 		return formTemplateManager.getCurrentFormTemplate();
 	}
 
-	public FieldSpecCollection getBottomSectionFieldSpecs()
+	public FieldSpecCollection getBottomSectionFieldSpecs() throws Exception
 	{
 		return getCurrentFormTemplate().getBottomFields();
 	}
 
-	public FieldSpecCollection getTopSectionFieldSpecs()
+	public FieldSpecCollection getTopSectionFieldSpecs() throws Exception
 	{
 		return getCurrentFormTemplate().getTopFields();
 	}
@@ -1467,7 +1467,7 @@ public class ClientBulletinStore extends BulletinStore
 		return new File(accountDirectory, FIELD_SPEC_CACHE_FILE_NAME);
 	}
 	
-	public boolean bulletinHasCurrentFieldSpecs(Bulletin b)
+	public boolean bulletinHasCurrentFieldSpecs(Bulletin b) throws Exception
 	{
 		return (b.getTopSectionFieldSpecs().equals(getTopSectionFieldSpecs()) &&
 				b.getBottomSectionFieldSpecs().equals(getBottomSectionFieldSpecs()) );
