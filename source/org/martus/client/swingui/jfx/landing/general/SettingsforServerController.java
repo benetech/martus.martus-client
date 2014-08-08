@@ -51,7 +51,6 @@ import org.martus.client.swingui.jfx.setupwizard.step3.FxSetupStorageServerContr
 import org.martus.client.swingui.jfx.setupwizard.tasks.ConnectToServerTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.GetServerPublicKeyTask;
 import org.martus.clientside.ClientSideNetworkGateway;
-import org.martus.clientside.CurrentUiState;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
@@ -79,7 +78,7 @@ public class SettingsforServerController extends FxInSwingController
 	{
 		serverPublicKey = getApp().getConfigInfo().getServerPublicKey();
 		String ipAddress = getApp().getConfigInfo().getServerName();
-		updateServerInfo(ipAddress, serverPublicKey);
+		updateServerInfo(ipAddress, serverPublicKey);		
 	}
 
 	private void updateServerInfo(String ipAddress, String publicKey)
@@ -143,8 +142,35 @@ public class SettingsforServerController extends FxInSwingController
 		automaticSyncFrequency.setItems(autoMaticSyncChoices);
 		String currentSyncFrequency = getApp().getConfigInfo().getSyncFrequencyMinutes();
 		selectByCode(automaticSyncFrequency, currentSyncFrequency);
+		if(!currentSyncFrequency.equals(NEVER))
+			automaticallyDownloadFromServer.setSelected(true);
+		updateSyncControls();
+		automaticallyDownloadFromServer.selectedProperty().addListener(new DownloadFromServerListener());
 	}
 	
+	protected void updateSyncControls()
+	{
+		if(automaticallyDownloadFromServer.selectedProperty().getValue())
+		{
+			automaticSyncFrequency.setDisable(false);
+		}
+		else
+		{
+			automaticSyncFrequency.setDisable(true);
+			selectByCode(automaticSyncFrequency, NEVER);
+		}
+	}
+
+	class DownloadFromServerListener implements ChangeListener<Boolean>
+	{
+		@Override
+		public void changed(ObservableValue<? extends Boolean> observable,
+				Boolean oldValue, Boolean newValue)
+		{
+			updateSyncControls();
+		}
+	}
+
 	class IpPublicCodeChangeListener implements ChangeListener<String>
 	{
 		@Override
