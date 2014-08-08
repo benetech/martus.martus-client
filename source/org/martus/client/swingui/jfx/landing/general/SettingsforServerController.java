@@ -51,6 +51,7 @@ import org.martus.client.swingui.jfx.setupwizard.step3.FxSetupStorageServerContr
 import org.martus.client.swingui.jfx.setupwizard.tasks.ConnectToServerTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.GetServerPublicKeyTask;
 import org.martus.clientside.ClientSideNetworkGateway;
+import org.martus.clientside.CurrentUiState;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
@@ -142,7 +143,6 @@ public class SettingsforServerController extends FxInSwingController
 		automaticSyncFrequency.setItems(autoMaticSyncChoices);
 		String currentSyncFrequency = getApp().getConfigInfo().getSyncFrequencyMinutes();
 		selectByCode(automaticSyncFrequency, currentSyncFrequency);
-		automaticSyncFrequency.getSelectionModel().selectedItemProperty().addListener(new SyncFrequencyChangeHandler(getApp()));
 	}
 	
 	class IpPublicCodeChangeListener implements ChangeListener<String>
@@ -155,30 +155,6 @@ public class SettingsforServerController extends FxInSwingController
 		}
 	}
 	
-	class SyncFrequencyChangeHandler implements ChangeListener<ChoiceItem>
-	{
-		public SyncFrequencyChangeHandler(MartusApp appToUse)
-		{
-			app = appToUse;
-		}
-		
-		@Override
-		public void changed(ObservableValue<? extends ChoiceItem> observable, ChoiceItem oldValue, ChoiceItem newValue)
-		{
-			try
-			{
-				app.getConfigInfo().setSyncFrequencyMinutes(newValue.getCode());
-				app.saveConfigInfo();
-			} 
-			catch (SaveConfigInfoException e)
-			{
-				getStage().logAndNotifyUnexpectedError(e);
-			}
-		}
-		
-		private MartusApp app;
-	}
-
 	private static void selectByCode(ChoiceBox choiceBox, String codeToFind)
 	{
 		ObservableChoiceItemList choices = new ObservableChoiceItemList(choiceBox.getItems());
@@ -357,7 +333,16 @@ public class SettingsforServerController extends FxInSwingController
 
 	@FXML
 	public void onSaveServerPreferenceChanges()
-	{
+	{		
+		getApp().getConfigInfo().setSyncFrequencyMinutes(automaticSyncFrequency.getSelectionModel().getSelectedItem().getCode());
+		try
+		{
+			getApp().saveConfigInfo();
+		} 
+		catch (SaveConfigInfoException e)
+		{
+			getStage().logAndNotifyUnexpectedError(e);
+		}		
 	}
 
 	public final static String NEVER = "";
@@ -382,7 +367,7 @@ public class SettingsforServerController extends FxInSwingController
 	@FXML
 	private CheckBox automaticallyDownloadFromServer;
 	@FXML
-	private ChoiceBox automaticSyncFrequency;
+	private ChoiceBox<ChoiceItem> automaticSyncFrequency;
 	
 	private String serverPublicKey;
 	
