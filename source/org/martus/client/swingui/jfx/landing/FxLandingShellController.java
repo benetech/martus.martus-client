@@ -49,9 +49,7 @@ import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
 import org.martus.client.swingui.actions.ActionMenuContactInfo;
 import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
 import org.martus.client.swingui.actions.ActionMenuManageContacts;
-import org.martus.client.swingui.actions.ActionMenuPreferences;
 import org.martus.client.swingui.actions.ActionMenuQuickSearch;
-import org.martus.client.swingui.actions.ActionMenuSelectServer;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinListProvider;
@@ -109,12 +107,6 @@ public class FxLandingShellController extends FxNonWizardShellController
 		return contents;
 	}
 
-	@FXML
-	private void onPreferences(ActionEvent event)
-	{
-		doAction(new ActionMenuPreferences(getMainWindow()));
-	}
-	
 	private String getStatusMessage(Boolean state)
 	{
 		MartusLocalization localization = getLocalization();
@@ -164,25 +156,39 @@ public class FxLandingShellController extends FxNonWizardShellController
 	}
 	
 	@FXML
-	private void onSettings(ActionEvent event)
-	{
-		SettingsController settingsController = new SettingsController(getMainWindow());
-		DialogWithCloseShellController shellController = new DialogWithCloseShellController(getMainWindow(), settingsController);
-		doAction(shellController);
-	}
-
-	@FXML
 	private void onManageContacts(ActionEvent event)
 	{
 		doAction(new ActionMenuManageContacts(getMainWindow()));
 	}
 
+	private void onSettings(int tabToDisplayFirst)
+	{
+		SettingsController settingsController = new SettingsController(getMainWindow());
+		settingsController.firstTabToDisplay(tabToDisplayFirst);
+		DialogWithCloseShellController shellController = new DialogWithCloseShellController(getMainWindow(), settingsController);
+		doAction(shellController);
+	}
+
 	@FXML
 	private void onConfigureServer(ActionEvent event)
 	{
-		doAction(new ActionMenuSelectServer(getMainWindow()));
+		//TODO remove this Old Swing doAction(new ActionMenuSelectServer(getMainWindow()));
+		onSettings(SettingsController.SERVER_TAB);
 	}
 	
+	@FXML
+	private void onSystemPreferences(ActionEvent event)
+	{
+		//TODO remove this Old Swing doAction(new ActionMenuPreferences(getMainWindow()));
+		onSettings(SettingsController.SYSTEM_TAB);
+	}
+	
+	@FXML
+	private void onTorPreferences(ActionEvent event)
+	{
+		onSettings(SettingsController.TOR_TAB);
+	}
+
 	@FXML
 	private void onChangeUsernameAndPassword(ActionEvent event)
 	{
