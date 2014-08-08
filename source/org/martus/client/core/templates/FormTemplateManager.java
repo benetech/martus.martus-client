@@ -50,6 +50,16 @@ public class FormTemplateManager
 		return formTemplateManager;
 	}
 	
+	private FormTemplateManager(MartusCrypto cryptoToUse, File directoryToUse) throws Exception
+	{
+		if(!directoryToUse.isDirectory())
+			throw new FileNotFoundException("No such directory: " + directoryToUse.getAbsolutePath());
+		
+		security = cryptoToUse;
+		directory = directoryToUse;
+		cachedCurrentFormTemplate = createDefaultFormTemplate();
+	}
+	
 	public FormTemplate getCurrentFormTemplate()
 	{
 		return cachedCurrentFormTemplate;
@@ -126,16 +136,6 @@ public class FormTemplateManager
 		return (file.exists());
 	}
 
-	private FormTemplateManager(MartusCrypto cryptoToUse, File directoryToUse) throws Exception
-	{
-		if(!directoryToUse.isDirectory())
-			throw new FileNotFoundException("No such directory: " + directoryToUse.getAbsolutePath());
-		
-		security = cryptoToUse;
-		directory = directoryToUse;
-		cachedCurrentFormTemplate = createDefaultFormTemplate();
-	}
-	
 	private FormTemplate loadEncryptedTemplate(File dataFile) throws Exception
 	{
 		File sigFile = getSignatureFileFor(dataFile);
