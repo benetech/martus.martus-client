@@ -134,6 +134,7 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 		{
 			File templateDirectory = new File(tempDirectory, "templates");
 			FormTemplateManager manager = FormTemplateManager.createOrOpen(security, templateDirectory);
+			assertEquals("", manager.getCurrentFormTemplate().getTitle());
 			
 			FormTemplate defaultTemplate = manager.getTemplate("");
 			assertEquals("", defaultTemplate.getTitle());
