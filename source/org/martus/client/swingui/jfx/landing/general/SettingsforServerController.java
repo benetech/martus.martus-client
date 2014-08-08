@@ -32,8 +32,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
 
@@ -67,6 +69,9 @@ public class SettingsforServerController extends FxInSwingController
 		super.initialize(location, bundle);
 		initializeSyncFrequency();
 		initializeServerInfo();
+		IpPublicCodeChangeListener ipPublicCodeChangeListener = new IpPublicCodeChangeListener();
+		advanceServerIpAddress.textProperty().addListener(ipPublicCodeChangeListener);
+		advanceServerPublicCode.textProperty().addListener(ipPublicCodeChangeListener);
 	}
 
 	private void initializeServerInfo()
@@ -80,14 +85,55 @@ public class SettingsforServerController extends FxInSwingController
 	{
 		try
 		{
-			String publicCode = MartusCrypto.computeFormattedPublicCode40(publicKey);
-			serverIpAddress.setText(ipAddress);
-			serverPublicCode.setText(publicCode);
+			String publicCode = getPublicCodeFromPublicKey(publicKey);
+			currentServerIp.setText(ipAddress);
+			currentServerPublicCode.setText(publicCode);
+			if(isDefaultServer(ipAddress))
+			{
+				advanceServerIpAddress.setText("");
+				advanceServerPublicCode.setText("");
+			}
+			else
+			{
+				advanceServerIpAddress.setText(ipAddress);
+				advanceServerPublicCode.setText(publicCode);
+			}
+			updateConnectToAdvanceServerButtonState();
 		} 
 		catch (Exception e)
 		{
 			getStage().logAndNotifyUnexpectedError(e);
 		} 
+	}
+
+	public String getPublicCodeFromPublicKey(String publicKey) throws Exception
+	{
+		return MartusCrypto.computeFormattedPublicCode40(publicKey);
+	}
+	
+	protected void updateConnectToAdvanceServerButtonState()
+	{
+		String ipAddress = advanceServerIpAddress.getText();
+		String publicCode = advanceServerPublicCode.getText();
+		if(isDefaultServer(ipAddress))
+		{
+			connectToAdvanceServer.setDisable(true);
+			return;
+		}
+		if (isIpAndPublicCodeValid(ipAddress, publicCode))
+			connectToAdvanceServer.setDisable(false);
+		else
+			connectToAdvanceServer.setDisable(true);
+	}
+	
+	private boolean isIpAndPublicCodeValid(String ipAddress, String publicCode)
+	{
+		if(!ipAddress.matches("\\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b"))
+				return false;
+		
+		int publicCodeLength = publicCode.length();
+		return (		publicCodeLength == TWENTY_DIGIT_FORMATED_PUBLIC_CODE_LENGTH 
+				 || publicCodeLength == FORTY_DIGIT_FORMATED_PUBLIC_CODE_LENGTH);
 	}
 
 	private void initializeSyncFrequency()
@@ -97,6 +143,16 @@ public class SettingsforServerController extends FxInSwingController
 		String currentSyncFrequency = getApp().getConfigInfo().getSyncFrequencyMinutes();
 		selectByCode(automaticSyncFrequency, currentSyncFrequency);
 		automaticSyncFrequency.getSelectionModel().selectedItemProperty().addListener(new SyncFrequencyChangeHandler(getApp()));
+	}
+	
+	class IpPublicCodeChangeListener implements ChangeListener<String>
+	{
+		@Override
+		public void changed(ObservableValue<? extends String> observedValue,
+				String oldValue, String newValue)
+		{
+			updateConnectToAdvanceServerButtonState();
+		}
 	}
 	
 	class SyncFrequencyChangeHandler implements ChangeListener<ChoiceItem>
@@ -153,16 +209,29 @@ public class SettingsforServerController extends FxInSwingController
 	@FXML
 	public void onConnectToDefaultServer()
 	{
-		updateServerInfo(FxSetupStorageServerController.getDefaultServerIp(),
-						 FxSetupStorageServerController.getDefaultServerPublicKey());
+		try
+		{
+			String ipAddress = FxSetupStorageServerController.getDefaultServerIp();
+			String publicCode = getPublicCodeFromPublicKey(FxSetupStorageServerController.getDefaultServerPublicKey());
+			connectToServerAndSave(ipAddress, publicCode);
+		} 
+		catch (Exception e)
+		{
+			getStage().logAndNotifyUnexpectedError(e);
+		}
 	}
 	
 	@FXML
-	public void onSaveServerSetupChanges()
+	public void onConnectToAdvanceServer()
 	{
-		String ipAddress = serverIpAddress.getText();
-		String publicCode = serverPublicCode.getText();
-		boolean askComplianceAcceptance = !ipAddress.equals(FxSetupStorageServerController.getDefaultServerIp());
+		String ipAddress = advanceServerIpAddress.getText();
+		String publicCode = advanceServerPublicCode.getText();
+		connectToServerAndSave(ipAddress, publicCode);
+	}
+
+	public void connectToServerAndSave(String ipAddress, String publicCode)
+	{
+		boolean askComplianceAcceptance = !isDefaultServer(ipAddress);
 		if(attemptToConnect(ipAddress, publicCode, askComplianceAcceptance))
 		{
 			MartusApp app = getApp();
@@ -177,6 +246,11 @@ public class SettingsforServerController extends FxInSwingController
 				getStage().logAndNotifyUnexpectedError(e);
 			}
 		}
+	}
+
+	public boolean isDefaultServer(String ipAddress)
+	{
+		return ipAddress.equals(FxSetupStorageServerController.getDefaultServerIp());
 	}
 	
 	private boolean attemptToConnect(String serverIPAddress, String publicCode, boolean askComplianceAcceptance)
@@ -234,8 +308,8 @@ public class SettingsforServerController extends FxInSwingController
 				}
 			}
 
+			updateServerInfo(serverIPAddress, newServerPublicKey);
 			app.setServerInfo(serverIPAddress, newServerPublicKey, complianceStatement);
-			
 			app.getStore().clearOnServerLists();
 			
 			getMainWindow().forceRecheckOfUidsOnServer();
@@ -288,17 +362,27 @@ public class SettingsforServerController extends FxInSwingController
 
 	public final static String NEVER = "";
 	public final static String ON_STARTUP = "OnStartup";
+	private final static int TWENTY_DIGIT_FORMATED_PUBLIC_CODE_LENGTH = 24;
+	private final static int FORTY_DIGIT_FORMATED_PUBLIC_CODE_LENGTH = 49;
 
 	@FXML
-	private ChoiceBox automaticSyncFrequency;
+	private Label currentServerIp;
 	@FXML
-	private TextField serverIpAddress;
+	private Label currentServerPublicCode;
+	
 	@FXML
-	private TextField serverPublicCode;
+	private TextField advanceServerIpAddress;
+	@FXML
+	private TextField advanceServerPublicCode;
+	@FXML
+	private Button connectToAdvanceServer;
+
 	@FXML
 	private CheckBox serverDefaultToOn;
 	@FXML
 	private CheckBox automaticallyDownloadFromServer;
+	@FXML
+	private ChoiceBox automaticSyncFrequency;
 	
 	private String serverPublicKey;
 	
