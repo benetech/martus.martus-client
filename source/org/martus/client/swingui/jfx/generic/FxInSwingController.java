@@ -22,44 +22,15 @@ License along with this program; if not, write to the Free
 Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
- */
-
+*/
 package org.martus.client.swingui.jfx.generic;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionDoer;
 
-abstract public class FxInSwingContentController extends FxInSwingController
+public abstract class FxInSwingController extends FxController
 {
-	public FxInSwingContentController(UiMainWindow mainWindowToUse)
+	public FxInSwingController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle bundle)
-	{
-		super.initialize(location, bundle);
-		initialize();
-	}
-	
-	abstract public void initialize();
-	
-	public void save()
-	{
-	}
-	
-	public void logAndNotifyUnexpectedError(Exception e)
-	{
-		getStage().logAndNotifyUnexpectedError(e);
-	}
-	
-	protected void doAction(ActionDoer doer)
-	{
-		getStage().doAction(doer);
-	}
-
 }
