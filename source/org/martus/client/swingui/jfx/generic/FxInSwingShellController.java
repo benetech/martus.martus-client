@@ -42,7 +42,7 @@ import org.martus.client.swingui.TranslucentWindowObscurer;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 
-public abstract class FxInSwingShellController extends FxController implements FxShellController
+public abstract class FxInSwingShellController extends FxInSwingController implements FxShellController
 {
 	public FxInSwingShellController(UiMainWindow mainWindowToUse)
 	{
