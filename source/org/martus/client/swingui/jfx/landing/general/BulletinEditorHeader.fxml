@@ -16,7 +16,7 @@
 		</ImageView>
 	</left>
 	<right>
-		<Button mnemonicParsing="false" text="Templates...">
+		<Button mnemonicParsing="false" text="Templates..." onAction="#onSelectTemplate">
 		</Button>
 	</right>
 </BorderPane>
