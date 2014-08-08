@@ -33,6 +33,8 @@ import java.util.Set;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableSet;
 
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusLogger;
@@ -61,7 +63,8 @@ public class FormTemplateManager
 		security = cryptoToUse;
 		directory = directoryToUse;
 
-		templateNames = loadTemplateNames();
+		templateNames = FXCollections.observableSet();
+		templateNames.addAll(loadTemplateNames());
 		currentTemplateName = new SimpleStringProperty();
 	}
 	
@@ -198,6 +201,6 @@ public class FormTemplateManager
 	
 	private MartusCrypto security;
 	private File directory;
-	private Set<String> templateNames;
+	private ObservableSet<String> templateNames;
 	private Property<String> currentTemplateName;
 }
