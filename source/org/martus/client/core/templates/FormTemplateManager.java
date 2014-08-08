@@ -31,6 +31,9 @@ import java.io.FileNotFoundException;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleStringProperty;
+
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
@@ -59,12 +62,12 @@ public class FormTemplateManager
 		directory = directoryToUse;
 
 		templateNames = loadTemplateNames();
-		currentTemplateName = "";
+		currentTemplateName = new SimpleStringProperty();
 	}
 	
 	public FormTemplate getCurrentFormTemplate() throws Exception
 	{
-		return getTemplate(currentTemplateName);
+		return getTemplate(currentTemplateName.getValue());
 	}
 
 	public void putTemplate(FormTemplate template) throws Exception
@@ -127,7 +130,7 @@ public class FormTemplateManager
 		if(!doesTemplateExist(newCurrentTitle))
 			throw new FileNotFoundException("No such template: " + newCurrentTitle);
 
-		currentTemplateName = newCurrentTitle;
+		currentTemplateName.setValue(newCurrentTitle);
 	}
 	
 	private boolean doesTemplateExist(String title)
@@ -196,5 +199,5 @@ public class FormTemplateManager
 	private MartusCrypto security;
 	private File directory;
 	private Set<String> templateNames;
-	private String currentTemplateName;
+	private Property<String> currentTemplateName;
 }
