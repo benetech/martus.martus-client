@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.landing.general;
 
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -37,6 +38,12 @@ public class SettingsController extends FxFlexibleShellController
 	public SettingsController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+		firstTabToDisplay = SERVER_TAB;
+	}
+	
+	public void firstTabToDisplay(int tab)
+	{
+		firstTabToDisplay = tab;
 	}
 	
 	@Override
@@ -46,7 +53,7 @@ public class SettingsController extends FxFlexibleShellController
 		loadControllerAndEmbedInPane(new SettingsforServerController(getMainWindow()), serverContentPane);
 		loadControllerAndEmbedInPane(new SettingsforSystemController(getMainWindow()), systemContentPane);
 		loadControllerAndEmbedInPane(new SettingsForTorController(getMainWindow()), torContentPane);
-		
+		settingTabs.getSelectionModel().select(firstTabToDisplay);
 		return shellContents;
 	}
 
@@ -55,6 +62,15 @@ public class SettingsController extends FxFlexibleShellController
 	{
 		return "landing/general/Settings.fxml";
 	}
+	
+	
+	static public final int SERVER_TAB = 0;
+	static public final int SYSTEM_TAB = 1;
+	static public final int TOR_TAB = 2;
+	
+	
+	@FXML
+	private TabPane settingTabs;
 
 	@FXML
 	private Pane serverContentPane;
@@ -64,4 +80,6 @@ public class SettingsController extends FxFlexibleShellController
 
 	@FXML
 	private Pane torContentPane;
+	
+	private int firstTabToDisplay;
 }
