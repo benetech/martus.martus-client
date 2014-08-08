@@ -65,7 +65,7 @@ public class FormTemplateManager
 
 		templateNames = FXCollections.observableSet();
 		templateNames.addAll(loadTemplateNames());
-		currentTemplateName = new SimpleStringProperty();
+		currentTemplateName = new SimpleStringProperty(MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
 	}
 	
 	public FormTemplate getCurrentFormTemplate() throws Exception
