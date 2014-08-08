@@ -25,6 +25,10 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
+import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.input.MouseEvent;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 
@@ -39,5 +43,11 @@ public class BulletinEditorHeaderShellController extends FxNonWizardShellControl
 	public String getFxmlLocation()
 	{
 		return "landing/general/BulletinEditorHeader.fxml";
+	}
+
+	@FXML
+	public void onSelectTemplate(MouseEvent mouseEvent) 
+	{
+
 	}
 }
