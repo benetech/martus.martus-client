@@ -25,14 +25,51 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
+import java.net.URL;
+import java.util.Comparator;
+import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
+
+import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.core.templates.FormTemplateManager;
+import org.martus.client.search.SaneCollator;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
+import org.martus.common.fieldspec.ChoiceItem;
 
 public class SelectTemplateController extends FxInSwingController
 {
 	public SelectTemplateController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle bundle)
+	{
+		super.initialize(location, bundle);
+		
+		ClientBulletinStore store = getMainWindow().getApp().getStore();
+		ObservableSet<String> templateNames = store.getAvailableTemplates();
+		ObservableList<ChoiceItem> templateChoiceItems = FXCollections.observableArrayList();
+		templateNames.forEach(name -> templateChoiceItems.add(createTemplateChoiceItem(name)));
+		Comparator<ChoiceItem> sorter = new SaneCollator(getLocalization().getCurrentLanguageCode());
+		templateChoiceItems.sort(sorter);
+		availableTemplates.setItems(templateChoiceItems);
+	}
+	
+	private ChoiceItem createTemplateChoiceItem(String name)
+	{
+		String displayableName = name;
+		if(displayableName.equals(FormTemplateManager.MARTUS_DEFAULT_FORM_TEMPLATE_NAME))
+			displayableName = getLocalization().getFieldLabel("DisplayableDefaultFormTemplateName");
+		ChoiceItem choiceItem = new ChoiceItem(name, displayableName);
+		return choiceItem;
 	}
 
 	@Override
@@ -41,4 +78,6 @@ public class SelectTemplateController extends FxInSwingController
 		return "landing/general/SelectTemplate.fxml";
 	}
 
+	@FXML
+	private ListView<ChoiceItem> availableTemplates;
 }

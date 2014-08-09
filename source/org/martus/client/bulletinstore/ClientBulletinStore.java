@@ -44,6 +44,8 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.zip.ZipFile;
 
+import javafx.collections.ObservableSet;
+
 import org.martus.client.core.MartusClientXml;
 import org.martus.client.core.templates.FormTemplateManager;
 import org.martus.client.swingui.bulletintable.BulletinTableModel;
@@ -1540,6 +1542,11 @@ public class ClientBulletinStore extends BulletinStore
 		Vector tags = new Vector(Arrays.asList(BulletinTableModel.sortableFieldTags));
 		tags.remove(Bulletin.PSEUDOFIELD_WAS_SENT);
 		return (String[])tags.toArray(new String[0]);
+	}
+
+	public ObservableSet<String> getAvailableTemplates()
+	{
+		return formTemplateManager.getAvailableTemplatesProperty();
 	}
 
 	public FormTemplate getFormTemplate(String title) throws Exception
