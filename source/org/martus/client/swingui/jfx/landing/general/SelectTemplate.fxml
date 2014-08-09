@@ -6,26 +6,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<Label alignment="CENTER" prefWidth="500.0" text="Template Selector">
+		<Label alignment="CENTER" text="Template Selector">
 		</Label>
-		<TabPane layoutX="35.0" layoutY="31.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE">
+		<TabPane tabClosingPolicy="UNAVAILABLE" >
 			<tabs>
 				<Tab text="Available Templates">
 					<content>
-						<Pane prefHeight="336.0" prefWidth="500.0">
+						<HBox>
 							<children>
-								<ListView fx:id="availableTemplates">
+								<ListView fx:id="availableTemplates" prefWidth="400">
 								</ListView>
-								<HBox alignment="CENTER_RIGHT" layoutX="6.0" layoutY="92.0" prefHeight="50.0" prefWidth="480.0">
-									<children>
-										<Button mnemonicParsing="false" text="Select">
-										</Button>
-									</children>
-								</HBox>
+								<Button mnemonicParsing="false" text="Select">
+								</Button>
 							</children>
-						</Pane>
+						</HBox>
 					</content>
 				</Tab>
 				<Tab text="Add New Template">
