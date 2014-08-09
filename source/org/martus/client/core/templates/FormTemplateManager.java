@@ -43,6 +43,7 @@ import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
+import org.miradi.utils.EnhancedJsonObject;
 
 public class FormTemplateManager
 {
@@ -66,6 +67,8 @@ public class FormTemplateManager
 		templateNames = FXCollections.observableSet();
 		templateNames.addAll(loadTemplateNames());
 		currentTemplateName = new SimpleStringProperty(MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
+		
+		loadState();
 	}
 	
 	public Property<String> getCurrentFormTemplateNameProperty()
@@ -145,6 +148,39 @@ public class FormTemplateManager
 			throw new FileNotFoundException("No such template: " + newCurrentTitle);
 
 		currentTemplateName.setValue(newCurrentTitle);
+		saveState();
+	}
+
+	private void saveState() throws Exception
+	{
+		String currentTemplateFilename = getTemplateFile(currentTemplateName.getValue()).getName();
+		EnhancedJsonObject json = new EnhancedJsonObject();
+		json.put(JSON_CURRENT_TEMPLATE_FILENAME, currentTemplateFilename);
+		byte[] plainTextBytes = json.toString().getBytes("UTF-8");
+		File file = getCurrentTemplateFilenameFile();
+		File signatureFile = getSignatureFileFor(file);
+		security.encryptAndWriteFileAndSignatureFile(file, signatureFile, plainTextBytes);
+	}
+
+	private void loadState() throws Exception
+	{
+		File file = getCurrentTemplateFilenameFile();
+		if(!file.exists())
+			return;
+		
+		File signatureFile = getSignatureFileFor(file);
+		byte[] plainTextBytes = MartusSecurity.verifySignatureAndDecryptFile(file, signatureFile, security);
+		String jsonAsText = new String(plainTextBytes, "UTF-8");
+		EnhancedJsonObject json = new EnhancedJsonObject(jsonAsText);
+		String savedCurrentTemplateFilename = json.optString(JSON_CURRENT_TEMPLATE_FILENAME);
+		File templateFile = new File(directory, savedCurrentTemplateFilename);
+		String savedCurrentTemplateName = loadEncryptedTemplate(templateFile).getTitle();
+		setCurrentFormTemplate(savedCurrentTemplateName	);
+	}
+	
+	private File getCurrentTemplateFilenameFile()
+	{
+		return new File(directory, CURRENT_STATUS_FILENAME);
 	}
 	
 	private boolean doesTemplateExist(String title)
@@ -207,6 +243,9 @@ public class FormTemplateManager
 	}
 
 	public static final String MARTUS_DEFAULT_FORM_TEMPLATE_NAME = "";
+
+	private static final String CURRENT_STATUS_FILENAME = "Status.dat";
+	private static final String JSON_CURRENT_TEMPLATE_FILENAME = "CurrentTemplateFilename";
 	private static final String ENCRYPTED_MCT_EXTENSION = ".emct";
 	private static final String SIG_EXTENSION = ".sig";
 	

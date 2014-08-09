@@ -134,7 +134,6 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 		{
 			File templateDirectory = new File(tempDirectory, "templates");
 			FormTemplateManager manager = FormTemplateManager.createOrOpen(security, templateDirectory);
-			assertEquals("", manager.getCurrentFormTemplate().getTitle());
 			
 			FormTemplate defaultTemplate = manager.getTemplate("");
 			assertEquals("", defaultTemplate.getTitle());
@@ -154,6 +153,31 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 			catch(InvalidTemplateNameException ignoreExpected)
 			{
 			}
+		}
+		finally
+		{
+			DirectoryUtils.deleteEntireDirectoryTree(tempDirectory);
+		}
+	}
+	
+	public void testCurrentTemplate() throws Exception
+	{
+		File tempDirectory = createTempDirectory();
+		try
+		{
+			File templateDirectory = new File(tempDirectory, "templates");
+			FormTemplateManager manager = FormTemplateManager.createOrOpen(security, templateDirectory);
+			assertEquals("", manager.getCurrentFormTemplate().getTitle());
+			
+			String title = "other";
+			FormTemplate template = createFormTemplate(title, "");
+			manager.putTemplate(template);
+			assertEquals("", manager.getCurrentFormTemplate().getTitle());
+			manager.setCurrentFormTemplate(title);
+			assertEquals(title, manager.getCurrentFormTemplateNameProperty().getValue());
+			
+			FormTemplateManager otherManager = FormTemplateManager.createOrOpen(security, templateDirectory);
+			assertEquals(title, otherManager.getCurrentFormTemplateNameProperty().getValue());
 		}
 		finally
 		{
