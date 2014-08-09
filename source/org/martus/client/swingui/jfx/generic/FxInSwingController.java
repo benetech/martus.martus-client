@@ -26,11 +26,18 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.generic;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.MartusLogger;
 
 public abstract class FxInSwingController extends FxController
 {
 	public FxInSwingController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+	}
+
+	public void unexpectedError(Exception e)
+	{
+		MartusLogger.logException(e);
+		showNotifyDialog("UnexpectedError");
 	}
 }
