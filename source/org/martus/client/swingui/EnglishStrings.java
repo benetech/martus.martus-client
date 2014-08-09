@@ -236,6 +236,9 @@ public class EnglishStrings
 "wintitle:notifyErrorLoadingDictionary=Error",
 "wintitle:notifyErrorUpdatingDictionary=Error",
 
+"wintitle:SelectTemplate=Select Template",
+"confirmOkToSwitchTemplate=Changing templates may lose data (need real text here)",
+
 "wintitle:notifyContactKeyIsOurself=Contact Account Is Yourself",
 "field:notifyContactKeyIsOurselfcause=You cannot add yourself as a contact.",
 "wintitle:notifyContactKeyAlreadyExists=Contact Account Already Exists",

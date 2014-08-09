@@ -26,18 +26,21 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.general;
 
 import java.awt.Dimension;
+import java.awt.Window;
 
-import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
 import org.martus.client.swingui.jfx.generic.FxInSwingFrameStage;
 
 public class BulletinEditorHeaderStage extends FxInSwingFrameStage
 {
-	public BulletinEditorHeaderStage(UiMainWindow mainWindowToUse)
+	public BulletinEditorHeaderStage(Window dialogOrFrame, UiBulletinComponent view)
 	{
-		super(mainWindowToUse);
+		super(view.getMainWindow());
 		
-		shellController = new BulletinEditorHeaderShellController(getMainWindow());
+		shellController = new BulletinEditorHeaderShellController(view);
 		setShellController(shellController);
+		
+		setWindow(dialogOrFrame);
 		
 		// NOTE: setPreferredSize seems to be required, unfortunately
 		setPreferredSize(new Dimension(1, 40));

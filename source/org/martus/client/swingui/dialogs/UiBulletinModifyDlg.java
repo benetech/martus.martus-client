@@ -94,7 +94,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 		if(UiSession.isJavaFx)
 		{
-			headerStage = new BulletinEditorHeaderStage(observerToUse);
+			headerStage = new BulletinEditorHeaderStage(this, view);
 			FxRunner fxRunner = new FxRunner(headerStage);
 			fxRunner.setAbortImmediatelyOnError();
 			Platform.runLater(fxRunner);
