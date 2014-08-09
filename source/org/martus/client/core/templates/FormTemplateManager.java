@@ -107,6 +107,12 @@ public class FormTemplateManager
 		return templateNames;
 	}
 	
+	public ObservableSet<String> getAvailableTemplatesProperty()
+	{
+		// NOTE: Make a copy so nobody messes with the official data
+		return FXCollections.observableSet(templateNames);
+	}
+
 	public Set<String> loadTemplateNames() throws Exception
 	{
 		HashSet<String> available = new HashSet<String>();
