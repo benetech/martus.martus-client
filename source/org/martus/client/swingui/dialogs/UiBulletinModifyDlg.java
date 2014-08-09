@@ -77,66 +77,65 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		UiLocalization localization = observer.getLocalization();
 		setTitle(localization.getWindowTitle("create"));
 		UiMainWindow.updateIcon(this);
-			bulletin = b;
+		bulletin = b;
 
-			view = new UiBulletinEditor(observer);
-			view.copyDataFromBulletin(bulletin);
+		view = new UiBulletinEditor(observer);
+		view.copyDataFromBulletin(bulletin);
 
-			view.setEncryptionChangeListener(this);
-			view.setLanguageChangeListener(this);
+		view.setEncryptionChangeListener(this);
+		view.setLanguageChangeListener(this);
 
-			send = new UiButton(localization.getButtonLabel("send"));
-			send.addActionListener(this);
-			draft = new UiButton(localization.getButtonLabel("savedraft"));
-			draft.addActionListener(this);
-			cancel = new UiButton(localization.getButtonLabel("cancel"));
-			cancel.addActionListener(this);
+		send = new UiButton(localization.getButtonLabel("send"));
+		send.addActionListener(this);
+		draft = new UiButton(localization.getButtonLabel("savedraft"));
+		draft.addActionListener(this);
+		cancel = new UiButton(localization.getButtonLabel("cancel"));
+		cancel.addActionListener(this);
 
-			if(UiSession.isJavaFx)
-			{
-				headerStage = new BulletinEditorHeaderStage(observerToUse);
-				FxRunner fxRunner = new FxRunner(headerStage);
-				fxRunner.setAbortImmediatelyOnError();
-				Platform.runLater(fxRunner);
-			}
+		if(UiSession.isJavaFx)
+		{
+			headerStage = new BulletinEditorHeaderStage(observerToUse);
+			FxRunner fxRunner = new FxRunner(headerStage);
+			fxRunner.setAbortImmediatelyOnError();
+			Platform.runLater(fxRunner);
+		}
 
-			addScrollerView();
+		addScrollerView();
 
-			if(observer.getBulletinsAlwaysPrivate())
-				view.encryptAndDisableAllPrivate();
-			else
-				indicateEncrypted(bulletin.isAllPrivate());
+		if(observer.getBulletinsAlwaysPrivate())
+			view.encryptAndDisableAllPrivate();
+		else
+			indicateEncrypted(bulletin.isAllPrivate());
 
-			Box box = Box.createHorizontalBox();
-			Component buttons[] = {send, draft, cancel, Box.createHorizontalGlue()};
-			Utilities.addComponentsRespectingOrientation(box, buttons);
-			getContentPane().add(box, BorderLayout.SOUTH);
+		Box box = Box.createHorizontalBox();
+		Component buttons[] = {send, draft, cancel, Box.createHorizontalGlue()};
+		Utilities.addComponentsRespectingOrientation(box, buttons);
+		getContentPane().add(box, BorderLayout.SOUTH);
 
-			setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-			addWindowListener(this);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		addWindowListener(this);
 
-			Dimension screenSize = Utilities.getViewableScreenSize();
-			Dimension editorDimension = observerToUse.getBulletinEditorDimension();
-			Point editorPosition = observerToUse.getBulletinEditorPosition();
-			boolean showMaximized = false;
-			if(Utilities.isValidScreenPosition(screenSize, editorDimension, editorPosition))
-			{
-				setLocation(editorPosition);
-				setSize(editorDimension);
-				if(observerToUse.isBulletinEditorMaximized())
-					showMaximized = true;
-			}
-			else
+		Dimension screenSize = Utilities.getViewableScreenSize();
+		Dimension editorDimension = observerToUse.getBulletinEditorDimension();
+		Point editorPosition = observerToUse.getBulletinEditorPosition();
+		boolean showMaximized = false;
+		if(Utilities.isValidScreenPosition(screenSize, editorDimension, editorPosition))
+		{
+			setLocation(editorPosition);
+			setSize(editorDimension);
+			if(observerToUse.isBulletinEditorMaximized())
 				showMaximized = true;
-			if(showMaximized)
-			{
-				setSize(screenSize.width - 50, screenSize.height - 50);
-				Utilities.maximizeWindow(this);
-			}
-			Utilities.forceScrollerToTop(view);
-			
-			setGlassPane(new WindowObscurer());
-
+		}
+		else
+			showMaximized = true;
+		if(showMaximized)
+		{
+			setSize(screenSize.width - 50, screenSize.height - 50);
+			Utilities.maximizeWindow(this);
+		}
+		Utilities.forceScrollerToTop(view);
+		
+		setGlassPane(new WindowObscurer());
 	}
 
 	private void addScrollerView() 
