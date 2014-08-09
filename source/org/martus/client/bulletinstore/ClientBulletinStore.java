@@ -1513,6 +1513,13 @@ public class ClientBulletinStore extends BulletinStore
 		return new Bulletin(getSignatureGenerator(), headerUid, publicDataUid, privateDataUid, publicSpecs, privateSpecs);
 	}
 
+	public Bulletin createNewDraftWithCurrentTemplateButDataFrom(Bulletin original) throws Exception
+	{
+		FieldSpecCollection topSpecs = getCurrentFormTemplate().getTopFields();
+		FieldSpecCollection bottomSpecs = getCurrentFormTemplate().getBottomFields();
+		return createNewDraft(original, topSpecs, bottomSpecs);
+	}
+
 	public Bulletin createNewDraft(Bulletin original, FieldSpecCollection topSectionFieldSpecsToUse, FieldSpecCollection bottomSectionFieldSpecsToUse) throws Exception 
 	{
 		Bulletin newDraftBulletin = createEmptyBulletin(topSectionFieldSpecsToUse, bottomSectionFieldSpecsToUse);
