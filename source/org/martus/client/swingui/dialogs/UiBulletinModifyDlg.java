@@ -38,11 +38,15 @@ import java.awt.event.WindowListener;
 import java.util.HashMap;
 
 import javafx.application.Platform;
+import javafx.beans.property.Property;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JViewport;
+import javax.swing.SwingUtilities;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -136,8 +140,63 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		Utilities.forceScrollerToTop(view);
 		
 		setGlassPane(new WindowObscurer());
+		
+		ClientBulletinStore store = observerToUse.getApp().getStore();
+		Property<String> currentTemplateNameProperty = store.getCurrentFormTemplateNameProperty();
+		currentTemplateNameProperty.addListener(new TemplateChangeHandler(observerToUse));
 	}
 
+	class TemplateChangeHandler implements ChangeListener<String>
+	{
+		public TemplateChangeHandler(UiMainWindow mainWindowToUse)
+		{
+			mainWindow = mainWindowToUse;
+		}
+		
+		@Override
+		public void changed(ObservableValue<? extends String> currentTemplateName, String oldValue, String newValue)
+		{
+			try
+			{
+				ClientBulletinStore store = mainWindow.getApp().getStore();
+				Bulletin clonedBulletin = createClonedBulletinUsingCurrentTemplate(store);
+				SwingUtilities.invokeLater(() -> showBulletin(clonedBulletin));
+			} 
+			catch (Exception e)
+			{
+				
+			}
+		}
+
+		private UiMainWindow mainWindow;
+	}
+	
+	public Bulletin createClonedBulletinUsingCurrentTemplate(ClientBulletinStore store) throws Exception
+	{
+		Bulletin bulletinWithOldTemplateButLatestData = getCurrentBulletin();
+		view.copyDataToBulletin(bulletinWithOldTemplateButLatestData);
+		Bulletin clonedBulletin = store.createNewDraftWithCurrentTemplateButDataFrom(bulletinWithOldTemplateButLatestData);
+		return clonedBulletin;
+	}
+
+	protected Bulletin getCurrentBulletin()
+	{
+		return bulletin;
+	}
+
+	protected void showBulletin(Bulletin bulletinToShow)
+	{
+		bulletin = bulletinToShow;
+		try
+		{
+			view.copyDataFromBulletin(bulletin);
+		} 
+		catch (Exception e)
+		{
+			observer.unexpectedErrorDlg(e);
+		}
+	}
+	
 	private void addScrollerView() 
 	{
 		scroller = new UiScrollPane();
