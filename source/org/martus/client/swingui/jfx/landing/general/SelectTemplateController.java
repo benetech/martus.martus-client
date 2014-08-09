@@ -61,6 +61,13 @@ public class SelectTemplateController extends FxInSwingController
 		Comparator<ChoiceItem> sorter = new SaneCollator(getLocalization().getCurrentLanguageCode());
 		templateChoiceItems.sort(sorter);
 		availableTemplates.setItems(templateChoiceItems);
+		updateSelectionFromReality();
+	}
+
+	public void updateSelectionFromReality()
+	{
+		ClientBulletinStore store = getBulletinStore();
+		ObservableChoiceItemList templateChoiceItems = (ObservableChoiceItemList) availableTemplates.getItems();
 		try
 		{
 			ChoiceItem current = templateChoiceItems.findByCode(store.getCurrentFormTemplateName());
