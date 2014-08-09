@@ -34,17 +34,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
+import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 
 public class BulletinEditorHeaderShellController extends FxNonWizardShellController
 {
-	public BulletinEditorHeaderShellController(UiMainWindow mainWindowToUse)
+	public BulletinEditorHeaderShellController(UiBulletinComponent view)
 	{
-		super(mainWindowToUse);
+		super(view.getMainWindow());
+		
+		bulletinComponent = view;
 	}
 	
 	@Override
@@ -66,11 +68,20 @@ public class BulletinEditorHeaderShellController extends FxNonWizardShellControl
 	@FXML
 	private void onSelectTemplate(ActionEvent event) 
 	{
-		FxInSwingController controller = new SelectTemplateController(getMainWindow());
-		ActionDoer shellController = new DialogWithCloseShellController(getMainWindow(), controller);
-		doAction(shellController);
+		try
+		{
+			FxInSwingController controller = new SelectTemplateController(bulletinComponent);
+			ActionDoer shellController = new DialogWithCloseShellController(getMainWindow(), controller);
+			doAction(shellController);
+		}
+		catch (Exception e)
+		{
+			unexpectedError(e);
+		}
 	}
 	
 	@FXML
 	private Label currentTemplateLabel;
+	
+	private UiBulletinComponent bulletinComponent;
 }
