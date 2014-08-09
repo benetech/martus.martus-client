@@ -25,17 +25,12 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionDoer;
-import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
-import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
+import org.martus.client.swingui.jfx.generic.FxInSwingController;
 
-public class BulletinEditorHeaderShellController extends FxNonWizardShellController
+public class SelectTemplateController extends FxInSwingController
 {
-	public BulletinEditorHeaderShellController(UiMainWindow mainWindowToUse)
+	public SelectTemplateController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
@@ -43,14 +38,7 @@ public class BulletinEditorHeaderShellController extends FxNonWizardShellControl
 	@Override
 	public String getFxmlLocation()
 	{
-		return "landing/general/BulletinEditorHeader.fxml";
+		return "landing/general/SelectTemplate.fxml";
 	}
 
-	@FXML
-	public void onSelectTemplate(ActionEvent event) 
-	{
-		SelectTemplateController controller = new SelectTemplateController(getMainWindow());
-		ActionDoer shellController = new DialogWithCloseShellController(getMainWindow(), controller);
-		doAction(shellController);
-	}
 }
