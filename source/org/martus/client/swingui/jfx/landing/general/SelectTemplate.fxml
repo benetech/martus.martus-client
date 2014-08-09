@@ -18,7 +18,7 @@
 							<children>
 								<ListView fx:id="availableTemplates" prefWidth="400">
 								</ListView>
-								<Button mnemonicParsing="false" text="Select">
+								<Button mnemonicParsing="false" text="Select" onAction="#onSelect">
 								</Button>
 							</children>
 						</HBox>

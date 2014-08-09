@@ -68,6 +68,11 @@ public class FormTemplateManager
 		currentTemplateName = new SimpleStringProperty(MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
 	}
 	
+	public Property<String> getCurrentFormTemplateNameProperty()
+	{
+		return currentTemplateName;
+	}
+
 	public FormTemplate getCurrentFormTemplate() throws Exception
 	{
 		return getTemplate(currentTemplateName.getValue());
