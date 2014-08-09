@@ -29,9 +29,8 @@ import java.net.URL;
 import java.util.Comparator;
 import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
@@ -40,6 +39,7 @@ import org.martus.client.core.templates.FormTemplateManager;
 import org.martus.client.search.SaneCollator;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
+import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class SelectTemplateController extends FxInSwingController
@@ -54,13 +54,27 @@ public class SelectTemplateController extends FxInSwingController
 	{
 		super.initialize(location, bundle);
 		
-		ClientBulletinStore store = getMainWindow().getApp().getStore();
+		ClientBulletinStore store = getBulletinStore();
 		ObservableSet<String> templateNames = store.getAvailableTemplates();
-		ObservableList<ChoiceItem> templateChoiceItems = FXCollections.observableArrayList();
+		ObservableChoiceItemList templateChoiceItems = new ObservableChoiceItemList();
 		templateNames.forEach(name -> templateChoiceItems.add(createTemplateChoiceItem(name)));
 		Comparator<ChoiceItem> sorter = new SaneCollator(getLocalization().getCurrentLanguageCode());
 		templateChoiceItems.sort(sorter);
 		availableTemplates.setItems(templateChoiceItems);
+		try
+		{
+			ChoiceItem current = templateChoiceItems.findByCode(store.getCurrentFormTemplateName());
+			availableTemplates.getSelectionModel().select(current);
+		}
+		catch(Exception e)
+		{
+			unexpectedError(e);
+		}
+	}
+
+	public ClientBulletinStore getBulletinStore()
+	{
+		return getApp().getStore();
 	}
 	
 	private ChoiceItem createTemplateChoiceItem(String name)
@@ -76,6 +90,20 @@ public class SelectTemplateController extends FxInSwingController
 	public String getFxmlLocation()
 	{
 		return "landing/general/SelectTemplate.fxml";
+	}
+	
+	@FXML
+	public void onSelect(ActionEvent event)
+	{
+		ChoiceItem selected = availableTemplates.getSelectionModel().getSelectedItem();
+		try
+		{
+			getBulletinStore().setFormTemplate(selected.getCode());
+		}
+		catch(Exception e)
+		{
+			unexpectedError(e);
+		}
 	}
 
 	@FXML

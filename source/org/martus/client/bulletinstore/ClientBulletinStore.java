@@ -44,6 +44,7 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.zip.ZipFile;
 
+import javafx.beans.property.Property;
 import javafx.collections.ObservableSet;
 
 import org.martus.client.core.MartusClientXml;
@@ -990,6 +991,11 @@ public class ClientBulletinStore extends BulletinStore
 		return new File(AccountDir, "MartusFolders.dat");
 	}
 
+	public String getCurrentFormTemplateName() throws Exception
+	{
+		return getCurrentFormTemplate().getTitle();
+	}
+
 	public FormTemplate getCurrentFormTemplate() throws Exception
 	{
 		return formTemplateManager.getCurrentFormTemplate();
@@ -1542,6 +1548,11 @@ public class ClientBulletinStore extends BulletinStore
 		Vector tags = new Vector(Arrays.asList(BulletinTableModel.sortableFieldTags));
 		tags.remove(Bulletin.PSEUDOFIELD_WAS_SENT);
 		return (String[])tags.toArray(new String[0]);
+	}
+
+	public Property<String> getCurrentFormTemplateNameProperty()
+	{
+		return formTemplateManager.getCurrentFormTemplateNameProperty();
 	}
 
 	public ObservableSet<String> getAvailableTemplates()

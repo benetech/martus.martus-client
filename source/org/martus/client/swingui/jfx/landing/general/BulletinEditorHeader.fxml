@@ -16,7 +16,11 @@
 		</ImageView>
 	</left>
 	<right>
-		<Button mnemonicParsing="false" text="Templates..." onAction="#onSelectTemplate">
-		</Button>
+		<HBox>
+			<children>
+				<Label fx:id="currentTemplateLabel" prefWidth="200"/>
+				<Button mnemonicParsing="false" text="Templates..." onAction="#onSelectTemplate" />
+			</children>
+		</HBox>
 	</right>
 </BorderPane>

@@ -25,12 +25,19 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.beans.property.Property;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
+import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 
 public class BulletinEditorHeaderShellController extends FxNonWizardShellController
@@ -38,6 +45,16 @@ public class BulletinEditorHeaderShellController extends FxNonWizardShellControl
 	public BulletinEditorHeaderShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle bundle)
+	{
+		super.initialize(location, bundle);
+		
+		ClientBulletinStore store = getApp().getStore();
+		Property<String> currentTemplateName = store.getCurrentFormTemplateNameProperty();
+		currentTemplateLabel.textProperty().bind(currentTemplateName);
 	}
 
 	@Override
@@ -47,10 +64,13 @@ public class BulletinEditorHeaderShellController extends FxNonWizardShellControl
 	}
 
 	@FXML
-	public void onSelectTemplate(ActionEvent event) 
+	private void onSelectTemplate(ActionEvent event) 
 	{
-		SelectTemplateController controller = new SelectTemplateController(getMainWindow());
+		FxInSwingController controller = new SelectTemplateController(getMainWindow());
 		ActionDoer shellController = new DialogWithCloseShellController(getMainWindow(), controller);
 		doAction(shellController);
 	}
+	
+	@FXML
+	private Label currentTemplateLabel;
 }
