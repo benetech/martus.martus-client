@@ -241,6 +241,11 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		return isAllPrivate;
 	}
 
+	public UiMainWindow getMainWindow()
+	{
+		return mainWindow;
+	}
+
 	// Scrollable interface
 	public Dimension getPreferredScrollableViewportSize()
 	{
