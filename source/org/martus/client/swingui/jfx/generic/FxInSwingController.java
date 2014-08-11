@@ -34,6 +34,11 @@ public abstract class FxInSwingController extends FxController
 	{
 		super(mainWindowToUse);
 	}
+	
+	public void logAndNotifyUnexpectedError(Exception e)
+	{
+		getStage().logAndNotifyUnexpectedError(e);
+	}
 
 	public void unexpectedError(Exception e)
 	{
