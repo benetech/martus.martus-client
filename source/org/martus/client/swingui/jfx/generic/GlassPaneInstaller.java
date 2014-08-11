@@ -33,14 +33,14 @@ import javax.swing.JFrame;
 
 public class GlassPaneInstaller
 {
-	public GlassPaneInstaller(FxInSwingShellController controllerToUse)
+	public GlassPaneInstaller(FxInSwingController controllerToUse)
 	{
 		controller = controllerToUse;
 	}
 
 	final public void installGlassPane(Component glassPane)
 	{
-		Window window = controller.getWindow();
+		Window window = getWindow();
 		if(window instanceof JFrame)
 		{
 			JFrame frame = (JFrame) window;
@@ -62,5 +62,5 @@ public class GlassPaneInstaller
 		return controller.getWindow();
 	}
 	
-	private FxInSwingShellController controller;
+	private FxInSwingController controller;
 }
