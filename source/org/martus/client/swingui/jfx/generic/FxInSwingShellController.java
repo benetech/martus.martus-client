@@ -77,6 +77,21 @@ public abstract class FxInSwingShellController extends FxInSwingController imple
 		stage = stageToUse;
 	}
 
+	public Window getWindow()
+	{
+		return getSwingStage().getWindow();
+	}
+
+	protected void doAction(ActionDoer doer)
+	{
+		getStage().doAction(doer);
+	}
+
+	protected void close()
+	{
+		getStage().close();
+	}
+
 	protected void showModalPopupStage(Stage popupStage)
 	{
 		Runnable fronter = new Fronter(popupStage);
@@ -107,21 +122,6 @@ public abstract class FxInSwingShellController extends FxInSwingController imple
 			
 			glassPane.setVisible(false);
 		}
-	}
-
-	public Window getWindow()
-	{
-		return getSwingStage().getWindow();
-	}
-
-	protected void doAction(ActionDoer doer)
-	{
-		getStage().doAction(doer);
-	}
-
-	protected void close()
-	{
-		getStage().close();
 	}
 
 	protected static class DialogWindowHandler extends WindowAdapter implements MouseMotionListener
