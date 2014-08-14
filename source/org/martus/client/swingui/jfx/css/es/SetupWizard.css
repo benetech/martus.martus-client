@@ -11,7 +11,7 @@
 		-fx-border-radius: 5;
 		-fx-text-fill: White;
 		-fx-alignment: center;
-		-fx-font-size: 17px;
+		-fx-font-size: 13px;
 		-fx-padding: 5 35 5 35;
 }
 
@@ -20,7 +20,7 @@
 		-fx-border-radius: 5;
 		-fx-text-fill: White;
 		-fx-alignment: center;
-		-fx-font-size: 17px;
+		-fx-font-size: 13px;
 		-fx-padding: 5 35 5 35;
 }
 
@@ -29,7 +29,7 @@
 		-fx-border-radius: 5;
 		-fx-text-fill: White;
 		-fx-alignment: center;
-		-fx-font-size: 17px;
+		-fx-font-size: 13px;
 		-fx-padding: 5 35 5 35;
 }
 
@@ -40,7 +40,7 @@
 		-fx-border-radius: 5;
 		-fx-text-fill: Black;
 		-fx-alignment: center;
-		-fx-font-size: 17px;
+		-fx-font-size: 13px;
 		-fx-padding: 5 35 5 35;
 }
 
@@ -60,7 +60,7 @@
 	-fx-font-weight: bold;
 	-fx-text-fill: White;
 	-fx-alignment: center;
-	-fx-font-size: 17px;
+	-fx-font-size: 13px;
 	-fx-padding: 5 35 5 35;
 }
 
@@ -71,7 +71,7 @@
 	-fx-border-radius: 5;
 	-fx-text-fill: White;
 	-fx-alignment: center;
-	-fx-font-size: 17px;
+	-fx-font-size: 13px;
 	-fx-padding: 5 35 5 35;
 }
 
@@ -92,7 +92,7 @@
 .headingLevel3 {
   -fx-font-weight: bold;
 	-fx-text-fill: #4c5e70;
-	-fx-font-size: 13px;
+	-fx-font-size: 11px;
 	-fx-padding: 5 3 5 3;
 }
 
@@ -107,7 +107,7 @@
 .mainText {
 	-fx-text-fill: #4c5e70;
 	-fx-alignment: center-left;
-	-fx-font-size: 13px;
+	-fx-font-size: 11px;
 	-fx-font-weight: bold;
 	-fx-padding: 0 10 0 10;
 }
@@ -115,7 +115,7 @@
 .mainTextNotBold {
 	-fx-text-fill: #4c5e70;
 	-fx-alignment: center-left;
-	-fx-font-size: 13px;
+	-fx-font-size: 11px;
 	-fx-padding: 0 10 0 10;
 }
 
@@ -130,7 +130,7 @@
 .mainTextBoxText {
 	-fx-text-fill: #4c5e70;
 	-fx-alignment: center-left;
-	-fx-font-size: 13px;
+	-fx-font-size: 11px;
 	-fx-font-weight: bold;
 	-fx-padding: 0 10 0 7;
 }
@@ -138,13 +138,13 @@
 .hintText {
 	-fx-text-fill: #638a4b;
 	-fx-alignment: center-left;
-	-fx-font-size: 13px;
+	-fx-font-size: 11px;
 }
 
 .errorText {
 	-fx-text-fill: #FF2819;
 	-fx-alignment: center-left;
-	-fx-font-size: 13px;
+	-fx-font-size: 11px;
 }
 
 .Icon {
@@ -293,30 +293,30 @@
 
 .current-step .TopBarStepNumber {
 	-fx-text-fill: White;
-	-fx-font-size: 13px;
+	-fx-font-size: 12px;
 }
 
 .current-step .TopBarStepName {
 	-fx-text-fill: White;
-	-fx-font-size: 13px;
+	-fx-font-size: 12px;
 }
 
 .TopBarStepNumber {
 	-fx-text-fill: #707e87;
-	-fx-font-size: 13px;
+	-fx-font-size: 12px;
 	-fx-padding: 0 5 0 3;
 }
 
 .TopBarStepName {
 	-fx-text-fill: #707e87;
 	-fx-alignment: center-left;
-	-fx-font-size: 13px;
+	-fx-font-size: 12px;
 }
 
 .TopBarArrow {
 	-fx-text-fill: #707e87;
   -fx-padding: 4 4 4 4;
-	-fx-font-size: 13px;
+	-fx-font-size: 12px;
   -fx-font-weight: bold;
 }
 
@@ -342,12 +342,12 @@
   -fx-background-color: #e6e7e9;
   -fx-effect: null;
 }
-
+       
 .choice-box .label {
      -fx-text-fill: black;
 }
 
 .bigLink {
-	-fx-font-size: 15px;
+	-fx-font-size: 12px;
 	-fx-text-fill: Black;
 }
