@@ -217,25 +217,9 @@ public class FxLandingShellController extends FxNonWizardShellController
 	private void onOnline(ActionEvent event)
 	{
 		boolean oldState = getApp().getTransport().isOnline();
-		try
-		{
-			ConfigInfo configInfo = getApp().getConfigInfo();
-			boolean newState = !oldState;
-			
-			configInfo.setIsNetworkOnline(newState);
-			getApp().saveConfigInfo();
-
-			updateOnlineStatus();
-		} 
-		catch (SaveConfigInfoException e)
-		{
-			MartusLogger.logException(e);
-			showNotifyDialog("ErrorSavingConfig");
-		}
-		catch (Exception e)
-		{
-			logAndNotifyUnexpectedError(e);
-		}
+		boolean newState = !oldState;
+		getApp().turnNetowrkOnOrOff(newState);
+		updateOnlineStatus();
 	}
 
 	@FXML

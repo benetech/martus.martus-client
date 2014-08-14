@@ -76,8 +76,12 @@ public class SettingsforServerController extends FxInSwingController
 
 	private void initializeServerInfo()
 	{
-		serverPublicKey = getApp().getConfigInfo().getServerPublicKey();
-		String ipAddress = getApp().getConfigInfo().getServerName();
+		ConfigInfo configInfo = getApp().getConfigInfo();
+		boolean isNetworkOn = configInfo.isNetworkOnline();
+		serverDefaultToOn.selectedProperty().setValue(isNetworkOn);
+
+		serverPublicKey = configInfo.getServerPublicKey();
+		String ipAddress = configInfo.getServerName();
 		updateServerInfo(ipAddress, serverPublicKey);		
 	}
 
@@ -360,7 +364,9 @@ public class SettingsforServerController extends FxInSwingController
 	@FXML
 	public void onSaveServerPreferenceChanges()
 	{		
-		getApp().getConfigInfo().setSyncFrequencyMinutes(automaticSyncFrequency.getSelectionModel().getSelectedItem().getCode());
+		ConfigInfo configInfo = getApp().getConfigInfo();
+		configInfo.setSyncFrequencyMinutes(automaticSyncFrequency.getSelectionModel().getSelectedItem().getCode());
+		configInfo.setIsNetworkOnline(serverDefaultToOn.selectedProperty().getValue());
 		try
 		{
 			getApp().saveConfigInfo();
@@ -368,7 +374,8 @@ public class SettingsforServerController extends FxInSwingController
 		catch (SaveConfigInfoException e)
 		{
 			getStage().logAndNotifyUnexpectedError(e);
-		}		
+		}
+		getApp().turnNetworkOnOrOffAsRequested();
 	}
 
 	public final static String NEVER = "";
