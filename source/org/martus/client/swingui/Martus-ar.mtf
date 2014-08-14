@@ -1,10 +1,11 @@
-# Martus Client Translation File
+﻿# Martus Client Translation File
 # Language code:  ar
 # Language name:  
 # Translated by:
 # Exported date:  
 # Client version:  Martus\nReport-Msgid-Bugs-To: info@martus.org\nPOT-Creation-Date: 2014-05-21 14:20:48 -0700\nPO-Revision-Date: 2014-08-14 16:33+0000\nLast-Translator: Martus Translations <martus-translations@benespace.org>\nLanguage-Team: Arabic (http://www.transifex.com/projects/p/martus/language/ar/)\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nLanguage: ar\nPlural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n
 # Client build:
+!right-to-left
 # *** This MTF file was converted from a PO file
 
 #______________________=Add Contact...
@@ -1520,7 +1521,7 @@
 -7ae6-field:VirtualKeyboardBackSpace=مسافة للخلف
 
 #______________________________=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\\/?|;:~
--25df-field:VirtualKeyboardKeys=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\\/?|;:~
+-25df-field:VirtualKeyboardKeys=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@$%^&*()_,.[]{}<>\/?|;:~أبتثجحخدذرزسشصضطظعغفقكلمنهوي
 
 #_______________________________=Space
 -6d8c-field:VirtualKeyboardSpace=مسافة
@@ -4179,4 +4180,5 @@ field:translationVersion=English pre-4.5
 
 #_________________________________=Confirm Delete Folder
 -1a75-wintitle:warningdeletefolder=تأكيد حذف المجلد
+
 
