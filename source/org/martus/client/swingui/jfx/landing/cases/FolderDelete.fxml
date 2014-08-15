@@ -4,19 +4,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="messageTitle" styleClass="headingLevel1" />
       <Pane>
          <children>
-            <TextArea fx:id="messageTextArea" />
+            <TextArea fx:id="messageTextArea" wrapText="true" />
          </children>
       </Pane>
-      <HBox prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <CheckBox fx:id="deleteAssociatedFiles" mnemonicParsing="false" text="%DeleteAssociatedFilesInFolder" />
-         </children>
-      </HBox>
    </children>
 </VBox>

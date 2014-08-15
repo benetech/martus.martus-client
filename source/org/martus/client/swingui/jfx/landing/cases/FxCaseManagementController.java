@@ -301,7 +301,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	
 	class FolderDeletedListener implements ChangeListener<Boolean>
 	{
-		public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldFolderName, Boolean newlyCreatedFoldersName)
+		public void changed(ObservableValue<? extends Boolean> observableValue, Boolean arg0, Boolean arg1)
 		{
 			updateCasesSelectDefaultCase();
 		}		
