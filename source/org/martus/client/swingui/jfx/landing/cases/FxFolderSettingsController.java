@@ -34,14 +34,13 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 import org.martus.client.core.ConfigInfo;
-import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxInSwingContentController;
+import org.martus.client.swingui.jfx.generic.DialogWithOkCancelContentController;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class FxFolderSettingsController extends FxInSwingContentController
+public class FxFolderSettingsController extends DialogWithOkCancelContentController
 {
 	public FxFolderSettingsController(UiMainWindow mainWindowToUse, ChangeListener folderLabelIndexListenertoUse, ChangeListener folderCustomLabelListenerToUse)
 	{
@@ -53,7 +52,8 @@ public class FxFolderSettingsController extends FxInSwingContentController
 	
 	public void initialize()
 	{
-		ObservableChoiceItemList folderNameChoices = getFolderLabelChoices(getMainWindow().getLocalization());
+		MartusLocalization localization = getMainWindow().getLocalization();
+		ObservableChoiceItemList folderNameChoices = getFolderLabelChoices(localization);
 		fxFolderChoiceBox.setItems(folderNameChoices);
 		String folderNameCustom = config.getFolderLabelCustomName();
 
@@ -75,20 +75,6 @@ public class FxFolderSettingsController extends FxInSwingContentController
 		fxFolderCustomTextField.textProperty().addListener(folderCustomLabelListener);
 	}
 	
-	@Override public void save()
-	{
-		try
-		{
-			config.setFolderLabelCode(fxFolderChoiceBox.getSelectionModel().getSelectedItem().getCode());
-			config.setFolderLabelCustomName(fxFolderCustomTextField.getText());
-			
-			getApp().saveConfigInfo();
-		} 
-		catch (SaveConfigInfoException e)
-		{
-			logAndNotifyUnexpectedError(e);
-		}
-	}
 	
 	protected void setFolderLabelCode(String code)
 	{
@@ -99,6 +85,7 @@ public class FxFolderSettingsController extends FxInSwingContentController
 	protected void setFolderLabelCustomName(String customName)
 	{
 		config.setFolderLabelCustomName(customName);
+		getMainWindow().saveConfigInfo();
 	}
 	
 	private final class FolderNameChoiceBoxListener implements ChangeListener<ChoiceItem>
@@ -135,6 +122,7 @@ public class FxFolderSettingsController extends FxInSwingContentController
 		{
 			fxFolderCustomTextField.setVisible(false);
 		}
+		getMainWindow().saveConfigInfo();
 	}
 	
 	public static ObservableChoiceItemList getFolderLabelChoices(MartusLocalization localization)
@@ -155,6 +143,14 @@ public class FxFolderSettingsController extends FxInSwingContentController
 		return getFoldersHeading(folderCodeToFind, folderLabelCustomName, localization);
 	}
 
+	public static String getCurrentFoldersHeading(ConfigInfo configInfo, MartusLocalization localization)
+	{
+		String code = configInfo.getFolderLabelCode();
+		String custom = configInfo.getFolderLabelCustomName();
+		String foldersLabel = getFoldersHeading(code, custom, localization);
+		return foldersLabel;
+	}
+	
 	public static String getFoldersHeading(String folderCodeToFind, String folderLabelCustomName, MartusLocalization localization)
 	{
 		if(folderCodeToFind.equals(FOLDER_CODE_CUSTOM))

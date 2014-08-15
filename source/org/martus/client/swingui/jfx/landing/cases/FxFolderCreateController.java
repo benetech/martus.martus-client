@@ -36,6 +36,8 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.DialogWithOkCancelContentController;
+import org.martus.util.TokenReplacement;
+import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class FxFolderCreateController extends DialogWithOkCancelContentController
 {
@@ -53,10 +55,26 @@ public class FxFolderCreateController extends DialogWithOkCancelContentControlle
 	public void initialize()
 	{
 		MartusLocalization localization = getLocalization();
+		String foldersLabel = FxFolderSettingsController.getCurrentFoldersHeading(getApp().getConfigInfo(), localization);
+		updateCaseIncedentProjectTitle(messageTitle, localization, "CreateCaseIncedentProject", foldersLabel);
 		String defaultFolderNewName = localization.getFieldLabel("defaultCaseName");
 		folderName.textProperty().addListener(new FolderNameChangeListener());
 		folderName.setText(defaultFolderNewName);
 		getOkCancelStage().setOkButtonText(localization.getButtonLabel("CreateFolder"));
+	}
+
+	public static void updateCaseIncedentProjectTitle(Label messageTitle, MartusLocalization localization, String code, String foldersLabel)
+	{
+		try
+		{
+			String createTitle = localization.getWindowTitle(code);
+			String createRealTitle = TokenReplacement.replaceToken(createTitle, "#FolderName#", foldersLabel);
+			messageTitle.setText(createRealTitle);
+		} 
+		catch (TokenInvalidException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -126,11 +144,14 @@ public class FxFolderCreateController extends DialogWithOkCancelContentControlle
 	}
 	
 	@FXML
+	private Label messageTitle;
+
+	@FXML
 	private TextField folderName;
 	
 	@FXML
 	private Label hintFolderError;
-
+	
 	private static final String LOCATION_FOLDER_CREATE_FXML = "landing/cases/FolderCreate.fxml";
 	private ChangeListener folderCreatedListener;
 }

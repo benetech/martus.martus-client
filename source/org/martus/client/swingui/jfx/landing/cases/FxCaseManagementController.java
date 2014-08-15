@@ -117,14 +117,10 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		updateCaseList();
 	}
 
-
 	protected void updateCases(String caseNameToSelect)
 	{
-		String code = getApp().getConfigInfo().getFolderLabelCode();
-		String custom = getApp().getConfigInfo().getFolderLabelCustomName();
-
-		String foldersLabel = FxFolderSettingsController.getFoldersHeading(code, custom, getLocalization());
-		updateFoldersLabel(foldersLabel);
+		String foldersLabel = FxFolderSettingsController.getCurrentFoldersHeading(getApp().getConfigInfo(), getLocalization());
+		updateFolderLabelName(foldersLabel);
 
 		caseListProviderAll.clear();
 		caseListProviderOpen.clear();
@@ -151,7 +147,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		orderCases();
 		selectCase(caseNameToSelect);
 	}
-	
+
 	private boolean shouldNotShowFolder(BulletinFolder folder)
 	{
 		ClientBulletinStore store = getApp().getStore();
@@ -318,7 +314,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 			String code = newItem.getCode();
 			String customLabel = getApp().getConfigInfo().getFolderLabelCustomName();
 			String foldersLabel = FxFolderSettingsController.getFoldersHeading(code, customLabel, getLocalization());
-			updateFoldersLabel(foldersLabel);
+			updateFolderLabelName(foldersLabel);
 		}
 	}
 
@@ -338,11 +334,6 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	protected void updateFolderLabelName(String newLabel)
 	{
 		folderNameLabel.setText(newLabel);
-	}
-
-	protected void updateFoldersLabel(String heading)
-	{
-		folderNameLabel.setText(heading);
 	}
 
 	public static final String LOCATION_CASE_MANAGEMENT_FXML = "landing/cases/CaseManagement.fxml";
