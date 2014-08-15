@@ -132,7 +132,7 @@ public class SettingsforServerController extends FxInSwingController
 	
 	private boolean isIpAndPublicCodeValid(String ipAddress, String publicCode)
 	{
-		if(!ipAddress.matches("\\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b"))
+		if(!getMainWindow().isServerAccessible(ipAddress))
 				return false;
 		
 		int publicCodeLength = publicCode.length();
