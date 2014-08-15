@@ -134,10 +134,11 @@ public class SettingsforServerController extends FxInSwingController
 	{
 		if(!getMainWindow().isServerAccessible(ipAddress))
 				return false;
-		
-		int publicCodeLength = publicCode.length();
-		return (		publicCodeLength == TWENTY_DIGIT_FORMATED_PUBLIC_CODE_LENGTH 
-				 || publicCodeLength == FORTY_DIGIT_FORMATED_PUBLIC_CODE_LENGTH);
+
+		String normalizedPublicCode = MartusCrypto.removeNonDigits(publicCode);
+		int publicCodeLength = normalizedPublicCode.length();
+		return (		publicCodeLength == NORMALIZED_TWENTY_DIGIT_PUBLIC_CODE_LENGTH 
+				 || publicCodeLength == NORMALIZED_FORTY_DIGIT_PUBLIC_CODE_LENGTH);
 	}
 
 	private void initializeSyncFrequency()
@@ -380,8 +381,8 @@ public class SettingsforServerController extends FxInSwingController
 
 	public final static String NEVER = "";
 	public final static String ON_STARTUP = "OnStartup";
-	private final static int TWENTY_DIGIT_FORMATED_PUBLIC_CODE_LENGTH = 24;
-	private final static int FORTY_DIGIT_FORMATED_PUBLIC_CODE_LENGTH = 49;
+	private final static int NORMALIZED_TWENTY_DIGIT_PUBLIC_CODE_LENGTH = 20;
+	private final static int NORMALIZED_FORTY_DIGIT_PUBLIC_CODE_LENGTH = 40;
 
 	@FXML
 	private Label currentServerIp;
