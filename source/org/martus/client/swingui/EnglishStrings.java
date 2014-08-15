@@ -347,7 +347,8 @@ public class EnglishStrings
 "wintitle:SearchProgress=Searching...",
 "wintitle:ReportSearchProgress=Searching...",
 "wintitle:LoadingFieldValuesFromAllBulletins=Loading Values...",
-
+"wintitle:CreateCaseIncedentProject=Create #FolderName#",
+"wintitle:DeleteCaseIncedentProject=Delete #FolderName#",
 "field:CreatingAccount=Please wait. Your account's encryption key is being created.",
 "field:LoadingTemplates=Please wait while we retrieve a list of templates from the server.",
 "field:FindAccountByToken=Please wait while we find this account on the server.",
@@ -1856,8 +1857,8 @@ public class EnglishStrings
 "button:On=On",
 "button:Off=Off",
 
-"field:TitleCaseManagement=Case Management",
-"field:MainFolderLabel=Folder Label:",
+"field:TitleCaseManagement=Management",
+"field:MainFolderLabel=Label:",
 "field:EmptyCustomName=Custom Name",
 "field:FolderNameCases=Cases",
 "field:FolderNameIncidents=Incidents",

@@ -54,8 +54,8 @@ public class FxFolderDeleteController extends DialogWithOkCancelContentControlle
 	public void initialize()
 	{
 		MartusLocalization localization = getLocalization();
-		String title = localization.getWindowTitle("DeleteFolder");
-		messageTitle.setText(title);
+		String foldersLabel = FxFolderSettingsController.getCurrentFoldersHeading(getApp().getConfigInfo(), localization);
+		FxFolderCreateController.updateCaseIncedentProjectTitle(messageTitle, localization, "DeleteCaseIncedentProject", foldersLabel);
 		messageTextArea.setEditable(false);
 		String deleteFolderMessage = localization.getFieldLabel("DeleteFolderMessage");
 		try
