@@ -233,6 +233,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("aws-dev");
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("54.245.101.104"); // aws-dev
 	}
+	
+	public boolean isServerAccessible(String address)
+	{
+		return ClientSideNetworkHandlerUsingXmlRpc.isServerAllowed(address);
+	}
 
 	public boolean run()
 	{
