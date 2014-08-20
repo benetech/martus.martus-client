@@ -19,6 +19,7 @@
 4. Crear un boletín
 4a. Rellenar los campos de un boletín
 4b. Personalizar sus boletines
+4c. Comprobación de la ortografía del texto en sus boletines
 5. Guardar y modificar sus boletines
 5a. ¿Cómo guardar un boletín sellado?
 5b. ¿Cómo guardar un borrador?
@@ -26,6 +27,7 @@
 5d. ¿Cómo modificar un borrador?
 5e. ¿Cómo desechar un borrador?
 5f. ¿Cómo desechar un boletín sellado?
+5g. Sellado de un grupo de boletines borrador al mismo tiempo
 6. Trabajando con sus boletines
 6a. Carpetas por defecto
 6b. Otras carpetas creadas por Martus
@@ -35,29 +37,28 @@
 6f. ¿Cómo mover boletines a su escritorio?
 6g. ¿Cómo bajar sus boletines sellados?
 6h. ¿Cómo bajar sus borradores?
-6i. ¿Cómo bajar boletines creados por oficinas regionales?
+6i. ¿Cómo bajar boletines creados por los contactos?
 6j. ¿Cómo ver versiones anteriores de un boletín?
 6k. ¿Cómo ver y guardar archivos adjuntos a un boletín?
 6l. ¿Cómo ver boletines dañados?
 6m. ¿Cómo buscar boletines específicos?
 6n. ¿Cómo imprimir boletines?
 6o. ¿Cómo crear reportes?
-6p. ¿Cómo exportar la información de sus boletines?
-6q. ¿Cómo importar boletin(es)?
+6q. ¿Cómo exportar la información de sus boletines?
+6r. ¿Cómo importar boletin(es)?
 7. Eliminar todos sus boletines y la información de su cuenta
 8. Eliminar toda la información en Martus, incluyendo el programa
 9. Para mantener su información segura
 9a. La seguridad de Martus y cómo funciona
-9b. ¿Cómo hacer una copia de seguridad de su llave?
+9b. Creando copia de seguridad de su clave
 9c. ¿Cómo recuperar su llave de una copia de seguridad?
 9d. Precauciones en el uso de su contraseña
 9e. Uso seguro de su computadora
-9f. Compartiendo su información privada con colegas
+9f. Compartiendo su información privada con los contactos
 9g. ¿Cómo permitir que otras cuentas envíen sus boletines a un servidor?
 9h. ¿Cómo cambiar su nombre de usuario o contraseña?
 10. Personalizando Martus
-10a. ¿Cómo usar una plantilla para el campo 'Detalles'?
-10b. Personalizando los campos de sus boletines
-10c. Utilizar Plantillas Personalizadas
-10d. Personalizando la visualización de su boletín
+10a. Personalizando los campos de sus boletines
+10b. Utilizar Plantillas Personalizadas
+10c. Personalizando la visualización de su boletín
 11. Preguntas frecuentes
