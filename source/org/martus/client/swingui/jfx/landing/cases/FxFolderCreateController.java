@@ -131,10 +131,7 @@ public class FxFolderCreateController extends FxFolderBaseController
 
 	@FXML
 	private TextField folderName;
-	
-	@FXML
-	private Label hintFolderError;
-	
+		
 	private static final String LOCATION_FOLDER_CREATE_FXML = "landing/cases/FolderCreate.fxml";
 	private ChangeListener folderCreatedListener;
 }

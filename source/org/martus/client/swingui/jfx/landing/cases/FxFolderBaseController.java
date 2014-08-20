@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.cases;
 
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 import org.martus.client.swingui.MartusLocalization;
@@ -55,4 +56,7 @@ public abstract class FxFolderBaseController extends DialogWithOkCancelContentCo
 		}
 	}
 
+	
+	@FXML
+	protected Label hintFolderError;
 }
