@@ -35,6 +35,10 @@ import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public abstract class FxFolderBaseController extends DialogWithOkCancelContentController
 {
+	public FxFolderBaseController(UiMainWindow mainWindowToUse)
+	{
+		super(mainWindowToUse);
+	}
 
 	public void updateCaseIncedentProjectTitle(Label messageTitle, String code, String foldersLabel)
 	{
@@ -49,11 +53,6 @@ public abstract class FxFolderBaseController extends DialogWithOkCancelContentCo
 		{
 			e.printStackTrace();
 		}
-	}
-
-	public FxFolderBaseController(UiMainWindow mainWindowToUse)
-	{
-		super(mainWindowToUse);
 	}
 
 }
