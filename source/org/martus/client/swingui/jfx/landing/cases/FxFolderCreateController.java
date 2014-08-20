@@ -35,8 +35,6 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.util.TokenReplacement;
-import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class FxFolderCreateController extends FxFolderBaseController
 {
@@ -60,20 +58,6 @@ public class FxFolderCreateController extends FxFolderBaseController
 		folderName.textProperty().addListener(new FolderNameChangeListener());
 		folderName.setText(defaultFolderNewName);
 		getOkCancelStage().setOkButtonText(localization.getButtonLabel("CreateFolder"));
-	}
-
-	public static void updateCaseIncedentProjectTitle(Label messageTitle, MartusLocalization localization, String code, String foldersLabel)
-	{
-		try
-		{
-			String titleWithTokens = localization.getWindowTitle(code);
-			String completeTitle = TokenReplacement.replaceToken(titleWithTokens, "#FolderName#", foldersLabel);
-			messageTitle.setText(completeTitle);
-		} 
-		catch (TokenInvalidException e)
-		{
-			e.printStackTrace();
-		}
 	}
 
 	@Override

@@ -25,11 +25,31 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.cases;
 
+import javafx.scene.control.Label;
+
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.DialogWithOkCancelContentController;
+import org.martus.util.TokenReplacement;
+import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public abstract class FxFolderBaseController extends DialogWithOkCancelContentController
 {
+
+	public static void updateCaseIncedentProjectTitle(Label messageTitle,
+			MartusLocalization localization, String code, String foldersLabel)
+	{
+		try
+		{
+			String titleWithTokens = localization.getWindowTitle(code);
+			String completeTitle = TokenReplacement.replaceToken(titleWithTokens, "#FolderName#", foldersLabel);
+			messageTitle.setText(completeTitle);
+		} 
+		catch (TokenInvalidException e)
+		{
+			e.printStackTrace();
+		}
+	}
 
 	public FxFolderBaseController(UiMainWindow mainWindowToUse)
 	{
