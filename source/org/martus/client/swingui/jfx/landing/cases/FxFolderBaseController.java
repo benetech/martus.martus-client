@@ -36,11 +36,11 @@ import org.martus.util.TokenReplacement.TokenInvalidException;
 public abstract class FxFolderBaseController extends DialogWithOkCancelContentController
 {
 
-	public static void updateCaseIncedentProjectTitle(Label messageTitle,
-			MartusLocalization localization, String code, String foldersLabel)
+	public void updateCaseIncedentProjectTitle(Label messageTitle, String code, String foldersLabel)
 	{
 		try
 		{
+			MartusLocalization localization = getLocalization();
 			String titleWithTokens = localization.getWindowTitle(code);
 			String completeTitle = TokenReplacement.replaceToken(titleWithTokens, "#FolderName#", foldersLabel);
 			messageTitle.setText(completeTitle);

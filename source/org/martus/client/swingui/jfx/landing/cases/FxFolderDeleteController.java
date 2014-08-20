@@ -54,7 +54,7 @@ public class FxFolderDeleteController extends FxFolderBaseController
 	{
 		MartusLocalization localization = getLocalization();
 		String foldersLabel = FxFolderSettingsController.getCurrentFoldersHeading(getApp().getConfigInfo(), localization);
-		updateCaseIncedentProjectTitle(messageTitle, localization, "DeleteCaseIncedentProject", foldersLabel);
+		updateCaseIncedentProjectTitle(messageTitle, "DeleteCaseIncedentProject", foldersLabel);
 		messageTextArea.setEditable(false);
 		String deleteFolderMessage = localization.getFieldLabel("DeleteFolderMessage");
 		try
