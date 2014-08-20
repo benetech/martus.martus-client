@@ -42,6 +42,8 @@ public class BulletinTableRowData
 		long dateLastSaved = bulletin.getBulletinHeaderPacket().getLastSavedTime();
 		dateSaved = new SimpleStringProperty(localization.formatDateTime(dateLastSaved));
 		this.onServer = new SimpleBooleanProperty(onServer);
+		viewBulletin = new SimpleStringProperty("View");
+		editBulletin = new SimpleStringProperty("Edit");
 	}
 	
 	public UniversalId getUniversalId()
@@ -89,15 +91,39 @@ public class BulletinTableRowData
     		return onServer;
     }
 
-    
+    public String getViewBulletin()
+	{
+		return viewBulletin.get();
+	}
+	
+    public SimpleStringProperty viewBulletinProperty() 
+    { 
+        return viewBulletin; 
+    }
+
+    public String getEditBulletin()
+ 	{
+ 		return editBulletin.get();
+ 	}
+ 	
+     public SimpleStringProperty editBulletinProperty() 
+     { 
+         return editBulletin; 
+     }
+
     static public final String TITLE_PROPERTY_NAME = "title";
     static public final String AUTHOR_PROPERTY_NAME = "author";
     static public final String DATE_SAVDED_PROPERTY_NAME = "dateSaved";
     static public final String ON_SERVER_PROPERTY_NAME = "onServer";
+    static public final String VIEW_BULLETIN_PROPERTY_NAME = "viewBulletin";
+    static public final String EDIT_BULLETIN_PROPERTY_NAME = "editBulletin";
     
     private final SimpleStringProperty title;
 	private final SimpleStringProperty author;
 	private final SimpleStringProperty dateSaved;
 	private final SimpleBooleanProperty onServer;
+	private final SimpleStringProperty viewBulletin;
+	private final SimpleStringProperty editBulletin;
+	
 	private final UniversalId uid;
 }
