@@ -53,7 +53,7 @@ public class FxFolderCreateController extends FxFolderBaseController
 	{
 		MartusLocalization localization = getLocalization();
 		String foldersLabel = FxFolderSettingsController.getCurrentFoldersHeading(getApp().getConfigInfo(), localization);
-		updateCaseIncedentProjectTitle(messageTitle, localization, "CreateCaseIncedentProject", foldersLabel);
+		updateCaseIncedentProjectTitle(messageTitle, "CreateCaseIncedentProject", foldersLabel);
 		String defaultFolderNewName = localization.getFieldLabel("defaultCaseName");
 		folderName.textProperty().addListener(new FolderNameChangeListener());
 		folderName.setText(defaultFolderNewName);
