@@ -32,7 +32,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import org.martus.client.bulletinstore.BulletinFolder;
-import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 
@@ -77,38 +76,6 @@ public class FxFolderCreateController extends FxFolderBaseController
 	public String getFxmlLocation()
 	{
 		return LOCATION_FOLDER_CREATE_FXML;
-	}
-	
-	private void setHintFolderErrorText(String hintText)
-	{
-		hintFolderError.setText(hintText);
-	}
-	
-	private void clearHintFolderErrorText()
-	{
-		setHintFolderErrorText("");
-	}
-
-	protected void updateButtonStatusAndFolderHint(String newFolderName)
-	{
-		MartusLocalization localization = getLocalization();
-		ClientBulletinStore store = getMainWindow().getStore();
-		boolean isOkButtonDisabled = false;
-		if(!store.isFolderNameValid(newFolderName))
-		{
-			setHintFolderErrorText(localization.getFieldLabel("HintFolderNameInvalid"));
-			isOkButtonDisabled = true;
-		}
-		else if(store.doesFolderNameAlreadyExist(newFolderName))
-		{
-			setHintFolderErrorText(localization.getFieldLabel("HintFolderNameAlreadyExists"));
-			isOkButtonDisabled = true;
-		}
-		else
-		{
-			clearHintFolderErrorText();
-		}
-		getOkCancelStage().setOkButtonDisabled(isOkButtonDisabled);
 	}
 	
 	private class FolderNameChangeListener implements ChangeListener<String>

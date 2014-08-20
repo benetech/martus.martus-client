@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.landing.cases;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.DialogWithOkCancelContentController;
@@ -41,7 +42,7 @@ public abstract class FxFolderBaseController extends DialogWithOkCancelContentCo
 		super(mainWindowToUse);
 	}
 
-	public void updateCaseIncedentProjectTitle(Label messageTitle, String code, String foldersLabel)
+	protected void updateCaseIncedentProjectTitle(Label messageTitle, String code, String foldersLabel)
 	{
 		try
 		{
@@ -57,6 +58,39 @@ public abstract class FxFolderBaseController extends DialogWithOkCancelContentCo
 	}
 
 	
+	private void setHintFolderErrorText(String hintText)
+	{
+		hintFolderError.setText(hintText);
+	}
+
+	private void clearHintFolderErrorText()
+	{
+		setHintFolderErrorText("");
+	}
+
+	protected void updateButtonStatusAndFolderHint(String newFolderName)
+	{
+		MartusLocalization localization = getLocalization();
+		ClientBulletinStore store = getMainWindow().getStore();
+		boolean isOkButtonDisabled = false;
+		if(!store.isFolderNameValid(newFolderName))
+		{
+			setHintFolderErrorText(localization.getFieldLabel("HintFolderNameInvalid"));
+			isOkButtonDisabled = true;
+		}
+		else if(store.doesFolderNameAlreadyExist(newFolderName))
+		{
+			setHintFolderErrorText(localization.getFieldLabel("HintFolderNameAlreadyExists"));
+			isOkButtonDisabled = true;
+		}
+		else
+		{
+			clearHintFolderErrorText();
+		}
+		getOkCancelStage().setOkButtonDisabled(isOkButtonDisabled);
+	}
+
+
 	@FXML
 	protected Label hintFolderError;
 }
