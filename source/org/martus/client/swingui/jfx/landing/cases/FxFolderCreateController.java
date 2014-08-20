@@ -35,11 +35,10 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.DialogWithOkCancelContentController;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 
-public class FxFolderCreateController extends DialogWithOkCancelContentController
+public class FxFolderCreateController extends FxFolderBaseController
 {
 	public FxFolderCreateController(UiMainWindow mainWindowToUse)
 	{
@@ -67,9 +66,9 @@ public class FxFolderCreateController extends DialogWithOkCancelContentControlle
 	{
 		try
 		{
-			String createTitle = localization.getWindowTitle(code);
-			String createRealTitle = TokenReplacement.replaceToken(createTitle, "#FolderName#", foldersLabel);
-			messageTitle.setText(createRealTitle);
+			String titleWithTokens = localization.getWindowTitle(code);
+			String completeTitle = TokenReplacement.replaceToken(titleWithTokens, "#FolderName#", foldersLabel);
+			messageTitle.setText(completeTitle);
 		} 
 		catch (TokenInvalidException e)
 		{
