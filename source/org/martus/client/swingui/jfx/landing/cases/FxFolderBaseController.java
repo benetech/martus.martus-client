@@ -70,12 +70,23 @@ public abstract class FxFolderBaseController extends DialogWithOkCancelContentCo
 
 	protected void updateButtonStatusAndFolderHint(String newFolderName)
 	{
+		String currentNameOfFolder = "";
+		updateButtonStatusAndFolderHint(newFolderName, currentNameOfFolder);
+	}
+
+	public void updateButtonStatusAndFolderHint(String newFolderName, String currentNameOfFolder)
+	{
 		MartusLocalization localization = getLocalization();
 		ClientBulletinStore store = getMainWindow().getStore();
 		boolean isOkButtonDisabled = false;
 		if(!store.isFolderNameValid(newFolderName))
 		{
 			setHintFolderErrorText(localization.getFieldLabel("HintFolderNameInvalid"));
+			isOkButtonDisabled = true;
+		}
+		else if(currentNameOfFolder.equals(newFolderName))
+		{
+			setHintFolderErrorText(localization.getFieldLabel("HintFolderNameIsSame"));
 			isOkButtonDisabled = true;
 		}
 		else if(store.doesFolderNameAlreadyExist(newFolderName))
