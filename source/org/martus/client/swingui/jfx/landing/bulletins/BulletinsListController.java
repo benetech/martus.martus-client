@@ -30,6 +30,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -71,7 +73,12 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		titleColumn.setCellFactory(TextFieldTableCell.<BulletinTableRowData>forTableColumn());
 		dateSavedColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.DATE_SAVDED_PROPERTY_NAME));
 		dateSavedColumn.setCellFactory(TextFieldTableCell.<BulletinTableRowData>forTableColumn());
-
+		viewBulletinColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.VIEW_BULLETIN_PROPERTY_NAME));
+		viewBulletinColumn.setCellFactory(new ViewEditBulletinTableColumnButton(new ViewBulletinListener(), VIEW_BULLETIN_IMAGE_PATH));
+		editBulletinColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.EDIT_BULLETIN_PROPERTY_NAME));
+		editBulletinColumn.setCellFactory(new ViewEditBulletinTableColumnButton(new EditBulletinListener(), EDIT_BULLETIN_IMAGE_PATH));
+		
+		
 		Label noBulletins = new Label(getLocalization().getFieldLabel("NoBulletinsInTable"));
 		itemsTable.setPlaceholder(noBulletins);
 		itemsTable.setItems(bulletinTableProvider);
@@ -92,6 +99,30 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		sortOrder.clear();
 		sortOrder.add(dateSavedColumn);
 		itemsTable.sort();
+	}
+	
+	private class ViewBulletinListener implements ChangeListener<Boolean>
+	{
+		public ViewBulletinListener()
+		{
+		}
+
+		public void changed(ObservableValue<? extends Boolean> observableValue, Boolean arg1, Boolean arg2)
+		{
+			//TODO view bulletin 
+		}		
+	}
+
+	private class EditBulletinListener implements ChangeListener<Boolean>
+	{
+		public EditBulletinListener()
+		{
+		}
+
+		public void changed(ObservableValue<? extends Boolean> observableValue, Boolean arg1, Boolean arg2)
+		{
+			editBulletin();
+		}		
 	}
 
 	protected void editBulletin()
@@ -130,6 +161,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		private SortableBulletinList results;
 	}
 	
+
 	public void loadBulletinData(Set bulletinUids)
 	{
 		bulletinTableProvider.loadBulletinData(bulletinUids);
@@ -178,6 +210,8 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		return "landing/bulletins/FxTableViewItems.fxml";
 	}
 	
+	final private String VIEW_BULLETIN_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/view_bulletin.png";
+	final private String EDIT_BULLETIN_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/edit_bulletin.png";
 	
 	@FXML 
 	protected TableView<BulletinTableRowData> itemsTable;
@@ -194,5 +228,11 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	@FXML
 	protected TableColumn<BulletinTableRowData, String> dateSavedColumn;	
 
+	@FXML
+	protected TableColumn<BulletinTableRowData, String> viewBulletinColumn;
+
+	@FXML
+	protected TableColumn<BulletinTableRowData, String> editBulletinColumn;
+	
 	protected BulletinListProvider bulletinTableProvider;
 }
