@@ -31,7 +31,7 @@
             <content>
             		<Pane>
                      <children>
-                  		<ListView fx:id="casesListViewOpen" prefHeight="128.0" prefWidth="300.0" />
+                  		<ListView fx:id="casesListViewOpen" onMouseClicked="#onCaseListMouseClicked" prefHeight="128.0" prefWidth="300.0" />
                      </children>
             		</Pane>
             </content>
@@ -40,7 +40,7 @@
             <content>
             		<Pane>
                      <children>
-                  		<ListView fx:id="casesListViewAll" prefHeight="128.0" prefWidth="300.0" />
+                  		<ListView fx:id="casesListViewAll" onMouseClicked="#onCaseListMouseClicked" prefHeight="128.0" prefWidth="300.0" />
                      </children>
             		</Pane>
             </content>
@@ -49,7 +49,7 @@
               <content>
        				<Pane>
                           <children>
-                  		<ListView fx:id="casesListViewClosed" prefHeight="128.0" prefWidth="300.0" />
+                  		<ListView fx:id="casesListViewClosed" onMouseClicked="#onCaseListMouseClicked" prefHeight="128.0" prefWidth="300.0" />
                      </children>
             		</Pane>
               </content>

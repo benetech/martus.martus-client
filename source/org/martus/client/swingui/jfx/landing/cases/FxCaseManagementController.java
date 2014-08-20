@@ -38,6 +38,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 import org.martus.client.bulletinstore.BulletinFolder;
@@ -116,6 +117,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		}
 		updateCaseList();
 	}
+
 
 	protected void updateCases(String caseNameToSelect)
 	{
@@ -225,6 +227,37 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		doAction(shellController);
 	}
 	
+	
+	@FXML
+	public void onCaseListMouseClicked(MouseEvent mouseEvent) 
+	{
+	    if(mouseEvent.getButton().equals(MouseButton.PRIMARY))
+	    {
+		    final int MOUSE_DOUBLE_CLICK = 2;
+	    		if(mouseEvent.getClickCount() == MOUSE_DOUBLE_CLICK)
+	        {
+	            renameCaseName();
+	        }
+	    }
+	}
+	
+	private void renameCaseName()
+	{
+		CaseListItem currentCase = currentCasesListView.getSelectionModel().getSelectedItem();
+		ClientBulletinStore store = getApp().getStore();
+		String currentFolderName = currentCase.getNameLocalized();
+		BulletinFolder currentFolder = store.findFolder(currentFolderName);
+		if(currentFolder == null)
+			return;
+		if(!currentFolder.canRename())
+			return;
+
+		FxFolderRenameController renameFolder = new FxFolderRenameController(getMainWindow(), currentFolderName);
+		renameFolder.addFolderRenameListener(new FolderRenamedListener());
+		ActionDoer shellController = new DialogWithOkCancelShellController(getMainWindow(), renameFolder);
+		doAction(shellController);
+	}
+	
 	private void orderCases()
 	{
 		java.util.Collections.sort(casesListViewAll.getItems(), new CaseComparitor());		
@@ -271,7 +304,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 			setCurrentlyViewedCaseList(currentTab);
 		}
 	}
-	
+
 	private class FolderCreatedListener implements ChangeListener<String>
 	{
 		public FolderCreatedListener()
@@ -281,6 +314,18 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		public void changed(ObservableValue<? extends String> observableValue, String oldFolderName, String newlyCreatedFoldersName)
 		{
 			updateCases(newlyCreatedFoldersName);
+		}		
+	}
+
+	private class FolderRenamedListener implements ChangeListener<String>
+	{
+		public FolderRenamedListener()
+		{
+		}
+
+		public void changed(ObservableValue<? extends String> observableValue, String oldFolderName, String renamedFoldersName)
+		{
+			updateCases(renamedFoldersName);
 		}		
 	}
 
