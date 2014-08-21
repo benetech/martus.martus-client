@@ -36,6 +36,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -252,6 +254,17 @@ abstract public class FxController implements Initializable
 		Parent createContents = embeddedContentController.createContents();
 		destinationPane.getChildren().addAll(createContents);
 		embeddedContentController.setShellController(getShellController());
+	}
+
+	public boolean isDoubleClick(MouseEvent mouseEvent)
+	{
+	    if(mouseEvent.getButton().equals(MouseButton.PRIMARY))
+	    {
+		    final int MOUSE_DOUBLE_CLICK = 2;
+	    		if(mouseEvent.getClickCount() == MOUSE_DOUBLE_CLICK)
+	    			return true;
+	    }
+	    return false;
 	}
 
 	static public void applyStyleSheets(ObservableList<String> stylesheets, File directory, String languageCode, String cssLocation) throws Exception

@@ -42,7 +42,6 @@ import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 import org.martus.client.core.SortableBulletinList;
@@ -195,17 +194,6 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	{
 		if(isDoubleClick(mouseEvent))
 			editBulletin();
-	}
-	
-	public boolean isDoubleClick(MouseEvent mouseEvent)
-	{
-	    if(mouseEvent.getButton().equals(MouseButton.PRIMARY))
-	    {
-		    final int MOUSE_DOUBLE_CLICK = 2;
-	    		if(mouseEvent.getClickCount() == MOUSE_DOUBLE_CLICK)
-	    			return true;
-	    }
-	    return false;
 	}
 	
 	@Override
