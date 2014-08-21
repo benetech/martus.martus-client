@@ -218,7 +218,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	{
 		boolean oldState = getApp().getTransport().isOnline();
 		boolean newState = !oldState;
-		getApp().turnNetowrkOnOrOff(newState);
+		getApp().turnNetworkOnOrOff(newState);
 		updateOnlineStatus();
 	}
 
