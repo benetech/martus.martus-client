@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.landing.general;
 
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 
@@ -41,7 +42,7 @@ public class SettingsController extends FxFlexibleShellController
 		firstTabToDisplay = SERVER_TAB;
 	}
 	
-	public void firstTabToDisplay(int tab)
+	public void firstTabToDisplay(String tab)
 	{
 		firstTabToDisplay = tab;
 	}
@@ -53,8 +54,19 @@ public class SettingsController extends FxFlexibleShellController
 		loadControllerAndEmbedInPane(new SettingsforServerController(getMainWindow()), serverContentPane);
 		loadControllerAndEmbedInPane(new SettingsforSystemController(getMainWindow()), systemContentPane);
 		loadControllerAndEmbedInPane(new SettingsForTorController(getMainWindow()), torContentPane);
-		settingTabs.getSelectionModel().select(firstTabToDisplay);
+		
+		selectInitialTabView();
 		return shellContents;
+	}
+
+	public void selectInitialTabView()
+	{
+		if(firstTabToDisplay.equals(serverTab.getId()))
+			settingTabPane.getSelectionModel().select(serverTab);
+		if(firstTabToDisplay.equals(systemTab.getId()))
+			settingTabPane.getSelectionModel().select(systemTab);
+		if(firstTabToDisplay.equals(torTab.getId()))
+			settingTabPane.getSelectionModel().select(torTab);
 	}
 
 	@Override
@@ -64,13 +76,21 @@ public class SettingsController extends FxFlexibleShellController
 	}
 	
 	
-	static public final int SERVER_TAB = 0;
-	static public final int SYSTEM_TAB = 1;
-	static public final int TOR_TAB = 2;
-	
+	static public final String SERVER_TAB = "serverTab";
+	static public final String SYSTEM_TAB = "systemTab";
+	static public final String TOR_TAB = "torTab";
 	
 	@FXML
-	private TabPane settingTabs;
+	private TabPane settingTabPane;
+
+	@FXML
+	private Tab serverTab;
+	
+	@FXML
+	private Tab systemTab;
+
+	@FXML
+	private Tab torTab;
 
 	@FXML
 	private Pane serverContentPane;
@@ -81,5 +101,5 @@ public class SettingsController extends FxFlexibleShellController
 	@FXML
 	private Pane torContentPane;
 	
-	private int firstTabToDisplay;
+	private String firstTabToDisplay;
 }

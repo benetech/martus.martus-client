@@ -161,7 +161,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 		doAction(new ActionMenuManageContacts(getMainWindow()));
 	}
 
-	private void onSettings(int tabToDisplayFirst)
+	private void onSettings(String tabToDisplayFirst)
 	{
 		SettingsController settingsController = new SettingsController(getMainWindow());
 		settingsController.firstTabToDisplay(tabToDisplayFirst);
