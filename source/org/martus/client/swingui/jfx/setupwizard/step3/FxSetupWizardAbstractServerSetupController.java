@@ -48,6 +48,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		attemptToConnect(serverIPAddress, serverPublicKey, askComplianceAcceptance, "");
 	}
 	
+	//TODO: look into removing duplicated code here and in SettingsForServerController
 	public void attemptToConnect(String serverIPAddress, String serverPublicKey, boolean askComplianceAcceptance, String magicWord)
 	{
 		MartusLogger.log("Attempting to connect to: " + serverIPAddress);

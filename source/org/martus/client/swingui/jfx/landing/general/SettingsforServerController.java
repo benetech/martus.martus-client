@@ -67,14 +67,21 @@ public class SettingsforServerController extends FxInSwingController
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		initializeSyncFrequency();
-		initializeServerInfo();
-		IpPublicCodeChangeListener ipPublicCodeChangeListener = new IpPublicCodeChangeListener();
-		advanceServerIpAddress.textProperty().addListener(ipPublicCodeChangeListener);
-		advanceServerPublicCode.textProperty().addListener(ipPublicCodeChangeListener);
+		try
+		{
+			initializeSyncFrequency();
+			initializeServerInfo();
+			IpPublicCodeChangeListener ipPublicCodeChangeListener = new IpPublicCodeChangeListener();
+			advanceServerIpAddress.textProperty().addListener(ipPublicCodeChangeListener);
+			advanceServerPublicCode.textProperty().addListener(ipPublicCodeChangeListener);
+		} 
+		catch (Exception e)
+		{
+			getStage().logAndNotifyUnexpectedError(e);
+		} 
 	}
 
-	private void initializeServerInfo()
+	private void initializeServerInfo() throws Exception
 	{
 		ConfigInfo configInfo = getApp().getConfigInfo();
 		boolean isNetworkOn = configInfo.isNetworkOnline();
@@ -82,32 +89,25 @@ public class SettingsforServerController extends FxInSwingController
 
 		serverPublicKey = configInfo.getServerPublicKey();
 		String ipAddress = configInfo.getServerName();
-		updateServerInfo(ipAddress, serverPublicKey);		
+		updateUiServerInfoAndButtonStatus(ipAddress, serverPublicKey);		
 	}
 
-	private void updateServerInfo(String ipAddress, String publicKey)
+	private void updateUiServerInfoAndButtonStatus(String ipAddress, String publicKey) throws Exception
 	{
-		try
+		String publicCode = getPublicCodeFromPublicKey(publicKey);
+		currentServerIp.setText(ipAddress);
+		currentServerPublicCode.setText(publicCode);
+		if(isDefaultServer(ipAddress))
 		{
-			String publicCode = getPublicCodeFromPublicKey(publicKey);
-			currentServerIp.setText(ipAddress);
-			currentServerPublicCode.setText(publicCode);
-			if(isDefaultServer(ipAddress))
-			{
-				advanceServerIpAddress.setText("");
-				advanceServerPublicCode.setText("");
-			}
-			else
-			{
-				advanceServerIpAddress.setText(ipAddress);
-				advanceServerPublicCode.setText(publicCode);
-			}
-			updateConnectToAdvanceServerButtonState();
-		} 
-		catch (Exception e)
+			advanceServerIpAddress.setText("");
+			advanceServerPublicCode.setText("");
+		}
+		else
 		{
-			getStage().logAndNotifyUnexpectedError(e);
-		} 
+			advanceServerIpAddress.setText(ipAddress);
+			advanceServerPublicCode.setText(publicCode);
+		}
+		updateConnectToAdvanceServerButtonState();
 	}
 
 	public String getPublicCodeFromPublicKey(String publicKey) throws Exception
@@ -238,8 +238,8 @@ public class SettingsforServerController extends FxInSwingController
 
 	public void connectToServerAndSave(String ipAddress, String publicCode)
 	{
-		boolean askComplianceAcceptance = !isDefaultServer(ipAddress);
-		if(attemptToConnect(ipAddress, publicCode, askComplianceAcceptance))
+		boolean needsComplianceConfirmation = !isDefaultServer(ipAddress);
+		if(attemptToConnect(ipAddress, publicCode, needsComplianceConfirmation))
 		{
 			MartusApp app = getApp();
 			app.getConfigInfo().setServerPublicKey(serverPublicKey);
@@ -260,7 +260,8 @@ public class SettingsforServerController extends FxInSwingController
 		return ipAddress.equals(FxSetupStorageServerController.getDefaultServerIp());
 	}
 	
-	private boolean attemptToConnect(String serverIPAddress, String publicCode, boolean askComplianceAcceptance)
+	//TODO: look into removing duplicated code here and in FxSetupWizardAbstractServerSetupController
+	private boolean attemptToConnect(String serverIPAddress, String publicCode, boolean needsComplianceConfirmation)
 	{
 		MartusLogger.log("Attempting to connect to: " + serverIPAddress);
 		MartusApp app = getApp();
@@ -292,7 +293,7 @@ public class SettingsforServerController extends FxInSwingController
 				return false;
 			}
 			String complianceStatement = connectToServerTask.getComplianceStatement();
-			if(askComplianceAcceptance)
+			if(needsComplianceConfirmation)
 			{
 				if(complianceStatement.equals(""))
 				{
@@ -315,7 +316,7 @@ public class SettingsforServerController extends FxInSwingController
 				}
 			}
 
-			updateServerInfo(serverIPAddress, newServerPublicKey);
+			updateUiServerInfoAndButtonStatus(serverIPAddress, newServerPublicKey);
 			app.setServerInfo(serverIPAddress, newServerPublicKey, complianceStatement);
 			app.getStore().clearOnServerLists();
 			
