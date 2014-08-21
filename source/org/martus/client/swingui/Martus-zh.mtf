@@ -1,4 +1,4 @@
-# Martus Client Translation File
+﻿# Martus Client Translation File
 # Language code: zh
 # Language name:  
 # Translated by:
@@ -188,10 +188,10 @@
 -f447-button:RecoverAccountByBackup=从备份密钥文件中还原账户
 
 #_________________________________=Restore account from multiple disks
--ad8d-button:RecoverAccountByShare=从多个硬盘中还原账号
+-ad8d-button:RecoverAccountByShare=从多个硬盘中还原账户
 
 #_____________________________=Restore Account
--d7da-button:RecoverAccountTab=还原账号
+-d7da-button:RecoverAccountTab=还原账户
 
 #_________________________________=Remove
 -e963-button:RemoveFieldFromReport=移除
@@ -383,13 +383,13 @@
 -5397-button:yes=是
 
 #______________________=Access Token:
--c45e-field:AccessToken=访问令牌
+-c45e-field:AccessToken=访问令牌:
 
 #__________________________________=Access Token
 -0d23-field:AccessTokenInstructions=访问令牌
 
 #_____________________________=Martus Account Access Token:
--dc84-field:AccountAccessToken=Marus系统帐户访问令牌
+-dc84-field:AccountAccessToken=Martus系统帐户访问令牌:
 
 #_________________________=Account Contact Information
 -c89a-field:AccountContact=账户联系人信息
@@ -398,19 +398,19 @@
 -b5a0-field:AccountContactInformation=这个信息是非强制性的和可以为预装你的公告带来方便。它储存在你的电脑里，不会发送到Martus服务器上。
 
 #_______________________________=Account Directory:
--c354-field:AccountInfoDirectory=账号目录：
+-c354-field:AccountInfoDirectory=账户目录:
 
 #________________________________=Public Code (Old):
--5662-field:AccountInfoPublicCode=(旧)公开密码：
+-5662-field:AccountInfoPublicCode=(旧)公开密码:
 
 #__________________________________=Public Code (New):
--a871-field:AccountInfoPublicCode40=(新)公开密码：
+-a871-field:AccountInfoPublicCode40=(新)公开密码:
 
 #_______________________________=Public Account Id:
--6723-field:AccountInfoPublicKey=公开账号ID
+-6723-field:AccountInfoPublicKey=公开账户ID:
 
 #______________________________=User Name:
--b58e-field:AccountInfoUserName=用户名：
+-b58e-field:AccountInfoUserName=用户名:
 
 #______________________________________=create a user name
 -591c-field:AccountUserNameInstructions=创建用户名
@@ -545,7 +545,7 @@
 -b0dd-field:BulletinHeadQuartersHeadquarters=联系人
 
 #_____________________=Bulletin Id:
--a081-field:BulletinId=公告ID：
+-a081-field:BulletinId=公告ID:
 
 #____________________________=Last Saved
 -eb05-field:BulletinLastSaved=上次保存
@@ -557,7 +557,7 @@
 -fa2e-field:BulletinSize=大小(Kb)
 
 #_________________________=Bulletin Status:
--c567-field:BulletinStatus=公告状态：
+-c567-field:BulletinStatus=公告状态:
 
 #______________________________________=Created by an UNKNOWN Contact
 -23a5-field:BulletinUnverifiedFieldDesk=被一个未知联系人创建
@@ -605,10 +605,10 @@
 -cf89-field:ChartPrivateFieldsNotice=请注意图表中的Martus系统公告数据无法被加密，\n任何人一旦获得图表导出文件的副本就能够读取所有数据。\n务必谨慎选择隐私字段。
 
 #______________________________________________=Note: Chart shows number of Martus bulletins matching search criteria.
--dee3-field:ChartSelectedBulletinsDisclaimerBar=注意：图表展示了符合搜索条件的Martus系统公告数字。
+-dee3-field:ChartSelectedBulletinsDisclaimerBar=注意：图表展示了符合搜索条件的 Martus 系统公告数字。
 
 #______________________________________________=Note: Chart shows % of Martus bulletins matching search criteria.
--b721-field:ChartSelectedBulletinsDisclaimerPie=注意：图表展示了符合搜索条件的Martus系统公告的百分比
+-b721-field:ChartSelectedBulletinsDisclaimerPie=注意：图表展示了符合搜索条件的 Martus 系统公告的百分比
 
 #___________________________=Martus Bulletin Counts
 -5582-field:ChartSeriesTitle=Martus系统公告数量
@@ -668,13 +668,13 @@
 -c2d4-field:ConfirmPassword=确认密码
 
 #______________________________________=Connect to the Martus server to:
--ae9b-field:ConnectMartusServerReasons1=把Martus系统服务器连接到：
+-ae9b-field:ConnectMartusServerReasons1=把Martus系统服务器连接到:
 
 #______________________________________=- Backup your documents on the Martus server in case your computer is lost or stolen
--5824-field:ConnectMartusServerReasons2=-备份你的文件到Martus系统服务器以防你的电脑丢失或被盗。
+-5824-field:ConnectMartusServerReasons2=- 备份你的文件到 Martus 系统服务器以防你的电脑丢失或被盗。
 
 #______________________________________=- Easily retrieve the public keys of your contacts, so you can send them bulletins
--e451-field:ConnectMartusServerReasons3=迅速取回联系人的公开密钥，因此你可以发送公告给他们。
+-e451-field:ConnectMartusServerReasons3=- 迅速取回联系人的公开密钥，因此你可以发送公告给他们。
 
 #______________________________________=- Import form templates from your contacts
 -d2ed-field:ConnectMartusServerReasons4=- 从联系人处导入表格模版
@@ -707,7 +707,7 @@
 -8108-field:CreateAccountInstructions=为了你的帐户安全，当为新账户创建用户名和密码时，请知道如果你忘记了你的用户名和密码，它们将无法恢复。
 
 #________________________________=User Name:
--784c-field:CreateAccountUserName=用户名：
+-784c-field:CreateAccountUserName=用户名:
 
 #__________________________________=The layout of the bulletins is dictated by an XML document.  The document must begin with <CustomFields> and end with </CustomFields>. By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
 -0399-field:CreateCustomFieldsHelp1=公告的布局由 XML 文档决定。该文档必须以<CustomFields>开头、</CustomFields>结尾。公告的默认标准字段出现在自定义字段声明的上方，但这个位置也可以按需移动。不过，有四个必填字段不能删除：‘作者’、‘录入日期’、‘语言’和‘标题’。\n\n
@@ -791,7 +791,7 @@
 -6d35-field:DefaultServerHeading=默认服务器
 
 #_________________________________=This bulletin has been pasted into Martus from the file:
--ce4c-field:DeleteBulletinFileMsg1=这个粘贴在Martus系统的公告来自该文件：
+-ce4c-field:DeleteBulletinFileMsg1=这个粘贴在Martus系统的公告来自该文件:
 
 #_________________________________=Do you want to delete the original file, or leave it in place?
 -3425-field:DeleteBulletinFileMsg2=你是想要删除这个原始文件，还是留在原位？
@@ -851,7 +851,7 @@
 -64b8-field:ErrorCustomFieldHeader4=标签
 
 #____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag\n   102 - A previous Tag already exists with this name\n   103 - Label cannot be blank\n   104 - Unrecognized Field Type\n   105 - A label was found in a standard field\n   106 - XML Parse Error (e.g. mismatched quotation marks or bracket syntax)\n   107 - Tag or Code contains illegal characters (e.g. spaces or punctuation)\n   108 - Duplicate entry in Dropdown field\n   109 - No Choices in Dropdown field\n   110 - System/Standard field tag cannot be used for custom field\n   111 - Standard field in top pane cannot be placed in bottom (always Private) pane\n   112 - Standard field in bottom (always Private) pane cannot be placed in the top pane\n   113 - Data Source Grid not found in same pane as resulting dropdown field\n   114 - Unknown Data Source Grid Column Label\n   115 - Dropdown cannot have both choices and data source\n   116 - Invalid date must be in ISO format YYYY-MM-DD\n   117 - No Reusable Choices list defined for Dropdown\n   118 - Reusable dropdown definition missing code value.  Please verify that the definition looks like the following:\n         <UseReusableChoices code='FieldChoices'></UseReusableChoices>\n   119 - Reusable choice must have a code and label\n   120 - Dropdown data source cannot be a single or multiple level dropdown with Reusable Choices\n   121 - Default value is not valid for this field\n   122 - Reusable Choices lists cannot have the same Label\n   123 - Lower-level reusable choice code has no matching higher-level code\n   200 - All fields empty\n   201 - Unrecognized Contact created this template\n   202 - Security validation error\n   203 - File Error\n   204 - Imported XML Missing Field
--8bd5-field:ErrorCustomFields=自定义字段定义中有错误提示，每个问题被定义为以下的代码：\n100 -请求的标准字段丢失\n101 -自定义字字段没有正确的标签\n102 -先前存在的标签使用了该名\n103 -标签不能为空\n104 -无法识别字段类型\n105 -标准字段中发现标签\n106 –XML语法错误(例如引用标签不匹配或括号语法) \n107 –标注或密码包含非法字符(例如空格或标点)\n108 -下拉式字段条目重复\n109 -下拉式字段无选项\n110 -系统/标准字段标签不能用作自定义字段。\n111 -顶部窗格的标准字段不能置于底部(总是保密)窗格。\n112 -底部窗格(总是保密)的标准字段不能置于顶部窗格。\n113 –产生的相同下拉式字段窗格中找不到数据源网格\n114 -未知数据源网格列标签\n115 -下拉式菜单不能同时有选择权和数据源 \n116 -无效日期，必须要按照国际标准格式YYYY-MM-DD\n117 - No Reusable Choices list defined for Dropdown下拉框中没有自定义的可重复使用选择列表\n118 –可重复使用下拉框定义丢失代码值。请核实该定义看起来如下：<UseReusableChoices code='FieldChoices'></UseReusableChoices>\n119 -可重复使用选择必须有一个代码和标签\n120 -下拉框数据源不能为单一或多个层级的可重复使用选择的下拉框\n121 -默认值对这个字段无效\n122 -可重复使用选择列表不能使用相同的标签\n123 -低级别的可重复使用选择代码与高级别的代码无法匹配\n200 -所有字段为空\n201 -无法识别创建该模板的联系人\n202 -安全验证错误\n203 -文件错误\n204 -导入XML文件字段丢失
+-8bd5-field:ErrorCustomFields=自定义字段定义中有错误提示，每个问题被定义为以下的代码：\n100 -请求的标准字段丢失\n101 -自定义字字段没有正确的标签\n102 -先前存在的标签使用了该名\n103 -标签不能为空\n104 -无法识别字段类型\n105 -标准字段中发现标签\n106 –XML语法错误(例如引用标签不匹配或括号语法) \n107 –标注或密码包含非法字符(例如空格或标点)\n108 -下拉式字段条目重复\n109 -下拉式字段无选项\n110 -系统/标准字段标签不能用作自定义字段。\n111 -顶部窗格的标准字段不能置于底部(总是保密)窗格。\n112 -底部窗格(总是保密)的标准字段不能置于顶部窗格。\n113 –产生的相同下拉式字段窗格中找不到数据源网格\n114 -未知数据源网格列标签\n115 -下拉式菜单不能同时有选择权和数据源 \n116 -无效日期，必须要按照国际标准格式YYYY-MM-DD\n117 -下拉框中没有自定义的可重复使用选择列表\n118 –可重复使用下拉框定义丢失代码值。请核实该定义看起来如下：<UseReusableChoices code='FieldChoices'></UseReusableChoices>\n119 -可重复使用选择必须有一个代码和标签\n120 -下拉框数据源不能为单一或多个层级的可重复使用选择的下拉框\n121 -默认值对这个字段无效\n122 -可重复使用选择列表不能使用相同的标签\n123 -低级别的可重复使用选择代码与高级别的代码无法匹配\n200 -所有字段为空\n201 -无法识别创建该模板的联系人\n202 -安全验证错误\n203 -文件错误\n204 -导入XML文件字段丢失
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=存在先前的备份文件。你必须把各个文件对应保存在它自己的可移动媒体存储盘。
@@ -872,7 +872,7 @@
 -30e3-field:ExitWhenComplete=完成后退出
 
 #_____________________=If you close this wizard now, you will not be able to return and use it to complete this account's setup (however, you can access the wizard to create other new accounts).\nAre you sure you want to close the wizard?
--8ee4-field:ExitWizard=如果你现在关闭安装向导，你将不能返回并继续使用向导去完成这个帐户的设置(然而，你可以使用这个安装向导来新建其它新帐户)。\n你确定你想要关闭安装向导吗？
+-986a-field:ExitWizard=如果你现在关闭安装向导，你将不能返回并继续使用向导去完成这个帐户的设置(然而，你可以使用这个安装向导来新建其它新帐户)。\n你确定你想要关闭安装向导吗？
 
 #____________________________=Include all versions of each bulletin in export
 -d390-field:ExportAllVersions=包含每个导出公告的所有版本
@@ -968,10 +968,10 @@
 -d8c8-field:HelpExample1DefaultDetails=是否有目击者？
 
 #_____________________________________=List Victim Names and Ages:
--d4c9-field:HelpExample2DefaultDetails=列出受害者姓名和年龄：
+-d4c9-field:HelpExample2DefaultDetails=列出受害者姓名和年龄:
 
 #____________________________________=Example:
--c637-field:HelpExampleDefaultDetails=例如：
+-c637-field:HelpExampleDefaultDetails=例如:
 
 #_______________________________________=etc...
 -5e9b-field:HelpExampleEtcDefaultDetails=等等...
@@ -1094,7 +1094,7 @@
 -55fa-field:NormalKeyboardMsg1=请记住：使用常规键盘输入你的密码可能会减低安全性。
 
 #_____________________________=For maximum security switch to the on-screen keyboard.
--8167-field:NormalKeyboardMsg2=为了最大的安全性请切换到屏幕上的键盘。[EM1]
+-8167-field:NormalKeyboardMsg2=为了最大的安全性请切换到屏幕上的键盘。
 
 #_____________________________________=The author has not given you permission to view the private portions of this bulletin.
 -ba2f-field:NotAuthorizedToViewPrivate=作者并未授权你查看这个公告的隐私部分。
@@ -1103,22 +1103,22 @@
 -3c6b-field:NotSorted=(没有)
 
 #____________________________=Details:
--1daa-field:OnlineHelpMessage=详细信息：
+-1daa-field:OnlineHelpMessage=详细信息:
 
 #_______________________________=Topics:
--3a8c-field:OnlineHelpTOCMessage=题目：
+-3a8c-field:OnlineHelpTOCMessage=题目:
 
 #__________________________________________=Click on topic to display details.
 -2a14-field:OnlineHelpTOCMessageDescription=点击题目来显示详情。
 
 #_______________________=Organization:
--6da9-field:Organization=组织名：
+-6da9-field:Organization=组织名:
 
 #_______________________________=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.
 -b511-field:OrganizeReportFields=添加你想在报告中出现的字段，然后根据你想要打印的顺序来进行整理。
 
 #___________________=Password:
--be81-field:Password=密码：
+-be81-field:Password=密码:
 
 #_______________________________=create a password
 -b61b-field:PasswordInstructions=创建一个密码
@@ -1130,13 +1130,13 @@
 -6002-field:PasswordTip2=- 不要使用单字
 
 #_______________________=- Use at least 15 characters for most security (8 are required)
--fab7-field:PasswordTip3=- 请使用至少15位数密码以达到最高安全强度(密码不能少于8位数)
+-fab7-field:PasswordTip3=- 请使用至少15位数密码以达到最\n  高安全强度(密码不能少于8位数)
 
 #_______________________=- Use a combination of alphabet characters, numbers, and special characters (such as !@#$%^*&amp;)
--3d55-field:PasswordTip4=- 请使用字母，数字和特殊字符(例如!@#$%^*&amp)结合的密码。
+-3d55-field:PasswordTip4=- 请使用字母，数字和特殊字符\n  (例如!@#$%^*&amp) \n  结合的密码。
 
 #_______________________=- Use a combination of uppercase (capital) and lowercase characters if you use a case-sensitive language.
--9278-field:PasswordTip5=- 如果你使用的有大小写之分的语言，请使用大写 (capital) 和小写字符相结合的密码
+-9278-field:PasswordTip5=- 如果你使用的有大小写之分的\n  语言，请使用大写 (capital) \n  和小写字符相结合的密码
 
 #_____________________________=Create secure passwords by using numbers, letters and symbols.
 -fb50-field:PasswordTipGeneral=通过使用数字、字母和符号来创建安全密码
@@ -1166,13 +1166,13 @@
 -48ad-field:PrintToPrinterOrDisk=你可以把公告内容使用打印机打印出来或者发送到一个文件中。
 
 #_____________________=Public Code:
--63bc-field:PublicCode=公开密码
+-63bc-field:PublicCode=公开密码:
 
 #_________________________________=Public Information Files (*.mpi)
 -bd0c-field:PublicInformationFiles=公开信息文件 (*.mpi)
 
 #___________________________________=Clicking on Ok will do the following on this computer:
--70e6-field:QuickEraseFollowingItems=点击OK将会对这台计算机做如下操作：
+-70e6-field:QuickEraseFollowingItems=点击OK将会对这台计算机做如下操作:
 
 #___________________________________=Exit Martus when complete.
 -23dc-field:QuickEraseWillExitMartus=完成后退出Martus系统。
@@ -1211,7 +1211,7 @@
 -2001-field:RemoveMartusWillUninstall=卸载Martus系统程序。
 
 #_____________________________=The following server will be removed:
--5316-field:RemoveServerLabel1=以下服务器将被移除。
+-5316-field:RemoveServerLabel1=以下服务器将被移除:
 
 #_____________________________=Are you sure you want to do this?
 -bfb8-field:RemoveServerLabel2=你是否确认你想要这样做？
@@ -1232,10 +1232,10 @@
 -fc88-field:ReportFound=#NumberBulletinsFound# 个公告匹配搜索条件。
 
 #__________________________________=Total Bulletins:
--b840-field:ReportNumberOfBulletins=公告总数：
+-b840-field:ReportNumberOfBulletins=公告总数:
 
 #_______________________________=Progress:
--92b6-field:ReportSearchProgress=进程：
+-92b6-field:ReportSearchProgress=进程:
 
 #______________________________=Print Summary Counts Only
 -9ca4-field:ReportSummariesOnly=只打印概要总数
@@ -1310,7 +1310,7 @@
 -caeb-field:SearchOpContains=包括
 
 #_________________________=Progress:
--92b6-field:SearchProgress=进程：
+-92b6-field:SearchProgress=进程:
 
 #_______________________________=You will be allowed to upload bulletins to this server.
 -0718-field:ServerAcceptsUploads=你被允许上传公告到这个服务器。
@@ -1325,13 +1325,13 @@
 -3a97-field:ServerDeclinesUploads=你不被允许向这个服务器上载公告。
 
 #_______________________________=Magic Word:
--7ba0-field:ServerMagicWordEntry=魔术语：
+-7ba0-field:ServerMagicWordEntry=魔术语:
 
 #__________________________________________=enter your server's magic word
 -0481-field:ServerMagicWordEntryInformation=输入你的服务器魔术语
 
 #__________________________=IP Address:
--4e30-field:ServerNameEntry=IP地址：
+-4e30-field:ServerNameEntry=IP地址:
 
 #_____________________________________=enter your server's IP address
 -4cb2-field:ServerNameEntryInformation=输入你的服务器IP地址
@@ -1343,13 +1343,13 @@
 -24f7-field:ServerNotRespondingSaveConfiguration=服务器无法连通。这可能是因为服务器不可用，服务器被封锁，或者你的网络连接断开。你是否希望稍后再保存这个服务器配置？
 
 #________________________________=Server Public Code:
--f3d1-field:ServerPublicCodeEntry=服务器公开密码：
+-f3d1-field:ServerPublicCodeEntry=服务器公开密码:
 
 #___________________________________________=enter your server's public code
 -b02c-field:ServerPublicCodeEntryInformation=输入你的服务器公开密码
 
 #_________________________________=The following server has been selected:
--d09b-field:ServerSelectionResults=以下的服务器被选定：
+-d09b-field:ServerSelectionResults=以下的服务器被选定:
 
 #______________________=Server Setup
 -3db1-field:ServerSetup=服务器设置
@@ -1487,22 +1487,22 @@
 -7dc3-field:UserNameAndPasswordMatches=用户名和密码匹配成功！
 
 #_______________________=- Your user name can contain letters, numbers, punctuation and spaces.
--3b6f-field:UserNameTip1=- 你的用户名可以包含字母、数字、标点和空格。
+-3b6f-field:UserNameTip1=- 你的用户名可以包含字母、数字、\n  标点和空格。
 
 #_______________________=- It should have between 8-50 characters, and it is case sensitive.
--3180-field:UserNameTip2=- 密码应该在8-50位数之间，并且区分大小写。
+-3180-field:UserNameTip2=- 密码应该在 8-50 位数之间，\n  并且区分大小写。
 
 #_______________________=- Remember to choose a user name you can remember.
--fb91-field:UserNameTip3=- 切记选择一个你可以记住的用户名。
+-fb91-field:UserNameTip3=- 切记选择一个你可以记住的用户\n  名。
 
 #_______________________=User Name Tips:
--c9d5-field:UserNameTips=用户名提示：
+-c9d5-field:UserNameTips=用户名提示:
 
 #__________________________________=Public Code:
--63bc-field:VerifyContactPublicCode=公开密码
+-63bc-field:VerifyContactPublicCode=公开密码:
 
 #_____________________________________=Public Code:
--63bc-field:VerifyContactPublicCodeOld=公开密码
+-63bc-field:VerifyContactPublicCodeOld=公开密码:
 
 #___________________________=Please verify the public code below against the one you received from your contact.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.
 -ec88-field:VerifyPublicCode=请根据你从联系人处接收的公开密码验证下面的公开密码。确保你正在添加的联系人是你想要添加的那个。如果你暂时没有他们的公开密码，你总是可以稍后再验证。
@@ -1514,7 +1514,7 @@
 -8f3a-field:ViewAttachmentAction=查看
 
 #_____________________________=#NumberOfHQs# Contact account(s) can view this private information
--4386-field:ViewBulletinHQInfo=#NumberOfHQs#个联系人帐户(s)可以查看这个隐私信息。[EM2]
+-4386-field:ViewBulletinHQInfo=#NumberOfHQs#个联系人帐户(s)可以查看这个隐私信息。
 
 #___________________________________=Back Space
 -7ae6-field:VirtualKeyboardBackSpace=返回
@@ -1567,8 +1567,8 @@
 #______________________=Server Setup
 -3db1-field:WizardStep3=服务器设置
 
-#_________________________________=Backup your information to a secure server.  Backup your information to a secure server.
--76cd-field:WizardStep3Information=备份你的信息到一个安全的服务器上。备份你的信息到一个安全的服务器上。
+#_________________________________=Backup your information to a secure server. 
+-d130-field:WizardStep3Information=备份你的信息到一个安全的服务器上。
 
 #______________________=Contacts
 -b0dd-field:WizardStep4=联系人
@@ -1643,7 +1643,7 @@
 -f2cc-field:aboutDlgVersionInfo=软件版本
 
 #__________________=Mailing Address:
--22f5-field:address=邮寄地址：
+-22f5-field:address=邮寄地址:
 
 #_____________________=Keep ALL Information Private
 -9b5e-field:allprivate=对所有信息保密
@@ -2078,7 +2078,7 @@
 -257e-field:disconnecting=断线中...
 
 #________________=Email Address:
--852c-field:email=邮箱地址：
+-852c-field:email=邮箱地址:
 
 #____________________=Date Created
 -dda2-field:entrydate=日期已创建
@@ -2102,10 +2102,10 @@
 -6507-field:inputGetShareFileNameentry=输入你希望导出的文件名。
 
 #____________________________________=Enter the Public Code for this account:
--fea8-field:inputImportPublicKeyentry=输入这个帐户的公开密码：
+-fea8-field:inputImportPublicKeyentry=输入这个帐户的公开密码:
 
 #____________________________________=If you want to request permission to upload to this server, enter the 'magic word' now:
--3ea8-field:inputservermagicwordentry=如果你想要获取服务器上传许可，现在请输入“魔术语”。
+-3ea8-field:inputservermagicwordentry=如果你想要获取服务器上传许可，现在请输入“魔术语”:
 
 #___________________=Keywords
 -f530-field:keywords=关键字
@@ -2123,7 +2123,7 @@
 -65b1-field:messageErrorAttachmentMissingcause=附件无法定位
 
 #________________________________________=This date occurs in the future:
--438b-field:messageErrorDateInFuturecause=这个日期发生在未来：
+-438b-field:messageErrorDateInFuturecause=这个日期发生在未来:
 
 #_____________________________________________=This date range has an end date that is earlier than the start date: #FieldLabel#
 -4952-field:messageErrorDateRangeInvertedcause=这个日期范围的结束日期在开始日期之前：#FieldLabel#
@@ -2138,7 +2138,7 @@
 -dd0a-field:messageErrorRequiredFieldBlankcause=这个字段是必需的且不能为空：#FieldLabel#
 
 #_________________________________=The current server has sent this message:
--fd76-field:messageServerNewscause=当前服务器发来这条消息。
+-fd76-field:messageServerNewscause=当前服务器发来这条消息:
 
 #_____________________________________________________=Must select at least one bulletin that was created by this account
 -f7c7-field:notifyAddPermissionsZeroBulletinsOurscause=必须至少选择一个由这个帐户创建的公告。
@@ -2177,7 +2177,7 @@
 -af6b-field:notifyConfirmCorrectDefaultDetailsDatacause=请确认取回的默认详情是正确的。
 
 #_____________________________________________=You have already added this contact.
--8184-field:notifyContactKeyAlreadyExistscause=你已添加了该账户。
+-8184-field:notifyContactKeyAlreadyExistscause=相同联系人已存在。
 
 #_________________________________________=You cannot add yourself as a contact.
 -af4b-field:notifyContactKeyIsOurselfcause=你无法添加自己为联系人。
@@ -2570,7 +2570,7 @@
 -71c7-field:password2=(再次输入相同的密码)
 
 #________________=Phone Number:
--846e-field:phone=手机号码
+-846e-field:phone=手机号码:
 
 #___________________________________=Automatically adjust legacy Afghan/Persian dates
 -396e-field:preferencesAdjustPersian=自动适应伊朗历日期
@@ -2663,7 +2663,7 @@ field:translationVersion=中文4.5
 -711f-field:warningUnofficialTranslation=警告：这个翻译并非由Martus系统团队所做，因此可能并不可靠。如果你只想使用官方翻译，那么就退出Martus系统，从Martus系统词典中移除这#UseUnofficialTranslationFiles#文件，然后重新启动Martus系统。
 
 #__________________=Web Page:
--cfeb-field:webpage=网页：
+-cfeb-field:webpage=网页:
 
 #___________________=All Files
 -af3d-filed:AllFiles=全部文件
@@ -3248,7 +3248,7 @@ field:translationVersion=中文4.5
 -b43a-wintitle:DeleteMyDraftsFromServer=从服务器上删除我的草稿。
 
 #_________________________________________________=Retrieving Bulletin Summaries
--2a45-wintitle:DeleteServerDraftsBulletinSummaries=公告概述正在取回中[EM3]
+-2a45-wintitle:DeleteServerDraftsBulletinSummaries=公告概述正在取回中
 
 #_____________________________________________=Warning Duplicate Labels Found
 -8e46-wintitle:DuplicateLabelsInCustomTemplate=发现重复的标签警告
@@ -3341,7 +3341,7 @@ field:translationVersion=中文4.5
 -7274-wintitle:FileDialogRecoverSharedKeyPair=恢复公共密钥
 
 #__________________________________________=Restore Account
--d7da-wintitle:FileDialogRestoreFromKeyPair=还原账号
+-d7da-wintitle:FileDialogRestoreFromKeyPair=还原账户
 
 #______________________________________=Save Attachment
 -f513-wintitle:FileDialogSaveAttachment=保存附件
@@ -4180,6 +4180,3 @@ field:translationVersion=中文4.5
 #_________________________________=Confirm Delete Folder
 -1a75-wintitle:warningdeletefolder=确认删除文件夹
 
-[EM1]Update
-[EM2]Update
-[EM3]Update
