@@ -39,7 +39,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
@@ -65,7 +64,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	public void initializeMainContentPane()
 	{
 		onServerColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, Boolean>(BulletinTableRowData.ON_SERVER_PROPERTY_NAME));
-		onServerColumn.setCellFactory(CheckBoxTableCell.<BulletinTableRowData>forTableColumn(onServerColumn));
+		onServerColumn.setCellFactory(new BulletinOnServerColumnHandler());
 		authorColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.AUTHOR_PROPERTY_NAME));
 		authorColumn.setCellFactory(TextFieldTableCell.<BulletinTableRowData>forTableColumn());
 		titleColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.TITLE_PROPERTY_NAME));
@@ -99,6 +98,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		sortOrder.add(dateSavedColumn);
 		itemsTable.sort();
 	}
+	
 	
 	private class ViewBulletinListener implements ActionListener
 	{
