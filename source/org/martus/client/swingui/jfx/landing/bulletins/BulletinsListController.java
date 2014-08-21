@@ -25,13 +25,13 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -100,28 +100,37 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		itemsTable.sort();
 	}
 	
-	private class ViewBulletinListener implements ChangeListener<Boolean>
+	private class ViewBulletinListener implements ActionListener
 	{
 		public ViewBulletinListener()
 		{
 		}
 
-		public void changed(ObservableValue<? extends Boolean> observableValue, Boolean arg1, Boolean arg2)
+		@Override
+		public void actionPerformed(ActionEvent e)
 		{
-			//TODO view bulletin 
-		}		
+			viewBulletin();
+		}
+
 	}
 
-	private class EditBulletinListener implements ChangeListener<Boolean>
+	private class EditBulletinListener implements ActionListener
 	{
 		public EditBulletinListener()
 		{
 		}
 
-		public void changed(ObservableValue<? extends Boolean> observableValue, Boolean arg1, Boolean arg2)
+		@Override
+		public void actionPerformed(ActionEvent e)
 		{
 			editBulletin();
-		}		
+		}
+
+	}
+	
+	protected void viewBulletin()
+	{
+		//TODO implement this.
 	}
 
 	protected void editBulletin()
