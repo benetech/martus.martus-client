@@ -202,7 +202,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	public void onMouseClick(MouseEvent mouseEvent) 
 	{
 		if(isDoubleClick(mouseEvent))
-			editBulletin();
+			viewBulletin();
 	}
 	
 	@Override
