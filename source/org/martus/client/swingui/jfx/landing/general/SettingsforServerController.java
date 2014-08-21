@@ -87,7 +87,7 @@ public class SettingsforServerController extends FxInSwingController
 		boolean isNetworkOn = configInfo.isNetworkOnline();
 		serverDefaultToOn.selectedProperty().setValue(isNetworkOn);
 
-		serverPublicKey = configInfo.getServerPublicKey();
+		String serverPublicKey = configInfo.getServerPublicKey();
 		String ipAddress = configInfo.getServerName();
 		updateUiServerInfoAndButtonStatus(ipAddress, serverPublicKey);		
 	}
@@ -239,19 +239,20 @@ public class SettingsforServerController extends FxInSwingController
 	public void connectToServerAndSave(String ipAddress, String publicCode)
 	{
 		boolean needsComplianceConfirmation = !isDefaultServer(ipAddress);
-		if(attemptToConnect(ipAddress, publicCode, needsComplianceConfirmation))
+		String newServersPublicKey = attemptToConnect(ipAddress, publicCode, needsComplianceConfirmation);
+		if(newServersPublicKey == null)
+			return;
+
+		MartusApp app = getApp();
+		app.getConfigInfo().setServerPublicKey(newServersPublicKey);
+		app.getConfigInfo().setServerName(ipAddress);
+		try
 		{
-			MartusApp app = getApp();
-			app.getConfigInfo().setServerPublicKey(serverPublicKey);
-			app.getConfigInfo().setServerName(ipAddress);
-			try
-			{
-				app.saveConfigInfo();
-			} 
-			catch (SaveConfigInfoException e)
-			{
-				getStage().logAndNotifyUnexpectedError(e);
-			}
+			app.saveConfigInfo();
+		} 
+		catch (SaveConfigInfoException e)
+		{
+			getStage().logAndNotifyUnexpectedError(e);
 		}
 	}
 
@@ -261,7 +262,7 @@ public class SettingsforServerController extends FxInSwingController
 	}
 	
 	//TODO: look into removing duplicated code here and in FxSetupWizardAbstractServerSetupController
-	private boolean attemptToConnect(String serverIPAddress, String publicCode, boolean needsComplianceConfirmation)
+	private String attemptToConnect(String serverIPAddress, String publicCode, boolean needsComplianceConfirmation)
 	{
 		MartusLogger.log("Attempting to connect to: " + serverIPAddress);
 		MartusApp app = getApp();
@@ -275,7 +276,7 @@ public class SettingsforServerController extends FxInSwingController
 			if(!FxAdvancedServerStorageSetupController.doesPublicCodeMatch(newServerPublicKey, publicCode))
 			{
 				showNotifyDialog("ServerCodeWrong");
-				return false;
+				return null;
 			}
 			ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, newServerPublicKey, getApp().getTransport());
 			ConnectToServerTask connectToServerTask = new ConnectToServerTask(getApp(), gateway, "");
@@ -285,12 +286,12 @@ public class SettingsforServerController extends FxInSwingController
 			if(!connectToServerTask.isAvailable())
 			{
 				showNotifyDialog("AdvanceServerNotResponding");
-				return false; 
+				return null; 
 			}
 			if(!connectToServerTask.isAllowedToUpload())
 			{
 				showNotifyDialog("ErrorServerOffline");
-				return false;
+				return null;
 			}
 			String complianceStatement = connectToServerTask.getComplianceStatement();
 			if(needsComplianceConfirmation)
@@ -298,7 +299,7 @@ public class SettingsforServerController extends FxInSwingController
 				if(complianceStatement.equals(""))
 				{
 					showNotifyDialog("ServerComplianceFailed");
-					return false;
+					return null;
 				}
 				
 				if(!acceptCompliance(complianceStatement))
@@ -312,7 +313,7 @@ public class SettingsforServerController extends FxInSwingController
 					//will reject the old server, we don't know why.
 					ClientSideNetworkGateway.buildGateway(previousServerName, previousServerKey, getApp().getTransport());
 					getApp().setServerInfo(previousServerName,previousServerKey,previousServerCompliance);
-					return false;
+					return null;
 				}
 			}
 
@@ -324,8 +325,7 @@ public class SettingsforServerController extends FxInSwingController
 			app.getStore().clearOnServerLists();
 			getMainWindow().repaint();
 			getMainWindow().setStatusMessageReady();
-			serverPublicKey = newServerPublicKey;
-			return true;
+			return newServerPublicKey;
 		}
 		catch(UserCancelledException e)
 		{
@@ -345,8 +345,7 @@ public class SettingsforServerController extends FxInSwingController
 			MartusLogger.logException(e);
 			showNotifyDialog("UnexpectedError");
 		}
-		
-		return false;
+		return null;
 	}
 	
 	private boolean acceptCompliance(String newServerCompliance)
@@ -403,7 +402,4 @@ public class SettingsforServerController extends FxInSwingController
 	private CheckBox automaticallyDownloadFromServer;
 	@FXML
 	private ChoiceBox<ChoiceItem> automaticSyncFrequency;
-	
-	private String serverPublicKey;
-	
 }
