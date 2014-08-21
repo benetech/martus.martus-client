@@ -581,7 +581,7 @@ public class MartusApp
 
 	public void turnNetworkOnOrOffAsRequested()
 	{
-		boolean shouldBeOnline = configInfo.isNetworkOnline();
+		boolean shouldBeOnline = configInfo.getOnStartupServerOnlineStatus();
 		turnNetworkOnOrOff(shouldBeOnline);
 	}
 

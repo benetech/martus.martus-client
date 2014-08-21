@@ -84,8 +84,8 @@ public class SettingsforServerController extends FxInSwingController
 	private void initializeServerInfo() throws Exception
 	{
 		ConfigInfo configInfo = getApp().getConfigInfo();
-		boolean isNetworkOn = configInfo.isNetworkOnline();
-		serverDefaultToOn.selectedProperty().setValue(isNetworkOn);
+		boolean onStartupServerOnlineStatus = configInfo.getOnStartupServerOnlineStatus();
+		serverDefaultToOn.selectedProperty().setValue(onStartupServerOnlineStatus);
 
 		String serverPublicKey = configInfo.getServerPublicKey();
 		String ipAddress = configInfo.getServerName();
@@ -366,7 +366,7 @@ public class SettingsforServerController extends FxInSwingController
 	{		
 		ConfigInfo configInfo = getApp().getConfigInfo();
 		configInfo.setSyncFrequencyMinutes(automaticSyncFrequency.getSelectionModel().getSelectedItem().getCode());
-		configInfo.setIsNetworkOnline(serverDefaultToOn.selectedProperty().getValue());
+		configInfo.setOnStartupServerOnlineStatus(serverDefaultToOn.selectedProperty().getValue());
 		try
 		{
 			getApp().saveConfigInfo();
