@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.cases;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -340,9 +342,10 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		doAction(shellController);
 	}
 	
-	class FolderDeletedListener implements ChangeListener<Boolean>
+	class FolderDeletedListener implements ActionListener
 	{
-		public void changed(ObservableValue<? extends Boolean> observableValue, Boolean arg0, Boolean arg1)
+		@Override
+		public void actionPerformed(ActionEvent e)
 		{
 			updateCasesSelectDefaultCase();
 		}		
