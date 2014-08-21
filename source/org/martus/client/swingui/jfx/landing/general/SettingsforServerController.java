@@ -99,14 +99,11 @@ public class SettingsforServerController extends FxInSwingController
 		currentServerPublicCode.setText(publicCode);
 		if(isDefaultServer(ipAddress))
 		{
-			advanceServerIpAddress.setText("");
-			advanceServerPublicCode.setText("");
+			ipAddress = "";
+			publicCode = "";
 		}
-		else
-		{
-			advanceServerIpAddress.setText(ipAddress);
-			advanceServerPublicCode.setText(publicCode);
-		}
+		advanceServerIpAddress.setText(ipAddress);
+		advanceServerPublicCode.setText(publicCode);
 		updateConnectToAdvanceServerButtonState();
 	}
 
