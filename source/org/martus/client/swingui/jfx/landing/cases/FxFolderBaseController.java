@@ -42,7 +42,7 @@ public abstract class FxFolderBaseController extends DialogWithOkCancelContentCo
 		super(mainWindowToUse);
 	}
 
-	protected void updateCaseIncedentProjectTitle(Label messageTitle, String code, String foldersLabel)
+	protected void updateCaseIncidentProjectTitle(Label messageTitle, String code, String foldersLabel)
 	{
 		try
 		{

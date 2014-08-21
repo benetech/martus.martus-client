@@ -54,7 +54,7 @@ public class FxFolderRenameController extends FxFolderBaseController
 	{
 		MartusLocalization localization = getLocalization();
 		String foldersLabel = FxFolderSettingsController.getCurrentFoldersHeading(getApp().getConfigInfo(), localization);
-		updateCaseIncedentProjectTitle(messageTitle, "RenameCaseIncedentProject", foldersLabel);
+		updateCaseIncidentProjectTitle(messageTitle, "RenameCaseIncidentProject", foldersLabel);
 		folderName.textProperty().addListener(new FolderNameChangeListener());
 		folderName.setText(currentFolderName);
 		getOkCancelStage().setOkButtonText(localization.getButtonLabel("RenameFolder"));
