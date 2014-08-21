@@ -582,10 +582,10 @@ public class MartusApp
 	public void turnNetworkOnOrOffAsRequested()
 	{
 		boolean shouldBeOnline = configInfo.isNetworkOnline();
-		turnNetowrkOnOrOff(shouldBeOnline);
+		turnNetworkOnOrOff(shouldBeOnline);
 	}
 
-	public void turnNetowrkOnOrOff(boolean shouldBeOnline)
+	public void turnNetworkOnOrOff(boolean shouldBeOnline)
 	{
 		getTransport().setIsOnline(shouldBeOnline);
 		MartusLogger.log("Online status set to " + shouldBeOnline);
