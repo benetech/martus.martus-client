@@ -25,7 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
-import javafx.beans.value.ChangeListener;
+import java.awt.event.ActionListener;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -38,7 +39,7 @@ import javafx.util.Callback;
 
 final class ViewEditBulletinTableColumnButton implements Callback<TableColumn<BulletinTableRowData, String>, TableCell<BulletinTableRowData, String>>
 {
-	public ViewEditBulletinTableColumnButton(ChangeListener<Boolean> listenerToUse, String pathToButtonImage)
+	public ViewEditBulletinTableColumnButton(ActionListener listenerToUse, String pathToButtonImage)
 	{
 		super();
 		listener = listenerToUse;
@@ -65,7 +66,7 @@ final class ViewEditBulletinTableColumnButton implements Callback<TableColumn<Bu
 		
 		protected void notifyListener()
 		{
-			listener.changed(null, null, null);
+			listener.actionPerformed(null);
 		}
 		
 		@Override
@@ -96,7 +97,7 @@ final class ViewEditBulletinTableColumnButton implements Callback<TableColumn<Bu
 	}
 	
 	final private String BULLETIN_VIEW_EDIT_BUTTON_CSS_STYLE = "";
-	protected ChangeListener<Boolean> listener;
+	protected ActionListener listener;
 	protected String buttonImagePath; 
 
 }
