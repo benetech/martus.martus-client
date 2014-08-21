@@ -144,7 +144,8 @@ public class SettingsforServerController extends FxInSwingController
 		automaticSyncFrequency.setItems(autoMaticSyncChoices);
 		String currentSyncFrequency = getApp().getConfigInfo().getSyncFrequencyMinutes();
 		selectByCode(automaticSyncFrequency, currentSyncFrequency);
-		if(!currentSyncFrequency.equals(NEVER))
+		boolean isSyncingWithServer = !currentSyncFrequency.equals(NEVER);
+		if(isSyncingWithServer)
 			automaticallyDownloadFromServer.setSelected(true);
 		updateSyncControls();
 		automaticallyDownloadFromServer.selectedProperty().addListener(new DownloadFromServerListener());
@@ -152,7 +153,8 @@ public class SettingsforServerController extends FxInSwingController
 	
 	protected void updateSyncControls()
 	{
-		if(automaticallyDownloadFromServer.selectedProperty().getValue())
+		Boolean shouldAutomaticallyDownloadFromServer = automaticallyDownloadFromServer.selectedProperty().getValue();
+		if(shouldAutomaticallyDownloadFromServer)
 		{
 			automaticSyncFrequency.setDisable(false);
 		}
