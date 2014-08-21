@@ -59,14 +59,20 @@ public class SettingsController extends FxFlexibleShellController
 		return shellContents;
 	}
 
-	public void selectInitialTabView()
+	private void selectInitialTabView()
 	{
-		if(firstTabToDisplay.equals(serverTab.getId()))
-			settingTabPane.getSelectionModel().select(serverTab);
-		if(firstTabToDisplay.equals(systemTab.getId()))
-			settingTabPane.getSelectionModel().select(systemTab);
-		if(firstTabToDisplay.equals(torTab.getId()))
-			settingTabPane.getSelectionModel().select(torTab);
+		settingTabPane.getSelectionModel().select(getToBeSelectedTab());
+	}
+	
+	private Tab getToBeSelectedTab()
+	{
+		if(firstTabToDisplay.equals(SERVER_TAB))
+			return serverTab;
+		if(firstTabToDisplay.equals(SYSTEM_TAB))
+			return systemTab;
+		if(firstTabToDisplay.equals(SYSTEM_TAB))
+			return torTab;
+		return null;
 	}
 
 	@Override
