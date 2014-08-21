@@ -193,16 +193,20 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	@FXML
 	public void onMouseClick(MouseEvent mouseEvent) 
 	{
+		if(isDoubleClick(mouseEvent))
+			editBulletin();
+	}
+	
+	public boolean isDoubleClick(MouseEvent mouseEvent)
+	{
 	    if(mouseEvent.getButton().equals(MouseButton.PRIMARY))
 	    {
 		    final int MOUSE_DOUBLE_CLICK = 2;
 	    		if(mouseEvent.getClickCount() == MOUSE_DOUBLE_CLICK)
-	        {
-	            editBulletin();
-	        }
+	    			return true;
 	    }
+	    return false;
 	}
-	
 	
 	@Override
 	public String getFxmlLocation()
