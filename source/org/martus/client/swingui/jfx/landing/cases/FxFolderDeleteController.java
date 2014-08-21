@@ -25,7 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.cases;
 
-import javafx.beans.value.ChangeListener;
+import java.awt.event.ActionListener;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -44,7 +45,7 @@ public class FxFolderDeleteController extends FxFolderBaseController
 		folderToDelete = folderToDeleteToUse;
 	}
 
-	public void addFolderDeletedListener(ChangeListener folderListenerToUse)
+	public void addFolderDeletedListener(ActionListener folderListenerToUse)
 	{
 		folderDeletedListener = folderListenerToUse;
 	}
@@ -80,7 +81,7 @@ public class FxFolderDeleteController extends FxFolderBaseController
 	{
 		boolean folderWasDeleted = getApp().getStore().deleteFolder(folderToDelete.getName());
 		if(folderWasDeleted)
-			folderDeletedListener.changed(null, null, null);
+			folderDeletedListener.actionPerformed(null);
 		else
 			showNotifyDialog("ErrorDeletingFolder");
 	}
@@ -93,6 +94,6 @@ public class FxFolderDeleteController extends FxFolderBaseController
 	@FXML 
 	private TextArea messageTextArea;
 
-	private ChangeListener folderDeletedListener;	
+	private ActionListener folderDeletedListener;	
 	private BulletinFolder folderToDelete;
 }
