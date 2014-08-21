@@ -385,7 +385,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setContactKeysXml(sampleContactKeysXml);
 		info.deprecatedSetCurrentFormTemplateTitle(sampleCurrentFormTemplateTitle);
 		info.deprecatedSetCurrentFormTemplateDescription(sampleCurrentFormTemplateDescription);
-		info.setIsNetworkOnline(sampleIsNetworkOnline);
+		info.setOnStartupServerOnlineStatus(sampleOnStartupDefaultServerOnlineStatus);
 		info.setFolderLabelCode(sampleFolderLabelCode);
 		info.setFolderLabelCustomName(sampleFolderLabelCustomName);
 		info.setSyncStatusJson(sampleSyncStatusJson);
@@ -580,9 +580,9 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getNoLongerUsedCurrentFormTemplateDescription());
 		}
 		if(VERSION >= 22)
-			assertEquals(label + ": sampleNetworkOnline", sampleIsNetworkOnline, info.isNetworkOnline());
+			assertEquals(label + ": sampleNetworkOnline", sampleOnStartupDefaultServerOnlineStatus, info.getOnStartupServerOnlineStatus());
 		else
-			assertEquals(label + ": sampleNetworkOnline", true, info.isNetworkOnline());
+			assertEquals(label + ": sampleNetworkOnline", true, info.getOnStartupServerOnlineStatus());
 		if(VERSION >= 23)
 		{
 			assertEquals(label + ": sampleFolderLabelIndex", sampleFolderLabelCode, info.getFolderLabelCode());
@@ -736,7 +736,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		}
 		if(VERSION >= 22)
 		{
-			out.writeBoolean(sampleIsNetworkOnline);
+			out.writeBoolean(sampleOnStartupDefaultServerOnlineStatus);
 		}
 		if(VERSION >= 23)
 		{
@@ -819,7 +819,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final String sampleCurrentFormTemplateTitle = "Sample Title for this Template";
 	final String sampleCurrentFormTemplateDescription = "Sample Description for this template.";
 //Version 22
-	final boolean sampleIsNetworkOnline = false; // NOTE: Defaults to true
+	final boolean sampleOnStartupDefaultServerOnlineStatus = false; // NOTE: Defaults to true
 //Version 23
 	final String sampleFolderLabelCode = "projects";
 	final String sampleFolderLabelCustomName = "My Cases";

@@ -86,7 +86,7 @@ public class ConfigInfo
 	public void setContactKeysXml(String contactKeysXml){this.contactKeysXml = contactKeysXml;}
 	public void deprecatedSetCurrentFormTemplateTitle(String netFormTemplateTitle) { currentFormTemplateTitle = netFormTemplateTitle; }
 	public void deprecatedSetCurrentFormTemplateDescription(String netFormTemplateDescription) { currentFormTemplateDescription = netFormTemplateDescription; }
-	public void setIsNetworkOnline(boolean newState) { isNetworkOnline = newState; }
+	public void setOnStartupServerOnlineStatus(boolean newState) { onStartupServerOnlineStatus = newState; }
 	public void setFolderLabelCode(String newCode) { folderLabelCode = newCode; }
 	public void setFolderLabelCustomName(String newName) { folderLabelCustomName = newName; }
 	public void setSyncStatusJson(String newSyncStatusJson) { syncStatusJson = newSyncStatusJson; }
@@ -139,7 +139,7 @@ public class ConfigInfo
 	public String getContactKeysXml() {return contactKeysXml;}
 	public String getNoLongerUsedCurrentFormTemplateTitle()  { return currentFormTemplateTitle;}
 	public String getNoLongerUsedCurrentFormTemplateDescription()  { return currentFormTemplateDescription;}
-	public boolean isNetworkOnline() { return isNetworkOnline; }
+	public boolean getOnStartupServerOnlineStatus() { return onStartupServerOnlineStatus; }
 	public String getFolderLabelCode() { return folderLabelCode; }
 	public String getFolderLabelCustomName() { return folderLabelCustomName; }
 	public String getSyncStatusJson() {	return syncStatusJson; }
@@ -188,7 +188,7 @@ public class ConfigInfo
 		contactKeysXml = "";
 		currentFormTemplateTitle = "";
 		currentFormTemplateDescription = "";
-		isNetworkOnline = true;
+		onStartupServerOnlineStatus = true;
 		folderLabelCode = "";
 		folderLabelCustomName = "";
 		syncStatusJson = "";
@@ -306,7 +306,7 @@ public class ConfigInfo
 			}
 			if(loaded.version >= 22)
 			{
-				loaded.isNetworkOnline = in.readBoolean();
+				loaded.onStartupServerOnlineStatus = in.readBoolean();
 			}
 			if(loaded.version >= 23)
 			{
@@ -377,7 +377,7 @@ public class ConfigInfo
 			writeLongString(out,contactKeysXml);
 			writeLongString(out, currentFormTemplateTitle);
 			writeLongString(out, currentFormTemplateDescription);
-			out.writeBoolean(isNetworkOnline);
+			out.writeBoolean(onStartupServerOnlineStatus);
 			out.writeUTF(folderLabelCode);
 			out.writeUTF(folderLabelCustomName);
 			writeLongString(out, syncStatusJson);
@@ -492,7 +492,7 @@ public class ConfigInfo
 	private String currentFormTemplateTitle;
 	private String currentFormTemplateDescription;
 	//Version 22
-	private boolean isNetworkOnline;
+	private boolean onStartupServerOnlineStatus;
 	//Version 23
 	private String folderLabelCode;
 	private String folderLabelCustomName;
