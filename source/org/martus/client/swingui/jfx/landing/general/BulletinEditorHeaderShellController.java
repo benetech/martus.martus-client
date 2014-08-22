@@ -28,35 +28,26 @@ package org.martus.client.swingui.jfx.landing.general;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.beans.property.Property;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 
-import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
-import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 
 public class BulletinEditorHeaderShellController extends FxNonWizardShellController
 {
-	public BulletinEditorHeaderShellController(UiBulletinComponent view)
+	public BulletinEditorHeaderShellController(UiMainWindow mainWindowToUse)
 	{
-		super(view.getMainWindow());
-		
-		bulletinComponent = view;
+		super(mainWindowToUse);
 	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		
-		ClientBulletinStore store = getApp().getStore();
-		Property<String> currentTemplateName = store.getCurrentFormTemplateNameProperty();
-		currentTemplateLabel.textProperty().bind(currentTemplateName);
 	}
 
 	@Override
@@ -70,7 +61,7 @@ public class BulletinEditorHeaderShellController extends FxNonWizardShellControl
 	{
 		try
 		{
-			FxInSwingController controller = new SelectTemplateController(bulletinComponent);
+			FxInSwingController controller = new SelectTemplateController(getMainWindow());
 			ActionDoer shellController = new DialogWithCloseShellController(getMainWindow(), controller);
 			doAction(shellController);
 		}
@@ -79,9 +70,4 @@ public class BulletinEditorHeaderShellController extends FxNonWizardShellControl
 			unexpectedError(e);
 		}
 	}
-	
-	@FXML
-	private Label currentTemplateLabel;
-	
-	private UiBulletinComponent bulletinComponent;
 }

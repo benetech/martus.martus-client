@@ -190,6 +190,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		try
 		{
 			view.copyDataFromBulletin(bulletin);
+			Utilities.forceScrollerToTop(view);
 		} 
 		catch (Exception e)
 		{
