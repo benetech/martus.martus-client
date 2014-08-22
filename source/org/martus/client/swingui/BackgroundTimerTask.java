@@ -42,7 +42,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.network.BackgroundRetriever;
 import org.martus.client.network.BackgroundUploader;
 import org.martus.client.network.SyncBulletinRetriever;
-import org.martus.client.swingui.jfx.landing.general.SettingsforServerController;
+import org.martus.client.swingui.jfx.landing.general.SettingsForServerController;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.BulletinSummary;
 import org.martus.common.BulletinSummary.WrongValueCount;
@@ -344,7 +344,7 @@ class BackgroundTimerTask extends TimerTask
 
 	private int getSyncDelayMinutes(String syncFrequency)
 	{
-		if(syncFrequency.equals(SettingsforServerController.SYNC_FREQUENCY_ON_STARTUP))
+		if(syncFrequency.equals(SettingsForServerController.SYNC_FREQUENCY_ON_STARTUP))
 			return Integer.MAX_VALUE;
 		
 		int syncMinutes = Integer.parseInt(syncFrequency);

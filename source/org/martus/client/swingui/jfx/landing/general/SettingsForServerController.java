@@ -58,9 +58,9 @@ import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class SettingsforServerController extends FxInSwingController
+public class SettingsForServerController extends FxInSwingController
 {
-	public SettingsforServerController(UiMainWindow mainWindowToUse)
+	public SettingsForServerController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
