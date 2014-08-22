@@ -78,8 +78,7 @@ public class BulletinOnServerColumnHandler implements Callback<TableColumn<Bulle
 	}	
 	
 	final String ON_SERVER = "\u2714";
-	final String NOT_ON_SERVER = "\u2716";
-
+	final String NOT_ON_SERVER = "\u2298";
 }	
 
 
