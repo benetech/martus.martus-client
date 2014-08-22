@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="845.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="450.0" prefWidth="845.0">
+         <children>
+			<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="845.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+			   <content>
+			      <TableView fx:id="itemsTable" onMouseClicked="#onMouseClick" prefHeight="418.0" prefWidth="842.0">
+			        <columns>
+			          <TableColumn fx:id="onServerColumn" editable="false" prefWidth="87.0" text="On Server" />
+			            <TableColumn fx:id="authorColumn" editable="false" prefWidth="123.0" text="Author" />
+			          <TableColumn fx:id="titleColumn" editable="false" prefWidth="284.0" text="Title" />
+			            <TableColumn fx:id="dateSavedColumn" editable="false" prefWidth="180.0" text="Date Saved" />
+			            <TableColumn fx:id="viewBulletinColumn" prefWidth="76.0" text="View" />
+			            <TableColumn fx:id="editBulletinColumn" prefWidth="81.0" text="Edit" />
+			        </columns>
+			      </TableView>
+			   </content>
+			</ScrollPane>
+            <HBox prefHeight="30.0" prefWidth="845.0">
+               <children>
+                  <Button fx:id="trashButton" mnemonicParsing="false" onAction="#onTrashSelectedItems" text="Trash" />
+                  <Button fx:id="exportButton" mnemonicParsing="false" onAction="#onExportSelectedItems" text="Export" />
+               </children></HBox>
+         </children></VBox>
+   </children>
+</Pane>

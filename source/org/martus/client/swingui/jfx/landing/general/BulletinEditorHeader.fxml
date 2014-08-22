@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<left>
+		<ImageView fitHeight="33.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@../../../dialogs/Martus-logo-white-text-160x72.png" />
+			</image>
+		</ImageView>
+	</left>
+	<right>
+		<HBox>
+			<children>
+				<Label fx:id="currentTemplateLabel" prefWidth="200"/>
+				<Button mnemonicParsing="false" text="Templates..." onAction="#onSelectTemplate" />
+			</children>
+		</HBox>
+	</right>
+</BorderPane>
