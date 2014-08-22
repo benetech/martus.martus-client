@@ -43,9 +43,13 @@
 												<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 											</rowConstraints>
 											<children>
-												<RadioButton mnemonicParsing="false" text="Generic" />
-												<RadioButton mnemonicParsing="false" text="From Contact" GridPane.rowIndex="1" />
-												<RadioButton mnemonicParsing="false" text="Import From File" GridPane.rowIndex="2" />
+												<RadioButton mnemonicParsing="false" text="Generic" >
+													<toggleGroup>
+														<ToggleGroup fx:id="importTemplateHow" />
+													</toggleGroup>
+												</RadioButton>
+												<RadioButton toggleGroup="$importTemplateHow" mnemonicParsing="false" text="From Contact" GridPane.rowIndex="1" />
+												<RadioButton toggleGroup="$importTemplateHow" mnemonicParsing="false" text="Import From File" GridPane.rowIndex="2" />
 												<ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" />
 												<ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 												<Label text="[file browser here]" GridPane.columnIndex="1" GridPane.rowIndex="2" />
