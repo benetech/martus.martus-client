@@ -109,6 +109,10 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 		ImageView buttonExportIcon = new ImageView(new Image(EXPORT_IMAGE_PATH));		
 		exportButton.setGraphic(buttonExportIcon);
+		
+		BooleanBinding itemsSelectedBinding = itemsTable.getSelectionModel().selectedItemProperty().isNull();
+		trashButton.disableProperty().bind(itemsSelectedBinding);
+		exportButton.disableProperty().bind(itemsSelectedBinding);
 	}
 
 	public void loadAllBulletinsAndSortByMostRecent()
