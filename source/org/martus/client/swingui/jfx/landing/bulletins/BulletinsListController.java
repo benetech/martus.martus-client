@@ -35,6 +35,7 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.control.TableView;
@@ -80,7 +81,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		Label noBulletins = new Label(getLocalization().getFieldLabel("NoBulletinsInTable"));
 		itemsTable.setPlaceholder(noBulletins);
 		itemsTable.setItems(bulletinTableProvider);
-
+		itemsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		loadAllBulletinsAndSortByMostRecent();
 	}
 
