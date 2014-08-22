@@ -28,9 +28,11 @@ package org.martus.client.swingui.jfx.landing.general;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -140,41 +142,57 @@ public class SettingsforServerController extends FxInSwingController
 
 	private void initializeSyncFrequency()
 	{
-		ObservableList<ChoiceItem> autoMaticSyncChoices = createChoices();
+		ObservableChoiceItemList autoMaticSyncChoices = createSyncChoiceInterval();
 		automaticSyncFrequency.setItems(autoMaticSyncChoices);
-		String currentSyncFrequency = getApp().getConfigInfo().getSyncFrequencyMinutes();
-		selectByCode(automaticSyncFrequency, currentSyncFrequency);
-		boolean isSyncingWithServer = !currentSyncFrequency.equals(NEVER);
-		if(isSyncingWithServer)
-			automaticallyDownloadFromServer.setSelected(true);
-		updateSyncControls();
-		automaticallyDownloadFromServer.selectedProperty().addListener(new DownloadFromServerListener());
+		ObservableChoiceItemList autoMaticSyncMinuteChoices = createSyncChoiceMinuteIntervals();
+		automaticSyncFrequencyMinutes.setItems(autoMaticSyncMinuteChoices);
+		
+		BooleanProperty downloadFromServerProperty = automaticallyDownloadFromServer.selectedProperty();
+		automaticSyncFrequency.disableProperty().bind(downloadFromServerProperty.not());
+		
+		ObservableChoiceItemList syncFrequencyList = (ObservableChoiceItemList)(automaticSyncFrequency.getItems());
+		BooleanProperty downloadFromServerChecked = downloadFromServerProperty;
+		BooleanBinding syncMinutesSelected = Bindings.equal(syncFrequencyList.findByCode(SYNC_FREQUENCY_MINUTES), automaticSyncFrequency.getSelectionModel().selectedItemProperty());
+		BooleanBinding shouldMinutesDropdownBeEnabled = Bindings.and(downloadFromServerChecked, syncMinutesSelected);
+		automaticSyncFrequencyMinutes.disableProperty().bind(shouldMinutesDropdownBeEnabled.not());
+		
+		String currentSyncFrequency = getApp().getConfigInfo().getSyncFrequencyMinutes();		
+		selectDefaultSyncFrequency(currentSyncFrequency);
 	}
 	
-	protected void updateSyncControls()
+	private void selectDefaultSyncFrequency(String syncFrequency)
 	{
-		Boolean shouldAutomaticallyDownloadFromServer = automaticallyDownloadFromServer.selectedProperty().getValue();
-		if(shouldAutomaticallyDownloadFromServer)
+		if(syncFrequency.equals(NEVER))
 		{
-			automaticSyncFrequency.setDisable(false);
+			selectChoiceByCode(automaticSyncFrequency, DEFAULT_SYNC_FREQUENCY);
+			selectChoiceByCode(automaticSyncFrequencyMinutes, DEFAULT_SYNC_MINUTES_FREQUENCY);
+			automaticallyDownloadFromServer.setSelected(false);
+			return;
 		}
-		else
+		automaticallyDownloadFromServer.setSelected(true);
+		if(syncFrequency.equals(SYNC_FREQUENCY_ONCE_AN_HOUR) || 
+		   syncFrequency.equals(SYNC_FREQUENCY_ON_STARTUP))
 		{
-			automaticSyncFrequency.setDisable(true);
-			selectByCode(automaticSyncFrequency, NEVER);
+			selectChoiceByCode(automaticSyncFrequency, SYNC_FREQUENCY_ONCE_AN_HOUR);
+			selectChoiceByCode(automaticSyncFrequencyMinutes, DEFAULT_SYNC_MINUTES_FREQUENCY);
+			return;
 		}
+		
+		selectChoiceByCode(automaticSyncFrequency, SYNC_FREQUENCY_MINUTES);
+		selectChoiceByCode(automaticSyncFrequencyMinutes, syncFrequency);
 	}
 
-	class DownloadFromServerListener implements ChangeListener<Boolean>
+	private static void selectChoiceByCode(ChoiceBox choiceBox, String codeToFind)
 	{
-		@Override
-		public void changed(ObservableValue<? extends Boolean> observable,
-				Boolean oldValue, Boolean newValue)
+		ObservableChoiceItemList choices = new ObservableChoiceItemList(choiceBox.getItems());
+		ChoiceItem current = choices.findByCode(codeToFind);
+		if(current != null)
 		{
-			updateSyncControls();
+			SingleSelectionModel model = choiceBox.getSelectionModel();
+			model.select(current);
 		}
 	}
-
+	
 	class IpPublicCodeChangeListener implements ChangeListener<String>
 	{
 		@Override
@@ -185,27 +203,39 @@ public class SettingsforServerController extends FxInSwingController
 		}
 	}
 	
-	private static void selectByCode(ChoiceBox choiceBox, String codeToFind)
+	private ObservableChoiceItemList createSyncChoiceInterval()
 	{
-		ObservableChoiceItemList choices = new ObservableChoiceItemList(choiceBox.getItems());
-		ChoiceItem current = choices.findByCode(codeToFind);
-		SingleSelectionModel model = choiceBox.getSelectionModel();
-		model.select(current);
+		ObservableChoiceItemList choices = new ObservableChoiceItemList();
+
+		choices.add(new ChoiceItem(SYNC_FREQUENCY_MINUTES, getLocalization().getFieldLabel("SyncFrequencyMinutes")));
+		choices.add(new ChoiceItem(SYNC_FREQUENCY_ON_STARTUP, getLocalization().getFieldLabel("SyncFrequencyOnStartup")));
+		choices.add(new ChoiceItem(SYNC_FREQUENCY_ONCE_AN_HOUR, getLocalization().getFieldLabel("SyncFrequencyOnceAnHour")));
+		return choices;
 	}
-
-	private ObservableList<ChoiceItem> createChoices()
+	
+	private ObservableChoiceItemList createSyncChoiceMinuteIntervals()
 	{
-		ObservableList<ChoiceItem> choices = new ObservableChoiceItemList();
+		ObservableChoiceItemList choices = new ObservableChoiceItemList();
 
-		choices.add(new ChoiceItem(NEVER, getLocalization().getFieldLabel("SyncFrequencyNever")));
-		choices.add(new ChoiceItem(ON_STARTUP, getLocalization().getFieldLabel("SyncFrequencyOnStartup")));
-		choices.add(new ChoiceItem("60", getLocalization().getFieldLabel("SyncFrequencyOneHour")));
-		choices.add(new ChoiceItem("15", getLocalization().getFieldLabel("SyncFrequencyFifteenMinutes")));
+		choices.add(new ChoiceItem("1", getLocalization().getFieldLabel("SyncFrequencyOneMinute")));
 		choices.add(new ChoiceItem("2", getLocalization().getFieldLabel("SyncFrequencyTwoMinutes")));
+		choices.add(new ChoiceItem("5", getLocalization().getFieldLabel("SyncFrequencyFiveMinutes")));
+		choices.add(new ChoiceItem("10", getLocalization().getFieldLabel("SyncFrequencyTenMinutes")));
+		choices.add(new ChoiceItem("15", getLocalization().getFieldLabel("SyncFrequencyFifteenMinutes")));
+		choices.add(new ChoiceItem("30", getLocalization().getFieldLabel("SyncFrequencyThirtyMinutes")));
+		choices.add(new ChoiceItem("45", getLocalization().getFieldLabel("SyncFrequencyFortyFiveMinutes")));
 		
 		return choices;
 	}
 	
+	protected void updateSynceFrequencyMinutesStatus(String selectedItemsCode)
+	{
+		if(selectedItemsCode.equals(SYNC_FREQUENCY_MINUTES))
+			automaticSyncFrequencyMinutes.disableProperty().set(false);
+		else
+			automaticSyncFrequencyMinutes.disableProperty().set(true);
+	}
+
 	@Override
 	public String getFxmlLocation()
 	{
@@ -365,7 +395,14 @@ public class SettingsforServerController extends FxInSwingController
 	public void onSaveServerPreferenceChanges()
 	{		
 		ConfigInfo configInfo = getApp().getConfigInfo();
-		configInfo.setSyncFrequencyMinutes(automaticSyncFrequency.getSelectionModel().getSelectedItem().getCode());
+		String frequencyInMinutes = NEVER;
+		if(automaticallyDownloadFromServer.isSelected())
+		{
+			frequencyInMinutes = automaticSyncFrequency.getSelectionModel().getSelectedItem().getCode();			
+			if(frequencyInMinutes.equals(SYNC_FREQUENCY_MINUTES))
+				frequencyInMinutes = automaticSyncFrequencyMinutes.getSelectionModel().getSelectedItem().getCode();
+		}
+		configInfo.setSyncFrequencyMinutes(frequencyInMinutes);
 		configInfo.setOnStartupServerOnlineStatus(serverDefaultToOn.selectedProperty().getValue());
 		try
 		{
@@ -378,8 +415,14 @@ public class SettingsforServerController extends FxInSwingController
 		getApp().turnNetworkOnOrOffAsRequested();
 	}
 
-	public final static String NEVER = "";
-	public final static String ON_STARTUP = "OnStartup";
+	public final static String SYNC_FREQUENCY_ON_STARTUP = "OnStartup";
+	private final static String NEVER = "";
+	private final static String SYNC_FREQUENCY_MINUTES = "Minutes";
+	private final static String SYNC_FREQUENCY_ONCE_AN_HOUR = "60";
+		
+	private final static String DEFAULT_SYNC_FREQUENCY = SYNC_FREQUENCY_MINUTES;
+	private final static String DEFAULT_SYNC_MINUTES_FREQUENCY = "5";
+	
 	private final static int NORMALIZED_TWENTY_DIGIT_PUBLIC_CODE_LENGTH = 20;
 	private final static int NORMALIZED_FORTY_DIGIT_PUBLIC_CODE_LENGTH = 40;
 
@@ -401,4 +444,6 @@ public class SettingsforServerController extends FxInSwingController
 	private CheckBox automaticallyDownloadFromServer;
 	@FXML
 	private ChoiceBox<ChoiceItem> automaticSyncFrequency;
+	@FXML
+	private ChoiceBox<ChoiceItem> automaticSyncFrequencyMinutes;
 }
