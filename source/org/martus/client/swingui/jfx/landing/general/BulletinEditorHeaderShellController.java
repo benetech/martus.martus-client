@@ -28,12 +28,9 @@ package org.martus.client.swingui.jfx.landing.general;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.beans.property.Property;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 
-import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
@@ -51,10 +48,6 @@ public class BulletinEditorHeaderShellController extends FxNonWizardShellControl
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		
-		ClientBulletinStore store = getApp().getStore();
-		Property<String> currentTemplateName = store.getCurrentFormTemplateNameProperty();
-		currentTemplateLabel.textProperty().bind(currentTemplateName);
 	}
 
 	@Override
@@ -77,7 +70,4 @@ public class BulletinEditorHeaderShellController extends FxNonWizardShellControl
 			unexpectedError(e);
 		}
 	}
-	
-	@FXML
-	private Label currentTemplateLabel;
 }
