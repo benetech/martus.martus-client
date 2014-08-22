@@ -68,7 +68,23 @@ public class FormTemplateManager
 		templateNames.addAll(loadTemplateNames());
 		currentTemplateName = new SimpleStringProperty(MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
 		
-		loadState();
+		try
+		{
+			loadState();
+		}
+		catch(Exception e)
+		{
+			throw new UnableToLoadCurrentTemplateException(e);
+		}
+	}
+	
+	public static class UnableToLoadCurrentTemplateException extends Exception
+	{
+		public UnableToLoadCurrentTemplateException(Exception causedBy)
+		{
+			super (causedBy);
+		}
+		
 	}
 	
 	public Property<String> getCurrentFormTemplateNameProperty()
@@ -153,13 +169,22 @@ public class FormTemplateManager
 
 	private void saveState() throws Exception
 	{
-		String currentTemplateFilename = getTemplateFile(currentTemplateName.getValue()).getName();
+		String currentTemplateFilename = getCurrentTemplateFilename();
 		EnhancedJsonObject json = new EnhancedJsonObject();
 		json.put(JSON_CURRENT_TEMPLATE_FILENAME, currentTemplateFilename);
 		byte[] plainTextBytes = json.toString().getBytes("UTF-8");
 		File file = getCurrentTemplateFilenameFile();
 		File signatureFile = getSignatureFileFor(file);
 		security.encryptAndWriteFileAndSignatureFile(file, signatureFile, plainTextBytes);
+	}
+
+	public String getCurrentTemplateFilename()
+	{
+		String currentTemplateTitle = currentTemplateName.getValue();
+		if(currentTemplateTitle.equals(MARTUS_DEFAULT_FORM_TEMPLATE_NAME))
+			return "";
+		
+		return getTemplateFile(currentTemplateTitle).getName();
 	}
 
 	private void loadState() throws Exception
@@ -173,6 +198,11 @@ public class FormTemplateManager
 		String jsonAsText = new String(plainTextBytes, "UTF-8");
 		EnhancedJsonObject json = new EnhancedJsonObject(jsonAsText);
 		String savedCurrentTemplateFilename = json.optString(JSON_CURRENT_TEMPLATE_FILENAME);
+
+		setCurrentFormTemplate(MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
+		if(savedCurrentTemplateFilename.equals(MARTUS_DEFAULT_FORM_TEMPLATE_NAME))
+			return;
+		
 		File templateFile = new File(directory, savedCurrentTemplateFilename);
 		String savedCurrentTemplateName = loadEncryptedTemplate(templateFile).getTitle();
 		setCurrentFormTemplate(savedCurrentTemplateName	);

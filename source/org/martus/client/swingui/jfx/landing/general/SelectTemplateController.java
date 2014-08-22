@@ -37,18 +37,16 @@ import javafx.scene.control.ListView;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.templates.FormTemplateManager;
 import org.martus.client.search.SaneCollator;
-import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class SelectTemplateController extends FxInSwingController
 {
-	public SelectTemplateController(UiBulletinComponent bulletinComponentToUse)
+	public SelectTemplateController(UiMainWindow mainWindowToUse)
 	{
-		super(bulletinComponentToUse.getMainWindow());
-		
-		bulletinComponent = bulletinComponentToUse;
+		super(mainWindowToUse);
 	}
 	
 	@Override
@@ -106,13 +104,11 @@ public class SelectTemplateController extends FxInSwingController
 	{
 		try
 		{
-			if(bulletinComponent.isBulletinModified())
-			{
-				String title = getLocalization().getWindowTitle("SelectTemplate");
-				String message = getLocalization().getFieldLabel("confirmOkToSwitchTemplate");
-				if(!showConfirmationDialog(title, message))
-					return;
-			}
+			String title = getLocalization().getWindowTitle("SelectTemplate");
+			String message = getLocalization().getFieldLabel("confirmOkToSwitchTemplate");
+			if(!showConfirmationDialog(title, message))
+				return;
+
 			ChoiceItem selected = availableTemplates.getSelectionModel().getSelectedItem();
 			getBulletinStore().setFormTemplate(selected.getCode());
 		}
@@ -124,6 +120,4 @@ public class SelectTemplateController extends FxInSwingController
 
 	@FXML
 	private ListView<ChoiceItem> availableTemplates;
-	
-	private UiBulletinComponent bulletinComponent;
 }
