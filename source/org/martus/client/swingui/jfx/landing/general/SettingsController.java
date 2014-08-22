@@ -51,7 +51,7 @@ public class SettingsController extends FxFlexibleShellController
 	public Parent createContents() throws Exception
 	{
 		Parent shellContents = super.createContents();
-		loadControllerAndEmbedInPane(new SettingsforServerController(getMainWindow()), serverContentPane);
+		loadControllerAndEmbedInPane(new SettingsForServerController(getMainWindow()), serverContentPane);
 		loadControllerAndEmbedInPane(new SettingsforSystemController(getMainWindow()), systemContentPane);
 		loadControllerAndEmbedInPane(new SettingsForTorController(getMainWindow()), torContentPane);
 		
