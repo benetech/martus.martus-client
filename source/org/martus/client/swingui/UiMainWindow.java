@@ -78,6 +78,7 @@ import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.core.MartusJarVerification;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.core.TransferableBulletinList;
+import org.martus.client.core.templates.FormTemplateManager.UnableToLoadCurrentTemplateException;
 import org.martus.client.network.BackgroundUploader;
 import org.martus.client.network.RetrieveCommand;
 import org.martus.client.search.SearchTreeNode;
@@ -659,9 +660,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			startInactivityTimeoutDetection();
 			getApp().doAfterSigninInitalization();
 		}
-		catch (MartusAppInitializationException e1)
+		catch (UnableToLoadCurrentTemplateException e)
 		{
-			initializationErrorExitMartusDlg(e1.getMessage());
+			notifyDlg("UnableToLoadCurrentTemplate");
 		}
 		catch (FileVerificationException e1)
 		{
@@ -674,6 +675,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		catch (MissingAccountMapException e1)
 		{
 			askToRepairMissingAccountMapFile();
+		}
+		catch (MartusAppInitializationException e1)
+		{
+			initializationErrorExitMartusDlg(e1.getMessage());
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			initializationErrorExitMartusDlg(e.getMessage());
 		}
 	}
     

@@ -59,6 +59,7 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.core.templates.FormTemplateManager.UnableToLoadCurrentTemplateException;
 import org.martus.client.network.RetrieveCommand;
 import org.martus.client.reports.ReportFormatFilter;
 import org.martus.client.search.BulletinSearcher;
@@ -800,12 +801,12 @@ public class MartusApp
 		return specs;
 	}
 
-	public void doAfterSigninInitalization() throws MartusAppInitializationException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
+	public void doAfterSigninInitalization() throws Exception
 	{
 		doAfterSigninInitalization(getCurrentAccountDirectory(), store.createDatabase(getCurrentAccountDirectory()));
 	}
 	
-	public void doAfterSigninInitalization(File dataDirectory,	Database database) throws MartusAppInitializationException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
+	public void doAfterSigninInitalization(File dataDirectory,	Database database) throws Exception
 	{
 		if(isInitialized)
 		{
@@ -831,6 +832,10 @@ public class MartusApp
 			throw(e);
 		}
 		catch(MissingAccountMapSignatureException e)
+		{
+			throw(e);
+		}
+		catch(UnableToLoadCurrentTemplateException e)
 		{
 			throw(e);
 		}

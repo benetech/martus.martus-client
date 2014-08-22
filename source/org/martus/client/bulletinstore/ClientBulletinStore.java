@@ -120,14 +120,14 @@ public class ClientBulletinStore extends BulletinStore
 		
 		initializeFolders();
 
-		initializeFormTemplateManager();
-		
 		loadCache();
 		
 		File obsoleteCacheFile = new File(getStoreRootDir(), OBSOLETE_CACHE_FILE_NAME);
 		obsoleteCacheFile.delete();
 
 		createKnownFieldSpecCache();
+
+		initializeFormTemplateManager();
 	}
 
 	public void prepareToExitNormally() throws Exception

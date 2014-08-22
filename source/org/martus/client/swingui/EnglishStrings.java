@@ -237,7 +237,10 @@ public class EnglishStrings
 "wintitle:notifyErrorUpdatingDictionary=Error",
 
 "wintitle:SelectTemplate=Select Template",
-"confirmOkToSwitchTemplate=Changing templates may lose data (need real text here)",
+"field:confirmOkToSwitchTemplate=Changing templates may lose data (need real text here)",
+
+"wintitle:notifyUnableToLoadCurrentTemplate=Error",
+"field:notifyUnableToLoadCurrentTemplatecause=Unable to restore the current form template, so the default template will be used.",
 
 "wintitle:notifyContactKeyIsOurself=Contact Account Is Yourself",
 "field:notifyContactKeyIsOurselfcause=You cannot add yourself as a contact.",

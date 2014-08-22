@@ -68,7 +68,23 @@ public class FormTemplateManager
 		templateNames.addAll(loadTemplateNames());
 		currentTemplateName = new SimpleStringProperty(MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
 		
-		loadState();
+		try
+		{
+			loadState();
+		}
+		catch(Exception e)
+		{
+			throw new UnableToLoadCurrentTemplateException(e);
+		}
+	}
+	
+	public static class UnableToLoadCurrentTemplateException extends Exception
+	{
+		public UnableToLoadCurrentTemplateException(Exception causedBy)
+		{
+			super (causedBy);
+		}
+		
 	}
 	
 	public Property<String> getCurrentFormTemplateNameProperty()
