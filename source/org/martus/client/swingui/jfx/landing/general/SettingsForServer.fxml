@@ -73,20 +73,27 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 <children><VBox prefHeight="100.0" prefWidth="480.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-<children><Label text="Server default to On?">
-<VBox.margin>
-<Insets />
-</VBox.margin></Label><CheckBox fx:id="serverDefaultToOn" mnemonicParsing="false" text="Yes" /><Label text="Automatically Download Files from Server?">
-<VBox.margin>
-<Insets top="10.0" />
-</VBox.margin></Label><CheckBox fx:id="automaticallyDownloadFromServer" mnemonicParsing="false" text="Yes" /><HBox prefHeight="100.0" prefWidth="200.0">
+<children>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Have Server Default to On? (will be applied on login)" />
+                                    <CheckBox fx:id="serverDefaultToOn" mnemonicParsing="false" text="Yes" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Automatically Download Files from Server?" />
+                                    <CheckBox fx:id="automaticallyDownloadFromServer" mnemonicParsing="false" text="Yes" />
+                                 </children>
+                              </HBox><HBox prefHeight="100.0" prefWidth="200.0">
 <VBox.margin>
 <Insets top="10.0" />
 </VBox.margin>
 <children>
-   	<Label text="%preferencesCheckFieldOfficeBulletins" GridPane.rowIndex="1" />
+   	<Label text="Download" GridPane.rowIndex="1" />
   	<ChoiceBox fx:id="automaticSyncFrequency" GridPane.columnIndex="1" GridPane.rowIndex="1" xmlns:fx="http://javafx.com/fxml" />
-</children></HBox><Button mnemonicParsing="false" onMouseClicked="#onSaveServerPreferenceChanges" text="Save Changes">
+</children></HBox>
+                              <ChoiceBox fx:id="automaticSyncFrequencyMinutes" prefWidth="150.0" /><Button mnemonicParsing="false" onMouseClicked="#onSaveServerPreferenceChanges" text="Save Changes">
 <VBox.margin>
 <Insets top="15.0" />
 </VBox.margin></Button>

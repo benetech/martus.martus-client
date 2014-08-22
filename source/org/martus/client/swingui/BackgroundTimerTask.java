@@ -344,7 +344,7 @@ class BackgroundTimerTask extends TimerTask
 
 	private int getSyncDelayMinutes(String syncFrequency)
 	{
-		if(syncFrequency.equals(SettingsforServerController.ON_STARTUP))
+		if(syncFrequency.equals(SettingsforServerController.SYNC_FREQUENCY_ON_STARTUP))
 			return Integer.MAX_VALUE;
 		
 		int syncMinutes = Integer.parseInt(syncFrequency);
