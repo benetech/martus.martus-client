@@ -59,7 +59,7 @@ final class ViewEditBulletinTableColumnButton implements Callback<TableColumn<Bu
 			@Override
 			public void handle(ActionEvent event) 
 			{
-				tableColumn.getTableView().getSelectionModel().select(getIndex());
+				tableColumn.getTableView().getSelectionModel().clearAndSelect(getIndex());
 				notifyListener();
 			}
 		}
