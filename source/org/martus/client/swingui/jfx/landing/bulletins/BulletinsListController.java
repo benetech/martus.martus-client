@@ -33,9 +33,6 @@ import java.util.Set;
 
 import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -57,7 +54,6 @@ import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.network.BulletinRetrieverGatewayInterface;
 import org.martus.common.packet.UniversalId;
 
 public class BulletinsListController extends AbstractFxLandingContentController
