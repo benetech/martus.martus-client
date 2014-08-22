@@ -37,7 +37,7 @@ public class BulletinEditorHeaderStage extends FxInSwingFrameStage
 	{
 		super(view.getMainWindow());
 		
-		shellController = new BulletinEditorHeaderShellController(view);
+		shellController = new BulletinEditorHeaderShellController(getMainWindow());
 		setShellController(shellController);
 		
 		setWindow(dialogOrFrame);
