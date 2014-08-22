@@ -662,6 +662,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		catch (UnableToLoadCurrentTemplateException e)
 		{
+			MartusLogger.logException(e);
 			notifyDlg("UnableToLoadCurrentTemplate");
 		}
 		catch (FileVerificationException e1)

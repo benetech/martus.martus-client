@@ -185,6 +185,32 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 		}
 	}
 	
+	public void testSaveLoadState() throws Exception
+	{
+		File tempDirectory = createTempDirectory();
+		try
+		{
+			File templateDirectory = new File(tempDirectory, "templates");
+			FormTemplateManager manager = FormTemplateManager.createOrOpen(security, templateDirectory);
+			
+			manager.setCurrentFormTemplate("");
+			manager = FormTemplateManager.createOrOpen(security, templateDirectory);
+
+			String title = "other";
+			FormTemplate template = createFormTemplate(title, "");
+			manager.putTemplate(template);
+			assertEquals("", manager.getCurrentFormTemplate().getTitle());
+			manager.setCurrentFormTemplate(title);
+			manager = FormTemplateManager.createOrOpen(security, templateDirectory);
+			assertEquals(title, manager.getCurrentFormTemplateNameProperty().getValue());
+		}
+		finally
+		{
+			DirectoryUtils.deleteEntireDirectoryTree(tempDirectory);
+		}
+		
+	}
+	
 	private FormTemplate createFormTemplate(String title, String description) throws Exception
 	{
 		FieldSpecCollection top = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
