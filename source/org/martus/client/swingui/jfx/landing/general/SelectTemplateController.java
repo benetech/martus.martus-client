@@ -32,7 +32,10 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.templates.FormTemplateManager;
@@ -54,6 +57,12 @@ public class SelectTemplateController extends FxInSwingController
 	{
 		super.initialize(location, bundle);
 		
+		initializeSelectTab();
+		initializeImportTab();
+	}
+
+	private void initializeSelectTab()
+	{
 		ClientBulletinStore store = getBulletinStore();
 		ObservableSet<String> templateNames = store.getAvailableTemplates();
 		ObservableChoiceItemList templateChoiceItems = new ObservableChoiceItemList();
@@ -62,6 +71,15 @@ public class SelectTemplateController extends FxInSwingController
 		templateChoiceItems.sort(sorter);
 		availableTemplates.setItems(templateChoiceItems);
 		updateSelectionFromReality();
+	}
+	
+	private void initializeImportTab()
+	{
+		genericChoiceBox.visibleProperty().bind(genericRadioButton.selectedProperty());
+		downloadChoiceBox.visibleProperty().bind(downloadRadioButton.selectedProperty());
+		chooseFileButton.visibleProperty().bind(importFileRadioButton.selectedProperty());
+		
+		genericRadioButton.setSelected(true);
 	}
 
 	public void updateSelectionFromReality()
@@ -120,4 +138,22 @@ public class SelectTemplateController extends FxInSwingController
 
 	@FXML
 	private ListView<ChoiceItem> availableTemplates;
+	
+	@FXML
+	private RadioButton genericRadioButton;
+	
+	@FXML
+	private ChoiceBox genericChoiceBox;
+	
+	@FXML
+	private RadioButton downloadRadioButton;
+	
+	@FXML
+	private ChoiceBox downloadChoiceBox;
+	
+	@FXML
+	private RadioButton importFileRadioButton;
+	
+	@FXML
+	private Button chooseFileButton;
 }
