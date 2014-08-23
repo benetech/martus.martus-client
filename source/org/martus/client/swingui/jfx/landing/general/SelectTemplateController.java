@@ -82,7 +82,7 @@ public class SelectTemplateController extends FxInSwingController
 		genericRadioButton.setSelected(true);
 	}
 
-	public void updateSelectionFromReality()
+	private void updateSelectionFromReality()
 	{
 		ClientBulletinStore store = getBulletinStore();
 		ObservableChoiceItemList templateChoiceItems = (ObservableChoiceItemList) availableTemplates.getItems();
@@ -97,7 +97,7 @@ public class SelectTemplateController extends FxInSwingController
 		}
 	}
 
-	public ClientBulletinStore getBulletinStore()
+	private ClientBulletinStore getBulletinStore()
 	{
 		return getApp().getStore();
 	}
