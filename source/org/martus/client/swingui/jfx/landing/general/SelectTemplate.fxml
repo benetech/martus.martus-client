@@ -43,16 +43,19 @@
 												<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 											</rowConstraints>
 											<children>
-												<RadioButton mnemonicParsing="false" text="Generic" >
+												<RadioButton fx:id="genericRadioButton" mnemonicParsing="false" text="Generic" >
 													<toggleGroup>
 														<ToggleGroup fx:id="importTemplateHow" />
 													</toggleGroup>
 												</RadioButton>
-												<RadioButton toggleGroup="$importTemplateHow" mnemonicParsing="false" text="From Contact" GridPane.rowIndex="1" />
-												<RadioButton toggleGroup="$importTemplateHow" mnemonicParsing="false" text="Import From File" GridPane.rowIndex="2" />
-												<ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" />
-												<ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-												<Label text="[file browser here]" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+												<ChoiceBox fx:id="genericChoiceBox" GridPane.columnIndex="1" />
+
+												<RadioButton toggleGroup="$importTemplateHow" fx:id="downloadRadioButton" mnemonicParsing="false" text="From Contact" GridPane.rowIndex="1" />
+												<ChoiceBox fx:id="downloadChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+												<RadioButton toggleGroup="$importTemplateHow" fx:id="importFileRadioButton" mnemonicParsing="false" text="Import From File" GridPane.rowIndex="2" />
+												<Button text="Choose..." fx:id="chooseFileButton" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
 											</children>
 										</GridPane>
 										<HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
