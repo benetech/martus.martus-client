@@ -25,9 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core.templates;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.net.URL;
 import java.util.Vector;
 
 import javafx.collections.FXCollections;
@@ -37,8 +36,8 @@ import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.FormTemplate.FutureVersionException;
-import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
+import org.martus.util.inputstreamwithseek.UrlInputStreamWithSeek;
 
 public class GenericFormTemplates
 {
@@ -70,17 +69,17 @@ public class GenericFormTemplates
 		Vector<FormTemplate> formTemplates = new Vector<FormTemplate>();
 		for (String formTemplateFileName : formTemplateFileNames)
 		{
-			InputStream resourceAsStream = GenericFormTemplates.class.getResourceAsStream(formTemplateFileName);
-			FormTemplate formTemplate = importFormTemplate(resourceAsStream, security);
+			URL url = GenericFormTemplates.class.getResource(formTemplateFileName);
+			FormTemplate formTemplate = importFormTemplate(url, security);
 			formTemplates.add(formTemplate);
 		}
 		
 		return formTemplates;
 	}
 
-	private static FormTemplate importFormTemplate(InputStream resourceAsStream, MartusCrypto security) throws Exception, FutureVersionException, IOException
+	private static FormTemplate importFormTemplate(URL url, MartusCrypto security) throws Exception, FutureVersionException, IOException
 	{
-		InputStreamWithSeek withSeek = new ByteArrayInputStreamWithSeek(convertToInputStreamWithSeek(resourceAsStream));
+		InputStreamWithSeek withSeek = new UrlInputStreamWithSeek(url);
 		try
 		{
 			FormTemplate formTemplate = new FormTemplate();
@@ -93,24 +92,4 @@ public class GenericFormTemplates
 			withSeek.close();
 		}
 	}
-
-	private static byte[] convertToInputStreamWithSeek(InputStream resourceAsStream) throws Exception
-	{
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		try
-		{
-			int readBytes = -1;
-			while ((readBytes = resourceAsStream.read()) != -1)
-			{
-				outputStream.write(readBytes);
-			}
-
-			return outputStream.toByteArray();
-		}
-		finally
-		{
-			outputStream.close();
-		}
-	}
-
 }

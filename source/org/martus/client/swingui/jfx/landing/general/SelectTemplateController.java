@@ -25,10 +25,16 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Comparator;
 import java.util.ResourceBundle;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,15 +42,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.stage.FileChooser;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.templates.GenericFormTemplates;
 import org.martus.client.core.templates.FormTemplateManager;
+import org.martus.client.core.templates.GenericFormTemplates;
 import org.martus.client.search.SaneCollator;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
+import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.FormTemplate;
 
 public class SelectTemplateController extends FxInSwingController
 {
@@ -76,6 +87,10 @@ public class SelectTemplateController extends FxInSwingController
 	
 	private void initializeImportTab()
 	{
+		templateToAddProperty = new SimpleObjectProperty<FormTemplate>();
+		
+		ReadOnlyObjectProperty<FormTemplate> selectedGenericTemplateProperty = genericChoiceBox.getSelectionModel().selectedItemProperty();
+		selectedGenericTemplateProperty.addListener(new GenericTemplateSelectedHandler());
 		genericChoiceBox.visibleProperty().bind(genericRadioButton.selectedProperty());
 		genericChoiceBox.setItems(GenericFormTemplates.getDefaultFormTemplateChoices(getSecurity()));
 		
@@ -83,6 +98,18 @@ public class SelectTemplateController extends FxInSwingController
 		chooseFileButton.visibleProperty().bind(importFileRadioButton.selectedProperty());
 		
 		genericRadioButton.setSelected(true);
+		
+		addTemplateButton.disableProperty().bind(Bindings.isNull(templateToAddProperty));
+	}
+	
+	protected class GenericTemplateSelectedHandler implements ChangeListener<FormTemplate>
+	{
+		@Override
+		public void changed(ObservableValue<? extends FormTemplate> arg0, FormTemplate arg1, FormTemplate arg2)
+		{
+			updateTemplateFromGeneric();
+		}
+		
 	}
 
 	private void updateSelectionFromReality()
@@ -114,6 +141,32 @@ public class SelectTemplateController extends FxInSwingController
 		return choiceItem;
 	}
 
+	private FormTemplate getGenericTemplateToAddIfAny()
+	{
+		return genericChoiceBox.getSelectionModel().getSelectedItem();
+	}
+
+	private void logTemplateToBeAdded()
+	{
+		MartusLogger.log("Ready to add template: " + getTitleOfTemplateToBeAdded());
+	}
+
+	private String getTitleOfTemplateToBeAdded()
+	{
+		FormTemplate template = templateToAddProperty.getValue();
+		String title = "(none)";
+		if(template != null)
+			title = template.getTitle();
+		return title;
+	}
+	
+	protected void updateTemplateFromGeneric()
+	{
+		FormTemplate selected = genericChoiceBox.getSelectionModel().getSelectedItem();
+		templateToAddProperty.setValue(selected);
+		logTemplateToBeAdded();
+	}
+		
 	@Override
 	public String getFxmlLocation()
 	{
@@ -121,7 +174,59 @@ public class SelectTemplateController extends FxInSwingController
 	}
 	
 	@FXML
-	public void onSelect(ActionEvent event)
+	private void onChooseGeneric(ActionEvent event)
+	{
+		updateTemplateFromGeneric();
+	}
+
+	@FXML
+	private void onChooseFromServer(ActionEvent event)
+	{
+		templateToAddProperty.setValue(null);
+		logTemplateToBeAdded();
+	}
+	
+	@FXML
+	private void onChooseFromFile(ActionEvent event)
+	{
+		templateToAddProperty.setValue(null);
+		logTemplateToBeAdded();
+	}
+	
+	@FXML
+	private void onImportFromFile(ActionEvent event)
+	{
+		FileChooser fileChooser = new FileChooser();
+		File martusRootDir = getApp().getMartusDataRootDirectory();
+		fileChooser.setInitialDirectory(martusRootDir);
+		fileChooser.setTitle(getLocalization().getWindowTitle("FileDialogSaveKeyPair"));
+		MCTFileFilter templateFileFilter = new MCTFileFilter(getLocalization());
+		fileChooser.getExtensionFilters().addAll(
+				new FileChooser.ExtensionFilter(templateFileFilter.getDescription(), templateFileFilter.getWildCardExtension()),
+				new FileChooser.ExtensionFilter(getLocalization().getFieldLabel("AllFiles"), "*.*"));
+		File templateFile = fileChooser.showOpenDialog(null);
+		if(templateFile == null)
+			return;
+		
+		FormTemplate importedTemplate = new FormTemplate();
+		try
+		{
+			if(!importedTemplate.importTemplate(templateFile, getSecurity()))
+			{
+				showNotifyDialog("ErrorImportingCustomizationTemplate");
+				return;
+			}
+			templateToAddProperty.setValue(importedTemplate);
+			logTemplateToBeAdded();
+		}
+		catch(Exception e)
+		{
+			unexpectedError(e);
+		}
+	}
+
+	@FXML
+	private void onSelect(ActionEvent event)
 	{
 		try
 		{
@@ -140,13 +245,41 @@ public class SelectTemplateController extends FxInSwingController
 	}
 
 	@FXML
+	private void onAdd(ActionEvent event)
+	{
+		try
+		{
+			FormTemplate templateToAdd = getGenericTemplateToAddIfAny();
+			if(templateToAdd == null)
+			{
+				showNotifyDialog("NoTemplateSelectedToAdd");
+				return;
+			}
+			ObservableSet<String> existingTemplateTitles = getBulletinStore().getAvailableTemplates();
+			boolean doesTemplateExist = existingTemplateTitles.contains(templateToAdd.getTitle());
+			if(doesTemplateExist)
+			{
+				String title = getLocalization().getWindowTitle("AddTemplate");
+				String message = getLocalization().getFieldLabel("confirmTemplateAlreadyExistscause");
+				if(!showConfirmationDialog(title, message))
+					return;
+			}
+			getBulletinStore().saveNewFormTemplate(templateToAdd);
+		}
+		catch(Exception e)
+		{
+			unexpectedError(e);
+		}
+	}
+
+	@FXML
 	private ListView<ChoiceItem> availableTemplates;
 	
 	@FXML
 	private RadioButton genericRadioButton;
 	
 	@FXML
-	private ChoiceBox genericChoiceBox;
+	private ChoiceBox<FormTemplate> genericChoiceBox;
 	
 	@FXML
 	private RadioButton downloadRadioButton;
@@ -159,4 +292,9 @@ public class SelectTemplateController extends FxInSwingController
 	
 	@FXML
 	private Button chooseFileButton;
+	
+	@FXML
+	private Button addTemplateButton;
+	
+	private SimpleObjectProperty<FormTemplate> templateToAddProperty;
 }
