@@ -38,6 +38,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.core.templates.BuiltInFormTemplates;
 import org.martus.client.core.templates.FormTemplateManager;
 import org.martus.client.search.SaneCollator;
 import org.martus.client.swingui.UiMainWindow;
@@ -76,6 +77,8 @@ public class SelectTemplateController extends FxInSwingController
 	private void initializeImportTab()
 	{
 		genericChoiceBox.visibleProperty().bind(genericRadioButton.selectedProperty());
+		genericChoiceBox.setItems(BuiltInFormTemplates.getDefaultFormTemplateChoices(getSecurity()));
+		
 		downloadChoiceBox.visibleProperty().bind(downloadRadioButton.selectedProperty());
 		chooseFileButton.visibleProperty().bind(importFileRadioButton.selectedProperty());
 		
