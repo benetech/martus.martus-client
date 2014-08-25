@@ -41,6 +41,9 @@ import javafx.util.StringConverter;
 
 import org.martus.client.core.templates.GenericFormTemplates;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.common.AbstractFxImportFormTemplateController;
+import org.martus.client.swingui.jfx.common.FxImportFormTemplateFromMyContactsPopupController;
+import org.martus.client.swingui.jfx.common.FxSetupFormTemplateFromNewContactPopupController;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.client.swingui.jfx.setupwizard.step6.FxSetupBackupYourKeyController;
 import org.martus.common.MartusLogger;
