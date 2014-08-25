@@ -38,6 +38,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseButton;
@@ -72,8 +73,11 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		updateCasesSelectDefaultCase();
 		CaseListChangeListener caseListChangeListener = new CaseListChangeListener();
 		casesListViewAll.getSelectionModel().selectedItemProperty().addListener(caseListChangeListener);
+		casesListViewAll.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		casesListViewOpen.getSelectionModel().selectedItemProperty().addListener(caseListChangeListener);
+		casesListViewOpen.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		casesListViewClosed.getSelectionModel().selectedItemProperty().addListener(caseListChangeListener);
+		casesListViewClosed.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		casesTabPane.getSelectionModel().selectedItemProperty().addListener(new caseTabeListener());
 	}
 
@@ -88,11 +92,6 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		listeners.add(listener);
 	}
 	
-	public void removeFolderSelectionListener(FolderSelectionListener listener)
-	{
-		listeners.remove(listener);
-	}
-
 	protected void updateCasesSelectDefaultCase()
 	{
 		setCurrentlyViewedCaseList(tabCaseAll);
@@ -116,7 +115,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		{
 			currentCasesListView = casesListViewAll;
 			currentCaseListProvider = caseListProviderAll;
-		}
+		}		
 		updateCaseList();
 	}
 

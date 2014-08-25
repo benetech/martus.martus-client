@@ -31,7 +31,7 @@ import java.util.Set;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.FolderContentsListener;
-import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.data.ArrayObservableList;
 import org.martus.client.swingui.jfx.landing.FolderSelectionListener;
 import org.martus.common.MiniLocalization;
@@ -40,11 +40,10 @@ import org.martus.common.packet.UniversalId;
 
 public class BulletinListProvider extends ArrayObservableList<BulletinTableRowData> implements FolderSelectionListener, FolderContentsListener
 {
-	public BulletinListProvider(MartusApp mainApp)
+	public BulletinListProvider(UiMainWindow mainWindowToUse)
 	{
 		super(INITIAL_CAPACITY);
-		app = mainApp;
-		setFolder(null);
+		mainWindow = mainWindowToUse;
 	}
 	
 	@Override
@@ -62,8 +61,13 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 			folder.addFolderContentsListener(this);
 		updateContents();
 	}
+	
+	public BulletinFolder getFolder()
+	{
+		return folder;
+	}
 
-	private void updateContents()
+	public void updateContents()
 	{
 		loadBulletinData(getUniversalIds());
 	}
@@ -71,7 +75,7 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 	private Set getUniversalIds()
 	{
 		if(folder == null)
-			return app.getStore().getAllBulletinLeafUids();
+			return mainWindow.getStore().getAllBulletinLeafUids();
 		return folder.getAllUniversalIdsUnsorted();
 	}
 
@@ -98,9 +102,14 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 		updateContents();
 	}
 
-	protected void loadAllBulletins()
+	private void loadAllBulletins()
 	{
-		setFolder(null);
+		setFolder(folder);
+	}
+
+	protected void loadAllBulletinsSelectInitialCaseFolder()
+	{
+		setFolder(mainWindow.getStore().findFolder(ClientBulletinStore.SAVED_FOLDER));
 	}
 
 	public void loadBulletinData(Set bulletinUids)
@@ -119,10 +128,10 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 
 	protected BulletinTableRowData getCurrentBulletinData(UniversalId leafBulletinUid)
 	{
-		ClientBulletinStore clientBulletinStore = app.getStore();
+		ClientBulletinStore clientBulletinStore = mainWindow.getStore();
 		Bulletin bulletin = clientBulletinStore.getBulletinRevision(leafBulletinUid);
 		boolean onServer = clientBulletinStore.isProbablyOnServer(leafBulletinUid);
-		MiniLocalization localization = app.getLocalization();
+		MiniLocalization localization = mainWindow.getLocalization();
 		BulletinTableRowData bulletinData = new BulletinTableRowData(bulletin, onServer, localization);
 		return bulletinData;
 	}
@@ -159,6 +168,6 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 	private static final int BULLETIN_NOT_IN_TABLE = -1;
 	private static final int INITIAL_CAPACITY = 1000;
 	
-	private MartusApp app;
+	private UiMainWindow mainWindow;
 	private BulletinFolder folder;
 }
