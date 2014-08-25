@@ -25,7 +25,92 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core.templates;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Vector;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import org.martus.common.MartusLogger;
+import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.fieldspec.FormTemplate;
+import org.martus.common.fieldspec.FormTemplate.FutureVersionException;
+import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
+import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
+
 public class BuiltInFormTemplates
 {
+	public static ObservableList<FormTemplate> getDefaultFormTemplateChoices(MartusCrypto security)
+	{
+		try
+		{
+			Vector<FormTemplate> customTemplates = loadFormTemplates(security);
+
+			return FXCollections.observableArrayList(customTemplates);
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			return FXCollections.observableArrayList();
+		}
+	}
+	
+	private static Vector<FormTemplate> loadFormTemplates(MartusCrypto security) throws Exception
+	{
+		String[] formTemplateFileNames = new String[]
+		{
+			"Amnesty-Urgent-Actions.mct", 
+			"Journalist-Example.mct", 
+			"Martus-Customization-Example.mct", 
+			"UN-Disappearances.mct", 
+			"UN-Special-Rapporteur-Executions.mct", 
+		};
+		Vector<FormTemplate> formTemplates = new Vector<FormTemplate>();
+		for (String formTemplateFileName : formTemplateFileNames)
+		{
+			InputStream resourceAsStream = BuiltInFormTemplates.class.getResourceAsStream(formTemplateFileName);
+			FormTemplate formTemplate = importFormTemplate(resourceAsStream, security);
+			formTemplates.add(formTemplate);
+		}
+		
+		return formTemplates;
+	}
+
+	private static FormTemplate importFormTemplate(InputStream resourceAsStream, MartusCrypto security) throws Exception, FutureVersionException, IOException
+	{
+		InputStreamWithSeek withSeek = new ByteArrayInputStreamWithSeek(convertToInputStreamWithSeek(resourceAsStream));
+		try
+		{
+			FormTemplate formTemplate = new FormTemplate();
+			formTemplate.importTemplate(security, withSeek);
+
+			return formTemplate;
+		}
+		finally
+		{
+			withSeek.close();
+		}
+	}
+
+	private static byte[] convertToInputStreamWithSeek(InputStream resourceAsStream) throws Exception
+	{
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		try
+		{
+			int readBytes = -1;
+			while ((readBytes = resourceAsStream.read()) != -1)
+			{
+				outputStream.write(readBytes);
+			}
+
+			return outputStream.toByteArray();
+		}
+		finally
+		{
+			outputStream.close();
+		}
+	}
 
 }
