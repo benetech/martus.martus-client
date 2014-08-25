@@ -25,9 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step5;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Vector;
 
 import javafx.beans.value.ChangeListener;
@@ -42,15 +39,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.util.StringConverter;
 
+import org.martus.client.core.templates.BuiltInFormTemplates;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.client.swingui.jfx.setupwizard.step6.FxSetupBackupYourKeyController;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.FormTemplate;
-import org.martus.common.fieldspec.FormTemplate.FutureVersionException;
 import org.martus.util.TokenReplacement;
-import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
-import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
 
 public class FxSetupImportTemplatesController extends FxStep5Controller
 {
@@ -81,7 +76,8 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	public void initializeMainContentPane()
 	{
 		genericTemplatesChoiceBox.setConverter(new FormTemplateToStringConverter(getLocalization()));
-		genericTemplatesChoiceBox.setItems(FXCollections.observableArrayList(getDefaultFormTemplateChoices()));
+		ObservableList<FormTemplate> builtInFormTemplates = BuiltInFormTemplates.getDefaultFormTemplateChoices(getApp().getSecurity());
+		genericTemplatesChoiceBox.setItems(FXCollections.observableArrayList(builtInFormTemplates));
 		genericTemplatesChoiceBox.getSelectionModel().selectedItemProperty().addListener(new GenericTemplatesSelectionChangedHandler());
 
 		customTemplatesChoiceBox.setItems(FXCollections.observableArrayList(getImportTemplateChoices()));
@@ -119,76 +115,6 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		return FXCollections.observableArrayList(choices);
 	}
 
-	private ObservableList<FormTemplate> getDefaultFormTemplateChoices()
-	{
-		try
-		{
-			Vector<FormTemplate> customTemplates = loadFormTemplates();
-
-			return FXCollections.observableArrayList(customTemplates);
-		}
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-			return FXCollections.observableArrayList();
-		}
-	}
-	
-	private Vector<FormTemplate> loadFormTemplates() throws Exception
-	{
-		String[] formTemplateFileNames = new String[]
-		{
-			"formtemplates/Amnesty-Urgent-Actions.mct", 
-			"formtemplates/Journalist-Example.mct", 
-			"formtemplates/Martus-Customization-Example.mct", 
-			"formtemplates/UN-Disappearances.mct", 
-			"formtemplates/UN-Special-Rapporteur-Executions.mct", 
-		};
-		Vector<FormTemplate> formTemplates = new Vector<FormTemplate>();
-		for (String formTemplateFileName : formTemplateFileNames)
-		{
-			InputStream resourceAsStream = getClass().getResourceAsStream(formTemplateFileName);
-			FormTemplate formTemplate = importFormTemplate(resourceAsStream);
-			formTemplates.add(formTemplate);
-		}
-		
-		return formTemplates;
-	}
-
-	private FormTemplate importFormTemplate(InputStream resourceAsStream) throws Exception, FutureVersionException, IOException
-	{
-		InputStreamWithSeek withSeek = new ByteArrayInputStreamWithSeek(convertToInputStreamWithSeek(resourceAsStream));
-		try
-		{
-			FormTemplate formTemplate = new FormTemplate();
-			formTemplate.importTemplate(getApp().getSecurity(), withSeek);
-
-			return formTemplate;
-		}
-		finally
-		{
-			withSeek.close();
-		}
-	}
-
-	private byte[] convertToInputStreamWithSeek(InputStream resourceAsStream) throws Exception
-	{
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		try
-		{
-			int readBytes = -1;
-			while ((readBytes = resourceAsStream.read()) != -1)
-			{
-				outputStream.write(readBytes);
-			}
-
-			return outputStream.toByteArray();
-		}
-		finally
-		{
-			outputStream.close();
-		}
-	}
 	
 	@FXML
 	private void genericComboBoxSelectionChanged() throws Exception
