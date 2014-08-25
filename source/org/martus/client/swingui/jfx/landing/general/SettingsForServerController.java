@@ -142,17 +142,16 @@ public class SettingsForServerController extends FxInSwingController
 
 	private void initializeSyncFrequency()
 	{
-		ObservableChoiceItemList autoMaticSyncChoices = createSyncChoiceInterval();
-		automaticSyncFrequency.setItems(autoMaticSyncChoices);
+		ObservableChoiceItemList automaticSyncChoices = createSyncChoiceInterval();
+		automaticSyncFrequency.setItems(automaticSyncChoices);
 		ObservableChoiceItemList autoMaticSyncMinuteChoices = createSyncChoiceMinuteIntervals();
 		automaticSyncFrequencyMinutes.setItems(autoMaticSyncMinuteChoices);
 		
 		BooleanProperty downloadFromServerProperty = automaticallyDownloadFromServer.selectedProperty();
 		automaticSyncFrequency.disableProperty().bind(downloadFromServerProperty.not());
 		
-		ObservableChoiceItemList syncFrequencyList = (ObservableChoiceItemList)(automaticSyncFrequency.getItems());
 		BooleanProperty downloadFromServerChecked = downloadFromServerProperty;
-		BooleanBinding syncMinutesSelected = Bindings.equal(syncFrequencyList.findByCode(SYNC_FREQUENCY_MINUTES), automaticSyncFrequency.getSelectionModel().selectedItemProperty());
+		BooleanBinding syncMinutesSelected = Bindings.equal(automaticSyncChoices.findByCode(SYNC_FREQUENCY_MINUTES), automaticSyncFrequency.getSelectionModel().selectedItemProperty());
 		BooleanBinding shouldMinutesDropdownBeEnabled = Bindings.and(downloadFromServerChecked, syncMinutesSelected);
 		automaticSyncFrequencyMinutes.disableProperty().bind(shouldMinutesDropdownBeEnabled.not());
 		
@@ -162,24 +161,31 @@ public class SettingsForServerController extends FxInSwingController
 	
 	private void selectDefaultSyncFrequency(String syncFrequency)
 	{
+		String syncFrequencyInterval = DEFAULT_SYNC_FREQUENCY;
+		String syncFrequencyMinutes = DEFAULT_SYNC_MINUTES_FREQUENCY;
+		
 		if(syncFrequency.equals(NEVER))
-		{
-			selectChoiceByCode(automaticSyncFrequency, DEFAULT_SYNC_FREQUENCY);
-			selectChoiceByCode(automaticSyncFrequencyMinutes, DEFAULT_SYNC_MINUTES_FREQUENCY);
 			automaticallyDownloadFromServer.setSelected(false);
-			return;
-		}
-		automaticallyDownloadFromServer.setSelected(true);
-		if(syncFrequency.equals(SYNC_FREQUENCY_ONCE_AN_HOUR) || 
-		   syncFrequency.equals(SYNC_FREQUENCY_ON_STARTUP))
+		else		
+			automaticallyDownloadFromServer.setSelected(true);
+		
+		if(syncFrequency.equals(SYNC_FREQUENCY_ON_STARTUP))
 		{
-			selectChoiceByCode(automaticSyncFrequency, SYNC_FREQUENCY_ONCE_AN_HOUR);
-			selectChoiceByCode(automaticSyncFrequencyMinutes, DEFAULT_SYNC_MINUTES_FREQUENCY);
-			return;
+			syncFrequencyInterval = SYNC_FREQUENCY_ON_STARTUP;
+		}
+		else if(syncFrequency.equals(SYNC_FREQUENCY_ON_STARTUP))
+		{
+			syncFrequencyInterval = SYNC_FREQUENCY_ON_STARTUP;
+		}
+		else
+		{
+			syncFrequencyInterval = SYNC_FREQUENCY_MINUTES;
+			syncFrequencyMinutes = syncFrequency;
 		}
 		
-		selectChoiceByCode(automaticSyncFrequency, SYNC_FREQUENCY_MINUTES);
-		selectChoiceByCode(automaticSyncFrequencyMinutes, syncFrequency);
+		
+		selectChoiceByCode(automaticSyncFrequency, syncFrequencyInterval);
+		selectChoiceByCode(automaticSyncFrequencyMinutes, syncFrequencyMinutes);
 	}
 
 	private static void selectChoiceByCode(ChoiceBox choiceBox, String codeToFind)
