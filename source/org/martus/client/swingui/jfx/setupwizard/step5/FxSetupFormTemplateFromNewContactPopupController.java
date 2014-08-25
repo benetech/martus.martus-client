@@ -37,7 +37,6 @@ import javafx.scene.control.TextField;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.AccessTokenChangeHandler;
 import org.martus.common.ContactKey;
 import org.martus.common.Exceptions.ServerNotAvailableException;
@@ -50,9 +49,9 @@ import org.martus.common.fieldspec.FormTemplate;
 
 public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFxImportFormTemplateController implements Initializable
 {
-	public FxSetupFormTemplateFromNewContactPopupController(UiMainWindow mainWindowToUse, FxWizardStage wizardPanelToUse)
+	public FxSetupFormTemplateFromNewContactPopupController(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindowToUse, wizardPanelToUse);
+		super(mainWindowToUse);
 	}
 	
 	@Override

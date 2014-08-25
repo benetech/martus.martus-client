@@ -35,7 +35,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxWizardStage;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.MartusLogger;
@@ -43,9 +42,9 @@ import org.martus.common.fieldspec.FormTemplate;
 
 public class FxImportFormTemplateFromMyContactsPopupController extends AbstractFxImportFormTemplateController
 {
-	public FxImportFormTemplateFromMyContactsPopupController(UiMainWindow mainWindow, FxWizardStage wizardPanelToUse)
+	public FxImportFormTemplateFromMyContactsPopupController(UiMainWindow mainWindow)
 	{
-		super(mainWindow, wizardPanelToUse);
+		super(mainWindow);
 	}
 	
 	@Override

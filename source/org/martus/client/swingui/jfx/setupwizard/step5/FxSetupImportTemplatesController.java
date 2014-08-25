@@ -109,8 +109,8 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	private ObservableList<AbstractFxImportFormTemplateController> getImportTemplateChoices()
 	{
 		Vector<AbstractFxImportFormTemplateController> choices = new Vector<AbstractFxImportFormTemplateController>();
-		choices.add(new FxImportFormTemplateFromMyContactsPopupController(getMainWindow(), getWizardStage()));
-		choices.add(new FxSetupFormTemplateFromNewContactPopupController(getMainWindow(), getWizardStage()));
+		choices.add(new FxImportFormTemplateFromMyContactsPopupController(getMainWindow()));
+		choices.add(new FxSetupFormTemplateFromNewContactPopupController(getMainWindow()));
 
 		return FXCollections.observableArrayList(choices);
 	}
