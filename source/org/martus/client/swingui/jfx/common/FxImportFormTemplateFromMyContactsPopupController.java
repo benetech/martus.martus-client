@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.setupwizard.step5;
+package org.martus.client.swingui.jfx.common;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -35,6 +35,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.setupwizard.step5.ContactKeyStringConverter;
+import org.martus.client.swingui.jfx.setupwizard.step5.FormTemplateToStringConverter;
 import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.MartusLogger;
@@ -86,7 +88,7 @@ public class FxImportFormTemplateFromMyContactsPopupController extends AbstractF
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/step5/SetupImportTemplateFromMyContactsPopup.fxml";
+		return "common/SetupImportTemplateFromMyContactsPopup.fxml";
 	}
 
 	@Override
