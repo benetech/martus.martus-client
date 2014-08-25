@@ -59,6 +59,12 @@ abstract public class AbstractFxImportFormTemplateController extends FxPopupCont
 		showTimeoutDialog(message, task);
 	}
 	
+	@Override
+	public String toString()
+	{
+		return getLabel();
+	}
+	
 	abstract public String getLabel();
 	
 	abstract public FormTemplate getSelectedFormTemplate();
