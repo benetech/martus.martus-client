@@ -602,7 +602,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		boolean confirmDiscardSingleBulletin(Bulletin b)
 		{
 			BulletinFolder folderToDiscardFrom = getFolder();
-			if(!isDiscardedFolder(folderToDiscardFrom))
+			if(!folderToDiscardFrom.isDiscardedFolder())
 				return true;
 
 			MartusApp app = mainWindow.getApp();
@@ -633,7 +633,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		boolean confirmDiscardMultipleBulletins()
 		{
 			BulletinFolder folderToDiscardFrom = getFolder();
-			if(!isDiscardedFolder(folderToDiscardFrom))
+			if(!folderToDiscardFrom.isDiscardedFolder())
 				return true;
 
 			MartusApp app = mainWindow.getApp();
@@ -748,11 +748,6 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 			names += " - " + node.getLocalizedName() + "\n";
 		}
 		return names;
-	}
-
-	boolean isDiscardedFolder(BulletinFolder f)
-	{
-		return f.equals(f.getStore().getFolderDiscarded());
 	}
 
 	void selectRow(int rowIndex)

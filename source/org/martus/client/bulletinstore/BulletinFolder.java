@@ -55,6 +55,11 @@ public class BulletinFolder
 		sortedIdList = null;
 		listeners = new HashSet();
 	}
+	
+	public boolean isDiscardedFolder()
+	{
+		return equals(getStore().getFolderDiscarded());
+	}
 
 	public ClientBulletinStore getStore()
 	{
