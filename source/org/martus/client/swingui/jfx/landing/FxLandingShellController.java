@@ -64,7 +64,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	public FxLandingShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		bulletinListProvider = new BulletinListProvider(getApp());
+		bulletinListProvider = new BulletinListProvider(mainWindowToUse);
 		bulletinsListController = new BulletinsListController(mainWindowToUse, bulletinListProvider);
 	}
 	
@@ -91,8 +91,9 @@ public class FxLandingShellController extends FxNonWizardShellController
 		configInfoUseInternalTorProperty.addListener(torChangeListener);
 		Property<Boolean> orchidTransportWrapperTorProperty = getApp().getTransport().getIsTorActiveProperty();
 		orchidTransportWrapperTorProperty.addListener(torChangeListener);
+		
 	}
-	
+
 	@Override
 	public Parent createContents() throws Exception
 	{
@@ -100,7 +101,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 		
 		FxCaseManagementController caseManagementSideBar = new FxCaseManagementController(getMainWindow());
 		caseManagementSideBar.addFolderSelectionListener(bulletinListProvider);
-		
+
 		loadControllerAndEmbedInPane(caseManagementSideBar, sideContentPane);
 		loadControllerAndEmbedInPane(bulletinsListController, mainContentPane);
 		

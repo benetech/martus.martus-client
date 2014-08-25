@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -48,6 +49,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.core.MartusApp;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
@@ -113,7 +116,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	public void loadAllBulletinsAndSortByMostRecent()
 	{
-		bulletinTableProvider.loadAllBulletins();
+		bulletinTableProvider.loadAllBulletinsSelectInitialCaseFolder();
 		sortByMostRecentBulletins();
 	}
 	
@@ -238,10 +241,40 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		return "landing/bulletins/FxTableViewItems.fxml";
 	}
 	
+	private UniversalId[] getSelectedBulletinIds()
+	{
+		ObservableList<BulletinTableRowData> selectedItems = itemsTable.getSelectionModel().getSelectedItems();
+		UniversalId[] selectedIds = new UniversalId[selectedItems.size()];
+		int next = 0;
+		for (BulletinTableRowData bulletinTableRowData : selectedItems)
+		{
+			selectedIds[next++] = bulletinTableRowData.getUniversalId();
+		}
+		return selectedIds;
+	}
+	
 	@FXML
 	private void onTrashSelectedItems(javafx.event.ActionEvent event)
 	{
-		
+		UniversalId[] bulletinsIDsToDiscard = getSelectedBulletinIds();
+		BulletinFolder folderToDiscardFrom = bulletinTableProvider.getFolder();
+		if(folderToDiscardFrom.isDiscardedFolder())
+		{
+			//FIXME warn user about unsent copies / copies in other folders when deleting from discarded folder
+			//Implement this when we can actually see the discarded folder and delete from it.
+			//See: UiBulletinTable:confirmDiscardSingleBulletin(Bulletin b)
+			//     UiBulletinTable:confirmDiscardMultipleBulletins
+		}
+		MartusApp app = getApp();
+		try
+		{
+			app.discardBulletinsFromFolder(folderToDiscardFrom, bulletinsIDsToDiscard);
+		}
+		catch (IOException e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+		bulletinTableProvider.updateContents();
 	}
 
 	@FXML
