@@ -83,7 +83,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		genericTemplatesChoiceBox.setItems(FXCollections.observableArrayList(builtInFormTemplates));
 		genericTemplatesChoiceBox.getSelectionModel().selectedItemProperty().addListener(new GenericTemplatesSelectionChangedHandler());
 
-		customTemplatesChoiceBox.setItems(FXCollections.observableArrayList(getImportTemplateChoices()));
+		customTemplatesChoiceBox.setItems(FXCollections.observableArrayList(getImportTemplateChoices(getMainWindow())));
 		customTemplatesChoiceBox.setConverter(new ControllerToStringConverter());
 		customTemplatesChoiceBox.getSelectionModel().selectedItemProperty().addListener(new CustomTemplatesSelectionChangedHandler());
 		
@@ -109,11 +109,11 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		}
 	} 
 	
-	private ObservableList<AbstractFxImportFormTemplateController> getImportTemplateChoices()
+	public static ObservableList<AbstractFxImportFormTemplateController> getImportTemplateChoices(UiMainWindow mainWindowToUse)
 	{
 		Vector<AbstractFxImportFormTemplateController> choices = new Vector<AbstractFxImportFormTemplateController>();
-		choices.add(new FxImportFormTemplateFromMyContactsPopupController(getMainWindow()));
-		choices.add(new FxSetupFormTemplateFromNewContactPopupController(getMainWindow()));
+		choices.add(new FxImportFormTemplateFromMyContactsPopupController(mainWindowToUse));
+		choices.add(new FxSetupFormTemplateFromNewContactPopupController(mainWindowToUse));
 
 		return FXCollections.observableArrayList(choices);
 	}

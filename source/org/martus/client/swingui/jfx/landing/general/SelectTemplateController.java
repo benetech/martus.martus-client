@@ -52,6 +52,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
+import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FormTemplate;
@@ -94,6 +95,8 @@ public class SelectTemplateController extends FxInSwingController
 		genericChoiceBox.setItems(GenericFormTemplates.getDefaultFormTemplateChoices(getSecurity()));
 		
 		downloadChoiceBox.visibleProperty().bind(downloadRadioButton.selectedProperty());
+		downloadChoiceBox.setItems(FxSetupImportTemplatesController.getImportTemplateChoices(getMainWindow()));
+		
 		chooseFileButton.visibleProperty().bind(importFileRadioButton.selectedProperty());
 		
 		genericRadioButton.setSelected(true);
