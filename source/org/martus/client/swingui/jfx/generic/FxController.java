@@ -48,6 +48,7 @@ import org.martus.client.swingui.jfx.generic.data.MartusResourceBundle;
 import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractAppTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.TaskWithTimeout;
 import org.martus.common.MartusLogger;
+import org.martus.common.crypto.MartusCrypto;
 
 abstract public class FxController implements Initializable
 {
@@ -143,7 +144,12 @@ abstract public class FxController implements Initializable
 	{
 		return getMainWindow().getApp();
 	}
-	
+
+	public MartusCrypto getSecurity()
+	{
+		return getApp().getSecurity();
+	}
+
 	public void showNotifyDialog(String baseTag)
 	{
 		String noExtraMessage = "";
