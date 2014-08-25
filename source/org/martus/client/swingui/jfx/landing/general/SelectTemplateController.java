@@ -45,7 +45,6 @@ import javafx.scene.control.RadioButton;
 import javafx.stage.FileChooser;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.core.templates.GenericFormTemplates;
 import org.martus.client.core.templates.FormTemplateManager;
 import org.martus.client.core.templates.GenericFormTemplates;
 import org.martus.client.search.SaneCollator;
