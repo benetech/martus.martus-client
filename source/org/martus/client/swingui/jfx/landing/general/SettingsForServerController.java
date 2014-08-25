@@ -234,14 +234,6 @@ public class SettingsForServerController extends FxInSwingController
 		return choices;
 	}
 	
-	protected void updateSynceFrequencyMinutesStatus(String selectedItemsCode)
-	{
-		if(selectedItemsCode.equals(SYNC_FREQUENCY_MINUTES))
-			automaticSyncFrequencyMinutes.disableProperty().set(false);
-		else
-			automaticSyncFrequencyMinutes.disableProperty().set(true);
-	}
-
 	@Override
 	public String getFxmlLocation()
 	{
