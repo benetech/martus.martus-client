@@ -39,7 +39,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.util.StringConverter;
 
-import org.martus.client.core.templates.BuiltInFormTemplates;
+import org.martus.client.core.templates.GenericFormTemplates;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.client.swingui.jfx.setupwizard.step6.FxSetupBackupYourKeyController;
@@ -76,7 +76,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	public void initializeMainContentPane()
 	{
 		genericTemplatesChoiceBox.setConverter(new FormTemplateToStringConverter(getLocalization()));
-		ObservableList<FormTemplate> builtInFormTemplates = BuiltInFormTemplates.getDefaultFormTemplateChoices(getApp().getSecurity());
+		ObservableList<FormTemplate> builtInFormTemplates = GenericFormTemplates.getDefaultFormTemplateChoices(getApp().getSecurity());
 		genericTemplatesChoiceBox.setItems(FXCollections.observableArrayList(builtInFormTemplates));
 		genericTemplatesChoiceBox.getSelectionModel().selectedItemProperty().addListener(new GenericTemplatesSelectionChangedHandler());
 

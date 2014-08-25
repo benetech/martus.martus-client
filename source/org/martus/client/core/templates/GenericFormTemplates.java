@@ -40,7 +40,7 @@ import org.martus.common.fieldspec.FormTemplate.FutureVersionException;
 import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
 
-public class BuiltInFormTemplates
+public class GenericFormTemplates
 {
 	public static ObservableList<FormTemplate> getDefaultFormTemplateChoices(MartusCrypto security)
 	{
@@ -70,7 +70,7 @@ public class BuiltInFormTemplates
 		Vector<FormTemplate> formTemplates = new Vector<FormTemplate>();
 		for (String formTemplateFileName : formTemplateFileNames)
 		{
-			InputStream resourceAsStream = BuiltInFormTemplates.class.getResourceAsStream(formTemplateFileName);
+			InputStream resourceAsStream = GenericFormTemplates.class.getResourceAsStream(formTemplateFileName);
 			FormTemplate formTemplate = importFormTemplate(resourceAsStream, security);
 			formTemplates.add(formTemplate);
 		}
