@@ -31,7 +31,6 @@ import javafx.collections.ObservableList;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxPopupController;
-import org.martus.client.swingui.jfx.generic.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.tasks.DownloadTemplateListForAccountTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.TaskWithTimeout;
 import org.martus.common.ContactKey;
@@ -39,11 +38,9 @@ import org.martus.common.fieldspec.FormTemplate;
 
 abstract public class AbstractFxImportFormTemplateController extends FxPopupController
 {
-	public AbstractFxImportFormTemplateController(UiMainWindow mainWindowToUse, FxWizardStage wizardPanelToUse)
+	public AbstractFxImportFormTemplateController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		
-		wizardPanel = wizardPanelToUse;
 	}
 	
 	protected ObservableList<FormTemplate> getFormTemplates(ContactKey contactKey) throws Exception
@@ -62,14 +59,7 @@ abstract public class AbstractFxImportFormTemplateController extends FxPopupCont
 		showTimeoutDialog(message, task);
 	}
 	
-	protected FxWizardStage getWizardStage()
-	{
-		return wizardPanel;
-	}
-	
 	abstract public String getLabel();
 	
 	abstract public FormTemplate getSelectedFormTemplate();
-	
-	private FxWizardStage wizardPanel;
 }
