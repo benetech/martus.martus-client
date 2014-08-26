@@ -102,7 +102,7 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 		updateContents();
 	}
 
-	private void loadAllBulletins()
+	private void updateAllItemsInCurrentFolder()
 	{
 		setFolder(folder);
 	}
@@ -154,7 +154,7 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 		int bulletinIndexInTable = findBulletinIndexInTable(bulletinId);
 		if(bulletinIndexInTable <= BULLETIN_NOT_IN_TABLE)
 		{
-			loadAllBulletins();
+			updateAllItemsInCurrentFolder();
 			shouldReSortTable = true;
 		}
 		else
