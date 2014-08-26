@@ -37,7 +37,7 @@ public class UiBulletinVersionView extends UiBulletinView
 
 	protected UiBulletinComponentHeaderSection createHeaderSection()
 	{
-		return new UiBulletinComponentPreviewVersionHeaderSection(mainWindow, "View");
+		return new UiBulletinComponentPreviewVersionHeaderSection(getMainWindow(), "View");
 	}
 
 }

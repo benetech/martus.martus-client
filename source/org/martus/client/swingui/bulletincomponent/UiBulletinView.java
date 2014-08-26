@@ -57,7 +57,7 @@ public class UiBulletinView extends UiBulletinComponent
 	
 	public UiBulletinComponentDataSection createBulletinComponentDataSection(String sectionName)
 	{
-		return new UiBulletinComponentViewSection(mainWindow, sectionName);
+		return new UiBulletinComponentViewSection(getMainWindow(), sectionName);
 	}
 
 	public void copyDataToBulletin(Bulletin bulletin) throws
@@ -87,12 +87,12 @@ public class UiBulletinView extends UiBulletinComponent
 	
 	protected UiBulletinComponentHeaderSection createHeaderSection()
 	{
-		return new UiBulletinComponentHeaderSection(mainWindow, "View");
+		return new UiBulletinComponentHeaderSection(getMainWindow(), "View");
 	}
 
 	protected UiBulletinComponentHeadQuartersSection createHeadQuartersSection()
 	{
-		return new UiBulletinComponentHeadQuartersViewer(mainWindow, currentBulletin, "View");
+		return new UiBulletinComponentHeadQuartersViewer(getMainWindow(), currentBulletin, "View");
 	}
 
 }
