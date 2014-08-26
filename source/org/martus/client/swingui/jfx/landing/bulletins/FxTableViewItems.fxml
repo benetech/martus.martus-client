@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -8,9 +9,9 @@
    <children>
       <VBox prefHeight="450.0" prefWidth="845.0">
          <children>
-			<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="845.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+			<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="845.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 			   <content>
-			      <TableView fx:id="itemsTable" onMouseClicked="#onMouseClick" prefHeight="418.0" prefWidth="842.0">
+			      <TableView fx:id="itemsTable" onMouseClicked="#onMouseClick" prefHeight="409.0" prefWidth="842.0">
 			        <columns>
 			          <TableColumn fx:id="onServerColumn" editable="false" prefWidth="87.0" text="On Server" />
 			            <TableColumn fx:id="authorColumn" editable="false" prefWidth="123.0" text="Author" />
@@ -24,8 +25,40 @@
 			</ScrollPane>
             <HBox prefHeight="30.0" prefWidth="845.0">
                <children>
-                  <Button fx:id="trashButton" mnemonicParsing="false" onAction="#onTrashSelectedItems" text="Trash" />
-                  <Button fx:id="exportButton" mnemonicParsing="false" onAction="#onExportSelectedItems" text="Export" />
+                  <Button fx:id="trashButton" mnemonicParsing="false" onAction="#onTrashSelectedItems" text="Trash">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/trash.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="exportButton" mnemonicParsing="false" onAction="#onExportSelectedItems" text="Export">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/export.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="moveButton" mnemonicParsing="false" onAction="#onMoveSelectedItems" text="Move">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/move.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="copyButton" mnemonicParsing="false" onAction="#onCopySelectedItem" text="Copy">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/copy.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children></HBox>
          </children></VBox>
    </children>
