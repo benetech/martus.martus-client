@@ -32,12 +32,19 @@ import java.util.Vector;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiExportBulletinsDlg;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.packet.UniversalId;
 
-public class ActionMenuExportBulletins extends UiMenuAction
+public class ActionMenuExportBulletins extends UiMenuAction implements ActionDoer
 {
 	public ActionMenuExportBulletins(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse, "ExportBulletins");
+	}
+
+	public ActionMenuExportBulletins(UiMainWindow mainWindowToUse, UniversalId[] bulletinsIdsToUse)
+	{
+		super(mainWindowToUse, "ExportBulletins");
+		bulletinIdsToExport = bulletinsIdsToUse;
 	}
 
 	public void actionPerformed(ActionEvent ae)
@@ -49,13 +56,38 @@ public class ActionMenuExportBulletins extends UiMenuAction
 	{
 		try
 		{
-			Vector bulletins = getMainWindow().getSelectedBulletins("ExportZeroBulletins");
-			if(bulletins == null)
+			Vector bulletinsToExport = getMainWindow().getSelectedBulletins("ExportZeroBulletins");
+			if(bulletinsToExport == null)
 				return;
+			exportBulletins(bulletinsToExport);
+		} 
+		catch (Exception e)
+		{
+			getMainWindow().unexpectedErrorDlg(e);
+		}	
+	}
+
+	private void exportBulletins(Vector bulletinsToExport)
+	{
+		try
+		{
 			String defaultFileName = getLocalization().getFieldLabel("ExportedBulletins");
-			if(bulletins.size()==1)
-				defaultFileName = ((Bulletin)bulletins.get(0)).toFileName();
-			new UiExportBulletinsDlg(getMainWindow(), bulletins, defaultFileName);
+			if(bulletinsToExport.size()==1)
+				defaultFileName = ((Bulletin)bulletinsToExport.get(0)).toFileName();
+			new UiExportBulletinsDlg(getMainWindow(), bulletinsToExport, defaultFileName);
+		} 
+		catch (Exception e)
+		{
+			getMainWindow().unexpectedErrorDlg(e);
+		}
+	}
+
+	@Override
+	public void doAction()
+	{
+		try
+		{
+			exportBulletins(getMainWindow().getBulletins(bulletinIdsToExport));	
 		} 
 		catch (Exception e)
 		{
@@ -63,4 +95,5 @@ public class ActionMenuExportBulletins extends UiMenuAction
 		}
 	}
 	
+	private UniversalId[] bulletinIdsToExport;
 }

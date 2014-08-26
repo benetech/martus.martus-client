@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
-
 import org.martus.common.bulletin.Bulletin;
 
 public class EnglishStrings
@@ -761,8 +760,6 @@ public class EnglishStrings
 "field:confirmDraftUploadRemindereffect=Clicking on Yes will exit Martus, and leave the unsent bulletins.  They will be sent the next time you run Martus and connect to a server.",
 "field:confirmRedoWeakPasswordcause=The password you chose has fewer than 15 characters and less than 2 non-alphanumeric characters. We recommend choosing a stronger password.",
 "field:confirmRedoWeakPasswordeffect=Clicking on Yes will continue with the password you just entered.",
-"field:confirmExportPrivateDatacause=This will save the private information in the selected bulletins in plain text.",
-"field:confirmExportPrivateDataeffect=Anyone who gets a copy of this file will be able to read all the private data.",
 "field:confirmResetDefaultDetailscause=This will reset the current Default Details contents to the original contents. After resetting the contents, you should review them to be sure they are correct.",
 "field:confirmResetDefaultDetailseffect=After you review the contents, you can accept them, modify them, or press cancel to keep the existing default details.",
 "field:confirmNotYourBulletinViewAttachmentAnywayscause=Warning: the bulletin you are currently viewing is not yours.  Attachments can contain viruses, or malicious programs harmful to your computer.",
@@ -1381,10 +1378,9 @@ public class EnglishStrings
 "field:ServerAcceptsUploads=You will be allowed to upload bulletins to this server.",
 "field:ServerDeclinesUploads=You will not be allowed to upload bulletins to this server.",
 "field:SearchEntry=Search for:",
-"field:ExportPrivateData=Include private data in export",
 "field:ExportAttachments=Include attachments in export",
 "field:ExportAllVersions=Include all versions of each bulletin in export",
-"field:ExportBulletinDetails=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.  These files can then be used to import the Martus bulletin information into another application.\n\n  You could also use this XML file to import these bulletins back into Martus (as new unique bulletins) if desired.  Please email help@martus.org if you need assistance with this type of importing.",
+"field:ExportBulletinDetails=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.  This will save the private information in the selected bulletins in plain text.  Anyone who gets a copy of this file will be able to read all the private data.  These files can then be used to import the Martus bulletin information into another application.\n\n  You could also use this XML file to import these bulletins back into Martus (as new unique bulletins) if desired.  Please email help@martus.org if you need assistance with this type of importing.",
 "field:HowToCreateNewAccount=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.",
 "field:HowToCreateInitialAccount=No accounts exist on this computer.  To create a new account click OK.  Otherwise you can click on the Restore Account tab to restore an account which was previously backed up.",
 "field:UntitledBulletin=Untitled Bulletin",
