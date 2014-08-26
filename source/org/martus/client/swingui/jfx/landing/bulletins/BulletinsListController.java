@@ -52,6 +52,7 @@ import javafx.scene.input.MouseEvent;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionMenuExportBulletins;
 import org.martus.client.swingui.actions.ActionMenuExportMba;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
@@ -279,10 +280,10 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	@FXML
 	private void onExportSelectedItems(javafx.event.ActionEvent event)
 	{
-		UniversalId[] bulletinsIDsToExport = getSelectedBulletinIds();
-		if(bulletinsIDsToExport.length == 1)
+		try
 		{
-			try
+			UniversalId[] bulletinsIDsToExport = getSelectedBulletinIds();
+			if(bulletinsIDsToExport.length == 1)
 			{
 				ConfirmEncryptedExportController exportController = new ConfirmEncryptedExportController(getMainWindow());
 				showControllerInsideModalDialog(exportController);
@@ -293,20 +294,21 @@ public class BulletinsListController extends AbstractFxLandingContentController
 					else
 						exportUnencryptedBulletins(bulletinsIDsToExport);
 				}
-			} 
-			catch (Exception e)
+			}
+			else
 			{
-				logAndNotifyUnexpectedError(e);
-			}		
-		}
-		else
+				exportUnencryptedBulletins(bulletinsIDsToExport);
+			}
+		} 
+		catch (Exception e)
 		{
-			exportUnencryptedBulletins(bulletinsIDsToExport);
-		}
+			logAndNotifyUnexpectedError(e);
+		}		
 	}	
 	
-	private void exportUnencryptedBulletins(UniversalId[] bulletinsIDsToExport)
+	private void exportUnencryptedBulletins(UniversalId[] bulletinsIdsToExport) throws Exception
 	{
+		doAction(new ActionMenuExportBulletins(getMainWindow(), bulletinsIdsToExport));
 	}
 
 	private void exportEncryptedBulletin(UniversalId bulletinIdToExport)
