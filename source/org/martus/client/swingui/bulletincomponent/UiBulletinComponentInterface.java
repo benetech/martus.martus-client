@@ -40,24 +40,24 @@ import org.martus.common.fieldspec.DataInvalidException;
 
 public interface UiBulletinComponentInterface
 {
-	public abstract UiMainWindow getMainWindow();
-	abstract public void copyDataToBulletin(Bulletin bulletin) throws IOException, MartusCrypto.EncryptionException;
-	public abstract void copyDataFromBulletin(Bulletin bulletinToShow) throws Exception;
-	abstract public void validateData() throws DataInvalidException;
-	abstract public boolean isBulletinModified() throws Exception;
-	public abstract void scrollToTop();
+	public UiMainWindow getMainWindow();
+	public void copyDataToBulletin(Bulletin bulletin) throws IOException, MartusCrypto.EncryptionException;
+	public void copyDataFromBulletin(Bulletin bulletinToShow) throws Exception;
+	public void validateData() throws DataInvalidException;
+	public boolean isBulletinModified() throws Exception;
+	public void scrollToTop();
 	public Component getComponent();
 
 	// ChangeListener interface
-	abstract public void stateChanged(ChangeEvent event);
+	public void stateChanged(ChangeEvent event);
 
-	abstract public void setLanguageChangeListener(BulletinLanguageChangeListener listener);
+	public void setLanguageChangeListener(BulletinLanguageChangeListener listener);
 	// LanguageChangeListener interface
-	public abstract void bulletinLanguageHasChanged(String newBulletinLanguageCode);
+	public void bulletinLanguageHasChanged(String newBulletinLanguageCode);
 
-	abstract public void setEncryptionChangeListener(EncryptionChangeListener listener);
-	public abstract void updateEncryptedIndicator(boolean isEncrypted);
-	public abstract void encryptAndDisableAllPrivate();
-	public abstract boolean isAllPrivateBoxChecked();
+	public void setEncryptionChangeListener(EncryptionChangeListener listener);
+	public void updateEncryptedIndicator(boolean isEncrypted);
+	public void encryptAndDisableAllPrivate();
+	public boolean isAllPrivateBoxChecked();
 
 }
