@@ -299,6 +299,7 @@ public class SelectTemplateController extends FxInSwingController
 					return;
 			}
 			getBulletinStore().saveNewFormTemplate(templateToAdd);
+			templateToAddProperty.setValue(null);
 		}
 		catch(Exception e)
 		{
