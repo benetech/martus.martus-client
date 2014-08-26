@@ -640,6 +640,8 @@ public class EnglishStrings
 "field:ContactVerifyNow=Verify Now",
 "field:ContactVerified=Verified",
 
+"wintitle:ExportEncryptedBulletin=Export Encrypted",
+
 "wintitle:IncludePrivateData=Include Private Data",
 "field:IncludePrivateData=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?",
 "button:PublicAndPrivateData=Both Public and Private Data",

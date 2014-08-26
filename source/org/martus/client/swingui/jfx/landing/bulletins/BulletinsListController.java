@@ -50,9 +50,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import org.martus.client.bulletinstore.BulletinFolder;
-import org.martus.client.core.MartusApp;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionMenuExportMba;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.common.MartusLogger;
@@ -265,10 +265,9 @@ public class BulletinsListController extends AbstractFxLandingContentController
 			//See: UiBulletinTable:confirmDiscardSingleBulletin(Bulletin b)
 			//     UiBulletinTable:confirmDiscardMultipleBulletins
 		}
-		MartusApp app = getApp();
 		try
 		{
-			app.discardBulletinsFromFolder(folderToDiscardFrom, bulletinsIDsToDiscard);
+			getApp().discardBulletinsFromFolder(folderToDiscardFrom, bulletinsIDsToDiscard);
 		}
 		catch (IOException e)
 		{
@@ -280,9 +279,42 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	@FXML
 	private void onExportSelectedItems(javafx.event.ActionEvent event)
 	{
-		
+		UniversalId[] bulletinsIDsToExport = getSelectedBulletinIds();
+		if(bulletinsIDsToExport.length == 1)
+		{
+			try
+			{
+				ConfirmEncryptedExportController exportController = new ConfirmEncryptedExportController(getMainWindow());
+				showControllerInsideModalDialog(exportController);
+				if(exportController.shouldExport())
+				{
+					if(exportController.shouldExportEncrypted())
+						exportEncryptedBulletin(bulletinsIDsToExport[0]);
+					else
+						exportUnencryptedBulletins(bulletinsIDsToExport);
+				}
+			} 
+			catch (Exception e)
+			{
+				logAndNotifyUnexpectedError(e);
+			}		
+		}
+		else
+		{
+			exportUnencryptedBulletins(bulletinsIDsToExport);
+		}
 	}	
 	
+	private void exportUnencryptedBulletins(UniversalId[] bulletinsIDsToExport)
+	{
+	}
+
+	private void exportEncryptedBulletin(UniversalId bulletinIdToExport)
+	{
+		Bulletin bulletinToExport = getApp().getStore().getBulletinRevision(bulletinIdToExport);
+		doAction(new ActionMenuExportMba(getMainWindow(), bulletinToExport));
+	}
+
 	final private String VIEW_BULLETIN_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/view_bulletin.png";
 	final private String EDIT_BULLETIN_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/edit_bulletin.png";
 	final private String TRASH_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/trash.png";
