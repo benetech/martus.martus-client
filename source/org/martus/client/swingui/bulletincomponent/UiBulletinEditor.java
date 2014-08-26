@@ -52,7 +52,7 @@ public class UiBulletinEditor extends UiBulletinComponent implements Headquarter
 
 	public UiBulletinComponentDataSection createBulletinComponentDataSection(String sectionName)
 	{
-		return new UiBulletinComponentEditorSection(mainWindow, sectionName);
+		return new UiBulletinComponentEditorSection(getMainWindow(), sectionName);
 	}
 
 	public void validateData() throws DataInvalidException 
@@ -65,7 +65,7 @@ public class UiBulletinEditor extends UiBulletinComponent implements Headquarter
 	{		
 		UiTableWithCellEditingProtection.savePendingEdits();
 		
-		Bulletin currentStateOfBulletinBeingEdited = mainWindow.getApp().getStore().createEmptyBulletin();					
+		Bulletin currentStateOfBulletinBeingEdited = getMainWindow().getApp().getStore().createEmptyBulletin();					
 		copyDataToBulletin(currentStateOfBulletinBeingEdited);
 		Bulletin previousStateOfBulletinBeingEdited = currentBulletin;
 		if(currentStateOfBulletinBeingEdited.isAllPrivate() != currentBulletin.isAllPrivate())
@@ -216,12 +216,12 @@ public class UiBulletinEditor extends UiBulletinComponent implements Headquarter
 	
 	protected UiBulletinComponentHeaderSection createHeaderSection()
 	{
-		return new UiBulletinComponentHeaderSection(mainWindow, "Modify");
+		return new UiBulletinComponentHeaderSection(getMainWindow(), "Modify");
 	}
 	
 	protected UiBulletinComponentHeadQuartersSection createHeadQuartersSection()
 	{
-		UiBulletinComponentHeadQuartersEditor uiBulletinComponentHeadQuartersEditor = new UiBulletinComponentHeadQuartersEditor(this, mainWindow, currentBulletin, "Modify");
+		UiBulletinComponentHeadQuartersEditor uiBulletinComponentHeadQuartersEditor = new UiBulletinComponentHeadQuartersEditor(this, getMainWindow(), currentBulletin, "Modify");
 		return uiBulletinComponentHeadQuartersEditor;
 	}
 

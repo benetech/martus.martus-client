@@ -268,7 +268,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	}
 	// End scrollable interface
 	
-	protected UiMainWindow mainWindow;
+	private UiMainWindow mainWindow;
 
 	protected UiField allPrivateField;
 	protected Bulletin currentBulletin;
