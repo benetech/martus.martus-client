@@ -28,9 +28,6 @@ package org.martus.client.swingui.bulletincomponent;
 
 import java.io.IOException;
 
-import javax.swing.event.ChangeEvent;
-
-import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.swingui.HeadquartersSelectionListener;
 import org.martus.client.swingui.UiMainWindow;
@@ -39,7 +36,6 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.DataInvalidException;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiTableWithCellEditingProtection;
 
 public class UiBulletinEditor extends UiBulletinComponent implements HeadquartersSelectionListener
@@ -145,8 +141,7 @@ public class UiBulletinEditor extends UiBulletinComponent implements Headquarter
 	{	
 		bulletin.clearAllUserData();
 			
-		boolean isAllPrivate = isAllPrivateBoxChecked();
-		bulletin.setAllPrivate(isAllPrivate);
+		bulletin.setAllPrivate(true);
 		
 		publicSection.copyDataToBulletin(bulletin);
 		privateSection.copyDataToBulletin(bulletin);
@@ -170,35 +165,12 @@ public class UiBulletinEditor extends UiBulletinComponent implements Headquarter
 
 	}	
 
-	public void setEncryptionChangeListener(EncryptionChangeListener listener)
-	{
-		encryptionListener = listener;
-	}
-	
 	public void setLanguageChangeListener(BulletinLanguageChangeListener listener)
 	{
 		languageListener = listener;
 	}
 	
 
-	protected void fireEncryptionChange(boolean newState)
-	{
-		if(encryptionListener != null)
-			encryptionListener.encryptionChanged(newState);
-	}
-	
-	// ChangeListener interface
-	public void stateChanged(ChangeEvent event)
-	{
-		String flagString = allPrivateField.getText();
-		boolean nowEncrypted = (flagString.equals(FieldSpec.TRUESTRING));
-		if(wasEncrypted != nowEncrypted)
-		{
-			wasEncrypted = nowEncrypted;
-			fireEncryptionChange(nowEncrypted);
-		}
-	}
-	
 	// LanguageChangeListener Interface
 	public void bulletinLanguageHasChanged(String newLanguageCode)
 	{
@@ -227,6 +199,5 @@ public class UiBulletinEditor extends UiBulletinComponent implements Headquarter
 
 
 	boolean wasEncrypted;
-	EncryptionChangeListener encryptionListener;
 	BulletinLanguageChangeListener languageListener;
 }

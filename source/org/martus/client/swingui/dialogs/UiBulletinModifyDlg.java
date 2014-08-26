@@ -51,7 +51,6 @@ import javax.swing.SwingUtilities;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BulletinLanguageChangeListener;
-import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiSession;
@@ -73,7 +72,7 @@ import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
-public class UiBulletinModifyDlg extends JFrame implements ActionListener, WindowListener, EncryptionChangeListener, BulletinLanguageChangeListener
+public class UiBulletinModifyDlg extends JFrame implements ActionListener, WindowListener, BulletinLanguageChangeListener
 {
 	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse) throws Exception
 	{
@@ -86,7 +85,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		view = new UiBulletinEditor(observer);
 		view.copyDataFromBulletin(bulletin);
 
-		view.setEncryptionChangeListener(this);
 		view.setLanguageChangeListener(this);
 
 		send = new UiButton(localization.getButtonLabel("send"));
@@ -105,11 +103,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		}
 
 		addScrollerView();
-
-		if(observer.getBulletinsAlwaysPrivate())
-			view.encryptAndDisableAllPrivate();
-		else
-			indicateEncrypted(bulletin.isAllPrivate());
 
 		Box box = Box.createHorizontalBox();
 		Component buttons[] = {send, draft, cancel, Box.createHorizontalGlue()};
@@ -229,8 +222,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			
 			if(userChoseSeal)
 			{
-				String tag = view.isAllPrivateBoxChecked() ? 
-						"send" : "SendWithPublicData";
+				String tag = "send";
 					
 				if (!observer.confirmDlg(this, tag))
 					return;
@@ -373,11 +365,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	// end WindowListener interface
 
 
-	public void encryptionChanged(boolean newState)
-	{
-		indicateEncrypted(newState);
-	}
-
 	public void bulletinLanguageHasChanged(String newLanguage) 
 	{
 		//TODO add this back when its working correctly
@@ -404,11 +391,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		observer.setBulletinEditorPosition(location);
 		observer.setBulletinEditorMaximized(maximized);
 		observer.saveState();
-	}
-
-	private void indicateEncrypted(boolean isEncrypted)
-	{
-		view.updateEncryptedIndicator(isEncrypted);
 	}
 
 	private void closeWindowIfUserConfirms() throws Exception

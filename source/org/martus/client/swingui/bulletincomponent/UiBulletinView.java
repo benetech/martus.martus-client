@@ -30,7 +30,6 @@ import java.io.IOException;
 
 import javax.swing.event.ChangeEvent;
 
-import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
@@ -45,11 +44,6 @@ public class UiBulletinView extends UiBulletinComponent
 		// ensure that attachmentViewer gets initialized
 	}
 
-	public void setEncryptionChangeListener(EncryptionChangeListener listener)
-	{
-		// read-only view cannot change encryption status
-	}
-	
 	public void setLanguageChangeListener(BulletinLanguageChangeListener listener)
 	{
 		// read-only view cannot change encryption status		
