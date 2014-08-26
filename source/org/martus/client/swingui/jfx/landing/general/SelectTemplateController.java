@@ -174,11 +174,6 @@ public class SelectTemplateController extends FxInSwingController
 		return choiceItem;
 	}
 
-	private FormTemplate getGenericTemplateToAddIfAny()
-	{
-		return genericChoiceBox.getSelectionModel().getSelectedItem();
-	}
-
 	private void logTemplateToBeAdded()
 	{
 		MartusLogger.log("Ready to add template: " + getTitleOfTemplateToBeAdded());
