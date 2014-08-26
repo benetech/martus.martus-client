@@ -214,12 +214,12 @@ public class UiBulletinEditor extends UiBulletinComponent implements Headquarter
 		headerSection.updateNumberOfHQs(newNumberOfSelectedHQs);
 	}
 	
-	UiBulletinComponentHeaderSection createHeaderSection()
+	protected UiBulletinComponentHeaderSection createHeaderSection()
 	{
 		return new UiBulletinComponentHeaderSection(mainWindow, "Modify");
 	}
 	
-	UiBulletinComponentHeadQuartersSection createHeadQuartersSection()
+	protected UiBulletinComponentHeadQuartersSection createHeadQuartersSection()
 	{
 		UiBulletinComponentHeadQuartersEditor uiBulletinComponentHeadQuartersEditor = new UiBulletinComponentHeadQuartersEditor(this, mainWindow, currentBulletin, "Modify");
 		return uiBulletinComponentHeadQuartersEditor;

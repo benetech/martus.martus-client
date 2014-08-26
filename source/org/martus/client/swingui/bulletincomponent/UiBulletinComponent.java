@@ -57,13 +57,13 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 {
 	abstract public void setEncryptionChangeListener(EncryptionChangeListener listener);
 	abstract public void setLanguageChangeListener(BulletinLanguageChangeListener listener);
-	abstract public UiBulletinComponentDataSection createBulletinComponentDataSection(String sectionName);
+	abstract protected UiBulletinComponentDataSection createBulletinComponentDataSection(String sectionName);
 	abstract public void copyDataToBulletin(Bulletin bulletin) throws
 			IOException, MartusCrypto.EncryptionException;
 	abstract public void validateData() throws DataInvalidException; 
 	abstract public boolean isBulletinModified() throws Exception;
-	abstract UiBulletinComponentHeaderSection createHeaderSection();
-	abstract UiBulletinComponentHeadQuartersSection createHeadQuartersSection();
+	abstract protected UiBulletinComponentHeaderSection createHeaderSection();
+	abstract protected UiBulletinComponentHeadQuartersSection createHeadQuartersSection();
 
 	// ChangeListener interface
 	abstract public void stateChanged(ChangeEvent event);
@@ -77,7 +77,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 
 
 
-	public UiBulletinComponent(UiMainWindow mainWindowToUse)
+	protected UiBulletinComponent(UiMainWindow mainWindowToUse)
 	{
 		GridLayoutPlus layout = new GridLayoutPlus();
 		layout.setFill(Alignment.FILL_NONE);
