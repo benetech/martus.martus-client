@@ -137,7 +137,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			setSize(screenSize.width - 50, screenSize.height - 50);
 			Utilities.maximizeWindow(this);
 		}
-		Utilities.forceScrollerToTop(view);
+		view.scrollToTop();
 		
 		setGlassPane(new WindowObscurer());
 		

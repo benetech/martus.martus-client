@@ -48,6 +48,7 @@ import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.packet.FieldDataPacket;
+import org.martus.swing.Utilities;
 import org.martus.util.language.LanguageOptions;
 
 import com.jhlabs.awt.Alignment;
@@ -279,6 +280,12 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		return false;
 	}
 	// End scrollable interface
+	
+	@Override
+	public void scrollToTop()
+	{
+		Utilities.forceScrollerToTop(this);
+	}
 	
 	private UiMainWindow mainWindow;
 

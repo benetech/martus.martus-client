@@ -44,6 +44,7 @@ public interface UiBulletinComponentInterface
 	public abstract void copyDataFromBulletin(Bulletin bulletinToShow) throws Exception;
 	abstract public void validateData() throws DataInvalidException;
 	abstract public boolean isBulletinModified() throws Exception;
+	public abstract void scrollToTop();
 
 	// ChangeListener interface
 	abstract public void stateChanged(ChangeEvent event);
