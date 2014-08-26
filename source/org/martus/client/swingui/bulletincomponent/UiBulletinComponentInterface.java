@@ -40,13 +40,14 @@ import org.martus.common.fieldspec.DataInvalidException;
 
 public interface UiBulletinComponentInterface
 {
+	public Component getComponent();
+	public void scrollToTop();
 	public UiMainWindow getMainWindow();
+
 	public void copyDataToBulletin(Bulletin bulletin) throws IOException, MartusCrypto.EncryptionException;
 	public void copyDataFromBulletin(Bulletin bulletinToShow) throws Exception;
 	public void validateData() throws DataInvalidException;
 	public boolean isBulletinModified() throws Exception;
-	public void scrollToTop();
-	public Component getComponent();
 
 	// ChangeListener interface
 	public void stateChanged(ChangeEvent event);
