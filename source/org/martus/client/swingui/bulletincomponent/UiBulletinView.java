@@ -85,12 +85,12 @@ public class UiBulletinView extends UiBulletinComponent
 		// read-only view cannot change state
 	}
 	
-	UiBulletinComponentHeaderSection createHeaderSection()
+	protected UiBulletinComponentHeaderSection createHeaderSection()
 	{
 		return new UiBulletinComponentHeaderSection(mainWindow, "View");
 	}
 
-	UiBulletinComponentHeadQuartersSection createHeadQuartersSection()
+	protected UiBulletinComponentHeadQuartersSection createHeadQuartersSection()
 	{
 		return new UiBulletinComponentHeadQuartersViewer(mainWindow, currentBulletin, "View");
 	}
