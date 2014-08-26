@@ -45,8 +45,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import org.martus.client.bulletinstore.BulletinFolder;
@@ -104,15 +102,11 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	
 	private void initalizeButtons()
 	{
-		ImageView buttonTrashIcon = new ImageView(new Image(TRASH_IMAGE_PATH));		
-		trashButton.setGraphic(buttonTrashIcon);
-
-		ImageView buttonExportIcon = new ImageView(new Image(EXPORT_IMAGE_PATH));		
-		exportButton.setGraphic(buttonExportIcon);
-		
 		BooleanBinding noItemsSelectedBinding = itemsTable.getSelectionModel().selectedItemProperty().isNull();
 		trashButton.disableProperty().bind(noItemsSelectedBinding);
 		exportButton.disableProperty().bind(noItemsSelectedBinding);
+		moveButton.disableProperty().bind(noItemsSelectedBinding);
+		copyButton.setDisable(true);//FIXME only one item selected for copy
 	}
 
 	public void loadAllBulletinsAndSortByMostRecent()
@@ -306,6 +300,17 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		}		
 	}	
 	
+	@FXML
+	private void onMoveSelectedItems(javafx.event.ActionEvent event)
+	{
+		
+	}
+	
+	@FXML
+	private void onCopySelectedItem(javafx.event.ActionEvent event)
+	{
+	}
+
 	private void exportUnencryptedBulletins(UniversalId[] bulletinsIdsToExport) throws Exception
 	{
 		doAction(new ActionMenuExportBulletins(getMainWindow(), bulletinsIdsToExport));
@@ -319,8 +324,6 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	final private String VIEW_BULLETIN_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/view_bulletin.png";
 	final private String EDIT_BULLETIN_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/edit_bulletin.png";
-	final private String TRASH_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/trash.png";
-	final private String EXPORT_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/export.png";
 	
 	@FXML 
 	protected TableView<BulletinTableRowData> itemsTable;
@@ -349,5 +352,11 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	@FXML
 	private Button exportButton;
 	
+	@FXML
+	private Button moveButton;
+
+	@FXML
+	private Button copyButton;
+
 	protected BulletinListProvider bulletinTableProvider;
 }
