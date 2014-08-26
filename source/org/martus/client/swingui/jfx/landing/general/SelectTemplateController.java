@@ -50,6 +50,7 @@ import org.martus.client.core.templates.GenericFormTemplates;
 import org.martus.client.search.SaneCollator;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
+import org.martus.client.swingui.jfx.common.AbstractFxImportFormTemplateController;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
@@ -93,7 +94,9 @@ public class SelectTemplateController extends FxInSwingController
 		selectedGenericTemplateProperty.addListener(new GenericTemplateSelectedHandler());
 		genericChoiceBox.visibleProperty().bind(genericRadioButton.selectedProperty());
 		genericChoiceBox.setItems(GenericFormTemplates.getDefaultFormTemplateChoices(getSecurity()));
-		
+
+		ReadOnlyObjectProperty<AbstractFxImportFormTemplateController> selectedDownloadTypeProperty = downloadChoiceBox.getSelectionModel().selectedItemProperty();
+		selectedDownloadTypeProperty.addListener(new DownloadTypeSelectedHandler());
 		downloadChoiceBox.visibleProperty().bind(downloadRadioButton.selectedProperty());
 		downloadChoiceBox.setItems(FxSetupImportTemplatesController.getImportTemplateChoices(getMainWindow()));
 		
@@ -114,6 +117,34 @@ public class SelectTemplateController extends FxInSwingController
 		
 	}
 
+	protected class DownloadTypeSelectedHandler implements ChangeListener<AbstractFxImportFormTemplateController>
+	{
+		@Override
+		public void changed(ObservableValue<? extends AbstractFxImportFormTemplateController> observable, AbstractFxImportFormTemplateController oldValue, AbstractFxImportFormTemplateController newValue)
+		{
+			if(newValue == null)
+				return;
+
+			try
+			{
+				showControllerInsideModalDialog(newValue);
+				FormTemplate downloadedTemplate = newValue.getSelectedFormTemplate();
+				updateTemplateFromDownloaded(downloadedTemplate);
+			}
+			catch(Exception e)
+			{
+				unexpectedError(e);
+			}
+		}
+
+	}
+
+	protected void updateTemplateFromDownloaded(FormTemplate downloadedTemplate)
+	{
+		templateToAddProperty.setValue(downloadedTemplate);
+		logTemplateToBeAdded();
+	}
+	
 	private void updateSelectionFromReality()
 	{
 		ClientBulletinStore store = getBulletinStore();
@@ -185,6 +216,7 @@ public class SelectTemplateController extends FxInSwingController
 	private void onChooseFromServer(ActionEvent event)
 	{
 		templateToAddProperty.setValue(null);
+		downloadChoiceBox.getSelectionModel().clearSelection();
 		logTemplateToBeAdded();
 	}
 	
@@ -251,7 +283,7 @@ public class SelectTemplateController extends FxInSwingController
 	{
 		try
 		{
-			FormTemplate templateToAdd = getGenericTemplateToAddIfAny();
+			FormTemplate templateToAdd = templateToAddProperty.getValue();
 			if(templateToAdd == null)
 			{
 				showNotifyDialog("NoTemplateSelectedToAdd");
