@@ -161,42 +161,40 @@ public class SettingsForServerController extends FxInSwingController
 	
 	private void selectDefaultSyncFrequency(String syncFrequency)
 	{
+		boolean syncFromServer = true;
+		if(syncFrequency.equals(NEVER))
+			syncFromServer = false;
+		automaticallyDownloadFromServer.setSelected(syncFromServer);
+
 		String syncFrequencyInterval = DEFAULT_SYNC_FREQUENCY;
 		String syncFrequencyMinutes = DEFAULT_SYNC_MINUTES_FREQUENCY;
-		
-		if(syncFrequency.equals(NEVER))
-			automaticallyDownloadFromServer.setSelected(false);
-		else		
-			automaticallyDownloadFromServer.setSelected(true);
-		
 		if(syncFrequency.equals(SYNC_FREQUENCY_ON_STARTUP))
 		{
 			syncFrequencyInterval = SYNC_FREQUENCY_ON_STARTUP;
 		}
-		else if(syncFrequency.equals(SYNC_FREQUENCY_ON_STARTUP))
+		else if(syncFrequency.equals(SYNC_FREQUENCY_ONCE_AN_HOUR))
 		{
-			syncFrequencyInterval = SYNC_FREQUENCY_ON_STARTUP;
+			syncFrequencyInterval = SYNC_FREQUENCY_ONCE_AN_HOUR;
 		}
 		else
 		{
 			syncFrequencyInterval = SYNC_FREQUENCY_MINUTES;
 			syncFrequencyMinutes = syncFrequency;
-		}
+		}		
 		
-		
-		selectChoiceByCode(automaticSyncFrequency, syncFrequencyInterval);
-		selectChoiceByCode(automaticSyncFrequencyMinutes, syncFrequencyMinutes);
+		selectChoiceByCode(automaticSyncFrequency, syncFrequencyInterval, DEFAULT_SYNC_FREQUENCY);
+		selectChoiceByCode(automaticSyncFrequencyMinutes, syncFrequencyMinutes, DEFAULT_SYNC_MINUTES_FREQUENCY);
 	}
 
-	private static void selectChoiceByCode(ChoiceBox choiceBox, String codeToFind)
+	private static void selectChoiceByCode(ChoiceBox choiceBox, String codeToFind, String defaultChoice)
 	{
 		ObservableChoiceItemList choices = new ObservableChoiceItemList(choiceBox.getItems());
-		ChoiceItem current = choices.findByCode(codeToFind);
-		if(current != null)
-		{
-			SingleSelectionModel model = choiceBox.getSelectionModel();
-			model.select(current);
-		}
+		ChoiceItem itemToBeSelected = choices.findByCode(codeToFind);
+		SingleSelectionModel model = choiceBox.getSelectionModel();
+		if(itemToBeSelected == null)
+			model.select(defaultChoice);
+		else
+			model.select(itemToBeSelected);
 	}
 	
 	class IpPublicCodeChangeListener implements ChangeListener<String>
