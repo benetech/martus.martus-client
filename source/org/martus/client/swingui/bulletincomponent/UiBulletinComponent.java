@@ -53,22 +53,29 @@ import org.martus.util.language.LanguageOptions;
 import com.jhlabs.awt.Alignment;
 import com.jhlabs.awt.GridLayoutPlus;
 
-abstract public class UiBulletinComponent extends JPanel implements Scrollable, ChangeListener, BulletinLanguageChangeListener 
+abstract public class UiBulletinComponent extends JPanel implements Scrollable, ChangeListener, BulletinLanguageChangeListener, UiBulletinComponentInterface 
 {
+	@Override
 	abstract public void setEncryptionChangeListener(EncryptionChangeListener listener);
+	@Override
 	abstract public void setLanguageChangeListener(BulletinLanguageChangeListener listener);
 	abstract protected UiBulletinComponentDataSection createBulletinComponentDataSection(String sectionName);
+	@Override
 	abstract public void copyDataToBulletin(Bulletin bulletin) throws
 			IOException, MartusCrypto.EncryptionException;
+	@Override
 	abstract public void validateData() throws DataInvalidException; 
+	@Override
 	abstract public boolean isBulletinModified() throws Exception;
 	abstract protected UiBulletinComponentHeaderSection createHeaderSection();
 	abstract protected UiBulletinComponentHeadQuartersSection createHeadQuartersSection();
 
 	// ChangeListener interface
+	@Override
 	abstract public void stateChanged(ChangeEvent event);
 
 	// LanguageChangeListener interface
+	@Override
 	public void bulletinLanguageHasChanged(String newBulletinLanguageCode)
 	{
 		publicSection.updateSpellChecker(newBulletinLanguageCode);
@@ -122,6 +129,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		privateSection.matchFirstColumnWidth(publicSection);
 	}
 
+	@Override
 	public void copyDataFromBulletin(Bulletin bulletinToShow) throws Exception
 	{
 		removeAll();
@@ -211,6 +219,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		repaint();
 	}
 
+	@Override
 	public void updateEncryptedIndicator(boolean isEncrypted)
 	{
 		if(publicSection != null)
@@ -220,6 +229,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 			privateSection.updateEncryptedIndicator(true);
 	}
 	
+	@Override
 	public void encryptAndDisableAllPrivate()
 	{
 		JCheckBox allPrivate = ((JCheckBox)(allPrivateField.getComponent()));
@@ -228,6 +238,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		updateEncryptedIndicator(true);
 	}
 
+	@Override
 	public boolean isAllPrivateBoxChecked()
 	{
 		boolean isAllPrivate = false;
@@ -236,6 +247,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		return isAllPrivate;
 	}
 
+	@Override
 	public UiMainWindow getMainWindow()
 	{
 		return mainWindow;

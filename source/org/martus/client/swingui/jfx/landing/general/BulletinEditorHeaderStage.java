@@ -28,12 +28,12 @@ package org.martus.client.swingui.jfx.landing.general;
 import java.awt.Dimension;
 import java.awt.Window;
 
-import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
+import org.martus.client.swingui.bulletincomponent.UiBulletinComponentInterface;
 import org.martus.client.swingui.jfx.generic.FxInSwingFrameStage;
 
 public class BulletinEditorHeaderStage extends FxInSwingFrameStage
 {
-	public BulletinEditorHeaderStage(Window dialogOrFrame, UiBulletinComponent view)
+	public BulletinEditorHeaderStage(Window dialogOrFrame, UiBulletinComponentInterface view)
 	{
 		super(view.getMainWindow());
 		
