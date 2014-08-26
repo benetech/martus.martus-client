@@ -29,10 +29,7 @@ package org.martus.client.swingui.bulletincomponent;
 import java.awt.Component;
 import java.io.IOException;
 
-import javax.swing.event.ChangeEvent;
-
 import org.martus.client.core.BulletinLanguageChangeListener;
-import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
@@ -49,16 +46,10 @@ public interface UiBulletinComponentInterface
 	public void validateData() throws DataInvalidException;
 	public boolean isBulletinModified() throws Exception;
 
-	// ChangeListener interface
-	public void stateChanged(ChangeEvent event);
+	public void updateEncryptedIndicator(boolean allPrivate);
 
 	public void setLanguageChangeListener(BulletinLanguageChangeListener listener);
 	// LanguageChangeListener interface
 	public void bulletinLanguageHasChanged(String newBulletinLanguageCode);
-
-	public void setEncryptionChangeListener(EncryptionChangeListener listener);
-	public void updateEncryptedIndicator(boolean isEncrypted);
-	public void encryptAndDisableAllPrivate();
-	public boolean isAllPrivateBoxChecked();
 
 }

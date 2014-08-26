@@ -85,12 +85,6 @@ public class UiBulletinPreviewPane extends UiScrollPane
 		{
 			System.out.println("UiBulletinPreview.refresh: " + e);
 		}
-		boolean isEncrypted = false;
-		if(currentBulletin != null && currentBulletin.isAllPrivate())
-			isEncrypted = true;
-		indicateEncrypted(isEncrypted);
-		if(currentBulletin == null)
-			return;
 		
 		if(didReturnToPreviousBulletin())
 			Utilities.forceScrollerToRect(view, previousRect);
@@ -111,11 +105,6 @@ public class UiBulletinPreviewPane extends UiScrollPane
 
 		if(b.getLocalId().equals(currentBulletin.getLocalId()))
 			setCurrentBulletin(b);
-	}
-
-	private void indicateEncrypted(boolean isEncrypted)
-	{
-		view.updateEncryptedIndicator(isEncrypted);
 	}
 
 	Bulletin currentBulletin;
