@@ -110,7 +110,7 @@ public class SelectTemplateController extends FxInSwingController
 	protected class GenericTemplateSelectedHandler implements ChangeListener<FormTemplate>
 	{
 		@Override
-		public void changed(ObservableValue<? extends FormTemplate> arg0, FormTemplate arg1, FormTemplate arg2)
+		public void changed(ObservableValue<? extends FormTemplate> observable, FormTemplate oldTemplate, FormTemplate newTemplate)
 		{
 			updateTemplateFromGeneric();
 		}
