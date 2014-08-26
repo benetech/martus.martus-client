@@ -1157,8 +1157,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		return title;
 	}
 
-	@Override
-	public boolean confirmDlg(JFrame parent, String title, String[] contents, String[] buttons, Map tokenReplacement)
+	private boolean confirmDlg(JFrame parent, String title, String[] contents, String[] buttons, Map tokenReplacement)
 	{
 		return UiUtilities.confirmDlg(parent, title, contents, buttons, tokenReplacement);
 	}
@@ -1226,8 +1225,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		notifyDlg(parent, baseTag, emptyTokenReplacement);
 	}
 
-	@Override
-	public void notifyDlg(JFrame parent, String baseTag, Map tokenReplacement)
+	private void notifyDlg(JFrame parent, String baseTag, Map tokenReplacement)
 	{
 		notifyDlg(parent, baseTag, "notify" + baseTag, tokenReplacement);
 	}
@@ -1239,8 +1237,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		notifyDlg(parent, baseTag, titleTag, emptyTokenReplacement);
 	}
 
-	@Override
-	public void notifyDlg(JFrame parent, String baseTag, String titleTag, Map tokenReplacement)
+	private void notifyDlg(JFrame parent, String baseTag, String titleTag, Map tokenReplacement)
 	{
 		UiUtilities.notifyDlg(getLocalization(), parent, baseTag, titleTag, tokenReplacement);
 	}

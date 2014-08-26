@@ -60,9 +60,7 @@ public interface UiMainWindowInterface
 	public void notifyDlg(String baseTag, Map tokenReplacement);
 	public void notifyDlgBeep(String baseTag);
 	public void notifyDlg(JFrame parent, String baseTag);
-	public void notifyDlg(JFrame parent, String baseTag, Map tokenReplacement);
 	public void notifyDlg(JFrame parent, String baseTag, String titleTag);
-	public void notifyDlg(JFrame parent, String baseTag, String titleTag, Map tokenReplacement);
 	public void notifyDlgBeep(JFrame parent, String baseTag);
 
 	public void messageDlg(JFrame parent, String baseTag, String message);
@@ -74,6 +72,5 @@ public interface UiMainWindowInterface
 	public boolean confirmDlg(JFrame parent, String title, String[] contents);
 	public boolean confirmDlg(JFrame parent, String title, String[] contents, String[] buttons);
 	public boolean confirmCustomButtonsDlg(JFrame parent,String baseTag, String[] buttons, Map tokenReplacement);
-	public boolean confirmDlg(JFrame parent, String title, String[] contents, String[] buttons, Map tokenReplacement);
 	public boolean confirmDlgBeep(String baseTag);
 }
