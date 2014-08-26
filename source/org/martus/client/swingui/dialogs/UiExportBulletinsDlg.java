@@ -75,7 +75,6 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		UiLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle("ExportBulletins"));
 		
-		includePrivate = new UiCheckBox(localization.getFieldLabel("ExportPrivateData"));
 		includeAttachments = new UiCheckBox(localization.getFieldLabel("ExportAttachments"));
 		includeAllVersions = new UiCheckBox(localization.getFieldLabel("ExportAllVersions"));
 		ok = new UiButton(localization.getButtonLabel("Continue"));
@@ -96,8 +95,6 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		upperStuff.addCentered(new UiWrappedTextArea(localization.getFieldLabel("ExportBulletinDetails")));
 		upperStuff.addSpace();
 		upperStuff.addCentered(tocMsgAreaScrollPane);
-		upperStuff.addSpace();
-		upperStuff.add(includePrivate);
 		upperStuff.addSpace();
 		upperStuff.add(includeAttachments);
 		upperStuff.addSpace();
@@ -124,11 +121,6 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		return mainWindow.showFileSaveDialog("ExportBulletins", defaultFileName, filter);
 	}
 
-	boolean userWantsToExportPrivate()
-	{
-		return includePrivate.isSelected();
-	}
-
 	boolean userWantsToExportAttachments()
 	{
 		return includeAttachments.isSelected();
@@ -142,7 +134,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 	public void doExport(File destFile)
 	{
 		ExportBulletins exporter = new ExportBulletins(mainWindow);
-		exporter.doExport(destFile, bulletins, userWantsToExportPrivate(), userWantsToExportAttachments(), userWantsToExportAllVersions());
+		exporter.doExport(destFile, bulletins, ALWAYS_EXPORT_PRIVATE_DATA, userWantsToExportAttachments(), userWantsToExportAllVersions());
 	}
 	
 	public void actionPerformed(ActionEvent ae)
@@ -162,12 +154,6 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 					return;
 			}
 			
-			if(userWantsToExportPrivate())
-			{
-				if(!mainWindow.confirmDlg("ExportPrivateData"))
-					return;
-			}
-
 			File destFile = askForDestinationFile();
 			if(destFile == null)
 				return;
@@ -179,10 +165,10 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		dispose();
 	}
 
-
+	private final boolean ALWAYS_EXPORT_PRIVATE_DATA = true;
+	
 	UiMainWindow mainWindow;
 	Vector bulletins;
-	JCheckBox includePrivate;
 	JCheckBox includeAttachments;
 	JCheckBox includeAllVersions;
 	JButton ok;
