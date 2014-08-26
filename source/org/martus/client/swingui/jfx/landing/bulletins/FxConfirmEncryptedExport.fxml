@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="457.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox prefHeight="65.0" prefWidth="431.0" BorderPane.alignment="CENTER">
+         <children>
+            <CheckBox fx:id="exportEncryptedCheckbox" mnemonicParsing="false" text="Export encrypted?" />
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox prefHeight="0.0" prefWidth="457.0" BorderPane.alignment="BOTTOM_CENTER">
+         <children>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#onExport" text="Export" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

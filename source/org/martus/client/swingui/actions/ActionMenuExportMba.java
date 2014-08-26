@@ -37,11 +37,16 @@ import org.martus.common.bulletin.BulletinZipUtilities;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 
-public class ActionMenuExportMba extends UiMenuAction
+public class ActionMenuExportMba extends UiMenuAction implements ActionDoer
 {
 	public ActionMenuExportMba(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse, "ExportMBA");
+	}
+	public ActionMenuExportMba(UiMainWindow mainWindowToUse, Bulletin bulletinToUse)
+	{
+		super(mainWindowToUse, "ExportMBA");
+		bulletinToExport = bulletinToUse;
 	}
 
 	public void actionPerformed(ActionEvent event)
@@ -58,20 +63,22 @@ public class ActionMenuExportMba extends UiMenuAction
 				return;
 			if(bulletins.size()!=1)
 				mainWindow.notifyDlg("ExportMbaSingleBulletinOnly");
-			Bulletin bulletin = (Bulletin)bulletins.get(0);
-			
-			String defaultFilename = bulletin.toFileName();
-			FormatFilter filter = new MartusBulletinArchiveFileFilter(getLocalization());
-			File destination = getMainWindow().showFileSaveDialog("ExportMBA", defaultFilename, filter);
-			if(destination == null)
-				return;
-			
-			exportBulletinToMba(bulletin, destination);
+			exportMbaBulletin((Bulletin)bulletins.get(0));
 		} 
 		catch (Exception e)
 		{
 			mainWindow.unexpectedErrorDlg(e);
 		}
+	}
+
+	private void exportMbaBulletin(Bulletin bulletin) throws Exception
+	{
+		String defaultFilename = bulletin.toFileName();
+		FormatFilter filter = new MartusBulletinArchiveFileFilter(getLocalization());
+		File destination = getMainWindow().showFileSaveDialog("ExportMBA", defaultFilename, filter);
+		if(destination == null)
+			return;
+		exportBulletinToMba(bulletin, destination);
 	}
 
 	private void exportBulletinToMba(Bulletin bulletin, File destination) throws Exception
@@ -80,4 +87,18 @@ public class ActionMenuExportMba extends UiMenuAction
 		DatabaseKey headerKey = DatabaseKey.createKey(bulletin.getUniversalId(), bulletin.getStatus()); 
 		BulletinZipUtilities.exportBulletinPacketsFromDatabaseToZipFile(db, headerKey, destination, mainWindow.getApp().getSecurity());
 	}
+
+	@Override
+	public void doAction()
+	{
+		try
+		{
+			exportMbaBulletin(bulletinToExport);
+		} 
+		catch (Exception e)
+		{
+			mainWindow.unexpectedErrorDlg(e);
+		}
+	}
+	Bulletin bulletinToExport;
 }
