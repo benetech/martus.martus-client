@@ -87,7 +87,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		mainWindow = mainWindowToUse;
 	}
 
-	public void createSections()
+	private void createSections()
 	{
 		headerSection = createHeaderSection();
 		publicSection = createDataSection(Bulletin.TOP_SECTION, currentBulletin.getTopSectionFieldSpecs(), SOMETIMES_ENCRYPTED);
@@ -120,11 +120,6 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	{
 		publicSection.matchFirstColumnWidth(privateSection);
 		privateSection.matchFirstColumnWidth(publicSection);
-	}
-
-	public Bulletin getCurrentBulletin()
-	{
-		return currentBulletin;
 	}
 
 	public void copyDataFromBulletin(Bulletin bulletinToShow) throws Exception
@@ -273,14 +268,14 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	}
 	// End scrollable interface
 	
-	UiMainWindow mainWindow;
+	protected UiMainWindow mainWindow;
 
-	UiField allPrivateField;
-	Bulletin currentBulletin;
-	UiBulletinComponentHeaderSection headerSection;
-	UiBulletinComponentDataSection publicSection;
-	UiBulletinComponentDataSection privateSection;	
-	UiBulletinComponentHeadQuartersSection headquartersSection;
+	protected UiField allPrivateField;
+	protected Bulletin currentBulletin;
+	protected UiBulletinComponentHeaderSection headerSection;
+	protected UiBulletinComponentDataSection publicSection;
+	protected UiBulletinComponentDataSection privateSection;	
+	protected UiBulletinComponentHeadQuartersSection headquartersSection;
 
 	private static final int SOMETIMES_ENCRYPTED = 1;
 	private static final int ALWAYS_ENCRYPTED = 2;
