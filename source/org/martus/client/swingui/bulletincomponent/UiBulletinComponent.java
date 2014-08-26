@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.io.IOException;
@@ -287,6 +288,12 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		Utilities.forceScrollerToTop(this);
 	}
 	
+	@Override
+	public Component getComponent()
+	{
+		return this;
+	}
+
 	private UiMainWindow mainWindow;
 
 	protected UiField allPrivateField;

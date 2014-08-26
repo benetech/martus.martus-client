@@ -202,7 +202,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	{
 		scroller = new UiScrollPane();
 		scroller.getVerticalScrollBar().setFocusable(false);
-		scroller.getViewport().add(view);
+		scroller.getViewport().add(view.getComponent());
 		scroller.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(scroller, BorderLayout.CENTER);

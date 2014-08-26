@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
+import java.awt.Component;
 import java.io.IOException;
 
 import javax.swing.event.ChangeEvent;
@@ -45,6 +46,7 @@ public interface UiBulletinComponentInterface
 	abstract public void validateData() throws DataInvalidException;
 	abstract public boolean isBulletinModified() throws Exception;
 	public abstract void scrollToTop();
+	public Component getComponent();
 
 	// ChangeListener interface
 	abstract public void stateChanged(ChangeEvent event);
