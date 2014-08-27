@@ -133,7 +133,7 @@ public class ManageTemplatesController extends FxInSwingController
 			}
 			catch(Exception e)
 			{
-				unexpectedError(e);
+				logAndNotifyUnexpectedError(e);
 			}
 		}
 
@@ -156,7 +156,7 @@ public class ManageTemplatesController extends FxInSwingController
 		}
 		catch(Exception e)
 		{
-			unexpectedError(e);
+			logAndNotifyUnexpectedError(e);
 		}
 	}
 
@@ -250,7 +250,7 @@ public class ManageTemplatesController extends FxInSwingController
 		}
 		catch(Exception e)
 		{
-			unexpectedError(e);
+			logAndNotifyUnexpectedError(e);
 		}
 	}
 
@@ -279,7 +279,7 @@ public class ManageTemplatesController extends FxInSwingController
 		}
 		catch(Exception e)
 		{
-			unexpectedError(e);
+			logAndNotifyUnexpectedError(e);
 		}
 	}
 

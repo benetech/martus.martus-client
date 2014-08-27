@@ -75,7 +75,7 @@ public class SelectTemplateController extends FxInSwingController
 		}
 		catch(Exception e)
 		{
-			unexpectedError(e);
+			logAndNotifyUnexpectedError(e);
 		}
 	}
 
@@ -114,7 +114,7 @@ public class SelectTemplateController extends FxInSwingController
 		}
 		catch(Exception e)
 		{
-			unexpectedError(e);
+			logAndNotifyUnexpectedError(e);
 		}
 	}
 

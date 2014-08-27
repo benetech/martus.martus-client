@@ -61,7 +61,7 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 		}
 		catch(Exception e)
 		{
-			unexpectedError(e);
+			logAndNotifyUnexpectedError(e);
 		}
 	}
 
