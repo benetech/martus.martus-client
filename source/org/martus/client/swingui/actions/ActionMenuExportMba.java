@@ -45,7 +45,7 @@ public class ActionMenuExportMba extends UiMenuAction implements ActionDoer
 	}
 	public ActionMenuExportMba(UiMainWindow mainWindowToUse, Bulletin bulletinToUse)
 	{
-		super(mainWindowToUse, "ExportMBA");
+		this(mainWindowToUse);
 		bulletinToExport = bulletinToUse;
 	}
 
