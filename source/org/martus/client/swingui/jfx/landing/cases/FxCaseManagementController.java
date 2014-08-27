@@ -32,6 +32,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -79,6 +80,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		casesListViewClosed.getSelectionModel().selectedItemProperty().addListener(caseListChangeListener);
 		casesListViewClosed.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		casesTabPane.getSelectionModel().selectedItemProperty().addListener(new caseTabeListener());
+		currentSelectedCase = currentCasesListView.getSelectionModel().selectedItemProperty();
 	}
 
 	@Override
@@ -189,7 +191,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		for (Iterator iterator = currentCaseListProvider.iterator(); iterator.hasNext();)
 		{
 			CaseListItem caseItem = (CaseListItem) iterator.next();
-			if(caseItem.caseName.equals(caseName))
+			if(caseItem.getName().equals(caseName))
 			{
 				selectCaseAndScrollInView(caseItem);
 				break;
@@ -244,16 +246,13 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	
 	private void renameCaseName()
 	{
-		CaseListItem currentCase = currentCasesListView.getSelectionModel().getSelectedItem();
-		ClientBulletinStore store = getApp().getStore();
-		String currentFolderName = currentCase.getNameLocalized();
-		BulletinFolder currentFolder = store.findFolder(currentFolderName);
+		BulletinFolder currentFolder = currentSelectedCase.get().getFolder();
 		if(currentFolder == null)
 			return;
 		if(!currentFolder.canRename())
 			return;
 
-		FxFolderRenameController renameFolder = new FxFolderRenameController(getMainWindow(), currentFolderName);
+		FxFolderRenameController renameFolder = new FxFolderRenameController(getMainWindow(), currentFolder.getName());
 		renameFolder.addFolderRenameListener(new FolderRenamedListener());
 		ActionDoer shellController = new DialogWithOkCancelShellController(getMainWindow(), renameFolder);
 		doAction(shellController);
@@ -333,8 +332,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	@FXML
 	public void onFolderDeleteClicked(MouseEvent mouseEvent) 
 	{
-		CaseListItem folderItem = currentCasesListView.getSelectionModel().getSelectedItem();
-		BulletinFolder folder = getApp().getStore().findFolder(folderItem.caseName);
+		BulletinFolder folder = currentSelectedCase.get().getFolder();
 		FxFolderDeleteController deleteFolder = new FxFolderDeleteController(getMainWindow(), folder);
 		deleteFolder.addFolderDeletedListener(new FolderDeletedListener());
 		ActionDoer shellController = new DialogWithOkCancelShellController(getMainWindow(), deleteFolder);
@@ -415,6 +413,8 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	@FXML
 	private Button deleteFolderButton;
 
+	private 	ReadOnlyObjectProperty<CaseListItem> currentSelectedCase;
+	
 	private CaseListProvider caseListProviderAll;
 	private CaseListProvider caseListProviderOpen;
 	private CaseListProvider caseListProviderClosed;
