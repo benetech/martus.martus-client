@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.cases;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -35,6 +34,7 @@ import java.util.Vector;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -338,11 +338,17 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		ActionDoer shellController = new DialogWithOkCancelShellController(getMainWindow(), deleteFolder);
 		doAction(shellController);
 	}
+
+	@FXML
+	public void onManageTemplates(ActionEvent event)
+	{
+		System.out.println("onManageTemplates");
+	}
 	
 	class FolderDeletedListener implements ActionListener
 	{
 		@Override
-		public void actionPerformed(ActionEvent e)
+		public void actionPerformed(java.awt.event.ActionEvent e)
 		{
 			updateCasesSelectDefaultCase();
 		}		
