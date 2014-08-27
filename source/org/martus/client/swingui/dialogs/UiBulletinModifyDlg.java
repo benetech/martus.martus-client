@@ -37,7 +37,6 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.HashMap;
 
-import javafx.application.Platform;
 import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -60,7 +59,6 @@ import org.martus.client.swingui.bulletincomponent.UiBulletinComponentInterface;
 import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.jfx.generic.FxRunner;
-import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.landing.bulletins.FxBulletinEditorShellController;
 import org.martus.client.swingui.jfx.landing.bulletins.FxGenericStage;
 import org.martus.clientside.UiLocalization;
@@ -89,7 +87,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			FxBulletinEditorShellController bulletinEditorShellController = new FxBulletinEditorShellController(observerToUse);
 
 			String cssName = "Bulletin.css";
-			bulletinEditorStage = createAndActivateEmbeddedStage(observerToUse, bulletinEditorShellController, cssName);
+			bulletinEditorStage = FxRunner.createAndActivateEmbeddedStage(observerToUse, bulletinEditorShellController, cssName);
 			view = bulletinEditorShellController;
 		}
 		else
@@ -145,17 +143,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		ClientBulletinStore store = observerToUse.getApp().getStore();
 		Property<String> currentTemplateNameProperty = store.getCurrentFormTemplateNameProperty();
 		currentTemplateNameProperty.addListener(new TemplateChangeHandler(observerToUse));
-	}
-
-	public static FxGenericStage createAndActivateEmbeddedStage(UiMainWindow observerToUse, FxShellController shellController, String cssName)
-	{
-		FxGenericStage stage = new FxGenericStage(observerToUse, shellController, cssName);
-		
-		FxRunner fxRunner = new FxRunner(stage);
-		fxRunner.setAbortImmediatelyOnError();
-		Platform.runLater(fxRunner);
-		
-		return stage;
 	}
 
 	class TemplateChangeHandler implements ChangeListener<String>
