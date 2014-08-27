@@ -255,25 +255,6 @@ public class ManageTemplatesController extends FxInSwingController
 	}
 
 	@FXML
-	private void onSelect(ActionEvent event)
-	{
-		try
-		{
-			String title = getLocalization().getWindowTitle("SelectTemplate");
-			String message = getLocalization().getFieldLabel("confirmOkToSwitchTemplate");
-			if(!showConfirmationDialog(title, message))
-				return;
-
-			ChoiceItem selected = availableTemplates.getSelectionModel().getSelectedItem();
-			getBulletinStore().setFormTemplate(selected.getCode());
-		}
-		catch(Exception e)
-		{
-			unexpectedError(e);
-		}
-	}
-
-	@FXML
 	private void onAdd(ActionEvent event)
 	{
 		try
