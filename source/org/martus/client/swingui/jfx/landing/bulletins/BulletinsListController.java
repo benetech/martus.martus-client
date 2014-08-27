@@ -279,25 +279,30 @@ public class BulletinsListController extends AbstractFxLandingContentController
 			UniversalId[] bulletinsIDsToExport = getSelectedBulletinIds();
 			if(bulletinsIDsToExport.length == 1)
 			{
-				ConfirmEncryptedExportController exportController = new ConfirmEncryptedExportController(getMainWindow());
-				showControllerInsideModalDialog(exportController);
-				if(exportController.shouldExport())
-				{
-					if(exportController.shouldExportEncrypted())
-						exportEncryptedBulletin(bulletinsIDsToExport[0]);
-					else
-						exportUnencryptedBulletins(bulletinsIDsToExport);
-				}
+				exportSingleBulletin(bulletinsIDsToExport);
 			}
 			else
 			{
-				exportUnencryptedBulletins(bulletinsIDsToExport);
+				exportUnencryptedXmlBulletins(bulletinsIDsToExport);
 			}
 		} 
 		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 		}		
+	}
+
+	private void exportSingleBulletin(UniversalId[] bulletinsIDsToExport)throws Exception
+	{
+		ConfirmEncryptedExportController exportController = new ConfirmEncryptedExportController(getMainWindow());
+		showControllerInsideModalDialog(exportController);
+		if(exportController.shouldExport())
+		{
+			if(exportController.shouldExportEncrypted())
+				exportEncryptedMbaBulletin(bulletinsIDsToExport[0]);
+			else
+				exportUnencryptedXmlBulletins(bulletinsIDsToExport);
+		}
 	}	
 	
 	@FXML
@@ -311,12 +316,12 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	{
 	}
 
-	private void exportUnencryptedBulletins(UniversalId[] bulletinsIdsToExport) throws Exception
+	private void exportUnencryptedXmlBulletins(UniversalId[] bulletinsIdsToExport) throws Exception
 	{
 		doAction(new ActionMenuExportBulletins(getMainWindow(), bulletinsIdsToExport));
 	}
 
-	private void exportEncryptedBulletin(UniversalId bulletinIdToExport)
+	private void exportEncryptedMbaBulletin(UniversalId bulletinIdToExport)
 	{
 		Bulletin bulletinToExport = getApp().getStore().getBulletinRevision(bulletinIdToExport);
 		doAction(new ActionMenuExportMba(getMainWindow(), bulletinToExport));
