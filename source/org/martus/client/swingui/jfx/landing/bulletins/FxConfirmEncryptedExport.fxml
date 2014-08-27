@@ -12,12 +12,4 @@
          </children>
       </VBox>
    </center>
-   <bottom>
-      <HBox prefHeight="0.0" prefWidth="457.0" BorderPane.alignment="BOTTOM_CENTER">
-         <children>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#onExport" text="Export" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
-         </children>
-      </HBox>
-   </bottom>
 </BorderPane>

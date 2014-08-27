@@ -26,14 +26,16 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.bulletins;
 
 
-import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxPopupController;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 
-public class ConfirmEncryptedExportController extends FxPopupController
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.generic.FxController;
+
+public class ConfirmEncryptedExportController extends FxController
 {
 	public ConfirmEncryptedExportController(UiMainWindow mainWindowToUse)
 	{
@@ -42,24 +44,14 @@ public class ConfirmEncryptedExportController extends FxPopupController
 	
 	public boolean shouldExportEncrypted()
 	{
-		return exportSelected && exportEncryptedCheckbox.isSelected();
+		return exportEncryptedCheckbox.isSelected();
 	}
 	
-	public boolean shouldExport()
-	{
-		return exportSelected;
-	}
-
 	@Override
-	public void initialize()
+	public void initialize(URL location, ResourceBundle bundle)
 	{
+		super.initialize(location, bundle);
 		exportEncryptedCheckbox.setSelected(true);
-	}
-
-	@Override
-	public String getDialogTitle()
-	{
-		return getLocalization().getWindowTitle("ExportEncryptedBulletin");
 	}
 
 	@Override
@@ -68,25 +60,5 @@ public class ConfirmEncryptedExportController extends FxPopupController
 		return "landing/bulletins/FxConfirmEncryptedExport.fxml";
 	}
 	
-	@FXML 
-	private void onExport(ActionEvent export)
-	{
-		exportSelected = true;
-		close();
-	}
-
-	@FXML 
-	private void onCancel(ActionEvent export)
-	{
-		close();
-	}
-
-	private void close()
-	{
-		getStage().close();
-	}
-
 	@FXML CheckBox exportEncryptedCheckbox;
-	
-	private boolean exportSelected;
 }

@@ -35,20 +35,21 @@ import org.martus.client.swingui.UiMainWindow;
 
 public class PopupConfirmationController extends FxPopupController implements Initializable
 {
-	public PopupConfirmationController(UiMainWindow mainWindowToUse, String title, FxController controllerForMainPane)
+	public PopupConfirmationController(UiMainWindow mainWindowToUse, String title, String yesLabel, String noLabel, FxController controllerForMainPane)
 	{
 		super(mainWindowToUse);
 		this.title = title;
 		this.controllerForMainPane = controllerForMainPane;
+		yesButtonLabel =  yesLabel;
+		noButtonLabel = noLabel;
 	}
 	
 	@Override
 	public void initialize()
 	{
-		
 		MartusLocalization localization = getLocalization();
-		fxYesButton.setText(localization.getButtonLabel("yes"));
-		fxNoButton.setText(localization.getButtonLabel("no"));
+		fxYesButton.setText(localization.getButtonLabel(yesButtonLabel));
+		fxNoButton.setText(localization.getButtonLabel(noButtonLabel));
 		try
 		{
 			loadControllerAndEmbedInPane(controllerForMainPane, mainPane);
@@ -101,4 +102,6 @@ public class PopupConfirmationController extends FxPopupController implements In
 	private String title;
 	private boolean yesWasPressed;
 	private FxController controllerForMainPane;
+	private String yesButtonLabel;
+	private String noButtonLabel;
 }

@@ -193,10 +193,20 @@ abstract public class FxController implements Initializable
 	
 	public boolean showConfirmationDialog(String title, String message)
 	{
+		FxController mainAreaController = new PopupSimpleConfirmationController(getMainWindow(), message);
+		return showModalYesNoDialog(title, mainAreaController);
+	}
+
+	protected boolean showModalYesNoDialog(String title, FxController mainAreaController)
+	{
+		return showModalYesNoDialog(title, YES_BUTTON_LABEL, NO_BUTTON_LABEL, mainAreaController);
+	}	
+	
+	protected boolean showModalYesNoDialog(String title, String yesButtonLabel, String NoButtonLabel, FxController mainAreaController)
+	{
 		try
 		{
-			PopupSimpleConfirmationController messageController = new PopupSimpleConfirmationController(getMainWindow(), message);
-			PopupConfirmationController popupController = new PopupConfirmationController(getMainWindow(), title, messageController);
+			PopupConfirmationController popupController = new PopupConfirmationController(getMainWindow(), title, yesButtonLabel, NoButtonLabel, mainAreaController);
 			showControllerInsideModalDialog(popupController);
 			return popupController.wasYesPressed();
 		} 
@@ -325,6 +335,8 @@ abstract public class FxController implements Initializable
 
 	private static final String POPUP_CSS = "Popup.css";
 	private static final String MARTUS_CSS = "Martus.css";
+	private static final String YES_BUTTON_LABEL = "yes";
+	private static final String NO_BUTTON_LABEL = "no";
 
 	private UiMainWindow mainWindow;
 	private static int notifyDialogDepth;

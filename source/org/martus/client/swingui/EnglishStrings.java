@@ -372,7 +372,7 @@ public class EnglishStrings
 
 "wintitle:ExitManageContacts=Exit Manage Contacts",
 "field:ExitManageContacts=Your changes will be lost, are you sure you want to do this?",
-
+"button:export=Export",
 "button:help=Help",
 "button:create=Create",
 "button:search=Search",
