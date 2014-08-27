@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<children><Label text="Language">
+<font>
+<Font name="Helvetica" size="18.0" />
+</font></Label><HBox prefHeight="50.0" prefWidth="200.0">
+<children><Label text="Select Language: ">
+<HBox.margin>
+<Insets top="10.0" />
+</HBox.margin></Label><ChoiceBox fx:id="languageSelection" prefWidth="150.0" /><CheckBox fx:id="useZawgyiFont" mnemonicParsing="false" text="%preferencesUseZawgyi">
+<HBox.margin>
+<Insets left="10.0" />
+</HBox.margin></CheckBox>
+</children></HBox><Label text="Calendar">
+<font>
+<Font name="Helvetica" size="18.0" />
+</font></Label><GridPane>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="175.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="433.0" minWidth="10.0" prefWidth="433.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+<children><ListView prefHeight="200.0" prefWidth="200.0" /><Label text="Date Delimiter:" GridPane.rowIndex="1" /><Label text="Date Format Sequence:" /><Label text="Calendar Type:" GridPane.rowIndex="2" /><ChoiceBox fx:id="dateFormat" prefWidth="150.0" GridPane.columnIndex="1" /><ChoiceBox fx:id="dateDelimiter" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" /><ChoiceBox fx:id="calendarType" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+</children>
+</GridPane>
+<Button mnemonicParsing="false" onMouseClicked="#onSaveChanges" text="Save Changes">
+<VBox.margin>
+<Insets top="50.0" />
+</VBox.margin></Button>
+</children></VBox>

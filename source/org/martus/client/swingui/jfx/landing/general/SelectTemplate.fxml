@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<Label alignment="CENTER" text="Template Selector">
+		</Label>
+		<TabPane tabClosingPolicy="UNAVAILABLE" >
+			<tabs>
+				<Tab text="Available Templates">
+					<content>
+						<HBox>
+							<children>
+								<ListView fx:id="availableTemplates" prefWidth="400">
+								</ListView>
+								<Button mnemonicParsing="false" text="Select" onAction="#onSelect">
+								</Button>
+							</children>
+						</HBox>
+					</content>
+				</Tab>
+				<Tab text="Add New Template">
+					<content>
+						<Pane prefHeight="200.0" prefWidth="200.0">
+							<children>
+								<VBox prefWidth="500.0">
+									<children>
+										<Label text="Import:">
+										</Label>
+										<GridPane>
+											<columnConstraints>
+												<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+												<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+											</columnConstraints>
+											<rowConstraints>
+												<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+												<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+												<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+											</rowConstraints>
+											<children>
+												<RadioButton fx:id="genericRadioButton" mnemonicParsing="false" text="Generic" onAction="#onChooseGeneric">
+													<toggleGroup>
+														<ToggleGroup fx:id="importTemplateHow" />
+													</toggleGroup>
+												</RadioButton>
+												<ChoiceBox fx:id="genericChoiceBox" GridPane.columnIndex="1" />
+
+												<RadioButton toggleGroup="$importTemplateHow" fx:id="downloadRadioButton" mnemonicParsing="false" text="From Contact" GridPane.rowIndex="1" onAction="#onChooseFromServer" />
+												<ChoiceBox fx:id="downloadChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+												<RadioButton toggleGroup="$importTemplateHow" fx:id="importFileRadioButton" mnemonicParsing="false" text="Import From File" GridPane.rowIndex="2" onAction="#onChooseFromFile" />
+												<Button text="Choose..." fx:id="chooseFileButton" onAction="#onImportFromFile" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+											</children>
+										</GridPane>
+										<HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+											<children>
+												<Button fx:id="addTemplateButton" onAction="#onAdd" mnemonicParsing="false" text="Add">
+												</Button>
+											</children>
+										</HBox>
+									</children>
+								</VBox>
+							</children>
+						</Pane>
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+	</children>
+</VBox>
