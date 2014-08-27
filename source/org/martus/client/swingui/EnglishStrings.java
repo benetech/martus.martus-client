@@ -683,6 +683,9 @@ public class EnglishStrings
 "wintitle:SealingSelectedBulletins=Sealing Bulletins...",
 "field:SealingSelectedBulletins=Sealing Bulletins...",
 
+"wintitle:ExportEncryptedMbaBulletin=Export Encrypted Bulletin",
+"wintitle:ExportUnencryptedXMLBulletins=Export Unencrypted Bulletin(s)",
+
 
 "field:AddingPermissionsToBulletins=Updating access...",
 "wintitle:confirmAddingPermissionsToBulletinsCancel=Cancel",
