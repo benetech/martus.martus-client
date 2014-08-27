@@ -27,13 +27,18 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingFrameStage;
+import org.martus.client.swingui.jfx.generic.FxShellController;
 
 public class FxGenericStage extends FxInSwingFrameStage
 {
-	public FxGenericStage(UiMainWindow mainWindowToUse)
+	public FxGenericStage(UiMainWindow mainWindowToUse, FxShellController shellController, String cssNameToUse)
 	{
 		super(mainWindowToUse);
+	
+		cssName = cssNameToUse;
+		setShellController(shellController);
 
+		// TODO: The setWindow mechanism needs to be re-evaluated
 		setWindow(mainWindowToUse);
 	}
 
@@ -46,8 +51,7 @@ public class FxGenericStage extends FxInSwingFrameStage
 	@Override
 	protected String getCssName()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return cssName;
 	}
 
 	@Override
@@ -55,4 +59,5 @@ public class FxGenericStage extends FxInSwingFrameStage
 	{
 	}
 
+	private String cssName;
 }
