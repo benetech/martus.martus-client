@@ -192,7 +192,9 @@ public class SettingsForServerController extends FxInSwingController
 		ChoiceItem itemToBeSelected = choices.findByCode(codeToFind);
 		SingleSelectionModel model = choiceBox.getSelectionModel();
 		if(itemToBeSelected == null)
-			model.select(defaultChoice);
+			itemToBeSelected = choices.findByCode(defaultChoice);
+		if(itemToBeSelected == null)
+			model.clearSelection();
 		else
 			model.select(itemToBeSelected);
 	}
