@@ -35,7 +35,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
 import org.martus.client.swingui.jfx.generic.FxController;
-import org.martus.client.swingui.jfx.generic.FxInSwingController;
 
 public class BulletinEditorHeaderController extends FxController
 {
@@ -61,7 +60,7 @@ public class BulletinEditorHeaderController extends FxController
 	{
 		try
 		{
-			FxInSwingController controller = new SelectTemplateController(getMainWindow());
+			FxController controller = new SelectTemplateController(getMainWindow());
 			ActionDoer shellController = new DialogWithCloseShellController(getMainWindow(), controller);
 			doAction(shellController);
 		}
