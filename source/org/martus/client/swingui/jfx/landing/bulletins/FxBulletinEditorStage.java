@@ -25,19 +25,10 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
-import java.awt.Component;
-import java.io.IOException;
-
-import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.bulletincomponent.UiBulletinComponentInterface;
 import org.martus.client.swingui.jfx.generic.FxInSwingFrameStage;
-import org.martus.client.swingui.jfx.generic.FxShellController;
-import org.martus.common.bulletin.Bulletin;
-import org.martus.common.crypto.MartusCrypto.EncryptionException;
-import org.martus.common.fieldspec.DataInvalidException;
 
-public class FxBulletinEditorStage extends FxInSwingFrameStage implements UiBulletinComponentInterface
+public class FxBulletinEditorStage extends FxInSwingFrameStage
 {
 	public FxBulletinEditorStage(UiMainWindow mainWindowToUse)
 	{
@@ -47,64 +38,9 @@ public class FxBulletinEditorStage extends FxInSwingFrameStage implements UiBull
 	}
 
 	@Override
-	public Component getComponent()
+	public void showCurrentPage() throws Exception
 	{
-		return this;
-	}
-
-	@Override
-	public void scrollToTop()
-	{
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void copyDataToBulletin(Bulletin bulletin) throws IOException,
-			EncryptionException
-	{
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void copyDataFromBulletin(Bulletin bulletinToShow) throws Exception
-	{
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void validateData() throws DataInvalidException
-	{
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public boolean isBulletinModified() throws Exception
-	{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void updateEncryptedIndicator(boolean allPrivate)
-	{
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void setLanguageChangeListener(BulletinLanguageChangeListener listener)
-	{
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void bulletinLanguageHasChanged(String newBulletinLanguageCode)
-	{
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void close()
-	{
+		loadAndShowShell();
 	}
 
 	@Override
@@ -115,9 +51,8 @@ public class FxBulletinEditorStage extends FxInSwingFrameStage implements UiBull
 	}
 
 	@Override
-	public void showCurrentPage() throws Exception
+	public void close()
 	{
-		loadAndShowShell();
 	}
 
 }

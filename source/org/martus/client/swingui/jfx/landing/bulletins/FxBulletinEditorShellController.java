@@ -25,17 +25,24 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import java.awt.Component;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
+import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.bulletincomponent.UiBulletinComponentInterface;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 import org.martus.client.swingui.jfx.landing.general.BulletinEditorHeaderShellController;
+import org.martus.common.bulletin.Bulletin;
+import org.martus.common.crypto.MartusCrypto.EncryptionException;
+import org.martus.common.fieldspec.DataInvalidException;
 
-public class FxBulletinEditorShellController extends FxNonWizardShellController
+public class FxBulletinEditorShellController extends FxNonWizardShellController implements UiBulletinComponentInterface
 {
 	public FxBulletinEditorShellController(UiMainWindow mainWindowToUse)
 	{
@@ -56,6 +63,62 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController
 		{
 			unexpectedError(e);
 		}
+	}
+
+	@Override
+	public Component getComponent()
+	{
+		throw new RuntimeException("Not implemented");
+	}
+
+	@Override
+	public void scrollToTop()
+	{
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void copyDataToBulletin(Bulletin bulletin) throws IOException,
+			EncryptionException
+	{
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void copyDataFromBulletin(Bulletin bulletinToShow) throws Exception
+	{
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void validateData() throws DataInvalidException
+	{
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public boolean isBulletinModified() throws Exception
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void updateEncryptedIndicator(boolean allPrivate)
+	{
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void setLanguageChangeListener(BulletinLanguageChangeListener listener)
+	{
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void bulletinLanguageHasChanged(String newBulletinLanguageCode)
+	{
+		// TODO Auto-generated method stub
 	}
 
 	@Override
