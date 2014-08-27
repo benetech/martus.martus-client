@@ -43,9 +43,6 @@ public class FxBulletinEditorStage extends FxInSwingFrameStage implements UiBull
 	{
 		super(mainWindowToUse);
 
-		FxShellController shellController = new FxBulletinEditorShellController(getMainWindow());
-		setShellController(shellController);
-		
 		setWindow(mainWindowToUse);
 	}
 
