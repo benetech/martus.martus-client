@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Vector;
 
 import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
@@ -236,14 +237,13 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		return "landing/bulletins/FxTableViewItems.fxml";
 	}
 	
-	private UniversalId[] getSelectedBulletinIds()
+	private Vector getSelectedBulletinIds()
 	{
 		ObservableList<BulletinTableRowData> selectedItems = itemsTable.getSelectionModel().getSelectedItems();
-		UniversalId[] selectedIds = new UniversalId[selectedItems.size()];
-		int next = 0;
+		Vector selectedIds = new Vector(selectedItems.size());
 		for (BulletinTableRowData bulletinTableRowData : selectedItems)
 		{
-			selectedIds[next++] = bulletinTableRowData.getUniversalId();
+			selectedIds.add(bulletinTableRowData.getUniversalId());
 		}
 		return selectedIds;
 	}
@@ -251,7 +251,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	@FXML
 	private void onTrashSelectedItems(javafx.event.ActionEvent event)
 	{
-		UniversalId[] bulletinsIDsToDiscard = getSelectedBulletinIds();
+		Vector<UniversalId> bulletinsIDsToDiscard = getSelectedBulletinIds();
 		BulletinFolder folderToDiscardFrom = bulletinTableProvider.getFolder();
 		if(folderToDiscardFrom.isDiscardedFolder())
 		{
@@ -262,7 +262,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		}
 		try
 		{
-			getApp().discardBulletinsFromFolder(folderToDiscardFrom, bulletinsIDsToDiscard);
+			getApp().discardBulletinsFromFolder(folderToDiscardFrom,bulletinsIDsToDiscard.toArray(new UniversalId[0]));
 		}
 		catch (IOException e)
 		{
@@ -276,14 +276,14 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	{
 		try
 		{
-			UniversalId[] bulletinsIDsToExport = getSelectedBulletinIds();
-			if(bulletinsIDsToExport.length == 1)
+			Vector<UniversalId> bulletinsIDsToExport = getSelectedBulletinIds();
+			if(bulletinsIDsToExport.size() == 1)
 			{
-				exportSingleBulletin(bulletinsIDsToExport);
+				exportSingleBulletin(bulletinsIDsToExport.toArray(new UniversalId[0]));
 			}
 			else
 			{
-				exportUnencryptedXmlBulletins(bulletinsIDsToExport);
+				exportUnencryptedXmlBulletins(bulletinsIDsToExport.toArray(new UniversalId[0]));
 			}
 		} 
 		catch (Exception e)
