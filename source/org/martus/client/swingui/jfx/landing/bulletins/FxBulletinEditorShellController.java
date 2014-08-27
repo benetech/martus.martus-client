@@ -124,7 +124,7 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	@Override
 	public String getFxmlLocation()
 	{
-		return "landing/bulletins/BulletinEditor.fxml";
+		return "landing/bulletins/BulletinEditorShell.fxml";
 	}
 	
 	@FXML
