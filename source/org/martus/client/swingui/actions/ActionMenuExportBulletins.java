@@ -43,7 +43,7 @@ public class ActionMenuExportBulletins extends UiMenuAction implements ActionDoe
 
 	public ActionMenuExportBulletins(UiMainWindow mainWindowToUse, UniversalId[] bulletinsIdsToUse)
 	{
-		super(mainWindowToUse, "ExportBulletins");
+		this(mainWindowToUse);
 		bulletinIdsToExport = bulletinsIdsToUse;
 	}
 
