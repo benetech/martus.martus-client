@@ -55,7 +55,7 @@ public class PopupConfirmationController extends FxPopupController implements In
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/ConfirmationPopup.fxml";
+		return "generic/PopupConfirmation.fxml";
 	}
 
 	@Override
