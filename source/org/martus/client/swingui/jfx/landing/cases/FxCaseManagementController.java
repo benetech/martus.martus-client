@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.cases;
 
-import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -54,6 +53,7 @@ import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
 import org.martus.client.swingui.jfx.generic.DialogWithOkCancelShellController;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.jfx.landing.FolderSelectionListener;
+import org.martus.client.swingui.jfx.landing.cases.FxFolderDeleteController.FolderDeletedListener;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxCaseManagementController extends AbstractFxLandingContentController
@@ -334,7 +334,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	{
 		BulletinFolder folder = currentSelectedCase.get().getFolder();
 		FxFolderDeleteController deleteFolder = new FxFolderDeleteController(getMainWindow(), folder);
-		deleteFolder.addFolderDeletedListener(new FolderDeletedListener());
+		deleteFolder.addFolderDeletedListener(new FolderDeletedHandler());
 		ActionDoer shellController = new DialogWithOkCancelShellController(getMainWindow(), deleteFolder);
 		doAction(shellController);
 	}
@@ -345,10 +345,10 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		System.out.println("onManageTemplates");
 	}
 	
-	class FolderDeletedListener implements ActionListener
+	class FolderDeletedHandler implements FolderDeletedListener
 	{
 		@Override
-		public void actionPerformed(java.awt.event.ActionEvent e)
+		public void folderWasDeleted()
 		{
 			updateCasesSelectDefaultCase();
 		}		
