@@ -87,7 +87,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			FxBulletinEditorShellController bulletinEditorShellController = new FxBulletinEditorShellController(observerToUse);
 
 			String cssName = "Bulletin.css";
-			bulletinEditorStage = FxRunner.createAndActivateEmbeddedStage(observerToUse, bulletinEditorShellController, cssName);
+			bulletinEditorStage = FxRunner.createAndActivateEmbeddedStage(observerToUse, this, bulletinEditorShellController, cssName);
 			view = bulletinEditorShellController;
 		}
 		else

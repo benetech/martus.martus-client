@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import java.awt.Window;
+
 import javafx.application.Platform;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -60,9 +62,9 @@ public class FxRunner implements Runnable
 		shouldAbortImmediatelyOnError = true;
 	}
 
-	public static FxGenericStage createAndActivateEmbeddedStage(UiMainWindow observerToUse, FxShellController shellController, String cssName)
+	public static FxGenericStage createAndActivateEmbeddedStage(UiMainWindow observerToUse, Window windowToUse, FxShellController shellController, String cssName)
 	{
-		FxGenericStage stage = new FxGenericStage(observerToUse, shellController, cssName);
+		FxGenericStage stage = new FxGenericStage(observerToUse, windowToUse, shellController, cssName);
 		
 		FxRunner fxRunner = new FxRunner(stage);
 		fxRunner.setAbortImmediatelyOnError();
