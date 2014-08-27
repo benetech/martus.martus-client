@@ -25,41 +25,39 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextArea;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
 
-public class ConfirmEncryptedExportController extends FxController
+public class ConfirmUnencyptedXmlController extends FxController
 {
-	public ConfirmEncryptedExportController(UiMainWindow mainWindowToUse)
+	public ConfirmUnencyptedXmlController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
-	
-	public boolean shouldExportEncrypted()
-	{
-		return exportEncryptedCheckbox.isSelected();
-	}
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		exportEncryptedCheckbox.setSelected(true);
+		textMessageArea.setText(getMainWindow().getLocalization().getFieldLabel("ExportBulletinDetails"));
 	}
 
 	@Override
 	public String getFxmlLocation()
 	{
-		return "landing/bulletins/FxConfirmEncryptedExport.fxml";
+		return "landing/bulletins/FxConfirmUnencryptedExport.fxml";
 	}
 	
-	@FXML 
-	CheckBox exportEncryptedCheckbox;
+	@FXML
+	TextArea textMessageArea;
+	
+	@FXML
+	CheckBox includeAttachments;
 }
