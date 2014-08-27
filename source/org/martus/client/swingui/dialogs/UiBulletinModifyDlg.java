@@ -60,10 +60,8 @@ import org.martus.client.swingui.bulletincomponent.UiBulletinComponentInterface;
 import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.jfx.generic.FxRunner;
-import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.landing.bulletins.FxBulletinEditorShellController;
 import org.martus.client.swingui.jfx.landing.bulletins.FxBulletinEditorStage;
-import org.martus.client.swingui.jfx.landing.general.BulletinEditorHeaderStage;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
@@ -87,15 +85,15 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 		if(UiSession.isJavaFx)
 		{
-			FxShellController bulletinEditorShellController = new FxBulletinEditorShellController(observerToUse);
+			FxBulletinEditorShellController bulletinEditorShellController = new FxBulletinEditorShellController(observerToUse);
 
-			FxBulletinEditorStage bulletinEditorStage = new FxBulletinEditorStage(observerToUse);
+			bulletinEditorStage = new FxBulletinEditorStage(observerToUse);
 			bulletinEditorStage.setShellController(bulletinEditorShellController);
 			
 			FxRunner fxRunner = new FxRunner(bulletinEditorStage);
 			fxRunner.setAbortImmediatelyOnError();
 			Platform.runLater(fxRunner);
-			view = bulletinEditorStage;
+			view = bulletinEditorShellController;
 		}
 		else
 		{
@@ -112,7 +110,10 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 
-		addScrollerView();
+		if(UiSession.isJavaFx)
+			getContentPane().add(bulletinEditorStage, BorderLayout.CENTER);
+		else
+			addScrollerView();
 
 		Box box = Box.createHorizontalBox();
 		Component buttons[] = {send, draft, cancel, Box.createHorizontalGlue()};
@@ -209,8 +210,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		scroller.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(scroller, BorderLayout.CENTER);
-		if(headerStage != null)
-			getContentPane().add(headerStage, BorderLayout.BEFORE_FIRST_LINE);
 		getContentPane().invalidate();
 		getContentPane().doLayout();
 	}
@@ -420,8 +419,8 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 	private UiBulletinComponentInterface view;
 	private UiScrollPane scroller;
-	private BulletinEditorHeaderStage headerStage;
-
+	private FxBulletinEditorStage bulletinEditorStage;
+	
 	private JButton send;
 	private JButton draft;
 	private JButton cancel;
