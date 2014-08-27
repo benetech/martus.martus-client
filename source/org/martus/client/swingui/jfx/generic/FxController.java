@@ -219,8 +219,7 @@ abstract public class FxController implements Initializable
 
 	public void logAndNotifyUnexpectedError(Exception e)
 	{
-		MartusLogger.logException(e);
-		showNotifyDialog("UnexpectedError");
+		getStage().logAndNotifyUnexpectedError(e);
 	}
 	
 	public void showBusyDialog(String message, Task task, FxInSwingStage wizardPanel) throws Exception
