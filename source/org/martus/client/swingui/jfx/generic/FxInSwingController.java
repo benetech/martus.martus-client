@@ -54,11 +54,6 @@ public abstract class FxInSwingController extends FxController
 		glassPaneInstaller.installGlassPane(glassPane);
 	}
 
-	public void logAndNotifyUnexpectedError(Exception e)
-	{
-		getStage().logAndNotifyUnexpectedError(e);
-	}
-
 	public void unexpectedError(Exception e)
 	{
 		MartusLogger.logException(e);
