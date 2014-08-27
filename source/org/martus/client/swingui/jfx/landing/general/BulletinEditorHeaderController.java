@@ -37,9 +37,9 @@ import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 
-public class BulletinEditorHeaderShellController extends FxController
+public class BulletinEditorHeaderController extends FxController
 {
-	public BulletinEditorHeaderShellController(UiMainWindow mainWindowToUse)
+	public BulletinEditorHeaderController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
