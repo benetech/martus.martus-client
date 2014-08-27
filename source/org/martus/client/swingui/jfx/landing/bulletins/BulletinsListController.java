@@ -295,8 +295,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	private void exportSingleBulletin(UniversalId[] bulletinsIDsToExport)throws Exception
 	{
 		ConfirmEncryptedExportController exportController = new ConfirmEncryptedExportController(getMainWindow());
-		showControllerInsideModalDialog(exportController);
-		if(exportController.shouldExport())
+		if(showModalYesNoDialog("EncryptBulletin", "export", "cancel", exportController))
 		{
 			if(exportController.shouldExportEncrypted())
 				exportEncryptedMbaBulletin(bulletinsIDsToExport[0]);
