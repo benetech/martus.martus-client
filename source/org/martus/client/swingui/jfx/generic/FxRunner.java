@@ -25,6 +25,10 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import javafx.application.Platform;
+
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.landing.bulletins.FxGenericStage;
 import org.martus.common.MartusLogger;
 
 public class FxRunner implements Runnable
@@ -54,6 +58,17 @@ public class FxRunner implements Runnable
 	public void setAbortImmediatelyOnError()
 	{
 		shouldAbortImmediatelyOnError = true;
+	}
+
+	public static FxGenericStage createAndActivateEmbeddedStage(UiMainWindow observerToUse, FxShellController shellController, String cssName)
+	{
+		FxGenericStage stage = new FxGenericStage(observerToUse, shellController, cssName);
+		
+		FxRunner fxRunner = new FxRunner(stage);
+		fxRunner.setAbortImmediatelyOnError();
+		Platform.runLater(fxRunner);
+		
+		return stage;
 	}
 
 	private FxInSwingStage stage;
