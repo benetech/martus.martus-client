@@ -237,10 +237,10 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		return "landing/bulletins/FxTableViewItems.fxml";
 	}
 	
-	private Vector getSelectedBulletinIds()
+	private Vector<UniversalId> getSelectedBulletinIds()
 	{
 		ObservableList<BulletinTableRowData> selectedItems = itemsTable.getSelectionModel().getSelectedItems();
-		Vector selectedIds = new Vector(selectedItems.size());
+		Vector<UniversalId> selectedIds = new Vector(selectedItems.size());
 		for (BulletinTableRowData bulletinTableRowData : selectedItems)
 		{
 			selectedIds.add(bulletinTableRowData.getUniversalId());
