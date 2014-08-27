@@ -34,10 +34,10 @@ import javafx.fxml.FXML;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
+import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
-import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 
-public class BulletinEditorHeaderShellController extends FxNonWizardShellController
+public class BulletinEditorHeaderShellController extends FxController
 {
 	public BulletinEditorHeaderShellController(UiMainWindow mainWindowToUse)
 	{
@@ -67,7 +67,7 @@ public class BulletinEditorHeaderShellController extends FxNonWizardShellControl
 		}
 		catch (Exception e)
 		{
-			unexpectedError(e);
+			logAndNotifyUnexpectedError(e);
 		}
 	}
 }
