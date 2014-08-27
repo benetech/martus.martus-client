@@ -195,16 +195,22 @@ abstract public class FxController implements Initializable
 	{
 		try
 		{
-			PopupConfirmationController popupController = new PopupConfirmationController(getMainWindow(), title, message);
+			PopupSimpleConfirmationController messageController = new PopupSimpleConfirmationController(getMainWindow(), message);
+			PopupConfirmationController popupController = new PopupConfirmationController(getMainWindow(), title, messageController);
 			showControllerInsideModalDialog(popupController);
 			return popupController.wasYesPressed();
 		} 
 		catch (Exception e)
 		{
-			MartusLogger.logException(e);
-			showNotifyDialog("UnexpectedError");
+			logAndNotifyUnexpectedError(e);
 		}
 		return false;
+	}
+
+	public void logAndNotifyUnexpectedError(Exception e)
+	{
+		MartusLogger.logException(e);
+		showNotifyDialog("UnexpectedError");
 	}
 	
 	public void showBusyDialog(String message, Task task, FxInSwingStage wizardPanel) throws Exception
