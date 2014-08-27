@@ -28,9 +28,9 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingFrameStage;
 
-public class FxBulletinEditorStage extends FxInSwingFrameStage
+public class FxGenericStage extends FxInSwingFrameStage
 {
-	public FxBulletinEditorStage(UiMainWindow mainWindowToUse)
+	public FxGenericStage(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 
