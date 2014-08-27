@@ -89,7 +89,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			FxBulletinEditorShellController bulletinEditorShellController = new FxBulletinEditorShellController(observerToUse);
 
 			String cssName = "Bulletin.css";
-			activateEmbeddedShellController(observerToUse, bulletinEditorShellController, cssName);
+			bulletinEditorStage = activateEmbeddedShellController(observerToUse, bulletinEditorShellController, cssName);
 			view = bulletinEditorShellController;
 		}
 		else
@@ -147,13 +147,15 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		currentTemplateNameProperty.addListener(new TemplateChangeHandler(observerToUse));
 	}
 
-	public void activateEmbeddedShellController(UiMainWindow observerToUse, FxShellController shellController, String cssName)
+	public static FxGenericStage activateEmbeddedShellController(UiMainWindow observerToUse, FxShellController shellController, String cssName)
 	{
-		bulletinEditorStage = new FxGenericStage(observerToUse, shellController, cssName);
+		FxGenericStage stage = new FxGenericStage(observerToUse, shellController, cssName);
 		
-		FxRunner fxRunner = new FxRunner(bulletinEditorStage);
+		FxRunner fxRunner = new FxRunner(stage);
 		fxRunner.setAbortImmediatelyOnError();
 		Platform.runLater(fxRunner);
+		
+		return stage;
 	}
 
 	class TemplateChangeHandler implements ChangeListener<String>
