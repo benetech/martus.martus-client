@@ -33,9 +33,9 @@ import javafx.scene.control.TextArea;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public class PopupSimpleConfirmationController extends FxController
+public class FxTextPaneController extends FxController
 {
-	public PopupSimpleConfirmationController(UiMainWindow mainWindowToUse, String message)
+	public FxTextPaneController(UiMainWindow mainWindowToUse, String message)
 	{
 		super(mainWindowToUse);
 		this.message = message;
@@ -44,7 +44,7 @@ public class PopupSimpleConfirmationController extends FxController
 	@Override
 	public String getFxmlLocation()
 	{
-		return "generic/PopupSimpleConfirmation.fxml";
+		return "generic/FxTextPane.fxml";
 	}
 
 	@Override

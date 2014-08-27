@@ -193,7 +193,7 @@ abstract public class FxController implements Initializable
 	
 	public boolean showConfirmationDialog(String title, String message)
 	{
-		FxController mainAreaController = new PopupSimpleConfirmationController(getMainWindow(), message);
+		FxController mainAreaController = new FxTextPaneController(getMainWindow(), message);
 		return showModalYesNoDialog(title, mainAreaController);
 	}
 
