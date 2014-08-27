@@ -60,6 +60,8 @@ import org.martus.client.swingui.bulletincomponent.UiBulletinComponentInterface;
 import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.jfx.generic.FxRunner;
+import org.martus.client.swingui.jfx.generic.FxShellController;
+import org.martus.client.swingui.jfx.landing.bulletins.FxBulletinEditorShellController;
 import org.martus.client.swingui.jfx.landing.bulletins.FxBulletinEditorStage;
 import org.martus.client.swingui.jfx.landing.general.BulletinEditorHeaderStage;
 import org.martus.clientside.UiLocalization;
@@ -85,7 +87,11 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 		if(UiSession.isJavaFx)
 		{
+			FxShellController bulletinEditorShellController = new FxBulletinEditorShellController(observerToUse);
+
 			FxBulletinEditorStage bulletinEditorStage = new FxBulletinEditorStage(observerToUse);
+			bulletinEditorStage.setShellController(bulletinEditorShellController);
+			
 			FxRunner fxRunner = new FxRunner(bulletinEditorStage);
 			fxRunner.setAbortImmediatelyOnError();
 			Platform.runLater(fxRunner);
