@@ -25,21 +25,21 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import java.awt.Window;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingFrameStage;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 
 public class FxGenericStage extends FxInSwingFrameStage
 {
-	public FxGenericStage(UiMainWindow mainWindowToUse, FxShellController shellController, String cssNameToUse)
+	public FxGenericStage(UiMainWindow mainWindowToUse, Window windowToUse, FxShellController shellController, String cssNameToUse)
 	{
 		super(mainWindowToUse);
 	
+		setWindow(windowToUse);
 		cssName = cssNameToUse;
 		setShellController(shellController);
-
-		// TODO: The setWindow mechanism needs to be re-evaluated
-		setWindow(mainWindowToUse);
 	}
 
 	@Override
