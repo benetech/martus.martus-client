@@ -44,6 +44,7 @@ import javafx.stage.Stage;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.generic.data.MartusResourceBundle;
 import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractAppTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.TaskWithTimeout;
@@ -275,6 +276,11 @@ abstract public class FxController implements Initializable
 		Parent createContents = embeddedContentController.createContents();
 		destinationPane.getChildren().addAll(createContents);
 		embeddedContentController.setShellController(getShellController());
+	}
+
+	protected void doAction(ActionDoer doer)
+	{
+		getStage().doAction(doer);
 	}
 
 	public boolean isDoubleClick(MouseEvent mouseEvent)

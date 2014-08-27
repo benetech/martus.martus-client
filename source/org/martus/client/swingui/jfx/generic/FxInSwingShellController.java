@@ -30,7 +30,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionDoer;
 
 public abstract class FxInSwingShellController extends FxInSwingController implements FxShellController
 {
@@ -59,11 +58,6 @@ public abstract class FxInSwingShellController extends FxInSwingController imple
 	public Window getWindow()
 	{
 		return getSwingStage().getWindow();
-	}
-
-	protected void doAction(ActionDoer doer)
-	{
-		getStage().doAction(doer);
 	}
 
 	protected void close()
