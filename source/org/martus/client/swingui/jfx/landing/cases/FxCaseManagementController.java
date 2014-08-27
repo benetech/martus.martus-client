@@ -51,9 +51,11 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
 import org.martus.client.swingui.jfx.generic.DialogWithOkCancelShellController;
+import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.jfx.landing.FolderSelectionListener;
 import org.martus.client.swingui.jfx.landing.cases.FxFolderDeleteController.FolderDeletedListener;
+import org.martus.client.swingui.jfx.landing.general.SelectTemplateController;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxCaseManagementController extends AbstractFxLandingContentController
@@ -342,7 +344,16 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	@FXML
 	public void onManageTemplates(ActionEvent event)
 	{
-		System.out.println("onManageTemplates");
+		try
+		{
+			FxInSwingController controller = new SelectTemplateController(getMainWindow());
+			ActionDoer shellController = new DialogWithCloseShellController(getMainWindow(), controller);
+			doAction(shellController);
+		}
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
 	}
 	
 	class FolderDeletedHandler implements FolderDeletedListener
