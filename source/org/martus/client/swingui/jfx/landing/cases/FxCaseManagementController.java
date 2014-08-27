@@ -55,7 +55,7 @@ import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.jfx.landing.FolderSelectionListener;
 import org.martus.client.swingui.jfx.landing.cases.FxFolderDeleteController.FolderDeletedListener;
-import org.martus.client.swingui.jfx.landing.general.SelectTemplateController;
+import org.martus.client.swingui.jfx.landing.general.ManageTemplatesController;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxCaseManagementController extends AbstractFxLandingContentController
@@ -346,7 +346,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	{
 		try
 		{
-			FxController controller = new SelectTemplateController(getMainWindow());
+			FxController controller = new ManageTemplatesController(getMainWindow());
 			ActionDoer shellController = new DialogWithCloseShellController(getMainWindow(), controller);
 			doAction(shellController);
 		}
