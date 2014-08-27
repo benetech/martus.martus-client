@@ -60,6 +60,7 @@ import org.martus.client.swingui.bulletincomponent.UiBulletinComponentInterface;
 import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.jfx.generic.FxRunner;
+import org.martus.client.swingui.jfx.landing.bulletins.FxBulletinEditorStage;
 import org.martus.client.swingui.jfx.landing.general.BulletinEditorHeaderStage;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusLogger;
@@ -82,7 +83,18 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		UiMainWindow.updateIcon(this);
 		bulletin = b;
 
-		view = new UiBulletinEditor(observer);
+		if(UiSession.isJavaFx)
+		{
+			FxBulletinEditorStage bulletinEditorStage = new FxBulletinEditorStage(observerToUse);
+			FxRunner fxRunner = new FxRunner(bulletinEditorStage);
+			fxRunner.setAbortImmediatelyOnError();
+			Platform.runLater(fxRunner);
+			view = bulletinEditorStage;
+		}
+		else
+		{
+			view = new UiBulletinEditor(observer);
+		}
 		view.copyDataFromBulletin(bulletin);
 
 		view.setLanguageChangeListener(this);
@@ -93,14 +105,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		draft.addActionListener(this);
 		cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
-
-		if(UiSession.isJavaFx)
-		{
-			headerStage = new BulletinEditorHeaderStage(this, view);
-			FxRunner fxRunner = new FxRunner(headerStage);
-			fxRunner.setAbortImmediatelyOnError();
-			Platform.runLater(fxRunner);
-		}
 
 		addScrollerView();
 
