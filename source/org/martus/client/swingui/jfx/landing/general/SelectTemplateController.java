@@ -225,10 +225,11 @@ public class SelectTemplateController extends FxInSwingController
 	@FXML
 	private void onImportFromFile(ActionEvent event)
 	{
+		//FIXME: This Dialog can be hidden behind
 		FileChooser fileChooser = new FileChooser();
 		File martusRootDir = getApp().getMartusDataRootDirectory();
 		fileChooser.setInitialDirectory(martusRootDir);
-		fileChooser.setTitle(getLocalization().getWindowTitle("FileDialogSaveKeyPair"));
+		fileChooser.setTitle(getLocalization().getWindowTitle("FileDialogImportCustomization"));
 		MCTFileFilter templateFileFilter = new MCTFileFilter(getLocalization());
 		fileChooser.getExtensionFilters().addAll(
 				new FileChooser.ExtensionFilter(templateFileFilter.getDescription(), templateFileFilter.getWildCardExtension()),
