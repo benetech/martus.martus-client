@@ -68,6 +68,6 @@ abstract public class BaseExportController extends FxController
 		return templateFile;
 	}
 
-	protected String initialFileExportName;
+	private String initialFileExportName;
 
 }
