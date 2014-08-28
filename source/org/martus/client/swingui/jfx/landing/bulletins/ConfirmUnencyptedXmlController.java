@@ -50,7 +50,10 @@ public class ConfirmUnencyptedXmlController extends BaseExportController
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		fileLocation.setText(getInitialFileAbsolutePath());
+		String initialFileExportPath = getInitialFileAbsolutePath();
+		if(overrideDefaultExportFile != null)
+			initialFileExportPath = overrideDefaultExportFile.getAbsolutePath();
+		fileLocation.setText(initialFileExportPath);
 	}
 
 	@Override
@@ -70,6 +73,11 @@ public class ConfirmUnencyptedXmlController extends BaseExportController
 			return;
 		fileLocation.setText(templateFile.getAbsolutePath());
 	}
+	
+	public void setInitialExportFile(File exportFile)
+	{
+		overrideDefaultExportFile = exportFile;
+	}
 
 	public boolean includeAttachments()
 	{
@@ -81,6 +89,11 @@ public class ConfirmUnencyptedXmlController extends BaseExportController
 		return false;
 	}
 	
+	File getExportFile()
+	{
+		return new File(fileLocation.getText());
+	}
+
 	@FXML
 	TextArea textMessageArea;
 	
@@ -89,4 +102,6 @@ public class ConfirmUnencyptedXmlController extends BaseExportController
 	
 	@FXML
 	TextField fileLocation;
+	
+	private File overrideDefaultExportFile;
 }
