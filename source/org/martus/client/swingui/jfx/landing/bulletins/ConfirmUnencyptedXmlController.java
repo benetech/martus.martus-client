@@ -46,7 +46,6 @@ public class ConfirmUnencyptedXmlController extends FxController
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		textMessageArea.setText(getMainWindow().getLocalization().getFieldLabel("ExportBulletinDetails"));
 	}
 
 	@Override
