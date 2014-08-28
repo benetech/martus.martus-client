@@ -45,18 +45,18 @@ import org.martus.common.fieldspec.FormTemplate;
 
 public class ConfirmUnencyptedXmlController extends FxController
 {
-	public ConfirmUnencyptedXmlController(UiMainWindow mainWindowToUse, String initialFileExportLocation)
+	public ConfirmUnencyptedXmlController(UiMainWindow mainWindowToUse, String initialFileExportName)
 	{
 		super(mainWindowToUse);
-		File fullPathOfInitialLocation = new File(getRootDirectory(), initialFileExportLocation);
-		this.initialFileExportLocation = fullPathOfInitialLocation.getAbsolutePath();
+		this.initialFileExportName = initialFileExportName;
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		fileLocation.setText(initialFileExportLocation);
+		File fullPathOfInitialLocation = new File(getRootDirectory(), initialFileExportName);
+		fileLocation.setText(fullPathOfInitialLocation.getAbsolutePath());
 	}
 
 	@Override
@@ -72,6 +72,7 @@ public class ConfirmUnencyptedXmlController extends FxController
 		FileChooser fileChooser = new FileChooser();
 		File martusRootDir = getRootDirectory();
 		fileChooser.setInitialDirectory(martusRootDir);
+		fileChooser.setInitialFileName(initialFileExportName);
 		fileChooser.setTitle(getLocalization().getWindowTitle("FileDialogExportBulletins"));
 		BulletinXmlFileFilter exportXmlFileFilter = new BulletinXmlFileFilter(getLocalization());
 		fileChooser.getExtensionFilters().addAll(
@@ -107,5 +108,5 @@ public class ConfirmUnencyptedXmlController extends FxController
 	@FXML
 	TextField fileLocation;
 	
-	private String initialFileExportLocation;
+	private String initialFileExportName;
 }
