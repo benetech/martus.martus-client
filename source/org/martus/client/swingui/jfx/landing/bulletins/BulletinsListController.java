@@ -49,6 +49,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 
 import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.core.MartusApp;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuExportBulletins;
@@ -317,7 +318,12 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	private void exportUnencryptedXmlBulletins(UniversalId[] bulletinsIdsToExport) throws Exception
 	{
-		ConfirmUnencyptedXmlController exportController = new ConfirmUnencyptedXmlController(getMainWindow());
+		String defaultFileName = getLocalization().getFieldLabel("ExportedBulletins");
+		if(bulletinsIdsToExport.length==1)
+			defaultFileName = getMainWindow().getStore().getBulletinRevision(bulletinsIdsToExport[0]).toFileName();
+		defaultFileName += MartusApp.MARTUS_IMPORT_EXPORT_EXTENSION;
+			
+		ConfirmUnencyptedXmlController exportController = new ConfirmUnencyptedXmlController(getMainWindow(), defaultFileName);
 		if(showModalYesNoDialog("ExportUnencryptedXMLBulletins", "export", "cancel", exportController))
 		{
 			doAction(new ActionMenuExportBulletins(getMainWindow(), bulletinsIdsToExport));
