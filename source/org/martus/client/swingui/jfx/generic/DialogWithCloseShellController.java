@@ -43,7 +43,7 @@ public class DialogWithCloseShellController extends DialogShellController implem
 		UiMainWindow mainWindow = getMainWindow();
 		try
 		{
-			FxModalDialog.createAndShow(mainWindow, new DialogWithCloseStage(mainWindow, this));
+			FxModalDialog.createAndShow(mainWindow, new DialogStage(mainWindow, this));
 		} 
 		catch (Exception e)
 		{
