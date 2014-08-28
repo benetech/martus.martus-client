@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,16 +34,22 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
+import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.clientside.FormatFilter;
+import org.martus.common.fieldspec.FormTemplate;
 
 public class ConfirmUnencyptedXmlController extends FxController
 {
 	public ConfirmUnencyptedXmlController(UiMainWindow mainWindowToUse, String initialFileExportLocation)
 	{
 		super(mainWindowToUse);
-		this.initialFileExportLocation = initialFileExportLocation;
+		File fullPathOfInitialLocation = new File(getRootDirectory(), initialFileExportLocation);
+		this.initialFileExportLocation = fullPathOfInitialLocation.getAbsolutePath();
 	}
 
 	@Override
@@ -61,7 +68,24 @@ public class ConfirmUnencyptedXmlController extends FxController
 	@FXML
 	public void onChangeFileLocation(ActionEvent event)
 	{
-		
+		//FIXME: This dialog can be hidden behind
+		FileChooser fileChooser = new FileChooser();
+		File martusRootDir = getRootDirectory();
+		fileChooser.setInitialDirectory(martusRootDir);
+		fileChooser.setTitle(getLocalization().getWindowTitle("FileDialogExportBulletins"));
+		BulletinXmlFileFilter exportXmlFileFilter = new BulletinXmlFileFilter(getLocalization());
+		fileChooser.getExtensionFilters().addAll(
+				new FileChooser.ExtensionFilter(exportXmlFileFilter.getDescription(), exportXmlFileFilter.getWildCardExtension()),
+				new FileChooser.ExtensionFilter(getLocalization().getFieldLabel("AllFiles"), "*.*"));
+		File templateFile = fileChooser.showSaveDialog(null);
+		if(templateFile == null)
+			return;
+		fileLocation.setText(templateFile.getAbsolutePath());
+	}
+
+	private File getRootDirectory()
+	{
+		return getApp().getMartusDataRootDirectory();
 	}
 	
 	public boolean includeAttachments()

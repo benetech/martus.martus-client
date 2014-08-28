@@ -86,6 +86,7 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 			return;
 		}
 
+		//FIXME: This dialog can be hidden behind
 		FileChooser fileChooser = new FileChooser();
 		File martusRootDir = getApp().getMartusDataRootDirectory();
 		fileChooser.setInitialDirectory(martusRootDir);

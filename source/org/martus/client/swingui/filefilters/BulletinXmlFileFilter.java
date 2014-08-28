@@ -36,6 +36,11 @@ public class BulletinXmlFileFilter extends FormatFilter
 		description = localization.getFieldLabel("BulletinXmlFileFilter"); 
 	}
 	
+	public String getWildCardExtension()
+	{
+		return "*" + getExtension();
+	}
+
 	@Override
 	public String getExtension()
 	{
