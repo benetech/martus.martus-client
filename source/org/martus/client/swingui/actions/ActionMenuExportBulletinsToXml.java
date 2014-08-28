@@ -27,47 +27,48 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.util.Vector;
 
+import org.martus.client.bulletinstore.ExportBulletins;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.dialogs.UiExportBulletinsDlg;
-import org.martus.common.bulletin.Bulletin;
+import org.martus.common.packet.UniversalId;
 
-public class ActionMenuExportBulletins extends UiMenuAction
+public class ActionMenuExportBulletinsToXml extends UiMenuAction implements ActionDoer
 {
-	public ActionMenuExportBulletins(UiMainWindow mainWindowToUse)
+	public ActionMenuExportBulletinsToXml(UiMainWindow mainWindowToUse, UniversalId[] bulletinsIdsToUse, File exportFileToUse, boolean includeAttachmentsToUse)
 	{
 		super(mainWindowToUse, "ExportBulletins");
+		bulletinIdsToExport = bulletinsIdsToUse;
+		exportFile = exportFileToUse;
+		includeAttachments = includeAttachmentsToUse;
 	}
 
-	public void actionPerformed(ActionEvent ae)
+	@Override
+	public void actionPerformed(ActionEvent e)
 	{
-		doExportBulletins();
+		doAction();
 	}
-
-	public void doExportBulletins()
+	
+	@Override
+	public void doAction()
 	{
 		try
 		{
-			Vector bulletinsToExport = getMainWindow().getSelectedBulletins("ExportZeroBulletins");
-			if(bulletinsToExport == null)
-				return;
-			exportBulletins(bulletinsToExport);
+			exportBulletins(getMainWindow().getBulletins(bulletinIdsToExport));	
 		} 
 		catch (Exception e)
 		{
 			getMainWindow().unexpectedErrorDlg(e);
-		}	
+		}
 	}
-
+	
 	private void exportBulletins(Vector bulletinsToExport)
 	{
 		try
 		{
-			String defaultFileName = getLocalization().getFieldLabel("ExportedBulletins");
-			if(bulletinsToExport.size()==1)
-				defaultFileName = ((Bulletin)bulletinsToExport.get(0)).toFileName();
-			new UiExportBulletinsDlg(getMainWindow(), bulletinsToExport, defaultFileName);
+			ExportBulletins exporter = new ExportBulletins(mainWindow);
+			exporter.doExport(exportFile.getAbsoluteFile(), bulletinsToExport, ALWAYS_EXPORT_PRIVATE_DATA, includeAttachments, SHOULD_EXPORT_ALL_VERSIONS);
 		} 
 		catch (Exception e)
 		{
@@ -75,4 +76,9 @@ public class ActionMenuExportBulletins extends UiMenuAction
 		}
 	}
 
+	private final boolean ALWAYS_EXPORT_PRIVATE_DATA = true;
+	private final boolean SHOULD_EXPORT_ALL_VERSIONS = false;
+	private boolean includeAttachments;
+	private UniversalId[] bulletinIdsToExport;
+	private File exportFile;	
 }

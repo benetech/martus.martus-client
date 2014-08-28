@@ -84,11 +84,6 @@ public class ConfirmUnencyptedXmlController extends BaseExportController
 		return includeAttachments.isSelected();
 	}
 	
-	public boolean includeAllRevisions()
-	{
-		return false;
-	}
-	
 	File getExportFile()
 	{
 		return new File(fileLocation.getText());

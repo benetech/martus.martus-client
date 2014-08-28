@@ -53,7 +53,7 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionMenuExportBulletins;
+import org.martus.client.swingui.actions.ActionMenuExportBulletinsToXml;
 import org.martus.client.swingui.actions.ActionMenuExportMba;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
@@ -327,7 +327,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		exportController.setInitialExportFile(exportFile);
 		if(showModalYesNoDialog("ExportUnencryptedXMLBulletins", "export", "cancel", exportController))
 		{
-			doAction(new ActionMenuExportBulletins(getMainWindow(), bulletinsIdsToExport));
+			doAction(new ActionMenuExportBulletinsToXml(getMainWindow(), bulletinsIdsToExport, exportController.getExportFile(), exportController.includeAttachments()));
 		}
 	}
 
