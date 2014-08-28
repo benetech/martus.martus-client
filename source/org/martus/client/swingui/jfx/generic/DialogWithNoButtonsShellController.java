@@ -23,50 +23,31 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.landing.general;
+package org.martus.client.swingui.jfx.generic;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionDoer;
-import org.martus.client.swingui.jfx.generic.DialogWithNoButtonsShellController;
-import org.martus.client.swingui.jfx.generic.FxController;
 
-public class BulletinEditorHeaderController extends FxController
+public class DialogWithNoButtonsShellController extends DialogShellController
 {
-	public BulletinEditorHeaderController(UiMainWindow mainWindowToUse)
+	public DialogWithNoButtonsShellController(UiMainWindow mainWindowToUse, FxController contentController)
 	{
-		super(mainWindowToUse);
-	}
-	
-	@Override
-	public void initialize(URL location, ResourceBundle bundle)
-	{
-		super.initialize(location, bundle);
+		super(mainWindowToUse, contentController);
 	}
 
 	@Override
 	public String getFxmlLocation()
 	{
-		return "landing/general/BulletinEditorHeader.fxml";
+		return LOCATION_DIALOG_WITH_NO_BUTTONS_SHELL;
+	}
+	
+	@FXML
+	public void onCloseClicked()
+	{
+		close();
 	}
 
-	@FXML
-	private void onSelectTemplate(ActionEvent event) 
-	{
-		try
-		{
-			FxController controller = new SelectTemplateController(getMainWindow());
-			ActionDoer shellController = new DialogWithNoButtonsShellController(getMainWindow(), controller);
-			doAction(shellController);
-		}
-		catch (Exception e)
-		{
-			logAndNotifyUnexpectedError(e);
-		}
-	}
+	private static final String LOCATION_DIALOG_WITH_NO_BUTTONS_SHELL = "generic/DialogWithNoButtonsShell.fxml";
+
 }
