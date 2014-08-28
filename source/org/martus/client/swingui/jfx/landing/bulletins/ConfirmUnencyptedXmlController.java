@@ -95,13 +95,13 @@ public class ConfirmUnencyptedXmlController extends BaseExportController
 	}
 
 	@FXML
-	TextArea textMessageArea;
+	private TextArea textMessageArea;
 	
 	@FXML
-	CheckBox includeAttachments;
+	private CheckBox includeAttachments;
 	
 	@FXML
-	TextField fileLocation;
+	private TextField fileLocation;
 	
 	private File overrideDefaultExportFile;
 }

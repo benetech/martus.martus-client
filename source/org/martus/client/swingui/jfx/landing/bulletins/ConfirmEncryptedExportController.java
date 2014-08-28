@@ -82,9 +82,9 @@ public class ConfirmEncryptedExportController extends BaseExportController
 	}
 
 	@FXML 
-	CheckBox exportEncryptedCheckbox;
+	private CheckBox exportEncryptedCheckbox;
 	
 	@FXML
-	TextField fileLocation;
+	private TextField fileLocation;
 	
 }
