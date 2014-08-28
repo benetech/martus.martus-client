@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="284.0" prefWidth="614.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="284.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox prefHeight="65.0" prefWidth="431.0" BorderPane.alignment="CENTER">
          <children>
@@ -13,7 +13,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Location:" />
-                  <TextField fx:id="fileLocation" prefHeight="26.0" prefWidth="387.0" />
+                  <TextField fx:id="fileLocation" prefHeight="26.0" prefWidth="360.0" />
                   <Button mnemonicParsing="false" onAction="#onChangeFileLocation" text="Destination" />
                </children>
             </HBox>

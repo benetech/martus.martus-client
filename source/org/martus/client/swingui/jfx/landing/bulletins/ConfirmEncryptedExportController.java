@@ -26,20 +26,23 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.bulletins;
 
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
 
-public class ConfirmEncryptedExportController extends FxController
+public class ConfirmEncryptedExportController extends BaseExportController
 {
-	public ConfirmEncryptedExportController(UiMainWindow mainWindowToUse)
+	public ConfirmEncryptedExportController(UiMainWindow mainWindowToUse, String initialFileExportName)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, initialFileExportName);
 	}
 	
 	public boolean shouldExportEncrypted()
@@ -51,6 +54,7 @@ public class ConfirmEncryptedExportController extends FxController
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
+		fileLocation.setText(getInitialFileAbsolutePath());
 		exportEncryptedCheckbox.setSelected(true);
 	}
 
@@ -60,6 +64,22 @@ public class ConfirmEncryptedExportController extends FxController
 		return "landing/bulletins/FxConfirmEncryptedExport.fxml";
 	}
 	
+	@FXML
+	public void onChangeFileLocation(ActionEvent event)
+	{
+		String FileChooserTitle = "FileDialogExportBulletins";
+		MartusBulletinArchiveFileFilter fileFilter = new MartusBulletinArchiveFileFilter(getLocalization());
+		
+		File templateFile = getFileSaveLocation(FileChooserTitle, fileFilter);
+		if(templateFile == null)
+			return;
+		fileLocation.setText(templateFile.getAbsolutePath());
+	}
+
 	@FXML 
 	CheckBox exportEncryptedCheckbox;
+	
+	@FXML
+	TextField fileLocation;
+	
 }

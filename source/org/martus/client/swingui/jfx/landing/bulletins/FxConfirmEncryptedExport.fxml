@@ -4,11 +4,18 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="457.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <VBox prefHeight="65.0" prefWidth="431.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="74.0" prefWidth="562.0" BorderPane.alignment="CENTER">
          <children>
             <CheckBox fx:id="exportEncryptedCheckbox" mnemonicParsing="false" text="Export encrypted?" />
+            <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="558.0">
+               <children>
+                  <Label text="Location:" />
+                  <TextField fx:id="fileLocation" prefHeight="26.0" prefWidth="350.0" />
+                  <Button mnemonicParsing="false" onAction="#onChangeFileLocation" text="Destination" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </center>
