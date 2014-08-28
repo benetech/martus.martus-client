@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -284,7 +285,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 			}
 			else
 			{
-				exportUnencryptedXmlBulletins(bulletinsIDsToExport.toArray(new UniversalId[0]));
+				exportUnencryptedXmlBulletins(bulletinsIDsToExport.toArray(new UniversalId[0]), null);
 			}
 		} 
 		catch (Exception e)
@@ -299,10 +300,11 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		ConfirmEncryptedExportController exportController = new ConfirmEncryptedExportController(getMainWindow(), defaultFileName);
 		if(showModalYesNoDialog("ExportEncryptedMbaBulletin", "export", "cancel", exportController))
 		{
+			File exportFile = exportController.getExportFile();
 			if(exportController.shouldExportEncrypted())
-				exportEncryptedMbaBulletin(bulletinsIdsToExport[0]);
+				exportEncryptedMbaBulletin(bulletinsIdsToExport[0], exportFile);
 			else
-				exportUnencryptedXmlBulletins(bulletinsIdsToExport);
+				exportUnencryptedXmlBulletins(bulletinsIdsToExport, exportFile);
 		}
 	}	
 	
@@ -317,11 +319,12 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	{
 	}
 
-	private void exportUnencryptedXmlBulletins(UniversalId[] bulletinsIdsToExport) throws Exception
+	private void exportUnencryptedXmlBulletins(UniversalId[] bulletinsIdsToExport, File exportFile) throws Exception
 	{
 		String defaultFileName = getDefaultExportFileName(bulletinsIdsToExport);
 			
-		BaseExportController exportController = new ConfirmUnencyptedXmlController(getMainWindow(), defaultFileName);
+		ConfirmUnencyptedXmlController exportController = new ConfirmUnencyptedXmlController(getMainWindow(), defaultFileName);
+		exportController.setInitialExportFile(exportFile);
 		if(showModalYesNoDialog("ExportUnencryptedXMLBulletins", "export", "cancel", exportController))
 		{
 			doAction(new ActionMenuExportBulletins(getMainWindow(), bulletinsIdsToExport));
@@ -337,7 +340,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		return defaultFileName;
 	}
 
-	private void exportEncryptedMbaBulletin(UniversalId bulletinIdToExport)
+	private void exportEncryptedMbaBulletin(UniversalId bulletinIdToExport, File exportFile)
 	{
 		Bulletin bulletinToExport = getApp().getStore().getBulletinRevision(bulletinIdToExport);
 		doAction(new ActionMenuExportMba(getMainWindow(), bulletinToExport));

@@ -75,6 +75,11 @@ public class ConfirmEncryptedExportController extends BaseExportController
 			return;
 		fileLocation.setText(templateFile.getAbsolutePath());
 	}
+	
+	File getExportFile()
+	{
+		return new File(fileLocation.getText());
+	}
 
 	@FXML 
 	CheckBox exportEncryptedCheckbox;
