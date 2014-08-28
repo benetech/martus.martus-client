@@ -293,15 +293,16 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		}		
 	}
 
-	private void exportSingleBulletin(UniversalId[] bulletinsIDsToExport)throws Exception
+	private void exportSingleBulletin(UniversalId[] bulletinsIdsToExport)throws Exception
 	{
-		ConfirmEncryptedExportController exportController = new ConfirmEncryptedExportController(getMainWindow());
+		String defaultFileName = getDefaultExportFileName(bulletinsIdsToExport);
+		ConfirmEncryptedExportController exportController = new ConfirmEncryptedExportController(getMainWindow(), defaultFileName);
 		if(showModalYesNoDialog("ExportEncryptedMbaBulletin", "export", "cancel", exportController))
 		{
 			if(exportController.shouldExportEncrypted())
-				exportEncryptedMbaBulletin(bulletinsIDsToExport[0]);
+				exportEncryptedMbaBulletin(bulletinsIdsToExport[0]);
 			else
-				exportUnencryptedXmlBulletins(bulletinsIDsToExport);
+				exportUnencryptedXmlBulletins(bulletinsIdsToExport);
 		}
 	}	
 	
@@ -318,16 +319,22 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	private void exportUnencryptedXmlBulletins(UniversalId[] bulletinsIdsToExport) throws Exception
 	{
-		String defaultFileName = getLocalization().getFieldLabel("ExportedBulletins");
-		if(bulletinsIdsToExport.length==1)
-			defaultFileName = getMainWindow().getStore().getBulletinRevision(bulletinsIdsToExport[0]).toFileName();
-		defaultFileName += MartusApp.MARTUS_IMPORT_EXPORT_EXTENSION;
+		String defaultFileName = getDefaultExportFileName(bulletinsIdsToExport);
 			
-		ConfirmUnencyptedXmlController exportController = new ConfirmUnencyptedXmlController(getMainWindow(), defaultFileName);
+		BaseExportController exportController = new ConfirmUnencyptedXmlController(getMainWindow(), defaultFileName);
 		if(showModalYesNoDialog("ExportUnencryptedXMLBulletins", "export", "cancel", exportController))
 		{
 			doAction(new ActionMenuExportBulletins(getMainWindow(), bulletinsIdsToExport));
 		}
+	}
+
+	private String getDefaultExportFileName(UniversalId[] bulletinsIdsToExport)
+	{
+		String defaultFileName = getLocalization().getFieldLabel("ExportedBulletins");
+		if(bulletinsIdsToExport.length==1)
+			defaultFileName = getMainWindow().getStore().getBulletinRevision(bulletinsIdsToExport[0]).toFileName();
+		defaultFileName += MartusApp.MARTUS_IMPORT_EXPORT_EXTENSION;
+		return defaultFileName;
 	}
 
 	private void exportEncryptedMbaBulletin(UniversalId bulletinIdToExport)
