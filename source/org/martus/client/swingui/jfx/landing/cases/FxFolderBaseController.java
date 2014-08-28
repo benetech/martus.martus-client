@@ -98,7 +98,7 @@ public abstract class FxFolderBaseController extends DialogWithOkCancelContentCo
 		{
 			clearHintFolderErrorText();
 		}
-		getOkCancelStage().setOkButtonDisabled(isOkButtonDisabled);
+		getOkCancelShellController().setOkButtonDisabled(isOkButtonDisabled);
 	}
 
 

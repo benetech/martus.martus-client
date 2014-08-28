@@ -34,6 +34,7 @@ import javafx.scene.control.TextField;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.generic.DialogWithOkCancelShellController;
 
 public class FxFolderCreateController extends FxFolderBaseController
 {
@@ -56,7 +57,8 @@ public class FxFolderCreateController extends FxFolderBaseController
 		String defaultFolderNewName = localization.getFieldLabel("defaultCaseName");
 		folderName.textProperty().addListener(new FolderNameChangeListener());
 		folderName.setText(defaultFolderNewName);
-		getOkCancelStage().setOkButtonText(localization.getButtonLabel("CreateFolder"));
+		DialogWithOkCancelShellController shellController = getOkCancelShellController();
+		shellController.setOkButtonText(localization.getButtonLabel("CreateFolder"));
 	}
 
 	@Override

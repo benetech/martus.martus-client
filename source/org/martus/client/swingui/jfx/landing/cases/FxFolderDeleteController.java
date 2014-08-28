@@ -32,6 +32,7 @@ import javafx.scene.control.TextArea;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.generic.DialogWithOkCancelShellController;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 
@@ -65,7 +66,8 @@ public class FxFolderDeleteController extends FxFolderBaseController
 		{
 			logAndNotifyUnexpectedError(e);
 		}
-		getOkCancelStage().setOkButtonText(localization.getButtonLabel("DeleteFolder"));
+		DialogWithOkCancelShellController shellController = getOkCancelShellController();
+		shellController.setOkButtonText(localization.getButtonLabel("DeleteFolder"));
 	}
 
 	@Override
