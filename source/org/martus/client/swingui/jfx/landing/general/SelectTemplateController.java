@@ -110,6 +110,7 @@ public class SelectTemplateController extends FxInSwingController
 
 			ChoiceItem selected = availableTemplates.getSelectionModel().getSelectedItem();
 			getBulletinStore().setFormTemplate(selected.getCode());
+			getStage().close();
 		}
 		catch(Exception e)
 		{
