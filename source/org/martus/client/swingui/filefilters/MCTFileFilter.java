@@ -47,10 +47,5 @@ public class MCTFileFilter extends FormatFilter
 		return description;
 	}
 	
-	public String getWildCardExtension()
-	{
-		return "*" + getExtension();
-	}
-	
 	private String description;
 }
