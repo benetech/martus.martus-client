@@ -50,6 +50,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
+import org.martus.client.swingui.jfx.generic.DialogWithNoButtonsShellController;
 import org.martus.client.swingui.jfx.generic.DialogWithOkCancelShellController;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
@@ -347,7 +348,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		try
 		{
 			FxController controller = new ManageTemplatesController(getMainWindow());
-			ActionDoer shellController = new DialogWithCloseShellController(getMainWindow(), controller);
+			ActionDoer shellController = new DialogWithNoButtonsShellController(getMainWindow(), controller);
 			doAction(shellController);
 		}
 		catch (Exception e)
