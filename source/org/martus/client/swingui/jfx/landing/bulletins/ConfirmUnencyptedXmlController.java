@@ -28,30 +28,40 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
 
 public class ConfirmUnencyptedXmlController extends FxController
 {
-	public ConfirmUnencyptedXmlController(UiMainWindow mainWindowToUse)
+	public ConfirmUnencyptedXmlController(UiMainWindow mainWindowToUse, String initialFileExportLocation)
 	{
 		super(mainWindowToUse);
+		this.initialFileExportLocation = initialFileExportLocation;
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
+		fileLocation.setText(initialFileExportLocation);
 	}
 
 	@Override
 	public String getFxmlLocation()
 	{
 		return "landing/bulletins/FxConfirmUnencryptedExport.fxml";
+	}
+	
+	@FXML
+	public void onChangeFileLocation(ActionEvent event)
+	{
+		
 	}
 	
 	public boolean includeAttachments()
@@ -69,4 +79,9 @@ public class ConfirmUnencyptedXmlController extends FxController
 	
 	@FXML
 	CheckBox includeAttachments;
+	
+	@FXML
+	TextField fileLocation;
+	
+	private String initialFileExportLocation;
 }
