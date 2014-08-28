@@ -44,7 +44,7 @@ public class DialogWithOkCancelShellController extends DialogShellController imp
 		UiMainWindow mainWindow = getMainWindow();
 		try
 		{
-			FxModalDialog.createAndShow(mainWindow, new DialogWithOkCancelStage(mainWindow, this));
+			FxModalDialog.createAndShow(mainWindow, new DialogStage(mainWindow, this));
 		} 
 		catch (Exception e)
 		{
@@ -71,12 +71,12 @@ public class DialogWithOkCancelShellController extends DialogShellController imp
 		close();
 	}
 	
-	protected void setOkButtonText(String newText)
+	public void setOkButtonText(String newText)
 	{
 		ok.setText(newText);
 	}
 	
-	protected void setOkButtonSetDisabled(boolean isDisabled)
+	public void setOkButtonDisabled(boolean isDisabled)
 	{
 		ok.setDisable(isDisabled);
 	}

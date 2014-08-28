@@ -35,6 +35,7 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.generic.DialogWithOkCancelShellController;
 
 public class FxFolderRenameController extends FxFolderBaseController
 {
@@ -57,7 +58,8 @@ public class FxFolderRenameController extends FxFolderBaseController
 		updateCaseIncidentProjectTitle(messageTitle, "RenameCaseIncidentProject", foldersLabel);
 		folderName.textProperty().addListener(new FolderNameChangeListener());
 		folderName.setText(currentFolderName);
-		getOkCancelStage().setOkButtonText(localization.getButtonLabel("RenameFolder"));
+		DialogWithOkCancelShellController shellController = getOkCancelShellController();
+		shellController.setOkButtonText(localization.getButtonLabel("RenameFolder"));
 	}
 
 	@Override
