@@ -47,9 +47,8 @@ public class PopupConfirmationController extends FxPopupController implements In
 	@Override
 	public void initialize()
 	{
-		MartusLocalization localization = getLocalization();
-		fxYesButton.setText(localization.getButtonLabel(yesButtonLabel));
-		fxNoButton.setText(localization.getButtonLabel(noButtonLabel));
+		fxYesButton.setText(yesButtonLabel);
+		fxNoButton.setText(noButtonLabel);
 		try
 		{
 			loadControllerAndEmbedInPane(controllerForMainPane, mainPane);

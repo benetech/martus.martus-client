@@ -66,9 +66,8 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 			showTimeoutDialog(connectingToServerMsg, task);
 			if(!task.isAvailable())
 			{
-				String serverNotRespondingSaveConfigurationTitle = localization.getWindowTitle("ServerNotRespondingSaveConfiguration");
 				String serverNotRespondingSaveConfigurationMessage = localization.getFieldLabel("ServerNotRespondingSaveConfiguration");
-				if(showConfirmationDialog(serverNotRespondingSaveConfigurationTitle, serverNotRespondingSaveConfigurationMessage))
+				if(showConfirmationDialog("ServerNotRespondingSaveConfiguration", serverNotRespondingSaveConfigurationMessage))
 				{
 					saveServerConfig(serverIPAddress, serverPublicKey, "");
 					return;
@@ -138,9 +137,8 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 	private boolean acceptCompliance(String newServerCompliance)
 	{
 		MartusLocalization localization = getLocalization();
-		String title = localization.getWindowTitle("ServerCompliance");
 		String complianceStatementMsg = String.format("%s\n\n%s", localization.getFieldLabel("ServerComplianceDescription"), newServerCompliance);
-		if(!showConfirmationDialog(title, complianceStatementMsg))
+		if(!showConfirmationDialog("ServerCompliance", complianceStatementMsg))
 		{
 			showNotifyDialog("UserRejectedServerCompliance");
 			return false;
