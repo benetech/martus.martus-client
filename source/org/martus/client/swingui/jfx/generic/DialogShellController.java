@@ -29,8 +29,9 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
 
-abstract public class DialogShellController extends FxShellWithSingleContentController 
+abstract public class DialogShellController extends FxShellWithSingleContentController implements ActionDoer 
 {
 	public DialogShellController(UiMainWindow mainWindowToUse, FxController contentController)
 	{
@@ -43,6 +44,20 @@ abstract public class DialogShellController extends FxShellWithSingleContentCont
 		return contentPane;
 	}
 	
+	@Override
+	public void doAction()
+	{
+		UiMainWindow mainWindow = getMainWindow();
+		try
+		{
+			FxModalDialog.createAndShow(mainWindow, new DialogStage(mainWindow, this));
+		} 
+		catch (Exception e)
+		{
+			mainWindow.unexpectedErrorDlg(e);
+		}
+	}
+
 	@FXML
 	Pane contentPane;
 }

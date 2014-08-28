@@ -29,27 +29,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionDoer;
 
-public class DialogWithOkCancelShellController extends DialogShellController implements ActionDoer
+public class DialogWithOkCancelShellController extends DialogShellController
 {
 	public DialogWithOkCancelShellController(UiMainWindow mainWindowToUse, FxController contentController)
 	{
 		super(mainWindowToUse, contentController);
-	}
-
-	@Override
-	public void doAction()
-	{
-		UiMainWindow mainWindow = getMainWindow();
-		try
-		{
-			FxModalDialog.createAndShow(mainWindow, new DialogStage(mainWindow, this));
-		} 
-		catch (Exception e)
-		{
-			mainWindow.unexpectedErrorDlg(e);
-		}
 	}
 
 	@Override
