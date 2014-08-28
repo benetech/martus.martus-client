@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="284.0" prefWidth="614.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox prefHeight="65.0" prefWidth="431.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextArea fx:id="textMessageArea" editable="false" prefHeight="267.0" prefWidth="614.0" wrapText="true" />
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <CheckBox fx:id="includeAttachments" mnemonicParsing="false" text="include attachments" BorderPane.alignment="CENTER_LEFT" />
+   </bottom>
+</BorderPane>
