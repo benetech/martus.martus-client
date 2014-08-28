@@ -54,6 +54,16 @@ public class ConfirmUnencyptedXmlController extends FxController
 		return "landing/bulletins/FxConfirmUnencryptedExport.fxml";
 	}
 	
+	public boolean includeAttachments()
+	{
+		return includeAttachments.isSelected();
+	}
+	
+	public boolean includeAllRevisions()
+	{
+		return false;
+	}
+	
 	@FXML
 	TextArea textMessageArea;
 	
