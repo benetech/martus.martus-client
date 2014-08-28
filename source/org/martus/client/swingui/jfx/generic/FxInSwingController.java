@@ -38,7 +38,6 @@ import javafx.stage.Stage;
 
 import org.martus.client.swingui.TranslucentWindowObscurer;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.MartusLogger;
 
 public abstract class FxInSwingController extends FxController
 {
@@ -54,12 +53,6 @@ public abstract class FxInSwingController extends FxController
 		glassPaneInstaller.installGlassPane(glassPane);
 	}
 
-	public void unexpectedError(Exception e)
-	{
-		MartusLogger.logException(e);
-		showNotifyDialog("UnexpectedError");
-	}
-	
 	protected void showModalPopupStage(Stage popupStage)
 	{
 		Runnable fronter = new Fronter(popupStage);
