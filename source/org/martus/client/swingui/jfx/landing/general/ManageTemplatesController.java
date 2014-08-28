@@ -256,6 +256,35 @@ public class ManageTemplatesController extends FxInSwingController
 	}
 
 	@FXML
+	private void onAdd(ActionEvent event)
+	{
+		try
+		{
+			FormTemplate templateToAdd = templateToAddProperty.getValue();
+			if(templateToAdd == null)
+			{
+				showNotifyDialog("NoTemplateSelectedToAdd");
+				return;
+			}
+			ObservableSet<String> existingTemplateTitles = getBulletinStore().getAvailableTemplates();
+			boolean doesTemplateExist = existingTemplateTitles.contains(templateToAdd.getTitle());
+			if(doesTemplateExist)
+			{
+				String title = getLocalization().getWindowTitle("AddTemplate");
+				String message = getLocalization().getFieldLabel("confirmTemplateAlreadyExistscause");
+				if(!showConfirmationDialog(title, message))
+					return;
+			}
+			getBulletinStore().saveNewFormTemplate(templateToAdd);
+			templateToAddProperty.setValue(null);
+		}
+		catch(Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
+
+	@FXML
 	private ListView<ChoiceItem> availableTemplates;
 	
 	@FXML
