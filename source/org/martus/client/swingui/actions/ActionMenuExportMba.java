@@ -34,19 +34,15 @@ import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
 import org.martus.clientside.FormatFilter;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinZipUtilities;
+import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 
-public class ActionMenuExportMba extends UiMenuAction implements ActionDoer
+public class ActionMenuExportMba extends UiMenuAction
 {
 	public ActionMenuExportMba(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse, "ExportMBA");
-	}
-	public ActionMenuExportMba(UiMainWindow mainWindowToUse, Bulletin bulletinToUse)
-	{
-		this(mainWindowToUse);
-		bulletinToExport = bulletinToUse;
 	}
 
 	public void actionPerformed(ActionEvent event)
@@ -78,27 +74,14 @@ public class ActionMenuExportMba extends UiMenuAction implements ActionDoer
 		File destination = getMainWindow().showFileSaveDialog("ExportMBA", defaultFilename, filter);
 		if(destination == null)
 			return;
-		exportBulletinToMba(bulletin, destination);
+		exportBulletinToMba(mainWindow, bulletin, destination);
 	}
 
-	private void exportBulletinToMba(Bulletin bulletin, File destination) throws Exception
+	static public void exportBulletinToMba(UiMainWindow windowToUse, Bulletin bulletin, File destination) throws Exception
 	{
-		ReadableDatabase db = mainWindow.getApp().getStore().getDatabase();
+		ReadableDatabase db = windowToUse.getApp().getStore().getDatabase();
 		DatabaseKey headerKey = DatabaseKey.createKey(bulletin.getUniversalId(), bulletin.getStatus()); 
-		BulletinZipUtilities.exportBulletinPacketsFromDatabaseToZipFile(db, headerKey, destination, mainWindow.getApp().getSecurity());
+		MartusCrypto security = windowToUse.getApp().getSecurity();
+		BulletinZipUtilities.exportBulletinPacketsFromDatabaseToZipFile(db, headerKey, destination, security);
 	}
-
-	@Override
-	public void doAction()
-	{
-		try
-		{
-			exportMbaBulletin(bulletinToExport);
-		} 
-		catch (Exception e)
-		{
-			mainWindow.unexpectedErrorDlg(e);
-		}
-	}
-	Bulletin bulletinToExport;
 }
