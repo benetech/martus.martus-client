@@ -26,7 +26,7 @@
 								</TableView>
 								<HBox alignment="CENTER_RIGHT" layoutX="6.0" layoutY="92.0" prefHeight="50.0" prefWidth="480.0">
 									<children>
-										<Button mnemonicParsing="false" text="OK">
+										<Button onAction="#onAvailableTabOkButton" mnemonicParsing="false" text="OK">
 										</Button>
 									</children>
 									<padding>

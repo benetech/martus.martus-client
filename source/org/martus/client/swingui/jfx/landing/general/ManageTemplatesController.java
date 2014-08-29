@@ -239,6 +239,12 @@ public class ManageTemplatesController extends FxInSwingController
 	}
 
 	@FXML
+	private void onAvailableTabOkButton(ActionEvent event)
+	{
+		getStage().close();
+	}
+	
+	@FXML
 	private void onAdd(ActionEvent event)
 	{
 		try
