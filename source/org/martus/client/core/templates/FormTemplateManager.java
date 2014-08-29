@@ -66,7 +66,7 @@ public class FormTemplateManager
 
 		templateNames = FXCollections.observableSet();
 		templateNames.addAll(loadTemplateNames());
-		currentTemplateName = new SimpleStringProperty(MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
+		currentTemplateName = new SimpleStringProperty(FormTemplate.MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
 		
 		try
 		{
@@ -107,7 +107,7 @@ public class FormTemplateManager
 	
 	public FormTemplate getTemplate(String title) throws Exception
 	{
-		if(title.equals(MARTUS_DEFAULT_FORM_TEMPLATE_NAME))
+		if(title.equals(FormTemplate.MARTUS_DEFAULT_FORM_TEMPLATE_NAME))
 			return createDefaultFormTemplate();
 		
 		return loadEncryptedTemplate(getTemplateFile(title));
@@ -115,7 +115,7 @@ public class FormTemplateManager
 
 	public FormTemplate getMartusDefaultTemplate() throws Exception
 	{
-		return getTemplate(MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
+		return getTemplate(FormTemplate.MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
 	}
 
 	public static FormTemplate createDefaultFormTemplate() throws Exception
@@ -140,7 +140,7 @@ public class FormTemplateManager
 	public Set<String> loadTemplateNames() throws Exception
 	{
 		HashSet<String> available = new HashSet<String>();
-		available.add(MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
+		available.add(FormTemplate.MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
 		
 		File[] emctFiles = directory.listFiles(file -> isEmctFile(file));
 		for (File file : emctFiles)
@@ -181,7 +181,7 @@ public class FormTemplateManager
 	public String getCurrentTemplateFilename()
 	{
 		String currentTemplateTitle = currentTemplateName.getValue();
-		if(currentTemplateTitle.equals(MARTUS_DEFAULT_FORM_TEMPLATE_NAME))
+		if(currentTemplateTitle.equals(FormTemplate.MARTUS_DEFAULT_FORM_TEMPLATE_NAME))
 			return "";
 		
 		return getTemplateFile(currentTemplateTitle).getName();
@@ -199,8 +199,8 @@ public class FormTemplateManager
 		EnhancedJsonObject json = new EnhancedJsonObject(jsonAsText);
 		String savedCurrentTemplateFilename = json.optString(JSON_CURRENT_TEMPLATE_FILENAME);
 
-		setCurrentFormTemplate(MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
-		if(savedCurrentTemplateFilename.equals(MARTUS_DEFAULT_FORM_TEMPLATE_NAME))
+		setCurrentFormTemplate(FormTemplate.MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
+		if(savedCurrentTemplateFilename.equals(FormTemplate.MARTUS_DEFAULT_FORM_TEMPLATE_NAME))
 			return;
 		
 		File templateFile = new File(directory, savedCurrentTemplateFilename);
@@ -271,8 +271,6 @@ public class FormTemplateManager
 			super(message);
 		}
 	}
-
-	public static final String MARTUS_DEFAULT_FORM_TEMPLATE_NAME = "";
 
 	private static final String CURRENT_STATUS_FILENAME = "Status.dat";
 	private static final String JSON_CURRENT_TEMPLATE_FILENAME = "CurrentTemplateFilename";

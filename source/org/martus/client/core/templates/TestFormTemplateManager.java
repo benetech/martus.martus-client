@@ -83,7 +83,7 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 			Set<String> names = manager.getAvailableTemplateNames();
 			assertEquals(1, names.size());
 			String onlyTemplateName = names.iterator().next();
-			assertEquals(FormTemplateManager.MARTUS_DEFAULT_FORM_TEMPLATE_NAME, onlyTemplateName);
+			assertEquals(FormTemplate.MARTUS_DEFAULT_FORM_TEMPLATE_NAME, onlyTemplateName);
 			
 		}
 		finally
