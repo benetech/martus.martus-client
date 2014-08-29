@@ -25,8 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
-import javafx.fxml.FXML;
-
 import org.martus.client.swingui.UiMainWindow;
 
 public class DialogWithNoButtonsShellController extends DialogShellController
@@ -42,12 +40,5 @@ public class DialogWithNoButtonsShellController extends DialogShellController
 		return LOCATION_DIALOG_WITH_NO_BUTTONS_SHELL;
 	}
 	
-	@FXML
-	public void onCloseClicked()
-	{
-		close();
-	}
-
 	private static final String LOCATION_DIALOG_WITH_NO_BUTTONS_SHELL = "generic/DialogWithNoButtonsShell.fxml";
-
 }
