@@ -78,9 +78,14 @@ public class ManageTemplatesController extends FxInSwingController
 	private void initializeAvailableTab()
 	{
 		templateNameColumn.setEditable(false);
-        templateNameColumn.setCellValueFactory(new PropertyValueFactory<Object,String>(ManageTemplatesTableRowData.LOCALIZED_TEMPLATE_NAME));
+        templateNameColumn.setCellValueFactory(new PropertyValueFactory<ManageTemplatesTableRowData,String>(ManageTemplatesTableRowData.LOCALIZED_TEMPLATE_NAME));
+		Comparator<String> sorter = new SaneCollator(getLocalization().getCurrentLanguageCode());
+        templateNameColumn.setComparator(sorter);
 
         populateAvailableTemplatesTable();
+
+        availableTemplatesTable.getSortOrder().clear();
+		availableTemplatesTable.getSortOrder().add(templateNameColumn);
 	}
 
 	private void populateAvailableTemplatesTable()
@@ -89,8 +94,6 @@ public class ManageTemplatesController extends FxInSwingController
 		ObservableSet<String> templateNamesSet = store.getAvailableTemplates();
 		ObservableList<ManageTemplatesTableRowData> templateRows = FXCollections.observableArrayList();
 		templateNamesSet.forEach(name -> templateRows.add(new ManageTemplatesTableRowData(name, getLocalization())));
-		Comparator<ManageTemplatesTableRowData> sorter = new SaneCollator(getLocalization().getCurrentLanguageCode());
-		templateRows.sort(sorter);
 
 		availableTemplatesTable.setItems(templateRows);
 	}
@@ -279,7 +282,7 @@ public class ManageTemplatesController extends FxInSwingController
 	private TableView<ManageTemplatesTableRowData> availableTemplatesTable;
 	
 	@FXML
-	protected TableColumn<Object, String> templateNameColumn;
+	protected TableColumn<ManageTemplatesTableRowData, String> templateNameColumn;
 
 	@FXML
 	private RadioButton genericRadioButton;
