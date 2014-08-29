@@ -27,7 +27,6 @@ package org.martus.client.swingui.jfx.landing.general;
 
 import java.io.File;
 import java.net.URL;
-import java.util.Comparator;
 import java.util.ResourceBundle;
 
 import javafx.beans.binding.Bindings;
@@ -35,26 +34,26 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.templates.FormTemplateManager;
 import org.martus.client.core.templates.GenericFormTemplates;
-import org.martus.client.search.SaneCollator;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.jfx.common.AbstractFxImportFormTemplateController;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
-import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
 import org.martus.common.MartusLogger;
-import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FormTemplate;
 
 public class ManageTemplatesController extends FxInSwingController
@@ -76,12 +75,12 @@ public class ManageTemplatesController extends FxInSwingController
 	private void initializeAvailableTab()
 	{
 		ClientBulletinStore store = getBulletinStore();
-		ObservableSet<String> templateNames = store.getAvailableTemplates();
-		ObservableChoiceItemList templateChoiceItems = new ObservableChoiceItemList();
-		templateNames.forEach(name -> templateChoiceItems.add(createTemplateChoiceItem(name)));
-		Comparator<ChoiceItem> sorter = new SaneCollator(getLocalization().getCurrentLanguageCode());
-		templateChoiceItems.sort(sorter);
-//		availableTemplates.setItems(templateChoiceItems);
+		ObservableSet<String> templateNamesSet = store.getAvailableTemplates();
+		ObservableList<String> templateNames = FXCollections.observableArrayList();
+		templateNamesSet.forEach(name -> templateNames.add(getDisplayableTemplateName(name)));
+//		Comparator<ChoiceItem> sorter = new SaneCollator(getLocalization().getCurrentLanguageCode());
+//		templateNames.sort(sorter);
+		availableTemplates.setItems(templateNames);
 	}
 	
 	private void initializeAddTab()
@@ -148,13 +147,12 @@ public class ManageTemplatesController extends FxInSwingController
 		return getApp().getStore();
 	}
 	
-	private ChoiceItem createTemplateChoiceItem(String name)
+	private String getDisplayableTemplateName(String rawName)
 	{
-		String displayableName = name;
+		String displayableName = rawName;
 		if(displayableName.equals(FormTemplateManager.MARTUS_DEFAULT_FORM_TEMPLATE_NAME))
 			displayableName = getLocalization().getFieldLabel("DisplayableDefaultFormTemplateName");
-		ChoiceItem choiceItem = new ChoiceItem(name, displayableName);
-		return choiceItem;
+		return displayableName;
 	}
 
 	private void logTemplateToBeAdded()
@@ -273,6 +271,9 @@ public class ManageTemplatesController extends FxInSwingController
 		}
 	}
 
+	@FXML
+	private TableView<String> availableTemplates;
+	
 	@FXML
 	private RadioButton genericRadioButton;
 	
