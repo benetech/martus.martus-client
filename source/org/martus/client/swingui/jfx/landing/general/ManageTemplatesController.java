@@ -42,11 +42,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.core.templates.FormTemplateManager;
 import org.martus.client.core.templates.GenericFormTemplates;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
@@ -74,13 +75,23 @@ public class ManageTemplatesController extends FxInSwingController
 
 	private void initializeAvailableTab()
 	{
+		templateNameColumn.setEditable(false);
+        templateNameColumn.setCellValueFactory(new PropertyValueFactory<Object,String>(ManageTemplatesTableRowData.LOCALIZED_TEMPLATE_NAME));
+
+        populateAvailableTemplatesTable();
+	}
+
+	private void populateAvailableTemplatesTable()
+	{
 		ClientBulletinStore store = getBulletinStore();
 		ObservableSet<String> templateNamesSet = store.getAvailableTemplates();
-		ObservableList<String> templateNames = FXCollections.observableArrayList();
-		templateNamesSet.forEach(name -> templateNames.add(getDisplayableTemplateName(name)));
-//		Comparator<ChoiceItem> sorter = new SaneCollator(getLocalization().getCurrentLanguageCode());
-//		templateNames.sort(sorter);
-		availableTemplates.setItems(templateNames);
+		ObservableList<ManageTemplatesTableRowData> templateRows = FXCollections.observableArrayList();
+		templateNamesSet.forEach(name -> templateRows.add(new ManageTemplatesTableRowData(name, getLocalization())));
+		// TODO: Add sorting
+//		Comparator<MTTRD> sorter = new SaneCollator(getLocalization().getCurrentLanguageCode());
+//		templateRows.sort(sorter);
+
+		availableTemplatesTable.setItems(templateRows);
 	}
 	
 	private void initializeAddTab()
@@ -147,14 +158,6 @@ public class ManageTemplatesController extends FxInSwingController
 		return getApp().getStore();
 	}
 	
-	private String getDisplayableTemplateName(String rawName)
-	{
-		String displayableName = rawName;
-		if(displayableName.equals(FormTemplateManager.MARTUS_DEFAULT_FORM_TEMPLATE_NAME))
-			displayableName = getLocalization().getFieldLabel("DisplayableDefaultFormTemplateName");
-		return displayableName;
-	}
-
 	private void logTemplateToBeAdded()
 	{
 		MartusLogger.log("Ready to add template: " + getTitleOfTemplateToBeAdded());
@@ -272,8 +275,11 @@ public class ManageTemplatesController extends FxInSwingController
 	}
 
 	@FXML
-	private TableView<String> availableTemplates;
+	private TableView<ManageTemplatesTableRowData> availableTemplatesTable;
 	
+	@FXML
+	protected TableColumn<Object, String> templateNameColumn;
+
 	@FXML
 	private RadioButton genericRadioButton;
 	
