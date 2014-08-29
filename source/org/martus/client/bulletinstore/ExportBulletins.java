@@ -58,12 +58,20 @@ public class ExportBulletins
 		int numberOfMissingAttachment = exporterThread.getNumberOfFailingAttachments();
 		int bulletinsExported = exporterThread.getNumberOfBulletinsExported();
 
-		String tag = "ExportComplete";
+		updateExportMessage(exporterThread, bulletinsExported, numberOfMissingAttachment);
+		mainWindow.notifyDlg(exportMessageTag,exportMessageTokensMap);
+	}
+
+	private void updateExportMessage(ExporterThread exporterThread,
+			int bulletinsExported, int numberOfMissingAttachment)
+	{
+		exportMessageTag = "ExportComplete";
 		if(exporterThread.didUnrecoverableErrorOccur())
-			tag = "ErrorExportingBulletins";
+			exportMessageTag = "ErrorExportingBulletins";
 		else if(numberOfMissingAttachment > 0)
-			tag = "ExportCompleteMissingAttachments";
-		mainWindow.notifyDlg(tag, getTokenReplacementImporter(bulletinsExported, bulletinsToExport.size(), numberOfMissingAttachment));
+			exportMessageTag = "ExportCompleteMissingAttachments";
+		
+		exportMessageTokensMap = getTokenReplacementImporter(bulletinsExported, bulletinsToExport.size(), numberOfMissingAttachment);
 	}
 
 	Map getTokenReplacementImporter(int numberOfBulletinsExported, int totalNumberOfBulletins, int numberOfMissingAttachment) 
@@ -135,12 +143,15 @@ public class ExportBulletins
 		return map;
 	}
 
-	UiMainWindow mainWindow;
-	File destinationFile;
-	Vector bulletinsToExport;
-	boolean userWantsToExportPrivate;
-	boolean userWantsToExportAttachments;
-	boolean userWantsToExportAllVersions;
+	protected UiMainWindow mainWindow;
+	protected File destinationFile;
+	protected Vector bulletinsToExport;
+	protected boolean userWantsToExportPrivate;
+	protected boolean userWantsToExportAttachments;
+	protected boolean userWantsToExportAllVersions;
+	
+	private String exportMessageTag;
+	private Map exportMessageTokensMap;
 }
 
 
