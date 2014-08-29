@@ -303,15 +303,10 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		}
 	}	
 	
-	@FXML
-	private void onMoveSelectedItems(javafx.event.ActionEvent event)
+	private void exportEncryptedMbaBulletin(UniversalId bulletinIdToExport, File exportFile)
 	{
-		
-	}
-	
-	@FXML
-	private void onCopySelectedItem(javafx.event.ActionEvent event)
-	{
+		Bulletin bulletinToExport = getApp().getStore().getBulletinRevision(bulletinIdToExport);
+		doAction(new ActionMenuExportMba(getMainWindow(), bulletinToExport));
 	}
 
 	private void exportUnencryptedXmlBulletins(UniversalId[] bulletinsIdsToExport, File exportFile) throws Exception
@@ -333,10 +328,15 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		return defaultFileName;
 	}
 
-	private void exportEncryptedMbaBulletin(UniversalId bulletinIdToExport, File exportFile)
+	@FXML
+	private void onMoveSelectedItems(javafx.event.ActionEvent event)
 	{
-		Bulletin bulletinToExport = getApp().getStore().getBulletinRevision(bulletinIdToExport);
-		doAction(new ActionMenuExportMba(getMainWindow(), bulletinToExport));
+		
+	}
+	
+	@FXML
+	private void onCopySelectedItem(javafx.event.ActionEvent event)
+	{
 	}
 
 	final private String VIEW_BULLETIN_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/view_bulletin.png";
