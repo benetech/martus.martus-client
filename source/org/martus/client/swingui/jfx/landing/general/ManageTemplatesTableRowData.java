@@ -50,6 +50,13 @@ public class ManageTemplatesTableRowData
     {
     	return templateNameProperty().getValue();
     }
+    
+    // NOTE: This is required in order to be sortable using SaneComparator
+    @Override
+    public String toString()
+    {
+    	return getTemplateName();
+    }
 
 	public static final String LOCALIZED_TEMPLATE_NAME = "templateName";
 

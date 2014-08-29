@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.landing.general;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 
 import javafx.beans.binding.Bindings;
@@ -49,6 +50,7 @@ import javafx.stage.FileChooser;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.templates.GenericFormTemplates;
+import org.martus.client.search.SaneCollator;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.jfx.common.AbstractFxImportFormTemplateController;
@@ -87,9 +89,8 @@ public class ManageTemplatesController extends FxInSwingController
 		ObservableSet<String> templateNamesSet = store.getAvailableTemplates();
 		ObservableList<ManageTemplatesTableRowData> templateRows = FXCollections.observableArrayList();
 		templateNamesSet.forEach(name -> templateRows.add(new ManageTemplatesTableRowData(name, getLocalization())));
-		// TODO: Add sorting
-//		Comparator<MTTRD> sorter = new SaneCollator(getLocalization().getCurrentLanguageCode());
-//		templateRows.sort(sorter);
+		Comparator<ManageTemplatesTableRowData> sorter = new SaneCollator(getLocalization().getCurrentLanguageCode());
+		templateRows.sort(sorter);
 
 		availableTemplatesTable.setItems(templateRows);
 	}
