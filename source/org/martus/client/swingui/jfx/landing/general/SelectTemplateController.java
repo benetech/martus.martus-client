@@ -35,12 +35,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.core.templates.FormTemplateManager;
 import org.martus.client.search.SaneCollator;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.FormTemplate;
 
 public class SelectTemplateController extends FxInSwingController
 {
@@ -87,7 +87,7 @@ public class SelectTemplateController extends FxInSwingController
 	private ChoiceItem createTemplateChoiceItem(String name)
 	{
 		String displayableName = name;
-		if(displayableName.equals(FormTemplateManager.MARTUS_DEFAULT_FORM_TEMPLATE_NAME))
+		if(displayableName.equals(FormTemplate.MARTUS_DEFAULT_FORM_TEMPLATE_NAME))
 			displayableName = getLocalization().getFieldLabel("DisplayableDefaultFormTemplateName");
 		ChoiceItem choiceItem = new ChoiceItem(name, displayableName);
 		return choiceItem;
