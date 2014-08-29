@@ -33,11 +33,11 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
-import org.martus.client.swingui.dialogs.UiImportExportProgressMeterDlg;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusXml;
 import org.martus.common.MiniLocalization;
+import org.martus.common.ProgressMeterInterface;
 import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
@@ -54,7 +54,7 @@ import org.martus.util.xml.XmlUtilities;
 
 public class BulletinXmlExporter
 {
-	public BulletinXmlExporter(MartusApp appToUse, MiniLocalization localizationToUse, UiImportExportProgressMeterDlg progressMeterToUse)
+	public BulletinXmlExporter(MartusApp appToUse, MiniLocalization localizationToUse, ProgressMeterInterface progressMeterToUse)
 	{
 		app = appToUse;
 		localization = localizationToUse;
@@ -77,7 +77,6 @@ public class BulletinXmlExporter
 			if(progressMeter != null)
 			{
 				progressMeter.updateProgressMeter(i+1, bulletins.size());
-				progressMeter.updateBulletinTitle(b.get(Bulletin.TAGTITLE));
 				if(progressMeter.shouldExit())
 					break;
 			}
@@ -382,6 +381,6 @@ public class BulletinXmlExporter
 	MartusApp app;
 	int bulletinsExported;
 	int failingAttachments;
-	UiImportExportProgressMeterDlg progressMeter;
+	ProgressMeterInterface progressMeter;
 
 }

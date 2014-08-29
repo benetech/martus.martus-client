@@ -133,8 +133,11 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 	
 	public void doExport(File destFile)
 	{
-		ExportBulletins exporter = new ExportBulletins(mainWindow);
+		UiImportExportProgressMeterDlg progressDlg = new UiImportExportProgressMeterDlg(mainWindow, "ExportProgress");
+		ExportBulletins exporter = new ExportBulletins(mainWindow, progressDlg);
 		exporter.doExport(destFile, bulletins, ALWAYS_EXPORT_PRIVATE_DATA, userWantsToExportAttachments(), userWantsToExportAllVersions());
+		if(exporter.didErrorOccur())
+			mainWindow.notifyDlg(exporter.getErrorMessage(),exporter.getErrorMessageTokenMap());
 	}
 	
 	public void actionPerformed(ActionEvent ae)
