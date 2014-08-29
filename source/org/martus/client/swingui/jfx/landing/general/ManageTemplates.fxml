@@ -16,7 +16,7 @@
 					<content>
 						<VBox layoutY="7.0" prefWidth="500.0" spacing="5.0">
 							<children>
-								<TableView prefHeight="200.0" prefWidth="480.0">
+								<TableView fx:id="availableTemplates" prefHeight="200.0" prefWidth="480.0">
 									<columns>
 										<TableColumn prefWidth="264.0" text="Name" />
 										<TableColumn maxWidth="150.0" prefWidth="75.0" text="Delete" />
