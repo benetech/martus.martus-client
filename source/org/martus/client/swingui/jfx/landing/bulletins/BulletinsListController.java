@@ -50,7 +50,6 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 
 import org.martus.client.bulletinstore.BulletinFolder;
-import org.martus.client.core.MartusApp;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuExportBulletinsToXml;
@@ -280,13 +279,9 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		{
 			Vector<UniversalId> bulletinsIDsToExport = getSelectedBulletinIds();
 			if(bulletinsIDsToExport.size() == 1)
-			{
 				exportSingleBulletin(bulletinsIDsToExport.toArray(new UniversalId[0]));
-			}
 			else
-			{
 				exportUnencryptedXmlBulletins(bulletinsIDsToExport.toArray(new UniversalId[0]), null);
-			}
 		} 
 		catch (Exception e)
 		{
@@ -297,7 +292,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	private void exportSingleBulletin(UniversalId[] bulletinsIdsToExport)throws Exception
 	{
 		String defaultFileName = getDefaultExportFileName(bulletinsIdsToExport);
-		ConfirmEncryptedExportController exportController = new ConfirmEncryptedExportController(getMainWindow(), defaultFileName);
+		ExportItemsController exportController = new ExportItemsController(getMainWindow(), defaultFileName, true);
 		if(showModalYesNoDialog("ExportEncryptedMbaBulletin", "export", "cancel", exportController))
 		{
 			File exportFile = exportController.getExportFile();
@@ -323,8 +318,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	{
 		String defaultFileName = getDefaultExportFileName(bulletinsIdsToExport);
 			
-		ConfirmUnencyptedXmlController exportController = new ConfirmUnencyptedXmlController(getMainWindow(), defaultFileName);
-		exportController.setInitialExportFile(exportFile);
+		ExportItemsController exportController = new ExportItemsController(getMainWindow(), defaultFileName, false);
 		if(showModalYesNoDialog("ExportUnencryptedXMLBulletins", "export", "cancel", exportController))
 		{
 			doAction(new ActionMenuExportBulletinsToXml(getMainWindow(), bulletinsIdsToExport, exportController.getExportFile(), exportController.includeAttachments()));
@@ -336,7 +330,6 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		String defaultFileName = getLocalization().getFieldLabel("ExportedBulletins");
 		if(bulletinsIdsToExport.length==1)
 			defaultFileName = getMainWindow().getStore().getBulletinRevision(bulletinsIdsToExport[0]).toFileName();
-		defaultFileName += MartusApp.MARTUS_IMPORT_EXPORT_EXTENSION;
 		return defaultFileName;
 	}
 
