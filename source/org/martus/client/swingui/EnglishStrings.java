@@ -735,6 +735,9 @@ public class EnglishStrings
 "field:VirtualKeyboardSpace=Space",
 "field:VirtualKeyboardBackSpace=Back Space",
 
+"field:ExportBulletinMba=Exporting encrypted Item",
+"field:ExportBulletinXml=Exporting non-encrypted Items",
+
 "field:confirmquestion=Are you sure you want to do this?",
 "field:confirmsendcause=You have chosen to save a completed bulletin.",
 "field:confirmsendeffect=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.",

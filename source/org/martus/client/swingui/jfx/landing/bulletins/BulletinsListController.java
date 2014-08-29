@@ -53,10 +53,10 @@ import javafx.scene.input.MouseEvent;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionMenuExportMba;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
-import org.martus.client.swingui.jfx.setupwizard.tasks.BulletinExportTask;
+import org.martus.client.swingui.jfx.setupwizard.tasks.BulletinExportEncryptedMbaTask;
+import org.martus.client.swingui.jfx.setupwizard.tasks.BulletinExportUnencryptedXmlTask;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
@@ -321,15 +321,26 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	private void doExportEncryptedMbaBulletin(UniversalId bulletinIdToExport, File exportFile)
 	{
 		Bulletin bulletinToExport = getApp().getStore().getBulletinRevision(bulletinIdToExport);
-		doAction(new ActionMenuExportMba(getMainWindow(), bulletinToExport));
+		BulletinExportEncryptedMbaTask task = new BulletinExportEncryptedMbaTask(getMainWindow(), bulletinToExport, exportFile);
+		try
+		{
+			showProgressDialog(getLocalization().getFieldLabel("ExportBulletinMba"), task);
+		}
+		catch (UserCancelledException e)
+		{
+		}
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
 	}
 
 	private void doExportUnencryptedXmlBulletin(UniversalId[] bulletinsIdsToExport, File exportFile, boolean includeAttachments)
 	{
-		BulletinExportTask task = new BulletinExportTask(getMainWindow(), bulletinsIdsToExport, exportFile, includeAttachments);
+		BulletinExportUnencryptedXmlTask task = new BulletinExportUnencryptedXmlTask(getMainWindow(), bulletinsIdsToExport, exportFile, includeAttachments);
 		try
 		{
-			showProgressDialog(getLocalization().getFieldLabel("ExportBulletin"), task);
+			showProgressDialog(getLocalization().getFieldLabel("ExportBulletinXml"), task);
 			if(task.didErrorOccur())
 			{
 				String errorMessage = task.getErrorMessage();
