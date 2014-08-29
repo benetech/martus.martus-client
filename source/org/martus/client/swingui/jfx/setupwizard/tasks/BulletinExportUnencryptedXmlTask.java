@@ -33,9 +33,9 @@ import org.martus.client.bulletinstore.ExportBulletins;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.packet.UniversalId;
 
-public class BulletinExportTask extends AbstractAppTask
+public class BulletinExportUnencryptedXmlTask extends AbstractAppTask
 {
-	public BulletinExportTask(UiMainWindow mainWindowToUse, UniversalId[] bulletinsIdsToUse, File exportFileToUse, boolean includeAttachmentsToUse)
+	public BulletinExportUnencryptedXmlTask(UiMainWindow mainWindowToUse, UniversalId[] bulletinsIdsToUse, File exportFileToUse, boolean includeAttachmentsToUse)
 	{
 		super(mainWindowToUse.getApp());
 		mainWindow = mainWindowToUse;
@@ -74,5 +74,4 @@ public class BulletinExportTask extends AbstractAppTask
 	private boolean includeAttachments;
 	private UniversalId[] bulletinIdsToExport;
 	private File exportFile;	
-	private ExportBulletins exporter;
-}
+	private ExportBulletins exporter;}
