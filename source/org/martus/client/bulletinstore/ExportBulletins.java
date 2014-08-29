@@ -32,45 +32,52 @@ import java.util.Vector;
 
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.dialogs.UiImportExportProgressMeterDlg;
 import org.martus.common.MartusLogger;
+import org.martus.common.ProgressMeterInterface;
 import org.martus.util.UnicodeWriter;
 
 public class ExportBulletins
 {
-	
-	public ExportBulletins(UiMainWindow mainWindowToUse)
+	public ExportBulletins(UiMainWindow mainWindowToUse, ProgressMeterInterface progressDlgToUse)
 	{
 		mainWindow = mainWindowToUse;
+		progressDlg = progressDlgToUse;
 	}
-
-	public void doExport(File destFile, Vector bulletinsToUse, boolean userWantsToExportPrivateToUse, boolean userWantsToExportAttachmentsToUse, boolean userWantsToExportAllVersionsToUse)
-	{
+	
+	public void doExport(File destFile, Vector bulletinsToUse, boolean userWantsToExportPrivateToUse, boolean userWantsToExportAttachmentsToUse, boolean userWantsToExportAllVersionsToUse) {
 		destinationFile = destFile;
 		bulletinsToExport = bulletinsToUse;
 		userWantsToExportPrivate = userWantsToExportPrivateToUse;
 		userWantsToExportAttachments = userWantsToExportAttachmentsToUse;
 		userWantsToExportAllVersions = userWantsToExportAllVersionsToUse;
-		UiImportExportProgressMeterDlg progressDlg = new UiImportExportProgressMeterDlg(mainWindow, "ExportProgress");
 		ExporterThread exporterThread = new ExporterThread(progressDlg);
 		exporterThread.start();
-		progressDlg.setVisible(true);
-		int numberOfMissingAttachment = exporterThread.getNumberOfFailingAttachments();
-		int bulletinsExported = exporterThread.getNumberOfBulletinsExported();
-
-		updateExportMessage(exporterThread, bulletinsExported, numberOfMissingAttachment);
-		mainWindow.notifyDlg(exportMessageTag,exportMessageTokensMap);
+	}
+	
+	public String getErrorMessage()
+	{
+		return exportMessageTag;
+	}
+	
+	public Map getErrorMessageTokenMap()
+	{
+		return exportMessageTokensMap;
 	}
 
-	private void updateExportMessage(ExporterThread exporterThread,
-			int bulletinsExported, int numberOfMissingAttachment)
+	protected void updateExportMessage(ExporterThread exporterThread,
+			int bulletinsExported, int numberOfMissingAttachment) 
 	{
 		exportMessageTag = "ExportComplete";
 		if(exporterThread.didUnrecoverableErrorOccur())
+		{
 			exportMessageTag = "ErrorExportingBulletins";
+			errorOccuredOrMissingAttachment = true;
+		}
 		else if(numberOfMissingAttachment > 0)
+		{
 			exportMessageTag = "ExportCompleteMissingAttachments";
-		
+			errorOccuredOrMissingAttachment = true;
+		}
 		exportMessageTokensMap = getTokenReplacementImporter(bulletinsExported, bulletinsToExport.size(), numberOfMissingAttachment);
 	}
 
@@ -86,7 +93,7 @@ public class ExportBulletins
 	
 	class ExporterThread extends Thread
 	{
-		public ExporterThread(UiImportExportProgressMeterDlg progressRetrieveDlgToUse)
+		public ExporterThread(ProgressMeterInterface progressRetrieveDlgToUse)
 		{
 			clientStore = mainWindow.getStore();
 			progressMeter = progressRetrieveDlgToUse;
@@ -109,6 +116,9 @@ public class ExportBulletins
 			finally
 			{
 				progressMeter.finished();
+				int numberOfMissingAttachment = getNumberOfFailingAttachments();
+				int bulletinsExported = getNumberOfBulletinsExported();
+				updateExportMessage(this, bulletinsExported, numberOfMissingAttachment);
 			}
 		}
 
@@ -127,7 +137,7 @@ public class ExportBulletins
 			return errorOccured;
 		}
 		
-		UiImportExportProgressMeterDlg progressMeter;
+		ProgressMeterInterface progressMeter;
 		ClientBulletinStore clientStore;
 		private BulletinXmlExporter exporter;
 		private boolean errorOccured;
@@ -142,16 +152,23 @@ public class ExportBulletins
 		map.put("#ImportFolder#", folder);
 		return map;
 	}
-
+	
+	public boolean didErrorOccur()
+	{
+		return errorOccuredOrMissingAttachment;
+	}
+	
 	protected UiMainWindow mainWindow;
 	protected File destinationFile;
 	protected Vector bulletinsToExport;
 	protected boolean userWantsToExportPrivate;
 	protected boolean userWantsToExportAttachments;
 	protected boolean userWantsToExportAllVersions;
+	protected boolean errorOccuredOrMissingAttachment;
 	
 	private String exportMessageTag;
 	private Map exportMessageTokensMap;
+	private ProgressMeterInterface progressDlg;
 }
 
 

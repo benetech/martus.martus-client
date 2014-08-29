@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
@@ -52,10 +53,10 @@ import javafx.scene.input.MouseEvent;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionMenuExportBulletinsToXml;
 import org.martus.client.swingui.actions.ActionMenuExportMba;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
+import org.martus.client.swingui.jfx.setupwizard.tasks.BulletinExportTask;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
@@ -296,6 +297,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		if(showModalYesNoDialog("ExportEncryptedMbaBulletin", "export", "cancel", exportController))
 		{
 			File exportFile = exportController.getExportFile();
+			
 			if(exportController.shouldExportEncrypted())
 				doExportEncryptedMbaBulletin(bulletinsIdsToExport[0], exportFile);
 			else
@@ -324,7 +326,24 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	private void doExportUnencryptedXmlBulletin(UniversalId[] bulletinsIdsToExport, File exportFile, boolean includeAttachments)
 	{
-		doAction(new ActionMenuExportBulletinsToXml(getMainWindow(), bulletinsIdsToExport, exportFile, includeAttachments));
+		BulletinExportTask task = new BulletinExportTask(getMainWindow(), bulletinsIdsToExport, exportFile, includeAttachments);
+		try
+		{
+			showProgressDialog(getLocalization().getFieldLabel("ExportBulletin"), task);
+			if(task.didErrorOccur())
+			{
+				String errorMessage = task.getErrorMessage();
+				Map errorMessageTokens = task.getErrorMessageTokens();
+				showNotifyDialog(errorMessage, errorMessageTokens);
+			}
+		}
+		catch (UserCancelledException e)
+		{
+		}
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
 	}
 
 	private String getDefaultExportFileName(UniversalId[] bulletinsIdsToExport)

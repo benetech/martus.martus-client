@@ -1,8 +1,8 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2005-2007, Beneficent
-Technology, Inc. (The Benetech Initiative).
+monitoring software. Copyright (C) 2014, Beneficent
+Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -23,62 +23,56 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
+package org.martus.client.swingui.jfx.setupwizard.tasks;
 
-package org.martus.client.swingui.actions;
-
-import java.awt.event.ActionEvent;
 import java.io.File;
+import java.util.Map;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.ExportBulletins;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.packet.UniversalId;
 
-public class ActionMenuExportBulletinsToXml extends UiMenuAction implements ActionDoer
+public class BulletinExportTask extends AbstractAppTask
 {
-	public ActionMenuExportBulletinsToXml(UiMainWindow mainWindowToUse, UniversalId[] bulletinsIdsToUse, File exportFileToUse, boolean includeAttachmentsToUse)
+	public BulletinExportTask(UiMainWindow mainWindowToUse, UniversalId[] bulletinsIdsToUse, File exportFileToUse, boolean includeAttachmentsToUse)
 	{
-		super(mainWindowToUse, "ExportBulletins");
+		super(mainWindowToUse.getApp());
+		mainWindow = mainWindowToUse;
 		bulletinIdsToExport = bulletinsIdsToUse;
 		exportFile = exportFileToUse;
 		includeAttachments = includeAttachmentsToUse;
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e)
+	protected Void call() throws Exception
 	{
-		doAction();
+		Vector bulletinsToExport = mainWindow.getBulletins(bulletinIdsToExport);			
+		exporter = new ExportBulletins(mainWindow, progress);
+		exporter.doExport(exportFile.getAbsoluteFile(), bulletinsToExport, ALWAYS_EXPORT_PRIVATE_DATA, includeAttachments, SHOULD_EXPORT_ALL_VERSIONS);
+		return null;
 	}
 	
-	@Override
-	public void doAction()
+	public boolean didErrorOccur()
 	{
-		try
-		{
-			exportBulletins(getMainWindow().getBulletins(bulletinIdsToExport));	
-		} 
-		catch (Exception e)
-		{
-			getMainWindow().unexpectedErrorDlg(e);
-		}
+		return exporter.didErrorOccur();
 	}
 	
-	private void exportBulletins(Vector bulletinsToExport)
+	public String getErrorMessage()
 	{
-		try
-		{
-			ExportBulletins exporter = new ExportBulletins(mainWindow);
-			exporter.doExport(exportFile.getAbsoluteFile(), bulletinsToExport, ALWAYS_EXPORT_PRIVATE_DATA, includeAttachments, SHOULD_EXPORT_ALL_VERSIONS);
-		} 
-		catch (Exception e)
-		{
-			getMainWindow().unexpectedErrorDlg(e);
-		}
+		return exporter.getErrorMessage();
 	}
-
+	
+	public Map getErrorMessageTokens()
+	{
+		return exporter.getErrorMessageTokenMap();
+	}
+	
+	private UiMainWindow mainWindow;
 	private final boolean ALWAYS_EXPORT_PRIVATE_DATA = true;
 	private final boolean SHOULD_EXPORT_ALL_VERSIONS = false;
 	private boolean includeAttachments;
 	private UniversalId[] bulletinIdsToExport;
 	private File exportFile;	
+	private ExportBulletins exporter;
 }
