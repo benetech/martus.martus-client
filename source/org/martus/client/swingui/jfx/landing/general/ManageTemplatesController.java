@@ -70,7 +70,7 @@ public class ManageTemplatesController extends FxInSwingController
 		super.initialize(location, bundle);
 		
 		initializeAvailableTab();
-		initializeImportTab();
+		initializeAddTab();
 	}
 
 	private void initializeAvailableTab()
@@ -84,7 +84,7 @@ public class ManageTemplatesController extends FxInSwingController
 //		availableTemplates.setItems(templateChoiceItems);
 	}
 	
-	private void initializeImportTab()
+	private void initializeAddTab()
 	{
 		templateToAddProperty = new SimpleObjectProperty<FormTemplate>();
 		
