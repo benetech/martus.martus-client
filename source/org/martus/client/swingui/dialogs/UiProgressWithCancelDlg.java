@@ -99,6 +99,7 @@ public class UiProgressWithCancelDlg extends JDialog implements ProgressMeterInt
 		dispose();
 	}
 
+	@Override
 	public void finished()
 	{
 		workerFinished();

@@ -67,6 +67,7 @@ public class UiProgressMeter extends JPanel implements ProgressMeterInterface
 		Utilities.addComponentsRespectingOrientation(this, items);
 	}
 	
+	@Override
 	public void setStatusMessage(String tagToShow)
 	{
 		String message = localization.getFieldLabel(tagToShow);
@@ -75,6 +76,7 @@ public class UiProgressMeter extends JPanel implements ProgressMeterInterface
 		statusMessage.setText(" " + message + " ");
 	}
 
+	@Override
 	public void updateProgressMeter(int currentValue, int maxValue)
 	{
 		progressMeter.setValue(currentValue);
@@ -82,11 +84,13 @@ public class UiProgressMeter extends JPanel implements ProgressMeterInterface
 		progressMeter.setVisible(true);
 	}
 
+	@Override
 	public void hideProgressMeter()
 	{
 		progressMeter.setVisible(false);
 	}
 
+	@Override
 	public boolean shouldExit()
 	{
 		if(parentDlg != null)
@@ -94,6 +98,10 @@ public class UiProgressMeter extends JPanel implements ProgressMeterInterface
 		return false;
 	}
 
+	@Override
+	public void finished()
+	{
+	}
 
 	private JLabel statusMessage;
 	private JProgressBar progressMeter;
