@@ -35,22 +35,29 @@ public class NullProgressMeter implements ProgressMeterInterface
 	{
 	}
 
+	@Override
 	public void setStatusMessage(String message)
 	{
-
 	}
 
+	@Override
 	public void updateProgressMeter(int currentValue, int maxValue)
 	{
-
 	}
 
+	@Override
 	public boolean shouldExit()
 	{
 		return false;
 	}
 
+	@Override
 	public void hideProgressMeter()
+	{
+	}
+	
+	@Override
+	public void finished()
 	{
 	}
 }
