@@ -40,7 +40,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.stage.FileChooser;
 
@@ -70,11 +69,11 @@ public class ManageTemplatesController extends FxInSwingController
 	{
 		super.initialize(location, bundle);
 		
-		initializeSelectTab();
+		initializeAvailableTab();
 		initializeImportTab();
 	}
 
-	private void initializeSelectTab()
+	private void initializeAvailableTab()
 	{
 		ClientBulletinStore store = getBulletinStore();
 		ObservableSet<String> templateNames = store.getAvailableTemplates();
@@ -82,8 +81,7 @@ public class ManageTemplatesController extends FxInSwingController
 		templateNames.forEach(name -> templateChoiceItems.add(createTemplateChoiceItem(name)));
 		Comparator<ChoiceItem> sorter = new SaneCollator(getLocalization().getCurrentLanguageCode());
 		templateChoiceItems.sort(sorter);
-		availableTemplates.setItems(templateChoiceItems);
-		updateSelectionFromReality();
+//		availableTemplates.setItems(templateChoiceItems);
 	}
 	
 	private void initializeImportTab()
@@ -145,21 +143,6 @@ public class ManageTemplatesController extends FxInSwingController
 		logTemplateToBeAdded();
 	}
 	
-	private void updateSelectionFromReality()
-	{
-		ClientBulletinStore store = getBulletinStore();
-		ObservableChoiceItemList templateChoiceItems = (ObservableChoiceItemList) availableTemplates.getItems();
-		try
-		{
-			ChoiceItem current = templateChoiceItems.findByCode(store.getCurrentFormTemplateName());
-			availableTemplates.getSelectionModel().select(current);
-		}
-		catch(Exception e)
-		{
-			logAndNotifyUnexpectedError(e);
-		}
-	}
-
 	private ClientBulletinStore getBulletinStore()
 	{
 		return getApp().getStore();
@@ -284,9 +267,6 @@ public class ManageTemplatesController extends FxInSwingController
 		}
 	}
 
-	@FXML
-	private ListView<ChoiceItem> availableTemplates;
-	
 	@FXML
 	private RadioButton genericRadioButton;
 	
