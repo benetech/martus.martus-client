@@ -41,7 +41,6 @@ import javax.swing.filechooser.FileFilter;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
@@ -69,7 +68,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		fontHelper = new UiFontEncodingHelper(info.getDoZawgyiConversion());
 		UiLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle("BulletinTemplate"));
-		okButton = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
+		okButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 		okButton.addActionListener(this);
 		JButton cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(this);
@@ -116,7 +115,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 			String helpMsgExample1 = localization.getFieldLabel("HelpExample1DefaultDetails");
 			String helpMsgExample2 = localization.getFieldLabel("HelpExample2DefaultDetails");
 			String helpMsgExampleEtc = localization.getFieldLabel("HelpExampleEtcDefaultDetails");
-			String ok = localization.getButtonLabel(EnglishStrings.OK);
+			String ok = localization.getButtonLabel(EnglishCommonStrings.OK);
 			String[] contents = {helpMsg, "", "",helpMsgExample, helpMsgExample1, "", helpMsgExample2, "", helpMsgExampleEtc};
 			String[] buttons = {ok};
 

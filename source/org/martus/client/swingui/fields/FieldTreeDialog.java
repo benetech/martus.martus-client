@@ -47,7 +47,6 @@ import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 import org.martus.client.search.SearchFieldTreeNode;
-import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor.BlankLeafRenderer;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor.SearchFieldTree;
 import org.martus.common.EnglishCommonStrings;
@@ -69,7 +68,7 @@ public class FieldTreeDialog extends JDialog implements TreeSelectionListener
 		setTitle(localization.getButtonLabel("PopUpTreeChoose"));
 		setLocation(location);
 		
-		okAction = new OkAction(localization.getButtonLabel(EnglishStrings.OK));
+		okAction = new OkAction(localization.getButtonLabel(EnglishCommonStrings.OK));
 
 		tree = new SearchFieldTree(spec.getModel());
 		tree.setRootVisible(false);

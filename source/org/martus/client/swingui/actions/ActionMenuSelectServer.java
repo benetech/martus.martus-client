@@ -30,10 +30,10 @@ import java.awt.event.ActionEvent;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
-import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiConfigServerDlg;
 import org.martus.clientside.ClientSideNetworkGateway;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.Exceptions.NetworkOfflineException;
 import org.martus.swing.UiNotifyDlg;
 
@@ -122,7 +122,7 @@ public class ActionMenuSelectServer extends UiMenuAction implements ActionDoer
 			else
 				uploadGranted = getLocalization().getFieldLabel("ServerDeclinesUploads");
 		
-			String ok = getLocalization().getButtonLabel(EnglishStrings.OK);
+			String ok = getLocalization().getButtonLabel(EnglishCommonStrings.OK);
 			String[] contents = {serverSelected, uploadGranted};
 			String[] buttons = {ok};
 		

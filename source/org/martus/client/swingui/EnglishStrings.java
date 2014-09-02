@@ -380,7 +380,6 @@ public class EnglishStrings
 "button:connectserver=Connect",
 "button:send=Save Sealed",
 "button:savedraft=Save Draft",
-"button:ok=OK",
 "button:inputservernameok=OK",
 "button:inputserverpubliccodeok=OK",
 "button:inputsearchok=Search",
@@ -1959,5 +1958,4 @@ public class EnglishStrings
 "keyword:and=and",
 "keyword:or=or",
 	};
-	final static public String OK = "ok";
 }

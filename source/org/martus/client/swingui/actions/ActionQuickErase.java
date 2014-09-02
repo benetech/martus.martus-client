@@ -41,7 +41,6 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.EnglishCommonStrings;
@@ -183,7 +182,7 @@ public abstract class ActionQuickErase extends UiMenuAction
 			text.setForeground(Color.BLACK);
 			text.setEditable(false);
 			
-			okButton = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
+			okButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 			okButton.addActionListener(this);
 			
 			JButton cancelButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));

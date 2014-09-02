@@ -116,6 +116,7 @@ import org.martus.clientside.FormatFilter;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiUtilities;
 import org.martus.common.Exceptions.NetworkOfflineException;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusLogger;
@@ -373,7 +374,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 	{
 		String title = getLocalization().getWindowTitle("IncompatibleJavaVersion");
 		String warningMessage = getLocalization().getFieldLabel("IncompatibleJavaVersion");
-		String buttonMessage = getLocalization().getButtonLabel(EnglishStrings.OK);
+		String buttonMessage = getLocalization().getButtonLabel(EnglishCommonStrings.OK);
 		Toolkit.getDefaultToolkit().beep();
 		HashMap map = new HashMap();
 		map.put("#HighVersion#", highVersionJava);
@@ -1560,7 +1561,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 	{
 		String title = getLocalization().getWindowTitle("notifySearchFound");
 		String message = getLocalization().getFieldLabel(messageTag);
-		String ok = getLocalization().getButtonLabel(EnglishStrings.OK);
+		String ok = getLocalization().getButtonLabel(EnglishCommonStrings.OK);
 		String[] buttons = { ok };
 		message = replaceToken(message , "#NumberBulletinsFound#", (new Integer(bulletinsFound)).toString());
 		UiOptionPane pane = new UiOptionPane(message, UiOptionPane.INFORMATION_MESSAGE, UiOptionPane.DEFAULT_OPTION,
@@ -1610,7 +1611,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		String accountDirectory = getLocalization().getFieldLabel("AccountInfoDirectory") + getApp().getCurrentAccountDirectory();
 		
 		
-		String ok = getLocalization().getButtonLabel(EnglishStrings.OK);
+		String ok = getLocalization().getButtonLabel(EnglishCommonStrings.OK);
 		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescriptionOld, formattedCodeContentsOld, " ", codeDescriptionNew, formattedCodeContentsNew, " ", martusAccountAccessTokenDescription, martusAccountAccessToken, " ", accountDirectory};
 		String[] buttons = {ok};
 

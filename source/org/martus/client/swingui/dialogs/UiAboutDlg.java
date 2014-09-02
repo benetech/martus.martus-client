@@ -40,10 +40,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
-import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.VersionBuildDate;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.swing.UiButton;
@@ -99,7 +99,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		buildDate.append(" ");
 		buildDate.append(VersionBuildDate.getVersionBuildDate());
 
-		JButton ok = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
+		JButton ok = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 		ok.addActionListener(this);
 		ok.addKeyListener(new MakeEnterKeyExit());
 
