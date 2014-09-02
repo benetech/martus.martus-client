@@ -54,7 +54,7 @@ public class FieldDataFormatter
 	private static String formatBooleanValue(String storedData, MiniLocalization localization)
 	{
 		if(storedData.equals(FieldSpec.TRUESTRING))
-			return localization.getButtonLabel("yes");
+			return localization.getButtonLabel(EnglishCommonStrings.YES);
 
 		return localization.getButtonLabel(EnglishCommonStrings.NO);
 	}
