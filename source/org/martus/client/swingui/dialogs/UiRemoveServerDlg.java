@@ -36,6 +36,7 @@ import javax.swing.JLabel;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
@@ -67,7 +68,7 @@ public class UiRemoveServerDlg extends JDialog implements ActionListener
 
 		yes = new UiButton(localization.getButtonLabel("yes"));		
 		yes.addActionListener(this);
-		JButton no = new UiButton(localization.getButtonLabel("no"));
+		JButton no = new UiButton(localization.getButtonLabel(EnglishCommonStrings.NO));
 		no.addActionListener(this);
 
 		UiParagraphPanel panel = new UiParagraphPanel();
