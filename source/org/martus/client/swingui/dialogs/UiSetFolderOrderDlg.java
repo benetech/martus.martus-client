@@ -32,13 +32,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Vector;
+
 import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+
 import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiButton;
@@ -91,7 +94,7 @@ public class UiSetFolderOrderDlg extends JDialog implements ActionListener
 
 		ok = new UiButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(this);
-		cancel = new UiButton(localization.getButtonLabel("cancel"));
+		cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancel.addActionListener(this);
 		Box okCancelBox = Box.createHorizontalBox();
 		Utilities.addComponentsRespectingOrientation(okCancelBox, new Component[] {ok, new UiLabel("   "), cancel, Box.createHorizontalGlue()});

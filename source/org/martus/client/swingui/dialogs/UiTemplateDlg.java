@@ -41,6 +41,7 @@ import javax.swing.filechooser.FileFilter;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
@@ -69,7 +70,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		setTitle(localization.getWindowTitle("BulletinTemplate"));
 		okButton = new UiButton(localization.getButtonLabel("ok"));
 		okButton.addActionListener(this);
-		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
+		JButton cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancel.addActionListener(this);
 		JButton help = new UiButton(localization.getButtonLabel("help"));
 		help.addActionListener(new helpHandler());

@@ -43,6 +43,7 @@ import org.json.JSONObject;
 import org.martus.client.search.FancySearchGridEditor;
 import org.martus.client.search.SearchSpec;
 import org.martus.client.search.SearchTreeNode;
+import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.clientside.FileDialogHelpers;
@@ -91,7 +92,7 @@ public class UiFancySearchDlg extends JDialog
 		UiButton search = new UiButton(getLocalization().getButtonLabel("search"));
 		search.addActionListener(new SearchButtonHandler());
 
-		UiButton cancel = new UiButton(getLocalization().getButtonLabel("cancel"));
+		UiButton cancel = new UiButton(getLocalization().getButtonLabel(EnglishStrings.CANCEL));
 		cancel.addActionListener(new CancelButtonHandler());
 		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow, mainWindow.getCurrentActiveFrame());
 		grid = FancySearchGridEditor.create(mainWindow, dlgLauncher);

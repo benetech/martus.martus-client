@@ -51,6 +51,7 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiSession;
 import org.martus.client.swingui.WindowObscurer;
@@ -102,7 +103,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		send.addActionListener(this);
 		draft = new UiButton(localization.getButtonLabel("savedraft"));
 		draft.addActionListener(this);
-		cancel = new UiButton(localization.getButtonLabel("cancel"));
+		cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancel.addActionListener(this);
 
 		if(UiSession.isJavaFx)

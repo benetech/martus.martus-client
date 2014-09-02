@@ -1960,4 +1960,6 @@ public class EnglishStrings
 "keyword:and=and",
 "keyword:or=or",
 	};
+	
+	final static public String CANCEL = "cancel";
 }

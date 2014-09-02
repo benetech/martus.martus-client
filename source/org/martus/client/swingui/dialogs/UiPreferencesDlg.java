@@ -34,6 +34,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 
 import org.martus.client.core.FontSetter;
+import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
@@ -127,7 +128,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		
 		ok = new UiButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(this);
-		cancel = new UiButton(localization.getButtonLabel("cancel"));
+		cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancel.addActionListener(this);
 		preferences.addComponents(ok, cancel);
 		

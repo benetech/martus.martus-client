@@ -50,6 +50,7 @@ import org.martus.client.reports.TabularReportBuilder;
 import org.martus.client.search.FieldChooserSpecBuilder;
 import org.martus.client.search.PageReportFieldChooserSpecBuilder;
 import org.martus.client.search.SearchTreeNode;
+import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WorkerThread;
@@ -92,7 +93,7 @@ public class ActionMenuReports extends ActionPrint
 			String runButtonLabel = localization.getButtonLabel("RunReport");
 			String createTabularReportButtonLabel = localization.getButtonLabel("CreateTabularReport");
 			String createPageReportButtonLabel = localization.getButtonLabel("CreatePageReport");
-			String cancelButtonLabel = localization.getButtonLabel("cancel");
+			String cancelButtonLabel = localization.getButtonLabel(EnglishStrings.CANCEL);
 			String[] buttonLabels = {runButtonLabel, createTabularReportButtonLabel, createPageReportButtonLabel, cancelButtonLabel, };
 			String title = mainWindow.getLocalization().getWindowTitle("RunOrCreateReport");
 			UiPushbuttonsDlg runOrCreate = new UiPushbuttonsDlg(mainWindow, title, buttonLabels);
@@ -273,7 +274,7 @@ public class ActionMenuReports extends ActionPrint
 			if(areAllBulletinPrivate)
 			{
 				MartusLocalization localization = mainWindow.getLocalization();
-				String cancel = localization.getButtonLabel("cancel");
+				String cancel = localization.getButtonLabel(EnglishStrings.CANCEL);
 				String includePublic = mainWindow.getLocalization().getButtonLabel("IncludePrivateBulletins");
 				String[] buttons = {includePublic, cancel};
 				HashMap emptyTokenReplacement = new HashMap();

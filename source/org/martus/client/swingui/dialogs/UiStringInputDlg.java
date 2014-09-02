@@ -32,6 +32,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
+import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
@@ -56,7 +57,7 @@ public class UiStringInputDlg extends JDialog
 
 		JButton ok = new UiButton(localization.getButtonLabel("input" + baseTag + "ok"));
 		ok.addActionListener(new OkHandler());
-		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
+		JButton cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancel.addActionListener(new CancelHandler());
 
 		UiParagraphPanel stringPanel = new UiParagraphPanel();
