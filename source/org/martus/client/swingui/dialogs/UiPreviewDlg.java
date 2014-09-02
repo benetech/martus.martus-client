@@ -35,9 +35,9 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 
-import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.swing.UiButton;
 import org.martus.swing.Utilities;
 
@@ -61,7 +61,7 @@ public class UiPreviewDlg  extends JDialog implements ActionListener
 		printToPrinter.addActionListener(this);		
 		printToFile = new UiButton(localization.getButtonLabel("PrintToFile"));
 		printToFile.addActionListener(this);		
-		cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
+		cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(this);	
 		
 		Box buttons = Box.createHorizontalBox();

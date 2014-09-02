@@ -111,7 +111,7 @@ public class ActionMenuCharts extends UiMenuAction
 //			
 ////			String runButtonLabel = localization.getButtonLabel("RunChart");
 //			String createChartButtonLabel = localization.getButtonLabel("CreateChart");
-//			String cancelButtonLabel = localization.getButtonLabel("cancel");
+//			String cancelButtonLabel = localization.getButtonLabel(EnglishCommonStrings.CANCEL);
 //			String[] buttonLabels = {/*runButtonLabel,*/ createChartButtonLabel, cancelButtonLabel, };
 //			String title = mainWindow.getLocalization().getWindowTitle("RunOrCreateChart");
 //			UiPushbuttonsDlg runOrCreate = new UiPushbuttonsDlg(mainWindow, title, buttonLabels);

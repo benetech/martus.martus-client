@@ -46,6 +46,7 @@ import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
@@ -95,7 +96,7 @@ public class CreateChartDialog extends JDialog
 		ok.addActionListener(new OkHandler());
 		ok.setEnabled(false);
 
-		UiButton cancel = new UiButton(getLocalization().getButtonLabel(EnglishStrings.CANCEL));
+		UiButton cancel = new UiButton(getLocalization().getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(new CancelHandler());
 		Box buttonBox = Box.createHorizontalBox();
 		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {Box.createHorizontalGlue(), ok, cancel});

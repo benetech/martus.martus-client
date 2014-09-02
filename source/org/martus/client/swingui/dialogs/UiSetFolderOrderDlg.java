@@ -44,6 +44,7 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiList;
@@ -94,7 +95,7 @@ public class UiSetFolderOrderDlg extends JDialog implements ActionListener
 
 		ok = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
 		ok.addActionListener(this);
-		cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
+		cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(this);
 		Box okCancelBox = Box.createHorizontalBox();
 		Utilities.addComponentsRespectingOrientation(okCancelBox, new Component[] {ok, new UiLabel("   "), cancel, Box.createHorizontalGlue()});

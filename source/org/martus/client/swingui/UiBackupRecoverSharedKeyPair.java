@@ -37,6 +37,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiFileChooser;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
@@ -403,7 +404,7 @@ public class UiBackupRecoverSharedKeyPair
 		Integer.toString(totalNumberOfDisks);
 		String insertNextDiskMessage[] = {message1, message2};
 
-		String buttons[] = {localization.getButtonLabel(EnglishStrings.OK), localization.getButtonLabel(EnglishStrings.CANCEL)};			
+		String buttons[] = {localization.getButtonLabel(EnglishStrings.OK), localization.getButtonLabel(EnglishCommonStrings.CANCEL)};			
 
 		if(!mainWindow.confirmDlg(mainWindow, windowTitle, insertNextDiskMessage, buttons))
 		{
