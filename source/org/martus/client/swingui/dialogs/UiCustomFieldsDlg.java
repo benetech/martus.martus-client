@@ -47,6 +47,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 
 import org.martus.client.core.CustomFieldsDuplicateLabelChecker;
+import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
@@ -105,7 +106,7 @@ public class UiCustomFieldsDlg extends JDialog
 		
 		JButton ok = new UiButton(localization.getButtonLabel("input" + baseTag + "ok"));
 		ok.addActionListener(new OkHandler());
-		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
+		JButton cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancel.addActionListener(new CancelHandler());
 		JButton help = new UiButton(localization.getButtonLabel("customHelp"));
 		help.addActionListener(new CustomHelpHandler());

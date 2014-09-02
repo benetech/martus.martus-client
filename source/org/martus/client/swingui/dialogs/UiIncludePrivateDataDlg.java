@@ -30,9 +30,12 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+
+import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiButton;
@@ -59,7 +62,7 @@ public class UiIncludePrivateDataDlg extends JDialog implements ActionListener
 		publicAndPrivate.addActionListener(this);		
 		publicOnly = new UiButton(localization.getButtonLabel("PublicOnly"));
 		publicOnly.addActionListener(this);		
-		cancel = new UiButton(localization.getButtonLabel("cancel"));
+		cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancel.addActionListener(this);	
 		
 		HashMap tokenReplacement = new HashMap();

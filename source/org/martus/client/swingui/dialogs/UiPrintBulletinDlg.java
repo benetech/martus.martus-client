@@ -33,6 +33,7 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
+
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -40,6 +41,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
@@ -74,7 +77,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		//includePrivate = new UiCheckBox(localization.getFieldLabel("PrintPrivateData"));
 		ok = new UiButton(localization.getButtonLabel("Continue"));
 		ok.addActionListener(this);		
-		cancel = new UiButton(localization.getButtonLabel("cancel"));
+		cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancel.addActionListener(this);	
 		
 		publicOnly = new UiRadioButton(localization.getButtonLabel("PrintOnlyPublic"));

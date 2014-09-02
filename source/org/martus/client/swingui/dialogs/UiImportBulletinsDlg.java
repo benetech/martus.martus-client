@@ -38,6 +38,7 @@ import javax.swing.JPanel;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ImportBulletins;
+import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
@@ -85,7 +86,7 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 		ok.addActionListener(this);
 		getRootPane().setDefaultButton(ok);
 		
-		UiButton cancel = new UiButton(localization.getButtonLabel("cancel"));
+		UiButton cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancel.addActionListener(this);
 		Box buttons = Box.createHorizontalBox();
 		Utilities.addComponentsRespectingOrientation(buttons, new Component[]{ok, cancel, Box.createHorizontalGlue()});

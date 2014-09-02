@@ -403,7 +403,7 @@ public class UiBackupRecoverSharedKeyPair
 		Integer.toString(totalNumberOfDisks);
 		String insertNextDiskMessage[] = {message1, message2};
 
-		String buttons[] = {localization.getButtonLabel("ok"), localization.getButtonLabel("cancel")};			
+		String buttons[] = {localization.getButtonLabel("ok"), localization.getButtonLabel(EnglishStrings.CANCEL)};			
 
 		if(!mainWindow.confirmDlg(mainWindow, windowTitle, insertNextDiskMessage, buttons))
 		{

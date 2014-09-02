@@ -39,6 +39,7 @@ import javax.swing.JDialog;
 
 import org.martus.client.bulletinstore.ExportBulletins;
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiBulletinTitleListComponent;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiSession;
@@ -80,7 +81,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		ok = new UiButton(localization.getButtonLabel("Continue"));
 		ok.addActionListener(this);
 		
-		cancel = new UiButton(localization.getButtonLabel("cancel"));
+		cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancel.addActionListener(this);
 		
 		
