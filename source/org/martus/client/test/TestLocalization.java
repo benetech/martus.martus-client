@@ -42,6 +42,7 @@ import org.martus.client.swingui.UiSession;
 import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -378,7 +379,7 @@ public class TestLocalization extends TestCaseEnhanced
 		assertTrue("should now have testLanguage", foundSomeTestLanguage);
 		myLocalization.setCurrentLanguageCode(someTestLanguageCode);
 		assertEquals("Incorrect translation OK from within language pack", "OK", myLocalization.getButtonLabel(EnglishStrings.OK));
-		assertEquals("Incorrect translation No from within language pack", "No", myLocalization.getButtonLabel("no"));
+		assertEquals("Incorrect translation No from within language pack", "No", myLocalization.getButtonLabel(EnglishCommonStrings.NO));
 		assertTrue("A signed MLP file should be trusted", myLocalization.isOfficialTranslation(someTestLanguageCode));
 		assertTrue("We should be using a Language Pack", myLocalization.isTranslationInsideMLP());
 
@@ -393,7 +394,7 @@ public class TestLocalization extends TestCaseEnhanced
 		assertTrue("should still have testLanguage even if its not signed.", foundSomeTestLanguage);
 		myLocalization2.setCurrentLanguageCode(someTestLanguageCode);
 		assertEquals("Incorrect translation OK from within unsigned language pack", "OK", myLocalization2.getButtonLabel(EnglishStrings.OK));
-		assertEquals("Incorrect translation No from within unsigned language pack", "No", myLocalization2.getButtonLabel("no"));
+		assertEquals("Incorrect translation No from within unsigned language pack", "No", myLocalization2.getButtonLabel(EnglishCommonStrings.NO));
 		assertTrue("We should be still be using a Language Pack", myLocalization2.isTranslationInsideMLP());
 		
 		assertFalse("A unsigned MLPK file should not be trusted", myLocalization2.isOfficialTranslation(someTestLanguageCode));
@@ -420,7 +421,7 @@ public class TestLocalization extends TestCaseEnhanced
 		assertTrue("should have testLanguage since it is official", foundSomeTestLanguage);
 		myLocalization.setCurrentLanguageCode(someTestLanguageCode);
 		assertEquals("Incorrect translation OK from within language pack", "OK", myLocalization.getButtonLabel(EnglishStrings.OK));
-		assertEquals("Incorrect translation No from within language pack", "No", myLocalization.getButtonLabel("no"));
+		assertEquals("Incorrect translation No from within language pack", "No", myLocalization.getButtonLabel(EnglishCommonStrings.NO));
 		assertTrue("A signed MLP file should be trusted", myLocalization.isOfficialTranslation(someTestLanguageCode));
 		
 		assertEquals("Date of MLP not the correct?", new Date(mlp.getEntry("META-INF").getTime()) , myLocalization.getMlpDate());

@@ -30,6 +30,7 @@ import java.io.File;
 import java.util.Arrays;
 
 import org.martus.client.core.SafeReadableBulletin;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
@@ -548,7 +549,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		b.set("bogus", "");
 		
 		String localizedTrue = localization.getButtonLabel("yes");
-		String localizedFalse = localization.getButtonLabel("no");
+		String localizedFalse = localization.getButtonLabel(EnglishCommonStrings.NO);
 		
 		verifyOperatorComparison("testBooleanMatches", b, trueField, "", localizedTrue, true);
 		verifyOperatorComparison("testBooleanMatches", b, trueField, "", localizedFalse, false);
