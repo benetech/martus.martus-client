@@ -113,7 +113,7 @@ public class UiSortFieldsDlg extends JDialog implements ActionListener
 		mainArea.add(breakChoice);
 		
 		contentPane.add(mainArea, BorderLayout.CENTER);
-		okButton = new UiButton(localization.getButtonLabel("ok"));
+		okButton = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
 		okButton.addActionListener(this);
 		UiButton cancelButton = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancelButton.addActionListener(this);

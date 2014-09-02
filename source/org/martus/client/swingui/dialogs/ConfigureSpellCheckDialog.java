@@ -65,7 +65,7 @@ public class ConfigureSpellCheckDialog extends JDialog
 		dictionaryEditor.setText(getUserDictionaryWords());
 		getContentPane().add(new UiScrollPane(dictionaryEditor), BorderLayout.CENTER);
 		
-		UiButton ok = new UiButton(getLocalization().getButtonLabel("ok"));
+		UiButton ok = new UiButton(getLocalization().getButtonLabel(EnglishStrings.OK));
 		ok.addActionListener(new OkHandler());
 
 		UiButton cancel = new UiButton(getLocalization().getButtonLabel(EnglishStrings.CANCEL));

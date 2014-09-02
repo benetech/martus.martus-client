@@ -92,7 +92,7 @@ public class UiSetFolderOrderDlg extends JDialog implements ActionListener
 		
 		UiScrollPane scroller = new UiScrollPane(folderList	);
 
-		ok = new UiButton(localization.getButtonLabel("ok"));
+		ok = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
 		ok.addActionListener(this);
 		cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancel.addActionListener(this);

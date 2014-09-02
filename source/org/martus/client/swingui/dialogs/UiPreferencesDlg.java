@@ -126,7 +126,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		preferences.addOnNewLine(useInternalTor);
 		preferences.addBlankLine();
 		
-		ok = new UiButton(localization.getButtonLabel("ok"));
+		ok = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
 		ok.addActionListener(this);
 		cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancel.addActionListener(this);
