@@ -60,7 +60,7 @@ public class UiBoolViewer extends UiViewerField
 	{
 		String text = "";
 		if(newText.equals(FieldSpec.TRUESTRING))
-			text = getLocalization().getButtonLabel("yes");
+			text = getLocalization().getButtonLabel(EnglishCommonStrings.YES);
 		else
 			text = getLocalization().getButtonLabel(EnglishCommonStrings.NO);
 

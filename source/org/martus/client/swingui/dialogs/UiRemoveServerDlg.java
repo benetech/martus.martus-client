@@ -66,7 +66,7 @@ public class UiRemoveServerDlg extends JDialog implements ActionListener
 		serversField.setPreferredSize(new Dimension(10,20));
 		serversField.setEditable(false);						
 
-		yes = new UiButton(localization.getButtonLabel("yes"));		
+		yes = new UiButton(localization.getButtonLabel(EnglishCommonStrings.YES));		
 		yes.addActionListener(this);
 		JButton no = new UiButton(localization.getButtonLabel(EnglishCommonStrings.NO));
 		no.addActionListener(this);

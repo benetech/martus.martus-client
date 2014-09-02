@@ -548,7 +548,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		b.set("false", FieldSpec.FALSESTRING);
 		b.set("bogus", "");
 		
-		String localizedTrue = localization.getButtonLabel("yes");
+		String localizedTrue = localization.getButtonLabel(EnglishCommonStrings.YES);
 		String localizedFalse = localization.getButtonLabel(EnglishCommonStrings.NO);
 		
 		verifyOperatorComparison("testBooleanMatches", b, trueField, "", localizedTrue, true);
