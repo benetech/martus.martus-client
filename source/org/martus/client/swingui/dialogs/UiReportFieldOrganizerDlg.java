@@ -37,7 +37,6 @@ import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 
 import org.martus.client.search.FieldChooserSpecBuilder;
-import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.EnglishCommonStrings;
@@ -78,7 +77,7 @@ public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 		sideButtonBar.add(upButton);
 		sideButtonBar.add(downButton);
 		
-		okButton = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
+		okButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 		okButton.addActionListener(new OkButtonHandler());
 		UiButton cancelButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancelButton.addActionListener(new CancelButtonHandler());

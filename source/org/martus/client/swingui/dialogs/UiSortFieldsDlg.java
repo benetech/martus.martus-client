@@ -36,7 +36,6 @@ import javax.swing.Box;
 import javax.swing.JDialog;
 
 import org.martus.client.search.SortFieldChooserSpecBuilder;
-import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor;
 import org.martus.clientside.UiLocalization;
@@ -114,7 +113,7 @@ public class UiSortFieldsDlg extends JDialog implements ActionListener
 		mainArea.add(breakChoice);
 		
 		contentPane.add(mainArea, BorderLayout.CENTER);
-		okButton = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
+		okButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 		okButton.addActionListener(this);
 		UiButton cancelButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancelButton.addActionListener(this);

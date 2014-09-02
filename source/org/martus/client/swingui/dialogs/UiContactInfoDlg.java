@@ -34,7 +34,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 import org.martus.client.core.ConfigInfo;
-import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
@@ -59,7 +58,7 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		UiLocalization localization = mainWindow.getLocalization();
 	
 		setTitle(localization.getWindowTitle("setupcontact"));
-		ok = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
+		ok = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 		ok.addActionListener(this);
 		JButton cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(this);

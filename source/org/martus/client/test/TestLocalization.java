@@ -378,7 +378,7 @@ public class TestLocalization extends TestCaseEnhanced
 		foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
 		assertTrue("should now have testLanguage", foundSomeTestLanguage);
 		myLocalization.setCurrentLanguageCode(someTestLanguageCode);
-		assertEquals("Incorrect translation OK from within language pack", "OK", myLocalization.getButtonLabel(EnglishStrings.OK));
+		assertEquals("Incorrect translation OK from within language pack", "OK", myLocalization.getButtonLabel(EnglishCommonStrings.OK));
 		assertEquals("Incorrect translation No from within language pack", "No", myLocalization.getButtonLabel(EnglishCommonStrings.NO));
 		assertTrue("A signed MLP file should be trusted", myLocalization.isOfficialTranslation(someTestLanguageCode));
 		assertTrue("We should be using a Language Pack", myLocalization.isTranslationInsideMLP());
@@ -393,7 +393,7 @@ public class TestLocalization extends TestCaseEnhanced
 		foundSomeTestLanguage = doesLanguageExist(myLocalization2, someTestLanguageCode);
 		assertTrue("should still have testLanguage even if its not signed.", foundSomeTestLanguage);
 		myLocalization2.setCurrentLanguageCode(someTestLanguageCode);
-		assertEquals("Incorrect translation OK from within unsigned language pack", "OK", myLocalization2.getButtonLabel(EnglishStrings.OK));
+		assertEquals("Incorrect translation OK from within unsigned language pack", "OK", myLocalization2.getButtonLabel(EnglishCommonStrings.OK));
 		assertEquals("Incorrect translation No from within unsigned language pack", "No", myLocalization2.getButtonLabel(EnglishCommonStrings.NO));
 		assertTrue("We should be still be using a Language Pack", myLocalization2.isTranslationInsideMLP());
 		
@@ -420,7 +420,7 @@ public class TestLocalization extends TestCaseEnhanced
 		foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
 		assertTrue("should have testLanguage since it is official", foundSomeTestLanguage);
 		myLocalization.setCurrentLanguageCode(someTestLanguageCode);
-		assertEquals("Incorrect translation OK from within language pack", "OK", myLocalization.getButtonLabel(EnglishStrings.OK));
+		assertEquals("Incorrect translation OK from within language pack", "OK", myLocalization.getButtonLabel(EnglishCommonStrings.OK));
 		assertEquals("Incorrect translation No from within language pack", "No", myLocalization.getButtonLabel(EnglishCommonStrings.NO));
 		assertTrue("A signed MLP file should be trusted", myLocalization.isOfficialTranslation(someTestLanguageCode));
 		

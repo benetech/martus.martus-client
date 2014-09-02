@@ -41,7 +41,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
 import org.martus.client.bulletinstore.BulletinFolder;
-import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.EnglishCommonStrings;
@@ -93,7 +92,7 @@ public class UiSetFolderOrderDlg extends JDialog implements ActionListener
 		
 		UiScrollPane scroller = new UiScrollPane(folderList	);
 
-		ok = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
+		ok = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 		ok.addActionListener(this);
 		cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(this);
