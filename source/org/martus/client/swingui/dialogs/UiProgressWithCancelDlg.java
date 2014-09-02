@@ -34,10 +34,10 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
-import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiProgressMeter;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MartusLogger;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.swing.UiButton;
@@ -54,7 +54,7 @@ public class UiProgressWithCancelDlg extends JDialog implements ProgressMeterInt
 		UiLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle(tagToUse));
 		
-		cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
+		cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(new CancelHandler());
 		cancel.setAlignmentX(JButton.CENTER_ALIGNMENT);
 

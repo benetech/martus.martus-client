@@ -50,6 +50,7 @@ import org.martus.client.search.SearchFieldTreeNode;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor.BlankLeafRenderer;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor.SearchFieldTree;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
@@ -80,7 +81,7 @@ public class FieldTreeDialog extends JDialog implements TreeSelectionListener
 		tree.setCellRenderer(new BlankLeafRenderer());
 		
 		okButton = new UiButton(okAction);
-		cancelButton = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
+		cancelButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancelButton.addActionListener(new CancelButtonHandler());
 		createButtonBox(localization);
 		

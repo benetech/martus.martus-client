@@ -46,9 +46,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 
-import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MiniLocalization;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.MartusParagraphLayout;
@@ -122,7 +122,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 	{
 		JButton ok = new UiButton(localization.getButtonLabel(okButtonTag));
 		ok.addActionListener(new OkHandler());
-		JButton cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
+		JButton cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(new CancelHandler());
 		JButton preview = new UiButton(localization.getButtonLabel("Preview"));
 		preview.addActionListener(new PreviewHandler());

@@ -42,10 +42,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
@@ -77,7 +77,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		//includePrivate = new UiCheckBox(localization.getFieldLabel("PrintPrivateData"));
 		ok = new UiButton(localization.getButtonLabel("Continue"));
 		ok.addActionListener(this);		
-		cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
+		cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(this);	
 		
 		publicOnly = new UiRadioButton(localization.getButtonLabel("PrintOnlyPublic"));

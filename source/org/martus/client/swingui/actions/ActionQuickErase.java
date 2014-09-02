@@ -44,6 +44,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiVBox;
@@ -185,7 +186,7 @@ public abstract class ActionQuickErase extends UiMenuAction
 			okButton = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
 			okButton.addActionListener(this);
 			
-			JButton cancelButton = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
+			JButton cancelButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 			cancelButton.addActionListener(this);
 
 			Box hBox = Box.createHorizontalBox();

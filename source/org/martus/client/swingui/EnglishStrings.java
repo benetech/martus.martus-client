@@ -397,7 +397,6 @@ public class EnglishStrings
 "button:customExport=Export Template",
 "button:customSendToServer=Send Template to Server",
 
-"button:cancel=Cancel",
 "button:save=Save",
 "button:browse=Browse...",
 "button:retrieve=Retrieve",
@@ -1960,7 +1959,5 @@ public class EnglishStrings
 "keyword:and=and",
 "keyword:or=or",
 	};
-	
-	final static public String CANCEL = "cancel";
 	final static public String OK = "ok";
 }

@@ -36,6 +36,7 @@ import javax.swing.JPanel;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiWrappedTextPanel;
@@ -57,7 +58,7 @@ public class UiReportFieldChooserDlg extends UIReportFieldDlg
 		
 		UiButton okButton = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
 		okButton.addActionListener(new OkButtonHandler());
-		UiButton cancelButton = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
+		UiButton cancelButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancelButton.addActionListener(new CancelButtonHandler());
 		Box buttonBar = Box.createHorizontalBox();
 		Component[] buttons = {Box.createHorizontalGlue(), okButton, cancelButton};
