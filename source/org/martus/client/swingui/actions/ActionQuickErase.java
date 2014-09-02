@@ -182,7 +182,7 @@ public abstract class ActionQuickErase extends UiMenuAction
 			text.setForeground(Color.BLACK);
 			text.setEditable(false);
 			
-			okButton = new UiButton(localization.getButtonLabel("ok"));
+			okButton = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
 			okButton.addActionListener(this);
 			
 			JButton cancelButton = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));

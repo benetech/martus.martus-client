@@ -68,7 +68,7 @@ public class FieldTreeDialog extends JDialog implements TreeSelectionListener
 		setTitle(localization.getButtonLabel("PopUpTreeChoose"));
 		setLocation(location);
 		
-		okAction = new OkAction(localization.getButtonLabel("ok"));
+		okAction = new OkAction(localization.getButtonLabel(EnglishStrings.OK));
 
 		tree = new SearchFieldTree(spec.getModel());
 		tree.setRootVisible(false);

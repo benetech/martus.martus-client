@@ -88,7 +88,7 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 
 		panel.addBlankLine();
 
-		ok = new UiButton(localization.getButtonLabel("ok"));
+		ok = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
 		ok.addActionListener(this);
 		JButton cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancel.addActionListener(this);

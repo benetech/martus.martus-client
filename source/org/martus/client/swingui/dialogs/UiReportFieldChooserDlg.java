@@ -55,7 +55,7 @@ public class UiReportFieldChooserDlg extends UIReportFieldDlg
 
 		fieldSelector = new UiReportFieldSelectorPanel(mainWindow, specsToUse);
 		
-		UiButton okButton = new UiButton(localization.getButtonLabel("ok"));
+		UiButton okButton = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
 		okButton.addActionListener(new OkButtonHandler());
 		UiButton cancelButton = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancelButton.addActionListener(new CancelButtonHandler());

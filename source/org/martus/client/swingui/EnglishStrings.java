@@ -1962,4 +1962,5 @@ public class EnglishStrings
 	};
 	
 	final static public String CANCEL = "cancel";
+	final static public String OK = "ok";
 }

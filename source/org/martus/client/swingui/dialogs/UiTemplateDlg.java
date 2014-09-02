@@ -68,7 +68,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		fontHelper = new UiFontEncodingHelper(info.getDoZawgyiConversion());
 		UiLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle("BulletinTemplate"));
-		okButton = new UiButton(localization.getButtonLabel("ok"));
+		okButton = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
 		okButton.addActionListener(this);
 		JButton cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancel.addActionListener(this);
@@ -115,7 +115,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 			String helpMsgExample1 = localization.getFieldLabel("HelpExample1DefaultDetails");
 			String helpMsgExample2 = localization.getFieldLabel("HelpExample2DefaultDetails");
 			String helpMsgExampleEtc = localization.getFieldLabel("HelpExampleEtcDefaultDetails");
-			String ok = localization.getButtonLabel("ok");
+			String ok = localization.getButtonLabel(EnglishStrings.OK);
 			String[] contents = {helpMsg, "", "",helpMsgExample, helpMsgExample1, "", helpMsgExample2, "", helpMsgExampleEtc};
 			String[] buttons = {ok};
 

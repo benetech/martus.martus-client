@@ -77,7 +77,7 @@ public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 		sideButtonBar.add(upButton);
 		sideButtonBar.add(downButton);
 		
-		okButton = new UiButton(localization.getButtonLabel("ok"));
+		okButton = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
 		okButton.addActionListener(new OkButtonHandler());
 		UiButton cancelButton = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancelButton.addActionListener(new CancelButtonHandler());

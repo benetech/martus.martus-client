@@ -39,6 +39,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JViewport;
 
+import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentViewSection;
@@ -82,7 +83,7 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 		scrollPane.getViewport().add(view);
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.X_AXIS));
-		JButton ok = new UiButton(localization.getButtonLabel("ok"));
+		JButton ok = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
 		ok.addActionListener(this);
 		Dimension okSize = ok.getPreferredSize();
 		okSize.width += 40;

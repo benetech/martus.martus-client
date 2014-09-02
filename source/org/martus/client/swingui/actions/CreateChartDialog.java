@@ -91,7 +91,7 @@ public class CreateChartDialog extends JDialog
 		Utilities.addComponentsRespectingOrientation(panel, subtitleRow);
 		getContentPane().add(panel, BorderLayout.CENTER);
 		
-		ok = new UiButton(getLocalization().getButtonLabel("ok"));
+		ok = new UiButton(getLocalization().getButtonLabel(EnglishStrings.OK));
 		ok.addActionListener(new OkHandler());
 		ok.setEnabled(false);
 

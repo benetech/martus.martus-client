@@ -58,7 +58,7 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		UiLocalization localization = mainWindow.getLocalization();
 	
 		setTitle(localization.getWindowTitle("setupcontact"));
-		ok = new UiButton(localization.getButtonLabel("ok"));
+		ok = new UiButton(localization.getButtonLabel(EnglishStrings.OK));
 		ok.addActionListener(this);
 		JButton cancel = new UiButton(localization.getButtonLabel(EnglishStrings.CANCEL));
 		cancel.addActionListener(this);
