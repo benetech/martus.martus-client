@@ -718,7 +718,8 @@ public class EnglishStrings
 
 "wintitle:FileDialogSaveAttachment=Save Attachment",
 
-"wintitle:FileDialogExportBulletins=Export Bulletins",
+"wintitle:FileSaveDialogExport=Export Bulletins to which file?",
+"wintitle:FolderSelectDialogExport=Export to which folder?",
 
 "wintitle:FileDialogExportCustomization=Export Customization Template",
 

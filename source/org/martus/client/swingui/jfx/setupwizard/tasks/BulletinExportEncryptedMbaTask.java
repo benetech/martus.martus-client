@@ -26,17 +26,18 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.setupwizard.tasks;
 
 import java.io.File;
+import java.util.Vector;
 
+import org.martus.client.bulletinstore.ExportEncryptedBulletins;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionMenuExportMba;
-import org.martus.common.bulletin.Bulletin;
+import org.martus.common.packet.UniversalId;
 
-public class BulletinExportEncryptedMbaTask extends AbstractAppTask
+public class BulletinExportEncryptedMbaTask extends AbstractExportTask
 {
-	public BulletinExportEncryptedMbaTask(UiMainWindow mainWindowToUse, Bulletin bulletinsToUse, File destinationToUse)
+	public BulletinExportEncryptedMbaTask(UiMainWindow mainWindowToUse, UniversalId[] bulletinIdsToUse, File destinationToUse)
 	{
-		super(mainWindowToUse.getApp());
-		bulletinToExport = bulletinsToUse;
+		super(mainWindowToUse);
+		bulletinIdsToExport = bulletinIdsToUse;
 		destination = destinationToUse;
 		mainWindow = mainWindowToUse;
 	}
@@ -44,13 +45,13 @@ public class BulletinExportEncryptedMbaTask extends AbstractAppTask
 	@Override
 	protected Void call() throws Exception
 	{
-		ActionMenuExportMba.exportBulletinToMba(mainWindow, bulletinToExport, destination);
-		progress.finished();
+		Vector bulletinsToExport = mainWindow.getBulletins(bulletinIdsToExport);			
+		exporter = new ExportEncryptedBulletins(mainWindow, progress);
+		exporter.doExport(destination, bulletinsToExport);
 		return null;
 	}
 	
 	private UiMainWindow mainWindow;
-	private Bulletin bulletinToExport;
+	private UniversalId[] bulletinIdsToExport;
 	private File destination;
-
 }
