@@ -28,6 +28,8 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -135,7 +137,48 @@ public class ExportItemsController extends FxController
 			File combinedExportFile = new File(exportFolder, exportFilenameOnly);
 			absolutePathToFileOrFolder = combinedExportFile.getAbsolutePath();
 		}
-		fileLocation.setText(absolutePathToFileOrFolder);
+		setExportFile(absolutePathToFileOrFolder);
+	}
+
+	private void setExportFile(String absolutePathToFileOrFolder)
+	{
+		String uniqueAbsolutePathToFileOrFolder = absolutePathToFileOrFolder;
+		File currentFileOrFolder = new File(absolutePathToFileOrFolder);
+		if(	currentFileOrFolder.isFile() && currentFileOrFolder.exists())
+		{
+			File uniqueFile = getUniqueFile(currentFileOrFolder);
+			uniqueAbsolutePathToFileOrFolder = uniqueFile.getAbsolutePath();
+		}	
+		fileLocation.setText(uniqueAbsolutePathToFileOrFolder);
+	}
+
+	private File getUniqueFile(File existingFile)
+	{
+		File currentFile = existingFile;
+		do
+		{
+			currentFile = new File(currentFile.getParentFile(), getNextFileName(currentFile.getName()));
+		} while (currentFile.exists());
+
+		return currentFile;
+	}
+
+	private String getNextFileName(String name)
+	{
+		int lastIndexOfFileNameOnly = name.lastIndexOf('.');
+		String fileExtension = name.substring(lastIndexOfFileNameOnly);
+		Pattern p = Pattern.compile("\\([0-9]+\\)");
+		Matcher m = p.matcher(name);
+		int newIndex = 1;
+		if(m.find())
+		{
+			int currentIndex = Integer.parseInt(m.group().replaceAll( "[^\\d]", "" ));
+			newIndex = ++currentIndex;
+			lastIndexOfFileNameOnly = m.start();
+		}
+		String FileNameWithoutIndex = name.substring(0, lastIndexOfFileNameOnly);
+		String newFileNameWithIndex = FileNameWithoutIndex +"(" + Integer.toString(newIndex) + ")" + fileExtension;
+		return newFileNameWithIndex;
 	}
 
 	@FXML
@@ -153,7 +196,7 @@ public class ExportItemsController extends FxController
 			exportFolder = saveLocationFileOrFolder.getParentFile();
 			exportFilenameOnly = saveLocationFileOrFolder.getName();
 		}
-		updateExportFilename();
+		fileLocation.setText(saveLocationFileOrFolder.getAbsolutePath());
 	}
 
 	private FormatFilter getFormatFilter()
@@ -201,7 +244,8 @@ public class ExportItemsController extends FxController
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle(localization.getWindowTitle("FileSaveDialogExport"));
 		fileChooser.setInitialDirectory(exportFolder);
-		fileChooser.setInitialFileName(exportFilenameOnly);
+		File currentUniqueFile = getExportFileOrFolder();
+		fileChooser.setInitialFileName(currentUniqueFile.getName());
 		FormatFilter fileFilter = getFormatFilter();
 		fileChooser.getExtensionFilters().addAll(
 				new FileChooser.ExtensionFilter(fileFilter.getDescription(), fileFilter.getWildCardExtension()),
