@@ -37,29 +37,29 @@ public class ManageTemplatesTableRowData
 	{
 		localization = localizationToUse;
 
-		String localizedTemplateName = FormTemplate.getDisplayableTemplateName(templateNameToUse, localization);
-		localizedTemplateNameProperty = new SimpleStringProperty(localizedTemplateName);
+		String displayableTemplateName = FormTemplate.getDisplayableTemplateName(templateNameToUse, localization);
+		displayableTemplateNameProperty = new SimpleStringProperty(displayableTemplateName);
 	}
 	
-    public Property<String> templateNameProperty() 
+    public Property<String> displayableTemplateNameProperty() 
     { 
-        return localizedTemplateNameProperty; 
+        return displayableTemplateNameProperty; 
     }
     
-    public String getTemplateName()
+    public String getDisplayableTemplateName()
     {
-    	return templateNameProperty().getValue();
+    	return displayableTemplateNameProperty().getValue();
     }
     
     // NOTE: This is required in order to be sortable using SaneComparator
     @Override
     public String toString()
     {
-    	return getTemplateName();
+    	return getDisplayableTemplateName();
     }
 
 	public static final String LOCALIZED_TEMPLATE_NAME = "templateName";
 
-	private Property<String> localizedTemplateNameProperty;
+	private Property<String> displayableTemplateNameProperty;
 	private MiniLocalization localization;
 }
