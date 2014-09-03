@@ -54,6 +54,7 @@ import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinListProvider;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
+import org.martus.client.swingui.jfx.landing.cases.CaseListProvider;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 import org.martus.client.swingui.jfx.landing.general.SettingsController;
 import org.martus.common.MartusLogger;
@@ -66,11 +67,17 @@ public class FxLandingShellController extends FxNonWizardShellController
 		super(mainWindowToUse);
 		bulletinListProvider = new BulletinListProvider(mainWindowToUse);
 		bulletinsListController = new BulletinsListController(mainWindowToUse, bulletinListProvider);
+		caseManagementController = new FxCaseManagementController(getMainWindow());
 	}
 	
 	public BulletinsListController getBulletinsListController()
 	{
 		return bulletinsListController;
+	}
+	
+	public CaseListProvider getCurrentCaseListProvider()
+	{
+		return caseManagementController.getCurrentCaseListProvider();
 	}
 
 	@Override
@@ -85,26 +92,25 @@ public class FxLandingShellController extends FxNonWizardShellController
 		super.initialize(location, bundle);
 		updateOnlineStatus();
 		updateTorStatus();
+		initializeTorListener();
+		caseManagementController.addFolderSelectionListener(bulletinListProvider);
+	}
 
+	private void initializeTorListener()
+	{
 		TorChangeListener torChangeListener = new TorChangeListener();
 		Property<Boolean> configInfoUseInternalTorProperty = getApp().getConfigInfo().useInternalTorProperty();
 		configInfoUseInternalTorProperty.addListener(torChangeListener);
 		Property<Boolean> orchidTransportWrapperTorProperty = getApp().getTransport().getIsTorActiveProperty();
 		orchidTransportWrapperTorProperty.addListener(torChangeListener);
-		
 	}
 
 	@Override
 	public Parent createContents() throws Exception
 	{
 		Parent contents = super.createContents();
-		
-		FxCaseManagementController caseManagementSideBar = new FxCaseManagementController(getMainWindow());
-		caseManagementSideBar.addFolderSelectionListener(bulletinListProvider);
-
-		loadControllerAndEmbedInPane(caseManagementSideBar, sideContentPane);
+		loadControllerAndEmbedInPane(caseManagementController, sideContentPane);
 		loadControllerAndEmbedInPane(bulletinsListController, mainContentPane);
-		
 		return contents;
 	}
 
@@ -291,5 +297,6 @@ public class FxLandingShellController extends FxNonWizardShellController
 	
 	private BulletinsListController bulletinsListController;
 	private BulletinListProvider bulletinListProvider;
+	private FxCaseManagementController caseManagementController;
 }
 

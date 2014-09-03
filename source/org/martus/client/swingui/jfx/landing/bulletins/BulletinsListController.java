@@ -55,9 +55,14 @@ import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
+import org.martus.client.swingui.jfx.landing.FxLandingShellController;
+import org.martus.client.swingui.jfx.landing.FxMainStage;
+import org.martus.client.swingui.jfx.landing.cases.CaseListItem;
+import org.martus.client.swingui.jfx.landing.cases.CaseListProvider;
 import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractExportTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.BulletinExportEncryptedMbaTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.BulletinExportUnencryptedXmlTask;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
@@ -345,11 +350,34 @@ public class BulletinsListController extends AbstractFxLandingContentController
 			defaultFileName = getMainWindow().getStore().getBulletinRevision(bulletinsIdsToExport[0]).toFileName();
 		return defaultFileName;
 	}
+	
+	private CaseListProvider getAvailableCasesForMove()
+	{
+		CaseListProvider currentCases = ((FxLandingShellController)getShellController()).getCurrentCaseListProvider();
+		BulletinFolder currentFolder = bulletinTableProvider.getFolder();
+		
+		CaseListProvider casesToMoveInto = new CaseListProvider();
+		for (CaseListItem caseListItem : currentCases)
+		{
+			if(!caseListItem.getFolder().equals(currentFolder))
+				casesToMoveInto.add(caseListItem);
+		}
+		return casesToMoveInto;
+	}
 
 	@FXML
 	private void onMoveSelectedItems(javafx.event.ActionEvent event)
 	{
-		
+		try
+		{
+			CaseListProvider casesAvailableToMoveItemsTo = getAvailableCasesForMove();
+			MoveItemsToCasesController moveItemsController = new MoveItemsToCasesController(getMainWindow(), casesAvailableToMoveItemsTo);
+			showModalYesNoDialog("MoveRecords", "move", EnglishCommonStrings.CANCEL, moveItemsController);
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
 	}
 	
 	@FXML

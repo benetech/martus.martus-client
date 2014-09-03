@@ -69,7 +69,7 @@ abstract public class FxController implements Initializable
 	{
 	}
 	
-	private FxShellController getShellController()
+	protected FxShellController getShellController()
 	{
 		return shellController;
 	}
