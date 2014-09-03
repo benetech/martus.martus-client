@@ -4,17 +4,15 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="347.0" prefWidth="584.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <ListView fx:id="casesListView" prefHeight="200.0" prefWidth="200.0" />
+            <Label fx:id="caseProjectIncidentMessageLabel" />
+            <Label />
+            <ListView fx:id="casesListView" />
             <CheckBox fx:id="removeFromExistingCase" mnemonicParsing="false" text="Remove from existing Case?" />
          </children>
       </VBox>
    </center>
-   <bottom>
-      <Button mnemonicParsing="false" onAction="#onMove" text="Move" BorderPane.alignment="CENTER" />
-   </bottom>
 </BorderPane>

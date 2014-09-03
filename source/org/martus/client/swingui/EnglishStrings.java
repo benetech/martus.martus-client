@@ -354,7 +354,7 @@ public class EnglishStrings
 "field:CreatingAccount=Please wait. Your account's encryption key is being created.",
 "field:LoadingTemplates=Please wait while we retrieve a list of templates from the server.",
 "field:FindAccountByToken=Please wait while we find this account on the server.",
-
+"field:moveToCaseProjectIncidents=Select one or more #FolderName#, to move selected items to.",
 "field:VerifyPublicCodeNewAndOld=Please verify one of the public codes below depending on which public code you received from your contact.  You may visually verify either code, you don't need to verify both.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.",
 "field:VerifyPublicCode=Please verify the public code below against the one you received from your contact.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.",
 "field:ContactAlreadyExistsAs=This contact currently has the name: '#Name#'",
@@ -1862,6 +1862,9 @@ public class EnglishStrings
 "field:Tor=Tor:",
 "button:On=On",
 "button:Off=Off",
+
+"wintitle:MoveRecords=Move",
+"button:move=Move",
 
 "field:TitleCaseManagement=Management",
 "field:MainFolderLabel=Label:",
