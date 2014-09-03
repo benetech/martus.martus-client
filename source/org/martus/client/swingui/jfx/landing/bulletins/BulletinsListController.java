@@ -105,11 +105,11 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		dateSavedColumn.setCellFactory(TextFieldTableCell.<BulletinTableRowData>forTableColumn());
 		
         Image viewImage = new Image(VIEW_BULLETIN_IMAGE_PATH);
-        viewBulletinColumn.setCellFactory(new FxButtonTableCellFactory(viewImage, () -> viewBulletin()));
+        viewBulletinColumn.setCellFactory(new FxButtonTableCellFactory(viewImage, () -> viewSelectedBulletin()));
 		viewBulletinColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.VIEW_BULLETIN_PROPERTY_NAME));
 		
         Image editImage = new Image(EDIT_BULLETIN_IMAGE_PATH);
-        editBulletinColumn.setCellFactory(new FxButtonTableCellFactory(editImage, () -> editBulletin()));
+        editBulletinColumn.setCellFactory(new FxButtonTableCellFactory(editImage, () -> editSelectedBulletin()));
 		editBulletinColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.EDIT_BULLETIN_PROPERTY_NAME));
 	}
 	
@@ -137,12 +137,12 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		itemsTable.sort();
 	}
 	
-	protected void viewBulletin()
+	protected void viewSelectedBulletin()
 	{
 		//TODO implement this.
 	}
 
-	protected void editBulletin()
+	protected void editSelectedBulletin()
 	{
 		TableViewSelectionModel<BulletinTableRowData> selectionModel = itemsTable.getSelectionModel();
 		BulletinTableRowData selectedItem = selectionModel.getSelectedItem();
@@ -211,7 +211,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	public void onMouseClick(MouseEvent mouseEvent) 
 	{
 		if(isDoubleClick(mouseEvent))
-			viewBulletin();
+			viewSelectedBulletin();
 	}
 	
 	@Override
