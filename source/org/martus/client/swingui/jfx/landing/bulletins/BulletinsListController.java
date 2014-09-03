@@ -56,7 +56,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.jfx.landing.FxLandingShellController;
-import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.landing.cases.CaseListItem;
 import org.martus.client.swingui.jfx.landing.cases.CaseListProvider;
 import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractExportTask;
