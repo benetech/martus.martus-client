@@ -25,8 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -48,6 +46,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 
 import org.martus.client.bulletinstore.BulletinFolder;
@@ -55,6 +54,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
+import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.jfx.landing.FxLandingShellController;
 import org.martus.client.swingui.jfx.landing.cases.CaseListItem;
@@ -103,10 +103,14 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		titleColumn.setCellFactory(TextFieldTableCell.<BulletinTableRowData>forTableColumn());
 		dateSavedColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.DATE_SAVDED_PROPERTY_NAME));
 		dateSavedColumn.setCellFactory(TextFieldTableCell.<BulletinTableRowData>forTableColumn());
+		
+        Image viewImage = new Image(VIEW_BULLETIN_IMAGE_PATH);
+        viewBulletinColumn.setCellFactory(new FxButtonTableCellFactory(viewImage, () -> viewBulletin()));
 		viewBulletinColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.VIEW_BULLETIN_PROPERTY_NAME));
-		viewBulletinColumn.setCellFactory(new ViewEditBulletinTableColumnButton(new ViewBulletinListener(), VIEW_BULLETIN_IMAGE_PATH));
+		
+        Image editImage = new Image(EDIT_BULLETIN_IMAGE_PATH);
+        editBulletinColumn.setCellFactory(new FxButtonTableCellFactory(editImage, () -> editBulletin()));
 		editBulletinColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.EDIT_BULLETIN_PROPERTY_NAME));
-		editBulletinColumn.setCellFactory(new ViewEditBulletinTableColumnButton(new EditBulletinListener(), EDIT_BULLETIN_IMAGE_PATH));
 	}
 	
 	private void initalizeButtons()
@@ -131,35 +135,6 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		sortOrder.clear();
 		sortOrder.add(dateSavedColumn);
 		itemsTable.sort();
-	}
-	
-	
-	private class ViewBulletinListener implements ActionListener
-	{
-		public ViewBulletinListener()
-		{
-		}
-
-		@Override
-		public void actionPerformed(ActionEvent e)
-		{
-			viewBulletin();
-		}
-
-	}
-
-	private class EditBulletinListener implements ActionListener
-	{
-		public EditBulletinListener()
-		{
-		}
-
-		@Override
-		public void actionPerformed(ActionEvent e)
-		{
-			editBulletin();
-		}
-
 	}
 	
 	protected void viewBulletin()
@@ -422,10 +397,10 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	protected TableColumn<BulletinTableRowData, String> dateSavedColumn;	
 
 	@FXML
-	protected TableColumn<BulletinTableRowData, String> viewBulletinColumn;
+	protected TableColumn viewBulletinColumn;
 
 	@FXML
-	protected TableColumn<BulletinTableRowData, String> editBulletinColumn;
+	protected TableColumn editBulletinColumn;
 	
 	@FXML
 	private Button trashButton;
