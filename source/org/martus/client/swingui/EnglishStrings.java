@@ -682,6 +682,7 @@ public class EnglishStrings
 "field:SealingSelectedBulletins=Sealing Bulletins...",
 
 "wintitle:Export=Export",
+"button:ExportTo=Send To",
 
 "field:AddingPermissionsToBulletins=Updating access...",
 "wintitle:confirmAddingPermissionsToBulletinsCancel=Cancel",
