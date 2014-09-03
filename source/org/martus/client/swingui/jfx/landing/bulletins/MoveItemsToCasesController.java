@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -37,6 +38,7 @@ import javafx.scene.control.SelectionMode;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.landing.cases.CaseListItem;
 import org.martus.client.swingui.jfx.landing.cases.CaseListProvider;
 import org.martus.client.swingui.jfx.landing.cases.FxFolderSettingsController;
 import org.martus.util.TokenReplacement;
@@ -81,6 +83,16 @@ public class MoveItemsToCasesController extends FxController
 	{
 		casesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		casesListView.setItems(availableCasesToMove);
+	}
+	
+	public ObservableList<CaseListItem> getSelectedCases()
+	{
+		return casesListView.getSelectionModel().getSelectedItems();
+	}
+	
+	public boolean deleteFromCurrentCase()
+	{
+		return removeFromExistingCase.isSelected();
 	}
 
 	@Override
