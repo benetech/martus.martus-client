@@ -67,9 +67,7 @@ public class ExportItemsController extends FxController
 		BooleanProperty encryptingExport = encryptExportFile.selectedProperty();
 		includeAttachments.disableProperty().bind(encryptingExport);
 
-		String initialFileExportPath = getExportFilenameBasedOnEncryptionStatus();
-		fileLocation.setText(initialFileExportPath);
-
+		updateExportFilename();
 		encryptExportFile.selectedProperty().addListener(new EncryptedStatusChanged());
 		encryptExportFile.setSelected(true);
 		updateControls(shouldExportEncrypted());
