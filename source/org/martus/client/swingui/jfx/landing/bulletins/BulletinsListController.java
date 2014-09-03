@@ -51,6 +51,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 
 import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
@@ -371,7 +372,25 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		{
 			CaseListProvider casesAvailableToMoveItemsTo = getAvailableCasesForMove();
 			MoveItemsToCasesController moveItemsController = new MoveItemsToCasesController(getMainWindow(), casesAvailableToMoveItemsTo);
-			showModalYesNoDialog("MoveRecords", "move", EnglishCommonStrings.CANCEL, moveItemsController);
+			if(showModalYesNoDialog("MoveRecords", "move", EnglishCommonStrings.CANCEL, moveItemsController))
+			{
+				ObservableList<CaseListItem> selectedCases = moveItemsController.getSelectedCases();
+				Vector<UniversalId> bulletinIdsToMove = getSelectedBulletinIds();
+				ClientBulletinStore store = getApp().getStore();
+				BulletinFolder currentCase = bulletinTableProvider.getFolder();
+				boolean deleteFromCurrentCase = moveItemsController.deleteFromCurrentCase();
+				for (UniversalId bulletinId : bulletinIdsToMove)
+				{
+					Bulletin b = store.getBulletinRevision(bulletinId);
+					for (CaseListItem caseItem : selectedCases)
+					{
+						BulletinFolder folderToMoveTo = caseItem.getFolder();
+						store.moveBulletin(b, currentCase, folderToMoveTo, false);		
+					}
+					if(deleteFromCurrentCase)
+						store.removeBulletinFromFolder(currentCase, b);
+				}
+			}
 		} 
 		catch (Exception e)
 		{

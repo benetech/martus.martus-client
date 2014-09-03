@@ -823,6 +823,11 @@ public class ClientBulletinStore extends BulletinStore
 
 	public synchronized void moveBulletin(Bulletin b, BulletinFolder from, BulletinFolder to)
 	{
+		moveBulletin(b, from, to, true);
+	}
+
+	public synchronized void moveBulletin(Bulletin b, BulletinFolder from, BulletinFolder to, boolean removeFromOriginal)
+	{
 		if(from.equals(to))
 			return;
 		try
@@ -838,7 +843,8 @@ public class ClientBulletinStore extends BulletinStore
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		removeBulletinFromFolder(from, b);
+		if(removeFromOriginal)
+			removeBulletinFromFolder(from, b);
 		saveFolders();
 	}
 
