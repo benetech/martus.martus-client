@@ -78,7 +78,7 @@ public class ManageTemplatesController extends FxInSwingController
 	private void initializeAvailableTab()
 	{
 		templateNameColumn.setEditable(false);
-        templateNameColumn.setCellValueFactory(new PropertyValueFactory<ManageTemplatesTableRowData,String>(ManageTemplatesTableRowData.LOCALIZED_TEMPLATE_NAME));
+        templateNameColumn.setCellValueFactory(new PropertyValueFactory<ManageTemplatesTableRowData,String>(ManageTemplatesTableRowData.DISPLAYABLE_TEMPLATE_NAME));
 		Comparator<String> sorter = new SaneCollator(getLocalization().getCurrentLanguageCode());
         templateNameColumn.setComparator(sorter);
 

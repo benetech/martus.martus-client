@@ -37,6 +37,7 @@ public class ManageTemplatesTableRowData
 	{
 		localization = localizationToUse;
 
+		rawTemplateNameProperty = new SimpleStringProperty(rawTemplateNameToUse);
 		String displayableTemplateName = FormTemplate.getDisplayableTemplateName(rawTemplateNameToUse, localization);
 		displayableTemplateNameProperty = new SimpleStringProperty(displayableTemplateName);
 	}
@@ -58,8 +59,10 @@ public class ManageTemplatesTableRowData
     	return getDisplayableTemplateName();
     }
 
-	public static final String LOCALIZED_TEMPLATE_NAME = "templateName";
+	public static final String RAW_TEMPLATE_NAME = "rawTemplateName";
+	public static final String DISPLAYABLE_TEMPLATE_NAME = "displayableTemplateName";
 
+	private Property<String> rawTemplateNameProperty;
 	private Property<String> displayableTemplateNameProperty;
 	private MiniLocalization localization;
 }
