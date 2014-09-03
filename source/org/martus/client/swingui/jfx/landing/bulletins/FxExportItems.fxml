@@ -15,7 +15,7 @@
                <children>
                   <Label text="Location:" />
                   <TextField fx:id="fileLocation" editable="false" prefHeight="26.0" prefWidth="360.0" />
-                  <Button mnemonicParsing="false" onAction="#onChangeFileLocation" text="Destination" />
+                  <Button mnemonicParsing="false" onAction="#onChangeFileLocation" text="%Button.ExportTo" />
                </children>
             </HBox>
          </children>
