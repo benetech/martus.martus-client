@@ -33,11 +33,11 @@ import org.martus.common.fieldspec.FormTemplate;
 
 public class ManageTemplatesTableRowData
 {
-	public ManageTemplatesTableRowData(String templateNameToUse, MiniLocalization localizationToUse)
+	public ManageTemplatesTableRowData(String rawTemplateNameToUse, MiniLocalization localizationToUse)
 	{
 		localization = localizationToUse;
 
-		String displayableTemplateName = FormTemplate.getDisplayableTemplateName(templateNameToUse, localization);
+		String displayableTemplateName = FormTemplate.getDisplayableTemplateName(rawTemplateNameToUse, localization);
 		displayableTemplateNameProperty = new SimpleStringProperty(displayableTemplateName);
 	}
 	
