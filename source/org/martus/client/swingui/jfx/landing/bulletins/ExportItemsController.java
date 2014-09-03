@@ -66,8 +66,6 @@ public class ExportItemsController extends FxController
 		
 		BooleanProperty encryptingExport = encryptExportFile.selectedProperty();
 		includeAttachments.disableProperty().bind(encryptingExport);
-
-		updateExportFilename();
 		encryptExportFile.selectedProperty().addListener(new EncryptedStatusChanged());
 		encryptExportFile.setSelected(true);
 		updateControls(shouldExportEncrypted());
@@ -99,22 +97,6 @@ public class ExportItemsController extends FxController
 		includeAttachments.setSelected(exportEncrypted);
 		updateExportFilename();
 	}
-
-	private void updateExportFilename()
-	{
-		String absolutePathToFileOrFolder;
-		if(showDirectoryOnly())
-		{
-			absolutePathToFileOrFolder = exportFolder.getAbsolutePath();
-		}
-		else
-		{
-			exportFilenameOnly = getExportFilenameBasedOnEncryptionStatus();
-			File combinedExportFile = new File(exportFolder, exportFilenameOnly);
-			absolutePathToFileOrFolder = combinedExportFile.getAbsolutePath();
-		}
-		fileLocation.setText(absolutePathToFileOrFolder);
-	}
 	
 	private String getExportFilenameBasedOnEncryptionStatus()
 	{
@@ -144,6 +126,18 @@ public class ExportItemsController extends FxController
 		return "landing/bulletins/FxExportItems.fxml";
 	}
 	
+	private void updateExportFilename()
+	{
+		String absolutePathToFileOrFolder = exportFolder.getAbsolutePath();
+		if(!showDirectoryOnly())
+		{
+			exportFilenameOnly = getExportFilenameBasedOnEncryptionStatus();
+			File combinedExportFile = new File(exportFolder, exportFilenameOnly);
+			absolutePathToFileOrFolder = combinedExportFile.getAbsolutePath();
+		}
+		fileLocation.setText(absolutePathToFileOrFolder);
+	}
+
 	@FXML
 	public void onChangeFileLocation(ActionEvent event)
 	{
@@ -159,7 +153,7 @@ public class ExportItemsController extends FxController
 			exportFolder = saveLocationFileOrFolder.getParentFile();
 			exportFilenameOnly = saveLocationFileOrFolder.getName();
 		}
-		fileLocation.setText(saveLocationFileOrFolder.getAbsolutePath());
+		updateExportFilename();
 	}
 
 	private FormatFilter getFormatFilter()
