@@ -46,6 +46,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -55,6 +56,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.jfx.common.AbstractFxImportFormTemplateController;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
+import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.FormTemplate;
@@ -82,10 +84,21 @@ public class ManageTemplatesController extends FxInSwingController
 		Comparator<String> sorter = new SaneCollator(getLocalization().getCurrentLanguageCode());
         templateNameColumn.setComparator(sorter);
 
+        Image image = new Image(TRASH_IMAGE_PATH);
+        templateDeleteColumn.setCellFactory(new FxButtonTableCellFactory(image, () -> deleteSelectedTemplate()));
+        templateDeleteColumn.setCellValueFactory(new PropertyValueFactory<ManageTemplatesTableRowData,String>(ManageTemplatesTableRowData.RAW_TEMPLATE_NAME));
+        
         populateAvailableTemplatesTable();
 
         availableTemplatesTable.getSortOrder().clear();
 		availableTemplatesTable.getSortOrder().add(templateNameColumn);
+	}
+	
+	protected void deleteSelectedTemplate()
+	{
+		ManageTemplatesTableRowData selected = availableTemplatesTable.getSelectionModel().getSelectedItem();
+		String displayableName = selected.getDisplayableTemplateName();
+		System.out.println("Delete " + displayableName);
 	}
 
 	private void populateAvailableTemplatesTable()
@@ -278,12 +291,17 @@ public class ManageTemplatesController extends FxInSwingController
 		}
 	}
 
+	final private String TRASH_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/trash.png";
+	
 	@FXML
 	private TableView<ManageTemplatesTableRowData> availableTemplatesTable;
 	
 	@FXML
 	protected TableColumn<ManageTemplatesTableRowData, String> templateNameColumn;
 
+	@FXML
+	protected TableColumn templateDeleteColumn;
+	
 	@FXML
 	private RadioButton genericRadioButton;
 	
