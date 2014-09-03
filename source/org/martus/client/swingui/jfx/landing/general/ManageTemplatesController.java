@@ -108,6 +108,8 @@ public class ManageTemplatesController extends FxInSwingController
 				return;
 
 			getBulletinStore().deleteFormTemplate(selected.getRawTemplateName());
+			
+			populateAvailableTemplatesTable();
 		}
 		catch (Exception e)
 		{
@@ -297,6 +299,7 @@ public class ManageTemplatesController extends FxInSwingController
 					return;
 			}
 			getBulletinStore().saveNewFormTemplate(templateToAdd);
+			populateAvailableTemplatesTable();
 			templateToAddProperty.setValue(null);
 		}
 		catch(Exception e)
