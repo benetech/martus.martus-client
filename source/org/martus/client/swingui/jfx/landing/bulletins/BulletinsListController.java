@@ -106,11 +106,11 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		
         Image viewImage = new Image(VIEW_BULLETIN_IMAGE_PATH);
         viewBulletinColumn.setCellFactory(new FxButtonTableCellFactory(viewImage, () -> viewSelectedBulletin()));
-		viewBulletinColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.VIEW_BULLETIN_PROPERTY_NAME));
+		viewBulletinColumn.setCellValueFactory(new PropertyValueFactory<Object, Boolean>(BulletinTableRowData.CAN_VIEW_PROPERTY_NAME));
 		
         Image editImage = new Image(EDIT_BULLETIN_IMAGE_PATH);
         editBulletinColumn.setCellFactory(new FxButtonTableCellFactory(editImage, () -> editSelectedBulletin()));
-		editBulletinColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.EDIT_BULLETIN_PROPERTY_NAME));
+		editBulletinColumn.setCellValueFactory(new PropertyValueFactory<Object, Boolean>(BulletinTableRowData.CAN_EDIT_PROPERTY_NAME));
 	}
 	
 	private void initalizeButtons()
@@ -397,10 +397,10 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	protected TableColumn<BulletinTableRowData, String> dateSavedColumn;	
 
 	@FXML
-	protected TableColumn viewBulletinColumn;
+	protected TableColumn<Object, Boolean> viewBulletinColumn;
 
 	@FXML
-	protected TableColumn editBulletinColumn;
+	protected TableColumn<Object, Boolean> editBulletinColumn;
 	
 	@FXML
 	private Button trashButton;

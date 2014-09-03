@@ -32,7 +32,7 @@ import javafx.util.Callback;
 
 import org.martus.client.swingui.actions.ActionDoer;
 
-public class FxButtonTableCellFactory implements Callback<TableColumn, TableCell>
+public class FxButtonTableCellFactory implements Callback<TableColumn<Object, Boolean>, TableCell<Object, Boolean>>
 {
 	public FxButtonTableCellFactory(Image imageToUse, ActionDoer doerToUse)
 	{

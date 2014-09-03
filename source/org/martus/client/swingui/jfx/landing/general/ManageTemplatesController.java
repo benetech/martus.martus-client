@@ -60,6 +60,8 @@ import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.FormTemplate;
+import org.martus.util.TokenReplacement;
+import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class ManageTemplatesController extends FxInSwingController
 {
@@ -86,7 +88,7 @@ public class ManageTemplatesController extends FxInSwingController
 
         Image image = new Image(TRASH_IMAGE_PATH);
         templateDeleteColumn.setCellFactory(new FxButtonTableCellFactory(image, () -> deleteSelectedTemplate()));
-        templateDeleteColumn.setCellValueFactory(new PropertyValueFactory<ManageTemplatesTableRowData,String>(ManageTemplatesTableRowData.RAW_TEMPLATE_NAME));
+        templateDeleteColumn.setCellValueFactory(new PropertyValueFactory<Object,Boolean>(ManageTemplatesTableRowData.CAN_DELETE_NAME));
         
         populateAvailableTemplatesTable();
 
@@ -96,9 +98,22 @@ public class ManageTemplatesController extends FxInSwingController
 	
 	protected void deleteSelectedTemplate()
 	{
-		ManageTemplatesTableRowData selected = availableTemplatesTable.getSelectionModel().getSelectedItem();
-		String displayableName = selected.getDisplayableTemplateName();
-		System.out.println("Delete " + displayableName);
+		try
+		{
+			ManageTemplatesTableRowData selected = availableTemplatesTable.getSelectionModel().getSelectedItem();
+			String displayableName = selected.getDisplayableTemplateName();
+			
+			String messageTemplate = getLocalization().getFieldLabel("confirmDeleteTemplate");
+			String message = TokenReplacement.replaceToken(messageTemplate, "#Name#", displayableName);
+			if(!showConfirmationDialog("Templates", message))
+				return;
+
+			// FIXME: Delete template here
+		}
+		catch (TokenInvalidException e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
 	}
 
 	private void populateAvailableTemplatesTable()
@@ -300,7 +315,7 @@ public class ManageTemplatesController extends FxInSwingController
 	protected TableColumn<ManageTemplatesTableRowData, String> templateNameColumn;
 
 	@FXML
-	protected TableColumn templateDeleteColumn;
+	protected TableColumn<Object, Boolean> templateDeleteColumn;
 	
 	@FXML
 	private RadioButton genericRadioButton;
