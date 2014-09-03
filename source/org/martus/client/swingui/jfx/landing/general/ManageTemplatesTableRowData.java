@@ -42,9 +42,19 @@ public class ManageTemplatesTableRowData
 		displayableTemplateNameProperty = new SimpleStringProperty(displayableTemplateName);
 	}
 	
+	public Property<String> rawTemplateNameProperty()
+	{
+		return rawTemplateNameProperty;
+	}
+	
     public Property<String> displayableTemplateNameProperty() 
     { 
         return displayableTemplateNameProperty; 
+    }
+    
+    public String getRawTemplateName()
+    {
+    	return rawTemplateNameProperty().getValue();
     }
     
     public String getDisplayableTemplateName()
