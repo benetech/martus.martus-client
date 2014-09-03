@@ -36,49 +36,37 @@ import org.martus.common.MartusLogger;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.util.UnicodeWriter;
 
-public class ExportBulletins
+public class ExportBulletins extends AbstractExport
 {
 	public ExportBulletins(UiMainWindow mainWindowToUse, ProgressMeterInterface progressDlgToUse)
 	{
-		mainWindow = mainWindowToUse;
-		progressDlg = progressDlgToUse;
+		super(mainWindowToUse, progressDlgToUse);
 	}
 	
-	public void doExport(File destFile, Vector bulletinsToUse, boolean userWantsToExportPrivateToUse, boolean userWantsToExportAttachmentsToUse, boolean userWantsToExportAllVersionsToUse) {
+	@Override
+	public void doExport(File destFile, Vector bulletinsToUse) 
+	{
 		destinationFile = destFile;
 		bulletinsToExport = bulletinsToUse;
-		userWantsToExportPrivate = userWantsToExportPrivateToUse;
-		userWantsToExportAttachments = userWantsToExportAttachmentsToUse;
-		userWantsToExportAllVersions = userWantsToExportAllVersionsToUse;
-		ExporterThread exporterThread = new ExporterThread(progressDlg);
+		ExporterThread exporterThread = new ExporterThread(getProgressDlg());
 		exporterThread.start();
 	}
 	
-	public String getErrorMessage()
-	{
-		return exportMessageTag;
-	}
-	
-	public Map getErrorMessageTokenMap()
-	{
-		return exportMessageTokensMap;
-	}
-
 	protected void updateExportMessage(ExporterThread exporterThread,
 			int bulletinsExported, int numberOfMissingAttachment) 
 	{
-		exportMessageTag = "ExportComplete";
+		setExportErrorMessage("ExportComplete");
 		if(exporterThread.didUnrecoverableErrorOccur())
 		{
-			exportMessageTag = "ErrorExportingBulletins";
-			errorOccuredOrMissingAttachment = true;
+			setExportErrorMessage("ErrorExportingBulletins");
+			setErrorOccured(true);
 		}
 		else if(numberOfMissingAttachment > 0)
 		{
-			exportMessageTag = "ExportCompleteMissingAttachments";
-			errorOccuredOrMissingAttachment = true;
+			setExportErrorMessage("ExportCompleteMissingAttachments");
+			setErrorOccured(true);
 		}
-		exportMessageTokensMap = getTokenReplacementImporter(bulletinsExported, bulletinsToExport.size(), numberOfMissingAttachment);
+		setExportErrorMessageTokensMap(getTokenReplacementImporter(bulletinsExported, bulletinsToExport.size(), numberOfMissingAttachment));
 	}
 
 	Map getTokenReplacementImporter(int numberOfBulletinsExported, int totalNumberOfBulletins, int numberOfMissingAttachment) 
@@ -95,9 +83,9 @@ public class ExportBulletins
 	{
 		public ExporterThread(ProgressMeterInterface progressRetrieveDlgToUse)
 		{
-			clientStore = mainWindow.getStore();
+			clientStore = getMainWindow().getStore();
 			progressMeter = progressRetrieveDlgToUse;
-			exporter = new BulletinXmlExporter(mainWindow.getApp(), mainWindow.getLocalization(), progressMeter);
+			exporter = new BulletinXmlExporter(getMainWindow().getApp(), getMainWindow().getLocalization(), progressMeter);
 		}
 
 		public void run()
@@ -105,7 +93,7 @@ public class ExportBulletins
 			try
 			{
 				UnicodeWriter writer = new UnicodeWriter(destinationFile);
-				exporter.exportBulletins(writer, bulletinsToExport, userWantsToExportPrivate, userWantsToExportAttachments, userWantsToExportAllVersions, destinationFile.getParentFile());
+				exporter.exportBulletins(writer, bulletinsToExport, isExportPrivate(), isExportAttachments(), isExportAllVersions(), destinationFile.getParentFile());
 				writer.close();
 			}
 			catch (Exception e)
@@ -141,8 +129,7 @@ public class ExportBulletins
 		ClientBulletinStore clientStore;
 		private BulletinXmlExporter exporter;
 		private boolean errorOccured;
-	}
-	
+	}	
 
 	Map getTokenReplacementImporter(int bulletinsImported, int totalBulletins, String folder) 
 	{
@@ -152,23 +139,9 @@ public class ExportBulletins
 		map.put("#ImportFolder#", folder);
 		return map;
 	}
-	
-	public boolean didErrorOccur()
-	{
-		return errorOccuredOrMissingAttachment;
-	}
-	
-	protected UiMainWindow mainWindow;
+		
 	protected File destinationFile;
 	protected Vector bulletinsToExport;
-	protected boolean userWantsToExportPrivate;
-	protected boolean userWantsToExportAttachments;
-	protected boolean userWantsToExportAllVersions;
-	protected boolean errorOccuredOrMissingAttachment;
-	
-	private String exportMessageTag;
-	private Map exportMessageTokensMap;
-	private ProgressMeterInterface progressDlg;
 }
 
 

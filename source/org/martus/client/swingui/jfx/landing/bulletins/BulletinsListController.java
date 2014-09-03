@@ -55,6 +55,7 @@ import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
+import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractExportTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.BulletinExportEncryptedMbaTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.BulletinExportUnencryptedXmlTask;
 import org.martus.common.MartusLogger;
@@ -293,15 +294,15 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	private void exportSingleBulletin(UniversalId[] bulletinsIdsToExport)throws Exception
 	{
 		String defaultFileName = getDefaultExportFileName(bulletinsIdsToExport);
-		ExportItemsController exportController = new ExportItemsController(getMainWindow(), defaultFileName, true);
+		ExportItemsController exportController = new ExportItemsController(getMainWindow(), defaultFileName, false);
 		if(showModalYesNoDialog("ExportEncryptedMbaBulletin", "export", "cancel", exportController))
 		{
-			File exportFile = exportController.getExportFile();
+			File exportFile = exportController.getExportFileOrFolder();
 			
 			if(exportController.shouldExportEncrypted())
-				doExportEncryptedMbaBulletin(bulletinsIdsToExport[0], exportFile);
+				doExportEncryptedMbaBulletins(bulletinsIdsToExport, exportFile);
 			else
-				doExportUnencryptedXmlBulletin(bulletinsIdsToExport, exportFile, exportController.includeAttachments());
+				doExportUnencryptedXmlBulletins(bulletinsIdsToExport, exportFile, exportController.includeAttachments());
 		}
 	}	
 	
@@ -309,38 +310,37 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	{
 		String defaultFileName = getDefaultExportFileName(bulletinsIdsToExport);
 			
-		ExportItemsController exportController = new ExportItemsController(getMainWindow(), defaultFileName, false);
+		ExportItemsController exportController = new ExportItemsController(getMainWindow(), defaultFileName, true);
 		if(showModalYesNoDialog("ExportUnencryptedXMLBulletins", "export", "cancel", exportController))
 		{
-			File exportFile = exportController.getExportFile();
+			File exportFile = exportController.getExportFileOrFolder();
+			if(exportController.shouldExportEncrypted())
+			{
+				doExportEncryptedMbaBulletins(bulletinsIdsToExport, exportFile);
+				return;
+			}
 			boolean includeAttachments = exportController.includeAttachments();
-			doExportUnencryptedXmlBulletin(bulletinsIdsToExport, exportFile, includeAttachments);
+			doExportUnencryptedXmlBulletins(bulletinsIdsToExport, exportFile, includeAttachments);
 		}
 	}
 
-	private void doExportEncryptedMbaBulletin(UniversalId bulletinIdToExport, File exportFile)
+	private void doExportEncryptedMbaBulletins(UniversalId[] bulletinIdsToExport, File exportFile)
 	{
-		Bulletin bulletinToExport = getApp().getStore().getBulletinRevision(bulletinIdToExport);
-		BulletinExportEncryptedMbaTask task = new BulletinExportEncryptedMbaTask(getMainWindow(), bulletinToExport, exportFile);
-		try
-		{
-			showProgressDialog(getLocalization().getFieldLabel("ExportBulletinMba"), task);
-		}
-		catch (UserCancelledException e)
-		{
-		}
-		catch (Exception e)
-		{
-			logAndNotifyUnexpectedError(e);
-		}
+		AbstractExportTask task = new BulletinExportEncryptedMbaTask(getMainWindow(), bulletinIdsToExport, exportFile);
+		doExport(task, "ExportBulletinMba");
 	}
 
-	private void doExportUnencryptedXmlBulletin(UniversalId[] bulletinsIdsToExport, File exportFile, boolean includeAttachments)
+	private void doExportUnencryptedXmlBulletins(UniversalId[] bulletinsIdsToExport, File exportFile, boolean includeAttachments)
 	{
-		BulletinExportUnencryptedXmlTask task = new BulletinExportUnencryptedXmlTask(getMainWindow(), bulletinsIdsToExport, exportFile, includeAttachments);
+		AbstractExportTask task = new BulletinExportUnencryptedXmlTask(getMainWindow(), bulletinsIdsToExport, exportFile, includeAttachments);
+		doExport(task, "ExportBulletinXml");
+	}
+
+	private void doExport(AbstractExportTask task, String progressDialogMessageTag)
+	{
 		try
 		{
-			showProgressDialog(getLocalization().getFieldLabel("ExportBulletinXml"), task);
+			showProgressDialog(getLocalization().getFieldLabel(progressDialogMessageTag), task);
 			if(task.didErrorOccur())
 			{
 				String errorMessage = task.getErrorMessage();

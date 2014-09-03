@@ -37,6 +37,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
 import org.martus.client.core.MartusApp;
@@ -50,11 +51,12 @@ import org.martus.clientside.FormatFilter;
 
 public class ExportItemsController extends FxController
 {
-	public ExportItemsController(UiMainWindow mainWindowToUse, String initialExportFilenameOnly, boolean singleBulletinBeingExported)
+	public ExportItemsController(UiMainWindow mainWindowToUse, String initialExportFilenameOnly, boolean multipleBulletinBeingExported)
 	{
 		super(mainWindowToUse);
-		this.singleBulletinBeingExported = singleBulletinBeingExported;
-		this.initialExportFilenameOnly = initialExportFilenameOnly;
+		this.exportFilenameOnly = initialExportFilenameOnly;
+		this.exportFolder = getApp().getMartusDataRootDirectory();
+		this.multipleBulletinBeingExported = multipleBulletinBeingExported;
 	}
 
 	@Override
@@ -65,21 +67,14 @@ public class ExportItemsController extends FxController
 		BooleanProperty encryptingExport = encryptExportFile.selectedProperty();
 		includeAttachments.disableProperty().bind(encryptingExport);
 
-		String initialFileExportPath = getInitialFileAbsolutePath();
+		String initialFileExportPath = getExportFilenameBasedOnEncryptionStatus();
 		fileLocation.setText(initialFileExportPath);
 
-		encryptExportFile.setDisable(isExportingMultipleBulletins());
 		encryptExportFile.selectedProperty().addListener(new EncryptedStatusChanged());
-		encryptExportFile.setSelected(singleBulletinBeingExported);
+		encryptExportFile.setSelected(true);
 		updateControls(shouldExportEncrypted());
 	}
 
-	private boolean isExportingMultipleBulletins()
-	{
-		boolean exportingMultipleBulletins = !singleBulletinBeingExported;
-		return exportingMultipleBulletins;
-	}
-	
 	public boolean shouldExportEncrypted()
 	{
 		return encryptExportFile.isSelected();
@@ -109,15 +104,25 @@ public class ExportItemsController extends FxController
 
 	private void updateExportFilename()
 	{
-		File exportPath = getExportFile().getParentFile();
-		String exportFilename = getExportFilenameBasedOnEncryptionStatus();
-		File combinedExportFile = new File(exportPath, exportFilename);
-		fileLocation.setText(combinedExportFile.getAbsolutePath());
+		String absolutePathToFileOrFolder;
+		if(showDirectoryOnly())
+		{
+			absolutePathToFileOrFolder = exportFolder.getAbsolutePath();
+		}
+		else
+		{
+			exportFilenameOnly = getExportFilenameBasedOnEncryptionStatus();
+			File combinedExportFile = new File(exportFolder, exportFilenameOnly);
+			absolutePathToFileOrFolder = combinedExportFile.getAbsolutePath();
+		}
+		fileLocation.setText(absolutePathToFileOrFolder);
 	}
 	
 	private String getExportFilenameBasedOnEncryptionStatus()
 	{
-		String currentExportFilename = getExportFile().getName();
+		if(exportingMultipleFiles())
+			return "";
+		String currentExportFilename = exportFilenameOnly;
 		int positionExtension = currentExportFilename.lastIndexOf('.');
 		String fileNameOnly = currentExportFilename;
 		if(positionExtension > 0)
@@ -144,12 +149,19 @@ public class ExportItemsController extends FxController
 	@FXML
 	public void onChangeFileLocation(ActionEvent event)
 	{
-		String FileChooserTitle = "FileDialogExportBulletins";
-		FormatFilter fileFilter = getFormatFilter();
-		File templateFile = getFileSaveLocation(FileChooserTitle, fileFilter);
-		if(templateFile == null)
+		File saveLocationFileOrFolder = getFileSaveLocation();
+		if(saveLocationFileOrFolder == null)
 			return;
-		fileLocation.setText(templateFile.getAbsolutePath());
+		if(showDirectoryOnly())
+		{
+			exportFolder = saveLocationFileOrFolder;
+		}
+		else
+		{
+			exportFolder = saveLocationFileOrFolder.getParentFile();
+			exportFilenameOnly = saveLocationFileOrFolder.getName();
+		}
+		fileLocation.setText(saveLocationFileOrFolder.getAbsolutePath());
 	}
 
 	private FormatFilter getFormatFilter()
@@ -160,35 +172,49 @@ public class ExportItemsController extends FxController
 		return new BulletinXmlFileFilter(localization);
 	}
 	
+	private boolean showDirectoryOnly()
+	{
+		return exportingMultipleFiles();
+	}
+
+	private boolean exportingMultipleFiles()
+	{
+		return (multipleBulletinBeingExported && shouldExportEncrypted());
+	}
+	
 	public boolean includeAttachments()
 	{
 		return includeAttachments.isSelected();
 	}
 	
-	File getExportFile()
+	File getExportFileOrFolder()
 	{
 		return new File(fileLocation.getText());
 	}
 
-	protected String getInitialFileAbsolutePath()
+	protected File getFileSaveLocation()
 	{
-		File fullPathOfInitialLocation = new File(getApp().getMartusDataRootDirectory(), getExportFilenameBasedOnEncryptionStatus(initialExportFilenameOnly));
-		return(fullPathOfInitialLocation.getAbsolutePath());
-	}
-		
-	protected File getFileSaveLocation(String FileChooserTitle, FormatFilter fileFilter)
-	{
-		//FIXME: This dialog can be hidden behind
+		//FIXME: These dialogs can be hidden behind caller window
 		MartusLocalization localization = getLocalization();
+		
+		//NOTE: DirectoryChooser and FileChooser are unfortunately derived from Object.
+		if(showDirectoryOnly())
+		{
+			DirectoryChooser directoryChooser = new DirectoryChooser();
+			directoryChooser.setTitle(localization.getWindowTitle("FolderSelectDialogExport"));
+			directoryChooser.setInitialDirectory(exportFolder);
+			return directoryChooser.showDialog(null);
+		}
+		
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setInitialDirectory(getExportFile().getParentFile());
-		fileChooser.setInitialFileName(getExportFilenameBasedOnEncryptionStatus());
-		fileChooser.setTitle(localization.getWindowTitle(FileChooserTitle));
+		fileChooser.setTitle(localization.getWindowTitle("FileSaveDialogExport"));
+		fileChooser.setInitialDirectory(exportFolder);
+		fileChooser.setInitialFileName(exportFilenameOnly);
+		FormatFilter fileFilter = getFormatFilter();
 		fileChooser.getExtensionFilters().addAll(
 				new FileChooser.ExtensionFilter(fileFilter.getDescription(), fileFilter.getWildCardExtension()),
 				new FileChooser.ExtensionFilter(localization.getFieldLabel("AllFiles"), "*.*"));
-		File templateFile = fileChooser.showSaveDialog(null);
-		return templateFile;
+		return fileChooser.showSaveDialog(null);
 	}
 
 	@FXML
@@ -203,7 +229,7 @@ public class ExportItemsController extends FxController
 	@FXML
 	private TextField fileLocation;
 	
-	private boolean singleBulletinBeingExported;
-	
-	private String initialExportFilenameOnly;
+	private String exportFilenameOnly;
+	private File exportFolder;
+	private boolean multipleBulletinBeingExported;
 }

@@ -26,18 +26,17 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.setupwizard.tasks;
 
 import java.io.File;
-import java.util.Map;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.ExportBulletins;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.packet.UniversalId;
 
-public class BulletinExportUnencryptedXmlTask extends AbstractAppTask
+public class BulletinExportUnencryptedXmlTask extends AbstractExportTask
 {
 	public BulletinExportUnencryptedXmlTask(UiMainWindow mainWindowToUse, UniversalId[] bulletinsIdsToUse, File exportFileToUse, boolean includeAttachmentsToUse)
 	{
-		super(mainWindowToUse.getApp());
+		super(mainWindowToUse);
 		mainWindow = mainWindowToUse;
 		bulletinIdsToExport = bulletinsIdsToUse;
 		exportFile = exportFileToUse;
@@ -49,23 +48,11 @@ public class BulletinExportUnencryptedXmlTask extends AbstractAppTask
 	{
 		Vector bulletinsToExport = mainWindow.getBulletins(bulletinIdsToExport);			
 		exporter = new ExportBulletins(mainWindow, progress);
-		exporter.doExport(exportFile.getAbsoluteFile(), bulletinsToExport, ALWAYS_EXPORT_PRIVATE_DATA, includeAttachments, SHOULD_EXPORT_ALL_VERSIONS);
+		exporter.setExportPrivate(ALWAYS_EXPORT_PRIVATE_DATA);
+		exporter.setExportAttachments(includeAttachments);
+		exporter.setExportAllVersions(SHOULD_EXPORT_ALL_VERSIONS);
+		exporter.doExport(exportFile.getAbsoluteFile(), bulletinsToExport);
 		return null;
-	}
-	
-	public boolean didErrorOccur()
-	{
-		return exporter.didErrorOccur();
-	}
-	
-	public String getErrorMessage()
-	{
-		return exporter.getErrorMessage();
-	}
-	
-	public Map getErrorMessageTokens()
-	{
-		return exporter.getErrorMessageTokenMap();
 	}
 	
 	private UiMainWindow mainWindow;
@@ -74,4 +61,4 @@ public class BulletinExportUnencryptedXmlTask extends AbstractAppTask
 	private boolean includeAttachments;
 	private UniversalId[] bulletinIdsToExport;
 	private File exportFile;	
-	private ExportBulletins exporter;}
+}
