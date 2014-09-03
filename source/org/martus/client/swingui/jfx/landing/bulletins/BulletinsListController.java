@@ -280,10 +280,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		try
 		{
 			Vector<UniversalId> bulletinsIDsToExport = getSelectedBulletinIds();
-			if(bulletinsIDsToExport.size() == 1)
-				exportSingleBulletin(bulletinsIDsToExport.toArray(new UniversalId[0]));
-			else
-				exportUnencryptedXmlBulletins(bulletinsIDsToExport.toArray(new UniversalId[0]));
+			exportBulletins(bulletinsIDsToExport.toArray(new UniversalId[0]));
 		} 
 		catch (Exception e)
 		{
@@ -291,11 +288,13 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		}		
 	}
 
-	private void exportSingleBulletin(UniversalId[] bulletinsIdsToExport)throws Exception
+	private void exportBulletins(UniversalId[] bulletinsIdsToExport)throws Exception
 	{
+		boolean exportMultibleBulletins = (bulletinsIdsToExport.length != 1);
+		
 		String defaultFileName = getDefaultExportFileName(bulletinsIdsToExport);
-		ExportItemsController exportController = new ExportItemsController(getMainWindow(), defaultFileName, false);
-		if(showModalYesNoDialog("ExportEncryptedMbaBulletin", "export", "cancel", exportController))
+		ExportItemsController exportController = new ExportItemsController(getMainWindow(), defaultFileName, exportMultibleBulletins);
+		if(showModalYesNoDialog("Export", "export", "cancel", exportController))
 		{
 			File exportFile = exportController.getExportFileOrFolder();
 			
@@ -305,24 +304,6 @@ public class BulletinsListController extends AbstractFxLandingContentController
 				doExportUnencryptedXmlBulletins(bulletinsIdsToExport, exportFile, exportController.includeAttachments());
 		}
 	}	
-	
-	private void exportUnencryptedXmlBulletins(UniversalId[] bulletinsIdsToExport) throws Exception
-	{
-		String defaultFileName = getDefaultExportFileName(bulletinsIdsToExport);
-			
-		ExportItemsController exportController = new ExportItemsController(getMainWindow(), defaultFileName, true);
-		if(showModalYesNoDialog("ExportUnencryptedXMLBulletins", "export", "cancel", exportController))
-		{
-			File exportFile = exportController.getExportFileOrFolder();
-			if(exportController.shouldExportEncrypted())
-			{
-				doExportEncryptedMbaBulletins(bulletinsIdsToExport, exportFile);
-				return;
-			}
-			boolean includeAttachments = exportController.includeAttachments();
-			doExportUnencryptedXmlBulletins(bulletinsIdsToExport, exportFile, includeAttachments);
-		}
-	}
 
 	private void doExportEncryptedMbaBulletins(UniversalId[] bulletinIdsToExport, File exportFile)
 	{
