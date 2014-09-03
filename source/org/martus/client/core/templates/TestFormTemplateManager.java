@@ -211,6 +211,53 @@ public class TestFormTemplateManager extends TestCaseEnhanced
 		
 	}
 	
+	public void testDelete() throws Exception
+	{
+		File tempDirectory = createTempDirectory();
+		try
+		{
+			File templateDirectory = new File(tempDirectory, "templates");
+			FormTemplateManager manager = FormTemplateManager.createOrOpen(security, templateDirectory);
+			
+			String title = "Title";
+			FormTemplate template = createFormTemplate(title, "Description");
+			manager.putTemplate(template);
+			manager.setCurrentFormTemplate(title);
+			
+			try
+			{
+				manager.deleteTemplate(FormTemplate.MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
+				fail("Should have thrown trying to delete the default template");
+			}
+			catch(InvalidTemplateNameException ignoreExpected)
+			{
+			}
+
+			try
+			{
+				manager.deleteTemplate("Does not exist");
+				fail("Should have thrown trying to delete a non-existent template");
+			}
+			catch(FileNotFoundException ignoreExpected)
+			{
+			}
+			
+			assertEquals(2, manager.getAvailableTemplateNames().size());
+			manager.deleteTemplate(title);
+			assertEquals(1, manager.getAvailableTemplateNames().size());
+			String currentTemplateTitle = manager.getCurrentFormTemplate().getTitle();
+			assertEquals(FormTemplate.MARTUS_DEFAULT_FORM_TEMPLATE_NAME, currentTemplateTitle);
+			
+			manager = FormTemplateManager.createOrOpen(security, templateDirectory);
+			assertEquals(1, manager.getAvailableTemplateNames().size());
+			
+		}
+		finally
+		{
+			DirectoryUtils.deleteEntireDirectoryTree(tempDirectory);
+		}
+	}
+	
 	private FormTemplate createFormTemplate(String title, String description) throws Exception
 	{
 		FieldSpecCollection top = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();

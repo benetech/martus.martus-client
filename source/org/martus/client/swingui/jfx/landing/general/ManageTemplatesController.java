@@ -61,7 +61,6 @@ import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesCon
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.FormTemplate;
 import org.martus.util.TokenReplacement;
-import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class ManageTemplatesController extends FxInSwingController
 {
@@ -108,9 +107,9 @@ public class ManageTemplatesController extends FxInSwingController
 			if(!showConfirmationDialog("Templates", message))
 				return;
 
-			// FIXME: Delete template here
+			getBulletinStore().deleteFormTemplate(selected.getRawTemplateName());
 		}
-		catch (TokenInvalidException e)
+		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 		}

@@ -28,6 +28,7 @@ package org.martus.client.core.templates;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -165,6 +166,25 @@ public class FormTemplateManager
 
 		currentTemplateName.setValue(newCurrentTitle);
 		saveState();
+	}
+
+	public void deleteTemplate(String templateName) throws Exception
+	{
+		if(templateName.equals(FormTemplate.MARTUS_DEFAULT_FORM_TEMPLATE_NAME))
+			throw new InvalidTemplateNameException("Cannot delete the default template");
+		
+		if(!doesTemplateExist(templateName))
+			throw new FileNotFoundException("Attempted to delete non-existent template: " + templateName);
+		
+		if(getCurrentFormTemplateNameProperty().getValue().equals(templateName))
+			setCurrentFormTemplate(FormTemplate.MARTUS_DEFAULT_FORM_TEMPLATE_NAME);
+		
+		File file = getTemplateFile(templateName);
+		file.delete();
+		if(file.exists())
+			throw new IOException("Failed to delete template: " + templateName);
+		
+		templateNames.remove(templateName);
 	}
 
 	private void saveState() throws Exception
