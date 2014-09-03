@@ -47,7 +47,9 @@ public class FxButtonTableCell extends TableCell
 		
 		Button button = null;
 		
-		if (!empty) 
+		boolean isValidRow = !empty;
+		boolean doesRowSupportButtonAction = isValidRow && ((Boolean)cellObject).booleanValue();
+		if (doesRowSupportButtonAction) 
 		{
 			button = new Button(null, new ImageView(buttonImage));
 

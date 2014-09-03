@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.general;
 
 import javafx.beans.property.Property;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import org.martus.common.MiniLocalization;
@@ -40,27 +41,40 @@ public class ManageTemplatesTableRowData
 		rawTemplateNameProperty = new SimpleStringProperty(rawTemplateNameToUse);
 		String displayableTemplateName = FormTemplate.getDisplayableTemplateName(rawTemplateNameToUse, localization);
 		displayableTemplateNameProperty = new SimpleStringProperty(displayableTemplateName);
+		
+		boolean isDefaultTemplate = rawTemplateNameToUse.isEmpty();
+		canDeleteProperty = new SimpleBooleanProperty(!isDefaultTemplate);
 	}
 	
-	public Property<String> rawTemplateNameProperty()
-	{
-		return rawTemplateNameProperty;
-	}
-	
-    public Property<String> displayableTemplateNameProperty() 
-    { 
-        return displayableTemplateNameProperty; 
-    }
-    
     public String getRawTemplateName()
     {
     	return rawTemplateNameProperty().getValue();
     }
     
+	public Property<String> rawTemplateNameProperty()
+	{
+		return rawTemplateNameProperty;
+	}
+	
     public String getDisplayableTemplateName()
     {
     	return displayableTemplateNameProperty().getValue();
     }
+    
+    public Property<String> displayableTemplateNameProperty() 
+    { 
+        return displayableTemplateNameProperty; 
+    }
+    
+    public Boolean getCanDelete()
+    {
+    	return canDeleteProperty().getValue();
+    }
+    
+    public Property<Boolean> canDeleteProperty()
+	{
+		return canDeleteProperty;
+	}
     
     // NOTE: This is required in order to be sortable using SaneComparator
     @Override
@@ -71,8 +85,10 @@ public class ManageTemplatesTableRowData
 
 	public static final String RAW_TEMPLATE_NAME = "rawTemplateName";
 	public static final String DISPLAYABLE_TEMPLATE_NAME = "displayableTemplateName";
+	public static final String CAN_DELETE_NAME = "canDelete";
 
 	private Property<String> rawTemplateNameProperty;
 	private Property<String> displayableTemplateNameProperty;
+	private Property<Boolean> canDeleteProperty;
 	private MiniLocalization localization;
 }

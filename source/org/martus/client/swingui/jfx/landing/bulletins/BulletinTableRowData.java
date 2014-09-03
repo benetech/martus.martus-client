@@ -25,12 +25,13 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
-
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
 
 public class BulletinTableRowData
 {
@@ -42,8 +43,8 @@ public class BulletinTableRowData
 		long dateLastSaved = bulletin.getBulletinHeaderPacket().getLastSavedTime();
 		dateSaved = new SimpleStringProperty(localization.formatDateTime(dateLastSaved));
 		this.onServer = new SimpleBooleanProperty(onServer);
-		viewBulletin = new SimpleStringProperty("View");
-		editBulletin = new SimpleStringProperty("Edit");
+		canView = new SimpleBooleanProperty(true);
+		canEdit = new SimpleBooleanProperty(true);
 	}
 	
 	public UniversalId getUniversalId()
@@ -91,39 +92,39 @@ public class BulletinTableRowData
     		return onServer;
     }
 
-    public String getViewBulletin()
+    public Boolean getCanView()
 	{
-		return viewBulletin.get();
+		return canViewProperty().getValue();
 	}
 	
-    public SimpleStringProperty viewBulletinProperty() 
+    public Property<Boolean> canViewProperty() 
     { 
-        return viewBulletin; 
+        return canView; 
     }
 
-    public String getEditBulletin()
+    public Boolean getEditBulletin()
  	{
- 		return editBulletin.get();
+ 		return canEditProperty().getValue();
  	}
  	
-     public SimpleStringProperty editBulletinProperty() 
+     public Property<Boolean> canEditProperty() 
      { 
-         return editBulletin; 
+         return canEdit;
      }
 
     static public final String TITLE_PROPERTY_NAME = "title";
     static public final String AUTHOR_PROPERTY_NAME = "author";
     static public final String DATE_SAVDED_PROPERTY_NAME = "dateSaved";
     static public final String ON_SERVER_PROPERTY_NAME = "onServer";
-    static public final String VIEW_BULLETIN_PROPERTY_NAME = "viewBulletin";
-    static public final String EDIT_BULLETIN_PROPERTY_NAME = "editBulletin";
+    static public final String CAN_VIEW_PROPERTY_NAME = "canView";
+    static public final String CAN_EDIT_PROPERTY_NAME = "canEdit";
     
     private final SimpleStringProperty title;
 	private final SimpleStringProperty author;
 	private final SimpleStringProperty dateSaved;
 	private final SimpleBooleanProperty onServer;
-	private final SimpleStringProperty viewBulletin;
-	private final SimpleStringProperty editBulletin;
+	private final SimpleBooleanProperty canView;
+	private final SimpleBooleanProperty canEdit;
 	
 	private final UniversalId uid;
 }

@@ -241,6 +241,9 @@ public class EnglishStrings
 "wintitle:notifyUnableToLoadCurrentTemplate=Error",
 "field:notifyUnableToLoadCurrentTemplatecause=Unable to restore the current form template, so the default template will be used.",
 
+"wintitle:Templates=Form Templates",
+"field:confirmDeleteTemplate=Are you sure you want to delete this template?\n#Name#",
+
 "wintitle:notifyContactKeyIsOurself=Contact Account Is Yourself",
 "field:notifyContactKeyIsOurselfcause=You cannot add yourself as a contact.",
 "wintitle:notifyContactKeyAlreadyExists=Contact Account Already Exists",
