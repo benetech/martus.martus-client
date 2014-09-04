@@ -54,6 +54,8 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
+import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.generic.SimpleHtmlContentController;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.jfx.landing.FxLandingShellController;
@@ -65,6 +67,8 @@ import org.martus.client.swingui.jfx.setupwizard.tasks.BulletinExportUnencrypted
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.BulletinHtmlGenerator;
+import org.martus.common.database.ReadableDatabase;
 import org.martus.common.packet.UniversalId;
 
 public class BulletinsListController extends AbstractFxLandingContentController
@@ -139,7 +143,29 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	
 	protected void viewSelectedBulletin()
 	{
-		//TODO implement this.
+		TableViewSelectionModel<BulletinTableRowData> selectionModel = itemsTable.getSelectionModel();
+		BulletinTableRowData selectedItem = selectionModel.getSelectedItem();
+		if(selectedItem == null)
+		{
+			MartusLogger.log("Attempted to view with nothing selected");
+			return;
+		}
+		UniversalId bulletinUid = selectedItem.getUniversalId();
+		ClientBulletinStore store = getApp().getStore();
+		Bulletin bulletin = store.getBulletinRevision(bulletinUid);
+		
+		ReadableDatabase database = store.getDatabase();
+		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(getLocalization());
+		try
+		{
+			String html = generator.getHtmlString(bulletin, database, true, true);
+			FxController htmlViewer = new SimpleHtmlContentController(getMainWindow(), html);
+			showDialogWithClose("ViewBulletin", htmlViewer);
+		}
+		catch(Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
 	}
 
 	protected void editSelectedBulletin()
