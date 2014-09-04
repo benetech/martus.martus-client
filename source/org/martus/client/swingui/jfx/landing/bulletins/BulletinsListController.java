@@ -272,7 +272,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	{
 		String defaultFileName = getDefaultExportFileName(bulletinsIdsToExport);
 		ExportItemsController exportController = new ExportItemsController(getMainWindow(), defaultFileName, bulletinsIdsToExport.length);
-		if(showModalYesNoDialog("Export", "export", "cancel", exportController))
+		if(showModalYesNoDialog("Export", "export", EnglishCommonStrings.CANCEL, exportController))
 		{
 			File exportFile = exportController.getExportFileOrFolder();
 			
