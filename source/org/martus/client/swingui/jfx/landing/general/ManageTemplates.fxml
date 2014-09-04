@@ -10,21 +10,26 @@
 	<children>
 		<Label alignment="CENTER" text="Template Manager">
 		</Label>
-		<TabPane tabClosingPolicy="UNAVAILABLE" >
+		<TabPane tabClosingPolicy="UNAVAILABLE">
 			<tabs>
 				<Tab text="Available Templates">
 					<content>
-						<VBox layoutY="7.0" prefWidth="500.0" spacing="5.0">
+						<VBox spacing="5.0">
 							<children>
-								<TableView fx:id="availableTemplatesTable" prefHeight="200.0" prefWidth="480.0">
+								<!-- Seems to be a bug in JavaFX where the table is sized wide enough to fit
+									the conents without a vertical scrollbar, but as soon as it is added, it 
+									is too narrow, so requires a horizontal scrollbar. Might need to set a 
+									prefWidth here to prevent that problem. -->
+								<TableView fx:id="availableTemplatesTable" prefHeight="200.0" prefWidth="600">
 									<columns>
 										<TableColumn fx:id="templateNameColumn" prefWidth="264.0" text="Name" />
 										<TableColumn fx:id="templateDeleteColumn" maxWidth="150.0" prefWidth="75.0" text="Delete" />
 										<TableColumn fx:id="templateUploadColumn" maxWidth="150.0" prefWidth="75.0" text="Upload" />
 										<TableColumn fx:id="templateExportColumn" maxWidth="150.0" prefWidth="75.0" text="Export" />
+										<TableColumn fx:id="templateEditColumn" maxWidth="150.0" prefWidth="75.0" text="Edit" />
 									</columns>
 								</TableView>
-								<HBox alignment="CENTER_RIGHT" layoutX="6.0" layoutY="92.0" prefHeight="50.0" prefWidth="480.0">
+								<HBox alignment="CENTER_RIGHT">
 									<children>
 										<Button onAction="#onAvailableTabOkButton" mnemonicParsing="false" text="OK">
 										</Button>
@@ -72,7 +77,7 @@
 
 									</children>
 								</GridPane>
-								<HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+								<HBox alignment="TOP_RIGHT" prefHeight="100.0" >
 									<children>
 										<Button fx:id="addTemplateButton" onAction="#onAdd" mnemonicParsing="false" text="Add">
 										</Button>

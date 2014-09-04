@@ -59,9 +59,9 @@ import org.martus.client.swingui.jfx.common.ExportTemplateDoer;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
-import org.martus.common.MartusLogger;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.Exceptions.ServerNotCompatibleException;
+import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.FormTemplate;
 import org.martus.util.TokenReplacement;
 
@@ -99,6 +99,10 @@ public class ManageTemplatesController extends FxInSwingController
         Image exportImage = new Image(EXPORT_IMAGE_PATH);
         templateExportColumn.setCellFactory(new FxButtonTableCellFactory(exportImage, () -> exportSelectedTemplate()));
         templateExportColumn.setCellValueFactory(new PropertyValueFactory<Object,Boolean>(ManageTemplatesTableRowData.CAN_EXPORT_NAME));
+        
+        Image editImage = new Image(EDIT_IMAGE_PATH);
+        templateEditColumn.setCellFactory(new FxButtonTableCellFactory(editImage, () -> editSelectedTemplate()));
+        templateEditColumn.setCellValueFactory(new PropertyValueFactory<Object,Boolean>(ManageTemplatesTableRowData.CAN_EDIT_NAME));
         
         populateAvailableTemplatesTable();
 
@@ -181,6 +185,21 @@ public class ManageTemplatesController extends FxInSwingController
 			String rawTitle = selected.getRawTemplateName();
 			FormTemplate template = getBulletinStore().getFormTemplate(rawTitle);
 			doAction(new ExportTemplateDoer(getMainWindow(), template));
+		}
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
+
+	protected void editSelectedTemplate()
+	{
+		try
+		{
+			ManageTemplatesTableRowData selected = availableTemplatesTable.getSelectionModel().getSelectedItem();
+			String rawTitle = selected.getRawTemplateName();
+			FormTemplate template = getBulletinStore().getFormTemplate(rawTitle);
+			// FIXME: Edit template here
 		}
 		catch (Exception e)
 		{
@@ -380,8 +399,9 @@ public class ManageTemplatesController extends FxInSwingController
 	}
 
 	final private String TRASH_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/trash.png";
-	final private String EXPORT_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/export.png";
 	final private String UPLOAD_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/upload.png";
+	final private String EXPORT_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/export.png";
+	final private String EDIT_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/edit.png";
 	
 	@FXML
 	private TableView<ManageTemplatesTableRowData> availableTemplatesTable;
@@ -397,6 +417,9 @@ public class ManageTemplatesController extends FxInSwingController
 	
 	@FXML
 	protected TableColumn<Object, Boolean> templateExportColumn;
+	
+	@FXML
+	protected TableColumn<Object, Boolean> templateEditColumn;
 	
 	@FXML
 	private RadioButton genericRadioButton;
