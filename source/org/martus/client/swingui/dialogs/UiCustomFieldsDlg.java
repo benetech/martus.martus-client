@@ -395,16 +395,15 @@ public class UiCustomFieldsDlg extends JDialog
 
 	}
 
-	public static boolean exportTemplate(UiMainWindow mainWindowToUse, FormTemplate template) throws Exception
+	public static void exportTemplate(UiMainWindow mainWindowToUse, FormTemplate template) throws Exception
 	{
 		FormatFilter filter = new MCTFileFilter(mainWindowToUse.getLocalization());
 		File destFile = mainWindowToUse.showFileSaveDialog("ExportCustomization", filter);
 		if(destFile == null)
-			return false;
+			return;
 
 		MartusCrypto securityTemp = mainWindowToUse.getApp().getSecurity();
 		template.exportTemplate(securityTemp, destFile);
-		return true;
 	}
 
 	class SendTemplateToServerHandler implements ActionListener
