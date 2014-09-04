@@ -404,13 +404,8 @@ public class UiCustomFieldsDlg extends JDialog
 			return false;
 
 		MartusCrypto securityTemp = mainWindowToUse.getApp().getSecurity();
-		UiCustomFieldsDlg.exportTemplate(destFile, template, securityTemp);
-		return true;
-	}
-
-	public static void exportTemplate(File destFile, FormTemplate template, MartusCrypto securityTemp) throws Exception
-	{
 		template.exportTemplate(securityTemp, destFile);
+		return true;
 	}
 
 	class SendTemplateToServerHandler implements ActionListener
