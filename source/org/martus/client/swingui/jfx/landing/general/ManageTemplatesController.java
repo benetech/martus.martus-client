@@ -45,6 +45,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
@@ -56,9 +57,11 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.jfx.common.AbstractFxImportFormTemplateController;
 import org.martus.client.swingui.jfx.common.ExportTemplateDoer;
+import org.martus.client.swingui.jfx.common.TemplatePropertiesController;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.Exceptions.ServerNotCompatibleException;
 import org.martus.common.MartusLogger;
@@ -199,7 +202,24 @@ public class ManageTemplatesController extends FxInSwingController
 			ManageTemplatesTableRowData selected = availableTemplatesTable.getSelectionModel().getSelectedItem();
 			String rawTitle = selected.getRawTemplateName();
 			FormTemplate template = getBulletinStore().getFormTemplate(rawTitle);
-			// FIXME: Edit template here
+			TemplatePropertiesController controller = new TemplatePropertiesController(getMainWindow(), template);
+			if(showModalYesNoDialog("TemplateProperties", EnglishCommonStrings.OK, EnglishCommonStrings.CANCEL, controller))
+			{
+				String oldTitle = template.getTitle();
+				String newTitle = controller.getTemplateTitle();
+				boolean willCreateNewCopy = !newTitle.equals(oldTitle);
+
+				template.setTitle(newTitle);
+				template.setDescription(controller.getTemplateDescription());
+
+				ClientBulletinStore store = getApp().getStore();
+				store.saveNewFormTemplate(template);
+				if(willCreateNewCopy)
+					store.deleteFormTemplate(oldTitle);
+				
+				populateAvailableTemplatesTable();
+			}
+			
 		}
 		catch (Exception e)
 		{
@@ -209,12 +229,19 @@ public class ManageTemplatesController extends FxInSwingController
 
 	private void populateAvailableTemplatesTable()
 	{
+		TableViewSelectionModel<ManageTemplatesTableRowData> selectionModel = availableTemplatesTable.selectionModelProperty().getValue();
+		ManageTemplatesTableRowData selected = selectionModel.getSelectedItem();
+		
 		ClientBulletinStore store = getBulletinStore();
 		ObservableSet<String> templateNamesSet = store.getAvailableTemplates();
 		ObservableList<ManageTemplatesTableRowData> templateRows = FXCollections.observableArrayList();
 		templateNamesSet.forEach(name -> templateRows.add(new ManageTemplatesTableRowData(name, getLocalization())));
 
 		availableTemplatesTable.setItems(templateRows);
+		availableTemplatesTable.sort();
+		
+		selectionModel.clearSelection();
+		selectionModel.select(selected);
 	}
 	
 	private void initializeAddTab()
