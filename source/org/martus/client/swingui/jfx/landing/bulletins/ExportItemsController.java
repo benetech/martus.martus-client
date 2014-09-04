@@ -144,7 +144,7 @@ public class ExportItemsController extends FxController
 	{
 		String uniqueAbsolutePathToFileOrFolder = absolutePathToFileOrFolder;
 		File currentFileOrFolder = new File(absolutePathToFileOrFolder);
-		if(	currentFileOrFolder.isFile() && currentFileOrFolder.exists())
+		if(currentFileOrFolder.isFile())
 		{
 			File uniqueFile = getUniqueFile(currentFileOrFolder);
 			uniqueAbsolutePathToFileOrFolder = uniqueFile.getAbsolutePath();
