@@ -871,7 +871,7 @@ public class EnglishStrings
 "wintitle:confirmUploadPublicTemplateToServerWarning=Send Template to Server",
 "field:confirmUploadPublicTemplateToServerWarningcause=Anyone who has (or can guess) your access token will be able to download it from the server and see everything in this template. If you upload your template, someone could potentially see the structure of the data you're collecting (but won't be able to see the data itself).",
 "field:confirmUploadPublicTemplateToServerWarningeffect=By continuing, you understand your template details are publicly available on the server.",
-
+"field:WhichTemplate=Selected template: #TemplateTitle#",
 
 
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",

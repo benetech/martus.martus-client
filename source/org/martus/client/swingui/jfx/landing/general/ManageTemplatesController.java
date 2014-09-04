@@ -60,6 +60,8 @@ import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
 import org.martus.common.MartusLogger;
+import org.martus.common.Exceptions.ServerNotAvailableException;
+import org.martus.common.Exceptions.ServerNotCompatibleException;
 import org.martus.common.fieldspec.FormTemplate;
 import org.martus.util.TokenReplacement;
 
@@ -131,10 +133,43 @@ public class ManageTemplatesController extends FxInSwingController
 		try
 		{
 			ManageTemplatesTableRowData selected = availableTemplatesTable.getSelectionModel().getSelectedItem();
+			String rawTitle = selected.getRawTemplateName();
+			FormTemplate template = getBulletinStore().getFormTemplate(rawTitle);
+
+			String displayableTitle = selected.getDisplayableTemplateName();
+			String rawWhich = getLocalization().getFieldLabel("WhichTemplate");
+			String which = TokenReplacement.replaceToken(rawWhich, "#TemplateTitle#", displayableTitle);
+			String cause = getLocalization().getFieldLabel("confirmUploadPublicTemplateToServerWarningcause");
+			String effect = getLocalization().getFieldLabel("confirmUploadPublicTemplateToServerWarningeffect");
+			String message = which + "\n\n" + cause + "\n\n" + effect;
+			if(!showConfirmationDialog("confirmUploadPublicTemplateToServerWarning", message))
+				return;
+			
+			uploadTemplateToServer(template);
 		}
 		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
+		}
+	}
+
+	public void uploadTemplateToServer(FormTemplate template)
+	{
+		try
+		{
+			getApp().putFormTemplateOnServer(template);
+		}
+		catch (ServerNotCompatibleException e)
+		{
+			showNotifyDialog("ServerNotCompatible");
+		}
+		catch (ServerNotAvailableException e)
+		{
+			showNotifyDialog("ServerNotAvailable");
+		} 
+		catch (Exception e)
+		{
+			showNotifyDialog("ErrorSavingTemplateToServer");
 		}
 	}
 
