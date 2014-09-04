@@ -53,12 +53,12 @@ import org.martus.clientside.FormatFilter;
 
 public class ExportItemsController extends FxController
 {
-	public ExportItemsController(UiMainWindow mainWindowToUse, String initialExportFilenameOnly, boolean multipleBulletinBeingExported)
+	public ExportItemsController(UiMainWindow mainWindowToUse, String initialExportFilenameOnly, int numberOfItemsToExport)
 	{
 		super(mainWindowToUse);
 		this.exportFilenameOnly = initialExportFilenameOnly;
 		this.exportFolder = getApp().getMartusDataRootDirectory();
-		this.multipleBulletinBeingExported = multipleBulletinBeingExported;
+		this.multipleBulletinBeingExported = numberOfItemsToExport > 1;
 	}
 
 	@Override
