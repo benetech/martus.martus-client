@@ -823,17 +823,15 @@ public class ClientBulletinStore extends BulletinStore
 
 	public synchronized void moveBulletin(Bulletin b, BulletinFolder from, BulletinFolder to)
 	{
-		if(linkBulletinToFolder(b, from, to))
+		if(linkBulletinToFolder(b, to))
 		{
 			removeBulletinFromFolder(from, b);
 			saveFolders();
 		}
 	}
 
-	public synchronized boolean linkBulletinToFolder(Bulletin b, BulletinFolder from, BulletinFolder to)
+	public synchronized boolean linkBulletinToFolder(Bulletin b, BulletinFolder to)
 	{
-		if(from.equals(to))
-			return false;
 		try
 		{
 			to.add(b);
