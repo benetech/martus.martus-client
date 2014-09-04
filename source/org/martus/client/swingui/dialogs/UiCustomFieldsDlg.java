@@ -359,8 +359,11 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
+			String title = titleField.getText();
+			String description = descriptionField.getText();
 			String topXml = topSectionXmlTextArea.getText();
 			String bottomXml = bottomSectionXmlTextArea.getText();
+
 			if(!validateXml(topXml, bottomXml))
 			{
 				mainWindow.notifyDlg("ErrorExportingCustomizationTemplate");
@@ -374,8 +377,6 @@ public class UiCustomFieldsDlg extends JDialog
 			if(destFile == null)
 				return;
 			
-			String title = titleField.getText();
-			String description = descriptionField.getText();
 			try
 			{
 				FormTemplate template = createTemplate(title, description, topXml, bottomXml);
