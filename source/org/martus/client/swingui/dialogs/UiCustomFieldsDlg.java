@@ -394,8 +394,14 @@ public class UiCustomFieldsDlg extends JDialog
 			FieldSpecCollection bottom = FieldCollection.parseXml(bottomXml);
 			FormTemplate template = new FormTemplate(title, description, top, bottom);
 			MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
-			template.exportTemplate(securityTemp, destFile);
+			UiCustomFieldsDlg.exportTemplate(destFile, template, securityTemp);
 		}
+
+	}
+
+	public static void exportTemplate(File destFile, FormTemplate template, MartusCrypto securityTemp) throws Exception
+	{
+		template.exportTemplate(securityTemp, destFile);
 	}
 
 	class SendTemplateToServerHandler implements ActionListener
