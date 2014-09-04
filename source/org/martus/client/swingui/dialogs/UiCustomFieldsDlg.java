@@ -57,7 +57,6 @@ import org.martus.common.EnglishCommonStrings;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.Exceptions.ServerNotCompatibleException;
 import org.martus.common.FieldCollection;
-import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.FieldDeskKeys;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKeys;
@@ -379,7 +378,9 @@ public class UiCustomFieldsDlg extends JDialog
 			String description = descriptionField.getText();
 			try
 			{
-				exportTemplate(destFile, title, description, topXml, bottomXml);
+				FormTemplate template = createTemplate(title, description, topXml, bottomXml);
+				MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
+				UiCustomFieldsDlg.exportTemplate(destFile, template, securityTemp);
 				mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
 			} 
 			catch (Exception e)
@@ -387,13 +388,6 @@ public class UiCustomFieldsDlg extends JDialog
 				MartusLogger.logException(e);
 				mainWindow.notifyDlg("ErrorExportingCustomizationTemplate");
 			}
-		}
-
-		public void exportTemplate(File destFile, String title, String description, String topXml, String bottomXml) throws Exception
-		{
-			FormTemplate template = createTemplate(title, description, topXml, bottomXml);
-			MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
-			UiCustomFieldsDlg.exportTemplate(destFile, template, securityTemp);
 		}
 
 		private FormTemplate createTemplate(String title, String description, String topXml, String bottomXml) throws Exception
