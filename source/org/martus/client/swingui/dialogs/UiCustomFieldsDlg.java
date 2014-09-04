@@ -51,7 +51,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
-import org.martus.clientside.FormatFilter;
+import org.martus.client.swingui.jfx.common.ExportTemplateDoer;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.Exceptions.ServerNotAvailableException;
@@ -376,7 +376,8 @@ public class UiCustomFieldsDlg extends JDialog
 				
 				FormTemplate template = createTemplate(title, description, topXml, bottomXml);
 
-				exportTemplate(mainWindow, template);
+				ExportTemplateDoer doer = new ExportTemplateDoer(mainWindow, template);
+				doer.doAction();
 			} 
 			catch (Exception e)
 			{
@@ -392,18 +393,6 @@ public class UiCustomFieldsDlg extends JDialog
 			FormTemplate template = new FormTemplate(title, description, top, bottom);
 			return template;
 		}
-
-	}
-
-	public static void exportTemplate(UiMainWindow mainWindowToUse, FormTemplate template) throws Exception
-	{
-		FormatFilter filter = new MCTFileFilter(mainWindowToUse.getLocalization());
-		File destFile = mainWindowToUse.showFileSaveDialog("ExportCustomization", filter);
-		if(destFile == null)
-			return;
-
-		MartusCrypto securityTemp = mainWindowToUse.getApp().getSecurity();
-		template.exportTemplate(securityTemp, destFile);
 	}
 
 	class SendTemplateToServerHandler implements ActionListener
