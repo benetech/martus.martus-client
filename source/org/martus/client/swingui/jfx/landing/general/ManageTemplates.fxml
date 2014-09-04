@@ -20,8 +20,8 @@
 									<columns>
 										<TableColumn fx:id="templateNameColumn" prefWidth="264.0" text="Name" />
 										<TableColumn fx:id="templateDeleteColumn" maxWidth="150.0" prefWidth="75.0" text="Delete" />
-										<TableColumn maxWidth="150.0" prefWidth="75.0" text="Upload" />
-										<TableColumn maxWidth="150.0" prefWidth="75.0" text="Export" />
+										<TableColumn fx:id="templateUploadColumn" maxWidth="150.0" prefWidth="75.0" text="Upload" />
+										<TableColumn fx:id="templateExportColumn" maxWidth="150.0" prefWidth="75.0" text="Export" />
 									</columns>
 								</TableView>
 								<HBox alignment="CENTER_RIGHT" layoutX="6.0" layoutY="92.0" prefHeight="50.0" prefWidth="480.0">
