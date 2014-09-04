@@ -85,9 +85,17 @@ public class ManageTemplatesController extends FxInSwingController
 		Comparator<String> sorter = new SaneCollator(getLocalization().getCurrentLanguageCode());
         templateNameColumn.setComparator(sorter);
 
-        Image image = new Image(TRASH_IMAGE_PATH);
-        templateDeleteColumn.setCellFactory(new FxButtonTableCellFactory(image, () -> deleteSelectedTemplate()));
+        Image trashImage = new Image(TRASH_IMAGE_PATH);
+        templateDeleteColumn.setCellFactory(new FxButtonTableCellFactory(trashImage, () -> deleteSelectedTemplate()));
         templateDeleteColumn.setCellValueFactory(new PropertyValueFactory<Object,Boolean>(ManageTemplatesTableRowData.CAN_DELETE_NAME));
+        
+        Image uploadImage = new Image(UPLOAD_IMAGE_PATH);
+        templateUploadColumn.setCellFactory(new FxButtonTableCellFactory(uploadImage, () -> uploadSelectedTemplate()));
+        templateUploadColumn.setCellValueFactory(new PropertyValueFactory<Object,Boolean>(ManageTemplatesTableRowData.CAN_UPLOAD_NAME));
+        
+        Image exportImage = new Image(EXPORT_IMAGE_PATH);
+        templateExportColumn.setCellFactory(new FxButtonTableCellFactory(exportImage, () -> exportSelectedTemplate()));
+        templateExportColumn.setCellValueFactory(new PropertyValueFactory<Object,Boolean>(ManageTemplatesTableRowData.CAN_EXPORT_NAME));
         
         populateAvailableTemplatesTable();
 
@@ -110,6 +118,30 @@ public class ManageTemplatesController extends FxInSwingController
 			getBulletinStore().deleteFormTemplate(selected.getRawTemplateName());
 			
 			populateAvailableTemplatesTable();
+		}
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
+
+	protected void uploadSelectedTemplate()
+	{
+		try
+		{
+			ManageTemplatesTableRowData selected = availableTemplatesTable.getSelectionModel().getSelectedItem();
+		}
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
+
+	protected void exportSelectedTemplate()
+	{
+		try
+		{
+			ManageTemplatesTableRowData selected = availableTemplatesTable.getSelectionModel().getSelectedItem();
 		}
 		catch (Exception e)
 		{
@@ -309,6 +341,8 @@ public class ManageTemplatesController extends FxInSwingController
 	}
 
 	final private String TRASH_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/trash.png";
+	final private String EXPORT_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/export.png";
+	final private String UPLOAD_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/upload.png";
 	
 	@FXML
 	private TableView<ManageTemplatesTableRowData> availableTemplatesTable;
@@ -318,6 +352,12 @@ public class ManageTemplatesController extends FxInSwingController
 
 	@FXML
 	protected TableColumn<Object, Boolean> templateDeleteColumn;
+	
+	@FXML
+	protected TableColumn<Object, Boolean> templateUploadColumn;
+	
+	@FXML
+	protected TableColumn<Object, Boolean> templateExportColumn;
 	
 	@FXML
 	private RadioButton genericRadioButton;

@@ -44,6 +44,9 @@ public class ManageTemplatesTableRowData
 		
 		boolean isDefaultTemplate = rawTemplateNameToUse.isEmpty();
 		canDeleteProperty = new SimpleBooleanProperty(!isDefaultTemplate);
+		canUploadProperty = new SimpleBooleanProperty(!isDefaultTemplate);
+		
+		canExportProperty = new SimpleBooleanProperty(true);
 	}
 	
     public String getRawTemplateName()
@@ -76,6 +79,26 @@ public class ManageTemplatesTableRowData
 		return canDeleteProperty;
 	}
     
+    public Boolean getCanUpload()
+    {
+    	return canUploadProperty().getValue();
+    }
+    
+    public Property<Boolean> canUploadProperty()
+	{
+		return canUploadProperty;
+	}
+    
+    public Boolean getCanExport()
+    {
+    	return canExportProperty().getValue();
+    }
+    
+    public Property<Boolean> canExportProperty()
+	{
+		return canExportProperty;
+	}
+    
     // NOTE: This is required in order to be sortable using SaneComparator
     @Override
     public String toString()
@@ -86,9 +109,13 @@ public class ManageTemplatesTableRowData
 	public static final String RAW_TEMPLATE_NAME = "rawTemplateName";
 	public static final String DISPLAYABLE_TEMPLATE_NAME = "displayableTemplateName";
 	public static final String CAN_DELETE_NAME = "canDelete";
+	public static final String CAN_UPLOAD_NAME = "canUpload";
+	public static final String CAN_EXPORT_NAME = "canExport";
 
 	private Property<String> rawTemplateNameProperty;
 	private Property<String> displayableTemplateNameProperty;
 	private Property<Boolean> canDeleteProperty;
+	private Property<Boolean> canUploadProperty;
+	private Property<Boolean> canExportProperty;
 	private MiniLocalization localization;
 }
