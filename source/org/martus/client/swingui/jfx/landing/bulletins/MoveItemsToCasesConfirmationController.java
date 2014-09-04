@@ -45,10 +45,10 @@ import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 
 
-public class MoveItemsToCasesController extends FxController
+public class MoveItemsToCasesConfirmationController extends FxController
 {
 
-	public MoveItemsToCasesController(UiMainWindow mainWindowToUse, CaseListProvider casesToMoveTo)
+	public MoveItemsToCasesConfirmationController(UiMainWindow mainWindowToUse, CaseListProvider casesToMoveTo)
 	{
 		super(mainWindowToUse);
 		availableCasesToMove = casesToMoveTo;
