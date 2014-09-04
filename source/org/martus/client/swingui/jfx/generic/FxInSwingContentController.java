@@ -31,6 +31,7 @@ import java.util.ResourceBundle;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
+import org.martus.common.MartusLogger;
 
 abstract public class FxInSwingContentController extends FxInSwingController
 {
@@ -54,7 +55,11 @@ abstract public class FxInSwingContentController extends FxInSwingController
 	
 	public void logAndNotifyUnexpectedError(Exception e)
 	{
-		getStage().logAndNotifyUnexpectedError(e);
+		VirtualStage stage = getStage();
+		if(stage != null)
+			stage.logAndNotifyUnexpectedError(e);
+		else
+			MartusLogger.logException(e);
 	}
 	
 	protected void doAction(ActionDoer doer)
