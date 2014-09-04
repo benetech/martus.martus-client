@@ -358,11 +358,12 @@ public class BulletinsListController extends AbstractFxLandingContentController
 					for (CaseListItem caseItem : selectedCases)
 					{
 						BulletinFolder folderToMoveTo = caseItem.getFolder();
-						store.moveBulletin(b, currentCase, folderToMoveTo, false);		
+						store.linkBulletinToFolder(b, currentCase, folderToMoveTo);		
 					}
 					if(deleteFromCurrentCase)
 						store.removeBulletinFromFolder(currentCase, b);
 				}
+				store.saveFolders();
 			}
 		} 
 		catch (Exception e)
