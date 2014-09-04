@@ -55,6 +55,7 @@ import org.martus.client.search.SaneCollator;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.jfx.common.AbstractFxImportFormTemplateController;
+import org.martus.client.swingui.jfx.common.ExportTemplateDoer;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
@@ -142,6 +143,9 @@ public class ManageTemplatesController extends FxInSwingController
 		try
 		{
 			ManageTemplatesTableRowData selected = availableTemplatesTable.getSelectionModel().getSelectedItem();
+			String rawTitle = selected.getRawTemplateName();
+			FormTemplate template = getBulletinStore().getFormTemplate(rawTitle);
+			doAction(new ExportTemplateDoer(getMainWindow(), template));
 		}
 		catch (Exception e)
 		{
