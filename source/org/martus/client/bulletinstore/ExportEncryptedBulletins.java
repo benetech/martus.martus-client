@@ -113,10 +113,7 @@ public class ExportEncryptedBulletins extends AbstractExport
 			if(doesDestinationIncludeFileName())
 				return destinationFolder;
 			String summary = bulletinToExport.toFileName();
-			File bulletinFileName = File.createTempFile(summary, TransferableBulletinList.BULLETIN_FILE_EXTENSION);
-			bulletinFileName.deleteOnExit();
-			File fullDestinationFile = new File(destinationFolder, bulletinFileName.getName());
-			return fullDestinationFile;
+			return File.createTempFile(summary, TransferableBulletinList.BULLETIN_FILE_EXTENSION, destinationFolder);
 		}
 
 		private boolean doesDestinationIncludeFileName()
