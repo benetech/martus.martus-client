@@ -57,6 +57,7 @@ import org.martus.common.EnglishCommonStrings;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.Exceptions.ServerNotCompatibleException;
 import org.martus.common.FieldCollection;
+import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.FieldDeskKeys;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKeys;
@@ -390,11 +391,17 @@ public class UiCustomFieldsDlg extends JDialog
 
 		public void exportTemplate(File destFile, String title, String description, String topXml, String bottomXml) throws Exception
 		{
+			FormTemplate template = createTemplate(title, description, topXml, bottomXml);
+			MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
+			UiCustomFieldsDlg.exportTemplate(destFile, template, securityTemp);
+		}
+
+		private FormTemplate createTemplate(String title, String description, String topXml, String bottomXml) throws Exception
+		{
 			FieldSpecCollection top = FieldCollection.parseXml(topXml);
 			FieldSpecCollection bottom = FieldCollection.parseXml(bottomXml);
 			FormTemplate template = new FormTemplate(title, description, top, bottom);
-			MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
-			UiCustomFieldsDlg.exportTemplate(destFile, template, securityTemp);
+			return template;
 		}
 
 	}
