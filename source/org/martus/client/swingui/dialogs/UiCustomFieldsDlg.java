@@ -376,8 +376,7 @@ public class UiCustomFieldsDlg extends JDialog
 				
 				FormTemplate template = createTemplate(title, description, topXml, bottomXml);
 
-				if(exportTemplate(mainWindow, template));
-					mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
+				exportTemplate(mainWindow, template);
 			} 
 			catch (Exception e)
 			{
