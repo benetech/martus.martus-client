@@ -376,20 +376,26 @@ public class UiCustomFieldsDlg extends JDialog
 				
 				FormTemplate template = createTemplate(title, description, topXml, bottomXml);
 
-				FormatFilter filter = new MCTFileFilter(mainWindow.getLocalization());
-				File destFile = mainWindow.showFileSaveDialog("ExportCustomization", filter);
-				if(destFile == null)
-					return;
-			
-				MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
-				UiCustomFieldsDlg.exportTemplate(destFile, template, securityTemp);
-				mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
+				if(exportTemplate(template));
+					mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
 			} 
 			catch (Exception e)
 			{
 				MartusLogger.logException(e);
 				mainWindow.notifyDlg("ErrorExportingCustomizationTemplate");
 			}
+		}
+
+		public boolean exportTemplate(FormTemplate template) throws Exception
+		{
+			FormatFilter filter = new MCTFileFilter(mainWindow.getLocalization());
+			File destFile = mainWindow.showFileSaveDialog("ExportCustomization", filter);
+			if(destFile == null)
+				return false;
+
+			MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
+			UiCustomFieldsDlg.exportTemplate(destFile, template, securityTemp);
+			return true;
 		}
 
 		private FormTemplate createTemplate(String title, String description, String topXml, String bottomXml) throws Exception
