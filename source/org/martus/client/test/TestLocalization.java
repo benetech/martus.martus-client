@@ -281,7 +281,7 @@ public class TestLocalization extends TestCaseEnhanced
 	public void testAddedMTFLanguageFile() throws Exception
 	{
 		File translationDirectory = createTempDirectory();
-		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, EnglishStrings.strings);
+		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, UiSession.getAllEnglishStrings());
 		myLocalization.setLanguageSettingsProvider(new CurrentUiState());
 		myLocalization.includeOfficialLanguagesOnly = false;
 		assertTrue("Default English should always be trusted.", myLocalization.isOfficialTranslation("en"));
@@ -306,7 +306,7 @@ public class TestLocalization extends TestCaseEnhanced
 	public void testAddedUnsignedMTFLanguageFileOfficialOnly() throws Exception
 	{
 		File translationDirectory = createTempDirectory();
-		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, EnglishStrings.strings);
+		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, UiSession.getAllEnglishStrings());
 		myLocalization.setLanguageSettingsProvider(new CurrentUiState());
 
 		String someTestLanguageCode = "zz";
