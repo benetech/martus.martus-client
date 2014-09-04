@@ -70,6 +70,12 @@ public class PopupConfirmationController extends FxPopupController implements In
 		return title; 
 	}
 
+	@Override
+	public Button getOkButton()
+	{
+		return fxYesButton;
+	}
+
 	@FXML
 	public void yesPressed()
 	{
