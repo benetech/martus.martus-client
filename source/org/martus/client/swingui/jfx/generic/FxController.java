@@ -36,6 +36,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -70,7 +71,7 @@ abstract public class FxController implements Initializable
 	{
 	}
 	
-	protected FxShellController getShellController()
+	public FxShellController getShellController()
 	{
 		return shellController;
 	}
@@ -82,6 +83,9 @@ abstract public class FxController implements Initializable
 	
 	public VirtualStage getStage()
 	{
+		if(getShellController() == null)
+			return null;
+		
 		return getShellController().getStage();
 	}
 
@@ -231,7 +235,11 @@ abstract public class FxController implements Initializable
 
 	public void logAndNotifyUnexpectedError(Exception e)
 	{
-		getStage().logAndNotifyUnexpectedError(e);
+		VirtualStage stage = getStage();
+		if(stage != null)
+			stage.logAndNotifyUnexpectedError(e);
+		else
+			MartusLogger.logException(e);
 	}
 	
 	public void showBusyDialog(String message, Task task, FxInSwingStage wizardPanel) throws Exception
@@ -287,6 +295,31 @@ abstract public class FxController implements Initializable
 		Parent createContents = embeddedContentController.createContents();
 		destinationPane.getChildren().addAll(createContents);
 		embeddedContentController.setShellController(getShellController());
+		embeddedContentController.setParentController(this);
+	}
+
+	private void setParentController(FxController parentControllerToUse)
+	{
+		parentController = parentControllerToUse;
+	}
+	
+	public FxController getParentController()
+	{
+		return parentController;
+	}
+	
+	public FxController getTopLevelController()
+	{
+		FxController top = this;
+		while(top.getParentController() != null)
+			top = top.getParentController();
+		
+		return top;
+	}
+	
+	public Button getOkButton()
+	{
+		return null;
 	}
 
 	protected void doAction(ActionDoer doer)
@@ -355,5 +388,5 @@ abstract public class FxController implements Initializable
 	private UiMainWindow mainWindow;
 	private static int notifyDialogDepth;
 	private FxShellController shellController;
-
+	private FxController parentController;
 }
