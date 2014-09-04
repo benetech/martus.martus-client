@@ -451,7 +451,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 			String warningMessageLtoR = getWarningMessageAboutUnofficialTranslations(message);
 			String warningMessageRtoL = getWarningMessageAboutUnofficialTranslations(messageRtoL);
 			Toolkit.getDefaultToolkit().beep();
-			new UiWarningMessageDlg(owner, "",warningMessageLtoR, warningMessageRtoL);
+			new UiWarningMessageDlg(owner, "", localization.getButtonLabel(EnglishCommonStrings.OK), warningMessageLtoR, warningMessageRtoL);
 		}
 		catch(Exception e)
 		{

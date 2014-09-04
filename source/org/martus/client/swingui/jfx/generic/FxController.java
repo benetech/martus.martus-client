@@ -48,6 +48,7 @@ import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.generic.data.MartusResourceBundle;
 import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractAppTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.TaskWithTimeout;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 
@@ -200,7 +201,7 @@ abstract public class FxController implements Initializable
 
 	protected boolean showModalYesNoDialog(String titleTag, FxController mainAreaController)
 	{
-		return showModalYesNoDialog(titleTag, YES_BUTTON_TAG, NO_BUTTON_TAG, mainAreaController);
+		return showModalYesNoDialog(titleTag, EnglishCommonStrings.YES, EnglishCommonStrings.NO, mainAreaController);
 	}	
 	
 	protected boolean showModalYesNoDialog(String titleTag, String yesButtonTag, String noButtonTag, FxController mainAreaController)
@@ -344,8 +345,6 @@ abstract public class FxController implements Initializable
 
 	private static final String POPUP_CSS = "Popup.css";
 	private static final String MARTUS_CSS = "Martus.css";
-	private static final String YES_BUTTON_TAG = "yes";
-	private static final String NO_BUTTON_TAG = "no";
 
 	private UiMainWindow mainWindow;
 	private static int notifyDialogDepth;

@@ -447,7 +447,7 @@ public class UiCustomFieldsDlg extends JDialog
 			formatTextArea(xmlExamples);
 			UiScrollPane pane = createScrollPane(xmlExamples);
 
-			new UiShowScrollableTextDlg(mainWindow, "CreateCustomFieldsHelp", "ok", MtfAwareLocalization.UNUSED_TAG, MtfAwareLocalization.UNUSED_TAG, message, pane);
+			new UiShowScrollableTextDlg(mainWindow, "CreateCustomFieldsHelp", EnglishCommonStrings.OK, MtfAwareLocalization.UNUSED_TAG, MtfAwareLocalization.UNUSED_TAG, message, pane);
 		}
 	}
 	
@@ -495,7 +495,7 @@ public class UiCustomFieldsDlg extends JDialog
 		formatTextArea(specificErrors);
 		UiScrollPane specificErrorsPane = createScrollPane(specificErrors);
 
-		new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", "ok", MtfAwareLocalization.UNUSED_TAG, MtfAwareLocalization.UNUSED_TAG, errorDescription, specificErrorsPane);
+		new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", EnglishCommonStrings.OK, MtfAwareLocalization.UNUSED_TAG, MtfAwareLocalization.UNUSED_TAG, errorDescription, specificErrorsPane);
 	}
 
 	protected void formatTextArea(UiTextArea textArea)
