@@ -275,7 +275,8 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		if(showModalYesNoDialog("Export", "export", EnglishCommonStrings.CANCEL, exportController))
 		{
 			File exportFile = exportController.getExportFileOrFolder();
-			
+			if(exportController.didUserApproveOverwritingExistingFile())
+				exportFile.delete();
 			if(exportController.shouldExportEncrypted())
 				doExportEncryptedMbaBulletins(bulletinsIdsToExport, exportFile);
 			else
@@ -358,7 +359,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 					for (CaseListItem caseItem : selectedCases)
 					{
 						BulletinFolder folderToMoveTo = caseItem.getFolder();
-						store.linkBulletinToFolder(b, currentCase, folderToMoveTo);		
+						store.linkBulletinToFolder(b, folderToMoveTo);		
 					}
 					if(deleteFromCurrentCase)
 						store.removeBulletinFromFolder(currentCase, b);
