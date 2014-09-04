@@ -270,10 +270,8 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	private void exportBulletins(UniversalId[] bulletinsIdsToExport)throws Exception
 	{
-		boolean exportMultibleBulletins = (bulletinsIdsToExport.length != 1);
-		
 		String defaultFileName = getDefaultExportFileName(bulletinsIdsToExport);
-		ExportItemsController exportController = new ExportItemsController(getMainWindow(), defaultFileName, exportMultibleBulletins);
+		ExportItemsController exportController = new ExportItemsController(getMainWindow(), defaultFileName, bulletinsIdsToExport.length);
 		if(showModalYesNoDialog("Export", "export", "cancel", exportController))
 		{
 			File exportFile = exportController.getExportFileOrFolder();
