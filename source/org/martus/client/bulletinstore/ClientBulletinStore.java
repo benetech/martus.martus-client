@@ -823,10 +823,12 @@ public class ClientBulletinStore extends BulletinStore
 
 	public synchronized void moveBulletin(Bulletin b, BulletinFolder from, BulletinFolder to)
 	{
-		moveBulletin(b, from, to, true);
+		linkBulletinToFolder(b, from, to);
+		removeBulletinFromFolder(from, b);
+		saveFolders();
 	}
 
-	public synchronized void moveBulletin(Bulletin b, BulletinFolder from, BulletinFolder to, boolean removeFromOriginal)
+	public synchronized void linkBulletinToFolder(Bulletin b, BulletinFolder from, BulletinFolder to)
 	{
 		if(from.equals(to))
 			return;
@@ -843,9 +845,6 @@ public class ClientBulletinStore extends BulletinStore
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(removeFromOriginal)
-			removeBulletinFromFolder(from, b);
-		saveFolders();
 	}
 
 	public void removeBulletinFromFolder(BulletinFolder from, Bulletin b)
