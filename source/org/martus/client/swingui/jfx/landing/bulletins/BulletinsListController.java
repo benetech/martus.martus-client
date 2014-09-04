@@ -303,6 +303,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 			File exportFile = exportController.getExportFileOrFolder();
 			if(exportController.didUserApproveOverwritingExistingFile())
 				exportFile.delete();
+			
 			if(exportController.shouldExportEncrypted())
 				doExportEncryptedMbaBulletins(bulletinsIdsToExport, exportFile);
 			else
