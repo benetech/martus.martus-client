@@ -1594,6 +1594,11 @@ public class ClientBulletinStore extends BulletinStore
 		formTemplateManager.deleteTemplate(title);
 	}
 
+	public boolean doesFormTemplateExist(String newTitle) throws Exception
+	{
+		return formTemplateManager.getAvailableTemplateNames().contains(newTitle);
+	}
+
 	private void initializeFormTemplateManager() throws Exception
 	{
 		File templateDirectory = getTemplateDirectory();
