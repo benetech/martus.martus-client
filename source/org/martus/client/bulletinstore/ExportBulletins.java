@@ -103,10 +103,10 @@ public class ExportBulletins extends AbstractExport
 			}
 			finally
 			{
-				progressMeter.finished();
 				int numberOfMissingAttachment = getNumberOfFailingAttachments();
 				int bulletinsExported = getNumberOfBulletinsExported();
 				updateExportMessage(this, bulletinsExported, numberOfMissingAttachment);
+				progressMeter.finished();
 			}
 		}
 
