@@ -359,26 +359,26 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			String title = titleField.getText();
-			String description = descriptionField.getText();
-			String topXml = topSectionXmlTextArea.getText();
-			String bottomXml = bottomSectionXmlTextArea.getText();
-
-			if(!validateXml(topXml, bottomXml))
-			{
-				mainWindow.notifyDlg("ErrorExportingCustomizationTemplate");
-				return;
-			}
-			if(!checkForDuplicateLabels())
-				return;
-			
-			FormatFilter filter = new MCTFileFilter(mainWindow.getLocalization());
-			File destFile = mainWindow.showFileSaveDialog("ExportCustomization", filter);
-			if(destFile == null)
-				return;
-			
 			try
 			{
+				String title = titleField.getText();
+				String description = descriptionField.getText();
+				String topXml = topSectionXmlTextArea.getText();
+				String bottomXml = bottomSectionXmlTextArea.getText();
+	
+				if(!validateXml(topXml, bottomXml))
+				{
+					mainWindow.notifyDlg("ErrorExportingCustomizationTemplate");
+					return;
+				}
+				if(!checkForDuplicateLabels())
+					return;
+				
+				FormatFilter filter = new MCTFileFilter(mainWindow.getLocalization());
+				File destFile = mainWindow.showFileSaveDialog("ExportCustomization", filter);
+				if(destFile == null)
+					return;
+			
 				FormTemplate template = createTemplate(title, description, topXml, bottomXml);
 				MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
 				UiCustomFieldsDlg.exportTemplate(destFile, template, securityTemp);
