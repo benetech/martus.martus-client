@@ -195,6 +195,7 @@ public class ExportItemsController extends FxController
 		{
 			exportFolder = saveLocationFileOrFolder.getParentFile();
 			exportFilenameOnly = saveLocationFileOrFolder.getName();
+			existingFileToBeReplaced = saveLocationFileOrFolder;
 		}
 		fileLocation.setText(saveLocationFileOrFolder.getAbsolutePath());
 	}
@@ -222,9 +223,14 @@ public class ExportItemsController extends FxController
 		return includeAttachments.isSelected();
 	}
 	
-	File getExportFileOrFolder()
+	public File getExportFileOrFolder()
 	{
 		return new File(fileLocation.getText());
+	}
+	
+	public boolean didUserApproveOverwritingExistingFile()
+	{
+		return getExportFileOrFolder().equals(existingFileToBeReplaced);
 	}
 
 	protected File getFileSaveLocation()
@@ -268,4 +274,5 @@ public class ExportItemsController extends FxController
 	private String exportFilenameOnly;
 	private File exportFolder;
 	private boolean multipleBulletinBeingExported;
+	private File existingFileToBeReplaced;
 }

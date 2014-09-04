@@ -823,18 +823,19 @@ public class ClientBulletinStore extends BulletinStore
 
 	public synchronized void moveBulletin(Bulletin b, BulletinFolder from, BulletinFolder to)
 	{
-		linkBulletinToFolder(b, from, to);
-		removeBulletinFromFolder(from, b);
-		saveFolders();
+		if(linkBulletinToFolder(b, to))
+		{
+			removeBulletinFromFolder(from, b);
+			saveFolders();
+		}
 	}
 
-	public synchronized void linkBulletinToFolder(Bulletin b, BulletinFolder from, BulletinFolder to)
+	public synchronized boolean linkBulletinToFolder(Bulletin b, BulletinFolder to)
 	{
-		if(from.equals(to))
-			return;
 		try
 		{
 			to.add(b);
+			return true;
 		}
 		catch (BulletinAlreadyExistsException e)
 		{
@@ -845,6 +846,7 @@ public class ClientBulletinStore extends BulletinStore
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return false;
 	}
 
 	public void removeBulletinFromFolder(BulletinFolder from, Bulletin b)

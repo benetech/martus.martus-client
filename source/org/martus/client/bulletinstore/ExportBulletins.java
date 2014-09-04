@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.bulletinstore;
 
 import java.io.File;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -92,6 +93,8 @@ public class ExportBulletins extends AbstractExport
 		{
 			try
 			{
+				if(!destinationFile.createNewFile())
+					throw new FileAlreadyExistsException(destinationFile.getAbsolutePath());
 				UnicodeWriter writer = new UnicodeWriter(destinationFile);
 				exporter.exportBulletins(writer, bulletinsToExport, isExportPrivate(), isExportAttachments(), isExportAllVersions(), destinationFile.getParentFile());
 				writer.close();
