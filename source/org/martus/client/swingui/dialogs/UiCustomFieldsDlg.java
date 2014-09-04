@@ -374,12 +374,13 @@ public class UiCustomFieldsDlg extends JDialog
 				if(!checkForDuplicateLabels())
 					return;
 				
+				FormTemplate template = createTemplate(title, description, topXml, bottomXml);
+
 				FormatFilter filter = new MCTFileFilter(mainWindow.getLocalization());
 				File destFile = mainWindow.showFileSaveDialog("ExportCustomization", filter);
 				if(destFile == null)
 					return;
 			
-				FormTemplate template = createTemplate(title, description, topXml, bottomXml);
 				MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
 				UiCustomFieldsDlg.exportTemplate(destFile, template, securityTemp);
 				mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
