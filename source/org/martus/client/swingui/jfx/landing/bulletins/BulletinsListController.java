@@ -125,8 +125,8 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		exportButton.disableProperty().bind(noItemsSelectedBinding);
 		moveButton.disableProperty().bind(noItemsSelectedBinding);
 
-		BooleanBinding onlyOneItemSelected = Bindings.equal(1, Bindings.size(itemsTable.getSelectionModel().getSelectedItems()));
-		copyButton.disableProperty().bind(onlyOneItemSelected.not());
+		BooleanBinding onlyOneItemSelectedBinding = Bindings.equal(1, Bindings.size(itemsTable.getSelectionModel().getSelectedItems()));
+		copyButton.disableProperty().bind(onlyOneItemSelectedBinding.not());
 		}
 
 	public void loadAllBulletinsAndSortByMostRecent()
