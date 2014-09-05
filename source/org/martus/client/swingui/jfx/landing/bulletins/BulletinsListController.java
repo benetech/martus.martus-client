@@ -34,6 +34,7 @@ import java.util.Set;
 import java.util.Vector;
 
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -123,8 +124,10 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		trashButton.disableProperty().bind(noItemsSelectedBinding);
 		exportButton.disableProperty().bind(noItemsSelectedBinding);
 		moveButton.disableProperty().bind(noItemsSelectedBinding);
-		copyButton.setDisable(true);//FIXME only one item selected for copy
-	}
+
+		BooleanBinding onlyOneItemSelected = Bindings.equal(1, Bindings.size(itemsTable.getSelectionModel().getSelectedItems()));
+		copyButton.disableProperty().bind(onlyOneItemSelected.not());
+		}
 
 	public void loadAllBulletinsAndSortByMostRecent()
 	{
