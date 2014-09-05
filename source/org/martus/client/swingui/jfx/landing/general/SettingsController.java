@@ -70,7 +70,7 @@ public class SettingsController extends FxFlexibleShellController
 			return serverTab;
 		if(firstTabToDisplay.equals(SYSTEM_TAB))
 			return systemTab;
-		if(firstTabToDisplay.equals(SYSTEM_TAB))
+		if(firstTabToDisplay.equals(TOR_TAB))
 			return torTab;
 		return null;
 	}
