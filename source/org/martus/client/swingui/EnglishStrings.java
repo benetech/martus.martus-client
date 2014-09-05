@@ -1737,6 +1737,8 @@ public class EnglishStrings
 "button:AddContact=Add Contact...",
 "button:ImportContactFromFile=Import Contact From File...",
 "button:ContactsSaveClose=Save and Close",
+"button:CopyItem=Copy",
+"wintitle:CopyItem=Copy",
 
 "wintitle:ExitWizard=Exit Martus Wizard",
 "field:ExitWizard=If you close this wizard now, you will not be able to return and use it to complete this account's setup \n(however, you can access the wizard to create other new accounts).\n\n" +

@@ -597,6 +597,24 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals(false, (b3 == null));
 		assertEquals(b.get(BulletinConstants.TAGSUMMARY), b3.get(BulletinConstants.TAGSUMMARY));
 	}
+	
+	public void testCopyBulletin() throws Exception
+	{
+		TRACE("testCopyBulletin");
+		assertEquals(0, testStore.getBulletinCount());
+		
+		Bulletin original = testStore.createEmptyBulletin();
+		String originalTitle = "original Title!";
+		original.set(BulletinConstants.TAGTITLE, originalTitle);
+		original.setDraft();
+		testStore.saveBulletin(original);
+		UniversalId originalId = original.getUniversalId();
+		String copy1Title = "Copy of original Title!";
+		Bulletin copy1 = testStore.copyBulletin(originalId, copy1Title);
+		String returnedCopy1Title = copy1.get(Bulletin.TAGTITLE);
+		assertNotEquals("Original Bulletin Id is the same as the Copy1's?",originalId.toString(), copy1.getUniversalIdString());
+		assertEquals("Copy1 should have a title its own title", copy1Title, returnedCopy1Title);
+	}
 
 	public void testDiscardBulletin() throws Exception
 	{

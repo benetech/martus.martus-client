@@ -406,6 +406,30 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	@FXML
 	private void onCopySelectedItem(javafx.event.ActionEvent event)
 	{
+		UniversalId selectedId = itemsTable.getSelectionModel().getSelectedItem().getUniversalId();
+		ClientBulletinStore store = getMainWindow().getStore();
+		Bulletin bulletinToCopy = store.getBulletinRevision(selectedId);
+		if(bulletinToCopy.hasUnknownTags() || bulletinToCopy.hasUnknownCustomField())
+		{
+			//TODO add Confirmation Warning
+		}
+	
+		String currentBulletinName = bulletinToCopy.get(Bulletin.TAGTITLE);
+		FxCopyItemNewNameController editNameController = new FxCopyItemNewNameController(getMainWindow(), currentBulletinName);
+		if(showModalYesNoDialog("CopyItem", "CopyItem", EnglishCommonStrings.CANCEL, editNameController))
+		{
+			try
+			{
+				Bulletin newCopy = store.copyBulletin(selectedId, editNameController.getNewItemName());
+				BulletinFolder currentCase = bulletinTableProvider.getFolder();
+				store.linkBulletinToFolder(newCopy, currentCase);		
+				store.saveFolders();
+			} 
+			catch (Exception e)
+			{
+				logAndNotifyUnexpectedError(e);
+			}
+		}
 	}
 
 	final private String VIEW_BULLETIN_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/view_bulletin.png";

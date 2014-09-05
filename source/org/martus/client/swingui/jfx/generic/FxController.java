@@ -337,6 +337,10 @@ abstract public class FxController implements Initializable
 	    }
 	    return false;
 	}
+	
+	public void popupControllerInitialized()
+	{
+	}
 
 	static public void applyStyleSheets(ObservableList<String> stylesheets, File directory, String languageCode, String cssLocation) throws Exception
 	{
