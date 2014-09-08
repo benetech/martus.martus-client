@@ -7,21 +7,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <bottom>
-      <HBox prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="fxYesButton" mnemonicParsing="false" onAction="#yesPressed" prefHeight="35.0" prefWidth="130.0" />
-            <Label prefHeight="16.0" prefWidth="304.0" />
-            <Button fx:id="fxNoButton" mnemonicParsing="false" onAction="#noPressed" prefHeight="30.0" prefWidth="130.0" />
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </HBox>
-   </bottom>
    <center>
       <Pane fx:id="mainPane" prefHeight="327.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </center>
+   <bottom>
+      <BorderPane prefHeight="30.0" prefWidth="411.0" BorderPane.alignment="CENTER">
+         <right>
+            <Button fx:id="fxNoButton" mnemonicParsing="false" onAction="#noPressed" BorderPane.alignment="CENTER" />
+         </right>
+         <left>
+            <Button fx:id="fxYesButton" mnemonicParsing="false" onAction="#yesPressed" BorderPane.alignment="CENTER" />
+         </left>
+      </BorderPane>
+   </bottom>
 </BorderPane>
