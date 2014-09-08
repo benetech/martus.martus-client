@@ -66,8 +66,8 @@ public class FxCopyItemNewNameController extends FxController
 		Button okButton = topLevelController.getOkButton();
 		BooleanBinding sameNameBinding = itemName.textProperty().isEqualTo(originalBulletinsName);
 		BooleanBinding emptyBinding = itemName.textProperty().isEmpty();
-		BooleanBinding notEmptyAndNotSameNameBinding = Bindings.or(sameNameBinding, emptyBinding);
-		okButton.disableProperty().bind(notEmptyAndNotSameNameBinding);
+		BooleanBinding emptyOrSameNameBinding = Bindings.or(sameNameBinding, emptyBinding);
+		okButton.disableProperty().bind(emptyOrSameNameBinding);
 	}
 	
 	@Override
