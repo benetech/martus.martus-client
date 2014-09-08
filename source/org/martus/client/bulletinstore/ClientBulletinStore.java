@@ -831,7 +831,7 @@ public class ClientBulletinStore extends BulletinStore
 		return copy;
 	}
 	
-	public synchronized void moveBulletin(Bulletin b, BulletinFolder from, BulletinFolder to)
+	public synchronized void moveBulletin(Bulletin b, BulletinFolder from, BulletinFolder to) throws IOException
 	{
 		if(linkBulletinToFolder(b, to))
 		{
@@ -840,7 +840,7 @@ public class ClientBulletinStore extends BulletinStore
 		}
 	}
 
-	public synchronized boolean linkBulletinToFolder(Bulletin b, BulletinFolder to)
+	public synchronized boolean linkBulletinToFolder(Bulletin b, BulletinFolder to) throws IOException
 	{
 		try
 		{
@@ -850,11 +850,6 @@ public class ClientBulletinStore extends BulletinStore
 		catch (BulletinAlreadyExistsException e)
 		{
 			//System.out.println("Bulletin already exists in destination folder");
-		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return false;
 	}

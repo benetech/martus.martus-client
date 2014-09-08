@@ -218,9 +218,21 @@ public class BackgroundUploader
 		finally
 		{
 			if(uploadResult.isHopelesslyDamaged)
-				app.moveBulletinToDamaged(uploadFromFolder, uploadResult.uid);
+			{
+				try
+				{
+					app.moveBulletinToDamaged(uploadFromFolder, uploadResult.uid);
+				} 
+				catch (IOException e)
+				{
+					uploadResult.exceptionThrown = e.toString();
+					uploadResult.isHopelesslyDamaged = true;
+				}
+			}
 			else
+			{
 				uploadFromFolder.remove(uploadResult.uid);
+			}
 			store.saveFolders();
 		}
 		return uploadResult;
