@@ -88,6 +88,14 @@ public class TestLocalization extends TestCaseEnhanced
 		}
 	}
 	
+	public void testConstructor() throws Exception
+	{
+		assertEquals("en", bd.getCurrentLanguageCode());
+		assertEquals("MM/dd/yyyy", bd.getCurrentDateTemplate());
+		assertEquals("MM/dd/yyyy", bd.getCurrentDateFormatCode());
+		assertEquals(MiniLocalization.GREGORIAN_SYSTEM, bd.getCurrentCalendarSystem());
+	}
+	
 	public void testNonAsciiEnglishTranslations() throws Exception
 	{
 		String[] strings = EnglishStrings.strings;
