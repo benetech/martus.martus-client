@@ -799,7 +799,7 @@ public class EnglishStrings
 "field:confirmCancelShareVerifycause=Do you wish to cancel the verification?",
 "field:confirmCancelShareVerifyeffect=By choosing Yes, you will exit this verification step.",
 "field:confirmEditBulletinWithUnknownTagscause=The bulletin you have chosen to modify contains information that this version of Martus cannot understand. It may have been created by a newer release of Martus, so you should ensure that you are running the latest release.",
-"field:confirmEditBulletinWithUnknownTagseffect=If you modify this bulletin, the unknown information will be lost.",
+"field:confirmEditBulletinWithUnknownTagseffect=If you copy this bulletin, the unknown information will be lost.",
 "field:confirmExportUnknownTagscause=One or more of the bulletins you have chosen to export contain information that this version of Martus cannot understand. They may have been created by a newer release of Martus, so you should ensure that you are running the latest release.",
 "field:confirmExportUnknownTagseffect=If you continue with the export, any unknown information will not be exported.",
 "field:confirmQuickEraseOutboxNotEmptycause=Please Note: There are bulletins that have not been sent to a server. If you continue these bulletins will be lost.",
@@ -1739,6 +1739,7 @@ public class EnglishStrings
 "button:ContactsSaveClose=Save and Close",
 "button:CopyItem=Copy",
 "wintitle:CopyItem=Copy",
+"button:YesCopyWithUnknownContent=Yes, copy what you can over",
 
 "wintitle:ExitWizard=Exit Martus Wizard",
 "field:ExitWizard=If you close this wizard now, you will not be able to return and use it to complete this account's setup \n(however, you can access the wizard to create other new accounts).\n\n" +

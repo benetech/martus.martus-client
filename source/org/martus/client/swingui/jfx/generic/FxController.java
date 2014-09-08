@@ -205,15 +205,15 @@ abstract public class FxController implements Initializable
 
 	public boolean showConfirmationDialog(String titleTag, String message)
 	{
-		FxController mainAreaController = new FxTextPaneController(getMainWindow(), message);
-		return showModalYesNoDialog(titleTag, mainAreaController);
+		return showConfirmationDialog(titleTag, EnglishCommonStrings.YES, EnglishCommonStrings.NO, message);
 	}
 
-	protected boolean showModalYesNoDialog(String titleTag, FxController mainAreaController)
+	public boolean showConfirmationDialog(String titleTag, String yesButtonTag, String noButtonTag, String message)
 	{
-		return showModalYesNoDialog(titleTag, EnglishCommonStrings.YES, EnglishCommonStrings.NO, mainAreaController);
-	}	
-	
+		FxController mainAreaController = new FxTextPaneController(getMainWindow(), message);
+		return showModalYesNoDialog(titleTag,  yesButtonTag, noButtonTag, mainAreaController);
+	}
+
 	protected boolean showModalYesNoDialog(String titleTag, String yesButtonTag, String noButtonTag, FxController mainAreaController)
 	{
 		try

@@ -53,6 +53,7 @@ import javafx.scene.input.MouseEvent;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.SortableBulletinList;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
 import org.martus.client.swingui.jfx.generic.FxController;
@@ -411,7 +412,13 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		Bulletin bulletinToCopy = store.getBulletinRevision(selectedId);
 		if(bulletinToCopy.hasUnknownTags() || bulletinToCopy.hasUnknownCustomField())
 		{
-			//TODO add Confirmation Warning
+			MartusLocalization localization = getLocalization();
+			String copingBulletinWithUnknownContentMessage = localization.getFieldLabel("confirmEditBulletinWithUnknownTagscause");
+			copingBulletinWithUnknownContentMessage += " ";
+			copingBulletinWithUnknownContentMessage += localization.getFieldLabel("confirmEditBulletinWithUnknownTagseffect");
+			
+			if(!showConfirmationDialog("CopyItem", "YesCopyWithUnknownContent", EnglishCommonStrings.CANCEL, copingBulletinWithUnknownContentMessage))
+				return;
 		}
 	
 		String currentBulletinName = bulletinToCopy.get(Bulletin.TAGTITLE);
