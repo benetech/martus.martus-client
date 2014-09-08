@@ -2015,7 +2015,7 @@ public class MartusApp
 		throw new ServerCallFailedException();
 	}
 
-	public void moveBulletinToDamaged(BulletinFolder outbox, UniversalId uid)
+	public void moveBulletinToDamaged(BulletinFolder outbox, UniversalId uid) throws IOException
 	{
 		System.out.println("Moving bulletin to damaged");
 		BulletinFolder damaged = createOrFindFolder(store.getNameOfFolderDamaged());
