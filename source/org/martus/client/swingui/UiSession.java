@@ -42,7 +42,9 @@ public class UiSession
 {
 	public UiSession() throws MartusAppInitializationException
 	{
-		setLocalization(new MartusLocalization(MartusApp.getTranslationsDirectory(), UiSession.getAllEnglishStrings()));
+		MartusLocalization newLocalization = new MartusLocalization(MartusApp.getTranslationsDirectory(), UiSession.getAllEnglishStrings());
+		
+		setLocalization(newLocalization);
 		app = new MartusApp(getLocalization());
 		initializeCurrentLanguage();
 	}
