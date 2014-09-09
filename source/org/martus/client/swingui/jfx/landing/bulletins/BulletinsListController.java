@@ -117,6 +117,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
         Image editImage = new Image(EDIT_BULLETIN_IMAGE_PATH);
         editBulletinColumn.setCellFactory(new FxButtonTableCellFactory(editImage, () -> editSelectedBulletin()));
 		editBulletinColumn.setCellValueFactory(new PropertyValueFactory<Object, Boolean>(BulletinTableRowData.CAN_EDIT_PROPERTY_NAME));
+		editBulletinColumn.visibleProperty().bind(getTrashNotBeingDisplayedBinding());
 	}
 	
 	private void initalizeButtons()
@@ -128,7 +129,16 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 		BooleanBinding onlyOneItemSelectedBinding = Bindings.equal(1, Bindings.size(itemsTable.getSelectionModel().getSelectedItems()));
 		copyButton.disableProperty().bind(onlyOneItemSelectedBinding.not());
+		
+		BooleanBinding trashNotBeingDisplayedBinding = getTrashNotBeingDisplayedBinding();
+		exportButton.visibleProperty().bind(trashNotBeingDisplayedBinding);
+		copyButton.visibleProperty().bind(trashNotBeingDisplayedBinding);
 		}
+
+	public BooleanBinding getTrashNotBeingDisplayedBinding()
+	{
+		return bulletinTableProvider.getTrashFolderBeingDisplayedBooleanProperty().not();
+	}
 
 	public void loadAllBulletinsAndSortByMostRecent()
 	{
