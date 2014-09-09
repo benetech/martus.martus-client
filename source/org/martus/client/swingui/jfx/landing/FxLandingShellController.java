@@ -76,9 +76,9 @@ public class FxLandingShellController extends FxNonWizardShellController
 		return bulletinsListController;
 	}
 	
-	public CaseListProvider getCurrentCaseListProvider()
+	public CaseListProvider getAllCaseListProvider()
 	{
-		return caseManagementController.getCurrentCaseListProvider();
+		return caseManagementController.getAllCaseListProvider();
 	}
 
 	@Override
