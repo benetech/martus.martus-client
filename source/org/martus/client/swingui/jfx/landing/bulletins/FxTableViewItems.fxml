@@ -33,14 +33,6 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button fx:id="exportButton" mnemonicParsing="false" onAction="#onExportSelectedItems" text="Export">
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/export.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></Button>
                   <Button fx:id="moveButton" mnemonicParsing="false" onAction="#onMoveSelectedItems" text="Move">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
@@ -50,6 +42,14 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Button fx:id="exportButton" mnemonicParsing="false" onAction="#onExportSelectedItems" text="Export">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/export.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                   <Button fx:id="copyButton" mnemonicParsing="false" onAction="#onCopySelectedItem" text="Copy">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
