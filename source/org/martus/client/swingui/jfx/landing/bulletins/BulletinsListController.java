@@ -379,7 +379,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	
 	private CaseListProvider getAvailableCasesForMove()
 	{
-		CaseListProvider currentCases = ((FxLandingShellController)getShellController()).getCurrentCaseListProvider();
+		CaseListProvider currentCases = ((FxLandingShellController)getShellController()).getAllCaseListProvider();
 		BulletinFolder currentFolder = bulletinTableProvider.getFolder();
 		
 		CaseListProvider casesToMoveInto = new CaseListProvider();

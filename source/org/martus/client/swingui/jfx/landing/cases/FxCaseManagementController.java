@@ -89,9 +89,14 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		return LOCATION_CASE_MANAGEMENT_FXML;
 	}
 	
-	public CaseListProvider getCurrentCaseListProvider()
+	private CaseListProvider getCurrentCaseListProvider()
 	{
 		return (CaseListProvider) currentCasesListView.getItems();
+	}
+
+	public CaseListProvider getAllCaseListProvider()
+	{
+		return (CaseListProvider) casesListViewAll.getItems();
 	}
 
 	public void addFolderSelectionListener(FolderSelectionListener listener)
