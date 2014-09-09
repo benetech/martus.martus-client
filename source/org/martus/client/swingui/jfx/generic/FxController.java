@@ -292,10 +292,10 @@ abstract public class FxController implements Initializable
 	
 	public void loadControllerAndEmbedInPane(FxController embeddedContentController, Pane destinationPane) throws Exception
 	{
-		Parent createContents = embeddedContentController.createContents();
-		destinationPane.getChildren().addAll(createContents);
 		embeddedContentController.setShellController(getShellController());
 		embeddedContentController.setParentController(this);
+		Parent createContents = embeddedContentController.createContents();
+		destinationPane.getChildren().addAll(createContents);
 	}
 
 	private void setParentController(FxController parentControllerToUse)
@@ -338,10 +338,6 @@ abstract public class FxController implements Initializable
 	    return false;
 	}
 	
-	public void popupControllerInitialized()
-	{
-	}
-
 	static public void applyStyleSheets(ObservableList<String> stylesheets, File directory, String languageCode, String cssLocation) throws Exception
 	{
 		applyMasterMartusStyleSheets(stylesheets, directory, languageCode);
