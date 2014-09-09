@@ -12,7 +12,7 @@
 		</Label>
 		<TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
 			<tabs>
-				<Tab text="Available Templates">
+				<Tab fx:id="availableTemplatesTab" text="Available Templates">
 					<content>
 						<VBox spacing="5.0">
 							<children>
