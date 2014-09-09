@@ -29,6 +29,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -40,7 +41,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
-import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
@@ -61,7 +61,7 @@ import org.martus.client.swingui.jfx.landing.general.SettingsController;
 import org.martus.common.MartusLogger;
 import org.martus.common.network.OrchidTransportWrapper;
 
-public class FxLandingShellController extends FxNonWizardShellController implements FolderSelectionListener
+public class FxLandingShellController extends FxNonWizardShellController
 {
 	public FxLandingShellController(UiMainWindow mainWindowToUse)
 	{
@@ -95,7 +95,9 @@ public class FxLandingShellController extends FxNonWizardShellController impleme
 		updateTorStatus();
 		initializeTorListener();
 		caseManagementController.addFolderSelectionListener(bulletinListProvider);
-		caseManagementController.addFolderSelectionListener(this);
+		
+		BooleanBinding showMainTrashButtonBinding = bulletinsListController.getTrashNotBeingDisplayedBinding();
+		toolbarButtonShowTrashFolder.visibleProperty().bind(showMainTrashButtonBinding);
 	}
 
 	private void initializeTorListener()
@@ -164,12 +166,6 @@ public class FxLandingShellController extends FxNonWizardShellController impleme
 		toolbarButtonOnline.setText(getStatusMessage(isOnline));
 	}
 	
-	@Override
-	public void folderWasSelected(BulletinFolder folder)
-	{
-		toolbarButtonShowTrashFolder.setDisable(folder.isDiscardedFolder());
-	}
-
 	@FXML void onShowTrashFolder(ActionEvent event)
 	{
 		caseManagementController.showTrashFolder();
