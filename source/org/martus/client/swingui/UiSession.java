@@ -87,22 +87,16 @@ public class UiSession
 		CurrentUiState previouslySavedState = new CurrentUiState();
 		previouslySavedState.load(getUiStateFile());
 		
-		if(previouslySavedState.getCurrentLanguage() != "")
-		{	
-			getLocalization().setCurrentLanguageCode(previouslySavedState.getCurrentLanguage());
-			getLocalization().setCurrentDateFormatCode(previouslySavedState.getCurrentDateFormat());
-		}
+		if(previouslySavedState.getCurrentLanguage() != null)
+			MartusApp.setInitialUiDefaultsFromFileIfPresent(previouslySavedState, new File(getApp().getMartusDataRootDirectory(),"DefaultUi.txt"));
 		
-		if(getLocalization().getCurrentLanguageCode()== null)
-			MartusApp.setInitialUiDefaultsFromFileIfPresent(getLocalization(), new File(getApp().getMartusDataRootDirectory(),"DefaultUi.txt"));
-		
-		if(getLocalization().getCurrentLanguageCode()== null)
+		if(previouslySavedState.getCurrentLanguage() == null)
 		{
-			getLocalization().setCurrentLanguageCode(MtfAwareLocalization.ENGLISH);
-			getLocalization().setDateFormatFromLanguage();
+			previouslySavedState.setCurrentLanguage(MtfAwareLocalization.ENGLISH);
+			previouslySavedState.setDateFormatFromLanguage();
 		}
 
-		if (MtfAwareLocalization.BURMESE.equals(getLocalization().getCurrentLanguageCode()))
+		if (MtfAwareLocalization.BURMESE.equals(previouslySavedState.getCurrentLanguage()))
 			FontSetter.setUIFont(FontHandler.BURMESE_FONT);
 		
 		getLocalization().setLanguageSettingsProvider(previouslySavedState);
