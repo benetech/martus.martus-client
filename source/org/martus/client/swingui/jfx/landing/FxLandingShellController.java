@@ -40,6 +40,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
@@ -60,13 +61,13 @@ import org.martus.client.swingui.jfx.landing.general.SettingsController;
 import org.martus.common.MartusLogger;
 import org.martus.common.network.OrchidTransportWrapper;
 
-public class FxLandingShellController extends FxNonWizardShellController
+public class FxLandingShellController extends FxNonWizardShellController implements FolderSelectionListener
 {
 	public FxLandingShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		bulletinListProvider = new BulletinListProvider(mainWindowToUse);
-		bulletinsListController = new BulletinsListController(mainWindowToUse, bulletinListProvider);
+		bulletinListProvider = new BulletinListProvider(getMainWindow());
+		bulletinsListController = new BulletinsListController(getMainWindow(), bulletinListProvider);
 		caseManagementController = new FxCaseManagementController(getMainWindow());
 	}
 	
@@ -94,6 +95,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 		updateTorStatus();
 		initializeTorListener();
 		caseManagementController.addFolderSelectionListener(bulletinListProvider);
+		caseManagementController.addFolderSelectionListener(this);
 	}
 
 	private void initializeTorListener()
@@ -162,6 +164,17 @@ public class FxLandingShellController extends FxNonWizardShellController
 		toolbarButtonOnline.setText(getStatusMessage(isOnline));
 	}
 	
+	@Override
+	public void folderWasSelected(BulletinFolder folder)
+	{
+		toolbarButtonShowTrashFolder.setDisable(folder.isDiscardedFolder());
+	}
+
+	@FXML void onShowTrashFolder(ActionEvent event)
+	{
+		caseManagementController.showTrashFolder();
+	}
+
 	@FXML
 	private void onManageContacts(ActionEvent event)
 	{
@@ -278,8 +291,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 			logAndNotifyUnexpectedError(e);
 		}
 	}
-
-
+	
 	@FXML
 	private TextField searchText;
 	
@@ -294,6 +306,9 @@ public class FxLandingShellController extends FxNonWizardShellController
 	
 	@FXML
 	private Pane mainContentPane;
+	
+	@FXML
+	private Button toolbarButtonShowTrashFolder;
 	
 	private BulletinsListController bulletinsListController;
 	private BulletinListProvider bulletinListProvider;

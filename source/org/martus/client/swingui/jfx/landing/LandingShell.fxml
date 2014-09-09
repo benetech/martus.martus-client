@@ -11,7 +11,7 @@
 	<top>
 		<HBox alignment="CENTER_RIGHT" styleClass="menu-bar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 			<children>
-				<MenuBar fx:id="global_menu" >
+				<MenuBar fx:id="global_menu">
 					<menus>
 						<Menu mnemonicParsing="false" text="Contacts">
 							<items>
@@ -80,10 +80,17 @@
       									</font>
       								</Button>
                               <Separator prefWidth="10.0" visible="false" />
-      								<Button mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="Import" textFill="#f7f7f7">
+      								<Button fx:id="toolbarButtonShowTrashFolder" mnemonicParsing="false" onAction="#onShowTrashFolder" style="-fx-background-color: #77bad0;" text="Trash" textFill="#f7f7f7">
       									<font>
       										<Font name="Helvetica" size="14.0" />
       									</font>
+                                 <graphic>
+                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/trash.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
       								</Button>
                            </children>
                         </HBox>
@@ -136,7 +143,7 @@
 				</VBox>
 			</top>
 			<center>
-				<SplitPane dividerPositions="0.2" focusTraversable="true" >
+				<SplitPane dividerPositions="0.2" focusTraversable="true">
 					<items>
 						<Pane fx:id="sideContentPane" />
 						<Pane fx:id="mainContentPane" />

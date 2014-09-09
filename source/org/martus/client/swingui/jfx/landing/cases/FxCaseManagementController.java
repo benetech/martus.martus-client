@@ -61,7 +61,7 @@ import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxCaseManagementController extends AbstractFxLandingContentController
 {
-	public FxCaseManagementController(UiMainWindow mainWindowToUse)
+	public FxCaseManagementController(UiMainWindow mainWindowToUse )
 	{
 		super(mainWindowToUse);
 		
@@ -69,6 +69,8 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		caseListProviderAll = new CaseListProvider();
 		caseListProviderOpen = new CaseListProvider();
 		caseListProviderClosed = new CaseListProvider();
+		caseListProviderTrash = new CaseListProvider();
+		casesListViewTrash = new ListView<CaseListItem>();
 	}
 
 	@Override
@@ -129,7 +131,6 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		updateCaseList();
 	}
 
-
 	protected void updateCases(String caseNameToSelect)
 	{
 		String foldersLabel = FxFolderSettingsController.getCurrentFoldersHeading(getApp().getConfigInfo(), getLocalization());
@@ -173,6 +174,22 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		return false;
 	}
 	
+	public void showTrashFolder()
+	{
+		currentCasesListView.getSelectionModel().clearSelection();
+		
+		BulletinFolder trashFolder = getApp().getStore().getFolderDiscarded();
+		MartusLocalization localization = getLocalization();
+		CaseListItem trashList = new CaseListItem(trashFolder, localization);
+		caseListProviderTrash.clear();
+		caseListProviderTrash.add(trashList);
+		casesListViewTrash.setItems(caseListProviderTrash);
+		currentCasesListView = casesListViewTrash;
+		currentCaseListProvider = caseListProviderTrash;
+		currentCasesListView.getSelectionModel().select(trashList);
+		updateCaseList();
+	}
+
 	protected void updateCaseList()
 	{
 		try
@@ -193,6 +210,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 			logAndNotifyUnexpectedError(e);
 		}
 	}
+	
 
 	private void selectCase(String caseName)
 	{
@@ -296,8 +314,15 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		public void changed(ObservableValue<? extends CaseListItem> observalue	,
 				CaseListItem previousCase, CaseListItem newCase)
 		{
+			reselectCurrentCaseIfTrashWasShown();
 			updateCaseList();
 		}
+	}
+	
+	protected void reselectCurrentCaseIfTrashWasShown()
+	{
+		if(currentCasesListView.equals(casesListViewTrash))
+			setCurrentlyViewedCaseList(casesTabPane.getSelectionModel().getSelectedItem());
 	}
 	
 	private class caseTabeListener implements ChangeListener<Tab>
@@ -417,6 +442,8 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	@FXML
 	private ListView<CaseListItem> casesListViewClosed;
 	
+	private ListView<CaseListItem> casesListViewTrash;
+	
 	@FXML
 	private TabPane casesTabPane;
 	
@@ -441,6 +468,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	private CaseListProvider caseListProviderAll;
 	private CaseListProvider caseListProviderOpen;
 	private CaseListProvider caseListProviderClosed;
+	private CaseListProvider caseListProviderTrash;
 	
 	private ListView<CaseListItem> currentCasesListView;
 	private CaseListProvider currentCaseListProvider;
