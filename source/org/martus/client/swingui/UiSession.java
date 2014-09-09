@@ -35,7 +35,9 @@ import org.martus.client.core.MartusApp.MartusAppInitializationException;
 import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.EnglishCommonStrings;
+import org.martus.common.MiniLocalization;
 import org.martus.swing.FontHandler;
+import org.martus.util.DatePreference;
 
 
 public class UiSession
@@ -52,6 +54,14 @@ public class UiSession
 	public void initalizeUiState()
 	{
 		uiState = new CurrentUiState();
+		
+		if(uiState.getCurrentLanguage() == null)
+		{
+			getLocalization().setCurrentLanguageCode(MiniLocalization.ENGLISH);
+			getLocalization().setCurrentDateFormatCode(new DatePreference().getDateTemplate());
+			getLocalization().setCurrentCalendarSystem(MiniLocalization.GREGORIAN_SYSTEM);
+		}
+
 		File uiStateFile = getUiStateFile();
 		if(!uiStateFile.exists())
 		{
