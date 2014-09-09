@@ -66,9 +66,6 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		super(mainWindowToUse);
 		
 		listeners = new HashSet<FolderSelectionListener>();
-		caseListProviderAll = new CaseListProvider();
-		caseListProviderOpen = new CaseListProvider();
-		caseListProviderClosed = new CaseListProvider();
 	}
 
 	@Override
@@ -94,7 +91,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	
 	public CaseListProvider getCurrentCaseListProvider()
 	{
-		return currentCaseListProvider;
+		return (CaseListProvider) currentCasesListView.getItems();
 	}
 
 	public void addFolderSelectionListener(FolderSelectionListener listener)
@@ -112,20 +109,11 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	protected void setCurrentlyViewedCaseList(Tab currentlyViewedCaseTab)
 	{
 		if(currentlyViewedCaseTab.equals(tabCaseOpen))
-		{
 			currentCasesListView = casesListViewOpen;
-			currentCaseListProvider = caseListProviderOpen;
-		}
 		else if (currentlyViewedCaseTab.equals(tabCaseClosed))
-		{
 			currentCasesListView = casesListViewClosed;
-			currentCaseListProvider = caseListProviderClosed;
-		}
 		else
-		{
 			currentCasesListView = casesListViewAll;
-			currentCaseListProvider = caseListProviderAll;
-		}		
 		updateCaseList();
 	}
 
@@ -134,9 +122,10 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		String foldersLabel = FxFolderSettingsController.getCurrentFoldersHeading(getApp().getConfigInfo(), getLocalization());
 		updateFolderLabelName(foldersLabel);
 
-		caseListProviderAll.clear();
-		caseListProviderOpen.clear();
-		caseListProviderClosed.clear();
+		CaseListProvider caseListProviderAll = new CaseListProvider();
+		CaseListProvider caseListProviderOpen = new CaseListProvider();
+		CaseListProvider caseListProviderClosed = new CaseListProvider();
+
 		Vector visibleFolders = getApp().getStore().getAllVisibleFolders();
 		MartusLocalization localization = getLocalization();
 		for(Iterator f = visibleFolders.iterator(); f.hasNext();)
@@ -179,10 +168,10 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		BulletinFolder trashFolder = getApp().getStore().getFolderDiscarded();
 		MartusLocalization localization = getLocalization();
 		CaseListItem trashList = new CaseListItem(trashFolder, localization);
-		currentCaseListProvider = new CaseListProvider();
-		currentCaseListProvider.add(trashList);
+		CaseListProvider trashProvider = new CaseListProvider();
+		trashProvider.add(trashList);
 		currentCasesListView = new ListView<CaseListItem>();
-		currentCasesListView.setItems(currentCaseListProvider);
+		currentCasesListView.setItems(trashProvider);
 		currentCasesListView.getSelectionModel().select(trashList);
 		updateCaseList();
 	}
@@ -194,7 +183,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 			int selectedIndex = currentCasesListView.getSelectionModel().getSelectedIndex();
 			if(selectedIndex == INVALID_INDEX)
 				return;
-			CaseListItem selectedCase = currentCaseListProvider.get(selectedIndex);
+			CaseListItem selectedCase = getCurrentCaseListProvider().get(selectedIndex);
 			BulletinFolder folder = getApp().findFolder(selectedCase.getName());
 			if(folder == null)
 				return;
@@ -211,7 +200,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 
 	private void selectCase(String caseName)
 	{
-		for (Iterator iterator = currentCaseListProvider.iterator(); iterator.hasNext();)
+		for (Iterator iterator = getCurrentCaseListProvider().iterator(); iterator.hasNext();)
 		{
 			CaseListItem caseItem = (CaseListItem) iterator.next();
 			if(caseItem.getName().equals(caseName))
@@ -462,11 +451,6 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 
 	private 	ReadOnlyObjectProperty<CaseListItem> currentSelectedCase;
 	
-	private CaseListProvider caseListProviderAll;
-	private CaseListProvider caseListProviderOpen;
-	private CaseListProvider caseListProviderClosed;
-	
 	private ListView<CaseListItem> currentCasesListView;
-	private CaseListProvider currentCaseListProvider;
 	private Set<FolderSelectionListener> listeners;
 }
