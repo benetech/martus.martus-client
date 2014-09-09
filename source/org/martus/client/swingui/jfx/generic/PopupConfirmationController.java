@@ -56,7 +56,6 @@ public class PopupConfirmationController extends FxPopupController implements In
 		{
 			logAndNotifyUnexpectedError(e);
 		}
-		controllerForMainPane.popupControllerInitialized();
 	}
 	
 	@Override

@@ -57,10 +57,10 @@ public class FxCopyItemNewNameController extends FxController
 	{
 		super.initialize(location, bundle);
 		itemName.setText(originalBulletinsName);
+		initializeOkButtonBindings();		
 	}
 	
-	@Override
-	public void popupControllerInitialized()
+	private void initializeOkButtonBindings()
 	{
 		FxController topLevelController = getTopLevelController();
 		Button okButton = topLevelController.getOkButton();
