@@ -10,7 +10,7 @@
 	<children>
 		<Label alignment="CENTER" text="Template Manager">
 		</Label>
-		<TabPane tabClosingPolicy="UNAVAILABLE">
+		<TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
 			<tabs>
 				<Tab text="Available Templates">
 					<content>
