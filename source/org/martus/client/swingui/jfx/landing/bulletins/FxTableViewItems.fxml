@@ -9,7 +9,7 @@
    <children>
       <VBox prefHeight="450.0" prefWidth="845.0">
          <children>
-			<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="845.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+			<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="845.0">
 			   <content>
 			      <TableView fx:id="itemsTable" onMouseClicked="#onMouseClick" prefHeight="409.0" prefWidth="842.0">
 			        <columns>
@@ -23,21 +23,13 @@
 			      </TableView>
 			   </content>
 			</ScrollPane>
-            <HBox prefHeight="30.0" prefWidth="845.0">
+            <HBox>
                <children>
                   <Button fx:id="trashButton" mnemonicParsing="false" onAction="#onTrashSelectedItems" text="Trash">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../images/trash.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></Button>
-                  <Button fx:id="moveButton" mnemonicParsing="false" onAction="#onMoveSelectedItems" text="Move">
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/move.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -49,7 +41,17 @@
                               <Image url="@../../images/export.png" />
                            </image>
                         </ImageView>
-                     </graphic></Button>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="moveButton" mnemonicParsing="false" onAction="#onMoveSelectedItems" text="Move">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/move.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                   <Button fx:id="copyButton" mnemonicParsing="false" onAction="#onCopySelectedItem" text="Copy">
                      <graphic>
                         <ImageView pickOnBounds="true" preserveRatio="true">
@@ -59,7 +61,17 @@
                         </ImageView>
                      </graphic>
                   </Button>
-               </children></HBox>
+                  <Button fx:id="emptyTrashButton" mnemonicParsing="false" onAction="#onEmptyTrash" text="Empty Trash">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/trash.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
          </children></VBox>
    </children>
 </Pane>

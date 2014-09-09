@@ -36,6 +36,7 @@ import java.util.Vector;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -130,10 +131,14 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		BooleanBinding onlyOneItemSelectedBinding = Bindings.equal(1, Bindings.size(itemsTable.getSelectionModel().getSelectedItems()));
 		copyButton.disableProperty().bind(onlyOneItemSelectedBinding.not());
 		
+		BooleanProperty trashBeingDisplayedProperty = bulletinTableProvider.getTrashFolderBeingDisplayedBooleanProperty();
+		emptyTrashButton.visibleProperty().bind(trashBeingDisplayedProperty);
+
 		BooleanBinding trashNotBeingDisplayedBinding = getTrashNotBeingDisplayedBinding();
 		exportButton.visibleProperty().bind(trashNotBeingDisplayedBinding);
 		copyButton.visibleProperty().bind(trashNotBeingDisplayedBinding);
-		}
+		trashButton.visibleProperty().bind(trashNotBeingDisplayedBinding);
+	}
 
 	public BooleanBinding getTrashNotBeingDisplayedBinding()
 	{
@@ -292,6 +297,12 @@ public class BulletinsListController extends AbstractFxLandingContentController
 			logAndNotifyUnexpectedError(e);
 		}
 		bulletinTableProvider.updateContents();
+	}
+	
+	@FXML
+	private void onEmptyTrash(javafx.event.ActionEvent event)
+	{
+		
 	}
 
 	@FXML
@@ -471,6 +482,9 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	@FXML
 	protected TableColumn<Object, Boolean> editBulletinColumn;
+	
+	@FXML
+	private Button emptyTrashButton;
 	
 	@FXML
 	private Button trashButton;
