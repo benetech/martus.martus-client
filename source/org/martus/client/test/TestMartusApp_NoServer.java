@@ -542,37 +542,36 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	
 	public void testSetDefaultUiState() throws Exception
 	{
-		MartusLocalization testLocalization = new MartusLocalization(null, noEnglishStrings);
-		testLocalization.setLanguageSettingsProvider(new CurrentUiState());
+		CurrentUiState currentUiState = new CurrentUiState();
 		File tmpFile = createTempFile();
-		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
-		assertNull("File doesn't exist localization should not be set.  Using DefaultUi.txt depends on the language not being set in this case.", testLocalization.getCurrentLanguageCode());
+		MartusApp.setInitialUiDefaultsFromFileIfPresent(currentUiState, tmpFile);
+		assertNull("File doesn't exist localization should not be set.  Using DefaultUi.txt depends on the language not being set in this case.", currentUiState.getCurrentLanguage());
 		FileOutputStream out = new FileOutputStream(tmpFile);
 		out.write("invalidLanguageCode".getBytes());
 		out.close();
-		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
-		assertNull("Invalid language code, localization should not be set", testLocalization.getCurrentLanguageCode());
+		MartusApp.setInitialUiDefaultsFromFileIfPresent(currentUiState, tmpFile);
+		assertNull("Invalid language code, localization should not be set", currentUiState.getCurrentLanguage());
 		tmpFile.delete();
 		out = new FileOutputStream(tmpFile);
 		out.write("en".getBytes());
 		out.close();
-		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
-		assertEquals("English should be set", MtfAwareLocalization.ENGLISH, testLocalization.getCurrentLanguageCode());
-		assertEquals("English code should set DMY correctly", MDY_SLASH, testLocalization.getCurrentDateFormatCode());
+		MartusApp.setInitialUiDefaultsFromFileIfPresent(currentUiState, tmpFile);
+		assertEquals("English should be set", MtfAwareLocalization.ENGLISH, currentUiState.getCurrentLanguage());
+		assertEquals("English code should set DMY correctly", MDY_SLASH, currentUiState.getCurrentDateFormat());
 		tmpFile.delete();
 		out = new FileOutputStream(tmpFile);
 		out.write("es".getBytes());
 		out.close();
-		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
-		assertEquals("Spanish should be set", MtfAwareLocalization.SPANISH, testLocalization.getCurrentLanguageCode());
-		assertEquals("Spanish code should set MDY correctly", DMY_SLASH, testLocalization.getCurrentDateFormatCode());
+		MartusApp.setInitialUiDefaultsFromFileIfPresent(currentUiState, tmpFile);
+		assertEquals("Spanish should be set", MtfAwareLocalization.SPANISH, currentUiState.getCurrentLanguage());
+		assertEquals("Spanish code should set MDY correctly", DMY_SLASH, currentUiState.getCurrentDateFormat());
 		tmpFile.delete();
 		out = new FileOutputStream(tmpFile);
 		out.write("ru".getBytes());
 		out.close();
-		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
-		assertEquals("Russian should be set", MtfAwareLocalization.RUSSIAN, testLocalization.getCurrentLanguageCode());
-		assertEquals("Russian code should set MDY Dot correctly", DMY_DOT, testLocalization.getCurrentDateFormatCode());
+		MartusApp.setInitialUiDefaultsFromFileIfPresent(currentUiState, tmpFile);
+		assertEquals("Russian should be set", MtfAwareLocalization.RUSSIAN, currentUiState.getCurrentLanguage());
+		assertEquals("Russian code should set MDY Dot correctly", DMY_DOT, currentUiState.getCurrentDateFormat());
 		tmpFile.delete();
 	}
 

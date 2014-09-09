@@ -90,6 +90,7 @@ import org.martus.common.FieldDeskKeys;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
+import org.martus.common.LanguageSettingsProvider;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
@@ -262,7 +263,7 @@ public class MartusApp
 		return jarEntry;
 	}
 
-	static public void setInitialUiDefaultsFromFileIfPresent(MtfAwareLocalization localization, File defaultUiFile)
+	static public void setInitialUiDefaultsFromFileIfPresent(LanguageSettingsProvider settings, File defaultUiFile)
 	{
 		if(!defaultUiFile.exists())
 			return;
@@ -278,8 +279,8 @@ public class MartusApp
 				MartusLogger.log("Setting default language: " + languageCode);
 				DatePreference datePref = MiniLocalization.getDefaultDatePreferenceForLanguage(languageCode);
 				MartusLogger.log("Setting default date fmt: " + datePref.getDateTemplate());
-				localization.setCurrentLanguageCode(languageCode);
-				localization.setDateFormatFromLanguage();
+				settings.setCurrentLanguage(languageCode);
+				settings.setDateFormatFromLanguage();
 			}
 		}
 		catch (Exception e)
