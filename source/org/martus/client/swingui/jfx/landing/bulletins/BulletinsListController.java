@@ -413,11 +413,11 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		if(bulletinToCopy.hasUnknownTags() || bulletinToCopy.hasUnknownCustomField())
 		{
 			MartusLocalization localization = getLocalization();
-			String copingBulletinWithUnknownContentMessage = localization.getFieldLabel("confirmEditBulletinWithUnknownTagscause");
-			copingBulletinWithUnknownContentMessage += " ";
-			copingBulletinWithUnknownContentMessage += localization.getFieldLabel("confirmEditBulletinWithUnknownTagseffect");
+			String copyingBulletinWithUnknownContentMessage = localization.getFieldLabel("confirmEditBulletinWithUnknownTagscause");
+			copyingBulletinWithUnknownContentMessage += "\n\n";
+			copyingBulletinWithUnknownContentMessage += localization.getFieldLabel("confirmEditBulletinWithUnknownTagseffect");
 			
-			if(!showConfirmationDialog("CopyItem", "YesCopyWithUnknownContent", EnglishCommonStrings.CANCEL, copingBulletinWithUnknownContentMessage))
+			if(!showConfirmationDialog("CopyItem", "YesCopyWithUnknownContent", EnglishCommonStrings.CANCEL, copyingBulletinWithUnknownContentMessage))
 				return;
 		}
 	
