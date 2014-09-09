@@ -52,6 +52,7 @@ import org.martus.client.core.templates.FormTemplateManager;
 import org.martus.client.swingui.bulletintable.BulletinTableModel;
 import org.martus.common.BulletinSummary;
 import org.martus.common.FieldSpecCollection;
+import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusXml;
@@ -828,7 +829,20 @@ public class ClientBulletinStore extends BulletinStore
 		FieldSpecCollection privateFieldSpecsToUse = original.getBottomSectionFieldSpecs();
 		Bulletin copy = createNewDraft(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
 		copy.set(Bulletin.TAGTITLE, newTitle);
+		if(!isMyBulletin(original))
+			clearAurthorizedToReadKeys(copy);
 		return copy;
+	}
+
+	public void clearAurthorizedToReadKeys(Bulletin copy)
+	{
+		HeadquartersKeys noKeys = new HeadquartersKeys();
+		copy.setAuthorizedToReadKeys(noKeys);
+	}
+
+	public boolean isMyBulletin(Bulletin original)
+	{
+		return original.getAccount().equals(getAccountId());
 	}
 	
 	public synchronized void moveBulletin(Bulletin b, BulletinFolder from, BulletinFolder to) throws IOException
