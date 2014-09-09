@@ -421,6 +421,8 @@ public class ManageTemplatesController extends FxInSwingController
 			templateToAddProperty.setValue(null);
 			
 			tabPane.selectionModelProperty().get().clearAndSelect(0);
+			availableTemplatesTable.selectionModelProperty().get().clearSelection();
+			availableTemplatesTable.scrollTo(0);
 		}
 		catch(Exception e)
 		{
