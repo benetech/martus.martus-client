@@ -43,6 +43,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
@@ -418,6 +419,8 @@ public class ManageTemplatesController extends FxInSwingController
 			getBulletinStore().saveNewFormTemplate(templateToAdd);
 			populateAvailableTemplatesTable();
 			templateToAddProperty.setValue(null);
+			
+			tabPane.selectionModelProperty().get().clearAndSelect(0);
 		}
 		catch(Exception e)
 		{
@@ -429,6 +432,9 @@ public class ManageTemplatesController extends FxInSwingController
 	final private String UPLOAD_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/upload.png";
 	final private String EXPORT_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/export.png";
 	final private String EDIT_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/edit.png";
+	
+	@FXML
+	private TabPane tabPane;
 	
 	@FXML
 	private TableView<ManageTemplatesTableRowData> availableTemplatesTable;
