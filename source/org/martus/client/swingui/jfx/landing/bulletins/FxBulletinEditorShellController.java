@@ -76,14 +76,14 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	@Override
 	public void scrollToTop()
 	{
-		bodyController.scrollToTop();
+		// TODO: Needs an implementation
 	}
 
 	@Override
 	public void copyDataToBulletin(Bulletin bulletin) throws IOException,
 			EncryptionException
 	{
-		bodyController.copyDataToBulletin(bulletin);
+		// TODO: Needs an implementation
 	}
 
 	@Override
@@ -95,32 +95,32 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	@Override
 	public void validateData() throws DataInvalidException
 	{
-		bodyController.validateData();
+		// TODO: Needs an implementation
 	}
 
 	@Override
 	public boolean isBulletinModified() throws Exception
 	{
-		// FIXME: Modifying the To field should also count as a modification
-		return bodyController.isBulletinModified();
+		// TODO: Needs an implementation
+		return false;
 	}
 
 	@Override
 	public void updateEncryptedIndicator(boolean allPrivate)
 	{
-		bodyController.updateEncryptedIndicator(allPrivate);
+		// TODO: Needs an implementation
 	}
 
 	@Override
 	public void setLanguageChangeListener(BulletinLanguageChangeListener listener)
 	{
-		bodyController.setLanguageChangeListener(listener);
+		// TODO: Needs an implementation
 	}
 
 	@Override
 	public void bulletinLanguageHasChanged(String newBulletinLanguageCode)
 	{
-		bodyController.bulletinLanguageHasChanged(newBulletinLanguageCode);
+		// TODO: Needs an implementation
 	}
 
 	@Override
