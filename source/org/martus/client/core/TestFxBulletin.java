@@ -25,12 +25,16 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core;
 
+import java.util.Vector;
+
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinForTesting;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.TestCaseEnhanced;
 
@@ -103,6 +107,37 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals(PRIVATE_DATA_2, modified.get(PRIVATE_TAG));
 		assertEquals(PRIVATE_DATA_2, modified.getFieldDataPacket().get(PRIVATE_TAG));
 		assertEquals("", modified.getPrivateFieldDataPacket().get(PRIVATE_TAG));
+	}
+	
+	public void testFieldSequence() throws Exception
+	{
+		FxBulletin fxb = new FxBulletin();
+		Bulletin before = new BulletinForTesting(security);
+		fxb.copyDataFromBulletin(before);
+		Bulletin after = new Bulletin(security);
+		fxb.copyDataToBulletin(after);
+		Vector<String> beforeTags = extractFieldTags(before);
+		Vector<String> afterTags = extractFieldTags(after);
+		assertEquals(beforeTags, afterTags);
+	}
+
+	public Vector<String> extractFieldTags(Bulletin b)
+	{
+		Vector<String> fieldTags = new Vector<String>();
+		FieldSpecCollection topSpecs = b.getTopSectionFieldSpecs();
+		for(int i = 0; i < topSpecs.size(); ++i)
+		{
+			FieldSpec fieldSpec = topSpecs.get(i);
+			fieldTags.add(fieldSpec.getTag());
+		}
+		FieldSpecCollection bottomSpecs = b.getBottomSectionFieldSpecs();
+		for(int i = 0; i < bottomSpecs.size(); ++i)
+		{
+			FieldSpec fieldSpec = bottomSpecs.get(i);
+			fieldTags.add(fieldSpec.getTag());
+		}
+		
+		return fieldTags;
 	}
 	
 	private MockMartusSecurity security;
