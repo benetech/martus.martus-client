@@ -37,8 +37,6 @@ import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentInterface;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
-import org.martus.client.swingui.jfx.landing.general.BulletinEditorBodyController;
-import org.martus.client.swingui.jfx.landing.general.BulletinEditorHeaderController;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.fieldspec.DataInvalidException;
