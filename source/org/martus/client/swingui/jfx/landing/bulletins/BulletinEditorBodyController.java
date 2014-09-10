@@ -27,9 +27,11 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.util.Vector;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
@@ -52,20 +54,34 @@ public class BulletinEditorBodyController extends FxController
 
 	public void showBulletin(FxBulletin bulletinToShow) throws Exception
 	{
-		Vector<FieldSpec> fieldTags = bulletinToShow.getFieldSpecs();
-		fieldTags.forEach(spec -> createFieldForSpec(spec));
+		Vector<FieldSpec> fieldSpecs = bulletinToShow.getFieldSpecs();
+		for(int row = 0; row < fieldSpecs.size(); ++row)
+		{
+			FieldSpec spec = fieldSpecs.get(row);
+			String tag = spec.getTag();
+			SimpleStringProperty property = bulletinToShow.getFieldProperty(tag);
+			createFieldForSpec(row, spec, property);
+		}
 	}
 
-	private void createFieldForSpec(FieldSpec spec)
+	private void createFieldForSpec(int row, FieldSpec spec, SimpleStringProperty property)
 	{
 		String tag = spec.getTag();
 		String labelText = spec.getLabel();
 		if(StandardFieldSpecs.isStandardFieldTag(tag))
 			labelText = getLocalization().getFieldLabel(tag);
 		Label label = new Label(labelText + ":");
-		fieldsBox.getChildren().add(label);
+		final int LABEL_COLUMN = 0;
+		final int DATA_COLUMN = 1;
+		fieldsGrid.add(label, LABEL_COLUMN, row);
+		if(spec.getType().isString())
+		{
+			TextField textField = new TextField();
+			textField.textProperty().bindBidirectional(property);
+			fieldsGrid.add(textField, DATA_COLUMN, row);
+		}
 	}
 
 	@FXML
-	private VBox fieldsBox;
+	private GridPane fieldsGrid;
 }

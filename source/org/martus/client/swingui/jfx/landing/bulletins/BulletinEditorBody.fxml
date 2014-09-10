@@ -9,6 +9,6 @@
 
 <Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<VBox fx:id="fieldsBox" />
+		<GridPane fx:id="fieldsGrid" />
 	</children>
 </Pane>
