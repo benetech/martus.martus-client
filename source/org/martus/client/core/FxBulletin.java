@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.core;
 
 import java.util.HashMap;
+import java.util.Vector;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
@@ -74,6 +75,18 @@ public class FxBulletin
 	public ReadOnlyObjectWrapper<UniversalId> universalIdProperty()
 	{
 		return universalIdProperty;
+	}
+	
+	public Vector<FieldSpec> getFieldSpecs()
+	{
+		Vector<FieldSpec> specs = new Vector<FieldSpec>();
+		for(int i = 0; i < fieldSpecs.size(); ++i)
+		{
+			FieldSpec fieldSpec = fieldSpecs.get(i);
+			specs.add(fieldSpec);
+		}
+		
+		return specs;
 	}
 
 	public SimpleStringProperty getFieldProperty(String tag)
