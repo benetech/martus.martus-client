@@ -23,22 +23,51 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.landing.general;
+package org.martus.client.swingui.jfx.landing.bulletins;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
+import org.martus.client.swingui.jfx.generic.DialogWithNoButtonsShellController;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.landing.general.SelectTemplateController;
 
-public class BulletinEditorBodyController extends FxController
+public class BulletinEditorHeaderController extends FxController
 {
-	public BulletinEditorBodyController(UiMainWindow mainWindowToUse)
+	public BulletinEditorHeaderController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle bundle)
+	{
+		super.initialize(location, bundle);
 	}
 
 	@Override
 	public String getFxmlLocation()
 	{
-		return "landing/general/BulletinEditorBody.fxml";
+		return "landing/bulletins/BulletinEditorHeader.fxml";
 	}
 
+	@FXML
+	private void onSelectTemplate(ActionEvent event) 
+	{
+		try
+		{
+			FxController controller = new SelectTemplateController(getMainWindow());
+			ActionDoer shellController = new DialogWithNoButtonsShellController(getMainWindow(), controller);
+			doAction(shellController);
+		}
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
 }
