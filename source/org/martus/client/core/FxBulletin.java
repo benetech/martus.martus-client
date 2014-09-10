@@ -29,6 +29,10 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 
 import org.martus.common.packet.UniversalId;
 
+/**
+ * This class wraps a Bulletin object, exposing each data member as a 
+ * Property, to make life easier when working in JavaFX.
+ */
 public class FxBulletin
 {
 	public FxBulletin()
