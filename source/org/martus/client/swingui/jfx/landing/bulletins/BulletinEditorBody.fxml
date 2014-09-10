@@ -9,6 +9,6 @@
 
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<Label text="(Bulletin contents would go here)" />
+		<Pane fx:id="bodyPane" />
 	</children>
 </VBox>
