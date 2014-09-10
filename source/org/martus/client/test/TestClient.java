@@ -34,6 +34,7 @@ import org.martus.client.bulletinstore.TestClientBulletinStore;
 import org.martus.client.bulletinstore.TestKnownFieldSpecCache;
 import org.martus.client.core.TestConfigInfo;
 import org.martus.client.core.TestCustomFieldsDuplicateLabelChecker;
+import org.martus.client.core.TestFxBulletin;
 import org.martus.client.core.TestPartialBulletin;
 import org.martus.client.core.TestSafeReadableBulletin;
 import org.martus.client.core.TestSortableBulletinList;
@@ -92,6 +93,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestFieldChooserSpecBuilder.class));
 		suite.addTest(new TestSuite(TestFolderList.class));
 		suite.addTest(new TestSuite(TestFormTemplateManager.class));
+		suite.addTest(new TestSuite(TestFxBulletin.class));
 		suite.addTest(new TestSuite(TestGridTableModel.class));
 		suite.addTest(new TestSuite(TestImporterOfXmlFilesOfBulletins.class));
 		suite.addTest(new TestSuite(TestKnownFieldSpecCache.class));
