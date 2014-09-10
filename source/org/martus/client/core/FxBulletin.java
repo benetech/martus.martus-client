@@ -32,6 +32,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.packet.UniversalId;
 
 /**
@@ -52,11 +53,32 @@ public class FxBulletin
 		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>();
 		universalIdProperty().setValue(b.getUniversalId());
 
-		FieldSpecCollection topSpecs = b.getTopSectionFieldSpecs();
-		for(int i = 0; i < topSpecs.size(); ++i)
+		setFieldPropertiesFromBulletinSection(b, b.getTopSectionFieldSpecs());
+		setFieldPropertiesFromBulletinSection(b, b.getBottomSectionFieldSpecs());
+	}
+
+	public void setFieldPropertiesFromBulletinSection(Bulletin b, FieldSpecCollection bulletinFieldSpecs)
+	{
+		for(int i = 0; i < bulletinFieldSpecs.size(); ++i)
 		{
-			String fieldTag = topSpecs.get(i).getTag();
+			FieldSpec fieldSpec = bulletinFieldSpecs.get(i);
+			fieldSpecs.add(fieldSpec);
+			String fieldTag = fieldSpec.getTag();
 			setField(fieldTag, b.get(fieldTag));
+		}
+	}
+
+	public void copyDataToBulletin(Bulletin modified) throws Exception
+	{
+		modified.getFieldDataPacket().setFieldSpecs(fieldSpecs);
+		modified.getPrivateFieldDataPacket().setFieldSpecs(new FieldSpecCollection());
+		
+		for(int i = 0; i < fieldSpecs.size(); ++i)
+		{
+			FieldSpec fieldSpec = fieldSpecs.get(i);
+			String fieldTag = fieldSpec.getTag();
+			String value = getFieldProperty(fieldTag).getValue();
+			modified.set(fieldTag, value);
 		}
 	}
 
@@ -80,6 +102,8 @@ public class FxBulletin
 		
 		fieldProperties.forEach((key, property) -> property.setValue(null));
 		fieldProperties.clear();
+		
+		fieldSpecs = new FieldSpecCollection();
 	}
 	
 	private void setField(String fieldTag, String value)
@@ -90,4 +114,5 @@ public class FxBulletin
 
 	private ReadOnlyObjectWrapper<UniversalId> universalIdProperty;
 	private HashMap<String, SimpleStringProperty> fieldProperties;
+	private FieldSpecCollection fieldSpecs;
 }

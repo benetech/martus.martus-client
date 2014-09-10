@@ -83,5 +83,27 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals(b.get(Bulletin.TAGTITLE), titleProperty.getValue());
 	}
 	
+	public void testBottomSectionField() throws Exception
+	{
+		final String PRIVATE_TAG = Bulletin.TAGPRIVATEINFO;
+		final String PRIVATE_DATA_1 = "private info";
+		final String PRIVATE_DATA_2 = "This is new and better private info";
+
+		FxBulletin fxb = new FxBulletin();
+		Bulletin b = new BulletinForTesting(security);
+		b.set(PRIVATE_TAG, PRIVATE_DATA_1);
+		fxb.setBulletin(b);
+		
+		SimpleStringProperty privateInfoProperty = fxb.getFieldProperty(PRIVATE_TAG);
+		assertEquals(b.get(PRIVATE_TAG), privateInfoProperty.getValue());
+		privateInfoProperty.setValue(PRIVATE_DATA_2);
+		
+		Bulletin modified = new Bulletin(security);
+		fxb.copyDataToBulletin(modified);
+		assertEquals(PRIVATE_DATA_2, modified.get(PRIVATE_TAG));
+		assertEquals(PRIVATE_DATA_2, modified.getFieldDataPacket().get(PRIVATE_TAG));
+		assertEquals("", modified.getPrivateFieldDataPacket().get(PRIVATE_TAG));
+	}
+	
 	private MockMartusSecurity security;
 }
