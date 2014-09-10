@@ -37,6 +37,7 @@ import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentInterface;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
+import org.martus.client.swingui.jfx.landing.general.BulletinEditorBodyController;
 import org.martus.client.swingui.jfx.landing.general.BulletinEditorHeaderController;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
@@ -58,6 +59,9 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 
 			BulletinEditorHeaderController headerController = new BulletinEditorHeaderController(getMainWindow());
 			loadControllerAndEmbedInPane(headerController, headerPane);
+			
+			BulletinEditorBodyController bodyController = new BulletinEditorBodyController(getMainWindow());
+			loadControllerAndEmbedInPane(bodyController, bodyPane);
 		}
 		catch(Exception e)
 		{
@@ -129,4 +133,7 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	
 	@FXML
 	private Pane headerPane;
+
+	@FXML
+	private Pane bodyPane;
 }
