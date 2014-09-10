@@ -9,10 +9,6 @@
    	  <Pane fx:id="headerPane" />
    </top>
    <center>
-      <VBox prefHeight="65.0" prefWidth="431.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="(Bulletin editor would appear here)" />
-         </children>
-      </VBox>
+		<Pane fx:id="bodyPane" />
    </center>
 </BorderPane>
