@@ -64,6 +64,7 @@ import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.jfx.landing.FxLandingShellController;
 import org.martus.client.swingui.jfx.landing.cases.CaseListItem;
 import org.martus.client.swingui.jfx.landing.cases.CaseListProvider;
+import org.martus.client.swingui.jfx.landing.cases.FxFolderSettingsController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractExportTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.BulletinExportEncryptedMbaTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.BulletinExportUnencryptedXmlTask;
@@ -73,6 +74,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinHtmlGenerator;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.packet.UniversalId;
+import org.martus.util.TokenReplacement;
 
 public class BulletinsListController extends AbstractFxLandingContentController
 {
@@ -276,18 +278,23 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		return selectedIds;
 	}
 	
+	private Vector<UniversalId> getAllUniversalIdsInFolder()
+	{
+		ObservableList<BulletinTableRowData> allItems = itemsTable.getItems();
+		Vector<UniversalId> allIds = new Vector(allItems.size());
+		for (BulletinTableRowData bulletinTableRowData : allItems)
+		{
+			allIds.add(bulletinTableRowData.getUniversalId());
+		}
+		return allIds;
+		
+	}
+	
 	@FXML
 	private void onTrashSelectedItems(javafx.event.ActionEvent event)
 	{
 		Vector<UniversalId> bulletinsIDsToDiscard = getSelectedBulletinIds();
 		BulletinFolder folderToDiscardFrom = bulletinTableProvider.getFolder();
-		if(folderToDiscardFrom.isDiscardedFolder())
-		{
-			//FIXME warn user about unsent copies / copies in other folders when deleting from discarded folder
-			//Implement this when we can actually see the discarded folder and delete from it.
-			//See: UiBulletinTable:confirmDiscardSingleBulletin(Bulletin b)
-			//     UiBulletinTable:confirmDiscardMultipleBulletins
-		}
 		try
 		{
 			getApp().discardBulletinsFromFolder(folderToDiscardFrom,bulletinsIDsToDiscard.toArray(new UniversalId[0]));
@@ -302,6 +309,35 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	@FXML
 	private void onEmptyTrash(javafx.event.ActionEvent event)
 	{
+		try
+		{
+			Vector<UniversalId> universalIDsToDiscard = getAllUniversalIdsInFolder();
+			UniversalId[] arrayUniversalIdsToDiscard = universalIDsToDiscard.toArray(new UniversalId[0]);
+			Vector otherCasesRecordsFoundIn = getApp().getNonDiscardedFoldersForBulletins(arrayUniversalIdsToDiscard);
+			MartusLocalization localization = getLocalization();
+			String confirmationMessage = localization.getFieldLabel("EmptyTrashConfirmation");
+			
+			if(otherCasesRecordsFoundIn.size() > 0)
+			{
+				String otherCasesRawMessage = localization.getFieldLabel("EmptyTrashConfirmationItemsInOtherFolders");
+				String foldersLabel = FxFolderSettingsController.getCurrentFoldersHeading(getApp().getConfigInfo(), getLocalization());
+				String idsFoundInCasesOtherthanTrashWarningMessage = TokenReplacement.replaceToken(otherCasesRawMessage, "#Cases#", foldersLabel);
+				confirmationMessage += "\n\n";
+				confirmationMessage += idsFoundInCasesOtherthanTrashWarningMessage;
+			}
+
+			if(showConfirmationDialog("EmptyTrash", EnglishCommonStrings.CONTINUE, EnglishCommonStrings.NO, confirmationMessage))
+			{
+				BulletinFolder trashFolder = bulletinTableProvider.getFolder();
+				getApp().discardBulletinsFromFolder(trashFolder,arrayUniversalIdsToDiscard);
+				bulletinTableProvider.updateContents();
+			}
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+		
 		
 	}
 
