@@ -57,17 +57,6 @@ public class FxBulletin
 		setFieldPropertiesFromBulletinSection(b, b.getBottomSectionFieldSpecs());
 	}
 
-	public void setFieldPropertiesFromBulletinSection(Bulletin b, FieldSpecCollection bulletinFieldSpecs)
-	{
-		for(int i = 0; i < bulletinFieldSpecs.size(); ++i)
-		{
-			FieldSpec fieldSpec = bulletinFieldSpecs.get(i);
-			fieldSpecs.add(fieldSpec);
-			String fieldTag = fieldSpec.getTag();
-			setField(fieldTag, b.get(fieldTag));
-		}
-	}
-
 	public void copyDataToBulletin(Bulletin modified) throws Exception
 	{
 		modified.getFieldDataPacket().setFieldSpecs(fieldSpecs);
@@ -106,6 +95,17 @@ public class FxBulletin
 		fieldSpecs = new FieldSpecCollection();
 	}
 	
+	private void setFieldPropertiesFromBulletinSection(Bulletin b, FieldSpecCollection bulletinFieldSpecs)
+	{
+		for(int i = 0; i < bulletinFieldSpecs.size(); ++i)
+		{
+			FieldSpec fieldSpec = bulletinFieldSpecs.get(i);
+			fieldSpecs.add(fieldSpec);
+			String fieldTag = fieldSpec.getTag();
+			setField(fieldTag, b.get(fieldTag));
+		}
+	}
+
 	private void setField(String fieldTag, String value)
 	{
 		SimpleStringProperty property = new SimpleStringProperty(value);
