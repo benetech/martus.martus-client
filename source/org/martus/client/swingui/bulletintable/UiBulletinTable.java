@@ -637,24 +637,9 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 				return true;
 
 			MartusApp app = mainWindow.getApp();
-
-			BulletinFolder draftOutBox = app.getFolderDraftOutbox();
-			BulletinFolder sealedOutBox = app.getFolderSealedOutbox();
-
-			boolean aBulletinIsUnsent = false;
-			Vector visibleFoldersContainingAnyBulletin = new Vector();
 			UniversalId[] bulletinIds = getSelectedBulletinUids();
-			for (int i = 0; i < bulletinIds.length; i++)
-			{
-				UniversalId uid = bulletinIds[i];
-				Vector visibleFoldersContainingThisBulletin = app.findBulletinInAllVisibleFolders(uid);
-				visibleFoldersContainingThisBulletin.remove(folderToDiscardFrom);
-				addUniqueEntriesOnly(visibleFoldersContainingAnyBulletin, visibleFoldersContainingThisBulletin);
-				
-				if(draftOutBox.contains(uid) || sealedOutBox.contains(uid))
-					aBulletinIsUnsent = true;
-			}
-
+			Vector visibleFoldersContainingAnyBulletin = app.getNonDiscardedFoldersForBulletins(bulletinIds);
+			boolean aBulletinIsUnsent = app.isAnyBulletinsUnsent(bulletinIds);
 			String tagUnsent = null;
 			if(aBulletinIsUnsent)
 				tagUnsent = "warningDeleteMultipleUnsentBulletins";
@@ -724,18 +709,6 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		mainWindow.selectNewCurrentBulletin(getSelectedRow());
 	}
 
-	void addUniqueEntriesOnly(Vector to, Vector from)
-	{
-		for(int i = 0 ; i < from.size(); ++i)
-		{
-			Object elementToAdd = from.get(i);
-			if(!to.contains(elementToAdd))
-				to.add(elementToAdd);
-		}
-	}
-
-	
-	
 
 	String buildFolderNameList(Vector visibleFoldersContainingThisBulletin)
 	{
