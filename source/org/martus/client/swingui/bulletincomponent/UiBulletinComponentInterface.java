@@ -27,12 +27,10 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Component;
-import java.io.IOException;
 
 import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.DataInvalidException;
 
 public interface UiBulletinComponentInterface
@@ -41,7 +39,7 @@ public interface UiBulletinComponentInterface
 	public void scrollToTop();
 	public UiMainWindow getMainWindow();
 
-	public void copyDataToBulletin(Bulletin bulletin) throws IOException, MartusCrypto.EncryptionException;
+	public void copyDataToBulletin(Bulletin bulletin) throws Exception;
 	public void copyDataFromBulletin(Bulletin bulletinToShow) throws Exception;
 	public void validateData() throws DataInvalidException;
 	public boolean isBulletinModified() throws Exception;
