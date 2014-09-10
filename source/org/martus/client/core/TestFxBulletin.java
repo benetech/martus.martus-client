@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.core;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleStringProperty;
 
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinForTesting;
@@ -51,18 +52,35 @@ public class TestFxBulletin extends TestCaseEnhanced
 	public void testUniversalId() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin();
-		ReadOnlyObjectWrapper<UniversalId> universalIdProperty = fxb.universalIdProperty();
-		assertEquals(null, universalIdProperty.getValue());
+		ReadOnlyObjectWrapper<UniversalId> universalIdPropertyNull = fxb.universalIdProperty();
+		assertEquals(null, universalIdPropertyNull);
 		
 		Bulletin b = new BulletinForTesting(security);
 		fxb.setBulletin(b);
+		ReadOnlyObjectWrapper<UniversalId> universalIdProperty = fxb.universalIdProperty();
 		assertEquals(b.getUniversalId(), universalIdProperty.getValue());
 		
 		Bulletin b2 = new BulletinForTesting(security);
 		assertNotEquals("Bulletins have same id?", b.getUniversalId(), b2.getUniversalId());
 		fxb.setBulletin(b2);
-		assertEquals(b2.getUniversalId(), universalIdProperty.getValue());
-		
+		assertEquals(null, universalIdProperty.getValue());
+		ReadOnlyObjectWrapper<UniversalId> universalIdProperty2 = fxb.universalIdProperty();
+		assertEquals(b2.getUniversalId(), universalIdProperty2.getValue());
+	}
+	
+	public void testTitle() throws Exception
+	{
+		FxBulletin fxb = new FxBulletin();
+		Bulletin b = new BulletinForTesting(security);
+		fxb.setBulletin(b);
+
+		SimpleStringProperty emptyTitleProperty = fxb.getFieldProperty(Bulletin.TAGTITLE);
+		assertEquals("", emptyTitleProperty.getValue());
+		b.set(Bulletin.TAGTITLE, "This is a title");
+		fxb.setBulletin(b);
+		assertNull(emptyTitleProperty.getValue());
+		SimpleStringProperty titleProperty = fxb.getFieldProperty(Bulletin.TAGTITLE);
+		assertEquals(b.get(Bulletin.TAGTITLE), titleProperty.getValue());
 	}
 	
 	private MockMartusSecurity security;
