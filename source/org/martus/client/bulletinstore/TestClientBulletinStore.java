@@ -603,17 +603,25 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		TRACE("testCopyBulletin");
 		assertEquals(0, testStore.getBulletinCount());
 		
+		ClientBulletinStore hqStore = createTempStore();
+		HeadquartersKeys keys = new HeadquartersKeys();
+		HeadquartersKey key1 = new HeadquartersKey(hqStore.getAccountId());
+		keys.add(key1);
+	
 		Bulletin original = testStore.createEmptyBulletin();
 		String originalTitle = "original Title!";
 		original.set(BulletinConstants.TAGTITLE, originalTitle);
+		original.setAuthorizedToReadKeys(keys);
 		original.setDraft();
 		testStore.saveBulletin(original);
 		UniversalId originalId = original.getUniversalId();
-		String copy1Title = "Copy of original Title!";
-		Bulletin copy1 = testStore.copyBulletin(originalId, copy1Title);
-		String returnedCopy1Title = copy1.get(Bulletin.TAGTITLE);
-		assertNotEquals("Original Bulletin Id is the same as the Copy1's?",originalId.toString(), copy1.getUniversalIdString());
-		assertEquals("Copy1 should have a title its own title", copy1Title, returnedCopy1Title);
+		String copyTitle = "Copy of original Title!";
+		Bulletin copy = testStore.copyBulletinWithoutContacts(originalId, copyTitle);
+		String returnedCopy1Title = copy.get(Bulletin.TAGTITLE);
+		assertNotEquals("Original Bulletin Id is the same as the Copy1's?",originalId.toString(), copy.getUniversalIdString());
+		assertEquals("Copy should have a title its own title", copyTitle, returnedCopy1Title);
+		assertEquals("Original Bulletin does not have a contact?", 1, original.getAuthorizedToReadKeys().size());
+		assertEquals("Copy Bulletin does not have a contact?", 0, copy.getAuthorizedToReadKeys().size());
 	}
 
 	public void testDiscardBulletin() throws Exception

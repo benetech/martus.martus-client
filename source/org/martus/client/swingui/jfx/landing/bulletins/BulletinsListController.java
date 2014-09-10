@@ -448,7 +448,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		{
 			try
 			{
-				Bulletin copy = store.copyBulletin(selectedId, editNameController.getNewItemName());
+				Bulletin copy = store.copyBulletinWithoutContacts(selectedId, editNameController.getNewItemName());
 				BulletinFolder currentCase = bulletinTableProvider.getFolder();
 				getApp().saveBulletin(copy, currentCase);
 			} 

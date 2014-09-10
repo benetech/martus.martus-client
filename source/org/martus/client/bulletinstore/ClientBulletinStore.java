@@ -822,15 +822,14 @@ public class ClientBulletinStore extends BulletinStore
 		}
 	}
 
-	public Bulletin copyBulletin(UniversalId bulletinId, String newTitle) throws Exception
+	public Bulletin copyBulletinWithoutContacts(UniversalId bulletinId, String newTitle) throws Exception
 	{
 		Bulletin original = getBulletinRevision(bulletinId);
 		FieldSpecCollection publicFieldSpecsToUse = original.getTopSectionFieldSpecs();
 		FieldSpecCollection privateFieldSpecsToUse = original.getBottomSectionFieldSpecs();
 		Bulletin copy = createNewDraft(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
 		copy.set(Bulletin.TAGTITLE, newTitle);
-		if(!isMyBulletin(original))
-			clearAurthorizedToReadKeys(copy);
+		clearAurthorizedToReadKeys(copy);
 		return copy;
 	}
 
