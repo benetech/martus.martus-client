@@ -27,6 +27,7 @@ package org.martus.client.core;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
 /**
@@ -40,10 +41,16 @@ public class FxBulletin
 		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>();
 	}
 
+	public void setBulletin(Bulletin b)
+	{
+		universalIdProperty().setValue(b.getUniversalId());
+	}
+
 	public ReadOnlyObjectWrapper<UniversalId> universalIdProperty()
 	{
 		return universalIdProperty;
 	}
 
 	private ReadOnlyObjectWrapper<UniversalId> universalIdProperty;
+
 }

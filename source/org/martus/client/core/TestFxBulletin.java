@@ -27,6 +27,9 @@ package org.martus.client.core;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 
+import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.BulletinForTesting;
+import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.TestCaseEnhanced;
 
@@ -37,10 +40,30 @@ public class TestFxBulletin extends TestCaseEnhanced
 		super(name);
 	}
 	
-	public void testBasics()
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+
+		security = MockMartusSecurity.createClient();
+	}
+	
+	public void testUniversalId() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin();
 		ReadOnlyObjectWrapper<UniversalId> universalIdProperty = fxb.universalIdProperty();
 		assertEquals(null, universalIdProperty.getValue());
+		
+		Bulletin b = new BulletinForTesting(security);
+		fxb.setBulletin(b);
+		assertEquals(b.getUniversalId(), universalIdProperty.getValue());
+		
+		Bulletin b2 = new BulletinForTesting(security);
+		assertNotEquals("Bulletins have same id?", b.getUniversalId(), b2.getUniversalId());
+		fxb.setBulletin(b2);
+		assertEquals(b2.getUniversalId(), universalIdProperty.getValue());
+		
 	}
+	
+	private MockMartusSecurity security;
 }
