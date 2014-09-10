@@ -1409,6 +1409,43 @@ public class MartusApp
 		return newFolder;
 	}
 	
+	public boolean isAnyBulletinsUnsent(UniversalId[] bulletinIds)
+	{
+		BulletinFolder draftOutBox = getFolderDraftOutbox();
+		BulletinFolder sealedOutBox = getFolderSealedOutbox();
+		for (int i = 0; i < bulletinIds.length; i++)
+		{
+			UniversalId uid = bulletinIds[i];
+			if(draftOutBox.contains(uid) || sealedOutBox.contains(uid))
+				return true;
+		}
+		return false;
+	}
+	
+	public Vector getNonDiscardedFoldersForBulletins(UniversalId[] bulletinIds)
+	{
+		BulletinFolder discardedFolder = getFolderDiscarded();
+		Vector visibleFoldersContainingAnyBulletin = new Vector();
+		for (int i = 0; i < bulletinIds.length; i++)
+		{
+			UniversalId uid = bulletinIds[i];
+			Vector visibleFoldersContainingThisBulletin = findBulletinInAllVisibleFolders(uid);
+			visibleFoldersContainingThisBulletin.remove(discardedFolder);
+			addUniqueEntriesOnly(visibleFoldersContainingAnyBulletin, visibleFoldersContainingThisBulletin);
+		}
+		return visibleFoldersContainingAnyBulletin;
+	}
+
+	private void addUniqueEntriesOnly(Vector to, Vector from)
+	{
+		for(int i = 0 ; i < from.size(); ++i)
+		{
+			Object elementToAdd = from.get(i);
+			if(!to.contains(elementToAdd))
+				to.add(elementToAdd);
+		}
+	}
+	
 	public void cleanupWhenCompleteQuickErase()
 	{
 		store.deleteFoldersDatFile();	
