@@ -56,13 +56,13 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals(null, universalIdPropertyNull);
 		
 		Bulletin b = new BulletinForTesting(security);
-		fxb.setBulletin(b);
+		fxb.copyDataFromBulletin(b);
 		ReadOnlyObjectWrapper<UniversalId> universalIdProperty = fxb.universalIdProperty();
 		assertEquals(b.getUniversalId(), universalIdProperty.getValue());
 		
 		Bulletin b2 = new BulletinForTesting(security);
 		assertNotEquals("Bulletins have same id?", b.getUniversalId(), b2.getUniversalId());
-		fxb.setBulletin(b2);
+		fxb.copyDataFromBulletin(b2);
 		assertEquals(null, universalIdProperty.getValue());
 		ReadOnlyObjectWrapper<UniversalId> universalIdProperty2 = fxb.universalIdProperty();
 		assertEquals(b2.getUniversalId(), universalIdProperty2.getValue());
@@ -72,12 +72,12 @@ public class TestFxBulletin extends TestCaseEnhanced
 	{
 		FxBulletin fxb = new FxBulletin();
 		Bulletin b = new BulletinForTesting(security);
-		fxb.setBulletin(b);
+		fxb.copyDataFromBulletin(b);
 
 		SimpleStringProperty emptyTitleProperty = fxb.getFieldProperty(Bulletin.TAGTITLE);
 		assertEquals("", emptyTitleProperty.getValue());
 		b.set(Bulletin.TAGTITLE, "This is a title");
-		fxb.setBulletin(b);
+		fxb.copyDataFromBulletin(b);
 		assertNull(emptyTitleProperty.getValue());
 		SimpleStringProperty titleProperty = fxb.getFieldProperty(Bulletin.TAGTITLE);
 		assertEquals(b.get(Bulletin.TAGTITLE), titleProperty.getValue());
@@ -92,7 +92,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		FxBulletin fxb = new FxBulletin();
 		Bulletin b = new BulletinForTesting(security);
 		b.set(PRIVATE_TAG, PRIVATE_DATA_1);
-		fxb.setBulletin(b);
+		fxb.copyDataFromBulletin(b);
 		
 		SimpleStringProperty privateInfoProperty = fxb.getFieldProperty(PRIVATE_TAG);
 		assertEquals(b.get(PRIVATE_TAG), privateInfoProperty.getValue());

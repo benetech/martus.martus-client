@@ -46,7 +46,7 @@ public class FxBulletin
 		fieldProperties = new HashMap<String, SimpleStringProperty>();
 	}
 
-	public void setBulletin(Bulletin b)
+	public void copyDataFromBulletin(Bulletin b)
 	{
 		clear();
 		
