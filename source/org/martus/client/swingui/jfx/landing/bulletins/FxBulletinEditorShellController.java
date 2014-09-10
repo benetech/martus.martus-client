@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.awt.Component;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -34,11 +33,11 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.core.BulletinLanguageChangeListener;
+import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentInterface;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.fieldspec.DataInvalidException;
 
 public class FxBulletinEditorShellController extends FxNonWizardShellController implements UiBulletinComponentInterface
@@ -46,6 +45,8 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	public FxBulletinEditorShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+		
+		fxBulletin = new FxBulletin();
 	}
 	
 	@Override
@@ -80,16 +81,16 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	}
 
 	@Override
-	public void copyDataToBulletin(Bulletin bulletin) throws IOException,
-			EncryptionException
+	public void copyDataToBulletin(Bulletin bulletin) throws Exception
 	{
-		// TODO: Needs an implementation
+		fxBulletin.copyDataToBulletin(bulletin);
 	}
 
 	@Override
 	public void copyDataFromBulletin(Bulletin bulletinToShow) throws Exception
 	{
-		bodyController.copyDataFromBulletin(bulletinToShow);
+		fxBulletin.copyDataFromBulletin(bulletinToShow);
+		bodyController.showBulletin(fxBulletin);
 	}
 
 	@Override
@@ -136,4 +137,5 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	private Pane bodyPane;
 	
 	private BulletinEditorBodyController bodyController;
+	private FxBulletin fxBulletin;
 }

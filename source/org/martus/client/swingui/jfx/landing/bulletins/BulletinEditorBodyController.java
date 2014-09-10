@@ -29,9 +29,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
+import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
-import org.martus.common.bulletin.Bulletin;
 
 public class BulletinEditorBodyController extends FxController
 {
@@ -46,7 +46,7 @@ public class BulletinEditorBodyController extends FxController
 		return "landing/bulletins/BulletinEditorBody.fxml";
 	}
 
-	public void copyDataFromBulletin(Bulletin bulletinToShow) throws Exception
+	public void showBulletin(FxBulletin bulletinToShow) throws Exception
 	{
 		Label label = new Label("(Bulletin contents would go here)");
 		bodyPane.getChildren().add(label);
