@@ -58,7 +58,7 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 			BulletinEditorHeaderController headerController = new BulletinEditorHeaderController(getMainWindow());
 			loadControllerAndEmbedInPane(headerController, headerPane);
 			
-			BulletinEditorBodyController bodyController = new BulletinEditorBodyController(getMainWindow());
+			bodyController = new BulletinEditorBodyController(getMainWindow());
 			loadControllerAndEmbedInPane(bodyController, bodyPane);
 		}
 		catch(Exception e)
@@ -76,51 +76,51 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	@Override
 	public void scrollToTop()
 	{
-		// TODO Auto-generated method stub
+		bodyController.scrollToTop();
 	}
 
 	@Override
 	public void copyDataToBulletin(Bulletin bulletin) throws IOException,
 			EncryptionException
 	{
-		// TODO Auto-generated method stub
+		bodyController.copyDataToBulletin(bulletin);
 	}
 
 	@Override
 	public void copyDataFromBulletin(Bulletin bulletinToShow) throws Exception
 	{
-		// TODO Auto-generated method stub
+		bodyController.copyDataFromBulletin(bulletinToShow);
 	}
 
 	@Override
 	public void validateData() throws DataInvalidException
 	{
-		// TODO Auto-generated method stub
+		bodyController.validateData();
 	}
 
 	@Override
 	public boolean isBulletinModified() throws Exception
 	{
-		// TODO Auto-generated method stub
-		return false;
+		// FIXME: Modifying the To field should also count as a modification
+		return bodyController.isBulletinModified();
 	}
 
 	@Override
 	public void updateEncryptedIndicator(boolean allPrivate)
 	{
-		// TODO Auto-generated method stub
+		bodyController.updateEncryptedIndicator(allPrivate);
 	}
 
 	@Override
 	public void setLanguageChangeListener(BulletinLanguageChangeListener listener)
 	{
-		// TODO Auto-generated method stub
+		bodyController.setLanguageChangeListener(listener);
 	}
 
 	@Override
 	public void bulletinLanguageHasChanged(String newBulletinLanguageCode)
 	{
-		// TODO Auto-generated method stub
+		bodyController.bulletinLanguageHasChanged(newBulletinLanguageCode);
 	}
 
 	@Override
@@ -134,4 +134,6 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 
 	@FXML
 	private Pane bodyPane;
+	
+	private BulletinEditorBodyController bodyController;
 }
