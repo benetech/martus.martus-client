@@ -829,11 +829,11 @@ public class ClientBulletinStore extends BulletinStore
 		FieldSpecCollection privateFieldSpecsToUse = original.getBottomSectionFieldSpecs();
 		Bulletin copy = createNewDraft(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
 		copy.set(Bulletin.TAGTITLE, newTitle);
-		clearAurthorizedToReadKeys(copy);
+		clearAuthorizedToReadKeys(copy);
 		return copy;
 	}
 
-	public void clearAurthorizedToReadKeys(Bulletin copy)
+	private void clearAuthorizedToReadKeys(Bulletin copy)
 	{
 		HeadquartersKeys noKeys = new HeadquartersKeys();
 		copy.setAuthorizedToReadKeys(noKeys);
