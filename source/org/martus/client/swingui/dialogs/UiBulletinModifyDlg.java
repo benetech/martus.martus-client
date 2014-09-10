@@ -37,6 +37,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.HashMap;
 
+import javafx.application.Platform;
 import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -90,14 +91,14 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			String cssName = "Bulletin.css";
 			bulletinEditorStage = FxRunner.createAndActivateEmbeddedStage(observerToUse, this, bulletinEditorShellController, cssName);
 			view = bulletinEditorShellController;
+			Platform.runLater(() -> safelyPopulateView());
 		}
 		else
 		{
 			view = new UiBulletinEditor(observer);
+			view.copyDataFromBulletin(bulletin);
+			view.setLanguageChangeListener(this);
 		}
-		view.copyDataFromBulletin(bulletin);
-
-		view.setLanguageChangeListener(this);
 
 		send = new UiButton(localization.getButtonLabel("send"));
 		send.addActionListener(this);
@@ -137,13 +138,29 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			setSize(screenSize.width - 50, screenSize.height - 50);
 			Utilities.maximizeWindow(this);
 		}
-		view.scrollToTop();
+		
+		if(!UiSession.isJavaFx)
+			view.scrollToTop();
 		
 		setGlassPane(new WindowObscurer());
 		
 		ClientBulletinStore store = observerToUse.getApp().getStore();
 		Property<String> currentTemplateNameProperty = store.getCurrentFormTemplateNameProperty();
 		currentTemplateNameProperty.addListener(new TemplateChangeHandler(observerToUse));
+	}
+
+	private void safelyPopulateView()
+	{
+		try
+		{
+			view.copyDataFromBulletin(bulletin);
+			view.setLanguageChangeListener(this);
+			view.scrollToTop();
+		} 
+		catch (Exception e)
+		{
+			throw new RuntimeException(e);
+		}
 	}
 
 	class TemplateChangeHandler implements ChangeListener<String>
