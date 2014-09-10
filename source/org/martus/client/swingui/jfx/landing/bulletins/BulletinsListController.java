@@ -125,6 +125,9 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	
 	private void initalizeButtons()
 	{
+		BooleanBinding noItemsBinding = Bindings.isEmpty(itemsTable.getItems());
+		emptyTrashButton.disableProperty().bind(noItemsBinding);
+		
 		BooleanBinding noItemsSelectedBinding = itemsTable.getSelectionModel().selectedItemProperty().isNull();
 		trashButton.disableProperty().bind(noItemsSelectedBinding);
 		exportButton.disableProperty().bind(noItemsSelectedBinding);
