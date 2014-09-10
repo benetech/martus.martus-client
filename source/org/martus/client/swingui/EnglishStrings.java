@@ -474,6 +474,7 @@ public class EnglishStrings
 "button:IncludePrivateBulletins=Include Private Data",
 "button:SettingOn=On",
 "button:SettingOff=Off",
+"button:emptyTrash=Empty",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
