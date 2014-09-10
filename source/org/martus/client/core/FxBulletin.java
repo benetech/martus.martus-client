@@ -25,8 +25,12 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core;
 
-import javafx.beans.property.ReadOnlyObjectWrapper;
+import java.util.HashMap;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleStringProperty;
+
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
@@ -38,12 +42,22 @@ public class FxBulletin
 {
 	public FxBulletin()
 	{
-		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>();
+		fieldProperties = new HashMap<String, SimpleStringProperty>();
 	}
 
 	public void setBulletin(Bulletin b)
 	{
+		clear();
+		
+		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>();
 		universalIdProperty().setValue(b.getUniversalId());
+
+		FieldSpecCollection topSpecs = b.getTopSectionFieldSpecs();
+		for(int i = 0; i < topSpecs.size(); ++i)
+		{
+			String fieldTag = topSpecs.get(i).getTag();
+			setField(fieldTag, b.get(fieldTag));
+		}
 	}
 
 	public ReadOnlyObjectWrapper<UniversalId> universalIdProperty()
@@ -51,6 +65,29 @@ public class FxBulletin
 		return universalIdProperty;
 	}
 
-	private ReadOnlyObjectWrapper<UniversalId> universalIdProperty;
+	public SimpleStringProperty getFieldProperty(String tag)
+	{
+		return fieldProperties.get(tag);
+	}
+	
+	private void clear()
+	{
+		if(universalIdProperty != null)
+		{
+			universalIdProperty.setValue(null);
+			universalIdProperty = null;
+		}
+		
+		fieldProperties.forEach((key, property) -> property.setValue(null));
+		fieldProperties.clear();
+	}
+	
+	private void setField(String fieldTag, String value)
+	{
+		SimpleStringProperty property = new SimpleStringProperty(value);
+		fieldProperties.put(fieldTag, property);
+	}
 
+	private ReadOnlyObjectWrapper<UniversalId> universalIdProperty;
+	private HashMap<String, SimpleStringProperty> fieldProperties;
 }
