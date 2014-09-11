@@ -49,6 +49,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ChoiceItemStringConverter;
+import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
@@ -125,11 +126,17 @@ public class BulletinEditorBodyController extends FxController
 		DropDownFieldSpec spec = (DropDownFieldSpec) rawSpec;
 		String dataSourceGridTag = spec.getDataSourceGridTag();
 		if(dataSourceGridTag != null && dataSourceGridTag.length() > 0)
+		{
+			MartusLogger.log("Skipping DataDrivenDropDown");
 			return;
+		}
 		
 		String[] reusableChoicesCodes = spec.getReusableChoicesCodes();
 		if(reusableChoicesCodes != null && reusableChoicesCodes.length > 0)
-			return; 
+		{
+			MartusLogger.log("Skipping ReusableChoicesDropDown");
+			return;
+		}
 
 		ChoiceItem[] rawChoices = spec.getAllChoices();
 		List<ChoiceItem> choicesList = Arrays.asList(rawChoices);
