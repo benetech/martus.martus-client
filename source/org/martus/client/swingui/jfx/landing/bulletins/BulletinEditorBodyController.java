@@ -95,11 +95,16 @@ public class BulletinEditorBodyController extends FxController
 		fieldsGrid.add(label, LABEL_COLUMN, row);
 		if(spec.getType().isString())
 		{
-			TextField textField = new TextField();
-			textField.setPrefColumnCount(NORMAL_TEXT_FIELD_WIDTH_IN_CHARACTERS);
-			textField.textProperty().bindBidirectional(property);
-			fieldsGrid.add(textField, DATA_COLUMN, row);
+			createStringField(row, property);
 		}
+	}
+
+	public void createStringField(int row, SimpleStringProperty property)
+	{
+		TextField textField = new TextField();
+		textField.setPrefColumnCount(NORMAL_TEXT_FIELD_WIDTH_IN_CHARACTERS);
+		textField.textProperty().bindBidirectional(property);
+		fieldsGrid.add(textField, DATA_COLUMN, row);
 	}
 	
 	private static final int LABEL_COLUMN = 0;
