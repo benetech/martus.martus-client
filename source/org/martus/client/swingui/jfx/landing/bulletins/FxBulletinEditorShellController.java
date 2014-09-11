@@ -29,6 +29,7 @@ import java.awt.Component;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
@@ -89,8 +90,13 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	@Override
 	public void copyDataFromBulletin(Bulletin bulletinToShow) throws Exception
 	{
+		Platform.runLater(() -> copyDataFromBulletinOnFxThread(bulletinToShow));
+	}
+	
+	private void copyDataFromBulletinOnFxThread(Bulletin bulletinToShow)
+	{
 		fxBulletin.copyDataFromBulletin(bulletinToShow);
-		bodyController.showBulletin(fxBulletin);
+		Platform.runLater(() -> bodyController.showBulletin(fxBulletin));
 	}
 
 	@Override
