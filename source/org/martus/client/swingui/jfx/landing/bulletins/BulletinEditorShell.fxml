@@ -9,6 +9,6 @@
    	  <Pane fx:id="headerPane" />
    </top>
    <center>
-		<Pane fx:id="bodyPane" />
+		<StackPane fx:id="bodyPane" />
    </center>
 </BorderPane>
