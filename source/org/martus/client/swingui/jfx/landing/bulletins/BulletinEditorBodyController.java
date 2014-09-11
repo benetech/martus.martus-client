@@ -25,12 +25,19 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Vector;
 
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -41,7 +48,10 @@ import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
+import org.martus.client.swingui.jfx.generic.data.ChoiceItemStringConverter;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MessageFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
@@ -106,6 +116,32 @@ public class BulletinEditorBodyController extends FxController
 			createMessageField(row, spec);
 		else if(spec.getType().isBoolean())
 			createBooleanField(row, property);
+		else if(spec.getType().isDropdown())
+			createDropdownField(row, property, spec);
+	}
+
+	private void createDropdownField(int row, SimpleStringProperty property, FieldSpec rawSpec)
+	{
+		DropDownFieldSpec spec = (DropDownFieldSpec) rawSpec;
+		ChoiceItem[] rawChoices = spec.getAllChoices();
+
+		List<ChoiceItem> choicesList = Arrays.asList(rawChoices);
+		ObservableList<ChoiceItem> choices = FXCollections.observableArrayList();
+		choices.addAll(choicesList);
+		ChoiceBox<ChoiceItem> choiceBox = new ChoiceBox<ChoiceItem>(choices);
+
+		Property<ChoiceItem> choiceItemCodeProperty = createChoiceItemStringIntermediaryProperty(property, rawChoices);
+		choiceBox.valueProperty().bindBidirectional(choiceItemCodeProperty);
+		fieldsGrid.add(choiceBox, DATA_COLUMN, row);
+	}
+
+	private Property<ChoiceItem> createChoiceItemStringIntermediaryProperty(SimpleStringProperty property, ChoiceItem[] rawChoices)
+	{
+		ChoiceItemStringConverter converter = new ChoiceItemStringConverter(rawChoices);
+		ChoiceItem existingValue = converter.fromString(property.getValue());
+		Property<ChoiceItem> choiceItemStringProperty = new SimpleObjectProperty<ChoiceItem>(existingValue);
+		property.bindBidirectional(choiceItemStringProperty, converter);
+		return choiceItemStringProperty;
 	}
 
 	private void createBooleanField(int row, SimpleStringProperty property)
