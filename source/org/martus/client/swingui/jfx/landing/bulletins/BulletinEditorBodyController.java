@@ -30,6 +30,7 @@ import java.util.Vector;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
@@ -70,6 +71,11 @@ public class BulletinEditorBodyController extends FxController
 		}
 	}
 
+	public void scrollToTop()
+	{
+		scrollPane.vvalueProperty().set(0);
+	}
+
 	private boolean shouldOmitField(FieldSpec spec)
 	{
 		Vector<String> tagsToOmit = new Vector<String>();
@@ -98,5 +104,9 @@ public class BulletinEditorBodyController extends FxController
 	}
 
 	@FXML
+	private ScrollPane scrollPane;
+	
+	@FXML
 	private GridPane fieldsGrid;
+
 }

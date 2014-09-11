@@ -78,7 +78,7 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	@Override
 	public void scrollToTop()
 	{
-		// TODO: Needs an implementation
+		Platform.runLater(() -> bodyController.scrollToTop());
 	}
 
 	@Override
