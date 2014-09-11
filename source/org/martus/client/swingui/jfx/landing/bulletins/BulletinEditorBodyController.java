@@ -91,7 +91,7 @@ public class BulletinEditorBodyController extends FxController
 		String labelText = spec.getLabel();
 		if(StandardFieldSpecs.isStandardFieldTag(tag))
 			labelText = getLocalization().getFieldLabel(tag);
-		Label label = new Label(labelText + ":");
+		Label label = new Label(labelText);
 		final int LABEL_COLUMN = 0;
 		final int DATA_COLUMN = 1;
 		fieldsGrid.add(label, LABEL_COLUMN, row);
