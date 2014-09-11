@@ -27,9 +27,8 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.util.Vector;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -41,6 +40,7 @@ import javafx.scene.layout.GridPane;
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MessageFieldSpec;
@@ -110,38 +110,21 @@ public class BulletinEditorBodyController extends FxController
 
 	private void createBooleanField(int row, SimpleStringProperty property)
 	{
+		SimpleBooleanProperty booleanProperty = createBooleanStringIntermediaryProperty(property);
 		CheckBox checkBox = new CheckBox();
-		checkBox.setOnAction(new CheckBoxHandler(checkBox, property));
-		checkBox.setSelected(isTrue(property));
+		checkBox.selectedProperty().bindBidirectional(booleanProperty);
 		fieldsGrid.add(checkBox, DATA_COLUMN, row);
 	}
+
+	private SimpleBooleanProperty createBooleanStringIntermediaryProperty(SimpleStringProperty property)
+	{
+		BooleanStringConverter booleanStringConverter = new BooleanStringConverter();
+		Boolean existingValue = booleanStringConverter.fromString(property.getValue());
+		SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(existingValue);
+		property.bindBidirectional(booleanProperty, booleanStringConverter);
+		return booleanProperty;
+	}
 	
-	private boolean isTrue(SimpleStringProperty property)
-	{
-		return property.getValue().equals(FieldSpec.TRUESTRING);
-	}
-
-	private static class CheckBoxHandler implements EventHandler<ActionEvent> 
-	{
-		public CheckBoxHandler(CheckBox checkBoxToUse, SimpleStringProperty property)
-		{
-			checkBox = checkBoxToUse;
-			booleanStringProperty = property;
-		}
-
-		@Override
-		public void handle(ActionEvent event)
-		{
-			String value = FieldSpec.FALSESTRING;
-			if(checkBox.isSelected())
-				value = FieldSpec.TRUESTRING;
-			booleanStringProperty.setValue(value);
-		}
-		
-		private CheckBox checkBox;
-		private SimpleStringProperty booleanStringProperty;
-	}
-
 	private void createMessageField(int row, FieldSpec spec)
 	{
 		String message = ((MessageFieldSpec)(spec)).getMessage();
