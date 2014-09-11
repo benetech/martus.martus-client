@@ -28,16 +28,19 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.generic.DialogWithNoButtonsShellController;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.landing.general.SelectTemplateController;
+import org.martus.common.bulletin.Bulletin;
 
 public class BulletinEditorHeaderController extends FxController
 {
@@ -56,6 +59,13 @@ public class BulletinEditorHeaderController extends FxController
 	public String getFxmlLocation()
 	{
 		return "landing/bulletins/BulletinEditorHeader.fxml";
+	}
+
+	public void showBulletin(FxBulletin bulletinToShow)
+	{
+		titleProperty = bulletinToShow.getFieldProperty(Bulletin.TAGTITLE);
+		titleField.textProperty().bindBidirectional(titleProperty);
+		headerTitleLabel.textProperty().bind(titleProperty);
 	}
 
 	@FXML
@@ -90,4 +100,6 @@ public class BulletinEditorHeaderController extends FxController
 
 	@FXML
 	TextField fromField;
+	
+	private StringProperty titleProperty;
 }

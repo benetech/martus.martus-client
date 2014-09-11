@@ -57,7 +57,7 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 		{
 			super.initialize(location, bundle);
 
-			BulletinEditorHeaderController headerController = new BulletinEditorHeaderController(getMainWindow());
+			headerController = new BulletinEditorHeaderController(getMainWindow());
 			loadControllerAndEmbedInPane(headerController, headerPane);
 			
 			bodyController = new BulletinEditorBodyController(getMainWindow());
@@ -96,6 +96,7 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	private void copyDataFromBulletinOnFxThread(Bulletin bulletinToShow)
 	{
 		fxBulletin.copyDataFromBulletin(bulletinToShow);
+		Platform.runLater(() -> headerController.showBulletin(fxBulletin));
 		Platform.runLater(() -> bodyController.showBulletin(fxBulletin));
 	}
 
@@ -142,6 +143,7 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	@FXML
 	private Pane bodyPane;
 	
+	private BulletinEditorHeaderController headerController;
 	private BulletinEditorBodyController bodyController;
 	private FxBulletin fxBulletin;
 }
