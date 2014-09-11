@@ -98,10 +98,13 @@ public class BulletinEditorBodyController extends FxController
 		if(spec.getType().isString())
 		{
 			TextField textField = new TextField();
+			textField.setPrefColumnCount(NORMAL_TEXT_FIELD_WIDTH_IN_CHARACTERS);
 			textField.textProperty().bindBidirectional(property);
 			fieldsGrid.add(textField, DATA_COLUMN, row);
 		}
 	}
+	
+	private static final int NORMAL_TEXT_FIELD_WIDTH_IN_CHARACTERS = 60;
 
 	@FXML
 	private ScrollPane scrollPane;
