@@ -28,7 +28,10 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import java.util.Vector;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -101,6 +104,42 @@ public class BulletinEditorBodyController extends FxController
 			createMultilineField(row, property);
 		else if(spec.getType().isMessage())
 			createMessageField(row, spec);
+		else if(spec.getType().isBoolean())
+			createBooleanField(row, property);
+	}
+
+	private void createBooleanField(int row, SimpleStringProperty property)
+	{
+		CheckBox checkBox = new CheckBox();
+		checkBox.setOnAction(new CheckBoxHandler(checkBox, property));
+		checkBox.setSelected(isTrue(property));
+		fieldsGrid.add(checkBox, DATA_COLUMN, row);
+	}
+	
+	private boolean isTrue(SimpleStringProperty property)
+	{
+		return property.getValue().equals(FieldSpec.TRUESTRING);
+	}
+
+	private static class CheckBoxHandler implements EventHandler<ActionEvent> 
+	{
+		public CheckBoxHandler(CheckBox checkBoxToUse, SimpleStringProperty property)
+		{
+			checkBox = checkBoxToUse;
+			booleanStringProperty = property;
+		}
+
+		@Override
+		public void handle(ActionEvent event)
+		{
+			String value = FieldSpec.FALSESTRING;
+			if(checkBox.isSelected())
+				value = FieldSpec.TRUESTRING;
+			booleanStringProperty.setValue(value);
+		}
+		
+		private CheckBox checkBox;
+		private SimpleStringProperty booleanStringProperty;
 	}
 
 	private void createMessageField(int row, FieldSpec spec)
