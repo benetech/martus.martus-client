@@ -93,7 +93,7 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 		Platform.runLater(() -> copyDataFromBulletinOnFxThread(bulletinToShow));
 	}
 	
-	private void copyDataFromBulletinOnFxThread(Bulletin bulletinToShow)
+	private void copyDataFromBulletinOnFxThread(Bulletin bulletinToShow) throws RuntimeException
 	{
 		fxBulletin.copyDataFromBulletin(bulletinToShow);
 		Platform.runLater(() -> headerController.showBulletin(fxBulletin));

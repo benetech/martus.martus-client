@@ -30,6 +30,7 @@ import java.util.Vector;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.Bulletin;
@@ -51,6 +52,7 @@ public class FxBulletin
 	{
 		clear();
 		
+		accountStringProperty = new SimpleStringProperty(b.getAccount());
 		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>();
 		universalIdProperty().setValue(b.getUniversalId());
 
@@ -75,6 +77,11 @@ public class FxBulletin
 	public ReadOnlyObjectWrapper<UniversalId> universalIdProperty()
 	{
 		return universalIdProperty;
+	}
+
+	public StringProperty accountProperty()
+	{
+		return accountStringProperty;
 	}
 	
 	public Vector<FieldSpec> getFieldSpecs()
@@ -102,6 +109,12 @@ public class FxBulletin
 			universalIdProperty = null;
 		}
 		
+		if(accountStringProperty != null)
+		{
+			accountStringProperty.setValue(null);
+			accountStringProperty = null;
+		}
+		
 		fieldProperties.forEach((key, property) -> property.setValue(null));
 		fieldProperties.clear();
 		
@@ -126,6 +139,7 @@ public class FxBulletin
 	}
 
 	private ReadOnlyObjectWrapper<UniversalId> universalIdProperty;
+	private StringProperty accountStringProperty;
 	private HashMap<String, SimpleStringProperty> fieldProperties;
 	private FieldSpecCollection fieldSpecs;
 }
