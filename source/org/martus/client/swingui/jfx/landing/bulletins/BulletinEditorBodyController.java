@@ -123,8 +123,15 @@ public class BulletinEditorBodyController extends FxController
 	private void createDropdownField(int row, SimpleStringProperty property, FieldSpec rawSpec)
 	{
 		DropDownFieldSpec spec = (DropDownFieldSpec) rawSpec;
-		ChoiceItem[] rawChoices = spec.getAllChoices();
+		String dataSourceGridTag = spec.getDataSourceGridTag();
+		if(dataSourceGridTag != null && dataSourceGridTag.length() > 0)
+			return;
+		
+		String[] reusableChoicesCodes = spec.getReusableChoicesCodes();
+		if(reusableChoicesCodes != null && reusableChoicesCodes.length > 0)
+			return; 
 
+		ChoiceItem[] rawChoices = spec.getAllChoices();
 		List<ChoiceItem> choicesList = Arrays.asList(rawChoices);
 		ObservableList<ChoiceItem> choices = FXCollections.observableArrayList();
 		choices.addAll(choicesList);
