@@ -36,6 +36,7 @@ import javafx.scene.layout.GridPane;
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
@@ -58,10 +59,22 @@ public class BulletinEditorBodyController extends FxController
 		for(int row = 0; row < fieldSpecs.size(); ++row)
 		{
 			FieldSpec spec = fieldSpecs.get(row);
+			if(shouldOmitField(spec))
+				continue;
+
 			String tag = spec.getTag();
 			SimpleStringProperty property = bulletinToShow.getFieldProperty(tag);
 			createFieldForSpec(row, spec, property);
 		}
+	}
+
+	private boolean shouldOmitField(FieldSpec spec)
+	{
+		Vector<String> tagsToOmit = new Vector<String>();
+		tagsToOmit.add(Bulletin.TAGTITLE);
+		tagsToOmit.add(Bulletin.TAGWASSENT);
+		
+		return tagsToOmit.contains(spec.getTag());
 	}
 
 	private void createFieldForSpec(int row, FieldSpec spec, SimpleStringProperty property)
