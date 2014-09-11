@@ -92,8 +92,6 @@ public class BulletinEditorBodyController extends FxController
 		if(StandardFieldSpecs.isStandardFieldTag(tag))
 			labelText = getLocalization().getFieldLabel(tag);
 		Label label = new Label(labelText);
-		final int LABEL_COLUMN = 0;
-		final int DATA_COLUMN = 1;
 		fieldsGrid.add(label, LABEL_COLUMN, row);
 		if(spec.getType().isString())
 		{
@@ -104,6 +102,8 @@ public class BulletinEditorBodyController extends FxController
 		}
 	}
 	
+	private static final int LABEL_COLUMN = 0;
+	private static final int DATA_COLUMN = 1;
 	private static final int NORMAL_TEXT_FIELD_WIDTH_IN_CHARACTERS = 60;
 
 	@FXML
