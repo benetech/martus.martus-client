@@ -40,6 +40,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.MessageFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class BulletinEditorBodyController extends FxController
@@ -98,6 +99,20 @@ public class BulletinEditorBodyController extends FxController
 			createStringField(row, property);
 		else if(spec.getType().isMultiline())
 			createMultilineField(row, property);
+		else if(spec.getType().isMessage())
+			createMessageField(row, spec);
+	}
+
+	private void createMessageField(int row, FieldSpec spec)
+	{
+		String message = ((MessageFieldSpec)(spec)).getMessage();
+		TextArea textArea = new TextArea(message);
+		textArea.setPrefColumnCount(NORMAL_TEXT_FIELD_WIDTH_IN_CHARACTERS);
+		textArea.setPrefRowCount(1);
+		textArea.setFocusTraversable(false);
+		textArea.setWrapText(true);
+		textArea.setEditable(false);
+		fieldsGrid.add(textArea, DATA_COLUMN, row);
 	}
 
 	public void createStringField(int row, SimpleStringProperty property)
