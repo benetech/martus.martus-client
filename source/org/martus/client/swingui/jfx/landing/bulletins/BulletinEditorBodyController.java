@@ -53,8 +53,10 @@ public class BulletinEditorBodyController extends FxController
 		return "landing/bulletins/BulletinEditorBody.fxml";
 	}
 
-	public void showBulletin(FxBulletin bulletinToShow) throws Exception
+	public void showBulletin(FxBulletin bulletinToShow) throws RuntimeException
 	{
+		fieldsGrid.getChildren().clear();
+		
 		Vector<FieldSpec> fieldSpecs = bulletinToShow.getFieldSpecs();
 		for(int row = 0; row < fieldSpecs.size(); ++row)
 		{
