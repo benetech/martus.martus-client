@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,6 +40,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.generic.DialogWithNoButtonsShellController;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.generic.data.FxBindingHelpers;
 import org.martus.client.swingui.jfx.landing.general.SelectTemplateController;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
@@ -66,11 +68,11 @@ public class BulletinEditorHeaderController extends FxController
 	{
 		try
 		{
-			titleProperty = bulletinToShow.getFieldProperty(Bulletin.TAGTITLE);
-			titleField.textProperty().bindBidirectional(titleProperty);
+			StringProperty newTitleProperty = bulletinToShow.getFieldProperty(Bulletin.TAGTITLE);
+			titleProperty = FxBindingHelpers.bindToOurPropertyField(newTitleProperty, titleField.textProperty(), titleProperty);
 			headerTitleLabel.textProperty().bind(titleProperty);
 			String accountKey = bulletinToShow.accountProperty().getValue();	
-			String formattedAccountLabel = "(" + getMainWindow().getApp().getUserName() + ")";
+			String formattedAccountLabel = "(" + getMainWindow().getApp().getUserName() + ") ";
 			formattedAccountLabel += MartusCrypto.computeFormattedPublicCode40(accountKey);
 			fromField.setText(formattedAccountLabel);
 		} 
@@ -113,5 +115,5 @@ public class BulletinEditorHeaderController extends FxController
 	@FXML
 	TextField fromField;
 	
-	private StringProperty titleProperty;
+	private Property titleProperty;
 }
