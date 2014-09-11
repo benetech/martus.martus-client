@@ -7,20 +7,107 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-	<left>
-		<ImageView fitHeight="33.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
-			<image>
-				<Image url="@../../../dialogs/Martus-logo-white-text-160x72.png" />
-			</image>
-		</ImageView>
-	</left>
-	<right>
-		<HBox>
-			<children>
-				<Label fx:id="currentTemplateLabel" prefWidth="200"/>
-				<Button mnemonicParsing="false" text="Templates..." onAction="#onSelectTemplate" />
+<BorderPane prefWidth="800.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <top>
+      <Label fx:id="headerTitleLabel" alignment="CENTER" style="-fx-background-color: gray;" styleClass=".headingLevel1" text="[New {Record/Note} / Title of Message]" BorderPane.alignment="CENTER">
+		<font>
+		<Font name="Helvetica" size="14.0" />
+		</font>
+      </Label>
+   </top>
+   <center>
+      <VBox prefHeight="110.0" prefWidth="800.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+		<children>
+            <Separator prefWidth="200.0">
+			<VBox.margin>
+				<Insets bottom="5.0" />
+			</VBox.margin>
+            </Separator>
+            <GridPane alignment="CENTER_LEFT" prefWidth="600.0">
+				<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="50.0" prefWidth="82.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="698.0" minWidth="10.0" prefWidth="698.0" />
+				</columnConstraints>
+				<rowConstraints>
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+				</rowConstraints>
+				<children>
+                  <Label text="Title:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                  <Label text="To:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                  <Label text="From:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                  <TextField fx:id="titleField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+					<children>
+                        <TextField fx:id="toField" prefHeight="26.0" prefWidth="605.0" />
+                        <Button mnemonicParsing="false" onAction="#onAddRemoveContact">
+						<graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+								<image>
+								<Image url="@../../images/add_contacts.png" />
+								</image>
+                              </ImageView>
+						</graphic>
+                        </Button>
+					</children>
+                  </HBox>
+                  <HBox prefHeight="30.0" prefWidth="703.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+					<children>
+                        <GridPane prefHeight="30.0" prefWidth="699.0">
+							<columnConstraints>
+							<ColumnConstraints hgrow="SOMETIMES" maxWidth="491.0" minWidth="100.0" prefWidth="474.0" />
+							<ColumnConstraints hgrow="SOMETIMES" maxWidth="251.0" minWidth="25.0" prefWidth="132.0" />
+							<ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="58.0" prefWidth="93.0" />
+							</columnConstraints>
+							<rowConstraints>
+							<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+							</rowConstraints>
+							<children>
+								<HBox prefHeight="30.0" prefWidth="185.0" GridPane.columnIndex="1">
+								<children>
+                                    <Label text="Version #:">
+									<padding>
+									<Insets left="25.0" top="5.0" />
+									</padding>
+                                    </Label>
+                                    <Label fx:id="versionField" text="1">
+									<padding>
+									<Insets left="10.0" top="5.0" />
+									</padding>
+                                    </Label>
+								</children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" GridPane.columnIndex="2">
+								<children>
+                                    <Button mnemonicParsing="false" onAction="#onSelectTemplate">
+										<graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+											<image>
+											<Image url="@../../images/templates.png" />
+											</image>
+                                          </ImageView>
+										</graphic>
+                                    </Button>
+								</children>
+							<padding>
+							<Insets top="5.0" />
+							</padding>
+                              </HBox>
+                              <TextField fx:id="fromField" />
+						</children>
+					</GridPane>
+					</children>
+                  </HBox>
+				</children>
+				<VBox.margin>
+				<Insets left="10.0" right="10.0" />
+				</VBox.margin>
+			</GridPane>
 			</children>
-		</HBox>
-	</right>
-</BorderPane>
+		<padding>
+		<Insets bottom="10.0" />
+		</padding>
+		</VBox>
+ 	</center>
+ </BorderPane>
