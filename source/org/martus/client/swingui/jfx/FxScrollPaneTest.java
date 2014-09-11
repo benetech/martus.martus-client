@@ -36,6 +36,17 @@ Boston, MA 02111-1307, USA.
 
  */
 
+/**
+ * 
+ * This class is just a tiny sample demo that was used to 
+ * send to the jfx mailing list to find out why scrollpanes 
+ * were not working as expected. The original code below 
+ * used Pane, and didn't work correctly. Following advice 
+ * from the list, switching to StackPane solved the problem.
+ * 
+ * This can probably be deleted at some point. 
+ *
+ */
 public class FxScrollPaneTest extends Application
 {
     public static void main(String[] args) 
