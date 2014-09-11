@@ -41,6 +41,7 @@ import org.martus.client.swingui.jfx.generic.DialogWithNoButtonsShellController;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.landing.general.SelectTemplateController;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.crypto.MartusCrypto;
 
 public class BulletinEditorHeaderController extends FxController
 {
@@ -61,11 +62,22 @@ public class BulletinEditorHeaderController extends FxController
 		return "landing/bulletins/BulletinEditorHeader.fxml";
 	}
 
-	public void showBulletin(FxBulletin bulletinToShow)
+	public void showBulletin(FxBulletin bulletinToShow) throws RuntimeException
 	{
-		titleProperty = bulletinToShow.getFieldProperty(Bulletin.TAGTITLE);
-		titleField.textProperty().bindBidirectional(titleProperty);
-		headerTitleLabel.textProperty().bind(titleProperty);
+		try
+		{
+			titleProperty = bulletinToShow.getFieldProperty(Bulletin.TAGTITLE);
+			titleField.textProperty().bindBidirectional(titleProperty);
+			headerTitleLabel.textProperty().bind(titleProperty);
+			String accountKey = bulletinToShow.accountProperty().getValue();	
+			String formattedAccountLabel = "(" + getMainWindow().getApp().getUserName() + ")";
+			formattedAccountLabel += MartusCrypto.computeFormattedPublicCode40(accountKey);
+			fromField.setText(formattedAccountLabel);
+		} 
+		catch (Exception e)
+		{
+			throw new RuntimeException(e);
+		}
 	}
 
 	@FXML
