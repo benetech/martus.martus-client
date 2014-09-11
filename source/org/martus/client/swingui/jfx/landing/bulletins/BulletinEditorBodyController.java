@@ -31,6 +31,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
@@ -94,9 +95,9 @@ public class BulletinEditorBodyController extends FxController
 		Label label = new Label(labelText);
 		fieldsGrid.add(label, LABEL_COLUMN, row);
 		if(spec.getType().isString())
-		{
 			createStringField(row, property);
-		}
+		else if(spec.getType().isMultiline())
+			createMultilineField(row, property);
 	}
 
 	public void createStringField(int row, SimpleStringProperty property)
@@ -107,9 +108,20 @@ public class BulletinEditorBodyController extends FxController
 		fieldsGrid.add(textField, DATA_COLUMN, row);
 	}
 	
+	private void createMultilineField(int row, SimpleStringProperty property)
+	{
+		TextArea textArea = new TextArea();
+		textArea.setPrefColumnCount(NORMAL_TEXT_FIELD_WIDTH_IN_CHARACTERS);
+		textArea.setPrefRowCount(MULTILINE_FIELD_HEIGHT_IN_ROWS);
+		textArea.setWrapText(true);
+		textArea.textProperty().bindBidirectional(property);
+		fieldsGrid.add(textArea, DATA_COLUMN, row);
+	}
+
 	private static final int LABEL_COLUMN = 0;
 	private static final int DATA_COLUMN = 1;
 	private static final int NORMAL_TEXT_FIELD_WIDTH_IN_CHARACTERS = 60;
+	private static final int MULTILINE_FIELD_HEIGHT_IN_ROWS = 5;
 
 	@FXML
 	private ScrollPane scrollPane;
