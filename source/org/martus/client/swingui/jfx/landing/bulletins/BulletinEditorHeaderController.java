@@ -64,7 +64,7 @@ public class BulletinEditorHeaderController extends FxController
 		return "landing/bulletins/BulletinEditorHeader.fxml";
 	}
 
-	public void showBulletin(FxBulletin bulletinToShow) throws RuntimeException
+	public void showBulletin(FxBulletin bulletinToShow)
 	{
 			updateTitle(bulletinToShow);
 			updateVersion(bulletinToShow);			
@@ -81,7 +81,7 @@ public class BulletinEditorHeaderController extends FxController
 		} 
 		catch (Exception e)
 		{
-			throw new RuntimeException(e);
+			logAndNotifyUnexpectedError(e);
 		}
 		fromField.setText(formattedAccountLabel);
 	}
