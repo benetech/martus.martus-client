@@ -145,8 +145,8 @@
 			<center>
 				<SplitPane dividerPositions="0.2" focusTraversable="true">
 					<items>
-						<Pane fx:id="sideContentPane" />
-						<Pane fx:id="mainContentPane" />
+						<StackPane fx:id="sideContentPane" />
+						<StackPane fx:id="mainContentPane" />
   					</items>
 				</SplitPane>
 			</center>
