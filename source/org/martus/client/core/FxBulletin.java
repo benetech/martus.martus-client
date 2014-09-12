@@ -28,12 +28,12 @@ package org.martus.client.core;
 import java.util.HashMap;
 import java.util.Vector;
 
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import org.martus.common.FieldSpecCollection;
+import org.martus.common.HeadquartersKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.packet.UniversalId;
@@ -53,10 +53,9 @@ public class FxBulletin
 	{
 		clear();
 		
-		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>();
-		universalIdProperty().setValue(b.getUniversalId());
-		
+		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>(b.getUniversalId());
 		versionProperty = new SimpleIntegerProperty(b.getVersion());
+		authorizedToReadProperty = new ReadOnlyObjectWrapper<HeadquartersKeys>(b.getAuthorizedToReadKeys());
 
 		setFieldPropertiesFromBulletinSection(b, b.getTopSectionFieldSpecs());
 		setFieldPropertiesFromBulletinSection(b, b.getBottomSectionFieldSpecs());
@@ -82,9 +81,14 @@ public class FxBulletin
 		return universalIdProperty;
 	}
 	
-	public IntegerProperty getVersionProperty()
+	public SimpleIntegerProperty getVersionProperty()
 	{
 		return versionProperty;
+	}
+
+	public ReadOnlyObjectWrapper<HeadquartersKeys> authorizedToReadProperty()
+	{
+		return authorizedToReadProperty;
 	}
 
 	public Vector<FieldSpec> getFieldSpecs()
@@ -110,6 +114,18 @@ public class FxBulletin
 		{
 			universalIdProperty.setValue(null);
 			universalIdProperty = null;
+		}
+		
+		if(authorizedToReadProperty != null)
+		{
+			authorizedToReadProperty.setValue(null);
+			authorizedToReadProperty = null;
+		}
+
+		if(versionProperty != null)
+		{
+			versionProperty.setValue(null);
+			versionProperty = null;
 		}
 		
 		fieldProperties.forEach((key, property) -> property.setValue(null));
@@ -140,5 +156,7 @@ public class FxBulletin
 	private ReadOnlyObjectWrapper<UniversalId> universalIdProperty;
 	private HashMap<String, SimpleStringProperty> fieldProperties;
 	private FieldSpecCollection fieldSpecs;
-	private IntegerProperty versionProperty;
+	private SimpleIntegerProperty versionProperty;
+	private ReadOnlyObjectWrapper<HeadquartersKeys> authorizedToReadProperty;
+
 }
