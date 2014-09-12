@@ -71,6 +71,9 @@ public class BulletinEditorHeaderController extends FxController
 			StringProperty newTitleProperty = bulletinToShow.getFieldProperty(Bulletin.TAGTITLE);
 			titleProperty = FxBindingHelpers.bindToOurPropertyField(newTitleProperty, titleField.textProperty(), titleProperty);
 			headerTitleLabel.textProperty().bind(titleProperty);
+			
+			versionField.setText(String.valueOf(bulletinToShow.getVersionProperty().get()));			
+			
 			String accountKey = bulletinToShow.universalIdProperty().get().getAccountId();
 			String formattedAccountLabel = "(" + getMainWindow().getApp().getUserName() + ") ";
 			formattedAccountLabel += MartusCrypto.computeFormattedPublicCode40(accountKey);
@@ -114,6 +117,9 @@ public class BulletinEditorHeaderController extends FxController
 
 	@FXML
 	TextField fromField;
+	
+	@FXML
+	Label versionField;
 	
 	private Property titleProperty;
 }
