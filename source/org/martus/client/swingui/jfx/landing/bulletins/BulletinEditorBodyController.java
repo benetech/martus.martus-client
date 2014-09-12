@@ -37,14 +37,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.MartusLocalization;
@@ -90,22 +91,45 @@ public class BulletinEditorBodyController extends FxController
 		public Node createFormFromBulletin(FxBulletin bulletinToShow)
 		{
 			bulletin = bulletinToShow;
-			root = new StackPane();
+			sections = new Vector<BulletinEditorSection>();
 			
 			Vector<FieldSpec> fieldSpecs = bulletin.getFieldSpecs();
 			fieldSpecs.forEach(fieldSpec -> addField(fieldSpec));
-			root.getChildren().add(currentSection);
-			return root;
+
+			if(sections.size() == 1)
+				return sections.get(0);
+
+			Accordion accordion = new Accordion();
+			sections.forEach(section -> accordion.getPanes().add(createTitledPane(section)));
+			TitledPane firstPane = accordion.getPanes().get(0);
+			accordion.setExpandedPane(firstPane);
+			return accordion;
 		}
 		
+		private TitledPane createTitledPane(BulletinEditorSection section)
+		{
+			String title = section.getTitle();
+			return new TitledPane(title, section);
+		}
+
 		private void addField(FieldSpec fieldSpec)
 		{
 			if(shouldOmitField(fieldSpec))
 				return;
+
+			boolean isSectionStart = fieldSpec.getType().isSectionStart();
 			
-			// FIXME: This should also create a new section when encountering a section spec
-			if(currentSection == null)
-				currentSection = new BulletinEditorSection(getLocalization());
+			if(isSectionStart || currentSection == null)
+			{
+				String sectionTitle = "";
+				if(isSectionStart)
+					sectionTitle = fieldSpec.getLabel();
+				currentSection = new BulletinEditorSection(getLocalization(), sectionTitle);
+				sections.add(currentSection);
+			}
+
+			if(isSectionStart)
+				return;
 			
 			SimpleStringProperty property = bulletin.getFieldProperty(fieldSpec.getTag());
 			currentSection.addField(fieldSpec, property);
@@ -127,17 +151,23 @@ public class BulletinEditorBodyController extends FxController
 
 		private MartusLocalization localization;
 		private FxBulletin bulletin;
-		private StackPane root;
 		private BulletinEditorSection currentSection;
+		private Vector<BulletinEditorSection> sections;
 	}
 	
 	protected static class BulletinEditorSection extends GridPane
 	{
-		public BulletinEditorSection(MartusLocalization localizationToUse)
+		public BulletinEditorSection(MartusLocalization localizationToUse, String sectionTitle)
 		{
 			localization = localizationToUse;
+			title = sectionTitle;
 			
 			currentRowIndex = 0;
+		}
+		
+		public String getTitle()
+		{
+			return title;
 		}
 		
 		public void addField(FieldSpec fieldSpec, SimpleStringProperty property)
@@ -164,6 +194,7 @@ public class BulletinEditorBodyController extends FxController
 		private static final int DATA_COLUMN = 1;
 
 		private MartusLocalization localization;
+		private String title;
 		private int currentRowIndex;
 	}
 	
