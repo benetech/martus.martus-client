@@ -34,7 +34,7 @@ public class FxBindingHelpers
 		if(cellPropertyBoundToCurrently==null) 
 		{
 			cellPropertyBoundToCurrently = cellProperty;
-			currentFieldProperty.bindBidirectional(cellPropertyBoundToCurrently);
+			currentFieldProperty.bindBidirectional(cellProperty);
 		}
 		else
 		{
@@ -42,7 +42,7 @@ public class FxBindingHelpers
 			{
 				currentFieldProperty.unbindBidirectional(cellPropertyBoundToCurrently);
 				cellPropertyBoundToCurrently = cellProperty;
-				currentFieldProperty.bindBidirectional(cellPropertyBoundToCurrently);
+				currentFieldProperty.bindBidirectional(cellProperty);
 			}
 		}
 		return cellPropertyBoundToCurrently;
