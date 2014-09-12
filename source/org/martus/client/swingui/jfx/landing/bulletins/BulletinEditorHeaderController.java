@@ -66,23 +66,36 @@ public class BulletinEditorHeaderController extends FxController
 
 	public void showBulletin(FxBulletin bulletinToShow) throws RuntimeException
 	{
+			updateTitle(bulletinToShow);
+			updateVersion(bulletinToShow);			
+			updateFrom(bulletinToShow);
+	}
+
+	private void updateFrom(FxBulletin bulletinToShow)
+	{
+		String accountKey = bulletinToShow.universalIdProperty().get().getAccountId();
+		String formattedAccountLabel = "(" + getMainWindow().getApp().getUserName() + ") ";
 		try
 		{
-			StringProperty newTitleProperty = bulletinToShow.getFieldProperty(Bulletin.TAGTITLE);
-			titleProperty = FxBindingHelpers.bindToOurPropertyField(newTitleProperty, titleField.textProperty(), titleProperty);
-			headerTitleLabel.textProperty().bind(titleProperty);
-			
-			versionField.setText(String.valueOf(bulletinToShow.getVersionProperty().get()));			
-			
-			String accountKey = bulletinToShow.universalIdProperty().get().getAccountId();
-			String formattedAccountLabel = "(" + getMainWindow().getApp().getUserName() + ") ";
 			formattedAccountLabel += MartusCrypto.computeFormattedPublicCode40(accountKey);
-			fromField.setText(formattedAccountLabel);
 		} 
 		catch (Exception e)
 		{
 			throw new RuntimeException(e);
 		}
+		fromField.setText(formattedAccountLabel);
+	}
+
+	private void updateVersion(FxBulletin bulletinToShow)
+	{
+		versionField.setText(String.valueOf(bulletinToShow.getVersionProperty().get()));
+	}
+
+	private void updateTitle(FxBulletin bulletinToShow)
+	{
+		StringProperty newTitleProperty = bulletinToShow.getFieldProperty(Bulletin.TAGTITLE);
+		titleProperty = FxBindingHelpers.bindToOurPropertyField(newTitleProperty, titleField.textProperty(), titleProperty);
+		headerTitleLabel.textProperty().bind(titleProperty);
 	}
 
 	@FXML
