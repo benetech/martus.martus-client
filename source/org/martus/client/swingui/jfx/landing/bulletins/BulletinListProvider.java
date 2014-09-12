@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import java.util.Iterator;
 import java.util.Set;
 
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
@@ -79,7 +80,7 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 
 	public void updateContents()
 	{
-		loadBulletinData(getUniversalIds());
+		Platform.runLater(() -> loadBulletinData(getUniversalIds()));
 	}
 
 	private Set getUniversalIds()
