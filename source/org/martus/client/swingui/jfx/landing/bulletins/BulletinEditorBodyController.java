@@ -45,8 +45,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.MartusLocalization;
@@ -165,6 +167,12 @@ public class BulletinEditorBodyController extends FxController
 			title = sectionTitle;
 			
 			rows = new Vector<BulletinEditorRow>();
+			
+			ColumnConstraints labelColumnConstraints= new ColumnConstraints();
+			getColumnConstraints().add(labelColumnConstraints);
+			ColumnConstraints fieldColumnConstraints = new ColumnConstraints();
+			fieldColumnConstraints.setHgrow(Priority.ALWAYS);
+			getColumnConstraints().add(fieldColumnConstraints);
 		}
 		
 		public String getTitle()
@@ -257,7 +265,11 @@ public class BulletinEditorBodyController extends FxController
 		{
 			getLabelDestination().getChildren().add(createLabel(fieldSpec));
 			
-			fieldsNode.getChildren().add(createFieldForSpec(fieldSpec, property));
+			Node fieldNode = createFieldForSpec(fieldSpec, property);
+			fieldsNode.getChildren().add(fieldNode);
+			FieldType type = fieldSpec.getType();
+			if(type.isString() || type.isMultiline() || type.isMessage())
+				HBox.setHgrow(fieldNode, Priority.ALWAYS);
 		}
 
 		public HBox getLabelDestination()
@@ -370,7 +382,6 @@ public class BulletinEditorBodyController extends FxController
 		public Node createStringField(SimpleStringProperty property)
 		{
 			TextField textField = new TextField();
-			textField.setPrefColumnCount(NORMAL_TEXT_FIELD_WIDTH_IN_CHARACTERS);
 			textField.textProperty().bindBidirectional(property);
 			
 			return textField;
@@ -379,7 +390,6 @@ public class BulletinEditorBodyController extends FxController
 		private Node createMultilineField(SimpleStringProperty property)
 		{
 			TextArea textArea = new TextArea();
-			textArea.setPrefColumnCount(NORMAL_TEXT_FIELD_WIDTH_IN_CHARACTERS);
 			textArea.setPrefRowCount(MULTILINE_FIELD_HEIGHT_IN_ROWS);
 			textArea.setWrapText(true);
 			textArea.textProperty().bindBidirectional(property);
