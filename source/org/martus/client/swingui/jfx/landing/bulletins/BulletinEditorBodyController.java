@@ -46,6 +46,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.MartusLocalization;
@@ -58,6 +59,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.MessageFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
@@ -162,7 +164,7 @@ public class BulletinEditorBodyController extends FxController
 			localization = localizationToUse;
 			title = sectionTitle;
 			
-			currentRowIndex = 0;
+			rows = new Vector<BulletinEditorRow>();
 		}
 		
 		public String getTitle()
@@ -172,19 +174,51 @@ public class BulletinEditorBodyController extends FxController
 		
 		public void addField(FieldSpec fieldSpec, SimpleStringProperty property)
 		{
-			BulletinEditorRow currentRow = new BulletinEditorRow(getLocalization());
+			boolean wantsKeepWithPrevious = fieldSpec.keepWithPrevious();
+			boolean canKeepWithPrevious = canKeepWithNextOrPrevious(fieldSpec);
+			boolean keepWithPrevious = (wantsKeepWithPrevious && canKeepWithPrevious);
+			if(!keepWithPrevious)
+				endCurrentRow();
+				
+			if(currentRow == null)
+			{
+				currentRow = new BulletinEditorRow(getLocalization());
+				rows.add(currentRow);
+			}
+			
 			currentRow.addFieldToRow(fieldSpec, property);
-			Node label = currentRow.getLabelNode();
-			Node fields = currentRow.getFieldsNode();
-			if(label == null || fields == null)
-				return;
 			
-			add(label, LABEL_COLUMN, currentRowIndex);
-			add(fields, DATA_COLUMN, currentRowIndex);
-			
-			++currentRowIndex;
+			if(!canKeepWithNextOrPrevious(fieldSpec))
+				endCurrentRow();
 		}
 		
+		private void endCurrentRow()
+		{
+			if(currentRow == null)
+				return;
+			
+			Node label = currentRow.getLabelNode();
+			Node fields = currentRow.getFieldsNode();
+			currentRow = null;
+
+			int currentRowIndex = rows.size();
+			add(label, LABEL_COLUMN, currentRowIndex);
+			add(fields, DATA_COLUMN, currentRowIndex);
+		}
+		
+		private boolean canKeepWithNextOrPrevious(FieldSpec fieldSpec)
+		{
+			FieldType type = fieldSpec.getType();
+			
+			if(type.isBoolean() || type.isDate() || type.isDateRange())
+				return true;
+			
+			if(type.isDropdown() || type.isLanguageDropdown() || type.isNestedDropdown())
+				return true;
+			
+			return false;
+		}
+
 		private MartusLocalization getLocalization()
 		{
 			return localization;
@@ -195,7 +229,8 @@ public class BulletinEditorBodyController extends FxController
 
 		private MartusLocalization localization;
 		private String title;
-		private int currentRowIndex;
+		private BulletinEditorRow currentRow;
+		private Vector<BulletinEditorRow> rows;
 	}
 	
 	protected static class BulletinEditorRow
@@ -203,6 +238,9 @@ public class BulletinEditorBodyController extends FxController
 		public BulletinEditorRow(MartusLocalization localizationToUse)
 		{
 			localization = localizationToUse;
+			
+			labelNode = new HBox();
+			fieldsNode = new HBox();
 		}
 		
 		public Node getLabelNode()
@@ -217,8 +255,17 @@ public class BulletinEditorBodyController extends FxController
 		
 		public void addFieldToRow(FieldSpec fieldSpec, SimpleStringProperty property)
 		{
-			labelNode = createLabel(fieldSpec);
-			fieldsNode = createFieldForSpec(fieldSpec, property);
+			getLabelDestination().getChildren().add(createLabel(fieldSpec));
+			
+			fieldsNode.getChildren().add(createFieldForSpec(fieldSpec, property));
+		}
+
+		public HBox getLabelDestination()
+		{
+			if(labelNode.getChildren().isEmpty())
+				return labelNode;
+			
+			return fieldsNode;
 		}
 		
 		public Label createLabel(FieldSpec spec)
@@ -354,8 +401,8 @@ public class BulletinEditorBodyController extends FxController
 		private static final int MULTILINE_FIELD_HEIGHT_IN_ROWS = 5;
 
 		private MartusLocalization localization;
-		private Node labelNode;
-		private Node fieldsNode;
+		private HBox labelNode;
+		private HBox fieldsNode;
 	}
 
 	public void scrollToTop()
