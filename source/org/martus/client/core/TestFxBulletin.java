@@ -29,7 +29,6 @@ import java.util.Vector;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.Bulletin;
@@ -73,25 +72,6 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals(b2.getUniversalId(), universalIdProperty2.getValue());
 	}
 	
-	public void testAccountString() throws Exception
-	{
-		FxBulletin fxb = new FxBulletin();
-		StringProperty accountPropertyNull = fxb.accountProperty();
-		assertEquals(null, accountPropertyNull);
-		
-		Bulletin b = new BulletinForTesting(security);
-		fxb.copyDataFromBulletin(b);
-		StringProperty accountProperty = fxb.accountProperty();
-		assertEquals(b.getAccount(), accountProperty.getValue());
-		
-		Bulletin b2 = new BulletinForTesting(security);
-		assertEquals("Bulletins have same differnt Accounts?", b.getAccount(), b2.getAccount());
-		fxb.copyDataFromBulletin(b2);
-		assertEquals(null, accountProperty.getValue());
-		StringProperty accountProperty2 = fxb.accountProperty();
-		assertEquals(b2.getAccount(), accountProperty2.getValue());
-	}
-
 	public void testTitle() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin();
