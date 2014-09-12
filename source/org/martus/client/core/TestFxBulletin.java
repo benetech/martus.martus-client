@@ -141,7 +141,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals(beforeTags, afterTags);
 	}
 
-	public Vector<String> extractFieldTags(Bulletin b)
+	private Vector<String> extractFieldTags(Bulletin b)
 	{
 		Vector<String> fieldTags = new Vector<String>();
 		FieldSpecCollection topSpecs = b.getTopSectionFieldSpecs();
