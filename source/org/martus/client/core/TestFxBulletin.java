@@ -27,6 +27,7 @@ package org.martus.client.core;
 
 import java.util.Vector;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -35,6 +36,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinForTesting;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.TestCaseEnhanced;
 
@@ -51,6 +53,31 @@ public class TestFxBulletin extends TestCaseEnhanced
 		super.setUp();
 
 		security = MockMartusSecurity.createClient();
+	}
+	
+	public void testVerison() throws Exception
+	{
+		FxBulletin fxb = new FxBulletin();
+		IntegerProperty versionPropertyNull = fxb.getVersionProperty();
+		assertEquals(null, versionPropertyNull);
+		
+		Bulletin b = new BulletinForTesting(security);
+		fxb.copyDataFromBulletin(b);
+		IntegerProperty versionProperty = fxb.getVersionProperty();
+		assertEquals(Integer.valueOf(b.getVersion()), versionProperty.getValue());
+		assertEquals(Integer.valueOf(1), versionProperty.getValue());
+		
+		Bulletin bulletinWith3Versions = new BulletinForTesting(security);
+		bulletinWith3Versions.setSealed();
+		BulletinHistory localHistory = bulletinWith3Versions.getHistory();
+		localHistory.add("history1");
+		localHistory.add("history2");
+		bulletinWith3Versions.setHistory(localHistory);
+		assertEquals("Bulletin2 doesn't have 3 versions?", 3, bulletinWith3Versions.getVersion());
+		fxb.copyDataFromBulletin(bulletinWith3Versions);
+		versionProperty = fxb.getVersionProperty();
+		assertEquals(Integer.valueOf(bulletinWith3Versions.getVersion()), versionProperty.getValue());
+		assertEquals(Integer.valueOf(3), versionProperty.getValue());
 	}
 	
 	public void testUniversalId() throws Exception

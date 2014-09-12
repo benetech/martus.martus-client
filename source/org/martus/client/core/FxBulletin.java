@@ -28,7 +28,9 @@ package org.martus.client.core;
 import java.util.HashMap;
 import java.util.Vector;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import org.martus.common.FieldSpecCollection;
@@ -53,6 +55,8 @@ public class FxBulletin
 		
 		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>();
 		universalIdProperty().setValue(b.getUniversalId());
+		
+		versionProperty = new SimpleIntegerProperty(b.getVersion());
 
 		setFieldPropertiesFromBulletinSection(b, b.getTopSectionFieldSpecs());
 		setFieldPropertiesFromBulletinSection(b, b.getBottomSectionFieldSpecs());
@@ -76,6 +80,11 @@ public class FxBulletin
 	public ReadOnlyObjectWrapper<UniversalId> universalIdProperty()
 	{
 		return universalIdProperty;
+	}
+	
+	public IntegerProperty getVersionProperty()
+	{
+		return versionProperty;
 	}
 
 	public Vector<FieldSpec> getFieldSpecs()
@@ -131,4 +140,5 @@ public class FxBulletin
 	private ReadOnlyObjectWrapper<UniversalId> universalIdProperty;
 	private HashMap<String, SimpleStringProperty> fieldProperties;
 	private FieldSpecCollection fieldSpecs;
+	private IntegerProperty versionProperty;
 }
