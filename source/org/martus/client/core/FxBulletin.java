@@ -31,6 +31,7 @@ import java.util.Vector;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import org.martus.common.FieldSpecCollection;
@@ -124,10 +125,7 @@ public class FxBulletin
 		}
 
 		if(versionProperty != null)
-		{
-			versionProperty.setValue(null);
 			versionProperty = null;
-		}
 		
 		fieldProperties.forEach((key, property) -> property.setValue(null));
 		fieldProperties.clear();
@@ -157,7 +155,7 @@ public class FxBulletin
 	private ReadOnlyObjectWrapper<UniversalId> universalIdProperty;
 	private HashMap<String, SimpleStringProperty> fieldProperties;
 	private FieldSpecCollection fieldSpecs;
-	private SimpleIntegerProperty versionProperty;
+	private ReadOnlyIntegerProperty versionProperty;
 	private ReadOnlyObjectWrapper<HeadquartersKeys> authorizedToReadProperty;
 
 }
