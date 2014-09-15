@@ -28,6 +28,7 @@ package org.martus.client.core;
 import java.util.HashMap;
 import java.util.Vector;
 
+import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -81,7 +82,7 @@ public class FxBulletin
 		return universalIdProperty;
 	}
 	
-	public SimpleIntegerProperty getVersionProperty()
+	public ReadOnlyIntegerProperty getVersionProperty()
 	{
 		return versionProperty;
 	}
