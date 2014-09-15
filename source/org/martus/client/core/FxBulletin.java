@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.core;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Vector;
 
 import javafx.beans.property.ReadOnlyIntegerProperty;
@@ -38,6 +39,7 @@ import javafx.collections.ObservableList;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.packet.UniversalId;
@@ -48,8 +50,10 @@ import org.martus.common.packet.UniversalId;
  */
 public class FxBulletin
 {
-	public FxBulletin()
+	public FxBulletin(MiniLocalization localizationToUse)
 	{
+		localization = localizationToUse;
+		
 		fieldProperties = new HashMap<String, SimpleStringProperty>();
 	}
 
@@ -120,6 +124,24 @@ public class FxBulletin
 		return fieldProperties.get(tag);
 	}
 	
+	public void validateData() throws Exception
+	{
+		Iterator<String> it = fieldProperties.keySet().iterator();
+		while(it.hasNext())
+		{
+			String tag = it.next();
+			FieldSpec spec = fieldSpecs.findBytag(tag);
+			String value = getFieldProperty(tag).getValue();
+			String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, getLocalization());
+			validateField(spec, label, value);
+		}
+	}
+
+	private void validateField(FieldSpec spec, String displayableLabel, String value)
+	{
+		
+	}
+
 	private void clear()
 	{
 		if(universalIdProperty != null)
@@ -158,11 +180,17 @@ public class FxBulletin
 		SimpleStringProperty property = new SimpleStringProperty(value);
 		fieldProperties.put(fieldTag, property);
 	}
+	
+	public MiniLocalization getLocalization()
+	{
+		return localization;
+	}
 
+	private MiniLocalization localization;
+	
 	private ReadOnlyObjectWrapper<UniversalId> universalIdProperty;
 	private HashMap<String, SimpleStringProperty> fieldProperties;
 	private FieldSpecCollection fieldSpecs;
 	private ReadOnlyIntegerProperty versionProperty;
 	private ObservableList<HeadquartersKey> authorizedToReadKeys;
-
 }

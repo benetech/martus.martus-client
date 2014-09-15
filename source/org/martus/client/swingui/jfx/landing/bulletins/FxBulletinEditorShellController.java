@@ -47,7 +47,7 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	{
 		super(mainWindowToUse);
 		
-		fxBulletin = new FxBulletin();
+		fxBulletin = new FxBulletin(getLocalization());
 	}
 	
 	@Override
