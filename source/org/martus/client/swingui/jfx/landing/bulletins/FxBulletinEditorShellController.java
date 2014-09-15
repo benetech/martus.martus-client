@@ -111,8 +111,7 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	@Override
 	public boolean isBulletinModified() throws Exception
 	{
-		// TODO: Needs an implementation
-		return false;
+		return fxBulletin.hasBeenModified();
 	}
 
 	@Override
