@@ -30,6 +30,7 @@ import java.util.Vector;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
@@ -105,8 +106,8 @@ public class TestFxBulletin extends TestCaseEnhanced
 	public void testAuthorizedToRead() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin();
-		ReadOnlyObjectWrapper<HeadquartersKeys> headquartersKeysPropertyNull = fxb.authorizedToReadProperty();
-		assertEquals(null, headquartersKeysPropertyNull);
+		ObservableList<HeadquartersKey> headquartersKeysListNull = fxb.authorizedToReadList();
+		assertEquals(null, headquartersKeysListNull);
 		
 		Bulletin b = new BulletinForTesting(security);
 		HeadquartersKey key1 = new HeadquartersKey("account1");
@@ -116,8 +117,10 @@ public class TestFxBulletin extends TestCaseEnhanced
 		b.setAuthorizedToReadKeys(keys);
 		
 		fxb.copyDataFromBulletin(b);
-		ReadOnlyObjectWrapper<HeadquartersKeys> headquartersKeysProperty = fxb.authorizedToReadProperty();
-		assertEquals(b.getAuthorizedToReadKeys(), headquartersKeysProperty.getValue());
+		ObservableList<HeadquartersKey> headquartersKeysList = fxb.authorizedToReadList();
+		HeadquartersKeys keysFromBulletin = b.getAuthorizedToReadKeys();
+		assertEquals(keysFromBulletin.size(), headquartersKeysList.size());
+		assertEquals(key1, headquartersKeysList.get(0));
 		
 		Bulletin b2 = new BulletinForTesting(security);
 		HeadquartersKey key2 = new HeadquartersKey("account2");
@@ -125,13 +128,30 @@ public class TestFxBulletin extends TestCaseEnhanced
 		Vector newKeys = new Vector();
 		newKeys.add(key2);
 		newKeys.add(key3);
-		HeadquartersKeys b2keys = new HeadquartersKeys(keysToUse);
+		HeadquartersKeys b2keys = new HeadquartersKeys(newKeys);
 		b2.setAuthorizedToReadKeys(b2keys);
 
 		fxb.copyDataFromBulletin(b2);
-		assertEquals(null, headquartersKeysProperty.getValue());
-		ReadOnlyObjectWrapper<HeadquartersKeys> authorizedToReadProperty2 = fxb.authorizedToReadProperty();
-		assertEquals(b2.getAuthorizedToReadKeys(), authorizedToReadProperty2.getValue());
+		ObservableList<HeadquartersKey> headquartersKeysList2 = fxb.authorizedToReadList();
+		assertEquals(2, b2.getAuthorizedToReadKeys().size());
+		assertEquals(2, headquartersKeysList2.size());
+		assertEquals(b2.getAuthorizedToReadKeys().size(), headquartersKeysList2.size());
+		assertNotEquals(headquartersKeysList.size(), headquartersKeysList2.size());
+		assertTrue(headquartersKeysList2.contains(key2));
+		assertTrue(headquartersKeysList2.contains(key3));
+		assertFalse(headquartersKeysList2.contains(key1));
+		
+		headquartersKeysList2.add(key1);
+		assertTrue(headquartersKeysList2.contains(key1));
+		assertFalse(b2.getAuthorizedToReadKeys().contains(key1));
+		Bulletin copyOfModifiedBulletinB2 = new BulletinForTesting(security);
+		fxb.copyDataToBulletin(copyOfModifiedBulletinB2);
+		assertTrue("After copying data back into this new modified Bulletin we don't have key that was added?", copyOfModifiedBulletinB2.getAuthorizedToReadKeys().contains(key1));
+		assertEquals(3, headquartersKeysList2.size());
+		assertEquals(3, copyOfModifiedBulletinB2.getAuthorizedToReadKeys().size());
+		assertEquals(2, b2.getAuthorizedToReadKeys().size());
+		
+		
 	}
 
 	public void testTitle() throws Exception

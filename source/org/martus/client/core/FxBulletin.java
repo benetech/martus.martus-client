@@ -31,10 +31,12 @@ import java.util.Vector;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import org.martus.common.FieldSpecCollection;
+import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
@@ -57,7 +59,12 @@ public class FxBulletin
 		
 		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>(b.getUniversalId());
 		versionProperty = new SimpleIntegerProperty(b.getVersion());
-		authorizedToReadProperty = new ReadOnlyObjectWrapper<HeadquartersKeys>(b.getAuthorizedToReadKeys());
+		HeadquartersKeys hqKeys = b.getAuthorizedToReadKeys();
+		authorizedToReadKeys = FXCollections.observableArrayList();
+		for(int i = 0; i < hqKeys.size(); ++i)
+		{
+			authorizedToReadKeys.add(hqKeys.get(i));
+		}
 
 		setFieldPropertiesFromBulletinSection(b, b.getTopSectionFieldSpecs());
 		setFieldPropertiesFromBulletinSection(b, b.getBottomSectionFieldSpecs());
@@ -76,6 +83,9 @@ public class FxBulletin
 			modified.set(fieldTag, value);
 //			System.out.println("copyDataToBulletin " + fieldTag + ":" + value);
 		}
+		HeadquartersKeys modifiedKeys = new HeadquartersKeys();
+		authorizedToReadKeys.forEach(key -> modifiedKeys.add(key));
+		modified.setAuthorizedToReadKeys(modifiedKeys);
 	}
 
 	public ReadOnlyObjectWrapper<UniversalId> universalIdProperty()
@@ -88,11 +98,11 @@ public class FxBulletin
 		return versionProperty;
 	}
 
-	public ReadOnlyObjectWrapper<HeadquartersKeys> authorizedToReadProperty()
+	public ObservableList<HeadquartersKey> authorizedToReadList()
 	{
-		return authorizedToReadProperty;
+		return authorizedToReadKeys;
 	}
-
+	
 	public Vector<FieldSpec> getFieldSpecs()
 	{
 		Vector<FieldSpec> specs = new Vector<FieldSpec>();
@@ -118,11 +128,8 @@ public class FxBulletin
 			universalIdProperty = null;
 		}
 		
-		if(authorizedToReadProperty != null)
-		{
-			authorizedToReadProperty.setValue(null);
-			authorizedToReadProperty = null;
-		}
+		if(authorizedToReadKeys != null)
+			authorizedToReadKeys.clear();
 
 		if(versionProperty != null)
 			versionProperty = null;
@@ -156,6 +163,6 @@ public class FxBulletin
 	private HashMap<String, SimpleStringProperty> fieldProperties;
 	private FieldSpecCollection fieldSpecs;
 	private ReadOnlyIntegerProperty versionProperty;
-	private ReadOnlyObjectWrapper<HeadquartersKeys> authorizedToReadProperty;
+	private ObservableList<HeadquartersKey> authorizedToReadKeys;
 
 }

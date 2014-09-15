@@ -30,6 +30,7 @@ import java.util.ResourceBundle;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -42,8 +43,11 @@ import org.martus.client.swingui.jfx.generic.DialogWithNoButtonsShellController;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.data.FxBindingHelpers;
 import org.martus.client.swingui.jfx.landing.general.SelectTemplateController;
+import org.martus.common.ContactKeys;
+import org.martus.common.HeadquartersKey;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class BulletinEditorHeaderController extends FxController
 {
@@ -56,6 +60,15 @@ public class BulletinEditorHeaderController extends FxController
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
+		try
+		{
+			contactKeys = getApp().getContactKeys();
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+
 	}
 
 	@Override
@@ -66,18 +79,55 @@ public class BulletinEditorHeaderController extends FxController
 
 	public void showBulletin(FxBulletin bulletinToShow)
 	{
-			updateTitle(bulletinToShow);
-			updateVersion(bulletinToShow);			
-			updateFrom(bulletinToShow);
+		updateTitle(bulletinToShow);
+		updateVersion(bulletinToShow);			
+		updateFrom(bulletinToShow);
+		updateTo(bulletinToShow);
+	}
+
+	private void updateTo(FxBulletin bulletinToShow)
+	{
+		authorizedToContacts = bulletinToShow.authorizedToReadList();
+		authorizedToContacts.forEach(key -> AddKeyToField(key));
+	}
+	
+	private void AddKeyToField(HeadquartersKey key)
+	{
+		String currentContacts = toField.getText();
+		
+		if(contactKeys.containsKey(key.getPublicKey()))
+		{
+			try
+			{
+				String contactName = contactKeys.getLabelIfPresent(key.getPublicKey());
+				if(contactName.isEmpty())
+					contactName = key.getFormattedPublicCode();
+
+				if(!currentContacts.isEmpty())
+					currentContacts += ", ";
+				currentContacts += contactName;
+				toField.setText(currentContacts);
+			} 
+			catch (InvalidBase64Exception e)
+			{
+				logAndNotifyUnexpectedError(e);
+			}
+		}
+		else
+		{
+			//TODO What should we do?  Include someone we are not connected with?
+		}
 	}
 
 	private void updateFrom(FxBulletin bulletinToShow)
 	{
 		String accountKey = bulletinToShow.universalIdProperty().get().getAccountId();
-		String formattedAccountLabel = "(" + getMainWindow().getApp().getUserName() + ") ";
+		String formattedAccountLabel = getMainWindow().getApp().getUserName();
 		try
 		{
+			formattedAccountLabel += " (";
 			formattedAccountLabel += MartusCrypto.computeFormattedPublicCode40(accountKey);
+			formattedAccountLabel += ")";
 		} 
 		catch (Exception e)
 		{
@@ -135,4 +185,6 @@ public class BulletinEditorHeaderController extends FxController
 	Label versionField;
 	
 	private Property titleProperty;
+	private ObservableList<HeadquartersKey> authorizedToContacts;
+	private ContactKeys contactKeys;
 }
