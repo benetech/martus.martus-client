@@ -74,8 +74,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		try
 		{
 			fxb.validateData();
-			// FIXME: Not working yet. Commenting out so I can commit other work. 
-//			fail("Should have thrown for blank required fields");
+			fail("Should have thrown for blank required fields");
 		}
 		catch(RequiredFieldIsBlankException ignoreExpected)
 		{

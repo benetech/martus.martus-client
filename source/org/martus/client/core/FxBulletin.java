@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.core;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Vector;
 
 import javafx.beans.property.ReadOnlyIntegerProperty;
@@ -39,9 +38,12 @@ import javafx.collections.ObservableList;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
+import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldType;
 import org.martus.common.packet.UniversalId;
 
 /**
@@ -124,22 +126,27 @@ public class FxBulletin
 		return fieldProperties.get(tag);
 	}
 	
-	public void validateData() throws Exception
+	public void validateData() throws DataInvalidException
 	{
-		Iterator<String> it = fieldProperties.keySet().iterator();
-		while(it.hasNext())
+		for(int i = 0; i < fieldSpecs.size(); ++i)
 		{
-			String tag = it.next();
-			FieldSpec spec = fieldSpecs.findBytag(tag);
+			FieldSpec spec = fieldSpecs.get(i);
+			String tag = spec.getTag();
 			String value = getFieldProperty(tag).getValue();
 			String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, getLocalization());
 			validateField(spec, label, value);
 		}
 	}
 
-	private void validateField(FieldSpec spec, String displayableLabel, String value)
+	private void validateField(FieldSpec spec, String displayableLabel, String fieldDataValue) throws DataInvalidException
 	{
-		
+		FieldType type = spec.getType();
+		if(type.isGrid() || type.isDate() || type.isDateRange())
+		{
+			MartusLogger.logError("******* Validation not handled yet for " + type.getTypeName());
+			return;
+		}
+		spec.validate(displayableLabel, fieldDataValue, getLocalization());
 	}
 
 	private void clear()

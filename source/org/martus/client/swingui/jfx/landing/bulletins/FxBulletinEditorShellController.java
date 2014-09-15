@@ -103,7 +103,9 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	@Override
 	public void validateData() throws DataInvalidException
 	{
-		// TODO: Needs an implementation
+		fxBulletin.validateData();
+		// TODO: The old code requested focus. In fx, it would be easier for 
+		// us to just outline the field with red or something else visual
 	}
 
 	@Override
