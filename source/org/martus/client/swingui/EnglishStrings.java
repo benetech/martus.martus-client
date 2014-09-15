@@ -379,6 +379,8 @@ public class EnglishStrings
 "field:EmptyTrashConfirmation=This will permanently remove these records from your local computer. This does not affect the records on the server.",
 "field:EmptyTrashConfirmationItemsInOtherFolders=Note: some records here are linked in other #Cases# and those copies will not be permanently removed.",
 
+"field:ContactNamesSeparator=,",
+
 "button:export=Export",
 "button:help=Help",
 "button:create=Create",
