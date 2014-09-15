@@ -62,15 +62,6 @@ public class BulletinEditorHeaderController extends FxController
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		try
-		{
-			contactKeys = getApp().getContactKeys();
-		} 
-		catch (Exception e)
-		{
-			logAndNotifyUnexpectedError(e);
-		}
-
 	}
 
 	@Override
@@ -89,18 +80,26 @@ public class BulletinEditorHeaderController extends FxController
 
 	private void updateTo(FxBulletin bulletinToShow)
 	{
-		authorizedToContacts = bulletinToShow.authorizedToReadList();
-		Vector listOfAuthorizedAccounts = new Vector();
-		authorizedToContacts.forEach(key -> AddKeyToField(key, listOfAuthorizedAccounts));
-		toField.setText(String.join(getLocalization().getFieldLabel("ContactNamesSeparator"), listOfAuthorizedAccounts));
+		try
+		{
+			ContactKeys ourContacts = getApp().getContactKeys();
+			authorizedToContacts = bulletinToShow.authorizedToReadList();
+			Vector listOfAuthorizedAccounts = new Vector();
+			authorizedToContacts.forEach(key -> AddKeyToField(key, ourContacts, listOfAuthorizedAccounts));
+			toField.setText(String.join(getLocalization().getFieldLabel("ContactNamesSeparator"), listOfAuthorizedAccounts));
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
 	}
 	
-	private void AddKeyToField(HeadquartersKey key, Vector currentListOfAccounts)
+	private void AddKeyToField(HeadquartersKey key, ContactKeys ourContacts, Vector currentListOfAccounts)
 	{
-		String contactName = contactKeys.getLabelIfPresent(key.getPublicKey());
+		String contactName = ourContacts.getLabelIfPresent(key.getPublicKey());
 		if(contactName.isEmpty())
 		{
-			contactName += addWarningIfNotInContacts(key);
+			contactName += addWarningIfNotInContacts(key, ourContacts);
 			try
 			{
 				contactName += key.getFormattedPublicCode();
@@ -113,9 +112,9 @@ public class BulletinEditorHeaderController extends FxController
 		currentListOfAccounts.add(contactName);
 	}
 
-	private String addWarningIfNotInContacts(HeadquartersKey key)
+	private String addWarningIfNotInContacts(HeadquartersKey key, ContactKeys ourContacts)
 	{
-		if(contactKeys.containsKey(key.getPublicKey()))
+		if(ourContacts.containsKey(key.getPublicKey()))
 			return "";
 
 		String notInContactsWarning = getLocalization().getFieldLabel("HQNotConfigured");
@@ -194,5 +193,4 @@ public class BulletinEditorHeaderController extends FxController
 	
 	private Property titleProperty;
 	private ObservableList<HeadquartersKey> authorizedToContacts;
-	private ContactKeys contactKeys;
 }
