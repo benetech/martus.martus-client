@@ -28,6 +28,7 @@ package org.martus.client.core;
 import java.util.Vector;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -60,12 +61,12 @@ public class TestFxBulletin extends TestCaseEnhanced
 	public void testVerison() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin();
-		IntegerProperty versionPropertyNull = fxb.getVersionProperty();
+		ReadOnlyIntegerProperty versionPropertyNull = fxb.getVersionProperty();
 		assertEquals(null, versionPropertyNull);
 		
 		Bulletin b = new BulletinForTesting(security);
 		fxb.copyDataFromBulletin(b);
-		IntegerProperty versionProperty = fxb.getVersionProperty();
+		ReadOnlyIntegerProperty versionProperty = fxb.getVersionProperty();
 		assertEquals(Integer.valueOf(b.getVersion()), versionProperty.getValue());
 		assertEquals(Integer.valueOf(1), versionProperty.getValue());
 		
@@ -77,7 +78,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		bulletinWith3Versions.setHistory(localHistory);
 		assertEquals("Bulletin2 doesn't have 3 versions?", 3, bulletinWith3Versions.getVersion());
 		fxb.copyDataFromBulletin(bulletinWith3Versions);
-		assertEquals(Integer.valueOf(0), versionProperty.getValue());
+		assertEquals("This is a readOnlyInteger so it will not change", Integer.valueOf(1), versionProperty.getValue());
 		versionProperty = fxb.getVersionProperty();
 		assertEquals(Integer.valueOf(bulletinWith3Versions.getVersion()), versionProperty.getValue());
 		assertEquals(Integer.valueOf(3), versionProperty.getValue());
