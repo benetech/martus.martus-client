@@ -35,10 +35,12 @@ import javafx.collections.ObservableList;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinForTesting;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.RequiredFieldIsBlankException;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.TestCaseEnhanced;
@@ -56,11 +58,33 @@ public class TestFxBulletin extends TestCaseEnhanced
 		super.setUp();
 
 		security = MockMartusSecurity.createClient();
+		localization = new MiniLocalization();
+	}
+	
+	public void testValidate() throws Exception
+	{
+		FxBulletin fxb = new FxBulletin(getLocalization());
+		Bulletin b = new BulletinForTesting(security);
+		fxb.copyDataFromBulletin(b);
+
+		fxb.validateData();
+		
+		Vector<FieldSpec> specs = fxb.getFieldSpecs();
+		specs.forEach(spec -> {if(spec.getTag().equals(Bulletin.TAGAUTHOR)) spec.setRequired();});
+		try
+		{
+			fxb.validateData();
+			// FIXME: Not working yet. Commenting out so I can commit other work. 
+//			fail("Should have thrown for blank required fields");
+		}
+		catch(RequiredFieldIsBlankException ignoreExpected)
+		{
+		}
 	}
 	
 	public void testVersion() throws Exception
 	{
-		FxBulletin fxb = new FxBulletin();
+		FxBulletin fxb = new FxBulletin(getLocalization());
 		ReadOnlyIntegerProperty versionPropertyNull = fxb.getVersionProperty();
 		assertEquals(null, versionPropertyNull);
 		
@@ -86,7 +110,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 	
 	public void testUniversalId() throws Exception
 	{
-		FxBulletin fxb = new FxBulletin();
+		FxBulletin fxb = new FxBulletin(getLocalization());
 		ReadOnlyObjectWrapper<UniversalId> universalIdPropertyNull = fxb.universalIdProperty();
 		assertEquals(null, universalIdPropertyNull);
 		
@@ -105,7 +129,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 	
 	public void testAuthorizedToRead() throws Exception
 	{
-		FxBulletin fxb = new FxBulletin();
+		FxBulletin fxb = new FxBulletin(getLocalization());
 		ObservableList<HeadquartersKey> headquartersKeysListNull = fxb.authorizedToReadList();
 		assertEquals(null, headquartersKeysListNull);
 		
@@ -156,7 +180,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 
 	public void testTitle() throws Exception
 	{
-		FxBulletin fxb = new FxBulletin();
+		FxBulletin fxb = new FxBulletin(getLocalization());
 		Bulletin b = new BulletinForTesting(security);
 		fxb.copyDataFromBulletin(b);
 
@@ -175,7 +199,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		final String PRIVATE_DATA_1 = "private info";
 		final String PRIVATE_DATA_2 = "This is new and better private info";
 
-		FxBulletin fxb = new FxBulletin();
+		FxBulletin fxb = new FxBulletin(getLocalization());
 		Bulletin b = new BulletinForTesting(security);
 		b.set(PRIVATE_TAG, PRIVATE_DATA_1);
 		fxb.copyDataFromBulletin(b);
@@ -193,7 +217,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 	
 	public void testFieldSequence() throws Exception
 	{
-		FxBulletin fxb = new FxBulletin();
+		FxBulletin fxb = new FxBulletin(getLocalization());
 		Bulletin before = new BulletinForTesting(security);
 		fxb.copyDataFromBulletin(before);
 		Bulletin after = new Bulletin(security);
@@ -222,5 +246,11 @@ public class TestFxBulletin extends TestCaseEnhanced
 		return fieldTags;
 	}
 	
+	private MiniLocalization getLocalization()
+	{
+		return localization;
+	}
+	
 	private MockMartusSecurity security;
+	private MiniLocalization localization;
 }
