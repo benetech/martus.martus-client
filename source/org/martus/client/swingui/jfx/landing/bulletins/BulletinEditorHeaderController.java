@@ -38,6 +38,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import org.martus.client.core.FxBulletin;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.generic.DialogWithNoButtonsShellController;
@@ -96,28 +97,33 @@ public class BulletinEditorHeaderController extends FxController
 	
 	private void AddKeyToField(HeadquartersKey key, ContactKeys ourContacts, Vector currentListOfAccounts)
 	{
+		try
+		{
+			currentListOfAccounts.add(getContactsName(getLocalization(), key, ourContacts));
+		} 
+		catch (InvalidBase64Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
+
+	static public String getContactsName(MartusLocalization localization, HeadquartersKey key, ContactKeys ourContacts) throws InvalidBase64Exception  
+	{
 		String contactName = ourContacts.getLabelIfPresent(key.getPublicKey());
 		if(contactName.isEmpty())
 		{
-			contactName += addWarningIfNotInContacts(key, ourContacts);
-			try
-			{
-				contactName += key.getFormattedPublicCode();
-			} 		
-			catch (InvalidBase64Exception e)
-			{
-				logAndNotifyUnexpectedError(e);
-			}
+			contactName += addWarningIfNotInContacts(localization, key, ourContacts);
+			contactName += key.getFormattedPublicCode();
 		}
-		currentListOfAccounts.add(contactName);
+		return contactName;
 	}
 
-	private String addWarningIfNotInContacts(HeadquartersKey key, ContactKeys ourContacts)
+	static private String addWarningIfNotInContacts(MartusLocalization localization, HeadquartersKey key, ContactKeys ourContacts)
 	{
 		if(ourContacts.containsKey(key.getPublicKey()))
 			return "";
 
-		String notInContactsWarning = getLocalization().getFieldLabel("HQNotConfigured");
+		String notInContactsWarning = localization.getFieldLabel("HQNotConfigured");
 		notInContactsWarning = " ";
 		return notInContactsWarning;
 	}
@@ -169,7 +175,9 @@ public class BulletinEditorHeaderController extends FxController
 	@FXML
 	private void onAddRemoveContact(ActionEvent event) 
 	{
-		BulletinContactsController contactsController = new BulletinContactsController(getMainWindow());
+		Vector currentAuthorizedKeys = new Vector();
+		authorizedToContacts.forEach(key -> currentAuthorizedKeys.add(key));
+		BulletinContactsController contactsController = new BulletinContactsController(getMainWindow(), currentAuthorizedKeys);
 		if(showModalYesNoDialog("BulletinContacts", EnglishCommonStrings.OK, EnglishCommonStrings.CANCEL, contactsController))
 		{
 			

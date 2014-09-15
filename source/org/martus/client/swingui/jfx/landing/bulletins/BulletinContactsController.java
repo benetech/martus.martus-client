@@ -25,6 +25,12 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.Vector;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -32,13 +38,53 @@ import javafx.scene.control.ListView;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.common.ContactKeys;
+import org.martus.common.HeadquartersKey;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class BulletinContactsController extends FxController
 {
 
-	public BulletinContactsController(UiMainWindow mainWindowToUse)
+	public BulletinContactsController(UiMainWindow mainWindowToUse, Vector currentAuthorizedKeysToUse)
 	{
 		super(mainWindowToUse);
+		currentAuthorizedKeys = currentAuthorizedKeysToUse;
+		availableListAuthorizedToReadKeys = FXCollections.observableArrayList();
+	}
+	
+	public Vector getCurrentAuthorizedKeys()
+	{
+		return currentAuthorizedKeys;
+	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle bundle)
+	{
+		super.initialize(location, bundle);
+		try
+		{
+			ContactKeys ourContacts = getApp().getContactKeys();
+			currentAuthorizedKeys.forEach(key -> addKeyToAvailableList(key, ourContacts));
+			contactsList.setItems(availableListAuthorizedToReadKeys);
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
+
+	private void addKeyToAvailableList(HeadquartersKey key, ContactKeys ourContacts)
+	{
+		try
+		{
+			String contactsName = BulletinEditorHeaderController.getContactsName(getLocalization(), key, ourContacts);
+			CheckBox contactCheckbox = new CheckBox(contactsName);
+			availableListAuthorizedToReadKeys.add(contactCheckbox);
+		} 
+		catch (InvalidBase64Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
 	}
 
 	@Override
@@ -50,13 +96,16 @@ public class BulletinContactsController extends FxController
 	@FXML
 	private void onSelectAll(ActionEvent event) 
 	{
-
+		
 	}
 
 	@FXML
-	CheckBox selectAll;
+	private CheckBox selectAll;
 	
 	@FXML
-	ListView contactsList;
+	private ListView contactsList;
+	
+	private Vector<HeadquartersKey> currentAuthorizedKeys;
+	private ObservableList<CheckBox> availableListAuthorizedToReadKeys;
 	
 }
