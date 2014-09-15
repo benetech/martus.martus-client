@@ -29,9 +29,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
-import javafx.beans.property.Property;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -332,20 +331,15 @@ public class BulletinEditorBodyController extends FxController
 			ObservableList<ChoiceItem> choices = FXCollections.observableArrayList();
 			choices.addAll(choicesList);
 			ChoiceBox<ChoiceItem> choiceBox = new ChoiceBox<ChoiceItem>(choices);
+			String currentSelectedCode = property.getValue();
+			ChoiceItem currentSelectedItem = new ChoiceItemStringConverter(rawChoices).fromString(currentSelectedCode);
+			choiceBox.getSelectionModel().select(currentSelectedItem);
 
-			Property<ChoiceItem> choiceItemCodeProperty = createChoiceItemStringIntermediaryProperty(property, rawChoices);
-			choiceBox.valueProperty().bindBidirectional(choiceItemCodeProperty);
-			
+			ReadOnlyObjectProperty<ChoiceItem> selectedItemProperty = choiceBox.getSelectionModel().selectedItemProperty();
+			selectedItemProperty.addListener(
+				(observable, oldValue, newValue) ->	property.setValue(newValue.getCode())
+			);
 			return choiceBox;
-		}
-
-		private Property<ChoiceItem> createChoiceItemStringIntermediaryProperty(SimpleStringProperty property, ChoiceItem[] rawChoices)
-		{
-			ChoiceItemStringConverter converter = new ChoiceItemStringConverter(rawChoices);
-			ChoiceItem existingValue = converter.fromString(property.getValue());
-			Property<ChoiceItem> choiceItemStringProperty = new SimpleObjectProperty<ChoiceItem>(existingValue);
-			property.bindBidirectional(choiceItemStringProperty, converter);
-			return choiceItemStringProperty;
 		}
 
 		private Node createBooleanField(SimpleStringProperty property)
