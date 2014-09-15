@@ -61,6 +61,25 @@ public class TestFxBulletin extends TestCaseEnhanced
 		localization = new MiniLocalization();
 	}
 	
+	public void testHasBeenModified() throws Exception
+	{
+		FxBulletin fxb = new FxBulletin(getLocalization());
+		assertFalse(fxb.hasBeenModified());
+		
+		Bulletin b = new BulletinForTesting(security);
+		fxb.copyDataFromBulletin(b);
+		assertFalse(fxb.hasBeenModified());
+		
+		SimpleStringProperty authorProperty = fxb.getFieldProperty(Bulletin.TAGAUTHOR);
+		assertEquals("", authorProperty.getValue());
+		
+		authorProperty.setValue("Something else");
+		assertTrue(fxb.hasBeenModified());
+		
+		authorProperty.setValue("");
+		assertTrue(fxb.hasBeenModified());
+	}
+	
 	public void testValidate() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin(getLocalization());

@@ -138,6 +138,11 @@ public class FxBulletin
 		}
 	}
 
+	public boolean hasBeenModified()
+	{
+		return hasBeenModified;
+	}
+
 	private void validateField(FieldSpec spec, String displayableLabel, String fieldDataValue) throws DataInvalidException
 	{
 		FieldType type = spec.getType();
@@ -151,6 +156,8 @@ public class FxBulletin
 
 	private void clear()
 	{
+		hasBeenModified = false;
+		
 		if(universalIdProperty != null)
 		{
 			universalIdProperty.setValue(null);
@@ -186,6 +193,7 @@ public class FxBulletin
 	{
 		SimpleStringProperty property = new SimpleStringProperty(value);
 		fieldProperties.put(fieldTag, property);
+		property.addListener((observable, newValue, oldValue) -> hasBeenModified = true);
 	}
 	
 	public MiniLocalization getLocalization()
@@ -194,6 +202,7 @@ public class FxBulletin
 	}
 
 	private MiniLocalization localization;
+	private boolean hasBeenModified;
 	
 	private ReadOnlyObjectWrapper<UniversalId> universalIdProperty;
 	private HashMap<String, SimpleStringProperty> fieldProperties;
