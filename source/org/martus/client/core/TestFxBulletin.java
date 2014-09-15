@@ -58,7 +58,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		security = MockMartusSecurity.createClient();
 	}
 	
-	public void testVerison() throws Exception
+	public void testVersion() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin();
 		ReadOnlyIntegerProperty versionPropertyNull = fxb.getVersionProperty();
