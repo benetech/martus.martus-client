@@ -29,8 +29,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -344,22 +344,17 @@ public class BulletinEditorBodyController extends FxController
 
 		private Node createBooleanField(SimpleStringProperty property)
 		{
-			SimpleBooleanProperty booleanProperty = createBooleanStringIntermediaryProperty(property);
 			CheckBox checkBox = new CheckBox();
-			checkBox.selectedProperty().bindBidirectional(booleanProperty);
-			
+			BooleanStringConverter converter = new BooleanStringConverter();
+			checkBox.selectedProperty().setValue(converter.fromString(property.getValue()));
+
+			BooleanProperty selectedStateProperty = checkBox.selectedProperty();
+			selectedStateProperty.addListener(
+				(observable, oldValue, newValue) -> property.setValue(converter.toString(newValue))
+			);
 			return checkBox;
 		}
 
-		private SimpleBooleanProperty createBooleanStringIntermediaryProperty(SimpleStringProperty property)
-		{
-			BooleanStringConverter booleanStringConverter = new BooleanStringConverter();
-			Boolean existingValue = booleanStringConverter.fromString(property.getValue());
-			SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(existingValue);
-			property.bindBidirectional(booleanProperty, booleanStringConverter);
-			return booleanProperty;
-		}
-		
 		private Node createMessageField(FieldSpec spec)
 		{
 			String message = ((MessageFieldSpec)(spec)).getMessage();
