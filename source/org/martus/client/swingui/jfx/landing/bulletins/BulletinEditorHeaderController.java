@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Vector;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
@@ -44,6 +45,7 @@ import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.data.FxBindingHelpers;
 import org.martus.client.swingui.jfx.landing.general.SelectTemplateController;
 import org.martus.common.ContactKeys;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
@@ -88,35 +90,37 @@ public class BulletinEditorHeaderController extends FxController
 	private void updateTo(FxBulletin bulletinToShow)
 	{
 		authorizedToContacts = bulletinToShow.authorizedToReadList();
-		authorizedToContacts.forEach(key -> AddKeyToField(key));
+		Vector listOfAuthorizedAccounts = new Vector();
+		authorizedToContacts.forEach(key -> AddKeyToField(key, listOfAuthorizedAccounts));
+		toField.setText(String.join(getLocalization().getFieldLabel("ContactNamesSeparator"), listOfAuthorizedAccounts));
 	}
 	
-	private void AddKeyToField(HeadquartersKey key)
+	private void AddKeyToField(HeadquartersKey key, Vector currentListOfAccounts)
 	{
-		String currentContacts = toField.getText();
-		
-		if(contactKeys.containsKey(key.getPublicKey()))
+		String contactName = contactKeys.getLabelIfPresent(key.getPublicKey());
+		if(contactName.isEmpty())
 		{
+			contactName += addWarningIfNotInContacts(key);
 			try
 			{
-				String contactName = contactKeys.getLabelIfPresent(key.getPublicKey());
-				if(contactName.isEmpty())
-					contactName = key.getFormattedPublicCode();
-
-				if(!currentContacts.isEmpty())
-					currentContacts += ", ";
-				currentContacts += contactName;
-				toField.setText(currentContacts);
-			} 
+				contactName += key.getFormattedPublicCode();
+			} 		
 			catch (InvalidBase64Exception e)
 			{
 				logAndNotifyUnexpectedError(e);
 			}
 		}
-		else
-		{
-			//TODO What should we do?  Include someone we are not connected with?
-		}
+		currentListOfAccounts.add(contactName);
+	}
+
+	private String addWarningIfNotInContacts(HeadquartersKey key)
+	{
+		if(contactKeys.containsKey(key.getPublicKey()))
+			return "";
+
+		String notInContactsWarning = getLocalization().getFieldLabel("HQNotConfigured");
+		notInContactsWarning = " ";
+		return notInContactsWarning;
 	}
 
 	private void updateFrom(FxBulletin bulletinToShow)
@@ -166,7 +170,11 @@ public class BulletinEditorHeaderController extends FxController
 	@FXML
 	private void onAddRemoveContact(ActionEvent event) 
 	{
-
+		BulletinContactsController contactsController = new BulletinContactsController(getMainWindow());
+		if(showModalYesNoDialog("BulletinContacts", EnglishCommonStrings.OK, EnglishCommonStrings.CANCEL, contactsController))
+		{
+			
+		}
 	}
 	
 	@FXML
