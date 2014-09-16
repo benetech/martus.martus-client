@@ -131,19 +131,21 @@ public class BulletinEditorHeaderController extends FxController
 
 	private void updateFrom(FxBulletin bulletinToShow)
 	{
-		String accountKey = bulletinToShow.universalIdProperty().get().getAccountId();
-		String formattedAccountLabel = getMainWindow().getApp().getUserName();
 		try
 		{
-			formattedAccountLabel += " (";
-			formattedAccountLabel += MartusCrypto.computeFormattedPublicCode40(accountKey);
-			formattedAccountLabel += ")";
+			String accountId = getMainWindow().getApp().getUserName();
+			String accountKey = bulletinToShow.universalIdProperty().get().getAccountId();
+			String publicCode = MartusCrypto.computeFormattedPublicCode40(accountKey);
+			HashMap tokenReplacement = new HashMap();
+			tokenReplacement.put("#AccountId#", accountId);
+			tokenReplacement.put("#PublicCode#", publicCode);
+			String accountNameWithPublicCode = getLocalization().getFieldLabel("AccountIdWithPublicCode");
+			fromField.setText(TokenReplacement.replaceTokens(accountNameWithPublicCode, tokenReplacement));
 		} 
 		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 		}
-		fromField.setText(formattedAccountLabel);
 	}
 
 	private void updateVersion(FxBulletin bulletinToShow)
