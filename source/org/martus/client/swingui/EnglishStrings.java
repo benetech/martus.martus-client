@@ -662,7 +662,7 @@ public class EnglishStrings
 "field:ContactVerifyNow=Verify Now",
 "field:ContactVerified=Verified",
 "field:AuthorizedToReadNotInContacts=#PublicCode# (not currently in contacts)",
-
+"field:AccountIdWithPublicCode=#AccountId# #PublicCode#",
 "wintitle:ExportEncryptedBulletin=Export Encrypted",
 
 "wintitle:IncludePrivateData=Include Private Data",
