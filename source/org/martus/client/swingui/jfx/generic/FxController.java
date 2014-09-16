@@ -202,6 +202,16 @@ abstract public class FxController implements Initializable
 		DialogWithCloseShellController dialogShellController = new DialogWithCloseShellController(getMainWindow(), contentController);
 		doAction(dialogShellController);
 	}
+	
+	public boolean showConfirmationDialog(String tag)
+	{
+		String message = getLocalization().getFieldLabel("confirm" + tag + "cause");
+		message += "\n\n";
+		message += getLocalization().getFieldLabel("confirm" + tag + "effect");
+		message += "\n\n";
+		message += getLocalization().getFieldLabel("confirmquestion");
+		return showConfirmationDialog(tag, message);
+	}
 
 	public boolean showConfirmationDialog(String titleTag, String message)
 	{
