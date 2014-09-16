@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.net.URL;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -54,6 +55,13 @@ public class BulletinContactsController extends FxController
 	
 	public Vector getCurrentAuthorizedKeys()
 	{
+		currentAuthorizedKeys.clear();
+		for (Iterator newContactsList = availableListAuthorizedToReadKeys.iterator(); newContactsList.hasNext();)
+		{
+			ContactKeyCheckBox contact = (ContactKeyCheckBox) newContactsList.next();
+			if(contact.isSelected())
+				currentAuthorizedKeys.add(contact.getKey());
+		}
 		return currentAuthorizedKeys;
 	}
 	
@@ -100,12 +108,28 @@ public class BulletinContactsController extends FxController
 		}
 	}
 
+	private class ContactKeyCheckBox extends CheckBox
+	{
+		public ContactKeyCheckBox(HeadquartersKey keyToUse, String label)
+		{
+			super(label);
+			key = keyToUse;
+		}
+		
+		public HeadquartersKey getKey()
+		{
+			return key;
+		}
+		
+		private HeadquartersKey key;
+	}
+	
 	private void addKeyToAvailableList(HeadquartersKey key, ContactKeys ourContacts, boolean contactShouldBePreSelected)
 	{
 		try
 		{
 			String contactsName = BulletinEditorHeaderController.getContactsName(getLocalization(), key, ourContacts);
-			CheckBox contactCheckbox = new CheckBox(contactsName);
+			ContactKeyCheckBox contactCheckbox = new ContactKeyCheckBox(key, contactsName);
 			contactCheckbox.selectedProperty().set(contactShouldBePreSelected);
 			availableListAuthorizedToReadKeys.add(contactCheckbox);
 		} 
@@ -133,9 +157,10 @@ public class BulletinContactsController extends FxController
 	
 	@FXML
 	private ListView contactsList;
+
 	private final boolean SELECT_CONTACT_INITIALLY = true;
 	private final boolean ADDITIONAL_CONTACT_NOT_SELECTED_INITIALLY = false;
+
 	private Vector<HeadquartersKey> currentAuthorizedKeys;
-	private ObservableList<CheckBox> availableListAuthorizedToReadKeys;
-	
+	private ObservableList<ContactKeyCheckBox> availableListAuthorizedToReadKeys;
 }
