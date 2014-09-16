@@ -12,10 +12,13 @@
 		<StackPane fx:id="bodyPane" />
 	</center>
 	<bottom>
-		<HBox>
-			<Button text="%Button.send" onAction="#onSaveSealed" />
-			<Button text="%Button.savedraft" onAction="#onSaveDraft" />
-			<Button text="%Button.cancel" onAction="#onCancel" />
-		</HBox>
+		<VBox>
+			<StackPane fx:id="footerPane" />
+			<HBox>
+				<Button text="%Button.send" onAction="#onSaveSealed" />
+				<Button text="%Button.savedraft" onAction="#onSaveDraft" />
+				<Button text="%Button.cancel" onAction="#onCancel" />
+			</HBox>
+		</VBox>
 	</bottom>
 </BorderPane>
