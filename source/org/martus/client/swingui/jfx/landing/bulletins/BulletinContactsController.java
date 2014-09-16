@@ -124,7 +124,8 @@ public class BulletinContactsController extends FxController
 	@FXML
 	private void onSelectAll(ActionEvent event) 
 	{
-		
+		boolean selectAllItems = selectAll.isSelected();
+		availableListAuthorizedToReadKeys.forEach(checkbox -> checkbox.selectedProperty().set(selectAllItems));
 	}
 
 	@FXML
