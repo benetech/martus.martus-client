@@ -82,6 +82,8 @@ public class BulletinEditorBodyController extends FxController
 		FxFormCreator creator = new FxFormCreator(getLocalization());
 		Node root = creator.createFormFromBulletin(bulletinToShow);
 		scrollPane.setContent(root);
+		
+		scrollPane.setFitToWidth(true);
 	}
 	
 	protected static class FxFormCreator
@@ -168,9 +170,13 @@ public class BulletinEditorBodyController extends FxController
 			rows = new Vector<BulletinEditorRow>();
 			
 			ColumnConstraints labelColumnConstraints= new ColumnConstraints();
-			getColumnConstraints().add(labelColumnConstraints);
+			labelColumnConstraints.setHgrow(Priority.NEVER);
+			labelColumnConstraints.minWidthProperty().bind(labelColumnConstraints.prefWidthProperty());
+
 			ColumnConstraints fieldColumnConstraints = new ColumnConstraints();
-			fieldColumnConstraints.setHgrow(Priority.ALWAYS);
+			fieldColumnConstraints.setHgrow(Priority.SOMETIMES);
+
+			getColumnConstraints().add(labelColumnConstraints);
 			getColumnConstraints().add(fieldColumnConstraints);
 		}
 		
@@ -359,7 +365,7 @@ public class BulletinEditorBodyController extends FxController
 		{
 			String message = ((MessageFieldSpec)(spec)).getMessage();
 			TextArea textArea = new TextArea(message);
-			textArea.setPrefColumnCount(NORMAL_TEXT_FIELD_WIDTH_IN_CHARACTERS);
+			textArea.setPrefColumnCount(MINIMUM_REASONABLE_COLUMN_COUNT);
 			textArea.setPrefRowCount(1);
 			textArea.setFocusTraversable(false);
 			textArea.setWrapText(true);
@@ -371,6 +377,7 @@ public class BulletinEditorBodyController extends FxController
 		public Node createStringField(SimpleStringProperty property)
 		{
 			TextField textField = new TextField();
+			textField.setPrefColumnCount(MINIMUM_REASONABLE_COLUMN_COUNT);
 			textField.textProperty().bindBidirectional(property);
 			
 			return textField;
@@ -379,6 +386,7 @@ public class BulletinEditorBodyController extends FxController
 		private Node createMultilineField(SimpleStringProperty property)
 		{
 			TextArea textArea = new TextArea();
+			textArea.setPrefColumnCount(MINIMUM_REASONABLE_COLUMN_COUNT);
 			textArea.setPrefRowCount(MULTILINE_FIELD_HEIGHT_IN_ROWS);
 			textArea.setWrapText(true);
 			textArea.textProperty().bindBidirectional(property);
@@ -396,7 +404,7 @@ public class BulletinEditorBodyController extends FxController
 			return localization;
 		}
 
-		private static final int NORMAL_TEXT_FIELD_WIDTH_IN_CHARACTERS = 60;
+		private static final int MINIMUM_REASONABLE_COLUMN_COUNT = 10;
 		private static final int MULTILINE_FIELD_HEIGHT_IN_ROWS = 5;
 
 		private MartusLocalization localization;
