@@ -79,6 +79,7 @@ public class BulletinContactsController extends FxController
 		{
 			String contactsName = BulletinEditorHeaderController.getContactsName(getLocalization(), key, ourContacts);
 			CheckBox contactCheckbox = new CheckBox(contactsName);
+			contactCheckbox.selectedProperty().set(true);
 			availableListAuthorizedToReadKeys.add(contactCheckbox);
 		} 
 		catch (InvalidBase64Exception e)
