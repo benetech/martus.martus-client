@@ -49,20 +49,20 @@ public class BulletinContactsController extends FxController
 	public BulletinContactsController(UiMainWindow mainWindowToUse, Vector currentAuthorizedKeysToUse)
 	{
 		super(mainWindowToUse);
-		currentAuthorizedKeys = currentAuthorizedKeysToUse;
+		initialAuthorizedKeys = currentAuthorizedKeysToUse;
 		availableListAuthorizedToReadKeys = FXCollections.observableArrayList();
 	}
 	
 	public Vector getCurrentAuthorizedKeys()
 	{
-		currentAuthorizedKeys.clear();
+		Vector newAuthorizedKeys = new Vector();
 		for (Iterator newContactsList = availableListAuthorizedToReadKeys.iterator(); newContactsList.hasNext();)
 		{
 			ContactKeyCheckBox contact = (ContactKeyCheckBox) newContactsList.next();
 			if(contact.isSelected())
-				currentAuthorizedKeys.add(contact.getKey());
+				newAuthorizedKeys.add(contact.getKey());
 		}
-		return currentAuthorizedKeys;
+		return newAuthorizedKeys;
 	}
 	
 	@Override
@@ -84,7 +84,7 @@ public class BulletinContactsController extends FxController
 
 	private void addPredefinedBulletinContactsToList(ContactKeys ourContacts)
 	{
-		currentAuthorizedKeys.forEach(key -> addKeyToAvailableList(key, ourContacts, SELECT_CONTACT_INITIALLY));
+		initialAuthorizedKeys.forEach(key -> addKeyToAvailableList(key, ourContacts, SELECT_CONTACT_INITIALLY));
 	}
 
 	private void addRemainingContactsToList(ContactKeys ourContacts)
@@ -94,7 +94,7 @@ public class BulletinContactsController extends FxController
 		{
 			remainingUnauthorizedContacts.add(new HeadquartersKey(ourContacts.get(i)));
 		}
-		currentAuthorizedKeys.forEach(authorizedContactKey -> removedAlreadyAddedAuthorizedContacts(authorizedContactKey, remainingUnauthorizedContacts));
+		initialAuthorizedKeys.forEach(authorizedContactKey -> removedAlreadyAddedAuthorizedContacts(authorizedContactKey, remainingUnauthorizedContacts));
 		remainingUnauthorizedContacts.forEach(unauthorizedContactKey -> addKeyToAvailableList(unauthorizedContactKey, ourContacts, ADDITIONAL_CONTACT_NOT_SELECTED_INITIALLY));
 	}
 
@@ -161,6 +161,6 @@ public class BulletinContactsController extends FxController
 	private final boolean SELECT_CONTACT_INITIALLY = true;
 	private final boolean ADDITIONAL_CONTACT_NOT_SELECTED_INITIALLY = false;
 
-	private Vector<HeadquartersKey> currentAuthorizedKeys;
+	private Vector<HeadquartersKey> initialAuthorizedKeys;
 	private ObservableList<ContactKeyCheckBox> availableListAuthorizedToReadKeys;
 }
