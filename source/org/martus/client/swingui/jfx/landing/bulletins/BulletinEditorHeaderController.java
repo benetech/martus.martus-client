@@ -115,22 +115,22 @@ public class BulletinEditorHeaderController extends FxController
 	static public String getContactsName(MartusLocalization localization, HeadquartersKey key, ContactKeys ourContacts) throws InvalidBase64Exception  
 	{
 		String contactName = ourContacts.getLabelIfPresent(key.getPublicKey());
-		if(contactName.isEmpty())
-		{
-			contactName += addWarningIfNotInContacts(localization, key, ourContacts);
-			contactName += key.getFormattedPublicCode();
-		}
-		return contactName;
+		if(!contactName.isEmpty())
+			return contactName;
+		Vector informalNames = addWarningIfNotInContacts(localization, key, ourContacts);
+		informalNames.add(key.getFormattedPublicCode());
+		return String.join(" ", informalNames);
 	}
 
-	static private String addWarningIfNotInContacts(MartusLocalization localization, HeadquartersKey key, ContactKeys ourContacts)
+	static private Vector addWarningIfNotInContacts(MartusLocalization localization, HeadquartersKey key, ContactKeys ourContacts)
 	{
+		Vector warningForContact = new Vector();
 		if(ourContacts.containsKey(key.getPublicKey()))
-			return "";
+			return warningForContact;
 
 		String notInContactsWarning = localization.getFieldLabel("HQNotConfigured");
-		notInContactsWarning = " ";
-		return notInContactsWarning;
+		warningForContact.add(notInContactsWarning);
+		return warningForContact;
 	}
 
 	private void updateFrom(FxBulletin bulletinToShow)
