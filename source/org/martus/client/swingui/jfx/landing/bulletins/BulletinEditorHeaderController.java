@@ -81,11 +81,16 @@ public class BulletinEditorHeaderController extends FxController
 
 	private void updateTo(FxBulletin bulletinToShow)
 	{
+			authorizedToContacts = bulletinToShow.authorizedToReadList();
+			updateAuthorizedToContactsList();
+	}
+
+	private void updateAuthorizedToContactsList()
+	{
 		try
 		{
-			ContactKeys ourContacts = getApp().getContactKeys();
-			authorizedToContacts = bulletinToShow.authorizedToReadList();
 			Vector listOfAuthorizedAccounts = new Vector();
+			ContactKeys ourContacts = getApp().getContactKeys();
 			authorizedToContacts.forEach(key -> AddKeyToField(key, ourContacts, listOfAuthorizedAccounts));
 			toField.setText(String.join(getLocalization().getFieldLabel("ContactNamesSeparator"), listOfAuthorizedAccounts));
 		} 
@@ -180,7 +185,10 @@ public class BulletinEditorHeaderController extends FxController
 		BulletinContactsController contactsController = new BulletinContactsController(getMainWindow(), currentAuthorizedKeys);
 		if(showModalYesNoDialog("BulletinContacts", EnglishCommonStrings.OK, EnglishCommonStrings.CANCEL, contactsController))
 		{
-			
+			Vector newAuthorizedContacts = contactsController.getCurrentAuthorizedKeys();
+			authorizedToContacts.clear();
+			authorizedToContacts.addAll(newAuthorizedContacts);
+			updateAuthorizedToContactsList();
 		}
 	}
 	
