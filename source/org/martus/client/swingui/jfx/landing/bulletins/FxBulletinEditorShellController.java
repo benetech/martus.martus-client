@@ -27,23 +27,30 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.awt.Component;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
-
-import javax.swing.SwingUtilities;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
+import javax.swing.SwingUtilities;
+
 import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSection;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentInterface;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
+import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.DataInvalidException;
+import org.martus.common.fieldspec.DateRangeInvertedException;
+import org.martus.common.fieldspec.DateTooEarlyException;
+import org.martus.common.fieldspec.DateTooLateException;
+import org.martus.common.fieldspec.RequiredFieldIsBlankException;
 
 public class FxBulletinEditorShellController extends FxNonWizardShellController implements UiBulletinComponentInterface
 {
@@ -143,16 +150,77 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 		return "landing/bulletins/BulletinEditorShell.fxml";
 	}
 	
+	private boolean validateAndNotifyUser()
+	{
+		try
+		{	
+			validateData();
+			return true;
+		}
+		catch(UiDateEditor.DateFutureException e)
+		{
+			showNotifyDialog("ErrorDateInFuture", e.getlocalizedTag());
+		}
+		catch(DateRangeInvertedException e)
+		{
+			HashMap map = new HashMap();
+			map.put("#FieldLabel#", e.getFieldLabel());
+			showNotifyDialog("ErrorDateRangeInverted", "", map);
+		}
+		catch(DateTooEarlyException e)
+		{
+			HashMap map = new HashMap();
+			map.put("#FieldLabel#", e.getFieldLabel());
+			map.put("#MinimumDate#", getLocalization().convertStoredDateToDisplay(e.getMinimumDate()));
+			showNotifyDialog("ErrorDateTooEarly", "", map);
+		}
+		catch(DateTooLateException e)
+		{
+			HashMap map = new HashMap();
+			map.put("#FieldLabel#", e.getFieldLabel());
+			map.put("#MaximumDate#", getLocalization().convertStoredDateToDisplay(e.getMaximumDate()));
+			showNotifyDialog("ErrorDateTooLate", "", map);
+		}
+		catch(UiBulletinComponentEditorSection.AttachmentMissingException e)
+		{
+			showNotifyDialog("ErrorAttachmentMissing", e.getlocalizedTag());
+		}
+		catch(RequiredFieldIsBlankException e)
+		{
+			HashMap map = new HashMap();
+			map.put("#FieldLabel#", e.getFieldLabel());
+			showNotifyDialog("ErrorRequiredFieldBlank", "", map);
+		}
+		catch (Exception e) 
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+		return false;
+	}
+
 	@FXML
 	private void onSaveSealed(ActionEvent event)
 	{
-		// TODO: Need implementation here
+		if(!validateAndNotifyUser())
+			return;
+		
+		if (!showConfirmationDialog("send"))
+			return;
+
+		final boolean didUserChooseSeal = true;
+		SwingUtilities.invokeLater(() -> parentDialog.saveBulletin(didUserChooseSeal));
+		SwingUtilities.invokeLater(() -> parentDialog.cleanupAndExit());
 	}
 	
 	@FXML
 	private void onSaveDraft(ActionEvent event)
 	{
-		// TODO: Need implementation here
+		if(!validateAndNotifyUser())
+			return;
+
+		final boolean didUserChooseSeal = false;
+		SwingUtilities.invokeLater(() -> parentDialog.saveBulletin(didUserChooseSeal));
+		SwingUtilities.invokeLater(() -> parentDialog.cleanupAndExit());
 	}
 	
 	@FXML

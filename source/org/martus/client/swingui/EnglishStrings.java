@@ -47,7 +47,10 @@ public class EnglishStrings
 "wintitle:ImportProgress=Importing Bulletins",
 "wintitle:ExportProgress=Exporting Bulletins",
 
+// NOTE: With confirm is for swing; without is for javafx
 "wintitle:confirmsend=Confirm Save Bulletin",
+"wintitle:send=Confirm Save Bulletin",
+
 "wintitle:confirmretrieve=Confirm Retrieve Bulletins",
 "wintitle:confirmRemoveAttachment=Confirm Remove Attachments",
 "wintitle:confirmOverWriteExistingFile=Confirm Replace Existing File",
@@ -283,10 +286,16 @@ public class EnglishStrings
 "wintitle:inputCustomFields=Customize Fields",
 "wintitle:inputGetShareFileName=Default Backup File Name",
 
+//NOTE: Without notify is for swing; with notify is for javafx 
 "wintitle:ErrorDateInFuture=Date Invalid",
 "wintitle:ErrorDateRangeInverted=Date Range Invalid",
 "wintitle:ErrorDateTooEarly=Date Too Early",
 "wintitle:ErrorDateTooLate=Date Too Late",
+"wintitle:notifyErrorDateInFuture=Date Invalid",
+"wintitle:notifyErrorDateRangeInverted=Date Range Invalid",
+"wintitle:notifyErrorDateTooEarly=Date Too Early",
+"wintitle:notifyErrorDateTooLate=Date Too Late",
+
 "wintitle:setupsignin=Martus Setup Signin",
 "wintitle:setupcontact=Martus Setup Contact Information",
 "wintitle:BulletinTemplate=Details Field Default Content",
@@ -321,8 +330,13 @@ public class EnglishStrings
 "wintitle:RemoveServer=Remove Server",
 "wintitle:BackupKeyPairGeneralInfo=Backup Key Information",
 "wintitle:BackupKeyPairToSecretShareInformation=Backup Key Information ",
+
+// NOTE: Without notify is for swing; with notify is for javafx 
 "wintitle:ErrorAttachmentMissing=Attachment Missing",
 "wintitle:ErrorRequiredFieldBlank=Required Field Blank",
+"wintitle:notifyErrorAttachmentMissing=Attachment Missing",
+"wintitle:notifyErrorRequiredFieldBlank=Required Field Blank",
+
 "wintitle:helpStringNotFound=Search Text Not Found",
 "wintitle:CreateCustomFieldsHelp=Help on Creating Custom Fields",
 "wintitle:ErrorCustomFields=Customize Fields Error",
@@ -1019,6 +1033,7 @@ public class EnglishStrings
 
 "field:SaveAttachmentAction=save",
 "field:ViewAttachmentAction=view",
+// NOTE: the messageXxx are for swing, and the notifyXxx are for JavaFX
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
 "field:messageErrorDateRangeInvertedcause=This date range has an end date that is earlier than the start date: #FieldLabel#",
@@ -1026,6 +1041,12 @@ public class EnglishStrings
 "field:messageErrorDateTooLatecause=Dates entered in '#FieldLabel#' cannot be later than #MaximumDate#",
 "field:messageErrorAttachmentMissingcause=The attachment could not be located.",
 "field:messageErrorRequiredFieldBlankcause=This field is required and cannot be left blank: #FieldLabel#",
+"field:notifyErrorDateInFuturecause=This date occurs in the future:",
+"field:notifyErrorDateRangeInvertedcause=This date range has an end date that is earlier than the start date: #FieldLabel#",
+"field:notifyErrorDateTooEarlycause=Dates entered in '#FieldLabel#' cannot be earlier than #MinimumDate#",
+"field:notifyErrorDateTooLatecause=Dates entered in '#FieldLabel#' cannot be later than #MaximumDate#",
+"field:notifyErrorAttachmentMissingcause=The attachment could not be located.",
+"field:notifyErrorRequiredFieldBlankcause=This field is required and cannot be left blank: #FieldLabel#",
 
 "field:CreateCustomFieldsHelp1=The layout of the bulletins is dictated by an XML document.  " +
 	"The document must begin with <CustomFields> and end with </CustomFields>. " +
