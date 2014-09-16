@@ -29,7 +29,10 @@ import java.awt.Component;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.SwingUtilities;
+
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
@@ -37,16 +40,18 @@ import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentInterface;
+import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.DataInvalidException;
 
 public class FxBulletinEditorShellController extends FxNonWizardShellController implements UiBulletinComponentInterface
 {
-	public FxBulletinEditorShellController(UiMainWindow mainWindowToUse)
+	public FxBulletinEditorShellController(UiMainWindow mainWindowToUse, UiBulletinModifyDlg parentDialogToUse)
 	{
 		super(mainWindowToUse);
-		
+	
+		parentDialog = parentDialogToUse;
 		fxBulletin = new FxBulletin(getLocalization());
 	}
 	
@@ -139,11 +144,44 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	}
 	
 	@FXML
+	private void onSaveSealed(ActionEvent event)
+	{
+		// TODO: Need implementation here
+	}
+	
+	@FXML
+	private void onSaveDraft(ActionEvent event)
+	{
+		// TODO: Need implementation here
+	}
+	
+	@FXML
+	private void onCancel(ActionEvent event)
+	{
+		try
+		{
+			boolean needConfirmation = isBulletinModified();
+			if(needConfirmation)
+			{
+				if(!showConfirmationDialog("CancelModifyBulletin"))
+					return;
+			}
+	
+			SwingUtilities.invokeLater(() -> parentDialog.cleanupAndExit());
+		}
+		catch(Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
+	
+	@FXML
 	private Pane headerPane;
 
 	@FXML
 	private Pane bodyPane;
-	
+
+	private UiBulletinModifyDlg parentDialog;
 	private BulletinEditorHeaderController headerController;
 	private BulletinEditorBodyController bodyController;
 	private FxBulletin fxBulletin;
