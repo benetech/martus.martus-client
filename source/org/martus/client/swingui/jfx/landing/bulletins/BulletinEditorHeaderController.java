@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -50,7 +51,7 @@ import org.martus.common.EnglishCommonStrings;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.util.StreamableBase64.InvalidBase64Exception;
+import org.martus.util.TokenReplacement;
 
 public class BulletinEditorHeaderController extends FxController
 {
@@ -106,32 +107,27 @@ public class BulletinEditorHeaderController extends FxController
 		{
 			currentListOfAccounts.add(getContactsName(getLocalization(), key, ourContacts));
 		} 
-		catch (InvalidBase64Exception e)
+		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 		}
 	}
 
-	static public String getContactsName(MartusLocalization localization, HeadquartersKey key, ContactKeys ourContacts) throws InvalidBase64Exception  
+	static public String getContactsName(MartusLocalization localization, HeadquartersKey key, ContactKeys ourContacts) throws Exception  
 	{
 		String contactName = ourContacts.getLabelIfPresent(key.getPublicKey());
 		if(!contactName.isEmpty())
 			return contactName;
-		Vector informalNames = addWarningIfNotInContacts(localization, key, ourContacts);
-		informalNames.add(key.getFormattedPublicCode());
-		return String.join(" ", informalNames);
-	}
-
-	static private Vector addWarningIfNotInContacts(MartusLocalization localization, HeadquartersKey key, ContactKeys ourContacts)
-	{
-		Vector warningForContact = new Vector();
+		
+		String contactsPublicCode = key.getFormattedPublicCode40();
 		if(ourContacts.containsKey(key.getPublicKey()))
-			return warningForContact;
-
-		String notInContactsWarning = localization.getFieldLabel("HQNotConfigured");
-		warningForContact.add(notInContactsWarning);
-		return warningForContact;
+			return contactsPublicCode;
+		String notInContactsWarning = localization.getFieldLabel("AuthorizedToReadNotInContacts");
+		HashMap tokenReplacement = new HashMap();
+		tokenReplacement.put("#PublicCode#", contactsPublicCode);
+		return TokenReplacement.replaceTokens(notInContactsWarning, tokenReplacement);
 	}
+
 
 	private void updateFrom(FxBulletin bulletinToShow)
 	{

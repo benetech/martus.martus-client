@@ -41,7 +41,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.common.ContactKeys;
 import org.martus.common.HeadquartersKey;
-import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class BulletinContactsController extends FxController
 {
@@ -133,7 +132,7 @@ public class BulletinContactsController extends FxController
 			contactCheckbox.selectedProperty().set(contactShouldBePreSelected);
 			availableListAuthorizedToReadKeys.add(contactCheckbox);
 		} 
-		catch (InvalidBase64Exception e)
+		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 		}

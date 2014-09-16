@@ -661,6 +661,7 @@ public class EnglishStrings
 	
 "field:ContactVerifyNow=Verify Now",
 "field:ContactVerified=Verified",
+"field:AuthorizedToReadNotInContacts=#PublicCode# (not currently in contacts)",
 
 "wintitle:ExportEncryptedBulletin=Export Encrypted",
 
