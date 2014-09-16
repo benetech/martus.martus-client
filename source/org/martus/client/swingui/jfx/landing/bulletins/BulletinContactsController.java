@@ -64,7 +64,8 @@ public class BulletinContactsController extends FxController
 		try
 		{
 			ContactKeys ourContacts = getApp().getContactKeys();
-			currentAuthorizedKeys.forEach(key -> addKeyToAvailableList(key, ourContacts));
+			addPredefinedBulletinContactsToList(ourContacts);
+			addRemainingContactsToList(ourContacts);
 			contactsList.setItems(availableListAuthorizedToReadKeys);
 		} 
 		catch (Exception e)
@@ -73,13 +74,39 @@ public class BulletinContactsController extends FxController
 		}
 	}
 
-	private void addKeyToAvailableList(HeadquartersKey key, ContactKeys ourContacts)
+	private void addPredefinedBulletinContactsToList(ContactKeys ourContacts)
+	{
+		currentAuthorizedKeys.forEach(key -> addKeyToAvailableList(key, ourContacts, SELECT_CONTACT_INITIALLY));
+	}
+
+	private void addRemainingContactsToList(ContactKeys ourContacts)
+	{
+		Vector<HeadquartersKey> remainingUnauthorizedContacts = new Vector();
+		for(int i = 0; i < ourContacts.size(); ++i)
+		{
+			remainingUnauthorizedContacts.add(new HeadquartersKey(ourContacts.get(i)));
+		}
+		currentAuthorizedKeys.forEach(authorizedContactKey -> removedAlreadyAddedAuthorizedContacts(authorizedContactKey, remainingUnauthorizedContacts));
+		remainingUnauthorizedContacts.forEach(unauthorizedContactKey -> addKeyToAvailableList(unauthorizedContactKey, ourContacts, ADDITIONAL_CONTACT_NOT_SELECTED_INITIALLY));
+	}
+
+	private void removedAlreadyAddedAuthorizedContacts(HeadquartersKey keyAlreadyAdded, Vector<HeadquartersKey> remainingUnauthorizedContacts)
+	{
+		for(int i = 0; i < remainingUnauthorizedContacts.size(); ++i)
+		{
+			HeadquartersKey currentKey = remainingUnauthorizedContacts.get(i);
+			if(currentKey.getPublicKey().equals(keyAlreadyAdded.getPublicKey()))
+				remainingUnauthorizedContacts.remove(i);
+		}
+	}
+
+	private void addKeyToAvailableList(HeadquartersKey key, ContactKeys ourContacts, boolean contactShouldBePreSelected)
 	{
 		try
 		{
 			String contactsName = BulletinEditorHeaderController.getContactsName(getLocalization(), key, ourContacts);
 			CheckBox contactCheckbox = new CheckBox(contactsName);
-			contactCheckbox.selectedProperty().set(true);
+			contactCheckbox.selectedProperty().set(contactShouldBePreSelected);
 			availableListAuthorizedToReadKeys.add(contactCheckbox);
 		} 
 		catch (InvalidBase64Exception e)
@@ -105,7 +132,8 @@ public class BulletinContactsController extends FxController
 	
 	@FXML
 	private ListView contactsList;
-	
+	private final boolean SELECT_CONTACT_INITIALLY = true;
+	private final boolean ADDITIONAL_CONTACT_NOT_SELECTED_INITIALLY = false;
 	private Vector<HeadquartersKey> currentAuthorizedKeys;
 	private ObservableList<CheckBox> availableListAuthorizedToReadKeys;
 	
