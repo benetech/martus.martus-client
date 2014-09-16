@@ -105,7 +105,7 @@ public class BulletinEditorHeaderController extends FxController
 	{
 		try
 		{
-			currentListOfAccounts.add(getContactsName(getLocalization(), key, ourContacts));
+			currentListOfAccounts.add(getContactsNameOrPublicCode(getLocalization(), key, ourContacts));
 		} 
 		catch (Exception e)
 		{
@@ -113,7 +113,7 @@ public class BulletinEditorHeaderController extends FxController
 		}
 	}
 
-	static public String getContactsName(MartusLocalization localization, HeadquartersKey key, ContactKeys ourContacts) throws Exception  
+	static public String getContactsNameOrPublicCode(MartusLocalization localization, HeadquartersKey key, ContactKeys ourContacts) throws Exception  
 	{
 		String contactName = ourContacts.getLabelIfPresent(key.getPublicKey());
 		if(!contactName.isEmpty())

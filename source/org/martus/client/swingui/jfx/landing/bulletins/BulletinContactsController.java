@@ -127,7 +127,7 @@ public class BulletinContactsController extends FxController
 	{
 		try
 		{
-			String contactsName = BulletinEditorHeaderController.getContactsName(getLocalization(), key, ourContacts);
+			String contactsName = BulletinEditorHeaderController.getContactsNameOrPublicCode(getLocalization(), key, ourContacts);
 			ContactKeyCheckBox contactCheckbox = new ContactKeyCheckBox(key, contactsName);
 			contactCheckbox.selectedProperty().set(contactShouldBePreSelected);
 			availableListAuthorizedToReadKeys.add(contactCheckbox);
