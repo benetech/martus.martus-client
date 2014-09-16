@@ -91,7 +91,7 @@ public class BulletinEditorHeaderController extends FxController
 		{
 			Vector listOfAuthorizedAccounts = new Vector();
 			ContactKeys ourContacts = getApp().getContactKeys();
-			authorizedToContacts.forEach(key -> AddKeyToField(key, ourContacts, listOfAuthorizedAccounts));
+			authorizedToContacts.forEach(key -> addKeyToField(key, ourContacts, listOfAuthorizedAccounts));
 			toField.setText(String.join(getLocalization().getFieldLabel("ContactNamesSeparator"), listOfAuthorizedAccounts));
 		} 
 		catch (Exception e)
@@ -100,7 +100,7 @@ public class BulletinEditorHeaderController extends FxController
 		}
 	}
 	
-	private void AddKeyToField(HeadquartersKey key, ContactKeys ourContacts, Vector currentListOfAccounts)
+	private void addKeyToField(HeadquartersKey key, ContactKeys ourContacts, Vector currentListOfAccounts)
 	{
 		try
 		{
