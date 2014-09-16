@@ -143,12 +143,14 @@
 				</VBox>
 			</top>
 			<center>
-				<SplitPane dividerPositions="0.2" focusTraversable="true">
-					<items>
+				<BorderPane>
+					<left>
 						<StackPane fx:id="sideContentPane" />
+					</left>
+					<center>
 						<StackPane fx:id="mainContentPane" />
-  					</items>
-				</SplitPane>
+					</center>
+				</BorderPane>
 			</center>
 		</BorderPane>
 	</center>
