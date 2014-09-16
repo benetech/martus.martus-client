@@ -40,7 +40,7 @@
                   <TextField fx:id="titleField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                   <HBox alignment="CENTER_LEFT" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
 					<children>
-                        <TextField fx:id="toField" prefHeight="26.0" prefWidth="605.0" />
+                        <TextField fx:id="toField" prefHeight="26.0" prefWidth="605.0" editable="false" />
                         <Button mnemonicParsing="false" onAction="#onAddRemoveContact">
 						<graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -94,7 +94,7 @@
 							<Insets top="5.0" />
 							</padding>
                               </HBox>
-                              <TextField fx:id="fromField" />
+                              <TextField fx:id="fromField" editable="false" />
 						</children>
 					</GridPane>
 					</children>
