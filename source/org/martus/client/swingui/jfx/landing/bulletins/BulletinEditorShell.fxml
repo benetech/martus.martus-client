@@ -13,9 +13,9 @@
 	</center>
 	<bottom>
 		<HBox>
-			<Button text="Save Sealed" onAction="#onSaveSealed" />
-			<Button text="Save Draft" onAction="#onSaveDraft" />
-			<Button text="Cancel" onAction="#onCancel" />
+			<Button text="%Button.send" onAction="#onSaveSealed" />
+			<Button text="%Button.savedraft" onAction="#onSaveDraft" />
+			<Button text="%Button.cancel" onAction="#onCancel" />
 		</HBox>
 	</bottom>
 </BorderPane>

@@ -108,14 +108,18 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		cancel.addActionListener(this);
 
 		if(UiSession.isJavaFx)
+		{
 			getContentPane().add(bulletinEditorStage, BorderLayout.CENTER);
+		}
 		else
+		{
 			addScrollerView();
 
-		Box box = Box.createHorizontalBox();
-		Component buttons[] = {send, draft, cancel, Box.createHorizontalGlue()};
-		Utilities.addComponentsRespectingOrientation(box, buttons);
-		getContentPane().add(box, BorderLayout.SOUTH);
+			Box box = Box.createHorizontalBox();
+			Component buttons[] = {send, draft, cancel, Box.createHorizontalGlue()};
+			Utilities.addComponentsRespectingOrientation(box, buttons);
+			getContentPane().add(box, BorderLayout.SOUTH);
+		}
 
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(this);
@@ -308,7 +312,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		return false;
 	}
 
-	private void saveBulletin(boolean userChoseSeal)
+	public void saveBulletin(boolean userChoseSeal)
 	{
 		Cursor originalCursor = getCursor();
 		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
