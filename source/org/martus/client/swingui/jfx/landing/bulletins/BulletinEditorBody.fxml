@@ -8,6 +8,5 @@
 <?import javafx.scene.text.*?>
 
 <StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-	<ScrollPane fx:id="scrollPane">
-	</ScrollPane>
+	<ScrollPane fx:id="scrollPane" />
 </StackPane>
