@@ -10,24 +10,26 @@
 
 <VBox maxWidth="300.0" minWidth="270.0" prefWidth="300.0" style="-fx-background-color: #353535;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<Button layoutX="44.33837890625" layoutY="24.0" maxHeight="45.0" maxWidth="300.0" minHeight="45.0" minWidth="270.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="270.0" style="-fx-background-color: #353535; -fx-background-radius: 1px; -fx-border-color: #606060;" text="Records" textFill="#f5f5f5" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-			<font>
-				<Font name="Helvetica" size="18.0" />
-			</font>
-		</Button>
 		<Button text="Template Manager" onAction="#onManageTemplates"
-					layoutX="44.33837890625" layoutY="24.0" maxHeight="45.0" mnemonicParsing="false" 
+					maxHeight="45.0" mnemonicParsing="false" 
 					style="-fx-background-color: #353535; -fx-background-radius: 1px; -fx-border-color: #606060;" textFill="#f5f5f5" 
 					AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<font>
 				<Font name="Helvetica" size="18.0" />
 			</font>
 		</Button>
-		<ImageView fitHeight="40.0" fitWidth="30.0" layoutX="12.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-			<image>
-			<Image url="@/org/martus/client/swingui/jfx/images/list.png" />
-			</image>
-		</ImageView>
+		<HBox>
+			<ImageView fitHeight="40.0" fitWidth="30.0" layoutX="12.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+				<image>
+				<Image url="@/org/martus/client/swingui/jfx/images/list.png" />
+				</image>
+			</ImageView>
+			<Button maxHeight="45.0" maxWidth="300.0" minHeight="45.0" minWidth="270.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="270.0" style="-fx-background-color: #353535; -fx-background-radius: 1px; -fx-border-color: #606060;" text="Records" textFill="#f5f5f5" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+				<font>
+					<Font name="Helvetica" size="18.0" />
+				</font>
+			</Button>
+		</HBox>
         <Label fx:id="folderNameLabel" alignment="CENTER" layoutY="154.0" prefHeight="40.0" prefWidth="300.0" text="Cases" textAlignment="CENTER" textFill="WHITE">
            <font>
               <Font size="18.0" />
