@@ -36,10 +36,8 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiBulletinDetailsDialog;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.common.ContactKeys;
-import org.martus.common.DammCheckDigitAlgorithm.CheckDigitInvalidException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.crypto.MartusCrypto.CreateDigestException;
 import org.martus.common.packet.UniversalId;
 
 public class BulletinDetailsController extends FxController
