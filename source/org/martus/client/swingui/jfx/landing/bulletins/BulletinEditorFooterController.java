@@ -113,7 +113,8 @@ public class BulletinEditorFooterController extends FxController
 	@FXML
 	private void onShowBulletinDetails(ActionEvent event) 
 	{
-
+		BulletinDetailsController details = new BulletinDetailsController(getMainWindow(), bulletin);
+		showDialogWithClose("BulletinDetails", details);
 	}
 	
 	@FXML
