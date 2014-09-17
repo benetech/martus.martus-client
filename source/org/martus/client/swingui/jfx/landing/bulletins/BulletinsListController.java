@@ -174,22 +174,30 @@ public class BulletinsListController extends AbstractFxLandingContentController
 			MartusLogger.log("Attempted to view with nothing selected");
 			return;
 		}
-		UniversalId bulletinUid = selectedItem.getUniversalId();
-		ClientBulletinStore store = getApp().getStore();
-		Bulletin bulletin = store.getBulletinRevision(bulletinUid);
-		
-		ReadableDatabase database = store.getDatabase();
-		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(getLocalization());
+
 		try
 		{
-			String html = generator.getHtmlString(bulletin, database, true, true);
-			FxController htmlViewer = new SimpleHtmlContentController(getMainWindow(), html);
+			UniversalId bulletinUid = selectedItem.getUniversalId();
+			FxController htmlViewer = getViewControllerForBulletin(bulletinUid, getMainWindow());
 			showDialogWithClose("ViewBulletin", htmlViewer);
-		}
-		catch(Exception e)
+		} 
+		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 		}
+	}
+
+	static public FxController getViewControllerForBulletin(UniversalId bulletinUid, UiMainWindow mainWindow)
+		throws Exception
+	{
+		ClientBulletinStore store = mainWindow.getApp().getStore();
+		Bulletin bulletin = store.getBulletinRevision(bulletinUid);
+		
+		ReadableDatabase database = store.getDatabase();
+		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(mainWindow.getLocalization());
+		String html = generator.getHtmlString(bulletin, database, true, true);
+		FxController htmlViewer = new SimpleHtmlContentController(mainWindow, html);
+		return htmlViewer;
 	}
 
 	protected void editSelectedBulletin()
