@@ -25,9 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
-import java.net.URL;
 import java.util.HashMap;
-import java.util.ResourceBundle;
 import java.util.Vector;
 
 import javafx.beans.property.Property;
@@ -60,12 +58,6 @@ public class BulletinEditorHeaderController extends FxController
 		super(mainWindowToUse);
 	}
 	
-	@Override
-	public void initialize(URL location, ResourceBundle bundle)
-	{
-		super.initialize(location, bundle);
-	}
-
 	@Override
 	public String getFxmlLocation()
 	{
