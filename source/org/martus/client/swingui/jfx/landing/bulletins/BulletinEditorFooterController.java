@@ -43,7 +43,7 @@ public class BulletinEditorFooterController extends FxController
 
 	public void showBulletin(FxBulletin bulletinToShow)
 	{
-
+		
 	}
 	
 	@Override

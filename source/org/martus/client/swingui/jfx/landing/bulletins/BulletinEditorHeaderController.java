@@ -74,7 +74,7 @@ public class BulletinEditorHeaderController extends FxController
 
 	private void updateTo(FxBulletin bulletinToShow)
 	{
-			authorizedToContacts = bulletinToShow.authorizedToReadList();
+			authorizedToContacts = bulletinToShow.getAuthorizedToReadList();
 			updateAuthorizedToContactsList();
 	}
 
@@ -126,7 +126,7 @@ public class BulletinEditorHeaderController extends FxController
 		try
 		{
 			String accountId = getMainWindow().getApp().getUserName();
-			String accountKey = bulletinToShow.universalIdProperty().get().getAccountId();
+			String accountKey = bulletinToShow.getUniversalIdProperty().get().getAccountId();
 			String publicCode = MartusCrypto.computeFormattedPublicCode40(accountKey);
 			HashMap tokenReplacement = new HashMap();
 			tokenReplacement.put("#AccountId#", accountId);

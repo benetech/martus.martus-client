@@ -131,26 +131,26 @@ public class TestFxBulletin extends TestCaseEnhanced
 	public void testUniversalId() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin(getLocalization());
-		ReadOnlyObjectWrapper<UniversalId> universalIdPropertyNull = fxb.universalIdProperty();
+		ReadOnlyObjectWrapper<UniversalId> universalIdPropertyNull = fxb.getUniversalIdProperty();
 		assertEquals(null, universalIdPropertyNull);
 		
 		Bulletin b = new BulletinForTesting(security);
 		fxb.copyDataFromBulletin(b);
-		ReadOnlyObjectWrapper<UniversalId> universalIdProperty = fxb.universalIdProperty();
+		ReadOnlyObjectWrapper<UniversalId> universalIdProperty = fxb.getUniversalIdProperty();
 		assertEquals(b.getUniversalId(), universalIdProperty.getValue());
 		
 		Bulletin b2 = new BulletinForTesting(security);
 		assertNotEquals("Bulletins have same id?", b.getUniversalId(), b2.getUniversalId());
 		fxb.copyDataFromBulletin(b2);
 		assertEquals(null, universalIdProperty.getValue());
-		ReadOnlyObjectWrapper<UniversalId> universalIdProperty2 = fxb.universalIdProperty();
+		ReadOnlyObjectWrapper<UniversalId> universalIdProperty2 = fxb.getUniversalIdProperty();
 		assertEquals(b2.getUniversalId(), universalIdProperty2.getValue());
 	}
 	
 	public void testAuthorizedToRead() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin(getLocalization());
-		ObservableList<HeadquartersKey> headquartersKeysListNull = fxb.authorizedToReadList();
+		ObservableList<HeadquartersKey> headquartersKeysListNull = fxb.getAuthorizedToReadList();
 		assertEquals(null, headquartersKeysListNull);
 		
 		Bulletin b = new BulletinForTesting(security);
@@ -161,7 +161,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		b.setAuthorizedToReadKeys(keys);
 		
 		fxb.copyDataFromBulletin(b);
-		ObservableList<HeadquartersKey> headquartersKeysList = fxb.authorizedToReadList();
+		ObservableList<HeadquartersKey> headquartersKeysList = fxb.getAuthorizedToReadList();
 		HeadquartersKeys keysFromBulletin = b.getAuthorizedToReadKeys();
 		assertEquals(keysFromBulletin.size(), headquartersKeysList.size());
 		assertEquals(key1, headquartersKeysList.get(0));
@@ -176,7 +176,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		b2.setAuthorizedToReadKeys(b2keys);
 
 		fxb.copyDataFromBulletin(b2);
-		ObservableList<HeadquartersKey> headquartersKeysList2 = fxb.authorizedToReadList();
+		ObservableList<HeadquartersKey> headquartersKeysList2 = fxb.getAuthorizedToReadList();
 		assertEquals(2, b2.getAuthorizedToReadKeys().size());
 		assertEquals(2, headquartersKeysList2.size());
 		assertEquals(b2.getAuthorizedToReadKeys().size(), headquartersKeysList2.size());
@@ -199,20 +199,20 @@ public class TestFxBulletin extends TestCaseEnhanced
 	public void testBulletinLocalId() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin(getLocalization());
-		StringProperty bulletinLocalIdNull = fxb.bulletinLocalIdProperty();
+		StringProperty bulletinLocalIdNull = fxb.getBulletinLocalIdProperty();
 		assertEquals(null, bulletinLocalIdNull);
 
 		Bulletin b = new BulletinForTesting(security);
 		fxb.copyDataFromBulletin(b);
 
-		StringProperty fxLocalId = fxb.bulletinLocalIdProperty();
+		StringProperty fxLocalId = fxb.getBulletinLocalIdProperty();
 		assertEquals(b.getLocalId(), fxLocalId.getValue());		
 		MockBulletinStore testStore = new MockBulletinStore();
 
     		Bulletin clone = testStore.createNewDraft(b, b.getTopSectionFieldSpecs(), b.getBottomSectionFieldSpecs());
     		assertNotEquals("not new local id?", b.getLocalId(), clone.getLocalId());
     		fxb.copyDataFromBulletin(clone);
-    		assertEquals(clone.getLocalId(), fxb.bulletinLocalIdProperty().getValue());
+    		assertEquals(clone.getLocalId(), fxb.getBulletinLocalIdProperty().getValue());
     		assertNull(fxLocalId.getValue());
  	}
 	

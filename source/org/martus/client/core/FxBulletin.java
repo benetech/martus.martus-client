@@ -98,7 +98,7 @@ public class FxBulletin
 		modified.setAuthorizedToReadKeys(modifiedKeys);
 	}
 
-	public ReadOnlyObjectWrapper<UniversalId> universalIdProperty()
+	public ReadOnlyObjectWrapper<UniversalId> getUniversalIdProperty()
 	{
 		return universalIdProperty;
 	}
@@ -108,7 +108,7 @@ public class FxBulletin
 		return versionProperty;
 	}
 
-	public ObservableList<HeadquartersKey> authorizedToReadList()
+	public ObservableList<HeadquartersKey> getAuthorizedToReadList()
 	{
 		return authorizedToReadKeys;
 	}
@@ -118,7 +118,7 @@ public class FxBulletin
 		return bulletinHistory;
 	}
 
-	public StringProperty bulletinLocalIdProperty()
+	public StringProperty getBulletinLocalIdProperty()
 	{
 		return bulletinLocalId;
 	}
