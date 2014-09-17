@@ -663,6 +663,7 @@ public class EnglishStrings
 "field:ContactVerified=Verified",
 "field:AuthorizedToReadNotInContacts=#PublicCode# (not currently in contacts)",
 "field:AccountIdWithPublicCode=#AccountId# #PublicCode#",
+"field:HistoryVersion=#VersionNumber#: #DateSaved# : #Title#",
 "wintitle:ExportEncryptedBulletin=Export Encrypted",
 
 "wintitle:IncludePrivateData=Include Private Data",

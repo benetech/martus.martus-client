@@ -25,13 +25,23 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import java.util.HashMap;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.dialogs.UiBulletinDetailsDialog;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.common.bulletin.Bulletin;
+import org.martus.common.packet.BulletinHistory;
+import org.martus.common.packet.UniversalId;
+import org.martus.util.TokenReplacement;
+import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class BulletinEditorFooterController extends FxController
 {
@@ -40,10 +50,57 @@ public class BulletinEditorFooterController extends FxController
 	{
 		super(mainWindowToUse);
 	}
+	
+	private class HistoryItem extends Label
+	{
+		public HistoryItem(String data, String localIdToUse)
+		{
+			super(data);
+//			localId = localIdToUse;
+		}
+		
+//		String localId;
+	}
 
 	public void showBulletin(FxBulletin bulletinToShow)
 	{
-		
+		bulletinLocalId.textProperty().bind(bulletinToShow.getBulletinLocalIdProperty());
+		try
+		{
+			BulletinHistory history = bulletinToShow.getHistory().getValue();
+			UniversalId bulletinUid = bulletinToShow.getUniversalIdProperty().getValue();
+			String accountId = bulletinUid.getAccountId();
+			UiMainWindow mainWindow = getMainWindow();
+			historyItemLabels = FXCollections.observableArrayList();
+			for(int i = 0; i < history.size(); ++i)
+			{
+				String localId = history.get(i);
+				UniversalId versionUid = UniversalId.createFromAccountAndLocalId(accountId, localId);
+				String dateSaved = UiBulletinDetailsDialog.getSavedDateToDisplay(versionUid,bulletinUid, mainWindow);
+				String title = UiBulletinDetailsDialog.getTitleToDisplay(versionUid, bulletinUid, mainWindow);
+				String versionsData =  getHistoryItemData(i+1, dateSaved, title);
+				historyItemLabels.add(new HistoryItem(versionsData, localId));
+			}
+			String currentVersionTitle = bulletinToShow.getFieldProperty(Bulletin.TAGTITLE).getValue();
+			String currentVersionLastSaved = UiBulletinDetailsDialog.getSavedDateToDisplay(bulletinUid,bulletinUid, mainWindow);
+			String versionsData =  getHistoryItemData(history.size() + 1, currentVersionLastSaved, currentVersionTitle);
+			historyItemLabels.add(new HistoryItem(versionsData, bulletinUid.getLocalId()));
+			historyItems.setItems(historyItemLabels);
+		} 
+		catch (TokenInvalidException e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
+
+	private String getHistoryItemData(int versionNumber, String dateSaved, String title) throws TokenInvalidException
+	{
+		HashMap tokenReplacement = new HashMap();
+		tokenReplacement.put("#Title#", title);
+		tokenReplacement.put("#DateSaved#", dateSaved);
+		tokenReplacement.put("#VersionNumber#", Integer.toString(versionNumber));
+		String historyItemTextWithTokens = getLocalization().getFieldLabel("HistoryVersion");
+		return TokenReplacement.replaceTokens(historyItemTextWithTokens, tokenReplacement);
 	}
 	
 	@Override
@@ -56,6 +113,7 @@ public class BulletinEditorFooterController extends FxController
 	private Label bulletinLocalId;
 	
 	@FXML
-	private ComboBox history;
-	
+	private ComboBox historyItems;
+
+	private ObservableList<HistoryItem> historyItemLabels;
 }

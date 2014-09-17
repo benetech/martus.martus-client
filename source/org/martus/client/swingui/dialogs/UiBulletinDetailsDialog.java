@@ -206,35 +206,38 @@ public class UiBulletinDetailsDialog extends JDialog
 		int column = 0;
 		versionModel.setValueAt(new Integer(1+i), i, column++);
 		versionModel.setValueAt(uid.getLocalId(), i, column++);
-		versionModel.setValueAt(getSavedDateToDisplay(uid), i, column++);
-		versionModel.setValueAt(getTitleToDisplay(uid), i, column++);
+		UniversalId bulletinUid = bulletin.getUniversalId();
+		versionModel.setValueAt(getSavedDateToDisplay(uid, bulletinUid, mainWindow), i, column++);
+		versionModel.setValueAt(getTitleToDisplay(uid, bulletinUid, mainWindow), i, column++);
 	}
 	
-	private String getSavedDateToDisplay(UniversalId uid)
+	static public String getSavedDateToDisplay(UniversalId versionUid, UniversalId bulletinUid, UiMainWindow mainWindow)
 	{
-		Bulletin b = mainWindow.getStore().getBulletinRevision(uid);
+		Bulletin b = mainWindow.getStore().getBulletinRevision(versionUid);
+		MartusLocalization localization = mainWindow.getLocalization();
 		if(b != null)
-			return getLocalization().formatDateTime(b.getLastSavedTime());
+			return localization.formatDateTime(b.getLastSavedTime());
 		
-		if(uid.equals(bulletin.getUniversalId()))
-			return getLabel("InProgressDate");
+		if(versionUid.equals(bulletinUid))
+			return getLabel(localization, "InProgressDate");
 		
-		return getLabel("UnknownDate");
+		return getLabel(localization, "UnknownDate");
 	}
 
-	private String getTitleToDisplay(UniversalId uid)
+	static public String getTitleToDisplay(UniversalId versionUid, UniversalId bulletinUid, UiMainWindow mainWindow)
 	{
-		Bulletin b = mainWindow.getStore().getBulletinRevision(uid);
+		Bulletin b = mainWindow.getStore().getBulletinRevision(versionUid);
 		if(b != null)
 		{
 			final String title = b.get(Bulletin.TAGTITLE);
 			return BurmeseUtilities.getDisplayable(title);
 		}
 		
-		if(uid.equals(bulletin.getUniversalId()))
-			return getLabel("InProgressTitle");
+		MartusLocalization localization = mainWindow.getLocalization();
+		if(versionUid.equals(bulletinUid))
+			return getLabel(localization, "InProgressTitle");
 		
-		return getLabel("UnknownTitle");
+		return getLabel(localization, "UnknownTitle");
 	}
 
 	private JComponent createField(String text)
@@ -264,7 +267,12 @@ public class UiBulletinDetailsDialog extends JDialog
 
 	private String getLabel(String tag)
 	{
-		return getLocalization().getFieldLabel("BulletinDetails" + tag);
+		return getLabel(getLocalization(), tag);
+	}
+
+	static private String getLabel(MartusLocalization localization, String tag)
+	{
+		return localization.getFieldLabel("BulletinDetails" + tag);
 	}
 	
 	class CloseHandler implements ActionListener

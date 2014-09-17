@@ -15,7 +15,7 @@
                <children>
                   <Label text="ID:" />
                   <Label fx:id="bulletinLocalId" text="Bulletin Local Id goes here." />
-                  <ComboBox fx:id="history" promptText="History" />
+                  <ComboBox fx:id="historyItems" promptText="History" />
                </children>
             </HBox>
 			</children>
