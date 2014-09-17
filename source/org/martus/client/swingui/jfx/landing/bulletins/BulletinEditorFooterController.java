@@ -57,10 +57,15 @@ public class BulletinEditorFooterController extends FxController
 		public HistoryItem(String data, String localIdToUse)
 		{
 			super(data);
-//			localId = localIdToUse;
+			localId = localIdToUse;
 		}
 		
-//		String localId;
+		public String getLocalId()
+		{
+			return localId;
+		}
+		
+		String localId;
 	}
 
 	public void showBulletin(FxBulletin bulletinToShow)
@@ -118,7 +123,26 @@ public class BulletinEditorFooterController extends FxController
 	}
 	
 	@FXML
-	private ComboBox historyItems;
+	private void onShowVersion(ActionEvent event) 
+	{
+		try
+		{
+			HistoryItem selectedVersion = historyItems.getSelectionModel().getSelectedItem();
+			UniversalId bulletinVersionId = UniversalId.createFromAccountAndLocalId(bulletin.getUniversalIdProperty().getValue().getAccountId(), selectedVersion.getLocalId());
+			FxController htmlViewer = BulletinsListController.getViewControllerForBulletin(bulletinVersionId, getMainWindow());
+			showDialogWithClose("ViewBulletin", htmlViewer);
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+		
+		
+		
+	}
+	
+	@FXML
+	private ComboBox<HistoryItem> historyItems;
 
 	private ObservableList<HistoryItem> historyItemLabels;
 	private FxBulletin bulletin;
