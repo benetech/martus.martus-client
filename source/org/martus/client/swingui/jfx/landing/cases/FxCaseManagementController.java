@@ -30,7 +30,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
-import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
