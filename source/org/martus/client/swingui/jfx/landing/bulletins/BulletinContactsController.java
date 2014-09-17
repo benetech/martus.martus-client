@@ -141,7 +141,7 @@ public class BulletinContactsController extends FxController
 	@Override
 	public String getFxmlLocation()
 	{
-		return "/landing/bulletins/FxBulletinContacts.fxml";
+		return "landing/bulletins/FxBulletinContacts.fxml";
 	}
 
 	@FXML
