@@ -30,8 +30,10 @@ import java.util.Vector;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 
+import org.martus.client.test.MockBulletinStore;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
@@ -192,8 +194,50 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals(3, headquartersKeysList2.size());
 		assertEquals(3, copyOfModifiedBulletinB2.getAuthorizedToReadKeys().size());
 		assertEquals(2, b2.getAuthorizedToReadKeys().size());
+	}
+
+	public void testBulletinLocalId() throws Exception
+	{
+		FxBulletin fxb = new FxBulletin(getLocalization());
+		StringProperty bulletinLocalIdNull = fxb.bulletinLocalIdProperty();
+		assertEquals(null, bulletinLocalIdNull);
+
+		Bulletin b = new BulletinForTesting(security);
+		fxb.copyDataFromBulletin(b);
+
+		StringProperty fxLocalId = fxb.bulletinLocalIdProperty();
+		assertEquals(b.getLocalId(), fxLocalId.getValue());		
+		MockBulletinStore testStore = new MockBulletinStore();
+
+    		Bulletin clone = testStore.createNewDraft(b, b.getTopSectionFieldSpecs(), b.getBottomSectionFieldSpecs());
+    		assertNotEquals("not new local id?", b.getLocalId(), clone.getLocalId());
+    		fxb.copyDataFromBulletin(clone);
+    		assertEquals(clone.getLocalId(), fxb.bulletinLocalIdProperty().getValue());
+    		assertNull(fxLocalId.getValue());
+ 	}
+	
+	public void testBulletinHistory() throws Exception
+	{
+		FxBulletin fxb = new FxBulletin(getLocalization());
+		ReadOnlyObjectWrapper<BulletinHistory> bulletinHistoryNull = fxb.getHistory();
+		assertEquals(null, bulletinHistoryNull);
+
+		Bulletin b = new BulletinForTesting(security);
+		fxb.copyDataFromBulletin(b);
+
+		ReadOnlyObjectWrapper<BulletinHistory> fxBulletinHistory = fxb.getHistory();
+		assertEquals(b.getHistory().toString(), fxBulletinHistory.getValue().toString());
 		
-		
+		BulletinHistory localHistory = b.getHistory();
+		String localIdHistory2 = "history2";
+		localHistory.add(localIdHistory2);
+		localHistory.add("history2");
+		b.setHistory(localHistory);
+		assertTrue(b.getHistory().contains(localIdHistory2));
+		fxb.copyDataFromBulletin(b);
+		ReadOnlyObjectWrapper<BulletinHistory> fxBulletinNewHistory = fxb.getHistory();
+		assertTrue(fxBulletinNewHistory.getValue().contains(localIdHistory2));
+		assertNull(fxBulletinHistory.getValue());
 	}
 
 	public void testTitle() throws Exception
