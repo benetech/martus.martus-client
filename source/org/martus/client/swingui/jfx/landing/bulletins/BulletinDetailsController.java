@@ -33,8 +33,11 @@ import javafx.scene.control.Label;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.dialogs.UiBulletinDetailsDialog;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.common.ContactKeys;
 import org.martus.common.DammCheckDigitAlgorithm.CheckDigitInvalidException;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CreateDigestException;
 import org.martus.common.packet.UniversalId;
@@ -52,24 +55,34 @@ public class BulletinDetailsController extends FxController
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		bulletinLocalId.textProperty().bind(bulletin.getBulletinLocalIdProperty());
-		updateAuthorsPublicCode(); 
-	}
-
-	private void updateAuthorsPublicCode()
-	{
-		UniversalId bulletinId = bulletin.getUniversalIdProperty().getValue();
 		try
 		{
+			UniversalId bulletinId = bulletin.getUniversalIdProperty().getValue();
+			if(getApp().getAccountId().equals(bulletinId.getAccountId()))
+			{
+				authorName.setText(getApp().getUserName());
+			}
+			else
+			{
+				ContactKeys ourContacts = getApp().getContactKeys();
+				authorName.setText(ourContacts.getLabelIfPresent(bulletinId.getAccountId()));
+			}
+			
 			publicCode.setText(MartusCrypto.computeFormattedPublicCode40(bulletinId.getAccountId()));
+
+			bulletinLocalId.textProperty().bind(bulletin.getBulletinLocalIdProperty());
+
+			String dateWasCreated = bulletin.getFieldProperty(Bulletin.TAGENTRYDATE).getValue();
+			dateCreated.setText(dateWasCreated);
+			
+			String dateSaved = UiBulletinDetailsDialog.getSavedDateToDisplay(bulletinId, bulletinId, getMainWindow());
+			dateLastSaved.setText(dateSaved);
 		} 
 		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 		}
 	}
-
-
 
 	@Override
 	public String getFxmlLocation()
@@ -78,19 +91,19 @@ public class BulletinDetailsController extends FxController
 	}
 	
 	@FXML
-	Label authorName;
+	private Label authorName;
 	
 	@FXML
-	Label publicCode;
+	private Label publicCode;
 
 	@FXML
-	Label bulletinLocalId;
+	private Label bulletinLocalId;
 
 	@FXML
-	Label dateCreated;
+	private Label dateCreated;
 
 	@FXML
-	Label dateLastSaved;
+	private Label dateLastSaved;
 
-	FxBulletin bulletin;
+	private FxBulletin bulletin;
 }
