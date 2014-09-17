@@ -80,18 +80,6 @@
       									</font>
       								</Button>
                               <Separator prefWidth="10.0" visible="false" />
-      								<Button fx:id="toolbarButtonShowTrashFolder" mnemonicParsing="false" onAction="#onShowTrashFolder" style="-fx-background-color: #77bad0;" text="Show Trash" textFill="#f7f7f7">
-      									<font>
-      										<Font name="Helvetica" size="14.0" />
-      									</font>
-                                 <graphic>
-                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../images/trash.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-      								</Button>
                            </children>
                         </HBox>
 								<HBox alignment="CENTER_LEFT" prefHeight="32.0" styleClass="toolbarHBox" GridPane.columnIndex="3">

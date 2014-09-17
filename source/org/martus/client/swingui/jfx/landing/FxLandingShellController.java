@@ -80,6 +80,11 @@ public class FxLandingShellController extends FxNonWizardShellController
 	{
 		return caseManagementController.getAllCaseListProvider();
 	}
+	
+	public BooleanBinding getShowTrashBinding()
+	{
+		return bulletinsListController.getTrashNotBeingDisplayedBinding();
+	}
 
 	@Override
 	public String getFxmlLocation()
@@ -94,10 +99,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 		updateOnlineStatus();
 		updateTorStatus();
 		initializeTorListener();
-		caseManagementController.addFolderSelectionListener(bulletinListProvider);
-		
-		BooleanBinding showMainTrashButtonBinding = bulletinsListController.getTrashNotBeingDisplayedBinding();
-		toolbarButtonShowTrashFolder.visibleProperty().bind(showMainTrashButtonBinding);
+		caseManagementController.addFolderSelectionListener(bulletinListProvider);		
 	}
 
 	private void initializeTorListener()
@@ -166,11 +168,6 @@ public class FxLandingShellController extends FxNonWizardShellController
 		toolbarButtonOnline.setText(getStatusMessage(isOnline));
 	}
 	
-	@FXML void onShowTrashFolder(ActionEvent event)
-	{
-		caseManagementController.showTrashFolder();
-	}
-
 	@FXML
 	private void onManageContacts(ActionEvent event)
 	{
@@ -302,9 +299,6 @@ public class FxLandingShellController extends FxNonWizardShellController
 	
 	@FXML
 	private Pane mainContentPane;
-	
-	@FXML
-	private Button toolbarButtonShowTrashFolder;
 	
 	private BulletinsListController bulletinsListController;
 	private BulletinListProvider bulletinListProvider;
