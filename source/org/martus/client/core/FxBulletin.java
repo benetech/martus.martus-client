@@ -32,6 +32,7 @@ import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -44,6 +45,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
+import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
 
 /**
@@ -71,6 +73,8 @@ public class FxBulletin
 		{
 			authorizedToReadKeys.add(hqKeys.get(i));
 		}
+		bulletinHistory = new ReadOnlyObjectWrapper<BulletinHistory>(b.getHistory());
+		bulletinLocalId = new SimpleStringProperty(b.getBulletinHeaderPacket().getLocalId());
 
 		setFieldPropertiesFromBulletinSection(b, b.getTopSectionFieldSpecs());
 		setFieldPropertiesFromBulletinSection(b, b.getBottomSectionFieldSpecs());
@@ -109,6 +113,16 @@ public class FxBulletin
 		return authorizedToReadKeys;
 	}
 	
+	public ReadOnlyObjectWrapper<BulletinHistory> getHistory()
+	{
+		return bulletinHistory;
+	}
+
+	public StringProperty bulletinLocalIdProperty()
+	{
+		return bulletinLocalId;
+	}
+
 	public Vector<FieldSpec> getFieldSpecs()
 	{
 		Vector<FieldSpec> specs = new Vector<FieldSpec>();
@@ -164,6 +178,18 @@ public class FxBulletin
 			universalIdProperty = null;
 		}
 		
+		if(bulletinLocalId != null)
+		{
+			bulletinLocalId.setValue(null);
+			bulletinLocalId = null;
+		}
+		
+		if(bulletinHistory != null)
+		{
+			bulletinHistory.setValue(null);
+			bulletinHistory = null;
+		}
+
 		if(authorizedToReadKeys != null)
 			authorizedToReadKeys.clear();
 
@@ -209,4 +235,6 @@ public class FxBulletin
 	private FieldSpecCollection fieldSpecs;
 	private ReadOnlyIntegerProperty versionProperty;
 	private ObservableList<HeadquartersKey> authorizedToReadKeys;
+	private ReadOnlyObjectWrapper<BulletinHistory> bulletinHistory;
+	private StringProperty bulletinLocalId;
 }
