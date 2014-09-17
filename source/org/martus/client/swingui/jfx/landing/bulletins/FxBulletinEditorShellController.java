@@ -74,6 +74,9 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 			
 			bodyController = new BulletinEditorBodyController(getMainWindow());
 			loadControllerAndEmbedInPane(bodyController, bodyPane);
+			
+			footerController = new BulletinEditorFooterController(getMainWindow());
+			loadControllerAndEmbedInPane(footerController, footerPane);
 		}
 		catch(Exception e)
 		{
@@ -110,6 +113,7 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 		fxBulletin.copyDataFromBulletin(bulletinToShow);
 		Platform.runLater(() -> headerController.showBulletin(fxBulletin));
 		Platform.runLater(() -> bodyController.showBulletin(fxBulletin));
+		Platform.runLater(() -> footerController.showBulletin(fxBulletin));
 	}
 
 	@Override
@@ -248,9 +252,13 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 
 	@FXML
 	private Pane bodyPane;
+	
+	@FXML
+	private Pane footerPane;
 
 	private UiBulletinModifyDlg parentDialog;
 	private BulletinEditorHeaderController headerController;
 	private BulletinEditorBodyController bodyController;
+	private BulletinEditorFooterController footerController;
 	private FxBulletin fxBulletin;
 }
