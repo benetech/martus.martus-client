@@ -1936,6 +1936,7 @@ public class EnglishStrings
 "folder:%Sent=Sent",
 "folder:%Draft=Old Draft Bulletins",
 "folder:%Discarded=Discarded Bulletins",
+"folder:%RetrievedBulletins=Retrieved Bulletins",
 "folder:%RetrievedMyBulletin=Retrieved Bulletins",
 "folder:%RetrievedMyBulletinDraft=Retrieved Draft Bulletins",
 "folder:%SearchResults=Search Results",
