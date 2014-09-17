@@ -29,6 +29,7 @@ import java.util.HashMap;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -64,7 +65,7 @@ public class BulletinEditorFooterController extends FxController
 
 	public void showBulletin(FxBulletin bulletinToShow)
 	{
-		bulletinLocalId.textProperty().bind(bulletinToShow.getBulletinLocalIdProperty());
+		bulletin = bulletinToShow;
 		try
 		{
 			BulletinHistory history = bulletinToShow.getHistory().getValue();
@@ -110,10 +111,14 @@ public class BulletinEditorFooterController extends FxController
 	}
 
 	@FXML
-	private Label bulletinLocalId;
+	private void onShowBulletinDetails(ActionEvent event) 
+	{
+
+	}
 	
 	@FXML
 	private ComboBox historyItems;
 
 	private ObservableList<HistoryItem> historyItemLabels;
+	private FxBulletin bulletin;
 }

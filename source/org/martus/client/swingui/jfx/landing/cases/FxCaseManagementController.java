@@ -30,6 +30,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -55,6 +56,7 @@ import org.martus.client.swingui.jfx.generic.DialogWithOkCancelShellController;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.jfx.landing.FolderSelectionListener;
+import org.martus.client.swingui.jfx.landing.FxLandingShellController;
 import org.martus.client.swingui.jfx.landing.cases.FxFolderDeleteController.FolderDeletedListener;
 import org.martus.client.swingui.jfx.landing.general.ManageTemplatesController;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -81,6 +83,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		casesListViewClosed.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		casesTabPane.getSelectionModel().selectedItemProperty().addListener(new caseTabeListener());
 		currentSelectedCase = currentCasesListView.getSelectionModel().selectedItemProperty();
+		showTrashFolder.visibleProperty().bind(((FxLandingShellController)getShellController()).getShowTrashBinding());
 	}
 
 	@Override
@@ -166,7 +169,8 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		return false;
 	}
 	
-	public void showTrashFolder()
+	@FXML
+	public void onShowTrash(ActionEvent event)
 	{
 		currentCasesListView.getSelectionModel().clearSelection();
 		
@@ -453,6 +457,9 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 
 	@FXML
 	private Button deleteFolderButton;
+	
+	@FXML
+	private Button showTrashFolder;
 
 	private 	ReadOnlyObjectProperty<CaseListItem> currentSelectedCase;
 	

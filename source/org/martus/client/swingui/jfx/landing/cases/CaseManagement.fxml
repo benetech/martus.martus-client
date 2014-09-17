@@ -82,7 +82,7 @@
                   </ImageView>
                </graphic>
             </Button>
-      		<Button graphicTextGap="2.0" maxHeight="45.0" mnemonicParsing="false" onAction="#onManageTemplates" text="Trash">
+      		<Button fx:id="showTrashFolder" graphicTextGap="2.0" maxHeight="45.0" mnemonicParsing="false" onAction="#onShowTrash" text="Show Trash">
       			<font>
       				<Font name="Helvetica" size="12.0" />
       			</font>
