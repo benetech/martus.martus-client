@@ -33,6 +33,7 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -70,6 +71,20 @@ public class BulletinEditorHeaderController extends FxController
 		updateVersion(bulletinToShow);			
 		updateFrom(bulletinToShow);
 		updateTo(bulletinToShow);
+		updateAddRemoveContacts();
+	}
+	
+	private void updateAddRemoveContacts()
+	{
+		try
+		{
+			ContactKeys ourContacts = getApp().getContactKeys();
+			addRemoveContact.setDisable(ourContacts.isEmpty());
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
 	}
 
 	private void updateTo(FxBulletin bulletinToShow)
@@ -196,6 +211,9 @@ public class BulletinEditorHeaderController extends FxController
 	
 	@FXML
 	Label versionField;
+	
+	@FXML
+	Button addRemoveContact;
 	
 	private Property titleProperty;
 	private ObservableList<HeadquartersKey> authorizedToContacts;
