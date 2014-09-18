@@ -55,7 +55,7 @@ public class BulletinDetailsController extends FxController
 		super.initialize(location, bundle);
 		try
 		{
-			UniversalId bulletinId = bulletin.getUniversalIdProperty().getValue();
+			UniversalId bulletinId = bulletin.universalIdProperty().getValue();
 			if(getApp().getAccountId().equals(bulletinId.getAccountId()))
 			{
 				authorName.setText(getApp().getUserName());
@@ -68,9 +68,9 @@ public class BulletinDetailsController extends FxController
 			
 			publicCode.setText(MartusCrypto.computeFormattedPublicCode40(bulletinId.getAccountId()));
 
-			bulletinLocalId.textProperty().bind(bulletin.getBulletinLocalIdProperty());
+			bulletinLocalId.textProperty().bind(bulletin.bulletinLocalIdProperty());
 
-			String dateWasCreated = bulletin.getFieldProperty(Bulletin.TAGENTRYDATE).getValue();
+			String dateWasCreated = bulletin.fieldProperty(Bulletin.TAGENTRYDATE).getValue();
 			dateCreated.setText(dateWasCreated);
 			
 			String dateSaved = UiBulletinDetailsDialog.getSavedDateToDisplay(bulletinId, bulletinId, getMainWindow());

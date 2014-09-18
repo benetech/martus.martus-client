@@ -141,7 +141,7 @@ public class BulletinEditorHeaderController extends FxController
 		try
 		{
 			String accountId = getMainWindow().getApp().getUserName();
-			String accountKey = bulletinToShow.getUniversalIdProperty().get().getAccountId();
+			String accountKey = bulletinToShow.universalIdProperty().get().getAccountId();
 			String publicCode = MartusCrypto.computeFormattedPublicCode40(accountKey);
 			HashMap tokenReplacement = new HashMap();
 			tokenReplacement.put("#AccountId#", accountId);
@@ -157,12 +157,12 @@ public class BulletinEditorHeaderController extends FxController
 
 	private void updateVersion(FxBulletin bulletinToShow)
 	{
-		versionField.setText(String.valueOf(bulletinToShow.getVersionProperty().get()));
+		versionField.setText(String.valueOf(bulletinToShow.versionProperty().get()));
 	}
 
 	private void updateTitle(FxBulletin bulletinToShow)
 	{
-		StringProperty newTitleProperty = bulletinToShow.getFieldProperty(Bulletin.TAGTITLE);
+		StringProperty newTitleProperty = bulletinToShow.fieldProperty(Bulletin.TAGTITLE);
 		titleProperty = FxBindingHelpers.bindToOurPropertyField(newTitleProperty, titleField.textProperty(), titleProperty);
 		headerTitleLabel.textProperty().bind(titleProperty);
 	}

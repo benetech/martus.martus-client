@@ -136,7 +136,7 @@ public class BulletinEditorBodyController extends FxController
 			if(isSectionStart)
 				return;
 			
-			SimpleStringProperty property = bulletin.getFieldProperty(fieldSpec.getTag());
+			SimpleStringProperty property = bulletin.fieldProperty(fieldSpec.getTag());
 			currentSection.addField(fieldSpec, property);
 		}
 

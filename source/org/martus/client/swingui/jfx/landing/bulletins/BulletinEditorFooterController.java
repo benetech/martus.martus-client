@@ -74,7 +74,7 @@ public class BulletinEditorFooterController extends FxController
 		try
 		{
 			BulletinHistory history = bulletinToShow.getHistory().getValue();
-			UniversalId bulletinUid = bulletinToShow.getUniversalIdProperty().getValue();
+			UniversalId bulletinUid = bulletinToShow.universalIdProperty().getValue();
 			String accountId = bulletinUid.getAccountId();
 			UiMainWindow mainWindow = getMainWindow();
 			historyItemLabels = FXCollections.observableArrayList();
@@ -87,7 +87,7 @@ public class BulletinEditorFooterController extends FxController
 				String versionsData =  getHistoryItemData(i+1, dateSaved, title);
 				historyItemLabels.add(new HistoryItem(versionsData, localId));
 			}
-			String currentVersionTitle = bulletinToShow.getFieldProperty(Bulletin.TAGTITLE).getValue();
+			String currentVersionTitle = bulletinToShow.fieldProperty(Bulletin.TAGTITLE).getValue();
 			String currentVersionLastSaved = UiBulletinDetailsDialog.getSavedDateToDisplay(bulletinUid,bulletinUid, mainWindow);
 			String versionsData =  getHistoryItemData(history.size() + 1, currentVersionLastSaved, currentVersionTitle);
 			historyItemLabels.add(new HistoryItem(versionsData, bulletinUid.getLocalId()));
@@ -128,7 +128,7 @@ public class BulletinEditorFooterController extends FxController
 		try
 		{
 			HistoryItem selectedVersion = historyItems.getSelectionModel().getSelectedItem();
-			UniversalId bulletinVersionId = UniversalId.createFromAccountAndLocalId(bulletin.getUniversalIdProperty().getValue().getAccountId(), selectedVersion.getLocalId());
+			UniversalId bulletinVersionId = UniversalId.createFromAccountAndLocalId(bulletin.universalIdProperty().getValue().getAccountId(), selectedVersion.getLocalId());
 			FxController htmlViewer = BulletinsListController.getViewControllerForBulletin(bulletinVersionId, getMainWindow());
 			showDialogWithClose("ViewBulletin", htmlViewer);
 		} 

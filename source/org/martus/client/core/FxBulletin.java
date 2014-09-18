@@ -89,7 +89,7 @@ public class FxBulletin
 		{
 			FieldSpec fieldSpec = fieldSpecs.get(i);
 			String fieldTag = fieldSpec.getTag();
-			String value = getFieldProperty(fieldTag).getValue();
+			String value = fieldProperty(fieldTag).getValue();
 			modified.set(fieldTag, value);
 //			System.out.println("copyDataToBulletin " + fieldTag + ":" + value);
 		}
@@ -98,12 +98,12 @@ public class FxBulletin
 		modified.setAuthorizedToReadKeys(modifiedKeys);
 	}
 
-	public ReadOnlyObjectWrapper<UniversalId> getUniversalIdProperty()
+	public ReadOnlyObjectWrapper<UniversalId> universalIdProperty()
 	{
 		return universalIdProperty;
 	}
 	
-	public ReadOnlyIntegerProperty getVersionProperty()
+	public ReadOnlyIntegerProperty versionProperty()
 	{
 		return versionProperty;
 	}
@@ -118,7 +118,7 @@ public class FxBulletin
 		return bulletinHistory;
 	}
 
-	public ReadOnlyStringProperty getBulletinLocalIdProperty()
+	public ReadOnlyStringProperty bulletinLocalIdProperty()
 	{
 		return bulletinLocalId;
 	}
@@ -135,7 +135,7 @@ public class FxBulletin
 		return specs;
 	}
 
-	public SimpleStringProperty getFieldProperty(String tag)
+	public SimpleStringProperty fieldProperty(String tag)
 	{
 		return fieldProperties.get(tag);
 	}
@@ -146,7 +146,7 @@ public class FxBulletin
 		{
 			FieldSpec spec = fieldSpecs.get(i);
 			String tag = spec.getTag();
-			String value = getFieldProperty(tag).getValue();
+			String value = fieldProperty(tag).getValue();
 			String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, getLocalization());
 			validateField(spec, label, value);
 		}
@@ -227,11 +227,12 @@ public class FxBulletin
 	private MiniLocalization localization;
 	private boolean hasBeenModified;
 	
-	private ReadOnlyObjectWrapper<UniversalId> universalIdProperty;
 	private HashMap<String, SimpleStringProperty> fieldProperties;
-	private FieldSpecCollection fieldSpecs;
+	private ReadOnlyObjectWrapper<UniversalId> universalIdProperty;
 	private ReadOnlyIntegerProperty versionProperty;
+	private ReadOnlyStringProperty bulletinLocalId;
+
+	private FieldSpecCollection fieldSpecs;
 	private ObservableList<HeadquartersKey> authorizedToReadKeys;
 	private ReadOnlyObjectWrapper<BulletinHistory> bulletinHistory;
-	private ReadOnlyStringProperty bulletinLocalId;
 }

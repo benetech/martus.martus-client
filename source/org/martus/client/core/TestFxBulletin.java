@@ -72,7 +72,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		fxb.copyDataFromBulletin(b);
 		assertFalse(fxb.hasBeenModified());
 		
-		SimpleStringProperty authorProperty = fxb.getFieldProperty(Bulletin.TAGAUTHOR);
+		SimpleStringProperty authorProperty = fxb.fieldProperty(Bulletin.TAGAUTHOR);
 		assertEquals("", authorProperty.getValue());
 		
 		authorProperty.setValue("Something else");
@@ -105,12 +105,12 @@ public class TestFxBulletin extends TestCaseEnhanced
 	public void testVersion() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin(getLocalization());
-		ReadOnlyIntegerProperty versionPropertyNull = fxb.getVersionProperty();
+		ReadOnlyIntegerProperty versionPropertyNull = fxb.versionProperty();
 		assertEquals(null, versionPropertyNull);
 		
 		Bulletin b = new BulletinForTesting(security);
 		fxb.copyDataFromBulletin(b);
-		ReadOnlyIntegerProperty versionProperty = fxb.getVersionProperty();
+		ReadOnlyIntegerProperty versionProperty = fxb.versionProperty();
 		assertEquals(Integer.valueOf(b.getVersion()), versionProperty.getValue());
 		assertEquals(Integer.valueOf(1), versionProperty.getValue());
 		
@@ -123,7 +123,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals("Bulletin2 doesn't have 3 versions?", 3, bulletinWith3Versions.getVersion());
 		fxb.copyDataFromBulletin(bulletinWith3Versions);
 		assertEquals("This is a readOnlyInteger so it will not change", Integer.valueOf(1), versionProperty.getValue());
-		versionProperty = fxb.getVersionProperty();
+		versionProperty = fxb.versionProperty();
 		assertEquals(Integer.valueOf(bulletinWith3Versions.getVersion()), versionProperty.getValue());
 		assertEquals(Integer.valueOf(3), versionProperty.getValue());
 	}
@@ -131,19 +131,19 @@ public class TestFxBulletin extends TestCaseEnhanced
 	public void testUniversalId() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin(getLocalization());
-		ReadOnlyObjectWrapper<UniversalId> universalIdPropertyNull = fxb.getUniversalIdProperty();
+		ReadOnlyObjectWrapper<UniversalId> universalIdPropertyNull = fxb.universalIdProperty();
 		assertEquals(null, universalIdPropertyNull);
 		
 		Bulletin b = new BulletinForTesting(security);
 		fxb.copyDataFromBulletin(b);
-		ReadOnlyObjectWrapper<UniversalId> universalIdProperty = fxb.getUniversalIdProperty();
+		ReadOnlyObjectWrapper<UniversalId> universalIdProperty = fxb.universalIdProperty();
 		assertEquals(b.getUniversalId(), universalIdProperty.getValue());
 		
 		Bulletin b2 = new BulletinForTesting(security);
 		assertNotEquals("Bulletins have same id?", b.getUniversalId(), b2.getUniversalId());
 		fxb.copyDataFromBulletin(b2);
 		assertEquals(null, universalIdProperty.getValue());
-		ReadOnlyObjectWrapper<UniversalId> universalIdProperty2 = fxb.getUniversalIdProperty();
+		ReadOnlyObjectWrapper<UniversalId> universalIdProperty2 = fxb.universalIdProperty();
 		assertEquals(b2.getUniversalId(), universalIdProperty2.getValue());
 	}
 	
@@ -199,22 +199,22 @@ public class TestFxBulletin extends TestCaseEnhanced
 	public void testBulletinLocalId() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin(getLocalization());
-		ReadOnlyStringProperty bulletinLocalIdNull = fxb.getBulletinLocalIdProperty();
+		ReadOnlyStringProperty bulletinLocalIdNull = fxb.bulletinLocalIdProperty();
 		assertEquals(null, bulletinLocalIdNull);
 
 		Bulletin b = new BulletinForTesting(security);
 		fxb.copyDataFromBulletin(b);
 
-		ReadOnlyStringProperty fxLocalId = fxb.getBulletinLocalIdProperty();
+		ReadOnlyStringProperty fxLocalId = fxb.bulletinLocalIdProperty();
 		assertEquals(b.getLocalId(), fxLocalId.getValue());		
 		MockBulletinStore testStore = new MockBulletinStore();
 
     		Bulletin clone = testStore.createNewDraft(b, b.getTopSectionFieldSpecs(), b.getBottomSectionFieldSpecs());
     		assertNotEquals("not new local id?", b.getLocalId(), clone.getLocalId());
     		fxb.copyDataFromBulletin(clone);
-    		assertEquals(clone.getLocalId(), fxb.getBulletinLocalIdProperty().getValue());
+    		assertEquals(clone.getLocalId(), fxb.bulletinLocalIdProperty().getValue());
     		assertNotNull("ReadOnlyStringProperty will be unchanged", fxLocalId.getValue());
-    		assertNotEquals(fxLocalId.getValue(), fxb.getBulletinLocalIdProperty().getValue());
+    		assertNotEquals(fxLocalId.getValue(), fxb.bulletinLocalIdProperty().getValue());
  	}
 	
 	public void testBulletinHistory() throws Exception
@@ -247,12 +247,12 @@ public class TestFxBulletin extends TestCaseEnhanced
 		Bulletin b = new BulletinForTesting(security);
 		fxb.copyDataFromBulletin(b);
 
-		SimpleStringProperty emptyTitleProperty = fxb.getFieldProperty(Bulletin.TAGTITLE);
+		SimpleStringProperty emptyTitleProperty = fxb.fieldProperty(Bulletin.TAGTITLE);
 		assertEquals("", emptyTitleProperty.getValue());
 		b.set(Bulletin.TAGTITLE, "This is a title");
 		fxb.copyDataFromBulletin(b);
 		assertNull(emptyTitleProperty.getValue());
-		SimpleStringProperty titleProperty = fxb.getFieldProperty(Bulletin.TAGTITLE);
+		SimpleStringProperty titleProperty = fxb.fieldProperty(Bulletin.TAGTITLE);
 		assertEquals(b.get(Bulletin.TAGTITLE), titleProperty.getValue());
 	}
 	
@@ -267,7 +267,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		b.set(PRIVATE_TAG, PRIVATE_DATA_1);
 		fxb.copyDataFromBulletin(b);
 		
-		SimpleStringProperty privateInfoProperty = fxb.getFieldProperty(PRIVATE_TAG);
+		SimpleStringProperty privateInfoProperty = fxb.fieldProperty(PRIVATE_TAG);
 		assertEquals(b.get(PRIVATE_TAG), privateInfoProperty.getValue());
 		privateInfoProperty.setValue(PRIVATE_DATA_2);
 		
