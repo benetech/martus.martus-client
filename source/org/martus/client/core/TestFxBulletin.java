@@ -29,8 +29,8 @@ import java.util.Vector;
 
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 
 import org.martus.client.test.MockBulletinStore;
@@ -199,13 +199,13 @@ public class TestFxBulletin extends TestCaseEnhanced
 	public void testBulletinLocalId() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin(getLocalization());
-		StringProperty bulletinLocalIdNull = fxb.getBulletinLocalIdProperty();
+		ReadOnlyStringProperty bulletinLocalIdNull = fxb.getBulletinLocalIdProperty();
 		assertEquals(null, bulletinLocalIdNull);
 
 		Bulletin b = new BulletinForTesting(security);
 		fxb.copyDataFromBulletin(b);
 
-		StringProperty fxLocalId = fxb.getBulletinLocalIdProperty();
+		ReadOnlyStringProperty fxLocalId = fxb.getBulletinLocalIdProperty();
 		assertEquals(b.getLocalId(), fxLocalId.getValue());		
 		MockBulletinStore testStore = new MockBulletinStore();
 
@@ -213,7 +213,8 @@ public class TestFxBulletin extends TestCaseEnhanced
     		assertNotEquals("not new local id?", b.getLocalId(), clone.getLocalId());
     		fxb.copyDataFromBulletin(clone);
     		assertEquals(clone.getLocalId(), fxb.getBulletinLocalIdProperty().getValue());
-    		assertNull(fxLocalId.getValue());
+    		assertNotNull("ReadOnlyStringProperty will be unchanged", fxLocalId.getValue());
+    		assertNotEquals(fxLocalId.getValue(), fxb.getBulletinLocalIdProperty().getValue());
  	}
 	
 	public void testBulletinHistory() throws Exception

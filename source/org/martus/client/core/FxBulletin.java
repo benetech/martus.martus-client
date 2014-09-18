@@ -30,9 +30,9 @@ import java.util.Vector;
 
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -118,7 +118,7 @@ public class FxBulletin
 		return bulletinHistory;
 	}
 
-	public StringProperty getBulletinLocalIdProperty()
+	public ReadOnlyStringProperty getBulletinLocalIdProperty()
 	{
 		return bulletinLocalId;
 	}
@@ -179,10 +179,7 @@ public class FxBulletin
 		}
 		
 		if(bulletinLocalId != null)
-		{
-			bulletinLocalId.setValue(null);
 			bulletinLocalId = null;
-		}
 		
 		if(bulletinHistory != null)
 		{
@@ -236,5 +233,5 @@ public class FxBulletin
 	private ReadOnlyIntegerProperty versionProperty;
 	private ObservableList<HeadquartersKey> authorizedToReadKeys;
 	private ReadOnlyObjectWrapper<BulletinHistory> bulletinHistory;
-	private StringProperty bulletinLocalId;
+	private ReadOnlyStringProperty bulletinLocalId;
 }
