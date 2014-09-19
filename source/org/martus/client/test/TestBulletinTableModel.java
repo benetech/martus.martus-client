@@ -126,7 +126,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		b.set("title", "xyz");
 		store.saveBulletin(b);
 
-		assertEquals(Bulletin.STATUSSEALED, b.getStatus());
+		assertEquals(Bulletin.STATUSIMMUTABLE, b.getStatus());
 		assertEquals(localization.getStatusLabel("sealed"), list.getValueAt(0,STATUS));
 
 		b.set(BulletinConstants.TAGEVENTDATE, "1999-04-15");

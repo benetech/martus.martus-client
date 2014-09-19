@@ -106,7 +106,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
     	if(draftWidth > width)
     		width = draftWidth;
     	
-    	int sealedWidth = getRenderedWidth(COLUMN_STATUS, localization.getStatusLabel(Bulletin.STATUSSEALED));
+    	int sealedWidth = getRenderedWidth(COLUMN_STATUS, localization.getStatusLabel(Bulletin.STATUSIMMUTABLE));
     	if(sealedWidth > width)
     		width = sealedWidth;
     	setColumnMaxWidth(COLUMN_STATUS, width);

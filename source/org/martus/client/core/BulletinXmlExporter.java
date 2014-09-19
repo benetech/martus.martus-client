@@ -211,7 +211,7 @@ public class BulletinXmlExporter
 		if(b.isSealed())
 		{
 			statusLocalized = localization.getStatusLabel("sealed");
-			status = Bulletin.STATUSSEALED;
+			status = Bulletin.STATUSIMMUTABLE;
 		}
 		dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.BULLETIN_STATUS, status));
 		dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.BULLETIN_STATUS_LOCALIZED, statusLocalized));
