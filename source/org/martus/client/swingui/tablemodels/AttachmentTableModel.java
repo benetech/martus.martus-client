@@ -146,7 +146,7 @@ public class AttachmentTableModel extends AbstractTableModel
 		{
 			DatabaseKey key = DatabaseKey.createMutableKey(id);
 			if(!database.doesRecordExist(key))
-				key = DatabaseKey.createSealedKey(id);
+				key = DatabaseKey.createImmutableKey(id);
 			if(!database.doesRecordExist(key))
 				return getLocalization().getFieldLabel("AttachmentSizeUnknown");
 			size = database.getRecordSize(key);
