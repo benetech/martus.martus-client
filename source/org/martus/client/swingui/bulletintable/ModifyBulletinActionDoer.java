@@ -80,7 +80,7 @@ public class ModifyBulletinActionDoer
 			}
 			
 			Bulletin bulletinToModify = original; 
-			if(isMyDraft(isMine, original.isDraft()))
+			if(isMyMutable(isMine, original.isMutable()))
 				bulletinToModify = updateFieldSpecsIfNecessary(original);
 			else if(needsCloneToEdit(isMine, original.isImmutable()))
 				bulletinToModify = createCloneAndUpdateFieldSpecsIfNecessary(original);
@@ -99,7 +99,7 @@ public class ModifyBulletinActionDoer
 		return isMine && isImmutable;
 	}
 	
-	private boolean isMyDraft(boolean isMine, boolean isDraft)
+	private boolean isMyMutable(boolean isMine, boolean isDraft)
 	{
 		return isMine && isDraft;
 	}

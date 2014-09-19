@@ -421,7 +421,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 					continue;
 				}
 
-				if(bulletin.isDraft())
+				if(bulletin.isMutable())
 					draftOutBox.add(bulletin);
 				if(bulletin.isImmutable())
 					sealedOutBox.add(bulletin);

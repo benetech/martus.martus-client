@@ -253,7 +253,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
 	    	assertEquals("Did not kept hq?", 1, clone.getAuthorizedToReadKeys().size());
-	    	assertTrue("not draft?", clone.isDraft());
+	    	assertTrue("not Mutable?", clone.isMutable());
 	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
 	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
 	    	BulletinHistory history = clone.getHistory();
@@ -273,7 +273,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
 	    	assertEquals("did not keep hq?", 1, clone.getAuthorizedToReadKeys().size());
-	    	assertTrue("not draft?", clone.isDraft());
+	    	assertTrue("not Mutable?", clone.isMutable());
 	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
 	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
 	    	BulletinHistory history = clone.getHistory();
@@ -295,7 +295,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("no public data?", PUBLIC_DATA, newFieldSpecsBulletin.get(Bulletin.TAGTITLE));
 	    	assertEquals("no private data?", PRIVATE_DATA, newFieldSpecsBulletin.get(Bulletin.TAGAUTHOR));
 	    	assertEquals("did not keep hq?", 1, newFieldSpecsBulletin.getAuthorizedToReadKeys().size());
-	    	assertTrue("not draft?", newFieldSpecsBulletin.isDraft());
+	    	assertTrue("not Mutable?", newFieldSpecsBulletin.isMutable());
 	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), newFieldSpecsBulletin.getTopSectionFieldSpecs().size());
 	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), newFieldSpecsBulletin.getBottomSectionFieldSpecs().size());
 	    	BulletinHistory history = newFieldSpecsBulletin.getHistory();
@@ -315,7 +315,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
 	    	assertEquals("Did not keep hq?", 1, clone.getAuthorizedToReadKeys().size());
-	    	assertTrue("not draft?", clone.isDraft());
+	    	assertTrue("not Mutable?", clone.isMutable());
 	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
 	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
 	    	assertEquals("has history?", 0, clone.getHistory().size());
