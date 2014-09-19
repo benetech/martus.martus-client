@@ -48,6 +48,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.MartusLocalization;
@@ -170,11 +172,11 @@ public class BulletinEditorBodyController extends FxController
 			rows = new Vector<BulletinEditorRow>();
 			
 			ColumnConstraints labelColumnConstraints= new ColumnConstraints();
-			labelColumnConstraints.setHgrow(Priority.NEVER);
-			labelColumnConstraints.minWidthProperty().bind(labelColumnConstraints.prefWidthProperty());
+			labelColumnConstraints.fillWidthProperty().setValue(true);
+			labelColumnConstraints.setMinWidth(200);
 
 			ColumnConstraints fieldColumnConstraints = new ColumnConstraints();
-			fieldColumnConstraints.setHgrow(Priority.SOMETIMES);
+			fieldColumnConstraints.fillWidthProperty().setValue(true);
 
 			getColumnConstraints().add(labelColumnConstraints);
 			getColumnConstraints().add(fieldColumnConstraints);
@@ -253,7 +255,9 @@ public class BulletinEditorBodyController extends FxController
 			localization = localizationToUse;
 			
 			labelNode = new HBox();
+			labelNode.getStyleClass().add("labelColumnContents");
 			fieldsNode = new HBox();
+			fieldsNode.getStyleClass().add("fieldsColumnContents");
 		}
 		
 		public Node getLabelNode()
@@ -268,13 +272,12 @@ public class BulletinEditorBodyController extends FxController
 		
 		public void addFieldToRow(FieldSpec fieldSpec, SimpleStringProperty property)
 		{
-			getLabelDestination().getChildren().add(createLabel(fieldSpec));
+			Node label = createLabel(fieldSpec);
+			HBox.setHgrow(label, Priority.ALWAYS);
+			getLabelDestination().getChildren().add(label);
 			
 			Node fieldNode = createFieldForSpec(fieldSpec, property);
 			fieldsNode.getChildren().add(fieldNode);
-			FieldType type = fieldSpec.getType();
-			if(type.isString() || type.isMultiline() || type.isMessage())
-				HBox.setHgrow(fieldNode, Priority.ALWAYS);
 		}
 
 		public HBox getLabelDestination()
@@ -285,14 +288,21 @@ public class BulletinEditorBodyController extends FxController
 			return fieldsNode;
 		}
 		
-		public Label createLabel(FieldSpec spec)
+		public Node createLabel(FieldSpec spec)
 		{
 			String tag = spec.getTag();
 			String labelText = spec.getLabel();
 			if(StandardFieldSpecs.isStandardFieldTag(tag))
 				labelText = getLocalization().getFieldLabel(tag);
-			Label label = new Label(labelText);
-			return label;
+			Text text = new Text(labelText);
+			TextFlow flow = new TextFlow(text);
+			if(spec.isRequiredField())
+			{
+				Label asterisk = new Label("*");
+				asterisk.getStyleClass().add("requiredAsterisk");
+				flow.getChildren().add(asterisk);
+			}
+			return flow;
 		}
 		
 		private Node createFieldForSpec(FieldSpec spec, SimpleStringProperty property)
@@ -363,15 +373,11 @@ public class BulletinEditorBodyController extends FxController
 
 		private Node createMessageField(FieldSpec spec)
 		{
-			String message = ((MessageFieldSpec)(spec)).getMessage();
-			TextArea textArea = new TextArea(message);
-			textArea.setPrefColumnCount(MINIMUM_REASONABLE_COLUMN_COUNT);
-			textArea.setPrefRowCount(1);
-			textArea.setFocusTraversable(false);
-			textArea.setWrapText(true);
-			textArea.setEditable(false);
-			
-			return textArea;
+			String messageText = ((MessageFieldSpec)(spec)).getMessage();
+			Text text = new Text(messageText);
+			TextFlow flow = new TextFlow(text);
+			flow.getStyleClass().add("messageText");
+			return flow;
 		}
 
 		public Node createStringField(SimpleStringProperty property)
@@ -379,6 +385,7 @@ public class BulletinEditorBodyController extends FxController
 			TextField textField = new TextField();
 			textField.setPrefColumnCount(MINIMUM_REASONABLE_COLUMN_COUNT);
 			textField.textProperty().bindBidirectional(property);
+			HBox.setHgrow(textField, Priority.SOMETIMES);
 			
 			return textField;
 		}
@@ -390,13 +397,14 @@ public class BulletinEditorBodyController extends FxController
 			textArea.setPrefRowCount(MULTILINE_FIELD_HEIGHT_IN_ROWS);
 			textArea.setWrapText(true);
 			textArea.textProperty().bindBidirectional(property);
+			HBox.setHgrow(textArea, Priority.SOMETIMES);
 			
 			return textArea;
 		}
 		
 		private Node createFieldNotAvailable()
 		{
-			return new Label("*");
+			return new Label("(n/a)");
 		}
 
 		private MartusLocalization getLocalization()
