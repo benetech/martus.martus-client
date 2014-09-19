@@ -223,7 +223,7 @@ public class MockMartusApp extends MartusApp
 								"Rosa, a causa de otra bomba arrojada por el avi"+UnicodeConstants.ACCENT_O_LOWER+"n.");
 			b.set("publicinfo",	"");
 			b.set("privateinfo",	"");
-			b.setSealed();
+			b.setImmutable();
 			store.saveBulletin(b);
 			f.add(b);
 		}
@@ -248,7 +248,7 @@ public class MockMartusApp extends MartusApp
 								"from 90. The police claimed Emmanuel Lenkoe hung himself with " +
 								"his belt in his cell");
 			b.set("privateinfo","");
-			b.setSealed();
+			b.setImmutable();
 			store.saveBulletin(b);
 			f.add(b);
 		}
@@ -257,7 +257,7 @@ public class MockMartusApp extends MartusApp
 			b.set("author", "Radiz");
 			b.set("eventdate", "2001-04-26");
 			b.set("title", "Kidnapping in town square");
-			b.setSealed();
+			b.setImmutable();
 			store.saveBulletin(b);
 			f.add(b);
 		}
@@ -266,7 +266,7 @@ public class MockMartusApp extends MartusApp
 			b.set("author", "Molanna");
 			b.set("eventdate", "1999-02-15");
 			b.set("title", "Missing child near river");
-			b.setSealed();
+			b.setImmutable();
 			store.saveBulletin(b);
 			f.add(b);
 		}
@@ -275,7 +275,7 @@ public class MockMartusApp extends MartusApp
 			b.set("author", "Ullan");
 			b.set("eventdate", "2000-12-19");
 			b.set("title", "Child with broken arm");
-			b.setSealed();
+			b.setImmutable();
 			store.saveBulletin(b);
 			f.add(b);
 		}
@@ -296,7 +296,7 @@ public class MockMartusApp extends MartusApp
 							"developers purchased the land from and does not know " +
 							"who in the government to seek assistance from.  His " +
 							"shop is in the tourist  district, and has been confiscated.");
-			b.setSealed();
+			b.setImmutable();
 			store.saveBulletin(b);
 			f.add(b);
 		}
@@ -315,7 +315,7 @@ public class MockMartusApp extends MartusApp
 								"by men who threw a firebomb in the front windows.  The " +
 								"explosion did not hurt anyone, staff members were in " +
 								"the back of the office during the attack.");
-			b.setSealed();
+			b.setImmutable();
 			store.saveBulletin(b);
 			f.add(b);
 		}
@@ -330,7 +330,7 @@ public class MockMartusApp extends MartusApp
 			b.set("keywords", "theft, computers, legal research, war crimes tribunal");
 			b.set("summary", "The Guatemala Legal Defence offices were targeted for theft of computers.  All of the legal office PCs with information pertaining to the upcoming War Crimes Tribunal were stolen.");
 			b.set("publicinfo", "The legal research to be used in the upcoming War Crimes Tribunal was lost when computers with the research and strategy were stolen in March.  Government officials claim that the computers loss was due to petty theft, but many in the NGO community believe that it is a targeted campaign to thwart justice in the upcoming tribunal.");
-			b.setSealed();
+			b.setImmutable();
 			store.saveBulletin(b);
 			f.add(b);
 		}
@@ -345,7 +345,7 @@ public class MockMartusApp extends MartusApp
 			b.set("keywords", "toxic storage, leaks, environment");
 			b.set("summary", "The chemical plant facilities south of St. Petersburg are using faulty storage mechanisms for storing toxic chemicals that it no longer uses.");
 			b.set("publicinfo", "Toxic storage tanks used by the chemical plant facilities south of St. Petersburg are not meeting international standards.  Workers fear that contamination of air and groundwater could ensue.");
-			b.setSealed();
+			b.setImmutable();
 			store.saveBulletin(b);
 			f.add(b);
 		}
@@ -361,7 +361,7 @@ public class MockMartusApp extends MartusApp
 			b.set("keywords", "kidnapping, battery");
 			b.set("summary", "Woman's arm was broken when she tried to stop her husband from being kidnapped.");
 			b.set("publicinfo", "Two men arrived in the middle of the night and pounded on the door.  The men abducted the husband and the woman tried to stop them.  They broke her arm and she has not seen her husband since.");
-			b.setSealed();
+			b.setImmutable();
 			store.saveBulletin(b);
 			f.add(b);
 		}

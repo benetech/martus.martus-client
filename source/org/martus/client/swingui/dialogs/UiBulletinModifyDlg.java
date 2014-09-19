@@ -330,7 +330,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			{
 				store.removeBulletinFromFolder(draftOutbox, bulletin);
 				
-				bulletin.setSealed();
+				bulletin.setImmutable();
 				outboxToUse = store.getFolderSealedOutbox();
 			}
 			else

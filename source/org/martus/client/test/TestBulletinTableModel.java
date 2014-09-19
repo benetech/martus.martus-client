@@ -140,7 +140,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		b.setMutable();
 		store.saveBulletin(b);
 		assertEquals(localization.getStatusLabel("draft"), list.getValueAt(0,STATUS));
-		b.setSealed();
+		b.setImmutable();
 		store.saveBulletin(b);
 		assertEquals(localization.getStatusLabel("sealed"), list.getValueAt(0,STATUS));
 	}

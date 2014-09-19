@@ -131,7 +131,7 @@ public class ActionMenuAddPermissions extends UiMenuAction
 			{
 				newBulletin = app.createBulletin();
 				newBulletin.createDraftCopyOf(oldBulletin, app.getStore().getDatabase());
-				newBulletin.setSealed();
+				newBulletin.setImmutable();
 				outbox = app.getFolderSealedOutbox();
 			}
 			newBulletin.addAuthorizedToReadKeys(hqKeys);

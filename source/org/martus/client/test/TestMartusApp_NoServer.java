@@ -580,7 +580,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		Bulletin b1 = appWithAccount.createBulletin();
 		Bulletin b2 = appWithAccount.createBulletin();
 		Bulletin b3 = appWithAccount.createBulletin();
-		b3.setSealed();
+		b3.setImmutable();
 		appWithAccount.getStore().saveBulletin(b1);
 		appWithAccount.getStore().saveBulletin(b2);
 		appWithAccount.getStore().saveBulletin(b3);
@@ -2358,7 +2358,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		
 		b1.set(Bulletin.TAGPRIVATEINFO, originalString);
 		b1.set(Bulletin.TAGKEYWORDS, commonString);
-		b1.setSealed();
+		b1.setImmutable();
 		BulletinFolder newFolder = new BulletinFolder(store, "myFolder");
 		appWithAccount.saveBulletin(b1, newFolder);
 		assertNull(store.findFolder(store.getSearchFolderName()));
@@ -2382,7 +2382,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		b2.set(Bulletin.TAGPRIVATEINFO, newString);
 		String publicData2 = "publicData2";
 		b2.set(Bulletin.TAGPUBLICINFO, publicData2);
-		b2.setSealed();
+		b2.setImmutable();
 		appWithAccount.saveBulletin(b2, newFolder);
 		Bulletin b3 = store.createNewDraft(b2, b2.getTopSectionFieldSpecs(), b2.getBottomSectionFieldSpecs());
 		b3.set(Bulletin.TAGPUBLICINFO, "");

@@ -133,7 +133,7 @@ public class ActionMenuSealSelectedBulletins extends UiMenuAction
 
 			store.removeBulletinFromFolder(draftOutbox, bulletin);
 
-			bulletin.setSealed();
+			bulletin.setImmutable();
 			store.saveBulletin(bulletin);
 
 			store.ensureBulletinIsInFolder(sealedOutbox, bulletin.getUniversalId());

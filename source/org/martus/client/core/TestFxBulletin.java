@@ -115,7 +115,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals(Integer.valueOf(1), versionProperty.getValue());
 		
 		Bulletin bulletinWith3Versions = new BulletinForTesting(security);
-		bulletinWith3Versions.setSealed();
+		bulletinWith3Versions.setImmutable();
 		BulletinHistory localHistory = bulletinWith3Versions.getHistory();
 		localHistory.add("history1");
 		localHistory.add("history2");

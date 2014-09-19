@@ -166,7 +166,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
    {
 		MockBulletinStore clientStore = new MockBulletinStore(security);
 		Bulletin original = testStore.createEmptyBulletin();
-		original.setSealed();
+		original.setImmutable();
 		clientStore.saveBulletin(original);
 		BulletinFolder folderA = clientStore.createFolder("A");
 		BulletinFolder folderB = clientStore.createFolder("B");
@@ -212,7 +212,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     public void testRemoveBulletinFromAllFolders() throws Exception
 	{
     	Bulletin original = testStore.createEmptyBulletin();
-    	original.setSealed();
+    	original.setImmutable();
     	testStore.saveBulletin(original);
     	testStore.setIsOnServer(original);
     	assertTrue("original not on server?", testStore.isProbablyOnServer(original.getUniversalId()));
@@ -330,7 +330,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	original.set(Bulletin.TAGTITLE, PUBLIC_DATA);
     	original.set(Bulletin.TAGAUTHOR, PRIVATE_DATA);
     	original.setAuthorizedToReadKeys(oldHq);
-    	original.setSealed();
+    	original.setImmutable();
 		return original;
 	}
 
@@ -590,7 +590,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals(false, (b2 == null));
 		assertEquals(b.get(BulletinConstants.TAGSUMMARY), b2.get(BulletinConstants.TAGSUMMARY));
 		
-		b.setSealed();
+		b.setImmutable();
 		testStore.saveBulletin(b);
 
 		Bulletin b3 = testStore.getBulletinRevision(id);
@@ -1032,13 +1032,13 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		BulletinFolder aFolder = testStore.createFolder("blah");
 
 		Bulletin original = testStore.createEmptyBulletin();
-		original.setSealed();
+		original.setImmutable();
 		testStore.saveBulletin(original);
 		testStore.addBulletinToFolder(aFolder, original.getUniversalId());
 		assertEquals(1, aFolder.getBulletinCount());
 
 		Bulletin firstClone = testStore.createNewDraft(original, publicFields, privateFields);
-		firstClone.setSealed();
+		firstClone.setImmutable();
 		testStore.saveBulletin(firstClone);
 		
 		Bulletin unrelated = testStore.createEmptyBulletin();
@@ -1053,7 +1053,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertTrue("didn't update to first clone?", aFolder.contains(firstClone));
 		
 		Bulletin lastClone = testStore.createNewDraft(firstClone, publicFields, privateFields);
-		lastClone.setSealed();
+		lastClone.setImmutable();
 		testStore.saveBulletin(lastClone);
 		BulletinFolder otherFolder = testStore.getFolderDiscarded();
 		testStore.addBulletinToFolder(otherFolder, lastClone.getUniversalId());
@@ -1078,10 +1078,10 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		FieldSpecCollection privateFields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		MockBulletinStore clientStore = new MockBulletinStore(security);
 		Bulletin original = clientStore.createEmptyBulletin();
-		original.setSealed();
+		original.setImmutable();
 
 		Bulletin clone = clientStore.createNewDraft(original, publicFields, privateFields);
-		clone.setSealed();
+		clone.setImmutable();
 		clientStore.saveBulletinForTesting(clone);
 		BulletinUidCollector collector = new BulletinUidCollector();
 		clientStore.visitAllBulletinRevisions(collector);
@@ -1112,10 +1112,10 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		FieldSpecCollection privateFields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		MockBulletinStore clientStore = new MockBulletinStore(security);
 		Bulletin original = clientStore.createEmptyBulletin();
-		original.setSealed();
+		original.setImmutable();
 
 		Bulletin newerVersion = clientStore.createNewDraft(original, publicFields, privateFields);
-		newerVersion.setSealed();
+		newerVersion.setImmutable();
 		clientStore.saveBulletinForTesting(newerVersion);
 		clientStore.saveBulletinForTesting(original);
 
@@ -1150,10 +1150,10 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		FieldSpecCollection privateFields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		MockBulletinStore clientStore = new MockBulletinStore(security);
 		Bulletin original = clientStore.createEmptyBulletin();
-		original.setSealed();
+		original.setImmutable();
 
 		Bulletin newVersion = clientStore.createNewDraft(original, publicFields, privateFields);
-		newVersion.setSealed();
+		newVersion.setImmutable();
 		clientStore.saveBulletinForTesting(original);
 
 		BulletinFolder visibleFolderA = clientStore.createFolder("a");
@@ -1532,7 +1532,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		original.set(Bulletin.TAGPRIVATEINFO, "priv");
 		original.addPublicAttachment(a);
 		original.addPrivateAttachment(aPrivate);
-		original.setSealed();
+		original.setImmutable();
 		testStore.saveBulletinForTesting(original);
 		File zipFile = createTempFileFromName("$$$MartusTestZipSealed");
 		Bulletin loaded = testStore.loadFromDatabase(originalKey);
@@ -1600,7 +1600,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		testStore.deleteAllData();
 		folder = testStore.createFolder("test2");
 
-		b.setSealed();
+		b.setImmutable();
 		BulletinForTesting.saveToFile(db,b, tempFile, testStore.getSignatureVerifier());
 		testStore.importZipFileBulletin(tempFile, folder, false);
 		assertEquals("not imported to store?", 1, testStore.getBulletinCount());
@@ -1643,7 +1643,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		HeadquartersKey key1 = new HeadquartersKey(hqStore.getAccountId());
 		keys.add(key1);
 		original.setAuthorizedToReadKeys(keys);
-		original.setSealed();
+		original.setImmutable();
 		BulletinForTesting.saveToFile(db,original, tempFile, testStore.getSignatureVerifier());
 
 		BulletinFolder folder = hqStore.createFolder("test");
