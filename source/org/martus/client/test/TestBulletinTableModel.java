@@ -137,7 +137,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		assertEquals("xyz", b.get(BulletinConstants.TAGTITLE));
 		assertEquals("xyz", list.getValueAt(0,TITLE));
 
-		b.setDraft();
+		b.setMutable();
 		store.saveBulletin(b);
 		assertEquals(localization.getStatusLabel("draft"), list.getValueAt(0,STATUS));
 		b.setSealed();

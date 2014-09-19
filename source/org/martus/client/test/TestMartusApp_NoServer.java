@@ -2858,7 +2858,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("is draft outbox folder empty?", 0,draftCount);
 		
 		Bulletin b1 = appWithAccount.createBulletin();
-		b1.setDraft();
+		b1.setMutable();
 		appWithAccount.getStore().saveBulletin(b1);
 		assertEquals("didn't find the orphan?", 1, appWithAccount.repairOrphans());
 		draftCount = appWithAccount.getStore().getFolderDraftOutbox().getBulletinCount();

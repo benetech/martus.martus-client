@@ -1299,7 +1299,7 @@ public class MartusApp
 		b.set(Bulletin.TAGPUBLICINFO, configInfo.getTemplateDetails());
 		b.set(Bulletin.TAGLANGUAGE, getDefaultLanguageForNewBulletin());
 		setDefaultHQKeysInBulletin(b);
-		b.setDraft();
+		b.setMutable();
 		b.setAllPrivate(true);
 		return b;
 	}
