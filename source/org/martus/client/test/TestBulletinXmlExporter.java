@@ -880,7 +880,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertEquals(exported.getTopSectionFieldSpecs(), imported.getTopSectionFieldSpecs());
 		assertEquals(exported.getBottomSectionFieldSpecs(), imported.getBottomSectionFieldSpecs());
 		
-		assertTrue("exported should be a sealed", exported.isSealed());
+		assertTrue("exported should be a immutable", exported.isImmutable());
 		assertTrue("Import should always be a draft", imported.isDraft());
 		assertFalse("exported should be public", exported.isAllPrivate());
 		assertTrue("Import should always be private", imported.isAllPrivate());

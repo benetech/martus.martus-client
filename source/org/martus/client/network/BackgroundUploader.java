@@ -80,7 +80,7 @@ public class BackgroundUploader
 	{
 		ClientBulletinStore store = app.getStore();
 		// FIXME: is it safe to skip if it's "probably" on the server???
-		if(b.isSealed() && store.isProbablyOnServer(b.getUniversalId()))
+		if(b.isImmutable() && store.isProbablyOnServer(b.getUniversalId()))
 			return NetworkInterfaceConstants.DUPLICATE;
 		File tempFile = File.createTempFile("$$$MartusUploadBulletin", null);
 		try
