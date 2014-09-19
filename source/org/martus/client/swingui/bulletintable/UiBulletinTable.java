@@ -102,7 +102,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
     	int width = getColumnHeaderWidth(COLUMN_STATUS);
 
     	MartusLocalization localization = mainWindow.getLocalization();
-		int draftWidth = getRenderedWidth(COLUMN_STATUS, localization.getStatusLabel(Bulletin.STATUSDRAFT));
+		int draftWidth = getRenderedWidth(COLUMN_STATUS, localization.getStatusLabel(Bulletin.STATUSMUTABLE));
     	if(draftWidth > width)
     		width = draftWidth;
     	

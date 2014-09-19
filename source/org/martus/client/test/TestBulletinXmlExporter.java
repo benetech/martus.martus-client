@@ -571,8 +571,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		app.getStore().saveBulletin(imported2);
 		
 		ReadableDatabase db = app.getStore().getDatabase();
-		File imported1File = imported1.getAsFileProxy(imported1.getPublicAttachments()[0],db,Bulletin.STATUSDRAFT).getFile();
-		File imported2File = imported2.getAsFileProxy(imported2.getPublicAttachments()[0],db,Bulletin.STATUSDRAFT).getFile();
+		File imported1File = imported1.getAsFileProxy(imported1.getPublicAttachments()[0],db,Bulletin.STATUSMUTABLE).getFile();
+		File imported2File = imported2.getAsFileProxy(imported2.getPublicAttachments()[0],db,Bulletin.STATUSMUTABLE).getFile();
 		assertEquals("attachment 1's data doesn't match?", UnicodeReader.getFileContents(sampleAttachmentFile1), UnicodeReader.getFileContents(imported1File));
 		assertEquals("attachment 2's data doesn't match?", UnicodeReader.getFileContents(sampleAttachmentFile2), UnicodeReader.getFileContents(imported2File));
 	}
@@ -938,7 +938,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		
 		app.getStore().saveBulletin(imported1);
 		ReadableDatabase db = app.getStore().getDatabase();
-		File imported2File = imported1.getAsFileProxy(imported1.getPublicAttachments()[0],db,Bulletin.STATUSDRAFT).getFile();
+		File imported2File = imported1.getAsFileProxy(imported1.getPublicAttachments()[0],db,Bulletin.STATUSMUTABLE).getFile();
 		assertEquals("attachment 2's data doesn't match?", UnicodeReader.getFileContents(sampleAttachmentFile2), UnicodeReader.getFileContents(imported2File));
 	}
 	
