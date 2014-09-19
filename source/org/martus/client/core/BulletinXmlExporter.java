@@ -207,7 +207,7 @@ public class BulletinXmlExporter
 	private void writeBulletinStatus(Writer dest, Bulletin b) throws IOException
 	{
 		String statusLocalized = localization.getStatusLabel("draft");
-		String status = Bulletin.STATUSDRAFT;
+		String status = Bulletin.STATUSMUTABLE;
 		if(b.isSealed())
 		{
 			statusLocalized = localization.getStatusLabel("sealed");

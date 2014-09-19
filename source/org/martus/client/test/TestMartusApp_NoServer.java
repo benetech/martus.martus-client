@@ -2263,7 +2263,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals(source, b.get(Bulletin.TAGAUTHOR));
 		assertEquals(organization, b.get(Bulletin.TAGORGANIZATION));
 		assertEquals(template, b.get(Bulletin.TAGPUBLICINFO));
-		assertEquals(Bulletin.STATUSDRAFT, b.getStatus());
+		assertEquals(Bulletin.STATUSMUTABLE, b.getStatus());
 		assertEquals("not automatically private?", true, b.isAllPrivate());
 		TRACE_END();
 	}
@@ -2791,7 +2791,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testStatusLabels()
 	{
 		TRACE_BEGIN("testStatusLabels");
-		assertEquals("Draft", testAppLocalization.getStatusLabel(Bulletin.STATUSDRAFT));
+		assertEquals("Draft", testAppLocalization.getStatusLabel(Bulletin.STATUSMUTABLE));
 		assertEquals("Sealed", testAppLocalization.getStatusLabel(Bulletin.STATUSSEALED));
 		TRACE_END();
 	}
