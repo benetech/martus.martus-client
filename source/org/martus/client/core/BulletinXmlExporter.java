@@ -208,7 +208,7 @@ public class BulletinXmlExporter
 	{
 		String statusLocalized = localization.getStatusLabel("draft");
 		String status = Bulletin.STATUSMUTABLE;
-		if(b.isSealed())
+		if(b.isImmutable())
 		{
 			statusLocalized = localization.getStatusLabel("sealed");
 			status = Bulletin.STATUSIMMUTABLE;

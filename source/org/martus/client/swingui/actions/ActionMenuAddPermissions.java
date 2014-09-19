@@ -127,7 +127,7 @@ public class ActionMenuAddPermissions extends UiMenuAction
 			MartusApp app = mainWindow.getApp();
 			Bulletin newBulletin = oldBulletin;
 			BulletinFolder outbox = app.getFolderDraftOutbox();
-			if(oldBulletin.isSealed())
+			if(oldBulletin.isImmutable())
 			{
 				newBulletin = app.createBulletin();
 				newBulletin.createDraftCopyOf(oldBulletin, app.getStore().getDatabase());

@@ -51,7 +51,6 @@ public class ModifyBulletinActionDoer
 
 			String myAccountId = mainWindow.getApp().getAccountId();
 			boolean isMine = myAccountId.equals(original.getAccount());
-			boolean isSealed = original.isSealed();
 			boolean isVerifiedFieldDeskBulletin = mainWindow.getApp().isVerifiedFieldDeskAccount(original.getAccount());
 
 			if(!isMine)
@@ -68,7 +67,7 @@ public class ModifyBulletinActionDoer
 				}
 			}
 			
-			if(isMySealed(isMine, isSealed))
+			if(isMyImmutable(isMine, original.isImmutable()))
 			{
 				if(!mainWindow.confirmDlg("CloneMySealedAsDraft"))
 					return;
@@ -81,9 +80,9 @@ public class ModifyBulletinActionDoer
 			}
 			
 			Bulletin bulletinToModify = original; 
-			if(isMyDraft(isMine, isSealed))
+			if(isMyDraft(isMine, original.isDraft()))
 				bulletinToModify = updateFieldSpecsIfNecessary(original);
-			else if(needsCloneToEdit(isMine, isSealed))
+			else if(needsCloneToEdit(isMine, original.isImmutable()))
 				bulletinToModify = createCloneAndUpdateFieldSpecsIfNecessary(original);
 			bulletinToModify.allowOnlyTheseAuthorizedKeysToRead(mainWindow.getApp().getAllHQKeys());
 			bulletinToModify.addAuthorizedToReadKeys(mainWindow.getApp().getDefaultHQKeysWithFallback());
@@ -95,14 +94,14 @@ public class ModifyBulletinActionDoer
 		}
 	}
 
-	private boolean isMySealed(boolean isMine, boolean isSealed)
+	private boolean isMyImmutable(boolean isMine, boolean isImmutable)
 	{
-		return isMine && isSealed;
+		return isMine && isImmutable;
 	}
 	
-	private boolean isMyDraft(boolean isMine, boolean isSealed)
+	private boolean isMyDraft(boolean isMine, boolean isDraft)
 	{
-		return isMine && !isSealed;
+		return isMine && isDraft;
 	}
 	
 	private boolean needsCloneToEdit(boolean isMine, boolean isSealed)

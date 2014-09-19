@@ -151,7 +151,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		list.setFolder(folderSaved);
 		int row = 0;
 		Bulletin b = list.getBulletin(row);
-		assertTrue("not sealed?", b.isSealed());
+		assertTrue("not Immutable?", b.isImmutable());
 		assertEquals("already sent?", "", list.getValueAt(row, WASSENT));
 		
 		store.setIsOnServer(b);
