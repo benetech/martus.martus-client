@@ -148,7 +148,7 @@ public class TestTransferableBulletin extends TestCaseEnhanced
 	private TransferableBulletinList createTransferableBulletin(String title) throws Exception
 	{
 		Bulletin b = store.createEmptyBulletin();
-		b.setSealed();
+		b.setImmutable();
 		b.set(Bulletin.TAGTITLE, title);
 		store.saveBulletin(b);
 		Bulletin[] bulletins = new Bulletin[] {b};

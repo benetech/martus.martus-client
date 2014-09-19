@@ -529,7 +529,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	{
 		Bulletin b1 = new Bulletin(store.getSignatureGenerator());
 		b1.setAllPrivate(false);
-		b1.setSealed();
+		b1.setImmutable();
 		Bulletin b2 = new Bulletin(store.getSignatureGenerator());
 		b2.setAllPrivate(false);
 
@@ -857,7 +857,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		exported.set(dropdownTag, choice2);
 		exported.set(booleanTag, "False");
 		exported.set(BulletinConstants.TAGPRIVATEINFO, "Private Data");
-		exported.setSealed();
+		exported.setImmutable();
 
 		String localId1 = "pretend local id";
 		String localId2 = "another fake local id";
@@ -896,7 +896,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	{
 		Bulletin b1 = new Bulletin(store.getSignatureGenerator());
 		b1.setAllPrivate(false);
-		b1.setSealed();
+		b1.setImmutable();
 
 		File sampleAttachmentFile1 = addNewPublicSampleAttachment(b1, "Attachment 1's Data");
 		File sampleAttachmentFile2 = addNewPublicSampleAttachment(b1, "Attachment 2's Data");

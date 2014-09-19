@@ -65,7 +65,7 @@ public class TestTransferableAttachments extends TestCaseEnhanced
 		out.close();
 		AttachmentProxy attach = new AttachmentProxy(temp);
 		b.addPrivateAttachment(attach);
-		b.setSealed();
+		b.setImmutable();
 
 		b.getFieldDataPacket().getAttachments();
 		store.saveBulletin(b);
