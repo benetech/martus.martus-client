@@ -398,13 +398,13 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		Bulletin version1 = new Bulletin(store.getSignatureGenerator());
 		version1.getField(Bulletin.TAGTITLE).setData(VERSION_1_TITLE);
-		version1.setStatus(Bulletin.STATUSSEALED);
+		version1.setStatus(Bulletin.STATUSIMMUTABLE);
 		app.getStore().saveBulletin(version1);
 		
 		Bulletin version2 = new Bulletin(store.getSignatureGenerator());
 		version2.createDraftCopyOf(version1, database);
 		version2.getField(Bulletin.TAGTITLE).setData(VERSION_2_TITLE);
-		version2.setStatus(Bulletin.STATUSSEALED);
+		version2.setStatus(Bulletin.STATUSIMMUTABLE);
 		app.getStore().saveBulletin(version2);
 
 		Bulletin version3 = new Bulletin(store.getSignatureGenerator());

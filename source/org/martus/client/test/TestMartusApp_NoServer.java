@@ -2792,7 +2792,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testStatusLabels");
 		assertEquals("Draft", testAppLocalization.getStatusLabel(Bulletin.STATUSMUTABLE));
-		assertEquals("Sealed", testAppLocalization.getStatusLabel(Bulletin.STATUSSEALED));
+		assertEquals("Sealed", testAppLocalization.getStatusLabel(Bulletin.STATUSIMMUTABLE));
 		TRACE_END();
 	}
 

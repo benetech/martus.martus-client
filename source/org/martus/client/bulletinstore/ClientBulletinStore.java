@@ -1390,7 +1390,7 @@ public class ClientBulletinStore extends BulletinStore
 			BulletinHeaderPacket bhp = BulletinHeaderPacket.loadFromZipFile(zip, getSignatureVerifier());
 			UniversalId uid = bhp.getUniversalId();
 
-			boolean isSealed = bhp.getStatus().equals(Bulletin.STATUSSEALED);
+			boolean isSealed = Bulletin.isImmutable(bhp.getStatus());
 			if(forceSameUids || !isMyBulletin(uid) || isSealed)
 			{
 				importZipFileToStoreWithSameUids(zipFile);
