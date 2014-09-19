@@ -106,7 +106,7 @@ public class BackgroundUploader
 	
 	private String getUploadProgressTag(Bulletin b)
 	{
-		if(b.isDraft())
+		if(b.isMutable())
 			return "UploadingDraftBulletin";
 		return "UploadingSealedBulletin";
 	}

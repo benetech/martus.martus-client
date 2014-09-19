@@ -1126,7 +1126,7 @@ public class ClientBulletinStore extends BulletinStore
 		orphanFolder.prepareForBulkOperation();
 		orphanFolder.add(b);
 		
-		BulletinFolder outboxFolder =  (b.isDraft())? getFolderDraftOutbox():getFolderSealedOutbox();
+		BulletinFolder outboxFolder =  (b.isMutable())? getFolderDraftOutbox():getFolderSealedOutbox();
 		if (outboxFolder != null)
 			outboxFolder.add(b);
 	}
