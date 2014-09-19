@@ -335,7 +335,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			}
 			else
 			{
-				bulletin.setDraft();
+				bulletin.setMutable();
 				outboxToUse = draftOutbox;
 			}
 			saveBulletinAndUpdateFolders(store, outboxToUse);

@@ -265,7 +265,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     public void testCreateDraftCopyOfMyDraftWithNewFieldSpecs() throws Exception
 	{
     	Bulletin original = createSealedBulletin(security);
-    	original.setDraft();
+    	original.setMutable();
     	
     	{
 	    	Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
@@ -285,7 +285,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	{
     	Bulletin originalBulletin = createSealedBulletin(security);
     	String id = originalBulletin.getLocalId();
-    	originalBulletin.setDraft();
+    	originalBulletin.setMutable();
     	{
     		Bulletin newFieldSpecsBulletin = testStore.createDraftClone(originalBulletin, customPublicSpecs, customPrivateSpecs);
 	    	assertEquals("wrong public field specs for untouched original?", StandardFieldSpecs.getDefaultTopSectionFieldSpecs().asArray().length, originalBulletin.getTopSectionFieldSpecs().size());
@@ -518,7 +518,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		Bulletin b = testStore.createEmptyBulletin();
 		b.set(Bulletin.TAGSUMMARY, sampleSummary);
 		b.set(Bulletin.TAGEVENTDATE, sampleEventDate);
-		b.setDraft();
+		b.setMutable();
 		testStore.saveBulletin(b);
 		UniversalId uId = b.getUniversalId();
 		assertEquals("Wrong summary?", sampleSummary, testStore.getFieldData(uId, Bulletin.TAGSUMMARY));
@@ -582,7 +582,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
 		b = testStore.createEmptyBulletin();
 		b.set(BulletinConstants.TAGSUMMARY, "whoop-dee-doo");
-		b.setDraft();
+		b.setMutable();
 		testStore.saveBulletin(b);
 		UniversalId id = b.getUniversalId();
 
@@ -612,7 +612,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		String originalTitle = "original Title!";
 		original.set(BulletinConstants.TAGTITLE, originalTitle);
 		original.setAuthorizedToReadKeys(keys);
-		original.setDraft();
+		original.setMutable();
 		testStore.saveBulletin(original);
 		UniversalId originalId = original.getUniversalId();
 		String copyTitle = "Copy of original Title!";
