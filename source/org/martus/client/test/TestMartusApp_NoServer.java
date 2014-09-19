@@ -483,7 +483,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		
 		Bulletin b = appWithAccount.createBulletin();
 		appWithAccount.saveBulletin(b, outbox);
-		DatabaseKey key = DatabaseKey.createDraftKey(b.getUniversalId());
+		DatabaseKey key = DatabaseKey.createMutableKey(b.getUniversalId());
 		assertTrue("didn't save?", store.getDatabase().doesRecordExist(key));
 		assertTrue("didn't put in outbox?", outbox.contains(b));
 		assertTrue("didn't put in saved?", appWithAccount.getFolderSaved().contains(b));

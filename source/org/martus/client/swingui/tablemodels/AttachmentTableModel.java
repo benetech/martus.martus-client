@@ -144,7 +144,7 @@ public class AttachmentTableModel extends AbstractTableModel
 		UniversalId id = a.getUniversalId();
 		try
 		{
-			DatabaseKey key = DatabaseKey.createDraftKey(id);
+			DatabaseKey key = DatabaseKey.createMutableKey(id);
 			if(!database.doesRecordExist(key))
 				key = DatabaseKey.createSealedKey(id);
 			if(!database.doesRecordExist(key))
