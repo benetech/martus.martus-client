@@ -78,6 +78,8 @@ public class ScrollFreeTextArea extends StackPane
 		textArea = new TextArea();
 		textArea.setWrapText(true);
 		textArea.getStyleClass().add("scroll-free-text-area");
+		
+		disableVerticalScrollBar();  
 
 		text = new Text();
 		text.textProperty().bind(textArea.textProperty().concat("\n"));
@@ -123,6 +125,15 @@ public class ScrollFreeTextArea extends StackPane
 //		getChildren().addAll(
 //				GroupBuilder.create().children(lblContainer).build(), textArea);
 		getChildren().addAll(flow, textArea);
+	}
+
+	public void disableVerticalScrollBar()
+	{
+		// NOTE: The following undocumented call came from
+		// https://community.oracle.com/message/10978956
+		// Unfortunately it doesn't work, because the scrollbar doesn't actually exist yet
+//		ScrollBar scrollBarv = (ScrollBar)textArea.lookup(".scroll-bar:vertical");
+//		scrollBarv.setDisable(true);
 	}
 	
 	private void flowHeightChanged(Number newValue)
