@@ -232,7 +232,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     
     public void testCreateEmptyClone() throws Exception
     {
-    	Bulletin original = createSealedBulletin(security);
+    	Bulletin original = createImmutableBulletin(security);
     	UniversalId id = original.getUniversalId();
     	
     	Bulletin emptyClone = testStore.createEmptyClone(original);
@@ -247,9 +247,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     
     public void testCreateDraftCopyOfMySealed() throws Exception
 	{
-    	Bulletin original = createSealedBulletin(security);
+	    	Bulletin original = createImmutableBulletin(security);
     	
-    	{
 	    	Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
 	    	assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
@@ -259,18 +258,31 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
 	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
 	    	BulletinHistory history = clone.getHistory();
-			assertEquals("no history?", 1, history.size());
+		assertEquals("no history?", 1, history.size());
 	    	assertEquals("wrong ancestor?", original.getLocalId(), history.get(0));
-    	}
 	}
-    
+
+    public void testCreateDraftCopyOfMyVersionedBulletin() throws Exception
+ 	{
+	    	Bulletin originalMutable = createMutableBulletin(security);
+	    	originalMutable.setState(BulletinState.STATE_VERSION);
+	    	Bulletin cloneMutable = testStore.createNewDraft(originalMutable, customPublicSpecs, customPrivateSpecs);
+	    	assertTrue(originalMutable.isVersioned());
+	    	assertFalse(cloneMutable.isVersioned());
+ 	   
+	    	Bulletin originalImmutable = createImmutableBulletin(security);
+	    	originalImmutable.setState(BulletinState.STATE_VERSION);
+  	    	Bulletin cloneImmutable = testStore.createNewDraft(originalMutable, customPublicSpecs, customPrivateSpecs);
+  	    	assertTrue(originalImmutable.isVersioned());
+  	    	assertFalse(cloneImmutable.isVersioned());
+ 	}
+  
     public void testCreateDraftCopyOfMyDraftWithNewFieldSpecs() throws Exception
 	{
-    	Bulletin original = createSealedBulletin(security);
-    	original.setMutable();
-    	
-    	{
-	    	Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
+    		Bulletin original = createImmutableBulletin(security);
+    		original.setMutable();
+   	
+ 	    	Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
 	    	assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
@@ -279,16 +291,14 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
 	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
 	    	BulletinHistory history = clone.getHistory();
-			assertEquals("has history?", 0, history.size());
-    	}
-	}
+		assertEquals("has history?", 0, history.size());
+ 	}
     
     public void testUpdateFieldSpecsOfMyDraft() throws Exception
 	{
-    	Bulletin originalBulletin = createSealedBulletin(security);
-    	String id = originalBulletin.getLocalId();
-    	originalBulletin.setMutable();
-    	{
+    		Bulletin originalBulletin = createImmutableBulletin(security);
+    		String id = originalBulletin.getLocalId();
+    		originalBulletin.setMutable();
     		Bulletin newFieldSpecsBulletin = testStore.createDraftClone(originalBulletin, customPublicSpecs, customPrivateSpecs);
 	    	assertEquals("wrong public field specs for untouched original?", StandardFieldSpecs.getDefaultTopSectionFieldSpecs().asArray().length, originalBulletin.getTopSectionFieldSpecs().size());
 	    	assertEquals("wrong private field specs for untouched original?", StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray().length, originalBulletin.getBottomSectionFieldSpecs().size());
@@ -301,17 +311,13 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), newFieldSpecsBulletin.getTopSectionFieldSpecs().size());
 	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), newFieldSpecsBulletin.getBottomSectionFieldSpecs().size());
 	    	BulletinHistory history = newFieldSpecsBulletin.getHistory();
-			assertEquals("has history?", 0, history.size());
-    	}
+		assertEquals("has history?", 0, history.size());
 	}
 
     public void testCreateDraftCopyOfNotMyBulletin() throws Exception
 	{
-    	MartusCrypto otherSecurity = MockMartusSecurity.createOtherClient();
-
-    	Bulletin original = createSealedBulletin(otherSecurity);
-
-    	{
+	    	MartusCrypto otherSecurity = MockMartusSecurity.createOtherClient();
+	    	Bulletin original = createImmutableBulletin(otherSecurity);
 	    	Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
 	    	assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
@@ -321,61 +327,66 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
 	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
 	    	assertEquals("has history?", 0, clone.getHistory().size());
-    	}
 	}
     
-    private Bulletin createSealedBulletin(MartusCrypto otherSecurity) throws Exception
+    private Bulletin createImmutableBulletin(MartusCrypto otherSecurity) throws Exception
 	{
 		HeadquartersKeys oldHq = new HeadquartersKeys(new HeadquartersKey(fakeHqKey));
-    	
-    	Bulletin original = new Bulletin(otherSecurity);
-    	original.set(Bulletin.TAGTITLE, PUBLIC_DATA);
-    	original.set(Bulletin.TAGAUTHOR, PRIVATE_DATA);
-    	original.setAuthorizedToReadKeys(oldHq);
-    	original.setImmutable();
+ 	    	Bulletin original = new Bulletin(otherSecurity);
+	    	original.set(Bulletin.TAGTITLE, PUBLIC_DATA);
+	    	original.set(Bulletin.TAGAUTHOR, PRIVATE_DATA);
+	    	original.setAuthorizedToReadKeys(oldHq);
+	    	original.setImmutable();
 		return original;
 	}
 
-	public void testChooseBulletinToUpload() throws Exception
+    private Bulletin createMutableBulletin(MartusCrypto otherSecurity) throws Exception
 	{
-    	BulletinFolder outbox = testStore.createFolder("*My outbox");
-    	int count = 10;
-    	Bulletin[] bulletins = new Bulletin[count];
-    	Set bulletinsToBeSent = new HashSet();
-    	for(int i=0; i < count; ++i)
-    	{
-    		bulletins[i] = testStore.createEmptyBulletin();
-    		testStore.saveBulletin(bulletins[i]);
-        	UniversalId universalId = bulletins[i].getUniversalId();
-			testStore.addBulletinToFolder(outbox, universalId);
-        	bulletinsToBeSent.add(universalId);
-    	}
-    	
-    	UniversalId uidRemoved = bulletins[3].getUniversalId();
-    	UniversalId uidDiscarded = bulletins[6].getUniversalId();
-    	UniversalId uidRemovedAndDiscarded = bulletins[9].getUniversalId();
-    	
-    	testStore.removeBulletinFromFolder(outbox, uidRemoved);
-    	testStore.removeBulletinFromFolder(outbox, uidRemovedAndDiscarded);
-    	
-    	BulletinFolder discarded = testStore.getFolderDiscarded();
-    	testStore.addBulletinToFolder(discarded, uidDiscarded);
-    	testStore.addBulletinToFolder(discarded, uidRemovedAndDiscarded);
-    	
-    	bulletinsToBeSent.remove(uidRemoved);
-    	bulletinsToBeSent.remove(uidRemovedAndDiscarded);
-    	bulletinsToBeSent.remove(uidDiscarded);
+    		Bulletin b = createImmutableBulletin(otherSecurity);
+	    	b.setMutable();
+		return b;
+	}
 
-    	Set bulletinsActuallySent = new HashSet();
-    	for(int startIndex=0; startIndex < count; ++startIndex)
-    	{
-    		UniversalId gotUid = testStore.chooseBulletinToUpload(outbox, startIndex).getUniversalId();
-    		bulletinsActuallySent.add(gotUid);
-    		assertNotEquals("Sent removed bulletin?", uidRemoved, gotUid);
-    		assertNotEquals("Sent discarded bulletin?", uidDiscarded, gotUid);
-    		assertNotEquals("Sent removed and discarded bulletin?", uidRemovedAndDiscarded, gotUid);
-    	}
-    	assertEquals("Didn't send expected bulletins?", bulletinsToBeSent, bulletinsActuallySent);
+    public void testChooseBulletinToUpload() throws Exception
+	{
+	    	BulletinFolder outbox = testStore.createFolder("*My outbox");
+	    	int count = 10;
+	    	Bulletin[] bulletins = new Bulletin[count];
+	    	Set bulletinsToBeSent = new HashSet();
+	    	for(int i=0; i < count; ++i)
+	    	{
+	    		bulletins[i] = testStore.createEmptyBulletin();
+	    		testStore.saveBulletin(bulletins[i]);
+	        	UniversalId universalId = bulletins[i].getUniversalId();
+				testStore.addBulletinToFolder(outbox, universalId);
+	        	bulletinsToBeSent.add(universalId);
+	    	}
+	    	
+	    	UniversalId uidRemoved = bulletins[3].getUniversalId();
+	    	UniversalId uidDiscarded = bulletins[6].getUniversalId();
+	    	UniversalId uidRemovedAndDiscarded = bulletins[9].getUniversalId();
+	    	
+	    	testStore.removeBulletinFromFolder(outbox, uidRemoved);
+	    	testStore.removeBulletinFromFolder(outbox, uidRemovedAndDiscarded);
+	    	
+	    	BulletinFolder discarded = testStore.getFolderDiscarded();
+	    	testStore.addBulletinToFolder(discarded, uidDiscarded);
+	    	testStore.addBulletinToFolder(discarded, uidRemovedAndDiscarded);
+	    	
+	    	bulletinsToBeSent.remove(uidRemoved);
+	    	bulletinsToBeSent.remove(uidRemovedAndDiscarded);
+	    	bulletinsToBeSent.remove(uidDiscarded);
+	
+	    	Set bulletinsActuallySent = new HashSet();
+	    	for(int startIndex=0; startIndex < count; ++startIndex)
+	    	{
+	    		UniversalId gotUid = testStore.chooseBulletinToUpload(outbox, startIndex).getUniversalId();
+	    		bulletinsActuallySent.add(gotUid);
+	    		assertNotEquals("Sent removed bulletin?", uidRemoved, gotUid);
+	    		assertNotEquals("Sent discarded bulletin?", uidDiscarded, gotUid);
+	    		assertNotEquals("Sent removed and discarded bulletin?", uidRemovedAndDiscarded, gotUid);
+	    	}
+	    	assertEquals("Didn't send expected bulletins?", bulletinsToBeSent, bulletinsActuallySent);
     	
 	}
     
