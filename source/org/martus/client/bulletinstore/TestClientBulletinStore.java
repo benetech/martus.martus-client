@@ -40,12 +40,14 @@ import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExists
 import org.martus.client.core.MartusClientXml;
 import org.martus.client.test.MockBulletinStore;
 import org.martus.common.BulletinSummary;
+import org.martus.common.Exceptions.InvalidBulletinStateException;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusXml;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.Bulletin.BulletinState;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.bulletin.BulletinForTesting;
 import org.martus.common.bulletin.BulletinLoader;
@@ -531,6 +533,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("Status not unSent?", ClientBulletinStore.WAS_SENT_NO, testStore.getFieldData(uId, Bulletin.TAGWASSENT));
 
 	}
+
 	public void testSaveBulletin() throws Exception
 	{
 		TRACE("testSaveBulletin");
@@ -568,7 +571,47 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
 		b = testStore.getBulletinRevision(uid);
 		assertEquals("store uid?", uid, b.getBulletinHeaderPacket().getUniversalId());
+	}
 
+	public void testSaveBulletinWithState() throws Exception
+	{
+		TRACE("testSaveBulletinWithState");
+
+		final String initialSummary = "New bulletin";
+
+		assertEquals(0, testStore.getBulletinCount());
+
+		Bulletin b = testStore.createEmptyBulletin();
+		b.set(Bulletin.TAGSUMMARY, initialSummary);
+		b.setState(BulletinState.STATE_SAVE);
+		testStore.saveBulletin(b);
+		UniversalId uId = b.getUniversalId();
+		Bulletin retrievedBulletinSavedState = testStore.getBulletinRevision(uId);
+		retrievedBulletinSavedState.setState(BulletinState.STATE_SAVE);
+		testStore.saveBulletin(retrievedBulletinSavedState);
+		
+		Bulletin versionStateBulletin = testStore.getBulletinRevision(uId);
+		versionStateBulletin.setState(BulletinState.STATE_VERSION);
+		testStore.saveBulletin(versionStateBulletin);
+
+		Bulletin retrievedVersionStateBulletin = testStore.getBulletinRevision(uId);
+		try
+		{
+			retrievedVersionStateBulletin.setState(BulletinState.STATE_SAVE);
+			fail("A retrieved VersionState Bulletin should not allow the state to be changed without making a new version.");
+		} 
+		catch (InvalidBulletinStateException expected)
+		{
+		}
+		
+		try
+		{
+			retrievedVersionStateBulletin.setState(BulletinState.STATE_SEND);
+			fail("A retrieved VersionState Bulletin should not allow the state to SEND without making a new version.");
+		} 
+		catch (InvalidBulletinStateException expected)
+		{
+		}
 	}
 
 	public void testFindBulletinById() throws Exception
