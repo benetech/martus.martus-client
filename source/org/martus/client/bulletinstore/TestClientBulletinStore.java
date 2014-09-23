@@ -335,29 +335,6 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("has history?", 0, clone.getHistory().size());
 	}
     
-    
-    public void testCreateDraftCopyOfNotMyBulletinThatIsVersioned() throws Exception
- 	{
- 	    	MartusCrypto otherSecurity = MockMartusSecurity.createOtherClient();
- 	    	Bulletin original = createImmutableVersionedBulletinWithHQs(otherSecurity);
-	    	assertTrue("State should be Versioned", original.isVersioned());
-	    	assertEquals("Should have 0 authorized HQ in Original", 0, original.getAuthorizedToReadKeys().size());
- 	    	assertEquals("Should have 1 pending HQ in Original", 1, original.getAuthorizedToReadKeysIncludingPending().size());
- 	    	Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
- 	    	assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
- 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
- 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
- 	    	assertEquals("did not clear authorized HQ?", 0, clone.getAuthorizedToReadKeys().size());
- 	    	assertEquals("did not clear any pending HQs?", 0, clone.getBulletinHeaderPacket().getAuthorizedToReadKeysPending().size());
- 	    	assertEquals("We no longer keep HQs for copies of bulletins that were not ours.?", 0, clone.getAuthorizedToReadKeysIncludingPending().size());
- 	    	assertTrue("not Mutable?", clone.isMutable());
- 	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
- 	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
- 	    	assertEquals("has history?", 0, clone.getHistory().size());
-	    	assertFalse("cloned State should not be Versioned", clone.isVersioned());
-	    	assertTrue("original State should be Versioned", original.isVersioned());
-	}
-    
     private Bulletin createImmutableBulletin(MartusCrypto otherSecurity) throws Exception
 	{
 		HeadquartersKeys oldHq = new HeadquartersKeys(new HeadquartersKey(fakeHqKey));
@@ -369,19 +346,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		return original;
 	}
 
-    private Bulletin createImmutableVersionedBulletinWithHQs(MartusCrypto otherSecurity) throws Exception
- 	{
- 		HeadquartersKeys oldHq = new HeadquartersKeys(new HeadquartersKey(fakeHqKey));
-  	    	Bulletin original = new Bulletin(otherSecurity);
- 	    	original.set(Bulletin.TAGTITLE, PUBLIC_DATA);
- 	    	original.set(Bulletin.TAGAUTHOR, PRIVATE_DATA);
- 	    	original.setAuthorizedToReadKeys(oldHq);
- 	    	original.setState(BulletinState.STATE_SNAPSHOT);
- 	    	original.setImmutable();
- 		return original;
- 	}
-
-    private Bulletin createMutableBulletin(MartusCrypto otherSecurity) throws Exception
+     private Bulletin createMutableBulletin(MartusCrypto otherSecurity) throws Exception
 	{
     		Bulletin b = createImmutableBulletin(otherSecurity);
 	    	b.setMutable();
