@@ -78,18 +78,19 @@ public class BulletinEditorFooterController extends FxController
 			String accountId = bulletinUid.getAccountId();
 			UiMainWindow mainWindow = getMainWindow();
 			historyItemLabels = FXCollections.observableArrayList();
-			for(int i = 0; i < history.size(); ++i)
+			int versionNumber = 1;
+			for(int i = 0; i < history.size(); ++i, ++versionNumber)
 			{
 				String localId = history.get(i);
 				UniversalId versionUid = UniversalId.createFromAccountAndLocalId(accountId, localId);
 				String dateSaved = UiBulletinDetailsDialog.getSavedDateToDisplay(versionUid,bulletinUid, mainWindow);
 				String title = UiBulletinDetailsDialog.getTitleToDisplay(versionUid, bulletinUid, mainWindow);
-				String versionsData =  getHistoryItemData(i+1, dateSaved, title);
+				String versionsData =  getHistoryItemData(versionNumber, dateSaved, title);
 				historyItemLabels.add(new HistoryItem(versionsData, localId));
 			}
 			String currentVersionTitle = bulletinToShow.fieldProperty(Bulletin.TAGTITLE).getValue();
 			String currentVersionLastSaved = UiBulletinDetailsDialog.getSavedDateToDisplay(bulletinUid,bulletinUid, mainWindow);
-			String versionsData =  getHistoryItemData(history.size() + 1, currentVersionLastSaved, currentVersionTitle);
+			String versionsData =  getHistoryItemData(versionNumber, currentVersionLastSaved, currentVersionTitle);
 			historyItemLabels.add(new HistoryItem(versionsData, bulletinUid.getLocalId()));
 			historyItems.setItems(historyItemLabels);
 		} 
@@ -136,9 +137,6 @@ public class BulletinEditorFooterController extends FxController
 		{
 			logAndNotifyUnexpectedError(e);
 		}
-		
-		
-		
 	}
 	
 	@FXML
