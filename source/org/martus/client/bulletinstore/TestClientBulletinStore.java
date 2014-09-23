@@ -253,7 +253,9 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
-	    	assertEquals("Did not kept hq?", 1, clone.getAuthorizedToReadKeys().size());
+	    	assertEquals("did not clear authorized HQ?", 0, clone.getAuthorizedToReadKeys().size());
+	    	assertEquals("did not move HQ to Pending?", 1, clone.getBulletinHeaderPacket().getAuthorizedToReadKeysPending().size());
+	    	assertEquals("should still have 1 HQ in anyHQs since one is in pending", 1, clone.getAuthorizedToReadKeysIncludingPending().size());
 	    	assertTrue("not Mutable?", clone.isMutable());
 	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
 	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
@@ -286,7 +288,9 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
-	    	assertEquals("did not keep hq?", 1, clone.getAuthorizedToReadKeys().size());
+	    	assertEquals("did not clear authorized HQ?", 0, clone.getAuthorizedToReadKeys().size());
+	    	assertEquals("did not move HQ to Pending?", 1, clone.getBulletinHeaderPacket().getAuthorizedToReadKeysPending().size());
+	    	assertEquals("should still have 1 HQ in anyHQs since one is in pending", 1, clone.getAuthorizedToReadKeysIncludingPending().size());
 	    	assertTrue("not Mutable?", clone.isMutable());
 	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
 	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
@@ -306,7 +310,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("not same local id?", id, newFieldSpecsBulletin.getLocalId());
 	    	assertEquals("no public data?", PUBLIC_DATA, newFieldSpecsBulletin.get(Bulletin.TAGTITLE));
 	    	assertEquals("no private data?", PRIVATE_DATA, newFieldSpecsBulletin.get(Bulletin.TAGAUTHOR));
-	    	assertEquals("did not keep hq?", 1, newFieldSpecsBulletin.getAuthorizedToReadKeys().size());
+	    	assertEquals("did not clear hq since it is now only pending?", 0, newFieldSpecsBulletin.getAuthorizedToReadKeys().size());
 	    	assertTrue("not Mutable?", newFieldSpecsBulletin.isMutable());
 	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), newFieldSpecsBulletin.getTopSectionFieldSpecs().size());
 	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), newFieldSpecsBulletin.getBottomSectionFieldSpecs().size());
@@ -322,7 +326,9 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
-	    	assertEquals("Did not keep hq?", 1, clone.getAuthorizedToReadKeys().size());
+	    	assertEquals("did not clear authorized HQ?", 0, clone.getAuthorizedToReadKeys().size());
+	    	assertEquals("did not move HQ to Pending?", 1, clone.getBulletinHeaderPacket().getAuthorizedToReadKeysPending().size());
+	    	assertEquals("should still have 1 HQ in anyHQs since one is in pending", 1, clone.getAuthorizedToReadKeysIncludingPending().size());
 	    	assertTrue("not Mutable?", clone.isMutable());
 	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
 	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
