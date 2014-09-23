@@ -269,14 +269,14 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	Bulletin originalMutable = createMutableBulletin(security);
 	    	originalMutable.setState(BulletinState.STATE_SNAPSHOT);
 	    	Bulletin cloneMutable = testStore.createNewDraft(originalMutable, customPublicSpecs, customPrivateSpecs);
-	    	assertTrue(originalMutable.isVersioned());
-	    	assertFalse(cloneMutable.isVersioned());
+	    	assertTrue(originalMutable.isSnapshot());
+	    	assertFalse(cloneMutable.isSnapshot());
  	   
 	    	Bulletin originalImmutable = createImmutableBulletin(security);
 	    	originalImmutable.setState(BulletinState.STATE_SNAPSHOT);
   	    	Bulletin cloneImmutable = testStore.createNewDraft(originalMutable, customPublicSpecs, customPrivateSpecs);
-  	    	assertTrue(originalImmutable.isVersioned());
-  	    	assertFalse(cloneImmutable.isVersioned());
+  	    	assertTrue(originalImmutable.isSnapshot());
+  	    	assertFalse(cloneImmutable.isSnapshot());
  	}
   
     public void testCreateDraftCopyOfMyDraftWithNewFieldSpecs() throws Exception
