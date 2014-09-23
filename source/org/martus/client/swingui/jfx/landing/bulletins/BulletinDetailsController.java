@@ -70,9 +70,7 @@ public class BulletinDetailsController extends FxController
 			publicCode.setText(MartusCrypto.computeFormattedPublicCode40(accountId));
 
 			bulletinLocalId.textProperty().bind(bulletin.bulletinLocalIdProperty());
-
-			String dateWasCreated = bulletin.fieldProperty(Bulletin.TAGENTRYDATE).getValue();
-			dateCreated.setText(dateWasCreated);
+			dateCreated.textProperty().bind(bulletin.fieldProperty(Bulletin.TAGENTRYDATE));
 			
 			String dateSaved = UiBulletinDetailsDialog.getSavedDateToDisplay(bulletinId, bulletinId, getMainWindow());
 			dateLastSaved.setText(dateSaved);
