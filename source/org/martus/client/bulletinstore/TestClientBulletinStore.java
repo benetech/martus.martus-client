@@ -658,8 +658,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		
 		try
 		{
-			retrievedVersionStateBulletin.setState(BulletinState.STATE_SEND);
-			fail("A retrieved VersionState Bulletin should not allow the state to SEND without making a new version.");
+			retrievedVersionStateBulletin.setState(BulletinState.STATE_SHARED);
+			fail("A retrieved VersionState Bulletin should not allow the state to SHARED without making a new version.");
 		} 
 		catch (InvalidBulletinStateException expected)
 		{
