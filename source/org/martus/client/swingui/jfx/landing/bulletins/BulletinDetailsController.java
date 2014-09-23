@@ -56,17 +56,18 @@ public class BulletinDetailsController extends FxController
 		try
 		{
 			UniversalId bulletinId = bulletin.universalIdProperty().getValue();
-			if(getApp().getAccountId().equals(bulletinId.getAccountId()))
+			String accountId = bulletinId.getAccountId();
+			if(getApp().getAccountId().equals(accountId))
 			{
 				authorName.setText(getApp().getUserName());
 			}
 			else
 			{
 				ContactKeys ourContacts = getApp().getContactKeys();
-				authorName.setText(ourContacts.getLabelIfPresent(bulletinId.getAccountId()));
+				authorName.setText(ourContacts.getLabelIfPresent(accountId));
 			}
 			
-			publicCode.setText(MartusCrypto.computeFormattedPublicCode40(bulletinId.getAccountId()));
+			publicCode.setText(MartusCrypto.computeFormattedPublicCode40(accountId));
 
 			bulletinLocalId.textProperty().bind(bulletin.bulletinLocalIdProperty());
 
