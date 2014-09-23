@@ -637,6 +637,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		b.set(Bulletin.TAGSUMMARY, initialSummary);
 		b.setState(BulletinState.STATE_SAVE);
 		testStore.saveBulletin(b);
+		
 		UniversalId uId = b.getUniversalId();
 		Bulletin retrievedBulletinSavedState = testStore.getBulletinRevision(uId);
 		retrievedBulletinSavedState.setState(BulletinState.STATE_SAVE);
