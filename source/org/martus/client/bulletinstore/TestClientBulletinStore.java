@@ -267,13 +267,13 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     public void testCreateDraftCopyOfMyVersionedBulletin() throws Exception
  	{
 	    	Bulletin originalMutable = createMutableBulletin(security);
-	    	originalMutable.setState(BulletinState.STATE_VERSION);
+	    	originalMutable.setState(BulletinState.STATE_SNAPSHOT);
 	    	Bulletin cloneMutable = testStore.createNewDraft(originalMutable, customPublicSpecs, customPrivateSpecs);
 	    	assertTrue(originalMutable.isVersioned());
 	    	assertFalse(cloneMutable.isVersioned());
  	   
 	    	Bulletin originalImmutable = createImmutableBulletin(security);
-	    	originalImmutable.setState(BulletinState.STATE_VERSION);
+	    	originalImmutable.setState(BulletinState.STATE_SNAPSHOT);
   	    	Bulletin cloneImmutable = testStore.createNewDraft(originalMutable, customPublicSpecs, customPrivateSpecs);
   	    	assertTrue(originalImmutable.isVersioned());
   	    	assertFalse(cloneImmutable.isVersioned());
@@ -376,7 +376,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
  	    	original.set(Bulletin.TAGTITLE, PUBLIC_DATA);
  	    	original.set(Bulletin.TAGAUTHOR, PRIVATE_DATA);
  	    	original.setAuthorizedToReadKeys(oldHq);
- 	    	original.setState(BulletinState.STATE_VERSION);
+ 	    	original.setState(BulletinState.STATE_SNAPSHOT);
  	    	original.setImmutable();
  		return original;
  	}
@@ -643,7 +643,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		testStore.saveBulletin(retrievedBulletinSavedState);
 		
 		Bulletin versionStateBulletin = testStore.getBulletinRevision(uId);
-		versionStateBulletin.setState(BulletinState.STATE_VERSION);
+		versionStateBulletin.setState(BulletinState.STATE_SNAPSHOT);
 		testStore.saveBulletin(versionStateBulletin);
 
 		Bulletin retrievedVersionStateBulletin = testStore.getBulletinRevision(uId);
