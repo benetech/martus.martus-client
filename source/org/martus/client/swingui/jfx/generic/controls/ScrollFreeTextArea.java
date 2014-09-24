@@ -26,23 +26,22 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.jfx.generic.controls;
 
+import java.util.List;
+
 import javafx.beans.property.StringProperty;
+import javafx.collections.ListChangeListener;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 /*
- * NOTE: This class is not yet working. It is fairly close in many ways, but 
- * if you hit enter, and then backspace, a vertical scrollbar appears. 
- * There is some debugging code specifically to try to figure out a way 
- * around that, but so far nothing has worked. Calls to applyCss, 
- * requestLayout, and setNeedsLayout have been ineffective. Perhaps they 
- * need to be called at a different moment. 
- * 
- * The code was originally derived from the code here, but has been 
- * modified to the point that it is probably not recognizable:
+ * NOTE: This class was originally inspired by the code here:
  * https://javafx-demos.googlecode.com/svn-history/r13/trunk/javafx-demos/
  *   src/main/java/com/ezest/javafx/components/freetextfield/ScrollFreeTextArea.java
  */
@@ -79,87 +78,55 @@ public class ScrollFreeTextArea extends StackPane
 		textArea.setWrapText(true);
 		textArea.getStyleClass().add("scroll-free-text-area");
 		
-		disableVerticalScrollBar();  
-
 		text = new Text();
 		text.textProperty().bind(textArea.textProperty().concat("\n"));
-
 		flow = new TextFlow(text);
-//		labelForSizing.setWrapText(true);
 		flow.prefWidthProperty().bind(textArea.widthProperty());
-		flow.heightProperty().addListener((observable, oldValue, newValue) -> flowHeightChanged(newValue));
+		flow.setPadding(getInsetsToRoughlyMatchTextArea());
 		
 		textArea.prefHeightProperty().bind(flow.prefHeightProperty().add(12));
-		textArea.minHeightProperty().bind(textArea.prefHeightProperty());
-		textArea.heightProperty().addListener((observable, oldValue, newValue) -> textAreaHeightChanged(newValue));
-		textArea.textProperty().addListener((observable, oldValue, newValue) -> textAreaTextChanged(newValue));
-		
-//		lblContainer = new StackPane(labelForSizing);
-//		lblContainer.setAlignment(Pos.TOP_LEFT);
-//		lblContainer.setPadding(new Insets(12,7,7,7));
-//		// Binding the container width to the TextArea width.
-//		lblContainer.maxWidthProperty().bind(textArea.widthProperty());
+		textArea.getChildrenUnmodifiable().addListener(new ScrollPaneBeingAddedListener());
 
-//		textArea.textProperty().addListener(new ChangeListener<String>()
-//		{
-//			@Override
-//			public void changed(
-//					ObservableValue<? extends String> paramObservableValue,
-//					String paramT1, String value)
-//			{
-//				layoutForNewLine(getText());
-//			}
-//		});
-
-//		flow.heightProperty().addListener(new ChangeListener<Number>()
-//		{
-//			@Override
-//			public void changed(
-//					ObservableValue<? extends Number> paramObservableValue,
-//					Number paramT1, Number paramT2)
-//			{
-//				layoutForNewLine(getText());
-//			}
-//		});
-
-//		getChildren().addAll(
-//				GroupBuilder.create().children(lblContainer).build(), textArea);
 		getChildren().addAll(flow, textArea);
 	}
 
-	public void disableVerticalScrollBar()
+	public Insets getInsetsToRoughlyMatchTextArea()
 	{
-		// NOTE: The following undocumented call came from
-		// https://community.oracle.com/message/10978956
-		// Unfortunately it doesn't work, because the scrollbar doesn't actually exist yet
-//		ScrollBar scrollBarv = (ScrollBar)textArea.lookup(".scroll-bar:vertical");
-//		scrollBarv.setDisable(true);
+		// FIXME: These insets are a very rough guess, but seem to work pretty well!
+		int topInset = 3;
+		int bottomInset = topInset;
+		int leftInset = 8;
+		int rightInset = leftInset;
+		return new Insets(topInset, rightInset, bottomInset, leftInset);
 	}
 	
-	private void flowHeightChanged(Number newValue)
+	class ScrollPaneBeingAddedListener implements ListChangeListener<Node>
 	{
-		System.out.println("Flow height changed:");
-		System.out.println("  TA Height now " + textArea.getHeight());
-		System.out.println("  Flow Height now " + flow.getHeight());
-	}
-
-	private void textAreaTextChanged(String newValue)
-	{
-		System.out.println("TA text changed:");
-		System.out.println("  TextArea text now " + textArea.getText().length());
-		System.out.println("  Text text now " + text.getText().length());
-	}
-
-	private void textAreaHeightChanged(Number newValue)
-	{
-		System.out.println("TA height changed:");
-		System.out.println("  TA Height now " + textArea.getHeight());
-		System.out.println("  Flow Height now " + flow.getHeight());
+		@Override
+		public void onChanged(javafx.collections.ListChangeListener.Change<? extends Node> change)
+		{
+			while(change.next())
+			{
+				if(!change.wasAdded())
+					continue;
+				
+				List<? extends Node> addedItems = change.getAddedSubList();
+				addedItems.forEach((child) -> grabScrollPane(child));
+			}
+		}
+		
+		private void grabScrollPane(Node child)
+		{
+			boolean isScrollPane = child instanceof ScrollPane;
+			if(!isScrollPane)
+				return;
+			
+			ScrollPane scrollPane = (ScrollPane) child;
+			scrollPane.setVbarPolicy(ScrollBarPolicy.NEVER);
+		}
 	}
 
 	private TextFlow flow;
 	private Text text;
-//	private Label labelForSizing;
-//	private StackPane lblContainer;
 	private TextArea textArea;
 }
