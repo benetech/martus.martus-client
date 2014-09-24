@@ -75,9 +75,9 @@ public class ModifyBulletinActionDoer
 			
 			Bulletin bulletinToModify = original; 
 			if(needsCloneToEdit(isMine, original.requiresNewCopyToEdit()))
-				bulletinToModify = createCloneAndUpdateFieldSpecsIfNecessary(original);
+				bulletinToModify = createCloneAndUpdateFieldSpecs(original);
 			else if(isMyMutable(isMine, original.isMutable()))
-				bulletinToModify = updateFieldSpecsIfNecessary(original);
+				bulletinToModify = original;
 			bulletinToModify.allowOnlyTheseAuthorizedKeysToRead(mainWindow.getApp().getAllHQKeys());
 			bulletinToModify.addAuthorizedToReadKeys(mainWindow.getApp().getDefaultHQKeysWithFallback());
 			mainWindow.modifyBulletin(bulletinToModify);
@@ -98,31 +98,12 @@ public class ModifyBulletinActionDoer
 		return requiresCloneToEdit || !isMine;
 	}
 
-	private Bulletin updateFieldSpecsIfNecessary(Bulletin original) throws Exception
-	{
-		ClientBulletinStore store = mainWindow.getApp().getStore();
-		if(store.bulletinHasCurrentFieldSpecs(original))
-			return original;
-		if(confirmUpdateFieldsDlg("UseBulletinsDraftCustomFields"))
-			return original;
-		FieldSpecCollection publicFieldSpecsToUse = store.getTopSectionFieldSpecs();
-		FieldSpecCollection privateFieldSpecsToUse = store.getBottomSectionFieldSpecs();
-		return store.createDraftClone(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
-	}
 
-	private Bulletin createCloneAndUpdateFieldSpecsIfNecessary(Bulletin original) throws Exception
+	private Bulletin createCloneAndUpdateFieldSpecs(Bulletin original) throws Exception
 	{
 		ClientBulletinStore store = mainWindow.getApp().getStore();
-		FieldSpecCollection publicFieldSpecsToUse = store.getTopSectionFieldSpecs();
-		FieldSpecCollection privateFieldSpecsToUse = store.getBottomSectionFieldSpecs();
-		if(!store.bulletinHasCurrentFieldSpecs(original))
-		{
-			if(confirmUpdateFieldsDlg("UseBulletinsCustomFields"))
-			{
-				publicFieldSpecsToUse = original.getTopSectionFieldSpecs();
-				privateFieldSpecsToUse = original.getBottomSectionFieldSpecs();
-			}
-		}
+		FieldSpecCollection publicFieldSpecsToUse = original.getTopSectionFieldSpecs();
+		FieldSpecCollection privateFieldSpecsToUse = original.getBottomSectionFieldSpecs();
 
 		Bulletin bulletinToModify = store.createNewDraft(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
 		return bulletinToModify;
