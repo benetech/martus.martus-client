@@ -46,6 +46,7 @@ import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.Bulletin.BulletinState;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.DateRangeInvertedException;
 import org.martus.common.fieldspec.DateTooEarlyException;
@@ -203,48 +204,31 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	}
 
 	@FXML
-	private void onSaveSealed(ActionEvent event)
+	private void onSaveBulletin(ActionEvent event)
 	{
-		if(!validateAndNotifyUser())
-			return;
-		
-		if (!showConfirmationDialog("send"))
-			return;
+		saveBulletinWithState(BulletinState.STATE_SAVE);
+	}
 
-		final boolean didUserChooseSeal = true;
-		SwingUtilities.invokeLater(() -> parentDialog.saveBulletin(didUserChooseSeal));
-		SwingUtilities.invokeLater(() -> parentDialog.cleanupAndExit());
+	@FXML
+	private void onVersionBulletin(ActionEvent event)
+	{
+		saveBulletinWithState(BulletinState.STATE_SNAPSHOT);
 	}
 	
 	@FXML
-	private void onSaveDraft(ActionEvent event)
+	private void onShareBulletin(ActionEvent event)
+	{
+		saveBulletinWithState(BulletinState.STATE_SHARED);
+	}
+
+	private void saveBulletinWithState(BulletinState state)
 	{
 		if(!validateAndNotifyUser())
 			return;
 
-		final boolean didUserChooseSeal = false;
-		SwingUtilities.invokeLater(() -> parentDialog.saveBulletin(didUserChooseSeal));
+		final boolean canDeleteFromServer = true; //TODO get real value.
+		SwingUtilities.invokeLater(() -> parentDialog.saveBulletin(canDeleteFromServer, state));
 		SwingUtilities.invokeLater(() -> parentDialog.cleanupAndExit());
-	}
-	
-	@FXML
-	private void onCancel(ActionEvent event)
-	{
-		try
-		{
-			boolean needConfirmation = isBulletinModified();
-			if(needConfirmation)
-			{
-				if(!showConfirmationDialog("CancelModifyBulletin"))
-					return;
-			}
-	
-			SwingUtilities.invokeLater(() -> parentDialog.cleanupAndExit());
-		}
-		catch(Exception e)
-		{
-			logAndNotifyUnexpectedError(e);
-		}
 	}
 	
 	@FXML

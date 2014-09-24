@@ -404,6 +404,11 @@ public class EnglishStrings
 "button:connectserver=Connect",
 "button:send=Save Sealed",
 "button:savedraft=Save Draft",
+
+"button:saveBulletin=Save",
+"button:versionBulletin=Version",
+"button:shareBulletin=Share",
+
 "button:inputservernameok=OK",
 "button:inputserverpubliccodeok=OK",
 "button:inputsearchok=Search",
