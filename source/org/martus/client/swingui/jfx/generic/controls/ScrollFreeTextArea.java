@@ -77,6 +77,7 @@ public class ScrollFreeTextArea extends StackPane
 		textArea = new TextArea();
 		textArea.setWrapText(true);
 		textArea.getStyleClass().add("scroll-free-text-area");
+		textArea.getChildrenUnmodifiable().addListener(new ScrollPaneBeingAddedListener());
 		
 		text = new Text();
 		text.textProperty().bind(textArea.textProperty());
@@ -85,7 +86,6 @@ public class ScrollFreeTextArea extends StackPane
 		flow.setPadding(getInsetsToRoughlyMatchTextArea());
 		
 		textArea.prefHeightProperty().bind(flow.heightProperty());
-		textArea.getChildrenUnmodifiable().addListener(new ScrollPaneBeingAddedListener());
 
 		getChildren().addAll(flow, textArea);
 	}
