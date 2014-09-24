@@ -80,10 +80,10 @@ public class ModifyBulletinActionDoer
 			}
 			
 			Bulletin bulletinToModify = original; 
-			if(isMyMutable(isMine, original.isMutable()))
-				bulletinToModify = updateFieldSpecsIfNecessary(original);
-			else if(needsCloneToEdit(isMine, original.isImmutable()))
+			if(needsCloneToEdit(isMine, original.requiresNewCopyToEdit()))
 				bulletinToModify = createCloneAndUpdateFieldSpecsIfNecessary(original);
+			else if(isMyMutable(isMine, original.isMutable()))
+				bulletinToModify = updateFieldSpecsIfNecessary(original);
 			bulletinToModify.allowOnlyTheseAuthorizedKeysToRead(mainWindow.getApp().getAllHQKeys());
 			bulletinToModify.addAuthorizedToReadKeys(mainWindow.getApp().getDefaultHQKeysWithFallback());
 			mainWindow.modifyBulletin(bulletinToModify);
@@ -104,9 +104,9 @@ public class ModifyBulletinActionDoer
 		return isMine && isDraft;
 	}
 	
-	private boolean needsCloneToEdit(boolean isMine, boolean isSealed)
+	private boolean needsCloneToEdit(boolean isMine, boolean requiresCloneToEdit)
 	{
-		return isSealed || !isMine;
+		return requiresCloneToEdit || !isMine;
 	}
 
 	private Bulletin updateFieldSpecsIfNecessary(Bulletin original) throws Exception
