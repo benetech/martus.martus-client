@@ -43,8 +43,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
@@ -62,7 +60,6 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.MessageFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
@@ -160,92 +157,6 @@ public class BulletinEditorBodyController extends FxController
 		private FxBulletin bulletin;
 		private BulletinEditorSection currentSection;
 		private Vector<BulletinEditorSection> sections;
-	}
-	
-	protected static class BulletinEditorSection extends GridPane
-	{
-		public BulletinEditorSection(MartusLocalization localizationToUse, String sectionTitle)
-		{
-			localization = localizationToUse;
-			title = sectionTitle;
-			
-			rows = new Vector<BulletinEditorRow>();
-			
-			ColumnConstraints labelColumnConstraints= new ColumnConstraints();
-			labelColumnConstraints.fillWidthProperty().setValue(true);
-			labelColumnConstraints.setMinWidth(200);
-
-			ColumnConstraints fieldColumnConstraints = new ColumnConstraints();
-			fieldColumnConstraints.fillWidthProperty().setValue(true);
-
-			getColumnConstraints().add(labelColumnConstraints);
-			getColumnConstraints().add(fieldColumnConstraints);
-		}
-		
-		public String getTitle()
-		{
-			return title;
-		}
-		
-		public void addField(FieldSpec fieldSpec, SimpleStringProperty property)
-		{
-			boolean wantsKeepWithPrevious = fieldSpec.keepWithPrevious();
-			boolean canKeepWithPrevious = canKeepWithNextOrPrevious(fieldSpec);
-			boolean keepWithPrevious = (wantsKeepWithPrevious && canKeepWithPrevious);
-			if(!keepWithPrevious)
-				endCurrentRow();
-				
-			if(currentRow == null)
-			{
-				currentRow = new BulletinEditorRow(getLocalization());
-				rows.add(currentRow);
-			}
-			
-			currentRow.addFieldToRow(fieldSpec, property);
-			
-			if(!canKeepWithNextOrPrevious(fieldSpec))
-				endCurrentRow();
-		}
-		
-		private void endCurrentRow()
-		{
-			if(currentRow == null)
-				return;
-			
-			Node label = currentRow.getLabelNode();
-			Node fields = currentRow.getFieldsNode();
-			currentRow = null;
-
-			int currentRowIndex = rows.size();
-			add(label, LABEL_COLUMN, currentRowIndex);
-			add(fields, DATA_COLUMN, currentRowIndex);
-		}
-		
-		private boolean canKeepWithNextOrPrevious(FieldSpec fieldSpec)
-		{
-			FieldType type = fieldSpec.getType();
-			
-			if(type.isBoolean() || type.isDate() || type.isDateRange())
-				return true;
-			
-			if(type.isDropdown() || type.isLanguageDropdown() || type.isNestedDropdown())
-				return true;
-			
-			return false;
-		}
-
-		private MartusLocalization getLocalization()
-		{
-			return localization;
-		}
-
-		private static final int LABEL_COLUMN = 0;
-		private static final int DATA_COLUMN = 1;
-
-		private MartusLocalization localization;
-		private String title;
-		private BulletinEditorRow currentRow;
-		private Vector<BulletinEditorRow> rows;
 	}
 	
 	protected static class BulletinEditorRow
