@@ -67,12 +67,6 @@ public class ModifyBulletinActionDoer
 				}
 			}
 			
-			if(isMyImmutable(isMine, original.isImmutable()))
-			{
-				if(!mainWindow.confirmDlg("CloneMySealedAsDraft"))
-					return;
-			}
-			
 			if(original.hasUnknownTags() || original.hasUnknownCustomField())
 			{
 				if(!mainWindow.confirmDlg("EditBulletinWithUnknownTags"))
@@ -94,11 +88,6 @@ public class ModifyBulletinActionDoer
 		}
 	}
 
-	private boolean isMyImmutable(boolean isMine, boolean isImmutable)
-	{
-		return isMine && isImmutable;
-	}
-	
 	private boolean isMyMutable(boolean isMine, boolean isDraft)
 	{
 		return isMine && isDraft;
