@@ -33,7 +33,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
 import org.martus.client.swingui.MartusLocalization;
-import org.martus.client.swingui.jfx.landing.bulletins.BulletinEditorBodyController.BulletinEditorRow;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 
