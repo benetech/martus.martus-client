@@ -66,6 +66,7 @@ import org.martus.clientside.UiLocalization;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.Bulletin.BulletinState;
 import org.martus.common.fieldspec.DateRangeInvertedException;
 import org.martus.common.fieldspec.DateTooEarlyException;
 import org.martus.common.fieldspec.DateTooLateException;
@@ -254,7 +255,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 					return;
 			}
 												
-			saveBulletin(userChoseSeal);
+			saveBulletin(userChoseSeal, BulletinState.STATE_SHARED);
 		}
 		catch (Exception e) 
 		{
@@ -312,7 +313,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		return false;
 	}
 
-	public void saveBulletin(boolean userChoseSeal)
+	public void saveBulletin(boolean canDeleteFromServer, BulletinState bulletinState)
 	{
 		Cursor originalCursor = getCursor();
 		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -326,17 +327,18 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			// NOTE: must copyDataToBulletin before setSealed or setDraft
 			// NOTE: after copyDataToBulletin, should not allow user to cancel
 			view.copyDataToBulletin(bulletin);
-			if(userChoseSeal)
-			{
-				store.removeBulletinFromFolder(draftOutbox, bulletin);
-				
-				bulletin.setImmutable();
-				outboxToUse = store.getFolderSealedOutbox();
-			}
-			else
+			bulletin.setState(bulletinState);
+			
+			if(canDeleteFromServer)
 			{
 				bulletin.setMutable();
 				outboxToUse = draftOutbox;
+			}
+			else
+			{
+				store.removeBulletinFromFolder(draftOutbox, bulletin);
+				bulletin.setImmutable();
+				outboxToUse = store.getFolderSealedOutbox();
 			}
 			saveBulletinAndUpdateFolders(store, outboxToUse);
 			wasBulletinSavedFlag = true;
