@@ -73,7 +73,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 {
 	static Stopwatch sw = new Stopwatch();
 	
-    public TestClientBulletinStore(String name) {
+    public TestClientBulletinStore(String name) 
+    {
         super(name);
     }
 
@@ -86,40 +87,38 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
     public void setUp() throws Exception
     {
-    	super.setUp();
+    		super.setUp();
 		testStore = new MockBulletinStore();
 		db = (MockDatabase)testStore.getDatabase();
 		security = (MockMartusSecurity)testStore.getSignatureGenerator();
 
-    	if(tempFile1 == null)
-    	{
-			tempFile1 = createTempFileWithData(sampleBytes1);
-			tempFile2 = createTempFileWithData(sampleBytes2);
-    	}
-    	
-    	if(customPublicSpecs == null)
-    	{
-    		FieldSpec title = FieldSpec.createFieldSpec(new FieldTypeNormal());
-    		title.setTag(Bulletin.TAGTITLE);
-    		
-    		customPublicSpecs =  new FieldSpecCollection(new FieldSpec[] {title});
-    	}
-    	if(customPrivateSpecs == null)
-    	{
-    		FieldSpec keyword = FieldSpec.createFieldSpec(new FieldTypeNormal());
-    		keyword.setTag(Bulletin.TAGKEYWORDS);
-    		FieldSpec author = FieldSpec.createFieldSpec(new FieldTypeNormal());
-    		author.setTag(Bulletin.TAGAUTHOR);
-    		
-    		customPrivateSpecs = new FieldSpecCollection(new FieldSpec[] {keyword, author});
-    		
-    	
-    	}
+	    	if(tempFile1 == null)
+	    	{
+				tempFile1 = createTempFileWithData(sampleBytes1);
+				tempFile2 = createTempFileWithData(sampleBytes2);
+	    	}
+	    	
+	    	if(customPublicSpecs == null)
+	    	{
+	    		FieldSpec title = FieldSpec.createFieldSpec(new FieldTypeNormal());
+	    		title.setTag(Bulletin.TAGTITLE);
+	    		
+	    		customPublicSpecs =  new FieldSpecCollection(new FieldSpec[] {title});
+	    	}
+	    	if(customPrivateSpecs == null)
+	    	{
+	    		FieldSpec keyword = FieldSpec.createFieldSpec(new FieldTypeNormal());
+	    		keyword.setTag(Bulletin.TAGKEYWORDS);
+	    		FieldSpec author = FieldSpec.createFieldSpec(new FieldTypeNormal());
+	    		author.setTag(Bulletin.TAGAUTHOR);
+	    		
+	    		customPrivateSpecs = new FieldSpecCollection(new FieldSpec[] {keyword, author});   		    	
+	    	}
     }
 
     public void tearDown() throws Exception
     {
-    	assertEquals("Still some mock streams open?", 0, db.getOpenStreamCount());
+    		assertEquals("Still some mock streams open?", 0, db.getOpenStreamCount());
 		testStore.deleteAllData();
 		super.tearDown();
 	}
@@ -213,37 +212,37 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     
     public void testRemoveBulletinFromAllFolders() throws Exception
 	{
-    	Bulletin original = testStore.createEmptyBulletin();
-    	original.setImmutable();
-    	testStore.saveBulletin(original);
-    	testStore.setIsOnServer(original);
-    	assertTrue("original not on server?", testStore.isProbablyOnServer(original.getUniversalId()));
-
-    	Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
-    	testStore.saveBulletin(clone);
-    	testStore.setIsOnServer(clone);
-    	
-    	assertTrue("new version not on server?", testStore.isProbablyOnServer(clone.getUniversalId()));
-    	assertTrue("original still not on server?", testStore.isProbablyOnServer(original.getUniversalId()));
-    	
-    	testStore.removeBulletinFromAllFolders(clone);
-    	assertFalse("didn't remove original?", testStore.isProbablyOnServer(original.getUniversalId()));
+	    	Bulletin original = testStore.createEmptyBulletin();
+	    	original.setImmutable();
+	    	testStore.saveBulletin(original);
+	    	testStore.setIsOnServer(original);
+	    	assertTrue("original not on server?", testStore.isProbablyOnServer(original.getUniversalId()));
+	
+	    	Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
+	    	testStore.saveBulletin(clone);
+	    	testStore.setIsOnServer(clone);
+	    	
+	    	assertTrue("new version not on server?", testStore.isProbablyOnServer(clone.getUniversalId()));
+	    	assertTrue("original still not on server?", testStore.isProbablyOnServer(original.getUniversalId()));
+	    	
+	    	testStore.removeBulletinFromAllFolders(clone);
+	    	assertFalse("didn't remove original?", testStore.isProbablyOnServer(original.getUniversalId()));
 	}
     
     public void testCreateEmptyClone() throws Exception
     {
-    	Bulletin original = createImmutableBulletin(security);
-    	UniversalId id = original.getUniversalId();
-    	
-    	Bulletin emptyClone = testStore.createEmptyClone(original);
-    	
-    	assertEquals(id, original.getUniversalId());
-    	assertEquals(id, emptyClone.getUniversalId());
-    	assertEquals("no public data?", PUBLIC_DATA, original.get(Bulletin.TAGTITLE));
-    	assertEquals("no private data?", PRIVATE_DATA, original.get(Bulletin.TAGAUTHOR));
-    	assertEquals("empty clone has public data?", "", emptyClone.get(Bulletin.TAGTITLE));
-    	assertEquals("empty clone has private data?", "", emptyClone.get(Bulletin.TAGAUTHOR));
-   }
+	    	Bulletin original = createImmutableBulletin(security);
+	    	UniversalId id = original.getUniversalId();
+	    	
+	    	Bulletin emptyClone = testStore.createEmptyClone(original);
+	    	
+	    	assertEquals(id, original.getUniversalId());
+	    	assertEquals(id, emptyClone.getUniversalId());
+	    	assertEquals("no public data?", PUBLIC_DATA, original.get(Bulletin.TAGTITLE));
+	    	assertEquals("no private data?", PRIVATE_DATA, original.get(Bulletin.TAGAUTHOR));
+	    	assertEquals("empty clone has public data?", "", emptyClone.get(Bulletin.TAGTITLE));
+	    	assertEquals("empty clone has private data?", "", emptyClone.get(Bulletin.TAGAUTHOR));
+	}
     
     public void testCreateDraftCopyOfMySealed() throws Exception
 	{
@@ -426,38 +425,38 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	
     public void testNeedsFolderMigration()
     {
-    	assertFalse("normal store needs migration?", testStore.needsFolderMigration());
+    		assertFalse("normal store needs migration?", testStore.needsFolderMigration());
 		testStore.createSystemFolder(ClientBulletinStore.OBSOLETE_OUTBOX_FOLDER);
-    	assertTrue("outbox doesn't trigger migration?", testStore.needsFolderMigration());
-    	testStore.deleteFolder(ClientBulletinStore.OBSOLETE_OUTBOX_FOLDER);
+		assertTrue("outbox doesn't trigger migration?", testStore.needsFolderMigration());
+		testStore.deleteFolder(ClientBulletinStore.OBSOLETE_OUTBOX_FOLDER);
 		testStore.createSystemFolder(ClientBulletinStore.OBSOLETE_DRAFT_FOLDER);
-    	assertTrue("drafts doesn't trigger migration?", testStore.needsFolderMigration());
-    	testStore.deleteFolder(ClientBulletinStore.OBSOLETE_DRAFT_FOLDER);
+		assertTrue("drafts doesn't trigger migration?", testStore.needsFolderMigration());
+		testStore.deleteFolder(ClientBulletinStore.OBSOLETE_DRAFT_FOLDER);
     }
     
     public void testMigrateFolders() throws Exception
     {
 
 		BulletinFolder outbox = testStore.createSystemFolder(ClientBulletinStore.OBSOLETE_OUTBOX_FOLDER);
-    	Bulletin saved = testStore.createEmptyBulletin();
-    	testStore.saveBulletin(saved);
-    	testStore.addBulletinToFolder(outbox, saved.getUniversalId());
-
-    	BulletinFolder drafts = testStore.createSystemFolder(ClientBulletinStore.OBSOLETE_DRAFT_FOLDER);
-    	Bulletin draft = testStore.createEmptyBulletin();
-    	testStore.saveBulletin(draft);
-    	testStore.addBulletinToFolder(drafts, draft.getUniversalId());
-    	
+	    	Bulletin saved = testStore.createEmptyBulletin();
+	    	testStore.saveBulletin(saved);
+	    	testStore.addBulletinToFolder(outbox, saved.getUniversalId());
+	
+	    	BulletinFolder drafts = testStore.createSystemFolder(ClientBulletinStore.OBSOLETE_DRAFT_FOLDER);
+	    	Bulletin draft = testStore.createEmptyBulletin();
+	    	testStore.saveBulletin(draft);
+	    	testStore.addBulletinToFolder(drafts, draft.getUniversalId());
+	    	
 		assertFalse("Already saved folders?", testStore.getFoldersFile().exists());
-    	assertTrue("Migration failed?", testStore.migrateFolders());
+	    	assertTrue("Migration failed?", testStore.migrateFolders());
 		assertTrue("Didn't save changes?", testStore.getFoldersFile().exists());
-
-    	assertEquals(2, testStore.getFolderSaved().getBulletinCount());
-    	assertEquals(1, testStore.getFolderSealedOutbox().getBulletinCount());
-    	assertEquals(0, testStore.getFolderSealedOutbox().find(saved.getUniversalId()));
-
-    	assertNull("Didn't remove outbox?", testStore.findFolder(ClientBulletinStore.OBSOLETE_OUTBOX_FOLDER));
-    	assertNull("Didn't remove drafts folder?", testStore.findFolder(ClientBulletinStore.OBSOLETE_DRAFT_FOLDER));
+	
+	    	assertEquals(2, testStore.getFolderSaved().getBulletinCount());
+	    	assertEquals(1, testStore.getFolderSealedOutbox().getBulletinCount());
+	    	assertEquals(0, testStore.getFolderSealedOutbox().find(saved.getUniversalId()));
+	
+	    	assertNull("Didn't remove outbox?", testStore.findFolder(ClientBulletinStore.OBSOLETE_OUTBOX_FOLDER));
+	    	assertNull("Didn't remove drafts folder?", testStore.findFolder(ClientBulletinStore.OBSOLETE_DRAFT_FOLDER));
     	
     }
     
@@ -561,6 +560,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
 		Bulletin b = testStore.createEmptyBulletin();
 		b.set(Bulletin.TAGSUMMARY, initialSummary);
+
 		testStore.saveBulletin(b);
 		UniversalId uId = b.getUniversalId();
 		assertEquals(1, testStore.getBulletinCount());
