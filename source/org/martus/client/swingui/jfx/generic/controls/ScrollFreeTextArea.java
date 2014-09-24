@@ -73,7 +73,9 @@ public class ScrollFreeTextArea extends StackPane
 	private void configure()
 	{
 		setAlignment(Pos.TOP_LEFT);
-
+		// NOTE: Original code set the padding. Doesn't seem to help
+//		setPadding(new Insets(4,7,7,7));
+		
 		textArea = new TextArea();
 		textArea.setWrapText(true);
 		textArea.getStyleClass().add("scroll-free-text-area");
@@ -81,21 +83,27 @@ public class ScrollFreeTextArea extends StackPane
 		
 		text = new Text();
 		text.textProperty().bind(textArea.textProperty());
+		text.fontProperty().bind(textArea.fontProperty());
 		flow = new TextFlow(text);
 		flow.prefWidthProperty().bind(textArea.widthProperty());
 		flow.setPadding(getInsetsToRoughlyMatchTextArea());
 		
 		textArea.prefHeightProperty().bind(flow.heightProperty());
+		// NOTE: Binding minHeight forces the box to grow but never shrink, 
+		// which is an improvement over the inaccurate shrinking it was doing
+		textArea.minHeightProperty().bind(textArea.prefHeightProperty());
+		textArea.maxHeightProperty().bind(textArea.prefHeightProperty());
 
 		getChildren().addAll(flow, textArea);
 	}
 
 	public Insets getInsetsToRoughlyMatchTextArea()
 	{
-		// FIXME: These insets are a very rough guess, but seem to work pretty well!
-		int topInset = 3;
+		// FIXME: These insets should match TextArea, but 
+		// so far are just rough guesses
+		int topInset = 8;
 		int bottomInset = topInset;
-		int leftInset = 8;
+		int leftInset = 0;
 		int rightInset = leftInset;
 		return new Insets(topInset, rightInset, bottomInset, leftInset);
 	}
