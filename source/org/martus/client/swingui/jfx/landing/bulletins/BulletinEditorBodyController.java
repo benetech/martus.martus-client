@@ -27,7 +27,6 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
@@ -36,13 +35,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Accordion;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
@@ -56,7 +53,6 @@ import org.martus.client.swingui.jfx.generic.controls.ScrollFreeTextArea;
 import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ChoiceItemStringConverter;
 import org.martus.common.MartusLogger;
-import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -83,80 +79,6 @@ public class BulletinEditorBodyController extends FxController
 		scrollPane.setContent(root);
 		
 		scrollPane.setFitToWidth(true);
-	}
-	
-	protected static class FxFormCreator
-	{
-		public FxFormCreator(MartusLocalization localizationToUse)
-		{
-			localization = localizationToUse;
-		}
-		
-		public Node createFormFromBulletin(FxBulletin bulletinToShow)
-		{
-			bulletin = bulletinToShow;
-			sections = new Vector<BulletinEditorSection>();
-			
-			Vector<FieldSpec> fieldSpecs = bulletin.getFieldSpecs();
-			fieldSpecs.forEach(fieldSpec -> addField(fieldSpec));
-
-			if(sections.size() == 1)
-				return sections.get(0);
-
-			Accordion accordion = new Accordion();
-			sections.forEach(section -> accordion.getPanes().add(createTitledPane(section)));
-			TitledPane firstPane = accordion.getPanes().get(0);
-			accordion.setExpandedPane(firstPane);
-			return accordion;
-		}
-		
-		private TitledPane createTitledPane(BulletinEditorSection section)
-		{
-			String title = section.getTitle();
-			return new TitledPane(title, section);
-		}
-
-		private void addField(FieldSpec fieldSpec)
-		{
-			if(shouldOmitField(fieldSpec))
-				return;
-
-			boolean isSectionStart = fieldSpec.getType().isSectionStart();
-			
-			if(isSectionStart || currentSection == null)
-			{
-				String sectionTitle = "";
-				if(isSectionStart)
-					sectionTitle = fieldSpec.getLabel();
-				currentSection = new BulletinEditorSection(getLocalization(), sectionTitle);
-				sections.add(currentSection);
-			}
-
-			if(isSectionStart)
-				return;
-			
-			SimpleStringProperty property = bulletin.fieldProperty(fieldSpec.getTag());
-			currentSection.addField(fieldSpec, property);
-		}
-
-		private boolean shouldOmitField(FieldSpec spec)
-		{
-			Vector<String> tagsToOmit = new Vector<String>();
-			tagsToOmit.add(Bulletin.TAGTITLE);
-			tagsToOmit.add(Bulletin.TAGWASSENT);
-			
-			return tagsToOmit.contains(spec.getTag());
-		}
-
-		private MartusLocalization getLocalization()
-		{
-			return localization;
-		}
-
-		private MartusLocalization localization;
-		private FxBulletin bulletin;
-		private BulletinEditorSection currentSection;
-		private Vector<BulletinEditorSection> sections;
 	}
 	
 	protected static class BulletinEditorRow
