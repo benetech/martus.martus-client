@@ -42,7 +42,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -55,6 +54,7 @@ import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.generic.controls.ScrollFreeTextArea;
 import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ChoiceItemStringConverter;
 import org.martus.common.MartusLogger;
@@ -382,8 +382,7 @@ public class BulletinEditorBodyController extends FxController
 
 		public Node createStringField(SimpleStringProperty property)
 		{
-			TextField textField = new TextField();
-			textField.setPrefColumnCount(MINIMUM_REASONABLE_COLUMN_COUNT);
+			ScrollFreeTextArea textField = new ScrollFreeTextArea();
 			textField.textProperty().bindBidirectional(property);
 			HBox.setHgrow(textField, Priority.SOMETIMES);
 			
