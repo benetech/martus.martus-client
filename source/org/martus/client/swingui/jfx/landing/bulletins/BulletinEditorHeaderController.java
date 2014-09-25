@@ -108,6 +108,11 @@ public class BulletinEditorHeaderController extends FxController
 		}
 	}
 	
+	public StringProperty getToFieldProperty()
+	{
+		return toField.textProperty();
+	}
+	
 	private void addKeyToField(HeadquartersKey key, ContactKeys ourContacts, Vector currentListOfAccounts)
 	{
 		try
