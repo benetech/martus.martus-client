@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import java.util.Vector;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
@@ -88,7 +89,8 @@ public class FxFormCreator
 			return;
 		
 		SimpleStringProperty fieldValueProperty = bulletin.fieldProperty(fieldSpec.getTag());
-		currentSection.addField(fieldSpec, fieldValueProperty);
+		ObservableBooleanValue isValidProperty = bulletin.isValidProperty(fieldSpec.getTag());
+		currentSection.addField(fieldSpec, fieldValueProperty, isValidProperty);
 	}
 
 	private boolean shouldOmitField(FieldSpec spec)

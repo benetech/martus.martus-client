@@ -20,6 +20,19 @@
 	-fx-padding: 5 5 5 5;
 }
 
+.scroll-free-text-area {
+ 	-fx-border-color: pink;
+ 	-fx-border-width: 2;
+	-fx-text-fill: #ff0000;
+}
+
+.scroll-free-text-area-container {
+	-fx-padding: 5 5 5 5;
+ 	-fx-border-color: green;
+ 	-fx-border-width: 2;
+ 	-fx-background-color: salmon;
+}
+
 .groupBox {
  	-fx-content-display: top;
  	-fx-border-insets: 2 2 2 2;

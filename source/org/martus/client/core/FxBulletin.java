@@ -28,7 +28,6 @@ package org.martus.client.core;
 import java.util.HashMap;
 import java.util.Vector;
 
-import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringProperty;
@@ -36,6 +35,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -146,7 +146,7 @@ public class FxBulletin
 		return fieldProperties.get(tag);
 	}
 	
-	public Property<Boolean> isValidProperty(String tag)
+	public ObservableBooleanValue isValidProperty(String tag)
 	{
 		return fieldValidators.get(tag).isValidProperty();
 	}
@@ -250,7 +250,7 @@ public class FxBulletin
 			isValidProperty = new SimpleBooleanProperty(); 
 		}
 		
-		public Property<Boolean> isValidProperty()
+		public ObservableBooleanValue isValidProperty()
 		{
 			return isValidProperty;
 		}
@@ -279,7 +279,7 @@ public class FxBulletin
 
 		private FieldSpec spec;
 		private MiniLocalization localization;
-		private Property<Boolean> isValidProperty;
+		private SimpleBooleanProperty isValidProperty;
 	}
 	
 	
