@@ -61,13 +61,13 @@ public class BulletinEditorRow
 		return fieldsNode;
 	}
 	
-	public void addFieldToRow(FieldSpec fieldSpec, Property<String> property)
+	public void addFieldToRow(FieldSpec fieldSpec, Property<String> fieldValueProperty)
 	{
 		Node label = createLabel(fieldSpec);
 		HBox.setHgrow(label, Priority.ALWAYS);
 		getLabelDestination().getChildren().add(label);
 		
-		Node fieldNode = fieldCreator.createFieldForSpec(fieldSpec, property);
+		Node fieldNode = fieldCreator.createFieldForSpec(fieldSpec, fieldValueProperty);
 		fieldsNode.getChildren().add(fieldNode);
 	}
 
