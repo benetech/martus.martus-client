@@ -152,14 +152,14 @@ public class FxBulletin
 		{
 			FieldSpec spec = fieldSpecs.get(i);
 			String value = fieldProperty(spec.getTag()).getValue();
-			validateField(spec, value);
+			validateField(spec, value, getLocalization());
 		}
 	}
 
-	public void validateField(FieldSpec spec, String value) throws DataInvalidException
+	private static void validateField(FieldSpec spec, String value, MiniLocalization localization) throws DataInvalidException
 	{
-		String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, getLocalization());
-		validateField(spec, label, value, getLocalization());
+		String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, localization);
+		validateField(spec, label, value, localization);
 	}
 
 	private static void validateField(FieldSpec spec, String displayableLabel, String fieldDataValue, MiniLocalization localization) throws DataInvalidException
