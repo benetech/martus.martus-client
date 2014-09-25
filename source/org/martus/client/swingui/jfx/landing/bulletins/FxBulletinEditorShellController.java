@@ -34,6 +34,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.layout.Pane;
 
 import javax.swing.SwingUtilities;
@@ -223,14 +224,22 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 		saveBulletinWithState(BulletinState.STATE_SHARED);
 	}
 
-	private void saveBulletinWithState(BulletinState state)
+	private void saveBulletinWithState(final BulletinState state)
 	{
 		if(!validateAndNotifyUser())
 			return;
 
-		final boolean canDeleteFromServer = true; //TODO get real value.
-		SwingUtilities.invokeLater(() -> parentDialog.saveBulletin(canDeleteFromServer, state));
+		boolean neverDeleteFromOurServer = disallowDeleteFromServer(state);
+		SwingUtilities.invokeLater(() -> parentDialog.saveBulletin(neverDeleteFromOurServer, state));
 		SwingUtilities.invokeLater(() -> parentDialog.cleanupAndExit());
+	}
+
+	private boolean disallowDeleteFromServer(final BulletinState state)
+	{
+		boolean neverDeleteFromServerSelected = neverDeleteFromServer.isSelected(); 
+		if(state.equals(BulletinState.STATE_SAVE))
+			return false;
+		return neverDeleteFromServerSelected;
 	}
 	
 	@FXML
@@ -244,6 +253,9 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	
 	@FXML
 	private Button shareButton;
+	
+	@FXML
+	private CheckBox neverDeleteFromServer;
 
 	private UiBulletinModifyDlg parentDialog;
 	private BulletinEditorHeaderController headerController;

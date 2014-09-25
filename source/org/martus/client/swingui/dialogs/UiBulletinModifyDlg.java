@@ -313,7 +313,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		return false;
 	}
 
-	public void saveBulletin(boolean canDeleteFromServer, BulletinState bulletinState)
+	public void saveBulletin(boolean neverDeleteFromServer, BulletinState bulletinState)
 	{
 		Cursor originalCursor = getCursor();
 		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -329,16 +329,16 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			view.copyDataToBulletin(bulletin);
 			bulletin.setState(bulletinState);
 			
-			if(canDeleteFromServer)
-			{
-				bulletin.setMutable();
-				outboxToUse = draftOutbox;
-			}
-			else
+			if(neverDeleteFromServer)
 			{
 				store.removeBulletinFromFolder(draftOutbox, bulletin);
 				bulletin.setImmutable();
 				outboxToUse = store.getFolderSealedOutbox();
+			}
+			else
+			{
+				bulletin.setMutable();
+				outboxToUse = draftOutbox;
 			}
 			saveBulletinAndUpdateFolders(store, outboxToUse);
 			wasBulletinSavedFlag = true;
