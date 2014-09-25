@@ -237,9 +237,9 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	private boolean shouldDisallowDeleteFromServer(final BulletinState state)
 	{
 		boolean neverDeleteFromServerSelected = neverDeleteFromServer.isSelected(); 
-		if(state.equals(BulletinState.STATE_SAVE))
-			return false;
-		return neverDeleteFromServerSelected;
+		if(state.equals(BulletinState.STATE_SHARED) || state.equals(BulletinState.STATE_SNAPSHOT))
+			return neverDeleteFromServerSelected;
+		return false;
 	}
 	
 	@FXML
