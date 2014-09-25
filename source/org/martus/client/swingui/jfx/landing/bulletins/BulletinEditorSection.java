@@ -44,6 +44,8 @@ public class BulletinEditorSection extends GridPane
 		localization = localizationToUse;
 		title = sectionTitle;
 		
+		getStyleClass().add("bulletin-editor-grid");
+		
 		rows = new Vector<BulletinEditorRow>();
 		
 		ColumnConstraints labelColumnConstraints= new ColumnConstraints();
