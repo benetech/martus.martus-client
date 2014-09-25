@@ -1,0 +1,26 @@
+
+.requiredAsterisk {
+	-fx-text-fill: #ff0000;
+	-fx-font-size: 24px;
+}
+
+.messageText {
+	-fx-padding: 5 5 5 5;
+}
+
+.labelColumnContents {
+	-fx-padding: 5 5 5 5;
+}
+
+.fieldColumnContents {
+	-fx-padding: 5 5 5 5;
+}
+
+.groupBox {
+ 	-fx-content-display: top;
+ 	-fx-border-insets: 2 2 2 2;
+	-fx-padding: 5 5 5 5;
+ 	-fx-border-color: black;
+ 	-fx-border-width: 2;
+}
+
