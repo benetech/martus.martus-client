@@ -212,15 +212,17 @@ public class FxBulletin
 			fieldSpecs.add(fieldSpec);
 			String fieldTag = fieldSpec.getTag();
 			String value = b.get(fieldTag);
-			setField(fieldTag, value);
+			setField(fieldSpec, value);
 //			System.out.println("copyDataFromBulletin " + fieldTag + ":" + value);
 		}
 	}
 
-	private void setField(String fieldTag, String value)
+	private void setField(FieldSpec spec, String value)
 	{
+		String tag = spec.getTag();
+
 		SimpleStringProperty property = new SimpleStringProperty(value);
-		fieldProperties.put(fieldTag, property);
+		fieldProperties.put(tag, property);
 		property.addListener((observable, newValue, oldValue) -> hasBeenModified = true);
 	}
 	
