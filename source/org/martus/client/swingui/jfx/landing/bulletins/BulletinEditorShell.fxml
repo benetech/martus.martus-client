@@ -19,7 +19,7 @@
       			<children>
       				<Button onAction="#onSaveBulletin" text="%Button.saveBulletin" />
                   	<Button mnemonicParsing="false" onAction="#onVersionBulletin" text="%Button.versionBulletin" />
-      				<Button disable="true" onAction="#onShareBulletin" text="%Button.shareBulletin" />
+      				<Button fx:id="shareButton" onAction="#onShareBulletin" text="%Button.shareBulletin" />
       			</children>
    			</HBox>
   			</children>

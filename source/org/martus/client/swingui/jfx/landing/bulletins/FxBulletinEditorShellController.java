@@ -33,6 +33,7 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
 import javax.swing.SwingUtilities;
@@ -72,6 +73,7 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 
 			headerController = new BulletinEditorHeaderController(getMainWindow());
 			loadControllerAndEmbedInPane(headerController, headerPane);
+			shareButton.disableProperty().bind(headerController.getToFieldProperty().isEmpty());
 			
 			bodyController = new BulletinEditorBodyController(getMainWindow());
 			loadControllerAndEmbedInPane(bodyController, bodyPane);
@@ -239,6 +241,9 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	
 	@FXML
 	private Pane footerPane;
+	
+	@FXML
+	private Button shareButton;
 
 	private UiBulletinModifyDlg parentDialog;
 	private BulletinEditorHeaderController headerController;
