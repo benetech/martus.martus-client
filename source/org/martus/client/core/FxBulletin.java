@@ -141,6 +141,11 @@ public class FxBulletin
 		return fieldProperties.get(tag);
 	}
 	
+	public boolean hasBeenModified()
+	{
+		return hasBeenModified;
+	}
+
 	public void validateData() throws DataInvalidException
 	{
 		for(int i = 0; i < fieldSpecs.size(); ++i)
@@ -155,11 +160,6 @@ public class FxBulletin
 	{
 		String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, getLocalization());
 		validateField(spec, label, value);
-	}
-
-	public boolean hasBeenModified()
-	{
-		return hasBeenModified;
 	}
 
 	private void validateField(FieldSpec spec, String displayableLabel, String fieldDataValue) throws DataInvalidException
