@@ -15,3 +15,12 @@
 .fieldColumnContents {
 	-fx-padding: 5 5 5 5;
 }
+
+.groupBox {
+ 	-fx-content-display: top;
+ 	-fx-border-insets: 2 2 2 2;
+	-fx-padding: 5 5 5 5;
+ 	-fx-border-color: black;
+ 	-fx-border-width: 2;
+}
+
