@@ -67,7 +67,7 @@ public class FxBulletin
 		
 		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>(b.getUniversalId());
 		versionProperty = new SimpleIntegerProperty(b.getVersion());
-		HeadquartersKeys hqKeys = b.getAuthorizedToReadKeys();
+		HeadquartersKeys hqKeys = b.getAuthorizedToReadKeysIncludingPending();
 		authorizedToReadKeys = FXCollections.observableArrayList();
 		for(int i = 0; i < hqKeys.size(); ++i)
 		{
@@ -95,6 +95,7 @@ public class FxBulletin
 		}
 		HeadquartersKeys modifiedKeys = new HeadquartersKeys();
 		authorizedToReadKeys.forEach(key -> modifiedKeys.add(key));
+		modified.clearAuthorizedToReadKeys();
 		modified.setAuthorizedToReadKeys(modifiedKeys);
 	}
 
