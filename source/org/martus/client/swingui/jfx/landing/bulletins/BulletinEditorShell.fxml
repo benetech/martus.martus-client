@@ -15,11 +15,12 @@
 		<VBox>
    			<children>
    			<StackPane fx:id="footerPane" />
-   			<HBox>
+   			<HBox alignment="CENTER_LEFT">
       			<children>
       				<Button onAction="#onSaveBulletin" text="%Button.saveBulletin" />
                   	<Button mnemonicParsing="false" onAction="#onVersionBulletin" text="%Button.versionBulletin" />
       				<Button fx:id="shareButton" onAction="#onShareBulletin" text="%Button.shareBulletin" />
+                  <CheckBox fx:id="neverDeleteFromServer" mnemonicParsing="false" text="Never Delete From Server" />
       			</children>
    			</HBox>
   			</children>
