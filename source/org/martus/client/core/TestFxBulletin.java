@@ -84,14 +84,20 @@ public class TestFxBulletin extends TestCaseEnhanced
 	
 	public void testValidate() throws Exception
 	{
+		String tag = Bulletin.TAGAUTHOR;
+
 		FxBulletin fxb = new FxBulletin(getLocalization());
 		Bulletin b = new BulletinForTesting(security);
 		fxb.copyDataFromBulletin(b);
-
-		fxb.validateData();
-		
 		Vector<FieldSpec> specs = fxb.getFieldSpecs();
-		specs.forEach(spec -> {if(spec.getTag().equals(Bulletin.TAGAUTHOR)) spec.setRequired();});
+		specs.forEach(spec -> {if(spec.getTag().equals(tag)) spec.setRequired();});
+
+		fxb.fieldProperty(tag).setValue("This is not blank");
+		assertTrue(fxb.isValidProperty(tag).getValue());
+		fxb.validateData();
+
+		fxb.fieldProperty(tag).setValue("");
+		assertFalse(fxb.isValidProperty(tag).getValue());
 		try
 		{
 			fxb.validateData();
