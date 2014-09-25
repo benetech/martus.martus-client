@@ -28,11 +28,15 @@ package org.martus.client.core;
 import java.util.HashMap;
 import java.util.Vector;
 
+import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -59,6 +63,7 @@ public class FxBulletin
 		localization = localizationToUse;
 		
 		fieldProperties = new HashMap<String, SimpleStringProperty>();
+		fieldValidators = new HashMap<String, FieldValidator>();
 	}
 
 	public void copyDataFromBulletin(Bulletin b)
@@ -141,6 +146,11 @@ public class FxBulletin
 		return fieldProperties.get(tag);
 	}
 	
+	public Property<Boolean> isValidProperty(String tag)
+	{
+		return fieldValidators.get(tag).isValidProperty();
+	}
+
 	public boolean hasBeenModified()
 	{
 		return hasBeenModified;
@@ -156,7 +166,7 @@ public class FxBulletin
 		}
 	}
 
-	private static void validateField(FieldSpec spec, String value, MiniLocalization localization) throws DataInvalidException
+	protected static void validateField(FieldSpec spec, String value, MiniLocalization localization) throws DataInvalidException
 	{
 		String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, localization);
 		validateField(spec, label, value, localization);
@@ -224,7 +234,54 @@ public class FxBulletin
 		SimpleStringProperty property = new SimpleStringProperty(value);
 		fieldProperties.put(tag, property);
 		property.addListener((observable, newValue, oldValue) -> hasBeenModified = true);
+
+		FieldValidator fieldValidator = new FieldValidator(spec, getLocalization());
+		fieldValidators.put(tag, fieldValidator);
+		fieldValidator.updateStatus(value);
+		property.addListener(fieldValidator);
 	}
+	
+	static class FieldValidator implements ChangeListener<String>
+	{
+		public FieldValidator(FieldSpec specToUse, MiniLocalization localizationToUse)
+		{
+			spec = specToUse;
+			localization = localizationToUse;
+			isValidProperty = new SimpleBooleanProperty(); 
+		}
+		
+		public Property<Boolean> isValidProperty()
+		{
+			return isValidProperty;
+		}
+		
+		@Override
+		public void changed(ObservableValue<? extends String> property, String oldValue, String newValue)
+		{
+			updateStatus(newValue);
+		}
+
+		public void updateStatus(String newValue)
+		{
+			boolean isValid = false;
+			try
+			{
+				FxBulletin.validateField(spec, newValue, localization);
+				isValid = true;
+			} 
+			catch (DataInvalidException noNeedToLogOrThrow)
+			{
+				isValid = false;
+			}
+			
+			isValidProperty.setValue(isValid);
+		}
+
+		private FieldSpec spec;
+		private MiniLocalization localization;
+		private Property<Boolean> isValidProperty;
+	}
+	
 	
 	public MiniLocalization getLocalization()
 	{
@@ -235,6 +292,7 @@ public class FxBulletin
 	private boolean hasBeenModified;
 	
 	private HashMap<String, SimpleStringProperty> fieldProperties;
+	private HashMap<String, FieldValidator> fieldValidators;
 	private ReadOnlyObjectWrapper<UniversalId> universalIdProperty;
 	private ReadOnlyIntegerProperty versionProperty;
 	private ReadOnlyStringProperty bulletinLocalId;
