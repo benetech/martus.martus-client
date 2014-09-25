@@ -266,13 +266,13 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     public void testCreateDraftCopyOfMyVersionedBulletin() throws Exception
  	{
 	    	Bulletin originalMutable = createMutableBulletin(security);
-	    	originalMutable.setState(BulletinState.STATE_SNAPSHOT);
+	    	originalMutable.changeState(BulletinState.STATE_SNAPSHOT);
 	    	Bulletin cloneMutable = testStore.createNewDraft(originalMutable, customPublicSpecs, customPrivateSpecs);
 	    	assertTrue(originalMutable.isSnapshot());
 	    	assertFalse(cloneMutable.isSnapshot());
  	   
 	    	Bulletin originalImmutable = createImmutableBulletin(security);
-	    	originalImmutable.setState(BulletinState.STATE_SNAPSHOT);
+	    	originalImmutable.changeState(BulletinState.STATE_SNAPSHOT);
   	    	Bulletin cloneImmutable = testStore.createNewDraft(originalMutable, customPublicSpecs, customPrivateSpecs);
   	    	assertTrue(originalImmutable.isSnapshot());
   	    	assertFalse(cloneImmutable.isSnapshot());
@@ -600,22 +600,22 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
 		Bulletin b = testStore.createEmptyBulletin();
 		b.set(Bulletin.TAGSUMMARY, initialSummary);
-		b.setState(BulletinState.STATE_SAVE);
+		b.changeState(BulletinState.STATE_SAVE);
 		testStore.saveBulletin(b);
 		
 		UniversalId uId = b.getUniversalId();
 		Bulletin retrievedBulletinSavedState = testStore.getBulletinRevision(uId);
-		retrievedBulletinSavedState.setState(BulletinState.STATE_SAVE);
+		retrievedBulletinSavedState.changeState(BulletinState.STATE_SAVE);
 		testStore.saveBulletin(retrievedBulletinSavedState);
 		
 		Bulletin versionStateBulletin = testStore.getBulletinRevision(uId);
-		versionStateBulletin.setState(BulletinState.STATE_SNAPSHOT);
+		versionStateBulletin.changeState(BulletinState.STATE_SNAPSHOT);
 		testStore.saveBulletin(versionStateBulletin);
 
 		Bulletin retrievedVersionStateBulletin = testStore.getBulletinRevision(uId);
 		try
 		{
-			retrievedVersionStateBulletin.setState(BulletinState.STATE_SAVE);
+			retrievedVersionStateBulletin.changeState(BulletinState.STATE_SAVE);
 			fail("A retrieved VersionState Bulletin should not allow the state to be changed without making a new version.");
 		} 
 		catch (InvalidBulletinStateException expected)
@@ -624,7 +624,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		
 		try
 		{
-			retrievedVersionStateBulletin.setState(BulletinState.STATE_SHARED);
+			retrievedVersionStateBulletin.changeState(BulletinState.STATE_SHARED);
 			fail("A retrieved VersionState Bulletin should not allow the state to SHARED without making a new version.");
 		} 
 		catch (InvalidBulletinStateException expected)

@@ -327,7 +327,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			// NOTE: must copyDataToBulletin before setSealed or setDraft
 			// NOTE: after copyDataToBulletin, should not allow user to cancel
 			view.copyDataToBulletin(bulletin);
-			bulletin.setState(bulletinState);
+			bulletin.changeState(bulletinState);
 			
 			if(neverDeleteFromServer)
 			{
