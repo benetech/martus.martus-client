@@ -145,8 +145,7 @@ public class FxBulletin
 		for(int i = 0; i < fieldSpecs.size(); ++i)
 		{
 			FieldSpec spec = fieldSpecs.get(i);
-			String tag = spec.getTag();
-			String value = fieldProperty(tag).getValue();
+			String value = fieldProperty(spec.getTag()).getValue();
 			String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, getLocalization());
 			validateField(spec, label, value);
 		}
