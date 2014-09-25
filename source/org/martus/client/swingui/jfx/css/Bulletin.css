@@ -8,11 +8,15 @@
 	-fx-padding: 5 5 5 5;
 }
 
-.labelColumnContents {
+.bulletin-editor-grid {
+	-fx-padding: 15 15 15 15;
+}
+
+.bulletin-editor-label-cell {
 	-fx-padding: 5 5 5 5;
 }
 
-.fieldColumnContents {
+.bulletin-editor-field-cell {
 	-fx-padding: 5 5 5 5;
 }
 
