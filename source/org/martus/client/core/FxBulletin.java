@@ -146,9 +146,14 @@ public class FxBulletin
 		{
 			FieldSpec spec = fieldSpecs.get(i);
 			String value = fieldProperty(spec.getTag()).getValue();
-			String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, getLocalization());
-			validateField(spec, label, value);
+			validateField(spec, value);
 		}
+	}
+
+	public void validateField(FieldSpec spec, String value) throws DataInvalidException
+	{
+		String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, getLocalization());
+		validateField(spec, label, value);
 	}
 
 	public boolean hasBeenModified()
