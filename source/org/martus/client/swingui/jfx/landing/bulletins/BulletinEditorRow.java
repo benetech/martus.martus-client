@@ -61,9 +61,9 @@ public class BulletinEditorRow
 		localization = localizationToUse;
 		
 		labelNode = new HBox();
-		labelNode.getStyleClass().add("labelColumnContents");
+		labelNode.getStyleClass().add("bulletin-editor-label-cell");
 		fieldsNode = new HBox();
-		fieldsNode.getStyleClass().add("fieldsColumnContents");
+		fieldsNode.getStyleClass().add("bulletin-editor-field-cell");
 	}
 	
 	public Node getLabelNode()
