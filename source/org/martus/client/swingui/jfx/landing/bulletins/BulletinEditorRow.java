@@ -25,7 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.Property;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -61,7 +61,7 @@ public class BulletinEditorRow
 		return fieldsNode;
 	}
 	
-	public void addFieldToRow(FieldSpec fieldSpec, SimpleStringProperty property)
+	public void addFieldToRow(FieldSpec fieldSpec, Property<String> property)
 	{
 		Node label = createLabel(fieldSpec);
 		HBox.setHgrow(label, Priority.ALWAYS);

@@ -29,8 +29,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -54,7 +54,7 @@ import org.martus.common.fieldspec.MessageFieldSpec;
 
 public class FxFieldCreator
 {
-	public Node createFieldForSpec(FieldSpec spec, SimpleStringProperty property)
+	public Node createFieldForSpec(FieldSpec spec, Property<String> property)
 	{
 		if(spec.getType().isString())
 			return createStringField(property);
@@ -74,7 +74,7 @@ public class FxFieldCreator
 		return createFieldNotAvailable();
 	}
 
-	private Node createDropdownField(SimpleStringProperty property, FieldSpec rawSpec)
+	private Node createDropdownField(Property<String> property, FieldSpec rawSpec)
 	{
 		DropDownFieldSpec spec = (DropDownFieldSpec) rawSpec;
 		String dataSourceGridTag = spec.getDataSourceGridTag();
@@ -107,7 +107,7 @@ public class FxFieldCreator
 		return choiceBox;
 	}
 
-	private Node createBooleanField(SimpleStringProperty property)
+	private Node createBooleanField(Property<String> property)
 	{
 		CheckBox checkBox = new CheckBox();
 		BooleanStringConverter converter = new BooleanStringConverter();
@@ -129,7 +129,7 @@ public class FxFieldCreator
 		return flow;
 	}
 
-	public Node createStringField(SimpleStringProperty property)
+	public Node createStringField(Property<String> property)
 	{
 		ScrollFreeTextArea textField = new ScrollFreeTextArea();
 		textField.textProperty().bindBidirectional(property);
@@ -138,7 +138,7 @@ public class FxFieldCreator
 		return textField;
 	}
 	
-	private Node createMultilineField(SimpleStringProperty property)
+	private Node createMultilineField(Property<String> property)
 	{
 		TextArea textArea = new TextArea();
 		textArea.setPrefColumnCount(MINIMUM_REASONABLE_COLUMN_COUNT);
