@@ -25,10 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.bulletintable;
 
-import java.util.HashMap;
-
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusLogger;
@@ -109,17 +106,5 @@ public class ModifyBulletinActionDoer
 		return bulletinToModify;
 	}
 	
-	private boolean confirmUpdateFieldsDlg(String baseTag)
-	{
-		MartusLocalization localization = mainWindow.getLocalization();
-		String useOld = localization.getButtonLabel("UseOldCustomFields");
-		String useNew = localization.getButtonLabel("UseNewCustomFields");
-		String[] buttons = {useOld, useNew};
-		HashMap tokenReplacement = new HashMap();
-		tokenReplacement.put("#UseOldCustomFields#", useOld);
-		tokenReplacement.put("#UseNewCustomFields#", useNew);
-
-		return mainWindow.confirmCustomButtonsDlg(mainWindow, baseTag, buttons, tokenReplacement);
-	}
 	UiMainWindow mainWindow;
 }
