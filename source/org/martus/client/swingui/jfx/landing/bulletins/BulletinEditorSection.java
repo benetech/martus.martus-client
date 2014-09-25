@@ -31,6 +31,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.fieldspec.FieldSpec;
@@ -51,6 +52,7 @@ public class BulletinEditorSection extends GridPane
 
 		ColumnConstraints fieldColumnConstraints = new ColumnConstraints();
 		fieldColumnConstraints.fillWidthProperty().setValue(true);
+		fieldColumnConstraints.hgrowProperty().set(Priority.ALWAYS);
 
 		getColumnConstraints().add(labelColumnConstraints);
 		getColumnConstraints().add(fieldColumnConstraints);
