@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import java.util.Vector;
 
 import javafx.beans.property.Property;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -65,7 +66,7 @@ public class BulletinEditorSection extends GridPane
 		return title;
 	}
 	
-	public void addField(FieldSpec fieldSpec, Property<String> fieldValueProperty)
+	public void addField(FieldSpec fieldSpec, Property<String> fieldValueProperty, ObservableBooleanValue isValidProperty)
 	{
 		boolean wantsKeepWithPrevious = fieldSpec.keepWithPrevious();
 		boolean canKeepWithPrevious = canKeepWithNextOrPrevious(fieldSpec);
@@ -79,7 +80,7 @@ public class BulletinEditorSection extends GridPane
 			rows.add(currentRow);
 		}
 		
-		currentRow.addFieldToRow(fieldSpec, fieldValueProperty);
+		currentRow.addFieldToRow(fieldSpec, fieldValueProperty, isValidProperty);
 		
 		if(!canKeepWithNextOrPrevious(fieldSpec))
 			endCurrentRow();

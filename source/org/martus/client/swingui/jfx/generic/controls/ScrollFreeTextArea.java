@@ -75,6 +75,7 @@ public class ScrollFreeTextArea extends StackPane
 		setAlignment(Pos.TOP_LEFT);
 		// NOTE: Original code set the padding. Doesn't seem to help
 //		setPadding(new Insets(4,7,7,7));
+		getStyleClass().add("scroll-free-text-area-container");
 		
 		textArea = new TextArea();
 		textArea.setWrapText(true);

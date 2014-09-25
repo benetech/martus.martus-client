@@ -25,7 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import javafx.beans.binding.When;
 import javafx.beans.property.Property;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -61,14 +63,24 @@ public class BulletinEditorRow
 		return fieldsNode;
 	}
 	
-	public void addFieldToRow(FieldSpec fieldSpec, Property<String> fieldValueProperty)
+	public void addFieldToRow(FieldSpec fieldSpec, Property<String> fieldValueProperty, ObservableBooleanValue isValidProperty)
 	{
 		Node label = createLabel(fieldSpec);
+		addValidationBorder(isValidProperty, label);
 		HBox.setHgrow(label, Priority.ALWAYS);
 		getLabelDestination().getChildren().add(label);
 		
 		Node fieldNode = fieldCreator.createFieldForSpec(fieldSpec, fieldValueProperty);
+		addValidationBorder(isValidProperty, fieldNode);
 		fieldsNode.getChildren().add(fieldNode);
+	}
+
+	public void addValidationBorder(ObservableBooleanValue isValidProperty,	Node node)
+	{
+		// FIXME: This really should be done with a listener that updates the css style class, 
+		// and then calls applyCss(), but I'm not sure how to replace one style with another.
+		// So for now, this will have to do. 
+		node.styleProperty().bind(new When(isValidProperty).then("").otherwise("-fx-border-color: red;"));
 	}
 
 	public HBox getLabelDestination()
