@@ -229,12 +229,12 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 		if(!validateAndNotifyUser())
 			return;
 
-		boolean neverDeleteFromOurServer = disallowDeleteFromServer(state);
+		boolean neverDeleteFromOurServer = shouldDisallowDeleteFromServer(state);
 		SwingUtilities.invokeLater(() -> parentDialog.saveBulletin(neverDeleteFromOurServer, state));
 		SwingUtilities.invokeLater(() -> parentDialog.cleanupAndExit());
 	}
 
-	private boolean disallowDeleteFromServer(final BulletinState state)
+	private boolean shouldDisallowDeleteFromServer(final BulletinState state)
 	{
 		boolean neverDeleteFromServerSelected = neverDeleteFromServer.isSelected(); 
 		if(state.equals(BulletinState.STATE_SAVE))
