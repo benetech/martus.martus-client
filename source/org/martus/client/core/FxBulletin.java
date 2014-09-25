@@ -159,10 +159,10 @@ public class FxBulletin
 	public void validateField(FieldSpec spec, String value) throws DataInvalidException
 	{
 		String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, getLocalization());
-		validateField(spec, label, value);
+		validateField(spec, label, value, getLocalization());
 	}
 
-	private void validateField(FieldSpec spec, String displayableLabel, String fieldDataValue) throws DataInvalidException
+	private static void validateField(FieldSpec spec, String displayableLabel, String fieldDataValue, MiniLocalization localization) throws DataInvalidException
 	{
 		FieldType type = spec.getType();
 		if(type.isGrid() || type.isDate() || type.isDateRange())
@@ -170,7 +170,7 @@ public class FxBulletin
 			MartusLogger.logError("******* Validation not handled yet for " + type.getTypeName());
 			return;
 		}
-		spec.validate(displayableLabel, fieldDataValue, getLocalization());
+		spec.validate(displayableLabel, fieldDataValue, localization);
 	}
 
 	private void clear()
