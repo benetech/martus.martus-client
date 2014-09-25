@@ -87,8 +87,8 @@ public class FxFormCreator
 		if(isSectionStart)
 			return;
 		
-		SimpleStringProperty property = bulletin.fieldProperty(fieldSpec.getTag());
-		currentSection.addField(fieldSpec, property);
+		SimpleStringProperty fieldValueProperty = bulletin.fieldProperty(fieldSpec.getTag());
+		currentSection.addField(fieldSpec, fieldValueProperty);
 	}
 
 	private boolean shouldOmitField(FieldSpec spec)
