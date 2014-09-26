@@ -24,7 +24,7 @@
                <right>
          			<HBox alignment="CENTER_LEFT" styleClass="groupBox" BorderPane.alignment="CENTER">
             			<children>
-                        <CheckBox fx:id="immutableOnServer" mnemonicParsing="false" text="Never Delete From Server" />
+                        <CheckBox fx:id="immutableOnServer" mnemonicParsing="false" text="%NeverDeleteVersionOnServer" />
                         	<Button mnemonicParsing="false" onAction="#onVersionBulletin" text="%Button.versionBulletin" />
             				<Button fx:id="shareButton" onAction="#onShareBulletin" text="%Button.shareBulletin" />
             			</children>
