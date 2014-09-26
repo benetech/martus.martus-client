@@ -126,8 +126,13 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	{
 		BooleanProperty immutableOnServerProperty = fxBulletin.getImmutableOnServerProperty();
 		immutableOnServer.selectedProperty().bindBidirectional(immutableOnServerProperty);
-		if(immutableOnServerProperty.get())
+		
+		boolean alwaysSetImmutableOnServer = getApp().getConfigInfo().getAlwaysImmutableOnServer();
+		if(alwaysSetImmutableOnServer)
+		{
+			immutableOnServerProperty.set(true);
 			immutableOnServer.setDisable(true);
+		}
 	}
 
 	@Override
