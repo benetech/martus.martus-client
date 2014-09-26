@@ -28,6 +28,7 @@ package org.martus.client.core;
 import java.util.HashMap;
 import java.util.Vector;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringProperty;
@@ -72,12 +73,17 @@ public class FxBulletin
 		
 		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>(b.getUniversalId());
 		versionProperty = new SimpleIntegerProperty(b.getVersion());
+
+		originalNeverDeleteSnapshotFromServer = b.getNeverDeleteSnapshotFromServer();
+		neverDeleteSnapshotFromServer = new SimpleBooleanProperty(originalNeverDeleteSnapshotFromServer);
+
 		HeadquartersKeys hqKeys = b.getAuthorizedToReadKeysIncludingPending();
 		authorizedToReadKeys = FXCollections.observableArrayList();
 		for(int i = 0; i < hqKeys.size(); ++i)
 		{
 			authorizedToReadKeys.add(hqKeys.get(i));
 		}
+		
 		bulletinHistory = new ReadOnlyObjectWrapper<BulletinHistory>(b.getHistory());
 		bulletinLocalId = new SimpleStringProperty(b.getBulletinHeaderPacket().getLocalId());
 
@@ -87,6 +93,9 @@ public class FxBulletin
 
 	public void copyDataToBulletin(Bulletin modified) throws Exception
 	{
+		if(originalNeverDeleteSnapshotFromServer || neverDeleteSnapshotFromServer.get())
+			modified.setNeverDeleteSnapshotFromServer();
+		
 		modified.getFieldDataPacket().setFieldSpecs(fieldSpecs);
 		modified.getPrivateFieldDataPacket().setFieldSpecs(new FieldSpecCollection());
 		
@@ -149,6 +158,11 @@ public class FxBulletin
 	public ObservableBooleanValue isValidProperty(String tag)
 	{
 		return fieldValidators.get(tag).isValidProperty();
+	}
+	
+	public BooleanProperty getNeverDeleteSnapshotFromServerProperty()
+	{
+		return neverDeleteSnapshotFromServer;
 	}
 
 	public boolean hasBeenModified()
@@ -300,4 +314,7 @@ public class FxBulletin
 	private FieldSpecCollection fieldSpecs;
 	private ObservableList<HeadquartersKey> authorizedToReadKeys;
 	private ReadOnlyObjectWrapper<BulletinHistory> bulletinHistory;
+
+	private boolean originalNeverDeleteSnapshotFromServer;
+	private BooleanProperty neverDeleteSnapshotFromServer;
 }

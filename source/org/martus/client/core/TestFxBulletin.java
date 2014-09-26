@@ -27,6 +27,7 @@ package org.martus.client.core;
 
 import java.util.Vector;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringProperty;
@@ -82,6 +83,33 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertTrue(fxb.hasBeenModified());
 	}
 	
+	public void testNeverDeleteSnapshotFromServer() throws Exception
+	{
+		FxBulletin fxb = new FxBulletin(getLocalization());
+		assertNull(fxb.getNeverDeleteSnapshotFromServerProperty());
+		
+		Bulletin bulletinWithNeverDeleteNotSetInitially = new BulletinForTesting(security);
+		fxb.copyDataFromBulletin(bulletinWithNeverDeleteNotSetInitially);
+		BooleanProperty neverDeleteSnapshotFromServerProperty = fxb.getNeverDeleteSnapshotFromServerProperty();
+		assertFalse(neverDeleteSnapshotFromServerProperty.get());
+		neverDeleteSnapshotFromServerProperty.set(true);
+		assertTrue(neverDeleteSnapshotFromServerProperty.get());
+		Bulletin result1 = new Bulletin(security);
+		fxb.copyDataToBulletin(result1);
+		assertTrue(result1.getNeverDeleteSnapshotFromServer());
+		
+		FxBulletin fxb2 = new FxBulletin(getLocalization());
+		Bulletin bulletinWithNeverDeleteSetInitially = new BulletinForTesting(security);
+		bulletinWithNeverDeleteSetInitially.setNeverDeleteSnapshotFromServer();
+		fxb2.copyDataFromBulletin(bulletinWithNeverDeleteSetInitially);
+		BooleanProperty neverDeleteSnapshotFromServerProperty2 = fxb2.getNeverDeleteSnapshotFromServerProperty();
+		assertTrue(neverDeleteSnapshotFromServerProperty2.get());
+		neverDeleteSnapshotFromServerProperty2.set(false);
+		Bulletin result2 = new Bulletin(security);
+		fxb2.copyDataToBulletin(result2);
+		assertTrue("Once a bulletin has this flag set it cant be unset", result2.getNeverDeleteSnapshotFromServer());
+	}
+
 	public void testValidate() throws Exception
 	{
 		String tag = Bulletin.TAGAUTHOR;
