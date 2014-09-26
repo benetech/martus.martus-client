@@ -81,7 +81,7 @@ public class FxFormCreator
 			String sectionTitle = "";
 			if(isSectionStart)
 				sectionTitle = fieldSpec.getLabel();
-			currentSection = new BulletinEditorSection(getLocalization(), sectionTitle);
+			currentSection = new BulletinEditorSection(bulletin, getLocalization(), sectionTitle);
 			sections.add(currentSection);
 		}
 

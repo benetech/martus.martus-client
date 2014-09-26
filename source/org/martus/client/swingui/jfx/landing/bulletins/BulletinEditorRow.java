@@ -35,14 +35,16 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
+import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class BulletinEditorRow
 {
-	public BulletinEditorRow(MartusLocalization localizationToUse)
+	public BulletinEditorRow(FxBulletin bulletinToUse, MartusLocalization localizationToUse)
 	{
+		bulletin = bulletinToUse;
 		localization = localizationToUse;
 		
 		fieldCreator = new FxFieldCreator();
@@ -70,7 +72,7 @@ public class BulletinEditorRow
 		HBox.setHgrow(label, Priority.ALWAYS);
 		getLabelDestination().getChildren().add(label);
 		
-		Node fieldNode = fieldCreator.createFieldForSpec(fieldSpec, fieldValueProperty);
+		Node fieldNode = fieldCreator.createFieldForSpec(bulletin, fieldSpec, fieldValueProperty);
 		addValidationBorder(isValidProperty, fieldNode);
 		fieldsNode.getChildren().add(fieldNode);
 	}
@@ -113,6 +115,7 @@ public class BulletinEditorRow
 		return localization;
 	}
 
+	private FxBulletin bulletin;
 	private MartusLocalization localization;
 	private FxFieldCreator fieldCreator;
 	private HBox labelNode;
