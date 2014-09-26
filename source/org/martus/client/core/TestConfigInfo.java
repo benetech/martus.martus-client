@@ -391,7 +391,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setSyncStatusJson(sampleSyncStatusJson);
 		info.setSyncFrequencyMinutes(sampleSyncFrequency);
 		info.setDidTemplateMigration(sampleDidTemplateMigration);
-		info.setImmutableOnServer(sampleNeverDeleteSnapshotFromServer);
+		info.setImmutableOnServer(sampleImmutableOnServer);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -428,7 +428,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": SyncStatusJson", "", info.getSyncStatusJson());
 		assertEquals(label + ": SyncFrequency", "", info.getSyncFrequencyMinutes());
 		assertEquals(label + ": DidMigrateTemplates", false, info.getDidTemplateMigration());
-		assertEquals(label + ": NeverDeleteSnapshotFromServer", true, info.getImmutableOnServer());
+		assertEquals(label + ": ImmutableOnServer", true, info.getImmutableOnServer());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -621,11 +621,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 		}
 		if(VERSION >= 27)
 		{
-			assertEquals(label + ": sampleNeverDeleteSnapshotFromServer", sampleNeverDeleteSnapshotFromServer, info.getImmutableOnServer());
+			assertEquals(label + ": sampleImmutableOnServer", sampleImmutableOnServer, info.getImmutableOnServer());
 		}
 		else
 		{
-			assertEquals(label + ": sampleNeverDeleteSnapshotFromServer", true, info.getImmutableOnServer());
+			assertEquals(label + ": sampleImmutableOnServer", true, info.getImmutableOnServer());
 		}
 	}
 
@@ -767,7 +767,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		}
 		if(VERSION >= 27)
 		{
-			out.writeBoolean(sampleNeverDeleteSnapshotFromServer);
+			out.writeBoolean(sampleImmutableOnServer);
 		}
 		out.close();
 		return outputStream.toByteArray();
@@ -844,5 +844,5 @@ public class TestConfigInfo extends TestCaseEnhanced
 //Version 26
 	final boolean sampleDidTemplateMigration = true;
 //Version 27
-	final boolean sampleNeverDeleteSnapshotFromServer = false; // NOTE: Defaults to true
+	final boolean sampleImmutableOnServer = false; // NOTE: Defaults to true
 }
