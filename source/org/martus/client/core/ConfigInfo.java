@@ -92,7 +92,7 @@ public class ConfigInfo
 	public void setSyncStatusJson(String newSyncStatusJson) { syncStatusJson = newSyncStatusJson; }
 	public void setSyncFrequencyMinutes(String newSyncFrequency) { syncFrequencyMinutes = newSyncFrequency; }
 	public void setDidTemplateMigration(boolean newValue) { didTemplateMigrationProperty.setValue(newValue); }
-	public void setImmutableOnServer(boolean newValue) { immutableOnServer.setValue(newValue); }
+	public void setAlwaysImmutableOnServer(boolean newValue) { alwaysImmutableOnServer.setValue(newValue); }
 
 
 	public void clearLegacyHQKey()						{ deprecatedLegacyHQKey = ""; }
@@ -146,7 +146,7 @@ public class ConfigInfo
 	public String getSyncStatusJson() {	return syncStatusJson; }
 	public String getSyncFrequencyMinutes() {	return syncFrequencyMinutes; }
 	public boolean getDidTemplateMigration() { return didTemplateMigrationProperty.getValue(); }
-	public boolean getImmutableOnServer() { return immutableOnServer.getValue(); }
+	public boolean getAlwaysImmutableOnServer() { return alwaysImmutableOnServer.getValue(); }
 
 	public boolean isServerConfigured()
 	{
@@ -196,7 +196,7 @@ public class ConfigInfo
 		syncStatusJson = "";
 		syncFrequencyMinutes = "";
 		didTemplateMigrationProperty = new SimpleBooleanProperty();
-		immutableOnServer = new SimpleBooleanProperty(true);
+		alwaysImmutableOnServer = new SimpleBooleanProperty(true);
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException
@@ -330,7 +330,7 @@ public class ConfigInfo
 			}
 			if(loaded.version >= 27)
 			{
-				loaded.immutableOnServer.setValue(in.readBoolean());
+				loaded.alwaysImmutableOnServer.setValue(in.readBoolean());
 			}
 		}
 		finally
@@ -390,7 +390,7 @@ public class ConfigInfo
 			writeLongString(out, syncStatusJson);
 			out.writeUTF(syncFrequencyMinutes);
 			out.writeBoolean(didTemplateMigrationProperty.getValue());
-			out.writeBoolean(immutableOnServer.getValue());
+			out.writeBoolean(alwaysImmutableOnServer.getValue());
 		}
 		finally
 		{
@@ -511,5 +511,5 @@ public class ConfigInfo
 	//Version 26
 	private Property<Boolean> didTemplateMigrationProperty;
 	//Version 27
-	private Property<Boolean> immutableOnServer;
+	private Property<Boolean> alwaysImmutableOnServer;
 }

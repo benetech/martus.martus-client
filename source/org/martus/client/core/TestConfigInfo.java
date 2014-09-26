@@ -391,7 +391,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setSyncStatusJson(sampleSyncStatusJson);
 		info.setSyncFrequencyMinutes(sampleSyncFrequency);
 		info.setDidTemplateMigration(sampleDidTemplateMigration);
-		info.setImmutableOnServer(sampleImmutableOnServer);
+		info.setAlwaysImmutableOnServer(sampleImmutableOnServer);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -428,7 +428,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": SyncStatusJson", "", info.getSyncStatusJson());
 		assertEquals(label + ": SyncFrequency", "", info.getSyncFrequencyMinutes());
 		assertEquals(label + ": DidMigrateTemplates", false, info.getDidTemplateMigration());
-		assertEquals(label + ": ImmutableOnServer", true, info.getImmutableOnServer());
+		assertEquals(label + ": ImmutableOnServer", true, info.getAlwaysImmutableOnServer());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -621,11 +621,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 		}
 		if(VERSION >= 27)
 		{
-			assertEquals(label + ": sampleImmutableOnServer", sampleImmutableOnServer, info.getImmutableOnServer());
+			assertEquals(label + ": sampleImmutableOnServer", sampleImmutableOnServer, info.getAlwaysImmutableOnServer());
 		}
 		else
 		{
-			assertEquals(label + ": sampleImmutableOnServer", true, info.getImmutableOnServer());
+			assertEquals(label + ": sampleImmutableOnServer", true, info.getAlwaysImmutableOnServer());
 		}
 	}
 
