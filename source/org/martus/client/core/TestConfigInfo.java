@@ -391,7 +391,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setSyncStatusJson(sampleSyncStatusJson);
 		info.setSyncFrequencyMinutes(sampleSyncFrequency);
 		info.setDidTemplateMigration(sampleDidTemplateMigration);
-		info.setNeverDeleteSnapshotFromServer(sampleNeverDeleteSnapshotFromServer);
+		info.setImmutableOnServer(sampleNeverDeleteSnapshotFromServer);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -428,7 +428,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": SyncStatusJson", "", info.getSyncStatusJson());
 		assertEquals(label + ": SyncFrequency", "", info.getSyncFrequencyMinutes());
 		assertEquals(label + ": DidMigrateTemplates", false, info.getDidTemplateMigration());
-		assertEquals(label + ": NeverDeleteSnapshotFromServer", true, info.getNeverDeleteSnapshotFromServer());
+		assertEquals(label + ": NeverDeleteSnapshotFromServer", true, info.getImmutableOnServer());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -621,11 +621,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 		}
 		if(VERSION >= 27)
 		{
-			assertEquals(label + ": sampleNeverDeleteSnapshotFromServer", sampleNeverDeleteSnapshotFromServer, info.getNeverDeleteSnapshotFromServer());
+			assertEquals(label + ": sampleNeverDeleteSnapshotFromServer", sampleNeverDeleteSnapshotFromServer, info.getImmutableOnServer());
 		}
 		else
 		{
-			assertEquals(label + ": sampleNeverDeleteSnapshotFromServer", true, info.getNeverDeleteSnapshotFromServer());
+			assertEquals(label + ": sampleNeverDeleteSnapshotFromServer", true, info.getImmutableOnServer());
 		}
 	}
 
