@@ -57,7 +57,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 
 	public void testBasics()
 	{
-		assertEquals(26, ConfigInfo.VERSION);
+		assertEquals(27, ConfigInfo.VERSION);
 
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
@@ -391,6 +391,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setSyncStatusJson(sampleSyncStatusJson);
 		info.setSyncFrequencyMinutes(sampleSyncFrequency);
 		info.setDidTemplateMigration(sampleDidTemplateMigration);
+		info.setNeverDeleteSnapshotFromServer(sampleNeverDeleteSnapshotFromServer);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -427,6 +428,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleSyncStatusJson", "", info.getSyncStatusJson());
 		assertEquals(label + ": sampleSyncFrequency", "", info.getSyncFrequencyMinutes());
 		assertEquals(label + ": sampleDidMigrateTemplates", false, info.getDidTemplateMigration());
+		assertEquals(label + ": sampleNeverDeleteSnapshotFromServer", true, info.getNeverDeleteSnapshotFromServer());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -617,6 +619,14 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			assertEquals(label + ": sampleDidTemplateMigration", false, info.getDidTemplateMigration());
 		}
+		if(VERSION >= 27)
+		{
+			assertEquals(label + ": sampleNeverDeleteSnapshotFromServer", sampleNeverDeleteSnapshotFromServer, info.getNeverDeleteSnapshotFromServer());
+		}
+		else
+		{
+			assertEquals(label + ": sampleNeverDeleteSnapshotFromServer", true, info.getNeverDeleteSnapshotFromServer());
+		}
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -755,6 +765,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			out.writeBoolean(sampleDidTemplateMigration);
 		}
+		if(VERSION >= 27)
+		{
+			out.writeBoolean(sampleNeverDeleteSnapshotFromServer);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -829,4 +843,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final String sampleSyncFrequency = "60";
 //Version 26
 	final boolean sampleDidTemplateMigration = true;
+//Version 27
+	final boolean sampleNeverDeleteSnapshotFromServer = false; // NOTE: Defaults to true
 }
