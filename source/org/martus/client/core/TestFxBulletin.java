@@ -83,28 +83,28 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertTrue(fxb.hasBeenModified());
 	}
 	
-	public void testNeverDeleteSnapshotFromServer() throws Exception
+	public void testImmutableOnServerProperty() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin(getLocalization());
 		assertNull(fxb.getImmutableOnServerProperty());
 		
-		Bulletin bulletinWithNeverDeleteNotSetInitially = new BulletinForTesting(security);
-		fxb.copyDataFromBulletin(bulletinWithNeverDeleteNotSetInitially);
-		BooleanProperty neverDeleteSnapshotFromServerProperty = fxb.getImmutableOnServerProperty();
-		assertFalse(neverDeleteSnapshotFromServerProperty.get());
-		neverDeleteSnapshotFromServerProperty.set(true);
-		assertTrue(neverDeleteSnapshotFromServerProperty.get());
+		Bulletin bulletinWithImmutableOnServerNotSetInitially = new BulletinForTesting(security);
+		fxb.copyDataFromBulletin(bulletinWithImmutableOnServerNotSetInitially);
+		BooleanProperty immutableOnServerProperty = fxb.getImmutableOnServerProperty();
+		assertFalse(immutableOnServerProperty.get());
+		immutableOnServerProperty.set(true);
+		assertTrue(immutableOnServerProperty.get());
 		Bulletin result1 = new Bulletin(security);
 		fxb.copyDataToBulletin(result1);
 		assertTrue(result1.getImmutableOnServer());
 		
 		FxBulletin fxb2 = new FxBulletin(getLocalization());
-		Bulletin bulletinWithNeverDeleteSetInitially = new BulletinForTesting(security);
-		bulletinWithNeverDeleteSetInitially.setImmutableOnServer();
-		fxb2.copyDataFromBulletin(bulletinWithNeverDeleteSetInitially);
-		BooleanProperty neverDeleteSnapshotFromServerProperty2 = fxb2.getImmutableOnServerProperty();
-		assertTrue(neverDeleteSnapshotFromServerProperty2.get());
-		neverDeleteSnapshotFromServerProperty2.set(false);
+		Bulletin bulletinWithImmutableOnServerSetInitially = new BulletinForTesting(security);
+		bulletinWithImmutableOnServerSetInitially.setImmutableOnServer();
+		fxb2.copyDataFromBulletin(bulletinWithImmutableOnServerSetInitially);
+		BooleanProperty immutableOnServerProperty2 = fxb2.getImmutableOnServerProperty();
+		assertTrue(immutableOnServerProperty2.get());
+		immutableOnServerProperty2.set(false);
 		Bulletin result2 = new Bulletin(security);
 		fxb2.copyDataToBulletin(result2);
 		assertTrue("Once a bulletin has this flag set it cant be unset", result2.getImmutableOnServer());
