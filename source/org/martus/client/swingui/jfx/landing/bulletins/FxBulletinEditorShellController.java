@@ -116,18 +116,18 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	private void copyDataFromBulletinOnFxThread(Bulletin bulletinToShow) throws RuntimeException
 	{
 		fxBulletin.copyDataFromBulletin(bulletinToShow);
-		setNeverDeleteSnapshotFromServerBinding();
+		setImmutableOnServerBinding();
 		Platform.runLater(() -> headerController.showBulletin(fxBulletin));
 		Platform.runLater(() -> bodyController.showBulletin(fxBulletin));
 		Platform.runLater(() -> footerController.showBulletin(fxBulletin));
 	}
 
-	private void setNeverDeleteSnapshotFromServerBinding()
+	private void setImmutableOnServerBinding()
 	{
-		BooleanProperty neverDeleteSnapshotFromServerProperty = fxBulletin.getImmutableOnServerProperty();
-		neverDeleteFromServer.selectedProperty().bindBidirectional(neverDeleteSnapshotFromServerProperty);
-		if(neverDeleteSnapshotFromServerProperty.get())
-			neverDeleteFromServer.setDisable(true);
+		BooleanProperty immutableOnServerProperty = fxBulletin.getImmutableOnServerProperty();
+		immutableOnServer.selectedProperty().bindBidirectional(immutableOnServerProperty);
+		if(immutableOnServerProperty.get())
+			immutableOnServer.setDisable(true);
 	}
 
 	@Override
@@ -246,7 +246,7 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 
 	private boolean shouldDisallowDeleteFromServer(final BulletinState state)
 	{
-		boolean neverDeleteFromServerSelected = neverDeleteFromServer.isSelected(); 
+		boolean neverDeleteFromServerSelected = immutableOnServer.isSelected(); 
 		if(state.equals(BulletinState.STATE_SHARED) || state.equals(BulletinState.STATE_SNAPSHOT))
 			return neverDeleteFromServerSelected;
 		return false;
@@ -265,7 +265,7 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	private Button shareButton;
 	
 	@FXML
-	private CheckBox neverDeleteFromServer;
+	private CheckBox immutableOnServer;
 
 	private UiBulletinModifyDlg parentDialog;
 	private BulletinEditorHeaderController headerController;
