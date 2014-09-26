@@ -64,7 +64,7 @@ public class SettingsforSystemController extends FxInSwingController
 		super.initialize(location, bundle);
 		ConfigInfo configInfo = getApp().getConfigInfo();
 		useZawgyiFont.selectedProperty().setValue(configInfo.getUseZawgyiFont());
-		neverDeleteSnapshotFromServer.selectedProperty().setValue(configInfo.getNeverDeleteSnapshotFromServer());
+		immutableOnServer.selectedProperty().setValue(configInfo.getNeverDeleteSnapshotFromServer());
 		MartusLocalization localization = getLocalization();
 		initializeLanguageChoices(localization);
 		initializeDateFormatChoices(localization);
@@ -156,7 +156,7 @@ public class SettingsforSystemController extends FxInSwingController
 		MartusLocalization localization = getLocalization();
 		ConfigInfo configInfo = getApp().getConfigInfo();
 		configInfo.setUseZawgyiFont(useZawgyiFont.selectedProperty().getValue());
-		configInfo.setNeverDeleteSnapshotFromServer(neverDeleteSnapshotFromServer.selectedProperty().getValue());
+		configInfo.setNeverDeleteSnapshotFromServer(immutableOnServer.selectedProperty().getValue());
 		localization.setMdyOrder(dateFormat.getSelectionModel().getSelectedItem().getCode());
 		String delimiter = dateDelimiter.getSelectionModel().getSelectedItem().getCode();
 		localization.setDateDelimiter(delimiter.charAt(0));
@@ -211,6 +211,6 @@ public class SettingsforSystemController extends FxInSwingController
 	private ChoiceBox<ChoiceItem> calendarType;
 
 	@FXML
-	private CheckBox neverDeleteSnapshotFromServer;
+	private CheckBox immutableOnServer;
 	
 }
