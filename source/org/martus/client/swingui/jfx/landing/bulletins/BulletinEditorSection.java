@@ -34,14 +34,16 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
+import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 
 public class BulletinEditorSection extends GridPane
 {
-	public BulletinEditorSection(MartusLocalization localizationToUse, String sectionTitle)
+	public BulletinEditorSection(FxBulletin bulletinToUse, MartusLocalization localizationToUse, String sectionTitle)
 	{
+		bulletin = bulletinToUse;
 		localization = localizationToUse;
 		title = sectionTitle;
 		
@@ -76,7 +78,7 @@ public class BulletinEditorSection extends GridPane
 			
 		if(currentRow == null)
 		{
-			currentRow = new BulletinEditorRow(getLocalization());
+			currentRow = new BulletinEditorRow(bulletin, getLocalization());
 			rows.add(currentRow);
 		}
 		
@@ -121,6 +123,7 @@ public class BulletinEditorSection extends GridPane
 	private static final int LABEL_COLUMN = 0;
 	private static final int DATA_COLUMN = 1;
 
+	private FxBulletin bulletin;
 	private MartusLocalization localization;
 	private String title;
 	private BulletinEditorRow currentRow;

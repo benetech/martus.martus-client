@@ -43,6 +43,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
+import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.jfx.generic.controls.ScrollFreeTextArea;
 import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ChoiceItemStringConverter;
@@ -54,7 +55,7 @@ import org.martus.common.fieldspec.MessageFieldSpec;
 
 public class FxFieldCreator
 {
-	public Node createFieldForSpec(FieldSpec spec, Property<String> property)
+	public Node createFieldForSpec(FxBulletin bulletin, FieldSpec spec, Property<String> property)
 	{
 		if(spec.getType().isString())
 			return createStringField(property);
@@ -71,7 +72,19 @@ public class FxFieldCreator
 		if(spec.getType().isDropdown())
 			return createDropdownField(property, spec);
 		
+		if(spec.getType().isDate())
+			return createDateField(property, spec);
+		
 		return createFieldNotAvailable();
+	}
+
+	private Node createDateField(Property<String> property, FieldSpec spec)
+	{
+		return createFieldNotAvailable();
+//		DatePicker picker = new DatePicker();
+//		picker.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
+//		picker.getStylesheets().add("org/martus/client/swingui/jfx/generic/controls/DatePicker.css");
+//		return picker;
 	}
 
 	private Node createDropdownField(Property<String> property, FieldSpec rawSpec)
