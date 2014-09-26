@@ -96,18 +96,18 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertTrue(neverDeleteSnapshotFromServerProperty.get());
 		Bulletin result1 = new Bulletin(security);
 		fxb.copyDataToBulletin(result1);
-		assertTrue(result1.getNeverDeleteSnapshotFromServer());
+		assertTrue(result1.getImmutableOnServer());
 		
 		FxBulletin fxb2 = new FxBulletin(getLocalization());
 		Bulletin bulletinWithNeverDeleteSetInitially = new BulletinForTesting(security);
-		bulletinWithNeverDeleteSetInitially.setNeverDeleteSnapshotFromServer();
+		bulletinWithNeverDeleteSetInitially.setImmutableOnServer();
 		fxb2.copyDataFromBulletin(bulletinWithNeverDeleteSetInitially);
 		BooleanProperty neverDeleteSnapshotFromServerProperty2 = fxb2.getNeverDeleteSnapshotFromServerProperty();
 		assertTrue(neverDeleteSnapshotFromServerProperty2.get());
 		neverDeleteSnapshotFromServerProperty2.set(false);
 		Bulletin result2 = new Bulletin(security);
 		fxb2.copyDataToBulletin(result2);
-		assertTrue("Once a bulletin has this flag set it cant be unset", result2.getNeverDeleteSnapshotFromServer());
+		assertTrue("Once a bulletin has this flag set it cant be unset", result2.getImmutableOnServer());
 	}
 
 	public void testValidate() throws Exception

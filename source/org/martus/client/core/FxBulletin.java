@@ -74,7 +74,7 @@ public class FxBulletin
 		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>(b.getUniversalId());
 		versionProperty = new SimpleIntegerProperty(b.getVersion());
 
-		originalNeverDeleteSnapshotFromServer = b.getNeverDeleteSnapshotFromServer();
+		originalNeverDeleteSnapshotFromServer = b.getImmutableOnServer();
 		neverDeleteSnapshotFromServer = new SimpleBooleanProperty(originalNeverDeleteSnapshotFromServer);
 
 		HeadquartersKeys hqKeys = b.getAuthorizedToReadKeysIncludingPending();
@@ -94,7 +94,7 @@ public class FxBulletin
 	public void copyDataToBulletin(Bulletin modified) throws Exception
 	{
 		if(originalNeverDeleteSnapshotFromServer || neverDeleteSnapshotFromServer.get())
-			modified.setNeverDeleteSnapshotFromServer();
+			modified.setImmutableOnServer();
 		
 		modified.getFieldDataPacket().setFieldSpecs(fieldSpecs);
 		modified.getPrivateFieldDataPacket().setFieldSpecs(new FieldSpecCollection());
