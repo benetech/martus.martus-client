@@ -126,6 +126,8 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	{
 		BooleanProperty neverDeleteSnapshotFromServerProperty = fxBulletin.getNeverDeleteSnapshotFromServerProperty();
 		neverDeleteFromServer.selectedProperty().bindBidirectional(neverDeleteSnapshotFromServerProperty);
+		if(neverDeleteSnapshotFromServerProperty.get())
+			neverDeleteFromServer.setDisable(true);
 	}
 
 	@Override
