@@ -48,7 +48,7 @@
       <VBox>
          <children>
             <Label styleClass="headingLevel1" text="New Records" />
-            <CheckBox fx:id="immutableOnServer" mnemonicParsing="false" text="Never Delete Versioned Records from Server" />
+            <CheckBox fx:id="immutableOnServer" mnemonicParsing="false" text="%NeverDeleteVersionOnServer" />
          </children>
       </VBox>
       <Button mnemonicParsing="false" onAction="#onSaveChanges" text="Save Changes" />
