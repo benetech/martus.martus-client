@@ -34,6 +34,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.Pane;
 
@@ -101,6 +102,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 		configInfo.setForceBulletinsAllPrivate(true); //NOTE: is this the best place to do this?
 		saveDateFormatConfiguration();
 		configInfo.setUseInternalTor(torSwitchButton.isSelected());
+		configInfo.setAlwaysImmutableOnServer(alwaysImmutableOnServer.isSelected());
 		getMainWindow().saveConfigInfo();
 	}
 
@@ -212,6 +214,9 @@ public class FxSetupSettingsController extends FxStep2Controller
 	
 	@FXML
 	protected Pane switchButtonPane;
+	
+	@FXML
+	private CheckBox alwaysImmutableOnServer;
 	
 	protected FxSwitchButton torSwitchButton;
 }
