@@ -32,6 +32,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -61,7 +62,9 @@ public class SettingsforSystemController extends FxInSwingController
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		useZawgyiFont.selectedProperty().setValue(getApp().getConfigInfo().getUseZawgyiFont());
+		ConfigInfo configInfo = getApp().getConfigInfo();
+		useZawgyiFont.selectedProperty().setValue(configInfo.getUseZawgyiFont());
+		neverDeleteSnapshotFromServer.selectedProperty().setValue(configInfo.getNeverDeleteSnapshotFromServer());
 		MartusLocalization localization = getLocalization();
 		initializeLanguageChoices(localization);
 		initializeDateFormatChoices(localization);
@@ -148,11 +151,12 @@ public class SettingsforSystemController extends FxInSwingController
 	}
 	
 	@FXML
-	public void onSaveChanges()
+	public void onSaveChanges(ActionEvent event)
 	{
 		MartusLocalization localization = getLocalization();
 		ConfigInfo configInfo = getApp().getConfigInfo();
 		configInfo.setUseZawgyiFont(useZawgyiFont.selectedProperty().getValue());
+		configInfo.setNeverDeleteSnapshotFromServer(neverDeleteSnapshotFromServer.selectedProperty().getValue());
 		localization.setMdyOrder(dateFormat.getSelectionModel().getSelectedItem().getCode());
 		String delimiter = dateDelimiter.getSelectionModel().getSelectedItem().getCode();
 		localization.setDateDelimiter(delimiter.charAt(0));
@@ -206,4 +210,7 @@ public class SettingsforSystemController extends FxInSwingController
 	@FXML
 	private ChoiceBox<ChoiceItem> calendarType;
 
+	@FXML
+	private CheckBox neverDeleteSnapshotFromServer;
+	
 }
