@@ -92,7 +92,7 @@ public class ConfigInfo
 	public void setSyncStatusJson(String newSyncStatusJson) { syncStatusJson = newSyncStatusJson; }
 	public void setSyncFrequencyMinutes(String newSyncFrequency) { syncFrequencyMinutes = newSyncFrequency; }
 	public void setDidTemplateMigration(boolean newValue) { didTemplateMigrationProperty.setValue(newValue); }
-	public void setNeverDeleteSnapshotFromServer(boolean newValue) { immutableOnServer.setValue(newValue); }
+	public void setImmutableOnServer(boolean newValue) { immutableOnServer.setValue(newValue); }
 
 
 	public void clearLegacyHQKey()						{ deprecatedLegacyHQKey = ""; }
@@ -146,7 +146,7 @@ public class ConfigInfo
 	public String getSyncStatusJson() {	return syncStatusJson; }
 	public String getSyncFrequencyMinutes() {	return syncFrequencyMinutes; }
 	public boolean getDidTemplateMigration() { return didTemplateMigrationProperty.getValue(); }
-	public boolean getNeverDeleteSnapshotFromServer() { return immutableOnServer.getValue(); }
+	public boolean getImmutableOnServer() { return immutableOnServer.getValue(); }
 
 	public boolean isServerConfigured()
 	{
