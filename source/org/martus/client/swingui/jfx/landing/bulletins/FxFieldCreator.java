@@ -81,6 +81,7 @@ public class FxFieldCreator
 	private Node createDateField(Property<String> property, FieldSpec spec)
 	{
 		return createFieldNotAvailable();
+		// FIXME: The following is spike code which will either become real, or be deleted
 //		DatePicker picker = new DatePicker();
 //		picker.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
 //		picker.getStylesheets().add("org/martus/client/swingui/jfx/generic/controls/DatePicker.css");
