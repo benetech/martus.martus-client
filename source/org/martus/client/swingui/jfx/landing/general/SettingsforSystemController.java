@@ -64,7 +64,7 @@ public class SettingsforSystemController extends FxInSwingController
 		super.initialize(location, bundle);
 		ConfigInfo configInfo = getApp().getConfigInfo();
 		useZawgyiFont.selectedProperty().setValue(configInfo.getUseZawgyiFont());
-		immutableOnServer.selectedProperty().setValue(configInfo.getImmutableOnServer());
+		immutableOnServer.selectedProperty().setValue(configInfo.getAlwaysImmutableOnServer());
 		MartusLocalization localization = getLocalization();
 		initializeLanguageChoices(localization);
 		initializeDateFormatChoices(localization);
@@ -156,7 +156,7 @@ public class SettingsforSystemController extends FxInSwingController
 		MartusLocalization localization = getLocalization();
 		ConfigInfo configInfo = getApp().getConfigInfo();
 		configInfo.setUseZawgyiFont(useZawgyiFont.selectedProperty().getValue());
-		configInfo.setImmutableOnServer(immutableOnServer.selectedProperty().getValue());
+		configInfo.setAlwaysImmutableOnServer(immutableOnServer.selectedProperty().getValue());
 		localization.setMdyOrder(dateFormat.getSelectionModel().getSelectedItem().getCode());
 		String delimiter = dateDelimiter.getSelectionModel().getSelectedItem().getCode();
 		localization.setDateDelimiter(delimiter.charAt(0));
