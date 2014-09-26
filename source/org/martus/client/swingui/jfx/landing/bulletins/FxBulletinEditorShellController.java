@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -115,9 +116,16 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	private void copyDataFromBulletinOnFxThread(Bulletin bulletinToShow) throws RuntimeException
 	{
 		fxBulletin.copyDataFromBulletin(bulletinToShow);
+		setNeverDeleteSnapshotFromServerBinding();
 		Platform.runLater(() -> headerController.showBulletin(fxBulletin));
 		Platform.runLater(() -> bodyController.showBulletin(fxBulletin));
 		Platform.runLater(() -> footerController.showBulletin(fxBulletin));
+	}
+
+	private void setNeverDeleteSnapshotFromServerBinding()
+	{
+		BooleanProperty neverDeleteSnapshotFromServerProperty = fxBulletin.getNeverDeleteSnapshotFromServerProperty();
+		neverDeleteFromServer.selectedProperty().bindBidirectional(neverDeleteSnapshotFromServerProperty);
 	}
 
 	@Override
