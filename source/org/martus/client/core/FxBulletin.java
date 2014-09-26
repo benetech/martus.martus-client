@@ -160,7 +160,7 @@ public class FxBulletin
 		return fieldValidators.get(tag).isValidProperty();
 	}
 	
-	public BooleanProperty getNeverDeleteSnapshotFromServerProperty()
+	public BooleanProperty getImmutableOnServerProperty()
 	{
 		return immutableOnServer;
 	}

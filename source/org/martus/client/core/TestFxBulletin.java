@@ -86,11 +86,11 @@ public class TestFxBulletin extends TestCaseEnhanced
 	public void testNeverDeleteSnapshotFromServer() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin(getLocalization());
-		assertNull(fxb.getNeverDeleteSnapshotFromServerProperty());
+		assertNull(fxb.getImmutableOnServerProperty());
 		
 		Bulletin bulletinWithNeverDeleteNotSetInitially = new BulletinForTesting(security);
 		fxb.copyDataFromBulletin(bulletinWithNeverDeleteNotSetInitially);
-		BooleanProperty neverDeleteSnapshotFromServerProperty = fxb.getNeverDeleteSnapshotFromServerProperty();
+		BooleanProperty neverDeleteSnapshotFromServerProperty = fxb.getImmutableOnServerProperty();
 		assertFalse(neverDeleteSnapshotFromServerProperty.get());
 		neverDeleteSnapshotFromServerProperty.set(true);
 		assertTrue(neverDeleteSnapshotFromServerProperty.get());
@@ -102,7 +102,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		Bulletin bulletinWithNeverDeleteSetInitially = new BulletinForTesting(security);
 		bulletinWithNeverDeleteSetInitially.setImmutableOnServer();
 		fxb2.copyDataFromBulletin(bulletinWithNeverDeleteSetInitially);
-		BooleanProperty neverDeleteSnapshotFromServerProperty2 = fxb2.getNeverDeleteSnapshotFromServerProperty();
+		BooleanProperty neverDeleteSnapshotFromServerProperty2 = fxb2.getImmutableOnServerProperty();
 		assertTrue(neverDeleteSnapshotFromServerProperty2.get());
 		neverDeleteSnapshotFromServerProperty2.set(false);
 		Bulletin result2 = new Bulletin(security);
