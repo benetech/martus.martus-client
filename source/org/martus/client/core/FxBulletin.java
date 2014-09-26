@@ -74,8 +74,8 @@ public class FxBulletin
 		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>(b.getUniversalId());
 		versionProperty = new SimpleIntegerProperty(b.getVersion());
 
-		originalNeverDeleteSnapshotFromServer = b.getImmutableOnServer();
-		neverDeleteSnapshotFromServer = new SimpleBooleanProperty(originalNeverDeleteSnapshotFromServer);
+		originalImmutableOnServer = b.getImmutableOnServer();
+		immutableOnServer = new SimpleBooleanProperty(originalImmutableOnServer);
 
 		HeadquartersKeys hqKeys = b.getAuthorizedToReadKeysIncludingPending();
 		authorizedToReadKeys = FXCollections.observableArrayList();
@@ -93,7 +93,7 @@ public class FxBulletin
 
 	public void copyDataToBulletin(Bulletin modified) throws Exception
 	{
-		if(originalNeverDeleteSnapshotFromServer || neverDeleteSnapshotFromServer.get())
+		if(originalImmutableOnServer || immutableOnServer.get())
 			modified.setImmutableOnServer();
 		
 		modified.getFieldDataPacket().setFieldSpecs(fieldSpecs);
@@ -162,7 +162,7 @@ public class FxBulletin
 	
 	public BooleanProperty getNeverDeleteSnapshotFromServerProperty()
 	{
-		return neverDeleteSnapshotFromServer;
+		return immutableOnServer;
 	}
 
 	public boolean hasBeenModified()
@@ -315,6 +315,6 @@ public class FxBulletin
 	private ObservableList<HeadquartersKey> authorizedToReadKeys;
 	private ReadOnlyObjectWrapper<BulletinHistory> bulletinHistory;
 
-	private boolean originalNeverDeleteSnapshotFromServer;
-	private BooleanProperty neverDeleteSnapshotFromServer;
+	private boolean originalImmutableOnServer;
+	private BooleanProperty immutableOnServer;
 }
