@@ -78,6 +78,9 @@ public class FxFormCreator
 		
 		if(isSectionStart || currentSection == null)
 		{
+			if(currentSection != null)
+				currentSection.endCurrentRow();
+			
 			String sectionTitle = "";
 			if(isSectionStart)
 				sectionTitle = fieldSpec.getLabel();
