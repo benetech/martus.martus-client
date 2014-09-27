@@ -70,7 +70,7 @@ public class FxFieldCreator
 			return createBooleanField(property);
 		
 		if(spec.getType().isDropdown())
-			return createDropdownField(property, spec);
+			return createDropdownField(bulletin, property, spec);
 		
 		if(spec.getType().isDate())
 			return createDateField(property, spec);
@@ -88,7 +88,7 @@ public class FxFieldCreator
 //		return picker;
 	}
 
-	private Node createDropdownField(Property<String> property, FieldSpec rawSpec)
+	private Node createDropdownField(FxBulletin bulletin, Property<String> property, FieldSpec rawSpec)
 	{
 		DropDownFieldSpec spec = (DropDownFieldSpec) rawSpec;
 		String dataSourceGridTag = spec.getDataSourceGridTag();
@@ -98,27 +98,63 @@ public class FxFieldCreator
 			return createFieldNotAvailable();
 		}
 		
-		String[] reusableChoicesCodes = spec.getReusableChoicesCodes();
-		if(reusableChoicesCodes != null && reusableChoicesCodes.length > 0)
-		{
-			MartusLogger.log("Skipping ReusableChoicesDropDown");
-			return createFieldNotAvailable();
-		}
+		if(spec.hasReusableCodes())
+			return createNestedDropDown(bulletin, spec);
 
-		ChoiceItem[] rawChoices = spec.getAllChoices();
-		List<ChoiceItem> choicesList = Arrays.asList(rawChoices);
-		ObservableList<ChoiceItem> choices = FXCollections.observableArrayList();
-		choices.addAll(choicesList);
-		ChoiceBox<ChoiceItem> choiceBox = new ChoiceBox<ChoiceItem>(choices);
-		String currentSelectedCode = property.getValue();
-		ChoiceItem currentSelectedItem = new ChoiceItemStringConverter(rawChoices).fromString(currentSelectedCode);
-		choiceBox.getSelectionModel().select(currentSelectedItem);
+		return createSingleDropDown(property, spec);
+	}
 
+	private Node createSingleDropDown(Property<String> property, DropDownFieldSpec spec)
+	{
+		ChoiceBox choiceBox = createSingleDropDown(property, getNonReusableChoices(spec));
 		ReadOnlyObjectProperty<ChoiceItem> selectedItemProperty = choiceBox.getSelectionModel().selectedItemProperty();
 		selectedItemProperty.addListener(
 			(observable, oldValue, newValue) ->	property.setValue(newValue.getCode())
 		);
 		return choiceBox;
+	}
+
+	private ChoiceBox createSingleDropDown(Property<String> property, ObservableList<ChoiceItem> choices)
+	{
+		ChoiceBox<ChoiceItem> choiceBox = new ChoiceBox<ChoiceItem>(choices);
+		String currentSelectedCode = property.getValue();
+		ChoiceItem[] choicesAsArray = choices.toArray(new ChoiceItem[0]);
+		ChoiceItemStringConverter converter = new ChoiceItemStringConverter(choicesAsArray);
+		ChoiceItem currentSelectedItem = converter.fromString(currentSelectedCode);
+		choiceBox.getSelectionModel().select(currentSelectedItem);
+
+		return choiceBox;
+	}
+
+	private Node createNestedDropDown(FxBulletin bulletin, DropDownFieldSpec spec)
+	{
+		return createFieldNotAvailable();
+		// FIXME: The following is work in progress, so disabled for now
+//		HBox nestedDropDown = new HBox();
+//		for(int level = 0; level < spec.getReusableChoicesCodes().length; ++level)
+//		{
+//			SimpleStringProperty thisProperty = new SimpleStringProperty();
+//			Node dropDown = createSingleDropDown(thisProperty, getReusableChoices(bulletin, spec, level));
+//			nestedDropDown.getChildren().add(dropDown);
+//		}
+//		return nestedDropDown;
+	}
+
+	// FIXME: The following is work in progress, so disabled for now
+//	private ObservableList<ChoiceItem> getReusableChoices(FxBulletin bulletin, DropDownFieldSpec spec, int level)
+//	{
+//		String tag = spec.getReusableChoicesCodes()[level];
+//		ObservableList<ChoiceItem> choices = bulletin.reusableChoicesProperty(tag);
+//		return choices;
+//	}
+
+	public ObservableList<ChoiceItem> getNonReusableChoices(DropDownFieldSpec spec)
+	{
+		ChoiceItem[] rawChoices = spec.getAllChoices();
+		List<ChoiceItem> choicesList = Arrays.asList(rawChoices);
+		ObservableList<ChoiceItem> choices = FXCollections.observableArrayList();
+		choices.addAll(choicesList);
+		return choices;
 	}
 
 	private Node createBooleanField(Property<String> property)
@@ -171,5 +207,4 @@ public class FxFieldCreator
 
 	private static final int MINIMUM_REASONABLE_COLUMN_COUNT = 10;
 	private static final int MULTILINE_FIELD_HEIGHT_IN_ROWS = 5;
-
 }
