@@ -88,7 +88,7 @@ public class BulletinEditorSection extends GridPane
 			endCurrentRow();
 	}
 	
-	private void endCurrentRow()
+	void endCurrentRow()
 	{
 		if(currentRow == null)
 			return;
