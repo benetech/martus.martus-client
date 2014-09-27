@@ -46,7 +46,9 @@ import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
+import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
@@ -89,6 +91,9 @@ public class FxBulletin
 
 		setFieldPropertiesFromBulletinSection(b, b.getTopSectionFieldSpecs());
 		setFieldPropertiesFromBulletinSection(b, b.getBottomSectionFieldSpecs());
+		
+		copyReusableChoiceListsFromBulletinSection(b.getTopSectionFieldSpecs());
+		copyReusableChoiceListsFromBulletinSection(b.getBottomSectionFieldSpecs());
 	}
 
 	public void copyDataToBulletin(Bulletin modified) throws Exception
@@ -163,6 +168,12 @@ public class FxBulletin
 	public BooleanProperty getImmutableOnServerProperty()
 	{
 		return immutableOnServer;
+	}
+	public ObservableList<ChoiceItem> reusableChoicesProperty(String tag)
+	{
+		ReusableChoices reusableChoices = fieldSpecs.getReusableChoices(tag);
+		ChoiceItem[] choices = reusableChoices.getChoices();
+		return FXCollections.observableArrayList(choices);
 	}
 
 	public boolean hasBeenModified()
@@ -255,6 +266,11 @@ public class FxBulletin
 		property.addListener(fieldValidator);
 	}
 	
+	private void copyReusableChoiceListsFromBulletinSection(FieldSpecCollection bulletinFieldSpecs)
+	{
+		fieldSpecs.addAllReusableChoicesLists(bulletinFieldSpecs.getAllReusableChoiceLists());
+	}
+	
 	static class FieldValidator implements ChangeListener<String>
 	{
 		public FieldValidator(FieldSpec specToUse, MiniLocalization localizationToUse)
@@ -280,6 +296,8 @@ public class FxBulletin
 			boolean isValid = false;
 			try
 			{
+				if(newValue == null)
+					newValue = "";
 				FxBulletin.validateField(spec, newValue, localization);
 				isValid = true;
 			} 

@@ -39,11 +39,14 @@ import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MiniLocalization;
+import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinForTesting;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.RequiredFieldIsBlankException;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.TestCaseEnhanced;
@@ -62,6 +65,31 @@ public class TestFxBulletin extends TestCaseEnhanced
 
 		security = MockMartusSecurity.createClient();
 		localization = new MiniLocalization();
+	}
+	
+	public void testReusableDropdownLists() throws Exception
+	{
+		FxBulletin fxb = new FxBulletin(getLocalization());
+		try
+		{
+			fxb.reusableChoicesProperty("No such list");
+			fail("Should have thrown asking for a choices list that doesn't exist");
+		}
+		catch(Exception ignoreExpected)
+		{
+		}
+
+		FieldSpecCollection fsc = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		String citiesChoicesTag = "cities";
+		ReusableChoices reusableChoices = new ReusableChoices(citiesChoicesTag, "Cities");
+		reusableChoices.add(new ChoiceItem("SEA", "Seattle"));
+		reusableChoices.add(new ChoiceItem("PDX", "Portland"));
+		fsc.addReusableChoiceList(reusableChoices);
+		
+		Bulletin b = new Bulletin(security, fsc, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		fxb.copyDataFromBulletin(b);
+		ObservableList<ChoiceItem> cityChoices = fxb.reusableChoicesProperty(citiesChoicesTag);
+		assertEquals(reusableChoices.size(), cityChoices.size());
 	}
 	
 	public void testHasBeenModified() throws Exception
