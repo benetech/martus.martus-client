@@ -27,8 +27,6 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.util.Vector;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
@@ -38,7 +36,6 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.MessageFieldSpec;
 
 public class FxFormCreator
 {
@@ -93,25 +90,17 @@ public class FxFormCreator
 		if(isSectionStart)
 			return;
 		
-		SimpleStringProperty fieldValueProperty = bulletin.fieldProperty(fieldSpec.getTag());
-		ObservableBooleanValue isValidProperty = bulletin.isValidProperty(fieldSpec.getTag());
 		try
 		{
-			currentSection.addField(fieldSpec, fieldValueProperty, isValidProperty);
+			currentSection.addField(fieldSpec);
 		}
 		catch(Exception e)
 		{
 			String errorMessage = getLocalization().getFieldLabel("notifyUnexpectedErrorcause");
 
-			MessageFieldSpec errorMessageSpec = new MessageFieldSpec();
-			errorMessageSpec.setLabel(fieldSpec.getLabel());
-			errorMessageSpec.putMessage(errorMessage);
-			
-			SimpleStringProperty emptyProperty = new SimpleStringProperty();
-			
 			try
 			{
-				currentSection.addField(errorMessageSpec, emptyProperty, null);
+				currentSection.addErrorMessage(fieldSpec.getLabel(), errorMessage);
 			} 
 			catch (Exception e1)
 			{

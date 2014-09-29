@@ -27,8 +27,6 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.util.Vector;
 
-import javafx.beans.property.Property;
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -68,7 +66,7 @@ public class BulletinEditorSection extends GridPane
 		return title;
 	}
 	
-	public void addField(FieldSpec fieldSpec, Property<String> fieldValueProperty, ObservableBooleanValue isValidProperty) throws Exception
+	public void addField(FieldSpec fieldSpec) throws Exception
 	{
 		boolean wantsKeepWithPrevious = fieldSpec.keepWithPrevious();
 		boolean canKeepWithPrevious = canKeepWithNextOrPrevious(fieldSpec);
@@ -77,17 +75,28 @@ public class BulletinEditorSection extends GridPane
 			endCurrentRow();
 			
 		if(currentRow == null)
-		{
-			currentRow = new BulletinEditorRow(bulletin, getLocalization());
-			rows.add(currentRow);
-		}
+			startNewRow();
 		
-		currentRow.addFieldToRow(fieldSpec, fieldValueProperty, isValidProperty);
+		currentRow.addFieldToRow(fieldSpec);
 		
 		if(!canKeepWithNextOrPrevious(fieldSpec))
 			endCurrentRow();
 	}
+
+	public void startNewRow()
+	{
+		currentRow = new BulletinEditorRow(bulletin, getLocalization());
+		rows.add(currentRow);
+	}
 	
+	public void addErrorMessage(String label, String errorMessage)
+	{
+		endCurrentRow();
+		startNewRow();
+		currentRow.addErrorMessage(label, errorMessage);
+		endCurrentRow();
+	}
+
 	void endCurrentRow()
 	{
 		if(currentRow == null)
