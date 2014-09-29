@@ -34,6 +34,7 @@ import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 
+import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.test.MockBulletinStore;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
@@ -44,6 +45,8 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinForTesting;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomDropDownFieldSpec;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.RequiredFieldIsBlankException;
 import org.martus.common.fieldspec.StandardFieldSpecs;
@@ -67,13 +70,13 @@ public class TestFxBulletin extends TestCaseEnhanced
 		localization = new MiniLocalization();
 	}
 	
-	public void testReusableDropdownLists() throws Exception
+	public void testGetChoiceItemLists() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin(getLocalization());
 		try
 		{
-			fxb.reusableChoicesProperty("No such list");
-			fail("Should have thrown asking for a choices list that doesn't exist");
+			fxb.getChoiceItemLists("No such field");
+			fail("Should have thrown asking for choices for a field that doesn't exist");
 		}
 		catch(Exception ignoreExpected)
 		{
@@ -85,11 +88,42 @@ public class TestFxBulletin extends TestCaseEnhanced
 		reusableChoices.add(new ChoiceItem("SEA", "Seattle"));
 		reusableChoices.add(new ChoiceItem("PDX", "Portland"));
 		fsc.addReusableChoiceList(reusableChoices);
+
+		String simpleDropDownTag = "simple";
+		ChoiceItem[] simpleChoices = new ChoiceItem[] {new ChoiceItem("a", "A"), new ChoiceItem("b", "B")};
+		FieldSpec simpleDropDown = new DropDownFieldSpec(simpleChoices);
+		simpleDropDown.setTag(simpleDropDownTag);
+		fsc.add(simpleDropDown);
+		
+		String reusableDropDownTag = "reusable";
+		CustomDropDownFieldSpec reusableDropDown = new CustomDropDownFieldSpec();
+		reusableDropDown.setTag(reusableDropDownTag);
+		reusableDropDown.addReusableChoicesCode(citiesChoicesTag);
+		fsc.add(reusableDropDown);
 		
 		Bulletin b = new Bulletin(security, fsc, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		fxb.copyDataFromBulletin(b);
-		ObservableList<ChoiceItem> cityChoices = fxb.reusableChoicesProperty(citiesChoicesTag);
-		assertEquals(reusableChoices.size(), cityChoices.size());
+
+		try
+		{
+			fxb.getChoiceItemLists(Bulletin.TAGAUTHOR);
+			fail("Should have thrown asking for choices for a non-dropdown field");
+		}
+		catch(Exception ignoreExpected)
+		{
+		}
+		
+		Vector<ObservableChoiceItemList> simpleLists = fxb.getChoiceItemLists(simpleDropDownTag);
+		assertEquals(1, simpleLists.size());
+		ObservableChoiceItemList simpleList = simpleLists.get(0);
+		assertEquals(simpleChoices.length, simpleList.size());
+		assertEquals(simpleChoices[0], simpleList.get(0));
+		
+		Vector<ObservableChoiceItemList> reusableLists = fxb.getChoiceItemLists(reusableDropDownTag);
+		assertEquals(1, reusableLists.size());
+		ObservableChoiceItemList reusableList = reusableLists.get(0);
+		assertEquals(reusableChoices.size(), reusableList.size());
+		assertEquals(reusableChoices.get(0), reusableList.get(0));
 	}
 	
 	public void testHasBeenModified() throws Exception
