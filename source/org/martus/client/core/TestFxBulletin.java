@@ -128,14 +128,14 @@ public class TestFxBulletin extends TestCaseEnhanced
 		
 		FxBulletin fxb2 = new FxBulletin(getLocalization());
 		Bulletin bulletinWithImmutableOnServerSetInitially = new BulletinForTesting(security);
-		bulletinWithImmutableOnServerSetInitially.setImmutableOnServer();
+		bulletinWithImmutableOnServerSetInitially.setImmutableOnServer(true);
 		fxb2.copyDataFromBulletin(bulletinWithImmutableOnServerSetInitially);
 		BooleanProperty immutableOnServerProperty2 = fxb2.getImmutableOnServerProperty();
 		assertTrue(immutableOnServerProperty2.get());
 		immutableOnServerProperty2.set(false);
 		Bulletin result2 = new Bulletin(security);
 		fxb2.copyDataToBulletin(result2);
-		assertTrue("Once a bulletin has this flag set it cant be unset", result2.getImmutableOnServer());
+		assertFalse("After a bulletin has this flag set it can be unset", result2.getImmutableOnServer());
 	}
 
 	public void testValidate() throws Exception

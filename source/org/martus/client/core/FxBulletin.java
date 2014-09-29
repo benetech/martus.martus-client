@@ -76,8 +76,7 @@ public class FxBulletin
 		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>(b.getUniversalId());
 		versionProperty = new SimpleIntegerProperty(b.getVersion());
 
-		originalImmutableOnServer = b.getImmutableOnServer();
-		immutableOnServer = new SimpleBooleanProperty(originalImmutableOnServer);
+		immutableOnServer = new SimpleBooleanProperty(b.getImmutableOnServer());
 
 		HeadquartersKeys hqKeys = b.getAuthorizedToReadKeysIncludingPending();
 		authorizedToReadKeys = FXCollections.observableArrayList();
@@ -98,8 +97,7 @@ public class FxBulletin
 
 	public void copyDataToBulletin(Bulletin modified) throws Exception
 	{
-		if(originalImmutableOnServer || immutableOnServer.get())
-			modified.setImmutableOnServer();
+		modified.setImmutableOnServer(immutableOnServer.get());
 		
 		modified.getFieldDataPacket().setFieldSpecs(fieldSpecs);
 		modified.getPrivateFieldDataPacket().setFieldSpecs(new FieldSpecCollection());
@@ -169,6 +167,7 @@ public class FxBulletin
 	{
 		return immutableOnServer;
 	}
+	
 	public ObservableList<ChoiceItem> reusableChoicesProperty(String tag)
 	{
 		ReusableChoices reusableChoices = fieldSpecs.getReusableChoices(tag);
@@ -333,6 +332,5 @@ public class FxBulletin
 	private ObservableList<HeadquartersKey> authorizedToReadKeys;
 	private ReadOnlyObjectWrapper<BulletinHistory> bulletinHistory;
 
-	private boolean originalImmutableOnServer;
 	private BooleanProperty immutableOnServer;
 }
