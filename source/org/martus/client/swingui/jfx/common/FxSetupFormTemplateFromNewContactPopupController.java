@@ -83,11 +83,6 @@ public class FxSetupFormTemplateFromNewContactPopupController extends AbstractFx
 			MartusAccountAccessToken token = new MartusAccountAccessToken(accessTokenTextField.getText());
 			MartusApp app = getApp();
 			String contactAccountId = app.getMartusAccountIdFromAccessTokenOnServer(token);
-			if(contactAccountId.equals(app.getAccountId()))
-			{
-				showNotifyDialog("ContactKeyIsOurself");
-				return;
-			}
 			
 			noTemplatesAvailableLabel.setVisible(false);
 			
