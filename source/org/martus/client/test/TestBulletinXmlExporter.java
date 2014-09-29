@@ -48,8 +48,8 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.bulletin.BulletinXmlExportImportConstants;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
-import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
+import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
@@ -794,7 +794,30 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertNotContains("exported raw flexidate?", rawDateRangeString, result);
 		assertContains("didn't write good date range?", "2005-05-01,2005-05-30", result);
 	}
-	
+
+// TODO: uncomment and implement based on Barbra's decision
+//	public void testExportSnapshot() throws Exception
+//	{
+//		Bulletin b = new Bulletin(store.getSignatureGenerator());
+//		final String exportWithoutSnapshot = getExportedXml(b);
+//		assertNotContains("<Snapshot></Snapshot>", exportWithoutSnapshot);
+//		
+//		b.changeState(BulletinState.STATE_SNAPSHOT);
+//		final String exportWithSnapshot = getExportedXml(b);
+//		assertContains("<Snapshot></Snapshot>", exportWithSnapshot);
+//	}
+//	
+//	public void testExportImmutableOnServer() throws Exception
+//	{
+//		Bulletin b = new Bulletin(store.getSignatureGenerator());
+//		final String exportWithoutSnapshot = getExportedXml(b);
+//		assertNotContains("<ImmutableOnServer></ImmutableOnServer>", exportWithoutSnapshot);
+//		
+//		b.setImmutableOnServer(true);
+//		final String exportWithSnapshot = getExportedXml(b);
+//		assertContains("<ImmutableOnServer></ImmutableOnServer>", exportWithSnapshot);
+//	}
+
 	public void testEndToEndExportAndThenImport() throws Exception
 	{
 		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
