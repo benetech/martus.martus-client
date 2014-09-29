@@ -46,9 +46,7 @@ import org.martus.client.swingui.jfx.generic.controls.ScrollFreeTextArea;
 import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ChoiceItemStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
-import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MessageFieldSpec;
 
@@ -89,23 +87,13 @@ public class FxFieldCreator
 
 	private Node createDropdownField(FxBulletin bulletin, Property<String> property, FieldSpec rawSpec) throws Exception
 	{
-		DropDownFieldSpec spec = (DropDownFieldSpec) rawSpec;
-		String dataSourceGridTag = spec.getDataSourceGridTag();
-		if(dataSourceGridTag != null && dataSourceGridTag.length() > 0)
-		{
-			MartusLogger.log("Skipping DataDrivenDropDown");
+		Vector<ObservableChoiceItemList> listOfChoiceItemLists = bulletin.getChoiceItemLists(rawSpec.getTag());
+		if(listOfChoiceItemLists.size() == 0)
 			return createFieldNotAvailable();
-		}
+
+		if(listOfChoiceItemLists.size() > 1)
+			return createFieldNotAvailable();
 		
-		if(spec.hasReusableCodes())
-			return createNestedDropDown(bulletin, spec);
-
-		return createSingleDropDown(bulletin, property, spec);
-	}
-
-	private Node createSingleDropDown(FxBulletin bulletin, Property<String> property, DropDownFieldSpec spec) throws Exception
-	{
-		Vector<ObservableChoiceItemList> listOfChoiceItemLists = bulletin.getChoiceItemLists(spec.getTag());
 		ObservableChoiceItemList choiceItemList = listOfChoiceItemLists.get(0);
 		ChoiceBox choiceBox = createSingleDropDown(property, choiceItemList);
 		ReadOnlyObjectProperty<ChoiceItem> selectedItemProperty = choiceBox.getSelectionModel().selectedItemProperty();
@@ -126,28 +114,6 @@ public class FxFieldCreator
 
 		return choiceBox;
 	}
-
-	private Node createNestedDropDown(FxBulletin bulletin, DropDownFieldSpec spec)
-	{
-		return createFieldNotAvailable();
-		// FIXME: The following is work in progress, so disabled for now
-//		HBox nestedDropDown = new HBox();
-//		for(int level = 0; level < spec.getReusableChoicesCodes().length; ++level)
-//		{
-//			SimpleStringProperty thisProperty = new SimpleStringProperty();
-//			Node dropDown = createSingleDropDown(thisProperty, getReusableChoices(bulletin, spec, level));
-//			nestedDropDown.getChildren().add(dropDown);
-//		}
-//		return nestedDropDown;
-	}
-
-	// FIXME: The following is work in progress, so disabled for now
-//	private ObservableList<ChoiceItem> getReusableChoices(FxBulletin bulletin, DropDownFieldSpec spec, int level)
-//	{
-//		String tag = spec.getReusableChoicesCodes()[level];
-//		ObservableList<ChoiceItem> choices = bulletin.reusableChoicesProperty(tag);
-//		return choices;
-//	}
 
 	private Node createBooleanField(Property<String> property)
 	{
