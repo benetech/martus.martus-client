@@ -25,13 +25,11 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Vector;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
@@ -47,6 +45,7 @@ import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.jfx.generic.controls.ScrollFreeTextArea;
 import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ChoiceItemStringConverter;
+import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
@@ -55,7 +54,7 @@ import org.martus.common.fieldspec.MessageFieldSpec;
 
 public class FxFieldCreator
 {
-	public Node createFieldForSpec(FxBulletin bulletin, FieldSpec spec, Property<String> property)
+	public Node createFieldForSpec(FxBulletin bulletin, FieldSpec spec, Property<String> property) throws Exception
 	{
 		if(spec.getType().isString())
 			return createStringField(property);
@@ -88,7 +87,7 @@ public class FxFieldCreator
 //		return picker;
 	}
 
-	private Node createDropdownField(FxBulletin bulletin, Property<String> property, FieldSpec rawSpec)
+	private Node createDropdownField(FxBulletin bulletin, Property<String> property, FieldSpec rawSpec) throws Exception
 	{
 		DropDownFieldSpec spec = (DropDownFieldSpec) rawSpec;
 		String dataSourceGridTag = spec.getDataSourceGridTag();
@@ -101,12 +100,14 @@ public class FxFieldCreator
 		if(spec.hasReusableCodes())
 			return createNestedDropDown(bulletin, spec);
 
-		return createSingleDropDown(property, spec);
+		return createSingleDropDown(bulletin, property, spec);
 	}
 
-	private Node createSingleDropDown(Property<String> property, DropDownFieldSpec spec)
+	private Node createSingleDropDown(FxBulletin bulletin, Property<String> property, DropDownFieldSpec spec) throws Exception
 	{
-		ChoiceBox choiceBox = createSingleDropDown(property, getNonReusableChoices(spec));
+		Vector<ObservableChoiceItemList> listOfChoiceItemLists = bulletin.getChoiceItemLists(spec.getTag());
+		ObservableChoiceItemList choiceItemList = listOfChoiceItemLists.get(0);
+		ChoiceBox choiceBox = createSingleDropDown(property, choiceItemList);
 		ReadOnlyObjectProperty<ChoiceItem> selectedItemProperty = choiceBox.getSelectionModel().selectedItemProperty();
 		selectedItemProperty.addListener(
 			(observable, oldValue, newValue) ->	property.setValue(newValue.getCode())
@@ -147,15 +148,6 @@ public class FxFieldCreator
 //		ObservableList<ChoiceItem> choices = bulletin.reusableChoicesProperty(tag);
 //		return choices;
 //	}
-
-	public ObservableList<ChoiceItem> getNonReusableChoices(DropDownFieldSpec spec)
-	{
-		ChoiceItem[] rawChoices = spec.getAllChoices();
-		List<ChoiceItem> choicesList = Arrays.asList(rawChoices);
-		ObservableList<ChoiceItem> choices = FXCollections.observableArrayList();
-		choices.addAll(choicesList);
-		return choices;
-	}
 
 	private Node createBooleanField(Property<String> property)
 	{

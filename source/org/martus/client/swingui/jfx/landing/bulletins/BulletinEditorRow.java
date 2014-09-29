@@ -65,7 +65,7 @@ public class BulletinEditorRow
 		return fieldsNode;
 	}
 	
-	public void addFieldToRow(FieldSpec fieldSpec, Property<String> fieldValueProperty, ObservableBooleanValue isValidProperty)
+	public void addFieldToRow(FieldSpec fieldSpec, Property<String> fieldValueProperty, ObservableBooleanValue isValidProperty) throws Exception
 	{
 		Node label = createLabel(fieldSpec);
 		addValidationBorder(isValidProperty, label);
@@ -79,6 +79,9 @@ public class BulletinEditorRow
 
 	public void addValidationBorder(ObservableBooleanValue isValidProperty,	Node node)
 	{
+		if(isValidProperty == null)
+			return;
+		
 		// FIXME: This really should be done with a listener that updates the css style class, 
 		// and then calls applyCss(), but I'm not sure how to replace one style with another.
 		// So for now, this will have to do. 
