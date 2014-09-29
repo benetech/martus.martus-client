@@ -35,8 +35,10 @@ import javafx.scene.control.TitledPane;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.MessageFieldSpec;
 
 public class FxFormCreator
 {
@@ -93,7 +95,30 @@ public class FxFormCreator
 		
 		SimpleStringProperty fieldValueProperty = bulletin.fieldProperty(fieldSpec.getTag());
 		ObservableBooleanValue isValidProperty = bulletin.isValidProperty(fieldSpec.getTag());
-		currentSection.addField(fieldSpec, fieldValueProperty, isValidProperty);
+		try
+		{
+			currentSection.addField(fieldSpec, fieldValueProperty, isValidProperty);
+		}
+		catch(Exception e)
+		{
+			String errorMessage = getLocalization().getFieldLabel("notifyUnexpectedErrorcause");
+
+			MessageFieldSpec errorMessageSpec = new MessageFieldSpec();
+			errorMessageSpec.setLabel(fieldSpec.getLabel());
+			errorMessageSpec.putMessage(errorMessage);
+			
+			SimpleStringProperty emptyProperty = new SimpleStringProperty();
+			
+			try
+			{
+				currentSection.addField(errorMessageSpec, emptyProperty, null);
+			} 
+			catch (Exception e1)
+			{
+				MartusLogger.logException(e1);
+				throw new RuntimeException(e1);
+			}
+		}
 	}
 
 	private boolean shouldOmitField(FieldSpec spec)
