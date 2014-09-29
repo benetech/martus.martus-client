@@ -26,7 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.bulletins;
 
 import javafx.beans.binding.When;
-import javafx.beans.property.Property;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -65,15 +65,32 @@ public class BulletinEditorRow
 		return fieldsNode;
 	}
 	
-	public void addFieldToRow(FieldSpec fieldSpec, Property<String> fieldValueProperty, ObservableBooleanValue isValidProperty) throws Exception
+	public void addErrorMessage(String labelText, String errorMessage)
 	{
+		Label label = new Label(labelText);
+		Label fieldNode = new Label(errorMessage);
+		addLabelAndField(label, fieldNode);
+	}
+
+	public void addFieldToRow(FieldSpec fieldSpec) throws Exception
+	{
+		SimpleStringProperty fieldValueProperty = bulletin.fieldProperty(fieldSpec.getTag());
+
 		Node label = createLabel(fieldSpec);
+		Node fieldNode = fieldCreator.createFieldForSpec(bulletin, fieldSpec, fieldValueProperty);
+		
+		ObservableBooleanValue isValidProperty = bulletin.isValidProperty(fieldSpec.getTag());
 		addValidationBorder(isValidProperty, label);
+		addValidationBorder(isValidProperty, fieldNode);
+
+		addLabelAndField(label, fieldNode);
+	}
+
+	public void addLabelAndField(Node label, Node fieldNode)
+	{
 		HBox.setHgrow(label, Priority.ALWAYS);
 		getLabelDestination().getChildren().add(label);
 		
-		Node fieldNode = fieldCreator.createFieldForSpec(bulletin, fieldSpec, fieldValueProperty);
-		addValidationBorder(isValidProperty, fieldNode);
 		fieldsNode.getChildren().add(fieldNode);
 	}
 
