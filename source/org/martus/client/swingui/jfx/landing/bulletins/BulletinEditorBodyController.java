@@ -50,19 +50,25 @@ public class BulletinEditorBodyController extends FxController
 	public void showBulletin(FxBulletin bulletinToShow) throws RuntimeException
 	{
 		FxFormCreator creator = new FxFormCreator(getLocalization());
-		BulletinAttachmentsController attachmentsController = new BulletinAttachmentsController(getMainWindow(), bulletinToShow);
+		StackPane attachmentsPane = createAttachmentsPane(bulletinToShow);
+		Node root = creator.createFormFromBulletin(bulletinToShow, attachmentsPane);
+		scrollPane.setContent(root);
+		scrollPane.setFitToWidth(true);
+	}
+
+	private StackPane createAttachmentsPane(FxBulletin bulletinToShow)
+	{
 		StackPane attachmentsPane = new StackPane();
 		try
 		{
+			BulletinAttachmentsController attachmentsController = new BulletinAttachmentsController(getMainWindow(), bulletinToShow);
 			loadControllerAndEmbedInPane(attachmentsController, attachmentsPane);
 		} 
 		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 		}
-		Node root = creator.createFormFromBulletin(bulletinToShow, attachmentsPane);
-		scrollPane.setContent(root);
-		scrollPane.setFitToWidth(true);
+		return attachmentsPane;
 	}
 	
 	public void scrollToTop()
