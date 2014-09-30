@@ -100,6 +100,7 @@ public class FxFormCreator
 
 			try
 			{
+				MartusLogger.logException(e);
 				currentSection.addErrorMessage(fieldSpec.getLabel(), errorMessage);
 			} 
 			catch (Exception e1)
