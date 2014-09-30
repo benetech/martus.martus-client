@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.StackPane;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
@@ -50,8 +51,17 @@ public class BulletinEditorBodyController extends FxController
 	{
 		FxFormCreator creator = new FxFormCreator(getLocalization());
 		BulletinAttachmentsController attachmentsController = new BulletinAttachmentsController(getMainWindow());
-
-		Node root = creator.createFormFromBulletin(bulletinToShow, attachmentsController.createFormFromBulletin(bulletinToShow));
+		StackPane attachmentsPane = new StackPane();
+		try
+		{
+			loadControllerAndEmbedInPane(attachmentsController, attachmentsPane);
+			attachmentsController.createFormFromBulletin(bulletinToShow);
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+		Node root = creator.createFormFromBulletin(bulletinToShow, attachmentsPane);
 		scrollPane.setContent(root);
 		scrollPane.setFitToWidth(true);
 	}
