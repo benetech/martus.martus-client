@@ -203,7 +203,8 @@ public class FxBulletin
 			ReusableChoices reusableChoices = fieldSpecs.getReusableChoices(onlyReusableChoicesCode);
 			ChoiceItem[] choiceItems = reusableChoices.getChoices();
 			ObservableChoiceItemList list = new ObservableChoiceItemList();
-			list.add(new ChoiceItem("", ""));
+			ChoiceItem emptyItemAtTheStartOfEveryReusableList = new ChoiceItem("", "");
+			list.add(emptyItemAtTheStartOfEveryReusableList);
 			list.addAll(choiceItems);
 			
 			listOfLists.add(list);
