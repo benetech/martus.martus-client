@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <right>
+      <TableView fx:id="attachmentsTable" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn editable="false" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Name" />
+          <TableColumn editable="false" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Size" />
+            <TableColumn editable="false" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" sortable="false" text="Remove" />
+        </columns>
+      </TableView>
+   </right>
+   <top>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onAddAttachment" text="Add Attachment" />
+         </children>
+      </HBox>
+   </top>
+</BorderPane>
