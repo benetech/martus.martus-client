@@ -196,16 +196,18 @@ public class FxBulletin
 		Vector<ObservableChoiceItemList> listOfLists = new Vector<ObservableChoiceItemList>();
 
 		String[] reusableChoicesCodes = dropDownSpec.getReusableChoicesCodes();
-		if(reusableChoicesCodes.length > 1)
-			return listOfLists;
-		
-		String onlyReusableChoicesCode = reusableChoicesCodes[0];
-		ReusableChoices reusableChoices = fieldSpecs.getReusableChoices(onlyReusableChoicesCode);
-		ChoiceItem[] choiceItems = reusableChoices.getChoices();
-		ObservableChoiceItemList list = new ObservableChoiceItemList();
-		list.addAll(choiceItems);
-		
-		listOfLists.add(list);
+
+		for(int i = 0; i < reusableChoicesCodes.length; ++i)
+		{
+			String onlyReusableChoicesCode = reusableChoicesCodes[i];
+			ReusableChoices reusableChoices = fieldSpecs.getReusableChoices(onlyReusableChoicesCode);
+			ChoiceItem[] choiceItems = reusableChoices.getChoices();
+			ObservableChoiceItemList list = new ObservableChoiceItemList();
+			list.add(new ChoiceItem("", ""));
+			list.addAll(choiceItems);
+			
+			listOfLists.add(list);
+		}
 		return listOfLists;
 	}
 

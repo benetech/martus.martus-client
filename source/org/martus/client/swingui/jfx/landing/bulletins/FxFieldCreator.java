@@ -29,11 +29,8 @@ import java.util.Vector;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.Property;
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
@@ -44,9 +41,7 @@ import javafx.scene.text.TextFlow;
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.jfx.generic.controls.ScrollFreeTextArea;
 import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
-import org.martus.client.swingui.jfx.generic.data.ChoiceItemStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
-import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MessageFieldSpec;
 
@@ -91,28 +86,11 @@ public class FxFieldCreator
 		if(listOfChoiceItemLists.size() == 0)
 			return createFieldNotAvailable();
 
-		if(listOfChoiceItemLists.size() > 1)
-			return createFieldNotAvailable();
-		
-		ObservableChoiceItemList choiceItemList = listOfChoiceItemLists.get(0);
-		ChoiceBox choiceBox = createSingleDropDown(property, choiceItemList);
-		ReadOnlyObjectProperty<ChoiceItem> selectedItemProperty = choiceBox.getSelectionModel().selectedItemProperty();
-		selectedItemProperty.addListener(
-			(observable, oldValue, newValue) ->	property.setValue(newValue.getCode())
-		);
-		return choiceBox;
-	}
-
-	private ChoiceBox createSingleDropDown(Property<String> property, ObservableList<ChoiceItem> choices)
-	{
-		ChoiceBox<ChoiceItem> choiceBox = new ChoiceBox<ChoiceItem>(choices);
-		String currentSelectedCode = property.getValue();
-		ChoiceItem[] choicesAsArray = choices.toArray(new ChoiceItem[0]);
-		ChoiceItemStringConverter converter = new ChoiceItemStringConverter(choicesAsArray);
-		ChoiceItem currentSelectedItem = converter.fromString(currentSelectedCode);
-		choiceBox.getSelectionModel().select(currentSelectedItem);
-
-		return choiceBox;
+		NestedChoiceBox choiceBoxes = new NestedChoiceBox();
+		choiceBoxes.setChoiceItemLists(listOfChoiceItemLists);
+		choiceBoxes.setValue(property.getValue());
+		property.bind(choiceBoxes.valueProperty());
+		return choiceBoxes;
 	}
 
 	private Node createBooleanField(Property<String> property)
