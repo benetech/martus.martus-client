@@ -45,7 +45,7 @@ public class FxFormCreator
 		localization = localizationToUse;
 	}
 	
-	public Node createFormFromBulletin(FxBulletin bulletinToShow)
+	public Node createFormFromBulletin(FxBulletin bulletinToShow, Node attachments)
 	{
 		bulletin = bulletinToShow;
 		sections = new Vector<BulletinEditorSection>();
@@ -56,11 +56,18 @@ public class FxFormCreator
 		Accordion accordion = new Accordion();
 		ObservableList<TitledPane> panes = accordion.getPanes();
 		sections.forEach(section -> panes.add(createTitledPane(section)));
+		panes.add(createAttachmentTitledPane(attachments));
 		TitledPane firstPane = panes.get(0);
 		accordion.setExpandedPane(firstPane);
 		return accordion;
 	}
 	
+	private TitledPane createAttachmentTitledPane(Node attachments)
+	{
+		String title = getLocalization().getWindowTitle("Attachments");
+		return new TitledPane(title, attachments);
+	}
+
 	private TitledPane createTitledPane(BulletinEditorSection section)
 	{
 		String title = section.getTitle();
