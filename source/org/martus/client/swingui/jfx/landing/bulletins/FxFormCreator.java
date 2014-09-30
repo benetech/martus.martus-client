@@ -52,9 +52,6 @@ public class FxFormCreator
 		Vector<FieldSpec> fieldSpecs = bulletin.getFieldSpecs();
 		fieldSpecs.forEach(fieldSpec -> addField(fieldSpec));
 
-		if(sections.size() == 1)
-			return sections.get(0);
-
 		Accordion accordion = new Accordion();
 		sections.forEach(section -> accordion.getPanes().add(createTitledPane(section)));
 		TitledPane firstPane = accordion.getPanes().get(0);
