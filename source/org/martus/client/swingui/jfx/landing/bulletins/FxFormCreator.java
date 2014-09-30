@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.util.Vector;
 
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
@@ -53,8 +54,9 @@ public class FxFormCreator
 		fieldSpecs.forEach(fieldSpec -> addField(fieldSpec));
 
 		Accordion accordion = new Accordion();
-		sections.forEach(section -> accordion.getPanes().add(createTitledPane(section)));
-		TitledPane firstPane = accordion.getPanes().get(0);
+		ObservableList<TitledPane> panes = accordion.getPanes();
+		sections.forEach(section -> panes.add(createTitledPane(section)));
+		TitledPane firstPane = panes.get(0);
 		accordion.setExpandedPane(firstPane);
 		return accordion;
 	}
