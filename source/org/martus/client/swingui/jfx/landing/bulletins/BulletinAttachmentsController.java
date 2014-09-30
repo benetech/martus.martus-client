@@ -25,6 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
@@ -36,16 +39,21 @@ import org.martus.client.swingui.jfx.generic.FxController;
 
 public class BulletinAttachmentsController extends FxController
 {
-	public BulletinAttachmentsController(UiMainWindow mainWindowToUse)
+	public BulletinAttachmentsController(UiMainWindow mainWindowToUse, FxBulletin bulletinToUse)
 	{
 		super(mainWindowToUse);
+		bulletin = bulletinToUse;
 	}
 
-	public void createFormFromBulletin(FxBulletin bulletinToShow)
+
+	@Override
+	public void initialize(URL location, ResourceBundle bundle)
 	{
+		super.initialize(location, bundle);
 		attachmentsTable.setVisible(false);
 	}
-	
+
+
 	@Override
 	public String getFxmlLocation()
 	{
@@ -57,5 +65,7 @@ public class BulletinAttachmentsController extends FxController
 	{
 	}
 	
-	@FXML TableView attachmentsTable;
+	@FXML 
+	private TableView attachmentsTable;
+	private FxBulletin bulletin;
 }

@@ -50,12 +50,11 @@ public class BulletinEditorBodyController extends FxController
 	public void showBulletin(FxBulletin bulletinToShow) throws RuntimeException
 	{
 		FxFormCreator creator = new FxFormCreator(getLocalization());
-		BulletinAttachmentsController attachmentsController = new BulletinAttachmentsController(getMainWindow());
+		BulletinAttachmentsController attachmentsController = new BulletinAttachmentsController(getMainWindow(), bulletinToShow);
 		StackPane attachmentsPane = new StackPane();
 		try
 		{
 			loadControllerAndEmbedInPane(attachmentsController, attachmentsPane);
-			attachmentsController.createFormFromBulletin(bulletinToShow);
 		} 
 		catch (Exception e)
 		{
