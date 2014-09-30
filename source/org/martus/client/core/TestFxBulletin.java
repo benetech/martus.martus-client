@@ -136,17 +136,20 @@ public class TestFxBulletin extends TestCaseEnhanced
 		Vector<ObservableChoiceItemList> reusableLists = fxb.getChoiceItemLists(reusableDropDownTag);
 		assertEquals(1, reusableLists.size());
 		ObservableChoiceItemList reusableList = reusableLists.get(0);
-		assertEquals(citiesChoices.size(), reusableList.size());
-		assertEquals(citiesChoices.get(0), reusableList.get(0));
+		assertEquals(citiesChoices.size()+1, reusableList.size());
+		assertEquals("", reusableList.get(0).getCode());
+		assertEquals(citiesChoices.get(0), reusableList.get(1));
 		
 		Vector<ObservableChoiceItemList> nestedLists = fxb.getChoiceItemLists(nestedDropDownTag);
 		assertEquals(2, nestedLists.size());
 		ObservableChoiceItemList nestedStatesList = nestedLists.get(0);
-		assertEquals(statesChoices.size(), nestedStatesList.size());
-		assertEquals(statesChoices.get(0), nestedStatesList.get(0));
+		assertEquals(statesChoices.size()+1, nestedStatesList.size());
+		assertEquals("", nestedStatesList.get(0).getCode());
+		assertEquals(statesChoices.get(0), nestedStatesList.get(1));
 		ObservableChoiceItemList nestedCitiesList = nestedLists.get(1);
-		assertEquals(citiesChoices.size(), nestedCitiesList.size());
-		assertEquals(citiesChoices.get(0), nestedCitiesList.get(0));
+		assertEquals(citiesChoices.size()+1, nestedCitiesList.size());
+		assertEquals("", nestedCitiesList.get(0).getCode());
+		assertEquals(citiesChoices.get(0), nestedCitiesList.get(1));
 		
 	}
 	
