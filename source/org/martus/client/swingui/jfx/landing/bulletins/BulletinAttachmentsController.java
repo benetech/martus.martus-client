@@ -27,9 +27,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.Pane;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
@@ -43,19 +41,9 @@ public class BulletinAttachmentsController extends FxController
 		super(mainWindowToUse);
 	}
 
-	public Node createFormFromBulletin(FxBulletin bulletinToShow)
+	public void createFormFromBulletin(FxBulletin bulletinToShow)
 	{
-		Pane attachmentsPane = new Pane();
-		try
-		{
-			loadControllerAndEmbedInPane(this, attachmentsPane);
-			attachmentsTable.setVisible(false);
-		} 
-		catch (Exception e)
-		{
-			logAndNotifyUnexpectedError(e);
-		}
-		return attachmentsPane;
+		attachmentsTable.setVisible(false);
 	}
 	
 	@Override
