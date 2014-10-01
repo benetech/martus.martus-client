@@ -48,6 +48,7 @@ import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.ReusableChoices;
+import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DataInvalidException;
@@ -69,6 +70,7 @@ public class FxBulletin
 		
 		fieldProperties = new HashMap<String, SimpleStringProperty>();
 		fieldValidators = new HashMap<String, FieldValidator>();
+		attachments = FXCollections.observableArrayList();
 	}
 
 	public void copyDataFromBulletin(Bulletin b)
@@ -95,7 +97,10 @@ public class FxBulletin
 		
 		copyReusableChoiceListsFromBulletinSection(b.getTopSectionFieldSpecs());
 		copyReusableChoiceListsFromBulletinSection(b.getBottomSectionFieldSpecs());
-	}
+
+		attachments.addAll(b.getPrivateAttachments());
+		attachments.addAll(b.getPublicAttachments());
+}
 
 	public void copyDataToBulletin(Bulletin modified) throws Exception
 	{
@@ -116,6 +121,15 @@ public class FxBulletin
 		authorizedToReadKeys.forEach(key -> modifiedKeys.add(key));
 		modified.clearAuthorizedToReadKeys();
 		modified.setAuthorizedToReadKeys(modifiedKeys);
+
+		modified.clearPublicAttachments();
+		modified.clearPrivateAttachments();
+
+		for(int i = 0; i < attachments.size(); ++i)
+		{
+			AttachmentProxy proxy = attachments.get(i);
+			modified.addPrivateAttachment(proxy);
+		}
 	}
 
 	public ReadOnlyObjectWrapper<UniversalId> universalIdProperty()
@@ -221,6 +235,11 @@ public class FxBulletin
 		return listOfLists;
 	}
 
+	public ObservableList<AttachmentProxy> getAttachments()
+	{
+		return attachments;
+	}
+	
 	public boolean hasBeenModified()
 	{
 		return hasBeenModified;
@@ -282,6 +301,10 @@ public class FxBulletin
 		fieldProperties.clear();
 		
 		fieldSpecs = new FieldSpecCollection();
+		
+		if(attachments != null)
+			attachments.clear();
+
 	}
 	
 	private void setFieldPropertiesFromBulletinSection(Bulletin b, FieldSpecCollection bulletinFieldSpecs)
@@ -379,4 +402,6 @@ public class FxBulletin
 	private ReadOnlyObjectWrapper<BulletinHistory> bulletinHistory;
 
 	private BooleanProperty immutableOnServer;
+	private ObservableList<AttachmentProxy> attachments;
+
 }
