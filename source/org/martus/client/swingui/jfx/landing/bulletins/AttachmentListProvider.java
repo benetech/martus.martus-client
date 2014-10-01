@@ -25,6 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import java.io.File;
+
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import org.martus.client.swingui.jfx.generic.data.ArrayObservableList;
@@ -34,15 +37,22 @@ import org.martus.common.database.ReadableDatabase;
 
 public class AttachmentListProvider extends ArrayObservableList<AttachmentTableRowData>
 {
-	public AttachmentListProvider(ObservableList<AttachmentProxy> attachmentsToUse, ReadableDatabase database)
+	public AttachmentListProvider(ObservableList<AttachmentProxy> attachmentsToUse, ReadableDatabase databaseToUse)
 	{
 		super(attachmentsToUse.size());
 		attachments = attachmentsToUse;
+		database = databaseToUse;
+		
 		for (AttachmentProxy attachmentProxy : attachmentsToUse)
 		{
-			AttachmentTableRowData attachmentRow = new AttachmentTableRowData(attachmentProxy, database);
-			add(attachmentRow);
+			addAttachmentDataToTable(attachmentProxy);
 		}
+	}
+
+	private void addAttachmentDataToTable(AttachmentProxy attachmentProxy)
+	{
+		AttachmentTableRowData attachmentRow = new AttachmentTableRowData(attachmentProxy, database);
+		add(attachmentRow);
 	}
 	
 	public void removeAttachment(AttachmentTableRowData attachmentToRemove)
@@ -52,5 +62,13 @@ public class AttachmentListProvider extends ArrayObservableList<AttachmentTableR
 		attachments.remove(attachmentProxy);
 	}
 	
-	ObservableList<AttachmentProxy> attachments;
+	public void addAttachment(File fileToAdd)
+	{
+		AttachmentProxy attachmentProxy = new AttachmentProxy(fileToAdd);
+		attachments.add(attachmentProxy);
+		addAttachmentDataToTable(attachmentProxy);
+	}
+	
+	private ObservableList<AttachmentProxy> attachments;
+	private ReadableDatabase database;
 }
