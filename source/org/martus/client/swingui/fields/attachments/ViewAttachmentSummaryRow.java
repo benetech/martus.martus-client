@@ -59,7 +59,7 @@ class ViewAttachmentSummaryRow extends AbstractAttachmentRow
 		}
 
 		String labelColumnText = proxy.getLabel();
-		String sizeColumnText = model.getSize(proxy);
+		String sizeColumnText = AttachmentTableModel.getSize(proxy, mainWindowToUse.getStore().getDatabase());
 		createCells(labelColumnText, sizeColumnText);
 	}
 
