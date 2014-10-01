@@ -49,5 +49,6 @@ public class TestAttachmentTableRowData extends TestCaseEnhanced
 		AttachmentTableRowData data = new AttachmentTableRowData(a1, database);
 		assertEquals(tempFile1.getName(), data.nameProperty().get());
 		assertEquals("1", data.sizeProperty().get());
+		assertEquals(a1, data.getAttachmentProxy());
 	}
 }

@@ -35,6 +35,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
@@ -43,6 +44,7 @@ import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
+import org.martus.common.MartusLogger;
 
 
 public class BulletinAttachmentsController extends FxController
@@ -87,6 +89,14 @@ public class BulletinAttachmentsController extends FxController
 	
 	private void removeSelectedAttachment()
 	{
+		TableViewSelectionModel<AttachmentTableRowData> selectionModel = attachmentsTable.getSelectionModel();
+		AttachmentTableRowData selectedItem = selectionModel.getSelectedItem();
+		if(selectedItem == null)
+		{
+			MartusLogger.log("Attempted to remove Attachment with nothing selected");
+			return;
+		}
+		attachmentsProvider.removeAttachment(selectedItem);
 	}
 
 
