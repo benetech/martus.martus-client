@@ -63,7 +63,7 @@ public class BulletinAttachmentsController extends FxController
 	
 	private void initalizeItemsTable()
 	{
-		attachmentsProvider = new AttachmentListProvider(bulletin.getAttachments());
+		attachmentsProvider = new AttachmentListProvider(bulletin.getAttachments(), getMainWindow().getStore().getDatabase());
 		attachmentsTable.setItems(attachmentsProvider);
 		attachmentsTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 

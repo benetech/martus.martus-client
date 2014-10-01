@@ -28,6 +28,8 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import java.io.File;
 
 import org.martus.common.bulletin.AttachmentProxy;
+import org.martus.common.database.MockClientDatabase;
+import org.martus.common.database.ReadableDatabase;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestAttachmentTableRowData extends TestCaseEnhanced
@@ -41,10 +43,11 @@ public class TestAttachmentTableRowData extends TestCaseEnhanced
 	{
 		final byte[] sampleBytes1 = {1,1,2,3,0,5,7,11};
 		File tempFile1 = createTempFileWithData(sampleBytes1);
+		ReadableDatabase database = new MockClientDatabase();		
+		
 		AttachmentProxy a1 = new AttachmentProxy(tempFile1);
-
-		AttachmentTableRowData data = new AttachmentTableRowData(a1);
+		AttachmentTableRowData data = new AttachmentTableRowData(a1, database);
 		assertEquals(tempFile1.getName(), data.nameProperty().get());
-		//assertEquals("8 bytes", data.sizeProperty().get());
+		assertEquals("1", data.sizeProperty().get());
 	}
 }

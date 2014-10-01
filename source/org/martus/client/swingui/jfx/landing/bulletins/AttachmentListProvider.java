@@ -29,16 +29,17 @@ import javafx.collections.ObservableList;
 
 import org.martus.client.swingui.jfx.generic.data.ArrayObservableList;
 import org.martus.common.bulletin.AttachmentProxy;
+import org.martus.common.database.ReadableDatabase;
 
 
 public class AttachmentListProvider extends ArrayObservableList<AttachmentTableRowData>
 {
-	public AttachmentListProvider(ObservableList<AttachmentProxy> attachments)
+	public AttachmentListProvider(ObservableList<AttachmentProxy> attachments, ReadableDatabase database)
 	{
 		super(attachments.size());
 		for (AttachmentProxy attachmentProxy : attachments)
 		{
-			AttachmentTableRowData attachmentRow = new AttachmentTableRowData(attachmentProxy);
+			AttachmentTableRowData attachmentRow = new AttachmentTableRowData(attachmentProxy, database);
 			add(attachmentRow);
 		}
 	}
