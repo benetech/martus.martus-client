@@ -90,17 +90,11 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		getMainWindow().resetCursor();
 	}
 
-	static private File getAttachmentAsFile(AttachmentProxy proxy, ClientBulletinStore store) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException 
+	private void notifyUnableToView()
 	{
-		if(proxy.getFile() != null)
-			return proxy.getFile();
-		
-		ReadableDatabase db = store.getDatabase();
-		MartusCrypto security = store.getSignatureVerifier();
-		File temp = extractAttachmentToTempFile(db, proxy, security);
-		return temp;
+		getMainWindow().notifyDlg("UnableToViewAttachment");
 	}
-
+	
 	public static void launchExternalAttachmentViewer(AttachmentProxy proxy, ClientBulletinStore store) throws IOException, InterruptedException, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, InvalidBase64Exception, CryptoException 
 	{
 		File temp = getAttachmentAsFile(proxy, store);
@@ -124,6 +118,17 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 			dumpOutputToConsole("stderr", processView.getErrorStream());
 			throw new IOException();
 		}
+	}
+
+	static private File getAttachmentAsFile(AttachmentProxy proxy, ClientBulletinStore store) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException 
+	{
+		if(proxy.getFile() != null)
+			return proxy.getFile();
+		
+		ReadableDatabase db = store.getDatabase();
+		MartusCrypto security = store.getSignatureVerifier();
+		File temp = extractAttachmentToTempFile(db, proxy, security);
+		return temp;
 	}
 
 	static private void dumpOutputToConsole(String streamName, InputStream capturedOutput) throws IOException
@@ -156,11 +161,6 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		throw new RuntimeException("Launch not supported on this operating system");
 	}
 
-	private void notifyUnableToView()
-	{
-		getMainWindow().notifyDlg("UnableToViewAttachment");
-	}
-	
 	static File extractAttachmentToTempFile(ReadableDatabase db, AttachmentProxy proxy, MartusCrypto security) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
 	{
 		String fileName = proxy.getLabel();
