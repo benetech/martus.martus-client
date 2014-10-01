@@ -37,6 +37,7 @@ public class AttachmentTableRowData
 {
 	public AttachmentTableRowData(AttachmentProxy attachmentToUse, ReadableDatabase database)
 	{
+		attachmentProxy = attachmentToUse;
 		name = new SimpleStringProperty(attachmentToUse.getLabel());
 		size =  new SimpleStringProperty(getSizeOfAttachment(attachmentToUse, database));
 		remove = new SimpleBooleanProperty(true);
@@ -62,10 +63,16 @@ public class AttachmentTableRowData
         return remove; 
     }
 	
+	public AttachmentProxy getAttachmentProxy()
+	{
+		return attachmentProxy;
+	}
+	
 	static public final String ATTACHMENT_NAME_PROPERTY_NAME = "name";
 	static public final String ATTACHMENT_SIZE_PROPERTY_NAME = "size";
 	static public final String ATTACHMENT_REMOVE_PROPERTY_NAME = "remove";
 	private SimpleStringProperty name;
 	private SimpleStringProperty size;
 	private SimpleBooleanProperty remove;
+	private AttachmentProxy attachmentProxy;
  }

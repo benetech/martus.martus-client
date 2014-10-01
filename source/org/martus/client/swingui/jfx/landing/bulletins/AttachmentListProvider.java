@@ -34,13 +34,23 @@ import org.martus.common.database.ReadableDatabase;
 
 public class AttachmentListProvider extends ArrayObservableList<AttachmentTableRowData>
 {
-	public AttachmentListProvider(ObservableList<AttachmentProxy> attachments, ReadableDatabase database)
+	public AttachmentListProvider(ObservableList<AttachmentProxy> attachmentsToUse, ReadableDatabase database)
 	{
-		super(attachments.size());
-		for (AttachmentProxy attachmentProxy : attachments)
+		super(attachmentsToUse.size());
+		attachments = attachmentsToUse;
+		for (AttachmentProxy attachmentProxy : attachmentsToUse)
 		{
 			AttachmentTableRowData attachmentRow = new AttachmentTableRowData(attachmentProxy, database);
 			add(attachmentRow);
 		}
 	}
+	
+	public void removeAttachment(AttachmentTableRowData attachmentToRemove)
+	{
+		remove(attachmentToRemove);
+		AttachmentProxy attachmentProxy = attachmentToRemove.getAttachmentProxy();
+		attachments.remove(attachmentProxy);
+	}
+	
+	ObservableList<AttachmentProxy> attachments;
 }
