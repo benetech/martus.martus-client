@@ -5,15 +5,6 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <right>
-      <TableView fx:id="attachmentsTable" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn editable="false" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Name" />
-          <TableColumn editable="false" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Size" />
-            <TableColumn editable="false" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" sortable="false" text="Remove" />
-        </columns>
-      </TableView>
-   </right>
    <top>
       <HBox BorderPane.alignment="CENTER">
          <children>
@@ -21,4 +12,13 @@
          </children>
       </HBox>
    </top>
+   <center>
+      <TableView fx:id="attachmentsTable" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="nameColumn" editable="false" maxWidth="800.0" minWidth="300.0" prefWidth="-1.0" text="Name" />
+          <TableColumn fx:id="sizeColumn" editable="false" maxWidth="200.0" minWidth="100.0" prefWidth="-1.0" text="Size" />
+            <TableColumn fx:id="removeColumn" editable="false" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" sortable="false" text="Remove" />
+        </columns>
+      </TableView>
+   </center>
 </BorderPane>

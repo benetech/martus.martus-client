@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core;
 
+import java.io.File;
 import java.util.Vector;
 
 import javafx.beans.property.BooleanProperty;
@@ -41,6 +42,7 @@ import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MiniLocalization;
 import org.martus.common.ReusableChoices;
+import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinForTesting;
 import org.martus.common.crypto.MockMartusSecurity;
@@ -70,6 +72,56 @@ public class TestFxBulletin extends TestCaseEnhanced
 		localization = new MiniLocalization();
 	}
 	
+	public void testAttachments() throws Exception
+
+	{	
+		final byte[] sampleBytes1 = {1,1,2,3,0,5,7,11};
+		final byte[] sampleBytes2 = {3,1,4,0,1,5,9,2,7};
+		final byte[] sampleBytes3 = {6,5,0,4,7,5,5,4,4,0};
+		final byte[] sampleBytes4 = {12,34,56};
+	
+		File tempFile1 = createTempFileWithData(sampleBytes1);
+		File tempFile2 = createTempFileWithData(sampleBytes2);
+		File tempFile3 = createTempFileWithData(sampleBytes3);
+		File tempFile4 = createTempFileWithData(sampleBytes4);
+	
+		AttachmentProxy a1 = new AttachmentProxy(tempFile1);
+		AttachmentProxy a2 = new AttachmentProxy(tempFile2);
+		AttachmentProxy a3 = new AttachmentProxy(tempFile3);
+
+		Bulletin b = new Bulletin(security);
+		b.addPublicAttachment(a1);
+		b.addPublicAttachment(a2);
+		b.addPrivateAttachment(a3);
+	
+		assertEquals(2, b.getPublicAttachments().length);
+		assertEquals(1, b.getPrivateAttachments().length);
+	
+		AttachmentProxy[] v = b.getPublicAttachments();
+		assertEquals("a1 label", tempFile1.getName(), v[0].getLabel());
+		assertEquals("a2 label", tempFile2.getName(), v[1].getLabel());
+	
+		AttachmentProxy[] vp = b.getPrivateAttachments();
+		assertEquals("a3 label", tempFile3.getName(), vp[0].getLabel());
+	
+		FxBulletin fxb = new FxBulletin(getLocalization());
+		fxb.copyDataFromBulletin(b);
+		assertEquals(3, fxb.getAttachments().size());
+	
+		Bulletin modified = new Bulletin(security);
+		fxb.copyDataToBulletin(modified);
+		assertEquals(3, modified.getPrivateAttachments().length);
+		assertEquals(0, modified.getPublicAttachments().length);
+		
+		ObservableList<AttachmentProxy> attachments = fxb.getAttachments();
+		AttachmentProxy a4 = new AttachmentProxy(tempFile4);
+		attachments.add(a4);
+		
+		Bulletin modifiedWith4Attachments = new Bulletin(security);
+		fxb.copyDataToBulletin(modifiedWith4Attachments);
+		assertEquals(4, modifiedWith4Attachments.getPrivateAttachments().length);
+	}
+
 	public void testGetChoiceItemLists() throws Exception
 	{
 		FxBulletin fxb = new FxBulletin(getLocalization());
