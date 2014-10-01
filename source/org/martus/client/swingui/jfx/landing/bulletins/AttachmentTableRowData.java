@@ -25,25 +25,26 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
-import org.martus.common.bulletin.AttachmentProxy;
-
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import org.martus.client.swingui.tablemodels.AttachmentTableModel;
+import org.martus.common.bulletin.AttachmentProxy;
+import org.martus.common.database.ReadableDatabase;
+
 public class AttachmentTableRowData
 {
-	public AttachmentTableRowData(AttachmentProxy attachmentToUse)
+	public AttachmentTableRowData(AttachmentProxy attachmentToUse, ReadableDatabase database)
 	{
 		name = new SimpleStringProperty(attachmentToUse.getLabel());
-		size =  new SimpleStringProperty(getSizeOfAttachment(attachmentToUse));
+		size =  new SimpleStringProperty(getSizeOfAttachment(attachmentToUse, database));
 		remove = new SimpleBooleanProperty(true);
 	}
 	
-	private String getSizeOfAttachment(AttachmentProxy attachmentToUse)
+	private String getSizeOfAttachment(AttachmentProxy attachmentToUse, ReadableDatabase database)
 	{
-		// FIXME do same as Swing
-		return "";
+		return AttachmentTableModel.getSize(attachmentToUse, database);
 	}
 
 	public SimpleStringProperty nameProperty()
@@ -67,5 +68,4 @@ public class AttachmentTableRowData
 	private SimpleStringProperty name;
 	private SimpleStringProperty size;
 	private SimpleBooleanProperty remove;
-
  }
