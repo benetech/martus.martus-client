@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -39,11 +40,14 @@ import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 
 import org.martus.client.core.FxBulletin;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
+import org.martus.clientside.FormatFilter;
 import org.martus.common.MartusLogger;
 
 
@@ -99,10 +103,17 @@ public class BulletinAttachmentsController extends FxController
 		attachmentsProvider.removeAttachment(selectedItem);
 	}
 
-
 	@FXML
 	private void onAddAttachment(ActionEvent event) 
 	{
+		FileChooser fileChooser = new FileChooser();
+		MartusLocalization localization = getLocalization();
+		fileChooser.setTitle(localization.getWindowTitle("FileDialogAddAttachment"));
+		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(localization.getFieldLabel("AllFiles"), "*.*"));
+		File fileToAdd = fileChooser.showOpenDialog(null);
+		if(fileToAdd == null)
+			return;
+		attachmentsProvider.addAttachment(fileToAdd);
 	}
 	
 	@Override
