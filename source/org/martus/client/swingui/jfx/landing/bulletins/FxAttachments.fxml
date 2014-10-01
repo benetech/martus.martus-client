@@ -8,16 +8,16 @@
    <top>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#onAddAttachment" text="Add Attachment" />
+            <Button mnemonicParsing="false" onAction="#onAddAttachment" text="%Button.addattachment" />
          </children>
       </HBox>
    </top>
    <center>
       <TableView fx:id="attachmentsTable" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="nameColumn" editable="false" maxWidth="800.0" minWidth="300.0" prefWidth="-1.0" text="Name" />
-          <TableColumn fx:id="sizeColumn" editable="false" maxWidth="200.0" minWidth="100.0" prefWidth="-1.0" text="Size (Kb)" />
-            <TableColumn fx:id="removeColumn" editable="false" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" sortable="false" text="Remove" />
+          <TableColumn fx:id="nameColumn" editable="false" maxWidth="800.0" minWidth="300.0" prefWidth="-1.0" text="%Button.attachmentLabel" />
+          <TableColumn fx:id="sizeColumn" editable="false" maxWidth="200.0" minWidth="100.0" prefWidth="-1.0" text="%Button.attachmentSize" />
+            <TableColumn fx:id="removeColumn" editable="false" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" sortable="false" text="%Button.removeattachment" />
         </columns>
       </TableView>
    </center>
