@@ -60,7 +60,7 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		if(panel.isImageInline)
 			return;
 		
-		if(shouldNotViewAttachmentInExternalViewer())
+		if(shouldNotViewAttachmentsInExternalViewer())
 		{
 			getMainWindow().notifyDlg("ViewAttachmentNotAvailable");
 			return;
@@ -96,7 +96,7 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		getMainWindow().notifyDlg("UnableToViewAttachment");
 	}
 	
-	static public boolean shouldNotViewAttachmentInExternalViewer()
+	static public boolean shouldNotViewAttachmentsInExternalViewer()
 	{
 		return (!Utilities.isMSWindows() && !Utilities.isMacintosh() && !UiSession.isAlphaTester);
 	}
