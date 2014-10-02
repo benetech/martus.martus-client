@@ -27,7 +27,6 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.io.File;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import org.martus.client.swingui.jfx.generic.data.ArrayObservableList;
