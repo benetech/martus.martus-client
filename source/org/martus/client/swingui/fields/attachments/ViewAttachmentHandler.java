@@ -126,7 +126,7 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		}
 	}
 
-	static private File getAttachmentAsFile(AttachmentProxy proxy, ClientBulletinStore store) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException 
+	static public File getAttachmentAsFile(AttachmentProxy proxy, ClientBulletinStore store) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException 
 	{
 		if(proxy.getFile() != null)
 			return proxy.getFile();
