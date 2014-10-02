@@ -1851,7 +1851,7 @@ public class EnglishStrings
 "field:TorTip1=Turning Tor on here establishes the default setting for your use of Tor when in Martus. You can also, turn Tor ON or OFF at any time inside the Martus desktop application.",
 "field:TorTip2=Note: Using Tor will slow sending and receiving of bulletins.",
 "field:SystemSettings=System Settings",
-"field:NeverDeleteVersionOnServer=Never Delete Versioned Records from Server",
+"field:NeverDeleteVersionOnServer=Never Delete from Server",
 
 "field:GettingServerInformation=Getting server information",
 "field:AdvanceServerSetup=Advanced Server Setup",
