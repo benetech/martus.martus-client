@@ -47,7 +47,6 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
-import org.martus.clientside.FormatFilter;
 import org.martus.common.MartusLogger;
 
 
@@ -69,7 +68,7 @@ public class BulletinAttachmentsController extends FxController
 	
 	private void initalizeItemsTable()
 	{
-		attachmentsProvider = new AttachmentListProvider(bulletin.getAttachments(), getMainWindow().getStore().getDatabase());
+		attachmentsProvider = new AttachmentListProvider(bulletin.getAttachments(), getApp().getStore().getDatabase());
 		attachmentsTable.setItems(attachmentsProvider);
 		attachmentsTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
