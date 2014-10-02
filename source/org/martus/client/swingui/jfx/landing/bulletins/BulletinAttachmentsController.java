@@ -45,9 +45,11 @@ import javafx.stage.FileChooser;
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.common.MartusLogger;
+import org.martus.common.bulletin.AttachmentProxy;
 
 
 public class BulletinAttachmentsController extends FxController
@@ -84,22 +86,57 @@ public class BulletinAttachmentsController extends FxController
 		sizeColumn.setCellValueFactory(new PropertyValueFactory<AttachmentTableRowData, String>(AttachmentTableRowData.ATTACHMENT_SIZE_PROPERTY_NAME));
 		sizeColumn.setCellFactory(TextFieldTableCell.<AttachmentTableRowData>forTableColumn());
 
+		Image viewImage = new Image(VIEW_ATTACHMENT_IMAGE_PATH);
+		viewColumn.setCellFactory(new FxButtonTableCellFactory(viewImage, () -> viewSelectedAttachment()));
+		viewColumn.setCellValueFactory(new PropertyValueFactory<Object, Boolean>(AttachmentTableRowData.ATTACHMENT_VIEW_PROPERTY_NAME));
+
 		Image removeImage = new Image(REMOVE_ATTACHMENT_IMAGE_PATH);
 		removeColumn.setCellFactory(new FxButtonTableCellFactory(removeImage, () -> removeSelectedAttachment()));
 		removeColumn.setCellValueFactory(new PropertyValueFactory<Object, Boolean>(AttachmentTableRowData.ATTACHMENT_REMOVE_PROPERTY_NAME));
 	}
 	
 	
+	private void viewSelectedAttachment()
+	{
+		AttachmentTableRowData selectedItem = getSelectedAttachmentRowData();
+		if(selectedItem == null)
+		{
+			MartusLogger.log("Attempted to remove Attachment with nothing selected");
+			return;
+		}
+		
+		AttachmentProxy proxy = selectedItem.getAttachmentProxy();
+		try
+		{
+			if(ViewAttachmentHandler.shouldNotViewAttachmentInExternalViewer())
+			{
+				showNotifyDialog("ViewAttachmentNotAvailable");
+				return;
+			}
+			ViewAttachmentHandler.launchExternalAttachmentViewer(proxy, getApp().getStore());
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		} 
+	}
+
 	private void removeSelectedAttachment()
 	{
-		TableViewSelectionModel<AttachmentTableRowData> selectionModel = attachmentsTable.getSelectionModel();
-		AttachmentTableRowData selectedItem = selectionModel.getSelectedItem();
+		AttachmentTableRowData selectedItem = getSelectedAttachmentRowData();
 		if(selectedItem == null)
 		{
 			MartusLogger.log("Attempted to remove Attachment with nothing selected");
 			return;
 		}
 		attachmentsProvider.removeAttachment(selectedItem);
+	}
+
+	private AttachmentTableRowData getSelectedAttachmentRowData()
+	{
+		TableViewSelectionModel<AttachmentTableRowData> selectionModel = attachmentsTable.getSelectionModel();
+		AttachmentTableRowData selectedItem = selectionModel.getSelectedItem();
+		return selectedItem;
 	}
 
 	@FXML
@@ -122,6 +159,7 @@ public class BulletinAttachmentsController extends FxController
 	}
 	
 	final private String REMOVE_ATTACHMENT_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/trash.png";
+	final private String VIEW_ATTACHMENT_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/viewAttachment.png";
 
 	@FXML 
 	private TableView attachmentsTable;
@@ -132,6 +170,9 @@ public class BulletinAttachmentsController extends FxController
 	@FXML
 	protected TableColumn<AttachmentTableRowData, String> sizeColumn;	
 	
+	@FXML
+	protected TableColumn<Object, Boolean> viewColumn;
+
 	@FXML
 	protected TableColumn<Object, Boolean> removeColumn;
 
