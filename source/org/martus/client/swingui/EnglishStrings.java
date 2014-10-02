@@ -1724,7 +1724,7 @@ public class EnglishStrings
 "field:ChooseHeadquartersToAdd=Select the contacts listed below that you want to add to all the bulletins listed above.",
 "field:TemplateCreatedByHeadquarters=Contacts #Name#",
 
-
+"wintitle:ViewAttachment=View Attachment",
 "wintitle:confirmCloneUnverifiedFDBulletinAsMine=Confirm Create Copy of Bulletin",
 
 

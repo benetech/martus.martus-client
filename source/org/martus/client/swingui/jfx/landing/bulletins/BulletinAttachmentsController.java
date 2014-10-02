@@ -103,23 +103,34 @@ public class BulletinAttachmentsController extends FxController
 			MartusLogger.log("Attempted to remove Attachment with nothing selected");
 			return;
 		}
-		AttachmentProxy proxy = selectedItem.getAttachmentProxy();
-		//TODO add internal Viewer here
 		
+		AttachmentProxy proxy = selectedItem.getAttachmentProxy();
+		if(viewAttachmentInternally(proxy))
+			return;
 		
 		if(ViewAttachmentHandler.shouldNotViewAttachmentsInExternalViewer())
 		{
 			showNotifyDialog("ViewAttachmentNotAvailable");
 			return;
 		}
+
 		try
 		{
+
 			ViewAttachmentHandler.launchExternalAttachmentViewer(proxy, getApp().getStore());
 		} 
 		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 		} 
+	}
+
+	private boolean viewAttachmentInternally(AttachmentProxy proxy)
+	{
+		//TODO check file type and only view internally if Image / Web / (maybe audio/video)
+		AttachmentViewController attachmentViewer = new AttachmentViewController(getMainWindow(), proxy);
+		showDialogWithClose("ViewAttachment", attachmentViewer);
+		return true;
 	}
 
 	private void removeSelectedAttachment()
