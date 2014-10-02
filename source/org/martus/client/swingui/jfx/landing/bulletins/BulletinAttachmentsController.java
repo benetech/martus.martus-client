@@ -105,13 +105,13 @@ public class BulletinAttachmentsController extends FxController
 		}
 		
 		AttachmentProxy proxy = selectedItem.getAttachmentProxy();
+		if(ViewAttachmentHandler.shouldNotViewAttachmentsInExternalViewer())
+		{
+			showNotifyDialog("ViewAttachmentNotAvailable");
+			return;
+		}
 		try
 		{
-			if(ViewAttachmentHandler.shouldNotViewAttachmentsInExternalViewer())
-			{
-				showNotifyDialog("ViewAttachmentNotAvailable");
-				return;
-			}
 			ViewAttachmentHandler.launchExternalAttachmentViewer(proxy, getApp().getStore());
 		} 
 		catch (Exception e)
