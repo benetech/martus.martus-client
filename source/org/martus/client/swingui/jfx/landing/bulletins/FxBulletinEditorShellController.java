@@ -115,7 +115,7 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	
 	private void copyDataFromBulletinOnFxThread(Bulletin bulletinToShow) throws RuntimeException
 	{
-		fxBulletin.copyDataFromBulletin(bulletinToShow);
+		fxBulletin.copyDataFromBulletin(bulletinToShow, getApp().getStore().getDatabase());
 		setImmutableOnServerBinding();
 		Platform.runLater(() -> headerController.showBulletin(fxBulletin));
 		Platform.runLater(() -> bodyController.showBulletin(fxBulletin));

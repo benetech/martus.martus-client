@@ -36,6 +36,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
+import org.martus.client.swingui.jfx.landing.bulletins.AttachmentTableRowData;
 import org.martus.client.test.MockBulletinStore;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
@@ -46,6 +47,8 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinForTesting;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.database.MockClientDatabase;
+import org.martus.common.database.ReadableDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
@@ -67,9 +70,10 @@ public class TestFxBulletin extends TestCaseEnhanced
 	protected void setUp() throws Exception
 	{
 		super.setUp();
-
+		
 		security = MockMartusSecurity.createClient();
 		localization = new MiniLocalization();
+		db = new MockClientDatabase();
 	}
 	
 	public void testAttachments() throws Exception
@@ -105,7 +109,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals("a3 label", tempFile3.getName(), vp[0].getLabel());
 	
 		FxBulletin fxb = new FxBulletin(getLocalization());
-		fxb.copyDataFromBulletin(b);
+		fxb.copyDataFromBulletin(b, db);
 		assertEquals(3, fxb.getAttachments().size());
 	
 		Bulletin modified = new Bulletin(security);
@@ -113,9 +117,10 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals(3, modified.getPrivateAttachments().length);
 		assertEquals(0, modified.getPublicAttachments().length);
 		
-		ObservableList<AttachmentProxy> attachments = fxb.getAttachments();
+		ObservableList<AttachmentTableRowData> attachments = fxb.getAttachments();
 		AttachmentProxy a4 = new AttachmentProxy(tempFile4);
-		attachments.add(a4);
+		AttachmentTableRowData a4RowData = new AttachmentTableRowData(a4, db);
+		attachments.add(a4RowData);
 		
 		Bulletin modifiedWith4Attachments = new Bulletin(security);
 		fxb.copyDataToBulletin(modifiedWith4Attachments);
@@ -168,7 +173,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		fsc.add(nestedDropDown);
 		
 		Bulletin b = new Bulletin(security, fsc, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
-		fxb.copyDataFromBulletin(b);
+		fxb.copyDataFromBulletin(b, db);
 
 		try
 		{
@@ -211,7 +216,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertFalse(fxb.hasBeenModified());
 		
 		Bulletin b = new BulletinForTesting(security);
-		fxb.copyDataFromBulletin(b);
+		fxb.copyDataFromBulletin(b, db);
 		assertFalse(fxb.hasBeenModified());
 		
 		SimpleStringProperty authorProperty = fxb.fieldProperty(Bulletin.TAGAUTHOR);
@@ -230,7 +235,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertNull(fxb.getImmutableOnServerProperty());
 		
 		Bulletin bulletinWithImmutableOnServerNotSetInitially = new BulletinForTesting(security);
-		fxb.copyDataFromBulletin(bulletinWithImmutableOnServerNotSetInitially);
+		fxb.copyDataFromBulletin(bulletinWithImmutableOnServerNotSetInitially, db);
 		BooleanProperty immutableOnServerProperty = fxb.getImmutableOnServerProperty();
 		assertFalse(immutableOnServerProperty.get());
 		immutableOnServerProperty.set(true);
@@ -242,7 +247,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		FxBulletin fxb2 = new FxBulletin(getLocalization());
 		Bulletin bulletinWithImmutableOnServerSetInitially = new BulletinForTesting(security);
 		bulletinWithImmutableOnServerSetInitially.setImmutableOnServer(true);
-		fxb2.copyDataFromBulletin(bulletinWithImmutableOnServerSetInitially);
+		fxb2.copyDataFromBulletin(bulletinWithImmutableOnServerSetInitially, db);
 		BooleanProperty immutableOnServerProperty2 = fxb2.getImmutableOnServerProperty();
 		assertTrue(immutableOnServerProperty2.get());
 		immutableOnServerProperty2.set(false);
@@ -257,7 +262,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 
 		FxBulletin fxb = new FxBulletin(getLocalization());
 		Bulletin b = new BulletinForTesting(security);
-		fxb.copyDataFromBulletin(b);
+		fxb.copyDataFromBulletin(b, db);
 		Vector<FieldSpec> specs = fxb.getFieldSpecs();
 		specs.forEach(spec -> {if(spec.getTag().equals(tag)) spec.setRequired();});
 
@@ -284,7 +289,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals(null, versionPropertyNull);
 		
 		Bulletin b = new BulletinForTesting(security);
-		fxb.copyDataFromBulletin(b);
+		fxb.copyDataFromBulletin(b, db);
 		ReadOnlyIntegerProperty versionProperty = fxb.versionProperty();
 		assertEquals(Integer.valueOf(b.getVersion()), versionProperty.getValue());
 		assertEquals(Integer.valueOf(1), versionProperty.getValue());
@@ -296,7 +301,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		localHistory.add("history2");
 		bulletinWith3Versions.setHistory(localHistory);
 		assertEquals("Bulletin2 doesn't have 3 versions?", 3, bulletinWith3Versions.getVersion());
-		fxb.copyDataFromBulletin(bulletinWith3Versions);
+		fxb.copyDataFromBulletin(bulletinWith3Versions, db);
 		assertEquals("This is a readOnlyInteger so it will not change", Integer.valueOf(1), versionProperty.getValue());
 		versionProperty = fxb.versionProperty();
 		assertEquals(Integer.valueOf(bulletinWith3Versions.getVersion()), versionProperty.getValue());
@@ -310,13 +315,13 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals(null, universalIdPropertyNull);
 		
 		Bulletin b = new BulletinForTesting(security);
-		fxb.copyDataFromBulletin(b);
+		fxb.copyDataFromBulletin(b, db);
 		ReadOnlyObjectWrapper<UniversalId> universalIdProperty = fxb.universalIdProperty();
 		assertEquals(b.getUniversalId(), universalIdProperty.getValue());
 		
 		Bulletin b2 = new BulletinForTesting(security);
 		assertNotEquals("Bulletins have same id?", b.getUniversalId(), b2.getUniversalId());
-		fxb.copyDataFromBulletin(b2);
+		fxb.copyDataFromBulletin(b2, db);
 		assertEquals(null, universalIdProperty.getValue());
 		ReadOnlyObjectWrapper<UniversalId> universalIdProperty2 = fxb.universalIdProperty();
 		assertEquals(b2.getUniversalId(), universalIdProperty2.getValue());
@@ -335,7 +340,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		HeadquartersKeys keys = new HeadquartersKeys(keysToUse);
 		b.setAuthorizedToReadKeys(keys);
 		
-		fxb.copyDataFromBulletin(b);
+		fxb.copyDataFromBulletin(b, db);
 		ObservableList<HeadquartersKey> headquartersKeysList = fxb.getAuthorizedToReadList();
 		HeadquartersKeys keysFromBulletin = b.getAuthorizedToReadKeys();
 		assertEquals(keysFromBulletin.size(), headquartersKeysList.size());
@@ -350,7 +355,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		HeadquartersKeys b2keys = new HeadquartersKeys(newKeys);
 		b2.setAuthorizedToReadKeys(b2keys);
 
-		fxb.copyDataFromBulletin(b2);
+		fxb.copyDataFromBulletin(b2, db);
 		ObservableList<HeadquartersKey> headquartersKeysList2 = fxb.getAuthorizedToReadList();
 		assertEquals(2, b2.getAuthorizedToReadKeys().size());
 		assertEquals(2, headquartersKeysList2.size());
@@ -378,7 +383,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals(null, bulletinLocalIdNull);
 
 		Bulletin b = new BulletinForTesting(security);
-		fxb.copyDataFromBulletin(b);
+		fxb.copyDataFromBulletin(b, db);
 
 		ReadOnlyStringProperty fxLocalId = fxb.bulletinLocalIdProperty();
 		assertEquals(b.getLocalId(), fxLocalId.getValue());		
@@ -386,7 +391,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 
     		Bulletin clone = testStore.createNewDraft(b, b.getTopSectionFieldSpecs(), b.getBottomSectionFieldSpecs());
     		assertNotEquals("not new local id?", b.getLocalId(), clone.getLocalId());
-    		fxb.copyDataFromBulletin(clone);
+    		fxb.copyDataFromBulletin(clone, db);
     		assertEquals(clone.getLocalId(), fxb.bulletinLocalIdProperty().getValue());
     		assertNotNull("ReadOnlyStringProperty will be unchanged", fxLocalId.getValue());
     		assertNotEquals(fxLocalId.getValue(), fxb.bulletinLocalIdProperty().getValue());
@@ -399,7 +404,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals(null, bulletinHistoryNull);
 
 		Bulletin b = new BulletinForTesting(security);
-		fxb.copyDataFromBulletin(b);
+		fxb.copyDataFromBulletin(b, db);
 
 		ReadOnlyObjectWrapper<BulletinHistory> fxBulletinHistory = fxb.getHistory();
 		assertEquals(b.getHistory().toString(), fxBulletinHistory.getValue().toString());
@@ -410,7 +415,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		localHistory.add("history2");
 		b.setHistory(localHistory);
 		assertTrue(b.getHistory().contains(localIdHistory2));
-		fxb.copyDataFromBulletin(b);
+		fxb.copyDataFromBulletin(b, db);
 		ReadOnlyObjectWrapper<BulletinHistory> fxBulletinNewHistory = fxb.getHistory();
 		assertTrue(fxBulletinNewHistory.getValue().contains(localIdHistory2));
 		assertNull(fxBulletinHistory.getValue());
@@ -420,12 +425,12 @@ public class TestFxBulletin extends TestCaseEnhanced
 	{
 		FxBulletin fxb = new FxBulletin(getLocalization());
 		Bulletin b = new BulletinForTesting(security);
-		fxb.copyDataFromBulletin(b);
+		fxb.copyDataFromBulletin(b, db);
 
 		SimpleStringProperty emptyTitleProperty = fxb.fieldProperty(Bulletin.TAGTITLE);
 		assertEquals("", emptyTitleProperty.getValue());
 		b.set(Bulletin.TAGTITLE, "This is a title");
-		fxb.copyDataFromBulletin(b);
+		fxb.copyDataFromBulletin(b, db);
 		assertNull(emptyTitleProperty.getValue());
 		SimpleStringProperty titleProperty = fxb.fieldProperty(Bulletin.TAGTITLE);
 		assertEquals(b.get(Bulletin.TAGTITLE), titleProperty.getValue());
@@ -440,7 +445,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		FxBulletin fxb = new FxBulletin(getLocalization());
 		Bulletin b = new BulletinForTesting(security);
 		b.set(PRIVATE_TAG, PRIVATE_DATA_1);
-		fxb.copyDataFromBulletin(b);
+		fxb.copyDataFromBulletin(b, db);
 		
 		SimpleStringProperty privateInfoProperty = fxb.fieldProperty(PRIVATE_TAG);
 		assertEquals(b.get(PRIVATE_TAG), privateInfoProperty.getValue());
@@ -457,7 +462,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 	{
 		FxBulletin fxb = new FxBulletin(getLocalization());
 		Bulletin before = new BulletinForTesting(security);
-		fxb.copyDataFromBulletin(before);
+		fxb.copyDataFromBulletin(before, db);
 		Bulletin after = new Bulletin(security);
 		fxb.copyDataToBulletin(after);
 		Vector<String> beforeTags = extractFieldTags(before);
@@ -491,4 +496,5 @@ public class TestFxBulletin extends TestCaseEnhanced
 	
 	private MockMartusSecurity security;
 	private MiniLocalization localization;
+	private ReadableDatabase db;
 }
