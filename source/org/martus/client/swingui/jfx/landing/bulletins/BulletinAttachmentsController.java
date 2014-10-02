@@ -70,8 +70,7 @@ public class BulletinAttachmentsController extends FxController
 	
 	private void initalizeItemsTable()
 	{
-		attachmentsProvider = new AttachmentListProvider(bulletin.getAttachments(), getApp().getStore().getDatabase());
-		attachmentsTable.setItems(attachmentsProvider);
+		attachmentsTable.setItems(bulletin.getAttachments());
 		attachmentsTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 		BooleanBinding nonEmptyTableBinding = Bindings.isNotEmpty(attachmentsTable.getItems());
@@ -129,7 +128,7 @@ public class BulletinAttachmentsController extends FxController
 			MartusLogger.log("Attempted to remove Attachment with nothing selected");
 			return;
 		}
-		attachmentsProvider.removeAttachment(selectedItem);
+		attachmentsTable.getItems().remove(selectedItem);
 	}
 
 	private AttachmentTableRowData getSelectedAttachmentRowData()
@@ -149,7 +148,10 @@ public class BulletinAttachmentsController extends FxController
 		File fileToAdd = fileChooser.showOpenDialog(null);
 		if(fileToAdd == null)
 			return;
-		attachmentsProvider.addAttachment(fileToAdd);
+		AttachmentProxy attachmentProxy = new AttachmentProxy(fileToAdd);
+		AttachmentTableRowData newAttachmentRowData = new AttachmentTableRowData(attachmentProxy, getApp().getStore().getDatabase());	
+
+		attachmentsTable.getItems().add(newAttachmentRowData);
 	}
 	
 	@Override
@@ -177,5 +179,4 @@ public class BulletinAttachmentsController extends FxController
 	protected TableColumn<Object, Boolean> removeColumn;
 
 	private FxBulletin bulletin;
-	private AttachmentListProvider attachmentsProvider;
 }

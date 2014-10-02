@@ -42,6 +42,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
+import org.martus.client.swingui.jfx.landing.bulletins.AttachmentTableRowData;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
@@ -50,6 +51,7 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.database.ReadableDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.DropDownFieldSpec;
@@ -73,7 +75,7 @@ public class FxBulletin
 		attachments = FXCollections.observableArrayList();
 	}
 
-	public void copyDataFromBulletin(Bulletin b)
+	public void copyDataFromBulletin(Bulletin b, ReadableDatabase db)
 	{
 		clear();
 		
@@ -98,9 +100,18 @@ public class FxBulletin
 		copyReusableChoiceListsFromBulletinSection(b.getTopSectionFieldSpecs());
 		copyReusableChoiceListsFromBulletinSection(b.getBottomSectionFieldSpecs());
 
-		attachments.addAll(b.getPrivateAttachments());
-		attachments.addAll(b.getPublicAttachments());
-}
+		addAttachmentProxies(b.getPrivateAttachments(), db);
+		addAttachmentProxies(b.getPublicAttachments(), db);
+	}
+	
+	private void addAttachmentProxies(AttachmentProxy[] attachmentsToAdd, ReadableDatabase db)
+	{
+		for (AttachmentProxy attachmentProxy : attachmentsToAdd)
+		{
+			AttachmentTableRowData attachmentRow = new AttachmentTableRowData(attachmentProxy, db);
+			attachments.add(attachmentRow);
+		}
+	}
 
 	public void copyDataToBulletin(Bulletin modified) throws Exception
 	{
@@ -127,7 +138,7 @@ public class FxBulletin
 
 		for(int i = 0; i < attachments.size(); ++i)
 		{
-			AttachmentProxy proxy = attachments.get(i);
+			AttachmentProxy proxy = attachments.get(i).getAttachmentProxy();
 			modified.addPrivateAttachment(proxy);
 		}
 	}
@@ -235,7 +246,7 @@ public class FxBulletin
 		return listOfLists;
 	}
 
-	public ObservableList<AttachmentProxy> getAttachments()
+	public ObservableList<AttachmentTableRowData> getAttachments()
 	{
 		return attachments;
 	}
@@ -402,6 +413,6 @@ public class FxBulletin
 	private ReadOnlyObjectWrapper<BulletinHistory> bulletinHistory;
 
 	private BooleanProperty immutableOnServer;
-	private ObservableList<AttachmentProxy> attachments;
+	private ObservableList<AttachmentTableRowData> attachments;
 
 }
