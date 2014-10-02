@@ -97,19 +97,21 @@ public class BulletinAttachmentsController extends FxController
 	
 	private void viewSelectedAttachment()
 	{
-		if(ViewAttachmentHandler.shouldNotViewAttachmentsInExternalViewer())
-		{
-			showNotifyDialog("ViewAttachmentNotAvailable");
-			return;
-		}
 		AttachmentTableRowData selectedItem = getSelectedAttachmentRowData();
 		if(selectedItem == null)
 		{
 			MartusLogger.log("Attempted to remove Attachment with nothing selected");
 			return;
 		}
-		
 		AttachmentProxy proxy = selectedItem.getAttachmentProxy();
+		//TODO add internal Viewer here
+		
+		
+		if(ViewAttachmentHandler.shouldNotViewAttachmentsInExternalViewer())
+		{
+			showNotifyDialog("ViewAttachmentNotAvailable");
+			return;
+		}
 		try
 		{
 			ViewAttachmentHandler.launchExternalAttachmentViewer(proxy, getApp().getStore());
