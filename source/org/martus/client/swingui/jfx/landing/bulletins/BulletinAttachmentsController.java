@@ -97,6 +97,11 @@ public class BulletinAttachmentsController extends FxController
 	
 	private void viewSelectedAttachment()
 	{
+		if(ViewAttachmentHandler.shouldNotViewAttachmentsInExternalViewer())
+		{
+			showNotifyDialog("ViewAttachmentNotAvailable");
+			return;
+		}
 		AttachmentTableRowData selectedItem = getSelectedAttachmentRowData();
 		if(selectedItem == null)
 		{
@@ -105,11 +110,6 @@ public class BulletinAttachmentsController extends FxController
 		}
 		
 		AttachmentProxy proxy = selectedItem.getAttachmentProxy();
-		if(ViewAttachmentHandler.shouldNotViewAttachmentsInExternalViewer())
-		{
-			showNotifyDialog("ViewAttachmentNotAvailable");
-			return;
-		}
 		try
 		{
 			ViewAttachmentHandler.launchExternalAttachmentViewer(proxy, getApp().getStore());
