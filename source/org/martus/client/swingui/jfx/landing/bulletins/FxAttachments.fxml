@@ -17,7 +17,8 @@
         <columns>
           <TableColumn fx:id="nameColumn" editable="false" maxWidth="800.0" minWidth="300.0" prefWidth="-1.0" text="%Button.attachmentLabel" />
           <TableColumn fx:id="sizeColumn" editable="false" maxWidth="200.0" minWidth="100.0" prefWidth="-1.0" text="%Button.attachmentSize" />
-            <TableColumn fx:id="removeColumn" editable="false" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" sortable="false" text="%Button.removeattachment" />
+            <TableColumn fx:id="viewColumn" maxWidth="-1.0" minWidth="120.0" prefWidth="-1.0" text="%Button.viewattachment" />
+            <TableColumn fx:id="removeColumn" editable="false" maxWidth="-1.0" minWidth="120.0" prefWidth="-1.0" sortable="false" text="%Button.removeattachment" />
         </columns>
       </TableView>
    </center>

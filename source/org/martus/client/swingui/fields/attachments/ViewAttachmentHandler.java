@@ -60,7 +60,7 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		if(panel.isImageInline)
 			return;
 		
-		if(!Utilities.isMSWindows() && !Utilities.isMacintosh() && !UiSession.isAlphaTester)
+		if(shouldNotViewAttachmentInExternalViewer())
 		{
 			getMainWindow().notifyDlg("ViewAttachmentNotAvailable");
 			return;
@@ -90,11 +90,17 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		getMainWindow().resetCursor();
 	}
 
+
 	private void notifyUnableToView()
 	{
 		getMainWindow().notifyDlg("UnableToViewAttachment");
 	}
 	
+	static public boolean shouldNotViewAttachmentInExternalViewer()
+	{
+		return (!Utilities.isMSWindows() && !Utilities.isMacintosh() && !UiSession.isAlphaTester);
+	}
+
 	public static void launchExternalAttachmentViewer(AttachmentProxy proxy, ClientBulletinStore store) throws IOException, InterruptedException, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, InvalidBase64Exception, CryptoException 
 	{
 		File temp = getAttachmentAsFile(proxy, store);

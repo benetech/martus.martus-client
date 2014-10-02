@@ -41,6 +41,7 @@ public class AttachmentTableRowData
 		name = new SimpleStringProperty(attachmentToUse.getLabel());
 		size =  new SimpleStringProperty(getSizeOfAttachment(attachmentToUse, database));
 		remove = new SimpleBooleanProperty(true);
+		view = new SimpleBooleanProperty(true);
 	}
 	
 	private String getSizeOfAttachment(AttachmentProxy attachmentToUse, ReadableDatabase database)
@@ -63,6 +64,11 @@ public class AttachmentTableRowData
         return remove; 
     }
 	
+	public Property<Boolean> viewProperty() 
+    { 
+        return view; 
+    }
+
 	public AttachmentProxy getAttachmentProxy()
 	{
 		return attachmentProxy;
@@ -70,9 +76,11 @@ public class AttachmentTableRowData
 	
 	static public final String ATTACHMENT_NAME_PROPERTY_NAME = "name";
 	static public final String ATTACHMENT_SIZE_PROPERTY_NAME = "size";
+	static public final String ATTACHMENT_VIEW_PROPERTY_NAME = "view";
 	static public final String ATTACHMENT_REMOVE_PROPERTY_NAME = "remove";
 	private SimpleStringProperty name;
 	private SimpleStringProperty size;
+	private SimpleBooleanProperty view;
 	private SimpleBooleanProperty remove;
 	private AttachmentProxy attachmentProxy;
  }
