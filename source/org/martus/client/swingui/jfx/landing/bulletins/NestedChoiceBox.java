@@ -67,6 +67,8 @@ public class NestedChoiceBox extends HBox
 			
 			previous = choiceBox;
 		}
+		
+		hasNestedDropdowns = (lists.size() > 1);
 	}
 
 	public Property<String> valueProperty()
@@ -155,13 +157,20 @@ public class NestedChoiceBox extends HBox
 			String code = choice.getCode();
 			boolean isExactMatch = value.equals(code);
 			boolean startsWith = code.length() > 0 && value.startsWith(code);
-			if(isExactMatch || startsWith)
+			boolean isNestedPartialMatch = hasNestedDropdowns() && startsWith;
+			if(isExactMatch || isNestedPartialMatch)
 			{
 				choiceBox.getSelectionModel().select(choice);
 				return;
 			}
 		}
 	}
+	
+	private boolean hasNestedDropdowns()
+	{
+		return hasNestedDropdowns;
+	}
 
 	private SimpleStringProperty overallValueProperty;
+	private boolean hasNestedDropdowns;
 }
