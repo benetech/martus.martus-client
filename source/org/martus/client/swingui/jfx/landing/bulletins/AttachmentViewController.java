@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,6 +39,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
+import javax.activation.MimetypesFileTypeMap;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.client.swingui.jfx.generic.FxController;
@@ -48,7 +51,16 @@ public class AttachmentViewController extends FxController
 	public AttachmentViewController(UiMainWindow mainWindowToUse, AttachmentProxy proxyToView)
 	{
 		super(mainWindowToUse);
-		attachmentProxy = proxyToView;
+		attachmentFileType = FileType.Unsupported;
+		try
+		{
+			attachmentFileToView = ViewAttachmentHandler.getAttachmentAsFile(proxyToView, getApp().getStore());
+			determineFileType();
+		} 
+		catch (Exception e)
+		{
+			errorLogNotifyAndCleanup(e);
+		} 
 	}
 
 	@Override
@@ -61,40 +73,57 @@ public class AttachmentViewController extends FxController
 		} 
 		catch (Exception e)
 		{
-			logAndNotifyUnexpectedError(e);
+			errorLogNotifyAndCleanup(e);
 		}
+	}
+
+	private void errorLogNotifyAndCleanup(Exception e)
+	{
+		attachmentFileType = FileType.Unsupported;
+		logAndNotifyUnexpectedError(e);
+	}
+
+	public boolean canViewInProgram()
+	{
+		return attachmentFileType != FileType.Unsupported;
+	}
+	
+	private void determineFileType() throws IOException
+	{
+		MimetypesFileTypeMap mimeTypeMap = new MimetypesFileTypeMap();
+		mimeTypeMap.addMimeTypes("html htm html");
+		mimeTypeMap.addMimeTypes("image png tif jpg jpeg bmp");
+		String mimetype = mimeTypeMap.getContentType(attachmentFileToView);
+        String type = mimetype.split("/")[0].toLowerCase();
+        if(type.equals("html"))
+        		attachmentFileType = FileType.HTML;
+        else if(type.equals("image"))
+			attachmentFileType = FileType.Image;
+		else
+			attachmentFileType = FileType.Unsupported;
 	}
 
 	private void addAttachmentToView() throws Exception
 	{
-		File attachmentFileToView = ViewAttachmentHandler.getAttachmentAsFile(attachmentProxy, getApp().getStore());
 		Node view = null;
-		if(isAttachmentHTML(attachmentFileToView))
-			view = getWebView(attachmentFileToView);
+		
+		if(attachmentFileType == FileType.HTML)
+			view = getWebView();
+		else if(attachmentFileType == FileType.Image)
+			view = getImageView();
 		else
-			view = getImageView(attachmentFileToView);
+			return;
 		attachmentStackPane.getChildren().add(view);
 	}
-
-	private boolean isAttachmentHTML(File attachmentFile)
-	{
-		String attachmentName = attachmentFile.getName().toLowerCase();
-		if(attachmentName.endsWith(".htm"))
-			return true;
-		if(attachmentName.endsWith(".html"))
-			return true;
-		return false;
-	}
-
-	private ImageView getImageView(File attachmentFileToView)
-			throws MalformedURLException
+	
+	private ImageView getImageView() throws MalformedURLException
 	{
 		Image attachmentImage = new Image(attachmentFileToView.toURI().toURL().toString());
 		ImageView attachmentView = new ImageView(attachmentImage);
 		return attachmentView;
 	}
 
-	private WebView getWebView(File attachmentFileToView)
+	private WebView getWebView()
 	{
 		WebView webView = new WebView();
 		WebEngine engine = webView.getEngine();
@@ -108,7 +137,11 @@ public class AttachmentViewController extends FxController
 		return "landing/bulletins/AttachmentViewer.fxml";
 	}
 	
+	enum FileType{Unsupported, Image, HTML};
+	
 	@FXML
 	private StackPane attachmentStackPane;
-	private AttachmentProxy attachmentProxy;
+
+	private File attachmentFileToView;
+	private FileType attachmentFileType;
 }
