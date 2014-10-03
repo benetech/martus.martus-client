@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import org.martus.common.ContactKey;
+
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.TableCell;
@@ -62,9 +64,10 @@ public class AuthorVerifiedColumnHandler implements Callback<TableColumn<Bulleti
 		    {
 		    		Integer verified = (Integer)item;
 		    		Image image = null;
-		    		if(verified == BulletinTableRowData.VerifiedContact)
+		    		if(verified == ContactKey.VERIFIED_ACCOUNT_OWNER ||
+		    		   verified == ContactKey.VERIFIED_CONTACT)
 		    			image = new Image(IMAGE_CONTACT_VERIFIED_PATH);
-		    		else if(verified == BulletinTableRowData.NotVerifiedContact)
+		    		else if(verified == ContactKey.NOT_VERIFIED_CONTACT)
 					image = new Image(IMAGE_CONTACT_NOT_VERIFIED_PATH);
 		    		else
 					image = new Image(IMAGE_CONTACT_UNKNOWN_PATH);

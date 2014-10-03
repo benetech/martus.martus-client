@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import org.martus.common.ContactKey;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MockMartusSecurity;
@@ -49,7 +50,7 @@ public class TestBulletinTableData extends TestCaseEnhanced
 		b.set(Bulletin.TAGTITLE, title);
 		b.set(Bulletin.TAGAUTHOR, author);
 		b.getBulletinHeaderPacket().updateLastSavedTime();
-		Integer verifiedAuthor = BulletinTableRowData.VerifiedContact;
+		Integer verifiedAuthor = ContactKey.VERIFIED_ACCOUNT_OWNER;
 		BulletinTableRowData data = new BulletinTableRowData(b, onServer, verifiedAuthor, localization);
 		assertEquals(title, data.getTitle());
 		assertEquals(author, data.getAuthor());

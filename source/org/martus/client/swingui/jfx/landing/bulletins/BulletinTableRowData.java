@@ -127,10 +127,6 @@ public class BulletinTableRowData
     static public final String CAN_EDIT_PROPERTY_NAME = "canEdit";
     static public final String AUTHOR_VERIFIED_PROPERTY_NAME = "authorVerified";
     
-    static public final Integer UnknownContact = 0;
-    static public final Integer VerifiedContact = 1;
-    static public final Integer NotVerifiedContact = 2;
-    
     private final SimpleStringProperty title;
 	private final SimpleStringProperty author;
 	private final SimpleStringProperty dateSaved;

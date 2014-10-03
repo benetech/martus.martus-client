@@ -38,6 +38,7 @@ import org.martus.client.bulletinstore.FolderContentsListener;
 import org.martus.client.swingui.UiMainWindowInterface;
 import org.martus.client.swingui.jfx.generic.data.ArrayObservableList;
 import org.martus.client.swingui.jfx.landing.FolderSelectionListener;
+import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
@@ -129,31 +130,30 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 		// we should just add or remove as needed, instead of 
 		// clearing and re-populating from scratch
 		clear();
-		for(Iterator iter = bulletinUids.iterator(); iter.hasNext();)
+		try
 		{
-			UniversalId leafBulletinUid = (UniversalId) iter.next();
-			BulletinTableRowData bulletinData = getCurrentBulletinData(leafBulletinUid);
-			add(bulletinData);		
+			for(Iterator iter = bulletinUids.iterator(); iter.hasNext();)
+			{
+				UniversalId leafBulletinUid = (UniversalId) iter.next();
+				BulletinTableRowData bulletinData = getCurrentBulletinData(leafBulletinUid);
+				add(bulletinData);		
+			}
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
 		}
 	}
 
-	protected BulletinTableRowData getCurrentBulletinData(UniversalId leafBulletinUid)
+	protected BulletinTableRowData getCurrentBulletinData(UniversalId leafBulletinUid) throws Exception
 	{
 		ClientBulletinStore clientBulletinStore = mainWindow.getStore();
 		Bulletin bulletin = clientBulletinStore.getBulletinRevision(leafBulletinUid);
 		boolean onServer = clientBulletinStore.isProbablyOnServer(leafBulletinUid);
-		Integer authorsValidation = getBulletinAuthorVerification(bulletin.getAccount());
+		Integer authorsValidation = mainWindow.getApp().getKeyVerificationStatus(bulletin.getAccount());
 		MiniLocalization localization = mainWindow.getLocalization();
 		BulletinTableRowData bulletinData = new BulletinTableRowData(bulletin, onServer, authorsValidation, localization);
 		return bulletinData;
-	}
-
-	private Integer getBulletinAuthorVerification(String account)
-	{
-		if(account.equals(mainWindow.getApp().getAccountId()))
-			return BulletinTableRowData.VerifiedContact;
-		//TODO check Contacts
-		return BulletinTableRowData.NotVerifiedContact;
 	}
 
 	protected int findBulletinIndexInTable(UniversalId uid)
@@ -166,7 +166,7 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 		return BULLETIN_NOT_IN_TABLE;
 	}
 
-	public boolean updateBulletin(Bulletin bulletin)
+	public boolean updateBulletin(Bulletin bulletin) throws Exception
 	{
 		boolean shouldReSortTable = false;
 		UniversalId bulletinId = bulletin.getUniversalId();
