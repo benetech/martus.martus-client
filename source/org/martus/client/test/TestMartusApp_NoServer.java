@@ -1380,10 +1380,36 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("Should now have 0 contacts", 0, keysReturned4.size());
 		assertEquals("Should have 0 HQs", 0, appWithAccount.getAllHQKeys().size());
 		assertEquals("Should have 0 FDs", 0, appWithAccount.getFieldDeskKeys().size());
-		
-		
 	}
 
+	public void testGetKeyVerificationStatus() throws Exception
+	{
+		assertEquals(ContactKey.VERIFIED_ACCOUNT_OWNER ,appWithAccount.getKeyVerificationStatus(appWithAccount.getAccountId()));
+
+		File configFile = appWithAccount.getConfigInfoFile();
+		configFile.deleteOnExit();
+		String sampleHQPublicKeyNotVerified = "HQ";
+		String sampleHQPublicKeyVerified20 = "HQ Verified 20";
+		String sampleHQPublicKeyVerifiedVisually = "HQ Verified Visually";
+		ContactKeys keys = new ContactKeys();
+		ContactKey hqKeyNotVerified = new ContactKey(sampleHQPublicKeyNotVerified, "Not Verified");
+		hqKeyNotVerified.setVerificationStatus(ContactKey.NOT_VERIFIED);
+		ContactKey hqKeyVerified20 = new ContactKey(sampleHQPublicKeyVerified20, "Verified 20");
+		hqKeyVerified20.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
+		ContactKey hqKeyVerifiedVisually = new ContactKey(sampleHQPublicKeyVerifiedVisually, "Verified Visually");
+		hqKeyVerifiedVisually.setVerificationStatus(ContactKey.VERIFIED_VISUALLY);
+		keys.add(hqKeyNotVerified);
+		keys.add(hqKeyVerified20);
+		keys.add(hqKeyVerifiedVisually);		
+		appWithAccount.setContactKeys(keys);
+		
+		assertEquals(ContactKey.NOT_VERIFIED_CONTACT ,appWithAccount.getKeyVerificationStatus(hqKeyNotVerified.getPublicKey()));
+		assertEquals(ContactKey.VERIFIED_CONTACT ,appWithAccount.getKeyVerificationStatus(hqKeyVerified20.getPublicKey()));
+		assertEquals(ContactKey.VERIFIED_CONTACT ,appWithAccount.getKeyVerificationStatus(hqKeyVerifiedVisually.getPublicKey()));
+
+		ContactKey unknownContactKey = new ContactKey("Unknown", "Not Verified");
+		assertEquals(ContactKey.NOT_VERIFIED_UNKNOWN_CONTACT ,appWithAccount.getKeyVerificationStatus(unknownContactKey.getPublicKey()));
+	}
 	
 	public void testSetAndGetHQKey() throws Exception
 	{

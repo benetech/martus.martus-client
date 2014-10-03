@@ -304,6 +304,24 @@ public class MartusApp
 		ContactKeys allContacts = new ContactKeys(configInfo.getContactKeysXml());
 		return allContacts;
 	}
+	
+	public Integer getKeyVerificationStatus(String publicKeyToCheck) throws Exception
+	{
+		if(publicKeyToCheck.equals(getAccountId()))
+				return ContactKey.VERIFIED_ACCOUNT_OWNER;
+		ContactKeys contacts = getContactKeys();
+		for(int i = 0; i < contacts.size(); ++i)
+		{
+			ContactKey key = contacts.get(i);
+			if(publicKeyToCheck.equals(key.getPublicKey()))
+			{
+				if(key.getVerificationStatus() == ContactKey.NOT_VERIFIED)
+					return ContactKey.NOT_VERIFIED_CONTACT;
+				return ContactKey.VERIFIED_CONTACT;
+			}
+		}
+		return ContactKey.NOT_VERIFIED_UNKNOWN_CONTACT;
+	}
 
 	public void setContactKeys(ContactKeys newContactKeys) throws SaveConfigInfoException 
 	{
