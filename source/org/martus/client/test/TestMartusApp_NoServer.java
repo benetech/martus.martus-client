@@ -1404,8 +1404,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		appWithAccount.setContactKeys(keys);
 		
 		assertEquals(ContactKey.NOT_VERIFIED_CONTACT ,appWithAccount.getKeyVerificationStatus(hqKeyNotVerified.getPublicKey()));
-		assertEquals(ContactKey.VERIFIED_CONTACT ,appWithAccount.getKeyVerificationStatus(hqKeyVerified20.getPublicKey()));
-		assertEquals(ContactKey.VERIFIED_CONTACT ,appWithAccount.getKeyVerificationStatus(hqKeyVerifiedVisually.getPublicKey()));
+		assertEquals(ContactKey.VERIFIED_CONTACT_ENTERED_20_DIGITS ,appWithAccount.getKeyVerificationStatus(hqKeyVerified20.getPublicKey()));
+		assertEquals(ContactKey.VERIFIED_CONTACT_VISUALLY ,appWithAccount.getKeyVerificationStatus(hqKeyVerifiedVisually.getPublicKey()));
 
 		ContactKey unknownContactKey = new ContactKey("Unknown", "Not Verified");
 		assertEquals(ContactKey.NOT_VERIFIED_UNKNOWN_CONTACT ,appWithAccount.getKeyVerificationStatus(unknownContactKey.getPublicKey()));

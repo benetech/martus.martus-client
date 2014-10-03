@@ -65,7 +65,8 @@ public class AuthorVerifiedColumnHandler implements Callback<TableColumn<Bulleti
 		    		Integer verified = (Integer)item;
 		    		Image image = null;
 		    		if(verified == ContactKey.VERIFIED_ACCOUNT_OWNER ||
-		    		   verified == ContactKey.VERIFIED_CONTACT)
+		    		   verified == ContactKey.VERIFIED_CONTACT_VISUALLY ||
+		    		   verified == ContactKey.VERIFIED_CONTACT_ENTERED_20_DIGITS)
 		    			image = new Image(IMAGE_CONTACT_VERIFIED_PATH);
 		    		else if(verified == ContactKey.NOT_VERIFIED_CONTACT)
 					image = new Image(IMAGE_CONTACT_NOT_VERIFIED_PATH);
