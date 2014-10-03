@@ -54,6 +54,7 @@ public class AttachmentViewController extends FxController
 		try
 		{
 			attachmentFileToView = ViewAttachmentHandler.getAttachmentAsFile(proxyToView, getApp().getStore());
+			attachmentFileType = determineFileType(attachmentFileToView);
 		} 
 		catch (Exception e)
 		{
@@ -77,14 +78,7 @@ public class AttachmentViewController extends FxController
 
 	public boolean canViewInProgram()
 	{
-		try
-		{
-			return determineFileType(attachmentFileToView) != FileType.Unsupported;
-		} 
-		catch (IOException e)
-		{
-			return false;
-		}
+		return attachmentFileType != FileType.Unsupported;
 	}
 	
 	static public FileType determineFileType(File file) throws IOException
@@ -103,24 +97,11 @@ public class AttachmentViewController extends FxController
 
 	private void addAttachmentToView() throws Exception
 	{
-		Node view = null;
-		FileType attachmentFileType = determineFileType(attachmentFileToView);
-		if(attachmentFileType == FileType.HTML)
-			view = getWebView();
-		else if(attachmentFileType == FileType.Image)
-			view = getImageView();
-		else
-			return;
-		attachmentStackPane.getChildren().add(view);
+		if(attachmentFileType == FileType.HTML || 
+				attachmentFileType == FileType.Image)
+			attachmentStackPane.getChildren().add(getWebView());
 	}
 	
-	private ImageView getImageView() throws MalformedURLException
-	{
-		Image attachmentImage = new Image(attachmentFileToView.toURI().toURL().toString());
-		ImageView attachmentView = new ImageView(attachmentImage);
-		return attachmentView;
-	}
-
 	private WebView getWebView()
 	{
 		WebView webView = new WebView();
@@ -141,4 +122,5 @@ public class AttachmentViewController extends FxController
 	private StackPane attachmentStackPane;
 
 	private File attachmentFileToView;
+	private FileType attachmentFileType;
 }
