@@ -321,10 +321,10 @@ public class MartusApp
 					return ContactKey.VERIFIED_CONTACT_ENTERED_20_DIGITS;
 				else if(key.getVerificationStatus() == ContactKey.VERIFIED_VISUALLY)
 					return ContactKey.VERIFIED_CONTACT_VISUALLY;
-				return ContactKey.NOT_VERIFIED_UNKNOWN_CONTACT;	
+				return ContactKey.NOT_VERIFIED_UNKNOWN;	
 			}
 		}
-		return ContactKey.NOT_VERIFIED_UNKNOWN_CONTACT;
+		return ContactKey.NOT_VERIFIED_UNKNOWN;
 	}
 
 	public void setContactKeys(ContactKeys newContactKeys) throws SaveConfigInfoException 
