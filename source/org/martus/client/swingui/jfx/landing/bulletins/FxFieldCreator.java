@@ -25,12 +25,15 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import java.time.LocalDate;
 import java.util.Vector;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.Property;
+import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
@@ -44,6 +47,7 @@ import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MessageFieldSpec;
+import org.martus.util.MultiCalendar;
 
 public class FxFieldCreator
 {
@@ -72,12 +76,26 @@ public class FxFieldCreator
 
 	private Node createDateField(Property<String> property, FieldSpec spec)
 	{
-		return createFieldNotAvailable();
-		// FIXME: The following is spike code which will either become real, or be deleted
-//		DatePicker picker = new DatePicker();
-//		picker.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
-//		picker.getStylesheets().add("org/martus/client/swingui/jfx/generic/controls/DatePicker.css");
-//		return picker;
+		DatePicker picker = new DatePicker();
+
+		String existingDateString = property.getValue();
+		MultiCalendar multiCalendar = MultiCalendar.createFromIsoDateString(existingDateString);
+		if(multiCalendar.isUnknown())
+			existingDateString = "";
+		
+		if(!existingDateString.isEmpty())
+		{
+			LocalDate existingDate = LocalDate.parse(existingDateString);
+			picker.setValue(existingDate);
+		}
+		StringProperty textProperty = picker.editorProperty().getValue().textProperty();
+		textProperty.addListener((observable, oldValue, newValue) -> property.setValue(getIsoDate(picker)));
+		return picker;
+	}
+	
+	private String getIsoDate(DatePicker picker)
+	{
+		return picker.getValue().toString();
 	}
 
 	private Node createDropdownField(FxBulletin bulletin, Property<String> property, FieldSpec rawSpec) throws Exception

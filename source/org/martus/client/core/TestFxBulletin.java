@@ -51,8 +51,11 @@ import org.martus.common.database.MockClientDatabase;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
+import org.martus.common.fieldspec.DataInvalidException;
+import org.martus.common.fieldspec.DateFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.RequiredFieldIsBlankException;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHistory;
@@ -74,6 +77,21 @@ public class TestFxBulletin extends TestCaseEnhanced
 		security = MockMartusSecurity.createClient();
 		localization = new MiniLocalization();
 		db = new MockClientDatabase();
+	}
+	
+	public void testHasBeenValidated() throws Exception
+	{
+		FxBulletin fxb = new FxBulletin(getLocalization());
+		assertFalse("Brand new bulletin was already validated?", fxb.hasBeenValidatedProperty().getValue());
+		
+		Bulletin b = new BulletinForTesting(security);
+		fxb.copyDataFromBulletin(b, db);
+		assertFalse("New loaded bulletin was already validated?", fxb.hasBeenValidatedProperty().getValue());
+		fxb.validateData();
+		assertTrue("Validate didn't set the property?", fxb.hasBeenValidatedProperty().getValue());
+
+		fxb.copyDataFromBulletin(b, db);
+		assertFalse("Load didn't reset the property?", fxb.hasBeenValidatedProperty().getValue());
 	}
 	
 	public void testAttachments() throws Exception
@@ -255,8 +273,43 @@ public class TestFxBulletin extends TestCaseEnhanced
 		fxb2.copyDataToBulletin(result2);
 		assertFalse("After a bulletin has this flag set it can be unset", result2.getImmutableOnServer());
 	}
+	
+	public void testValidateDateMinMax() throws Exception
+	{
+		FxBulletin fxb = new FxBulletin(getLocalization());
+		Bulletin b = new BulletinForTesting(security);
+		fxb.copyDataFromBulletin(b, db);
+		Vector<FieldSpec> specs = fxb.getFieldSpecs();
 
-	public void testValidate() throws Exception
+		DateFieldSpec spec = (DateFieldSpec) new FieldTypeDate().createEmptyFieldSpec();
+		spec.setTag("CustomDateField");
+		spec.setLabel("Custom date field");
+		spec.setMinimumDate("2014-01-01");
+		spec.setMaximumDate("2014-12-31");
+		specs.add(spec);
+		
+		FxBulletin.validateField(spec, "", localization);
+		FxBulletin.validateField(spec, "2014-07-01", localization);
+		try
+		{
+			FxBulletin.validateField(spec, "2013-12-31", localization);
+			throw new Exception("Should have failed for blank date earlier than acceptable range");
+		}
+		catch(DataInvalidException ignoreExpected)
+		{
+		}
+
+		try
+		{
+			FxBulletin.validateField(spec, "2015-01-01", localization);
+			throw new Exception("Should have failed for blank date later than acceptable range");
+		}
+		catch(DataInvalidException ignoreExpected)
+		{
+		}
+	}
+
+	public void testValidateRequiredField() throws Exception
 	{
 		String tag = Bulletin.TAGAUTHOR;
 

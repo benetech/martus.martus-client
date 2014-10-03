@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringProperty;
@@ -73,6 +74,7 @@ public class FxBulletin
 		fieldProperties = new HashMap<String, SimpleStringProperty>();
 		fieldValidators = new HashMap<String, FieldValidator>();
 		attachments = FXCollections.observableArrayList();
+		hasBeenValidatedProperty = new SimpleBooleanProperty();
 	}
 
 	public void copyDataFromBulletin(Bulletin b, ReadableDatabase db)
@@ -168,6 +170,11 @@ public class FxBulletin
 		return bulletinLocalId;
 	}
 
+	public ReadOnlyBooleanProperty hasBeenValidatedProperty()
+	{
+		return hasBeenValidatedProperty;
+	}
+
 	public Vector<FieldSpec> getFieldSpecs()
 	{
 		Vector<FieldSpec> specs = new Vector<FieldSpec>();
@@ -258,6 +265,8 @@ public class FxBulletin
 
 	public void validateData() throws DataInvalidException
 	{
+		hasBeenValidatedProperty.setValue(true);
+
 		for(int i = 0; i < fieldSpecs.size(); ++i)
 		{
 			FieldSpec spec = fieldSpecs.get(i);
@@ -275,7 +284,7 @@ public class FxBulletin
 	private static void validateField(FieldSpec spec, String displayableLabel, String fieldDataValue, MiniLocalization localization) throws DataInvalidException
 	{
 		FieldType type = spec.getType();
-		if(type.isGrid() || type.isDate() || type.isDateRange())
+		if(type.isGrid() || type.isDateRange())
 		{
 			MartusLogger.logError("******* Validation not handled yet for " + type.getTypeName());
 			return;
@@ -286,6 +295,7 @@ public class FxBulletin
 	private void clear()
 	{
 		hasBeenModified = false;
+		hasBeenValidatedProperty.setValue(false);
 		
 		if(universalIdProperty != null)
 		{
@@ -401,6 +411,7 @@ public class FxBulletin
 
 	private MiniLocalization localization;
 	private boolean hasBeenModified;
+	private SimpleBooleanProperty hasBeenValidatedProperty;
 	
 	private HashMap<String, SimpleStringProperty> fieldProperties;
 	private HashMap<String, FieldValidator> fieldValidators;
@@ -414,5 +425,4 @@ public class FxBulletin
 
 	private BooleanProperty immutableOnServer;
 	private ObservableList<AttachmentTableRowData> attachments;
-
 }
