@@ -25,7 +25,10 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.binding.When;
+import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.Node;
@@ -102,7 +105,11 @@ public class BulletinEditorRow
 		// FIXME: This really should be done with a listener that updates the css style class, 
 		// and then calls applyCss(), but I'm not sure how to replace one style with another.
 		// So for now, this will have to do. 
-		node.styleProperty().bind(new When(isValidProperty).then("").otherwise("-fx-border-color: red;"));
+		
+		BooleanBinding isFieldInvalid = Bindings.not(isValidProperty);
+		ReadOnlyBooleanProperty hasUserSaved = bulletin.hasBeenValidatedProperty();
+		BooleanBinding showBorder = Bindings.and(isFieldInvalid, hasUserSaved);
+		node.styleProperty().bind(new When(showBorder).then("-fx-border-color: red;").otherwise(""));
 	}
 
 	public HBox getLabelDestination()

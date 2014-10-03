@@ -76,6 +76,21 @@ public class TestFxBulletin extends TestCaseEnhanced
 		db = new MockClientDatabase();
 	}
 	
+	public void testHasBeenValidated() throws Exception
+	{
+		FxBulletin fxb = new FxBulletin(getLocalization());
+		assertFalse("Brand new bulletin was already validated?", fxb.hasBeenValidatedProperty().getValue());
+		
+		Bulletin b = new BulletinForTesting(security);
+		fxb.copyDataFromBulletin(b, db);
+		assertFalse("New loaded bulletin was already validated?", fxb.hasBeenValidatedProperty().getValue());
+		fxb.validateData();
+		assertTrue("Validate didn't set the property?", fxb.hasBeenValidatedProperty().getValue());
+
+		fxb.copyDataFromBulletin(b, db);
+		assertFalse("Load didn't reset the property?", fxb.hasBeenValidatedProperty().getValue());
+	}
+	
 	public void testAttachments() throws Exception
 
 	{	
