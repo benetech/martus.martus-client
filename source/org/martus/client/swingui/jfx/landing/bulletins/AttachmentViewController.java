@@ -51,15 +51,13 @@ public class AttachmentViewController extends FxController
 	public AttachmentViewController(UiMainWindow mainWindowToUse, AttachmentProxy proxyToView)
 	{
 		super(mainWindowToUse);
-		attachmentFileType = FileType.Unsupported;
 		try
 		{
 			attachmentFileToView = ViewAttachmentHandler.getAttachmentAsFile(proxyToView, getApp().getStore());
-			determineFileType();
 		} 
 		catch (Exception e)
 		{
-			errorLogNotifyAndCleanup(e);
+			logAndNotifyUnexpectedError(e);
 		} 
 	}
 
@@ -73,40 +71,40 @@ public class AttachmentViewController extends FxController
 		} 
 		catch (Exception e)
 		{
-			errorLogNotifyAndCleanup(e);
+			logAndNotifyUnexpectedError(e);
 		}
-	}
-
-	private void errorLogNotifyAndCleanup(Exception e)
-	{
-		attachmentFileType = FileType.Unsupported;
-		logAndNotifyUnexpectedError(e);
 	}
 
 	public boolean canViewInProgram()
 	{
-		return attachmentFileType != FileType.Unsupported;
+		try
+		{
+			return determineFileType(attachmentFileToView) != FileType.Unsupported;
+		} 
+		catch (IOException e)
+		{
+			return false;
+		}
 	}
 	
-	private void determineFileType() throws IOException
+	static public FileType determineFileType(File file) throws IOException
 	{
 		MimetypesFileTypeMap mimeTypeMap = new MimetypesFileTypeMap();
 		mimeTypeMap.addMimeTypes("html htm html");
 		mimeTypeMap.addMimeTypes("image png tif jpg jpeg bmp");
-		String mimetype = mimeTypeMap.getContentType(attachmentFileToView);
+		String mimetype = mimeTypeMap.getContentType(file);
         String type = mimetype.split("/")[0].toLowerCase();
         if(type.equals("html"))
-        		attachmentFileType = FileType.HTML;
+        		return FileType.HTML;
         else if(type.equals("image"))
-			attachmentFileType = FileType.Image;
-		else
-			attachmentFileType = FileType.Unsupported;
+			return FileType.Image;
+		return FileType.Unsupported;
 	}
 
 	private void addAttachmentToView() throws Exception
 	{
 		Node view = null;
-		
+		FileType attachmentFileType = determineFileType(attachmentFileToView);
 		if(attachmentFileType == FileType.HTML)
 			view = getWebView();
 		else if(attachmentFileType == FileType.Image)
@@ -143,5 +141,4 @@ public class AttachmentViewController extends FxController
 	private StackPane attachmentStackPane;
 
 	private File attachmentFileToView;
-	private FileType attachmentFileType;
 }
