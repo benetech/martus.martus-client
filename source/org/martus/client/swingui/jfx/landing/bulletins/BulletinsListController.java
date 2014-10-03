@@ -106,6 +106,8 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	{
 		onServerColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, Boolean>(BulletinTableRowData.ON_SERVER_PROPERTY_NAME));
 		onServerColumn.setCellFactory(new BulletinOnServerColumnHandler());
+		authorVerifiedColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, Integer>(BulletinTableRowData.AUTHOR_VERIFIED_PROPERTY_NAME));
+		authorVerifiedColumn.setCellFactory(new AuthorVerifiedColumnHandler());
 		authorColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.AUTHOR_PROPERTY_NAME));
 		authorColumn.setCellFactory(TextFieldTableCell.<BulletinTableRowData>forTableColumn());
 		titleColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.TITLE_PROPERTY_NAME));
@@ -514,6 +516,9 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	@FXML
 	protected TableColumn<BulletinTableRowData, Boolean> onServerColumn;
+
+	@FXML
+	protected TableColumn<BulletinTableRowData, Integer> authorVerifiedColumn;
 
 	@FXML
 	protected TableColumn<BulletinTableRowData, String> authorColumn;

@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import org.martus.common.MiniLocalization;
@@ -35,7 +36,7 @@ import org.martus.common.packet.UniversalId;
 
 public class BulletinTableRowData
 {
-	public BulletinTableRowData(Bulletin bulletin, boolean onServer, MiniLocalization localization)
+	public BulletinTableRowData(Bulletin bulletin, boolean onServer, Integer authorsValidation, MiniLocalization localization)
 	{
 		uid = bulletin.getUniversalId();
 		title = new SimpleStringProperty(bulletin.get(Bulletin.TAGTITLE));
@@ -45,6 +46,7 @@ public class BulletinTableRowData
 		this.onServer = new SimpleBooleanProperty(onServer);
 		canView = new SimpleBooleanProperty(true);
 		canEdit = new SimpleBooleanProperty(true);
+		authorVerified = new SimpleIntegerProperty(authorsValidation);
 	}
 	
 	public UniversalId getUniversalId()
@@ -92,6 +94,11 @@ public class BulletinTableRowData
     		return onServer;
     }
 
+    public SimpleIntegerProperty authorVerifiedProperty() 
+    {
+    		return authorVerified;
+    }
+
     public Boolean getCanView()
 	{
 		return canViewProperty().getValue();
@@ -118,6 +125,11 @@ public class BulletinTableRowData
     static public final String ON_SERVER_PROPERTY_NAME = "onServer";
     static public final String CAN_VIEW_PROPERTY_NAME = "canView";
     static public final String CAN_EDIT_PROPERTY_NAME = "canEdit";
+    static public final String AUTHOR_VERIFIED_PROPERTY_NAME = "authorVerified";
+    
+    static public final Integer UnknownContact = 0;
+    static public final Integer VerifiedContact = 1;
+    static public final Integer NotVerifiedContact = 2;
     
     private final SimpleStringProperty title;
 	private final SimpleStringProperty author;
@@ -125,6 +137,7 @@ public class BulletinTableRowData
 	private final SimpleBooleanProperty onServer;
 	private final SimpleBooleanProperty canView;
 	private final SimpleBooleanProperty canEdit;
+	private final SimpleIntegerProperty authorVerified;
 	
 	private final UniversalId uid;
 }
