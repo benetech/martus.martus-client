@@ -42,6 +42,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import org.martus.client.core.FxBulletin;
+import org.martus.client.swingui.jfx.generic.controls.DateRangePicker;
 import org.martus.client.swingui.jfx.generic.controls.NestedChoiceBox;
 import org.martus.client.swingui.jfx.generic.controls.ScrollFreeTextArea;
 import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
@@ -72,6 +73,9 @@ public class FxFieldCreator
 		if(spec.getType().isDate())
 			return createDateField(property, spec);
 		
+		if(spec.getType().isDateRange())
+			return createDateRangeField(property, spec);
+		
 		return createFieldNotAvailable();
 	}
 
@@ -91,6 +95,17 @@ public class FxFieldCreator
 		}
 		StringProperty textProperty = picker.editorProperty().getValue().textProperty();
 		textProperty.addListener((observable, oldValue, newValue) -> property.setValue(getIsoDate(picker)));
+		return picker;
+	}
+	
+	private Node createDateRangeField(Property<String> property, FieldSpec rawSpec)
+	{
+		DateRangePicker picker = new DateRangePicker();
+
+		String existingDateRangeString = property.getValue();
+		picker.setValue(existingDateRangeString);
+		property.bind(picker.valueProperty());
+		
 		return picker;
 	}
 	

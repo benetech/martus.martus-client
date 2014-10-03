@@ -284,7 +284,7 @@ public class FxBulletin
 	private static void validateField(FieldSpec spec, String displayableLabel, String fieldDataValue, MiniLocalization localization) throws DataInvalidException
 	{
 		FieldType type = spec.getType();
-		if(type.isGrid() || type.isDateRange())
+		if(type.isGrid())
 		{
 			MartusLogger.logError("******* Validation not handled yet for " + type.getTypeName());
 			return;
