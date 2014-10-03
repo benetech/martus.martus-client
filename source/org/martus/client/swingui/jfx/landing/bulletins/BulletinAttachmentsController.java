@@ -127,8 +127,10 @@ public class BulletinAttachmentsController extends FxController
 
 	private boolean viewAttachmentInternally(AttachmentProxy proxy)
 	{
-		//TODO check file type and only view internally if Image / Web / (maybe audio/video)
 		AttachmentViewController attachmentViewer = new AttachmentViewController(getMainWindow(), proxy);
+		if(!attachmentViewer.canViewInProgram())
+			return false;
+		
 		showDialogWithClose("ViewAttachment", attachmentViewer);
 		return true;
 	}
