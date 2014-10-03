@@ -142,9 +142,18 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 		ClientBulletinStore clientBulletinStore = mainWindow.getStore();
 		Bulletin bulletin = clientBulletinStore.getBulletinRevision(leafBulletinUid);
 		boolean onServer = clientBulletinStore.isProbablyOnServer(leafBulletinUid);
+		Integer authorsValidation = getBulletinAuthorVerification(bulletin.getAccount());
 		MiniLocalization localization = mainWindow.getLocalization();
-		BulletinTableRowData bulletinData = new BulletinTableRowData(bulletin, onServer, localization);
+		BulletinTableRowData bulletinData = new BulletinTableRowData(bulletin, onServer, authorsValidation, localization);
 		return bulletinData;
+	}
+
+	private Integer getBulletinAuthorVerification(String account)
+	{
+		if(account.equals(mainWindow.getApp().getAccountId()))
+			return BulletinTableRowData.VerifiedContact;
+		//TODO check Contacts
+		return BulletinTableRowData.NotVerifiedContact;
 	}
 
 	protected int findBulletinIndexInTable(UniversalId uid)

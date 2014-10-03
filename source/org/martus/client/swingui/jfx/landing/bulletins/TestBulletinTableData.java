@@ -49,11 +49,13 @@ public class TestBulletinTableData extends TestCaseEnhanced
 		b.set(Bulletin.TAGTITLE, title);
 		b.set(Bulletin.TAGAUTHOR, author);
 		b.getBulletinHeaderPacket().updateLastSavedTime();
-		BulletinTableRowData data = new BulletinTableRowData(b, onServer, localization);
+		Integer verifiedAuthor = BulletinTableRowData.VerifiedContact;
+		BulletinTableRowData data = new BulletinTableRowData(b, onServer, verifiedAuthor, localization);
 		assertEquals(title, data.getTitle());
 		assertEquals(author, data.getAuthor());
 		long lastSavedTime = b.getBulletinHeaderPacket().getLastSavedTime();
 		assertEquals(localization.formatDateTime(lastSavedTime), data.getDateSaved());
 		assertEquals(onServer, data.isOnServer());
+		assertEquals(verifiedAuthor, data.authorVerifiedProperty().getValue());
 	}
 }
