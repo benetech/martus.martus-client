@@ -42,6 +42,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import org.martus.client.core.FxBulletin;
+import org.martus.client.swingui.jfx.generic.controls.NestedChoiceBox;
 import org.martus.client.swingui.jfx.generic.controls.ScrollFreeTextArea;
 import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
