@@ -1408,7 +1408,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals(ContactKey.VERIFIED_CONTACT_VISUALLY ,appWithAccount.getKeyVerificationStatus(hqKeyVerifiedVisually.getPublicKey()));
 
 		ContactKey unknownContactKey = new ContactKey("Unknown", "Not Verified");
-		assertEquals(ContactKey.NOT_VERIFIED_UNKNOWN_CONTACT ,appWithAccount.getKeyVerificationStatus(unknownContactKey.getPublicKey()));
+		assertEquals(ContactKey.NOT_VERIFIED_UNKNOWN ,appWithAccount.getKeyVerificationStatus(unknownContactKey.getPublicKey()));
 	}
 	
 	public void testSetAndGetHQKey() throws Exception
