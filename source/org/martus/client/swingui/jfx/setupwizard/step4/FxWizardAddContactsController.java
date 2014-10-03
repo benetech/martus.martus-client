@@ -306,21 +306,17 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			    	}
 			}
 			
-			private String getVerificationStatusLabel(int verificationStatusCode)
+			private String getVerificationStatusLabel(Integer verificationStatusCode)
 			{
 				String statusCode = null;
-				switch (verificationStatusCode)
-				{
-					case  ContactKey.NOT_VERIFIED:
-						statusCode = localization.getFieldLabel("ContactVerifyNow");
-						break;
-					case  ContactKey.VERIFIED_ENTERED_20_DIGITS:
-					case  ContactKey.VERIFIED_VISUALLY:
-						statusCode = localization.getFieldLabel("ContactVerified");
-						break;
-					default :
-						statusCode = "?";
-				}
+				if (verificationStatusCode == ContactKey.NOT_VERIFIED)
+					statusCode = localization.getFieldLabel("ContactVerifyNow");
+				else if (verificationStatusCode == ContactKey.VERIFIED_ENTERED_20_DIGITS
+						|| verificationStatusCode == ContactKey.VERIFIED_VISUALLY)
+					statusCode = localization.getFieldLabel("ContactVerified");
+				else
+					statusCode = "?";
+				
 				return statusCode;
 			}
 			
