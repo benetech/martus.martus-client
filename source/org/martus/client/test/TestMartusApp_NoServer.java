@@ -1644,7 +1644,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("We should still only have 2 HQ accounts", 2, returnedKeysAfterAddingH1andH2asBothHQandDefault.size());
 		HeadquartersKey testKey = returnedKeysAfterAddingH1andH2asBothHQandDefault.get(0);
 		assertEquals("Key1 Label not correct?",sampleLabel1, testKey.getLabel());
-		assertEquals("Key1 should not be verified", ContactKey.NOT_VERIFIED, testKey.getVerificationStatus());
+		assertEquals("Key1 should not be verified", ContactKey.NOT_VERIFIED_UNKNOWN, testKey.getVerificationStatus());
 		assertTrue("HQ Key1 Can't Receive From", testKey.getCanReceiveFrom());
 		assertTrue("HQ Key1 Can't Send To?", testKey.getCanSendTo());
 
@@ -1773,7 +1773,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("We should only have 2 FD accounts", 2, returnedKeysAfterAddingBothFDs.size());
 		FieldDeskKey testKey = returnedKeysAfterAddingBothFDs.get(0);
 		assertEquals("Key1 Label not correct?",sampleLabel1, testKey.getLabel());
-		assertEquals("Key1 should not be verified", ContactKey.NOT_VERIFIED, testKey.getVerificationStatus());
+		assertEquals("Key1 should not be verified", ContactKey.NOT_VERIFIED_UNKNOWN, testKey.getVerificationStatus());
 		assertTrue("FD Key1 Can't Receive From", testKey.getCanReceiveFrom());
 		assertTrue("FD Key1 Can't Send To?", testKey.getCanSendTo());
 		String newLabel1 = "Flinstone";
