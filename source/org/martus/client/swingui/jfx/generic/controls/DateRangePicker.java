@@ -86,7 +86,7 @@ public class DateRangePicker extends HBox
 		endPicker.setValue(date);
 	}
 	
-	private LocalDate getLocalDate(MultiCalendar baseDate)
+	public static LocalDate getLocalDate(MultiCalendar baseDate)
 	{
 		if(baseDate.isUnknown())
 			return null;
@@ -120,7 +120,7 @@ public class DateRangePicker extends HBox
 		return value;
 	}
 
-	public MultiCalendar convertLocalDateToMultiCalendar(LocalDate localDate)
+	public static MultiCalendar convertLocalDateToMultiCalendar(LocalDate localDate)
 	{
 		int year = localDate.getYear();
 		int month = localDate.getMonthValue();
