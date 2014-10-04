@@ -84,14 +84,6 @@ public class DateRangePicker extends HBox
 		endPicker.setValue(date);
 	}
 	
-	public static LocalDate getLocalDate(MultiCalendar baseDate)
-	{
-		if(baseDate.isUnknown())
-			return null;
-		
-		return LocalDate.parse(baseDate.toIsoDateString());
-	}
-
 	private void updateOverallValue()
 	{
 		LocalDate startLocalDate = startPicker.getValue();
@@ -112,18 +104,10 @@ public class DateRangePicker extends HBox
 		if(startLocalDate == null)
 			return "";
 		
-		final MultiCalendar beginDate = convertLocalDateToMultiCalendar(startLocalDate);
-		final MultiCalendar endDate = convertLocalDateToMultiCalendar(endLocalDate);
+		final MultiCalendar beginDate = MartusDatePicker.convertLocalDateToMultiCalendar(startLocalDate);
+		final MultiCalendar endDate = MartusDatePicker.convertLocalDateToMultiCalendar(endLocalDate);
 		String value = MartusFlexidate.toBulletinFlexidateFormat(beginDate, endDate);
 		return value;
-	}
-
-	public static MultiCalendar convertLocalDateToMultiCalendar(LocalDate localDate)
-	{
-		int year = localDate.getYear();
-		int month = localDate.getMonthValue();
-		int day = localDate.getDayOfMonth();
-		return MultiCalendar.createFromGregorianYearMonthDay(year, month, day);
 	}
 
 	private SimpleStringProperty overallValueProperty;

@@ -53,7 +53,7 @@ public class MartusDatePicker extends DatePicker
 			return null;
 		
 		MultiCalendar multiCalendar = MultiCalendar.createFromIsoDateString(existingDateString);
-		return DateRangePicker.getLocalDate(multiCalendar);
+		return MartusDatePicker.getLocalDate(multiCalendar);
 	}
 	
 	public ReadOnlyStringProperty overallValueProperty()
@@ -73,8 +73,24 @@ public class MartusDatePicker extends DatePicker
 		if(localDate == null)
 			return "";
 		
-		MultiCalendar multiCalendar = DateRangePicker.convertLocalDateToMultiCalendar(localDate);
+		MultiCalendar multiCalendar = MartusDatePicker.convertLocalDateToMultiCalendar(localDate);
 		return multiCalendar.toIsoDateString();
+	}
+
+	public static LocalDate getLocalDate(MultiCalendar baseDate)
+	{
+		if(baseDate.isUnknown())
+			return null;
+		
+		return LocalDate.parse(baseDate.toIsoDateString());
+	}
+
+	public static MultiCalendar convertLocalDateToMultiCalendar(LocalDate localDate)
+	{
+		int year = localDate.getYear();
+		int month = localDate.getMonthValue();
+		int day = localDate.getDayOfMonth();
+		return MultiCalendar.createFromGregorianYearMonthDay(year, month, day);
 	}
 
 	private SimpleStringProperty overallValueProperty;
