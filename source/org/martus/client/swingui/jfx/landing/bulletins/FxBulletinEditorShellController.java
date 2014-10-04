@@ -63,7 +63,6 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 		super(mainWindowToUse);
 	
 		parentDialog = parentDialogToUse;
-		fxBulletin = new FxBulletin(getLocalization());
 	}
 	
 	@Override
@@ -115,6 +114,9 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	
 	private void copyDataFromBulletinOnFxThread(Bulletin bulletinToShow) throws RuntimeException
 	{
+		// NOTE: We have to create a new fxb each time, because the old one 
+		// was probably bound to a bunch of controls, and we have no way to unbind 
+		fxBulletin = new FxBulletin(getLocalization());
 		fxBulletin.copyDataFromBulletin(bulletinToShow, getApp().getStore().getDatabase());
 		setImmutableOnServerBinding();
 		Platform.runLater(() -> headerController.showBulletin(fxBulletin));
