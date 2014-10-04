@@ -45,6 +45,7 @@ import org.martus.client.swingui.jfx.generic.controls.NestedChoiceBox;
 import org.martus.client.swingui.jfx.generic.controls.ScrollFreeTextArea;
 import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MessageFieldSpec;
 
@@ -79,6 +80,9 @@ public class FxFieldCreator
 	private Node createDateField(Property<String> property, FieldSpec spec)
 	{
 		MartusDatePicker picker = new MartusDatePicker();
+
+		if(spec.getTag().equals(Bulletin.TAGENTRYDATE))
+			picker.setDisable(true);
 
 		String existingDateString = property.getValue();
 		picker.setValue(existingDateString);
