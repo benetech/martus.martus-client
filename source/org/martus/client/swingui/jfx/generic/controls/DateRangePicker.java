@@ -29,11 +29,9 @@ import java.time.LocalDate;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
-import org.martus.client.swingui.jfx.generic.controls.MartusDatePicker.MartusDateConverter;
 import org.martus.common.MiniLocalization;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.util.MultiCalendar;
@@ -44,13 +42,9 @@ public class DateRangePicker extends HBox
 	{
 		overallValueProperty = new SimpleStringProperty("");
 		
-		startPicker = new DatePicker();
-		endPicker = new DatePicker();
+		startPicker = new MartusDatePicker(localizationToUse);
+		endPicker = new MartusDatePicker(localizationToUse);
 		
-		MartusDateConverter martusDateConverter = new MartusDateConverter(localizationToUse);
-		startPicker.setConverter(martusDateConverter);
-		endPicker.setConverter(martusDateConverter);
-
 		startPicker.valueProperty().addListener((observable, oldValue, newValue) -> updateOverallValue());
 		endPicker.valueProperty().addListener((observable, oldValue, newValue) -> updateOverallValue());
 
@@ -79,15 +73,14 @@ public class DateRangePicker extends HBox
 		String isoStartDate = flexidate.getBeginDate().toIsoDateString();
 		String isoEndDate = flexidate.getEndDate().toIsoDateString();
 		
-		startPicker.setValue(LocalDate.parse(isoStartDate));
-		endPicker.setValue(LocalDate.parse(isoEndDate));
+		startPicker.setValue(isoStartDate);
+		endPicker.setValue(isoEndDate);
 	}
 
 	public void setFromSingleDate(String isoDateString)
 	{
-		LocalDate date = MartusDatePicker.convertIsoDateStringToLocalDate(isoDateString);
-		startPicker.setValue(date);
-		endPicker.setValue(date);
+		startPicker.setValue(isoDateString);
+		endPicker.setValue(isoDateString);
 	}
 	
 	private void updateOverallValue()
@@ -117,6 +110,6 @@ public class DateRangePicker extends HBox
 	}
 
 	private SimpleStringProperty overallValueProperty;
-	private DatePicker startPicker;
-	private DatePicker endPicker;
+	private MartusDatePicker startPicker;
+	private MartusDatePicker endPicker;
 }
