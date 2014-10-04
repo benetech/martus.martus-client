@@ -318,7 +318,7 @@ public class FxBulletin
 		if(versionProperty != null)
 			versionProperty = null;
 		
-		fieldProperties.forEach((key, property) -> property.setValue(null));
+		fieldProperties.forEach((key, property) -> clearProperty(property));
 		fieldProperties.clear();
 		
 		fieldSpecs = new FieldSpecCollection();
@@ -326,6 +326,11 @@ public class FxBulletin
 		if(attachments != null)
 			attachments.clear();
 
+	}
+
+	public void clearProperty(SimpleStringProperty property)
+	{
+		property.setValue(null);
 	}
 	
 	private void setFieldPropertiesFromBulletinSection(Bulletin b, FieldSpecCollection bulletinFieldSpecs)
