@@ -43,6 +43,7 @@ import javafx.scene.text.TextFlow;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.jfx.generic.controls.DateRangePicker;
+import org.martus.client.swingui.jfx.generic.controls.MartusDatePicker;
 import org.martus.client.swingui.jfx.generic.controls.NestedChoiceBox;
 import org.martus.client.swingui.jfx.generic.controls.ScrollFreeTextArea;
 import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
@@ -81,7 +82,7 @@ public class FxFieldCreator
 
 	private Node createDateField(Property<String> property, FieldSpec spec)
 	{
-		DatePicker picker = new DatePicker();
+		MartusDatePicker picker = new MartusDatePicker();
 
 		String existingDateString = property.getValue();
 		MultiCalendar multiCalendar = MultiCalendar.createFromIsoDateString(existingDateString);
