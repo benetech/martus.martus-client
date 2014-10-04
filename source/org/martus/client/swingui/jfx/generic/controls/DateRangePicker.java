@@ -79,9 +79,7 @@ public class DateRangePicker extends HBox
 
 	public void setFromSingleDate(String isoDateString)
 	{
-		MultiCalendar baseDate = MultiCalendar.createFromIsoDateString(isoDateString);
-		
-		LocalDate date = getLocalDate(baseDate);
+		LocalDate date = MartusDatePicker.convertIsoDateStringToLocalDate(isoDateString);
 		startPicker.setValue(date);
 		endPicker.setValue(date);
 	}

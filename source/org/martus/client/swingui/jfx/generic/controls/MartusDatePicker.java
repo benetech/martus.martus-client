@@ -43,9 +43,17 @@ public class MartusDatePicker extends DatePicker
 	
 	public void setValue(String existingDateString)
 	{
-		MultiCalendar multiCalendar = MultiCalendar.createFromIsoDateString(existingDateString);
-		LocalDate localDate = DateRangePicker.getLocalDate(multiCalendar);
+		LocalDate localDate = convertIsoDateStringToLocalDate(existingDateString);
 		setValue(localDate);
+	}
+
+	public static LocalDate convertIsoDateStringToLocalDate(String existingDateString)
+	{
+		if(existingDateString.isEmpty())
+			return null;
+		
+		MultiCalendar multiCalendar = MultiCalendar.createFromIsoDateString(existingDateString);
+		return DateRangePicker.getLocalDate(multiCalendar);
 	}
 	
 	public ReadOnlyStringProperty overallValueProperty()
