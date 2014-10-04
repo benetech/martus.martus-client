@@ -45,12 +45,18 @@ import org.martus.client.swingui.jfx.generic.controls.NestedChoiceBox;
 import org.martus.client.swingui.jfx.generic.controls.ScrollFreeTextArea;
 import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MessageFieldSpec;
 
 public class FxFieldCreator
 {
+	public FxFieldCreator(MiniLocalization localizationToUse)
+	{
+		localization = localizationToUse;
+	}
+	
 	public Node createFieldForSpec(FxBulletin bulletin, FieldSpec spec, Property<String> property) throws Exception
 	{
 		if(spec.getType().isString())
@@ -79,7 +85,7 @@ public class FxFieldCreator
 
 	private Node createDateField(Property<String> property, FieldSpec spec)
 	{
-		MartusDatePicker picker = new MartusDatePicker();
+		MartusDatePicker picker = new MartusDatePicker(localization);
 
 		if(spec.getTag().equals(Bulletin.TAGENTRYDATE))
 			picker.setDisable(true);
@@ -164,4 +170,6 @@ public class FxFieldCreator
 
 	private static final int MINIMUM_REASONABLE_COLUMN_COUNT = 10;
 	private static final int MULTILINE_FIELD_HEIGHT_IN_ROWS = 5;
+	
+	private MiniLocalization localization;
 }

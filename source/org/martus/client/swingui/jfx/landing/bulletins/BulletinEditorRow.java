@@ -50,7 +50,7 @@ public class BulletinEditorRow
 		bulletin = bulletinToUse;
 		localization = localizationToUse;
 		
-		fieldCreator = new FxFieldCreator();
+		fieldCreator = new FxFieldCreator(localizationToUse);
 		
 		labelNode = new HBox();
 		labelNode.getStyleClass().add("bulletin-editor-label-cell");
