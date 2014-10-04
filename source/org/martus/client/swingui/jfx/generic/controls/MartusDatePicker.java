@@ -25,9 +25,49 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic.controls;
 
+import java.time.LocalDate;
+
+import org.martus.util.MultiCalendar;
+
+import javafx.beans.property.ReadOnlyStringProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.DatePicker;
 
 public class MartusDatePicker extends DatePicker
 {
+	public MartusDatePicker()
+	{
+		overallValueProperty = new SimpleStringProperty();
+		valueProperty().addListener((observable, oldValue, newValue) -> updateOverallValue());
+	}
+	
+	public void setValue(String existingDateString)
+	{
+		MultiCalendar multiCalendar = MultiCalendar.createFromIsoDateString(existingDateString);
+		LocalDate localDate = DateRangePicker.getLocalDate(multiCalendar);
+		setValue(localDate);
+	}
+	
+	public ReadOnlyStringProperty overallValueProperty()
+	{
+		return overallValueProperty;
+	}
 
+	private void updateOverallValue()
+	{
+		LocalDate localDate = getValue();
+		String isoDate = convertLocalDateToString(localDate);
+		overallValueProperty.setValue(isoDate);
+	}
+	
+	private String convertLocalDateToString(LocalDate localDate)
+	{
+		if(localDate == null)
+			return "";
+		
+		MultiCalendar multiCalendar = DateRangePicker.convertLocalDateToMultiCalendar(localDate);
+		return multiCalendar.toIsoDateString();
+	}
+
+	private SimpleStringProperty overallValueProperty;
 }

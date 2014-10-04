@@ -25,15 +25,12 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
-import java.time.LocalDate;
 import java.util.Vector;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.Property;
-import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
@@ -50,7 +47,6 @@ import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MessageFieldSpec;
-import org.martus.util.MultiCalendar;
 
 public class FxFieldCreator
 {
@@ -85,17 +81,8 @@ public class FxFieldCreator
 		MartusDatePicker picker = new MartusDatePicker();
 
 		String existingDateString = property.getValue();
-		MultiCalendar multiCalendar = MultiCalendar.createFromIsoDateString(existingDateString);
-		if(multiCalendar.isUnknown())
-			existingDateString = "";
-		
-		if(!existingDateString.isEmpty())
-		{
-			LocalDate existingDate = LocalDate.parse(existingDateString);
-			picker.setValue(existingDate);
-		}
-		StringProperty textProperty = picker.editorProperty().getValue().textProperty();
-		textProperty.addListener((observable, oldValue, newValue) -> property.setValue(getIsoDate(picker)));
+		picker.setValue(existingDateString);
+		property.bind(picker.overallValueProperty());
 		return picker;
 	}
 	
@@ -110,11 +97,6 @@ public class FxFieldCreator
 		return picker;
 	}
 	
-	private String getIsoDate(DatePicker picker)
-	{
-		return picker.getValue().toString();
-	}
-
 	private Node createDropdownField(FxBulletin bulletin, Property<String> property, FieldSpec rawSpec) throws Exception
 	{
 		Vector<ObservableChoiceItemList> listOfChoiceItemLists = bulletin.getChoiceItemLists(rawSpec.getTag());
