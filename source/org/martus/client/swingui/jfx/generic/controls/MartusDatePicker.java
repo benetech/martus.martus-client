@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.generic.controls;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -39,7 +40,8 @@ public class MartusDatePicker extends DatePicker
 {
 	public MartusDatePicker(MiniLocalization localizationToUse)
 	{
-		new MartusDateConverter(localizationToUse);
+		MartusDateConverter converter = new MartusDateConverter(localizationToUse);
+		setConverter(converter);
 		overallValueProperty = new SimpleStringProperty();
 		valueProperty().addListener((observable, oldValue, newValue) -> updateOverallValue());
 	}
@@ -100,22 +102,23 @@ public class MartusDatePicker extends DatePicker
 	{
 		public MartusDateConverter(MiniLocalization localizationToUse)
 		{
+			String dateFormatCode = localizationToUse.getCurrentDateFormatCode();
+			formatter = DateTimeFormatter.ofPattern(dateFormatCode);
 		}
 
 		@Override
-		public LocalDate fromString(String arg0)
+		public LocalDate fromString(String dateInStringForm)
 		{
-			// TODO Auto-generated method stub
-			return null;
+			return LocalDate.parse(dateInStringForm, formatter);
 		}
 
 		@Override
-		public String toString(LocalDate arg0)
+		public String toString(LocalDate localDate)
 		{
-			// TODO Auto-generated method stub
-			return null;
+			return localDate.format(formatter);
 		}
 		
+		private DateTimeFormatter formatter;
 	}
 
 	private SimpleStringProperty overallValueProperty;

@@ -33,17 +33,23 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
+import org.martus.client.swingui.jfx.generic.controls.MartusDatePicker.MartusDateConverter;
+import org.martus.common.MiniLocalization;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.util.MultiCalendar;
 
 public class DateRangePicker extends HBox
 {
-	public DateRangePicker()
+	public DateRangePicker(MiniLocalization localizationToUse)
 	{
 		overallValueProperty = new SimpleStringProperty("");
 		
 		startPicker = new DatePicker();
 		endPicker = new DatePicker();
+		
+		MartusDateConverter martusDateConverter = new MartusDateConverter(localizationToUse);
+		startPicker.setConverter(martusDateConverter);
+		endPicker.setConverter(martusDateConverter);
 
 		startPicker.valueProperty().addListener((observable, oldValue, newValue) -> updateOverallValue());
 		endPicker.valueProperty().addListener((observable, oldValue, newValue) -> updateOverallValue());

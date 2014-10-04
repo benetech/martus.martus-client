@@ -98,7 +98,7 @@ public class FxFieldCreator
 	
 	private Node createDateRangeField(Property<String> property, FieldSpec rawSpec)
 	{
-		DateRangePicker picker = new DateRangePicker();
+		DateRangePicker picker = new DateRangePicker(localization);
 
 		String existingDateRangeString = property.getValue();
 		picker.setValue(existingDateRangeString);
