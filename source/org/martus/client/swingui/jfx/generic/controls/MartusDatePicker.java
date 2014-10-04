@@ -27,16 +27,19 @@ package org.martus.client.swingui.jfx.generic.controls;
 
 import java.time.LocalDate;
 
-import org.martus.util.MultiCalendar;
-
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.DatePicker;
+import javafx.util.StringConverter;
+
+import org.martus.common.MiniLocalization;
+import org.martus.util.MultiCalendar;
 
 public class MartusDatePicker extends DatePicker
 {
-	public MartusDatePicker()
+	public MartusDatePicker(MiniLocalization localizationToUse)
 	{
+		new MartusDateConverter(localizationToUse);
 		overallValueProperty = new SimpleStringProperty();
 		valueProperty().addListener((observable, oldValue, newValue) -> updateOverallValue());
 	}
@@ -91,6 +94,28 @@ public class MartusDatePicker extends DatePicker
 		int month = localDate.getMonthValue();
 		int day = localDate.getDayOfMonth();
 		return MultiCalendar.createFromGregorianYearMonthDay(year, month, day);
+	}
+	
+	static class MartusDateConverter extends StringConverter<LocalDate>
+	{
+		public MartusDateConverter(MiniLocalization localizationToUse)
+		{
+		}
+
+		@Override
+		public LocalDate fromString(String arg0)
+		{
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String toString(LocalDate arg0)
+		{
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
 	}
 
 	private SimpleStringProperty overallValueProperty;
