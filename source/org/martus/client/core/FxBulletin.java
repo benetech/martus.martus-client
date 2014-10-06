@@ -350,6 +350,11 @@ public class FxBulletin
 	public String getFieldValue(Bulletin b, String fieldTag)
 	{
 		MartusField field = b.getField(fieldTag);
+		return getFieldValue(field);
+	}
+
+	private String getFieldValue(MartusField field)
+	{
 		String value = field.getData();
 		return value;
 	}
