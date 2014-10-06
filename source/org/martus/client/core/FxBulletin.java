@@ -53,6 +53,7 @@ import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.database.ReadableDatabase;
+import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.DropDownFieldSpec;
@@ -348,7 +349,8 @@ public class FxBulletin
 
 	public String getFieldValue(Bulletin b, String fieldTag)
 	{
-		String value = b.get(fieldTag);
+		MartusField field = b.getField(fieldTag);
+		String value = field.getData();
 		return value;
 	}
 
