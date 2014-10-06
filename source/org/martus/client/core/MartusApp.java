@@ -315,11 +315,11 @@ public class MartusApp
 			ContactKey key = contacts.get(i);
 			if(publicKeyToCheck.equals(key.getPublicKey()))
 			{
-				if(key.getVerificationStatus() == ContactKey.NOT_VERIFIED)
+				if(key.getVerificationStatus().equals(ContactKey.NOT_VERIFIED))
 					return ContactKey.NOT_VERIFIED;
-				else if(key.getVerificationStatus() == ContactKey.VERIFIED_ENTERED_20_DIGITS)
+				else if(key.getVerificationStatus().equals(ContactKey.VERIFIED_ENTERED_20_DIGITS))
 					return ContactKey.VERIFIED_ENTERED_20_DIGITS;
-				else if(key.getVerificationStatus() == ContactKey.VERIFIED_VISUALLY)
+				else if(key.getVerificationStatus().equals(ContactKey.VERIFIED_VISUALLY))
 					return ContactKey.VERIFIED_VISUALLY;
 				return ContactKey.NOT_VERIFIED_UNKNOWN;	
 			}
