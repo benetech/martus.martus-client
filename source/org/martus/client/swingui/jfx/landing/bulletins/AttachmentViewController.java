@@ -64,7 +64,7 @@ public class AttachmentViewController extends FxController
 		super.initialize(location, bundle);
 		try
 		{
-			addAttachmentToView();
+			setAttachmentInView();
 		} 
 		catch (Exception e)
 		{
@@ -91,7 +91,7 @@ public class AttachmentViewController extends FxController
 		return FileType.Unsupported;
 	}
 
-	private void addAttachmentToView() throws Exception
+	private void setAttachmentInView() throws Exception
 	{
 		if(attachmentFileType == FileType.HTML || 
 				attachmentFileType == FileType.Image)
