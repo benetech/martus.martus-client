@@ -60,6 +60,8 @@ import org.martus.common.fieldspec.RequiredFieldIsBlankException;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
+import org.martus.common.utilities.MartusFlexidate;
+import org.martus.util.MultiCalendar;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestFxBulletin extends TestCaseEnhanced
@@ -225,7 +227,48 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals(citiesChoices.size()+1, nestedCitiesList.size());
 		assertEquals("", nestedCitiesList.get(0).getCode());
 		assertEquals(citiesChoices.get(0), nestedCitiesList.get(1));
+	}
+	
+	public void testDates() throws Exception
+	{
+		String DATE_TAG = Bulletin.TAGENTRYDATE;
+		String DATE_RANGE_TAG = Bulletin.TAGEVENTDATE;
+
+		String emptyDate = "";
+		verifyDateOrDateRange(DATE_TAG, emptyDate, emptyDate);
+		verifyDateOrDateRange(DATE_RANGE_TAG, emptyDate, emptyDate);
 		
+		String normalDate = "2012-07-16";
+		verifyDateOrDateRange(DATE_TAG, normalDate, normalDate);
+		verifyDateOrDateRange(DATE_RANGE_TAG, normalDate, normalDate);
+
+		String unknownDate = "0001-01-01";
+		verifyDateOrDateRange(DATE_TAG, "", unknownDate);
+		verifyDateOrDateRange(DATE_RANGE_TAG, "", unknownDate);
+		
+		MultiCalendar unknown = MultiCalendar.createFromIsoDateString(unknownDate); 
+		MartusFlexidate completelyUnknownFlexidate = new MartusFlexidate(unknown, unknown);
+		verifyDateOrDateRange(DATE_RANGE_TAG, "", completelyUnknownFlexidate.getMartusFlexidateString());
+		
+		MultiCalendar normal = MultiCalendar.createFromIsoDateString(normalDate);
+		String beginUnknownStoredRange = MartusFlexidate.toBulletinFlexidateFormat(unknown, normal);
+		verifyDateOrDateRange(DATE_RANGE_TAG, beginUnknownStoredRange, beginUnknownStoredRange);
+
+		String endUnknownStoredRange = MartusFlexidate.toBulletinFlexidateFormat(normal, unknown);
+		verifyDateOrDateRange(DATE_RANGE_TAG, endUnknownStoredRange, endUnknownStoredRange);
+	}
+
+	public void verifyDateOrDateRange(String tag, String expected, String stored)
+			throws Exception
+	{
+		FxBulletin fxb = new FxBulletin(getLocalization());
+		assertFalse(fxb.hasBeenModified());
+		
+		Bulletin b = new BulletinForTesting(security);
+		b.set(tag, stored);
+		fxb.copyDataFromBulletin(b, db);
+		assertFalse(fxb.hasBeenModified());
+		assertEquals(expected, fxb.fieldProperty(tag).getValue());
 	}
 	
 	public void testHasBeenModified() throws Exception

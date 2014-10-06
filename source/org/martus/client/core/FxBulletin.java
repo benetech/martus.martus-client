@@ -61,6 +61,8 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
+import org.martus.common.utilities.MartusFlexidate;
+import org.martus.util.MultiCalendar;
 
 /**
  * This class wraps a Bulletin object, exposing each data member as a 
@@ -350,8 +352,49 @@ public class FxBulletin
 
 	private String getFieldValue(MartusField field)
 	{
-		String value = field.getData();
-		return value;
+		if(field.getType().isDate())
+			return getDateFieldValue(field);
+		else if(field.getType().isDateRange())
+			return getDateRangeFieldValue(field);
+		
+		return field.getData();
+	}
+
+	private String getDateFieldValue(MartusField field)
+	{
+		String data = field.getData();
+		if(data.isEmpty())
+			return data;
+		
+		MultiCalendar multiCalendar = MultiCalendar.createFromIsoDateString(data);
+		if(multiCalendar.isUnknown())
+			return "";
+		
+		return data;
+	}
+
+	private String getDateRangeFieldValue(MartusField field)
+	{
+		String data = field.getData();
+		if(!MartusFlexidate.isFlexidateString(data))
+			return getDateFieldValue(field);
+		
+		String isoBaseDate = MartusFlexidate.extractIsoDateFromStoredDate(data);
+		int numberOfDays = MartusFlexidate.extractRangeFromStoredDate(data);
+		
+		MartusFlexidate flexidate = new MartusFlexidate(isoBaseDate, numberOfDays);
+		MultiCalendar begin = flexidate.getBeginDate();
+		MultiCalendar end = flexidate.getEndDate();
+		
+		if(begin.isUnknown())
+			begin = end;
+		if(end.isUnknown())
+			end = begin;
+		
+		if(begin.isUnknown())
+			return "";
+		
+		return data;
 	}
 
 	private void setField(FieldSpec spec, String value)
