@@ -32,13 +32,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
-import org.martus.common.MiniLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.util.MultiCalendar;
 
 public class DateRangePicker extends HBox
 {
-	public DateRangePicker(MiniLocalization localizationToUse)
+	public DateRangePicker(MartusLocalization localizationToUse)
 	{
 		overallValueProperty = new SimpleStringProperty("");
 		
