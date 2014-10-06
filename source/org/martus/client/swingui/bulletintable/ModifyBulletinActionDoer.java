@@ -50,18 +50,10 @@ public class ModifyBulletinActionDoer
 			boolean isMine = myAccountId.equals(original.getAccount());
 			boolean isVerifiedFieldDeskBulletin = mainWindow.getApp().isVerifiedFieldDeskAccount(original.getAccount());
 
-			if(!isMine)
+			if(!isMine && !isVerifiedFieldDeskBulletin)
 			{
-				if(isVerifiedFieldDeskBulletin)
-				{
-					if(!mainWindow.confirmDlg("CloneBulletinAsMine"))
-						return;
-				}
-				else
-				{
-					if(!mainWindow.confirmDlg("CloneUnverifiedFDBulletinAsMine"))
-						return;
-				}
+				//TODO add Notify Dialog if this bulletin has an attachment
+				//That can't be viewed internally 
 			}
 			
 			if(original.hasUnknownTags() || original.hasUnknownCustomField())
