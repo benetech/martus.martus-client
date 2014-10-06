@@ -33,12 +33,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.DatePicker;
 import javafx.util.StringConverter;
 
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.MiniLocalization;
 import org.martus.util.MultiCalendar;
 
 public class MartusDatePicker extends DatePicker
 {
-	public MartusDatePicker(MiniLocalization localizationToUse)
+	public MartusDatePicker(MartusLocalization localizationToUse)
 	{
 		MartusDateConverter converter = new MartusDateConverter(localizationToUse);
 		setConverter(converter);
