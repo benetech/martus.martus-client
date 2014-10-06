@@ -77,6 +77,25 @@ public class TestLocalization extends TestCaseEnhanced
 		assertFalse("Translation directory still exists?", testTranslationDirectory.exists());
 	}
 	
+	public void testCalendars() throws Exception
+	{
+		final String JAVA_CHRONOLOGY_TYPE_CODE_FOR_GREGORIAN = "iso8601";
+		final String JAVA_CHRONOLOGY_TYPE_CODE_FOR_THAI = "buddhist";
+		final String JAVA_CHRONOLOGY_TYPE_CODE_FOR_PERSIAN = "islamic-umalqura";
+
+		assertEquals(JAVA_CHRONOLOGY_TYPE_CODE_FOR_GREGORIAN, MartusLocalization.getChronology(MartusLocalization.GREGORIAN_SYSTEM).getCalendarType());
+		assertEquals(JAVA_CHRONOLOGY_TYPE_CODE_FOR_THAI, MartusLocalization.getChronology(MartusLocalization.THAI_SYSTEM).getCalendarType());
+		assertEquals(JAVA_CHRONOLOGY_TYPE_CODE_FOR_PERSIAN, MartusLocalization.getChronology(MartusLocalization.PERSIAN_SYSTEM).getCalendarType());
+		assertEquals(JAVA_CHRONOLOGY_TYPE_CODE_FOR_PERSIAN, MartusLocalization.getChronology(MartusLocalization.AFGHAN_SYSTEM).getCalendarType());
+		
+		String storedDate = "2014-10-06";
+		assertEquals("10/06/2014", bd.convertStoredDateToDisplay(storedDate));
+		
+		bd.setCurrentCalendarSystem(MartusLocalization.THAI_SYSTEM);
+		assertEquals("10/06/2557", bd.convertStoredDateToDisplay(storedDate));
+		assertEquals(JAVA_CHRONOLOGY_TYPE_CODE_FOR_THAI, bd.getCurrentChronology().getCalendarType());
+	}
+	
 	public void testEnglishStringsDontStartWithAngleBrackets() throws Exception
 	{
 		for(int i=0; i < EnglishStrings.strings.length; ++i)

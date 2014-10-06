@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import java.io.File;
+import java.time.chrono.Chronology;
 import java.util.Vector;
 
 import org.martus.clientside.UiLocalization;
@@ -56,5 +57,23 @@ public class MartusLocalization extends UiLocalization
 	public String getProgramVersionLabel()
 	{
 		return UiConstants.versionLabel;
+	}
+
+	public Chronology getCurrentChronology()
+	{
+		String currentCalendarSystem = getCurrentCalendarSystem();
+		return getChronology(currentCalendarSystem);
+	}
+
+	public static Chronology getChronology(String currentCalendarSystem)
+	{
+		final String JAVA_CHRONOLOGY_CODE_FOR_BUDDHIST_CALENDAR = "ThaiBuddhist";
+		final String JAVA_CHRONOLOGY_CODE_FOR_ISLAMIC_CALENDAR = "Hijrah-umalqura";
+		final String JAVA_CHRONOLOGY_CODE_FOR_GREGORIAN_CALENDAR = "ISO";
+		if(currentCalendarSystem.equals(THAI_SYSTEM))
+			return Chronology.of(JAVA_CHRONOLOGY_CODE_FOR_BUDDHIST_CALENDAR);
+		if(currentCalendarSystem.equals(PERSIAN_SYSTEM) || currentCalendarSystem.equals(AFGHAN_SYSTEM))
+			return Chronology.of(JAVA_CHRONOLOGY_CODE_FOR_ISLAMIC_CALENDAR);
+		return Chronology.of(JAVA_CHRONOLOGY_CODE_FOR_GREGORIAN_CALENDAR);
 	}
 }
