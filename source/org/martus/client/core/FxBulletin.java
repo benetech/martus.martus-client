@@ -340,10 +340,16 @@ public class FxBulletin
 			FieldSpec fieldSpec = bulletinFieldSpecs.get(i);
 			fieldSpecs.add(fieldSpec);
 			String fieldTag = fieldSpec.getTag();
-			String value = b.get(fieldTag);
+			String value = getFieldValue(b, fieldTag);
 			setField(fieldSpec, value);
 //			System.out.println("copyDataFromBulletin " + fieldTag + ":" + value);
 		}
+	}
+
+	public String getFieldValue(Bulletin b, String fieldTag)
+	{
+		String value = b.get(fieldTag);
+		return value;
 	}
 
 	private void setField(FieldSpec spec, String value)
