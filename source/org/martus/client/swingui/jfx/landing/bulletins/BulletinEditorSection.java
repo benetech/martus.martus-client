@@ -101,14 +101,24 @@ public class BulletinEditorSection extends GridPane
 	{
 		if(currentRow == null)
 			return;
-		
+
+		boolean isGrid = currentRow.isGrid();
 		Node label = currentRow.getLabelNode();
 		Node fields = currentRow.getFieldsNode();
 		currentRow = null;
 
 		int currentRowIndex = rows.size();
-		add(label, LABEL_COLUMN, currentRowIndex);
-		add(fields, DATA_COLUMN, currentRowIndex);
+		if(isGrid)
+		{
+			final int BOTH_COLUMNS = 2;
+			final int ONE_ROW = 1;
+			add(fields, LABEL_COLUMN, currentRowIndex, BOTH_COLUMNS, ONE_ROW);
+		}
+		else
+		{
+			add(label, LABEL_COLUMN, currentRowIndex);
+			add(fields, DATA_COLUMN, currentRowIndex);
+		}
 	}
 	
 	private boolean canKeepWithNextOrPrevious(FieldSpec fieldSpec)
