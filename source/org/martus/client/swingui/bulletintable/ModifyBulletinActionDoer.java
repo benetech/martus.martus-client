@@ -27,6 +27,7 @@ package org.martus.client.swingui.bulletintable;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiSession;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
@@ -52,15 +53,26 @@ public class ModifyBulletinActionDoer
 
 			if(!isMine)
 			{
-				if(isVerifiedFieldDeskBulletin)
+				if(UiSession.isJavaFx)
 				{
-					if(!mainWindow.confirmDlg("CloneBulletinAsMine"))
-						return;
+					if(!isVerifiedFieldDeskBulletin)
+					{
+						//TODO add Notify Dialog if this bulletin has an attachment
+						//That can't be viewed internally 
+					}
 				}
 				else
 				{
-					if(!mainWindow.confirmDlg("CloneUnverifiedFDBulletinAsMine"))
-						return;
+					if(isVerifiedFieldDeskBulletin)
+					{
+						if(!mainWindow.confirmDlg("CloneBulletinAsMine"))
+							return;
+					}
+					else
+					{
+						if(!mainWindow.confirmDlg("CloneUnverifiedFDBulletinAsMine"))
+							return;
+					}
 				}
 			}
 			
