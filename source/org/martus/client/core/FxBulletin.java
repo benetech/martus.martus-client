@@ -190,14 +190,28 @@ public class FxBulletin
 		return specs;
 	}
 
-	public SimpleStringProperty fieldProperty(String tag)
+	public SimpleStringProperty fieldProperty(String fieldTag)
 	{
-		return fieldProperties.get(tag);
+		FieldSpec foundSpec = fieldSpecs.findBytag(fieldTag);
+		if(foundSpec == null)
+			throw new NullPointerException("No such field: " + fieldTag);
+
+		if(foundSpec.getType().isGrid())
+			throw new NullPointerException("fieldProperty not available for a grid: " + fieldTag);
+		
+		return fieldProperties.get(fieldTag);
 	}
 	
-	public ObservableBooleanValue isValidProperty(String tag)
+	public ObservableBooleanValue isValidProperty(String fieldTag)
 	{
-		return fieldValidators.get(tag).isValidProperty();
+		FieldSpec foundSpec = fieldSpecs.findBytag(fieldTag);
+		if(foundSpec == null)
+			throw new NullPointerException("No such field: " + fieldTag);
+
+		if(foundSpec.getType().isGrid())
+			throw new NullPointerException("fieldProperty not available for a grid: " + fieldTag);
+
+		return fieldValidators.get(fieldTag).isValidProperty();
 	}
 	
 	public BooleanProperty getImmutableOnServerProperty()
