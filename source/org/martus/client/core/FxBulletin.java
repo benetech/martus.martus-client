@@ -44,11 +44,14 @@ import javafx.collections.ObservableList;
 
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.landing.bulletins.AttachmentTableRowData;
+import org.martus.client.swingui.jfx.landing.bulletins.GridRowData;
 import org.martus.common.FieldSpecCollection;
+import org.martus.common.GridData;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
@@ -59,6 +62,7 @@ import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.utilities.MartusFlexidate;
@@ -80,7 +84,7 @@ public class FxBulletin
 		hasBeenValidatedProperty = new SimpleBooleanProperty();
 	}
 
-	public void copyDataFromBulletin(Bulletin b, ReadableDatabase db)
+	public void copyDataFromBulletin(Bulletin b, ReadableDatabase db) throws Exception
 	{
 		clear();
 		
@@ -214,6 +218,11 @@ public class FxBulletin
 		return fieldValidators.get(fieldTag).isValidProperty();
 	}
 	
+	public ObservableList<GridRowData> gridDataProperty(String tag)
+	{
+		return dataForGrids.get(tag);
+	}
+
 	public BooleanProperty getImmutableOnServerProperty()
 	{
 		return immutableOnServer;
@@ -338,6 +347,8 @@ public class FxBulletin
 		fieldProperties.forEach((key, property) -> clearProperty(property));
 		fieldProperties.clear();
 		
+		dataForGrids = new HashMap();
+		
 		fieldSpecs = new FieldSpecCollection();
 		
 		if(attachments != null)
@@ -350,7 +361,7 @@ public class FxBulletin
 		property.setValue(null);
 	}
 	
-	private void setFieldPropertiesFromBulletinSection(Bulletin b, FieldSpecCollection bulletinFieldSpecs)
+	private void setFieldPropertiesFromBulletinSection(Bulletin b, FieldSpecCollection bulletinFieldSpecs) throws Exception
 	{
 		for(int i = 0; i < bulletinFieldSpecs.size(); ++i)
 		{
@@ -359,9 +370,34 @@ public class FxBulletin
 			String fieldTag = fieldSpec.getTag();
 			MartusField field = b.getField(fieldTag);
 			String value = getFieldValue(field);
-			setField(fieldSpec, value);
+			if(fieldSpec.getType().isGrid())
+				setGridField((GridFieldSpec)fieldSpec, value, bulletinFieldSpecs.getAllReusableChoiceLists());
+			else
+				setField(fieldSpec, value);
 //			System.out.println("copyDataFromBulletin " + fieldTag + ":" + value);
 		}
+	}
+
+	private void setGridField(GridFieldSpec gridSpec, String xmlGridData, PoolOfReusableChoicesLists poolOfReusableChoicesLists) throws Exception
+	{
+		GridData data = new GridData(gridSpec, poolOfReusableChoicesLists);
+		data.setFromXml(xmlGridData);
+		
+		GridFieldData gridFieldData = new GridFieldData();
+		for(int row = 0; row < data.getRowCount(); ++row)
+		{
+			GridRowData rowData = new GridRowData();
+			for(int column = 0; column < data.getColumnCount(); ++column)
+			{
+				String columnLabel = gridSpec.getColumnLabel(column);
+				String value = data.getValueAt(row, column);
+				rowData.put(columnLabel, value);
+			}
+			
+			gridFieldData.add(rowData);
+		}
+		
+		dataForGrids.put(gridSpec.getTag(), gridFieldData);
 	}
 
 	private String getFieldValue(MartusField field)
@@ -485,6 +521,8 @@ public class FxBulletin
 	
 	private HashMap<String, SimpleStringProperty> fieldProperties;
 	private HashMap<String, FieldValidator> fieldValidators;
+	private HashMap<String, GridFieldData> dataForGrids;
+	
 	private ReadOnlyObjectWrapper<UniversalId> universalIdProperty;
 	private ReadOnlyIntegerProperty versionProperty;
 	private ReadOnlyStringProperty bulletinLocalId;
