@@ -2026,7 +2026,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 
 		setWindowSizeAndState();
 
-		if(UiSession.isJavaFx)
+		if(UiSession.isJavaFx())
 		{
 			mainStage = new FxMainStage(this);
 			FxRunner fxRunner = new FxRunner(mainStage);

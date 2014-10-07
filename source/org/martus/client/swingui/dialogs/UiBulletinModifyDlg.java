@@ -85,7 +85,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		UiMainWindow.updateIcon(this);
 		bulletin = b;
 
-		if(UiSession.isJavaFx)
+		if(UiSession.isJavaFx())
 		{
 			FxBulletinEditorShellController bulletinEditorShellController = new FxBulletinEditorShellController(observerToUse, this);
 
@@ -108,7 +108,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(this);
 
-		if(UiSession.isJavaFx)
+		if(UiSession.isJavaFx())
 		{
 			getContentPane().add(bulletinEditorStage, BorderLayout.CENTER);
 		}
@@ -144,7 +144,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			Utilities.maximizeWindow(this);
 		}
 		
-		if(!UiSession.isJavaFx)
+		if(!UiSession.isJavaFx())
 			view.scrollToTop();
 		
 		setGlassPane(new WindowObscurer());

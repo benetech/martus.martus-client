@@ -151,6 +151,11 @@ public class UiSession
 			memorizedFileOpenDirectories = new HashMap<String, File>();
 		return memorizedFileOpenDirectories;
 	}
+	
+	public static boolean isJavaFx()
+	{
+		return isJavaFx;
+	}
 
 	private MartusLocalization localization;
 	private MartusApp app;
