@@ -56,6 +56,8 @@ import org.martus.common.fieldspec.DateFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeDate;
+import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.RequiredFieldIsBlankException;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHistory;
@@ -79,6 +81,65 @@ public class TestFxBulletin extends TestCaseEnhanced
 		security = MockMartusSecurity.createClient();
 		localization = new MiniLocalization();
 		db = new MockClientDatabase();
+	}
+	
+	public void testGrid() throws Exception
+	{
+		String gridTag = "grid";
+		GridFieldSpec gridSpec2Colunns = new GridFieldSpec();
+		gridSpec2Colunns.setTag(gridTag);
+		gridSpec2Colunns.setLabel("Grid");
+		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("a", "A", new FieldTypeNormal()));
+		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("b", "B", new FieldTypeDate()));
+
+		FieldSpecCollection fsc = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		fsc.add(gridSpec2Colunns);
+
+		Bulletin b = new Bulletin(security, fsc, new FieldSpecCollection());
+		FxBulletin fxb = new FxBulletin(getLocalization());
+		fxb.copyDataFromBulletin(b, db);
+		
+		try
+		{
+			fxb.fieldProperty(gridTag);
+			fail("fieldProperty should have thrown for grid");
+		}
+		catch(Exception ignoreExpected)
+		{
+		}
+		try
+		{
+			fxb.isValidProperty(gridTag);
+			fail("isValidProperty should have thrown for grid");
+		}
+		catch(Exception ignoreExpected)
+		{
+		}
+	}
+	
+	public void testBasics() throws Exception
+	{
+		FxBulletin fxb = new FxBulletin(getLocalization());
+		Bulletin b = new BulletinForTesting(security);
+		fxb.copyDataFromBulletin(b, db);
+		
+		try
+		{
+			fxb.fieldProperty("Tag that does not exist");
+			fail("fieldProperty should have thrown getting property for missing field");
+		}
+		catch(NullPointerException ignoreExpected)
+		{
+		}
+
+		try
+		{
+			fxb.isValidProperty("Tag that does not exist");
+			fail("isValidProperty should have thrown getting property for missing field");
+		}
+		catch(NullPointerException ignoreExpected)
+		{
+		}
 	}
 	
 	public void testHasBeenValidated() throws Exception
