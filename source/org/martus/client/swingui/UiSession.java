@@ -154,14 +154,14 @@ public class UiSession
 	
 	public static boolean isJavaFx()
 	{
-		return isJavaFx;
+		return !isSwing;
 	}
 
 	private MartusLocalization localization;
 	private MartusApp app;
 	private CurrentUiState uiState;
 	public static boolean isAlphaTester;
-	public static boolean isJavaFx;
+	public static boolean isSwing;
 	
 	public static boolean defaultFoldersUnsorted;
 	private static Map<String, File> memorizedFileOpenDirectories;
