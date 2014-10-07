@@ -401,8 +401,8 @@ public class EnglishStrings
 "button:search=Search",
 "button:print=Print",
 "button:connectserver=Connect",
-"button:send=Save Sealed",
-"button:savedraft=Save Draft",
+"button:send=Share",
+"button:savedraft=Save",
 
 "button:saveBulletin=Save",
 "button:versionBulletin=Version",
