@@ -37,8 +37,11 @@ import javafx.collections.ObservableList;
 
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.landing.bulletins.AttachmentTableRowData;
+import org.martus.client.swingui.jfx.landing.bulletins.GridRowData;
 import org.martus.client.test.MockBulletinStore;
 import org.martus.common.FieldSpecCollection;
+import org.martus.common.GridData;
+import org.martus.common.GridRow;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MiniLocalization;
@@ -96,6 +99,9 @@ public class TestFxBulletin extends TestCaseEnhanced
 		fsc.add(gridSpec2Colunns);
 
 		Bulletin b = new Bulletin(security, fsc, new FieldSpecCollection());
+		GridData data = createSampleGridData(gridSpec2Colunns, fsc);
+		b.set(gridSpec2Colunns.getTag(), data.getXmlRepresentation());
+		
 		FxBulletin fxb = new FxBulletin(getLocalization());
 		fxb.copyDataFromBulletin(b, db);
 		
@@ -115,6 +121,19 @@ public class TestFxBulletin extends TestCaseEnhanced
 		catch(Exception ignoreExpected)
 		{
 		}
+		
+		ObservableList<GridRowData> gridData = fxb.gridDataProperty(gridTag);
+		assertEquals(1, gridData.size());
+	}
+
+	private GridData createSampleGridData(GridFieldSpec gridSpec2Colunns, FieldSpecCollection fsc)
+	{
+		GridData gridData = new GridData(gridSpec2Colunns, fsc.getAllReusableChoiceLists());
+		GridRow gridRowSample = new GridRow(gridSpec2Colunns, fsc.getAllReusableChoiceLists());
+		gridRowSample.setCellText(0, "Apple");
+		gridRowSample.setCellText(1, "Balloon");
+		gridData.addRow(gridRowSample);
+		return gridData;
 	}
 	
 	public void testBasics() throws Exception

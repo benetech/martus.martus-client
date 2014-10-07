@@ -117,7 +117,15 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 		// NOTE: We have to create a new fxb each time, because the old one 
 		// was probably bound to a bunch of controls, and we have no way to unbind 
 		fxBulletin = new FxBulletin(getLocalization());
-		fxBulletin.copyDataFromBulletin(bulletinToShow, getApp().getStore().getDatabase());
+
+		try
+		{
+			fxBulletin.copyDataFromBulletin(bulletinToShow, getApp().getStore().getDatabase());
+		} 
+		catch (Exception e)
+		{
+			throw new RuntimeException(e);
+		}
 		setImmutableOnServerBinding();
 		Platform.runLater(() -> headerController.showBulletin(fxBulletin));
 		Platform.runLater(() -> bodyController.showBulletin(fxBulletin));
