@@ -68,8 +68,10 @@ import org.martus.client.swingui.jfx.landing.cases.FxFolderSettingsController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractExportTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.BulletinExportEncryptedMbaTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.BulletinExportUnencryptedXmlTask;
+import org.martus.common.ContactKey;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MartusLogger;
+import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinHtmlGenerator;
 import org.martus.common.database.ReadableDatabase;
@@ -213,8 +215,52 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		}
 		UniversalId bulletinUid = selectedItem.getUniversalId();
 		Bulletin bulletinSelected = getApp().getStore().getBulletinRevision(bulletinUid);
-		getStage().doAction(new ActionMenuModifyFxBulletin(getMainWindow(), bulletinSelected));
+		try
+		{
+			notifyIfBulletinIsNotOursAndHasExternallyViewedAttachments(bulletinSelected);
+			getStage().doAction(new ActionMenuModifyFxBulletin(getMainWindow(), bulletinSelected));
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
 	}
+
+	private void notifyIfBulletinIsNotOursAndHasExternallyViewedAttachments(Bulletin bulletinSelected) throws Exception
+	{
+		Integer status = getApp().getKeyVerificationStatus(bulletinSelected.getAccount());
+		if(status.equals(ContactKey.NOT_VERIFIED) || status.equals(ContactKey.NOT_VERIFIED_UNKNOWN))
+		{
+			if(couldAnyAttachmentBeViewedExternally(bulletinSelected))
+				showNotifyDialog("BulletinWithAnUnverifiedExternalAttachment");
+		}
+	}
+
+	private boolean couldAnyAttachmentBeViewedExternally(Bulletin original)
+	{
+		AttachmentProxy[] publicAttachments = original.getPublicAttachments();
+		if(couldAnyAttachmentBeViewedExternally(publicAttachments))
+			return true;
+		AttachmentProxy[] privateAttachments = original.getPrivateAttachments();
+		if(couldAnyAttachmentBeViewedExternally(privateAttachments))
+			return true;
+		return false;		
+	}
+
+	private boolean couldAnyAttachmentBeViewedExternally(AttachmentProxy[] attachments)
+	{
+		int numberOfAttachments = attachments.length;
+		if(numberOfAttachments == 0)
+			return false;
+		for (int i = 0; i < numberOfAttachments; i++)
+		{
+			AttachmentProxy attachmentProxy = attachments[i];
+			AttachmentViewController attachmentViewer = new AttachmentViewController(getMainWindow(), attachmentProxy);
+			if(!attachmentViewer.canViewInProgram())
+				return true;
+		}
+		return false;
+	}		
 
 	public void updateSearchResultsTable(SortableBulletinList searchResults)
 	{
