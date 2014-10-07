@@ -110,6 +110,14 @@ public class Martus
 			options.remove(foundSwing);
 		}
 		
+		int foundJavaFx = options.indexOf("--javafx");
+		if(foundJavaFx >= 0)
+		{
+			System.out.println(options.get(foundJavaFx));
+			UiSession.isSwing = false;
+			options.remove(foundJavaFx);
+		}
+		
 		UiMainWindow.timeoutInXSeconds = DEFAULT_TIMEOUT_SECONDS;
 		int foundTimeout = findOption(options, TIMEOUT_OPTION_TEXT);
 		if(foundTimeout >= 0)
