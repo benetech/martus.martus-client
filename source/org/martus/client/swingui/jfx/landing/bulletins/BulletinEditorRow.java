@@ -41,6 +41,7 @@ import javafx.scene.text.TextFlow;
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class BulletinEditorRow
@@ -68,6 +69,11 @@ public class BulletinEditorRow
 		return fieldsNode;
 	}
 	
+	public boolean isGrid()
+	{
+		return isGrid;
+	}
+
 	public void addErrorMessage(String labelText, String errorMessage)
 	{
 		Label label = new Label(labelText);
@@ -76,6 +82,23 @@ public class BulletinEditorRow
 	}
 
 	public void addFieldToRow(FieldSpec fieldSpec) throws Exception
+	{
+		if(fieldSpec.getType().isGrid())
+			addGridFieldToRow(fieldSpec);
+		else
+			addNormalFieldToRow(fieldSpec);
+	}
+
+	private void addGridFieldToRow(FieldSpec fieldSpec)
+	{
+		isGrid = true;
+		GridFieldSpec gridSpec = (GridFieldSpec) fieldSpec;
+		ExpandedGridSection gridSection = new ExpandedGridSection(bulletin, getLocalization(), gridSpec);
+		
+		fieldsNode.getChildren().add(gridSection);
+	}
+
+	public void addNormalFieldToRow(FieldSpec fieldSpec) throws Exception
 	{
 		SimpleStringProperty fieldValueProperty = bulletin.fieldProperty(fieldSpec.getTag());
 
@@ -147,4 +170,5 @@ public class BulletinEditorRow
 	private FxFieldCreator fieldCreator;
 	private HBox labelNode;
 	private HBox fieldsNode;
+	private boolean isGrid;
 }
