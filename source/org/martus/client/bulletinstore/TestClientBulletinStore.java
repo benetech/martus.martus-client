@@ -38,6 +38,7 @@ import java.util.Vector;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.MartusClientXml;
+import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.client.test.MockBulletinStore;
 import org.martus.common.BulletinSummary;
 import org.martus.common.Exceptions.InvalidBulletinStateException;
@@ -321,6 +322,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	{
 	    	MartusCrypto otherSecurity = MockMartusSecurity.createOtherClient();
 	    	Bulletin original = createImmutableBulletin(otherSecurity);
+	    	assertNotNull(original.getPublicAttachments()[0].getPendingPacket().getRawFile());
+	    	assertNotNull(original.getPrivateAttachments()[0].getPendingPacket().getRawFile());
 	    	Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
 	    	assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
@@ -332,6 +335,20 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
 	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
 	    	assertEquals("has history?", 0, clone.getHistory().size());
+	    	AttachmentProxy[] publicAttachments = clone.getPublicAttachments();
+	    	AttachmentProxy[] privateAttachments = clone.getPrivateAttachments();
+	    	assertEquals(1, publicAttachments.length);
+	    	assertEquals(1, privateAttachments.length);
+	    	
+	    	File externalPublicAttachment = publicAttachments[0].getFile();
+	    	assertNull("Should not yet have a public embedded file in this proxy", externalPublicAttachment);
+	    	externalPublicAttachment = ViewAttachmentHandler.getAttachmentAsFile(publicAttachments[0], testStore);	
+	    	assertNotNull("Should now have a public embedded file in this proxy", externalPublicAttachment);
+
+	    	File externalPrivateAttachment = privateAttachments[0].getFile();
+	    	assertNull("Should not yet have a private embedded file in this proxy", externalPrivateAttachment);
+	    	externalPrivateAttachment = ViewAttachmentHandler.getAttachmentAsFile(privateAttachments[0], testStore);	
+	    	assertNotNull("Should now have a private embedded file in this proxy", externalPrivateAttachment);
 	}
     
     private Bulletin createImmutableBulletin(MartusCrypto otherSecurity) throws Exception
@@ -340,6 +357,10 @@ public class TestClientBulletinStore extends TestCaseEnhanced
  	    	Bulletin original = new Bulletin(otherSecurity);
 	    	original.set(Bulletin.TAGTITLE, PUBLIC_DATA);
 	    	original.set(Bulletin.TAGAUTHOR, PRIVATE_DATA);
+		AttachmentProxy a1 = new AttachmentProxy(tempFile1);
+		AttachmentProxy a2 = new AttachmentProxy(tempFile2);
+		original.addPublicAttachment(a1);
+		original.addPrivateAttachment(a2);
 	    	original.setAuthorizedToReadKeys(oldHq);
 	    	original.setImmutable();
 		return original;
