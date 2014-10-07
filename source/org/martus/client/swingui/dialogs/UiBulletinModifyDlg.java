@@ -247,15 +247,17 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 			boolean userChoseSeal = (ae.getSource() == send);
 			
+			BulletinState state =  BulletinState.STATE_SAVE;
 			if(userChoseSeal)
 			{
 				String tag = "send";
 					
 				if (!observer.confirmDlg(this, tag))
 					return;
+				state = BulletinState.STATE_SHARED;
 			}
 												
-			saveBulletin(userChoseSeal, BulletinState.STATE_SHARED);
+			saveBulletin(userChoseSeal, state);
 		}
 		catch (Exception e) 
 		{
