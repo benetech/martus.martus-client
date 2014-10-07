@@ -27,6 +27,7 @@ package org.martus.client.swingui.bulletintable;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiSession;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
@@ -50,10 +51,18 @@ public class ModifyBulletinActionDoer
 			boolean isMine = myAccountId.equals(original.getAccount());
 			boolean isVerifiedFieldDeskBulletin = mainWindow.getApp().isVerifiedFieldDeskAccount(original.getAccount());
 
-			if(!isMine && !isVerifiedFieldDeskBulletin)
+			if(!isMine && !UiSession.isJavaFx)
 			{
-				//TODO add Notify Dialog if this bulletin has an attachment
-				//That can't be viewed internally 
+				if(isVerifiedFieldDeskBulletin)
+				{
+					if(!mainWindow.confirmDlg("CloneBulletinAsMine"))
+						return;
+				}
+				else
+				{
+					if(!mainWindow.confirmDlg("CloneUnverifiedFDBulletinAsMine"))
+						return;
+				}
 			}
 			
 			if(original.hasUnknownTags() || original.hasUnknownCustomField())
@@ -76,7 +85,7 @@ public class ModifyBulletinActionDoer
 			MartusLogger.logException(e);			mainWindow.notifyDlg("UnexpectedError");
 		}
 	}
-
+	
 	private boolean isMyMutable(boolean isMine, boolean isDraft)
 	{
 		return isMine && isDraft;
