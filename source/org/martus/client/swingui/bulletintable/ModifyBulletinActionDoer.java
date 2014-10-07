@@ -51,28 +51,17 @@ public class ModifyBulletinActionDoer
 			boolean isMine = myAccountId.equals(original.getAccount());
 			boolean isVerifiedFieldDeskBulletin = mainWindow.getApp().isVerifiedFieldDeskAccount(original.getAccount());
 
-			if(!isMine)
+			if(!isMine && !UiSession.isJavaFx)
 			{
-				if(UiSession.isJavaFx)
+				if(isVerifiedFieldDeskBulletin)
 				{
-					if(!isVerifiedFieldDeskBulletin)
-					{
-						//TODO add Notify Dialog if this bulletin has an attachment
-						//That can't be viewed internally 
-					}
+					if(!mainWindow.confirmDlg("CloneBulletinAsMine"))
+						return;
 				}
 				else
 				{
-					if(isVerifiedFieldDeskBulletin)
-					{
-						if(!mainWindow.confirmDlg("CloneBulletinAsMine"))
-							return;
-					}
-					else
-					{
-						if(!mainWindow.confirmDlg("CloneUnverifiedFDBulletinAsMine"))
-							return;
-					}
+					if(!mainWindow.confirmDlg("CloneUnverifiedFDBulletinAsMine"))
+						return;
 				}
 			}
 			
@@ -96,7 +85,7 @@ public class ModifyBulletinActionDoer
 			MartusLogger.logException(e);			mainWindow.notifyDlg("UnexpectedError");
 		}
 	}
-
+	
 	private boolean isMyMutable(boolean isMine, boolean isDraft)
 	{
 		return isMine && isDraft;

@@ -269,7 +269,6 @@ public class EnglishStrings
 "wintitle:notifyErrorGettingCompliance=Error Getting Compliance Statement",
 "field:notifyErrorGettingCompliancecause=An error occured while trying to connect to the server.",
 
-
 "wintitle:notifyErrorServerOffline=Unable to Connect to Server",
 "field:notifyErrorServerOfflinecause=Unable to connect to the server.",
 
@@ -1739,6 +1738,10 @@ public class EnglishStrings
 "folder:%RetrievedFieldOfficeBulletinDraft=Contacts Draft Bulletins",
 "field:confirmCloneUnverifiedFDBulletinAsMinecause=You have chosen to modify a bulletin that was created by a Martus user that has not been verified, so the bulletin could contain incorrect information or potentially damaging attachments. We recommend that you verify this account before continuing (See Tools > Manage Contacts).",
 "field:confirmCloneUnverifiedFDBulletinAsMineeffect=Clicking on Yes to continue with the modify operation will create a new bulletin that contains a copy of all the same information.  You will be the official author of this new bulletin, so you will become responsible for all the content. Any private data in it will only be visible to you (and any contacts accounts you have shared this with).  The original bulletin will remain unchanged.",
+
+"wintitle:notifyBulletinWithAnUnverifiedExternalAttachment=Unverified Attachment",
+"field:notifyBulletinWithAnUnverifiedExternalAttachmentcause=Warning: This record includes attachments that have to be read outside of the Martus system. In addition, this file was sent to you from an [unknown/unverified] contact. Opening unknown attachments is one of the most common ways of introducing malware to your computer. Be sure of the safety of the attachment(s) before open or sharing with others.",
+
 "field:RetrieveHQSealedBulletinProgress=Retrieving Sealed Bulletins from Contacts",
 "field:RetrieveHQDraftBulletinProgress=Retrieving Draft Bulletins from Contacts",
 "field:RetrieveHQSealedBulletinSummaries=Retrieving Sealed Bulletin Summaries from Contacts",
