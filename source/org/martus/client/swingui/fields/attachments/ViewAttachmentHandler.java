@@ -130,6 +130,9 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 	{
 		if(proxy.getFile() != null)
 			return proxy.getFile();
+
+		if(proxy.getPendingPacket().getRawFile() != null)
+			return proxy.getPendingPacket().getRawFile();
 		
 		ReadableDatabase db = store.getDatabase();
 		MartusCrypto security = store.getSignatureVerifier();
@@ -169,11 +172,9 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 
 	static File extractAttachmentToTempFile(ReadableDatabase db, AttachmentProxy proxy, MartusCrypto security) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
 	{
-		String fileName = proxy.getLabel();
-		
+		String fileName = proxy.getLabel();		
 		File temp = File.createTempFile(BulletinXmlExporter.extractFileNameOnly(fileName), BulletinXmlExporter.extractExtentionOnly(fileName));
 		temp.deleteOnExit();
-	
 		BulletinLoader.extractAttachmentToFile(db, proxy, security, temp);
 		return temp;
 	}
