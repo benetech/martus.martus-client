@@ -124,6 +124,10 @@ public class TestFxBulletin extends TestCaseEnhanced
 		
 		ObservableList<GridRowData> gridData = fxb.gridDataProperty(gridTag);
 		assertEquals(1, gridData.size());
+		GridRowData gridRowData = gridData.get(0);
+		assertEquals(2, gridRowData.size());
+		assertEquals("Apple", gridRowData.get("A"));
+		assertEquals("Balloon", gridRowData.get("B"));
 	}
 
 	private GridData createSampleGridData(GridFieldSpec gridSpec2Colunns, FieldSpecCollection fsc)

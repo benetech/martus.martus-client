@@ -27,8 +27,6 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.util.HashMap;
 
-import javafx.collections.ObservableMap;
-
 import com.sun.javafx.collections.ObservableMapWrapper;
 
 public class GridRowData extends ObservableMapWrapper<String, String>
@@ -37,11 +35,4 @@ public class GridRowData extends ObservableMapWrapper<String, String>
 	{
 		super(new HashMap<String, String>());
 	}
-
-	public String get(String key)
-	{
-		return dataValues.get(key);
-	}
-	
-	private ObservableMap<String, String> dataValues;
 }
