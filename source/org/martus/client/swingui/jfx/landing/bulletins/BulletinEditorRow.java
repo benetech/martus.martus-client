@@ -81,15 +81,7 @@ public class BulletinEditorRow
 		addLabelAndField(label, fieldNode);
 	}
 
-	public void addFieldToRow(FieldSpec fieldSpec) throws Exception
-	{
-		if(fieldSpec.getType().isGrid())
-			addGridFieldToRow(fieldSpec);
-		else
-			addNormalFieldToRow(fieldSpec);
-	}
-
-	private void addGridFieldToRow(FieldSpec fieldSpec)
+	public void addGridFieldToRow(FieldSpec fieldSpec)
 	{
 		isGrid = true;
 		GridFieldSpec gridSpec = (GridFieldSpec) fieldSpec;
