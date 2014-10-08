@@ -92,10 +92,11 @@ public class BulletinEditorRow
 
 	public void addNormalFieldToRow(FieldSpec fieldSpec, SimpleStringProperty fieldValueProperty) throws Exception
 	{
+		ObservableBooleanValue isValidProperty = bulletin.isValidProperty(fieldSpec.getTag());
+
 		Node label = createLabel(fieldSpec);
 		Node fieldNode = fieldCreator.createFieldForSpec(bulletin, fieldSpec, fieldValueProperty);
 		
-		ObservableBooleanValue isValidProperty = bulletin.isValidProperty(fieldSpec.getTag());
 		addValidationBorder(isValidProperty, label);
 		addValidationBorder(isValidProperty, fieldNode);
 
