@@ -100,8 +100,8 @@ public class FxFormCreator
 		
 		try
 		{
-			SimpleStringProperty fieldValueProperty = bulletin.fieldProperty(fieldSpec.getTag());
-			ObservableBooleanValue isValidProperty = bulletin.isValidProperty(fieldSpec.getTag());
+			SimpleStringProperty fieldValueProperty = getFieldValueProperty(fieldSpec);
+			ObservableBooleanValue isValidProperty = getIsValidProperty(fieldSpec);
 			
 			currentSection.addField(fieldSpec, fieldValueProperty, isValidProperty);
 		}
@@ -120,6 +120,18 @@ public class FxFormCreator
 				throw new RuntimeException(e1);
 			}
 		}
+	}
+
+	public SimpleStringProperty getFieldValueProperty(FieldSpec fieldSpec)
+	{
+		SimpleStringProperty fieldValueProperty = bulletin.fieldProperty(fieldSpec.getTag());
+		return fieldValueProperty;
+	}
+
+	public ObservableBooleanValue getIsValidProperty(FieldSpec fieldSpec)
+	{
+		ObservableBooleanValue isValidProperty = bulletin.isValidProperty(fieldSpec.getTag());
+		return isValidProperty;
 	}
 
 	private boolean shouldOmitField(FieldSpec spec)
