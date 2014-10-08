@@ -231,12 +231,12 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		Integer status = getApp().getKeyVerificationStatus(bulletinSelected.getAccount());
 		if(status.equals(ContactKey.NOT_VERIFIED) || status.equals(ContactKey.NOT_VERIFIED_UNKNOWN))
 		{
-			if(couldAnyAttachmentBeViewedExternally(bulletinSelected))
+			if(wouldAnyAttachmentBeViewedExternally(bulletinSelected))
 				showNotifyDialog("BulletinWithAnUnverifiedExternalAttachment");
 		}
 	}
 
-	private boolean couldAnyAttachmentBeViewedExternally(Bulletin original)
+	private boolean wouldAnyAttachmentBeViewedExternally(Bulletin original)
 	{
 		AttachmentProxy[] publicAttachments = original.getPublicAttachments();
 		if(couldAnyAttachmentBeViewedExternally(publicAttachments))
