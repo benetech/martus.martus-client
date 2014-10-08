@@ -90,13 +90,6 @@ public class BulletinEditorRow
 		fieldsNode.getChildren().add(gridSection);
 	}
 
-	public void addNormalFieldToRow(FieldSpec fieldSpec, SimpleStringProperty fieldValueProperty) throws Exception
-	{
-		ObservableBooleanValue isValidProperty = bulletin.isValidProperty(fieldSpec.getTag());
-
-		addNormalFieldToRow(fieldSpec, fieldValueProperty, isValidProperty);
-	}
-
 	public void addNormalFieldToRow(FieldSpec fieldSpec, SimpleStringProperty fieldValueProperty, ObservableBooleanValue isValidProperty) throws Exception
 	{
 		Node label = createLabel(fieldSpec);
