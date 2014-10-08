@@ -124,14 +124,18 @@ public class FxFormCreator
 
 	public SimpleStringProperty getFieldValueProperty(FieldSpec fieldSpec)
 	{
-		SimpleStringProperty fieldValueProperty = bulletin.fieldProperty(fieldSpec.getTag());
-		return fieldValueProperty;
+		if(fieldSpec.getType().isGrid())
+			return null;
+		
+		return bulletin.fieldProperty(fieldSpec.getTag());
 	}
 
 	public ObservableBooleanValue getIsValidProperty(FieldSpec fieldSpec)
 	{
-		ObservableBooleanValue isValidProperty = bulletin.isValidProperty(fieldSpec.getTag());
-		return isValidProperty;
+		if(fieldSpec.getType().isGrid())
+			return null;
+		
+		return bulletin.isValidProperty(fieldSpec.getTag());
 	}
 
 	private boolean shouldOmitField(FieldSpec spec)
