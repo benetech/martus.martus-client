@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import java.util.Vector;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -85,7 +86,9 @@ public class BulletinEditorSection extends GridPane
 		else
 		{
 			SimpleStringProperty fieldValueProperty = bulletin.fieldProperty(fieldSpec.getTag());
-			currentRow.addNormalFieldToRow(fieldSpec, fieldValueProperty);
+			ObservableBooleanValue isValidProperty = bulletin.isValidProperty(fieldSpec.getTag());
+			
+			currentRow.addNormalFieldToRow(fieldSpec, fieldValueProperty, isValidProperty);
 		}
 		
 		if(!canKeepWithNextOrPrevious(fieldSpec))
