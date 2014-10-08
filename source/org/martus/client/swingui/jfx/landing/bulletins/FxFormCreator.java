@@ -27,6 +27,8 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.util.Vector;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
@@ -98,7 +100,10 @@ public class FxFormCreator
 		
 		try
 		{
-			currentSection.addField(fieldSpec);
+			SimpleStringProperty fieldValueProperty = bulletin.fieldProperty(fieldSpec.getTag());
+			ObservableBooleanValue isValidProperty = bulletin.isValidProperty(fieldSpec.getTag());
+			
+			currentSection.addField(fieldSpec, fieldValueProperty, isValidProperty);
 		}
 		catch(Exception e)
 		{
