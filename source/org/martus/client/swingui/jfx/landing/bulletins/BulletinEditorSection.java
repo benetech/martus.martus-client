@@ -70,6 +70,9 @@ public class BulletinEditorSection extends GridPane
 	
 	public void addField(FieldSpec fieldSpec) throws Exception
 	{
+		SimpleStringProperty fieldValueProperty = bulletin.fieldProperty(fieldSpec.getTag());
+		ObservableBooleanValue isValidProperty = bulletin.isValidProperty(fieldSpec.getTag());
+
 		boolean wantsKeepWithPrevious = fieldSpec.keepWithPrevious();
 		boolean canKeepWithPrevious = canKeepWithNextOrPrevious(fieldSpec);
 		boolean keepWithPrevious = (wantsKeepWithPrevious && canKeepWithPrevious);
@@ -85,9 +88,6 @@ public class BulletinEditorSection extends GridPane
 		}
 		else
 		{
-			SimpleStringProperty fieldValueProperty = bulletin.fieldProperty(fieldSpec.getTag());
-			ObservableBooleanValue isValidProperty = bulletin.isValidProperty(fieldSpec.getTag());
-			
 			currentRow.addNormalFieldToRow(fieldSpec, fieldValueProperty, isValidProperty);
 		}
 		
