@@ -25,8 +25,14 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
-import javafx.scene.control.Label;
+
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.MartusLocalization;
@@ -37,8 +43,50 @@ public class ExpandedGridSection extends TitledPane
 	public ExpandedGridSection(FxBulletin bulletinToUse, MartusLocalization localizationToUse, GridFieldSpec gridSpecToUse)
 	{
 		super();
-		setText(gridSpecToUse.getLabel());
-		setContent(new Label("Repeating (aka Expanded Grid) data would go here"));
+		bulletin = bulletinToUse;
+		localization = localizationToUse;
+		gridSpec = gridSpecToUse;
+		
+		setText(gridSpec.getLabel());
+		
+		itemBox = new VBox();
+		gridData = bulletinToUse.gridDataProperty(gridSpecToUse.getTag());
+		gridData.forEach((rowData) -> addItemControls(rowData));
+		
+		HBox bottom = new HBox();
+		Button appendItemButton = new Button("Add Item");
+		appendItemButton.setOnAction((event) -> appendItem()); 
+		bottom.getChildren().add(appendItemButton);
+
+		mainBorderPane = new BorderPane();
+		mainBorderPane.setCenter(itemBox);
+		mainBorderPane.setBottom(bottom);
+		setContent(mainBorderPane);
+		
+	}
+
+	private void addItemControls(GridRowData rowData)
+	{
+		itemBox.getChildren().add(createItem(rowData));
 	}
 	
+	private Node createItem(GridRowData rowData)
+	{
+		BulletinEditorSection section = new BulletinEditorSection(bulletin, localization, "");
+		return section;
+	}
+
+	private void appendItem()
+	{
+		GridRowData gridRowData = new GridRowData();
+		gridData.add(gridRowData);
+		addItemControls(gridRowData);
+	}
+
+	private FxBulletin bulletin;
+	private MartusLocalization localization;
+	private GridFieldSpec gridSpec;
+	private ObservableList<GridRowData> gridData;
+	private BorderPane mainBorderPane;
+	private VBox itemBox;
 }
