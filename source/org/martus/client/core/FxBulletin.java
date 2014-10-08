@@ -356,7 +356,7 @@ public class FxBulletin
 
 	}
 
-	public void clearProperty(SimpleStringProperty property)
+	private void clearProperty(SimpleStringProperty property)
 	{
 		property.setValue(null);
 	}
