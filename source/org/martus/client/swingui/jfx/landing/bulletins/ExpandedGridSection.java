@@ -26,6 +26,9 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.bulletins;
 
 
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -36,6 +39,8 @@ import javafx.scene.layout.VBox;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.common.MartusLogger;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 
 public class ExpandedGridSection extends TitledPane
@@ -73,6 +78,25 @@ public class ExpandedGridSection extends TitledPane
 	private Node createItem(GridRowData rowData)
 	{
 		BulletinEditorSection section = new BulletinEditorSection(bulletin, localization, "");
+		for(int column = 0; column < gridSpec.getColumnCount(); ++column)
+		{
+			FieldSpec fieldSpec = gridSpec.getFieldSpec(column);
+			SimpleStringProperty emptyValueProperty = new SimpleStringProperty("");
+			ObservableBooleanValue alwaysValidProperty = new SimpleBooleanProperty(false); 
+			try
+			{
+				section.addField(fieldSpec, emptyValueProperty, alwaysValidProperty);
+			}
+			catch(Exception e)
+			{
+				MartusLogger.logException(e);
+				String errorMessage = getLocalization().getFieldLabel("notifyUnexpectedErrorcause");
+				section.addErrorMessage(fieldSpec.getLabel(), errorMessage);
+			}
+		}
+		
+		section.addSeparator();
+		
 		return section;
 	}
 
@@ -81,6 +105,11 @@ public class ExpandedGridSection extends TitledPane
 		GridRowData gridRowData = new GridRowData();
 		gridData.add(gridRowData);
 		addItemControls(gridRowData);
+	}
+	
+	public MartusLocalization getLocalization()
+	{
+		return localization;
 	}
 
 	private FxBulletin bulletin;
