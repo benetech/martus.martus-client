@@ -239,15 +239,15 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	private boolean wouldAnyAttachmentBeViewedExternally(Bulletin original)
 	{
 		AttachmentProxy[] publicAttachments = original.getPublicAttachments();
-		if(couldAnyAttachmentBeViewedExternally(publicAttachments))
+		if(wouldAnyAttachmentBeViewedExternally(publicAttachments))
 			return true;
 		AttachmentProxy[] privateAttachments = original.getPrivateAttachments();
-		if(couldAnyAttachmentBeViewedExternally(privateAttachments))
+		if(wouldAnyAttachmentBeViewedExternally(privateAttachments))
 			return true;
 		return false;		
 	}
 
-	private boolean couldAnyAttachmentBeViewedExternally(AttachmentProxy[] attachments)
+	private boolean wouldAnyAttachmentBeViewedExternally(AttachmentProxy[] attachments)
 	{
 		int numberOfAttachments = attachments.length;
 		if(numberOfAttachments == 0)
