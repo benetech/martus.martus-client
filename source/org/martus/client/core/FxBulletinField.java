@@ -29,20 +29,44 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableBooleanValue;
 
+import org.martus.client.swingui.jfx.landing.bulletins.GridRowData;
+import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.GridFieldSpec;
 
 public class FxBulletinField
 {
 	public FxBulletinField(FieldSpec fieldSpecToUse, MiniLocalization localizationToUse)
 	{
+		fieldSpec = fieldSpecToUse;
 		valueProperty = new SimpleStringProperty("");
-		FieldValidator fieldValidator = new FieldValidator(fieldSpecToUse, localizationToUse);
+		gridDataIfApplicable = new GridFieldData();
+		FieldValidator fieldValidator = new FieldValidator(fieldSpec, localizationToUse);
 		setValidator(fieldValidator);
+	}
+	
+	public boolean isGrid()
+	{
+		return getFieldSpec().getType().isGrid();
+	}
+	
+	public String getTag()
+	{
+		return getFieldSpec().getTag();
+	}
+	
+	public FieldSpec getFieldSpec()
+	{
+		return fieldSpec;
 	}
 	
 	public SimpleStringProperty valueProperty()
 	{
+		if(isGrid())
+			throw new RuntimeException("valueProperty not available for grid: " + getTag());
+		
 		return valueProperty;
 	}
 
@@ -70,9 +94,40 @@ public class FxBulletinField
 
 	public ObservableBooleanValue fieldIsValidProperty()
 	{
+		if(isGrid())
+			throw new RuntimeException("fieldIsValidProperty not available for grid: " + getTag());
+
 		return validator.fieldIsValidProperty();
 	}
 	
+	public GridFieldData gridDataProperty()
+	{
+		return gridDataIfApplicable;
+	}
+
+	public void setGridData(String xmlGridData, PoolOfReusableChoicesLists poolOfReusableChoicesLists) throws Exception
+	{
+		GridFieldSpec gridSpec = (GridFieldSpec) getFieldSpec();
+		GridData data = new GridData(gridSpec, poolOfReusableChoicesLists);
+		data.setFromXml(xmlGridData);
+		
+		GridFieldData gridFieldData = gridDataProperty();
+		for(int row = 0; row < data.getRowCount(); ++row)
+		{
+			GridRowData rowData = new GridRowData();
+			for(int column = 0; column < data.getColumnCount(); ++column)
+			{
+				String columnLabel = gridSpec.getColumnLabel(column);
+				String value = data.getValueAt(row, column);
+				rowData.put(columnLabel, value);
+			}
+			
+			gridFieldData.add(rowData);
+		}
+	}
+
+	private FieldSpec fieldSpec;
 	private SimpleStringProperty valueProperty;
 	private FieldValidator validator;
+	private GridFieldData gridDataIfApplicable;
 }

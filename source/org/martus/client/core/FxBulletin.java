@@ -44,7 +44,6 @@ import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.landing.bulletins.AttachmentTableRowData;
 import org.martus.client.swingui.jfx.landing.bulletins.GridRowData;
 import org.martus.common.FieldSpecCollection;
-import org.martus.common.GridData;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusLogger;
@@ -218,7 +217,7 @@ public class FxBulletin
 	
 	public ObservableList<GridRowData> gridDataProperty(String tag)
 	{
-		return dataForGrids.get(tag);
+		return fields.get(tag).gridDataProperty();
 	}
 
 	public BooleanProperty getImmutableOnServerProperty()
@@ -345,8 +344,6 @@ public class FxBulletin
 		fields.forEach((key, field) -> clearField(field));
 		fields.clear();
 		
-		dataForGrids = new HashMap();
-		
 		fieldSpecs = new FieldSpecCollection();
 		
 		if(attachments != null)
@@ -379,28 +376,6 @@ public class FxBulletin
 				setField(fieldSpec, value);
 //			System.out.println("copyDataFromBulletin " + fieldTag + ":" + value);
 		}
-	}
-
-	private void setGridField(GridFieldSpec gridSpec, String xmlGridData, PoolOfReusableChoicesLists poolOfReusableChoicesLists) throws Exception
-	{
-		GridData data = new GridData(gridSpec, poolOfReusableChoicesLists);
-		data.setFromXml(xmlGridData);
-		
-		GridFieldData gridFieldData = new GridFieldData();
-		for(int row = 0; row < data.getRowCount(); ++row)
-		{
-			GridRowData rowData = new GridRowData();
-			for(int column = 0; column < data.getColumnCount(); ++column)
-			{
-				String columnLabel = gridSpec.getColumnLabel(column);
-				String value = data.getValueAt(row, column);
-				rowData.put(columnLabel, value);
-			}
-			
-			gridFieldData.add(rowData);
-		}
-		
-		dataForGrids.put(gridSpec.getTag(), gridFieldData);
 	}
 
 	private String getFieldValue(MartusField field)
@@ -459,6 +434,14 @@ public class FxBulletin
 		field.addValueListener((observable, newValue, oldValue) -> hasBeenModified = true);
 	}
 	
+	private void setGridField(GridFieldSpec fieldSpec, String value, PoolOfReusableChoicesLists allReusableChoiceLists) throws Exception
+	{
+		String tag = fieldSpec.getTag();
+
+		FxBulletinField field = fields.get(tag);
+		field.setGridData(value, allReusableChoiceLists);
+	}
+
 	private void copyReusableChoiceListsFromBulletinSection(FieldSpecCollection bulletinFieldSpecs)
 	{
 		fieldSpecs.addAllReusableChoicesLists(bulletinFieldSpecs.getAllReusableChoiceLists());
@@ -474,7 +457,6 @@ public class FxBulletin
 	private SimpleBooleanProperty hasBeenValidatedProperty;
 	
 	private HashMap<String, FxBulletinField> fields;
-	private HashMap<String, GridFieldData> dataForGrids;
 	
 	private ReadOnlyObjectWrapper<UniversalId> universalIdProperty;
 	private ReadOnlyIntegerProperty versionProperty;
