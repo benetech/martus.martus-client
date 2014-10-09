@@ -261,11 +261,9 @@ public class FxBulletin
 		for(int i = 0; i < fieldSpecs.size(); ++i)
 		{
 			FieldSpec spec = fieldSpecs.get(i);
-			if(spec.getType().isGrid())
-				continue;
 			
-			String value = fieldProperty(spec.getTag()).getValue();
-			FieldValidator.validateField(spec, value, getLocalization());
+			String tag = spec.getTag();
+			fields.get(tag).validate();
 		}
 	}
 

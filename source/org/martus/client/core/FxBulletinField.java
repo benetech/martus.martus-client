@@ -183,6 +183,9 @@ public class FxBulletinField
 
 	public void validate() throws DataInvalidException
 	{
+		if(isGrid())
+			return;
+		
 		validator.validate(valueProperty().getValue());
 	}
 
