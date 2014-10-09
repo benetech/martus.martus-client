@@ -34,9 +34,9 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 
-class FieldValidator implements ChangeListener<String>
+public class FxFieldValidator implements ChangeListener<String>
 {
-	public FieldValidator(FieldSpec specToUse, MiniLocalization localizationToUse)
+	public FxFieldValidator(FieldSpec specToUse, MiniLocalization localizationToUse)
 	{
 		spec = specToUse;
 		localization = localizationToUse;
