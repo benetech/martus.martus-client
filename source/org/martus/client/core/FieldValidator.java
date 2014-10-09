@@ -76,19 +76,14 @@ public class FieldValidator implements ChangeListener<String>
 	
 	public void validate(String value) throws DataInvalidException
 	{
-		String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, localization);
-		validateField(spec, label, value, localization);
-	}
-
-	private static void validateField(FieldSpec spec, String displayableLabel, String fieldDataValue, MiniLocalization localization) throws DataInvalidException
-	{
 		FieldType type = spec.getType();
 		if(type.isGrid())
 		{
 			MartusLogger.logError("******* Validation not handled yet for " + type.getTypeName());
 			return;
 		}
-		spec.validate(displayableLabel, fieldDataValue, localization);
+		String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, localization);
+		spec.validate(label, value, localization);
 	}
 
 	private FieldSpec spec;
