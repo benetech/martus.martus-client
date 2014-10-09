@@ -457,9 +457,6 @@ public class FxBulletin
 		FxBulletinField field = fields.get(tag);
 		field.setValue(value);
 		field.addValueListener((observable, newValue, oldValue) -> hasBeenModified = true);
-
-		FieldValidator fieldValidator = new FieldValidator(spec, getLocalization());
-		field.setValidator(fieldValidator);
 	}
 	
 	private void copyReusableChoiceListsFromBulletinSection(FieldSpecCollection bulletinFieldSpecs)

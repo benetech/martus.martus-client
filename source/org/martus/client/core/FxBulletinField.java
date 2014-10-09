@@ -37,7 +37,8 @@ public class FxBulletinField
 	public FxBulletinField(FieldSpec fieldSpecToUse, MiniLocalization localizationToUse)
 	{
 		valueProperty = new SimpleStringProperty("");
-		validator = null;
+		FieldValidator fieldValidator = new FieldValidator(fieldSpecToUse, localizationToUse);
+		setValidator(fieldValidator);
 	}
 	
 	public SimpleStringProperty valueProperty()
@@ -60,7 +61,7 @@ public class FxBulletinField
 		valueProperty.setValue(null);
 	}
 
-	public void setValidator(FieldValidator validatorToUse)
+	private void setValidator(FieldValidator validatorToUse)
 	{
 		validator = validatorToUse;
 		validator.updateStatus(valueProperty.getValue());
