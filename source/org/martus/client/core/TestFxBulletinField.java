@@ -26,11 +26,18 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.core;
 
 import javafx.beans.value.ObservableBooleanValue;
+import javafx.collections.ObservableList;
 
 import org.junit.Test;
+import org.martus.client.swingui.jfx.landing.bulletins.GridRowData;
+import org.martus.common.FieldSpecCollection;
+import org.martus.common.GridData;
+import org.martus.common.GridRow;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestFxBulletinField extends TestCaseEnhanced
@@ -55,6 +62,14 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		FieldSpec fieldSpec = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
 		FxBulletinField field = new FxBulletinField(fieldSpec, localization);
 		assertEquals("", field.valueProperty().getValue());
+		try
+		{
+			field.gridDataProperty();
+		}
+		catch(Exception ignoreExpected)
+		{
+		}
+
 		field.valueProperty().setValue(SAMPLE);
 		field.clear();
 		assertNull(field.valueProperty().getValue());
@@ -82,7 +97,57 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		ObservableBooleanValue fieldIsValidProperty = field.fieldIsValidProperty();
 		assertFalse(fieldIsValidProperty.getValue());
 	}
+	
+	public void testGrid() throws Exception
+	{
+		String gridTag = "grid";
+		GridFieldSpec gridSpec2Colunns = new GridFieldSpec();
+		gridSpec2Colunns.setTag(gridTag);
+		gridSpec2Colunns.setLabel("Grid");
+		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("a", "A", new FieldTypeNormal()));
+		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("b", "B", new FieldTypeDate()));
 
+		FxBulletinField gridField = new FxBulletinField(gridSpec2Colunns, localization);
+		try
+		{
+			gridField.valueProperty();
+			fail("valueProperty should have thrown for grid");
+		}
+		catch(Exception ignoreExpected)
+		{
+		}
+		try
+		{
+			gridField.fieldIsValidProperty();
+			fail("fieldIsValidProperty should have thrown for grid");
+		}
+		catch(Exception ignoreExpected)
+		{
+		}
+		
+		FieldSpecCollection noReusableLists = new FieldSpecCollection();
+		GridData data = createSampleGridData(gridSpec2Colunns, noReusableLists);
+		gridField.setGridData(data.getXmlRepresentation(), noReusableLists.getAllReusableChoiceLists());
+
+		ObservableList<GridRowData> gridData = gridField.gridDataProperty();
+		assertEquals(1, gridData.size());
+		GridRowData gridRowData = gridData.get(0);
+		assertEquals(2, gridRowData.size());
+		assertEquals("Apple", gridRowData.get("A"));
+		assertEquals("Balloon", gridRowData.get("B"));
+		
+	}
+
+	private GridData createSampleGridData(GridFieldSpec gridSpec2Colunns, FieldSpecCollection fsc)
+	{
+		GridData gridData = new GridData(gridSpec2Colunns, fsc.getAllReusableChoiceLists());
+		GridRow gridRowSample = new GridRow(gridSpec2Colunns, fsc.getAllReusableChoiceLists());
+		gridRowSample.setCellText(0, "Apple");
+		gridRowSample.setCellText(1, "Balloon");
+		gridData.addRow(gridRowSample);
+		return gridData;
+	}
+	
 	private MiniLocalization localization;
 
 }
