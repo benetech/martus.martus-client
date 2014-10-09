@@ -27,7 +27,6 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.util.Vector;
 
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
@@ -100,9 +99,7 @@ public class FxFormCreator
 		
 		try
 		{
-			ObservableBooleanValue isValidProperty = getIsValidProperty(field);
-			
-			currentSection.addField(field, isValidProperty);
+			currentSection.addField(field);
 		}
 		catch(Exception e)
 		{
@@ -119,14 +116,6 @@ public class FxFormCreator
 				throw new RuntimeException(e1);
 			}
 		}
-	}
-
-	private ObservableBooleanValue getIsValidProperty(FxBulletinField field)
-	{
-		if(field.isGrid())
-			return null;
-		
-		return field.fieldIsValidProperty();
 	}
 
 	private boolean shouldOmitField(FxBulletinField field)

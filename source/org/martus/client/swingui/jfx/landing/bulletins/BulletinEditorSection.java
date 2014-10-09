@@ -27,7 +27,6 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.util.Vector;
 
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.Separator;
@@ -70,7 +69,7 @@ public class BulletinEditorSection extends GridPane
 		return title;
 	}
 	
-	public void addField(FxBulletinField field, ObservableBooleanValue isValidProperty) throws Exception
+	public void addField(FxBulletinField field) throws Exception
 	{
 		FieldSpec fieldSpec = field.getFieldSpec();
 		
@@ -89,7 +88,7 @@ public class BulletinEditorSection extends GridPane
 		}
 		else
 		{
-			currentRow.addNormalFieldToRow(field, isValidProperty);
+			currentRow.addNormalFieldToRow(field);
 		}
 		
 		if(!canKeepWithNextOrPrevious(fieldSpec))
