@@ -225,7 +225,10 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		fsc.add(nestedDropDown);
 		FxBulletin fxb = createFxBulletin();
 		
-		Vector<ObservableChoiceItemList> nestedLists = fxb.getChoiceItemLists(nestedDropDownTag);
+		FxBulletinField field = new FxBulletinField(fxb, nestedDropDown, localization);
+		assertTrue(field.isDropdown());
+
+		Vector<ObservableChoiceItemList> nestedLists = field.getChoiceItemLists();
 		assertEquals(2, nestedLists.size());
 		ObservableChoiceItemList nestedStatesList = nestedLists.get(0);
 		assertEquals(statesChoices.size()+1, nestedStatesList.size());
