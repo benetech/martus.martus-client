@@ -91,8 +91,10 @@ public class BulletinEditorRow
 		fieldsNode.getChildren().add(gridSection);
 	}
 
-	public void addNormalFieldToRow(FieldSpec fieldSpec, SimpleStringProperty fieldValueProperty, ObservableBooleanValue isValidProperty) throws Exception
+	public void addNormalFieldToRow(FxBulletinField field, SimpleStringProperty fieldValueProperty, ObservableBooleanValue isValidProperty) throws Exception
 	{
+		FieldSpec fieldSpec = field.getFieldSpec();
+		
 		Node label = createLabel(fieldSpec);
 		Node fieldNode = fieldCreator.createFieldForSpec(bulletin, fieldSpec, fieldValueProperty);
 		
