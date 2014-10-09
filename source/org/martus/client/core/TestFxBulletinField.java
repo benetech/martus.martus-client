@@ -93,6 +93,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		assertFalse(field.isSectionStart());
 		assertFalse(field.isDropdown());
 		assertEquals("", field.valueProperty().getValue());
+		field.validate();
 		try
 		{
 			field.gridDataProperty();
@@ -133,6 +134,16 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		assertTrue(field.isRequiredField());
 		ObservableBooleanValue fieldIsValidProperty = field.fieldIsValidProperty();
 		assertFalse(fieldIsValidProperty.getValue());
+
+//		Commented out until this test can pass
+//		try
+//		{
+//			field.validate();
+//			fail("Blank required field should have thrown");
+//		}
+//		catch(RequiredFieldIsBlankException ignoreExpected)
+//		{
+//		}
 	}
 	
 	public void testGrid() throws Exception
