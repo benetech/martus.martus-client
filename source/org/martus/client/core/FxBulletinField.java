@@ -63,6 +63,11 @@ public class FxBulletinField
 		return getFieldSpec().getTag();
 	}
 	
+	public String getLabel()
+	{
+		return getFieldSpec().getLabel();
+	}
+
 	public FieldSpec getFieldSpec()
 	{
 		return fieldSpec;
