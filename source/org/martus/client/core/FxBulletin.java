@@ -190,6 +190,16 @@ public class FxBulletin
 		return specs;
 	}
 
+	public FxBulletinField getField(FieldSpec fieldSpec)
+	{
+		return getField(fieldSpec.getTag());
+	}
+
+	public FxBulletinField getField(String tag)
+	{
+		return fields.get(tag);
+	}
+
 	public SimpleStringProperty fieldProperty(String fieldTag)
 	{
 		FieldSpec foundSpec = fieldSpecs.findBytag(fieldTag);
