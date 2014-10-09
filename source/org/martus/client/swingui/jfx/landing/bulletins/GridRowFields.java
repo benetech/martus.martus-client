@@ -31,9 +31,9 @@ import org.martus.client.core.FxBulletinField;
 
 import com.sun.javafx.collections.ObservableMapWrapper;
 
-public class GridRowData extends ObservableMapWrapper<String, FxBulletinField>
+public class GridRowFields extends ObservableMapWrapper<String, FxBulletinField>
 {
-	public GridRowData()
+	public GridRowFields()
 	{
 		super(new HashMap<String, FxBulletinField>());
 	}

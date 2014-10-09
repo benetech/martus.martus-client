@@ -68,12 +68,12 @@ public class ExpandedGridSection extends TitledPane
 		
 	}
 
-	private void addItemControls(GridRowData rowData)
+	private void addItemControls(GridRowFields rowData)
 	{
 		itemBox.getChildren().add(createItem(rowData));
 	}
 	
-	private Node createItem(GridRowData rowData)
+	private Node createItem(GridRowFields rowData)
 	{
 		BulletinEditorSection section = new BulletinEditorSection(bulletin, localization, "");
 		for(int column = 0; column < gridSpec.getColumnCount(); ++column)
@@ -99,7 +99,7 @@ public class ExpandedGridSection extends TitledPane
 
 	private void appendItem()
 	{
-		GridRowData gridRowData = new GridRowData();
+		GridRowFields gridRowData = new GridRowFields();
 		gridData.add(gridRowData);
 		addItemControls(gridRowData);
 	}
@@ -112,7 +112,7 @@ public class ExpandedGridSection extends TitledPane
 	private FxBulletin bulletin;
 	private MartusLocalization localization;
 	private GridFieldSpec gridSpec;
-	private ObservableList<GridRowData> gridData;
+	private ObservableList<GridRowFields> gridData;
 	private BorderPane mainBorderPane;
 	private VBox itemBox;
 }

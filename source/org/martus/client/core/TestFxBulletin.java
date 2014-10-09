@@ -36,7 +36,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 
 import org.martus.client.swingui.jfx.landing.bulletins.AttachmentTableRowData;
-import org.martus.client.swingui.jfx.landing.bulletins.GridRowData;
+import org.martus.client.swingui.jfx.landing.bulletins.GridRowFields;
 import org.martus.client.test.MockBulletinStore;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
@@ -118,9 +118,9 @@ public class TestFxBulletin extends TestCaseEnhanced
 		{
 		}
 		
-		ObservableList<GridRowData> gridData = fxb.gridDataProperty(gridTag);
+		ObservableList<GridRowFields> gridData = fxb.gridDataProperty(gridTag);
 		assertEquals(1, gridData.size());
-		GridRowData gridRowData = gridData.get(0);
+		GridRowFields gridRowData = gridData.get(0);
 		assertEquals(2, gridRowData.size());
 		assertEquals("Apple", gridRowData.get("A").valueProperty().getValue());
 		assertEquals("Balloon", gridRowData.get("B").valueProperty().getValue());

@@ -27,14 +27,14 @@ package org.martus.client.core;
 
 import java.util.Vector;
 
-import org.martus.client.swingui.jfx.landing.bulletins.GridRowData;
+import org.martus.client.swingui.jfx.landing.bulletins.GridRowFields;
 
 import com.sun.javafx.collections.ObservableListWrapper;
 
-public class GridFieldData extends ObservableListWrapper<GridRowData>
+public class GridFieldData extends ObservableListWrapper<GridRowFields>
 {
 	public GridFieldData()
 	{
-		super(new Vector<GridRowData>());
+		super(new Vector<GridRowFields>());
 	}
 }

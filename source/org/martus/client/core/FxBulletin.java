@@ -41,7 +41,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import org.martus.client.swingui.jfx.landing.bulletins.AttachmentTableRowData;
-import org.martus.client.swingui.jfx.landing.bulletins.GridRowData;
+import org.martus.client.swingui.jfx.landing.bulletins.GridRowFields;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
@@ -225,7 +225,7 @@ public class FxBulletin
 		return fields.get(fieldTag).fieldIsValidProperty();
 	}
 	
-	public ObservableList<GridRowData> gridDataProperty(String tag)
+	public ObservableList<GridRowFields> gridDataProperty(String tag)
 	{
 		return fields.get(tag).gridDataProperty();
 	}
