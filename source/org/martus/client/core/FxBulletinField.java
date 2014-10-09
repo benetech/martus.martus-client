@@ -180,6 +180,10 @@ public class FxBulletinField
 		return getSimpleChoiceItemLists();
 	}
 
+	public void validate() throws Exception
+	{
+	}
+
 	private Vector<ObservableChoiceItemList> getReusableChoiceItemLists(DropDownFieldSpec dropDownSpec)
 	{
 		Vector<ObservableChoiceItemList> listOfLists = new Vector<ObservableChoiceItemList>();
