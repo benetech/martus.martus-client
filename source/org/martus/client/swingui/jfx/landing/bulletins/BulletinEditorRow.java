@@ -29,7 +29,6 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.binding.When;
 import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -90,10 +89,10 @@ public class BulletinEditorRow
 		fieldsNode.getChildren().add(gridSection);
 	}
 
-	public void addNormalFieldToRow(FxBulletinField field, SimpleStringProperty fieldValueProperty, ObservableBooleanValue isValidProperty) throws Exception
+	public void addNormalFieldToRow(FxBulletinField field, ObservableBooleanValue isValidProperty) throws Exception
 	{
 		Node label = createLabel(field);
-		Node fieldNode = fieldCreator.createFieldNode(bulletin, field, fieldValueProperty);
+		Node fieldNode = fieldCreator.createFieldNode(bulletin, field);
 		
 		addValidationBorder(isValidProperty, label);
 		addValidationBorder(isValidProperty, fieldNode);

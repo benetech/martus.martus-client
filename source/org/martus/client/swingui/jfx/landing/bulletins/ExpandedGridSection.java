@@ -27,7 +27,6 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -83,11 +82,10 @@ public class ExpandedGridSection extends TitledPane
 		{
 			FieldSpec fieldSpec = gridSpec.getFieldSpec(column);
 			FxBulletinField field = new FxBulletinField(fieldSpec, getLocalization());
-			SimpleStringProperty emptyValueProperty = new SimpleStringProperty("");
 			ObservableBooleanValue alwaysValidProperty = new SimpleBooleanProperty(false); 
 			try
 			{
-				section.addField(field, emptyValueProperty, alwaysValidProperty);
+				section.addField(field, alwaysValidProperty);
 			}
 			catch(Exception e)
 			{
