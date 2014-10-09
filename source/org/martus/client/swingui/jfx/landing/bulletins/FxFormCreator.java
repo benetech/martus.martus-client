@@ -79,8 +79,6 @@ public class FxFormCreator
 
 	private void addField(FxBulletinField field)
 	{
-		FieldSpec fieldSpec = field.getFieldSpec();
-		
 		if(shouldOmitField(field))
 			return;
 
@@ -106,7 +104,7 @@ public class FxFormCreator
 			SimpleStringProperty fieldValueProperty = getFieldValueProperty(field);
 			ObservableBooleanValue isValidProperty = getIsValidProperty(field);
 			
-			currentSection.addField(fieldSpec, fieldValueProperty, isValidProperty);
+			currentSection.addField(field, fieldValueProperty, isValidProperty);
 		}
 		catch(Exception e)
 		{
