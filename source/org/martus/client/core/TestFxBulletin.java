@@ -129,6 +129,10 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals(2, gridRowData.size());
 		assertEquals("Apple", gridRowData.get("A"));
 		assertEquals("Balloon", gridRowData.get("B"));
+		
+		Bulletin modified = new Bulletin(security);
+		fxb.copyDataToBulletin(modified);
+		assertEquals("", modified.get(gridTag));
 	}
 
 	private GridData createSampleGridData(GridFieldSpec gridSpec2Colunns, FieldSpecCollection fsc)
