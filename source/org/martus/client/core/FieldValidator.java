@@ -30,9 +30,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.beans.value.ObservableValue;
 
+import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldType;
 
 public class FieldValidator implements ChangeListener<String>
 {
@@ -61,7 +63,7 @@ public class FieldValidator implements ChangeListener<String>
 		{
 			if(newValue == null)
 				newValue = "";
-			FxBulletinField.validateField(spec, newValue, localization);
+			FieldValidator.validateField(spec, newValue, localization);
 			isValid = true;
 		} 
 		catch (DataInvalidException noNeedToLogOrThrow)
@@ -70,6 +72,23 @@ public class FieldValidator implements ChangeListener<String>
 		}
 		
 		fieldIsValidProperty.setValue(isValid);
+	}
+
+	protected static void validateField(FieldSpec spec, String value, MiniLocalization localization) throws DataInvalidException
+	{
+		String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, localization);
+		validateField(spec, label, value, localization);
+	}
+
+	private static void validateField(FieldSpec spec, String displayableLabel, String fieldDataValue, MiniLocalization localization) throws DataInvalidException
+	{
+		FieldType type = spec.getType();
+		if(type.isGrid())
+		{
+			MartusLogger.logError("******* Validation not handled yet for " + type.getTypeName());
+			return;
+		}
+		spec.validate(displayableLabel, fieldDataValue, localization);
 	}
 
 	private FieldSpec spec;

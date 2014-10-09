@@ -265,7 +265,7 @@ public class FxBulletin
 				continue;
 			
 			String value = fieldProperty(spec.getTag()).getValue();
-			FxBulletinField.validateField(spec, value, getLocalization());
+			FieldValidator.validateField(spec, value, getLocalization());
 		}
 	}
 
