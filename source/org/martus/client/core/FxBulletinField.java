@@ -36,6 +36,8 @@ import org.martus.client.swingui.jfx.landing.bulletins.GridRowData;
 import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
+import org.martus.common.ReusableChoices;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
@@ -43,8 +45,9 @@ import org.martus.common.fieldspec.GridFieldSpec;
 
 public class FxBulletinField
 {
-	public FxBulletinField(FieldSpec fieldSpecToUse, MiniLocalization localizationToUse)
+	public FxBulletinField(FxBulletin bulletinToUse, FieldSpec fieldSpecToUse, MiniLocalization localizationToUse)
 	{
+		fxb = bulletinToUse;
 		fieldSpec = fieldSpecToUse;
 		valueProperty = new SimpleStringProperty("");
 		gridDataIfApplicable = new GridFieldData();
@@ -133,10 +136,11 @@ public class FxBulletinField
 		return gridDataIfApplicable;
 	}
 
-	public void setGridData(String xmlGridData, PoolOfReusableChoicesLists poolOfReusableChoicesLists) throws Exception
+	public void setGridData(String xmlGridData) throws Exception
 	{
 		GridFieldSpec gridSpec = (GridFieldSpec) getFieldSpec();
-		GridData data = new GridData(gridSpec, poolOfReusableChoicesLists);
+		PoolOfReusableChoicesLists poolOfReusableChoicesLists = fxb.getAllReusableChoicesLists();
+		GridData data = new GridData(gridSpec, poolOfReusableChoicesLists );
 		data.setFromXml(xmlGridData);
 		
 		GridFieldData gridFieldData = gridDataProperty();
@@ -166,9 +170,30 @@ public class FxBulletinField
 			return new Vector<ObservableChoiceItemList>();
 		
 		if(isReusable)
-			return new Vector<ObservableChoiceItemList>();
+			return getReusableChoiceItemLists(dropDownSpec);
 		
 		return getSimpleChoiceItemLists();
+	}
+
+	private Vector<ObservableChoiceItemList> getReusableChoiceItemLists(DropDownFieldSpec dropDownSpec)
+	{
+		Vector<ObservableChoiceItemList> listOfLists = new Vector<ObservableChoiceItemList>();
+
+		String[] reusableChoicesCodes = dropDownSpec.getReusableChoicesCodes();
+
+		for(int i = 0; i < reusableChoicesCodes.length; ++i)
+		{
+			String onlyReusableChoicesCode = reusableChoicesCodes[i];
+			ReusableChoices reusableChoices = fxb.getReusableChoices(onlyReusableChoicesCode);
+			ChoiceItem[] choiceItems = reusableChoices.getChoices();
+			ObservableChoiceItemList list = new ObservableChoiceItemList();
+			ChoiceItem emptyItemAtTheStartOfEveryReusableList = new ChoiceItem("", "");
+			list.add(emptyItemAtTheStartOfEveryReusableList);
+			list.addAll(choiceItems);
+			
+			listOfLists.add(list);
+		}
+		return listOfLists;
 	}
 
 	private Vector<ObservableChoiceItemList> getSimpleChoiceItemLists()
@@ -185,7 +210,8 @@ public class FxBulletinField
 	{
 		return getFieldSpec().getType();
 	}
-	
+
+	private FxBulletin fxb;
 	private FieldSpec fieldSpec;
 	private SimpleStringProperty valueProperty;
 	private FieldValidator validator;

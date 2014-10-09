@@ -79,7 +79,7 @@ public class ExpandedGridSection extends TitledPane
 		for(int column = 0; column < gridSpec.getColumnCount(); ++column)
 		{
 			FieldSpec fieldSpec = gridSpec.getFieldSpec(column);
-			FxBulletinField field = new FxBulletinField(fieldSpec, getLocalization());
+			FxBulletinField field = new FxBulletinField(bulletin, fieldSpec, getLocalization());
 			try
 			{
 				section.addField(field);
