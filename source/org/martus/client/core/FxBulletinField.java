@@ -27,12 +27,16 @@ package org.martus.client.core;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableBooleanValue;
+
+import org.martus.client.core.FxBulletin.FieldValidator;
 
 public class FxBulletinField
 {
 	public FxBulletinField()
 	{
 		valueProperty = new SimpleStringProperty("");
+		validator = null;
 	}
 	
 	public SimpleStringProperty valueProperty()
@@ -55,5 +59,18 @@ public class FxBulletinField
 		valueProperty.setValue(null);
 	}
 
+	public void setValidator(FieldValidator validatorToUse)
+	{
+		validator = validatorToUse;
+		validator.updateStatus(valueProperty.getValue());
+		addValueListener(validator);
+	}
+
+	public ObservableBooleanValue fieldIsValidProperty()
+	{
+		return validator.isValidProperty();
+	}
+	
 	private SimpleStringProperty valueProperty;
+	private FieldValidator validator;
 }
