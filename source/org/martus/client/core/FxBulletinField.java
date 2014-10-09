@@ -29,8 +29,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableBooleanValue;
 
-import org.martus.client.core.FxBulletin.FieldValidator;
-
 public class FxBulletinField
 {
 	public FxBulletinField()
