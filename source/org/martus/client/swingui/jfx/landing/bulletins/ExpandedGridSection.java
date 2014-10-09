@@ -38,6 +38,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import org.martus.client.core.FxBulletin;
+import org.martus.client.core.FxBulletinField;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.FieldSpec;
@@ -81,11 +82,12 @@ public class ExpandedGridSection extends TitledPane
 		for(int column = 0; column < gridSpec.getColumnCount(); ++column)
 		{
 			FieldSpec fieldSpec = gridSpec.getFieldSpec(column);
+			FxBulletinField field = new FxBulletinField(fieldSpec, getLocalization());
 			SimpleStringProperty emptyValueProperty = new SimpleStringProperty("");
 			ObservableBooleanValue alwaysValidProperty = new SimpleBooleanProperty(false); 
 			try
 			{
-				section.addField(fieldSpec, emptyValueProperty, alwaysValidProperty);
+				section.addField(field, emptyValueProperty, alwaysValidProperty);
 			}
 			catch(Exception e)
 			{

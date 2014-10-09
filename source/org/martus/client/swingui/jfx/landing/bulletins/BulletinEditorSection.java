@@ -37,6 +37,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
 import org.martus.client.core.FxBulletin;
+import org.martus.client.core.FxBulletinField;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
@@ -70,8 +71,10 @@ public class BulletinEditorSection extends GridPane
 		return title;
 	}
 	
-	public void addField(FieldSpec fieldSpec, SimpleStringProperty fieldValueProperty, ObservableBooleanValue isValidProperty) throws Exception
+	public void addField(FxBulletinField field, SimpleStringProperty fieldValueProperty, ObservableBooleanValue isValidProperty) throws Exception
 	{
+		FieldSpec fieldSpec = field.getFieldSpec();
+		
 		boolean wantsKeepWithPrevious = fieldSpec.keepWithPrevious();
 		boolean canKeepWithPrevious = canKeepWithNextOrPrevious(fieldSpec);
 		boolean keepWithPrevious = (wantsKeepWithPrevious && canKeepWithPrevious);
