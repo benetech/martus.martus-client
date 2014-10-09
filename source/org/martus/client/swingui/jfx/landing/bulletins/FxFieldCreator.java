@@ -76,7 +76,7 @@ public class FxFieldCreator
 			return createBooleanField(property);
 		
 		if(spec.getType().isDropdown())
-			return createDropdownField(bulletin, property, spec);
+			return createDropdownField(bulletin, field);
 		
 		if(spec.getType().isDate())
 			return createDateField(field);
@@ -113,16 +113,19 @@ public class FxFieldCreator
 		return picker;
 	}
 	
-	private Node createDropdownField(FxBulletin bulletin, Property<String> property, FieldSpec rawSpec) throws Exception
+	private Node createDropdownField(FxBulletin bulletin, FxBulletinField field) throws Exception
 	{
-		Vector<ObservableChoiceItemList> listOfChoiceItemLists = bulletin.getChoiceItemLists(rawSpec.getTag());
+		Vector<ObservableChoiceItemList> listOfChoiceItemLists = bulletin.getChoiceItemLists(field.getTag());
 		if(listOfChoiceItemLists.size() == 0)
 			return createFieldNotAvailable();
 
 		NestedChoiceBox choiceBoxes = new NestedChoiceBox();
 		choiceBoxes.setChoiceItemLists(listOfChoiceItemLists);
+
+		Property<String> property = field.valueProperty();
 		choiceBoxes.setValue(property.getValue());
 		property.bind(choiceBoxes.valueProperty());
+
 		return choiceBoxes;
 	}
 
