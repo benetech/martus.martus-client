@@ -26,8 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.bulletins;
 
 
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -82,10 +80,9 @@ public class ExpandedGridSection extends TitledPane
 		{
 			FieldSpec fieldSpec = gridSpec.getFieldSpec(column);
 			FxBulletinField field = new FxBulletinField(fieldSpec, getLocalization());
-			ObservableBooleanValue alwaysValidProperty = new SimpleBooleanProperty(false); 
 			try
 			{
-				section.addField(field, alwaysValidProperty);
+				section.addField(field);
 			}
 			catch(Exception e)
 			{
