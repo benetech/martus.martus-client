@@ -37,6 +37,7 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.FieldTypeSectionStart;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.util.TestCaseEnhanced;
 
@@ -61,6 +62,8 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		final String SAMPLE = "test";
 		FieldSpec fieldSpec = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
 		FxBulletinField field = new FxBulletinField(fieldSpec, localization);
+		assertFalse(field.isGrid());
+		assertFalse(field.isSectionStart());
 		assertEquals("", field.valueProperty().getValue());
 		try
 		{
@@ -137,6 +140,13 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		assertEquals("Apple", gridRowData.get("A"));
 		assertEquals("Balloon", gridRowData.get("B"));
 		
+	}
+	
+	public void testSection() throws Exception
+	{
+		FieldSpec spec = FieldSpec.createCustomField("tag", "Label", new FieldTypeSectionStart());
+		FxBulletinField field = new FxBulletinField(spec, localization);
+		assertTrue(field.isSectionStart());
 	}
 
 	private GridData createSampleGridData(GridFieldSpec gridSpec2Colunns, FieldSpecCollection fsc)

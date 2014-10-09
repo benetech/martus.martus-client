@@ -84,7 +84,7 @@ public class FxFormCreator
 		if(shouldOmitField(fieldSpec))
 			return;
 
-		boolean isSectionStart = fieldSpec.getType().isSectionStart();
+		boolean isSectionStart = field.isSectionStart();
 		
 		if(isSectionStart || currentSection == null)
 		{
