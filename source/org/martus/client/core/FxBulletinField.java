@@ -25,14 +25,18 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core;
 
+import java.util.Vector;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableBooleanValue;
 
+import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.landing.bulletins.GridRowData;
 import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -56,6 +60,11 @@ public class FxBulletinField
 	public boolean isSectionStart()
 	{
 		return getType().isSectionStart();
+	}
+
+	public boolean isDropdown()
+	{
+		return getType().isDropdown();
 	}
 
 	public String getTag()
@@ -143,6 +152,33 @@ public class FxBulletinField
 			
 			gridFieldData.add(rowData);
 		}
+	}
+
+	public Vector<ObservableChoiceItemList> getChoiceItemLists()
+	{
+		if(!isDropdown())
+			throw new RuntimeException("Field is not a dropdown: " + getTag());
+		
+		DropDownFieldSpec dropDownSpec = (DropDownFieldSpec) getFieldSpec();
+		boolean isDataDriven = (dropDownSpec.getDataSource() != null);
+		boolean isReusable = (dropDownSpec.getReusableChoicesCodes().length > 0);
+		if(isDataDriven)
+			return new Vector<ObservableChoiceItemList>();
+		
+		if(isReusable)
+			return new Vector<ObservableChoiceItemList>();
+		
+		return getSimpleChoiceItemLists();
+	}
+
+	private Vector<ObservableChoiceItemList> getSimpleChoiceItemLists()
+	{
+		DropDownFieldSpec dropDownSpec = (DropDownFieldSpec) getFieldSpec();
+		Vector<ObservableChoiceItemList> listOfLists = new Vector<ObservableChoiceItemList>();
+		ObservableChoiceItemList simpleChoices = new ObservableChoiceItemList();
+		simpleChoices.addAll(dropDownSpec.getAllChoices());
+		listOfLists.add(simpleChoices);
+		return listOfLists;
 	}
 
 	private FieldType getType()

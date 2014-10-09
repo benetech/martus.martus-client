@@ -25,15 +25,20 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core;
 
+import java.util.Vector;
+
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.ObservableList;
 
 import org.junit.Test;
+import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.landing.bulletins.GridRowData;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
 import org.martus.common.GridRow;
 import org.martus.common.MiniLocalization;
+import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeNormal;
@@ -67,6 +72,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		assertFalse(field.isRequiredField());
 		assertFalse(field.isGrid());
 		assertFalse(field.isSectionStart());
+		assertFalse(field.isDropdown());
 		assertEquals("", field.valueProperty().getValue());
 		try
 		{
@@ -151,6 +157,22 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		FieldSpec spec = FieldSpec.createCustomField("tag", "Label", new FieldTypeSectionStart());
 		FxBulletinField field = new FxBulletinField(spec, localization);
 		assertTrue(field.isSectionStart());
+	}
+	
+	public void testSimpleDropdown() throws Exception
+	{
+		String simpleDropDownTag = "simple";
+		ChoiceItem[] simpleChoices = new ChoiceItem[] {new ChoiceItem("a", "A"), new ChoiceItem("b", "B")};
+		FieldSpec simpleDropDown = new DropDownFieldSpec(simpleChoices);
+		simpleDropDown.setTag(simpleDropDownTag);
+		FxBulletinField field = new FxBulletinField(simpleDropDown, localization);
+		assertTrue(field.isDropdown());
+
+		Vector<ObservableChoiceItemList> simpleLists = field.getChoiceItemLists();
+		assertEquals(1, simpleLists.size());
+		ObservableChoiceItemList simpleList = simpleLists.get(0);
+		assertEquals(simpleChoices.length, simpleList.size());
+		assertEquals(simpleChoices[0], simpleList.get(0));
 	}
 
 	private GridData createSampleGridData(GridFieldSpec gridSpec2Colunns, FieldSpecCollection fsc)
