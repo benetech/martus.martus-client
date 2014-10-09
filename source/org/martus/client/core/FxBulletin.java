@@ -458,7 +458,7 @@ public class FxBulletin
 		field.setValue(value);
 		field.addValueListener((observable, newValue, oldValue) -> hasBeenModified = true);
 
-		FxFieldValidator fieldValidator = new FxFieldValidator(spec, getLocalization());
+		FieldValidator fieldValidator = new FieldValidator(spec, getLocalization());
 		field.setValidator(fieldValidator);
 	}
 	

@@ -77,7 +77,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		FieldSpec spec = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
 		spec.setRequired();
 		FxBulletinField field = new FxBulletinField();
-		FxFieldValidator validator = new FxFieldValidator(spec, localization);
+		FieldValidator validator = new FieldValidator(spec, localization);
 		field.setValidator(validator);
 		ObservableBooleanValue fieldIsValidProperty = field.fieldIsValidProperty();
 		assertFalse(fieldIsValidProperty.getValue());

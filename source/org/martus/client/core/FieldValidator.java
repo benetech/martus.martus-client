@@ -34,18 +34,18 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 
-public class FxFieldValidator implements ChangeListener<String>
+public class FieldValidator implements ChangeListener<String>
 {
-	public FxFieldValidator(FieldSpec specToUse, MiniLocalization localizationToUse)
+	public FieldValidator(FieldSpec specToUse, MiniLocalization localizationToUse)
 	{
 		spec = specToUse;
 		localization = localizationToUse;
-		isValidProperty = new SimpleBooleanProperty(); 
+		fieldIsValidProperty = new SimpleBooleanProperty(); 
 	}
 	
-	public ObservableBooleanValue isValidProperty()
+	public ObservableBooleanValue fieldIsValidProperty()
 	{
-		return isValidProperty;
+		return fieldIsValidProperty;
 	}
 	
 	@Override
@@ -69,10 +69,10 @@ public class FxFieldValidator implements ChangeListener<String>
 			isValid = false;
 		}
 		
-		isValidProperty.setValue(isValid);
+		fieldIsValidProperty.setValue(isValid);
 	}
 
 	private FieldSpec spec;
 	private MiniLocalization localization;
-	private SimpleBooleanProperty isValidProperty;
+	private SimpleBooleanProperty fieldIsValidProperty;
 }

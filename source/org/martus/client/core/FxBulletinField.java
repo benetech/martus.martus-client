@@ -57,7 +57,7 @@ public class FxBulletinField
 		valueProperty.setValue(null);
 	}
 
-	public void setValidator(FxFieldValidator validatorToUse)
+	public void setValidator(FieldValidator validatorToUse)
 	{
 		validator = validatorToUse;
 		validator.updateStatus(valueProperty.getValue());
@@ -66,9 +66,9 @@ public class FxBulletinField
 
 	public ObservableBooleanValue fieldIsValidProperty()
 	{
-		return validator.isValidProperty();
+		return validator.fieldIsValidProperty();
 	}
 	
 	private SimpleStringProperty valueProperty;
-	private FxFieldValidator validator;
+	private FieldValidator validator;
 }
