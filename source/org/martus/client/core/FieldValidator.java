@@ -63,7 +63,7 @@ public class FieldValidator implements ChangeListener<String>
 		{
 			if(newValue == null)
 				newValue = "";
-			FieldValidator.validateField(spec, newValue, localization);
+			validate(newValue);
 			isValid = true;
 		} 
 		catch (DataInvalidException noNeedToLogOrThrow)
@@ -72,6 +72,11 @@ public class FieldValidator implements ChangeListener<String>
 		}
 		
 		fieldIsValidProperty.setValue(isValid);
+	}
+	
+	public void validate(String value) throws DataInvalidException
+	{
+		validateField(spec, value, localization);
 	}
 
 	protected static void validateField(FieldSpec spec, String value, MiniLocalization localization) throws DataInvalidException
