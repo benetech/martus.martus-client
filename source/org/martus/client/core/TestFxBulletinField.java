@@ -65,6 +65,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		try
 		{
 			field.gridDataProperty();
+			fail("Should have thrown for getting grid data from non-grid field");
 		}
 		catch(Exception ignoreExpected)
 		{

@@ -102,6 +102,9 @@ public class FxBulletinField
 	
 	public GridFieldData gridDataProperty()
 	{
+		if(!isGrid())
+			throw new RuntimeException("gridDataProperty not available for non-grid: " + getTag());
+
 		return gridDataIfApplicable;
 	}
 
