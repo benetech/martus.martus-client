@@ -64,6 +64,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		FxBulletinField field = new FxBulletinField(fieldSpec, localization);
 		assertEquals("tag", field.getTag());
 		assertEquals("Label", field.getLabel());
+		assertFalse(field.isRequiredField());
 		assertFalse(field.isGrid());
 		assertFalse(field.isSectionStart());
 		assertEquals("", field.valueProperty().getValue());
@@ -100,6 +101,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		FieldSpec spec = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
 		spec.setRequired();
 		FxBulletinField field = new FxBulletinField(spec, localization);
+		assertTrue(field.isRequiredField());
 		ObservableBooleanValue fieldIsValidProperty = field.fieldIsValidProperty();
 		assertFalse(fieldIsValidProperty.getValue());
 	}

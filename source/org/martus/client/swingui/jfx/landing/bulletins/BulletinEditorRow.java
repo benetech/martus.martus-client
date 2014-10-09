@@ -95,7 +95,7 @@ public class BulletinEditorRow
 	{
 		FieldSpec fieldSpec = field.getFieldSpec();
 		
-		Node label = createLabel(fieldSpec);
+		Node label = createLabel(field);
 		Node fieldNode = fieldCreator.createFieldForSpec(bulletin, fieldSpec, fieldValueProperty);
 		
 		addValidationBorder(isValidProperty, label);
@@ -135,15 +135,15 @@ public class BulletinEditorRow
 		return fieldsNode;
 	}
 	
-	public Node createLabel(FieldSpec spec)
+	public Node createLabel(FxBulletinField field)
 	{
-		String tag = spec.getTag();
-		String labelText = spec.getLabel();
+		String tag = field.getTag();
+		String labelText = field.getLabel();
 		if(StandardFieldSpecs.isStandardFieldTag(tag))
 			labelText = getLocalization().getFieldLabel(tag);
 		Text text = new Text(labelText);
 		TextFlow flow = new TextFlow(text);
-		if(spec.isRequiredField())
+		if(field.isRequiredField())
 		{
 			Label asterisk = new Label("*");
 			asterisk.getStyleClass().add("requiredAsterisk");

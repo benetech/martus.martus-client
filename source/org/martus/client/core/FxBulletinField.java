@@ -68,6 +68,11 @@ public class FxBulletinField
 		return getFieldSpec().getLabel();
 	}
 
+	public boolean isRequiredField()
+	{
+		return getFieldSpec().isRequiredField();
+	}
+
 	public FieldSpec getFieldSpec()
 	{
 		return fieldSpec;
