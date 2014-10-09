@@ -76,11 +76,6 @@ public class FieldValidator implements ChangeListener<String>
 	
 	public void validate(String value) throws DataInvalidException
 	{
-		validateField(spec, value, localization);
-	}
-
-	protected static void validateField(FieldSpec spec, String value, MiniLocalization localization) throws DataInvalidException
-	{
 		String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, localization);
 		validateField(spec, label, value, localization);
 	}
