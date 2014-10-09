@@ -67,6 +67,11 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		security = MockMartusSecurity.createClient();
 		fsc = new FieldSpecCollection();
 
+		statesChoices = new ReusableChoices(STATES_CHOICES_TAG, "States");
+		statesChoices.add(new ChoiceItem("WA", "Washington"));
+		statesChoices.add(new ChoiceItem("OR", "Oregon"));
+		fsc.addReusableChoiceList(statesChoices);
+
 		citiesChoices = new ReusableChoices(CITIES_CHOICES_TAG, "Cities");
 		citiesChoices.add(new ChoiceItem("SEA", "Seattle"));
 		citiesChoices.add(new ChoiceItem("PDX", "Portland"));
@@ -208,6 +213,30 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		assertEquals("", reusableList.get(0).getCode());
 		assertEquals(citiesChoices.get(0), reusableList.get(1));
 	}
+	
+	public void testNestedDropdowns() throws Exception
+	{
+		String nestedDropDownTag = "nested";
+		CustomDropDownFieldSpec nestedDropDown = new CustomDropDownFieldSpec();
+		nestedDropDown.setTag(nestedDropDownTag);
+		nestedDropDown.addReusableChoicesCode(STATES_CHOICES_TAG);
+		nestedDropDown.addReusableChoicesCode(CITIES_CHOICES_TAG);
+
+		fsc.add(nestedDropDown);
+		FxBulletin fxb = createFxBulletin();
+		
+		Vector<ObservableChoiceItemList> nestedLists = fxb.getChoiceItemLists(nestedDropDownTag);
+		assertEquals(2, nestedLists.size());
+		ObservableChoiceItemList nestedStatesList = nestedLists.get(0);
+		assertEquals(statesChoices.size()+1, nestedStatesList.size());
+		assertEquals("", nestedStatesList.get(0).getCode());
+		assertEquals(statesChoices.get(0), nestedStatesList.get(1));
+		ObservableChoiceItemList nestedCitiesList = nestedLists.get(1);
+		assertEquals(citiesChoices.size()+1, nestedCitiesList.size());
+		assertEquals("", nestedCitiesList.get(0).getCode());
+		assertEquals(citiesChoices.get(0), nestedCitiesList.get(1));
+		
+	}
 
 	public FxBulletin createFxBulletin() throws Exception
 	{
@@ -227,10 +256,12 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		return gridData;
 	}
 	
+	private static final String STATES_CHOICES_TAG = "states";
 	private static final String CITIES_CHOICES_TAG = "cities";
 
 	private MiniLocalization localization;
 	private MartusSecurity security;
 	private FieldSpecCollection fsc;
+	private ReusableChoices statesChoices;
 	private ReusableChoices citiesChoices;
 }
