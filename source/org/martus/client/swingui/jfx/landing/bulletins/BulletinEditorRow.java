@@ -41,7 +41,6 @@ import javafx.scene.text.TextFlow;
 import org.martus.client.core.FxBulletin;
 import org.martus.client.core.FxBulletinField;
 import org.martus.client.swingui.MartusLocalization;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
@@ -93,10 +92,8 @@ public class BulletinEditorRow
 
 	public void addNormalFieldToRow(FxBulletinField field, SimpleStringProperty fieldValueProperty, ObservableBooleanValue isValidProperty) throws Exception
 	{
-		FieldSpec fieldSpec = field.getFieldSpec();
-		
 		Node label = createLabel(field);
-		Node fieldNode = fieldCreator.createFieldNode(bulletin, fieldSpec, fieldValueProperty);
+		Node fieldNode = fieldCreator.createFieldNode(bulletin, field, fieldValueProperty);
 		
 		addValidationBorder(isValidProperty, label);
 		addValidationBorder(isValidProperty, fieldNode);

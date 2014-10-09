@@ -39,6 +39,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import org.martus.client.core.FxBulletin;
+import org.martus.client.core.FxBulletinField;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.jfx.generic.controls.DateRangePicker;
 import org.martus.client.swingui.jfx.generic.controls.MartusDatePicker;
@@ -57,8 +58,10 @@ public class FxFieldCreator
 		localization = localizationToUse;
 	}
 	
-	public Node createFieldNode(FxBulletin bulletin, FieldSpec spec, Property<String> property) throws Exception
+	public Node createFieldNode(FxBulletin bulletin, FxBulletinField field, Property<String> property) throws Exception
 	{
+		FieldSpec spec = field.getFieldSpec();
+		
 		if(spec.getType().isString())
 			return createStringField(property);
 		
