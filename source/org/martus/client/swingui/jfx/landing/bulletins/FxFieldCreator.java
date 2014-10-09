@@ -79,7 +79,7 @@ public class FxFieldCreator
 			return createDropdownField(bulletin, property, spec);
 		
 		if(spec.getType().isDate())
-			return createDateField(property, spec);
+			return createDateField(field);
 		
 		if(spec.getType().isDateRange())
 			return createDateRangeField(property, spec);
@@ -87,13 +87,14 @@ public class FxFieldCreator
 		return createFieldNotAvailable();
 	}
 
-	private Node createDateField(Property<String> property, FieldSpec spec)
+	private Node createDateField(FxBulletinField field)
 	{
 		MartusDatePicker picker = new MartusDatePicker(localization);
 
-		if(spec.getTag().equals(Bulletin.TAGENTRYDATE))
+		if(field.getTag().equals(Bulletin.TAGENTRYDATE))
 			picker.setDisable(true);
 
+		Property<String> property = field.valueProperty();
 		String existingDateString = property.getValue();
 		picker.setValue(existingDateString);
 		property.bind(picker.overallValueProperty());
