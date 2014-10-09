@@ -27,12 +27,14 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.util.HashMap;
 
+import org.martus.client.core.FxBulletinField;
+
 import com.sun.javafx.collections.ObservableMapWrapper;
 
-public class GridRowData extends ObservableMapWrapper<String, String>
+public class GridRowData extends ObservableMapWrapper<String, FxBulletinField>
 {
 	public GridRowData()
 	{
-		super(new HashMap<String, String>());
+		super(new HashMap<String, FxBulletinField>());
 	}
 }

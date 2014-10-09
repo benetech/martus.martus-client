@@ -49,6 +49,8 @@ public class FxBulletinField
 	{
 		fxb = bulletinToUse;
 		fieldSpec = fieldSpecToUse;
+		localization = localizationToUse;
+		
 		valueProperty = new SimpleStringProperty("");
 		gridDataIfApplicable = new GridFieldData();
 		FieldValidator fieldValidator = new FieldValidator(fieldSpec, localizationToUse);
@@ -151,7 +153,10 @@ public class FxBulletinField
 			{
 				String columnLabel = gridSpec.getColumnLabel(column);
 				String value = data.getValueAt(row, column);
-				rowData.put(columnLabel, value);
+				FieldSpec cellSpec = gridSpec.getFieldSpec(column);
+				FxBulletinField cellField = new FxBulletinField(fxb, cellSpec, getLocalization());
+				cellField.setValue(value);
+				rowData.put(columnLabel, cellField);
 			}
 			
 			gridFieldData.add(rowData);
@@ -210,9 +215,15 @@ public class FxBulletinField
 	{
 		return getFieldSpec().getType();
 	}
+	
+	private MiniLocalization getLocalization()
+	{
+		return localization;
+	}
 
 	private FxBulletin fxb;
 	private FieldSpec fieldSpec;
+	private MiniLocalization localization;
 	private SimpleStringProperty valueProperty;
 	private FieldValidator validator;
 	private GridFieldData gridDataIfApplicable;
