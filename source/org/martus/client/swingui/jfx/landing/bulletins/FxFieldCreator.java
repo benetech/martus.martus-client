@@ -115,7 +115,7 @@ public class FxFieldCreator
 	
 	private Node createDropdownField(FxBulletin bulletin, FxBulletinField field) throws Exception
 	{
-		Vector<ObservableChoiceItemList> listOfChoiceItemLists = bulletin.getChoiceItemLists(field.getTag());
+		Vector<ObservableChoiceItemList> listOfChoiceItemLists = field.getChoiceItemLists();
 		if(listOfChoiceItemLists.size() == 0)
 			return createFieldNotAvailable();
 
