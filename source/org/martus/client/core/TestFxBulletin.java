@@ -104,6 +104,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		
 		FxBulletin fxb = new FxBulletin(getLocalization());
 		fxb.copyDataFromBulletin(b, db);
+		fxb.validateData();
 		
 		try
 		{
