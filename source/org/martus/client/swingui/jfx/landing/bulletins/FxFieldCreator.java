@@ -82,7 +82,7 @@ public class FxFieldCreator
 			return createDateField(field);
 		
 		if(spec.getType().isDateRange())
-			return createDateRangeField(property, spec);
+			return createDateRangeField(field);
 		
 		return createFieldNotAvailable();
 	}
@@ -101,10 +101,11 @@ public class FxFieldCreator
 		return picker;
 	}
 	
-	private Node createDateRangeField(Property<String> property, FieldSpec rawSpec)
+	private Node createDateRangeField(FxBulletinField field)
 	{
 		DateRangePicker picker = new DateRangePicker(localization);
 
+		Property<String> property = field.valueProperty();
 		String existingDateRangeString = property.getValue();
 		picker.setValue(existingDateRangeString);
 		property.bind(picker.valueProperty());
