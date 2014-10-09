@@ -40,7 +40,6 @@ import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.landing.bulletins.AttachmentTableRowData;
 import org.martus.client.swingui.jfx.landing.bulletins.GridRowData;
 import org.martus.common.FieldSpecCollection;
@@ -54,9 +53,7 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.field.MartusField;
-import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DataInvalidException;
-import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -243,61 +240,10 @@ public class FxBulletin
 		return fieldSpecs.getAllReusableChoiceLists();
 	}
 
-	public Vector<ObservableChoiceItemList> getChoiceItemLists(String fieldTag) throws Exception
-	{
-		FieldSpec spec = fieldSpecs.findBytag(fieldTag);
-		if(spec == null)
-			throw new NullPointerException("No such field: " + fieldTag);
-		
-		if(!spec.getType().isDropdown())
-			throw new Exception("Field is not a dropdown: " + fieldTag);
-		
-		DropDownFieldSpec dropDownSpec = (DropDownFieldSpec) spec;
-		boolean isDataDriven = (dropDownSpec.getDataSource() != null);
-		boolean isReusable = (dropDownSpec.getReusableChoicesCodes().length > 0);
-		if(isDataDriven)
-			return new Vector<ObservableChoiceItemList>();
-		
-		if(isReusable)
-			return getReusableChoiceItemLists(dropDownSpec);
-		
-		return getSimpleChoiceItemLists(dropDownSpec);
-	}
-
-	private Vector<ObservableChoiceItemList> getReusableChoiceItemLists(DropDownFieldSpec dropDownSpec)
-	{
-		Vector<ObservableChoiceItemList> listOfLists = new Vector<ObservableChoiceItemList>();
-
-		String[] reusableChoicesCodes = dropDownSpec.getReusableChoicesCodes();
-
-		for(int i = 0; i < reusableChoicesCodes.length; ++i)
-		{
-			String onlyReusableChoicesCode = reusableChoicesCodes[i];
-			ReusableChoices reusableChoices = getReusableChoices(onlyReusableChoicesCode);
-			ChoiceItem[] choiceItems = reusableChoices.getChoices();
-			ObservableChoiceItemList list = new ObservableChoiceItemList();
-			ChoiceItem emptyItemAtTheStartOfEveryReusableList = new ChoiceItem("", "");
-			list.add(emptyItemAtTheStartOfEveryReusableList);
-			list.addAll(choiceItems);
-			
-			listOfLists.add(list);
-		}
-		return listOfLists;
-	}
-
 	public ReusableChoices getReusableChoices(String onlyReusableChoicesCode)
 	{
 		ReusableChoices reusableChoices = fieldSpecs.getReusableChoices(onlyReusableChoicesCode);
 		return reusableChoices;
-	}
-
-	public Vector<ObservableChoiceItemList> getSimpleChoiceItemLists(DropDownFieldSpec dropDownSpec)
-	{
-		Vector<ObservableChoiceItemList> listOfLists = new Vector<ObservableChoiceItemList>();
-		ObservableChoiceItemList simpleChoices = new ObservableChoiceItemList();
-		simpleChoices.addAll(dropDownSpec.getAllChoices());
-		listOfLists.add(simpleChoices);
-		return listOfLists;
 	}
 
 	public ObservableList<AttachmentTableRowData> getAttachments()

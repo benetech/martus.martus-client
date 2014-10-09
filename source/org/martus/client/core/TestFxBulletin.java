@@ -35,7 +35,6 @@ import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 
-import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.landing.bulletins.AttachmentTableRowData;
 import org.martus.client.swingui.jfx.landing.bulletins.GridRowData;
 import org.martus.client.test.MockBulletinStore;
@@ -45,18 +44,14 @@ import org.martus.common.GridRow;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MiniLocalization;
-import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinForTesting;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.common.database.ReadableDatabase;
-import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.DateFieldSpec;
-import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeNormal;
@@ -236,88 +231,6 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals(4, modifiedWith4Attachments.getPrivateAttachments().length);
 	}
 
-	public void testGetChoiceItemLists() throws Exception
-	{
-		FxBulletin fxb = new FxBulletin(getLocalization());
-		try
-		{
-			fxb.getChoiceItemLists("No such field");
-			fail("Should have thrown asking for choices for a field that doesn't exist");
-		}
-		catch(Exception ignoreExpected)
-		{
-		}
-
-		FieldSpecCollection fsc = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
-
-		String statesChoicesTag = "states";
-		ReusableChoices statesChoices = new ReusableChoices(statesChoicesTag, "States");
-		statesChoices.add(new ChoiceItem("WA", "Washington"));
-		statesChoices.add(new ChoiceItem("OR", "Oregon"));
-		fsc.addReusableChoiceList(statesChoices);
-
-		String citiesChoicesTag = "cities";
-		ReusableChoices citiesChoices = new ReusableChoices(citiesChoicesTag, "Cities");
-		citiesChoices.add(new ChoiceItem("SEA", "Seattle"));
-		citiesChoices.add(new ChoiceItem("PDX", "Portland"));
-		fsc.addReusableChoiceList(citiesChoices);
-
-		String simpleDropDownTag = "simple";
-		ChoiceItem[] simpleChoices = new ChoiceItem[] {new ChoiceItem("a", "A"), new ChoiceItem("b", "B")};
-		FieldSpec simpleDropDown = new DropDownFieldSpec(simpleChoices);
-		simpleDropDown.setTag(simpleDropDownTag);
-		fsc.add(simpleDropDown);
-		
-		String reusableDropDownTag = "reusable";
-		CustomDropDownFieldSpec reusableDropDown = new CustomDropDownFieldSpec();
-		reusableDropDown.setTag(reusableDropDownTag);
-		reusableDropDown.addReusableChoicesCode(citiesChoicesTag);
-		fsc.add(reusableDropDown);
-		
-		String nestedDropDownTag = "nested";
-		CustomDropDownFieldSpec nestedDropDown = new CustomDropDownFieldSpec();
-		nestedDropDown.setTag(nestedDropDownTag);
-		nestedDropDown.addReusableChoicesCode(statesChoicesTag);
-		nestedDropDown.addReusableChoicesCode(citiesChoicesTag);
-		fsc.add(nestedDropDown);
-		
-		Bulletin b = new Bulletin(security, fsc, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
-		fxb.copyDataFromBulletin(b, db);
-
-		try
-		{
-			fxb.getChoiceItemLists(Bulletin.TAGAUTHOR);
-			fail("Should have thrown asking for choices for a non-dropdown field");
-		}
-		catch(Exception ignoreExpected)
-		{
-		}
-		
-		Vector<ObservableChoiceItemList> simpleLists = fxb.getChoiceItemLists(simpleDropDownTag);
-		assertEquals(1, simpleLists.size());
-		ObservableChoiceItemList simpleList = simpleLists.get(0);
-		assertEquals(simpleChoices.length, simpleList.size());
-		assertEquals(simpleChoices[0], simpleList.get(0));
-		
-		Vector<ObservableChoiceItemList> reusableLists = fxb.getChoiceItemLists(reusableDropDownTag);
-		assertEquals(1, reusableLists.size());
-		ObservableChoiceItemList reusableList = reusableLists.get(0);
-		assertEquals(citiesChoices.size()+1, reusableList.size());
-		assertEquals("", reusableList.get(0).getCode());
-		assertEquals(citiesChoices.get(0), reusableList.get(1));
-		
-		Vector<ObservableChoiceItemList> nestedLists = fxb.getChoiceItemLists(nestedDropDownTag);
-		assertEquals(2, nestedLists.size());
-		ObservableChoiceItemList nestedStatesList = nestedLists.get(0);
-		assertEquals(statesChoices.size()+1, nestedStatesList.size());
-		assertEquals("", nestedStatesList.get(0).getCode());
-		assertEquals(statesChoices.get(0), nestedStatesList.get(1));
-		ObservableChoiceItemList nestedCitiesList = nestedLists.get(1);
-		assertEquals(citiesChoices.size()+1, nestedCitiesList.size());
-		assertEquals("", nestedCitiesList.get(0).getCode());
-		assertEquals(citiesChoices.get(0), nestedCitiesList.get(1));
-	}
-	
 	public void testDates() throws Exception
 	{
 		String DATE_TAG = Bulletin.TAGENTRYDATE;
