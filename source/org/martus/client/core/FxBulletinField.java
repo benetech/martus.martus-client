@@ -38,6 +38,7 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.ReusableChoices;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
@@ -180,8 +181,9 @@ public class FxBulletinField
 		return getSimpleChoiceItemLists();
 	}
 
-	public void validate() throws Exception
+	public void validate() throws DataInvalidException
 	{
+		validator.validate(valueProperty().getValue());
 	}
 
 	private Vector<ObservableChoiceItemList> getReusableChoiceItemLists(DropDownFieldSpec dropDownSpec)
