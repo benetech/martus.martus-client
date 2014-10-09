@@ -99,12 +99,12 @@ public class FxBulletin
 		bulletinHistory = new ReadOnlyObjectWrapper<BulletinHistory>(b.getHistory());
 		bulletinLocalId = new SimpleStringProperty(b.getBulletinHeaderPacket().getLocalId());
 
-		setFieldPropertiesFromBulletinSection(b, b.getTopSectionFieldSpecs());
-		setFieldPropertiesFromBulletinSection(b, b.getBottomSectionFieldSpecs());
-		
 		copyReusableChoiceListsFromBulletinSection(b.getTopSectionFieldSpecs());
 		copyReusableChoiceListsFromBulletinSection(b.getBottomSectionFieldSpecs());
 
+		setFieldPropertiesFromBulletinSection(b, b.getTopSectionFieldSpecs());
+		setFieldPropertiesFromBulletinSection(b, b.getBottomSectionFieldSpecs());
+		
 		addAttachmentProxies(b.getPrivateAttachments(), db);
 		addAttachmentProxies(b.getPublicAttachments(), db);
 	}
@@ -238,6 +238,11 @@ public class FxBulletin
 		return immutableOnServer;
 	}
 	
+	public PoolOfReusableChoicesLists getAllReusableChoicesLists()
+	{
+		return fieldSpecs.getAllReusableChoiceLists();
+	}
+
 	public Vector<ObservableChoiceItemList> getChoiceItemLists(String fieldTag) throws Exception
 	{
 		FieldSpec spec = fieldSpecs.findBytag(fieldTag);
@@ -268,7 +273,7 @@ public class FxBulletin
 		for(int i = 0; i < reusableChoicesCodes.length; ++i)
 		{
 			String onlyReusableChoicesCode = reusableChoicesCodes[i];
-			ReusableChoices reusableChoices = fieldSpecs.getReusableChoices(onlyReusableChoicesCode);
+			ReusableChoices reusableChoices = getReusableChoices(onlyReusableChoicesCode);
 			ChoiceItem[] choiceItems = reusableChoices.getChoices();
 			ObservableChoiceItemList list = new ObservableChoiceItemList();
 			ChoiceItem emptyItemAtTheStartOfEveryReusableList = new ChoiceItem("", "");
@@ -278,6 +283,12 @@ public class FxBulletin
 			listOfLists.add(list);
 		}
 		return listOfLists;
+	}
+
+	public ReusableChoices getReusableChoices(String onlyReusableChoicesCode)
+	{
+		ReusableChoices reusableChoices = fieldSpecs.getReusableChoices(onlyReusableChoicesCode);
+		return reusableChoices;
 	}
 
 	public Vector<ObservableChoiceItemList> getSimpleChoiceItemLists(DropDownFieldSpec dropDownSpec)
@@ -383,11 +394,11 @@ public class FxBulletin
 
 			fieldSpecs.add(fieldSpec);
 			
-			FxBulletinField field = new FxBulletinField(fieldSpec, getLocalization());
+			FxBulletinField field = new FxBulletinField(this, fieldSpec, getLocalization());
 			fields.put(fieldTag, field);
 			
 			if(fieldSpec.getType().isGrid())
-				setGridField((GridFieldSpec)fieldSpec, value, bulletinFieldSpecs.getAllReusableChoiceLists());
+				setGridField((GridFieldSpec)fieldSpec, value);
 			else
 				setField(fieldSpec, value);
 //			System.out.println("copyDataFromBulletin " + fieldTag + ":" + value);
@@ -450,12 +461,12 @@ public class FxBulletin
 		field.addValueListener((observable, newValue, oldValue) -> hasBeenModified = true);
 	}
 	
-	private void setGridField(GridFieldSpec fieldSpec, String value, PoolOfReusableChoicesLists allReusableChoiceLists) throws Exception
+	private void setGridField(GridFieldSpec fieldSpec, String value) throws Exception
 	{
 		String tag = fieldSpec.getTag();
 
 		FxBulletinField field = fields.get(tag);
-		field.setGridData(value, allReusableChoiceLists);
+		field.setGridData(value);
 	}
 
 	private void copyReusableChoiceListsFromBulletinSection(FieldSpecCollection bulletinFieldSpecs)

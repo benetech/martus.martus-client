@@ -37,7 +37,12 @@ import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
 import org.martus.common.GridRow;
 import org.martus.common.MiniLocalization;
+import org.martus.common.ReusableChoices;
+import org.martus.common.bulletin.Bulletin;
+import org.martus.common.crypto.MartusSecurity;
+import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeDate;
@@ -59,14 +64,21 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		super.setUp();
 		
 		localization = new MiniLocalization();
+		security = MockMartusSecurity.createClient();
+		fsc = new FieldSpecCollection();
+
+		citiesChoices = new ReusableChoices(CITIES_CHOICES_TAG, "Cities");
+		citiesChoices.add(new ChoiceItem("SEA", "Seattle"));
+		citiesChoices.add(new ChoiceItem("PDX", "Portland"));
+		fsc.addReusableChoiceList(citiesChoices);
 	}
 	
 	@Test
-	public void testBasics()
+	public void testBasics() throws Exception
 	{
 		final String SAMPLE = "test";
 		FieldSpec fieldSpec = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
-		FxBulletinField field = new FxBulletinField(fieldSpec, localization);
+		FxBulletinField field = new FxBulletinField(createFxBulletin(), fieldSpec, localization);
 		assertEquals("tag", field.getTag());
 		assertEquals("Label", field.getLabel());
 		assertFalse(field.isRequiredField());
@@ -88,11 +100,11 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		assertNull(field.valueProperty().getValue());
 	}
 	
-	public void testAddListener()
+	public void testAddListener() throws Exception
 	{
 		final String SAMPLE = "test";
 		FieldSpec fieldSpec = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
-		FxBulletinField field = new FxBulletinField(fieldSpec, localization);
+		FxBulletinField field = new FxBulletinField(createFxBulletin(), fieldSpec, localization);
 		assertEquals("", field.valueProperty().getValue());
 		field.addValueListener((observable, oldValue, newValue) -> 
 		{
@@ -102,11 +114,11 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		field.valueProperty().setValue(SAMPLE);
 	}
 	
-	public void testValidation()
+	public void testValidation() throws Exception
 	{
 		FieldSpec spec = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
 		spec.setRequired();
-		FxBulletinField field = new FxBulletinField(spec, localization);
+		FxBulletinField field = new FxBulletinField(createFxBulletin(), spec, localization);
 		assertTrue(field.isRequiredField());
 		ObservableBooleanValue fieldIsValidProperty = field.fieldIsValidProperty();
 		assertFalse(fieldIsValidProperty.getValue());
@@ -121,7 +133,8 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("a", "A", new FieldTypeNormal()));
 		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("b", "B", new FieldTypeDate()));
 
-		FxBulletinField gridField = new FxBulletinField(gridSpec2Colunns, localization);
+		FxBulletin fxb = createFxBulletin();
+		FxBulletinField gridField = new FxBulletinField(fxb, gridSpec2Colunns, localization);
 		try
 		{
 			gridField.valueProperty();
@@ -139,9 +152,8 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		{
 		}
 		
-		FieldSpecCollection noReusableLists = new FieldSpecCollection();
-		GridData data = createSampleGridData(gridSpec2Colunns, noReusableLists);
-		gridField.setGridData(data.getXmlRepresentation(), noReusableLists.getAllReusableChoiceLists());
+		GridData data = createSampleGridData(gridSpec2Colunns);
+		gridField.setGridData(data.getXmlRepresentation());
 
 		ObservableList<GridRowData> gridData = gridField.gridDataProperty();
 		assertEquals(1, gridData.size());
@@ -155,7 +167,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 	public void testSection() throws Exception
 	{
 		FieldSpec spec = FieldSpec.createCustomField("tag", "Label", new FieldTypeSectionStart());
-		FxBulletinField field = new FxBulletinField(spec, localization);
+		FxBulletinField field = new FxBulletinField(createFxBulletin(), spec, localization);
 		assertTrue(field.isSectionStart());
 	}
 	
@@ -165,7 +177,8 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		ChoiceItem[] simpleChoices = new ChoiceItem[] {new ChoiceItem("a", "A"), new ChoiceItem("b", "B")};
 		FieldSpec simpleDropDown = new DropDownFieldSpec(simpleChoices);
 		simpleDropDown.setTag(simpleDropDownTag);
-		FxBulletinField field = new FxBulletinField(simpleDropDown, localization);
+		
+		FxBulletinField field = new FxBulletinField(createFxBulletin(), simpleDropDown, localization);
 		assertTrue(field.isDropdown());
 
 		Vector<ObservableChoiceItemList> simpleLists = field.getChoiceItemLists();
@@ -174,17 +187,50 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		assertEquals(simpleChoices.length, simpleList.size());
 		assertEquals(simpleChoices[0], simpleList.get(0));
 	}
-
-	private GridData createSampleGridData(GridFieldSpec gridSpec2Colunns, FieldSpecCollection fsc)
+	
+	public void testReusableDropdown() throws Exception
 	{
-		GridData gridData = new GridData(gridSpec2Colunns, fsc.getAllReusableChoiceLists());
-		GridRow gridRowSample = new GridRow(gridSpec2Colunns, fsc.getAllReusableChoiceLists());
+		String reusableDropDownTag = "reusable";
+		CustomDropDownFieldSpec reusableDropDown = new CustomDropDownFieldSpec();
+		reusableDropDown.setTag(reusableDropDownTag);
+		reusableDropDown.addReusableChoicesCode(CITIES_CHOICES_TAG);
+
+		fsc.add(reusableDropDown);
+		FxBulletin fxb = createFxBulletin();
+		
+		FxBulletinField field = new FxBulletinField(fxb, reusableDropDown, localization);
+		assertTrue(field.isDropdown());
+
+		Vector<ObservableChoiceItemList> reusableLists = field.getChoiceItemLists();
+		assertEquals(1, reusableLists.size());
+		ObservableChoiceItemList reusableList = reusableLists.get(0);
+		assertEquals(citiesChoices.size()+1, reusableList.size());
+		assertEquals("", reusableList.get(0).getCode());
+		assertEquals(citiesChoices.get(0), reusableList.get(1));
+	}
+
+	public FxBulletin createFxBulletin() throws Exception
+	{
+		Bulletin b = new Bulletin(security, fsc, new FieldSpecCollection());
+		FxBulletin fxb = new FxBulletin(localization);
+		fxb.copyDataFromBulletin(b, null);
+		return fxb;
+	}
+
+	private GridData createSampleGridData(GridFieldSpec gridSpec2Columns)
+	{
+		GridData gridData = new GridData(gridSpec2Columns, fsc.getAllReusableChoiceLists());
+		GridRow gridRowSample = new GridRow(gridSpec2Columns, fsc.getAllReusableChoiceLists());
 		gridRowSample.setCellText(0, "Apple");
 		gridRowSample.setCellText(1, "Balloon");
 		gridData.addRow(gridRowSample);
 		return gridData;
 	}
 	
-	private MiniLocalization localization;
+	private static final String CITIES_CHOICES_TAG = "cities";
 
+	private MiniLocalization localization;
+	private MartusSecurity security;
+	private FieldSpecCollection fsc;
+	private ReusableChoices citiesChoices;
 }
