@@ -35,6 +35,7 @@ import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
 
 import org.martus.client.core.FxBulletin;
+import org.martus.client.core.FxBulletinField;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
@@ -53,7 +54,7 @@ public class FxFormCreator
 		sections = new Vector<BulletinEditorSection>();
 		
 		Vector<FieldSpec> fieldSpecs = bulletin.getFieldSpecs();
-		fieldSpecs.forEach(fieldSpec -> addField(fieldSpec));
+		fieldSpecs.forEach(fieldSpec -> addField(bulletin.getField(fieldSpec)));
 
 		Accordion accordion = new Accordion();
 		ObservableList<TitledPane> panes = accordion.getPanes();
@@ -76,8 +77,10 @@ public class FxFormCreator
 		return new TitledPane(title, section);
 	}
 
-	private void addField(FieldSpec fieldSpec)
+	private void addField(FxBulletinField field)
 	{
+		FieldSpec fieldSpec = field.getFieldSpec();
+		
 		if(shouldOmitField(fieldSpec))
 			return;
 
