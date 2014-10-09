@@ -90,7 +90,7 @@ public class BulletinEditorSection extends GridPane
 		}
 		else
 		{
-			currentRow.addNormalFieldToRow(fieldSpec, fieldValueProperty, isValidProperty);
+			currentRow.addNormalFieldToRow(field, fieldValueProperty, isValidProperty);
 		}
 		
 		if(!canKeepWithNextOrPrevious(fieldSpec))
