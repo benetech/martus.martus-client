@@ -61,7 +61,7 @@ public class FieldValidator implements ChangeListener<String>
 		{
 			if(newValue == null)
 				newValue = "";
-			FxBulletin.validateField(spec, newValue, localization);
+			FxBulletinField.validateField(spec, newValue, localization);
 			isValid = true;
 		} 
 		catch (DataInvalidException noNeedToLogOrThrow)

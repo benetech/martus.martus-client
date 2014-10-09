@@ -45,7 +45,6 @@ import org.martus.client.swingui.jfx.landing.bulletins.GridRowFields;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
-import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.ReusableChoices;
@@ -55,7 +54,6 @@ import org.martus.common.database.ReadableDatabase;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
@@ -267,25 +265,8 @@ public class FxBulletin
 				continue;
 			
 			String value = fieldProperty(spec.getTag()).getValue();
-			validateField(spec, value, getLocalization());
+			FxBulletinField.validateField(spec, value, getLocalization());
 		}
-	}
-
-	protected static void validateField(FieldSpec spec, String value, MiniLocalization localization) throws DataInvalidException
-	{
-		String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, localization);
-		validateField(spec, label, value, localization);
-	}
-
-	private static void validateField(FieldSpec spec, String displayableLabel, String fieldDataValue, MiniLocalization localization) throws DataInvalidException
-	{
-		FieldType type = spec.getType();
-		if(type.isGrid())
-		{
-			MartusLogger.logError("******* Validation not handled yet for " + type.getTypeName());
-			return;
-		}
-		spec.validate(displayableLabel, fieldDataValue, localization);
 	}
 
 	private void clear()

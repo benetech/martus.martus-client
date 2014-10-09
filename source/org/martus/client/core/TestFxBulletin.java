@@ -333,11 +333,11 @@ public class TestFxBulletin extends TestCaseEnhanced
 		spec.setMaximumDate("2014-12-31");
 		specs.add(spec);
 		
-		FxBulletin.validateField(spec, "", localization);
-		FxBulletin.validateField(spec, "2014-07-01", localization);
+		FxBulletinField.validateField(spec, "", localization);
+		FxBulletinField.validateField(spec, "2014-07-01", localization);
 		try
 		{
-			FxBulletin.validateField(spec, "2013-12-31", localization);
+			FxBulletinField.validateField(spec, "2013-12-31", localization);
 			throw new Exception("Should have failed for blank date earlier than acceptable range");
 		}
 		catch(DataInvalidException ignoreExpected)
@@ -346,7 +346,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 
 		try
 		{
-			FxBulletin.validateField(spec, "2015-01-01", localization);
+			FxBulletinField.validateField(spec, "2015-01-01", localization);
 			throw new Exception("Should have failed for blank date later than acceptable range");
 		}
 		catch(DataInvalidException ignoreExpected)

@@ -34,10 +34,12 @@ import javafx.beans.value.ObservableBooleanValue;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.landing.bulletins.GridRowFields;
 import org.martus.common.GridData;
+import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.ReusableChoices;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
@@ -223,6 +225,23 @@ public class FxBulletinField
 	private MiniLocalization getLocalization()
 	{
 		return localization;
+	}
+
+	protected static void validateField(FieldSpec spec, String value, MiniLocalization localization) throws DataInvalidException
+	{
+		String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, localization);
+		validateField(spec, label, value, localization);
+	}
+
+	private static void validateField(FieldSpec spec, String displayableLabel, String fieldDataValue, MiniLocalization localization) throws DataInvalidException
+	{
+		FieldType type = spec.getType();
+		if(type.isGrid())
+		{
+			MartusLogger.logError("******* Validation not handled yet for " + type.getTypeName());
+			return;
+		}
+		spec.validate(displayableLabel, fieldDataValue, localization);
 	}
 
 	private FxBulletin fxb;
