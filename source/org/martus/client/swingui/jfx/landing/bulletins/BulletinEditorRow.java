@@ -96,7 +96,7 @@ public class BulletinEditorRow
 		FieldSpec fieldSpec = field.getFieldSpec();
 		
 		Node label = createLabel(field);
-		Node fieldNode = fieldCreator.createFieldForSpec(bulletin, fieldSpec, fieldValueProperty);
+		Node fieldNode = fieldCreator.createFieldNode(bulletin, fieldSpec, fieldValueProperty);
 		
 		addValidationBorder(isValidProperty, label);
 		addValidationBorder(isValidProperty, fieldNode);
