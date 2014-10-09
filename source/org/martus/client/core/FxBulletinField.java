@@ -34,6 +34,7 @@ import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.GridFieldSpec;
 
 public class FxBulletinField
@@ -49,9 +50,14 @@ public class FxBulletinField
 	
 	public boolean isGrid()
 	{
-		return getFieldSpec().getType().isGrid();
+		return getType().isGrid();
 	}
-	
+
+	public boolean isSectionStart()
+	{
+		return getType().isSectionStart();
+	}
+
 	public String getTag()
 	{
 		return getFieldSpec().getTag();
@@ -129,6 +135,11 @@ public class FxBulletinField
 		}
 	}
 
+	private FieldType getType()
+	{
+		return getFieldSpec().getType();
+	}
+	
 	private FieldSpec fieldSpec;
 	private SimpleStringProperty valueProperty;
 	private FieldValidator validator;
