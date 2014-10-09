@@ -52,7 +52,8 @@ public class TestFxBulletinField extends TestCaseEnhanced
 	public void testBasics()
 	{
 		final String SAMPLE = "test";
-		FxBulletinField field = new FxBulletinField();
+		FieldSpec fieldSpec = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
+		FxBulletinField field = new FxBulletinField(fieldSpec, localization);
 		assertEquals("", field.valueProperty().getValue());
 		field.valueProperty().setValue(SAMPLE);
 		field.clear();
@@ -62,7 +63,8 @@ public class TestFxBulletinField extends TestCaseEnhanced
 	public void testAddListener()
 	{
 		final String SAMPLE = "test";
-		FxBulletinField field = new FxBulletinField();
+		FieldSpec fieldSpec = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
+		FxBulletinField field = new FxBulletinField(fieldSpec, localization);
 		assertEquals("", field.valueProperty().getValue());
 		field.addValueListener((observable, oldValue, newValue) -> 
 		{
@@ -76,7 +78,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 	{
 		FieldSpec spec = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
 		spec.setRequired();
-		FxBulletinField field = new FxBulletinField();
+		FxBulletinField field = new FxBulletinField(spec, localization);
 		FieldValidator validator = new FieldValidator(spec, localization);
 		field.setValidator(validator);
 		ObservableBooleanValue fieldIsValidProperty = field.fieldIsValidProperty();

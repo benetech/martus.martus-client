@@ -29,9 +29,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableBooleanValue;
 
+import org.martus.common.MiniLocalization;
+import org.martus.common.fieldspec.FieldSpec;
+
 public class FxBulletinField
 {
-	public FxBulletinField()
+	public FxBulletinField(FieldSpec fieldSpecToUse, MiniLocalization localizationToUse)
 	{
 		valueProperty = new SimpleStringProperty("");
 		validator = null;
