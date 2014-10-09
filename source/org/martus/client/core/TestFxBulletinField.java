@@ -28,7 +28,6 @@ package org.martus.client.core;
 import javafx.beans.value.ObservableBooleanValue;
 
 import org.junit.Test;
-import org.martus.client.core.FxBulletin.FieldValidator;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeNormal;

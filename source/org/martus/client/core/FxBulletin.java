@@ -36,9 +36,7 @@ import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableBooleanValue;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -468,50 +466,6 @@ public class FxBulletin
 	{
 		fieldSpecs.addAllReusableChoicesLists(bulletinFieldSpecs.getAllReusableChoiceLists());
 	}
-	
-	static class FieldValidator implements ChangeListener<String>
-	{
-		public FieldValidator(FieldSpec specToUse, MiniLocalization localizationToUse)
-		{
-			spec = specToUse;
-			localization = localizationToUse;
-			isValidProperty = new SimpleBooleanProperty(); 
-		}
-		
-		public ObservableBooleanValue isValidProperty()
-		{
-			return isValidProperty;
-		}
-		
-		@Override
-		public void changed(ObservableValue<? extends String> property, String oldValue, String newValue)
-		{
-			updateStatus(newValue);
-		}
-
-		public void updateStatus(String newValue)
-		{
-			boolean isValid = false;
-			try
-			{
-				if(newValue == null)
-					newValue = "";
-				FxBulletin.validateField(spec, newValue, localization);
-				isValid = true;
-			} 
-			catch (DataInvalidException noNeedToLogOrThrow)
-			{
-				isValid = false;
-			}
-			
-			isValidProperty.setValue(isValid);
-		}
-
-		private FieldSpec spec;
-		private MiniLocalization localization;
-		private SimpleBooleanProperty isValidProperty;
-	}
-	
 	
 	public MiniLocalization getLocalization()
 	{
