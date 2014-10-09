@@ -78,7 +78,7 @@ public class FxBulletin
 	{
 		localization = localizationToUse;
 		
-		fieldProperties = new HashMap<String, SimpleStringProperty>();
+		fields = new HashMap<String, FxBulletinField>();
 		fieldValidators = new HashMap<String, FieldValidator>();
 		attachments = FXCollections.observableArrayList();
 		hasBeenValidatedProperty = new SimpleBooleanProperty();
@@ -203,7 +203,8 @@ public class FxBulletin
 		if(foundSpec.getType().isGrid())
 			throw new NullPointerException("fieldProperty not available for a grid: " + fieldTag);
 		
-		return fieldProperties.get(fieldTag);
+		FxBulletinField field = fields.get(fieldTag);
+		return field.valueProperty();
 	}
 	
 	public ObservableBooleanValue isValidProperty(String fieldTag)
@@ -344,8 +345,8 @@ public class FxBulletin
 		if(versionProperty != null)
 			versionProperty = null;
 		
-		fieldProperties.forEach((key, property) -> clearProperty(property));
-		fieldProperties.clear();
+		fields.forEach((key, field) -> clearField(field));
+		fields.clear();
 		
 		dataForGrids = new HashMap();
 		
@@ -356,9 +357,9 @@ public class FxBulletin
 
 	}
 
-	private void clearProperty(SimpleStringProperty property)
+	private void clearField(FxBulletinField field)
 	{
-		property.setValue(null);
+		field.clear();
 	}
 	
 	private void setFieldPropertiesFromBulletinSection(Bulletin b, FieldSpecCollection bulletinFieldSpecs) throws Exception
@@ -366,10 +367,15 @@ public class FxBulletin
 		for(int i = 0; i < bulletinFieldSpecs.size(); ++i)
 		{
 			FieldSpec fieldSpec = bulletinFieldSpecs.get(i);
-			fieldSpecs.add(fieldSpec);
 			String fieldTag = fieldSpec.getTag();
-			MartusField field = b.getField(fieldTag);
-			String value = getFieldValue(field);
+			MartusField martusField = b.getField(fieldTag);
+			String value = getFieldValue(martusField);
+
+			fieldSpecs.add(fieldSpec);
+			
+			FxBulletinField field = new FxBulletinField();
+			fields.put(fieldTag, field);
+			
 			if(fieldSpec.getType().isGrid())
 				setGridField((GridFieldSpec)fieldSpec, value, bulletinFieldSpecs.getAllReusableChoiceLists());
 			else
@@ -451,14 +457,14 @@ public class FxBulletin
 	{
 		String tag = spec.getTag();
 
-		SimpleStringProperty property = new SimpleStringProperty(value);
-		fieldProperties.put(tag, property);
-		property.addListener((observable, newValue, oldValue) -> hasBeenModified = true);
+		FxBulletinField field = fields.get(tag);
+		field.setValue(value);
+		field.addValueListener((observable, newValue, oldValue) -> hasBeenModified = true);
 
 		FieldValidator fieldValidator = new FieldValidator(spec, getLocalization());
 		fieldValidators.put(tag, fieldValidator);
 		fieldValidator.updateStatus(value);
-		property.addListener(fieldValidator);
+		field.addValueListener(fieldValidator);
 	}
 	
 	private void copyReusableChoiceListsFromBulletinSection(FieldSpecCollection bulletinFieldSpecs)
@@ -519,7 +525,7 @@ public class FxBulletin
 	private boolean hasBeenModified;
 	private SimpleBooleanProperty hasBeenValidatedProperty;
 	
-	private HashMap<String, SimpleStringProperty> fieldProperties;
+	private HashMap<String, FxBulletinField> fields;
 	private HashMap<String, FieldValidator> fieldValidators;
 	private HashMap<String, GridFieldData> dataForGrids;
 	
