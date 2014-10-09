@@ -83,6 +83,8 @@ public class TestFxBulletinField extends TestCaseEnhanced
 	{
 		final String SAMPLE = "test";
 		FieldSpec fieldSpec = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
+		fsc.add(fieldSpec);
+		
 		FxBulletinField field = new FxBulletinField(createFxBulletin(), fieldSpec, localization);
 		assertEquals("tag", field.getTag());
 		assertEquals("Label", field.getLabel());
@@ -109,6 +111,8 @@ public class TestFxBulletinField extends TestCaseEnhanced
 	{
 		final String SAMPLE = "test";
 		FieldSpec fieldSpec = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
+		fsc.add(fieldSpec);
+		
 		FxBulletinField field = new FxBulletinField(createFxBulletin(), fieldSpec, localization);
 		assertEquals("", field.valueProperty().getValue());
 		field.addValueListener((observable, oldValue, newValue) -> 
@@ -123,6 +127,8 @@ public class TestFxBulletinField extends TestCaseEnhanced
 	{
 		FieldSpec spec = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
 		spec.setRequired();
+		fsc.add(spec);
+		
 		FxBulletinField field = new FxBulletinField(createFxBulletin(), spec, localization);
 		assertTrue(field.isRequiredField());
 		ObservableBooleanValue fieldIsValidProperty = field.fieldIsValidProperty();
@@ -137,6 +143,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		gridSpec2Colunns.setLabel("Grid");
 		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("a", "A", new FieldTypeNormal()));
 		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("b", "B", new FieldTypeDate()));
+		fsc.add(gridSpec2Colunns);
 
 		FxBulletin fxb = createFxBulletin();
 		FxBulletinField gridField = new FxBulletinField(fxb, gridSpec2Colunns, localization);
@@ -172,6 +179,8 @@ public class TestFxBulletinField extends TestCaseEnhanced
 	public void testSection() throws Exception
 	{
 		FieldSpec spec = FieldSpec.createCustomField("tag", "Label", new FieldTypeSectionStart());
+		fsc.add(spec);
+		
 		FxBulletinField field = new FxBulletinField(createFxBulletin(), spec, localization);
 		assertTrue(field.isSectionStart());
 	}
@@ -182,6 +191,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		ChoiceItem[] simpleChoices = new ChoiceItem[] {new ChoiceItem("a", "A"), new ChoiceItem("b", "B")};
 		FieldSpec simpleDropDown = new DropDownFieldSpec(simpleChoices);
 		simpleDropDown.setTag(simpleDropDownTag);
+		fsc.add(simpleDropDown);
 		
 		FxBulletinField field = new FxBulletinField(createFxBulletin(), simpleDropDown, localization);
 		assertTrue(field.isDropdown());
@@ -199,6 +209,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		CustomDropDownFieldSpec reusableDropDown = new CustomDropDownFieldSpec();
 		reusableDropDown.setTag(reusableDropDownTag);
 		reusableDropDown.addReusableChoicesCode(CITIES_CHOICES_TAG);
+		fsc.add(reusableDropDown);
 
 		fsc.add(reusableDropDown);
 		FxBulletin fxb = createFxBulletin();
@@ -221,7 +232,8 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		nestedDropDown.setTag(nestedDropDownTag);
 		nestedDropDown.addReusableChoicesCode(STATES_CHOICES_TAG);
 		nestedDropDown.addReusableChoicesCode(CITIES_CHOICES_TAG);
-
+		fsc.add(nestedDropDown);
+		
 		fsc.add(nestedDropDown);
 		FxBulletin fxb = createFxBulletin();
 		
