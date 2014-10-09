@@ -32,7 +32,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableBooleanValue;
 
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
-import org.martus.client.swingui.jfx.landing.bulletins.GridRowData;
+import org.martus.client.swingui.jfx.landing.bulletins.GridRowFields;
 import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
@@ -148,7 +148,7 @@ public class FxBulletinField
 		GridFieldData gridFieldData = gridDataProperty();
 		for(int row = 0; row < data.getRowCount(); ++row)
 		{
-			GridRowData rowData = new GridRowData();
+			GridRowFields rowData = new GridRowFields();
 			for(int column = 0; column < data.getColumnCount(); ++column)
 			{
 				String columnLabel = gridSpec.getColumnLabel(column);
