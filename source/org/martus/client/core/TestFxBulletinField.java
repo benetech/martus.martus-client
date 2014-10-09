@@ -62,6 +62,8 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		final String SAMPLE = "test";
 		FieldSpec fieldSpec = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
 		FxBulletinField field = new FxBulletinField(fieldSpec, localization);
+		assertEquals("tag", field.getTag());
+		assertEquals("Label", field.getLabel());
 		assertFalse(field.isGrid());
 		assertFalse(field.isSectionStart());
 		assertEquals("", field.valueProperty().getValue());

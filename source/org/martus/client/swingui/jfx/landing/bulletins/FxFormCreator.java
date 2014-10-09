@@ -93,7 +93,7 @@ public class FxFormCreator
 			
 			String sectionTitle = "";
 			if(isSectionStart)
-				sectionTitle = fieldSpec.getLabel();
+				sectionTitle = field.getLabel();
 			currentSection = new BulletinEditorSection(bulletin, getLocalization(), sectionTitle);
 			sections.add(currentSection);
 		}
@@ -115,7 +115,7 @@ public class FxFormCreator
 			try
 			{
 				MartusLogger.logException(e);
-				currentSection.addErrorMessage(fieldSpec.getLabel(), errorMessage);
+				currentSection.addErrorMessage(field.getLabel(), errorMessage);
 			} 
 			catch (Exception e1)
 			{
