@@ -25,7 +25,13 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core;
 
+import javafx.beans.value.ObservableBooleanValue;
+
 import org.junit.Test;
+import org.martus.client.core.FxBulletin.FieldValidator;
+import org.martus.common.MiniLocalization;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestFxBulletinField extends TestCaseEnhanced
@@ -35,6 +41,14 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		super(name);
 	}
 
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		
+		localization = new MiniLocalization();
+	}
+	
 	@Test
 	public void testBasics()
 	{
@@ -58,4 +72,18 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		}); 
 		field.valueProperty().setValue(SAMPLE);
 	}
+	
+	public void testValidation()
+	{
+		FieldSpec spec = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
+		spec.setRequired();
+		FxBulletinField field = new FxBulletinField();
+		FieldValidator validator = new FieldValidator(spec, localization);
+		field.setValidator(validator);
+		ObservableBooleanValue fieldIsValidProperty = field.fieldIsValidProperty();
+		assertFalse(fieldIsValidProperty.getValue());
+	}
+
+	private MiniLocalization localization;
+
 }

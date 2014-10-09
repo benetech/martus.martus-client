@@ -79,7 +79,6 @@ public class FxBulletin
 		localization = localizationToUse;
 		
 		fields = new HashMap<String, FxBulletinField>();
-		fieldValidators = new HashMap<String, FieldValidator>();
 		attachments = FXCollections.observableArrayList();
 		hasBeenValidatedProperty = new SimpleBooleanProperty();
 	}
@@ -216,7 +215,7 @@ public class FxBulletin
 		if(foundSpec.getType().isGrid())
 			throw new NullPointerException("fieldProperty not available for a grid: " + fieldTag);
 
-		return fieldValidators.get(fieldTag).isValidProperty();
+		return fields.get(fieldTag).fieldIsValidProperty();
 	}
 	
 	public ObservableList<GridRowData> gridDataProperty(String tag)
@@ -462,9 +461,7 @@ public class FxBulletin
 		field.addValueListener((observable, newValue, oldValue) -> hasBeenModified = true);
 
 		FieldValidator fieldValidator = new FieldValidator(spec, getLocalization());
-		fieldValidators.put(tag, fieldValidator);
-		fieldValidator.updateStatus(value);
-		field.addValueListener(fieldValidator);
+		field.setValidator(fieldValidator);
 	}
 	
 	private void copyReusableChoiceListsFromBulletinSection(FieldSpecCollection bulletinFieldSpecs)
@@ -526,7 +523,6 @@ public class FxBulletin
 	private SimpleBooleanProperty hasBeenValidatedProperty;
 	
 	private HashMap<String, FxBulletinField> fields;
-	private HashMap<String, FieldValidator> fieldValidators;
 	private HashMap<String, GridFieldData> dataForGrids;
 	
 	private ReadOnlyObjectWrapper<UniversalId> universalIdProperty;
