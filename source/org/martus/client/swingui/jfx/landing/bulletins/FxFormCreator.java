@@ -81,7 +81,7 @@ public class FxFormCreator
 	{
 		FieldSpec fieldSpec = field.getFieldSpec();
 		
-		if(shouldOmitField(fieldSpec))
+		if(shouldOmitField(field))
 			return;
 
 		boolean isSectionStart = field.isSectionStart();
@@ -141,13 +141,13 @@ public class FxFormCreator
 		return field.fieldIsValidProperty();
 	}
 
-	private boolean shouldOmitField(FieldSpec spec)
+	private boolean shouldOmitField(FxBulletinField field)
 	{
 		Vector<String> tagsToOmit = new Vector<String>();
 		tagsToOmit.add(Bulletin.TAGTITLE);
 		tagsToOmit.add(Bulletin.TAGWASSENT);
 		
-		return tagsToOmit.contains(spec.getTag());
+		return tagsToOmit.contains(field.getTag());
 	}
 
 	private MartusLocalization getLocalization()
