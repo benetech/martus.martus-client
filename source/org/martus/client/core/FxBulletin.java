@@ -370,7 +370,7 @@ public class FxBulletin
 
 			fieldSpecs.add(fieldSpec);
 			
-			FxBulletinField field = new FxBulletinField();
+			FxBulletinField field = new FxBulletinField(fieldSpec, getLocalization());
 			fields.put(fieldTag, field);
 			
 			if(fieldSpec.getType().isGrid())
