@@ -319,41 +319,6 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertFalse("After a bulletin has this flag set it can be unset", result2.getImmutableOnServer());
 	}
 	
-	public void testValidateDateMinMax() throws Exception
-	{
-		FxBulletin fxb = new FxBulletin(getLocalization());
-		Bulletin b = new BulletinForTesting(security);
-		fxb.copyDataFromBulletin(b, db);
-		Vector<FieldSpec> specs = fxb.getFieldSpecs();
-
-		DateFieldSpec spec = (DateFieldSpec) new FieldTypeDate().createEmptyFieldSpec();
-		spec.setTag("CustomDateField");
-		spec.setLabel("Custom date field");
-		spec.setMinimumDate("2014-01-01");
-		spec.setMaximumDate("2014-12-31");
-		specs.add(spec);
-		
-		FieldValidator.validateField(spec, "", localization);
-		FieldValidator.validateField(spec, "2014-07-01", localization);
-		try
-		{
-			FieldValidator.validateField(spec, "2013-12-31", localization);
-			throw new Exception("Should have failed for blank date earlier than acceptable range");
-		}
-		catch(DataInvalidException ignoreExpected)
-		{
-		}
-
-		try
-		{
-			FieldValidator.validateField(spec, "2015-01-01", localization);
-			throw new Exception("Should have failed for blank date later than acceptable range");
-		}
-		catch(DataInvalidException ignoreExpected)
-		{
-		}
-	}
-
 	public void testValidateRequiredField() throws Exception
 	{
 		String tag = Bulletin.TAGAUTHOR;

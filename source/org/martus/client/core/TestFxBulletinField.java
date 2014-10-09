@@ -43,6 +43,8 @@ import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
+import org.martus.common.fieldspec.DataInvalidException;
+import org.martus.common.fieldspec.DateFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeDate;
@@ -146,6 +148,42 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		}
 	}
 	
+	public void testValidateDateMinMax() throws Exception
+	{
+		DateFieldSpec spec = (DateFieldSpec) new FieldTypeDate().createEmptyFieldSpec();
+		spec.setTag("CustomDateField");
+		spec.setLabel("Custom date field");
+		spec.setMinimumDate("2014-01-01");
+		spec.setMaximumDate("2014-12-31");
+		fsc.add(spec);
+		
+		FxBulletinField field = new FxBulletinField(createFxBulletin(), spec, localization);
+		field.setValue("");
+		field.validate();
+		
+		field.setValue("2014-07-01");
+		field.validate();
+		try
+		{
+			field.setValue("2013-12-31");
+			field.validate();
+			throw new Exception("Should have failed for blank date earlier than acceptable range");
+		}
+		catch(DataInvalidException ignoreExpected)
+		{
+		}
+
+		try
+		{
+			field.setValue("2015-01-01");
+			field.validate();
+			throw new Exception("Should have failed for blank date later than acceptable range");
+		}
+		catch(DataInvalidException ignoreExpected)
+		{
+		}
+	}
+
 	public void testGrid() throws Exception
 	{
 		String gridTag = "grid";
