@@ -86,7 +86,7 @@ public class BulletinEditorSection extends GridPane
 		
 		if(fieldSpec.getType().isGrid())
 		{
-			currentRow.addGridFieldToRow(fieldSpec);
+			currentRow.addGridFieldToRow(field);
 		}
 		else
 		{
