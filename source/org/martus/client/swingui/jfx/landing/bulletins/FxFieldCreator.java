@@ -58,9 +58,10 @@ public class FxFieldCreator
 		localization = localizationToUse;
 	}
 	
-	public Node createFieldNode(FxBulletin bulletin, FxBulletinField field, Property<String> property) throws Exception
+	public Node createFieldNode(FxBulletin bulletin, FxBulletinField field) throws Exception
 	{
 		FieldSpec spec = field.getFieldSpec();
+		Property<String> property = field.valueProperty();
 		
 		if(spec.getType().isString())
 			return createStringField(property);

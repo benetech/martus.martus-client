@@ -27,7 +27,6 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.util.Vector;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -101,10 +100,9 @@ public class FxFormCreator
 		
 		try
 		{
-			SimpleStringProperty fieldValueProperty = getFieldValueProperty(field);
 			ObservableBooleanValue isValidProperty = getIsValidProperty(field);
 			
-			currentSection.addField(field, fieldValueProperty, isValidProperty);
+			currentSection.addField(field, isValidProperty);
 		}
 		catch(Exception e)
 		{
@@ -123,15 +121,7 @@ public class FxFormCreator
 		}
 	}
 
-	public SimpleStringProperty getFieldValueProperty(FxBulletinField field)
-	{
-		if(field.isGrid())
-			return null;
-		
-		return field.valueProperty();
-	}
-
-	public ObservableBooleanValue getIsValidProperty(FxBulletinField field)
+	private ObservableBooleanValue getIsValidProperty(FxBulletinField field)
 	{
 		if(field.isGrid())
 			return null;
