@@ -106,6 +106,15 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		{
 		}
 
+		try
+		{
+			field.appendEmptyGridRow();
+			fail("Should have thrown for appending grid data from non-grid field");
+		}
+		catch(Exception ignoreExpected)
+		{
+		}
+
 		field.valueProperty().setValue(SAMPLE);
 		field.clear();
 		assertNull(field.valueProperty().getValue());
@@ -221,8 +230,10 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		GridRowFields gridRowFields = gridData.get(0);
 		assertEquals(2, gridRowFields.size());
 		assertEquals("Apple", gridRowFields.get("A").valueProperty().getValue());
-		assertEquals("Balloon", gridRowFields.get("B").valueProperty().getValue());
+		assertEquals("2012-03-18", gridRowFields.get("B").valueProperty().getValue());
 		
+		gridField.appendEmptyGridRow();
+		assertEquals(2, gridData.size());
 	}
 	
 	public void testSection() throws Exception
@@ -315,7 +326,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		GridData gridData = new GridData(gridSpec2Columns, fsc.getAllReusableChoiceLists());
 		GridRow gridRowSample = new GridRow(gridSpec2Columns, fsc.getAllReusableChoiceLists());
 		gridRowSample.setCellText(0, "Apple");
-		gridRowSample.setCellText(1, "Balloon");
+		gridRowSample.setCellText(1, "2012-03-18");
 		gridData.addRow(gridRowSample);
 		return gridData;
 	}
