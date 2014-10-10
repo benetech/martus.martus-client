@@ -27,6 +27,7 @@ package org.martus.client.core;
 
 import java.util.Vector;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.ObservableList;
 
@@ -217,14 +218,8 @@ public class TestFxBulletinField extends TestCaseEnhanced
 
 		FxBulletin fxb = createFxBulletin();
 		FxBulletinField gridField = new FxBulletinField(fxb, gridSpec2Colunns, localization);
-		try
-		{
-			gridField.valueProperty();
-			fail("valueProperty should have thrown for grid");
-		}
-		catch(Exception ignoreExpected)
-		{
-		}
+		SimpleStringProperty gridValueProperty = gridField.valueProperty();
+
 		try
 		{
 			gridField.fieldIsValidProperty();
@@ -238,8 +233,10 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		String sampleDataXml = data.getXmlRepresentation();
 		assertEquals("", gridField.getValue());
 		gridField.setValue(sampleDataXml);
+		assertEquals(sampleDataXml, gridValueProperty.getValue());
 		assertEquals(sampleDataXml, gridField.getValue());
 		gridField.setValue(sampleDataXml);
+		assertEquals(sampleDataXml, gridValueProperty.getValue());
 		assertEquals(sampleDataXml, gridField.getValue());
 
 		ObservableList<GridRowFields> gridData = gridField.gridDataProperty();
@@ -254,13 +251,16 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		GridRow gridRow = FxBulletinField.convertGridRowFieldsToGridRow(gridSpec2Colunns, addedRow);
 		assertTrue(gridRow.isEmptyRow());
 		assertEquals(2, gridData.size());
+		assertEquals(sampleDataXml, gridValueProperty.getValue());
 		assertEquals(sampleDataXml, gridField.getValue());
 
 		GridRowFields secondRow = gridData.get(1);
 		secondRow.get("Normal").setValue("test data");
+		assertNotEquals(sampleDataXml, gridValueProperty.getValue());
 		assertNotEquals(sampleDataXml, gridField.getValue());
 		gridField.removeGridRow(addedRow);
 		assertEquals(1, gridData.size());
+		assertEquals(sampleDataXml, gridValueProperty.getValue());
 		assertEquals(sampleDataXml, gridField.getValue());
 		try
 		{
@@ -273,6 +273,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		
 		gridField.removeGridRow(gridRowFields);
 		assertEquals(0, gridData.size());
+		assertEquals("", gridValueProperty.getValue());
 		assertEquals("", gridField.getValue());
 	}
 	

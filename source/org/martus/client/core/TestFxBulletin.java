@@ -50,6 +50,7 @@ import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -84,8 +85,9 @@ public class TestFxBulletin extends TestCaseEnhanced
 		GridFieldSpec gridSpec2Colunns = new GridFieldSpec();
 		gridSpec2Colunns.setTag(gridTag);
 		gridSpec2Colunns.setLabel("Grid");
-		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("a", "A", new FieldTypeNormal()));
-		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("b", "B", new FieldTypeDate()));
+		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("a", "Normal", new FieldTypeNormal()));
+		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("b", "Date", new FieldTypeDate()));
+		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("c", "Boolean", new FieldTypeBoolean()));
 
 		FieldSpecCollection fsc = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		fsc.add(gridSpec2Colunns);
@@ -95,7 +97,9 @@ public class TestFxBulletin extends TestCaseEnhanced
 		b.set(gridSpec2Colunns.getTag(), data.getXmlRepresentation());
 		
 		FxBulletin fxb = new FxBulletin(getLocalization());
+		assertFalse(fxb.hasBeenModified());
 		fxb.copyDataFromBulletin(b, db);
+		assertFalse(fxb.hasBeenModified());
 		fxb.validateData();
 		
 		try
@@ -122,7 +126,8 @@ public class TestFxBulletin extends TestCaseEnhanced
 		GridData gridData = new GridData(gridSpec2Colunns, fsc.getAllReusableChoiceLists());
 		GridRow gridRowSample = new GridRow(gridSpec2Colunns, fsc.getAllReusableChoiceLists());
 		gridRowSample.setCellText(0, "Apple");
-		gridRowSample.setCellText(1, "2034-06-19");
+		gridRowSample.setCellText(1, "2012-03-18");
+		gridRowSample.setCellText(2, FieldSpec.TRUESTRING);
 		gridData.addRow(gridRowSample);
 		return gridData;
 	}

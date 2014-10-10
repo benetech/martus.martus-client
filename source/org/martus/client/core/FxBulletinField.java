@@ -30,6 +30,7 @@ import java.util.Vector;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableBooleanValue;
+import javafx.collections.ListChangeListener;
 
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.landing.bulletins.GridRowFields;
@@ -55,6 +56,8 @@ public class FxBulletinField
 		
 		valueProperty = new SimpleStringProperty("");
 		gridDataIfApplicable = new GridFieldData();
+		ListChangeListener<GridRowFields> rowChangeHandler = (change) -> updateOverallValue();
+		gridDataIfApplicable.addListener(rowChangeHandler);
 		FieldValidator fieldValidator = new FieldValidator(fieldSpec, getLocalization());
 		setValidator(fieldValidator);
 	}
@@ -106,9 +109,6 @@ public class FxBulletinField
 
 	public SimpleStringProperty valueProperty()
 	{
-		if(isGrid())
-			throw new RuntimeException("valueProperty not available for grid: " + getTag());
-		
 		return valueProperty;
 	}
 
@@ -263,7 +263,8 @@ public class FxBulletinField
 	
 	private void updateOverallValue()
 	{
-		valueProperty.setValue(getGridValue());
+		String newValue = getGridValue();
+		valueProperty.setValue(newValue);
 	}
 
 	private String getGridValue()
@@ -271,7 +272,14 @@ public class FxBulletinField
 		PoolOfReusableChoicesLists irrelevantReusableLists = null;
 		GridFieldSpec gridSpec = getGridFieldSpec();
 		GridData gridData = new GridData(gridSpec, irrelevantReusableLists);
-		gridDataProperty().forEach(gridRowFields -> gridData.addRow(convertGridRowFieldsToGridRow(gridSpec, gridRowFields)));
+		for(int row = 0; row < gridDataProperty().size(); ++ row)
+		{
+			GridRowFields rowFields = gridDataProperty().get(row);
+			GridRow gridRow = convertGridRowFieldsToGridRow(gridSpec, rowFields);
+			if(!gridRow.isEmptyRow())
+				gridData.addRow(gridRow);
+		}
+
 		return gridData.getXmlRepresentation();
 	}
 
@@ -285,6 +293,8 @@ public class FxBulletinField
 			FieldSpec cellSpec = gridFieldSpec.getFieldSpec(column);
 			FxBulletinField cellField = new FxBulletinField(fxb, cellSpec, getLocalization());
 			rowFields.put(columnLabel, cellField);
+			
+			cellField.addValueListener((observable, oldValue, newValue) -> updateOverallValue());
 		}
 
 		GridRow gridRow = GridRow.createEmptyRow(getGridFieldSpec(), PoolOfReusableChoicesLists.EMPTY_POOL);
