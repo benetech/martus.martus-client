@@ -218,10 +218,10 @@ public class TestFxBulletinField extends TestCaseEnhanced
 
 		ObservableList<GridRowFields> gridData = gridField.gridDataProperty();
 		assertEquals(1, gridData.size());
-		GridRowFields gridRowData = gridData.get(0);
-		assertEquals(2, gridRowData.size());
-		assertEquals("Apple", gridRowData.get("A").valueProperty().getValue());
-		assertEquals("Balloon", gridRowData.get("B").valueProperty().getValue());
+		GridRowFields gridRowFields = gridData.get(0);
+		assertEquals(2, gridRowFields.size());
+		assertEquals("Apple", gridRowFields.get("A").valueProperty().getValue());
+		assertEquals("Balloon", gridRowFields.get("B").valueProperty().getValue());
 		
 	}
 	
