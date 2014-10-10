@@ -102,7 +102,7 @@ public class ExpandedGridSection extends TitledPane
 
 	private void appendItem()
 	{
-		GridRowFields gridRowData = new GridRowFields();
+		GridRowFields gridRowData = gridField.createEmptyRow();
 		gridData.add(gridRowData);
 		addItemControls(gridRowData);
 	}
