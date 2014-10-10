@@ -47,6 +47,7 @@ import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.DateFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.FieldTypeSectionStart;
@@ -209,8 +210,9 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		GridFieldSpec gridSpec2Colunns = new GridFieldSpec();
 		gridSpec2Colunns.setTag(gridTag);
 		gridSpec2Colunns.setLabel("Grid");
-		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("a", "A", new FieldTypeNormal()));
-		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("b", "B", new FieldTypeDate()));
+		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("a", "Normal", new FieldTypeNormal()));
+		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("b", "Date", new FieldTypeDate()));
+		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("c", "Boolean", new FieldTypeBoolean()));
 		fsc.add(gridSpec2Colunns);
 
 		FxBulletin fxb = createFxBulletin();
@@ -234,16 +236,22 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		
 		GridData data = createSampleGridData(gridSpec2Colunns);
 		String sampleDataXml = data.getXmlRepresentation();
+		assertEquals("", gridField.getValue());
 		gridField.setGridData(sampleDataXml);
+		assertEquals(sampleDataXml, gridField.getValue());
 
 		ObservableList<GridRowFields> gridData = gridField.gridDataProperty();
 		assertEquals(1, gridData.size());
 		GridRowFields gridRowFields = gridData.get(0);
-		assertEquals(2, gridRowFields.size());
-		assertEquals("Apple", gridRowFields.get("A").valueProperty().getValue());
-		assertEquals("2012-03-18", gridRowFields.get("B").valueProperty().getValue());
+		assertEquals(3, gridRowFields.size());
+		assertEquals("Apple", gridRowFields.get("Normal").valueProperty().getValue());
+		assertEquals("2012-03-18", gridRowFields.get("Date").valueProperty().getValue());
+		assertEquals(FieldSpec.TRUESTRING, gridRowFields.get("Boolean").valueProperty().getValue());
 		
 		GridRowFields addedRow = gridField.appendEmptyGridRow();
+		GridRow gridRow = FxBulletinField.convertGridRowFieldsToGridRow(gridSpec2Colunns, addedRow);
+		assertTrue(gridRow.isEmptyRow());
+		
 		assertEquals(2, gridData.size());
 		gridField.removeGridRow(addedRow);
 		assertEquals(1, gridData.size());
@@ -348,6 +356,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		GridRow gridRowSample = new GridRow(gridSpec2Columns, fsc.getAllReusableChoiceLists());
 		gridRowSample.setCellText(0, "Apple");
 		gridRowSample.setCellText(1, "2012-03-18");
+		gridRowSample.setCellText(2, FieldSpec.TRUESTRING);
 		gridData.addRow(gridRowSample);
 		return gridData;
 	}

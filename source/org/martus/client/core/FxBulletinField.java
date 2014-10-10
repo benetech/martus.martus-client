@@ -55,7 +55,7 @@ public class FxBulletinField
 		
 		valueProperty = new SimpleStringProperty("");
 		gridDataIfApplicable = new GridFieldData();
-		FieldValidator fieldValidator = new FieldValidator(fieldSpec, localizationToUse);
+		FieldValidator fieldValidator = new FieldValidator(fieldSpec, getLocalization());
 		setValidator(fieldValidator);
 	}
 	
@@ -167,14 +167,9 @@ public class FxBulletinField
 		
 		for(int row = 0; row < data.getRowCount(); ++row)
 		{
+			GridRow gridRow = data.getRow(row);
 			GridRowFields rowFields = appendEmptyGridRow();
-			for(int column = 0; column < data.getColumnCount(); ++column)
-			{
-				String columnLabel = gridSpec.getColumnLabel(column);
-				FxBulletinField cellField = rowFields.get(columnLabel);
-				String value = data.getValueAt(row, column);
-				cellField.setValue(value);
-			}
+			copyGridRowToGridRowFields(gridRow, rowFields);
 		}
 	}
 
@@ -258,14 +253,14 @@ public class FxBulletinField
 		PoolOfReusableChoicesLists irrelevantReusableLists = null;
 		GridFieldSpec gridSpec = getGridFieldSpec();
 		GridData gridData = new GridData(gridSpec, irrelevantReusableLists);
-		gridDataProperty().forEach(gridRowFields -> gridData.addRow(convertGridRowFieldsToGridRow(gridRowFields)));
+		gridDataProperty().forEach(gridRowFields -> gridData.addRow(convertGridRowFieldsToGridRow(gridSpec, gridRowFields)));
 		return gridData.getXmlRepresentation();
 	}
 
 	private GridRowFields createEmptyRow()
 	{
-		GridRowFields rowFields = new GridRowFields();
 		GridFieldSpec gridFieldSpec = getGridFieldSpec();
+		GridRowFields rowFields = new GridRowFields();
 		for(int column = 0; column < gridFieldSpec.getColumnCount(); ++column)
 		{
 			String columnLabel = gridFieldSpec.getColumnLabel(column);
@@ -273,13 +268,26 @@ public class FxBulletinField
 			FxBulletinField cellField = new FxBulletinField(fxb, cellSpec, getLocalization());
 			rowFields.put(columnLabel, cellField);
 		}
+
+		GridRow gridRow = GridRow.createEmptyRow(getGridFieldSpec(), PoolOfReusableChoicesLists.EMPTY_POOL);
+		copyGridRowToGridRowFields(gridRow, rowFields);
 		return rowFields;
 	}
 
-	private GridRow convertGridRowFieldsToGridRow(GridRowFields gridRowFields)
+	public void copyGridRowToGridRowFields(GridRow gridRow, GridRowFields rowFields)
+	{
+		for(int column = 0; column < gridRow.getColumnCount(); ++column)
+		{
+			String columnLabel = getGridFieldSpec().getColumnLabel(column);
+			FxBulletinField cellField = rowFields.get(columnLabel);
+			String value = gridRow.getCellText(column);
+			cellField.setValue(value);
+		}
+	}
+
+	public static GridRow convertGridRowFieldsToGridRow(GridFieldSpec gridFieldSpec, GridRowFields gridRowFields)
 	{
 		PoolOfReusableChoicesLists irrelevantReusableLists = null;
-		GridFieldSpec gridFieldSpec = getGridFieldSpec();
 		GridRow gridRow = new GridRow(gridFieldSpec, irrelevantReusableLists);
 		for(int column = 0; column < gridRow.getColumnCount(); ++column)
 		{
@@ -298,11 +306,11 @@ public class FxBulletinField
 		return getFieldSpec().getType();
 	}
 	
-	private MiniLocalization getLocalization()
+	public MiniLocalization getLocalization()
 	{
 		return localization;
 	}
-
+	
 	private FxBulletin fxb;
 	private FieldSpec fieldSpec;
 	private MiniLocalization localization;
