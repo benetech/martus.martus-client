@@ -224,10 +224,7 @@ public class FxBulletinField
 
 	public void validate() throws DataInvalidException
 	{
-		if(isGrid())
-			return;
-		
-		validator.validate(valueProperty().getValue());
+		validator.validate(getValue());
 	}
 
 	private Vector<ObservableChoiceItemList> getReusableChoiceItemLists(DropDownFieldSpec dropDownSpec)
