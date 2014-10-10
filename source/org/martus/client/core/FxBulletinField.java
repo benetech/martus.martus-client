@@ -258,7 +258,7 @@ public class FxBulletinField
 		PoolOfReusableChoicesLists irrelevantReusableLists = null;
 		GridFieldSpec gridSpec = getGridFieldSpec();
 		GridData gridData = new GridData(gridSpec, irrelevantReusableLists);
-		gridDataProperty().forEach(gridRowFields -> gridData.addRow(createGridRow(gridRowFields)));
+		gridDataProperty().forEach(gridRowFields -> gridData.addRow(convertGridRowFieldsToGridRow(gridRowFields)));
 		return gridData.getXmlRepresentation();
 	}
 
@@ -276,7 +276,7 @@ public class FxBulletinField
 		return rowFields;
 	}
 
-	private GridRow createGridRow(GridRowFields gridRowFields)
+	private GridRow convertGridRowFieldsToGridRow(GridRowFields gridRowFields)
 	{
 		PoolOfReusableChoicesLists irrelevantReusableLists = null;
 		GridFieldSpec gridFieldSpec = getGridFieldSpec();
