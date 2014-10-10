@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.bulletins;
 
 
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
@@ -36,6 +35,7 @@ import javafx.scene.layout.VBox;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.core.FxBulletinField;
+import org.martus.client.core.GridFieldData;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.FieldSpec;
@@ -58,7 +58,7 @@ public class ExpandedGridSection extends TitledPane
 	public void createAndSetContent()
 	{
 		itemBox = new VBox();
-		gridData = gridField.gridDataProperty();
+		GridFieldData gridData = gridField.gridDataProperty();
 		gridData.forEach((rowData) -> addItemControls(rowData));
 		
 		HBox bottom = new HBox();
@@ -118,7 +118,6 @@ public class ExpandedGridSection extends TitledPane
 
 	private FxBulletinField gridField;
 	private MartusLocalization localization;
-	private ObservableList<GridRowFields> gridData;
 	private BorderPane mainBorderPane;
 	private VBox itemBox;
 }
