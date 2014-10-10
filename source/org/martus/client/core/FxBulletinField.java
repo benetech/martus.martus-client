@@ -34,6 +34,7 @@ import javafx.beans.value.ObservableBooleanValue;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.landing.bulletins.GridRowFields;
 import org.martus.common.GridData;
+import org.martus.common.GridRow;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.ReusableChoices;
@@ -93,12 +94,25 @@ public class FxBulletinField
 		return fieldSpec;
 	}
 	
+	public GridFieldSpec getGridFieldSpec()
+	{
+		return (GridFieldSpec) getFieldSpec();
+	}
+
 	public SimpleStringProperty valueProperty()
 	{
 		if(isGrid())
 			throw new RuntimeException("valueProperty not available for grid: " + getTag());
 		
 		return valueProperty;
+	}
+
+	public String getValue()
+	{
+		if(isGrid())
+			return getGridValue();
+		
+		return valueProperty.getValue();
 	}
 
 	public void setValue(String value)
@@ -141,7 +155,7 @@ public class FxBulletinField
 
 	public void setGridData(String xmlGridData) throws Exception
 	{
-		GridFieldSpec gridSpec = (GridFieldSpec) getFieldSpec();
+		GridFieldSpec gridSpec = getGridFieldSpec();
 		PoolOfReusableChoicesLists poolOfReusableChoicesLists = fxb.getAllReusableChoicesLists();
 		GridData data = new GridData(gridSpec, poolOfReusableChoicesLists );
 		data.setFromXml(xmlGridData);
@@ -218,6 +232,32 @@ public class FxBulletinField
 		simpleChoices.addAll(dropDownSpec.getAllChoices());
 		listOfLists.add(simpleChoices);
 		return listOfLists;
+	}
+	
+	private String getGridValue()
+	{
+		PoolOfReusableChoicesLists irrelevantReusableLists = null;
+		GridFieldSpec gridSpec = getGridFieldSpec();
+		GridData gridData = new GridData(gridSpec, irrelevantReusableLists);
+		gridDataProperty().forEach(gridRowFields -> gridData.addRow(createGridRow(gridRowFields)));
+		return gridData.getXmlRepresentation();
+	}
+
+	private GridRow createGridRow(GridRowFields gridRowFields)
+	{
+		PoolOfReusableChoicesLists irrelevantReusableLists = null;
+		GridFieldSpec gridFieldSpec = getGridFieldSpec();
+		GridRow gridRow = new GridRow(gridFieldSpec, irrelevantReusableLists);
+		for(int column = 0; column < gridRow.getColumnCount(); ++column)
+		{
+			FieldSpec columnFieldSpec = gridFieldSpec.getFieldSpec(column);
+			String label = columnFieldSpec.getLabel();
+			FxBulletinField field = gridRowFields.get(label);
+			String value = field.getValue();
+			gridRow.setCellText(column, value);
+		}
+		
+		return gridRow;
 	}
 
 	private FieldType getType()

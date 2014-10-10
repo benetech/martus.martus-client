@@ -116,16 +116,22 @@ public class TestFxBulletin extends TestCaseEnhanced
 		{
 		}
 		
-		ObservableList<GridRowFields> gridData = fxb.gridDataProperty(gridTag);
-		assertEquals(1, gridData.size());
-		GridRowFields gridRowData = gridData.get(0);
+		ObservableList<GridRowFields> gridFields = fxb.gridDataProperty(gridTag);
+		assertEquals(1, gridFields.size());
+		GridRowFields gridRowData = gridFields.get(0);
 		assertEquals(2, gridRowData.size());
-		assertEquals("Apple", gridRowData.get("A").valueProperty().getValue());
-		assertEquals("Balloon", gridRowData.get("B").valueProperty().getValue());
+		String firstRowFirstColumnData = gridRowData.get("A").valueProperty().getValue();
+		assertEquals("Apple", firstRowFirstColumnData);
+		String firstRowSecondColumnData = gridRowData.get("B").valueProperty().getValue();
+		assertEquals("2034-06-19", firstRowSecondColumnData);
 		
 		Bulletin modified = new Bulletin(security);
 		fxb.copyDataToBulletin(modified);
-		assertEquals("", modified.get(gridTag));
+		GridData gridData = new GridData(gridSpec2Colunns, fsc.getAllReusableChoiceLists());
+		gridData.setFromXml(modified.get(gridTag));
+		assertEquals(gridFields.size(), gridData.getRowCount());
+		assertEquals(firstRowFirstColumnData, gridData.getValueAt(0, 0));
+		assertEquals(firstRowSecondColumnData, gridData.getValueAt(0, 1));
 	}
 
 	private GridData createSampleGridData(GridFieldSpec gridSpec2Colunns, FieldSpecCollection fsc)
@@ -133,7 +139,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		GridData gridData = new GridData(gridSpec2Colunns, fsc.getAllReusableChoiceLists());
 		GridRow gridRowSample = new GridRow(gridSpec2Colunns, fsc.getAllReusableChoiceLists());
 		gridRowSample.setCellText(0, "Apple");
-		gridRowSample.setCellText(1, "Balloon");
+		gridRowSample.setCellText(1, "2034-06-19");
 		gridData.addRow(gridRowSample);
 		return gridData;
 	}
