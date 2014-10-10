@@ -200,20 +200,6 @@ public class FxBulletinField
 		gridData.remove(rowToRemove);
 	}
 
-	private GridRowFields createEmptyRow()
-	{
-		GridRowFields rowFields = new GridRowFields();
-		GridFieldSpec gridFieldSpec = getGridFieldSpec();
-		for(int column = 0; column < gridFieldSpec.getColumnCount(); ++column)
-		{
-			String columnLabel = gridFieldSpec.getColumnLabel(column);
-			FieldSpec cellSpec = gridFieldSpec.getFieldSpec(column);
-			FxBulletinField cellField = new FxBulletinField(fxb, cellSpec, getLocalization());
-			rowFields.put(columnLabel, cellField);
-		}
-		return rowFields;
-	}
-
 	public Vector<ObservableChoiceItemList> getChoiceItemLists()
 	{
 		if(!isDropdown())
@@ -277,6 +263,20 @@ public class FxBulletinField
 		GridData gridData = new GridData(gridSpec, irrelevantReusableLists);
 		gridDataProperty().forEach(gridRowFields -> gridData.addRow(createGridRow(gridRowFields)));
 		return gridData.getXmlRepresentation();
+	}
+
+	private GridRowFields createEmptyRow()
+	{
+		GridRowFields rowFields = new GridRowFields();
+		GridFieldSpec gridFieldSpec = getGridFieldSpec();
+		for(int column = 0; column < gridFieldSpec.getColumnCount(); ++column)
+		{
+			String columnLabel = gridFieldSpec.getColumnLabel(column);
+			FieldSpec cellSpec = gridFieldSpec.getFieldSpec(column);
+			FxBulletinField cellField = new FxBulletinField(fxb, cellSpec, getLocalization());
+			rowFields.put(columnLabel, cellField);
+		}
+		return rowFields;
 	}
 
 	private GridRow createGridRow(GridRowFields gridRowFields)
