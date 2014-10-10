@@ -237,9 +237,9 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		GridData data = createSampleGridData(gridSpec2Colunns);
 		String sampleDataXml = data.getXmlRepresentation();
 		assertEquals("", gridField.getValue());
-		gridField.setGridData(sampleDataXml);
+		gridField.setValue(sampleDataXml);
 		assertEquals(sampleDataXml, gridField.getValue());
-		gridField.setGridData(sampleDataXml);
+		gridField.setValue(sampleDataXml);
 		assertEquals(sampleDataXml, gridField.getValue());
 
 		ObservableList<GridRowFields> gridData = gridField.gridDataProperty();

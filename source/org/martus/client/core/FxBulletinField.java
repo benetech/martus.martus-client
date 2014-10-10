@@ -122,6 +122,9 @@ public class FxBulletinField
 
 	public void setValue(String value)
 	{
+		if(isGrid())
+			setGridData(value);
+		
 		valueProperty.setValue(value);
 	}
 
@@ -158,14 +161,22 @@ public class FxBulletinField
 		return gridDataIfApplicable;
 	}
 
-	public void setGridData(String xmlGridData) throws Exception
+	private void setGridData(String xmlGridData)
 	{
 		gridDataProperty().clear();
 		
 		GridFieldSpec gridSpec = getGridFieldSpec();
 		PoolOfReusableChoicesLists poolOfReusableChoicesLists = fxb.getAllReusableChoicesLists();
 		GridData data = new GridData(gridSpec, poolOfReusableChoicesLists );
-		data.setFromXml(xmlGridData);
+		
+		try
+		{
+			data.setFromXml(xmlGridData);
+		}
+		catch(Exception e)
+		{
+			throw new RuntimeException(e);
+		}
 		
 		for(int row = 0; row < data.getRowCount(); ++row)
 		{
@@ -252,7 +263,7 @@ public class FxBulletinField
 	
 	private void updateOverallValue()
 	{
-		setValue(getGridValue());
+		valueProperty.setValue(getGridValue());
 	}
 
 	private String getGridValue()

@@ -53,7 +53,6 @@ import org.martus.common.database.ReadableDatabase;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.utilities.MartusFlexidate;
@@ -314,10 +313,7 @@ public class FxBulletin
 			FxBulletinField field = new FxBulletinField(this, fieldSpec, getLocalization());
 			fields.put(fieldTag, field);
 			
-			if(fieldSpec.getType().isGrid())
-				setGridField((GridFieldSpec)fieldSpec, value);
-			else
-				setField(fieldSpec, value);
+			setField(fieldSpec, value);
 //			System.out.println("copyDataFromBulletin " + fieldTag + ":" + value);
 		}
 	}
@@ -378,14 +374,6 @@ public class FxBulletin
 		field.addValueListener((observable, oldValue, newValue) -> hasBeenModified = true);
 	}
 	
-	private void setGridField(GridFieldSpec fieldSpec, String value) throws Exception
-	{
-		String tag = fieldSpec.getTag();
-
-		FxBulletinField field = fields.get(tag);
-		field.setGridData(value);
-	}
-
 	private void copyReusableChoiceListsFromBulletinSection(FieldSpecCollection bulletinFieldSpecs)
 	{
 		fieldSpecs.addAllReusableChoicesLists(bulletinFieldSpecs.getAllReusableChoiceLists());
