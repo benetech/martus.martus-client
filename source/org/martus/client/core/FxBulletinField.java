@@ -191,6 +191,15 @@ public class FxBulletinField
 		return newRowFields;
 	}
 
+	public void removeGridRow(GridRowFields rowToRemove)
+	{
+		GridFieldData gridData = gridDataProperty();
+		if(!gridData.contains(rowToRemove))
+			throw new RuntimeException("Attempted to remove grid row that didn't exist");
+		
+		gridData.remove(rowToRemove);
+	}
+
 	private GridRowFields createEmptyRow()
 	{
 		GridRowFields rowFields = new GridRowFields();

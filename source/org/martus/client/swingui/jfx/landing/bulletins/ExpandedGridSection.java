@@ -85,7 +85,7 @@ public class ExpandedGridSection extends TitledPane
 	
 	private void deleteItem(GridRowFields rowData)
 	{
-		gridField.gridDataProperty().remove(rowData);
+		gridField.removeGridRow(rowData);
 		createAndSetContent();
 	}
 
