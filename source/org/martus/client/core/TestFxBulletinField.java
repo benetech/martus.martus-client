@@ -239,6 +239,8 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		assertEquals("", gridField.getValue());
 		gridField.setGridData(sampleDataXml);
 		assertEquals(sampleDataXml, gridField.getValue());
+		gridField.setGridData(sampleDataXml);
+		assertEquals(sampleDataXml, gridField.getValue());
 
 		ObservableList<GridRowFields> gridData = gridField.gridDataProperty();
 		assertEquals(1, gridData.size());

@@ -160,6 +160,8 @@ public class FxBulletinField
 
 	public void setGridData(String xmlGridData) throws Exception
 	{
+		gridDataProperty().clear();
+		
 		GridFieldSpec gridSpec = getGridFieldSpec();
 		PoolOfReusableChoicesLists poolOfReusableChoicesLists = fxb.getAllReusableChoicesLists();
 		GridData data = new GridData(gridSpec, poolOfReusableChoicesLists );
