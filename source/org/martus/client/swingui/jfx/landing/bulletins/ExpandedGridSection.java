@@ -77,9 +77,18 @@ public class ExpandedGridSection extends TitledPane
 	private void addItemControls(GridRowFields rowData)
 	{
 		itemBox.getChildren().add(createItem(rowData));
+		Button deleteButton = new Button("Delete");
+		deleteButton.setOnAction(event -> deleteItem(rowData));
+		itemBox.getChildren().add(deleteButton);
 		itemBox.getChildren().add(new Separator(Orientation.HORIZONTAL));
 	}
 	
+	private void deleteItem(GridRowFields rowData)
+	{
+		gridField.gridDataProperty().remove(rowData);
+		createAndSetContent();
+	}
+
 	private Node createItem(GridRowFields rowData)
 	{
 		GridFieldSpec gridSpec = gridField.getGridFieldSpec();
