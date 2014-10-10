@@ -36,7 +36,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 
 import org.martus.client.swingui.jfx.landing.bulletins.AttachmentTableRowData;
-import org.martus.client.swingui.jfx.landing.bulletins.GridRowFields;
 import org.martus.client.test.MockBulletinStore;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
@@ -116,22 +115,6 @@ public class TestFxBulletin extends TestCaseEnhanced
 		{
 		}
 		
-		ObservableList<GridRowFields> gridFields = fxb.gridDataProperty(gridTag);
-		assertEquals(1, gridFields.size());
-		GridRowFields gridRowData = gridFields.get(0);
-		assertEquals(2, gridRowData.size());
-		String firstRowFirstColumnData = gridRowData.get("A").valueProperty().getValue();
-		assertEquals("Apple", firstRowFirstColumnData);
-		String firstRowSecondColumnData = gridRowData.get("B").valueProperty().getValue();
-		assertEquals("2034-06-19", firstRowSecondColumnData);
-		
-		Bulletin modified = new Bulletin(security);
-		fxb.copyDataToBulletin(modified);
-		GridData gridData = new GridData(gridSpec2Colunns, fsc.getAllReusableChoiceLists());
-		gridData.setFromXml(modified.get(gridTag));
-		assertEquals(gridFields.size(), gridData.getRowCount());
-		assertEquals(firstRowFirstColumnData, gridData.getValueAt(0, 0));
-		assertEquals(firstRowSecondColumnData, gridData.getValueAt(0, 1));
 	}
 
 	private GridData createSampleGridData(GridFieldSpec gridSpec2Colunns, FieldSpecCollection fsc)
