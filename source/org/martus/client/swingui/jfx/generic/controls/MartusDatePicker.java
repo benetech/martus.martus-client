@@ -44,7 +44,7 @@ public class MartusDatePicker extends DatePicker
 		MartusDateConverter converter = new MartusDateConverter(localizationToUse);
 		setConverter(converter);
 		setChronology(localizationToUse.getCurrentChronology());
-		overallValueProperty = new SimpleStringProperty();
+		overallValueProperty = new SimpleStringProperty("");
 		valueProperty().addListener((observable, oldValue, newValue) -> updateOverallValue());
 	}
 	
