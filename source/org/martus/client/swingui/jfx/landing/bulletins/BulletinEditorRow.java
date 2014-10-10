@@ -83,6 +83,7 @@ public class BulletinEditorRow
 	{
 		isGrid = true;
 		ExpandedGridSection gridSection = new ExpandedGridSection(field, getLocalization());
+		HBox.setHgrow(gridSection, Priority.SOMETIMES);
 		
 		fieldsNode.getChildren().add(gridSection);
 	}
