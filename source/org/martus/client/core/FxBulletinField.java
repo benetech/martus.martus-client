@@ -168,7 +168,7 @@ public class FxBulletinField
 		GridFieldData gridFieldData = gridDataProperty();
 		for(int row = 0; row < data.getRowCount(); ++row)
 		{
-			GridRowFields rowData = new GridRowFields();
+			GridRowFields rowData = createEmptyRow();
 			for(int column = 0; column < data.getColumnCount(); ++column)
 			{
 				String columnLabel = gridSpec.getColumnLabel(column);
@@ -181,6 +181,11 @@ public class FxBulletinField
 			
 			gridFieldData.add(rowData);
 		}
+	}
+
+	public GridRowFields createEmptyRow()
+	{
+		return new GridRowFields();
 	}
 
 	public Vector<ObservableChoiceItemList> getChoiceItemLists()
