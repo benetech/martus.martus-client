@@ -251,10 +251,15 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		GridRowFields addedRow = gridField.appendEmptyGridRow();
 		GridRow gridRow = FxBulletinField.convertGridRowFieldsToGridRow(gridSpec2Colunns, addedRow);
 		assertTrue(gridRow.isEmptyRow());
-		
 		assertEquals(2, gridData.size());
+		assertEquals(sampleDataXml, gridField.getValue());
+
+		GridRowFields secondRow = gridData.get(1);
+		secondRow.get("Normal").setValue("test data");
+		assertNotEquals(sampleDataXml, gridField.getValue());
 		gridField.removeGridRow(addedRow);
 		assertEquals(1, gridData.size());
+		assertEquals(sampleDataXml, gridField.getValue());
 		try
 		{
 			gridField.removeGridRow(addedRow);
@@ -263,6 +268,10 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		catch(Exception ignoreExpected)
 		{
 		}
+		
+		gridField.removeGridRow(gridRowFields);
+		assertEquals(0, gridData.size());
+		assertEquals("", gridField.getValue());
 	}
 	
 	public void testSection() throws Exception
