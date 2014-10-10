@@ -43,17 +43,16 @@ import org.martus.common.fieldspec.GridFieldSpec;
 
 public class ExpandedGridSection extends TitledPane
 {
-	public ExpandedGridSection(FxBulletin bulletinToUse, MartusLocalization localizationToUse, GridFieldSpec gridSpecToUse)
+	public ExpandedGridSection(FxBulletinField gridFieldToUse, MartusLocalization localizationToUse)
 	{
 		super();
-		bulletin = bulletinToUse;
+		gridField = gridFieldToUse;
 		localization = localizationToUse;
-		gridSpec = gridSpecToUse;
 		
-		setText(gridSpec.getLabel());
+		setText(gridField.getLabel());
 		
 		itemBox = new VBox();
-		gridData = bulletinToUse.gridDataProperty(gridSpecToUse.getTag());
+		gridData = gridField.gridDataProperty();
 		gridData.forEach((rowData) -> addItemControls(rowData));
 		
 		HBox bottom = new HBox();
@@ -75,11 +74,15 @@ public class ExpandedGridSection extends TitledPane
 	
 	private Node createItem(GridRowFields rowData)
 	{
-		BulletinEditorSection section = new BulletinEditorSection(bulletin, localization, "");
+		GridFieldSpec gridSpec = gridField.getGridFieldSpec();
+		
+		FxBulletin fxb = gridField.getBulletin();
+		BulletinEditorSection section = new BulletinEditorSection(fxb, localization, "");
 		for(int column = 0; column < gridSpec.getColumnCount(); ++column)
 		{
 			FieldSpec fieldSpec = gridSpec.getFieldSpec(column);
-			FxBulletinField field = new FxBulletinField(bulletin, fieldSpec, getLocalization());
+			String columnLabel = fieldSpec.getLabel();
+			FxBulletinField field = rowData.get(columnLabel);
 			try
 			{
 				section.addField(field);
@@ -109,9 +112,8 @@ public class ExpandedGridSection extends TitledPane
 		return localization;
 	}
 
-	private FxBulletin bulletin;
+	private FxBulletinField gridField;
 	private MartusLocalization localization;
-	private GridFieldSpec gridSpec;
 	private ObservableList<GridRowFields> gridData;
 	private BorderPane mainBorderPane;
 	private VBox itemBox;
