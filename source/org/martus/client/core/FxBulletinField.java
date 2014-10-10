@@ -115,7 +115,7 @@ public class FxBulletinField
 	public String getValue()
 	{
 		if(isGrid())
-			return getGridValue();
+			updateOverallValue();
 		
 		return valueProperty.getValue();
 	}
@@ -250,6 +250,11 @@ public class FxBulletinField
 		return listOfLists;
 	}
 	
+	private void updateOverallValue()
+	{
+		setValue(getGridValue());
+	}
+
 	private String getGridValue()
 	{
 		PoolOfReusableChoicesLists irrelevantReusableLists = null;
