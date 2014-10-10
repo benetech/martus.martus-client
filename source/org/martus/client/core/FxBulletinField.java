@@ -99,6 +99,11 @@ public class FxBulletinField
 		return (GridFieldSpec) getFieldSpec();
 	}
 
+	public FxBulletin getBulletin()
+	{
+		return fxb;
+	}
+
 	public SimpleStringProperty valueProperty()
 	{
 		if(isGrid())
