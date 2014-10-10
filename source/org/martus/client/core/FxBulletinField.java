@@ -172,11 +172,9 @@ public class FxBulletinField
 			for(int column = 0; column < data.getColumnCount(); ++column)
 			{
 				String columnLabel = gridSpec.getColumnLabel(column);
+				FxBulletinField cellField = rowData.get(columnLabel);
 				String value = data.getValueAt(row, column);
-				FieldSpec cellSpec = gridSpec.getFieldSpec(column);
-				FxBulletinField cellField = new FxBulletinField(fxb, cellSpec, getLocalization());
 				cellField.setValue(value);
-				rowData.put(columnLabel, cellField);
 			}
 			
 			gridFieldData.add(rowData);
@@ -185,7 +183,16 @@ public class FxBulletinField
 
 	public GridRowFields createEmptyRow()
 	{
-		return new GridRowFields();
+		GridRowFields rowFields = new GridRowFields();
+		GridFieldSpec gridFieldSpec = getGridFieldSpec();
+		for(int column = 0; column < gridFieldSpec.getColumnCount(); ++column)
+		{
+			String columnLabel = gridFieldSpec.getColumnLabel(column);
+			FieldSpec cellSpec = gridFieldSpec.getFieldSpec(column);
+			FxBulletinField cellField = new FxBulletinField(fxb, cellSpec, getLocalization());
+			rowFields.put(columnLabel, cellField);
+		}
+		return rowFields;
 	}
 
 	public Vector<ObservableChoiceItemList> getChoiceItemLists()
