@@ -381,7 +381,7 @@ public class FxBulletin
 
 		FxBulletinField field = fields.get(tag);
 		field.setValue(value);
-		field.addValueListener((observable, newValue, oldValue) -> hasBeenModified = true);
+		field.addValueListener((observable, oldValue, newValue) -> hasBeenModified = true);
 	}
 	
 	private void setGridField(GridFieldSpec fieldSpec, String value) throws Exception
