@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core;
 
+import java.util.Arrays;
 import java.util.Vector;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -207,6 +208,9 @@ public class FxBulletinField
 
 	public Vector<ObservableChoiceItemList> getChoiceItemLists()
 	{
+		if(isLanguageDropdown())
+			return getLanguageChoices();
+		
 		if(!isDropdown())
 			throw new RuntimeException("Field is not a dropdown: " + getTag());
 		
@@ -331,6 +335,21 @@ public class FxBulletinField
 		return getFieldSpec().getType();
 	}
 	
+	private boolean isLanguageDropdown()
+	{
+		return getType().isLanguageDropdown();
+	}
+
+	private Vector<ObservableChoiceItemList> getLanguageChoices()
+	{
+		ChoiceItem[] languageChoices = getLocalization().getLanguageNameChoices();
+		ObservableChoiceItemList choices = new ObservableChoiceItemList();
+		choices.addAll(Arrays.asList(languageChoices));
+		Vector<ObservableChoiceItemList> listOfChoiceLists = new Vector<>();
+		listOfChoiceLists.add(choices);
+		return listOfChoiceLists;
+	}
+
 	public MiniLocalization getLocalization()
 	{
 		return localization;

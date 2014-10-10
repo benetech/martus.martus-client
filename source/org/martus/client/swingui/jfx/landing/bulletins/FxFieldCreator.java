@@ -75,7 +75,7 @@ public class FxFieldCreator
 		if(spec.getType().isBoolean())
 			return createBooleanField(property);
 		
-		if(spec.getType().isDropdown())
+		if(spec.getType().isDropdown() || spec.getType().isLanguageDropdown())
 			return createDropdownField(bulletin, field);
 		
 		if(spec.getType().isDate())

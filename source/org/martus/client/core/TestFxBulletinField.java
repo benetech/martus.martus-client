@@ -50,6 +50,7 @@ import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.FieldTypeDate;
+import org.martus.common.fieldspec.FieldTypeLanguage;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.FieldTypeSectionStart;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -130,6 +131,21 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		field.valueProperty().setValue(SAMPLE);
 		field.clear();
 		assertNull(field.valueProperty().getValue());
+	}
+	
+	public void testLanguage() throws Exception
+	{
+		FieldSpec languageSpec = new FieldTypeLanguage().createEmptyFieldSpec();
+		fsc.add(languageSpec);
+
+		FxBulletinField field = new FxBulletinField(createFxBulletin(), languageSpec, localization);
+		Vector<ObservableChoiceItemList> choiceLists = field.getChoiceItemLists();
+		assertEquals(1, choiceLists.size());
+		ObservableChoiceItemList languageChoices = choiceLists.get(0);
+		ChoiceItem english = languageChoices.findByCode("en");
+		assertNotNull(english);
+		
+		field.validate();
 	}
 	
 	public void testAddListener() throws Exception
