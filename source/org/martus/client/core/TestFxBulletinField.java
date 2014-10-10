@@ -115,6 +115,16 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		{
 		}
 
+		try
+		{
+			GridRowFields row = new GridRowFields();
+			field.removeGridRow(row);
+			fail("Should have thrown for removing grid data from non-grid field");
+		}
+		catch(Exception ignoreExpected)
+		{
+		}
+
 		field.valueProperty().setValue(SAMPLE);
 		field.clear();
 		assertNull(field.valueProperty().getValue());
@@ -235,8 +245,16 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		
 		GridRowFields addedRow = gridField.appendEmptyGridRow();
 		assertEquals(2, gridData.size());
-		gridField.gridDataProperty().remove(addedRow);
+		gridField.removeGridRow(addedRow);
 		assertEquals(1, gridData.size());
+		try
+		{
+			gridField.removeGridRow(addedRow);
+			fail("Should have thrown for removing a row that isn't in the grid");
+		}
+		catch(Exception ignoreExpected)
+		{
+		}
 	}
 	
 	public void testSection() throws Exception
