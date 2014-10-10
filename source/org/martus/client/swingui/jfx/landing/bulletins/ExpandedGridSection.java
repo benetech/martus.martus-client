@@ -51,6 +51,12 @@ public class ExpandedGridSection extends TitledPane
 		
 		setText(gridField.getLabel());
 		
+		createAndSetContent();
+		
+	}
+
+	public void createAndSetContent()
+	{
 		itemBox = new VBox();
 		gridData = gridField.gridDataProperty();
 		gridData.forEach((rowData) -> addItemControls(rowData));
@@ -64,7 +70,6 @@ public class ExpandedGridSection extends TitledPane
 		mainBorderPane.setCenter(itemBox);
 		mainBorderPane.setBottom(bottom);
 		setContent(mainBorderPane);
-		
 	}
 
 	private void addItemControls(GridRowFields rowData)
@@ -102,8 +107,8 @@ public class ExpandedGridSection extends TitledPane
 
 	private void appendItem()
 	{
-		GridRowFields gridRowData = gridField.appendEmptyGridRow();
-		addItemControls(gridRowData);
+		gridField.appendEmptyGridRow();
+		createAndSetContent();
 	}
 	
 	public MartusLocalization getLocalization()
