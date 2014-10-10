@@ -168,16 +168,16 @@ public class FxBulletinField
 		GridFieldData gridFieldData = gridDataProperty();
 		for(int row = 0; row < data.getRowCount(); ++row)
 		{
-			GridRowFields rowData = createEmptyRow();
+			GridRowFields rowFields = createEmptyRow();
 			for(int column = 0; column < data.getColumnCount(); ++column)
 			{
 				String columnLabel = gridSpec.getColumnLabel(column);
-				FxBulletinField cellField = rowData.get(columnLabel);
+				FxBulletinField cellField = rowFields.get(columnLabel);
 				String value = data.getValueAt(row, column);
 				cellField.setValue(value);
 			}
 			
-			gridFieldData.add(rowData);
+			gridFieldData.add(rowFields);
 		}
 	}
 
