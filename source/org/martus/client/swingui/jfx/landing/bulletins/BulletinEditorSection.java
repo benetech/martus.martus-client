@@ -27,9 +27,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.util.Vector;
 
-import javafx.geometry.Orientation;
 import javafx.scene.Node;
-import javafx.scene.control.Separator;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -99,17 +97,6 @@ public class BulletinEditorSection extends GridPane
 	{
 		currentRow = new BulletinEditorRow(bulletin, getLocalization());
 		rows.add(currentRow);
-	}
-	
-	public void addSeparator()
-	{
-		endCurrentRow();
-
-		int currentRowIndex = rows.size();
-		int separatorRowIndex = currentRowIndex + 1;
-		final int BOTH_COLUMNS = 2;
-		final int ONE_ROW = 1;
-		add(new Separator(Orientation.HORIZONTAL), LABEL_COLUMN, separatorRowIndex, BOTH_COLUMNS, ONE_ROW);
 	}
 	
 	public void addErrorMessage(String label, String errorMessage)
