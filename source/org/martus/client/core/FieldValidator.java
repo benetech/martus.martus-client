@@ -30,11 +30,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.beans.value.ObservableValue;
 
-import org.martus.common.MartusLogger;
+import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
+import org.martus.common.fieldspec.GridFieldSpec;
 
 public class FieldValidator implements ChangeListener<String>
 {
@@ -76,16 +78,49 @@ public class FieldValidator implements ChangeListener<String>
 	
 	public void validate(String value) throws DataInvalidException
 	{
+		String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, localization);
+		spec.validate(label, value, localization);
+
 		FieldType type = spec.getType();
 		if(type.isGrid())
 		{
-			MartusLogger.logError("******* Validation not handled yet for " + type.getTypeName());
+			validateGrid(value);
 			return;
 		}
-		String label = ZawgyiLabelUtilities.getDisplayableLabel(spec, localization);
-		spec.validate(label, value, localization);
 	}
 
+	private void validateGrid(String gridXml) throws DataInvalidException
+	{
+		try
+		{
+			GridFieldSpec gridSpec = (GridFieldSpec)spec;
+			GridData gridData = new GridData(gridSpec, PoolOfReusableChoicesLists.EMPTY_POOL);
+			gridData.setFromXml(gridXml);
+			for(int row = 0; row < gridData.getRowCount(); ++row)
+				for(int col = 0; col < gridSpec.getColumnCount(); ++col)
+					validateCell(gridSpec, gridData, row, col);
+		}
+		catch (DataInvalidException e)
+		{
+			throw(e);
+		}
+		catch (Exception e)
+		{
+			throw new DataInvalidException(e);
+		}
+	}
+
+	private void validateCell(GridFieldSpec gridSpec, GridData gridData,
+			int row, int col) throws DataInvalidException
+	{
+		FieldSpec columnSpec = gridSpec.getFieldSpec(col);
+		String value = gridData.getValueAt(row, col);
+		String fullColumnLabel = gridSpec.getLabel() + ": " + columnSpec.getLabel();
+		// FIXME: Need to handle Burmese here
+//		fullColumnLabel = fontHelper.getDisplayable(fullColumnLabel);
+		columnSpec.validate(fullColumnLabel, value, localization);
+	}
+	
 	private FieldSpec spec;
 	private MiniLocalization localization;
 	private SimpleBooleanProperty fieldIsValidProperty;

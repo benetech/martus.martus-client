@@ -211,7 +211,9 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		GridFieldSpec gridSpec2Colunns = new GridFieldSpec();
 		gridSpec2Colunns.setTag(gridTag);
 		gridSpec2Colunns.setLabel("Grid");
-		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("a", "Normal", new FieldTypeNormal()));
+		FieldSpec normalGridColumn = FieldSpec.createCustomField("a", "Normal", new FieldTypeNormal());
+		normalGridColumn.setRequired();
+		gridSpec2Colunns.addColumn(normalGridColumn);
 		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("b", "Date", new FieldTypeDate()));
 		gridSpec2Colunns.addColumn(FieldSpec.createCustomField("c", "Boolean", new FieldTypeBoolean()));
 		fsc.add(gridSpec2Colunns);
@@ -255,7 +257,15 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		assertEquals(sampleDataXml, gridField.getValue());
 
 		GridRowFields secondRow = gridData.get(1);
-		secondRow.get("Normal").setValue("test data");
+		secondRow.get("Date").setValue("2015-07-12");
+		try
+		{
+			gridField.validate();
+			fail("Should have thrown for blank required field inside grid");
+		}
+		catch(RequiredFieldIsBlankException ignoreExpected)
+		{
+		}
 		assertNotEquals(sampleDataXml, gridValueProperty.getValue());
 		assertNotEquals(sampleDataXml, gridField.getValue());
 		gridField.removeGridRow(addedRow);
