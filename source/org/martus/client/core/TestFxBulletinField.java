@@ -223,7 +223,8 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		}
 		
 		GridData data = createSampleGridData(gridSpec2Colunns);
-		gridField.setGridData(data.getXmlRepresentation());
+		String sampleDataXml = data.getXmlRepresentation();
+		gridField.setGridData(sampleDataXml);
 
 		ObservableList<GridRowFields> gridData = gridField.gridDataProperty();
 		assertEquals(1, gridData.size());
@@ -232,8 +233,10 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		assertEquals("Apple", gridRowFields.get("A").valueProperty().getValue());
 		assertEquals("2012-03-18", gridRowFields.get("B").valueProperty().getValue());
 		
-		gridField.appendEmptyGridRow();
+		GridRowFields addedRow = gridField.appendEmptyGridRow();
 		assertEquals(2, gridData.size());
+		gridField.gridDataProperty().remove(addedRow);
+		assertEquals(1, gridData.size());
 	}
 	
 	public void testSection() throws Exception
