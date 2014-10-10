@@ -181,7 +181,17 @@ public class FxBulletinField
 		}
 	}
 
-	public GridRowFields createEmptyRow()
+	public GridRowFields appendEmptyGridRow()
+	{
+		if(!isGrid())
+			throw new RuntimeException("Cannot append rows to non-grid field: " + getTag());
+		
+		GridRowFields newRowFields = createEmptyRow();
+		gridDataProperty().add(newRowFields);
+		return newRowFields;
+	}
+
+	private GridRowFields createEmptyRow()
 	{
 		GridRowFields rowFields = new GridRowFields();
 		GridFieldSpec gridFieldSpec = getGridFieldSpec();
