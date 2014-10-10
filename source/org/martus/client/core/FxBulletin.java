@@ -123,11 +123,9 @@ public class FxBulletin
 		for(int i = 0; i < fieldSpecs.size(); ++i)
 		{
 			FieldSpec fieldSpec = fieldSpecs.get(i);
-			if(fieldSpec.getType().isGrid())
-				continue;
-
 			String fieldTag = fieldSpec.getTag();
-			String value = fieldProperty(fieldTag).getValue();
+			FxBulletinField field = getField(fieldTag);
+			String value = field.getValue();
 			modified.set(fieldTag, value);
 //			System.out.println("copyDataToBulletin " + fieldTag + ":" + value);
 		}
