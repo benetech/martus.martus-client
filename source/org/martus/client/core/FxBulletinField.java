@@ -165,10 +165,9 @@ public class FxBulletinField
 		GridData data = new GridData(gridSpec, poolOfReusableChoicesLists );
 		data.setFromXml(xmlGridData);
 		
-		GridFieldData gridFieldData = gridDataProperty();
 		for(int row = 0; row < data.getRowCount(); ++row)
 		{
-			GridRowFields rowFields = createEmptyRow();
+			GridRowFields rowFields = appendEmptyGridRow();
 			for(int column = 0; column < data.getColumnCount(); ++column)
 			{
 				String columnLabel = gridSpec.getColumnLabel(column);
@@ -176,8 +175,6 @@ public class FxBulletinField
 				String value = data.getValueAt(row, column);
 				cellField.setValue(value);
 			}
-			
-			gridFieldData.add(rowFields);
 		}
 	}
 
