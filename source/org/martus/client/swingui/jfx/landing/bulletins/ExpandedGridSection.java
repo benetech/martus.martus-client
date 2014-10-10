@@ -26,8 +26,10 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.bulletins;
 
 
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -75,6 +77,7 @@ public class ExpandedGridSection extends TitledPane
 	private void addItemControls(GridRowFields rowData)
 	{
 		itemBox.getChildren().add(createItem(rowData));
+		itemBox.getChildren().add(new Separator(Orientation.HORIZONTAL));
 	}
 	
 	private Node createItem(GridRowFields rowData)
@@ -99,8 +102,6 @@ public class ExpandedGridSection extends TitledPane
 				section.addErrorMessage(fieldSpec.getLabel(), errorMessage);
 			}
 		}
-		
-		section.addSeparator();
 		
 		return section;
 	}
