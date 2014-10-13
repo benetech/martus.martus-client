@@ -35,6 +35,7 @@ import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 
+import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.landing.bulletins.AttachmentTableRowData;
 import org.martus.client.test.MockBulletinStore;
 import org.martus.common.FieldSpecCollection;
@@ -49,6 +50,7 @@ import org.martus.common.bulletin.BulletinForTesting;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.common.database.ReadableDatabase;
+import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.FieldTypeDate;
@@ -130,6 +132,44 @@ public class TestFxBulletin extends TestCaseEnhanced
 		gridRowSample.setCellText(2, FieldSpec.TRUESTRING);
 		gridData.addRow(gridRowSample);
 		return gridData;
+	}
+	
+	public void testDataDrivenDropDown() throws Exception
+	{
+		String gridTag = "grid";
+		GridFieldSpec gridSpec = new GridFieldSpec();
+		gridSpec.setTag(gridTag);
+		gridSpec.setLabel("Grid");
+		String firstNameColumnLabel = "First Name";
+		gridSpec.addColumn(FieldSpec.createCustomField("FirstName", firstNameColumnLabel, new FieldTypeNormal()));
+		
+		String dropDownTag = "dropdown";
+		CustomDropDownFieldSpec ddddSpec = new CustomDropDownFieldSpec();
+		ddddSpec.setTag(dropDownTag);
+		ddddSpec.setDataSource(gridTag, firstNameColumnLabel);
+			
+		FieldSpecCollection fsc = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		fsc.add(gridSpec);
+		fsc.add(ddddSpec);
+
+		Bulletin b = new Bulletin(security, fsc, new FieldSpecCollection());
+		FxBulletin fxb = new FxBulletin(getLocalization());
+		fxb.copyDataFromBulletin(b, db);
+		Vector<ObservableChoiceItemList> listWithOneEmptyList = fxb.getField(ddddSpec).getChoiceItemLists();
+		assertEquals(1, listWithOneEmptyList.size());
+		ObservableChoiceItemList emptyList = listWithOneEmptyList.firstElement();
+		assertEquals(0, emptyList.size());
+		
+		GridData gridData = new GridData(gridSpec, fsc.getAllReusableChoiceLists());
+		String[] names = new String[] {"Chris", "Robin", "Starbuck",};
+		for (String name : names)
+		{
+			GridRow gridRow = new GridRow(gridSpec, fsc.getAllReusableChoiceLists());
+			gridRow.setCellText(0, name);
+		}
+		b.set(gridTag, gridData.getXmlRepresentation());
+		fxb.copyDataFromBulletin(b, db);
+		
 	}
 	
 	public void testBasics() throws Exception

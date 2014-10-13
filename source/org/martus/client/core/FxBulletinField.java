@@ -218,12 +218,21 @@ public class FxBulletinField
 		boolean isDataDriven = (dropDownSpec.getDataSource() != null);
 		boolean isReusable = (dropDownSpec.getReusableChoicesCodes().length > 0);
 		if(isDataDriven)
-			return new Vector<ObservableChoiceItemList>();
+			return getDataDrivenChoiceLists();
 		
 		if(isReusable)
 			return getReusableChoiceItemLists(dropDownSpec);
 		
 		return getSimpleChoiceItemLists();
+	}
+
+	public Vector<ObservableChoiceItemList> getDataDrivenChoiceLists()
+	{
+		ObservableChoiceItemList choices = new ObservableChoiceItemList();
+		
+		Vector<ObservableChoiceItemList> listOfLists = new Vector<ObservableChoiceItemList>();
+		listOfLists.add(choices);
+		return listOfLists;
 	}
 
 	public void validate() throws DataInvalidException
@@ -233,7 +242,7 @@ public class FxBulletinField
 
 	private Vector<ObservableChoiceItemList> getReusableChoiceItemLists(DropDownFieldSpec dropDownSpec)
 	{
-		Vector<ObservableChoiceItemList> listOfLists = new Vector<ObservableChoiceItemList>();
+		Vector<ObservableChoiceItemList> listOfLists = getDataDrivenChoiceLists();
 
 		String[] reusableChoicesCodes = dropDownSpec.getReusableChoicesCodes();
 
@@ -255,7 +264,7 @@ public class FxBulletinField
 	private Vector<ObservableChoiceItemList> getSimpleChoiceItemLists()
 	{
 		DropDownFieldSpec dropDownSpec = (DropDownFieldSpec) getFieldSpec();
-		Vector<ObservableChoiceItemList> listOfLists = new Vector<ObservableChoiceItemList>();
+		Vector<ObservableChoiceItemList> listOfLists = getDataDrivenChoiceLists();
 		ObservableChoiceItemList simpleChoices = new ObservableChoiceItemList();
 		simpleChoices.addAll(dropDownSpec.getAllChoices());
 		listOfLists.add(simpleChoices);
