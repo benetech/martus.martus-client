@@ -1523,13 +1523,6 @@ public class ClientBulletinStore extends BulletinStore
 		return b;
 	}
 	
-	public Bulletin createEmptyClone(Bulletin original) throws Exception 
-	{
-		FieldSpecCollection topSectionSpecs = original.getTopSectionFieldSpecs();
-		FieldSpecCollection bottomSectionSpecs = original.getBottomSectionFieldSpecs();
-		return createEmptyCloneWithFields(original, topSectionSpecs, bottomSectionSpecs);
-	}
-
 	public Bulletin createEmptyCloneWithFields(Bulletin original, FieldSpecCollection publicSpecs, FieldSpecCollection privateSpecs) throws Exception
 	{
 		UniversalId headerUid = original.getUniversalId();
