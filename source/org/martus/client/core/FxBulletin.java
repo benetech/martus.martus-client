@@ -40,6 +40,7 @@ import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.landing.bulletins.AttachmentTableRowData;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
@@ -219,6 +220,11 @@ public class FxBulletin
 		return fields.get(fieldTag).fieldIsValidProperty();
 	}
 	
+	public Vector<ObservableChoiceItemList> gridColumnValuesProperty(String gridTag, String gridColumnLabel)
+	{
+		return getField(gridTag).gridColumnValuesProperty(gridColumnLabel);
+	}
+
 	public BooleanProperty getImmutableOnServerProperty()
 	{
 		return immutableOnServer;

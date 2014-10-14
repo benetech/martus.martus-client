@@ -158,18 +158,82 @@ public class TestFxBulletin extends TestCaseEnhanced
 		Vector<ObservableChoiceItemList> listWithOneEmptyList = fxb.getField(ddddSpec).getChoiceItemLists();
 		assertEquals(1, listWithOneEmptyList.size());
 		ObservableChoiceItemList emptyList = listWithOneEmptyList.firstElement();
-		assertEquals(0, emptyList.size());
+		assertEquals(1, emptyList.size());
+		assertEquals("", emptyList.get(0).getCode());
 		
 		GridData gridData = new GridData(gridSpec, fsc.getAllReusableChoiceLists());
+		assertEquals(0, gridData.getRowCount());
 		String[] names = new String[] {"Chris", "Robin", "Starbuck",};
 		for (String name : names)
 		{
 			GridRow gridRow = new GridRow(gridSpec, fsc.getAllReusableChoiceLists());
 			gridRow.setCellText(0, name);
+			gridData.addRow(gridRow);
 		}
+		assertEquals(names.length, gridData.getRowCount());
 		b.set(gridTag, gridData.getXmlRepresentation());
 		fxb.copyDataFromBulletin(b, db);
+
+		Vector<ObservableChoiceItemList> listWithOneRealList = fxb.getField(ddddSpec).getChoiceItemLists();
+		assertEquals(1, listWithOneRealList.size());
+		ObservableChoiceItemList realList = listWithOneRealList.firstElement();
+		assertEquals(names.length + 1, realList.size());
 		
+	}
+	
+	public void testGridColumnValuesProperty() throws Exception
+	{
+		String gridTag = "grid";
+		GridFieldSpec gridSpec = new GridFieldSpec();
+		gridSpec.setTag(gridTag);
+		gridSpec.setLabel("Grid");
+		String firstNameColumnLabel = "First Name";
+		gridSpec.addColumn(FieldSpec.createCustomField("FirstName", firstNameColumnLabel, new FieldTypeNormal()));
+		
+		FieldSpecCollection fsc = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		fsc.add(gridSpec);
+		Bulletin b = new Bulletin(security, fsc, new FieldSpecCollection());
+		FxBulletin fxb = new FxBulletin(getLocalization());
+		fxb.copyDataFromBulletin(b, db);
+
+		Vector<ObservableChoiceItemList> listOfLists = fxb.gridColumnValuesProperty(gridTag, firstNameColumnLabel);
+		assertEquals(1, listOfLists.size());
+		ObservableChoiceItemList realList = listOfLists.firstElement();
+		final int EMPTY_CHOICE_ALWAYS_AVAILABLE = 1;
+		assertEquals(EMPTY_CHOICE_ALWAYS_AVAILABLE, realList.size());
+		assertEquals("", realList.get(0).getCode());
+		assertEquals("", realList.get(0).getLabel());
+
+		FxBulletinField grid = fxb.getField(gridTag);
+		GridFieldData gridFieldData = grid.gridDataProperty();
+		String sampleAlphabeticallyLater = "Lucy";
+		gridFieldData.get(0).get(firstNameColumnLabel).setValue(sampleAlphabeticallyLater);
+		assertEquals(2, realList.size());
+		assertEquals("", realList.get(0).getCode());
+		assertEquals("", realList.get(0).getLabel());
+		assertEquals(sampleAlphabeticallyLater, realList.get(1).getCode());
+		assertEquals(sampleAlphabeticallyLater, realList.get(1).getLabel());
+		
+		grid.appendEmptyGridRow();
+		final int STILL_2_BECAUSE_WE_TRUNCATE_TRAILING_EMPTY_ROWS = 2;
+		assertEquals(STILL_2_BECAUSE_WE_TRUNCATE_TRAILING_EMPTY_ROWS, realList.size());
+		
+		String sampleAlphabeticallyEarlier = "Fred";
+		gridFieldData.get(1).get(firstNameColumnLabel).setValue(sampleAlphabeticallyEarlier);
+		assertEquals(3, realList.size());
+		assertEquals("", realList.get(0).getCode());
+		assertEquals("", realList.get(0).getLabel());
+		assertEquals(sampleAlphabeticallyEarlier, realList.get(1).getCode());
+		assertEquals(sampleAlphabeticallyEarlier, realList.get(1).getLabel());
+		assertEquals(sampleAlphabeticallyLater, realList.get(2).getCode());
+		assertEquals(sampleAlphabeticallyLater, realList.get(2).getLabel());
+		
+		gridFieldData.remove(0);
+		assertEquals(2, realList.size());
+		assertEquals("", realList.get(0).getCode());
+		assertEquals("", realList.get(0).getLabel());
+		assertEquals(sampleAlphabeticallyEarlier, realList.get(1).getCode());
+		assertEquals(sampleAlphabeticallyEarlier, realList.get(1).getLabel());
 	}
 	
 	public void testBasics() throws Exception

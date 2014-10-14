@@ -26,6 +26,9 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.core;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Vector;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -33,6 +36,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.ListChangeListener;
 
+import org.martus.client.search.SaneCollator;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.landing.bulletins.GridRowFields;
 import org.martus.common.GridData;
@@ -61,6 +65,7 @@ public class FxBulletinField
 		gridDataIfApplicable.addListener(rowChangeHandler);
 		FieldValidator fieldValidator = new FieldValidator(fieldSpec, getLocalization());
 		setValidator(fieldValidator);
+		gridColumnValuesMap = new HashMap<String, FxBulletinField.ColumnValues>();
 	}
 	
 	public boolean isGrid()
@@ -218,7 +223,7 @@ public class FxBulletinField
 		boolean isDataDriven = (dropDownSpec.getDataSource() != null);
 		boolean isReusable = (dropDownSpec.getReusableChoicesCodes().length > 0);
 		if(isDataDriven)
-			return getDataDrivenChoiceLists();
+			return getDataDrivenChoices(dropDownSpec);
 		
 		if(isReusable)
 			return getReusableChoiceItemLists(dropDownSpec);
@@ -226,13 +231,134 @@ public class FxBulletinField
 		return getSimpleChoiceItemLists();
 	}
 
-	public Vector<ObservableChoiceItemList> getDataDrivenChoiceLists()
+	public Vector<ObservableChoiceItemList> getDataDrivenChoices(DropDownFieldSpec dropDownSpec)
 	{
-		ObservableChoiceItemList choices = new ObservableChoiceItemList();
+		String gridTag = dropDownSpec.getDataSourceGridTag();
+		String gridColumnLabel = dropDownSpec.getDataSourceGridColumn();
+		Vector<ObservableChoiceItemList> listOfChoiceLists = fxb.gridColumnValuesProperty(gridTag, gridColumnLabel);
+		return listOfChoiceLists;
+	}
+
+	public Vector<ObservableChoiceItemList> gridColumnValuesProperty(String columnLabel)
+	{
+		if(!isGrid())
+			throw new RuntimeException("gridColumnValues not available for non-grid: " + getTag());
+		
+		GridFieldSpec gridSpec = getGridFieldSpec();
+		FieldSpec columnSpec = gridSpec.findColumnSpecByLabel(columnLabel);
+		if(columnSpec == null)
+			throw new RuntimeException("attempt to get values from non-existent grid column: " + getTag() + " . " + columnLabel);
+
+		ColumnValues columnValues = gridColumnValuesMap.get(columnLabel);
+		if(columnValues == null)
+		{
+			columnValues = new ColumnValues(this, columnLabel, getLocalization());
+			gridColumnValuesMap.put(columnLabel, columnValues);
+		}
 		
 		Vector<ObservableChoiceItemList> listOfLists = new Vector<ObservableChoiceItemList>();
-		listOfLists.add(choices);
+		listOfLists.add(columnValues);
 		return listOfLists;
+	}
+	
+	private static class ColumnValues extends ObservableChoiceItemList
+	{
+		public ColumnValues(FxBulletinField gridField, String gridColumnLabel, MiniLocalization localizationToUse)
+		{
+			field = gridField;
+			columnLabel = gridColumnLabel;
+			localization = localizationToUse;
+			
+			updateChoices();
+			gridField.valueProperty().addListener((observable, oldValue, newValue) -> updateChoices());
+		}
+		
+		private void updateChoices()
+		{
+			HashSet<ChoiceItem> newChoices = new HashSet<ChoiceItem>(); 
+			ChoiceItem alwaysIncludeEmpty = new ChoiceItem("", "");
+			newChoices.add(alwaysIncludeEmpty);
+			GridFieldData gridFieldData = field.gridDataProperty();
+			for(int row = 0; row < gridFieldData.size(); ++row)
+			{
+				GridRowFields rowFields = gridFieldData.get(row);
+				ChoiceItem thisChoice = createChoice(rowFields);
+				ChoiceItem existing = findByCode(thisChoice.getCode());
+				if(existing != null)
+					thisChoice = existing;
+				newChoices.add(thisChoice);
+			}
+
+			// NOTE: If we clear() or sort() the list, any dddd 
+			// will be cleared because the item the point to will 
+			// no longer be a legal choice (even for a very short time)
+			updateChoicesInPlace(newChoices);
+		}
+
+		public void updateChoicesInPlace(HashSet<ChoiceItem> newChoices)
+		{
+			HashSet<ChoiceItem> oldChoices = new HashSet<ChoiceItem>(this);
+			for (ChoiceItem oldChoice : oldChoices)
+			{
+				if(!newChoices.contains(oldChoice)) 
+					remove(oldChoice);
+			}
+			for (ChoiceItem existingChoice : this)
+			{
+				if(newChoices.contains(existingChoice)) 
+					newChoices.remove(existingChoice);
+			}
+
+			if(newChoices.size() == 0)
+				return;
+		
+			insertNewItemsSortedWithoutCallingSort(newChoices);
+
+		}
+
+		public void insertNewItemsSortedWithoutCallingSort(HashSet<ChoiceItem> unsortedNewChoices)
+		{
+			ObservableChoiceItemList destination = this;
+			ObservableChoiceItemList sortedNewChoices = new ObservableChoiceItemList();
+			sortedNewChoices.addAll(unsortedNewChoices);
+			sortedNewChoices.sort(new SaneCollator(localization.getCurrentLanguageCode()));
+			
+			int from = 0;
+			int to = 0;
+			while(to <= destination.size())
+			{
+				while(from < sortedNewChoices.size())
+				{
+					boolean shouldInsertHere = (to >= destination.size());
+					ChoiceItem candidate = sortedNewChoices.get(from);
+					
+					if(!shouldInsertHere)
+					{
+						ChoiceItem existing = destination.get(to);
+						if(candidate.compareTo(existing) < 0)
+							shouldInsertHere = true;
+					}
+					
+					if(!shouldInsertHere)
+						break;
+					
+					destination.add(to, candidate);
+					++from;
+				}
+				++to;
+			}
+		}
+
+		private ChoiceItem createChoice(GridRowFields gridRowFields)
+		{
+			String value = gridRowFields.get(columnLabel).getValue();
+			ChoiceItem choice = new ChoiceItem(value, value);
+			return choice;
+		}
+
+		private FxBulletinField field;
+		private String columnLabel;
+		private MiniLocalization localization;
 	}
 
 	public void validate() throws DataInvalidException
@@ -242,7 +368,7 @@ public class FxBulletinField
 
 	private Vector<ObservableChoiceItemList> getReusableChoiceItemLists(DropDownFieldSpec dropDownSpec)
 	{
-		Vector<ObservableChoiceItemList> listOfLists = getDataDrivenChoiceLists();
+		Vector<ObservableChoiceItemList> listOfLists = new Vector<ObservableChoiceItemList>();
 
 		String[] reusableChoicesCodes = dropDownSpec.getReusableChoicesCodes();
 
@@ -264,7 +390,7 @@ public class FxBulletinField
 	private Vector<ObservableChoiceItemList> getSimpleChoiceItemLists()
 	{
 		DropDownFieldSpec dropDownSpec = (DropDownFieldSpec) getFieldSpec();
-		Vector<ObservableChoiceItemList> listOfLists = getDataDrivenChoiceLists();
+		Vector<ObservableChoiceItemList> listOfLists = new Vector<ObservableChoiceItemList>();
 		ObservableChoiceItemList simpleChoices = new ObservableChoiceItemList();
 		simpleChoices.addAll(dropDownSpec.getAllChoices());
 		listOfLists.add(simpleChoices);
@@ -312,7 +438,7 @@ public class FxBulletinField
 		return rowFields;
 	}
 
-	public void copyGridRowToGridRowFields(GridRow gridRow, GridRowFields rowFields)
+	private void copyGridRowToGridRowFields(GridRow gridRow, GridRowFields rowFields)
 	{
 		for(int column = 0; column < gridRow.getColumnCount(); ++column)
 		{
@@ -370,4 +496,5 @@ public class FxBulletinField
 	private SimpleStringProperty valueProperty;
 	private FieldValidator validator;
 	private GridFieldData gridDataIfApplicable;
+	private Map<String, ColumnValues> gridColumnValuesMap;
 }
