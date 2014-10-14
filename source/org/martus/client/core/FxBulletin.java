@@ -195,6 +195,15 @@ public class FxBulletin
 		return fields.get(tag);
 	}
 
+	public FxBulletinGridField getGridField(String gridTag)
+	{
+		FxBulletinField field = getField(gridTag);
+		if(!field.isGrid())
+			throw new RuntimeException("not a grid: " + gridTag);
+		
+		return (FxBulletinGridField) field;
+	}
+
 	public SimpleStringProperty fieldProperty(String fieldTag)
 	{
 		FieldSpec foundSpec = fieldSpecs.findBytag(fieldTag);
