@@ -1740,7 +1740,7 @@ public class EnglishStrings
 "field:confirmCloneUnverifiedFDBulletinAsMineeffect=Clicking on Yes to continue with the modify operation will create a new bulletin that contains a copy of all the same information.  You will be the official author of this new bulletin, so you will become responsible for all the content. Any private data in it will only be visible to you (and any contacts accounts you have shared this with).  The original bulletin will remain unchanged.",
 
 "wintitle:notifyBulletinWithAnUnverifiedExternalAttachment=Unverified Attachment",
-"field:notifyBulletinWithAnUnverifiedExternalAttachmentcause=Warning: This record includes attachments that have to be read outside of the Martus system. In addition, this file was sent to you from an [unknown/unverified] contact. Opening unknown attachments is one of the most common ways of introducing malware to your computer. Be sure of the safety of the attachment(s) before opening or sharing with others.",
+"field:notifyBulletinWithAnUnverifiedExternalAttachmentcause=Warning: This record includes attachments that need to be read outside of the Martus system. In addition, this file was sent to you from an [unknown/unverified] contact. Opening unknown attachments is one of the most common ways of introducing malware to your computer. Be sure of the safety of the attachment(s) before opening or sharing with others.",
 
 "field:RetrieveHQSealedBulletinProgress=Retrieving Sealed Bulletins from Contacts",
 "field:RetrieveHQDraftBulletinProgress=Retrieving Draft Bulletins from Contacts",
