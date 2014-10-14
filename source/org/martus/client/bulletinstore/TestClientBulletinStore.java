@@ -229,21 +229,6 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertFalse("didn't remove original?", testStore.isProbablyOnServer(original.getUniversalId()));
 	}
     
-    public void testCreateEmptyClone() throws Exception
-    {
-	    	Bulletin original = createImmutableBulletin(security);
-	    	UniversalId id = original.getUniversalId();
-	    	
-	    	Bulletin emptyClone = testStore.createEmptyClone(original);
-	    	
-	    	assertEquals(id, original.getUniversalId());
-	    	assertEquals(id, emptyClone.getUniversalId());
-	    	assertEquals("no public data?", PUBLIC_DATA, original.get(Bulletin.TAGTITLE));
-	    	assertEquals("no private data?", PRIVATE_DATA, original.get(Bulletin.TAGAUTHOR));
-	    	assertEquals("empty clone has public data?", "", emptyClone.get(Bulletin.TAGTITLE));
-	    	assertEquals("empty clone has private data?", "", emptyClone.get(Bulletin.TAGAUTHOR));
-	}
-    
     public void testCreateDraftCopyOfMySealed() throws Exception
 	{
 	    	Bulletin original = createImmutableBulletin(security);
