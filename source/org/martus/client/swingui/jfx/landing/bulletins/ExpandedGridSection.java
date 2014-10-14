@@ -107,8 +107,7 @@ public class ExpandedGridSection extends TitledPane
 			catch(Exception e)
 			{
 				MartusLogger.logException(e);
-				String errorMessage = getLocalization().getFieldLabel("notifyUnexpectedErrorcause");
-				section.addErrorMessage(fieldSpec.getLabel(), errorMessage);
+				section.addUnexpectedErrorMessage(fieldSpec.getLabel());
 			}
 		}
 		
