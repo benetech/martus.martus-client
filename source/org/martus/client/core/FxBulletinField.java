@@ -55,6 +55,9 @@ public class FxBulletinField
 {
 	public static FxBulletinField createFxBulletinField(FxBulletin bulletinToUse, FieldSpec fieldSpecToUse, MiniLocalization localizationToUse)
 	{
+		if(fieldSpecToUse.getType().isGrid())
+			return new FxBulletinGridField(bulletinToUse, (GridFieldSpec)fieldSpecToUse, localizationToUse);
+		
 		return new FxBulletinField(bulletinToUse, fieldSpecToUse, localizationToUse);
 	}
 
