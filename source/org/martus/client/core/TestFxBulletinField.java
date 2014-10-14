@@ -100,42 +100,6 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		assertFalse(field.isDropdown());
 		assertEquals("", field.valueProperty().getValue());
 		field.validate();
-		try
-		{
-			field.gridDataProperty();
-			fail("Should have thrown for getting grid data from non-grid field");
-		}
-		catch(Exception ignoreExpected)
-		{
-		}
-
-		try
-		{
-			field.appendEmptyGridRow();
-			fail("Should have thrown for appending grid data from non-grid field");
-		}
-		catch(Exception ignoreExpected)
-		{
-		}
-
-		try
-		{
-			GridRowFields row = new GridRowFields();
-			field.removeGridRow(row);
-			fail("Should have thrown for removing grid data from non-grid field");
-		}
-		catch(Exception ignoreExpected)
-		{
-		}
-
-		try
-		{
-			field.gridColumnValuesProperty("Whatever");
-			fail("Should have thrown for getting grid column values from non-grid field");
-		}
-		catch(Exception ignoreExpected)
-		{
-		}
 
 		field.valueProperty().setValue(SAMPLE);
 		field.clear();
