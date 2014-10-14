@@ -128,6 +128,15 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		{
 		}
 
+		try
+		{
+			field.gridColumnValuesProperty("Whatever");
+			fail("Should have thrown for getting grid column values from non-grid field");
+		}
+		catch(Exception ignoreExpected)
+		{
+		}
+
 		field.valueProperty().setValue(SAMPLE);
 		field.clear();
 		assertNull(field.valueProperty().getValue());
@@ -242,6 +251,15 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		{
 			gridField.fieldIsValidProperty();
 			fail("fieldIsValidProperty should have thrown for grid");
+		}
+		catch(Exception ignoreExpected)
+		{
+		}
+		
+		try
+		{
+			gridField.gridColumnValuesProperty("No such column");
+			fail("gridColumnValuesProperty should have thrown for no such column");
 		}
 		catch(Exception ignoreExpected)
 		{
