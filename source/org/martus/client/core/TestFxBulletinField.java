@@ -356,7 +356,6 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		reusableDropDown.addReusableChoicesCode(CITIES_CHOICES_TAG);
 		fsc.add(reusableDropDown);
 
-		fsc.add(reusableDropDown);
 		FxBulletin fxb = createFxBulletin();
 		
 		FxBulletinField field = new FxBulletinField(fxb, reusableDropDown, localization);
