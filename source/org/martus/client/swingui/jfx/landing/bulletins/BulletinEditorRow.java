@@ -44,12 +44,11 @@ import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class BulletinEditorRow
 {
-	public BulletinEditorRow(FxBulletin bulletinToUse, MartusLocalization localizationToUse)
+	public BulletinEditorRow(FxFieldCreator fieldCreatorToUse, FxBulletin bulletinToUse, MartusLocalization localizationToUse)
 	{
+		fieldCreator = fieldCreatorToUse;
 		bulletin = bulletinToUse;
 		localization = localizationToUse;
-		
-		fieldCreator = new FxFieldCreator(localizationToUse);
 		
 		labelNode = new HBox();
 		labelNode.getStyleClass().add("bulletin-editor-label-cell");
@@ -82,7 +81,7 @@ public class BulletinEditorRow
 	public void addGridFieldToRow(FxBulletinField field)
 	{
 		isGrid = true;
-		ExpandedGridSection gridSection = new ExpandedGridSection(field, getLocalization());
+		ExpandedGridSection gridSection = new ExpandedGridSection(fieldCreator, field, getLocalization());
 		HBox.setHgrow(gridSection, Priority.SOMETIMES);
 		
 		fieldsNode.getChildren().add(gridSection);
