@@ -103,18 +103,8 @@ public class FxFormCreator
 		}
 		catch(Exception e)
 		{
-			String errorMessage = getLocalization().getFieldLabel("notifyUnexpectedErrorcause");
-
-			try
-			{
-				MartusLogger.logException(e);
-				currentSection.addErrorMessage(field.getLabel(), errorMessage);
-			} 
-			catch (Exception e1)
-			{
-				MartusLogger.logException(e1);
-				throw new RuntimeException(e1);
-			}
+			MartusLogger.logException(e);
+			currentSection.addUnexpectedErrorMessage(field.getLabel());
 		}
 	}
 

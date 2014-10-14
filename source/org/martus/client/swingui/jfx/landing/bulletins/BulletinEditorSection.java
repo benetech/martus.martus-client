@@ -99,6 +99,12 @@ public class BulletinEditorSection extends GridPane
 		rows.add(currentRow);
 	}
 	
+	public void addUnexpectedErrorMessage(String label)
+	{
+		String errorMessage = getLocalization().getFieldLabel("notifyUnexpectedErrorcause");
+		addErrorMessage(label, errorMessage);
+	}
+	
 	public void addErrorMessage(String label, String errorMessage)
 	{
 		endCurrentRow();
