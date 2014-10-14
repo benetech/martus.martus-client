@@ -244,7 +244,8 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		fsc.add(gridSpec2Colunns);
 
 		FxBulletin fxb = createFxBulletin();
-		FxBulletinField gridField = FxBulletinField.createFxBulletinField(fxb, gridSpec2Colunns, localization);
+		FxBulletinField field = FxBulletinField.createFxBulletinField(fxb, gridSpec2Colunns, localization);
+		FxBulletinField gridField = field;
 		SimpleStringProperty gridValueProperty = gridField.valueProperty();
 
 		try
