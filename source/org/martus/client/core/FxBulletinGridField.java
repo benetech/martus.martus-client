@@ -45,6 +45,16 @@ import org.martus.common.fieldspec.GridFieldSpec;
 
 public class FxBulletinGridField extends FxBulletinField
 {
+	protected FxBulletinGridField(FxBulletin bulletinToUse, GridFieldSpec fieldSpecToUse, MiniLocalization localizationToUse)
+	{
+		super(bulletinToUse, fieldSpecToUse, localizationToUse);
+
+		gridDataIfApplicable = new GridFieldData();
+		ListChangeListener<GridRowFields> rowChangeHandler = (change) -> updateOverallValue();
+		gridDataIfApplicable.addListener(rowChangeHandler);
+		gridColumnValuesMap = new HashMap<String, FxBulletinGridField.ColumnValues>();
+	}
+
 	public GridFieldSpec getGridFieldSpec()
 	{
 		return (GridFieldSpec) getFieldSpec();
@@ -111,16 +121,6 @@ public class FxBulletinGridField extends FxBulletinField
 		Vector<ObservableChoiceItemList> listOfLists = new Vector<ObservableChoiceItemList>();
 		listOfLists.add(columnValues);
 		return listOfLists;
-	}
-
-	protected FxBulletinGridField(FxBulletin bulletinToUse, GridFieldSpec fieldSpecToUse, MiniLocalization localizationToUse)
-	{
-		super(bulletinToUse, fieldSpecToUse, localizationToUse);
-
-		gridDataIfApplicable = new GridFieldData();
-		ListChangeListener<GridRowFields> rowChangeHandler = (change) -> updateOverallValue();
-		gridDataIfApplicable.addListener(rowChangeHandler);
-		gridColumnValuesMap = new HashMap<String, FxBulletinGridField.ColumnValues>();
 	}
 
 	protected void updateOverallValue()
