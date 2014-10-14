@@ -91,7 +91,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		FieldSpec fieldSpec = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
 		fsc.add(fieldSpec);
 		
-		FxBulletinField field = new FxBulletinField(createFxBulletin(), fieldSpec, localization);
+		FxBulletinField field = FxBulletinField.createFxBulletinField(createFxBulletin(), fieldSpec, localization);
 		assertEquals("tag", field.getTag());
 		assertEquals("Label", field.getLabel());
 		assertFalse(field.isRequiredField());
@@ -147,7 +147,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		FieldSpec languageSpec = new FieldTypeLanguage().createEmptyFieldSpec();
 		fsc.add(languageSpec);
 
-		FxBulletinField field = new FxBulletinField(createFxBulletin(), languageSpec, localization);
+		FxBulletinField field = FxBulletinField.createFxBulletinField(createFxBulletin(), languageSpec, localization);
 		Vector<ObservableChoiceItemList> choiceLists = field.getChoiceItemLists();
 		assertEquals(1, choiceLists.size());
 		ObservableChoiceItemList languageChoices = choiceLists.get(0);
@@ -163,7 +163,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		FieldSpec fieldSpec = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
 		fsc.add(fieldSpec);
 		
-		FxBulletinField field = new FxBulletinField(createFxBulletin(), fieldSpec, localization);
+		FxBulletinField field = FxBulletinField.createFxBulletinField(createFxBulletin(), fieldSpec, localization);
 		assertEquals("", field.valueProperty().getValue());
 		field.addValueListener((observable, oldValue, newValue) -> 
 		{
@@ -179,7 +179,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		spec.setRequired();
 		fsc.add(spec);
 		
-		FxBulletinField field = new FxBulletinField(createFxBulletin(), spec, localization);
+		FxBulletinField field = FxBulletinField.createFxBulletinField(createFxBulletin(), spec, localization);
 		assertTrue(field.isRequiredField());
 		ObservableBooleanValue fieldIsValidProperty = field.fieldIsValidProperty();
 		assertFalse(fieldIsValidProperty.getValue());
@@ -203,7 +203,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		spec.setMaximumDate("2014-12-31");
 		fsc.add(spec);
 		
-		FxBulletinField field = new FxBulletinField(createFxBulletin(), spec, localization);
+		FxBulletinField field = FxBulletinField.createFxBulletinField(createFxBulletin(), spec, localization);
 		field.setValue("");
 		field.validate();
 		
@@ -244,7 +244,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		fsc.add(gridSpec2Colunns);
 
 		FxBulletin fxb = createFxBulletin();
-		FxBulletinField gridField = new FxBulletinField(fxb, gridSpec2Colunns, localization);
+		FxBulletinField gridField = FxBulletinField.createFxBulletinField(fxb, gridSpec2Colunns, localization);
 		SimpleStringProperty gridValueProperty = gridField.valueProperty();
 
 		try
@@ -326,7 +326,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		FieldSpec spec = FieldSpec.createCustomField("tag", "Label", new FieldTypeSectionStart());
 		fsc.add(spec);
 		
-		FxBulletinField field = new FxBulletinField(createFxBulletin(), spec, localization);
+		FxBulletinField field = FxBulletinField.createFxBulletinField(createFxBulletin(), spec, localization);
 		assertTrue(field.isSectionStart());
 	}
 	
@@ -338,7 +338,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		simpleDropDown.setTag(simpleDropDownTag);
 		fsc.add(simpleDropDown);
 		
-		FxBulletinField field = new FxBulletinField(createFxBulletin(), simpleDropDown, localization);
+		FxBulletinField field = FxBulletinField.createFxBulletinField(createFxBulletin(), simpleDropDown, localization);
 		assertTrue(field.isDropdown());
 
 		Vector<ObservableChoiceItemList> simpleListOfLists = field.getChoiceItemLists();
@@ -358,7 +358,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 
 		FxBulletin fxb = createFxBulletin();
 		
-		FxBulletinField field = new FxBulletinField(fxb, reusableDropDown, localization);
+		FxBulletinField field = FxBulletinField.createFxBulletinField(fxb, reusableDropDown, localization);
 		assertTrue(field.isDropdown());
 
 		Vector<ObservableChoiceItemList> reusableLists = field.getChoiceItemLists();
@@ -381,7 +381,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		fsc.add(nestedDropDown);
 		FxBulletin fxb = createFxBulletin();
 		
-		FxBulletinField field = new FxBulletinField(fxb, nestedDropDown, localization);
+		FxBulletinField field = FxBulletinField.createFxBulletinField(fxb, nestedDropDown, localization);
 		assertTrue(field.isDropdown());
 
 		Vector<ObservableChoiceItemList> nestedLists = field.getChoiceItemLists();
