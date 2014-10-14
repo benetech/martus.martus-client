@@ -35,7 +35,6 @@ import javafx.scene.control.TitledPane;
 import org.martus.client.core.FxBulletin;
 import org.martus.client.core.FxBulletinField;
 import org.martus.client.swingui.MartusLocalization;
-import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
 
@@ -103,8 +102,7 @@ public class FxFormCreator
 		}
 		catch(Exception e)
 		{
-			MartusLogger.logException(e);
-			currentSection.addUnexpectedErrorMessage(field.getLabel());
+			currentSection.addUnexpectedErrorMessage(e, field.getLabel());
 		}
 	}
 
