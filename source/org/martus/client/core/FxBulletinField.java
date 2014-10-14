@@ -68,7 +68,7 @@ public class FxBulletinField
 	
 	public boolean isGrid()
 	{
-		return getType().isGrid();
+		return false;
 	}
 
 	public boolean isSectionStart()

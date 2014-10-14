@@ -54,6 +54,12 @@ public class FxBulletinGridField extends FxBulletinField
 		gridDataIfApplicable.addListener(rowChangeHandler);
 		gridColumnValuesMap = new HashMap<String, FxBulletinGridField.ColumnValues>();
 	}
+	
+	@Override
+	public boolean isGrid()
+	{
+		return true;
+	}
 
 	public GridFieldSpec getGridFieldSpec()
 	{
