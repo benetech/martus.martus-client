@@ -204,7 +204,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals("", realList.get(0).getCode());
 		assertEquals("", realList.get(0).getLabel());
 
-		FxBulletinField grid = fxb.getField(gridTag);
+		FxBulletinGridField grid = fxb.getGridField(gridTag);
 		GridFieldData gridFieldData = grid.gridDataProperty();
 		String sampleAlphabeticallyLater = "Lucy";
 		gridFieldData.get(0).get(firstNameColumnLabel).setValue(sampleAlphabeticallyLater);
