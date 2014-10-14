@@ -251,7 +251,7 @@ public class FxBulletinField
 		return localization;
 	}
 	
-	protected FxBulletin fxb;
+	private FxBulletin fxb;
 	private FieldSpec fieldSpec;
 	private MiniLocalization localization;
 	protected SimpleStringProperty valueProperty;
