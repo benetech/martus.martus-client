@@ -282,26 +282,6 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("has history?", 0, history.size());
  	}
     
-    public void testUpdateFieldSpecsOfMyDraft() throws Exception
-	{
-    		Bulletin originalBulletin = createImmutableBulletin(security);
-    		String id = originalBulletin.getLocalId();
-    		originalBulletin.setMutable();
-    		Bulletin newFieldSpecsBulletin = testStore.createDraftClone(originalBulletin, customPublicSpecs, customPrivateSpecs);
-	    	assertEquals("wrong public field specs for untouched original?", StandardFieldSpecs.getDefaultTopSectionFieldSpecs().asArray().length, originalBulletin.getTopSectionFieldSpecs().size());
-	    	assertEquals("wrong private field specs for untouched original?", StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray().length, originalBulletin.getBottomSectionFieldSpecs().size());
-	    	assertEquals("wrong account?", testStore.getAccountId(), newFieldSpecsBulletin.getAccount());
-	    	assertEquals("not same local id?", id, newFieldSpecsBulletin.getLocalId());
-	    	assertEquals("no public data?", PUBLIC_DATA, newFieldSpecsBulletin.get(Bulletin.TAGTITLE));
-	    	assertEquals("no private data?", PRIVATE_DATA, newFieldSpecsBulletin.get(Bulletin.TAGAUTHOR));
-	    	assertEquals("did not clear hq since it is now only pending?", 0, newFieldSpecsBulletin.getAuthorizedToReadKeys().size());
-	    	assertTrue("not Mutable?", newFieldSpecsBulletin.isMutable());
-	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), newFieldSpecsBulletin.getTopSectionFieldSpecs().size());
-	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), newFieldSpecsBulletin.getBottomSectionFieldSpecs().size());
-	    	BulletinHistory history = newFieldSpecsBulletin.getHistory();
-		assertEquals("has history?", 0, history.size());
-	}
-
     public void testCreateDraftCopyOfNotMyBulletin() throws Exception
 	{
 	    	MartusCrypto otherSecurity = MockMartusSecurity.createOtherClient();
