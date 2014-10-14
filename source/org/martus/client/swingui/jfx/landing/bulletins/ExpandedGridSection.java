@@ -44,9 +44,10 @@ import org.martus.common.fieldspec.GridFieldSpec;
 
 public class ExpandedGridSection extends TitledPane
 {
-	public ExpandedGridSection(FxBulletinField gridFieldToUse, MartusLocalization localizationToUse)
+	public ExpandedGridSection(FxFieldCreator fieldCreatorToUse, FxBulletinField gridFieldToUse, MartusLocalization localizationToUse)
 	{
 		super();
+		fieldCreator = fieldCreatorToUse;
 		gridField = gridFieldToUse;
 		localization = localizationToUse;
 		
@@ -93,7 +94,7 @@ public class ExpandedGridSection extends TitledPane
 		GridFieldSpec gridSpec = gridField.getGridFieldSpec();
 		
 		FxBulletin fxb = gridField.getBulletin();
-		BulletinEditorSection section = new BulletinEditorSection(fxb, localization, "");
+		BulletinEditorSection section = new BulletinEditorSection(fieldCreator, fxb, localization, "");
 		for(int column = 0; column < gridSpec.getColumnCount(); ++column)
 		{
 			FieldSpec fieldSpec = gridSpec.getFieldSpec(column);
@@ -122,6 +123,8 @@ public class ExpandedGridSection extends TitledPane
 	{
 		return localization;
 	}
+
+	private FxFieldCreator fieldCreator;
 
 	private FxBulletinField gridField;
 	private MartusLocalization localization;

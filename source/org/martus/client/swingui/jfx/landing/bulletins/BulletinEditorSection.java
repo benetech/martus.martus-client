@@ -41,8 +41,9 @@ import org.martus.common.fieldspec.FieldType;
 
 public class BulletinEditorSection extends GridPane
 {
-	public BulletinEditorSection(FxBulletin bulletinToUse, MartusLocalization localizationToUse, String sectionTitle)
+	public BulletinEditorSection(FxFieldCreator fieldCreatorToUse, FxBulletin bulletinToUse, MartusLocalization localizationToUse, String sectionTitle)
 	{
+		fieldCreator = fieldCreatorToUse;
 		bulletin = bulletinToUse;
 		localization = localizationToUse;
 		title = sectionTitle;
@@ -96,7 +97,7 @@ public class BulletinEditorSection extends GridPane
 
 	public void startNewRow()
 	{
-		currentRow = new BulletinEditorRow(bulletin, getLocalization());
+		currentRow = new BulletinEditorRow(fieldCreator, bulletin, getLocalization());
 		rows.add(currentRow);
 	}
 	
@@ -160,6 +161,7 @@ public class BulletinEditorSection extends GridPane
 	private static final int LABEL_COLUMN = 0;
 	private static final int DATA_COLUMN = 1;
 
+	private FxFieldCreator fieldCreator;
 	private FxBulletin bulletin;
 	private MartusLocalization localization;
 	private String title;

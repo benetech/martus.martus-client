@@ -43,6 +43,8 @@ public class FxFormCreator
 	public FxFormCreator(MartusLocalization localizationToUse)
 	{
 		localization = localizationToUse;
+		
+		fieldCreator = new FxFieldCreator(getLocalization());
 	}
 	
 	public Node createFormFromBulletin(FxBulletin bulletinToShow, Node attachments)
@@ -89,7 +91,7 @@ public class FxFormCreator
 			String sectionTitle = "";
 			if(isSectionStart)
 				sectionTitle = field.getLabel();
-			currentSection = new BulletinEditorSection(bulletin, getLocalization(), sectionTitle);
+			currentSection = new BulletinEditorSection(fieldCreator, bulletin, getLocalization(), sectionTitle);
 			sections.add(currentSection);
 		}
 
@@ -121,6 +123,7 @@ public class FxFormCreator
 	}
 
 	private MartusLocalization localization;
+	private FxFieldCreator fieldCreator;
 	private FxBulletin bulletin;
 	private BulletinEditorSection currentSection;
 	private Vector<BulletinEditorSection> sections;
