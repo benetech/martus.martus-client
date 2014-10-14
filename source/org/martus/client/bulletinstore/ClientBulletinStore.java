@@ -1545,6 +1545,13 @@ public class ClientBulletinStore extends BulletinStore
 		return createNewDraft(original, topSpecs, bottomSpecs);
 	}
 
+	public Bulletin createCloneWithTemplateAndDataFrom(Bulletin original) throws Exception
+	{
+		FieldSpecCollection publicFieldSpecsToUse = original.getTopSectionFieldSpecs();
+		FieldSpecCollection privateFieldSpecsToUse = original.getBottomSectionFieldSpecs();
+		return createNewDraft(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
+	}
+
 	public Bulletin createNewDraft(Bulletin original, FieldSpecCollection topSectionFieldSpecsToUse, FieldSpecCollection bottomSectionFieldSpecsToUse) throws Exception 
 	{
 		Bulletin newDraftBulletin = createEmptyBulletin(topSectionFieldSpecsToUse, bottomSectionFieldSpecsToUse);
@@ -1627,7 +1634,7 @@ public class ClientBulletinStore extends BulletinStore
 	{
 		return new File(getStoreRootDir(), TEMPLATE_DIRECTORY_NAME);
 	}
-
+	
 	public static final String SAVED_FOLDER = "%Sent";
 	public static final String DISCARDED_FOLDER = "%Discarded";
 	public static final String SEARCH_RESULTS_BULLETIN_FOLDER = "%SearchResults";

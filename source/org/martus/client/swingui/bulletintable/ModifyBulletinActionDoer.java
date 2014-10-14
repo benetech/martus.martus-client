@@ -25,16 +25,13 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.bulletintable;
 
-import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiSession;
-import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 
 public class ModifyBulletinActionDoer
 {
-	
 	public ModifyBulletinActionDoer(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
@@ -73,7 +70,7 @@ public class ModifyBulletinActionDoer
 			
 			Bulletin bulletinToModify = original; 
 			if(needsCloneToEdit(isMine, original.requiresNewCopyToEdit()))
-				bulletinToModify = createCloneAndUpdateFieldSpecs(original);
+				bulletinToModify = mainWindow.getStore().createCloneWithTemplateAndDataFrom(original);
 			else if(isMyMutable(isMine, original.isMutable()))
 				bulletinToModify = original;
 			bulletinToModify.allowOnlyTheseAuthorizedKeysToRead(mainWindow.getApp().getAllHQKeys());
@@ -94,17 +91,6 @@ public class ModifyBulletinActionDoer
 	private boolean needsCloneToEdit(boolean isMine, boolean requiresCloneToEdit)
 	{
 		return requiresCloneToEdit || !isMine;
-	}
-
-
-	private Bulletin createCloneAndUpdateFieldSpecs(Bulletin original) throws Exception
-	{
-		ClientBulletinStore store = mainWindow.getApp().getStore();
-		FieldSpecCollection publicFieldSpecsToUse = original.getTopSectionFieldSpecs();
-		FieldSpecCollection privateFieldSpecsToUse = original.getBottomSectionFieldSpecs();
-
-		Bulletin bulletinToModify = store.createNewDraft(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
-		return bulletinToModify;
 	}
 	
 	UiMainWindow mainWindow;
