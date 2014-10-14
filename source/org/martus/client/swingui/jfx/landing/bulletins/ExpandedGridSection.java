@@ -37,6 +37,7 @@ import javafx.scene.layout.VBox;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.core.FxBulletinField;
+import org.martus.client.core.FxBulletinGridField;
 import org.martus.client.core.GridFieldData;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.fieldspec.FieldSpec;
@@ -44,7 +45,7 @@ import org.martus.common.fieldspec.GridFieldSpec;
 
 public class ExpandedGridSection extends TitledPane
 {
-	public ExpandedGridSection(FxFieldCreator fieldCreatorToUse, FxBulletinField gridFieldToUse, MartusLocalization localizationToUse)
+	public ExpandedGridSection(FxFieldCreator fieldCreatorToUse, FxBulletinGridField gridFieldToUse, MartusLocalization localizationToUse)
 	{
 		super();
 		fieldCreator = fieldCreatorToUse;
@@ -126,7 +127,7 @@ public class ExpandedGridSection extends TitledPane
 
 	private FxFieldCreator fieldCreator;
 
-	private FxBulletinField gridField;
+	private FxBulletinGridField gridField;
 	private MartusLocalization localization;
 	private BorderPane mainBorderPane;
 	private VBox itemBox;

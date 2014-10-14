@@ -39,6 +39,7 @@ import javafx.scene.text.TextFlow;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.core.FxBulletinField;
+import org.martus.client.core.FxBulletinGridField;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
@@ -78,7 +79,7 @@ public class BulletinEditorRow
 		addLabelAndField(label, fieldNode);
 	}
 
-	public void addGridFieldToRow(FxBulletinField field)
+	public void addGridFieldToRow(FxBulletinGridField field)
 	{
 		isGrid = true;
 		ExpandedGridSection gridSection = new ExpandedGridSection(fieldCreator, field, getLocalization());
