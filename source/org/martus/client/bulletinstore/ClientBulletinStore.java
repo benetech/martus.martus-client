@@ -1523,14 +1523,6 @@ public class ClientBulletinStore extends BulletinStore
 		return b;
 	}
 	
-	public Bulletin createEmptyCloneWithFields(Bulletin original, FieldSpecCollection publicSpecs, FieldSpecCollection privateSpecs) throws Exception
-	{
-		UniversalId headerUid = original.getUniversalId();
-		UniversalId publicDataUid = original.getFieldDataPacket().getUniversalId();
-		UniversalId privateDataUid = original.getPrivateFieldDataPacket().getUniversalId();
-		return new Bulletin(getSignatureGenerator(), headerUid, publicDataUid, privateDataUid, publicSpecs, privateSpecs);
-	}
-
 	public Bulletin createNewDraftWithCurrentTemplateButDataFrom(Bulletin original) throws Exception
 	{
 		FieldSpecCollection topSpecs = getCurrentFormTemplate().getTopFields();
@@ -1552,13 +1544,6 @@ public class ClientBulletinStore extends BulletinStore
 		return newDraftBulletin;
 	}
 	
-	public Bulletin createDraftClone(Bulletin original, FieldSpecCollection topSectionFieldSpecsToUse, FieldSpecCollection bottomSectionFieldSpecsToUse) throws Exception 
-	{
-		Bulletin clone = createEmptyCloneWithFields(original, topSectionFieldSpecsToUse, bottomSectionFieldSpecsToUse);
-		clone.createDraftCopyOf(original, getDatabase());
-		return clone;
-	}
-
 	public Vector getUidsOfAllBulletinRevisions()
 	{
 		class UidCollector implements Database.PacketVisitor
