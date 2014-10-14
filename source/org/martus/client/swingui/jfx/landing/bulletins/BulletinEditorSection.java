@@ -35,6 +35,7 @@ import javafx.scene.layout.Priority;
 import org.martus.client.core.FxBulletin;
 import org.martus.client.core.FxBulletinField;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 
@@ -99,8 +100,9 @@ public class BulletinEditorSection extends GridPane
 		rows.add(currentRow);
 	}
 	
-	public void addUnexpectedErrorMessage(String label)
+	public void addUnexpectedErrorMessage(Exception e, String label)
 	{
+		MartusLogger.logException(e);
 		String errorMessage = getLocalization().getFieldLabel("notifyUnexpectedErrorcause");
 		addErrorMessage(label, errorMessage);
 	}

@@ -39,7 +39,6 @@ import org.martus.client.core.FxBulletin;
 import org.martus.client.core.FxBulletinField;
 import org.martus.client.core.GridFieldData;
 import org.martus.client.swingui.MartusLocalization;
-import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 
@@ -106,8 +105,7 @@ public class ExpandedGridSection extends TitledPane
 			}
 			catch(Exception e)
 			{
-				MartusLogger.logException(e);
-				section.addUnexpectedErrorMessage(fieldSpec.getLabel());
+				section.addUnexpectedErrorMessage(e, fieldSpec.getLabel());
 			}
 		}
 		
