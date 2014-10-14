@@ -123,7 +123,7 @@ public class FxBulletinGridField extends FxBulletinField
 		return listOfLists;
 	}
 
-	protected void updateOverallValue()
+	private void updateOverallValue()
 	{
 		String newValue = getGridValue();
 		valueProperty().setValue(newValue);
