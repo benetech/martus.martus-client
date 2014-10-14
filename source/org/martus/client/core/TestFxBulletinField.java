@@ -341,9 +341,9 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		FxBulletinField field = new FxBulletinField(createFxBulletin(), simpleDropDown, localization);
 		assertTrue(field.isDropdown());
 
-		Vector<ObservableChoiceItemList> simpleLists = field.getChoiceItemLists();
-		assertEquals(1, simpleLists.size());
-		ObservableChoiceItemList simpleList = simpleLists.get(0);
+		Vector<ObservableChoiceItemList> simpleListOfLists = field.getChoiceItemLists();
+		assertEquals(1, simpleListOfLists.size());
+		ObservableChoiceItemList simpleList = simpleListOfLists.get(0);
 		assertEquals(simpleChoices.length, simpleList.size());
 		assertEquals(simpleChoices[0], simpleList.get(0));
 	}
