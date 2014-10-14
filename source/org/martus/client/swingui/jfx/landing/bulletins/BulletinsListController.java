@@ -229,7 +229,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	private void notifyIfBulletinIsNotOursAndHasExternallyViewedAttachments(Bulletin bulletinSelected) throws Exception
 	{
 		Integer status = getApp().getKeyVerificationStatus(bulletinSelected.getAccount());
-		if(status.equals(ContactKey.NOT_VERIFIED) || status.equals(ContactKey.NOT_VERIFIED_UNKNOWN))
+		if(!ContactKey.isVerified(status))
 		{
 			if(wouldAnyAttachmentBeViewedExternally(bulletinSelected))
 				showNotifyDialog("BulletinWithAnUnverifiedExternalAttachment");
