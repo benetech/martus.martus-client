@@ -254,6 +254,6 @@ public class FxBulletinField
 	private FxBulletin fxb;
 	private FieldSpec fieldSpec;
 	private MiniLocalization localization;
-	protected SimpleStringProperty valueProperty;
+	private SimpleStringProperty valueProperty;
 	private FieldValidator validator;
 }

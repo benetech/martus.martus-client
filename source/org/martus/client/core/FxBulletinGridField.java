@@ -300,7 +300,7 @@ public class FxBulletinGridField extends FxBulletinField
 	protected void updateOverallValue()
 	{
 		String newValue = getGridValue();
-		valueProperty.setValue(newValue);
+		valueProperty().setValue(newValue);
 	}
 
 }
