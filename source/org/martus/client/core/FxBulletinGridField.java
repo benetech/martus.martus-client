@@ -190,7 +190,7 @@ public class FxBulletinGridField extends FxBulletinField
 		gridDataProperty().clear();
 		
 		GridFieldSpec gridSpec = getGridFieldSpec();
-		PoolOfReusableChoicesLists poolOfReusableChoicesLists = fxb.getAllReusableChoicesLists();
+		PoolOfReusableChoicesLists poolOfReusableChoicesLists = getBulletin().getAllReusableChoicesLists();
 		GridData data = new GridData(gridSpec, poolOfReusableChoicesLists );
 		
 		try
@@ -275,7 +275,7 @@ public class FxBulletinGridField extends FxBulletinField
 		{
 			String columnLabel = gridFieldSpec.getColumnLabel(column);
 			FieldSpec cellSpec = gridFieldSpec.getFieldSpec(column);
-			FxBulletinField cellField = createFxBulletinField(fxb, cellSpec, getLocalization());
+			FxBulletinField cellField = createFxBulletinField(getBulletin(), cellSpec, getLocalization());
 			rowFields.put(columnLabel, cellField);
 			
 			cellField.addValueListener((observable, oldValue, newValue) -> updateOverallValue());
