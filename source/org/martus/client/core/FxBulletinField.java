@@ -53,7 +53,12 @@ import org.martus.common.fieldspec.GridFieldSpec;
 
 public class FxBulletinField
 {
-	public FxBulletinField(FxBulletin bulletinToUse, FieldSpec fieldSpecToUse, MiniLocalization localizationToUse)
+	public static FxBulletinField createFxBulletinField(FxBulletin bulletinToUse, FieldSpec fieldSpecToUse, MiniLocalization localizationToUse)
+	{
+		return new FxBulletinField(bulletinToUse, fieldSpecToUse, localizationToUse);
+	}
+
+	protected FxBulletinField(FxBulletin bulletinToUse, FieldSpec fieldSpecToUse, MiniLocalization localizationToUse)
 	{
 		fxb = bulletinToUse;
 		fieldSpec = fieldSpecToUse;
@@ -427,7 +432,7 @@ public class FxBulletinField
 		{
 			String columnLabel = gridFieldSpec.getColumnLabel(column);
 			FieldSpec cellSpec = gridFieldSpec.getFieldSpec(column);
-			FxBulletinField cellField = new FxBulletinField(fxb, cellSpec, getLocalization());
+			FxBulletinField cellField = createFxBulletinField(fxb, cellSpec, getLocalization());
 			rowFields.put(columnLabel, cellField);
 			
 			cellField.addValueListener((observable, oldValue, newValue) -> updateOverallValue());

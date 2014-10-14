@@ -316,7 +316,7 @@ public class FxBulletin
 
 			fieldSpecs.add(fieldSpec);
 			
-			FxBulletinField field = new FxBulletinField(this, fieldSpec, getLocalization());
+			FxBulletinField field = FxBulletinField.createFxBulletinField(this, fieldSpec, getLocalization());
 			fields.put(fieldTag, field);
 			
 			setField(fieldSpec, value);
