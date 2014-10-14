@@ -231,7 +231,7 @@ public class FxBulletin
 	
 	public Vector<ObservableChoiceItemList> gridColumnValuesProperty(String gridTag, String gridColumnLabel)
 	{
-		return getField(gridTag).gridColumnValuesProperty(gridColumnLabel);
+		return getGridField(gridTag).gridColumnValuesProperty(gridColumnLabel);
 	}
 
 	public BooleanProperty getImmutableOnServerProperty()
