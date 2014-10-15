@@ -38,18 +38,16 @@ import javafx.scene.web.WebView;
 import javax.activation.MimetypesFileTypeMap;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.client.swingui.jfx.generic.FxController;
-import org.martus.common.bulletin.AttachmentProxy;
 
 public class AttachmentViewController extends FxController
 {
-	public AttachmentViewController(UiMainWindow mainWindowToUse, AttachmentProxy proxyToView)
+	public AttachmentViewController(UiMainWindow mainWindowToUse, File attachmentFile)
 	{
 		super(mainWindowToUse);
 		try
 		{
-			attachmentFileToView = ViewAttachmentHandler.getAttachmentAsFile(proxyToView, getApp().getStore());
+			attachmentFileToView = attachmentFile;
 			attachmentFileType = determineFileType(attachmentFileToView);
 		} 
 		catch (Exception e)
@@ -77,7 +75,7 @@ public class AttachmentViewController extends FxController
 		return attachmentFileType != FileType.Unsupported;
 	}
 	
-	static public FileType determineFileType(File file) throws IOException
+	private FileType determineFileType(File file) throws IOException
 	{
 		MimetypesFileTypeMap mimeTypeMap = new MimetypesFileTypeMap();
 		mimeTypeMap.addMimeTypes("html htm html");
