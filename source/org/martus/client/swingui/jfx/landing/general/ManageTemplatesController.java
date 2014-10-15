@@ -422,7 +422,7 @@ public class ManageTemplatesController extends FxInSwingController
 		}
 	}
 
-	protected FileChooser createFileChooser(String titleTag)
+	private FileChooser createFileChooser(String titleTag)
 	{
 		//FIXME: This Dialog can be hidden behind
 		FileChooser fileChooser = new FileChooser();
