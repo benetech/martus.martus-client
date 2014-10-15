@@ -311,17 +311,20 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("Original Attachment not added?", 1, originalAttachments.length);
 		File originalFile = ViewAttachmentHandler.obtainFileForAttachment(originalAttachments[0], clientStore);
 		assertNotNull(originalFile);
+		assertTrue ("original file didn't end in .txt?", originalFile.getName().endsWith(ATTACHMENT_1_EXTENSION));
 	    	
 	    	Bulletin clone = clientStore.createCloneWithTemplateAndDataFrom(original);
 	    	AttachmentProxy[] cloneAttachmentsBeforeSave = clone.getPublicAttachments();
 		File cloneFile = ViewAttachmentHandler.obtainFileForAttachment(cloneAttachmentsBeforeSave[0], clientStore);
 	    	assertNotNull(cloneFile);
+		assertTrue ("cloned attachment before save didn't end in .txt?", cloneFile.getName().endsWith(ATTACHMENT_1_EXTENSION));
 
 	    	clientStore.saveBulletin(clone);
 	    	AttachmentProxy[] cloneAttachmentsAfterSave = clone.getPublicAttachments();
 		File cloneFileAfterSave = ViewAttachmentHandler.obtainFileForAttachment(cloneAttachmentsAfterSave[0], clientStore);
-	    	assertEquals("Clone Attachment not added?", 1, cloneAttachmentsAfterSave.length);
+	    	assertEquals("Clone Attachment after save not added?", 1, cloneAttachmentsAfterSave.length);
 	    	assertNotNull(cloneFileAfterSave);
+		assertTrue ("cloned attachment after save didn't end in .txt?", cloneFileAfterSave.getName().endsWith(ATTACHMENT_1_EXTENSION));
 
 	    	assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
@@ -347,7 +350,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
 	private File createAttachment(String data) throws IOException 
 	{
-		return stringToFile("$$$MartusBulletinTempAttachment", null, data);
+		return stringToFile("$$$MartusBulletinTempAttachment", ATTACHMENT_1_EXTENSION, data);
 	}
 
      private Bulletin createMutableBulletin(MartusCrypto otherSecurity) throws Exception
@@ -1987,4 +1990,6 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	private static final byte[] sampleBytes2 = {3,1,4,0,1,5,9,2,7};
 	private static final String fakeHqKey = "wwwllkjsfdkjf";
 	private static final String ATTACHMENT_1_DATA = "Attachment 1's Data";
+	private static final String ATTACHMENT_1_EXTENSION = ".txt";
+
 }
