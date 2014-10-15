@@ -256,7 +256,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		for (int i = 0; i < numberOfAttachments; i++)
 		{
 			AttachmentProxy attachmentProxy = attachments[i];
-			File attachmentFileToView = ViewAttachmentHandler.getAttachmentAsFile(attachmentProxy, getApp().getStore());
+			File attachmentFileToView = ViewAttachmentHandler.obtainFileForAttachment(attachmentProxy, getMainWindow().getStore());
 			AttachmentViewController attachmentViewer = new AttachmentViewController(getMainWindow(), attachmentFileToView);
 			if(!attachmentViewer.canViewInProgram())
 				return true;

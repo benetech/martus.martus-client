@@ -126,7 +126,7 @@ public class BulletinAttachmentsController extends FxController
 
 	private boolean viewAttachmentInternally(AttachmentProxy proxy) throws Exception
 	{
-		File attachmentFileToView = ViewAttachmentHandler.getAttachmentAsFile(proxy, getApp().getStore());
+		File attachmentFileToView = ViewAttachmentHandler.obtainFileForAttachment(proxy, getMainWindow().getStore());
 		AttachmentViewController attachmentViewer = new AttachmentViewController(getMainWindow(), attachmentFileToView);
 
 		if(!attachmentViewer.canViewInProgram())
