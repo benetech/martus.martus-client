@@ -306,8 +306,15 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	original.set(Bulletin.TAGTITLE, PUBLIC_DATA);
 	    	original.set(Bulletin.TAGAUTHOR, PRIVATE_DATA);
 	    	original.setAuthorizedToReadKeys(oldHq);
+	    	File attachment = createAttachment(ATTACHMENT_1_DATA);
+	    	original.addPublicAttachment(new AttachmentProxy(attachment));
 	    	original.setImmutable();
 		return original;
+	}
+
+	private File createAttachment(String data) throws IOException 
+	{
+		return stringToFile("$$$MartusBulletinTempAttachment", data);
 	}
 
      private Bulletin createMutableBulletin(MartusCrypto otherSecurity) throws Exception
@@ -1933,19 +1940,18 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	}	
 
 
-	final int sampleRecordCount = 5;
+	private static MockBulletinStore testStore;
+	private static MockMartusSecurity security;
+	private static MockDatabase db;
+	private static FieldSpecCollection customPublicSpecs;
+	private static FieldSpecCollection customPrivateSpecs;
 
-	static MockBulletinStore testStore;
-	static MockMartusSecurity security;
-	static MockDatabase db;
-	static FieldSpecCollection customPublicSpecs;
-	static FieldSpecCollection customPrivateSpecs;
-
-	static File tempFile1;
-	static File tempFile2;
+	private static File tempFile1;
+	private static File tempFile2;
 	private static final String PUBLIC_DATA = "oeiwjfio";
 	private static final String PRIVATE_DATA = "test private";
-	static final byte[] sampleBytes1 = {1,1,2,3,0,5,7,11};
-	static final byte[] sampleBytes2 = {3,1,4,0,1,5,9,2,7};
-	static final String fakeHqKey = "wwwllkjsfdkjf";
+	private static final byte[] sampleBytes1 = {1,1,2,3,0,5,7,11};
+	private static final byte[] sampleBytes2 = {3,1,4,0,1,5,9,2,7};
+	private static final String fakeHqKey = "wwwllkjsfdkjf";
+	private static final String ATTACHMENT_1_DATA = "Attachment 1's Data";
 }
