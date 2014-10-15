@@ -38,6 +38,7 @@ import java.util.Vector;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.MartusClientXml;
+import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.client.test.MockBulletinStore;
 import org.martus.common.BulletinSummary;
 import org.martus.common.Exceptions.InvalidBulletinStateException;
@@ -299,7 +300,39 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("has history?", 0, clone.getHistory().size());
 	}
     
-    private Bulletin createImmutableBulletin(MartusCrypto otherSecurity) throws Exception
+    public void testCreateCloneWithTemplateAndDataFrom() throws Exception
+    {
+		MockBulletinStore clientStore = new MockBulletinStore(security);
+	    	MartusCrypto otherSecurity = MockMartusSecurity.createOtherClient();
+	    	Bulletin original = createImmutableBulletin(otherSecurity);
+	    	original.setAuthorizedToReadKeys(new HeadquartersKeys(new HeadquartersKey(security.getPublicKeyString())));
+	    	clientStore.saveBulletin(original);
+	    	AttachmentProxy[] originalAttachments = original.getPublicAttachments();
+	    	assertEquals("Original Attachment not added?", 1, originalAttachments.length);
+		File originalFile = ViewAttachmentHandler.obtainFileForAttachment(originalAttachments[0], clientStore);
+		assertNotNull(originalFile);
+	    	
+	    	Bulletin clone = clientStore.createCloneWithTemplateAndDataFrom(original);
+	    	AttachmentProxy[] cloneAttachmentsBeforeSave = clone.getPublicAttachments();
+		File cloneFile = ViewAttachmentHandler.obtainFileForAttachment(cloneAttachmentsBeforeSave[0], clientStore);
+	    	assertNotNull(cloneFile);
+
+	    	clientStore.saveBulletin(clone);
+	    	AttachmentProxy[] cloneAttachmentsAfterSave = clone.getPublicAttachments();
+		File cloneFileAfterSave = ViewAttachmentHandler.obtainFileForAttachment(cloneAttachmentsAfterSave[0], clientStore);
+	    	assertEquals("Clone Attachment not added?", 1, cloneAttachmentsAfterSave.length);
+	    	assertNotNull(cloneFileAfterSave);
+
+	    	assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
+	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
+	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
+	    	assertEquals("did not clear authorized HQ?", 0, clone.getAuthorizedToReadKeys().size());
+	    	assertEquals("did not clear any pending HQs?", 0, clone.getBulletinHeaderPacket().getAuthorizedToReadKeysPending().size());
+	    	assertEquals("We no longer keep HQs for copies of bulletins that were not ours.", 0, clone.getAuthorizedToReadKeysIncludingPending().size());
+	    	assertEquals("has history?", 0, clone.getHistory().size());
+    }
+
+   private Bulletin createImmutableBulletin(MartusCrypto otherSecurity) throws Exception
 	{
 		HeadquartersKeys oldHq = new HeadquartersKeys(new HeadquartersKey(fakeHqKey));
  	    	Bulletin original = new Bulletin(otherSecurity);

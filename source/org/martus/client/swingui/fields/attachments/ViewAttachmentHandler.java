@@ -40,6 +40,7 @@ import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.database.ReadableDatabase;
+import org.martus.common.packet.AttachmentPacket;
 import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
@@ -103,7 +104,7 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 
 	public static void launchExternalAttachmentViewer(AttachmentProxy proxy, ClientBulletinStore store) throws IOException, InterruptedException, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, InvalidBase64Exception, CryptoException 
 	{
-		File temp = getAttachmentAsFile(proxy, store);
+		File temp = obtainFileForAttachment(proxy, store);
 		Runtime runtime = Runtime.getRuntime();
 
 		String[] launchCommand = getLaunchCommandForThisOperatingSystem(temp.getPath());
@@ -125,18 +126,27 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 			throw new IOException();
 		}
 	}
-
-	static public File getAttachmentAsFile(AttachmentProxy proxy, ClientBulletinStore store) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException 
+	
+	static public File obtainFileForAttachment(AttachmentProxy proxy, ClientBulletinStore store) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
 	{
-		if(proxy.getFile() != null)
-			return proxy.getFile();
+		File attachmentAlreadyAvailableAsFile = proxy.getFile();
+		if(attachmentAlreadyAvailableAsFile != null)
+			return attachmentAlreadyAvailableAsFile;
+		
+		AttachmentPacket pendingPacket = proxy.getPendingPacket();
+		if(pendingPacket != null)
+		{
+			File tempFileAlreadyAvailable = pendingPacket.getRawFile();
+			if(tempFileAlreadyAvailable != null)
+				return tempFileAlreadyAvailable;
+		}
 		
 		ReadableDatabase db = store.getDatabase();
 		MartusCrypto security = store.getSignatureVerifier();
-		File temp = extractAttachmentToTempFile(db, proxy, security);
-		return temp;
+		File tempFile = extractAttachmentToTempFile(db, proxy, security);
+		return tempFile;
 	}
-
+	
 	static private void dumpOutputToConsole(String streamName, InputStream capturedOutput) throws IOException
 	{
 		if(capturedOutput.available() <= 0)
