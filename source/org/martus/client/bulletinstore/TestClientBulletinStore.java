@@ -347,7 +347,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
 	private File createAttachment(String data) throws IOException 
 	{
-		return stringToFile("$$$MartusBulletinTempAttachment", data);
+		return stringToFile("$$$MartusBulletinTempAttachment", null, data);
 	}
 
      private Bulletin createMutableBulletin(MartusCrypto otherSecurity) throws Exception
