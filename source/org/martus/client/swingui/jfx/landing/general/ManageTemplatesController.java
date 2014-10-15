@@ -70,9 +70,12 @@ import org.martus.common.EnglishCommonStrings;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.Exceptions.ServerNotCompatibleException;
 import org.martus.common.MartusLogger;
+import org.martus.common.XmlFormTemplateLoader;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.FormTemplate;
 import org.martus.util.TokenReplacement;
+import org.martus.util.UnicodeReader;
+import org.martus.util.xml.SimpleXmlParser;
 
 public class ManageTemplatesController extends FxInSwingController
 {
@@ -204,12 +207,6 @@ public class ManageTemplatesController extends FxInSwingController
 	private void exportTemplate(UiMainWindow mainWindowToUse, FormTemplate template) throws Exception
 	{
 		FileChooser fileChooser = createFileChooser("FileDialogExportCustomization");
-		
-		BulletinXmlFileFilter templateFileFilter = new BulletinXmlFileFilter(getLocalization());
-		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter(templateFileFilter.getDescription(), templateFileFilter.getWildCardExtension())
-				);
-
 		File templateFile = fileChooser.showSaveDialog(null);
 		if(templateFile == null)
 			return;
@@ -220,8 +217,13 @@ public class ManageTemplatesController extends FxInSwingController
 		if (isExtensionSelected(chosenExtensionFilter, new MCTFileFilter(getLocalization())))
 			template.exportTemplate(securityTemp, templateFile);
 		
-		if (isExtensionSelected(chosenExtensionFilter, new BulletinXmlFileFilter(getLocalization())))
+		if (isXmlExtensionSelected(chosenExtensionFilter))
 			template.exportTopSection(templateFile);
+	}
+
+	private boolean isXmlExtensionSelected(ExtensionFilter chosenExtensionFilter)
+	{
+		return isExtensionSelected(chosenExtensionFilter, new BulletinXmlFileFilter(getLocalization()));
 	}
 
 	private boolean isExtensionSelected(ExtensionFilter chosenFileFilter, FormatFilter mctFileFilter) 
@@ -408,6 +410,13 @@ public class ManageTemplatesController extends FxInSwingController
 		FormTemplate importedTemplate = new FormTemplate();
 		try
 		{
+			ExtensionFilter chosenExtensionFilter = fileChooser.getSelectedExtensionFilter();
+			if (isXmlExtensionSelected(chosenExtensionFilter))
+			{
+				importXmlFormTemplate(templateFile);
+				return;
+			}
+			
 			if(!importedTemplate.importTemplate(templateFile, getSecurity()))
 			{
 				showNotifyDialog("ErrorImportingCustomizationTemplate");
@@ -422,6 +431,33 @@ public class ManageTemplatesController extends FxInSwingController
 		}
 	}
 
+	private void importXmlFormTemplate(File templateFile) throws Exception
+	{
+		String xmlAsString = importXmlAsString(templateFile);
+		System.out.println(xmlAsString);
+		
+		XmlFormTemplateLoader loader = new XmlFormTemplateLoader();
+		SimpleXmlParser.parse(loader, xmlAsString);
+		FormTemplate importedTemplate = loader.getFormTemplate();
+		
+		//FIXME urgent: need to validate formTemplate before adding below
+		templateToAddProperty.setValue(importedTemplate);
+		logTemplateToBeAdded();
+	}
+	
+	private String importXmlAsString(File tempFormTemplateFile) throws Exception 
+	{
+		UnicodeReader reader = new UnicodeReader(tempFormTemplateFile);
+		try
+		{
+			return reader.readAll();
+		}
+		finally
+		{
+			reader.close();
+		}
+	}
+	
 	private FileChooser createFileChooser(String titleTag)
 	{
 		//FIXME: This Dialog can be hidden behind
@@ -430,8 +466,10 @@ public class ManageTemplatesController extends FxInSwingController
 		fileChooser.setInitialDirectory(martusRootDir);
 		fileChooser.setTitle(getLocalization().getWindowTitle(titleTag));
 		MCTFileFilter templateFileFilter = new MCTFileFilter(getLocalization());
+		BulletinXmlFileFilter xmlTemplateFileFilter = new BulletinXmlFileFilter(getLocalization());
 		fileChooser.getExtensionFilters().addAll(
 				new FileChooser.ExtensionFilter(templateFileFilter.getDescription(), templateFileFilter.getWildCardExtension()),
+				new FileChooser.ExtensionFilter(xmlTemplateFileFilter.getDescription(), xmlTemplateFileFilter.getWildCardExtension()),
 				new FileChooser.ExtensionFilter(getLocalization().getFieldLabel("AllFiles"), "*.*"));
 
 		return fileChooser;
