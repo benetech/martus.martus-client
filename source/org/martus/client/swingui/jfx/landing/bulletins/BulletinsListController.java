@@ -57,6 +57,7 @@ import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
+import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.SimpleHtmlContentController;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
@@ -236,7 +237,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		}
 	}
 
-	private boolean wouldAnyAttachmentBeViewedExternally(Bulletin original)
+	private boolean wouldAnyAttachmentBeViewedExternally(Bulletin original) throws Exception
 	{
 		AttachmentProxy[] publicAttachments = original.getPublicAttachments();
 		if(wouldAnyAttachmentBeViewedExternally(publicAttachments))
@@ -247,7 +248,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		return false;		
 	}
 
-	private boolean wouldAnyAttachmentBeViewedExternally(AttachmentProxy[] attachments)
+	private boolean wouldAnyAttachmentBeViewedExternally(AttachmentProxy[] attachments) throws Exception
 	{
 		int numberOfAttachments = attachments.length;
 		if(numberOfAttachments == 0)
@@ -255,7 +256,8 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		for (int i = 0; i < numberOfAttachments; i++)
 		{
 			AttachmentProxy attachmentProxy = attachments[i];
-			AttachmentViewController attachmentViewer = new AttachmentViewController(getMainWindow(), attachmentProxy);
+			File attachmentFileToView = ViewAttachmentHandler.getAttachmentAsFile(attachmentProxy, getApp().getStore());
+			AttachmentViewController attachmentViewer = new AttachmentViewController(getMainWindow(), attachmentFileToView);
 			if(!attachmentViewer.canViewInProgram())
 				return true;
 		}
