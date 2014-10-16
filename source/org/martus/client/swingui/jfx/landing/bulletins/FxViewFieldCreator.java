@@ -128,23 +128,36 @@ public class FxViewFieldCreator extends FxFieldCreator
 	@Override
 	protected Node createStringField(Property<String> property)
 	{
-		Label textField = new Label(property.getValue());
-		HBox.setHgrow(textField, Priority.SOMETIMES);
-		return textField;
+		return responsiveTextFlowNode(property);
 	}
 
 	@Override
 	protected Node createMultilineField(Property<String> property)
 	{
-		Text text = new Text(property.getValue());
-		TextFlow flow = new TextFlow(text);
-		flow.prefWidthProperty().bind(fieldWidthProperty);
-		return flow;
+		return responsiveTextFlowNode(property);
 	}
 
 	@Override
 	protected Node createFieldNotAvailable()
 	{
 		return new Label("(n/a)");
+	}
+
+	private Node responsiveTextFlowNode(Property<String> property)
+	{
+		return responsiveTextFlowNode(getText(property));
+	}
+
+	private Node responsiveTextFlowNode(Text text)
+	{
+		TextFlow flow = new TextFlow(text);
+		flow.prefWidthProperty().bind(fieldWidthProperty);
+		return flow;
+	}
+
+	private Text getText(Property<String> property)
+	{
+		Text text = new Text(property.getValue());
+		return text;
 	}
 }
