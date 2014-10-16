@@ -219,7 +219,7 @@ public class ManageTemplatesController extends FxInSwingController
 		if (isMctFileFilterSelected(chosenExtensionFilter, templateFile))
 			template.exportTemplate(securityTemp, templateFile);
 		
-		if (isXmlExtensionSelected(chosenExtensionFilter))
+		if (isXmlExtensionSelected(chosenExtensionFilter, templateFile))
 			template.exportTopSection(templateFile);
 	}
 
@@ -232,9 +232,12 @@ public class ManageTemplatesController extends FxInSwingController
 		return isExtensionSelected(chosenExtensionFilter, mctFileFilter);
 	}
 
-	private boolean isXmlExtensionSelected(ExtensionFilter chosenExtensionFilter)
+	private boolean isXmlExtensionSelected(ExtensionFilter chosenExtensionFilter, File file)
 	{
 		BulletinXmlFileFilter xmlFileFilter = new BulletinXmlFileFilter(getLocalization());
+		if (xmlFileFilter.accept(file))
+			return true;
+		
 		return isExtensionSelected(chosenExtensionFilter, xmlFileFilter);
 	}
 
@@ -425,7 +428,7 @@ public class ManageTemplatesController extends FxInSwingController
 			if (isMctFileFilterSelected(chosenExtensionFilter, templateFile))
 				importFormTemplateFromMctFile(templateFile);
 
-			if (isXmlExtensionSelected(chosenExtensionFilter))
+			if (isXmlExtensionSelected(chosenExtensionFilter, templateFile))
 				importXmlFormTemplate(templateFile);
 		}
 		catch(Exception e)
