@@ -44,7 +44,7 @@ public class FxFormCreator
 	{
 		localization = localizationToUse;
 		
-		fieldCreator = new FxFieldCreator(getLocalization());
+		fieldCreator = new FxEditFieldCreator(getLocalization());
 	}
 	
 	public Node createFormFromBulletin(FxBulletin bulletinToShow, Node attachments)
