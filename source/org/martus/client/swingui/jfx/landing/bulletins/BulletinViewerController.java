@@ -73,6 +73,7 @@ public class BulletinViewerController extends FxController
 		{
 			BulletinAttachmentsController attachmentsController = new BulletinAttachmentsController(getMainWindow(), bulletinToShow);
 			loadControllerAndEmbedInPane(attachmentsController, attachmentsPane);
+			attachmentsController.setViewingAttachmentsOnly();
 		} 
 		catch (Exception e)
 		{

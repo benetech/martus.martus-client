@@ -8,7 +8,7 @@
    <top>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#onAddAttachment" text="%Button.addattachment" />
+            <Button fx:id="addAttachmentButton" mnemonicParsing="false" onAction="#onAddAttachment" text="%Button.addattachment" />
          </children>
       </HBox>
    </top>
