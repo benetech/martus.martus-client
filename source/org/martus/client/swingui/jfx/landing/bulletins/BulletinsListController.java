@@ -195,7 +195,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		BulletinTableRowData selectedItem = itemsTable.getSelectionModel().getSelectedItem();
 		if(selectedItem == null)
 		{
-			MartusLogger.log("Attempted to edit with nothing selected");
+			MartusLogger.log("Attempted to access bulletin with nothing selected");
 			return;
 		}
 		
@@ -204,7 +204,9 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		try
 		{
 			notifyIfBulletinIsNotOursAndHasExternallyViewedAttachments(bulletinSelected);
-			getStage().doAction(new ActionMenuModifyFxBulletin(getMainWindow(), bulletinSelected));
+			ActionMenuModifyFxBulletin actionDoer = new ActionMenuModifyFxBulletin(getMainWindow());
+			actionDoer.setBulletinToBeModified(bulletinSelected);
+			getStage().doAction(actionDoer);
 		} 
 		catch (Exception e)
 		{

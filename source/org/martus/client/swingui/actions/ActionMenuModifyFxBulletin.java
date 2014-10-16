@@ -34,9 +34,13 @@ import org.martus.common.bulletin.Bulletin;
 
 public class ActionMenuModifyFxBulletin extends UiMenuAction implements ActionDoer
 {
-	public ActionMenuModifyFxBulletin(UiMainWindow mainWindowToUse, Bulletin bulletinToModify)
+	public ActionMenuModifyFxBulletin(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse, "modifyBulletin");
+	}
+	
+	public void setBulletinToBeModified(Bulletin bulletinToModify)
+	{
 		bulletin = bulletinToModify;
 	}
 
