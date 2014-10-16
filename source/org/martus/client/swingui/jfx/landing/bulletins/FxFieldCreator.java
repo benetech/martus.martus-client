@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.bulletins;
 
 import javafx.beans.property.Property;
+import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.scene.Node;
 
 import org.martus.client.core.FxBulletin;
@@ -40,8 +41,9 @@ abstract public class FxFieldCreator
 		localization = localizationToUse;
 	}
 	
-	public Node createFieldNode(FxBulletin bulletin, FxBulletinField field) throws Exception
+	public Node createFieldNode(FxBulletin bulletin, FxBulletinField field, ReadOnlyDoubleProperty widthProperty) throws Exception
 	{
+		this.fieldWidthProperty = widthProperty;
 		FieldSpec spec = field.getFieldSpec();
 		Property<String> property = field.valueProperty();
 		
@@ -82,4 +84,5 @@ abstract public class FxFieldCreator
 	protected static final int MULTILINE_FIELD_HEIGHT_IN_ROWS = 5;
 	
 	protected MartusLocalization localization;
+	protected ReadOnlyDoubleProperty fieldWidthProperty;
 }
