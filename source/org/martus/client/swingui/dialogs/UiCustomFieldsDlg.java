@@ -469,6 +469,27 @@ public class UiCustomFieldsDlg extends JDialog
 		Vector errors = template.getErrors();
 		if(errors == null)
 			return;
+		
+		StringBuilder errorMessage = createErrorMessage(mainWindow, fontHelper, errors);
+
+		String errorDescription = mainWindow.getLocalization().getFieldLabel("ErrorCustomFields");
+		UiTextArea specificErrors = createXMLTextArea(errorMessage.toString());
+		formatTextArea(specificErrors);
+		UiScrollPane specificErrorsPane = createScrollPane(specificErrors);
+
+		new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", EnglishCommonStrings.OK, MtfAwareLocalization.UNUSED_TAG, MtfAwareLocalization.UNUSED_TAG, errorDescription, specificErrorsPane);
+	}
+	
+	public static StringBuilder createErrorMessage(UiMainWindow mainWindow, Vector errors)
+	{
+		UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(mainWindow.getDoZawgyiConversion());
+
+		return createErrorMessage(mainWindow, fontHelper, errors);
+	}
+	
+
+	private static StringBuilder createErrorMessage(UiMainWindow mainWindow, UiFontEncodingHelper fontHelper, Vector errors)
+	{
 		String header1 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader1");
 		String header2 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader2");
 		String header3 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader3");
@@ -489,13 +510,7 @@ public class UiCustomFieldsDlg extends JDialog
 			errorMessage.append(thisErrorMessage);
 			errorMessage.append('\n');
 		}
-
-		String errorDescription = mainWindow.getLocalization().getFieldLabel("ErrorCustomFields");
-		UiTextArea specificErrors = createXMLTextArea(errorMessage.toString());
-		formatTextArea(specificErrors);
-		UiScrollPane specificErrorsPane = createScrollPane(specificErrors);
-
-		new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", EnglishCommonStrings.OK, MtfAwareLocalization.UNUSED_TAG, MtfAwareLocalization.UNUSED_TAG, errorDescription, specificErrorsPane);
+		return errorMessage;
 	}
 
 	protected void formatTextArea(UiTextArea textArea)
@@ -506,7 +521,7 @@ public class UiCustomFieldsDlg extends JDialog
 		textArea.setEditable(false);
 	}
 
-	private String GetDataAndSpacing(String data, int columnSpacing)
+	private static String GetDataAndSpacing(String data, int columnSpacing)
 	{
 		if(data == null)
 			return " ";
@@ -605,8 +620,8 @@ public class UiCustomFieldsDlg extends JDialog
 	MartusCrypto security;
 
 
-	private int HEADER_SPACING_1 = 6;
-	private int HEADER_SPACING_2 = 11;
-	private int HEADER_SPACING_3 = 14;
+	private static final int HEADER_SPACING_1 = 6;
+	private static final int HEADER_SPACING_2 = 11;
+	private static final int HEADER_SPACING_3 = 14;
 	
 }
