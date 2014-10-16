@@ -216,11 +216,16 @@ public class ManageTemplatesController extends FxInSwingController
 		ExtensionFilter chosenExtensionFilter = fileChooser.getSelectedExtensionFilter();
 		MartusCrypto securityTemp = mainWindowToUse.getApp().getSecurity();
 		
-		if (isExtensionSelected(chosenExtensionFilter, new MCTFileFilter(getLocalization())))
+		if (isMctFileFilterSelected(chosenExtensionFilter))
 			template.exportTemplate(securityTemp, templateFile);
 		
 		if (isXmlExtensionSelected(chosenExtensionFilter))
 			template.exportTopSection(templateFile);
+	}
+
+	private boolean isMctFileFilterSelected(ExtensionFilter chosenExtensionFilter)
+	{
+		return isExtensionSelected(chosenExtensionFilter, new MCTFileFilter(getLocalization()));
 	}
 
 	private boolean isXmlExtensionSelected(ExtensionFilter chosenExtensionFilter)
@@ -414,12 +419,10 @@ public class ManageTemplatesController extends FxInSwingController
 		{
 			ExtensionFilter chosenExtensionFilter = fileChooser.getSelectedExtensionFilter();
 			if (isXmlExtensionSelected(chosenExtensionFilter))
-			{
 				importXmlFormTemplate(templateFile);
-				return;
-			}
 		
-			importFormTemplateFromMctFile(templateFile);
+			if (isMctFileFilterSelected(chosenExtensionFilter))
+				importFormTemplateFromMctFile(templateFile);
 		}
 		catch(Exception e)
 		{
