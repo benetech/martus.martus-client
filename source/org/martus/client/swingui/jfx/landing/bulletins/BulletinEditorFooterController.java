@@ -126,6 +126,7 @@ public class BulletinEditorFooterController extends FxController
 	@FXML
 	private void onShowVersion(ActionEvent event) 
 	{
+		//TODO make this work with the existing new Bulletin Viewer instead of a html rendering.
 		try
 		{
 			HistoryItem selectedVersion = historyItems.getSelectionModel().getSelectedItem();
