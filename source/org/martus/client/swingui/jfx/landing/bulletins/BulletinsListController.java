@@ -172,8 +172,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	
 	protected void viewSelectedBulletin()
 	{
-		TableViewSelectionModel<BulletinTableRowData> selectionModel = itemsTable.getSelectionModel();
-		BulletinTableRowData selectedItem = selectionModel.getSelectedItem();
+		BulletinTableRowData selectedItem = itemsTable.getSelectionModel().getSelectedItem();
 		if(selectedItem == null)
 		{
 			MartusLogger.log("Attempted to view with nothing selected");
@@ -207,13 +206,13 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	protected void editSelectedBulletin()
 	{
-		TableViewSelectionModel<BulletinTableRowData> selectionModel = itemsTable.getSelectionModel();
-		BulletinTableRowData selectedItem = selectionModel.getSelectedItem();
+		BulletinTableRowData selectedItem = itemsTable.getSelectionModel().getSelectedItem();
 		if(selectedItem == null)
 		{
 			MartusLogger.log("Attempted to edit with nothing selected");
 			return;
 		}
+		
 		UniversalId bulletinUid = selectedItem.getUniversalId();
 		Bulletin bulletinSelected = getApp().getStore().getBulletinRevision(bulletinUid);
 		try
