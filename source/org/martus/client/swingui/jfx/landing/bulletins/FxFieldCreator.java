@@ -87,7 +87,7 @@ public class FxFieldCreator
 		return createFieldNotAvailable();
 	}
 
-	private Node createDateField(FxBulletinField field)
+	protected Node createDateField(FxBulletinField field)
 	{
 		MartusDatePicker picker = new MartusDatePicker(localization);
 
@@ -101,7 +101,7 @@ public class FxFieldCreator
 		return picker;
 	}
 	
-	private Node createDateRangeField(FxBulletinField field)
+	protected Node createDateRangeField(FxBulletinField field)
 	{
 		DateRangePicker picker = new DateRangePicker(localization);
 
@@ -113,7 +113,7 @@ public class FxFieldCreator
 		return picker;
 	}
 	
-	private Node createDropdownField(FxBulletin bulletin, FxBulletinField field) throws Exception
+	protected Node createDropdownField(FxBulletin bulletin, FxBulletinField field) throws Exception
 	{
 		Vector<ObservableChoiceItemList> listOfChoiceItemLists = field.getChoiceItemLists();
 		if(listOfChoiceItemLists.size() == 0)
@@ -129,7 +129,7 @@ public class FxFieldCreator
 		return choiceBoxes;
 	}
 
-	private Node createBooleanField(Property<String> property)
+	protected Node createBooleanField(Property<String> property)
 	{
 		CheckBox checkBox = new CheckBox();
 		BooleanStringConverter converter = new BooleanStringConverter();
@@ -142,7 +142,7 @@ public class FxFieldCreator
 		return checkBox;
 	}
 
-	private Node createMessageField(FieldSpec spec)
+	protected Node createMessageField(FieldSpec spec)
 	{
 		String messageText = ((MessageFieldSpec)(spec)).getMessage();
 		Text text = new Text(messageText);
@@ -151,7 +151,7 @@ public class FxFieldCreator
 		return flow;
 	}
 
-	public Node createStringField(Property<String> property)
+	protected Node createStringField(Property<String> property)
 	{
 		ScrollFreeTextArea textField = new ScrollFreeTextArea();
 		textField.textProperty().bindBidirectional(property);
@@ -160,7 +160,7 @@ public class FxFieldCreator
 		return textField;
 	}
 	
-	private Node createMultilineField(Property<String> property)
+	protected Node createMultilineField(Property<String> property)
 	{
 		TextArea textArea = new TextArea();
 		textArea.setPrefColumnCount(MINIMUM_REASONABLE_COLUMN_COUNT);
@@ -172,7 +172,7 @@ public class FxFieldCreator
 		return textArea;
 	}
 	
-	private Node createFieldNotAvailable()
+	protected Node createFieldNotAvailable()
 	{
 		return new Label("(n/a)");
 	}
