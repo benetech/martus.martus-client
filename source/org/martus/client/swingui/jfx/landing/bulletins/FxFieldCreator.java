@@ -78,8 +78,8 @@ abstract public class FxFieldCreator
 	abstract protected Node createDateRangeField(FxBulletinField field);
 	abstract protected Node createFieldNotAvailable();
 
-	private static final int MINIMUM_REASONABLE_COLUMN_COUNT = 10;
-	private static final int MULTILINE_FIELD_HEIGHT_IN_ROWS = 5;
+	protected static final int MINIMUM_REASONABLE_COLUMN_COUNT = 10;
+	protected static final int MULTILINE_FIELD_HEIGHT_IN_ROWS = 5;
 	
-	private MartusLocalization localization;
+	protected MartusLocalization localization;
 }
