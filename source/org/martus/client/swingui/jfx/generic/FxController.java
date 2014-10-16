@@ -332,7 +332,7 @@ abstract public class FxController implements Initializable
 		return null;
 	}
 
-	protected void doAction(ActionDoer doer)
+	public void doAction(ActionDoer doer)
 	{
 		getStage().doAction(doer);
 	}

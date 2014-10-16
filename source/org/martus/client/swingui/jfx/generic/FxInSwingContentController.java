@@ -62,7 +62,7 @@ abstract public class FxInSwingContentController extends FxInSwingController
 			MartusLogger.logException(e);
 	}
 	
-	protected void doAction(ActionDoer doer)
+	public void doAction(ActionDoer doer)
 	{
 		getStage().doAction(doer);
 	}
