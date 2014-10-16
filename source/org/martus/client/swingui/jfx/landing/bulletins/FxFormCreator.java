@@ -38,13 +38,11 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
 
-public class FxFormCreator
+abstract public class FxFormCreator
 {
 	public FxFormCreator(MartusLocalization localizationToUse)
 	{
 		localization = localizationToUse;
-		
-		fieldCreator = new FxEditFieldCreator(getLocalization());
 	}
 	
 	public Node createFormFromBulletin(FxBulletin bulletinToShow, Node attachments)
@@ -117,13 +115,13 @@ public class FxFormCreator
 		return tagsToOmit.contains(field.getTag());
 	}
 
-	private MartusLocalization getLocalization()
+	protected MartusLocalization getLocalization()
 	{
 		return localization;
 	}
 
 	private MartusLocalization localization;
-	private FxFieldCreator fieldCreator;
+	protected FxFieldCreator fieldCreator;
 	private FxBulletin bulletin;
 	private BulletinEditorSection currentSection;
 	private Vector<BulletinEditorSection> sections;
