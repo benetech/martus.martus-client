@@ -207,13 +207,10 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	}
 
 	//TODO this will go away soon once viewer is finished and History will access that instead
-	static public FxController getViewControllerForBulletin(UniversalId bulletinUid, UiMainWindow mainWindow)
+	static public FxController getViewControllerForBulletin(Bulletin bulletin, UiMainWindow mainWindow)
 		throws Exception
 	{
-		ClientBulletinStore store = mainWindow.getApp().getStore();
-		Bulletin bulletin = store.getBulletinRevision(bulletinUid);
-		
-		ReadableDatabase database = store.getDatabase();
+		ReadableDatabase database = mainWindow.getApp().getStore().getDatabase();
 		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(mainWindow.getLocalization());
 		String html = generator.getHtmlString(bulletin, database, true, true);
 		FxController htmlViewer = new SimpleHtmlContentController(mainWindow, html);

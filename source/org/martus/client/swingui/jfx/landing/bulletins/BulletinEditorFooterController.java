@@ -34,6 +34,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiBulletinDetailsDialog;
@@ -130,7 +131,12 @@ public class BulletinEditorFooterController extends FxController
 		try
 		{
 			HistoryItem selectedVersion = historyItems.getSelectionModel().getSelectedItem();
-			FxController htmlViewer = BulletinsListController.getViewControllerForBulletin(selectedVersion.getUid(), getMainWindow());
+			ClientBulletinStore store = getApp().getStore();
+			Bulletin bulletinHistoryItem = store.getBulletinRevision(selectedVersion.getUid());
+			if(bulletinHistoryItem == null)
+				return; 
+			
+			FxController htmlViewer = BulletinsListController.getViewControllerForBulletin(bulletinHistoryItem, getMainWindow());
 			showDialogWithClose("ViewBulletin", htmlViewer);
 		} 
 		catch (Exception e)
