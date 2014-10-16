@@ -34,5 +34,4 @@ public class FxFormViewCreator extends FxFormCreator
 		super(localizationToUse);
 		fieldCreator = new FxViewFieldCreator(getLocalization());
 	}
-
 }
