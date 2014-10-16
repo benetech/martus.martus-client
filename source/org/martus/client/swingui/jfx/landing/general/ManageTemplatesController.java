@@ -241,12 +241,12 @@ public class ManageTemplatesController extends FxInSwingController
 		return isExtensionSelected(chosenExtensionFilter, xmlFileFilter);
 	}
 
-	private boolean isExtensionSelected(ExtensionFilter chosenFileFilter, FormatFilter mctFileFilter) 
+	private boolean isExtensionSelected(ExtensionFilter chosenFileFilter, FormatFilter fileFilter) 
 	{
 		List<String> extensions = chosenFileFilter.getExtensions();
 		for (String extension : extensions)
 		{
-			if (extension.contains(mctFileFilter.getExtension()))
+			if (extension.contains(fileFilter.getExtension()))
 				return true;
 		}
 		
