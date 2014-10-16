@@ -409,7 +409,7 @@ public class ManageTemplatesController extends FxInSwingController
 		if(templateFile == null)
 			return;
 		
-		FormTemplate importedTemplate = new FormTemplate();
+		
 		try
 		{
 			ExtensionFilter chosenExtensionFilter = fileChooser.getSelectedExtensionFilter();
@@ -418,7 +418,8 @@ public class ManageTemplatesController extends FxInSwingController
 				importXmlFormTemplate(templateFile);
 				return;
 			}
-			
+		
+			FormTemplate importedTemplate = new FormTemplate();
 			if(!importedTemplate.importTemplate(templateFile, getSecurity()))
 			{
 				showNotifyDialog("ErrorImportingCustomizationTemplate");
