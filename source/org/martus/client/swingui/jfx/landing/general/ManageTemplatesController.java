@@ -234,7 +234,8 @@ public class ManageTemplatesController extends FxInSwingController
 
 	private boolean isXmlExtensionSelected(ExtensionFilter chosenExtensionFilter)
 	{
-		return isExtensionSelected(chosenExtensionFilter, new BulletinXmlFileFilter(getLocalization()));
+		BulletinXmlFileFilter xmlFileFilter = new BulletinXmlFileFilter(getLocalization());
+		return isExtensionSelected(chosenExtensionFilter, xmlFileFilter);
 	}
 
 	private boolean isExtensionSelected(ExtensionFilter chosenFileFilter, FormatFilter mctFileFilter) 
