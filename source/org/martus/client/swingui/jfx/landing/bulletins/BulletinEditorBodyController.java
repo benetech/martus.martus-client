@@ -49,7 +49,7 @@ public class BulletinEditorBodyController extends FxController
 
 	public void showBulletin(FxBulletin bulletinToShow) throws RuntimeException
 	{
-		FxFormCreator creator = new FxFormCreator(getLocalization());
+		FxFormCreator creator = new FxFormEditCreator(getLocalization());
 		StackPane attachmentsPane = createAttachmentsPane(bulletinToShow);
 		Node root = creator.createFormFromBulletin(bulletinToShow, attachmentsPane);
 		scrollPane.setContent(root);

@@ -48,7 +48,7 @@ public class BulletinViewerController extends FxController
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		FxFormCreator creator = new FxFormCreator(getLocalization());
+		FxFormCreator creator = new FxFormViewCreator(getLocalization());
 		StackPane attachmentsPane = createAttachmentsPane(bulletin);
 		Node root = creator.createFormFromBulletin(bulletin, attachmentsPane);
 		scrollPane.setContent(root);
