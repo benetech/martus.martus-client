@@ -120,9 +120,7 @@ public class FxViewFieldCreator extends FxFieldCreator
 	{
 		String messageText = ((MessageFieldSpec)(spec)).getMessage();
 		Text text = new Text(messageText);
-		TextFlow flow = new TextFlow(text);
-		flow.getStyleClass().add("messageText");
-		return flow;
+		return responsiveTextFlowNode(text);
 	}
 
 	@Override
