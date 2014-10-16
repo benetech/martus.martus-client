@@ -136,14 +136,10 @@ public class FxViewFieldCreator extends FxFieldCreator
 	@Override
 	protected Node createMultilineField(Property<String> property)
 	{
-		//TODO fix that it looks like its editable with CSS styling
-		//TODO fix the Vertical height restriction hopefully by the using a responsive container instead of DialogWithCloseShellController
-		ScrollFreeTextArea textArea = new ScrollFreeTextArea();
-		
-		textArea.textProperty().bind(property);
-		HBox.setHgrow(textArea, Priority.SOMETIMES);
-		VBox.setVgrow(textArea, Priority.SOMETIMES);
-		return textArea;
+		Text text = new Text(property.getValue());
+		TextFlow flow = new TextFlow(text);
+		flow.prefWidthProperty().bind(fieldWidthProperty);
+		return flow;
 	}
 
 	@Override

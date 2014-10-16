@@ -91,7 +91,7 @@ public class BulletinEditorRow
 	public void addNormalFieldToRow(FxBulletinField field) throws Exception
 	{
 		Node label = createLabel(field);
-		Node fieldNode = fieldCreator.createFieldNode(bulletin, field);
+		Node fieldNode = fieldCreator.createFieldNode(bulletin, field, fieldsNode.widthProperty());
 		
 		ObservableBooleanValue isValidProperty = field.fieldIsValidProperty();
 		addValidationBorder(isValidProperty, label);
