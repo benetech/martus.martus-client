@@ -192,6 +192,12 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	protected void editSelectedBulletin()
 	{
+		ActionMenuModifyFxBulletin actionDoer = new ActionMenuModifyFxBulletin(getMainWindow());
+		performActionOnSelectedBulletin(actionDoer);
+	}
+
+	private void performActionOnSelectedBulletin(ActionMenuModifyFxBulletin actionDoer)
+	{
 		BulletinTableRowData selectedItem = itemsTable.getSelectionModel().getSelectedItem();
 		if(selectedItem == null)
 		{
@@ -204,7 +210,6 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		try
 		{
 			notifyIfBulletinIsNotOursAndHasExternallyViewedAttachments(bulletinSelected);
-			ActionMenuModifyFxBulletin actionDoer = new ActionMenuModifyFxBulletin(getMainWindow());
 			actionDoer.setBulletinToBeModified(bulletinSelected);
 			getStage().doAction(actionDoer);
 		} 
