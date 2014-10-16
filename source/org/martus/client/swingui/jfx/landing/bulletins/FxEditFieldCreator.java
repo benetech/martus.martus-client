@@ -111,9 +111,7 @@ public class FxEditFieldCreator extends FxFieldCreator
 		checkBox.selectedProperty().setValue(converter.fromString(property.getValue()));
 	
 		BooleanProperty selectedStateProperty = checkBox.selectedProperty();
-		selectedStateProperty.addListener(
-			(observable, oldValue, newValue) -> property.setValue(converter.toString(newValue))
-		);
+		selectedStateProperty.addListener((observable, oldValue, newValue) -> property.setValue(converter.toString(newValue)));
 		return checkBox;
 	}
 
