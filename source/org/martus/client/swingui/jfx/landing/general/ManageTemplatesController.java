@@ -419,19 +419,25 @@ public class ManageTemplatesController extends FxInSwingController
 				return;
 			}
 		
-			FormTemplate importedTemplate = new FormTemplate();
-			if(!importedTemplate.importTemplate(templateFile, getSecurity()))
-			{
-				showNotifyDialog("ErrorImportingCustomizationTemplate");
-				return;
-			}
-			templateToAddProperty.setValue(importedTemplate);
-			logTemplateToBeAdded();
+			importFormTemplateFromMctFile(templateFile);
 		}
 		catch(Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 		}
+	}
+
+	private void importFormTemplateFromMctFile(File templateFile) throws Exception
+	{
+		FormTemplate importedTemplate = new FormTemplate();
+		if(!importedTemplate.importTemplate(templateFile, getSecurity()))
+		{
+			showNotifyDialog("ErrorImportingCustomizationTemplate");
+			return;
+		}
+		
+		templateToAddProperty.setValue(importedTemplate);
+		logTemplateToBeAdded();
 	}
 
 	private void importXmlFormTemplate(File templateFile) throws Exception
