@@ -27,14 +27,9 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.util.Vector;
 
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.Property;
 import javafx.scene.Node;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -44,11 +39,10 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.jfx.generic.controls.DateRangePicker;
 import org.martus.client.swingui.jfx.generic.controls.MartusDatePicker;
 import org.martus.client.swingui.jfx.generic.controls.NestedChoiceBox;
-import org.martus.client.swingui.jfx.generic.controls.ScrollFreeTextArea;
-import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.MessageFieldSpec;
 
 public class FxViewFieldCreator extends FxFieldCreator
@@ -106,13 +100,8 @@ public class FxViewFieldCreator extends FxFieldCreator
 	@Override
 	protected Node createBooleanField(Property<String> property)
 	{
-		CheckBox checkBox = new CheckBox();
-		BooleanStringConverter converter = new BooleanStringConverter();
-		checkBox.selectedProperty().setValue(converter.fromString(property.getValue()));
-	
-		BooleanProperty selectedStateProperty = checkBox.selectedProperty();
-		selectedStateProperty.addListener((observable, oldValue, newValue) -> property.setValue(converter.toString(newValue)));
-		return checkBox;
+		Text text = new Text(FieldTypeBoolean.getViewableData(property.getValue(), localization));
+		return responsiveTextFlowNode(text);
 	}
 
 	@Override
