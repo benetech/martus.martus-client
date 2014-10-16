@@ -418,11 +418,11 @@ public class ManageTemplatesController extends FxInSwingController
 		try
 		{
 			ExtensionFilter chosenExtensionFilter = fileChooser.getSelectedExtensionFilter();
-			if (isXmlExtensionSelected(chosenExtensionFilter))
-				importXmlFormTemplate(templateFile);
-		
 			if (isMctFileFilterSelected(chosenExtensionFilter))
 				importFormTemplateFromMctFile(templateFile);
+
+			if (isXmlExtensionSelected(chosenExtensionFilter))
+				importXmlFormTemplate(templateFile);
 		}
 		catch(Exception e)
 		{
