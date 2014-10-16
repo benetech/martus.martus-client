@@ -206,6 +206,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		}
 	}
 
+	//TODO this will go away soon once viewer is finished and History will access that instead
 	static public FxController getViewControllerForBulletin(UniversalId bulletinUid, UiMainWindow mainWindow)
 		throws Exception
 	{
