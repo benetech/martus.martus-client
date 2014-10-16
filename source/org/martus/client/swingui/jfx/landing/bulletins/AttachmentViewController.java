@@ -82,10 +82,10 @@ public class AttachmentViewController extends FxController
 		mimeTypeMap.addMimeTypes("image png tif jpg jpeg bmp");
 		String mimetype = mimeTypeMap.getContentType(file);
         String type = mimetype.split("/")[0].toLowerCase();
-        if(type.equals("html"))
-        		return FileType.HTML;
-        else if(type.equals("image"))
+        if(type.equals("image"))
 			return FileType.Image;
+//        else if(type.equals("html")) //TODO: Add back once we are confident we can view HTML securly inside Martus
+//   			return FileType.HTML;        
 		return FileType.Unsupported;
 	}
 
