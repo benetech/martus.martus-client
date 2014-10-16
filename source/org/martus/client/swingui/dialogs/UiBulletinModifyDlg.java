@@ -93,27 +93,21 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			bulletinEditorStage = FxRunner.createAndActivateEmbeddedStage(observerToUse, this, bulletinEditorShellController, cssName);
 			view = bulletinEditorShellController;
 			Platform.runLater(() -> safelyPopulateView());
+			getContentPane().add(bulletinEditorStage, BorderLayout.CENTER);
 		}
 		else
 		{
 			view = new UiBulletinEditor(observer);
 			view.copyDataFromBulletin(bulletin);
 			view.setLanguageChangeListener(this);
-		}
 
-		send = new UiButton(localization.getButtonLabel("send"));
-		send.addActionListener(this);
-		draft = new UiButton(localization.getButtonLabel("savedraft"));
-		draft.addActionListener(this);
-		cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
-		cancel.addActionListener(this);
+			send = new UiButton(localization.getButtonLabel("send"));
+			send.addActionListener(this);
+			draft = new UiButton(localization.getButtonLabel("savedraft"));
+			draft.addActionListener(this);
+			cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
+			cancel.addActionListener(this);
 
-		if(UiSession.isJavaFx())
-		{
-			getContentPane().add(bulletinEditorStage, BorderLayout.CENTER);
-		}
-		else
-		{
 			addScrollerView();
 
 			Box box = Box.createHorizontalBox();
@@ -121,6 +115,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			Utilities.addComponentsRespectingOrientation(box, buttons);
 			getContentPane().add(box, BorderLayout.SOUTH);
 		}
+
 
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(this);
