@@ -226,6 +226,11 @@ public class ManageTemplatesController extends FxInSwingController
 	private boolean isMctFileFilterSelected(ExtensionFilter chosenExtensionFilter, File file)
 	{
 		FormatFilter mctFileFilter = new MCTFileFilter(getLocalization());
+		return isExtensionSelected(chosenExtensionFilter, file, mctFileFilter);
+	}
+
+	private boolean isExtensionSelected(ExtensionFilter chosenExtensionFilter, File file, FormatFilter mctFileFilter)
+	{
 		if (mctFileFilter.accept(file))
 			return true;
 		
@@ -235,10 +240,7 @@ public class ManageTemplatesController extends FxInSwingController
 	private boolean isXmlExtensionSelected(ExtensionFilter chosenExtensionFilter, File file)
 	{
 		FormatFilter xmlFileFilter = new BulletinXmlFileFilter(getLocalization());
-		if (xmlFileFilter.accept(file))
-			return true;
-		
-		return isExtensionSelected(chosenExtensionFilter, xmlFileFilter);
+		return isExtensionSelected(chosenExtensionFilter, file, xmlFileFilter);
 	}
 
 	private boolean isExtensionSelected(ExtensionFilter chosenFileFilter, FormatFilter fileFilter) 
