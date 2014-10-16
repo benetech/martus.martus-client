@@ -53,7 +53,6 @@ import org.martus.common.fieldspec.MessageFieldSpec;
 
 public class FxViewFieldCreator extends FxFieldCreator
 {
-	//TODO: FIX THIS FOR VIEW ONLY
 	public FxViewFieldCreator(MartusLocalization localizationToUse)
 	{
 		super(localizationToUse);
@@ -129,10 +128,7 @@ public class FxViewFieldCreator extends FxFieldCreator
 	@Override
 	protected Node createStringField(Property<String> property)
 	{
-		ScrollFreeTextArea textField = new ScrollFreeTextArea();
-		textField.textProperty().bindBidirectional(property);
-		HBox.setHgrow(textField, Priority.SOMETIMES);
-		
+		Label textField = new Label(property.getValue());
 		return textField;
 	}
 
