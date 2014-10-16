@@ -55,6 +55,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionMenuFxBulletin;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
 import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.client.swingui.jfx.generic.FxController;
@@ -196,7 +197,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		performActionOnSelectedBulletin(actionDoer);
 	}
 
-	private void performActionOnSelectedBulletin(ActionMenuModifyFxBulletin actionDoer)
+	private void performActionOnSelectedBulletin(ActionMenuFxBulletin actionDoer)
 	{
 		BulletinTableRowData selectedItem = itemsTable.getSelectionModel().getSelectedItem();
 		if(selectedItem == null)
@@ -210,7 +211,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		try
 		{
 			notifyIfBulletinIsNotOursAndHasExternallyViewedAttachments(bulletinSelected);
-			actionDoer.setBulletinToBeModified(bulletinSelected);
+			actionDoer.setBulletin(bulletinSelected);
 			getStage().doAction(actionDoer);
 		} 
 		catch (Exception e)

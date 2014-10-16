@@ -1,8 +1,8 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2005-2007, Beneficent
-Technology, Inc. (The Benetech Initiative).
+monitoring software. Copyright (C) 2014, Beneficent
+Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -23,22 +23,36 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-
 package org.martus.client.swingui.actions;
 
-import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.bulletintable.ModifyBulletinActionDoer;
+import java.awt.event.ActionEvent;
 
-public class ActionMenuModifyFxBulletin extends ActionMenuFxBulletin
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.bulletin.Bulletin;
+
+abstract public class ActionMenuFxBulletin extends UiMenuAction implements ActionDoer
 {
-	public ActionMenuModifyFxBulletin(UiMainWindow mainWindowToUse)
+	public ActionMenuFxBulletin(UiMainWindow mainWindowToUse, String tag)
 	{
-		super(mainWindowToUse, "modifyBulletin");
+		super(mainWindowToUse, tag);
 	}
-	
-	public void doAction()
+
+	public void setBulletin(Bulletin bulletinToModify)
 	{
-		ModifyBulletinActionDoer bulletinHelper = new ModifyBulletinActionDoer(getMainWindow());
-		bulletinHelper.doModifyBulletin(getBulletin());
+		bulletin = bulletinToModify;
 	}
+
+	protected Bulletin getBulletin()
+	{
+		return bulletin;
+	}
+
+	public void actionPerformed(ActionEvent ae)
+	{
+		doAction();
+	}
+
+	abstract public void doAction();
+
+	private Bulletin bulletin;
 }
