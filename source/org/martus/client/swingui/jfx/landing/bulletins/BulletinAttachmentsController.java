@@ -33,6 +33,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -66,6 +67,12 @@ public class BulletinAttachmentsController extends FxController
 		super.initialize(location, bundle);
 		initalizeColumns();
 		initalizeItemsTable();
+	}
+	
+	public void setViewingAttachmentsOnly()
+	{
+		addAttachmentButton.setVisible(false);
+		removeColumn.setVisible(false);
 	}
 	
 	private void initalizeItemsTable()
@@ -193,6 +200,9 @@ public class BulletinAttachmentsController extends FxController
 
 	@FXML
 	protected TableColumn<Object, Boolean> removeColumn;
+	
+	@FXML
+	private Button addAttachmentButton;
 
 	private FxBulletin bulletin;
 }
