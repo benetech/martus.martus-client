@@ -173,7 +173,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	
 	protected void viewSelectedBulletin()
 	{
-		ActionMenuViewFxBulletin actionDoer = new ActionMenuViewFxBulletin(getMainWindow());
+		ActionMenuViewFxBulletin actionDoer = new ActionMenuViewFxBulletin(getMainWindow(), this);
 		performActionOnSelectedBulletin(actionDoer);
 	}
 

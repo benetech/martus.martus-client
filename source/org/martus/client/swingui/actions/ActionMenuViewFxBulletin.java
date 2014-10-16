@@ -26,20 +26,36 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.actions;
 
+import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.bulletintable.ModifyBulletinActionDoer;
+import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
+import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.landing.bulletins.BulletinViewerController;
 
 public class ActionMenuViewFxBulletin extends ActionMenuFxBulletin
 {
-	public ActionMenuViewFxBulletin(UiMainWindow mainWindowToUse)
+	public ActionMenuViewFxBulletin(UiMainWindow mainWindowToUse, FxController controllerToUse)
 	{
 		super(mainWindowToUse, "viewBulletin");
+		controller = controllerToUse;
 	}
 	
 	public void doAction()
 	{
-		//TODO this will become a ViewBulletinActionDoer
-		ModifyBulletinActionDoer bulletinHelper = new ModifyBulletinActionDoer(getMainWindow());
-		bulletinHelper.doModifyBulletin(getBulletin());
+		try
+		{
+			BulletinViewerController bulletinViewCotroller = new BulletinViewerController(getMainWindow());
+			FxBulletin bulletinToView = new FxBulletin(getLocalization());
+			bulletinToView.copyDataFromBulletin(getBulletin(), getMainWindow().getStore().getDatabase());
+			DialogWithCloseShellController shellController = new DialogWithCloseShellController(getMainWindow(), bulletinViewCotroller);
+			bulletinViewCotroller.setBulletin(bulletinToView);		
+			controller.doAction(shellController);
+		} 
+		catch (Exception e)
+		{
+			controller.logAndNotifyUnexpectedError(e);
+		} 
 	}
+	
+	private FxController controller;
 }
