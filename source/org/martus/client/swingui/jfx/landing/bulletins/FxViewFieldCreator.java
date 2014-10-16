@@ -44,7 +44,6 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.jfx.generic.controls.DateRangePicker;
 import org.martus.client.swingui.jfx.generic.controls.MartusDatePicker;
 import org.martus.client.swingui.jfx.generic.controls.NestedChoiceBox;
-import org.martus.client.swingui.jfx.generic.controls.ScrollFreeTextArea;
 import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.bulletin.Bulletin;
@@ -129,6 +128,7 @@ public class FxViewFieldCreator extends FxFieldCreator
 	protected Node createStringField(Property<String> property)
 	{
 		Label textField = new Label(property.getValue());
+		HBox.setHgrow(textField, Priority.SOMETIMES);
 		return textField;
 	}
 
