@@ -30,6 +30,7 @@ import java.net.URL;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Vector;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectProperty;
@@ -58,6 +59,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.templates.GenericFormTemplates;
 import org.martus.client.search.SaneCollator;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.dialogs.UiCustomFieldsDlg;
 import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.jfx.common.AbstractFxImportFormTemplateController;
@@ -434,14 +436,22 @@ public class ManageTemplatesController extends FxInSwingController
 	private void importXmlFormTemplate(File templateFile) throws Exception
 	{
 		String xmlAsString = importXmlAsString(templateFile);
-		System.out.println(xmlAsString);
 		
 		XmlFormTemplateLoader loader = new XmlFormTemplateLoader();
 		SimpleXmlParser.parse(loader, xmlAsString);
 		FormTemplate importedTemplate = loader.getFormTemplate();
 		
-		//FIXME urgent: need to validate formTemplate before adding below
-		templateToAddProperty.setValue(importedTemplate);
+		if (importedTemplate.isvalidTemplateXml())
+		{
+			templateToAddProperty.setValue(importedTemplate);
+		}
+		else
+		{
+			Vector errors = importedTemplate.getErrors();
+			String errorsAsString = UiCustomFieldsDlg.createErrorMessage(getMainWindow(), errors).toString();
+			showNotifyDialog("ErrorImportingCustomizationTemplate", errorsAsString);
+		}
+		
 		logTemplateToBeAdded();
 	}
 	
