@@ -32,9 +32,9 @@ import javafx.beans.property.Property;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -44,6 +44,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.jfx.generic.controls.DateRangePicker;
 import org.martus.client.swingui.jfx.generic.controls.MartusDatePicker;
 import org.martus.client.swingui.jfx.generic.controls.NestedChoiceBox;
+import org.martus.client.swingui.jfx.generic.controls.ScrollFreeTextArea;
 import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.bulletin.Bulletin;
@@ -135,13 +136,13 @@ public class FxViewFieldCreator extends FxFieldCreator
 	@Override
 	protected Node createMultilineField(Property<String> property)
 	{
-		TextArea textArea = new TextArea();
-		textArea.setPrefColumnCount(MINIMUM_REASONABLE_COLUMN_COUNT);
-		textArea.setPrefRowCount(MULTILINE_FIELD_HEIGHT_IN_ROWS);
-		textArea.setWrapText(true);
-		textArea.textProperty().bindBidirectional(property);
-		HBox.setHgrow(textArea, Priority.SOMETIMES);
+		//TODO fix that it looks like its editable with CSS styling
+		//TODO fix the Vertical height restriction hopefully by the using a responsive container instead of DialogWithCloseShellController
+		ScrollFreeTextArea textArea = new ScrollFreeTextArea();
 		
+		textArea.textProperty().bind(property);
+		HBox.setHgrow(textArea, Priority.SOMETIMES);
+		VBox.setVgrow(textArea, Priority.SOMETIMES);
 		return textArea;
 	}
 
