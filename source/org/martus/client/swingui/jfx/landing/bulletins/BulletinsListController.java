@@ -45,7 +45,6 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
@@ -191,19 +190,6 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		}
 	}
 
-	static public FxController getViewControllerForBulletin(UniversalId bulletinUid, UiMainWindow mainWindow)
-		throws Exception
-	{
-		ClientBulletinStore store = mainWindow.getApp().getStore();
-		Bulletin bulletin = store.getBulletinRevision(bulletinUid);
-		
-		ReadableDatabase database = store.getDatabase();
-		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(mainWindow.getLocalization());
-		String html = generator.getHtmlString(bulletin, database, true, true);
-		FxController htmlViewer = new SimpleHtmlContentController(mainWindow, html);
-		return htmlViewer;
-	}
-
 	protected void editSelectedBulletin()
 	{
 		BulletinTableRowData selectedItem = itemsTable.getSelectionModel().getSelectedItem();
@@ -224,6 +210,19 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		{
 			logAndNotifyUnexpectedError(e);
 		}
+	}
+
+	static public FxController getViewControllerForBulletin(UniversalId bulletinUid, UiMainWindow mainWindow)
+		throws Exception
+	{
+		ClientBulletinStore store = mainWindow.getApp().getStore();
+		Bulletin bulletin = store.getBulletinRevision(bulletinUid);
+		
+		ReadableDatabase database = store.getDatabase();
+		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(mainWindow.getLocalization());
+		String html = generator.getHtmlString(bulletin, database, true, true);
+		FxController htmlViewer = new SimpleHtmlContentController(mainWindow, html);
+		return htmlViewer;
 	}
 
 	private void notifyIfBulletinIsNotOursAndHasExternallyViewedAttachments(Bulletin bulletinSelected) throws Exception
