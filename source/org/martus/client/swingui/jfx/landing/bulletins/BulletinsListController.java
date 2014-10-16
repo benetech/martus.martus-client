@@ -57,6 +57,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuFxBulletin;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
+import org.martus.client.swingui.actions.ActionMenuViewFxBulletin;
 import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.SimpleHtmlContentController;
@@ -172,23 +173,8 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	
 	protected void viewSelectedBulletin()
 	{
-		BulletinTableRowData selectedItem = itemsTable.getSelectionModel().getSelectedItem();
-		if(selectedItem == null)
-		{
-			MartusLogger.log("Attempted to view with nothing selected");
-			return;
-		}
-
-		try
-		{
-			UniversalId bulletinUid = selectedItem.getUniversalId();
-			FxController htmlViewer = getViewControllerForBulletin(bulletinUid, getMainWindow());
-			showDialogWithClose("ViewBulletin", htmlViewer);
-		} 
-		catch (Exception e)
-		{
-			logAndNotifyUnexpectedError(e);
-		}
+		ActionMenuViewFxBulletin actionDoer = new ActionMenuViewFxBulletin(getMainWindow());
+		performActionOnSelectedBulletin(actionDoer);
 	}
 
 	protected void editSelectedBulletin()
