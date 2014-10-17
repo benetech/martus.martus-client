@@ -35,7 +35,7 @@
 		<Label text="Author Nickname:" />
 		<Label fx:id="authorName" text="Name here if available otherwise blank" GridPane.columnIndex="2" />
 		<Label text="Author Public Code:" GridPane.rowIndex="1" />
-		<ImageView fx:id="contactVerificationImage" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+		<ImageView fx:id="contactVerificationImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 		<Label fx:id="publicCode" text="Code here" GridPane.columnIndex="2" GridPane.rowIndex="1" />
 		<Label text="Bulletin ID:" GridPane.rowIndex="2" />
 		<Label fx:id="bulletinLocalId" text="ID here" GridPane.columnIndex="2" GridPane.rowIndex="2" />
