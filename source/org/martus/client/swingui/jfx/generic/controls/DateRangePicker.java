@@ -94,9 +94,16 @@ public class DateRangePicker extends HBox
 	
 	public String convertStoredToHumanReadable()
 	{
-		String combinedDateRange = startPicker.getValue().toString();
-		combinedDateRange += DATE_RANGE_SEPARATOR;
-		combinedDateRange += endPicker.getValue().toString();
+		String combinedDateRange = "";
+		LocalDate startValue = endPicker.getValue();
+		if(startValue != null)
+			combinedDateRange = startValue.toString();
+		LocalDate endValue = endPicker.getValue();
+		if(endValue != null)
+		{
+			combinedDateRange += DATE_RANGE_SEPARATOR;
+			combinedDateRange += endValue.toString();
+		}
 		return combinedDateRange;
 	}
 
