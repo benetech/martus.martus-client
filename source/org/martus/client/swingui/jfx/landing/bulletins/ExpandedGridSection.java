@@ -64,24 +64,38 @@ public class ExpandedGridSection extends TitledPane
 		GridFieldData gridData = gridField.gridDataProperty();
 		gridData.forEach((rowData) -> addItemControls(rowData));
 		
-		HBox bottom = new HBox();
-		Button appendItemButton = new Button("Add Item");
-		appendItemButton.setOnAction((event) -> appendItem()); 
-		bottom.getChildren().add(appendItemButton);
 
 		mainBorderPane = new BorderPane();
 		mainBorderPane.setCenter(itemBox);
-		mainBorderPane.setBottom(bottom);
+		includeAddItemButtonIfEditing();
 		setContent(mainBorderPane);
 	}
 
 	private void addItemControls(GridRowFields rowData)
 	{
 		itemBox.getChildren().add(createItem(rowData));
+		includeDeleteButtonIfEditing(rowData);
+		itemBox.getChildren().add(new Separator(Orientation.HORIZONTAL));
+	}
+
+	private void includeAddItemButtonIfEditing()
+	{
+		if(!fieldCreator.isFieldEditable())
+			return;
+		HBox bottom = new HBox();
+		Button appendItemButton = new Button("Add Item");
+		appendItemButton.setOnAction((event) -> appendItem()); 
+		bottom.getChildren().add(appendItemButton);
+		mainBorderPane.setBottom(bottom);
+	}
+
+	private void includeDeleteButtonIfEditing(GridRowFields rowData)
+	{
+		if(!fieldCreator.isFieldEditable())
+			return;
 		Button deleteButton = new Button("Delete");
 		deleteButton.setOnAction(event -> deleteItem(rowData));
 		itemBox.getChildren().add(deleteButton);
-		itemBox.getChildren().add(new Separator(Orientation.HORIZONTAL));
 	}
 	
 	private void deleteItem(GridRowFields rowData)
