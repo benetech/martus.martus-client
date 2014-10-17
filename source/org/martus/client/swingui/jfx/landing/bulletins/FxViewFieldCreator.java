@@ -30,7 +30,6 @@ import java.util.Vector;
 import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -81,7 +80,7 @@ public class FxViewFieldCreator extends FxFieldCreator
 		Vector<ObservableChoiceItemList> listOfChoiceItemLists = field.getChoiceItemLists();
 		if(listOfChoiceItemLists.size() == 0)
 			return createFieldNotAvailable();
-	
+			
 		NestedChoiceBox choiceBoxes = new NestedChoiceBox();
 		choiceBoxes.setChoiceItemLists(listOfChoiceItemLists);
 	
@@ -125,6 +124,12 @@ public class FxViewFieldCreator extends FxFieldCreator
 		return responsiveTextFlowNode("(n/a)");
 	}
 
+	@Override
+	public boolean isFieldEditable()
+	{
+		return false;
+	}
+
 	private Node responsiveTextFlowNode(String data)
 	{
 		return responsiveTextFlowNode(new Text(data));
@@ -161,4 +166,5 @@ public class FxViewFieldCreator extends FxFieldCreator
 	}
 
 	private static final String NEW_LINE = "\n";
+
 }

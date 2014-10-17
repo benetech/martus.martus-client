@@ -153,4 +153,10 @@ public class FxEditFieldCreator extends FxFieldCreator
 	{
 		return new Label("(n/a)");
 	}
+
+	@Override
+	public boolean isFieldEditable()
+	{
+		return true;
+	}
 }

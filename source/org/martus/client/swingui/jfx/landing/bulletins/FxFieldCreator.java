@@ -79,6 +79,7 @@ abstract public class FxFieldCreator
 	abstract protected Node createDateField(FxBulletinField field);
 	abstract protected Node createDateRangeField(FxBulletinField field);
 	abstract protected Node createFieldNotAvailable();
+	abstract public boolean isFieldEditable();
 
 	protected static final int MINIMUM_REASONABLE_COLUMN_COUNT = 10;
 	protected static final int MULTILINE_FIELD_HEIGHT_IN_ROWS = 5;
