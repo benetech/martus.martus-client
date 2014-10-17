@@ -50,7 +50,8 @@ public class BulletinViewerController extends FxController
 		super.initialize(location, bundle);
 		FxFormCreator creator = new FxFormViewCreator(getLocalization());
 		StackPane attachmentsPane = createAttachmentsPane(bulletin);
-		Node root = creator.createFormFromBulletin(bulletin, attachmentsPane);
+		StackPane detailsPane = createDetailsPane(bulletin);
+		Node root = creator.createFormFromBulletin(bulletin, attachmentsPane, detailsPane);
 		scrollPane.setContent(root);
 		scrollPane.setFitToWidth(true);
 	}
@@ -82,6 +83,21 @@ public class BulletinViewerController extends FxController
 		return attachmentsPane;
 	}
 	
+	private StackPane createDetailsPane(FxBulletin bulletinToShow)
+	{
+		StackPane detailsPane = new StackPane();
+		try
+		{
+			BulletinDetailsController detailsController = new BulletinDetailsController(getMainWindow(), bulletinToShow);
+			loadControllerAndEmbedInPane(detailsController, detailsPane);
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+		return detailsPane;
+	}
+
 	public void scrollToTop()
 	{
 		scrollPane.vvalueProperty().set(0);

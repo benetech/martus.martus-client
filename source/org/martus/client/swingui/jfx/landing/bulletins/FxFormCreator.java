@@ -46,6 +46,11 @@ abstract public class FxFormCreator
 	
 	public Node createFormFromBulletin(FxBulletin bulletinToShow, Node attachments)
 	{
+		return createFormFromBulletin(bulletinToShow, attachments, null);
+	}
+	
+	public Node createFormFromBulletin(FxBulletin bulletinToShow, Node attachments, Node details)
+	{
 		bulletin = bulletinToShow;
 		sections = new Vector<BulletinEditorSection>();
 		
@@ -56,6 +61,8 @@ abstract public class FxFormCreator
 		ObservableList<TitledPane> panes = accordion.getPanes();
 		sections.forEach(section -> panes.add(createTitledPane(section)));
 		panes.add(createAttachmentTitledPane(attachments));
+		if(details != null)
+			panes.add(createDetailsTitledPane(details));
 		TitledPane firstPane = panes.get(0);
 		accordion.setExpandedPane(firstPane);
 		return accordion;
@@ -65,6 +72,12 @@ abstract public class FxFormCreator
 	{
 		String title = getLocalization().getWindowTitle("Attachments");
 		return new TitledPane(title, attachments);
+	}
+	
+	private TitledPane createDetailsTitledPane(Node details)
+	{
+		String title = getLocalization().getWindowTitle("Details");
+		return new TitledPane(title, details);
 	}
 
 	private TitledPane createTitledPane(BulletinEditorSection section)
