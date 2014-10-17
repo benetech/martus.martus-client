@@ -13,6 +13,14 @@
       </HBox>
    </bottom>
    <center>
-      <Pane fx:id="contentPane" BorderPane.alignment="CENTER" />
-   </center>
+      <ScrollPane BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane>
+               <children>
+                  <Pane fx:id="contentPane" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+	</center>
 </BorderPane>
