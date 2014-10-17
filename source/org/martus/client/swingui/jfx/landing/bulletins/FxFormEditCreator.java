@@ -25,7 +25,11 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import java.util.Vector;
+
+import org.martus.client.core.FxBulletinField;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.common.bulletin.Bulletin;
 
 public class FxFormEditCreator extends FxFormCreator
 {
@@ -34,5 +38,16 @@ public class FxFormEditCreator extends FxFormCreator
 		super(localizationToUse);
 		fieldCreator = new FxEditFieldCreator(getLocalization());
 	}
+	
+	@Override
+	protected boolean shouldOmitField(FxBulletinField field)
+	{
+		Vector<String> tagsToOmit = new Vector<String>();
+		tagsToOmit.add(Bulletin.TAGTITLE);
+		tagsToOmit.add(Bulletin.TAGWASSENT);
+		
+		return tagsToOmit.contains(field.getTag());
+	}
+	
 
 }

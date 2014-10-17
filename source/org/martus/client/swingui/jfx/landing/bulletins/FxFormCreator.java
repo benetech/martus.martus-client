@@ -106,14 +106,7 @@ abstract public class FxFormCreator
 		}
 	}
 
-	protected boolean shouldOmitField(FxBulletinField field)
-	{
-		Vector<String> tagsToOmit = new Vector<String>();
-		tagsToOmit.add(Bulletin.TAGTITLE);
-		tagsToOmit.add(Bulletin.TAGWASSENT);
-		
-		return tagsToOmit.contains(field.getTag());
-	}
+	abstract protected boolean shouldOmitField(FxBulletinField field);
 
 	protected MartusLocalization getLocalization()
 	{
