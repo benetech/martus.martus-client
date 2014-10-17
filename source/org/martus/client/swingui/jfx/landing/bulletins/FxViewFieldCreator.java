@@ -122,7 +122,12 @@ public class FxViewFieldCreator extends FxFieldCreator
 	@Override
 	protected Node createFieldNotAvailable()
 	{
-		return new Label("(n/a)");
+		return responsiveTextFlowNode("(n/a)");
+	}
+
+	private Node responsiveTextFlowNode(String data)
+	{
+		return responsiveTextFlowNode(new Text(data));
 	}
 
 	private Node responsiveTextFlowNode(ReadOnlyStringProperty property)
