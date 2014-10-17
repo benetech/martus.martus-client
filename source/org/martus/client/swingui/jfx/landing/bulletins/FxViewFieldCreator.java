@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import java.util.Vector;
 
 import javafx.beans.property.Property;
+import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
@@ -40,7 +41,6 @@ import org.martus.client.swingui.jfx.generic.controls.DateRangePicker;
 import org.martus.client.swingui.jfx.generic.controls.MartusDatePicker;
 import org.martus.client.swingui.jfx.generic.controls.NestedChoiceBox;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
-import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.MessageFieldSpec;
@@ -56,22 +56,18 @@ public class FxViewFieldCreator extends FxFieldCreator
 	protected Node createDateField(FxBulletinField field)
 	{
 		MartusDatePicker picker = new MartusDatePicker(localization);
-	
-		if(field.getTag().equals(Bulletin.TAGENTRYDATE))
-			picker.setDisable(true);
-	
 		Property<String> property = field.valueProperty();
+		
 		String existingDateString = property.getValue();
 		picker.setValue(existingDateString);
-		property.bind(picker.overallValueProperty());
-		return picker;
+		return responsiveTextFlowNode(picker.overallValueProperty());
 	}
 
 	@Override
 	protected Node createDateRangeField(FxBulletinField field)
 	{
 		DateRangePicker picker = new DateRangePicker(localization);
-	
+		
 		Property<String> property = field.valueProperty();
 		String existingDateRangeString = property.getValue();
 		picker.setValue(existingDateRangeString);
@@ -130,9 +126,14 @@ public class FxViewFieldCreator extends FxFieldCreator
 		return new Label("(n/a)");
 	}
 
-	private Node responsiveTextFlowNode(Property<String> property)
+	private Node responsiveTextFlowNode(ReadOnlyStringProperty property)
 	{
 		return responsiveTextFlowNode(getText(property));
+	}
+
+	private Node responsiveTextFlowNode(Property<String> property)
+	{
+		return responsiveTextFlowNode(getText((ReadOnlyStringProperty)property));
 	}
 
 	private Node responsiveTextFlowNode(Text mainContent)
@@ -149,7 +150,7 @@ public class FxViewFieldCreator extends FxFieldCreator
 		return new Text(stringContentWithNewLine);
 	}
 
-	private Text getText(Property<String> property)
+	private Text getText(ReadOnlyStringProperty property)
 	{
 		Text text = new Text(property.getValue());
 		return text;
