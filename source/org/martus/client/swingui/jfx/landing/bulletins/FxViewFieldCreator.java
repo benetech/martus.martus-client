@@ -86,9 +86,7 @@ public class FxViewFieldCreator extends FxFieldCreator
 	
 		Property<String> property = field.valueProperty();
 		choiceBoxes.setValue(property.getValue());
-		property.bind(choiceBoxes.valueProperty());
-	
-		return choiceBoxes;
+		return responsiveTextFlowNode(choiceBoxes.convertStoredToHumanReadable());
 	}
 
 	@Override
