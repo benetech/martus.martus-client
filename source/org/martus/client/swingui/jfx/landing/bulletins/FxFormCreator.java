@@ -106,7 +106,7 @@ abstract public class FxFormCreator
 		}
 	}
 
-	private boolean shouldOmitField(FxBulletinField field)
+	protected boolean shouldOmitField(FxBulletinField field)
 	{
 		Vector<String> tagsToOmit = new Vector<String>();
 		tagsToOmit.add(Bulletin.TAGTITLE);
