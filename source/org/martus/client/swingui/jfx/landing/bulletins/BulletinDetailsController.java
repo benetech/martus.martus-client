@@ -30,11 +30,14 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiBulletinDetailsDialog;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.common.ContactKey;
 import org.martus.common.ContactKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
@@ -68,7 +71,10 @@ public class BulletinDetailsController extends FxController
 			}
 			
 			publicCode.setText(MartusCrypto.computeFormattedPublicCode40(accountId));
-
+			Integer verificationStatus = getApp().getKeyVerificationStatus(accountId);
+			Image verificationImage = AuthorVerifiedColumnHandler.getVerificationImage(verificationStatus);
+			contactVerificationImage.setImage(verificationImage);
+			
 			bulletinLocalId.textProperty().bind(bulletin.bulletinLocalIdProperty());
 			dateCreated.textProperty().bind(bulletin.fieldProperty(Bulletin.TAGENTRYDATE));
 			
@@ -101,6 +107,9 @@ public class BulletinDetailsController extends FxController
 
 	@FXML
 	private Label dateLastSaved;
+	
+	@FXML
+	private ImageView contactVerificationImage;
 
 	private FxBulletin bulletin;
 }

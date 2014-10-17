@@ -63,15 +63,7 @@ public class AuthorVerifiedColumnHandler implements Callback<TableColumn<Bulleti
 		    else 
 		    {
 		    		Integer verified = (Integer)item;
-		    		Image image = null;
-		    		if(verified == ContactKey.VERIFIED_ACCOUNT_OWNER ||
-		    		   verified == ContactKey.VERIFIED_VISUALLY ||
-		    		   verified == ContactKey.VERIFIED_ENTERED_20_DIGITS)
-		    			image = new Image(IMAGE_CONTACT_VERIFIED_PATH);
-		    		else if(verified == ContactKey.NOT_VERIFIED)
-					image = new Image(IMAGE_CONTACT_NOT_VERIFIED_PATH);
-		    		else
-					image = new Image(IMAGE_CONTACT_UNKNOWN_PATH);
+		    		Image image = getVerificationImage(verified);
 		    		final Node statusCell = new ImageView(image);
 	    			setGraphic(statusCell);
 	    			setAlignment(Pos.CENTER);
@@ -86,9 +78,23 @@ public class AuthorVerifiedColumnHandler implements Callback<TableColumn<Bulleti
 		return new TableCellUpdateHandler(param);
 	}	
 	
-	final String IMAGE_CONTACT_VERIFIED_PATH = "/org/martus/client/swingui/jfx/images/contact_verified.png";
-	final String IMAGE_CONTACT_NOT_VERIFIED_PATH = "/org/martus/client/swingui/jfx/images/contact_not_verified.png";
-	final String IMAGE_CONTACT_UNKNOWN_PATH = "/org/martus/client/swingui/jfx/images/contact_unknown.png";
+	static public Image getVerificationImage(Integer verified)
+	{
+		Image image = null;
+		if(verified == ContactKey.VERIFIED_ACCOUNT_OWNER ||
+		   verified == ContactKey.VERIFIED_VISUALLY ||
+		   verified == ContactKey.VERIFIED_ENTERED_20_DIGITS)
+			image = new Image(IMAGE_CONTACT_VERIFIED_PATH);
+		else if(verified == ContactKey.NOT_VERIFIED)
+		image = new Image(IMAGE_CONTACT_NOT_VERIFIED_PATH);
+		else
+		image = new Image(IMAGE_CONTACT_UNKNOWN_PATH);
+		return image;
+	}
+
+	static public final String IMAGE_CONTACT_VERIFIED_PATH = "/org/martus/client/swingui/jfx/images/contact_verified.png";
+	static public final String IMAGE_CONTACT_NOT_VERIFIED_PATH = "/org/martus/client/swingui/jfx/images/contact_not_verified.png";
+	static public final String IMAGE_CONTACT_UNKNOWN_PATH = "/org/martus/client/swingui/jfx/images/contact_unknown.png";
 	
 }	
 
