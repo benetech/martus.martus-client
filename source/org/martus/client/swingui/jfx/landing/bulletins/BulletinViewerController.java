@@ -89,5 +89,6 @@ public class BulletinViewerController extends FxController
 
 	@FXML
 	private ScrollPane scrollPane;
+
 	private FxBulletin bulletin;
 }
