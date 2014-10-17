@@ -103,6 +103,7 @@ public class NestedChoiceBox extends HBox
 	private void updateOverallValue()
 	{
 		overallValueProperty.setValue("");
+		overallValueHumanReadable = "";
 		getChildrenUnmodifiable().forEach(child -> updateOverallValue((ChoiceBox)child));
 	}
 
@@ -117,6 +118,8 @@ public class NestedChoiceBox extends HBox
 			return;
 		
 		overallValueProperty.setValue(code);
+		overallValueHumanReadable += selectedChoice.getLabel();
+		overallValueHumanReadable += " ";
 	}
 
 	private FilteredList<ChoiceItem> createFilteredList(ObservableChoiceItemList choices)
@@ -170,7 +173,13 @@ public class NestedChoiceBox extends HBox
 	{
 		return hasNestedDropdowns;
 	}
+	
+	public String convertStoredToHumanReadable()
+	{
+		return overallValueHumanReadable;
+	}
 
 	private SimpleStringProperty overallValueProperty;
+	private String overallValueHumanReadable;
 	private boolean hasNestedDropdowns;
 }
