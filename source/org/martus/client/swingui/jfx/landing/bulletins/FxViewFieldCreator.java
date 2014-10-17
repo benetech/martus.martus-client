@@ -146,6 +146,7 @@ public class FxViewFieldCreator extends FxFieldCreator
 	private Node responsiveTextFlowNode(Text mainContent)
 	{
 		TextFlow flow = new TextFlow(getContentWithNewLineAdded(mainContent));
+		flow.setMinWidth(DEFAULT_TEXT_VIEW_WIDTH); //TODO: Ideally we would get the width of the Dialog - Width of the Field Title and bind us to that.
 		flow.prefWidthProperty().bind(fieldWidthProperty);
 		return flow;
 	}
@@ -163,6 +164,7 @@ public class FxViewFieldCreator extends FxFieldCreator
 		return text;
 	}
 
+	private static final int DEFAULT_TEXT_VIEW_WIDTH = 500;
 	private static final String NEW_LINE = "\n";
 
 }
