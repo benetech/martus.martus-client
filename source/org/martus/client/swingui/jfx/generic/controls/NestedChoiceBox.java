@@ -118,6 +118,7 @@ public class NestedChoiceBox extends HBox
 			return;
 		
 		overallValueProperty.setValue(code);
+		//TODO change this approach since this will break down with RtoL languages
 		overallValueHumanReadable += selectedChoice.getLabel();
 		overallValueHumanReadable += " ";
 	}

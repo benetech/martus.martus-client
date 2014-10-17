@@ -94,6 +94,7 @@ public class DateRangePicker extends HBox
 	
 	public String convertStoredToHumanReadable()
 	{
+		//TODO fix this since it won't work with RtoL languages
 		String combinedDateRange = "";
 		LocalDate startValue = endPicker.getValue();
 		if(startValue != null)
