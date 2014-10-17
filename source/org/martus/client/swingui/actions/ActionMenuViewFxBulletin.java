@@ -45,10 +45,10 @@ public class ActionMenuViewFxBulletin extends ActionMenuFxBulletin
 		try
 		{
 			BulletinViewerController bulletinViewCotroller = new BulletinViewerController(getMainWindow());
-			FxBulletin bulletinToView = new FxBulletin(getLocalization());
+			FxBulletin bulletinToView = new FxBulletin(getLocalization());			
 			bulletinToView.copyDataFromBulletin(getBulletin(), getMainWindow().getStore().getDatabase());
-			DialogWithCloseShellController shellController = new DialogWithCloseShellController(getMainWindow(), bulletinViewCotroller);
 			bulletinViewCotroller.setBulletin(bulletinToView);		
+			DialogWithCloseShellController shellController = new DialogWithCloseShellController(getMainWindow(), bulletinViewCotroller);
 			controller.doAction(shellController);
 		} 
 		catch (Exception e)

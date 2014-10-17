@@ -1694,6 +1694,8 @@ public class EnglishStrings
 "wintitle:AddingPermissionsToBulletins=Update your Contacts' access to Bulletins",
 "wintitle:FileDialogImportHeadquartersPublicKey=Add a contact",
 "wintitle:Attachments=Attachments",
+"wintitle:Details=Details",
+
 
 "menu:AddPermissions=Update Contact's Access...",
 "button:FileDialogOkImportHeadquartersPublicKey=Import",
