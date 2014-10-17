@@ -71,9 +71,8 @@ public class FxViewFieldCreator extends FxFieldCreator
 		Property<String> property = field.valueProperty();
 		String existingDateRangeString = property.getValue();
 		picker.setValue(existingDateRangeString);
-		property.bind(picker.valueProperty());
-		
-		return picker;
+
+		return responsiveTextFlowNode(picker.convertStoredToHumanReadable());
 	}
 
 	@Override

@@ -49,7 +49,7 @@ public class DateRangePicker extends HBox
 		endPicker.valueProperty().addListener((observable, oldValue, newValue) -> updateOverallValue());
 
 		getChildren().add(startPicker);
-		getChildren().add(new Label(" - "));
+		getChildren().add(new Label(DATE_RANGE_SEPARATOR));
 		getChildren().add(endPicker);
 	}
 	
@@ -91,6 +91,14 @@ public class DateRangePicker extends HBox
 		String value = getDateRangeString(startLocalDate, endLocalDate);
 		overallValueProperty.setValue(value);
 	}
+	
+	public String convertStoredToHumanReadable()
+	{
+		String combinedDateRange = startPicker.getValue().toString();
+		combinedDateRange += DATE_RANGE_SEPARATOR;
+		combinedDateRange += endPicker.getValue().toString();
+		return combinedDateRange;
+	}
 
 	public String getDateRangeString(LocalDate startLocalDate, LocalDate endLocalDate)
 	{
@@ -108,6 +116,8 @@ public class DateRangePicker extends HBox
 		String value = MartusFlexidate.toBulletinFlexidateFormat(beginDate, endDate);
 		return value;
 	}
+
+	private static final String DATE_RANGE_SEPARATOR = " - ";
 
 	private SimpleStringProperty overallValueProperty;
 	private MartusDatePicker startPicker;
