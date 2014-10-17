@@ -135,11 +135,18 @@ public class FxViewFieldCreator extends FxFieldCreator
 		return responsiveTextFlowNode(getText(property));
 	}
 
-	private Node responsiveTextFlowNode(Text text)
+	private Node responsiveTextFlowNode(Text mainContent)
 	{
-		TextFlow flow = new TextFlow(text);
+		TextFlow flow = new TextFlow(getContentWithNewLineAdded(mainContent));
 		flow.prefWidthProperty().bind(fieldWidthProperty);
 		return flow;
+	}
+
+	private Text getContentWithNewLineAdded(Text mainContent)
+	{
+		String stringContentWithNewLine = mainContent.getText();
+		stringContentWithNewLine += NEW_LINE;
+		return new Text(stringContentWithNewLine);
 	}
 
 	private Text getText(Property<String> property)
@@ -147,4 +154,6 @@ public class FxViewFieldCreator extends FxFieldCreator
 		Text text = new Text(property.getValue());
 		return text;
 	}
+
+	private static final String NEW_LINE = "\n";
 }
