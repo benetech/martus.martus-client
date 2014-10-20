@@ -46,7 +46,7 @@ public class ActionMenuViewFxBulletin extends ActionMenuFxBulletin
 		{
 			BulletinViewerController bulletinViewCotroller = new BulletinViewerController(getMainWindow());
 			FxBulletin bulletinToView = new FxBulletin(getLocalization());			
-			bulletinToView.copyDataFromBulletin(getBulletin(), getMainWindow().getStore().getDatabase());
+			bulletinToView.copyDataFromBulletin(getBulletin(), getMainWindow().getStore());
 			bulletinViewCotroller.setBulletin(bulletinToView);		
 			DialogWithCloseShellController shellController = new DialogWithCloseShellController(getMainWindow(), bulletinViewCotroller);
 			controller.doAction(shellController);

@@ -50,6 +50,7 @@ import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletinstore.BulletinStore;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.DataInvalidException;
@@ -74,7 +75,7 @@ public class FxBulletin
 		hasBeenValidatedProperty = new SimpleBooleanProperty();
 	}
 
-	public void copyDataFromBulletin(Bulletin b, ReadableDatabase db) throws Exception
+	public void copyDataFromBulletin(Bulletin b, BulletinStore store) throws Exception
 	{
 		clear();
 		
@@ -99,8 +100,8 @@ public class FxBulletin
 		setFieldPropertiesFromBulletinSection(b, b.getTopSectionFieldSpecs());
 		setFieldPropertiesFromBulletinSection(b, b.getBottomSectionFieldSpecs());
 		
-		addAttachmentProxies(b.getPrivateAttachments(), db);
-		addAttachmentProxies(b.getPublicAttachments(), db);
+		addAttachmentProxies(b.getPrivateAttachments(), store.getDatabase());
+		addAttachmentProxies(b.getPublicAttachments(), store.getDatabase());
 	}
 	
 	private void addAttachmentProxies(AttachmentProxy[] attachmentsToAdd, ReadableDatabase db)
