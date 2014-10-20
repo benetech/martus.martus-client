@@ -395,6 +395,8 @@ public class EnglishStrings
 
 "field:ContactNamesSeparator=,",
 
+"field:LegacyPublicIsPrivateMessage=Records created in older versions of Martus may contain fields of data that may have been made public on Martus legacy systems. However, this data is not public on the new Martus system To check if data from older bulletins is public on the old system search.",
+
 "button:export=Export",
 "button:help=Help",
 "button:create=Create",
