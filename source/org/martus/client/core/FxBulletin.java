@@ -278,6 +278,7 @@ public class FxBulletin
 	private void clear()
 	{
 		hasBeenModified = false;
+		validBulletin = false;
 		hasBeenValidatedProperty.setValue(false);
 		
 		if(universalIdProperty != null)

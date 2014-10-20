@@ -20,6 +20,11 @@
 	-fx-padding: 5 5 5 5;
 }
 
+.bulletin-warning-message {
+	-fx-background-color: yellow;
+	-fx-font-size: 20px;
+}
+
 .scroll-free-text-area {
 }
 
