@@ -103,6 +103,7 @@ public class BulletinViewerController extends FxController
 		scrollPane.vvalueProperty().set(0);
 	}
 
+		
 	@FXML
 	private ScrollPane scrollPane;
 

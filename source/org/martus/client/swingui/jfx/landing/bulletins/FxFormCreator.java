@@ -30,7 +30,9 @@ import java.util.Vector;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.VBox;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.core.FxBulletinField;
@@ -65,9 +67,23 @@ abstract public class FxFormCreator
 			panes.add(createDetailsTitledPane(details));
 		TitledPane firstPane = panes.get(0);
 		accordion.setExpandedPane(firstPane);
+		if(bulletin.isValidBulletin())
+			return InvalidBulletinForm(accordion);
 		return accordion;
 	}
 	
+	private Node InvalidBulletinForm(Node accordion)
+	{
+		VBox vBox = new VBox();
+		Label warningMessage = new Label(localization.getFieldLabel("MayBeDamaged"));
+		//warningMessage.getStyleClass().add("css/Bulletin.css"); //Does not work need help
+		//warningMessage.setStyle("bulletin-warning-message"); //TODO make this work
+		warningMessage.setStyle("-fx-background-color: yellow; -fx-font-size: 20px;");
+		vBox.getChildren().add(warningMessage);
+		vBox.getChildren().add(accordion);
+		return vBox;
+	}
+
 	private TitledPane createAttachmentTitledPane(Node attachments)
 	{
 		String title = getLocalization().getWindowTitle("Attachments");
