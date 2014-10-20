@@ -52,6 +52,7 @@ public class ConfigInfo
 		clear();
 	}
 
+	public void setVersion(short newVersion) {version = newVersion; }
 	public void setAuthor(String newSource)		{ author = newSource; }
 	public void setOrganization(String newOrg)		{ organization = newOrg; }
 	public void setEmail(String newEmail)			{ email = newEmail; }
@@ -156,6 +157,11 @@ public class ConfigInfo
 	public boolean isNewVersion()
 	{
 		return version > VERSION;
+	}
+	
+	public boolean shouldShowOneTimeNoticeFortheRemovalOfPublicBulletins() 
+	{
+		return getVersion() < VERSION;
 	}
 	
 	public void clear()

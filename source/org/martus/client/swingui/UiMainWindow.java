@@ -101,6 +101,7 @@ import org.martus.client.swingui.dialogs.UiStringInputDlg;
 import org.martus.client.swingui.dialogs.UiTemplateDlg;
 import org.martus.client.swingui.dialogs.UiWarningMessageDlg;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
+import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.generic.FxModalDialog;
 import org.martus.client.swingui.jfx.generic.FxRunner;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
@@ -115,8 +116,8 @@ import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.FormatFilter;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiUtilities;
-import org.martus.common.Exceptions.NetworkOfflineException;
 import org.martus.common.EnglishCommonStrings;
+import org.martus.common.Exceptions.NetworkOfflineException;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusLogger;
@@ -557,6 +558,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		try
 		{
 			getApp().loadConfigInfo();
+			displayPossiblePublicBulletinRemovalNotification();
+			
 			if(getApp().getConfigInfo().isNewVersion())
 			{
 				if(!confirmDlg("NewerConfigInfoFileFound"))
@@ -572,6 +575,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		{
 			notifyDlg("ErrorSavingConfig");
 		}
+		catch (Exception e)
+		{
+			notifyDlg("ErrorSavingConfig");
+		}
 		
 		if(createdNewAccount)
 		{
@@ -581,6 +588,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		}
 	}
 
+	private void displayPossiblePublicBulletinRemovalNotification() throws Exception
+	{
+//		if (getApp().getConfigInfo().shouldShowOneTimeNoticeFortheRemovalOfPublicBulletins())
+//		{
+			FxDialogHelper.showNotificationDialog(this, "LegacyPublicIsPrivateMessage");
+//		}
+	}
+	
 	private void reloadPendingRetrieveQueue()
 	{
 		try
