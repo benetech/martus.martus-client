@@ -73,6 +73,20 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertFalse("A blank config Info can't be new", info.isNewVersion());
 	}
 	
+	public void testShouldShowOneTimeNoticeFortheRemovalOfPublicBulletins() 
+	{
+		verifyShouldShowOneTimeNoticeFortheRemovalOfPublicBulletins(true, -1);
+		verifyShouldShowOneTimeNoticeFortheRemovalOfPublicBulletins(false, 0);
+		verifyShouldShowOneTimeNoticeFortheRemovalOfPublicBulletins(false, 1);
+	}
+	
+	private void verifyShouldShowOneTimeNoticeFortheRemovalOfPublicBulletins(boolean expected, int verionDifference)
+	{
+		ConfigInfo configInfo = new ConfigInfo();
+		configInfo.setVersion((short) (ConfigInfo.VERSION + verionDifference));
+		assertEquals("Is older version?", expected, configInfo.shouldShowOneTimeNoticeFortheRemovalOfPublicBulletins());
+	}
+	
 	public void testGetLegacyFormTemplate() throws Exception
 	{
 		ConfigInfo configInfo = new ConfigInfo();
