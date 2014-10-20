@@ -102,6 +102,7 @@ public class FxBulletin
 		
 		addAttachmentProxies(b.getPrivateAttachments(), store.getDatabase());
 		addAttachmentProxies(b.getPublicAttachments(), store.getDatabase());
+		validBulletin = store.isBulletinValid(b);
 	}
 	
 	private void addAttachmentProxies(AttachmentProxy[] attachmentsToAdd, ReadableDatabase db)
@@ -400,6 +401,11 @@ public class FxBulletin
 		return localization;
 	}
 
+	public boolean isValidBulletin()
+	{
+		return validBulletin;
+	}
+
 	private MiniLocalization localization;
 	private boolean hasBeenModified;
 	private SimpleBooleanProperty hasBeenValidatedProperty;
@@ -416,4 +422,6 @@ public class FxBulletin
 
 	private BooleanProperty immutableOnServer;
 	private ObservableList<AttachmentTableRowData> attachments;
+	
+	private boolean validBulletin;
 }
