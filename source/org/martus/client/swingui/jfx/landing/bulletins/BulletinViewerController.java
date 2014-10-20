@@ -104,6 +104,7 @@ public class BulletinViewerController extends FxController
 				
 		BulletinContactsController contactsController = new BulletinContactsController(getMainWindow(), keysAllowedToRead);
 		loadControllerAndEmbedInPane(contactsController, contactsPane);
+		contactsController.setViewingContactsOnly();
 		return contactsPane;
 	}
 
