@@ -120,7 +120,7 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 
 		try
 		{
-			fxBulletin.copyDataFromBulletin(bulletinToShow, getApp().getStore().getDatabase());
+			fxBulletin.copyDataFromBulletin(bulletinToShow, getApp().getStore());
 		} 
 		catch (Exception e)
 		{

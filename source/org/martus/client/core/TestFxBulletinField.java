@@ -34,6 +34,7 @@ import javafx.collections.ObservableList;
 import org.junit.Test;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.landing.bulletins.GridRowFields;
+import org.martus.client.test.MockBulletinStore;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
 import org.martus.common.GridRow;
@@ -82,6 +83,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 		citiesChoices.add(new ChoiceItem("SEA", "Seattle"));
 		citiesChoices.add(new ChoiceItem("PDX", "Portland"));
 		fsc.addReusableChoiceList(citiesChoices);
+		store = new MockBulletinStore();
 	}
 	
 	@Test
@@ -366,7 +368,7 @@ public class TestFxBulletinField extends TestCaseEnhanced
 	{
 		Bulletin b = new Bulletin(security, fsc, new FieldSpecCollection());
 		FxBulletin fxb = new FxBulletin(localization);
-		fxb.copyDataFromBulletin(b, null);
+		fxb.copyDataFromBulletin(b, store);
 		return fxb;
 	}
 
@@ -389,4 +391,5 @@ public class TestFxBulletinField extends TestCaseEnhanced
 	private FieldSpecCollection fsc;
 	private ReusableChoices statesChoices;
 	private ReusableChoices citiesChoices;
+	private MockBulletinStore store;
 }
