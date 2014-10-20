@@ -37,6 +37,7 @@ import javafx.scene.control.Label;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionMenuViewFxBulletin;
 import org.martus.client.swingui.dialogs.UiBulletinDetailsDialog;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.common.bulletin.Bulletin;
@@ -127,7 +128,6 @@ public class BulletinEditorFooterController extends FxController
 	@FXML
 	private void onShowVersion(ActionEvent event) 
 	{
-		//TODO make this work with the existing new Bulletin Viewer instead of a html rendering.
 		try
 		{
 			HistoryItem selectedVersion = historyItems.getSelectionModel().getSelectedItem();
@@ -136,8 +136,10 @@ public class BulletinEditorFooterController extends FxController
 			if(bulletinHistoryItem == null)
 				return; 
 			
-			FxController htmlViewer = BulletinsListController.getViewControllerForBulletin(bulletinHistoryItem, getMainWindow());
-			showDialogWithClose("ViewBulletin", htmlViewer);
+			
+			ActionMenuViewFxBulletin actionDoer = new ActionMenuViewFxBulletin(getMainWindow(), this);
+			actionDoer.setBulletin(bulletinHistoryItem);
+			doAction(actionDoer);
 		} 
 		catch (Exception e)
 		{
