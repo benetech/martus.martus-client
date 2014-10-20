@@ -68,14 +68,14 @@ abstract public class FxFormCreator
 		TitledPane firstPane = panes.get(0);
 		accordion.setExpandedPane(firstPane);
 		if(bulletin.isValidBulletin())
-			return InvalidBulletinForm(accordion);
+			return warningBulletinForm(accordion, "MayBeDamaged");
 		return accordion;
 	}
-	
-	private Node InvalidBulletinForm(Node accordion)
+
+	private Node warningBulletinForm(Node accordion, String warningTag)
 	{
 		VBox vBox = new VBox();
-		Label warningMessage = new Label(localization.getFieldLabel("MayBeDamaged"));
+		Label warningMessage = new Label(localization.getFieldLabel(warningTag));
 		//warningMessage.getStyleClass().add("css/Bulletin.css"); //Does not work need help
 		//warningMessage.setStyle("bulletin-warning-message"); //TODO make this work
 		warningMessage.setStyle("-fx-background-color: yellow; -fx-font-size: 20px;");
