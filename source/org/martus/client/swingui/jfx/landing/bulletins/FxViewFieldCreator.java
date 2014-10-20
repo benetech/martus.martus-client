@@ -164,7 +164,7 @@ public class FxViewFieldCreator extends FxFieldCreator
 		return text;
 	}
 
-	private static final int DEFAULT_TEXT_VIEW_WIDTH = 500;
+	private static final int DEFAULT_TEXT_VIEW_WIDTH = 650;
 	private static final String NEW_LINE = "\n";
 
 }

@@ -139,6 +139,7 @@ public class BulletinEditorRow
 			labelText = getLocalization().getFieldLabel(tag);
 		Text text = new Text(labelText);
 		TextFlow flow = new TextFlow(text);
+		flow.setPrefWidth(250); //TODO remove this and get View to be more responsive for Labels.
 		if(field.isRequiredField())
 		{
 			Label asterisk = new Label("*");
