@@ -102,7 +102,13 @@ public class FxBulletin
 		
 		addAttachmentProxies(b.getPrivateAttachments(), store.getDatabase());
 		addAttachmentProxies(b.getPublicAttachments(), store.getDatabase());
+
 		validBulletin = store.isBulletinValid(b);
+		String authorPublicKeyString = b.getAccount();
+		String accountId = store.getAccountId();
+		boolean notYourBulletin = !authorPublicKeyString.equals(accountId);
+		if(notYourBulletin)
+			notAuthorizedToRead = !b.getAuthorizedToReadKeys().containsKey(accountId);
 	}
 	
 	private void addAttachmentProxies(AttachmentProxy[] attachmentsToAdd, ReadableDatabase db)
@@ -279,6 +285,7 @@ public class FxBulletin
 	{
 		hasBeenModified = false;
 		validBulletin = false;
+		notAuthorizedToRead = false;
 		hasBeenValidatedProperty.setValue(false);
 		
 		if(universalIdProperty != null)
@@ -402,11 +409,18 @@ public class FxBulletin
 		return localization;
 	}
 
+	//TODO add unit tests for this
 	public boolean isValidBulletin()
 	{
 		return validBulletin;
 	}
-
+	
+	//TODO add unit tests for this
+	public boolean notAuthorizedToRead()
+	{
+		return notAuthorizedToRead;
+	}
+	
 	private MiniLocalization localization;
 	private boolean hasBeenModified;
 	private SimpleBooleanProperty hasBeenValidatedProperty;
@@ -425,4 +439,5 @@ public class FxBulletin
 	private ObservableList<AttachmentTableRowData> attachments;
 	
 	private boolean validBulletin;
+	private boolean notAuthorizedToRead;
 }
