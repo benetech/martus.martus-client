@@ -35,6 +35,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -81,6 +82,18 @@ public class BulletinContactsController extends FxController
 		}
 	}
 
+	public void setViewingContactsOnly()
+	{
+		selectAll.setVisible(false);
+		ObservableList<Label> readOnlyList = FXCollections.observableArrayList();
+		for (ContactKeyCheckBox contactKeyCheckBox : availableListAuthorizedToReadKeys)
+		{
+			if(contactKeyCheckBox.isSelected())
+				readOnlyList.add(new Label(contactKeyCheckBox.getText()));
+		}
+		contactsList.setItems(readOnlyList);
+	}
+	
 	private void addPredefinedBulletinContactsToList(ContactKeys ourContacts)
 	{
 		initialAuthorizedKeys.forEach(key -> addKeyToAvailableList(key, ourContacts, SELECT_CONTACT_INITIALLY));
