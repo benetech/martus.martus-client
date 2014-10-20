@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic.controls;
 
+import java.util.Iterator;
 import java.util.Vector;
 import java.util.function.Predicate;
 
@@ -45,6 +46,7 @@ public class NestedChoiceBox extends HBox
 	public NestedChoiceBox()
 	{
 		overallValueProperty = new SimpleStringProperty("");
+		overallValuesHumanReadable = new Vector();
 	}
 	
 	public void setChoiceItemLists(Vector<ObservableChoiceItemList> lists)
@@ -103,7 +105,7 @@ public class NestedChoiceBox extends HBox
 	private void updateOverallValue()
 	{
 		overallValueProperty.setValue("");
-		overallValueHumanReadable = "";
+		overallValuesHumanReadable.clear();
 		getChildrenUnmodifiable().forEach(child -> updateOverallValue((ChoiceBox)child));
 	}
 
@@ -118,9 +120,9 @@ public class NestedChoiceBox extends HBox
 			return;
 		
 		overallValueProperty.setValue(code);
-		//TODO change this approach since this will break down with RtoL languages
-		overallValueHumanReadable += selectedChoice.getLabel();
-		overallValueHumanReadable += " ";
+		if(overallValuesHumanReadable.size() > 0)
+			overallValuesHumanReadable.add(SPACE);
+		overallValuesHumanReadable.add(selectedChoice.getLabel());
 	}
 
 	private FilteredList<ChoiceItem> createFilteredList(ObservableChoiceItemList choices)
@@ -177,10 +179,16 @@ public class NestedChoiceBox extends HBox
 	
 	public String convertStoredToHumanReadable()
 	{
-		return overallValueHumanReadable;
+		StringBuilder combindData = new StringBuilder();
+		for (Iterator iterator = overallValuesHumanReadable.iterator(); iterator.hasNext();)
+		{
+			combindData.append(iterator.next());
+		}
+		return combindData.toString();
 	}
 
+	private final String SPACE = " ";
 	private SimpleStringProperty overallValueProperty;
-	private String overallValueHumanReadable;
+	private Vector<String> overallValuesHumanReadable;
 	private boolean hasNestedDropdowns;
 }
