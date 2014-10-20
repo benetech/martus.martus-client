@@ -1695,7 +1695,7 @@ public class EnglishStrings
 "wintitle:FileDialogImportHeadquartersPublicKey=Add a contact",
 "wintitle:Attachments=Attachments",
 "wintitle:Details=Details",
-
+"wintitle:Contacts=Contacts",
 
 "menu:AddPermissions=Update Contact's Access...",
 "button:FileDialogOkImportHeadquartersPublicKey=Import",

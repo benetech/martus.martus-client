@@ -27,7 +27,9 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Vector;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
@@ -36,6 +38,7 @@ import javafx.scene.layout.StackPane;
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.common.HeadquartersKey;
 
 public class BulletinViewerController extends FxController
 {
@@ -48,12 +51,20 @@ public class BulletinViewerController extends FxController
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		FxFormCreator creator = new FxFormViewCreator(getLocalization());
-		StackPane attachmentsPane = createAttachmentsPane(bulletin);
-		StackPane detailsPane = createDetailsPane(bulletin);
-		Node root = creator.createFormFromBulletin(bulletin, attachmentsPane, detailsPane);
-		scrollPane.setContent(root);
-		scrollPane.setFitToWidth(true);
+		try
+		{
+			FxFormCreator creator = new FxFormViewCreator(getLocalization());
+			StackPane attachmentsPane = createAttachmentsPane(bulletin);
+			StackPane detailsPane = createDetailsPane(bulletin);
+			StackPane contactsPane = createContactsPane(bulletin);
+			Node root = creator.createFormFromBulletin(bulletin, attachmentsPane, detailsPane, contactsPane);
+			scrollPane.setContent(root);
+			scrollPane.setFitToWidth(true);
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
 	}
 
 	@Override
@@ -67,35 +78,33 @@ public class BulletinViewerController extends FxController
 		bulletin = bulletinToShow;
 	}
 
-	private StackPane createAttachmentsPane(FxBulletin bulletinToShow)
+	private StackPane createAttachmentsPane(FxBulletin bulletinToShow) throws Exception
 	{
 		StackPane attachmentsPane = new StackPane();
-		try
-		{
-			BulletinAttachmentsController attachmentsController = new BulletinAttachmentsController(getMainWindow(), bulletinToShow);
-			loadControllerAndEmbedInPane(attachmentsController, attachmentsPane);
-			attachmentsController.setViewingAttachmentsOnly();
-		} 
-		catch (Exception e)
-		{
-			logAndNotifyUnexpectedError(e);
-		}
+		BulletinAttachmentsController attachmentsController = new BulletinAttachmentsController(getMainWindow(), bulletinToShow);
+		loadControllerAndEmbedInPane(attachmentsController, attachmentsPane);
+		attachmentsController.setViewingAttachmentsOnly();
 		return attachmentsPane;
 	}
 	
-	private StackPane createDetailsPane(FxBulletin bulletinToShow)
+	private StackPane createDetailsPane(FxBulletin bulletinToShow) throws Exception
 	{
 		StackPane detailsPane = new StackPane();
-		try
-		{
-			BulletinDetailsController detailsController = new BulletinDetailsController(getMainWindow(), bulletinToShow);
-			loadControllerAndEmbedInPane(detailsController, detailsPane);
-		} 
-		catch (Exception e)
-		{
-			logAndNotifyUnexpectedError(e);
-		}
+		BulletinDetailsController detailsController = new BulletinDetailsController(getMainWindow(), bulletinToShow);
+		loadControllerAndEmbedInPane(detailsController, detailsPane);
 		return detailsPane;
+	}
+
+	private StackPane createContactsPane(FxBulletin bulletinToShow) throws Exception
+	{
+		StackPane contactsPane = new StackPane();
+		ObservableList<HeadquartersKey>currentAuthorizedKeysToUse = bulletinToShow.getAuthorizedToReadList();
+		Vector keysAllowedToRead = new Vector();
+		currentAuthorizedKeysToUse.forEach(key -> keysAllowedToRead.add(key));
+				
+		BulletinContactsController contactsController = new BulletinContactsController(getMainWindow(), keysAllowedToRead);
+		loadControllerAndEmbedInPane(contactsController, contactsPane);
+		return contactsPane;
 	}
 
 	public void scrollToTop()

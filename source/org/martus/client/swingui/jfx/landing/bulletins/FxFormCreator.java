@@ -48,10 +48,10 @@ abstract public class FxFormCreator
 	
 	public Node createFormFromBulletin(FxBulletin bulletinToShow, Node attachments)
 	{
-		return createFormFromBulletin(bulletinToShow, attachments, null);
+		return createFormFromBulletin(bulletinToShow, attachments, null, null);
 	}
 	
-	public Node createFormFromBulletin(FxBulletin bulletinToShow, Node attachments, Node details)
+	public Node createFormFromBulletin(FxBulletin bulletinToShow, Node attachments, Node details, Node contacts)
 	{
 		bulletin = bulletinToShow;
 		sections = new Vector<BulletinEditorSection>();
@@ -62,9 +62,11 @@ abstract public class FxFormCreator
 		Accordion accordion = new Accordion();
 		ObservableList<TitledPane> panes = accordion.getPanes();
 		sections.forEach(section -> panes.add(createTitledPane(section)));
-		panes.add(createAttachmentTitledPane(attachments));
+		panes.add(createTitledPane(attachments, "Attachments"));
+		if(contacts != null)
+			panes.add(createTitledPane(contacts, "Contacts"));
 		if(details != null)
-			panes.add(createDetailsTitledPane(details));
+			panes.add(createTitledPane(details, "Details"));
 		TitledPane firstPane = panes.get(0);
 		accordion.setExpandedPane(firstPane);
 		if(!bulletin.isValidBulletin())
@@ -87,18 +89,11 @@ abstract public class FxFormCreator
 		return vBox;
 	}
 
-	private TitledPane createAttachmentTitledPane(Node attachments)
+	private TitledPane createTitledPane(Node attachments, String titleTag)
 	{
-		String title = getLocalization().getWindowTitle("Attachments");
+		String title = getLocalization().getWindowTitle(titleTag);
 		return new TitledPane(title, attachments);
 	}
-	
-	private TitledPane createDetailsTitledPane(Node details)
-	{
-		String title = getLocalization().getWindowTitle("Details");
-		return new TitledPane(title, details);
-	}
-
 	private TitledPane createTitledPane(BulletinEditorSection section)
 	{
 		String title = section.getTitle();
