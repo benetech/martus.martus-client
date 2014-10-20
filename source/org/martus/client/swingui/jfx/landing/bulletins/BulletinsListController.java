@@ -59,8 +59,6 @@ import org.martus.client.swingui.actions.ActionMenuFxBulletin;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
 import org.martus.client.swingui.actions.ActionMenuViewFxBulletin;
 import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
-import org.martus.client.swingui.jfx.generic.FxController;
-import org.martus.client.swingui.jfx.generic.SimpleHtmlContentController;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.jfx.landing.FxLandingShellController;
@@ -75,8 +73,6 @@ import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.bulletin.BulletinHtmlGenerator;
-import org.martus.common.database.ReadableDatabase;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.TokenReplacement;
 
@@ -204,17 +200,6 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		{
 			logAndNotifyUnexpectedError(e);
 		}
-	}
-
-	//TODO this will go away soon once viewer is finished and History will access that instead
-	static public FxController getViewControllerForBulletin(Bulletin bulletin, UiMainWindow mainWindow)
-		throws Exception
-	{
-		ReadableDatabase database = mainWindow.getApp().getStore().getDatabase();
-		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(mainWindow.getLocalization());
-		String html = generator.getHtmlString(bulletin, database, true, true);
-		FxController htmlViewer = new SimpleHtmlContentController(mainWindow, html);
-		return htmlViewer;
 	}
 
 	private void notifyIfBulletinIsNotOursAndHasExternallyViewedAttachments(Bulletin bulletinSelected) throws Exception
