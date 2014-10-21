@@ -497,7 +497,7 @@ public class EnglishStrings
 "button:ServerSyncRecordLocation=Location",
 "button:ServerSyncRecordTitle=Title",
 "button:ServerSyncRecordAuthor=Author",
-"button:ServerSyncRecordLastSaved=Last Saved",
+"button:ServerSyncRecordLastModified=Last Saved",
 "button:ServerSyncRecordSize=Size",
 
 "field:RecordLocationLocal=Local",

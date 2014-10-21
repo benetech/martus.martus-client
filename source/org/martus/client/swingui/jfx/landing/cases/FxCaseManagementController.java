@@ -57,6 +57,7 @@ import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.jfx.landing.FolderSelectionListener;
 import org.martus.client.swingui.jfx.landing.FxLandingShellController;
 import org.martus.client.swingui.jfx.landing.cases.FxFolderDeleteController.FolderDeletedListener;
+import org.martus.client.swingui.jfx.landing.general.ManageServerSyncRecordsController;
 import org.martus.client.swingui.jfx.landing.general.ManageTemplatesController;
 import org.martus.common.fieldspec.ChoiceItem;
 
@@ -382,6 +383,20 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		}
 	}
 	
+	public void onServerSync(ActionEvent event)
+	{
+		try
+		{
+			ManageServerSyncRecordsController controller = new ManageServerSyncRecordsController(getMainWindow());
+			ActionDoer shellController = new DialogWithCloseShellController(getMainWindow(), controller);
+			doAction(shellController);
+		}
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
+
 	class FolderDeletedHandler implements FolderDeletedListener
 	{
 		@Override
