@@ -31,13 +31,11 @@ import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.core.FxBulletinField;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.jfx.generic.controls.DateRangePicker;
-import org.martus.client.swingui.jfx.generic.controls.MartusDatePicker;
 import org.martus.client.swingui.jfx.generic.controls.NestedChoiceBox;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.fieldspec.FieldSpec;
@@ -54,12 +52,7 @@ public class FxViewFieldCreator extends FxFieldCreator
 	@Override
 	protected Node createDateField(FxBulletinField field)
 	{
-		MartusDatePicker picker = new MartusDatePicker(localization);
-		Property<String> property = field.valueProperty();
-		
-		String existingDateString = property.getValue();
-		picker.setValue(existingDateString);
-		return responsiveTextFlowNode(picker.overallValueProperty());
+		return createReadOnlyDateField(field);
 	}
 
 	@Override
@@ -133,38 +126,9 @@ public class FxViewFieldCreator extends FxFieldCreator
 		return responsiveTextFlowNode(new Text(data));
 	}
 
-	private Node responsiveTextFlowNode(ReadOnlyStringProperty property)
-	{
-		return responsiveTextFlowNode(getText(property));
-	}
-
 	private Node responsiveTextFlowNode(Property<String> property)
 	{
 		return responsiveTextFlowNode(getText((ReadOnlyStringProperty)property));
 	}
-
-	private Node responsiveTextFlowNode(Text mainContent)
-	{
-		TextFlow flow = new TextFlow(getContentWithNewLineAdded(mainContent));
-		flow.setMinWidth(DEFAULT_TEXT_VIEW_WIDTH); //TODO: Ideally we would get the width of the Dialog - Width of the Field Title and bind us to that.
-		flow.prefWidthProperty().bind(fieldWidthProperty);
-		return flow;
-	}
-
-	private Text getContentWithNewLineAdded(Text mainContent)
-	{
-		String stringContentWithNewLine = mainContent.getText();
-		stringContentWithNewLine += NEW_LINE;
-		return new Text(stringContentWithNewLine);
-	}
-
-	private Text getText(ReadOnlyStringProperty property)
-	{
-		Text text = new Text(property.getValue());
-		return text;
-	}
-
-	private static final int DEFAULT_TEXT_VIEW_WIDTH = 650;
-	private static final String NEW_LINE = "\n";
 
 }
