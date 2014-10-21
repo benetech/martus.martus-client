@@ -494,6 +494,17 @@ public class EnglishStrings
 "button:ShowGridExpanded=Show Expanded",
 "button:ShowGridNormal=Show as Grid",
 
+"button:ServerSyncRecordLocation=Location",
+"button:ServerSyncRecordTitle=Title",
+"button:ServerSyncRecordAuthor=Author",
+"button:ServerSyncRecordLastSaved=Last Saved",
+"button:ServerSyncRecordSize=Size",
+
+"field:RecordLocationLocal=Local",
+"field:RecordLocationServer=Server",
+"field:RecordLocationBothLocalAndServer=Both",
+"field:RecordLocationUnknown=Unknown",
+
 "button:IncludePrivateBulletins=Include Private Data",
 "button:SettingOn=On",
 "button:SettingOff=Off",
