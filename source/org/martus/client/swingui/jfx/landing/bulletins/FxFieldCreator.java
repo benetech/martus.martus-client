@@ -27,11 +27,16 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyDoubleProperty;
+import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.scene.Node;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 import org.martus.client.core.FxBulletin;
 import org.martus.client.core.FxBulletinField;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.jfx.generic.controls.MartusDatePicker;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
 
 abstract public class FxFieldCreator
@@ -63,7 +68,11 @@ abstract public class FxFieldCreator
 			return createDropdownField(bulletin, field);
 		
 		if(spec.getType().isDate())
+		{
+			if(field.getTag().equals(Bulletin.TAGENTRYDATE))
+				return createReadOnlyDateField(field);
 			return createDateField(field);
+		}
 		
 		if(spec.getType().isDateRange())
 			return createDateRangeField(field);
@@ -81,8 +90,46 @@ abstract public class FxFieldCreator
 	abstract protected Node createFieldNotAvailable();
 	abstract public boolean isFieldEditable();
 
+	protected Node createReadOnlyDateField(FxBulletinField field)
+	{
+		MartusDatePicker picker = new MartusDatePicker(localization);
+		Property<String> property = field.valueProperty();
+		
+		String existingDateString = property.getValue();
+		picker.setValue(existingDateString);
+		return responsiveTextFlowNode(picker.overallValueProperty());
+	}
+
+	protected Node responsiveTextFlowNode(ReadOnlyStringProperty property)
+	{
+		return responsiveTextFlowNode(getText(property));
+	}
+
+	protected Node responsiveTextFlowNode(Text mainContent)
+	{
+		TextFlow flow = new TextFlow(getContentWithNewLineAdded(mainContent));
+		flow.setMinWidth(DEFAULT_TEXT_VIEW_WIDTH); //TODO: Ideally we would get the width of the Dialog - Width of the Field Title and bind us to that.
+		flow.prefWidthProperty().bind(fieldWidthProperty);
+		return flow;
+	}
+
+	protected Text getContentWithNewLineAdded(Text mainContent)
+	{
+		String stringContentWithNewLine = mainContent.getText();
+		stringContentWithNewLine += NEW_LINE;
+		return new Text(stringContentWithNewLine);
+	}
+
+	protected Text getText(ReadOnlyStringProperty property)
+	{
+		Text text = new Text(property.getValue());
+		return text;
+	}
+
 	protected static final int MINIMUM_REASONABLE_COLUMN_COUNT = 10;
 	protected static final int MULTILINE_FIELD_HEIGHT_IN_ROWS = 5;
+	protected static final int DEFAULT_TEXT_VIEW_WIDTH = 650;
+	protected static final String NEW_LINE = "\n";
 	
 	protected MartusLocalization localization;
 	protected ReadOnlyDoubleProperty fieldWidthProperty;

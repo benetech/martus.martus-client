@@ -63,9 +63,6 @@ public class FxEditFieldCreator extends FxFieldCreator
 	{
 		MartusDatePicker picker = new MartusDatePicker(localization);
 	
-		if(field.getTag().equals(Bulletin.TAGENTRYDATE))
-			picker.setDisable(true);
-	
 		Property<String> property = field.valueProperty();
 		String existingDateString = property.getValue();
 		picker.setValue(existingDateString);
