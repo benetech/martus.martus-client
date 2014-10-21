@@ -94,6 +94,18 @@
                   </ImageView>
                </graphic>
       		</Button>
+      		<Button fx:id="importBulletin" graphicTextGap="2.0" maxHeight="45.0" mnemonicParsing="false" onAction="#onImportBulletin" text="Import Bulletin">
+      			<font>
+      				<Font name="Helvetica" size="12.0" />
+      			</font>
+               <graphic>
+                  <ImageView fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/import.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+      		</Button>
          </children>
       </HBox>
 	</children>
