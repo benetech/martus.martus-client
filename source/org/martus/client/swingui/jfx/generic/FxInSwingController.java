@@ -32,12 +32,19 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.util.List;
 
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 import org.martus.client.swingui.TranslucentWindowObscurer;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
+import org.martus.client.swingui.filefilters.MCTFileFilter;
+import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
+import org.martus.clientside.FormatFilter;
 
 public abstract class FxInSwingController extends FxController
 {
@@ -93,6 +100,39 @@ public abstract class FxInSwingController extends FxController
 	public FxInSwingStage getSwingStage()
 	{
 		return (FxInSwingStage) getStage();
+	}
+	
+	protected boolean isMctFileFilterSelected(ExtensionFilter chosenExtensionFilter, File file)
+	{
+		FormatFilter mctFileFilter = new MCTFileFilter(getLocalization());
+		return isExtensionSelected(chosenExtensionFilter, file, mctFileFilter);
+	}
+
+	protected boolean isXmlExtensionSelected(ExtensionFilter chosenExtensionFilter, File file)
+	{
+		FormatFilter xmlFileFilter = new BulletinXmlFileFilter(getLocalization());
+		return isExtensionSelected(chosenExtensionFilter, file, xmlFileFilter);
+	}
+	
+	protected boolean isMbaExtensionSelected(ExtensionFilter chosenExtensionFilter, File file)
+	{
+		FormatFilter xmlFileFilter = new MartusBulletinArchiveFileFilter(getLocalization());
+		return isExtensionSelected(chosenExtensionFilter, file, xmlFileFilter);
+	}
+	
+	private boolean isExtensionSelected(ExtensionFilter chosenExtensionFilter, File file, FormatFilter mctFileFilter)
+	{
+		if (mctFileFilter.accept(file))
+			return true;
+		
+		List<String> extensions = chosenExtensionFilter.getExtensions();
+		for (String extension : extensions)
+		{
+			if (extension.contains(mctFileFilter.getExtension()))
+				return true;
+		}
+		
+		return false;
 	}
 	
 	protected static class DialogWindowHandler extends WindowAdapter implements MouseMotionListener
