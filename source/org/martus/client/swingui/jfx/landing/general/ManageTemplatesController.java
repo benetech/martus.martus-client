@@ -28,7 +28,6 @@ package org.martus.client.swingui.jfx.landing.general;
 import java.io.File;
 import java.net.URL;
 import java.util.Comparator;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -67,7 +66,6 @@ import org.martus.client.swingui.jfx.common.TemplatePropertiesController;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
-import org.martus.clientside.FormatFilter;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.Exceptions.ServerNotCompatibleException;
@@ -221,33 +219,6 @@ public class ManageTemplatesController extends FxInSwingController
 		
 		if (isXmlExtensionSelected(chosenExtensionFilter, templateFile))
 			template.exportTopSection(templateFile);
-	}
-
-	private boolean isMctFileFilterSelected(ExtensionFilter chosenExtensionFilter, File file)
-	{
-		FormatFilter mctFileFilter = new MCTFileFilter(getLocalization());
-		return isExtensionSelected(chosenExtensionFilter, file, mctFileFilter);
-	}
-
-	private boolean isXmlExtensionSelected(ExtensionFilter chosenExtensionFilter, File file)
-	{
-		FormatFilter xmlFileFilter = new BulletinXmlFileFilter(getLocalization());
-		return isExtensionSelected(chosenExtensionFilter, file, xmlFileFilter);
-	}
-	
-	private boolean isExtensionSelected(ExtensionFilter chosenExtensionFilter, File file, FormatFilter mctFileFilter)
-	{
-		if (mctFileFilter.accept(file))
-			return true;
-		
-		List<String> extensions = chosenExtensionFilter.getExtensions();
-		for (String extension : extensions)
-		{
-			if (extension.contains(mctFileFilter.getExtension()))
-				return true;
-		}
-		
-		return false;
 	}
 
 	protected void editSelectedTemplate()
