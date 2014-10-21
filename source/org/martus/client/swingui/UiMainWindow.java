@@ -590,10 +590,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 
 	private void displayPossiblePublicBulletinRemovalNotification() throws Exception
 	{
-//		if (getApp().getConfigInfo().shouldShowOneTimeNoticeFortheRemovalOfPublicBulletins())
-//		{
+		if (getApp().getConfigInfo().shouldShowOneTimeNoticeFortheRemovalOfPublicBulletins())
+		{
 			FxDialogHelper.showNotificationDialog(this, "LegacyPublicIsPrivateMessage");
-//		}
+		}
 	}
 	
 	private void reloadPendingRetrieveQueue()
