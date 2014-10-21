@@ -8,10 +8,10 @@
    <children>
        <HBox>
          <children>
-            <Button mnemonicParsing="false" onAction="#onShowAll" text="All" />
-            <Button mnemonicParsing="false" onAction="#onShowLocalOnly" text="Local Only" />
-            <Button mnemonicParsing="false" onAction="#onShowServerOnly" text="Server Only" />
-            <Button mnemonicParsing="false" onAction="#onShowBoth" text="Both" />
+            <Hyperlink onAction="#onShowAll" text="All" />
+            <Hyperlink onAction="#onShowLocalOnly" text="Local Only" />
+            <Hyperlink onAction="#onShowServerOnly" text="Server Only" />
+            <Hyperlink onAction="#onShowBoth" text="Both" />
          </children>
       </HBox>
       <ScrollPane>
