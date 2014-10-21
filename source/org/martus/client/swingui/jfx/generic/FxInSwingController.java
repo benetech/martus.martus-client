@@ -43,6 +43,7 @@ import org.martus.client.swingui.TranslucentWindowObscurer;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
+import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
 import org.martus.clientside.FormatFilter;
 
 public abstract class FxInSwingController extends FxController
@@ -110,6 +111,12 @@ public abstract class FxInSwingController extends FxController
 	protected boolean isXmlExtensionSelected(ExtensionFilter chosenExtensionFilter, File file)
 	{
 		FormatFilter xmlFileFilter = new BulletinXmlFileFilter(getLocalization());
+		return isExtensionSelected(chosenExtensionFilter, file, xmlFileFilter);
+	}
+	
+	protected boolean isMbaExtensionSelected(ExtensionFilter chosenExtensionFilter, File file)
+	{
+		FormatFilter xmlFileFilter = new MartusBulletinArchiveFileFilter(getLocalization());
 		return isExtensionSelected(chosenExtensionFilter, file, xmlFileFilter);
 	}
 	

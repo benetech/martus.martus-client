@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.cases;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -43,12 +44,16 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
+import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
+import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
 import org.martus.client.swingui.jfx.generic.DialogWithNoButtonsShellController;
 import org.martus.client.swingui.jfx.generic.DialogWithOkCancelShellController;
@@ -58,6 +63,8 @@ import org.martus.client.swingui.jfx.landing.FolderSelectionListener;
 import org.martus.client.swingui.jfx.landing.FxLandingShellController;
 import org.martus.client.swingui.jfx.landing.cases.FxFolderDeleteController.FolderDeletedListener;
 import org.martus.client.swingui.jfx.landing.general.ManageTemplatesController;
+import org.martus.client.tools.ImporterOfXmlFilesOfBulletins;
+import org.martus.clientside.FormatFilter;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class FxCaseManagementController extends AbstractFxLandingContentController
@@ -188,11 +195,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	{
 		try
 		{
-			int selectedIndex = currentCasesListView.getSelectionModel().getSelectedIndex();
-			if(selectedIndex == INVALID_INDEX)
-				return;
-			CaseListItem selectedCase = getCurrentCaseListProvider().get(selectedIndex);
-			BulletinFolder folder = getApp().findFolder(selectedCase.getName());
+			BulletinFolder folder = getCurrentBulletinFolder();
 			if(folder == null)
 				return;
 			updateButtons(folder);
@@ -204,7 +207,17 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 			logAndNotifyUnexpectedError(e);
 		}
 	}
-	
+
+	private BulletinFolder getCurrentBulletinFolder()
+	{
+		int selectedIndex = currentCasesListView.getSelectionModel().getSelectedIndex();
+		if(selectedIndex == INVALID_INDEX)
+			return null;
+		CaseListItem selectedCase = getCurrentCaseListProvider().get(selectedIndex);
+		BulletinFolder folder = getApp().findFolder(selectedCase.getName());
+		
+		return folder;
+	}
 
 	private void selectCase(String caseName)
 	{
@@ -283,6 +296,56 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		java.util.Collections.sort(casesListViewAll.getItems(), new CaseComparitor());		
 		java.util.Collections.sort(casesListViewOpen.getItems(), new CaseComparitor());		
 		java.util.Collections.sort(casesListViewClosed.getItems(), new CaseComparitor());		
+	}
+	
+	@FXML
+	public void onImportBulletin(ActionEvent event)
+	{
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle(getLocalization().getWindowTitle("ImportBulletin"));
+		fileChooser.setInitialDirectory(getApp().getMartusDataRootDirectory());
+		FormatFilter mbaFileFilter = new MartusBulletinArchiveFileFilter(getLocalization());
+		FormatFilter xmlFileFilter = new BulletinXmlFileFilter(getLocalization());
+		fileChooser.getExtensionFilters().addAll(
+				new FileChooser.ExtensionFilter(xmlFileFilter.getDescription(), xmlFileFilter.getWildCardExtension()),
+				new FileChooser.ExtensionFilter(mbaFileFilter.getDescription(), mbaFileFilter.getWildCardExtension()),
+				new FileChooser.ExtensionFilter(getLocalization().getFieldLabel("AllFiles"), "*.*"));
+		
+		File fileToImport = fileChooser.showOpenDialog(null);
+		if (fileToImport == null)
+			return;
+		
+		ExtensionFilter chosenExtensionFilter = fileChooser.getSelectedExtensionFilter();
+		if (isXmlExtensionSelected(chosenExtensionFilter, fileToImport))
+			importBulletinFromXmlFile(fileToImport);
+		
+		if (isMbaExtensionSelected(chosenExtensionFilter, fileToImport))
+			importBulletinFromMbaFile(fileToImport);
+	}
+
+	private void importBulletinFromXmlFile(File fileToImport)
+	{
+		try
+		{
+			ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(fileToImport, getApp().getStore(), getCurrentBulletinFolder(), System.out);
+			importer.importFiles();
+		}
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
+
+	private void importBulletinFromMbaFile(File fileToImport)
+	{
+		try
+		{
+			getApp().getStore().importZipFileBulletin(fileToImport, getCurrentBulletinFolder(), false);
+		}
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
 	}
 	
 	private final class CaseComparitor implements java.util.Comparator<CaseListItem>
