@@ -25,40 +25,20 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
-import javafx.fxml.FXML;
-import javafx.scene.layout.Pane;
-
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionDoer;
 
-abstract public class DialogShellController extends FxShellWithSingleContentController implements ActionDoer 
+public class DialogStageWithCss extends DialogStage
 {
-	public DialogShellController(UiMainWindow mainWindowToUse, FxController contentController)
+	public DialogStageWithCss(UiMainWindow mainWindowToUse, FxNonWizardShellController controllerToUse, String cssToUse)
 	{
-		super(mainWindowToUse, contentController);
-	}
-
-	@Override
-	protected Pane getContentPane()
-	{
-		return contentPane;
+		super(mainWindowToUse, controllerToUse);
+		cssFile = cssToUse;
 	}
 	
 	@Override
-	public void doAction()
+	protected String getCssName()
 	{
-		UiMainWindow mainWindow = getMainWindow();
-		try
-		{
-			DialogStageWithCss stage = new DialogStageWithCss(mainWindow, this, getContentController().getCssName());
-			FxModalDialog.createAndShow(mainWindow, stage);
-		} 
-		catch (Exception e)
-		{
-			mainWindow.unexpectedErrorDlg(e);
-		}
+		return cssFile;
 	}
-	
-	@FXML
-	Pane contentPane;
+	private String cssFile;
 }

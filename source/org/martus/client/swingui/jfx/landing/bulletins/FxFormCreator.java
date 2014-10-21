@@ -81,9 +81,7 @@ abstract public class FxFormCreator
 	{
 		VBox vBox = new VBox();
 		Label warningMessage = new Label(localization.getFieldLabel(warningTag));
-		//warningMessage.getStyleClass().add("css/Bulletin.css"); //Does not work need help
-		//warningMessage.setStyle("bulletin-warning-message"); //TODO make this work
-		warningMessage.setStyle("-fx-background-color: yellow; -fx-font-size: 20px;");
+		warningMessage.getStyleClass().add("bulletin-warning-message"); 
 		vBox.getChildren().add(warningMessage);
 		vBox.getChildren().add(accordion);
 		return vBox;

@@ -66,6 +66,12 @@ public class BulletinViewerController extends FxController
 			logAndNotifyUnexpectedError(e);
 		}
 	}
+	
+	@Override
+	public String getCssName()
+	{
+		return "Bulletin.css";
+	}
 
 	@Override
 	public String getFxmlLocation()

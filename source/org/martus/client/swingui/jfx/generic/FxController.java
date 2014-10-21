@@ -62,6 +62,11 @@ abstract public class FxController implements Initializable
 	
 	abstract public String getFxmlLocation();
 	
+	protected String getCssName()
+	{
+		return null;
+	}
+	
 	public void save()
 	{
 	}
