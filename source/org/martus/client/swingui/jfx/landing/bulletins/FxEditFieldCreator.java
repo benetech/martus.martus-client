@@ -47,7 +47,6 @@ import org.martus.client.swingui.jfx.generic.controls.NestedChoiceBox;
 import org.martus.client.swingui.jfx.generic.controls.ScrollFreeTextArea;
 import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
-import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MessageFieldSpec;
 
