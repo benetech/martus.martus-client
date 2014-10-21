@@ -52,7 +52,6 @@ public class ConfigInfo
 		clear();
 	}
 
-	public void setVersion(short newVersion) {version = newVersion; }
 	public void setAuthor(String newSource)		{ author = newSource; }
 	public void setOrganization(String newOrg)		{ organization = newOrg; }
 	public void setEmail(String newEmail)			{ email = newEmail; }
@@ -161,7 +160,7 @@ public class ConfigInfo
 	
 	public boolean shouldShowOneTimeNoticeFortheRemovalOfPublicBulletins() 
 	{
-		return getVersion() < VERSION;
+		return  getVersion() < VERSION_MIGRATE_TO_PRIVATE_ALWAYS;
 	}
 	
 	public void clear()
@@ -448,7 +447,7 @@ public class ConfigInfo
 		return new String(bytes, "UTF-8");
 	}
 	
-	public static final short VERSION = 27;
+	public static final short VERSION = 28;
 
 	//Version 1
 	private short version;
@@ -518,4 +517,6 @@ public class ConfigInfo
 	private Property<Boolean> didTemplateMigrationProperty;
 	//Version 27
 	private Property<Boolean> alwaysImmutableOnServer;
+	//Version 28
+	private static final short VERSION_MIGRATE_TO_PRIVATE_ALWAYS = 28;
 }
