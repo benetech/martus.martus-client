@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
@@ -45,6 +46,25 @@ public class ManageServerSyncRecordsController extends FxController
 	public String getFxmlLocation()
 	{
 		return "landing/general/ManageServerSyncRecords.fxml";
+	}
+	
+	
+	@FXML 	
+	private void onUpload(ActionEvent event)
+	{
+		
+	}
+
+	@FXML 	
+	private void onDownload(ActionEvent event)
+	{
+		
+	}
+
+	@FXML 	
+	private void onDelete(ActionEvent event)
+	{
+		
 	}
 	
 	@FXML

@@ -70,6 +70,15 @@
 		</HBox>
       <HBox prefWidth="200.0">
          <children>
+            <Button mnemonicParsing="false" onAction="#onServerSync" text="Server Sync">
+               <graphic>
+                  <ImageView fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/server_sync.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             <Button graphicTextGap="2.0" maxHeight="45.0" mnemonicParsing="false" onAction="#onManageTemplates" text="Templates">
                <font>
                   <Font name="Helvetica" size="12.0" />
