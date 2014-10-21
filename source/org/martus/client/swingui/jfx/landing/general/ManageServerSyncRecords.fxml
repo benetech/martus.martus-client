@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="All" fx:id="allRecordsTab">
+               <content>
+                  <ScrollPane>
+                     <content>
+                        <TableView fx:id="allRecordsTable">
+                          <columns>
+                              <TableColumn fx:id="recordLocationColumn" prefWidth="50.0" text="%Button.ServerSyncRecordLocation" />
+                              <TableColumn fx:id="recordTitleColumn" prefWidth="75.0" text="%Button.ServerSyncRecordTitle" />
+                              <TableColumn fx:id="recordAuthorColumn" prefWidth="50.0" text="%Button.ServerSyncRecordAuthor" />
+                              <TableColumn fx:id="recordLastSavedColumn" prefWidth="50.0" text="%Button.ServerSyncRecordLastModified" />
+                              <TableColumn fx:id="recordSizeColumn" prefWidth="25.0" text="%Button.ServerSyncRecordSize" />
+                          </columns>
+                        </TableView>
+                     </content>
+                  </ScrollPane>
+               </content>
+          </Tab>
+          <Tab text="Only on Server">
+           </Tab>
+           <Tab text="Only Local">
+           	</Tab>
+          	<Tab text="Both">
+ 	     	</Tab>
+         </tabs>
+      </TabPane>
+      <HBox>
+         <children>
+            <Button mnemonicParsing="false" onAction="#onUpload" text="Upload" />
+            <Button mnemonicParsing="false" onAction="#onDownload" text="Download" />
+            <Button mnemonicParsing="false" onAction="#onDelete" text="Delete" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
