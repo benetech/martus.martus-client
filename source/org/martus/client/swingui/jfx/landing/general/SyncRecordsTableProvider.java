@@ -63,10 +63,11 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 		addAll(allRows);
 	}
 		
-	public void addBulletinsAndSummaries(Set localUidsToUse, Vector myDraftSummaries) throws Exception
+	public void addBulletinsAndSummaries(Set localUidsToUse, Vector myDraftSummaries, Vector mySealedSummaries) throws Exception
 	{
 		localUids = localUidsToUse;
-		addAllServerSummaries(myDraftSummaries);
+		//addAllServerSummaries(myDraftSummaries);
+		addAllServerSummaries(mySealedSummaries);
 		
 		addLocalBulletions();
 	}
@@ -107,9 +108,8 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 		ClientBulletinStore clientBulletinStore = mainWindow.getStore();
 		Bulletin bulletin = clientBulletinStore.getBulletinRevision(leafBulletinUid);
 		int bulletinSizeBytes = MartusUtilities.getBulletinSize(clientBulletinStore.getDatabase(), bulletin.getBulletinHeaderPacket());
-		Integer size = new Integer(RetrieveTableModel.getSizeInKbytes(bulletinSizeBytes));
 		int location = ServerSyncTableRowData.LOCATION_LOCAL;  //TODO compare with whats on server first.
-		ServerSyncTableRowData bulletinData = new ServerSyncTableRowData(bulletin, size, location, mainWindow.getApp());
+		ServerSyncTableRowData bulletinData = new ServerSyncTableRowData(bulletin, bulletinSizeBytes, location, mainWindow.getApp());
 		return bulletinData;
 	}
 
