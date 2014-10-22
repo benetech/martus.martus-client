@@ -218,6 +218,13 @@ abstract public class FxController implements Initializable
 		return showConfirmationDialog(tag, message);
 	}
 
+	public boolean showOkCancelConfirmationDialog(String titleTag, String messageTag)
+	{
+		String message = getLocalization().getFieldLabel(messageTag);
+		
+		return showConfirmationDialog(titleTag, EnglishCommonStrings.OK, EnglishCommonStrings.CANCEL, message);
+	}
+	
 	public boolean showConfirmationDialog(String titleTag, String message)
 	{
 		return showConfirmationDialog(titleTag, EnglishCommonStrings.YES, EnglishCommonStrings.NO, message);
