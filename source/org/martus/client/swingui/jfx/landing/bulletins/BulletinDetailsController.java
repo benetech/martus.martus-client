@@ -34,6 +34,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import org.martus.client.core.FxBulletin;
+import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiBulletinDetailsDialog;
 import org.martus.client.swingui.jfx.generic.FxController;
@@ -59,18 +60,11 @@ public class BulletinDetailsController extends FxController
 		{
 			UniversalId bulletinId = bulletin.universalIdProperty().getValue();
 			String accountId = bulletinId.getAccountId();
-			if(getApp().getAccountId().equals(accountId))
-			{
-				authorName.setText(getApp().getUserName());
-			}
-			else
-			{
-				ContactKeys ourContacts = getApp().getContactKeys();
-				authorName.setText(ourContacts.getLabelIfPresent(accountId));
-			}
+			MartusApp app = getApp();
+			authorName.setText(getAuthorName(app, accountId));
 			
 			publicCode.setText(MartusCrypto.computeFormattedPublicCode40(accountId));
-			Integer verificationStatus = getApp().getKeyVerificationStatus(accountId);
+			Integer verificationStatus = app.getKeyVerificationStatus(accountId);
 			Image verificationImage = AuthorVerifiedColumnHandler.getVerificationImage(verificationStatus);
 			contactVerificationImage.setImage(verificationImage);
 			
@@ -84,6 +78,27 @@ public class BulletinDetailsController extends FxController
 		{
 			logAndNotifyUnexpectedError(e);
 		}
+	}
+
+	//TODO add unit tests
+	static public String getAuthorName(MartusApp app, String accountId) throws Exception
+	{
+		String author = null;
+		if(app.getAccountId().equals(accountId))
+		{
+			author = app.getUserName();
+		}
+		else
+		{
+			ContactKeys ourContacts = app.getContactKeys();
+			String name = "";
+			if(ourContacts.containsKey(accountId))
+				name = ourContacts.getLabelIfPresent(accountId);
+			else
+				name = MartusCrypto.computeFormattedPublicCode40(accountId);
+			author = name;
+		}
+		return author;
 	}
 
 	@Override
