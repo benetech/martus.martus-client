@@ -289,8 +289,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	@FXML
 	public void onDeleteMyData(ActionEvent event)
 	{
-		String message = getLocalization().getFieldLabel("QuickEraseWillNotRemoveItems");
-		if(showConfirmationDialog("confirmDeleteMyData", message))
+		if(showOkCancelConfirmationDialog("confirmDeleteMyData", "QuickEraseWillNotRemoveItems"))
 		{
 			doAction(new ActionMenuQuickEraseDeleteMyData(getMainWindow()));
 		}
