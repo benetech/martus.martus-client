@@ -83,7 +83,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	{
 		//TODO should show a progress dialog that user can abort.
 		RetrieveMyDraftsTableModel model = new RetrieveMyDraftsTableModel(getApp(), getLocalization());
-		model.populateAllSummariesList();
+		model.initialize(null);
 		return model.getAllSummaries();
 	}
 
@@ -91,7 +91,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	{
 		//TODO should show a progress dialog that user can abort.
 		RetrieveMyTableModel model = new RetrieveMyTableModel(getApp(), getLocalization());
-		model.populateAllSummariesList();
+		model.initialize(null);
 		return model.getAllSummaries();
 	}
 
