@@ -40,7 +40,6 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.tablemodels.RetrieveMyDraftsTableModel;
-import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 
 
 public class ManageServerSyncRecordsController extends AbstractFxLandingContentController
@@ -67,8 +66,9 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		allRecordsTable.setItems(syncRecordsTableProvider);
 		try
 		{
-			syncRecordsTableProvider.addServerMyDrafts(getServerMyDrafts());
-			syncRecordsTableProvider.addLocalBulletin(getLocalRecords());
+			Set localRecords = getLocalRecords();
+			Vector serverMyDrafts = getServerMyDrafts();
+			syncRecordsTableProvider.addBulletinsAndSummaries(localRecords, serverMyDrafts);
 			onShowAll(null);
 		} 
 		catch (Exception e)

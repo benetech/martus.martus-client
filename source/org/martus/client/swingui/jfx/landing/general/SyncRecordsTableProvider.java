@@ -63,17 +63,36 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 		addAll(allRows);
 	}
 		
-	public void addServerMyDrafts(Vector summaries) throws Exception
+	public void addBulletinsAndSummaries(Set localUidsToUse, Vector myDraftSummaries) throws Exception
 	{
-		for (Iterator iterator = summaries.iterator(); iterator.hasNext();)
+		localUids = localUidsToUse;
+		addAllServerSummaries(myDraftSummaries);
+		
+		addLocalBulletions();
+	}
+
+	private void addAllServerSummaries(Vector myDraftSummaries) throws Exception
+	{
+		for (Iterator iterator = myDraftSummaries.iterator(); iterator.hasNext();)
 		{
 			BulletinSummary summary = (BulletinSummary) iterator.next();
 			ServerSyncTableRowData bulletinData = new ServerSyncTableRowData(summary, mainWindow.getApp());
-			allRows.add(bulletinData);		
+			addServerRecord(bulletinData);	
 		}
 	}
 	
-	public void addLocalBulletin(Set localUids) throws Exception
+	private void addServerRecord(ServerSyncTableRowData bulletinData)
+	{
+		UniversalId serverUid = bulletinData.getUniversalId();
+		if(localUids.contains(serverUid))
+		{
+			localUids.remove(serverUid);
+			bulletinData.setLocation(mainWindow.getApp(), ServerSyncTableRowData.LOCATION_BOTH);
+		}
+		allRows.add(bulletinData);
+	}
+	
+	private void addLocalBulletions() throws Exception
 	{
 		for(Iterator iter = localUids.iterator(); iter.hasNext();)
 		{
@@ -97,4 +116,5 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 	private UiMainWindowInterface mainWindow;
 	private static final int INITIAL_CAPACITY = 500;
 	private ArrayObservableList<ServerSyncTableRowData> allRows;
+	private Set localUids;
 }
