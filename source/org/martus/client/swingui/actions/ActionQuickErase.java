@@ -50,13 +50,20 @@ import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
-public abstract class ActionQuickErase extends UiMenuAction 
+public abstract class ActionQuickErase extends UiMenuAction implements ActionDoer 
 {
 	protected ActionQuickErase (UiMainWindow mainWindowToUse, String tag)
 	{
 		super(mainWindowToUse, tag);
 		app = mainWindowToUse.getApp();
 		martusAccounts = new Vector();
+	}
+	
+	@Override
+	public void doAction()
+	{
+		prepareAndDeleteMyData();
+		exitMartus();
 	}
 	
 	protected boolean confirmQuickErase(boolean uninstallAsWell)
