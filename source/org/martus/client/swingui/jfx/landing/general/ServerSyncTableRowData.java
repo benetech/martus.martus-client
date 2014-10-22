@@ -49,6 +49,7 @@ public class ServerSyncTableRowData
 		canDeleteFromServer = new SimpleBooleanProperty(mutable);
 		setLocation(app, LOCATION_SERVER);
 		isLocal = new SimpleBooleanProperty(false);
+		isRemote = new SimpleBooleanProperty(true);
 		FontHandler.setDoZawgyiConversion(false);//TODO FIXME once we are loading correct Language info
 		UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
 		String rawTitle = summaryToUse.getStorableTitle();
@@ -63,6 +64,7 @@ public class ServerSyncTableRowData
 		summary = null;
 		canDeleteFromServer = new SimpleBooleanProperty(false);
 		isLocal = new SimpleBooleanProperty(true);
+		isRemote = new SimpleBooleanProperty(false);
 		uid = bulletin.getUniversalId();
 		setLocation(app, locationOfBulletin);
 		setTitle(bulletin.get(Bulletin.TAGTITLE));
@@ -101,6 +103,8 @@ public class ServerSyncTableRowData
 		location = new SimpleStringProperty(getLocationString(locationOfBulletin, app.getLocalization()));
 		boolean local = (locationOfBulletin == LOCATION_LOCAL || locationOfBulletin == LOCATION_BOTH);
 		isLocal = new SimpleBooleanProperty(local);
+		boolean remote = (locationOfBulletin == LOCATION_SERVER || locationOfBulletin == LOCATION_BOTH);
+		isRemote = new SimpleBooleanProperty(remote);
 	}
 	
 	private String getLocationString(int locationOfBulletin, MiniLocalization localization)
@@ -184,6 +188,11 @@ public class ServerSyncTableRowData
     		return isLocal;
     }
 
+    public BooleanProperty isRemote()
+    {
+    		return isRemote;
+    }
+
     static public final int LOCATION_LOCAL = 0;
     static public final int LOCATION_SERVER = 1;
     static public final int LOCATION_BOTH = 2;
@@ -206,4 +215,5 @@ public class ServerSyncTableRowData
 	private int 	rawLocation;
 	private BooleanProperty canDeleteFromServer;
 	private BooleanProperty isLocal;
+	private BooleanProperty isRemote;
 }
