@@ -39,8 +39,11 @@ import javafx.scene.control.cell.TextFieldTableCell;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
+import org.martus.client.swingui.tablemodels.RetrieveHQDraftsTableModel;
+import org.martus.client.swingui.tablemodels.RetrieveHQTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyTableModel;
+import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 
 
 public class ManageServerSyncRecordsController extends AbstractFxLandingContentController
@@ -70,7 +73,9 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 			Set localRecords = getLocalRecords();
 			Vector serverMyDrafts = getServerMyDrafts();
 			Vector serverMySealeds = getServerMySealeds();
-			syncRecordsTableProvider.addBulletinsAndSummaries(localRecords, serverMyDrafts, serverMySealeds);
+			Vector serverHQDrafts = getServerHQDrafts();
+			Vector serverHQSealeds = getServerHQSealeds();
+			syncRecordsTableProvider.addBulletinsAndSummaries(localRecords, serverMyDrafts, serverMySealeds, serverHQDrafts, serverHQSealeds);
 			onShowAll(null);
 		} 
 		catch (Exception e)
@@ -82,7 +87,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	private Vector getServerMyDrafts() throws Exception
 	{
 		//TODO should show a progress dialog that user can abort.
-		RetrieveMyDraftsTableModel model = new RetrieveMyDraftsTableModel(getApp(), getLocalization());
+		RetrieveTableModel model = new RetrieveMyDraftsTableModel(getApp(), getLocalization());
 		model.initialize(null);
 		return model.getAllSummaries();
 	}
@@ -90,7 +95,23 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	private Vector getServerMySealeds() throws Exception
 	{
 		//TODO should show a progress dialog that user can abort.
-		RetrieveMyTableModel model = new RetrieveMyTableModel(getApp(), getLocalization());
+		RetrieveTableModel model = new RetrieveMyTableModel(getApp(), getLocalization());
+		model.initialize(null);
+		return model.getAllSummaries();
+	}
+
+	private Vector getServerHQDrafts() throws Exception
+	{
+		//TODO should show a progress dialog that user can abort.
+		RetrieveTableModel model = new RetrieveHQDraftsTableModel(getApp(), getLocalization());
+		model.initialize(null);
+		return model.getAllSummaries();
+	}
+
+	private Vector getServerHQSealeds() throws Exception
+	{
+		//TODO should show a progress dialog that user can abort.
+		RetrieveTableModel model = new RetrieveHQTableModel(getApp(), getLocalization());
 		model.initialize(null);
 		return model.getAllSummaries();
 	}
