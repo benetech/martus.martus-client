@@ -60,6 +60,7 @@ public class ServerSyncTableRowData
 	public ServerSyncTableRowData(Bulletin bulletin, int sizeOfBulletinBytes, int locationOfBulletin, MartusApp app) throws Exception
 	{
 		summary = null;
+		canDeleteFromServer = new SimpleBooleanProperty(false);
 		uid = bulletin.getUniversalId();
 		setLocation(app, locationOfBulletin);
 		setTitle(bulletin.get(Bulletin.TAGTITLE));

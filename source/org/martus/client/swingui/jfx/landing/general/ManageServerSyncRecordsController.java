@@ -25,9 +25,13 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
+import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -59,6 +63,9 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	{
 		initalizeColumns();
 		initalizeItemsTable();
+
+		RecordSelectedListener recordSelectedListener = new RecordSelectedListener();
+		allRecordsTable.getSelectionModel().selectedItemProperty().addListener(recordSelectedListener);
 	}
 	
 	private void initalizeItemsTable()
@@ -66,6 +73,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		Label noRecords = new Label(getLocalization().getFieldLabel("NoServerSyncDataInTable"));
 		allRecordsTable.setPlaceholder(noRecords);
 		allRecordsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		
 		syncRecordsTableProvider = new SyncRecordsTableProvider(getMainWindow());
 		allRecordsTable.setItems(syncRecordsTableProvider);
 		try
@@ -135,6 +143,28 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		recordSizeColumn.setCellFactory(new RecordSizeColumnHandler());
 	}
 
+	private class RecordSelectedListener implements ChangeListener<ServerSyncTableRowData>
+	{
+		public RecordSelectedListener()
+		{
+		}
+
+		@Override
+		public void changed(ObservableValue<? extends ServerSyncTableRowData> observalue	,
+				ServerSyncTableRowData previousRecord, ServerSyncTableRowData newRecord)
+		{
+			ObservableList<ServerSyncTableRowData> rowsSelected = allRecordsTable.getSelectionModel().getSelectedItems();
+			boolean isAnythingMutable = false;
+			for (Iterator iterator = rowsSelected.iterator(); iterator.hasNext();)
+			{
+				ServerSyncTableRowData data = (ServerSyncTableRowData) iterator.next();
+				if(data.canDeleteFromServerProperty().getValue())
+					isAnythingMutable = true;
+			}
+			deleteButton.setDisable(!isAnythingMutable);
+		}
+	}
+
 	@Override
 	public String getFxmlLocation()
 	{
@@ -186,7 +216,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	}
 
 	@FXML
-	private TableView<ServerSyncTableRowData> allRecordsTable;
+	TableView<ServerSyncTableRowData> allRecordsTable;
 	
 	@FXML
 	private TableColumn<ServerSyncTableRowData, String> recordLocationColumn;
@@ -209,8 +239,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	@FXML
 	private Button downloadButton;
 
-	@FXML
-	private Button deleteButton;
+	@FXML Button deleteButton;
 
 	
 	private SyncRecordsTableProvider syncRecordsTableProvider;
