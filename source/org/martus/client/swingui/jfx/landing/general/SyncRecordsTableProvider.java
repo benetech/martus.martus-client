@@ -58,8 +58,8 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 	{
 		ClientBulletinStore clientBulletinStore = mainWindow.getStore();
 		Bulletin bulletin = clientBulletinStore.getBulletinRevision(leafBulletinUid);
-		int bulletinSize = MartusUtilities.getBulletinSize(clientBulletinStore.getDatabase(), bulletin.getBulletinHeaderPacket());
-		Integer size = new Integer(bulletinSize);
+		int bulletinSizeBytes = MartusUtilities.getBulletinSize(clientBulletinStore.getDatabase(), bulletin.getBulletinHeaderPacket());
+		Integer size = new Integer(bulletinSizeBytes / KILLOBYTES);
 		int location = ServerSyncTableRowData.LOCATION_LOCAL;  //TODO compare with whats on server first.
 		ServerSyncTableRowData bulletinData = new ServerSyncTableRowData(bulletin, size, location, mainWindow.getApp());
 		return bulletinData;
@@ -67,4 +67,5 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 
 	private UiMainWindowInterface mainWindow;
 	private static final int INITIAL_CAPACITY = 100;
+	private static final int KILLOBYTES = 1000;
 }
