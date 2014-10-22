@@ -499,7 +499,7 @@ public class EnglishStrings
 "button:ServerSyncRecordTitle=Title",
 "button:ServerSyncRecordAuthor=Author",
 "button:ServerSyncRecordLastModified=Last Saved",
-"button:ServerSyncRecordSize=Size",
+"button:ServerSyncRecordSize=Size (Kb)",
 
 "field:RecordLocationLocal=Local",
 "field:RecordLocationServer=Server",
