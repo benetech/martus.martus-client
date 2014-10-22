@@ -29,11 +29,14 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinDetailsController;
+import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.common.BulletinSummary;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
+import org.martus.swing.FontHandler;
 
 public class ServerSyncTableRowData
 {
@@ -42,13 +45,16 @@ public class ServerSyncTableRowData
 		summary = summaryToUse;
 		uid = summaryToUse.getUniversalId();
 		setLocation(app, LOCATION_SERVER);
-		setTitle(summaryToUse.getStorableTitle());
+		FontHandler.setDoZawgyiConversion(false);//TODO FIXME once we are loading correct Language info
+		UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
+		String rawTitle = summaryToUse.getStorableTitle();
+		setTitle(fontHelper.getDisplayable(rawTitle));
 		setAuthor(app, summaryToUse.getAccountId());
 		setLastSavedDate(app, summaryToUse.getDateTimeSaved());
 		setSize(summaryToUse.getSize());
 	}	
 	
-	public ServerSyncTableRowData(Bulletin bulletin, Integer sizeOfBulletin, int locationOfBulletin, MartusApp app) throws Exception
+	public ServerSyncTableRowData(Bulletin bulletin, int sizeOfBulletinBytes, int locationOfBulletin, MartusApp app) throws Exception
 	{
 		summary = null;
 		uid = bulletin.getUniversalId();
@@ -56,13 +62,13 @@ public class ServerSyncTableRowData
 		setTitle(bulletin.get(Bulletin.TAGTITLE));
 		setAuthor(app, bulletin.getAccount());
 		setLastSavedDate(app, bulletin.getBulletinHeaderPacket().getLastSavedTime());
-		setSize(sizeOfBulletin);
+		setSize(sizeOfBulletinBytes);
 	}
 
 
-	public void setSize(Integer sizeOfBulletin)
+	public void setSize(Integer sizeOfBulletinBytes)
 	{
-		size = new SimpleIntegerProperty(sizeOfBulletin);
+		size = new SimpleIntegerProperty(RetrieveTableModel.getSizeInKbytes(sizeOfBulletinBytes));
 	}
 
 
@@ -78,9 +84,9 @@ public class ServerSyncTableRowData
 		author = new SimpleStringProperty(authorName);
 	}
 
-	public void setTitle(String tits)
+	public void setTitle(String titleToUse)
 	{
-		title = new SimpleStringProperty(tits);
+		title = new SimpleStringProperty(titleToUse);
 	}
 
 	public void setLocation(MartusApp app, int locationOfBulletin)

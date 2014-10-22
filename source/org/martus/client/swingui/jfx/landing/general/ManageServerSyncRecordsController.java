@@ -40,6 +40,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.tablemodels.RetrieveMyDraftsTableModel;
+import org.martus.client.swingui.tablemodels.RetrieveMyTableModel;
 
 
 public class ManageServerSyncRecordsController extends AbstractFxLandingContentController
@@ -68,7 +69,8 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		{
 			Set localRecords = getLocalRecords();
 			Vector serverMyDrafts = getServerMyDrafts();
-			syncRecordsTableProvider.addBulletinsAndSummaries(localRecords, serverMyDrafts);
+			Vector serverMySealeds = getServerMySealeds();
+			syncRecordsTableProvider.addBulletinsAndSummaries(localRecords, serverMyDrafts, serverMySealeds);
 			onShowAll(null);
 		} 
 		catch (Exception e)
@@ -81,6 +83,14 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	{
 		//TODO should show a progress dialog that user can abort.
 		RetrieveMyDraftsTableModel model = new RetrieveMyDraftsTableModel(getApp(), getLocalization());
+		model.populateAllSummariesList();
+		return model.getAllSummaries();
+	}
+
+	private Vector getServerMySealeds() throws Exception
+	{
+		//TODO should show a progress dialog that user can abort.
+		RetrieveMyTableModel model = new RetrieveMyTableModel(getApp(), getLocalization());
 		model.populateAllSummariesList();
 		return model.getAllSummaries();
 	}
