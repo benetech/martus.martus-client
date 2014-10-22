@@ -61,7 +61,6 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 		int bulletinSize = MartusUtilities.getBulletinSize(clientBulletinStore.getDatabase(), bulletin.getBulletinHeaderPacket());
 		Integer size = new Integer(bulletinSize);
 		int location = ServerSyncTableRowData.LOCATION_LOCAL;  //TODO compare with whats on server first.
-		String key = bulletin.getAccount();
 		ServerSyncTableRowData bulletinData = new ServerSyncTableRowData(bulletin, size, location, mainWindow.getApp());
 		return bulletinData;
 	}
