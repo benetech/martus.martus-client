@@ -48,6 +48,7 @@ public class ServerSyncTableRowData
 		uid = summaryToUse.getUniversalId();
 		canDeleteFromServer = new SimpleBooleanProperty(mutable);
 		setLocation(app, LOCATION_SERVER);
+		isLocal = new SimpleBooleanProperty(false);
 		FontHandler.setDoZawgyiConversion(false);//TODO FIXME once we are loading correct Language info
 		UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
 		String rawTitle = summaryToUse.getStorableTitle();
@@ -61,6 +62,7 @@ public class ServerSyncTableRowData
 	{
 		summary = null;
 		canDeleteFromServer = new SimpleBooleanProperty(false);
+		isLocal = new SimpleBooleanProperty(true);
 		uid = bulletin.getUniversalId();
 		setLocation(app, locationOfBulletin);
 		setTitle(bulletin.get(Bulletin.TAGTITLE));
@@ -97,6 +99,8 @@ public class ServerSyncTableRowData
 	{
 		rawLocation = locationOfBulletin;
 		location = new SimpleStringProperty(getLocationString(locationOfBulletin, app.getLocalization()));
+		boolean local = (locationOfBulletin == LOCATION_LOCAL || locationOfBulletin == LOCATION_BOTH);
+		isLocal = new SimpleBooleanProperty(local);
 	}
 	
 	private String getLocationString(int locationOfBulletin, MiniLocalization localization)
@@ -174,6 +178,11 @@ public class ServerSyncTableRowData
     {
     		return canDeleteFromServer;
     }
+    
+    public BooleanProperty isLocal()
+    {
+    		return isLocal;
+    }
 
     static public final int LOCATION_LOCAL = 0;
     static public final int LOCATION_SERVER = 1;
@@ -196,4 +205,5 @@ public class ServerSyncTableRowData
 	private BulletinSummary summary;
 	private int 	rawLocation;
 	private BooleanProperty canDeleteFromServer;
+	private BooleanProperty isLocal;
 }
