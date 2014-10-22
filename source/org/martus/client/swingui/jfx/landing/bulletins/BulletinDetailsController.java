@@ -94,7 +94,8 @@ public class BulletinDetailsController extends FxController
 			String name = "";
 			if(ourContacts.containsKey(accountId))
 				name = ourContacts.getLabelIfPresent(accountId);
-			else
+			
+			if(name.isEmpty())
 				name = MartusCrypto.computeFormattedPublicCode40(accountId);
 			author = name;
 		}
