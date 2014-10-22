@@ -66,6 +66,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 
 		RecordSelectedListener recordSelectedListener = new RecordSelectedListener();
 		allRecordsTable.getSelectionModel().selectedItemProperty().addListener(recordSelectedListener);
+		updateButtons();
 	}
 	
 	private void initalizeItemsTable()
@@ -153,24 +154,29 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		public void changed(ObservableValue<? extends ServerSyncTableRowData> observalue	,
 				ServerSyncTableRowData previousRecord, ServerSyncTableRowData newRecord)
 		{
-			ObservableList<ServerSyncTableRowData> rowsSelected = allRecordsTable.getSelectionModel().getSelectedItems();
-			boolean isAnythingMutable = false;
-			boolean isAnythingLocal = false;
-			boolean isAnythingRemote = false;
-			for (Iterator iterator = rowsSelected.iterator(); iterator.hasNext();)
-			{
-				ServerSyncTableRowData data = (ServerSyncTableRowData) iterator.next();
-				if(data.canDeleteFromServerProperty().getValue())
-					isAnythingMutable = true;
-				if(data.isLocal().getValue())
-					isAnythingLocal = true;
-				if(data.isRemote().getValue())
-					isAnythingRemote = true;
-			}
-			deleteButton.setDisable(!isAnythingMutable);
-			uploadButton.setDisable(!isAnythingLocal);
-			downloadButton.setDisable(!isAnythingRemote);
+			updateButtons();
 		}
+	}
+
+	protected void updateButtons()
+	{
+		ObservableList<ServerSyncTableRowData> rowsSelected = allRecordsTable.getSelectionModel().getSelectedItems();
+		boolean isAnythingMutable = false;
+		boolean isAnythingLocal = false;
+		boolean isAnythingRemote = false;
+		for (Iterator iterator = rowsSelected.iterator(); iterator.hasNext();)
+		{
+			ServerSyncTableRowData data = (ServerSyncTableRowData) iterator.next();
+			if(data.canDeleteFromServerProperty().getValue())
+				isAnythingMutable = true;
+			if(data.isLocal().getValue())
+				isAnythingLocal = true;
+			if(data.isRemote().getValue())
+				isAnythingRemote = true;
+		}
+		deleteButton.setDisable(!isAnythingMutable);
+		uploadButton.setDisable(!isAnythingLocal);
+		downloadButton.setDisable(!isAnythingRemote);
 	}
 
 	@Override
@@ -178,7 +184,6 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	{
 		return "landing/general/ManageServerSyncRecords.fxml";
 	}
-	
 	
 
 	@FXML 	
@@ -224,7 +229,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	}
 
 	@FXML
-	TableView<ServerSyncTableRowData> allRecordsTable;
+	private TableView<ServerSyncTableRowData> allRecordsTable;
 	
 	@FXML
 	private TableColumn<ServerSyncTableRowData, String> recordLocationColumn;
@@ -241,12 +246,14 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	@FXML
 	private TableColumn<ServerSyncTableRowData, Integer> recordSizeColumn;
 	
-	@FXML Button uploadButton;
+	@FXML 
+	private Button uploadButton;
 	
-	@FXML Button downloadButton;
+	@FXML 
+	private Button downloadButton;
 
-	@FXML Button deleteButton;
-
+	@FXML 
+	private Button deleteButton;
 	
 	private SyncRecordsTableProvider syncRecordsTableProvider;
 }
