@@ -31,6 +31,7 @@ import java.util.Set;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindowInterface;
 import org.martus.client.swingui.jfx.generic.data.ArrayObservableList;
+import org.martus.client.swingui.jfx.landing.bulletins.BulletinDetailsController;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -63,8 +64,8 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 		int bulletinSize = MartusUtilities.getBulletinSize(clientBulletinStore.getDatabase(), bulletin.getBulletinHeaderPacket());
 		Integer size = new Integer(bulletinSize);
 		int location = ServerSyncTableRowData.LOCATION_LOCAL;  //TODO compare with whats on server first.
-		
-		ServerSyncTableRowData bulletinData = new ServerSyncTableRowData(bulletin, size, location, localization);
+		String key = bulletin.getAccount();
+		ServerSyncTableRowData bulletinData = new ServerSyncTableRowData(bulletin, size, location, mainWindow.getApp());
 		return bulletinData;
 	}
 

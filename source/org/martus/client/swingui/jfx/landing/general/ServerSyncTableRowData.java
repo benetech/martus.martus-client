@@ -28,20 +28,26 @@ package org.martus.client.swingui.jfx.landing.general;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.jfx.landing.bulletins.BulletinDetailsController;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
 public class ServerSyncTableRowData
 {
-	public ServerSyncTableRowData(Bulletin bulletin, Integer sizeOfBulletin, int locationOfBulletin, MiniLocalization localization)
+	public ServerSyncTableRowData(Bulletin bulletin, Integer sizeOfBulletin, int locationOfBulletin, MartusApp app) throws Exception
 	{
 		uid = bulletin.getUniversalId();
-		location = new SimpleStringProperty(getLocationString(locationOfBulletin, localization));
+		location = new SimpleStringProperty(getLocationString(locationOfBulletin, app.getLocalization()));
 		title = new SimpleStringProperty(bulletin.get(Bulletin.TAGTITLE));
-		author = new SimpleStringProperty(bulletin.get(Bulletin.TAGAUTHOR));
+
+		String authorName = BulletinDetailsController.getAuthorName(app, bulletin.getAccount());
+		author = new SimpleStringProperty(authorName);
+
 		long dateLastSaved = bulletin.getBulletinHeaderPacket().getLastSavedTime();
-		dateSaved = new SimpleStringProperty(localization.formatDateTime(dateLastSaved));
+		dateSaved = new SimpleStringProperty(app.getLocalization().formatDateTime(dateLastSaved));
+
 		size = new SimpleIntegerProperty(sizeOfBulletin);
 	}
 	
