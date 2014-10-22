@@ -50,6 +50,7 @@ import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
 import org.martus.client.swingui.actions.ActionMenuContactInfo;
 import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
 import org.martus.client.swingui.actions.ActionMenuManageContacts;
+import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
 import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
@@ -282,6 +283,16 @@ public class FxLandingShellController extends FxNonWizardShellController
 		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
+		}
+	}
+	
+	@FXML
+	public void onDeleteMyData(ActionEvent event)
+	{
+		String message = getLocalization().getFieldLabel("QuickEraseWillNotRemoveItems");
+		if(showConfirmationDialog("confirmDeleteMyData", message))
+		{
+			doAction(new ActionMenuQuickEraseDeleteMyData(getMainWindow()));
 		}
 	}
 	
