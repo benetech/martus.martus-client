@@ -66,7 +66,7 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 	public void addBulletinsAndSummaries(Set localUidsToUse, Vector myDraftSummaries, Vector mySealedSummaries) throws Exception
 	{
 		localUids = localUidsToUse;
-		//addAllServerSummaries(myDraftSummaries);
+		addAllServerSummaries(myDraftSummaries);
 		addAllServerSummaries(mySealedSummaries);
 		
 		addLocalBulletions();
