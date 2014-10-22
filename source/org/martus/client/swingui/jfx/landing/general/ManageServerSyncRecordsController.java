@@ -156,6 +156,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 			ObservableList<ServerSyncTableRowData> rowsSelected = allRecordsTable.getSelectionModel().getSelectedItems();
 			boolean isAnythingMutable = false;
 			boolean isAnythingLocal = false;
+			boolean isAnythingRemote = false;
 			for (Iterator iterator = rowsSelected.iterator(); iterator.hasNext();)
 			{
 				ServerSyncTableRowData data = (ServerSyncTableRowData) iterator.next();
@@ -163,9 +164,12 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 					isAnythingMutable = true;
 				if(data.isLocal().getValue())
 					isAnythingLocal = true;
+				if(data.isRemote().getValue())
+					isAnythingRemote = true;
 			}
 			deleteButton.setDisable(!isAnythingMutable);
 			uploadButton.setDisable(!isAnythingLocal);
+			downloadButton.setDisable(!isAnythingRemote);
 		}
 	}
 
@@ -239,8 +243,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	
 	@FXML Button uploadButton;
 	
-	@FXML
-	private Button downloadButton;
+	@FXML Button downloadButton;
 
 	@FXML Button deleteButton;
 
