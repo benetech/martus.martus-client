@@ -32,6 +32,7 @@
 							<MenuItem mnemonicParsing="false" onAction="#onCreateNewAccount" styleClass="menu-item" text="Create New" />
 							<MenuItem mnemonicParsing="false" onAction="#onContactInformation" styleClass="menu-item" text="Contact Information" />
 							<MenuItem mnemonicParsing="false" onAction="#onBackupKeypair" styleClass="menu-item" text="Backup Key" />
+							<MenuItem mnemonicParsing="false" onAction="#onDeleteMyData" styleClass="menu-item" text="Delete Account" />
 							</items>
 						</Menu>
 		    			<Menu mnemonicParsing="false" styleClass="menu_style" text="Help">
