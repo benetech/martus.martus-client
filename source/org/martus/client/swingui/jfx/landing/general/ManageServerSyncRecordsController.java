@@ -30,6 +30,7 @@ import java.util.Vector;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -58,7 +59,6 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	{
 		initalizeColumns();
 		initalizeItemsTable();
-		
 	}
 	
 	private void initalizeItemsTable()
@@ -202,6 +202,16 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 
 	@FXML
 	private TableColumn<ServerSyncTableRowData, Integer> recordSizeColumn;
+	
+	@FXML
+	private Button uploadButton;
+	
+	@FXML
+	private Button downloadButton;
+
+	@FXML
+	private Button deleteButton;
+
 	
 	private SyncRecordsTableProvider syncRecordsTableProvider;
 }

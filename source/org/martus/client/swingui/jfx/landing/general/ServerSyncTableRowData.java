@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -40,10 +42,11 @@ import org.martus.swing.FontHandler;
 
 public class ServerSyncTableRowData
 {
-	public ServerSyncTableRowData(BulletinSummary summaryToUse, MartusApp app) throws Exception
+	public ServerSyncTableRowData(BulletinSummary summaryToUse, boolean mutable, MartusApp app) throws Exception
 	{
 		summary = summaryToUse;
 		uid = summaryToUse.getUniversalId();
+		canDeleteFromServer = new SimpleBooleanProperty(mutable);
 		setLocation(app, LOCATION_SERVER);
 		FontHandler.setDoZawgyiConversion(false);//TODO FIXME once we are loading correct Language info
 		UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
@@ -165,6 +168,11 @@ public class ServerSyncTableRowData
     {
     		return size;
     }
+    
+    public BooleanProperty canDeleteFromServerProperty()
+    {
+    		return canDeleteFromServer;
+    }
 
     static public final int LOCATION_LOCAL = 0;
     static public final int LOCATION_SERVER = 1;
@@ -185,5 +193,6 @@ public class ServerSyncTableRowData
 	
 	private final UniversalId uid;
 	private BulletinSummary summary;
-	int 	rawLocation;
+	private int 	rawLocation;
+	private BooleanProperty canDeleteFromServer;
 }

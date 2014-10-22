@@ -66,19 +66,28 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 	public void addBulletinsAndSummaries(Set localUidsToUse, Vector myDraftSummaries, Vector mySealedSummaries, Vector hqDraftSummaries, Vector hqSealedSummaries) throws Exception
 	{
 		localUids = localUidsToUse;
-		addAllServerSummaries(myDraftSummaries);
-		addAllServerSummaries(mySealedSummaries);
-		addAllServerSummaries(hqDraftSummaries);
-		addAllServerSummaries(hqSealedSummaries);
+		addAllServerSummariesMutable(myDraftSummaries);
+		addAllServerSummariesImmutable(mySealedSummaries);
+		addAllServerSummariesImmutable(hqDraftSummaries);
+		addAllServerSummariesImmutable(hqSealedSummaries);
 		addLocalBulletions();
 	}
 
-	private void addAllServerSummaries(Vector myDraftSummaries) throws Exception
+	private void addAllServerSummariesMutable(Vector summaries) throws Exception
+	{
+		addAllServerSummaries(summaries, true);
+	}
+
+	private void addAllServerSummariesImmutable(Vector summaries) throws Exception
+	{
+		addAllServerSummaries(summaries, false);
+	}
+	private void addAllServerSummaries(Vector myDraftSummaries, boolean mutable) throws Exception
 	{
 		for (Iterator iterator = myDraftSummaries.iterator(); iterator.hasNext();)
 		{
 			BulletinSummary summary = (BulletinSummary) iterator.next();
-			ServerSyncTableRowData bulletinData = new ServerSyncTableRowData(summary, mainWindow.getApp());
+			ServerSyncTableRowData bulletinData = new ServerSyncTableRowData(summary, mutable, mainWindow.getApp());
 			addServerRecord(bulletinData);	
 		}
 	}

@@ -29,9 +29,9 @@
       </ScrollPane>
       <HBox>
          <children>
-            <Button mnemonicParsing="false" onAction="#onUpload" text="Upload" />
-            <Button mnemonicParsing="false" onAction="#onDownload" text="Download" />
-            <Button mnemonicParsing="false" onAction="#onDelete" text="Delete" />
+            <Button fx:id="uploadButton" mnemonicParsing="false" onAction="#onUpload" text="Upload" />
+            <Button fx:id="downloadButton" mnemonicParsing="false" onAction="#onDownload" text="Download" />
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDelete" text="Delete" />
          </children>
       </HBox>
    </children>
