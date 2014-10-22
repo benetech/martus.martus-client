@@ -505,6 +505,7 @@ public class EnglishStrings
 "field:RecordLocationServer=Server",
 "field:RecordLocationBothLocalAndServer=Both",
 "field:RecordLocationUnknown=Unknown",
+"field:NoServerSyncDataInTable=No Records available",
 
 "button:IncludePrivateBulletins=Include Private Data",
 "button:SettingOn=On",

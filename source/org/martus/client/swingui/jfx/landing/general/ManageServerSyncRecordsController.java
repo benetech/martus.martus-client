@@ -25,24 +25,75 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.Set;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
+import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 
 
-public class ManageServerSyncRecordsController extends FxController
+public class ManageServerSyncRecordsController extends AbstractFxLandingContentController
 {
 	public ManageServerSyncRecordsController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+	}
+
+	@Override
+	public void initializeMainContentPane()
+	{
+		initalizeColumns();
+		initalizeItemsTable();
+		
+	}
+	
+	private void initalizeItemsTable()
+	{
+		Label noRecords = new Label(getLocalization().getFieldLabel("NoServerSyncDataInTable"));
+		allRecordsTable.setPlaceholder(noRecords);
+		allRecordsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		syncRecordsTableProvider = new SyncRecordsTableProvider(getMainWindow());
+		allRecordsTable.setItems(syncRecordsTableProvider);
+		try
+		{
+			//syncRecordsTableProvider.addServerBulletins(getServerRecords());
+			syncRecordsTableProvider.addLocalBulletin(getLocalRecords());
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
+
+	//private void getServerRecords()
+	//{		
+	//}
+
+	private Set getLocalRecords()
+	{
+		return getApp().getStore().getAllBulletinLeafUids();
+	}
+
+	private void initalizeColumns()
+	{
+		recordLocationColumn.setCellValueFactory(new PropertyValueFactory<ServerSyncTableRowData, String>(ServerSyncTableRowData.LOCATION_PROPERTY_NAME));
+		recordLocationColumn.setCellFactory(TextFieldTableCell.<ServerSyncTableRowData>forTableColumn());
+		recordTitleColumn.setCellValueFactory(new PropertyValueFactory<ServerSyncTableRowData, String>(ServerSyncTableRowData.TITLE_PROPERTY_NAME));
+		recordTitleColumn.setCellFactory(TextFieldTableCell.<ServerSyncTableRowData>forTableColumn());
+		recordAuthorColumn.setCellValueFactory(new PropertyValueFactory<ServerSyncTableRowData, String>(ServerSyncTableRowData.AUTHOR_PROPERTY_NAME));
+		recordAuthorColumn.setCellFactory(TextFieldTableCell.<ServerSyncTableRowData>forTableColumn());
+		recordLastSavedColumn.setCellValueFactory(new PropertyValueFactory<ServerSyncTableRowData, String>(ServerSyncTableRowData.DATE_SAVDED_PROPERTY_NAME));
+		recordLastSavedColumn.setCellFactory(TextFieldTableCell.<ServerSyncTableRowData>forTableColumn());
+		recordSizeColumn.setCellValueFactory(new PropertyValueFactory<ServerSyncTableRowData, Integer>(ServerSyncTableRowData.SIZE_PROPERTY_NAME));
+		recordSizeColumn.setCellFactory(new RecordSizeColumnHandler());
 	}
 
 	@Override
@@ -52,11 +103,6 @@ public class ManageServerSyncRecordsController extends FxController
 	}
 	
 	
-	@Override
-	public void initialize(URL location, ResourceBundle bundle)
-	{
-		super.initialize(location, bundle);
-	}
 
 	@FXML 	
 	private void onUpload(ActionEvent event)
@@ -101,20 +147,22 @@ public class ManageServerSyncRecordsController extends FxController
 	}
 
 	@FXML
-	private TableView allRecordsTable;
+	private TableView<ServerSyncTableRowData> allRecordsTable;
 	
 	@FXML
-	private TableColumn recordLocationColumn;
+	private TableColumn<ServerSyncTableRowData, String> recordLocationColumn;
 
 	@FXML
-	private TableColumn recordTitleColumn;
+	private TableColumn<ServerSyncTableRowData, String> recordTitleColumn;
 
 	@FXML
-	private TableColumn recordAuthorColumn;
+	private TableColumn<ServerSyncTableRowData, String> recordAuthorColumn;
 
 	@FXML
-	private TableColumn recordLastSavedColumn;
+	private TableColumn<ServerSyncTableRowData, String> recordLastSavedColumn;
 
 	@FXML
-	private TableColumn recordSizeColumn;
+	private TableColumn<ServerSyncTableRowData, Integer> recordSizeColumn;
+	
+	private SyncRecordsTableProvider syncRecordsTableProvider;
 }
