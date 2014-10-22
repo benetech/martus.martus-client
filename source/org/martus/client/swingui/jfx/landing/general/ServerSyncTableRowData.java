@@ -30,25 +30,63 @@ import javafx.beans.property.SimpleStringProperty;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinDetailsController;
+import org.martus.common.BulletinSummary;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
 public class ServerSyncTableRowData
 {
+	public ServerSyncTableRowData(BulletinSummary summaryToUse, MartusApp app) throws Exception
+	{
+		summary = summaryToUse;
+		uid = summaryToUse.getUniversalId();
+		setLocation(app, LOCATION_SERVER);
+		setTitle(summaryToUse.getStorableTitle());
+		setAuthor(app, summaryToUse.getAccountId());
+		setLastSavedDate(app, summaryToUse.getDateTimeSaved());
+		setSize(summaryToUse.getSize());
+	}	
+	
 	public ServerSyncTableRowData(Bulletin bulletin, Integer sizeOfBulletin, int locationOfBulletin, MartusApp app) throws Exception
 	{
+		summary = null;
 		uid = bulletin.getUniversalId();
-		location = new SimpleStringProperty(getLocationString(locationOfBulletin, app.getLocalization()));
-		title = new SimpleStringProperty(bulletin.get(Bulletin.TAGTITLE));
+		setLocation(app, locationOfBulletin);
+		setTitle(bulletin.get(Bulletin.TAGTITLE));
+		setAuthor(app, bulletin.getAccount());
+		setLastSavedDate(app, bulletin.getBulletinHeaderPacket().getLastSavedTime());
+		setSize(sizeOfBulletin);
+	}
 
-		String authorName = BulletinDetailsController.getAuthorName(app, bulletin.getAccount());
-		author = new SimpleStringProperty(authorName);
 
-		long dateLastSaved = bulletin.getBulletinHeaderPacket().getLastSavedTime();
-		dateSaved = new SimpleStringProperty(app.getLocalization().formatDateTime(dateLastSaved));
-
+	public void setSize(Integer sizeOfBulletin)
+	{
 		size = new SimpleIntegerProperty(sizeOfBulletin);
+	}
+
+
+	public void setLastSavedDate(MartusApp app, long dateLastSaved)
+	{
+		dateSaved = new SimpleStringProperty(app.getLocalization().formatDateTime(dateLastSaved));
+	}
+
+
+	public void setAuthor(MartusApp app, String account) throws Exception
+	{
+		String authorName = BulletinDetailsController.getAuthorName(app, account);
+		author = new SimpleStringProperty(authorName);
+	}
+
+	public void setTitle(String tits)
+	{
+		title = new SimpleStringProperty(tits);
+	}
+
+	public void setLocation(MartusApp app, int locationOfBulletin)
+	{
+		rawLocation = locationOfBulletin;
+		location = new SimpleStringProperty(getLocationString(locationOfBulletin, app.getLocalization()));
 	}
 	
 	private String getLocationString(int locationOfBulletin, MiniLocalization localization)
@@ -106,6 +144,11 @@ public class ServerSyncTableRowData
 	{
 		return location;
 	}
+	
+	public int getRawLocation()
+	{
+		return rawLocation;
+	}
 
     public Integer getSize() 
     {
@@ -120,18 +163,21 @@ public class ServerSyncTableRowData
     static public final int LOCATION_LOCAL = 0;
     static public final int LOCATION_SERVER = 1;
     static public final int LOCATION_BOTH = 2;
-    
+    static public final int LOCATION_ANY = 3;
+       
     static public final String LOCATION_PROPERTY_NAME = "location";
     static public final String TITLE_PROPERTY_NAME = "title";
     static public final String AUTHOR_PROPERTY_NAME = "author";
     static public final String DATE_SAVDED_PROPERTY_NAME = "dateSaved";
     static public final String SIZE_PROPERTY_NAME = "size";
     
-	private final SimpleStringProperty location;
-    private final SimpleStringProperty title;
-	private final SimpleStringProperty author;
-	private final SimpleStringProperty dateSaved;
-	private final SimpleIntegerProperty size;
+	private SimpleStringProperty location;
+    private SimpleStringProperty title;
+	private SimpleStringProperty author;
+	private SimpleStringProperty dateSaved;
+	private SimpleIntegerProperty size;
 	
 	private final UniversalId uid;
+	private BulletinSummary summary;
+	int 	rawLocation;
 }

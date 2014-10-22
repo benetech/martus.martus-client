@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.general;
 
 import java.util.Set;
+import java.util.Vector;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,6 +39,8 @@ import javafx.scene.control.cell.TextFieldTableCell;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
+import org.martus.client.swingui.tablemodels.RetrieveMyDraftsTableModel;
+import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 
 
 public class ManageServerSyncRecordsController extends AbstractFxLandingContentController
@@ -64,8 +67,9 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		allRecordsTable.setItems(syncRecordsTableProvider);
 		try
 		{
-			//syncRecordsTableProvider.addServerBulletins(getServerRecords());
+			syncRecordsTableProvider.addServerMyDrafts(getServerMyDrafts());
 			syncRecordsTableProvider.addLocalBulletin(getLocalRecords());
+			onShowAll(null);
 		} 
 		catch (Exception e)
 		{
@@ -73,9 +77,13 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		}
 	}
 
-	//private void getServerRecords()
-	//{		
-	//}
+	private Vector getServerMyDrafts() throws Exception
+	{
+		//TODO should show a progress dialog that user can abort.
+		RetrieveMyDraftsTableModel model = new RetrieveMyDraftsTableModel(getApp(), getLocalization());
+		model.populateAllSummariesList();
+		return model.getAllSummaries();
+	}
 
 	private Set getLocalRecords()
 	{
@@ -125,25 +133,25 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	@FXML 	
 	private void onShowAll(ActionEvent event)
 	{
-		
+		syncRecordsTableProvider.show(ServerSyncTableRowData.LOCATION_ANY);
 	}
 
 	@FXML 	
 	private void onShowLocalOnly(ActionEvent event)
 	{
-		
+		syncRecordsTableProvider.show(ServerSyncTableRowData.LOCATION_LOCAL);
 	}
 
 	@FXML 	
 	private void onShowServerOnly(ActionEvent event)
 	{
-		
+		syncRecordsTableProvider.show(ServerSyncTableRowData.LOCATION_SERVER);
 	}
 
 	@FXML 	
 	private void onShowBoth(ActionEvent event)
 	{
-		
+		syncRecordsTableProvider.show(ServerSyncTableRowData.LOCATION_BOTH);
 	}
 
 	@FXML

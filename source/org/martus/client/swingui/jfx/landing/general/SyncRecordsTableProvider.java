@@ -27,11 +27,13 @@ package org.martus.client.swingui.jfx.landing.general;
 
 import java.util.Iterator;
 import java.util.Set;
+import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindowInterface;
 import org.martus.client.swingui.jfx.generic.data.ArrayObservableList;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
+import org.martus.common.BulletinSummary;
 import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
@@ -42,20 +44,46 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 	{
 		super(INITIAL_CAPACITY);
 		mainWindow = mainWindowToUse;
+		allRows = new ArrayObservableList(INITIAL_CAPACITY);
+	}
+	
+	public void show(int location)
+	{
+		clear();
+		if(location != ServerSyncTableRowData.LOCATION_ANY)
+		{
+			for (Iterator iterator = allRows.iterator(); iterator.hasNext();)
+			{
+				ServerSyncTableRowData rowData = (ServerSyncTableRowData) iterator.next();
+				if(rowData.getRawLocation() == location)
+					add(rowData);
+			}
+			return;
+		}
+		addAll(allRows);
+	}
+		
+	public void addServerMyDrafts(Vector summaries) throws Exception
+	{
+		for (Iterator iterator = summaries.iterator(); iterator.hasNext();)
+		{
+			BulletinSummary summary = (BulletinSummary) iterator.next();
+			ServerSyncTableRowData bulletinData = new ServerSyncTableRowData(summary, mainWindow.getApp());
+			allRows.add(bulletinData);		
+		}
 	}
 	
 	public void addLocalBulletin(Set localUids) throws Exception
 	{
-		clear();
 		for(Iterator iter = localUids.iterator(); iter.hasNext();)
 		{
 			UniversalId leafBulletinUid = (UniversalId) iter.next();
-			ServerSyncTableRowData bulletinData = getCurrentBulletinData(leafBulletinUid);
-			add(bulletinData);		
+			ServerSyncTableRowData bulletinData = getLocalBulletinData(leafBulletinUid);
+			allRows.add(bulletinData);		
 		}
 	}
 
-	protected ServerSyncTableRowData getCurrentBulletinData(UniversalId leafBulletinUid) throws Exception
+	protected ServerSyncTableRowData getLocalBulletinData(UniversalId leafBulletinUid) throws Exception
 	{
 		ClientBulletinStore clientBulletinStore = mainWindow.getStore();
 		Bulletin bulletin = clientBulletinStore.getBulletinRevision(leafBulletinUid);
@@ -67,5 +95,6 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 	}
 
 	private UiMainWindowInterface mainWindow;
-	private static final int INITIAL_CAPACITY = 100;
+	private static final int INITIAL_CAPACITY = 500;
+	private ArrayObservableList<ServerSyncTableRowData> allRows;
 }
