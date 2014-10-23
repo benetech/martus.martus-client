@@ -462,7 +462,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 			}
 			String folderToDownloadRecords = getCurrentBulletinFolder().getName();
 			ManageServerSyncRecordsController controller = new ManageServerSyncRecordsController(getMainWindow(), folderToDownloadRecords);
-			ActionDoer shellController = new DialogWithCloseShellController(getMainWindow(), controller);
+			ActionDoer shellController = new DialogWithNoButtonsShellController(getMainWindow(), controller);
 			doAction(shellController);
 		}
 		catch (Exception e)
