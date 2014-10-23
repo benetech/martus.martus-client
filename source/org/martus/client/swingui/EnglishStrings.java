@@ -506,6 +506,8 @@ public class EnglishStrings
 "field:RecordLocationBothLocalAndServer=Both",
 "field:RecordLocationUnknown=Unknown",
 "field:NoServerSyncDataInTable=No Records available",
+"wintitle:notifySyncUnableToDownloadLocalFiles=Download Information",
+"field:notifySyncUnableToDownloadLocalFilescause=The following bulletins were unable to be downloaded since they were only found locally.",
 
 "button:IncludePrivateBulletins=Include Private Data",
 "button:SettingOn=On",
@@ -1038,6 +1040,7 @@ public class EnglishStrings
 "field:notifyViewAttachmentNotAvailablecause=This computer can only view JPEG, GIF, and PNG image attachments",
 "field:notifyAddPermissionsZeroBulletinsOurscause=Must select at least one bulletin that was created by this account",
 "field:notifySealSelectedZeroBulletinsOurscause=Must select at least one bulletin that was created by this account",
+
 
 "field:notifyErrorImportingBulletinsTooOldcause=This XML file was created by an older version of Martus and cannot be read by this version.",
 "field:notifyErrorImportingBulletinsTooNewcause=This XML file was created by a newer version of Martus and cannot be read by this version.  You must upgrade to the newer version of Martus to import this file.",
