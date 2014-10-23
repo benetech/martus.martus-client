@@ -2055,8 +2055,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 
 		if(UiSession.isJavaFx())
 		{
-			mainStage = new FxMainStage(this);
 			statusBar = new FxStatusBar(getLocalization());
+			mainStage = new FxMainStage(this);
 			FxRunner fxRunner = new FxRunner(mainStage);
 			fxRunner.setAbortImmediatelyOnError();
 			Platform.runLater(fxRunner);
@@ -2064,8 +2064,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		}
 		else
 		{
-			mainPane = new UiMainPane(this, getUiState());
 			statusBar = new UiStatusBar(getLocalization());		
+			mainPane = new UiMainPane(this, getUiState());
 			setContentPane(mainPane);
 		}
 
