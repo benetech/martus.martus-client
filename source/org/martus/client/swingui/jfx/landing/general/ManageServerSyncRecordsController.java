@@ -195,6 +195,34 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	@FXML 	
 	private void onDownload(ActionEvent event)
 	{
+		//TODO put this in a progress Dialog user can abort.
+		ObservableList<ServerSyncTableRowData> selectedRows = allRecordsTable.getSelectionModel().getSelectedItems();
+		StringBuilder localOnlyRecords = new StringBuilder();
+		for (Iterator iterator = selectedRows.iterator(); iterator.hasNext();)
+		{
+			ServerSyncTableRowData recordData = (ServerSyncTableRowData) iterator.next();
+			if(recordData.getRawLocation() == ServerSyncTableRowData.LOCATION_LOCAL)
+			{
+				localOnlyRecords.append(TITLE_SEPARATOR);
+				localOnlyRecords.append(recordData.getTitle());
+			}
+			else
+			{
+				downloadRecord(recordData);
+			}
+		}
+		if(localOnlyRecords.length()>1)
+			DisplayWarningDialog("SyncUnableToDownloadLocalFiles", localOnlyRecords);
+	}
+
+	private void DisplayWarningDialog( String warningTag, StringBuilder titlesInQuestion)
+	{
+		showNotifyDialog(warningTag, titlesInQuestion.toString());
+	}
+
+	private void downloadRecord(ServerSyncTableRowData recordData)
+	{
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -234,6 +262,8 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		updateTable(ServerSyncTableRowData.LOCATION_BOTH);
 	}
 
+	private final String TITLE_SEPARATOR = "\n";
+	
 	@FXML
 	private TableView<ServerSyncTableRowData> allRecordsTable;
 	
