@@ -26,31 +26,37 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
-import java.awt.Component;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import org.martus.swing.UiLanguageDirection;
-import org.martus.swing.Utilities;
+import org.martus.common.ProgressMeterInterface;
 
-public class UiStatusBar extends StatusBar
-{
-
-	public UiStatusBar(MartusLocalization localization)
+public class StatusBar
+{	
+	public ProgressMeterInterface getBackgroundProgressMeter()
 	{
-		super();
-		JPanel uiPanel = getUiPanel();
-		uiPanel.setLayout( new BoxLayout( uiPanel, BoxLayout.X_AXIS) );
-		uiPanel.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
-
-		Box statusBarBox = Box.createHorizontalBox();
-		backgroundProgressMeter = new UiProgressMeter(null, localization);
-		backgroundProgressMeter.hideProgressMeter();
-		torProgressMeter = new UiProgressMeter(null, localization);
-		torProgressMeter.hideProgressMeter();
-		Utilities.addComponentsRespectingOrientation(statusBarBox, new Component[]{(UiProgressMeter)backgroundProgressMeter, Box.createHorizontalGlue(), (UiProgressMeter)torProgressMeter});
-		uiPanel.add(statusBarBox);
+		return backgroundProgressMeter;
 	}
+	
+	public ProgressMeterInterface getTorProgressMeter()
+	{
+		return torProgressMeter;
+	}
+	
+	public void setStatusMessageTag(String tag)
+	{
+		ProgressMeterInterface r = getBackgroundProgressMeter();	
+		r.setStatusMessage(tag);
+		r.hideProgressMeter();
+	}
+	
+	public JPanel getUiPanel()
+	{
+		if(panel == null)
+			panel = new JPanel();
+		return panel;
+	}
+
+	protected ProgressMeterInterface backgroundProgressMeter;
+	protected ProgressMeterInterface torProgressMeter;
+	private JPanel panel;
 }
