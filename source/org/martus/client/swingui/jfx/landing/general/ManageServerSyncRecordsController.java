@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
@@ -42,6 +43,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.tablemodels.RetrieveHQDraftsTableModel;
@@ -49,6 +53,7 @@ import org.martus.client.swingui.tablemodels.RetrieveHQTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
 
@@ -190,7 +195,56 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	@FXML 	
 	private void onUpload(ActionEvent event)
 	{
-		
+		ObservableList<ServerSyncTableRowData> selectedRows = allRecordsTable.getSelectionModel().getSelectedItems();
+		StringBuilder serverOnlyRecords = new StringBuilder();
+		ClientBulletinStore store = getApp().getStore();
+		BulletinFolder draftOutBox = store.getFolderDraftOutbox();
+		BulletinFolder sealedOutBox = store.getFolderSealedOutbox();
+		for (Iterator iterator = selectedRows.iterator(); iterator.hasNext();)
+		{
+			ServerSyncTableRowData recordData = (ServerSyncTableRowData) iterator.next();
+			if(recordData.getRawLocation() == ServerSyncTableRowData.LOCATION_SERVER)
+			{
+				addToInvalidRecords(serverOnlyRecords, recordData);
+			}
+			else
+			{
+				String accountId = getApp().getAccountId();
+				Bulletin bulletin =  store.getBulletinRevision(recordData.getUniversalId());
+				if(!bulletin.getBulletinHeaderPacket().isAuthorizedToUpload(accountId))
+				{
+					addToInvalidRecords(serverOnlyRecords, recordData);
+					continue;
+				}
+
+				try
+				{
+					if(bulletin.isMutable())
+						draftOutBox.add(bulletin);
+					if(bulletin.isImmutable())
+						sealedOutBox.add(bulletin);
+				} 
+				catch (BulletinAlreadyExistsException ignored)
+				{
+				} 
+				catch (IOException e)
+				{
+					addToInvalidRecords(serverOnlyRecords, recordData);
+					logAndNotifyUnexpectedError(e);
+				}
+			}
+		}
+		if(serverOnlyRecords.length()>0)
+			DisplayWarningDialog("SyncUnableToUploadServerFiles", serverOnlyRecords);
+
+		closeDialog();
+	}
+
+	public void addToInvalidRecords(StringBuilder serverOnlyRecords,
+			ServerSyncTableRowData recordData)
+	{
+		serverOnlyRecords.append(TITLE_SEPARATOR);
+		serverOnlyRecords.append(recordData.getTitle());
 	}
 
 	@FXML 	
@@ -203,16 +257,11 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		{
 			ServerSyncTableRowData recordData = (ServerSyncTableRowData) iterator.next();
 			if(recordData.getRawLocation() == ServerSyncTableRowData.LOCATION_LOCAL)
-			{
-				localOnlyRecords.append(TITLE_SEPARATOR);
-				localOnlyRecords.append(recordData.getTitle());
-			}
+				addToInvalidRecords(localOnlyRecords, recordData);
 			else
-			{
 				uidsToDownload.add(recordData.getUniversalId());
-			}
 		}
-		if(localOnlyRecords.length()>1)
+		if(localOnlyRecords.length()>0)
 			DisplayWarningDialog("SyncUnableToDownloadLocalFiles", localOnlyRecords);
 		try
 		{

@@ -508,6 +508,8 @@ public class EnglishStrings
 "field:NoServerSyncDataInTable=No Records available",
 "wintitle:notifySyncUnableToDownloadLocalFiles=Download Information",
 "field:notifySyncUnableToDownloadLocalFilescause=The following bulletins were unable to be downloaded since they were only found locally.  The remaining bulletins will be downloaded in the background.",
+"wintitle:notifySyncUnableToUploadServerFiles=Upload Information",
+"field:notifySyncUnableToUploadServerFilescause=The following bulletins were unable to be uploaded since they were only found on the server or you do not have permission to upload these as your own.  The remaining bulletins will be uploaded in the background.",
 
 "button:IncludePrivateBulletins=Include Private Data",
 "button:SettingOn=On",
