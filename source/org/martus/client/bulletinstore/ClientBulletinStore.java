@@ -586,6 +586,12 @@ public class ClientBulletinStore extends BulletinStore
 	{
 		return RECOVERED_BULLETIN_FOLDER;
 	}
+	
+		
+	public String getNameOfFolderForAllRetrieved()
+	{
+		return RETRIEVED_FOLDER;
+	}
 
 	public String getNameOfFolderRetrievedSealed()
 	{

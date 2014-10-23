@@ -1377,6 +1377,11 @@ public class MartusApp
 		String folderName = getNameOfFolderRetrievedFieldOfficeSealed();
 		return createOrFindFolder(folderName);
 	}
+	
+	public String getNameOfFolderForAllRetrieved()
+	{
+		return store.getNameOfFolderForAllRetrieved();
+	}
 
 	public String getNameOfFolderRetrievedSealed()
 	{
