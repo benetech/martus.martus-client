@@ -450,6 +450,11 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	{
 		try
 		{
+			if(getMainWindow().isRetrieveInProgress())
+			{
+				showNotifyDialog("RetrieveInProgress");
+				return;
+			}
 			if(!getApp().isSSLServerAvailable())
 			{
 				showNotifyDialog("retrievenoserver");
