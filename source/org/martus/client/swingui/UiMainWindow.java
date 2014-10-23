@@ -124,8 +124,12 @@ import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.MiniLocalization;
+import org.martus.common.ProgressMeterInterface;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.EncryptionException;
+import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
+import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
@@ -1851,14 +1855,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 			if(uidList == null)
 				return;
 			
-			getApp().createOrFindFolder(folderName);
-			getApp().getStore().saveFolders();
-			folderTreeContentsHaveChanged();
-
-			RetrieveCommand command = new RetrieveCommand(folderName, uidList);
-			getApp().startBackgroundRetrieve(command);
-			
-			setStatusMessageTag(STATUS_RETRIEVING);
+			retrieveRecordsFromServer(folderName, uidList);
 			
 //			if(progressDlg.shouldExit())
 //				notifyDlg("RetrieveCanceled");
@@ -1872,6 +1869,20 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		{
 			notifyDlg("UnexpectedError");
 		}
+	}
+
+	public void retrieveRecordsFromServer(String folderName, Vector uidList)
+			throws MartusSignatureException, NoKeyPairException,
+			EncryptionException, IOException
+	{
+		getApp().createOrFindFolder(folderName);
+		getApp().getStore().saveFolders();
+		folderTreeContentsHaveChanged();
+
+		RetrieveCommand command = new RetrieveCommand(folderName, uidList);
+		getApp().startBackgroundRetrieve(command);
+		
+		setStatusMessageTag(STATUS_RETRIEVING);
 	}
 
 
@@ -2066,7 +2077,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		MartusLogger.logEndProcess("Checking server status");
 	}
 
-	public UiProgressMeter getTorProgressMeter()
+	public ProgressMeterInterface getTorProgressMeter()
 	{
 		UiStatusBar statusBar = getStatusBar();
 		if(statusBar == null)
