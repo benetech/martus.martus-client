@@ -32,6 +32,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import org.martus.common.ProgressMeterInterface;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.Utilities;
 
@@ -49,27 +50,27 @@ public class UiStatusBar extends JPanel
 		backgroundProgressMeter.hideProgressMeter();
 		torProgressMeter = new UiProgressMeter(null, localization);
 		torProgressMeter.hideProgressMeter();
-		Utilities.addComponentsRespectingOrientation(statusBarBox, new Component[]{backgroundProgressMeter, Box.createHorizontalGlue(), torProgressMeter});
+		Utilities.addComponentsRespectingOrientation(statusBarBox, new Component[]{(UiProgressMeter)backgroundProgressMeter, Box.createHorizontalGlue(), (UiProgressMeter)torProgressMeter});
 		add(statusBarBox);
 	}
 	
-	public UiProgressMeter getBackgroundProgressMeter()
+	public ProgressMeterInterface getBackgroundProgressMeter()
 	{
 		return backgroundProgressMeter;
 	}
 	
-	public UiProgressMeter getTorProgressMeter()
+	public ProgressMeterInterface getTorProgressMeter()
 	{
 		return torProgressMeter;
 	}
 	
 	public void setStatusMessageTag(String tag)
 	{
-		UiProgressMeter r = getBackgroundProgressMeter();	
+		ProgressMeterInterface r = getBackgroundProgressMeter();	
 		r.setStatusMessage(tag);
 		r.hideProgressMeter();
 	}
 
-	private UiProgressMeter backgroundProgressMeter;
-	private UiProgressMeter torProgressMeter;
+	private ProgressMeterInterface backgroundProgressMeter;
+	private ProgressMeterInterface torProgressMeter;
 }
