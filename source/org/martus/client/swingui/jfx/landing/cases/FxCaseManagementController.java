@@ -460,8 +460,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 				showNotifyDialog("retrievenoserver");
 				return;
 			}
-			String folderToDownloadRecords = getCurrentBulletinFolder().getName();
-			ManageServerSyncRecordsController controller = new ManageServerSyncRecordsController(getMainWindow(), folderToDownloadRecords);
+			ManageServerSyncRecordsController controller = new ManageServerSyncRecordsController(getMainWindow());
 			ActionDoer shellController = new DialogWithNoButtonsShellController(getMainWindow(), controller);
 			doAction(shellController);
 		}

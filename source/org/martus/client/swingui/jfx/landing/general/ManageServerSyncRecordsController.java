@@ -54,10 +54,9 @@ import org.martus.common.packet.UniversalId;
 
 public class ManageServerSyncRecordsController extends AbstractFxLandingContentController
 {
-	public ManageServerSyncRecordsController(UiMainWindow mainWindowToUse, String folderToUse)
+	public ManageServerSyncRecordsController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		downloadFolder = folderToUse;
 	}
 
 	@Override
@@ -217,7 +216,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 			DisplayWarningDialog("SyncUnableToDownloadLocalFiles", localOnlyRecords);
 		try
 		{
-			getMainWindow().retrieveRecordsFromServer(downloadFolder, uidsToDownload);
+			getMainWindow().retrieveRecordsFromServer(getApp().getNameOfFolderForAllRetrieved(), uidsToDownload);
 			closeDialog();
 		} 
 		catch (Exception e)
@@ -302,5 +301,4 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	private Button deleteButton;
 	
 	private SyncRecordsTableProvider syncRecordsTableProvider;
-	private String downloadFolder;
 }
