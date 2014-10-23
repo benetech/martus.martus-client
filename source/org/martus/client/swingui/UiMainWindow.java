@@ -1036,6 +1036,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		UiFolderTreePane folderTreePane = getFolderTreePane();
 		if(folderTreePane != null)
 			folderTreePane.folderTreeContentsHaveChanged();
+		if(UiSession.isJavaFx())
+			getMainStage().getCaseManager().folderContentsHaveChanged();
 	}
 
 	public boolean isDiscardedFolderSelected()
