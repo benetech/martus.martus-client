@@ -49,13 +49,15 @@ import org.martus.client.swingui.tablemodels.RetrieveHQTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
+import org.martus.common.packet.UniversalId;
 
 
 public class ManageServerSyncRecordsController extends AbstractFxLandingContentController
 {
-	public ManageServerSyncRecordsController(UiMainWindow mainWindowToUse)
+	public ManageServerSyncRecordsController(UiMainWindow mainWindowToUse, String folderToUse)
 	{
 		super(mainWindowToUse);
+		downloadFolder = folderToUse;
 	}
 
 	@Override
@@ -195,9 +197,9 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	@FXML 	
 	private void onDownload(ActionEvent event)
 	{
-		//TODO put this in a progress Dialog user can abort.
 		ObservableList<ServerSyncTableRowData> selectedRows = allRecordsTable.getSelectionModel().getSelectedItems();
 		StringBuilder localOnlyRecords = new StringBuilder();
+		Vector<UniversalId> uidsToDownload = new Vector(selectedRows.size());
 		for (Iterator iterator = selectedRows.iterator(); iterator.hasNext();)
 		{
 			ServerSyncTableRowData recordData = (ServerSyncTableRowData) iterator.next();
@@ -208,22 +210,25 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 			}
 			else
 			{
-				downloadRecord(recordData);
+				uidsToDownload.add(recordData.getUniversalId());
 			}
 		}
 		if(localOnlyRecords.length()>1)
 			DisplayWarningDialog("SyncUnableToDownloadLocalFiles", localOnlyRecords);
+		try
+		{
+			getMainWindow().retrieveRecordsFromServer(downloadFolder, uidsToDownload);
+			//TODO exit Dialog since retrieval
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
 	}
 
 	private void DisplayWarningDialog( String warningTag, StringBuilder titlesInQuestion)
 	{
 		showNotifyDialog(warningTag, titlesInQuestion.toString());
-	}
-
-	private void downloadRecord(ServerSyncTableRowData recordData)
-	{
-		// TODO Auto-generated method stub
-		
 	}
 
 	@FXML 	
@@ -292,4 +297,5 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	private Button deleteButton;
 	
 	private SyncRecordsTableProvider syncRecordsTableProvider;
+	private String downloadFolder;
 }

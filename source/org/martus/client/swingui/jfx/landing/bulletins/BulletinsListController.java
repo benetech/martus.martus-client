@@ -49,6 +49,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -91,6 +92,12 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		initalizeColumns();
 		initalizeItemsTable();
 		initalizeButtons();
+		initializeStatusBar();
+	}
+
+	private void initializeStatusBar()
+	{
+		statusBar.getChildren().add(getMainWindow().getStatusBar().getFxPane());
 	}
 
 	private void initalizeItemsTable()
@@ -579,6 +586,9 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	@FXML
 	private Button copyButton;
+	
+	@FXML
+	private Pane statusBar;
 
 	protected BulletinListProvider bulletinTableProvider;
 }

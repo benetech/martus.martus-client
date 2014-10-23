@@ -507,7 +507,7 @@ public class EnglishStrings
 "field:RecordLocationUnknown=Unknown",
 "field:NoServerSyncDataInTable=No Records available",
 "wintitle:notifySyncUnableToDownloadLocalFiles=Download Information",
-"field:notifySyncUnableToDownloadLocalFilescause=The following bulletins were unable to be downloaded since they were only found locally.",
+"field:notifySyncUnableToDownloadLocalFilescause=The following bulletins were unable to be downloaded since they were only found locally.  The remaining bulletins will be downloaded in the background.",
 
 "button:IncludePrivateBulletins=Include Private Data",
 "button:SettingOn=On",

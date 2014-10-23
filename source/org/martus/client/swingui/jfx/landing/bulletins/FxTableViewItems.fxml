@@ -19,55 +19,62 @@
         </columns>
       </TableView>
   </center>
-  <bottom>
-    <HBox>
-       <children>
-          <Button fx:id="trashButton" mnemonicParsing="false" onAction="#onTrashSelectedItems" text="Trash">
-             <graphic>
-                <ImageView pickOnBounds="true" preserveRatio="true">
-                   <image>
-                      <Image url="@../../images/trash.png" />
-                   </image>
-                </ImageView>
-             </graphic>
-          </Button>
-          <Button fx:id="exportButton" mnemonicParsing="false" onAction="#onExportSelectedItems" text="Export">
-             <graphic>
-                <ImageView pickOnBounds="true" preserveRatio="true">
-                   <image>
-                      <Image url="@../../images/export.png" />
-                   </image>
-                </ImageView>
-             </graphic>
-          </Button>
-          <Button fx:id="moveButton" mnemonicParsing="false" onAction="#onMoveSelectedItems" text="Move">
-             <graphic>
-                <ImageView pickOnBounds="true" preserveRatio="true">
-                   <image>
-                      <Image url="@../../images/move.png" />
-                   </image>
-                </ImageView>
-             </graphic>
-          </Button>
-          <Button fx:id="copyButton" mnemonicParsing="false" onAction="#onCopySelectedItem" text="Copy">
-             <graphic>
-                <ImageView pickOnBounds="true" preserveRatio="true">
-                   <image>
-                      <Image url="@../../images/copy.png" />
-                   </image>
-                </ImageView>
-             </graphic>
-          </Button>
-          <Button fx:id="emptyTrashButton" mnemonicParsing="false" onAction="#onEmptyTrash" text="%Button.emptyTrash">
-             <graphic>
-                <ImageView pickOnBounds="true" preserveRatio="true">
-                   <image>
-                      <Image url="@../../images/trash.png" />
-                   </image>
-                </ImageView>
-             </graphic>
-          </Button>
-       </children>
-    </HBox>
-  </bottom>
+   <bottom>
+      <BorderPane BorderPane.alignment="CENTER">
+         <left>
+          <HBox BorderPane.alignment="CENTER">
+             <children>
+                <Button fx:id="trashButton" mnemonicParsing="false" onAction="#onTrashSelectedItems" text="Trash">
+                   <graphic>
+                      <ImageView pickOnBounds="true" preserveRatio="true">
+                         <image>
+                            <Image url="@../../images/trash.png" />
+                         </image>
+                      </ImageView>
+                   </graphic>
+                </Button>
+                <Button fx:id="exportButton" mnemonicParsing="false" onAction="#onExportSelectedItems" text="Export">
+                   <graphic>
+                      <ImageView pickOnBounds="true" preserveRatio="true">
+                         <image>
+                            <Image url="@../../images/export.png" />
+                         </image>
+                      </ImageView>
+                   </graphic>
+                </Button>
+                <Button fx:id="moveButton" mnemonicParsing="false" onAction="#onMoveSelectedItems" text="Move">
+                   <graphic>
+                      <ImageView pickOnBounds="true" preserveRatio="true">
+                         <image>
+                            <Image url="@../../images/move.png" />
+                         </image>
+                      </ImageView>
+                   </graphic>
+                </Button>
+                <Button fx:id="copyButton" mnemonicParsing="false" onAction="#onCopySelectedItem" text="Copy">
+                   <graphic>
+                      <ImageView pickOnBounds="true" preserveRatio="true">
+                         <image>
+                            <Image url="@../../images/copy.png" />
+                         </image>
+                      </ImageView>
+                   </graphic>
+                </Button>
+                <Button fx:id="emptyTrashButton" mnemonicParsing="false" onAction="#onEmptyTrash" text="%Button.emptyTrash">
+                   <graphic>
+                      <ImageView pickOnBounds="true" preserveRatio="true">
+                         <image>
+                            <Image url="@../../images/trash.png" />
+                         </image>
+                      </ImageView>
+                   </graphic>
+                </Button>
+             </children>
+          </HBox>
+         </left>
+         <right>
+            <Pane fx:id="statusBar" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+   </bottom>
 </BorderPane>

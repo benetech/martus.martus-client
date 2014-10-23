@@ -59,11 +59,10 @@ public class UiMainPane extends JPanel
 		else
 			folderSplitter = new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, getFolderTreePane(), getPreviewSplitter());
 
-		statusBar = new UiStatusBar(mainWindowToUse.getLocalization());		
 
 		add(createTopStuff(mainWindowToUse), BorderLayout.NORTH);
 		add(getFolderSplitter(), BorderLayout.CENTER);
-		add(getStatusBar().getUiPanel(), BorderLayout.SOUTH ); 
+		add(mainWindowToUse.getStatusBar().getUiPanel(), BorderLayout.SOUTH ); 
 		
 		getPreviewSplitter().setDividerLocation(currentUiState.getCurrentPreviewSplitterPosition());
 		getFolderSplitter().setInitialDividerLocation(currentUiState.getCurrentFolderSplitterPosition());
@@ -139,11 +138,6 @@ public class UiMainPane extends JPanel
 		return previewSplitter;
 	}
 
-	public StatusBar getStatusBar()
-	{
-		return statusBar;
-	}
-
 	public FolderSplitPane getFolderSplitter()
 	{
 		return folderSplitter;
@@ -156,7 +150,6 @@ public class UiMainPane extends JPanel
 
 	private UiMenuBar menuBar;
 	private UiToolBar toolBar;
-	private StatusBar statusBar;
 
 	private FolderSplitPane folderSplitter;
 	private UiFolderTreePane folderTreePane;

@@ -63,6 +63,7 @@ public class FxMainStage extends FxInSwingFrameStage
 	{
 		return shellController.getBulletinsListController();
 	}
+	
 
 	private FxLandingShellController shellController;
 }
