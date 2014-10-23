@@ -26,6 +26,8 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
+import javafx.scene.layout.Pane;
+
 import javax.swing.JPanel;
 
 import org.martus.common.ProgressMeterInterface;
@@ -55,8 +57,16 @@ public class StatusBar
 			panel = new JPanel();
 		return panel;
 	}
+	
+	public Pane getFxPane()
+	{
+		if(fxPane == null)
+			fxPane = new Pane();
+		return fxPane;
+	}
 
 	protected ProgressMeterInterface backgroundProgressMeter;
 	protected ProgressMeterInterface torProgressMeter;
 	private JPanel panel;
+	private Pane fxPane;
 }
