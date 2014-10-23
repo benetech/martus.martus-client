@@ -139,7 +139,7 @@ public class UiMainPane extends JPanel
 		return previewSplitter;
 	}
 
-	public UiStatusBar getStatusBar()
+	public StatusBar getStatusBar()
 	{
 		return statusBar;
 	}
@@ -156,7 +156,7 @@ public class UiMainPane extends JPanel
 
 	private UiMenuBar menuBar;
 	private UiToolBar toolBar;
-	private UiStatusBar statusBar;
+	private StatusBar statusBar;
 
 	private FolderSplitPane folderSplitter;
 	private UiFolderTreePane folderTreePane;
