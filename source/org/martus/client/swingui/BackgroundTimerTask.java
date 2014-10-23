@@ -178,8 +178,7 @@ class BackgroundTimerTask extends TimerTask
 			doRetrieving();
 			if(!retriever.hasWorkToDo())
 			{
-				if(!UiSession.isJavaFx())
-					SwingUtilities.invokeLater(new ThreadedNotifyDlgAndUpdateReadyMessage("RetrieveCompleted"));
+				SwingUtilities.invokeLater(new ThreadedNotifyDlgAndUpdateReadyMessage("RetrieveCompleted"));
 			}
 			return;
 		}
@@ -695,7 +694,8 @@ class BackgroundTimerTask extends TimerTask
 		
 		public void run()
 		{
-			mainWindow.notifyDlg(mainWindow, tag);
+			if(!UiSession.isJavaFx())
+				mainWindow.notifyDlg(mainWindow, tag);
 			mainWindow.setStatusMessageReady();
 		}
 		
