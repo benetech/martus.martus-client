@@ -203,29 +203,35 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	{
 		
 	}
+	
+	private void updateTable(int TableToShow)
+	{
+		syncRecordsTableProvider.show(TableToShow);
+		updateButtons();
+	}
 		
 	@FXML 	
 	private void onShowAll(ActionEvent event)
 	{
-		syncRecordsTableProvider.show(ServerSyncTableRowData.LOCATION_ANY);
+		updateTable(ServerSyncTableRowData.LOCATION_ANY);
 	}
 
 	@FXML 	
 	private void onShowLocalOnly(ActionEvent event)
 	{
-		syncRecordsTableProvider.show(ServerSyncTableRowData.LOCATION_LOCAL);
+		updateTable(ServerSyncTableRowData.LOCATION_LOCAL);
 	}
 
 	@FXML 	
 	private void onShowServerOnly(ActionEvent event)
 	{
-		syncRecordsTableProvider.show(ServerSyncTableRowData.LOCATION_SERVER);
+		updateTable(ServerSyncTableRowData.LOCATION_SERVER);
 	}
 
 	@FXML 	
 	private void onShowBoth(ActionEvent event)
 	{
-		syncRecordsTableProvider.show(ServerSyncTableRowData.LOCATION_BOTH);
+		updateTable(ServerSyncTableRowData.LOCATION_BOTH);
 	}
 
 	@FXML
