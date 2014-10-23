@@ -218,12 +218,17 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		try
 		{
 			getMainWindow().retrieveRecordsFromServer(downloadFolder, uidsToDownload);
-			//TODO exit Dialog since retrieval
+			closeDialog();
 		} 
 		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 		}
+	}
+
+	private void closeDialog()
+	{
+		getSwingStage().close();
 	}
 
 	private void DisplayWarningDialog( String warningTag, StringBuilder titlesInQuestion)
