@@ -216,7 +216,8 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 			DisplayWarningDialog("SyncUnableToDownloadLocalFiles", localOnlyRecords);
 		try
 		{
-			getMainWindow().retrieveRecordsFromServer(getApp().getNameOfFolderForAllRetrieved(), uidsToDownload);
+			String retrievedFolder = getApp().getNameOfFolderForAllRetrieved();
+			getMainWindow().retrieveRecordsFromServer(retrievedFolder, uidsToDownload);
 			closeDialog();
 		} 
 		catch (Exception e)

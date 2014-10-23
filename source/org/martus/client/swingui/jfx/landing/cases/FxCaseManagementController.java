@@ -191,6 +191,12 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		currentCasesListView.getSelectionModel().select(trashList);
 		updateCaseList();
 	}
+	
+	public void folderContentsHaveChanged()
+	{
+		updateCases(getCurrentBulletinFolder().getName());
+	}
+	
 
 	protected void updateCaseList()
 	{

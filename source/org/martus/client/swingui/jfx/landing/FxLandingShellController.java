@@ -86,6 +86,11 @@ public class FxLandingShellController extends FxNonWizardShellController
 	{
 		return bulletinsListController.getTrashNotBeingDisplayedBinding();
 	}
+	
+	public FxCaseManagementController getCaseManager()
+	{
+		return caseManagementController;
+	}
 
 	@Override
 	public String getFxmlLocation()
