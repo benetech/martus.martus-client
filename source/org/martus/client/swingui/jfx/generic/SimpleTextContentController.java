@@ -48,7 +48,7 @@ public class SimpleTextContentController extends FxController
 		super.initialize(location, bundle);
 
 		messageTextArea.setWrapText(true);
-		messageTextArea.setPrefWidth(getParentController().getShellController().getSwingStage().getWidth());
+		messageTextArea.setPrefWidth(getParentController().getShellController().getSwingStage().getWidth() - SCROLLER_WIDTH);
 		messageTextArea.setText(getLocalization().getFieldLabel(confirmationMessageTag));
 	}
 
@@ -58,6 +58,7 @@ public class SimpleTextContentController extends FxController
 		return "generic/Confirmation.fxml";
 	}
 	
+	private final int SCROLLER_WIDTH = 10;
 	@FXML
 	private Label messageTextArea;
 	
