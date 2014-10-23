@@ -2079,7 +2079,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 
 	public ProgressMeterInterface getTorProgressMeter()
 	{
-		UiStatusBar statusBar = getStatusBar();
+		StatusBar statusBar = getStatusBar();
 		if(statusBar == null)
 			return null;
 		
@@ -2734,7 +2734,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		return getMainPane().getPreviewSplitter();
 	}
 
-	private UiStatusBar getStatusBar()
+	private StatusBar getStatusBar()
 	{
 		if(getMainPane() == null)
 			return null;

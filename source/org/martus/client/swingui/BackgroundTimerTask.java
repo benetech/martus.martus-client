@@ -62,7 +62,7 @@ import org.miradi.utils.EnhancedJsonObject;
 
 class BackgroundTimerTask extends TimerTask
 {
-	public BackgroundTimerTask(UiMainWindow mainWindowToUse, UiStatusBar statusBarToUse) throws Exception
+	public BackgroundTimerTask(UiMainWindow mainWindowToUse, StatusBar statusBarToUse) throws Exception
 	{
 		mainWindow = mainWindowToUse;
 		statusBar = statusBarToUse;
@@ -715,7 +715,7 @@ class BackgroundTimerTask extends TimerTask
 	BackgroundUploader uploader;
 	BackgroundRetriever retriever;
 	private SyncBulletinRetriever syncRetriever;
-	private UiStatusBar statusBar;
+	private StatusBar statusBar;
 	
 	long nextCheckForFieldOfficeBulletins;
 	long nextCheckForToken;
