@@ -450,6 +450,12 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	{
 		try
 		{
+			if(!getApp().isSSLServerAvailable())
+			{
+				showNotifyDialog("retrievenoserver");
+				return;
+			}
+			
 			ManageServerSyncRecordsController controller = new ManageServerSyncRecordsController(getMainWindow());
 			ActionDoer shellController = new DialogWithCloseShellController(getMainWindow(), controller);
 			doAction(shellController);
