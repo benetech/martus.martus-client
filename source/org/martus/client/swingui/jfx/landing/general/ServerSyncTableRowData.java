@@ -44,7 +44,6 @@ public class ServerSyncTableRowData
 {
 	public ServerSyncTableRowData(BulletinSummary summaryToUse, boolean mutable, MartusApp app) throws Exception
 	{
-		summary = summaryToUse;
 		uid = summaryToUse.getUniversalId();
 		canDeleteFromServer = new SimpleBooleanProperty(mutable);
 		setLocation(app, LOCATION_SERVER);
@@ -61,7 +60,6 @@ public class ServerSyncTableRowData
 	
 	public ServerSyncTableRowData(Bulletin bulletin, int sizeOfBulletinBytes, int locationOfBulletin, MartusApp app) throws Exception
 	{
-		summary = null;
 		canDeleteFromServer = new SimpleBooleanProperty(false);
 		isLocal = new SimpleBooleanProperty(true);
 		isRemote = new SimpleBooleanProperty(false);
@@ -211,7 +209,6 @@ public class ServerSyncTableRowData
 	private SimpleIntegerProperty size;
 	
 	private final UniversalId uid;
-	private BulletinSummary summary;
 	private int 	rawLocation;
 	private BooleanProperty canDeleteFromServer;
 	private BooleanProperty isLocal;
