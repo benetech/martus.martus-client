@@ -32,7 +32,6 @@ import java.util.Vector;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindowInterface;
 import org.martus.client.swingui.jfx.generic.data.ArrayObservableList;
-import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.common.BulletinSummary;
 import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.Bulletin;
