@@ -104,6 +104,7 @@ import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.generic.FxModalDialog;
 import org.martus.client.swingui.jfx.generic.FxRunner;
+import org.martus.client.swingui.jfx.generic.FxStatusBar;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.setupwizard.SetupWizardStage;
 import org.martus.client.swingui.jfx.welcome.WelcomeStage;
@@ -2055,6 +2056,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		if(UiSession.isJavaFx())
 		{
 			mainStage = new FxMainStage(this);
+			statusBar = new FxStatusBar(getLocalization());
 			FxRunner fxRunner = new FxRunner(mainStage);
 			fxRunner.setAbortImmediatelyOnError();
 			Platform.runLater(fxRunner);
@@ -2063,6 +2065,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		else
 		{
 			mainPane = new UiMainPane(this, getUiState());
+			statusBar = new UiStatusBar(getLocalization());		
 			setContentPane(mainPane);
 		}
 
@@ -2079,11 +2082,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 
 	public ProgressMeterInterface getTorProgressMeter()
 	{
-		StatusBar statusBar = getStatusBar();
-		if(statusBar == null)
+		StatusBar torStatusBar = getStatusBar();
+		if(torStatusBar == null)
 			return null;
 		
-		return statusBar.getTorProgressMeter();
+		return torStatusBar.getTorProgressMeter();
 	}
 
 	public void setWindowSizeAndState()
@@ -2734,12 +2737,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		return getMainPane().getPreviewSplitter();
 	}
 
-	private StatusBar getStatusBar()
+	public StatusBar getStatusBar()
 	{
-		if(getMainPane() == null)
-			return null;
-		
-		return getMainPane().getStatusBar();
+		return statusBar;
 	}
 
 	private FolderSplitPane getFolderSplitter()
@@ -2805,6 +2805,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 	private FileOutputStream lockStream;
 	public int timeBetweenFieldOfficeChecksSeconds;
 	private Stack cursorStack;
+	private StatusBar statusBar;
 
 	public static int timeoutInXSeconds;
+	
 }
