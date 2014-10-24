@@ -44,5 +44,5 @@ public abstract class FxTabbedShellController extends FxNonWizardShellController
 		return firstTabToDisplay;
 	}
 	
-	protected String firstTabToDisplay;
+	private String firstTabToDisplay;
 }

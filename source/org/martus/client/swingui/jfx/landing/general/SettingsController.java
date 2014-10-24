@@ -39,7 +39,8 @@ public class SettingsController extends FxTabbedShellController
 	public SettingsController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		firstTabToDisplay = SERVER_TAB;
+		
+		firstTabToDisplay(SERVER_TAB);
 	}
 	
 	@Override
@@ -61,11 +62,11 @@ public class SettingsController extends FxTabbedShellController
 	
 	private Tab getToBeSelectedTab()
 	{
-		if(firstTabToDisplay.equals(SERVER_TAB))
+		if(getFirstTabToDisplay().equals(SERVER_TAB))
 			return serverTab;
-		if(firstTabToDisplay.equals(SYSTEM_TAB))
+		if(getFirstTabToDisplay().equals(SYSTEM_TAB))
 			return systemTab;
-		if(firstTabToDisplay.equals(TOR_TAB))
+		if(getFirstTabToDisplay().equals(TOR_TAB))
 			return torTab;
 		return null;
 	}
