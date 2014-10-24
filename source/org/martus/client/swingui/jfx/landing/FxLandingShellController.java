@@ -54,6 +54,7 @@ import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
 import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
+import org.martus.client.swingui.jfx.generic.FxTabbedShellController;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinListProvider;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.CaseListProvider;
@@ -183,7 +184,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 
 	private void onSettings(String tabToDisplayFirst)
 	{
-		SettingsController settingsController = new SettingsController(getMainWindow());
+		FxTabbedShellController settingsController = new SettingsController(getMainWindow());
 		settingsController.setFirstTabToDisplay(tabToDisplayFirst);
 		DialogWithCloseShellController shellController = new DialogWithCloseShellController(getMainWindow(), settingsController);
 		doAction(shellController);
@@ -191,7 +192,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	
 	private void onAccount(String tabToDisplayFirst)
 	{
-		AccountController settingsController = new AccountController(getMainWindow());
+		FxTabbedShellController settingsController = new AccountController(getMainWindow());
 		settingsController.setFirstTabToDisplay(tabToDisplayFirst);
 		DialogWithCloseShellController shellController = new DialogWithCloseShellController(getMainWindow(), settingsController);
 		doAction(shellController);
