@@ -40,7 +40,7 @@ public class AccountController extends FxTabbedShellController
 	{
 		super(mainWindowToUse);
 		
-		firstTabToDisplay(USERNAME_AND_PASSWORD_TAB_CODE);
+		setFirstTabToDisplay(USERNAME_AND_PASSWORD_TAB_CODE);
 	}
 	
 	@Override

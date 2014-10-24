@@ -40,7 +40,7 @@ public class SettingsController extends FxTabbedShellController
 	{
 		super(mainWindowToUse);
 		
-		firstTabToDisplay(SERVER_TAB);
+		setFirstTabToDisplay(SERVER_TAB);
 	}
 	
 	@Override
