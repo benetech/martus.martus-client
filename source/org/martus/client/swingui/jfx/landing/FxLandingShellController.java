@@ -289,7 +289,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	@FXML
 	private void onContactInformation(ActionEvent event)
 	{
-		onAccount(AccountController.ACCOUNT_INFORMATION_TAB_CODE);
+		onAccount(AccountController.CONTACT_INFORMATION_TAB_CODE);
 	}
 	
 	@FXML

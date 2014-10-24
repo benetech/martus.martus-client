@@ -73,7 +73,7 @@ public class AccountController extends FxTabbedShellController
 		if(getFirstTabToDisplay().equals(KEY_BACKUP_TAB_CODE))
 			return keyBackupTab;
 		
-		if(getFirstTabToDisplay().equals(ACCOUNT_INFORMATION_TAB_CODE))
+		if(getFirstTabToDisplay().equals(CONTACT_INFORMATION_TAB_CODE))
 			return contactInformationTab;
 		
 		return null;
@@ -88,7 +88,7 @@ public class AccountController extends FxTabbedShellController
 	public static final String USERNAME_AND_PASSWORD_TAB_CODE = "userNameAndPasswordTab";
 	public static final String ACCOUNT_SHARING_TAB_CODE = "accountSharing";
 	public static final String KEY_BACKUP_TAB_CODE = "keyBackupTab";
-	public static final String ACCOUNT_INFORMATION_TAB_CODE = "accountInformationTab";
+	public static final String CONTACT_INFORMATION_TAB_CODE = "accountInformationTab";
 	
 	@FXML
 	private TabPane accountTabPane;
