@@ -43,11 +43,6 @@ public class AccountController extends FxTabbedShellController
 		firstTabToDisplay(USERNAME_AND_PASSWORD_TAB_CODE);
 	}
 	
-	public void firstTabToDisplay(String tab)
-	{
-		firstTabToDisplay = tab;
-	}
-	
 	@Override
 	public Parent createContents() throws Exception
 	{
@@ -122,6 +117,4 @@ public class AccountController extends FxTabbedShellController
 
 	@FXML
 	private Pane accountInformationPane;
-	
-	private String firstTabToDisplay;
 }

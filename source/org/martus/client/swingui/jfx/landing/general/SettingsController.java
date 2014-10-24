@@ -42,11 +42,6 @@ public class SettingsController extends FxTabbedShellController
 		firstTabToDisplay = SERVER_TAB;
 	}
 	
-	public void firstTabToDisplay(String tab)
-	{
-		firstTabToDisplay = tab;
-	}
-	
 	@Override
 	public Parent createContents() throws Exception
 	{
@@ -106,6 +101,4 @@ public class SettingsController extends FxTabbedShellController
 
 	@FXML
 	private Pane torContentPane;
-	
-	private String firstTabToDisplay;
 }
