@@ -46,6 +46,8 @@ public class ServerSyncTableRowData
 	{
 		uid = summaryToUse.getUniversalId();
 		canDeleteFromServer = new SimpleBooleanProperty(mutable);
+		boolean uploadAllowedForAllOurMutableRecords = mutable;
+		canUploadToServer = new SimpleBooleanProperty(uploadAllowedForAllOurMutableRecords);
 		setLocation(app, LOCATION_SERVER);
 		isLocal = new SimpleBooleanProperty(false);
 		isRemote = new SimpleBooleanProperty(true);
@@ -61,6 +63,10 @@ public class ServerSyncTableRowData
 	public ServerSyncTableRowData(Bulletin bulletin, int sizeOfBulletinBytes, int locationOfBulletin, MartusApp app) throws Exception
 	{
 		canDeleteFromServer = new SimpleBooleanProperty(false);
+		String ourAccountId = app.getAccountId();
+		boolean authorizedToUpload = bulletin.getBulletinHeaderPacket().isAuthorizedToUpload(ourAccountId);
+		canUploadToServer = new SimpleBooleanProperty(authorizedToUpload);
+		
 		isLocal = new SimpleBooleanProperty(true);
 		isRemote = new SimpleBooleanProperty(false);
 		uid = bulletin.getUniversalId();
@@ -181,6 +187,11 @@ public class ServerSyncTableRowData
     		return canDeleteFromServer;
     }
     
+    public BooleanProperty canUploadToServerProperty()
+    {
+    		return canUploadToServer;
+    }
+    
     public BooleanProperty isLocal()
     {
     		return isLocal;
@@ -211,6 +222,7 @@ public class ServerSyncTableRowData
 	private final UniversalId uid;
 	private int 	rawLocation;
 	private BooleanProperty canDeleteFromServer;
+	private BooleanProperty canUploadToServer;
 	private BooleanProperty isLocal;
 	private BooleanProperty isRemote;
 }

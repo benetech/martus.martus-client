@@ -168,21 +168,21 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	{
 		ObservableList<ServerSyncTableRowData> rowsSelected = allRecordsTable.getSelectionModel().getSelectedItems();
 		boolean isAnythingDeleteable = false;
-		boolean isAnythingLocal = false;
-		boolean isAnythingRemote = false;
+		boolean isAnythingUploadable = false;
+		boolean isAnythingDownloadable = false;
 		for (Iterator iterator = rowsSelected.iterator(); iterator.hasNext();)
 		{
 			ServerSyncTableRowData data = (ServerSyncTableRowData) iterator.next();
 			if(data.canDeleteFromServerProperty().getValue())
 				isAnythingDeleteable = true;
-			if(data.isLocal().getValue())
-				isAnythingLocal = true;
+			if(data.canUploadToServerProperty().getValue())
+				isAnythingUploadable = true;
 			if(data.isRemote().getValue())
-				isAnythingRemote = true;
+				isAnythingDownloadable = true;
 		}
 		deleteButton.setDisable(!isAnythingDeleteable);
-		uploadButton.setDisable(!isAnythingLocal);
-		downloadButton.setDisable(!isAnythingRemote);
+		uploadButton.setDisable(!isAnythingUploadable);
+		downloadButton.setDisable(!isAnythingDownloadable);
 	}
 
 	private void closeDialog()
