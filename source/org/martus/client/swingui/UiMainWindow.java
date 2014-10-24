@@ -139,6 +139,7 @@ import org.martus.common.network.OrchidTransportWrapper;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.XmlPacketLoader;
+import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.swing.FontHandler;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiOptionPane;
@@ -1938,6 +1939,27 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 			notifyDlg(this, "RetrievedOnlySomeSummaries", dlgTitleTag);
 		}
 		return true;
+	}
+
+	public void deleteMutableRecordsFromServer(Vector uidList)
+			throws MartusSignatureException, WrongAccountException
+	{
+		setWaitingCursor();
+		try
+		{
+			String result = getApp().deleteServerDraftBulletins(uidList);
+			if (!result.equals(NetworkInterfaceConstants.OK))
+			{
+				notifyDlg("DeleteServerDraftsFailed");
+				return;
+			}
+
+			notifyDlg("DeleteServerDraftsWorked");
+		} 
+		finally
+		{
+			resetCursor();
+		}
 	}
 
 	public void askToBackupKeyPairEncryptedSingleFile()
