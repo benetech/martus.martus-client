@@ -1942,7 +1942,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 	}
 
 	public void deleteMutableRecordsFromServer(Vector uidList)
-			throws MartusSignatureException, WrongAccountException
+			throws MartusSignatureException, WrongAccountException, Exception
 	{
 		setWaitingCursor();
 		try
@@ -1950,11 +1950,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 			String result = getApp().deleteServerDraftBulletins(uidList);
 			if (!result.equals(NetworkInterfaceConstants.OK))
 			{
-				notifyDlg("DeleteServerDraftsFailed");
+				if(UiSession.isJavaFx())
+					FxDialogHelper.showNotificationDialog(this, "notifyDeleteServerDraftsFailedcause");
+				else
+					notifyDlg("DeleteServerDraftsFailed");
 				return;
 			}
 
-			notifyDlg("DeleteServerDraftsWorked");
+			if(!UiSession.isJavaFx())
+				notifyDlg("DeleteServerDraftsWorked");
 		} 
 		finally
 		{
