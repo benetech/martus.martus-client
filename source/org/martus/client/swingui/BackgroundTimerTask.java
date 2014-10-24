@@ -42,6 +42,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.network.BackgroundRetriever;
 import org.martus.client.network.BackgroundUploader;
 import org.martus.client.network.SyncBulletinRetriever;
+import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.landing.general.SettingsForServerController;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.BulletinSummary;
@@ -625,7 +626,10 @@ class BackgroundTimerTask extends TimerTask
 			
 			HashMap map = new HashMap();
 			map.put("#BulletinTitle#", bulletinTitle);
-			mainWindow.notifyDlg(notifyTag,map);
+			if(UiSession.isJavaFx())
+				FxDialogHelper.showNotificationDialog(mainWindow, notifyTag, map);
+			else
+				mainWindow.notifyDlg(notifyTag,map);
 		}
 		String notifyTag;
 		UniversalId uid;
