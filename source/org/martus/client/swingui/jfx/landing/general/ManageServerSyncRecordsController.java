@@ -48,6 +48,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
+import org.martus.client.swingui.tablemodels.DeleteMyServerDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveHQDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveHQTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyDraftsTableModel;
@@ -185,12 +186,34 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		downloadButton.setDisable(!isAnythingRemote);
 	}
 
+	private void closeDialog()
+	{
+		getSwingStage().close();
+	}
+
+	private void DisplayWarningDialog( String warningTag, StringBuilder titlesInQuestion)
+	{
+		showNotifyDialog(warningTag, titlesInQuestion.toString());
+	}
+	
+	private void updateTable(int TableToShow)
+	{
+		syncRecordsTableProvider.show(TableToShow);
+		updateButtons();
+	}
+		
 	@Override
 	public String getFxmlLocation()
 	{
 		return "landing/general/ManageServerSyncRecords.fxml";
 	}
 	
+	public void addToInvalidRecords(StringBuilder serverOnlyRecords,
+			ServerSyncTableRowData recordData)
+	{
+		serverOnlyRecords.append(TITLE_SEPARATOR);
+		serverOnlyRecords.append(recordData.getTitle());
+	}
 
 	@FXML 	
 	private void onUpload(ActionEvent event)
@@ -240,13 +263,6 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		closeDialog();
 	}
 
-	public void addToInvalidRecords(StringBuilder serverOnlyRecords,
-			ServerSyncTableRowData recordData)
-	{
-		serverOnlyRecords.append(TITLE_SEPARATOR);
-		serverOnlyRecords.append(recordData.getTitle());
-	}
-
 	@FXML 	
 	private void onDownload(ActionEvent event)
 	{
@@ -275,28 +291,11 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		}
 	}
 
-	private void closeDialog()
-	{
-		getSwingStage().close();
-	}
-
-	private void DisplayWarningDialog( String warningTag, StringBuilder titlesInQuestion)
-	{
-		showNotifyDialog(warningTag, titlesInQuestion.toString());
-	}
-
 	@FXML 	
 	private void onDelete(ActionEvent event)
 	{
-		
 	}
-	
-	private void updateTable(int TableToShow)
-	{
-		syncRecordsTableProvider.show(TableToShow);
-		updateButtons();
-	}
-		
+
 	@FXML 	
 	private void onShowAll(ActionEvent event)
 	{
