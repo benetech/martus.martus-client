@@ -48,7 +48,6 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
-import org.martus.client.swingui.tablemodels.DeleteMyServerDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveHQDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveHQTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyDraftsTableModel;
@@ -131,7 +130,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		model.initialize(null);
 		return model.getAllSummaries();
 	}
-
+	
 	private Set getLocalRecords()
 	{
 		return getApp().getStore().getAllBulletinLeafUids();
