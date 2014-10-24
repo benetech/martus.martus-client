@@ -88,7 +88,7 @@ public class AccountController extends FxTabbedShellController
 	public static final String USERNAME_AND_PASSWORD_TAB_CODE = "userNameAndPasswordTab";
 	public static final String ACCOUNT_SHARING_TAB_CODE = "accountSharing";
 	public static final String KEY_BACKUP_TAB_CODE = "keyBackupTab";
-	public static final String CONTACT_INFORMATION_TAB_CODE = "accountInformationTab";
+	public static final String CONTACT_INFORMATION_TAB_CODE = "contactInformationTab";
 	
 	@FXML
 	private TabPane accountTabPane;
