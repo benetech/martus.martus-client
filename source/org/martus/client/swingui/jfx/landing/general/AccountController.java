@@ -64,16 +64,16 @@ public class AccountController extends FxTabbedShellController
 	
 	private Tab getToBeSelectedTab()
 	{
-		if(firstTabToDisplay.equals(USERNAME_AND_PASSWORD_TAB_CODE))
+		if(getFirstTabToDisplay().equals(USERNAME_AND_PASSWORD_TAB_CODE))
 			return usernameAndPasswordTab;
 		
-		if (firstTabToDisplay.equals(ACCOUNT_SHARING_TAB_CODE))
+		if (getFirstTabToDisplay().equals(ACCOUNT_SHARING_TAB_CODE))
 			return accountSharingTab;
 		
-		if(firstTabToDisplay.equals(KEY_BACKUP_TAB_CODE))
+		if(getFirstTabToDisplay().equals(KEY_BACKUP_TAB_CODE))
 			return keyBackupTab;
 		
-		if(firstTabToDisplay.equals(ACCOUNT_INFORMATION_TAB_CODE))
+		if(getFirstTabToDisplay().equals(ACCOUNT_INFORMATION_TAB_CODE))
 			return accountInformationTab;
 		
 		return null;
