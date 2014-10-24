@@ -185,14 +185,17 @@ public class FxLandingShellController extends FxNonWizardShellController
 	private void onSettings(String tabToDisplayFirst)
 	{
 		FxTabbedShellController settingsController = new SettingsController(getMainWindow());
-		settingsController.setFirstTabToDisplay(tabToDisplayFirst);
-		DialogWithCloseShellController shellController = new DialogWithCloseShellController(getMainWindow(), settingsController);
-		doAction(shellController);
+		setTab(tabToDisplayFirst, settingsController);
 	}
-	
+
 	private void onAccount(String tabToDisplayFirst)
 	{
 		FxTabbedShellController settingsController = new AccountController(getMainWindow());
+		setTab(tabToDisplayFirst, settingsController);
+	}
+	
+	private void setTab(String tabToDisplayFirst, FxTabbedShellController settingsController)
+	{
 		settingsController.setFirstTabToDisplay(tabToDisplayFirst);
 		DialogWithCloseShellController shellController = new DialogWithCloseShellController(getMainWindow(), settingsController);
 		doAction(shellController);
