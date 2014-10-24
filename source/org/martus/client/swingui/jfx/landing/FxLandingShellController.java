@@ -58,6 +58,7 @@ import org.martus.client.swingui.jfx.landing.bulletins.BulletinListProvider;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.CaseListProvider;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
+import org.martus.client.swingui.jfx.landing.general.AccountController;
 import org.martus.client.swingui.jfx.landing.general.SettingsController;
 import org.martus.common.MartusLogger;
 import org.martus.common.network.OrchidTransportWrapper;
@@ -187,6 +188,14 @@ public class FxLandingShellController extends FxNonWizardShellController
 		DialogWithCloseShellController shellController = new DialogWithCloseShellController(getMainWindow(), settingsController);
 		doAction(shellController);
 	}
+	
+	private void onAccount(String tabToDisplayFirst)
+	{
+		AccountController settingsController = new AccountController(getMainWindow());
+		settingsController.firstTabToDisplay(tabToDisplayFirst);
+		DialogWithCloseShellController shellController = new DialogWithCloseShellController(getMainWindow(), settingsController);
+		doAction(shellController);
+	}
 
 	@FXML
 	private void onConfigureServer(ActionEvent event)
@@ -208,12 +217,6 @@ public class FxLandingShellController extends FxNonWizardShellController
 		onSettings(SettingsController.TOR_TAB);
 	}
 
-	@FXML
-	private void onChangeUsernameAndPassword(ActionEvent event)
-	{
-		doAction(new ActionMenuChangeUserNamePassword(getMainWindow()));
-	}
-	
 	@FXML
 	private void onCreateNewAccount(ActionEvent event)
 	{
@@ -263,19 +266,35 @@ public class FxLandingShellController extends FxNonWizardShellController
 			logAndNotifyUnexpectedError(e);
 		}
 	}
+	
+	//FIXME uncomment the onAccount calls once tabs are working. 
+	//These are commented out to avoid having to make large commits.
+	@FXML
+	private void onChangeUsernameAndPassword(ActionEvent event)
+	{
+		doAction(new ActionMenuChangeUserNamePassword(getMainWindow()));
+		//onAccount(AccountController.USERNAME_AND_PASSWORD_TAB_CODE);
+	}
+	
+	@FXML
+	private void onAccountSharing(ActionEvent event)
+	{
+		//onAccount(AccountController.ACCOUNT_SHARING_TAB_CODE);
+	}
 
 	@FXML
 	private void onContactInformation(ActionEvent event)
 	{
 		doAction(new ActionMenuContactInfo(getMainWindow()));
+		//onAccount(AccountController.ACCOUNT_INFORMATION_TAB_CODE);
 	}
 	
 	@FXML
 	private void onBackupKeypair(ActionEvent event)
 	{
 		doAction(new ActionMenuBackupMyKeyPair(getMainWindow()));
+		//onAccount(AccountController.KEY_BACKUP_TAB_CODE);
 	}
-	
 
 	@FXML
 	public void onLogoClicked(MouseEvent mouseEvent) 
