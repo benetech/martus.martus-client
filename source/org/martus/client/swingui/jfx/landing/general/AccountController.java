@@ -50,7 +50,7 @@ public class AccountController extends FxTabbedShellController
 		loadControllerAndEmbedInPane(new UserAndPasswordController(getMainWindow()), usernameAndPasswordPane);
 		loadControllerAndEmbedInPane(new AccountSharingController(getMainWindow()), accountSharingPane);
 		loadControllerAndEmbedInPane(new KeyBackupController(getMainWindow()), keyBackupPane);
-		loadControllerAndEmbedInPane(new AccountInformationController(getMainWindow()), accountInformationPane);
+		loadControllerAndEmbedInPane(new AccountInformationController(getMainWindow()), contactInformationPane);
 		
 		selectInitialTabView();
 		
@@ -116,5 +116,5 @@ public class AccountController extends FxTabbedShellController
 	private Pane keyBackupPane;
 
 	@FXML
-	private Pane accountInformationPane;
+	private Pane contactInformationPane;
 }
