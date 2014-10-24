@@ -37,9 +37,9 @@ import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 
-public class AccountInformationController extends FxInSwingController
+public class ContactInformationController extends FxInSwingController
 {
-	public AccountInformationController(UiMainWindow mainWindowToUse)
+	public ContactInformationController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 		
