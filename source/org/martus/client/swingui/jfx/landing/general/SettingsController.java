@@ -32,9 +32,9 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxFlexibleShellController;
+import org.martus.client.swingui.jfx.generic.FxTabbedShellController;
 
-public class SettingsController extends FxFlexibleShellController
+public class SettingsController extends FxTabbedShellController
 {
 	public SettingsController(UiMainWindow mainWindowToUse)
 	{

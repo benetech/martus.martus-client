@@ -27,9 +27,9 @@ package org.martus.client.swingui.jfx.generic;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public abstract class FxFlexibleShellController extends FxNonWizardShellController
+public abstract class FxTabbedShellController extends FxNonWizardShellController
 {
-	public FxFlexibleShellController(UiMainWindow mainWindowToUse)
+	public FxTabbedShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
