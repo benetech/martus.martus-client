@@ -75,7 +75,7 @@ public class ActionMenuDeleteMyServerDraftBulletins extends UiMenuAction
 			if (uidList == null)
 				return;
 
-			deleteMutableRecordsFromServer(uidList);
+			getMainWindow().deleteMutableRecordsFromServer(uidList);
 		} 
 		catch (MartusCrypto.MartusSignatureException e)
 		{
@@ -93,26 +93,4 @@ public class ActionMenuDeleteMyServerDraftBulletins extends UiMenuAction
 			return;
 		}
 	}
-
-	public void deleteMutableRecordsFromServer(Vector uidList)
-			throws MartusSignatureException, WrongAccountException
-	{
-		getMainWindow().setWaitingCursor();
-		try
-		{
-			String result = getApp().deleteServerDraftBulletins(uidList);
-			if (!result.equals(NetworkInterfaceConstants.OK))
-			{
-				getMainWindow().notifyDlg("DeleteServerDraftsFailed");
-				return;
-			}
-
-			getMainWindow().notifyDlg("DeleteServerDraftsWorked");
-		} 
-		finally
-		{
-			getMainWindow().resetCursor();
-		}
-	}
-
 }
