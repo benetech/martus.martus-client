@@ -40,6 +40,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
@@ -48,6 +49,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
+import org.martus.client.swingui.jfx.landing.bulletins.BulletinTableRowData;
 import org.martus.client.swingui.tablemodels.RetrieveHQDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveHQTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyDraftsTableModel;
@@ -73,6 +75,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		RecordSelectedListener recordSelectedListener = new RecordSelectedListener();
 		allRecordsTable.getSelectionModel().selectedItemProperty().addListener(recordSelectedListener);
 		updateButtons();
+		sortByMostRecent();
 	}
 	
 	private void initalizeItemsTable()
@@ -97,6 +100,15 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		{
 			logAndNotifyUnexpectedError(e);
 		}
+	}
+
+	protected void sortByMostRecent()
+	{
+		recordLastSavedColumn.setSortType(SortType.DESCENDING);
+		ObservableList<TableColumn<ServerSyncTableRowData, ?>> sortOrder = allRecordsTable.getSortOrder();
+		sortOrder.clear();
+		sortOrder.add(recordLastSavedColumn);
+		allRecordsTable.sort();
 	}
 
 	private Vector getServerMyDrafts() throws Exception
@@ -199,6 +211,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	{
 		syncRecordsTableProvider.show(TableToShow);
 		updateButtons();
+		sortByMostRecent();
 	}
 		
 	@Override
