@@ -173,8 +173,8 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		for (Iterator iterator = rowsSelected.iterator(); iterator.hasNext();)
 		{
 			ServerSyncTableRowData data = (ServerSyncTableRowData) iterator.next();
-			if(canRecordBeDeletedOffServer(data))
-					isAnythingDeleteable = true;
+			if(data.canDeleteFromServerProperty().getValue())
+				isAnythingDeleteable = true;
 			if(data.isLocal().getValue())
 				isAnythingLocal = true;
 			if(data.isRemote().getValue())
@@ -299,7 +299,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		for (Iterator iterator = selectedRows.iterator(); iterator.hasNext();)
 		{
 			ServerSyncTableRowData recordData = (ServerSyncTableRowData) iterator.next();
-			if(canRecordBeDeletedOffServer(recordData))
+			if(recordData.canDeleteFromServerProperty().getValue())
 				uidsToDelete.add(recordData.getUniversalId());
 			else
 				addToInvalidRecords(localOrImmutableRecords, recordData);
@@ -315,18 +315,6 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		{
 			logAndNotifyUnexpectedError(e);
 		}
-	}
-
-	public boolean canRecordBeDeletedOffServer(ServerSyncTableRowData recordData)
-	{
-		if(recordData.getRawLocation() == ServerSyncTableRowData.LOCATION_LOCAL)
-			return false;
-		if(!recordData.canDeleteFromServerProperty().getValue())
-			return false;
-		String recordAccount = recordData.getUniversalId().getAccountId();
-		if(!recordAccount.equals(getApp().getAccountId()))
-			return false;
-		return true;
 	}
 
 	@FXML 	
