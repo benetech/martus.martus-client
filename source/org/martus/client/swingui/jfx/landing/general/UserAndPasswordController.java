@@ -32,6 +32,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 
 public class UserAndPasswordController extends FxInSwingController
@@ -54,14 +55,8 @@ public class UserAndPasswordController extends FxInSwingController
 	}
 	
 	@FXML
-	public void onChangePassword(ActionEvent event)
+	public void onChangeUsernameAndPassword(ActionEvent event)
 	{
-		
-	}
-	
-	@FXML
-	public void onChangeUsername(ActionEvent event)
-	{
-		
+		doAction(new ActionMenuChangeUserNamePassword(getMainWindow()));
 	}
 }
