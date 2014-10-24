@@ -1951,7 +1951,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 			if (!result.equals(NetworkInterfaceConstants.OK))
 			{
 				if(UiSession.isJavaFx())
-					FxDialogHelper.showNotificationDialog(this, "notifyDeleteServerDraftsFailedcause");
+					FxDialogHelper.showNotificationDialog(this, "DeleteServerDraftsFailed");
 				else
 					notifyDlg("DeleteServerDraftsFailed");
 				return;
