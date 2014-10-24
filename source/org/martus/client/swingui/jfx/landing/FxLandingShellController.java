@@ -45,7 +45,6 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionMenuBackupMyKeyPair;
 import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
 import org.martus.client.swingui.actions.ActionMenuManageContacts;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
@@ -292,8 +291,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	@FXML
 	private void onBackupKeypair(ActionEvent event)
 	{
-		doAction(new ActionMenuBackupMyKeyPair(getMainWindow()));
-		//onAccount(AccountController.KEY_BACKUP_TAB_CODE);
+		onAccount(AccountController.KEY_BACKUP_TAB_CODE);
 	}
 
 	@FXML

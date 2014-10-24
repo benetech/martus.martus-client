@@ -25,11 +25,15 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionMenuBackupMyKeyPair;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
+import org.martus.client.swingui.jfx.setupwizard.step6.FxSetupBackupYourKeyController;
 
 public class KeyBackupController extends FxInSwingController
 {
@@ -39,14 +43,27 @@ public class KeyBackupController extends FxInSwingController
 	}
 	
 	@Override
-	public void initialize(URL location, ResourceBundle bundle)
+	public Parent createContents() throws Exception
 	{
-		super.initialize(location, bundle);
+		Parent contents = super.createContents();
+		
+		loadControllerAndEmbedInPane(new FxSetupBackupYourKeyController(getMainWindow()), contentPane);
+	
+		return contents;
 	}
-
+	
 	@Override
 	public String getFxmlLocation()
 	{
 		return "landing/general/KeyBackup.fxml";
 	}
+	
+	@FXML
+	private void onExportMultiKey(ActionEvent event)
+	{
+		doAction(new ActionMenuBackupMyKeyPair(getMainWindow()));
+	}
+		
+	@FXML
+	private Pane contentPane;
 }
