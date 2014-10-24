@@ -29,6 +29,7 @@
 						<Menu mnemonicParsing="false" styleClass="menu-item" text="Account">
 							<items>
 							<MenuItem mnemonicParsing="false" onAction="#onChangeUsernameAndPassword" styleClass="menu-item" text="Change Username and Password" />
+							<MenuItem mnemonicParsing="false" onAction="#onAccountSharing" styleClass="menu-item" text="Account Sharing" />
 							<MenuItem mnemonicParsing="false" onAction="#onCreateNewAccount" styleClass="menu-item" text="Create New" />
 							<MenuItem mnemonicParsing="false" onAction="#onContactInformation" styleClass="menu-item" text="Contact Information" />
 							<MenuItem mnemonicParsing="false" onAction="#onBackupKeypair" styleClass="menu-item" text="Backup Key" />
