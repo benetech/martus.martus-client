@@ -29,6 +29,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
+import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindowInterface;
 import org.martus.client.swingui.jfx.generic.data.ArrayObservableList;
@@ -81,6 +82,7 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 	{
 		addAllServerSummaries(summaries, false);
 	}
+	
 	private void addAllServerSummaries(Vector myDraftSummaries, boolean mutable) throws Exception
 	{
 		for (Iterator iterator = myDraftSummaries.iterator(); iterator.hasNext();)
@@ -99,7 +101,8 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 			localUids.remove(serverUid);
 			bulletinData.setLocation(mainWindow.getApp(), ServerSyncTableRowData.LOCATION_BOTH);
 		}
-		allRows.add(bulletinData);
+		if(!isInTrash(serverUid))
+			allRows.add(bulletinData);
 	}
 	
 	private void addLocalBulletions() throws Exception
@@ -107,9 +110,17 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 		for(Iterator iter = localUids.iterator(); iter.hasNext();)
 		{
 			UniversalId leafBulletinUid = (UniversalId) iter.next();
+			if(isInTrash(leafBulletinUid))
+				continue;
 			ServerSyncTableRowData bulletinData = getLocalBulletinData(leafBulletinUid);
 			allRows.add(bulletinData);		
 		}
+	}
+
+	private boolean isInTrash(UniversalId uid)
+	{
+		BulletinFolder discardedFolder = mainWindow.getApp().getFolderDiscarded();
+		return discardedFolder.contains(uid);
 	}
 
 	protected ServerSyncTableRowData getLocalBulletinData(UniversalId leafBulletinUid) throws Exception
