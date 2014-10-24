@@ -46,8 +46,6 @@ import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuBackupMyKeyPair;
-import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
-import org.martus.client.swingui.actions.ActionMenuContactInfo;
 import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
 import org.martus.client.swingui.actions.ActionMenuManageContacts;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
@@ -276,8 +274,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	@FXML
 	private void onChangeUsernameAndPassword(ActionEvent event)
 	{
-		doAction(new ActionMenuChangeUserNamePassword(getMainWindow()));
-		//onAccount(AccountController.USERNAME_AND_PASSWORD_TAB_CODE);
+		onAccount(AccountController.USERNAME_AND_PASSWORD_TAB_CODE);
 	}
 	
 	@FXML
