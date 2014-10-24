@@ -65,7 +65,6 @@ public class AccountInformationController extends FxInSwingController
 	@FXML
 	public void onSaveChanges(ActionEvent event) throws Exception
 	{
-		System.out.println("SAVING CHANGES");
 		getConfigInfo().setAuthor(getFontHelper().getStorable(authorField.getText()));
 		getConfigInfo().setOrganization(getFontHelper().getStorable(organizationField.getText()));
 		getApp().saveConfigInfo();
