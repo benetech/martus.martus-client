@@ -167,20 +167,20 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	protected void updateButtons()
 	{
 		ObservableList<ServerSyncTableRowData> rowsSelected = allRecordsTable.getSelectionModel().getSelectedItems();
-		boolean isAnythingMutable = false;
+		boolean isAnythingDeleteable = false;
 		boolean isAnythingLocal = false;
 		boolean isAnythingRemote = false;
 		for (Iterator iterator = rowsSelected.iterator(); iterator.hasNext();)
 		{
 			ServerSyncTableRowData data = (ServerSyncTableRowData) iterator.next();
-			if(data.canDeleteFromServerProperty().getValue())
-				isAnythingMutable = true;
+			if(canRecordBeDeletedOffServer(data))
+					isAnythingDeleteable = true;
 			if(data.isLocal().getValue())
 				isAnythingLocal = true;
 			if(data.isRemote().getValue())
 				isAnythingRemote = true;
 		}
-		deleteButton.setDisable(!isAnythingMutable);
+		deleteButton.setDisable(!isAnythingDeleteable);
 		uploadButton.setDisable(!isAnythingLocal);
 		downloadButton.setDisable(!isAnythingRemote);
 	}
@@ -293,6 +293,40 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	@FXML 	
 	private void onDelete(ActionEvent event)
 	{
+		ObservableList<ServerSyncTableRowData> selectedRows = allRecordsTable.getSelectionModel().getSelectedItems();
+		StringBuilder localOrImmutableRecords = new StringBuilder();
+		Vector<UniversalId> uidsToDelete = new Vector(selectedRows.size());
+		for (Iterator iterator = selectedRows.iterator(); iterator.hasNext();)
+		{
+			ServerSyncTableRowData recordData = (ServerSyncTableRowData) iterator.next();
+			if(canRecordBeDeletedOffServer(recordData))
+				uidsToDelete.add(recordData.getUniversalId());
+			else
+				addToInvalidRecords(localOrImmutableRecords, recordData);
+		}
+		if(localOrImmutableRecords.length()>0)
+			DisplayWarningDialog("SyncUnableToDownloadLocalFiles", localOrImmutableRecords);
+		try
+		{
+			getMainWindow().deleteMutableRecordsFromServer(uidsToDelete);
+			closeDialog();
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
+
+	public boolean canRecordBeDeletedOffServer(ServerSyncTableRowData recordData)
+	{
+		if(recordData.getRawLocation() == ServerSyncTableRowData.LOCATION_LOCAL)
+			return false;
+		if(!recordData.canDeleteFromServerProperty().getValue())
+			return false;
+		String recordAccount = recordData.getUniversalId().getAccountId();
+		if(!recordAccount.equals(getApp().getAccountId()))
+			return false;
+		return true;
 	}
 
 	@FXML 	
