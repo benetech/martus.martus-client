@@ -36,8 +36,10 @@ import org.martus.client.swingui.tablemodels.DeleteMyServerDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.packet.Packet;
+import org.martus.common.packet.Packet.WrongAccountException;
 
 public class ActionMenuDeleteMyServerDraftBulletins extends UiMenuAction
 {
@@ -73,22 +75,7 @@ public class ActionMenuDeleteMyServerDraftBulletins extends UiMenuAction
 			if (uidList == null)
 				return;
 
-			getMainWindow().setWaitingCursor();
-			try
-			{
-				String result = getApp().deleteServerDraftBulletins(uidList);
-				if (!result.equals(NetworkInterfaceConstants.OK))
-				{
-					getMainWindow().notifyDlg("DeleteServerDraftsFailed");
-					return;
-				}
-
-				getMainWindow().notifyDlg("DeleteServerDraftsWorked");
-			} 
-			finally
-			{
-				getMainWindow().resetCursor();
-			}
+			deleteMutableRecordsFromServer(uidList);
 		} 
 		catch (MartusCrypto.MartusSignatureException e)
 		{
@@ -104,6 +91,27 @@ public class ActionMenuDeleteMyServerDraftBulletins extends UiMenuAction
 		{
 			getMainWindow().notifyDlg("ServerError");
 			return;
+		}
+	}
+
+	public void deleteMutableRecordsFromServer(Vector uidList)
+			throws MartusSignatureException, WrongAccountException
+	{
+		getMainWindow().setWaitingCursor();
+		try
+		{
+			String result = getApp().deleteServerDraftBulletins(uidList);
+			if (!result.equals(NetworkInterfaceConstants.OK))
+			{
+				getMainWindow().notifyDlg("DeleteServerDraftsFailed");
+				return;
+			}
+
+			getMainWindow().notifyDlg("DeleteServerDraftsWorked");
+		} 
+		finally
+		{
+			getMainWindow().resetCursor();
 		}
 	}
 
