@@ -74,7 +74,7 @@ public class AccountController extends FxTabbedShellController
 			return keyBackupTab;
 		
 		if(getFirstTabToDisplay().equals(ACCOUNT_INFORMATION_TAB_CODE))
-			return accountInformationTab;
+			return contactInformationTab;
 		
 		return null;
 	}
@@ -103,7 +103,7 @@ public class AccountController extends FxTabbedShellController
 	private Tab keyBackupTab;
 
 	@FXML
-	private Tab accountInformationTab;
+	private Tab contactInformationTab;
 	
 	
 	@FXML
