@@ -28,11 +28,12 @@ package org.martus.client.swingui.jfx.landing.general;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 import org.martus.client.core.ConfigInfo;
-//import org.martus.client.swingui.UiFontEncodingHelper;
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 
@@ -41,6 +42,9 @@ public class AccountInformationController extends FxInSwingController
 	public AccountInformationController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+		
+		info = getApp().getConfigInfo();
+		fontHelper = new UiFontEncodingHelper(getConfigInfo().getDoZawgyiConversion());
 	}
 	
 	@Override
@@ -57,11 +61,25 @@ public class AccountInformationController extends FxInSwingController
 	{
 		return info;
 	}
+	
+	@FXML
+	public void onSaveChanges(ActionEvent event) throws Exception
+	{
+		System.out.println("SAVING CHANGES");
+		getConfigInfo().setAuthor(getFontHelper().getStorable(authorField.getText()));
+		getConfigInfo().setOrganization(getFontHelper().getStorable(organizationField.getText()));
+		getApp().saveConfigInfo();
+	}
+	
+	private UiFontEncodingHelper getFontHelper()
+	{
+		return fontHelper;
+	}
 
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/step2/SetupContactInfo.fxml";
+		return "landing/general/AccountInformation.fxml";
 	}
 	
 	@FXML
@@ -71,5 +89,5 @@ public class AccountInformationController extends FxInSwingController
 	private TextField organizationField;
 	
 	private ConfigInfo info;
-	//private UiFontEncodingHelper fontHelper;
+	private UiFontEncodingHelper fontHelper;
 }

@@ -289,8 +289,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	@FXML
 	private void onContactInformation(ActionEvent event)
 	{
-		doAction(new ActionMenuContactInfo(getMainWindow()));
-		//onAccount(AccountController.ACCOUNT_INFORMATION_TAB_CODE);
+		onAccount(AccountController.ACCOUNT_INFORMATION_TAB_CODE);
 	}
 	
 	@FXML
