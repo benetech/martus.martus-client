@@ -26,22 +26,30 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.generic;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.util.TokenReplacement;
+import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class SimpleTextContentController extends FxController
 {
 	public SimpleTextContentController(UiMainWindow mainWindowToUse, String confirmationMessageTagToUse)
 	{
-		super(mainWindowToUse);
-		
-		confirmationMessageTag = confirmationMessageTagToUse;
+		this(mainWindowToUse, confirmationMessageTagToUse, null);
 	}
 	
+	public SimpleTextContentController(UiMainWindow mainWindowToUse, String confirmationMessageTagToUse, Map tokensToUse)
+	{
+		super(mainWindowToUse);
+		confirmationMessageTag = confirmationMessageTagToUse;
+		tokenReplacement = tokensToUse;
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle bundle)
 	{
@@ -49,7 +57,18 @@ public class SimpleTextContentController extends FxController
 
 		messageTextArea.setWrapText(true);
 		messageTextArea.setPrefWidth(getParentController().getShellController().getSwingStage().getWidth() - SCROLLER_WIDTH);
-		messageTextArea.setText(getLocalization().getFieldLabel(confirmationMessageTag));
+		String rawMessage = getLocalization().getFieldLabel(confirmationMessageTag);
+		String contents = rawMessage;
+		try
+		{
+			if(tokenReplacement != null)
+				contents = TokenReplacement.replaceTokens(rawMessage, tokenReplacement);
+		} 
+		catch (TokenInvalidException e)
+		{
+			e.printStackTrace();
+		}
+		messageTextArea.setText(contents);
 	}
 
 	@Override
@@ -63,4 +82,5 @@ public class SimpleTextContentController extends FxController
 	private Label messageTextArea;
 	
 	private String confirmationMessageTag;
+	private Map tokenReplacement;
 }

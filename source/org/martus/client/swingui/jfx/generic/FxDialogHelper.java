@@ -25,15 +25,30 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import java.util.Map;
+
 import org.martus.client.swingui.UiMainWindow;
 
 public class FxDialogHelper
 {
-	public static void showNotificationDialog(UiMainWindow mainWindow, String confirmationMessageTag) throws Exception
+	public static void showNotificationDialog(UiMainWindow mainWindow, String baseTag)
 	{
-		FxController mainNotificationAreaController = new SimpleTextContentController(mainWindow, confirmationMessageTag);
-		DialogWithCloseShellController dialogWithCloseShellController = new DialogWithCloseShellController(mainWindow, mainNotificationAreaController);
-		DialogStage stage = new DialogStage(mainWindow, dialogWithCloseShellController);
-		FxModalDialog.createAndShow(mainWindow, stage);
+		showNotificationDialog(mainWindow, baseTag, null);
+	}
+	
+	public static void showNotificationDialog(UiMainWindow mainWindow, String baseTag, Map map)
+	{
+		try
+		{
+			String causeTag = "notify" + baseTag + "cause";
+			FxController mainNotificationAreaController = new SimpleTextContentController(mainWindow, causeTag, map);
+			DialogWithCloseShellController dialogWithCloseShellController = new DialogWithCloseShellController(mainWindow, mainNotificationAreaController);
+			DialogStage stage = new DialogStage(mainWindow, dialogWithCloseShellController);
+			FxModalDialog.createAndShow(mainWindow, stage);
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }
