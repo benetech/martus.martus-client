@@ -78,7 +78,7 @@ public class ContactInformationController extends FxInSwingController
 	@Override
 	public String getFxmlLocation()
 	{
-		return "landing/general/AccountInformation.fxml";
+		return "landing/general/ContactInformation.fxml";
 	}
 	
 	@FXML
