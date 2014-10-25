@@ -29,6 +29,13 @@
       </ScrollPane>
       <HBox>
          <children>
+            <Hyperlink onAction="#onSubfilterAll" text="All" />
+            <Hyperlink onAction="#onSubfilterMyRecords" text="My Records" />
+            <Hyperlink onAction="#onSubfilterSharedWithMe" text="Shared With Me" />
+         </children>
+      </HBox>
+      <HBox>
+         <children>
             <Button fx:id="uploadButton" mnemonicParsing="false" onAction="#onUpload" text="Upload" />
             <Button fx:id="downloadButton" mnemonicParsing="false" onAction="#onDownload" text="Download" />
             <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDelete" text="Delete" />

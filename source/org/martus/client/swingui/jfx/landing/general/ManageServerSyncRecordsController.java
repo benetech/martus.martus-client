@@ -208,7 +208,16 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	
 	private void updateTable(int TableToShow)
 	{
+		syncRecordsTableProvider.setFilter(SyncRecordsTableProvider.SUB_FILTER_ALL);
 		syncRecordsTableProvider.show(TableToShow);
+		updateButtons();
+		sortByMostRecent();
+	}
+	
+	private void filterTable(int filter)
+	{
+		syncRecordsTableProvider.setFilter(filter);
+		syncRecordsTableProvider.filterResults();
 		updateButtons();
 		sortByMostRecent();
 	}
@@ -351,6 +360,24 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	private void onShowBoth(ActionEvent event)
 	{
 		updateTable(ServerSyncTableRowData.LOCATION_BOTH);
+	}
+
+	@FXML 	
+	private void onSubfilterAll(ActionEvent event)
+	{
+		filterTable(SyncRecordsTableProvider.SUB_FILTER_ALL);
+	}
+
+	@FXML 	
+	private void onSubfilterMyRecords(ActionEvent event)
+	{
+		filterTable(SyncRecordsTableProvider.SUB_FILTER_MY_RECORDS);
+	}
+
+	@FXML 	
+	private void onSubfilterSharedWithMe(ActionEvent event)
+	{
+		filterTable(SyncRecordsTableProvider.SUB_FILTER_SHARED_WITH_ME);
 	}
 
 	private final String TITLE_SEPARATOR = "\n";

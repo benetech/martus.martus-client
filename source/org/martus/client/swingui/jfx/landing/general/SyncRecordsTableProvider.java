@@ -44,25 +44,62 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 	{
 		super(INITIAL_CAPACITY);
 		mainWindow = mainWindowToUse;
+		currentLocation = ServerSyncTableRowData.LOCATION_ANY;
+		currentSubFilter = SUB_FILTER_ALL;
 		allRows = new ArrayObservableList(INITIAL_CAPACITY);
 	}
 	
 	public void show(int location)
 	{
+		currentLocation = location;
 		clear();
-		if(location != ServerSyncTableRowData.LOCATION_ANY)
+		if( location == ServerSyncTableRowData.LOCATION_ANY && currentSubFilter == SUB_FILTER_ALL)
 		{
-			for (Iterator iterator = allRows.iterator(); iterator.hasNext();)
-			{
-				ServerSyncTableRowData rowData = (ServerSyncTableRowData) iterator.next();
-				if(rowData.getRawLocation() == location)
-					add(rowData);
-			}
+			addAll(allRows);
 			return;
 		}
-		addAll(allRows);
+		
+		String myAccountId = mainWindow.getApp().getAccountId();
+		for (Iterator iterator = allRows.iterator(); iterator.hasNext();)
+		{
+			ServerSyncTableRowData rowData = (ServerSyncTableRowData) iterator.next();
+			if(location == rowData.getRawLocation() || location == ServerSyncTableRowData.LOCATION_ANY)
+			{
+				if(subFilterMatches(rowData, myAccountId))
+					add(rowData);
+			}
+		}
 	}
 		
+	private boolean subFilterMatches(ServerSyncTableRowData rowData, String myAccountId)
+	{
+		if(currentSubFilter == SUB_FILTER_ALL)
+			return true;
+		if(currentSubFilter == SUB_FILTER_MY_RECORDS)
+		{
+			if(myAccountId.equals(rowData.getUniversalId().getAccountId()))
+				return true;
+			return false;
+		}
+		if(currentSubFilter == SUB_FILTER_SHARED_WITH_ME)
+		{
+			if(!myAccountId.equals(rowData.getUniversalId().getAccountId()))
+				return true;
+			return false;
+		}
+		return false;
+	}
+
+	public void setFilter(int filter)
+	{
+		currentSubFilter = filter;
+	}
+	
+	public void filterResults()
+	{
+		show(currentLocation);
+	}
+
 	public void addBulletinsAndSummaries(Set localUidsToUse, Vector myDraftSummaries, Vector mySealedSummaries, Vector hqDraftSummaries, Vector hqSealedSummaries) throws Exception
 	{
 		localUids = localUidsToUse;
@@ -133,8 +170,14 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 		return bulletinData;
 	}
 
+	public static final int SUB_FILTER_ALL = 0;
+	public static final int SUB_FILTER_MY_RECORDS = 1;
+	public static final int SUB_FILTER_SHARED_WITH_ME = 2;
+	
 	private UiMainWindowInterface mainWindow;
 	private static final int INITIAL_CAPACITY = 500;
 	private ArrayObservableList<ServerSyncTableRowData> allRows;
 	private Set localUids;
+	private int currentLocation;
+	private int currentSubFilter;
 }
