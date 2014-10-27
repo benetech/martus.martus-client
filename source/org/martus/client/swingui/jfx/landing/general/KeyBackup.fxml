@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-       <HBox>
-      </HBox>
-   </children>
-</VBox>
+<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="910.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <BorderPane layoutX="0.0" layoutY="0.0" prefWidth="910.0" styleClass="pageMargin">
+      <center>
+        <Pane fx:id="contentPane" maxHeight="-Infinity" prefHeight="408.0" prefWidth="840.0" />
+      </center>
+      <top>
+        <Button mnemonicParsing="false" onAction="#onExportMultiKey" text="Export 3 Key"/>
+      </top>
+    </BorderPane>
+  </children>
+</AnchorPane>
