@@ -36,6 +36,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuExportMyPublicKey;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.common.MartusAccountAccessToken;
+import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
 import org.martus.common.crypto.MartusCrypto;
 
 public class AccountSharingController extends FxInSwingController
@@ -58,14 +59,25 @@ public class AccountSharingController extends FxInSwingController
 	{
 		try
 		{
-			MartusAccountAccessToken accountToken = getApp().getConfigInfo().getCurrentMartusAccountAccessToken();
-			String martusAccountAccessToken = accountToken.getToken();
+			String martusAccountAccessToken = getAccountAccessToken();
 			accountAccessTokenLabel.setText(martusAccountAccessToken);
 		} 
 		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 		}
+	}
+
+	private String getAccountAccessToken() throws TokenInvalidException
+	{
+		if (getApp().getConfigInfo().hasMartusAccountAccessToken())
+		{
+			MartusAccountAccessToken accountToken = getApp().getConfigInfo().getCurrentMartusAccountAccessToken();
+			
+			return accountToken.getToken();
+		}
+		
+		return getLocalization().getFieldLabel("NotAvailable");
 	}
 
 	private void setAccountPublicCodeLabel() 
