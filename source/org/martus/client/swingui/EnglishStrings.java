@@ -1966,6 +1966,7 @@ public class EnglishStrings
 "button:CaseClosed=Closed",
 
 "field:ChooseLanguage=Choose a Language",
+"field:NotAvailable=Not Available",
 
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Sent",
