@@ -279,7 +279,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	@FXML
 	private void onAccountSharing(ActionEvent event)
 	{
-		//onAccount(AccountController.ACCOUNT_SHARING_TAB_CODE);
+		onAccount(AccountController.ACCOUNT_SHARING_TAB_CODE);
 	}
 
 	@FXML

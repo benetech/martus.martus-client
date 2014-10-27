@@ -28,8 +28,15 @@ package org.martus.client.swingui.jfx.landing.general;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionMenuExportMyPublicKey;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
+import org.martus.common.MartusAccountAccessToken;
+import org.martus.common.crypto.MartusCrypto;
 
 public class AccountSharingController extends FxInSwingController
 {
@@ -42,6 +49,43 @@ public class AccountSharingController extends FxInSwingController
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
+
+		setAccountPublicCodeLabel();
+		setAccessTokenLabel();
+	}
+
+	private void setAccessTokenLabel()
+	{
+		try
+		{
+			MartusAccountAccessToken accountToken = getApp().getConfigInfo().getCurrentMartusAccountAccessToken();
+			String martusAccountAccessToken = accountToken.getToken();
+			accountAccessTokenLabel.setText(martusAccountAccessToken);
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
+
+	private void setAccountPublicCodeLabel() 
+	{
+		try
+		{
+			String keyContents = getApp().getAccountId();
+			String formattedCodeContentsNew = MartusCrypto.computeFormattedPublicCode40(keyContents);
+			accountPublicCode.setText(formattedCodeContentsNew);
+		}
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
+	
+	@FXML
+	private void onExportPublicKey(ActionEvent event)
+	{
+		doAction(new ActionMenuExportMyPublicKey(getMainWindow()));
 	}
 
 	@Override
@@ -49,4 +93,10 @@ public class AccountSharingController extends FxInSwingController
 	{
 		return "landing/general/AccountSharing.fxml";
 	}
+	
+	@FXML
+	private Label accountAccessTokenLabel;
+	
+	@FXML
+	private Label accountPublicCode;
 }
