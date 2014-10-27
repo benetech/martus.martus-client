@@ -268,8 +268,6 @@ public class FxLandingShellController extends FxNonWizardShellController
 		}
 	}
 	
-	//FIXME uncomment the onAccount calls once tabs are working. 
-	//These are commented out to avoid having to make large commits.
 	@FXML
 	private void onChangeUsernameAndPassword(ActionEvent event)
 	{
