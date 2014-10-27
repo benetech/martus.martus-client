@@ -35,7 +35,7 @@ import org.martus.client.swingui.filefilters.PublicInfoFileFilter;
 import org.martus.clientside.FormatFilter;
 import org.martus.common.MartusLogger;
 
-public class ActionMenuExportMyPublicKey extends UiMenuAction
+public class ActionMenuExportMyPublicKey extends UiMenuAction  implements ActionDoer
 {
 	public ActionMenuExportMyPublicKey(UiMainWindow mainWindowToUse)
 	{
@@ -68,4 +68,9 @@ public class ActionMenuExportMyPublicKey extends UiMenuAction
 		}
 	}
 
+	@Override
+	public void doAction()
+	{
+		doExportMyPublicKey();
+	}
 }
