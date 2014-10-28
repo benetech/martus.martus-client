@@ -442,6 +442,9 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	@FXML
 	public void onShowAllCases(ActionEvent event)
 	{
+		BulletinFolder allFolders = null;
+		listeners.forEach(listener -> listener.folderWasSelected(allFolders));
+		currentCasesListView.getSelectionModel().clearSelection();
 	}	
 	
 	public void onServerSync(ActionEvent event)
