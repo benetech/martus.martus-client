@@ -27,8 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.contacts.ContactsStage;
-import org.martus.client.swingui.jfx.generic.FxModalDialog;
 
 public class ActionMenuManageContacts extends ActionMenuManageContactsWithoutResignIn
 {
@@ -42,14 +40,7 @@ public class ActionMenuManageContacts extends ActionMenuManageContactsWithoutRes
 		if(!mainWindow.reSignIn())
 			return;
 		
-		try
-		{
-		    FxModalDialog.createAndShow(mainWindow, new ContactsStage(mainWindow));
-		} 
-		catch (Exception e)
-		{
-			mainWindow.unexpectedErrorDlg(e);
-		}
+		super.doAction();
 	}
 	
 }
