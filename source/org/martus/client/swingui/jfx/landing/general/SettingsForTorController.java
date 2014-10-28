@@ -106,9 +106,14 @@ public class SettingsForTorController extends FxInSwingController
 	@FXML 
 	private void OnLinkTorProject()
 	{
+		openLinkInDefaultBrowser("https://www.torproject.org");
+	}
+
+	private void openLinkInDefaultBrowser(String url)
+	{
 		try
 		{
-			String url = "https://www.torproject.org";
+			
 			Desktop.getDesktop().browse(java.net.URI.create(url));
 		} 
 		catch (IOException e)
