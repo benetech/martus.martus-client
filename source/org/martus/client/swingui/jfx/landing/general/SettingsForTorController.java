@@ -109,20 +109,6 @@ public class SettingsForTorController extends FxInSwingController
 		openLinkInDefaultBrowser("https://www.torproject.org");
 	}
 
-	private void openLinkInDefaultBrowser(String url)
-	{
-		try
-		{
-			
-			Desktop.getDesktop().browse(java.net.URI.create(url));
-		} 
-		catch (IOException e)
-		{
-			MartusLogger.logException(e);
-		}
-	}
-	
-	
 	@FXML
 	protected Pane switchButtonPane;
 

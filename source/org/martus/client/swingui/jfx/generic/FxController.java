@@ -25,7 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -398,6 +400,19 @@ abstract public class FxController implements Initializable
 		if(languageCode.equals(MartusLocalization.ENGLISH))
 			return getBestFile(directory, "css/" + cssLocation);
 		return getBestFile(directory, "css/" + languageCode + "/" + cssLocation);
+	}
+	
+	protected void openLinkInDefaultBrowser(String url)
+	{
+		try
+		{
+			
+			Desktop.getDesktop().browse(java.net.URI.create(url));
+		} 
+		catch (IOException e)
+		{
+			MartusLogger.logException(e);
+		}
 	}
 
 	public static class UserCancelledException extends Exception
