@@ -63,9 +63,13 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 		if(folder != null)
 			folder.removeFolderContentsListener(this);
 		folder = newFolder;
+		boolean isTrashBeingDisplayed = false;
 		if(folder != null)
+		{
 			folder.addFolderContentsListener(this);
-		trashFolderBeingDisplayedProperty.set(folder.isDiscardedFolder());
+			isTrashBeingDisplayed = folder.isDiscardedFolder();
+		}
+		trashFolderBeingDisplayedProperty.set(isTrashBeingDisplayed);
 		updateContents();
 	}
 	
