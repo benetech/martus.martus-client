@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.generic;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -409,6 +410,19 @@ abstract public class FxController implements Initializable
 			Desktop.getDesktop().browse(java.net.URI.create(url));
 		} 
 		catch (IOException e)
+		{
+			MartusLogger.logException(e);
+		}
+	}
+
+	protected void openDefaultEmailApp(String email)
+	{
+		try
+		{
+			Desktop desktop = Desktop.getDesktop(); 
+			desktop.mail(new URI(email));
+		} 
+		catch (Exception e)
 		{
 			MartusLogger.logException(e);
 		}
