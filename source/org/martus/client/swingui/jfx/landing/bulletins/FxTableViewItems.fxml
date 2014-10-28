@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <center>
+      <TableView fx:id="itemsTable" onMouseClicked="#onMouseClick">
+        <columns>
+          <TableColumn fx:id="onServerColumn" editable="false" text="On Server" />
+            <TableColumn fx:id="authorVerifiedColumn" prefWidth="75.0" text="Verified" />
+            <TableColumn fx:id="authorColumn" editable="false" prefWidth="123.0" text="Author" />
+          <TableColumn fx:id="titleColumn" editable="false" prefWidth="284.0" text="Title" />
+            <TableColumn fx:id="dateSavedColumn" editable="false" prefWidth="180.0" text="Date Saved" />
+            <TableColumn fx:id="viewBulletinColumn" text="View" />
+            <TableColumn fx:id="editBulletinColumn" text="Edit" />
+        </columns>
+      </TableView>
+  </center>
+   <bottom>
+      <BorderPane BorderPane.alignment="CENTER">
+         <left>
+          <HBox BorderPane.alignment="CENTER">
+             <children>
+                <Button fx:id="trashButton" mnemonicParsing="false" onAction="#onTrashSelectedItems" text="Trash">
+                   <graphic>
+                      <ImageView pickOnBounds="true" preserveRatio="true">
+                         <image>
+                            <Image url="@../../images/trash.png" />
+                         </image>
+                      </ImageView>
+                   </graphic>
+                </Button>
+                <Button fx:id="exportButton" mnemonicParsing="false" onAction="#onExportSelectedItems" text="Export">
+                   <graphic>
+                      <ImageView pickOnBounds="true" preserveRatio="true">
+                         <image>
+                            <Image url="@../../images/export.png" />
+                         </image>
+                      </ImageView>
+                   </graphic>
+                </Button>
+                <Button fx:id="moveButton" mnemonicParsing="false" onAction="#onMoveSelectedItems" text="Move">
+                   <graphic>
+                      <ImageView pickOnBounds="true" preserveRatio="true">
+                         <image>
+                            <Image url="@../../images/move.png" />
+                         </image>
+                      </ImageView>
+                   </graphic>
+                </Button>
+                <Button fx:id="copyButton" mnemonicParsing="false" onAction="#onCopySelectedItem" text="Copy">
+                   <graphic>
+                      <ImageView pickOnBounds="true" preserveRatio="true">
+                         <image>
+                            <Image url="@../../images/copy.png" />
+                         </image>
+                      </ImageView>
+                   </graphic>
+                </Button>
+                <Button fx:id="emptyTrashButton" mnemonicParsing="false" onAction="#onEmptyTrash" text="%Button.emptyTrash">
+                   <graphic>
+                      <ImageView pickOnBounds="true" preserveRatio="true">
+                         <image>
+                            <Image url="@../../images/trash.png" />
+                         </image>
+                      </ImageView>
+                   </graphic>
+                </Button>
+             </children>
+          </HBox>
+         </left>
+         <right>
+            <Pane fx:id="statusBar" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+   </bottom>
+</BorderPane>
