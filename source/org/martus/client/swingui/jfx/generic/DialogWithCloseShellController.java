@@ -35,6 +35,11 @@ public class DialogWithCloseShellController extends DialogShellController
 	{
 		super(mainWindowToUse, contentController);
 	}
+	
+	public DialogWithCloseShellController(UiMainWindow mainWindowToUse, FxController contentController, String titleTagToUse)
+	{
+		super(mainWindowToUse, contentController, titleTagToUse);
+	}
 
 	@Override
 	public String getFxmlLocation()
@@ -49,5 +54,4 @@ public class DialogWithCloseShellController extends DialogShellController
 	}
 
 	private static final String LOCATION_DIALOG_WITH_CLOSE_SHELL = "generic/DialogWithCloseShell.fxml";
-
 }

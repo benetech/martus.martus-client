@@ -35,7 +35,14 @@ abstract public class DialogShellController extends FxShellWithSingleContentCont
 {
 	public DialogShellController(UiMainWindow mainWindowToUse, FxController contentController)
 	{
+		this(mainWindowToUse, contentController, "");
+	}
+	
+	public DialogShellController(UiMainWindow mainWindowToUse, FxController contentController, String titleTagToUse)
+	{
 		super(mainWindowToUse, contentController);
+		
+		titleTag = titleTagToUse;
 	}
 
 	@Override
@@ -51,7 +58,7 @@ abstract public class DialogShellController extends FxShellWithSingleContentCont
 		try
 		{
 			DialogStageWithCss stage = new DialogStageWithCss(mainWindow, this, getContentController().getCssName());
-			FxModalDialog.createAndShow(mainWindow, stage);
+			FxModalDialog.createAndShow(mainWindow, stage, getTitleTag());
 		} 
 		catch (Exception e)
 		{
@@ -59,6 +66,13 @@ abstract public class DialogShellController extends FxShellWithSingleContentCont
 		}
 	}
 	
+	protected String getTitleTag()
+	{
+		return titleTag;
+	}
+	
 	@FXML
 	Pane contentPane;
+	
+	private String titleTag;
 }
