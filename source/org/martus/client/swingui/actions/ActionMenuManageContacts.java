@@ -30,7 +30,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.contacts.ContactsStage;
 import org.martus.client.swingui.jfx.generic.FxModalDialog;
 
-public class ActionMenuManageContacts extends ActionMenuManageContactsWithoutResignIn implements ActionDoer
+public class ActionMenuManageContacts extends ActionMenuManageContactsWithoutResignIn
 {
 	public ActionMenuManageContacts(UiMainWindow mainWindowToUse)
 	{
