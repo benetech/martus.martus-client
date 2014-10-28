@@ -26,8 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.actions;
 
-import java.awt.event.ActionEvent;
-
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.contacts.ContactsStage;
 import org.martus.client.swingui.jfx.generic.FxModalDialog;
@@ -37,11 +35,6 @@ public class ActionMenuManageContacts extends ActionMenuManageContactsWithoutRes
 	public ActionMenuManageContacts(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-	}
-
-	public void actionPerformed(ActionEvent ae)
-	{
-		doAction();
 	}
 
 	public void doAction()
