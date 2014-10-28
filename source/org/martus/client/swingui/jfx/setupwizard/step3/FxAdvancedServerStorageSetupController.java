@@ -93,7 +93,11 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 	@FXML
 	private void onLinkMailTo()
 	{
-		String email = "mailto:info@martus.org";
+		openDefaultEmailApp("mailto:info@martus.org");
+	}
+
+	private void openDefaultEmailApp(String email)
+	{
 		try
 		{
 			Desktop desktop = Desktop.getDesktop(); 
