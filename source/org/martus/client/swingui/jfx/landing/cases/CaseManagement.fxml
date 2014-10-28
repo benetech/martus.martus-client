@@ -24,8 +24,9 @@
         </Label>
       <HBox>
          <children>
-            <Button mnemonicParsing="false" onAction="#onShowAllCase" text="%Button.CaseAll" />
-            <Button mnemonicParsing="false" onAction="#onShowSentCase" text="%Button.CaseSent" />
+            <Button mnemonicParsing="false" onAction="#onShowAllCase" styleClass="button-minpadding" text="%Button.CaseAll" />
+            <Button mnemonicParsing="false" onAction="#onShowSentCase" styleClass="button-minpadding" text="%Button.CaseSent" />
+            <Button mnemonicParsing="false" onAction="#onShowReceivedCase" styleClass="button-minpadding" text="%Button.CaseReceived" />
          </children>
       </HBox>
       <TabPane fx:id="casesTabPane" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
@@ -58,7 +59,7 @@
 		</HBox>
       <HBox prefWidth="200.0">
          <children>
-            <Button graphicTextGap="2.0" maxHeight="45.0" mnemonicParsing="false" onAction="#onManageTemplates" text="Templates">
+            <Button graphicTextGap="2.0" maxHeight="45.0" mnemonicParsing="false" onAction="#onManageTemplates" styleClass="button-minpadding" text="Templates">
                <font>
                   <Font name="Helvetica" size="12.0" />
                </font>
@@ -70,7 +71,7 @@
                   </ImageView>
                </graphic>
             </Button>
-      		<Button fx:id="showTrashFolder" graphicTextGap="2.0" maxHeight="45.0" mnemonicParsing="false" onAction="#onShowTrash" text="Show Trash">
+      		<Button fx:id="showTrashFolder" graphicTextGap="2.0" maxHeight="45.0" mnemonicParsing="false" onAction="#onShowTrash" styleClass="button-minpadding" text="Show Trash">
       			<font>
       				<Font name="Helvetica" size="12.0" />
       			</font>
@@ -86,7 +87,7 @@
       </HBox>
       <HBox>
          <children>
-            <Button mnemonicParsing="false" onAction="#onServerSync" text="Server Sync">
+            <Button mnemonicParsing="false" onAction="#onServerSync" styleClass="button-minpadding" text="Server Sync">
                <graphic>
                   <ImageView fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -95,7 +96,7 @@
                   </ImageView>
                </graphic>
             </Button>
-      		<Button fx:id="importBulletin" graphicTextGap="2.0" maxHeight="45.0" mnemonicParsing="false" onAction="#onImportBulletin" text="Import Bulletin">
+      		<Button fx:id="importBulletin" graphicTextGap="2.0" maxHeight="45.0" mnemonicParsing="false" onAction="#onImportBulletin" styleClass="button-minpadding" text="Import Bulletin">
       			<font>
       				<Font name="Helvetica" size="12.0" />
       			</font>
