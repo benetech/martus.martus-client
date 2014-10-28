@@ -46,7 +46,7 @@ import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
-import org.martus.client.swingui.actions.ActionMenuManageContacts;
+import org.martus.client.swingui.actions.ActionMenuManageContactsWithoutResignIn;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
 import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
@@ -177,7 +177,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	@FXML
 	private void onManageContacts(ActionEvent event)
 	{
-		doAction(new ActionMenuManageContacts(getMainWindow()));
+		doAction(new ActionMenuManageContactsWithoutResignIn(getMainWindow()));
 	}
 
 	private void onSettings(String tabToDisplayFirst)
