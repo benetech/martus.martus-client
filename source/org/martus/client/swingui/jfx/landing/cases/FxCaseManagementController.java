@@ -34,6 +34,7 @@ import java.util.Vector;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -283,7 +284,12 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	
 	private void orderCases()
 	{
-		java.util.Collections.sort(casesListViewAll.getItems(), new CaseComparator());		
+		sortCases(casesListViewAll.getItems());		
+	}
+
+	public void sortCases(ObservableList<CaseListItem> items)
+	{
+		java.util.Collections.sort(items, new CaseComparator());
 	}
 	
 	@FXML
