@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+       <HBox>
+       		<Label text="For assistance with Martus, please send an email to" />
+       		<Hyperlink onAction="#onLinkEMailTo" text="help@martus.org" />
+       		<Label text="There is also help documentation available" />
+       		<Hyperlink onAction="#onMartusLinkClick" text="martus.org" />
+      </HBox>
+   </children>
+</VBox>
