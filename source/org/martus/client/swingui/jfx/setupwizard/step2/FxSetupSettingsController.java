@@ -25,8 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step2;
 
-import java.awt.Desktop;
-import java.io.IOException;
 import java.util.Vector;
 
 import javafx.beans.value.ChangeListener;
@@ -195,15 +193,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 	@FXML 
 	private void OnLinkTorProject()
 	{
-		try
-		{
-			String url = "https://www.torproject.org";
-			Desktop.getDesktop().browse(java.net.URI.create(url));
-		} 
-		catch (IOException e)
-		{
-			MartusLogger.logException(e);
-		}
+		openLinkInDefaultBrowser("https://www.torproject.org");
 	}
 
 	@FXML
