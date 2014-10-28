@@ -406,7 +406,6 @@ abstract public class FxController implements Initializable
 	{
 		try
 		{
-			
 			Desktop.getDesktop().browse(java.net.URI.create(url));
 		} 
 		catch (IOException e)
