@@ -22,6 +22,12 @@
             </ImageView>
          </graphic>
         </Label>
+      <HBox>
+         <children>
+            <Button mnemonicParsing="false" onAction="#onShowAllCase" text="%Button.CaseAll" />
+            <Button mnemonicParsing="false" onAction="#onShowSentCase" text="%Button.CaseSent" />
+         </children>
+      </HBox>
       <TabPane fx:id="casesTabPane" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="tabCaseAll">
@@ -32,9 +38,6 @@
                      </children>
             		</Pane>
             </content>
-               <graphic>
-                  <Hyperlink onAction="#onShowAllCases" text="%Button.CaseAll" />
-               </graphic>
           </Tab>
         </tabs>
       </TabPane>

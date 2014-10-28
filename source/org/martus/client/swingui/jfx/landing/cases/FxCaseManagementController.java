@@ -154,6 +154,8 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		String searchFolder = store.getSearchFolderName();
 		if(folder.getName().equals(searchFolder))
 			return true;
+		if(folder.equals(store.getFolderSaved()))
+			return true;
 		BulletinFolder discarded = store.getFolderDiscarded();
 		if(folder.equals(discarded))
 			return true;
@@ -163,7 +165,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	@FXML
 	public void onShowTrash(ActionEvent event)
 	{
-		currentCasesListView.getSelectionModel().clearSelection();
+		clearCases();
 		
 		BulletinFolder trashFolder = getApp().getStore().getFolderDiscarded();
 		MartusLocalization localization = getLocalization();
@@ -231,10 +233,10 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 
 	private void updateButtons(BulletinFolder folder)
 	{
-		if(folder.canDelete())
-			deleteFolderButton.setDisable(false);
-		else
+		if(folder == null || !folder.canDelete() )
 			deleteFolderButton.setDisable(true);
+		else
+			deleteFolderButton.setDisable(false);
 	}
 
 	@FXML
@@ -440,13 +442,27 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	}
 	
 	@FXML
-	public void onShowAllCases(ActionEvent event)
+	public void onShowAllCase(ActionEvent event)
 	{
-		BulletinFolder allFolders = null;
-		listeners.forEach(listener -> listener.folderWasSelected(allFolders));
+		BulletinFolder allFolder = null;
+		listeners.forEach(listener -> listener.folderWasSelected(allFolder));
+		clearCases();
+	}
+
+	public void clearCases()
+	{
 		currentCasesListView.getSelectionModel().clearSelection();
+		updateButtons(null);
 	}	
 	
+	@FXML
+	public void onShowSentCase(ActionEvent event)
+	{
+		BulletinFolder sentFolder = getApp().getStore().getFolderSaved();
+		listeners.forEach(listener -> listener.folderWasSelected(sentFolder));
+		clearCases();
+	}	
+
 	public void onServerSync(ActionEvent event)
 	{
 		try
