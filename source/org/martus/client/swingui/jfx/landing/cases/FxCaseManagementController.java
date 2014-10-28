@@ -283,7 +283,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	
 	private void orderCases()
 	{
-		java.util.Collections.sort(casesListViewAll.getItems(), new CaseComparitor());		
+		java.util.Collections.sort(casesListViewAll.getItems(), new CaseComparator());		
 	}
 	
 	@FXML
@@ -336,9 +336,9 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		}
 	}
 	
-	private final class CaseComparitor implements java.util.Comparator<CaseListItem>
+	private final class CaseComparator implements java.util.Comparator<CaseListItem>
 	{
-		public CaseComparitor()
+		public CaseComparator()
 		{
 		}
 
