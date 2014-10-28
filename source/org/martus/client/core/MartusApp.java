@@ -1350,6 +1350,11 @@ public class MartusApp
 	{
 		return store.getFolderSaved();
 	}
+	
+	public BulletinFolder getFolderRetrieved()
+	{
+		return store.createOrFindFolder(getNameOfFolderForAllRetrieved());
+	}
 
 	public BulletinFolder getFolderDiscarded()
 	{

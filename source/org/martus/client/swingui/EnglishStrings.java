@@ -1963,7 +1963,7 @@ public class EnglishStrings
 "wintitle:notifyErrorDeletingFolder=Error Deleting Folder",
 "button:CaseSent=Sent",
 "button:CaseAll=All",
-
+"button:CaseReceived=Received",
 "field:ChooseLanguage=Choose a Language",
 "field:TokenNotAvailable=Not Available",
 

@@ -154,11 +154,18 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		String searchFolder = store.getSearchFolderName();
 		if(folder.getName().equals(searchFolder))
 			return true;
+
+		String receivedFolder = store.getNameOfFolderForAllRetrieved();
+		if(folder.getName().equals(receivedFolder))
+			return true;
+	
 		if(folder.equals(store.getFolderSaved()))
 			return true;
+
 		BulletinFolder discarded = store.getFolderDiscarded();
 		if(folder.equals(discarded))
 			return true;
+
 		return false;
 	}
 	
@@ -445,24 +452,35 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	public void onShowAllCase(ActionEvent event)
 	{
 		BulletinFolder allFolder = null;
-		listeners.forEach(listener -> listener.folderWasSelected(allFolder));
-		clearCases();
+		showDefaultCase(allFolder);
 	}
 
+	@FXML
+	public void onShowSentCase(ActionEvent event)
+	{
+		BulletinFolder sentFolder = getApp().getFolderSaved();
+		showDefaultCase(sentFolder);
+	}	
+
+	@FXML
+	public void onShowReceivedCase(ActionEvent event)
+	{
+		BulletinFolder receivedFolder = getApp().getFolderRetrieved();
+		showDefaultCase(receivedFolder);
+	}
+
+	public void showDefaultCase(BulletinFolder receivedFolder)
+	{
+		listeners.forEach(listener -> listener.folderWasSelected(receivedFolder));
+		clearCases();
+	}	
+	
 	public void clearCases()
 	{
 		currentCasesListView.getSelectionModel().clearSelection();
 		updateButtons(null);
 	}	
 	
-	@FXML
-	public void onShowSentCase(ActionEvent event)
-	{
-		BulletinFolder sentFolder = getApp().getStore().getFolderSaved();
-		listeners.forEach(listener -> listener.folderWasSelected(sentFolder));
-		clearCases();
-	}	
-
 	public void onServerSync(ActionEvent event)
 	{
 		try
