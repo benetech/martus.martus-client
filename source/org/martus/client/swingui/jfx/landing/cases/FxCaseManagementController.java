@@ -84,10 +84,6 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		CaseListChangeListener caseListChangeListener = new CaseListChangeListener();
 		casesListViewAll.getSelectionModel().selectedItemProperty().addListener(caseListChangeListener);
 		casesListViewAll.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		casesListViewOpen.getSelectionModel().selectedItemProperty().addListener(caseListChangeListener);
-		casesListViewOpen.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		casesListViewClosed.getSelectionModel().selectedItemProperty().addListener(caseListChangeListener);
-		casesListViewClosed.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		casesTabPane.getSelectionModel().selectedItemProperty().addListener(new caseTabeListener());
 		currentSelectedCase = currentCasesListView.getSelectionModel().selectedItemProperty();
 		showTrashFolder.visibleProperty().bind(((FxLandingShellController)getShellController()).getShowTrashBinding());
@@ -123,12 +119,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	
 	protected void setCurrentlyViewedCaseList(Tab currentlyViewedCaseTab)
 	{
-		if(currentlyViewedCaseTab.equals(tabCaseOpen))
-			currentCasesListView = casesListViewOpen;
-		else if (currentlyViewedCaseTab.equals(tabCaseClosed))
-			currentCasesListView = casesListViewClosed;
-		else
-			currentCasesListView = casesListViewAll;
+		currentCasesListView = casesListViewAll;
 		updateCaseList();
 	}
 
@@ -138,8 +129,6 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		updateFolderLabelName(foldersLabel);
 
 		CaseListProvider caseListProviderAll = new CaseListProvider();
-		CaseListProvider caseListProviderOpen = new CaseListProvider();
-		CaseListProvider caseListProviderClosed = new CaseListProvider();
 
 		Vector visibleFolders = getApp().getStore().getAllVisibleFolders();
 		MartusLocalization localization = getLocalization();
@@ -152,14 +141,8 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 				updateButtons(folder);
 			CaseListItem caseList = new CaseListItem(folder, localization);
 			caseListProviderAll.add(caseList);
-			if(folder.isClosed())
-				caseListProviderClosed.add(caseList);
-			else
-				caseListProviderOpen.add(caseList);
 		}
 		casesListViewAll.setItems(caseListProviderAll);
-		casesListViewOpen.setItems(caseListProviderOpen);
-		casesListViewClosed.setItems(caseListProviderClosed);
 		orderCases();
 		selectCase(caseNameToSelect);
 	}
@@ -301,8 +284,6 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	private void orderCases()
 	{
 		java.util.Collections.sort(casesListViewAll.getItems(), new CaseComparitor());		
-		java.util.Collections.sort(casesListViewOpen.getItems(), new CaseComparitor());		
-		java.util.Collections.sort(casesListViewClosed.getItems(), new CaseComparitor());		
 	}
 	
 	@FXML
@@ -452,6 +433,11 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		}
 	}
 	
+	@FXML
+	public void onShowAllCases(ActionEvent event)
+	{
+	}	
+	
 	public void onServerSync(ActionEvent event)
 	{
 		try
@@ -524,26 +510,13 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 
 	@FXML
 	private ListView<CaseListItem> casesListViewAll;
-	
-	@FXML
-	private ListView<CaseListItem> casesListViewOpen;
-
-	@FXML
-	private ListView<CaseListItem> casesListViewClosed;
-	
-	
+			
 	@FXML
 	private TabPane casesTabPane;
 	
 	@FXML
 	private Tab tabCaseAll;
 	
-	@FXML
-	private Tab tabCaseOpen;
-
-	@FXML
-	private Tab tabCaseClosed;
-
 
 	@FXML
 	private Label folderNameLabel;

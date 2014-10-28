@@ -24,16 +24,7 @@
         </Label>
       <TabPane fx:id="casesTabPane" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="tabCaseOpen" text="%Button.CaseOpen">
-            <content>
-            		<Pane>
-                     <children>
-                  		<ListView fx:id="casesListViewOpen" onMouseClicked="#onCaseListMouseClicked" prefWidth="300.0" />
-                     </children>
-            		</Pane>
-            </content>
-          </Tab>
-          <Tab fx:id="tabCaseAll" text="%Button.CaseAll">
+          <Tab fx:id="tabCaseAll">
             <content>
             		<Pane>
                      <children>
@@ -41,16 +32,10 @@
                      </children>
             		</Pane>
             </content>
+               <graphic>
+                  <Hyperlink onAction="#onShowAllCases" text="%Button.CaseAll" />
+               </graphic>
           </Tab>
-            <Tab fx:id="TabCaseClosed" text="%Button.CaseClosed">
-              <content>
-       				<Pane>
-                          <children>
-                  		<ListView fx:id="casesListViewClosed" onMouseClicked="#onCaseListMouseClicked" prefWidth="300.0" />
-                     </children>
-            		</Pane>
-              </content>
-            </Tab>
         </tabs>
       </TabPane>
 		<HBox>
