@@ -77,7 +77,7 @@ public class AccountSharingController extends FxInSwingController
 			return accountToken.getToken();
 		}
 		
-		return getLocalization().getFieldLabel("NotAvailable");
+		return getLocalization().getFieldLabel("TokenNotAvailable");
 	}
 
 	private void setAccountPublicCodeLabel() 
