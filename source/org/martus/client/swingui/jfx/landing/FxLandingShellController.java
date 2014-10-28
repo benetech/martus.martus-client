@@ -57,6 +57,7 @@ import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.CaseListProvider;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 import org.martus.client.swingui.jfx.landing.general.AccountController;
+import org.martus.client.swingui.jfx.landing.general.HelpController;
 import org.martus.client.swingui.jfx.landing.general.SettingsController;
 import org.martus.common.MartusLogger;
 import org.martus.common.network.OrchidTransportWrapper;
@@ -313,6 +314,12 @@ public class FxLandingShellController extends FxNonWizardShellController
 		{
 			doAction(new ActionMenuQuickEraseDeleteMyData(getMainWindow()));
 		}
+	}
+	
+	@FXML
+	public void onHelpMenu(ActionEvent event)
+	{
+		showDialogWithClose("Help", new HelpController(getMainWindow()));	
 	}
 	
 	@FXML

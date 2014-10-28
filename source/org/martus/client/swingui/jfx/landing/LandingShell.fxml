@@ -36,13 +36,11 @@
 							<MenuItem mnemonicParsing="false" onAction="#onDeleteMyData" styleClass="menu-item" text="Delete Account" />
 							</items>
 						</Menu>
-		    			<Menu mnemonicParsing="false" styleClass="menu_style" text="Help">
-		      				<items>
-		        				<MenuItem mnemonicParsing="false" styleClass="menu-item" text="What is Martus" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Getting Started" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="FAQs" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Installation Wizard" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Support Documentation" />
-		      				</items>
-		    			</Menu>
 					</menus>
 				</MenuBar>
+
+				<Button mnemonicParsing="false" onAction="#onHelpMenu" text="Help"/>	
+				
 			</children>
 		</HBox>
 	</top>
