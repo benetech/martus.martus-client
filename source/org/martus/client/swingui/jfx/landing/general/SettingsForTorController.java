@@ -25,8 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
-import java.awt.Desktop;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
