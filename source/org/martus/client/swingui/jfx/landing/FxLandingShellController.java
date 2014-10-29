@@ -151,7 +151,8 @@ public class FxLandingShellController extends FxNonWizardShellController
 		updateOnlineStatus();
 		updateTorStatus();
 		initializeTorListener();
-		caseManagementController.addFolderSelectionListener(bulletinListProvider);		
+		caseManagementController.addFolderSelectionListener(bulletinListProvider);
+		setTitleBarToAll();
 	}
 
 	private void initializeTorListener()
