@@ -358,13 +358,14 @@ public class ClientBulletinStore extends BulletinStore
 	{
 		try
 		{
-			if(!f.equals(folderDiscarded))
+			if(f==null || !f.equals(folderDiscarded))
 				folderDiscarded.add(uid);
 		}
 		catch (BulletinAlreadyExistsException saveToIgnoreException)
 		{
 		}
-		removeBulletinFromFolder(f, uid);
+		if(f != null)
+			removeBulletinFromFolder(f, uid);
 		if(isOrphan(uid))
 			destroyBulletin(getBulletinRevision(uid));
 	}
