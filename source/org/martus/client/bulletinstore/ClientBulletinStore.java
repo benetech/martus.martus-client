@@ -398,7 +398,7 @@ public class ClientBulletinStore extends BulletinStore
 		return false;
 	}
 	
-	private boolean isDiscarded(UniversalId uid)
+	public boolean isDiscarded(UniversalId uid)
 	{
 		return getFolderDiscarded().contains(uid);
 	}

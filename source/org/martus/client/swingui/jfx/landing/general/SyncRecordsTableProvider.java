@@ -149,7 +149,7 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 			bulletinData.canUploadToServerProperty().setValue(true);
 			bulletinData.setLocation(mainWindow.getApp(), ServerSyncTableRowData.LOCATION_BOTH);
 		}
-		if(!isInTrash(serverUid))
+		if(!mainWindow.getStore().isDiscarded(serverUid))
 			allRows.add(bulletinData);
 	}
 	
@@ -158,17 +158,11 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 		for(Iterator iter = localUids.iterator(); iter.hasNext();)
 		{
 			UniversalId leafBulletinUid = (UniversalId) iter.next();
-			if(isInTrash(leafBulletinUid))
+			if(!mainWindow.getStore().isDiscarded(leafBulletinUid))
 				continue;
 			ServerSyncTableRowData bulletinData = getLocalBulletinData(leafBulletinUid);
 			allRows.add(bulletinData);		
 		}
-	}
-
-	private boolean isInTrash(UniversalId uid)
-	{
-		BulletinFolder discardedFolder = mainWindow.getApp().getFolderDiscarded();
-		return discardedFolder.contains(uid);
 	}
 
 	protected ServerSyncTableRowData getLocalBulletinData(UniversalId leafBulletinUid) throws Exception
