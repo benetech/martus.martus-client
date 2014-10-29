@@ -46,8 +46,7 @@ public class ServerSyncTableRowData
 	{
 		uid = summaryToUse.getUniversalId();
 		canDeleteFromServer = new SimpleBooleanProperty(mutable);
-		boolean uploadAllowedForAllOurMutableRecords = mutable;
-		canUploadToServer = new SimpleBooleanProperty(uploadAllowedForAllOurMutableRecords);
+		canUploadToServer = new SimpleBooleanProperty(false);
 		setLocation(app, LOCATION_SERVER);
 		isLocal = new SimpleBooleanProperty(false);
 		isRemote = new SimpleBooleanProperty(true);

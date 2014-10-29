@@ -146,6 +146,7 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 		if(localUids.contains(serverUid))
 		{
 			localUids.remove(serverUid);
+			bulletinData.canUploadToServerProperty().setValue(true);
 			bulletinData.setLocation(mainWindow.getApp(), ServerSyncTableRowData.LOCATION_BOTH);
 		}
 		if(!isInTrash(serverUid))
