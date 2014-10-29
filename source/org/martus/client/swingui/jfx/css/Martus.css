@@ -45,6 +45,11 @@
 		-fx-padding: 5 35 5 35;
 }
 
+.button-minpadding:pressed {
+		-fx-padding: 5 5 5 5;
+}
+
+
 .button_not_main_action {
 		-fx-background-color:
         #797769,
