@@ -37,6 +37,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -90,6 +91,39 @@ public class FxLandingShellController extends FxNonWizardShellController
 	public FxCaseManagementController getCaseManager()
 	{
 		return caseManagementController;
+	}
+	
+	public void setTitleBarToAll()
+	{
+		hideCloseCurrentViewButton();
+		setTitleBarLabel("CaseAll");
+	}
+	
+	public void setTitleBarToTrash()
+	{
+		showCloseCurrentViewButton();
+		setTitleBarLabel("Trash");
+	}
+	
+	public void setTitleBarToSearch()
+	{
+		showCloseCurrentViewButton();
+		setTitleBarLabel("notifySearchFound");
+	}
+	
+	private void setTitleBarLabel(String titleLabelTag)
+	{
+		titleBarLabel.setText(getLocalization().getWindowTitle(titleLabelTag));
+	}
+	
+	private void showCloseCurrentViewButton()
+	{
+		closeCurrentViewButton.setVisible(true);
+	}
+	
+	private void hideCloseCurrentViewButton()
+	{
+		closeCurrentViewButton.setVisible(false);
 	}
 
 	@Override
@@ -229,6 +263,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	private void onQuickSearch(ActionEvent event)
 	{
 		doAction(new  ActionMenuQuickSearch(getMainWindow(), searchText.getText()));
+		setTitleBarToSearch();
 	}
 
 	@FXML
@@ -323,6 +358,12 @@ public class FxLandingShellController extends FxNonWizardShellController
 	}
 	
 	@FXML
+	public void onCloseCurrentView(ActionEvent event)
+	{
+		caseManagementController.showAllCases();
+	}
+	
+	@FXML
 	private TextField searchText;
 	
 	@FXML
@@ -336,6 +377,12 @@ public class FxLandingShellController extends FxNonWizardShellController
 	
 	@FXML
 	private Pane mainContentPane;
+	
+	@FXML
+	private Label titleBarLabel;
+	
+	@FXML
+	private Button closeCurrentViewButton;
 	
 	private BulletinsListController bulletinsListController;
 	private BulletinListProvider bulletinListProvider;

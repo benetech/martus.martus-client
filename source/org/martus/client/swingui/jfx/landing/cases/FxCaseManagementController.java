@@ -87,7 +87,12 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		casesListViewAll.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		casesTabPane.getSelectionModel().selectedItemProperty().addListener(new caseTabeListener());
 		currentSelectedCase = currentCasesListView.getSelectionModel().selectedItemProperty();
-		showTrashFolder.visibleProperty().bind(((FxLandingShellController)getShellController()).getShowTrashBinding());
+		showTrashFolder.visibleProperty().bind(getFxLandingShellController().getShowTrashBinding());
+	}
+
+	private FxLandingShellController getFxLandingShellController()
+	{
+		return (FxLandingShellController)getShellController();
 	}
 
 	@Override
@@ -183,6 +188,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		currentCasesListView.setItems(trashProvider);
 		currentCasesListView.getSelectionModel().select(trashList);
 		updateCaseList();
+		getFxLandingShellController().setTitleBarToTrash();
 	}
 	
 	public void folderContentsHaveChanged()
@@ -451,8 +457,14 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	@FXML
 	public void onShowAllCase(ActionEvent event)
 	{
+		showAllCases();
+	}
+
+	public void showAllCases()
+	{
 		BulletinFolder allFolder = null;
 		showDefaultCase(allFolder);
+		getFxLandingShellController().setTitleBarToAll();
 	}
 
 	@FXML
