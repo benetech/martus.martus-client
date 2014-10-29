@@ -347,7 +347,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 				addToInvalidRecords(localOrImmutableRecords, recordData);
 		}
 		if(localOrImmutableRecords.length()>0)
-			DisplayWarningDialog("SyncUnableToDownloadLocalFiles", localOrImmutableRecords);
+			DisplayWarningDialog("SyncUnableToDeleteLocalOnlyOrImmutableFiles", localOrImmutableRecords);
 		try
 		{
 			getMainWindow().deleteMutableRecordsFromServer(uidsToDelete);
