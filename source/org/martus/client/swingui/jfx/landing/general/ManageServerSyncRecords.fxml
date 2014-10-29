@@ -8,10 +8,10 @@
    <children>
        <HBox>
          <children>
-            <Hyperlink onAction="#onShowAll" text="All" />
-            <Hyperlink onAction="#onShowLocalOnly" text="Local Only" />
-            <Hyperlink onAction="#onShowServerOnly" text="Server Only" />
-            <Hyperlink onAction="#onShowBoth" text="Both" />
+            <Hyperlink fx:id="fxLocationAll" onAction="#onShowAll" text="All" />
+            <Hyperlink fx:id="fxLocationLocalOnly" onAction="#onShowLocalOnly" text="Local Only" />
+            <Hyperlink fx:id="fxLocationServerOnly" onAction="#onShowServerOnly" text="Server Only" />
+            <Hyperlink fx:id="fxLocationBoth" onAction="#onShowBoth" text="Both" />
          </children>
       </HBox>
       <ScrollPane>
