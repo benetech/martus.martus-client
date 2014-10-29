@@ -135,8 +135,8 @@
 						<BorderPane>
 							<top>
 								<HBox>
-            	        			<Label fx:id="titleBarLabel" text="" />
-            	        			<Button fx:id="closeCurrentViewButton" mnemonicParsing="false" onAction="#onCloseCurrentView" text="Close" />
+            	        			<Label fx:id="titleBarLabel" styleClass="toolbarLabel" text="" />
+            	        			<Button fx:id="closeCurrentViewButton" mnemonicParsing="false" onAction="#onCloseCurrentView" styleClass="toolbarButton" text="Close" />
             	        		</HBox>	
 							</top>
 							<center>
