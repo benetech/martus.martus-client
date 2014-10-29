@@ -91,9 +91,20 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 
 	private Set getUniversalIds()
 	{
-		if(folder == null)
-			return mainWindow.getStore().getAllBulletinLeafUids();
+		if(folder == FxCaseManagementController.ALL_FOLDER)
+			return getAllNonDeleletedBulletinUids();
 		return folder.getAllUniversalIdsUnsorted();
+	}
+
+	public Set getAllNonDeleletedBulletinUids()
+	{
+		{			
+			Set allNonDiscardedBulletinUids = mainWindow.getStore().getAllBulletinLeafUids();
+			BulletinFolder discarded = mainWindow.getStore().getFolderDiscarded();
+			Set discardedUids = discarded.getAllUniversalIdsUnsorted();
+			allNonDiscardedBulletinUids.removeAll(discardedUids);
+			return allNonDiscardedBulletinUids;
+		}
 	}
 
 	@Override
