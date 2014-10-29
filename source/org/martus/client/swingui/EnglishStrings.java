@@ -512,7 +512,7 @@ public class EnglishStrings
 "wintitle:notifySyncUnableToUploadServerFiles=Upload Information",
 "field:notifySyncUnableToUploadServerFilescause=The following records were unable to be uploaded since they were only found on the server or you do not have permission to upload these as your own.  The remaining bulletins will be uploaded in the background.",
 "wintitle:notifySyncUnableToDeleteLocalOnlyOrImmutableFiles=Download Information",
-"field:notifySyncUnableToDeleteLocalOnlyOrImmutablecause=The following records were unable to be deleted since they were only found locally or you do not have permission to delete them off the server.  The remaining bulletins will be deleted.",
+"field:notifySyncUnableToDeleteLocalOnlyOrImmutableFilescause=The following records were unable to be deleted since they were only found locally or you do not have permission to delete them off the server.  The remaining bulletins will be deleted.",
 
 "button:IncludePrivateBulletins=Include Private Data",
 "button:SettingOn=On",
