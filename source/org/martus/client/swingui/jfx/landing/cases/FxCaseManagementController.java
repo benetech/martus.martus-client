@@ -473,6 +473,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	{
 		BulletinFolder sentFolder = getApp().getFolderSaved();
 		showDefaultCase(sentFolder);
+		getFxLandingShellController().setTitleBarToSent();
 	}	
 
 	@FXML
@@ -480,6 +481,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	{
 		BulletinFolder receivedFolder = getApp().getFolderRetrieved();
 		showDefaultCase(receivedFolder);
+		getFxLandingShellController().setTitleBarToRecieved();
 	}
 
 	public void showDefaultCase(BulletinFolder receivedFolder)
