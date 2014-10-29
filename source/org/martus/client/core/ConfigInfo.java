@@ -201,7 +201,7 @@ public class ConfigInfo
 		syncStatusJson = "";
 		syncFrequencyMinutes = "";
 		didTemplateMigrationProperty = new SimpleBooleanProperty();
-		alwaysImmutableOnServer = new SimpleBooleanProperty(true);
+		alwaysImmutableOnServer = new SimpleBooleanProperty(false);
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException
