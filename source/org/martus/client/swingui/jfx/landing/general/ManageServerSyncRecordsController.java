@@ -196,7 +196,17 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		uploadButton.setDisable(!isAnythingUploadable);
 		downloadButton.setDisable(!isAnythingDownloadable);
 		
+		updateLocationLinks();
 		updateSubFilterLinks();
+	}
+
+	private void updateLocationLinks()
+	{
+		int location = syncRecordsTableProvider.getLocation();
+		fxLocationAll.setVisited(location == ServerSyncTableRowData.LOCATION_ANY);
+		fxLocationLocalOnly.setVisited(location == ServerSyncTableRowData.LOCATION_LOCAL);
+		fxLocationServerOnly.setVisited(location == ServerSyncTableRowData.LOCATION_SERVER);
+		fxLocationBoth.setVisited(location == ServerSyncTableRowData.LOCATION_BOTH);
 	}
 
 	private void updateSubFilterLinks()
@@ -392,6 +402,18 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	}
 
 	private final String TITLE_SEPARATOR = "\n";
+	
+	@FXML
+	private Hyperlink fxLocationAll;
+	
+	@FXML
+	private Hyperlink fxLocationLocalOnly;
+	
+	@FXML
+	private Hyperlink fxLocationServerOnly;
+	
+	@FXML
+	private Hyperlink fxLocationBoth;
 	
 	@FXML
 	private Hyperlink fxSubFilterAll;

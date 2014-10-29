@@ -49,6 +49,11 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 		allRows = new ArrayObservableList(INITIAL_CAPACITY);
 	}
 	
+	public int getLocation()
+	{
+		return currentLocation;
+	}
+	
 	public void show(int location)
 	{
 		currentLocation = location;
