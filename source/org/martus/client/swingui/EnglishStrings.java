@@ -390,6 +390,7 @@ public class EnglishStrings
 "wintitle:ExitManageContacts=Exit Manage Contacts",
 "field:ExitManageContacts=Your changes will be lost, are you sure you want to do this?",
 
+"wintitle:Trash=Trash",
 "wintitle:EmptyTrash=Empty Trash",
 "field:EmptyTrashConfirmation=This will permanently remove these records from your local computer. This does not affect the records on the server.",
 "field:EmptyTrashConfirmationItemsInOtherFolders=Note: some records here are linked in other #Cases# and those copies will not be permanently removed.",
@@ -1966,6 +1967,7 @@ public class EnglishStrings
 "button:CaseReceived=Received",
 "field:ChooseLanguage=Choose a Language",
 "field:TokenNotAvailable=Not Available",
+"wintitle:CaseAll=All",
 
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Sent",

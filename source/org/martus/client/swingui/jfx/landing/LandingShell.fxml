@@ -132,7 +132,17 @@
 						<StackPane fx:id="sideContentPane" />
 					</left>
 					<center>
-						<StackPane fx:id="mainContentPane" />
+						<BorderPane>
+							<top>
+								<HBox>
+            	        			<Label fx:id="titleBarLabel" text="All" />
+            	        			<Button fx:id="closeCurrentViewButton" mnemonicParsing="false" onAction="#onCloseCurrentView" text="Close" />
+            	        		</HBox>	
+							</top>
+							<center>
+								<StackPane fx:id="mainContentPane" />
+							</center>
+						</BorderPane>
 					</center>
 				</BorderPane>
 			</center>
