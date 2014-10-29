@@ -201,7 +201,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 
 	private void updateSubFilterLinks()
 	{
-		int subFilter = syncRecordsTableProvider.getFilter();
+		int subFilter = syncRecordsTableProvider.getSubFilter();
 		fxSubFilterAll.setVisited(subFilter == SyncRecordsTableProvider.SUB_FILTER_ALL);
 		fxSubFilterMyRecords.setVisited(subFilter == SyncRecordsTableProvider.SUB_FILTER_MY_RECORDS);
 		fxSubFilterSharedWithMe.setVisited(subFilter == SyncRecordsTableProvider.SUB_FILTER_SHARED_WITH_ME);
@@ -219,7 +219,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	
 	private void updateTable(int TableToShow)
 	{
-		syncRecordsTableProvider.setFilter(SyncRecordsTableProvider.SUB_FILTER_ALL);
+		syncRecordsTableProvider.setSubFilter(SyncRecordsTableProvider.SUB_FILTER_ALL);
 		syncRecordsTableProvider.show(TableToShow);
 		updateButtons();
 		sortByMostRecent();
@@ -227,7 +227,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	
 	private void filterTable(int filter)
 	{
-		syncRecordsTableProvider.setFilter(filter);
+		syncRecordsTableProvider.setSubFilter(filter);
 		syncRecordsTableProvider.filterResults();
 		updateButtons();
 		sortByMostRecent();

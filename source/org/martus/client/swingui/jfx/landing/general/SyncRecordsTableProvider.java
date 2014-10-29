@@ -90,12 +90,12 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 		return false;
 	}
 
-	public void setFilter(int filter)
+	public void setSubFilter(int filter)
 	{
 		currentSubFilter = filter;
 	}
 	
-	public int getFilter()
+	public int getSubFilter()
 	{
 		return currentSubFilter;
 	}
