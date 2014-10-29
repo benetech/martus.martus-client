@@ -10,8 +10,8 @@
       <TableView fx:id="itemsTable" onMouseClicked="#onMouseClick">
         <columns>
           <TableColumn fx:id="onServerColumn" editable="false" text="On Server" />
-            <TableColumn fx:id="authorVerifiedColumn" prefWidth="75.0" text="Verified" />
             <TableColumn fx:id="authorColumn" editable="false" prefWidth="123.0" text="Author" />
+            <TableColumn fx:id="authorVerifiedColumn" prefWidth="75.0" text="Verified" />
           <TableColumn fx:id="titleColumn" editable="false" prefWidth="284.0" text="Title" />
             <TableColumn fx:id="dateSavedColumn" editable="false" prefWidth="180.0" text="Date Saved" />
             <TableColumn fx:id="viewBulletinColumn" text="View" />
