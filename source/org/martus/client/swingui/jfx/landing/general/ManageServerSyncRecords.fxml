@@ -29,9 +29,9 @@
       </ScrollPane>
       <HBox>
          <children>
-            <Hyperlink onAction="#onSubfilterAll" text="All" />
-            <Hyperlink onAction="#onSubfilterMyRecords" text="My Records" />
-            <Hyperlink onAction="#onSubfilterSharedWithMe" text="Shared With Me" />
+            <Hyperlink fx:id="fxSubFilterAll" onAction="#onSubfilterAll" text="All" />
+            <Hyperlink fx:id="fxSubFilterMyRecords" onAction="#onSubfilterMyRecords" text="My Records" />
+            <Hyperlink fx:id="fxSubFilterSharedWithMe" onAction="#onSubfilterSharedWithMe" text="Shared With Me" />
          </children>
       </HBox>
       <HBox>

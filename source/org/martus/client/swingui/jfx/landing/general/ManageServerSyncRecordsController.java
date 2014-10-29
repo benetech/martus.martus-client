@@ -36,6 +36,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -194,6 +195,16 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		deleteButton.setDisable(!isAnythingDeleteable);
 		uploadButton.setDisable(!isAnythingUploadable);
 		downloadButton.setDisable(!isAnythingDownloadable);
+		
+		updateSubFilterLinks();
+	}
+
+	private void updateSubFilterLinks()
+	{
+		int subFilter = syncRecordsTableProvider.getFilter();
+		fxSubFilterAll.setVisited(subFilter == SyncRecordsTableProvider.SUB_FILTER_ALL);
+		fxSubFilterMyRecords.setVisited(subFilter == SyncRecordsTableProvider.SUB_FILTER_MY_RECORDS);
+		fxSubFilterSharedWithMe.setVisited(subFilter == SyncRecordsTableProvider.SUB_FILTER_SHARED_WITH_ME);
 	}
 
 	private void closeDialog()
@@ -381,6 +392,15 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	}
 
 	private final String TITLE_SEPARATOR = "\n";
+	
+	@FXML
+	private Hyperlink fxSubFilterAll;
+	
+	@FXML
+	private Hyperlink fxSubFilterMyRecords;
+	
+	@FXML
+	private Hyperlink fxSubFilterSharedWithMe;
 	
 	@FXML
 	private TableView<ServerSyncTableRowData> allRecordsTable;

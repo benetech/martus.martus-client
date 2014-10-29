@@ -95,6 +95,11 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 		currentSubFilter = filter;
 	}
 	
+	public int getFilter()
+	{
+		return currentSubFilter;
+	}
+	
 	public void filterResults()
 	{
 		show(currentLocation);
