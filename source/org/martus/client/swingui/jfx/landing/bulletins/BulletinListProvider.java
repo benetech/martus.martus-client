@@ -38,6 +38,7 @@ import org.martus.client.bulletinstore.FolderContentsListener;
 import org.martus.client.swingui.UiMainWindowInterface;
 import org.martus.client.swingui.jfx.generic.data.ArrayObservableList;
 import org.martus.client.swingui.jfx.landing.FolderSelectionListener;
+import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -125,7 +126,7 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 
 	protected void loadAllBulletinsSelectInitialCaseFolder()
 	{
-		setFolder(mainWindow.getStore().findFolder(ClientBulletinStore.SAVED_FOLDER));
+		setFolder(FxCaseManagementController.ALL_FOLDER);
 	}
 
 	public void loadBulletinData(Set bulletinUids)

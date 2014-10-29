@@ -120,7 +120,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	{
 		setCurrentlyViewedCaseList(tabCaseAll);
 		casesTabPane.getSelectionModel().select(tabCaseAll);
-		updateCases(DEFAULT_SELECTED_CASE_NAME);
+		updateCases(ALL_FOLDER_NAME);
 	}
 	
 	protected void setCurrentlyViewedCaseList(Tab currentlyViewedCaseTab)
@@ -227,6 +227,8 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 
 	private void selectCase(String caseName)
 	{
+		if(caseName == null)
+			return;
 		for (Iterator iterator = getCurrentCaseListProvider().iterator(); iterator.hasNext();)
 		{
 			CaseListItem caseItem = (CaseListItem) iterator.next();
@@ -246,7 +248,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 
 	private void updateButtons(BulletinFolder folder)
 	{
-		if(folder == null || !folder.canDelete() )
+		if(folder == ALL_FOLDER || !folder.canDelete() )
 			deleteFolderButton.setDisable(true);
 		else
 			deleteFolderButton.setDisable(false);
@@ -286,7 +288,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	private void renameCaseName()
 	{
 		BulletinFolder currentFolder = currentSelectedCase.get().getFolder();
-		if(currentFolder == null)
+		if(currentFolder == ALL_FOLDER)
 			return;
 		if(!currentFolder.canRename())
 			return;
@@ -462,8 +464,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 
 	public void showAllCases()
 	{
-		BulletinFolder allFolder = null;
-		showDefaultCase(allFolder);
+		showDefaultCase(ALL_FOLDER);
 		getFxLandingShellController().setTitleBarToAll();
 	}
 
@@ -559,9 +560,10 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		folderNameLabel.setText(newLabel);
 	}
 
+	public static final BulletinFolder ALL_FOLDER = null;
+	private static final String ALL_FOLDER_NAME = null;
 	public static final String LOCATION_CASE_MANAGEMENT_FXML = "landing/cases/CaseManagement.fxml";
 	private final int INVALID_INDEX = -1;
-	private String DEFAULT_SELECTED_CASE_NAME = ClientBulletinStore.SAVED_FOLDER;
 
 	@FXML
 	private ListView<CaseListItem> casesListViewAll;
