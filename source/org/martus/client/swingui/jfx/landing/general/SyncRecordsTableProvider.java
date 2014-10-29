@@ -29,7 +29,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
-import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindowInterface;
 import org.martus.client.swingui.jfx.generic.data.ArrayObservableList;
