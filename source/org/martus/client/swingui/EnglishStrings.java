@@ -1968,6 +1968,8 @@ public class EnglishStrings
 "field:ChooseLanguage=Choose a Language",
 "field:TokenNotAvailable=Not Available",
 "wintitle:CaseAll=All",
+"wintitle:CaseSent=Sent",
+"wintitle:CaseRecieved=Recieved",
 
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Sent",
