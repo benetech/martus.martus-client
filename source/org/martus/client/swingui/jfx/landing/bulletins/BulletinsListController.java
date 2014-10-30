@@ -65,6 +65,7 @@ import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.jfx.landing.FxLandingShellController;
 import org.martus.client.swingui.jfx.landing.cases.CaseListItem;
 import org.martus.client.swingui.jfx.landing.cases.CaseListProvider;
+import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 import org.martus.client.swingui.jfx.landing.cases.FxFolderSettingsController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractExportTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.BulletinExportEncryptedMbaTask;
@@ -499,7 +500,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 						BulletinFolder folderToMoveTo = caseItem.getFolder();
 						store.linkBulletinToFolder(b, folderToMoveTo);		
 					}
-					if(deleteFromCurrentCase)
+					if(deleteFromCurrentCase  && currentCase != FxCaseManagementController.ALL_FOLDER)
 						store.removeBulletinFromFolder(currentCase, b);
 				}
 				store.saveFolders();
