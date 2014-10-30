@@ -45,7 +45,9 @@ public class FxModalDialog extends JDialog
 	public static void createAndShow(UiMainWindow owner, FxInSwingDialogStage stage, String titleTag) throws Exception
 	{
 		FxModalDialog dialog = new FxModalDialog(owner);
-		dialog.setTitle(owner.getLocalization().getWindowTitle(titleTag));
+		if (titleTag.length() > 0)
+			dialog.setTitle(owner.getLocalization().getWindowTitle(titleTag));
+		
 		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		dialog.getContentPane().setPreferredSize(new Dimension(960, 640));
 		dialog.pack();
