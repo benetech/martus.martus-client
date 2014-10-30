@@ -283,6 +283,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	private void onCreateNewBulletin(ActionEvent event)
 	{
 		doAction(new ActionMenuCreateNewBulletin(getMainWindow()));
+		caseManagementController.showAllCases();
 	}
 	
 	@FXML
