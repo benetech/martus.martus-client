@@ -67,8 +67,7 @@ abstract public class FxFormCreator
 			panes.add(createTitledPane(contacts, "Contacts"));
 		if(details != null)
 			panes.add(createTitledPane(details, "Details"));
-		TitledPane firstPane = panes.get(0);
-		accordion.setExpandedPane(firstPane);
+		
 		if(!bulletin.isValidBulletin())
 			return warningBulletinForm(accordion, "MayBeDamaged");
 		if(bulletin.notAuthorizedToRead())
