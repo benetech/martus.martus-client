@@ -22,23 +22,25 @@
             </ImageView>
          </graphic>
         </Label>
-      <HBox>
-         <children>
-            <Button mnemonicParsing="false" onAction="#onShowAllCase" styleClass="button-minpadding" text="%Button.CaseAll" />
-            <Button mnemonicParsing="false" onAction="#onShowSentCase" styleClass="button-minpadding" text="%Button.CaseSent" />
-            <Button mnemonicParsing="false" onAction="#onShowReceivedCase" styleClass="button-minpadding" text="%Button.CaseReceived" />
-         </children>
-      </HBox>
       <TabPane fx:id="casesTabPane" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="tabCaseAll">
+          <Tab fx:id="tabCaseAll" closable="false">
             <content>
             		<Pane>
                      <children>
-                  		<ListView fx:id="casesListViewAll" onMouseClicked="#onCaseListMouseClicked" prefWidth="300.0" />
+                        <VBox>
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#onShowSentCase" text="%Button.CaseSent" />
+                              <Button mnemonicParsing="false" onAction="#onShowReceivedCase" text="%Button.CaseReceived" />
+                        		<ListView fx:id="casesListViewAll" onMouseClicked="#onCaseListMouseClicked" prefWidth="300.0" />
+                           </children>
+                        </VBox>
                      </children>
             		</Pane>
             </content>
+               <graphic>
+                  <Button mnemonicParsing="false" onAction="#onShowAllCase" text="%Button.CaseAll" />
+               </graphic>
           </Tab>
         </tabs>
       </TabPane>
