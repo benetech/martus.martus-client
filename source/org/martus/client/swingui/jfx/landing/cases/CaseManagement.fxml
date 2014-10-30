@@ -24,7 +24,7 @@
         </Label>
       <TabPane fx:id="casesTabPane" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="tabCaseAll" closable="false">
+          <Tab fx:id="tabCaseAll" closable="false" style="-fx-background-color: lightgray;">
             <content>
             		<Pane>
                      <children>
