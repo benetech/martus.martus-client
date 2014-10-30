@@ -99,6 +99,12 @@ public class SelectTemplateController extends FxInSwingController
 		return "landing/general/SelectTemplate.fxml";
 	}
 	
+	@Override
+	protected String getCssName()
+	{
+		return "MainDialog.css";
+	}
+	
 	@FXML
 	private void onSelect(ActionEvent event)
 	{
