@@ -51,4 +51,25 @@ public class FxDialogHelper
 			e.printStackTrace();
 		}
 	}
+	
+	public static boolean showConfirmationDialog(UiMainWindow mainWindow, String baseTag)
+	{
+		try
+		{
+			String causeTag = "confirm" + baseTag + "effect";
+			FxController mainNotificationAreaController = new SimpleTextContentController(mainWindow, causeTag);
+			DialogWithYesNoShellController dialogWithCloseShellController = new DialogWithYesNoShellController(mainWindow, mainNotificationAreaController);
+			DialogStage stage = new DialogStage(mainWindow, dialogWithCloseShellController);
+			FxModalDialog.createAndShow(mainWindow, stage);
+			
+			return dialogWithCloseShellController.didConfirm();
+		} 
+		catch (Exception e)
+		{
+			
+			return false;
+		}
+	}
+	
+	
 }
