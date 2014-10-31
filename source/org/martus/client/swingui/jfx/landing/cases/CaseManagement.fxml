@@ -32,6 +32,7 @@
                            <children>
                               <VBox spacing="2.0">
                                  <children>
+                                    <Button mnemonicParsing="false" onAction="#onShowAllCase" styleClass="button-defaultcase" text="%Button.CaseAll" />
                                     <Button mnemonicParsing="false" onAction="#onShowSentCase" styleClass="button-defaultcase" text="%Button.CaseSent" />
                                     <Button mnemonicParsing="false" onAction="#onShowReceivedCase" styleClass="button-defaultcase" text="%Button.CaseReceived" />
                                  </children>
@@ -39,7 +40,7 @@
                                     <Insets />
                                  </opaqueInsets>
                                  <VBox.margin>
-                                    <Insets left="12.0" />
+                                    <Insets left="5.0" />
                                  </VBox.margin>
                                  <padding>
                                     <Insets bottom="2.0" top="2.0" />
@@ -51,9 +52,6 @@
                      </children>
             		</Pane>
             </content>
-               <graphic>
-                  <Button mnemonicParsing="false" onAction="#onShowAllCase" styleClass="button-defaultcase" text="%Button.CaseAll" />
-               </graphic>
           </Tab>
         </tabs>
       </TabPane>
