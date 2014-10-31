@@ -71,6 +71,4 @@ public class FxDialogHelper
 			return false;
 		}
 	}
-	
-	
 }
