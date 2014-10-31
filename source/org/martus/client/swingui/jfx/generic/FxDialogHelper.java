@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.generic;
 import java.util.Map;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.MartusLogger;
 
 public class FxDialogHelper
 {
@@ -66,7 +67,7 @@ public class FxDialogHelper
 		} 
 		catch (Exception e)
 		{
-			
+			MartusLogger.logException(e);
 			return false;
 		}
 	}
