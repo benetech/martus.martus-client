@@ -423,7 +423,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		boolean needConfirmation = view.isBulletinModified();
 		if(needConfirmation)
 		{
-			if(!observer.confirmDlg(this, "CancelModifyBulletin"))
+			if(!view.confirmDlg(this, "CancelModifyBulletin"))
 				return;
 		}
 			

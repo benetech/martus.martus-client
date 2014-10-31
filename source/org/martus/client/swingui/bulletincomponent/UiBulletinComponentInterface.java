@@ -28,6 +28,8 @@ package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Component;
 
+import javax.swing.JFrame;
+
 import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
@@ -50,4 +52,5 @@ public interface UiBulletinComponentInterface
 	// LanguageChangeListener interface
 	public void bulletinLanguageHasChanged(String newBulletinLanguageCode);
 
+	public boolean confirmDlg(JFrame parent, String baseTag);
 }

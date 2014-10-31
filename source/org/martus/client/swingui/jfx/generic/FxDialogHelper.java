@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.generic;
 import java.util.Map;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.MartusLogger;
 
 public class FxDialogHelper
 {
@@ -49,6 +50,25 @@ public class FxDialogHelper
 		catch (Exception e)
 		{
 			e.printStackTrace();
+		}
+	}
+	
+	public static boolean showConfirmationDialog(UiMainWindow mainWindow, String baseTag)
+	{
+		try
+		{
+			String causeTag = "confirm" + baseTag + "effect";
+			FxController mainNotificationAreaController = new SimpleTextContentController(mainWindow, causeTag);
+			DialogWithYesNoShellController dialogWithCloseShellController = new DialogWithYesNoShellController(mainWindow, mainNotificationAreaController);
+			DialogStage stage = new DialogStage(mainWindow, dialogWithCloseShellController);
+			FxModalDialog.createAndShow(mainWindow, stage);
+			
+			return dialogWithCloseShellController.didConfirm();
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			return false;
 		}
 	}
 }
