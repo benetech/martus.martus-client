@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxWidth="300.0" minWidth="270.0" prefWidth="300.0" style="-fx-background-color: #353535;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxWidth="300.0" minWidth="270.0" prefWidth="300.0" styleClass="cases" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
         <Label fx:id="folderNameLabel" alignment="CENTER" layoutY="154.0" prefHeight="40.0" prefWidth="300.0" text="Cases" textAlignment="CENTER" textFill="WHITE">
            <font>
@@ -22,16 +22,29 @@
             </ImageView>
          </graphic>
         </Label>
-      <TabPane fx:id="casesTabPane" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="casesTabPane" prefWidth="300.0" styleClass="tab-pane-cases" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="tabCaseAll" closable="false" style="-fx-background-color: lightgray;">
+          <Tab fx:id="tabCaseAll" closable="false" styleClass="tab-cases">
             <content>
             		<Pane>
                      <children>
                         <VBox>
                            <children>
-                              <Button mnemonicParsing="false" onAction="#onShowSentCase" text="%Button.CaseSent" />
-                              <Button mnemonicParsing="false" onAction="#onShowReceivedCase" text="%Button.CaseReceived" />
+                              <VBox spacing="2.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#onShowSentCase" text="%Button.CaseSent" />
+                                    <Button mnemonicParsing="false" onAction="#onShowReceivedCase" text="%Button.CaseReceived" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets left="12.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="2.0" top="2.0" />
+                                 </padding>
+                              </VBox>
                         		<ListView fx:id="casesListViewAll" onMouseClicked="#onCaseListMouseClicked" prefWidth="300.0" />
                            </children>
                         </VBox>

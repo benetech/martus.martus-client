@@ -128,3 +128,20 @@
 	-fx-font-size: 13px;
 }
 
+/*********/
+/* Cases */
+/*********/
+.cases {
+    -fx-background-color:  #353535;
+}
+
+/********/
+/* Tab */
+/********/
+.tab-pane-cases .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab-cases {
+	-fx-background-color:  #353535;
+}
