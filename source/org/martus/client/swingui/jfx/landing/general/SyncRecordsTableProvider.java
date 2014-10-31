@@ -157,7 +157,7 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 		for(Iterator iter = localUids.iterator(); iter.hasNext();)
 		{
 			UniversalId leafBulletinUid = (UniversalId) iter.next();
-			if(!mainWindow.getStore().isDiscarded(leafBulletinUid))
+			if(mainWindow.getStore().isDiscarded(leafBulletinUid))
 				continue;
 			ServerSyncTableRowData bulletinData = getLocalBulletinData(leafBulletinUid);
 			allRows.add(bulletinData);		
