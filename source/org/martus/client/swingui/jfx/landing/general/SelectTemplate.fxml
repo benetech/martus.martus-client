@@ -6,21 +6,28 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane minHeight="400" minWidth="600">
+<Pane minHeight="400" minWidth="600" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 
-<VBox  styleClass="margin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox>
 	<children>
-		<Label alignment="CENTER" text="Template Selector">
-		</Label>
-		<Label text="Available Templates" />
-		<VBox>
+		<HBox styleClass="titleBox" minWidth="600">
+			<Label styleClass="titleText" alignment="CENTER" text="Template Selector">
+			</Label>
+		</HBox>
+		<VBox styleClass="mainBox">
+		<Label styleClass="headingLevel1" text="Available Templates" />
+		</VBox>
+		<VBox styleClass="listViewBox">
 			<children>
 				<ListView fx:id="availableTemplates" prefWidth="400">
 				</ListView>
-				<Button mnemonicParsing="false" text="Select" onAction="#onSelect">
-				</Button>
 			</children>
 		</VBox>
+		<HBox styleClass="buttonRow">
+			<Button mnemonicParsing="false" text="Select" onAction="#onSelect">
+			</Button>
+		</HBox>
 	</children>
 </VBox>
+
 </Pane>
