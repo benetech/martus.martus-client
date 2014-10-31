@@ -19,10 +19,6 @@
 		-fx-padding: 5 35 5 35;
 }
 
-.button-minpadding{
-		-fx-padding: 5 5 5 5;
-}
-
 .button:hover {
 		-fx-background-color: #638a4b;
 		-fx-border-radius: 5;
@@ -30,10 +26,6 @@
 		-fx-alignment: center;
 		-fx-font-size: 17px;
 		-fx-padding: 5 35 5 35;
-}
-
-.button-minpadding:hover {
-		-fx-padding: 5 5 5 5;
 }
 
 .button:pressed {
@@ -45,8 +37,28 @@
 		-fx-padding: 5 35 5 35;
 }
 
+.button-minpadding{
+		-fx-padding: 5 5 5 5;
+}
+
+.button-minpadding:hover {
+		-fx-padding: 5 5 5 5;
+}
+
 .button-minpadding:pressed {
 		-fx-padding: 5 5 5 5;
+}
+
+.button-defaultcase{
+		 -fx-pref-width: 260;
+}
+
+.button-defaultcase:hover {
+		 -fx-pref-width: 260;
+}
+
+.button-defaultcase:pressed {
+		 -fx-pref-width: 260;
 }
 
 
