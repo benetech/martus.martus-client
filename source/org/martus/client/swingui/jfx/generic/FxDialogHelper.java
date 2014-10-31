@@ -39,36 +39,32 @@ public class FxDialogHelper
 	
 	public static void showNotificationDialog(UiMainWindow mainWindow, String baseTag, Map map)
 	{
-		try
-		{
-			String causeTag = "notify" + baseTag + "cause";
-			FxController mainNotificationAreaController = new SimpleTextContentController(mainWindow, causeTag, map);
-			DialogWithCloseShellController dialogWithCloseShellController = new DialogWithCloseShellController(mainWindow, mainNotificationAreaController);
-			DialogStage stage = new DialogStage(mainWindow, dialogWithCloseShellController);
-			FxModalDialog.createAndShow(mainWindow, stage);
-		} 
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		String causeTag = "notify" + baseTag + "cause";
+		FxController mainNotificationAreaController = new SimpleTextContentController(mainWindow, causeTag, map);
+		DialogShellController dialogWithCloseShellController = new DialogWithCloseShellController(mainWindow, mainNotificationAreaController);
+		createAndShowDialog(mainWindow, dialogWithCloseShellController);
+	}
+
+	public static boolean showConfirmationDialog(UiMainWindow mainWindow, String baseTag)
+	{
+		String causeTag = "confirm" + baseTag + "effect";
+		FxController mainNotificationAreaController = new SimpleTextContentController(mainWindow, causeTag);
+		DialogWithYesNoShellController dialogWithCloseShellController = new DialogWithYesNoShellController(mainWindow, mainNotificationAreaController);
+		createAndShowDialog(mainWindow, dialogWithCloseShellController);
+		
+		return dialogWithCloseShellController.didConfirm();
 	}
 	
-	public static boolean showConfirmationDialog(UiMainWindow mainWindow, String baseTag)
+	private static void createAndShowDialog(UiMainWindow mainWindow,	DialogShellController dialogShellController)
 	{
 		try
 		{
-			String causeTag = "confirm" + baseTag + "effect";
-			FxController mainNotificationAreaController = new SimpleTextContentController(mainWindow, causeTag);
-			DialogWithYesNoShellController dialogWithCloseShellController = new DialogWithYesNoShellController(mainWindow, mainNotificationAreaController);
-			DialogStage stage = new DialogStage(mainWindow, dialogWithCloseShellController);
+			DialogStage stage = new DialogStage(mainWindow, dialogShellController);
 			FxModalDialog.createAndShow(mainWindow, stage);
-			
-			return dialogWithCloseShellController.didConfirm();
 		} 
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
-			return false;
 		}
 	}
 }
