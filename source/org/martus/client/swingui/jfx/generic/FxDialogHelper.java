@@ -55,7 +55,7 @@ public class FxDialogHelper
 		return dialogWithCloseShellController.didConfirm();
 	}
 	
-	private static void createAndShowDialog(UiMainWindow mainWindow,	DialogShellController dialogShellController)
+	private static void createAndShowDialog(UiMainWindow mainWindow, DialogShellController dialogShellController)
 	{
 		try
 		{
