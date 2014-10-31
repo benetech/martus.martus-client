@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.generic;
 import java.util.Map;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusLogger;
 
 public class FxDialogHelper
@@ -39,7 +40,7 @@ public class FxDialogHelper
 	
 	public static void showNotificationDialog(UiMainWindow mainWindow, String baseTag, Map map)
 	{
-		String causeTag = "notify" + baseTag + "cause";
+		String causeTag = UiLocalization.createNotifyCauseTag(baseTag);
 		FxController mainNotificationAreaController = new SimpleTextContentController(mainWindow, causeTag, map);
 		DialogShellController dialogWithCloseShellController = new DialogWithCloseShellController(mainWindow, mainNotificationAreaController);
 		createAndShowDialog(mainWindow, dialogWithCloseShellController);
@@ -47,7 +48,7 @@ public class FxDialogHelper
 
 	public static boolean showConfirmationDialog(UiMainWindow mainWindow, String baseTag)
 	{
-		String causeTag = "confirm" + baseTag + "effect";
+		String causeTag = UiLocalization.createConfirmEffectTag(baseTag);
 		FxController mainNotificationAreaController = new SimpleTextContentController(mainWindow, causeTag);
 		DialogWithYesNoShellController dialogWithCloseShellController = new DialogWithYesNoShellController(mainWindow, mainNotificationAreaController);
 		createAndShowDialog(mainWindow, dialogWithCloseShellController);
