@@ -61,7 +61,7 @@ public class FxDialogHelper
 		try
 		{
 			DialogStage stage = new DialogStage(mainWindow, dialogShellController);
-			FxModalDialog.createAndShow(mainWindow, stage);
+			FxModalDialog.createAndShowConfirmationSizedDialog(mainWindow, stage);
 		} 
 		catch (Exception e)
 		{
