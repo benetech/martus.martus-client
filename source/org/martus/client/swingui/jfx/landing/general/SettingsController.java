@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
+import java.awt.Dimension;
+
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Tab;
@@ -41,6 +43,12 @@ public class SettingsController extends FxTabbedShellController
 		super(mainWindowToUse);
 		
 		setFirstTabToDisplay(SERVER_TAB);
+	}
+	
+	@Override
+	protected Dimension getPreferredDimension()
+	{
+		return new Dimension(600, 400);
 	}
 	
 	@Override

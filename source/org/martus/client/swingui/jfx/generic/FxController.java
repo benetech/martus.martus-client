@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.generic;
 
 import java.awt.Desktop;
+import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -66,6 +67,11 @@ abstract public class FxController implements Initializable
 	abstract public String getFxmlLocation();
 	
 	protected String getCssName()
+	{
+		return null;
+	}
+	
+	protected Dimension getPreferredDimension()
 	{
 		return null;
 	}
