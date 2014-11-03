@@ -25,17 +25,26 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
+import java.awt.Dimension;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.generic.FxModalDialog;
 
 public class HelpController extends FxController
 {
 	public HelpController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+	}
+	
+	@Override
+	protected Dimension getPreferredDimension()
+	{
+		return FxModalDialog.MEDIUM_PREFERRED_DIALOG_SIZE;
 	}
 
 	@Override

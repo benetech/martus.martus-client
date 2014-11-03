@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import java.awt.Dimension;
+
 import org.martus.client.swingui.UiMainWindow;
 
 public abstract class FxTabbedShellController extends FxNonWizardShellController
@@ -42,6 +44,12 @@ public abstract class FxTabbedShellController extends FxNonWizardShellController
 	protected String getFirstTabToDisplay()
 	{
 		return firstTabToDisplay;
+	}
+	
+	@Override
+	protected Dimension getPreferredDimension()
+	{
+		return FxModalDialog.MEDIUM_PREFERRED_DIALOG_SIZE;
 	}
 	
 	private String firstTabToDisplay;

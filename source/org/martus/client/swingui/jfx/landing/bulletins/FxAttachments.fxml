@@ -5,13 +5,6 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <HBox BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="addAttachmentButton" mnemonicParsing="false" onAction="#onAddAttachment" text="%Button.addattachment" />
-         </children>
-      </HBox>
-   </top>
    <center>
       <TableView fx:id="attachmentsTable" BorderPane.alignment="CENTER">
         <columns>
@@ -22,4 +15,11 @@
         </columns>
       </TableView>
    </center>
+    <bottom>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="addAttachmentButton" mnemonicParsing="false" onAction="#onAddAttachment" text="%Button.addattachment" />
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

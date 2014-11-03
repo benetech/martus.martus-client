@@ -407,6 +407,8 @@ public class EnglishStrings
 "button:connectserver=Connect",
 "button:send=Share",
 "button:savedraft=Save",
+"button:yes=Yes",
+"button:no=No",
 
 "button:saveBulletin=Save",
 "button:versionBulletin=Version",
