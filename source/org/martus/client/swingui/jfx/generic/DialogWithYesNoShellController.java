@@ -25,63 +25,47 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public class DialogWithOkCancelShellController extends DialogShellController
+public class DialogWithYesNoShellController extends	DialogWithOkCancelShellController
 {
-	public DialogWithOkCancelShellController(UiMainWindow mainWindowToUse, FxController contentController)
+	public DialogWithYesNoShellController(UiMainWindow mainWindowToUse,	FxController contentController)
 	{
 		super(mainWindowToUse, contentController);
 	}
 
 	@Override
-	public String getFxmlLocation()
+	public void initialize(URL location, ResourceBundle bundle)
 	{
-		return LOCATION_DIALOG_WITH_OK_CANCEL_SHELL;
-	}
-	
-	@FXML
-	public void onOkClicked()
-	{
-		getContentController().save();
-		close();
+		super.initialize(location, bundle);
+		
+		setOkButtonText(getLocalization().getButtonLabel("yes"));
+		setCancelButtonText("no");
 	}
 	
 	@Override
-	protected String getCssName()
-	{
-		return "mainDialog.css";
-	}
-	
-	@FXML
 	public void onCancelClicked()
 	{
-		close();
+		super.onCancelClicked();
+		
+		wasConfirmed = false;
 	}
 	
-	public void setOkButtonText(String newText)
+	@Override
+	public void onOkClicked()
 	{
-		ok.setText(newText);
+		super.onOkClicked();
+		
+		wasConfirmed = true;
 	}
 	
-	public void setOkButtonDisabled(boolean isDisabled)
+	public boolean didConfirm()
 	{
-		ok.setDisable(isDisabled);
+		return wasConfirmed;
 	}
 	
-	public void setCancelButtonText(String buttonTag)
-	{
-		cancel.setText(getLocalization().getButtonLabel(buttonTag));
-	}
-	
-	private static final String LOCATION_DIALOG_WITH_OK_CANCEL_SHELL = "generic/DialogWithOkCancelShell.fxml";
-	
-	@FXML
-	protected Button ok;
-	
-	@FXML
-	protected Button cancel;
+	private boolean wasConfirmed;
 }

@@ -11,7 +11,7 @@
          	<label styleClass="titleText">test </label>
             <Button fx:id="ok" mnemonicParsing="false" onMouseClicked="#onOkClicked" text="%Button.ok" />
             <Separator visible="false" HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" onMouseClicked="#onCancelClicked" text="%Button.cancel" />
+            <Button fx:id="cancel" mnemonicParsing="false" onMouseClicked="#onCancelClicked" text="%Button.cancel" />
          </children>
       </HBox>
    </bottom>

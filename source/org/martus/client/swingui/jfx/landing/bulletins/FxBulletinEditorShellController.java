@@ -38,6 +38,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.Pane;
 
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import org.martus.client.core.BulletinLanguageChangeListener;
@@ -47,6 +48,7 @@ import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSect
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentInterface;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.fields.UiDateEditor;
+import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.Bulletin.BulletinState;
@@ -265,6 +267,12 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 		if(state.equals(BulletinState.STATE_SHARED) || state.equals(BulletinState.STATE_SNAPSHOT))
 			return neverDeleteFromServerSelected;
 		return false;
+	}
+	
+	@Override
+	public boolean confirmDlg(JFrame parent, String baseTag)
+	{
+		return FxDialogHelper.showConfirmationDialog(getMainWindow(), baseTag);
 	}
 	
 	@FXML

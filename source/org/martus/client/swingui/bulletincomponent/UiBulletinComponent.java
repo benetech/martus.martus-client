@@ -31,6 +31,7 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.io.IOException;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Scrollable;
 
@@ -252,6 +253,11 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	public Component getComponent()
 	{
 		return this;
+	}
+	
+	public boolean confirmDlg(JFrame parent, String baseTag)
+	{
+		return getMainWindow().confirmDlg(parent, baseTag);
 	}
 
 	private UiMainWindow mainWindow;
