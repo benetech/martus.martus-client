@@ -193,7 +193,11 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	
 	public void folderContentsHaveChanged()
 	{
-		updateCases(getCurrentBulletinFolder().getName());
+		BulletinFolder currentBulletinFolder = getCurrentBulletinFolder();
+		if(currentBulletinFolder == null)
+			updateCasesSelectDefaultCase();
+		else
+			updateCases(currentBulletinFolder.getName());
 	}
 	
 
@@ -218,7 +222,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	{
 		int selectedIndex = currentCasesListView.getSelectionModel().getSelectedIndex();
 		if(selectedIndex == INVALID_INDEX)
-			return null;
+			return defaultCaseBeingViewed;
 		CaseListItem selectedCase = getCurrentCaseListProvider().get(selectedIndex);
 		BulletinFolder folder = getApp().findFolder(selectedCase.getName());
 		
@@ -493,9 +497,10 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		getFxLandingShellController().setTitleBarToRecieved();
 	}
 
-	public void showDefaultCase(BulletinFolder receivedFolder)
+	public void showDefaultCase(BulletinFolder folder)
 	{
-		listeners.forEach(listener -> listener.folderWasSelected(receivedFolder));
+		defaultCaseBeingViewed = folder;
+		listeners.forEach(listener -> listener.folderWasSelected(folder));
 		clearCases();
 	}	
 	
@@ -599,4 +604,5 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	
 	private ListView<CaseListItem> currentCasesListView;
 	private Set<FolderSelectionListener> listeners;
+	private BulletinFolder defaultCaseBeingViewed;
 }
