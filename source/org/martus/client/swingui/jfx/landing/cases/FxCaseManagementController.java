@@ -338,8 +338,10 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	{
 		try
 		{
-			ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(fileToImport, getApp().getStore(), getCurrentBulletinFolder(), System.out);
+			BulletinFolder folderToImportInto = getImportFolder();
+			ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(fileToImport, getApp().getStore(), folderToImportInto, System.out);
 			importer.importFiles();
+			showAllCases();
 		}
 		catch (Exception e)
 		{
@@ -351,7 +353,9 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	{
 		try
 		{
-			getApp().getStore().importZipFileBulletin(fileToImport, getCurrentBulletinFolder(), false);
+			BulletinFolder folderToImportInto = getImportFolder();
+			getApp().getStore().importZipFileBulletin(fileToImport, folderToImportInto, false);
+			showAllCases();
 		}
 		catch (Exception e)
 		{
@@ -359,6 +363,11 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		}
 	}
 	
+	private BulletinFolder getImportFolder()
+	{
+		return getApp().getStore().getFolderImport();
+	}
+
 	private final class CaseComparator implements java.util.Comparator<CaseListItem>
 	{
 		public CaseComparator()
