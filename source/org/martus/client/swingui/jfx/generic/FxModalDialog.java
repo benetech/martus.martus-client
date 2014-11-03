@@ -42,9 +42,14 @@ public class FxModalDialog extends JDialog
 		createAndShow(owner, stage, "");
 	}
 	
+	public static void createAndShow(UiMainWindow owner, FxInSwingDialogStage stage, String titleTag, Dimension dimension) throws Exception
+	{
+		createAndShowDialog(owner, stage, titleTag, dimension);
+	}
+	
 	public static void createAndShow(UiMainWindow owner, FxInSwingDialogStage stage, String titleTag) throws Exception
 	{
-		createAndShowDialog(owner, stage, titleTag, 960, 640);
+		createAndShowDialog(owner, stage, titleTag, new Dimension(960, 640));
 	}
 	
 	public static void createAndShowConfirmationSizedDialog(UiMainWindow owner, FxInSwingDialogStage stage) throws Exception
@@ -54,17 +59,17 @@ public class FxModalDialog extends JDialog
 	
 	public static void createAndShowConfirmationSizedDialog(UiMainWindow owner, FxInSwingDialogStage stage, String titleTag) throws Exception
 	{
-		createAndShowDialog(owner, stage, titleTag, 500, 200);
+		createAndShowDialog(owner, stage, titleTag, new Dimension(500, 200));
 	}
 
-	private static void createAndShowDialog(UiMainWindow owner, FxInSwingDialogStage stage, String titleTag, int dialogPrefWidth, int dialogPrefHeight)
+	private static void createAndShowDialog(UiMainWindow owner, FxInSwingDialogStage stage, String titleTag, Dimension dimension)
 	{
 		FxModalDialog dialog = new FxModalDialog(owner);
 		if (titleTag.length() > 0)
 			dialog.setTitle(owner.getLocalization().getWindowTitle(titleTag));
 		
 		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		dialog.getContentPane().setPreferredSize(new Dimension(dialogPrefWidth, dialogPrefHeight));
+		dialog.getContentPane().setPreferredSize(dimension);
 		dialog.pack();
 		dialog.getContentPane().add(stage);
 		stage.setDialog(dialog);
