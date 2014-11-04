@@ -185,6 +185,8 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		for (Iterator iterator = rowsSelected.iterator(); iterator.hasNext();)
 		{
 			ServerSyncTableRowData data = (ServerSyncTableRowData) iterator.next();
+			if(data == null)
+				return; 
 			if(data.canDeleteFromServerProperty().getValue())
 				isAnythingDeleteable = true;
 			if(data.canUploadToServerProperty().getValue())
