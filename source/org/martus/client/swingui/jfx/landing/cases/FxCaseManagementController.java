@@ -31,6 +31,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -194,13 +195,17 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	
 	public void folderContentsHaveChanged()
 	{
+		Platform.runLater(() -> folderContentsHaveChangedOnFxThread());
+	}
+	
+	public void folderContentsHaveChangedOnFxThread()
+	{
 		BulletinFolder currentBulletinFolder = getCurrentBulletinFolder();
 		if(currentBulletinFolder == null)
 			showAllCases();
 		else
 			updateCases(currentBulletinFolder.getName());
-	}
-	
+	}	
 
 	protected void updateCaseList()
 	{
