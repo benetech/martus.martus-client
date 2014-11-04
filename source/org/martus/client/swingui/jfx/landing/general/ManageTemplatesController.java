@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.general;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Comparator;
 import java.util.ResourceBundle;
@@ -54,9 +55,12 @@ import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
+import javax.swing.SwingUtilities;
+
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.templates.GenericFormTemplates;
 import org.martus.client.search.SaneCollator;
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiCustomFieldsDlg;
 import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
@@ -69,9 +73,13 @@ import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesCon
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.Exceptions.ServerNotCompatibleException;
+import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.MartusLogger;
 import org.martus.common.XmlFormTemplateLoader;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.AuthorizationFailedException;
+import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
+import org.martus.common.fieldspec.CustomFieldError;
 import org.martus.common.fieldspec.FormTemplate;
 import org.martus.util.TokenReplacement;
 import org.martus.util.UnicodeReader;
@@ -420,6 +428,7 @@ public class ManageTemplatesController extends FxInSwingController
 
 	private void importXmlFormTemplate(File templateFile)
 	{
+		Vector errors = new Vector();
 		try
 		{
 			String xmlAsString = importXmlAsString(templateFile);
@@ -431,21 +440,42 @@ public class ManageTemplatesController extends FxInSwingController
 			{
 				templateToAddProperty.setValue(importedTemplate);
 			}
-			else
-			{
-				Vector errors = importedTemplate.getErrors();
-				String errorsAsString = UiCustomFieldsDlg.createErrorMessage(getMainWindow(), errors).toString();
-				showNotifyDialog("ErrorImportingCustomizationTemplate", errorsAsString);
-			}
-
+			
+			errors.addAll(importedTemplate.getErrors());
 			logTemplateToBeAdded();
+		}
+		catch(IOException e)
+		{
+			errors.add(CustomFieldError.errorIO(e.getMessage()));
+		}
+		catch(MartusSignatureException e)
+		{
+			errors.add(CustomFieldError.errorSignature());
+		}
+		catch(AuthorizationFailedException e)
+		{
+			errors.add(CustomFieldError.errorUnauthorizedKey());
+		}
+		catch(CustomFieldsParseException e)
+		{
+			errors.add(CustomFieldError.errorParseXml(e.getMessage()));
 		}
 		catch (Exception e)
 		{
 			showNotifyDialog("ErrorImportingCustomizationTemplate", e.getMessage());
+			return;
 		}
+		
+		if (!errors.isEmpty())
+			SwingUtilities.invokeLater(() -> safelyPopulateView(errors));
 	}
 	
+	private void safelyPopulateView(Vector errors)
+	{
+		UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(getMainWindow().getDoZawgyiConversion());
+		UiCustomFieldsDlg.displayXMLError(getMainWindow(), fontHelper, errors);
+	}
+
 	private String importXmlAsString(File tempFormTemplateFile) throws Exception 
 	{
 		UnicodeReader reader = new UnicodeReader(tempFormTemplateFile);
