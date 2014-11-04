@@ -8,7 +8,6 @@
    <bottom>
       <HBox styleClass="margin" alignment="BOTTOM_RIGHT" BorderPane.alignment="CENTER">
          <children>
-         	<label styleClass="titleText">test </label>
             <Button fx:id="ok" mnemonicParsing="false" onMouseClicked="#onOkClicked" text="%Button.ok" />
             <Separator visible="false" HBox.hgrow="ALWAYS" />
             <Button fx:id="cancel" mnemonicParsing="false" onMouseClicked="#onCancelClicked" text="%Button.cancel" />
