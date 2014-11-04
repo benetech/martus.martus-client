@@ -50,6 +50,12 @@ public class DialogWithOkCancelShellController extends DialogShellController
 		close();
 	}
 	
+	@Override
+	protected String getCssName()
+	{
+		return "mainDialog.css";
+	}
+	
 	@FXML
 	public void onCancelClicked()
 	{
