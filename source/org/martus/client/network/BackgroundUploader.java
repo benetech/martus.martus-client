@@ -57,10 +57,15 @@ import org.martus.util.StreamableBase64;
 
 public class BackgroundUploader
 {
-	public BackgroundUploader(UiMainWindow mainWindowToUse, ProgressMeterInterface progressMeterToUse)
+	public BackgroundUploader(MartusApp appToUse, ProgressMeterInterface progressMeterToUse)
 	{
-		mainWindow = mainWindowToUse;
-		app = mainWindowToUse.getApp();
+		this(appToUse, null, progressMeterToUse);
+	}
+	
+	public BackgroundUploader(MartusApp appToUse, UiMainWindow mainWindowForFxToUse, ProgressMeterInterface progressMeterToUse)
+	{
+		app = appToUse;
+		mainWindow = mainWindowForFxToUse;
 		progressMeter = progressMeterToUse;
 	}
 
@@ -180,7 +185,7 @@ public class BackgroundUploader
 					uploadResult.result.equals(NetworkInterfaceConstants.DUPLICATE))
 			{
 				store.setIsOnServer(b);
-				if(UiSession.isJavaFx())
+				if(UiSession.isJavaFx() && mainWindow != null)
 					mainWindow.folderTreeContentsHaveChanged();
 				// TODO: Is the file this creates ever used???
 				app.resetLastUploadedTime();

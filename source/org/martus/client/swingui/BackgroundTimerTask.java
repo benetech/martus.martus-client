@@ -68,7 +68,7 @@ class BackgroundTimerTask extends TimerTask
 		mainWindow = mainWindowToUse;
 		statusBar = statusBarToUse;
 		ProgressMeterInterface progressMeter = getProgressMeter();
-		uploader = new BackgroundUploader(mainWindow, progressMeter);
+		uploader = new BackgroundUploader(mainWindow.getApp(), mainWindow, progressMeter);
 		retriever = new BackgroundRetriever(getApp(), progressMeter);
 		syncRetriever = new SyncBulletinRetriever(getApp());
 		if(mainWindow.isServerConfigured() && getApp().getTransport().isOnline())
