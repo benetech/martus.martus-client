@@ -36,6 +36,8 @@ import java.util.Vector;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiSession;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
@@ -55,9 +57,10 @@ import org.martus.util.StreamableBase64;
 
 public class BackgroundUploader
 {
-	public BackgroundUploader(MartusApp appToUse, ProgressMeterInterface progressMeterToUse)
+	public BackgroundUploader(UiMainWindow mainWindowToUse, ProgressMeterInterface progressMeterToUse)
 	{
-		app = appToUse;
+		mainWindow = mainWindowToUse;
+		app = mainWindowToUse.getApp();
 		progressMeter = progressMeterToUse;
 	}
 
@@ -177,6 +180,8 @@ public class BackgroundUploader
 					uploadResult.result.equals(NetworkInterfaceConstants.DUPLICATE))
 			{
 				store.setIsOnServer(b);
+				if(UiSession.isJavaFx())
+					mainWindow.folderTreeContentsHaveChanged();
 				// TODO: Is the file this creates ever used???
 				app.resetLastUploadedTime();
 			}
@@ -257,6 +262,7 @@ public class BackgroundUploader
 	
 	public static final String CONTACT_INFO_NOT_SENT="Contact Info Not Sent";
 
-	MartusApp app;
-	ProgressMeterInterface progressMeter;
+	private UiMainWindow mainWindow;
+	private MartusApp app;
+	private ProgressMeterInterface progressMeter;
 }
