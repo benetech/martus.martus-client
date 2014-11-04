@@ -1957,7 +1957,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 				return;
 			}
 
-			if(!UiSession.isJavaFx())
+			if(UiSession.isJavaFx())
+				folderTreeContentsHaveChanged();
+			else
 				notifyDlg("DeleteServerDraftsWorked");
 		} 
 		finally
