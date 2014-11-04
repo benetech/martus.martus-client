@@ -418,26 +418,32 @@ public class ManageTemplatesController extends FxInSwingController
 		logTemplateToBeAdded();
 	}
 
-	private void importXmlFormTemplate(File templateFile) throws Exception
+	private void importXmlFormTemplate(File templateFile)
 	{
-		String xmlAsString = importXmlAsString(templateFile);
-		
-		XmlFormTemplateLoader loader = new XmlFormTemplateLoader();
-		SimpleXmlParser.parse(loader, xmlAsString);
-		FormTemplate importedTemplate = loader.getFormTemplate();
-		
-		if (importedTemplate.isvalidTemplateXml())
+		try
 		{
-			templateToAddProperty.setValue(importedTemplate);
+			String xmlAsString = importXmlAsString(templateFile);
+			XmlFormTemplateLoader loader = new XmlFormTemplateLoader();
+			SimpleXmlParser.parse(loader, xmlAsString);
+			FormTemplate importedTemplate = loader.getFormTemplate();
+
+			if (importedTemplate.isvalidTemplateXml())
+			{
+				templateToAddProperty.setValue(importedTemplate);
+			}
+			else
+			{
+				Vector errors = importedTemplate.getErrors();
+				String errorsAsString = UiCustomFieldsDlg.createErrorMessage(getMainWindow(), errors).toString();
+				showNotifyDialog("ErrorImportingCustomizationTemplate", errorsAsString);
+			}
+
+			logTemplateToBeAdded();
 		}
-		else
+		catch (Exception e)
 		{
-			Vector errors = importedTemplate.getErrors();
-			String errorsAsString = UiCustomFieldsDlg.createErrorMessage(getMainWindow(), errors).toString();
-			showNotifyDialog("ErrorImportingCustomizationTemplate", errorsAsString);
+			showNotifyDialog("ErrorImportingCustomizationTemplate", e.getMessage());
 		}
-		
-		logTemplateToBeAdded();
 	}
 	
 	private String importXmlAsString(File tempFormTemplateFile) throws Exception 
