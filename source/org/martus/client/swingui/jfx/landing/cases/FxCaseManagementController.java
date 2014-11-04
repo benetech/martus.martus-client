@@ -88,6 +88,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		casesTabPane.getSelectionModel().selectedItemProperty().addListener(new caseTabeListener());
 		currentSelectedCase = currentCasesListView.getSelectionModel().selectedItemProperty();
 		showTrashFolder.visibleProperty().bind(getFxLandingShellController().getShowTrashBinding());
+		showAllCases();
 	}
 
 	private FxLandingShellController getFxLandingShellController()
