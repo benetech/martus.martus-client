@@ -2193,21 +2193,33 @@ public class MartusApp
 		}
 	}
 
-	public String deleteServerDraftBulletins(Vector uidList) throws
+	public String deleteServerDraftBulletins(Vector<UniversalId> uidList) throws
 		MartusSignatureException,
 		WrongAccountException
 	{
 		String[] localIds = new String[uidList.size()];
 		for (int i = 0; i < localIds.length; i++)
 		{
-			UniversalId uid = (UniversalId)uidList.get(i);
+			UniversalId uid = uidList.get(i);
 			if(!uid.getAccountId().equals(getAccountId()))
 				throw new WrongAccountException();
 
 			localIds[i] = uid.getLocalId();
 		}
 		NetworkResponse response = getCurrentNetworkInterfaceGateway().deleteServerDraftBulletins(getSecurity(), getAccountId(), localIds);
-		return response.getResultCode();
+		String resultCode = response.getResultCode();
+		if(resultCode.equals(NetworkInterfaceConstants.OK))
+			updateOnServerFlagForLocalCopies(uidList);
+		return resultCode;
+	}
+
+	private void updateOnServerFlagForLocalCopies(Vector<UniversalId> uidList)
+	{
+		for (UniversalId bulletinId : uidList)
+		{
+			if(store.doesBulletinRevisionExist(bulletinId))
+				store.setIsNotOnServer(bulletinId);
+		}
 	}
 
 	public static class AccountAlreadyExistsException extends Exception 
