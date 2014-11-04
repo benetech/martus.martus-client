@@ -467,6 +467,11 @@ public class UiCustomFieldsDlg extends JDialog
 	void displayXMLError(FormTemplate template)
 	{
 		Vector errors = template.getErrors();
+		displayXMLError(mainWindow, fontHelper, errors);
+	}
+	
+	public static void displayXMLError(UiMainWindow mainWindow, UiFontEncodingHelper fontHelper, Vector errors)
+	{
 		if(errors == null)
 			return;
 		
@@ -513,7 +518,7 @@ public class UiCustomFieldsDlg extends JDialog
 		return errorMessage;
 	}
 
-	protected void formatTextArea(UiTextArea textArea)
+	protected static void formatTextArea(UiTextArea textArea)
 	{
 		textArea.setCaretPosition(0);
 		textArea.setBackground(new JFrame().getBackground());
@@ -541,7 +546,7 @@ public class UiCustomFieldsDlg extends JDialog
 		return createXMLTextArea(xmlRepresentationFieldSpecs);
 	}
 
-	UiTextArea createXMLTextArea(String initialText)
+	static UiTextArea createXMLTextArea(String initialText)
 	{
 		UiTextArea msgArea = new UiTextArea(20, 80);
 		
@@ -552,7 +557,7 @@ public class UiCustomFieldsDlg extends JDialog
 		return msgArea;
 	}
 
-	UiScrollPane createScrollPane(UiTextArea textArea)
+	static UiScrollPane createScrollPane(UiTextArea textArea)
 	{
 		UiScrollPane textPane = new UiScrollPane(textArea, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
