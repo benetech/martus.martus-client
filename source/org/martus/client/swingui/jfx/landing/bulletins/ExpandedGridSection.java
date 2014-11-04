@@ -124,6 +124,7 @@ public class ExpandedGridSection extends TitledPane
 				section.addUnexpectedErrorMessage(e, fieldSpec.getLabel());
 			}
 		}
+		section.endCurrentRow();
 		
 		return section;
 	}

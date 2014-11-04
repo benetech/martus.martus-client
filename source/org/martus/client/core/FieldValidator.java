@@ -91,6 +91,8 @@ public class FieldValidator implements ChangeListener<String>
 
 	private void validateGrid(String gridXml) throws DataInvalidException
 	{
+		if(gridXml.isEmpty())
+			return;
 		try
 		{
 			GridFieldSpec gridSpec = (GridFieldSpec)spec;

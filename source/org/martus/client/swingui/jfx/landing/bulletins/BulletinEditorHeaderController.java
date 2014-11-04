@@ -65,6 +65,12 @@ public class BulletinEditorHeaderController extends FxInSwingController
 	{
 		return "landing/bulletins/BulletinEditorHeader.fxml";
 	}
+	
+	@Override
+	protected String getCssName()
+	{
+		return "css/mainDialog.css";
+	}
 
 	public void showBulletin(FxBulletin bulletinToShow)
 	{

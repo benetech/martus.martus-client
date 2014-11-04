@@ -66,8 +66,8 @@
 }
 
 .buttonRow {
-	-fx-padding:10 0 20 0;
-	-fx-alignment:baseline-center;
+	-fx-padding:10 15 20 15;
+	-fx-alignment:baseline-right;
 }
 
 .list-view,
