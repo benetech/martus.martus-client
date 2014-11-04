@@ -121,7 +121,6 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	{
 		setCurrentlyViewedCaseList(tabCaseAll);
 		casesTabPane.getSelectionModel().select(tabCaseAll);
-		updateCases(ALL_FOLDER_NAME);
 	}
 	
 	protected void setCurrentlyViewedCaseList(Tab currentlyViewedCaseTab)
@@ -196,7 +195,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	{
 		BulletinFolder currentBulletinFolder = getCurrentBulletinFolder();
 		if(currentBulletinFolder == null)
-			updateCasesSelectDefaultCase();
+			showAllCases();
 		else
 			updateCases(currentBulletinFolder.getName());
 	}
@@ -578,7 +577,6 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	}
 
 	public static final BulletinFolder ALL_FOLDER = null;
-	private static final String ALL_FOLDER_NAME = null;
 	public static final String LOCATION_CASE_MANAGEMENT_FXML = "landing/cases/CaseManagement.fxml";
 	private final int INVALID_INDEX = -1;
 
