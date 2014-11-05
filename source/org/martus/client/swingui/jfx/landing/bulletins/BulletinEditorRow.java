@@ -138,7 +138,9 @@ public class BulletinEditorRow
 		if(StandardFieldSpecs.isStandardFieldTag(tag))
 			labelText = getLocalization().getFieldLabel(tag);
 		Text text = new Text(labelText);
+		text.getStyleClass().add("editFieldLabel");
 		TextFlow flow = new TextFlow(text);
+		flow.getStyleClass().add("editFieldLabel");
 		flow.setPrefWidth(250); //TODO remove this and get View to be more responsive for Labels.
 		if(field.isRequiredField())
 		{
