@@ -57,7 +57,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 
 	public void testBasics()
 	{
-		assertEquals(28, ConfigInfo.VERSION);
+		assertEquals(29, ConfigInfo.VERSION);
 
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
@@ -82,7 +82,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 	
 	private void verifyShouldShowOneTimeNoticeFortheRemovalOfPublicBulletins(boolean expected, int verionDifference) throws Exception
 	{
-		byte[] data = createFileWithSampleData((short) (ConfigInfo.VERSION + verionDifference));
+		byte[] data = createFileWithSampleData((short) (ConfigInfo.VERSION_MIGRATE_TO_PRIVATE_ALWAYS + verionDifference));
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(data);
 		ConfigInfo configInfo = ConfigInfo.load(inputStream);
 		
@@ -408,6 +408,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setSyncFrequencyMinutes(sampleSyncFrequency);
 		info.setDidTemplateMigration(sampleDidTemplateMigration);
 		info.setAlwaysImmutableOnServer(sampleImmutableOnServer);
+		info.setDateLastAskedUserToBackupKeypair(sampleDateLastAskedUserToBackupKeypair);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -445,6 +446,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": SyncFrequency", "", info.getSyncFrequencyMinutes());
 		assertEquals(label + ": DidMigrateTemplates", false, info.getDidTemplateMigration());
 		assertEquals(label + ": ImmutableOnServer", false, info.getAlwaysImmutableOnServer());
+		assertEquals(label + ": DateLastAskedUserToBackupKeypair", "", info.getDateLastAskedUserToBackupKeypair());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -643,6 +645,15 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			assertEquals(label + ": sampleImmutableOnServer", false, info.getAlwaysImmutableOnServer());
 		}
+		//Version 28 MIGRATE_TO_PRIVATE_ALWAYS
+		if(VERSION >= 29)
+		{
+			assertEquals(label + ": sampleDateLastAskedUserToBackupKeypair", sampleDateLastAskedUserToBackupKeypair, info.getDateLastAskedUserToBackupKeypair());
+		}
+		else
+		{
+			assertEquals(label + ": sampleDateLastAskedUserToBackupKeypair", "", info.getDateLastAskedUserToBackupKeypair());
+		}
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -785,6 +796,12 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			out.writeBoolean(sampleImmutableOnServer);
 		}
+		//Version 28 MIGRATE_TO_PRIVATE_ALWAYS
+		if(VERSION >= 29)
+		{
+			out.writeUTF(sampleDateLastAskedUserToBackupKeypair);
+		}
+		
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -861,4 +878,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final boolean sampleDidTemplateMigration = true;
 //Version 27
 	final boolean sampleImmutableOnServer = true; 
+//Version 28 MIGRATE_TO_PRIVATE_ALWAYS
+//Version 29
+	final String sampleDateLastAskedUserToBackupKeypair = "2014-11-04";
 }
