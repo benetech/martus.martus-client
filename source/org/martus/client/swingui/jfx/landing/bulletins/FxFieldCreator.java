@@ -108,6 +108,7 @@ abstract public class FxFieldCreator
 	protected Node responsiveTextFlowNode(Text mainContent)
 	{
 		TextFlow flow = new TextFlow(getContentWithNewLineAdded(mainContent));
+		flow.getStyleClass().add("systemTextField");
 		flow.setMinWidth(DEFAULT_TEXT_VIEW_WIDTH); //TODO: Ideally we would get the width of the Dialog - Width of the Field Title and bind us to that.
 		flow.prefWidthProperty().bind(fieldWidthProperty);
 		return flow;
