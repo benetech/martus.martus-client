@@ -45,8 +45,6 @@ public class ActionMenuBackupMyKeyPair extends UiMenuAction implements ActionDoe
 
 	public void doAction()
 	{
-		if(!mainWindow.reSignIn())
-			return;
 		String message =  mainWindow.getLocalization().getFieldLabel("BackupKeyPairGeneralInfo");
 		mainWindow.displayScrollableMessage("BackupKeyPairGeneralInfo", message, "Continue", UiBackupRecoverSharedKeyPair.getTokenReplacement());
 		

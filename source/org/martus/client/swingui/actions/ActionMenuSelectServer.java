@@ -55,9 +55,6 @@ public class ActionMenuSelectServer extends UiMenuAction implements ActionDoer
 		if(getMainWindow().isRetrieveInProgress())
 			return;
 		
-		if(!getMainWindow().reSignIn())
-			return;
-		
 		getMainWindow().inConfigServer = true;
 		try
 		{
