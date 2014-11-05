@@ -1347,17 +1347,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 			tb.dispose();
 	}
 
-
-	public void setCurrentDefaultKeyboardVirtual(boolean keyboard)
-	{
-		getUiState().setCurrentDefaultKeyboardVirtual(keyboard);
-	}
-
-	public boolean isCurrentDefaultKeyboardVirtual()
-	{
-		return getUiState().isCurrentDefaultKeyboardVirtual();
-	}
-
 	public Dimension getBulletinEditorDimension()
 	{
 		return getUiState().getCurrentEditorDimension();
