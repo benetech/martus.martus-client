@@ -630,6 +630,11 @@ public class MartusApp
 		saveConfigInfo();
 	}
 	
+	public void clearClockToAskForKeypairBackup() throws SaveConfigInfoException
+	{
+		configInfo.setDateLastAskedUserToBackupKeypair("");
+		saveConfigInfo();
+	}
 
 	public void turnNetworkOnOrOffAsRequested()
 	{

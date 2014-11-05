@@ -561,6 +561,10 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		MultiCalendar sevenDaysLater = MultiCalendar.createFromIsoDateString(dateLastAskedForKeypairBackup);
 		sevenDaysLater.addDays(MartusApp.DAYS_UNTIL_WE_ASK_TO_BACKUP_KEYPAIR);
 		assertTrue("exactly 7 days into the future we need to ask for a backup", appWithAccount.shouldWeAskForKeypairBackup(sevenDaysLater.toIsoDateString()));
+		
+		appWithAccount.clearClockToAskForKeypairBackup();
+		assertFalse("After we clear the clock we should not be asked for a backup", appWithAccount.shouldWeAskForKeypairBackup());
+		assertFalse("After we clear the clock we should not be asked for a backup", appWithAccount.shouldWeAskForKeypairBackup(sevenDaysLater.toIsoDateString()));
 	}
 	
 	public void testSetDefaultUiState() throws Exception
