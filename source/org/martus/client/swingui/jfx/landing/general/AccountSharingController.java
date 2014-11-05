@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuExportMyPublicKey;
@@ -61,6 +61,7 @@ public class AccountSharingController extends FxInSwingController
 		{
 			String martusAccountAccessToken = getAccountAccessToken();
 			accountAccessTokenLabel.setText(martusAccountAccessToken);
+			accountAccessTokenLabel.setEditable(false);
 		} 
 		catch (Exception e)
 		{
@@ -87,6 +88,7 @@ public class AccountSharingController extends FxInSwingController
 			String keyContents = getApp().getAccountId();
 			String formattedCodeContentsNew = MartusCrypto.computeFormattedPublicCode40(keyContents);
 			accountPublicCode.setText(formattedCodeContentsNew);
+			accountPublicCode.setEditable(false);
 		}
 		catch (Exception e)
 		{
@@ -107,8 +109,8 @@ public class AccountSharingController extends FxInSwingController
 	}
 	
 	@FXML
-	private Label accountAccessTokenLabel;
+	private TextField accountAccessTokenLabel;
 	
 	@FXML
-	private Label accountPublicCode;
+	private TextField accountPublicCode;
 }

@@ -8,10 +8,10 @@
    <children>
        <VBox>
        	<Label styleClass="headingLevel3" text="%AccountAccessToken" />
-       	<Label styleClass="headingLevel3" fx:id="accountAccessTokenLabel" text="" />
+       	<TextField styleClass="headingLevel3" fx:id="accountAccessTokenLabel" text="" />
        	
        	<Label styleClass="headingLevel3" text="%AccountInfoPublicCode40" />
-       	<Label styleClass="headingLevel3" fx:id="accountPublicCode" text="" />
+       	<TextField styleClass="headingLevel3" fx:id="accountPublicCode" text="" />
 
        	<Button mnemonicParsing="false" onAction="#onExportPublicKey" text="Export Account Public Key"/>
       </VBox>
