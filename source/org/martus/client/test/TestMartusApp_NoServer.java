@@ -111,8 +111,10 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		mockSecurityForApp = MockMartusSecurity.createClient();
 
 		testAppLocalization = new MartusLocalization(null, UiSession.getAllEnglishStrings());
-		testAppLocalization.setLanguageSettingsProvider(new CurrentUiState());
-		testAppLocalization.setCurrentLanguageCode("en");
+		CurrentUiState currentUi = new CurrentUiState();
+		currentUi.setCurrentLanguage(MiniLocalization.ENGLISH);
+		currentUi.setCurrentDateFormat(MDY_SLASH);
+		testAppLocalization.setLanguageSettingsProvider(currentUi);
 		appWithAccount = MockMartusApp.create(mockSecurityForApp, getName());
 		appWithAccount.setSSLNetworkInterfaceHandlerForTesting(new ServerSideNetworkHandlerNotAvailable());
 
@@ -120,6 +122,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		keyPairFile.delete();
 		appWithAccount.getConfigInfoFile().delete();
 		appWithAccount.getConfigInfoSignatureFile().delete();
+		LanguageOptions.setDirectionLeftToRight();
 
 		TRACE_END();
 	}
@@ -283,7 +286,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testGetDefaultLanguageForNewBulletin()
 	{
 		MiniLocalization localization = appWithAccount.getLocalization();
-		localization.setLanguageSettingsProvider(new CurrentUiState());
+		CurrentUiState uiStateToUse = new CurrentUiState();
+		uiStateToUse.setCurrentDateFormat(DMY_SLASH);
+		localization.setLanguageSettingsProvider(uiStateToUse);
 		String originalLanguage = localization.getCurrentLanguageCode();
 		assertNull("language not null by default?", originalLanguage);
 		
@@ -2762,7 +2767,6 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("1987/13/12", testAppLocalization.convertStoredDateToDisplay("1987-12-13"));
 		assertEquals("2004/01/03", testAppLocalization.getViewableDateRange("2004-03-01,20040301+0"));
 		assertEquals("2004/03/07 - 2004/07/01", testAppLocalization.getViewableDateRange("2004-01-07,20040107+178"));
-		
 		TRACE_END();
 	}
 
