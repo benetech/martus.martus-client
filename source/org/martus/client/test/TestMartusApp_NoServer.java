@@ -90,6 +90,7 @@ import org.martus.common.packet.UniversalId;
 import org.martus.common.test.UniversalIdForTesting;
 import org.martus.swing.Utilities;
 import org.martus.util.DirectoryUtils;
+import org.martus.util.MultiCalendar;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
@@ -543,6 +544,23 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		FieldCollection expected = new FieldCollection(LegacyCustomFields.parseFieldSpecsFromString(newFields));
 		assertEquals(expected.toString(), fields.toString());
+	}
+	
+	public void testShouldAskUserToBackupKeypair() throws Exception
+	{
+		appWithAccount.startClockToAskForKeypairBackup();
+		assertFalse("should not ask when we just started the clock", appWithAccount.shouldWeAskForKeypairBackup());
+		assertTrue("wasn't true for a date decades into the future?",appWithAccount.shouldWeAskForKeypairBackup("2099-01-01"));
+
+		String dateLastAskedForKeypairBackup = appWithAccount.getConfigInfo().getDateLastAskedUserToBackupKeypair();
+
+		MultiCalendar oneDayPrior = MultiCalendar.createFromIsoDateString(dateLastAskedForKeypairBackup);
+		oneDayPrior.addDays(MartusApp.DAYS_UNTIL_WE_ASK_TO_BACKUP_KEYPAIR - 1);
+		assertFalse("6 days into the future we should still not ask", appWithAccount.shouldWeAskForKeypairBackup(oneDayPrior.toIsoDateString()));
+
+		MultiCalendar sevenDaysLater = MultiCalendar.createFromIsoDateString(dateLastAskedForKeypairBackup);
+		sevenDaysLater.addDays(MartusApp.DAYS_UNTIL_WE_ASK_TO_BACKUP_KEYPAIR);
+		assertTrue("exactly 7 days into the future we need to ask for a backup", appWithAccount.shouldWeAskForKeypairBackup(sevenDaysLater.toIsoDateString()));
 	}
 	
 	public void testSetDefaultUiState() throws Exception

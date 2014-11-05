@@ -137,9 +137,9 @@ import org.martus.common.database.FileDatabase.MissingAccountMapSignatureExcepti
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.OrchidTransportWrapper;
 import org.martus.common.packet.Packet;
+import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.XmlPacketLoader;
-import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.swing.FontHandler;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiOptionPane;
@@ -840,6 +840,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 	
 	private void askAndBackupKeypairIfRequired()
 	{
+		if(!getApp().shouldWeAskForKeypairBackup())
+			return;
+
 		ConfigInfo info = getApp().getConfigInfo();
 		boolean hasBackedUpEncrypted = info.hasUserBackedUpKeypairEncrypted();
 		boolean hasBackedUpShare = info.hasUserBackedUpKeypairShare();
