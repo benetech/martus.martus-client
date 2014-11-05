@@ -68,8 +68,6 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 	
 	protected boolean confirmQuickErase(boolean uninstallAsWell)
 	{
-		if(!mainWindow.reSignIn())
-			return false;
 		if(!checkAndConfirmUnsentBulletins())
 			return false;
 		if(!confirmErase(uninstallAsWell))

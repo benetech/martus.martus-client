@@ -35,6 +35,7 @@ import java.util.Vector;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.LegacyCustomFields;
@@ -93,7 +94,7 @@ public class ConfigInfo
 	public void setSyncFrequencyMinutes(String newSyncFrequency) { syncFrequencyMinutes = newSyncFrequency; }
 	public void setDidTemplateMigration(boolean newValue) { didTemplateMigrationProperty.setValue(newValue); }
 	public void setAlwaysImmutableOnServer(boolean newValue) { alwaysImmutableOnServer.setValue(newValue); }
-
+	public void setDateLastAskedUserToBackupKeypair(String newDate) {dateLastAskedUserToBackupKeypair.setValue(newDate); }
 
 	public void clearLegacyHQKey()						{ deprecatedLegacyHQKey = ""; }
 
@@ -147,7 +148,8 @@ public class ConfigInfo
 	public String getSyncFrequencyMinutes() {	return syncFrequencyMinutes; }
 	public boolean getDidTemplateMigration() { return didTemplateMigrationProperty.getValue(); }
 	public boolean getAlwaysImmutableOnServer() { return alwaysImmutableOnServer.getValue(); }
-
+	public String getDateLastAskedUserToBackupKeypair() { return dateLastAskedUserToBackupKeypair.getValue(); }
+	
 	public boolean isServerConfigured()
 	{
 		return (serverName.length()>0 && serverPublicKey.length()>0);
@@ -201,7 +203,8 @@ public class ConfigInfo
 		syncStatusJson = "";
 		syncFrequencyMinutes = "";
 		didTemplateMigrationProperty = new SimpleBooleanProperty();
-		alwaysImmutableOnServer = new SimpleBooleanProperty(false);
+		alwaysImmutableOnServer = new SimpleBooleanProperty();
+		dateLastAskedUserToBackupKeypair = new SimpleStringProperty("");
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException
@@ -337,6 +340,11 @@ public class ConfigInfo
 			{
 				loaded.alwaysImmutableOnServer.setValue(in.readBoolean());
 			}
+			//Version 28 MIGRATE_TO_PRIVATE_ALWAYS
+			if(loaded.version >= 29)
+			{
+				loaded.dateLastAskedUserToBackupKeypair.setValue(in.readUTF());
+			}
 		}
 		finally
 		{
@@ -396,6 +404,7 @@ public class ConfigInfo
 			out.writeUTF(syncFrequencyMinutes);
 			out.writeBoolean(didTemplateMigrationProperty.getValue());
 			out.writeBoolean(alwaysImmutableOnServer.getValue());
+			out.writeUTF(dateLastAskedUserToBackupKeypair.getValue());
 		}
 		finally
 		{
@@ -447,7 +456,7 @@ public class ConfigInfo
 		return new String(bytes, "UTF-8");
 	}
 	
-	public static final short VERSION = 28;
+	public static final short VERSION = 29;
 
 	//Version 1
 	private short version;
@@ -518,5 +527,7 @@ public class ConfigInfo
 	//Version 27
 	private Property<Boolean> alwaysImmutableOnServer;
 	//Version 28
-	private static final short VERSION_MIGRATE_TO_PRIVATE_ALWAYS = 28;
+	public static final short VERSION_MIGRATE_TO_PRIVATE_ALWAYS = 28;
+	//Version 29
+	private Property<String> dateLastAskedUserToBackupKeypair;
 }

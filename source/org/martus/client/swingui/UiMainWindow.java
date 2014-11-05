@@ -137,9 +137,9 @@ import org.martus.common.database.FileDatabase.MissingAccountMapSignatureExcepti
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.OrchidTransportWrapper;
 import org.martus.common.packet.Packet;
+import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.XmlPacketLoader;
-import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.swing.FontHandler;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiOptionPane;
@@ -840,31 +840,57 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 	
 	private void askAndBackupKeypairIfRequired()
 	{
+
 		ConfigInfo info = getApp().getConfigInfo();
 		boolean hasBackedUpEncrypted = info.hasUserBackedUpKeypairEncrypted();
 		boolean hasBackedUpShare = info.hasUserBackedUpKeypairShare();
 		boolean hasBackedUpImprovedShare = info.hasBackedUpImprovedKeypairShare();
+		boolean askForBackupAgainInSevenDays = false;
+		boolean dontAskForBackupAgain = false;
 		if(!hasBackedUpEncrypted || !hasBackedUpShare || !hasBackedUpImprovedShare)
 		{
-			String generalMsg = getLocalization().getFieldLabel("confirmgeneralBackupKeyPairMsgcause");
-			String generalMsgEffect = getLocalization().getFieldLabel("confirmgeneralBackupKeyPairMsgeffect");
-			String backupEncrypted = "";
-			String backupShare = "";
-			String backupImprovedShare = "";
-			if(!hasBackedUpEncrypted)
-				backupEncrypted = getLocalization().getFieldLabel("confirmbackupIncompleteEncryptedNeeded");
-			if(!hasBackedUpShare)
-				backupShare = getLocalization().getFieldLabel("confirmbackupIncompleteShareNeeded");
-			if (hasBackedUpShare && !hasBackedUpImprovedShare)
-				backupImprovedShare = getLocalization().getFieldLabel("confirmbackupIncompleteImprovedShareNeeded");
-			String[] contents = new String[] {generalMsg, "", backupEncrypted, "", getBackupShareText(backupImprovedShare, backupShare), "", generalMsgEffect};
-			if(confirmDlg(getCurrentActiveFrame(), getLocalization().getWindowTitle("askToBackupKeyPair"), contents))
+			if(info.getDateLastAskedUserToBackupKeypair().isEmpty())
+				askForBackupAgainInSevenDays = true;
+			if(getApp().shouldWeAskForKeypairBackup())
 			{
+				askForBackupAgainInSevenDays = true;
+
+				String generalMsg = getLocalization().getFieldLabel("confirmgeneralBackupKeyPairMsgcause");
+				String generalMsgEffect = getLocalization().getFieldLabel("confirmgeneralBackupKeyPairMsgeffect");
+				String backupEncrypted = "";
+				String backupShare = "";
+				String backupImprovedShare = "";
 				if(!hasBackedUpEncrypted)
-					askToBackupKeyPairEncryptedSingleFile();
-				if(!hasBackedUpShare || !hasBackedUpImprovedShare)
-					askToBackupKeyPareToSecretShareFiles();
+					backupEncrypted = getLocalization().getFieldLabel("confirmbackupIncompleteEncryptedNeeded");
+				if(!hasBackedUpShare)
+					backupShare = getLocalization().getFieldLabel("confirmbackupIncompleteShareNeeded");
+				if (hasBackedUpShare && !hasBackedUpImprovedShare)
+					backupImprovedShare = getLocalization().getFieldLabel("confirmbackupIncompleteImprovedShareNeeded");
+				String[] contents = new String[] {generalMsg, "", backupEncrypted, "", getBackupShareText(backupImprovedShare, backupShare), "", generalMsgEffect};
+				if(confirmDlg(getCurrentActiveFrame(), getLocalization().getWindowTitle("askToBackupKeyPair"), contents))
+				{
+					if(!hasBackedUpEncrypted)
+						askToBackupKeyPairEncryptedSingleFile();
+					if(!hasBackedUpShare || !hasBackedUpImprovedShare)
+						askToBackupKeyPareToSecretShareFiles();
+				}
 			}
+		}
+		else
+		{
+			dontAskForBackupAgain = true;
+		}
+
+		try
+		{
+			if(askForBackupAgainInSevenDays)
+				getApp().startClockToAskForKeypairBackup();
+			if(dontAskForBackupAgain)
+				getApp().clearClockToAskForKeypairBackup();
+		}	
+		catch (SaveConfigInfoException e)
+		{
+			MartusLogger.logException(e);
 		}
 	}
 
@@ -1319,17 +1345,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		TransferableBulletinList tb = TransferableBulletinList.extractFrom(contents);
 		if(tb != null)
 			tb.dispose();
-	}
-
-
-	public void setCurrentDefaultKeyboardVirtual(boolean keyboard)
-	{
-		getUiState().setCurrentDefaultKeyboardVirtual(keyboard);
-	}
-
-	public boolean isCurrentDefaultKeyboardVirtual()
-	{
-		return getUiState().isCurrentDefaultKeyboardVirtual();
 	}
 
 	public Dimension getBulletinEditorDimension()
