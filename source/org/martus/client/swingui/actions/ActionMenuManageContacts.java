@@ -37,9 +37,6 @@ public class ActionMenuManageContacts extends ActionMenuManageContactsWithoutRes
 
 	public void doAction()
 	{
-		if(!mainWindow.reSignIn())
-			return;
-		
 		super.doAction();
 	}
 	
