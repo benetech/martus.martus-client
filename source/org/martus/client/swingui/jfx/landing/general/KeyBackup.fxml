@@ -8,12 +8,12 @@
 <AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="910.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
     <BorderPane layoutX="0.0" layoutY="0.0" prefWidth="910.0" styleClass="pageMargin">
-      <center>
-        <Pane fx:id="contentPane" maxHeight="-Infinity" prefHeight="408.0" prefWidth="840.0" />
-      </center>
       <top>
-        <Button mnemonicParsing="false" onAction="#onExportMultiKey" text="Export 3 Key"/>
+        <Pane fx:id="contentPane" prefWidth="840.0" />
       </top>
+      <bottom>
+        <Button mnemonicParsing="false" onAction="#onExportMultiKey" text="Export 3 Key"/>
+      </bottom>
     </BorderPane>
   </children>
 </AnchorPane>
