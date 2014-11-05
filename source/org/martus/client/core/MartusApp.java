@@ -137,10 +137,12 @@ import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.common.packet.UniversalId;
+import org.martus.common.utilities.DateUtilities;
 import org.martus.jarverifier.JarVerifier;
 import org.martus.swing.FontHandler;
 import org.martus.util.DatePreference;
 import org.martus.util.DirectoryUtils;
+import org.martus.util.MultiCalendar;
 import org.martus.util.Stopwatch;
 import org.martus.util.StreamCopier;
 import org.martus.util.StreamableBase64;
@@ -602,6 +604,32 @@ public class MartusApp
 		turnNetworkOnOrOffAsRequested();
 		startOrStopTorAsRequested();
 	}
+	
+	public boolean shouldWeAskForKeypairBackup()
+	{
+		return shouldWeAskForKeypairBackup(DateUtilities.getTodayInStoredFormat());
+	}
+
+	public boolean shouldWeAskForKeypairBackup(String today)
+	{
+		String dateLastAskedForKeypairBackup = configInfo.getDateLastAskedUserToBackupKeypair();
+		if(dateLastAskedForKeypairBackup.isEmpty())
+			return false;
+		
+		MultiCalendar todayCalendar = MultiCalendar.createFromIsoDateString(today);
+		MultiCalendar lastNoticeCalendar = MultiCalendar.createFromIsoDateString(dateLastAskedForKeypairBackup);
+		
+		int daysFromLastNotice = MultiCalendar.daysBetween(lastNoticeCalendar, todayCalendar);
+		return (daysFromLastNotice >= DAYS_UNTIL_WE_ASK_TO_BACKUP_KEYPAIR);
+	}
+	
+	public void startClockToAskForKeypairBackup() throws SaveConfigInfoException
+	{
+		String today = DateUtilities.getTodayInStoredFormat();
+		configInfo.setDateLastAskedUserToBackupKeypair(today);
+		saveConfigInfo();
+	}
+	
 
 	public void turnNetworkOnOrOffAsRequested()
 	{
@@ -2727,7 +2755,9 @@ public class MartusApp
 	public static final String PACKETS_DIRECTORY_NAME = "packets";
 	public static final String DOCUMENTS_DIRECTORY_NAME = "Docs";
 	public static final String USE_UNOFFICIAL_TRANSLATIONS_NAME = "use_unofficial_translations.txt";
+	public static final int DAYS_UNTIL_WE_ASK_TO_BACKUP_KEYPAIR = 7;
 	private static final String FXML_DIRECTORY_NAME = "fxml";
+	
 	private final int MAXFOLDERS = 50;
 	public int serverChunkSize = NetworkInterfaceConstants.CLIENT_MAX_CHUNK_SIZE;
 }
