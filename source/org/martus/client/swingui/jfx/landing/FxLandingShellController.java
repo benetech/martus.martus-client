@@ -267,12 +267,6 @@ public class FxLandingShellController extends FxNonWizardShellController
 	}
 
 	@FXML
-	private void onCreateNewAccount(ActionEvent event)
-	{
-		//TODO: add doAction
-	}
-	
-	@FXML
 	private void onQuickSearch(ActionEvent event)
 	{
 		doAction(new  ActionMenuQuickSearch(getMainWindow(), searchText.getText()));

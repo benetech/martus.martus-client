@@ -12,7 +12,7 @@
 		<HBox alignment="CENTER_RIGHT" styleClass="menu-bar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 			<children>
 			
-				<Button mnemonicParsing="false" onAction="#onManageContacts" text="Contacts"/>
+				<Button mnemonicParsing="false" onAction="#onManageContacts" text="Contacts" />
 				<MenuBar fx:id="global_menu">
 					<menus>
 						<Menu mnemonicParsing="false" text="Settings">
@@ -26,7 +26,6 @@
 							<items>
 							<MenuItem mnemonicParsing="false" onAction="#onChangeUsernameAndPassword" styleClass="menu-item" text="Change Username and Password" />
 							<MenuItem mnemonicParsing="false" onAction="#onAccountSharing" styleClass="menu-item" text="Account Sharing" />
-							<MenuItem mnemonicParsing="false" onAction="#onCreateNewAccount" styleClass="menu-item" text="Create New" />
 							<MenuItem mnemonicParsing="false" onAction="#onContactInformation" styleClass="menu-item" text="Contact Information" />
 							<MenuItem mnemonicParsing="false" onAction="#onBackupKeypair" styleClass="menu-item" text="Backup Key" />
 							<MenuItem mnemonicParsing="false" onAction="#onDeleteMyData" styleClass="menu-item" text="Delete Account" />
@@ -35,7 +34,7 @@
 					</menus>
 				</MenuBar>
 
-				<Button mnemonicParsing="false" onAction="#onHelpMenu" text="Help"/>	
+				<Button mnemonicParsing="false" onAction="#onHelpMenu" text="Help" />	
 				
 			</children>
 		</HBox>
@@ -135,8 +134,10 @@
 						<BorderPane>
 							<top>
 								<HBox>
-            	        			<Label fx:id="titleBarLabel" styleClass="toolbarLabel" text="" />
-            	        			<Button fx:id="closeCurrentViewButton" mnemonicParsing="false" onAction="#onCloseCurrentView" styleClass="toolbarButton" text="Close" />
+   <children>
+               	        			<Label fx:id="titleBarLabel" styleClass="toolbarLabel" text="" />
+               	        			<Button fx:id="closeCurrentViewButton" mnemonicParsing="false" onAction="#onCloseCurrentView" styleClass="toolbarButton" text="Close" />
+   </children>
             	        		</HBox>	
 							</top>
 							<center>
