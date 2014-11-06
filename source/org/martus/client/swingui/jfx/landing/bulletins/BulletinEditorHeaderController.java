@@ -141,9 +141,11 @@ public class BulletinEditorHeaderController extends FxInSwingController
 		String contactsPublicCode = key.getFormattedPublicCode40();
 		if(ourContacts.containsKey(key.getPublicKey()))
 			return contactsPublicCode;
+		
 		String notInContactsWarning = localization.getFieldLabel("AuthorizedToReadNotInContacts");
 		HashMap tokenReplacement = new HashMap();
 		tokenReplacement.put("#PublicCode#", contactsPublicCode);
+		
 		return TokenReplacement.replaceTokens(notInContactsWarning, tokenReplacement);
 	}
 
