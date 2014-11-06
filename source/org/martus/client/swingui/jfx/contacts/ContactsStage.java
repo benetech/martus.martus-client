@@ -69,12 +69,16 @@ public class ContactsStage extends FxNonWizardStage
 	@Override
 	protected boolean confirmExit()
 	{
+		if (!contentController.hasContactsDataChanged())
+			return true;
+		
 		MartusLocalization localization = getMainWindow().getLocalization();
 		String title = localization.getWindowTitle("ExitManageContacts");
 		String message = localization.getFieldLabel("ExitManageContacts");
 		int result = JOptionPane.showConfirmDialog(getDialog(), message, title, JOptionPane.YES_NO_OPTION);
 		if (result == JOptionPane.YES_OPTION)
 			return true;
+		
 		return false;
 	}
 	
