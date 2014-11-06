@@ -1984,6 +1984,7 @@ public class EnglishStrings
 "folder:%SearchResults=Search Results",
 "folder:%RecoveredBulletins=Recovered Bulletins",
 "folder:%DamagedBulletins=Damaged Bulletins",
+"folder:%Import=Imported",
 
 "month:jan=Jan",
 "month:feb=Feb",
