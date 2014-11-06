@@ -240,6 +240,7 @@ public class EnglishStrings
 
 "wintitle:SelectTemplate=Select Template",
 "field:confirmOkToSwitchTemplate=Changing templates may lose data (need real text here)",
+"field:DisplayableDefaultFormTemplateName=Default Template",
 
 "wintitle:notifyUnableToLoadCurrentTemplate=Error",
 "field:notifyUnableToLoadCurrentTemplatecause=Unable to restore the current form template, so the default template will be used.",
@@ -1637,7 +1638,7 @@ public class EnglishStrings
 
 "field:ManageContacts=Manage Contacts",
 
-"filed:AllFiles=All Files",
+"field:AllFiles=All Files",
 "field:BulletinViewHeading=Martus Bulletin",
 "field:RemoveMartusFromSystemWarning=WARNING!",
 "field:RemoveMartusFromSystemMultipleAccountsWarning1=IMPORTANT: There are other Martus accounts on this system.",
