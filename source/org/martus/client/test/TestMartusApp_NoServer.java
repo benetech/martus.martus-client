@@ -2730,7 +2730,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testWindowTitles()
 	{
 		TRACE_BEGIN("testWindowTitles");
-		assertEquals("Martus Human Rights Bulletin System", testAppLocalization.getWindowTitle("main"));
+		assertEquals("Martus Information Management and Data Collection Framework", testAppLocalization.getWindowTitle("main"));
 		TRACE_END();
 	}
 

@@ -31,7 +31,7 @@ import org.martus.common.bulletin.Bulletin;
 public class EnglishStrings
 {
 	public static String strings[] = {
-"wintitle:main=Martus Human Rights Bulletin System",
+"wintitle:main=Martus Information Management and Data Collection Framework",
 "wintitle:create=Create Bulletin",
 "wintitle:options=Options",
 "wintitle:HelpDefaultDetails=Help on Bulletin Details Field Default Content",
@@ -1490,7 +1490,7 @@ public class EnglishStrings
 "field:ErrorCustomFieldHeader2=TYPE",
 "field:ErrorCustomFieldHeader3=TAG",
 "field:ErrorCustomFieldHeader4=LABEL",
-"field:SplashProductDescription=Human Rights Bulletin System",
+"field:SplashProductDescription=Information Management and Data Collection Framework",
 "field:DateExact=Exact Date",
 "field:DateRange=Date Range",
 "field:YearUnspecified=Unknown",
