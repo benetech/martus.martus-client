@@ -91,6 +91,6 @@ public class FxModalDialog extends JDialog
 	}
 	
 	private static final Dimension SMALL_PREFFERD_DIALOG_SIZE = new Dimension(300, 200);
-	public static final Dimension MEDIUM_PREFERRED_DIALOG_SIZE = new Dimension(600, 400);
+	public static final Dimension MEDIUM_PREFERRED_DIALOG_SIZE = new Dimension(650, 450);
 	private static final Dimension LARGE_PREFERRED_DIALOG_ZIZE = new Dimension(960, 640);
 }

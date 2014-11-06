@@ -50,9 +50,6 @@ public class ActionMenuRemoveServer extends UiMenuAction
 		if(getMainWindow().isRetrieveInProgress())
 			return;
 		
-		if(!getMainWindow().reSignIn())
-			return;
-		
 		ConfigInfo info = getApp().getConfigInfo();
 		UiRemoveServerDlg removeDlg = new UiRemoveServerDlg(getMainWindow(), info);
 		if (!removeDlg.isYesButtonPressed())

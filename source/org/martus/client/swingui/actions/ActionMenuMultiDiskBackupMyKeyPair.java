@@ -23,47 +23,20 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.landing.general;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.layout.Pane;
+package org.martus.client.swingui.actions;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionMenuMultiDiskBackupMyKeyPair;
-import org.martus.client.swingui.jfx.generic.FxInSwingController;
-import org.martus.client.swingui.jfx.setupwizard.step6.FxSetupBackupYourKeyController;
 
-public class KeyBackupController extends FxInSwingController
+public class ActionMenuMultiDiskBackupMyKeyPair	extends	ActionMenuBackupMyKeyPair
 {
-	public KeyBackupController(UiMainWindow mainWindowToUse)
+	public ActionMenuMultiDiskBackupMyKeyPair(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
-	
+
 	@Override
-	public Parent createContents() throws Exception
+	protected void backupKey()
 	{
-		Parent contents = super.createContents();
-		
-		loadControllerAndEmbedInPane(new FxSetupBackupYourKeyController(getMainWindow()), contentPane);
-	
-		return contents;
+		mainWindow.askToBackupKeyPareToSecretShareFiles();
 	}
-	
-	@Override
-	public String getFxmlLocation()
-	{
-		return "landing/general/KeyBackup.fxml";
-	}
-	
-	@FXML
-	private void onExportMultiKey(ActionEvent event)
-	{
-		doAction(new ActionMenuMultiDiskBackupMyKeyPair(getMainWindow()));
-	}
-		
-	@FXML
-	private Pane contentPane;
 }

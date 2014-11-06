@@ -263,5 +263,5 @@ public class Martus
 	}
 
 	private final static String TIMEOUT_OPTION_TEXT = "--timeout-minutes=";
-	private final static int DEFAULT_TIMEOUT_SECONDS = (10 * 60);
+	private final static int DEFAULT_TIMEOUT_SECONDS = (5 * 60);
 }
