@@ -175,7 +175,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			return;
 		}
 		String contactPublicCode = MartusSecurity.computeFormattedPublicCode40(contactAccountId);
-		if(DoesContactAlreadyExistInTable(contactPublicCode))
+		if(doesContactAlreadyExistInTable(contactPublicCode))
 		{
 			showContactAlreadyExists(contactPublicCode);
 			return;
@@ -196,7 +196,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		showNotifyDialog("ContactKeyAlreadyExists", contactExistsWithName);
 	}
 
-	protected boolean DoesContactAlreadyExistInTable(String contactPublicCode)
+	protected boolean doesContactAlreadyExistInTable(String contactPublicCode)
 	{
 		for(int i=0; i < getContactsTableData().size(); ++i)
 		{
