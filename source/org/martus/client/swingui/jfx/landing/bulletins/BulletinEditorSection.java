@@ -74,7 +74,7 @@ public class BulletinEditorSection extends GridPane
 	{
 		FieldSpec fieldSpec = field.getFieldSpec();
 		
-		boolean wantsKeepWithPrevious = fieldSpec.keepWithPrevious();
+		boolean wantsKeepWithPrevious = false;//TODO fix this (causes issues with editing groupings and view bulletin) fieldSpec.keepWithPrevious();
 		boolean canKeepWithPrevious = canKeepWithNextOrPrevious(fieldSpec);
 		boolean keepWithPrevious = (wantsKeepWithPrevious && canKeepWithPrevious);
 		if(!keepWithPrevious)
