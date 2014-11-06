@@ -27,10 +27,12 @@ package org.martus.client.swingui.jfx.contacts;
 
 import java.io.File;
 
+import javafx.collections.ListChangeListener;
 import javafx.stage.FileChooser;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.setupwizard.ContactsTableData;
 import org.martus.client.swingui.jfx.setupwizard.step4.FxWizardAddContactsController;
 import org.martus.common.MartusLogger;
 
@@ -47,11 +49,14 @@ public class FxManageContactsController extends FxWizardAddContactsController
 	public void initializeMainContentPane()
 	{
 		super.initializeMainContentPane();
+		
+		data.addListener((ListChangeListener<ContactsTableData>) change -> {setContactsDataChanged();});
 		//TODO remove this and figure out a better solution in FXML
 		contactsVbox.setMaxWidth(MAX_WIDTH_CONTACTS_TABLE);
 
 		sendToByDefaultColumn.setVisible(true);
 		showOldPublicCodeDuringVerification();
+		setContactsDataHasNotChanged();
 	}
 
 	public void importContactFromFile()
@@ -81,6 +86,21 @@ public class FxManageContactsController extends FxWizardAddContactsController
 			} 
 	}
 	
+	protected boolean hasContactsDataChanged()
+	{
+		return hasContactsDataChanged;
+	}
+	
+	public void setContactsDataChanged()
+	{
+		hasContactsDataChanged = true;
+	}
+	
+	private void setContactsDataHasNotChanged()
+	{
+		hasContactsDataChanged = false;
+	}
+	
 	@Override
 	public String getFxmlLocation()
 	{
@@ -88,4 +108,5 @@ public class FxManageContactsController extends FxWizardAddContactsController
 	}
 	
 	private static final int MAX_WIDTH_CONTACTS_TABLE = 960;
+	private boolean hasContactsDataChanged;
 }
