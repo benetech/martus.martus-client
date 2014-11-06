@@ -89,10 +89,12 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		try
 		{
 			Set localRecords = getLocalRecords();
+			getMainWindow().setWaitingCursor();
 			Vector serverMyDrafts = getServerMyDrafts();
 			Vector serverMySealeds = getServerMySealeds();
 			Vector serverHQDrafts = getServerHQDrafts();
 			Vector serverHQSealeds = getServerHQSealeds();
+			getMainWindow().resetCursor();
 			syncRecordsTableProvider.addBulletinsAndSummaries(localRecords, serverMyDrafts, serverMySealeds, serverHQDrafts, serverHQSealeds);
 			onShowAll(null);
 		} 

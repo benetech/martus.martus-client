@@ -240,7 +240,7 @@ public class EnglishStrings
 
 "wintitle:SelectTemplate=Select Template",
 "field:confirmOkToSwitchTemplate=Changing templates may lose data (need real text here)",
-"field:DisplayableDefaultFormTemplateName=Default Template",
+"field:DisplayableDefaultFormTemplateName=Martus Standard Fields",
 
 "wintitle:notifyUnableToLoadCurrentTemplate=Error",
 "field:notifyUnableToLoadCurrentTemplatecause=Unable to restore the current form template, so the default template will be used.",
@@ -1984,6 +1984,7 @@ public class EnglishStrings
 "folder:%SearchResults=Search Results",
 "folder:%RecoveredBulletins=Recovered Bulletins",
 "folder:%DamagedBulletins=Damaged Bulletins",
+"folder:%Import=Imported",
 
 "month:jan=Jan",
 "month:feb=Feb",
