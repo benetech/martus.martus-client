@@ -1637,7 +1637,7 @@ public class EnglishStrings
 
 "field:ManageContacts=Manage Contacts",
 
-"filed:AllFiles=All Files",
+"field:AllFiles=All Files",
 "field:BulletinViewHeading=Martus Bulletin",
 "field:RemoveMartusFromSystemWarning=WARNING!",
 "field:RemoveMartusFromSystemMultipleAccountsWarning1=IMPORTANT: There are other Martus accounts on this system.",
