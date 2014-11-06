@@ -351,7 +351,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 			BulletinFolder folderToImportInto = getImportFolder();
 			ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(fileToImport, getApp().getStore(), folderToImportInto, System.out);
 			importer.importFiles();
-			showAllCases();
+			updateCases(folderToImportInto.getName());
 		}
 		catch (Exception e)
 		{
@@ -365,7 +365,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		{
 			BulletinFolder folderToImportInto = getImportFolder();
 			getApp().getStore().importZipFileBulletin(fileToImport, folderToImportInto, false);
-			showAllCases();
+			updateCases(folderToImportInto.getName());
 		}
 		catch (Exception e)
 		{

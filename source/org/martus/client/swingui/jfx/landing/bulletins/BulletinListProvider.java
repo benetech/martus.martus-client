@@ -51,6 +51,7 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 		super(INITIAL_CAPACITY);
 		mainWindow = mainWindowToUse;
 		trashFolderBeingDisplayedProperty = new SimpleBooleanProperty();
+		allFolderBeingDisplayedProperty = new SimpleBooleanProperty();
 	}
 	
 	@Override
@@ -65,11 +66,18 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 			folder.removeFolderContentsListener(this);
 		folder = newFolder;
 		boolean isTrashBeingDisplayed = false;
-		if(folder != null)
+		boolean isAllBeingDisplayed = false;
+		if(folder == FxCaseManagementController.ALL_FOLDER)
+		{
+			isAllBeingDisplayed = true;
+		}
+		else
 		{
 			folder.addFolderContentsListener(this);
 			isTrashBeingDisplayed = folder.isDiscardedFolder();
 		}
+		
+		allFolderBeingDisplayedProperty.set(isAllBeingDisplayed);
 		trashFolderBeingDisplayedProperty.set(isTrashBeingDisplayed);
 		updateContents();
 	}
@@ -82,6 +90,11 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 	public BooleanProperty getTrashFolderBeingDisplayedBooleanProperty()
 	{
 		return trashFolderBeingDisplayedProperty;
+	}
+	
+	public BooleanProperty getAllFolderBeingDisplayedBooleanProperty()
+	{
+		return allFolderBeingDisplayedProperty;
 	}
 
 	public void updateContents()
@@ -207,4 +220,5 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 	private UiMainWindowInterface mainWindow;
 	private BulletinFolder folder;
 	private BooleanProperty trashFolderBeingDisplayedProperty;
+	private BooleanProperty allFolderBeingDisplayedProperty;
 }

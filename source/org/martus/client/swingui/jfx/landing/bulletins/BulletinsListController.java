@@ -152,12 +152,19 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		BooleanBinding trashNotBeingDisplayedBinding = getTrashNotBeingDisplayedBinding();
 		exportButton.visibleProperty().bind(trashNotBeingDisplayedBinding);
 		copyButton.visibleProperty().bind(trashNotBeingDisplayedBinding);
-		trashButton.visibleProperty().bind(trashNotBeingDisplayedBinding);
+		BooleanBinding allNotBeingDisplayedBinding = getAllNotBeingDisplayedBinding();
+		BooleanBinding showTrashBinding = Bindings.and(trashNotBeingDisplayedBinding, allNotBeingDisplayedBinding);
+		trashButton.visibleProperty().bind(showTrashBinding);
 	}
 
 	public BooleanBinding getTrashNotBeingDisplayedBinding()
 	{
 		return bulletinTableProvider.getTrashFolderBeingDisplayedBooleanProperty().not();
+	}
+	
+	public BooleanBinding getAllNotBeingDisplayedBinding()
+	{
+		return bulletinTableProvider.getAllFolderBeingDisplayedBooleanProperty().not();
 	}
 
 	public void loadAllBulletinsAndSortByMostRecent()

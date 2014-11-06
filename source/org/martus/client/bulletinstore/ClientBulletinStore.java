@@ -646,7 +646,7 @@ public class ClientBulletinStore extends BulletinStore
 	
 	public BulletinFolder getFolderImport()
 	{
-		return folderImport;
+		return createOrFindFolder(IMPORT_FOLDER);
 	}
 
 	private BulletinFolder getFolderOnServer()
@@ -729,7 +729,6 @@ public class ClientBulletinStore extends BulletinStore
 		folderDiscarded = createSystemFolder(DISCARDED_FOLDER);
 		folderDraftOutbox = createSystemFolder(DRAFT_OUTBOX);
 		folderSealedOutbox = createSystemFolder(SEALED_OUTBOX);
-		folderImport = createSystemFolder(IMPORT_FOLDER);
 	}
 
 	public BulletinFolder createSystemFolder(String name)
@@ -1641,7 +1640,7 @@ public class ClientBulletinStore extends BulletinStore
 	public static final String DAMAGED_BULLETIN_FOLDER = "%DamagedBulletins";
 	private static final String DRAFT_OUTBOX = "*DraftOutbox";
 	private static final String SEALED_OUTBOX = "*SealedOutbox";
-	private static final String IMPORT_FOLDER = "*Import";
+	private static final String IMPORT_FOLDER = "%Import";
 	private static final String ON_SERVER_FOLDER = "*OnServer";
 	private static final String NOT_ON_SERVER_FOLDER = "*NotOnServer";
 
@@ -1661,7 +1660,6 @@ public class ClientBulletinStore extends BulletinStore
 	private BulletinFolder folderDiscarded;
 	private BulletinFolder folderDraftOutbox;
 	private BulletinFolder folderSealedOutbox;
-	private BulletinFolder folderImport;
 	private boolean loadedLegacyFolders;
 
 	PartialBulletinCache bulletinDataCache;
