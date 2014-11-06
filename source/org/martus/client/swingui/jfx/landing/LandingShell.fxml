@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<top>
+		<HBox alignment="CENTER_RIGHT" styleClass="menu-bar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+			<children>
+			
+				<Button mnemonicParsing="false" onAction="#onManageContacts" text="Contacts" />
+				<MenuBar fx:id="global_menu">
+					<menus>
+						<Menu mnemonicParsing="false" text="Settings">
+							<items>
+								<MenuItem mnemonicParsing="false" onAction="#onConfigureServer" text="Server Settings" />
+								<MenuItem mnemonicParsing="false" onAction="#onSystemPreferences" text="System Preferences" />
+								<MenuItem mnemonicParsing="false" onAction="#onTorPreferences" text="Tor Preferences" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" styleClass="menu-item" text="Account">
+							<items>
+							<MenuItem mnemonicParsing="false" onAction="#onChangeUsernameAndPassword" styleClass="menu-item" text="Change Username and Password" />
+							<MenuItem mnemonicParsing="false" onAction="#onAccountSharing" styleClass="menu-item" text="Account Sharing" />
+							<MenuItem mnemonicParsing="false" onAction="#onContactInformation" styleClass="menu-item" text="Contact Information" />
+							<MenuItem mnemonicParsing="false" onAction="#onBackupKeypair" styleClass="menu-item" text="Backup Key" />
+							<MenuItem mnemonicParsing="false" onAction="#onDeleteMyData" styleClass="menu-item" text="Delete Account" />
+							</items>
+						</Menu>
+					</menus>
+				</MenuBar>
+
+				<Button mnemonicParsing="false" onAction="#onHelpMenu" text="Help" />	
+				
+			</children>
+		</HBox>
+	</top>
+	<center>
+		<BorderPane>
+			<top>
+<!--				<VBox prefHeight="2.0" prefWidth="920.0" style="-fx-background-color: #77bad0;" />-->
+				<VBox prefHeight="40.0" prefWidth="920.0" style="-fx-background-color: #e6e6e6;">
+					<VBox.margin>
+						<Insets bottom="1.0" top="1.0" />
+					</VBox.margin>
+					<children>
+						<GridPane hgap="5.0">
+							<columnConstraints>
+								<ColumnConstraints hgrow="SOMETIMES" />
+								<ColumnConstraints hgrow="SOMETIMES" />
+								<ColumnConstraints hgrow="SOMETIMES" />
+								<ColumnConstraints hgrow="SOMETIMES" />
+							    <ColumnConstraints hgrow="SOMETIMES" />
+							    <ColumnConstraints hgrow="SOMETIMES" />
+							</columnConstraints>
+							<children>
+                        <HBox alignment="CENTER" prefHeight="100.0">
+                           <children>
+      								<ImageView fitHeight="33.0" fitWidth="97.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true">
+      									<image>
+      										<Image url="@../../dialogs/Martus-logo-white-text-160x72.png" />
+      									</image>
+      								</ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" GridPane.columnIndex="1">
+                           <children>
+      								<Button mnemonicParsing="false" onAction="#onCreateNewBulletin" style="-fx-background-color: #77bad0;" text="+ Create" textFill="#f7f7f7">
+      									<font>
+      										<Font name="Helvetica" size="14.0" />
+      									</font>
+      								</Button>
+                              <Separator prefWidth="10.0" visible="false" />
+                           </children>
+                        </HBox>
+								<HBox alignment="CENTER_LEFT" prefHeight="32.0" styleClass="toolbarHBox" GridPane.columnIndex="3">
+									<children>
+										<Label contentDisplay="CENTER" styleClass="toolbarLabel" text="Server:">
+                                 			<padding>
+                                    				<Insets right="5.0" />
+                                 			</padding>
+                                 		</Label>
+										<Button fx:id="toolbarButtonOnline" contentDisplay="CENTER" minWidth="28.0" mnemonicParsing="false" onAction="#onOnline" styleClass="toolbarButton" />
+									</children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+								</HBox>
+ 						<HBox alignment="CENTER_LEFT" styleClass="toolbarHBox" GridPane.columnIndex="4">
+									<children>
+										<Label styleClass="toolbarLabel" text="%Tor">
+                                 			<padding>
+                                    				<Insets right="5.0" />
+                                 			</padding>
+                                 		</Label>
+ 										<Button fx:id="toolbarButtonTor" minWidth="50" mnemonicParsing="false" onAction="#onTor" styleClass="toolbarButton" />
+                           			</children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" GridPane.columnIndex="5">
+                           <children>
+      								<TextField fx:id="searchText" maxWidth="160.0" minHeight="27.0" prefWidth="150.0" style="-fx-background-radius: 0px;" />
+                              <Label text="   " />
+      								<Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onQuickSearch" style="-fx-background-color: #77bad0; -fx-background-radius: 0px;" text="%Button.search" textAlignment="CENTER" textFill="#f7f7f7">
+      									<font>
+      										<Font name="Helvetica" size="14.0" />
+      									</font>
+      									<opaqueInsets>
+      										<Insets />
+      									</opaqueInsets>
+      								</Button>
+                           </children>
+                        </HBox>
+							</children>
+                     <rowConstraints>
+                        <RowConstraints />
+                     </rowConstraints>
+                     <opaqueInsets>
+                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                     </opaqueInsets>
+						</GridPane>
+					</children>
+				</VBox>
+			</top>
+			<center>
+				<BorderPane>
+					<left>
+						<StackPane fx:id="sideContentPane" />
+					</left>
+					<center>
+						<BorderPane>
+							<top>
+								<HBox>
+   <children>
+               	        			<Label fx:id="titleBarLabel" styleClass="toolbarLabel" text="" />
+               	        			<Button fx:id="closeCurrentViewButton" mnemonicParsing="false" onAction="#onCloseCurrentView" styleClass="toolbarButton" text="Close" />
+   </children>
+            	        		</HBox>	
+							</top>
+							<center>
+								<StackPane fx:id="mainContentPane" />
+							</center>
+						</BorderPane>
+					</center>
+				</BorderPane>
+			</center>
+		</BorderPane>
+	</center>
+</BorderPane>
