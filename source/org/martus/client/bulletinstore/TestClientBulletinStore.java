@@ -155,12 +155,12 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     public void testGetAllVisibleFolders() throws Exception
 	{
 		MockBulletinStore clientStore = new MockBulletinStore(security);
-		assertEquals("Should only have 5 folders", 5, clientStore.getAllFolders().size());
+		assertEquals("Should only have 4 folders", 4, clientStore.getAllFolders().size());
 		assertEquals("Should only have 2 visible folders", 2, clientStore.getAllVisibleFolders().size());
 		clientStore.createFolder("visible1");
 		clientStore.createFolder("visible2");
 		clientStore.createFolder("*invisible1");
-		assertEquals("Should now have 8 folders", 8, clientStore.getAllFolders().size());
+		assertEquals("Should now have 7 folders", 7, clientStore.getAllFolders().size());
 		assertEquals("Should now have 4 visible folders", 4, clientStore.getAllVisibleFolders().size());
 	}
     
@@ -826,10 +826,9 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals(myStore.getFolderDiscarded().getName(), namesOriginal.get(1));
 		assertEquals(myStore.getFolderDraftOutbox().getName(), namesOriginal.get(2));
 		assertEquals(myStore.getFolderSealedOutbox().getName(), namesOriginal.get(3));
-		assertEquals(myStore.getFolderImport().getName(), namesOriginal.get(4));
-		assertEquals(folder1.getName(), namesOriginal.get(5));
-		assertEquals(folder2.getName(), namesOriginal.get(6));
-		assertEquals(folder3.getName(), namesOriginal.get(7));
+		assertEquals(folder1.getName(), namesOriginal.get(4));
+		assertEquals(folder2.getName(), namesOriginal.get(5));
+		assertEquals(folder3.getName(), namesOriginal.get(6));
 
 		Vector newOrder = new Vector();
 		newOrder.add(folder2);
@@ -839,7 +838,6 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		newOrder.add(folder1);
 		newOrder.add(myStore.getFolderSealedOutbox());
 		newOrder.add(myStore.getFolderDiscarded());
-		newOrder.add(myStore.getFolderImport());
 
 		myStore.setFolderOrder(newOrder);
 		Vector namesReordered = myStore.getAllFolders();
