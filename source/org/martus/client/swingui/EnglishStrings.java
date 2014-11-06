@@ -690,7 +690,7 @@ public class EnglishStrings
 	
 "field:ContactVerifyNow=Verify Now",
 "field:ContactVerified=Verified",
-"field:AuthorizedToReadNotInContacts=#PublicCode# (Contact not verified)",
+"field:AuthorizedToReadNotInContacts=#PublicCode# (not currently in contacts)",
 "field:AccountIdWithPublicCode=#AccountId# #PublicCode#",
 "field:HistoryVersion=#VersionNumber#: #DateSaved# : #Title#",
 "wintitle:ExportEncryptedBulletin=Export Encrypted",
