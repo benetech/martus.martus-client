@@ -60,7 +60,7 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 	@Override
 	public AbstractFxSetupWizardContentController getNextController()
 	{
-		return new FxSelectLanguageController(getMainWindow());
+		return null;
 	}
 
 	@Override
