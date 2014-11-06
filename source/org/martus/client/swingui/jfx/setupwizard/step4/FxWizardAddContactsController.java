@@ -198,9 +198,10 @@ public class FxWizardAddContactsController extends FxStep4Controller
 
 	protected boolean doesContactAlreadyExistInTable(String contactPublicCode)
 	{
-		for(int i=0; i < getContactsTableData().size(); ++i)
+		ObservableList<ContactsTableData> contactsTableData = getContactsTableData();
+		for(int i=0; i < contactsTableData.size(); ++i)
 		{
-			ContactsTableData contactData = getContactsTableData().get(i);
+			ContactsTableData contactData = contactsTableData.get(i);
 			if(contactData.getPublicCode().equals(contactPublicCode))
 				return true;
 		}
@@ -209,9 +210,10 @@ public class FxWizardAddContactsController extends FxStep4Controller
 
 	private String getContactsNameInTable(String contactPublicCode)
 	{
-		for(int i=0; i < getContactsTableData().size(); ++i)
+		ObservableList<ContactsTableData> contactsTableData = getContactsTableData();
+		for(int i=0; i < contactsTableData.size(); ++i)
 		{
-			ContactsTableData contactData = getContactsTableData().get(i);
+			ContactsTableData contactData = contactsTableData.get(i);
 			if(contactData.getPublicCode().equals(contactPublicCode))
 				return contactData.getContactName();
 		}
@@ -547,9 +549,10 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	public void saveContacts()
 	{
 		ContactKeys allContactsInTable = new ContactKeys();
-		for(int i =0; i < getContactsTableData().size(); ++i)
+		ObservableList<ContactsTableData> contactsTableData = getContactsTableData();
+		for(int i =0; i < contactsTableData.size(); ++i)
 		{
-			ContactKey contact = getContactsTableData().get(i).getContact();
+			ContactKey contact = contactsTableData.get(i).getContact();
 			allContactsInTable.add(contact);
 		}
 		try
@@ -609,7 +612,8 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	
 	private void loadExistingContactData()
 	{
-		getContactsTableData().clear();
+		ObservableList<ContactsTableData> contactsTableData = getContactsTableData();
+		contactsTableData.clear();
 		
 		try
 		{
@@ -618,7 +622,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			{
 				ContactKey contact = keys.get(i);
 				ContactsTableData contactData = new ContactsTableData(contact); 
-				getContactsTableData().add(contactData);
+				contactsTableData.add(contactData);
 			}
 		} 
 		catch (Exception e)
