@@ -107,7 +107,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	    removeContactColumn.setCellFactory(new TableColumnRemoveButtonCellFactory(getLocalization()));
 
 	    sendToByDefaultColumn.setVisible(false);
-		contactsTable.setItems(data);
+		contactsTable.setItems(getContactsTableData());
 		Label noContacts = new Label(getLocalization().getFieldLabel("NoContactsInTable"));
 		contactsTable.setPlaceholder(noContacts);
 		loadExistingContactData();
@@ -117,7 +117,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 
 	protected void removeContactFromTable(ContactsTableData contactData)
 	{
-		data.remove(contactData);
+		getContactsTableData().remove(contactData);
 	}
 
 	protected ContactsTableData getSelectedContact()
@@ -183,7 +183,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		ContactsTableData newContact = verifyContact(new ContactKey(contactAccountId), false);
 		if(newContact != null)
 		{
-			data.add(newContact);
+			getContactsTableData().add(newContact);
 			clearAccessTokenField();
 		}
 	}
@@ -198,20 +198,20 @@ public class FxWizardAddContactsController extends FxStep4Controller
 
 	protected boolean DoesContactAlreadyExistInTable(String contactPublicCode)
 	{
-		for(int i=0; i < data.size(); ++i)
+		for(int i=0; i < getContactsTableData().size(); ++i)
 		{
-			ContactsTableData contactData = data.get(i);
+			ContactsTableData contactData = getContactsTableData().get(i);
 			if(contactData.getPublicCode().equals(contactPublicCode))
 				return true;
 		}
 		return false;
 	}
-	
+
 	private String getContactsNameInTable(String contactPublicCode)
 	{
-		for(int i=0; i < data.size(); ++i)
+		for(int i=0; i < getContactsTableData().size(); ++i)
 		{
-			ContactsTableData contactData = data.get(i);
+			ContactsTableData contactData = getContactsTableData().get(i);
 			if(contactData.getPublicCode().equals(contactPublicCode))
 				return contactData.getContactName();
 		}
@@ -263,10 +263,10 @@ public class FxWizardAddContactsController extends FxStep4Controller
 				public void handle(ActionEvent event) 
 				{
 					int index = getIndex();
-					ContactKey currentContactSelected = data.get(index).getContact();
+					ContactKey currentContactSelected = getContactsTableData().get(index).getContact();
 					ContactsTableData contactData = verifyContact(currentContactSelected, true);
 					if(contactData != null)
-						data.set(index, contactData);
+						getContactsTableData().set(index, contactData);
 
 				}
 			}
@@ -547,9 +547,9 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	public void saveContacts()
 	{
 		ContactKeys allContactsInTable = new ContactKeys();
-		for(int i =0; i < data.size(); ++i)
+		for(int i =0; i < getContactsTableData().size(); ++i)
 		{
-			ContactKey contact = data.get(i).getContact();
+			ContactKey contact = getContactsTableData().get(i).getContact();
 			allContactsInTable.add(contact);
 		}
 		try
@@ -609,7 +609,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	
 	private void loadExistingContactData()
 	{
-		data.clear();
+		getContactsTableData().clear();
 		
 		try
 		{
@@ -618,7 +618,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			{
 				ContactKey contact = keys.get(i);
 				ContactsTableData contactData = new ContactsTableData(contact); 
-				data.add(contactData);
+				getContactsTableData().add(contactData);
 			}
 		} 
 		catch (Exception e)
@@ -683,6 +683,11 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		}
 			
 	}
+	
+	protected ObservableList<ContactsTableData> getContactsTableData()
+	{
+		return data;
+	}
 
 	@FXML 
 	protected TableView<ContactsTableData> contactsTable;
@@ -721,7 +726,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	@FXML
 	protected VBox contactsVbox;
 	
-	protected ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
+	private ObservableList<ContactsTableData> data = FXCollections.observableArrayList();
 	
 	private boolean showOldPublicCode;
 	

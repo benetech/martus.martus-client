@@ -50,7 +50,7 @@ public class FxManageContactsController extends FxWizardAddContactsController
 	{
 		super.initializeMainContentPane();
 		
-		data.addListener((ListChangeListener<ContactsTableData>) change -> {setContactsDataChanged();});
+		getContactsTableData().addListener((ListChangeListener<ContactsTableData>) change -> {setContactsDataChanged();});
 		//TODO remove this and figure out a better solution in FXML
 		contactsVbox.setMaxWidth(MAX_WIDTH_CONTACTS_TABLE);
 
