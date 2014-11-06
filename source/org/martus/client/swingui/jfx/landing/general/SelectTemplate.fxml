@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane minHeight="400" minWidth="600" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+
+<VBox>
+	<children>
+		<HBox styleClass="titleBox" minWidth="600">
+			<Label styleClass="titleText" alignment="CENTER" text="Template Selector">
+			</Label>
+		</HBox>
+		<VBox styleClass="mainBox">
+		<Label styleClass="headingLevel1" text="Available Templates" />
+		</VBox>
+		<VBox styleClass="listViewBox">
+			<children>
+				<ListView fx:id="availableTemplates" prefWidth="400">
+				</ListView>
+			</children>
+		</VBox>
+		<HBox styleClass="buttonRow">
+			<Button mnemonicParsing="false" text="Select" onAction="#onSelect">
+			</Button>
+		</HBox>
+	</children>
+</VBox>
+
+</Pane>
