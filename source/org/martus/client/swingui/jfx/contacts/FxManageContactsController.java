@@ -51,7 +51,7 @@ public class FxManageContactsController extends FxWizardAddContactsController
 	{
 		super.initializeMainContentPane();
 		
-		FXCollections.copy(initialContactsTableData, getContactsTableData());
+		initialContactsTableData = FXCollections.observableArrayList(getContactsTableData());
 		//TODO remove this and figure out a better solution in FXML
 		contactsVbox.setMaxWidth(MAX_WIDTH_CONTACTS_TABLE);
 
@@ -88,7 +88,7 @@ public class FxManageContactsController extends FxWizardAddContactsController
 	
 	protected boolean hasContactsDataChanged()
 	{
-		return !initialContactsTableData.containsAll(getContactsTableData());
+		return !getContactsTableData().equals(initialContactsTableData);
 	}
 	
 	@Override
