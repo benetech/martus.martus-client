@@ -2121,7 +2121,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		MartusLogger.logEndProcess("Initializing views");
 
 		MartusLogger.logBeginProcess("Checking server status");
-		checkServerStatus();	
+		setWaitingCursor();
+		checkServerStatus();
+		resetCursor();
 		MartusLogger.logEndProcess("Checking server status");
 	}
 
