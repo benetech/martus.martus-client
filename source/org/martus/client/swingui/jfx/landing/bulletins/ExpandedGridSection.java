@@ -61,14 +61,21 @@ public class ExpandedGridSection extends TitledPane
 	public void createAndSetContent()
 	{
 		itemBox = new VBox();
-		GridFieldData gridData = gridField.gridDataProperty();
-		gridData.forEach((rowData) -> addItemControls(rowData));
-		
-
+		addEmptyRowIfEditing();
 		mainBorderPane = new BorderPane();
 		mainBorderPane.setCenter(itemBox);
 		includeAddItemButtonIfEditing();
 		setContent(mainBorderPane);
+	}
+
+	public void addEmptyRowIfEditing()
+	{
+		boolean hasData = !gridField.getValue().isEmpty();
+		if(hasData || (fieldCreator.isFieldEditable() && !hasData))
+		{
+			GridFieldData gridData = gridField.gridDataProperty();
+			gridData.forEach((rowData) -> addItemControls(rowData));
+		}
 	}
 
 	private void addItemControls(GridRowFields rowData)
