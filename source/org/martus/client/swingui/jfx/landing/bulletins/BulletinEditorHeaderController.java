@@ -38,6 +38,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import org.martus.client.core.FxBulletin;
+import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
@@ -124,7 +125,7 @@ public class BulletinEditorHeaderController extends FxInSwingController
 	{
 		try
 		{
-			currentListOfAccounts.add(getContactsNameOrPublicCode(getLocalization(), key, ourContacts));
+			currentListOfAccounts.add(getContactsNameOrPublicCode(getLocalization(), getApp(), key, ourContacts));
 		} 
 		catch (Exception e)
 		{
@@ -132,8 +133,12 @@ public class BulletinEditorHeaderController extends FxInSwingController
 		}
 	}
 
-	static public String getContactsNameOrPublicCode(MartusLocalization localization, HeadquartersKey key, ContactKeys ourContacts) throws Exception  
+	static public String getContactsNameOrPublicCode(MartusLocalization localization, MartusApp app, HeadquartersKey key, ContactKeys ourContacts) throws Exception  
 	{
+		String accountId = app.getSecurity().getPublicKeyString();
+		if (key.getPublicKey().equals(accountId))
+			return app.getUserName();
+
 		String contactName = ourContacts.getLabelIfPresent(key.getPublicKey());
 		if(!contactName.isEmpty())
 			return contactName;
@@ -141,9 +146,11 @@ public class BulletinEditorHeaderController extends FxInSwingController
 		String contactsPublicCode = key.getFormattedPublicCode40();
 		if(ourContacts.containsKey(key.getPublicKey()))
 			return contactsPublicCode;
+		
 		String notInContactsWarning = localization.getFieldLabel("AuthorizedToReadNotInContacts");
 		HashMap tokenReplacement = new HashMap();
 		tokenReplacement.put("#PublicCode#", contactsPublicCode);
+		
 		return TokenReplacement.replaceTokens(notInContactsWarning, tokenReplacement);
 	}
 
