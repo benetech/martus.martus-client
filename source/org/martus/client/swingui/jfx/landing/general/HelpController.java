@@ -90,6 +90,7 @@ public class HelpController extends FxController
 		buildDate.append(" ");
 		buildDate.append(VersionBuildDate.getVersionBuildDate());
 
+		versionInfoBox.getChildren().add(new Label(""));
 		versionInfoBox.getChildren().add(new Label(versionInfo.toString()));
 		if(mlpDateInfo.length() > 0)
 			versionInfoBox.getChildren().add(new Label(mlpDateInfo.toString()));
@@ -112,7 +113,6 @@ public class HelpController extends FxController
 		noticeArea.setPrefHeight(225);
 		noticeArea.setEditable(false);
 		versionInfoBox.getChildren().add(noticeArea);		
-		versionInfoBox.getChildren().add(new Label(""));
 	}
 	
 	public final class OnBenetechClicked implements EventHandler<ActionEvent>
