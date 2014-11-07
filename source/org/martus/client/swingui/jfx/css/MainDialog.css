@@ -1,0 +1,90 @@
+.background {
+	-fx-background-color: #FFFFFF;
+}
+
+.titleBox {
+	-fx-padding:3 10 5 3;
+	-fx-alignment:baseline-center;
+	-fx-background-color:#2c2c2c;
+	-fx-border-color: #7fc831;
+	-fx-border-width: 0 0 2 0;
+	-fx-border-style:solid;
+}
+
+.titleText {
+	-fx-font-size: 13px;
+	-fx-text-fill: #ffffff;
+	-fx-font-family: "Helvetica";
+	-fx-text-alignment:center;
+}
+
+.mainBox {
+	-fx-padding:5 15 5 15;
+	-fx-alignment:left;
+}
+
+.headingLevel1 {
+	-fx-font-size: 15px;
+	-fx-text-fill: #7fc831;
+	-fx-font-weight: bold;
+	-fx-font-family: "Helvetica";
+	-fx-text-alignment:left;
+	-fx-padding:5 0 5 0;
+}
+
+.listViewBox {
+	-fx-padding:0 15 5 15;
+	-fx-alignment:left;
+}
+
+.button {
+    -fx-background-color: #7fc733;
+    -fx-border-radius: .25;
+    -fx-text-fill: #FFFFFF;
+	-fx-font-size: 16px;
+    -fx-alignment: center;
+    -fx-padding: 5 35 10 35;
+}
+
+.button:hover {
+	-fx-background-color: #1397e9;
+	-fx-border-radius: .25;
+	-fx-text-fill: White;
+	-fx-alignment: center;
+	-fx-font-size: 16px;
+    -fx-padding: 5 35 10 35;
+}
+
+.button:pressed {
+	-fx-background-color: #1397e9;
+	-fx-border-radius: .25;
+	-fx-font-weight: bold;
+	-fx-text-fill: White;
+	-fx-alignment: center;
+	-fx-font-size: 16px;
+    -fx-padding: 5 35 10 35;
+}
+
+.buttonRow {
+	-fx-padding:10 15 20 15;
+	-fx-alignment:baseline-right;
+}
+
+.list-view,
+.list-view:focused {
+    -fx-border-width: 1;
+    -fx-border-color: #2c2c2c;
+    -fx-border-radius: 5;
+    -fx-background-insets: 0;
+}
+
+
+.list-cell:even {
+    -fx-cell-hover-color: #7fc831;
+    -fx-background-color: #ffffff;
+}
+
+.list-cell:odd {
+    -fx-cell-hover-color: #7fc831;
+    -fx-background-color: #f7f7f7;
+}
