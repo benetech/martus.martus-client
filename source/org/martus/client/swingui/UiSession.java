@@ -53,14 +53,16 @@ public class UiSession
 
 	public void initalizeUiState()
 	{
+		initalizeUiState(MiniLocalization.ENGLISH);
+	}
+	
+	public void initalizeUiState(String defaultLanguageCode)
+	{
 		uiState = new CurrentUiState();
 		
-		if(uiState.getCurrentLanguage() == null)
-		{
-			getLocalization().setCurrentLanguageCode(MiniLocalization.ENGLISH);
-			getLocalization().setCurrentDateFormatCode(new DatePreference().getDateTemplate());
-			getLocalization().setCurrentCalendarSystem(MiniLocalization.GREGORIAN_SYSTEM);
-		}
+		getLocalization().setCurrentLanguageCode(defaultLanguageCode);
+		getLocalization().setCurrentDateFormatCode(new DatePreference().getDateTemplate());
+		getLocalization().setCurrentCalendarSystem(MiniLocalization.GREGORIAN_SYSTEM);
 
 		File uiStateFile = getUiStateFile();
 		if(!uiStateFile.exists())

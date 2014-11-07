@@ -79,8 +79,8 @@ public class FxVerifyAccountController extends FxStep1Controller
 		showBusyDialog(message, task, getWizardStage());
 		getMainWindow().setCreatedNewAccount(true);
 		
-		getApp().loadConfigInfo();
-		getMainWindow().initalizeUiState();
+		String languageCodeUserStartedWith = getMainWindow().getLocalization().getCurrentLanguageCode();
+		getMainWindow().initalizeUiState(languageCodeUserStartedWith);
 		getApp().doAfterSigninInitalization();
 	}
 	
