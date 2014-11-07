@@ -31,7 +31,6 @@ import javafx.stage.FileChooser;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.setupwizard.step4.FxWizardAddContactsController;
 import org.martus.common.MartusLogger;
 
 
