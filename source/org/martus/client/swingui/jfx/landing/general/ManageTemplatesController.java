@@ -66,10 +66,11 @@ import org.martus.client.swingui.dialogs.UiCustomFieldsDlg;
 import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.jfx.common.AbstractFxImportFormTemplateController;
+import org.martus.client.swingui.jfx.common.FxImportFormTemplateFromMyContactsPopupController;
+import org.martus.client.swingui.jfx.common.FxSetupFormTemplateFromNewContactPopupController;
 import org.martus.client.swingui.jfx.common.TemplatePropertiesController;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
-import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.Exceptions.ServerNotCompatibleException;
@@ -97,8 +98,15 @@ public class ManageTemplatesController extends FxInSwingController
 	{
 		super.initialize(location, bundle);
 		
-		initializeAvailableTab();
-		initializeAddTab();
+		try
+		{
+			initializeAvailableTab();
+			initializeAddTab();
+		}
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
 	}
 
 	private void initializeAvailableTab()
@@ -278,7 +286,7 @@ public class ManageTemplatesController extends FxInSwingController
 		selectionModel.select(selected);
 	}
 	
-	private void initializeAddTab()
+	private void initializeAddTab() throws Exception
 	{
 		templateToAddProperty = new SimpleObjectProperty<FormTemplate>();
 		
@@ -290,13 +298,24 @@ public class ManageTemplatesController extends FxInSwingController
 		ReadOnlyObjectProperty<AbstractFxImportFormTemplateController> selectedDownloadTypeProperty = downloadChoiceBox.getSelectionModel().selectedItemProperty();
 		selectedDownloadTypeProperty.addListener(new DownloadTypeSelectedHandler());
 		downloadChoiceBox.visibleProperty().bind(downloadRadioButton.selectedProperty());
-		downloadChoiceBox.setItems(FxSetupImportTemplatesController.getImportTemplateChoices(getMainWindow()));
+		downloadChoiceBox.setItems(getImportTemplateChoices());
 		
 		chooseFileButton.visibleProperty().bind(importFileRadioButton.selectedProperty());
 		
 		genericRadioButton.setSelected(true);
 		
 		addTemplateButton.disableProperty().bind(Bindings.isNull(templateToAddProperty));
+	}
+	
+	private ObservableList<AbstractFxImportFormTemplateController> getImportTemplateChoices() throws Exception
+	{
+		Vector<AbstractFxImportFormTemplateController> choices = new Vector<AbstractFxImportFormTemplateController>();
+		if (!getApp().getAllHQKeys().isEmpty())
+			choices.add(new FxImportFormTemplateFromMyContactsPopupController(getMainWindow()));
+		
+		choices.add(new FxSetupFormTemplateFromNewContactPopupController(getMainWindow()));
+
+		return FXCollections.observableArrayList(choices);
 	}
 	
 	protected class GenericTemplateSelectedHandler implements ChangeListener<FormTemplate>
