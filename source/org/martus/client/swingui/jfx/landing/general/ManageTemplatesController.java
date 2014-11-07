@@ -109,19 +109,19 @@ public class ManageTemplatesController extends FxInSwingController
         templateNameColumn.setComparator(sorter);
 
         Image trashImage = new Image(TRASH_IMAGE_PATH);
-        templateDeleteColumn.setCellFactory(new FxButtonTableCellFactory(trashImage, () -> deleteSelectedTemplate()));
+        templateDeleteColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(trashImage, () -> deleteSelectedTemplate()));
         templateDeleteColumn.setCellValueFactory(new PropertyValueFactory<Object,Boolean>(ManageTemplatesTableRowData.CAN_DELETE_NAME));
         
         Image uploadImage = new Image(UPLOAD_IMAGE_PATH);
-        templateUploadColumn.setCellFactory(new FxButtonTableCellFactory(uploadImage, () -> uploadSelectedTemplate()));
+        templateUploadColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(uploadImage, () -> uploadSelectedTemplate()));
         templateUploadColumn.setCellValueFactory(new PropertyValueFactory<Object,Boolean>(ManageTemplatesTableRowData.CAN_UPLOAD_NAME));
         
         Image exportImage = new Image(EXPORT_IMAGE_PATH);
-        templateExportColumn.setCellFactory(new FxButtonTableCellFactory(exportImage, () -> exportSelectedTemplate()));
+        templateExportColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(exportImage, () -> exportSelectedTemplate()));
         templateExportColumn.setCellValueFactory(new PropertyValueFactory<Object,Boolean>(ManageTemplatesTableRowData.CAN_EXPORT_NAME));
         
         Image editImage = new Image(EDIT_IMAGE_PATH);
-        templateEditColumn.setCellFactory(new FxButtonTableCellFactory(editImage, () -> editSelectedTemplate()));
+        templateEditColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(editImage, () -> editSelectedTemplate()));
         templateEditColumn.setCellValueFactory(new PropertyValueFactory<Object,Boolean>(ManageTemplatesTableRowData.CAN_EDIT_NAME));
         
         populateAvailableTemplatesTable();

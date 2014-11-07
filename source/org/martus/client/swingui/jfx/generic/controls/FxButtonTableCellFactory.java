@@ -34,19 +34,42 @@ import org.martus.client.swingui.actions.ActionDoer;
 
 public class FxButtonTableCellFactory implements Callback<TableColumn<Object, Boolean>, TableCell<Object, Boolean>>
 {
-	public FxButtonTableCellFactory(Image imageToUse, ActionDoer doerToUse)
+	public static FxButtonTableCellFactory createNormalButtonTableCellFactory(Image buttonImageToUse, ActionDoer doerToUse)
+	{
+		return new FxButtonTableCellFactory(buttonImageToUse, doerToUse);
+	}
+
+	public static FxButtonTableCellFactory createNarrowButtonTableCell(Image buttonImageToUse, ActionDoer doerToUse)
+	{
+		FxButtonTableCellFactory fxButtonTableCellFactory = new FxButtonTableCellFactory(buttonImageToUse, doerToUse);
+		fxButtonTableCellFactory.useNarrowButtons();
+		return fxButtonTableCellFactory;
+	}
+	
+	
+	private FxButtonTableCellFactory(Image imageToUse, ActionDoer doerToUse)
 	{
 		buttonImage = imageToUse;
 		doer = doerToUse;
 	}
 	
+	private void useNarrowButtons()
+	{
+		narrowButtons = true;
+	}
+
 	@Override
 	public TableCell call(final TableColumn param) 
 	{
-		FxButtonTableCell cell = new FxButtonTableCell(buttonImage, doer);
+		FxButtonTableCell cell;
+		if(narrowButtons)
+			cell = FxButtonTableCell.createNarrowButtonTableCell(buttonImage, doer);
+		else
+			cell = FxButtonTableCell.createNormalButtonTableCell(buttonImage, doer);
 		return cell;
 	}
 	
+	private boolean narrowButtons;
 	private Image buttonImage;
 	private ActionDoer doer;
 }

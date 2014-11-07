@@ -124,11 +124,11 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		dateSavedColumn.setCellFactory(TextFieldTableCell.<BulletinTableRowData>forTableColumn());
 		
         Image viewImage = new Image(VIEW_BULLETIN_IMAGE_PATH);
-        viewBulletinColumn.setCellFactory(new FxButtonTableCellFactory(viewImage, () -> viewSelectedBulletin()));
+        viewBulletinColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(viewImage, () -> viewSelectedBulletin()));
 		viewBulletinColumn.setCellValueFactory(new PropertyValueFactory<Object, Boolean>(BulletinTableRowData.CAN_VIEW_PROPERTY_NAME));
 		
         Image editImage = new Image(EDIT_BULLETIN_IMAGE_PATH);
-        editBulletinColumn.setCellFactory(new FxButtonTableCellFactory(editImage, () -> editSelectedBulletin()));
+        editBulletinColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(editImage, () -> editSelectedBulletin()));
 		editBulletinColumn.setCellValueFactory(new PropertyValueFactory<Object, Boolean>(BulletinTableRowData.CAN_EDIT_PROPERTY_NAME));
 		editBulletinColumn.visibleProperty().bind(getTrashNotBeingDisplayedBinding());
 	}

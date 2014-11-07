@@ -34,12 +34,29 @@ import org.martus.client.swingui.actions.ActionDoer;
 
 public class FxButtonTableCell extends TableCell
 {
-	public FxButtonTableCell(Image buttonImageToUse, ActionDoer doerToUse)
+	public static FxButtonTableCell createNormalButtonTableCell(Image buttonImageToUse, ActionDoer doerToUse)
+	{
+		return new FxButtonTableCell(buttonImageToUse, doerToUse);
+	}
+
+	public static FxButtonTableCell createNarrowButtonTableCell(Image buttonImageToUse, ActionDoer doerToUse)
+	{
+		FxButtonTableCell fxButtonTableCell = new FxButtonTableCell(buttonImageToUse, doerToUse);
+		fxButtonTableCell.setButtonStyle(NARROW_BUTTON_STYLE);
+		return fxButtonTableCell;
+	}
+
+	private void setButtonStyle(String styleToUse)
+	{
+		buttonStyling = styleToUse;
+	}
+
+	private FxButtonTableCell(Image buttonImageToUse, ActionDoer doerToUse)
 	{
 		buttonImage = buttonImageToUse;
 		doer = doerToUse;
 	}
-
+	
 	@Override
 	public void updateItem(Object cellObject, boolean empty) 
 	{
@@ -52,7 +69,7 @@ public class FxButtonTableCell extends TableCell
 		if (doesRowSupportButtonAction) 
 		{
 			button = new Button(null, new ImageView(buttonImage));
-
+			button.getStyleClass().add(buttonStyling);
 			FxTableCellButtonActionHandler handler = new FxTableCellButtonActionHandler(getTableView(), doer);
 			handler.setTableRowIndex(getIndex());
 			button.setOnAction(handler);
@@ -62,6 +79,8 @@ public class FxButtonTableCell extends TableCell
 		setGraphic(button);
 	}
 	
+	static final private String NARROW_BUTTON_STYLE = "button-minpadding";
 	private Image buttonImage;
 	private ActionDoer doer;
+	private String buttonStyling = "";
 }

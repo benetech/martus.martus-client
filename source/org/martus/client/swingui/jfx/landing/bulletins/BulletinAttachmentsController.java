@@ -93,11 +93,11 @@ public class BulletinAttachmentsController extends FxController
 		sizeColumn.setCellFactory(TextFieldTableCell.<AttachmentTableRowData>forTableColumn());
 
 		Image viewImage = new Image(VIEW_ATTACHMENT_IMAGE_PATH);
-		viewColumn.setCellFactory(new FxButtonTableCellFactory(viewImage, () -> viewSelectedAttachment()));
+		viewColumn.setCellFactory(FxButtonTableCellFactory.createNormalButtonTableCellFactory(viewImage, () -> viewSelectedAttachment()));
 		viewColumn.setCellValueFactory(new PropertyValueFactory<Object, Boolean>(AttachmentTableRowData.ATTACHMENT_VIEW_PROPERTY_NAME));
 
 		Image removeImage = new Image(REMOVE_ATTACHMENT_IMAGE_PATH);
-		removeColumn.setCellFactory(new FxButtonTableCellFactory(removeImage, () -> removeSelectedAttachment()));
+		removeColumn.setCellFactory(FxButtonTableCellFactory.createNormalButtonTableCellFactory(removeImage, () -> removeSelectedAttachment()));
 		removeColumn.setCellValueFactory(new PropertyValueFactory<Object, Boolean>(AttachmentTableRowData.ATTACHMENT_REMOVE_PROPERTY_NAME));
 	}
 	
