@@ -448,7 +448,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		@Override
 		public String getFxmlLocation()
 		{
-			return "setupwizard/step4/VerifyContactPopup.fxml";
+			return "contacts/VerifyContactPopup.fxml";
 		}
 
 		@Override
