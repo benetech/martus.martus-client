@@ -9,19 +9,19 @@
      <center>
         <VBox BorderPane.alignment="CENTER">
            <children>
-              <VBox fx:id="versionInfoBox" />
-               <HBox>
+               <HBox alignment="CENTER_LEFT">
                   <children>
-                  		<Label text="For assistance with Martus, please send an email to" />
+                  		<Label text="For assistance with Martus, there is help documentation available at" />
                   		<Hyperlink onAction="#onLinkEMailTo" text="help@martus.org" />
                   </children>
               </HBox>
-              <HBox>
+              <HBox alignment="CENTER_LEFT">
                  <children>
-                  		<Label text="There is also help documentation available" />
+                  		<Label text="or you can send an email to" />
                   		<Hyperlink onAction="#onMartusLinkClick" text="martus.org" />
                  </children>
               </HBox>
+              <VBox fx:id="versionInfoBox" />
            </children>
         </VBox>
      </center>
