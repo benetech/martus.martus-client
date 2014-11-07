@@ -31,6 +31,7 @@ import java.util.Map;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -113,8 +114,22 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		loadExistingContactData();
 		updateAddContactButtonState();
 		accessTokenField.textProperty().addListener(new AccessTokenChangeHandler());
+		
+		getContactsTableData().addListener(new TableRowAddRemoveChangeHandler());
+		addTableDataListener();
 	}
 
+	private void addTableDataListener()
+	{
+		for(ContactsTableData contactData : getContactsTableData())
+		{
+			TableDataChangeListener tableDataChangeListener = new TableDataChangeListener();
+			contactData.contactNameProperty().addListener(tableDataChangeListener);
+			contactData.sendToByDefaultProperty().addListener(tableDataChangeListener);
+			contactData.verificationStatusProperty().addListener(tableDataChangeListener);
+		}
+	}
+	
 	protected void removeContactFromTable(ContactsTableData contactData)
 	{
 		getContactsTableData().remove(contactData);
@@ -573,7 +588,6 @@ public class FxWizardAddContactsController extends FxStep4Controller
 		{
 			updateAddContactButtonState();
 		}
-
 	}
 	
 	protected void updateAddContactButtonState()
@@ -692,6 +706,34 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	{
 		return data;
 	}
+	
+	protected void setDataChanged()
+	{
+		hasDataChanged = true;
+	}
+	
+	public boolean hasContactsDataChanged()
+	{
+		return hasDataChanged;
+	}
+	
+	protected class TableDataChangeListener implements ChangeListener
+	{
+		@Override
+		public void changed(ObservableValue arg0, Object arg1, Object arg2)
+		{
+			setDataChanged();
+		}
+	}
+	
+	protected class TableRowAddRemoveChangeHandler implements ListChangeListener<ContactsTableData>
+	{
+		@Override
+		public void onChanged(javafx.collections.ListChangeListener.Change<? extends ContactsTableData> arg0)
+		{
+			setDataChanged();
+		}
+	}
 
 	@FXML 
 	protected TableView<ContactsTableData> contactsTable;
@@ -735,6 +777,7 @@ public class FxWizardAddContactsController extends FxStep4Controller
 	private boolean showOldPublicCode;
 	
 	private MartusAccountAccessToken accountToken;
+	private boolean hasDataChanged;
 
 	private static final int MAX_TABLE_WIDTH_IN_WIZARD = 660;
 }
