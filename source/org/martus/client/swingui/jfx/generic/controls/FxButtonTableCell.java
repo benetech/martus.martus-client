@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
  */
 package org.martus.client.swingui.jfx.generic.controls;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.image.Image;
@@ -74,7 +75,7 @@ public class FxButtonTableCell extends TableCell
 			handler.setTableRowIndex(getIndex());
 			button.setOnAction(handler);
 		}
-
+		setAlignment(Pos.CENTER);
 		setText(null);
 		setGraphic(button);
 	}
