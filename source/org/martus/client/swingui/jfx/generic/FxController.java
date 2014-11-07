@@ -45,6 +45,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
@@ -254,7 +255,7 @@ abstract public class FxController implements Initializable
 			String yesButtonText = localization.getButtonLabel(yesButtonTag);
 			String noButtonText = localization.getButtonLabel(noButtonTag);
 			PopupConfirmationController popupController = new PopupConfirmationController(getMainWindow(), titleText, yesButtonText, noButtonText, mainAreaController);
-			showControllerInsideModalDialog(popupController);
+			showControllerInsideModalDialog(popupController, mainAreaController);
 			return popupController.wasYesPressed();
 		} 
 		catch (Exception e)
@@ -298,6 +299,18 @@ abstract public class FxController implements Initializable
 	public void showControllerInsideModalDialog(FxPopupController controller) throws Exception
 	{
 		FxStage popupStage = new FxStage(mainWindow, controller);
+		showControllerInsideModalDialog(popupStage, controller);
+	}
+	
+	public void showControllerInsideModalDialog(FxPopupController controller, FxController mainAreaController) throws Exception
+	{
+		FxStage popupStage = new FxStage(mainWindow, controller);
+		mainAreaController.setParentWindow(popupStage);
+		showControllerInsideModalDialog(popupStage, controller);
+	}
+
+	private void showControllerInsideModalDialog(FxStage popupStage, FxPopupController controller) throws Exception, IOException
+	{
 		FXMLLoader fl = new FXMLLoader();
 		fl.setResources(new MartusResourceBundle(getLocalization()));
 		fl.setController(controller);
@@ -437,6 +450,16 @@ abstract public class FxController implements Initializable
 	public static class UserCancelledException extends Exception
 	{
 	}
+	
+	public void setParentWindow(Window parentWindowToUse)
+	{
+		parentWindow = parentWindowToUse;
+	}
+	
+	public Window getParentWindow()
+	{
+		return parentWindow;
+	}
 
 	private static final String POPUP_CSS = "Popup.css";
 	private static final String MARTUS_CSS = "Martus.css";
@@ -445,4 +468,5 @@ abstract public class FxController implements Initializable
 	private static int notifyDialogDepth;
 	private FxShellController shellController;
 	private FxController parentController;
+	private Window parentWindow;
 }

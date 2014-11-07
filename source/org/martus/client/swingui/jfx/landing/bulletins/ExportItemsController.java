@@ -39,7 +39,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
 import org.martus.client.core.MartusApp;
@@ -49,6 +48,8 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
 import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.generic.FxModalDirectoryChooser;
+import org.martus.client.swingui.jfx.landing.general.FxModalFileChooser;
 import org.martus.clientside.FormatFilter;
 
 public class ExportItemsController extends FxController
@@ -235,19 +236,19 @@ public class ExportItemsController extends FxController
 
 	protected File getFileSaveLocation()
 	{
-		//FIXME: These dialogs can be hidden behind caller window
 		MartusLocalization localization = getLocalization();
 		
 		//NOTE: DirectoryChooser and FileChooser are unfortunately derived from Object.
 		if(showDirectoryOnly())
 		{
-			DirectoryChooser directoryChooser = new DirectoryChooser();
+			FxModalDirectoryChooser directoryChooser = new FxModalDirectoryChooser(getParentWindow());
 			directoryChooser.setTitle(localization.getWindowTitle("FolderSelectDialogExport"));
 			directoryChooser.setInitialDirectory(exportFolder);
-			return directoryChooser.showDialog(null);
+			
+			return directoryChooser.showDialog();
 		}
 		
-		FileChooser fileChooser = new FileChooser();
+		FxModalFileChooser fileChooser = new FxModalFileChooser(getParentWindow());
 		fileChooser.setTitle(localization.getWindowTitle("FileSaveDialogExport"));
 		fileChooser.setInitialDirectory(exportFolder);
 		File currentUniqueFile = getExportFileOrFolder();
@@ -256,7 +257,8 @@ public class ExportItemsController extends FxController
 		fileChooser.getExtensionFilters().addAll(
 				new FileChooser.ExtensionFilter(fileFilter.getDescription(), fileFilter.getWildCardExtension()),
 				new FileChooser.ExtensionFilter(localization.getFieldLabel("AllFiles"), "*.*"));
-		return fileChooser.showSaveDialog(null);
+
+		return fileChooser.showSaveDialog();
 	}
 
 	@FXML
