@@ -926,6 +926,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		}
 		else
 		{
+			if(UiSession.isJavaFx())
+				return;
 			complianceStatementAlwaysEnglish =
 			BEGIN_HTML_TAGS +
 			"Martus(TM)<br></br>" +
