@@ -49,7 +49,7 @@ import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
 import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxModalDirectoryChooser;
-import org.martus.client.swingui.jfx.landing.general.FxModalFileChooser;
+import org.martus.client.swingui.jfx.generic.FxModalFileChooser;
 import org.martus.clientside.FormatFilter;
 
 public class ExportItemsController extends FxController
