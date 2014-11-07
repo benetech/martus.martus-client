@@ -40,12 +40,14 @@ import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExists
 import org.martus.client.core.MartusClientXml;
 import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.client.test.MockBulletinStore;
+import org.martus.client.test.MockMartusApp;
 import org.martus.common.BulletinSummary;
 import org.martus.common.Exceptions.InvalidBulletinStateException;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusXml;
+import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.Bulletin.BulletinState;
@@ -58,6 +60,8 @@ import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.MockDatabase;
+import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.StandardFieldSpecs;
@@ -1770,12 +1774,32 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	public void testImportZipFileWithAttachmentDraft() throws Exception
 	{
 		TRACE("testImportZipFileWithAttachmentDraft");
-		Bulletin original = testStore.createEmptyBulletin();
+
+		ReusableChoices choices = new ReusableChoices("choicescode", "Choices Label");
+		String aLabel = "Fabulous A";
+		choices.add(new ChoiceItem("a", aLabel));
+		String bLabel = "Excellent B";
+		choices.add(new ChoiceItem("b", bLabel));
+		MockMartusApp app = MockMartusApp.create(getName());
+		FieldSpecCollection defaultSpecs = app.getStore().getTopSectionFieldSpecs();
+		FieldSpecCollection specs = new FieldSpecCollection();
+		for(int i = 0; i < defaultSpecs.size(); ++i)
+			specs.add(defaultSpecs.get(i));
+		specs.addReusableChoiceList(choices);
+		CustomDropDownFieldSpec dropdown = new CustomDropDownFieldSpec();
+		String customDropdownTag = "DropDownTag";
+		dropdown.setTag(customDropdownTag);
+		dropdown.setLabel("Dropdown");
+		dropdown.addReusableChoicesCode(choices.getCode());
+		specs.add(dropdown);
+		
+		Bulletin original = testStore.createEmptyBulletin(specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		DatabaseKey originalKey = DatabaseKey.createLegacyKey(original.getUniversalId());
 		AttachmentProxy a = new AttachmentProxy(tempFile1);
 		AttachmentProxy aPrivate = new AttachmentProxy(tempFile2);
 		original.set(Bulletin.TAGTITLE, "abc");
 		original.set(Bulletin.TAGPRIVATEINFO, "private");
+		original.set(customDropdownTag, bLabel);
 		original.addPublicAttachment(a);
 		original.addPrivateAttachment(aPrivate);
 		testStore.saveBulletin(original);
@@ -1804,6 +1828,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("Private Packet present?", false, db.doesRecordExist(privateKey));
 		assertEquals("Attachment Public Packet present?", false, db.doesRecordExist(attachmentKey));
 		assertEquals("Attachment Private Packet present?", false, db.doesRecordExist(attachmentPrivateKey));
+		assertEquals("custom field missing before load?", bLabel, original.get(customDropdownTag));
 
 		Bulletin reloaded = testStore.loadFromDatabase(DatabaseKey.createLegacyKey(savedAsId));
 
@@ -1811,6 +1836,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("private?", original.get(Bulletin.TAGPRIVATEINFO), reloaded.get(Bulletin.TAGPRIVATEINFO));
 		assertEquals("attachment", true, db.doesRecordExist(DatabaseKey.createLegacyKey(reloaded.getPublicAttachments()[0].getUniversalId())));
 		assertEquals("attachment Private", true, db.doesRecordExist(DatabaseKey.createLegacyKey(reloaded.getPrivateAttachments()[0].getUniversalId())));
+		assertEquals("custom field missing?", original.get(customDropdownTag), reloaded.get(customDropdownTag));
 
 		ByteArrayOutputStream publicStream = new ByteArrayOutputStream();
 		BulletinLoader.extractAttachmentToStream(db, reloaded.getPublicAttachments()[0], security, publicStream);
