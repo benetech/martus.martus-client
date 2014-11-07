@@ -35,6 +35,6 @@ public class UiConstants
 	public static String versionLabel = "pre-5.0";
 	public static final String copyrightSymbol = "\u00A9 "; 
 	public static final String copyright = copyrightSymbol + "Copyright 2001-2014, Beneficent Technology, Inc. (The Benetech Initiative)";
+	public static final String websiteURL = "https://www.benetech.org";
 	public static final String website = "(Benetech, at www.benetech.org)";
-
 }

@@ -585,6 +585,7 @@ public class EnglishStrings
 "field:aboutDlgBuildDate=Built on",
 "field:aboutDlgDisclaimer=Martus comes with ABSOLUTELY NO WARRANTY, and is made available under license terms in the file named license.txt in the Martus directory. This is free software, and you are welcome to redistribute it under certain conditions discussed in license.txt. ",
 "field:aboutDlgCredits=Martus Software is developed by Benetech in partnership with the Information Program of the Open Society Institute, Aspiration, and the John D. and Catherine T. MacArthur Foundation.",
+"field:aboutDlgThirdParty=This product includes software developed by the Apache Software Foundation, Bouncy Castle, IBM, JH Labs, JOrtho, JUnit, The Mozilla Foundation, Logi Ragnarsson, Object Refinery Limited, and Subgraph [Orchid].",
 
 "field:status=Status",
 
@@ -1870,7 +1871,7 @@ public class EnglishStrings
 "field:VerifyContactPublicCode=Public Code:",
 "field:VerifyContactPublicCodeOld=Public Code:",
 "button:VerifyContactLater=Verify Later",
-"button:VerifyContactNow=Verify!",
+"button:VerifyContactNow=Verify Now",
 
 "field:SettingUpTor=Setting Up Tor.",
 "field:AccountContact=Account Contact Information",
