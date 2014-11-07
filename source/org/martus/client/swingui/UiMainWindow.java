@@ -2753,6 +2753,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		getSession().initalizeUiState();
 	}
 
+	public void initalizeUiState(String defaultLanguageCode)
+	{
+		getSession().initalizeUiState(defaultLanguageCode);
+	}
+
 	public UiMainPane getMainPane()
 	{
 		return mainPane;
