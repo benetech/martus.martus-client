@@ -373,8 +373,8 @@ public class EnglishStrings
 "field:LoadingTemplates=Please wait while we retrieve a list of templates from the server.",
 "field:FindAccountByToken=Please wait while we find this account on the server.",
 "field:moveToCaseProjectIncidents=Select one or more #FolderName#, to move selected items to.",
-"field:VerifyPublicCodeNewAndOld=Please verify one of the public codes below depending on which public code you received from your contact.  You may visually verify either code, you don't need to verify both.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.",
-"field:VerifyPublicCode=Please verify the public code below against the one you received from your contact.  This ensures you are adding the person you think you are adding.  If you don't have their public code, you can always verify them later.",
+"field:VerifyPublicCodeNewAndOld=A public code is a unique identifier that can help you verify that a contact that you are adding is who they say they are. The number may be a 20 digit string for accounts using Martus 4.4 and below, or a 40 digit string for accounts using Martus 4.5 and above.\n\nYou can visually verify the public code below. If you don’t know your contact’s public code, you can always perform the verification later.\n\nVerification is an important step that only needs to be performed once.",
+"field:VerifyPublicCode=A public code is a unique identifier that can help you verify that a contact that you are adding is who they say they are.\n\nYou can visually verify the public code below. If you don’t know your contact’s public code, you can always perform the verification later.\n\nVerification is an important step that only needs to be performed once.",
 "field:ContactAlreadyExistsAs=This contact currently has the name: '#Name#'",
 
 "field:notifyShowTokenAndPublicCodecause=Access Token: #Token#\nPublic Code: #PublicCode#",
@@ -1868,8 +1868,9 @@ public class EnglishStrings
 "field:ConfirmPassword=Confirm Password",
 "field:UserNameAndPasswordMatches=Username and password match!",
 
-"field:VerifyContactPublicCode=Public Code:",
-"field:VerifyContactPublicCodeOld=Public Code:",
+"field:VerifyContactPublicCode=Verify your contact public code",
+"field:VerifyContactPublicCodeNew=Public code (for Martus 4.5 and above):",
+"field:VerifyContactPublicCodeOld=Public code (for Martus 4.4 and below):",
 "button:VerifyContactLater=Verify Later",
 "button:VerifyContactNow=Verify Now",
 
