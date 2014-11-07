@@ -37,4 +37,5 @@ public class UiConstants
 	public static final String copyright = copyrightSymbol + "Copyright 2001-2014, Beneficent Technology, Inc. (The Benetech Initiative)";
 	public static final String websiteURL = "https://www.benetech.org";
 	public static final String website = "(Benetech, at www.benetech.org)";
+	public static final String martusWebsiteURL = "https://martus.org";
 }

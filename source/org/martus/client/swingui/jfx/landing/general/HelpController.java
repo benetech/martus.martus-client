@@ -105,12 +105,11 @@ public class HelpController extends FxController
 		versionInfoBox.getChildren().add(new Label(""));
 		
 		final String disclaimer = localization.getFieldLabel("aboutDlgDisclaimer");
-		final String credits = localization.getFieldLabel("aboutDlgCredits");
-		final String notice = "\n" + disclaimer + "\n\n" + credits + "\n\n" + localization.getFieldLabel("aboutDlgThirdParty");
+		final String notice = "\n" + disclaimer + "\n\n" + localization.getFieldLabel("aboutDlgThirdParty");
 	
 		TextArea noticeArea = new TextArea(notice);
 		noticeArea.setWrapText(true);
-		noticeArea.setPrefHeight(225);
+		noticeArea.setPrefHeight(150);
 		noticeArea.setEditable(false);
 		versionInfoBox.getChildren().add(noticeArea);		
 	}
@@ -139,7 +138,7 @@ public class HelpController extends FxController
 	@FXML
 	private void onMartusLinkClick(ActionEvent event)
 	{
-		openLink(UiConstants.website);
+		openLink(UiConstants.martusWebsiteURL);
 	}
 	
 	protected void openLink(String link)
