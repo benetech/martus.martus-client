@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.jfx.setupwizard.step4;
+package org.martus.client.swingui.jfx.contacts;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -59,6 +59,7 @@ import org.martus.client.swingui.jfx.generic.FxPopupController;
 import org.martus.client.swingui.jfx.generic.FxTableCellTextFieldFactory;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.client.swingui.jfx.setupwizard.ContactsTableData;
+import org.martus.client.swingui.jfx.setupwizard.step4.FxStep4Controller;
 import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.GetAccountTokenFromServerTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.LookupAccountFromTokenTask;
