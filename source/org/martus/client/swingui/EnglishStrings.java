@@ -284,7 +284,7 @@ public class EnglishStrings
 "wintitle:inputservermagicword=Request Upload Permission",
 "wintitle:inputImportPublicKey=Import Account Public Information",
 "wintitle:inputCustomFields=Customize Fields",
-"wintitle:inputGetShareFileName=Default Backup File Name",
+"wintitle:inputGetShareFileName=Key Backup",
 
 //NOTE: Without notify is for swing; with notify is for javafx 
 "wintitle:ErrorDateInFuture=Date Invalid",
