@@ -1739,7 +1739,7 @@ public class EnglishStrings
 "field:confirmClearHQInformationeffect=By clicking on Yes, any draft or sealed bulletin saved in the future will no longer be accessible by your Contacts.",
 "menu:ManageContacts=Manage Contacts",
 "field:confirmAddingPermissionsToBulletinsCanceleffect=If you do this, the bulletins already processed will have the new headquarters access, but other selected bulletins will not.",
-"field:confirmWarningSwitchToNormalKeyboardeffect=If you have been sent this bulletin from one of your contacts, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.",
+"field:confirmWarningSwitchToNormalKeyboardeffect=If this record was shared with you by one of your contacts, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.",
 "field:confirmCloneBulletinAsMineeffect=Clicking on Yes will create a new bulletin that contains a copy of all the same information. You will be the official author of this new bulletin, and any private data in it will only be visible by you (and your Contact's accounts that you have shared the bulletin with). The original bulletin will remain unchanged.",
 "field:notifyAddPermissionsZeroHeadquartersSelectedcause=Must select at least one contact's account",
 "field:ConfigureHQColumnHeaderPublicCode=Public Code",
