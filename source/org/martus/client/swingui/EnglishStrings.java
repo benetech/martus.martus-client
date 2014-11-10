@@ -41,7 +41,7 @@ public class EnglishStrings
 "wintitle:ServerCompliance=Server Compliance Statement",
 "wintitle:ErrorBackingupKeyPair=Error",
 "wintitle:askToBackupKeyPair=Key Backup Needed",
-"wintitle:BulletinDetailsDialog=Bulletin Details",
+"wintitle:BulletinDetailsDialog=Record Details",
 "wintitle:IncompatibleMtfVersion=Incompatible Translation Version",
 "wintitle:DuplicateLabelsInCustomTemplate=Warning Duplicate Labels Found",
 "wintitle:ImportProgress=Importing Bulletins",
