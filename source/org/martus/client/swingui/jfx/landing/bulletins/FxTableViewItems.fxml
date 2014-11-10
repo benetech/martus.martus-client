@@ -24,7 +24,7 @@
          <left>
           <HBox BorderPane.alignment="CENTER">
              <children>
-                <Button fx:id="trashButton" mnemonicParsing="false" onAction="#onTrashSelectedItems" text="Trash">
+                <Button fx:id="trashButton" mnemonicParsing="false" onAction="#onTrashSelectedItems" text="%Button.Delete">
                    <graphic>
                       <ImageView pickOnBounds="true" preserveRatio="true">
                          <image>
