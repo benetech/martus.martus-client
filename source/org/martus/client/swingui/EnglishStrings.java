@@ -812,7 +812,7 @@ public class EnglishStrings
 "field:confirmOverWriteExistingFilecause=A file already exists with that name.",
 "field:confirmOverWriteExistingFileeffect=The existing file will be deleted and replaced with the new information.",
 "field:confirmCancelModifyBulletincause=You have chosen to cancel modifying this bulletin.",
-"field:confirmCancelModifyBulletineffect=Any changes you have made to this bulletin will be discarded.",
+"field:confirmCancelModifyBulletineffect=Canceling will discard any changes made to this record.",
 "field:confirmSetImportPublicKeycause=You have chosen to allow this client the ability to view your public and PRIVATE data.",
 "field:confirmSetImportPublicKeyeffect=By clicking on Yes you are authorizing this client to view all portions of your bulletins.",
 "field:confirmWarningSwitchToNormalKeyboardcause=Warning! Using the regular keyboard to enter your password greatly reduces the security of the Martus system, and could make it easier for an attacker to view your private data.",
