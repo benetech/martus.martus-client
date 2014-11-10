@@ -1937,7 +1937,7 @@ public class EnglishStrings
 "field:BackupYourKey=Backup Your Key",
 "field:BackupYourKeyInformation=Back it your encryption key to be able to restore your account.",
 "button:CreateSingleEncryptedFile=Export Password Protected Key",
-"field:CreateSingleEncryptedFileInformation=Note: this backup method still requires remembering your username and password to restore your account.",
+"field:CreateSingleEncryptedFileInformation=Note: This backup method requiresyour username and password to restore your account.",
 "field:BackupYourKeyTip1=Be sure to save a copy of your account key to a secure location that is different from the computer where you currently have Martus installed, so you have it if you need to restore your account.",
 "field:BackupYourKeyTip2=Martus also offers a way to back up your key in 3 separate pieces, which is the only way for you to access your Martus account and data if you forget your user name and password. You will be prompted to create the 3 piece backup after completing your account setup and we strongly encourage you to do so.",
 
