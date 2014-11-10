@@ -82,7 +82,7 @@
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Label text="Automatically Download Files from Server?" />
+                                    <Label text="%Button.AutomaticallyDownloadFiles" />
                                     <CheckBox fx:id="automaticallyDownloadFromServer" mnemonicParsing="false" text="Yes" />
                                  </children>
                               </HBox><HBox prefHeight="100.0" prefWidth="200.0">
