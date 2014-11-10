@@ -94,7 +94,7 @@ public class UiBackupRecoverSharedKeyPair
 	public void backupKeyPairToMultipleUnencryptedFiles() 
 	{
 		String message = localization.getFieldLabel("BackupKeyPairToSecretShareInformation");
-		mainWindow.displayScrollableMessage("BackupKeyPairToSecretShareInformation", message, "Continue", getTokenReplacement());
+		mainWindow.displayScrollableMessage("confirmBackupKeyPairInformation", message, "Continue", getTokenReplacement());
 
 		String defaultFileName = getDefaultKeyShareFileName();
 		if(defaultFileName == null)
