@@ -787,7 +787,7 @@ public class EnglishStrings
 "wintitle:FileDialogExportCustomization=Export Customization Template",
 
 "wintitle:AddTemplate=Add Form Template",
-"field:confirmTemplateAlreadyExistscause=A template by that name already exists. If you continue, the old template will be replaced by this new one. Do you wish to continue?",
+"field:confirmTemplateAlreadyExistscause=A template by that name already exists. Select Yes to replace the old template with this new one.",
 
 "wintitle:FileDialogExportPublicKey=Export Public Account Key",
 
