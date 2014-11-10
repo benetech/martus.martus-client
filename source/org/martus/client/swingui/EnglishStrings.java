@@ -390,6 +390,7 @@ public class EnglishStrings
 
 "wintitle:ExitManageContacts=Exit Manage Contacts",
 "field:ExitManageContacts=Your changes will be lost, are you sure you want to do this?",
+"field:confirmExitManageContactseffect=Your changes will be lost, are you sure you want to do this?",
 
 "wintitle:Trash=Trash",
 "wintitle:EmptyTrash=Empty Trash",
