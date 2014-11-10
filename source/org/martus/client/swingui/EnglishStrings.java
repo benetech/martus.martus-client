@@ -236,7 +236,7 @@ public class EnglishStrings
 "wintitle:notifyErrorSavingDictionary=Error",
 "wintitle:notifyErrorLoadingDictionary=Error",
 "wintitle:notifyErrorUpdatingDictionary=Error",
-"wintitle:BulletinContacts=Bulletin Contacts",
+"wintitle:BulletinContacts=Record Contacts",
 
 "wintitle:SelectTemplate=Select Template",
 "field:confirmOkToSwitchTemplate=Changing templates may lose data (need real text here)",
