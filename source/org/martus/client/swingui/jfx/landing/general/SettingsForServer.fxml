@@ -76,7 +76,7 @@
 <children>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Label text="Have Server Default to On? (will be applied on login)" />
+                                    <Label text="%Button.HaveServerDefaulttoOn" />
                                     <CheckBox fx:id="serverDefaultToOn" mnemonicParsing="false" text="Yes" />
                                  </children>
                               </HBox>
