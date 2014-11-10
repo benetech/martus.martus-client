@@ -786,7 +786,7 @@ public class EnglishStrings
 "wintitle:AddTemplate=Add Form Template",
 "field:confirmTemplateAlreadyExistscause=A template by that name already exists. If you continue, the old template will be replaced by this new one. Do you wish to continue?",
 
-"wintitle:FileDialogExportPublicKey=Export Public Account Id",
+"wintitle:FileDialogExportPublicKey=Export Public Account Key",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
