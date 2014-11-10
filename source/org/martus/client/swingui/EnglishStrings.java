@@ -239,7 +239,7 @@ public class EnglishStrings
 "wintitle:BulletinContacts=Record Contacts",
 
 "wintitle:SelectTemplate=Template Selector",
-"field:confirmOkToSwitchTemplate=Changing templates may lose data (need real text here)",
+"field:confirmOkToSwitchTemplate=Changing templates will replace the old template with a new one and may remove existing data from this record.",
 "field:DisplayableDefaultFormTemplateName=Martus Standard Fields",
 
 "wintitle:notifyUnableToLoadCurrentTemplate=Error",
