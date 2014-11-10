@@ -151,7 +151,7 @@ public class EnglishStrings
 "wintitle:notifyErrorSavingState=Error Saving State",
 "wintitle:notifyErrorSavingFile=Error Saving File",
 "wintitle:notifyErrorBackingupKeyPair=Error Verifying Key Pair",
-"wintitle:notifyExportMyPublicKey=Public Account Id Exported",
+"wintitle:notifyExportMyPublicKey=Public Account Key Exported",
 "wintitle:notifyPublicInfoFileError=Error Importing Public Information",
 "wintitle:notifyErrorSavingConfig=Error Saving Configuration File",
 "wintitle:notifyAuthenticateServerFailed=Security Alert!",
