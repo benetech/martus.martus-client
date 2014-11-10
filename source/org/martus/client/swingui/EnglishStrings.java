@@ -32,7 +32,7 @@ public class EnglishStrings
 {
 	public static String strings[] = {
 "wintitle:main=Martus Information Management and Data Collection Framework",
-"wintitle:create=Create Bulletin",
+"wintitle:create=Create Record",
 "wintitle:options=Options",
 "wintitle:HelpDefaultDetails=Help on Bulletin Details Field Default Content",
 "wintitle:MartusSignIn=Martus SignIn",
