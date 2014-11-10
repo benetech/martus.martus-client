@@ -54,7 +54,7 @@ public class EnglishStrings
 "wintitle:confirmretrieve=Confirm Retrieve Bulletins",
 "wintitle:confirmRemoveAttachment=Confirm Remove Attachments",
 "wintitle:confirmOverWriteExistingFile=Confirm Replace Existing File",
-"wintitle:confirmCancelModifyBulletin=Cancel Modify Bulletin",
+"wintitle:confirmCancelModifyBulletin=Cancel Edit",
 "wintitle:confirmSetImportPublicKey=Confirm Import of Public Account Id",
 "wintitle:confirmWarningSwitchToNormalKeyboard=Security Warning",
 "wintitle:confirmCloneMySealedAsDraft=Confirm Create New Version of Sealed Bulletin",
