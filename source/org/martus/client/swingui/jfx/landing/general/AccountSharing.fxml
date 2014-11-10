@@ -13,7 +13,7 @@
        	<Label styleClass="headingLevel3" text="%AccountInfoPublicCode40" />
        	<TextField styleClass="headingLevel3" fx:id="accountPublicCode" text="" />
 
-       	<Button mnemonicParsing="false" onAction="#onExportPublicKey" text="Export Account Public Key"/>
+       	<Button mnemonicParsing="false" onAction="#onExportPublicKey" text="%Button.ExportAccountPublicKey"/>
       </VBox>
    </children>
 </VBox>
