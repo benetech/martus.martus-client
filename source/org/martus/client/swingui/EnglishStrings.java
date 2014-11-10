@@ -878,7 +878,7 @@ public class EnglishStrings
 "field:confirmBackupKeyPairInformationeffect=Choosing Yes will begin the backup process.",		
 "field:confirmhelpStringNotFoundcause=The text \"#SearchString#\" was not found.  Do you wish to search from the beginning?",
 "field:confirmhelpStringNotFoundeffect=Clicking on Yes will search for \"#SearchString#\" from the beginning.",
-"field:confirmgeneralBackupKeyPairMsgcause=Martus has noticed that you have not completed the backup procedure of your key.  It is strongly recommended that you complete the backup procedure at this time.\n\nIf something happens to the original key file, and you don't have a backup you will not be able to open any bulletins you have created with this key.",
+"field:confirmgeneralBackupKeyPairMsgcause=If you lose your key, and you do not have a copy, you will not be able to open any of your records.",
 "field:confirmgeneralBackupKeyPairMsgeffect=Selecting Yes will guide you through the backup procedure, selecting No will skip this important step.",
 "field:confirmbackupIncompleteEncryptedNeeded=A single encrypted backup file of your key has yet to be created.",
 "field:confirmbackupIncompleteImprovedShareNeeded=Martus has improved the security of the multiple pieces key backup.  To keep your account secure and enable you to access your data if you forget your password, please create a new set of key backup files, and delete/destroy the old ones.",
