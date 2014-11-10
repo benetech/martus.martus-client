@@ -1419,7 +1419,7 @@ public class EnglishStrings
 "field:AccountInfoUserName=User Name: ",
 "field:AccountInfoPublicKey=Public Account Id:",
 "field:AccountInfoPublicCode=Public Code (Old):",
-"field:AccountInfoPublicCode40=Public Code (New):",
+"field:AccountInfoPublicCode40=Public Code:",
 "field:AccountInfoDirectory=Account Directory: ",
 "field:AccountAccessToken=Martus Account Access Token: ",
 "field:NameOfExportedFile=Please enter a name for the file you wish to export.",
