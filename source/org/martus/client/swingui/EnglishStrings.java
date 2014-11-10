@@ -1421,7 +1421,7 @@ public class EnglishStrings
 "field:AccountInfoPublicCode=Public Code (Old):",
 "field:AccountInfoPublicCode40=Public Code:",
 "field:AccountInfoDirectory=Account Directory: ",
-"field:AccountAccessToken=Martus Account Access Token: ",
+"field:AccountAccessToken=Access Token: ",
 "field:NameOfExportedFile=Please enter a name for the file you wish to export.",
 "field:DefaultServerHeading=Default Server",
 "field:AdvanceServerSetupHeading=Advanced Server Setup",
