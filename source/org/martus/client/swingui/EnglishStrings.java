@@ -304,7 +304,7 @@ public class EnglishStrings
 "wintitle:DeleteMyDraftsFromServer=Delete My Drafts From Server",
 "wintitle:about=About Martus",
 "wintitle:AccountInfo=Account Information",
-"wintitle:Help=Help on Martus",
+"wintitle:Help=Martus Help",
 "wintitle:RetrieveMySealedBulletinProgress=Retrieving Bulletins",
 "wintitle:RetrieveMyDraftBulletinProgress=Retrieving Bulletins",
 "wintitle:RetrieveMySealedBulletinSummaries=Retrieving Bulletin Summaries",
