@@ -373,7 +373,7 @@ public class EnglishStrings
 "field:LoadingTemplates=Please wait while we retrieve a list of templates from the server.",
 "field:FindAccountByToken=Please wait while we find this account on the server.",
 "field:moveToCaseProjectIncidents=Select one or more #FolderName#, to move selected items to.",
-"field:VerifyPublicCodeNewAndOld=A public code is a unique identifier that can help you verify that a contact that you are adding is who they say they are. The number may be a 20 digit string for accounts using Martus 4.4 and below, or a 40 digit string for accounts using Martus 4.5 and above.\n\nYou can visually verify the public code below. If you don’t know your contact’s public code, you can always perform the verification later.\n\nVerification is an important step that only needs to be performed once.",
+"field:VerifyPublicCodeNewAndOld=Please visually verify either public code below to ensure you are adding the person you think you are adding.",
 "field:VerifyPublicCode=A public code is a unique identifier that can help you verify that a contact that you are adding is who they say they are.\n\nYou can visually verify the public code below. If you don’t know your contact’s public code, you can always perform the verification later.\n\nVerification is an important step that only needs to be performed once.",
 "field:ContactAlreadyExistsAs=This contact currently has the name: '#Name#'",
 
