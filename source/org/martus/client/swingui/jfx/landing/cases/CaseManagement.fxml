@@ -84,7 +84,7 @@
                   </ImageView>
                </graphic>
             </Button>
-      		<Button fx:id="showTrashFolder" graphicTextGap="2.0" maxHeight="45.0" mnemonicParsing="false" onAction="#onShowTrash" styleClass="button-minpadding" text="Show Trash">
+      		<Button fx:id="showTrashFolder" graphicTextGap="2.0" maxHeight="45.0" mnemonicParsing="false" onAction="#onShowTrash" styleClass="button-minpadding" text="%Button.ShowTrash">
       			<font>
       				<Font name="Helvetica" size="12.0" />
       			</font>
