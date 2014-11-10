@@ -1910,7 +1910,7 @@ public class EnglishStrings
 "field:LinkToTokenAndPublicCode=Get your Token and Code",
 
 "field:ManageContactsHeading=Contacts",
-"field:ManageContactsDescription=To send information through Martus to your contacts, you need their public key. You can pull their public keys off of the Martus server using their 7 digit access token. You can verify that you have pulled the correct key, by using their key's public code.  Ask your contacts for the access token, and public code to add your contacts here. If you do not have this information now, you will be able to add contacts later from the Martus desktop client.",
+"field:ManageContactsDescription=Ask your contacts for their access token and public code to add them here.",
 
 "field:NoFormTemplateTitle=[no title]",
 "button:GenericForms=Generic",
