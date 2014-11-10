@@ -1950,7 +1950,7 @@ public class EnglishStrings
 "wintitle:MoveRecords=Move",
 "button:move=Move",
 
-"field:TitleCaseManagement=Management",
+"field:TitleCaseManagement=Label Manager",
 "field:MainFolderLabel=Label:",
 "field:EmptyCustomName=Custom Name",
 "field:FolderNameCases=Cases",
