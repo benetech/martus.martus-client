@@ -1681,7 +1681,7 @@ public class EnglishStrings
 "field:_SectionTopSection=",
 "field:_SectionBottomSection=",
 
-"field:mdyOrder=Date format sequence",
+"field:mdyOrder=Date Format",
 "field:DateDelimiter=Date delimiter",
 "field:CalendarSystem=Calendar type",
 "field:DatePartYear=Year",
