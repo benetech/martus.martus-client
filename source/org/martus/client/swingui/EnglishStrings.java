@@ -932,7 +932,7 @@ public class EnglishStrings
 
 "wintitle:confirmUploadPublicTemplateToServerWarning=Send Template to Server",
 "field:confirmUploadPublicTemplateToServerWarningcause=Anyone with your access token can download this template from the server.",
-"field:confirmUploadPublicTemplateToServerWarningeffect=By continuing, you understand your template details are publicly available on the server.",
+"field:confirmUploadPublicTemplateToServerWarningeffect=Select Yes to make this template’s details publicly available on the server.",
 "field:WhichTemplate=Selected template: #TemplateTitle#",
 
 
