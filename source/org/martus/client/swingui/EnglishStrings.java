@@ -798,7 +798,7 @@ public class EnglishStrings
 "field:ExportBulletinMba=Exporting encrypted Item",
 "field:ExportBulletinXml=Exporting non-encrypted Items",
 
-"field:confirmquestion=Are you sure you want to do this?",
+"field:confirmquestion=Are you sure you want to continue?",
 "field:confirmsendcause=You have chosen to save a completed bulletin.",
 "field:confirmsendeffect=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.",
 "field:confirmdeletefoldercause=You have chosen to permanently delete a folder.  ",
@@ -1650,7 +1650,7 @@ public class EnglishStrings
 "field:RemoveMartusFromSystemMultipleAccountsWarning1=IMPORTANT: There are other Martus accounts on this system.",
 "field:RemoveMartusFromSystemMultipleAccountsWarning2=All of their data will be removed as well!",
 "field:QuickEraseFollowingItems=Clicking on Ok will do the following on this computer:",
-"field:QuickEraseWillNotRemoveItems=This will remove all files and your account key from your local computer. \n\nThis will NOT remove any bulletins from the server, any Martus files copied outside of Martus, or any Martus files on another computer.",
+"field:QuickEraseWillNotRemoveItems=Any records on the server, Martus files copied outside of the Martus directory, and any of your records or Martus files on another computer will NOT be removed.",
 "field:RemoveMartusWillUninstall=Uninstall the Martus program.",
 "field:RemoveMartusWillRemoveAllOtherAccounts=Delete all other Martus accounts, including their key, folders, and bulletins.",
 "field:RemoveMartusWillDeleteMartusDirectory=Delete the Martus directory and all of its contents.",
