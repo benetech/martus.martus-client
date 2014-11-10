@@ -1446,7 +1446,7 @@ public class EnglishStrings
 "field:SearchEntry=Search for:",
 "field:ExportAttachments=Include attachments in export",
 "field:ExportAllVersions=Include all versions of each bulletin in export",
-"field:ExportBulletinDetails=Information from the selected bulletins will be exported to an XML file that you specify.  This will save the private information in the selected bulletins in plain text.  Anyone who gets a copy of this file will be able to read all the private data.  These files can then be used to import the Martus bulletin information into another application.\n\n  You could also use this XML file to import these bulletins back into Martus (as new unique bulletins) if desired.  Please email help@martus.org if you need assistance with this type of importing.",
+"field:ExportBulletinDetails=The selected records will be exported to an XML file that you specify. All information will be saved as plain textand anyone who gets a copy of the file will be able to read its contents. These files can be used to import record data back into Martus or into another application.\n\n Please email martus@benetech.org if you need assistance.",
 "field:HowToCreateNewAccount=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.",
 "field:HowToCreateInitialAccount=No accounts exist on this computer.  To create a new account click OK.  Otherwise you can click on the Restore Account tab to restore an account which was previously backed up.",
 "field:UntitledBulletin=Untitled Bulletin",
