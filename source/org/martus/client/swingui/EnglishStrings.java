@@ -1382,7 +1382,7 @@ public class EnglishStrings
 
 "field:inputservermagicwordentry=If you want to request permission to upload to this server, enter the 'magic word' now:",
 "field:inputImportPublicKeyentry=Enter the Public Code for this account:",
-"field:inputGetShareFileNameentry=Enter the name of the file you wish to export.",
+"field:inputGetShareFileNameentry=Enter a name for the exported backup file(s).",
 "field:inputCustomFieldsInfo=Enter the XML representation for the layout of new and modified bulletins.",
 "field:inputCustomFieldsTitle=Title",
 "field:inputCustomFieldsDescription=Description",
