@@ -238,7 +238,7 @@ public class EnglishStrings
 "wintitle:notifyErrorUpdatingDictionary=Error",
 "wintitle:BulletinContacts=Record Contacts",
 
-"wintitle:SelectTemplate=Select Template",
+"wintitle:SelectTemplate=Template Selector",
 "field:confirmOkToSwitchTemplate=Changing templates may lose data (need real text here)",
 "field:DisplayableDefaultFormTemplateName=Martus Standard Fields",
 
