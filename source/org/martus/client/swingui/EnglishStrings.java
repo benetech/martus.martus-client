@@ -722,6 +722,8 @@ public class EnglishStrings
 "button:RemoveFromExistingCase=Remove from existing Case?",
 "button:Templates=Templates",
 "button:ServerSync=Server Sync",
+"button:SaveChanges=Save Changes",
+
 "field:Location=Location:",
 "field:OnServer=On Server",
 "field:Author=Author",

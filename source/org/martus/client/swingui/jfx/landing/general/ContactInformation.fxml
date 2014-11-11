@@ -35,7 +35,7 @@
 		
 		<bottom>
 			<VBox styleClass="mainTextBox">
-				<Button mnemonicParsing="false" onAction="#onSaveChanges" text="Save Changes"/>
+				<Button mnemonicParsing="false" onAction="#onSaveChanges" text="%Button.SaveChanges"/>
 			</VBox>
 		</bottom>
     </BorderPane>
