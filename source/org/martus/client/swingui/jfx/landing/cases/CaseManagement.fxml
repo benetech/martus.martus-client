@@ -10,7 +10,7 @@
 
 <VBox maxWidth="300.0" minWidth="270.0" prefWidth="300.0" styleClass="cases" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-        <Label fx:id="folderNameLabel" alignment="CENTER" layoutY="154.0" prefHeight="40.0" prefWidth="300.0" text="Cases" textAlignment="CENTER" textFill="WHITE">
+        <Label fx:id="folderNameLabel" alignment="CENTER" layoutY="154.0" prefHeight="40.0" prefWidth="300.0" text="%FolderNameCases" textAlignment="CENTER" textFill="WHITE">
            <font>
               <Font size="18.0" />
            </font>
@@ -72,7 +72,7 @@
 		</HBox>
       <HBox prefWidth="200.0">
          <children>
-            <Button graphicTextGap="2.0" maxHeight="45.0" mnemonicParsing="false" onAction="#onManageTemplates" styleClass="button-minpadding" text="Templates">
+            <Button graphicTextGap="2.0" maxHeight="45.0" mnemonicParsing="false" onAction="#onManageTemplates" styleClass="button-minpadding" text="%Button.Templates">
                <font>
                   <Font name="Helvetica" size="12.0" />
                </font>
@@ -100,7 +100,7 @@
       </HBox>
       <HBox>
          <children>
-            <Button mnemonicParsing="false" onAction="#onServerSync" styleClass="button-minpadding" text="Server Sync">
+            <Button mnemonicParsing="false" onAction="#onServerSync" styleClass="button-minpadding" text="%Button.ServerSync">
                <graphic>
                   <ImageView fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
