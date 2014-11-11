@@ -758,6 +758,12 @@ public class EnglishStrings
 "field:ServerIP=Server I.P.:",
 "field:ServerPreferences=Server Preferences",
 "field:Download=Download",
+"field:SelectLanguage=Select Language:",
+"field:Calendar=Calendar",
+"field:DateDelimiter=Date Delimiter:",
+"field:DateFormatSequence=Date Format Sequence:",
+"field:CalendarType=Calendar Type:",
+"field:NewRecords=New Records",
 
 "wintitle:PrintPreview=Print Preview",
 "button:PrintToPrinter=Print To Printer",

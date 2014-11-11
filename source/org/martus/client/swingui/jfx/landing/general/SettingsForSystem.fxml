@@ -10,10 +10,10 @@
 <children>
       <VBox>
          <children>
-            <Label styleClass="headingLevel1" text="Language" />
+            <Label styleClass="headingLevel1" text="%FieldTypeLANGUAGE" />
             <HBox alignment="CENTER_LEFT">
  		     <children>
-                  <Label text="Select Language:" />
+                  <Label text="%SelectLanguage" />
                   <ChoiceBox fx:id="languageSelection" />
       </children>
             </HBox>
@@ -22,7 +22,7 @@
       </VBox>
       <VBox>
          <children>
-            <Label styleClass="headingLevel1" text="Calendar" />
+            <Label styleClass="headingLevel1" text="%Calendar" />
             <GridPane>
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="175.0" />
@@ -35,9 +35,9 @@
         </rowConstraints>
       <children>
                   <ListView prefHeight="200.0" prefWidth="200.0" />
-                  <Label text="Date Delimiter:" GridPane.rowIndex="1" />
-                  <Label text="Date Format Sequence:" />
-                  <Label text="Calendar Type:" GridPane.rowIndex="2" />
+                  <Label text="%DateDelimiter" GridPane.rowIndex="1" />
+                  <Label text="%DateFormatSequence" />
+                  <Label text="%CalendarType" GridPane.rowIndex="2" />
                   <ChoiceBox fx:id="dateFormat" prefWidth="150.0" GridPane.columnIndex="1" />
                   <ChoiceBox fx:id="dateDelimiter" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <ChoiceBox fx:id="calendarType" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -47,9 +47,9 @@
       </VBox>
       <VBox>
          <children>
-            <Label styleClass="headingLevel1" text="New Records" />
+            <Label styleClass="headingLevel1" text="%NewRecords" />
             <CheckBox fx:id="immutableOnServer" mnemonicParsing="false" text="%NeverDeleteVersionOnServer" />
          </children>
       </VBox>
-      <Button mnemonicParsing="false" onAction="#onSaveChanges" text="Save Changes" />
+      <Button mnemonicParsing="false" onAction="#onSaveChanges" text="%Button.SaveChanges" />
 </children></VBox>
