@@ -709,6 +709,7 @@ public class EnglishStrings
 "field:IncludePrivateData=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?",
 "button:PublicAndPrivateData=Both Public and Private Data",
 "button:PublicOnly=Public Data Only",
+"button:selectall=Select All",
 
 "wintitle:PrintPreview=Print Preview",
 "button:PrintToPrinter=Print To Printer",
