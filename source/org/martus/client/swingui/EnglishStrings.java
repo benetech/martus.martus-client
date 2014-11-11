@@ -717,6 +717,9 @@ public class EnglishStrings
 "button:PublicAndPrivateData=Both Public and Private Data",
 "button:PublicOnly=Public Data Only",
 "button:selectall=Select All",
+"button:Encrypted=Encrypted?",
+"button:IncludeAttachments=Include attachments",
+"field:Location=Location:",
 
 "wintitle:PrintPreview=Print Preview",
 "button:PrintToPrinter=Print To Printer",
