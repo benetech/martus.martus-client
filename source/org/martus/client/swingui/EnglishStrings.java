@@ -719,6 +719,7 @@ public class EnglishStrings
 "button:selectall=Select All",
 "button:Encrypted=Encrypted?",
 "button:IncludeAttachments=Include attachments",
+"button:RemoveFromExistingCase=Remove from existing Case?",
 "field:Location=Location:",
 
 "wintitle:PrintPreview=Print Preview",
