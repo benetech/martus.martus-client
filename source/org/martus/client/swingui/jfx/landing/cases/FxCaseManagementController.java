@@ -500,7 +500,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	{
 		BulletinFolder receivedFolder = getApp().getFolderRetrieved();
 		showDefaultCase(receivedFolder);
-		getFxLandingShellController().setTitleBarToRecieved();
+		getFxLandingShellController().setTitleBarToReceived();
 	}
 
 	public void showDefaultCase(BulletinFolder folder)
