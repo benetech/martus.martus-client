@@ -11,13 +11,13 @@
            <children>
                <HBox alignment="CENTER_LEFT">
                   <children>
-                  		<Label text="For assistance with Martus, there is help documentation available at" />
+                  		<Label text="%AssistanceWithMartusPart1" />
                   		<Hyperlink onAction="#onMartusLinkClick" text="https://martus.org " />
                   </children>
               </HBox>
               <HBox alignment="CENTER_LEFT">
                  <children>
-                  		<Label text="or you can send an email to" />
+                  		<Label text="%AssistanceWithMartusPart2" />
                   		<Hyperlink onAction="#onLinkEMailTo" text="martus@benetech.org" />
                  </children>
               </HBox>
