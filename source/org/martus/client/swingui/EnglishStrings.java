@@ -748,6 +748,7 @@ public class EnglishStrings
 "field:Export=Export",
 "field:AddNewTemplate=Add New Template",
 "field:Import=Import:",
+"field:TemplateSelector=Template Selector",
 
 "wintitle:PrintPreview=Print Preview",
 "button:PrintToPrinter=Print To Printer",
