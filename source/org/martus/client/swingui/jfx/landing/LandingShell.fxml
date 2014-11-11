@@ -12,29 +12,29 @@
 		<HBox alignment="CENTER_RIGHT" styleClass="menu-bar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 			<children>
 			
-				<Button mnemonicParsing="false" onAction="#onManageContacts" text="Contacts" />
+				<Button mnemonicParsing="false" onAction="#onManageContacts" text="%Button.Contacts" />
 				<MenuBar fx:id="global_menu">
 					<menus>
-						<Menu mnemonicParsing="false" text="Settings">
+						<Menu mnemonicParsing="false" text="%WizardStep2">
 							<items>
-								<MenuItem mnemonicParsing="false" onAction="#onConfigureServer" text="Server Settings" />
-								<MenuItem mnemonicParsing="false" onAction="#onSystemPreferences" text="System Preferences" />
-								<MenuItem mnemonicParsing="false" onAction="#onTorPreferences" text="Tor Preferences" />
+								<MenuItem mnemonicParsing="false" onAction="#onConfigureServer" text="%ServerSettings" />
+								<MenuItem mnemonicParsing="false" onAction="#onSystemPreferences" text="%SystemPreferences" />
+								<MenuItem mnemonicParsing="false" onAction="#onTorPreferences" text="%TorPreferences" />
 							</items>
 						</Menu>
-						<Menu mnemonicParsing="false" styleClass="menu-item" text="Account">
+						<Menu mnemonicParsing="false" styleClass="menu-item" text="%account">
 							<items>
-							<MenuItem mnemonicParsing="false" onAction="#onChangeUsernameAndPassword" styleClass="menu-item" text="Change Username and Password" />
-							<MenuItem mnemonicParsing="false" onAction="#onAccountSharing" styleClass="menu-item" text="Account Sharing" />
-							<MenuItem mnemonicParsing="false" onAction="#onContactInformation" styleClass="menu-item" text="Contact Information" />
-							<MenuItem mnemonicParsing="false" onAction="#onBackupKeypair" styleClass="menu-item" text="Backup Key" />
-							<MenuItem mnemonicParsing="false" onAction="#onDeleteMyData" styleClass="menu-item" text="Delete Account" />
+							<MenuItem mnemonicParsing="false" onAction="#onChangeUsernameAndPassword" styleClass="menu-item" text="%ChangeUsernameAndPassword" />
+							<MenuItem mnemonicParsing="false" onAction="#onAccountSharing" styleClass="menu-item" text="%AccountSharing" />
+							<MenuItem mnemonicParsing="false" onAction="#onContactInformation" styleClass="menu-item" text="%ContactInformation" />
+							<MenuItem mnemonicParsing="false" onAction="#onBackupKeypair" styleClass="menu-item" text="%WizardStep6Heading" />
+							<MenuItem mnemonicParsing="false" onAction="#onDeleteMyData" styleClass="menu-item" text="%DeleteAccount" />
 							</items>
 						</Menu>
 					</menus>
 				</MenuBar>
 
-				<Button mnemonicParsing="false" onAction="#onHelpMenu" text="Help" />	
+				<Button mnemonicParsing="false" onAction="#onHelpMenu" text="%Button.help" />	
 				
 			</children>
 		</HBox>
@@ -69,7 +69,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" GridPane.columnIndex="1">
                            <children>
-      								<Button mnemonicParsing="false" onAction="#onCreateNewBulletin" style="-fx-background-color: #77bad0;" text="+ Create" textFill="#f7f7f7">
+      								<Button mnemonicParsing="false" onAction="#onCreateNewBulletin" style="-fx-background-color: #77bad0;" text="%Button.Create" textFill="#f7f7f7">
       									<font>
       										<Font name="Helvetica" size="14.0" />
       									</font>
@@ -79,7 +79,7 @@
                         </HBox>
 								<HBox alignment="CENTER_LEFT" prefHeight="32.0" styleClass="toolbarHBox" GridPane.columnIndex="3">
 									<children>
-										<Label contentDisplay="CENTER" styleClass="toolbarLabel" text="Server:">
+										<Label contentDisplay="CENTER" styleClass="toolbarLabel" text="%serverWithColon">
                                  			<padding>
                                     				<Insets right="5.0" />
                                  			</padding>
@@ -136,7 +136,7 @@
 								<HBox>
    <children>
                	        			<Label fx:id="titleBarLabel" styleClass="toolbarLabel" text="" />
-               	        			<Button fx:id="closeCurrentViewButton" mnemonicParsing="false" onAction="#onCloseCurrentView" styleClass="toolbarButton" text="Close" />
+               	        			<Button fx:id="closeCurrentViewButton" mnemonicParsing="false" onAction="#onCloseCurrentView" styleClass="toolbarButton" text="%Button.close" />
    </children>
             	        		</HBox>	
 							</top>

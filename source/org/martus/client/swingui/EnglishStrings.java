@@ -514,6 +514,7 @@ public class EnglishStrings
 
 "field:RecordLocationLocal=Local",
 "field:RecordLocationServer=Server",
+"field:serverWithColon=Server:",
 "field:RecordLocationBothLocalAndServer=Both",
 "field:RecordLocationUnknown=Unknown",
 "field:NoServerSyncDataInTable=No Records available",
@@ -702,6 +703,7 @@ public class EnglishStrings
 "field:AccountIdWithPublicCode=#AccountId# #PublicCode#",
 "field:HistoryVersion=#VersionNumber#: #DateSaved# : #Title#",
 "wintitle:ExportEncryptedBulletin=Export Encrypted",
+"field:account=Account",
 
 "wintitle:IncludePrivateData=Include Private Data",
 "field:IncludePrivateData=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?",
@@ -1733,6 +1735,8 @@ public class EnglishStrings
 "menu:AddPermissions=Update Contact's Access...",
 "button:FileDialogOkImportHeadquartersPublicKey=Import",
 "button:AddPermissions=Update Contact's Access",
+"button:Contacts=Contacts",
+"button:Create=+ Create",
 
 "field:confirmClearHQInformationcause=You have chosen to remove the selected contact's accounts.  Any existing saved bulletins will still be visible by the old contact.  If you want to disallow this contact's viewing access to previously created Draft bulletins they must be re-saved after deleting the contact.  New versions of sealed bulletins will not be able to be viewed by the removed contact, but any old versions of sealed bulletins that already are on that contact's computer will still be viewable by the contact.",
 "field:confirmClearHQInformationeffect=By clicking on Yes, any draft or sealed bulletin saved in the future will no longer be accessible by your Contacts.",
@@ -1908,6 +1912,13 @@ public class EnglishStrings
 "field:UseDefaultServer=Use default server",
 "field:SetupAdvanceServer=Advanced server settings",
 "field:SetupServerTips=The data you store on Martus servers are completely encrypted using 3072-bit encryption. This means even Martus server administrators cannot read your data.",
+"field:ServerSettings=Server Settings",
+"field:SystemPreferences=System Preferences",
+"field:TorPreferences=Tor Preferences",
+"field:ChangeUsernameAndPassword=Change Username and Password",
+"field:AccountSharing=Account Sharing",
+"field:ContactInformation=Contact Information",
+"field:DeleteAccount=Delete Account",
 
 
 "field:HelpForTokenAndPublicCode=If someone wishes to send you information, provide them with your access token and public code.",
