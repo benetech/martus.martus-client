@@ -8,10 +8,10 @@
    <children>
        <HBox>
          <children>
-            <Hyperlink fx:id="fxLocationAll" onAction="#onShowAll" text="All" />
-            <Hyperlink fx:id="fxLocationLocalOnly" onAction="#onShowLocalOnly" text="Local Only" />
-            <Hyperlink fx:id="fxLocationServerOnly" onAction="#onShowServerOnly" text="Server Only" />
-            <Hyperlink fx:id="fxLocationBoth" onAction="#onShowBoth" text="Both" />
+            <Hyperlink fx:id="fxLocationAll" onAction="#onShowAll" text="%All" />
+            <Hyperlink fx:id="fxLocationLocalOnly" onAction="#onShowLocalOnly" text="$LocalOnly" />
+            <Hyperlink fx:id="fxLocationServerOnly" onAction="#onShowServerOnly" text="%ServerOnly" />
+            <Hyperlink fx:id="fxLocationBoth" onAction="#onShowBoth" text="%RecordLocationBothLocalAndServer" />
          </children>
       </HBox>
       <ScrollPane>
@@ -29,16 +29,16 @@
       </ScrollPane>
       <HBox>
          <children>
-            <Hyperlink fx:id="fxSubFilterAll" onAction="#onSubfilterAll" text="All" />
-            <Hyperlink fx:id="fxSubFilterMyRecords" onAction="#onSubfilterMyRecords" text="My Records" />
-            <Hyperlink fx:id="fxSubFilterSharedWithMe" onAction="#onSubfilterSharedWithMe" text="Shared With Me" />
+            <Hyperlink fx:id="fxSubFilterAll" onAction="#onSubfilterAll" text="%All" />
+            <Hyperlink fx:id="fxSubFilterMyRecords" onAction="#onSubfilterMyRecords" text="%MyRecords" />
+            <Hyperlink fx:id="fxSubFilterSharedWithMe" onAction="#onSubfilterSharedWithMe" text="%SharedWithMe" />
          </children>
       </HBox>
       <HBox>
          <children>
-            <Button fx:id="uploadButton" mnemonicParsing="false" onAction="#onUpload" text="Upload" />
-            <Button fx:id="downloadButton" mnemonicParsing="false" onAction="#onDownload" text="Download" />
-            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDelete" text="Delete from Server" />
+            <Button fx:id="uploadButton" mnemonicParsing="false" onAction="#onUpload" text="%Button.Upload" />
+            <Button fx:id="downloadButton" mnemonicParsing="false" onAction="#onDownload" text="%Button.Download" />
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDelete" text="%Button.DeleteFromServer" />
          </children>
       </HBox>
    </children>
