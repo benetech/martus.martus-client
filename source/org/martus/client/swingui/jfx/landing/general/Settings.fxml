@@ -6,17 +6,17 @@
 
 <TabPane fx:id="settingTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
-    <Tab id="serverTab" fx:id="serverTab" text="Server">
+    <Tab id="serverTab" fx:id="serverTab" text="%RecordLocationServer">
       <content>
         <AnchorPane fx:id="serverContentPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
       </content>
     </Tab>
-    <Tab id="systemTab" fx:id="systemTab" text="System">
+    <Tab id="systemTab" fx:id="systemTab" text="%System">
       <content>
         <AnchorPane fx:id="systemContentPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
       </content>
     </Tab>
-    <Tab id="torTab" fx:id="torTab" text="Tor">
+    <Tab id="torTab" fx:id="torTab" text="%TorTab">
 	  <content>
 	    <AnchorPane fx:id="torContentPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
 	  </content>

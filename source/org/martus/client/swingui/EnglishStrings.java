@@ -749,6 +749,8 @@ public class EnglishStrings
 "field:AddNewTemplate=Add New Template",
 "field:Import=Import:",
 "field:TemplateSelector=Template Selector",
+"field:System=System",
+"field:TorTab=Tor",
 
 "wintitle:PrintPreview=Print Preview",
 "button:PrintToPrinter=Print To Printer",
