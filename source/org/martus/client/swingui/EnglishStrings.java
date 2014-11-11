@@ -1980,7 +1980,7 @@ public class EnglishStrings
 "field:TokenNotAvailable=Not Available",
 "wintitle:CaseAll=All",
 "wintitle:CaseSent=Sent",
-"wintitle:CaseRecieved=Recieved",
+"wintitle:CaseReceived=Received",
 
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Sent",

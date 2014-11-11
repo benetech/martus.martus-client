@@ -114,7 +114,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	public void setTitleBarToRecieved()
 	{
 		hideCloseCurrentViewButton();
-		setTitleBarLabel("CaseRecieved");
+		setTitleBarLabel("CaseReceived");
 	}
 	
 	public void setTitleBarToSearch()
