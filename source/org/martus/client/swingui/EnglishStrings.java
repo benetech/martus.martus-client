@@ -723,6 +723,9 @@ public class EnglishStrings
 "button:Templates=Templates",
 "button:ServerSync=Server Sync",
 "button:SaveChanges=Save Changes",
+"button:Upload=Upload",
+"button:Download=Download",
+"button:DeleteFromServer=Delete from Server",
 
 "field:Location=Location:",
 "field:OnServer=On Server",
@@ -732,6 +735,11 @@ public class EnglishStrings
 "field:AccountInformation=Account Information",
 "field:AssistanceWithMartusPart1=For assistance with Martus, there is help documentation available at",
 "field:AssistanceWithMartusPart2=or you can send an email to",
+"field:All=All",
+"field:LocalOnly=Local Only",
+"field:ServerOnly=Server Only",
+"field:MyRecords=My Records",
+"field:SharedWithMe=Shared With Me",
 
 
 "wintitle:PrintPreview=Print Preview",
