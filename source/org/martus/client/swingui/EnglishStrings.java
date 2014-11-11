@@ -704,6 +704,12 @@ public class EnglishStrings
 "field:HistoryVersion=#VersionNumber#: #DateSaved# : #Title#",
 "wintitle:ExportEncryptedBulletin=Export Encrypted",
 "field:account=Account",
+"field:AuthorNickname=Author Nickname:",
+"field:AuthorNicknameFieldDescription=Name here if available otherwise blank",
+"field:AuthorPublicCode=Author Public Code:",
+"field:BulletinID=Bulletin ID:",
+"field:DateCreated=Date Created",
+"field:LastModified=Last Modified",
 
 "wintitle:IncludePrivateData=Include Private Data",
 "field:IncludePrivateData=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?",
