@@ -108,7 +108,7 @@ public class EnglishStrings
 "wintitle:confirmSealingSelectedBulletinsCancel=Sealing Bulletins",
 "wintitle:confirmXmlSchemaNewerImportAnyway=Import Bulletins",
 "wintitle:confirmLoadingFieldValuesFromAllBulletinsCancel=Loading Values",
-"wintitle:confirmImportingCustomizationUnknownSigner=Import Customization Template",
+"wintitle:confirmImportingCustomizationUnknownSigner=Template Manager",
 
 "wintitle:notifyAddContact=Add Contact",
 "wintitle:notifyVerifyContact=Verify Contact",
@@ -762,7 +762,6 @@ public class EnglishStrings
 "wintitle:FileDialogImportMBA=Import Martus Bulletin Archive",
 "button:FileDialogOkImportMBA=Import",
 
-"wintitle:FileDialogImportCustomization=Import Customization Template",
 "button:FileDialogOkImportCustomization=Import",
 
 "wintitle:FileDialogImportBulletins=Import Bulletins",

@@ -245,7 +245,7 @@ public class ManageTemplatesController extends FxInSwingController
 			String rawTitle = selected.getRawTemplateName();
 			FormTemplate template = getBulletinStore().getFormTemplate(rawTitle);
 			TemplatePropertiesController controller = new TemplatePropertiesController(getMainWindow(), template);
-			if(showModalYesNoDialog("TemplateProperties", EnglishCommonStrings.OK, EnglishCommonStrings.CANCEL, controller))
+			if(showModalYesNoDialog("confirmImportingCustomizationUnknownSigner", EnglishCommonStrings.OK, EnglishCommonStrings.CANCEL, controller))
 			{
 				String oldTitle = template.getTitle();
 				String newTitle = controller.getTemplateTitle();
@@ -412,7 +412,7 @@ public class ManageTemplatesController extends FxInSwingController
 	@FXML
 	private void onImportFromFile(ActionEvent event)
 	{
-		FileChooser fileChooser = createFileChooser("FileDialogImportCustomization");
+		FileChooser fileChooser = createFileChooser("confirmImportingCustomizationUnknownSigner");
 		File templateFile = fileChooser.showOpenDialog(null);
 		if(templateFile == null)
 			return;
