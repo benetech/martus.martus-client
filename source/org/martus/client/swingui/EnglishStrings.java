@@ -726,6 +726,8 @@ public class EnglishStrings
 "field:OnServer=On Server",
 "field:Author=Author",
 "field:Edit=Edit",
+"field:UsernameAndPassword=Username and Password",
+"field:AccountInformation=Account Information",
 
 
 "wintitle:PrintPreview=Print Preview",
