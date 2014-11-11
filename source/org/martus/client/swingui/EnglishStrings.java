@@ -245,7 +245,7 @@ public class EnglishStrings
 "wintitle:notifyUnableToLoadCurrentTemplate=Error",
 "field:notifyUnableToLoadCurrentTemplatecause=Unable to restore the current form template, so the default template will be used.",
 
-"wintitle:Templates=Form Templates",
+"wintitle:Templates=Template Manager",
 "field:confirmDeleteTemplate=Are you sure you want to delete this template?\n#Name#",
 
 "wintitle:notifyContactKeyIsOurself=Contact Account Is Yourself",
@@ -430,7 +430,7 @@ public class EnglishStrings
 "button:close=Close",
 "button:customDefault=Restore Defaults",
 "button:customHelp=Help",
-"button:customImport=Import Template",
+"button:customImport=Template Manager",
 "button:customExport=Export Template",
 "button:customSendToServer=Send Template to Server",
 
