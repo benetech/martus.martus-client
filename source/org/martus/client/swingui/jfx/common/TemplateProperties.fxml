@@ -9,9 +9,9 @@
    <children>
 		<VBox>
 			<children>
-				<Label text="Title" />
+				<Label text="%inputCustomFieldsTitle" />
 				<TextField fx:id="templateTitle"  />
-				<Label text="Description" />
+				<Label text="%inputCustomFieldsDescription" />
 				<TextField fx:id="templateDescription"  />
 			</children>
 		</VBox>
