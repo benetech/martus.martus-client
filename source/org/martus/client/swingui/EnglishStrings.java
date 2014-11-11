@@ -1716,6 +1716,10 @@ public class EnglishStrings
 "field:BackgroundSorting=Sorting Bulletins...",
 "field:BackgroundPrinting=Preparing Report...",
 "field:BackgroundWorking=Working...",
+"field:title=Title:",
+"field:to=To:",
+"field:from=From:",
+"field:versionNumber=Version #:",
 
 "wintitle:ImportContactPublicKey=Import Contact Key",
 "button:AddContactFromServer=Add Contact From Server...",
