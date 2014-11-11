@@ -9,11 +9,11 @@
       <VBox prefHeight="65.0" prefWidth="431.0" BorderPane.alignment="CENTER">
          <children>
             <TextArea fx:id="textMessageArea" editable="false" prefHeight="267.0" prefWidth="614.0" wrapText="true" />
-            <CheckBox fx:id="encryptExportFile" mnemonicParsing="false" text="Encrypted?" />
-            <CheckBox fx:id="includeAttachments" mnemonicParsing="false" text="include attachments" />
+            <CheckBox fx:id="encryptExportFile" mnemonicParsing="false" text="%Button.Encrypted" />
+            <CheckBox fx:id="includeAttachments" mnemonicParsing="false" text="%Button.IncludeAttachments" />
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Location:" />
+                  <Label text="%Location" />
                   <TextField fx:id="fileLocation" editable="false" prefHeight="26.0" prefWidth="360.0" />
                   <Button mnemonicParsing="false" onAction="#onChangeFileLocation" text="%Button.ExportTo" />
                </children>
