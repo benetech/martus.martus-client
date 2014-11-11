@@ -800,6 +800,8 @@ public class EnglishStrings
 
 "field:ExportBulletinMba=Exporting encrypted Item",
 "field:ExportBulletinXml=Exporting non-encrypted Items",
+"field:bulletinDetails=Bulletin Details",
+"wintitle:BulletinDetails=Bulletin Details",
 
 "field:confirmquestion=Are you sure you want to continue?",
 "field:confirmsendcause=You have chosen to save a completed bulletin.",
