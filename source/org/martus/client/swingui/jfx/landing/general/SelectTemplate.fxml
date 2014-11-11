@@ -11,11 +11,11 @@
 <VBox>
 	<children>
 		<HBox styleClass="titleBox" minWidth="600">
-			<Label styleClass="titleText" alignment="CENTER" text="Template Selector">
+			<Label styleClass="titleText" alignment="CENTER" text="%TemplateSelector">
 			</Label>
 		</HBox>
 		<VBox styleClass="mainBox">
-		<Label styleClass="headingLevel1" text="Available Templates" />
+		<Label styleClass="headingLevel1" text="%AvailableTemplates" />
 		</VBox>
 		<VBox styleClass="listViewBox">
 			<children>
@@ -24,7 +24,7 @@
 			</children>
 		</VBox>
 		<HBox styleClass="buttonRow">
-			<Button mnemonicParsing="false" text="Select" onAction="#onSelect">
+			<Button mnemonicParsing="false" text="%Button.SelectReport" onAction="#onSelect">
 			</Button>
 		</HBox>
 	</children>
