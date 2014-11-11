@@ -772,6 +772,7 @@ public class EnglishStrings
 "button:ImportFromFile=Import From File",
 "button:Choose=Choose...",
 "button:ConnectToServer=Connect to Server",
+"button:ChangeUsernameAndPassword=Change Username and Password",
 
 "wintitle:RunOrCreateChart=Charts",
 "button:RunChart=Display an existing chart",
