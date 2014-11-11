@@ -721,6 +721,10 @@ public class EnglishStrings
 "button:IncludeAttachments=Include attachments",
 "button:RemoveFromExistingCase=Remove from existing Case?",
 "field:Location=Location:",
+"field:OnServer=On Server",
+"field:Author=Author",
+"field:Edit=Edit",
+
 
 "wintitle:PrintPreview=Print Preview",
 "button:PrintToPrinter=Print To Printer",
