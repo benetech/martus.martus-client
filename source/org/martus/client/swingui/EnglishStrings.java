@@ -740,11 +740,21 @@ public class EnglishStrings
 "field:ServerOnly=Server Only",
 "field:MyRecords=My Records",
 "field:SharedWithMe=Shared With Me",
-
+"field:TemplateManager=Template Manager",
+"field:AvailableTemplates=Available Templates",
+"field:Name=Name",
+"field:Delete=Delete",
+"field:Upload=Upload",
+"field:Export=Export",
+"field:AddNewTemplate=Add New Template",
+"field:Import=Import:",
 
 "wintitle:PrintPreview=Print Preview",
 "button:PrintToPrinter=Print To Printer",
 "button:PrintToFile=Print To File",
+"button:FromContact=From Contact",
+"button:ImportFromFile=Import From File",
+"button:Choose=Choose...",
 
 "wintitle:RunOrCreateChart=Charts",
 "button:RunChart=Display an existing chart",
