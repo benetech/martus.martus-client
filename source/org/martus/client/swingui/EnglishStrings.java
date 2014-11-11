@@ -720,6 +720,8 @@ public class EnglishStrings
 "button:Encrypted=Encrypted?",
 "button:IncludeAttachments=Include attachments",
 "button:RemoveFromExistingCase=Remove from existing Case?",
+"button:Templates=Templates",
+"button:ServerSync=Server Sync",
 "field:Location=Location:",
 "field:OnServer=On Server",
 "field:Author=Author",
