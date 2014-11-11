@@ -730,6 +730,8 @@ public class EnglishStrings
 "field:Edit=Edit",
 "field:UsernameAndPassword=Username and Password",
 "field:AccountInformation=Account Information",
+"field:AssistanceWithMartusPart1=For assistance with Martus, there is help documentation available at",
+"field:AssistanceWithMartusPart2=or you can send an email to",
 
 
 "wintitle:PrintPreview=Print Preview",
