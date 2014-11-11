@@ -710,6 +710,7 @@ public class EnglishStrings
 "field:BulletinID=Bulletin ID:",
 "field:DateCreated=Date Created",
 "field:LastModified=Last Modified",
+"field:EnterNewName=Enter New Name:",
 
 "wintitle:IncludePrivateData=Include Private Data",
 "field:IncludePrivateData=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?",
