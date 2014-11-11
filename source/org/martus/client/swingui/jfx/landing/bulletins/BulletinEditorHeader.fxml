@@ -37,9 +37,9 @@
 				<children>
 				
 				<!--Column 1 -->
-                  <Label styleClass="systemFieldTitle" text="Title:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                  <Label styleClass="systemFieldTitle" text="To:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                  <Label styleClass="systemFieldTitle" text="From:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                  <Label styleClass="systemFieldTitle" text="%title" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                  <Label styleClass="systemFieldTitle" text="%to" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                  <Label styleClass="systemFieldTitle" text="%from" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                   
                   <!-- Column 2 -->
                   <TextField fx:id="titleField" styleClass="systemTextField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -89,7 +89,7 @@
 						
 						<HBox styleClass="headerButtonHBox" alignment="CENTER"  prefHeight="30.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
 							<children>
-                            	<Label styleClass="systemFieldTitle" text="Version #:"></Label>
+                            	<Label styleClass="systemFieldTitle" text="%versionNumber"></Label>
                                 <Label fx:id="versionField" text="1"></Label>
                         	</children>
                         </HBox>
