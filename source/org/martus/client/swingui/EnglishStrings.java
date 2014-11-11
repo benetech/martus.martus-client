@@ -751,6 +751,13 @@ public class EnglishStrings
 "field:TemplateSelector=Template Selector",
 "field:System=System",
 "field:TorTab=Tor",
+"field:CurrentConnection=Current Connection",
+"field:DefaultServerConnection=Default (Service Level 1:)",
+"field:ConnectToDefault=Connect to Default",
+"field:AdvancedSettings=Advanced Settings:",
+"field:ServerIP=Server I.P.:",
+"field:ServerPreferences=Server Preferences",
+"field:Download=Download",
 
 "wintitle:PrintPreview=Print Preview",
 "button:PrintToPrinter=Print To Printer",
@@ -758,6 +765,7 @@ public class EnglishStrings
 "button:FromContact=From Contact",
 "button:ImportFromFile=Import From File",
 "button:Choose=Choose...",
+"button:ConnectToServer=Connect to Server",
 
 "wintitle:RunOrCreateChart=Charts",
 "button:RunChart=Display an existing chart",
