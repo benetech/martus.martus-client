@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<Label alignment="CENTER" text="%TemplateManager">
+		</Label>
+		<TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
+			<tabs>
+				<Tab fx:id="availableTemplatesTab" text="%AvailableTemplates">
+					<content>
+						<VBox spacing="5.0">
+							<children>
+								<!-- Seems to be a bug in JavaFX where the table is sized wide enough to fit
+									the conents without a vertical scrollbar, but as soon as it is added, it 
+									is too narrow, so requires a horizontal scrollbar. Might need to set a 
+									prefWidth here to prevent that problem. -->
+								<TableView fx:id="availableTemplatesTable" prefHeight="200.0" prefWidth="600">
+									<columns>
+										<TableColumn fx:id="templateNameColumn" prefWidth="264.0" text="%Name" />
+										<TableColumn fx:id="templateDeleteColumn" maxWidth="150.0" prefWidth="75.0" text="%Delete" />
+										<TableColumn fx:id="templateUploadColumn" maxWidth="150.0" prefWidth="75.0" text="%Upload" />
+										<TableColumn fx:id="templateExportColumn" maxWidth="150.0" prefWidth="75.0" text="%Export" />
+										<TableColumn fx:id="templateEditColumn" maxWidth="150.0" prefWidth="75.0" text="%Edit" />
+									</columns>
+								</TableView>
+								<HBox alignment="CENTER_RIGHT">
+									<children>
+										<Button onAction="#onAvailableTabOkButton" mnemonicParsing="false" text="%Button.inputservernameok">
+										</Button>
+									</children>
+									<padding>
+									<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+									</padding>
+								</HBox>
+							</children>
+							<padding>
+								<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+							</padding>
+						</VBox>
+					</content>
+				</Tab>
+				<Tab text="%AddNewTemplate">
+					<content>
+						<VBox >
+							<children>
+								<Label text="%Import">
+								</Label>
+								<GridPane>
+									<columnConstraints>
+										<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+										<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+									</columnConstraints>
+									<rowConstraints>
+										<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+										<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+										<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+									</rowConstraints>
+									<children>
+										<RadioButton fx:id="genericRadioButton" mnemonicParsing="false" text="%Button.GenericForms" onAction="#onChooseGeneric">
+											<toggleGroup>
+												<ToggleGroup fx:id="importTemplateHow" />
+											</toggleGroup>
+										</RadioButton>
+										<ChoiceBox fx:id="genericChoiceBox" GridPane.columnIndex="1" />
+
+										<RadioButton toggleGroup="$importTemplateHow" fx:id="downloadRadioButton" mnemonicParsing="false" text="%Button.FromContact" GridPane.rowIndex="1" onAction="#onChooseFromServer" />
+										<ChoiceBox fx:id="downloadChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+										<RadioButton toggleGroup="$importTemplateHow" fx:id="importFileRadioButton" mnemonicParsing="false" text="%Button.ImportFromFile" GridPane.rowIndex="2" onAction="#onChooseFromFile" />
+										<Button text="%Button.Choose" fx:id="chooseFileButton" onAction="#onImportFromFile" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+									</children>
+								</GridPane>
+								<HBox alignment="TOP_RIGHT" prefHeight="100.0" >
+									<children>
+										<Button fx:id="addTemplateButton" onAction="#onAdd" mnemonicParsing="false" text="%Button.AddFieldToReport">
+										</Button>
+									</children>
+								</HBox>
+							</children>
+						</VBox>
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+	</children>
+</VBox>

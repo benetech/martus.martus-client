@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="910.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <BorderPane layoutX="0.0" layoutY="0.0" prefWidth="910.0" styleClass="pageMargin">
+      <top>
+        <Pane fx:id="contentPane" prefWidth="840.0" />
+      </top>
+      <bottom>
+        <Button mnemonicParsing="false" onAction="#onExportMultiKey" text="%Button.Export3Key"/>
+      </bottom>
+    </BorderPane>
+  </children>
+</AnchorPane>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane prefHeight="336.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<children><Accordion>
+  <panes>
+    <TitledPane animated="false" minWidth="500.0" prefWidth="500.0" text="%CurrentConnection">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+<children><VBox spacing="1.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+<children>
+                              <HBox prefHeight="19.0" prefWidth="458.0">
+                                 <children>
+                                    <Label text="%ServerIP" />
+                                    <Label fx:id="currentServerIp" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="11.0" prefWidth="458.0">
+                                 <children>
+                                    <Label text="%ConfigureHQColumnHeaderPublicCode" />
+                                    <Label fx:id="currentServerPublicCode" />
+                                 </children>
+                              </HBox>
+</children>
+<VBox.margin>
+<Insets left="10.0" right="10.0" top="10.0" />
+</VBox.margin></VBox>
+</children></AnchorPane>
+      </content>
+    </TitledPane>
+    <TitledPane animated="false" text="%ServerSetup">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="225.0" prefWidth="200.0">
+<children><VBox prefWidth="480.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+<children><Label text="%DefaultServerConnection">
+<font>
+<Font name="Helvetica" size="14.0" />
+</font></Label><Button mnemonicParsing="false" onMouseClicked="#onConnectToDefaultServer" text="%ConnectToDefault">
+<VBox.margin>
+<Insets bottom="10.0" top="10.0" />
+</VBox.margin></Button><Label text="%AdvancedSettings">
+<font>
+<Font name="Helvetica" size="14.0" />
+</font></Label><GridPane>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
+    <ColumnConstraints hgrow="SOMETIMES" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+<children><Label text="%ServerIP" /><Label text="%AccountInfoPublicCode40" GridPane.rowIndex="1" /><TextField fx:id="advanceServerIpAddress" GridPane.columnIndex="1" /><TextField fx:id="advanceServerPublicCode" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+</children>
+</GridPane><Button fx:id="connectToAdvanceServer" mnemonicParsing="false" onMouseClicked="#onConnectToAdvanceServer" text="%Button.ConnectToServer">
+<VBox.margin>
+<Insets top="20.0" />
+</VBox.margin></Button>
+</children>
+<VBox.margin>
+<Insets left="10.0" right="10.0" />
+</VBox.margin>
+</VBox>
+</children></AnchorPane>
+      </content>
+    </TitledPane>
+    <TitledPane animated="false" text="%ServerPreferences">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+<children><VBox prefHeight="100.0" prefWidth="480.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+<children>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="%Button.HaveServerDefaulttoOn" />
+                                    <CheckBox fx:id="serverDefaultToOn" mnemonicParsing="false" text="%Button.yes" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="%Button.AutomaticallyDownloadFiles" />
+                                    <CheckBox fx:id="automaticallyDownloadFromServer" mnemonicParsing="false" text="%Button.yes" />
+                                 </children>
+                              </HBox><HBox prefHeight="100.0" prefWidth="200.0">
+<VBox.margin>
+<Insets top="10.0" />
+</VBox.margin>
+<children>
+   	<Label text="%Download" GridPane.rowIndex="1" />
+  	<ChoiceBox fx:id="automaticSyncFrequency" GridPane.columnIndex="1" GridPane.rowIndex="1" xmlns:fx="http://javafx.com/fxml" />
+</children></HBox>
+                              <ChoiceBox fx:id="automaticSyncFrequencyMinutes" prefWidth="150.0" /><Button mnemonicParsing="false" onMouseClicked="#onSaveServerPreferenceChanges" text="%Button.SaveChanges">
+<VBox.margin>
+<Insets top="15.0" />
+</VBox.margin></Button>
+</children></VBox>
+</children></AnchorPane>
+      </content>
+    </TitledPane>
+  </panes>
+</Accordion>
+</children>
+</Pane>
