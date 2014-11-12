@@ -12,7 +12,7 @@
           <TableColumn fx:id="onServerColumn" editable="false" text="%OnServer" />
             <TableColumn fx:id="authorColumn" editable="false" prefWidth="123.0" text="%Author" />
             <TableColumn fx:id="authorVerifiedColumn" prefWidth="75.0" text="%ContactVerified" />
-          <TableColumn fx:id="titleColumn" editable="false" prefWidth="284.0" text="%inputCustomFieldsTitle" />
+          <TableColumn fx:id="titleColumn" editable="false" prefWidth="284.0" text="%InputCustomFieldsTitle" />
             <TableColumn fx:id="dateSavedColumn" editable="false" prefWidth="180.0" text="%BulletinDetailsVersionDate" />
             <TableColumn fx:id="viewBulletinColumn" text="%ViewAttachmentAction" />
             <TableColumn fx:id="editBulletinColumn" text="%Edit" />

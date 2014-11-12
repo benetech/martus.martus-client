@@ -1451,7 +1451,7 @@ public class EnglishStrings
 "field:inputImportPublicKeyentry=Enter the Public Code for this account:",
 "field:inputGetShareFileNameentry=Enter a name for the exported backup file(s).",
 "field:inputCustomFieldsInfo=Enter the XML representation for the layout of new and modified bulletins.",
-"field:inputCustomFieldsTitle=Title",
+"field:InputCustomFieldsTitle=Title",
 "field:inputCustomFieldsDescription=Description",
 
 "field:warningDeleteSingleBulletin=You have chosen to permanently delete a bulletin from the Discarded Bulletins folder. Even if this bulletin was recently cut or copied, you will not be able to paste it. If this bulletin has already been sent to a server, it will remain on the server. This action will only delete it from this computer.",
