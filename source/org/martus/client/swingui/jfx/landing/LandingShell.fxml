@@ -116,6 +116,13 @@
       									<opaqueInsets>
       										<Insets />
       									</opaqueInsets>
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/search.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
       								</Button>
                            </children>
                         </HBox>
