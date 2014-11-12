@@ -28,7 +28,7 @@
                    <graphic>
                       <ImageView pickOnBounds="true" preserveRatio="true">
                          <image>
-                            <Image url="@../../images/trash.png" />
+                            <Image url="@../../images/delete.png" />
                          </image>
                       </ImageView>
                    </graphic>
