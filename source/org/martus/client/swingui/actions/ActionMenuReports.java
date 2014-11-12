@@ -72,7 +72,7 @@ import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.util.UnicodeWriter;
 
 
-public class ActionMenuReports extends ActionPrint
+public class ActionMenuReports extends ActionPrint implements ActionDoer
 {
 	public ActionMenuReports(UiMainWindow mainWindowToUse)
 	{
@@ -85,6 +85,11 @@ public class ActionMenuReports extends ActionPrint
 	}
 
 	public void actionPerformed(ActionEvent ae)
+	{
+		doAction();
+	}
+
+	public void doAction()
 	{
 		try
 		{
