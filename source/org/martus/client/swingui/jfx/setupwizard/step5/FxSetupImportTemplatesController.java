@@ -25,8 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step5;
 
-import java.util.Vector;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -42,8 +40,7 @@ import javafx.util.StringConverter;
 import org.martus.client.core.templates.GenericFormTemplates;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.common.AbstractFxImportFormTemplateController;
-import org.martus.client.swingui.jfx.common.FxImportFormTemplateFromMyContactsPopupController;
-import org.martus.client.swingui.jfx.common.FxSetupFormTemplateFromNewContactPopupController;
+import org.martus.client.swingui.jfx.landing.general.ManageTemplatesController;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.client.swingui.jfx.setupwizard.step6.FxSetupBackupYourKeyController;
 import org.martus.common.MartusLogger;
@@ -109,16 +106,20 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		}
 	} 
 	
-	public static ObservableList<AbstractFxImportFormTemplateController> getImportTemplateChoices(UiMainWindow mainWindowToUse)
+	private ObservableList<AbstractFxImportFormTemplateController> getImportTemplateChoices(UiMainWindow mainWindowToUse)
 	{
-		Vector<AbstractFxImportFormTemplateController> choices = new Vector<AbstractFxImportFormTemplateController>();
-		choices.add(new FxImportFormTemplateFromMyContactsPopupController(mainWindowToUse));
-		choices.add(new FxSetupFormTemplateFromNewContactPopupController(mainWindowToUse));
+		try
+		{
+			return ManageTemplatesController.getImportTemplateChoices(mainWindowToUse);
+		}
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
 
-		return FXCollections.observableArrayList(choices);
+			return FXCollections.observableArrayList();
+		}
 	}
 
-	
 	@FXML
 	private void genericComboBoxSelectionChanged() throws Exception
 	{
