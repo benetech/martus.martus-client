@@ -494,7 +494,7 @@ public class EnglishStrings
 "button:LoadSearchOkButton=Load",
 "button:LoadFieldValuesFromAllBulletins=Load all possible values for selected field",
 
-"button:AddFieldToReport=Add",
+"button:AddTemplate=Add",
 "button:RemoveFieldFromReport=Remove",
 "button:MoveFieldUpInReport=Move Up",
 "button:MoveFieldDownInReport=Move Down",
