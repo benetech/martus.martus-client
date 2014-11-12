@@ -47,7 +47,6 @@ import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
-import org.martus.client.swingui.actions.ActionMenuManageContactsWithoutResignIn;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
 import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
@@ -311,7 +310,19 @@ public class FxLandingShellController extends FxNonWizardShellController
 			logAndNotifyUnexpectedError(e);
 		}
 	}
+	
+	@FXML 
+	private void onReports(ActionEvent event)
+	{
 		
+	}
+		
+	@FXML 
+	private void onCharts(ActionEvent event)
+	{
+		
+	}
+
 	@FXML
 	private void onChangeUsernameAndPassword(ActionEvent event)
 	{
