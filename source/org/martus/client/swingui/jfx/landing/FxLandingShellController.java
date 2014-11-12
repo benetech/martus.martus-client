@@ -46,9 +46,11 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionMenuCharts;
 import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
 import org.martus.client.swingui.actions.ActionMenuQuickSearch;
+import org.martus.client.swingui.actions.ActionMenuReports;
 import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 import org.martus.client.swingui.jfx.generic.FxTabbedShellController;
@@ -314,13 +316,13 @@ public class FxLandingShellController extends FxNonWizardShellController
 	@FXML 
 	private void onReports(ActionEvent event)
 	{
-		
+		doAction(new ActionMenuReports(getMainWindow()));
 	}
 		
 	@FXML 
 	private void onCharts(ActionEvent event)
 	{
-		
+		doAction(new ActionMenuCharts(getMainWindow()));
 	}
 
 	@FXML
