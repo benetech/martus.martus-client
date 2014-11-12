@@ -18,7 +18,7 @@
       </content>
     </Tab>
     
-    <Tab id="keyBackupTab" fx:id="keyBackupTab" text="%WizardStep6">
+    <Tab id="keyBackupTab" fx:id="keyBackupTab" text="%KeyBackup">
       <content>
         <AnchorPane fx:id="keyBackupPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
       </content>

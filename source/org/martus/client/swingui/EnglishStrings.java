@@ -1919,7 +1919,7 @@ public class EnglishStrings
 "field:WizardStep5=Import Forms",
 "field:WizardStep5Heading=Import Form Template",
 "field:WizardStep5Information=Select a template for creating Martus forms.",
-"field:WizardStep6=Key Backup",
+"field:KeyBackup=Key Backup",
 "field:WizardStep6Heading=Backup key",
 "field:WizardStep6Information=Make a copy of your account's encryption key to ensure continued access to your account.",
 "button:GetStarted=Get Started",
