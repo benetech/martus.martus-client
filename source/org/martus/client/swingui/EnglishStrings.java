@@ -704,7 +704,7 @@ public class EnglishStrings
 "field:AccountIdWithPublicCode=#AccountId# #PublicCode#",
 "field:HistoryVersion=#VersionNumber#: #DateSaved# : #Title#",
 "wintitle:ExportEncryptedBulletin=Export Encrypted",
-"field:account=Account",
+"field:Account=Account",
 "field:AuthorNickname=Author Nickname:",
 "field:AuthorNicknameFieldDescription=Name here if available otherwise blank",
 "field:AuthorPublicCode=Author Public Code:",

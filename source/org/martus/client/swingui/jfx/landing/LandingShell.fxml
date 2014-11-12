@@ -20,7 +20,7 @@
 								<MenuItem mnemonicParsing="false" onAction="#onTorPreferences" text="%TorPreferences" />
 							</items>
 						</Menu>
-						<Menu mnemonicParsing="false" styleClass="menu-item" text="%account">
+						<Menu mnemonicParsing="false" styleClass="menu-item" text="%Account">
 							<items>
 							<MenuItem mnemonicParsing="false" onAction="#onChangeUsernameAndPassword" styleClass="menu-item" text="%ChangeUsernameAndPassword" />
 							<MenuItem mnemonicParsing="false" onAction="#onAccountSharing" styleClass="menu-item" text="%AccountSharing" />
