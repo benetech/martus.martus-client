@@ -103,16 +103,6 @@ Scene {
 -fx-background-insets: 0 0 -1 0, 0, 1, 2;
 }
 
-.iconButton {
-    -fx-background-color: #2c2c2c;
-    -fx-background-radius: 0 2 2 0;
-    -fx-text-fill: #FFFFFF;
-	-fx-font-size: 17px;
-    -fx-font-weight: bold;
-    -fx-alignment: center;
-    -fx-padding: 2 5 2 5;
-}
-
 .headerFieldBox {
 	-fx-padding:0 10 0 10;
 	-fx-background-color:#FFFFFF;
