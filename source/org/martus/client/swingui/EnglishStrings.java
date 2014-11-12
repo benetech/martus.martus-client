@@ -513,6 +513,7 @@ public class EnglishStrings
 "button:ExportMultiKey=Export 3 Key",
 
 "field:RecordLocationLocal=Local",
+"field:RecordLocationServer=Server",
 "field:RecordLocationServerTab=Server",
 "field:serverWithColon=Server:",
 "field:RecordLocationBothLocalAndServer=Both",
