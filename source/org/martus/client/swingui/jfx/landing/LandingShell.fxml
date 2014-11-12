@@ -13,21 +13,21 @@
 			<children>
 				<MenuBar fx:id="global_menu">
 					<menus>
-						<Menu mnemonicParsing="false" text="%ServerSettings">
+						<Menu mnemonicParsing="false" text="%Menu.ServerSettings">
 							<items>
-								<MenuItem mnemonicParsing="false" onAction="#onConfigureServer" text="%ServerSettings" />
-								<MenuItem mnemonicParsing="false" onAction="#onSystemPreferences" text="%SystemPreferences" />
-								<MenuItem mnemonicParsing="false" onAction="#onTorPreferences" text="%TorPreferences" />
+								<MenuItem mnemonicParsing="false" onAction="#onConfigureServer" text="%Menu.ServerSettings" />
+								<MenuItem mnemonicParsing="false" onAction="#onSystemPreferences" text="%Menu.SystemPreferences" />
+								<MenuItem mnemonicParsing="false" onAction="#onTorPreferences" text="%Menu.TorPreferences" />
 							</items>
 						</Menu>
-						<Menu mnemonicParsing="false" styleClass="menu-item" text="%Account">
+						<Menu mnemonicParsing="false" styleClass="menu-item" text="%Menu.Account">
 							<items>
-							<MenuItem mnemonicParsing="false" onAction="#onChangeUsernameAndPassword" styleClass="menu-item" text="%ChangeUsernameAndPassword" />
-							<MenuItem mnemonicParsing="false" onAction="#onAccountSharing" styleClass="menu-item" text="%AccountSharing" />
-							<MenuItem mnemonicParsing="false" onAction="#onContactInformation" styleClass="menu-item" text="%ContactInformation" />
-							<MenuItem mnemonicParsing="false" onAction="#onBackupKeypair" styleClass="menu-item" text="%WizardStep6Heading" />
-                        <MenuItem mnemonicParsing="false" onAction="#onManageContacts" text="%ManageContacts" />
-							<MenuItem mnemonicParsing="false" onAction="#onDeleteMyData" styleClass="menu-item" text="%DeleteAccount" />
+							<MenuItem mnemonicParsing="false" onAction="#onChangeUsernameAndPassword" styleClass="menu-item" text="%Menu.ChangeUsernameAndPassword" />
+							<MenuItem mnemonicParsing="false" onAction="#onAccountSharing" styleClass="menu-item" text="%Menu.AccountSharing" />
+							<MenuItem mnemonicParsing="false" onAction="#onContactInformation" styleClass="menu-item" text="%Menu.ContactInformation" />
+							<MenuItem mnemonicParsing="false" onAction="#onBackupKeypair" styleClass="menu-item" text="%Menu.WizardStep6Heading" />
+                        <MenuItem mnemonicParsing="false" onAction="#onManageContacts" text="%Menu.ManageContacts" />
+							<MenuItem mnemonicParsing="false" onAction="#onDeleteMyData" styleClass="menu-item" text="%Menu.DeleteAccount" />
 							</items>
 						</Menu>
                   <Menu mnemonicParsing="false" text="%Menu.Analysis">
