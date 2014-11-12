@@ -12,7 +12,7 @@
         <Pane fx:id="contentPane" prefWidth="840.0" />
       </top>
       <bottom>
-        <Button mnemonicParsing="false" onAction="#onExportMultiKey" text="%Button.Export3Key"/>
+        <Button mnemonicParsing="false" onAction="#onExportMultiKey" text="%Button.ExportMultiKey"/>
       </bottom>
     </BorderPane>
   </children>
