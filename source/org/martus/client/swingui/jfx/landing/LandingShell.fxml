@@ -67,7 +67,7 @@
                            <children>
       								<ImageView fitHeight="33.0" fitWidth="97.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true">
       									<image>
-      										<Image url="@../../dialogs/Martus-logo-white-text-160x72.png" />
+      										<Image url="@../../dialogs/Martus-logo-black-text-120x54.png" />
       									</image>
       								</ImageView>
                            </children>
