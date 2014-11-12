@@ -418,7 +418,7 @@ public class EnglishStrings
 "button:versionBulletin=Version",
 "button:shareBulletin=Share",
 
-"button:inputservernameok=OK",
+"button:InputServerNameOk=OK",
 "button:inputserverpubliccodeok=OK",
 "button:inputsearchok=Search",
 "button:inputservermagicwordok=OK",
