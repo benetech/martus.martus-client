@@ -79,7 +79,7 @@
 								</GridPane>
 								<HBox alignment="TOP_RIGHT" prefHeight="100.0" >
 									<children>
-										<Button fx:id="addTemplateButton" onAction="#onAdd" mnemonicParsing="false" text="%Button.AddFieldToReport">
+										<Button fx:id="addTemplateButton" onAction="#onAdd" mnemonicParsing="false" text="%Button.AddTemplate">
 										</Button>
 									</children>
 								</HBox>
