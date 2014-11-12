@@ -30,7 +30,7 @@
             <Label styleClass="mainText" text="%WizardStep1Information" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
 
             <Label styleClass="stepNumber" text="%Step2" GridPane.rowIndex="2" />
-            <Label styleClass="headingLevel3" text="%WizardStep2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label styleClass="headingLevel3" text="%ServerSettings" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label styleClass="mainText" text="%WizardStep2Information" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
 
             <Label styleClass="stepNumber" text="%Step3" GridPane.rowIndex="3" />

@@ -13,7 +13,7 @@
 			<children>
 				<MenuBar fx:id="global_menu">
 					<menus>
-						<Menu mnemonicParsing="false" text="%WizardStep2">
+						<Menu mnemonicParsing="false" text="%ServerSettings">
 							<items>
 								<MenuItem mnemonicParsing="false" onAction="#onConfigureServer" text="%ServerSettings" />
 								<MenuItem mnemonicParsing="false" onAction="#onSystemPreferences" text="%SystemPreferences" />
