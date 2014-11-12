@@ -30,6 +30,12 @@
 							<MenuItem mnemonicParsing="false" onAction="#onDeleteMyData" styleClass="menu-item" text="%DeleteAccount" />
 							</items>
 						</Menu>
+                  <Menu mnemonicParsing="false" text="%Menu.Analysis">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#onReports" text="%Menu.Reports" />
+                        <MenuItem mnemonicParsing="false" onAction="#onCharts" text="%Menu.Charts" />
+                    </items>
+                  </Menu>
 					</menus>
 				</MenuBar>
 
