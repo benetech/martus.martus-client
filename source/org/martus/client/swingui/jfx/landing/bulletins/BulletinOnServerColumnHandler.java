@@ -30,6 +30,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
 
@@ -60,11 +62,18 @@ public class BulletinOnServerColumnHandler implements Callback<TableColumn<Bulle
 		    else 
 		    {
 		    		Boolean onServer = (Boolean)item;
-		    		String labelText = NOT_ON_SERVER;
 		    		if(onServer)
-					labelText = ON_SERVER;
-		    		final Node statusCell = new Label(labelText);
-	    			setGraphic(statusCell);
+		    		{
+			    		Image image = new Image(ON_SERVER_IMAGE_PATH);
+			    		final Node statusCell = new ImageView(image);
+		    			setGraphic(statusCell);
+				}
+		    		else
+		    		{
+			    		String labelText = NOT_ON_SERVER;
+		    			final Node statusCell = new Label(labelText);
+		    			setGraphic(statusCell);
+		    		}
 	    			setAlignment(Pos.CENTER);
 		    	}
 		}
@@ -77,8 +86,8 @@ public class BulletinOnServerColumnHandler implements Callback<TableColumn<Bulle
 		return new TableCellUpdateHandler(param);
 	}	
 	
-	final String ON_SERVER = "\u2714";
-	final String NOT_ON_SERVER = "\u2298";
+	private final String ON_SERVER_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/on_server.png";
+	private final String NOT_ON_SERVER = "\u2298";
 }	
 
 
