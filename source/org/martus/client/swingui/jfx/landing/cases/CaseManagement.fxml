@@ -104,7 +104,7 @@
                <graphic>
                   <ImageView fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../images/server_sync.png" />
+                        <Image url="@../../images/synch_manager.png" />
                      </image>
                   </ImageView>
                </graphic>
