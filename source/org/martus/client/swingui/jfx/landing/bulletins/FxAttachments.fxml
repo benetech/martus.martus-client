@@ -15,11 +15,11 @@
         </columns>
       </TableView>
    </center>
-    <bottom>
+   <top>
       <HBox BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="addAttachmentButton" mnemonicParsing="false" onAction="#onAddAttachment" text="%Button.addattachment" />
          </children>
       </HBox>
-   </bottom>
+   </top>
 </BorderPane>
