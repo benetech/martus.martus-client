@@ -404,7 +404,7 @@ public class EnglishStrings
 "button:ImportBulletin=Import Record",
 "button:ShowTrash=Trash",
 "button:export=Export",
-"button:help=Help",
+"button:Help=Help",
 "button:create=Create",
 "button:search=Search",
 "button:print=Print",
@@ -862,7 +862,7 @@ public class EnglishStrings
 
 "field:ExportBulletinMba=Exporting encrypted Item",
 "field:ExportBulletinXml=Exporting non-encrypted Items",
-"field:bulletinDetails=Bulletin Details",
+"field:BulletinDetails=Bulletin Details",
 "wintitle:BulletinDetails=Bulletin Details",
 
 "field:confirmquestion=Are you sure you want to continue?",
