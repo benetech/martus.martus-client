@@ -100,7 +100,7 @@
    								<graphic>
                            		<ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
    									<image>
-   									<Image url="@../../images/templates.png" />
+   									<Image url="@../../images/template_manager.png" />
    									</image>
                                	</ImageView>
    								</graphic>
