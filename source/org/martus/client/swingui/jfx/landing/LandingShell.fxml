@@ -11,8 +11,6 @@
 	<top>
 		<HBox alignment="CENTER_RIGHT" styleClass="menu-bar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 			<children>
-			
-				<Button mnemonicParsing="false" onAction="#onManageContacts" text="%Button.Contacts" />
 				<MenuBar fx:id="global_menu">
 					<menus>
 						<Menu mnemonicParsing="false" text="%WizardStep2">
@@ -28,6 +26,7 @@
 							<MenuItem mnemonicParsing="false" onAction="#onAccountSharing" styleClass="menu-item" text="%AccountSharing" />
 							<MenuItem mnemonicParsing="false" onAction="#onContactInformation" styleClass="menu-item" text="%ContactInformation" />
 							<MenuItem mnemonicParsing="false" onAction="#onBackupKeypair" styleClass="menu-item" text="%WizardStep6Heading" />
+                        <MenuItem mnemonicParsing="false" onAction="#onManageContacts" text="%ManageContacts" />
 							<MenuItem mnemonicParsing="false" onAction="#onDeleteMyData" styleClass="menu-item" text="%DeleteAccount" />
 							</items>
 						</Menu>
