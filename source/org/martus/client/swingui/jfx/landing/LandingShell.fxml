@@ -78,6 +78,13 @@
       									<font>
       										<Font name="Helvetica" size="14.0" />
       									</font>
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/create.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
       								</Button>
                               <Separator prefWidth="10.0" visible="false" />
                            </children>

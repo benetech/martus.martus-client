@@ -1806,7 +1806,7 @@ public class EnglishStrings
 "button:AddPermissions=Update Contact's Access",
 "button:Contacts=Contacts",
 "button:ManageContacts=Manage Contacts",
-"button:Create=+ Create",
+"button:Create=Create",
 
 "field:confirmClearHQInformationcause=You have chosen to remove the selected contact's accounts.  Any existing saved bulletins will still be visible by the old contact.  If you want to disallow this contact's viewing access to previously created Draft bulletins they must be re-saved after deleting the contact.  New versions of sealed bulletins will not be able to be viewed by the removed contact, but any old versions of sealed bulletins that already are on that contact's computer will still be viewable by the contact.",
 "field:confirmClearHQInformationeffect=By clicking on Yes, any draft or sealed bulletin saved in the future will no longer be accessible by your Contacts.",
