@@ -64,14 +64,14 @@ public class BulletinOnServerColumnHandler implements Callback<TableColumn<Bulle
 		    		Boolean onServer = (Boolean)item;
 		    		if(onServer)
 		    		{
-			    		Image image = new Image(ON_SERVER_IMAGE_PATH);
+		    			Image image = new Image(ON_SERVER_IMAGE_PATH);
 			    		final Node statusCell = new ImageView(image);
 		    			setGraphic(statusCell);
 				}
 		    		else
 		    		{
-			    		String labelText = NOT_ON_SERVER;
-		    			final Node statusCell = new Label(labelText);
+		    			Image image = new Image(NOT_ON_SERVER_IMAGE_PATH);
+			    		final Node statusCell = new ImageView(image);
 		    			setGraphic(statusCell);
 		    		}
 	    			setAlignment(Pos.CENTER);
@@ -87,7 +87,7 @@ public class BulletinOnServerColumnHandler implements Callback<TableColumn<Bulle
 	}	
 	
 	private final String ON_SERVER_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/on_server.png";
-	private final String NOT_ON_SERVER = "\u2298";
+	private final String NOT_ON_SERVER_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/not_on_server.png";
 }	
 
 
