@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -36,9 +37,30 @@
       </HBox>
       <HBox>
          <children>
-            <Button fx:id="uploadButton" mnemonicParsing="false" onAction="#onUpload" text="%Button.Upload" />
-            <Button fx:id="downloadButton" mnemonicParsing="false" onAction="#onDownload" text="%Button.Download" />
-            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDelete" text="%Button.DeleteFromServer" />
+            <Button fx:id="uploadButton" mnemonicParsing="false" onAction="#onUpload" text="%Button.Upload">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/upload.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="downloadButton" mnemonicParsing="false" onAction="#onDownload" text="%Button.Download">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/download.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDelete" text="%Button.DeleteFromServer">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/delete.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
          </children>
       </HBox>
    </children>
