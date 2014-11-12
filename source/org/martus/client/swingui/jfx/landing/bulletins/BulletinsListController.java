@@ -553,7 +553,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		}
 	}
 
-	final private String VIEW_BULLETIN_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/view_bulletin.png";
+	final private String VIEW_BULLETIN_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/view.png";
 	final private String EDIT_BULLETIN_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/edit.png";
 	
 	@FXML 
