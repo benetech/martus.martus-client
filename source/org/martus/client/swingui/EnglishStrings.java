@@ -1778,7 +1778,7 @@ public class EnglishStrings
 "field:BackgroundSorting=Sorting Bulletins...",
 "field:BackgroundPrinting=Preparing Report...",
 "field:BackgroundWorking=Working...",
-"field:Title=Title:",
+"field:RecordTitle=Title:",
 "field:To=To:",
 "field:From=From:",
 "field:VersionNumber=Version #:",

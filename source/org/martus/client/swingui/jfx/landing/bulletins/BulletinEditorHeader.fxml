@@ -37,7 +37,7 @@
 				<children>
 				
 				<!--Column 1 -->
-                  <Label styleClass="systemFieldTitle" text="%Title" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                  <Label styleClass="systemFieldTitle" text="%RecordTitle" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                   <Label styleClass="systemFieldTitle" text="%To" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                   <Label styleClass="systemFieldTitle" text="%From" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                   
