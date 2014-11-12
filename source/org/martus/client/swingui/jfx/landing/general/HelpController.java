@@ -150,7 +150,7 @@ public class HelpController extends FxController
 	@FXML
 	private void onLinkEMailTo(ActionEvent event)
 	{
-		openDefaultEmailApp("mailto:help@martus.org");
+		openDefaultEmailApp("mailto:martus@benetech.org");
 	}
 	
 	@FXML 
