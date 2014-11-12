@@ -31,7 +31,7 @@
 								</TableView>
 								<HBox alignment="CENTER_RIGHT">
 									<children>
-										<Button onAction="#onAvailableTabOkButton" mnemonicParsing="false" text="%Button.inputservernameok">
+										<Button onAction="#onAvailableTabOkButton" mnemonicParsing="false" text="%Button.InputServerNameOk">
 										</Button>
 									</children>
 									<padding>
