@@ -764,6 +764,7 @@ public class EnglishStrings
 "field:DateFormatSequence=Date Format Sequence:",
 "field:CalendarType=Calendar Type:",
 "field:NewRecords=New Records",
+"field:RecordDetails=Record Details",
 
 "wintitle:PrintPreview=Print Preview",
 "button:PrintToPrinter=Print To Printer",
