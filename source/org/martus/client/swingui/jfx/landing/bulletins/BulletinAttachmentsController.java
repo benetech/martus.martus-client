@@ -184,7 +184,7 @@ public class BulletinAttachmentsController extends FxController
 	}
 	
 	final private String REMOVE_ATTACHMENT_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/trash.png";
-	final private String VIEW_ATTACHMENT_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/viewAttachment.png";
+	final private String VIEW_ATTACHMENT_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/view_attachment.png";
 
 	@FXML 
 	private TableView attachmentsTable;
