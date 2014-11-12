@@ -298,7 +298,7 @@ public class ManageTemplatesController extends FxInSwingController
 		ReadOnlyObjectProperty<AbstractFxImportFormTemplateController> selectedDownloadTypeProperty = downloadChoiceBox.getSelectionModel().selectedItemProperty();
 		selectedDownloadTypeProperty.addListener(new DownloadTypeSelectedHandler());
 		downloadChoiceBox.visibleProperty().bind(downloadRadioButton.selectedProperty());
-		downloadChoiceBox.setItems(getImportTemplateChoices());
+		downloadChoiceBox.setItems(getImportTemplateChoices(getMainWindow()));
 		
 		chooseFileButton.visibleProperty().bind(importFileRadioButton.selectedProperty());
 		
@@ -307,13 +307,13 @@ public class ManageTemplatesController extends FxInSwingController
 		addTemplateButton.disableProperty().bind(Bindings.isNull(templateToAddProperty));
 	}
 	
-	private ObservableList<AbstractFxImportFormTemplateController> getImportTemplateChoices() throws Exception
+	private ObservableList<AbstractFxImportFormTemplateController> getImportTemplateChoices(UiMainWindow mainWindow) throws Exception
 	{
 		Vector<AbstractFxImportFormTemplateController> choices = new Vector<AbstractFxImportFormTemplateController>();
-		if (!getApp().getAllHQKeys().isEmpty())
-			choices.add(new FxImportFormTemplateFromMyContactsPopupController(getMainWindow()));
+		if (!mainWindow.getApp().getAllHQKeys().isEmpty())
+			choices.add(new FxImportFormTemplateFromMyContactsPopupController(mainWindow));
 		
-		choices.add(new FxSetupFormTemplateFromNewContactPopupController(getMainWindow()));
+		choices.add(new FxSetupFormTemplateFromNewContactPopupController(mainWindow));
 
 		return FXCollections.observableArrayList(choices);
 	}
