@@ -94,7 +94,7 @@ import org.martus.swing.Utilities;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 
-public class ActionMenuCharts extends UiMenuAction
+public class ActionMenuCharts extends UiMenuAction implements ActionDoer
 {
 	public ActionMenuCharts(UiMainWindow mainWindowToUse)
 	{
@@ -103,6 +103,11 @@ public class ActionMenuCharts extends UiMenuAction
 	}
 
 	public void actionPerformed(ActionEvent events)
+	{
+		doAction();
+	}
+
+	public void doAction()
 	{
 		try
 		{
