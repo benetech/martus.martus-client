@@ -224,7 +224,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	@FXML
 	private void onManageContacts(ActionEvent event)
 	{
-		doAction(new ActionMenuManageContactsWithoutResignIn(getMainWindow()));
+		onAccount(AccountController.MANAGE_CONTACTS_TAB_CODE);
 	}
 
 	private void onSettings(String tabToDisplayFirst)
@@ -311,7 +311,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 			logAndNotifyUnexpectedError(e);
 		}
 	}
-	
+		
 	@FXML
 	private void onChangeUsernameAndPassword(ActionEvent event)
 	{

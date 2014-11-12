@@ -50,8 +50,8 @@ public class AccountController extends FxTabbedShellController
 		loadControllerAndEmbedInPane(new UserAndPasswordController(getMainWindow()), usernameAndPasswordPane);
 		loadControllerAndEmbedInPane(new AccountSharingController(getMainWindow()), accountSharingPane);
 		loadControllerAndEmbedInPane(new KeyBackupController(getMainWindow()), keyBackupPane);
+		loadControllerAndEmbedInPane(new ManageContactsController(getMainWindow()), manageContactsPane);
 		loadControllerAndEmbedInPane(new ContactInformationController(getMainWindow()), contactInformationPane);
-		
 		selectInitialTabView();
 		
 		return shellContents;
@@ -75,6 +75,9 @@ public class AccountController extends FxTabbedShellController
 		
 		if(getFirstTabToDisplay().equals(CONTACT_INFORMATION_TAB_CODE))
 			return contactInformationTab;
+
+		if(getFirstTabToDisplay().equals(MANAGE_CONTACTS_TAB_CODE))
+			return manageContactsTab;
 		
 		return null;
 	}
@@ -89,6 +92,7 @@ public class AccountController extends FxTabbedShellController
 	public static final String ACCOUNT_SHARING_TAB_CODE = "accountSharing";
 	public static final String KEY_BACKUP_TAB_CODE = "keyBackupTab";
 	public static final String CONTACT_INFORMATION_TAB_CODE = "contactInformationTab";
+	public static final String MANAGE_CONTACTS_TAB_CODE = "manageContactsTab";
 	
 	@FXML
 	private TabPane accountTabPane;
@@ -105,6 +109,8 @@ public class AccountController extends FxTabbedShellController
 	@FXML
 	private Tab contactInformationTab;
 	
+	@FXML
+	private Tab manageContactsTab;
 	
 	@FXML
 	private Pane usernameAndPasswordPane;
@@ -117,4 +123,7 @@ public class AccountController extends FxTabbedShellController
 
 	@FXML
 	private Pane contactInformationPane;
+	
+	@FXML
+	private Pane manageContactsPane;
 }
