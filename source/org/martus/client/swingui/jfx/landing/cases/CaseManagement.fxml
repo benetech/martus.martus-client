@@ -63,7 +63,7 @@
 		         <graphic>
 		            <ImageView fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
 		               <image>
-		                  <Image url="@/org/martus/client/swingui/jfx/images/cog.png" />
+		                  <Image url="@/org/martus/client/swingui/jfx/images/settings.png" />
 		               </image>
 		            </ImageView>
 		         </graphic>
