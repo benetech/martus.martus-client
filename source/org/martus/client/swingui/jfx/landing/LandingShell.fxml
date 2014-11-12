@@ -39,7 +39,7 @@
 					</menus>
 				</MenuBar>
 
-				<Button mnemonicParsing="false" onAction="#onHelpMenu" text="%Button.help" />	
+				<Button mnemonicParsing="false" onAction="#onHelpMenu" text="%Button.Help" />	
 				
 			</children>
 		</HBox>

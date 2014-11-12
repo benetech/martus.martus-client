@@ -13,7 +13,7 @@
 		<children>
             <BorderPane>
                <left>
-                  <Hyperlink onAction="#onShowBulletinDetails" text="%bulletinDetails" BorderPane.alignment="CENTER" />
+                  <Hyperlink onAction="#onShowBulletinDetails" text="%BulletinDetails" BorderPane.alignment="CENTER" />
                </left>
                <right>
                   <ComboBox fx:id="historyItems" onAction="#onShowVersion" promptText="%BulletinDetailsHistory" BorderPane.alignment="CENTER" />
