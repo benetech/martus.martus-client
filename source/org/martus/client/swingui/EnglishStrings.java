@@ -1910,7 +1910,7 @@ public class EnglishStrings
 "field:WizardStep1=Create Account",
 "field:WizardStep1Heading=Account Creation",
 "field:WizardStep1Information=Your information will be kept safe, with a password protected, encrypted account.",
-"field:WizardStep2=Settings",
+"field:ServerSettings=Settings",
 "field:WizardStep2Information=Establish your system settings for the use of Tor (a tool to help hide network activity) and dates.",
 "field:WizardStep3=Server Setup",
 "field:WizardStep3Information=Backup your information to a secure server.",
