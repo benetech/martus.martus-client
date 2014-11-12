@@ -507,7 +507,7 @@ public class EnglishStrings
 "button:ServerSyncRecordAuthor=Author",
 "button:ServerSyncRecordLastModified=Last Saved",
 "button:ServerSyncRecordSize=Size (Kb)",
-"button:HaveServerDefaulttoOn=Have Server Default to On? (will be applied on login)",
+"button:HaveServerDefaultToOn=Have Server Default to On? (will be applied on login)",
 "button:AutomaticallyDownloadFiles=Automatically Download Files from Server?",
 "button:ExportAccountPublicKey=Export Account Public Key",
 "button:Export3Key=Export 3 Key",

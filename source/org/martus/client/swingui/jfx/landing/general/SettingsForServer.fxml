@@ -76,7 +76,7 @@
 <children>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Label text="%Button.HaveServerDefaulttoOn" />
+                                    <Label text="%Button.HaveServerDefaultToOn" />
                                     <CheckBox fx:id="serverDefaultToOn" mnemonicParsing="false" text="%Button.yes" />
                                  </children>
                               </HBox>
