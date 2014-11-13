@@ -10,7 +10,7 @@
        <HBox>
          <children>
             <Hyperlink fx:id="fxLocationAll" onAction="#onShowAll" text="%All" />
-            <Hyperlink fx:id="fxLocationLocalOnly" onAction="#onShowLocalOnly" text="$LocalOnly" />
+            <Hyperlink fx:id="fxLocationLocalOnly" onAction="#onShowLocalOnly" text="%LocalOnly" />
             <Hyperlink fx:id="fxLocationServerOnly" onAction="#onShowServerOnly" text="%ServerOnly" />
             <Hyperlink fx:id="fxLocationBoth" onAction="#onShowBoth" text="%RecordLocationBothLocalAndServer" />
          </children>
