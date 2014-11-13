@@ -2000,7 +2000,7 @@ public class EnglishStrings
 "field:LinkToTokenAndPublicCode=Get your Token and Code",
 
 "field:ManageContactsHeading=Contacts",
-"field:ManageContactsDescription=Ask your contacts for their access token and public code to add them here.",
+"field:ManageContactsDescription=Ask your contacts for their access token and public code to add and verify them here.",
 
 "field:NoFormTemplateTitle=[no title]",
 "button:GenericForms=Generic",
