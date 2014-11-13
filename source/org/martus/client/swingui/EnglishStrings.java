@@ -34,7 +34,7 @@ public class EnglishStrings
 "wintitle:main=Martus Information Management and Data Collection Framework",
 "wintitle:create=Create Record",
 "wintitle:options=Options",
-"wintitle:HelpDefaultDetails=Help on Bulletin Details Field Default Content",
+"wintitle:HelpDefaultDetails=Help on Record Details Field Default Content",
 "wintitle:MartusSignIn=Martus SignIn",
 "wintitle:MartusSignInValidate=Validate User",
 "wintitle:MartusSignInRetypePassword=Confirm Password",
@@ -44,21 +44,21 @@ public class EnglishStrings
 "wintitle:BulletinDetailsDialog=Record Details",
 "wintitle:IncompatibleMtfVersion=Incompatible Translation Version",
 "wintitle:DuplicateLabelsInCustomTemplate=Warning Duplicate Labels Found",
-"wintitle:ImportProgress=Importing Bulletins",
-"wintitle:ExportProgress=Exporting Bulletins",
+"wintitle:ImportProgress=Importing Recordss",
+"wintitle:ExportProgress=Exporting Records",
 
 // NOTE: With confirm is for swing; without is for javafx
-"wintitle:confirmsend=Confirm Save Bulletin",
-"wintitle:send=Confirm Save Bulletin",
+"wintitle:confirmsend=Confirm Save Record",
+"wintitle:send=Confirm Save Record",
 
-"wintitle:confirmretrieve=Confirm Retrieve Bulletins",
+"wintitle:confirmretrieve=Confirm Retrieve Records",
 "wintitle:confirmRemoveAttachment=Confirm Remove Attachments",
 "wintitle:confirmOverWriteExistingFile=Confirm Replace Existing File",
 "wintitle:confirmCancelModifyBulletin=Cancel Edit",
 "wintitle:confirmSetImportPublicKey=Confirm Import of Public Account Id",
 "wintitle:confirmWarningSwitchToNormalKeyboard=Security Warning",
-"wintitle:confirmCloneMySealedAsDraft=Confirm Create New Version of Sealed Bulletin",
-"wintitle:confirmCloneBulletinAsMine=Confirm Create Copy of Someone Else's Bulletin",
+"wintitle:confirmCloneMySealedAsDraft=Confirm Create New Version of Sealed Record",
+"wintitle:confirmCloneBulletinAsMine=Confirm Create Copy of Someone Else's Record",
 "wintitle:confirmPrinterWarning=Print Configuration Warning",
 "wintitle:confirmUploadReminder=Upload Reminder",
 "wintitle:confirmDraftUploadReminder=Unsent Draft Reminder",
@@ -79,20 +79,20 @@ public class EnglishStrings
 "wintitle:confirmErrorRecoverIvalidFileName=Invalid File",
 "wintitle:confirmBackupKeyShareVerifyDisks=Verify Disks",
 "wintitle:confirmCancelShareVerify=Cancel Verification",
-"wintitle:confirmEditBulletinWithUnknownTags=Modify Bulletin",
-"wintitle:confirmExportUnknownTags=Export Bulletins",
+"wintitle:confirmEditBulletinWithUnknownTags=Modify Record",
+"wintitle:confirmExportUnknownTags=Export Records",
 "wintitle:confirmKeyPairFileExistsOverWrite=Key file Exists",
-"wintitle:confirmQuickEraseOutboxNotEmpty=Unsent Bulletins Reminder",
+"wintitle:confirmQuickEraseOutboxNotEmpty=Unsent Records Reminder",
 "wintitle:confirmCancelBackupRecovery=Cancel Backup Restore",
 "wintitle:confirmUnableToRecoverFromBackupFile=Unable to Restore from Backup File",
 "wintitle:confirmWarningPathChosenMayNotBeRemoveable=Questionable Media Chosen",
 "wintitle:confirmBackupKeyPairInformation=Key Backup",
 "wintitle:confirmhelpStringNotFound=Text Not Found",
 "wintitle:confirmNeedsFolderMigration=Folder Migration Required",
-"wintitle:confirmNeedsBulletinVersioningMigration=Bulletin Versioning Migration Required",
+"wintitle:confirmNeedsBulletinVersioningMigration=Record Versioning Migration Required",
 "wintitle:confirmUseBulletinsCustomFields=Custom Fields Selection",
 "wintitle:confirmUseBulletinsDraftCustomFields=Custom Fields Selection",
-"wintitle:confirmUnAuthoredBulletinDeleteBeforePaste=Bulletin Already Exists",
+"wintitle:confirmUnAuthoredBulletinDeleteBeforePaste=Record Already Exists",
 "wintitle:confirmRemoveMartus=Delete All Data and Remove Martus",
 "wintitle:confirmDeleteMyData=Delete My Data",
 "wintitle:confirmNewerConfigInfoFileFound=Release Warning",
@@ -104,9 +104,9 @@ public class EnglishStrings
 "wintitle:confirmReportIncludePrivate=All Data Private",
 "wintitle:confirmSearchProgressCancel=Cancel Search",
 "wintitle:confirmReportSearchProgressCancel=Cancel Search",
-"wintitle:confirmSealSelectedBulletins=Seal Bulletins",
-"wintitle:confirmSealingSelectedBulletinsCancel=Sealing Bulletins",
-"wintitle:confirmXmlSchemaNewerImportAnyway=Import Bulletins",
+"wintitle:confirmSealSelectedBulletins=Seal Records",
+"wintitle:confirmSealingSelectedBulletinsCancel=Sealing Records",
+"wintitle:confirmXmlSchemaNewerImportAnyway=Import Records",
 "wintitle:confirmLoadingFieldValuesFromAllBulletinsCancel=Loading Values",
 "wintitle:confirmImportingCustomizationUnknownSigner=Template Manager",
 
@@ -115,16 +115,16 @@ public class EnglishStrings
 "wintitle:notifyImportTemplate=Import Template",
 "wintitle:notifyContactsNoServer=Contacts Server",
 
-"wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
-"wintitle:notifyDropErrorBulletinOlder=Cannot Move Bulletin(s)",
-"wintitle:notifyDropErrors=Error Moving Bulletin(s)",
-"wintitle:notifyPasteErrorBulletinAlreadyExists=Cannot Paste Bulletin(s)",
-"wintitle:PasteErrorBulletinOlder=Cannot Paste Bulletin(s)",
-"wintitle:notifyPasteError=Error Pasting Bulletin(s)",
-"wintitle:notifyretrieveworked=Retrieve Bulletins",
-"wintitle:notifyretrievefailed=Retrieve Bulletins",
-"wintitle:notifyretrievenothing=Retrieve Bulletins",
-"wintitle:notifyretrievenoserver=Retrieve Bulletins",
+"wintitle:notifyDropErrorBulletinExists=Cannot Move Record(s)",
+"wintitle:notifyDropErrorBulletinOlder=Cannot Move Record(s)",
+"wintitle:notifyDropErrors=Error Moving Record(s)",
+"wintitle:notifyPasteErrorBulletinAlreadyExists=Cannot Paste Record(s)",
+"wintitle:PasteErrorBulletinOlder=Cannot Paste Record(s)",
+"wintitle:notifyPasteError=Error Pasting Record(s)",
+"wintitle:notifyretrieveworked=Retrieve Records",
+"wintitle:notifyretrievefailed=Retrieve Records",
+"wintitle:notifyretrievenothing=Retrieve Records",
+"wintitle:notifyretrievenoserver=Retrieve Records",
 "wintitle:notifyDeleteServerDraftsWorked=Delete Drafts From Server",
 "wintitle:notifyDeleteServerDraftsNone=Delete Drafts From Server",
 "wintitle:notifyDeleteServerDraftsFailed=Delete Drafts From Server",
@@ -134,7 +134,7 @@ public class EnglishStrings
 "wintitle:notifyPasswordInvalid=Invalid Setup Information",
 "wintitle:notifyPasswordMatchesUserName=Invalid Setup Information",
 "wintitle:notifyincorrectsignin=Incorrect Signin",
-"wintitle:notifyuploadrejected=Error Sending Bulletin",
+"wintitle:notifyuploadrejected=Error Sending Record",
 "wintitle:notifycorruptconfiginfo=Error Loading Configuration File",
 "wintitle:notifyserverok=Server Selection Complete",
 "wintitle:notifymagicwordok=Upload Permission Granted",
@@ -146,8 +146,8 @@ public class EnglishStrings
 "wintitle:notifySearchFailed=Search Results",
 "wintitle:notifySearchFound=Search Results",
 "wintitle:notifyServerError=Server Error",
-"wintitle:notifyFoundOrphans=Recovered Lost Bulletins",
-"wintitle:notifyFoundDamagedBulletins=Detected Damaged Bulletins",
+"wintitle:notifyFoundOrphans=Recovered Lost Records",
+"wintitle:notifyFoundDamagedBulletins=Detected Damaged Records",
 "wintitle:notifyErrorSavingState=Error Saving State",
 "wintitle:notifyErrorSavingFile=Error Saving File",
 "wintitle:notifyErrorBackingupKeyPair=Error Verifying Key Pair",
@@ -162,23 +162,23 @@ public class EnglishStrings
 "wintitle:notifyServerInfoInvalid=Server Response Invalid",
 "wintitle:notifyConfigNoServer=Unable to Connect to Server",
 "wintitle:notifyServerCodeWrong=Incorrect Server Public Code",
-"wintitle:notifyRetrieveCanceled=Bulletin Download Canceled",
+"wintitle:notifyRetrieveCanceled=Record Download Canceled",
 "wintitle:notifyRememberPassword=Remember Your Password",
-"wintitle:notifyDamagedBulletinMovedToDiscarded=Moved Damaged Bulletin",
-"wintitle:notifyUploadFailedBulletinNotSentToServer=Unable to Send Bulletin To Server",
-"wintitle:notifyPreviewOneBulletinOnly=Preview One Bulletin Only",
-"wintitle:notifyPreviewNoBulletinsSelected=No Bulletin Selected",
+"wintitle:notifyDamagedBulletinMovedToDiscarded=Moved Damaged Record",
+"wintitle:notifyUploadFailedBulletinNotSentToServer=Unable to Send Record To Server",
+"wintitle:notifyPreviewOneBulletinOnly=Preview One Record Only",
+"wintitle:notifyPreviewNoBulletinsSelected=No Record Selected",
 "wintitle:notifyRetrievePreviewNotAvailableYet=Unable To Preview",
 "wintitle:notifyRetrievedOnlySomeSummaries=Error During Retrieve",
 "wintitle:notifyConfirmCorrectDefaultDetailsData=Confirm Correct Default Details Content",
-"wintitle:notifyExportComplete=Export Bulletins",
-"wintitle:notifyExportCompleteMissingAttachments=Export Bulletins",
+"wintitle:notifyExportComplete=Export Records",
+"wintitle:notifyExportCompleteMissingAttachments=Export Records",
 "wintitle:notifyErrorDuringExit=Error During Exit",
 
 "wintitle:notifyErrorWritingFile=Error Writing File",
 "wintitle:notifyErrorReadingFile=Error Reading File",
-"wintitle:notifyExportZeroBulletins=No Bulletins Selected",
-"wintitle:notifyPrintZeroBulletins=No Bulletins Selected",
+"wintitle:notifyExportZeroBulletins=No Records Selected",
+"wintitle:notifyPrintZeroBulletins=No Records Selected",
 "wintitle:notifyNoGridRowSelected=No Row Selected",
 "wintitle:notifyNonStringFieldRowSelected=Load Values",
 "wintitle:notifyNoImportFileSpecified=No Folder Specified",
@@ -205,11 +205,11 @@ public class EnglishStrings
 "wintitle:notifyFilesWillNotBeDeleted=Files Not Deleted",
 "wintitle:notifyFolderMigrationFailed=Folder Migration Error",
 "wintitle:notifyResendErrorNotAuthorizedToSend=Not Authorized To Send",
-"wintitle:notifyResendError=Error Sending Bulletin",
+"wintitle:notifyResendError=Error Sending Record",
 "wintitle:notifyErrorRenameFolder=Unable to Rename Folder",
 "wintitle:notifyErrorRenameFolderExists=Unable to Rename Folder",
-"wintitle:notifyAlreadyViewingThisVersion=Bulletin Version Already Being Viewed",
-"wintitle:notifyBulletinVersionNotInSystem=Bulletin Version Not Found",
+"wintitle:notifyAlreadyViewingThisVersion=Record Version Already Being Viewed",
+"wintitle:notifyBulletinVersionNotInSystem=Record Version Not Found",
 "wintitle:notifyErrorExportingCustomizationTemplate=Error Exporting Template",
 "wintitle:notifyErrorImportingCustomizationTemplate=Error Importing Template",
 "wintitle:notifyErrorImportingCustomizationTemplateFuture=Error Importing Template",
@@ -220,19 +220,19 @@ public class EnglishStrings
 "wintitle:notifyRetrieveFileDataVersionError=Warning",
 "wintitle:notifyRetrieveFileError=Error",
 "wintitle:notifyImportComplete=Import Complete",
-"wintitle:notifyErrorImportingBulletins=Error Importing Bulletins",
-"wintitle:notifyErrorExportingBulletins=Error Exporting Bulletins",
+"wintitle:notifyErrorImportingBulletins=Error Importing Records",
+"wintitle:notifyErrorExportingBulletins=Error Exporting Records",
 "wintitle:notifyImportMissingAttachments=Warning Missing Attachments",
-"wintitle:notifyImportBulletinsNotImported=Warning Bulletins Not Imported",
+"wintitle:notifyImportBulletinsNotImported=Warning Records Not Imported",
 "wintitle:notifyNoReportFieldsSelected=Create Report",
 "wintitle:notifyNotValidReportFormat=Reports",
 "wintitle:notifyReportFormatIsOld=Reports",
 "wintitle:notifyReportFormatIsTooNew=Reports",
 "wintitle:notifyReportFormatDifferentLanguage=Reports",
 "wintitle:notifyViewAttachmentNotAvailable=Unable to View Attachment",
-"wintitle:notifySealSelectedZeroBulletinsOurs=Seal Bulletins",
-"wintitle:notifyErrorImportingBulletinsTooOld=Import Bulletin(s)",
-"wintitle:notifyErrorImportingBulletinsTooNew=Import Bulletin(s)",
+"wintitle:notifySealSelectedZeroBulletinsOurs=Seal Records",
+"wintitle:notifyErrorImportingBulletinsTooOld=Import Record(s)",
+"wintitle:notifyErrorImportingBulletinsTooNew=Import Record(s)",
 "wintitle:notifyErrorSavingDictionary=Error",
 "wintitle:notifyErrorLoadingDictionary=Error",
 "wintitle:notifyErrorUpdatingDictionary=Error",
@@ -265,7 +265,7 @@ public class EnglishStrings
 "field:notifyServerNotCompatiblecause=This server does not support this feature.",
 
 "wintitle:notifyRetrieveCompleted=Retrieve Complete",
-"field:notifyRetrieveCompletedcause=Retrieving bulletins from the server is complete",
+"field:notifyRetrieveCompletedcause=Retrieving records from the server is complete",
 
 "wintitle:notifyErrorGettingCompliance=Error Getting Compliance Statement",
 "field:notifyErrorGettingCompliancecause=An error occured while trying to connect to the server.",
@@ -299,25 +299,25 @@ public class EnglishStrings
 "wintitle:setupsignin=Martus Setup Signin",
 "wintitle:setupcontact=Martus Setup Contact Information",
 "wintitle:BulletinTemplate=Details Field Default Content",
-"wintitle:RetrieveMySealedBulletins=Retrieve My Sealed Bulletins",
-"wintitle:RetrieveMyDraftBulletins=Retrieve My Draft Bulletins",
+"wintitle:RetrieveMySealedBulletins=Retrieve My Sealed Records",
+"wintitle:RetrieveMyDraftBulletins=Retrieve My Draft Records",
 "wintitle:DeleteMyDraftsFromServer=Delete My Drafts From Server",
 "wintitle:about=About Martus",
 "wintitle:AccountInfo=Account Information",
 "wintitle:Help=Martus Help",
-"wintitle:RetrieveMySealedBulletinProgress=Retrieving Bulletins",
-"wintitle:RetrieveMyDraftBulletinProgress=Retrieving Bulletins",
-"wintitle:RetrieveMySealedBulletinSummaries=Retrieving Bulletin Summaries",
-"wintitle:RetrieveMyDraftBulletinSummaries=Retrieving Bulletin Summaries",
-"wintitle:DeleteServerDraftsBulletinSummaries=Retrieving Bulletin Summaries",
+"wintitle:RetrieveMySealedBulletinProgress=Retrieving Records",
+"wintitle:RetrieveMyDraftBulletinProgress=Retrieving Records",
+"wintitle:RetrieveMySealedBulletinSummaries=Retrieving Record Summaries",
+"wintitle:RetrieveMyDraftBulletinSummaries=Retrieving Record Summaries",
+"wintitle:DeleteServerDraftsBulletinSummaries=Retrieving Record Summaries",
 "wintitle:ConfigServer=Server Configuration",
 "wintitle:ServerSelectionResults=Server Configuration Results",
 "wintitle:search=Search",
-"wintitle:BulletinPreview=Bulletin Preview",
-"wintitle:DeleteBulletinFile=Delete Bulletin File",
+"wintitle:BulletinPreview=Record Preview",
+"wintitle:DeleteBulletinFile=Delete Record File",
 "wintitle:ServerNews=Server News: Message #CurrentNewsItem# of #MaxNewsItems#",
 "wintitle:LoadDefaultDetails=Load Default Details Field Content",
-"wintitle:ExportBulletins=Export Bulletins",
+"wintitle:ExportBulletins=Export Records",
 "wintitle:SaveShareKeyPair=Saving Backup Disk",
 "wintitle:SaveRecoverShareKeyPairOf=of",
 "wintitle:BackupSecretShareCompleteInformation=Backup Complete",				
@@ -346,8 +346,8 @@ public class EnglishStrings
 "wintitle:ConfigureSpellCheck=Configure Spell Checking",
 
 "wintitle:warningdeletefolder=Confirm Delete Folder",
-"wintitle:warningDeleteSingleBulletin=Confirm Delete Bulletin",
-"wintitle:warningDeleteMultipleBulletins=Confirm Delete Bulletins",
+"wintitle:warningDeleteSingleBulletin=Confirm Delete Record",
+"wintitle:warningDeleteMultipleBulletins=Confirm Delete Records",
 
 "wintitle:RunOrCreateReport=Reports",
 "wintitle:ReportChooseSortFields=Reports",
@@ -357,9 +357,9 @@ public class EnglishStrings
 "wintitle:PrintOptions=Print Options",
 "wintitle:DeleteMyDataFromThisComputer=Delete My Data From This Computer",
 "wintitle:RemoveMartsFromThisComputer=Remove Martus From This Computer",
-"wintitle:ResendBulletins=Resend Bulletins",
-"wintitle:ImportBulletins=Import Bulletins",
-"wintitle:ImportBulletin=Import Bulletin",
+"wintitle:ResendBulletins=Resend Records",
+"wintitle:ImportBulletins=Import Records",
+"wintitle:ImportBulletin=Import Record",
 
 "wintitle:LoadSavedSearch=Load Saved Search",
 "wintitle:SaveSearch=Save Search",
@@ -399,7 +399,7 @@ public class EnglishStrings
 
 "field:ContactNamesSeparator=,",
 
-"field:notifyLegacyPublicIsPrivateMessagecause=Records created in older versions of Martus may contain fields of data that may have been made public on Martus legacy systems. However, this data is not public on the new Martus system To check if data from older bulletins is public on the old system search.",
+"field:notifyLegacyPublicIsPrivateMessagecause=Records created in older versions of Martus may contain fields of data that may have been made public on Martus legacy systems. However, this data is not public on the new Martus system To check if data from older records is public on the old system search.",
 
 "button:ImportBulletin=Import Record",
 "button:ShowTrash=Trash",
@@ -449,8 +449,8 @@ public class EnglishStrings
 "button:hideattachment=Hide",
 "button:VirtualKeyboardSwitchToNormal=Switch to using regular keyboard",
 "button:VirtualKeyboardSwitchToVirtual=Switch to using on-screen keyboard",
-"button:DownloadableSummaries=Show bulletins that are only on the server.",
-"button:AllSummaries=Show all bulletins on this server and on this computer.",
+"button:DownloadableSummaries=Show records that are only on the server.",
+"button:AllSummaries=Show all records on this server and on this computer.",
 "button:Preview=Preview",
 "button:Delete=Delete",
 "button:Leave=Leave",
@@ -467,17 +467,17 @@ public class EnglishStrings
 "button:RecoverAccountByShare=Restore account from multiple disks",
 "button:RecoverAccountByBackup=Restore account from backup key file",
 
-"button:BulletinDetails=Bulletin Details...",
+"button:BulletinDetails=Record Details...",
 "button:ViewPreviousBulletinVersion=View Selected Version...",
-"button:RetrieveAllVersions=Retrieve all bulletin versions",
-"button:RetrieveLatestBulletinRevisionOnly=Retrieve latest bulletin version only",
+"button:RetrieveAllVersions=Retrieve all record versions",
+"button:RetrieveLatestBulletinRevisionOnly=Retrieve latest record version only",
 "button:FolderOrderUp=Up",
 "button:FolderOrderDown=Down",
 "button:UseOldCustomFields=Use Old",
 "button:UseNewCustomFields=Use New",
 "button:CloseHelp=Close Help",
-"button:SearchFinalBulletinsOnly=Only search most recent version of bulletins",
-"button:SearchSameRowsOnly=Match grid column specifications in the search screen to a single row of bulletin grid data. See the search Help screen for additional guidance on this advanced option.",
+"button:SearchFinalBulletinsOnly=Only search most recent version of records",
+"button:SearchSameRowsOnly=Match grid column specifications in the search screen to a single row of record grid data. See the search Help screen for additional guidance on this advanced option.",
 "button:DeleteSelectedGridRow=Delete Selected Row",
 "button:InsertEmptyGridRow=Insert Row",
 "button:AppendEmptyGridRow=Append Row",
@@ -520,11 +520,11 @@ public class EnglishStrings
 "field:RecordLocationUnknown=Unknown",
 "field:NoServerSyncDataInTable=No Records available",
 "wintitle:notifySyncUnableToDownloadLocalFiles=Download Information",
-"field:notifySyncUnableToDownloadLocalFilescause=The following records were unable to be downloaded since they were only found locally.  The remaining bulletins will be downloaded in the background.",
+"field:notifySyncUnableToDownloadLocalFilescause=The following records were unable to be downloaded since they were only found locally.  The remaining records will be downloaded in the background.",
 "wintitle:notifySyncUnableToUploadServerFiles=Upload Information",
-"field:notifySyncUnableToUploadServerFilescause=The following records were unable to be uploaded since they were only found on the server or you do not have permission to upload these as your own.  The remaining bulletins will be uploaded in the background.",
+"field:notifySyncUnableToUploadServerFilescause=The following records were unable to be uploaded since they were only found on the server or you do not have permission to upload these as your own.  The remaining records will be uploaded in the background.",
 "wintitle:notifySyncUnableToDeleteLocalOnlyOrImmutableFiles=Download Information",
-"field:notifySyncUnableToDeleteLocalOnlyOrImmutableFilescause=The following records were unable to be deleted since they were only found locally or you do not have permission to delete them off the server.  The remaining bulletins will be deleted.",
+"field:notifySyncUnableToDeleteLocalOnlyOrImmutableFilescause=The following records were unable to be deleted since they were only found locally or you do not have permission to delete them off the server.  The remaining records will be deleted.",
 
 "button:IncludePrivateBulletins=Include Private Data",
 "button:SettingOn=On",
@@ -532,35 +532,35 @@ public class EnglishStrings
 "button:emptyTrash=Empty",
 
 "menu:file=File",
-"menu:CreateNewBulletin=Create New Bulletin",
-"menu:printBulletin=Print Bulletin(s)",
+"menu:CreateNewBulletin=Create New Record",
+"menu:printBulletin=Print Record(s)",
 "menu:printButton=Print",
 "menu:Analysis=Analysis",
 "menu:Reports=Reports",
 "menu:Charts=Charts",
-"menu:ExportBulletins=Export Bulletins",
-"menu:ImportBulletins=Import Bulletins",
+"menu:ExportBulletins=Export Records",
+"menu:ImportBulletins=Import Records",
 "menu:ExportFolder=Export Folder",
 "menu:exit=Exit",
 "menu:edit=Edit",
 "menu:search=Search",
-"menu:modifyBulletin=Modify Bulletin",
-"menu:SelectAllBulletins=Select All Bulletins",
-"menu:CutBulletins=Cut Bulletin(s)",
-"menu:CopyBulletins=Copy Bulletin(s)",
-"menu:PasteBulletins=Paste Bulletin(s)",
-"menu:DiscardBulletins=Discard Bulletin(s)",
-"menu:DeleteBulletins=Delete Bulletin(s)",
-"menu:SealSelectedBulletins=Seal Bulletin(s)",
-"menu:ResendBulletins=Resend Bulletin(s)",
+"menu:modifyBulletin=Modify Record",
+"menu:SelectAllBulletins=Select All Records",
+"menu:CutBulletins=Cut Record(s)",
+"menu:CopyBulletins=Copy Record(s)",
+"menu:PasteBulletins=Paste Record(s)",
+"menu:DiscardBulletins=Discard Record(s)",
+"menu:DeleteBulletins=Delete Record(s)",
+"menu:SealSelectedBulletins=Seal Record(s)",
+"menu:ResendBulletins=Resend Record(s)",
 "menu:folders=Folders",
 "menu:CreateNewFolder=Create New Folder",
 "menu:RenameFolder=Rename Folder",
 "menu:DeleteFolder=Delete Folder",
 "menu:OrganizeFolders=Organize Folders",
 "menu:server=Server",
-"menu:RetrieveMySealedBulletins=Retrieve My Sealed Bulletins",
-"menu:RetrieveMyDraftsBulletins=Retrieve My Draft Bulletins",
+"menu:RetrieveMySealedBulletins=Retrieve My Sealed Records",
+"menu:RetrieveMyDraftsBulletins=Retrieve My Draft Records",
 "menu:DeleteMyServerDrafts=Delete My Drafts From Server",
 "menu:SelectServer=Select Martus Server",
 "menu:options=Options",
@@ -610,14 +610,14 @@ public class EnglishStrings
 "field:disconnecting=Disconnecting...",
 "field:dateformat=Date Format",
 "field:MayBeDamaged=Warning: Portions may be missing or damaged",
-"field:NotAuthorizedToViewPrivate=The author has not given you permission to view the private portions of this bulletin.",
-"field:BulletinHasUnknownStuff=Warning: Some information in this bulletin is not visible",
+"field:NotAuthorizedToViewPrivate=The author has not given you permission to view the private portions of this record.",
+"field:BulletinHasUnknownStuff=Warning: Some information in this record is not visible",
 "field:retrieveflag=Retrieve?",
 "field:DeleteFlag=Delete?",
 "field:waitingForKeyPairGeneration=Please wait a minute while your account is being created...",
 "field:waitingForBulletinsToLoad=Loading Martus.  Please wait...",
 "field:waitAfterFailedSignIn=Please wait to sign in again ...",
-"field:HelpDefaultDetails=Enter questions, details, or other information your organization wants to have answered in future bulletins created.",
+"field:HelpDefaultDetails=Enter questions, details, or other information your organization wants to have answered in future records created.",
 "field:HelpExampleDefaultDetails=Example:",
 "field:HelpExample1DefaultDetails=Were there any witnesses?",
 "field:HelpExample2DefaultDetails=List Victim Names and Ages:",
@@ -626,28 +626,28 @@ public class EnglishStrings
 "field:BulletinXmlFileFilter=XML Files (*.xml)",
 "field:NormalKeyboardMsg1=Remember: Entering your password using the regular keyboard may reduce security.",
 "field:NormalKeyboardMsg2=For maximum security switch to the on-screen keyboard.",
-"field:RetrieveSummariesMessage=All bulletins retrieved will still remain on the server.\nYou can only retrieve bulletins that are not currently on your computer.",
-"field:DeleteServerDraftsMessage=You can only delete draft bulletins from the server that are not currently on your computer.",
-"field:ContactInfoRequiredFields=This information identifies your organization.\nYou may enter either an Author, Organization, or both, and both are shown in every bulletin you create.",
-"field:ContactInfoFutureUseOfFields=This information is optional and is used to prepopulate your bulletins for your convenience. It is stored on your local computer and not sent to the Martus server.",
-"field:UploadingSealedBulletin=Sending Sealed Bulletin",
-"field:UploadingDraftBulletin=Sending Draft Bulletin",
+"field:RetrieveSummariesMessage=All records retrieved will still remain on the server.\nYou can only retrieve records that are not currently on your computer.",
+"field:DeleteServerDraftsMessage=You can only delete draft records from the server that are not currently on your computer.",
+"field:ContactInfoRequiredFields=This information identifies your organization.\nYou may enter either an Author, Organization, or both, and both are shown in every record you create.",
+"field:ContactInfoFutureUseOfFields=This information is optional and is used to prepopulate your records for your convenience. It is stored on your local computer and not sent to the Martus server.",
+"field:UploadingSealedBulletin=Sending Sealed Record",
+"field:UploadingDraftBulletin=Sending Draft Record",
 "field:StatusReady=Server Ready",
 "field:StatusRetrieving=Retrieving...",
 "field:StatusConnecting=Connecting to server",
-"field:RetrieveMySealedBulletinProgress=Retrieving My Sealed Bulletins",
-"field:RetrieveMyDraftBulletinProgress=Retrieving My Draft Bulletins",
+"field:RetrieveMySealedBulletinProgress=Retrieving My Sealed Records",
+"field:RetrieveMyDraftBulletinProgress=Retrieving My Draft Records",
 "field:NoServerAvailableProgressMessage=Server Not Available",
 "field:ServerNotConfiguredProgressMessage=Server needs to be configured.",
 "field:OfflineModeProgressMessage=Offline",
 "field:UploadFailedProgressMessage=Upload Failed",
 "field:ChunkProgressStatusMessage=Download Progress",
-"field:RetrieveMySealedBulletinSummaries=Retrieving My Sealed Bulletin Summaries",
-"field:RetrieveMyDraftBulletinSummaries=Retrieving My Draft Bulletin Summaries",
+"field:RetrieveMySealedBulletinSummaries=Retrieving My Sealed Record Summaries",
+"field:RetrieveMyDraftBulletinSummaries=Retrieving My Draft Record Summaries",
 "field:TorStatusActive=Embedded Tor Active",
 "field:TorStatusInitializing=Embedded Tor Initializing",
 "field:TorStatusDisabled=Embedded Tor Disabled",
-"field:DeleteBulletinFileMsg1=This bulletin has been pasted into Martus from the file:",
+"field:DeleteBulletinFileMsg1=This record has been pasted into Martus from the file:",
 "field:DeleteBulletinFileMsg2=Do you want to delete the original file, or leave it in place?",
 "field:OnlineHelpMessage=Details:",
 "field:OnlineHelpTOCMessage=Topics:",
@@ -669,7 +669,7 @@ public class EnglishStrings
 "field:preferencesAdjustThai=Automatically adjust legacy Thai dates",
 "field:preferencesAdjustPersian=Automatically adjust legacy Afghan/Persian dates",
 "field:preferencesUseZawgyi=Enable Zawgyi font to display in Burmese",
-"field:preferencesAllPrivate=Prevent creating public bulletins",
+"field:preferencesAllPrivate=Prevent creating public records",
 "field:PreferencesUseInternalTor=Use embedded Tor (Using Tor can improve security but may be slower than not using Tor)",
 "field:PreferencesWhyUseTor=Turn Tor ON if you wish to hide that you are connecting to a Martus server. This may help reach the Martus servers if they are blocked from your location.",
 "field:CustomizationTemplateFileFilter=Customization Template Files (*.mct)",
@@ -681,20 +681,20 @@ public class EnglishStrings
 "field:DuplicateLabelsInCustomTemplate=The following labels appear more than once in your template.",
 "field:DuplicateLabels=Labels",
 "field:DuplicateLabelsInCustomTemplateContinue=Do you want to save this template with the duplicate labels?",
-"field:PrintPrivateDataMessage=You have the option to include or exclude the selected bulletin's private information in this print out. " +
+"field:PrintPrivateDataMessage=You have the option to include or exclude the selected record's private information in this print out. " +
 	"If you choose to print private data, it will be visible to anyone who sees the print out.",
 "button:PrintOnlyPublic=Print only public information",
 "button:PrintPublicAndPrivate=Include private information",
-"field:PrintToPrinterOrDisk=You can print the bulletin contents to a printer or to a file.",
+"field:PrintToPrinterOrDisk=You can print the record contents to a printer or to a file.",
 "button:PrintToDisk=Print to a file",
 "wintitle:PrintToWhichFile=Print to which file",
-"field:DefaultPrintToDiskFileName=bulletins.html",
+"field:DefaultPrintToDiskFileName=records.html",
 "wintitle:notifyPrintToDiskComplete=Print To Report File",
 "field:notifyPrintToDiskCompletecause=Successfully saved Report",
 "wintitle:notifyPrintCompleted=Reports",
 "field:notifyPrintCompletedcause=Printing Complete",
 "field:OrganizeReportFields=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.",
-"field:SkippingBulletinsNotOurs=NOTE: Bulletins authored by other accounts cannot be changed using this command, " +
+"field:SkippingBulletinsNotOurs=NOTE: Records authored by other accounts cannot be changed using this command, " +
 	"so they are not included in the list above.",
 "field:DownloadTemplateFromMartusUser=Download from Another Martus User",
 "field:DownloadTemplateFromMyContacts=Download from my Contacts",
@@ -709,13 +709,13 @@ public class EnglishStrings
 "field:AuthorNickname=Author Nickname:",
 "field:AuthorNicknameFieldDescription=Name here if available otherwise blank",
 "field:AuthorPublicCode=Author Public Code:",
-"field:BulletinID=Bulletin ID:",
+"field:BulletinID=Record ID:",
 "field:DateCreated=Date Created",
 "field:LastModified=Last Modified",
 "field:EnterNewName=Enter New Name:",
 
 "wintitle:IncludePrivateData=Include Private Data",
-"field:IncludePrivateData=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?",
+"field:IncludePrivateData=#TotalBulletins# records were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?",
 "button:PublicAndPrivateData=Both Public and Private Data",
 "button:PublicOnly=Public Data Only",
 "button:SelectAll=Select All",
@@ -781,7 +781,7 @@ public class EnglishStrings
 "button:RunChart=Display an existing chart",
 "button:CreateChart=Create a new chart template",
 "wintitle:CreateChart=Charts",
-"field:ChartPrivateFieldsNotice=Please note that any Martus bulletin data in charts will not be encrypted, \nand anyone who gets a copy of the chart output will be able to read all the data. \nUse caution when selecting a private field.",
+"field:ChartPrivateFieldsNotice=Please note that any Martus record data in charts will not be encrypted, \nand anyone who gets a copy of the chart output will be able to read all the data. \nUse caution when selecting a private field.",
 "field:ChartType=Type of Chart",
 "field:ChartTypeBar=Bar Chart",
 "field:ChartType3DBar=3D Bar Chart",
@@ -789,13 +789,13 @@ public class EnglishStrings
 "field:ChartItemLabelBlank=(Missing field or data)",
 "field:ChartFieldToCount=Field to count",
 "field:ChartSubtitle=Subtitle (optional)",
-"field:ChartTitle=Martus Bulletins by #SelectedField#",
+"field:ChartTitle=Martus Records by #SelectedField#",
 "field:ChartCreatedOn=Chart produced #Date#",
-"field:ChartSeriesTitle=Martus Bulletin Counts",
-"field:ChartYAxisTitle=Martus Bulletin Count",
-"field:ChartPieSliceLabel=#Count# bulletins = #Percent# of Martus bulletins",
-"field:ChartSelectedBulletinsDisclaimerBar=Note: Chart shows number of Martus bulletins matching search criteria.",
-"field:ChartSelectedBulletinsDisclaimerPie=Note: Chart shows % of Martus bulletins matching search criteria.",
+"field:ChartSeriesTitle=Martus Record Counts",
+"field:ChartYAxisTitle=Martus Record Count",
+"field:ChartPieSliceLabel=#Count# records = #Percent# of Martus records",
+"field:ChartSelectedBulletinsDisclaimerBar=Note: Chart shows number of Martus records matching search criteria.",
+"field:ChartSelectedBulletinsDisclaimerPie=Note: Chart shows % of Martus records matching search criteria.",
 "field:DefaultPrintChartToDiskFileName=chart.jpeg",
 "wintitle:notifyChartCompleted=Charts",
 "field:notifyChartCompletedcause=Printing complete",
@@ -804,11 +804,11 @@ public class EnglishStrings
 "wintitle:notifyRestartMartusForLanguageChange=Martus Restart Required",
 "field:notifyRestartMartusForLanguageChangecause=Please restart martus to see the language you have chosen.",
 
-"wintitle:PreparingBulletins=Preparing Bulletins...",
-"field:PreparingBulletins=Preparing Bulletins...",
+"wintitle:PreparingBulletins=Preparing Records...",
+"field:PreparingBulletins=Preparing Records...",
 
-"wintitle:SealingSelectedBulletins=Sealing Bulletins...",
-"field:SealingSelectedBulletins=Sealing Bulletins...",
+"wintitle:SealingSelectedBulletins=Sealing Records...",
+"field:SealingSelectedBulletins=Sealing Records...",
 
 "wintitle:Export=Export",
 "button:ExportTo=Send To",
@@ -824,12 +824,12 @@ public class EnglishStrings
 "wintitle:FileDialogRestoreFromKeyPair=Restore Account",
 "button:FileDialogOkRestoreFromKeyPair=Restore",
 
-"wintitle:FileDialogImportMBA=Import Martus Bulletin Archive",
+"wintitle:FileDialogImportMBA=Import Martus Record Archive",
 "button:FileDialogOkImportMBA=Import",
 
 "button:FileDialogOkImportCustomization=Import",
 
-"wintitle:FileDialogImportBulletins=Import Bulletins",
+"wintitle:FileDialogImportBulletins=Import Records",
 "button:FileDialogOkImportBulletins=Import",
 
 "wintitle:FileDialogRecoverSharedKeyPair=Recover Shared Key",
@@ -841,11 +841,11 @@ public class EnglishStrings
 
 "wintitle:FileDialogSaveKeyPair=Backup Key File",
 
-"wintitle:FileDialogExportMBA=Export Martus Bulletin Archive",
+"wintitle:FileDialogExportMBA=Export Martus Record Archive",
 
 "wintitle:FileDialogSaveAttachment=Save Attachment",
 
-"wintitle:FileSaveDialogExport=Export Bulletins to which file?",
+"wintitle:FileSaveDialogExport=Export Records to which file?",
 "wintitle:FolderSelectDialogExport=Export to which folder?",
 
 "wintitle:FileDialogExportCustomization=Export Customization Template",
@@ -863,57 +863,57 @@ public class EnglishStrings
 
 "field:ExportBulletinMba=Exporting encrypted Item",
 "field:ExportBulletinXml=Exporting non-encrypted Items",
-"field:BulletinDetails=Bulletin Details",
-"wintitle:BulletinDetails=Bulletin Details",
+"field:BulletinDetails=Record Details",
+"wintitle:BulletinDetails=Record Details",
 
 "field:confirmquestion=Are you sure you want to continue?",
-"field:confirmsendcause=You have chosen to save a completed bulletin.",
-"field:confirmsendeffect=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.",
+"field:confirmsendcause=You have chosen to save a completed record.",
+"field:confirmsendeffect=This will permanently seal the record and you will not be allowed to make any further modifications to it except by creating a new version of the record.",
 "field:confirmdeletefoldercause=You have chosen to permanently delete a folder.  ",
-"field:confirmdeletefoldereffect=Any bulletins in the folder will be moved to Discarded Bulletins.  ",
-"field:confirmretrievecause=You have chosen to retrieve all bulletins from the Martus server.  ",
-"field:confirmretrieveeffect=This will restore all the discarded bulletins that were sent to the server.  ",
-"field:confirmRemoveAttachmentcause=You have chosen to remove the selected attachments from this bulletin.",
-"field:confirmRemoveAttachmenteffect=The selected attachments will be permanently removed from this bulletin.",
+"field:confirmdeletefoldereffect=Any records in the folder will be moved to Discarded Records.  ",
+"field:confirmretrievecause=You have chosen to retrieve all records from the Martus server.  ",
+"field:confirmretrieveeffect=This will restore all the discarded records that were sent to the server.  ",
+"field:confirmRemoveAttachmentcause=You have chosen to remove the selected attachments from this record.",
+"field:confirmRemoveAttachmenteffect=The selected attachments will be permanently removed from this record.",
 "field:confirmOverWriteExistingFilecause=A file already exists with that name.",
 "field:confirmOverWriteExistingFileeffect=The existing file will be deleted and replaced with the new information.",
-"field:confirmCancelModifyBulletincause=You have chosen to cancel modifying this bulletin.",
+"field:confirmCancelModifyBulletincause=You have chosen to cancel modifying this record.",
 "field:confirmCancelModifyBulletineffect=Canceling will discard any changes made to this record.",
 "field:confirmSetImportPublicKeycause=You have chosen to allow this client the ability to view your public and PRIVATE data.",
-"field:confirmSetImportPublicKeyeffect=By clicking on Yes you are authorizing this client to view all portions of your bulletins.",
+"field:confirmSetImportPublicKeyeffect=By clicking on Yes you are authorizing this client to view all portions of your records.",
 "field:confirmWarningSwitchToNormalKeyboardcause=Warning! Using the regular keyboard to enter your password greatly reduces the security of the Martus system, and could make it easier for an attacker to view your private data.",
-"field:confirmCloneMySealedAsDraftcause=You have chosen to modify one of your sealed bulletins, thus creating a new version of that bulletin.",
-"field:confirmCloneMySealedAsDrafteffect=Clicking on Yes will create a new version of this bulletin that initially contains all the same information.",
-"field:confirmCloneBulletinAsMinecause=You have chosen to modify a bulletin that was created by someone else.",
+"field:confirmCloneMySealedAsDraftcause=You have chosen to modify one of your sealed records, thus creating a new version of that record.",
+"field:confirmCloneMySealedAsDrafteffect=Clicking on Yes will create a new version of this record that initially contains all the same information.",
+"field:confirmCloneBulletinAsMinecause=You have chosen to modify a record that was created by someone else.",
 "field:confirmPrinterWarningcause=Since you have changed from the default print tray your print out may be incorrect, if you also changed the size of paper used.  You must first select the paper tray and then select the paper size in that order, for both to get set correctly.  If you only wanted to change the paper tray then disregard this message and select 'No'.",
 "field:confirmPrinterWarningeffect=Clicking on Yes will bring back the Printer Dialog so you can reselect your default paper tray and size.  Clicking on 'No' will print the document.",
-"field:confirmUploadRemindercause=Please Note: There are bulletins that have not been sent to a server.  Do you still want to exit?",
-"field:confirmUploadRemindereffect=Clicking on Yes will exit Martus, and leave the unsent bulletins.  They will be sent the next time you run Martus and connect to a server.",
-"field:confirmDraftUploadRemindercause=Please Note: There are draft bulletins that have been modified and not yet sent to a server.  Do you still want to exit?",
-"field:confirmDraftUploadRemindereffect=Clicking on Yes will exit Martus, and leave the unsent bulletins.  They will be sent the next time you run Martus and connect to a server.",
+"field:confirmUploadRemindercause=Please Note: There are records that have not been sent to a server.  Do you still want to exit?",
+"field:confirmUploadRemindereffect=Clicking on Yes will exit Martus, and leave the unsent records.  They will be sent the next time you run Martus and connect to a server.",
+"field:confirmDraftUploadRemindercause=Please Note: There are draft records that have been modified and not yet sent to a server.  Do you still want to exit?",
+"field:confirmDraftUploadRemindereffect=Clicking on Yes will exit Martus, and leave the unsent records.  They will be sent the next time you run Martus and connect to a server.",
 "field:confirmRedoWeakPasswordcause=The password you chose has fewer than 15 characters and less than 2 non-alphanumeric characters. We recommend choosing a stronger password.",
 "field:confirmRedoWeakPasswordeffect=Clicking on Yes will continue with the password you just entered.",
 "field:confirmResetDefaultDetailscause=This will reset the current Default Details contents to the original contents. After resetting the contents, you should review them to be sure they are correct.",
 "field:confirmResetDefaultDetailseffect=After you review the contents, you can accept them, modify them, or press cancel to keep the existing default details.",
-"field:confirmNotYourBulletinViewAttachmentAnywayscause=Warning: the bulletin you are currently viewing is not yours.  Attachments can contain viruses, or malicious programs harmful to your computer.",
+"field:confirmNotYourBulletinViewAttachmentAnywayscause=Warning: the record you are currently viewing is not yours.  Attachments can contain viruses, or malicious programs harmful to your computer.",
 "field:confirmNotYourBulletinViewAttachmentAnywayseffect=Clicking on Yes will #action# the attachment. Clicking on No will cancel this action.",
 "field:confirmServerComplianceFailedcause=Martus software is unable to determine whether this server complies with the official guidelines for operating a secure and reliable Martus server.",
 "field:confirmServerComplianceFailedeffect=Benetech recommends that you do not use this server until a compliance statement is made available for you to read.  Continuing will select this non-compliant server anyway.",
 "field:confirmWarnMissingOrCorruptAccountMapSignatureFilecause=Warning: acctmap.txt.sig file is missing or is corrupt in your account's packets directory.  If you have just upgraded to a new release of Martus this warning is harmless and you should click on No.  Otherwise this may indicate someone has tried to tamper with your data or could be caused by a hardware error.",		
 "field:confirmWarnMissingOrCorruptAccountMapSignatureFileeffect=Clicking on Yes will try to generate a new acctmap.txt.sig file and continue to load Martus.  Clicking on No will exit Martus.",
 "field:confirmWarnMissingAccountMapFilecause=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.",		
-"field:confirmWarnMissingAccountMapFileeffect=Clicking on Yes will delete all of your bulletins and continue to load Martus.  Clicking on No will exit Martus so you can try to recover or repair this file manually.",
-"field:confirmReportIncludePrivatecause=There are no bulletins with public data. Include private data?",
+"field:confirmWarnMissingAccountMapFileeffect=Clicking on Yes will delete all of your records and continue to load Martus.  Clicking on No will exit Martus so you can try to recover or repair this file manually.",
+"field:confirmReportIncludePrivatecause=There are no records with public data. Include private data?",
 "field:confirmReportIncludePrivateeffect=Press 'Include Private Data' to continue with private data included, or press 'Cancel' to exit and return to Martus.",
 
 "field:confirmBackupKeyPairSecretSharecause=We recommend that you now create #TotalNumberOfFilesInBackup# separate key backup files of which any #MinimumNumberOfFilesNeededForRecovery# can be used to reconstruct your key without a Username or password being required.",
 "field:confirmBackupKeyPairSecretShareeffect=By choosing Yes, you will be prompted to save pieces of your key onto removable disks.",
 "field:confirmCancelShareBackupcause=Do you wish to cancel this backup?",
 "field:confirmCancelShareBackupeffect=By choosing Yes, you will exit this backup.",
-"field:confirmEnterCustomFieldscause=You have chosen to customize the fields that will be used in any new bulletins created by this account.",
+"field:confirmEnterCustomFieldscause=You have chosen to customize the fields that will be used in any new records created by this account.",
 "field:confirmEnterCustomFieldseffect=Customizing fields is an advanced operation. You should only proceed if you are certain that you understand the feature.",
 "field:confirmUndoCustomFieldscause=You have chosen to restore the standard set of Martus fields.",
-"field:confirmUndoCustomFieldseffect=New bulletins created with this account will not have any custom fields.",
+"field:confirmUndoCustomFieldseffect=New records created with this account will not have any custom fields.",
 "field:confirmRecoverUsingKeySharecause=Welcome to Martus.  What would you like to do?",
 "field:confirmRecoverUsingKeyShareeffect=Create a new account, or restore a previously created account?",
 "field:confirmCancelShareRecovercause=Do you wish to cancel the key restore process?",
@@ -926,11 +926,11 @@ public class EnglishStrings
 "field:confirmBackupKeyShareVerifyDiskseffect=By choosing Yes, the verification process will begin.",
 "field:confirmCancelShareVerifycause=Do you wish to cancel the verification?",
 "field:confirmCancelShareVerifyeffect=By choosing Yes, you will exit this verification step.",
-"field:confirmEditBulletinWithUnknownTagscause=The bulletin you have chosen to modify contains information that this version of Martus cannot understand. It may have been created by a newer release of Martus, so you should ensure that you are running the latest release.",
-"field:confirmEditBulletinWithUnknownTagseffect=If you copy this bulletin, the unknown information will be lost.",
-"field:confirmExportUnknownTagscause=One or more of the bulletins you have chosen to export contain information that this version of Martus cannot understand. They may have been created by a newer release of Martus, so you should ensure that you are running the latest release.",
+"field:confirmEditBulletinWithUnknownTagscause=The record you have chosen to modify contains information that this version of Martus cannot understand. It may have been created by a newer release of Martus, so you should ensure that you are running the latest release.",
+"field:confirmEditBulletinWithUnknownTagseffect=If you copy this record, the unknown information will be lost.",
+"field:confirmExportUnknownTagscause=One or more of the records you have chosen to export contain information that this version of Martus cannot understand. They may have been created by a newer release of Martus, so you should ensure that you are running the latest release.",
 "field:confirmExportUnknownTagseffect=If you continue with the export, any unknown information will not be exported.",
-"field:confirmQuickEraseOutboxNotEmptycause=Please Note: There are bulletins that have not been sent to a server. If you continue these bulletins will be lost.",
+"field:confirmQuickEraseOutboxNotEmptycause=Please Note: There are records that have not been sent to a server. If you continue these records will be lost.",
 "field:confirmQuickEraseOutboxNotEmptyeffect=Clicking on Yes will bring you to a confirmation dialog, Clicking on No will return you to Martus without erasing anything.",
 "field:confirmKeyPairFileExistsOverWritecause=A key file already exists for this account.  Do you wish to overwrite it?",
 "field:confirmKeyPairFileExistsOverWriteeffect=Clicking on Yes will delete the old key file and replace it with your restored key.",
@@ -951,44 +951,44 @@ public class EnglishStrings
 "field:confirmbackupIncompleteShareNeeded=A multiple disk backup of your key has yet to be created.",
 "field:confirmNeedsFolderMigrationcause=This account was created with an older release of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.",
 "field:confirmNeedsFolderMigrationeffect=Answering Yes will allow the migration to proceed, answering No will exit Martus.",
-"field:confirmNeedsBulletinVersioningMigrationcause=This account was created with an older release of Martus, which was unaware of multiple sealed bulletin versions. We need to update your system to recognize bulletins with versions.  The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.",
+"field:confirmNeedsBulletinVersioningMigrationcause=This account was created with an older release of Martus, which was unaware of multiple sealed record versions. We need to update your system to recognize records with versions.  The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.",
 "field:confirmNeedsBulletinVersioningMigrationeffect=Answering Yes will allow the migration to proceed, answering No will exit Martus.",
 
-"field:confirmUseBulletinsCustomFieldscause=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?",
-"field:confirmUseBulletinsCustomFieldseffect=Answering '#UseOldCustomFields#' will use the old custom fields and all bulletin data.  Answering '#UseNewCustomFields#' will use your current custom fields and copy all similar fields to the new bulletin but you may lose some of the original bulletin's data.",
-"field:confirmUseBulletinsDraftCustomFieldscause=The draft bulletin you are about to modify has custom fields which are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?",
-"field:confirmUseBulletinsDraftCustomFieldseffect=Answering '#UseOldCustomFields#' will use the old custom fields and all bulletin data.  Answering '#UseNewCustomFields#' will use your current custom fields and copy all similar fields to this new draft bulletin but you may lose some of the original bulletin's data.",
-"field:confirmUnAuthoredBulletinDeleteBeforePastecause=The bulletin entitled \"#Title#\" already exists in this system.  Do you wish to delete the old bulletin and replace it with this bulletin?",
-"field:confirmUnAuthoredBulletinDeleteBeforePasteeffect=Answering Yes will replace the old bulletin with this bulletin.  Answering on No will leave the original bulletin and skip this file.",
+"field:confirmUseBulletinsCustomFieldscause=The record you are about to create is based on a previous record whose custom fields are different from your current custom fields.  Do you wish to use the original record's custom fields?",
+"field:confirmUseBulletinsCustomFieldseffect=Answering '#UseOldCustomFields#' will use the old custom fields and all record data.  Answering '#UseNewCustomFields#' will use your current custom fields and copy all similar fields to the new record but you may lose some of the original record's data.",
+"field:confirmUseBulletinsDraftCustomFieldscause=The draft record you are about to modify has custom fields which are different from your current custom fields.  Do you wish to use the original record's custom fields?",
+"field:confirmUseBulletinsDraftCustomFieldseffect=Answering '#UseOldCustomFields#' will use the old custom fields and all record data.  Answering '#UseNewCustomFields#' will use your current custom fields and copy all similar fields to this new draft record but you may lose some of the original record's data.",
+"field:confirmUnAuthoredBulletinDeleteBeforePastecause=The record entitled \"#Title#\" already exists in this system.  Do you wish to delete the old record and replace it with this record?",
+"field:confirmUnAuthoredBulletinDeleteBeforePasteeffect=Answering Yes will replace the old record with this record.  Answering on No will leave the original record and skip this file.",
 "field:confirmRemoveMartuscause=You are about to delete all Martus data from this computer.",
 "field:confirmRemoveMartuseffect=Answering Yes will delete all data, uninstall Martus and exit the program.  Answering No will return you to Martus with nothing deleted.",
 "field:confirmDeleteMyDatacause=You are about to delete your Martus data from this computer.",
 "field:confirmDeleteMyDataeffect=Answering Yes will delete your data and exit Martus.  Answering No will return you to Martus with nothing deleted.",
 "field:confirmNewerConfigInfoFileFoundcause=Warning: It appears that you are trying to run an older release of Martus.  Running this release of Martus may result in reduced functionality, and some configuration settings created in the newer version will be ignored. We recommend that you upgrade your software.",  
 "field:confirmNewerConfigInfoFileFoundeffect=Answering Yes will continue to use this older release of Martus.  Answering No will exit Martus so you can upgrade to the latest release.",
-"field:confirmRetrieveNewerVersionscause=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#Titles#",
+"field:confirmRetrieveNewerVersionscause=The following record(s) selected for retrieval are newer versions of records already on this computer:\n\n#Titles#",
 "field:confirmRetrieveNewerVersionseffect=Each older version will be replaced by the newer version from the server.",
-"field:confirmPrintAllPrivateDatacause=One or more bulletins will not be printed because all the information is private, and you marked the \"Print only public information\" box.",
+"field:confirmPrintAllPrivateDatacause=One or more records will not be printed because all the information is private, and you marked the \"Print only public information\" box.",
 "field:confirmPrintAllPrivateDataeffect=Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the \"Include private information\" box. " +
-	"Answering '#PrintContinue#' will print only the public information in the bulletins and skip those bulletins which are all private.",
-"field:confirmCancelRetrievecause=Bulletins are currently being retrieved from the server.",
-"field:confirmCancelRetrieveeffect=This operation will cancel the current retrieval, so some of the requested bulletins may not be retrieved.",
+	"Answering '#PrintContinue#' will print only the public information in the records and skip those records which are all private.",
+"field:confirmCancelRetrievecause=Records are currently being retrieved from the server.",
+"field:confirmCancelRetrieveeffect=This operation will cancel the current retrieval, so some of the requested records may not be retrieved.",
 "field:confirmSearchProgressCancelcause=The search in progress will be stopped immediately.",
-"field:confirmSearchProgressCanceleffect=If you do this, the Search Results will only contain bulletins that have been found so far.",
+"field:confirmSearchProgressCanceleffect=If you do this, the Search Results will only contain records that have been found so far.",
 "field:confirmReportSearchProgressCancelcause=The search in progress will be stopped immediately.",
-"field:confirmReportSearchProgressCanceleffect=If you do this, the report will only include the bulletins that have been found so far.",
+"field:confirmReportSearchProgressCanceleffect=If you do this, the report will only include the records that have been found so far.",
 
 "field:confirmSealingSelectedBulletinsCancelcause=The operation in progress will be stopped.",
-"field:confirmSealingSelectedBulletinsCanceleffect=If you do this, bulletins that have already been sealed will remain sealed, and bulletins that have not been processed yet will remain in their current state.",
+"field:confirmSealingSelectedBulletinsCanceleffect=If you do this, records that have already been sealed will remain sealed, and records that have not been processed yet will remain in their current state.",
 
 "field:confirmDateRageInvalidcause=The date range you entered is invalid because the end date occurs before the begin date.",
 "field:confirmDateRageInvalideffect=Answering Yes will take you back to the '#FieldLabel#' date range to fix the problem.  Answering No will swap the begin and end dates so they are in order.",
 
-"field:confirmSealSelectedBulletinscause=This will seal all the currently selected draft bulletins.",
-"field:confirmSealSelectedBulletinseffect=Any selected bulletins that are already sealed will remain unchanged.",
+"field:confirmSealSelectedBulletinscause=This will seal all the currently selected draft records.",
+"field:confirmSealSelectedBulletinseffect=Any selected records that are already sealed will remain unchanged.",
 
 "field:confirmXmlSchemaNewerImportAnywaycause=This XML file was created by a newer version of Martus.",
-"field:confirmXmlSchemaNewerImportAnywayeffect=If you continue with the import, some information in the bulletin(s) might not be imported.",
+"field:confirmXmlSchemaNewerImportAnywayeffect=If you continue with the import, some information in the record(s) might not be imported.",
 
 "field:confirmLoadingFieldValuesFromAllBulletinsCancelcause=This will stop loading all the values for this field.",
 "field:confirmLoadingFieldValuesFromAllBulletinsCanceleffect=The field will be still/again be searchable as text.",
@@ -1002,18 +1002,18 @@ public class EnglishStrings
 "field:WhichTemplate=Selected template: #TemplateTitle#",
 
 
-"field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
-"field:notifyDropErrorBulletinOldercause=One or more bulletins cannot be moved to that folder, because a newer version of this bulletin already exists.",
-"field:notifyDropErrorscause=An unexpected error occurred while moving the bulletin(s). One or more files may be damaged.",
-"field:notifyPasteErrorBulletinAlreadyExistscause=One or more bulletins cannot be pasted in that folder, because they already exist in this folder.",
-"field:notifyPasteErrorBulletinOldercause=One or more bulletins cannot be pasted in that folder, because a newer version of this bulletin already exists.",
-"field:notifyPasteErrorcause=An unexpected error occurred while pasting the bulletin(s). One or more files may be damaged.",
-"field:notifyretrieveworkedcause=All of the selected bulletins were successfully retrieved from the server",
-"field:notifyretrievefailedcause=Error: Unable to retrieve bulletins from the server",
-"field:notifyretrievenothingcause=No bulletins were selected",
-"field:notifyDeleteServerDraftsWorkedcause=All of the selected draft bulletins have been deleted from the server.",
-"field:notifyDeleteServerDraftsFailedcause=Error: Unable to delete all of those draft bulletins from the server. Some of them may have been deleted.",
-"field:notifyDeleteServerDraftsNonecause=No bulletins were selected",
+"field:notifyDropErrorBulletinExistscause=One or more records cannot be moved to that folder, because it already exists in that folder.",
+"field:notifyDropErrorBulletinOldercause=One or more records cannot be moved to that folder, because a newer version of this record already exists.",
+"field:notifyDropErrorscause=An unexpected error occurred while moving the record(s). One or more files may be damaged.",
+"field:notifyPasteErrorBulletinAlreadyExistscause=One or more records cannot be pasted in that folder, because they already exist in this folder.",
+"field:notifyPasteErrorBulletinOldercause=One or more records cannot be pasted in that folder, because a newer version of this record already exists.",
+"field:notifyPasteErrorcause=An unexpected error occurred while pasting the record(s). One or more files may be damaged.",
+"field:notifyretrieveworkedcause=All of the selected records were successfully retrieved from the server",
+"field:notifyretrievefailedcause=Error: Unable to retrieve records from the server",
+"field:notifyretrievenothingcause=No records were selected",
+"field:notifyDeleteServerDraftsWorkedcause=All of the selected draft records have been deleted from the server.",
+"field:notifyDeleteServerDraftsFailedcause=Error: Unable to delete all of those draft records from the server. Some of them may have been deleted.",
+"field:notifyDeleteServerDraftsNonecause=No records were selected",
 "field:notifyretrievenoservercause=The current server is not responding or may need to be configured from the server menu.",
 "field:notifyContactsNoServercause=The current server is not responding or may need to be configured from the server menu.",
 "field:notifypasswordsdontmatchcause=Warning: You must enter the same password you entered on the previous screen.",
@@ -1022,21 +1022,21 @@ public class EnglishStrings
 "field:notifyPasswordInvalidcause=Not a valid password, passwords must be at least 8 characters long, 15 recommended.",
 "field:notifyPasswordMatchesUserNamecause=Your password can not be your username",
 "field:notifyincorrectsignincause=Username or Password incorrect",
-"field:notifyuploadrejectedcause=The current Martus Server has refused to accept a bulletin",
+"field:notifyuploadrejectedcause=The current Martus Server has refused to accept a record",
 "field:notifycorruptconfiginfocause=The configuration file may be corrupted",
 "field:notifyserverokcause=The Server has been selected.",
-"field:notifymagicwordokcause=The Server has accepted your request for permission to upload bulletins.",
+"field:notifymagicwordokcause=The Server has accepted your request for permission to upload records.",
 "field:notifymagicwordrejectedcause=The Server has rejected your request. The magic word is probably not correct.",
 "field:notifyRewriteKeyPairFailedcause=An error occurred.  Unable to change Username or password.  You may need to restore your backup key file.",
 "field:notifyRewriteKeyPairSavedcause=Successfully saved your new username and password.",
 "field:notifyUnableToSaveAttachmentcause=Unable to save the selected attachment for some reason.  Try saving it to a different file.",
 "field:notifyUnableToViewAttachmentcause=Unable to view the selected attachment for some reason.",
-"field:notifySearchFailedcause=Sorry, no bulletins were found.",
+"field:notifySearchFailedcause=Sorry, no records were found.",
 "field:notifyErrorDuringExitcause=An error has occurred, which may have prevented Martus from saving some configuration information. You may see a warning next time you log in.",
 
 "field:notifyServerErrorcause=Server Error, the server may be down, please try again later",
-"field:notifyFoundOrphanscause=One or more bulletins were not in any folder. These lost bulletins have been placed into the Recovered Bulletins folder.",
-"field:notifyFoundDamagedBulletinscause=One or more bulletins were severely damaged, and cannot be displayed. If these bulletins were backed up to a server, you may be able to retrieve undamaged copies from there.",
+"field:notifyFoundOrphanscause=One or more records were not in any folder. These lost records have been placed into the Recovered Records folder.",
+"field:notifyFoundDamagedBulletinscause=One or more records were severely damaged, and cannot be displayed. If these records were backed up to a server, you may be able to retrieve undamaged copies from there.",
 "field:notifyErrorSavingStatecause=Unable to save current screen layout.",
 "field:notifyExportMyPublicKeycause=The following file has been exported: #Filename#",
 "field:notifyPublicInfoFileErrorcause=The file does not contain valid public information.",
@@ -1044,34 +1044,34 @@ public class EnglishStrings
 "field:notifyErrorSavingFilecause=Unable to save the file. This could be because the destination is readonly or full, or because of a hardware error.",
 "field:notifyErrorBackingupKeyPair=Unable to verify the backup. Please try again, possibly to a different destination.",
 "field:notifyAuthenticateServerFailedcause=Martus could not authenticate the server. The server may have been compromised.  Please verify your server configuration and contact the server operator.",
-"field:notifyWelcomeToMartuscause=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create bulletins that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.",
+"field:notifyWelcomeToMartuscause=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create records that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.",
 "field:notifyUnexpectedErrorcause=An unexpected error has occurred. Please report this problem to help@martus.org.",
 "field:notifyInvalidServerNamecause=You must have a server name or IP address.",
 "field:notifyInvalidServerCodecause=You must have a server public code.",
 "field:notifyServerInfoInvalidcause=The Server has responded with invalid account information.",
 "field:notifyConfigNoServercause=The selected server is not responding. Before you choose a server, you must be connected to the internet, and that server must be available.",
 "field:notifyServerCodeWrongcause=The Server Public Code does not match the one you entered.",
-"field:notifyRetrieveCanceledcause=Bulletin download cancelled.  Some bulletins may have already been downloaded.",
+"field:notifyRetrieveCanceledcause=Record download cancelled.  Some records may have already been downloaded.",
 "field:notifyRememberPasswordcause=Please remember your username and password. It cannot be recovered.",
-"field:notifyDamagedBulletinMovedToDiscardedcause=An error occurred during upload, and the damaged bulletin:'#BulletinTitle#' has been moved to the Damaged Bulletins folder.",
-"field:notifyUploadFailedBulletinNotSentToServercause=An error occurred during upload, and the bulletin:'#BulletinTitle#' has not been sent to the server.  You may try and resend the bulletin later.",
-"field:notifyPreviewOneBulletinOnlycause=You may only preview one bulletin at a time.  Please only select one bulletin to preview.",
-"field:notifyPreviewNoBulletinsSelectedcause=No bulletin selected.  Please select the bulletin you wish to preview.",
-"field:notifyRetrievePreviewNotAvailableYetcause=Preview not yet available for this bulletin. Please wait until the information has been retrieved from the server, and then try again.",
-"field:notifyRetrievedOnlySomeSummariescause=Errors occurred while retrieving bulletin summaries.  Some of the bulletins on the server will not be shown.",
+"field:notifyDamagedBulletinMovedToDiscardedcause=An error occurred during upload, and the damaged record:'#BulletinTitle#' has been moved to the Damaged Records folder.",
+"field:notifyUploadFailedBulletinNotSentToServercause=An error occurred during upload, and the record:'#BulletinTitle#' has not been sent to the server.  You may try and resend the record later.",
+"field:notifyPreviewOneBulletinOnlycause=You may only preview one record at a time.  Please only select one record to preview.",
+"field:notifyPreviewNoBulletinsSelectedcause=No record selected.  Please select the record you wish to preview.",
+"field:notifyRetrievePreviewNotAvailableYetcause=Preview not yet available for this record. Please wait until the information has been retrieved from the server, and then try again.",
+"field:notifyRetrievedOnlySomeSummariescause=Errors occurred while retrieving record summaries.  Some of the records on the server will not be shown.",
 "field:notifyConfirmCorrectDefaultDetailsDatacause=Please confirm that the default details retrieved are correct.",
-"field:notifyExportCompletecause=Successfully exported #BulletinsExported# of #TotalBulletinsToExport# bulletins.",
-"field:notifyExportCompleteMissingAttachmentscause=Exported #BulletinsExported# of #TotalBulletinsToExport# bulletins.  Unfortunately #AttachmentsNotExported# attachments were not exported due to errors.",
+"field:notifyExportCompletecause=Successfully exported #BulletinsExported# of #TotalBulletinsToExport# records.",
+"field:notifyExportCompleteMissingAttachmentscause=Exported #BulletinsExported# of #TotalBulletinsToExport# records.  Unfortunately #AttachmentsNotExported# attachments were not exported due to errors.",
 
 "field:notifyErrorWritingFilecause=An error prevented the file from being written. Check to make sure the disk is not full or write protected.",
 "field:notifyErrorReadingFilecause=An error prevented the file from being read.",
-"field:notifyExportZeroBulletinscause=To export bulletins, select them first, and then perform the export operation.",
-"field:notifyPrintZeroBulletinscause=To print one or more bulletins, select them first, and then perform the print operation.",
+"field:notifyExportZeroBulletinscause=To export records, select them first, and then perform the export operation.",
+"field:notifyPrintZeroBulletinscause=To print one or more records, select them first, and then perform the print operation.",
 
 "field:notifyUserRejectedServerCompliancecause=You have chosen not to use this server",
-"field:notifyExistingServerRemovedcause=You will have to select a server for any bulletins to be backed up to that server, or to retrieve bulletins from that server.",
-"field:notifyErrorSavingBulletincause=An error prevented the bulletin from being saved. Check to make sure the disk is not full or write protected.",		
-"field:notifyExportFolderEmptycause=The folder you are trying to export does not contain any bulletins.  Select a folder which has bulletins before exporting the folder.",		
+"field:notifyExistingServerRemovedcause=You will have to select a server for any records to be backed up to that server, or to retrieve records from that server.",
+"field:notifyErrorSavingBulletincause=An error prevented the record from being saved. Check to make sure the disk is not full or write protected.",		
+"field:notifyExportFolderEmptycause=The folder you are trying to export does not contain any records.  Select a folder which has records before exporting the folder.",		
 "field:notifyErrorBackingUpKeySharecause=An unexpected error occurred in generating the key backup files.",
 "field:notifyRecoveryProcessKeySharecause=You will now have to provide #MinimumNumberOfFilesNeededForRecovery# out of the #TotalNumberOfFilesInBackup# files you previously saved when you backed up your key.",
 "field:notifyRecoveredKeyShareSucceededNewUserNamePasswordRequiredcause=Key restore succeeded!  You now have to enter a Username and password.",
@@ -1086,42 +1086,42 @@ public class EnglishStrings
 "field:notifyErrorRecoveringAccountDirectorycause=Error during key restore. This key backup copy may be damaged.",
 "field:notifyServerSSLNotRespondingcause=Unable to make a secure connection with the Martus backup server.\n\nMartus can connect to a server using either of two ports.  When trying to connect to this server, neither port is accessible, probably because both ports are being blocked by a local firewall or by your ISP.\n\nWe recommend that any firewalls be configured to allow outgoing connections on both TCP port 443 and 987.  Please contact your LAN administrator or office technical support staff to verify that your firewall configuration allows this.\n\nIf the problem persists, you may need to select a different server.",
 "field:notifyAlreadyRunningcause=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.",
-"field:notifyAttachmentNotAFilecause=The item you chose was not a file, please choose a file to add as an attachment to this bulletin.",
+"field:notifyAttachmentNotAFilecause=The item you chose was not a file, please choose a file to add as an attachment to this record.",
 "field:notifyFilesWillNotBeDeletedcause=The original files have not been deleted from your computer, you must delete them manually if you wish.",
 "field:notifyFolderMigrationFailedcause=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.",
-"field:notifyResendErrorNotAuthorizedToSendcause=One or more bulletins were unable to be resent because you are not authorized to upload them.",
-"field:notifyResendErrorcause=One or more bulletins were unable to be resent due to an unexpected error.",
+"field:notifyResendErrorNotAuthorizedToSendcause=One or more records were unable to be resent because you are not authorized to upload them.",
+"field:notifyResendErrorcause=One or more records were unable to be resent due to an unexpected error.",
 "field:notifyErrorRenameFoldercause=Folder names cannot contain punctuation.  They also cannot begin with a space.",
 "field:notifyErrorRenameFolderExistscause=You already have a folder with that name.",
-"field:notifyAlreadyViewingThisVersioncause=You currently are viewing this version of the bulletin.",
-"field:notifyBulletinVersionNotInSystemcause=The bulletin version you are trying to view is currently not on your computer.",
+"field:notifyAlreadyViewingThisVersioncause=You currently are viewing this version of the record.",
+"field:notifyBulletinVersionNotInSystemcause=The record version you are trying to view is currently not on your computer.",
 "field:notifyErrorExportingCustomizationTemplatecause=There was an error saving your template.",
 "field:notifyErrorImportingCustomizationTemplatecause=There was an error importing this template.",
 "field:notifyErrorImportingCustomizationTemplateFuturecause=The customization template you are trying to import was created by a newer version of Martus.  You need to upgrade to the latest version of Martus before you can import this template.",
 "field:notifyImportingCustomizationTemplateSuccesscause=Successfully imported a customization template that was created by #CreatedBy#.",
 "field:TemplateCreatedByThisAccount=this account",
 "field:TemplateCreatedByUnknown=an unknown account",
-"field:notifyCreatingFieldSpecCachecause=Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis list does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.",
-"field:notifyRetrieveErrorcause=An error has occurred while retrieving a bulletin.",
+"field:notifyCreatingFieldSpecCachecause=Martus needs to keep a list of all the fields in all the records in your system.\n\nThis list does not exist, so it will be created now. This may take a few seconds per record on a slower computer.",
+"field:notifyRetrieveErrorcause=An error has occurred while retrieving a record.",
 "field:notifyRetrieveInProgresscause=A retrieve is already in progress. You cannot start another retrieve until that one has finished.",
-"field:notifyRetrieveFileDataVersionErrorcause=A retrieve was in progress when you upgraded to a newer version of Martus. That retrieve will be canceled, so you should re-select any bulletins that had not yet been retrieved.",
-"field:notifyRetrieveFileErrorcause=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any bulletins that had not yet been retrieved.",
+"field:notifyRetrieveFileDataVersionErrorcause=A retrieve was in progress when you upgraded to a newer version of Martus. That retrieve will be canceled, so you should re-select any records that had not yet been retrieved.",
+"field:notifyRetrieveFileErrorcause=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any records that had not yet been retrieved.",
 "field:notifyNoGridRowSelectedcause=No row selected.",
 "field:notifyNonStringFieldRowSelectedcause=Load Values is only available for String and Data-driven Dropdown fields",
-"field:notifyImportCompletecause=Import complete.  Imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# bulletins into folder: #ImportFolder#",
-"field:notifyErrorImportingBulletinscause=There was an error importing bulletins into Martus.  Not all bulletins were imported.",
-"field:notifyErrorExportingBulletinscause=There was an error exporting bulletins from Martus.  Not all bulletins were exported.",
+"field:notifyImportCompletecause=Import complete.  Imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# records into folder: #ImportFolder#",
+"field:notifyErrorImportingBulletinscause=There was an error importing records into Martus.  Not all records were imported.",
+"field:notifyErrorExportingBulletinscause=There was an error exporting records from Martus.  Not all records were exported.",
 "field:notifyNoImportFileSpecifiedcause=No folder specified.  You must enter a folder you wish the files to be imported into.  This folder can already exist in the system, or can be a new folder.",
-"field:notifyImportMissingAttachmentscause=Not all attachments were imported.  The following bulletins had problems importing these attachments.\n\n#ImportMissingAttachments#",
-"field:notifyImportBulletinsNotImportedcause=Not all bulletins were imported.  The following bulletins had problems during import.\n\n#ImportBulletinsNotImported#",
+"field:notifyImportMissingAttachmentscause=Not all attachments were imported.  The following records had problems importing these attachments.\n\n#ImportMissingAttachments#",
+"field:notifyImportBulletinsNotImportedcause=Not all records were imported.  The following records had problems during import.\n\n#ImportBulletinsNotImported#",
 "field:notifyNoReportFieldsSelectedcause=You must select at least one field to be included in the report.",
 "field:notifyNotValidReportFormatcause=This is not a valid Report Format file",
 "field:notifyReportFormatIsOldcause=This report format was created with an earlier version of Martus, so it may not work correctly",
 "field:notifyReportFormatIsTooNewcause=This report format was created with a newer version of Martus, so it may not work correctly",
 "field:notifyReportFormatDifferentLanguagecause=This report format was created in a different language. As a result, some headings may not print properly, and some of the fields may not be available for sorting.",
 "field:notifyViewAttachmentNotAvailablecause=This computer can only view JPEG, GIF, and PNG image attachments",
-"field:notifyAddPermissionsZeroBulletinsOurscause=Must select at least one bulletin that was created by this account",
-"field:notifySealSelectedZeroBulletinsOurscause=Must select at least one bulletin that was created by this account",
+"field:notifyAddPermissionsZeroBulletinsOurscause=Must select at least one record that was created by this account",
+"field:notifySealSelectedZeroBulletinsOurscause=Must select at least one record that was created by this account",
 
 
 "field:notifyErrorImportingBulletinsTooOldcause=This XML file was created by an older version of Martus and cannot be read by this version.",
@@ -1154,9 +1154,9 @@ public class EnglishStrings
 "field:notifyErrorAttachmentMissingcause=The attachment could not be located.",
 "field:notifyErrorRequiredFieldBlankcause=This field is required and cannot be left blank: #FieldLabel#",
 
-"field:CreateCustomFieldsHelp1=The layout of the bulletins is dictated by an XML document.  " +
+"field:CreateCustomFieldsHelp1=The layout of the records is dictated by an XML document.  " +
 	"The document must begin with <CustomFields> and end with </CustomFields>. " +
-	"By default the standard bulletin fields occur at the top of the Custom Field declaration, " +
+	"By default the standard record fields occur at the top of the Custom Field declaration, " +
 	"but they can be moved if desired.  However, there are four required fields that cannot be removed:  " +
 	"'author', 'entrydate', 'language' and 'title'.\n\n",
 "field:CreateCustomFieldsHelp2=For custom (non-standard) fields, " +
@@ -1173,14 +1173,14 @@ public class EnglishStrings
 	"Then you need a label which is displayed next to your custom field.  " +
 	"An example might be 'Name of 1st Witness'." +
 	"\n\n" +
-	"You can create sections (which you can hide/unhide) in your bulletins " +
+	"You can create sections (which you can hide/unhide) in your records " +
 	"using a SECTION field type.  " +
 	"\n\n" +
-	"You can put multiple fields on a single row in your bulletin by using " +
+	"You can put multiple fields on a single row in your record by using " +
 	"<KeepWithPrevious/> in the field definition." +
 	"\n\n" +
 	"You can require certain fields or grid columns to be entered before " +
-	"saving a bulletin by using </RequiredField> in the field definition." +
+	"saving a record by using </RequiredField> in the field definition." +
 	"\n\n" +
 	"You can restrict standard or custom date fields, date grid columns, date range fields, " +
 	"and date range grid columns by using <MinimumDate> and/or <MaximumDate> " +
@@ -1195,7 +1195,7 @@ public class EnglishStrings
 	"in three ways - " +
 	"1) by entering a list of <Choices> values in the field definition, " +
 	"2) with values that have been entered in a grid elsewhere " +
-	"in your bulletin by using <DataSource> (sometimes called \"data-driven dropdowns\"), and " +
+	"in your record by using <DataSource> (sometimes called \"data-driven dropdowns\"), and " +
 	"3) by creating a list of \"Reusable Choices\" that can be referred to " +
 	"by more than one field.  " +
 	"See examples below for the correct XML definition syntax to use." +
@@ -1210,11 +1210,11 @@ public class EnglishStrings
 	"but are NOT allowed for BOOLEAN, DATE, DATERANGE, GRID, LANGUAGE, MESSAGE, and SECTION field types, " +
 	"and are not allowed for dropdowns where the values in the list are based on data entered in another field." +
 	"(i.e. data-driven dropdowns).  " +
-	"Please note that default values are only applied when a new bulletin is created, " +
-	"not when a new version of a bulletin is created, " +
+	"Please note that default values are only applied when a new record is created, " +
+	"not when a new version of a record is created, " +
 	"so that the value of the field in the previous version is not overwritten.  " +
-	"This means that default values entered in a bulletin using an earlier customization will be kept " +
-	"even if you create a new version of the bulletin with an updated customization that has a new default value" +
+	"This means that default values entered in a record using an earlier customization will be kept " +
+	"even if you create a new version of the record with an updated customization that has a new default value" +
 	"\n\n " +
 	"Additional Comments" +
 	"\n\n" +
@@ -1226,7 +1226,7 @@ public class EnglishStrings
 	"3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed." +
 	"\n\n" +
 	"4.  Use \"MESSAGE\" fields to give guidance on how to enter data, and to create comments/notes " +
-	"that will be displayed in every bulletin." +
+	"that will be displayed in every record." +
 	"\n\n" +
 	"5.  Dropdowns using a \"Reusable Choices\" list can have multiple levels " +
 	"(e.g. for locations that might have Region and City), different fields can use one or more of the levels, " +
@@ -1242,20 +1242,20 @@ public class EnglishStrings
 	"\n\n" +
 	"8.  You can update your customization if the information you are collecting over time changes, " +
 	"for example by adding new fields.  If you are changing fields in a customization, " +
-	"you should think about how you will want to search/report on bulletins created with the old customization " +
-	"as well as new bulletins you create with the new customization, " +
-	"and try to make the changes so that you can search/report on all bulletins at the same time.  " +
+	"you should think about how you will want to search/report on records created with the old customization " +
+	"as well as new records you create with the new customization, " +
+	"and try to make the changes so that you can search/report on all records at the same time.  " +
 	"Changing field types may cause your searching/reporting to be more complex, " +
-	"so we always recommend that you test out creating bulletins with a new customization and searching/reporting " +
-	"on both old and new bulletins before officially updating the customization for your project.  " +
+	"so we always recommend that you test out creating records with a new customization and searching/reporting " +
+	"on both old and new records before officially updating the customization for your project.  " +
 	"When you change customizations, Martus will do its best to update the old formatted data to the new customization " +
-	"if you create a new version of a bulletin with the old customization.  " +
+	"if you create a new version of a record with the old customization.  " +
 	"If you add completely new fields but don't change any of the old fields, " +
-	"the new version of the bulletin will have all the old fields filled in as they were in the previous version, " +
+	"the new version of the record will have all the old fields filled in as they were in the previous version, " +
 	"and the new fields will be blank and you can fill them in.  If you delete fields, " +
-	"the new version of the bulletin will not contain those fields, but you can go back to see the deleted fields " +
-	"in the previous version if it was a sealed bulletin instead of a draft " +
-	"(by hitting the Bulletin Details button in the Header section of the bulletin), " +
+	"the new version of the record will not contain those fields, but you can go back to see the deleted fields " +
+	"in the previous version if it was a sealed record instead of a draft " +
+	"(by hitting the Record Details button in the Header section of the record), " +
 	"and copy any info from the old version into a different field in the new one if desired.  " +
 	"You have to be very careful if you make changes to the customization definitions of old fields.  " +
 	"If you keep the same tag and label, but change the type of field, " +
@@ -1265,12 +1265,12 @@ public class EnglishStrings
 	"your data will be transferred, but if you change from DATERANGE to DATE, you will lose the end date from your earlier data. " +
 	"DROPDOWN and GRID fields are subject to additional rules regarding the modification of dropdown options/values and grid columns. " +
 	"If you add options/values to a dropdown list, the old data will be transferred over. " +
-	"But if you modify or delete an option/value, all bulletins for which that option was selected will lose that data. " +
+	"But if you modify or delete an option/value, all records for which that option was selected will lose that data. " +
 	"If you want to add columns to a grid, please make sure to do so at the end of the old grid definition and not in the middle, " +
-	"or the old data will not be transferred to the new version of the bulletin. " +
+	"or the old data will not be transferred to the new version of the record. " +
 	"If you change fields and lose old data in the new version as a result, " +
 	"please note that you can go back to see the deleted data in the previous version " +
-	"if it was a sealed bulletin instead of a draft (by hitting the Bulletin Details button in the Header section of the bulletin), " +
+	"if it was a sealed record instead of a draft (by hitting the Record Details button in the Header section of the record), " +
 	"and copy any info from the old version into a different field in the new one if desired. " +
 	"In this release, if you want to change the number of levels in a \"Reusable Choices\" dropdown field when updating a customization, " +
 	"you should also change the field tag and/or label so that they are more easily distinguished from each other in searching and reporting.  " +
@@ -1289,7 +1289,7 @@ public class EnglishStrings
 	"(e.g. you could have defined Neighborhood values as a lower level for some larger Cities, " +
 	"but not all Cities need to have Neighborhoods defined).  " +
 	"The number of levels is not limited by Martus, but please note that if you have large amounts of data in your definitions lists, " +
-	"or a large number of levels, performance of certain Martus bulletin operations may be affected." +
+	"or a large number of levels, performance of certain Martus record operations may be affected." +
 	"\n\n " +
 	"2. In this release, we recommend that if you want to change the number of levels in a \"Reusable Choices\" dropdown field " +
 	"when updating a customization, you also change the field tag and/or label so that they are more easily distinguished " +
@@ -1326,7 +1326,7 @@ public class EnglishStrings
 	"\n" +
 	"<Field type='DROPDOWN'>\n" +
 	"<Tag>BulletinSource</Tag>\n" +
-	"<Label>Source of bulletin information</Label>\n" +
+	"<Label>Source of record information</Label>\n" +
 	"<RequiredField/>\n" +
 	"<DefaultValue>Media/Press</DefaultValue>\n" +
 	"<Choices>\n" +
@@ -1451,16 +1451,16 @@ public class EnglishStrings
 "field:inputservermagicwordentry=If you want to request permission to upload to this server, enter the 'magic word' now:",
 "field:inputImportPublicKeyentry=Enter the Public Code for this account:",
 "field:inputGetShareFileNameentry=Enter a name for the exported backup file(s).",
-"field:inputCustomFieldsInfo=Enter the XML representation for the layout of new and modified bulletins.",
+"field:inputCustomFieldsInfo=Enter the XML representation for the layout of new and modified records.",
 "field:InputCustomFieldsTitle=Title",
 "field:inputCustomFieldsDescription=Description",
 
-"field:warningDeleteSingleBulletin=You have chosen to permanently delete a bulletin from the Discarded Bulletins folder. Even if this bulletin was recently cut or copied, you will not be able to paste it. If this bulletin has already been sent to a server, it will remain on the server. This action will only delete it from this computer.",
-"field:warningDeleteMultipleBulletins=You have chosen to permanently delete bulletins from the Discarded Bulletins folder. Even if these bulletins were recently cut or copied, you will not be able to paste them. If they have already been sent to a server, they will remain on the server. This action will only delete them from this computer.",
-"field:warningDeleteSingleUnsentBulletin=WARNING: This bulletin has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.",
-"field:warningDeleteMultipleUnsentBulletins=WARNING: One or more of these bulletins have not been sent to a server since they were last modified. Deleting them will prevent the latest changes from being backed up.",
-"field:warningDeleteSingleBulletinWithCopies=NOTE: A copy of this bulletin exists in one or more other folders, and those copies will not be removed.",
-"field:warningDeleteMultipleBulletinsWithCopies=NOTE: Copies of one or more of these bulletins exist in one or more other folders. Those copies will not be removed.",
+"field:warningDeleteSingleBulletin=You have chosen to permanently delete a record from the Discarded Records folder. Even if this record was recently cut or copied, you will not be able to paste it. If this record has already been sent to a server, it will remain on the server. This action will only delete it from this computer.",
+"field:warningDeleteMultipleBulletins=You have chosen to permanently delete records from the Discarded Records folder. Even if these records were recently cut or copied, you will not be able to paste them. If they have already been sent to a server, they will remain on the server. This action will only delete them from this computer.",
+"field:warningDeleteSingleUnsentBulletin=WARNING: This record has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.",
+"field:warningDeleteMultipleUnsentBulletins=WARNING: One or more of these records have not been sent to a server since they were last modified. Deleting them will prevent the latest changes from being backed up.",
+"field:warningDeleteSingleBulletinWithCopies=NOTE: A copy of this record exists in one or more other folders, and those copies will not be removed.",
+"field:warningDeleteMultipleBulletinsWithCopies=NOTE: Copies of one or more of these records exist in one or more other folders. Those copies will not be removed.",
 "field:warningUnofficialTranslation=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.  If you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.",
 
 "wintitle:IncompatibleJavaVersion=Incompatible Java Version",
@@ -1481,9 +1481,9 @@ public class EnglishStrings
 "field:CreateNewUserNamePassword=Please enter your new username and password.",
 "field:HelpOnCreatingNewPassword=When choosing a password, it is important not to use a password that is easy to guess like names, important dates of events or simple words.  Try adding numbers to random letters and making the password long.  Remember your password, but do not share it.  No one else has access to the password if you forget it, so if you write it down, put it in a safe place.",
 "field:timedout1=Martus is still running in the background, but has locked the screen for security.  You must sign in to Martus again to continue working.",
-"field:timedout2=Any unsaved bulletins will be lost unless you sign in to Martus again and save them.",
+"field:timedout2=Any unsaved records will be lost unless you sign in to Martus again and save them.",
 "field:defaultFolderName=New Folder",
-"field:SearchBulletinRules=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNOTE: Bulletins that appear only in the Discarded folder will not be searched.",
+"field:SearchBulletinRules=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNOTE: Records that appear only in the Discarded folder will not be searched.",
 "field:SearchBulletinAddingRules=Press Enter to create a new row in the search query.",
 "field:SearchBulletinHelp=Click '#SearchHelpButton#' to get additional information on searching.",
 "field:AccountInfoUserName=Username: ",
@@ -1496,8 +1496,8 @@ public class EnglishStrings
 "field:DefaultServerHeading=Default Server",
 "field:AdvanceServerSetupHeading=Advanced Server Setup",
 "field:NoContactsInTable=No Contacts.",
-"field:NoBulletinsInTable=No Bulletins.",
-"field:NoRecentBulletinsInTable=No recent bulletins.",
+"field:NoBulletinsInTable=No Records.",
+"field:NoRecentBulletinsInTable=No recent records.",
 "button:ChooseDefaultServer=Use Default Server",
 "field:ServerNameEntry=IP Address:",
 "field:ServerNameEntryInformation=enter your server's IP address",
@@ -1507,15 +1507,15 @@ public class EnglishStrings
 "field:ServerMagicWordEntry=Magic Word:",
 "field:ServerMagicWordEntryInformation=enter your server's magic word",
 "field:ServerSelectionResults=The following server has been selected:",
-"field:ServerAcceptsUploads=You will be allowed to upload bulletins to this server.",
-"field:ServerDeclinesUploads=You will not be allowed to upload bulletins to this server.",
+"field:ServerAcceptsUploads=You will be allowed to upload records to this server.",
+"field:ServerDeclinesUploads=You will not be allowed to upload records to this server.",
 "field:SearchEntry=Search for:",
 "field:ExportAttachments=Include attachments in export",
-"field:ExportAllVersions=Include all versions of each bulletin in export",
+"field:ExportAllVersions=Include all versions of each record in export",
 "field:ExportBulletinDetails=The selected records will be exported to an XML file that you specify. All information will be saved as plain text and anyone who gets a copy of the file will be able to read its contents. These files can be used to import record data back into Martus or into another application.\n\n Please email martus@benetech.org if you need assistance.",
 "field:HowToCreateNewAccount=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.",
 "field:HowToCreateInitialAccount=No accounts exist on this computer.  To create a new account click OK.  Otherwise you can click on the Restore Account tab to restore an account which was previously backed up.",
-"field:UntitledBulletin=Untitled Bulletin",
+"field:UntitledBulletin=Untitled Record",
 "field:GetShareFileNameDescription=This file name should be unique and identifiable to you but we recommend not using your Username.  Each file will be generated with this name and its number sequence.",
 "field:UnknownFieldType=WARNING: This field requires a newer release of Martus to be viewed",
 "field:BackupSecretShareCompleteInformation=Backup complete, please give each disk to someone you trust, so that if you forget your Username and/or password in the future you can recreate your account.  You will need #MinimumNumberOfFilesNeededForRecovery# of these disks to recreate your account.",
@@ -1527,7 +1527,7 @@ public class EnglishStrings
 "field:UninstallMartus=Uninstall Martus",
 "field:RemoveServerLabel1=The following server will be removed:",
 "field:RemoveServerLabel2=Are you sure you want to do this?",
-"field:ExportedBulletins=Exported Bulletins",
+"field:ExportedBulletins=Exported Records",
 "field:ErrorCustomFields=There is an error in the custom field definitions. " +
 	"Each problem is identified with the following codes:\n" +
 	"   100 - Required standard field is missing\n" +
@@ -1573,8 +1573,8 @@ public class EnglishStrings
 "field:ColumnGridRowNumber=Row #",
 "field:SetFolderOrder=To change a folder's position, select the folder name and use the #MoveFolderUp# / #MoveFolderDown# buttons.",
 "field:FancySearchHelpMsg1=---Overview---\n\n" +
-	"Martus searches all versions of every bulletin (both public and private, sealed and draft) in every folder, including the Discarded Bulletins folder.  " +
-		"When the search is completed, the Search Results folder lists copies of the bulletins found in your search.\n\n" +
+	"Martus searches all versions of every record (both public and private, sealed and draft) in every folder, including the Discarded Records folder.  " +
+		"When the search is completed, the Search Results folder lists copies of the records found in your search.\n\n" +
 	"You can search for words in any language.  " +
 		"Martus searches are not case-sensitive in English and other purely Latin character languages, " +
 		"so it doesn't matter whether a word is capitalized or not.\n\n" +
@@ -1582,58 +1582,58 @@ public class EnglishStrings
 	"You can search both standard and custom fields.\n\n",
 "field:FancySearchHelpMsg2=---Search tips---\n\n" +
 	"Martus will find any text you enter whether it's a complete word or part of a larger word. " +
-		"For example, if you search for the word prison, you'll see bulletins that include the words prison, imprison, and imprisonment. " +
+		"For example, if you search for the word prison, you'll see records that include the words prison, imprison, and imprisonment. " +
 		"Likewise, if you search for the word prison, " +
-		"Martus will find bulletins that include attachments with names such as photos-prison.jpg and prisoners-report.doc.\n\n" + 
+		"Martus will find records that include attachments with names such as photos-prison.jpg and prisoners-report.doc.\n\n" + 
 	"To search for an exact phrase, type it with quotation marks around the phrase  (e.g.  \"Witness Testimony\"). " +
 		"If you do not put quotation marks around the phrase, Martus will search for the words individually.\n\n" + 
 	"Use the word \"#Or#\" to broaden your search, or the word \"#And#\" to narrow it.  " +
 		"You can use the #And# / #Or# dropdowns to specify different fields you want search across " +
-		"(e.g. you want to search for bulletins that have \"Last Saved Date\" in the last week and have a certain author).  " +
-		"If you want to search on multiple text values within a single bulletin field, " +
+		"(e.g. you want to search for records that have \"Last Saved Date\" in the last week and have a certain author).  " +
+		"If you want to search on multiple text values within a single record field, " +
 		"you can use #Or# or #And# in-between words in the \"Search For...\" entry box.  " +
 		"For example, if you search \"Any Field\" for:\n" +
 		"   prison #Or# jail\n" +
-		"you'll see a list of bulletins that contain either word anywhere in the bulletin. " + 
+		"you'll see a list of records that contain either word anywhere in the record. " + 
 		"If you search for:\n" +
 		"   prison #And# assault \n" +
-		"you'll see a list of bulletins that contain both words. " +
+		"you'll see a list of records that contain both words. " +
 		"The keyword \"#And#\" is implied, so if you search for:\n" +
 		"   prison assault \n" +
-		"Martus will find bulletins the same bulletins as if you searched for:\n" +
+		"Martus will find records the same records as if you searched for:\n" +
 		"   prison #And# assault\n\n" + 
 	"When you use both \"#And#\" and \"#Or#\", your search terms are grouped from the beginning of your list " +
-		"(either across bulletin fields or within a particular field). " +
+		"(either across record fields or within a particular field). " +
 		"For example, if you enter:\n" +
 		"   prison #Or# jail #And# trial \n" +
 		"in the \"Search For...\" entry box, " +
-		"Martus will search for any bulletins that contain either of the words prison or jail, and also contain the word trial. " +   
+		"Martus will search for any records that contain either of the words prison or jail, and also contain the word trial. " +   
 		"But if you enter:\n" +
 		"   prison #And# jail #Or# trial \n" +
-		"Martus will search for any bulletins that contain both the words prison and jail, or contain the word trial.\n",
+		"Martus will search for any records that contain both the words prison and jail, or contain the word trial.\n",
 "field:FancySearchHelpMsg3=" + 
 	"You can use the word #Or# or #And#, or you can use the English words \"#OrEnglish#\" and \"#AndEnglish#\" to search.\n\n" +  
 	"You need to put spaces before and after any #Or# / #And# keywords you use in your search.\n",
 "field:FancySearchHelpMsg4=" +
-	"If you want all of your grid search criteria to be met in a single bulletin grid row, " +
+	"If you want all of your grid search criteria to be met in a single record grid row, " +
 	"please check the \"Match grid column specifications\" checkbox. " +
-	"For example, if you want to search for a specific victim name in a single row in your bulletins created after a certain date, " +
+	"For example, if you want to search for a specific victim name in a single row in your records created after a certain date, " +
 	"select the checkbox and enter the following fields in the Search screen: " +
 	"\"Victim Information: First Name\" = x and \"Victim Information: Last Name\" = y and \"Date Created\" >= YYYY-Mon-DD. " +
 	"If you do not select the \"Match grid column specifications\" checkbox, " +
-	"Martus will find bulletins created after your specified date where any row has the first name you specified " +
-	"and any other row has the last name specified, but not necessarily in the same bulletin row " +
+	"Martus will find records created after your specified date where any row has the first name you specified " +
+	"and any other row has the last name specified, but not necessarily in the same record row " +
 	"(you could have a row with \"First Name\" = x and \"Last Name\" = b, " +
 	"and a different row with \"First Name\" = a and \"Last Name\" = y, " +
-	"and Martus will find that bulletin as matching the search because you did not specify that it had to match in a single row)" +
+	"and Martus will find that record as matching the search because you did not specify that it had to match in a single row)" +
 	"\n\n",
 "field:FancySearchHelpMsg5= Additional Search Notes:\n" +
 	"\n " +
 	"1. Because Martus searches all rows of any grid (table) fields for your criteria, " +
-	"it may find bulletins where one grid row matches your criteria but other rows do not.  " +
-	"For example you could have a bulletin with a grid that has a location field in it and you have multiple rows of data " +
-	"in the grid with locations A, B, and C.  If you search for bulletins where location != C (does not equal C), " +
-	"Martus will find that bulletin because there are 2 rows in the bulletin grid where the location is not C, " +
+	"it may find records where one grid row matches your criteria but other rows do not.  " +
+	"For example you could have a record with a grid that has a location field in it and you have multiple rows of data " +
+	"in the grid with locations A, B, and C.  If you search for records where location != C (does not equal C), " +
+	"Martus will find that record because there are 2 rows in the record grid where the location is not C, " +
 	"even though there is one row where the locations IS C.\n" +
 	"\n " +
 	"2. " +
@@ -1642,24 +1642,24 @@ public class EnglishStrings
 	"This means that you have to pick the exact level at which you want to be searching.  " +
 	"For example, an \"Event Location\" field that has three levels (Region/City/Neighborhood) " +
 	"will have three entries in the search field list:  Event Location: Region, Event Location: City, and Event Location: Neighborhood.  " +
-	"So if you want to find any bulletins that have an Event Location anywhere in Region X (regardless of the City), " +
+	"So if you want to find any records that have an Event Location anywhere in Region X (regardless of the City), " +
 	"you have to pick the \"Event Location: Region\" field to search on and pick Region X off the dropdown list choices. " +
 	"If you pick Event Location: City to search on and then pick Region X but leave the City level blank, " +
 	"Martus will only find entries where there was no City data entered  (City was blank), " +
 	"as opposed to ANY location with Region X regardless of what data was entered at the City level.\n" +
 	"\n " +
 	"3. " +
-	"If you do not see your search terms/dates in the final version of the bulletin displayed in the Search Results folder, " +
-	"your criteria may have been matched in an earlier version of the bulletin.  " +
-	"You can access previous versions by clicking the \"Bulletin Details...\" button at the top of the bulletin.  " +
-	"To search only the most recent versions of bulletins, select Only Search Most Recent Versions of Bulletins " +
+	"If you do not see your search terms/dates in the final version of the record displayed in the Search Results folder, " +
+	"your criteria may have been matched in an earlier version of the record.  " +
+	"You can access previous versions by clicking the \"Record Details...\" button at the top of the record.  " +
+	"To search only the most recent versions of records, select Only Search Most Recent Versions of Records " +
 	"in the Search dialog box.\n" +
 	"\n " +
 	"4. " +
-	"If you have fields in different bulletins or from different customizations that are exactly the same, " +
+	"If you have fields in different records or from different customizations that are exactly the same, " +
 	"Martus will combine them in any Search and Report field lists.  " +
-	"And while Martus warns you about duplicate labels where you are creating a new bulletin customization, " +
-	"it is possible that over time, you may have bulletins with different customizations that ended up with the same labels " +
+	"And while Martus warns you about duplicate labels where you are creating a new record customization, " +
+	"it is possible that over time, you may have records with different customizations that ended up with the same labels " +
 	"(e.g. maybe you changed a text field to a dropdown field but kept the same label).  " +
 	"In these cases, Martus will display both fields in the search screen, " +
 	"and try to help you figure out the difference between the fields by displaying what the field type and " +
@@ -1674,38 +1674,38 @@ public class EnglishStrings
 	"dropdown list options are the labels for each list entry, but the codes you defined determine how many entries " +
 	"there will be in the search dropdown list (see the \"Customize Fields\" Help screen for more information about " +
 	"creating custom dropdown fields). So if you have different Reusable Choices codes with the same label in " +
-	"different bulletin customizations in your account, the labels will show up twice in search dropdown lists " +
+	"different record customizations in your account, the labels will show up twice in search dropdown lists " +
 	"(i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks " +
-	"like \"label1\" and your search will be on bulletins that have that label, " +
+	"like \"label1\" and your search will be on records that have that label, " +
 	"regardless of which code the customization had for the label).  " +
-	"And if you have the same Reusable Choices code with different labels in different bulletin customizations in your account, " +
+	"And if you have the same Reusable Choices code with different labels in different record customizations in your account, " +
 	"the search dropdown list for that code will show both values separated by a semicolon " +
 	"(i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks " +
-	"like \"label1; label2\" and your search will be on bulletins that have either of those labels).\n" +
+	"like \"label1; label2\" and your search will be on records that have either of those labels).\n" +
 	"\n" +
 	"For additional help with searching, email help@martus.org.",
 "field:SearchProgress=Progress: ",
 "field:ReportSearchProgress=Progress: ",
-"field:SearchFound=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.",
-"field:ReportFound=#NumberBulletinsFound# bulletins matched the search.",
-"field:ReportChooseSortFields=Choose how the bulletins will be sorted in the report. The bulletins will be ordered by the first field chosen. When two bulletins have the same value in that field, they will be sorted by the next sort field, and so on.",
+"field:SearchFound=#NumberBulletinsFound# records matched the search, and have been added to the Search Results folder.",
+"field:ReportFound=#NumberBulletinsFound# records matched the search.",
+"field:ReportChooseSortFields=Choose how the records will be sorted in the report. The records will be ordered by the first field chosen. When two records have the same value in that field, they will be sorted by the next sort field, and so on.",
 "field:ReportFieldError=*Error retrieving field*",
-"field:ReportDetailOnly=Print Bulletin Information",
-"field:ReportDetailWithSummaries=Print Bulletin Information and Summary Counts",
+"field:ReportDetailOnly=Print Record Information",
+"field:ReportDetailWithSummaries=Print Record Information and Summary Counts",
 "field:ReportSummariesOnly=Print Summary Counts Only",
 "field:ChooseReportFields=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. ",
 "field:MartusReportFormatFileFilter=Martus Report Format (.mrf)",
 "field:MartusSearchSpecFileFilter=Martus Search Specification (.mss)",
-"field:MBAFileFilter=Martus Bulletin Archive (*.mba)",
+"field:MBAFileFilter=Martus Record Archive (*.mba)",
 "field:JPEGFileFilter=JPEG (*.jpeg, *.jpg)",
 "field:KeyPairFileFilter=Martus Key (*.dat)",
 "field:HtmlFileFilter=HTML (*.html, *.htm)",
-"field:CustomXMLTopSection=Top Pane of Bulletin",
-"field:CustomXMLBottomSection=Bottom (always Private) Pane of Bulletin",
+"field:CustomXMLTopSection=Top Pane of Record",
+"field:CustomXMLBottomSection=Bottom (always Private) Pane of Record",
 "field:WasSentYes=Yes",
 "field:WasSentNo=No",
 "field:NotSorted=(none)",
-"field:ReportNumberOfBulletins=Total Bulletins:",
+"field:ReportNumberOfBulletins=Total Records:",
 
 "wintitle:RemoveContact=Remove Contact",
 "field:RemoveContactLabel=The following contact will be removed.\n\nName: #Name#\nPublic Code: #PublicCode#.\n\nAre you sure you want to do this?",
@@ -1713,19 +1713,19 @@ public class EnglishStrings
 "field:ManageContacts=Manage Contacts",
 
 "field:AllFiles=All Files",
-"field:BulletinViewHeading=Martus Bulletin",
+"field:BulletinViewHeading=Martus Record",
 "field:RemoveMartusFromSystemWarning=WARNING!",
 "field:RemoveMartusFromSystemMultipleAccountsWarning1=IMPORTANT: There are other Martus accounts on this system.",
 "field:RemoveMartusFromSystemMultipleAccountsWarning2=All of their data will be removed as well!",
 "field:QuickEraseFollowingItems=Clicking on Ok will do the following on this computer:",
 "field:QuickEraseWillNotRemoveItems=Any records on the server, Martus files copied outside of the Martus directory, and any of your records or Martus files on another computer will NOT be removed.",
 "field:RemoveMartusWillUninstall=Uninstall the Martus program.",
-"field:RemoveMartusWillRemoveAllOtherAccounts=Delete all other Martus accounts, including their key, folders, and bulletins.",
+"field:RemoveMartusWillRemoveAllOtherAccounts=Delete all other Martus accounts, including their key, folders, and records.",
 "field:RemoveMartusWillDeleteMartusDirectory=Delete the Martus directory and all of its contents.",
 "field:QuickEraseWillExitMartus=Exit Martus when complete.",
 
 "field:BulletinDetailsAuthorPublicCode=Author Public Code",
-"field:BulletinDetailsBulletinId=Bulletin ID",
+"field:BulletinDetailsBulletinId=Record ID",
 "field:BulletinDetailsVersionNumber=Version #",
 "field:BulletinDetailsVersionDate=Date Saved",
 "field:BulletinDetailsVersionId=ID",
@@ -1733,19 +1733,19 @@ public class EnglishStrings
 "field:BulletinDetailsHistory=History",
 "field:BulletinDetailsExtendedHistory=Extended History",
 "field:PreviousAuthor=Previous Author: #AUTHOR#",
-"field:PreviousBulletinId=Bulletin ID: #ID#",
+"field:PreviousBulletinId=Record ID: #ID#",
 "field:BulletinDetailsUnknownDate=(unknown)",
 "field:BulletinDetailsUnknownTitle=(unknown)",
 "field:Unknown=(unknown)",
 "field:BulletinDetailsInProgressDate=(in progress)",
 "field:BulletinDetailsInProgressTitle=(in progress)",
-"field:ImportBulletinsIntoWhichFolder=Import bulletins into which Folder?",
+"field:ImportBulletinsIntoWhichFolder=Import records into which Folder?",
 "field:ImportProgress=Importing",
 "field:ExportProgress=Exporting",
-"field:ImportExportBulletinTitle=Bulletin",
+"field:ImportExportBulletinTitle=Record",
 "field:DataIsHidden=(Press the + button to show the hidden information)",
-"field:LoadingFieldValuesFromAllBulletins=Processing bulletin",
-"field:LoadingFieldValuesFromAllBulletinsExplanation=Scanning all bulletins to create a list of all the values in #FieldName#",
+"field:LoadingFieldValuesFromAllBulletins=Processing record",
+"field:LoadingFieldValuesFromAllBulletinsExplanation=Scanning all records to create a list of all the values in #FieldName#",
 
 "field:_Section_BulletinSectionHeader=Header",
 "field:_SectionTopSection=",
@@ -1776,7 +1776,7 @@ public class EnglishStrings
 "field:FieldTypeGRID=Grid/Table",
 
 "field:BackgroundSearching=Searching...",
-"field:BackgroundSorting=Sorting Bulletins...",
+"field:BackgroundSorting=Sorting Records...",
 "field:BackgroundPrinting=Preparing Report...",
 "field:BackgroundWorking=Working...",
 "field:RecordTitle=Title:",
@@ -1788,14 +1788,14 @@ public class EnglishStrings
 "button:AddContactFromServer=Add Contact From Server...",
 
 "wintitle:confirmClearHQInformation=Confirm Removal of Contact",
-"wintitle:notifyAddPermissionsZeroBulletinsOurs=Update Contacts access to Bulletins",
+"wintitle:notifyAddPermissionsZeroBulletinsOurs=Update Contacts access to Records",
 "wintitle:notifyAddPermissionsZeroHeadquartersSelected=No Contacts Selected",
-"wintitle:RetrieveHQSealedBulletinProgress=Retrieving Bulletins",
-"wintitle:RetrieveHQDraftBulletinProgress=Retrieving Bulletins",
-"wintitle:RetrieveHQSealedBulletinSummaries=Retrieving Bulletin Summaries",
-"wintitle:RetrieveHQDraftBulletinSummaries=Retrieving Bulletin Summaries",
-"wintitle:AddPermissions=Update your contacts' access to Bulletins",
-"wintitle:AddingPermissionsToBulletins=Update your Contacts' access to Bulletins",
+"wintitle:RetrieveHQSealedBulletinProgress=Retrieving Records",
+"wintitle:RetrieveHQDraftBulletinProgress=Retrieving Records",
+"wintitle:RetrieveHQSealedBulletinSummaries=Retrieving Record Summaries",
+"wintitle:RetrieveHQDraftBulletinSummaries=Retrieving Record Summaries",
+"wintitle:AddPermissions=Update your contacts' access to Records",
+"wintitle:AddingPermissionsToBulletins=Update your Contacts' access to Records",
 "wintitle:FileDialogImportHeadquartersPublicKey=Add a contact",
 "wintitle:Attachments=Attachments",
 "wintitle:Details=Details",
@@ -1808,59 +1808,59 @@ public class EnglishStrings
 "button:ManageContacts=Manage Contacts",
 "button:Create=Create",
 
-"field:confirmClearHQInformationcause=You have chosen to remove the selected contact's accounts.  Any existing saved bulletins will still be visible by the old contact.  If you want to disallow this contact's viewing access to previously created Draft bulletins they must be re-saved after deleting the contact.  New versions of sealed bulletins will not be able to be viewed by the removed contact, but any old versions of sealed bulletins that already are on that contact's computer will still be viewable by the contact.",
-"field:confirmClearHQInformationeffect=By clicking on Yes, any draft or sealed bulletin saved in the future will no longer be accessible by your Contacts.",
+"field:confirmClearHQInformationcause=You have chosen to remove the selected contact's accounts.  Any existing saved records will still be visible by the old contact.  If you want to disallow this contact's viewing access to previously created Draft records they must be re-saved after deleting the contact.  New versions of sealed records will not be able to be viewed by the removed contact, but any old versions of sealed records that already are on that contact's computer will still be viewable by the contact.",
+"field:confirmClearHQInformationeffect=By clicking on Yes, any draft or sealed record saved in the future will no longer be accessible by your Contacts.",
 "field:ManageContacts=Manage Contacts",
 "field:ManageContactsTab=Manage Contacts",
-"field:confirmAddingPermissionsToBulletinsCanceleffect=If you do this, the bulletins already processed will have the new headquarters access, but other selected bulletins will not.",
+"field:confirmAddingPermissionsToBulletinsCanceleffect=If you do this, the records already processed will have the new headquarters access, but other selected records will not.",
 "field:confirmWarningSwitchToNormalKeyboardeffect=If this record was shared with you by one of your contacts, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.",
-"field:confirmCloneBulletinAsMineeffect=Clicking on Yes will create a new bulletin that contains a copy of all the same information. You will be the official author of this new bulletin, and any private data in it will only be visible by you (and your Contact's accounts that you have shared the bulletin with). The original bulletin will remain unchanged.",
+"field:confirmCloneBulletinAsMineeffect=Clicking on Yes will create a new record that contains a copy of all the same information. You will be the official author of this new record, and any private data in it will only be visible by you (and your Contact's accounts that you have shared the record with). The original record will remain unchanged.",
 "field:notifyAddPermissionsZeroHeadquartersSelectedcause=Must select at least one contact's account",
 "field:ConfigureHQColumnHeaderPublicCode=Public Code",
 "field:ViewBulletinHQInfo=#NumberOfHQs# Contact account(s) can view this private information",
 "field:ModifyBulletinHQInfo=#NumberOfHQs# Contact account(s) will be able to view this private information",
-"field:BulletinHeadQuartersHQInfoForView=The following Contact account(s) can view the private information in this bulletin, and can send this bulletin to a server.",
-"field:BulletinHeadQuartersHQInfoForModify=The selected contacts' account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new contact's account use the Tools > Manage Contacts menu option.",
+"field:BulletinHeadQuartersHQInfoForView=The following Contact account(s) can view the private information in this record, and can send this record to a server.",
+"field:BulletinHeadQuartersHQInfoForModify=The selected contacts' account(s) will be able to view the private information in this record, or send this record to a server, after you save it.\n\nTo add a new contact's account use the Tools > Manage Contacts menu option.",
 "field:BulletinHeadQuartersHQLabel=Label",
 "field:BulletinHeadQuartersHeadquarters=Contacts",
-"field:QuickEraseWillRemoveItems=Delete your Martus key, bulletins, folders, and configuration information (such as your contacts, server, and custom field settings).",
+"field:QuickEraseWillRemoveItems=Delete your Martus key, records, folders, and configuration information (such as your contacts, server, and custom field settings).",
 "field:_Section_BulletinSectionHeadquarters=Contacts",
 "field:HeadQuartersSelected=Selected?",
 "field:ConfigureHeadQuartersDefault=Default?",
-"field:AddPermissionsOverview=This allows you to update your contacts' access to existing bulletins. " +
-"Each of the bulletins in the list below will be modified to add the selected contacts' accounts. " +
-"If a bulletin is sealed, a new version will be created.",
-"field:ChooseHeadquartersToAdd=Select the contacts listed below that you want to add to all the bulletins listed above.",
+"field:AddPermissionsOverview=This allows you to update your contacts' access to existing records. " +
+"Each of the records in the list below will be modified to add the selected contacts' accounts. " +
+"If a record is sealed, a new version will be created.",
+"field:ChooseHeadquartersToAdd=Select the contacts listed below that you want to add to all the records listed above.",
 "field:TemplateCreatedByHeadquarters=Contacts #Name#",
 
 "wintitle:ViewAttachment=View Attachment",
-"wintitle:confirmCloneUnverifiedFDBulletinAsMine=Confirm Create Copy of Bulletin",
+"wintitle:confirmCloneUnverifiedFDBulletinAsMine=Confirm Create Copy of Record",
 
 
-"wintitle:RetrieveHQSealedBulletins=Retrieve Sealed Bulletins from My Contacts",
-"wintitle:RetrieveHQDraftBulletins=Retrieve Draft Bulletins from My Contacts",
+"wintitle:RetrieveHQSealedBulletins=Retrieve Sealed Records from My Contacts",
+"wintitle:RetrieveHQDraftBulletins=Retrieve Draft Records from My Contacts",
 
 
 
-"menu:RetrieveHQSealedBulletins=Retrieve Sealed Bulletins from My Contacts",
-"menu:RetrieveHQDraftBulletins=Retrieve Draft Bulletins from My Contacts",
-"folder:%RetrievedFieldOfficeBulletin=Contacts Sealed Bulletins",
-"folder:%RetrievedFieldOfficeBulletinDraft=Contacts Draft Bulletins",
-"field:confirmCloneUnverifiedFDBulletinAsMinecause=You have chosen to modify a bulletin that was created by a Martus user that has not been verified, so the bulletin could contain incorrect information or potentially damaging attachments. We recommend that you verify this account before continuing (See Tools > Manage Contacts).",
-"field:confirmCloneUnverifiedFDBulletinAsMineeffect=Clicking on Yes to continue with the modify operation will create a new bulletin that contains a copy of all the same information.  You will be the official author of this new bulletin, so you will become responsible for all the content. Any private data in it will only be visible to you (and any contacts accounts you have shared this with).  The original bulletin will remain unchanged.",
+"menu:RetrieveHQSealedBulletins=Retrieve Sealed Records from My Contacts",
+"menu:RetrieveHQDraftBulletins=Retrieve Draft Records from My Contacts",
+"folder:%RetrievedFieldOfficeBulletin=Contacts Sealed Records",
+"folder:%RetrievedFieldOfficeBulletinDraft=Contacts Draft Records",
+"field:confirmCloneUnverifiedFDBulletinAsMinecause=You have chosen to modify a record that was created by a Martus user that has not been verified, so the record could contain incorrect information or potentially damaging attachments. We recommend that you verify this account before continuing (See Tools > Manage Contacts).",
+"field:confirmCloneUnverifiedFDBulletinAsMineeffect=Clicking on Yes to continue with the modify operation will create a new record that contains a copy of all the same information.  You will be the official author of this new record, so you will become responsible for all the content. Any private data in it will only be visible to you (and any contacts accounts you have shared this with).  The original record will remain unchanged.",
 
 "wintitle:notifyBulletinWithAnUnverifiedExternalAttachment=Unverified Attachment",
 "field:notifyBulletinWithAnUnverifiedExternalAttachmentcause=Warning: This record includes attachments that need to be read outside of the Martus system. In addition, this file was sent to you from an [unknown/unverified] contact. Opening unknown attachments is one of the most common ways of introducing malware to your computer. Be sure of the safety of the attachment(s) before opening or sharing with others.",
 
-"field:RetrieveHQSealedBulletinProgress=Retrieving Sealed Bulletins from Contacts",
-"field:RetrieveHQDraftBulletinProgress=Retrieving Draft Bulletins from Contacts",
-"field:RetrieveHQSealedBulletinSummaries=Retrieving Sealed Bulletin Summaries from Contacts",
-"field:RetrieveHQDraftBulletinSummaries=Retrieving Draft Bulletin Summaries from Contacts",
+"field:RetrieveHQSealedBulletinProgress=Retrieving Sealed Records from Contacts",
+"field:RetrieveHQDraftBulletinProgress=Retrieving Draft Records from Contacts",
+"field:RetrieveHQSealedBulletinSummaries=Retrieving Sealed Record Summaries from Contacts",
+"field:RetrieveHQDraftBulletinSummaries=Retrieving Draft Record Summaries from Contacts",
 "field:TemplateCreatedByFieldDesk=Contact #Name#",
-"field:UnverifiedFDAttachment=The Martus account that created this bulletin has not been verified, so there is an increased chance that this attachment could be dangerous. We recommend that you verify this Contact's account before you #action# this attachment (See Tools > Manage Contacts). Opening this attachment could put your computer at risk. ",
-"field:statusCheckingForNewFieldOfficeBulletins=Checking for new bulletins from Contacts...",
-"field:statusNewFieldOfficeBulletins=New bulletins found on server",
-"field:preferencesCheckFieldOfficeBulletins=Automatically check for new bulletins from Contacts",
+"field:UnverifiedFDAttachment=The Martus account that created this record has not been verified, so there is an increased chance that this attachment could be dangerous. We recommend that you verify this Contact's account before you #action# this attachment (See Tools > Manage Contacts). Opening this attachment could put your computer at risk. ",
+"field:statusCheckingForNewFieldOfficeBulletins=Checking for new records from Contacts...",
+"field:statusNewFieldOfficeBulletins=New records found on server",
+"field:preferencesCheckFieldOfficeBulletins=Automatically check for new records from Contacts",
 "field:SyncFrequencyMinutes=minutes",
 "field:SyncFrequencyOnStartup=on log-in",
 "field:SyncFrequencyOnceAnHour=once an hour",
@@ -1957,19 +1957,19 @@ public class EnglishStrings
 
 "field:SettingUpTor=Setting Up Tor.",
 "field:AccountContact=Account Contact Information",
-"field:AccountContactInformation=This information is optional and is used to prepopulate your bulletins for your convenience. It is stored on your local computer and not sent to the Martus server.",
+"field:AccountContactInformation=This information is optional and is used to prepopulate your records for your convenience. It is stored on your local computer and not sent to the Martus server.",
 "field:DisplaySettings=Your Display Settings",
 "field:TorSettings=Your Tor Settings",
 "field:UseTor=Use Tor",
 "field:UseTorInstructions=Tor is a security tool you can use to hide your identity when connecting to sites on the Internet. If Martus servers are blocked from your location, using Tor may help reach the servers.",
 "field:TorTip1=Turning Tor on here establishes the default setting for your use of Tor when in Martus. You can also, turn Tor ON or OFF at any time inside the Martus desktop application.",
-"field:TorTip2=Note: Using Tor will slow sending and receiving of bulletins.",
+"field:TorTip2=Note: Using Tor will slow sending and receiving of records.",
 "field:SystemSettings=System Settings",
 "field:NeverDeleteVersionOnServer=Never Delete from Server",
 
 "field:GettingServerInformation=Getting server information",
 "field:AdvanceServerSetup=Advanced Server Setup",
-"field:AdvanceServerInformation=To store your bulletins on a specific server, you will need the IP address, public code, and magic word for the server.",
+"field:AdvanceServerInformation=To store your records on a specific server, you will need the IP address, public code, and magic word for the server.",
 "field:AdvanceMartusServerMailTo=If you are connecting to a Martus server, email info@martus.org for this info.",
 "field:AdvanceOrganizationServer=If you are connecting to your organization's server, contact your administrator.",
 "field:ConnectToAdvanceServer=Connect",
@@ -1977,7 +1977,7 @@ public class EnglishStrings
 "field:ServerSetup=Server Setup",
 "field:ConnectMartusServerReasons1=Connect to the Martus server to:",
 "field:ConnectMartusServerReasons2=- Backup your documents on the Martus server in case your computer is lost or stolen",
-"field:ConnectMartusServerReasons3=- Easily retrieve the public keys of your contacts, so you can send them bulletins",
+"field:ConnectMartusServerReasons3=- Easily retrieve the public keys of your contacts, so you can send them records",
 "field:ConnectMartusServerReasons4=- Import form templates from your contacts",
 "field:SetupServerLater=Set up server later",
 "field:UseDefaultServer=Use default server",
@@ -2068,16 +2068,16 @@ public class EnglishStrings
 "wintitle:CaseSent=Sent",
 "wintitle:CaseReceived=Received",
 
-"folder:%OutBox=Unsent Bulletins",
+"folder:%OutBox=Unsent Records",
 "folder:%Sent=Sent",
-"folder:%Draft=Old Draft Bulletins",
-"folder:%Discarded=Discarded Bulletins",
-"folder:%RetrievedBulletins=Retrieved Bulletins",
-"folder:%RetrievedMyBulletin=Retrieved Bulletins",
-"folder:%RetrievedMyBulletinDraft=Retrieved Draft Bulletins",
+"folder:%Draft=Old Draft Records",
+"folder:%Discarded=Discarded Records",
+"folder:%RetrievedBulletins=Retrieved Records",
+"folder:%RetrievedMyBulletin=Retrieved Records",
+"folder:%RetrievedMyBulletinDraft=Retrieved Draft Records",
 "folder:%SearchResults=Search Results",
-"folder:%RecoveredBulletins=Recovered Bulletins",
-"folder:%DamagedBulletins=Damaged Bulletins",
+"folder:%RecoveredBulletins=Recovered Records",
+"folder:%DamagedBulletins=Damaged Records",
 "folder:%Import=Imported",
 
 "month:jan=Jan",
