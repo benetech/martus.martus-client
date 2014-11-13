@@ -1996,7 +1996,7 @@ public class EnglishStrings
 "menu:ChangeUsernameAndPassword=Username and Password",
 "menu:AccountSharing=Account Sharing",
 "field:AccountSharing=Account Sharing",
-"menu:ContactInformation=Contact Information",
+"menu:AccountInformation=Account Information",
 "menu:DeleteAccount=Delete Account",
 "menu:ServerSettings=Server Settings",
 "menu:WizardStep6Heading=Backup key",
