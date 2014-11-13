@@ -1969,7 +1969,7 @@ public class EnglishStrings
 "field:GettingServerInformation=Getting server information",
 "field:AdvanceServerSetup=Advanced Server Setup",
 "field:AdvanceServerInformation=To store your records on a specific server, you will need the IP address, public code, and magic word for the server.",
-"field:AdvanceMartusServerMailTo=If you are connecting to a Martus server, email info@martus.org for this info.",
+"field:AdvanceMartusServerMailTo=If you are connecting to a Martus server, email martus@benetech.org for this info.",
 "field:AdvanceOrganizationServer=If you are connecting to your organization's server, contact your administrator.",
 "field:ConnectToAdvanceServer=Connect",
 
