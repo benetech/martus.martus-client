@@ -440,7 +440,7 @@ public class EnglishStrings
 "button:DeleteServerDrafts=Delete",
 "button:checkall=Check All",
 "button:uncheckall=Uncheck All",
-"button:addattachment=Add Attachment",
+"button:addattachment=Add",
 "button:removeattachment=Remove",
 "button:attachmentLabel=Name",
 "button:attachmentSize=Size(Kb)",
