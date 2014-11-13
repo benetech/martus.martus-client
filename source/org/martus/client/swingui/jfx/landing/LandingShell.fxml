@@ -153,7 +153,7 @@
 							<top>
 								<HBox>
    <children>
-               	        			<Label fx:id="titleBarLabel" styleClass="headingLevel1" text="" />
+               	        			<Label fx:id="titleBarLabel" styleClass="headingLevel2" text="" />
                	        			<Button fx:id="closeCurrentViewButton" mnemonicParsing="false" onAction="#onCloseCurrentView" styleClass="toolbarButton" text="%Button.close" />
    </children>
             	        		</HBox>	
