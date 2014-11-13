@@ -1956,7 +1956,7 @@ public class EnglishStrings
 
 "field:SettingUpTor=Setting Up Tor.",
 "field:AccountContact=Account Contact Information",
-"field:AccountContactInformation=This information is optional and is used to prepopulate your records for your convenience. It is stored on your local computer and not sent to the Martus server.",
+"field:AccountContactInformation=This information is optional and is used to auto-fill your records for your convenience. It is stored on your local computer and not sent to the Martus server.",
 "field:DisplaySettings=Your Display Settings",
 "field:TorSettings=Your Tor Settings",
 "field:UseTor=Use Tor",
