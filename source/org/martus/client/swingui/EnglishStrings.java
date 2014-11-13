@@ -397,7 +397,7 @@ public class EnglishStrings
 "field:EmptyTrashConfirmation=This will permanently remove these records from your local computer. This does not affect the records on the server.",
 "field:EmptyTrashConfirmationItemsInOtherFolders=Note: some records here are linked in other #Cases# and those copies will not be permanently removed.",
 "field:ContactNamesSeparator=,",
-"field:notifyLegacyPublicIsPrivateMessagecause=Records created in older versions of Martus may contain fields of data that may have been made public on Martus legacy systems. However, this data is not public on the new Martus system To check if data from older records is public on the old system search.",
+"field:notifyLegacyPublicIsPrivateMessagecause=Note: Any record data made public using previous versions of Martus will no longer be public in the new Martus system.",
 
 "tooltip:ShowTrash=Trash",
 "tooltip:CaseSettings=Case Settings",
