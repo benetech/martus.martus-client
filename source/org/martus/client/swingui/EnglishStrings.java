@@ -1949,7 +1949,7 @@ public class EnglishStrings
 "field:UserNameAndPasswordMatches=Username and password match!",
 
 "field:VerifyContactPublicCode=Verify your contact public code",
-"field:VerifyContactPublicCodeNew=Public code (for Martus 4.5 and above):",
+"field:VerifyContactPublicCodeNew=Public code:",
 "field:VerifyContactPublicCodeOld=Public code (for Martus 4.4 and below):",
 "button:VerifyContactLater=Verify Later",
 "button:VerifyContactNow=Verify Now",
