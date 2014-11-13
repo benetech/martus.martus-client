@@ -1990,7 +1990,7 @@ public class EnglishStrings
 "field:UseDefaultServer=Use default server",
 "field:SetupAdvanceServer=Advanced server settings",
 "field:SetupServerTips=The data you store on Martus servers are completely encrypted using 3072-bit encryption. This means even Martus server administrators cannot read your data.",
-"field:ServerSettings=Server Settings",
+"field:ServerSettings=Settings",
 "menu:SystemPreferences=System Preferences",
 "menu:TorPreferences=Tor Preferences",
 "menu:ChangeUsernameAndPassword=Change Username and Password",
@@ -1998,9 +1998,10 @@ public class EnglishStrings
 "field:AccountSharing=Account Sharing",
 "menu:ContactInformation=Contact Information",
 "menu:DeleteAccount=Delete Account",
-"menu:ServerSettings=Settings",
+"menu:ServerSettings=Server Settings",
 "menu:WizardStep6Heading=Backup key",
 "menu:ManageContacts=Manage Contacts",
+"menu:Settings=Settings",
 
 
 "field:HelpForTokenAndPublicCode=If someone wishes to send you information, provide them with your access token and public code.",
