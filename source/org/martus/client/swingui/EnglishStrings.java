@@ -1957,14 +1957,14 @@ public class EnglishStrings
 "field:UserNameAndPasswordMatches=Username and password match!",
 
 "field:VerifyContactPublicCode=Verify your contact public code",
-"field:VerifyContactPublicCodeNew=Public code (for Martus 4.5 and above):",
+"field:VerifyContactPublicCodeNew=Public code:",
 "field:VerifyContactPublicCodeOld=Public code (for Martus 4.4 and below):",
 "button:VerifyContactLater=Verify Later",
 "button:VerifyContactNow=Verify Now",
 
 "field:SettingUpTor=Setting Up Tor.",
 "field:AccountContact=Account Contact Information",
-"field:AccountContactInformation=This information is optional and is used to prepopulate your records for your convenience. It is stored on your local computer and not sent to the Martus server.",
+"field:AccountContactInformation=This information is optional and is used to auto-fill your records for your convenience. It is stored on your local computer and not sent to the Martus server.",
 "field:DisplaySettings=Your Display Settings",
 "field:TorSettings=Your Tor Settings",
 "field:UseTor=Use Tor",
@@ -2008,7 +2008,7 @@ public class EnglishStrings
 "field:LinkToTokenAndPublicCode=Get your Token and Code",
 
 "field:ManageContactsHeading=Contacts",
-"field:ManageContactsDescription=Ask your contacts for their access token and public code to add them here.",
+"field:ManageContactsDescription=Ask your contacts for their access token and public code to add and verify them here.",
 
 "field:NoFormTemplateTitle=[no title]",
 "button:GenericForms=Generic",
