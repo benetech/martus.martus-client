@@ -160,3 +160,64 @@
 .tab-cases {
 	-fx-background-color:  #353535;
 }
+
+/************/
+/* ListView */
+/************/
+
+
+.list-view,
+.list-view:focused {
+    -fx-border-width: 1;
+    -fx-border-color: #2c2c2c;
+    -fx-border-radius: 5;
+    -fx-background-insets: 0;
+}
+
+
+.list-cell:even {
+    -fx-cell-hover-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+    -fx-background-color: #ffffff;
+}
+
+.list-cell:odd {
+    -fx-cell-hover-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+    -fx-background-color: #f7f7f7;
+}
+
+.list-cell:filled:selected:focused:selected {
+    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+    -fx-text-fill: white;
+}
+
+.list-cell:even { /* <=== changed to even */
+    -fx-background-color: white;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+    -fx-text-fill: white;
+}
+
+/*************/
+/* TableView */
+/*************/
+/* Selected row */
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+}
+
+/* Selected row when table not focused */
+.table-row-cell:filled:focused:selected {
+     -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+}
+
+/* Row hovered */
+.table-view:row-selection .table-row-cell:filled:hover {
+    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+}
+
+/* Selected row hovered */
+.table-view:focused .table-row-cell:filled:focused:selected:hover {
+     -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+}
