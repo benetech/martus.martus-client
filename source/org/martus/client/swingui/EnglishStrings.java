@@ -810,7 +810,7 @@ public class EnglishStrings
 "wintitle:notifyChartUnknownError=Charts",
 "field:notifyChartUnknownErrorcause=An unknown error has occurred",
 "wintitle:notifyRestartMartusForLanguageChange=Martus Restart Required",
-"field:notifyRestartMartusForLanguageChangecause=Please restart martus to see the language you have chosen.",
+"field:notifyRestartMartusForLanguageChangecause=Please restart Martus to see the language you have chosen.",
 
 "wintitle:PreparingBulletins=Preparing Records...",
 "field:PreparingBulletins=Preparing Records...",
