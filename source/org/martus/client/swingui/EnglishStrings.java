@@ -1759,7 +1759,7 @@ public class EnglishStrings
 "field:_SectionBottomSection=",
 
 "field:mdyOrder=Date Format",
-"field:DateDelimiter=Date delimiter",
+"field:DateDelimiter=Date Delimiter",
 "field:CalendarSystem=Calendar type",
 "field:DatePartYear=Year",
 "field:DatePartMonth=Month",
