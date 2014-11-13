@@ -53,11 +53,6 @@
 					<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
 					</rowConstraints>
 					<children>
-                        <TextField fx:id="toField" editable="false" styleClass="systemTextField" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-						</TextField>
                         <Button fx:id="addRemoveContact" mnemonicParsing="false" onAction="#onAddRemoveContact" styleClass="button-minpadding" GridPane.columnIndex="1" GridPane.rowIndex="0">
 							<graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -70,6 +65,7 @@
                               <Insets right="1.0" />
                            </GridPane.margin>
                         </Button>
+                        <Label fx:id="toField" />
                   </children>
           		</GridPane>
 
@@ -84,8 +80,6 @@
 					<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
 					</rowConstraints>
 					<children>
-					
-						<TextField fx:id="fromField" editable="false" prefWidth="500.0" styleClass="systemTextField" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 						
 						<HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" styleClass="headerButtonHBox" GridPane.columnIndex="1" GridPane.rowIndex="0">
 							<children>
@@ -110,6 +104,7 @@
                               </Button>
                            </children>
 						 </HBox>
+                        <Label fx:id="fromField" />
 
                       </children>
 					</GridPane>
