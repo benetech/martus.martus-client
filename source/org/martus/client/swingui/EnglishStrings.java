@@ -677,7 +677,7 @@ public class EnglishStrings
 "field:" + Bulletin.PSEUDOFIELD_WAS_SENT + "=Sent",
 "field:preferencesAdjustThai=Automatically adjust legacy Thai dates",
 "field:preferencesAdjustPersian=Automatically adjust legacy Afghan/Persian dates",
-"field:preferencesUseZawgyi=Enable Zawgyi font to display in Burmese",
+"field:preferencesUseZawgyi=Enable Zawgyi font to display Burmese",
 "field:preferencesAllPrivate=Prevent creating public records",
 "field:PreferencesUseInternalTor=Use embedded Tor (Using Tor can improve security but may be slower than not using Tor)",
 "field:PreferencesWhyUseTor=Turn Tor ON if you wish to hide that you are connecting to a Martus server. This may help reach the Martus servers if they are blocked from your location.",
