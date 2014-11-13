@@ -7,13 +7,13 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <center>
-      <TableView fx:id="itemsTable" onMouseClicked="#onMouseClick">
+      <TableView fx:id="itemsTable" onMouseClicked="#onMouseClick" prefHeight="400.0" prefWidth="940.0">
         <columns>
           <TableColumn fx:id="onServerColumn" editable="false" text="%OnServer" />
-            <TableColumn fx:id="authorColumn" editable="false" prefWidth="123.0" text="%Author" />
-            <TableColumn fx:id="authorVerifiedColumn" prefWidth="75.0" text="%ContactVerified" />
-          <TableColumn fx:id="titleColumn" editable="false" prefWidth="284.0" text="%InputCustomFieldsTitle" />
-            <TableColumn fx:id="dateSavedColumn" editable="false" prefWidth="180.0" text="%BulletinDetailsVersionDate" />
+            <TableColumn fx:id="authorColumn" editable="false" prefWidth="120.0" text="%Author" />
+            <TableColumn fx:id="authorVerifiedColumn" prefWidth="100.0" text="%ContactVerified" />
+          <TableColumn fx:id="titleColumn" editable="false" prefWidth="360.0" text="%InputCustomFieldsTitle" />
+            <TableColumn fx:id="dateSavedColumn" editable="false" prefWidth="140.0" text="%BulletinDetailsVersionDate" />
             <TableColumn fx:id="viewBulletinColumn" text="%ViewAttachmentAction" />
             <TableColumn fx:id="editBulletinColumn" text="%Edit" />
         </columns>
@@ -24,7 +24,7 @@
          <left>
           <HBox BorderPane.alignment="CENTER">
              <children>
-                <Button fx:id="trashButton" mnemonicParsing="false" onAction="#onTrashSelectedItems" text="%Button.Delete">
+                <Button fx:id="trashButton" mnemonicParsing="false" onAction="#onTrashSelectedItems">
                    <graphic>
                       <ImageView pickOnBounds="true" preserveRatio="true">
                          <image>
@@ -32,8 +32,11 @@
                          </image>
                       </ImageView>
                    </graphic>
+                     <tooltip>
+                        <Tooltip text="%Button.Delete" />
+                     </tooltip>
                 </Button>
-                <Button fx:id="exportButton" mnemonicParsing="false" onAction="#onExportSelectedItems" text="%Button.export">
+                <Button fx:id="exportButton" mnemonicParsing="false" onAction="#onExportSelectedItems">
                    <graphic>
                       <ImageView pickOnBounds="true" preserveRatio="true">
                          <image>
@@ -41,8 +44,11 @@
                          </image>
                       </ImageView>
                    </graphic>
+                     <tooltip>
+                        <Tooltip text="%Button.export" />
+                     </tooltip>
                 </Button>
-                <Button fx:id="moveButton" mnemonicParsing="false" onAction="#onMoveSelectedItems" text="%Button.move">
+                <Button fx:id="moveButton" mnemonicParsing="false" onAction="#onMoveSelectedItems">
                    <graphic>
                       <ImageView pickOnBounds="true" preserveRatio="true">
                          <image>
@@ -50,8 +56,11 @@
                          </image>
                       </ImageView>
                    </graphic>
+                     <tooltip>
+                        <Tooltip text="%Button.move" />
+                     </tooltip>
                 </Button>
-                <Button fx:id="copyButton" mnemonicParsing="false" onAction="#onCopySelectedItem" text="%Button.CopyItem">
+                <Button fx:id="copyButton" mnemonicParsing="false" onAction="#onCopySelectedItem">
                    <graphic>
                       <ImageView pickOnBounds="true" preserveRatio="true">
                          <image>
@@ -59,8 +68,11 @@
                          </image>
                       </ImageView>
                    </graphic>
+                     <tooltip>
+                        <Tooltip text="%Button.CopyItem" />
+                     </tooltip>
                 </Button>
-                <Button fx:id="emptyTrashButton" mnemonicParsing="false" onAction="#onEmptyTrash" text="%Button.emptyTrash">
+                <Button fx:id="emptyTrashButton" mnemonicParsing="false" onAction="#onEmptyTrash">
                    <graphic>
                       <ImageView pickOnBounds="true" preserveRatio="true">
                          <image>
@@ -68,6 +80,9 @@
                          </image>
                       </ImageView>
                    </graphic>
+                     <tooltip>
+                        <Tooltip text="%Button.emptyTrash" />
+                     </tooltip>
                 </Button>
              </children>
           </HBox>
