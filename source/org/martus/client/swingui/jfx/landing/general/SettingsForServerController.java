@@ -379,7 +379,7 @@ public class SettingsForServerController extends FxInSwingController
 	{
 		MartusLocalization localization = getLocalization();
 		String complianceStatementMsg = String.format("%s\n\n%s", localization.getFieldLabel("ServerComplianceDescription"), newServerCompliance);
-		if(!showConfirmationDialog("ServerCompliance", complianceStatementMsg))
+		if(!showConfirmationDialog("ServerCompliance", "ServerComplianceAccept", "ServerComplianceReject", complianceStatementMsg))
 		{
 			showNotifyDialog("UserRejectedServerCompliance");
 			return false;
