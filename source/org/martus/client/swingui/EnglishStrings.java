@@ -819,7 +819,6 @@ public class EnglishStrings
 "wintitle:notifyViewKeyDetails=View Key Details",
 "field:notifyViewKeyDetailscause=Label: #Label#\n\nPublic Code: #PublicCode#\n\nPublic Account Id: #PublicKey#",
 "wintitle:FileDialogAddAttachment=Add Attachment",
-"button:FileDialogOkAddAttachment=Add Attachment",
 
 "wintitle:FileDialogRestoreFromKeyPair=Restore Account",
 "button:FileDialogOkRestoreFromKeyPair=Restore",
