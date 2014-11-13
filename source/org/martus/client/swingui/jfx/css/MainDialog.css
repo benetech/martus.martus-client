@@ -20,7 +20,6 @@
 
 .mainBox {
 	-fx-padding:5 15 5 15;
-	-fx-alignment:left;
 }
 
 .headingLevel1 {
@@ -70,21 +69,3 @@
 	-fx-alignment:baseline-right;
 }
 
-.list-view,
-.list-view:focused {
-    -fx-border-width: 1;
-    -fx-border-color: #2c2c2c;
-    -fx-border-radius: 5;
-    -fx-background-insets: 0;
-}
-
-
-.list-cell:even {
-    -fx-cell-hover-color: #7fc831;
-    -fx-background-color: #ffffff;
-}
-
-.list-cell:odd {
-    -fx-cell-hover-color: #7fc831;
-    -fx-background-color: #f7f7f7;
-}
