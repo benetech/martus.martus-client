@@ -90,18 +90,25 @@ Scene {
 	-fx-border-width: 1;
 }
 
+.context-menu {
+-fx-background-color: darkgray;
+}
 
 .choice-box {
 -fx-padding: 2 6 3 6;
 -fx-font-size: 13px;
 -fx-text-fill: #FFFFFF;
--fx-control-inner-background: #cfd1cf;
--fx-background-color: #2c2c2c;
+-fx-control-inner-background: #2c2c2c;
+-fx-background-color: darkgray;
 -fx-border-color: #bdbdbd;
--fx-border-width: 1;
+-fx-border-width: 2;
 -fx-background-radius: 0;
--fx-background-insets: 0 0 -1 0, 0, 1, 2;
 }
+
+.choice-box .label {
+     -fx-text-fill: black;
+ }
+
 
 .headerFieldBox {
 	-fx-padding:0 10 0 10;
