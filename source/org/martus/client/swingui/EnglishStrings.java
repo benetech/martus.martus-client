@@ -765,7 +765,7 @@ public class EnglishStrings
 "field:DefaultServerConnection=Default (Service Level 1:)",
 "field:ConnectToDefault=Connect to Default",
 "field:AdvancedSettings=Advanced Settings:",
-"field:ServerIP=Server I.P.:",
+"field:ServerIP=Server IP:",
 "field:ServerPreferences=Server Preferences",
 "field:Download=Download",
 "field:SelectLanguage=Select Language:",
