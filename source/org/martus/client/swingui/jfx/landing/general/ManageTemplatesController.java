@@ -481,8 +481,7 @@ public class ManageTemplatesController extends FxInSwingController
 		}
 		catch (Exception e)
 		{
-			showNotifyDialog("ErrorImportingCustomizationTemplate", e.getMessage());
-			return;
+			errors.add(CustomFieldError.errorParseXml(e.getMessage()));
 		}
 		
 		if (!errors.isEmpty())
