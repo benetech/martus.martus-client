@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+      <VBox>
+         <children>
+            <Label styleClass="headingLevel1" text="%FieldTypeLANGUAGE" />
+            <HBox alignment="CENTER_LEFT">
+ 		     <children>
+                  <Label text="%SelectLanguage" />
+                  <ChoiceBox fx:id="languageSelection" />
+      </children>
+            </HBox>
+            <CheckBox fx:id="useZawgyiFont" mnemonicParsing="false" text="%preferencesUseZawgyi" />
+         </children>
+      </VBox>
+      <VBox>
+         <children>
+            <Label styleClass="headingLevel1" text="%Calendar" />
+            <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="175.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="433.0" minWidth="10.0" prefWidth="433.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      <children>
+                  <ListView prefHeight="200.0" prefWidth="200.0" />
+                  <Label text="%DateDelimiter" GridPane.rowIndex="1" />
+                  <Label text="%DateFormatSequence" />
+                  <Label text="%CalendarType" GridPane.rowIndex="2" />
+                  <ChoiceBox fx:id="dateFormat" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <ChoiceBox fx:id="dateDelimiter" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="calendarType" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      </children>
+      </GridPane>
+         </children>
+      </VBox>
+      <VBox>
+         <children>
+            <Label styleClass="headingLevel1" text="%NewRecords" />
+            <CheckBox fx:id="immutableOnServer" mnemonicParsing="false" text="%NeverDeleteVersionOnServer" />
+         </children>
+      </VBox>
+      <Button mnemonicParsing="false" onAction="#onSaveChanges" text="%Button.SaveChanges" />
+</children></VBox>
