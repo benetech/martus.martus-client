@@ -54,11 +54,11 @@ public class BulletinEditorFooterController extends FxController
 		super(mainWindowToUse);
 	}
 	
-	private class HistoryItem extends Label
+	private class HistoryItem
 	{
 		public HistoryItem(String data, UniversalId revisionUidToUse)
 		{
-			super(data);
+			label = data;
 			revisionUid = revisionUidToUse;
 		}
 		
@@ -67,7 +67,14 @@ public class BulletinEditorFooterController extends FxController
 			return revisionUid;
 		}
 		
+		@Override
+		public String toString()
+		{
+			return label;
+		}
+
 		private UniversalId revisionUid;
+		private String label;
 	}
 
 	public void showBulletin(FxBulletin bulletinToShow)
@@ -130,7 +137,7 @@ public class BulletinEditorFooterController extends FxController
 	{
 		try
 		{
-			HistoryItem selectedVersion = historyItems.getSelectionModel().getSelectedItem();
+			final HistoryItem selectedVersion = historyItems.getSelectionModel().getSelectedItem();
 			ClientBulletinStore store = getApp().getStore();
 			Bulletin bulletinHistoryItem = store.getBulletinRevision(selectedVersion.getUid());
 			if(bulletinHistoryItem == null)
