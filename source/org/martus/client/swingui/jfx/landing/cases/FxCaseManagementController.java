@@ -92,7 +92,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		showAllCases();
 	}
 
-	private FxLandingShellController getFxLandingShellController()
+	protected FxLandingShellController getFxLandingShellController()
 	{
 		return (FxLandingShellController)getShellController();
 	}
@@ -224,7 +224,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		}
 	}
 
-	private BulletinFolder getCurrentBulletinFolder()
+	protected BulletinFolder getCurrentBulletinFolder()
 	{
 		int selectedIndex = currentCasesListView.getSelectionModel().getSelectedIndex();
 		if(selectedIndex == INVALID_INDEX)
@@ -402,6 +402,10 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 				CaseListItem previousCase, CaseListItem newCase)
 		{
 			selectCurrentCaseIfNothingWasPreviouslySelected(previousCase);
+			BulletinFolder folder = getCurrentBulletinFolder();
+			if (folder != null)
+				getFxLandingShellController().setTitleBarToCustomCase(folder.getLocalizedName(getLocalization()));
+
 			updateCaseList();
 		}
 

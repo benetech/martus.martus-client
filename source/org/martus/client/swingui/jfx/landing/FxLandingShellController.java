@@ -124,9 +124,21 @@ public class FxLandingShellController extends FxNonWizardShellController
 		setTitleBarLabel("notifySearchFound");
 	}
 	
+	public void setTitleBarToCustomCase(String caseName)
+	{
+		hideCloseCurrentViewButton();
+		setTitleBarTranslatedLabel(caseName);
+	}
+	
 	private void setTitleBarLabel(String titleLabelTag)
 	{
-		titleBarLabel.setText(getLocalization().getWindowTitle(titleLabelTag));
+		String translatedLabel = getLocalization().getWindowTitle(titleLabelTag);
+		setTitleBarTranslatedLabel(translatedLabel);
+	}
+
+	private void setTitleBarTranslatedLabel(String translatedLabel)
+	{
+		titleBarLabel.setText(translatedLabel);
 	}
 	
 	private void showCloseCurrentViewButton()
