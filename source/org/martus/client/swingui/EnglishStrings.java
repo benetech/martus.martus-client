@@ -1138,7 +1138,7 @@ public class EnglishStrings
 "field:IncompatibleMtfVersionProgram=Martus Software Version: #ProgramVersionNumber#",
 
 "field:SaveAttachmentAction=save",
-"field:ViewAttachmentAction=view",
+"field:ViewAttachmentAction=View",
 // NOTE: the messageXxx are for swing, and the notifyXxx are for JavaFX
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
