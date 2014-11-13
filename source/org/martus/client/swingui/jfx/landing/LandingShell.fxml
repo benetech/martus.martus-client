@@ -47,8 +47,7 @@
 	<center>
 		<BorderPane>
 			<top>
-<!--				<VBox prefHeight="2.0" prefWidth="920.0" style="-fx-background-color: #77bad0;" />-->
-				<VBox prefHeight="40.0" prefWidth="920.0" style="-fx-background-color: #e6e6e6;">
+				<VBox prefWidth="800.0" style="-fx-background-color: #e6e6e6;">
 					<VBox.margin>
 						<Insets bottom="1.0" top="1.0" />
 					</VBox.margin>
@@ -63,16 +62,16 @@
 							    <ColumnConstraints hgrow="SOMETIMES" />
 							</columnConstraints>
 							<children>
-                        <HBox alignment="CENTER" prefHeight="100.0">
+                        <HBox alignment="CENTER">
                            <children>
-      								<ImageView fitHeight="33.0" fitWidth="97.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true">
+      								<ImageView fitHeight="28.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true">
       									<image>
       										<Image url="@../../dialogs/Martus-logo-black-text-120x54.png" />
       									</image>
       								</ImageView>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" GridPane.columnIndex="1">
+                        <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1">
                            <children>
       								<Button mnemonicParsing="false" onAction="#onCreateNewBulletin" styleClass="toolbarButton" text="%Button.Create" textFill="#f7f7f7">
       									<font>
@@ -89,7 +88,7 @@
                               <Separator prefWidth="10.0" visible="false" />
                            </children>
                         </HBox>
-								<HBox alignment="CENTER_LEFT" prefHeight="32.0" styleClass="toolbarHBox" GridPane.columnIndex="3">
+								<HBox alignment="CENTER_LEFT" styleClass="toolbarHBox" GridPane.columnIndex="3">
 									<children>
 										<Label contentDisplay="CENTER" styleClass="toolbarLabel" text="%serverWithColon">
                                  			<padding>
@@ -112,9 +111,9 @@
  										<Button fx:id="toolbarButtonTor" minWidth="50" mnemonicParsing="false" onAction="#onTor" styleClass="toolbarButton" />
                            			</children>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" GridPane.columnIndex="5">
+                        <HBox alignment="CENTER_LEFT" GridPane.columnIndex="5">
                            <children>
-      								<TextField fx:id="searchText" maxWidth="160.0" minHeight="27.0" prefWidth="150.0" style="-fx-background-radius: 0px;" />
+      								<TextField fx:id="searchText" maxWidth="160.0" minHeight="27.0" prefWidth="100.0" style="-fx-background-radius: 0px;" />
                               <Label text="   " />
       								<Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onQuickSearch" styleClass="toolbarButton" text="%Button.search" textAlignment="CENTER" textFill="#f7f7f7">
       									<font>
