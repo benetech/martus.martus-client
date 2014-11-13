@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fillWidth="false" spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 <children>
       <VBox>
          <children>
@@ -34,13 +34,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       <children>
-                  <ListView prefHeight="200.0" prefWidth="200.0" />
                   <Label text="%DateDelimiter" GridPane.rowIndex="1" />
                   <Label text="%DateFormatSequence" />
                   <Label text="%CalendarType" GridPane.rowIndex="2" />
-                  <ChoiceBox fx:id="dateFormat" prefWidth="150.0" GridPane.columnIndex="1" />
-                  <ChoiceBox fx:id="dateDelimiter" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ChoiceBox fx:id="calendarType" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ChoiceBox fx:id="dateFormat" GridPane.columnIndex="1" />
+                  <ChoiceBox fx:id="dateDelimiter" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="calendarType" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       </children>
       </GridPane>
          </children>
@@ -52,4 +51,7 @@
          </children>
       </VBox>
       <Button mnemonicParsing="false" onAction="#onSaveChanges" text="%Button.SaveChanges" />
-</children></VBox>
+</children>
+   <padding>
+      <Insets left="10.0" top="10.0" />
+   </padding></VBox>
