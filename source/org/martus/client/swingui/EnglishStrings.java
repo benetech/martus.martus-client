@@ -632,7 +632,7 @@ public class EnglishStrings
 "field:ContactInfoFutureUseOfFields=This information is optional and is used to prepopulate your bulletins for your convenience. It is stored on your local computer and not sent to the Martus server.",
 "field:UploadingSealedBulletin=Sending Sealed Bulletin",
 "field:UploadingDraftBulletin=Sending Draft Bulletin",
-"field:StatusReady=Ready",
+"field:StatusReady=Server Ready",
 "field:StatusRetrieving=Retrieving...",
 "field:StatusConnecting=Connecting to server",
 "field:RetrieveMySealedBulletinProgress=Retrieving My Sealed Bulletins",
