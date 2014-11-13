@@ -449,7 +449,7 @@ public class EnglishStrings
 "button:DeleteServerDrafts=Delete",
 "button:checkall=Check All",
 "button:uncheckall=Uncheck All",
-"button:addattachment=Add Attachment",
+"button:addattachment=Add",
 "button:removeattachment=Remove",
 "button:attachmentLabel=Name",
 "button:attachmentSize=Size(Kb)",
@@ -827,7 +827,6 @@ public class EnglishStrings
 "wintitle:notifyViewKeyDetails=View Key Details",
 "field:notifyViewKeyDetailscause=Label: #Label#\n\nPublic Code: #PublicCode#\n\nPublic Account Id: #PublicKey#",
 "wintitle:FileDialogAddAttachment=Add Attachment",
-"button:FileDialogOkAddAttachment=Add Attachment",
 
 "wintitle:FileDialogRestoreFromKeyPair=Restore Account",
 "button:FileDialogOkRestoreFromKeyPair=Restore",
@@ -1146,7 +1145,7 @@ public class EnglishStrings
 "field:IncompatibleMtfVersionProgram=Martus Software Version: #ProgramVersionNumber#",
 
 "field:SaveAttachmentAction=save",
-"field:ViewAttachmentAction=view",
+"field:ViewAttachmentAction=View",
 // NOTE: the messageXxx are for swing, and the notifyXxx are for JavaFX
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
@@ -1978,7 +1977,7 @@ public class EnglishStrings
 "field:GettingServerInformation=Getting server information",
 "field:AdvanceServerSetup=Advanced Server Setup",
 "field:AdvanceServerInformation=To store your records on a specific server, you will need the IP address, public code, and magic word for the server.",
-"field:AdvanceMartusServerMailTo=If you are connecting to a Martus server, email info@martus.org for this info.",
+"field:AdvanceMartusServerMailTo=If you are connecting to a Martus server, email martus@benetech.org for this info.",
 "field:AdvanceOrganizationServer=If you are connecting to your organization's server, contact your administrator.",
 "field:ConnectToAdvanceServer=Connect",
 
