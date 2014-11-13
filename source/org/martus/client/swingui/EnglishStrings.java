@@ -1993,7 +1993,7 @@ public class EnglishStrings
 "field:ServerSettings=Settings",
 "menu:SystemPreferences=System Preferences",
 "menu:TorPreferences=Tor Preferences",
-"menu:ChangeUsernameAndPassword=Change Username and Password",
+"menu:ChangeUsernameAndPassword=Username and Password",
 "menu:AccountSharing=Account Sharing",
 "field:AccountSharing=Account Sharing",
 "menu:ContactInformation=Contact Information",
