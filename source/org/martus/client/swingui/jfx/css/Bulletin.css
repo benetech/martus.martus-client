@@ -8,8 +8,9 @@ Scene {
 
 .editFieldLabel { 
 	-fx-font-family: "Helvetica";
-	-fx-font-size: 14px;
-    -fx-fill: #7fc831;
+	-fx-font-size: 15px;
+    -fx-fill: #405980;
+	-fx-font-weight: bold;
 }
 
 .requiredAsterisk {
@@ -74,7 +75,7 @@ Scene {
 
 .systemFieldTitle {	
 	-fx-font-size: 15px;
-	-fx-text-fill: #7fc831;
+	-fx-text-fill: #405980;
 	-fx-font-weight: bold;
 	-fx-font-family: "Helvetica";
 	-fx-text-alignment:left;
@@ -122,6 +123,7 @@ Scene {
 
 .accordion .editFieldLabel { 
 	-fx-font-family: "Helvetica";
-	-fx-font-size: 14px;
-	-fx-text-fill: #7fc831;
+	-fx-font-size: 15px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #405980;
 }
