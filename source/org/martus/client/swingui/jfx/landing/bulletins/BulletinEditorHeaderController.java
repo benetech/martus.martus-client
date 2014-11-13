@@ -223,10 +223,10 @@ public class BulletinEditorHeaderController extends FxInSwingController
 	TextField titleField;
 	
 	@FXML
-	TextField toField;
+	Label toField;
 
 	@FXML
-	TextField fromField;
+	Label fromField;
 	
 	@FXML
 	Label versionField;
