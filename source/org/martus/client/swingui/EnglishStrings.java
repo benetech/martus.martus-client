@@ -2059,7 +2059,7 @@ public class EnglishStrings
 "wintitle:notifyUnableToCreateFolder=Error Creating Folder",
 "field:notifyErrorDeletingFoldercause=Unable to delete Folder.",
 "wintitle:notifyErrorDeletingFolder=Error Deleting Folder",
-"button:CaseSent=Sent",
+"button:CaseSent=Saved",
 "button:CaseAll=All",
 "button:CaseReceived=Received",
 "field:ChooseLanguage=Choose a Language",
