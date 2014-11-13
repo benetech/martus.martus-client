@@ -17,6 +17,7 @@
 		-fx-alignment: center;
 		-fx-font-size: 17px;
 		-fx-padding: 5 35 5 35;
+		-fx-background-insets: 2px;
 }
 
 .button:hover {
@@ -26,6 +27,7 @@
 		-fx-alignment: center;
 		-fx-font-size: 17px;
 		-fx-padding: 5 35 5 35;
+		-fx-background-insets: 2px;
 }
 
 .button:pressed {
@@ -35,6 +37,7 @@
 		-fx-alignment: center;
 		-fx-font-size: 17px;
 		-fx-padding: 5 35 5 35;
+		-fx-background-insets: 2px;
 }
 
 .button-minpadding{

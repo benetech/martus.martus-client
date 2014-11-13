@@ -62,3 +62,23 @@
 /*	-fx-background-insets: 10, 0, 10, 0;*/
 }
 
+.toolbarButton:hover {
+	-fx-background-color: #638a4b;
+	-fx-text-fill: White;
+	-fx-font-family: Helvetica;
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+/*	-fx-padding: 10, 10, 10, 10;*/
+/*	-fx-background-insets: 10, 0, 10, 0;*/
+}
+
+.toolbarButton:pressed {
+	-fx-background-color: DarkGreen;
+	-fx-text-fill: White;
+	-fx-font-family: Helvetica;
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+/*	-fx-padding: 10, 10, 10, 10;*/
+/*	-fx-background-insets: 10, 0, 10, 0;*/
+}
+
