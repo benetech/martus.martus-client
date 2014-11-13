@@ -715,7 +715,7 @@ public class EnglishStrings
 "field:HistoryVersion=#VersionNumber#: #DateSaved# : #Title#",
 "wintitle:ExportEncryptedBulletin=Export Encrypted",
 "menu:Account=Account",
-"field:AuthorNickname=Author Nickname:",
+"field:AuthorNickname=Author:",
 "field:AuthorNicknameFieldDescription=Name here if available otherwise blank",
 "field:AuthorPublicCode=Author Public Code:",
 "field:BulletinID=Record ID:",
