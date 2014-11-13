@@ -762,7 +762,7 @@ public class EnglishStrings
 "field:SystemTab=System",
 "field:TorTab=Tor",
 "field:CurrentConnection=Current Connection",
-"field:DefaultServerConnection=Default (Service Level 1:)",
+"field:DefaultServerConnection=Default Server:",
 "field:ConnectToDefault=Connect to Default",
 "field:AdvancedSettings=Advanced Settings:",
 "field:ServerIP=Server IP:",
