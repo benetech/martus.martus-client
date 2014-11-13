@@ -33,7 +33,7 @@
                       </ImageView>
                    </graphic>
                      <tooltip>
-                        <Tooltip text="%Button.Delete" />
+                        <Tooltip text="%Tooltip.DeleteItem" />
                      </tooltip>
                 </Button>
                 <Button fx:id="exportButton" mnemonicParsing="false" onAction="#onExportSelectedItems">
@@ -45,7 +45,7 @@
                       </ImageView>
                    </graphic>
                      <tooltip>
-                        <Tooltip text="%Button.export" />
+                        <Tooltip text="%Tooltip.ExportItem" />
                      </tooltip>
                 </Button>
                 <Button fx:id="moveButton" mnemonicParsing="false" onAction="#onMoveSelectedItems">
@@ -57,7 +57,7 @@
                       </ImageView>
                    </graphic>
                      <tooltip>
-                        <Tooltip text="%Button.move" />
+                        <Tooltip text="%Tooltip.MoveItem" />
                      </tooltip>
                 </Button>
                 <Button fx:id="copyButton" mnemonicParsing="false" onAction="#onCopySelectedItem">
@@ -69,7 +69,7 @@
                       </ImageView>
                    </graphic>
                      <tooltip>
-                        <Tooltip text="%Button.CopyItem" />
+                        <Tooltip text="%Tooltip.CopyItem" />
                      </tooltip>
                 </Button>
                 <Button fx:id="emptyTrashButton" mnemonicParsing="false" onAction="#onEmptyTrash">
@@ -81,7 +81,7 @@
                       </ImageView>
                    </graphic>
                      <tooltip>
-                        <Tooltip text="%Button.emptyTrash" />
+                        <Tooltip text="%Tooltip.EmptyTrash" />
                      </tooltip>
                 </Button>
              </children>
