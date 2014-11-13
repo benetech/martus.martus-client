@@ -2002,6 +2002,7 @@ public class EnglishStrings
 "menu:WizardStep6Heading=Backup key",
 "menu:ManageContacts=Manage Contacts",
 "menu:Settings=Settings",
+"menu:KeyBackup=Key Backup",
 
 
 "field:HelpForTokenAndPublicCode=If someone wishes to send you information, provide them with your access token and public code.",
