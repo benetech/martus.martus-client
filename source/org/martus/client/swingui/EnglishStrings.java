@@ -638,7 +638,7 @@ public class EnglishStrings
 "field:RetrieveSummariesMessage=All records retrieved will still remain on the server.\nYou can only retrieve records that are not currently on your computer.",
 "field:DeleteServerDraftsMessage=You can only delete draft records from the server that are not currently on your computer.",
 "field:ContactInfoRequiredFields=This information identifies your organization.\nYou may enter either an Author, Organization, or both, and both are shown in every record you create.",
-"field:ContactInfoFutureUseOfFields=This information is optional and is used to prepopulate your records for your convenience. It is stored on your local computer and not sent to the Martus server.",
+"field:ContactInfoFutureUseOfFields=This information is optional and is used to auto-fill your records for your convenience. It is stored on your local computer and not sent to the Martus server.",
 "field:UploadingSealedBulletin=Sending Sealed Record",
 "field:UploadingDraftBulletin=Sending Draft Record",
 "field:StatusReady=Server Ready",
