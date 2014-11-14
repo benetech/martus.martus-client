@@ -409,7 +409,8 @@ public class EnglishStrings
 "tooltip:CopyItem=Copy",
 "tooltip:ExportItem=Export",
 "tooltip:Templates=Template Manager",
-"tooltip:Contacts=Contact Manager",
+"tooltip:TemplateSelector=Template Selector",
+"tooltip:AddContact=Add Contacts",
 "tooltip:ServerSync=Sync Manager",
 "tooltip:ImportBulletin=Import Record",
 
