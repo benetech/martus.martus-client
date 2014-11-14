@@ -49,7 +49,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.HBox;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -596,7 +596,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	private Button copyButton;
 	
 	@FXML
-	private Pane statusBar;
+	private HBox statusBar;
 
 	protected BulletinListProvider bulletinTableProvider;
 }
