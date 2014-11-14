@@ -201,8 +201,13 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	public void folderContentsHaveChangedOnFxThread()
 	{
 		BulletinFolder currentBulletinFolder = getCurrentBulletinFolder();
-		if(currentBulletinFolder == null)
+		BulletinFolder sentFolder = getApp().getFolderSaved();
+		BulletinFolder receivedFolder = getApp().getFolderRetrieved();
+
+		if(currentBulletinFolder == ALL_FOLDER)
 			showAllCases();
+		if(currentBulletinFolder == sentFolder || currentBulletinFolder == receivedFolder)
+			showDefaultCase(currentBulletinFolder);
 		else
 			updateCases(currentBulletinFolder.getName());
 	}	
