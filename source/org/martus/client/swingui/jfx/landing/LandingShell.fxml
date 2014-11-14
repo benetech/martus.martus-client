@@ -94,7 +94,14 @@
                                     				<Insets right="5.0" />
                                  			</padding>
                                  		</Label>
-										<Button fx:id="toolbarButtonOnline" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onOnline" prefHeight="38.0" styleClass="toolbarButton" />
+										<Button fx:id="toolbarButtonOnline" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onOnline" styleClass="toolbarButton">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/blank.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
 									</children>
                            <opaqueInsets>
                               <Insets />
@@ -107,7 +114,14 @@
                                     				<Insets right="5.0" />
                                  			</padding>
                                  		</Label>
- 										<Button fx:id="toolbarButtonTor" mnemonicParsing="false" onAction="#onTor" prefHeight="38.0" styleClass="toolbarButton" />
+ 										<Button fx:id="toolbarButtonTor" mnemonicParsing="false" onAction="#onTor" styleClass="toolbarButton">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/blank.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
                            			</children>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="5">
