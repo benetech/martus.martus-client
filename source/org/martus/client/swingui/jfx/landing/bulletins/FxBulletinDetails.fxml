@@ -32,7 +32,7 @@
 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
 	<children>
-		<Label text="%AuthorNickname" />
+		<Label text="%Author />
 		<Label fx:id="authorName" text="%AuthorNicknameFieldDescription" GridPane.columnIndex="2" />
 		<Label text="%AuthorPublicCode" GridPane.rowIndex="1" />
 		<ImageView fx:id="contactVerificationImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
