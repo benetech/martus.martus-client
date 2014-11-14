@@ -206,7 +206,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 
 		if(currentBulletinFolder == ALL_FOLDER)
 			showAllCases();
-		if(currentBulletinFolder == sentFolder || currentBulletinFolder == receivedFolder)
+		else if(currentBulletinFolder == sentFolder || currentBulletinFolder == receivedFolder)
 			showDefaultCase(currentBulletinFolder);
 		else
 			updateCases(currentBulletinFolder.getName());
