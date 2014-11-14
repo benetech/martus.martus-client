@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fillWidth="false" spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fillWidth="false" spacing="15.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 <children>
       <VBox>
          <children>
@@ -53,5 +53,5 @@
       <Button mnemonicParsing="false" onAction="#onSaveChanges" text="%Button.SaveChanges" />
 </children>
    <padding>
-      <Insets left="10.0" top="10.0" />
+      <Insets bottom="10.0" left="10.0" top="10.0" />
    </padding></VBox>
