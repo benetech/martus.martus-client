@@ -522,7 +522,7 @@ public class EnglishStrings
 "button:ServerSyncRecordSize=Size (Kb)",
 "button:HaveServerDefaultToOn=Have Server Default to On? (will be applied on login)",
 "button:AutomaticallyDownloadFiles=Automatically Download Files from Server?",
-"button:ExportAccountPublicKey=Export Account Public Key",
+"button:ExportAccountPublicKey=Export Public Account Key",
 "button:ExportMultiKey=Export 3-Part Key",
 
 "field:RecordLocationLocal=Local",
@@ -2035,7 +2035,7 @@ public class EnglishStrings
 
 "field:KeypairTooLarge=keypair file too large!",
 "field:BackupYourKey=Backup Your Key",
-"field:BackupYourKeyInformation=Back it your encryption key to be able to restore your account.",
+"field:BackupYourKeyInformation=Back up your encryption key to be able to restore your account.",
 "button:CreateSingleEncryptedFile=Export Password Protected Key",
 "field:CreateSingleEncryptedFileInformation=Note: This backup method requires your username and password to restore your account.",
 "field:BackupYourKeyTip1=Be sure to save a copy of your account key to a secure location that is different from the computer where you currently have Martus installed, so you have it if you need to restore your account.",
