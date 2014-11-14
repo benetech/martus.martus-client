@@ -2079,6 +2079,7 @@ public class EnglishStrings
 "wintitle:CaseAll=All",
 "wintitle:CaseSent=Sent",
 "wintitle:CaseReceived=Received",
+"wintitle:CaseSaved=Saved",
 
 "folder:%OutBox=Unsent Records",
 "folder:%Sent=Sent",
