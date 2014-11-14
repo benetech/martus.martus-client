@@ -646,7 +646,7 @@ public class EnglishStrings
 "field:UploadingSealedBulletin=Sending Record",
 "field:UploadingDraftBulletin=Sending Record",
 "field:StatusReady=Server Ready",
-"field:StatusRetrieving=Retrieving...",
+"field:StatusRetrieving=Receiving Records",
 "field:StatusConnecting=Connecting to server",
 "field:RetrieveMySealedBulletinProgress=Retrieving My Sealed Records",
 "field:RetrieveMyDraftBulletinProgress=Retrieving My Draft Records",
