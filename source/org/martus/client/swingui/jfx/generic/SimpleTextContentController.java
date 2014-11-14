@@ -77,7 +77,7 @@ public class SimpleTextContentController extends FxController
 		return "generic/Confirmation.fxml";
 	}
 	
-	private final int SCROLLER_WIDTH = 10;
+	private final int SCROLLER_WIDTH = 30;
 	@FXML
 	private Label messageTextArea;
 	
