@@ -51,7 +51,7 @@ import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
 import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.actions.ActionMenuReports;
-import org.martus.client.swingui.jfx.generic.DialogWithCloseShellController;
+import org.martus.client.swingui.jfx.generic.DialogWithNoButtonsShellController;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 import org.martus.client.swingui.jfx.generic.FxTabbedShellController;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinListProvider;
@@ -255,7 +255,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	private void setTab(String tabToDisplayFirst, FxTabbedShellController settingsController)
 	{
 		settingsController.setFirstTabToDisplay(tabToDisplayFirst);
-		DialogWithCloseShellController shellController = new DialogWithCloseShellController(getMainWindow(), settingsController);
+		DialogWithNoButtonsShellController shellController = new DialogWithNoButtonsShellController(getMainWindow(), settingsController);
 		doAction(shellController);
 	}
 
