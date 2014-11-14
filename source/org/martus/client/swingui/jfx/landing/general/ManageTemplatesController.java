@@ -545,9 +545,8 @@ public class ManageTemplatesController extends FxInSwingController
 			boolean doesTemplateExist = existingTemplateTitles.contains(templateToAdd.getTitle());
 			if(doesTemplateExist)
 			{
-				String title = getLocalization().getWindowTitle("AddTemplate");
 				String message = getLocalization().getFieldLabel("confirmTemplateAlreadyExistscause");
-				if(!showConfirmationDialog(title, message))
+				if(!showConfirmationDialog("AddTemplate", message))
 					return;
 			}
 			getBulletinStore().saveNewFormTemplate(templateToAdd);
