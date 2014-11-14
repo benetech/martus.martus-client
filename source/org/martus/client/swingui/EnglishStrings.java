@@ -782,7 +782,7 @@ public class EnglishStrings
 "wintitle:PrintPreview=Print Preview",
 "button:PrintToPrinter=Print To Printer",
 "button:PrintToFile=Print To File",
-"button:FromContact=From Contact",
+"button:FromContact=From Another Martus User",
 "button:ImportFromFile=Import From File",
 "button:Choose=Choose...",
 "button:ConnectToServer=Connect to Server",
