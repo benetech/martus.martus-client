@@ -22,7 +22,7 @@
                               </HBox>
                               <HBox prefHeight="11.0" prefWidth="458.0">
                                  <children>
-                                    <Label text="%ConfigureHQColumnHeaderPublicCode" />
+                                    <Label text="%PublicCodeWithColon" />
                                     <Label fx:id="currentServerPublicCode" />
                                  </children>
                               </HBox>
