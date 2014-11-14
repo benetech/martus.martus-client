@@ -30,6 +30,8 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
+import javax.swing.SwingUtilities;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -80,6 +82,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	
 	private void initalizeItemsTable()
 	{
+		SwingUtilities.invokeLater(new ShowWaitCursor());
 		Label noRecords = new Label(getLocalization().getFieldLabel("NoServerSyncDataInTable"));
 		allRecordsTable.setPlaceholder(noRecords);
 		allRecordsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -89,12 +92,10 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		try
 		{
 			Set localRecords = getLocalRecords();
-			getMainWindow().setWaitingCursor();
 			Vector serverMyDrafts = getServerMyDrafts();
 			Vector serverMySealeds = getServerMySealeds();
 			Vector serverHQDrafts = getServerHQDrafts();
 			Vector serverHQSealeds = getServerHQSealeds();
-			getMainWindow().resetCursor();
 			syncRecordsTableProvider.addBulletinsAndSummaries(localRecords, serverMyDrafts, serverMySealeds, serverHQDrafts, serverHQSealeds);
 			onShowAll(null);
 		} 
@@ -102,8 +103,37 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		{
 			logAndNotifyUnexpectedError(e);
 		}
+		finally
+		{
+			SwingUtilities.invokeLater(new ResetCursor());
+		}
 	}
 
+	private class ShowWaitCursor implements Runnable
+	{
+		public ShowWaitCursor()
+		{
+		}
+
+		public void run()
+		{
+			getMainWindow().setWaitingCursor();
+		}
+	}
+	
+	private class ResetCursor implements Runnable
+	{
+		public ResetCursor()
+		{
+		}
+
+		public void run()
+		{
+			getMainWindow().resetCursor();
+		}
+	}
+	
+	
 	protected void sortByMostRecent()
 	{
 		recordLastSavedColumn.setSortType(SortType.DESCENDING);
