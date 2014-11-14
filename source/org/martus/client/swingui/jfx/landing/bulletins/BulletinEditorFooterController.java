@@ -32,7 +32,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.FxBulletin;
