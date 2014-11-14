@@ -2091,7 +2091,7 @@ public class EnglishStrings
 "folder:%SearchResults=Search Results",
 "folder:%RecoveredBulletins=Recovered Records",
 "folder:%DamagedBulletins=Damaged Records",
-"folder:%Import=Imported",
+"folder:%Import=Imported Records",
 
 "month:jan=Jan",
 "month:feb=Feb",
