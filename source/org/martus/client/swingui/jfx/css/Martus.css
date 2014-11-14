@@ -1,5 +1,4 @@
 .root {
-/*	-fx-background-color: #e6e7e9; NOTE:caused tooltips & dropdowns to have ugly gray window behind them, side effect off gray on wizard around content*/
   -fx-font-family: "Helvetica";
   -fx-line-height: 28px inherit;
 }
