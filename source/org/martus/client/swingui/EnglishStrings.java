@@ -522,7 +522,7 @@ public class EnglishStrings
 "button:ServerSyncRecordSize=Size (Kb)",
 "button:HaveServerDefaultToOn=Have Server Default to On? (will be applied on login)",
 "button:AutomaticallyDownloadFiles=Automatically Download Files from Server?",
-"button:ExportAccountPublicKey=Export Account Public Key",
+"button:ExportAccountPublicKey=Export Public Account Key",
 "button:ExportMultiKey=Export 3-Part Key",
 
 "field:RecordLocationLocal=Local",
