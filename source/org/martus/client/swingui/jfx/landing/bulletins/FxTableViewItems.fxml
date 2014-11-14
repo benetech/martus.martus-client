@@ -33,7 +33,7 @@
                       </ImageView>
                    </graphic>
                      <tooltip>
-                        <Tooltip text="%Tooltip.DeleteItem" />
+                        <Tooltip anchorLocation="WINDOW_TOP_RIGHT" text="%Tooltip.DeleteItem" />
                      </tooltip>
                 </Button>
                 <Button fx:id="exportButton" mnemonicParsing="false" onAction="#onExportSelectedItems">
@@ -45,7 +45,7 @@
                       </ImageView>
                    </graphic>
                      <tooltip>
-                        <Tooltip text="%Tooltip.ExportItem" />
+                        <Tooltip anchorLocation="WINDOW_TOP_RIGHT" text="%Tooltip.ExportItem" />
                      </tooltip>
                 </Button>
                 <Button fx:id="moveButton" mnemonicParsing="false" onAction="#onMoveSelectedItems">
@@ -57,7 +57,7 @@
                       </ImageView>
                    </graphic>
                      <tooltip>
-                        <Tooltip text="%Tooltip.MoveItem" />
+                        <Tooltip anchorLocation="WINDOW_TOP_RIGHT" text="%Tooltip.MoveItem" />
                      </tooltip>
                 </Button>
                 <Button fx:id="copyButton" mnemonicParsing="false" onAction="#onCopySelectedItem">
@@ -69,7 +69,7 @@
                       </ImageView>
                    </graphic>
                      <tooltip>
-                        <Tooltip text="%Tooltip.CopyItem" />
+                        <Tooltip anchorLocation="WINDOW_TOP_RIGHT" text="%Tooltip.CopyItem" />
                      </tooltip>
                 </Button>
                 <Button fx:id="emptyTrashButton" mnemonicParsing="false" onAction="#onEmptyTrash">
@@ -81,7 +81,7 @@
                       </ImageView>
                    </graphic>
                      <tooltip>
-                        <Tooltip text="%Tooltip.EmptyTrash" />
+                        <Tooltip anchorLocation="WINDOW_TOP_RIGHT" text="%Tooltip.EmptyTrash" />
                      </tooltip>
                 </Button>
              </children>
