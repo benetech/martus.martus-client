@@ -1842,6 +1842,7 @@ public class EnglishStrings
 "If a record is sealed, a new version will be created.",
 "field:ChooseHeadquartersToAdd=Select the contacts listed below that you want to add to all the records listed above.",
 "field:TemplateCreatedByHeadquarters=Contacts #Name#",
+"field:PublicCodeWithColon=Public Code:",
 
 "wintitle:ViewAttachment=View Attachment",
 "wintitle:confirmCloneUnverifiedFDBulletinAsMine=Confirm Create Copy of Record",
