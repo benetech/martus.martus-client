@@ -37,9 +37,7 @@
                     </items>
                   </Menu>
 					</menus>
-				</MenuBar>
-
-				<Button mnemonicParsing="false" onAction="#onHelpMenu" text="%Button.Help" />	
+				</MenuBar>	
 				
 			</children>
 		</HBox>
@@ -73,7 +71,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1">
                            <children>
-      								<Button mnemonicParsing="false" onAction="#onCreateNewBulletin" styleClass="toolbarButton" text="%Button.Create" textFill="#f7f7f7">
+      								<Button mnemonicParsing="false" onAction="#onCreateNewBulletin" styleClass="toolbarButton" text="%Button.Create">
       									<font>
       										<Font name="Helvetica" size="14.0" />
       									</font>
@@ -128,7 +126,7 @@
                            <children>
       								<TextField fx:id="searchText" maxWidth="160.0" minHeight="27.0" prefWidth="100.0" style="-fx-background-radius: 0px;" />
                               <Label text="   " />
-      								<Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onQuickSearch" styleClass="toolbarButton" text="%Button.search" textAlignment="CENTER" textFill="#f7f7f7">
+      								<Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onQuickSearch" styleClass="toolbarButton" text="%Button.search" textAlignment="CENTER">
       									<font>
       										<Font name="Helvetica" size="14.0" />
       									</font>
@@ -143,6 +141,16 @@
                                     </ImageView>
                                  </graphic>
       								</Button>
+                  
+                  				<Button mnemonicParsing="false" onAction="#onHelpMenu" styleClass="toolbarButton" text="%Button.Help">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/blank.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
                            </children>
                         </HBox>
 							</children>
