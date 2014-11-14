@@ -65,7 +65,7 @@
                               <Insets right="1.0" />
                            </GridPane.margin>
                            <tooltip>
-                              <Tooltip text="%Tooltip.AddContact" />
+                              <Tooltip anchorLocation="WINDOW_TOP_RIGHT" text="%Tooltip.AddContact" />
                            </tooltip>
                         </Button>
                         <Label fx:id="toField" />
@@ -105,7 +105,7 @@
                                  		<Insets right="1.0" />
                              		</GridPane.margin>
                                  <tooltip>
-                                    <Tooltip text="%Tooltip.TemplateSelector" />
+                                    <Tooltip anchorLocation="WINDOW_TOP_RIGHT" text="%Tooltip.TemplateSelector" />
                                  </tooltip>
                               </Button>
                            </children>

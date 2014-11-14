@@ -61,12 +61,12 @@
       		   <children>
       		       <Button mnemonicParsing="false" onMouseClicked="#onFolderNewClicked" prefHeight="40.0" prefWidth="40.0" styleClass="button-minpadding" text="+">
                      <tooltip>
-                        <Tooltip text="%Tooltip.AddCase" />
+                        <Tooltip anchorLocation="WINDOW_TOP_LEFT" text="%Tooltip.AddCase" />
                      </tooltip>
                   </Button>
       		       <Button fx:id="deleteFolderButton" mnemonicParsing="false" onMouseClicked="#onFolderDeleteClicked" prefHeight="40.0" prefWidth="40.0" styleClass="button-minpadding" text="-">
                      <tooltip>
-                        <Tooltip text="%Tooltip.DeleteCase" />
+                        <Tooltip anchorLocation="WINDOW_TOP_LEFT" text="%Tooltip.DeleteCase" />
                      </tooltip>
                   </Button>
       		       <Button mnemonicParsing="false" onMouseClicked="#onFolderSettingsClicked" prefHeight="40.0" prefWidth="40.0" styleClass="button-minpadding">
@@ -78,7 +78,7 @@
       		            </ImageView>
       		         </graphic>
                      <tooltip>
-                        <Tooltip text="%Tooltip.CaseSettings" />
+                        <Tooltip anchorLocation="WINDOW_TOP_RIGHT" text="%Tooltip.CaseSettings" />
                      </tooltip>
       		      </Button>
             		<Button fx:id="showTrashFolder" graphicTextGap="2.0" mnemonicParsing="false" onAction="#onShowTrash" prefHeight="40.0" prefWidth="40.0" styleClass="button-minpadding">
@@ -93,7 +93,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="%Tooltip.ShowTrash" />
+                        <Tooltip anchorLocation="WINDOW_TOP_RIGHT" text="%Tooltip.ShowTrash" />
                      </tooltip>
             		</Button>
       		   </children>
@@ -114,7 +114,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="%Tooltip.Templates" />
+                        <Tooltip anchorLocation="WINDOW_TOP_RIGHT" text="%Tooltip.Templates" />
                      </tooltip>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#onServerSync" prefHeight="40.0" prefWidth="40.0" styleClass="button-minpadding">
@@ -126,7 +126,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="%Tooltip.ServerSync" />
+                        <Tooltip anchorLocation="WINDOW_TOP_RIGHT" text="%Tooltip.ServerSync" />
                      </tooltip>
                   </Button>
             		<Button fx:id="importBulletin" graphicTextGap="2.0" mnemonicParsing="false" onAction="#onImportBulletin" prefHeight="40.0" prefWidth="40.0" styleClass="button-minpadding">
@@ -141,7 +141,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="%Tooltip.ImportBulletin" />
+                        <Tooltip anchorLocation="WINDOW_TOP_RIGHT" text="%Tooltip.ImportBulletin" />
                      </tooltip>
             		</Button>
                </children>
