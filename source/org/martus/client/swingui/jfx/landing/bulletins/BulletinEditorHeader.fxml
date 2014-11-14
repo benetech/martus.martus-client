@@ -64,6 +64,9 @@
 							<GridPane.margin>
                               <Insets right="1.0" />
                            </GridPane.margin>
+                           <tooltip>
+                              <Tooltip text="%Tooltip.Contacts" />
+                           </tooltip>
                         </Button>
                         <Label fx:id="toField" />
                   </children>
@@ -101,6 +104,9 @@
    								<GridPane.margin>
                                  		<Insets right="1.0" />
                              		</GridPane.margin>
+                                 <tooltip>
+                                    <Tooltip text="%Tooltip.Templates" />
+                                 </tooltip>
                               </Button>
                            </children>
 						 </HBox>
