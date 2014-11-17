@@ -27,6 +27,8 @@ package org.martus.client.swingui.jfx.contacts;
 
 import java.io.File;
 
+import javafx.application.Platform;
+
 import javax.swing.JFileChooser;
 
 import org.martus.client.core.MartusApp;
@@ -66,16 +68,12 @@ public class ImportContactAction implements ActionDoer
 		if(importFile == null)
 			return;
 
-		try
-		{
-			String publicKeyString = getApp().extractPublicInfo(importFile);
-			getFxManageContactsController().verifyContactAndAddToTable(publicKeyString);
-		} 	
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-			UiMainWindow.showNotifyDlgOnSwingThread(getMainWindow(), "PublicInfoFileError");
-		} 
+		verifyContactAndAddToTable(importFile); 
+	}
+
+	public void verifyContactAndAddToTable(File importFile)
+	{
+		Platform.runLater(new ContactVerifyAndAddToTableRunnable(importFile));
 	}
 	
 	private MartusLocalization getLocalization()
@@ -83,7 +81,7 @@ public class ImportContactAction implements ActionDoer
 		return getFxManageContactsController().getLocalization();
 	}
 
-	private MartusApp getApp()
+	protected MartusApp getApp()
 	{
 		return getFxManageContactsController().getApp();
 	}
@@ -93,9 +91,34 @@ public class ImportContactAction implements ActionDoer
 		return fxManageContactsController;
 	}
 	
-	private UiMainWindow getMainWindow()
+	protected UiMainWindow getMainWindow()
 	{
 		return getFxManageContactsController().getMainWindow();
+	}
+	
+	protected class ContactVerifyAndAddToTableRunnable implements Runnable
+	{
+		public ContactVerifyAndAddToTableRunnable(File publicKeyFileToUse)
+		{
+			publicKeyFile = publicKeyFileToUse;
+		}
+		
+		@Override
+		public void run()
+		{
+			try
+			{
+				String publicKeyAsString = getApp().extractPublicInfo(publicKeyFile);
+				getFxManageContactsController().verifyContactAndAddToTable(publicKeyAsString);
+			} 	
+			catch (Exception e)
+			{
+				MartusLogger.logException(e);
+				UiMainWindow.showNotifyDlgOnSwingThread(getMainWindow(), "PublicInfoFileError");
+			}
+		}
+		
+		private File publicKeyFile;
 	}
 	
 	private FxManageContactsController fxManageContactsController;
