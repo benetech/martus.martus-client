@@ -87,9 +87,9 @@
              </children>
           </HBox>
          </left>
-         <right>
-            <Pane fx:id="statusBar" BorderPane.alignment="CENTER" />
-         </right>
+         <center>
+            <HBox fx:id="statusBar" alignment="CENTER_RIGHT" BorderPane.alignment="CENTER" />
+         </center>
       </BorderPane>
    </bottom>
 </BorderPane>

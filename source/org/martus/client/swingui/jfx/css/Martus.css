@@ -79,7 +79,6 @@
     -fx-background-color: #253342,linear-gradient(#FFFF66, #666600);
     -fx-border-radius: 5;
     -fx-text-fill: #4c5e70;
-    -fx-font-weight: bold;
     -fx-alignment: center;
     -fx-padding: 5 35 5 35;
 }
@@ -88,7 +87,6 @@
 	-fx-background-color:
         linear-gradient(DarkGreen 0%, Green  50%, Green 51%, DarkGreen 100%);
 	-fx-border-radius: 5;
-	-fx-font-weight: bold;
 	-fx-text-fill: White;
 	-fx-alignment: center;
 	-fx-font-size: 17px;
@@ -99,7 +97,6 @@
 	-fx-background-color:
         linear-gradient(DarkGreen 0%, Green  50%, Green 51%, DarkGreen 100%);
 	-fx-effect: innershadow( three-pass-box , Black , 2 , 2.0 , 2, 2 );
-	-fx-font-weight: bold;
 	-fx-border-radius: 5;
 	-fx-text-fill: White;
 	-fx-alignment: center;
@@ -206,17 +203,10 @@
     -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
 }
 
-/* Selected row when table not focused */
-.table-row-cell:filled:focused:selected {
-     -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
-}
 
 /* Row hovered */
 .table-view:row-selection .table-row-cell:filled:hover {
-    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+		-fx-background-color: #77bad0;
 }
 
-/* Selected row hovered */
-.table-view:focused .table-row-cell:filled:focused:selected:hover {
-     -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
-}
+

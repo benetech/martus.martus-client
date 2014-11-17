@@ -556,7 +556,7 @@ public class EnglishStrings
 "menu:ExportFolder=Export Folder",
 "menu:exit=Exit",
 "menu:edit=Edit",
-"menu:search=Search",
+"menu:search=Advance Search",
 "menu:modifyBulletin=Modify Record",
 "menu:SelectAllBulletins=Select All Records",
 "menu:CutBulletins=Cut Record(s)",
@@ -643,10 +643,10 @@ public class EnglishStrings
 "field:DeleteServerDraftsMessage=You can only delete draft records from the server that are not currently on your computer.",
 "field:ContactInfoRequiredFields=This information identifies your organization.\nYou may enter either an Author, Organization, or both, and both are shown in every record you create.",
 "field:ContactInfoFutureUseOfFields=This information is optional and is used to auto-fill your records for your convenience. It is stored on your local computer and not sent to the Martus server.",
-"field:UploadingSealedBulletin=Sending Sealed Record",
-"field:UploadingDraftBulletin=Sending Draft Record",
+"field:UploadingSealedBulletin=Sending Record",
+"field:UploadingDraftBulletin=Sending Record",
 "field:StatusReady=Server Ready",
-"field:StatusRetrieving=Retrieving...",
+"field:StatusRetrieving=Receiving Records",
 "field:StatusConnecting=Connecting to server",
 "field:RetrieveMySealedBulletinProgress=Retrieving My Sealed Records",
 "field:RetrieveMyDraftBulletinProgress=Retrieving My Draft Records",
@@ -1055,7 +1055,7 @@ public class EnglishStrings
 "field:notifyErrorBackingupKeyPair=Unable to verify the backup. Please try again, possibly to a different destination.",
 "field:notifyAuthenticateServerFailedcause=Martus could not authenticate the server. The server may have been compromised.  Please verify your server configuration and contact the server operator.",
 "field:notifyWelcomeToMartuscause=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create records that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.",
-"field:notifyUnexpectedErrorcause=An unexpected error has occurred. Please report this problem to help@martus.org.",
+"field:notifyUnexpectedErrorcause=An unexpected error has occurred. Please report this problem to martus@benetech.org.",
 "field:notifyInvalidServerNamecause=You must have a server name or IP address.",
 "field:notifyInvalidServerCodecause=You must have a server public code.",
 "field:notifyServerInfoInvalidcause=The Server has responded with invalid account information.",
@@ -1288,7 +1288,7 @@ public class EnglishStrings
 	"due to them having a different number of levels." +
 	"\n\n" +
 	"See examples below and if you need additional help with customization, " +
-	"please email help@martus.org." +
+	"please email martus@benetech.org." +
 	"\n\n",
 "field:CreateCustomFieldsHelp2b= Notes on \"Reusable Choices\" dropdown fields:" +
 	"\n\n " +
@@ -1693,7 +1693,7 @@ public class EnglishStrings
 	"(i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks " +
 	"like \"label1; label2\" and your search will be on records that have either of those labels).\n" +
 	"\n" +
-	"For additional help with searching, email help@martus.org.",
+	"For additional help with searching, email martus@benetech.org.",
 "field:SearchProgress=Progress: ",
 "field:ReportSearchProgress=Progress: ",
 "field:SearchFound=#NumberBulletinsFound# records matched the search, and have been added to the Search Results folder.",

@@ -1538,11 +1538,18 @@ public class ClientBulletinStore extends BulletinStore
 		return b;
 	}
 	
-	public Bulletin createNewDraftWithCurrentTemplateButDataFrom(Bulletin original) throws Exception
+	public Bulletin createNewDraftWithCurrentTemplateButDataAndHistoryFrom(Bulletin original) throws Exception
 	{
 		FieldSpecCollection topSpecs = getCurrentFormTemplate().getTopFields();
 		FieldSpecCollection bottomSpecs = getCurrentFormTemplate().getBottomFields();
-		return createNewDraft(original, topSpecs, bottomSpecs);
+		Bulletin newDraft = createNewDraft(original, topSpecs, bottomSpecs);
+		newDraft.setHistory(original.getHistory());
+
+		BulletinHeaderPacket oldHeader = original.getBulletinHeaderPacket();
+		BulletinHeaderPacket newHeader = newDraft.getBulletinHeaderPacket();
+		newHeader.setExtendedHistory(oldHeader.getExtendedHistory());
+		newHeader.setAuthorizedToReadKeysPending(oldHeader.getAuthorizedToReadKeysPending());
+		return newDraft;
 	}
 
 	public Bulletin createCloneWithTemplateAndDataFrom(Bulletin original) throws Exception

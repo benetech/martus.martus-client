@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.general;
 
+import java.awt.Dimension;
 import java.net.URL;
 import java.util.Comparator;
 import java.util.ResourceBundle;
@@ -38,6 +39,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.search.SaneCollator;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
+import org.martus.client.swingui.jfx.generic.FxModalDialog;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FormTemplate;
@@ -105,6 +107,12 @@ public class SelectTemplateController extends FxInSwingController
 		return "MainDialog.css";
 	}
 	
+	@Override
+	protected Dimension getPreferredDimension()
+	{
+		return FxModalDialog.MEDIUM_PREFERRED_DIALOG_SIZE;
+	}
+
 	@FXML
 	private void onSelect(ActionEvent event)
 	{

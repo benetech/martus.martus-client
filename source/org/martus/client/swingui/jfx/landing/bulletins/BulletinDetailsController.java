@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import java.awt.Dimension;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -38,6 +39,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiBulletinDetailsDialog;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.generic.FxModalDialog;
 import org.martus.common.ContactKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
@@ -79,6 +81,13 @@ public class BulletinDetailsController extends FxController
 			logAndNotifyUnexpectedError(e);
 		}
 	}
+
+	@Override
+	protected Dimension getPreferredDimension()
+	{
+		return FxModalDialog.MEDIUM_PREFERRED_DIALOG_SIZE;
+	}
+
 
 	//TODO add unit tests
 	static public String getAuthorName(MartusApp app, String accountId) throws Exception
