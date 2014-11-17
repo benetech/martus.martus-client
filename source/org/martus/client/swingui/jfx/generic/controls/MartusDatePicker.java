@@ -41,6 +41,7 @@ public class MartusDatePicker extends DatePicker
 {
 	public MartusDatePicker(MartusLocalization localizationToUse)
 	{
+		localization = localizationToUse;
 		MartusDateConverter converter = new MartusDateConverter(localizationToUse);
 		setConverter(converter);
 		setChronology(localizationToUse.getCurrentChronology());
@@ -66,6 +67,14 @@ public class MartusDatePicker extends DatePicker
 	public ReadOnlyStringProperty overallValueProperty()
 	{
 		return overallValueProperty;
+	}
+	
+	public String getLocalizedDateFormatted()
+	{
+		LocalDate date = getValue();
+		if(date == null)
+			return "";
+		return localization.formatDateTime(date.toEpochDay());
 	}
 
 	private void updateOverallValue()
@@ -123,5 +132,6 @@ public class MartusDatePicker extends DatePicker
 		private DateTimeFormatter formatter;
 	}
 
+	private MartusLocalization localization;
 	private SimpleStringProperty overallValueProperty;
 }
