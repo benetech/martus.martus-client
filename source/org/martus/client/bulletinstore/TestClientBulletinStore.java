@@ -67,6 +67,7 @@ import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.BulletinHistory;
+import org.martus.common.packet.ExtendedHistoryList;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.test.UniversalIdForTesting;
@@ -337,6 +338,42 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("did not clear any pending HQs?", 0, clone.getBulletinHeaderPacket().getAuthorizedToReadKeysPending().size());
 	    	assertEquals("We no longer keep HQs for copies of bulletins that were not ours.", 0, clone.getAuthorizedToReadKeysIncludingPending().size());
 	    	assertEquals("has history?", 0, clone.getHistory().size());
+    }
+    
+    public void testCreateNewDraftWithCurrentTemplateButDataAndHistoryFrom() throws Exception
+    {
+		MockBulletinStore clientStore = new MockBulletinStore(security);
+    	MartusCrypto otherSecurity = MockMartusSecurity.createOtherClient();
+    	
+    	Bulletin original = createImmutableBulletin(otherSecurity);
+
+    	String customTag = "custom";
+    	FieldSpec customFieldSpec = FieldSpec.createCustomField(customTag, "Label", new FieldTypeNormal());
+    	original.getTopSectionFieldSpecs().add(customFieldSpec);
+    	original.setAuthorizedToReadKeys(new HeadquartersKeys(new HeadquartersKey(security.getPublicKeyString())));
+		original.set(customTag, "Whatever");
+		
+    	BulletinHistory fakeHistory = new BulletinHistory();
+    	fakeHistory.add("SomeLocalId");
+    	original.setHistory(fakeHistory);
+    	ExtendedHistoryList fakeExtendedHistory = new ExtendedHistoryList();
+    	BulletinHistory fakeOtherHistory = new BulletinHistory();
+    	fakeOtherHistory.add("OtherLocalId");
+    	fakeExtendedHistory.add(MockMartusSecurity.createClient().getPublicKeyString(), fakeOtherHistory);
+    	BulletinHeaderPacket originalHeader = original.getBulletinHeaderPacket();
+		originalHeader.setExtendedHistory(fakeExtendedHistory);
+    	
+    	original.getAuthorizedToReadKeys().add(new HeadquartersKey(MockMartusSecurity.createServer().getPublicKeyString()));
+    	clientStore.saveBulletin(original);
+
+    	Bulletin clone = clientStore.createNewDraftWithCurrentTemplateButDataAndHistoryFrom(original);
+    	assertEquals(original.get(customTag), clone.get(customTag));
+    	assertEquals(original.getHistory().toString(), clone.getHistory().toString());
+    	assertEquals(0, clone.getAuthorizedToReadKeys().size());
+
+    	BulletinHeaderPacket cloneHeader = clone.getBulletinHeaderPacket();
+		assertEquals(originalHeader.getExtendedHistory().size(), cloneHeader.getExtendedHistory().size());
+    	assertEquals(originalHeader.getAuthorizedToReadKeysPending(), cloneHeader.getAuthorizedToReadKeysPending());
     }
 
    private Bulletin createImmutableBulletin(MartusCrypto otherSecurity) throws Exception
