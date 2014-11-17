@@ -33,12 +33,12 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.util.List;
 
 import javafx.application.Platform;
-import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.TranslucentWindowObscurer;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
@@ -105,27 +105,45 @@ public abstract class FxInSwingController extends FxController
 	protected boolean isMctFileFilterSelected(ExtensionFilter chosenExtensionFilter, File file)
 	{
 		FormatFilter mctFileFilter = new MCTFileFilter(getLocalization());
+		String[] extensions = chosenExtensionFilter.getExtensions().toArray(new String[0]);
+		return isExtensionSelected(extensions, file, mctFileFilter);
+	}
+	
+	protected boolean isMctFileFilterSelected(FormatFilter chosenExtensionFilter, File file)
+	{
+		FormatFilter mctFileFilter = new MCTFileFilter(getLocalization());
 		return isExtensionSelected(chosenExtensionFilter, file, mctFileFilter);
 	}
 
 	protected boolean isXmlExtensionSelected(ExtensionFilter chosenExtensionFilter, File file)
 	{
 		FormatFilter xmlFileFilter = new BulletinXmlFileFilter(getLocalization());
-		return isExtensionSelected(chosenExtensionFilter, file, xmlFileFilter);
+		String[] extensions = chosenExtensionFilter.getExtensions().toArray(new String[0]);
+		return isExtensionSelected(extensions, file, xmlFileFilter);
 	}
 	
-	protected boolean isMbaExtensionSelected(ExtensionFilter chosenExtensionFilter, File file)
+	public static boolean isXmlExtensionSelected(MartusLocalization localization, FormatFilter chosenExtensionFilter, File file)
 	{
-		FormatFilter xmlFileFilter = new MartusBulletinArchiveFileFilter(getLocalization());
+		FormatFilter xmlFileFilter = new BulletinXmlFileFilter(localization);
 		return isExtensionSelected(chosenExtensionFilter, file, xmlFileFilter);
 	}
 	
-	private boolean isExtensionSelected(ExtensionFilter chosenExtensionFilter, File file, FormatFilter mctFileFilter)
+	public static boolean isMbaExtensionSelected(MartusLocalization localization, FormatFilter chosenExtensionFilter, File file)
+	{
+		FormatFilter xmlFileFilter = new MartusBulletinArchiveFileFilter(localization);
+		return isExtensionSelected(chosenExtensionFilter, file, xmlFileFilter);
+	}
+	
+	private static boolean isExtensionSelected(FormatFilter chosenExtensionFilter, File file, FormatFilter mctFileFilter)
+	{
+		return isExtensionSelected(chosenExtensionFilter.getExtensions(), file, mctFileFilter);
+	}
+
+	public static boolean isExtensionSelected(String[] extensions, File file, FormatFilter mctFileFilter)
 	{
 		if (mctFileFilter.accept(file))
 			return true;
 		
-		List<String> extensions = chosenExtensionFilter.getExtensions();
 		for (String extension : extensions)
 		{
 			if (extension.contains(mctFileFilter.getExtension()))
