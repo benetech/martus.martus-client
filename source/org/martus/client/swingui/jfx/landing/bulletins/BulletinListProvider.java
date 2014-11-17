@@ -143,7 +143,7 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 		updateContents();
 	}
 
-	private void updateAllItemsInCurrentFolder()
+	void updateAllItemsInCurrentFolder()
 	{
 		setFolder(folder);
 	}

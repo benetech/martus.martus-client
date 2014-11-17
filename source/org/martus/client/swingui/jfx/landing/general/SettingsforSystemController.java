@@ -142,6 +142,7 @@ public class SettingsforSystemController extends FxInSwingController
 			showNotifyDialog("ErrorSavingConfig");
 		}
 		super.save();
+		getMainWindow().getMainStage().getBulletinsListController().updateContents();
 	}
 
 	@Override
