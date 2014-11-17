@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.common;
 
+import java.awt.Dimension;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -36,6 +37,7 @@ import javafx.scene.control.TextField;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.generic.FxModalDialog;
 import org.martus.common.fieldspec.FormTemplate;
 
 public class TemplatePropertiesController extends FxController
@@ -105,6 +107,13 @@ public class TemplatePropertiesController extends FxController
 	public String getFxmlLocation()
 	{
 		return "common/TemplateProperties.fxml";
+	}
+
+	@Override
+	protected Dimension getPreferredDimension()
+	{
+		//TODO fix this is not getting called
+		return FxModalDialog.MEDIUM_SMALL_PREFERRED_DIALOG_SIZE;
 	}
 
 	@FXML

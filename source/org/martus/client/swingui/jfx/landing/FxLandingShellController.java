@@ -51,6 +51,7 @@ import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
 import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.actions.ActionMenuReports;
+import org.martus.client.swingui.actions.ActionMenuSearch;
 import org.martus.client.swingui.jfx.generic.DialogWithNoButtonsShellController;
 import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 import org.martus.client.swingui.jfx.generic.FxTabbedShellController;
@@ -283,6 +284,13 @@ public class FxLandingShellController extends FxNonWizardShellController
 	private void onQuickSearch(ActionEvent event)
 	{
 		doAction(new  ActionMenuQuickSearch(getMainWindow(), searchText.getText()));
+		setTitleBarToSearch();
+	}
+	
+	@FXML 
+	private void onAdvanceSearch(ActionEvent event)
+	{
+		doAction(new ActionMenuSearch(getMainWindow()));
 		setTitleBarToSearch();
 	}
 

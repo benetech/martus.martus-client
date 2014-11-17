@@ -77,7 +77,7 @@ public class UiFancySearchDlg extends JDialog
 	{
 		setTitle(getLocalization().getWindowTitle("search"));
 		
-		String helpButtonText = getLocalization().getButtonLabel("help"); 
+		String helpButtonText = getLocalization().getButtonLabel("Help"); 
 		UiButton help = new UiButton(helpButtonText);
 		help.addActionListener(new HelpListener(mainWindow));
 		
