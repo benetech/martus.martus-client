@@ -1543,6 +1543,12 @@ public class ClientBulletinStore extends BulletinStore
 		FieldSpecCollection topSpecs = getCurrentFormTemplate().getTopFields();
 		FieldSpecCollection bottomSpecs = getCurrentFormTemplate().getBottomFields();
 		Bulletin newDraft = createNewDraft(original, topSpecs, bottomSpecs);
+		newDraft.setHistory(original.getHistory());
+
+		BulletinHeaderPacket oldHeader = original.getBulletinHeaderPacket();
+		BulletinHeaderPacket newHeader = newDraft.getBulletinHeaderPacket();
+		newHeader.setExtendedHistory(oldHeader.getExtendedHistory());
+		newHeader.setAuthorizedToReadKeysPending(oldHeader.getAuthorizedToReadKeysPending());
 		return newDraft;
 	}
 
