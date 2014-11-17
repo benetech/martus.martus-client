@@ -25,13 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.contacts;
 
-import java.io.File;
-
-import javafx.stage.FileChooser;
-
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.MartusLogger;
 
 
 public class FxManageContactsController extends FxWizardAddContactsController
@@ -56,29 +50,7 @@ public class FxManageContactsController extends FxWizardAddContactsController
 
 	public void importContactFromFile()
 	{
-		FileChooser fileChooser = new FileChooser();
-		File martusRootDir = getApp().getMartusDataRootDirectory();
-		fileChooser.setInitialDirectory(martusRootDir);
-		MartusLocalization localization = getLocalization();
-		fileChooser.setTitle(localization.getWindowTitle("ImportContactPublicKey"));
-		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter(localization.getFieldLabel("PublicInformationFiles"), "*.mpi"),
-				new FileChooser.ExtensionFilter(localization.getFieldLabel("AllFiles"), "*.*"));
-		File importFile = fileChooser.showOpenDialog(null);
-
-		if(importFile == null)
-			return;
-		
-			try
-			{
-				String publicKeyString = getMainWindow().getApp().extractPublicInfo(importFile);
-				verifyContactAndAddToTable(publicKeyString);
-			} 	
-			catch (Exception e)
-			{
-				MartusLogger.logException(e);
-				showNotifyDialog("PublicInfoFileError");
-			} 
+		doAction(new ImportContactAction(this));
 	}
 	
 	@Override
