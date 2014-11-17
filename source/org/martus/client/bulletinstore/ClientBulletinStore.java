@@ -1538,7 +1538,7 @@ public class ClientBulletinStore extends BulletinStore
 		return b;
 	}
 	
-	public Bulletin createNewDraftWithCurrentTemplateButDataFrom(Bulletin original) throws Exception
+	public Bulletin createNewDraftWithCurrentTemplateButDataAndHistoryFrom(Bulletin original) throws Exception
 	{
 		FieldSpecCollection topSpecs = getCurrentFormTemplate().getTopFields();
 		FieldSpecCollection bottomSpecs = getCurrentFormTemplate().getBottomFields();
