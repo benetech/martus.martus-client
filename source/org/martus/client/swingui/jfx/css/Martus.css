@@ -203,17 +203,10 @@
     -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
 }
 
-/* Selected row when table not focused */
-.table-row-cell:filled:focused:selected {
-     -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
-}
 
 /* Row hovered */
 .table-view:row-selection .table-row-cell:filled:hover {
-    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+		-fx-background-color: #77bad0;
 }
 
-/* Selected row hovered */
-.table-view:focused .table-row-cell:filled:focused:selected:hover {
-     -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
-}
+

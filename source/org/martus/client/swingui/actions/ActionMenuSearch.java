@@ -27,6 +27,9 @@ package org.martus.client.swingui.actions;
 
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiSession;
+import org.martus.client.swingui.jfx.landing.FxMainStage;
+import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 
 public class ActionMenuSearch extends ActionSearch
 {
@@ -39,7 +42,15 @@ public class ActionMenuSearch extends ActionSearch
 	public void doAction()
 	{
 		SortableBulletinList bulletinIdsFromSearch = doSearch();
-		mainWindow.updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
-		return;
+		if(UiSession.isJavaFx())
+		{
+			FxMainStage stage = mainWindow.getMainStage();
+			BulletinsListController controller = stage.getBulletinsListController();
+			controller.updateSearchResultsTable(bulletinIdsFromSearch);
+		}
+		else
+		{
+			mainWindow.updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
+		}
 	}	
 }
