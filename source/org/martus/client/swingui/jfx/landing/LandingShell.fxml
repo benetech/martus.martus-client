@@ -34,6 +34,7 @@
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#onReports" text="%Menu.Reports" />
                         <MenuItem mnemonicParsing="false" onAction="#onCharts" text="%Menu.Charts" />
+                        <MenuItem mnemonicParsing="false" onAction="#onAdvanceSearch" text="%Menu.search" />
                     </items>
                   </Menu>
 					</menus>
