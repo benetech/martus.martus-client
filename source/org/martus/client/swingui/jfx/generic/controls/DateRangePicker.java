@@ -92,21 +92,6 @@ public class DateRangePicker extends HBox
 		overallValueProperty.setValue(value);
 	}
 	
-	public String convertStoredToHumanReadable()
-	{
-		StringBuilder combinedDateRange = new StringBuilder();
-		LocalDate startValue = startPicker.getValue();
-		if(startValue != null)
-			combinedDateRange.append(startValue.toString());
-		LocalDate endValue = endPicker.getValue();
-		if(endValue != null)
-		{
-			combinedDateRange.append(DATE_RANGE_SEPARATOR);
-			combinedDateRange.append(endValue.toString());
-		}
-		return combinedDateRange.toString();
-	}
-
 	public String getDateRangeString(LocalDate startLocalDate, LocalDate endLocalDate)
 	{
 		if(startLocalDate == null)
