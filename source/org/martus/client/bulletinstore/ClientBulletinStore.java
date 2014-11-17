@@ -1542,7 +1542,8 @@ public class ClientBulletinStore extends BulletinStore
 	{
 		FieldSpecCollection topSpecs = getCurrentFormTemplate().getTopFields();
 		FieldSpecCollection bottomSpecs = getCurrentFormTemplate().getBottomFields();
-		return createNewDraft(original, topSpecs, bottomSpecs);
+		Bulletin newDraft = createNewDraft(original, topSpecs, bottomSpecs);
+		return newDraft;
 	}
 
 	public Bulletin createCloneWithTemplateAndDataFrom(Bulletin original) throws Exception
