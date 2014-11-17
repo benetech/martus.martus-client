@@ -97,7 +97,8 @@ abstract public class FxFieldCreator
 		
 		String existingDateString = property.getValue();
 		picker.setValue(existingDateString);
-		return responsiveTextFlowNode(picker.overallValueProperty());
+		Text localDate = new Text(picker.getLocalizedDateFormatted());
+		return responsiveTextFlowNode(localDate);
 	}
 
 	protected Node responsiveTextFlowNode(ReadOnlyStringProperty property)
