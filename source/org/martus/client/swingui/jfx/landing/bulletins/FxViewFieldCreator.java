@@ -35,7 +35,6 @@ import javafx.scene.text.Text;
 import org.martus.client.core.FxBulletin;
 import org.martus.client.core.FxBulletinField;
 import org.martus.client.swingui.MartusLocalization;
-import org.martus.client.swingui.jfx.generic.controls.DateRangePicker;
 import org.martus.client.swingui.jfx.generic.controls.NestedChoiceBox;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.fieldspec.FieldSpec;
@@ -58,13 +57,9 @@ public class FxViewFieldCreator extends FxFieldCreator
 	@Override
 	protected Node createDateRangeField(FxBulletinField field)
 	{
-		DateRangePicker picker = new DateRangePicker(localization);
-		
 		Property<String> property = field.valueProperty();
 		String existingDateRangeString = property.getValue();
-		picker.setValue(existingDateRangeString);
-
-		return responsiveTextFlowNode(picker.convertStoredToHumanReadable());
+		return responsiveTextFlowNode(localization.getViewableDateRange(existingDateRangeString));
 	}
 
 	@Override
