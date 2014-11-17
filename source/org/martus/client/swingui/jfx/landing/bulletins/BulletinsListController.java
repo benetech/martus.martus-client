@@ -555,6 +555,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	public void updateContents()
 	{
+		//TODO should be able to invalidate window to have the changes updated, which doesn't seem to work.
 		bulletinTableProvider.updateAllItemsInCurrentFolder();
 	}
 
