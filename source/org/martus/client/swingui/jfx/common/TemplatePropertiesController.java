@@ -59,6 +59,7 @@ public class TemplatePropertiesController extends FxController
 		String existingDescription = template.getDescription();
 		templateDescription.setText(existingDescription);
 		editTemplateMessage.setText(message);
+		updateOkButtonStatus();
 	}
 	
 	protected class TitleChangeHandler implements ChangeListener
@@ -78,7 +79,8 @@ public class TemplatePropertiesController extends FxController
 			String newTitle = getTemplateTitle();
 			boolean doesTitleAlreadyExist = getApp().getStore().doesFormTemplateExist(newTitle);
 			boolean isTitleChanged = !newTitle.equals(oldTitle);
-			boolean isNewTitleIllegal = isTitleChanged && doesTitleAlreadyExist;
+			boolean isTitleBlank = newTitle.isEmpty();
+			boolean isNewTitleIllegal = isTitleChanged && doesTitleAlreadyExist || isTitleBlank;
 
 			setOkButtonDisabled(isNewTitleIllegal);
 		} 
