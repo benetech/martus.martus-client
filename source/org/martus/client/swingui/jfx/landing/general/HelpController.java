@@ -32,7 +32,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
@@ -95,13 +94,10 @@ public class HelpController extends FxController
 		if(mlpDateInfo.length() > 0)
 			versionInfoBox.getChildren().add(new Label(mlpDateInfo.toString()));
 		versionInfoBox.getChildren().add(new Label(mtfVersionInfo.toString()));
-		versionInfoBox.getChildren().add(new Label(UiConstants.copyright));
-		Hyperlink benetechWebsite = new Hyperlink(UiConstants.website);
-		benetechWebsite.setOnAction(new OnBenetechClicked());
-		
-		
-		versionInfoBox.getChildren().add(benetechWebsite);
 		versionInfoBox.getChildren().add(new Label(buildDate.toString()));
+		versionInfoBox.getChildren().add(new Label(""));
+		versionInfoBox.getChildren().add(new Label(UiConstants.copyright));
+		
 		versionInfoBox.getChildren().add(new Label(""));
 		
 		final String disclaimer = localization.getFieldLabel("aboutDlgDisclaimer");
