@@ -2124,7 +2124,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 
 		MartusLogger.logBeginProcess("Checking server status");
 		setWaitingCursor();
-		checkServerStatus();
+		updateServerStatusInStatusBar();
 		resetCursor();
 		MartusLogger.logEndProcess("Checking server status");
 	}
@@ -2167,7 +2167,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		setTitle(getLocalization().getWindowTitle("main"));
 	}
 
-	public void checkServerStatus()
+	public void updateServerStatusInStatusBar()
 	{		
 		if (!getApp().isServerConfigured())
 		{	
