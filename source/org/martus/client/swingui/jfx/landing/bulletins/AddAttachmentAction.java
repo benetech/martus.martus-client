@@ -45,7 +45,6 @@ public class AddAttachmentAction implements ActionDoer
 	@Override
 	public void doAction()
 	{
-		
 		JFileChooser fileChooser = new JFileChooser();
 		MartusLocalization localization = getBulletinAttachmentsContoller().getLocalization();
 		fileChooser.setDialogTitle(localization.getWindowTitle("FileDialogAddAttachment"));
