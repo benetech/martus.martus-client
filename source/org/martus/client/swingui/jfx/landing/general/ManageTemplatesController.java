@@ -300,7 +300,7 @@ public class ManageTemplatesController extends FxInSwingController
 		addTemplateButton.disableProperty().bind(Bindings.isNull(templateToAddProperty));
 
 		templateNameToBeAdded.visibleProperty().bind(Bindings.isNull(templateToAddProperty).not());
-		templateNameToBeAdded.textProperty().bind(getTitleOfTemplateToBeAdded());
+		templateNameToBeAdded.textProperty().bind(templateToAddProperty.asString());
 	}
 	
 	public static ObservableList<AbstractFxImportFormTemplateController> getImportTemplateChoices(UiMainWindow mainWindow) throws Exception
