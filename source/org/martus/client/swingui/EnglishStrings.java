@@ -623,7 +623,7 @@ public class EnglishStrings
 "field:disconnecting=Disconnecting...",
 "field:dateformat=Date Format",
 "field:MayBeDamaged=Warning: Portions may be missing or damaged",
-"field:NotAuthorizedToViewPrivate=The author has not given you permission to view the private portions of this record.",
+"field:NotAuthorizedToViewPrivate=The author has not given you permission to view this record.",
 "field:BulletinHasUnknownStuff=Warning: Some information in this record is not visible",
 "field:retrieveflag=Retrieve?",
 "field:DeleteFlag=Delete?",
