@@ -22,7 +22,7 @@
 									prefWidth here to prevent that problem. -->
 								<TableView fx:id="availableTemplatesTable" prefHeight="450.0" prefWidth="850.0">
 									<columns>
-										<TableColumn fx:id="templateNameColumn" prefWidth="371.0" text="%Name" />
+										<TableColumn fx:id="templateNameColumn" prefWidth="440.0" text="%Name" />
 										<TableColumn fx:id="templateDeleteColumn" maxWidth="164.0" minWidth="0.0" prefWidth="69.0" text="%Delete" />
 										<TableColumn fx:id="templateUploadColumn" maxWidth="240.0" prefWidth="113.0" text="%Upload" />
 										<TableColumn fx:id="templateExportColumn" maxWidth="270.0" prefWidth="122.0" text="%Export" />
@@ -77,8 +77,13 @@
 
 									</children>
 								</GridPane>
-								<HBox alignment="TOP_RIGHT" prefHeight="100.0">
+								<HBox alignment="CENTER_RIGHT">
 									<children>
+                              <Label fx:id="templateNameToBeAdded">
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
 										<Button fx:id="addTemplateButton" mnemonicParsing="false" onAction="#onAdd" text="%Button.AddTemplate">
 										</Button>
 									</children>
