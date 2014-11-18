@@ -245,7 +245,10 @@ public class ManageTemplatesController extends FxInSwingController
 			ManageTemplatesTableRowData selected = availableTemplatesTable.getSelectionModel().getSelectedItem();
 			String rawTitle = selected.getRawTemplateName();
 			FormTemplate template = getBulletinStore().getFormTemplate(rawTitle);
-			editTemplate(template);
+			String emptyMessage = "";
+			boolean keepExistingTemplate = false;
+			if(editTemplate(template, emptyMessage, keepExistingTemplate))
+				populateAvailableTemplatesTable();
 		}
 		catch (Exception e)
 		{
@@ -253,25 +256,26 @@ public class ManageTemplatesController extends FxInSwingController
 		}
 	}
 
-	public void editTemplate(FormTemplate template) throws Exception
+	public boolean editTemplate(FormTemplate template, String message, boolean keepExistingTemplate) throws Exception
 	{
 		TemplatePropertiesController controller = new TemplatePropertiesController(getMainWindow(), template);
+		controller.setMessage(message);
 		if(showModalYesNoDialog("TemplateEditor", EnglishCommonStrings.OK, EnglishCommonStrings.CANCEL, controller))
 		{
 			String oldTitle = template.getTitle();
 			String newTitle = controller.getTemplateTitle();
-			boolean willCreateNewCopy = !newTitle.equals(oldTitle);
+			boolean willReplaceExistingCopy = !newTitle.equals(oldTitle) && !keepExistingTemplate;
 
 			template.setTitle(newTitle);
 			template.setDescription(controller.getTemplateDescription());
 
 			ClientBulletinStore store = getApp().getStore();
 			store.saveNewFormTemplate(template);
-			if(willCreateNewCopy)
+			if(willReplaceExistingCopy)
 				store.deleteFormTemplate(oldTitle);
-			
-			populateAvailableTemplatesTable();
+			return true;
 		}
+		return false;
 	}
 
 	private void populateAvailableTemplatesTable()
@@ -348,15 +352,20 @@ public class ManageTemplatesController extends FxInSwingController
 				showControllerInsideModalDialog(newValue);
 				FormTemplate downloadedTemplate = newValue.getSelectedFormTemplate();
 				updateTemplateFromDownloaded(downloadedTemplate);
+				clearDownloadSelection();
 			}
 			catch(Exception e)
 			{
 				logAndNotifyUnexpectedError(e);
 			}
 		}
-
 	}
 
+	protected void clearDownloadSelection()
+	{
+		downloadChoiceBox.getSelectionModel().clearSelection();
+	}
+	
 	protected void updateTemplateFromDownloaded(FormTemplate downloadedTemplate)
 	{
 		templateToAddProperty.setValue(downloadedTemplate);
@@ -552,22 +561,28 @@ public class ManageTemplatesController extends FxInSwingController
 			boolean doesTemplateExist = existingTemplateTitles.contains(templateToAdd.getTitle());
 			if(doesTemplateExist)
 			{
-				String message = getLocalization().getFieldLabel("confirmTemplateAlreadyExistscause");
-				if(!showConfirmationDialog("AddTemplate", message))
-					return;
+				boolean keepExistingTemplate = true;
+				if(editTemplate(templateToAdd, getLocalization().getFieldLabel("ImportTemplateWhichAlreadyExists"), keepExistingTemplate))
+					updateTable();
+				return;
 			}
 			getBulletinStore().saveNewFormTemplate(templateToAdd);
-			populateAvailableTemplatesTable();
-			templateToAddProperty.setValue(null);
-			
-			tabPane.selectionModelProperty().get().select(availableTemplatesTab);
-			availableTemplatesTable.selectionModelProperty().get().clearSelection();
-			availableTemplatesTable.scrollTo(0);
+			updateTable();
 		}
 		catch(Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 		}
+	}
+
+	public void updateTable()
+	{
+		populateAvailableTemplatesTable();
+		templateToAddProperty.setValue(null);
+		
+		tabPane.selectionModelProperty().get().select(availableTemplatesTab);
+		availableTemplatesTable.selectionModelProperty().get().clearSelection();
+		availableTemplatesTable.scrollTo(0);
 	}
 
 	final private String TRASH_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/trash.png";
