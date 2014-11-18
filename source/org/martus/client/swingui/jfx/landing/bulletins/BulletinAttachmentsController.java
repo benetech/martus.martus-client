@@ -41,10 +41,8 @@ import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
-import javafx.stage.FileChooser;
 
 import org.martus.client.core.FxBulletin;
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.client.swingui.jfx.generic.FxController;
@@ -164,15 +162,7 @@ public class BulletinAttachmentsController extends FxController
 	@FXML
 	private void onAddAttachment(ActionEvent event) 
 	{
-		FileChooser fileChooser = new FileChooser();
-		MartusLocalization localization = getLocalization();
-		fileChooser.setTitle(localization.getWindowTitle("FileDialogAddAttachment"));
-		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(localization.getFieldLabel("AllFiles"), "*.*"));
-		File fileToAdd = fileChooser.showOpenDialog(null);
-		if(fileToAdd == null)
-			return;
-		
-		addAttachment(fileToAdd);
+		doAction(new AddAttachmentAction(this));
 	}
 
 	public void addAttachment(File fileToAdd)
