@@ -121,7 +121,7 @@ public class BulletinTableRowData
 
     static public final String TITLE_PROPERTY_NAME = "title";
     static public final String AUTHOR_PROPERTY_NAME = "author";
-    static public final String DATE_SAVDED_PROPERTY_NAME = "dateSaved";
+    static public final String DATE_SAVED_PROPERTY_NAME = "dateSaved";
     static public final String ON_SERVER_PROPERTY_NAME = "onServer";
     static public final String CAN_VIEW_PROPERTY_NAME = "canView";
     static public final String CAN_EDIT_PROPERTY_NAME = "canEdit";

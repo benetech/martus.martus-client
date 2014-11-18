@@ -119,7 +119,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		authorColumn.setCellFactory(TextFieldTableCell.<BulletinTableRowData>forTableColumn());
 		titleColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.TITLE_PROPERTY_NAME));
 		titleColumn.setCellFactory(TextFieldTableCell.<BulletinTableRowData>forTableColumn());
-		dateSavedColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.DATE_SAVDED_PROPERTY_NAME));
+		dateSavedColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.DATE_SAVED_PROPERTY_NAME));
 		dateSavedColumn.setCellFactory(TextFieldTableCell.<BulletinTableRowData>forTableColumn());
 		
         Image viewImage = new Image(VIEW_BULLETIN_IMAGE_PATH);
