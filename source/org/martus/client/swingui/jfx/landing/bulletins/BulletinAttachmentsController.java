@@ -171,6 +171,12 @@ public class BulletinAttachmentsController extends FxController
 		File fileToAdd = fileChooser.showOpenDialog(null);
 		if(fileToAdd == null)
 			return;
+		
+		addAttachment(fileToAdd);
+	}
+
+	public void addAttachment(File fileToAdd)
+	{
 		AttachmentProxy attachmentProxy = new AttachmentProxy(fileToAdd);
 		AttachmentTableRowData newAttachmentRowData = new AttachmentTableRowData(attachmentProxy, getApp().getStore().getDatabase());	
 
