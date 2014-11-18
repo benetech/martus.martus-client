@@ -61,7 +61,7 @@ import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
 import org.martus.client.swingui.actions.ActionMenuViewFxBulletin;
 import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
-import org.martus.client.swingui.jfx.generic.controls.FxDateTableCellFactory;
+import org.martus.client.swingui.jfx.generic.controls.FxTimestampTableCellFactory;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.jfx.landing.FxLandingShellController;
 import org.martus.client.swingui.jfx.landing.cases.CaseListItem;
@@ -121,7 +121,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		titleColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, String>(BulletinTableRowData.TITLE_PROPERTY_NAME));
 		titleColumn.setCellFactory(TextFieldTableCell.<BulletinTableRowData>forTableColumn());
 		dateSavedColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, Long>(BulletinTableRowData.DATE_SAVED_PROPERTY_NAME));
-		dateSavedColumn.setCellFactory(new FxDateTableCellFactory(getLocalization()));
+		dateSavedColumn.setCellFactory(new FxTimestampTableCellFactory(getLocalization()));
 		
         Image viewImage = new Image(VIEW_BULLETIN_IMAGE_PATH);
         viewBulletinColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(viewImage, () -> viewSelectedBulletin()));
