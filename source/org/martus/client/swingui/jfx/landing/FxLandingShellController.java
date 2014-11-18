@@ -233,7 +233,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	{
 		boolean isOnline = getApp().getTransport().isOnline();
 		toolbarButtonOnline.setText(getStatusMessage(isOnline));
-		getMainWindow().checkServerStatus();
+		getMainWindow().updateServerStatusInStatusBar();
 	}
 	
 	@FXML
