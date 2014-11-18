@@ -107,7 +107,6 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		itemsTable.setPlaceholder(noBulletins);
 		itemsTable.setItems(bulletinTableProvider);
 		itemsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		loadAllBulletinsAndSortByMostRecent();
 	}
 
 	private void initalizeColumns()
