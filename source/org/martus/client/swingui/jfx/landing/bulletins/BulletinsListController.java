@@ -97,6 +97,14 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		initializeStatusBar();
 	}
 
+	public void prepareToSort()
+	{
+		// NOTE: Java 8u25 seems to have a bug where sorting the table when 
+		// a row is selected gives an AOOB exception. To work around that, 
+		// we will always clear the selection before sorting
+		itemsTable.getSelectionModel().clearSelection();
+	}
+
 	private void initializeStatusBar()
 	{
 		statusBar.getChildren().add(getMainWindow().getStatusBar().getFxPane());
@@ -108,6 +116,11 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		itemsTable.setPlaceholder(noBulletins);
 		itemsTable.setItems(bulletinTableProvider);
 		itemsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+		// NOTE: Java 8u25 seems to have a bug where sorting the table when 
+		// a row is selected gives an AOOB exception. To work around that, 
+		// we will always clear the selection before sorting
+		itemsTable.setOnSort((sortEvent) -> prepareToSort());
 	}
 
 	private void initalizeColumns()
@@ -192,6 +205,11 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	{
 		ActionMenuModifyFxBulletin actionDoer = new ActionMenuModifyFxBulletin(getMainWindow());
 		performActionOnSelectedBulletin(actionDoer);
+
+		// NOTE: We haven't gotten sorting to work properly yet, 
+		// so as a workaround for now, we will clear the sort
+		// whenever the user wants to edit a bulletin
+		itemsTable.getSortOrder().clear();
 	}
 
 	private void performActionOnSelectedBulletin(ActionMenuFxBulletin actionDoer)
@@ -279,8 +297,11 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	public void loadBulletinData(Set bulletinUids)
 	{
+		// NOTE: We haven't gotten sorting to work properly yet, 
+		// so as a workaround for now, we will clear the sort
+		// whenever we load a new set of bulletins (e.g. change folder)
+		itemsTable.getSortOrder().clear();
 		bulletinTableProvider.loadBulletinData(bulletinUids);
-		itemsTable.sort();
 	}
 	
 	public void bulletinContentsHaveChanged(Bulletin bulletinUpdated)
@@ -300,6 +321,10 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		{
 			try
 			{
+				// NOTE: We haven't gotten sorting to work properly yet, 
+				// so as a workaround for now, we will clear the sort
+				// whenever a bulletin is modified
+				itemsTable.getSortOrder().clear();
 				boolean shouldReSortTable = bulletinTableProvider.updateBulletin(bulletin);
 				if(shouldReSortTable)
 					sortByMostRecentBulletins();

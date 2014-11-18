@@ -197,21 +197,18 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 
 	public boolean updateBulletin(Bulletin bulletin) throws Exception
 	{
-		boolean shouldReSortTable = false;
 		UniversalId bulletinId = bulletin.getUniversalId();
 		BulletinTableRowData updatedBulletinData = getCurrentBulletinData(bulletinId);
 		int bulletinIndexInTable = findBulletinIndexInTable(bulletinId);
 		if(bulletinIndexInTable <= BULLETIN_NOT_IN_TABLE)
 		{
 			updateAllItemsInCurrentFolder();
-			shouldReSortTable = true;
 		}
 		else
 		{
 			set(bulletinIndexInTable, updatedBulletinData);
-			shouldReSortTable = false;
 		}
-		return shouldReSortTable;
+		return false;
 	}
 
 	private static final int BULLETIN_NOT_IN_TABLE = -1;
