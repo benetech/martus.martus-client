@@ -186,7 +186,7 @@ public class BackgroundUploader
 			{
 				store.setIsOnServer(b);
 				if(UiSession.isJavaFx() && mainWindow != null)
-					mainWindow.folderTreeContentsHaveChanged();
+					mainWindow.bulletinContentsHaveChanged(b);
 				// TODO: Is the file this creates ever used???
 				app.resetLastUploadedTime();
 			}
