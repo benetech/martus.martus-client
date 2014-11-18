@@ -179,6 +179,12 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	{
 		try
 		{
+			if(template.getTitle().isEmpty())
+			{
+				boolean keepPreviousTemplate = true;
+				String emptyTitleMessage = getLocalization().getFieldLabel("ImportTemplateNoName");
+				ManageTemplatesController.editTemplate(template, emptyTitleMessage, keepPreviousTemplate, this);
+			}
 			getApp().updateFormTemplate(template);
 		}
 		catch (Exception e)

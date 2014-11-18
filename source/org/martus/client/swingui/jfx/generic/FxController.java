@@ -246,7 +246,7 @@ abstract public class FxController implements Initializable
 		return showModalYesNoDialog(titleTag,  yesButtonTag, noButtonTag, mainAreaController);
 	}
 
-	protected boolean showModalYesNoDialog(String titleTag, String yesButtonTag, String noButtonTag, FxController mainAreaController)
+	public boolean showModalYesNoDialog(String titleTag, String yesButtonTag, String noButtonTag, FxController mainAreaController)
 	{
 		try
 		{
