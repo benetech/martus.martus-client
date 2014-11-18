@@ -80,7 +80,7 @@ public class MartusDatePicker extends DatePicker
 		overallValueProperty.setValue(isoDate);
 	}
 	
-	private String convertLocalDateToString(LocalDate localDate)
+	static protected String convertLocalDateToString(LocalDate localDate)
 	{
 		if(localDate == null)
 			return "";
@@ -123,7 +123,10 @@ public class MartusDatePicker extends DatePicker
 		@Override
 		public String toString(LocalDate localDate)
 		{
-			return localization.convertStoredDateToDisplay(localDate.format(formatter));
+			if(localDate == null)
+				return "";
+			String storedDateFormat = convertLocalDateToString(localDate);
+			return localization.convertStoredDateToDisplay(storedDateFormat);
 		}
 		
 		private MiniLocalization localization;
