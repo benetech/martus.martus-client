@@ -77,8 +77,13 @@
 
 									</children>
 								</GridPane>
-								<HBox alignment="TOP_RIGHT" prefHeight="100.0">
+								<HBox alignment="CENTER_RIGHT">
 									<children>
+                              <Label fx:id="templateNameToBeAdded">
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
 										<Button fx:id="addTemplateButton" mnemonicParsing="false" onAction="#onAdd" text="%Button.AddTemplate">
 										</Button>
 									</children>

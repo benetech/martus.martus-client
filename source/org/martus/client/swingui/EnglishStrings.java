@@ -1005,6 +1005,7 @@ public class EnglishStrings
 
 "field:confirmImportingCustomizationUnknownSignercause=This template was not created by a known account. You should carefully review the fields to make sure the template is suitable. You will be able to cancel the template editing to restore the earlier template.",
 "field:confirmImportingCustomizationUnknownSignereffect=To see the template contents, continue with the import.",
+"wintitle:TemplateEditor=Template Editor",
 
 "wintitle:confirmUploadPublicTemplateToServerWarning=Send Template to Server",
 "field:confirmUploadPublicTemplateToServerWarningcause=Anyone with your access token can download this template from the server.",
