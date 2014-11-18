@@ -29,7 +29,6 @@ import java.awt.Component;
 import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -73,7 +72,6 @@ public abstract class FxInSwingController extends FxController
 		installGlassPane(glassPane);
 		GlassPaneMouseHandler glassPaneMouseHandler = new GlassPaneMouseHandler(fronter);
 		glassPane.addMouseListener(glassPaneMouseHandler);
-		glassPane.addMouseMotionListener(glassPaneMouseHandler);
 		
 		glassPane.setVisible(true);
 		try
@@ -82,7 +80,6 @@ public abstract class FxInSwingController extends FxController
 		}
 		finally
 		{
-			glassPane.removeMouseMotionListener(glassPaneMouseHandler);
 			glassPane.removeMouseListener(glassPaneMouseHandler);
 	
 			window.removeWindowFocusListener(windowHandler);
@@ -159,7 +156,7 @@ public abstract class FxInSwingController extends FxController
 		return false;
 	}
 	
-	protected static class DialogWindowHandler extends WindowAdapter implements MouseMotionListener
+	protected static class DialogWindowHandler extends WindowAdapter
 	{
 		public DialogWindowHandler(Runnable runOnFocusGained)
 		{
@@ -186,17 +183,6 @@ public abstract class FxInSwingController extends FxController
 
 		@Override
 		public void windowGainedFocus(WindowEvent e)
-		{
-			Platform.runLater(task);
-		}
-
-		@Override
-		public void mouseDragged(MouseEvent e)
-		{
-		}
-
-		@Override
-		public void mouseMoved(MouseEvent e)
 		{
 			Platform.runLater(task);
 		}
