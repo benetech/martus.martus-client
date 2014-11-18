@@ -90,7 +90,7 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 	@FXML
 	private void onLinkMailTo()
 	{
-		openDefaultEmailApp("mailto:info@martus.org");
+		openDefaultEmailApp("mailto:martus@benetech.org");
 	}
 
 	@FXML
