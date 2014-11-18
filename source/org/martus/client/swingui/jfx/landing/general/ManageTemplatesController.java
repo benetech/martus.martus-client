@@ -35,6 +35,8 @@ import java.util.Vector;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -298,7 +300,7 @@ public class ManageTemplatesController extends FxInSwingController
 		addTemplateButton.disableProperty().bind(Bindings.isNull(templateToAddProperty));
 
 		templateNameToBeAdded.visibleProperty().bind(Bindings.isNull(templateToAddProperty).not());
-		templateNameToBeAdded.textProperty().bind(templateToAddProperty.asString());
+		templateNameToBeAdded.textProperty().bind(getTitleOfTemplateToBeAdded());
 	}
 	
 	public static ObservableList<AbstractFxImportFormTemplateController> getImportTemplateChoices(UiMainWindow mainWindow) throws Exception
@@ -365,13 +367,14 @@ public class ManageTemplatesController extends FxInSwingController
 		MartusLogger.log("Ready to add template: " + getTitleOfTemplateToBeAdded());
 	}
 
-	private String getTitleOfTemplateToBeAdded()
+	private StringProperty getTitleOfTemplateToBeAdded()
 	{
 		FormTemplate template = templateToAddProperty.getValue();
-		String title = "(none)";
+		String title = getLocalization().getFieldLabel("NoFormTemplateTitle");
 		if(template != null)
 			title = template.getTitle();
-		return title;
+		
+		return new SimpleStringProperty(title);
 	}
 	
 	protected void updateTemplateFromGeneric()
