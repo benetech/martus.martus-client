@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.cases;
 
+import java.awt.Dimension;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -35,6 +37,7 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.DialogWithOkCancelShellController;
+import org.martus.client.swingui.jfx.generic.FxModalDialog;
 
 public class FxFolderCreateController extends FxFolderBaseController
 {
@@ -59,6 +62,12 @@ public class FxFolderCreateController extends FxFolderBaseController
 		folderName.setText(defaultFolderNewName);
 		DialogWithOkCancelShellController shellController = getOkCancelShellController();
 		shellController.setOkButtonText(localization.getButtonLabel("CreateFolder"));
+	}
+	
+	@Override
+	protected Dimension getPreferredDimension()
+	{
+		return FxModalDialog.SMALL_PREFERRED_DIALOG_SIZE;
 	}
 
 	@Override
