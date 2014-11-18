@@ -68,6 +68,7 @@ import org.martus.client.swingui.jfx.common.AbstractFxImportFormTemplateControll
 import org.martus.client.swingui.jfx.common.FxImportFormTemplateFromMyContactsPopupController;
 import org.martus.client.swingui.jfx.common.FxSetupFormTemplateFromNewContactPopupController;
 import org.martus.client.swingui.jfx.common.TemplatePropertiesController;
+import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.common.EnglishCommonStrings;
@@ -232,7 +233,7 @@ public class ManageTemplatesController extends FxInSwingController
 			FormTemplate template = getBulletinStore().getFormTemplate(rawTitle);
 			String emptyMessage = "";
 			boolean keepExistingTemplate = false;
-			if(editTemplate(template, emptyMessage, keepExistingTemplate))
+			if(ManageTemplatesController.editTemplate(template, emptyMessage, keepExistingTemplate, this))
 				populateAvailableTemplatesTable();
 		}
 		catch (Exception e)
@@ -241,11 +242,11 @@ public class ManageTemplatesController extends FxInSwingController
 		}
 	}
 
-	public boolean editTemplate(FormTemplate template, String message, boolean keepExistingTemplate) throws Exception
+	static public boolean editTemplate(FormTemplate template, String message, boolean keepExistingTemplate, FxController mainController) throws Exception
 	{
-		TemplatePropertiesController controller = new TemplatePropertiesController(getMainWindow(), template);
+		TemplatePropertiesController controller = new TemplatePropertiesController(mainController.getMainWindow(), template);
 		controller.setMessage(message);
-		if(showModalYesNoDialog("TemplateEditor", EnglishCommonStrings.OK, EnglishCommonStrings.CANCEL, controller))
+		if(mainController.showModalYesNoDialog("TemplateEditor", EnglishCommonStrings.OK, EnglishCommonStrings.CANCEL, controller))
 		{
 			String oldTitle = template.getTitle();
 			String newTitle = controller.getTemplateTitle();
@@ -254,7 +255,7 @@ public class ManageTemplatesController extends FxInSwingController
 			template.setTitle(newTitle);
 			template.setDescription(controller.getTemplateDescription());
 
-			ClientBulletinStore store = getApp().getStore();
+			ClientBulletinStore store = mainController.getApp().getStore();
 			store.saveNewFormTemplate(template);
 			if(willReplaceExistingCopy)
 				store.deleteFormTemplate(oldTitle);
@@ -514,7 +515,7 @@ public class ManageTemplatesController extends FxInSwingController
 			if(doesTemplateExist)
 			{
 				boolean keepExistingTemplate = true;
-				if(editTemplate(templateToAdd, getLocalization().getFieldLabel("ImportTemplateWhichAlreadyExists"), keepExistingTemplate))
+				if(ManageTemplatesController.editTemplate(templateToAdd, getLocalization().getFieldLabel("ImportTemplateWhichAlreadyExists"), keepExistingTemplate, this))
 					updateTable();
 				return;
 			}

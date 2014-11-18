@@ -1007,6 +1007,7 @@ public class EnglishStrings
 "field:confirmImportingCustomizationUnknownSignereffect=To see the template contents, continue with the import.",
 "wintitle:TemplateEditor=Template Editor",
 "field:ImportTemplateWhichAlreadyExists=A template by that name already exists. Enter a new title for this template or leave the title the same to replace the old template with this new one.",
+"field:ImportTemplateNoName=This template currently does not have a name.  Enter a new title for this template.",
 
 "wintitle:confirmUploadPublicTemplateToServerWarning=Send Template to Server",
 "field:confirmUploadPublicTemplateToServerWarningcause=Anyone with your access token can download this template from the server.",
