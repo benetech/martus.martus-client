@@ -52,8 +52,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 
 import javax.swing.SwingUtilities;
 
@@ -63,8 +61,6 @@ import org.martus.client.search.SaneCollator;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiCustomFieldsDlg;
-import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
-import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.jfx.common.AbstractFxImportFormTemplateController;
 import org.martus.client.swingui.jfx.common.FxImportFormTemplateFromMyContactsPopupController;
 import org.martus.client.swingui.jfx.common.FxSetupFormTemplateFromNewContactPopupController;
@@ -77,7 +73,6 @@ import org.martus.common.Exceptions.ServerNotCompatibleException;
 import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.MartusLogger;
 import org.martus.common.XmlFormTemplateLoader;
-import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.AuthorizationFailedException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.fieldspec.CustomFieldError;
@@ -222,19 +217,7 @@ public class ManageTemplatesController extends FxInSwingController
 	
 	private void exportTemplate(UiMainWindow mainWindowToUse, FormTemplate template) throws Exception
 	{
-		FileChooser fileChooser = createFileChooser("FileDialogExportCustomization");
-		File templateFile = fileChooser.showSaveDialog(null);
-		if(templateFile == null)
-			return;
-		
-		ExtensionFilter chosenExtensionFilter = fileChooser.getSelectedExtensionFilter();
-		MartusCrypto securityTemp = mainWindowToUse.getApp().getSecurity();
-		
-		if (isMctFileFilterSelected(chosenExtensionFilter, templateFile))
-			template.exportTemplate(securityTemp, templateFile);
-		
-		if (isXmlExtensionSelected(chosenExtensionFilter, templateFile))
-			template.exportTopSection(templateFile);
+		doAction(new ExportTemplateAction(getMainWindow(), template));
 	}
 
 	protected void editSelectedTemplate()
@@ -412,27 +395,10 @@ public class ManageTemplatesController extends FxInSwingController
 	@FXML
 	private void onImportFromFile(ActionEvent event)
 	{
-		FileChooser fileChooser = createFileChooser("confirmImportingCustomizationUnknownSigner");
-		File templateFile = fileChooser.showOpenDialog(null);
-		if(templateFile == null)
-			return;
-		
-		try
-		{
-			ExtensionFilter chosenExtensionFilter = fileChooser.getSelectedExtensionFilter();
-			if (isMctFileFilterSelected(chosenExtensionFilter, templateFile))
-				importFormTemplateFromMctFile(templateFile);
-
-			if (isXmlExtensionSelected(chosenExtensionFilter, templateFile))
-				importXmlFormTemplate(templateFile);
-		}
-		catch(Exception e)
-		{
-			logAndNotifyUnexpectedError(e);
-		}
+		doAction(new ImportTemplateAction(this));
 	}
 
-	private void importFormTemplateFromMctFile(File templateFile) throws Exception
+	public void importFormTemplateFromMctFile(File templateFile) throws Exception
 	{
 		FormTemplate importedTemplate = new FormTemplate();
 		if(!importedTemplate.importTemplate(templateFile, getSecurity()))
@@ -445,7 +411,7 @@ public class ManageTemplatesController extends FxInSwingController
 		logTemplateToBeAdded();
 	}
 
-	private void importXmlFormTemplate(File templateFile)
+	public void importXmlFormTemplate(File templateFile)
 	{
 		Vector errors = new Vector();
 		try
@@ -505,23 +471,6 @@ public class ManageTemplatesController extends FxInSwingController
 		{
 			reader.close();
 		}
-	}
-	
-	private FileChooser createFileChooser(String titleTag)
-	{
-		//FIXME: This Dialog can be hidden behind
-		FileChooser fileChooser = new FileChooser();
-		File martusRootDir = getApp().getMartusDataRootDirectory();
-		fileChooser.setInitialDirectory(martusRootDir);
-		fileChooser.setTitle(getLocalization().getWindowTitle(titleTag));
-		MCTFileFilter templateFileFilter = new MCTFileFilter(getLocalization());
-		BulletinXmlFileFilter xmlTemplateFileFilter = new BulletinXmlFileFilter(getLocalization());
-		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter(templateFileFilter.getDescription(), templateFileFilter.getWildCardExtension()),
-				new FileChooser.ExtensionFilter(xmlTemplateFileFilter.getDescription(), xmlTemplateFileFilter.getWildCardExtension()),
-				new FileChooser.ExtensionFilter(getLocalization().getFieldLabel("AllFiles"), "*.*"));
-
-		return fileChooser;
 	}
 	
 	@FXML
