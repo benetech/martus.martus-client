@@ -25,19 +25,11 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step6;
 
-import java.io.File;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.stage.FileChooser;
 
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.UiMainWindow.KeyPairFormatFilter;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
-import org.martus.util.FileTransfer;
-import org.martus.util.FileVerifier;
-import org.martus.util.TokenReplacement;
 
 public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 {
@@ -77,41 +69,13 @@ public class FxSetupBackupYourKeyController	extends	FxStep6Controller
 	
 	private void doBackupKeyPairToSingleEncryptedFile() throws Exception 
 	{
-		backupMessageLabel.setText("");
-		File keypairFile = getApp().getCurrentKeyPairFile();
-		MartusLocalization localization = getLocalization();
-		if(keypairFile.length() > UiMainWindow.MAX_KEYPAIRFILE_SIZE)
-		{
-			backupMessageLabel.setText(localization.getFieldLabel("KeypairTooLarge"));
-			return;
-		}
-
-		//FIXME: This dialog can be hidden behind
-		FileChooser fileChooser = new FileChooser();
-		File martusRootDir = getApp().getMartusDataRootDirectory();
-		fileChooser.setInitialDirectory(martusRootDir);
-		fileChooser.setTitle(localization.getWindowTitle("FileDialogSaveKeyPair"));
-		KeyPairFormatFilter keyPairFilter = getMainWindow().getKeyPairFormatFilter();
-		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter(keyPairFilter.getDescription(), keyPairFilter.getWildCardExtension()),
-				new FileChooser.ExtensionFilter(localization.getFieldLabel("AllFiles"), "*.*"));
-		File newBackupFile = fileChooser.showSaveDialog(null);
-		if(newBackupFile == null)
-			return;
-
-		if(!newBackupFile.getName().contains("."))
-			newBackupFile = new File(newBackupFile.getAbsolutePath() + keyPairFilter.getExtension());
-		
-		FileTransfer.copyFile(keypairFile, newBackupFile);
-		if(FileVerifier.verifyFiles(keypairFile, newBackupFile))
-		{
-			String message = TokenReplacement.replaceToken(localization.getFieldLabel("SingleEncryptedKeyBackupCreated"), "#backupFileName", newBackupFile.getName());
-			backupMessageLabel.setText(message);
-			getApp().getConfigInfo().setBackedUpKeypairEncrypted(true);
-			getApp().saveConfigInfo();
-		}
+		doAction(new BackupKeyAction(this));
 	}
 	
+	public void updateBackupKeyMessageLabelWithTranslatedMessage(String translatedMessage)
+	{
+		backupMessageLabel.setText(translatedMessage);
+	}
 	
 	@FXML
 	private Label backupMessageLabel;
