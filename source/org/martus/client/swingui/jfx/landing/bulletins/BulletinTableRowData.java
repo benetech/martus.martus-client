@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import org.martus.common.MiniLocalization;
@@ -42,7 +43,7 @@ public class BulletinTableRowData
 		title = new SimpleStringProperty(bulletin.get(Bulletin.TAGTITLE));
 		author = new SimpleStringProperty(bulletin.get(Bulletin.TAGAUTHOR));
 		long dateLastSaved = bulletin.getBulletinHeaderPacket().getLastSavedTime();
-		dateSaved = new SimpleStringProperty(localization.formatDateTime(dateLastSaved));
+		dateSaved = new SimpleLongProperty(dateLastSaved);
 		this.onServer = new SimpleBooleanProperty(onServer);
 		canView = new SimpleBooleanProperty(true);
 		canEdit = new SimpleBooleanProperty(true);
@@ -74,12 +75,12 @@ public class BulletinTableRowData
         return author; 
     }
 
-    public String getDateSaved()
+    public Long getDateSaved()
 	{
 		return dateSaved.get();
 	}
 	
-    public SimpleStringProperty dateSavedProperty() 
+    public SimpleLongProperty dateSavedProperty() 
     { 
         return dateSaved; 
     }
@@ -129,7 +130,7 @@ public class BulletinTableRowData
     
     private final SimpleStringProperty title;
 	private final SimpleStringProperty author;
-	private final SimpleStringProperty dateSaved;
+	private final SimpleLongProperty dateSaved;
 	private final SimpleBooleanProperty onServer;
 	private final SimpleBooleanProperty canView;
 	private final SimpleBooleanProperty canEdit;
