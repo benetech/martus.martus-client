@@ -200,7 +200,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		// NOTE NAG screen now could be localized
 //		new UiNotifyDlg(this, "Martus - Test Version", 
 //				new String[] {"THIS IS A PRE-RELEASE TEST VERSION OF MARTUS.",
-//				"Please contact info@martus.org with any feedback or questions."}, 
+//				"Please contact martus@bentech.org with any feedback or questions."}, 
 //				new String[] {"OK"});
 		
 		restrictToOnlyTestServers();
