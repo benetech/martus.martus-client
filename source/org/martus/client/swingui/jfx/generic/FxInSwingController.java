@@ -73,7 +73,6 @@ public abstract class FxInSwingController extends FxController
 		installGlassPane(glassPane);
 		GlassPaneMouseHandler glassPaneMouseHandler = new GlassPaneMouseHandler(fronter);
 		glassPane.addMouseListener(glassPaneMouseHandler);
-		glassPane.addMouseMotionListener(glassPaneMouseHandler);
 		
 		glassPane.setVisible(true);
 		try
@@ -82,7 +81,6 @@ public abstract class FxInSwingController extends FxController
 		}
 		finally
 		{
-			glassPane.removeMouseMotionListener(glassPaneMouseHandler);
 			glassPane.removeMouseListener(glassPaneMouseHandler);
 	
 			window.removeWindowFocusListener(windowHandler);
