@@ -108,6 +108,12 @@ public abstract class FxInSwingController extends FxController
 		String[] extensions = chosenExtensionFilter.getExtensions().toArray(new String[0]);
 		return isExtensionSelected(extensions, file, mctFileFilter);
 	}
+
+	public static boolean isMctFileFilterSelected(MartusLocalization localization, FormatFilter chosenExtensionFilter, File file)
+	{
+		FormatFilter mctFileFilter = new MCTFileFilter(localization);
+		return isExtensionSelected(chosenExtensionFilter, file, mctFileFilter);
+	}
 	
 	protected boolean isMctFileFilterSelected(FormatFilter chosenExtensionFilter, File file)
 	{
