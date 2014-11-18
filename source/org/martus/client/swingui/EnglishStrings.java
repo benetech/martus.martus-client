@@ -556,7 +556,7 @@ public class EnglishStrings
 "menu:ExportFolder=Export Folder",
 "menu:exit=Exit",
 "menu:edit=Edit",
-"menu:search=Advance Search",
+"menu:search=Advanced Search",
 "menu:modifyBulletin=Modify Record",
 "menu:SelectAllBulletins=Select All Records",
 "menu:CutBulletins=Cut Record(s)",
