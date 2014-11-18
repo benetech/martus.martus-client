@@ -19,14 +19,6 @@
                       <Hyperlink onAction="#OnLinkTorProject" prefHeight="28.0" text="torproject.org" underline="true" />
                     </children>
                   </HBox>
-                  <Label text="" />
-                  <HBox prefHeight="144.0" prefWidth="561.0">
-                    <children>
-                      <Label prefHeight="30.0" prefWidth="59" styleClass="headingLevel3" text="%UseTor" />
-                      <Pane fx:id="switchButtonPane" prefHeight="144.0" prefWidth="104.0" />
-                      <Label prefHeight="144.0" prefWidth="285.0" styleClass="mainTextBoxText" text="%PreferencesWhyUseTor" wrapText="true" />
-                    </children>
-                  </HBox>
                 </children>
              </VBox>
             </children>
