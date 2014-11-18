@@ -26,24 +26,27 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.generic.controls;
 
 import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.util.Callback;
 
-import org.martus.client.swingui.jfx.landing.bulletins.BulletinTableRowData;
 import org.martus.common.MiniLocalization;
 
-public class FxDateTableCellFactory implements Callback<TableColumn<BulletinTableRowData, Long>, TableCell<BulletinTableRowData, Long>>
+public class FxTimestampTableCell extends TableCell
 {
-	public FxDateTableCellFactory(MiniLocalization localizationToUse)
+	public FxTimestampTableCell(MiniLocalization localizationToUse)
 	{
 		localization = localizationToUse;
 	}
 	
 	@Override
-	public TableCell call(final TableColumn param) 
+	public void updateItem(Object cellObject, boolean empty) 
 	{
-		FxDateTableCell cell = new FxDateTableCell(localization);
-		return cell;
+		super.updateItem(cellObject, empty);
+
+		Long timestamp = (Long)cellObject;
+		if(timestamp == null)
+			return;
+		
+		String formatted = localization.formatDateTime(timestamp);
+		setText(formatted);
 	}
 	
 	private MiniLocalization localization;
