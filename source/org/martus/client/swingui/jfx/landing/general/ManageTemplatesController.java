@@ -35,6 +35,8 @@ import java.util.Vector;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -44,6 +46,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -227,29 +230,37 @@ public class ManageTemplatesController extends FxInSwingController
 			ManageTemplatesTableRowData selected = availableTemplatesTable.getSelectionModel().getSelectedItem();
 			String rawTitle = selected.getRawTemplateName();
 			FormTemplate template = getBulletinStore().getFormTemplate(rawTitle);
-			TemplatePropertiesController controller = new TemplatePropertiesController(getMainWindow(), template);
-			if(showModalYesNoDialog("confirmImportingCustomizationUnknownSigner", EnglishCommonStrings.OK, EnglishCommonStrings.CANCEL, controller))
-			{
-				String oldTitle = template.getTitle();
-				String newTitle = controller.getTemplateTitle();
-				boolean willCreateNewCopy = !newTitle.equals(oldTitle);
-
-				template.setTitle(newTitle);
-				template.setDescription(controller.getTemplateDescription());
-
-				ClientBulletinStore store = getApp().getStore();
-				store.saveNewFormTemplate(template);
-				if(willCreateNewCopy)
-					store.deleteFormTemplate(oldTitle);
-				
+			String emptyMessage = "";
+			boolean keepExistingTemplate = false;
+			if(editTemplate(template, emptyMessage, keepExistingTemplate))
 				populateAvailableTemplatesTable();
-			}
-			
 		}
 		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 		}
+	}
+
+	public boolean editTemplate(FormTemplate template, String message, boolean keepExistingTemplate) throws Exception
+	{
+		TemplatePropertiesController controller = new TemplatePropertiesController(getMainWindow(), template);
+		controller.setMessage(message);
+		if(showModalYesNoDialog("TemplateEditor", EnglishCommonStrings.OK, EnglishCommonStrings.CANCEL, controller))
+		{
+			String oldTitle = template.getTitle();
+			String newTitle = controller.getTemplateTitle();
+			boolean willReplaceExistingCopy = !newTitle.equals(oldTitle) && !keepExistingTemplate;
+
+			template.setTitle(newTitle);
+			template.setDescription(controller.getTemplateDescription());
+
+			ClientBulletinStore store = getApp().getStore();
+			store.saveNewFormTemplate(template);
+			if(willReplaceExistingCopy)
+				store.deleteFormTemplate(oldTitle);
+			return true;
+		}
+		return false;
 	}
 
 	private void populateAvailableTemplatesTable()
@@ -272,7 +283,6 @@ public class ManageTemplatesController extends FxInSwingController
 	private void initializeAddTab() throws Exception
 	{
 		templateToAddProperty = new SimpleObjectProperty<FormTemplate>();
-		
 		ReadOnlyObjectProperty<FormTemplate> selectedGenericTemplateProperty = genericChoiceBox.getSelectionModel().selectedItemProperty();
 		selectedGenericTemplateProperty.addListener(new GenericTemplateSelectedHandler());
 		genericChoiceBox.visibleProperty().bind(genericRadioButton.selectedProperty());
@@ -288,6 +298,9 @@ public class ManageTemplatesController extends FxInSwingController
 		genericRadioButton.setSelected(true);
 		
 		addTemplateButton.disableProperty().bind(Bindings.isNull(templateToAddProperty));
+
+		templateNameToBeAdded.visibleProperty().bind(Bindings.isNull(templateToAddProperty).not());
+		templateNameToBeAdded.textProperty().bind(templateToAddProperty.asString());
 	}
 	
 	public static ObservableList<AbstractFxImportFormTemplateController> getImportTemplateChoices(UiMainWindow mainWindow) throws Exception
@@ -324,15 +337,20 @@ public class ManageTemplatesController extends FxInSwingController
 				showControllerInsideModalDialog(newValue);
 				FormTemplate downloadedTemplate = newValue.getSelectedFormTemplate();
 				updateTemplateFromDownloaded(downloadedTemplate);
+				clearDownloadSelection();
 			}
 			catch(Exception e)
 			{
 				logAndNotifyUnexpectedError(e);
 			}
 		}
-
 	}
 
+	protected void clearDownloadSelection()
+	{
+		downloadChoiceBox.getSelectionModel().clearSelection();
+	}
+	
 	protected void updateTemplateFromDownloaded(FormTemplate downloadedTemplate)
 	{
 		templateToAddProperty.setValue(downloadedTemplate);
@@ -349,13 +367,14 @@ public class ManageTemplatesController extends FxInSwingController
 		MartusLogger.log("Ready to add template: " + getTitleOfTemplateToBeAdded());
 	}
 
-	private String getTitleOfTemplateToBeAdded()
+	private StringProperty getTitleOfTemplateToBeAdded()
 	{
 		FormTemplate template = templateToAddProperty.getValue();
-		String title = "(none)";
+		String title = getLocalization().getFieldLabel("NoFormTemplateTitle");
 		if(template != null)
 			title = template.getTitle();
-		return title;
+		
+		return new SimpleStringProperty(title);
 	}
 	
 	protected void updateTemplateFromGeneric()
@@ -494,22 +513,28 @@ public class ManageTemplatesController extends FxInSwingController
 			boolean doesTemplateExist = existingTemplateTitles.contains(templateToAdd.getTitle());
 			if(doesTemplateExist)
 			{
-				String message = getLocalization().getFieldLabel("confirmTemplateAlreadyExistscause");
-				if(!showConfirmationDialog("AddTemplate", message))
-					return;
+				boolean keepExistingTemplate = true;
+				if(editTemplate(templateToAdd, getLocalization().getFieldLabel("ImportTemplateWhichAlreadyExists"), keepExistingTemplate))
+					updateTable();
+				return;
 			}
 			getBulletinStore().saveNewFormTemplate(templateToAdd);
-			populateAvailableTemplatesTable();
-			templateToAddProperty.setValue(null);
-			
-			tabPane.selectionModelProperty().get().select(availableTemplatesTab);
-			availableTemplatesTable.selectionModelProperty().get().clearSelection();
-			availableTemplatesTable.scrollTo(0);
+			updateTable();
 		}
 		catch(Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 		}
+	}
+
+	public void updateTable()
+	{
+		populateAvailableTemplatesTable();
+		templateToAddProperty.setValue(null);
+		
+		tabPane.selectionModelProperty().get().select(availableTemplatesTab);
+		availableTemplatesTable.selectionModelProperty().get().clearSelection();
+		availableTemplatesTable.scrollTo(0);
 	}
 
 	final private String TRASH_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/trash.png";
@@ -561,6 +586,9 @@ public class ManageTemplatesController extends FxInSwingController
 	
 	@FXML
 	private Button addTemplateButton;
+	
+	@FXML
+	private Label templateNameToBeAdded;
 	
 	private SimpleObjectProperty<FormTemplate> templateToAddProperty;
 }

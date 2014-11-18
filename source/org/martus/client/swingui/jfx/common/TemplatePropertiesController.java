@@ -29,10 +29,13 @@ import java.awt.Dimension;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -46,6 +49,7 @@ public class TemplatePropertiesController extends FxController
 	{
 		super(mainWindowToUse);
 		template = templateToEdit;
+		message = "";
 	}
 
 	@Override
@@ -56,6 +60,10 @@ public class TemplatePropertiesController extends FxController
 		templateTitle.textProperty().addListener(new TitleChangeHandler());
 		String existingDescription = template.getDescription();
 		templateDescription.setText(existingDescription);
+		editTemplateMessage.setVisible(!message.isEmpty());
+		editTemplateMessage.setText(message);
+		
+		updateOkButtonStatus();
 	}
 	
 	protected class TitleChangeHandler implements ChangeListener
@@ -65,7 +73,6 @@ public class TemplatePropertiesController extends FxController
 		{
 			updateOkButtonStatus();
 		}
-
 	}
 	
 	protected void updateOkButtonStatus()
@@ -76,7 +83,8 @@ public class TemplatePropertiesController extends FxController
 			String newTitle = getTemplateTitle();
 			boolean doesTitleAlreadyExist = getApp().getStore().doesFormTemplateExist(newTitle);
 			boolean isTitleChanged = !newTitle.equals(oldTitle);
-			boolean isNewTitleIllegal = isTitleChanged && doesTitleAlreadyExist;
+			boolean isTitleBlank = newTitle.isEmpty();
+			boolean isNewTitleIllegal = isTitleChanged && doesTitleAlreadyExist || isTitleBlank;
 
 			setOkButtonDisabled(isNewTitleIllegal);
 		} 
@@ -84,6 +92,11 @@ public class TemplatePropertiesController extends FxController
 		{
 			logAndNotifyUnexpectedError(e);
 		}
+	}
+	
+	public void setMessage(String messageToUse)
+	{
+		message = messageToUse;
 	}
 
 	private void setOkButtonDisabled(boolean shouldBeDisabled)
@@ -122,6 +135,10 @@ public class TemplatePropertiesController extends FxController
 	@FXML
 	private TextField templateDescription;
 	
+	@FXML
+	private TextArea editTemplateMessage;
+	
 	private FormTemplate template;
+	private String message;
 
 }
