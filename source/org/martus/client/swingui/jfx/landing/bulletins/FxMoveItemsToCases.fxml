@@ -11,7 +11,7 @@
             <Label fx:id="caseProjectIncidentMessageLabel" />
             <Label />
             <ListView fx:id="casesListView" />
-            <CheckBox fx:id="removeFromExistingCase" mnemonicParsing="false" text="%Button.RemoveFromExistingCase" />
+            <CheckBox fx:id="removeFromExistingCase" mnemonicParsing="false" />
          </children>
       </VBox>
    </center>
