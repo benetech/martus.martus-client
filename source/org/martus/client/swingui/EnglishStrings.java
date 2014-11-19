@@ -1962,8 +1962,6 @@ public class EnglishStrings
 "button:VerifyContactNow=Verify Now",
 
 "field:SettingUpTor=Setting Up Tor.",
-"field:AccountContact=Account Contact Information",
-"field:AccountContactInformation=This information is optional and is used to auto-fill your records for your convenience. It is stored on your local computer and not sent to the Martus server.",
 "field:DisplaySettings=Your Display Settings",
 "field:TorSettings=Your Tor Settings",
 "field:UseTor=Use Tor",
@@ -2000,6 +1998,8 @@ public class EnglishStrings
 "wintitle:AuthorInformation=Account Information",
 "menu:AuthorInformation=Account Information",
 "field:AuthorInformation=Account Information",
+"field:AuthorContactInformation=This information is optional and is used to auto-fill your records for your convenience. It is stored on your local computer and not sent to the Martus server.",
+
 
 "menu:DeleteAccount=Delete Account",
 "menu:ServerSettings=Server Settings",

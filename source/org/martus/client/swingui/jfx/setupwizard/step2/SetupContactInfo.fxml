@@ -9,8 +9,8 @@
     <BorderPane>
 		<top>
 			<VBox styleClass="mainTextBox">
-				<Label styleClass="headingLevel1" text="%AccountContact" />
-		        <Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="%AccountContactInformation" />
+				<Label styleClass="headingLevel1" text="%AuthorInformation" />
+		        <Label styleClass="mainTextBoxText" maxWidth="600" wrapText="true" text="%AuthorContactInformation" />
 			</VBox>
 		</top>
 		<center>
