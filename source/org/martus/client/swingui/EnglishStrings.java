@@ -1997,9 +1997,9 @@ public class EnglishStrings
 "menu:AccountSharing=Account Sharing",
 "field:AccountSharing=Account Sharing",
 
-"wintitle:AccountInformation=Account Information",
-"menu:AccountInformation=Account Information",
-"field:AccountInformation=Account Information",
+"wintitle:AuthorInformation=Account Information",
+"menu:AuthorInformation=Account Information",
+"field:AuthorInformation=Account Information",
 
 "menu:DeleteAccount=Delete Account",
 "menu:ServerSettings=Server Settings",

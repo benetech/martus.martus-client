@@ -29,7 +29,7 @@
         </content>
       </Tab>
     
-    <Tab id="contactInformationTab" fx:id="contactInformationTab" text="%AccountInformation">
+    <Tab id="contactInformationTab" fx:id="contactInformationTab" text="%AuthorInformation">
 	  <content>
 	    <AnchorPane fx:id="contactInformationPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
 	  </content>
