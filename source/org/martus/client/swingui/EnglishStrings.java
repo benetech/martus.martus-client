@@ -1995,9 +1995,9 @@ public class EnglishStrings
 "menu:AccountSharing=Account Sharing",
 "field:AccountSharing=Account Sharing",
 
-"wintitle:AuthorInformation=Account Information",
-"menu:AuthorInformation=Account Information",
-"field:AuthorInformation=Account Information",
+"wintitle:AuthorInformation=Author Information",
+"menu:AuthorInformation=Author Information",
+"field:AuthorInformation=Author Information",
 "field:AuthorContactInformation=This information is optional and is used to auto-fill your records for your convenience. It is stored on your local computer and not sent to the Martus server.",
 
 
