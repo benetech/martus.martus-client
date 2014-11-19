@@ -66,10 +66,10 @@ public class ExportTemplateAction implements ActionDoer
 	{
 		JFileChooser fileChooser = new JFileChooser(getApp().getMartusDataRootDirectory());
 		fileChooser.setDialogTitle(getLocalization().getWindowTitle("FileDialogExportCustomization"));
-		fileChooser.setAcceptAllFileFilterUsed(false);
-		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
 		fileChooser.addChoosableFileFilter(new MCTFileFilter(getLocalization()));
 		fileChooser.addChoosableFileFilter(new BulletinXmlFileFilter(getLocalization()));
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
 		int userChoice = fileChooser.showSaveDialog(getMainWindow());
 		if (userChoice != JFileChooser.APPROVE_OPTION)
 			return;

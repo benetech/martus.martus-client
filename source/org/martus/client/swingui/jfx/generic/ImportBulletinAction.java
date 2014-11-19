@@ -36,6 +36,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
+import org.martus.client.swingui.filefilters.AllFileFilter;
 import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
 import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
@@ -60,7 +61,8 @@ public class ImportBulletinAction implements ActionDoer
 		FormatFilter xmlFileFilter = new BulletinXmlFileFilter(getLocalization());
 		fileChooser.addChoosableFileFilter(mbaFileFilter);
 		fileChooser.addChoosableFileFilter(xmlFileFilter);
-		fileChooser.setAcceptAllFileFilterUsed(true);
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
 
 		int userResult = fileChooser.showOpenDialog(getMainWindow());
 		if (userResult != JFileChooser.APPROVE_OPTION)
