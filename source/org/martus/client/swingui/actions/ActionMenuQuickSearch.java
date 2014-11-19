@@ -35,12 +35,12 @@ import org.martus.common.MartusLogger;
 public class ActionMenuQuickSearch extends ActionSearch
 {
 
-	public ActionMenuQuickSearch(UiMainWindow mainWindowToUse, String simpleSearch)
+	public ActionMenuQuickSearch(UiMainWindow mainWindowToUse, String storableSimpleSearchString)
 	{
 		super(mainWindowToUse);
 		CurrentUiState uiState = getMainWindow().getUiState();
 		uiState.setSearchFinalBulletinsOnly(true);
-		searchString = simpleSearch;
+		searchString = storableSimpleSearchString;
 	}
 
 	@Override

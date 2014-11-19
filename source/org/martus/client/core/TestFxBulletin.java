@@ -59,6 +59,7 @@ import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.utilities.MartusFlexidate;
+import org.martus.swing.FontHandler;
 import org.martus.util.MultiCalendar;
 import org.martus.util.TestCaseEnhanced;
 
@@ -77,6 +78,43 @@ public class TestFxBulletin extends TestCaseEnhanced
 		security = MockMartusSecurity.createClient();
 		localization = new MiniLocalization();
 		store = new MockBulletinStore();
+	}
+	
+	public void testZawgyi() throws Exception
+	{
+		Bulletin b = new Bulletin(security);
+		b.set(Bulletin.TAGAUTHOR, BURMESE_UNICODE_TEST_STRING);
+		AttachmentProxy ap = new AttachmentProxy(BURMESE_UNICODE_TEST_STRING);
+		UniversalId attachmentUid = UniversalId.createFromAccountAndLocalId("AccountId", "LocalId");
+		ap.setUniversalIdAndSessionKey(attachmentUid, null);
+		b.addPublicAttachment(ap);
+		FxBulletin fxb = new FxBulletin(getLocalization());
+		Bulletin copy = new Bulletin(security);
+		
+		FontHandler.setDoZawgyiConversion(false);
+		fxb.copyDataFromBulletin(b, store);
+		assertEquals(BURMESE_UNICODE_TEST_STRING, fxb.getField(Bulletin.TAGAUTHOR).getValue());
+		assertEquals(BURMESE_UNICODE_TEST_STRING, fxb.getAttachments().get(0).getAttachmentProxy().getLabel());
+		assertEquals(BURMESE_UNICODE_TEST_STRING, fxb.getAttachments().get(0).nameProperty().getValue());
+		fxb.copyDataToBulletin(copy);
+		assertEquals(BURMESE_UNICODE_TEST_STRING, copy.get(Bulletin.TAGAUTHOR));
+		assertEquals(BURMESE_UNICODE_TEST_STRING, copy.getPrivateFieldDataPacket().getAttachments()[0].getLabel());
+		
+		try
+		{
+			FontHandler.setDoZawgyiConversion(true);
+			fxb.copyDataFromBulletin(b, store);
+			assertEquals(BURMESE_ZAWGYI_TEST_STRING, fxb.getField(Bulletin.TAGAUTHOR).getValue());
+			assertEquals(BURMESE_ZAWGYI_TEST_STRING, fxb.getAttachments().get(0).getAttachmentProxy().getLabel());
+			assertEquals(BURMESE_ZAWGYI_TEST_STRING, fxb.getAttachments().get(0).nameProperty().getValue());
+			fxb.copyDataToBulletin(copy);
+			assertEquals(BURMESE_UNICODE_TEST_STRING, copy.get(Bulletin.TAGAUTHOR));
+			assertEquals(BURMESE_UNICODE_TEST_STRING, copy.getPrivateFieldDataPacket().getAttachments()[0].getLabel());
+		}
+		finally
+		{
+			FontHandler.setDoZawgyiConversion(false);
+		}
 	}
 	
 	public void testGrid() throws Exception
@@ -650,6 +688,9 @@ public class TestFxBulletin extends TestCaseEnhanced
 	{
 		return localization;
 	}
+	
+	public static final String BURMESE_UNICODE_TEST_STRING = "\u104E\u1004\u103A\u1038";
+	public static final String BURMESE_ZAWGYI_TEST_STRING = "\u104E";
 	
 	private MockMartusSecurity security;
 	private MiniLocalization localization;
