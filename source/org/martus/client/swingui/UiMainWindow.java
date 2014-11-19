@@ -230,10 +230,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		addWindowListener(new WindowEventHandler());
 	}
 	
-	private void restrictToOnlyTestServers()
+	protected void restrictToOnlyTestServers()
 	{
 		// NOTE: For now, only allow connecting to servers which we can completely 
 		// delete all user data from if necessary. So NOT .29 or .114.
+		// Visibility 'protected' only so we don't get a warning when we don't call this method for releases.
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("127.0.0.1");
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("127.0.0.2");
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("localhost");
