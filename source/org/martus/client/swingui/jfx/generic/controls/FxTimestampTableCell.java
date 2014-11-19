@@ -42,10 +42,10 @@ public class FxTimestampTableCell extends TableCell
 		super.updateItem(cellObject, empty);
 
 		Long timestamp = (Long)cellObject;
-		if(timestamp == null)
-			return;
+		String formatted = "";
+		if(timestamp != null)
+			formatted = localization.formatDateTime(timestamp);
 		
-		String formatted = localization.formatDateTime(timestamp);
 		setText(formatted);
 	}
 	
