@@ -37,7 +37,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
 
@@ -424,9 +423,9 @@ public class SettingsForServerController extends FxInSwingController
 	private final static int NORMALIZED_FORTY_DIGIT_PUBLIC_CODE_LENGTH = 40;
 
 	@FXML
-	private Label currentServerIp;
+	private TextField currentServerIp;
 	@FXML
-	private Label currentServerPublicCode;
+	private TextField currentServerPublicCode;
 	
 	@FXML
 	private TextField advanceServerIpAddress;
