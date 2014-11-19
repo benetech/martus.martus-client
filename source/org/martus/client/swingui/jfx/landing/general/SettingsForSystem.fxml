@@ -49,8 +49,11 @@
       </VBox>
       <VBox spacing="3.0">
          <children>
-            <Label styleClass="headingLevel1" text="%NewRecords" />
-            <CheckBox fx:id="immutableOnServer" mnemonicParsing="false" text="%NeverDeleteVersionOnServer" />
+            <Label styleClass="headingLevel1" text="%RecordSettings" />
+            <CheckBox fx:id="immutableOnServer" mnemonicParsing="false" text="%NeverDeleteVersionOnServer">
+               <tooltip>
+                  <Tooltip anchorLocation="WINDOW_TOP_LEFT" text="%Tooltip.NeverDeleteFromServer" />
+               </tooltip></CheckBox>
          </children>
       </VBox>
       <Button mnemonicParsing="false" onAction="#onSaveChanges" text="%Button.SaveChanges" />

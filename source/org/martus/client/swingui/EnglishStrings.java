@@ -413,7 +413,7 @@ public class EnglishStrings
 "tooltip:AddContact=Add Contacts",
 "tooltip:ServerSync=Sync Manager",
 "tooltip:ImportBulletin=Import Record",
-
+"tooltip:NeverDeleteFromServer=Check this to not allow your records to be deleted from the Martus server.",
 "button:export=Export",
 "button:Help=Help",
 "button:create=Create",
@@ -776,7 +776,7 @@ public class EnglishStrings
 "field:DateDelimiter=Date Delimiter:",
 "field:DateFormatSequence=Date Format Sequence:",
 "field:CalendarType=Calendar Type:",
-"field:NewRecords=New Records",
+"field:RecordSettings=Record Settings",
 "field:RecordDetails=Record Details",
 
 "wintitle:PrintPreview=Print Preview",
@@ -1973,7 +1973,6 @@ public class EnglishStrings
 "field:TorTip1=Turning Tor on here establishes the default setting for your use of Tor when in Martus. You can also, turn Tor ON or OFF at any time inside the Martus desktop application.",
 "field:TorTip2=Note: Using Tor will make sending and receiving of records slower.",
 "field:TorTip1Settings=Turn Tor ON or OFF at any time using the button in the task bar at the top of the main Martus screen.",
-"field:SystemSettings=System Settings",
 "field:NeverDeleteVersionOnServer=Never Delete from Server",
 
 "field:GettingServerInformation=Getting server information",
