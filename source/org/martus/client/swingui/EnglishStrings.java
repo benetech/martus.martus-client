@@ -303,7 +303,6 @@ public class EnglishStrings
 "wintitle:RetrieveMyDraftBulletins=Retrieve My Draft Records",
 "wintitle:DeleteMyDraftsFromServer=Delete My Drafts From Server",
 "wintitle:about=About Martus",
-"wintitle:AccountInfo=Account Information",
 "wintitle:Help=Martus Help",
 "wintitle:RetrieveMySealedBulletinProgress=Retrieving Records",
 "wintitle:RetrieveMyDraftBulletinProgress=Retrieving Records",
@@ -745,7 +744,6 @@ public class EnglishStrings
 "field:Author=Author",
 "field:Edit=Edit",
 "field:UsernameAndPassword=Username and Password",
-"field:AccountInformation=Account Information",
 "field:AssistanceWithMartusPart1=Martus help documentation is available at",
 "field:AssistanceWithMartusPart2=For additional assistance, please email",
 "field:All=All",
@@ -1995,9 +1993,14 @@ public class EnglishStrings
 "menu:SystemPreferences=System Preferences",
 "menu:TorPreferences=Tor Preferences",
 "menu:ChangeUsernameAndPassword=Username and Password",
+
 "menu:AccountSharing=Account Sharing",
 "field:AccountSharing=Account Sharing",
+
+"wintitle:AccountInformation=Account Information",
 "menu:AccountInformation=Account Information",
+"field:AccountInformation=Account Information",
+
 "menu:DeleteAccount=Delete Account",
 "menu:ServerSettings=Server Settings",
 "menu:WizardStep6Heading=Backup key",

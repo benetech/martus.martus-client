@@ -1617,7 +1617,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 
 	public void showAccountInfo()
 	{
-		String title = getLocalization().getWindowTitle("AccountInfo");
+		String title = getLocalization().getWindowTitle("AccountInfomation");
 		String userName = getLocalization().getFieldLabel("AccountInfoUserName")
 						  + getApp().getUserName();
 		String keyDescription = getLocalization().getFieldLabel("AccountInfoPublicKey");
