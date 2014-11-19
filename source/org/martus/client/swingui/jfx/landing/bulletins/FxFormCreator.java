@@ -72,7 +72,10 @@ abstract public class FxFormCreator
 			return warningBulletinForm(accordion, "MayBeDamaged");
 		if(bulletin.notAuthorizedToRead())
 			return warningBulletinForm(accordion, "NotAuthorizedToViewPrivate");
-				
+
+		TitledPane firstPane = panes.get(0);
+	        accordion.setExpandedPane(firstPane);
+	 
 		return accordion;
 	}
 
