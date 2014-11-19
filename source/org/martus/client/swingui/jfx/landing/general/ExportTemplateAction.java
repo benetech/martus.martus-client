@@ -79,11 +79,27 @@ public class ExportTemplateAction implements ActionDoer
 			return;
 		
 		FormatFilter chosenExtensionFilter = (FormatFilter) fileChooser.getFileFilter();
+		templateFile = getFileWithExtension(templateFile, chosenExtensionFilter);
+
 		if (FxInSwingContentController.isMctFileFilterSelected(getLocalization(), chosenExtensionFilter, templateFile))
 			template.exportTemplate(getApp().getSecurity(), templateFile);
 		
 		if (FxInSwingContentController.isXmlExtensionSelected(getLocalization(), chosenExtensionFilter, templateFile))
 			template.exportTopSection(templateFile);
+	}
+
+	public File getFileWithExtension(File templateFile,
+			FormatFilter chosenExtensionFilter)
+	{
+		String extension = chosenExtensionFilter.getExtension();
+		String fileName = templateFile.getName();
+		if(!fileName.endsWith(extension))
+		{
+			StringBuilder fileNameWithExtension = new StringBuilder(fileName);
+			fileNameWithExtension.append(extension);
+			templateFile = new File(templateFile.getParentFile(), fileNameWithExtension.toString());
+		}
+		return templateFile;
 	}
 	
 	private MartusLocalization getLocalization()
