@@ -92,12 +92,15 @@ abstract public class FxFieldCreator
 
 	protected Node createReadOnlyDateField(FxBulletinField field)
 	{
-		MartusDatePicker picker = new MartusDatePicker(localization);
 		Property<String> property = field.valueProperty();
-		
 		String existingDateString = property.getValue();
-		picker.setValue(existingDateString);
-		String formattedDate = picker.getLocalizedDateFormatted();
+		String formattedDate = "";
+		if(existingDateString.length() > 0)
+		{
+			MartusDatePicker picker = new MartusDatePicker(localization);
+			picker.setValue(existingDateString);
+			formattedDate = picker.getLocalizedDateFormatted();
+		}
 		Text localDate = new Text(formattedDate);
 		return responsiveTextFlowNode(localDate);
 	}
