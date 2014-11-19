@@ -55,7 +55,7 @@ public class TestBulletinTableData extends TestCaseEnhanced
 		assertEquals(title, data.getTitle());
 		assertEquals(author, data.getAuthor());
 		long lastSavedTime = b.getBulletinHeaderPacket().getLastSavedTime();
-		assertEquals(localization.formatDateTime(lastSavedTime), data.getDateSaved());
+		assertEquals(lastSavedTime, data.getDateSaved().longValue());
 		assertEquals(onServer, data.isOnServer());
 		assertEquals(verifiedAuthor, data.authorVerifiedProperty().getValue());
 	}
