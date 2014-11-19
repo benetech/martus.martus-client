@@ -76,7 +76,6 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		RecordSelectedListener recordSelectedListener = new RecordSelectedListener();
 		allRecordsTable.getSelectionModel().selectedItemProperty().addListener(recordSelectedListener);
 		updateButtons();
-		sortByMostRecent();
 	}
 	
 	private void initalizeItemsTable()
@@ -106,15 +105,6 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		{
 			getSwingStage().getScene().setCursor(Cursor.DEFAULT);
 		}
-	}
-
-	protected void sortByMostRecent()
-	{
-		recordLastSavedColumn.setSortType(SortType.DESCENDING);
-		ObservableList<TableColumn<ServerSyncTableRowData, ?>> sortOrder = allRecordsTable.getSortOrder();
-		sortOrder.clear();
-		sortOrder.add(recordLastSavedColumn);
-		allRecordsTable.sort();
 	}
 
 	private Vector getServerMyDrafts() throws Exception
@@ -240,7 +230,6 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		syncRecordsTableProvider.setSubFilter(SyncRecordsTableProvider.SUB_FILTER_ALL);
 		syncRecordsTableProvider.show(TableToShow);
 		updateButtons();
-		sortByMostRecent();
 	}
 	
 	private void filterTable(int filter)
@@ -248,7 +237,6 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		syncRecordsTableProvider.setSubFilter(filter);
 		syncRecordsTableProvider.filterResults();
 		updateButtons();
-		sortByMostRecent();
 	}
 		
 	@Override
