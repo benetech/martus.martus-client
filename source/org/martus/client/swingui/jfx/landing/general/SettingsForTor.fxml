@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -8,35 +9,23 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-         <VBox prefHeight="200.0" styleClass="notMainTextBox">
+         <VBox styleClass="notMainTextBox">
             <children>
-             <VBox maxWidth="635" prefHeight="200.0" prefWidth="635" styleClass="mainTextBox">
+             <VBox styleClass="mainTextBox">
                 <children>
-                  <HBox prefHeight="37.0" prefWidth="660.0">
+                  <HBox>
                     <children>
                       <Label styleClass="headingLevel1" text="%TorSettings" />
                       <Label prefWidth="15.0" text="" />
                       <Hyperlink onAction="#OnLinkTorProject" prefHeight="28.0" text="torproject.org" underline="true" />
                     </children>
                   </HBox>
+                  <TextArea fx:id="torDescription" editable="false" prefHeight="350.0" wrapText="true" />
                 </children>
              </VBox>
             </children>
         </VBox>
     </center>
-    <right>
-		<VBox maxWidth="300" prefHeight="400.0" prefWidth="151.0" styleClass="outerSidebar">
-   <children>
-   			<VBox maxWidth="200" prefWidth="200.0" styleClass="sidebar">
-      <children>
-      				<Label maxWidth="235" styleClass="sidebarText" text="%TorTip1" wrapText="true" />
-      				<Label />
-      				<Label styleClass="sidebarText" text="%TorTip2" wrapText="true" />
-      </children>
-   			</VBox>
-   </children>
-		</VBox>    
-	</right>
     <padding>
       <Insets left="10.0" top="10.0" />
    </padding>

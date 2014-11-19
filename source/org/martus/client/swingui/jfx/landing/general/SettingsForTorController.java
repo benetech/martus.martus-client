@@ -29,6 +29,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
@@ -44,6 +45,13 @@ public class SettingsForTorController extends FxInSwingController
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
+		StringBuilder message = new StringBuilder();
+		message.append(getLocalization().getFieldLabel("UseTorInstructions"));
+		message.append(NEWLINES);
+		message.append(getLocalization().getFieldLabel("TorTip1Settings"));
+		message.append(NEWLINES);
+		message.append(getLocalization().getFieldLabel("TorTip2"));
+		torDescription.setText(message.toString());
 	}
 
 	@Override
@@ -57,4 +65,9 @@ public class SettingsForTorController extends FxInSwingController
 	{
 		openLinkInDefaultBrowser("https://www.torproject.org");
 	}
+	
+	@FXML
+	private TextArea torDescription;
+	
+	final private String NEWLINES = "\n\n";
 }
