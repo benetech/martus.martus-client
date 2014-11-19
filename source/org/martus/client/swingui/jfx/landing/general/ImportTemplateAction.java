@@ -54,10 +54,10 @@ public class ImportTemplateAction implements ActionDoer
 	{
 		JFileChooser fileChooser = new JFileChooser(getApp().getMartusDataRootDirectory());
 		fileChooser.setDialogTitle(getLocalization().getWindowTitle("confirmImportingCustomizationUnknownSigner"));
-		fileChooser.setAcceptAllFileFilterUsed(false);
-		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
 		fileChooser.addChoosableFileFilter(new MCTFileFilter(getLocalization()));
 		fileChooser.addChoosableFileFilter(new BulletinXmlFileFilter(getLocalization()));
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
 		int userChoice = fileChooser.showOpenDialog(getMainWindow());
 		if (userChoice != JFileChooser.APPROVE_OPTION)
 			return;

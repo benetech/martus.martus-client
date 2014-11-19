@@ -77,9 +77,9 @@ public class BackupKeyAction implements ActionDoer
 		JFileChooser fileChooser = new JFileChooser(getApp().getMartusDataRootDirectory());
 		fileChooser.setDialogTitle(localization.getWindowTitle("FileDialogSaveKeyPair"));
 		KeyPairFormatFilter keyPairFilter = getMainWindow().getKeyPairFormatFilter();
+		fileChooser.addChoosableFileFilter(keyPairFilter);
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
-		fileChooser.addChoosableFileFilter(keyPairFilter);
 		int userChoice = fileChooser.showSaveDialog(getMainWindow());
 		if (userChoice != JFileChooser.APPROVE_OPTION)
 			return;
