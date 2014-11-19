@@ -8,13 +8,16 @@
 
 <VBox fillWidth="false" spacing="15.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 <children>
-      <VBox>
+      <VBox spacing="3.0">
          <children>
             <Label styleClass="headingLevel1" text="%FieldTypeLANGUAGE" />
             <HBox alignment="CENTER_LEFT">
  		     <children>
                   <Label text="%SelectLanguage" />
-                  <ChoiceBox fx:id="languageSelection" />
+                  <ChoiceBox fx:id="languageSelection">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin></ChoiceBox>
       </children>
             </HBox>
             <CheckBox fx:id="useZawgyiFont" mnemonicParsing="false" text="%preferencesUseZawgyi" />
@@ -44,7 +47,7 @@
       </GridPane>
          </children>
       </VBox>
-      <VBox>
+      <VBox spacing="3.0">
          <children>
             <Label styleClass="headingLevel1" text="%NewRecords" />
             <CheckBox fx:id="immutableOnServer" mnemonicParsing="false" text="%NeverDeleteVersionOnServer" />
