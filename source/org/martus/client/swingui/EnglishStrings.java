@@ -733,7 +733,7 @@ public class EnglishStrings
 "button:SelectAll=Select All",
 "button:Encrypted=Encrypted?",
 "button:IncludeAttachments=Include attachments",
-"button:RemoveFromExistingCase=Remove from existing Case?",
+"button:RemoveFromExistingCase=Remove from #FolderName#?",
 "button:Templates=Template Manager",
 "button:SaveChanges=Save Changes",
 "button:Upload=Upload",
