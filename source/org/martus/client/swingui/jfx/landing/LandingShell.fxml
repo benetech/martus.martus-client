@@ -24,7 +24,7 @@
 							<items>
 							<MenuItem mnemonicParsing="false" onAction="#onChangeUsernameAndPassword" styleClass="menu-item" text="%Menu.ChangeUsernameAndPassword" />
 							<MenuItem mnemonicParsing="false" onAction="#onAccountSharing" styleClass="menu-item" text="%Menu.AccountSharing" />
-							<MenuItem mnemonicParsing="false" onAction="#onContactInformation" styleClass="menu-item" text="%Menu.AccountInformation" />
+							<MenuItem mnemonicParsing="false" onAction="#onContactInformation" styleClass="menu-item" text="%Menu.AuthorInformation" />
 							<MenuItem mnemonicParsing="false" onAction="#onBackupKeypair" styleClass="menu-item" text="%Menu.KeyBackup" />
                         <MenuItem mnemonicParsing="false" onAction="#onManageContacts" text="%Menu.ManageContacts" />
 							<MenuItem mnemonicParsing="false" onAction="#onDeleteMyData" styleClass="menu-item" text="%Menu.DeleteAccount" />
