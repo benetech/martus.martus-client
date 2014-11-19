@@ -35,11 +35,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 
+import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.landing.cases.CaseListItem;
 import org.martus.client.swingui.jfx.landing.cases.CaseListProvider;
+import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 import org.martus.client.swingui.jfx.landing.cases.FxFolderSettingsController;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
@@ -48,10 +50,11 @@ import org.martus.util.TokenReplacement.TokenInvalidException;
 public class MoveItemsToCasesConfirmationController extends FxController
 {
 
-	public MoveItemsToCasesConfirmationController(UiMainWindow mainWindowToUse, CaseListProvider casesToMoveTo)
+	public MoveItemsToCasesConfirmationController(UiMainWindow mainWindowToUse, CaseListProvider casesToMoveTo, BulletinFolder currentFolderToUse)
 	{
 		super(mainWindowToUse);
 		availableCasesToMove = casesToMoveTo;
+		currentFolder = currentFolderToUse;
 	}
 
 	@Override
@@ -60,7 +63,31 @@ public class MoveItemsToCasesConfirmationController extends FxController
 		super.initialize(location, bundle);
 		updateMoveMessage();
 		updateCaseList();
+		updateRemoveFromExistingCase();
+	}
+
+	private void updateRemoveFromExistingCase()
+	{
+		if(currentFolder == FxCaseManagementController.ALL_FOLDER)
+		{
+			removeFromExistingCase.setVisible(false);
+			return;
+		}
+		
 		removeFromExistingCase.selectedProperty().set(true);
+		
+		try
+		{
+			String currentFolderName = currentFolder.getLocalizedName(getLocalization());
+			String originalMessage = getLocalization().getButtonLabel("RemoveFromExistingCase");
+			String completeMessage = TokenReplacement.replaceToken(originalMessage, "#FolderName#", currentFolderName);
+			removeFromExistingCase.setText(completeMessage);
+		} 
+		catch (TokenInvalidException e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+		
 	}
 
 	private void updateMoveMessage()
@@ -111,4 +138,5 @@ public class MoveItemsToCasesConfirmationController extends FxController
 	private Label caseProjectIncidentMessageLabel;
 	
 	private CaseListProvider availableCasesToMove;
+	private BulletinFolder currentFolder;
 }

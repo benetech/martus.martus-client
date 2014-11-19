@@ -515,8 +515,9 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	{
 		try
 		{
+			BulletinFolder currentFolder = bulletinTableProvider.getFolder();
 			CaseListProvider casesAvailableToMoveItemsTo = getAvailableCasesForMove();
-			MoveItemsToCasesConfirmationController moveItemsController = new MoveItemsToCasesConfirmationController(getMainWindow(), casesAvailableToMoveItemsTo);
+			MoveItemsToCasesConfirmationController moveItemsController = new MoveItemsToCasesConfirmationController(getMainWindow(), casesAvailableToMoveItemsTo, currentFolder);
 			if(showModalYesNoDialog("MoveRecords", "move", EnglishCommonStrings.CANCEL, moveItemsController))
 			{
 				ObservableList<CaseListItem> selectedCases = moveItemsController.getSelectedCases();
