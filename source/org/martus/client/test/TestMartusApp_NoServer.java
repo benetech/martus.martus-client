@@ -2737,7 +2737,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testButtonLabels()
 	{
 		TRACE_BEGIN("testButtonLabels");
-		assertEquals("Help", testAppLocalization.getButtonLabel("help"));
+		assertEquals("Help", testAppLocalization.getButtonLabel("Help"));
 		TRACE_END();
 	}
 
