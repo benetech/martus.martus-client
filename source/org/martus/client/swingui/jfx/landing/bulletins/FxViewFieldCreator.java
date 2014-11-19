@@ -59,7 +59,10 @@ public class FxViewFieldCreator extends FxFieldCreator
 	{
 		Property<String> property = field.valueProperty();
 		String existingDateRangeString = property.getValue();
-		return responsiveTextFlowNode(localization.getViewableDateRange(existingDateRangeString));
+		String formattedDateRange = "";
+		if(existingDateRangeString.length() > 0)
+			formattedDateRange = localization.getViewableDateRange(existingDateRangeString);
+		return responsiveTextFlowNode(formattedDateRange);
 	}
 
 	@Override
