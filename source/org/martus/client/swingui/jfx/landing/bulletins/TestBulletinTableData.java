@@ -25,10 +25,12 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import org.martus.client.core.TestFxBulletin;
 import org.martus.common.ContactKey;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.swing.FontHandler;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestBulletinTableData extends TestCaseEnhanced
@@ -58,5 +60,28 @@ public class TestBulletinTableData extends TestCaseEnhanced
 		assertEquals(lastSavedTime, data.getDateSaved().longValue());
 		assertEquals(onServer, data.isOnServer());
 		assertEquals(verifiedAuthor, data.authorVerifiedProperty().getValue());
+	}
+	
+	public void testZawgyi() throws Exception
+	{
+		MockMartusSecurity security = new MockMartusSecurity();
+		MiniLocalization localization = new MiniLocalization();
+		Bulletin b = new Bulletin(security);
+		b.set(Bulletin.TAGAUTHOR, TestFxBulletin.BURMESE_UNICODE_TEST_STRING);
+		
+		FontHandler.setDoZawgyiConversion(false);
+		BulletinTableRowData notConverted = new BulletinTableRowData(b, false, ContactKey.VERIFIED_ACCOUNT_OWNER, localization);
+		assertEquals(TestFxBulletin.BURMESE_UNICODE_TEST_STRING, notConverted.getAuthor());
+
+		try
+		{
+			FontHandler.setDoZawgyiConversion(true);
+			BulletinTableRowData converted = new BulletinTableRowData(b, false, ContactKey.VERIFIED_ACCOUNT_OWNER, localization);
+			assertEquals(TestFxBulletin.BURMESE_ZAWGYI_TEST_STRING, converted.getAuthor());
+		}
+		finally
+		{
+			FontHandler.setDoZawgyiConversion(false);
+		}
 	}
 }

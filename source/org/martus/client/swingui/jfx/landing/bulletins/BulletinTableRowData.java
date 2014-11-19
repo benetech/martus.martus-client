@@ -31,17 +31,25 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
+import org.martus.swing.FontHandler;
 
 public class BulletinTableRowData
 {
 	public BulletinTableRowData(Bulletin bulletin, boolean onServer, Integer authorsValidation, MiniLocalization localization)
 	{
+		UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
+
 		uid = bulletin.getUniversalId();
-		title = new SimpleStringProperty(bulletin.get(Bulletin.TAGTITLE));
-		author = new SimpleStringProperty(bulletin.get(Bulletin.TAGAUTHOR));
+		String storableTitle = bulletin.get(Bulletin.TAGTITLE);
+		String displayableTitle = fontHelper.getDisplayable(storableTitle);
+		title = new SimpleStringProperty(displayableTitle);
+		String storableAuthor = bulletin.get(Bulletin.TAGAUTHOR);
+		String displayableAuthor = fontHelper.getDisplayable(storableAuthor);
+		author = new SimpleStringProperty(displayableAuthor);
 		long dateLastSaved = bulletin.getBulletinHeaderPacket().getLastSavedTime();
 		dateSaved = new SimpleLongProperty(dateLastSaved);
 		this.onServer = new SimpleBooleanProperty(onServer);
