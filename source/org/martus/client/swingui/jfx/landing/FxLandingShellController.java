@@ -45,6 +45,7 @@ import javafx.scene.layout.Pane;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuCharts;
 import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
@@ -64,6 +65,7 @@ import org.martus.client.swingui.jfx.landing.general.HelpController;
 import org.martus.client.swingui.jfx.landing.general.SettingsController;
 import org.martus.common.MartusLogger;
 import org.martus.common.network.OrchidTransportWrapper;
+import org.martus.swing.FontHandler;
 
 public class FxLandingShellController extends FxNonWizardShellController
 {
@@ -285,7 +287,10 @@ public class FxLandingShellController extends FxNonWizardShellController
 	private void onQuickSearch(ActionEvent event)
 	{
 		String displayableSearchText = searchText.getText();
-		doAction(new  ActionMenuQuickSearch(getMainWindow(), displayableSearchText));
+		UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
+		String storableSearchText = fontHelper.getStorable(displayableSearchText);
+
+		doAction(new  ActionMenuQuickSearch(getMainWindow(), storableSearchText));
 		setTitleBarToSearch();
 	}
 	
