@@ -100,14 +100,21 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals(BURMESE_UNICODE_TEST_STRING, copy.get(Bulletin.TAGAUTHOR));
 		assertEquals(BURMESE_UNICODE_TEST_STRING, copy.getPrivateFieldDataPacket().getAttachments()[0].getLabel());
 		
-		FontHandler.setDoZawgyiConversion(true);
-		fxb.copyDataFromBulletin(b, store);
-		assertEquals(BURMESE_ZAWGYI_TEST_STRING, fxb.getField(Bulletin.TAGAUTHOR).getValue());
-		assertEquals(BURMESE_ZAWGYI_TEST_STRING, fxb.getAttachments().get(0).getAttachmentProxy().getLabel());
-		assertEquals(BURMESE_ZAWGYI_TEST_STRING, fxb.getAttachments().get(0).nameProperty().getValue());
-		fxb.copyDataToBulletin(copy);
-		assertEquals(BURMESE_UNICODE_TEST_STRING, copy.get(Bulletin.TAGAUTHOR));
-		assertEquals(BURMESE_UNICODE_TEST_STRING, copy.getPrivateFieldDataPacket().getAttachments()[0].getLabel());
+		try
+		{
+			FontHandler.setDoZawgyiConversion(true);
+			fxb.copyDataFromBulletin(b, store);
+			assertEquals(BURMESE_ZAWGYI_TEST_STRING, fxb.getField(Bulletin.TAGAUTHOR).getValue());
+			assertEquals(BURMESE_ZAWGYI_TEST_STRING, fxb.getAttachments().get(0).getAttachmentProxy().getLabel());
+			assertEquals(BURMESE_ZAWGYI_TEST_STRING, fxb.getAttachments().get(0).nameProperty().getValue());
+			fxb.copyDataToBulletin(copy);
+			assertEquals(BURMESE_UNICODE_TEST_STRING, copy.get(Bulletin.TAGAUTHOR));
+			assertEquals(BURMESE_UNICODE_TEST_STRING, copy.getPrivateFieldDataPacket().getAttachments()[0].getLabel());
+		}
+		finally
+		{
+			FontHandler.setDoZawgyiConversion(false);
+		}
 	}
 	
 	public void testGrid() throws Exception
