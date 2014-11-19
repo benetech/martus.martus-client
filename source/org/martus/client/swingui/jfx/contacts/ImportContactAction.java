@@ -35,6 +35,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
+import org.martus.client.swingui.filefilters.AllFileFilter;
 import org.martus.client.swingui.filefilters.PublicInfoFileFilter;
 import org.martus.common.MartusLogger;
 
@@ -57,8 +58,9 @@ public class ImportContactAction implements ActionDoer
 		JFileChooser fileChooser = new JFileChooser(martusRootDir);
 		MartusLocalization localization = getLocalization();
 		fileChooser.setDialogTitle(localization.getWindowTitle("ImportContactPublicKey"));
-		fileChooser.setAcceptAllFileFilterUsed(true);
 		fileChooser.addChoosableFileFilter(new PublicInfoFileFilter(getLocalization()));
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
 
 		int userResult = fileChooser.showOpenDialog(getMainWindow());
 		if (userResult != JFileChooser.APPROVE_OPTION)

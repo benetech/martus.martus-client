@@ -34,6 +34,7 @@ import javax.swing.JFileChooser;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
+import org.martus.client.swingui.filefilters.AllFileFilter;
 
 public class AddAttachmentAction implements ActionDoer
 {
@@ -48,7 +49,8 @@ public class AddAttachmentAction implements ActionDoer
 		JFileChooser fileChooser = new JFileChooser();
 		MartusLocalization localization = getBulletinAttachmentsContoller().getLocalization();
 		fileChooser.setDialogTitle(localization.getWindowTitle("FileDialogAddAttachment"));
-		fileChooser.setAcceptAllFileFilterUsed(true);
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		fileChooser.addChoosableFileFilter(new AllFileFilter(getMainWindow().getLocalization()));
 		int userChoice = fileChooser.showOpenDialog(getMainWindow());
 		if (userChoice != JFileChooser.APPROVE_OPTION)
 			return;
