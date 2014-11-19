@@ -1992,8 +1992,8 @@ public class EnglishStrings
 "menu:TorPreferences=Tor Preferences",
 "menu:ChangeUsernameAndPassword=Username and Password",
 
-"menu:AccountSharing=Account Sharing",
-"field:AccountSharing=Account Sharing",
+"menu:AccountInformation=Account Information",
+"field:AccountInformation=Account Information",
 
 "wintitle:AuthorInformation=Author Information",
 "menu:AuthorInformation=Author Information",
