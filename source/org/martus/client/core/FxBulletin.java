@@ -57,7 +57,9 @@ import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
+import org.martus.common.utilities.BurmeseUtilities;
 import org.martus.common.utilities.MartusFlexidate;
+import org.martus.swing.FontHandler;
 import org.martus.util.MultiCalendar;
 
 /**
@@ -116,6 +118,14 @@ public class FxBulletin
 		for (AttachmentProxy attachmentProxy : attachmentsToAdd)
 		{
 			AttachmentTableRowData attachmentRow = new AttachmentTableRowData(attachmentProxy, db);
+			
+			String storable = attachmentRow.nameProperty().getValue();
+			String displayable = storable;
+			if(FontHandler.isDoZawgyiConversion())
+				displayable = BurmeseUtilities.getDisplayable(storable);
+			attachmentRow.nameProperty().setValue(displayable);
+			attachmentProxy.setLabel(displayable);
+			
 			attachments.add(attachmentRow);
 		}
 	}
@@ -133,7 +143,10 @@ public class FxBulletin
 			String fieldTag = fieldSpec.getTag();
 			FxBulletinField field = getField(fieldTag);
 			String value = field.getValue();
-			modified.set(fieldTag, value);
+			String storable = value;
+			if(FontHandler.isDoZawgyiConversion())
+				storable = BurmeseUtilities.getStorable(value);
+			modified.set(fieldTag, storable);
 //			System.out.println("copyDataToBulletin " + fieldTag + ":" + value);
 		}
 		HeadquartersKeys modifiedKeys = new HeadquartersKeys();
@@ -147,6 +160,11 @@ public class FxBulletin
 		for(int i = 0; i < attachments.size(); ++i)
 		{
 			AttachmentProxy proxy = attachments.get(i).getAttachmentProxy();
+			String displayable = proxy.getLabel();
+			String storable = displayable;
+			if(FontHandler.isDoZawgyiConversion())
+				storable = BurmeseUtilities.getStorable(displayable);
+			proxy.setLabel(storable);
 			modified.addPrivateAttachment(proxy);
 		}
 	}
@@ -332,6 +350,8 @@ public class FxBulletin
 			String fieldTag = fieldSpec.getTag();
 			MartusField martusField = b.getField(fieldTag);
 			String value = getFieldValue(martusField);
+			if(FontHandler.isDoZawgyiConversion())
+				value = BurmeseUtilities.getDisplayable(value);
 
 			fieldSpecs.add(fieldSpec);
 			

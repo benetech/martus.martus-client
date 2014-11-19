@@ -50,7 +50,6 @@ public class ServerSyncTableRowData
 		setLocation(app, LOCATION_SERVER);
 		isLocal = new SimpleBooleanProperty(false);
 		isRemote = new SimpleBooleanProperty(true);
-		FontHandler.setDoZawgyiConversion(false);//TODO FIXME once we are loading correct Language info
 		UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
 		String rawTitle = summaryToUse.getStorableTitle();
 		setTitle(fontHelper.getDisplayable(rawTitle));
