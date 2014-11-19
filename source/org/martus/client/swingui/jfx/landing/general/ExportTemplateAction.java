@@ -33,7 +33,6 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
-import org.martus.client.swingui.filefilters.AllFileFilter;
 import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.jfx.generic.FxInSwingContentController;
@@ -69,7 +68,6 @@ public class ExportTemplateAction implements ActionDoer
 		fileChooser.addChoosableFileFilter(new MCTFileFilter(getLocalization()));
 		fileChooser.addChoosableFileFilter(new BulletinXmlFileFilter(getLocalization()));
 		fileChooser.setAcceptAllFileFilterUsed(false);
-		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
 		int userChoice = fileChooser.showSaveDialog(getMainWindow());
 		if (userChoice != JFileChooser.APPROVE_OPTION)
 			return;
