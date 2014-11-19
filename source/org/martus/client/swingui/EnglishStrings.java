@@ -488,7 +488,7 @@ public class EnglishStrings
 "button:UseNewCustomFields=Use New",
 "button:CloseHelp=Close Help",
 "button:SearchFinalBulletinsOnly=Only search most recent version of records",
-"button:SearchSameRowsOnly=Match grid column specifications in the search screen to a single row of record grid data. See the search Help screen for additional guidance on this advanced option.",
+"button:SearchSameRowsOnly=Match multi-item list details in the search screen to a single item. See the search Help screen for additional guidance on this advanced option.",
 "button:DeleteSelectedGridRow=Delete Selected Row",
 "button:InsertEmptyGridRow=Insert Row",
 "button:AppendEmptyGridRow=Append Row",
@@ -1496,7 +1496,7 @@ public class EnglishStrings
 "field:timedout1=Martus is still running in the background, but has locked the screen for security.  You must sign in to Martus again to continue working.",
 "field:timedout2=Any unsaved records will be lost unless you sign in to Martus again and save them.",
 "field:defaultFolderName=New Folder",
-"field:SearchBulletinRules=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNOTE: Records that appear only in the Discarded folder will not be searched.",
+"field:SearchBulletinRules=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNOTE: Records that appear only in the Trash will not be searched.",
 "field:SearchBulletinAddingRules=Press Enter to create a new row in the search query.",
 "field:SearchBulletinHelp=Click '#SearchHelpButton#' to get additional information on searching.",
 "field:AccountInfoUserName=Username: ",
@@ -1627,76 +1627,70 @@ public class EnglishStrings
 "field:FancySearchHelpMsg3=" + 
 	"You can use the word #Or# or #And#, or you can use the English words \"#OrEnglish#\" and \"#AndEnglish#\" to search.\n\n" +  
 	"You need to put spaces before and after any #Or# / #And# keywords you use in your search.\n",
-"field:FancySearchHelpMsg4=" +
-	"If you want all of your grid search criteria to be met in a single record grid row, " +
-	"please check the \"Match grid column specifications\" checkbox. " +
-	"For example, if you want to search for a specific victim name in a single row in your records created after a certain date, " +
-	"select the checkbox and enter the following fields in the Search screen: " +
-	"\"Victim Information: First Name\" = x and \"Victim Information: Last Name\" = y and \"Date Created\" >= YYYY-Mon-DD. " +
-	"If you do not select the \"Match grid column specifications\" checkbox, " +
-	"Martus will find records created after your specified date where any row has the first name you specified " +
-	"and any other row has the last name specified, but not necessarily in the same record row " +
-	"(you could have a row with \"First Name\" = x and \"Last Name\" = b, " +
-	"and a different row with \"First Name\" = a and \"Last Name\" = y, " +
-	"and Martus will find that record as matching the search because you did not specify that it had to match in a single row)" +
-	"\n\n",
-"field:FancySearchHelpMsg5= Additional Search Notes:\n" +
-	"\n " +
-	"1. Because Martus searches all rows of any grid (table) fields for your criteria, " +
-	"it may find records where one grid row matches your criteria but other rows do not.  " +
-	"For example you could have a record with a grid that has a location field in it and you have multiple rows of data " +
-	"in the grid with locations A, B, and C.  If you search for records where location != C (does not equal C), " +
-	"Martus will find that record because there are 2 rows in the record grid where the location is not C, " +
-	"even though there is one row where the locations IS C.\n" +
-	"\n " +
-	"2. " +
-	"In this release, if you are searching on a multi-level dropdown, all searches are exact matches, " +
-	"not partial or \"starts with\" matches.  " +
-	"This means that you have to pick the exact level at which you want to be searching.  " +
-	"For example, an \"Event Location\" field that has three levels (Region/City/Neighborhood) " +
-	"will have three entries in the search field list:  Event Location: Region, Event Location: City, and Event Location: Neighborhood.  " +
-	"So if you want to find any records that have an Event Location anywhere in Region X (regardless of the City), " +
-	"you have to pick the \"Event Location: Region\" field to search on and pick Region X off the dropdown list choices. " +
-	"If you pick Event Location: City to search on and then pick Region X but leave the City level blank, " +
-	"Martus will only find entries where there was no City data entered  (City was blank), " +
-	"as opposed to ANY location with Region X regardless of what data was entered at the City level.\n" +
-	"\n " +
-	"3. " +
-	"If you do not see your search terms/dates in the final version of the record displayed in the Search Results folder, " +
-	"your criteria may have been matched in an earlier version of the record.  " +
-	"You can access previous versions by clicking the \"Record Details...\" button at the top of the record.  " +
-	"To search only the most recent versions of records, select Only Search Most Recent Versions of Records " +
-	"in the Search dialog box.\n" +
-	"\n " +
-	"4. " +
-	"If you have fields in different records or from different customizations that are exactly the same, " +
-	"Martus will combine them in any Search and Report field lists.  " +
-	"And while Martus warns you about duplicate labels where you are creating a new record customization, " +
-	"it is possible that over time, you may have records with different customizations that ended up with the same labels " +
-	"(e.g. maybe you changed a text field to a dropdown field but kept the same label).  " +
-	"In these cases, Martus will display both fields in the search screen, " +
-	"and try to help you figure out the difference between the fields by displaying what the field type and " +
-	"tag are in the field selection lists.  Also, if you have fields with the same tag but different labels and/or field types, " +
-	"Martus may use the tag and field type to try and determine when different fields were meant to be the same.  " +
-	"So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion. " +
-	"Please see the \"Customize Fields\" Help screen for more guidelines on creating fields for searching.\n" +
-	"\n " +
-	"5. " +
-	"You may sometimes see duplicate entries in dropdown list search criteria values in the search screen.  " +
-	"If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria " +
-	"dropdown list options are the labels for each list entry, but the codes you defined determine how many entries " +
-	"there will be in the search dropdown list (see the \"Customize Fields\" Help screen for more information about " +
-	"creating custom dropdown fields). So if you have different Reusable Choices codes with the same label in " +
-	"different record customizations in your account, the labels will show up twice in search dropdown lists " +
-	"(i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks " +
-	"like \"label1\" and your search will be on records that have that label, " +
-	"regardless of which code the customization had for the label).  " +
-	"And if you have the same Reusable Choices code with different labels in different record customizations in your account, " +
-	"the search dropdown list for that code will show both values separated by a semicolon " +
-	"(i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks " +
-	"like \"label1; label2\" and your search will be on records that have either of those labels).\n" +
-	"\n" +
-	"For additional help with searching, email martus@benetech.org.",
+"field:FancySearchHelpMsg4="
++ "If you want all of your multi-item list search criteria to be met in a single list item, "
++ "please check the \"Match multi-item list details\" checkbox. For example, "
++ "if you want to search for a specific victim name in a single item in your records created after a certain date, "
++ "select the checkbox and enter the following fields in the Search screen: \"Victim Information: First Name\" = x and "
++ "\"Victim Information: Last Name\" = y and \"Date Created\" >= YYYY-Mon-DD. "
++ "If you do not select the \"Match multi-item details\" checkbox, "
++ "Martus will find records created after your specified date where any item has the first name you specified and any other item has the last name specified, "
++ "but not necessarily in the same item (you could have an item with \"First Name\" = x and \"Last Name\" = b, "
++ "and a different item with \"First Name\" = a and \"Last Name\" = y, "
++ "and Martus will find that record as matching the search because you did not specify that it had to match in a single item)\n\n",
+"field:FancySearchHelpMsg5= Additional Search Notes:\n\n"
++ " 1. Because Martus searches all details of any multi-item list for your criteria, "
++ "it may find records where one item detail matches your criteria but other details do not. "
++ "For example you could have a record with an item that has a location field in it and you have "
++ "multiple details in the item with locations A, B, and C. "
++ "If you search for records where location != C (does not equal C), "
++ "Martus will find that record because there are 2 details in the record item where the location is not C, "
++ "even though there is one item where the locations IS C."
++ "\n\n"
++ " 2. In this release, if you are searching on a multi-level dropdown, "
++ "all searches are exact matches, not partial or \"starts with\" matches. "
++ "This means that you have to pick the exact level at which you want to be searching. "
++ "For example, an \"Event Location\" field that has three levels (Region/City/Neighborhood) "
++ "will have three entries in the search field list: Event Location: Region, "
++ "Event Location: City, and Event Location: Neighborhood. "
++ "So if you want to find any records that have an Event Location anywhere in Region X "
++ "(regardless of the City), you have to pick the \"Event Location: Region\" "
++ "field to search on and pick Region X off the dropdown list choices. "
++ "If you pick Event Location: City to search on and then pick Region X but leave the City level blank, "
++ "Martus will only find entries where there was no City data entered (City was blank), "
++ "as opposed to ANY location with Region X regardless of what data was entered at the City level."
++ "\n\n"
++ " 3. If you do not see your search terms/dates in the final version of the record displayed in the Search Results folder, "
++ "your criteria may have been matched in an earlier version of the record. "
++ "You can access previous versions by clicking the \"Record Details...\" button at the bottom of the record. "
++ "To search only the most recent versions of records, select Only Search Most Recent Versions of Records in the Search dialog box."
++ "\n\n"
++ " 4. If you have fields in different records or from different customizations that are exactly the same, "
++ "Martus will combine them in any Search and Report field lists. "
++ "And while Martus warns you about duplicate labels where you are creating a new record customization, "
++ "it is possible that over time, you may have records with different customizations that ended up with the same labels "
++ "(e.g. maybe you changed a text field to a dropdown field but kept the same label). "
++ "In these cases, Martus will display both fields in the search screen, "
++ "and try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists. "
++ "Also, if you have fields with the same tag but different labels and/or field types, "
++ "Martus may use the tag and field type to try and determine when different fields were meant to be the same. "
++ "So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion."
++ "\n\n"
++ " 5. You may sometimes see duplicate entries in dropdown list search criteria values in the search screen. "
++ "If you pick a Reusable Choices dropdown field to search on, "
++ "the values that are displayed as the criteria dropdown list options are the labels for each list entry, "
++ "but the codes you defined determine how many entries there will be in the search dropdown list. "
++ "So if you have different Reusable Choices codes with the same label in different record customizations in your account, "
++ "the labels will show up twice in search dropdown lists "
++ "(i.e. if you used label1 for both code1 and code2, "
++ "you will see 2 entries in the search dropdown that looks like \"label1\" and your search will be on records that have that label, "
++ "regardless of which code the customization had for the label). "
++ "And if you have the same Reusable Choices code with different labels in different record customizations in your account, "
++ "the search dropdown list for that code will show both values separated by a semicolon "
++ "(i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like \"label1; label2\" "
++ "and your search will be on records that have either of those labels)."
++ "\n\n"
++ "For additional help with searching, see the documentation at martus.org or email martus@benetech.org.",
 "field:SearchProgress=Progress: ",
 "field:ReportSearchProgress=Progress: ",
 "field:SearchFound=#NumberBulletinsFound# records matched the search, and have been added to the Search Results folder.",
