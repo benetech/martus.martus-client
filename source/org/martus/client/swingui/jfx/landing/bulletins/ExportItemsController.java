@@ -255,8 +255,7 @@ public class ExportItemsController extends FxController
 		fileChooser.setInitialFileName(currentUniqueFile.getName());
 		FormatFilter fileFilter = getFormatFilter();
 		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter(fileFilter.getDescription(), fileFilter.getWildCardExtension()),
-				new FileChooser.ExtensionFilter(localization.getFieldLabel("AllFiles"), "*.*"));
+				new FileChooser.ExtensionFilter(fileFilter.getDescription(), fileFilter.getWildCardExtension()));
 
 		return fileChooser.showSaveDialog();
 	}
