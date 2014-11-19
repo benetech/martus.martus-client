@@ -284,7 +284,8 @@ public class FxLandingShellController extends FxNonWizardShellController
 	@FXML
 	private void onQuickSearch(ActionEvent event)
 	{
-		doAction(new  ActionMenuQuickSearch(getMainWindow(), searchText.getText()));
+		String displayableSearchText = searchText.getText();
+		doAction(new  ActionMenuQuickSearch(getMainWindow(), displayableSearchText));
 		setTitleBarToSearch();
 	}
 	
