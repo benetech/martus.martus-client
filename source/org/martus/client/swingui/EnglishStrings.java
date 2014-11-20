@@ -399,9 +399,9 @@ public class EnglishStrings
 "field:notifyLegacyPublicIsPrivateMessagecause=Note: Any record data made public using previous versions of Martus will no longer be public in the new Martus system.",
 
 "tooltip:ShowTrash=Trash",
-"tooltip:CaseSettings=Case Settings",
-"tooltip:DeleteCase=Delete Case",
-"tooltip:AddCase=Add Case",
+"tooltip:CaseSettings=Settings",
+"tooltip:DeleteCase=Delete",
+"tooltip:AddCase=Add",
 "tooltip:EmptyTrash=Empty Trash",
 "tooltip:DeleteItem=Delete",
 "tooltip:MoveItem=Move",
