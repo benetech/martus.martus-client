@@ -1,0 +1,25 @@
+.menu-bar .label
+{
+  -fx-font-family: "Zawgyi-One";
+}
+
+.menu .label
+{
+  -fx-font-family: "Zawgyi-One";
+}
+
+.toolbarLabel {
+  -fx-font-family: "Zawgyi-One";
+}
+
+.toolbarButton {
+  -fx-font-family: "Zawgyi-One";
+}
+
+.toolbarButton:hover {
+  -fx-font-family: "Zawgyi-One";
+}
+
+.toolbarButton:pressed {
+  -fx-font-family: "Zawgyi-One";
+}
