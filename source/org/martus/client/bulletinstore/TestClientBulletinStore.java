@@ -343,9 +343,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     public void testCreateNewDraftWithCurrentTemplateButDataAndHistoryFrom() throws Exception
     {
 		MockBulletinStore clientStore = new MockBulletinStore(security);
-    	MartusCrypto otherSecurity = MockMartusSecurity.createOtherClient();
     	
-    	Bulletin original = createImmutableBulletin(otherSecurity);
+    	Bulletin original = createMutableBulletin(security);
 
     	String customTag = "custom";
     	FieldSpec customFieldSpec = FieldSpec.createCustomField(customTag, "Label", new FieldTypeNormal());
@@ -367,6 +366,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	clientStore.saveBulletin(original);
 
     	Bulletin clone = clientStore.createNewDraftWithCurrentTemplateButDataAndHistoryFrom(original);
+    	assertEquals(original.getUniversalId(), clone.getUniversalId());
     	assertEquals(original.get(customTag), clone.get(customTag));
     	assertEquals(original.getHistory().toString(), clone.getHistory().toString());
     	assertEquals(0, clone.getAuthorizedToReadKeys().size());

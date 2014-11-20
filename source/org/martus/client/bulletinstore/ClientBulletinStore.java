@@ -1547,6 +1547,7 @@ public class ClientBulletinStore extends BulletinStore
 
 		BulletinHeaderPacket oldHeader = original.getBulletinHeaderPacket();
 		BulletinHeaderPacket newHeader = newDraft.getBulletinHeaderPacket();
+		newHeader.setUniversalId(oldHeader.getUniversalId());
 		newHeader.setExtendedHistory(oldHeader.getExtendedHistory());
 		newHeader.setAuthorizedToReadKeysPending(oldHeader.getAuthorizedToReadKeysPending());
 		return newDraft;
