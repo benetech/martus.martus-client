@@ -38,6 +38,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.TranslucentWindowObscurer;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
@@ -67,28 +68,24 @@ public abstract class FxInSwingController extends FxController
 		window.addWindowListener(windowHandler);
 		window.addWindowFocusListener(windowHandler);
 		
-		// FIXME: Commented-out code in an attempt to work around the Mac crashing
-		// To restore, un-comment the 6 lines of code, and then delete the call to 
-		// window.addMouseListener since we really want to listen to the glasspane
-//		Component glassPane = new TranslucentWindowObscurer();
-//		installGlassPane(glassPane);
+		Component glassPane = new TranslucentWindowObscurer();
+		installGlassPane(glassPane);
 		GlassPaneMouseHandler glassPaneMouseHandler = new GlassPaneMouseHandler(fronter);
-//		glassPane.addMouseListener(glassPaneMouseHandler);
-		window.addMouseListener(glassPaneMouseHandler);
+		glassPane.addMouseListener(glassPaneMouseHandler);
 		
-//		glassPane.setVisible(true);
+		glassPane.setVisible(true);
 		try
 		{
 			popupStage.showAndWait();
 		}
 		finally
 		{
-//			glassPane.removeMouseListener(glassPaneMouseHandler);
+			glassPane.removeMouseListener(glassPaneMouseHandler);
 	
 			window.removeWindowFocusListener(windowHandler);
 			window.removeWindowListener(windowHandler);
 			
-//			glassPane.setVisible(false);
+			glassPane.setVisible(false);
 		}
 	}
 
