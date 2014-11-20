@@ -100,8 +100,9 @@ public class SettingsforSystemController extends FxInSwingController
 		ObservableList<ChoiceItem> availableLanguages = FXCollections.observableArrayList(FxSelectLanguageController.getAvailableLanguages(localization));
 		languageSelection.setItems(availableLanguages);
 		originalLanguageChoiceItem = FxSelectLanguageController.findCurrentLanguageChoiceItem(getLocalization());
-		languageSelection.getSelectionModel().selectedItemProperty().addListener(new LanguageSelectionListener());
 		languageSelection.getSelectionModel().select(originalLanguageChoiceItem);
+		languageSelection.getSelectionModel().selectedItemProperty().addListener(new LanguageSelectionListener());
+		updateUseZawgyiFontButton(originalLanguageChoiceItem);
 	}
 	
 	class LanguageSelectionListener implements ChangeListener<ChoiceItem>
@@ -117,15 +118,18 @@ public class SettingsforSystemController extends FxInSwingController
 	protected void updateZawgyiFont(ChoiceItem itemSelected)
 	{
 		if(itemSelected.getCode().equals(MiniLocalization.BURMESE))
-		{
 			useZawgyiFont.selectedProperty().setValue(true);
-			useZawgyiFont.setDisable(true);
-		}
 		else
-		{
 			useZawgyiFont.selectedProperty().setValue(false);
+		updateUseZawgyiFontButton(itemSelected);
+	}
+	
+	private void updateUseZawgyiFontButton(ChoiceItem selection)
+	{
+		if(selection.getCode().equals(MiniLocalization.BURMESE))
+			useZawgyiFont.setDisable(true);
+		else
 			useZawgyiFont.setDisable(false);
-		}
 	}
 
 	@Override
