@@ -207,11 +207,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	{
 		ActionMenuModifyFxBulletin actionDoer = new ActionMenuModifyFxBulletin(getMainWindow());
 		performActionOnSelectedBulletin(actionDoer);
-
-		// NOTE: We haven't gotten sorting to work properly yet, 
-		// so as a workaround for now, we will clear the sort
-		// whenever the user wants to edit a bulletin
-		itemsTable.getSortOrder().clear();
+		clearBulletinListSortedOrder();
 	}
 
 	private void performActionOnSelectedBulletin(ActionMenuFxBulletin actionDoer)
@@ -339,6 +335,8 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		// NOTE: We haven't gotten sorting to work properly yet, 
 		// so as a workaround for now, we will clear the sort
 		// whenever a bulletin is modified
+		// whenever the user wants to edit a bulletin
+		// whenever user switches folders
 		itemsTable.getSortOrder().clear();
 	}
 
