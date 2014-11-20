@@ -63,6 +63,7 @@ import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.client.swingui.jfx.generic.controls.FxTimestampTableCellFactory;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
+import org.martus.client.swingui.jfx.landing.FolderSelectionListener;
 import org.martus.client.swingui.jfx.landing.FxLandingShellController;
 import org.martus.client.swingui.jfx.landing.cases.CaseListItem;
 import org.martus.client.swingui.jfx.landing.cases.CaseListProvider;
@@ -79,7 +80,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.TokenReplacement;
 
-public class BulletinsListController extends AbstractFxLandingContentController
+public class BulletinsListController extends AbstractFxLandingContentController implements FolderSelectionListener
 {
 
 	public BulletinsListController(UiMainWindow mainWindowToUse, BulletinListProvider bulletinListProviderToUse)
@@ -337,7 +338,8 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		// whenever a bulletin is modified
 		// whenever the user wants to edit a bulletin
 		// whenever user switches folders
-		itemsTable.getSortOrder().clear();
+		if(itemsTable != null)
+			itemsTable.getSortOrder().clear();
 	}
 
 	@FXML
@@ -581,6 +583,12 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		}
 	}
 
+	@Override
+	public void folderWasSelected(BulletinFolder folder)
+	{
+		clearBulletinListSortedOrder();
+	}
+	
 	public void updateContents()
 	{
 		//TODO should be able to invalidate window to have the changes updated, which doesn't seem to work.
@@ -633,4 +641,5 @@ public class BulletinsListController extends AbstractFxLandingContentController
 	private HBox statusBar;
 
 	protected BulletinListProvider bulletinTableProvider;
+
 }
