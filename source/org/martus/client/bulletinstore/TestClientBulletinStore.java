@@ -340,7 +340,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("has history?", 0, clone.getHistory().size());
     }
     
-    public void testCreateNewDraftWithCurrentTemplateButDataAndHistoryFrom() throws Exception
+    public void testCreateNewDraftWithCurrentTemplateButIdAndDataAndHistoryFrom() throws Exception
     {
 		MockBulletinStore clientStore = new MockBulletinStore(security);
     	
@@ -365,7 +365,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	original.getAuthorizedToReadKeys().add(new HeadquartersKey(MockMartusSecurity.createServer().getPublicKeyString()));
     	clientStore.saveBulletin(original);
 
-    	Bulletin clone = clientStore.createNewDraftWithCurrentTemplateButDataAndHistoryFrom(original);
+    	Bulletin clone = clientStore.createNewDraftWithCurrentTemplateButIdAndDataAndHistoryFrom(original);
     	assertEquals(original.getUniversalId(), clone.getUniversalId());
     	assertEquals(original.get(customTag), clone.get(customTag));
     	assertEquals(original.getHistory().toString(), clone.getHistory().toString());
