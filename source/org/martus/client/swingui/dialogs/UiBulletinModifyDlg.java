@@ -192,7 +192,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	{
 		Bulletin bulletinWithOldTemplateButLatestData = getCurrentBulletin();
 		view.copyDataToBulletin(bulletinWithOldTemplateButLatestData);
-		Bulletin clonedBulletin = store.createNewDraftWithCurrentTemplateButDataAndHistoryFrom(bulletinWithOldTemplateButLatestData);
+		Bulletin clonedBulletin = store.createNewDraftWithCurrentTemplateButIdAndDataAndHistoryFrom(bulletinWithOldTemplateButLatestData);
 		return clonedBulletin;
 	}
 
