@@ -203,7 +203,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 //				"Please contact martus@bentech.org with any feedback or questions."}, 
 //				new String[] {"OK"});
 		
-		restrictToOnlyTestServers();
+		// Uncomment the call to restrictToOnlyTestServers for test builds which might
+		// generate bad data that we don't want cluttering up production servers
+//		restrictToOnlyTestServers();
 		
 		File timeoutDebug = new File(getApp().getMartusDataRootDirectory(), "timeout.1min");
 		if(timeoutDebug.exists())
