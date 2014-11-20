@@ -44,6 +44,7 @@ import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
 import org.martus.clientside.FormatFilter;
+import org.martus.common.MartusLogger;
 
 public abstract class FxInSwingController extends FxController
 {
@@ -77,6 +78,7 @@ public abstract class FxInSwingController extends FxController
 		try
 		{
 			popupStage.showAndWait();
+		    MartusLogger.log("Back from showAndWait");
 		}
 		finally
 		{
@@ -86,6 +88,7 @@ public abstract class FxInSwingController extends FxController
 			window.removeWindowListener(windowHandler);
 			
 			glassPane.setVisible(false);
+		    MartusLogger.log("Glass pane is now invisible");
 		}
 	}
 
