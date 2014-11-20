@@ -325,8 +325,12 @@ abstract public class FxController implements Initializable
 		FxController.applyStyleSheets(scene.getStylesheets(), fxmlDir, getLocalization().getCurrentLanguageCode(), POPUP_CSS);
 		popupStage.setScene(scene);
 	    showModalPopupStage(popupStage);
+	    MartusLogger.log("Back from showModalPopupStage");
 	    if(controller.getThrownException() != null)
-	    	throw (Exception)controller.getThrownException();
+	    {
+		    MartusLogger.log("Re-throwing exception");
+	    	throw new Exception(controller.getThrownException());
+	    }
 	}
 
 	protected void showModalPopupStage(Stage popupStage)
