@@ -1,0 +1,15 @@
+.editFieldLabel { 
+  -fx-font-family: "Zawgyi-One";
+}
+
+.titleText {
+  -fx-font-family: "Zawgyi-One";
+}
+
+.systemFieldTitle {	
+  -fx-font-family: "Zawgyi-One";
+	}
+
+.accordion .editFieldLabel { 
+  -fx-font-family: "Zawgyi-One";
+}
