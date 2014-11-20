@@ -299,10 +299,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 
 	public void loadBulletinData(Set bulletinUids)
 	{
-		// NOTE: We haven't gotten sorting to work properly yet, 
-		// so as a workaround for now, we will clear the sort
-		// whenever we load a new set of bulletins (e.g. change folder)
-		itemsTable.getSortOrder().clear();
+		clearBulletinListSortedOrder();
 		bulletinTableProvider.loadBulletinData(bulletinUids);
 	}
 	
@@ -323,10 +320,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		{
 			try
 			{
-				// NOTE: We haven't gotten sorting to work properly yet, 
-				// so as a workaround for now, we will clear the sort
-				// whenever a bulletin is modified
-				itemsTable.getSortOrder().clear();
+				clearBulletinListSortedOrder();
 				boolean shouldReSortTable = bulletinTableProvider.updateBulletin(bulletin);
 				if(shouldReSortTable)
 					sortByMostRecentBulletins();
@@ -336,9 +330,18 @@ public class BulletinsListController extends AbstractFxLandingContentController
 				logAndNotifyUnexpectedError(e);
 			}
 		}
+
 		public Bulletin bulletin;
 	}
 	
+	protected void clearBulletinListSortedOrder()
+	{
+		// NOTE: We haven't gotten sorting to work properly yet, 
+		// so as a workaround for now, we will clear the sort
+		// whenever a bulletin is modified
+		itemsTable.getSortOrder().clear();
+	}
+
 	@FXML
 	public void onMouseClick(MouseEvent mouseEvent) 
 	{
@@ -388,6 +391,7 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		{
 			logAndNotifyUnexpectedError(e);
 		}
+		clearBulletinListSortedOrder();
 		bulletinTableProvider.updateContents();
 	}
 	
@@ -422,8 +426,6 @@ public class BulletinsListController extends AbstractFxLandingContentController
 		{
 			logAndNotifyUnexpectedError(e);
 		}
-		
-		
 	}
 
 	@FXML
