@@ -1,10 +1,103 @@
-# Martus Client Translation File
+﻿# Martus Client Translation File
 # Language code:  es
 # Language name:  Spanish
 # Translated by:
 # Exported date:  Wed Nov 19 13:15:24 PST 2014
 # Client version: pre-5.0
 # Client build:   2014-11-18.3471
+#
+# This file MUST be saved in UTF-8 format!
+# Lines beginning with # are comments and are ignored by Martus
+# Each entry has two lines. The first line is the current English
+#    text, and the second line consists of: KEY=VALUE
+#    (e.g. -c47a-button:customHelp=<Help> )
+# Do not modify any KEY. Do localize every VALUE.
+# Each VALUE that needs to be translated has <> around it.
+#    As you translate each VALUE, remove its <>
+# When a non-English VALUE appears inside <> it is because the English
+#    translation has changed. Verify or update the translation to 
+#    match the new English text, and remove the <>
+# If there is an English VALUE inside <> , it is because it is a field
+#    added after the last release. Remove the english, insert/update the
+#    VALUE translation to match the new English text which is in the
+#    comment line directly above it, and remove the <>
+# If you name it Martus-es.mtf, put the file in your
+#     Martus directory, and create a file (which can be empty)
+#     called use_unofficial_translations.txt in your Martus directory,
+#     then Martus will automatically read it.  You will receive a warning
+#     message when you use this file while testing.
+# In Martus, to choose a language, pick one from the drop-down list
+#    in the lower left-hand corner of the signin screen, or after you
+#    are logged in, go to Options/Preferences.
+#
+#  1.  do NOT translate "\n" (used for new lines)
+#      And do NOT put spaces before the  equal sign after field:xxx.
+#      [should be "field:fieldtag=fieldtext" instead of
+#  	   "field:fieldtag = fieldtext" (space before the equals sign)]
+#  2.  do NOT create any user-entered new-lines/carriage-returns
+#      (by using the enter key) in any mtf entry
+#      (from the field:xxx to the end of the translated text),
+#      since a continuous block of text is needed.
+#  3.  in field:VirtualKeyboardKeys, keep the english alphabet, but include any
+#      non-english characters at the end of the english alphabet/numbers/special
+#      characters (e.g. attach entire Thai alphabet at the end of the line)
+#  4.  in CreateCustomFieldsHelp2/3 fields, you can translate tags into foreign
+#      characters (but without punctuation or spaces)
+#  5.  when there are file or directory names, do not translate them
+#      (e.g.  "acctmap.txt" and "packets"
+#      in field:confirmWarnMissingAccountMapFilecause=Warning: acctmap.txt
+#      file in your account's packets directory...)
+#  6.  do not translate the words "Martus" or "Benetech" or "Tor"
+#  7.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
+#      CreateCustomFieldsHelp2, but put translation in parentheses after
+#      english : e.g.  'author' (translation-of-author from mtf, e.g. autor in spanish), so users know what they refer to
+#  8.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
+#      DATE), but put translation in parentheses after english, so users know
+#      what they refer to.
+#  9.  Leave field types in English in CreateCustomFieldsHelp3 examples
+#      (e.g. BOOLEAN, DATE)
+# 10.  In CreateCustomFieldsHelp3, do not translate words between angle brackets in the XML for custom fields, such as:
+#      <Field type='SECTION'>, <Field type='STRING'>, <Field type='BOOLEAN'>, <Field type='DATE'>, 
+#      <Field type='DATERANGE'>, <Field type='DROPDOWN'>, <Field type='MULTILINE'> 
+#      <Field type='LANGUAGE'>, <Field type='MESSAGE'>, <Field type='GRID'>, 
+#      </Field>, <Tag>, </Tag>, <Label>, </Label>,  <Message>, </Message> 
+#      <Choices>, </Choices>, <Choice>, </Choice>, <DataSource>, </DataSource>
+#      <GridFieldTag>, </GridFieldTag>, <GridColumnLabel>, </GridColumnLabel> 
+#      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>, 
+#      <Column type='STRING'>, <Column type='BOOLEAN'>, <Column type='DATE'>,
+#      <Column type='DATERANGE'>, <Column type='DROPDOWN'> 
+#      <KeepWithPrevious/>, <RequiredField/>, <DefaultValue>, </DefaultValue>,
+#      <MinimumDate>, </MinimumDate>, <MaximumDate>, </MaximumDate>, <MaximumDate/>.
+#      For Reusable choices sections, translate anything within single quotes '...', but not  <UseReusableChoices code= , </UseReusableChoices>
+#      <ReusableChoices code= , </ReusableChoices>, label= , <Choice code= . 
+# 10b.  In CreateCustomFieldsHelp2, change the "ddd" in "<DefaultValue>ddd</DefaultValue>" to whatever letter the translation of "default" begins with.
+# 10c.  For  CreateCustomFieldsHelp1/2/2b/3, check the User Guide section 10b to see if the text has already been translated and use the same translation for consistency.
+# 11.  Do not translate words that are surrounded by #'s, but you may move
+#      them around as grammatically appropriate.
+#      Example: #TotalNumberOfFilesInBackup#, #Titles#, #FieldLabel#, etc.
+#      as these words will be replaced when the program runs with
+#      a particular value.
+#      For Example. #TotalNumberOfFilesInBackup# = '5'
+#                   #Titles# = 'A list of bulletin titles'
+# 12.  Do not translate the numbers in the field:translationVersion string.
+# 13.  Do not translate the numbers in the field:ErrorCustomFields string.
+# 14.  For Thai, Afghan and Persian months, please do the following: 
+#          - for Thai translation, Thai months should be the same as the translation
+#            of default/Gregorian months, and Afghan and Persian dates are the same as in English.
+#          - for Afghan or Persian translation, Thai and Afghan and Persian months 
+#            should be the same as the translation of default/Gregorian months
+#          - for Arabic translation, Thai months should be the same as 
+#            the translation of default/Gregorian months, but do an Arabic translation
+#            (or transliteration) of Afghan and Persian dates (not the same as in English).
+#          - for all other languages, Thai and Afghan and Persian dates can be the same
+#            as the translation of default/Gregorian months 
+# 15       - We have file filters like 'Martus Report Format (.mrf)'
+#            and 'Martus Search Specification (.mss)'.
+#            The descriptive names should be translated, but the (.mrf) and (.mss)
+#            must not be translated. Similarly for .html, .htm, .mba, .mpi, .xml, .mct, .jpeg, .jpg, and .dat file extensions.
+# 16.  If you want your language to appear right to left,
+#      Uncomment the next line (by removing the # in front of #!right-to-left)
+#!right-to-left
 #
 
 #______________________=Add Contact...
@@ -71,7 +164,7 @@
 -aed3-button:ContactVerified=Verificado
 
 #____________________=Contacts
--b0dd-button:Contacts=<Contacts>
+-b0dd-button:Contacts=Contactos
 
 #_____________________________=Save and Close
 -7af7-button:ContactsSaveClose=Guardar y cerrar
@@ -329,7 +422,7 @@
 -2b03-button:ServerComplianceReject=Rechazar
 
 #__________________________________=Author
--5fda-button:ServerSyncRecordAuthor=<Author>
+-5fda-button:ServerSyncRecordAuthor=Autor
 
 #________________________________________=Last Saved
 -eb05-button:ServerSyncRecordLastModified=<Last Saved>
@@ -341,7 +434,7 @@
 -fa2e-button:ServerSyncRecordSize=<Size (Kb)>
 
 #_________________________________=Title
--768e-button:ServerSyncRecordTitle=<Title>
+-768e-button:ServerSyncRecordTitle=Título
 
 #______________________=Off
 -e3de-button:SettingOff=<Off>
@@ -374,7 +467,7 @@
 -aedf-button:VerifyContactLater=Verificar luego
 
 #____________________________=Verify Now
--b8b4-button:VerifyContactNow=<¡Verificar!>
+-b8b4-button:VerifyContactNow=Verificar ahora
 
 #_______________________________________=View Selected Version...
 -f943-button:ViewPreviousBulletinVersion=Ver la versión seleccionada...
@@ -389,7 +482,7 @@
 -3c2c-button:YesCopyWithUnknownContent=<Yes, copy what you can over>
 
 #_________________________=Add
--61cc-button:addattachment=<Añadir adjunto>
+-61cc-button:addattachment=Añadir
 
 #___________________________=Name
 -709a-button:attachmentLabel=Nombre del adjunto
@@ -527,7 +620,7 @@
 -0d23-field:AccessTokenInstructions=Credencial de acceso
 
 #_____________________________=Access Token: 
--d42d-field:AccountAccessToken=<Credencial de acceso a la cuenta de Martus:>
+-d42d-field:AccountAccessToken=Credencial de acceso a la cuenta:
 
 #_________________________=Account Contact Information
 -c89a-field:AccountContact=Información de contacto de la cuenta
@@ -536,7 +629,7 @@
 -696e-field:AccountContactInformation=<Esta información es opcional, y se usa para pre-rellenar sus boletines para su comodidad. Se almacena en su computadora local y no se envía al servidor Martus.>
 
 #__________________________________=#AccountId# #PublicCode#
--ca80-field:AccountIdWithPublicCode=<#AccountId# #PublicCode#>
+-ca80-field:AccountIdWithPublicCode=#AccountId# #PublicCode#
 
 #_______________________________=Account Directory: 
 -c354-field:AccountInfoDirectory=Carpeta de la cuenta:
@@ -545,13 +638,13 @@
 -5662-field:AccountInfoPublicCode=Código público (antiguo):
 
 #__________________________________=Public Code:
--63bc-field:AccountInfoPublicCode40=<Código público (nuevo):>
+-63bc-field:AccountInfoPublicCode40=Código público:
 
 #_______________________________=Public Account Id:
 -6723-field:AccountInfoPublicKey=Identificación (clave) pública de la cuenta:
 
 #______________________________=Username: 
--869c-field:AccountInfoUserName=<Nombre de usuario:>
+-869c-field:AccountInfoUserName=Nombre de usuario:
 
 #_____________________________=Account Information
 -0cbd-field:AccountInformation=<Account Information>
@@ -560,7 +653,7 @@
 -6cc0-field:AccountSharing=<Account Sharing>
 
 #______________________________________=create a Username
--e8c1-field:AccountUserNameInstructions=<cree su nombre de usuario>
+-e8c1-field:AccountUserNameInstructions=cree su nombre de usuario
 
 #_________________________________=To send information through Martus to your contacts, pull their public key from the Martus server using their access token. Verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add them here. If you do not have this information now, you will be able to add contacts later.
 -70e8-field:AddContactInstructions=Para enviar información a través de Martus a sus contactos, obtenga sus claves públicas desde el servidor Martus usando sus credenciales de acceso. Verifique que ha obtenido las claves correctas comprobando el código público de sus claves. Pida a sus contactos sus credenciales de acceso y códigos públicos para añadirlos aquí. Si no tiene ahora esta información, podrá añadir contactos luego.
@@ -569,7 +662,7 @@
 -b0dd-field:AddContacts=Contactos
 
 #_________________________=Add New Template
--a13f-field:AddNewTemplate=<Add New Template>
+-a13f-field:AddNewTemplate=Add New Template
 
 #_________________________________=This allows you to update your contacts' access to existing records. Each of the records in the list below will be modified to add the selected contacts' accounts. If a record is sealed, a new version will be created.
 -087f-field:AddPermissionsOverview=<Esto le permite actualizar el acceso de sus contactos a boletines existentes. Cada uno de los boletines en la lista de debajo se modificará para añadir las cuentas de los contactos seleccionados. Si un boletín está sellado, se creará una nueva versión del boletín.>
@@ -617,7 +710,7 @@
 -e9ba-field:AttemptToConnectToServerAndGetCompliance=Tratando de conectar al servidor
 
 #_________________=Author
--5fda-field:Author=<Autor:>
+-5fda-field:Author=Autor:
 
 #_________________________________________=Name here if available otherwise blank
 -6338-field:AuthorNicknameFieldDescription=<Name here if available otherwise blank>
@@ -650,13 +743,13 @@
 -ae7b-field:BackupKeyPairGeneralInfo=<Su par de claves es un elemento necesario para poder leer la información privada de sus boletines o para crear nuevos boletines. Es extremadamente importante conservar copias de seguridad de su par de claves para estar seguro de que siempre va a tener acceso a su información.\n\nMartus le ofrece dos métodos para crear copias de seguridad de su par de claves, puede escoger el que más le convenga pero le recomendamos que use ambos métodos. El primer método crea un único archivo de copia de seguridad de su par de claves, con cifrado protegido por su contraseña, en un medio extraíble (como una unidad USB, un disco CD-ROM o un disquete) o en un disco de red. El segundo método crea una copia de seguridad por partes de su par de claves en #TotalNumberOfFilesInBackup# archivos separados (sin un cifrado protegido con su contraseña) y los copia en múltiples medios extraíbles como disquetes u otros.\n>
 
 #________________________________________________=This method breaks up your key into #TotalNumberOfFilesInBackup# pieces, any #MinimumNumberOfFilesNeededForRecovery# of which will be required to reconstruct the key without requiring a password. If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #TotalNumberOfFilesInBackup# files have been written to removable media disks, you should distribute them to #TotalNumberOfFilesInBackup# different people whom you will remember, but each of whom doesn't know to whom you have given the other files. Do not store any of the disks together.\n
--2192-field:BackupKeyPairToSecretShareInformation=<Este método divide su par de claves en #TotalNumberOfFilesInBackup# partes. Juntando un mínimo de #MinimumNumberOfFilesNeededForRecovery# partes puede reconstruir su par de claves sin necesidad de su contraseña. Si se le olvida su nombre de usuario de Martus o su contraseña, esta es la única manera de recuperar su clave.\n\nUna vez haya guardado las #TotalNumberOfFilesInBackup# partes en medios extraíbles, es necesario que las distribuya entre #TotalNumberOfFilesInBackup# personas diferentes que pueda recordar, pero que no sepan de las otras personas a las que entregó las demás piezas. Nunca guarde los soportes extraíbles juntos, sepárelos siempre para su seguridad.\n\nPara recuperar su par de claves, primero reúna #MinimumNumberOfFilesNeededForRecovery# de las #TotalNumberOfFilesInBackup# partes de la copia de seguridad, y elija 'Restaurar cuenta' y luego 'Restaurar cuenta desde copia de seguridad en múltiples partes' al iniciar sesión en Martus.\n\n>
+-2192-field:BackupKeyPairToSecretShareInformation=Este método divide su par de claves en #TotalNumberOfFilesInBackup# partes. Juntando un mínimo de #MinimumNumberOfFilesNeededForRecovery# partes puede reconstruir su par de claves sin necesidad de su contraseña. Si se le olvida su nombre de usuario de Martus o su contraseña, esta es la única manera de recuperar su clave.\n\nUna vez haya guardado las #TotalNumberOfFilesInBackup# partes en medios extraíbles, es necesario que las distribuya entre #TotalNumberOfFilesInBackup# personas diferentes que pueda recordar, pero que no sepan de las otras personas a las que entregó las demás piezas. Nunca guarde los soportes extraíbles juntos, sepárelos siempre para su seguridad.\n\nPara recuperar su par de claves, primero reúna #MinimumNumberOfFilesNeededForRecovery# de las #TotalNumberOfFilesInBackup# partes de la copia de seguridad, y elija 'Restaurar cuenta' y luego 'Restaurar cuenta desde copia de seguridad en múltiples partes' al iniciar sesión en Martus.\n\n
 
 #____________________________________________________=Please insert disk #
 -b877-field:BackupRecoverKeyPairInsertNextDiskMessage=Por favor inserte el disco número
 
 #_______________________________________________=Backup complete, please give each disk to someone you trust, so that if you forget your Username and/or password in the future you can recreate your account.  You will need #MinimumNumberOfFilesNeededForRecovery# of these disks to recreate your account.
--a721-field:BackupSecretShareCompleteInformation=<Copia de seguridad completada. Por favor entregue cada disco a una persona distinta de su confianza, de tal forma que si olvida su nombre de usuario o contraseña, pueda volver a crear su cuenta de Martus. Necesitará juntar un mínimo de #MinimumNumberOfFilesNeededForRecovery# de esos discos con copias de seguridad para volver a crear su cuenta.>
+-a721-field:BackupSecretShareCompleteInformation=Copia de seguridad completada. Por favor entregue cada disco a una persona distinta de su confianza, de tal forma que si olvida su nombre de usuario o contraseña, pueda volver a crear su cuenta de Martus. Necesitará juntar un mínimo de #MinimumNumberOfFilesNeededForRecovery# de esos discos con copias de seguridad para volver a crear su cuenta.
 
 #________________________=Backup Your Key
 -a49a-field:BackupYourKey=Crear copia de seguridad de su par de claves
@@ -668,7 +761,7 @@
 -0204-field:BackupYourKeyTip1=Asegúrese de guardar una copia del par de claves de su cuenta en un lugar seguro distinto de la computadora donde actualmente tiene instalado Martus, para disponer de ella si necesita restaurar su cuenta.
 
 #____________________________=Martus also offers a way to back up your key in 3 separate pieces, which is the only way for you to access your Martus account and data if you forget your Username and password. You will be prompted to create the 3 piece backup after completing your account setup and we strongly encourage you to do so.
--5264-field:BackupYourKeyTip2=<Martus también ofrece una forma de realizar una copia de seguridad de su par de claves en 5 partes separadas, la que es la única manera de acceder a su cuenta y datos de Martus si olvidó su nombre de usuario y contraseña. Se le solicitará que cree la copia de seguridad en 5 partes después de completar la configuración de su cuenta, y le animamos vivamente a que lo haga.>
+-5264-field:BackupYourKeyTip2=Martus también ofrece una forma de realizar una copia de seguridad de su par de claves en 5 partes separadas, la que es la única manera de acceder a su cuenta y datos de Martus si olvidó su nombre de usuario y contraseña. Se le solicitará que cree la copia de seguridad en 5 partes después de completar la configuración de su cuenta, y le animamos vivamente a que lo haga.
 
 #__________________________=Record Details
 -5522-field:BulletinDetails=<Record Details>
@@ -851,7 +944,7 @@
 -0e2c-field:ConfigureHeadQuartersDefault=¿Por defecto?
 
 #_________________________________=Confirm Username
--5edd-field:ConfirmAccountUserName=<Confirme su nombre de usuario>
+-5edd-field:ConfirmAccountUserName=Confirme su nombre de usuario
 
 #__________________________=Confirm Password
 -c2d4-field:ConfirmPassword=Confirme su contraseña
@@ -899,10 +992,10 @@
 -d48e-field:CreateAccount=Crear una cuenta
 
 #____________________________________=When creating a Username and password for your account, please be aware there is no way to retrieve your Username and password if you forget it. This is for your safety.
--cafe-field:CreateAccountInstructions=<Cuando cree un nombre de usuario y contraseña para su cuenta, por favor sea precavido, porque no hay forma de recuperarlos si los olvida. Esto es así por su seguridad.>
+-cafe-field:CreateAccountInstructions=Cuando cree un nombre de usuario y contraseña para su cuenta, por favor sea precavido, porque no hay forma de recuperarlos si los olvida. Esto es así por su seguridad.
 
 #________________________________=Username:
--17df-field:CreateAccountUserName=<Nombre de usuario:>
+-17df-field:CreateAccountUserName=Nombre de usuario:
 
 #__________________________________=The layout of the records is dictated by an XML document.  The document must begin with <CustomFields> and end with </CustomFields>. By default the standard record fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
 -53b4-field:CreateCustomFieldsHelp1=<La presentación de los boletines está definida por un documento en XML. El documento debe comenzar con <CustomFields> (campos personalizados) y finalizar con </CustomFields> . Por defecto los campos de un boletín estándar se encuentran al principio del documento, pero puede moverlos a otra posición si lo desea. Hay cuatro campos requeridos en la presentación de un boletín que no pueden eliminarse: 'author' (autor), 'entrydate' (fecha de creación), 'language' (idioma) y 'title' (título).\n\n>
@@ -920,7 +1013,7 @@
 -aec2-field:CreateNewUserNamePassword=Introduzca su nuevo nombre de usuario y contraseña.
 
 #_______________________________________________=Note: This backup method requires your username and password to restore your account.
--f588-field:CreateSingleEncryptedFileInformation=<Nota: Este método de creación de copia de seguridad todavía requiere que recuerde su nombre de usuario y contraseña para restaurar su cuenta.>
+-f588-field:CreateSingleEncryptedFileInformation=Nota: Este método de creación de copia de seguridad todavía requiere que recuerde su nombre de usuario y contraseña para restaurar su cuenta.
 
 #__________________________=Please wait. Your account's encryption key is being created.
 -cae1-field:CreatingAccount=Por favor espere. El par de claves de cifrado de su cuenta se está creando.
@@ -1211,7 +1304,7 @@
 -c4d6-field:From=<From:>
 
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your Username.  Each file will be generated with this name and its number sequence.
--4753-field:GetShareFileNameDescription=<El nombre del archivo tiene que ser único e identificable. Le recomendamos no usar su nombre de usuario. Cada archivo será generado con el nombre que escoja y su número en la secuencia.>
+-4753-field:GetShareFileNameDescription=El nombre del archivo tiene que ser único e identificable. Le recomendamos no usar su nombre de usuario. Cada archivo será generado con el nombre que escoja y su número en la secuencia.
 
 #___________________________________=Getting server information
 -90d2-field:GettingServerInformation=Obteniendo los datos del servidor
@@ -1460,7 +1553,7 @@
 -b61b-field:PasswordInstructions=cree una contraseña
 
 #_______________________=- Do not use your Username
--bcd7-field:PasswordTip1=<- No use su nombre de usuario>
+-bcd7-field:PasswordTip1=- No use su nombre de usuario
 
 #_______________________=- Do not use a single dictionary word
 -6002-field:PasswordTip2=- No use una palabra individual de diccionario
@@ -1925,7 +2018,7 @@
 -7dc3-field:UserNameAndPasswordMatches=¡El nombre de usuario y la contraseña son iguales!
 
 #_______________________=- Your Username can contain letters, numbers, punctuation and spaces.
--f047-field:UserNameTip1=<- Su nombre de usuario puede contener letras, números, signos de puntuación y espacios.>
+-f047-field:UserNameTip1=- Su nombre de usuario puede contener letras, números, signos de puntuación y espacios.
 
 #_______________________=- It should have between 8-50 characters, and it is case sensitive.
 -3180-field:UserNameTip2=- Debe tener de 8 a 50 caracteres, y se hace distinción entre mayúsculas y minúsculas.
@@ -1934,7 +2027,7 @@
 -c6f9-field:UserNameTip3=<- Asegúrese de elegir un nombre de usuario que pueda recordar.>
 
 #_______________________=Username Tips:
--c1b3-field:UserNameTips=<Consejos para el nombre de usuario:>
+-c1b3-field:UserNameTips=Consejos para el nombre de usuario:
 
 #______________________________=Username and Password
 -d205-field:UsernameAndPassword=<Username and Password>
@@ -2015,7 +2108,7 @@
 -3db1-field:WizardStep3=Configuración de servidor
 
 #_________________________________=Backup your information to a secure server.
--d130-field:WizardStep3Information=<Mandar una copia de seguridad de su información a un servidor seguro.>
+-d130-field:WizardStep3Information=Mandar una copia de seguridad de su información a un servidor seguro.
 
 #______________________=Contacts
 -b0dd-field:WizardStep4=Contactos
@@ -2033,7 +2126,7 @@
 -22ff-field:WizardStep5Information=Seleccione una plantilla para crear formularios de Martus.
 
 #_____________________________=Backup key
--1ab8-field:WizardStep6Heading=Hacer copia de seguridad de par de claves
+-1ab8-field:WizardStep6Heading=Copia de seguridad de clave
 
 #_________________________________=Make a copy of your account's encryption key to ensure continued access to your account.
 -bb2f-field:WizardStep6Information=Realiza una copia de seguridad del par de claves de cifrado de su cuenta para asegurar la continuidad del acceso a su cuenta.
@@ -2114,13 +2207,13 @@
 -e85a-field:confirmAddingPermissionsToBulletinsCanceleffect=<Si hace esto, los boletines que ya han sido procesados tendrán el acceso de la nueva cuenta de oficina central, pero otros boletines seleccionados no lo tendrán.>
 
 #_______________________________________________=Save your password encrypted key backup file to a single removable medium and store it in a safe place. You can use this backup file, with your username and password, to restore your data.
--b6f5-field:confirmBackupKeyPairInformationcause=<Guarde el archivo de copia de seguridad de su par de claves cifrado con contraseña, en un medio extraíble como un único disquete. Luego guarde este soporte en un lugar seguro. Lo necesitará junto con su nombre de usuario y contraseña para recuperar su cuenta de Martus en caso de que los archivos de su computadora resulten dañados. Para recuperar su cuenta con esta copia de su par de claves bajo contraseña, seleccione 'Restaurar cuenta' y luego 'Restaurar cuenta desde una copia de seguridad de su par de claves' al iniciar sesión en Martus.>
+-b6f5-field:confirmBackupKeyPairInformationcause=Guarde el archivo de copia de seguridad de su par de claves cifrado con contraseña, en un medio extraíble como un único disquete. Luego guarde este soporte en un lugar seguro. Lo necesitará junto con su nombre de usuario y contraseña para recuperar su cuenta de Martus en caso de que los archivos de su computadora resulten dañados. Para recuperar su cuenta con esta copia de su par de claves bajo contraseña, seleccione 'Restaurar cuenta' y luego 'Restaurar cuenta desde una copia de seguridad de su par de claves' al iniciar sesión en Martus.
 
 #________________________________________________=Choosing Yes will begin the backup process.
 -0b47-field:confirmBackupKeyPairInformationeffect=Pulse Sí para empezar a hacer la copia de seguridad.
 
 #_______________________________________________=We recommend that you now create #TotalNumberOfFilesInBackup# separate key backup files of which any #MinimumNumberOfFilesNeededForRecovery# can be used to reconstruct your key without a Username or password being required.
--a09c-field:confirmBackupKeyPairSecretSharecause=<Le recomendamos que cree la copia de seguridad de su par de claves en #TotalNumberOfFilesInBackup# archivos de partes. Juntando #MinimumNumberOfFilesNeededForRecovery# de estas partes se podrá reconstruir su par de claves, y por tanto su cuenta de Martus, sin necesitar su nombre de usuario y contraseña.>
+-a09c-field:confirmBackupKeyPairSecretSharecause=Le recomendamos que cree la copia de seguridad de su par de claves en #TotalNumberOfFilesInBackup# archivos de partes. Juntando #MinimumNumberOfFilesNeededForRecovery# de estas partes se podrá reconstruir su par de claves, y por tanto su cuenta de Martus, sin necesitar su nombre de usuario y contraseña.
 
 #________________________________________________=By choosing Yes, you will be prompted to save pieces of your key onto removable disks.
 -efaa-field:confirmBackupKeyPairSecretShareeffect=Al pulsar Sí, se le pedirá que guarde las partes de su par de claves en disquetes o medios extraíbles.
@@ -2867,7 +2960,7 @@
 -f5b5-field:notifyPublicInfoFileErrorcause=El archivo no contiene información pública válida.
 
 #___________________________________________________________________________=Key restore succeeded!  You now have to enter a Username and password.
--08d1-field:notifyRecoveredKeyShareSucceededNewUserNamePasswordRequiredcause=<¡Se restauró el par de claves! Ahora tiene que introducir un nombre de usuario y contraseña.>
+-08d1-field:notifyRecoveredKeyShareSucceededNewUserNamePasswordRequiredcause=¡Se restauró el par de claves! Ahora tiene que introducir un nombre de usuario y contraseña.
 
 #_______________________________________________=Key restore is complete, you will now be logged into Martus.
 -efa0-field:notifyRecoveryOfKeyPairCompletecause=La restauración del par de claves ha finalizado, y ahora se le abrirá sesión en Martus con esta cuenta.
@@ -2876,7 +2969,7 @@
 -f50c-field:notifyRecoveryOfKeyShareCompletecause=Ha recuperado la cuenta al restaurar (sin contraseña) el par de claves desde los archivos de copia de seguridad por partes. Es extremadamente importante que ahora vuelva a separar estos archivos. También le recomendamos que haga una copia de seguridad del par de claves en un único archivo cifrado-con-contraseña, no es necesario volver a crear otra en múltiples archivos.
 
 #_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your Username and password and restore your key so you can log in normally and access your account.
--1d12-field:notifyRecoveryProcessBackupFilecause=<Para restaurar su par de claves primero tiene que encontrar el archivo de copia de seguridad que haya guardado anteriormente. Al iniciar Martus elija 'Restaurar cuenta desde copia de seguridad de par de claves'; indique la ubicación de la copia en su disco duro, en un disco en la red, o en un medio extraíble; y pulse Abrir. Entonces Martus le pedirá que introduzca su nombre de usuario y contraseña para restaurar su par de claves, y que pueda acceder a su cuenta con normalidad.>
+-1d12-field:notifyRecoveryProcessBackupFilecause=Para restaurar su par de claves primero tiene que encontrar el archivo de copia de seguridad que haya guardado anteriormente. Al iniciar Martus elija 'Restaurar cuenta desde copia de seguridad de par de claves'; indique la ubicación de la copia en su disco duro, en un disco en la red, o en un medio extraíble; y pulse Abrir. Entonces Martus le pedirá que introduzca su nombre de usuario y contraseña para restaurar su par de claves, y que pueda acceder a su cuenta con normalidad.
 
 #_____________________________________________=You will now have to provide #MinimumNumberOfFilesNeededForRecovery# out of the #TotalNumberOfFilesInBackup# files you previously saved when you backed up your key.
 -f571-field:notifyRecoveryProcessKeySharecause=Ahora necesitará tener #MinimumNumberOfFilesNeededForRecovery# de los #TotalNumberOfFilesInBackup# archivos de la copia de seguridad por partes que creó del par de claves.
@@ -2927,7 +3020,7 @@
 -dcf0-field:notifyRetrievedOnlySomeSummariescause=<Hubo errores al descargar resúmenes de boletines. Algunos de los boletines guardados en el servidor no se mostrarán.>
 
 #__________________________________________=An error occurred.  Unable to change Username or password.  You may need to restore your backup key file.
--cbd8-field:notifyRewriteKeyPairFailedcause=<Ocurrió un error. No se pudo cambiar el nombre de usuario o la contraseña. Puede que necesite recuperar su cuenta restaurando su par de claves con la copia de seguridad..>
+-cbd8-field:notifyRewriteKeyPairFailedcause=Ocurrió un error. No se pudo cambiar el nombre de usuario o la contraseña. Puede que necesite recuperar su cuenta restaurando su par de claves con la copia de seguridad.
 
 #_________________________________________=Successfully saved your new username and password.
 -0398-field:notifyRewriteKeyPairSavedcause=Su nuevo nombre de usuario y contraseña han sido guardados.
@@ -2990,16 +3083,16 @@
 -db36-field:notifyUnableToViewAttachmentcause=No se pudo ver el archivo adjunto por algún motivo.
 
 #_____________________________________=An unexpected error has occurred. Please report this problem to martus@benetech.org.
--201e-field:notifyUnexpectedErrorcause=<Ocurrió un error inesperado. Por favor, informe a help@martus.org de este problema.>
+-201e-field:notifyUnexpectedErrorcause=Ocurrió un error inesperado. Por favor, informe a martus@benetech.org de este problema.
 
 #_________________________________________________________=An error occurred during upload, and the record:'#BulletinTitle#' has not been sent to the server.  You may try and resend the record later.
 -4a05-field:notifyUploadFailedBulletinNotSentToServercause=<Ocurrió un error durante el envío, y el boletín '#BulletinTitle#' no ha sido subido al servidor. Puede intentar reenviar el boletín más tarde.>
 
 #_______________________________________=The Username you chose already exists on this system, please choose a different Username.
--3efd-field:notifyUserAlreadyExistscause=<El nombre de usuario que eligió ya está en uso, por favor escoja un nombre diferente.>
+-3efd-field:notifyUserAlreadyExistscause=El nombre de usuario que eligió ya está en uso, por favor escoja un nombre diferente.
 
 #___________________________________=Username must not be blank
--66fb-field:notifyUserNameBlankcause=<El nombre de usuario no puede estar en blanco>
+-66fb-field:notifyUserNameBlankcause=El nombre de usuario no puede estar en blanco
 
 #__________________________________________________=You have chosen not to use this server
 -91af-field:notifyUserRejectedServerCompliancecause=Ha escogido no usar este servidor
@@ -3014,7 +3107,7 @@
 -08cf-field:notifyViewKeyDetailscause=Nombre de cuenta: #Label#\n\nCódigo público: #PublicCode#\n\nIdentificación (clave) pública de cuenta: #PublicKey#
 
 #_____________________________________=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create records that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.
--b2aa-field:notifyWelcomeToMartuscause=<Bienvenido al sistema de Martus.\n\nPara poder usar Martus es necesario crear una cuenta. Escoja el nombre de usuario que desee, y una contraseña con un mínimo de 8 caracteres. Para esta elección considere lo siguiente:\n\n * Nosotros recomendamos usar una contraseña con un mínimo de 15 caracteres.\n * Incluya signos de puntuación y otros símbolos no alfanuméricos en su contraseña.\n * Use una contraseña que otras personas no puedan adivinar; cualquiera que conozca su nombre de usuario y contraseña puede ver y modificar su información privada, y crear boletines haciéndose pasar por usted con verosimilitud.\n * Anote su nombre de usuario y contraseña, y guárdelos en un lugar seguro.\n * Tendrá que introducir su nombre de usuario y contraseña cada vez que inicie Martus.\n * Martus también le pedirá que introduzca su nombre de usuario y contraseña en ciertas ocasiones durante el uso del programa, para impedir que sea otra persona la que use su cuenta después de que usted se haya autentificado.\n\nIMPORTANTE: Por lo que a nosotros respecta, usted es la única persona que tiene su nombre de usuario y contraseña. Si pierde cualquiera de ellos no podrá acceder a la información que haya ingresado. Martus NO guarda su nombre de usuario y su contraseña, por lo que de perderse estos, no los podrá recobrar.>
+-b2aa-field:notifyWelcomeToMartuscause=Bienvenido al sistema de Martus.\n\nPara poder usar Martus es necesario crear una cuenta. Escoja el nombre de usuario que desee, y una contraseña con un mínimo de 8 caracteres. Para esta elección considere lo siguiente:\n\n * Nosotros recomendamos usar una contraseña con un mínimo de 15 caracteres.\n * Incluya signos de puntuación y otros símbolos no alfanuméricos en su contraseña.\n * Use una contraseña que otras personas no puedan adivinar; cualquiera que conozca su nombre de usuario y contraseña puede ver y modificar su información privada, y crear boletines haciéndose pasar por usted con verosimilitud.\n * Anote su nombre de usuario y contraseña, y guárdelos en un lugar seguro.\n * Tendrá que introducir su nombre de usuario y contraseña cada vez que inicie Martus.\n * Martus también le pedirá que introduzca su nombre de usuario y contraseña en ciertas ocasiones durante el uso del programa, para impedir que sea otra persona la que use su cuenta después de que usted se haya autentificado.\n\nIMPORTANTE: Por lo que a nosotros respecta, usted es la única persona que tiene su nombre de usuario y contraseña. Si pierde cualquiera de ellos no podrá acceder a la información que haya ingresado. Martus NO guarda su nombre de usuario y su contraseña, por lo que de perderse estos, no los podrá recobrar.
 
 #_____________________________________=The current Martus Server has refused to accept your contact info
 -156f-field:notifycontactRejectedcause=El servidor actual de Martus ha rechazado su información de contacto.
@@ -3053,7 +3146,7 @@
 -ea98-field:notifyuploadrejectedcause=<El servidor actual de Martus rechazó un boletín>
 
 #_________________________________________=Warning: You must enter the same Username you entered on the previous screen.
--0648-field:notifyusernamessdontmatchcause=<Advertencia: Tiene que introducir el mismo nombre de usuario que introdujo en la pantalla previa.>
+-0648-field:notifyusernamessdontmatchcause=Advertencia: Tiene que introducir el mismo nombre de usuario que introdujo en la pantalla previa.
 
 #_______________________=Organization
 -5192-field:organization=Organización
@@ -3104,7 +3197,7 @@
 -0381-field:securityServerConfigValidate=Por razones de seguridad debemos validar su nombre de usuario y contraseña.
 
 #__________________________=Server:
--05a1-field:serverWithColon=<Server:>
+-05a1-field:serverWithColon=Servidor:
 
 #_________________=Status
 -bae7-field:status=Estado
@@ -3524,7 +3617,7 @@ field:translationVersion=<Español 4.5>
 -ceff-menu:about=Acerca de Martus
 
 #________________________________=Change Username or Password
--50fe-menu:changeUserNamePassword=<Cambiar nombre de usuario o contraseña>
+-50fe-menu:changeUserNamePassword=Cambiar nombre de usuario o contraseña
 
 #_____________________=Contact Information
 -a34b-menu:contactinfo=Información de contacto
@@ -3872,7 +3965,7 @@ field:translationVersion=<Español 4.5>
 -84e6-wintitle:DeleteServerDraftsBulletinSummaries=<Descargando resúmenes de boletines>
 
 #_____________________=Details
--dc3d-wintitle:Details=<Details>
+-dc3d-wintitle:Details=Detalles
 
 #_____________________________________________=Warning Duplicate Labels Found
 -8e46-wintitle:DuplicateLabelsInCustomTemplate=Advertencia: Se encontraron títulos (<Label>) duplicados
@@ -3986,7 +4079,7 @@ field:translationVersion=<Español 4.5>
 -f47b-wintitle:FolderSelectDialogExport=<Export to which folder?>
 
 #__________________=Martus Help
--2d1c-wintitle:Help=<Ayuda sobre Martus>
+-2d1c-wintitle:Help=Ayuda sobre Martus
 
 #________________________________=Help on Record Details Field Default Content
 -8b08-wintitle:HelpDefaultDetails=<Ayuda sobre el contenido por defecto del campo Detalles de boletín>
@@ -4187,7 +4280,7 @@ field:translationVersion=<Español 4.5>
 -3b7c-wintitle:confirmCancelBackupRecovery=Cancelar restauración de copia de seguridad
 
 #_________________________________________=Cancel Edit
--4d63-wintitle:confirmCancelModifyBulletin=<Cancelar modificación>
+-4d63-wintitle:confirmCancelModifyBulletin=Cancelar modificación
 
 #___________________________________=Cancel Retrieve
 -d984-wintitle:confirmCancelRetrieve=Cancelar descarga
@@ -4577,7 +4670,7 @@ field:translationVersion=<Español 4.5>
 -d6d7-wintitle:notifyExportFolderEmpty=Error al exportar carpeta
 
 #_____________________________________=Public Account Key Exported
--6ff2-wintitle:notifyExportMyPublicKey=<Identificación (clave) pública de cuenta exportada>
+-6ff2-wintitle:notifyExportMyPublicKey=Clave pública de cuenta exportada
 
 #_______________________________________=No Records Selected
 -b009-wintitle:notifyExportZeroBulletins=<No se seleccionaron boletines>
@@ -4724,10 +4817,10 @@ field:translationVersion=<Español 4.5>
 -f2d7-wintitle:notifyRetrievedOnlySomeSummaries=Error al descargar boletines
 
 #________________________________________=Error Changing Username or Password
--97d9-wintitle:notifyRewriteKeyPairFailed=<Error al cambiar nombre de usuario o contraseña>
+-97d9-wintitle:notifyRewriteKeyPairFailed=Error al cambiar nombre de usuario o contraseña
 
 #_______________________________________=Changed Username or Password
--d54a-wintitle:notifyRewriteKeyPairSaved=<Se cambió el nombre de usuario o la contraseña>
+-d54a-wintitle:notifyRewriteKeyPairSaved=Se cambió el nombre de usuario o la contraseña
 
 #_________________________________________________=Seal Records
 -b07e-wintitle:notifySealSelectedZeroBulletinsOurs=<Sellar boletines>
@@ -4760,7 +4853,7 @@ field:translationVersion=<Español 4.5>
 -8db5-wintitle:notifyShowTokenAndPublicCode=Credencial de cuenta y código público
 
 #__________________________________________=Error
--7f2f-wintitle:notifySyncDisabledDueToError=<Error>
+-7f2f-wintitle:notifySyncDisabledDueToError=Error
 
 #_______________________________________________________________=Download Information
 -a620-wintitle:notifySyncUnableToDeleteLocalOnlyOrImmutableFiles=<Download Information>
@@ -4778,7 +4871,7 @@ field:translationVersion=<Español 4.5>
 -4043-wintitle:notifyUnableToCreateFolder=<Error Creating Folder>
 
 #_______________________________________________=Error
--7f2f-wintitle:notifyUnableToLoadCurrentTemplate=<Error>
+-7f2f-wintitle:notifyUnableToLoadCurrentTemplate=Error
 
 #_____________________________________________________=Unable To Retrieve Contact Info
 -df02-wintitle:notifyUnableToRetrieveContactFromServer=No se pudo bajar la información del contacto
