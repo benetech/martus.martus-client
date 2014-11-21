@@ -425,7 +425,7 @@
 -2b03-button:ServerComplianceReject=رفض
 
 #__________________________________=Author
--5fda-button:ServerSyncRecordAuthor=<Author>
+-5fda-button:ServerSyncRecordAuthor=الكاتب
 
 #________________________________________=Last Saved
 -eb05-button:ServerSyncRecordLastModified=<Last Saved>
@@ -656,7 +656,7 @@
 -4bfb-field:AccountInfoUserName=إسم المستخدم : 
 
 #_____________________________=Account Information
--0cbd-field:AccountInformation=<Account Information>
+-0cbd-field:AccountInformation=معلومات الحساب
 
 #_________________________=<Account Sharing>
 -69ec-field:AccountSharing=<Account Sharing>
@@ -719,22 +719,22 @@
 -e9ba-field:AttemptToConnectToServerAndGetCompliance=محاولة الاتصال بالخادم
 
 #_________________=<Author:>
--be68-field:Author=<الكاتب :>
+-be68-field:Author=الكاتب : 
 
 #___________________________________=This information is optional and is used to auto-fill your records for your convenience. It is stored on your local computer and not sent to the Martus server.
 -696e-field:AuthorContactInformation=<This information is optional and is used to auto-fill your records for your convenience. It is stored on your local computer and not sent to the Martus server.>
 
 #____________________________=Author Information
--42f4-field:AuthorInformation=<Author Information>
+-42f4-field:AuthorInformation=معلومات الكاتب
 
 #_________________________=<Author:>
--be68-field:AuthorNickname=<Author:>
+-be68-field:AuthorNickname=الكاتب: 
 
 #_________________________________________=Name here if available otherwise blank
 -6338-field:AuthorNicknameFieldDescription=<Name here if available otherwise blank>
 
 #___________________________=Author Public Code:
--bcc8-field:AuthorPublicCode=<Author Public Code:>
+-bcc8-field:AuthorPublicCode=رمز عام الكاتب:
 
 #________________________________________=#PublicCode# (not currently in contacts)
 -68c3-field:AuthorizedToReadNotInContacts=<#PublicCode# (not currently in contacts)>
@@ -3500,7 +3500,7 @@ field:translationVersion=<العربية -4.5>
 -85df-menu:Account=<Account>
 
 #____________________________=Account Information
--0cbd-menu:AccountInformation=<Account Information>
+-0cbd-menu:AccountInformation=معلومات الحساب
 
 #________________________=<Account Sharing>
 -69ec-menu:AccountSharing=<Account Sharing>
@@ -3515,7 +3515,7 @@ field:translationVersion=<العربية -4.5>
 -62c7-menu:Analysis=<Analysis>
 
 #___________________________=Author Information
--42f4-menu:AuthorInformation=<Author Information>
+-42f4-menu:AuthorInformation=معلومات الكاتب
 
 #_____________________________=Backup My Key
 -2852-menu:BackupMyKeyPairFile=نسخ مفتاحي احتياطيًا
@@ -3908,7 +3908,7 @@ field:translationVersion=<العربية -4.5>
 -3fe3-tooltip:Templates=<Template Manager>
 
 #_________________________=<Account Information>
--8bc1-wintitle:AccountInfo=<Account Information>
+-8bc1-wintitle:AccountInfo=معلومات الحساب
 
 #____________________________=<Update your contacts' access to Bulletins>
 -0ad5-wintitle:AddPermissions=<تحديث وصول جهات الاتصال الخاصة بك للنشرات>
@@ -3923,7 +3923,7 @@ field:translationVersion=<العربية -4.5>
 -6771-wintitle:Attachments=<Attachments>
 
 #_______________________________=Author Information
--42f4-wintitle:AuthorInformation=<Author Information>
+-42f4-wintitle:AuthorInformation=معلومات الكاتب
 
 #______________________________________=Backup Key Information
 -f733-wintitle:BackupKeyPairGeneralInfo=نسخ معلومات المفتاح احتياطيًا
