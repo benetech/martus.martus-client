@@ -1427,7 +1427,7 @@
 -b11a-field:JPEGFileFilter=JPEG ‏(*.jpeg، ‏*.jpg)
 
 #____________________=Key Backup
--f8a1-field:KeyBackup=<Key Backup>
+-f8a1-field:KeyBackup=نسخ المفتاح احتياطيًا
 
 #____________________________=Martus Key (*.dat)
 -798b-field:KeyPairFileFilter=مفتاح Martus ‏(*.dat)
@@ -2054,7 +2054,7 @@
 -f2ab-field:UserNameTips=نصائح خاصة بإسم المستخدم :
 
 #______________________________=Username and Password
--d205-field:UsernameAndPassword=<Username and Password>
+-d205-field:UsernameAndPassword=الإسم المستخدم و كامة السر
 
 #__________________________________=Verify your contact public code
 -1e3f-field:VerifyContactPublicCode=<الرمز العام :>
@@ -3125,7 +3125,7 @@
 -c1da-field:notifyUserAlreadyExistscause=<إسم المستخدم الذي اخترته موجود بالفعل على هذا النظام، الرجاء اختيار إسم مستخدم آخر.>
 
 #___________________________________=<User Name must not be blank>
--eb9a-field:notifyUserNameBlankcause=<لا يمكن أن يكون إسم المستخدم فارغًا>
+-eb9a-field:notifyUserNameBlankcause=لا يمكن أن يكون إسم المستخدم فارغًا
 
 #__________________________________________________=You have chosen not to use this server
 -91af-field:notifyUserRejectedServerCompliancecause=لقد اخترت عدم استخدام هذا الخادم
@@ -3521,7 +3521,7 @@ field:translationVersion=<العربية -4.5>
 -2852-menu:BackupMyKeyPairFile=نسخ مفتاحي احتياطيًا
 
 #___________________________________=Username and Password
--d205-menu:ChangeUsernameAndPassword=<Username and Password>
+-d205-menu:ChangeUsernameAndPassword=الإسم المستخدم و كامة السر
 
 #________________=Charts
 -8610-menu:Charts=المخططات
