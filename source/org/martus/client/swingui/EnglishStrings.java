@@ -421,8 +421,6 @@ public class EnglishStrings
 "button:connectserver=Connect",
 "button:send=Share",
 "button:savedraft=Save",
-"button:yes=Yes",
-"button:no=No",
 
 "button:saveBulletin=Save",
 "button:versionBulletin=Version",
@@ -741,7 +739,6 @@ public class EnglishStrings
 
 "field:Location=Location:",
 "field:OnServer=On Server",
-"field:Author=Author",
 "field:Edit=Edit",
 "field:UsernameAndPassword=Username and Password",
 "field:AssistanceWithMartusPart1=Martus help documentation is available at",
@@ -1757,7 +1754,6 @@ public class EnglishStrings
 "field:_SectionBottomSection=",
 
 "field:mdyOrder=Date Format",
-"field:DateDelimiter=Date Delimiter",
 "field:CalendarSystem=Calendar type",
 "field:DatePartYear=Year",
 "field:DatePartMonth=Month",
@@ -1815,7 +1811,6 @@ public class EnglishStrings
 
 "field:confirmClearHQInformationcause=You have chosen to remove the selected contact's accounts.  Any existing saved records will still be visible by the old contact.  If you want to disallow this contact's viewing access to previously created Draft records they must be re-saved after deleting the contact.  New versions of sealed records will not be able to be viewed by the removed contact, but any old versions of sealed records that already are on that contact's computer will still be viewable by the contact.",
 "field:confirmClearHQInformationeffect=By clicking on Yes, any draft or sealed record saved in the future will no longer be accessible by your Contacts.",
-"field:ManageContacts=Manage Contacts",
 "field:ManageContactsTab=Manage Contacts",
 "field:confirmAddingPermissionsToBulletinsCanceleffect=If you do this, the records already processed will have the new headquarters access, but other selected records will not.",
 "field:confirmWarningSwitchToNormalKeyboardeffect=If this record was shared with you by one of your contacts, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.",
@@ -1987,7 +1982,6 @@ public class EnglishStrings
 "field:UseDefaultServer=Use default server",
 "field:SetupAdvanceServer=Advanced server settings",
 "field:SetupServerTips=The data you store on Martus servers are completely encrypted using 3072-bit encryption. This means even Martus server administrators cannot read your data.",
-"field:ServerSettings=Settings",
 "menu:SystemPreferences=System Preferences",
 "menu:TorPreferences=Tor Preferences",
 "menu:ChangeUsernameAndPassword=Username and Password",
