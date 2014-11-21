@@ -113,7 +113,7 @@
 -ba05-button:AddPermissions=更新联系人权限
 
 #_______________________=Add
--61cc-button:AddTemplate=<Add>
+-61cc-button:AddTemplate=添加
 
 #________________________=Show all records on this server and on this computer.
 -ccf0-button:AllSummaries=<显示此服务器和此计算机上的全部公告>
@@ -164,7 +164,7 @@
 -aed3-button:ContactVerified=已验证
 
 #____________________=Contacts
--b0dd-button:Contacts=<Contacts>
+-b0dd-button:Contacts=联系人
 
 #_____________________________=Save and Close
 -7af7-button:ContactsSaveClose=保存并关闭
@@ -173,16 +173,16 @@
 -2e02-button:Continue=继续
 
 #____________________=Copy
--af74-button:CopyItem=<Copy>
+-af74-button:CopyItem=复制
 
 #__________________=Create
--6e15-button:Create=<Create>
+-6e15-button:Create=创建
 
 #_______________________=Create a new chart template
 -9ef9-button:CreateChart=新建图表模板
 
 #________________________=Create
--6e15-button:CreateFolder=<Create>
+-6e15-button:CreateFolder=创建
 
 #____________________________=Create New Page Report
 -1d7a-button:CreatePageReport=新建文档报告
@@ -200,7 +200,7 @@
 -f6fd-button:Delete=删除
 
 #________________________=Delete
--f6fd-button:DeleteFolder=<Delete>
+-f6fd-button:DeleteFolder=删除
 
 #____________________________=Delete from Server
 -ae3f-button:DeleteFromServer=<Delete from Server>
@@ -278,7 +278,7 @@
 -7d27-button:HaveServerDefaultToOn=<Have Server Default to On? (will be applied on login)>
 
 #________________=Help
--c47a-button:Help=<Help>
+-c47a-button:Help=帮助
 
 #_________________________________=Import Contact From File...
 -eaff-button:ImportContactFromFile=从文件中导入联系人…
@@ -287,13 +287,13 @@
 -85a7-button:ImportFromFile=<Import From File>
 
 #______________________________=Include attachments
--75c1-button:IncludeAttachments=<Include attachments>
+-75c1-button:IncludeAttachments=导出数据中包含附件
 
 #___________________________________=Include Private Data
 -e6dc-button:IncludePrivateBulletins=包括隐私数据
 
 #_____________________________=OK
--9ce3-button:InputServerNameOk=<OK>
+-9ce3-button:InputServerNameOk=是
 
 #______________________________=Insert Row
 -9f53-button:InsertEmptyGridRow=插入行
@@ -311,7 +311,7 @@
 -ddcb-button:LoadSearchOkButton=加载
 
 #__________________________=Manage Contacts
--88c0-button:ManageContacts=<Manage Contacts>
+-88c0-button:ManageContacts=联系人管理
 
 #_________________________________=Move Down
 -4158-button:MoveFieldDownInReport=下移
@@ -407,7 +407,7 @@
 -fac4-button:SeeForms=查看表格
 
 #_____________________=Select All
--86a5-button:SelectAll=<Select All>
+-86a5-button:SelectAll=全选
 
 #________________________=Select
 -8598-button:SelectReport=选择
@@ -422,16 +422,16 @@
 -2b03-button:ServerComplianceReject=拒绝
 
 #__________________________________=Author
--5fda-button:ServerSyncRecordAuthor=<Author>
+-5fda-button:ServerSyncRecordAuthor=作者
 
 #________________________________________=Last Saved
--eb05-button:ServerSyncRecordLastModified=<Last Saved>
+-eb05-button:ServerSyncRecordLastModified=上次保存
 
 #____________________________________=Location
--d219-button:ServerSyncRecordLocation=<Location>
+-d219-button:ServerSyncRecordLocation=位置
 
 #________________________________=Size (Kb)
--fa2e-button:ServerSyncRecordSize=<Size (Kb)>
+-fa2e-button:ServerSyncRecordSize=大小(Kb)
 
 #_________________________________=Title
 -768e-button:ServerSyncRecordTitle=标题
@@ -482,7 +482,7 @@
 -3c2c-button:YesCopyWithUnknownContent=<Yes, copy what you can over>
 
 #_________________________=Add
--61cc-button:addattachment=<添加附件>
+-61cc-button:addattachment=添加
 
 #___________________________=Name
 -709a-button:attachmentLabel=名称
@@ -506,7 +506,7 @@
 -b654-button:connectserver=连接
 
 #____________________=Continue
--2e02-button:continue=<Continue>
+-2e02-button:continue=继续
 
 #__________________=Create
 -6e15-button:create=创建
@@ -530,7 +530,7 @@
 -3159-button:emptyTrash=<Empty>
 
 #__________________=Export
--f3e4-button:export=<Export>
+-f3e4-button:export=导出
 
 #__________________________=Hide
 -34d8-button:hideattachment=隐藏
@@ -584,13 +584,13 @@
 -efc0-button:save=保存
 
 #________________________=Save
--efc0-button:saveBulletin=<Save>
+-efc0-button:saveBulletin=保存
 
 #__________________________=Save...
 -96b4-button:saveattachment=保存...
 
 #_____________________=Save
--efc0-button:savedraft=<保存草稿>
+-efc0-button:savedraft=保存
 
 #__________________=Search
 -bce0-button:search=搜索
@@ -605,7 +605,7 @@
 -bc6d-button:uncheckall=未选
 
 #___________________________=Version
--2da6-button:versionBulletin=<Version>
+-2da6-button:versionBulletin=版本
 
 #__________________________=View
 -69bd-button:viewattachment=查看
@@ -620,7 +620,7 @@
 -0d23-field:AccessTokenInstructions=访问令牌
 
 #_____________________________=Access Token: 
--d42d-field:AccountAccessToken=<Martus系统帐户访问令牌:>
+-d42d-field:AccountAccessToken=系统帐户访问令牌:
 
 #__________________________________=#AccountId# #PublicCode#
 -ca80-field:AccountIdWithPublicCode=<#AccountId# #PublicCode#>
@@ -638,13 +638,13 @@
 -6723-field:AccountInfoPublicKey=公开账户ID:
 
 #______________________________=Username: 
--869c-field:AccountInfoUserName=<用户名:>
+-869c-field:AccountInfoUserName=用户名:
 
 #_____________________________=Account Information
--0cbd-field:AccountInformation=<Account Information>
+-0cbd-field:AccountInformation=账户信息
 
 #______________________________________=create a Username
--e8c1-field:AccountUserNameInstructions=<创建用户名>
+-e8c1-field:AccountUserNameInstructions=创建用户名
 
 #_________________________________=To send information through Martus to your contacts, pull their public key from the Martus server using their access token. Verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add them here. If you do not have this information now, you will be able to add contacts later.
 -70e8-field:AddContactInstructions=要通过Martus系统发送信息给你的联系人，使用用联系人的访问令牌从Martus服务器上拉他们的公开密钥过来。核实你是否拉的是正确的密钥，方法是检查他们的密钥的公开密码。请求你的联系人用他们的访问令牌和公开密码来添加你的联系人到这里。如果你现在没有这些信息，你可以稍后再添加。
@@ -662,7 +662,7 @@
 -958f-field:AddingPermissionsToBulletins=更新路径中...
 
 #____________________________________=If you are connecting to a Martus server, email martus@benetech.org for this info.
--62cc-field:AdvanceMartusServerMailTo=<如果你正在连接到Martus服务器，请邮件至info@martus.org获取这个信息。>
+-62cc-field:AdvanceMartusServerMailTo=如果你正在连接到Martus服务器，请邮件至martus@benetech.org获取这个信息。
 
 #____________________________________=If you are connecting to your organization's server, contact your administrator.
 -1eae-field:AdvanceOrganizationServer=如果你正在连接到你的组织的服务器，请联系你的管理员。
@@ -683,7 +683,7 @@
 -6a72-field:All=<All>
 
 #___________________=All Files
--af3d-field:AllFiles=<All Files>
+-af3d-field:AllFiles=全部文件
 
 #____________________________________=Martus help documentation is available at
 -ab4d-field:AssistanceWithMartusPart1=<Martus help documentation is available at>
@@ -701,10 +701,10 @@
 -e9ba-field:AttemptToConnectToServerAndGetCompliance=正在尝试连接到服务器
 
 #_________________=Author
--5fda-field:Author=<作者:>
+-5fda-field:Author=作者:
 
 #___________________________________=This information is optional and is used to auto-fill your records for your convenience. It is stored on your local computer and not sent to the Martus server.
--696e-field:AuthorContactInformation=<This information is optional and is used to auto-fill your records for your convenience. It is stored on your local computer and not sent to the Martus server.>
+-696e-field:AuthorContactInformation=<这个信息是非强制性的和可以为预装你的公告带来方便。它储存在你的电脑里，不会发送到Martus服务器上。>
 
 #____________________________=Author Information
 -42f4-field:AuthorInformation=<Author Information>
@@ -866,7 +866,7 @@
 -2be4-field:CalendarSystemThai=泰国历(2548-05-31)
 
 #_______________________=Calendar Type:
--522d-field:CalendarType=<Calendar Type:>
+-522d-field:CalendarType=日历样式:
 
 #_________________________=Chart produced #Date#
 -fb8c-field:ChartCreatedOn=已生成图表 #Date#
@@ -941,7 +941,7 @@
 -0e2c-field:ConfigureHeadQuartersDefault=默认？
 
 #_________________________________=Confirm Username
--5edd-field:ConfirmAccountUserName=<确认用户名>
+-5edd-field:ConfirmAccountUserName=确认用户名
 
 #__________________________=Confirm Password
 -c2d4-field:ConfirmPassword=确认密码
@@ -992,7 +992,7 @@
 -cafe-field:CreateAccountInstructions=<为了你的帐户安全，当为新账户创建用户名和密码时，请知道如果你忘记了你的用户名和密码，它们将无法恢复。>
 
 #________________________________=Username:
--17df-field:CreateAccountUserName=<用户名:>
+-17df-field:CreateAccountUserName=用户名:
 
 #__________________________________=The layout of the records is dictated by an XML document.  The document must begin with <CustomFields> and end with </CustomFields>. By default the standard record fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
 -53b4-field:CreateCustomFieldsHelp1=<公告的布局由 XML 文档决定。该文档必须以<CustomFields>开头、</CustomFields>结尾。公告的默认标准字段出现在自定义字段声明的上方，但这个位置也可以按需移动。不过，有四个必填字段不能删除：‘作者’、‘录入日期’、‘语言’和‘标题’。\n\n>
@@ -1034,7 +1034,7 @@
 -dda2-field:DateCreated=日期已创建
 
 #________________________=Date Delimiter
--ea64-field:DateDelimiter=<日期分隔符>
+-ea64-field:DateDelimiter=日期分隔符
 
 #____________________________=Dash (00-00-00)
 -997c-field:DateDelimiterDash=破折号 (00-00-00)
@@ -1049,7 +1049,7 @@
 -8a81-field:DateExact=准确日期
 
 #_____________________________=Date Format Sequence:
--f14f-field:DateFormatSequence=<Date Format Sequence:>
+-f14f-field:DateFormatSequence=日期格式顺序:
 
 #___________________________=Unknown
 -bc78-field:DateNotSpecified=未知
@@ -1082,13 +1082,13 @@
 -3f09-field:DefaultPrintToDiskFileName=<公告.html>
 
 #__________________________________=Default Server:
--c985-field:DefaultServerConnection=<Default Server:>
+-c985-field:DefaultServerConnection=默认服务器:
 
 #_______________________________=Default Server
 -6d35-field:DefaultServerHeading=默认服务器
 
 #_________________=Delete
--f6fd-field:Delete=<Delete>
+-f6fd-field:Delete=删除
 
 #________________________________________=Delete associated files?
 -37f0-field:DeleteAssociatedFilesInFolder=<Delete associated files?>
@@ -1145,7 +1145,7 @@
 -79bc-field:DuplicateLabelsInCustomTemplateContinue=你是否想要用重复标签来保存该模板？
 
 #_______________=Edit
--5301-field:Edit=<Edit>
+-5301-field:Edit=编辑
 
 #__________________________=Custom Name
 -3cb5-field:EmptyCustomName=<Custom Name>
@@ -1202,7 +1202,7 @@
 -986a-field:ExitWizard=如果你现在关闭安装向导，你将不能返回并继续使用向导去完成这个帐户的设置(然而，你可以使用这个安装向导来新建其它新帐户)。\n你确定你想要关闭安装向导吗？
 
 #_________________=Export
--f3e4-field:Export=<Export>
+-f3e4-field:Export=导出
 
 #____________________________=Include all versions of each record in export
 -17cd-field:ExportAllVersions=<包含每个导出公告的所有版本>
@@ -1211,7 +1211,7 @@
 -1a48-field:ExportAttachments=导出数据中包含附件
 
 #________________________________=The selected records will be exported to an XML file that you specify. All information will be saved as plain text and anyone who gets a copy of the file will be able to read its contents. These files can be used to import record data back into Martus or into another application.\n\n Please email martus@benetech.org if you need assistance.
--7373-field:ExportBulletinDetails=<你所选择的公告 (见下面列表)信息将被导出到一个指定的XML文件中。这些公告之后可以用来导入Martus系统公告信息到其它应用中。\n\n如果你希望，还可以使用该XML文件把这些公告再导出到Martus系统(成为一个新的独一无二的公告)。在这种类型的导入操作上如需协助，请邮件至help@martus.org。>
+-7373-field:ExportBulletinDetails=<你所选择的公告 (见下面列表)信息将被导出到一个指定的XML文件中。这些公告之后可以用来导入Martus系统公告信息到其它应用中。\n\n如果你希望，还可以使用该XML文件把这些公告再导出到Martus系统(成为一个新的独一无二的公告)。在这种类型的导入操作上如需协助，请邮件至martus@benetech.org。>
 
 #____________________________=Exporting encrypted Item
 -e837-field:ExportBulletinMba=<Exporting encrypted Item>
@@ -1238,7 +1238,7 @@
 -0375-field:FancySearchHelpMsg4=<如果想要所有网格搜索数据在一条公告网格数据行内满足，则请勾选“匹配网格列规范”复选框。例如，要在某个日期之后所创建的公告中的同一条网格行内搜索一个指定的受害者姓名，则可勾选该复选框，然后在搜索屏幕中输入以下字段：“受害者信息：姓” = x和“受害者信息：名”= y 和“创建日期” >= 年-月-日。若不勾选“匹配网格列规范”复选框，Martus 就会开始搜索在某个日期之后创建的、在某一行中包含规定的姓的、且在另外任意一行中包含规定名的所有公告，而二者未必在公告的同一行中（即可能有一行是“姓”= X 和“名”= b，同时另一行则是“姓”= a 和“名”= Y，结果 Martus 就认为该公告符合搜索条件，因为您并未规定两个条件必须在同一行内）。\n\n>
 
 #______________________________= Additional Search Notes:\n\n 1. Because Martus searches all details of any multi-item list for your criteria, it may find records where one item detail matches your criteria but other details do not. For example you could have a record with an item that has a location field in it and you have multiple details in the item with locations A, B, and C. If you search for records where location != C (does not equal C), Martus will find that record because there are 2 details in the record item where the location is not C, even though there is one item where the locations IS C.\n\n 2. In this release, if you are searching on a multi-level dropdown, all searches are exact matches, not partial or "starts with" matches. This means that you have to pick the exact level at which you want to be searching. For example, an "Event Location" field that has three levels (Region/City/Neighborhood) will have three entries in the search field list: Event Location: Region, Event Location: City, and Event Location: Neighborhood. So if you want to find any records that have an Event Location anywhere in Region X (regardless of the City), you have to pick the "Event Location: Region" field to search on and pick Region X off the dropdown list choices. If you pick Event Location: City to search on and then pick Region X but leave the City level blank, Martus will only find entries where there was no City data entered (City was blank), as opposed to ANY location with Region X regardless of what data was entered at the City level.\n\n 3. If you do not see your search terms/dates in the final version of the record displayed in the Search Results folder, your criteria may have been matched in an earlier version of the record. You can access previous versions by clicking the "Record Details..." button at the bottom of the record. To search only the most recent versions of records, select Only Search Most Recent Versions of Records in the Search dialog box.\n\n 4. If you have fields in different records or from different customizations that are exactly the same, Martus will combine them in any Search and Report field lists. And while Martus warns you about duplicate labels where you are creating a new record customization, it is possible that over time, you may have records with different customizations that ended up with the same labels (e.g. maybe you changed a text field to a dropdown field but kept the same label). In these cases, Martus will display both fields in the search screen, and try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists. Also, if you have fields with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same. So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion.\n\n 5. You may sometimes see duplicate entries in dropdown list search criteria values in the search screen. If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria dropdown list options are the labels for each list entry, but the codes you defined determine how many entries there will be in the search dropdown list. So if you have different Reusable Choices codes with the same label in different record customizations in your account, the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like "label1" and your search will be on records that have that label, regardless of which code the customization had for the label). And if you have the same Reusable Choices code with different labels in different record customizations in your account, the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like "label1; label2" and your search will be on records that have either of those labels).\n\nFor additional help with searching, see the documentation at martus.org or email martus@benetech.org.
--caa1-field:FancySearchHelpMsg5=<搜索补充说明：\n\n 1. 由于Martus系统会根据你的搜索条件，搜索任何网格(表格)字段的所有行，搜索出来的公告可能会出现一个网格行符合搜索条件而其它所有行都不符合的情况。例如你有一个含有位置字段网格的公告，且这个网格的多行数据里包含了A，B，和C三个位置。如果你搜索位置!= C(位置不等于C)的公告，Martus系统将会搜索到这个公告，因为这个公告中有两行网格的位置不等于C，即使它有一行的位置是C。\n\n 2. 在这个版本中，如果你使用多层级下拉菜单进行搜索，所作的搜索就是准确匹配，而不是部分搜索或者字符开头匹配的搜索。这意味着你必须选择准确的层级来进行你想要的搜索。例如，一个具有三个层级(区域/城市/居民区)的“事件位置”字段会有三个搜索字段列表条目：区域，城市，居民区。因此如果你想要搜索任何事件位置为区域X(不管城市)的公告， 你必须选择根据“区域”的字段来搜索，然后在下拉选择菜单中选择区域X 。如果你选择根据“城市”来搜索，而且选择区域 X但城市层级选择留白，Martus系统只会搜索到没有任何城市数据录入记录的条目(城市选择留白了)，这个结果与选择了区域X但不管城市数据记录内容的搜索截然相反。\n\n3. 如果你没有在搜索结果显示的最终版本公告中看到你的搜索条件或日期，你的搜索目标可能会与早期版本的公告匹配。你可以点击这篇公告顶部的“公告详情”按钮来获取以前版本。如果只要搜索最近版本的公告，可在搜索对话框中选择只搜索最近版本公告。\n\n 4. 如果你在不同的公告或从不同自定义得出的字段是完全一样的，Martus系统将会把他们在搜索和报告的字段列表中结合起来。当Martus系统提示当前新创建的自定义公告为重复标签，可能是随着时间的过去，你在不同的自定义公告中最终使用了相同的标签。(例如可能你把一个文本字段更改为了一个下拉字段但是保留了相同的标签。)在这些情况下，Martus系统会在搜索页面显示两个字段的结果，同时会尝试通过在字段选择列表中显示字段类型和标记来帮助你计算出两个字段间的区别。另外，如果你有标记相同但标签和/或字段类型不同的字段，Martus系统会使用这些标记和字段类型来尝试判断不同的字段是否意思一样。因此我们鼓励你对有关联的字段标记和标签做一个清晰的自定义来避免任何的混淆。更多搜索字段指引请查看 “自定义字段”帮助页面。\n\n 5. 你有时可能在搜索页面的下拉框搜索标准值中看见重复条目。如果你选择一个可重复使用选择的下拉字段进行搜索，显示为标准下拉框选项的值即为各个列表条目的标签，但你定义的编码决定了搜索下拉框的条目个数。(更多关于创建自定义下拉字段的信息请查看 “自定义字段”帮助页面。)因此如果你有不同的可重复使用选择的编码对应着账户里在不同的定制公告的相同标签，这些标签会在搜索下拉框中显示两次。(换言之，如果你同时把标签一对应到编码一和编码二，你会在搜索下拉列表中看到两个看起来像“标签一”的条目，然后你的搜索会根据具有这个标签的公告来进行，不管你对这个标签自定义了哪个编码。)\n如果你有相同的可重复使用选择的编码对应着帐户里在不同的定制公告里的不同标签，这个编码的搜索下拉框同时显示用分号隔开的两个值。(换言之，如果你同时把编码一对应到给标签一和标签二，你会在搜索下拉列表中看到一个看起来像“标签一；标签二”的条目，然后你的搜索会根据具有两个标签中任意一个的公告来进行。)\n\n获取更多的搜索帮助，请邮件至help@Martus.org。>
+-caa1-field:FancySearchHelpMsg5=<搜索补充说明：\n\n 1. 由于Martus系统会根据你的搜索条件，搜索任何网格(表格)字段的所有行，搜索出来的公告可能会出现一个网格行符合搜索条件而其它所有行都不符合的情况。例如你有一个含有位置字段网格的公告，且这个网格的多行数据里包含了A，B，和C三个位置。如果你搜索位置!= C(位置不等于C)的公告，Martus系统将会搜索到这个公告，因为这个公告中有两行网格的位置不等于C，即使它有一行的位置是C。\n\n 2. 在这个版本中，如果你使用多层级下拉菜单进行搜索，所作的搜索就是准确匹配，而不是部分搜索或者字符开头匹配的搜索。这意味着你必须选择准确的层级来进行你想要的搜索。例如，一个具有三个层级(区域/城市/居民区)的“事件位置”字段会有三个搜索字段列表条目：区域，城市，居民区。因此如果你想要搜索任何事件位置为区域X(不管城市)的公告， 你必须选择根据“区域”的字段来搜索，然后在下拉选择菜单中选择区域X 。如果你选择根据“城市”来搜索，而且选择区域 X但城市层级选择留白，Martus系统只会搜索到没有任何城市数据录入记录的条目(城市选择留白了)，这个结果与选择了区域X但不管城市数据记录内容的搜索截然相反。\n\n3. 如果你没有在搜索结果显示的最终版本公告中看到你的搜索条件或日期，你的搜索目标可能会与早期版本的公告匹配。你可以点击这篇公告顶部的“公告详情”按钮来获取以前版本。如果只要搜索最近版本的公告，可在搜索对话框中选择只搜索最近版本公告。\n\n 4. 如果你在不同的公告或从不同自定义得出的字段是完全一样的，Martus系统将会把他们在搜索和报告的字段列表中结合起来。当Martus系统提示当前新创建的自定义公告为重复标签，可能是随着时间的过去，你在不同的自定义公告中最终使用了相同的标签。(例如可能你把一个文本字段更改为了一个下拉字段但是保留了相同的标签。)在这些情况下，Martus系统会在搜索页面显示两个字段的结果，同时会尝试通过在字段选择列表中显示字段类型和标记来帮助你计算出两个字段间的区别。另外，如果你有标记相同但标签和/或字段类型不同的字段，Martus系统会使用这些标记和字段类型来尝试判断不同的字段是否意思一样。因此我们鼓励你对有关联的字段标记和标签做一个清晰的自定义来避免任何的混淆。更多搜索字段指引请查看 “自定义字段”帮助页面。\n\n 5. 你有时可能在搜索页面的下拉框搜索标准值中看见重复条目。如果你选择一个可重复使用选择的下拉字段进行搜索，显示为标准下拉框选项的值即为各个列表条目的标签，但你定义的编码决定了搜索下拉框的条目个数。(更多关于创建自定义下拉字段的信息请查看 “自定义字段”帮助页面。)因此如果你有不同的可重复使用选择的编码对应着账户里在不同的定制公告的相同标签，这些标签会在搜索下拉框中显示两次。(换言之，如果你同时把标签一对应到编码一和编码二，你会在搜索下拉列表中看到两个看起来像“标签一”的条目，然后你的搜索会根据具有这个标签的公告来进行，不管你对这个标签自定义了哪个编码。)\n如果你有相同的可重复使用选择的编码对应着帐户里在不同的定制公告里的不同标签，这个编码的搜索下拉框同时显示用分号隔开的两个值。(换言之，如果你同时把编码一对应到给标签一和标签二，你会在搜索下拉列表中看到一个看起来像“标签一；标签二”的条目，然后你的搜索会根据具有两个标签中任意一个的公告来进行。)\n\n获取更多的搜索帮助，请邮件至martus@benetech.org。>
 
 #___________________________=Yes/No
 -9f62-field:FieldTypeBOOLEAN=是/否
@@ -1271,7 +1271,7 @@
 -6ec9-field:FindAccountByToken=当从服务器查找帐户时，请等待。
 
 #______________________________=Name:
--71dd-field:FolderCreateNewName=<Name:>
+-71dd-field:FolderCreateNewName=名称:
 
 #__________________________=Cases
 -eccd-field:FolderNameCases=<Cases>
@@ -1361,7 +1361,7 @@
 -842b-field:HtmlFileFilter=超文本链接标示语言 (*.html, *.htm)
 
 #_________________=Import:
--5098-field:Import=<Import:>
+-5098-field:Import=导入:
 
 #_________________________________________=Import records into which Folder?
 -c09e-field:ImportBulletinsIntoWhichFolder=<把公告导入到哪个文件夹？>
@@ -1433,13 +1433,13 @@
 -05ed-field:LocalOnly=<Local Only>
 
 #___________________=Location:
--1bf3-field:Location=<Location:>
+-1bf3-field:Location=位置:
 
 #________________________=Martus Record Archive (*.mba)
 -8d99-field:MBAFileFilter=<Martus系统公告档案 (*.mba)>
 
 #__________________________=Label:
--f70a-field:MainFolderLabel=<Label:>
+-f70a-field:MainFolderLabel=标签:
 
 #_________________________=Manage Contacts
 -88c0-field:ManageContacts=联系人管理
@@ -1457,7 +1457,7 @@
 -3e7b-field:ManageContactsOverview2=<如果有人想要通过Martus系统发送信息给你，把你的访问令牌和公开密码给他们。记住要安全地通过安全的办法转达你的访问令牌和公开密码，比如通过加密邮件、私下(OTR)的聊天、面对面告知、或者其它无人能拦截你的信息的通讯频道。>
 
 #____________________________=Manage Contacts
--88c0-field:ManageContactsTab=<Manage Contacts>
+-88c0-field:ManageContactsTab=联系人管理
 
 #_______________________________________=Martus Report Format (.mrf)
 -62cd-field:MartusReportFormatFileFilter=Martus系统报表格式 (.mrf)
@@ -1475,7 +1475,7 @@
 -5fb3-field:MyRecords=<My Records>
 
 #_______________=Name
--709a-field:Name=<Name>
+-709a-field:Name=名称
 
 #_____________________________=Please enter a name for the file you wish to export.
 -95ed-field:NameOfExportedFile=请输入你希望导出的文件名。
@@ -1547,7 +1547,7 @@
 -b61b-field:PasswordInstructions=创建一个密码
 
 #_______________________=- Do not use your Username
--bcd7-field:PasswordTip1=<- 不要使用你的用户名>
+-bcd7-field:PasswordTip1=- 不要使用你的用户名
 
 #_______________________=- Do not use a single dictionary word
 -6002-field:PasswordTip2=- 不要使用单字
@@ -1619,13 +1619,13 @@
 -dc99-field:RecordLocationLocal=<Local>
 
 #_______________________________=Server
--cb0c-field:RecordLocationServer=<Server>
+-cb0c-field:RecordLocationServer=服务器
 
 #__________________________________=Server
--cb0c-field:RecordLocationServerTab=<Server>
+-cb0c-field:RecordLocationServerTab=服务器
 
 #________________________________=Unknown
--bc78-field:RecordLocationUnknown=<Unknown>
+-bc78-field:RecordLocationUnknown=未知
 
 #_________________________=Record Settings
 -9c80-field:RecordSettings=<Record Settings>
@@ -1778,7 +1778,7 @@
 -4d75-field:ServerDeclinesUploads=<你不被允许向这个服务器上载公告。>
 
 #___________________=Server IP:
--c31c-field:ServerIP=<Server IP:>
+-c31c-field:ServerIP=服务器IP:
 
 #_______________________________=Magic Word:
 -7ba0-field:ServerMagicWordEntry=魔术语:
@@ -1946,7 +1946,7 @@
 -4028-field:TokenNotAvailable=<Not Available>
 
 #______________=Tor:
--8c44-field:Tor=<Tor:>
+-8c44-field:Tor=Tor:
 
 #______________________=Your Tor Settings
 -4656-field:TorSettings=你的Tor工具设置
@@ -1961,7 +1961,7 @@
 -13e0-field:TorStatusInitializing=嵌入的Tor正在初始化
 
 #_________________=Tor
--ed70-field:TorTab=<Tor>
+-ed70-field:TorTab=Tor
 
 #__________________=Turning Tor on here establishes the default setting for your use of Tor when in Martus. You can also, turn Tor ON or OFF at any time inside the Martus desktop application.
 -e344-field:TorTip1=使用Martus系统时，在这里打开建立了默认使用设置的Tor工具。你同样也可以在任何时候在Martus系统桌面应用中打开或者关闭Tor工具。
@@ -2015,7 +2015,7 @@
 -7dc3-field:UserNameAndPasswordMatches=用户名和密码匹配成功！
 
 #_______________________=- Your Username can contain letters, numbers, punctuation and spaces.
--f047-field:UserNameTip1=<- 你的用户名可以包含字母、数字、\n  标点和空格。>
+-f047-field:UserNameTip1=- 你的用户名可以包含字母、数字、\n  标点和空格。
 
 #_______________________=- It should have between 8-50 characters, and it is case sensitive.
 -3180-field:UserNameTip2=- 密码应该在 8-50 位数之间，\n  并且区分大小写。
@@ -2024,7 +2024,7 @@
 -c6f9-field:UserNameTip3=<- 切记选择一个你可以记住的用户\n  名。>
 
 #_______________________=Username Tips:
--c1b3-field:UserNameTips=<用户名提示:>
+-c1b3-field:UserNameTips=用户名提示:
 
 #______________________________=Username and Password
 -d205-field:UsernameAndPassword=<Username and Password>
@@ -2045,10 +2045,10 @@
 -1162-field:VerifyPublicCodeNewAndOld=<请根据你从联系人处接收的公开密码来验证下面的两个公开密码。你可以直观地验证任一个密码，不必两个都验证。这可以确保了你添加联系人的是你认为正在添加的那个。如果你没有他们的公开密码，你总是可以等到后面再验证。>
 
 #________________________=Version #:
--4e0d-field:VersionNumber=<Version #:>
+-4e0d-field:VersionNumber=版本 #:
 
 #_______________________________=View
--69bd-field:ViewAttachmentAction=<查看>
+-69bd-field:ViewAttachmentAction=查看
 
 #_____________________________=#NumberOfHQs# Contact account(s) can view this private information
 -4386-field:ViewBulletinHQInfo=#NumberOfHQs#个联系人帐户(s)可以查看这个隐私信息。
@@ -2654,7 +2654,7 @@
 -d219-field:location=位置
 
 #___________________=Date Format
--4827-field:mdyOrder=<日期格式顺序>
+-4827-field:mdyOrder=日期格式
 
 #_____________________________________________=The attachment could not be located.
 -65b1-field:messageErrorAttachmentMissingcause=附件无法定位
@@ -2756,7 +2756,7 @@
 -933f-field:notifyDropErrorscause=<移动公告(s)时出现意外错误。一个或多个文件可能损坏了。>
 
 #____________________________________________=The attachment could not be located.
--65b1-field:notifyErrorAttachmentMissingcause=<The attachment could not be located.>
+-65b1-field:notifyErrorAttachmentMissingcause=附件无法定位
 
 #____________________________________________=An unexpected error occurred in generating the key backup files.
 -d237-field:notifyErrorBackingUpKeySharecause=正在生成密钥备份文件时出现了一个意外错误。
@@ -2765,16 +2765,16 @@
 -e78e-field:notifyErrorBackingupKeyPair=无法认证该备份。请重试，或者尝试一下其它备份路径。
 
 #_______________________________________=This date occurs in the future:
--438b-field:notifyErrorDateInFuturecause=<This date occurs in the future:>
+-438b-field:notifyErrorDateInFuturecause=这个日期发生在未来
 
 #____________________________________________=This date range has an end date that is earlier than the start date: #FieldLabel#
--4952-field:notifyErrorDateRangeInvertedcause=<This date range has an end date that is earlier than the start date: #FieldLabel#>
+-4952-field:notifyErrorDateRangeInvertedcause=这个日期范围的结束日期在开始日期之前：#FieldLabel#
 
 #_______________________________________=Dates entered in '#FieldLabel#' cannot be earlier than #MinimumDate#
--db1c-field:notifyErrorDateTooEarlycause=<Dates entered in '#FieldLabel#' cannot be earlier than #MinimumDate#>
+-db1c-field:notifyErrorDateTooEarlycause=在'#FieldLabel#'输入的日期不能 早于#MinimumDate#。
 
 #______________________________________=Dates entered in '#FieldLabel#' cannot be later than #MaximumDate#
--615b-field:notifyErrorDateTooLatecause=<Dates entered in '#FieldLabel#' cannot be later than #MaximumDate#>
+-615b-field:notifyErrorDateTooLatecause=在 '#FieldLabel#'输入的日期不能晚于 #MaximumDate#。
 
 #_________________________________________=Unable to delete Folder.
 -1226-field:notifyErrorDeletingFoldercause=<Unable to delete Folder.>
@@ -2825,7 +2825,7 @@
 -1538-field:notifyErrorRenameFoldercause=文件夹名不能包含标点。它们不能以空格开头。
 
 #_____________________________________________=This field is required and cannot be left blank: #FieldLabel#
--dd0a-field:notifyErrorRequiredFieldBlankcause=<This field is required and cannot be left blank: #FieldLabel#>
+-dd0a-field:notifyErrorRequiredFieldBlankcause=这个字段是必需的且不能为空：#FieldLabel#
 
 #_________________________________________=An error prevented the record from being saved. Check to make sure the disk is not full or write protected.
 -6bc1-field:notifyErrorSavingBulletincause=<一个错误阻止了公告的保存进程。点击确认存储盘未满或没有读写保护。>
@@ -3080,16 +3080,16 @@
 -db36-field:notifyUnableToViewAttachmentcause=由于某个原因无法查看选定的附件。
 
 #_____________________________________=An unexpected error has occurred. Please report this problem to martus@benetech.org.
--201e-field:notifyUnexpectedErrorcause=<出现了一个意外错误。请发送错误报告到邮箱help@martus.org。>
+-201e-field:notifyUnexpectedErrorcause=出现了一个意外错误。请发送错误报告到邮箱martus@benetech.org。
 
 #_________________________________________________________=An error occurred during upload, and the record:'#BulletinTitle#' has not been sent to the server.  You may try and resend the record later.
 -4a05-field:notifyUploadFailedBulletinNotSentToServercause=<上传中出现错误，公告:'#BulletinTitle#' 没有成功发送到服务器。你可以在稍后尝试重发这个公告。>
 
 #_______________________________________=The Username you chose already exists on this system, please choose a different Username.
--3efd-field:notifyUserAlreadyExistscause=<你所选择的用户名已在系统存在，请选择另一个用户名。>
+-3efd-field:notifyUserAlreadyExistscause=你所选择的用户名已在系统存在，请选择另一个用户名。
 
 #___________________________________=Username must not be blank
--66fb-field:notifyUserNameBlankcause=<用户名不能为空>
+-66fb-field:notifyUserNameBlankcause=用户名不能为空
 
 #__________________________________________________=You have chosen not to use this server
 -91af-field:notifyUserRejectedServerCompliancecause=你决定不使用这个服务器
@@ -3143,7 +3143,7 @@
 -ea98-field:notifyuploadrejectedcause=<当前的Martus服务器拒绝接收公告。>
 
 #_________________________________________=Warning: You must enter the same Username you entered on the previous screen.
--0648-field:notifyusernamessdontmatchcause=<警告：你必须输入与上一个屏幕中输入的相同的用户名。>
+-0648-field:notifyusernamessdontmatchcause=警告：你必须输入与上一个屏幕中输入的相同的用户名。
 
 #_______________________=Organization
 -5192-field:organization=组织
@@ -3173,7 +3173,7 @@
 -0369-field:preferencesCheckFieldOfficeBulletins=<从联系人处自动检查新公告>
 
 #_______________________________=Enable Zawgyi font to display Burmese
--2bc5-field:preferencesUseZawgyi=<缅甸语的显示和输入使用藻基河字体>
+-2bc5-field:preferencesUseZawgyi=缅甸语的显示和输入使用藻基河字体
 
 #______________________=Additional Information
 -ecfe-field:privateinfo=<隐私>
@@ -3194,7 +3194,7 @@
 -0381-field:securityServerConfigValidate=基于安全理由，我们必须验证你的用户名和密码。
 
 #__________________________=Server:
--05a1-field:serverWithColon=<Server:>
+-05a1-field:serverWithColon=服务器:
 
 #_________________=Status
 -bae7-field:status=状态
@@ -3218,7 +3218,7 @@
 -768e-field:title=标题
 
 #_____________________________=Chinese pre-5.0
-field:translationVersion=<中文4.5>
+field:translationVersion=中文4.5
 
 #___________________=Username
 -84c2-field:username=用户名
@@ -3461,10 +3461,10 @@ field:translationVersion=<中文4.5>
 -15dc-language:zh=汉语
 
 #_________________=Account
--85df-menu:Account=<Account>
+-85df-menu:Account=账户
 
 #____________________________=Account Information
--0cbd-menu:AccountInformation=<Account Information>
+-0cbd-menu:AccountInformation=账户信息
 
 #________________________=Update Contact's Access...
 -1462-menu:AddPermissions=更新联系人权限…
@@ -3833,19 +3833,19 @@ field:translationVersion=<中文4.5>
 -f08d-tooltip:CaseSettings=<Case Settings>
 
 #_____________________=Copy
--af74-tooltip:CopyItem=<Copy>
+-af74-tooltip:CopyItem=复制
 
 #_______________________=Delete Case
 -9dbf-tooltip:DeleteCase=<Delete Case>
 
 #_______________________=Delete
--f6fd-tooltip:DeleteItem=<Delete>
+-f6fd-tooltip:DeleteItem=删除
 
 #_______________________=Empty Trash
 -cb42-tooltip:EmptyTrash=<Empty Trash>
 
 #_______________________=Export
--f3e4-tooltip:ExportItem=<Export>
+-f3e4-tooltip:ExportItem=导出
 
 #___________________________=Import Record
 -b810-tooltip:ImportBulletin=<Import Record>
@@ -3878,7 +3878,7 @@ field:translationVersion=<中文4.5>
 -a1d1-wintitle:AddingPermissionsToBulletins=<更新你的联系人公告权限>
 
 #_________________________=Attachments
--6771-wintitle:Attachments=<Attachments>
+-6771-wintitle:Attachments=附件
 
 #_______________________________=Author Information
 -42f4-wintitle:AuthorInformation=<Author Information>
@@ -3917,7 +3917,7 @@ field:translationVersion=<中文4.5>
 -c0ae-wintitle:CaseSaved=<Saved>
 
 #______________________=Sent
--35f4-wintitle:CaseSent=<Sent>
+-35f4-wintitle:CaseSent=已发送
 
 #________________________________=Create Report
 -446e-wintitle:ChooseReportFields=创建报告
@@ -3932,13 +3932,13 @@ field:translationVersion=<中文4.5>
 -b0ce-wintitle:ConfigureSpellCheck=配置拼写检查中
 
 #______________________=Contacts
--b0dd-wintitle:Contacts=<Contacts>
+-b0dd-wintitle:Contacts=联系人
 
 #______________________=Copy
--af74-wintitle:CopyItem=<Copy>
+-af74-wintitle:CopyItem=复制
 
 #_______________________________________=Create #FolderName#
--448b-wintitle:CreateCaseIncidentProject=<Create #FolderName#>
+-448b-wintitle:CreateCaseIncidentProject=账户 #FolderName#
 
 #_________________________=Charts
 -8610-wintitle:CreateChart=图表
@@ -3950,10 +3950,10 @@ field:translationVersion=<中文4.5>
 -a3fd-wintitle:DeleteBulletinFile=<删除公告文件夹>
 
 #_______________________________________=Delete #FolderName#
--ec13-wintitle:DeleteCaseIncidentProject=<Delete #FolderName#>
+-ec13-wintitle:DeleteCaseIncidentProject=删除#FolderName#
 
 #__________________________=Delete
--f6fd-wintitle:DeleteFolder=<Delete>
+-f6fd-wintitle:DeleteFolder=删除
 
 #__________________________________________=Delete My Data From This Computer
 -216c-wintitle:DeleteMyDataFromThisComputer=从这台计算机上删除我的数据
@@ -3965,7 +3965,7 @@ field:translationVersion=<中文4.5>
 -84e6-wintitle:DeleteServerDraftsBulletinSummaries=<公告概述正在取回中>
 
 #_____________________=Details
--dc3d-wintitle:Details=<Details>
+-dc3d-wintitle:Details=详情
 
 #_____________________________________________=Warning Duplicate Labels Found
 -8e46-wintitle:DuplicateLabelsInCustomTemplate=发现重复的标签警告
@@ -4016,7 +4016,7 @@ field:translationVersion=<中文4.5>
 -5bc6-wintitle:ExitWizard=退出Martus系统安装向导
 
 #____________________=Export
--f3e4-wintitle:Export=<Export>
+-f3e4-wintitle:Export=导出
 
 #_____________________________=Export Records
 -fc5c-wintitle:ExportBulletins=<导出公告>
@@ -4559,7 +4559,7 @@ field:translationVersion=<中文4.5>
 -a1f7-wintitle:notifyDropErrors=<正在移动公告(s)时出现错误>
 
 #__________________________________________=Attachment Missing
--11e1-wintitle:notifyErrorAttachmentMissing=<Attachment Missing>
+-11e1-wintitle:notifyErrorAttachmentMissing=附件丢失
 
 #__________________________________________=Error Backing Up Key
 -ee40-wintitle:notifyErrorBackingUpKeyShare=备份密钥错误
@@ -4568,16 +4568,16 @@ field:translationVersion=<中文4.5>
 -154c-wintitle:notifyErrorBackingupKeyPair=检验密钥对错误
 
 #_____________________________________=Date Invalid
--3af5-wintitle:notifyErrorDateInFuture=<Date Invalid>
+-3af5-wintitle:notifyErrorDateInFuture=日期无效
 
 #__________________________________________=Date Range Invalid
--1228-wintitle:notifyErrorDateRangeInverted=<Date Range Invalid>
+-1228-wintitle:notifyErrorDateRangeInverted=日期范围无效
 
 #_____________________________________=Date Too Early
--63d3-wintitle:notifyErrorDateTooEarly=<Date Too Early>
+-63d3-wintitle:notifyErrorDateTooEarly=日期过早
 
 #____________________________________=Date Too Late
--7b75-wintitle:notifyErrorDateTooLate=<Date Too Late>
+-7b75-wintitle:notifyErrorDateTooLate=日期过迟
 
 #_______________________________________=Error Deleting Folder
 -ebd5-wintitle:notifyErrorDeletingFolder=<Error Deleting Folder>
@@ -4628,7 +4628,7 @@ field:translationVersion=<中文4.5>
 -1ce2-wintitle:notifyErrorRenameFolderExists=无法重命名文件夹
 
 #___________________________________________=Required Field Blank
--1131-wintitle:notifyErrorRequiredFieldBlank=<Required Field Blank>
+-1131-wintitle:notifyErrorRequiredFieldBlank=要求字段为空
 
 #_______________________________________=Error Saving
 -9dc8-wintitle:notifyErrorSavingBulletin=正在保存时出现错误
@@ -4817,10 +4817,10 @@ field:translationVersion=<中文4.5>
 -f2d7-wintitle:notifyRetrievedOnlySomeSummaries=取回进程出错
 
 #________________________________________=Error Changing Username or Password
--97d9-wintitle:notifyRewriteKeyPairFailed=<更改用户名或密码错误>
+-97d9-wintitle:notifyRewriteKeyPairFailed=更改用户名或密码错误
 
 #_______________________________________=Changed Username or Password
--d54a-wintitle:notifyRewriteKeyPairSaved=<用户名和密码已修改>
+-d54a-wintitle:notifyRewriteKeyPairSaved=用户名和密码已修改
 
 #_________________________________________________=Seal Records
 -b07e-wintitle:notifySealSelectedZeroBulletinsOurs=<密封公告>
@@ -4853,7 +4853,7 @@ field:translationVersion=<中文4.5>
 -8db5-wintitle:notifyShowTokenAndPublicCode=帐户令牌和公开密码
 
 #__________________________________________=Error
--7f2f-wintitle:notifySyncDisabledDueToError=<Error>
+-7f2f-wintitle:notifySyncDisabledDueToError=错误
 
 #_______________________________________________________________=Download Information
 -a620-wintitle:notifySyncUnableToDeleteLocalOnlyOrImmutableFiles=<Download Information>
@@ -4871,7 +4871,7 @@ field:translationVersion=<中文4.5>
 -4043-wintitle:notifyUnableToCreateFolder=<Error Creating Folder>
 
 #_______________________________________________=Error
--7f2f-wintitle:notifyUnableToLoadCurrentTemplate=<Error>
+-7f2f-wintitle:notifyUnableToLoadCurrentTemplate=错误
 
 #_____________________________________________________=Unable To Retrieve Contact Info
 -df02-wintitle:notifyUnableToRetrieveContactFromServer=无法取回联系人信息
