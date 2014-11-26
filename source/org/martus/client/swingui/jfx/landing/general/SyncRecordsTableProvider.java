@@ -129,12 +129,12 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 		addAllServerSummaries(summaries, false);
 	}
 	
-	private void addAllServerSummaries(Vector summaries, boolean mutable) throws Exception
+	private void addAllServerSummaries(Vector summaries, boolean canDelete) throws Exception
 	{
 		for (Iterator iterator = summaries.iterator(); iterator.hasNext();)
 		{
 			BulletinSummary summary = (BulletinSummary) iterator.next();
-			ServerSyncTableRowData bulletinData = new ServerSyncTableRowData(summary, mutable, mainWindow.getApp());
+			ServerSyncTableRowData bulletinData = new ServerSyncTableRowData(summary, canDelete, mainWindow.getApp());
 			addServerRecord(bulletinData);	
 		}
 	}
