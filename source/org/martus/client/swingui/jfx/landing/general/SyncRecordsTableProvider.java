@@ -112,14 +112,14 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 	public void addBulletinsAndSummaries(Set localUidsToUse, Vector myDraftSummaries, Vector mySealedSummaries, Vector hqDraftSummaries, Vector hqSealedSummaries) throws Exception
 	{
 		localUids = localUidsToUse;
-		addAllServerSummariesMutable(myDraftSummaries);
+		addAllCanDeleteServerSummaries(myDraftSummaries);
 		addAllServerSummariesImmutable(mySealedSummaries);
 		addAllServerSummariesImmutable(hqDraftSummaries);
 		addAllServerSummariesImmutable(hqSealedSummaries);
 		addLocalBulletions();
 	}
 
-	private void addAllServerSummariesMutable(Vector summaries) throws Exception
+	private void addAllCanDeleteServerSummaries(Vector summaries) throws Exception
 	{
 		addAllServerSummaries(summaries, true);
 	}
