@@ -42,10 +42,10 @@ import org.martus.swing.FontHandler;
 
 public class ServerSyncTableRowData
 {
-	public ServerSyncTableRowData(BulletinSummary summaryToUse, boolean mutable, MartusApp app) throws Exception
+	public ServerSyncTableRowData(BulletinSummary summaryToUse, boolean canDelete, MartusApp app) throws Exception
 	{
 		uid = summaryToUse.getUniversalId();
-		canDeleteFromServer = new SimpleBooleanProperty(mutable);
+		canDeleteFromServer = new SimpleBooleanProperty(canDelete);
 		canUploadToServer = new SimpleBooleanProperty(false);
 		setLocation(app, LOCATION_SERVER);
 		isLocal = new SimpleBooleanProperty(false);
