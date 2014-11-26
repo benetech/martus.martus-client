@@ -113,9 +113,9 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 	{
 		localUids = localUidsToUse;
 		addAllCanDeleteServerSummaries(myDraftSummaries);
-		addAllServerSummariesImmutable(mySealedSummaries);
-		addAllServerSummariesImmutable(hqDraftSummaries);
-		addAllServerSummariesImmutable(hqSealedSummaries);
+		addAllCanNotDeleteServerSummaries(mySealedSummaries);
+		addAllCanNotDeleteServerSummaries(hqDraftSummaries);
+		addAllCanNotDeleteServerSummaries(hqSealedSummaries);
 		addLocalBulletions();
 	}
 
@@ -124,7 +124,7 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 		addAllServerSummaries(summaries, true);
 	}
 
-	private void addAllServerSummariesImmutable(Vector summaries) throws Exception
+	private void addAllCanNotDeleteServerSummaries(Vector summaries) throws Exception
 	{
 		addAllServerSummaries(summaries, false);
 	}
