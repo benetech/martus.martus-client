@@ -124,6 +124,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestTransferableAttachments.class));
 		suite.addTest(new TestSuite(TestTransferableBulletin.class));
 		suite.addTest(new TestSuite(TestRandomAccessFileOverwrite.class));
+		suite.addTest(new TestSuite(TestUiSession.class));
 	    return suite;
 	}
 }
