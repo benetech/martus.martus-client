@@ -742,6 +742,8 @@ public class EnglishStrings
 "field:Edit=Edit",
 "field:UsernameAndPassword=Username and Password",
 "field:AssistanceWithMartusPart1=Martus help documentation is available at",
+"field:AssistanceWithMartusPart1B=or inside C:\\Martus\\Docs on Windows",
+"field:AssistanceWithMartusPart1C=and the Martus Documentation folder inside the Martus DMG on Mac.",
 "field:AssistanceWithMartusPart2=For additional assistance, please email",
 "field:All=All",
 "field:LocalOnly=Local Only",

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -12,9 +13,15 @@
                <HBox alignment="CENTER_LEFT">
                   <children>
                   		<Label text="%AssistanceWithMartusPart1" />
-                  		<Hyperlink onAction="#onMartusLinkClick" text="https://martus.org " />
+                  		<Hyperlink onAction="#onMartusLinkClick" text="https://martus.org," />
                   </children>
               </HBox>
+            <Label text="%AssistanceWithMartusPart1B">
+               <padding>
+                  <Insets bottom="3.0" />
+               </padding>
+            </Label>
+            <Label text="%AssistanceWithMartusPart1C" />
               <HBox alignment="CENTER_LEFT">
                  <children>
                   		<Label text="%AssistanceWithMartusPart2" />
