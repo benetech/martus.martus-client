@@ -88,6 +88,7 @@ public class ScrollFreeTextArea extends StackPane
 		flow = new TextFlow(text);
 		flow.prefWidthProperty().bind(textArea.widthProperty());
 		flow.setPadding(getInsetsToRoughlyMatchTextArea());
+		flow.setVisible(false);
 		
 		textArea.prefHeightProperty().bind(flow.heightProperty());
 		// NOTE: Binding minHeight forces the box to grow but never shrink, 
