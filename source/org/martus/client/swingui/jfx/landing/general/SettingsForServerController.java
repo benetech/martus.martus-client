@@ -110,6 +110,9 @@ public class SettingsForServerController extends FxInSwingController
 
 	public String getPublicCodeFromPublicKey(String publicKey) throws Exception
 	{
+		if(publicKey.length() == 0)
+			return "";
+		
 		return MartusCrypto.computeFormattedPublicCode40(publicKey);
 	}
 	
