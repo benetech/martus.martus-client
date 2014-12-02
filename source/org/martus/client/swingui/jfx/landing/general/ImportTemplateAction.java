@@ -106,8 +106,12 @@ public class ImportTemplateAction implements ActionDoer
 				if (FxInSwingContentController.isMctFileFilterSelected(getLocalization(), chosenExtensionFilter, templateFileToImport))
 					getManageTemplatesController().importFormTemplateFromMctFile(templateFileToImport);
 
-				if (FxInSwingContentController.isXmlExtensionSelected(getLocalization(), chosenExtensionFilter, templateFileToImport))
+				else if (FxInSwingContentController.isXmlExtensionSelected(getLocalization(), chosenExtensionFilter, templateFileToImport))
 					getManageTemplatesController().importXmlFormTemplate(templateFileToImport);
+				
+				else
+					getManageTemplatesController().importXmlFormTemplate(templateFileToImport);
+					
 			}
 			catch (Exception e)
 			{
