@@ -299,7 +299,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 			doPostSigninAppInitialization();
 		}
 		
-		getSession().initalizeUiState();
+		initalizeUiState(getLocalization().getCurrentLanguageCode());
 		
 
 		try

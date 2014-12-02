@@ -32,6 +32,7 @@ import java.util.Map;
 import org.martus.client.core.FontSetter;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.MartusAppInitializationException;
+import org.martus.client.test.MockMartusApp;
 import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.EnglishCommonStrings;
@@ -72,6 +73,8 @@ public class UiSession
 			return;
 		}
 		getUiState().load(uiStateFile);
+		if(getApp().isSignedIn())
+			uiState.setCurrentLanguage(defaultLanguageCode);
 		getLocalization().setLanguageSettingsProvider(uiState);
 	}
 
@@ -141,8 +144,13 @@ public class UiSession
 	{
 		return app;
 	}
+	
+	public void setAppForUnitTests(MockMartusApp testApp)
+	{
+		app = testApp;
+	}
 
-	CurrentUiState getUiState()
+	public CurrentUiState getUiState()
 	{
 		return uiState;
 	}
