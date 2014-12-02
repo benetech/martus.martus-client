@@ -81,8 +81,11 @@ public class ImportBulletinAction implements ActionDoer
 		if (FxInSwingContentController.isXmlExtensionSelected(getLocalization(), chosenExtensionFilter, fileToImport))
 			importBulletinFromXmlFile(fileToImport);
 		
-		if (FxInSwingContentController.isMbaExtensionSelected(getLocalization(), chosenExtensionFilter, fileToImport))
+		else if (FxInSwingContentController.isMbaExtensionSelected(getLocalization(), chosenExtensionFilter, fileToImport))
 			importBulletinFromMbaFile(fileToImport);
+		
+		else
+			importBulletinFromXmlFile(fileToImport);
 	}
 	
 	private void importBulletinFromXmlFile(File fileToImport)
