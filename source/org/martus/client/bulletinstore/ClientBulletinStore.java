@@ -71,6 +71,7 @@ import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.BulletinHistory;
+import org.martus.common.packet.ExtendedHistoryList;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.UniversalId.NotUniversalIdException;
@@ -837,7 +838,7 @@ public class ClientBulletinStore extends BulletinStore
 		}
 	}
 
-	public Bulletin copyBulletinWithoutContacts(UniversalId bulletinId, String newTitle) throws Exception
+	public Bulletin copyBulletinWithoutContactsOrHistory(UniversalId bulletinId, String newTitle) throws Exception
 	{
 		Bulletin original = getBulletinRevision(bulletinId);
 		FieldSpecCollection publicFieldSpecsToUse = original.getTopSectionFieldSpecs();
@@ -845,13 +846,14 @@ public class ClientBulletinStore extends BulletinStore
 		Bulletin copy = createNewDraft(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
 		copy.set(Bulletin.TAGTITLE, newTitle);
 		clearAuthorizedToReadKeys(copy);
+		copy.setHistory(new BulletinHistory());
+		copy.getBulletinHeaderPacket().setExtendedHistory(new ExtendedHistoryList());
 		return copy;
 	}
 
 	private void clearAuthorizedToReadKeys(Bulletin copy)
 	{
-		HeadquartersKeys noKeys = new HeadquartersKeys();
-		copy.setAuthorizedToReadKeys(noKeys);
+		copy.clearAuthorizedToReadKeys();
 	}
 
 	public boolean isMyBulletin(Bulletin original)
