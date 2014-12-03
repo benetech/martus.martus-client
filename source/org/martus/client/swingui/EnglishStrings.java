@@ -69,7 +69,6 @@ public class EnglishStrings
 "wintitle:confirmServerComplianceFailed=Server Compliance Statement",
 "wintitle:confirmWarnMissingOrCorruptAccountMapSignatureFile=Accountmap Signature File Missing Or Corrupt",
 "wintitle:confirmWarnMissingAccountMapFile=Accountmap File Missing Or Corrupt",
-"wintitle:confirmBackupKeyPairSecretShare=Key Backup",
 "wintitle:confirmCancelShareBackup=Key Backup",
 "wintitle:confirmEnterCustomFields=Customize Fields",
 "wintitle:confirmUndoCustomFields=Customize Fields",
@@ -327,7 +326,6 @@ public class EnglishStrings
 "wintitle:ErrorVerifyingKeyPairShare=Verification Error",				
 "wintitle:VerifyingKeyPairShare=Verifying Disk",
 "wintitle:RemoveServer=Remove Server",
-"wintitle:BackupKeyPairGeneralInfo=Backup Key Information",
 "wintitle:BackupKeyPairToSecretShareInformation=Backup Key Information ",
 
 // NOTE: Without notify is for swing; with notify is for javafx 
@@ -672,7 +670,6 @@ public class EnglishStrings
 "field:ErrorVerifyingKeyPairShare=An error occurred verifying this key backup file.",
 "field:RecoverAccount=Restore your existing account from a backup file.",
 "field:ErrorBackingupKeyPair=Unable to back up the key file on this disk.",
-"field:BackupKeyPairGeneralInfo=Your key is required to read private record information and to create new records.  To ensure that you always have access to your data, it is extremely important to keep a backup of your key.\n\nThere are two methods for backing up your key and we strongly recommend using both methods.  The first method saves a single, password encrypted key back up file to a removable medium (e.g. cd, USB storage) or a network drive; the second method backs up the key in #TotalNumberOfFilesInBackup# pieces (not encrypted with your password) onto multiple removable media.\n",
 "field:BackupKeyPairToSecretShareInformation=This method breaks up your key into #TotalNumberOfFilesInBackup# pieces, any #MinimumNumberOfFilesNeededForRecovery# of which will be required to reconstruct the key without requiring a password. If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #TotalNumberOfFilesInBackup# files have been written to removable media disks, you should distribute them to #TotalNumberOfFilesInBackup# different people whom you will remember, but each of whom doesn't know to whom you have given the other files. Do not store any of the disks together.\n",
 "field:BulletinWasSent=Sent",
 "field:" + Bulletin.PSEUDOFIELD_WAS_SENT + "=Sent",
@@ -708,7 +705,7 @@ public class EnglishStrings
 	"so they are not included in the list above.",
 "field:DownloadTemplateFromMartusUser=Download from Another Martus User",
 "field:DownloadTemplateFromMyContacts=Download from my Contacts",
-	
+"field:ExportMultiKeyNote=Note: This is the only way you can restore access to your account if you forget your password.",	
 "field:ContactVerifyNow=Verify Now",
 "field:ContactVerified=Verified",
 "field:AuthorizedToReadNotInContacts=#PublicCode# (not currently in contacts)",
@@ -913,8 +910,6 @@ public class EnglishStrings
 "field:confirmReportIncludePrivatecause=There are no records with public data. Include private data?",
 "field:confirmReportIncludePrivateeffect=Press 'Include Private Data' to continue with private data included, or press 'Cancel' to exit and return to Martus.",
 
-"field:confirmBackupKeyPairSecretSharecause=We recommend that you now create #TotalNumberOfFilesInBackup# separate key backup files of which any #MinimumNumberOfFilesNeededForRecovery# can be used to reconstruct your key without a Username or password being required.",
-"field:confirmBackupKeyPairSecretShareeffect=By choosing Yes, you will be prompted to save pieces of your key onto removable disks.",
 "field:confirmCancelShareBackupcause=Do you wish to cancel this backup?",
 "field:confirmCancelShareBackupeffect=By choosing Yes, you will exit this backup.",
 "field:confirmEnterCustomFieldscause=You have chosen to customize the fields that will be used in any new records created by this account.",
@@ -2033,7 +2028,7 @@ public class EnglishStrings
 "field:BackupYourKey=Backup Your Key",
 "field:BackupYourKeyInformation=Back up your encryption key to be able to restore your account.",
 "button:CreateSingleEncryptedFile=Export Password Protected Key",
-"field:CreateSingleEncryptedFileInformation=Note: This backup method requires your username and password to restore your account.",
+"field:CreateSingleEncryptedFileInformation=Note: This requires your username and password to restore your account.",
 "field:BackupYourKeyTip1=Be sure to save a copy of your account key to a secure location that is different from the computer where you currently have Martus installed, so you have it if you need to restore your account.",
 "field:BackupYourKeyTip2=Martus also offers a way to back up your key in 3 separate pieces, which is the only way for you to access your Martus account and data if you forget your Username and password. You will be prompted to create the 3 piece backup after completing your account setup and we strongly encourage you to do so.",
 
