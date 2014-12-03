@@ -722,16 +722,49 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		String originalTitle = "original Title!";
 		original.set(BulletinConstants.TAGTITLE, originalTitle);
 		original.setAuthorizedToReadKeys(keys);
+		original.getBulletinHeaderPacket().setAuthorizedToReadKeysPending(keys);
+		{
+			BulletinHistory fakeHistory = new BulletinHistory();
+			fakeHistory.add("older version");
+			original.setHistory(fakeHistory);
+		}
+		{
+			BulletinHistory extendedHistory = new BulletinHistory();
+			extendedHistory.add("other version");
+			ExtendedHistoryList extendedHistoryList = new ExtendedHistoryList();
+			extendedHistoryList.add("Other account", extendedHistory);
+			original.getBulletinHeaderPacket().setExtendedHistory(extendedHistoryList);
+		}
 		original.setMutable();
 		testStore.saveBulletin(original);
+
+		assertNotEquals("Original doesn't have history?", 0, original.getHistory().size());
+		assertNotEquals("Original doesn't have extended history?", 0, original.getBulletinHeaderPacket().getExtendedHistory());
+
 		UniversalId originalId = original.getUniversalId();
 		String copyTitle = "Copy of original Title!";
-		Bulletin copy = testStore.copyBulletinWithoutContacts(originalId, copyTitle);
+		Bulletin copy = testStore.copyBulletinWithoutContactsOrHistory(originalId, copyTitle);
 		String returnedCopy1Title = copy.get(Bulletin.TAGTITLE);
 		assertNotEquals("Original Bulletin Id is the same as the Copy1's?",originalId.toString(), copy.getUniversalIdString());
 		assertEquals("Copy should have a title its own title", copyTitle, returnedCopy1Title);
 		assertEquals("Original Bulletin does not have a contact?", 1, original.getAuthorizedToReadKeys().size());
-		assertEquals("Copy Bulletin does not have a contact?", 0, copy.getAuthorizedToReadKeys().size());
+		assertEquals("Copy Bulletin has a contact?", 0, copy.getAuthorizedToReadKeysIncludingPending().size());
+		assertEquals("Copy kept the history?", 0, copy.getHistory().size());
+		assertEquals("Copy kept the extended history?", 0, copy.getBulletinHeaderPacket().getExtendedHistory().size());
+		
+		original.setImmutable();
+		original.setImmutableOnServer(true);
+		original.getBulletinHeaderPacket().setSnapshot(true);
+		testStore.saveBulletin(original);
+		Bulletin copyOfImmutable = testStore.copyBulletinWithoutContactsOrHistory(originalId, copyTitle);
+		assertNotEquals("Original Bulletin Id is the same as the Copy2's?",originalId.toString(), copyOfImmutable.getUniversalIdString());
+		assertEquals("Copy2 should have a title its own title", copyOfImmutable.get(Bulletin.TAGTITLE), returnedCopy1Title);
+		assertEquals("Copy2 Bulletin does not have a contact?", 0, copyOfImmutable.getAuthorizedToReadKeysIncludingPending().size());
+		assertEquals("Copy2 kept the history?", 0, copyOfImmutable.getHistory().size());
+		assertEquals("Copy2 kept the extended history?", 0, copyOfImmutable.getBulletinHeaderPacket().getExtendedHistory().size());
+		
+		assertEquals("original lost its history?", 1, original.getHistory().size());
+		assertEquals("original lost its extended history?", 1, original.getBulletinHeaderPacket().getExtendedHistory().size());
 	}
 
 	public void testDiscardBulletin() throws Exception
