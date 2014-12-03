@@ -27,7 +27,6 @@ package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
 
-import org.martus.client.swingui.UiBackupRecoverSharedKeyPair;
 import org.martus.client.swingui.UiMainWindow;
 
 
@@ -45,9 +44,6 @@ public class ActionMenuBackupMyKeyPair extends UiMenuAction implements ActionDoe
 
 	public void doAction()
 	{
-		String message =  mainWindow.getLocalization().getFieldLabel("BackupKeyPairGeneralInfo");
-		mainWindow.displayScrollableMessage("confirmBackupKeyPairInformation", message, "Continue", UiBackupRecoverSharedKeyPair.getTokenReplacement());
-		
 		backupKey();
 	}
 
