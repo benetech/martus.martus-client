@@ -52,7 +52,6 @@ import org.martus.client.core.templates.FormTemplateManager;
 import org.martus.client.swingui.bulletintable.BulletinTableModel;
 import org.martus.common.BulletinSummary;
 import org.martus.common.FieldSpecCollection;
-import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusXml;
