@@ -1880,9 +1880,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 				return;
 			
 			retrieveRecordsFromServer(folderName, uidList);
-			
-//			if(progressDlg.shouldExit())
-//				notifyDlg("RetrieveCanceled");
 		}
 		catch(ServerErrorException e)
 		{
