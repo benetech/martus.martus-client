@@ -62,7 +62,6 @@ public class EnglishStrings
 "wintitle:confirmUploadReminder=Upload Reminder",
 "wintitle:confirmDraftUploadReminder=Unsent Draft Reminder",
 "wintitle:confirmRedoWeakPassword=Weak Password Warning",
-"wintitle:confirmExportPrivateData=Confirm Export Private Data",
 "wintitle:confirmResetDefaultDetails=Reset Contents",
 "wintitle:confirmNotYourBulletinViewAttachmentAnyways=Attachment Warning",
 "wintitle:confirmServerComplianceFailed=Server Compliance Statement",
@@ -304,7 +303,6 @@ public class EnglishStrings
 "wintitle:RetrieveMyDraftBulletinProgress=Retrieving Records",
 "wintitle:RetrieveMySealedBulletinSummaries=Retrieving Record Summaries",
 "wintitle:RetrieveMyDraftBulletinSummaries=Retrieving Record Summaries",
-"wintitle:DeleteServerDraftsBulletinSummaries=Retrieving Record Summaries",
 "wintitle:ConfigServer=Server Configuration",
 "wintitle:ServerSelectionResults=Server Configuration Results",
 "wintitle:search=Search",
@@ -334,7 +332,6 @@ public class EnglishStrings
 "wintitle:helpStringNotFound=Search Text Not Found",
 "wintitle:CreateCustomFieldsHelp=Help on Creating Custom Fields",
 "wintitle:ErrorCustomFields=Customize Fields Error",
-"wintitle:ExportCustomizationTemplateSaveAs=Export Customization Template",
 "wintitle:SetFolderOrder=Folder Order",
 "wintitle:FancySearchHelp=Search Help",
 "wintitle:ConfigureSpellCheck=Configure Spell Checking",
@@ -708,7 +705,6 @@ public class EnglishStrings
 "field:AuthorizedToReadNotInContacts=#PublicCode# (not currently in contacts)",
 "field:AccountIdWithPublicCode=#AccountId# #PublicCode#",
 "field:HistoryVersion=#VersionNumber#: #DateSaved# : #Title#",
-"wintitle:ExportEncryptedBulletin=Export Encrypted",
 "menu:Account=Account",
 "field:AuthorNicknameFieldDescription=Name here if available otherwise blank",
 "field:AuthorPublicCode=Author Public Code:",
@@ -820,29 +816,17 @@ public class EnglishStrings
 "field:notifyViewKeyDetailscause=Label: #Label#\n\nPublic Code: #PublicCode#\n\nPublic Account Id: #PublicKey#",
 "wintitle:FileDialogAddAttachment=Add Attachment",
 
-"wintitle:FileDialogRestoreFromKeyPair=Restore Account",
 "button:FileDialogOkRestoreFromKeyPair=Restore",
 
-"wintitle:FileDialogImportMBA=Import Martus Record Archive",
 "button:FileDialogOkImportMBA=Import",
 
 "button:FileDialogOkImportCustomization=Import",
 
-"wintitle:FileDialogImportBulletins=Import Records",
 "button:FileDialogOkImportBulletins=Import",
 
-"wintitle:FileDialogRecoverSharedKeyPair=Recover Shared Key",
 "button:FileDialogOkRecoverSharedKeyPair=Recover",
 
-"wintitle:FileDialogSaveReportFormat=Save Report Format",
-
-"wintitle:FileDialogPrintToFile=Print to File",
-
 "wintitle:FileDialogSaveKeyPair=Backup Key File",
-
-"wintitle:FileDialogExportMBA=Export Martus Record Archive",
-
-"wintitle:FileDialogSaveAttachment=Save Attachment",
 
 "wintitle:FileSaveDialogExport=Export Records to which file?",
 "wintitle:FolderSelectDialogExport=Export to which folder?",
@@ -851,8 +835,6 @@ public class EnglishStrings
 
 "wintitle:AddTemplate=Add Form Template",
 "field:confirmTemplateAlreadyExistscause=A template by that name already exists. Select Yes to replace the old template with this new one.",
-
-"wintitle:FileDialogExportPublicKey=Export Public Account Key",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
@@ -1516,10 +1498,7 @@ public class EnglishStrings
 "field:UnknownFieldType=WARNING: This field requires a newer release of Martus to be viewed",
 "field:BackupSecretShareCompleteInformation=Backup complete, please give each disk to someone you trust, so that if you forget your Username and/or password in the future you can recreate your account.  You will need #MinimumNumberOfFilesNeededForRecovery# of these disks to recreate your account.",
 "field:BackupRecoverKeyPairInsertNextDiskMessage=Please insert disk #",
-"field:DeleteKeypair=Delete key File",
 "field:ScrubDataBeforeDelete=Scrub data before deleting",
-"field:ExitWhenComplete=Exit when complete",
-"field:DonotPrompt=Do not prompt",
 "field:UninstallMartus=Uninstall Martus",
 "field:RemoveServerLabel1=The following server will be removed:",
 "field:RemoveServerLabel2=Are you sure you want to do this?",
@@ -1779,13 +1758,11 @@ public class EnglishStrings
 "wintitle:RetrieveHQDraftBulletinSummaries=Retrieving Record Summaries",
 "wintitle:AddPermissions=Update your contacts' access to Records",
 "wintitle:AddingPermissionsToBulletins=Update your Contacts' access to Records",
-"wintitle:FileDialogImportHeadquartersPublicKey=Add a contact",
 "wintitle:Attachments=Attachments",
 "wintitle:Details=Details",
 "wintitle:Contacts=Contacts",
 
 "menu:AddPermissions=Update Contact's Access...",
-"button:FileDialogOkImportHeadquartersPublicKey=Import",
 "button:AddPermissions=Update Contact's Access",
 "button:Contacts=Contacts",
 "button:ManageContacts=Manage Contacts",
@@ -2037,7 +2014,6 @@ public class EnglishStrings
 "button:RenameFolder=Rename",
 "wintitle:DeleteFolder=Delete",
 "field:DeleteFolderMessage=You are about to delete #FolderName#",
-"field:DeleteAssociatedFilesInFolder=Delete associated files?",
 "field:notifyUnableToCreateFoldercause=Unable to create Folder.",
 "wintitle:notifyUnableToCreateFolder=Error Creating Folder",
 "field:notifyErrorDeletingFoldercause=Unable to delete Folder.",
