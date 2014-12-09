@@ -84,8 +84,6 @@ public class EnglishStrings
 "wintitle:confirmhelpStringNotFound=Text Not Found",
 "wintitle:confirmNeedsFolderMigration=Folder Migration Required",
 "wintitle:confirmNeedsBulletinVersioningMigration=Record Versioning Migration Required",
-"wintitle:confirmUseBulletinsCustomFields=Custom Fields Selection",
-"wintitle:confirmUseBulletinsDraftCustomFields=Custom Fields Selection",
 "wintitle:confirmUnAuthoredBulletinDeleteBeforePaste=Record Already Exists",
 "wintitle:confirmRemoveMartus=Delete All Data and Remove Martus",
 "wintitle:confirmDeleteMyData=Delete My Data",
@@ -96,9 +94,7 @@ public class EnglishStrings
 "wintitle:confirmPrintAllPrivateData=Print All Private Data",
 "wintitle:confirmCancelRetrieve=Cancel Retrieve",
 "wintitle:confirmReportIncludePrivate=All Data Private",
-"wintitle:confirmSearchProgressCancel=Cancel Search",
 "wintitle:confirmSealSelectedBulletins=Seal Records",
-"wintitle:confirmSealingSelectedBulletinsCancel=Sealing Records",
 "wintitle:confirmXmlSchemaNewerImportAnyway=Import Records",
 "wintitle:confirmImportingCustomizationUnknownSigner=Template Manager",
 
@@ -147,7 +143,6 @@ public class EnglishStrings
 "wintitle:notifyPublicInfoFileError=Error Importing Public Information",
 "wintitle:notifyErrorSavingConfig=Error Saving Configuration File",
 "wintitle:notifyAuthenticateServerFailed=Security Alert!",
-"wintitle:notifyWelcomeToMartus=Welcome To Martus",
 "wintitle:notifyUnexpectedError=Unexpected Error",
 "wintitle:notifyInvalidServerName=Invalid Server Name or IP Address",
 "wintitle:notifyInvalidServerCode=Invalid Server Public Code",
@@ -462,8 +457,6 @@ public class EnglishStrings
 "button:RetrieveLatestBulletinRevisionOnly=Retrieve latest record version only",
 "button:FolderOrderUp=Up",
 "button:FolderOrderDown=Down",
-"button:UseOldCustomFields=Use Old",
-"button:UseNewCustomFields=Use New",
 "button:CloseHelp=Close Help",
 "button:SearchFinalBulletinsOnly=Only search most recent version of records",
 "button:SearchSameRowsOnly=Match multi-item list details in the search screen to a single item. See the search Help screen for additional guidance on this advanced option.",
@@ -518,8 +511,6 @@ public class EnglishStrings
 "field:notifySyncUnableToDeleteLocalOnlyOrImmutableFilescause=The following records were unable to be deleted since they were only found locally or you do not have permission to delete them off the server.  The remaining records will be deleted.",
 
 "button:IncludePrivateBulletins=Include Private Data",
-"button:SettingOn=On",
-"button:SettingOff=Off",
 "button:emptyTrash=Empty",
 
 "menu:file=File",
@@ -797,8 +788,6 @@ public class EnglishStrings
 "button:ExportTo=Send To",
 
 "field:AddingPermissionsToBulletins=Updating access...",
-"wintitle:notifyViewKeyDetails=View Key Details",
-"field:notifyViewKeyDetailscause=Label: #Label#\n\nPublic Code: #PublicCode#\n\nPublic Account Id: #PublicKey#",
 "wintitle:FileDialogAddAttachment=Add Attachment",
 
 "button:FileDialogOkRestoreFromKeyPair=Restore",
@@ -819,7 +808,6 @@ public class EnglishStrings
 "wintitle:FileDialogExportCustomization=Export Customization Template",
 
 "wintitle:AddTemplate=Add Form Template",
-"field:confirmTemplateAlreadyExistscause=A template by that name already exists. Select Yes to replace the old template with this new one.",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
@@ -910,10 +898,6 @@ public class EnglishStrings
 "field:confirmNeedsBulletinVersioningMigrationcause=This account was created with an older release of Martus, which was unaware of multiple sealed record versions. We need to update your system to recognize records with versions.  The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.",
 "field:confirmNeedsBulletinVersioningMigrationeffect=Answering Yes will allow the migration to proceed, answering No will exit Martus.",
 
-"field:confirmUseBulletinsCustomFieldscause=The record you are about to create is based on a previous record whose custom fields are different from your current custom fields.  Do you wish to use the original record's custom fields?",
-"field:confirmUseBulletinsCustomFieldseffect=Answering '#UseOldCustomFields#' will use the old custom fields and all record data.  Answering '#UseNewCustomFields#' will use your current custom fields and copy all similar fields to the new record but you may lose some of the original record's data.",
-"field:confirmUseBulletinsDraftCustomFieldscause=The draft record you are about to modify has custom fields which are different from your current custom fields.  Do you wish to use the original record's custom fields?",
-"field:confirmUseBulletinsDraftCustomFieldseffect=Answering '#UseOldCustomFields#' will use the old custom fields and all record data.  Answering '#UseNewCustomFields#' will use your current custom fields and copy all similar fields to this new draft record but you may lose some of the original record's data.",
 "field:confirmUnAuthoredBulletinDeleteBeforePastecause=The record entitled \"#Title#\" already exists in this system.  Do you wish to delete the old record and replace it with this record?",
 "field:confirmUnAuthoredBulletinDeleteBeforePasteeffect=Answering Yes will replace the old record with this record.  Answering on No will leave the original record and skip this file.",
 "field:confirmRemoveMartuscause=You are about to delete all Martus data from this computer.",
@@ -929,11 +913,6 @@ public class EnglishStrings
 	"Answering '#PrintContinue#' will print only the public information in the records and skip those records which are all private.",
 "field:confirmCancelRetrievecause=Records are currently being retrieved from the server.",
 "field:confirmCancelRetrieveeffect=This operation will cancel the current retrieval, so some of the requested records may not be retrieved.",
-"field:confirmSearchProgressCancelcause=The search in progress will be stopped immediately.",
-"field:confirmSearchProgressCanceleffect=If you do this, the Search Results will only contain records that have been found so far.",
-
-"field:confirmSealingSelectedBulletinsCancelcause=The operation in progress will be stopped.",
-"field:confirmSealingSelectedBulletinsCanceleffect=If you do this, records that have already been sealed will remain sealed, and records that have not been processed yet will remain in their current state.",
 
 "field:confirmDateRageInvalidcause=The date range you entered is invalid because the end date occurs before the begin date.",
 "field:confirmDateRageInvalideffect=Answering Yes will take you back to the '#FieldLabel#' date range to fix the problem.  Answering No will swap the begin and end dates so they are in order.",
@@ -998,7 +977,6 @@ public class EnglishStrings
 "field:notifyErrorSavingFilecause=Unable to save the file. This could be because the destination is readonly or full, or because of a hardware error.",
 "field:notifyErrorBackingupKeyPair=Unable to verify the backup. Please try again, possibly to a different destination.",
 "field:notifyAuthenticateServerFailedcause=Martus could not authenticate the server. The server may have been compromised.  Please verify your server configuration and contact the server operator.",
-"field:notifyWelcomeToMartuscause=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create records that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.",
 "field:notifyUnexpectedErrorcause=An unexpected error has occurred. Please report this problem to martus@benetech.org.",
 "field:notifyInvalidServerNamecause=You must have a server name or IP address.",
 "field:notifyInvalidServerCodecause=You must have a server public code.",
@@ -1456,7 +1434,6 @@ public class EnglishStrings
 "field:ServerSelectionResults=The following server has been selected:",
 "field:ServerAcceptsUploads=You will be allowed to upload records to this server.",
 "field:ServerDeclinesUploads=You will not be allowed to upload records to this server.",
-"field:SearchEntry=Search for:",
 "field:ExportAttachments=Include attachments in export",
 "field:ExportAllVersions=Include all versions of each record in export",
 "field:ExportBulletinDetails=The selected records will be exported to an XML file that you specify. All information will be saved as plain text and anyone who gets a copy of the file will be able to read its contents. These files can be used to import record data back into Martus or into another application.\n\n Please email martus@benetech.org if you need assistance.",
@@ -1467,8 +1444,6 @@ public class EnglishStrings
 "field:UnknownFieldType=WARNING: This field requires a newer release of Martus to be viewed",
 "field:BackupSecretShareCompleteInformation=Backup complete, please give each disk to someone you trust, so that if you forget your Username and/or password in the future you can recreate your account.  You will need #MinimumNumberOfFilesNeededForRecovery# of these disks to recreate your account.",
 "field:BackupRecoverKeyPairInsertNextDiskMessage=Please insert disk #",
-"field:ScrubDataBeforeDelete=Scrub data before deleting",
-"field:UninstallMartus=Uninstall Martus",
 "field:RemoveServerLabel1=The following server will be removed:",
 "field:RemoveServerLabel2=Are you sure you want to do this?",
 "field:ExportedBulletins=Exported Records",
@@ -1512,7 +1487,6 @@ public class EnglishStrings
 "field:DateExact=Exact Date",
 "field:DateRange=Date Range",
 "field:YearUnspecified=Unknown",
-"field:UnknownDateSave=Unknown",
 "field:ColumnGridRowNumber=Row #",
 "field:SetFolderOrder=To change a folder's position, select the folder name and use the #MoveFolderUp# / #MoveFolderDown# buttons.",
 "field:FancySearchHelpMsg1=---Overview---\n\n" +
@@ -1740,7 +1714,6 @@ public class EnglishStrings
 "field:confirmCloneBulletinAsMineeffect=Clicking on Yes will create a new record that contains a copy of all the same information. You will be the official author of this new record, and any private data in it will only be visible by you (and your Contact's accounts that you have shared the record with). The original record will remain unchanged.",
 "field:notifyAddPermissionsZeroHeadquartersSelectedcause=Must select at least one contact's account",
 "field:ConfigureHQColumnHeaderPublicCode=Public Code",
-"field:ViewBulletinHQInfo=#NumberOfHQs# Contact account(s) can view this private information",
 "field:BulletinHeadQuartersHQLabel=Label",
 "field:QuickEraseWillRemoveItems=Delete your Martus key, records, folders, and configuration information (such as your contacts, server, and custom field settings).",
 "field:_Section_BulletinSectionHeadquarters=Contacts",
