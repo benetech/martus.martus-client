@@ -125,7 +125,6 @@ public class EnglishStrings
 "wintitle:notifyuploadrejected=Error Sending Record",
 "wintitle:notifycorruptconfiginfo=Error Loading Configuration File",
 "wintitle:notifyserverok=Server Selection Complete",
-"wintitle:notifymagicwordok=Upload Permission Granted",
 "wintitle:notifymagicwordrejected=Upload Permission Rejected",
 "wintitle:notifyRewriteKeyPairFailed=Error Changing Username or Password",
 "wintitle:notifyRewriteKeyPairSaved=Changed Username or Password",
@@ -396,7 +395,6 @@ public class EnglishStrings
 "button:create=Create",
 "button:search=Search",
 "button:print=Print",
-"button:connectserver=Connect",
 "button:send=Share",
 "button:savedraft=Save",
 
@@ -407,7 +405,6 @@ public class EnglishStrings
 "button:InputServerNameOk=OK",
 "button:inputserverpubliccodeok=OK",
 "button:inputsearchok=Search",
-"button:inputservermagicwordok=OK",
 "button:inputCustomFieldsok=OK",
 "button:inputGetShareFileNameok=OK",
 
@@ -419,7 +416,6 @@ public class EnglishStrings
 "button:customSendToServer=Send Template to Server",
 
 "button:save=Save",
-"button:browse=Browse...",
 "button:retrieve=Retrieve",
 "button:DeleteServerDrafts=Delete",
 "button:checkall=Check All",
@@ -439,7 +435,6 @@ public class EnglishStrings
 "button:Delete=Delete",
 "button:Leave=Leave",
 "button:modify=Modify",
-"button:loadTemplateFromFile=Load From File",
 "button:Back=Back",
 "button:Continue=Continue",
 "button:ResetContents=Reset Contents",
@@ -511,7 +506,6 @@ public class EnglishStrings
 "field:notifySyncUnableToDeleteLocalOnlyOrImmutableFilescause=The following records were unable to be deleted since they were only found locally or you do not have permission to delete them off the server.  The remaining records will be deleted.",
 
 "button:IncludePrivateBulletins=Include Private Data",
-"button:emptyTrash=Empty",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Record",
@@ -586,11 +580,6 @@ public class EnglishStrings
 "field:Author=Author:",
 "field:Organization=Organization:",
 "field:TemplateDetails=Details",
-"field:connecting=Connecting...",
-"field:authorizing=Authorizing...",
-"field:confirming=Confirming...",
-"field:disconnecting=Disconnecting...",
-"field:dateformat=Date Format",
 "field:MayBeDamaged=Warning: Portions may be missing or damaged",
 "field:NotAuthorizedToViewPrivate=The author has not given you permission to view this record.",
 "field:BulletinHasUnknownStuff=Warning: Some information in this record is not visible",
@@ -958,7 +947,6 @@ public class EnglishStrings
 "field:notifyuploadrejectedcause=The current Martus Server has refused to accept a record",
 "field:notifycorruptconfiginfocause=The configuration file may be corrupted",
 "field:notifyserverokcause=The Server has been selected.",
-"field:notifymagicwordokcause=The Server has accepted your request for permission to upload records.",
 "field:notifymagicwordrejectedcause=The Server has rejected your request. The magic word is probably not correct.",
 "field:notifyRewriteKeyPairFailedcause=An error occurred.  Unable to change Username or password.  You may need to restore your backup key file.",
 "field:notifyRewriteKeyPairSavedcause=Successfully saved your new username and password.",
@@ -1378,7 +1366,6 @@ public class EnglishStrings
 
 "field:inputservermagicwordentry=If you want to request permission to upload to this server, enter the 'magic word' now:",
 "field:inputGetShareFileNameentry=Enter a name for the exported backup file(s).",
-"field:inputCustomFieldsInfo=Enter the XML representation for the layout of new and modified records.",
 "field:InputCustomFieldsTitle=Title",
 "field:inputCustomFieldsDescription=Description",
 
@@ -1400,8 +1387,6 @@ public class EnglishStrings
 "field:webpage=Web Page:",
 "field:phone=Phone Number:",
 "field:address=Mailing Address:",
-"field:_AttachmentsTopSection=Attachments",
-"field:_AttachmentsBottomSection=Attachments",
 "field:password=Password",
 "field:securityServerConfigValidate=For security reasons, we must validate your username and password.",
 "field:RetypeUserNameAndPassword=Please retype your username and password for verification.",
