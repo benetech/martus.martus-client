@@ -36,7 +36,6 @@ import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.network.NetworkInterfaceConstants;
-import org.martus.common.network.NetworkInterfaceXmlRpcConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.network.PassThroughTransportWrapper;
 import org.martus.common.network.TransportWrapper;
@@ -52,7 +51,7 @@ public class VerifyAccountToken
 	public VerifyAccountToken(String[] args) throws Exception
 	{
 		System.out.println("Usage: VerifyAccountToken <server ip> <username>");
-		System.out.println("  After you sign into a Martus account, this app will show the access token ");
+		System.out.println("  'password' will be used as the accounts password, this app will show the access token ");
 		System.out.println("  for that account on the specified server. ");
 		System.out.println();
 		System.out.flush();
