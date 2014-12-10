@@ -51,7 +51,7 @@ public class VerifyAccountToken
 	
 	public VerifyAccountToken(String[] args) throws Exception
 	{
-		System.out.println("Usage: VerifyAccountToken <server ip>");
+		System.out.println("Usage: VerifyAccountToken <server ip> <username>");
 		System.out.println("  After you sign into a Martus account, this app will show the access token ");
 		System.out.println("  for that account on the specified server. ");
 		System.out.println();
