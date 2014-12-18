@@ -44,7 +44,15 @@ public class ExportPot
 {
 	public static void main(String[] args) throws Exception
 	{
-		new ExportPot().exportPot();
+		System.err.println("Usage: ExportPot <filename.pot>");
+		if(args.length == 0)
+		{
+			System.exit(1);
+		}
+			
+		PrintStream out = new PrintStream(new File(args[0]));
+		
+		new ExportPot().exportPot(out);
 	}
 
 	public ExportPot() throws Exception
@@ -54,10 +62,10 @@ public class ExportPot
 		localization = new MartusLocalization(translationsDirectory, allEnglishStrings);
 	}
 	
-	public void exportPot() throws Exception
+	public void exportPot(PrintStream out) throws Exception
 	{
-		exportHeader(System.out);
-		exportEntries(System.out);
+		exportHeader(out);
+		exportEntries(out);
 	}
 
 	private void exportHeader(PrintStream out)
@@ -66,19 +74,19 @@ public class ExportPot
 		String today = DateTimeFormatter.ISO_LOCAL_DATE.format(now);
 		out.println("msgid \"\"");
 		out.println("msgstr \"\"");
-		write_quoted(out, "Project-Id-Version: Martus " + UiConstants.versionLabel + "\\n");
-		write_quoted(out, "Report-Msgid-Bugs-To: martus@benetech.org\\n");
-		write_quoted(out, "POT-Creation-Date: " + today + "\\n");
-		write_quoted(out, "MIME-Version: 1.0\\n");
-		write_quoted(out, "Content-Type: text/plain; charset=UTF-8\\n");
-		write_quoted(out, "Content-Transfer-Encoding: 8bit\\n");
+		printlnQuoted(out, "Project-Id-Version: Martus " + UiConstants.versionLabel + "\\n");
+		printlnQuoted(out, "Report-Msgid-Bugs-To: martus@benetech.org\\n");
+		printlnQuoted(out, "POT-Creation-Date: " + today + "\\n");
+		printlnQuoted(out, "MIME-Version: 1.0\\n");
+		printlnQuoted(out, "Content-Type: text/plain; charset=UTF-8\\n");
+		printlnQuoted(out, "Content-Transfer-Encoding: 8bit\\n");
 		//#write_quoted output, "Plural-Forms: nplurals=2; plural=(n != 1);\\n"
 		out.println();
 		out.println();
 		
 	}
 
-	private void write_quoted(PrintStream out, String string)
+	private void printlnQuoted(PrintStream out, String string)
 	{
 		out.println('"' + string + '"');
 	}
@@ -102,90 +110,90 @@ public class ExportPot
 
 	public void exportEntry(PrintStream out, TranslationEntry entry)
 	{
+		String english_text = entry.getMsgid();
+		english_text = english_text.replace("\\", "\\\\");
+		english_text = english_text.replace("\n", "\\n");
+		english_text = english_text.replace("\"", "\\\"");
+
 		out.println("#: " + entry.getHex());
+		exportNotesToTranslators(out, entry);
 		out.print("msgctxt ");
-		write_comments(out, entry);
-		write_quoted(out, entry.getContext());
+		printlnQuoted(out, entry.getContext());
 		out.print("msgid ");
-		write_quoted(out, "");
-		write_quoted(out, entry.getMsgid());
+		printlnQuoted(out, "");
+		printlnQuoted(out, english_text);
 		out.print("msgstr ");
-		write_quoted(out, "");
-		write_quoted(out, "");
+		printlnQuoted(out, "");
+		printlnQuoted(out, "");
 		out.println();
 	}
 	
-	private void write_comments(PrintStream out, TranslationEntry entry)
+	private void exportNotesToTranslators(PrintStream out, TranslationEntry entry)
 	{
-//		if(english_text.index("\\n"))
-//			output.puts "#. Do NOT translate the \\n because they represent newlines."
-//		end
-//		if(english_text.index("Benetech"))
-//			output.puts "#. Do NOT translate the word Benetech."
-//		end
-//		if(english_text.index("Martus"))
-//			output.puts "#. Do NOT translate the word Martus."
-//		end
-//		if(english_text.index("Tor"))
-//			output.puts "#. Do NOT translate the word Tor."
-//		end
-//		if(english_text =~ /#.*#/)
-//			output.puts "#. Do not translate words that are surrounded by #'s, but you may move " + 
-//			"them around as grammatically appropriate. " +
-//			"Example: #TotalNumberOfFilesInBackup#, #Titles#, #FieldLabel#, etc. " +
-//			"as these words will be replaced when the program runs with " +
-//			"a particular value. " +
-//			"For Example. #TotalNumberOfFilesInBackup# = '5' " +
-//			"#Titles# = 'A list of bulletin titles' "
-//		end
-//		if(english_text =~ /\(\..*\)/)
-//			output.puts "#. For file filters like 'Martus Report Format (.mrf), " +
-//			"The descriptive names should be translated, but the (.mrf) must not be translated."
-//		end
-//		if(context == "field:VirtualKeyboardKeys")
-//			output.puts "#. Keep the english alphabet, but include any " + 
-//			"non-english characters at the end of the english alphabet/numbers/special " + 
-//			"characters (e.g. attach entire Thai alphabet at the end of the line)."
-//		end
-//		if(context == "field:translationVersion")
-//			output.puts "#. Do not translate the numbers."
-//		end
-//		if(context == "field:ErrorCustomFields")
-//			output.puts "#. Do not translate the numbers."
-//		end
-//		if(context.index("CreateCustomFieldsHelp"))
-//			output.puts "#. You can translate tags into foreign characters (but without punctuation or spaces)."
-//			output.puts "#. Check the User Guide section 10b to see if the text has already been translated and use the same translation for consistency."
-//		end
-//		if(context.index("CreateCustomFieldsHelp1") || context.index("CreateCustomFieldsHelp2"))
-//			output.puts "#. Leave standard field tags in English, but put translation in parentheses after " + 
-//			"english : e.g.  'author' (translation-of-author from mtf, e.g. autor in spanish), " +
-//			"so users know what they refer to."
-//		end
-//		if(context.index("CreateCustomFieldsHelp2"))
-//			output.puts "#. Leave field types in English (e.g. BOOLEAN, DATE), " + 
-//			"but put translation in parentheses after english, so users know what they refer to."
-//			output.puts "#. Change the \"ddd\" in \"<DefaultValue>ddd</DefaultValue>\" to whatever letter the translation of \"default\" begins with."
-//		end
-//		if(context.index("CreateCustomFieldsHelp3"))
-//			output.puts "#. Leave field types in English in examples (e.g. BOOLEAN, DATE)"
-//			output.puts "#. do not translate words between angle brackets in the XML for custom fields, such as: " +
-//			"<Field type='SECTION'>, <Field type='STRING'>, <Field type='BOOLEAN'>, <Field type='DATE'>, " + 
-//			"<Field type='DATERANGE'>, <Field type='DROPDOWN'>, <Field type='MULTILINE'>  " +
-//			"<Field type='LANGUAGE'>, <Field type='MESSAGE'>, <Field type='GRID'>,  " +
-//			"</Field>, <Tag>, </Tag>, <Label>, </Label>,  <Message>, </Message>  " +
-//			"<Choices>, </Choices>, <Choice>, </Choice>, <DataSource>, </DataSource> " +
-//			"<GridFieldTag>, </GridFieldTag>, <GridColumnLabel>, </GridColumnLabel>  " +
-//			"<GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>,  " +
-//			"<Column type='STRING'>, <Column type='BOOLEAN'>, <Column type='DATE'>, " +
-//			"<Column type='DATERANGE'>, <Column type='DROPDOWN'>  " +
-//			"<KeepWithPrevious/>, <RequiredField/>, <DefaultValue>, </DefaultValue>, " +
-//			"<MinimumDate>, </MinimumDate>, <MaximumDate>, </MaximumDate>, <MaximumDate/>. " +
-//			"For Reusable choices sections, translate anything within single quotes '...', but not  " +
-//			"<UseReusableChoices code= , </UseReusableChoices> " +
-//			"<ReusableChoices code= , </ReusableChoices>, label= , <Choice code= ."
-//		end
+		String english_text = entry.getMsgid();
+		english_text = english_text.replaceAll("\n", "\\\\n");
 		
+		if(english_text.contains("\\n"))
+			out.println("#. Do NOT translate the \\n because they represent newlines.");
+		if(english_text.contains("Benetech"))
+			out.println("#. Do NOT translate the word Benetech.");
+		if(english_text.contains("Martus"))
+			out.println("#. Do NOT translate the word Martus.");
+		if(english_text.contains("Tor"))
+			out.println("#. Do NOT translate the word Tor.");
+		if(english_text.matches(".*?#.*?#.*"))
+			out.println("#. Do not translate words that are surrounded by #'s, but you may move " + 
+					"them around as grammatically appropriate. " +
+					"Example: #TotalNumberOfFilesInBackup#, #Titles#, #FieldLabel#, etc. " +
+					"as these words will be replaced when the program runs with " +
+					"a particular value. " +
+					"For Example. #TotalNumberOfFilesInBackup# = '5' " +
+					"#Titles# = 'A list of bulletin titles' ");
+		if(english_text.matches(".*?\\(\\..*\\).*"))
+			out.println("#. For file filters like 'Martus Report Format (.mrf), " +
+					"The descriptive names should be translated, but the (.mrf) must not be translated.");
+		if(entry.getContext().equals("field:VirtualKeyboardKeys"))
+			out.println("#. Keep the english alphabet, but include any " + 
+					"non-english characters at the end of the english alphabet/numbers/special " + 
+					"characters (e.g. attach entire Thai alphabet at the end of the line).");
+		if(entry.getContext().equals("field:translationVersion"))
+			out.println("#. Do not translate the numbers.");
+		if(entry.getContext().equals("field:ErrorCustomFields"))
+			out.println("#. Do not translate the numbers.");
+		if(entry.getContext().contains("CreateCustomFieldsHelp"))
+		{
+			out.println("#. You can translate tags into foreign characters (but without punctuation or spaces).");
+			out.println("#. Check the User Guide section 10b to see if the text has already been translated and use the same translation for consistency.");
+		}
+		if(entry.getContext().contains("CreateCustomFieldsHelp1") || entry.getContext().contains("CreateCustomFieldsHelp2"))
+			out.println("#. Leave standard field tags in English, but put translation in parentheses after " + 
+					"english : e.g.  'author' (translation-of-author from mtf, e.g. autor in spanish), " +
+					"so users know what they refer to.");
+		if(entry.getContext().contains("CreateCustomFieldsHelp2"))
+		{
+			out.println("#. Leave field types in English (e.g. BOOLEAN, DATE), " + 
+					"but put translation in parentheses after english, so users know what they refer to.");
+			out.println("#. Change the \"ddd\" in \"<DefaultValue>ddd</DefaultValue>\" to whatever letter the translation of \"default\" begins with.");
+		}
+		if(entry.getContext().contains("CreateCustomFieldsHelp3"))
+		{
+			out.println("#. Leave field types in English in examples (e.g. BOOLEAN, DATE)");
+			out.println("#. do not translate words between angle brackets in the XML for custom fields, such as: " +
+					"<Field type='SECTION'>, <Field type='STRING'>, <Field type='BOOLEAN'>, <Field type='DATE'>, " + 
+					"<Field type='DATERANGE'>, <Field type='DROPDOWN'>, <Field type='MULTILINE'>  " +
+					"<Field type='LANGUAGE'>, <Field type='MESSAGE'>, <Field type='GRID'>,  " +
+					"</Field>, <Tag>, </Tag>, <Label>, </Label>,  <Message>, </Message>  " +
+					"<Choices>, </Choices>, <Choice>, </Choice>, <DataSource>, </DataSource> " +
+					"<GridFieldTag>, </GridFieldTag>, <GridColumnLabel>, </GridColumnLabel>  " +
+					"<GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>,  " +
+					"<Column type='STRING'>, <Column type='BOOLEAN'>, <Column type='DATE'>, " +
+					"<Column type='DATERANGE'>, <Column type='DROPDOWN'>  " +
+					"<KeepWithPrevious/>, <RequiredField/>, <DefaultValue>, </DefaultValue>, " +
+					"<MinimumDate>, </MinimumDate>, <MaximumDate>, </MaximumDate>, <MaximumDate/>. " +
+					"For Reusable choices sections, translate anything within single quotes '...', but not  " +
+					"<UseReusableChoices code= , </UseReusableChoices> " +
+					"<ReusableChoices code= , </ReusableChoices>, label= , <Choice code= .");
+		}
 	}
 
 	private MtfAwareLocalization localization;
