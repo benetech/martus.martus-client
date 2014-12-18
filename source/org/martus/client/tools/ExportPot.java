@@ -122,9 +122,10 @@ public class ExportPot
 		out.print("msgid ");
 		printlnQuoted(out, "");
 		printlnQuoted(out, english_text);
-		out.print("msgstr ");
-		printlnQuoted(out, "");
-		printlnQuoted(out, "");
+		// FIXME: The following commented-out code can be deleted unless Transifex requires it
+//		out.print("msgstr ");
+//		printlnQuoted(out, "");
+//		printlnQuoted(out, "");
 		out.println();
 	}
 	
