@@ -44,7 +44,7 @@ public class EnglishStrings
 "wintitle:BulletinDetailsDialog=Record Details",
 "wintitle:IncompatibleMtfVersion=Incompatible Translation Version",
 "wintitle:DuplicateLabelsInCustomTemplate=Warning Duplicate Labels Found",
-"wintitle:ImportProgress=Importing Recordss",
+"wintitle:ImportProgress=Importing Records",
 "wintitle:ExportProgress=Exporting Records",
 
 // NOTE: With confirm is for swing; without is for javafx
