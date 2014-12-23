@@ -94,22 +94,28 @@ public class ListTranslatableStrings
 		
 		File fileContainingKeys = new File("/home/kevins/fxmlstrings.txt");
 		UnicodeReader reader = new UnicodeReader(fileContainingKeys);
-		while(true)
+		try
 		{
-			String line = reader.readLine();
-			if(line == null)
-				break;
-			
-			String key = line.substring(2, line.length()-1);
-			
-			int dotAt = key.indexOf('.');
-			if(dotAt >= 0)
-				key = key.substring(dotAt+1);
-			
-			keysUsedInFxml.add(key);
+			while(true)
+			{
+				String line = reader.readLine();
+				if(line == null)
+					break;
+				
+				String key = line.substring(2, line.length()-1);
+				
+				int dotAt = key.indexOf('.');
+				if(dotAt >= 0)
+					key = key.substring(dotAt+1);
+				
+				keysUsedInFxml.add(key);
+			}
+			return keysUsedInFxml;
+		} 
+		finally
+		{
+			reader.close();
 		}
-		
-		return keysUsedInFxml;
 	}
 
 	private static HashMap<String, HashSet<String>> loadAvailableTranslatableKeys()
@@ -123,7 +129,7 @@ public class ListTranslatableStrings
 		for (String entryText : englishTranslations)
 		{
 			String key = localization.extractKeyFromEntry(entryText);
-			String value = localization.extractValueFromEntry(entryText);
+			//String value = localization.extractValueFromEntry(entryText);
 			
 			String prefix = "";
 			int colonAt = key.indexOf(':');
@@ -189,11 +195,12 @@ public class ListTranslatableStrings
 		return categories;
 	}
 
-	private static void displayCategory(HashMap<String, HashSet<String>> categories, String prefix)
+/*	private static void displayCategory(HashMap<String, HashSet<String>> categories, String prefix)
 	{
 		System.out.println(prefix);
 		HashSet<String> entriesForCategory = categories.get(prefix);
 		entriesForCategory.forEach(string -> System.out.println("  " + string));
 	}
+*/
 }
 
