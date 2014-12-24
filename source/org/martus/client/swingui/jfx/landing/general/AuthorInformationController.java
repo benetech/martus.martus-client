@@ -37,9 +37,9 @@ import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingController;
 
-public class ContactInformationController extends FxInSwingController
+public class AuthorInformationController extends FxInSwingController
 {
-	public ContactInformationController(UiMainWindow mainWindowToUse)
+	public AuthorInformationController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 		
@@ -78,7 +78,7 @@ public class ContactInformationController extends FxInSwingController
 	@Override
 	public String getFxmlLocation()
 	{
-		return "landing/general/ContactInformation.fxml";
+		return "landing/general/AuthorInformation.fxml";
 	}
 	
 	@FXML

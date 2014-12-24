@@ -48,7 +48,7 @@ public class AccountController extends FxTabbedShellController
 	{
 		Parent shellContents = super.createContents();
 		loadControllerAndEmbedInPane(new AccountInformationController(getMainWindow()), accountInformationPane);
-		loadControllerAndEmbedInPane(new ContactInformationController(getMainWindow()), contactInformationPane);
+		loadControllerAndEmbedInPane(new AuthorInformationController(getMainWindow()), authorInformationPane);
 		loadControllerAndEmbedInPane(new KeyBackupController(getMainWindow()), keyBackupPane);
 		selectInitialTabView();
 		
@@ -69,7 +69,7 @@ public class AccountController extends FxTabbedShellController
 			return keyBackupTab;
 		
 		if(getFirstTabToDisplay().equals(CONTACT_INFORMATION_TAB_CODE))
-			return contactInformationTab;
+			return authorInformationTab;
 
 		return null;
 	}
@@ -91,7 +91,7 @@ public class AccountController extends FxTabbedShellController
 	private Tab accountInformationTab;
 	
 	@FXML
-	private Tab contactInformationTab;
+	private Tab authorInformationTab;
 
 	@FXML
 	private Tab keyBackupTab;
@@ -100,7 +100,7 @@ public class AccountController extends FxTabbedShellController
 	private Pane accountInformationPane;
 
 	@FXML
-	private Pane contactInformationPane;
+	private Pane authorInformationPane;
 
 	@FXML
 	private Pane keyBackupPane;
