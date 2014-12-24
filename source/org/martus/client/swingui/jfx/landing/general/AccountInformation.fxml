@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -20,4 +21,7 @@
       <Label />
       <Button mnemonicParsing="false" onAction="#onManageContacts" text="%Button.ManageContacts" />
    </children>
+   <padding>
+      <Insets left="10.0" top="10.0" />
+   </padding>
 </VBox>

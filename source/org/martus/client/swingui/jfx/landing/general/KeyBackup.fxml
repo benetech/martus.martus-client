@@ -6,11 +6,11 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <BorderPane layoutX="0.0" layoutY="0.0" prefWidth="910.0" styleClass="pageMargin">
+    <BorderPane layoutX="0.0" layoutY="0.0" styleClass="pageMargin">
       <top>
-        <Pane fx:id="contentPane" prefWidth="840.0" />
+        <Pane fx:id="contentPane" />
       </top>
          <bottom>
             <VBox BorderPane.alignment="CENTER">
@@ -21,6 +21,9 @@
                </children>
             </VBox>
          </bottom>
+         <padding>
+            <Insets left="10.0" top="10.0" />
+         </padding>
     </BorderPane>
   </children>
 </AnchorPane>
