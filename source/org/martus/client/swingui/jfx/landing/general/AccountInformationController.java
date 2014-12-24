@@ -41,9 +41,9 @@ import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
 import org.martus.common.crypto.MartusCrypto;
 
-public class AccountSharingController extends FxInSwingController
+public class AccountInformationController extends FxInSwingController
 {
-	public AccountSharingController(UiMainWindow mainWindowToUse)
+	public AccountInformationController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
@@ -119,7 +119,7 @@ public class AccountSharingController extends FxInSwingController
 	@Override
 	public String getFxmlLocation()
 	{
-		return "landing/general/AccountSharing.fxml";
+		return "landing/general/AccountInformation.fxml";
 	}
 	
 	@FXML

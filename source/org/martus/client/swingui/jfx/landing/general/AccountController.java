@@ -47,7 +47,7 @@ public class AccountController extends FxTabbedShellController
 	public Parent createContents() throws Exception
 	{
 		Parent shellContents = super.createContents();
-		loadControllerAndEmbedInPane(new AccountSharingController(getMainWindow()), accountInformationPane);
+		loadControllerAndEmbedInPane(new AccountInformationController(getMainWindow()), accountInformationPane);
 		loadControllerAndEmbedInPane(new ContactInformationController(getMainWindow()), contactInformationPane);
 		loadControllerAndEmbedInPane(new KeyBackupController(getMainWindow()), keyBackupPane);
 		selectInitialTabView();
