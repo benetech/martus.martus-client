@@ -6,15 +6,10 @@
 
 <TabPane fx:id="accountTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
-    <Tab id="usernameAndPasswordTab" fx:id="usernameAndPasswordTab" text="%UsernameAndPassword">
-      <content>
-        <AnchorPane fx:id="usernameAndPasswordPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-      </content>
-    </Tab>
     
-    <Tab id="accountSharingTab" fx:id="accountSharingTab" text="%AccountInformation">
+    <Tab id="accountSharingTab" fx:id="accountInformationTab" text="%AccountInformation">
       <content>
-        <AnchorPane fx:id="accountSharingPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        <AnchorPane fx:id="accountInformationPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
       </content>
     </Tab>
     
@@ -29,10 +24,5 @@
         <AnchorPane fx:id="keyBackupPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
       </content>
     </Tab>
-      <Tab fx:id="manageContactsTab" text="%ManageContactsTab">
-        <content>
-          <AnchorPane fx:id="manageContactsPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-        </content>
-      </Tab>
   </tabs>
 </TabPane>

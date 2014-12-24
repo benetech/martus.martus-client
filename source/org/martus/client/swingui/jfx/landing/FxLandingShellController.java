@@ -237,12 +237,6 @@ public class FxLandingShellController extends FxNonWizardShellController
 		getMainWindow().updateServerStatusInStatusBar();
 	}
 	
-	@FXML
-	private void onManageContacts(ActionEvent event)
-	{
-		onAccount(AccountController.MANAGE_CONTACTS_TAB_CODE);
-	}
-
 	private void onSettings(String tabToDisplayFirst)
 	{
 		FxTabbedShellController settingsController = new SettingsController(getMainWindow());
@@ -347,17 +341,11 @@ public class FxLandingShellController extends FxNonWizardShellController
 	{
 		doAction(new ActionMenuCharts(getMainWindow()));
 	}
-
-	@FXML
-	private void onChangeUsernameAndPassword(ActionEvent event)
-	{
-		onAccount(AccountController.USERNAME_AND_PASSWORD_TAB_CODE);
-	}
 	
 	@FXML
-	private void onAccountSharing(ActionEvent event)
+	private void onAccountInformation(ActionEvent event)
 	{
-		onAccount(AccountController.ACCOUNT_SHARING_TAB_CODE);
+		onAccount(AccountController.ACCOUNT_INFORMATION_TAB_CODE);
 	}
 
 	@FXML

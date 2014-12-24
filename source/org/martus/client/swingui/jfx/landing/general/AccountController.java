@@ -40,18 +40,16 @@ public class AccountController extends FxTabbedShellController
 	{
 		super(mainWindowToUse);
 		
-		setFirstTabToDisplay(USERNAME_AND_PASSWORD_TAB_CODE);
+		setFirstTabToDisplay(ACCOUNT_INFORMATION_TAB_CODE);
 	}
 	
 	@Override
 	public Parent createContents() throws Exception
 	{
 		Parent shellContents = super.createContents();
-		loadControllerAndEmbedInPane(new UserAndPasswordController(getMainWindow()), usernameAndPasswordPane);
-		loadControllerAndEmbedInPane(new AccountSharingController(getMainWindow()), accountSharingPane);
-		loadControllerAndEmbedInPane(new KeyBackupController(getMainWindow()), keyBackupPane);
-		loadControllerAndEmbedInPane(new ManageContactsController(getMainWindow()), manageContactsPane);
+		loadControllerAndEmbedInPane(new AccountSharingController(getMainWindow()), accountInformationPane);
 		loadControllerAndEmbedInPane(new ContactInformationController(getMainWindow()), contactInformationPane);
+		loadControllerAndEmbedInPane(new KeyBackupController(getMainWindow()), keyBackupPane);
 		selectInitialTabView();
 		
 		return shellContents;
@@ -64,11 +62,8 @@ public class AccountController extends FxTabbedShellController
 	
 	private Tab getToBeSelectedTab()
 	{
-		if(getFirstTabToDisplay().equals(USERNAME_AND_PASSWORD_TAB_CODE))
-			return usernameAndPasswordTab;
-		
-		if (getFirstTabToDisplay().equals(ACCOUNT_SHARING_TAB_CODE))
-			return accountSharingTab;
+		if (getFirstTabToDisplay().equals(ACCOUNT_INFORMATION_TAB_CODE))
+			return accountInformationTab;
 		
 		if(getFirstTabToDisplay().equals(KEY_BACKUP_TAB_CODE))
 			return keyBackupTab;
@@ -76,9 +71,6 @@ public class AccountController extends FxTabbedShellController
 		if(getFirstTabToDisplay().equals(CONTACT_INFORMATION_TAB_CODE))
 			return contactInformationTab;
 
-		if(getFirstTabToDisplay().equals(MANAGE_CONTACTS_TAB_CODE))
-			return manageContactsTab;
-		
 		return null;
 	}
 
@@ -88,42 +80,28 @@ public class AccountController extends FxTabbedShellController
 		return "landing/general/Account.fxml";
 	}
 	
-	public static final String USERNAME_AND_PASSWORD_TAB_CODE = "userNameAndPasswordTab";
-	public static final String ACCOUNT_SHARING_TAB_CODE = "accountSharing";
-	public static final String KEY_BACKUP_TAB_CODE = "keyBackupTab";
+	public static final String ACCOUNT_INFORMATION_TAB_CODE = "accountInformationTab";
 	public static final String CONTACT_INFORMATION_TAB_CODE = "contactInformationTab";
-	public static final String MANAGE_CONTACTS_TAB_CODE = "manageContactsTab";
+	public static final String KEY_BACKUP_TAB_CODE = "keyBackupTab";
 	
 	@FXML
 	private TabPane accountTabPane;
-	
+		
 	@FXML
-	private Tab usernameAndPasswordTab;
+	private Tab accountInformationTab;
 	
-	@FXML
-	private Tab accountSharingTab;
-	
-	@FXML
-	private Tab keyBackupTab;
-
 	@FXML
 	private Tab contactInformationTab;
-	
-	@FXML
-	private Tab manageContactsTab;
-	
-	@FXML
-	private Pane usernameAndPasswordPane;
-	
-	@FXML
-	private Pane accountSharingPane;
 
 	@FXML
-	private Pane keyBackupPane;
+	private Tab keyBackupTab;
+	
+	@FXML
+	private Pane accountInformationPane;
 
 	@FXML
 	private Pane contactInformationPane;
-	
+
 	@FXML
-	private Pane manageContactsPane;
+	private Pane keyBackupPane;
 }
