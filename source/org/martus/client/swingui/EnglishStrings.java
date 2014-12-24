@@ -688,7 +688,6 @@ public class EnglishStrings
 "field:Location=Location:",
 "field:OnServer=On Server",
 "field:Edit=Edit",
-"field:UsernameAndPassword=Username and Password",
 "field:AssistanceWithMartusPart1=Martus help documentation is available at",
 "field:AssistanceWithMartusPart1B=or inside C:\\Martus\\Docs on Windows",
 "field:AssistanceWithMartusPart1C=and the Martus Documentation folder inside the Martus DMG on Mac.",
@@ -1679,7 +1678,6 @@ public class EnglishStrings
 "button:ManageContacts=Manage Contacts",
 "button:Create=Create",
 
-"field:ManageContactsTab=Manage Contacts",
 "field:confirmWarningSwitchToNormalKeyboardeffect=If this record was shared with you by one of your contacts, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.",
 "field:confirmCloneBulletinAsMineeffect=Clicking on Yes will create a new record that contains a copy of all the same information. You will be the official author of this new record, and any private data in it will only be visible by you (and your Contact's accounts that you have shared the record with). The original record will remain unchanged.",
 "field:notifyAddPermissionsZeroHeadquartersSelectedcause=Must select at least one contact's account",
@@ -1845,7 +1843,6 @@ public class EnglishStrings
 "field:SetupServerTips=The data you store on Martus servers are completely encrypted using 3072-bit encryption. This means even Martus server administrators cannot read your data.",
 "menu:SystemPreferences=System Preferences",
 "menu:TorPreferences=Tor Preferences",
-"menu:ChangeUsernameAndPassword=Username and Password",
 
 "menu:AccountInformation=Account Information",
 "field:AccountInformation=Account Information",
@@ -1859,7 +1856,6 @@ public class EnglishStrings
 "menu:DeleteAccount=Delete Account",
 "menu:ServerSettings=Server Settings",
 "menu:WizardStep6Heading=Backup key",
-"menu:ManageContacts=Manage Contacts",
 "menu:Settings=Settings",
 "menu:KeyBackup=Key Backup",
 
