@@ -37,6 +37,7 @@ import javax.swing.SwingUtilities;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.network.BackgroundRetriever;
@@ -271,9 +272,14 @@ class BackgroundTimerTask extends TimerTask
 
 		if(syncRetriever.hadException())
 		{
-			disableSync();
-
 			Exception e = syncRetriever.getAndClearException();
+			if(e instanceof AddOlderVersionToFolderFailedException)
+			{ 
+				MartusLogger.log("Older version not added."); 
+				return; //We already have a newer version of this record, no need to stop syncing. 
+			}
+
+			disableSync();
 			MartusLogger.logException(e);
 
 			String baseTag = "SyncDisabledDueToError";
