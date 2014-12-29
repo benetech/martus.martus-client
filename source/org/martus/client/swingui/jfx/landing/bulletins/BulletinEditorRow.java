@@ -100,7 +100,7 @@ public class BulletinEditorRow
 		addLabelAndField(label, fieldNode);
 	}
 
-	public void addLabelAndField(Node label, Node fieldNode)
+	private void addLabelAndField(Node label, Node fieldNode)
 	{
 		HBox.setHgrow(label, Priority.ALWAYS);
 		getLabelDestination().getChildren().add(label);
