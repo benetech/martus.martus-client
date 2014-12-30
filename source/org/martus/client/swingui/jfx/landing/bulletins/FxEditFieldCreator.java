@@ -29,10 +29,12 @@ import java.util.Vector;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.Property;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
@@ -49,6 +51,9 @@ import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MessageFieldSpec;
+
+import com.sun.javafx.scene.control.behavior.TextAreaBehavior;
+import com.sun.javafx.scene.control.skin.TextAreaSkin;
 
 public class FxEditFieldCreator extends FxFieldCreator
 {
@@ -139,9 +144,51 @@ public class FxEditFieldCreator extends FxFieldCreator
 		textArea.setPrefRowCount(MULTILINE_FIELD_HEIGHT_IN_ROWS);
 		textArea.setWrapText(true);
 		textArea.textProperty().bindBidirectional(property);
+		textArea.addEventFilter(KeyEvent.KEY_TYPED, new KeyTypedEventHandler());
+		
+		// NOTE: Since JavaFX 8 still inserts the TAB even if we consume the event, 
+		// we need to manually remove the TAB after it is inserted.
+		textArea.textProperty().addListener((changeEvent) -> removeAllTabs(textArea));
+		
 		HBox.setHgrow(textArea, Priority.SOMETIMES);
 		
 		return textArea;
+	}
+	
+	private void removeAllTabs(TextArea textArea)
+	{
+		String oldText = textArea.getText();
+		String newText = oldText.replace("\t", "");
+		if(!newText.equals(oldText))
+			textArea.setText(newText);
+	}
+
+	class KeyTypedEventHandler implements EventHandler<KeyEvent>
+	{
+		public void handle(KeyEvent event)
+		{
+			String keyCode = event.getCharacter();
+			if(keyCode.equals("\t"))
+			{
+				onTabTyped(event);
+			}
+		}
+
+		private void onTabTyped(KeyEvent event)
+		{
+			if(event.isAltDown() || event.isControlDown() || event.isShiftDown())
+				return;
+			
+			TextArea targetNode = (TextArea)event.getTarget();
+			TextAreaSkin skin = (TextAreaSkin)targetNode.getSkin();
+			TextAreaBehavior behavior = skin.getBehavior();
+			behavior.callAction("TraverseNext");
+
+			// NOTE: This consume won't actually help, apparently because 
+			// of the way Java FX 8 uses a KeyBinding, which seems to ignore 
+			// whether or not the event was consumed. 
+			event.consume();
+		}
 	}
 
 	@Override
