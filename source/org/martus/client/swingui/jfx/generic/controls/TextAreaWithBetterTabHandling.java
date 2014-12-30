@@ -36,17 +36,18 @@ public class TextAreaWithBetterTabHandling extends TextArea
 {
 	public TextAreaWithBetterTabHandling()
 	{
-		addEventFilter(KeyEvent.KEY_TYPED, new KeyTypedEventHandler());
-		// NOTE: Since JavaFX 8 still inserts the TAB even if we consume the event, 
-		// we need to manually remove the TAB after it is inserted.
-		textProperty().addListener((changeEvent) -> removeAllTabs(this));
+		// NOTE: KEY_TYPED would be more appropriate for handling TAB, but 
+		// for whatever reason JavaFX actually advances to the next field 
+		// as soon as TAB is pressed. So we will play along. 
+		// See: com.sun.javafx.scene.control.behavior.TextAreaBehavior.TEXT_AREA_BINDINGS
+		addEventFilter(KeyEvent.KEY_PRESSED, new KeyTypedEventHandler());
 	}
 
 	class KeyTypedEventHandler implements EventHandler<KeyEvent>
 	{
 		public void handle(KeyEvent event)
 		{
-			String keyCode = event.getCharacter();
+			String keyCode = event.getText();
 			if(keyCode.equals("\t"))
 			{
 				onTabTyped(event);
@@ -62,20 +63,8 @@ public class TextAreaWithBetterTabHandling extends TextArea
 			TextAreaSkin skin = (TextAreaSkin)targetNode.getSkin();
 			TextAreaBehavior behavior = skin.getBehavior();
 			behavior.callAction("TraverseNext");
-
-			// NOTE: This consume won't actually help, apparently because 
-			// of the way Java FX 8 uses a KeyBinding, which seems to ignore 
-			// whether or not the event was consumed. 
 			event.consume();
 		}
-	}
-
-	private void removeAllTabs(TextArea textArea)
-	{
-		String oldText = textArea.getText();
-		String newText = oldText.replace("\t", "");
-		if(!newText.equals(oldText))
-			textArea.setText(newText);
 	}
 
 }
