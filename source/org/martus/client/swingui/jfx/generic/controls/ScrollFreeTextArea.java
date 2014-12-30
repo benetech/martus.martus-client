@@ -77,7 +77,7 @@ public class ScrollFreeTextArea extends StackPane
 //		setPadding(new Insets(4,7,7,7));
 		getStyleClass().add("scroll-free-text-area-container");
 		
-		textArea = new TextArea();
+		textArea = new TextAreaWithBetterTabHandling();
 		textArea.setWrapText(true);
 		textArea.getStyleClass().add("scroll-free-text-area");
 		textArea.getChildrenUnmodifiable().addListener(new ScrollPaneBeingAddedListener());

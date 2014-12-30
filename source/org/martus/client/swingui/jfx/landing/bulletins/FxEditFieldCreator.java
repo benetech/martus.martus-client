@@ -47,6 +47,7 @@ import org.martus.client.swingui.jfx.generic.controls.DateRangePicker;
 import org.martus.client.swingui.jfx.generic.controls.MartusDatePicker;
 import org.martus.client.swingui.jfx.generic.controls.NestedChoiceBox;
 import org.martus.client.swingui.jfx.generic.controls.ScrollFreeTextArea;
+import org.martus.client.swingui.jfx.generic.controls.TextAreaWithBetterTabHandling;
 import org.martus.client.swingui.jfx.generic.data.BooleanStringConverter;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.fieldspec.FieldSpec;
@@ -139,7 +140,7 @@ public class FxEditFieldCreator extends FxFieldCreator
 	@Override
 	protected Node createMultilineField(Property<String> property)
 	{
-		TextArea textArea = new TextArea();
+		TextArea textArea = new TextAreaWithBetterTabHandling();
 		textArea.setPrefColumnCount(MINIMUM_REASONABLE_COLUMN_COUNT);
 		textArea.setPrefRowCount(MULTILINE_FIELD_HEIGHT_IN_ROWS);
 		textArea.setWrapText(true);
