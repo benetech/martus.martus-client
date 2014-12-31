@@ -46,7 +46,7 @@ public class UiProgressWithCancelDlg extends JDialog implements ProgressMeterInt
 {
 	public UiProgressWithCancelDlg(UiMainWindow mainWindowToUse, String tagToUse)
 	{
-		super(mainWindowToUse, true);
+		super(mainWindowToUse.getSwingFrame(), true);
 		mainWindow = mainWindowToUse;
 		
 		tag = tagToUse;

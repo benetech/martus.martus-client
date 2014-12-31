@@ -79,7 +79,7 @@ public abstract class WorkerThread extends Thread
 		
 		public void run()
 		{
-			result = mainWindow.confirmDlg(mainWindow, title, contents);
+			result = mainWindow.confirmDlg(mainWindow.getSwingFrame(), title, contents);
 		}
 		
 		public boolean getResult()
@@ -113,7 +113,7 @@ public abstract class WorkerThread extends Thread
 		
 		public void run()
 		{
-			mainWindow.notifyDlg(mainWindow, tag);
+			mainWindow.notifyDlg(mainWindow.getSwingFrame(), tag);
 		}
 		UiMainWindow mainWindow;
 		String tag;

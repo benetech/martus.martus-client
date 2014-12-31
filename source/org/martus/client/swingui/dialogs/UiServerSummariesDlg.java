@@ -66,7 +66,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 {
 	public UiServerSummariesDlg(UiMainWindow owner, RetrieveTableModel tableModel, String windowTitleTag)
 	{
-		super(owner, owner.getLocalization().getWindowTitle(windowTitleTag), true);
+		super(owner.getSwingFrame(), owner.getLocalization().getWindowTitle(windowTitleTag), true);
 		mainWindow = owner;
 		model = tableModel;
 		displayBulletinVersionRadioButtons = true;

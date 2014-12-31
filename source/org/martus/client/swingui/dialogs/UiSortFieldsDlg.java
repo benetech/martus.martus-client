@@ -54,7 +54,7 @@ public class UiSortFieldsDlg extends JDialog implements ActionListener
 {
 	public UiSortFieldsDlg(UiMainWindow mainWindow, MiniFieldSpec[] specsToAllow)
 	{
-		super(mainWindow);
+		super(mainWindow.getSwingFrame());
 		
 		if(sortMiniSpecs == null)
 			sortMiniSpecs = new Vector();

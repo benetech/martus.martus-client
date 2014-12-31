@@ -45,7 +45,7 @@ public class UiReportFieldChooserDlg extends UIReportFieldDlg
 {
 	public UiReportFieldChooserDlg(UiMainWindow mainWindow, FieldSpec[] specsToUse)
 	{
-		super(mainWindow);
+		super(mainWindow.getSwingFrame());
 		setModal(true);
 		
 		String dialogTag = "ChooseReportFields";

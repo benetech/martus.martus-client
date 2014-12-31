@@ -53,7 +53,7 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 
 	public UiImportBulletinsDlg(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindowToUse, "", true);
+		super(mainWindowToUse.getSwingFrame(), "", true);
 		mainWindow = mainWindowToUse;
 		
 		fileToImport = getFileToImport();

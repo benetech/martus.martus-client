@@ -215,7 +215,7 @@ public class UiFolderTreePane extends UiScrollPane
 		parent.setWaitingCursor();
 		final String internalName = nodeToDelete.getInternalName();
 		final boolean isFolderEmpty = store.findFolder(internalName).getBulletinCount() == 0;
-		if(isFolderEmpty || parent.confirmDlg(parent, "deletefolder"))
+		if(isFolderEmpty || parent.confirmDlg(parent.getSwingFrame(), "deletefolder"))
 		{
 			store.deleteFolder(internalName);
 			parent.folderTreeContentsHaveChanged();

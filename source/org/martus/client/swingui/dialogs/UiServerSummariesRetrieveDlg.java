@@ -68,7 +68,7 @@ public class UiServerSummariesRetrieveDlg extends UiServerSummariesDlg
 			}
 			Map replacements = new HashMap();
 			replacements.put("#Titles#", titles);
-			if(!mainWindow.confirmDlg(mainWindow, "RetrieveNewerVersions", replacements))
+			if(!mainWindow.confirmDlg(mainWindow.getSwingFrame(), "RetrieveNewerVersions", replacements))
 				return false;
 		}
 		
