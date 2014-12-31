@@ -68,7 +68,7 @@ public class ExportTemplateAction implements ActionDoer
 		fileChooser.addChoosableFileFilter(new MCTFileFilter(getLocalization()));
 		fileChooser.addChoosableFileFilter(new BulletinXmlFileFilter(getLocalization()));
 		fileChooser.setAcceptAllFileFilterUsed(false);
-		int userChoice = fileChooser.showSaveDialog(getMainWindow());
+		int userChoice = fileChooser.showSaveDialog(getMainWindow().getSwingFrame());
 		if (userChoice != JFileChooser.APPROVE_OPTION)
 			return;
 		

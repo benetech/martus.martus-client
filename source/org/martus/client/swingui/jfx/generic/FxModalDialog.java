@@ -78,7 +78,7 @@ public class FxModalDialog extends JDialog
 	
 	private FxModalDialog(UiMainWindow owner)
 	{
-		super(owner);
+		super(owner.getSwingFrame());
 
 		setModal(true);
 		

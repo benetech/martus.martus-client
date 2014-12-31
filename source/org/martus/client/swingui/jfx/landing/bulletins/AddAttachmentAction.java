@@ -51,7 +51,7 @@ public class AddAttachmentAction implements ActionDoer
 		fileChooser.setDialogTitle(localization.getWindowTitle("FileDialogAddAttachment"));
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.addChoosableFileFilter(new AllFileFilter(getMainWindow().getLocalization()));
-		int userChoice = fileChooser.showOpenDialog(getMainWindow());
+		int userChoice = fileChooser.showOpenDialog(getMainWindow().getSwingFrame());
 		if (userChoice != JFileChooser.APPROVE_OPTION)
 			return;
 		

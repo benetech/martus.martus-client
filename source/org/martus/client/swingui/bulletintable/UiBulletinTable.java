@@ -454,7 +454,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		String leave = localization.getButtonLabel("Leave");
 		String[] buttons = {delete, leave};
 
-		UiNotifyDlg notify = new UiNotifyDlg(mainWindow, title, contents, buttons);
+		UiNotifyDlg notify = new UiNotifyDlg(mainWindow.getSwingFrame(), title, contents, buttons);
 		String result = notify.getResult();
 		if(result != null && result.equals(delete))
 			return true;

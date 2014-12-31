@@ -80,7 +80,7 @@ public class BackupKeyAction implements ActionDoer
 		fileChooser.addChoosableFileFilter(keyPairFilter);
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
-		int userChoice = fileChooser.showSaveDialog(getMainWindow());
+		int userChoice = fileChooser.showSaveDialog(getMainWindow().getSwingFrame());
 		if (userChoice != JFileChooser.APPROVE_OPTION)
 			return;
 		

@@ -352,7 +352,7 @@ public class SettingsForServerController extends FxInSwingController
 			
 			getMainWindow().forceRecheckOfUidsOnServer();
 			app.getStore().clearOnServerLists();
-			getMainWindow().repaint();
+			getMainWindow().getSwingFrame().repaint();
 			getMainWindow().setStatusMessageReady();
 			return newServerPublicKey;
 		}

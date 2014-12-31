@@ -198,7 +198,7 @@ public class ActionMenuReports extends ActionPrint implements ActionDoer
 		String okButtonLabel = getLocalization().getButtonLabel("SelectReport");
 		File directory = owner.getApp().getCurrentAccountDirectory();
 		FileFilter filter = new ReportFormatFilter(getLocalization());
-		File chosenFile = FileDialogHelpers.doFileOpenDialog(owner, title, okButtonLabel, directory, filter);
+		File chosenFile = FileDialogHelpers.doFileOpenDialog(owner.getSwingFrame(), title, okButtonLabel, directory, filter);
 		
 		if(chosenFile == null)
 			return null;
@@ -283,7 +283,7 @@ public class ActionMenuReports extends ActionPrint implements ActionDoer
 				String includePublic = mainWindow.getLocalization().getButtonLabel("IncludePrivateBulletins");
 				String[] buttons = {includePublic, cancel};
 				HashMap emptyTokenReplacement = new HashMap();
-				if(!mainWindow.confirmCustomButtonsDlg(mainWindow, "ReportIncludePrivate", buttons, emptyTokenReplacement))
+				if(!mainWindow.confirmCustomButtonsDlg(mainWindow.getSwingFrame(), "ReportIncludePrivate", buttons, emptyTokenReplacement))
 					return;
 				options.includePrivate = true;
 			}
@@ -417,7 +417,7 @@ public class ActionMenuReports extends ActionPrint implements ActionDoer
 				return null;
 			if(selectedSpecs.length == 0)
 			{
-				mainWindow.notifyDlg(mainWindow, "NoReportFieldsSelected");
+				mainWindow.notifyDlg(mainWindow.getSwingFrame(), "NoReportFieldsSelected");
 				continue;
 			}
 			MiniFieldSpec[] specs = new MiniFieldSpec[selectedSpecs.length];

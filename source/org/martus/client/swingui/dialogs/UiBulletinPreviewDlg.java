@@ -56,7 +56,7 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 
 	public UiBulletinPreviewDlg(UiMainWindow owner, MartusLocalization localizationToUse, String windowTitleTag)
 	{
-		super(owner, localizationToUse.getWindowTitle(windowTitleTag), true);	
+		super(owner.getSwingFrame(), localizationToUse.getWindowTitle(windowTitleTag), true);	
 		getContentPane().setLayout(new BorderLayout());
 		localization = localizationToUse;
 	}

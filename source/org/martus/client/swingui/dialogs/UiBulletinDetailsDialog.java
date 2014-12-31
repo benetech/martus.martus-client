@@ -141,7 +141,7 @@ public class UiBulletinDetailsDialog extends JDialog
 				return;
 			if(selectedRow == versionTable.getRowCount()-1)
 			{
-				mainWindow.notifyDlg(mainWindow, "AlreadyViewingThisVersion");
+				mainWindow.notifyDlg(mainWindow.getSwingFrame(), "AlreadyViewingThisVersion");
 				return;
 			}
 			String localId = (String)versionTable.getValueAt(selectedRow, 1);
@@ -149,7 +149,7 @@ public class UiBulletinDetailsDialog extends JDialog
 			Bulletin previousBulletinVersion = mainWindow.getStore().getBulletinRevision(uid);
 			if(previousBulletinVersion == null)
 			{
-				mainWindow.notifyDlg(mainWindow, "BulletinVersionNotInSystem");
+				mainWindow.notifyDlg(mainWindow.getSwingFrame(), "BulletinVersionNotInSystem");
 				return;
 			}
 			new UiBulletinVersionPreviewDlg(mainWindow, previousBulletinVersion);

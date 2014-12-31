@@ -52,7 +52,7 @@ public class AddPermissionsDialog extends JDialog
 {
 	public AddPermissionsDialog(UiMainWindow mainWindowToUse, Vector allBulletins, Vector ourBulletins, HeadquartersKeys hqKeys)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse.getSwingFrame());
 		mainWindow = mainWindowToUse;
 		
 		setModal(true);
