@@ -56,6 +56,7 @@ public class TextAreaWithBetterTabHandling extends TextArea
 
 		private void onTabTyped(KeyEvent event)
 		{
+			// NOTE: JavaFX already handles Shift-TAB correctly 
 			if(event.isAltDown() || event.isControlDown() || event.isShiftDown())
 				return;
 			
