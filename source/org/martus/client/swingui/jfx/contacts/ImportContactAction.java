@@ -62,7 +62,7 @@ public class ImportContactAction implements ActionDoer
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
 
-		int userResult = fileChooser.showOpenDialog(getMainWindow());
+		int userResult = fileChooser.showOpenDialog(getMainWindow().getSwingFrame());
 		if (userResult != JFileChooser.APPROVE_OPTION)
 			return;
 

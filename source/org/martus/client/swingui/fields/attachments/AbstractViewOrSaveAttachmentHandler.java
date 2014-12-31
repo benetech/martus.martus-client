@@ -65,7 +65,7 @@ public abstract class AbstractViewOrSaveAttachmentHandler implements ActionListe
 		String[] buttons = UiUtilities.getConfirmDialogButtons(mainWindow.getLocalization());
 		HashMap<String, String> replacement = new HashMap<String, String>();
 		replacement.put("#action#", actionName);
-		return UiUtilities.confirmDlg(mainWindow, title, contents, buttons, replacement);
+		return UiUtilities.confirmDlg(mainWindow.getSwingFrame(), title, contents, buttons, replacement);
 	}
 
 	String getProxyAuthor(AttachmentProxy proxy) 

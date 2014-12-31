@@ -691,7 +691,7 @@ class BackgroundTimerTask extends TimerTask
 
 		public void run()
 		{
-			mainWindow.messageDlg(mainWindow, titleTag, messageContents, tokenReplacement);
+			mainWindow.messageDlg(mainWindow.getSwingFrame(), titleTag, messageContents, tokenReplacement);
 		}
 		String titleTag;
 		String messageContents;
@@ -708,7 +708,7 @@ class BackgroundTimerTask extends TimerTask
 		public void run()
 		{
 			if(!UiSession.isJavaFx())
-				mainWindow.notifyDlg(mainWindow, tag);
+				mainWindow.notifyDlg(mainWindow.getSwingFrame(), tag);
 			mainWindow.setStatusMessageReady();
 		}
 		

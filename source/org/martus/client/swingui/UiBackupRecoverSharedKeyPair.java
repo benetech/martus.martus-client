@@ -267,7 +267,7 @@ public class UiBackupRecoverSharedKeyPair
 		while(true)
 		{
 			String windowTitle = localization.getWindowTitle("SaveShareKeyPair");
-			File pathChosen = UiFileChooser.displayChooseDirectoryDialog(mainWindow, windowTitle);
+			File pathChosen = UiFileChooser.displayChooseDirectoryDialog(mainWindow.getSwingFrame(), windowTitle);
 			if(pathChosen != null)
 			{	
 				String pathToUse = verifyBackupShareMediaType(pathChosen);
@@ -292,7 +292,7 @@ public class UiBackupRecoverSharedKeyPair
 			if(rootFiles[i].equals(pathChoosen))
 				return pathToUse;
 		}
-		if(mainWindow.confirmDlg(mainWindow, "WarningPathChosenMayNotBeRemoveable", UiBackupRecoverSharedKeyPair.getTokenReplacement()))
+		if(mainWindow.confirmDlg(mainWindow.getSwingFrame(), "WarningPathChosenMayNotBeRemoveable", UiBackupRecoverSharedKeyPair.getTokenReplacement()))
 			return pathToUse;
 		return null;
 	}
@@ -407,7 +407,7 @@ public class UiBackupRecoverSharedKeyPair
 		String buttons[] = {localization.getButtonLabel(EnglishCommonStrings.OK), 
 							localization.getButtonLabel(EnglishCommonStrings.CANCEL)};			
 
-		if(!mainWindow.confirmDlg(mainWindow, windowTitle, insertNextDiskMessage, buttons))
+		if(!mainWindow.confirmDlg(mainWindow.getSwingFrame(), windowTitle, insertNextDiskMessage, buttons))
 		{
 			if(mainWindow.confirmDlg(confirmCancelTag))
 				return false;

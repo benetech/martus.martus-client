@@ -83,7 +83,7 @@ public class ActionPrint extends UiMenuAction
 		{
 			mainWindow.unexpectedErrorDlg(e);
 		}
-		mainWindow.requestFocus();
+		mainWindow.getSwingFrame().requestFocus();
 	}
 
 	void printBulletins(Vector currentSelectedBulletins) throws Exception
@@ -166,13 +166,13 @@ public class ActionPrint extends UiMenuAction
 			catch(Exception e)
 			{
 				e.printStackTrace();
-				mainWindow.notifyDlg(mainWindow, "notifyUnexpectedError");
+				mainWindow.notifyDlg(mainWindow.getSwingFrame(), "notifyUnexpectedError");
 			}
 			finally
 			{
 				writer.close();
 			}
-			mainWindow.notifyDlg(mainWindow, "PrintToDiskComplete");
+			mainWindow.notifyDlg(mainWindow.getSwingFrame(), "PrintToDiskComplete");
 		}
 		catch (IOException e)
 		{

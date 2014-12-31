@@ -58,7 +58,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 	public UiAboutDlg(UiMainWindow owner)
 		throws HeadlessException
 	{
-		super(owner, "" , true);
+		super(owner.getSwingFrame(), "" , true);
 		getContentPane().setLayout(new BorderLayout());
 //		System.out.println("Number of calls to verifyPacketSignature " + Packet.callsToVerifyPacketSignature);
 //		System.out.println("Cumulative time in verifyPacketSignature " + Packet.millisInVerifyPacketSignature);

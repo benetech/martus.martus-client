@@ -124,7 +124,7 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 	{
 		ConfirmQuickEraseDlg(boolean uninstallMartus)
 		{
-			super(mainWindow, "", true);
+			super(mainWindow.getSwingFrame(), "", true);
 			uninstallChoosen = uninstallMartus;
 			martusAccounts = app.getAllAccountDirectories();
 			MartusLocalization localization = mainWindow.getLocalization();

@@ -51,7 +51,7 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 {
 	public UiConfigServerDlg(UiMainWindow owner, ConfigInfo infoToUse)
 	{
-		super(owner, "", true);
+		super(owner.getSwingFrame(), "", true);
 
 		info = infoToUse;
 		mainWindow = owner;
