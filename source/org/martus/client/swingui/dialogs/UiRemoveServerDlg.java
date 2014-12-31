@@ -48,7 +48,7 @@ public class UiRemoveServerDlg extends JDialog implements ActionListener
 {
 	public UiRemoveServerDlg(UiMainWindow owner,ConfigInfo info)
 	{
-		super(owner, "", true);
+		super(owner.getSwingFrame(), "", true);
 		UiLocalization localization = owner.getLocalization();			
 		
 		setTitle(localization.getWindowTitle("RemoveServer"));

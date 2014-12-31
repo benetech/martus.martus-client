@@ -48,7 +48,7 @@ public class UiIncludePrivateDataDlg extends JDialog implements ActionListener
 {
 	public UiIncludePrivateDataDlg(UiMainWindow mainWindowToUse, int totalBulletins, int privateOnlyBulletins)
 	{
-		super(mainWindowToUse, "", true);
+		super(mainWindowToUse.getSwingFrame(), "", true);
 		mainWindow = mainWindowToUse;
 		init(totalBulletins, privateOnlyBulletins);	
 	}

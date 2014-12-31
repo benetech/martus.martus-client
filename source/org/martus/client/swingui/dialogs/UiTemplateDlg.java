@@ -60,7 +60,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 {
 	public UiTemplateDlg(UiMainWindow owner, ConfigInfo infoToUse, File defaultDetailsFileToUse)
 	{
-		super(owner, "", true);
+		super(owner.getSwingFrame(), "", true);
 		info = infoToUse;
 		mainWindow = owner;
 		defaultDetailsFile = defaultDetailsFileToUse;
@@ -119,7 +119,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 			String[] contents = {helpMsg, "", "",helpMsgExample, helpMsgExample1, "", helpMsgExample2, "", helpMsgExampleEtc};
 			String[] buttons = {ok};
 
-			new UiNotifyDlg(mainWindow, title, contents, buttons);
+			new UiNotifyDlg(mainWindow.getSwingFrame(), title, contents, buttons);
 		}
 	}
 

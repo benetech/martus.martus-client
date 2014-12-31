@@ -63,7 +63,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 	
 	public UiPrintBulletinDlg(UiMainWindow mainWindowToUse, boolean warnAboutPrivateData)
 	{
-		super(mainWindowToUse, "", true);
+		super(mainWindowToUse.getSwingFrame(), "", true);
 		mainWindow = mainWindowToUse;
 		allPrivateData = warnAboutPrivateData;
 		init();	
@@ -153,7 +153,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 				HashMap tokenReplacement = new HashMap();
 				tokenReplacement.put("#PrintBack#", back);
 				tokenReplacement.put("#PrintContinue#", continuePrinting);
-				if(mainWindow.confirmCustomButtonsDlg(mainWindow, "PrintAllPrivateData", buttons, tokenReplacement))
+				if(mainWindow.confirmCustomButtonsDlg(mainWindow.getSwingFrame(), "PrintAllPrivateData", buttons, tokenReplacement))
 					return;
 			}	
 			pressContinue = true;

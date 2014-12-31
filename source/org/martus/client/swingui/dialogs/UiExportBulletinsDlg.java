@@ -59,7 +59,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 {
 	public UiExportBulletinsDlg(UiMainWindow mainWindowToUse, Vector bulletinsToExport, String defaultName)
 	{
-		super(mainWindowToUse, "", true);
+		super(mainWindowToUse.getSwingFrame(), "", true);
 		mainWindow = mainWindowToUse;
 		bulletins = bulletinsToExport;
 		defaultFileName = defaultName;

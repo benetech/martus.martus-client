@@ -38,7 +38,7 @@ public class UiPushbuttonsDlg extends JDialog implements ActionListener
 {
 	public UiPushbuttonsDlg(UiMainWindow mainWindow, String title, String[] buttonLabels)
 	{
-		super(mainWindow);
+		super(mainWindow.getSwingFrame());
 		setModal(true);
 		setTitle(title);
 		Container panel = getContentPane();

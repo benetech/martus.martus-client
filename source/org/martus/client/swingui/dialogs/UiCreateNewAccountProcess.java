@@ -77,7 +77,7 @@ public class UiCreateNewAccountProcess
 
 				if(userAlreadyExists)
 				{	
-					window.notifyDlg(window, "UserAlreadyExists");
+					window.notifyDlg(window.getSwingFrame(), "UserAlreadyExists");
 					continue;
 				}
 			}
@@ -89,17 +89,17 @@ public class UiCreateNewAccountProcess
 			}
 			catch (BlankUserNameException bune)
 			{
-				mainWindow.notifyDlg(mainWindow, "UserNameBlank");
+				mainWindow.notifyDlg(mainWindow.getSwingFrame(), "UserNameBlank");
 				continue;
 			}
 			catch (PasswordTooShortException ptse)
 			{
-				mainWindow.notifyDlg(mainWindow, "PasswordInvalid");
+				mainWindow.notifyDlg(mainWindow.getSwingFrame(), "PasswordInvalid");
 				continue;
 			}
 			catch (PasswordMatchedUserNameException pmune)
 			{
-				mainWindow.notifyDlg(mainWindow, "PasswordMatchesUserName");
+				mainWindow.notifyDlg(mainWindow.getSwingFrame(), "PasswordMatchesUserName");
 				continue;
 			}
 			
@@ -117,12 +117,12 @@ public class UiCreateNewAccountProcess
 			// make sure the passwords and usernames match
 			if (!Arrays.equals(userPassword1, userPassword2))
 			{
-				window.notifyDlg(window, "passwordsdontmatch");
+				window.notifyDlg(window.getSwingFrame(), "passwordsdontmatch");
 				continue;
 			}
 			if (!userName1.equals(userName2))
 			{
-				window.notifyDlg(window, "usernamessdontmatch");
+				window.notifyDlg(window.getSwingFrame(), "usernamessdontmatch");
 				continue;
 			}
 
@@ -146,7 +146,7 @@ public class UiCreateNewAccountProcess
 		char[] userPassword = "".toCharArray();
 		while(userChoice == UiSigninDlg.LANGUAGE_CHANGED)
 		{	
-			signinDlg = new UiSigninDlg(mainWindow.getLocalization(), mainWindow.getCurrentUiState(), mainWindow, mode, userName, userPassword);
+			signinDlg = new UiSigninDlg(mainWindow.getLocalization(), mainWindow.getCurrentUiState(), mainWindow.getSwingFrame(), mode, userName, userPassword);
 			userChoice = signinDlg.getUserChoice();
 			userName = signinDlg.getNameText();
 			userPassword = signinDlg.getPassword();

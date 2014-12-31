@@ -59,7 +59,7 @@ public class UiSetFolderOrderDlg extends JDialog implements ActionListener
 {
 	public UiSetFolderOrderDlg(UiMainWindow owner, Vector originalFolderOrderToUse)
 	{
-		super(owner, "", true);
+		super(owner.getSwingFrame(), "", true);
 		originalFolderOrder = originalFolderOrderToUse;
 		hiddenFolders = new Vector();
 		okPressed = false;

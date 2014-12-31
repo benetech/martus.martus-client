@@ -56,7 +56,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 {
 	public UiPreferencesDlg(UiMainWindow mainWindow)
 	{
-		super(mainWindow, "", true);
+		super(mainWindow.getSwingFrame(), "", true);
 		owner = mainWindow;
 		UiLocalization localization = owner.getLocalization();
 		

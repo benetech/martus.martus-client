@@ -46,7 +46,7 @@ public class UiPreviewDlg  extends JDialog implements ActionListener
 	
 	public UiPreviewDlg(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse.getSwingFrame());
 		setTitle("");
 		setModal(true);
 		mainWindow = mainWindowToUse;

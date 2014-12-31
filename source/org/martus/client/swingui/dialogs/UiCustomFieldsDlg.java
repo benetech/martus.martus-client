@@ -82,7 +82,7 @@ public class UiCustomFieldsDlg extends JDialog
 {
 	public UiCustomFieldsDlg(UiMainWindow owner, FormTemplate existingTemplate)
 	{
-		super(owner, "", true);
+		super(owner.getSwingFrame(), "", true);
 		mainWindow = owner; 
 		security = mainWindow.getApp().getSecurity();		
 		String baseTag = "CustomFields";
@@ -607,7 +607,7 @@ public class UiCustomFieldsDlg extends JDialog
 			duplicates.append("\" ");
 		}
 		String[] duplicateWarningMessage = {duplicateWarnging, duplicates.toString(), duplicateContinue};
-		if(mainWindow.confirmDlg(mainWindow, duplicateTitle, duplicateWarningMessage))
+		if(mainWindow.confirmDlg(mainWindow.getSwingFrame(), duplicateTitle, duplicateWarningMessage))
 			return true;
 		return false;
 	}

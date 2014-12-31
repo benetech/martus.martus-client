@@ -64,7 +64,7 @@ public class UiFancySearchDlg extends JDialog
 {
 	public UiFancySearchDlg(UiMainWindow owner)
 	{
-		super(owner, "", true);
+		super(owner.getSwingFrame(), "", true);
 		mainWindow = owner;
 		createBody();
 		Utilities.centerDlg(this);
@@ -224,7 +224,7 @@ public class UiFancySearchDlg extends JDialog
 		
 		private void showHelp(String title, String message, String closeButton)
 		{
-			JDialog dlg = new JDialog(mainWindow, title, true);
+			JDialog dlg = new JDialog(mainWindow.getSwingFrame(), title, true);
 			JPanel panel = new JPanel();
 			panel.setBorder(new EmptyBorder(5,5,5,5));
 			panel.setLayout(new BorderLayout());
@@ -363,7 +363,7 @@ public class UiFancySearchDlg extends JDialog
 			dialog.setVisible(false);
 			try
 			{
-				File saveTo = FileDialogHelpers.doFileSaveDialog(dialog.mainWindow, title, directory, "", filter, localization);
+				File saveTo = FileDialogHelpers.doFileSaveDialog(dialog.mainWindow.getSwingFrame(), title, directory, "", filter, localization);
 				if(saveTo == null)
 					return;
 				

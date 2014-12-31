@@ -51,7 +51,7 @@ public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 {
 	public UiReportFieldOrganizerDlg(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse.getSwingFrame());
 		setModal(true);
 		mainWindow = mainWindowToUse;
 		
