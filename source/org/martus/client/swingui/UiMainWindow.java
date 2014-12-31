@@ -232,6 +232,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		addWindowListener(new WindowEventHandler());
 	}
 	
+	public JFrame getSwingFrame()
+	{
+		return this;
+	}
+	
 	protected void restrictToOnlyTestServers()
 	{
 		// NOTE: For now, only allow connecting to servers which we can completely 
