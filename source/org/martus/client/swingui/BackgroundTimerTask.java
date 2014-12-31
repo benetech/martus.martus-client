@@ -272,18 +272,22 @@ class BackgroundTimerTask extends TimerTask
 
 		if(syncRetriever.hadException())
 		{
-			Exception e = syncRetriever.getAndClearException();
-			if(e instanceof AddOlderVersionToFolderFailedException)
-			{ 
-				MartusLogger.log("Older version not added."); 
-				return; //We already have a newer version of this record, no need to stop syncing. 
+			try
+			{
+				throw syncRetriever.getAndClearException();
 			}
-
-			disableSync();
-			MartusLogger.logException(e);
-
-			String baseTag = "SyncDisabledDueToError";
-			UiMainWindow.showNotifyDlgOnSwingThread(mainWindow, baseTag);
+			catch (AddOlderVersionToFolderFailedException ignoreOldVersionException)
+			{
+				MartusLogger.log("Older version not added."); 
+			}
+			catch (Exception e)
+			{
+				disableSync();
+				MartusLogger.logException(e);
+	
+				String baseTag = "SyncDisabledDueToError";
+				UiMainWindow.showNotifyDlgOnSwingThread(mainWindow, baseTag);
+			}
 			return;
 		}
 		
