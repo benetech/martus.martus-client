@@ -185,7 +185,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		cursorStack = new Stack();
 		UiModelessBusyDlg splashScreen = new UiModelessBusyDlg(new ImageIcon(UiAboutDlg.class.getResource("Martus-logo-black-text-160x72.png")));
 
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		getSwingFrame().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		try
 		{
 			session = new UiSession();
@@ -194,7 +194,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		{
 			initializationErrorExitMartusDlg(e.getMessage());
 		}
-		UiMainWindow.updateIcon(this);
+		UiMainWindow.updateIcon(this.getSwingFrame());
 
 		// Pop up a nag screen if this is an unofficial private release
 		// NOTE NAG screen now could be localized
@@ -227,9 +227,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		
 		getSession().initalizeUiState();
 		
-		setGlassPane(new WindowObscurer());
+		getSwingFrame().setGlassPane(new WindowObscurer());
 
-		addWindowListener(new WindowEventHandler());
+		getSwingFrame().addWindowListener(new WindowEventHandler());
 	}
 	
 	public JFrame getSwingFrame()
@@ -259,21 +259,21 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 
 	public boolean run()
 	{
-		setCurrentActiveFrame(this);
+		setCurrentActiveFrame(this.getSwingFrame());
 		
 		if(Utilities.isMSWindows())
 		{
 			updateTitle();
-			setVisible(true);
+			getSwingFrame().setVisible(true);
 			Dimension screenSize = Utilities.getViewableScreenSize();
-			setLocation(screenSize.width, screenSize.height);
+			getSwingFrame().setLocation(screenSize.width, screenSize.height);
 		}
 		else if(Utilities.isLinux())
 		{
 			updateTitle();
-			setVisible(true);
+			getSwingFrame().setVisible(true);
 			Dimension screenSize = Utilities.getViewableScreenSize();
-			setLocation(screenSize.width/2, screenSize.height/2);
+			getSwingFrame().setLocation(screenSize.width/2, screenSize.height/2);
 		}
 
 		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
@@ -358,15 +358,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		MartusLogger.log("Ready to show main window");
 		if(timeoutTimerTask.waitingForSignin)
 		{
-			setLocation(100000, 0);
-			setSize(0,0);
-			setEnabled(false);
+			getSwingFrame().setLocation(100000, 0);
+			getSwingFrame().setSize(0,0);
+			getSwingFrame().setEnabled(false);
 		}
 		else
 		{
 			MartusLogger.log("Showing main window");
-			setVisible(true);
-			toFront();
+			getSwingFrame().setVisible(true);
+			getSwingFrame().toFront();
 			mainWindowInitalizing = false;
 		}
 		
@@ -394,7 +394,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		HashMap map = new HashMap();
 		map.put("#HighVersion#", highVersionJava);
 		map.put("#ExpectedVersion#", expectedVersionJava);
-		new UiNotifyDlg(this, title, new String[]{warningMessage}, new String[]{buttonMessage}, map);
+		new UiNotifyDlg(this.getSwingFrame(), title, new String[]{warningMessage}, new String[]{buttonMessage}, map);
 	}
 
 	private void warnIfCryptoJarsNotLoaded() throws Exception
@@ -550,7 +550,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		if(!getStore().loadFieldSpecCache())
 		{
 			if(!createdNewAccount)
-				notifyDlg(this, "CreatingFieldSpecCache");
+				notifyDlg(this.getSwingFrame(), "CreatingFieldSpecCache");
 
 			getStore().createFieldSpecCacheFromDatabase();
 		}
@@ -978,14 +978,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 	@Override
 	public void resetCursor()
 	{
-		setCursor((Cursor)cursorStack.pop());
+		getSwingFrame().setCursor((Cursor)cursorStack.pop());
 	}
 
 	@Override
 	public void setWaitingCursor()
 	{
-		cursorStack.push(getCursor());
-		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+		cursorStack.push(getSwingFrame().getCursor());
+		getSwingFrame().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		return;
 	}
 	
@@ -1429,9 +1429,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		}
 		uiState.setCurrentPreviewSplitterPosition(getPreviewSplitterDividerLocation());
 		uiState.setCurrentFolderSplitterPosition(getFolderSplitterDividerLocation());
-		uiState.setCurrentAppDimension(getSize());
-		uiState.setCurrentAppPosition(getLocation());
-		boolean isMaximized = getExtendedState()==MAXIMIZED_BOTH;
+		uiState.setCurrentAppDimension(getSwingFrame().getSize());
+		uiState.setCurrentAppPosition(getSwingFrame().getLocation());
+		boolean isMaximized = getSwingFrame().getExtendedState()==JFrame.MAXIMIZED_BOTH;
 		uiState.setCurrentAppMaximized(isMaximized);
 		saveCurrentUiState();
 	}
@@ -1614,7 +1614,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		message = replaceToken(message , "#NumberBulletinsFound#", (new Integer(bulletinsFound)).toString());
 		UiOptionPane pane = new UiOptionPane(message, UiOptionPane.INFORMATION_MESSAGE, UiOptionPane.DEFAULT_OPTION,
 								null, buttons);
-		JDialog dialog = pane.createDialog(this, title);
+		JDialog dialog = pane.createDialog(this.getSwingFrame(), title);
 		dialog.setVisible(true);
 	}
 
@@ -1663,7 +1663,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescriptionOld, formattedCodeContentsOld, " ", codeDescriptionNew, formattedCodeContentsNew, " ", martusAccountAccessTokenDescription, martusAccountAccessToken, " ", accountDirectory};
 		String[] buttons = {ok};
 
-		new UiNotifyDlg(this, title, contents, buttons);
+		new UiNotifyDlg(this.getSwingFrame(), title, contents, buttons);
 	}
 
 	public void displayHelpMessage()
@@ -1712,7 +1712,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		restoreState();
 		getTransport().updateStatus();
 		backgroundUploadTimerTask.setWaitingForServer();
-		setVisible(true);
+		getSwingFrame().setVisible(true);
 	}
 
 	
@@ -1732,7 +1732,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		if(!isRetrieveInProgress())
 			return;
 		
-		if(!confirmDlg(this, "CancelRetrieve"))
+		if(!confirmDlg(this.getSwingFrame(), "CancelRetrieve"))
 			return;
 		
 		try
@@ -1934,7 +1934,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		{
 			if(!getApp().isSSLServerAvailable())
 			{
-				notifyDlg(this, "retrievenoserver", dlgTitleTag);
+				notifyDlg(this.getSwingFrame(), "retrievenoserver", dlgTitleTag);
 				return false;
 			}
 			model.initialize(progressHandler);
@@ -1958,7 +1958,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		}
 		catch (Exception e)
 		{
-			notifyDlg(this, "RetrievedOnlySomeSummaries", dlgTitleTag);
+			notifyDlg(this.getSwingFrame(), "RetrievedOnlySomeSummaries", dlgTitleTag);
 		}
 		return true;
 	}
@@ -2109,13 +2109,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 			FxRunner fxRunner = new FxRunner(mainStage);
 			fxRunner.setAbortImmediatelyOnError();
 			Platform.runLater(fxRunner);
-			setContentPane(mainStage);
+			getSwingFrame().setContentPane(mainStage);
 		}
 		else
 		{
 			statusBar = new UiStatusBar(getLocalization());		
 			mainPane = new UiMainPane(this, getUiState());
-			setContentPane(mainPane);
+			getSwingFrame().setContentPane(mainPane);
 		}
 
 		getTransport().setProgressMeter(getTorProgressMeter());
@@ -2148,8 +2148,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		boolean showMaximized = false;
 		if(Utilities.isValidScreenPosition(screenSize, appDimension, appPosition))
 		{
-			setLocation(appPosition);
-			setSize(appDimension);
+			getSwingFrame().setLocation(appPosition);
+			getSwingFrame().setSize(appDimension);
 			if(getUiState().isCurrentAppMaximized())
 				showMaximized = true;
 		}
@@ -2158,15 +2158,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 		
 		if(showMaximized)
 		{
-			setSize(screenSize.width - 50 , screenSize.height - 50);
-			Utilities.maximizeWindow(this);
+			getSwingFrame().setSize(screenSize.width - 50 , screenSize.height - 50);
+			Utilities.maximizeWindow(this.getSwingFrame());
 		}
 		
-		getUiState().setCurrentAppDimension(getSize());
+		getUiState().setCurrentAppDimension(getSwingFrame().getSize());
 	}
 
 	private void updateTitle() {
-		setTitle(getLocalization().getWindowTitle("main"));
+		getSwingFrame().setTitle(getLocalization().getWindowTitle("main"));
 	}
 
 	public void updateServerStatusInStatusBar()
@@ -2383,13 +2383,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 	public void modifyBulletin(Bulletin b) throws Exception
 	{
 		getCurrentUiState().setModifyingBulletin(true);
-		setEnabled(false);
+		getSwingFrame().setEnabled(false);
 		UiBulletinModifyDlg dlg = null;
 		try
 		{
 			dlg = new UiBulletinModifyDlg(b, this);
 			setCurrentActiveFrame(dlg);
-			setVisible(false);
+			getSwingFrame().setVisible(false);
 			dlg.setVisible(true);
 		}
 		catch(Exception e)
@@ -2405,9 +2405,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 	public void doneModifyingBulletin()
 	{
 		getCurrentUiState().setModifyingBulletin(false);
-		setEnabled(true);
-		setVisible(true);
-		setCurrentActiveFrame(this);
+		getSwingFrame().setEnabled(true);
+		getSwingFrame().setVisible(true);
+		setCurrentActiveFrame(this.getSwingFrame());
 	}
 
 	public BulletinFolder getSelectedFolder()
