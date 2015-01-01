@@ -154,11 +154,11 @@ import org.martus.util.UnicodeReader;
 import org.martus.util.language.LanguageOptions;
 import org.martus.util.xml.XmlUtilities;
 
-public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindowInterface
+public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 {
 	public UiMainWindow() throws Exception
 	{
-		super();
+		swingFrame = new JFrame();
 
 		try
 		{
@@ -234,7 +234,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 	
 	public JFrame getSwingFrame()
 	{
-		return this;
+		return swingFrame;
 	}
 	
 	protected void restrictToOnlyTestServers()
@@ -2864,5 +2864,5 @@ public class UiMainWindow extends JFrame implements ClipboardOwner, UiMainWindow
 	private StatusBar statusBar;
 
 	public static int timeoutInXSeconds;
-	
+	private JFrame swingFrame;
 }
