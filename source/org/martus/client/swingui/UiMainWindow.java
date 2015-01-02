@@ -157,7 +157,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 {
 	public UiMainWindow() throws Exception
 	{
-		swingFrame = new MainSwingFrame(this);
 
 		try
 		{
@@ -188,8 +187,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		{
 			session = new UiSession();
 			getSession().initalizeUiState();
-
-			UiMainWindow.updateIcon(getSwingFrame());
 
 			// Pop up a nag screen if this is an unofficial private release
 			// NOTE NAG screen now could be localized
@@ -240,6 +237,9 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 
 	public boolean run()
 	{
+		swingFrame = new MainSwingFrame(this);
+		UiMainWindow.updateIcon(getSwingFrame());
+
 		setCurrentActiveFrame(getSwingFrame());
 		
 		if(Utilities.isMSWindows())
