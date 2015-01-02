@@ -2013,7 +2013,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		}
 		
 		String defaultBackupFilename = "MartusKeyPairBackup.dat";
-		File newBackupFile = showFileSaveDialog("SaveKeyPair", defaultBackupFilename, new KeyPairFormatFilter());
+		File newBackupFile = showFileSaveDialog("SaveKeyPair", defaultBackupFilename, new KeyPairFormatFilter(getLocalization()));
 		if(newBackupFile == null)
 			return;
 
@@ -2054,11 +2054,16 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 	
 	public KeyPairFormatFilter getKeyPairFormatFilter()
 	{
-		return new KeyPairFormatFilter();
+		return new KeyPairFormatFilter(getLocalization());
 	}
 	
-	public class KeyPairFormatFilter extends FormatFilter
+	public static class KeyPairFormatFilter extends FormatFilter
 	{
+		public KeyPairFormatFilter(MiniLocalization localization)
+		{
+			description = localization.getFieldLabel("KeyPairFileFilter");
+		}
+		
 		public String getWildCardExtension()
 		{
 			return "*" + getExtension();
@@ -2073,9 +2078,10 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		@Override
 		public String getDescription()
 		{
-			return getLocalization().getFieldLabel("KeyPairFileFilter");
+			return description;
 		}
 		
+		private String description;
 	}
 	
 	public void displayScrollableMessage(String titleTag, String message, String okButtonTag, Map tokenReplacement) 
