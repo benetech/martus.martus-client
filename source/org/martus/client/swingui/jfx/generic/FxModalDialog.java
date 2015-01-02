@@ -25,11 +25,13 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import java.awt.Dialog;
 import java.awt.Dimension;
 
 import javafx.application.Platform;
 
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WindowObscurer;
@@ -59,7 +61,7 @@ public class FxModalDialog extends JDialog
 
 	private static void createAndShowDialog(UiMainWindow owner, FxInSwingDialogStage stage, String titleTag, Dimension dimension)
 	{
-		FxModalDialog dialog = new FxModalDialog(owner);
+		FxModalDialog dialog = createDialog(owner);
 		if (titleTag.length() > 0)
 			dialog.setTitle(owner.getLocalization().getWindowTitle(titleTag));
 		
@@ -75,13 +77,34 @@ public class FxModalDialog extends JDialog
 		dialog.setVisible(true);
 		owner.setCurrentActiveDialog(null);
 	}
+
+	public static FxModalDialog createDialog(UiMainWindow owner)
+	{
+		JFrame frame = owner.getSwingFrame();
+		if(frame != null)
+			return new FxModalDialog(owner);
+
+		return new FxModalDialog();
+	}
+	
+	private FxModalDialog()
+	{
+		// NOTE: Pass (Dialog)null to force this window to show up in the Task Bar
+		super((Dialog)null);
+		
+		initialize();
+	}
 	
 	private FxModalDialog(UiMainWindow owner)
 	{
 		super(owner.getSwingFrame());
 
+		initialize();
+	}
+
+	public void initialize()
+	{
 		setModal(true);
-		
 		setGlassPane(new WindowObscurer());
 	}
 	

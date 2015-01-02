@@ -237,26 +237,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 
 	public boolean run()
 	{
-		swingFrame = new MainSwingFrame(this);
-		UiMainWindow.updateIcon(getSwingFrame());
-
-		setCurrentActiveFrame(getSwingFrame());
-		
-		if(Utilities.isMSWindows())
-		{
-			updateTitle();
-			getSwingFrame().setVisible(true);
-			Dimension screenSize = Utilities.getViewableScreenSize();
-			getSwingFrame().setLocation(screenSize.width, screenSize.height);
-		}
-		else if(Utilities.isLinux())
-		{
-			updateTitle();
-			getSwingFrame().setVisible(true);
-			Dimension screenSize = Utilities.getViewableScreenSize();
-			getSwingFrame().setLocation(screenSize.width/2, screenSize.height/2);
-		}
-
 		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
 		FontSetter.setDefaultFont(currentLanguageCode.equals(MtfAwareLocalization.BURMESE));
 		displayDefaultUnofficialTranslationMessageIfNecessary(currentActiveFrame, getLocalization(), currentLanguageCode);
@@ -287,7 +267,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		}
 		
 		initalizeUiState(getLocalization().getCurrentLanguageCode());
-		
 
 		try
 		{
@@ -300,6 +279,12 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 			MartusLogger.logException(e);
 			// NOTE: This was just informational output, so keep going
 		}
+		
+		swingFrame = new MainSwingFrame(this);
+		updateTitle();
+		UiMainWindow.updateIcon(getSwingFrame());
+		setCurrentActiveFrame(getSwingFrame());
+		getSwingFrame().setVisible(true);
 		
 		if(!createdNewAccount && !justRecovered)
 			askAndBackupKeypairIfRequired();
@@ -922,7 +907,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 			productDescription +
 			END_HTML_TAGS;
 		}
-		new UiSplashDlg(getCurrentActiveFrame(), getLocalization(), complianceStatementAlwaysEnglish);
+		new UiSplashDlg(getLocalization(), complianceStatementAlwaysEnglish);
 	}
 	public final static String BEGIN_HTML_TAGS = "<font size='5'>";
 	public final static String END_HTML_TAGS = "</font>";
@@ -2207,7 +2192,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 			while(userChoice == UiSigninDlg.LANGUAGE_CHANGED)
 			{	
 				if(mode==UiSigninDlg.INITIAL || mode == UiSigninDlg.INITIAL_NEW_RECOVER_ACCOUNT)
-					signinDlg = new UiInitialSigninDlg(getLocalization(), getCurrentUiState(), getCurrentActiveFrame(), mode, userName, userPassword);
+					signinDlg = new UiInitialSigninDlg(getLocalization(), getCurrentUiState(), mode, userName, userPassword);
 				else
 				{
 					if(getCurrentActiveDialog() != null)

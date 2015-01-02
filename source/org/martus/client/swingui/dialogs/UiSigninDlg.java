@@ -43,6 +43,11 @@ import org.martus.swing.UiLabel;
 
 public class UiSigninDlg extends UiBasicSigninDlg
 {
+	public UiSigninDlg(UiLocalization localizationToUse, CurrentUiState uiStateToUse, int mode, String username, char[] password)
+	{
+		super(localizationToUse, uiStateToUse, mode, username, password);
+	}
+	
 	public UiSigninDlg(UiLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode, String username, char[] password)
 	{
 		super(localizationToUse, uiStateToUse, owner, mode, username, password);
