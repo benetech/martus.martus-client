@@ -156,7 +156,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		dtde.dropComplete(worked);
 		observer.resetCursor();
 		if(!worked)
-			observer.notifyDlgBeep(observer.getSwingFrame(), errorTag);
+			observer.notifyDlgBeep(errorTag);
 	}
 
 	private void dropFiles(DropTargetDropEvent dtde)
@@ -223,7 +223,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		dtde.dropComplete(worked);
 
 		if(!worked)
-			observer.notifyDlgBeep(observer.getSwingFrame(), resultMessageTag);
+			observer.notifyDlgBeep(resultMessageTag);
 	}
 	
 	public void attemptDropFiles(File[] files, BulletinFolder toFolder) throws
@@ -276,7 +276,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		{
 			HashMap tokenReplacement = new HashMap();
 			tokenReplacement.put("#Title#", old.get(Bulletin.TAGTITLE));
-			if(observer.confirmDlg(observer.getSwingFrame(), "UnAuthoredBulletinDeleteBeforePaste", tokenReplacement))
+			if(observer.confirmDlg("UnAuthoredBulletinDeleteBeforePaste", tokenReplacement))
 			{
 				store.destroyBulletin(old);
 				store.saveFolders();
