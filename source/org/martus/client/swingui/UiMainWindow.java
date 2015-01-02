@@ -100,6 +100,7 @@ import org.martus.client.swingui.dialogs.UiSplashDlg;
 import org.martus.client.swingui.dialogs.UiStringInputDlg;
 import org.martus.client.swingui.dialogs.UiTemplateDlg;
 import org.martus.client.swingui.dialogs.UiWarningMessageDlg;
+import org.martus.client.swingui.filefilters.KeyPairFormatFilter;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.generic.FxModalDialog;
@@ -2055,33 +2056,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 	public KeyPairFormatFilter getKeyPairFormatFilter()
 	{
 		return new KeyPairFormatFilter(getLocalization());
-	}
-	
-	public static class KeyPairFormatFilter extends FormatFilter
-	{
-		public KeyPairFormatFilter(MiniLocalization localization)
-		{
-			description = localization.getFieldLabel("KeyPairFileFilter");
-		}
-		
-		public String getWildCardExtension()
-		{
-			return "*" + getExtension();
-		}
-
-		@Override
-		public String getExtension()
-		{
-			return MartusApp.SHARE_KEYPAIR_FILENAME_EXTENSION;
-		}
-
-		@Override
-		public String getDescription()
-		{
-			return description;
-		}
-		
-		private String description;
 	}
 	
 	public void displayScrollableMessage(String titleTag, String message, String okButtonTag, Map tokenReplacement) 
