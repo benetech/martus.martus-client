@@ -37,6 +37,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import org.martus.clientside.ClientPortOverride;
+import org.martus.common.MartusConstants;
 import org.martus.common.MartusLogger;
 import org.martus.common.VersionBuildDate;
 import org.martus.swing.UiOptionPane;
@@ -118,7 +119,7 @@ public class Martus
 			options.remove(foundJavaFx);
 		}
 		
-		UiMainWindow.timeoutInXSeconds = DEFAULT_TIMEOUT_SECONDS;
+		timeoutInXSeconds = DEFAULT_TIMEOUT_SECONDS;
 		int foundTimeout = findOption(options, TIMEOUT_OPTION_TEXT);
 		if(foundTimeout >= 0)
 		{
@@ -126,9 +127,18 @@ public class Martus
 			String requestedTimeoutMinutes = fullOption.substring(TIMEOUT_OPTION_TEXT.length());
 			System.out.println("Requested timeout in minutes: " + requestedTimeoutMinutes);
 			int timeoutMinutes = Integer.parseInt(requestedTimeoutMinutes);
-			UiMainWindow.timeoutInXSeconds = 60 * timeoutMinutes;
+			timeoutInXSeconds = 60 * timeoutMinutes;
 			options.remove(foundTimeout);
 		}
+		
+		File dataRootDirectory = MartusConstants.determineMartusDataRootDirectory();
+		File timeoutDebug = new File(dataRootDirectory, "timeout.1min");
+		if(timeoutDebug.exists())
+		{
+			timeoutInXSeconds = TESTING_TIMEOUT_60_SECONDS;
+			System.out.println(timeoutDebug.toString() + " detected");
+		}
+		MartusLogger.log("Inactivity timeout set to " + timeoutInXSeconds + " seconds");
 		
 		int foundInsecurePorts = options.indexOf("--insecure-ports");
 		if(foundInsecurePorts >= 0)
@@ -264,4 +274,6 @@ public class Martus
 
 	private final static String TIMEOUT_OPTION_TEXT = "--timeout-minutes=";
 	private final static int DEFAULT_TIMEOUT_SECONDS = (5 * 60);
+	private static final int TESTING_TIMEOUT_60_SECONDS = 60;
+	public static int timeoutInXSeconds;
 }
