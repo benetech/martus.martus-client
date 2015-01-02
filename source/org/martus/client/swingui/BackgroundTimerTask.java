@@ -592,7 +592,10 @@ class BackgroundTimerTask extends TimerTask
 			return;
 		if(!isServerAvailable())
 			return;
+
+		MartusLogger.logBeginProcess("Checking server news");
 		Vector newsItems = getApp().getNewsFromServer();
+		
 		int newsSize = newsItems.size();
 		if (newsSize > 0)
 			mainWindow.setStatusMessageReady();
@@ -617,6 +620,7 @@ class BackgroundTimerTask extends TimerTask
 			}
 		}
 		alreadyGotNews = true;
+		MartusLogger.logEndProcess("Checking server news");
 	}
 
 	class ThreadedNotify implements Runnable
@@ -690,7 +694,7 @@ class BackgroundTimerTask extends TimerTask
 
 		public void run()
 		{
-			mainWindow.messageDlg(mainWindow.getSwingFrame(), titleTag, messageContents, tokenReplacement);
+			mainWindow.messageDlg(titleTag, messageContents, tokenReplacement);
 		}
 		String titleTag;
 		String messageContents;
