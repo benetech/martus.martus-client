@@ -201,13 +201,15 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 			// generate bad data that we don't want cluttering up production servers
 //			restrictToOnlyTestServers();
 			
-			splashScreen.endDialog();
-			
 			getSession().initalizeUiState();
 		}
 		catch(MartusApp.MartusAppInitializationException e)
 		{
 			initializationErrorExitMartusDlg(e.getMessage());
+		}
+		finally
+		{
+			splashScreen.endDialog();
 		}
 	}
 	
