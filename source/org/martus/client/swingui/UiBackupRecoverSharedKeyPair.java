@@ -407,7 +407,7 @@ public class UiBackupRecoverSharedKeyPair
 		String buttons[] = {localization.getButtonLabel(EnglishCommonStrings.OK), 
 							localization.getButtonLabel(EnglishCommonStrings.CANCEL)};			
 
-		if(!mainWindow.confirmDlg(mainWindow.getSwingFrame(), windowTitle, insertNextDiskMessage, buttons))
+		if(!mainWindow.confirmDlg(windowTitle, insertNextDiskMessage, buttons))
 		{
 			if(mainWindow.confirmDlg(confirmCancelTag))
 				return false;
