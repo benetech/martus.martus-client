@@ -35,8 +35,6 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -230,7 +228,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		
 		getSwingFrame().setGlassPane(new WindowObscurer());
 
-		getSwingFrame().addWindowListener(new WindowEventHandler(this));
 	}
 	
 	public JFrame getSwingFrame()
@@ -2470,21 +2467,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 	}
 	
 	
-	private static class WindowEventHandler extends WindowAdapter
-	{
-		public WindowEventHandler(UiMainWindow windowToClose)
-		{
-			mainWindow = windowToClose;
-		}
-		
-		public void windowClosing(WindowEvent event)
-		{
-			mainWindow.exitNormally();
-		}
-		
-		UiMainWindow mainWindow;
-	}
-
 	private class TimeoutTimerTask extends TimerTask
 	{
 		public TimeoutTimerTask()

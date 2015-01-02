@@ -1,4 +1,7 @@
 package org.martus.client.swingui;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JFrame;
 
 /*
@@ -32,7 +35,24 @@ public class MainSwingFrame extends JFrame
 	public MainSwingFrame(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
+
+		addWindowListener(new WindowEventHandler(mainWindow));
 	}
 	
-	UiMainWindow mainWindow;
+	private static class WindowEventHandler extends WindowAdapter
+	{
+		public WindowEventHandler(UiMainWindow windowToClose)
+		{
+			mainWindow = windowToClose;
+		}
+		
+		public void windowClosing(WindowEvent event)
+		{
+			mainWindow.exitNormally();
+		}
+		
+		UiMainWindow mainWindow;
+	}
+
+	private UiMainWindow mainWindow;
 }
