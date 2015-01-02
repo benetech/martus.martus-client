@@ -442,25 +442,6 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 			mainWindow.notifyDlg("ResendError");
 	}
 
-	public boolean confirmDeletionOfFile(String filePath)
-	{
-		UiLocalization localization = mainWindow.getLocalization();
-		String title = localization.getWindowTitle("DeleteBulletinFile");
-		String msg1 = localization.getFieldLabel("DeleteBulletinFileMsg1");
-		String msg2 = localization.getFieldLabel("DeleteBulletinFileMsg2");
-		String[] contents = {msg1, filePath, msg2};
-
-		String delete = localization.getButtonLabel("Delete");
-		String leave = localization.getButtonLabel("Leave");
-		String[] buttons = {delete, leave};
-
-		UiNotifyDlg notify = new UiNotifyDlg(mainWindow.getSwingFrame(), title, contents, buttons);
-		String result = notify.getResult();
-		if(result != null && result.equals(delete))
-			return true;
-		return false;
-	}
-
 	class TableHeaderMouseAdapter extends MouseAdapter
 	{
 		public void mouseClicked(MouseEvent e)
