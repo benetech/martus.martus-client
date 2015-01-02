@@ -1146,6 +1146,11 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		return UiUtilities.confirmDlg(getLocalization(), parent, title, contents);
 	}
 
+	public boolean confirmDlg(String title, String[] contents, String[] buttons)
+	{
+		return confirmDlg(getCurrentActiveFrame(), title, contents, buttons);
+	}
+
 	@Override
 	public boolean confirmDlg(JFrame parent, String title, String[] contents, String[] buttons)
 	{
