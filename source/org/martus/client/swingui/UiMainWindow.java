@@ -2470,7 +2470,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 	}
 	
 	
-	class WindowEventHandler extends WindowAdapter
+	private class WindowEventHandler extends WindowAdapter
 	{
 		public void windowClosing(WindowEvent event)
 		{
