@@ -179,7 +179,7 @@ class BackgroundTimerTask extends TimerTask
 			doRetrieving();
 			if(!retriever.hasWorkToDo())
 			{
-				SwingUtilities.invokeLater(new ThreadedNotifyDlgAndUpdateReadyMessage("RetrieveCompleted"));
+				SwingUtilities.invokeLater(new ThreadedUpdateReadyMessage());
 			}
 			return;
 		}
@@ -197,7 +197,8 @@ class BackgroundTimerTask extends TimerTask
 		catch (Exception e)
 		{
 			String tag = "RetrieveError";
-			SwingUtilities.invokeLater(new ThreadedNotifyDlgAndUpdateReadyMessage(tag));
+			SwingUtilities.invokeLater(new WorkerThread.ThreadedNotifyDlg(mainWindow, tag));
+			SwingUtilities.invokeLater(new ThreadedUpdateReadyMessage());
 			e.printStackTrace();
 		}
 		mainWindow.folderContentsHaveChanged(folder);
@@ -701,21 +702,12 @@ class BackgroundTimerTask extends TimerTask
 		HashMap tokenReplacement;
 	}
 	
-	class ThreadedNotifyDlgAndUpdateReadyMessage implements Runnable
+	class ThreadedUpdateReadyMessage implements Runnable
 	{
-		public ThreadedNotifyDlgAndUpdateReadyMessage(String tagToUse)
-		{
-			tag = tagToUse;
-		}
-		
 		public void run()
 		{
-			if(!UiSession.isJavaFx())
-				mainWindow.notifyDlg(mainWindow.getSwingFrame(), tag);
 			mainWindow.setStatusMessageReady();
 		}
-		
-		String tag;
 	}
 		
 	MartusApp getApp()
