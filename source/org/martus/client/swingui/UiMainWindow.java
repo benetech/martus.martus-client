@@ -213,14 +213,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		}
 		MartusLogger.log("Inactivity timeout set to " + timeoutInXSeconds + " seconds");
 		
-		timeBetweenFieldOfficeChecksSeconds = TIME_BETWEEN_FIELD_OFFICE_CHECKS_SECONDS;
-		File foCheckDebug = new File(getApp().getMartusDataRootDirectory(), "focheck.debug");
-		if(foCheckDebug.exists())
-		{
-			timeBetweenFieldOfficeChecksSeconds = TESTING_FOCHECK_SECONDS;
-			System.out.println(foCheckDebug.toString() + " detected; field office check every " + timeBetweenFieldOfficeChecksSeconds + " seconds");
-		}
-		
 		splashScreen.endDialog();
 		
 		getSession().initalizeUiState();
@@ -2793,12 +2785,10 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 
 	public static final int MINIMUM_TEXT_FIELD_WIDTH = 30;
 	private static final int TESTING_TIMEOUT_60_SECONDS = 60;
-	private static final int TESTING_FOCHECK_SECONDS = 5 * 60;
 	private static final int MINIMUM_SCREEN_WIDTH = 700;
 	public static final int MAX_KEYPAIRFILE_SIZE = 32000;
 	private static final int BACKGROUND_UPLOAD_CHECK_MILLIS = 5*1000;
 	private static final int BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS = 5*1000;
-	private static final int TIME_BETWEEN_FIELD_OFFICE_CHECKS_SECONDS = 60;
 
 	private UiSession session;
 
@@ -2824,7 +2814,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 
 	private FileLock lockToPreventTwoInstances; 
 	private FileOutputStream lockStream;
-	public int timeBetweenFieldOfficeChecksSeconds;
 	private Stack cursorStack;
 	private StatusBar statusBar;
 
