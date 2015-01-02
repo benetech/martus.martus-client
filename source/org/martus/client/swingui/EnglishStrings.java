@@ -768,6 +768,7 @@ public class EnglishStrings
 
 "field:AddingPermissionsToBulletins=Updating access...",
 "wintitle:FileDialogAddAttachment=Add Attachment",
+"button:FileDialogOkAddAttachment=Add",
 
 "button:FileDialogOkRestoreFromKeyPair=Restore",
 
