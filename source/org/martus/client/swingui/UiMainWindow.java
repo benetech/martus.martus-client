@@ -2251,8 +2251,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 	@Override
 	public void exitNormally()
 	{
-		if(createdNewAccount)
-			askAndBackupKeypairIfRequired();
 		if(showRelevantUploadReminder())
 			return;
 		
