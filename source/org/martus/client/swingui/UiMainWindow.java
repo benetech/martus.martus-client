@@ -283,18 +283,18 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		if(!createdNewAccount && !justRecovered)
 			askAndBackupKeypairIfRequired();
 		
-		swingFrame = new MainSwingFrame(this);
-		updateTitle();
-		UiMainWindow.updateIcon(getSwingFrame());
-		setCurrentActiveFrame(getSwingFrame());
-		getSwingFrame().setVisible(true);
-		
 		UiModelessBusyDlg waitingForBulletinsToLoad = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitingForBulletinsToLoad"));
 		try
 		{
 			if(!loadFoldersAndBulletins())
 				return false;
 	
+			swingFrame = new MainSwingFrame(this);
+			updateTitle();
+			UiMainWindow.updateIcon(getSwingFrame());
+			setCurrentActiveFrame(getSwingFrame());
+			getSwingFrame().setVisible(true);
+			
 			initializeViews();
 			restoreState();
 		}
