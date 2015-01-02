@@ -36,6 +36,8 @@ public class MainSwingFrame extends JFrame
 	{
 		mainWindow = mainWindowToUse;
 
+		setGlassPane(new WindowObscurer());
+
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowEventHandler(mainWindow));
 	}

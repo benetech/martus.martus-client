@@ -224,9 +224,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		splashScreen.endDialog();
 		
 		getSession().initalizeUiState();
-		
-		getSwingFrame().setGlassPane(new WindowObscurer());
-
 	}
 	
 	public JFrame getSwingFrame()
