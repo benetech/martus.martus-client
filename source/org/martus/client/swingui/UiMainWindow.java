@@ -195,7 +195,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		{
 			initializationErrorExitMartusDlg(e.getMessage());
 		}
-		UiMainWindow.updateIcon(this.getSwingFrame());
+		UiMainWindow.updateIcon(getSwingFrame());
 
 		// Pop up a nag screen if this is an unofficial private release
 		// NOTE NAG screen now could be localized
@@ -260,7 +260,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 
 	public boolean run()
 	{
-		setCurrentActiveFrame(this.getSwingFrame());
+		setCurrentActiveFrame(getSwingFrame());
 		
 		if(Utilities.isMSWindows())
 		{
@@ -395,7 +395,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		HashMap map = new HashMap();
 		map.put("#HighVersion#", highVersionJava);
 		map.put("#ExpectedVersion#", expectedVersionJava);
-		new UiNotifyDlg(this.getSwingFrame(), title, new String[]{warningMessage}, new String[]{buttonMessage}, map);
+		new UiNotifyDlg(getSwingFrame(), title, new String[]{warningMessage}, new String[]{buttonMessage}, map);
 	}
 
 	private void warnIfCryptoJarsNotLoaded() throws Exception
@@ -551,7 +551,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		if(!getStore().loadFieldSpecCache())
 		{
 			if(!createdNewAccount)
-				notifyDlg(this.getSwingFrame(), "CreatingFieldSpecCache");
+				notifyDlg(getSwingFrame(), "CreatingFieldSpecCache");
 
 			getStore().createFieldSpecCacheFromDatabase();
 		}
@@ -1615,7 +1615,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		message = replaceToken(message , "#NumberBulletinsFound#", (new Integer(bulletinsFound)).toString());
 		UiOptionPane pane = new UiOptionPane(message, UiOptionPane.INFORMATION_MESSAGE, UiOptionPane.DEFAULT_OPTION,
 								null, buttons);
-		JDialog dialog = pane.createDialog(this.getSwingFrame(), title);
+		JDialog dialog = pane.createDialog(getSwingFrame(), title);
 		dialog.setVisible(true);
 	}
 
@@ -1664,7 +1664,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescriptionOld, formattedCodeContentsOld, " ", codeDescriptionNew, formattedCodeContentsNew, " ", martusAccountAccessTokenDescription, martusAccountAccessToken, " ", accountDirectory};
 		String[] buttons = {ok};
 
-		new UiNotifyDlg(this.getSwingFrame(), title, contents, buttons);
+		new UiNotifyDlg(getSwingFrame(), title, contents, buttons);
 	}
 
 	public void displayHelpMessage()
@@ -1733,7 +1733,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		if(!isRetrieveInProgress())
 			return;
 		
-		if(!confirmDlg(this.getSwingFrame(), "CancelRetrieve"))
+		if(!confirmDlg(getSwingFrame(), "CancelRetrieve"))
 			return;
 		
 		try
@@ -1935,7 +1935,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		{
 			if(!getApp().isSSLServerAvailable())
 			{
-				notifyDlg(this.getSwingFrame(), "retrievenoserver", dlgTitleTag);
+				notifyDlg(getSwingFrame(), "retrievenoserver", dlgTitleTag);
 				return false;
 			}
 			model.initialize(progressHandler);
@@ -1959,7 +1959,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		}
 		catch (Exception e)
 		{
-			notifyDlg(this.getSwingFrame(), "RetrievedOnlySomeSummaries", dlgTitleTag);
+			notifyDlg(getSwingFrame(), "RetrievedOnlySomeSummaries", dlgTitleTag);
 		}
 		return true;
 	}
@@ -2139,7 +2139,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		if(showMaximized)
 		{
 			getSwingFrame().setSize(screenSize.width - 50 , screenSize.height - 50);
-			Utilities.maximizeWindow(this.getSwingFrame());
+			Utilities.maximizeWindow(getSwingFrame());
 		}
 		
 		getUiState().setCurrentAppDimension(getSwingFrame().getSize());
@@ -2387,7 +2387,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		getCurrentUiState().setModifyingBulletin(false);
 		getSwingFrame().setEnabled(true);
 		getSwingFrame().setVisible(true);
-		setCurrentActiveFrame(this.getSwingFrame());
+		setCurrentActiveFrame(getSwingFrame());
 	}
 
 	public BulletinFolder getSelectedFolder()
