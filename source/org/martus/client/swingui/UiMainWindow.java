@@ -230,7 +230,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		
 		getSwingFrame().setGlassPane(new WindowObscurer());
 
-		getSwingFrame().addWindowListener(new WindowEventHandler());
+		getSwingFrame().addWindowListener(new WindowEventHandler(this));
 	}
 	
 	public JFrame getSwingFrame()
@@ -2470,15 +2470,22 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 	}
 	
 	
-	private class WindowEventHandler extends WindowAdapter
+	private static class WindowEventHandler extends WindowAdapter
 	{
+		public WindowEventHandler(UiMainWindow windowToClose)
+		{
+			mainWindow = windowToClose;
+		}
+		
 		public void windowClosing(WindowEvent event)
 		{
-			exitNormally();
+			mainWindow.exitNormally();
 		}
+		
+		UiMainWindow mainWindow;
 	}
 
-	class TimeoutTimerTask extends TimerTask
+	private class TimeoutTimerTask extends TimerTask
 	{
 		public TimeoutTimerTask()
 		{
