@@ -280,14 +280,14 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 			// NOTE: This was just informational output, so keep going
 		}
 		
+		if(!createdNewAccount && !justRecovered)
+			askAndBackupKeypairIfRequired();
+		
 		swingFrame = new MainSwingFrame(this);
 		updateTitle();
 		UiMainWindow.updateIcon(getSwingFrame());
 		setCurrentActiveFrame(getSwingFrame());
 		getSwingFrame().setVisible(true);
-		
-		if(!createdNewAccount && !justRecovered)
-			askAndBackupKeypairIfRequired();
 		
 		UiModelessBusyDlg waitingForBulletinsToLoad = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitingForBulletinsToLoad"));
 		try
