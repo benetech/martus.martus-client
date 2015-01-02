@@ -1,9 +1,3 @@
-package org.martus.client.swingui;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.JFrame;
-
 /*
 
 The Martus(tm) free, social justice documentation and
@@ -29,6 +23,12 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
  */
+
+package org.martus.client.swingui;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JFrame;
 
 public class MainSwingFrame extends JFrame
 {
