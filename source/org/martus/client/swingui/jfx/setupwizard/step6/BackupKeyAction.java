@@ -29,13 +29,10 @@ import java.io.File;
 
 import javafx.application.Platform;
 
-import javax.swing.JFileChooser;
-
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
-import org.martus.client.swingui.filefilters.AllFileFilter;
 import org.martus.client.swingui.filefilters.KeyPairFormatFilter;
 import org.martus.common.MartusLogger;
 import org.martus.util.FileTransfer;
@@ -74,17 +71,8 @@ public class BackupKeyAction implements ActionDoer
 			return;
 		}
 
-		JFileChooser fileChooser = new JFileChooser(getApp().getMartusDataRootDirectory());
-		fileChooser.setDialogTitle(localization.getWindowTitle("FileDialogSaveKeyPair"));
 		KeyPairFormatFilter keyPairFilter = getMainWindow().getKeyPairFormatFilter();
-		fileChooser.addChoosableFileFilter(keyPairFilter);
-		fileChooser.setAcceptAllFileFilterUsed(false);
-		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
-		int userChoice = fileChooser.showSaveDialog(getMainWindow().getSwingFrame());
-		if (userChoice != JFileChooser.APPROVE_OPTION)
-			return;
-		
-		File newBackupFile = fileChooser.getSelectedFile();
+		File newBackupFile = getMainWindow().showFileSaveDialog("SaveKeyPair", MartusApp.KEYPAIR_FILENAME, keyPairFilter);
 		if(newBackupFile == null)
 			return;
 		
