@@ -2642,6 +2642,11 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		return internalShowFileOpenDialog(fileDialogCategory, null, filter);
 	}
 	
+	public File showFileOpenDialogWithDirectoryMemory(String fileDialogCategory)
+	{
+		return showFileOpenDialogWithDirectoryMemory(fileDialogCategory, (FileFilter)null);
+	}
+
 	public File showFileOpenDialogWithDirectoryMemory(String fileDialogCategory, FileFilter filter)
 	{
 		File directory = UiSession.getMemorizedFileOpenDirectories().get(fileDialogCategory);
@@ -2812,4 +2817,5 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 	private StatusBar statusBar;
 
 	private JFrame swingFrame;
+
 }
