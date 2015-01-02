@@ -103,7 +103,7 @@ public abstract class WorkerThread extends Thread
 		SwingUtilities.invokeAndWait(new ThreadedNotifyDlg(mainWindow, resultMessageTag));
 	}
 
-	private static class ThreadedNotifyDlg implements Runnable
+	public static class ThreadedNotifyDlg implements Runnable
 	{
 		public ThreadedNotifyDlg(UiMainWindow mainWindowToUse, String tagToUse)
 		{
