@@ -1656,7 +1656,8 @@ public class EnglishStrings
 "field:From=From:",
 "field:VersionNumber=Version #:",
 
-"wintitle:ImportContactPublicKey=Import Contact Key",
+"wintitle:FileDialogImportContactPublicKey=Import Contact Key",
+"button:FileDialogOkImportContactPublicKey=Import",
 
 "wintitle:notifyAddPermissionsZeroBulletinsOurs=Update Contacts access to Records",
 "wintitle:notifyAddPermissionsZeroHeadquartersSelected=No Contacts Selected",
