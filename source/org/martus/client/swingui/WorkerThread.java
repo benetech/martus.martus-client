@@ -113,7 +113,7 @@ public abstract class WorkerThread extends Thread
 		
 		public void run()
 		{
-			mainWindow.notifyDlg(mainWindow.getSwingFrame(), tag);
+			mainWindow.notifyDlg(tag);
 		}
 		UiMainWindow mainWindow;
 		String tag;
