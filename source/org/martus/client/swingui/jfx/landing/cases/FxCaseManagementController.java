@@ -302,7 +302,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		if(!currentFolder.canRename())
 			return;
 
-		FxFolderRenameController renameFolder = new FxFolderRenameController(getMainWindow(), currentFolder.getName());
+		FxFolderRenameController renameFolder = new FxFolderRenameController(getMainWindow(), currentFolder.getLocalizedName(getLocalization()));
 		renameFolder.addFolderRenameListener(new FolderRenamedListener());
 		ActionDoer shellController = new DialogWithOkCancelShellController(getMainWindow(), renameFolder);
 		doAction(shellController);
