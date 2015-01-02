@@ -187,6 +187,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		try
 		{
 			session = new UiSession();
+			getSession().initalizeUiState();
 
 			UiMainWindow.updateIcon(getSwingFrame());
 
@@ -201,7 +202,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 			// generate bad data that we don't want cluttering up production servers
 //			restrictToOnlyTestServers();
 			
-			getSession().initalizeUiState();
 		}
 		catch(MartusApp.MartusAppInitializationException e)
 		{
