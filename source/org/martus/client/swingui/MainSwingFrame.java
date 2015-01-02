@@ -29,8 +29,10 @@ Boston, MA 02111-1307, USA.
 
 public class MainSwingFrame extends JFrame
 {
-	public MainSwingFrame()
+	public MainSwingFrame(UiMainWindow mainWindowToUse)
 	{
-		
+		mainWindow = mainWindowToUse;
 	}
+	
+	UiMainWindow mainWindow;
 }
