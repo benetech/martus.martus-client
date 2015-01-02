@@ -1261,6 +1261,11 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		UiUtilities.notifyDlg(getLocalization(), parent, baseTag, titleTag, tokenReplacement);
 	}
 
+	public void messageDlg(String baseTag, String message, Map tokenReplacement)
+	{
+		messageDlg(getCurrentActiveFrame(), baseTag, message, tokenReplacement);
+	}
+
 	@Override
 	public void messageDlg(JFrame parent, String baseTag, String message)
 	{
