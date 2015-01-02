@@ -187,27 +187,28 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		try
 		{
 			session = new UiSession();
+
+			UiMainWindow.updateIcon(getSwingFrame());
+
+			// Pop up a nag screen if this is an unofficial private release
+			// NOTE NAG screen now could be localized
+//			new UiNotifyDlg(this, "Martus - Test Version", 
+//					new String[] {"THIS IS A PRE-RELEASE TEST VERSION OF MARTUS.",
+//					"Please contact martus@bentech.org with any feedback or questions."}, 
+//					new String[] {"OK"});
+			
+			// Uncomment the call to restrictToOnlyTestServers for test builds which might
+			// generate bad data that we don't want cluttering up production servers
+//			restrictToOnlyTestServers();
+			
+			splashScreen.endDialog();
+			
+			getSession().initalizeUiState();
 		}
 		catch(MartusApp.MartusAppInitializationException e)
 		{
 			initializationErrorExitMartusDlg(e.getMessage());
 		}
-		UiMainWindow.updateIcon(getSwingFrame());
-
-		// Pop up a nag screen if this is an unofficial private release
-		// NOTE NAG screen now could be localized
-//		new UiNotifyDlg(this, "Martus - Test Version", 
-//				new String[] {"THIS IS A PRE-RELEASE TEST VERSION OF MARTUS.",
-//				"Please contact martus@bentech.org with any feedback or questions."}, 
-//				new String[] {"OK"});
-		
-		// Uncomment the call to restrictToOnlyTestServers for test builds which might
-		// generate bad data that we don't want cluttering up production servers
-//		restrictToOnlyTestServers();
-		
-		splashScreen.endDialog();
-		
-		getSession().initalizeUiState();
 	}
 	
 	public JFrame getSwingFrame()
