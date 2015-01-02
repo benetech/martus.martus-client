@@ -2037,11 +2037,9 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 	{
 		MartusLogger.logBeginProcess("Initializing views");
 		swingFrame = new MainSwingFrame(this);
-		updateTitle();
 		UiMainWindow.updateIcon(getSwingFrame());
 		setCurrentActiveFrame(getSwingFrame());
 		getSwingFrame().setVisible(true);
-		
 		updateTitle();
 
 		setWindowSizeAndState();
