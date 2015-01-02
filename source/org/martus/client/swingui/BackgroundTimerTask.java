@@ -270,27 +270,26 @@ class BackgroundTimerTask extends TimerTask
 		if(!isSyncEnabled)
 			return;
 
-		if(syncRetriever.hadException())
+		try
 		{
-			try
-			{
+			if(syncRetriever.hadException())
 				throw syncRetriever.getAndClearException();
-			}
-			catch (AddOlderVersionToFolderFailedException ignoreOldVersionException)
-			{
-				MartusLogger.log("Older version not added."); 
-			}
-			catch (Exception e)
-			{
-				disableSync();
-				MartusLogger.logException(e);
-	
-				String baseTag = "SyncDisabledDueToError";
-				UiMainWindow.showNotifyDlgOnSwingThread(mainWindow, baseTag);
-			}
+		}
+		catch (AddOlderVersionToFolderFailedException ignoreOldVersionException)
+		{
+			MartusLogger.log("Older version not added."); 
 			return;
 		}
-		
+		catch (Exception e)
+		{
+			disableSync();
+			MartusLogger.logException(e);
+
+			String baseTag = "SyncDisabledDueToError";
+			UiMainWindow.showNotifyDlgOnSwingThread(mainWindow, baseTag);
+			return;
+		}
+
 		lastKnownSyncFrequencyMinutes = syncFrequency;
 		if(System.currentTimeMillis() < nextCheckForFieldOfficeBulletins)
 			return;
