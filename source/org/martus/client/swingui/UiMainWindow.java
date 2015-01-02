@@ -205,14 +205,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		// generate bad data that we don't want cluttering up production servers
 //		restrictToOnlyTestServers();
 		
-		File timeoutDebug = new File(getApp().getMartusDataRootDirectory(), "timeout.1min");
-		if(timeoutDebug.exists())
-		{
-			timeoutInXSeconds = TESTING_TIMEOUT_60_SECONDS;
-			System.out.println(timeoutDebug.toString() + " detected");
-		}
-		MartusLogger.log("Inactivity timeout set to " + timeoutInXSeconds + " seconds");
-		
 		splashScreen.endDialog();
 		
 		getSession().initalizeUiState();
@@ -2495,7 +2487,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 
 		boolean hasTimedOut()
 		{
-			if(inactivityDetector.secondsSinceLastActivity() > timeoutInXSeconds)
+			if(inactivityDetector.secondsSinceLastActivity() > Martus.timeoutInXSeconds)
 				return true;
 
 			return false;
@@ -2784,7 +2776,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 	public static final String STATUS_SERVER_OFFLINE_MODE = "OfflineModeProgressMessage";
 
 	public static final int MINIMUM_TEXT_FIELD_WIDTH = 30;
-	private static final int TESTING_TIMEOUT_60_SECONDS = 60;
 	private static final int MINIMUM_SCREEN_WIDTH = 700;
 	public static final int MAX_KEYPAIRFILE_SIZE = 32000;
 	private static final int BACKGROUND_UPLOAD_CHECK_MILLIS = 5*1000;
@@ -2817,6 +2808,5 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 	private Stack cursorStack;
 	private StatusBar statusBar;
 
-	public static int timeoutInXSeconds;
 	private JFrame swingFrame;
 }
