@@ -182,8 +182,8 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		}
 		
 		cursorStack = new Stack();
+		
 		UiModelessBusyDlg splashScreen = new UiModelessBusyDlg(new ImageIcon(UiAboutDlg.class.getResource("Martus-logo-black-text-160x72.png")));
-
 		try
 		{
 			session = new UiSession();
