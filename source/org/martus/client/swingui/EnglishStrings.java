@@ -243,9 +243,6 @@ public class EnglishStrings
 "wintitle:notifyServerNotCompatible=Server Error",
 "field:notifyServerNotCompatiblecause=This server does not support this feature.",
 
-"wintitle:notifyRetrieveCompleted=Retrieve Complete",
-"field:notifyRetrieveCompletedcause=Retrieving records from the server is complete",
-
 "wintitle:notifyErrorGettingCompliance=Error Getting Compliance Statement",
 "field:notifyErrorGettingCompliancecause=An error occured while trying to connect to the server.",
 
