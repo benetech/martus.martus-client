@@ -79,7 +79,7 @@ public abstract class WorkerThread extends Thread
 		
 		public void run()
 		{
-			result = mainWindow.confirmDlg(mainWindow.getSwingFrame(), title, contents);
+			result = mainWindow.confirmDlg(title, contents);
 		}
 		
 		public boolean getResult()
