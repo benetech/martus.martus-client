@@ -159,7 +159,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 {
 	public UiMainWindow() throws Exception
 	{
-		swingFrame = new MainSwingFrame();
+		swingFrame = new MainSwingFrame(this);
 
 		try
 		{
