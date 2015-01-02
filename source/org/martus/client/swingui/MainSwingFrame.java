@@ -36,6 +36,7 @@ public class MainSwingFrame extends JFrame
 	{
 		mainWindow = mainWindowToUse;
 
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowEventHandler(mainWindow));
 	}
 	
