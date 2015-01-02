@@ -35,8 +35,6 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -100,6 +98,7 @@ import org.martus.client.swingui.dialogs.UiSplashDlg;
 import org.martus.client.swingui.dialogs.UiStringInputDlg;
 import org.martus.client.swingui.dialogs.UiTemplateDlg;
 import org.martus.client.swingui.dialogs.UiWarningMessageDlg;
+import org.martus.client.swingui.filefilters.KeyPairFormatFilter;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.generic.FxModalDialog;
@@ -158,7 +157,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 {
 	public UiMainWindow() throws Exception
 	{
-		swingFrame = new JFrame();
+		swingFrame = new MainSwingFrame(this);
 
 		try
 		{
@@ -185,51 +184,33 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		cursorStack = new Stack();
 		UiModelessBusyDlg splashScreen = new UiModelessBusyDlg(new ImageIcon(UiAboutDlg.class.getResource("Martus-logo-black-text-160x72.png")));
 
-		getSwingFrame().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		try
 		{
 			session = new UiSession();
+
+			UiMainWindow.updateIcon(getSwingFrame());
+
+			// Pop up a nag screen if this is an unofficial private release
+			// NOTE NAG screen now could be localized
+//			new UiNotifyDlg(this, "Martus - Test Version", 
+//					new String[] {"THIS IS A PRE-RELEASE TEST VERSION OF MARTUS.",
+//					"Please contact martus@bentech.org with any feedback or questions."}, 
+//					new String[] {"OK"});
+			
+			// Uncomment the call to restrictToOnlyTestServers for test builds which might
+			// generate bad data that we don't want cluttering up production servers
+//			restrictToOnlyTestServers();
+			
+			getSession().initalizeUiState();
 		}
 		catch(MartusApp.MartusAppInitializationException e)
 		{
 			initializationErrorExitMartusDlg(e.getMessage());
 		}
-		UiMainWindow.updateIcon(this.getSwingFrame());
-
-		// Pop up a nag screen if this is an unofficial private release
-		// NOTE NAG screen now could be localized
-//		new UiNotifyDlg(this, "Martus - Test Version", 
-//				new String[] {"THIS IS A PRE-RELEASE TEST VERSION OF MARTUS.",
-//				"Please contact martus@bentech.org with any feedback or questions."}, 
-//				new String[] {"OK"});
-		
-		// Uncomment the call to restrictToOnlyTestServers for test builds which might
-		// generate bad data that we don't want cluttering up production servers
-//		restrictToOnlyTestServers();
-		
-		File timeoutDebug = new File(getApp().getMartusDataRootDirectory(), "timeout.1min");
-		if(timeoutDebug.exists())
+		finally
 		{
-			timeoutInXSeconds = TESTING_TIMEOUT_60_SECONDS;
-			System.out.println(timeoutDebug.toString() + " detected");
+			splashScreen.endDialog();
 		}
-		MartusLogger.log("Inactivity timeout set to " + timeoutInXSeconds + " seconds");
-		
-		timeBetweenFieldOfficeChecksSeconds = TIME_BETWEEN_FIELD_OFFICE_CHECKS_SECONDS;
-		File foCheckDebug = new File(getApp().getMartusDataRootDirectory(), "focheck.debug");
-		if(foCheckDebug.exists())
-		{
-			timeBetweenFieldOfficeChecksSeconds = TESTING_FOCHECK_SECONDS;
-			System.out.println(foCheckDebug.toString() + " detected; field office check every " + timeBetweenFieldOfficeChecksSeconds + " seconds");
-		}
-		
-		splashScreen.endDialog();
-		
-		getSession().initalizeUiState();
-		
-		getSwingFrame().setGlassPane(new WindowObscurer());
-
-		getSwingFrame().addWindowListener(new WindowEventHandler());
 	}
 	
 	public JFrame getSwingFrame()
@@ -259,7 +240,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 
 	public boolean run()
 	{
-		setCurrentActiveFrame(this.getSwingFrame());
+		setCurrentActiveFrame(getSwingFrame());
 		
 		if(Utilities.isMSWindows())
 		{
@@ -394,7 +375,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		HashMap map = new HashMap();
 		map.put("#HighVersion#", highVersionJava);
 		map.put("#ExpectedVersion#", expectedVersionJava);
-		new UiNotifyDlg(this.getSwingFrame(), title, new String[]{warningMessage}, new String[]{buttonMessage}, map);
+		new UiNotifyDlg(getSwingFrame(), title, new String[]{warningMessage}, new String[]{buttonMessage}, map);
 	}
 
 	private void warnIfCryptoJarsNotLoaded() throws Exception
@@ -550,7 +531,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		if(!getStore().loadFieldSpecCache())
 		{
 			if(!createdNewAccount)
-				notifyDlg(this.getSwingFrame(), "CreatingFieldSpecCache");
+				notifyDlg(getSwingFrame(), "CreatingFieldSpecCache");
 
 			getStore().createFieldSpecCacheFromDatabase();
 		}
@@ -1614,7 +1595,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		message = replaceToken(message , "#NumberBulletinsFound#", (new Integer(bulletinsFound)).toString());
 		UiOptionPane pane = new UiOptionPane(message, UiOptionPane.INFORMATION_MESSAGE, UiOptionPane.DEFAULT_OPTION,
 								null, buttons);
-		JDialog dialog = pane.createDialog(this.getSwingFrame(), title);
+		JDialog dialog = pane.createDialog(getSwingFrame(), title);
 		dialog.setVisible(true);
 	}
 
@@ -1663,7 +1644,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescriptionOld, formattedCodeContentsOld, " ", codeDescriptionNew, formattedCodeContentsNew, " ", martusAccountAccessTokenDescription, martusAccountAccessToken, " ", accountDirectory};
 		String[] buttons = {ok};
 
-		new UiNotifyDlg(this.getSwingFrame(), title, contents, buttons);
+		new UiNotifyDlg(getSwingFrame(), title, contents, buttons);
 	}
 
 	public void displayHelpMessage()
@@ -1732,7 +1713,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		if(!isRetrieveInProgress())
 			return;
 		
-		if(!confirmDlg(this.getSwingFrame(), "CancelRetrieve"))
+		if(!confirmDlg(getSwingFrame(), "CancelRetrieve"))
 			return;
 		
 		try
@@ -1934,7 +1915,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		{
 			if(!getApp().isSSLServerAvailable())
 			{
-				notifyDlg(this.getSwingFrame(), "retrievenoserver", dlgTitleTag);
+				notifyDlg(getSwingFrame(), "retrievenoserver", dlgTitleTag);
 				return false;
 			}
 			model.initialize(progressHandler);
@@ -1958,7 +1939,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		}
 		catch (Exception e)
 		{
-			notifyDlg(this.getSwingFrame(), "RetrievedOnlySomeSummaries", dlgTitleTag);
+			notifyDlg(getSwingFrame(), "RetrievedOnlySomeSummaries", dlgTitleTag);
 		}
 		return true;
 	}
@@ -2013,7 +1994,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		}
 		
 		String defaultBackupFilename = "MartusKeyPairBackup.dat";
-		File newBackupFile = showFileSaveDialog("SaveKeyPair", defaultBackupFilename, new KeyPairFormatFilter());
+		File newBackupFile = showFileSaveDialog("SaveKeyPair", defaultBackupFilename, new KeyPairFormatFilter(getLocalization()));
 		if(newBackupFile == null)
 			return;
 
@@ -2054,28 +2035,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 	
 	public KeyPairFormatFilter getKeyPairFormatFilter()
 	{
-		return new KeyPairFormatFilter();
-	}
-	
-	public class KeyPairFormatFilter extends FormatFilter
-	{
-		public String getWildCardExtension()
-		{
-			return "*" + getExtension();
-		}
-
-		@Override
-		public String getExtension()
-		{
-			return MartusApp.SHARE_KEYPAIR_FILENAME_EXTENSION;
-		}
-
-		@Override
-		public String getDescription()
-		{
-			return getLocalization().getFieldLabel("KeyPairFileFilter");
-		}
-		
+		return new KeyPairFormatFilter(getLocalization());
 	}
 	
 	public void displayScrollableMessage(String titleTag, String message, String okButtonTag, Map tokenReplacement) 
@@ -2159,7 +2119,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		if(showMaximized)
 		{
 			getSwingFrame().setSize(screenSize.width - 50 , screenSize.height - 50);
-			Utilities.maximizeWindow(this.getSwingFrame());
+			Utilities.maximizeWindow(getSwingFrame());
 		}
 		
 		getUiState().setCurrentAppDimension(getSwingFrame().getSize());
@@ -2407,7 +2367,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		getCurrentUiState().setModifyingBulletin(false);
 		getSwingFrame().setEnabled(true);
 		getSwingFrame().setVisible(true);
-		setCurrentActiveFrame(this.getSwingFrame());
+		setCurrentActiveFrame(getSwingFrame());
 	}
 
 	public BulletinFolder getSelectedFolder()
@@ -2490,15 +2450,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 	}
 	
 	
-	class WindowEventHandler extends WindowAdapter
-	{
-		public void windowClosing(WindowEvent event)
-		{
-			exitNormally();
-		}
-	}
-
-	class TimeoutTimerTask extends TimerTask
+	private class TimeoutTimerTask extends TimerTask
 	{
 		public TimeoutTimerTask()
 		{
@@ -2538,7 +2490,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 
 		boolean hasTimedOut()
 		{
-			if(inactivityDetector.secondsSinceLastActivity() > timeoutInXSeconds)
+			if(inactivityDetector.secondsSinceLastActivity() > Martus.timeoutInXSeconds)
 				return true;
 
 			return false;
@@ -2827,13 +2779,10 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 	public static final String STATUS_SERVER_OFFLINE_MODE = "OfflineModeProgressMessage";
 
 	public static final int MINIMUM_TEXT_FIELD_WIDTH = 30;
-	private static final int TESTING_TIMEOUT_60_SECONDS = 60;
-	private static final int TESTING_FOCHECK_SECONDS = 5 * 60;
 	private static final int MINIMUM_SCREEN_WIDTH = 700;
 	public static final int MAX_KEYPAIRFILE_SIZE = 32000;
 	private static final int BACKGROUND_UPLOAD_CHECK_MILLIS = 5*1000;
 	private static final int BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS = 5*1000;
-	private static final int TIME_BETWEEN_FIELD_OFFICE_CHECKS_SECONDS = 60;
 
 	private UiSession session;
 
@@ -2859,10 +2808,8 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 
 	private FileLock lockToPreventTwoInstances; 
 	private FileOutputStream lockStream;
-	public int timeBetweenFieldOfficeChecksSeconds;
 	private Stack cursorStack;
 	private StatusBar statusBar;
 
-	public static int timeoutInXSeconds;
 	private JFrame swingFrame;
 }
