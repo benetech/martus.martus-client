@@ -417,7 +417,7 @@ public class ActionMenuReports extends ActionPrint implements ActionDoer
 				return null;
 			if(selectedSpecs.length == 0)
 			{
-				mainWindow.notifyDlg(mainWindow.getSwingFrame(), "NoReportFieldsSelected");
+				mainWindow.notifyDlg("NoReportFieldsSelected");
 				continue;
 			}
 			MiniFieldSpec[] specs = new MiniFieldSpec[selectedSpecs.length];
