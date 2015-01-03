@@ -60,7 +60,6 @@ import org.martus.client.swingui.dialogs.UiPushbuttonsDlg;
 import org.martus.client.swingui.dialogs.UiReportFieldChooserDlg;
 import org.martus.client.swingui.dialogs.UiReportFieldOrganizerDlg;
 import org.martus.client.swingui.dialogs.UiSortFieldsDlg;
-import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.FormatFilter;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MiniLocalization;
@@ -193,13 +192,8 @@ public class ActionMenuReports extends ActionPrint implements ActionDoer
 	
 	ReportAnswers chooseReport() throws Exception
 	{
-		UiMainWindow owner = mainWindow;
-		String title = getLocalization().getWindowTitle("ChooseReportToRun");
-		String okButtonLabel = getLocalization().getButtonLabel("SelectReport");
-		File directory = owner.getApp().getCurrentAccountDirectory();
 		FileFilter filter = new ReportFormatFilter(getLocalization());
-		File chosenFile = FileDialogHelpers.doFileOpenDialog(owner.getSwingFrame(), title, okButtonLabel, directory, filter);
-		
+		File chosenFile = mainWindow.showFileOpenDialog("SelectReport", filter);
 		if(chosenFile == null)
 			return null;
 	
