@@ -119,7 +119,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 			String[] contents = {helpMsg, "", "",helpMsgExample, helpMsgExample1, "", helpMsgExample2, "", helpMsgExampleEtc};
 			String[] buttons = {ok};
 
-			new UiNotifyDlg(mainWindow.getSwingFrame(), title, contents, buttons);
+			new UiNotifyDlg(title, contents, buttons);
 		}
 	}
 
