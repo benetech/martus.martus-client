@@ -277,7 +277,7 @@ public class ActionMenuReports extends ActionPrint implements ActionDoer
 				String includePublic = mainWindow.getLocalization().getButtonLabel("IncludePrivateBulletins");
 				String[] buttons = {includePublic, cancel};
 				HashMap emptyTokenReplacement = new HashMap();
-				if(!mainWindow.confirmCustomButtonsDlg(mainWindow.getSwingFrame(), "ReportIncludePrivate", buttons, emptyTokenReplacement))
+				if(!mainWindow.confirmCustomButtonsDlg("ReportIncludePrivate", buttons, emptyTokenReplacement))
 					return;
 				options.includePrivate = true;
 			}
