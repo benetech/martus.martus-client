@@ -511,7 +511,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		if(!getStore().loadFieldSpecCache())
 		{
 			if(!createdNewAccount)
-				notifyDlg(getSwingFrame(), "CreatingFieldSpecCache");
+				notifyDlg("CreatingFieldSpecCache");
 
 			getStore().createFieldSpecCacheFromDatabase();
 		}
@@ -1721,7 +1721,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		if(!isRetrieveInProgress())
 			return;
 		
-		if(!confirmDlg(getSwingFrame(), "CancelRetrieve"))
+		if(!confirmDlg("CancelRetrieve"))
 			return;
 		
 		try
