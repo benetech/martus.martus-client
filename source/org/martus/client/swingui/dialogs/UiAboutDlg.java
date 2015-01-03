@@ -38,10 +38,10 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import org.martus.client.swingui.UiConstants;
-import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.VersionBuildDate;
@@ -55,19 +55,16 @@ import org.martus.util.MultiCalendar;
 
 public class UiAboutDlg extends JDialog implements ActionListener
 {
-	public UiAboutDlg(UiMainWindow owner)
+	public UiAboutDlg(JFrame owner, UiLocalization localization)
 		throws HeadlessException
 	{
-		super(owner.getSwingFrame(), "" , true);
+		super(owner, "" , true);
 		getContentPane().setLayout(new BorderLayout());
 //		System.out.println("Number of calls to verifyPacketSignature " + Packet.callsToVerifyPacketSignature);
 //		System.out.println("Cumulative time in verifyPacketSignature " + Packet.millisInVerifyPacketSignature);
 //		System.out.println("Number of calls to XmlPacketLoader " + XmlPacketLoader.callsToXmlPacketLoader);
 //		System.out.println("Cumulative time in XmlPacketLoader " + XmlPacketLoader.millisInXmlPacketLoader);
 
-		
-		UiLocalization localization = owner.getLocalization();
-		
 		setTitle(localization.getWindowTitle("about"));
 
 		JLabel icon = new JLabel(new ImageIcon(UiAboutDlg.class.getResource("Martus-logo-black-text-160x72.png")),JLabel.LEFT);

@@ -1619,7 +1619,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 
 	public void aboutMartus()
 	{
-		new UiAboutDlg(this);
+		new UiAboutDlg(getCurrentActiveFrame(), getLocalization());
 	}
 
 	public void showAccountInfo()
