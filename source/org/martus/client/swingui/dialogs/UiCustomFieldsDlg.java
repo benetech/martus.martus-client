@@ -607,7 +607,7 @@ public class UiCustomFieldsDlg extends JDialog
 			duplicates.append("\" ");
 		}
 		String[] duplicateWarningMessage = {duplicateWarnging, duplicates.toString(), duplicateContinue};
-		if(mainWindow.confirmDlg(mainWindow.getSwingFrame(), duplicateTitle, duplicateWarningMessage))
+		if(mainWindow.confirmDlg(duplicateTitle, duplicateWarningMessage))
 			return true;
 		return false;
 	}

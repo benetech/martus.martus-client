@@ -153,7 +153,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 				HashMap tokenReplacement = new HashMap();
 				tokenReplacement.put("#PrintBack#", back);
 				tokenReplacement.put("#PrintContinue#", continuePrinting);
-				if(mainWindow.confirmCustomButtonsDlg(mainWindow.getSwingFrame(), "PrintAllPrivateData", buttons, tokenReplacement))
+				if(mainWindow.confirmCustomButtonsDlg("PrintAllPrivateData", buttons, tokenReplacement))
 					return;
 			}	
 			pressContinue = true;
