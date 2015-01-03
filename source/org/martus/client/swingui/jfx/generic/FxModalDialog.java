@@ -82,7 +82,7 @@ public class FxModalDialog extends JDialog
 	{
 		JFrame frame = owner.getSwingFrame();
 		if(frame != null)
-			return new FxModalDialog(owner);
+			return new FxModalDialog(frame);
 
 		return new FxModalDialog();
 	}
@@ -95,9 +95,9 @@ public class FxModalDialog extends JDialog
 		initialize();
 	}
 	
-	private FxModalDialog(UiMainWindow owner)
+	private FxModalDialog(JFrame owner)
 	{
-		super(owner.getSwingFrame());
+		super(owner);
 
 		initialize();
 	}
