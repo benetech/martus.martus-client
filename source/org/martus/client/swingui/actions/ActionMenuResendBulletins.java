@@ -54,7 +54,7 @@ public class ActionMenuResendBulletins extends UiMenuAction
 	{		
 		if (!getMainWindow().isServerConfigured())
 		{
-			getMainWindow().notifyDlg(getMainWindow().getSwingFrame(), "retrievenoserver", "ResendBulletins");
+			getMainWindow().notifyDlg("retrievenoserver", "ResendBulletins");
 			return;
 		}	
 		
