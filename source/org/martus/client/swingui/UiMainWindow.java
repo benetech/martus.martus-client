@@ -1928,7 +1928,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		{
 			if(!getApp().isSSLServerAvailable())
 			{
-				notifyDlg(getSwingFrame(), "retrievenoserver", dlgTitleTag);
+				notifyDlg("retrievenoserver", dlgTitleTag);
 				return false;
 			}
 			model.initialize(progressHandler);
@@ -1952,7 +1952,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		}
 		catch (Exception e)
 		{
-			notifyDlg(getSwingFrame(), "RetrievedOnlySomeSummaries", dlgTitleTag);
+			notifyDlg("RetrievedOnlySomeSummaries", dlgTitleTag);
 		}
 		return true;
 	}
