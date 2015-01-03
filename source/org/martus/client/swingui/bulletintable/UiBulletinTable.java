@@ -66,7 +66,6 @@ import org.martus.client.swingui.foldertree.FolderNode;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
-import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiTable;
 
 
