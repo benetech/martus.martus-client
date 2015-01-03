@@ -1271,7 +1271,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 
 	public void notifyDlg(String baseTag, String titleTag)
 	{
-		notifyDlg(getCurrentActiveFrame(), baseTag, titleTag, emptyTokenReplacement);
+		notifyDlg(getCurrentActiveFrame(), baseTag, titleTag);
 	}
 
 	@Override
