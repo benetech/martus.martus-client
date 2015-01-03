@@ -316,7 +316,8 @@ public class EnglishStrings
 
 "wintitle:RunOrCreateReport=Reports",
 "wintitle:ReportChooseSortFields=Reports",
-"wintitle:ChooseReportToRun=Run Report...",
+"wintitle:FileDialogSelectReport=Run Report...",
+"button:FileDialogOkSelectReport=Select",
 "wintitle:ChooseReportFields=Create Report",
 "wintitle:OrganizeReportFields=Organize Report Fields",
 "wintitle:PrintOptions=Print Options",
