@@ -355,7 +355,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		HashMap map = new HashMap();
 		map.put("#HighVersion#", highVersionJava);
 		map.put("#ExpectedVersion#", expectedVersionJava);
-		new UiNotifyDlg(getSwingFrame(), title, new String[]{warningMessage}, new String[]{buttonMessage}, map);
+		new UiNotifyDlg(title, new String[]{warningMessage}, new String[]{buttonMessage}, map);
 	}
 
 	private void warnIfCryptoJarsNotLoaded() throws Exception
