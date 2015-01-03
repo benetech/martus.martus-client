@@ -166,7 +166,7 @@ public class ActionPrint extends UiMenuAction
 			catch(Exception e)
 			{
 				e.printStackTrace();
-				mainWindow.notifyDlg(mainWindow.getSwingFrame(), "notifyUnexpectedError");
+				mainWindow.notifyDlg("notifyUnexpectedError");
 			}
 			finally
 			{
