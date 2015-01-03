@@ -1281,6 +1281,11 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		UiUtilities.notifyDlg(getLocalization(), parent, baseTag, titleTag, tokenReplacement);
 	}
 
+	public void notifyDlg(String title, String[] contents, String[] buttons)
+	{
+		new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons);  
+	}
+
 	public void messageDlg(String baseTag, String message, Map tokenReplacement)
 	{
 		messageDlg(getCurrentActiveFrame(), baseTag, message, tokenReplacement);
@@ -1647,7 +1652,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescriptionOld, formattedCodeContentsOld, " ", codeDescriptionNew, formattedCodeContentsNew, " ", martusAccountAccessTokenDescription, martusAccountAccessToken, " ", accountDirectory};
 		String[] buttons = {ok};
 
-		new UiNotifyDlg(getSwingFrame(), title, contents, buttons);
+		notifyDlg(title, contents, buttons);
 	}
 
 	public void displayHelpMessage()
