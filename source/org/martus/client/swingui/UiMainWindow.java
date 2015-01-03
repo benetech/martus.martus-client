@@ -2142,7 +2142,8 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		getUiState().setCurrentAppDimension(getSwingFrame().getSize());
 	}
 
-	private void updateTitle() {
+	private void updateTitle() 
+	{
 		getSwingFrame().setTitle(getLocalization().getWindowTitle("main"));
 	}
 
