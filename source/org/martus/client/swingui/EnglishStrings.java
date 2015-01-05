@@ -1928,7 +1928,7 @@ public class EnglishStrings
 "folder:%OutBox=Unsent Records",
 "folder:%Sent=Saved",
 "folder:%Draft=Old Draft Records",
-"folder:%Discarded=Discarded Records",
+"folder:%Discarded=Trash",
 "folder:%RetrievedBulletins=Received Records",
 "folder:%RetrievedMyBulletin=Received Records",
 "folder:%RetrievedMyBulletinDraft=Received Records",
