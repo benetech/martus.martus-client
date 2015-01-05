@@ -100,7 +100,7 @@ public class AddPermissionsDialog extends JDialog
 		Utilities.addComponentsRespectingOrientation(buttonBox, buttons);
 		contentPane.add(buttonBox);
 		
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 	}
 	

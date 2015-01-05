@@ -29,13 +29,10 @@ import java.io.File;
 
 import javafx.application.Platform;
 
-import javax.swing.JFileChooser;
-
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
-import org.martus.client.swingui.filefilters.AllFileFilter;
 import org.martus.client.swingui.filefilters.PublicInfoFileFilter;
 import org.martus.common.MartusLogger;
 
@@ -54,19 +51,8 @@ public class ImportContactAction implements ActionDoer
 	
 	private void importContactFromFile()
 	{
-		File martusRootDir = getApp().getMartusDataRootDirectory();
-		JFileChooser fileChooser = new JFileChooser(martusRootDir);
-		MartusLocalization localization = getLocalization();
-		fileChooser.setDialogTitle(localization.getWindowTitle("ImportContactPublicKey"));
-		fileChooser.addChoosableFileFilter(new PublicInfoFileFilter(getLocalization()));
-		fileChooser.setAcceptAllFileFilterUsed(false);
-		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
-
-		int userResult = fileChooser.showOpenDialog(getMainWindow().getSwingFrame());
-		if (userResult != JFileChooser.APPROVE_OPTION)
-			return;
-
-		File importFile = fileChooser.getSelectedFile();		
+		PublicInfoFileFilter filter = new PublicInfoFileFilter(getLocalization());
+		File importFile = getMainWindow().showFileOpenDialogWithDirectoryMemory("ImportContactPublicKey", filter);
 		if(importFile == null)
 			return;
 

@@ -70,7 +70,7 @@ public class UiReportFieldChooserDlg extends UIReportFieldDlg
 
 		getContentPane().add(panel);
 		pack();
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 	}
 	
 	

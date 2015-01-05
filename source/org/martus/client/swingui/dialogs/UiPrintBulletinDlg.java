@@ -121,7 +121,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 		getContentPane().add(buttons, BorderLayout.SOUTH);
 		getRootPane().setDefaultButton(ok);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 	}
 	
@@ -153,7 +153,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 				HashMap tokenReplacement = new HashMap();
 				tokenReplacement.put("#PrintBack#", back);
 				tokenReplacement.put("#PrintContinue#", continuePrinting);
-				if(mainWindow.confirmCustomButtonsDlg(mainWindow.getSwingFrame(), "PrintAllPrivateData", buttons, tokenReplacement))
+				if(mainWindow.confirmCustomButtonsDlg("PrintAllPrivateData", buttons, tokenReplacement))
 					return;
 			}	
 			pressContinue = true;

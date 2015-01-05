@@ -52,7 +52,7 @@ public class UiPushbuttonsDlg extends JDialog implements ActionListener
 		
 		panel.add(buttonBox);
 		pack();
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 	}
 	
 	public String getPressedButtonLabel()

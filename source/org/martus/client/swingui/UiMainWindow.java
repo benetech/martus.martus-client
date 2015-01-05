@@ -237,26 +237,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 
 	public boolean run()
 	{
-		swingFrame = new MainSwingFrame(this);
-		UiMainWindow.updateIcon(getSwingFrame());
-
-		setCurrentActiveFrame(getSwingFrame());
-		
-		if(Utilities.isMSWindows())
-		{
-			updateTitle();
-			getSwingFrame().setVisible(true);
-			Dimension screenSize = Utilities.getViewableScreenSize();
-			getSwingFrame().setLocation(screenSize.width, screenSize.height);
-		}
-		else if(Utilities.isLinux())
-		{
-			updateTitle();
-			getSwingFrame().setVisible(true);
-			Dimension screenSize = Utilities.getViewableScreenSize();
-			getSwingFrame().setLocation(screenSize.width/2, screenSize.height/2);
-		}
-
 		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
 		FontSetter.setDefaultFont(currentLanguageCode.equals(MtfAwareLocalization.BURMESE));
 		displayDefaultUnofficialTranslationMessageIfNecessary(currentActiveFrame, getLocalization(), currentLanguageCode);
@@ -286,7 +266,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		}
 		
 		initalizeUiState(getLocalization().getCurrentLanguageCode());
-		
 
 		try
 		{
@@ -375,7 +354,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		HashMap map = new HashMap();
 		map.put("#HighVersion#", highVersionJava);
 		map.put("#ExpectedVersion#", expectedVersionJava);
-		new UiNotifyDlg(getSwingFrame(), title, new String[]{warningMessage}, new String[]{buttonMessage}, map);
+		new UiNotifyDlg(title, new String[]{warningMessage}, new String[]{buttonMessage}, map);
 	}
 
 	private void warnIfCryptoJarsNotLoaded() throws Exception
@@ -531,7 +510,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		if(!getStore().loadFieldSpecCache())
 		{
 			if(!createdNewAccount)
-				notifyDlg(getSwingFrame(), "CreatingFieldSpecCache");
+				notifyDlg("CreatingFieldSpecCache");
 
 			getStore().createFieldSpecCacheFromDatabase();
 		}
@@ -923,7 +902,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 			productDescription +
 			END_HTML_TAGS;
 		}
-		new UiSplashDlg(getCurrentActiveFrame(), getLocalization(), complianceStatementAlwaysEnglish);
+		new UiSplashDlg(getLocalization(), complianceStatementAlwaysEnglish);
 	}
 	public final static String BEGIN_HTML_TAGS = "<font size='5'>";
 	public final static String END_HTML_TAGS = "</font>";
@@ -1151,10 +1130,20 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		return UiUtilities.confirmDlg(getLocalization(), parent, baseTag);
 	}
 
+	public boolean confirmDlg(String baseTag, Map tokenReplacement)
+	{
+		return confirmDlg(getCurrentActiveFrame(), baseTag, tokenReplacement);
+	}
+
 	@Override
 	public boolean confirmDlg(JFrame parent, String baseTag, Map tokenReplacement)
 	{
 		return UiUtilities.confirmDlg(getLocalization(), parent, baseTag, tokenReplacement);
+	}
+
+	public boolean confirmDlg(String title, String[] contents)
+	{
+		return confirmDlg(getCurrentActiveFrame(), title, contents);
 	}
 
 	@Override
@@ -1163,10 +1152,25 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		return UiUtilities.confirmDlg(getLocalization(), parent, title, contents);
 	}
 
+	public boolean confirmDlg(String title, String[] contents, String[] buttons)
+	{
+		return confirmDlg(getCurrentActiveFrame(), title, contents, buttons);
+	}
+
 	@Override
 	public boolean confirmDlg(JFrame parent, String title, String[] contents, String[] buttons)
 	{
 		return UiUtilities.confirmDlg(parent, title, contents, buttons);
+	}
+
+	public boolean confirmDlg(String title, String[] contents, String[] buttons, Map tokenReplacement)
+	{
+		return UiUtilities.confirmDlg(getCurrentActiveFrame(), title, contents, buttons, tokenReplacement);
+	}
+
+	public boolean confirmCustomButtonsDlg(String baseTag, String[] buttons, Map tokenReplacement)
+	{
+		return confirmCustomButtonsDlg(getCurrentActiveFrame(), baseTag, buttons, tokenReplacement);
 	}
 
 	@Override
@@ -1271,6 +1275,11 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		notifyDlg(parent, baseTag, "notify" + baseTag, tokenReplacement);
 	}
 
+	public void notifyDlg(String baseTag, String titleTag)
+	{
+		notifyDlg(getCurrentActiveFrame(), baseTag, titleTag);
+	}
+
 	@Override
 	public void notifyDlg(JFrame parent, String baseTag, String titleTag)
 	{
@@ -1281,6 +1290,16 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 	private void notifyDlg(JFrame parent, String baseTag, String titleTag, Map tokenReplacement)
 	{
 		UiUtilities.notifyDlg(getLocalization(), parent, baseTag, titleTag, tokenReplacement);
+	}
+
+	public void notifyDlg(String title, String[] contents, String[] buttons)
+	{
+		new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons);  
+	}
+
+	public void messageDlg(String baseTag, String message, Map tokenReplacement)
+	{
+		messageDlg(getCurrentActiveFrame(), baseTag, message, tokenReplacement);
 	}
 
 	@Override
@@ -1514,7 +1533,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		{
 			worker.start(progressDialog);
 			progressDialog.pack();
-			Utilities.centerDlg(progressDialog);
+			Utilities.packAndCenterWindow(progressDialog);
 			progressDialog.setVisible(true);
 			worker.cleanup();
 		}
@@ -1601,7 +1620,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 
 	public void aboutMartus()
 	{
-		new UiAboutDlg(this);
+		new UiAboutDlg(getCurrentActiveFrame(), getLocalization());
 	}
 
 	public void showAccountInfo()
@@ -1644,7 +1663,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescriptionOld, formattedCodeContentsOld, " ", codeDescriptionNew, formattedCodeContentsNew, " ", martusAccountAccessTokenDescription, martusAccountAccessToken, " ", accountDirectory};
 		String[] buttons = {ok};
 
-		new UiNotifyDlg(getSwingFrame(), title, contents, buttons);
+		notifyDlg(title, contents, buttons);
 	}
 
 	public void displayHelpMessage()
@@ -1713,7 +1732,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		if(!isRetrieveInProgress())
 			return;
 		
-		if(!confirmDlg(getSwingFrame(), "CancelRetrieve"))
+		if(!confirmDlg("CancelRetrieve"))
 			return;
 		
 		try
@@ -1915,7 +1934,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		{
 			if(!getApp().isSSLServerAvailable())
 			{
-				notifyDlg(getSwingFrame(), "retrievenoserver", dlgTitleTag);
+				notifyDlg("retrievenoserver", dlgTitleTag);
 				return false;
 			}
 			model.initialize(progressHandler);
@@ -1939,7 +1958,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		}
 		catch (Exception e)
 		{
-			notifyDlg(getSwingFrame(), "RetrievedOnlySomeSummaries", dlgTitleTag);
+			notifyDlg("RetrievedOnlySomeSummaries", dlgTitleTag);
 		}
 		return true;
 	}
@@ -2058,8 +2077,12 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 	void initializeViews()
 	{
 		MartusLogger.logBeginProcess("Initializing views");
-		updateTitle();
 
+		swingFrame = new MainSwingFrame(this);
+		UiMainWindow.updateIcon(getSwingFrame());
+		setCurrentActiveFrame(getSwingFrame());
+		getSwingFrame().setVisible(true);
+		updateTitle();
 		setWindowSizeAndState();
 
 		if(UiSession.isJavaFx())
@@ -2125,7 +2148,8 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		getUiState().setCurrentAppDimension(getSwingFrame().getSize());
 	}
 
-	private void updateTitle() {
+	private void updateTitle() 
+	{
 		getSwingFrame().setTitle(getLocalization().getWindowTitle("main"));
 	}
 
@@ -2208,7 +2232,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 			while(userChoice == UiSigninDlg.LANGUAGE_CHANGED)
 			{	
 				if(mode==UiSigninDlg.INITIAL || mode == UiSigninDlg.INITIAL_NEW_RECOVER_ACCOUNT)
-					signinDlg = new UiInitialSigninDlg(getLocalization(), getCurrentUiState(), getCurrentActiveFrame(), mode, userName, userPassword);
+					signinDlg = new UiInitialSigninDlg(getLocalization(), getCurrentUiState(), mode, userName, userPassword);
 				else
 				{
 					if(getCurrentActiveDialog() != null)
@@ -2267,8 +2291,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 	@Override
 	public void exitNormally()
 	{
-		if(createdNewAccount)
-			askAndBackupKeypairIfRequired();
 		if(showRelevantUploadReminder())
 			return;
 		

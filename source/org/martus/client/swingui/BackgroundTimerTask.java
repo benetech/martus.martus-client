@@ -179,7 +179,7 @@ class BackgroundTimerTask extends TimerTask
 			doRetrieving();
 			if(!retriever.hasWorkToDo())
 			{
-				SwingUtilities.invokeLater(new ThreadedNotifyDlgAndUpdateReadyMessage("RetrieveCompleted"));
+				SwingUtilities.invokeLater(new ThreadedUpdateReadyMessage());
 			}
 			return;
 		}
@@ -197,7 +197,8 @@ class BackgroundTimerTask extends TimerTask
 		catch (Exception e)
 		{
 			String tag = "RetrieveError";
-			SwingUtilities.invokeLater(new ThreadedNotifyDlgAndUpdateReadyMessage(tag));
+			SwingUtilities.invokeLater(new WorkerThread.ThreadedNotifyDlg(mainWindow, tag));
+			SwingUtilities.invokeLater(new ThreadedUpdateReadyMessage());
 			e.printStackTrace();
 		}
 		mainWindow.folderContentsHaveChanged(folder);
@@ -592,7 +593,10 @@ class BackgroundTimerTask extends TimerTask
 			return;
 		if(!isServerAvailable())
 			return;
+
+		MartusLogger.logBeginProcess("Checking server news");
 		Vector newsItems = getApp().getNewsFromServer();
+		
 		int newsSize = newsItems.size();
 		if (newsSize > 0)
 			mainWindow.setStatusMessageReady();
@@ -617,6 +621,7 @@ class BackgroundTimerTask extends TimerTask
 			}
 		}
 		alreadyGotNews = true;
+		MartusLogger.logEndProcess("Checking server news");
 	}
 
 	class ThreadedNotify implements Runnable
@@ -690,28 +695,19 @@ class BackgroundTimerTask extends TimerTask
 
 		public void run()
 		{
-			mainWindow.messageDlg(mainWindow.getSwingFrame(), titleTag, messageContents, tokenReplacement);
+			mainWindow.messageDlg(titleTag, messageContents, tokenReplacement);
 		}
 		String titleTag;
 		String messageContents;
 		HashMap tokenReplacement;
 	}
 	
-	class ThreadedNotifyDlgAndUpdateReadyMessage implements Runnable
+	class ThreadedUpdateReadyMessage implements Runnable
 	{
-		public ThreadedNotifyDlgAndUpdateReadyMessage(String tagToUse)
-		{
-			tag = tagToUse;
-		}
-		
 		public void run()
 		{
-			if(!UiSession.isJavaFx())
-				mainWindow.notifyDlg(mainWindow.getSwingFrame(), tag);
 			mainWindow.setStatusMessageReady();
 		}
-		
-		String tag;
 	}
 		
 	MartusApp getApp()

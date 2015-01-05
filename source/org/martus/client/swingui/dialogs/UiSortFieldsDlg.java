@@ -124,7 +124,7 @@ public class UiSortFieldsDlg extends JDialog implements ActionListener
 		getRootPane().setDefaultButton(okButton);
 		
 		pack();
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 	}
 	
 	private ChoiceItem createChoiceItem(String tag, MiniLocalization localization)

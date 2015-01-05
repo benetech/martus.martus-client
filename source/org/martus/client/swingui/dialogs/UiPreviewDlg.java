@@ -71,7 +71,7 @@ public class UiPreviewDlg  extends JDialog implements ActionListener
 		getContentPane().add(scrollablePreview, BorderLayout.CENTER);
 		getContentPane().add(buttons, BorderLayout.SOUTH);
 		getRootPane().setDefaultButton(printToPrinter);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 	}
 

@@ -135,7 +135,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		getContentPane().add(preferences);
 		getRootPane().setDefaultButton(ok);
 		
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 	}
 
