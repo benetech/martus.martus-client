@@ -878,6 +878,9 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		// Martus source code license. The easiest way to do 
 		// this is to set modified=true and edit the text below. 
 		final boolean modified = false;
+
+		if(!modified && UiSession.isJavaFx())
+			return;
 		
 		String complianceStatementAlwaysEnglish = "";
 		if(modified)
@@ -894,8 +897,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		}
 		else
 		{
-			if(UiSession.isJavaFx())
-				return;
 			complianceStatementAlwaysEnglish =
 			BEGIN_HTML_TAGS +
 			"Martus(TM)<br></br>" +
