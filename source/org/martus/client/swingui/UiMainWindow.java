@@ -1532,7 +1532,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		{
 			worker.start(progressDialog);
 			progressDialog.pack();
-			Utilities.centerDlg(progressDialog);
+			Utilities.packAndCenterWindow(progressDialog);
 			progressDialog.setVisible(true);
 			worker.cleanup();
 		}

@@ -50,7 +50,7 @@ public class ModalBusyDialog extends JDialog
 		text.setBorder(new EmptyBorder(10, 10, 10, 10));
 		getContentPane().add(text, BorderLayout.CENTER);
 		setUndecorated(true);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 	}
 	
 	public void workerFinished()

@@ -72,7 +72,7 @@ public class FxModalDialog extends JDialog
 		stage.setDialog(dialog);
 		Platform.runLater(new FxRunner(stage));
 
-		Utilities.centerDlg(dialog);
+		Utilities.packAndCenterWindow(dialog);
 		owner.setCurrentActiveDialog(dialog);
 		dialog.setVisible(true);
 		owner.setCurrentActiveDialog(null);

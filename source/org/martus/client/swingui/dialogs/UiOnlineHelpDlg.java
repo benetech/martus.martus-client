@@ -133,7 +133,7 @@ public class UiOnlineHelpDlg extends JDialog
 		getRootPane().setDefaultButton(close);
 		close.requestFocus();
 
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 	}
 

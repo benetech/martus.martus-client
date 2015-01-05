@@ -100,7 +100,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		getContentPane().add(panel);
 		
 		getRootPane().setDefaultButton(okButton);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 	}
 
 

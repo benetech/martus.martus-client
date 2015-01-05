@@ -72,7 +72,7 @@ public class UiStringInputDlg extends JDialog
 		getContentPane().add(stringPanel);
 		getRootPane().setDefaultButton(ok);
 
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 	}
 	
