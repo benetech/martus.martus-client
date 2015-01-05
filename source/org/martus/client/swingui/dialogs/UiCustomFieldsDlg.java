@@ -159,7 +159,7 @@ public class UiCustomFieldsDlg extends JDialog
 	
 		getContentPane().add(customFieldsPanel);
 		getRootPane().setDefaultButton(ok);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 	}
 

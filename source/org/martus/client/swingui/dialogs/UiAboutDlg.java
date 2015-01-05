@@ -128,7 +128,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		getContentPane().add(new UiWrappedTextArea(notice), BorderLayout.CENTER);
 		getContentPane().add(hBoxOk, BorderLayout.SOUTH);
 		
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setVisible(true);
 	}
 

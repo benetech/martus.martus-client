@@ -121,7 +121,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 		getContentPane().add(buttons, BorderLayout.SOUTH);
 		getRootPane().setDefaultButton(ok);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 	}
 	
