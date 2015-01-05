@@ -88,7 +88,7 @@ public class UiBulletinDetailsDialog extends JDialog
 			previewVersionButton.setEnabled(false);
 		panel.addComponents(closeButton, previewVersionButton);
 		getContentPane().add(new UiScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 		
 	}

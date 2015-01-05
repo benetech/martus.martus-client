@@ -243,9 +243,6 @@ public class EnglishStrings
 "wintitle:notifyServerNotCompatible=Server Error",
 "field:notifyServerNotCompatiblecause=This server does not support this feature.",
 
-"wintitle:notifyRetrieveCompleted=Retrieve Complete",
-"field:notifyRetrieveCompletedcause=Retrieving records from the server is complete",
-
 "wintitle:notifyErrorGettingCompliance=Error Getting Compliance Statement",
 "field:notifyErrorGettingCompliancecause=An error occured while trying to connect to the server.",
 
@@ -287,7 +284,6 @@ public class EnglishStrings
 "wintitle:ServerSelectionResults=Server Configuration Results",
 "wintitle:search=Search",
 "wintitle:BulletinPreview=Record Preview",
-"wintitle:DeleteBulletinFile=Delete Record File",
 "wintitle:ServerNews=Server News: Message #CurrentNewsItem# of #MaxNewsItems#",
 "wintitle:ExportBulletins=Export Records",
 "wintitle:SaveShareKeyPair=Saving Backup Disk",
@@ -320,7 +316,8 @@ public class EnglishStrings
 
 "wintitle:RunOrCreateReport=Reports",
 "wintitle:ReportChooseSortFields=Reports",
-"wintitle:ChooseReportToRun=Run Report...",
+"wintitle:FileDialogSelectReport=Run Report...",
+"button:FileDialogOkSelectReport=Select",
 "wintitle:ChooseReportFields=Create Report",
 "wintitle:OrganizeReportFields=Organize Report Fields",
 "wintitle:PrintOptions=Print Options",
@@ -425,7 +422,6 @@ public class EnglishStrings
 "button:AllSummaries=Show all records on this server and on this computer.",
 "button:Preview=Preview",
 "button:Delete=Delete",
-"button:Leave=Leave",
 "button:modify=Modify",
 "button:Back=Back",
 "button:Continue=Continue",
@@ -609,8 +605,6 @@ public class EnglishStrings
 "field:TorStatusActive=Embedded Tor Active",
 "field:TorStatusInitializing=Embedded Tor Initializing",
 "field:TorStatusDisabled=Embedded Tor Disabled",
-"field:DeleteBulletinFileMsg1=This record has been pasted into Martus from the file:",
-"field:DeleteBulletinFileMsg2=Do you want to delete the original file, or leave it in place?",
 "field:OnlineHelpMessage=Details:",
 "field:OnlineHelpTOCMessage=Topics:",
 "field:DefaultDetailFiles=Default Details",
@@ -1037,7 +1031,7 @@ public class EnglishStrings
 
 "field:SingleEncryptedKeyBackupCreated=Single, Encrypted File #backupFileName created (this still requires remembering your username and password to restore your account).",
 
-"field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
+"field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (https://martus.org/download.html) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",
 "field:IncompatibleMtfVersionProgram=Martus Software Version: #ProgramVersionNumber#",
 
@@ -1659,7 +1653,8 @@ public class EnglishStrings
 "field:From=From:",
 "field:VersionNumber=Version #:",
 
-"wintitle:ImportContactPublicKey=Import Contact Key",
+"wintitle:FileDialogImportContactPublicKey=Import Contact Key",
+"button:FileDialogOkImportContactPublicKey=Import",
 
 "wintitle:notifyAddPermissionsZeroBulletinsOurs=Update Contacts access to Records",
 "wintitle:notifyAddPermissionsZeroHeadquartersSelected=No Contacts Selected",
@@ -1933,7 +1928,7 @@ public class EnglishStrings
 "folder:%OutBox=Unsent Records",
 "folder:%Sent=Saved",
 "folder:%Draft=Old Draft Records",
-"folder:%Discarded=Discarded Records",
+"folder:%Discarded=Trash",
 "folder:%RetrievedBulletins=Received Records",
 "folder:%RetrievedMyBulletin=Received Records",
 "folder:%RetrievedMyBulletinDraft=Received Records",

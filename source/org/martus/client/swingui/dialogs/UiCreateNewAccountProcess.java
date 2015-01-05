@@ -77,7 +77,7 @@ public class UiCreateNewAccountProcess
 
 				if(userAlreadyExists)
 				{	
-					window.notifyDlg(window.getSwingFrame(), "UserAlreadyExists");
+					window.notifyDlg("UserAlreadyExists");
 					continue;
 				}
 			}
@@ -89,17 +89,17 @@ public class UiCreateNewAccountProcess
 			}
 			catch (BlankUserNameException bune)
 			{
-				mainWindow.notifyDlg(mainWindow.getSwingFrame(), "UserNameBlank");
+				mainWindow.notifyDlg("UserNameBlank");
 				continue;
 			}
 			catch (PasswordTooShortException ptse)
 			{
-				mainWindow.notifyDlg(mainWindow.getSwingFrame(), "PasswordInvalid");
+				mainWindow.notifyDlg("PasswordInvalid");
 				continue;
 			}
 			catch (PasswordMatchedUserNameException pmune)
 			{
-				mainWindow.notifyDlg(mainWindow.getSwingFrame(), "PasswordMatchesUserName");
+				mainWindow.notifyDlg("PasswordMatchesUserName");
 				continue;
 			}
 			

@@ -67,7 +67,7 @@ public class UiFancySearchDlg extends JDialog
 		super(owner.getSwingFrame(), "", true);
 		mainWindow = owner;
 		createBody();
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		pack();  //JAVA Bug had to call pack twice to force UiWrappedTextArea to get the right dimension
 		setResizable(true);
 
@@ -245,7 +245,7 @@ public class UiFancySearchDlg extends JDialog
 			panel.add(buttonPanel, BorderLayout.SOUTH);
 			
 			dlg.getContentPane().add(panel);
-			Utilities.centerDlg(dlg);
+			Utilities.packAndCenterWindow(dlg);
 			dlg.setVisible(true);
 		}
 		

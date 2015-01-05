@@ -111,7 +111,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		vBoxAll.add(new Component[]{ok, cancel});
 		getContentPane().add(vBoxAll);
 		
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 		setVisible(true);
 	}

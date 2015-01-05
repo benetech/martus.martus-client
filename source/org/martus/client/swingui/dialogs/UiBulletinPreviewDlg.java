@@ -94,7 +94,7 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 		getRootPane().setDefaultButton(ok);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 		ok.requestFocus(true);
 		Utilities.forceScrollerToTop(view);

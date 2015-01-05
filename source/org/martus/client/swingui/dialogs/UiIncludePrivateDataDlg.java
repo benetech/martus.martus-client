@@ -86,7 +86,7 @@ public class UiIncludePrivateDataDlg extends JDialog implements ActionListener
 		getContentPane().add(new UiWrappedTextArea(message, 40), BorderLayout.CENTER);
 		getContentPane().add(buttons, BorderLayout.SOUTH);
 		getRootPane().setDefaultButton(publicAndPrivate);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 	}
 	

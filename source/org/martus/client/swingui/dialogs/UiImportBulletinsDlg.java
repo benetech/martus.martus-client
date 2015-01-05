@@ -92,7 +92,7 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 		Utilities.addComponentsRespectingOrientation(buttons, new Component[]{ok, cancel, Box.createHorizontalGlue()});
 		contentPane.add(buttons, BorderLayout.SOUTH);
 		
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 		setVisible(true);
 	

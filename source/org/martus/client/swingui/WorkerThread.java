@@ -79,7 +79,7 @@ public abstract class WorkerThread extends Thread
 		
 		public void run()
 		{
-			result = mainWindow.confirmDlg(mainWindow.getSwingFrame(), title, contents);
+			result = mainWindow.confirmDlg(title, contents);
 		}
 		
 		public boolean getResult()
@@ -103,7 +103,7 @@ public abstract class WorkerThread extends Thread
 		SwingUtilities.invokeAndWait(new ThreadedNotifyDlg(mainWindow, resultMessageTag));
 	}
 
-	private static class ThreadedNotifyDlg implements Runnable
+	public static class ThreadedNotifyDlg implements Runnable
 	{
 		public ThreadedNotifyDlg(UiMainWindow mainWindowToUse, String tagToUse)
 		{
@@ -113,7 +113,7 @@ public abstract class WorkerThread extends Thread
 		
 		public void run()
 		{
-			mainWindow.notifyDlg(mainWindow.getSwingFrame(), tag);
+			mainWindow.notifyDlg(tag);
 		}
 		UiMainWindow mainWindow;
 		String tag;

@@ -150,7 +150,7 @@ public class ActionMenuCharts extends UiMenuAction implements ActionDoer
 	private ChartAnswers createAndSave()
 	{
 		CreateChartDialog dialog = new CreateChartDialog(getMainWindow());
-		Utilities.centerDlg(dialog);
+		Utilities.packAndCenterWindow(dialog);
 		dialog.setVisible(true);
 		if(!dialog.getResult())
 			return null;

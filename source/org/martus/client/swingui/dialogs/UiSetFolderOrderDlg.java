@@ -125,7 +125,7 @@ public class UiSetFolderOrderDlg extends JDialog implements ActionListener
 		contentPane.add(okCancelBox,BorderLayout.SOUTH);
 		getRootPane().setDefaultButton(ok);
 		
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 	}
 	

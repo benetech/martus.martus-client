@@ -205,7 +205,7 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 			getContentPane().add(text, BorderLayout.CENTER);
 			getContentPane().add(hBox, BorderLayout.SOUTH);
 			
-			Utilities.centerDlg(this);
+			Utilities.packAndCenterWindow(this);
 			setResizable(true);
 			setVisible(true);
 		}

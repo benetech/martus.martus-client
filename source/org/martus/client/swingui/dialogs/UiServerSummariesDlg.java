@@ -101,7 +101,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 
 		getContentPane().add(topPanel);	
 		setScreenSize();				
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setVisible(true);
 	}
 

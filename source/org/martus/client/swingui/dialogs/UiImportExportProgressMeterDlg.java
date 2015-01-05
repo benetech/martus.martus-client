@@ -58,7 +58,7 @@ public class UiImportExportProgressMeterDlg extends UiProgressRetrieveDlg
 		getContentPane().add(hBox, BorderLayout.NORTH);
 		getContentPane().add(meterPanel, BorderLayout.CENTER);
 		getContentPane().add(cancelPanel, BorderLayout.SOUTH);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 	}
 	
 	public void updateBulletinTitle(String bulletinTitle)

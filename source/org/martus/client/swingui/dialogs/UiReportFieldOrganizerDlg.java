@@ -93,7 +93,7 @@ public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 
 		getContentPane().add(panel);
 		pack();
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		updateButtons();
 	}
 	
