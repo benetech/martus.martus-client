@@ -263,8 +263,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		displayIncompatibleMtfVersionWarningMessageIfNecessary(currentActiveFrame, getLocalization(), getLocalization().getCurrentLanguageCode());
 		
 		preventTwoInstances();
-		if(!UiSession.isJavaFx())
-			notifyClientCompliance();
+		notifyClientCompliance();
 
 		mainWindowInitalizing = true;
 
@@ -916,6 +915,8 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		}
 		else
 		{
+			if(UiSession.isJavaFx())
+				return;
 			complianceStatementAlwaysEnglish =
 			BEGIN_HTML_TAGS +
 			"Martus(TM)<br></br>" +
