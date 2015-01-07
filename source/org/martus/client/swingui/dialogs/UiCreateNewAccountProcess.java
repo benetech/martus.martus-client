@@ -117,12 +117,12 @@ public class UiCreateNewAccountProcess
 			// make sure the passwords and usernames match
 			if (!Arrays.equals(userPassword1, userPassword2))
 			{
-				window.notifyDlg(window.getSwingFrame(), "passwordsdontmatch");
+				window.notifyDlg("passwordsdontmatch");
 				continue;
 			}
 			if (!userName1.equals(userName2))
 			{
-				window.notifyDlg(window.getSwingFrame(), "usernamessdontmatch");
+				window.notifyDlg("usernamessdontmatch");
 				continue;
 			}
 

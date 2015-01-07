@@ -172,7 +172,7 @@ public class ActionPrint extends UiMenuAction
 			{
 				writer.close();
 			}
-			mainWindow.notifyDlg(mainWindow.getSwingFrame(), "PrintToDiskComplete");
+			mainWindow.notifyDlg("PrintToDiskComplete");
 		}
 		catch (IOException e)
 		{
