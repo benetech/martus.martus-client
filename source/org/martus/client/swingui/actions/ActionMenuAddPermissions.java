@@ -32,7 +32,7 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WorkerProgressThread;
-import org.martus.client.swingui.dialogs.AddPermissionsDialog;
+import org.martus.client.swingui.dialogs.AddPermissionsDialogContents;
 import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusLogger;
@@ -85,7 +85,7 @@ public class ActionMenuAddPermissions extends UiMenuAction
 		}
 
 		HeadquartersKeys allHqKeys = mainWindow.getApp().getAllHQKeys();
-		AddPermissionsDialog dlg = new AddPermissionsDialog(mainWindow, selectedBulletins, ourBulletins, allHqKeys);
+		AddPermissionsDialogContents dlg = new AddPermissionsDialogContents(mainWindow, selectedBulletins, ourBulletins, allHqKeys);
 		dlg.setVisible(true);
 		
 		HeadquartersKeys selectedHqKeys = dlg.getSelectedHqKeys();
