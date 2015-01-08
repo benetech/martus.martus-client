@@ -267,7 +267,7 @@ public class UiBackupRecoverSharedKeyPair
 		while(true)
 		{
 			String windowTitle = localization.getWindowTitle("SaveShareKeyPair");
-			File pathChosen = UiFileChooser.displayChooseDirectoryDialog(mainWindow.getSwingFrame(), windowTitle);
+			File pathChosen = mainWindow.showChooseDirectoryDialog(windowTitle);
 			if(pathChosen != null)
 			{	
 				String pathToUse = verifyBackupShareMediaType(pathChosen);

@@ -115,6 +115,7 @@ import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.FormatFilter;
 import org.martus.clientside.MtfAwareLocalization;
+import org.martus.clientside.UiFileChooser;
 import org.martus.clientside.UiUtilities;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.Exceptions.NetworkOfflineException;
@@ -2660,6 +2661,11 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		return getTextFieldColumns(Utilities.getViewableScreenSize().width);
 	}
 	
+	public File showChooseDirectoryDialog(String windowTitle)
+	{
+		return UiFileChooser.displayChooseDirectoryDialog(getCurrentActiveFrame(), windowTitle);
+	}
+
 	public File showFileOpenDialog(String fileDialogCategory, FileFilter filter)
 	{
 		return internalShowFileOpenDialog(fileDialogCategory, null, filter);
