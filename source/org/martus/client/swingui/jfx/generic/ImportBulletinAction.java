@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.generic;
 
 import java.io.File;
+import java.util.Vector;
 
 import javafx.application.Platform;
 
@@ -55,13 +56,13 @@ public class ImportBulletinAction implements ActionDoer
 	@Override
 	public void doAction()
 	{
-		FormatFilter mbaFileFilter = new MartusBulletinArchiveFileFilter(getLocalization());
-		FormatFilter xmlFileFilter = new BulletinXmlFileFilter(getLocalization());
+		Vector<FormatFilter> filters = new Vector();
+		filters.add(new MartusBulletinArchiveFileFilter(getLocalization()));
+		filters.add(new BulletinXmlFileFilter(getLocalization()));
 
 		JFileChooser fileChooser = new JFileChooser(getApp().getMartusDataRootDirectory());
 		fileChooser.setDialogTitle(getLocalization().getWindowTitle("ImportBulletin"));
-		fileChooser.addChoosableFileFilter(mbaFileFilter);
-		fileChooser.addChoosableFileFilter(xmlFileFilter);
+		filters.forEach(filter -> fileChooser.addChoosableFileFilter(filter));
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
 
