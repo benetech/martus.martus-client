@@ -33,10 +33,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+import javax.swing.filechooser.FileFilter;
+
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.clientside.MtfAwareLocalization;
-import org.martus.clientside.UiFileChooser;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusLogger;
@@ -198,7 +199,7 @@ public class UiBackupRecoverSharedKeyPair
 		File firstShareFile = null;
 		while(true)
 		{
-			firstShareFile = mainWindow.showFileOpenDialog("RecoverSharedKeyPair", null);
+			firstShareFile = mainWindow.showFileOpenDialog("RecoverSharedKeyPair", (FileFilter)null);
 			if(firstShareFile != null)
 			{
 				if(getRootKeyShareFileName(firstShareFile) != null)

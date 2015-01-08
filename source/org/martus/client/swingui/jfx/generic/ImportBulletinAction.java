@@ -30,14 +30,11 @@ import java.util.Vector;
 
 import javafx.application.Platform;
 
-import javax.swing.JFileChooser;
-
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
-import org.martus.client.swingui.filefilters.AllFileFilter;
 import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
 import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
@@ -65,7 +62,7 @@ public class ImportBulletinAction implements ActionDoer
 		filters.add(mbaFilter);
 		filters.add(xmlFilter);
 
-		File selectedFile = showFileOpenDialog(fileDialogCategory, filters);
+		File selectedFile = getMainWindow().showFileOpenDialog(fileDialogCategory, filters);
 		
 		if(selectedFile == null)
 			return;
@@ -77,23 +74,6 @@ public class ImportBulletinAction implements ActionDoer
 			importBulletinFromXmlFile(selectedFile);        
 	}
 
-	public File showFileOpenDialog(String fileDialogCategory, Vector<FormatFilter> filters)
-	{
-		JFileChooser fileChooser = new JFileChooser(getApp().getMartusDataRootDirectory());
-		fileChooser.setDialogTitle(getLocalization().getWindowTitle("FileDialog" + fileDialogCategory));
-		filters.forEach(filter -> fileChooser.addChoosableFileFilter(filter));
-		
-		// NOTE: Apparently the all file filter has a Mac bug, so this is a workaround
-		fileChooser.setAcceptAllFileFilterUsed(false);
-		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
-
-		int userResult = fileChooser.showOpenDialog(getMainWindow().getSwingFrame());
-		File selectedFile = fileChooser.getSelectedFile();
-		if(userResult != JFileChooser.APPROVE_OPTION)
-			selectedFile = null;
-		return selectedFile;
-	}
-	
 	private void importBulletinFromXmlFile(File fileToImport)
 	{
 		try
