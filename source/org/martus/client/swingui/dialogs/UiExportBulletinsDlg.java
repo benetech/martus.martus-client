@@ -65,8 +65,8 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		defaultFileName = defaultName;
 		if(defaultFileName == null)
 			throw new RuntimeException("Must pass non-null defaultFileName to export dialog");
-		if(!defaultFileName.endsWith(MartusApp.MARTUS_IMPORT_EXPORT_EXTENSION))
-			defaultFileName += MartusApp.MARTUS_IMPORT_EXPORT_EXTENSION;
+		if(!defaultFileName.endsWith(MartusApp.XML_EXTENSION))
+			defaultFileName += MartusApp.XML_EXTENSION;
 
 		constructDialog();
 	}

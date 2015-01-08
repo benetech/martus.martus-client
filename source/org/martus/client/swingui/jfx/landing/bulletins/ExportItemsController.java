@@ -119,7 +119,7 @@ public class ExportItemsController extends FxController
 		if(shouldExportEncrypted())
 			fullNameWithCorrectFileExtension += TransferableBulletinList.BULLETIN_FILE_EXTENSION;			
 		else
-			fullNameWithCorrectFileExtension += MartusApp.MARTUS_IMPORT_EXPORT_EXTENSION;
+			fullNameWithCorrectFileExtension += MartusApp.XML_EXTENSION;
 		return fullNameWithCorrectFileExtension;
 	}
 	
