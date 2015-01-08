@@ -35,7 +35,6 @@ import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
@@ -43,6 +42,7 @@ import javax.swing.border.LineBorder;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
 import org.martus.client.swingui.jfx.generic.SwingDialogContentPane;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.swing.UiButton;
@@ -97,26 +97,6 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 		return true;
 	}
 	
-	private static class ModalDialogWithSwingContents extends JDialog
-	{
-		public static void show(SwingDialogContentPane contents)
-		{
-			JDialog dialog = new ModalDialogWithSwingContents(contents);
-			dialog.setVisible(true);
-		}
-
-		private ModalDialogWithSwingContents(SwingDialogContentPane contents)
-		{
-			super(contents.getMainWindow().getCurrentActiveFrame());
-			contents.addIsActiveListener((property, oldValue, newValue) -> dispose());
-			setTitle(contents.getTitle());
-			getContentPane().add(contents);
-			Utilities.packAndCenterWindow(this);
-			setModal(true);
-			setResizable(true);
-		}
-	}
-
 	private boolean confirmErase(boolean uninstall)
 	{
 		ConfirmQuickEraseDlgContents confirm = new ConfirmQuickEraseDlgContents(getMainWindow(), uninstall);
