@@ -35,7 +35,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
-import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
+import org.martus.client.swingui.filefilters.XmlFileFilter;
 import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 import org.martus.client.tools.ImporterOfXmlFilesOfBulletins;
@@ -56,7 +56,7 @@ public class ImportBulletinAction implements ActionDoer
 		String fileDialogCategory = "ImportBulletin";
 
 		MartusBulletinArchiveFileFilter mbaFilter = new MartusBulletinArchiveFileFilter(getLocalization());
-		BulletinXmlFileFilter xmlFilter = new BulletinXmlFileFilter(getLocalization());
+		XmlFileFilter xmlFilter = new XmlFileFilter(getLocalization());
 		
 		Vector<FormatFilter> filters = new Vector();
 		filters.add(mbaFilter);

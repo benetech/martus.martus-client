@@ -40,7 +40,7 @@ import javafx.stage.Stage;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.TranslucentWindowObscurer;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
+import org.martus.client.swingui.filefilters.XmlFileFilter;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
 import org.martus.clientside.FormatFilter;
@@ -123,14 +123,14 @@ public abstract class FxInSwingController extends FxController
 
 	protected boolean isXmlExtensionSelected(ExtensionFilter chosenExtensionFilter, File file)
 	{
-		FormatFilter xmlFileFilter = new BulletinXmlFileFilter(getLocalization());
+		FormatFilter xmlFileFilter = new XmlFileFilter(getLocalization());
 		String[] extensions = chosenExtensionFilter.getExtensions().toArray(new String[0]);
 		return isExtensionSelected(extensions, file, xmlFileFilter);
 	}
 	
 	public static boolean isXmlExtensionSelected(MartusLocalization localization, FormatFilter chosenExtensionFilter, File file)
 	{
-		FormatFilter xmlFileFilter = new BulletinXmlFileFilter(localization);
+		FormatFilter xmlFileFilter = new XmlFileFilter(localization);
 		return isExtensionSelected(chosenExtensionFilter, file, xmlFileFilter);
 	}
 	

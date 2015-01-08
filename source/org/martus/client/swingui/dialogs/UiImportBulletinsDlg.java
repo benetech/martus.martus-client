@@ -40,7 +40,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ImportBulletins;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
+import org.martus.client.swingui.filefilters.XmlFileFilter;
 import org.martus.clientside.FormatFilter;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.swing.UiButton;
@@ -64,7 +64,7 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 	
 	private File getFileToImport()
 	{
-		FormatFilter importFilter = new BulletinXmlFileFilter(mainWindow.getLocalization());
+		FormatFilter importFilter = new XmlFileFilter(mainWindow.getLocalization());
 		return mainWindow.showFileOpenDialog("ImportBulletins", importFilter);
 	}	
 	
