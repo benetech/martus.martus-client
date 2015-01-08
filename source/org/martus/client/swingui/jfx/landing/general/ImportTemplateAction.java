@@ -30,7 +30,6 @@ import java.util.Vector;
 
 import javafx.application.Platform;
 
-import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
@@ -65,11 +64,6 @@ public class ImportTemplateAction implements ActionDoer
 		return getMainWindow().getLocalization();
 	}
 
-	private MartusApp getApp()
-	{
-		return getMainWindow().getApp();
-	}
-	
 	protected UiMainWindow getMainWindow()
 	{
 		return manageTemplatesController.getMainWindow();
