@@ -26,18 +26,16 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.general;
 
 import java.io.File;
+import java.util.Vector;
 
 import javafx.application.Platform;
-
-import javax.swing.JFileChooser;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
-import org.martus.client.swingui.filefilters.AllFileFilter;
-import org.martus.client.swingui.filefilters.XmlFileFilter;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
+import org.martus.client.swingui.filefilters.XmlFileFilter;
 import org.martus.client.swingui.jfx.generic.FxInSwingContentController;
 import org.martus.clientside.FormatFilter;
 import org.martus.common.MartusLogger;
@@ -52,22 +50,15 @@ public class ImportTemplateAction implements ActionDoer
 	@Override
 	public void doAction()
 	{
-		JFileChooser fileChooser = new JFileChooser(getApp().getMartusDataRootDirectory());
-		fileChooser.setDialogTitle(getLocalization().getWindowTitle("confirmImportingCustomizationUnknownSigner"));
-		fileChooser.addChoosableFileFilter(new MCTFileFilter(getLocalization()));
-		fileChooser.addChoosableFileFilter(new XmlFileFilter(getLocalization()));
-		fileChooser.setAcceptAllFileFilterUsed(false);
-		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
-		int userChoice = fileChooser.showOpenDialog(getMainWindow().getSwingFrame());
-		if (userChoice != JFileChooser.APPROVE_OPTION)
+		Vector<FormatFilter> filters = new Vector();
+		filters.add(new MCTFileFilter(getLocalization()));
+		filters.add(new XmlFileFilter(getLocalization()));
+		
+		File selectedFile = getMainWindow().showFileOpenDialog("ImportTemplate", filters);
+		if(selectedFile == null)
 			return;
 		
-		File templateFile = fileChooser.getSelectedFile();
-		if(templateFile == null)
-			return;
-		
-		FormatFilter chosenExtensionFilter = (FormatFilter) fileChooser.getFileFilter();
-		Platform.runLater(new ImportFormTemplateRunner(templateFile, chosenExtensionFilter));
+		Platform.runLater(new ImportFormTemplateRunner(selectedFile));
 	}
 	
 	protected MartusLocalization getLocalization()
@@ -92,10 +83,9 @@ public class ImportTemplateAction implements ActionDoer
 	
 	protected class ImportFormTemplateRunner implements Runnable
 	{
-		public ImportFormTemplateRunner(File templateFileToImportToUse, FormatFilter chosenExtensionFilterToUse)
+		public ImportFormTemplateRunner(File templateFileToImportToUse)
 		{
 			templateFileToImport = templateFileToImportToUse;
-			chosenExtensionFilter = chosenExtensionFilterToUse;
 		}
 		
 		@Override
@@ -103,12 +93,9 @@ public class ImportTemplateAction implements ActionDoer
 		{
 			try
 			{
-				if (FxInSwingContentController.isMctFileFilterSelected(getLocalization(), chosenExtensionFilter, templateFileToImport))
+				String lowerCaseFileName = templateFileToImport.getName().toLowerCase();
+				if(lowerCaseFileName.endsWith(new MCTFileFilter(getLocalization()).getExtension().toLowerCase()))
 					getManageTemplatesController().importFormTemplateFromMctFile(templateFileToImport);
-
-				else if (FxInSwingContentController.isXmlExtensionSelected(getLocalization(), chosenExtensionFilter, templateFileToImport))
-					getManageTemplatesController().importXmlFormTemplate(templateFileToImport);
-				
 				else
 					getManageTemplatesController().importXmlFormTemplate(templateFileToImport);
 					
@@ -121,7 +108,6 @@ public class ImportTemplateAction implements ActionDoer
 		}
 
 		private File templateFileToImport;
-		private FormatFilter chosenExtensionFilter;
 	}
 
 	private ManageTemplatesController manageTemplatesController;

@@ -217,6 +217,8 @@ public class EnglishStrings
 "wintitle:notifyErrorUpdatingDictionary=Error",
 "wintitle:BulletinContacts=Record Contacts",
 
+"wintitle:FileDialogImportTemplate=Import Form Template",
+
 "wintitle:SelectTemplate=Template Selector",
 "field:confirmOkToSwitchTemplate=Changing templates will replace the old template with a new one and may remove existing data from this record.",
 "field:DisplayableDefaultFormTemplateName=Martus Standard Fields",
