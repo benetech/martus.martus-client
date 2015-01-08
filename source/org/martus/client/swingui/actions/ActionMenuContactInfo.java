@@ -56,7 +56,7 @@ public class ActionMenuContactInfo extends UiMenuAction implements ActionDoer
 		// the following is required (for unknown reasons)
 		// to get the window to redraw after the dialog
 		// is closed. Yuck! kbs.
-		getMainWindow().getSwingFrame().repaint();
+		getMainWindow().repaint();
 	}
 	
 }

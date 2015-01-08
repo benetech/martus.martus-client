@@ -110,7 +110,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 			
 			getMainWindow().forceRecheckOfUidsOnServer();
 			app.getStore().clearOnServerLists();
-			getMainWindow().getSwingFrame().repaint();
+			getMainWindow().repaint();
 			getMainWindow().setStatusMessageReady();
 			wizardStage.setCurrentServerIsAvailable(true);
 		}
