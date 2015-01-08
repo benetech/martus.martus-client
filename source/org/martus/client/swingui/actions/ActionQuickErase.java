@@ -136,8 +136,20 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 	{
 		public SwingDialogContents(UiMainWindow mainWindowToUse)
 		{
-			
+			setMainWindow(mainWindowToUse);
 		}
+
+		public UiMainWindow getMainWindow()
+		{
+			return mainWindow;
+		}
+
+		private void setMainWindow(UiMainWindow mainWindow)
+		{
+			this.mainWindow = mainWindow;
+		}
+
+		private UiMainWindow mainWindow;
 	}
 	
 	// NOTE: This is only used in swing mode
@@ -147,7 +159,6 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 		{
 			super(mainWindowToUse);
 			
-			setMainWindow(mainWindowToUse);
 			uninstallChoosen = uninstallMartus;
 			isActive = new SimpleBooleanProperty(true);
 			MartusApp app = getMainWindow().getApp();
@@ -269,17 +280,6 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 			return title;
 		}
 
-		private UiMainWindow getMainWindow()
-		{
-			return mainWindow;
-		}
-
-		private void setMainWindow(UiMainWindow mainWindow)
-		{
-			this.mainWindow = mainWindow;
-		}
-
-		private UiMainWindow mainWindow;
 		private JButton okButton;
 		private boolean okPressed;
 		private boolean uninstallChoosen;
