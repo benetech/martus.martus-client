@@ -55,7 +55,7 @@ public class SwingDialogContentPane extends JPanel
 		isActive.addListener(listener);
 	}
 	
-	protected void setInactive()
+	protected void dispose()
 	{
 		isActive.setValue(false);
 	}

@@ -225,7 +225,7 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 						okPressed = true;
 				}
 			}
-			setInactive();
+			dispose();
 		}
 
 		public boolean okPressed()
