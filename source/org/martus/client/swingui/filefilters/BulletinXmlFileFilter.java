@@ -33,7 +33,7 @@ public class BulletinXmlFileFilter extends FormatFilter
 {
 	public BulletinXmlFileFilter(MiniLocalization localization)
 	{
-		description = localization.getFieldLabel("BulletinXmlFileFilter"); 
+		description = localization.getFieldLabel("XmlFileFilter"); 
 	}
 	
 	@Override

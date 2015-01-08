@@ -581,7 +581,7 @@ public class EnglishStrings
 "field:HelpExample2DefaultDetails=List Victim Names and Ages:",
 "field:HelpExampleEtcDefaultDetails=etc...",
 "field:PublicInformationFiles=Public Information Files (*.mpi)",
-"field:BulletinXmlFileFilter=XML Files (*.xml)",
+"field:XmlFileFilter=XML Files (*.xml)",
 "field:NormalKeyboardMsg1=Remember: Entering your password using the regular keyboard may reduce security.",
 "field:NormalKeyboardMsg2=For maximum security switch to the on-screen keyboard.",
 "field:RetrieveSummariesMessage=All records retrieved will still remain on the server.\nYou can only retrieve records that are not currently on your computer.",
