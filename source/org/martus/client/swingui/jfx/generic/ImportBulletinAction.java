@@ -68,7 +68,9 @@ public class ImportBulletinAction implements ActionDoer
 		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
 
 		int userResult = fileChooser.showOpenDialog(getMainWindow().getSwingFrame());
-		if (userResult != JFileChooser.APPROVE_OPTION)
+		boolean didUserApprove = (userResult == JFileChooser.APPROVE_OPTION);
+		
+		if(!didUserApprove)
 			return;
 
 		importChooser(fileChooser);        
