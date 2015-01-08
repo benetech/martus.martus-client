@@ -65,6 +65,20 @@ public class ImportBulletinAction implements ActionDoer
 		filters.add(mbaFilter);
 		filters.add(xmlFilter);
 
+		File selectedFile = showFileOpenDialog(windowTitleTag, filters);
+		
+		if(selectedFile == null)
+			return;
+		
+		String lowerCaseFileName = selectedFile.getName().toLowerCase();
+		if(lowerCaseFileName.endsWith(mbaFilter.getExtension().toLowerCase()))
+			importBulletinFromMbaFile(selectedFile);
+		else
+			importBulletinFromXmlFile(selectedFile);        
+	}
+
+	public File showFileOpenDialog(String windowTitleTag, Vector<FormatFilter> filters)
+	{
 		JFileChooser fileChooser = new JFileChooser(getApp().getMartusDataRootDirectory());
 		fileChooser.setDialogTitle(getLocalization().getWindowTitle(windowTitleTag));
 		filters.forEach(filter -> fileChooser.addChoosableFileFilter(filter));
@@ -77,15 +91,7 @@ public class ImportBulletinAction implements ActionDoer
 		File selectedFile = fileChooser.getSelectedFile();
 		if(userResult != JFileChooser.APPROVE_OPTION)
 			selectedFile = null;
-		
-		if(selectedFile == null)
-			return;
-		
-		String lowerCaseFileName = selectedFile.getName().toLowerCase();
-		if(lowerCaseFileName.endsWith(mbaFilter.getExtension().toLowerCase()))
-			importBulletinFromMbaFile(selectedFile);
-		else
-			importBulletinFromXmlFile(selectedFile);        
+		return selectedFile;
 	}
 	
 	private void importBulletinFromXmlFile(File fileToImport)
