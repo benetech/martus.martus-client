@@ -75,7 +75,7 @@ public class ImportBulletinAction implements ActionDoer
 		if(selectedFile == null)
 			return;
 
-		File fileToImport = fileChooser.getSelectedFile(); 
+		File fileToImport = selectedFile; 
 		
 		FormatFilter chosenExtensionFilter = (FormatFilter) fileChooser.getFileFilter();
 		if (FxInSwingContentController.isXmlExtensionSelected(getLocalization(), chosenExtensionFilter, fileToImport))
