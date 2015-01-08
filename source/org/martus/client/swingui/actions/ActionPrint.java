@@ -83,7 +83,6 @@ public class ActionPrint extends UiMenuAction
 		{
 			mainWindow.unexpectedErrorDlg(e);
 		}
-		mainWindow.getSwingFrame().requestFocus();
 	}
 
 	void printBulletins(Vector currentSelectedBulletins) throws Exception
