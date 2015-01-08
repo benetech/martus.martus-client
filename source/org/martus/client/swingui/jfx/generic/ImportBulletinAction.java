@@ -68,6 +68,8 @@ public class ImportBulletinAction implements ActionDoer
 		JFileChooser fileChooser = new JFileChooser(getApp().getMartusDataRootDirectory());
 		fileChooser.setDialogTitle(getLocalization().getWindowTitle(windowTitleTag));
 		filters.forEach(filter -> fileChooser.addChoosableFileFilter(filter));
+		
+		// NOTE: Apparently the all file filter has a Mac bug, so this is a workaround
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
 
@@ -78,14 +80,10 @@ public class ImportBulletinAction implements ActionDoer
 		
 		if(selectedFile == null)
 			return;
-
-		FormatFilter chosenExtensionFilter = (FormatFilter) fileChooser.getFileFilter();
-		if (FxInSwingContentController.isXmlExtensionSelected(getLocalization(), chosenExtensionFilter, selectedFile))
-			importBulletinFromXmlFile(selectedFile);
 		
-		else if (FxInSwingContentController.isMbaExtensionSelected(getLocalization(), chosenExtensionFilter, selectedFile))
+		String lowerCaseFileName = selectedFile.getName().toLowerCase();
+		if(lowerCaseFileName.endsWith(mbaFilter.getExtension().toLowerCase()))
 			importBulletinFromMbaFile(selectedFile);
-		
 		else
 			importBulletinFromXmlFile(selectedFile);        
 	}
