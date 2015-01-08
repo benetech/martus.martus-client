@@ -2714,6 +2714,50 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		return FileDialogHelpers.doFileOpenDialog(getCurrentActiveFrame(), title, okButtonLabel, directory, filter);
 	}
 	
+	public File showFileSaveDialog(String fileDialogCategory, Vector<FormatFilter> filters)
+	{
+		// TODO: When we switch from Swing to JavaFX, combine this with the other file save dialog
+		while(true)
+		{
+			JFileChooser fileChooser = new JFileChooser(getApp().getMartusDataRootDirectory());
+			fileChooser.setDialogTitle(getLocalization().getWindowTitle("FileDialog" + fileDialogCategory));
+			filters.forEach(filter -> fileChooser.addChoosableFileFilter(filter));
+			
+			// NOTE: Apparently the all file filter has a Mac bug, so this is a workaround
+			fileChooser.setAcceptAllFileFilterUsed(false);
+			fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
+	
+			int userResult = fileChooser.showSaveDialog(getCurrentActiveFrame());
+			if(userResult != JFileChooser.APPROVE_OPTION)
+				break;
+			
+			File selectedFile = fileChooser.getSelectedFile();
+			FormatFilter selectedFilter = (FormatFilter) fileChooser.getFileFilter();
+			selectedFile = getFileWithExtension(selectedFile, selectedFilter);
+
+			if(!selectedFile.exists())
+				return selectedFile;
+
+			if(UiUtilities.confirmDlg(getLocalization(), getCurrentActiveFrame(), "OverWriteExistingFile"))
+				return selectedFile;
+		}
+		
+		return null;
+	}
+	
+	private static File getFileWithExtension(File file, FormatFilter filter)
+	{
+		String extension = filter.getExtension();
+		String fileName = file.getName();
+		if(!fileName.toLowerCase().endsWith(extension.toLowerCase()))
+		{
+			StringBuilder fileNameWithExtension = new StringBuilder(fileName);
+			fileNameWithExtension.append(extension);
+			file = new File(file.getParentFile(), fileNameWithExtension.toString());
+		}
+		return file;
+	}
+	
 	public File showFileSaveDialogNoFilterWithDirectoryMemory(String fileDialogCategory, String defaultFilename)
 	{
 		File directory = UiSession.getMemorizedFileOpenDirectories().get(fileDialogCategory);

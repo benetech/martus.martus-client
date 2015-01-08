@@ -26,16 +26,14 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.general;
 
 import java.io.File;
-
-import javax.swing.JFileChooser;
+import java.util.Vector;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
-import org.martus.client.swingui.filefilters.XmlFileFilter;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
-import org.martus.client.swingui.jfx.generic.FxInSwingContentController;
+import org.martus.client.swingui.filefilters.XmlFileFilter;
 import org.martus.clientside.FormatFilter;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.FormTemplate;
@@ -63,43 +61,22 @@ public class ExportTemplateAction implements ActionDoer
 	
 	private void exportTemplate(FormTemplate template) throws Exception
 	{
-		JFileChooser fileChooser = new JFileChooser(getApp().getMartusDataRootDirectory());
-		fileChooser.setDialogTitle(getLocalization().getWindowTitle("FileDialogExportCustomization"));
-		fileChooser.addChoosableFileFilter(new MCTFileFilter(getLocalization()));
-		fileChooser.addChoosableFileFilter(new XmlFileFilter(getLocalization()));
-		fileChooser.setAcceptAllFileFilterUsed(false);
-		int userChoice = fileChooser.showSaveDialog(getMainWindow().getSwingFrame());
-		if (userChoice != JFileChooser.APPROVE_OPTION)
+		Vector<FormatFilter> filters = new Vector();
+		filters.add(new MCTFileFilter(getLocalization()));
+		XmlFileFilter xmlFilter = new XmlFileFilter(getLocalization());
+		filters.add(xmlFilter);
+
+		File selectedFile = getMainWindow().showFileSaveDialog("ExportCustomization", filters);
+		if(selectedFile == null)
 			return;
 		
-		File templateFile = fileChooser.getSelectedFile();
-		if(templateFile == null)
-			return;
-		
-		FormatFilter chosenExtensionFilter = (FormatFilter) fileChooser.getFileFilter();
-		templateFile = getFileWithExtension(templateFile, chosenExtensionFilter);
-
-		if (FxInSwingContentController.isMctFileFilterSelected(getLocalization(), chosenExtensionFilter, templateFile))
-			template.exportTemplate(getApp().getSecurity(), templateFile);
-		
-		if (FxInSwingContentController.isXmlExtensionSelected(getLocalization(), chosenExtensionFilter, templateFile))
-			template.exportTopSection(templateFile);
+		String lowerCaseFileName = selectedFile.getName().toLowerCase();
+		if(lowerCaseFileName.endsWith(xmlFilter.getExtension().toLowerCase()))
+			template.exportTopSection(selectedFile);
+		else
+			template.exportTemplate(getApp().getSecurity(), selectedFile);
 	}
 
-	public File getFileWithExtension(File templateFile,
-			FormatFilter chosenExtensionFilter)
-	{
-		String extension = chosenExtensionFilter.getExtension();
-		String fileName = templateFile.getName();
-		if(!fileName.endsWith(extension))
-		{
-			StringBuilder fileNameWithExtension = new StringBuilder(fileName);
-			fileNameWithExtension.append(extension);
-			templateFile = new File(templateFile.getParentFile(), fileNameWithExtension.toString());
-		}
-		return templateFile;
-	}
-	
 	private MartusLocalization getLocalization()
 	{
 		return getMainWindow().getLocalization();

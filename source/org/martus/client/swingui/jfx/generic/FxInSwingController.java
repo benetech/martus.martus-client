@@ -31,17 +31,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
 
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.TranslucentWindowObscurer;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.filefilters.MCTFileFilter;
-import org.martus.client.swingui.filefilters.XmlFileFilter;
-import org.martus.clientside.FormatFilter;
 import org.martus.common.MartusLogger;
 
 public abstract class FxInSwingController extends FxController
@@ -98,37 +93,6 @@ public abstract class FxInSwingController extends FxController
 	public FxInSwingStage getSwingStage()
 	{
 		return (FxInSwingStage) getStage();
-	}
-	
-	public static boolean isMctFileFilterSelected(MartusLocalization localization, FormatFilter chosenExtensionFilter, File file)
-	{
-		FormatFilter mctFileFilter = new MCTFileFilter(localization);
-		return isExtensionSelected(chosenExtensionFilter, file, mctFileFilter);
-	}
-	
-	public static boolean isXmlExtensionSelected(MartusLocalization localization, FormatFilter chosenExtensionFilter, File file)
-	{
-		FormatFilter xmlFileFilter = new XmlFileFilter(localization);
-		return isExtensionSelected(chosenExtensionFilter, file, xmlFileFilter);
-	}
-	
-	private static boolean isExtensionSelected(FormatFilter chosenExtensionFilter, File file, FormatFilter mctFileFilter)
-	{
-		return isExtensionSelected(chosenExtensionFilter.getExtensions(), file, mctFileFilter);
-	}
-
-	private static boolean isExtensionSelected(String[] extensions, File file, FormatFilter mctFileFilter)
-	{
-		if (mctFileFilter.accept(file))
-			return true;
-		
-		for (String extension : extensions)
-		{
-			if (extension.contains(mctFileFilter.getExtension()))
-				return true;
-		}
-		
-		return false;
 	}
 	
 	protected static class DialogWindowHandler extends WindowAdapter
