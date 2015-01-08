@@ -95,21 +95,32 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 				return false;
 		}
 		return true;
-	}	
+	}
+	
+	private static class ModalDialogWithSwingContents extends JDialog
+	{
+		public static void show(SwingDialogContentPane contents)
+		{
+			JDialog dialog = new ModalDialogWithSwingContents(contents);
+			dialog.setVisible(true);
+		}
+
+		private ModalDialogWithSwingContents(SwingDialogContentPane contents)
+		{
+			super(contents.getMainWindow().getCurrentActiveFrame());
+			contents.addIsActiveListener((property, oldValue, newValue) -> dispose());
+			setTitle(contents.getTitle());
+			getContentPane().add(contents);
+			Utilities.packAndCenterWindow(this);
+			setModal(true);
+			setResizable(true);
+		}
+	}
 
 	private boolean confirmErase(boolean uninstall)
 	{
 		ConfirmQuickEraseDlgContents confirm = new ConfirmQuickEraseDlgContents(getMainWindow(), uninstall);
-
-		JDialog dialog = new JDialog(getMainWindow().getCurrentActiveFrame());
-		confirm.addIsActiveListener((property, oldValue, newValue) -> dialog.dispose());
-		dialog.setTitle(confirm.getTitle());
-		dialog.getContentPane().add(confirm);
-		Utilities.packAndCenterWindow(dialog);
-		dialog.setModal(true);
-		dialog.setResizable(true);
-		dialog.setVisible(true);
-
+		ModalDialogWithSwingContents.show(confirm);
 		return confirm.okPressed();
 	}
 
