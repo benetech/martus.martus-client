@@ -160,12 +160,23 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 			isActive.setValue(false);
 		}
 
+		protected void setTitle(String newTitle)
+		{
+			title = newTitle;
+		}
+
+		public String getTitle()
+		{
+			return title;
+		}
+
 		private UiMainWindow mainWindow;
 		private SimpleBooleanProperty isActive;
+		private String title;
 	}
 	
 	// NOTE: This is only used in swing mode
-	private static class ConfirmQuickEraseDlgContents extends SwingDialogContents implements ActionListener
+	static class ConfirmQuickEraseDlgContents extends SwingDialogContents implements ActionListener
 	{
 		ConfirmQuickEraseDlgContents(UiMainWindow mainWindowToUse, boolean uninstallMartus)
 		{
@@ -276,20 +287,9 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 			return okPressed;
 		}
 		
-		private void setTitle(String newTitle)
-		{
-			title = newTitle;
-		}
-		
-		public String getTitle()
-		{
-			return title;
-		}
-
 		private JButton okButton;
 		private boolean okPressed;
 		private boolean uninstallChoosen;
-		private String title;
 	}
 
 
