@@ -137,6 +137,7 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 		public SwingDialogContents(UiMainWindow mainWindowToUse)
 		{
 			setMainWindow(mainWindowToUse);
+			isActive = new SimpleBooleanProperty(true);
 		}
 
 		public UiMainWindow getMainWindow()
@@ -149,7 +150,18 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 			this.mainWindow = mainWindow;
 		}
 
+		public void addIsActiveListener(ChangeListener<Boolean> listener)
+		{
+			isActive.addListener(listener);
+		}
+		
+		protected void setInactive()
+		{
+			isActive.setValue(false);
+		}
+
 		private UiMainWindow mainWindow;
+		private SimpleBooleanProperty isActive;
 	}
 	
 	// NOTE: This is only used in swing mode
@@ -160,7 +172,6 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 			super(mainWindowToUse);
 			
 			uninstallChoosen = uninstallMartus;
-			isActive = new SimpleBooleanProperty(true);
 			MartusApp app = getMainWindow().getApp();
 			Vector martusAccounts = app.getAllAccountDirectories();
 			MartusLocalization localization = getMainWindow().getLocalization();
@@ -242,11 +253,6 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 			add(hBox, BorderLayout.SOUTH);
 		}
 
-		public void addIsActiveListener(ChangeListener<Boolean> listener)
-		{
-			isActive.addListener(listener);
-		}
-
 		public void actionPerformed(ActionEvent ae)
 		{
 			if(okButton.hasFocus())
@@ -262,7 +268,7 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 						okPressed = true;
 				}
 			}
-			isActive.setValue(false);
+			setInactive();
 		}
 
 		public boolean okPressed()
@@ -284,7 +290,6 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 		private boolean okPressed;
 		private boolean uninstallChoosen;
 		private String title;
-		private SimpleBooleanProperty isActive;
 	}
 
 
