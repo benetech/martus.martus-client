@@ -75,14 +75,7 @@ public class ImportBulletinAction implements ActionDoer
 		if(selectedFile == null)
 			return;
 
-		importChooser(fileChooser);        
-	}
-	
-	private void importChooser(JFileChooser fileChooser)
-	{
 		File fileToImport = fileChooser.getSelectedFile(); 
-		if (fileToImport == null)
-			return;
 		
 		FormatFilter chosenExtensionFilter = (FormatFilter) fileChooser.getFileFilter();
 		if (FxInSwingContentController.isXmlExtensionSelected(getLocalization(), chosenExtensionFilter, fileToImport))
@@ -92,7 +85,7 @@ public class ImportBulletinAction implements ActionDoer
 			importBulletinFromMbaFile(fileToImport);
 		
 		else
-			importBulletinFromXmlFile(fileToImport);
+			importBulletinFromXmlFile(fileToImport);        
 	}
 	
 	private void importBulletinFromXmlFile(File fileToImport)
