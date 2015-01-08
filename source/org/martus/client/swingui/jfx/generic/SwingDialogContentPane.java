@@ -30,6 +30,7 @@ import javafx.beans.value.ChangeListener;
 
 import javax.swing.JPanel;
 
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 
 public class SwingDialogContentPane extends JPanel
@@ -48,6 +49,11 @@ public class SwingDialogContentPane extends JPanel
 	private void setMainWindow(UiMainWindow mainWindow)
 	{
 		this.mainWindow = mainWindow;
+	}
+	
+	public MartusLocalization getLocalization()
+	{
+		return getMainWindow().getLocalization();
 	}
 
 	public void addIsActiveListener(ChangeListener<Boolean> listener)
