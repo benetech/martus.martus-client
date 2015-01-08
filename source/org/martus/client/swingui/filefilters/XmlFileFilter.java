@@ -39,7 +39,7 @@ public class XmlFileFilter extends FormatFilter
 	@Override
 	public String getExtension()
 	{
-		return MartusApp.MARTUS_IMPORT_EXPORT_EXTENSION;
+		return MartusApp.XML_EXTENSION;
 	}
 	
 	public String getDescription()
