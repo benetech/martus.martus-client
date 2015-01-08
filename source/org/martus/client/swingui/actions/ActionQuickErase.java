@@ -33,6 +33,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -56,7 +59,6 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 	{
 		super(mainWindowToUse, tag);
 		app = mainWindowToUse.getApp();
-		martusAccounts = new Vector();
 	}
 	
 	@Override
@@ -99,7 +101,17 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 
 	private boolean confirmErase(boolean uninstall)
 	{
-		ConfirmQuickEraseDlg confirm = new ConfirmQuickEraseDlg(uninstall);
+		ConfirmQuickEraseDlgContents confirm = new ConfirmQuickEraseDlgContents(getMainWindow(), uninstall);
+
+		JDialog dialog = new JDialog(getMainWindow().getCurrentActiveFrame());
+		confirm.addIsActiveListener((property, oldValue, newValue) -> dialog.dispose());
+		dialog.setTitle(confirm.getTitle());
+		dialog.getContentPane().add(confirm);
+		Utilities.packAndCenterWindow(dialog);
+		dialog.setModal(true);
+		dialog.setResizable(true);
+		dialog.setVisible(true);
+
 		return confirm.okPressed();
 	}
 
@@ -120,13 +132,16 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 		mainWindow.folderTreeContentsHaveChanged();		
 	}
 	
-	private class ConfirmQuickEraseDlg extends JDialog implements ActionListener
+	// NOTE: This is only used in swing mode
+	private static class ConfirmQuickEraseDlgContents extends JPanel implements ActionListener
 	{
-		ConfirmQuickEraseDlg(boolean uninstallMartus)
+		ConfirmQuickEraseDlgContents(UiMainWindow mainWindowToUse, boolean uninstallMartus)
 		{
-			super(mainWindow.getSwingFrame(), "", true);
+			mainWindow = mainWindowToUse;
 			uninstallChoosen = uninstallMartus;
-			martusAccounts = app.getAllAccountDirectories();
+			isActive = new SimpleBooleanProperty(true);
+			MartusApp app = mainWindow.getApp();
+			Vector martusAccounts = app.getAllAccountDirectories();
 			MartusLocalization localization = mainWindow.getLocalization();
 			if(uninstallMartus)
 				setTitle(localization.getWindowTitle("RemoveMartsFromThisComputer"));
@@ -200,14 +215,15 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 			panel.setBorder(new LineBorder(Color.RED, 20));
 			panel.add(vBox, BorderLayout.CENTER);
 			
-			getContentPane().setLayout(new BorderLayout());
-			getContentPane().add(panel, BorderLayout.NORTH);
-			getContentPane().add(text, BorderLayout.CENTER);
-			getContentPane().add(hBox, BorderLayout.SOUTH);
-			
-			Utilities.packAndCenterWindow(this);
-			setResizable(true);
-			setVisible(true);
+			setLayout(new BorderLayout());
+			add(panel, BorderLayout.NORTH);
+			add(text, BorderLayout.CENTER);
+			add(hBox, BorderLayout.SOUTH);
+		}
+
+		public void addIsActiveListener(ChangeListener<Boolean> listener)
+		{
+			isActive.addListener(listener);
 		}
 
 		public void actionPerformed(ActionEvent ae)
@@ -225,23 +241,34 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 						okPressed = true;
 				}
 			}
-			dispose();
+			isActive.setValue(false);
 		}
 
 		public boolean okPressed()
 		{
 			return okPressed;
 		}
+		
+		private void setTitle(String newTitle)
+		{
+			title = newTitle;
+		}
+		
+		public String getTitle()
+		{
+			return title;
+		}
 
-
+		private UiMainWindow mainWindow;
 		private JButton okButton;
 		private boolean okPressed;
 		private boolean uninstallChoosen;
+		private String title;
+		private SimpleBooleanProperty isActive;
 	}
 
 
-	final boolean WILL_UNINSTALL_MARTUS = true;
-	final boolean WILL_NOT_UNINSTALL_MARTUS = false;
+	final static boolean WILL_UNINSTALL_MARTUS = true;
+	final static boolean WILL_NOT_UNINSTALL_MARTUS = false;
 	MartusApp app;
-	Vector martusAccounts;
 }
