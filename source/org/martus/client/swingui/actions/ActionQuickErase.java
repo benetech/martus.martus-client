@@ -132,11 +132,21 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 		mainWindow.folderTreeContentsHaveChanged();		
 	}
 	
+	private static class SwingDialogContents extends JPanel
+	{
+		public SwingDialogContents(UiMainWindow mainWindowToUse)
+		{
+			
+		}
+	}
+	
 	// NOTE: This is only used in swing mode
-	private static class ConfirmQuickEraseDlgContents extends JPanel implements ActionListener
+	private static class ConfirmQuickEraseDlgContents extends SwingDialogContents implements ActionListener
 	{
 		ConfirmQuickEraseDlgContents(UiMainWindow mainWindowToUse, boolean uninstallMartus)
 		{
+			super(mainWindowToUse);
+			
 			mainWindow = mainWindowToUse;
 			uninstallChoosen = uninstallMartus;
 			isActive = new SimpleBooleanProperty(true);
