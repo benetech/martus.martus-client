@@ -36,7 +36,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
 import org.martus.client.swingui.filefilters.XmlFileFilter;
-import org.martus.client.swingui.jfx.generic.FxInSwingContentController;
 import org.martus.clientside.FormatFilter;
 import org.martus.common.MartusLogger;
 
