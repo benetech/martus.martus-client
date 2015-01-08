@@ -57,9 +57,13 @@ public class ImportBulletinAction implements ActionDoer
 	public void doAction()
 	{
 		String windowTitleTag = "ImportBulletin";
+
+		MartusBulletinArchiveFileFilter mbaFilter = new MartusBulletinArchiveFileFilter(getLocalization());
+		BulletinXmlFileFilter xmlFilter = new BulletinXmlFileFilter(getLocalization());
+		
 		Vector<FormatFilter> filters = new Vector();
-		filters.add(new MartusBulletinArchiveFileFilter(getLocalization()));
-		filters.add(new BulletinXmlFileFilter(getLocalization()));
+		filters.add(mbaFilter);
+		filters.add(xmlFilter);
 
 		JFileChooser fileChooser = new JFileChooser(getApp().getMartusDataRootDirectory());
 		fileChooser.setDialogTitle(getLocalization().getWindowTitle(windowTitleTag));
