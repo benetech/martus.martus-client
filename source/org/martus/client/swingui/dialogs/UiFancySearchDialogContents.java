@@ -60,9 +60,9 @@ import org.martus.util.TokenReplacement.TokenInvalidException;
 
 import com.jhlabs.awt.GridLayoutPlus;
 
-public class UiFancySearchDlg extends JDialog
+public class UiFancySearchDialogContents extends JDialog
 {
-	public UiFancySearchDlg(UiMainWindow owner)
+	public UiFancySearchDialogContents(UiMainWindow owner)
 	{
 		super(owner.getSwingFrame(), "", true);
 		mainWindow = owner;
@@ -345,7 +345,7 @@ public class UiFancySearchDlg extends JDialog
 	
 	static class SaveButtonHandler implements ActionListener
 	{
-		public SaveButtonHandler(UiFancySearchDlg dialogToSaveFrom)
+		public SaveButtonHandler(UiFancySearchDialogContents dialogToSaveFrom)
 		{
 			dialog = dialogToSaveFrom;
 		}
@@ -389,12 +389,12 @@ public class UiFancySearchDlg extends JDialog
 			dialog.getSecurity().saveEncryptedStringToFile(destination, text);
 		}
 		
-		UiFancySearchDlg dialog;
+		UiFancySearchDialogContents dialog;
 	}
 	
 	static class LoadButtonHandler implements ActionListener
 	{
-		public LoadButtonHandler(UiFancySearchDlg dialogToLoadInto)
+		public LoadButtonHandler(UiFancySearchDialogContents dialogToLoadInto)
 		{
 			dialog = dialogToLoadInto;
 		}
@@ -442,7 +442,7 @@ public class UiFancySearchDlg extends JDialog
 			return new SearchSpec(new JSONObject(text));
 		}
 		
-		UiFancySearchDlg dialog;
+		UiFancySearchDialogContents dialog;
 	}
 	
 	static class SearchSpecFilter extends FormatFilter

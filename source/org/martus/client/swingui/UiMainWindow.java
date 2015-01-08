@@ -86,7 +86,7 @@ import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
 import org.martus.client.swingui.dialogs.UiAboutDlg;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
-import org.martus.client.swingui.dialogs.UiFancySearchDlg;
+import org.martus.client.swingui.dialogs.UiFancySearchDialogContents;
 import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
 import org.martus.client.swingui.dialogs.UiOnlineHelpDlg;
@@ -1566,7 +1566,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 	
 	public SearchTreeNode askUserForSearchCriteria() throws ParseException
 	{
-		UiFancySearchDlg searchDlg = new UiFancySearchDlg(this);
+		UiFancySearchDialogContents searchDlg = new UiFancySearchDialogContents(this);
 		searchDlg.setSearchFinalBulletinsOnly(getUiState().searchFinalBulletinsOnly());
 		searchDlg.setSearchSameRowsOnly(getUiState().searchSameRowsOnly());
 		String searchString = getUiState().getSearchString();
