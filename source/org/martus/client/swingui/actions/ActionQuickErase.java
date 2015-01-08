@@ -176,7 +176,7 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 	}
 	
 	// NOTE: This is only used in swing mode
-	static class ConfirmQuickEraseDlgContents extends SwingDialogContents implements ActionListener
+	private static class ConfirmQuickEraseDlgContents extends SwingDialogContents implements ActionListener
 	{
 		ConfirmQuickEraseDlgContents(UiMainWindow mainWindowToUse, boolean uninstallMartus)
 		{
