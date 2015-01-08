@@ -147,12 +147,12 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 		{
 			super(mainWindowToUse);
 			
-			mainWindow = mainWindowToUse;
+			setMainWindow(mainWindowToUse);
 			uninstallChoosen = uninstallMartus;
 			isActive = new SimpleBooleanProperty(true);
-			MartusApp app = mainWindow.getApp();
+			MartusApp app = getMainWindow().getApp();
 			Vector martusAccounts = app.getAllAccountDirectories();
-			MartusLocalization localization = mainWindow.getLocalization();
+			MartusLocalization localization = getMainWindow().getLocalization();
 			if(uninstallMartus)
 				setTitle(localization.getWindowTitle("RemoveMartsFromThisComputer"));
 			else
@@ -242,12 +242,12 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 			{
 				if(uninstallChoosen)
 				{
-					if(mainWindow.confirmDlgBeep("RemoveMartus"))
+					if(getMainWindow().confirmDlgBeep("RemoveMartus"))
 						okPressed = true;
 				}
 				else
 				{
-					if(mainWindow.confirmDlgBeep("DeleteMyData"))
+					if(getMainWindow().confirmDlgBeep("DeleteMyData"))
 						okPressed = true;
 				}
 			}
@@ -267,6 +267,16 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 		public String getTitle()
 		{
 			return title;
+		}
+
+		private UiMainWindow getMainWindow()
+		{
+			return mainWindow;
+		}
+
+		private void setMainWindow(UiMainWindow mainWindow)
+		{
+			this.mainWindow = mainWindow;
 		}
 
 		private UiMainWindow mainWindow;
