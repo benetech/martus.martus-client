@@ -127,7 +127,7 @@ public class ActionMenuSelectServer extends UiMenuAction implements ActionDoer
 			
 			getMainWindow().forceRecheckOfUidsOnServer();
 			getStore().clearOnServerLists();
-			getMainWindow().getSwingFrame().repaint();
+			getMainWindow().repaint();
 			getMainWindow().setStatusMessageReady();
 		}
 		catch(NetworkOfflineException e)

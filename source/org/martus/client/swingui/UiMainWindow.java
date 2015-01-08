@@ -2756,6 +2756,11 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		return mainStage;
 	}
 
+	public void repaint()
+	{
+		getCurrentActiveFrame().repaint();
+	}
+	
 	private UiBulletinTablePane getBulletinsTablePane()
 	{
 		if(getMainPane() == null)

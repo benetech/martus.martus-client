@@ -59,7 +59,7 @@ public class ActionMenuRemoveServer extends UiMenuAction
 		{
 			getApp().setServerInfo("","","");
 			getMainWindow().clearStatusMessage();
-			getMainWindow().getSwingFrame().repaint();
+			getMainWindow().repaint();
 		}
 		catch(Exception e)
 		{
