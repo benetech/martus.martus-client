@@ -2725,7 +2725,6 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 			
 			// NOTE: Apparently the all file filter has a Mac bug, so this is a workaround
 			fileChooser.setAcceptAllFileFilterUsed(false);
-			fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
 	
 			int userResult = fileChooser.showSaveDialog(getCurrentActiveFrame());
 			if(userResult != JFileChooser.APPROVE_OPTION)
