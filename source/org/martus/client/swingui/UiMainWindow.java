@@ -2670,6 +2670,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 
 	public File showFileOpenDialog(String fileDialogCategory, Vector<FormatFilter> filters)
 	{
+		// TODO: When we switch from Swing to JavaFX, combine this with the other file open dialog
 		JFileChooser fileChooser = new JFileChooser(getApp().getMartusDataRootDirectory());
 		fileChooser.setDialogTitle(getLocalization().getWindowTitle("FileDialog" + fileDialogCategory));
 		filters.forEach(filter -> fileChooser.addChoosableFileFilter(filter));
