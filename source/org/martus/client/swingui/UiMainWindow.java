@@ -56,6 +56,7 @@ import javax.crypto.Cipher;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
@@ -98,6 +99,7 @@ import org.martus.client.swingui.dialogs.UiSplashDlg;
 import org.martus.client.swingui.dialogs.UiStringInputDlg;
 import org.martus.client.swingui.dialogs.UiTemplateDlg;
 import org.martus.client.swingui.dialogs.UiWarningMessageDlg;
+import org.martus.client.swingui.filefilters.AllFileFilter;
 import org.martus.client.swingui.filefilters.KeyPairFormatFilter;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
@@ -2666,6 +2668,23 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		return UiFileChooser.displayChooseDirectoryDialog(getCurrentActiveFrame(), windowTitle);
 	}
 
+	public File showFileOpenDialog(String fileDialogCategory, Vector<FormatFilter> filters)
+	{
+		JFileChooser fileChooser = new JFileChooser(getApp().getMartusDataRootDirectory());
+		fileChooser.setDialogTitle(getLocalization().getWindowTitle("FileDialog" + fileDialogCategory));
+		filters.forEach(filter -> fileChooser.addChoosableFileFilter(filter));
+		
+		// NOTE: Apparently the all file filter has a Mac bug, so this is a workaround
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
+
+		int userResult = fileChooser.showOpenDialog(getSwingFrame());
+		File selectedFile = fileChooser.getSelectedFile();
+		if(userResult != JFileChooser.APPROVE_OPTION)
+			selectedFile = null;
+		return selectedFile;
+	}
+	
 	public File showFileOpenDialog(String fileDialogCategory, FileFilter filter)
 	{
 		return internalShowFileOpenDialog(fileDialogCategory, null, filter);
