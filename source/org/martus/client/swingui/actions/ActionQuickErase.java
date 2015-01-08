@@ -43,7 +43,7 @@ import javax.swing.border.LineBorder;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.SwingDialogContents;
+import org.martus.client.swingui.jfx.generic.SwingDialogContentPane;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
@@ -131,7 +131,7 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 	}
 	
 	// NOTE: This is only used in swing mode
-	private static class ConfirmQuickEraseDlgContents extends SwingDialogContents implements ActionListener
+	private static class ConfirmQuickEraseDlgContents extends SwingDialogContentPane implements ActionListener
 	{
 		ConfirmQuickEraseDlgContents(UiMainWindow mainWindowToUse, boolean uninstallMartus)
 		{

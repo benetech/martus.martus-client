@@ -32,9 +32,9 @@ import javax.swing.JPanel;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public class SwingDialogContents extends JPanel
+public class SwingDialogContentPane extends JPanel
 {
-	public SwingDialogContents(UiMainWindow mainWindowToUse)
+	public SwingDialogContentPane(UiMainWindow mainWindowToUse)
 	{
 		setMainWindow(mainWindowToUse);
 		isActive = new SimpleBooleanProperty(true);
