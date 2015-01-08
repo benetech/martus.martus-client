@@ -33,9 +33,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -46,6 +43,7 @@ import javax.swing.border.LineBorder;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.generic.SwingDialogContents;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
@@ -130,49 +128,6 @@ public abstract class ActionQuickErase extends UiMenuAction implements ActionDoe
 		app.deleteAllBulletinsAndUserFolders();
 		mainWindow.allFolderContentsHaveChanged();
 		mainWindow.folderTreeContentsHaveChanged();		
-	}
-	
-	private static class SwingDialogContents extends JPanel
-	{
-		public SwingDialogContents(UiMainWindow mainWindowToUse)
-		{
-			setMainWindow(mainWindowToUse);
-			isActive = new SimpleBooleanProperty(true);
-		}
-
-		public UiMainWindow getMainWindow()
-		{
-			return mainWindow;
-		}
-
-		private void setMainWindow(UiMainWindow mainWindow)
-		{
-			this.mainWindow = mainWindow;
-		}
-
-		public void addIsActiveListener(ChangeListener<Boolean> listener)
-		{
-			isActive.addListener(listener);
-		}
-		
-		protected void setInactive()
-		{
-			isActive.setValue(false);
-		}
-
-		protected void setTitle(String newTitle)
-		{
-			title = newTitle;
-		}
-
-		public String getTitle()
-		{
-			return title;
-		}
-
-		private UiMainWindow mainWindow;
-		private SimpleBooleanProperty isActive;
-		private String title;
 	}
 	
 	// NOTE: This is only used in swing mode
