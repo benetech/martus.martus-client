@@ -48,9 +48,9 @@ import org.martus.swing.Utilities;
 
 import com.jhlabs.awt.GridLayoutPlus;
 
-public class AddPermissionsDialog extends JDialog
+public class AddPermissionsDialogContents extends JDialog
 {
-	public AddPermissionsDialog(UiMainWindow mainWindowToUse, Vector allBulletins, Vector ourBulletins, HeadquartersKeys hqKeys)
+	public AddPermissionsDialogContents(UiMainWindow mainWindowToUse, Vector allBulletins, Vector ourBulletins, HeadquartersKeys hqKeys)
 	{
 		super(mainWindowToUse.getSwingFrame());
 		mainWindow = mainWindowToUse;
