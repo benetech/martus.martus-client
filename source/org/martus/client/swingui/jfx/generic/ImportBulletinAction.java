@@ -56,7 +56,7 @@ public class ImportBulletinAction implements ActionDoer
 	@Override
 	public void doAction()
 	{
-		String windowTitleTag = "ImportBulletin";
+		String fileDialogCategory = "ImportBulletin";
 
 		MartusBulletinArchiveFileFilter mbaFilter = new MartusBulletinArchiveFileFilter(getLocalization());
 		BulletinXmlFileFilter xmlFilter = new BulletinXmlFileFilter(getLocalization());
@@ -65,7 +65,7 @@ public class ImportBulletinAction implements ActionDoer
 		filters.add(mbaFilter);
 		filters.add(xmlFilter);
 
-		File selectedFile = showFileOpenDialog(windowTitleTag, filters);
+		File selectedFile = showFileOpenDialog(fileDialogCategory, filters);
 		
 		if(selectedFile == null)
 			return;
@@ -77,10 +77,10 @@ public class ImportBulletinAction implements ActionDoer
 			importBulletinFromXmlFile(selectedFile);        
 	}
 
-	public File showFileOpenDialog(String windowTitleTag, Vector<FormatFilter> filters)
+	public File showFileOpenDialog(String fileDialogCategory, Vector<FormatFilter> filters)
 	{
 		JFileChooser fileChooser = new JFileChooser(getApp().getMartusDataRootDirectory());
-		fileChooser.setDialogTitle(getLocalization().getWindowTitle(windowTitleTag));
+		fileChooser.setDialogTitle(getLocalization().getWindowTitle("FileDialog" + fileDialogCategory));
 		filters.forEach(filter -> fileChooser.addChoosableFileFilter(filter));
 		
 		// NOTE: Apparently the all file filter has a Mac bug, so this is a workaround

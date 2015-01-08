@@ -325,7 +325,7 @@ public class EnglishStrings
 "wintitle:RemoveMartsFromThisComputer=Remove Martus From This Computer",
 "wintitle:ResendBulletins=Resend Records",
 "wintitle:ImportBulletins=Import Records",
-"wintitle:ImportBulletin=Import Record",
+"wintitle:FileDialogImportBulletin=Import Record",
 
 "wintitle:LoadSavedSearch=Load Saved Search",
 "wintitle:SaveSearch=Save Search",
