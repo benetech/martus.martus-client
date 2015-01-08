@@ -29,9 +29,9 @@ import org.martus.client.core.MartusApp;
 import org.martus.clientside.FormatFilter;
 import org.martus.common.MiniLocalization;
 
-public class BulletinXmlFileFilter extends FormatFilter
+public class XmlFileFilter extends FormatFilter
 {
-	public BulletinXmlFileFilter(MiniLocalization localization)
+	public XmlFileFilter(MiniLocalization localization)
 	{
 		description = localization.getFieldLabel("XmlFileFilter"); 
 	}

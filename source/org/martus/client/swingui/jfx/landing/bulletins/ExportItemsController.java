@@ -45,7 +45,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
+import org.martus.client.swingui.filefilters.XmlFileFilter;
 import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxModalDirectoryChooser;
@@ -206,7 +206,7 @@ public class ExportItemsController extends FxController
 		MartusLocalization localization = getLocalization();
 		if(shouldExportEncrypted())
 			return new MartusBulletinArchiveFileFilter(localization);
-		return new BulletinXmlFileFilter(localization);
+		return new XmlFileFilter(localization);
 	}
 	
 	private boolean showDirectoryOnly()

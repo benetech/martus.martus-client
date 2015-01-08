@@ -42,7 +42,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiBulletinTitleListComponent;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiSession;
-import org.martus.client.swingui.filefilters.BulletinXmlFileFilter;
+import org.martus.client.swingui.filefilters.XmlFileFilter;
 import org.martus.clientside.FormatFilter;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.EnglishCommonStrings;
@@ -118,7 +118,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 
 	File askForDestinationFile()
 	{
-		FormatFilter filter = new BulletinXmlFileFilter(mainWindow.getLocalization());
+		FormatFilter filter = new XmlFileFilter(mainWindow.getLocalization());
 		return mainWindow.showFileSaveDialog("ExportBulletins", defaultFileName, filter);
 	}
 
