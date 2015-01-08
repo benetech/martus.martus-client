@@ -32,12 +32,12 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.Box;
-import javax.swing.JDialog;
 
 import org.martus.client.swingui.UiBulletinTitleListComponent;
 import org.martus.client.swingui.UiHeadquartersTable;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.HeadquartersEditorTableModel;
+import org.martus.client.swingui.jfx.generic.SwingDialogContentPane;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.HeadquartersKeys;
 import org.martus.swing.UiButton;
@@ -48,24 +48,22 @@ import org.martus.swing.Utilities;
 
 import com.jhlabs.awt.GridLayoutPlus;
 
-public class AddPermissionsDialogContents extends JDialog
+public class AddPermissionsDialogContents extends SwingDialogContentPane
 {
 	public AddPermissionsDialogContents(UiMainWindow mainWindowToUse, Vector allBulletins, Vector ourBulletins, HeadquartersKeys hqKeys)
 	{
-		super(mainWindowToUse.getSwingFrame());
-		mainWindow = mainWindowToUse;
+		super(mainWindowToUse);
 		
-		setModal(true);
-		Container contentPane = getContentPane();
+		Container contentPane = this;
 		contentPane.setLayout(new GridLayoutPlus(0, 1, 2, 2, 2, 2));
-		UiLocalization localization = mainWindow.getLocalization();
+		UiLocalization localization = getLocalization();
 		setTitle(localization.getWindowTitle("AddPermissions"));
 
 		String overview = localization.getFieldLabel("AddPermissionsOverview");
 		contentPane.add(new UiWrappedTextArea(overview));
 
 		
-		UiBulletinTitleListComponent list = new UiBulletinTitleListComponent(mainWindow, ourBulletins);
+		UiBulletinTitleListComponent list = new UiBulletinTitleListComponent(getMainWindow(), ourBulletins);
 		contentPane.add(new UiScrollPane(list));
 		
 		// if any bulletins are not ours, tell user why they are not listed
@@ -79,7 +77,7 @@ public class AddPermissionsDialogContents extends JDialog
 		String chooseHeadquartersToAdd = localization.getFieldLabel("ChooseHeadquartersToAdd");
 		contentPane.add(new UiWrappedTextArea(chooseHeadquartersToAdd));
 		
-		model = new HeadquartersEditorTableModel(mainWindow.getApp());
+		model = new HeadquartersEditorTableModel(getMainWindow().getApp());
 		model.addKeys(hqKeys);
 		UiHeadquartersTable hqTable = new UiHeadquartersTable(model);
 		hqTable.setMaxColumnWidthToHeaderWidth(0);
@@ -99,9 +97,6 @@ public class AddPermissionsDialogContents extends JDialog
 		};
 		Utilities.addComponentsRespectingOrientation(buttonBox, buttons);
 		contentPane.add(buttonBox);
-		
-		Utilities.packAndCenterWindow(this);
-		setResizable(true);
 	}
 	
 	public HeadquartersKeys getSelectedHqKeys()
@@ -119,7 +114,7 @@ public class AddPermissionsDialogContents extends JDialog
 		HeadquartersKeys selectedKeys = model.getAllSelectedHeadQuarterKeys();
 		if(selectedKeys.size() == 0)
 		{
-			mainWindow.notifyDlg("AddPermissionsZeroHeadquartersSelected");
+			getMainWindow().notifyDlg("AddPermissionsZeroHeadquartersSelected");
 			return;
 		}
 		
@@ -150,7 +145,6 @@ public class AddPermissionsDialogContents extends JDialog
 		
 	}
 	
-	UiMainWindow mainWindow;
 	HeadquartersEditorTableModel model;
 	HeadquartersKeys selectedHqKeys;
 }
