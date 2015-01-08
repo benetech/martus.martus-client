@@ -34,15 +34,13 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 
 import javafx.application.Platform;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.TranslucentWindowObscurer;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.filefilters.XmlFileFilter;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
-import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
+import org.martus.client.swingui.filefilters.XmlFileFilter;
 import org.martus.clientside.FormatFilter;
 import org.martus.common.MartusLogger;
 
@@ -102,30 +100,10 @@ public abstract class FxInSwingController extends FxController
 		return (FxInSwingStage) getStage();
 	}
 	
-	protected boolean isMctFileFilterSelected(ExtensionFilter chosenExtensionFilter, File file)
-	{
-		FormatFilter mctFileFilter = new MCTFileFilter(getLocalization());
-		String[] extensions = chosenExtensionFilter.getExtensions().toArray(new String[0]);
-		return isExtensionSelected(extensions, file, mctFileFilter);
-	}
-
 	public static boolean isMctFileFilterSelected(MartusLocalization localization, FormatFilter chosenExtensionFilter, File file)
 	{
 		FormatFilter mctFileFilter = new MCTFileFilter(localization);
 		return isExtensionSelected(chosenExtensionFilter, file, mctFileFilter);
-	}
-	
-	protected boolean isMctFileFilterSelected(FormatFilter chosenExtensionFilter, File file)
-	{
-		FormatFilter mctFileFilter = new MCTFileFilter(getLocalization());
-		return isExtensionSelected(chosenExtensionFilter, file, mctFileFilter);
-	}
-
-	protected boolean isXmlExtensionSelected(ExtensionFilter chosenExtensionFilter, File file)
-	{
-		FormatFilter xmlFileFilter = new XmlFileFilter(getLocalization());
-		String[] extensions = chosenExtensionFilter.getExtensions().toArray(new String[0]);
-		return isExtensionSelected(extensions, file, xmlFileFilter);
 	}
 	
 	public static boolean isXmlExtensionSelected(MartusLocalization localization, FormatFilter chosenExtensionFilter, File file)
@@ -134,18 +112,12 @@ public abstract class FxInSwingController extends FxController
 		return isExtensionSelected(chosenExtensionFilter, file, xmlFileFilter);
 	}
 	
-	public static boolean isMbaExtensionSelected(MartusLocalization localization, FormatFilter chosenExtensionFilter, File file)
-	{
-		FormatFilter xmlFileFilter = new MartusBulletinArchiveFileFilter(localization);
-		return isExtensionSelected(chosenExtensionFilter, file, xmlFileFilter);
-	}
-	
 	private static boolean isExtensionSelected(FormatFilter chosenExtensionFilter, File file, FormatFilter mctFileFilter)
 	{
 		return isExtensionSelected(chosenExtensionFilter.getExtensions(), file, mctFileFilter);
 	}
 
-	public static boolean isExtensionSelected(String[] extensions, File file, FormatFilter mctFileFilter)
+	private static boolean isExtensionSelected(String[] extensions, File file, FormatFilter mctFileFilter)
 	{
 		if (mctFileFilter.accept(file))
 			return true;
