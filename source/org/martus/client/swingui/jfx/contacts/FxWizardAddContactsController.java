@@ -56,9 +56,9 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxInSwingStage;
 import org.martus.client.swingui.jfx.generic.FxPopupController;
 import org.martus.client.swingui.jfx.generic.FxTableCellTextFieldFactory;
+import org.martus.client.swingui.jfx.generic.VirtualStage;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.client.swingui.jfx.setupwizard.ContactsTableData;
 import org.martus.client.swingui.jfx.setupwizard.step4.FxStep4Controller;
@@ -513,19 +513,19 @@ public class FxWizardAddContactsController extends FxStep4Controller
 			return contactAccepted;
 		}
 		
-		public void setFxStage(FxInSwingStage stageToUse)
+		public void setFxStage(VirtualStage stageToUse)
 		{
 			fxStage = stageToUse;
 		}
 
-		public FxInSwingStage getFxStage()
+		public VirtualStage getFxStage()
 		{
 			return fxStage;
 		}
 
 		private String contactPublicCode;
 		private String contactPublicCode40;
-		private FxInSwingStage fxStage;
+		private VirtualStage fxStage;
 		private int verification;
 		private boolean contactAccepted;
 		private boolean verifyContact;
