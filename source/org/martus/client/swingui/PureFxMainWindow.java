@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui;
 
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -83,19 +84,17 @@ public class PureFxMainWindow extends UiMainWindow
 
 	public void rawSetCursor(Object newCursor)
 	{
-		// FIXME: We need to support this
+		stage.getScene().setCursor((Cursor) newCursor);
 	}
 
 	public Object getWaitCursor()
 	{
-		// FIXME: We need to support this
-		return null;
+		return Cursor.WAIT;
 	}
 
 	public Object getExistingCursor()
 	{
-		// FIXME: We need to support this
-		return null;
+		return stage.getScene().getCursor();
 	}
 
 	public static Stage stage;
