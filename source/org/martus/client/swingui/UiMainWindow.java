@@ -321,8 +321,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		else
 		{
 			MartusLogger.log("Showing main window");
-			getSwingFrame().setVisible(true);
-			getSwingFrame().toFront();
+			showMainWindow();
 			mainWindowInitalizing = false;
 		}
 		
@@ -341,6 +340,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		return true;
     }
 
+	abstract protected void showMainWindow();
 	abstract protected void obscureMainWindow();
 
 	public void displayIncorrectVersionJava(String highVersionJava, String expectedVersionJava)

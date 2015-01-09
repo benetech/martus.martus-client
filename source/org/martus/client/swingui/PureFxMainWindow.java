@@ -82,21 +82,31 @@ public class PureFxMainWindow extends UiMainWindow
 		// FIXME: We need to support this
 	}
 
+	@Override
 	public void rawSetCursor(Object newCursor)
 	{
 		stage.getScene().setCursor((Cursor) newCursor);
 	}
 
+	@Override
 	public Object getWaitCursor()
 	{
 		return Cursor.WAIT;
 	}
 
+	@Override
 	public Object getExistingCursor()
 	{
 		return stage.getScene().getCursor();
 	}
 
+	@Override
+	protected void showMainWindow()
+	{
+		// FIXME: We need to support this
+	}
+	
+	@Override
 	protected void obscureMainWindow()
 	{
 		// FIXME: We need to support this
