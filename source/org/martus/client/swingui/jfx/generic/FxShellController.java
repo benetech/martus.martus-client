@@ -30,7 +30,6 @@ import javafx.scene.Parent;
 public abstract interface FxShellController 
 {
 	public VirtualStage getStage();
-	public VirtualStage getSwingStage();
 	public void setStage(VirtualStage stageToUse);
 	public Parent createContents() throws Exception;
 }
