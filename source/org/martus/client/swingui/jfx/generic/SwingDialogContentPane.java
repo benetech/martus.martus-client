@@ -74,7 +74,7 @@ public class SwingDialogContentPane extends JPanel
 		isActive.setValue(false);
 	}
 
-	protected void setTitle(String newTitle)
+	public void setTitle(String newTitle)
 	{
 		title = newTitle;
 	}
