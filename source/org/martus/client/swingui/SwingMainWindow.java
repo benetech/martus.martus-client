@@ -28,6 +28,7 @@ package org.martus.client.swingui;
 import javafx.application.Platform;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import org.martus.client.swingui.jfx.generic.FxRunner;
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
@@ -96,6 +97,12 @@ public class SwingMainWindow extends UiMainWindow
 	private void updateTitle() 
 	{
 		getSwingFrame().setTitle(getLocalization().getWindowTitle("main"));
+	}
+	
+	@Override
+	public void rawError(String errorText)
+	{
+		JOptionPane.showMessageDialog(null, errorText, "ERROR", JOptionPane.ERROR_MESSAGE);
 	}
 
 	private JFrame swingFrame;

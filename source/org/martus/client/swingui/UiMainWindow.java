@@ -1207,6 +1207,8 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		return UiUtilities.confirmDlg(parent, title, contents, buttons, tokenReplacement);
 	}
 
+	abstract public void rawError(String string);
+
 	@Override
 	public void notifyDlgBeep(String baseTag)
 	{			
