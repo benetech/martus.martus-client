@@ -108,21 +108,32 @@ public class SwingMainWindow extends UiMainWindow
 		JOptionPane.showMessageDialog(null, errorText, "ERROR", JOptionPane.ERROR_MESSAGE);
 	}
 
+	@Override
 	public void rawSetCursor(Object newCursor)
 	{
 		getSwingFrame().setCursor((Cursor)newCursor);
 	}
 
+	@Override
 	public Object getWaitCursor()
 	{
 		return Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
 	}
 
+	@Override
 	public Object getExistingCursor()
 	{
 		return getSwingFrame().getCursor();
 	}
 	
+	@Override
+	protected void showMainWindow()
+	{
+		getSwingFrame().setVisible(true);
+		getSwingFrame().toFront();
+	}
+
+	@Override
 	protected void obscureMainWindow()
 	{
 		getSwingFrame().setLocation(100000, 0);
