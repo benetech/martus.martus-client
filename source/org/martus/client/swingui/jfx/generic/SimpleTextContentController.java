@@ -57,7 +57,7 @@ public class SimpleTextContentController extends FxController
 
 		messageTextArea.setWrapText(true);
 		//FIXME: SCROLLER_WIDTH probably can't be correct across multiple platforms.
-		messageTextArea.setPrefWidth(getParentController().getShellController().getSwingStage().getWidthAsDouble() - SCROLLER_WIDTH);
+		messageTextArea.setPrefWidth(getParentController().getShellController().getStage().getWidthAsDouble() - SCROLLER_WIDTH);
 		String rawMessage = getLocalization().getFieldLabel(confirmationMessageTag);
 		String contents = rawMessage;
 		try
