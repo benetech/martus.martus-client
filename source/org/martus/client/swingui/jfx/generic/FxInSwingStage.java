@@ -25,11 +25,13 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import java.awt.Container;
 import java.awt.Window;
 import java.io.File;
 
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 import javax.swing.JDialog;
 import javax.swing.SwingUtilities;
@@ -39,11 +41,12 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 
-public abstract class FxInSwingStage extends JFXPanel implements VirtualStage
+public abstract class FxInSwingStage implements VirtualStage
 {
 	public FxInSwingStage(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
+		panel = new JFXPanel();
 	}
 
 	protected FxScene createScene() throws Exception
@@ -67,7 +70,7 @@ public abstract class FxInSwingStage extends JFXPanel implements VirtualStage
 		if(scene == null)
 		{
 			scene = createScene();
-			setScene(scene);
+			panel.setScene(scene);
 		}
 	}
 	
@@ -176,8 +179,18 @@ public abstract class FxInSwingStage extends JFXPanel implements VirtualStage
 		SwingUtilities.invokeLater(new ShowErrorDialogHandler(e));
 	}
 
+	public Container getPanel()
+	{
+		return panel;
+	}
+
+	public Scene getScene()
+	{
+		return panel.getScene();
+	}
 
 	protected UiMainWindow mainWindow;
+	private JFXPanel panel;
 	private FxScene scene;
 	private Window window;
 	private FxShellController shellController;

@@ -61,7 +61,7 @@ public class SwingMainWindow extends UiMainWindow
 			FxRunner fxRunner = new FxRunner(fxInSwingMainStage);
 			fxRunner.setAbortImmediatelyOnError();
 			Platform.runLater(fxRunner);
-			getSwingFrame().setContentPane(fxInSwingMainStage);
+			getSwingFrame().setContentPane(fxInSwingMainStage.getPanel());
 		}
 		else
 		{

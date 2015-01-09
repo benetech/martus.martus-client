@@ -68,7 +68,7 @@ public class FxModalDialog extends JDialog
 		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		dialog.getContentPane().setPreferredSize(dimension);
 		dialog.pack();
-		dialog.getContentPane().add(stage);
+		dialog.getContentPane().add(stage.getPanel());
 		stage.setDialog(dialog);
 		Platform.runLater(new FxRunner(stage));
 
