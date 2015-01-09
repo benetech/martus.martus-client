@@ -53,7 +53,7 @@ abstract public class FxWizardShellController extends FxInSwingShellController i
 	
 	public FxWizardStage getWizardStage()
 	{
-		return (FxWizardStage) getSwingStage();
+		return (FxWizardStage) getStage();
 	}
 	
 	abstract public void loadAndIntegrateContentPane(FxController contentPaneController) throws Exception;
