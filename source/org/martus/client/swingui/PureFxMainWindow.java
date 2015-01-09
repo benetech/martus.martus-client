@@ -25,9 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui;
 
-public class FxMainWindow extends UiMainWindow
+public class PureFxMainWindow extends UiMainWindow
 {
-	public FxMainWindow() throws Exception
+	public PureFxMainWindow() throws Exception
 	{
 		super();
 		// TODO Auto-generated constructor stub
