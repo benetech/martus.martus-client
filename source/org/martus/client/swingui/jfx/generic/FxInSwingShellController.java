@@ -45,12 +45,13 @@ public abstract class FxInSwingShellController extends FxInSwingController imple
 		super.initialize(location, bundle);
 	}
 	
+	@Override
 	public VirtualStage getStage()
 	{
 		return stage;
 	}
 
-	public void setStage(FxInSwingStage stageToUse)
+	public void setStage(VirtualStage stageToUse)
 	{
 		stage = stageToUse;
 	}
@@ -66,5 +67,5 @@ public abstract class FxInSwingShellController extends FxInSwingController imple
 	}
 
 
-	private FxInSwingStage stage;
+	private VirtualStage stage;
 }

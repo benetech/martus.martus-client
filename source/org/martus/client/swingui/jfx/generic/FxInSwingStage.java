@@ -188,6 +188,12 @@ public abstract class FxInSwingStage implements VirtualStage
 	{
 		return panel.getScene();
 	}
+	
+	@Override
+	public double getWidthAsDouble()
+	{
+		return getPanel().getWidth();
+	}
 
 	protected UiMainWindow mainWindow;
 	private JFXPanel panel;
