@@ -107,7 +107,7 @@ import org.martus.client.swingui.jfx.generic.FxModalDialog;
 import org.martus.client.swingui.jfx.generic.FxRunner;
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
 import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
-import org.martus.client.swingui.jfx.landing.FxMainStage;
+import org.martus.client.swingui.jfx.landing.FxInSwingMainStage;
 import org.martus.client.swingui.jfx.setupwizard.SetupWizardStage;
 import org.martus.client.swingui.jfx.welcome.WelcomeStage;
 import org.martus.client.swingui.spellcheck.SpellCheckerManager;
@@ -975,7 +975,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	public void bulletinContentsHaveChanged(Bulletin b)
 	{
-		FxMainStage stage = getMainStage();
+		FxInSwingMainStage stage = getMainStage();
 		if(stage != null)
 		{
 			try
@@ -2092,7 +2092,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 		if(UiSession.isJavaFx())
 		{
-			mainStage = new FxMainStage(this);
+			mainStage = new FxInSwingMainStage(this);
 			statusBar = new FxStatusBar(getLocalization());
 			FxRunner fxRunner = new FxRunner(mainStage);
 			fxRunner.setAbortImmediatelyOnError();
@@ -2815,7 +2815,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		return mainPane;
 	}
 	
-	public FxMainStage getMainStage()
+	public FxInSwingMainStage getMainStage()
 	{
 		return mainStage;
 	}
@@ -2890,7 +2890,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	private UiSession session;
 
 	private UiMainPane mainPane;
-	private FxMainStage mainStage;
+	private FxInSwingMainStage mainStage;
 
 	private java.util.Timer uploader;
 	private java.util.Timer timeoutChecker;
