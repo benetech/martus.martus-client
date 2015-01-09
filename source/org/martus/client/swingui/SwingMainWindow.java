@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui;
 
+import javax.swing.JFrame;
+
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
 
 public class SwingMainWindow extends UiMainWindow
@@ -32,6 +34,17 @@ public class SwingMainWindow extends UiMainWindow
 	public SwingMainWindow() throws Exception
 	{
 		super();
+	}
+	
+	@Override
+	protected void initializeFrame()
+	{
+		swingFrame = new MainSwingFrame(this);
+		UiMainWindow.updateIcon(getSwingFrame());
+		setCurrentActiveFrame(getSwingFrame());
+		getSwingFrame().setVisible(true);
+		updateTitle();
+		setWindowSizeAndState();
 	}
 
 	public StatusBar createStatusBar()
@@ -41,4 +54,17 @@ public class SwingMainWindow extends UiMainWindow
 		
 		return new UiStatusBar(getLocalization());
 	}
+
+	@Override
+	public JFrame getSwingFrame()
+	{
+		return swingFrame;
+	}
+	
+	private void updateTitle() 
+	{
+		getSwingFrame().setTitle(getLocalization().getWindowTitle("main"));
+	}
+
+	private JFrame swingFrame;
 }

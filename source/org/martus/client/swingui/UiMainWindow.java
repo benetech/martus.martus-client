@@ -214,10 +214,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		}
 	}
 	
-	public JFrame getSwingFrame()
-	{
-		return swingFrame;
-	}
+	public abstract JFrame getSwingFrame();
 	
 	protected void restrictToOnlyTestServers()
 	{
@@ -2083,12 +2080,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	{
 		MartusLogger.logBeginProcess("Initializing views");
 
-		swingFrame = new MainSwingFrame(this);
-		UiMainWindow.updateIcon(getSwingFrame());
-		setCurrentActiveFrame(getSwingFrame());
-		getSwingFrame().setVisible(true);
-		updateTitle();
-		setWindowSizeAndState();
+		initializeFrame();
 
 		if(UiSession.isJavaFx())
 		{
@@ -2119,6 +2111,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		MartusLogger.logEndProcess("Checking server status");
 	}
 
+	abstract protected void initializeFrame();
 	abstract public StatusBar createStatusBar();
 
 	public ProgressMeterInterface getTorProgressMeter()
@@ -2153,11 +2146,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		}
 		
 		getUiState().setCurrentAppDimension(getSwingFrame().getSize());
-	}
-
-	private void updateTitle() 
-	{
-		getSwingFrame().setTitle(getLocalization().getWindowTitle("main"));
 	}
 
 	public void updateServerStatusInStatusBar()
@@ -2915,7 +2903,5 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	private FileOutputStream lockStream;
 	private Stack cursorStack;
 	private StatusBar statusBar;
-
-	private JFrame swingFrame;
 
 }
