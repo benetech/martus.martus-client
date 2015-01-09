@@ -80,12 +80,12 @@ public abstract class FxInSwingController extends FxController
 		}
 	}
 
-	public Window getWindow()
+	private Window getWindow()
 	{
 		return getSwingStage().getWindow();
 	}
 
-	public FxInSwingStage getSwingStage()
+	private FxInSwingStage getSwingStage()
 	{
 		return (FxInSwingStage) getStage();
 	}
