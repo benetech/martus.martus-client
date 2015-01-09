@@ -35,7 +35,7 @@ import org.martus.common.MartusLogger;
 
 public class FxRunner implements Runnable
 {
-	public FxRunner(FxInSwingStage stageToUse)
+	public FxRunner(VirtualStage stageToUse)
 	{
 		stage = stageToUse;
 	}
