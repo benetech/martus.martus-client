@@ -172,6 +172,7 @@ public class UiSession
 	private CurrentUiState uiState;
 	public static boolean isAlphaTester;
 	public static boolean isSwing;
+	public static boolean isPureFx;
 	
 	public static boolean defaultFoldersUnsorted;
 	private static Map<String, File> memorizedFileOpenDirectories;
