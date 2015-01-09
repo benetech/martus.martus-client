@@ -68,6 +68,7 @@ public class SwingMainWindow extends UiMainWindow
 		}
 	}
 
+	@Override
 	public StatusBar createStatusBar()
 	{
 		if(UiSession.isJavaFx())
