@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Point;
@@ -956,22 +955,11 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		rawSetCursor(waitCursor);
 		return;
 	}
-
-	public void rawSetCursor(Object waitCursor)
-	{
-		getSwingFrame().setCursor((Cursor)waitCursor);
-	}
-
-	public Object getWaitCursor()
-	{
-		return Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
-	}
-
-	public Object getExistingCursor()
-	{
-		return getSwingFrame().getCursor();
-	}
 	
+	abstract public void rawSetCursor(Object newCursor);
+	abstract public Object getExistingCursor();
+	abstract public Object getWaitCursor();
+
 	public void allBulletinsInCurrentFolderHaveChanged()
 	{
 		UiBulletinTablePane bulletinsTablePane = getBulletinsTablePane();

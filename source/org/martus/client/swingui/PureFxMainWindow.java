@@ -81,5 +81,22 @@ public class PureFxMainWindow extends UiMainWindow
 		// FIXME: We need to support this
 	}
 
+	public void rawSetCursor(Object newCursor)
+	{
+		// FIXME: We need to support this
+	}
+
+	public Object getWaitCursor()
+	{
+		// FIXME: We need to support this
+		return null;
+	}
+
+	public Object getExistingCursor()
+	{
+		// FIXME: We need to support this
+		return null;
+	}
+
 	public static Stage stage;
 }

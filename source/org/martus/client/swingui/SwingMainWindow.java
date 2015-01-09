@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui;
 
+import java.awt.Cursor;
+
 import javafx.application.Platform;
 
 import javax.swing.JFrame;
@@ -104,6 +106,21 @@ public class SwingMainWindow extends UiMainWindow
 	public void rawError(String errorText)
 	{
 		JOptionPane.showMessageDialog(null, errorText, "ERROR", JOptionPane.ERROR_MESSAGE);
+	}
+
+	public void rawSetCursor(Object newCursor)
+	{
+		getSwingFrame().setCursor((Cursor)newCursor);
+	}
+
+	public Object getWaitCursor()
+	{
+		return Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
+	}
+
+	public Object getExistingCursor()
+	{
+		return getSwingFrame().getCursor();
 	}
 
 	private JFrame swingFrame;
