@@ -216,7 +216,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 
 	private void closeDialog()
 	{
-		getSwingStage().close();
+		getStage().close();
 	}
 
 	private void DisplayWarningDialog( String warningTag, StringBuilder titlesInQuestion)
