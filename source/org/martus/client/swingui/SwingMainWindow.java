@@ -25,10 +25,20 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui;
 
+import org.martus.client.swingui.jfx.generic.FxStatusBar;
+
 public class SwingMainWindow extends UiMainWindow
 {
 	public SwingMainWindow() throws Exception
 	{
 		super();
+	}
+
+	public StatusBar createStatusBar()
+	{
+		if(UiSession.isJavaFx())
+			return new FxStatusBar(getLocalization());
+		
+		return new UiStatusBar(getLocalization());
 	}
 }

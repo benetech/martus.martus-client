@@ -105,7 +105,6 @@ import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.generic.FxModalDialog;
 import org.martus.client.swingui.jfx.generic.FxRunner;
-import org.martus.client.swingui.jfx.generic.FxStatusBar;
 import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
 import org.martus.client.swingui.jfx.landing.FxInSwingMainStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
@@ -2094,7 +2093,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		if(UiSession.isJavaFx())
 		{
 			mainStage = new FxInSwingMainStage(this);
-			statusBar = new FxStatusBar(getLocalization());
 			FxRunner fxRunner = new FxRunner(mainStage);
 			fxRunner.setAbortImmediatelyOnError();
 			Platform.runLater(fxRunner);
@@ -2102,10 +2100,10 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		}
 		else
 		{
-			statusBar = new UiStatusBar(getLocalization());		
 			mainPane = new UiMainPane(this, getUiState());
 			getSwingFrame().setContentPane(mainPane);
 		}
+		statusBar = createStatusBar();
 
 		getTransport().setProgressMeter(getTorProgressMeter());
 		// NOTE: re-start Tor here in case it was turned on in the wizard
@@ -2119,6 +2117,8 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		resetCursor();
 		MartusLogger.logEndProcess("Checking server status");
 	}
+
+	abstract public StatusBar createStatusBar();
 
 	public ProgressMeterInterface getTorProgressMeter()
 	{
