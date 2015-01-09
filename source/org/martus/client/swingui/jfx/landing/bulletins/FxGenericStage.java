@@ -28,10 +28,10 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import java.awt.Window;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxInSwingFrameStage;
+import org.martus.client.swingui.jfx.generic.FxInSwingStage;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 
-public class FxGenericStage extends FxInSwingFrameStage
+public class FxGenericStage extends FxInSwingStage
 {
 	public FxGenericStage(UiMainWindow mainWindowToUse, Window windowToUse, FxShellController shellController, String cssNameToUse)
 	{
