@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
-import java.awt.Window;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -54,11 +53,6 @@ public abstract class FxInSwingShellController extends FxInSwingController imple
 	public void setStage(VirtualStage stageToUse)
 	{
 		stage = stageToUse;
-	}
-
-	public Window getWindow()
-	{
-		return getSwingStage().getWindow();
 	}
 
 	protected void close()
