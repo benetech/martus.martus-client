@@ -55,6 +55,12 @@ public class FxStage extends Stage implements VirtualStage
 	{
 		mainWindow.unexpectedErrorDlg(e);
 	}
+	
+	@Override
+	public double getWidthAsDouble()
+	{
+		return getWidth();
+	}
 
 	private UiMainWindow mainWindow;
 }
