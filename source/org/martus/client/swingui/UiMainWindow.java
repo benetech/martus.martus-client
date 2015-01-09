@@ -943,7 +943,8 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	@Override
 	public void resetCursor()
 	{
-		getSwingFrame().setCursor((Cursor)getCursorStack().pop());
+		Cursor desiredCursor = (Cursor)getCursorStack().pop();
+		getSwingFrame().setCursor(desiredCursor);
 	}
 
 	@Override
