@@ -119,6 +119,15 @@ public class Martus
 			options.remove(foundJavaFx);
 		}
 		
+		int foundPureFx = options.indexOf("--purefx");
+		if(foundPureFx >= 0)
+		{
+			System.out.println(options.get(foundPureFx));
+			UiSession.isSwing = false;
+			UiSession.isPureFx = true;
+			options.remove(foundPureFx);
+		}
+		
 		timeoutInXSeconds = DEFAULT_TIMEOUT_SECONDS;
 		int foundTimeout = findOption(options, TIMEOUT_OPTION_TEXT);
 		if(foundTimeout >= 0)
