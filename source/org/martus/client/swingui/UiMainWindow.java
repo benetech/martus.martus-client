@@ -943,8 +943,8 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	@Override
 	public void resetCursor()
 	{
-		Cursor desiredCursor = (Cursor)getCursorStack().pop();
-		getSwingFrame().setCursor(desiredCursor);
+		Object desiredCursor = getCursorStack().pop();
+		getSwingFrame().setCursor((Cursor)desiredCursor);
 	}
 
 	@Override
@@ -2883,7 +2883,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	private FileLock lockToPreventTwoInstances; 
 	private FileOutputStream lockStream;
-	private Stack cursorStack;
+	private Stack<Object> cursorStack;
 	private StatusBar statusBar;
 
 }
