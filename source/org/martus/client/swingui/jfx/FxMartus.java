@@ -23,63 +23,31 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui;
+package org.martus.client.swingui.jfx;
 
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.application.Application;
 import javafx.stage.Stage;
 
-import javax.swing.JFrame;
+import org.martus.client.swingui.Martus;
+import org.martus.client.swingui.PureFxMainWindow;
+import org.martus.client.swingui.UiSession;
 
-import org.martus.client.swingui.jfx.generic.FxStatusBar;
-import org.martus.client.swingui.jfx.landing.FxMainStage;
-
-public class PureFxMainWindow extends UiMainWindow
+public class FxMartus extends Application
 {
-	public PureFxMainWindow() throws Exception
+	public static void main(String[] args)
 	{
-		super();
-	}
-
-	@Override
-	public StatusBar createStatusBar()
-	{
-		return new FxStatusBar(getLocalization());
-	}
-
-	@Override
-	public JFrame getSwingFrame()
-	{
-		return null;
-	}
-
-	@Override
-	public UiMainPane getMainPane()
-	{
-		return null;
+		storedArgs = args;
+		UiSession.isSwing = false;
+		UiSession.isPureFx = true;
+		Application.launch(args);
 	}
 	
 	@Override
-	public FxMainStage getMainStage()
+	public void start(Stage stage) throws Exception
 	{
-		return null;
+		PureFxMainWindow.stage = stage;
+		Martus.main(storedArgs);
 	}
 
-	@Override
-	protected void initializeFrame()
-	{
-		Parent root = new Button("Hello");
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-	}
-	
-	@Override
-	public void rawError(String errorText)
-	{
-		// FIXME: We need to support this
-	}
-
-	public static Stage stage;
+	private static String[] storedArgs;
 }

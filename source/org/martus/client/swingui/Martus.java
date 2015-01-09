@@ -172,8 +172,9 @@ public class Martus
 			if(Utilities.isMSWindows())
 				UIManager.put("Application.useSystemFontSettings", new Boolean(false));
 
-			boolean useSystemLookAndFeel = true;
-			String osName = System.getProperty("os.name");
+	        UiMainWindow window = constructMainWindow();
+
+	        String osName = System.getProperty("os.name");
 			String osVersion = System.getProperty("os.version");
 			System.out.println(osName + ": " + osVersion);
 			if(osName.startsWith("Windows"))
@@ -183,15 +184,11 @@ public class Martus
 				boolean isModernWindows = (isWin2KOrLater || isWinME); 
 				if(!isModernWindows)
 				{
-					JOptionPane.showMessageDialog(null, "Martus requires Windows ME or later", "ERROR", JOptionPane.ERROR_MESSAGE);
+					window.rawError("Martus requires Windows ME or later");
 					System.exit(1);
 				}
 			}
 			
-			if(useSystemLookAndFeel)
-				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
-	        UiMainWindow window = constructMainWindow();
 	        if(!window.run())
 	        {
 	        	MartusLogger.log("Exiting after run()");
@@ -211,6 +208,10 @@ public class Martus
 		if(UiSession.isPureFx)
 			return new PureFxMainWindow();
 		
+		boolean useSystemLookAndFeel = true;
+		if(useSystemLookAndFeel)
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
 		return new SwingMainWindow();
 	}
 
