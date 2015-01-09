@@ -944,7 +944,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	public void resetCursor()
 	{
 		Object desiredCursor = getCursorStack().pop();
-		getSwingFrame().setCursor((Cursor)desiredCursor);
+		rawSetCursor(desiredCursor);
 	}
 
 	@Override
@@ -953,8 +953,13 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		Object existingCursor = getExistingCursor();
 		getCursorStack().push(existingCursor);
 		Object waitCursor = getWaitCursor();
-		getSwingFrame().setCursor((Cursor)waitCursor);
+		rawSetCursor(waitCursor);
 		return;
+	}
+
+	public void rawSetCursor(Object waitCursor)
+	{
+		getSwingFrame().setCursor((Cursor)waitCursor);
 	}
 
 	public Object getWaitCursor()
