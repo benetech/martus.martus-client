@@ -33,4 +33,6 @@ public interface VirtualStage
 	public void doAction(ActionDoer doer);
 	public void logAndNotifyUnexpectedError(Exception e);
 	public double getWidthAsDouble();
+	public void showCurrentPage() throws Exception;
+	public void unexpectedErrorDlg(Exception e);
 }

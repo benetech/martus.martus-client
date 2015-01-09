@@ -61,6 +61,18 @@ public class FxStage extends Stage implements VirtualStage
 	{
 		return getWidth();
 	}
+	
+	@Override
+	public void showCurrentPage() throws Exception
+	{
+		throw new RuntimeException("Not implemented yet");
+	}
+	
+	@Override
+	public void unexpectedErrorDlg(Exception e)
+	{
+		mainWindow.unexpectedErrorDlg(e);
+	}
 
 	private UiMainWindow mainWindow;
 }

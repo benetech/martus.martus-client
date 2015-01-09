@@ -120,8 +120,6 @@ public abstract class FxInSwingStage implements VirtualStage
 		shellController = controller;
 	}
 
-	abstract public void showCurrentPage() throws Exception;
-
 	public void loadAndShowShell() throws Exception
 	{
 		ensureSceneExists();
@@ -194,7 +192,13 @@ public abstract class FxInSwingStage implements VirtualStage
 	{
 		return getPanel().getWidth();
 	}
-
+	
+	@Override
+	public void unexpectedErrorDlg(Exception e)
+	{
+		mainWindow.unexpectedErrorDlg(e);
+	}
+	
 	protected UiMainWindow mainWindow;
 	private JFXPanel panel;
 	private FxScene scene;
