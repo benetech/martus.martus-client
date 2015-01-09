@@ -2092,11 +2092,12 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 		if(UiSession.isJavaFx())
 		{
-			mainStage = new FxInSwingMainStage(this);
-			FxRunner fxRunner = new FxRunner(mainStage);
+			FxInSwingMainStage fxInSwingMainStage = new FxInSwingMainStage(this);
+			mainStage = fxInSwingMainStage;
+			FxRunner fxRunner = new FxRunner(fxInSwingMainStage);
 			fxRunner.setAbortImmediatelyOnError();
 			Platform.runLater(fxRunner);
-			getSwingFrame().setContentPane(mainStage);
+			getSwingFrame().setContentPane(fxInSwingMainStage);
 		}
 		else
 		{
@@ -2891,7 +2892,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	private UiSession session;
 
 	private UiMainPane mainPane;
-	private FxInSwingMainStage mainStage;
+	private FxMainStage mainStage;
 
 	private java.util.Timer uploader;
 	private java.util.Timer timeoutChecker;
