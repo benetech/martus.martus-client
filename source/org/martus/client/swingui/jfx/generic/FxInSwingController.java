@@ -49,7 +49,7 @@ public abstract class FxInSwingController extends FxController
 	
 	protected void showModalPopupStage(Stage popupStage)
 	{
-		GlassPaneInstaller glassPaneInstaller = new GlassPaneInstaller(this);
+		GlassPaneInstaller glassPaneInstaller = new GlassPaneInstaller(getWindow());
 		Runnable fronter = new Fronter(popupStage);
 	
 		Window window = getWindow();
