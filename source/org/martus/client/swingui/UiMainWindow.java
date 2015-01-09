@@ -106,6 +106,7 @@ import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.generic.FxModalDialog;
 import org.martus.client.swingui.jfx.generic.FxRunner;
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
+import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.setupwizard.SetupWizardStage;
 import org.martus.client.swingui.jfx.welcome.WelcomeStage;
@@ -1574,7 +1575,7 @@ public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 		if(searchString.startsWith("{"))
 			search = new JSONObject(searchString);
 		searchDlg.setSearchAsJson(search);
-		searchDlg.setVisible(true);
+		ModalDialogWithSwingContents.show(searchDlg);
 		if(!searchDlg.getResults())
 			return null;
 		
