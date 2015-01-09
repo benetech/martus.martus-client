@@ -35,7 +35,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -79,7 +78,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	
 	private void initalizeItemsTable()
 	{
-		getSwingStage().getScene().setCursor(Cursor.WAIT);
+		getMainWindow().setWaitingCursor();
 		Label noRecords = new Label(getLocalization().getFieldLabel("NoServerSyncDataInTable"));
 		allRecordsTable.setPlaceholder(noRecords);
 		allRecordsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -102,7 +101,7 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		}
 		finally
 		{
-			getSwingStage().getScene().setCursor(Cursor.DEFAULT);
+			getMainWindow().resetCursor();
 		}
 	}
 
