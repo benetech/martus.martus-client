@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.generic;
 
 import javax.swing.JDialog;
 
+import org.martus.swing.UiButton;
 import org.martus.swing.Utilities;
 
 public class ModalDialogWithSwingContents extends JDialog
@@ -41,10 +42,16 @@ public class ModalDialogWithSwingContents extends JDialog
 	{
 		super(contents.getMainWindow().getCurrentActiveFrame());
 		contents.addIsActiveListener((property, oldValue, newValue) -> dispose());
+		contents.addDefaultButtonListener((property, oldButton, newButton) -> setDefaultButton(newButton));
 		setTitle(contents.getTitle());
 		getContentPane().add(contents);
 		Utilities.packAndCenterWindow(this);
 		setModal(true);
 		setResizable(true);
+	}
+
+	private void setDefaultButton(UiButton newDefaultButton)
+	{
+		getRootPane().setDefaultButton(newDefaultButton);
 	}
 }

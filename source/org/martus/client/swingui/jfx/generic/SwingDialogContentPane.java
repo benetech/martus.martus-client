@@ -26,12 +26,14 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.generic;
 
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 
 import javax.swing.JPanel;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.swing.UiButton;
 
 public class SwingDialogContentPane extends JPanel
 {
@@ -39,6 +41,7 @@ public class SwingDialogContentPane extends JPanel
 	{
 		setMainWindow(mainWindowToUse);
 		isActive = new SimpleBooleanProperty(true);
+		defaultButton = new SimpleObjectProperty<UiButton>();
 	}
 
 	public UiMainWindow getMainWindow()
@@ -61,7 +64,12 @@ public class SwingDialogContentPane extends JPanel
 		isActive.addListener(listener);
 	}
 	
-	protected void dispose()
+	public void addDefaultButtonListener(ChangeListener<UiButton> listener)
+	{
+		defaultButton.addListener(listener);
+	}
+	
+	public void dispose()
 	{
 		isActive.setValue(false);
 	}
@@ -76,7 +84,13 @@ public class SwingDialogContentPane extends JPanel
 		return title;
 	}
 
+	protected void setDefaultButton(UiButton newDefaultButton)
+	{
+		defaultButton.setValue(newDefaultButton);
+	}
+
 	private UiMainWindow mainWindow;
 	private SimpleBooleanProperty isActive;
+	private SimpleObjectProperty<UiButton> defaultButton;
 	private String title;
 }
