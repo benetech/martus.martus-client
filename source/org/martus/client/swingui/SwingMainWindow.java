@@ -122,6 +122,13 @@ public class SwingMainWindow extends UiMainWindow
 	{
 		return getSwingFrame().getCursor();
 	}
+	
+	protected void obscureMainWindow()
+	{
+		getSwingFrame().setLocation(100000, 0);
+		getSwingFrame().setSize(0,0);
+		getSwingFrame().setEnabled(false);
+	}
 
 	private JFrame swingFrame;
 	private UiMainPane mainPane;
