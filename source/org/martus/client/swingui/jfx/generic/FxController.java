@@ -274,7 +274,7 @@ abstract public class FxController implements Initializable
 			MartusLogger.logException(e);
 	}
 	
-	public void showBusyDialog(String message, Task task, FxInSwingStage wizardPanel) throws Exception
+	public void showBusyDialog(String message, Task task) throws Exception
 	{
 		FxPopupController popupController = new FxBusyController(getMainWindow(), message, task);
 		showControllerInsideModalDialog(popupController);
