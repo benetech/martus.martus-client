@@ -316,9 +316,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		MartusLogger.log("Ready to show main window");
 		if(timeoutTimerTask.waitingForSignin)
 		{
-			getSwingFrame().setLocation(100000, 0);
-			getSwingFrame().setSize(0,0);
-			getSwingFrame().setEnabled(false);
+			obscureMainWindow();
 		}
 		else
 		{
@@ -342,6 +340,8 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		MartusLogger.log("Initialization complete");
 		return true;
     }
+
+	abstract protected void obscureMainWindow();
 
 	public void displayIncorrectVersionJava(String highVersionJava, String expectedVersionJava)
 	{

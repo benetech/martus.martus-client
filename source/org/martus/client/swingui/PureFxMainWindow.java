@@ -97,5 +97,10 @@ public class PureFxMainWindow extends UiMainWindow
 		return stage.getScene().getCursor();
 	}
 
+	protected void obscureMainWindow()
+	{
+		// FIXME: We need to support this
+	}
+
 	public static Stage stage;
 }
