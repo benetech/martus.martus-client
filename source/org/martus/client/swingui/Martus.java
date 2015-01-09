@@ -208,7 +208,10 @@ public class Martus
 
 	public static UiMainWindow constructMainWindow() throws Exception
 	{
-		return new UiMainWindow();
+		if(UiSession.isPureFx)
+			return new FxMainWindow();
+		
+		return new SwingMainWindow();
 	}
 
 	private static int findOption(Vector options, String optionText)

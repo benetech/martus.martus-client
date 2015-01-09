@@ -157,7 +157,7 @@ import org.martus.util.UnicodeReader;
 import org.martus.util.language.LanguageOptions;
 import org.martus.util.xml.XmlUtilities;
 
-public class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
+public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
 {
 	public UiMainWindow() throws Exception
 	{
