@@ -45,6 +45,7 @@ import org.martus.client.search.SearchSpec;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.grids.GridTableModel;
+import org.martus.client.swingui.jfx.generic.SwingDialogContentPane;
 import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.FormatFilter;
 import org.martus.clientside.UiLocalization;
@@ -60,17 +61,12 @@ import org.martus.util.TokenReplacement.TokenInvalidException;
 
 import com.jhlabs.awt.GridLayoutPlus;
 
-public class UiFancySearchDialogContents extends JDialog
+public class UiFancySearchDialogContents extends SwingDialogContentPane
 {
 	public UiFancySearchDialogContents(UiMainWindow owner)
 	{
-		super(owner.getSwingFrame(), "", true);
-		mainWindow = owner;
+		super(owner);
 		createBody();
-		Utilities.packAndCenterWindow(this);
-		pack();  //JAVA Bug had to call pack twice to force UiWrappedTextArea to get the right dimension
-		setResizable(true);
-
 	}
 	
 	void createBody()
@@ -79,7 +75,7 @@ public class UiFancySearchDialogContents extends JDialog
 		
 		String helpButtonText = getLocalization().getButtonLabel("Help"); 
 		UiButton help = new UiButton(helpButtonText);
-		help.addActionListener(new HelpListener(mainWindow));
+		help.addActionListener(new HelpListener(getMainWindow()));
 		
 		String saveButtonText = getLocalization().getButtonLabel("SaveSearch");
 		UiButton save = new UiButton(saveButtonText);
@@ -94,8 +90,8 @@ public class UiFancySearchDialogContents extends JDialog
 
 		UiButton cancel = new UiButton(getLocalization().getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(new CancelButtonHandler());
-		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow, mainWindow.getCurrentActiveFrame());
-		grid = FancySearchGridEditor.create(mainWindow, dlgLauncher);
+		UiDialogLauncher dlgLauncher = new UiDialogLauncher(getMainWindow(), getMainWindow().getCurrentActiveFrame());
+		grid = FancySearchGridEditor.create(getMainWindow(), dlgLauncher);
 		clearGridIfAnyProblems();
 
 		JPanel instructionPanel = new JPanel();
@@ -142,13 +138,13 @@ public class UiFancySearchDialogContents extends JDialog
 		mainPanel.add(grid.getComponent(),BorderLayout.CENTER);
 		mainPanel.add(bottomPanel,BorderLayout.SOUTH);
 
-		getContentPane().add(mainPanel);
+		add(mainPanel);
 		setInsertButtonAsDefault();
 	}
 
 	private void setInsertButtonAsDefault()
 	{
-		getRootPane().setDefaultButton(grid.getInsertButton());
+		setDefaultButton(grid.getInsertButton());
 	}
 	
 	
@@ -321,7 +317,7 @@ public class UiFancySearchDialogContents extends JDialog
 	
 	public MartusCrypto getSecurity()
 	{
-		return mainWindow.getApp().getSecurity();
+		return getMainWindow().getApp().getSecurity();
 	}
 	
 	class SearchButtonHandler implements ActionListener
@@ -354,7 +350,7 @@ public class UiFancySearchDialogContents extends JDialog
 		{
 			UiLocalization localization = dialog.getLocalization();
 			String title = localization.getWindowTitle("SaveSearch");
-			File directory = dialog.mainWindow.getApp().getCurrentAccountDirectory();
+			File directory = dialog.getMainWindow().getApp().getCurrentAccountDirectory();
 			FormatFilter filter = new SearchSpecFilter(localization);
 			// NOTE: If we pass the frame, the user will still be able to click on 
 			// the fancy search dialog, possibly hiding the modal file save dialog.
@@ -363,7 +359,7 @@ public class UiFancySearchDialogContents extends JDialog
 			dialog.setVisible(false);
 			try
 			{
-				File saveTo = FileDialogHelpers.doFileSaveDialog(dialog.mainWindow.getSwingFrame(), title, directory, "", filter, localization);
+				File saveTo = FileDialogHelpers.doFileSaveDialog(dialog.getMainWindow().getSwingFrame(), title, directory, "", filter, localization);
 				if(saveTo == null)
 					return;
 				
@@ -374,7 +370,7 @@ public class UiFancySearchDialogContents extends JDialog
 				catch (Exception e)
 				{
 					e.printStackTrace();
-					dialog.mainWindow.notifyDlg("ErrorWritingFile");
+					dialog.getMainWindow().notifyDlg("ErrorWritingFile");
 				}
 			}
 			finally
@@ -404,7 +400,7 @@ public class UiFancySearchDialogContents extends JDialog
 			UiLocalization localization = dialog.getLocalization();
 			String title = localization.getWindowTitle("LoadSavedSearch");
 			String openButtonLabel = localization.getButtonLabel("LoadSearchOkButton");
-			File directory = dialog.mainWindow.getApp().getCurrentAccountDirectory();
+			File directory = dialog.getMainWindow().getApp().getCurrentAccountDirectory();
 			FormatFilter filter = new SearchSpecFilter(localization);
 			// NOTE: If we pass the frame, the user will still be able to click on 
 			// the fancy search dialog, possibly hiding the modal file save dialog.
@@ -427,7 +423,7 @@ public class UiFancySearchDialogContents extends JDialog
 				catch (Exception e)
 				{
 					e.printStackTrace();
-					dialog.mainWindow.notifyDlg("ErrorReadingFile");
+					dialog.getMainWindow().notifyDlg("ErrorReadingFile");
 				}
 			}
 			finally
@@ -474,13 +470,7 @@ public class UiFancySearchDialogContents extends JDialog
 		return result;
 	}
 
-	public UiLocalization getLocalization()
-	{
-		return mainWindow.getLocalization();
-	}
-
 	boolean result;
-	UiMainWindow mainWindow;
 	FancySearchGridEditor grid;
 	UiCheckBox searchFinalBulletins;
 	UiCheckBox searchSameRowsOnly;
