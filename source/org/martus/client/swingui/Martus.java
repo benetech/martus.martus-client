@@ -209,7 +209,7 @@ public class Martus
 	public static UiMainWindow constructMainWindow() throws Exception
 	{
 		if(UiSession.isPureFx)
-			return new FxMainWindow();
+			return new PureFxMainWindow();
 		
 		return new SwingMainWindow();
 	}
