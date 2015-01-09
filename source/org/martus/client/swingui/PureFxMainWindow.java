@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui;
 
+import org.martus.client.swingui.jfx.generic.FxStatusBar;
+
 public class PureFxMainWindow extends UiMainWindow
 {
 	public PureFxMainWindow() throws Exception
@@ -33,4 +35,9 @@ public class PureFxMainWindow extends UiMainWindow
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public StatusBar createStatusBar()
+	{
+		return new FxStatusBar(getLocalization());
+	}
 }
