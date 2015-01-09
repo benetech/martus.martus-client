@@ -28,6 +28,7 @@ package org.martus.client.swingui;
 import javax.swing.JFrame;
 
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
+import org.martus.client.swingui.jfx.landing.FxMainStage;
 
 public class PureFxMainWindow extends UiMainWindow
 {
@@ -45,6 +46,18 @@ public class PureFxMainWindow extends UiMainWindow
 
 	@Override
 	public JFrame getSwingFrame()
+	{
+		return null;
+	}
+
+	@Override
+	public UiMainPane getMainPane()
+	{
+		return null;
+	}
+	
+	@Override
+	public FxMainStage getMainStage()
 	{
 		return null;
 	}
