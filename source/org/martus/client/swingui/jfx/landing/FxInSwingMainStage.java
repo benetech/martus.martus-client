@@ -26,11 +26,11 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxInSwingFrameStage;
+import org.martus.client.swingui.jfx.generic.FxInSwingStage;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 
-public class FxInSwingMainStage extends FxInSwingFrameStage implements FxMainStage
+public class FxInSwingMainStage extends FxInSwingStage implements FxMainStage
 {
 	public FxInSwingMainStage(UiMainWindow mainWindowToUse)
 	{
