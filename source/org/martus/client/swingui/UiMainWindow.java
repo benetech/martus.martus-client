@@ -108,6 +108,7 @@ import org.martus.client.swingui.jfx.generic.FxRunner;
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
 import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
 import org.martus.client.swingui.jfx.landing.FxInSwingMainStage;
+import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.setupwizard.SetupWizardStage;
 import org.martus.client.swingui.jfx.welcome.WelcomeStage;
 import org.martus.client.swingui.spellcheck.SpellCheckerManager;
@@ -975,7 +976,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	public void bulletinContentsHaveChanged(Bulletin b)
 	{
-		FxInSwingMainStage stage = getMainStage();
+		FxMainStage stage = getMainStage();
 		if(stage != null)
 		{
 			try
@@ -2815,7 +2816,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		return mainPane;
 	}
 	
-	public FxInSwingMainStage getMainStage()
+	public FxMainStage getMainStage()
 	{
 		return mainStage;
 	}

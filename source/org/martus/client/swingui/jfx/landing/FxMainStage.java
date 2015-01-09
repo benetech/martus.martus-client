@@ -26,10 +26,12 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing;
 
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
+import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 
 public interface FxMainStage
 {
 
-	BulletinsListController getBulletinsListController();
+	public BulletinsListController getBulletinsListController();
+	public FxCaseManagementController getCaseManager();
 
 }
