@@ -334,8 +334,6 @@ public class UiFancySearchDialogContents extends SwingDialogContentPane
 		public void actionPerformed(ActionEvent event)
 		{
 			UiLocalization localization = dialog.getLocalization();
-			String title = localization.getWindowTitle("SaveSearch");
-			File directory = dialog.getMainWindow().getApp().getCurrentAccountDirectory();
 			FormatFilter filter = new SearchSpecFilter(localization);
 			// NOTE: If we pass the frame, the user will still be able to click on 
 			// the fancy search dialog, possibly hiding the modal file save dialog.
@@ -344,7 +342,7 @@ public class UiFancySearchDialogContents extends SwingDialogContentPane
 			dialog.setVisible(false);
 			try
 			{
-				File saveTo = FileDialogHelpers.doFileSaveDialog(dialog.getMainWindow().getSwingFrame(), title, directory, "", filter, localization);
+				File saveTo = dialog.getMainWindow().showFileSaveDialog("SaveSearch", filter);
 				if(saveTo == null)
 					return;
 				
