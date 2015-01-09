@@ -952,9 +952,14 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	{
 		Object existingCursor = getExistingCursor();
 		getCursorStack().push(existingCursor);
-		Object waitCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
+		Object waitCursor = getWaitCursor();
 		getSwingFrame().setCursor((Cursor)waitCursor);
 		return;
+	}
+
+	public Object getWaitCursor()
+	{
+		return Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
 	}
 
 	public Object getExistingCursor()
