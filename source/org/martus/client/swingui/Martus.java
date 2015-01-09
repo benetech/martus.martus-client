@@ -36,6 +36,7 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
+import org.martus.client.swingui.jfx.FxMartus;
 import org.martus.clientside.ClientPortOverride;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusLogger;
@@ -167,6 +168,14 @@ public class Martus
 			System.exit(1);
 		}
 		
+		if(UiSession.isPureFx)
+			FxMartus.main(args);
+		else
+			run();
+    }
+
+	public static void run()
+	{
 		try
 		{
 			if(Utilities.isMSWindows())
@@ -200,8 +209,7 @@ public class Martus
 			MartusLogger.logException(e);
 			System.exit(1);
 		}
-
-    }
+	}
 
 	public static UiMainWindow constructMainWindow() throws Exception
 	{
