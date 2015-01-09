@@ -61,7 +61,7 @@ import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.jfx.generic.FxRunner;
 import org.martus.client.swingui.jfx.landing.bulletins.FxBulletinEditorShellController;
-import org.martus.client.swingui.jfx.landing.bulletins.FxGenericStage;
+import org.martus.client.swingui.jfx.landing.bulletins.FxInSwingGenericStage;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MartusLogger;
@@ -435,7 +435,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 	private UiBulletinComponentInterface view;
 	private UiScrollPane scroller;
-	private FxGenericStage bulletinEditorStage;
+	private FxInSwingGenericStage bulletinEditorStage;
 	
 	private JButton send;
 	private JButton draft;
