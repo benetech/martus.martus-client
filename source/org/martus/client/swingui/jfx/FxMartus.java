@@ -30,15 +30,11 @@ import javafx.stage.Stage;
 
 import org.martus.client.swingui.Martus;
 import org.martus.client.swingui.PureFxMainWindow;
-import org.martus.client.swingui.UiSession;
 
 public class FxMartus extends Application
 {
 	public static void main(String[] args)
 	{
-		storedArgs = args;
-		UiSession.isSwing = false;
-		UiSession.isPureFx = true;
 		Application.launch(args);
 	}
 	
@@ -46,8 +42,6 @@ public class FxMartus extends Application
 	public void start(Stage stage) throws Exception
 	{
 		PureFxMainWindow.stage = stage;
-		Martus.main(storedArgs);
+		Martus.run();
 	}
-
-	private static String[] storedArgs;
 }
