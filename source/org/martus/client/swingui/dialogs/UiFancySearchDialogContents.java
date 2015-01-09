@@ -35,7 +35,6 @@ import java.io.File;
 import java.util.HashMap;
 
 import javax.swing.Box;
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -45,6 +44,7 @@ import org.martus.client.search.SearchSpec;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.grids.GridTableModel;
+import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
 import org.martus.client.swingui.jfx.generic.SwingDialogContentPane;
 import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.FormatFilter;
@@ -220,8 +220,8 @@ public class UiFancySearchDialogContents extends SwingDialogContentPane
 		
 		private void showHelp(String title, String message, String closeButton)
 		{
-			JDialog dlg = new JDialog(mainWindow.getSwingFrame(), title, true);
-			JPanel panel = new JPanel();
+			SwingDialogContentPane panel = new SwingDialogContentPane(mainWindow);
+			panel.setTitle(title);
 			panel.setBorder(new EmptyBorder(5,5,5,5));
 			panel.setLayout(new BorderLayout());
 			UiWrappedTextPanel messagePanel = new UiWrappedTextPanel(message);
@@ -230,7 +230,7 @@ public class UiFancySearchDialogContents extends SwingDialogContentPane
 			panel.add(messagePanel, BorderLayout.CENTER);
 
 			UiButton button = new UiButton(closeButton);
-			button.addActionListener(new CloseHelpDialog(dlg));
+			button.addActionListener((event) -> panel.dispose());
 			Box hbox = Box.createHorizontalBox();
 			hbox.add(Box.createHorizontalGlue());
 			hbox.add(button);
@@ -240,22 +240,7 @@ public class UiFancySearchDialogContents extends SwingDialogContentPane
 			buttonPanel.add(hbox);
 			panel.add(buttonPanel, BorderLayout.SOUTH);
 			
-			dlg.getContentPane().add(panel);
-			Utilities.packAndCenterWindow(dlg);
-			dlg.setVisible(true);
-		}
-		
-		class CloseHelpDialog implements ActionListener
-		{
-			public CloseHelpDialog(JDialog dlgToUse)
-			{
-				dlg = dlgToUse;
-			}
-			public void actionPerformed(ActionEvent e)
-			{
-				dlg.dispose();
-			}
-			private JDialog dlg;
+			ModalDialogWithSwingContents.show(panel);
 		}
 		
 		private boolean notInEnglishSoExplainUsingEnglishAndOr()
