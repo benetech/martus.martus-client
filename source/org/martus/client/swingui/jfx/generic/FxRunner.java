@@ -51,7 +51,7 @@ public class FxRunner implements Runnable
 			MartusLogger.logException(e);
 			if(!shouldAbortImmediatelyOnError)
 			{
-				stage.getMainWindow().unexpectedErrorDlg(e);
+				stage.unexpectedErrorDlg(e);
 			}
 			System.exit(1);
 		}
@@ -73,6 +73,6 @@ public class FxRunner implements Runnable
 		return stage;
 	}
 
-	private FxInSwingStage stage;
+	private VirtualStage stage;
 	private boolean shouldAbortImmediatelyOnError;
 }
