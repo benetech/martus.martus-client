@@ -48,11 +48,6 @@ public abstract class FxInSwingController extends FxController
 		glassPaneInstaller = new GlassPaneInstaller(this);
 	}
 	
-	public void installGlassPane(Component glassPane)
-	{
-		glassPaneInstaller.installGlassPane(glassPane);
-	}
-
 	protected void showModalPopupStage(Stage popupStage)
 	{
 		Runnable fronter = new Fronter(popupStage);
@@ -63,7 +58,7 @@ public abstract class FxInSwingController extends FxController
 		window.addWindowFocusListener(windowHandler);
 		
 		Component glassPane = new TranslucentWindowObscurer();
-		installGlassPane(glassPane);
+		glassPaneInstaller.installGlassPane(glassPane);
 		GlassPaneMouseHandler glassPaneMouseHandler = new GlassPaneMouseHandler(fronter);
 		glassPane.addMouseListener(glassPaneMouseHandler);
 		
