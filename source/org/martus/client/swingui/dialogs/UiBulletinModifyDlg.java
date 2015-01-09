@@ -93,7 +93,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			bulletinEditorStage = FxRunner.createAndActivateEmbeddedStage(observerToUse, this, bulletinEditorShellController, cssName);
 			view = bulletinEditorShellController;
 			Platform.runLater(() -> safelyPopulateView());
-			getContentPane().add(bulletinEditorStage, BorderLayout.CENTER);
+			getContentPane().add(bulletinEditorStage.getPanel(), BorderLayout.CENTER);
 		}
 		else
 		{
