@@ -104,9 +104,7 @@ import org.martus.client.swingui.filefilters.KeyPairFormatFilter;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.generic.FxModalDialog;
-import org.martus.client.swingui.jfx.generic.FxRunner;
 import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
-import org.martus.client.swingui.jfx.landing.FxInSwingMainStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.setupwizard.SetupWizardStage;
 import org.martus.client.swingui.jfx.welcome.WelcomeStage;
@@ -964,7 +962,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		if(bulletinsTablePane == null)
 			return;
 		Bulletin b = bulletinsTablePane.getSingleSelectedBulletin();
-		if(mainPane == null)
+		if(getMainPane() == null)
 			return;
 		getMainPane().updateEnabledStatuses();
 		getPreviewPane().setCurrentBulletin(b);
@@ -2082,20 +2080,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 		initializeFrame();
 
-		if(UiSession.isJavaFx())
-		{
-			FxInSwingMainStage fxInSwingMainStage = new FxInSwingMainStage(this);
-			mainStage = fxInSwingMainStage;
-			FxRunner fxRunner = new FxRunner(fxInSwingMainStage);
-			fxRunner.setAbortImmediatelyOnError();
-			Platform.runLater(fxRunner);
-			getSwingFrame().setContentPane(fxInSwingMainStage);
-		}
-		else
-		{
-			mainPane = new UiMainPane(this, getUiState());
-			getSwingFrame().setContentPane(mainPane);
-		}
 		statusBar = createStatusBar();
 
 		getTransport().setProgressMeter(getTorProgressMeter());
@@ -2800,15 +2784,8 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		getSession().initalizeUiState(defaultLanguageCode);
 	}
 
-	public UiMainPane getMainPane()
-	{
-		return mainPane;
-	}
-	
-	public FxMainStage getMainStage()
-	{
-		return mainStage;
-	}
+	abstract public UiMainPane getMainPane();
+	abstract public FxMainStage getMainStage();
 
 	public void repaint()
 	{
@@ -2878,9 +2855,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	private static final int BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS = 5*1000;
 
 	private UiSession session;
-
-	private UiMainPane mainPane;
-	private FxMainStage mainStage;
 
 	private java.util.Timer uploader;
 	private java.util.Timer timeoutChecker;

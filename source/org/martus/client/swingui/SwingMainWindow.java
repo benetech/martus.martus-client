@@ -25,9 +25,14 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui;
 
+import javafx.application.Platform;
+
 import javax.swing.JFrame;
 
+import org.martus.client.swingui.jfx.generic.FxRunner;
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
+import org.martus.client.swingui.jfx.landing.FxInSwingMainStage;
+import org.martus.client.swingui.jfx.landing.FxMainStage;
 
 public class SwingMainWindow extends UiMainWindow
 {
@@ -45,6 +50,21 @@ public class SwingMainWindow extends UiMainWindow
 		getSwingFrame().setVisible(true);
 		updateTitle();
 		setWindowSizeAndState();
+
+		if(UiSession.isJavaFx())
+		{
+			FxInSwingMainStage fxInSwingMainStage = new FxInSwingMainStage(this);
+			mainStage = fxInSwingMainStage;
+			FxRunner fxRunner = new FxRunner(fxInSwingMainStage);
+			fxRunner.setAbortImmediatelyOnError();
+			Platform.runLater(fxRunner);
+			getSwingFrame().setContentPane(fxInSwingMainStage);
+		}
+		else
+		{
+			mainPane = new UiMainPane(this, getUiState());
+			getSwingFrame().setContentPane(mainPane);
+		}
 	}
 
 	public StatusBar createStatusBar()
@@ -60,11 +80,25 @@ public class SwingMainWindow extends UiMainWindow
 	{
 		return swingFrame;
 	}
+
+	@Override
+	public UiMainPane getMainPane()
+	{
+		return mainPane;
+	}
 	
+	@Override
+	public FxMainStage getMainStage()
+	{
+		return mainStage;
+	}
+
 	private void updateTitle() 
 	{
 		getSwingFrame().setTitle(getLocalization().getWindowTitle("main"));
 	}
 
 	private JFrame swingFrame;
+	private UiMainPane mainPane;
+	private FxMainStage mainStage;
 }
