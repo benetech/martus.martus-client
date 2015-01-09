@@ -191,7 +191,7 @@ public class Martus
 			if(useSystemLookAndFeel)
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-	        UiMainWindow window = new UiMainWindow();
+	        UiMainWindow window = constructMainWindow();
 	        if(!window.run())
 	        {
 	        	MartusLogger.log("Exiting after run()");
@@ -205,6 +205,11 @@ public class Martus
 		}
 
     }
+
+	public static UiMainWindow constructMainWindow() throws Exception
+	{
+		return new UiMainWindow();
+	}
 
 	private static int findOption(Vector options, String optionText)
 	{
