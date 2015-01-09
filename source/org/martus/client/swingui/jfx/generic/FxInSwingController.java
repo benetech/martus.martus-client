@@ -45,11 +45,11 @@ public abstract class FxInSwingController extends FxController
 	{
 		super(mainWindowToUse);
 
-		glassPaneInstaller = new GlassPaneInstaller(this);
 	}
 	
 	protected void showModalPopupStage(Stage popupStage)
 	{
+		GlassPaneInstaller glassPaneInstaller = new GlassPaneInstaller(this);
 		Runnable fronter = new Fronter(popupStage);
 	
 		Window window = getWindow();
@@ -164,5 +164,4 @@ public abstract class FxInSwingController extends FxController
 		private Stage popupStage;
 	}
 
-	private GlassPaneInstaller glassPaneInstaller;
 }
