@@ -330,7 +330,7 @@ public class EnglishStrings
 "wintitle:FileDialogImportBulletin=Import Record",
 
 "wintitle:LoadSavedSearch=Load Saved Search",
-"wintitle:SaveSearch=Save Search",
+"wintitle:FileDialogSaveSearch=Save Search",
 "wintitle:SearchProgress=Searching...",
 "wintitle:ReportSearchProgress=Searching...",
 "wintitle:LoadingFieldValuesFromAllBulletins=Loading Values...",
