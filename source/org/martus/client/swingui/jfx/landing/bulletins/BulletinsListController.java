@@ -39,6 +39,7 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
@@ -50,6 +51,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -108,7 +110,9 @@ public class BulletinsListController extends AbstractFxLandingContentController 
 
 	private void initializeStatusBar()
 	{
-		statusBar.getChildren().add(getMainWindow().getStatusBar().getFxPane());
+		Pane fxPane = getMainWindow().getStatusBar().getFxPane();
+		ObservableList<Node> children = statusBar.getChildren();
+		children.add(fxPane);
 	}
 
 	private void initalizeItemsTable()
