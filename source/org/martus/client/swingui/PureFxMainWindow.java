@@ -26,15 +26,13 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import javafx.scene.Cursor;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import javax.swing.JFrame;
 
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
+import org.martus.client.swingui.jfx.landing.PureFxMainStage;
 
 public class PureFxMainWindow extends UiMainWindow
 {
@@ -68,11 +66,9 @@ public class PureFxMainWindow extends UiMainWindow
 	}
 
 	@Override
-	protected void initializeFrame()
+	protected void initializeFrame() throws Exception
 	{
-		Parent root = new Button("Hello");
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
+		new PureFxMainStage(this, stage);
 		stage.show();
 	}
 	
