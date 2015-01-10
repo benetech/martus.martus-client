@@ -305,7 +305,7 @@ abstract public class FxController implements Initializable
 	public void showControllerInsideModalDialog(FxPopupController controller, FxController mainAreaController) throws Exception
 	{
 		FxStage popupStage = new FxStage(mainWindow, controller);
-		mainAreaController.setParentWindow(popupStage);
+		mainAreaController.setParentFxStage(popupStage);
 		showControllerInsideModalDialog(popupStage, controller);
 	}
 
@@ -455,14 +455,14 @@ abstract public class FxController implements Initializable
 	{
 	}
 	
-	public void setParentWindow(Window parentWindowToUse)
+	public void setParentFxStage(FxStage parentFxStageToUse)
 	{
-		parentWindow = parentWindowToUse;
+		parentFxStage = parentFxStageToUse;
 	}
 	
 	public Window getParentWindow()
 	{
-		return parentWindow;
+		return parentFxStage;
 	}
 
 	private static final String POPUP_CSS = "Popup.css";
@@ -472,5 +472,5 @@ abstract public class FxController implements Initializable
 	private static int notifyDialogDepth;
 	private FxShellController shellController;
 	private FxController parentController;
-	private Window parentWindow;
+	private FxStage parentFxStage;
 }
