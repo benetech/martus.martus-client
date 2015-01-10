@@ -57,6 +57,7 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.StatusBar;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuFxBulletin;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
@@ -110,7 +111,8 @@ public class BulletinsListController extends AbstractFxLandingContentController 
 
 	private void initializeStatusBar()
 	{
-		Pane fxPane = getMainWindow().getStatusBar().getFxPane();
+		StatusBar actualStatusBar = getMainWindow().getStatusBar();
+		Pane fxPane = actualStatusBar.getFxPane();
 		ObservableList<Node> children = statusBar.getChildren();
 		children.add(fxPane);
 	}
