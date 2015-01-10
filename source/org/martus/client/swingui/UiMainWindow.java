@@ -1719,7 +1719,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		return previewPane.getView().getWidth();
 	}
 
-	public void respondToPreferencesChanges()
+	public void respondToPreferencesChanges() throws Exception
 	{
 		initializeViews();
 		restoreState();
@@ -2087,7 +2087,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		}
 	}
 
-	void initializeViews()
+	void initializeViews() throws Exception
 	{
 		MartusLogger.logBeginProcess("Initializing views");
 
@@ -2108,7 +2108,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		MartusLogger.logEndProcess("Checking server status");
 	}
 
-	abstract protected void initializeFrame();
+	abstract protected void initializeFrame() throws Exception;
 	abstract public StatusBar createStatusBar();
 
 	public ProgressMeterInterface getTorProgressMeter()
