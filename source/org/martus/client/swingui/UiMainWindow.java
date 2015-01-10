@@ -198,7 +198,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 			
 			// Uncomment the call to restrictToOnlyTestServers for test builds which might
 			// generate bad data that we don't want cluttering up production servers
-//			restrictToOnlyTestServers();
+			restrictToOnlyTestServers();
 			
 		}
 		catch(MartusApp.MartusAppInitializationException e)
