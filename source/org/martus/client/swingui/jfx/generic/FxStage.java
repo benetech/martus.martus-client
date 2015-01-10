@@ -25,22 +25,28 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.Window;
+import javafx.stage.WindowEvent;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 
 
-public class FxStage extends Stage implements VirtualStage
+public class FxStage implements VirtualStage
 {
 	public FxStage(UiMainWindow mainWindowToUse, FxPopupController controller)
 	{
 		mainWindow = mainWindowToUse;
+		stage = new Stage();
 		controller.setStage(this);
 
-		setTitle(controller.getDialogTitle());
-		initModality(Modality.APPLICATION_MODAL);
+		stage.setTitle(controller.getDialogTitle());
+		stage.initModality(Modality.APPLICATION_MODAL);
 	}
 
 	@Override
@@ -59,7 +65,7 @@ public class FxStage extends Stage implements VirtualStage
 	@Override
 	public double getWidthAsDouble()
 	{
-		return getWidth();
+		return stage.getWidth();
 	}
 	
 	@Override
@@ -74,5 +80,37 @@ public class FxStage extends Stage implements VirtualStage
 		mainWindow.unexpectedErrorDlg(e);
 	}
 
+	@Override
+	public void close()
+	{
+		stage.close();
+	}
+
+	public void setOnCloseRequest(EventHandler<WindowEvent> closeEventHandler)
+	{
+		stage.setOnCloseRequest(closeEventHandler);
+	}
+
+	public void initStyle(StageStyle style)
+	{
+		stage.initStyle(style);
+	}
+
+	public void setScene(Scene scene)
+	{
+		stage.setScene(scene);
+	}
+
+	public Window getActualStage()
+	{
+		return stage;
+	}
+
+	public void showAndWait()
+	{
+		stage.showAndWait();
+	}
+
 	private UiMainWindow mainWindow;
+	private Stage stage;
 }
