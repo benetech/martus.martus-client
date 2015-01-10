@@ -41,6 +41,7 @@ public class PureFxMainStage implements FxMainStage
 	public PureFxMainStage(UiMainWindow mainWindowToUse, Stage realStage) throws Exception
 	{
 		stage = new FxStage(mainWindowToUse, "", realStage);
+		stage.setOnCloseRequest((event) -> mainWindowToUse.exitNormally());
 		shellController = new FxLandingShellController(stage.getMainWindow());
 		Scene scene = new Scene(new Pane());
 		stage.setScene(scene);
