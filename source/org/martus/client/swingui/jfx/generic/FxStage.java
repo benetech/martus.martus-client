@@ -41,12 +41,17 @@ public class FxStage implements VirtualStage
 {
 	public FxStage(UiMainWindow mainWindowToUse, FxPopupController controller)
 	{
-		mainWindow = mainWindowToUse;
-		stage = new Stage();
+		this(mainWindowToUse, controller.getDialogTitle(), new Stage());
 		controller.setStage(this);
-
-		stage.setTitle(controller.getDialogTitle());
 		stage.initModality(Modality.APPLICATION_MODAL);
+	}
+
+	public FxStage(UiMainWindow mainWindowToUse, String title, Stage stageToUse)
+	{
+		mainWindow = mainWindowToUse;
+		stage = stageToUse;
+		
+		stage.setTitle(title);
 	}
 
 	@Override
@@ -71,7 +76,7 @@ public class FxStage implements VirtualStage
 	@Override
 	public void showCurrentPage() throws Exception
 	{
-		throw new RuntimeException("Not implemented yet");
+		// FIXME: Is this even needed?
 	}
 	
 	@Override
@@ -109,6 +114,11 @@ public class FxStage implements VirtualStage
 	public void showAndWait()
 	{
 		stage.showAndWait();
+	}
+	
+	public UiMainWindow getMainWindow()
+	{
+		return mainWindow;
 	}
 
 	private UiMainWindow mainWindow;
