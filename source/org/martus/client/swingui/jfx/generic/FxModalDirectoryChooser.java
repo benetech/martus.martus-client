@@ -28,22 +28,21 @@ package org.martus.client.swingui.jfx.generic;
 import java.io.File;
 
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Window;
 
 public class FxModalDirectoryChooser
 {
-	public FxModalDirectoryChooser(Window parentWindowToUse)
+	public FxModalDirectoryChooser(FxStage parentStageToUse)
 	{
-		if (parentWindowToUse == null)
-			throw new RuntimeException("Cannot display modal file chooser without a parent window");
+		if (parentStageToUse == null)
+			throw new RuntimeException("Cannot display modal file chooser without a parent stage");
 		
-		parentWindow = parentWindowToUse;
+		parentStage = parentStageToUse;
 		directoryChooser = new DirectoryChooser();
 	}
 	
 	public File showDialog()
 	{
-		return getDirectoryChooser().showDialog(getParentWindow());
+		return getDirectoryChooser().showDialog(parentStage.getActualStage());
 	}
 	
 	public void setTitle(String windowTitle)
@@ -61,11 +60,6 @@ public class FxModalDirectoryChooser
 		return directoryChooser;
 	}
 
-	private Window getParentWindow()
-	{
-		return parentWindow;
-	}
-
-	private Window parentWindow;
+	private FxStage parentStage;
 	private DirectoryChooser directoryChooser;
 }

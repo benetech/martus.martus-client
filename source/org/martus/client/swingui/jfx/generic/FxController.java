@@ -44,8 +44,6 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
@@ -333,7 +331,7 @@ abstract public class FxController implements Initializable
 	    }
 	}
 
-	protected void showModalPopupStage(Stage popupStage)
+	protected void showModalPopupStage(FxStage popupStage)
 	{
 		popupStage.showAndWait();
 	}
@@ -460,7 +458,7 @@ abstract public class FxController implements Initializable
 		parentFxStage = parentFxStageToUse;
 	}
 	
-	public Window getParentWindow()
+	public FxStage getParentWindow()
 	{
 		return parentFxStage;
 	}
