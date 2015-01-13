@@ -52,7 +52,7 @@ abstract public class PureFxStage extends VirtualStage
 		
 		stage.setTitle(title);
 
-		Scene scene = createScene();
+		Scene scene = createEmptyShellScene();
 		setScene(scene);
 	}
 
