@@ -34,10 +34,4 @@ abstract public class FxNonWizardStage extends FxInSwingDialogStage
 		super(mainWindowToUse);
 	}
 
-	@Override
-	public void showCurrentPage() throws Exception
-	{
-		loadAndShowShell();
-	}
-
 }

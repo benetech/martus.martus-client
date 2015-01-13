@@ -66,6 +66,12 @@ public abstract class FxInSwingStage extends VirtualStage
 		panel.setScene(scene);
 	}
 	
+	@Override
+	public void showCurrentPage() throws Exception
+	{
+		loadAndShowShell();
+	}
+
 	public void doAction(ActionDoer doer)
 	{
 		try

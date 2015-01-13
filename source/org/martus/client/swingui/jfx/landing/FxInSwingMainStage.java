@@ -48,12 +48,6 @@ public class FxInSwingMainStage extends FxInSwingStage implements FxMainStage
 	}
 
 	@Override
-	public void showCurrentPage() throws Exception
-	{
-		loadAndShowShell();
-	}
-
-	@Override
 	public void close()
 	{
 		// FIXME: Should we actually close mainWindow here, or 

@@ -43,12 +43,6 @@ public class FxInSwingGenericStage extends FxInSwingStage
 	}
 
 	@Override
-	public void showCurrentPage() throws Exception
-	{
-		loadAndShowShell();
-	}
-
-	@Override
 	protected String getCssName()
 	{
 		return cssName;

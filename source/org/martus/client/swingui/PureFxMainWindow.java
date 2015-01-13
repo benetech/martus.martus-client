@@ -68,7 +68,8 @@ public class PureFxMainWindow extends UiMainWindow
 	protected void initializeFrame() throws Exception
 	{
 		setStatusBar(createStatusBar());
-		new PureFxMainStage(this, stage);
+		PureFxMainStage fxStage = new PureFxMainStage(this, stage);
+		fxStage.showCurrentPage();
 		stage.show();
 	}
 	
