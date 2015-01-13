@@ -37,16 +37,16 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 
 
-public class FxStage implements VirtualStage
+public class PureFxStage implements VirtualStage
 {
-	public FxStage(UiMainWindow mainWindowToUse, FxPopupController controller)
+	public PureFxStage(UiMainWindow mainWindowToUse, FxPopupController controller)
 	{
 		this(mainWindowToUse, controller.getDialogTitle(), new Stage());
 		controller.setStage(this);
 		stage.initModality(Modality.APPLICATION_MODAL);
 	}
 
-	public FxStage(UiMainWindow mainWindowToUse, String title, Stage stageToUse)
+	public PureFxStage(UiMainWindow mainWindowToUse, String title, Stage stageToUse)
 	{
 		mainWindow = mainWindowToUse;
 		stage = stageToUse;

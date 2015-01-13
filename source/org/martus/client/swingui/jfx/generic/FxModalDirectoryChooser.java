@@ -31,7 +31,7 @@ import javafx.stage.DirectoryChooser;
 
 public class FxModalDirectoryChooser
 {
-	public FxModalDirectoryChooser(FxStage parentStageToUse)
+	public FxModalDirectoryChooser(PureFxStage parentStageToUse)
 	{
 		if (parentStageToUse == null)
 			throw new RuntimeException("Cannot display modal file chooser without a parent stage");
@@ -60,6 +60,6 @@ public class FxModalDirectoryChooser
 		return directoryChooser;
 	}
 
-	private FxStage parentStage;
+	private PureFxStage parentStage;
 	private DirectoryChooser directoryChooser;
 }
