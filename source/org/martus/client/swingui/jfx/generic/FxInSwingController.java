@@ -51,7 +51,7 @@ public abstract class FxInSwingController extends FxController
 	{
 		Window window = getWindow();
 
-		GlassPaneInstaller glassPaneInstaller = new GlassPaneInstaller(getWindow());
+		GlassPaneInstaller glassPaneInstaller = new GlassPaneInstaller(window);
 		Runnable fronter = new Fronter(popupStage);
 	
 		DialogWindowHandler windowHandler = new DialogWindowHandler(fronter);
