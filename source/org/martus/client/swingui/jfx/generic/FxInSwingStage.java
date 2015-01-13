@@ -76,6 +76,7 @@ public abstract class FxInSwingStage extends VirtualStage
 		getScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
 	}
 
+	@Override
 	public void setScene(Scene scene)
 	{
 		panel.setScene(scene);

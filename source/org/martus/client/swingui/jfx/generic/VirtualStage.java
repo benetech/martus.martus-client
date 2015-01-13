@@ -27,6 +27,8 @@ package org.martus.client.swingui.jfx.generic;
 
 import java.io.File;
 
+import javafx.scene.Scene;
+
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -50,6 +52,8 @@ public abstract class VirtualStage
 	abstract public double getWidthAsDouble();
 	abstract public void showCurrentPage() throws Exception;
 	abstract protected String getCssName();
+	abstract public void setScene(Scene scene);
+
 
 	protected FxScene createScene() throws Exception
 	{
