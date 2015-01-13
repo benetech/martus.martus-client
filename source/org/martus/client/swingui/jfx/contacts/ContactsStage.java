@@ -70,7 +70,7 @@ public class ContactsStage extends FxNonWizardStage
 		if (!contentController.hasContactsDataChanged())
 			return true;
 		
-		return FxDialogHelper.showConfirmationDialog(mainWindow, "ExitManageContacts", "ExitManageContacts");
+		return FxDialogHelper.showConfirmationDialog(getMainWindow(), "ExitManageContacts", "ExitManageContacts");
 	}
 	
 	private ContactsShellController shellController;
