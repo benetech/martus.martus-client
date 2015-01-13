@@ -46,11 +46,6 @@ public abstract class FxInSwingStage extends VirtualStage
 		panel = new JFXPanel();
 	}
 
-	protected FxScene createScene() throws Exception
-	{
-		return new FxScene(getExternalFxmlDirectory(), getCssName());
-	}
-
 	public void setWindow(Window dialogToUse)
 	{
 		window = dialogToUse;
