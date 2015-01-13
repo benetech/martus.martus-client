@@ -45,7 +45,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxInSwingController;
+import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.setupwizard.step3.FxAdvancedServerStorageSetupController;
 import org.martus.client.swingui.jfx.setupwizard.step3.FxSetupStorageServerController;
@@ -57,7 +57,7 @@ import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class SettingsForServerController extends FxInSwingController
+public class SettingsForServerController extends FxController
 {
 	public SettingsForServerController(UiMainWindow mainWindowToUse)
 	{

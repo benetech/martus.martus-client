@@ -36,12 +36,12 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
 import org.martus.client.swingui.actions.ActionMenuExportMyPublicKey;
 import org.martus.client.swingui.actions.ActionMenuManageContactsWithoutResignIn;
-import org.martus.client.swingui.jfx.generic.FxInSwingController;
+import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
 import org.martus.common.crypto.MartusCrypto;
 
-public class AccountInformationController extends FxInSwingController
+public class AccountInformationController extends FxController
 {
 	public AccountInformationController(UiMainWindow mainWindowToUse)
 	{
