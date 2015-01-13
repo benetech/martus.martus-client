@@ -53,13 +53,18 @@ public abstract class VirtualStage
 	abstract public void showCurrentPage() throws Exception;
 	abstract protected String getCssName();
 	abstract public void setScene(Scene scene);
-
+	abstract public Scene getScene();
 
 	protected FxScene createScene() throws Exception
 	{
 		return new FxScene(getExternalFxmlDirectory(), getCssName());
 	}
 
+	public FxScene getFxScene()
+	{
+		return (FxScene)getScene();
+	}
+	
 	public void setShellController(FxShellController shellController)
 	{
 		this.shellController = shellController;
