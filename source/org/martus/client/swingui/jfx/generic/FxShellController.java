@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public abstract class FxShellController extends FxInSwingController implements FxShellControllerInterface
+public abstract class FxShellController extends FxController implements FxShellControllerInterface
 {
 	public FxShellController(UiMainWindow mainWindowToUse)
 	{
