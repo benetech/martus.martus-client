@@ -68,7 +68,7 @@ public abstract class FxInSwingStage extends VirtualStage
 
 	public void loadAndShowShell() throws Exception
 	{
-		if(scene == null)
+		if(getScene() == null)
 		{
 			scene = createScene();
 			panel.setScene(scene);
