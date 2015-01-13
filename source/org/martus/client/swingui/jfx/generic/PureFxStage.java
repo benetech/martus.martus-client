@@ -36,7 +36,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 
 
-public class PureFxStage implements VirtualStage
+public class PureFxStage extends VirtualStage
 {
 	public PureFxStage(UiMainWindow mainWindowToUse, FxPopupController controller)
 	{
