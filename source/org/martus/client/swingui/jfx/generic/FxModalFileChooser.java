@@ -34,7 +34,7 @@ import javafx.stage.Window;
 
 public class FxModalFileChooser
 {
-	public FxModalFileChooser(FxStage parentStageToUse)
+	public FxModalFileChooser(PureFxStage parentStageToUse)
 	{
 		if (parentStageToUse == null)
 			throw new RuntimeException("Cannot display modal file chooser without a parent window");
@@ -88,6 +88,6 @@ public class FxModalFileChooser
 		return getFileChooser().getSelectedExtensionFilter();
 	}
 	
-	private FxStage parentStage;
+	private PureFxStage parentStage;
 	private FileChooser fileChooser;
 }

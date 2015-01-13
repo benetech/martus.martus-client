@@ -46,12 +46,12 @@ abstract public class FxPopupController extends FxController
 	
 	abstract public void initialize();
 	
-	public void setStage(FxStage stageToUse)
+	public void setStage(PureFxStage stageToUse)
 	{
 		stage = stageToUse;
 	}
 	
-	public FxStage getStage()
+	public PureFxStage getStage()
 	{
 		return stage;
 	}
@@ -68,6 +68,6 @@ abstract public class FxPopupController extends FxController
 
 	abstract public String getDialogTitle();
 
-	private FxStage stage;
+	private PureFxStage stage;
 	private Throwable thrownException;
 }

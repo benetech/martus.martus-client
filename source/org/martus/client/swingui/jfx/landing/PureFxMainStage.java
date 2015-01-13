@@ -32,7 +32,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxStage;
+import org.martus.client.swingui.jfx.generic.PureFxStage;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 
@@ -40,7 +40,7 @@ public class PureFxMainStage implements FxMainStage
 {
 	public PureFxMainStage(UiMainWindow mainWindowToUse, Stage realStage) throws Exception
 	{
-		stage = new FxStage(mainWindowToUse, "", realStage);
+		stage = new PureFxStage(mainWindowToUse, "", realStage);
 		stage.setOnCloseRequest((event) -> mainWindowToUse.exitNormally());
 		shellController = new FxLandingShellController(stage.getMainWindow());
 		Scene scene = new Scene(new Pane());
@@ -77,6 +77,6 @@ public class PureFxMainStage implements FxMainStage
 		return null;
 	}
 	
-	private FxStage stage;
+	private PureFxStage stage;
 	private FxLandingShellController shellController;
 }

@@ -296,18 +296,18 @@ abstract public class FxController implements Initializable
 
 	public void showControllerInsideModalDialog(FxPopupController controller) throws Exception
 	{
-		FxStage popupStage = new FxStage(mainWindow, controller);
+		PureFxStage popupStage = new PureFxStage(mainWindow, controller);
 		showControllerInsideModalDialog(popupStage, controller);
 	}
 	
 	public void showControllerInsideModalDialog(FxPopupController controller, FxController mainAreaController) throws Exception
 	{
-		FxStage popupStage = new FxStage(mainWindow, controller);
+		PureFxStage popupStage = new PureFxStage(mainWindow, controller);
 		mainAreaController.setParentFxStage(popupStage);
 		showControllerInsideModalDialog(popupStage, controller);
 	}
 
-	private void showControllerInsideModalDialog(FxStage popupStage, FxPopupController controller) throws Exception, IOException
+	private void showControllerInsideModalDialog(PureFxStage popupStage, FxPopupController controller) throws Exception, IOException
 	{
 		FXMLLoader fl = new FXMLLoader();
 		fl.setResources(new MartusResourceBundle(getLocalization()));
@@ -331,7 +331,7 @@ abstract public class FxController implements Initializable
 	    }
 	}
 
-	protected void showModalPopupStage(FxStage popupStage)
+	protected void showModalPopupStage(PureFxStage popupStage)
 	{
 		popupStage.showAndWait();
 	}
@@ -457,12 +457,12 @@ abstract public class FxController implements Initializable
 	{
 	}
 	
-	public void setParentFxStage(FxStage parentFxStageToUse)
+	public void setParentFxStage(PureFxStage parentFxStageToUse)
 	{
 		parentFxStage = parentFxStageToUse;
 	}
 	
-	public FxStage getParentWindow()
+	public PureFxStage getParentWindow()
 	{
 		return parentFxStage;
 	}
@@ -474,5 +474,5 @@ abstract public class FxController implements Initializable
 	private static int notifyDialogDepth;
 	private FxShellController shellController;
 	private FxController parentController;
-	private FxStage parentFxStage;
+	private PureFxStage parentFxStage;
 }
