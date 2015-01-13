@@ -84,12 +84,12 @@ abstract public class FxController implements Initializable
 	{
 	}
 	
-	public FxShellController getShellController()
+	public FxShellControllerInterface getShellController()
 	{
 		return shellController;
 	}
 	
-	public void setShellController(FxShellController shellControllerToUse)
+	public void setShellController(FxShellControllerInterface shellControllerToUse)
 	{
 		shellController = shellControllerToUse;
 	}
@@ -468,7 +468,7 @@ abstract public class FxController implements Initializable
 
 	private UiMainWindow mainWindow;
 	private static int notifyDialogDepth;
-	private FxShellController shellController;
+	private FxShellControllerInterface shellController;
 	private FxController parentController;
 	private FxStage parentFxStage;
 }

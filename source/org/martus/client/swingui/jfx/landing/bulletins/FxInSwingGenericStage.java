@@ -29,11 +29,11 @@ import java.awt.Window;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingStage;
-import org.martus.client.swingui.jfx.generic.FxShellController;
+import org.martus.client.swingui.jfx.generic.FxShellControllerInterface;
 
 public class FxInSwingGenericStage extends FxInSwingStage
 {
-	public FxInSwingGenericStage(UiMainWindow mainWindowToUse, Window windowToUse, FxShellController shellController, String cssNameToUse)
+	public FxInSwingGenericStage(UiMainWindow mainWindowToUse, Window windowToUse, FxShellControllerInterface shellController, String cssNameToUse)
 	{
 		super(mainWindowToUse);
 	

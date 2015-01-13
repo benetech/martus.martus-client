@@ -110,12 +110,12 @@ public abstract class FxInSwingStage implements VirtualStage
 		return getMainWindow().getApp().getFxmlDirectory();
 	}
 
-	public FxShellController getShellController()
+	public FxShellControllerInterface getShellController()
 	{
 		return shellController;
 	}
 
-	public void setShellController(FxShellController controller)
+	public void setShellController(FxShellControllerInterface controller)
 	{
 		shellController = controller;
 	}
@@ -203,5 +203,5 @@ public abstract class FxInSwingStage implements VirtualStage
 	private JFXPanel panel;
 	private FxScene scene;
 	private Window window;
-	private FxShellController shellController;
+	private FxShellControllerInterface shellController;
 }
