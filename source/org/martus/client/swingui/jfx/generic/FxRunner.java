@@ -62,7 +62,7 @@ public class FxRunner implements Runnable
 		shouldAbortImmediatelyOnError = true;
 	}
 
-	public static FxInSwingGenericStage createAndActivateEmbeddedStage(UiMainWindow observerToUse, Window windowToUse, FxShellControllerInterface shellController, String cssName)
+	public static FxInSwingGenericStage createAndActivateEmbeddedStage(UiMainWindow observerToUse, Window windowToUse, FxShellController shellController, String cssName)
 	{
 		FxInSwingGenericStage stage = new FxInSwingGenericStage(observerToUse, windowToUse, shellController, cssName);
 		
