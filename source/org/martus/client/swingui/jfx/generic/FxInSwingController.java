@@ -49,7 +49,8 @@ public abstract class FxInSwingController extends FxController
 	
 	protected void showModalPopupStage(Stage popupStage)
 	{
-		Window window = getWindow();
+		FxInSwingStage swingStage = (FxInSwingStage) getStage();
+		Window window = swingStage.getWindow();
 
 		GlassPaneInstaller glassPaneInstaller = new GlassPaneInstaller(window);
 		Runnable fronter = new Fronter(popupStage);
@@ -79,12 +80,6 @@ public abstract class FxInSwingController extends FxController
 			glassPane.setVisible(false);
 		    MartusLogger.log("Glass pane is now invisible");
 		}
-	}
-
-	private Window getWindow()
-	{
-		FxInSwingStage swingStage = (FxInSwingStage) getStage();
-		return swingStage.getWindow();
 	}
 
 	protected static class DialogWindowHandler extends WindowAdapter
