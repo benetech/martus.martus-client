@@ -51,11 +51,6 @@ public abstract class FxInSwingStage extends VirtualStage
 		return new FxScene(getExternalFxmlDirectory(), getCssName());
 	}
 
-	public FxScene getFxScene()
-	{
-		return scene;
-	}
-	
 	public void setWindow(Window dialogToUse)
 	{
 		window = dialogToUse;
@@ -83,7 +78,7 @@ public abstract class FxInSwingStage extends VirtualStage
 		Parent shellContents = getShellController().createContents();
 
 		scene.setRoot(shellContents);
-		getFxScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
+		scene.applyStyleSheet(getLocalization().getCurrentLanguageCode());
 	}
 	
 	public void doAction(ActionDoer doer)
