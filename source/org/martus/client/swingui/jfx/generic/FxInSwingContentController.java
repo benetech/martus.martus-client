@@ -33,7 +33,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.common.MartusLogger;
 
-abstract public class FxInSwingContentController extends FxInSwingController
+abstract public class FxInSwingContentController extends FxController
 {
 	public FxInSwingContentController(UiMainWindow mainWindowToUse)
 	{
