@@ -371,6 +371,9 @@ abstract public class FxController implements Initializable
 	public void doAction(ActionDoer doer)
 	{
 		VirtualStage stage = getStage();
+		if(stage == null)
+			MartusLogger.log("Controller has no stage: " + getClass().getName());
+		
 		stage.doAction(doer);
 	}
 
