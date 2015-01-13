@@ -50,6 +50,7 @@ import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxModalDirectoryChooser;
 import org.martus.client.swingui.jfx.generic.FxModalFileChooser;
+import org.martus.client.swingui.jfx.generic.PureFxStage;
 import org.martus.clientside.FormatFilter;
 
 public class ExportItemsController extends FxController
@@ -237,18 +238,19 @@ public class ExportItemsController extends FxController
 	protected File getFileSaveLocation()
 	{
 		MartusLocalization localization = getLocalization();
+		PureFxStage parentWindow = getParentWindow();
 		
 		//NOTE: DirectoryChooser and FileChooser are unfortunately derived from Object.
 		if(showDirectoryOnly())
 		{
-			FxModalDirectoryChooser directoryChooser = new FxModalDirectoryChooser(getParentWindow());
+			FxModalDirectoryChooser directoryChooser = new FxModalDirectoryChooser(parentWindow);
 			directoryChooser.setTitle(localization.getWindowTitle("FolderSelectDialogExport"));
 			directoryChooser.setInitialDirectory(exportFolder);
 			
 			return directoryChooser.showDialog();
 		}
 		
-		FxModalFileChooser fileChooser = new FxModalFileChooser(getParentWindow());
+		FxModalFileChooser fileChooser = new FxModalFileChooser(parentWindow);
 		fileChooser.setTitle(localization.getWindowTitle("FileSaveDialogExport"));
 		fileChooser.setInitialDirectory(exportFolder);
 		File currentUniqueFile = getExportFileOrFolder();
