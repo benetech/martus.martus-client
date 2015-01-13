@@ -297,11 +297,6 @@ abstract public class FxController implements Initializable
 	public void showControllerInsideModalDialog(FxPopupController controller) throws Exception
 	{
 		PureFxStage popupStage = new PureFxDialogStage(mainWindow, controller);
-		showControllerInsideModalDialog(popupStage, controller);
-	}
-	
-	private void showControllerInsideModalDialog(PureFxStage popupStage, FxPopupController controller) throws Exception, IOException
-	{
 		FXMLLoader fl = new FXMLLoader();
 		fl.setResources(new MartusResourceBundle(getLocalization()));
 		fl.setController(controller);
@@ -309,21 +304,21 @@ abstract public class FxController implements Initializable
 		fl.setLocation(fxmlUrl);
 		fl.load();
 		Parent root = fl.getRoot();
-
+		
 		Scene scene = new Scene(root);
 		scene.setNodeOrientation(FxScene.getNodeOrientationBasedOnLanguage());
 		File fxmlDir = getApp().getFxmlDirectory();
 		FxController.applyStyleSheets(scene.getStylesheets(), fxmlDir, getLocalization().getCurrentLanguageCode(), POPUP_CSS);
 		popupStage.setScene(scene);
-	    showModalPopupStage(popupStage);
-	    MartusLogger.log("Back from showModalPopupStage");
-	    if(controller.getThrownException() != null)
-	    {
+		showModalPopupStage(popupStage);
+		MartusLogger.log("Back from showModalPopupStage");
+		if(controller.getThrownException() != null)
+		{
 		    MartusLogger.log("Re-throwing exception");
-	    	throw new Exception(controller.getThrownException());
-	    }
+			throw new Exception(controller.getThrownException());
+		}
 	}
-
+	
 	protected void showModalPopupStage(PureFxStage popupStage)
 	{
 		popupStage.showAndWait();
