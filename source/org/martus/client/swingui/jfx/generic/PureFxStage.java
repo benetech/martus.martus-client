@@ -103,6 +103,7 @@ abstract public class PureFxStage extends VirtualStage
 		stage.initStyle(style);
 	}
 
+	@Override
 	public void setScene(Scene scene)
 	{
 		stage.setScene(scene);
