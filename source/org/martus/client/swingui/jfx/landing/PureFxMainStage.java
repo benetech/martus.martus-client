@@ -32,6 +32,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.PureFxStage;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
@@ -42,7 +43,7 @@ public class PureFxMainStage extends PureFxStage implements FxMainStage
 	{
 		super(mainWindowToUse, "", realStage);
 		getActualStage().setOnCloseRequest((event) -> getMainWindow().exitNormally());
-		shellController = new FxLandingShellController(getMainWindow());
+		setShellController(new FxLandingShellController(getMainWindow()));
 		Scene scene = new Scene(new Pane());
 		getActualStage().setScene(scene);
 		Platform.runLater(() -> initializeContents());
@@ -53,7 +54,7 @@ public class PureFxMainStage extends PureFxStage implements FxMainStage
 		try
 		{
 			showCurrentPage();
-			Parent shellContents = shellController.createContents();
+			Parent shellContents = getShellController().createContents();
 			Scene scene = getActualStage().getScene();
 			scene.setRoot(shellContents);
 		}
@@ -77,5 +78,15 @@ public class PureFxMainStage extends PureFxStage implements FxMainStage
 		return null;
 	}
 	
-	private FxLandingShellController shellController;
+	public void setShellController(FxShellController shellController)
+	{
+		this.shellController = shellController;
+	}
+	
+	public FxShellController getShellController()
+	{
+		return shellController;
+	}
+	
+	private FxShellController shellController;
 }
