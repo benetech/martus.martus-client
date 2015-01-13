@@ -64,7 +64,7 @@ public abstract class FxInSwingStage extends VirtualStage
 	{
 		if(getScene() == null)
 		{
-			scene = createScene();
+			FxScene scene = createScene();
 			panel.setScene(scene);
 		}
 		
@@ -139,6 +139,5 @@ public abstract class FxInSwingStage extends VirtualStage
 	}
 	
 	private JFXPanel panel;
-	private FxScene scene;
 	private Window window;
 }
