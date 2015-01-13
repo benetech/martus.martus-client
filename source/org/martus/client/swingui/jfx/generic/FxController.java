@@ -458,7 +458,7 @@ abstract public class FxController implements Initializable
 	
 	public PureFxStage getParentWindow()
 	{
-		return (PureFxStage)getShellController().getStage();
+		return (PureFxStage)getStage();
 	}
 
 	private static final String POPUP_CSS = "Popup.css";
