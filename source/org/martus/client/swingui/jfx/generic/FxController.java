@@ -296,13 +296,13 @@ abstract public class FxController implements Initializable
 
 	public void showControllerInsideModalDialog(FxPopupController controller) throws Exception
 	{
-		PureFxStage popupStage = new PureFxStage(mainWindow, controller);
+		PureFxStage popupStage = new PureFxDialogStage(mainWindow, controller);
 		showControllerInsideModalDialog(popupStage, controller);
 	}
 	
 	public void showControllerInsideModalDialog(FxPopupController controller, FxController mainAreaController) throws Exception
 	{
-		PureFxStage popupStage = new PureFxStage(mainWindow, controller);
+		PureFxStage popupStage = new PureFxDialogStage(mainWindow, controller);
 		mainAreaController.setParentFxStage(popupStage);
 		showControllerInsideModalDialog(popupStage, controller);
 	}

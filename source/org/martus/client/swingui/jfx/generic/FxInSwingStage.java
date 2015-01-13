@@ -51,7 +51,6 @@ public abstract class FxInSwingStage extends VirtualStage
 		return new FxScene(getExternalFxmlDirectory(), getCssName());
 	}
 
-	abstract protected String getCssName();
 	public FxScene getFxScene()
 	{
 		return scene;

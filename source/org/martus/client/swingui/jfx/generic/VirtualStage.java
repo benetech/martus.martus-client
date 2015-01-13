@@ -49,6 +49,7 @@ public abstract class VirtualStage
 	abstract public void logAndNotifyUnexpectedError(Exception e);
 	abstract public double getWidthAsDouble();
 	abstract public void showCurrentPage() throws Exception;
+	abstract protected String getCssName();
 
 	public void setShellController(FxShellController shellController)
 	{
