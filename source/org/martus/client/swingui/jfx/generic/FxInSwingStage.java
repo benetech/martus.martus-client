@@ -65,7 +65,7 @@ public abstract class FxInSwingStage extends VirtualStage
 		if(getScene() == null)
 		{
 			FxScene scene = createScene();
-			panel.setScene(scene);
+			setScene(scene);
 		}
 		
 		getShellController().setStage(this);
@@ -73,6 +73,11 @@ public abstract class FxInSwingStage extends VirtualStage
 
 		getScene().setRoot(shellContents);
 		getScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
+	}
+
+	public void setScene(FxScene scene)
+	{
+		panel.setScene(scene);
 	}
 	
 	public void doAction(ActionDoer doer)
