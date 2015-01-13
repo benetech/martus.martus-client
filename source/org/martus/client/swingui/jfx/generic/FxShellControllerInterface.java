@@ -27,7 +27,7 @@ package org.martus.client.swingui.jfx.generic;
 
 import javafx.scene.Parent;
 
-public abstract interface FxShellController 
+public abstract interface FxShellControllerInterface 
 {
 	public VirtualStage getStage();
 	public void setStage(VirtualStage stageToUse);
