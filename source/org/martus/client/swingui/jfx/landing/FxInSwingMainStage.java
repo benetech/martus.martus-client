@@ -27,7 +27,6 @@ package org.martus.client.swingui.jfx.landing;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingStage;
-import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 
@@ -38,7 +37,7 @@ public class FxInSwingMainStage extends FxInSwingStage implements FxMainStage
 		super(mainWindowToUse);
 		setWindow(getMainWindow().getSwingFrame());
 		
-		shellController = new FxLandingShellController(getMainWindow());
+		FxLandingShellController shellController = new FxLandingShellController(getMainWindow());
 		setShellController(shellController);
 	}
 
@@ -73,10 +72,6 @@ public class FxInSwingMainStage extends FxInSwingStage implements FxMainStage
 
 	private FxLandingShellController getLandingShellController()
 	{
-		return (FxLandingShellController)shellController;
+		return (FxLandingShellController)getShellController();
 	}
-
-	private FxShellController shellController;
-
-
 }
