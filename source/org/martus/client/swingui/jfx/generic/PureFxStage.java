@@ -44,9 +44,6 @@ abstract public class PureFxStage extends VirtualStage
 		this(mainWindowToUse, controller.getDialogTitle(), new Stage());
 		controller.setStage(this);
 		getActualStage().initModality(Modality.APPLICATION_MODAL);
-		
-		Scene scene = new Scene(new Pane());
-		setScene(scene);
 	}
 
 	public PureFxStage(UiMainWindow mainWindowToUse, String title, Stage stageToUse)
@@ -55,6 +52,9 @@ abstract public class PureFxStage extends VirtualStage
 		stage = stageToUse;
 		
 		stage.setTitle(title);
+
+		Scene scene = new Scene(new Pane());
+		setScene(scene);
 	}
 
 	@Override
