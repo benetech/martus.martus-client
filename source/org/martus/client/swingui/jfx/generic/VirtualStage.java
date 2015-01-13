@@ -47,7 +47,6 @@ public abstract class VirtualStage
 	abstract public void logAndNotifyUnexpectedError(Exception e);
 	abstract public double getWidthAsDouble();
 	abstract public void showCurrentPage() throws Exception;
-	abstract public void unexpectedErrorDlg(Exception e);
 
 	public void setShellController(FxShellController shellController)
 	{
@@ -67,6 +66,11 @@ public abstract class VirtualStage
 	public MartusLocalization getLocalization()
 	{
 		return getMainWindow().getLocalization();
+	}
+
+	public void unexpectedErrorDlg(Exception e)
+	{
+		getMainWindow().unexpectedErrorDlg(e);
 	}
 
 	private UiMainWindow mainWindow;
