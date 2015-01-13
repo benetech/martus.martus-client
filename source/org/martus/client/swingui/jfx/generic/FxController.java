@@ -253,7 +253,7 @@ abstract public class FxController implements Initializable
 			String yesButtonText = localization.getButtonLabel(yesButtonTag);
 			String noButtonText = localization.getButtonLabel(noButtonTag);
 			PopupConfirmationController popupController = new PopupConfirmationController(getMainWindow(), titleText, yesButtonText, noButtonText, mainAreaController);
-			showControllerInsideModalDialog(popupController, mainAreaController);
+			showControllerInsideModalDialog(popupController);
 			return popupController.wasYesPressed();
 		} 
 		catch (Exception e)
@@ -300,12 +300,6 @@ abstract public class FxController implements Initializable
 		showControllerInsideModalDialog(popupStage, controller);
 	}
 	
-	public void showControllerInsideModalDialog(FxPopupController controller, FxController mainAreaController) throws Exception
-	{
-		PureFxStage popupStage = new PureFxDialogStage(mainWindow, controller);
-		showControllerInsideModalDialog(popupStage, controller);
-	}
-
 	private void showControllerInsideModalDialog(PureFxStage popupStage, FxPopupController controller) throws Exception, IOException
 	{
 		FXMLLoader fl = new FXMLLoader();
