@@ -30,7 +30,6 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -106,7 +105,7 @@ public class PureFxStage implements VirtualStage
 		stage.setScene(scene);
 	}
 
-	public Window getActualStage()
+	public Stage getActualStage()
 	{
 		return stage;
 	}
