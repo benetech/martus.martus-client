@@ -41,7 +41,7 @@ public class FxMartus extends Application
 	@Override
 	public void start(Stage stage) throws Exception
 	{
-		PureFxMainWindow.stage = stage;
+		PureFxMainWindow.setStage(stage);
 		Martus.run();
 	}
 }
