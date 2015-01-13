@@ -38,18 +38,18 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	{
 		super(mainWindowToUse);
 		
-		visitedWizardPagesStack = new Stack<FxInSwingContentController>();
+		visitedWizardPagesStack = new Stack<FxContentController>();
 
 		setShellController(new FxSetupWizardShellController(getMainWindow()));
 		setCurrentController(getFirstController());
 	}
 	
-	public FxInSwingContentController getCurrentController()
+	public FxContentController getCurrentController()
 	{
 		return currentContentController;
 	}
 
-	public void setCurrentController(FxInSwingContentController contentControllerToUse)
+	public void setCurrentController(FxContentController contentControllerToUse)
 	{
 		currentContentController = contentControllerToUse;
 	}
@@ -73,9 +73,9 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 	{
 		try
 		{
-			FxInSwingContentController currentController = getCurrentController();
+			FxContentController currentController = getCurrentController();
 			AbstractFxSetupWizardContentController contentPaneController = (AbstractFxSetupWizardContentController) currentController;
-			FxInSwingContentController nextController = contentPaneController.getNextController();
+			FxContentController nextController = contentPaneController.getNextController();
 			visitedWizardPagesStack.push(currentController);
 			if(nextController == null)
 			{
@@ -151,12 +151,12 @@ abstract public class FxWizardStage extends FxInSwingDialogStage
 		return (FxWizardShellController)getShellController();
 	}
 	
-	abstract protected FxInSwingContentController getFirstController();
+	abstract protected FxContentController getFirstController();
 
-	private Stack<FxInSwingContentController> visitedWizardPagesStack;
+	private Stack<FxContentController> visitedWizardPagesStack;
 
 	private String serverAvailibilityState;
-	private FxInSwingContentController currentContentController;
+	private FxContentController currentContentController;
 
 	private static final String SERVER_STATE_NOT_INITIALIZED = null;
 	private static final String SERVER_STATE_NOT_AVAILABLE = "IsNotAvailable";

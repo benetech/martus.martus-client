@@ -28,7 +28,7 @@ package org.martus.client.swingui.jfx.generic;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public abstract class DialogWithOkCancelContentController extends FxInSwingContentController
+public abstract class DialogWithOkCancelContentController extends FxContentController
 {
 	public DialogWithOkCancelContentController(UiMainWindow mainWindowToUse)
 	{
