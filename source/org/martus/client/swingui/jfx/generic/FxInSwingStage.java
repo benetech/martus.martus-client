@@ -30,6 +30,7 @@ import java.awt.Window;
 
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 import javax.swing.JDialog;
 import javax.swing.SwingUtilities;
@@ -75,7 +76,7 @@ public abstract class FxInSwingStage extends VirtualStage
 		getScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
 	}
 
-	public void setScene(FxScene scene)
+	public void setScene(Scene scene)
 	{
 		panel.setScene(scene);
 	}
