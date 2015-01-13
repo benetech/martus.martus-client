@@ -28,7 +28,6 @@ package org.martus.client.swingui.jfx.landing;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -43,8 +42,6 @@ public class PureFxMainStage extends PureFxStage implements FxMainStage
 		super(mainWindowToUse, "", realStage);
 		getActualStage().setOnCloseRequest((event) -> getMainWindow().exitNormally());
 		setShellController(new FxLandingShellController(getMainWindow()));
-		Scene scene = new Scene(new Pane());
-		getActualStage().setScene(scene);
 		Platform.runLater(() -> initializeContents());
 	}
 
