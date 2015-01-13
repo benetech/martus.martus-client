@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.generic;
 
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -42,7 +43,10 @@ abstract public class PureFxStage extends VirtualStage
 	{
 		this(mainWindowToUse, controller.getDialogTitle(), new Stage());
 		controller.setStage(this);
-		stage.initModality(Modality.APPLICATION_MODAL);
+		getActualStage().initModality(Modality.APPLICATION_MODAL);
+		
+		Scene scene = new Scene(new Pane());
+		getActualStage().setScene(scene);
 	}
 
 	public PureFxStage(UiMainWindow mainWindowToUse, String title, Stage stageToUse)
