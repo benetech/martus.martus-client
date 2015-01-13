@@ -36,35 +36,30 @@ import org.martus.client.swingui.jfx.generic.PureFxStage;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 
-public class PureFxMainStage implements FxMainStage
+public class PureFxMainStage extends PureFxStage implements FxMainStage
 {
 	public PureFxMainStage(UiMainWindow mainWindowToUse, Stage realStage) throws Exception
 	{
-		stage = new PureFxStage(mainWindowToUse, "", realStage);
-		getActualStage().setOnCloseRequest((event) -> mainWindowToUse.exitNormally());
-		shellController = new FxLandingShellController(getActualStage().getMainWindow());
+		super(mainWindowToUse, "", realStage);
+		getActualStage().setOnCloseRequest((event) -> getMainWindow().exitNormally());
+		shellController = new FxLandingShellController(getMainWindow());
 		Scene scene = new Scene(new Pane());
 		getActualStage().setScene(scene);
 		Platform.runLater(() -> initializeContents());
 	}
 
-	public PureFxStage getActualStage()
-	{
-		return stage;
-	}
-	
 	private void initializeContents()
 	{
 		try
 		{
-			getActualStage().showCurrentPage();
+			showCurrentPage();
 			Parent shellContents = shellController.createContents();
-			Scene scene = getActualStage().getActualStage().getScene();
+			Scene scene = getActualStage().getScene();
 			scene.setRoot(shellContents);
 		}
 		catch(Exception e)
 		{
-			getActualStage().getMainWindow().unexpectedErrorDlg(e);
+			getMainWindow().unexpectedErrorDlg(e);
 		}
 	}
 
@@ -82,6 +77,5 @@ public class PureFxMainStage implements FxMainStage
 		return null;
 	}
 	
-	private PureFxStage stage;
 	private FxLandingShellController shellController;
 }
