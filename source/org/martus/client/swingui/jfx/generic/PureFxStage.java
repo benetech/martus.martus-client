@@ -46,7 +46,7 @@ abstract public class PureFxStage extends VirtualStage
 		getActualStage().initModality(Modality.APPLICATION_MODAL);
 		
 		Scene scene = new Scene(new Pane());
-		getActualStage().setScene(scene);
+		setScene(scene);
 	}
 
 	public PureFxStage(UiMainWindow mainWindowToUse, String title, Stage stageToUse)
