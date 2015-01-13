@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.generic;
 
 import java.io.File;
 
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import org.martus.client.core.MartusApp;
@@ -93,6 +94,21 @@ public abstract class VirtualStage
 	public File getExternalFxmlDirectory()
 	{
 		return getMainWindow().getApp().getFxmlDirectory();
+	}
+
+	public void loadAndShowShell() throws Exception
+	{
+		if(getScene() == null)
+		{
+			FxScene scene = createScene();
+			setScene(scene);
+		}
+		
+		getShellController().setStage(this);
+		Parent shellContents = getShellController().createContents();
+	
+		getScene().setRoot(shellContents);
+		getFxScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
 	}
 
 	private UiMainWindow mainWindow;
