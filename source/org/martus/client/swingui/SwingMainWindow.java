@@ -47,6 +47,7 @@ public class SwingMainWindow extends UiMainWindow
 	@Override
 	protected void initializeFrame()
 	{
+
 		swingFrame = new MainSwingFrame(this);
 		UiMainWindow.updateIcon(getSwingFrame());
 		setCurrentActiveFrame(getSwingFrame());
@@ -68,9 +69,10 @@ public class SwingMainWindow extends UiMainWindow
 			mainPane = new UiMainPane(this, getUiState());
 			getSwingFrame().setContentPane(mainPane);
 		}
+
+		setStatusBar(createStatusBar());
 	}
 
-	@Override
 	public StatusBar createStatusBar()
 	{
 		if(UiSession.isJavaFx())

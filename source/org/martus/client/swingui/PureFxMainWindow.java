@@ -41,7 +41,6 @@ public class PureFxMainWindow extends UiMainWindow
 		super();
 	}
 
-	@Override
 	public StatusBar createStatusBar()
 	{
 		return new FxStatusBar(getLocalization());
@@ -68,6 +67,7 @@ public class PureFxMainWindow extends UiMainWindow
 	@Override
 	protected void initializeFrame() throws Exception
 	{
+		setStatusBar(createStatusBar());
 		new PureFxMainStage(this, stage);
 		stage.show();
 	}

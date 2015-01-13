@@ -2093,8 +2093,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 		initializeFrame();
 
-		statusBar = createStatusBar();
-
 		getTransport().setProgressMeter(getTorProgressMeter());
 		// NOTE: re-start Tor here in case it was turned on in the wizard
 		getApp().startOrStopTorAsRequested();
@@ -2109,7 +2107,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	}
 
 	abstract protected void initializeFrame() throws Exception;
-	abstract public StatusBar createStatusBar();
 
 	public ProgressMeterInterface getTorProgressMeter()
 	{
@@ -2831,6 +2828,11 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	public StatusBar getStatusBar()
 	{
 		return statusBar;
+	}
+	
+	protected void setStatusBar(StatusBar newStatusBar)
+	{
+		statusBar = newStatusBar;
 	}
 
 	private FolderSplitPane getFolderSplitter()
