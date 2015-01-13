@@ -296,7 +296,6 @@ abstract public class FxController implements Initializable
 
 	public void showControllerInsideModalDialog(FxPopupController controller) throws Exception
 	{
-		PureFxStage popupStage = new PureFxDialogStage(mainWindow, controller);
 		FXMLLoader fl = new FXMLLoader();
 		fl.setResources(new MartusResourceBundle(getLocalization()));
 		fl.setController(controller);
@@ -309,6 +308,8 @@ abstract public class FxController implements Initializable
 		scene.setNodeOrientation(FxScene.getNodeOrientationBasedOnLanguage());
 		File fxmlDir = getApp().getFxmlDirectory();
 		FxController.applyStyleSheets(scene.getStylesheets(), fxmlDir, getLocalization().getCurrentLanguageCode(), POPUP_CSS);
+
+		PureFxStage popupStage = new PureFxDialogStage(mainWindow, controller);
 		popupStage.setScene(scene);
 		showModalPopupStage(popupStage);
 		MartusLogger.log("Back from showModalPopupStage");
