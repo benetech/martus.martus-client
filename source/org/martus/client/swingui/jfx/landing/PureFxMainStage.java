@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
-import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -42,7 +41,7 @@ public class PureFxMainStage extends PureFxStage implements FxMainStage
 		super(mainWindowToUse, "", realStage);
 		getActualStage().setOnCloseRequest((event) -> getMainWindow().exitNormally());
 		setShellController(new FxLandingShellController(getMainWindow()));
-		Platform.runLater(() -> initializeContents());
+		initializeContents();
 	}
 
 	private void initializeContents()
