@@ -32,10 +32,10 @@ import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuMultiDiskBackupMyKeyPair;
-import org.martus.client.swingui.jfx.generic.FxInSwingController;
+import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.setupwizard.step6.FxSetupBackupYourKeyController;
 
-public class KeyBackupController extends FxInSwingController
+public class KeyBackupController extends FxController
 {
 	public KeyBackupController(UiMainWindow mainWindowToUse)
 	{

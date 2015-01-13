@@ -32,9 +32,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxInSwingController;
+import org.martus.client.swingui.jfx.generic.FxController;
 
-public class SettingsForTorController extends FxInSwingController
+public class SettingsForTorController extends FxController
 {
 	public SettingsForTorController(UiMainWindow mainWindowToUse)
 	{

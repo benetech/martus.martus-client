@@ -69,7 +69,6 @@ import org.martus.client.swingui.jfx.common.FxImportFormTemplateFromMyContactsPo
 import org.martus.client.swingui.jfx.common.FxSetupFormTemplateFromNewContactPopupController;
 import org.martus.client.swingui.jfx.common.TemplatePropertiesController;
 import org.martus.client.swingui.jfx.generic.FxController;
-import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.Exceptions.ServerNotAvailableException;
@@ -85,7 +84,7 @@ import org.martus.util.TokenReplacement;
 import org.martus.util.UnicodeReader;
 import org.martus.util.xml.SimpleXmlParser;
 
-public class ManageTemplatesController extends FxInSwingController
+public class ManageTemplatesController extends FxController
 {
 	public ManageTemplatesController(UiMainWindow mainWindowToUse)
 	{

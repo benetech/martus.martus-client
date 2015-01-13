@@ -44,7 +44,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.generic.DialogWithNoButtonsShellController;
 import org.martus.client.swingui.jfx.generic.FxController;
-import org.martus.client.swingui.jfx.generic.FxInSwingController;
 import org.martus.client.swingui.jfx.generic.data.FxBindingHelpers;
 import org.martus.client.swingui.jfx.landing.general.SelectTemplateController;
 import org.martus.common.ContactKeys;
@@ -54,7 +53,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.util.TokenReplacement;
 
-public class BulletinEditorHeaderController extends FxInSwingController
+public class BulletinEditorHeaderController extends FxController
 {
 	public BulletinEditorHeaderController(UiMainWindow mainWindowToUse)
 	{

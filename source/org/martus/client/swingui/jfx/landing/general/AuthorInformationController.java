@@ -35,9 +35,9 @@ import javafx.scene.control.TextField;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxInSwingController;
+import org.martus.client.swingui.jfx.generic.FxController;
 
-public class AuthorInformationController extends FxInSwingController
+public class AuthorInformationController extends FxController
 {
 	public AuthorInformationController(UiMainWindow mainWindowToUse)
 	{
