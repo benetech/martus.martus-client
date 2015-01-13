@@ -85,6 +85,6 @@ public class ContactsStage extends FxNonWizardStage
 		return (ContactsShellController)getShellController();
 	}
 	
-	private ContactsShellController shellController;
+	private FxShellController shellController;
 	private FxManageContactsController contentController;
 }
