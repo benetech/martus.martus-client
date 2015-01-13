@@ -370,7 +370,8 @@ abstract public class FxController implements Initializable
 
 	public void doAction(ActionDoer doer)
 	{
-		getStage().doAction(doer);
+		VirtualStage stage = getStage();
+		stage.doAction(doer);
 	}
 
 	public boolean isDoubleClick(MouseEvent mouseEvent)
