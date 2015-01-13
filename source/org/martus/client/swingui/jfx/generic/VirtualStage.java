@@ -47,5 +47,16 @@ public abstract class VirtualStage
 	abstract public void showCurrentPage() throws Exception;
 	abstract public void unexpectedErrorDlg(Exception e);
 
+	public void setShellController(FxShellController shellController)
+	{
+		this.shellController = shellController;
+	}
+
+	public FxShellController getShellController()
+	{
+		return shellController;
+	}
+
 	private UiMainWindow mainWindow;
+	private FxShellController shellController;
 }

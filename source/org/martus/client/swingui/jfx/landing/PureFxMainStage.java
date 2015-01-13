@@ -32,7 +32,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.PureFxStage;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
@@ -77,16 +76,4 @@ public class PureFxMainStage extends PureFxStage implements FxMainStage
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public void setShellController(FxShellController shellController)
-	{
-		this.shellController = shellController;
-	}
-	
-	public FxShellController getShellController()
-	{
-		return shellController;
-	}
-	
-	private FxShellController shellController;
 }

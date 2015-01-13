@@ -29,7 +29,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.generic.FxNonWizardStage;
-import org.martus.client.swingui.jfx.generic.FxShellController;
 
 public class ContactsStage extends FxNonWizardStage
 {
@@ -37,7 +36,7 @@ public class ContactsStage extends FxNonWizardStage
 	{
 		super(mainWindow);
 		
-		shellController = new ContactsShellController(getMainWindow());
+		ContactsShellController shellController = new ContactsShellController(getMainWindow());
 		contentController = new FxManageContactsController(getMainWindow());
 
 		setShellController(shellController);
@@ -74,17 +73,10 @@ public class ContactsStage extends FxNonWizardStage
 		return FxDialogHelper.showConfirmationDialog(getMainWindow(), "ExitManageContacts", "ExitManageContacts");
 	}
 	
-	@Override
-	public FxShellController getShellController()
-	{
-		return shellController;
-	}
-	
 	public ContactsShellController getContactsShellController()
 	{
 		return (ContactsShellController)getShellController();
 	}
 	
-	private FxShellController shellController;
 	private FxManageContactsController contentController;
 }
