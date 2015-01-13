@@ -82,15 +82,10 @@ public abstract class FxInSwingController extends FxController
 
 	private Window getWindow()
 	{
-		FxInSwingStage swingStage = getSwingStage();
+		FxInSwingStage swingStage = (FxInSwingStage) getStage();
 		return swingStage.getWindow();
 	}
 
-	private FxInSwingStage getSwingStage()
-	{
-		return (FxInSwingStage) getStage();
-	}
-	
 	protected static class DialogWindowHandler extends WindowAdapter
 	{
 		public DialogWindowHandler(Runnable runOnFocusGained)
