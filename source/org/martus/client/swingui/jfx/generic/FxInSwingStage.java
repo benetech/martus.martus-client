@@ -105,16 +105,6 @@ public abstract class FxInSwingStage extends VirtualStage
 		return getMainWindow().getApp().getFxmlDirectory();
 	}
 
-	public FxShellController getShellController()
-	{
-		return shellController;
-	}
-
-	public void setShellController(FxShellController controller)
-	{
-		shellController = controller;
-	}
-
 	public void loadAndShowShell() throws Exception
 	{
 		ensureSceneExists();
@@ -197,5 +187,4 @@ public abstract class FxInSwingStage extends VirtualStage
 	private JFXPanel panel;
 	private FxScene scene;
 	private Window window;
-	private FxShellController shellController;
 }
