@@ -56,15 +56,6 @@ public abstract class FxInSwingStage extends VirtualStage
 		return scene;
 	}
 	
-	public void ensureSceneExists() throws Exception
-	{
-		if(scene == null)
-		{
-			scene = createScene();
-			panel.setScene(scene);
-		}
-	}
-	
 	public void setSceneRoot(Parent contents)
 	{
 		scene.setRoot(contents);
@@ -88,7 +79,12 @@ public abstract class FxInSwingStage extends VirtualStage
 
 	public void loadAndShowShell() throws Exception
 	{
-		ensureSceneExists();
+		if(scene == null)
+		{
+			scene = createScene();
+			panel.setScene(scene);
+		}
+		
 		getShellController().setStage(this);
 		Parent shellContents = getShellController().createContents();
 
