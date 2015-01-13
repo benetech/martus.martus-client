@@ -45,7 +45,7 @@ public abstract class FxInSwingStage extends VirtualStage
 {
 	public FxInSwingStage(UiMainWindow mainWindowToUse)
 	{
-		mainWindow = mainWindowToUse;
+		super(mainWindowToUse);
 		panel = new JFXPanel();
 	}
 
@@ -55,11 +55,6 @@ public abstract class FxInSwingStage extends VirtualStage
 	}
 
 	abstract protected String getCssName();
-	public UiMainWindow getMainWindow()
-	{
-		return mainWindow;
-	}
-	
 	public FxScene getFxScene()
 	{
 		return scene;
@@ -167,7 +162,7 @@ public abstract class FxInSwingStage extends VirtualStage
 
 		public void run()
 		{
-			mainWindow.unexpectedErrorDlg(exceptionToReport);
+			getMainWindow().unexpectedErrorDlg(exceptionToReport);
 		}
 		Exception exceptionToReport;
 	}
@@ -196,10 +191,9 @@ public abstract class FxInSwingStage extends VirtualStage
 	@Override
 	public void unexpectedErrorDlg(Exception e)
 	{
-		mainWindow.unexpectedErrorDlg(e);
+		getMainWindow().unexpectedErrorDlg(e);
 	}
 	
-	protected UiMainWindow mainWindow;
 	private JFXPanel panel;
 	private FxScene scene;
 	private Window window;
