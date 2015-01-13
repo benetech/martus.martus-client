@@ -41,7 +41,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 
-public abstract class FxInSwingStage implements VirtualStage
+public abstract class FxInSwingStage extends VirtualStage
 {
 	public FxInSwingStage(UiMainWindow mainWindowToUse)
 	{

@@ -27,12 +27,12 @@ package org.martus.client.swingui.jfx.generic;
 
 import org.martus.client.swingui.actions.ActionDoer;
 
-public interface VirtualStage
+public abstract class VirtualStage
 {
-	public void close();
-	public void doAction(ActionDoer doer);
-	public void logAndNotifyUnexpectedError(Exception e);
-	public double getWidthAsDouble();
-	public void showCurrentPage() throws Exception;
-	public void unexpectedErrorDlg(Exception e);
+	abstract public void close();
+	abstract public void doAction(ActionDoer doer);
+	abstract public void logAndNotifyUnexpectedError(Exception e);
+	abstract public double getWidthAsDouble();
+	abstract public void showCurrentPage() throws Exception;
+	abstract public void unexpectedErrorDlg(Exception e);
 }
