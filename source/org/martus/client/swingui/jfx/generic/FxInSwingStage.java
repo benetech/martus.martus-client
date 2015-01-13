@@ -29,7 +29,6 @@ import java.awt.Container;
 import java.awt.Window;
 
 import javafx.embed.swing.JFXPanel;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javax.swing.JDialog;
@@ -59,21 +58,6 @@ public abstract class FxInSwingStage extends VirtualStage
 	public JDialog getDialog()
 	{
 		return (JDialog) getWindow();
-	}
-
-	public void loadAndShowShell() throws Exception
-	{
-		if(getScene() == null)
-		{
-			FxScene scene = createScene();
-			setScene(scene);
-		}
-		
-		getShellController().setStage(this);
-		Parent shellContents = getShellController().createContents();
-
-		getScene().setRoot(shellContents);
-		getFxScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
 	}
 
 	@Override
