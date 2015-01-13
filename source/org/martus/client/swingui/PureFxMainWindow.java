@@ -107,6 +107,11 @@ public class PureFxMainWindow extends UiMainWindow
 	{
 		// FIXME: We need to support this
 	}
+	
+	public static void setStage(Stage stage)
+	{
+		PureFxMainWindow.stage = stage;
+	}
 
-	public static Stage stage;
+	private static Stage stage;
 }
