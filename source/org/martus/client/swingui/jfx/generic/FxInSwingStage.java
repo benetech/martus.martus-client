@@ -30,7 +30,6 @@ import java.awt.Window;
 
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 
 import javax.swing.JDialog;
 import javax.swing.SwingUtilities;
@@ -72,8 +71,8 @@ public abstract class FxInSwingStage extends VirtualStage
 		getShellController().setStage(this);
 		Parent shellContents = getShellController().createContents();
 
-		scene.setRoot(shellContents);
-		scene.applyStyleSheet(getLocalization().getCurrentLanguageCode());
+		getScene().setRoot(shellContents);
+		getScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
 	}
 	
 	public void doAction(ActionDoer doer)
@@ -128,9 +127,9 @@ public abstract class FxInSwingStage extends VirtualStage
 		return panel;
 	}
 
-	public Scene getScene()
+	public FxScene getScene()
 	{
-		return panel.getScene();
+		return (FxScene)panel.getScene();
 	}
 	
 	@Override
