@@ -166,12 +166,6 @@ public abstract class FxInSwingStage extends VirtualStage
 		return getPanel().getWidth();
 	}
 	
-	@Override
-	public void unexpectedErrorDlg(Exception e)
-	{
-		getMainWindow().unexpectedErrorDlg(e);
-	}
-	
 	private JFXPanel panel;
 	private FxScene scene;
 	private Window window;
