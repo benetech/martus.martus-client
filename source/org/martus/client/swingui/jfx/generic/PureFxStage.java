@@ -47,7 +47,7 @@ public class PureFxStage extends VirtualStage
 
 	public PureFxStage(UiMainWindow mainWindowToUse, String title, Stage stageToUse)
 	{
-		mainWindow = mainWindowToUse;
+		super(mainWindowToUse);
 		stage = stageToUse;
 		
 		stage.setTitle(title);
@@ -63,7 +63,7 @@ public class PureFxStage extends VirtualStage
 	@Override
 	public void logAndNotifyUnexpectedError(Exception e)
 	{
-		mainWindow.unexpectedErrorDlg(e);
+		getMainWindow().unexpectedErrorDlg(e);
 	}
 	
 	@Override
@@ -81,7 +81,7 @@ public class PureFxStage extends VirtualStage
 	@Override
 	public void unexpectedErrorDlg(Exception e)
 	{
-		mainWindow.unexpectedErrorDlg(e);
+		getMainWindow().unexpectedErrorDlg(e);
 	}
 
 	@Override
@@ -115,11 +115,5 @@ public class PureFxStage extends VirtualStage
 		stage.showAndWait();
 	}
 	
-	public UiMainWindow getMainWindow()
-	{
-		return mainWindow;
-	}
-
-	private UiMainWindow mainWindow;
 	private Stage stage;
 }

@@ -25,14 +25,27 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 
 public abstract class VirtualStage
 {
+	public VirtualStage(UiMainWindow mainWindowToUse)
+	{
+		mainWindow = mainWindowToUse;
+	}
+	
+	public UiMainWindow getMainWindow()
+	{
+		return mainWindow;
+	}
+
 	abstract public void close();
 	abstract public void doAction(ActionDoer doer);
 	abstract public void logAndNotifyUnexpectedError(Exception e);
 	abstract public double getWidthAsDouble();
 	abstract public void showCurrentPage() throws Exception;
 	abstract public void unexpectedErrorDlg(Exception e);
+
+	private UiMainWindow mainWindow;
 }
