@@ -41,25 +41,30 @@ public class PureFxMainStage implements FxMainStage
 	public PureFxMainStage(UiMainWindow mainWindowToUse, Stage realStage) throws Exception
 	{
 		stage = new PureFxStage(mainWindowToUse, "", realStage);
-		stage.setOnCloseRequest((event) -> mainWindowToUse.exitNormally());
-		shellController = new FxLandingShellController(stage.getMainWindow());
+		getActualStage().setOnCloseRequest((event) -> mainWindowToUse.exitNormally());
+		shellController = new FxLandingShellController(getActualStage().getMainWindow());
 		Scene scene = new Scene(new Pane());
-		stage.setScene(scene);
+		getActualStage().setScene(scene);
 		Platform.runLater(() -> initializeContents());
+	}
+
+	public PureFxStage getActualStage()
+	{
+		return stage;
 	}
 	
 	private void initializeContents()
 	{
 		try
 		{
-			stage.showCurrentPage();
+			getActualStage().showCurrentPage();
 			Parent shellContents = shellController.createContents();
-			Scene scene = stage.getActualStage().getScene();
+			Scene scene = getActualStage().getActualStage().getScene();
 			scene.setRoot(shellContents);
 		}
 		catch(Exception e)
 		{
-			stage.getMainWindow().unexpectedErrorDlg(e);
+			getActualStage().getMainWindow().unexpectedErrorDlg(e);
 		}
 	}
 
