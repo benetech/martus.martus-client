@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import java.io.File;
+
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -71,6 +73,11 @@ public abstract class VirtualStage
 	public void unexpectedErrorDlg(Exception e)
 	{
 		getMainWindow().unexpectedErrorDlg(e);
+	}
+
+	public File getExternalFxmlDirectory()
+	{
+		return getMainWindow().getApp().getFxmlDirectory();
 	}
 
 	private UiMainWindow mainWindow;

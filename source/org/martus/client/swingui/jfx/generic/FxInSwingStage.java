@@ -27,7 +27,6 @@ package org.martus.client.swingui.jfx.generic;
 
 import java.awt.Container;
 import java.awt.Window;
-import java.io.File;
 
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
@@ -86,11 +85,6 @@ public abstract class FxInSwingStage extends VirtualStage
 	public JDialog getDialog()
 	{
 		return (JDialog) getWindow();
-	}
-
-	public File getExternalFxmlDirectory()
-	{
-		return getMainWindow().getApp().getFxmlDirectory();
 	}
 
 	public void loadAndShowShell() throws Exception
