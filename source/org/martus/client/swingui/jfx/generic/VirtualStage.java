@@ -56,7 +56,7 @@ public abstract class VirtualStage
 	abstract public void setScene(Scene scene);
 	abstract public Scene getScene();
 
-	protected FxScene createScene() throws Exception
+	protected FxScene createEmptyShellScene() throws Exception
 	{
 		return new FxScene(getExternalFxmlDirectory(), getCssName());
 	}
@@ -100,7 +100,7 @@ public abstract class VirtualStage
 	{
 		if(getScene() == null)
 		{
-			FxScene scene = createScene();
+			FxScene scene = createEmptyShellScene();
 			setScene(scene);
 		}
 		
