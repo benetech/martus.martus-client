@@ -78,9 +78,9 @@ abstract public class PureFxStage extends VirtualStage
 	@Override
 	public void showCurrentPage() throws Exception
 	{
-		// FIXME: Is this even needed?
+		loadAndShowShell();
 	}
-	
+
 	@Override
 	public void unexpectedErrorDlg(Exception e)
 	{
