@@ -108,6 +108,12 @@ abstract public class PureFxStage extends VirtualStage
 	{
 		stage.setScene(scene);
 	}
+	
+	@Override
+	public Scene getScene()
+	{
+		return stage.getScene();
+	};
 
 	public Stage getActualStage()
 	{

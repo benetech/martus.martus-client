@@ -73,7 +73,7 @@ public abstract class FxInSwingStage extends VirtualStage
 		Parent shellContents = getShellController().createContents();
 
 		getScene().setRoot(shellContents);
-		getScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
+		getFxScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
 	}
 
 	@Override
@@ -134,9 +134,9 @@ public abstract class FxInSwingStage extends VirtualStage
 		return panel;
 	}
 
-	public FxScene getScene()
+	public Scene getScene()
 	{
-		return (FxScene)panel.getScene();
+		return panel.getScene();
 	}
 	
 	@Override
