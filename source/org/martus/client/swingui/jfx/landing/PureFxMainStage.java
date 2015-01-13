@@ -64,6 +64,12 @@ public class PureFxMainStage extends PureFxStage implements FxMainStage
 	}
 
 	@Override
+	protected String getCssName()
+	{
+		return "Landing.css";
+	}
+
+	@Override
 	public BulletinsListController getBulletinsListController()
 	{
 		// TODO Auto-generated method stub
