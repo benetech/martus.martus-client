@@ -59,8 +59,7 @@ abstract public class DialogShellController extends FxShellWithSingleContentCont
 		UiMainWindow mainWindow = getMainWindow();
 		try
 		{
-			DialogShellController controller = this;
-			createAndShow(mainWindow, controller);
+			createAndShow(mainWindow, this);
 		} 
 		catch (Exception e)
 		{
