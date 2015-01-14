@@ -33,6 +33,7 @@ public class DialogStage extends FxNonWizardStage
 	{
 		super(mainWindowToUse);
 		setShellController(controllerToUse);
+		setCssName(controllerToUse.getCssName());
 	}
 	
 	@Override
@@ -41,10 +42,16 @@ public class DialogStage extends FxNonWizardStage
 		return true;
 	}
 
+	public void setCssName(String cssName)
+	{
+		this.cssFile = cssName;
+	}
+	
 	@Override
 	protected String getCssName()
 	{
-		return null;
+		return cssFile;
 	}
 
+	private String cssFile;
 }
