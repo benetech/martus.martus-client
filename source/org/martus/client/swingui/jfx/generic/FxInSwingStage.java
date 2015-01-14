@@ -32,7 +32,6 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 
-import javax.swing.JDialog;
 import javax.swing.SwingUtilities;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -54,11 +53,6 @@ public abstract class FxInSwingStage extends VirtualStage
 	public Window getWindow()
 	{
 		return window;
-	}
-
-	public JDialog getDialog()
-	{
-		return (JDialog) getWindow();
 	}
 
 	@Override
