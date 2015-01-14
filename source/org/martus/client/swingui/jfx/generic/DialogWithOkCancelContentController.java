@@ -35,13 +35,8 @@ public abstract class DialogWithOkCancelContentController extends FxContentContr
 		super(mainWindowToUse);
 	}
 
-	private DialogStage getDialogStage()
-	{
-		return (DialogStage)getStage();
-	}
-	
 	public DialogWithOkCancelShellController getOkCancelShellController()
 	{
-		return (DialogWithOkCancelShellController) getDialogStage().getShellController();
+		return (DialogWithOkCancelShellController) getStage().getShellController();
 	}
 }
