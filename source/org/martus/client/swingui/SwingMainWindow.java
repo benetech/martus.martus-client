@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import java.awt.Cursor;
+import java.awt.Window;
 
 import javafx.application.Platform;
 
@@ -33,9 +34,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import org.martus.client.swingui.jfx.generic.FxRunner;
+import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
 import org.martus.client.swingui.jfx.landing.FxInSwingMainStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
+import org.martus.client.swingui.jfx.landing.bulletins.FxInSwingGenericStage;
 
 public class SwingMainWindow extends UiMainWindow
 {
@@ -141,6 +144,12 @@ public class SwingMainWindow extends UiMainWindow
 		getSwingFrame().setLocation(100000, 0);
 		getSwingFrame().setSize(0,0);
 		getSwingFrame().setEnabled(false);
+	}
+	
+	@Override
+	public FxInSwingGenericStage createGenericStage(UiMainWindow observerToUse, Window windowToUse, FxShellController shellController, String cssName)
+	{
+		return new FxInSwingGenericStage(observerToUse, windowToUse, shellController, cssName);
 	}
 
 	private JFrame swingFrame;
