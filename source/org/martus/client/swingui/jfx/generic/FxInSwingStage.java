@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.generic;
 import java.awt.Container;
 import java.awt.Window;
 
+import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 
@@ -70,6 +71,12 @@ public abstract class FxInSwingStage extends VirtualStage
 	public void showCurrentPage() throws Exception
 	{
 		loadAndShowShell();
+	}
+	
+	@Override
+	public void runOnFxThreadMaybeLater(Runnable toRun)
+	{
+		Platform.runLater(toRun);
 	}
 
 	public void doAction(ActionDoer doer)
