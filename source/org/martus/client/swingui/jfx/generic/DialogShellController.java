@@ -59,7 +59,8 @@ abstract public class DialogShellController extends FxShellWithSingleContentCont
 		UiMainWindow mainWindow = getMainWindow();
 		try
 		{
-			DialogStage stage = new DialogStage(mainWindow, this);
+			DialogShellController controller = this;
+			DialogStage stage = new DialogStage(mainWindow, controller);
 			Dimension preferedDimension = getContentController().getPreferredDimension();
 			FxModalDialog.createAndShow(mainWindow, stage, getTitleTag(), preferedDimension);
 		} 
