@@ -67,11 +67,11 @@ abstract public class DialogShellController extends FxShellWithSingleContentCont
 		}
 	}
 
-	public void createAndShow(UiMainWindow mainWindow, DialogShellController controller) throws Exception
+	public static void createAndShow(UiMainWindow mainWindow, DialogShellController controller) throws Exception
 	{
 		DialogStage stage = new DialogStage(mainWindow, controller);
-		Dimension preferedDimension = getContentController().getPreferredDimension();
-		FxModalDialog.createAndShow(mainWindow, stage, getTitleTag(), preferedDimension);
+		Dimension preferedDimension = controller.getContentController().getPreferredDimension();
+		FxModalDialog.createAndShow(mainWindow, stage, controller.getTitleTag(), preferedDimension);
 	}
 	
 	protected String getTitleTag()
