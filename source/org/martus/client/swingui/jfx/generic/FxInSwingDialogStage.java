@@ -53,6 +53,11 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 		return new WindowCloseHandler();
 	}
 	
+	private JDialog getDialog()
+	{
+		return (JDialog) getWindow();
+	}
+
 	public void close()
 	{
 		getDialog().setVisible(false);
