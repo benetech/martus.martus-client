@@ -32,6 +32,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxContentController;
 import org.martus.client.swingui.jfx.generic.FxWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.step1.FxSetupUsernamePasswordController;
+import org.martus.common.EnglishCommonStrings;
 
 public class SetupWizardStage extends FxWizardStage
 {
@@ -61,9 +62,11 @@ public class SetupWizardStage extends FxWizardStage
 		MartusLocalization localization = getMainWindow().getLocalization();
 		String title = localization.getWindowTitle("ExitWizard");
 		String message = localization.getFieldLabel("ExitWizard");
-		int result = JOptionPane.showConfirmDialog(getDialog(), message, title, JOptionPane.YES_NO_OPTION);
-		if (result == JOptionPane.YES_OPTION)
-			return true;
-		return false;
+		String[] buttons = new String[] 
+		{ 
+			localization.getButtonLabel(EnglishCommonStrings.YES), 
+			localization.getButtonLabel(EnglishCommonStrings.NO)
+		};
+		return getMainWindow().confirmDlg(title, new String[] {message}, buttons);
 	}
 }
