@@ -68,7 +68,7 @@ public class FxRunner implements Runnable
 		
 		FxRunner fxRunner = new FxRunner(stage);
 		fxRunner.setAbortImmediatelyOnError();
-		Platform.runLater(fxRunner);
+		stage.runOnFxThreadMaybeLater(fxRunner);
 		
 		return stage;
 	}
