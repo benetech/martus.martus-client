@@ -55,6 +55,7 @@ public abstract class VirtualStage
 	abstract protected String getCssName();
 	abstract public void setScene(Scene scene);
 	abstract public Scene getScene();
+	abstract public void runOnFxThreadMaybeLater(Runnable toRun);
 
 	protected FxScene createEmptyShellScene() throws Exception
 	{

@@ -114,6 +114,12 @@ abstract public class PureFxStage extends VirtualStage
 	{
 		return stage.getScene();
 	};
+	
+	@Override
+	public void runOnFxThreadMaybeLater(Runnable toRun)
+	{
+		toRun.run();
+	}
 
 	public Stage getActualStage()
 	{

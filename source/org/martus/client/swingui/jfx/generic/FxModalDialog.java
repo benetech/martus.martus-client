@@ -28,8 +28,6 @@ package org.martus.client.swingui.jfx.generic;
 import java.awt.Dialog;
 import java.awt.Dimension;
 
-import javafx.application.Platform;
-
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -70,7 +68,7 @@ public class FxModalDialog extends JDialog
 		dialog.pack();
 		dialog.getContentPane().add(stage.getPanel());
 		stage.setDialog(dialog);
-		Platform.runLater(new FxRunner(stage));
+		stage.runOnFxThreadMaybeLater(new FxRunner(stage));
 
 		Utilities.packAndCenterWindow(dialog);
 		owner.setCurrentActiveDialog(dialog);
