@@ -37,6 +37,13 @@ import org.martus.swing.Utilities;
 
 public class FxModalDialog extends JDialog
 {
+	public static void createAndShow(UiMainWindow mainWindow, DialogShellController controller) throws Exception
+	{
+		DialogStage stage = new DialogStage(mainWindow, controller);
+		Dimension preferedDimension = controller.getContentController().getPreferredDimension();
+		createAndShow(mainWindow, stage, controller.getTitleTag(), preferedDimension);
+	}
+
 	public static void createAndShow(UiMainWindow owner, FxInSwingDialogStage stage) throws Exception
 	{
 		createAndShow(owner, stage, EMPTY_TITLE);
