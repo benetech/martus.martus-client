@@ -38,14 +38,14 @@ import org.martus.client.swingui.actions.ActionDoer;
 
 abstract public class PureFxStage extends VirtualStage
 {
-	public PureFxStage(UiMainWindow mainWindowToUse, FxPopupController controller) throws Exception
+	public PureFxStage(UiMainWindow mainWindowToUse, FxPopupController controller, String cssNameToUse) throws Exception
 	{
-		this(mainWindowToUse, controller.getDialogTitle(), new Stage());
+		this(mainWindowToUse, controller.getDialogTitle(), new Stage(), cssNameToUse);
 		controller.setStage(this);
 		getActualStage().initModality(Modality.APPLICATION_MODAL);
 	}
 
-	public PureFxStage(UiMainWindow mainWindowToUse, String title, Stage stageToUse) throws Exception
+	public PureFxStage(UiMainWindow mainWindowToUse, String title, Stage stageToUse, String cssNameToUse) throws Exception
 	{
 		super(mainWindowToUse);
 		stage = stageToUse;
@@ -54,6 +54,7 @@ abstract public class PureFxStage extends VirtualStage
 
 		Scene scene = createEmptyShellScene();
 		setScene(scene);
+		setCssName(cssNameToUse);
 	}
 
 	@Override
@@ -131,5 +132,17 @@ abstract public class PureFxStage extends VirtualStage
 		stage.showAndWait();
 	}
 	
+	@Override
+	protected String getCssName()
+	{
+		return cssName;
+	}
+	
+	private void setCssName(String cssName)
+	{
+		this.cssName = cssName;
+	}
+	
 	private Stage stage;
+	private String cssName;
 }

@@ -36,15 +36,9 @@ public class PureFxMainStage extends PureFxStage implements FxMainStage
 {
 	public PureFxMainStage(UiMainWindow mainWindowToUse, Stage realStage) throws Exception
 	{
-		super(mainWindowToUse, "", realStage);
+		super(mainWindowToUse, "", realStage, "Landing.css");
 		getActualStage().setOnCloseRequest((event) -> getMainWindow().exitNormally());
 		setShellController(new FxLandingShellController(getMainWindow()));
-	}
-
-	@Override
-	protected String getCssName()
-	{
-		return "Landing.css";
 	}
 
 	@Override
