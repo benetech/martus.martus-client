@@ -2867,7 +2867,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	public static void createAndShowLargeModalDialog(UiMainWindow owner, FxInSwingDialogStage stage) throws Exception
 	{
-		createAndShowDialog(owner, stage, FxInSwingModalDialog.EMPTY_TITLE, LARGE_PREFERRED_DIALOG_ZIZE);
+		createAndShowDialog(owner, stage, FxInSwingModalDialog.EMPTY_TITLE, LARGE_PREFERRED_DIALOG_SIZE);
 	}
 
 	public static void createAndShowConfirmationSizedDialog(UiMainWindow owner, String titleTag, FxNonWizardShellController dialogShellController) throws Exception
@@ -2884,7 +2884,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	private static void createAndShowDialog(UiMainWindow owner, FxInSwingDialogStage stage, String titleTag, Dimension dimension)
 	{
 		if (dimension == null)
-			dimension = LARGE_PREFERRED_DIALOG_ZIZE;
+			dimension = LARGE_PREFERRED_DIALOG_SIZE;
 		
 		FxInSwingModalDialog dialog = createDialog(owner);
 		if (titleTag.length() > 0)
@@ -2913,7 +2913,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	}
 
 	public static final Dimension SMALL_PREFERRED_DIALOG_SIZE = new Dimension(400, 200);
-	private static final Dimension LARGE_PREFERRED_DIALOG_ZIZE = new Dimension(960, 640);
+	private static final Dimension LARGE_PREFERRED_DIALOG_SIZE = new Dimension(960, 640);
 
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
