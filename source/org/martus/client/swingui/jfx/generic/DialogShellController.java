@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import java.awt.Dimension;
+
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
@@ -57,7 +59,8 @@ abstract public class DialogShellController extends FxShellWithSingleContentCont
 		UiMainWindow mainWindow = getMainWindow();
 		try
 		{
-			FxModalDialog.createAndShow(mainWindow, this);
+			Dimension preferedDimension = this.getContentController().getPreferredDimension();
+			FxModalDialog.createAndShow(mainWindow, this, preferedDimension);
 		} 
 		catch (Exception e)
 		{
