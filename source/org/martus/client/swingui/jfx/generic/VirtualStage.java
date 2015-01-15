@@ -37,9 +37,11 @@ import org.martus.client.swingui.actions.ActionDoer;
 
 public abstract class VirtualStage
 {
-	public VirtualStage(UiMainWindow mainWindowToUse)
+	public VirtualStage(UiMainWindow mainWindowToUse, String cssNameToUse)
 	{
 		mainWindow = mainWindowToUse;
+
+		setCssName(cssNameToUse);
 	}
 	
 	public UiMainWindow getMainWindow()
@@ -52,7 +54,6 @@ public abstract class VirtualStage
 	abstract public void logAndNotifyUnexpectedError(Exception e);
 	abstract public double getWidthAsDouble();
 	abstract public void showCurrentPage() throws Exception;
-	abstract protected String getCssName();
 	abstract public void setScene(Scene scene);
 	abstract public Scene getScene();
 	abstract public void runOnFxThreadMaybeLater(Runnable toRun);
@@ -112,6 +113,17 @@ public abstract class VirtualStage
 		getFxScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
 	}
 
+	private void setCssName(String cssName)
+	{
+		this.cssFile = cssName;
+	}
+	
+	protected String getCssName()
+	{
+		return cssFile;
+	}
+
 	private UiMainWindow mainWindow;
 	private FxShellController shellController;
+	private String cssFile;
 }

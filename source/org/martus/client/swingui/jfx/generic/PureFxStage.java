@@ -47,14 +47,13 @@ abstract public class PureFxStage extends VirtualStage
 
 	public PureFxStage(UiMainWindow mainWindowToUse, String title, Stage stageToUse, String cssNameToUse) throws Exception
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, cssNameToUse);
 		stage = stageToUse;
 		
 		stage.setTitle(title);
 
 		Scene scene = createEmptyShellScene();
 		setScene(scene);
-		setCssName(cssNameToUse);
 	}
 
 	@Override
@@ -132,17 +131,5 @@ abstract public class PureFxStage extends VirtualStage
 		stage.showAndWait();
 	}
 	
-	@Override
-	protected String getCssName()
-	{
-		return cssName;
-	}
-	
-	private void setCssName(String cssName)
-	{
-		this.cssName = cssName;
-	}
-	
 	private Stage stage;
-	private String cssName;
 }
