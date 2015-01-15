@@ -40,7 +40,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
-import org.martus.client.swingui.jfx.generic.FxModalDialog;
+import org.martus.client.swingui.jfx.generic.FxInSwingModalDialog;
 import org.martus.common.VersionBuildDate;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.util.MultiCalendar;
@@ -122,7 +122,7 @@ public class HelpController extends FxController
 	@Override
 	protected Dimension getPreferredDimension()
 	{
-		return FxModalDialog.MEDIUM_PREFERRED_DIALOG_SIZE;
+		return FxInSwingModalDialog.MEDIUM_PREFERRED_DIALOG_SIZE;
 	}
 
 	@Override

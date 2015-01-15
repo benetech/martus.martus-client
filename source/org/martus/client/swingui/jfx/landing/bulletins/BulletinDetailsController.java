@@ -39,7 +39,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiBulletinDetailsDialog;
 import org.martus.client.swingui.jfx.generic.FxController;
-import org.martus.client.swingui.jfx.generic.FxModalDialog;
+import org.martus.client.swingui.jfx.generic.FxInSwingModalDialog;
 import org.martus.common.ContactKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
@@ -85,7 +85,7 @@ public class BulletinDetailsController extends FxController
 	@Override
 	protected Dimension getPreferredDimension()
 	{
-		return FxModalDialog.MEDIUM_PREFERRED_DIALOG_SIZE;
+		return FxInSwingModalDialog.MEDIUM_PREFERRED_DIALOG_SIZE;
 	}
 
 

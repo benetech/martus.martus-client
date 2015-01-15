@@ -49,7 +49,7 @@ public abstract class FxTabbedShellController extends FxNonWizardShellController
 	@Override
 	protected Dimension getPreferredDimension()
 	{
-		return FxModalDialog.MEDIUM_PREFERRED_DIALOG_SIZE;
+		return FxInSwingModalDialog.MEDIUM_PREFERRED_DIALOG_SIZE;
 	}
 	
 	private String firstTabToDisplay;

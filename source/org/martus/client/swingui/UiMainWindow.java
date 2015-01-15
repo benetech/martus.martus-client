@@ -103,7 +103,7 @@ import org.martus.client.swingui.filefilters.AllFileFilter;
 import org.martus.client.swingui.filefilters.KeyPairFormatFilter;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
-import org.martus.client.swingui.jfx.generic.FxModalDialog;
+import org.martus.client.swingui.jfx.generic.FxInSwingModalDialog;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
@@ -495,9 +495,9 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 			// NOTE: Prevent implicit JavaFX shutdown when the only JFX window is closed
 		    Platform.setImplicitExit(false);
 
-		    FxModalDialog.createAndShow(this, new WelcomeStage(this));
+		    FxInSwingModalDialog.createAndShow(this, new WelcomeStage(this));
 		    
-		    FxModalDialog.createAndShow(this, new SetupWizardStage(this));
+		    FxInSwingModalDialog.createAndShow(this, new SetupWizardStage(this));
 		} 
 		catch (Exception e)
 		{

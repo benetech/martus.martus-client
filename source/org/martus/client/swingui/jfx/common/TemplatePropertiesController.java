@@ -38,7 +38,7 @@ import javafx.scene.control.TextField;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
-import org.martus.client.swingui.jfx.generic.FxModalDialog;
+import org.martus.client.swingui.jfx.generic.FxInSwingModalDialog;
 import org.martus.common.fieldspec.FormTemplate;
 
 public class TemplatePropertiesController extends FxController
@@ -124,7 +124,7 @@ public class TemplatePropertiesController extends FxController
 	protected Dimension getPreferredDimension()
 	{
 		//TODO fix this is not getting called
-		return FxModalDialog.MEDIUM_SMALL_PREFERRED_DIALOG_SIZE;
+		return FxInSwingModalDialog.MEDIUM_SMALL_PREFERRED_DIALOG_SIZE;
 	}
 
 	@FXML

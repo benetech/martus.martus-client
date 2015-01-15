@@ -39,7 +39,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.search.SaneCollator;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
-import org.martus.client.swingui.jfx.generic.FxModalDialog;
+import org.martus.client.swingui.jfx.generic.FxInSwingModalDialog;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FormTemplate;
@@ -110,7 +110,7 @@ public class SelectTemplateController extends FxController
 	@Override
 	protected Dimension getPreferredDimension()
 	{
-		return FxModalDialog.MEDIUM_PREFERRED_DIALOG_SIZE;
+		return FxInSwingModalDialog.MEDIUM_PREFERRED_DIALOG_SIZE;
 	}
 
 	@FXML
