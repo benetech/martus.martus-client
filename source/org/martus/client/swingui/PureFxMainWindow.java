@@ -77,9 +77,9 @@ public class PureFxMainWindow extends UiMainWindow
 	protected void initializeFrame() throws Exception
 	{
 		setStatusBar(createStatusBar());
-		PureFxMainStage fxStage = new PureFxMainStage(this, stage);
+		PureFxMainStage fxStage = new PureFxMainStage(this, realStage);
 		fxStage.showCurrentPage();
-		stage.show();
+		realStage.show();
 	}
 	
 	@Override
@@ -91,7 +91,7 @@ public class PureFxMainWindow extends UiMainWindow
 	@Override
 	public void rawSetCursor(Object newCursor)
 	{
-		stage.getScene().setCursor((Cursor) newCursor);
+		realStage.getScene().setCursor((Cursor) newCursor);
 	}
 
 	@Override
@@ -103,7 +103,7 @@ public class PureFxMainWindow extends UiMainWindow
 	@Override
 	public Object getExistingCursor()
 	{
-		return stage.getScene().getCursor();
+		return realStage.getScene().getCursor();
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public class PureFxMainWindow extends UiMainWindow
 	
 	public static void setStage(Stage stage)
 	{
-		PureFxMainWindow.stage = stage;
+		PureFxMainWindow.realStage = stage;
 	}
 	
 	@Override
@@ -152,5 +152,5 @@ public class PureFxMainWindow extends UiMainWindow
 		createAndShowLargeModalDialog(new PureFxContactsStage(this));
 	}
 
-	private static Stage stage;
+	private static Stage realStage;
 }
