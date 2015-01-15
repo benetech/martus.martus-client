@@ -242,8 +242,8 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	{
 		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
 		FontSetter.setDefaultFont(currentLanguageCode.equals(MtfAwareLocalization.BURMESE));
-		displayDefaultUnofficialTranslationMessageIfNecessary(currentActiveFrame, getLocalization(), currentLanguageCode);
-		displayIncompatibleMtfVersionWarningMessageIfNecessary(currentActiveFrame, getLocalization(), getLocalization().getCurrentLanguageCode());
+		displayDefaultUnofficialTranslationMessageIfNecessary(getCurrentActiveFrame(), getLocalization(), currentLanguageCode);
+		displayIncompatibleMtfVersionWarningMessageIfNecessary(getCurrentActiveFrame(), getLocalization(), getLocalization().getCurrentLanguageCode());
 		
 		preventTwoInstances();
 		notifyClientCompliance();
@@ -1853,7 +1853,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			notifyDlg(currentActiveFrame, "RewriteKeyPairFailed");
+			notifyDlg(getCurrentActiveFrame(), "RewriteKeyPairFailed");
 			return false;
 			//TODO eventually try to restore keypair from backup.
 		}
