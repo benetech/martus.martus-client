@@ -31,21 +31,7 @@ abstract public class FxInSwingNonWizardStage extends FxInSwingDialogStage
 {
 	public FxInSwingNonWizardStage(UiMainWindow mainWindowToUse, String cssName)
 	{
-		super(mainWindowToUse);
-
-		setCssName(cssName);
+		super(mainWindowToUse, cssName);
 	}
 
-	public void setCssName(String cssName)
-	{
-		this.cssFile = cssName;
-	}
-	
-	@Override
-	protected String getCssName()
-	{
-		return cssFile;
-	}
-
-	private String cssFile;
 }

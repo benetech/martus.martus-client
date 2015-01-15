@@ -34,9 +34,9 @@ import org.martus.common.MartusLogger;
 
 abstract public class FxWizardStage extends FxInSwingDialogStage
 {
-	public FxWizardStage(UiMainWindow mainWindowToUse) throws Exception
+	public FxWizardStage(UiMainWindow mainWindowToUse, String cssName) throws Exception
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, cssName);
 		
 		visitedWizardPagesStack = new Stack<FxContentController>();
 

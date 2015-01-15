@@ -35,9 +35,11 @@ import org.martus.client.swingui.UiMainWindow;
 
 abstract public class FxInSwingDialogStage extends FxInSwingStage
 {
-	public FxInSwingDialogStage(UiMainWindow mainWindowToUse)
+	public FxInSwingDialogStage(UiMainWindow mainWindowToUse, String cssName)
 	{
 		super(mainWindowToUse);
+
+		setCssName(cssName);
 	}
 
 	abstract protected boolean confirmExit();
@@ -80,4 +82,17 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 			}
 		}
 	}
+
+	public void setCssName(String cssName)
+	{
+		this.cssFile = cssName;
+	}
+	
+	@Override
+	protected String getCssName()
+	{
+		return cssFile;
+	}
+
+	private String cssFile;
 }
