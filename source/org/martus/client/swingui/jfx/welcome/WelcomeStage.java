@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.welcome;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxNonWizardStage;
+import org.martus.client.swingui.jfx.generic.FxShellController;
 
 public class WelcomeStage extends FxNonWizardStage
 {
@@ -35,7 +36,7 @@ public class WelcomeStage extends FxNonWizardStage
 		super(mainWindow);
 		
 		FxWelcomeContentController contentController = new FxWelcomeContentController(getMainWindow());
-		WelcomeShellController shellController = new WelcomeShellController(getMainWindow(), contentController);
+		FxShellController shellController = new WelcomeShellController(getMainWindow(), contentController);
 		setShellController(shellController);
 	}
 
