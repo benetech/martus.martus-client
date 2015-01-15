@@ -39,10 +39,12 @@ import org.martus.client.swingui.actions.ActionDoer;
 
 public abstract class FxInSwingStage extends VirtualStage
 {
-	public FxInSwingStage(UiMainWindow mainWindowToUse)
+	public FxInSwingStage(UiMainWindow mainWindowToUse, String cssName)
 	{
 		super(mainWindowToUse);
+
 		panel = new JFXPanel();
+		setCssName(cssName);
 	}
 
 	public void setWindow(Window dialogToUse)
@@ -136,6 +138,19 @@ public abstract class FxInSwingStage extends VirtualStage
 		return getPanel().getWidth();
 	}
 	
+
+	public void setCssName(String cssName)
+	{
+		this.cssFile = cssName;
+	}
+	
+	@Override
+	protected String getCssName()
+	{
+		return cssFile;
+	}
+
 	private JFXPanel panel;
 	private Window window;
+	private String cssFile;
 }

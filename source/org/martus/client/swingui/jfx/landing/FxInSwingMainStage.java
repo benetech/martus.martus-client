@@ -34,17 +34,11 @@ public class FxInSwingMainStage extends FxInSwingStage implements FxMainStage
 {
 	public FxInSwingMainStage(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, "Landing.css");
 		setWindow(getMainWindow().getSwingFrame());
 		
 		FxLandingShellController shellController = new FxLandingShellController(getMainWindow());
 		setShellController(shellController);
-	}
-
-	@Override
-	protected String getCssName()
-	{
-		return "Landing.css";
 	}
 
 	@Override
