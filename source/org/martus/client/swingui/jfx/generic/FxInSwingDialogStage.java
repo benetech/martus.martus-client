@@ -37,9 +37,7 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 {
 	public FxInSwingDialogStage(UiMainWindow mainWindowToUse, String cssName)
 	{
-		super(mainWindowToUse);
-
-		setCssName(cssName);
+		super(mainWindowToUse, cssName);
 	}
 
 	abstract protected boolean confirmExit();
@@ -82,17 +80,4 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 			}
 		}
 	}
-
-	public void setCssName(String cssName)
-	{
-		this.cssFile = cssName;
-	}
-	
-	@Override
-	protected String getCssName()
-	{
-		return cssFile;
-	}
-
-	private String cssFile;
 }

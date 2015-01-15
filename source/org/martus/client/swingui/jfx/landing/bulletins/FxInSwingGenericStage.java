@@ -35,23 +35,14 @@ public class FxInSwingGenericStage extends FxInSwingStage
 {
 	public FxInSwingGenericStage(UiMainWindow mainWindowToUse, Window windowToUse, FxShellController shellController, String cssNameToUse)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, cssNameToUse);
 	
 		setWindow(windowToUse);
-		cssName = cssNameToUse;
 		setShellController(shellController);
-	}
-
-	@Override
-	protected String getCssName()
-	{
-		return cssName;
 	}
 
 	@Override
 	public void close()
 	{
 	}
-
-	private String cssName;
 }
