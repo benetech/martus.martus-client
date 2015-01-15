@@ -42,6 +42,7 @@ import org.martus.client.swingui.jfx.generic.FxInSwingStage;
 import org.martus.client.swingui.jfx.generic.FxRunner;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
+import org.martus.client.swingui.jfx.generic.VirtualStage;
 import org.martus.client.swingui.jfx.landing.FxInSwingMainStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.swing.Utilities;
@@ -159,9 +160,9 @@ public class SwingMainWindow extends UiMainWindow
 	}
 
 	@Override
-	public void createAndShowLargeModalDialog(FxInSwingDialogStage stage) throws Exception
+	public void createAndShowLargeModalDialog(VirtualStage stage) throws Exception
 	{
-		createAndShowDialog(stage, FxInSwingModalDialog.EMPTY_TITLE, LARGE_PREFERRED_DIALOG_SIZE);
+		createAndShowDialog((FxInSwingDialogStage) stage, FxInSwingModalDialog.EMPTY_TITLE, LARGE_PREFERRED_DIALOG_SIZE);
 	}
 
 	@Override
