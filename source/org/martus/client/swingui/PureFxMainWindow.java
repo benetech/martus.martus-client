@@ -82,6 +82,7 @@ public class PureFxMainWindow extends UiMainWindow
 		PureFxMainStage fxStage = new PureFxMainStage(this, realStage);
 		fxStage.showCurrentPage();
 		restoreWindowSizeAndState();
+		realStage.setTitle(getLocalization().getWindowTitle("main"));
 		realStage.show();
 	}
 	
