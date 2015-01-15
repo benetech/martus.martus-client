@@ -2878,13 +2878,13 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	public void createAndShowConfirmationSizedDialog(String titleTag, FxNonWizardShellController dialogShellController) throws Exception
 	{
-		createAndShowModalDialog(this, dialogShellController, SMALL_PREFERRED_DIALOG_SIZE, titleTag);
+		createAndShowModalDialog(dialogShellController, SMALL_PREFERRED_DIALOG_SIZE, titleTag);
 	}
 
-	public static void createAndShowModalDialog(UiMainWindow mainWindow, FxNonWizardShellController controller, Dimension preferedDimension, String titleTag)
+	public void createAndShowModalDialog(FxNonWizardShellController controller, Dimension preferedDimension, String titleTag)
 	{
-		DialogStage stage = new DialogStage(mainWindow, controller);
-		createAndShowDialog(mainWindow, stage, titleTag, preferedDimension);
+		DialogStage stage = new DialogStage(this, controller);
+		createAndShowDialog(this, stage, titleTag, preferedDimension);
 	}
 
 	private static void createAndShowDialog(UiMainWindow owner, FxInSwingDialogStage stage, String titleTag, Dimension dimension)
