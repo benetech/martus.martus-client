@@ -2874,11 +2874,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		createAndShowDialog(stage, FxInSwingModalDialog.EMPTY_TITLE, LARGE_PREFERRED_DIALOG_SIZE);
 	}
 
-	public void createAndShowConfirmationSizedDialog(String titleTag, FxNonWizardShellController dialogShellController) throws Exception
-	{
-		createAndShowModalDialog(dialogShellController, SMALL_PREFERRED_DIALOG_SIZE, titleTag);
-	}
-
 	public void createAndShowModalDialog(FxShellController controller, Dimension preferedDimension, String titleTag)
 	{
 		FxInSwingModalDialogStage stage = new FxInSwingModalDialogStage(this, controller);
