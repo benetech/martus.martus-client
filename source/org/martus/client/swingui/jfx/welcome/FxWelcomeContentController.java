@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.welcome;
 
+import java.awt.Dimension;
+
 import javafx.fxml.FXML;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -60,4 +62,9 @@ public class FxWelcomeContentController extends FxContentController
 		return (FxInSwingDialogStage) getStage();
 	}
 
+	@Override
+	protected Dimension getPreferredDimension()
+	{
+		return UiMainWindow.LARGE_PREFERRED_DIALOG_SIZE;
+	}
 }

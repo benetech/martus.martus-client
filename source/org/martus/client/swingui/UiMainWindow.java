@@ -102,13 +102,13 @@ import org.martus.client.swingui.dialogs.UiWarningMessageDlg;
 import org.martus.client.swingui.filefilters.AllFileFilter;
 import org.martus.client.swingui.filefilters.KeyPairFormatFilter;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
+import org.martus.client.swingui.jfx.generic.DialogShellController;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.generic.FxInSwingDialogStage;
 import org.martus.client.swingui.jfx.generic.FxInSwingModalDialog;
 import org.martus.client.swingui.jfx.generic.FxInSwingModalDialogStage;
 import org.martus.client.swingui.jfx.generic.FxInSwingStage;
-import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
 import org.martus.client.swingui.jfx.generic.FxRunner;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
@@ -502,8 +502,8 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		    Platform.setImplicitExit(false);
 
 			FxController contentController = new FxWelcomeContentController(this);
-			FxShellController shellController = new WelcomeShellController(this, contentController);
-			createAndShowModalDialog(shellController, LARGE_PREFERRED_DIALOG_SIZE, FxInSwingModalDialog.EMPTY_TITLE);
+			DialogShellController shellController = new WelcomeShellController(this, contentController);
+			shellController.doAction();
 		    
 		    createAndShowLargeModalDialog(new SetupWizardStage(this));
 		} 
@@ -2912,7 +2912,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	}
 
 	public static final Dimension SMALL_PREFERRED_DIALOG_SIZE = new Dimension(400, 200);
-	private static final Dimension LARGE_PREFERRED_DIALOG_SIZE = new Dimension(960, 640);
+	public static final Dimension LARGE_PREFERRED_DIALOG_SIZE = new Dimension(960, 640);
 
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";

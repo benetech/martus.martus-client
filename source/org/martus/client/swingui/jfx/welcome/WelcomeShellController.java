@@ -31,10 +31,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.generic.DialogShellController;
 import org.martus.client.swingui.jfx.generic.FxController;
-import org.martus.client.swingui.jfx.generic.FxShellWithSingleContentController;
 
-public class WelcomeShellController extends FxShellWithSingleContentController
+public class WelcomeShellController extends DialogShellController
 {
 	public WelcomeShellController(UiMainWindow mainWindowToUse, FxController contentController)
 	{
