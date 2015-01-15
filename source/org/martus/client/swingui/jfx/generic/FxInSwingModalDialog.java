@@ -35,7 +35,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WindowObscurer;
 import org.martus.swing.Utilities;
 
-public class FxModalDialog extends JDialog
+public class FxInSwingModalDialog extends JDialog
 {
 	public static void createAndShow(UiMainWindow owner, FxInSwingDialogStage stage) throws Exception
 	{
@@ -58,7 +58,7 @@ public class FxModalDialog extends JDialog
 		if (dimension == null)
 			dimension = LARGE_PREFERRED_DIALOG_ZIZE;
 		
-		FxModalDialog dialog = createDialog(owner);
+		FxInSwingModalDialog dialog = createDialog(owner);
 		if (titleTag.length() > 0)
 			dialog.setTitle(owner.getLocalization().getWindowTitle(titleTag));
 		
@@ -75,16 +75,16 @@ public class FxModalDialog extends JDialog
 		owner.setCurrentActiveDialog(null);
 	}
 
-	public static FxModalDialog createDialog(UiMainWindow owner)
+	public static FxInSwingModalDialog createDialog(UiMainWindow owner)
 	{
 		JFrame frame = owner.getSwingFrame();
 		if(frame != null)
-			return new FxModalDialog(frame);
+			return new FxInSwingModalDialog(frame);
 
-		return new FxModalDialog();
+		return new FxInSwingModalDialog();
 	}
 	
-	private FxModalDialog()
+	private FxInSwingModalDialog()
 	{
 		// NOTE: Pass (Dialog)null to force this window to show up in the Task Bar
 		super((Dialog)null);
@@ -92,7 +92,7 @@ public class FxModalDialog extends JDialog
 		initialize();
 	}
 	
-	private FxModalDialog(JFrame owner)
+	private FxInSwingModalDialog(JFrame owner)
 	{
 		super(owner);
 

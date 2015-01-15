@@ -43,12 +43,12 @@ public class FxDialogHelper
 		String causeTag = UiLocalization.createNotifyCauseTag(baseTag);
 		FxController mainNotificationAreaController = new SimpleTextContentController(mainWindow, causeTag, map);
 		DialogShellController dialogWithCloseShellController = new DialogWithCloseShellController(mainWindow, mainNotificationAreaController);
-		createAndShowDialog(mainWindow, dialogWithCloseShellController, FxModalDialog.EMPTY_TITLE);
+		createAndShowDialog(mainWindow, dialogWithCloseShellController, FxInSwingModalDialog.EMPTY_TITLE);
 	}
 
 	public static boolean showConfirmationDialog(UiMainWindow mainWindow, String baseTag)
 	{
-		return showConfirmationDialog(mainWindow, baseTag, FxModalDialog.EMPTY_TITLE);
+		return showConfirmationDialog(mainWindow, baseTag, FxInSwingModalDialog.EMPTY_TITLE);
 	}
 	
 	public static boolean showConfirmationDialog(UiMainWindow mainWindow, String baseTag, String titleTag)
@@ -65,7 +65,7 @@ public class FxDialogHelper
 	{
 		try
 		{
-			FxModalDialog.createAndShowConfirmationSizedDialog(mainWindow, titleTag, dialogShellController);
+			FxInSwingModalDialog.createAndShowConfirmationSizedDialog(mainWindow, titleTag, dialogShellController);
 		} 
 		catch (Exception e)
 		{
