@@ -39,8 +39,9 @@ public class FxModalDialog extends JDialog
 {
 	public static void createAndShow(UiMainWindow mainWindow, DialogShellController controller, Dimension preferedDimension)
 	{
+		String titleTag = controller.getTitleTag();
 		DialogStage stage = new DialogStage(mainWindow, controller);
-		createAndShowDialog(mainWindow, stage, controller.getTitleTag(), preferedDimension);
+		createAndShowDialog(mainWindow, stage, titleTag, preferedDimension);
 	}
 
 	public static void createAndShow(UiMainWindow owner, FxInSwingDialogStage stage) throws Exception
