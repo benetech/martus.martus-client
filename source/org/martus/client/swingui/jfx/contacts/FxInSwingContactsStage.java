@@ -30,9 +30,9 @@ import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.generic.FxInSwingNonWizardStage;
 
-public class ContactsStage extends FxInSwingNonWizardStage
+public class FxInSwingContactsStage extends FxInSwingNonWizardStage
 {
-	public ContactsStage(UiMainWindow mainWindow) throws Exception
+	public FxInSwingContactsStage(UiMainWindow mainWindow) throws Exception
 	{
 		super(mainWindow);
 		
