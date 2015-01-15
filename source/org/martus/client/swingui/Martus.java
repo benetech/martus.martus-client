@@ -220,7 +220,7 @@ public class Martus
 		if(useSystemLookAndFeel)
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-		return new SwingMainWindow();
+		return new FxInSwingMainWindow();
 	}
 
 	private static int findOption(Vector options, String optionText)

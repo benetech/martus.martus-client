@@ -48,9 +48,9 @@ import org.martus.client.swingui.jfx.landing.FxInSwingMainStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.swing.Utilities;
 
-public class SwingMainWindow extends UiMainWindow
+public class FxInSwingMainWindow extends UiMainWindow
 {
-	public SwingMainWindow() throws Exception
+	public FxInSwingMainWindow() throws Exception
 	{
 		super();
 	}
