@@ -105,10 +105,10 @@ import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.generic.DialogShellController;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
-import org.martus.client.swingui.jfx.generic.FxInSwingDialogStage;
 import org.martus.client.swingui.jfx.generic.FxInSwingStage;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
+import org.martus.client.swingui.jfx.generic.VirtualStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.setupwizard.SetupWizardStage;
 import org.martus.client.swingui.jfx.welcome.FxWelcomeContentController;
@@ -2866,7 +2866,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		backgroundUploadTimerTask.setNeedToGetAccessToken();
 	}
 
-	abstract public void createAndShowLargeModalDialog(FxInSwingDialogStage stage) throws Exception;
+	abstract public void createAndShowLargeModalDialog(VirtualStage stage) throws Exception;
 	abstract public void createAndShowModalDialog(FxShellController controller, Dimension preferedDimension, String titleTag);
 	
 	public static final Dimension SMALL_PREFERRED_DIALOG_SIZE = new Dimension(400, 200);

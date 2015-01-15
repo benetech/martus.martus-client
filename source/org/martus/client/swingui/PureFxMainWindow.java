@@ -33,11 +33,10 @@ import javafx.stage.Stage;
 
 import javax.swing.JFrame;
 
-import org.martus.client.swingui.jfx.generic.FxInSwingDialogStage;
-import org.martus.client.swingui.jfx.generic.FxInSwingModalDialog;
 import org.martus.client.swingui.jfx.generic.FxInSwingStage;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
+import org.martus.client.swingui.jfx.generic.VirtualStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.landing.PureFxMainStage;
 
@@ -129,18 +128,13 @@ public class PureFxMainWindow extends UiMainWindow
 	}
 
 	@Override
-	public void createAndShowLargeModalDialog(FxInSwingDialogStage stageToShow) throws Exception
-	{
-		createAndShowDialog(stageToShow, FxInSwingModalDialog.EMPTY_TITLE, LARGE_PREFERRED_DIALOG_SIZE);
-	}
-
-	@Override
-	public void createAndShowModalDialog(FxShellController controller, Dimension preferedDimension, String titleTag)
+	public void createAndShowLargeModalDialog(VirtualStage stageToShow) throws Exception
 	{
 		// FIXME: Needs to be implemented
 	}
 
-	private void createAndShowDialog(FxInSwingDialogStage stageToShow, String titleTag, Dimension dimension)
+	@Override
+	public void createAndShowModalDialog(FxShellController controller, Dimension preferedDimension, String titleTag)
 	{
 		// FIXME: Needs to be implemented
 	}
