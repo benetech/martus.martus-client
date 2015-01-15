@@ -503,8 +503,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 			FxController contentController = new FxWelcomeContentController(this);
 			FxShellController shellController = new WelcomeShellController(this, contentController);
-		    FxInSwingDialogStage welcomeStage = new FxInSwingModalDialogStage(this, shellController);
-			createAndShowLargeModalDialog(welcomeStage);
+			createAndShowModalDialog(shellController, LARGE_PREFERRED_DIALOG_SIZE, FxInSwingModalDialog.EMPTY_TITLE);
 		    
 		    createAndShowLargeModalDialog(new SetupWizardStage(this));
 		} 
@@ -2880,7 +2879,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		createAndShowModalDialog(dialogShellController, SMALL_PREFERRED_DIALOG_SIZE, titleTag);
 	}
 
-	public void createAndShowModalDialog(FxNonWizardShellController controller, Dimension preferedDimension, String titleTag)
+	public void createAndShowModalDialog(FxShellController controller, Dimension preferedDimension, String titleTag)
 	{
 		FxInSwingModalDialogStage stage = new FxInSwingModalDialogStage(this, controller);
 		createAndShowDialog(stage, titleTag, preferedDimension);
