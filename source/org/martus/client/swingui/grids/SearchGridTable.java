@@ -76,7 +76,7 @@ public class SearchGridTable extends GridTable
 	
 	private void createEditableEditorsOrRenderers(HashMap map)
 	{
-		UiLocalization localization = dlgLauncher.GetLocalization();
+		UiLocalization localization = dlgLauncher.getLocalization();
 		map.put(new FieldTypeBoolean(), new GridBooleanCellEditor(localization));
 		map.put(new FieldTypeDate(), new GridDateCellEditor((DateFieldSpec)new FieldTypeDate().createEmptyFieldSpec(), localization));
 		map.put(new FieldTypeDateRange(), new GridDateRangeCellEditor(dlgLauncher, getGridFieldSpec(), (DateRangeFieldSpec) new FieldTypeDateRange().createEmptyFieldSpec(), localization));

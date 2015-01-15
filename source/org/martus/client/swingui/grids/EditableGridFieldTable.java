@@ -74,7 +74,7 @@ public class EditableGridFieldTable extends GridFieldTable
 	private GridCellEditorAndRenderer createEditor(FieldSpec cellFieldSpec)
 	{
 		FieldType type = cellFieldSpec.getType();
-		UiLocalization localization = dlgLauncher.GetLocalization();
+		UiLocalization localization = dlgLauncher.getLocalization();
 		if(type.isBoolean())
 			return new GridBooleanCellEditor(localization);
 		if(type.isDate())

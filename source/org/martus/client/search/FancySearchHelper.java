@@ -52,12 +52,12 @@ public class FancySearchHelper
 	public FancySearchHelper(ClientBulletinStore storeToUse, UiDialogLauncher dlgLauncherToUse)
 	{
 		dlgLauncher = dlgLauncherToUse;
-		model = new FancySearchTableModel(getGridSpec(storeToUse), storeToUse.getAllReusableChoiceLists(), dlgLauncherToUse.GetLocalization());
+		model = new FancySearchTableModel(getGridSpec(storeToUse), storeToUse.getAllReusableChoiceLists(), dlgLauncherToUse.getLocalization());
 	}
 	
 	UiLocalization getLocalization()
 	{
-		return dlgLauncher.GetLocalization();
+		return dlgLauncher.getLocalization();
 	}
 	
 	UiDialogLauncher getDialogLauncher()

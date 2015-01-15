@@ -59,26 +59,26 @@ public class UiDialogLauncher
 	{
 		if(frame == null)
 			return true;
-		return UiUtilities.confirmDlg(GetLocalization(), frame, baseTag);
+		return UiUtilities.confirmDlg(getLocalization(), frame, baseTag);
 	}
 
 	public boolean showConfirmDlg(String baseTag, HashMap map)
 	{
-		return UiUtilities.confirmDlg(GetLocalization(), frame, baseTag, map);
+		return UiUtilities.confirmDlg(getLocalization(), frame, baseTag, map);
 	}
 
 	public void ShowNotifyDialog(String baseTag)
 	{
-		UiUtilities.notifyDlg(GetLocalization(), frame, baseTag);
+		UiUtilities.notifyDlg(getLocalization(), frame, baseTag);
 	}
 
 	public void messageDlg(GridDateRangeCellEditor gridDateRangeCellEditor,
 			String baseTag, String message, HashMap tokenReplacement)
 	{
-		UiUtilities.messageDlg(GetLocalization(), frame, baseTag, message, tokenReplacement);
+		UiUtilities.messageDlg(getLocalization(), frame, baseTag, message, tokenReplacement);
 	}
 
-	public UiLocalization GetLocalization()
+	public UiLocalization getLocalization()
 	{
 		if(localization != null)
 			return localization;

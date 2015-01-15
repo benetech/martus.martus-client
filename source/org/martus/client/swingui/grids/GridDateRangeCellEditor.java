@@ -49,7 +49,7 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 {
 	GridDateRangeCellEditor(UiDialogLauncher dlgLauncherToUse, GridFieldSpec gridSpecToUse, DateRangeFieldSpec cellFieldSpec, MiniLocalization localizationToUse)
 	{
-		super(new UiGridDateRangeEditorViewer(cellFieldSpec, dlgLauncherToUse.GetLocalization()));
+		super(new UiGridDateRangeEditorViewer(cellFieldSpec, dlgLauncherToUse.getLocalization()));
 		dlgLauncher = dlgLauncherToUse;
 		gridSpec = gridSpecToUse;
 		localization = localizationToUse;
@@ -80,7 +80,7 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 		{
 			HashMap map = new HashMap();
 			map.put("#FieldLabel#", e.getFieldLabel());
-			map.put("#MinimumDate#", dlgLauncher.GetLocalization().convertStoredDateToDisplay(e.getMinimumDate()));
+			map.put("#MinimumDate#", dlgLauncher.getLocalization().convertStoredDateToDisplay(e.getMinimumDate()));
 			dlgLauncher.messageDlg(this, "ErrorDateTooEarly", "", map);
 			return false;
 		}
@@ -88,7 +88,7 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 		{
 			HashMap map = new HashMap();
 			map.put("#FieldLabel#", e.getFieldLabel());
-			map.put("#MaximumDate#", dlgLauncher.GetLocalization().convertStoredDateToDisplay(e.getMaximumDate()));
+			map.put("#MaximumDate#", dlgLauncher.getLocalization().convertStoredDateToDisplay(e.getMaximumDate()));
 			dlgLauncher.messageDlg(this, "ErrorDateTooLate", "", map);
 			return false;
 		}

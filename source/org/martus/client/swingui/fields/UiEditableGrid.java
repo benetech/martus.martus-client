@@ -85,7 +85,7 @@ public abstract class UiEditableGrid extends UiGrid implements FocusListener
 
 	protected Vector createButtons() 
 	{
-		MiniLocalization localization = table.getDialogLauncher().GetLocalization();
+		MiniLocalization localization = table.getDialogLauncher().getLocalization();
 
 		Vector buttons = new Vector();
 		
