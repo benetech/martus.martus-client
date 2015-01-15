@@ -51,6 +51,12 @@ public class FxSetupWizardShellController extends FxWizardShellController
 		return "setupwizard/SetupWizardShell.fxml";
 	}
 	
+	@Override
+	protected String getCssName()
+	{
+		return "SetupWizard.css";
+	}
+	
 	public void loadAndIntegrateContentPane(FxController contentPaneController) throws Exception
 	{
 		AbstractFxSetupWizardContentController controller = (AbstractFxSetupWizardContentController) contentPaneController;
