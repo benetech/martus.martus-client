@@ -32,7 +32,7 @@ import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentCon
 import org.martus.client.swingui.jfx.setupwizard.FxSetupWizardShellController;
 import org.martus.common.MartusLogger;
 
-abstract public class FxInSwingWizardStage extends FxInSwingDialogStage
+abstract public class FxInSwingWizardStage extends FxInSwingDialogStage implements WizardStageInterface
 {
 	public FxInSwingWizardStage(UiMainWindow mainWindowToUse, String cssName) throws Exception
 	{
@@ -69,7 +69,7 @@ abstract public class FxInSwingWizardStage extends FxInSwingDialogStage
 		getWizardShellController().loadAndIntegrateContentPane(contentPaneController);
 	}
 	
-	protected void next()
+	public void next()
 	{
 		try
 		{
@@ -93,7 +93,7 @@ abstract public class FxInSwingWizardStage extends FxInSwingDialogStage
 		}
 	}
 
-	protected void back()
+	public void back()
 	{
 		try
 		{

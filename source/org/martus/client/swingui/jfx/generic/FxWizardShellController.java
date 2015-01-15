@@ -51,9 +51,9 @@ abstract public class FxWizardShellController extends FxShellController implemen
 		super.initialize(location, bundle);
 	}
 	
-	public FxInSwingWizardStage getWizardStage()
+	public WizardStageInterface getWizardStage()
 	{
-		return (FxInSwingWizardStage) getStage();
+		return (WizardStageInterface) getStage();
 	}
 	
 	abstract public void loadAndIntegrateContentPane(FxController contentPaneController) throws Exception;
