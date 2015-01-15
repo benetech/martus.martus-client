@@ -2898,8 +2898,14 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	
 		Utilities.packAndCenterWindow(dialog);
 		setCurrentActiveDialog(dialog);
-		dialog.setVisible(true);
-		setCurrentActiveDialog(null);
+		try
+		{
+			dialog.setVisible(true);
+		}
+		finally
+		{
+			setCurrentActiveDialog(null);
+		}
 	}
 
 	private static FxInSwingModalDialog createDialog(UiMainWindow owner)
