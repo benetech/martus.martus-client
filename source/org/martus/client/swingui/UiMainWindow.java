@@ -1451,12 +1451,15 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		}
 		uiState.setCurrentPreviewSplitterPosition(getPreviewSplitterDividerLocation());
 		uiState.setCurrentFolderSplitterPosition(getFolderSplitterDividerLocation());
-		uiState.setCurrentAppDimension(getSwingFrame().getSize());
-		uiState.setCurrentAppPosition(getSwingFrame().getLocation());
-		boolean isMaximized = getSwingFrame().getExtendedState()==JFrame.MAXIMIZED_BOTH;
-		uiState.setCurrentAppMaximized(isMaximized);
+		uiState.setCurrentAppDimension(getMainWindowSize());
+		uiState.setCurrentAppPosition(getMainWindowLocation());
+		uiState.setCurrentAppMaximized(isMainWindowMaximized());
 		saveCurrentUiState();
 	}
+
+	abstract public boolean isMainWindowMaximized();
+	abstract public Dimension getMainWindowSize();
+	abstract public Point getMainWindowLocation();
 
 	private static final int ARBITRARY_FALLBACK_SPLITTER_LOCATION = 100;
 	
@@ -2150,7 +2153,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 			Utilities.maximizeWindow(getSwingFrame());
 		}
 		
-		getUiState().setCurrentAppDimension(getSwingFrame().getSize());
+		getUiState().setCurrentAppDimension(getMainWindowSize());
 	}
 
 	public void updateServerStatusInStatusBar()

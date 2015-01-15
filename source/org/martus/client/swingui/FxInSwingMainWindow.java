@@ -27,6 +27,7 @@ package org.martus.client.swingui;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.Window;
 
 import javafx.application.Platform;
@@ -213,6 +214,25 @@ public class FxInSwingMainWindow extends UiMainWindow
 			setCurrentActiveDialog(null);
 		}
 	}
+
+	@Override
+	public Dimension getMainWindowSize()
+	{
+		return getSwingFrame().getSize();
+	}
+
+	@Override
+	public Point getMainWindowLocation()
+	{
+		return getSwingFrame().getLocation();
+	}
+
+	@Override
+	public boolean isMainWindowMaximized()
+	{
+		return getSwingFrame().getExtendedState()==JFrame.MAXIMIZED_BOTH;
+	}
+
 
 	private static FxInSwingModalDialog createDialog(UiMainWindow owner)
 	{
