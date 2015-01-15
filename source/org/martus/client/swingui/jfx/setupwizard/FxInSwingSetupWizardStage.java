@@ -32,9 +32,9 @@ import org.martus.client.swingui.jfx.generic.FxInSwingWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.step1.FxSetupUsernamePasswordController;
 import org.martus.common.EnglishCommonStrings;
 
-public class SetupWizardStage extends FxInSwingWizardStage
+public class FxInSwingSetupWizardStage extends FxInSwingWizardStage
 {
-	public SetupWizardStage(UiMainWindow mainWindow) throws Exception
+	public FxInSwingSetupWizardStage(UiMainWindow mainWindow) throws Exception
 	{
 		super(mainWindow, "SetupWizard.css");
 	}
