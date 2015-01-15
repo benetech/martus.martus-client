@@ -48,6 +48,12 @@ public class WelcomeShellController extends FxShellWithSingleContentController
 	}
 
 	@Override
+	protected String getCssName()
+	{
+		return "Welcome.css";
+	}
+	
+	@Override
 	protected Pane getContentPane()
 	{
 		return contentPane;
