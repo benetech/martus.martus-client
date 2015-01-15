@@ -37,7 +37,7 @@ import org.martus.swing.Utilities;
 
 public class FxModalDialog extends JDialog
 {
-	public static void createAndShow(UiMainWindow mainWindow, DialogShellController controller, Dimension preferedDimension, String titleTag)
+	public static void createAndShow(UiMainWindow mainWindow, FxNonWizardShellController controller, Dimension preferedDimension, String titleTag)
 	{
 		DialogStage stage = new DialogStage(mainWindow, controller);
 		createAndShowDialog(mainWindow, stage, titleTag, preferedDimension);
@@ -50,8 +50,7 @@ public class FxModalDialog extends JDialog
 	
 	public static void createAndShowConfirmationSizedDialog(UiMainWindow owner, String titleTag, FxNonWizardShellController dialogShellController) throws Exception
 	{
-		DialogStage stage = new DialogStage(owner, dialogShellController);
-		createAndShowDialog(owner, stage, titleTag, SMALL_PREFERRED_DIALOG_SIZE);
+		createAndShow(owner, dialogShellController, SMALL_PREFERRED_DIALOG_SIZE, titleTag);
 	}
 
 	private static void createAndShowDialog(UiMainWindow owner, FxInSwingDialogStage stage, String titleTag, Dimension dimension)
