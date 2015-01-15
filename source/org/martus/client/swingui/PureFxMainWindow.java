@@ -42,6 +42,7 @@ import org.martus.client.swingui.jfx.generic.PureFxStage;
 import org.martus.client.swingui.jfx.generic.VirtualStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.landing.PureFxMainStage;
+import org.martus.client.swingui.jfx.setupwizard.PureFxSetupWizardStage;
 
 public class PureFxMainWindow extends UiMainWindow
 {
@@ -152,5 +153,11 @@ public class PureFxMainWindow extends UiMainWindow
 		createAndShowLargeModalDialog(new PureFxContactsStage(this));
 	}
 
+	@Override
+	public void createAndShowSetupWizard() throws Exception
+	{
+		createAndShowLargeModalDialog(new PureFxSetupWizardStage(this));
+	}
+	
 	private static Stage realStage;
 }

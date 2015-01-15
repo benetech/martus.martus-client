@@ -46,6 +46,7 @@ import org.martus.client.swingui.jfx.generic.FxStatusBar;
 import org.martus.client.swingui.jfx.generic.VirtualStage;
 import org.martus.client.swingui.jfx.landing.FxInSwingMainStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
+import org.martus.client.swingui.jfx.setupwizard.FxInSwingSetupWizardStage;
 import org.martus.swing.Utilities;
 
 public class FxInSwingMainWindow extends UiMainWindow
@@ -177,6 +178,12 @@ public class FxInSwingMainWindow extends UiMainWindow
 	public void createAndShowContactsDialog() throws Exception
 	{
 		createAndShowLargeModalDialog(new FxInSwingContactsStage(this));
+	}
+
+	@Override
+	public void createAndShowSetupWizard() throws Exception
+	{
+		createAndShowLargeModalDialog(new FxInSwingSetupWizardStage(this));
 	}
 	
 	private void createAndShowDialog(FxInSwingDialogStage stage, String titleTag, Dimension dimension)

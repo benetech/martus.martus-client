@@ -41,6 +41,11 @@ abstract public class AbstractFxSetupWizardContentController extends FxContentCo
 		super(mainWindowToUse);
 	}
 	
+	@Override
+	protected String getCssName()
+	{
+		return "SetupWizard.css";
+	}
 	
 	final public void initialize()
 	{
