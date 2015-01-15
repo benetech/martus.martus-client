@@ -60,7 +60,8 @@ abstract public class DialogShellController extends FxShellWithSingleContentCont
 		try
 		{
 			Dimension preferedDimension = this.getContentController().getPreferredDimension();
-			FxModalDialog.createAndShow(mainWindow, this, preferedDimension);
+			String titleTag = this.getTitleTag();
+			FxModalDialog.createAndShow(mainWindow, this, preferedDimension, titleTag);
 		} 
 		catch (Exception e)
 		{
