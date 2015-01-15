@@ -54,9 +54,9 @@ public class FxWelcomeContentController extends FxContentController
 		getWelcomeStage().close();
 	}
 
-	private WelcomeStage getWelcomeStage()
+	private FxInSwingWelcomeStage getWelcomeStage()
 	{
-		return (WelcomeStage) getStage();
+		return (FxInSwingWelcomeStage) getStage();
 	}
 
 }

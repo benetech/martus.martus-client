@@ -29,9 +29,9 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingNonWizardStage;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 
-public class WelcomeStage extends FxInSwingNonWizardStage
+public class FxInSwingWelcomeStage extends FxInSwingNonWizardStage
 {
-	public WelcomeStage(UiMainWindow mainWindow, FxShellController shellController) throws Exception
+	public FxInSwingWelcomeStage(UiMainWindow mainWindow, FxShellController shellController) throws Exception
 	{
 		super(mainWindow);
 		
