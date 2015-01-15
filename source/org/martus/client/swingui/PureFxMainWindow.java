@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui;
 
+import java.awt.Dimension;
 import java.awt.Window;
 
 import javafx.scene.Cursor;
@@ -32,6 +33,8 @@ import javafx.stage.Stage;
 
 import javax.swing.JFrame;
 
+import org.martus.client.swingui.jfx.generic.FxInSwingDialogStage;
+import org.martus.client.swingui.jfx.generic.FxInSwingModalDialog;
 import org.martus.client.swingui.jfx.generic.FxInSwingStage;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
@@ -123,6 +126,21 @@ public class PureFxMainWindow extends UiMainWindow
 	{
 		// FIXME: Needs to be implemented
 		throw new RuntimeException("Not implemented");
+	}
+
+	public void createAndShowLargeModalDialog(FxInSwingDialogStage stageToShow) throws Exception
+	{
+		createAndShowDialog(stageToShow, FxInSwingModalDialog.EMPTY_TITLE, LARGE_PREFERRED_DIALOG_SIZE);
+	}
+
+	public void createAndShowModalDialog(FxShellController controller, Dimension preferedDimension, String titleTag)
+	{
+		// FIXME: Needs to be implemented
+	}
+
+	private void createAndShowDialog(FxInSwingDialogStage stageToShow, String titleTag, Dimension dimension)
+	{
+		// FIXME: Needs to be implemented
 	}
 
 	private static Stage stage;

@@ -26,19 +26,25 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Window;
 
 import javafx.application.Platform;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import org.martus.client.swingui.jfx.generic.FxInSwingDialogStage;
+import org.martus.client.swingui.jfx.generic.FxInSwingModalDialog;
+import org.martus.client.swingui.jfx.generic.FxInSwingModalDialogStage;
 import org.martus.client.swingui.jfx.generic.FxInSwingStage;
 import org.martus.client.swingui.jfx.generic.FxRunner;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
 import org.martus.client.swingui.jfx.landing.FxInSwingMainStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
+import org.martus.swing.Utilities;
 
 public class SwingMainWindow extends UiMainWindow
 {
@@ -150,6 +156,56 @@ public class SwingMainWindow extends UiMainWindow
 	public FxInSwingStage createGenericStage(UiMainWindow observerToUse, Window windowToUse, FxShellController shellController, String cssName)
 	{
 		return new FxInSwingStage(observerToUse, windowToUse, shellController, cssName);
+	}
+
+	@Override
+	public void createAndShowLargeModalDialog(FxInSwingDialogStage stage) throws Exception
+	{
+		createAndShowDialog(stage, FxInSwingModalDialog.EMPTY_TITLE, LARGE_PREFERRED_DIALOG_SIZE);
+	}
+
+	@Override
+	public void createAndShowModalDialog(FxShellController controller, Dimension preferedDimension, String titleTag)
+	{
+		FxInSwingModalDialogStage stage = new FxInSwingModalDialogStage(this, controller);
+		createAndShowDialog(stage, titleTag, preferedDimension);
+	}
+
+	private void createAndShowDialog(FxInSwingDialogStage stage, String titleTag, Dimension dimension)
+	{
+		if (dimension == null)
+			dimension = LARGE_PREFERRED_DIALOG_SIZE;
+		
+		FxInSwingModalDialog dialog = createDialog(this);
+		if (titleTag.length() > 0)
+			dialog.setTitle(getLocalization().getWindowTitle(titleTag));
+		
+		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		dialog.getContentPane().setPreferredSize(dimension);
+		dialog.pack();
+		dialog.getContentPane().add(stage.getPanel());
+		stage.setDialog(dialog);
+		stage.runOnFxThreadMaybeLater(new FxRunner(stage));
+	
+		Utilities.packAndCenterWindow(dialog);
+		setCurrentActiveDialog(dialog);
+		try
+		{
+			dialog.setVisible(true);
+		}
+		finally
+		{
+			setCurrentActiveDialog(null);
+		}
+	}
+
+	private static FxInSwingModalDialog createDialog(UiMainWindow owner)
+	{
+		JFrame frame = owner.getSwingFrame();
+		if(frame != null)
+			return new FxInSwingModalDialog(frame);
+	
+		return new FxInSwingModalDialog();
 	}
 
 	private JFrame swingFrame;
