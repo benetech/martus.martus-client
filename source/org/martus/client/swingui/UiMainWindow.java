@@ -504,7 +504,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 			FxController contentController = new FxWelcomeContentController(this);
 			FxShellController shellController = new WelcomeShellController(this, contentController);
-		    WelcomeStage welcomeStage = new WelcomeStage(this, shellController);
+		    FxInSwingDialogStage welcomeStage = new WelcomeStage(this, shellController);
 			createAndShowLargeModalDialog(welcomeStage);
 		    
 		    createAndShowLargeModalDialog(new SetupWizardStage(this));
