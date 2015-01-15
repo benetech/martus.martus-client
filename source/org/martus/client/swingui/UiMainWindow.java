@@ -106,10 +106,7 @@ import org.martus.client.swingui.jfx.generic.DialogShellController;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.generic.FxInSwingDialogStage;
-import org.martus.client.swingui.jfx.generic.FxInSwingModalDialog;
-import org.martus.client.swingui.jfx.generic.FxInSwingModalDialogStage;
 import org.martus.client.swingui.jfx.generic.FxInSwingStage;
-import org.martus.client.swingui.jfx.generic.FxRunner;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
@@ -2869,54 +2866,9 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		backgroundUploadTimerTask.setNeedToGetAccessToken();
 	}
 
-	public void createAndShowLargeModalDialog(FxInSwingDialogStage stage) throws Exception
-	{
-		createAndShowDialog(stage, FxInSwingModalDialog.EMPTY_TITLE, LARGE_PREFERRED_DIALOG_SIZE);
-	}
-
-	public void createAndShowModalDialog(FxShellController controller, Dimension preferedDimension, String titleTag)
-	{
-		FxInSwingModalDialogStage stage = new FxInSwingModalDialogStage(this, controller);
-		createAndShowDialog(stage, titleTag, preferedDimension);
-	}
-
-	private void createAndShowDialog(FxInSwingDialogStage stage, String titleTag, Dimension dimension)
-	{
-		if (dimension == null)
-			dimension = LARGE_PREFERRED_DIALOG_SIZE;
-		
-		FxInSwingModalDialog dialog = createDialog(this);
-		if (titleTag.length() > 0)
-			dialog.setTitle(getLocalization().getWindowTitle(titleTag));
-		
-		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		dialog.getContentPane().setPreferredSize(dimension);
-		dialog.pack();
-		dialog.getContentPane().add(stage.getPanel());
-		stage.setDialog(dialog);
-		stage.runOnFxThreadMaybeLater(new FxRunner(stage));
+	abstract public void createAndShowLargeModalDialog(FxInSwingDialogStage stage) throws Exception;
+	abstract public void createAndShowModalDialog(FxShellController controller, Dimension preferedDimension, String titleTag);
 	
-		Utilities.packAndCenterWindow(dialog);
-		setCurrentActiveDialog(dialog);
-		try
-		{
-			dialog.setVisible(true);
-		}
-		finally
-		{
-			setCurrentActiveDialog(null);
-		}
-	}
-
-	private static FxInSwingModalDialog createDialog(UiMainWindow owner)
-	{
-		JFrame frame = owner.getSwingFrame();
-		if(frame != null)
-			return new FxInSwingModalDialog(frame);
-	
-		return new FxInSwingModalDialog();
-	}
-
 	public static final Dimension SMALL_PREFERRED_DIALOG_SIZE = new Dimension(400, 200);
 	public static final Dimension LARGE_PREFERRED_DIALOG_SIZE = new Dimension(960, 640);
 
