@@ -60,6 +60,15 @@ public abstract class FxShellController extends FxController
 		getStage().close();
 	}
 
+	public String getTitleTag()
+	{
+		return "";
+	}
+
+	public String getDialogTitle()
+	{
+		return "";
+	}
 
 	private VirtualStage stage;
 }
