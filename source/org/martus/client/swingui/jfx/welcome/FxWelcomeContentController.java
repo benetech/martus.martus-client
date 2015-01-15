@@ -29,6 +29,7 @@ import javafx.fxml.FXML;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxContentController;
+import org.martus.client.swingui.jfx.generic.FxInSwingDialogStage;
 
 public class FxWelcomeContentController extends FxContentController
 {
@@ -54,9 +55,9 @@ public class FxWelcomeContentController extends FxContentController
 		getWelcomeStage().close();
 	}
 
-	private FxInSwingWelcomeStage getWelcomeStage()
+	private FxInSwingDialogStage getWelcomeStage()
 	{
-		return (FxInSwingWelcomeStage) getStage();
+		return (FxInSwingDialogStage) getStage();
 	}
 
 }
