@@ -495,9 +495,9 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 			// NOTE: Prevent implicit JavaFX shutdown when the only JFX window is closed
 		    Platform.setImplicitExit(false);
 
-		    FxInSwingModalDialog.createAndShow(this, new WelcomeStage(this));
+		    FxInSwingModalDialog.createAndShowLargeModalDialog(this, new WelcomeStage(this));
 		    
-		    FxInSwingModalDialog.createAndShow(this, new SetupWizardStage(this));
+		    FxInSwingModalDialog.createAndShowLargeModalDialog(this, new SetupWizardStage(this));
 		} 
 		catch (Exception e)
 		{
