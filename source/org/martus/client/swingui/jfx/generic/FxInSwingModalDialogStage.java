@@ -29,7 +29,7 @@ import org.martus.client.swingui.UiMainWindow;
 
 public class FxInSwingModalDialogStage extends FxInSwingDialogStage
 {
-	public FxInSwingModalDialogStage(UiMainWindow mainWindowToUse, FxNonWizardShellController controllerToUse)
+	public FxInSwingModalDialogStage(UiMainWindow mainWindowToUse, FxShellController controllerToUse)
 	{
 		super(mainWindowToUse, controllerToUse.getCssName());
 		setShellController(controllerToUse);
