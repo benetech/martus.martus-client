@@ -2873,7 +2873,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	public void createAndShowLargeModalDialog(FxInSwingDialogStage stage) throws Exception
 	{
-		createAndShowDialog(this, stage, FxInSwingModalDialog.EMPTY_TITLE, LARGE_PREFERRED_DIALOG_SIZE);
+		createAndShowDialog(stage, FxInSwingModalDialog.EMPTY_TITLE, LARGE_PREFERRED_DIALOG_SIZE);
 	}
 
 	public void createAndShowConfirmationSizedDialog(String titleTag, FxNonWizardShellController dialogShellController) throws Exception
@@ -2884,17 +2884,17 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	public void createAndShowModalDialog(FxNonWizardShellController controller, Dimension preferedDimension, String titleTag)
 	{
 		DialogStage stage = new DialogStage(this, controller);
-		createAndShowDialog(this, stage, titleTag, preferedDimension);
+		createAndShowDialog(stage, titleTag, preferedDimension);
 	}
 
-	private static void createAndShowDialog(UiMainWindow owner, FxInSwingDialogStage stage, String titleTag, Dimension dimension)
+	private void createAndShowDialog(FxInSwingDialogStage stage, String titleTag, Dimension dimension)
 	{
 		if (dimension == null)
 			dimension = LARGE_PREFERRED_DIALOG_SIZE;
 		
-		FxInSwingModalDialog dialog = createDialog(owner);
+		FxInSwingModalDialog dialog = createDialog(this);
 		if (titleTag.length() > 0)
-			dialog.setTitle(owner.getLocalization().getWindowTitle(titleTag));
+			dialog.setTitle(getLocalization().getWindowTitle(titleTag));
 		
 		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		dialog.getContentPane().setPreferredSize(dimension);
@@ -2904,9 +2904,9 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		stage.runOnFxThreadMaybeLater(new FxRunner(stage));
 	
 		Utilities.packAndCenterWindow(dialog);
-		owner.setCurrentActiveDialog(dialog);
+		setCurrentActiveDialog(dialog);
 		dialog.setVisible(true);
-		owner.setCurrentActiveDialog(null);
+		setCurrentActiveDialog(null);
 	}
 
 	private static FxInSwingModalDialog createDialog(UiMainWindow owner)
