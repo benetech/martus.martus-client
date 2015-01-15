@@ -114,7 +114,6 @@ import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.setupwizard.SetupWizardStage;
-import org.martus.client.swingui.jfx.welcome.FxInSwingWelcomeStage;
 import org.martus.client.swingui.jfx.welcome.FxWelcomeContentController;
 import org.martus.client.swingui.jfx.welcome.WelcomeShellController;
 import org.martus.client.swingui.spellcheck.SpellCheckerManager;
@@ -504,7 +503,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 			FxController contentController = new FxWelcomeContentController(this);
 			FxShellController shellController = new WelcomeShellController(this, contentController);
-		    FxInSwingDialogStage welcomeStage = new FxInSwingWelcomeStage(this, shellController);
+		    FxInSwingDialogStage welcomeStage = new FxInSwingModalDialogStage(this, shellController);
 			createAndShowLargeModalDialog(welcomeStage);
 		    
 		    createAndShowLargeModalDialog(new SetupWizardStage(this));
