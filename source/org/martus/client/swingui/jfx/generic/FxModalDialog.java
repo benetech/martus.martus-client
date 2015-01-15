@@ -40,6 +40,11 @@ public class FxModalDialog extends JDialog
 	public static void createAndShow(UiMainWindow mainWindow, DialogShellController controller, Dimension preferedDimension)
 	{
 		String titleTag = controller.getTitleTag();
+		createAndShow(mainWindow, controller, preferedDimension, titleTag);
+	}
+
+	public static void createAndShow(UiMainWindow mainWindow, DialogShellController controller, Dimension preferedDimension, String titleTag)
+	{
 		DialogStage stage = new DialogStage(mainWindow, controller);
 		createAndShowDialog(mainWindow, stage, titleTag, preferedDimension);
 	}
