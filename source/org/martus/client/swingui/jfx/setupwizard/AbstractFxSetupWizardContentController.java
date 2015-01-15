@@ -31,7 +31,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.WizardNavigationButtonsInterface;
 import org.martus.client.swingui.jfx.WizardNavigationHandlerInterface;
 import org.martus.client.swingui.jfx.generic.FxContentController;
-import org.martus.client.swingui.jfx.generic.FxWizardStage;
+import org.martus.client.swingui.jfx.generic.FxInSwingWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.tasks.ConnectToServerTask;
 
 abstract public class AbstractFxSetupWizardContentController extends FxContentController implements WizardNavigationHandlerInterface, Initializable
@@ -86,9 +86,9 @@ abstract public class AbstractFxSetupWizardContentController extends FxContentCo
 		wizardNavigationHandler = navigationHandlerToUse;
 	}
 	
-	public FxWizardStage getWizardStage()
+	public FxInSwingWizardStage getWizardStage()
 	{
-		return (FxWizardStage) getStage();
+		return (FxInSwingWizardStage) getStage();
 	}
 	
 	abstract public int getWizardStepNumber();

@@ -28,11 +28,11 @@ package org.martus.client.swingui.jfx.setupwizard;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxContentController;
-import org.martus.client.swingui.jfx.generic.FxWizardStage;
+import org.martus.client.swingui.jfx.generic.FxInSwingWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.step1.FxSetupUsernamePasswordController;
 import org.martus.common.EnglishCommonStrings;
 
-public class SetupWizardStage extends FxWizardStage
+public class SetupWizardStage extends FxInSwingWizardStage
 {
 	public SetupWizardStage(UiMainWindow mainWindow) throws Exception
 	{
