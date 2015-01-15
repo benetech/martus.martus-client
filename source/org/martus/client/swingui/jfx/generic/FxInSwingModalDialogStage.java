@@ -31,9 +31,8 @@ public class FxInSwingModalDialogStage extends FxInSwingNonWizardStage
 {
 	public FxInSwingModalDialogStage(UiMainWindow mainWindowToUse, FxNonWizardShellController controllerToUse)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, controllerToUse.getCssName());
 		setShellController(controllerToUse);
-		setCssName(controllerToUse.getCssName());
 	}
 	
 	@Override
@@ -42,16 +41,4 @@ public class FxInSwingModalDialogStage extends FxInSwingNonWizardStage
 		return true;
 	}
 
-	public void setCssName(String cssName)
-	{
-		this.cssFile = cssName;
-	}
-	
-	@Override
-	protected String getCssName()
-	{
-		return cssFile;
-	}
-
-	private String cssFile;
 }

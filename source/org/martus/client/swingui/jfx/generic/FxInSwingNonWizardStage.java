@@ -29,9 +29,23 @@ import org.martus.client.swingui.UiMainWindow;
 
 abstract public class FxInSwingNonWizardStage extends FxInSwingDialogStage
 {
-	public FxInSwingNonWizardStage(UiMainWindow mainWindowToUse)
+	public FxInSwingNonWizardStage(UiMainWindow mainWindowToUse, String cssName)
 	{
 		super(mainWindowToUse);
+
+		setCssName(cssName);
 	}
 
+	public void setCssName(String cssName)
+	{
+		this.cssFile = cssName;
+	}
+	
+	@Override
+	protected String getCssName()
+	{
+		return cssFile;
+	}
+
+	private String cssFile;
 }
