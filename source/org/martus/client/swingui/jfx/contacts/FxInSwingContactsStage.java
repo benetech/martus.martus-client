@@ -28,18 +28,15 @@ package org.martus.client.swingui.jfx.contacts;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
-import org.martus.client.swingui.jfx.generic.FxInSwingDialogStage;
+import org.martus.client.swingui.jfx.generic.FxInSwingModalDialogStage;
 
-public class FxInSwingContactsStage extends FxInSwingDialogStage
+public class FxInSwingContactsStage extends FxInSwingModalDialogStage
 {
 	public FxInSwingContactsStage(UiMainWindow mainWindow) throws Exception
 	{
-		super(mainWindow, "Contacts.css");
+		super(mainWindow, new ContactsShellController(mainWindow));
 		
-		ContactsShellController shellController = new ContactsShellController(getMainWindow());
 		contentController = new FxManageContactsController(getMainWindow());
-
-		setShellController(shellController);
 	}
 
 	@Override

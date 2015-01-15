@@ -44,6 +44,12 @@ public class ContactsShellController extends FxWizardShellController implements 
 	{
 		super(mainWindowToUse);
 	}
+	
+	@Override
+	protected String getCssName()
+	{
+		return "Contacts.css";
+	}
 
 	@Override
 	public String getFxmlLocation()
