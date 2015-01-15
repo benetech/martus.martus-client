@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2015, Beneficent
+monitoring software. Copyright (C) 2014, Beneficent
 Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
@@ -27,13 +27,15 @@ package org.martus.client.swingui.jfx.generic;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public class PureFxDialogStage extends PureFxStage
+public class PureFxModalDialogStage extends PureFxDialogStage
 {
-	public PureFxDialogStage(UiMainWindow mainWindowToUse, FxShellController controller) throws Exception
+	public PureFxModalDialogStage(UiMainWindow mainWindowToUse, FxShellController controllerToUse) throws Exception
 	{
-		super(mainWindowToUse, controller, controller.getCssName());
+		super(mainWindowToUse, controllerToUse);
+		setShellController(controllerToUse);
 	}
-
+	
+	@Override
 	protected boolean confirmExit()
 	{
 		return true;

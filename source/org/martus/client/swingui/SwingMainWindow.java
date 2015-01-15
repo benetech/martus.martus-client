@@ -35,6 +35,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import org.martus.client.swingui.jfx.contacts.FxInSwingContactsStage;
 import org.martus.client.swingui.jfx.generic.FxInSwingDialogStage;
 import org.martus.client.swingui.jfx.generic.FxInSwingModalDialog;
 import org.martus.client.swingui.jfx.generic.FxInSwingModalDialogStage;
@@ -172,6 +173,12 @@ public class SwingMainWindow extends UiMainWindow
 		createAndShowDialog(stage, titleTag, preferedDimension);
 	}
 
+	@Override
+	public void createAndShowContactsDialog() throws Exception
+	{
+		createAndShowLargeModalDialog(new FxInSwingContactsStage(this));
+	}
+	
 	private void createAndShowDialog(FxInSwingDialogStage stage, String titleTag, Dimension dimension)
 	{
 		if (dimension == null)

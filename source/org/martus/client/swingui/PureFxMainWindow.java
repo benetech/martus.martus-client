@@ -33,10 +33,12 @@ import javafx.stage.Stage;
 
 import javax.swing.JFrame;
 
+import org.martus.client.swingui.jfx.contacts.PureFxContactsStage;
 import org.martus.client.swingui.jfx.generic.FxInSwingStage;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
 import org.martus.client.swingui.jfx.generic.PureFxDialogStage;
+import org.martus.client.swingui.jfx.generic.PureFxStage;
 import org.martus.client.swingui.jfx.generic.VirtualStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.landing.PureFxMainStage;
@@ -131,7 +133,9 @@ public class PureFxMainWindow extends UiMainWindow
 	@Override
 	public void createAndShowLargeModalDialog(VirtualStage stageToShow) throws Exception
 	{
-		// FIXME: Needs to be implemented
+		PureFxStage fxStage = (PureFxStage)stageToShow;
+		fxStage.showCurrentPage();
+		fxStage.showAndWait();
 	}
 
 	@Override
@@ -140,6 +144,12 @@ public class PureFxMainWindow extends UiMainWindow
 		PureFxDialogStage dialogStage = new PureFxDialogStage(this, controller); 
 		dialogStage.showCurrentPage();
 		dialogStage.showAndWait();
+	}
+	
+	@Override
+	public void createAndShowContactsDialog() throws Exception
+	{
+		createAndShowLargeModalDialog(new PureFxContactsStage(this));
 	}
 
 	private static Stage stage;
