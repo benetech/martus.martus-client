@@ -37,7 +37,6 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.DialogWithOkCancelShellController;
-import org.martus.client.swingui.jfx.generic.FxInSwingModalDialog;
 
 public class FxFolderCreateController extends FxFolderBaseController
 {
@@ -67,7 +66,7 @@ public class FxFolderCreateController extends FxFolderBaseController
 	@Override
 	protected Dimension getPreferredDimension()
 	{
-		return FxInSwingModalDialog.SMALL_PREFERRED_DIALOG_SIZE;
+		return UiMainWindow.SMALL_PREFERRED_DIALOG_SIZE;
 	}
 
 	@Override
