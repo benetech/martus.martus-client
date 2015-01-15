@@ -54,7 +54,7 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 	{
 		fxLabel.setText(message);
 		task.stateProperty().addListener(new TaskStateChangeHandler());	
-		PureFxStage stage = getStage();
+		PureFxStage stage = getPureFxStage();
 		stage.setOnCloseRequest(new CloseEventHandler());
 		stage.initStyle(StageStyle.UNDECORATED);
 		Thread thread = new Thread(task);

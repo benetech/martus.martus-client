@@ -46,14 +46,9 @@ abstract public class FxPopupController extends FxShellController
 	
 	abstract public void initialize();
 	
-	public void setStage(PureFxStage stageToUse)
+	public PureFxStage getPureFxStage()
 	{
-		stage = stageToUse;
-	}
-	
-	public PureFxStage getStage()
-	{
-		return stage;
+		return (PureFxStage) getStage();
 	}
 	
 	public Throwable getThrownException()
@@ -66,6 +61,5 @@ abstract public class FxPopupController extends FxShellController
 		thrownException = exception;
 	}
 
-	private PureFxStage stage;
 	private Throwable thrownException;
 }
