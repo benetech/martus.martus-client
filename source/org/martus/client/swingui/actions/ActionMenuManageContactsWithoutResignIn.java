@@ -28,7 +28,7 @@ package org.martus.client.swingui.actions;
 import java.awt.event.ActionEvent;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.contacts.ContactsStage;
+import org.martus.client.swingui.jfx.contacts.FxInSwingContactsStage;
 
 public class ActionMenuManageContactsWithoutResignIn extends UiMenuAction  implements ActionDoer
 {
@@ -46,7 +46,7 @@ public class ActionMenuManageContactsWithoutResignIn extends UiMenuAction  imple
 	{
 		try
 		{
-			mainWindow.createAndShowLargeModalDialog(new ContactsStage(mainWindow));
+			mainWindow.createAndShowLargeModalDialog(new FxInSwingContactsStage(mainWindow));
 		} 
 		catch (Exception e)
 		{
