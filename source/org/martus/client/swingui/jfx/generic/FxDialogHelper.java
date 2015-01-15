@@ -65,7 +65,7 @@ public class FxDialogHelper
 	{
 		try
 		{
-			FxInSwingModalDialog.createAndShowConfirmationSizedDialog(mainWindow, titleTag, dialogShellController);
+			UiMainWindow.createAndShowConfirmationSizedDialog(mainWindow, titleTag, dialogShellController);
 		} 
 		catch (Exception e)
 		{

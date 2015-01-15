@@ -102,8 +102,12 @@ import org.martus.client.swingui.dialogs.UiWarningMessageDlg;
 import org.martus.client.swingui.filefilters.AllFileFilter;
 import org.martus.client.swingui.filefilters.KeyPairFormatFilter;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
+import org.martus.client.swingui.jfx.generic.DialogStage;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
+import org.martus.client.swingui.jfx.generic.FxInSwingDialogStage;
 import org.martus.client.swingui.jfx.generic.FxInSwingModalDialog;
+import org.martus.client.swingui.jfx.generic.FxNonWizardShellController;
+import org.martus.client.swingui.jfx.generic.FxRunner;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
@@ -495,9 +499,9 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 			// NOTE: Prevent implicit JavaFX shutdown when the only JFX window is closed
 		    Platform.setImplicitExit(false);
 
-		    FxInSwingModalDialog.createAndShowLargeModalDialog(this, new WelcomeStage(this));
+		    UiMainWindow.createAndShowLargeModalDialog(this, new WelcomeStage(this));
 		    
-		    FxInSwingModalDialog.createAndShowLargeModalDialog(this, new SetupWizardStage(this));
+		    UiMainWindow.createAndShowLargeModalDialog(this, new SetupWizardStage(this));
 		} 
 		catch (Exception e)
 		{
@@ -2861,6 +2865,56 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		backgroundUploadTimerTask.setNeedToGetAccessToken();
 	}
 
+	public static void createAndShowLargeModalDialog(UiMainWindow owner, FxInSwingDialogStage stage) throws Exception
+	{
+		createAndShowDialog(owner, stage, FxInSwingModalDialog.EMPTY_TITLE, LARGE_PREFERRED_DIALOG_ZIZE);
+	}
+
+	public static void createAndShowConfirmationSizedDialog(UiMainWindow owner, String titleTag, FxNonWizardShellController dialogShellController) throws Exception
+	{
+		createAndShowModalDialog(owner, dialogShellController, SMALL_PREFERRED_DIALOG_SIZE, titleTag);
+	}
+
+	public static void createAndShowModalDialog(UiMainWindow mainWindow, FxNonWizardShellController controller, Dimension preferedDimension, String titleTag)
+	{
+		DialogStage stage = new DialogStage(mainWindow, controller);
+		createAndShowDialog(mainWindow, stage, titleTag, preferedDimension);
+	}
+
+	private static void createAndShowDialog(UiMainWindow owner, FxInSwingDialogStage stage, String titleTag, Dimension dimension)
+	{
+		if (dimension == null)
+			dimension = LARGE_PREFERRED_DIALOG_ZIZE;
+		
+		FxInSwingModalDialog dialog = createDialog(owner);
+		if (titleTag.length() > 0)
+			dialog.setTitle(owner.getLocalization().getWindowTitle(titleTag));
+		
+		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		dialog.getContentPane().setPreferredSize(dimension);
+		dialog.pack();
+		dialog.getContentPane().add(stage.getPanel());
+		stage.setDialog(dialog);
+		stage.runOnFxThreadMaybeLater(new FxRunner(stage));
+	
+		Utilities.packAndCenterWindow(dialog);
+		owner.setCurrentActiveDialog(dialog);
+		dialog.setVisible(true);
+		owner.setCurrentActiveDialog(null);
+	}
+
+	private static FxInSwingModalDialog createDialog(UiMainWindow owner)
+	{
+		JFrame frame = owner.getSwingFrame();
+		if(frame != null)
+			return new FxInSwingModalDialog(frame);
+	
+		return new FxInSwingModalDialog();
+	}
+
+	public static final Dimension SMALL_PREFERRED_DIALOG_SIZE = new Dimension(400, 200);
+	private static final Dimension LARGE_PREFERRED_DIALOG_ZIZE = new Dimension(960, 640);
+
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
@@ -2897,5 +2951,4 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	private FileOutputStream lockStream;
 	private Stack<Object> cursorStack;
 	private StatusBar statusBar;
-
 }
