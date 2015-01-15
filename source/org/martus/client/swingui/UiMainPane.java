@@ -62,7 +62,8 @@ public class UiMainPane extends JPanel
 
 		add(createTopStuff(mainWindowToUse), BorderLayout.NORTH);
 		add(getFolderSplitter(), BorderLayout.CENTER);
-		add(mainWindowToUse.getStatusBar().getUiPanel(), BorderLayout.SOUTH ); 
+		StatusBar statusBar = mainWindowToUse.getStatusBar();
+		add(statusBar.getUiPanel(), BorderLayout.SOUTH ); 
 		
 		getPreviewSplitter().setDividerLocation(currentUiState.getCurrentPreviewSplitterPosition());
 		getFolderSplitter().setInitialDividerLocation(currentUiState.getCurrentFolderSplitterPosition());
