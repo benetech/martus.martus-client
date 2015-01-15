@@ -2654,7 +2654,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
 
-		int userResult = fileChooser.showOpenDialog(getSwingFrame());
+		int userResult = fileChooser.showOpenDialog(getCurrentActiveFrame());
 		File selectedFile = fileChooser.getSelectedFile();
 		if(userResult != JFileChooser.APPROVE_OPTION)
 			selectedFile = null;
