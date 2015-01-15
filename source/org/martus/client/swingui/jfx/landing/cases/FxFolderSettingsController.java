@@ -39,7 +39,7 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.DialogWithOkCancelContentController;
-import org.martus.client.swingui.jfx.generic.FxModalDialog;
+import org.martus.client.swingui.jfx.generic.FxInSwingModalDialog;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.fieldspec.ChoiceItem;
 
@@ -169,7 +169,7 @@ public class FxFolderSettingsController extends DialogWithOkCancelContentControl
 	@Override
 	protected Dimension getPreferredDimension()
 	{
-		return FxModalDialog.MEDIUM_SMALL_PREFERRED_DIALOG_SIZE;
+		return FxInSwingModalDialog.MEDIUM_SMALL_PREFERRED_DIALOG_SIZE;
 	}
 
 	@Override
