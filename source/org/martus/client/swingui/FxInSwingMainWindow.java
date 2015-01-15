@@ -76,14 +76,15 @@ public class FxInSwingMainWindow extends UiMainWindow
 			fxRunner.setAbortImmediatelyOnError();
 			Platform.runLater(fxRunner);
 			getSwingFrame().setContentPane(fxInSwingMainStage.getPanel());
+			setStatusBar(createStatusBar());
 		}
 		else
 		{
+			setStatusBar(createStatusBar());
 			mainPane = new UiMainPane(this, getUiState());
 			getSwingFrame().setContentPane(mainPane);
 		}
 
-		setStatusBar(createStatusBar());
 	}
 	
 	@Override
