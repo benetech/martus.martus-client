@@ -70,7 +70,7 @@ public class FxInSwingMainWindow extends UiMainWindow
 
 		if(UiSession.isJavaFx())
 		{
-			FxInSwingMainStage fxInSwingMainStage = new FxInSwingMainStage(this);
+			FxInSwingMainStage fxInSwingMainStage = new FxInSwingMainStage(this, getSwingFrame());
 			mainStage = fxInSwingMainStage;
 			FxRunner fxRunner = new FxRunner(fxInSwingMainStage);
 			fxRunner.setAbortImmediatelyOnError();

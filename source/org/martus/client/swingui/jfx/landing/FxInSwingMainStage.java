@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
+import javax.swing.JFrame;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxInSwingStage;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
@@ -32,10 +34,10 @@ import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 
 public class FxInSwingMainStage extends FxInSwingStage implements FxMainStage
 {
-	public FxInSwingMainStage(UiMainWindow mainWindowToUse)
+	public FxInSwingMainStage(UiMainWindow mainWindowToUse, JFrame swingFrame)
 	{
 		super(mainWindowToUse, "Landing.css");
-		setWindow(getMainWindow().getSwingFrame());
+		setWindow(swingFrame);
 		
 		FxLandingShellController shellController = new FxLandingShellController(getMainWindow());
 		setShellController(shellController);
