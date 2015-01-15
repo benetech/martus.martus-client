@@ -29,9 +29,9 @@ import org.martus.client.swingui.UiMainWindow;
 
 public class PureFxDialogStage extends PureFxStage
 {
-	public PureFxDialogStage(UiMainWindow mainWindowToUse, FxPopupController controller) throws Exception
+	public PureFxDialogStage(UiMainWindow mainWindowToUse, FxShellController controller) throws Exception
 	{
-		super(mainWindowToUse, controller, "Dialog.css");
+		super(mainWindowToUse, controller, controller.getCssName());
 	}
 
 }

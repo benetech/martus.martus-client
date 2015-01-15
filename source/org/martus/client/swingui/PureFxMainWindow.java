@@ -36,6 +36,7 @@ import javax.swing.JFrame;
 import org.martus.client.swingui.jfx.generic.FxInSwingStage;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
+import org.martus.client.swingui.jfx.generic.PureFxDialogStage;
 import org.martus.client.swingui.jfx.generic.VirtualStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.landing.PureFxMainStage;
@@ -134,9 +135,11 @@ public class PureFxMainWindow extends UiMainWindow
 	}
 
 	@Override
-	public void createAndShowModalDialog(FxShellController controller, Dimension preferedDimension, String titleTag)
+	public void createAndShowModalDialog(FxShellController controller, Dimension preferedDimension, String titleTag) throws Exception
 	{
-		// FIXME: Needs to be implemented
+		PureFxDialogStage dialogStage = new PureFxDialogStage(this, controller); 
+		dialogStage.showCurrentPage();
+		dialogStage.showAndWait();
 	}
 
 	private static Stage stage;

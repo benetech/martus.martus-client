@@ -66,8 +66,6 @@ abstract public class FxPopupController extends FxShellController
 		thrownException = exception;
 	}
 
-	abstract public String getDialogTitle();
-
 	private PureFxStage stage;
 	private Throwable thrownException;
 }

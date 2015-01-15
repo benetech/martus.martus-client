@@ -2867,7 +2867,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	}
 
 	abstract public void createAndShowLargeModalDialog(VirtualStage stage) throws Exception;
-	abstract public void createAndShowModalDialog(FxShellController controller, Dimension preferedDimension, String titleTag);
+	abstract public void createAndShowModalDialog(FxShellController controller, Dimension preferedDimension, String titleTag) throws Exception;
 	
 	public static final Dimension SMALL_PREFERRED_DIALOG_SIZE = new Dimension(400, 200);
 	public static final Dimension LARGE_PREFERRED_DIALOG_SIZE = new Dimension(960, 640);

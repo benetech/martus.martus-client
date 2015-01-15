@@ -68,7 +68,8 @@ abstract public class DialogShellController extends FxShellWithSingleContentCont
 		}
 	}
 
-	protected String getTitleTag()
+	@Override
+	public String getTitleTag()
 	{
 		return titleTag;
 	}

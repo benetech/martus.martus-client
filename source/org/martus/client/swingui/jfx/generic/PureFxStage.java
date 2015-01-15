@@ -38,9 +38,10 @@ import org.martus.client.swingui.actions.ActionDoer;
 
 abstract public class PureFxStage extends VirtualStage
 {
-	public PureFxStage(UiMainWindow mainWindowToUse, FxPopupController controller, String cssNameToUse) throws Exception
+	public PureFxStage(UiMainWindow mainWindowToUse, FxShellController controller, String cssNameToUse) throws Exception
 	{
 		this(mainWindowToUse, controller.getDialogTitle(), new Stage(), cssNameToUse);
+		setShellController(controller);
 		controller.setStage(this);
 		getActualStage().initModality(Modality.APPLICATION_MODAL);
 	}
