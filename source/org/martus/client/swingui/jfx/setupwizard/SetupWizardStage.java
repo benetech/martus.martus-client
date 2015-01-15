@@ -36,19 +36,13 @@ public class SetupWizardStage extends FxWizardStage
 {
 	public SetupWizardStage(UiMainWindow mainWindow) throws Exception
 	{
-		super(mainWindow);
+		super(mainWindow, "SetupWizard.css");
 	}
 	
 	@Override
 	protected FxContentController getFirstController()
 	{
 		return new FxSetupUsernamePasswordController(getMainWindow());
-	}
-	
-	@Override
-	protected String getCssName()
-	{
-		return "SetupWizard.css";
 	}
 	
 	@Override
