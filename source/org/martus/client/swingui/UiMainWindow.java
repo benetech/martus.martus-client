@@ -102,7 +102,7 @@ import org.martus.client.swingui.dialogs.UiWarningMessageDlg;
 import org.martus.client.swingui.filefilters.AllFileFilter;
 import org.martus.client.swingui.filefilters.KeyPairFormatFilter;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
-import org.martus.client.swingui.jfx.generic.DialogStage;
+import org.martus.client.swingui.jfx.generic.FxInSwingModalDialogStage;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.generic.FxInSwingDialogStage;
@@ -2883,7 +2883,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	public void createAndShowModalDialog(FxNonWizardShellController controller, Dimension preferedDimension, String titleTag)
 	{
-		DialogStage stage = new DialogStage(this, controller);
+		FxInSwingModalDialogStage stage = new FxInSwingModalDialogStage(this, controller);
 		createAndShowDialog(stage, titleTag, preferedDimension);
 	}
 
