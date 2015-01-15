@@ -81,9 +81,26 @@ public class PureFxMainWindow extends UiMainWindow
 		setStatusBar(createStatusBar());
 		PureFxMainStage fxStage = new PureFxMainStage(this, realStage);
 		fxStage.showCurrentPage();
+		restoreWindowSizeAndState();
 		realStage.show();
 	}
 	
+	@Override
+	public void restoreWindowSizeAndState()
+	{
+		Dimension appDimension = getUiState().getCurrentAppDimension();
+		Point appPosition = getUiState().getCurrentAppPosition();
+		boolean showMaximized = getUiState().isCurrentAppMaximized();
+
+		realStage.setX(appPosition.getX());
+		realStage.setY(appPosition.getY());
+		realStage.setWidth(appDimension.getWidth());
+		realStage.setHeight(appDimension.getHeight());
+		realStage.setMaximized(showMaximized);
+		
+		getUiState().setCurrentAppDimension(getMainWindowSize());
+	}
+
 	@Override
 	public void rawError(String errorText)
 	{
