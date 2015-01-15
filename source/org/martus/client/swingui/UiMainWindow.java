@@ -505,9 +505,9 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 			FxController contentController = new FxWelcomeContentController(this);
 			FxShellController shellController = new WelcomeShellController(this, contentController);
 		    WelcomeStage welcomeStage = new WelcomeStage(this, shellController);
-			createAndShowLargeModalDialog(this, welcomeStage);
+			createAndShowLargeModalDialog(welcomeStage);
 		    
-		    createAndShowLargeModalDialog(this, new SetupWizardStage(this));
+		    createAndShowLargeModalDialog(new SetupWizardStage(this));
 		} 
 		catch (Exception e)
 		{
@@ -2871,9 +2871,9 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		backgroundUploadTimerTask.setNeedToGetAccessToken();
 	}
 
-	public static void createAndShowLargeModalDialog(UiMainWindow owner, FxInSwingDialogStage stage) throws Exception
+	public void createAndShowLargeModalDialog(FxInSwingDialogStage stage) throws Exception
 	{
-		createAndShowDialog(owner, stage, FxInSwingModalDialog.EMPTY_TITLE, LARGE_PREFERRED_DIALOG_SIZE);
+		createAndShowDialog(this, stage, FxInSwingModalDialog.EMPTY_TITLE, LARGE_PREFERRED_DIALOG_SIZE);
 	}
 
 	public static void createAndShowConfirmationSizedDialog(UiMainWindow owner, String titleTag, FxNonWizardShellController dialogShellController) throws Exception
