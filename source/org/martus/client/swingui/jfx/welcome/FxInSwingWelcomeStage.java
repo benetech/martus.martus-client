@@ -33,17 +33,11 @@ public class FxInSwingWelcomeStage extends FxInSwingNonWizardStage
 {
 	public FxInSwingWelcomeStage(UiMainWindow mainWindow, FxShellController shellController) throws Exception
 	{
-		super(mainWindow);
+		super(mainWindow, "Welcome.css");
 		
 		setShellController(shellController);
 	}
 
-	@Override
-	protected String getCssName()
-	{
-		return "Welcome.css";
-	}
-	
 	@Override
 	protected boolean confirmExit()
 	{

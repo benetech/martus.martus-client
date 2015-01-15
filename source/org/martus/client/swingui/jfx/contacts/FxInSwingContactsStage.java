@@ -34,7 +34,7 @@ public class FxInSwingContactsStage extends FxInSwingNonWizardStage
 {
 	public FxInSwingContactsStage(UiMainWindow mainWindow) throws Exception
 	{
-		super(mainWindow);
+		super(mainWindow, "Contacts.css");
 		
 		ContactsShellController shellController = new ContactsShellController(getMainWindow());
 		contentController = new FxManageContactsController(getMainWindow());
@@ -56,12 +56,6 @@ public class FxInSwingContactsStage extends FxInSwingNonWizardStage
 		
 		contentPaneController.setShellController(getShellController());
 		getContactsShellController().loadAndIntegrateContentPane(contentPaneController);
-	}
-	
-	@Override
-	protected String getCssName()
-	{
-		return "Contacts.css";
 	}
 	
 	@Override
