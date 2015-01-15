@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.Window;
 
 import javafx.scene.Cursor;
@@ -159,5 +160,24 @@ public class PureFxMainWindow extends UiMainWindow
 		createAndShowLargeModalDialog(new PureFxSetupWizardStage(this));
 	}
 	
+	public Dimension getMainWindowSize()
+	{
+		int width = (int)realStage.getWidth();
+		int height = (int)realStage.getHeight();
+		return new Dimension(width, height);
+	}
+
+	public Point getMainWindowLocation()
+	{
+		int x = (int)realStage.getX();
+		int y = (int)realStage.getY();
+		return new Point(x, y);
+	}
+
+	public boolean isMainWindowMaximized()
+	{
+		return realStage.isMaximized();
+	}
+
 	private static Stage realStage;
 }
