@@ -1737,7 +1737,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		restoreState();
 		getTransport().updateStatus();
 		backgroundUploadTimerTask.setWaitingForServer();
-		getSwingFrame().setVisible(true);
 	}
 
 	
