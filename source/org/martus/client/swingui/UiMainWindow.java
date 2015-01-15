@@ -2131,30 +2131,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		return torStatusBar.getTorProgressMeter();
 	}
 
-	public void setWindowSizeAndState()
-	{
-		Dimension screenSize = Utilities.getViewableScreenSize();
-		Dimension appDimension = getUiState().getCurrentAppDimension();
-		Point appPosition = getUiState().getCurrentAppPosition();
-		boolean showMaximized = false;
-		if(Utilities.isValidScreenPosition(screenSize, appDimension, appPosition))
-		{
-			getSwingFrame().setLocation(appPosition);
-			getSwingFrame().setSize(appDimension);
-			if(getUiState().isCurrentAppMaximized())
-				showMaximized = true;
-		}
-		else
-			showMaximized = true;
-		
-		if(showMaximized)
-		{
-			getSwingFrame().setSize(screenSize.width - 50 , screenSize.height - 50);
-			Utilities.maximizeWindow(getSwingFrame());
-		}
-		
-		getUiState().setCurrentAppDimension(getMainWindowSize());
-	}
+	abstract public void restoreWindowSizeAndState();
 
 	public void updateServerStatusInStatusBar()
 	{		
