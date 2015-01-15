@@ -27,7 +27,7 @@ package org.martus.client.swingui.jfx.generic;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public class DialogStage extends FxNonWizardStage
+public class DialogStage extends FxInSwingNonWizardStage
 {
 	public DialogStage(UiMainWindow mainWindowToUse, FxNonWizardShellController controllerToUse)
 	{
