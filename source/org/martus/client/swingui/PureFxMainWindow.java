@@ -32,11 +32,11 @@ import javafx.stage.Stage;
 
 import javax.swing.JFrame;
 
+import org.martus.client.swingui.jfx.generic.FxInSwingStage;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.landing.PureFxMainStage;
-import org.martus.client.swingui.jfx.landing.bulletins.FxInSwingGenericStage;
 
 public class PureFxMainWindow extends UiMainWindow
 {
@@ -119,7 +119,7 @@ public class PureFxMainWindow extends UiMainWindow
 	}
 	
 	@Override
-	public FxInSwingGenericStage createGenericStage(UiMainWindow observerToUse, Window windowToUse, FxShellController shellController, String cssName)
+	public FxInSwingStage createGenericStage(UiMainWindow observerToUse, Window windowToUse, FxShellController shellController, String cssName)
 	{
 		// FIXME: Needs to be implemented
 		throw new RuntimeException("Not implemented");

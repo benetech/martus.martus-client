@@ -33,12 +33,12 @@ import javafx.application.Platform;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import org.martus.client.swingui.jfx.generic.FxInSwingStage;
 import org.martus.client.swingui.jfx.generic.FxRunner;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
 import org.martus.client.swingui.jfx.landing.FxInSwingMainStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
-import org.martus.client.swingui.jfx.landing.bulletins.FxInSwingGenericStage;
 
 public class SwingMainWindow extends UiMainWindow
 {
@@ -147,9 +147,9 @@ public class SwingMainWindow extends UiMainWindow
 	}
 	
 	@Override
-	public FxInSwingGenericStage createGenericStage(UiMainWindow observerToUse, Window windowToUse, FxShellController shellController, String cssName)
+	public FxInSwingStage createGenericStage(UiMainWindow observerToUse, Window windowToUse, FxShellController shellController, String cssName)
 	{
-		return new FxInSwingGenericStage(observerToUse, windowToUse, shellController, cssName);
+		return new FxInSwingStage(observerToUse, windowToUse, shellController, cssName);
 	}
 
 	private JFrame swingFrame;

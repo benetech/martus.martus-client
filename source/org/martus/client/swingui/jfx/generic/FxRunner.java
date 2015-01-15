@@ -28,7 +28,6 @@ package org.martus.client.swingui.jfx.generic;
 import java.awt.Window;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.landing.bulletins.FxInSwingGenericStage;
 import org.martus.common.MartusLogger;
 
 public class FxRunner implements Runnable
@@ -60,9 +59,9 @@ public class FxRunner implements Runnable
 		shouldAbortImmediatelyOnError = true;
 	}
 
-	public static FxInSwingGenericStage createAndActivateEmbeddedStage(UiMainWindow observerToUse, Window windowToUse, FxShellController shellController, String cssName)
+	public static FxInSwingStage createAndActivateEmbeddedStage(UiMainWindow observerToUse, Window windowToUse, FxShellController shellController, String cssName)
 	{
-		FxInSwingGenericStage stage = observerToUse.createGenericStage(observerToUse, windowToUse, shellController, cssName);
+		FxInSwingStage stage = observerToUse.createGenericStage(observerToUse, windowToUse, shellController, cssName);
 		
 		FxRunner fxRunner = new FxRunner(stage);
 		fxRunner.setAbortImmediatelyOnError();

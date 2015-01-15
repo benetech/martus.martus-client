@@ -37,8 +37,16 @@ import javax.swing.SwingUtilities;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 
-public abstract class FxInSwingStage extends VirtualStage
+public class FxInSwingStage extends VirtualStage
 {
+	public FxInSwingStage(UiMainWindow mainWindowToUse, Window windowToUse, FxShellController shellController, String cssNameToUse)
+	{
+		this(mainWindowToUse, cssNameToUse);
+	
+		setWindow(windowToUse);
+		setShellController(shellController);
+	}
+
 	public FxInSwingStage(UiMainWindow mainWindowToUse, String cssName)
 	{
 		super(mainWindowToUse, cssName);
@@ -137,6 +145,12 @@ public abstract class FxInSwingStage extends VirtualStage
 		return getPanel().getWidth();
 	}
 	
+	@Override
+	public void close()
+	{
+		throw new RuntimeException("Close called for " + getClass().getName());
+	}
+
 
 	private JFXPanel panel;
 	private Window window;
