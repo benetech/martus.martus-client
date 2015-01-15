@@ -47,7 +47,7 @@ public class ActionMenuManageContactsWithoutResignIn extends UiMenuAction  imple
 	{
 		try
 		{
-		    FxInSwingModalDialog.createAndShow(mainWindow, new ContactsStage(mainWindow));
+		    FxInSwingModalDialog.createAndShowLargeModalDialog(mainWindow, new ContactsStage(mainWindow));
 		} 
 		catch (Exception e)
 		{

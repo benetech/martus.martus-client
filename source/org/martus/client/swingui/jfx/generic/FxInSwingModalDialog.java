@@ -84,7 +84,7 @@ public class FxInSwingModalDialog extends JDialog
 		return new FxInSwingModalDialog();
 	}
 	
-	private FxInSwingModalDialog()
+	public FxInSwingModalDialog()
 	{
 		// NOTE: Pass (Dialog)null to force this window to show up in the Task Bar
 		super((Dialog)null);
@@ -92,7 +92,7 @@ public class FxInSwingModalDialog extends JDialog
 		initialize();
 	}
 	
-	private FxInSwingModalDialog(JFrame owner)
+	public FxInSwingModalDialog(JFrame owner)
 	{
 		super(owner);
 
