@@ -26,18 +26,15 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.welcome;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxNonWizardStage;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 
 public class WelcomeStage extends FxNonWizardStage
 {
-	public WelcomeStage(UiMainWindow mainWindow) throws Exception
+	public WelcomeStage(UiMainWindow mainWindow, FxShellController shellController) throws Exception
 	{
 		super(mainWindow);
 		
-		FxController contentController = new FxWelcomeContentController(getMainWindow());
-		FxShellController shellController = new WelcomeShellController(getMainWindow(), contentController);
 		setShellController(shellController);
 	}
 

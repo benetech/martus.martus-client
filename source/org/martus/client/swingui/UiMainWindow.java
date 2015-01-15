@@ -103,6 +103,7 @@ import org.martus.client.swingui.filefilters.AllFileFilter;
 import org.martus.client.swingui.filefilters.KeyPairFormatFilter;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.generic.DialogStage;
+import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.generic.FxInSwingDialogStage;
 import org.martus.client.swingui.jfx.generic.FxInSwingModalDialog;
@@ -113,6 +114,8 @@ import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.landing.bulletins.FxInSwingGenericStage;
 import org.martus.client.swingui.jfx.setupwizard.SetupWizardStage;
+import org.martus.client.swingui.jfx.welcome.FxWelcomeContentController;
+import org.martus.client.swingui.jfx.welcome.WelcomeShellController;
 import org.martus.client.swingui.jfx.welcome.WelcomeStage;
 import org.martus.client.swingui.spellcheck.SpellCheckerManager;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
@@ -499,7 +502,10 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 			// NOTE: Prevent implicit JavaFX shutdown when the only JFX window is closed
 		    Platform.setImplicitExit(false);
 
-		    UiMainWindow.createAndShowLargeModalDialog(this, new WelcomeStage(this));
+			FxController contentController = new FxWelcomeContentController(this);
+			FxShellController shellController = new WelcomeShellController(this, contentController);
+		    WelcomeStage welcomeStage = new WelcomeStage(this, shellController);
+			UiMainWindow.createAndShowLargeModalDialog(this, welcomeStage);
 		    
 		    UiMainWindow.createAndShowLargeModalDialog(this, new SetupWizardStage(this));
 		} 
