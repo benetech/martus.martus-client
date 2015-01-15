@@ -49,8 +49,9 @@ public class FxModalDialog extends JDialog
 		createAndShowDialog(owner, stage, EMPTY_TITLE, LARGE_PREFERRED_DIALOG_ZIZE);
 	}
 	
-	public static void createAndShowConfirmationSizedDialog(UiMainWindow owner, FxInSwingDialogStage stage, String titleTag) throws Exception
+	public static void createAndShowConfirmationSizedDialog(UiMainWindow owner, String titleTag, FxNonWizardShellController dialogShellController) throws Exception
 	{
+		DialogStage stage = new DialogStage(owner, dialogShellController);
 		createAndShowDialog(owner, stage, titleTag, SMALL_PREFERRED_DIALOG_SIZE);
 	}
 
