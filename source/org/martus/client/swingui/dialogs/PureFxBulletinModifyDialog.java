@@ -49,7 +49,6 @@ public class PureFxBulletinModifyDialog extends UiBulletinModifyDlg
 		dialogStage = new PureFxDialogStage(getMainWindow(), bulletinEditorShellController); 
 		dialogStage.showCurrentPage();
 		safelyPopulateView();
-		// FIXME: We should restore the dialog position/size here
 		
 		dialogStage.getActualStage().setOnCloseRequest((event) -> closeWindowIfUserConfirms());
 	}
@@ -58,6 +57,28 @@ public class PureFxBulletinModifyDialog extends UiBulletinModifyDlg
 	public JFrame getSwingFrame()
 	{
 		return null;
+	}
+
+	@Override
+	protected void setFrameLocation(Point bulletinEditorPosition)
+	{
+		Stage actualStage = dialogStage.getActualStage();
+		actualStage.setX(bulletinEditorPosition.getX());
+		actualStage.setY(bulletinEditorPosition.getY());
+	}
+
+	@Override
+	protected void setFrameSize(Dimension bulletinEditorDimension)
+	{
+		Stage actualStage = dialogStage.getActualStage();
+		actualStage.setWidth(bulletinEditorDimension.getWidth());
+		actualStage.setHeight(bulletinEditorDimension.getHeight());
+	}
+
+	@Override
+	protected void setFrameMaximized(boolean bulletinEditorMaximized)
+	{
+		dialogStage.getActualStage().setMaximized(bulletinEditorMaximized);
 	}
 
 	@Override
