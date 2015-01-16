@@ -60,11 +60,6 @@ public class UiInitialSigninDlg extends UiSigninDlg
 		super(localizationToUse, uiStateToUse, mode, userName, password);
 	}
 
-	public UiInitialSigninDlg(UiLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode, String userName, char[] password)
-	{
-		super(localizationToUse, uiStateToUse, owner, mode, userName, password);
-	}
-
 	protected Component createMainPanel()
 	{
 		JPanel forceProperAlignment = new JPanel(new BorderLayout());
