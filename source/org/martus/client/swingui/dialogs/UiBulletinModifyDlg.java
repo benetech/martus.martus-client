@@ -103,8 +103,8 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		else
 		{
 			setView(new UiBulletinEditor(observer));
-			view.copyDataFromBulletin(bulletin);
-			view.setLanguageChangeListener(new LanguageChangeHandler());
+			getView().copyDataFromBulletin(bulletin);
+			getView().setLanguageChangeListener(new LanguageChangeHandler());
 
 			UiButton send = new UiButton(localization.getButtonLabel("send"));
 			send.addActionListener(new SendHandler());
@@ -145,7 +145,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		}
 		
 		if(!UiSession.isJavaFx())
-			view.scrollToTop();
+			getView().scrollToTop();
 		
 		getSwingFrame().setGlassPane(new WindowObscurer());
 		
@@ -217,9 +217,9 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	{
 		try
 		{
-			view.copyDataFromBulletin(bulletin);
-			view.setLanguageChangeListener(new LanguageChangeHandler());
-			view.scrollToTop();
+			getView().copyDataFromBulletin(bulletin);
+			getView().setLanguageChangeListener(new LanguageChangeHandler());
+			getView().scrollToTop();
 		} 
 		catch (Exception e)
 		{
@@ -255,7 +255,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	public Bulletin createClonedBulletinUsingCurrentTemplate(ClientBulletinStore store) throws Exception
 	{
 		Bulletin bulletinWithOldTemplateButLatestData = getCurrentBulletin();
-		view.copyDataToBulletin(bulletinWithOldTemplateButLatestData);
+		getView().copyDataToBulletin(bulletinWithOldTemplateButLatestData);
 		Bulletin clonedBulletin = store.createNewDraftWithCurrentTemplateButIdAndDataAndHistoryFrom(bulletinWithOldTemplateButLatestData);
 		return clonedBulletin;
 	}
@@ -270,8 +270,8 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		bulletin = bulletinToShow;
 		try
 		{
-			view.copyDataFromBulletin(bulletin);
-			view.scrollToTop();
+			getView().copyDataFromBulletin(bulletin);
+			getView().scrollToTop();
 		} 
 		catch (Exception e)
 		{
@@ -283,7 +283,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	{
 		scroller = new UiScrollPane();
 		scroller.getVerticalScrollBar().setFocusable(false);
-		scroller.getViewport().add(view.getComponent());
+		scroller.getViewport().add(getView().getComponent());
 		scroller.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 		getSwingFrame().getContentPane().setLayout(new BorderLayout());
 		getSwingFrame().getContentPane().add(scroller, BorderLayout.CENTER);
@@ -352,7 +352,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	{
 		try
 		{	
-			view.validateData();
+			getView().validateData();
 			return true;
 		}
 		catch(UiDateEditor.DateFutureException e)
@@ -409,7 +409,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 
 			// NOTE: must copyDataToBulletin before setSealed or setDraft
 			// NOTE: after copyDataToBulletin, should not allow user to cancel
-			view.copyDataToBulletin(bulletin);
+			getView().copyDataToBulletin(bulletin);
 			bulletin.changeState(bulletinState);
 			
 			if(neverDeleteFromServer)
@@ -471,7 +471,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 
 	protected void closeWindowIfUserConfirms() throws Exception
 	{	
-		boolean needConfirmation = view.isBulletinModified();
+		boolean needConfirmation = getView().isBulletinModified();
 		if(needConfirmation)
 		{
 			if(!observer.confirmDlg("CancelModifyBulletin"))
@@ -484,6 +484,11 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	public void setView(UiBulletinComponentInterface view)
 	{
 		this.view = view;
+	}
+
+	private UiBulletinComponentInterface getView()
+	{
+		return view;
 	}
 
 	private JFrame realFrame;
