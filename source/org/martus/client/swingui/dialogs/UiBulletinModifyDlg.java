@@ -96,13 +96,13 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 			FxBulletinEditorShellController bulletinEditorShellController = new FxBulletinEditorShellController(observerToUse, this);
 
 			bulletinEditorStage = FxRunner.createAndActivateEmbeddedStage(observerToUse, getSwingFrame(), bulletinEditorShellController);
-			view = bulletinEditorShellController;
+			setView(bulletinEditorShellController);
 			Platform.runLater(() -> safelyPopulateView());
 			getSwingFrame().getContentPane().add(bulletinEditorStage.getPanel(), BorderLayout.CENTER);
 		}
 		else
 		{
-			view = new UiBulletinEditor(observer);
+			setView(new UiBulletinEditor(observer));
 			view.copyDataFromBulletin(bulletin);
 			view.setLanguageChangeListener(new LanguageChangeHandler());
 
@@ -479,6 +479,11 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		}
 			
 		cleanupAndExit();
+	}
+	
+	public void setView(UiBulletinComponentInterface view)
+	{
+		this.view = view;
 	}
 
 	private JFrame realFrame;
