@@ -33,8 +33,8 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.HashMap;
 
 import javafx.application.Platform;
@@ -74,7 +74,7 @@ import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
-public class UiBulletinModifyDlg extends JFrame implements ActionListener, WindowListener
+public class UiBulletinModifyDlg extends JFrame implements ActionListener
 {
 	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse) throws Exception
 	{
@@ -117,7 +117,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		addWindowListener(this);
+		addWindowListener(new WindowEventHandler());
 
 		Dimension screenSize = Utilities.getViewableScreenSize();
 		Dimension editorDimension = observerToUse.getBulletinEditorDimension();
@@ -148,6 +148,21 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		currentTemplateNameProperty.addListener(new TemplateChangeHandler(observerToUse));
 	}
 	
+	class WindowEventHandler extends WindowAdapter
+	{
+		public void windowClosing(WindowEvent event)
+		{
+			try
+			{
+				closeWindowIfUserConfirms();
+			}
+			catch (Exception e)
+			{
+				unexpectedErrorDlg(e);
+			}
+		}
+	}
+	
 	class LanguageChangeHandler implements BulletinLanguageChangeListener
 	{
 		@Override
@@ -162,6 +177,11 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 					addScrollerView();
 			*/
 		}
+	}
+	
+	protected void unexpectedErrorDlg(Exception e)
+	{
+		observer.unexpectedErrorDlg(e);
 	}
 
 	private void safelyPopulateView()
@@ -379,27 +399,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		return wasBulletinSavedFlag;
 	}
 
-	// WindowListener interface
-	public void windowActivated(WindowEvent event) {}
-	public void windowClosed(WindowEvent event) {}
-	public void windowDeactivated(WindowEvent event) {}
-	public void windowDeiconified(WindowEvent event) {}
-	public void windowIconified(WindowEvent event) {}
-	public void windowOpened(WindowEvent event) {}
-
-	public void windowClosing(WindowEvent event)
-	{
-		try
-		{
-			closeWindowIfUserConfirms();
-		}
-		catch (Exception e)
-		{
-			observer.unexpectedErrorDlg(e);
-		}
-	}
-	// end WindowListener interface
-
 
 	public void cleanupAndExit()
 	{
@@ -417,7 +416,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		observer.saveState();
 	}
 
-	private void closeWindowIfUserConfirms() throws Exception
+	protected void closeWindowIfUserConfirms() throws Exception
 	{	
 		boolean needConfirmation = view.isBulletinModified();
 		if(needConfirmation)
