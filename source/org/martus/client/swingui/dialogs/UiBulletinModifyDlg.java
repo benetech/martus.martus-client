@@ -74,7 +74,7 @@ import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
-public class UiBulletinModifyDlg extends JFrame implements ActionListener
+public class UiBulletinModifyDlg extends JFrame
 {
 	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse) throws Exception
 	{
@@ -101,11 +101,11 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener
 			view.setLanguageChangeListener(new LanguageChangeHandler());
 
 			send = new UiButton(localization.getButtonLabel("send"));
-			send.addActionListener(this);
+			send.addActionListener(new SaveSendHandler());
 			draft = new UiButton(localization.getButtonLabel("savedraft"));
-			draft.addActionListener(this);
+			draft.addActionListener(new SaveSendHandler());
 			cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
-			cancel.addActionListener(this);
+			cancel.addActionListener(new CancelHandler());
 
 			addScrollerView();
 
@@ -261,41 +261,55 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener
 		getContentPane().invalidate();
 		getContentPane().doLayout();
 	}
-
-	public void actionPerformed(ActionEvent ae)
-	{		
-		try
-		{
-			if(ae.getSource() == cancel)
-			{				
-				closeWindowIfUserConfirms();
-				return;
-			}	
 	
-			if(!validateData())
-				return;
-
-			boolean userChoseSeal = (ae.getSource() == send);
-			
-			BulletinState state =  BulletinState.STATE_SAVE;
-			if(userChoseSeal)
-			{
-				String tag = "send";
-					
-				if (!observer.confirmDlg(tag))
-					return;
-				state = BulletinState.STATE_SHARED;
-			}
-												
-			saveBulletin(userChoseSeal, state);
-		}
-		catch (Exception e) 
+	class CancelHandler implements ActionListener
+	{
+		@Override
+		public void actionPerformed(ActionEvent event)
 		{
-			observer.unexpectedErrorDlg(e);
+			try
+			{
+				closeWindowIfUserConfirms();
+			} 
+			catch (Exception e)
+			{
+				unexpectedErrorDlg(e);
+			}
+		}
+		
+	}
+
+	class SaveSendHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
+		{		
+			try
+			{
+				if(!validateData())
+					return;
+	
+				boolean userChoseSeal = (ae.getSource() == send);
+				
+				BulletinState state =  BulletinState.STATE_SAVE;
+				if(userChoseSeal)
+				{
+					String tag = "send";
+						
+					if (!observer.confirmDlg(tag))
+						return;
+					state = BulletinState.STATE_SHARED;
+				}
+													
+				saveBulletin(userChoseSeal, state);
+			}
+			catch (Exception e) 
+			{
+				observer.unexpectedErrorDlg(e);
+			}
 		}
 	}
 
-	private boolean validateData()
+	protected boolean validateData()
 	{
 		try
 		{	
