@@ -75,7 +75,7 @@ import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
-public class UiBulletinModifyDlg implements TopLevelWindowInterface
+abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 {
 	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse) throws Exception
 	{
