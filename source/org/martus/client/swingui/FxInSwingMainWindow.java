@@ -88,6 +88,20 @@ public class FxInSwingMainWindow extends UiMainWindow
 	}
 	
 	@Override
+	protected void enableMainWindow()
+	{
+		getSwingFrame().setEnabled(true);
+		getSwingFrame().setVisible(false);
+	}
+	
+	@Override
+	protected void disableMainWindow()
+	{
+		getSwingFrame().setEnabled(false);
+		getSwingFrame().setVisible(false);
+	}
+	
+	@Override
 	public void restoreWindowSizeAndState()
 	{
 		Dimension screenSize = Utilities.getViewableScreenSize();
