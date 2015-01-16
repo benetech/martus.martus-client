@@ -78,7 +78,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 {
 	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse) throws Exception
 	{
-		bulletin = b;
+		setBulletin(b);
 		observer = observerToUse;
 		
 		UiLocalization localization = getMainWindow().getLocalization();
@@ -259,6 +259,11 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		Bulletin clonedBulletin = store.createNewDraftWithCurrentTemplateButIdAndDataAndHistoryFrom(bulletinWithOldTemplateButLatestData);
 		return clonedBulletin;
 	}
+	
+	public void setBulletin(Bulletin bulletin)
+	{
+		this.bulletin = bulletin;
+	}
 
 	protected Bulletin getBulletin()
 	{
@@ -267,7 +272,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 
 	protected void showBulletin(Bulletin bulletinToShow)
 	{
-		bulletin = bulletinToShow;
+		setBulletin(bulletinToShow);
 		try
 		{
 			getView().copyDataFromBulletin(getBulletin());
