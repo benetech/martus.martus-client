@@ -33,6 +33,7 @@ public class FxInSwingBulletinModifyDialog extends UiBulletinModifyDlg
 	public FxInSwingBulletinModifyDialog(Bulletin b, UiMainWindow observerToUse) throws Exception
 	{
 		super(b, observerToUse);
+
 	}
 
 }

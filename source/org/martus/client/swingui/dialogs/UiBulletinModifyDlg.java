@@ -108,9 +108,9 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 			view.setLanguageChangeListener(new LanguageChangeHandler());
 
 			send = new UiButton(localization.getButtonLabel("send"));
-			send.addActionListener(new SaveSendHandler());
+			send.addActionListener(new SendHandler());
 			draft = new UiButton(localization.getButtonLabel("savedraft"));
-			draft.addActionListener(new SaveSendHandler());
+			draft.addActionListener(new SaveHandler());
 			UiButton cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 			cancel.addActionListener(new CancelHandler());
 
@@ -309,7 +309,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		
 	}
 
-	class SaveSendHandler implements ActionListener
+	class SaveHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
 		{		
@@ -318,19 +318,29 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 				if(!validateData())
 					return;
 	
-				boolean userChoseSeal = (ae.getSource() == send);
-				
-				BulletinState state =  BulletinState.STATE_SAVE;
-				if(userChoseSeal)
-				{
-					String tag = "send";
-						
-					if (!getMainWindow().confirmDlg(tag))
-						return;
-					state = BulletinState.STATE_SHARED;
-				}
+				saveBulletin(false, BulletinState.STATE_SAVE);
+			}
+			catch (Exception e) 
+			{
+				getMainWindow().unexpectedErrorDlg(e);
+			}
+		}
+	}
+
+	class SendHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
+		{		
+			try
+			{
+				if(!validateData())
+					return;
+	
+				String tag = "send";
+				if (!getMainWindow().confirmDlg(tag))
+					return;
 													
-				saveBulletin(userChoseSeal, state);
+				saveBulletin(true, BulletinState.STATE_SHARED);
 			}
 			catch (Exception e) 
 			{
