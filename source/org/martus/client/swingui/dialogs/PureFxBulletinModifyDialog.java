@@ -25,6 +25,11 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
+import java.awt.Dimension;
+import java.awt.Point;
+
+import javafx.stage.Stage;
+
 import javax.swing.JFrame;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -41,7 +46,7 @@ public class PureFxBulletinModifyDialog extends UiBulletinModifyDlg
 		FxBulletinEditorShellController bulletinEditorShellController = new FxBulletinEditorShellController(observerToUse, this);
 		setView(bulletinEditorShellController);
 		
-		PureFxDialogStage dialogStage = new PureFxDialogStage(getMainWindow(), bulletinEditorShellController); 
+		dialogStage = new PureFxDialogStage(getMainWindow(), bulletinEditorShellController); 
 		dialogStage.showCurrentPage();
 		safelyPopulateView();
 		// FIXME: We should restore the dialog position/size here
@@ -56,15 +61,40 @@ public class PureFxBulletinModifyDialog extends UiBulletinModifyDlg
 	}
 
 	@Override
+	protected Point getFrameLocation()
+	{
+		Stage actualStage = dialogStage.getActualStage();
+		int x = (int)actualStage.getX();
+		int y = (int)actualStage.getY();
+		return new Point(x, y);
+	}
+	
+	@Override
+	protected Dimension getFrameSize() 
+	{
+		Stage actualStage = dialogStage.getActualStage();
+		int width = (int) actualStage.getWidth();
+		int height = (int) actualStage.getHeight();
+		return new Dimension(width, height);
+	}
+	
+	@Override
+	protected boolean isFrameMaximized()
+	{
+		return dialogStage.getActualStage().isMaximized();
+	}
+	
+	@Override
 	public void dispose()
 	{
-		((FxBulletinEditorShellController)getView()).getStage().close();
+		dialogStage.close();
 	}
 
 	@Override
 	public void setVisible(boolean newState)
 	{
-		((FxBulletinEditorShellController)getView()).getStage().show();
+		dialogStage.show();
 	}
 
+	private PureFxDialogStage dialogStage;
 }
