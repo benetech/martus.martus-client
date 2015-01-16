@@ -34,6 +34,8 @@ import javafx.stage.Stage;
 
 import javax.swing.JFrame;
 
+import org.martus.client.swingui.dialogs.PureFxBulletinModifyDialog;
+import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.jfx.contacts.PureFxContactsStage;
 import org.martus.client.swingui.jfx.generic.FxInSwingStage;
 import org.martus.client.swingui.jfx.generic.FxShellController;
@@ -44,6 +46,7 @@ import org.martus.client.swingui.jfx.generic.VirtualStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.landing.PureFxMainStage;
 import org.martus.client.swingui.jfx.setupwizard.PureFxSetupWizardStage;
+import org.martus.common.bulletin.Bulletin;
 
 public class PureFxMainWindow extends UiMainWindow
 {
@@ -202,6 +205,29 @@ public class PureFxMainWindow extends UiMainWindow
 	{
 		return realStage.isMaximized();
 	}
+	
+	@Override
+	public void modifyBulletin(Bulletin b) throws Exception
+	{
+		getCurrentUiState().setModifyingBulletin(true);
+		UiBulletinModifyDlg dlg = null;
+		try
+		{
+			dlg = new PureFxBulletinModifyDialog(b, this);
+			setCurrentActiveFrame(dlg);
+			hideMainWindow();
+			dlg.setVisible(true);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			if(dlg != null)
+				dlg.dispose();
+			doneModifyingBulletin();
+			throw(e);
+		}
+	}
+
 
 	private static Stage realStage;
 }

@@ -28,6 +28,8 @@ package org.martus.client.swingui.dialogs;
 import javax.swing.JFrame;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.generic.PureFxDialogStage;
+import org.martus.client.swingui.jfx.landing.bulletins.FxBulletinEditorShellController;
 import org.martus.common.bulletin.Bulletin;
 
 public class PureFxBulletinModifyDialog extends UiBulletinModifyDlg
@@ -36,18 +38,15 @@ public class PureFxBulletinModifyDialog extends UiBulletinModifyDlg
 	{
 		super(b, observerToUse);
 
-		// TODO: Work in progress
-//		FxBulletinEditorShellController bulletinEditorShellController = new FxBulletinEditorShellController(observerToUse, this);
-//		view = bulletinEditorShellController;
-//		
-//		PureFxDialogStage dialogStage = new PureFxDialogStage(getMainWindow(), bulletinEditorShellController); 
-//		dialogStage.showCurrentPage();
-//		safelyPopulateView();
-//		// FIXME: We should restore the dialog position/size here
-//		dialogStage.showAndWait();
-//		observer.doneModifyingBulletin();
-//		// FIXME: We should save the dialog position/size here
-//		saveEditorState(getSwingFrame().getSize(), getSwingFrame().getLocation());
+		FxBulletinEditorShellController bulletinEditorShellController = new FxBulletinEditorShellController(observerToUse, this);
+		setView(bulletinEditorShellController);
+		
+		PureFxDialogStage dialogStage = new PureFxDialogStage(getMainWindow(), bulletinEditorShellController); 
+		dialogStage.showCurrentPage();
+		safelyPopulateView();
+		// FIXME: We should restore the dialog position/size here
+		
+		dialogStage.getActualStage().setOnCloseRequest((event) -> closeWindowIfUserConfirms());
 	}
 
 	@Override
@@ -59,15 +58,13 @@ public class PureFxBulletinModifyDialog extends UiBulletinModifyDlg
 	@Override
 	public void dispose()
 	{
-		// TODO Auto-generated method stub
-		
+		((FxBulletinEditorShellController)getView()).getStage().close();
 	}
 
 	@Override
 	public void setVisible(boolean newState)
 	{
-		// TODO Auto-generated method stub
-		
+		((FxBulletinEditorShellController)getView()).getStage().show();
 	}
 
 }

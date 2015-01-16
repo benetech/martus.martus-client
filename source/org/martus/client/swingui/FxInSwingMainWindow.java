@@ -36,6 +36,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import org.martus.client.swingui.dialogs.FxInSwingBulletinModifyDialog;
+import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.jfx.contacts.FxInSwingContactsStage;
 import org.martus.client.swingui.jfx.generic.FxInSwingDialogStage;
 import org.martus.client.swingui.jfx.generic.FxInSwingModalDialog;
@@ -48,6 +50,7 @@ import org.martus.client.swingui.jfx.generic.VirtualStage;
 import org.martus.client.swingui.jfx.landing.FxInSwingMainStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.setupwizard.FxInSwingSetupWizardStage;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.Utilities;
 
 public class FxInSwingMainWindow extends UiMainWindow
@@ -277,6 +280,29 @@ public class FxInSwingMainWindow extends UiMainWindow
 	
 		return new FxInSwingModalDialog();
 	}
+
+	@Override
+	public void modifyBulletin(Bulletin b) throws Exception
+	{
+		getCurrentUiState().setModifyingBulletin(true);
+		UiBulletinModifyDlg dlg = null;
+		try
+		{
+			dlg = new FxInSwingBulletinModifyDialog(b, this);
+			setCurrentActiveFrame(dlg);
+			hideMainWindow();
+			dlg.setVisible(true);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			if(dlg != null)
+				dlg.dispose();
+			doneModifyingBulletin();
+			throw(e);
+		}
+	}
+
 
 	private JFrame swingFrame;
 	private UiMainPane mainPane;

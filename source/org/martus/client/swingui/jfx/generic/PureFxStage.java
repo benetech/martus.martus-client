@@ -77,6 +77,12 @@ abstract public class PureFxStage extends VirtualStage
 	}
 	
 	@Override
+	public void show()
+	{
+		stage.show();
+	}
+	
+	@Override
 	public void showCurrentPage() throws Exception
 	{
 		loadAndShowShell();

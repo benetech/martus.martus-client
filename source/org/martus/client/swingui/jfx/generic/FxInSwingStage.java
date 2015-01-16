@@ -71,6 +71,12 @@ public class FxInSwingStage extends VirtualStage
 	}
 	
 	@Override
+	public void show()
+	{
+		getWindow().setVisible(true);
+	}
+	
+	@Override
 	public void showCurrentPage() throws Exception
 	{
 		loadAndShowShell();
