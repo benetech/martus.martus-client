@@ -95,7 +95,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		{
 			FxBulletinEditorShellController bulletinEditorShellController = new FxBulletinEditorShellController(observerToUse, this);
 
-			bulletinEditorStage = FxRunner.createAndActivateEmbeddedStage(observerToUse, getSwingFrame(), bulletinEditorShellController);
+			FxInSwingStage bulletinEditorStage = FxRunner.createAndActivateEmbeddedStage(observerToUse, getSwingFrame(), bulletinEditorShellController);
 			setView(bulletinEditorShellController);
 			Platform.runLater(() -> safelyPopulateView());
 			getSwingFrame().getContentPane().add(bulletinEditorStage.getPanel(), BorderLayout.CENTER);
@@ -498,7 +498,6 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 
 	private UiBulletinComponentInterface view;
 	private UiScrollPane scroller;
-	private FxInSwingStage bulletinEditorStage;
 	
 	private boolean wasBulletinSavedFlag;
 }
