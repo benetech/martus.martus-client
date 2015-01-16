@@ -138,6 +138,24 @@ public class FxInSwingBulletinModifyDialog extends UiBulletinModifyDlg
 		return realFrame;
 	}
 	
+	@Override
+	protected Point getFrameLocation()
+	{
+		return getSwingFrame().getLocation();
+	}
+	
+	@Override
+	protected Dimension getFrameSize() 
+	{
+		return getSwingFrame().getSize();
+	}
+	
+	@Override
+	protected boolean isFrameMaximized()
+	{
+		return getSwingFrame().getExtendedState() == JFrame.MAXIMIZED_BOTH;
+	}
+	
 	private void addScrollerView() 
 	{
 		scroller = new UiScrollPane();

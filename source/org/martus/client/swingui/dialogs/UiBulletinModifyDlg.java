@@ -37,7 +37,6 @@ import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import org.martus.client.bulletinstore.BulletinFolder;
@@ -305,13 +304,17 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	public void cleanupAndExit()
 	{
 		observer.doneModifyingBulletin();
-		saveEditorState(getSwingFrame().getSize(), getSwingFrame().getLocation());
+		saveEditorState(getFrameSize(), getFrameLocation(), isFrameMaximized());
 		dispose();
 	}
+	
+	abstract protected Point getFrameLocation();
+	abstract protected Dimension getFrameSize();
+	abstract protected boolean isFrameMaximized();
 
-	public void saveEditorState(Dimension size, Point location)
+	public void saveEditorState(Dimension size, Point location, boolean isMaximized)
 	{
-		boolean maximized = getSwingFrame().getExtendedState() == JFrame.MAXIMIZED_BOTH;
+		boolean maximized = isMaximized;
 		observer.setBulletinEditorDimension(size);
 		observer.setBulletinEditorPosition(location);
 		observer.setBulletinEditorMaximized(maximized);
