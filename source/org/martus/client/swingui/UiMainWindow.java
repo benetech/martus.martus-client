@@ -2173,7 +2173,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 			while(userChoice == UiSigninDlg.LANGUAGE_CHANGED)
 			{	
 				if(mode==UiSigninDlg.INITIAL || mode == UiSigninDlg.INITIAL_NEW_RECOVER_ACCOUNT)
-					signinDlg = new UiInitialSigninDlg(getLocalization(), getCurrentUiState(), mode, userName, userPassword);
+					signinDlg = new UiInitialSigninDlg(this, mode, userName, userPassword);
 				else
 				{
 					if(getCurrentActiveDialog() != null)

@@ -37,6 +37,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiLabel;
@@ -49,6 +50,11 @@ import org.martus.swing.UiWrappedTextArea;
 
 public class UiInitialSigninDlg extends UiSigninDlg
 {
+	public UiInitialSigninDlg(UiMainWindow mainWindowToUse, int mode, String userName, char[] password)
+	{
+		this(mainWindowToUse.getLocalization(), mainWindowToUse.getCurrentUiState(), mode, userName, password);
+	}
+	
 	public UiInitialSigninDlg(UiLocalization localizationToUse, CurrentUiState uiStateToUse, int mode, String userName, char[] password)
 	{
 		super(localizationToUse, uiStateToUse, mode, userName, password);
