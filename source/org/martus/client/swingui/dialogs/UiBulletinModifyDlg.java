@@ -231,46 +231,6 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		
 	}
 
-	class SaveHandler implements ActionListener
-	{
-		public void actionPerformed(ActionEvent ae)
-		{		
-			try
-			{
-				if(!validateData())
-					return;
-	
-				saveBulletin(false, BulletinState.STATE_SAVE);
-			}
-			catch (Exception e) 
-			{
-				getMainWindow().unexpectedErrorDlg(e);
-			}
-		}
-	}
-
-	class SendHandler implements ActionListener
-	{
-		public void actionPerformed(ActionEvent ae)
-		{		
-			try
-			{
-				if(!validateData())
-					return;
-	
-				String tag = "send";
-				if (!getMainWindow().confirmDlg(tag))
-					return;
-													
-				saveBulletin(true, BulletinState.STATE_SHARED);
-			}
-			catch (Exception e) 
-			{
-				getMainWindow().unexpectedErrorDlg(e);
-			}
-		}
-	}
-
 	protected boolean validateData()
 	{
 		try
