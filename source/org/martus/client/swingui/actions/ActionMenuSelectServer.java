@@ -123,7 +123,7 @@ public class ActionMenuSelectServer extends UiMenuAction implements ActionDoer
 			String[] contents = {serverSelected, uploadGranted};
 			String[] buttons = {ok};
 		
-			new UiNotifyDlg(getMainWindow().getCurrentActiveFrame(), title, contents, buttons);
+			getMainWindow().notifyDlg(title, contents, buttons);
 			
 			getMainWindow().forceRecheckOfUidsOnServer();
 			getStore().clearOnServerLists();
