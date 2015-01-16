@@ -95,7 +95,7 @@ public class FxInSwingMainWindow extends UiMainWindow
 	}
 	
 	@Override
-	protected void disableMainWindow()
+	protected void hideMainWindow()
 	{
 		getSwingFrame().setEnabled(false);
 		getSwingFrame().setVisible(false);
