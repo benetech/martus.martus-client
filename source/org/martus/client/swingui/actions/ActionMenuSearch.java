@@ -25,11 +25,19 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.actions;
 
+import javax.swing.JDialog;
+
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiSession;
+import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
+import org.martus.common.EnglishCommonStrings;
+import org.martus.swing.UiOptionPane;
+import org.martus.util.TokenReplacement;
 
 public class ActionMenuSearch extends ActionSearch
 {
@@ -56,6 +64,51 @@ public class ActionMenuSearch extends ActionSearch
 
 	public void showSearchResults(SortableBulletinList bulletinIdsFromSearch)
 	{
-		mainWindow.updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
+		updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
 	}	
+
+	public void updateSearchFolderAndNotifyUserOfTheResults(SortableBulletinList matchedBulletinsFromSearch)
+	{
+		if(matchedBulletinsFromSearch == null)
+			return;
+		getApp().updateSearchFolder(matchedBulletinsFromSearch);
+		ClientBulletinStore store = getStore();
+		BulletinFolder searchFolder = store.findFolder(store.getSearchFolderName());
+		UiFolderTreePane folderTreePane = getFolderTreePane();
+		if(folderTreePane == null)
+			return;
+		folderTreePane.folderTreeContentsHaveChanged();
+		folderTreePane.folderContentsHaveChanged(searchFolder);
+		int bulletinsFound = searchFolder.getBulletinCount();
+		if(bulletinsFound > 0)
+		{
+			getMainWindow().selectSearchFolder();
+			showNumberOfBulletinsFound(bulletinsFound, "SearchFound");
+		}
+		else
+		{
+			getMainWindow().notifyDlg("SearchFailed");
+		}
+	}
+
+	public void showNumberOfBulletinsFound(int bulletinsFound,String messageTag)
+	{
+		try
+		{
+			String title = getLocalization().getWindowTitle("notifySearchFound");
+			String message = getLocalization().getFieldLabel(messageTag);
+			String ok = getLocalization().getButtonLabel(EnglishCommonStrings.OK);
+			String[] buttons = { ok };
+			message = TokenReplacement.replaceToken(message , "#NumberBulletinsFound#", (new Integer(bulletinsFound)).toString());
+			UiOptionPane pane = new UiOptionPane(message, UiOptionPane.INFORMATION_MESSAGE, UiOptionPane.DEFAULT_OPTION,
+									null, buttons);
+			JDialog dialog = pane.createDialog(getMainWindow().getSwingFrame(), title);
+			dialog.setVisible(true);
+		}
+		catch(Exception e)
+		{
+			getMainWindow().unexpectedErrorDlg(e);
+		}
+	}
+
 }
