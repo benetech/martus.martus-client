@@ -92,8 +92,7 @@ public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		{
 			FxBulletinEditorShellController bulletinEditorShellController = new FxBulletinEditorShellController(observerToUse, this);
 
-			String cssName = "Bulletin.css";
-			bulletinEditorStage = FxRunner.createAndActivateEmbeddedStage(observerToUse, getSwingFrame(), bulletinEditorShellController, cssName);
+			bulletinEditorStage = FxRunner.createAndActivateEmbeddedStage(observerToUse, getSwingFrame(), bulletinEditorShellController);
 			view = bulletinEditorShellController;
 			Platform.runLater(() -> safelyPopulateView());
 			getSwingFrame().getContentPane().add(bulletinEditorStage.getPanel(), BorderLayout.CENTER);
