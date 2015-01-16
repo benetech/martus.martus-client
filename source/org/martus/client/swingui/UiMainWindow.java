@@ -1606,43 +1606,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		return searchDlg.getSearchTree();
 	}
 
-	public void updateSearchFolderAndNotifyUserOfTheResults(SortableBulletinList matchedBulletinsFromSearch)
-	{
-		if(matchedBulletinsFromSearch == null)
-			return;
-		getApp().updateSearchFolder(matchedBulletinsFromSearch);
-		ClientBulletinStore store = getStore();
-		BulletinFolder searchFolder = store.findFolder(store.getSearchFolderName());
-		UiFolderTreePane folderTreePane = getFolderTreePane();
-		if(folderTreePane == null)
-			return;
-		folderTreePane.folderTreeContentsHaveChanged();
-		folderTreePane.folderContentsHaveChanged(searchFolder);
-		int bulletinsFound = searchFolder.getBulletinCount();
-		if(bulletinsFound > 0)
-		{
-			selectSearchFolder();
-			showNumberOfBulletinsFound(bulletinsFound, "SearchFound");
-		}
-		else
-		{
-			notifyDlg("SearchFailed");
-		}
-	}
-
-	public void showNumberOfBulletinsFound(int bulletinsFound,String messageTag)
-	{
-		String title = getLocalization().getWindowTitle("notifySearchFound");
-		String message = getLocalization().getFieldLabel(messageTag);
-		String ok = getLocalization().getButtonLabel(EnglishCommonStrings.OK);
-		String[] buttons = { ok };
-		message = replaceToken(message , "#NumberBulletinsFound#", (new Integer(bulletinsFound)).toString());
-		UiOptionPane pane = new UiOptionPane(message, UiOptionPane.INFORMATION_MESSAGE, UiOptionPane.DEFAULT_OPTION,
-								null, buttons);
-		JDialog dialog = pane.createDialog(getSwingFrame(), title);
-		dialog.setVisible(true);
-	}
-
 	public void aboutMartus()
 	{
 		new UiAboutDlg(getCurrentActiveFrame(), getLocalization());
