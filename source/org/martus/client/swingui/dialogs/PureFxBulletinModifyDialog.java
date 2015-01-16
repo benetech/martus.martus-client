@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
+import javax.swing.JFrame;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
 
@@ -46,6 +48,26 @@ public class PureFxBulletinModifyDialog extends UiBulletinModifyDlg
 //		observer.doneModifyingBulletin();
 //		// FIXME: We should save the dialog position/size here
 //		saveEditorState(getSwingFrame().getSize(), getSwingFrame().getLocation());
+	}
+
+	@Override
+	public JFrame getSwingFrame()
+	{
+		return null;
+	}
+
+	@Override
+	public void dispose()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setVisible(boolean newState)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 }
