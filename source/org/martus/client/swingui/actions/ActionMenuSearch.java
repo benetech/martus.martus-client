@@ -100,10 +100,8 @@ public class ActionMenuSearch extends ActionSearch
 			String ok = getLocalization().getButtonLabel(EnglishCommonStrings.OK);
 			String[] buttons = { ok };
 			message = TokenReplacement.replaceToken(message , "#NumberBulletinsFound#", (new Integer(bulletinsFound)).toString());
-			UiOptionPane pane = new UiOptionPane(message, UiOptionPane.INFORMATION_MESSAGE, UiOptionPane.DEFAULT_OPTION,
-									null, buttons);
-			JDialog dialog = pane.createDialog(getMainWindow().getSwingFrame(), title);
-			dialog.setVisible(true);
+			String[] contents = new String[] { message };
+			getMainWindow().notifyDlg(title, contents, buttons);
 		}
 		catch(Exception e)
 		{
