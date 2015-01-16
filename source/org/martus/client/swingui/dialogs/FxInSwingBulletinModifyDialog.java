@@ -138,7 +138,7 @@ public class FxInSwingBulletinModifyDialog extends UiBulletinModifyDlg
 		return realFrame;
 	}
 	
-	protected void addScrollerView() 
+	private void addScrollerView() 
 	{
 		scroller = new UiScrollPane();
 		scroller.getVerticalScrollBar().setFocusable(false);
