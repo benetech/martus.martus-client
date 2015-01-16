@@ -35,7 +35,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.FolderContentsListener;
-import org.martus.client.swingui.UiMainWindowInterface;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.data.ArrayObservableList;
 import org.martus.client.swingui.jfx.landing.FolderSelectionListener;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
@@ -46,7 +46,7 @@ import org.martus.common.packet.UniversalId;
 
 public class BulletinListProvider extends ArrayObservableList<BulletinTableRowData> implements FolderSelectionListener, FolderContentsListener
 {
-	public BulletinListProvider(UiMainWindowInterface mainWindowToUse)
+	public BulletinListProvider(UiMainWindow mainWindowToUse)
 	{
 		super(INITIAL_CAPACITY);
 		mainWindow = mainWindowToUse;
@@ -214,7 +214,7 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 	private static final int BULLETIN_NOT_IN_TABLE = -1;
 	private static final int INITIAL_CAPACITY = 1000;
 	
-	private UiMainWindowInterface mainWindow;
+	private UiMainWindow mainWindow;
 	private BulletinFolder folder;
 	private BooleanProperty trashFolderBeingDisplayedProperty;
 	private BooleanProperty allFolderBeingDisplayedProperty;
