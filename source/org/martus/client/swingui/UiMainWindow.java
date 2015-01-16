@@ -348,6 +348,9 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	abstract protected void showMainWindow();
 	abstract protected void obscureMainWindow();
+	abstract protected void enableMainWindow();
+	abstract protected void disableMainWindow();
+
 
 	public void displayIncorrectVersionJava(String highVersionJava, String expectedVersionJava)
 	{
@@ -2332,9 +2335,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		enableMainWindow();
 		setCurrentActiveFrame(this);
 	}
-
-	abstract protected void enableMainWindow();
-	abstract protected void disableMainWindow();
 
 	public BulletinFolder getSelectedFolder()
 	{
