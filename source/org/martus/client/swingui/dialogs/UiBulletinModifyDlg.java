@@ -74,7 +74,7 @@ import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
-public class UiBulletinModifyDlg extends JFrame implements ActionListener, WindowListener, BulletinLanguageChangeListener
+public class UiBulletinModifyDlg extends JFrame implements ActionListener, WindowListener
 {
 	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse) throws Exception
 	{
@@ -98,7 +98,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		{
 			view = new UiBulletinEditor(observer);
 			view.copyDataFromBulletin(bulletin);
-			view.setLanguageChangeListener(this);
+			view.setLanguageChangeListener(new LanguageChangeHandler());
 
 			send = new UiButton(localization.getButtonLabel("send"));
 			send.addActionListener(this);
@@ -147,13 +147,29 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		Property<String> currentTemplateNameProperty = store.getCurrentFormTemplateNameProperty();
 		currentTemplateNameProperty.addListener(new TemplateChangeHandler(observerToUse));
 	}
+	
+	class LanguageChangeHandler implements BulletinLanguageChangeListener
+	{
+		@Override
+		public void bulletinLanguageHasChanged(String newLanguageCode)
+		{
+			//TODO add this back when its working correctly
+			/*		if(observer.getLocalization().doesLanguageRequirePadding(newLanguage))
+						LanguageOptions.setLanguagePaddingRequired();
+					else
+						LanguageOptions.setLanguagePaddingNotRequired();
+					getContentPane().remove(scroller);
+					addScrollerView();
+			*/
+		}
+	}
 
 	private void safelyPopulateView()
 	{
 		try
 		{
 			view.copyDataFromBulletin(bulletin);
-			view.setLanguageChangeListener(this);
+			view.setLanguageChangeListener(new LanguageChangeHandler());
 			view.scrollToTop();
 		} 
 		catch (Exception e)
@@ -385,18 +401,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	// end WindowListener interface
 
 
-	public void bulletinLanguageHasChanged(String newLanguage) 
-	{
-		//TODO add this back when its working correctly
-/*		if(observer.getLocalization().doesLanguageRequirePadding(newLanguage))
-			LanguageOptions.setLanguagePaddingRequired();
-		else
-			LanguageOptions.setLanguagePaddingNotRequired();
-		getContentPane().remove(scroller);
-		addScrollerView();
-*/
-	}
-	
 	public void cleanupAndExit()
 	{
 		observer.doneModifyingBulletin();
