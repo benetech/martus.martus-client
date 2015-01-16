@@ -36,6 +36,7 @@ import javafx.application.Platform;
 
 import javax.swing.Box;
 import javax.swing.JFrame;
+import javax.swing.JViewport;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiSession;
@@ -48,6 +49,7 @@ import org.martus.common.EnglishCommonStrings;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.Bulletin.BulletinState;
 import org.martus.swing.UiButton;
+import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
 public class FxInSwingBulletinModifyDialog extends UiBulletinModifyDlg
@@ -136,6 +138,18 @@ public class FxInSwingBulletinModifyDialog extends UiBulletinModifyDlg
 		return realFrame;
 	}
 	
+	protected void addScrollerView() 
+	{
+		scroller = new UiScrollPane();
+		scroller.getVerticalScrollBar().setFocusable(false);
+		scroller.getViewport().add(getView().getComponent());
+		scroller.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+		getSwingFrame().getContentPane().setLayout(new BorderLayout());
+		getSwingFrame().getContentPane().add(scroller, BorderLayout.CENTER);
+		getSwingFrame().getContentPane().invalidate();
+		getSwingFrame().getContentPane().doLayout();
+	}
+	
 	class SaveHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
@@ -176,6 +190,24 @@ public class FxInSwingBulletinModifyDialog extends UiBulletinModifyDlg
 		}
 	}
 
+	class CancelHandler implements ActionListener
+	{
+		@Override
+		public void actionPerformed(ActionEvent event)
+		{
+			try
+			{
+				closeWindowIfUserConfirms();
+			} 
+			catch (Exception e)
+			{
+				unexpectedErrorDlg(e);
+			}
+		}
+		
+	}
+
 	private JFrame realFrame;
+	private UiScrollPane scroller;
 	
 }
