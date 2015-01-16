@@ -63,7 +63,7 @@ public class FxInSwingMainWindow extends UiMainWindow
 
 		swingFrame = new MainSwingFrame(this);
 		UiMainWindow.updateIcon(getSwingFrame());
-		setCurrentActiveFrame(getSwingFrame());
+		setCurrentActiveFrame(this);
 		getSwingFrame().setVisible(true);
 		updateTitle();
 		restoreWindowSizeAndState();

@@ -41,7 +41,7 @@ public class ModalBusyDialog extends JDialog
 {
 	public ModalBusyDialog(UiMainWindow mainWindow, String dialogTag)
 	{
-		super(mainWindow.getCurrentActiveFrame());
+		super(mainWindow.getCurrentActiveFrame().getSwingFrame());
 		UiLocalization localization = mainWindow.getLocalization();
 		setModal(true);
 		setTitle(localization.getWindowTitle(dialogTag));

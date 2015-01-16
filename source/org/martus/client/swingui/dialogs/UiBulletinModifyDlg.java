@@ -52,6 +52,7 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.TopLevelWindowInterface;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiSession;
 import org.martus.client.swingui.WindowObscurer;
@@ -74,7 +75,7 @@ import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
-public class UiBulletinModifyDlg extends JFrame
+public class UiBulletinModifyDlg implements TopLevelWindowInterface
 {
 	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse) throws Exception
 	{
@@ -149,6 +150,12 @@ public class UiBulletinModifyDlg extends JFrame
 		ClientBulletinStore store = observerToUse.getApp().getStore();
 		Property<String> currentTemplateNameProperty = store.getCurrentFormTemplateNameProperty();
 		currentTemplateNameProperty.addListener(new TemplateChangeHandler(observerToUse));
+	}
+	
+	@Override
+	public void repaint()
+	{
+		getSwingFrame().repaint();
 	}
 	
 	protected UiMainWindow getMainWindow()

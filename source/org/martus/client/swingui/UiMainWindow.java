@@ -158,7 +158,7 @@ import org.martus.util.UnicodeReader;
 import org.martus.util.language.LanguageOptions;
 import org.martus.util.xml.XmlUtilities;
 
-public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterface
+public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterface, TopLevelWindowInterface
 {
 	public UiMainWindow() throws Exception
 	{
@@ -239,10 +239,12 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	public boolean run()
 	{
+		setCurrentActiveFrame(this);
+		
 		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
 		FontSetter.setDefaultFont(currentLanguageCode.equals(MtfAwareLocalization.BURMESE));
-		displayDefaultUnofficialTranslationMessageIfNecessary(getCurrentActiveFrame(), getLocalization(), currentLanguageCode);
-		displayIncompatibleMtfVersionWarningMessageIfNecessary(getCurrentActiveFrame(), getLocalization(), getLocalization().getCurrentLanguageCode());
+		displayDefaultUnofficialTranslationMessageIfNecessary(null, getLocalization(), currentLanguageCode);
+		displayIncompatibleMtfVersionWarningMessageIfNecessary(null, getLocalization(), getLocalization().getCurrentLanguageCode());
 		
 		preventTwoInstances();
 		notifyClientCompliance();
@@ -841,7 +843,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 				if (hasBackedUpShare && !hasBackedUpImprovedShare)
 					backupImprovedShare = getLocalization().getFieldLabel("confirmbackupIncompleteImprovedShareNeeded");
 				String[] contents = new String[] {generalMsg, "", backupEncrypted, "", getBackupShareText(backupImprovedShare, backupShare), "", generalMsgEffect};
-				if(confirmDlg(getCurrentActiveFrame(), getLocalization().getWindowTitle("askToBackupKeyPair"), contents))
+				if(confirmDlg(getSwingFrame(), getLocalization().getWindowTitle("askToBackupKeyPair"), contents))
 				{
 					if(!hasBackedUpEncrypted)
 						askToBackupKeyPairEncryptedSingleFile();
@@ -1140,7 +1142,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	@Override
 	public boolean confirmDlg(String baseTag)
 	{
-		return confirmDlg(getCurrentActiveFrame(), baseTag);
+		return confirmDlg(getCurrentActiveFrame().getSwingFrame(), baseTag);
 	}
 	
 	@Override
@@ -1151,7 +1153,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	public boolean confirmDlg(String baseTag, Map tokenReplacement)
 	{
-		return confirmDlg(getCurrentActiveFrame(), baseTag, tokenReplacement);
+		return confirmDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, tokenReplacement);
 	}
 
 	@Override
@@ -1162,7 +1164,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	public boolean confirmDlg(String title, String[] contents)
 	{
-		return confirmDlg(getCurrentActiveFrame(), title, contents);
+		return confirmDlg(getCurrentActiveFrame().getSwingFrame(), title, contents);
 	}
 
 	@Override
@@ -1173,7 +1175,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	public boolean confirmDlg(String title, String[] contents, String[] buttons)
 	{
-		return confirmDlg(getCurrentActiveFrame(), title, contents, buttons);
+		return confirmDlg(getCurrentActiveFrame().getSwingFrame(), title, contents, buttons);
 	}
 
 	@Override
@@ -1184,12 +1186,12 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	public boolean confirmDlg(String title, String[] contents, String[] buttons, Map tokenReplacement)
 	{
-		return UiUtilities.confirmDlg(getCurrentActiveFrame(), title, contents, buttons, tokenReplacement);
+		return UiUtilities.confirmDlg(getCurrentActiveFrame().getSwingFrame(), title, contents, buttons, tokenReplacement);
 	}
 
 	public boolean confirmCustomButtonsDlg(String baseTag, String[] buttons, Map tokenReplacement)
 	{
-		return confirmCustomButtonsDlg(getCurrentActiveFrame(), baseTag, buttons, tokenReplacement);
+		return confirmCustomButtonsDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, buttons, tokenReplacement);
 	}
 
 	@Override
@@ -1275,13 +1277,13 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	public void notifyDlg(String baseTag)
 	{
 		HashMap emptyTokenReplacement = new HashMap();
-		notifyDlg(getCurrentActiveFrame(), baseTag, emptyTokenReplacement);
+		notifyDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, emptyTokenReplacement);
 	}
 	
 	@Override
 	public void notifyDlg(String baseTag, Map tokenReplacement)
 	{
-		notifyDlg(getCurrentActiveFrame(), baseTag, tokenReplacement);
+		notifyDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, tokenReplacement);
 	}
 
 	@Override
@@ -1298,7 +1300,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	public void notifyDlg(String baseTag, String titleTag)
 	{
-		notifyDlg(getCurrentActiveFrame(), baseTag, titleTag);
+		notifyDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, titleTag);
 	}
 
 	@Override
@@ -1315,12 +1317,12 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	public void notifyDlg(String title, String[] contents, String[] buttons)
 	{
-		new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons);  
+		new UiNotifyDlg(getCurrentActiveFrame().getSwingFrame(), title, contents, buttons);  
 	}
 
 	public void messageDlg(String baseTag, String message, Map tokenReplacement)
 	{
-		messageDlg(getCurrentActiveFrame(), baseTag, message, tokenReplacement);
+		messageDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, message, tokenReplacement);
 	}
 
 	@Override
@@ -1607,7 +1609,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	public void aboutMartus()
 	{
-		new UiAboutDlg(getCurrentActiveFrame(), getLocalization());
+		new UiAboutDlg(getCurrentActiveFrame().getSwingFrame(), getLocalization());
 	}
 
 	public void showAccountInfo()
@@ -1814,7 +1816,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			notifyDlg(getCurrentActiveFrame(), "RewriteKeyPairFailed");
+			notifyDlg(getCurrentActiveFrame().getSwingFrame(), "RewriteKeyPairFailed");
 			return false;
 			//TODO eventually try to restore keypair from backup.
 		}
@@ -2179,7 +2181,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 					if(getCurrentActiveDialog() != null)
 						signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), (JFrame)null, mode, userName, userPassword);
 					else
-						signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), getCurrentActiveFrame(), mode, userName, userPassword);
+						signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), getCurrentActiveFrame().getSwingFrame(), mode, userName, userPassword);
 				}
 				userChoice = signinDlg.getUserChoice();
 				userName = signinDlg.getNameText();
@@ -2201,7 +2203,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 			}
 			catch (Exception e)
 			{
-				notifyDlg(getCurrentActiveFrame(), "incorrectsignin");
+				notifyDlg(getCurrentActiveFrame().getSwingFrame(), "incorrectsignin");
 				busyDlg = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitAfterFailedSignIn"));
 			}
 			finally
@@ -2330,7 +2332,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		getCurrentUiState().setModifyingBulletin(false);
 		getSwingFrame().setEnabled(true);
 		getSwingFrame().setVisible(true);
-		setCurrentActiveFrame(getSwingFrame());
+		setCurrentActiveFrame(this);
 	}
 
 	public BulletinFolder getSelectedFolder()
@@ -2464,7 +2466,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 			@Override
 			public void run()
 			{
-				JFrame frame = getCurrentActiveFrame();
+				JFrame frame = getCurrentActiveFrame().getSwingFrame();
 				if(frame != null)
 				{
 					frame.setGlassPane(new WindowObscurer());
@@ -2552,13 +2554,13 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	}
 
 	@Override
-	public void setCurrentActiveFrame(JFrame currentActiveFrame)
+	public void setCurrentActiveFrame(TopLevelWindowInterface currentActiveFrame)
 	{
 		this.currentActiveFrame = currentActiveFrame;
 	}
 
 	@Override
-	public JFrame getCurrentActiveFrame()
+	public TopLevelWindowInterface getCurrentActiveFrame()
 	{
 		return currentActiveFrame;
 	}
@@ -2602,7 +2604,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	
 	public File showChooseDirectoryDialog(String windowTitle)
 	{
-		return UiFileChooser.displayChooseDirectoryDialog(getCurrentActiveFrame(), windowTitle);
+		return UiFileChooser.displayChooseDirectoryDialog(getCurrentActiveFrame().getSwingFrame(), windowTitle);
 	}
 
 	public File showFileOpenDialog(String fileDialogCategory, Vector<FormatFilter> filters)
@@ -2616,7 +2618,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
 
-		int userResult = fileChooser.showOpenDialog(getCurrentActiveFrame());
+		int userResult = fileChooser.showOpenDialog(getCurrentActiveFrame().getSwingFrame());
 		File selectedFile = fileChooser.getSelectedFile();
 		if(userResult != JFileChooser.APPROVE_OPTION)
 			selectedFile = null;
@@ -2648,7 +2650,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		String okButtonLabel = getLocalization().getButtonLabel("FileDialogOk" + fileDialogCategory);
 		if(directory == null)
 			directory = getApp().getCurrentAccountDirectory();
-		return FileDialogHelpers.doFileOpenDialog(getCurrentActiveFrame(), title, okButtonLabel, directory, filter);
+		return FileDialogHelpers.doFileOpenDialog(getCurrentActiveFrame().getSwingFrame(), title, okButtonLabel, directory, filter);
 	}
 	
 	public File showFileSaveDialog(String fileDialogCategory, Vector<FormatFilter> filters)
@@ -2663,7 +2665,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 			// NOTE: Apparently the all file filter has a Mac bug, so this is a workaround
 			fileChooser.setAcceptAllFileFilterUsed(false);
 	
-			int userResult = fileChooser.showSaveDialog(getCurrentActiveFrame());
+			int userResult = fileChooser.showSaveDialog(getCurrentActiveFrame().getSwingFrame());
 			if(userResult != JFileChooser.APPROVE_OPTION)
 				break;
 			
@@ -2674,7 +2676,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 			if(!selectedFile.exists())
 				return selectedFile;
 
-			if(UiUtilities.confirmDlg(getLocalization(), getCurrentActiveFrame(), "OverWriteExistingFile"))
+			if(UiUtilities.confirmDlg(getLocalization(), getCurrentActiveFrame().getSwingFrame(), "OverWriteExistingFile"))
 				return selectedFile;
 		}
 		
@@ -2718,7 +2720,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		String title = getLocalization().getWindowTitle("FileDialog" + fileDialogCategory);
 		if(defaultDirectory == null)
 			defaultDirectory = getApp().getCurrentAccountDirectory();
-		return FileDialogHelpers.doFileSaveDialog(getCurrentActiveFrame(), title, defaultDirectory, defaultFilename, filter, getLocalization());
+		return FileDialogHelpers.doFileSaveDialog(getCurrentActiveFrame().getSwingFrame(), title, defaultDirectory, defaultFilename, filter, getLocalization());
 	}
 
 	void setLocalization(MartusLocalization localization)
@@ -2838,7 +2840,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	String uploadResult;
 	UiInactivityDetector inactivityDetector;
 
-	private JFrame currentActiveFrame;
+	private TopLevelWindowInterface currentActiveFrame;
 	private JDialog currentActiveDialog;
 	
 	public boolean inConfigServer;

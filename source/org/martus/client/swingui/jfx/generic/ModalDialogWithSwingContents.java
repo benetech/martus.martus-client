@@ -40,7 +40,7 @@ public class ModalDialogWithSwingContents extends JDialog
 
 	private ModalDialogWithSwingContents(SwingDialogContentPane contents)
 	{
-		super(contents.getMainWindow().getCurrentActiveFrame());
+		super(contents.getMainWindow().getCurrentActiveFrame().getSwingFrame());
 		contents.addIsActiveListener((property, oldValue, newValue) -> dispose());
 		contents.addDefaultButtonListener((property, oldButton, newButton) -> setDefaultButton(newButton));
 		setTitle(contents.getTitle());
