@@ -48,8 +48,8 @@ public interface UiMainWindowInterface
 	public void setWaitingCursor();
 	public void resetCursor();
 
-	public void setCurrentActiveFrame(JFrame currentActiveFrame);
-	public JFrame getCurrentActiveFrame();
+	public void setCurrentActiveFrame(TopLevelWindowInterface currentActiveFrame);
+	public TopLevelWindowInterface getCurrentActiveFrame();
 	public void setCurrentActiveDialog(JDialog newActiveDialog);
 	public JDialog getCurrentActiveDialog();
 	

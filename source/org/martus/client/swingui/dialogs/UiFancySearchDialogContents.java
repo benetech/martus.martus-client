@@ -90,7 +90,7 @@ public class UiFancySearchDialogContents extends SwingDialogContentPane
 
 		UiButton cancel = new UiButton(getLocalization().getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(new CancelButtonHandler());
-		UiDialogLauncher dlgLauncher = new UiDialogLauncher(getMainWindow(), getMainWindow().getCurrentActiveFrame());
+		UiDialogLauncher dlgLauncher = new UiDialogLauncher(getMainWindow(), getMainWindow().getCurrentActiveFrame().getSwingFrame());
 		grid = FancySearchGridEditor.create(getMainWindow(), dlgLauncher);
 		clearGridIfAnyProblems();
 

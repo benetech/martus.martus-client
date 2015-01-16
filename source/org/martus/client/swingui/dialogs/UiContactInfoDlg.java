@@ -51,7 +51,7 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 {
 	public UiContactInfoDlg(UiMainWindow mainWindow, ConfigInfo infoToUse)
 	{
-		super(mainWindow.getCurrentActiveFrame(), "", true);
+		super(mainWindow.getCurrentActiveFrame().getSwingFrame(), "", true);
 		info = infoToUse;
 		fontHelper = new UiFontEncodingHelper(info.getDoZawgyiConversion());
 

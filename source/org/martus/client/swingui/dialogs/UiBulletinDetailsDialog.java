@@ -61,7 +61,7 @@ public class UiBulletinDetailsDialog extends JDialog
 {
 	public UiBulletinDetailsDialog(UiMainWindow mainWindowToUse, Bulletin bulletinToShow, String tagQualifierToUse) throws Exception
 	{
-		super(mainWindowToUse.getCurrentActiveFrame(), true);
+		super(mainWindowToUse.getCurrentActiveFrame().getSwingFrame(), true);
 		
 		mainWindow = mainWindowToUse;
 		bulletin = bulletinToShow;

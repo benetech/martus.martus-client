@@ -92,7 +92,7 @@ public class UiReadOnlyFieldCreator extends UiFieldCreator
 	{
 		MartusLocalization localization = mainWindow.getLocalization();
 		fieldSpec.setColumnZeroLabel(localization.getFieldLabel("ColumnGridRowNumber"));
-		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow, mainWindow.getCurrentActiveFrame());
+		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow, mainWindow.getCurrentActiveFrame().getSwingFrame());
 		UiGridViewer gridViewer = new UiGridViewer(mainWindow, fieldSpec, dlgLauncher, getContext(), mainWindow.getPreviewTextFieldColumns());
 		return gridViewer;
 	}
