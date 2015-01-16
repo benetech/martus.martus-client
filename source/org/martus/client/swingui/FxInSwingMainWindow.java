@@ -194,8 +194,7 @@ public class FxInSwingMainWindow extends UiMainWindow
 		getSwingFrame().setEnabled(false);
 	}
 	
-	@Override
-	public FxInSwingStage createGenericStage(UiMainWindow observerToUse, Window windowToUse, FxShellController shellController, String cssName)
+	public static FxInSwingStage createGenericStage(UiMainWindow observerToUse, Window windowToUse, FxShellController shellController, String cssName)
 	{
 		return new FxInSwingStage(observerToUse, windowToUse, shellController, cssName);
 	}

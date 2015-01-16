@@ -27,7 +27,6 @@ package org.martus.client.swingui;
 
 import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.Window;
 
 import javafx.scene.Cursor;
 import javafx.stage.Stage;
@@ -37,7 +36,6 @@ import javax.swing.JFrame;
 import org.martus.client.swingui.dialogs.PureFxBulletinModifyDialog;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.jfx.contacts.PureFxContactsStage;
-import org.martus.client.swingui.jfx.generic.FxInSwingStage;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.FxStatusBar;
 import org.martus.client.swingui.jfx.generic.PureFxDialogStage;
@@ -152,13 +150,6 @@ public class PureFxMainWindow extends UiMainWindow
 		PureFxMainWindow.realStage = stage;
 	}
 	
-	@Override
-	public FxInSwingStage createGenericStage(UiMainWindow observerToUse, Window windowToUse, FxShellController shellController, String cssName)
-	{
-		// FIXME: Needs to be implemented
-		throw new RuntimeException("Not implemented");
-	}
-
 	@Override
 	public void createAndShowLargeModalDialog(VirtualStage stageToShow) throws Exception
 	{
