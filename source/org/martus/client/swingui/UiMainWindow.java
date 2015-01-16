@@ -2308,12 +2308,12 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	public void modifyBulletin(Bulletin b) throws Exception
 	{
 		getCurrentUiState().setModifyingBulletin(true);
-		getSwingFrame().setEnabled(false);
 		UiBulletinModifyDlg dlg = null;
 		try
 		{
 			dlg = new UiBulletinModifyDlg(b, this);
 			setCurrentActiveFrame(dlg);
+			getSwingFrame().setEnabled(false);
 			getSwingFrame().setVisible(false);
 			dlg.setVisible(true);
 		}
