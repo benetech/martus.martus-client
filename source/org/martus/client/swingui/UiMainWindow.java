@@ -349,7 +349,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	abstract protected void showMainWindow();
 	abstract protected void obscureMainWindow();
 	abstract protected void enableMainWindow();
-	abstract protected void disableMainWindow();
+	abstract protected void hideMainWindow();
 
 
 	public void displayIncorrectVersionJava(String highVersionJava, String expectedVersionJava)
@@ -2316,7 +2316,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		{
 			dlg = new UiBulletinModifyDlg(b, this);
 			setCurrentActiveFrame(dlg);
-			disableMainWindow();
+			hideMainWindow();
 			dlg.setVisible(true);
 		}
 		catch(Exception e)

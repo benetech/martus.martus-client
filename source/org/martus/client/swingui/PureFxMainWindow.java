@@ -82,7 +82,7 @@ public class PureFxMainWindow extends UiMainWindow
 	}
 	
 	@Override
-	protected void disableMainWindow()
+	protected void hideMainWindow()
 	{
 		realStage.hide();
 	}
