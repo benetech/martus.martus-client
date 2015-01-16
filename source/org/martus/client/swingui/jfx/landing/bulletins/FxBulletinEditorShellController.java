@@ -68,6 +68,12 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	}
 	
 	@Override
+	protected String getCssName()
+	{
+		return "Bulletin.css";
+	}
+	
+	@Override
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		try
