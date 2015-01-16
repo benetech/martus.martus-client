@@ -81,7 +81,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		setBulletin(b);
 		observer = observerToUse;
 		
-		UiLocalization localization = getMainWindow().getLocalization();
+		UiLocalization localization = getLocalization();
 
 		ClientBulletinStore store = observerToUse.getApp().getStore();
 		Property<String> currentTemplateNameProperty = store.getCurrentFormTemplateNameProperty();
@@ -149,6 +149,12 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		
 		getSwingFrame().setGlassPane(new WindowObscurer());
 		
+	}
+
+	public UiLocalization getLocalization()
+	{
+		UiLocalization localization = getMainWindow().getLocalization();
+		return localization;
 	}
 	
 	@Override
