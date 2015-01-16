@@ -82,7 +82,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		
 		realFrame = new JFrame();
 		
-		UiLocalization localization = observer.getLocalization();
+		UiLocalization localization = getMainWindow().getLocalization();
 		getSwingFrame().setTitle(localization.getWindowTitle("create"));
 		UiMainWindow.updateIcon(getSwingFrame());
 		bulletin = b;
@@ -102,7 +102,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		}
 		else
 		{
-			setView(new UiBulletinEditor(observer));
+			setView(new UiBulletinEditor(getMainWindow()));
 			getView().copyDataFromBulletin(bulletin);
 			getView().setLanguageChangeListener(new LanguageChangeHandler());
 
