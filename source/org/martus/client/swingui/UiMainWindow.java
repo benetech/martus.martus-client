@@ -2313,8 +2313,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		{
 			dlg = new UiBulletinModifyDlg(b, this);
 			setCurrentActiveFrame(dlg);
-			getSwingFrame().setEnabled(false);
-			getSwingFrame().setVisible(false);
+			disableMainWindow();
 			dlg.setVisible(true);
 		}
 		catch(Exception e)
@@ -2325,6 +2324,12 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 			doneModifyingBulletin();
 			throw(e);
 		}
+	}
+
+	protected void disableMainWindow()
+	{
+		getSwingFrame().setEnabled(false);
+		getSwingFrame().setVisible(false);
 	}
 
 	public void doneModifyingBulletin()
