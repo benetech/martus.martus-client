@@ -27,7 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.dialogs;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -37,12 +36,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
 
-import javafx.application.Platform;
 import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
-import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
@@ -53,26 +50,17 @@ import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.TopLevelWindowInterface;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.UiSession;
-import org.martus.client.swingui.WindowObscurer;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSection;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentInterface;
-import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
-import org.martus.client.swingui.jfx.generic.FxInSwingStage;
-import org.martus.client.swingui.jfx.generic.FxRunner;
-import org.martus.client.swingui.jfx.landing.bulletins.FxBulletinEditorShellController;
 import org.martus.clientside.UiLocalization;
-import org.martus.common.EnglishCommonStrings;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.Bulletin.BulletinState;
 import org.martus.common.fieldspec.DateRangeInvertedException;
 import org.martus.common.fieldspec.DateTooEarlyException;
 import org.martus.common.fieldspec.DateTooLateException;
 import org.martus.common.fieldspec.RequiredFieldIsBlankException;
-import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
-import org.martus.swing.Utilities;
 
 abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 {
@@ -85,68 +73,6 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		Property<String> currentTemplateNameProperty = store.getCurrentFormTemplateNameProperty();
 		currentTemplateNameProperty.addListener(new TemplateChangeHandler(observerToUse));
 
-		realFrame = new JFrame();
-		UiMainWindow.updateIcon(getSwingFrame());
-		getSwingFrame().setTitle(getLocalization().getWindowTitle("create"));
-		
-		if(UiSession.isJavaFx())
-		{
-			FxBulletinEditorShellController bulletinEditorShellController = new FxBulletinEditorShellController(observerToUse, this);
-
-			FxInSwingStage bulletinEditorStage = FxRunner.createAndActivateEmbeddedStage(observerToUse, getSwingFrame(), bulletinEditorShellController);
-			setView(bulletinEditorShellController);
-			Platform.runLater(() -> safelyPopulateView());
-			getSwingFrame().getContentPane().add(bulletinEditorStage.getPanel(), BorderLayout.CENTER);
-		}
-		else
-		{
-			setView(new UiBulletinEditor(getMainWindow()));
-			getView().copyDataFromBulletin(getBulletin());
-			getView().setLanguageChangeListener(new LanguageChangeHandler());
-
-			UiButton send = new UiButton(getLocalization().getButtonLabel("send"));
-			send.addActionListener(new SendHandler());
-			UiButton draft = new UiButton(getLocalization().getButtonLabel("savedraft"));
-			draft.addActionListener(new SaveHandler());
-			UiButton cancel = new UiButton(getLocalization().getButtonLabel(EnglishCommonStrings.CANCEL));
-			cancel.addActionListener(new CancelHandler());
-
-			addScrollerView();
-
-			Box box = Box.createHorizontalBox();
-			Component buttons[] = {send, draft, cancel, Box.createHorizontalGlue()};
-			Utilities.addComponentsRespectingOrientation(box, buttons);
-			getSwingFrame().getContentPane().add(box, BorderLayout.SOUTH);
-		}
-
-
-		getSwingFrame().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		getSwingFrame().addWindowListener(new WindowEventHandler());
-
-		Dimension screenSize = Utilities.getViewableScreenSize();
-		Dimension editorDimension = observerToUse.getBulletinEditorDimension();
-		Point editorPosition = observerToUse.getBulletinEditorPosition();
-		boolean showMaximized = false;
-		if(Utilities.isValidScreenPosition(screenSize, editorDimension, editorPosition))
-		{
-			getSwingFrame().setLocation(editorPosition);
-			getSwingFrame().setSize(editorDimension);
-			if(observerToUse.isBulletinEditorMaximized())
-				showMaximized = true;
-		}
-		else
-			showMaximized = true;
-		if(showMaximized)
-		{
-			getSwingFrame().setSize(screenSize.width - 50, screenSize.height - 50);
-			Utilities.maximizeWindow(getSwingFrame());
-		}
-		
-		if(!UiSession.isJavaFx())
-			getView().scrollToTop();
-		
-		getSwingFrame().setGlassPane(new WindowObscurer());
-		
 	}
 
 	public UiLocalization getLocalization()
@@ -197,27 +123,15 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		}
 	}
 	
-	public JFrame getSwingFrame()
-	{
-		return realFrame;
-	}
-	
-	public void dispose()
-	{
-		getSwingFrame().dispose();
-	}
-	
-	public void setVisible(boolean newVisibility)
-	{
-		getSwingFrame().setVisible(newVisibility);
-	}
+	abstract public void dispose();
+	abstract public void setVisible(boolean newState);
 	
 	protected void unexpectedErrorDlg(Exception e)
 	{
 		observer.unexpectedErrorDlg(e);
 	}
 
-	private void safelyPopulateView()
+	protected void safelyPopulateView()
 	{
 		try
 		{
@@ -288,7 +202,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		}
 	}
 	
-	private void addScrollerView() 
+	protected void addScrollerView() 
 	{
 		scroller = new UiScrollPane();
 		scroller.getVerticalScrollBar().setFocusable(false);
@@ -500,8 +414,6 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		return view;
 	}
 
-	private JFrame realFrame;
-	
 	private Bulletin bulletin;
 	private UiMainWindow observer;
 
