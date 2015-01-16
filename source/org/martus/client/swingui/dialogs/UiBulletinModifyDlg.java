@@ -304,21 +304,18 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	public void cleanupAndExit()
 	{
 		observer.doneModifyingBulletin();
-		saveEditorState(getFrameSize(), getFrameLocation(), isFrameMaximized());
+		
+		observer.setBulletinEditorDimension(getFrameSize());
+		observer.setBulletinEditorPosition(getFrameLocation());
+		observer.setBulletinEditorMaximized(isFrameMaximized());
+		observer.saveState();
+		
 		dispose();
 	}
 	
 	abstract protected Point getFrameLocation();
 	abstract protected Dimension getFrameSize();
 	abstract protected boolean isFrameMaximized();
-
-	public void saveEditorState(Dimension size, Point location, boolean isMaximized)
-	{
-		observer.setBulletinEditorDimension(size);
-		observer.setBulletinEditorPosition(location);
-		observer.setBulletinEditorMaximized(isMaximized);
-		observer.saveState();
-	}
 
 	protected void closeWindowIfUserConfirms()
 	{	
