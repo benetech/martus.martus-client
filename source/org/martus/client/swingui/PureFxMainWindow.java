@@ -76,6 +76,18 @@ public class PureFxMainWindow extends UiMainWindow
 	}
 
 	@Override
+	protected void enableMainWindow()
+	{
+		realStage.show();
+	}
+	
+	@Override
+	protected void disableMainWindow()
+	{
+		realStage.hide();
+	}
+	
+	@Override
 	protected void initializeFrame() throws Exception
 	{
 		setStatusBar(createStatusBar());
