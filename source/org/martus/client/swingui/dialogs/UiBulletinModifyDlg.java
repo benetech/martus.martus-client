@@ -81,15 +81,13 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		setBulletin(b);
 		observer = observerToUse;
 		
-		UiLocalization localization = getLocalization();
-
 		ClientBulletinStore store = observerToUse.getApp().getStore();
 		Property<String> currentTemplateNameProperty = store.getCurrentFormTemplateNameProperty();
 		currentTemplateNameProperty.addListener(new TemplateChangeHandler(observerToUse));
 
 		realFrame = new JFrame();
 		UiMainWindow.updateIcon(getSwingFrame());
-		getSwingFrame().setTitle(localization.getWindowTitle("create"));
+		getSwingFrame().setTitle(getLocalization().getWindowTitle("create"));
 		
 		if(UiSession.isJavaFx())
 		{
@@ -106,11 +104,11 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 			getView().copyDataFromBulletin(bulletin);
 			getView().setLanguageChangeListener(new LanguageChangeHandler());
 
-			UiButton send = new UiButton(localization.getButtonLabel("send"));
+			UiButton send = new UiButton(getLocalization().getButtonLabel("send"));
 			send.addActionListener(new SendHandler());
-			UiButton draft = new UiButton(localization.getButtonLabel("savedraft"));
+			UiButton draft = new UiButton(getLocalization().getButtonLabel("savedraft"));
 			draft.addActionListener(new SaveHandler());
-			UiButton cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
+			UiButton cancel = new UiButton(getLocalization().getButtonLabel(EnglishCommonStrings.CANCEL));
 			cancel.addActionListener(new CancelHandler());
 
 			addScrollerView();
