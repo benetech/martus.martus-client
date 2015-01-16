@@ -101,7 +101,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		else
 		{
 			setView(new UiBulletinEditor(getMainWindow()));
-			getView().copyDataFromBulletin(bulletin);
+			getView().copyDataFromBulletin(getBulletin());
 			getView().setLanguageChangeListener(new LanguageChangeHandler());
 
 			UiButton send = new UiButton(getLocalization().getButtonLabel("send"));
@@ -490,12 +490,12 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		cleanupAndExit();
 	}
 	
-	public void setView(UiBulletinComponentInterface view)
+	protected void setView(UiBulletinComponentInterface view)
 	{
 		this.view = view;
 	}
 
-	private UiBulletinComponentInterface getView()
+	protected UiBulletinComponentInterface getView()
 	{
 		return view;
 	}
