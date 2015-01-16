@@ -30,7 +30,7 @@ import java.util.Set;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.swingui.UiMainWindowInterface;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.data.ArrayObservableList;
 import org.martus.common.BulletinSummary;
 import org.martus.common.MartusUtilities;
@@ -39,7 +39,7 @@ import org.martus.common.packet.UniversalId;
 
 public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTableRowData>
 {
-	public SyncRecordsTableProvider(UiMainWindowInterface mainWindowToUse)
+	public SyncRecordsTableProvider(UiMainWindow mainWindowToUse)
 	{
 		super(INITIAL_CAPACITY);
 		mainWindow = mainWindowToUse;
@@ -178,7 +178,7 @@ public class SyncRecordsTableProvider extends ArrayObservableList<ServerSyncTabl
 	public static final int SUB_FILTER_MY_RECORDS = 1;
 	public static final int SUB_FILTER_SHARED_WITH_ME = 2;
 	
-	private UiMainWindowInterface mainWindow;
+	private UiMainWindow mainWindow;
 	private static final int INITIAL_CAPACITY = 500;
 	private ArrayObservableList<ServerSyncTableRowData> allRows;
 	private Set localUids;

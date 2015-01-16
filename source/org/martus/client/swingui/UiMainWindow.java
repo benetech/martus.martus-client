@@ -157,7 +157,7 @@ import org.martus.util.UnicodeReader;
 import org.martus.util.language.LanguageOptions;
 import org.martus.util.xml.XmlUtilities;
 
-public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterface, TopLevelWindowInterface
+public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInterface
 {
 	public UiMainWindow() throws Exception
 	{
@@ -230,7 +230,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("54.245.101.104"); // aws-dev
 	}
 	
-	@Override
 	public boolean isServerAccessible(String address)
 	{
 		return ClientSideNetworkHandlerUsingXmlRpc.isServerAllowed(address);
@@ -922,19 +921,16 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
     	return mainWindowInitalizing;
     }
 
-	@Override
     public MartusApp getApp()
     {
 		return getSession().getApp();
 	}
 	
-	@Override
 	public MartusLocalization getLocalization()
 	{
 		return getSession().getLocalization();
 	}
 
-	@Override
 	public ClientBulletinStore getStore()
 	{
 		return getApp().getStore();
@@ -950,14 +946,12 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		return cursorStack;
 	}
 
-	@Override
 	public void resetCursor()
 	{
 		Object desiredCursor = getCursorStack().pop();
 		rawSetCursor(desiredCursor);
 	}
 
-	@Override
 	public void setWaitingCursor()
 	{
 		Object existingCursor = getExistingCursor();
@@ -1133,20 +1127,17 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 			bulletinsTablePane.setCurrentBulletinIndex(currentPosition);
 	}
 
-	@Override
 	public boolean confirmDlgBeep(String baseTag)
 	{			
 		Toolkit.getDefaultToolkit().beep();
 		return confirmDlg(baseTag);
 	}
 	
-	@Override
 	public boolean confirmDlg(String baseTag)
 	{
 		return confirmDlg(getCurrentActiveFrame().getSwingFrame(), baseTag);
 	}
 	
-	@Override
 	public boolean confirmDlg(JFrame parent, String baseTag)
 	{
 		return UiUtilities.confirmDlg(getLocalization(), parent, baseTag);
@@ -1157,7 +1148,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		return confirmDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, tokenReplacement);
 	}
 
-	@Override
 	public boolean confirmDlg(JFrame parent, String baseTag, Map tokenReplacement)
 	{
 		return UiUtilities.confirmDlg(getLocalization(), parent, baseTag, tokenReplacement);
@@ -1168,7 +1158,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		return confirmDlg(getCurrentActiveFrame().getSwingFrame(), title, contents);
 	}
 
-	@Override
 	public boolean confirmDlg(JFrame parent, String title, String[] contents)
 	{
 		return UiUtilities.confirmDlg(getLocalization(), parent, title, contents);
@@ -1179,7 +1168,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		return confirmDlg(getCurrentActiveFrame().getSwingFrame(), title, contents, buttons);
 	}
 
-	@Override
 	public boolean confirmDlg(JFrame parent, String title, String[] contents, String[] buttons)
 	{
 		return UiUtilities.confirmDlg(parent, title, contents, buttons);
@@ -1195,7 +1183,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		return confirmCustomButtonsDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, buttons, tokenReplacement);
 	}
 
-	@Override
 	public boolean confirmCustomButtonsDlg(JFrame parent,String baseTag, String[] buttons, Map tokenReplacement)
 	{
 		String title = getConfirmDialogTitle(baseTag);
@@ -1231,21 +1218,18 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	abstract public void rawError(String string);
 
-	@Override
 	public void notifyDlgBeep(String baseTag)
 	{			
 		Toolkit.getDefaultToolkit().beep();
 		notifyDlg(baseTag);
 	}
 	
-	@Override
 	public void notifyDlgBeep(JFrame parent, String baseTag)
 	{			
 		Toolkit.getDefaultToolkit().beep();
 		notifyDlg(parent, baseTag);
 	}
 	
-	@Override
 	public void unexpectedErrorDlg(Exception e)
 	{
 		MartusLogger.logException(e);
@@ -1274,20 +1258,17 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		SwingUtilities.invokeLater(new Notifier(mainWindowToUse, baseTag));
 	}
 
-	@Override
 	public void notifyDlg(String baseTag)
 	{
 		HashMap emptyTokenReplacement = new HashMap();
 		notifyDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, emptyTokenReplacement);
 	}
 	
-	@Override
 	public void notifyDlg(String baseTag, Map tokenReplacement)
 	{
 		notifyDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, tokenReplacement);
 	}
 
-	@Override
 	public void notifyDlg(JFrame parent, String baseTag)
 	{
 		HashMap emptyTokenReplacement = new HashMap();
@@ -1304,7 +1285,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		notifyDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, titleTag);
 	}
 
-	@Override
 	public void notifyDlg(JFrame parent, String baseTag, String titleTag)
 	{
 		HashMap emptyTokenReplacement = new HashMap();
@@ -1326,13 +1306,11 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		messageDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, message, tokenReplacement);
 	}
 
-	@Override
 	public void messageDlg(JFrame parent, String baseTag, String message)
 	{
 		messageDlg(parent, baseTag, message, new HashMap());
 	}
 
-	@Override
 	public void messageDlg(JFrame parent, String baseTag, String message, Map tokenReplacement)
 	{
 		UiUtilities.messageDlg(getLocalization(), parent, baseTag, message, tokenReplacement);
@@ -1766,7 +1744,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		return dlg.getResult();
 	}
 	
-	@Override
 	public void saveConfigInfo()
 	{
 		try
@@ -1779,7 +1756,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		}
 	}
 
-	@Override
 	public boolean isServerConfigured()
 	{
 		return getApp().getConfigInfo().isServerConfigured();
@@ -2232,7 +2208,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		return dontExitApplication;
 	}
 
-	@Override
 	public void exitNormally()
 	{
 		if(showRelevantUploadReminder())
@@ -2261,7 +2236,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		exitWithoutSavingState();
 	}
 
-	@Override
 	public void exitWithoutSavingState()
 	{
 		getStore().prepareToExitWithoutSavingState();
@@ -2356,13 +2330,11 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		return getApp().getConfigInfo().getUseZawgyiFont();
 	}
 
-	@Override
 	public boolean getDoZawgyiConversion()
 	{
 	 	return getApp().getConfigInfo().getDoZawgyiConversion();
 	}
 	
-	@Override
 	public boolean getUseInternalTor()
 	{
 		return getApp().getConfigInfo().useInternalTor();
@@ -2533,25 +2505,21 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		}
 	}
 
-	@Override
 	public void setCurrentActiveFrame(TopLevelWindowInterface currentActiveFrame)
 	{
 		this.currentActiveFrame = currentActiveFrame;
 	}
 
-	@Override
 	public TopLevelWindowInterface getCurrentActiveFrame()
 	{
 		return currentActiveFrame;
 	}
 	
-	@Override
 	public void setCurrentActiveDialog(JDialog newActiveDialog)
 	{
 		currentActiveDialog = newActiveDialog;
 	}
 	
-	@Override
 	public JDialog getCurrentActiveDialog()
 	{
 		return currentActiveDialog;
