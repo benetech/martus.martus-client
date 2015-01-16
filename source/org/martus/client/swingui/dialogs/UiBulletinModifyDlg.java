@@ -116,7 +116,7 @@ public class UiBulletinModifyDlg extends JFrame
 		}
 
 
-		getSwingFrame().setDefaultCloseOperation(getSwingFrame().DO_NOTHING_ON_CLOSE);
+		getSwingFrame().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		getSwingFrame().addWindowListener(new WindowEventHandler());
 
 		Dimension screenSize = Utilities.getViewableScreenSize();
@@ -146,6 +146,11 @@ public class UiBulletinModifyDlg extends JFrame
 		ClientBulletinStore store = observerToUse.getApp().getStore();
 		Property<String> currentTemplateNameProperty = store.getCurrentFormTemplateNameProperty();
 		currentTemplateNameProperty.addListener(new TemplateChangeHandler(observerToUse));
+	}
+	
+	protected UiMainWindow getMainWindow()
+	{
+		return observer;
 	}
 	
 	class WindowEventHandler extends WindowAdapter
@@ -300,7 +305,7 @@ public class UiBulletinModifyDlg extends JFrame
 				{
 					String tag = "send";
 						
-					if (!observer.confirmDlg(tag))
+					if (!getMainWindow().confirmDlg(tag))
 						return;
 					state = BulletinState.STATE_SHARED;
 				}
@@ -309,7 +314,7 @@ public class UiBulletinModifyDlg extends JFrame
 			}
 			catch (Exception e) 
 			{
-				observer.unexpectedErrorDlg(e);
+				getMainWindow().unexpectedErrorDlg(e);
 			}
 		}
 	}
@@ -428,7 +433,7 @@ public class UiBulletinModifyDlg extends JFrame
 
 	public void saveEditorState(Dimension size, Point location)
 	{
-		boolean maximized = getSwingFrame().getExtendedState() == getSwingFrame().MAXIMIZED_BOTH;
+		boolean maximized = getSwingFrame().getExtendedState() == JFrame.MAXIMIZED_BOTH;
 		observer.setBulletinEditorDimension(size);
 		observer.setBulletinEditorPosition(location);
 		observer.setBulletinEditorMaximized(maximized);
@@ -454,7 +459,7 @@ public class UiBulletinModifyDlg extends JFrame
 	private UiScrollPane scroller;
 	private FxInSwingStage bulletinEditorStage;
 	
-	private JButton send;
+	protected JButton send;
 	private JButton draft;
 	private JButton cancel;
 
