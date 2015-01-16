@@ -306,7 +306,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	{
 		observer.doneModifyingBulletin();
 		saveEditorState(getSwingFrame().getSize(), getSwingFrame().getLocation());
-		getSwingFrame().dispose();
+		dispose();
 	}
 
 	public void saveEditorState(Dimension size, Point location)
