@@ -217,7 +217,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	{
 		try
 		{
-			getView().copyDataFromBulletin(bulletin);
+			getView().copyDataFromBulletin(getCurrentBulletin());
 			getView().setLanguageChangeListener(new LanguageChangeHandler());
 			getView().scrollToTop();
 		} 
@@ -270,7 +270,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		bulletin = bulletinToShow;
 		try
 		{
-			getView().copyDataFromBulletin(bulletin);
+			getView().copyDataFromBulletin(getCurrentBulletin());
 			getView().scrollToTop();
 		} 
 		catch (Exception e)
@@ -409,18 +409,18 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 
 			// NOTE: must copyDataToBulletin before setSealed or setDraft
 			// NOTE: after copyDataToBulletin, should not allow user to cancel
-			getView().copyDataToBulletin(bulletin);
-			bulletin.changeState(bulletinState);
+			getView().copyDataToBulletin(getCurrentBulletin());
+			getCurrentBulletin().changeState(bulletinState);
 			
 			if(neverDeleteFromServer)
 			{
-				store.removeBulletinFromFolder(draftOutbox, bulletin);
-				bulletin.setImmutable();
+				store.removeBulletinFromFolder(draftOutbox, getCurrentBulletin());
+				getCurrentBulletin().setImmutable();
 				outboxToUse = store.getFolderSealedOutbox();
 			}
 			else
 			{
-				bulletin.setMutable();
+				getCurrentBulletin().setMutable();
 				outboxToUse = draftOutbox;
 			}
 			saveBulletinAndUpdateFolders(store, outboxToUse);
@@ -439,12 +439,12 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 
 	private void saveBulletinAndUpdateFolders(ClientBulletinStore store, BulletinFolder outboxToUse) throws Exception
 	{
-		observer.getApp().saveBulletin(bulletin, outboxToUse);
+		observer.getApp().saveBulletin(getCurrentBulletin(), outboxToUse);
 
 		observer.folderContentsHaveChanged(store.getFolderSaved());
 		observer.folderContentsHaveChanged(store.getFolderDiscarded());
-		observer.selectBulletinInCurrentFolderIfExists(bulletin.getUniversalId());
-		observer.bulletinContentsHaveChanged(bulletin);
+		observer.selectBulletinInCurrentFolderIfExists(getCurrentBulletin().getUniversalId());
+		observer.bulletinContentsHaveChanged(getCurrentBulletin());
 	}
 
 	public boolean wasBulletinSaved()
