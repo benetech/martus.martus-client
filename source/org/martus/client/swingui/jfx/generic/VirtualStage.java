@@ -49,6 +49,7 @@ public abstract class VirtualStage
 		return mainWindow;
 	}
 
+	abstract public void show();
 	abstract public void close();
 	abstract public void doAction(ActionDoer doer);
 	abstract public void logAndNotifyUnexpectedError(Exception e);

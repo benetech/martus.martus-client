@@ -82,9 +82,7 @@ import org.martus.client.network.RetrieveCommand;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.bulletincomponent.UiBulletinPreviewPane;
 import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
-import org.martus.client.swingui.dialogs.FxInSwingBulletinModifyDialog;
 import org.martus.client.swingui.dialogs.UiAboutDlg;
-import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
 import org.martus.client.swingui.dialogs.UiFancySearchDialogContents;
 import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
@@ -2308,26 +2306,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		}
 	}
 
-	public void modifyBulletin(Bulletin b) throws Exception
-	{
-		getCurrentUiState().setModifyingBulletin(true);
-		UiBulletinModifyDlg dlg = null;
-		try
-		{
-			dlg = new FxInSwingBulletinModifyDialog(b, this);
-			setCurrentActiveFrame(dlg);
-			hideMainWindow();
-			dlg.setVisible(true);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			if(dlg != null)
-				dlg.dispose();
-			doneModifyingBulletin();
-			throw(e);
-		}
-	}
+	abstract public void modifyBulletin(Bulletin b) throws Exception;
 
 	public void doneModifyingBulletin()
 	{

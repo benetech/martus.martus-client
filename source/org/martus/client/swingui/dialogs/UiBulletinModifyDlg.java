@@ -318,16 +318,23 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		observer.saveState();
 	}
 
-	protected void closeWindowIfUserConfirms() throws Exception
+	protected void closeWindowIfUserConfirms()
 	{	
-		boolean needConfirmation = getView().isBulletinModified();
-		if(needConfirmation)
+		try
 		{
-			if(!observer.confirmDlg("CancelModifyBulletin"))
-				return;
+			boolean needConfirmation = getView().isBulletinModified();
+			if(needConfirmation)
+			{
+				if(!observer.confirmDlg("CancelModifyBulletin"))
+					return;
+			}
+				
+			cleanupAndExit();
 		}
-			
-		cleanupAndExit();
+		catch (Exception e)
+		{
+			unexpectedErrorDlg(e);
+		}
 	}
 	
 	protected void setView(UiBulletinComponentInterface view)
