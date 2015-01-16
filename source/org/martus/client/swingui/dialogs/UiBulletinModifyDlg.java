@@ -79,6 +79,9 @@ public class UiBulletinModifyDlg extends JFrame
 	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse) throws Exception
 	{
 		observer = observerToUse;
+		
+		realFrame = new JFrame();
+		
 		UiLocalization localization = observer.getLocalization();
 		getSwingFrame().setTitle(localization.getWindowTitle("create"));
 		UiMainWindow.updateIcon(getSwingFrame());
@@ -184,9 +187,19 @@ public class UiBulletinModifyDlg extends JFrame
 		}
 	}
 	
-	private JFrame getSwingFrame()
+	public JFrame getSwingFrame()
 	{
-		return this;
+		return realFrame;
+	}
+	
+	public void dispose()
+	{
+		getSwingFrame().dispose();
+	}
+	
+	public void setVisible(boolean newVisibility)
+	{
+		getSwingFrame().setVisible(newVisibility);
 	}
 	
 	protected void unexpectedErrorDlg(Exception e)
@@ -451,6 +464,8 @@ public class UiBulletinModifyDlg extends JFrame
 			
 		cleanupAndExit();
 	}
+
+	private JFrame realFrame;
 	
 	private Bulletin bulletin;
 	private UiMainWindow observer;
