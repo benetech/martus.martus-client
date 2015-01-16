@@ -29,6 +29,8 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javafx.application.Platform;
 
@@ -44,6 +46,7 @@ import org.martus.client.swingui.jfx.generic.FxRunner;
 import org.martus.client.swingui.jfx.landing.bulletins.FxBulletinEditorShellController;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.Bulletin.BulletinState;
 import org.martus.swing.UiButton;
 import org.martus.swing.Utilities;
 
@@ -133,6 +136,46 @@ public class FxInSwingBulletinModifyDialog extends UiBulletinModifyDlg
 		return realFrame;
 	}
 	
+	class SaveHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
+		{		
+			try
+			{
+				if(!validateData())
+					return;
+	
+				saveBulletin(false, BulletinState.STATE_SAVE);
+			}
+			catch (Exception e) 
+			{
+				getMainWindow().unexpectedErrorDlg(e);
+			}
+		}
+	}
+
+	class SendHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
+		{		
+			try
+			{
+				if(!validateData())
+					return;
+	
+				String tag = "send";
+				if (!getMainWindow().confirmDlg(tag))
+					return;
+													
+				saveBulletin(true, BulletinState.STATE_SHARED);
+			}
+			catch (Exception e) 
+			{
+				getMainWindow().unexpectedErrorDlg(e);
+			}
+		}
+	}
+
 	private JFrame realFrame;
 	
 }
