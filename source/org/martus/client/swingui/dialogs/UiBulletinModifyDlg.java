@@ -88,6 +88,10 @@ public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		UiMainWindow.updateIcon(getSwingFrame());
 		bulletin = b;
 
+		ClientBulletinStore store = observerToUse.getApp().getStore();
+		Property<String> currentTemplateNameProperty = store.getCurrentFormTemplateNameProperty();
+		currentTemplateNameProperty.addListener(new TemplateChangeHandler(observerToUse));
+
 		if(UiSession.isJavaFx())
 		{
 			FxBulletinEditorShellController bulletinEditorShellController = new FxBulletinEditorShellController(observerToUse, this);
@@ -146,9 +150,6 @@ public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		
 		getSwingFrame().setGlassPane(new WindowObscurer());
 		
-		ClientBulletinStore store = observerToUse.getApp().getStore();
-		Property<String> currentTemplateNameProperty = store.getCurrentFormTemplateNameProperty();
-		currentTemplateNameProperty.addListener(new TemplateChangeHandler(observerToUse));
 	}
 	
 	@Override
