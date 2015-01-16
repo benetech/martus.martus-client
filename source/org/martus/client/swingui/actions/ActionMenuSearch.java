@@ -47,7 +47,11 @@ public class ActionMenuSearch extends ActionSearch
 	public void doAction()
 	{
 		SortableBulletinList bulletinIdsFromSearch = doSearch();
-		if(UiSession.isJavaFx())
+		if(UiSession.isPureFx)
+		{
+			// FIXME: Needs implementation
+		}
+		else if(UiSession.isJavaFx())
 		{
 			FxMainStage stage = mainWindow.getMainStage();
 			BulletinsListController controller = stage.getBulletinsListController();
