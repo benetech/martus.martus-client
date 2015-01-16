@@ -299,7 +299,17 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	{
 		return wasBulletinSavedFlag;
 	}
+	
+	public void restoreFrameState()
+	{
+		setFrameLocation(observer.getBulletinEditorPosition());
+		setFrameSize(observer.getBulletinEditorDimension());
+		setFrameMaximized(observer.isBulletinEditorMaximized());
+	}
 
+	abstract protected void setFrameLocation(Point bulletinEditorPosition);
+	abstract protected void setFrameSize(Dimension bulletinEditorDimension);
+	abstract protected void setFrameMaximized(boolean bulletinEditorMaximized);
 
 	public void cleanupAndExit()
 	{

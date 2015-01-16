@@ -28,6 +28,7 @@ package org.martus.client.swingui.dialogs;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -96,25 +97,6 @@ public class FxInSwingBulletinModifyDialog extends UiBulletinModifyDlg
 		getSwingFrame().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		getSwingFrame().addWindowListener(new WindowEventHandler());
 
-		Dimension screenSize = Utilities.getViewableScreenSize();
-		Dimension editorDimension = observerToUse.getBulletinEditorDimension();
-		Point editorPosition = observerToUse.getBulletinEditorPosition();
-		boolean showMaximized = false;
-		if(Utilities.isValidScreenPosition(screenSize, editorDimension, editorPosition))
-		{
-			getSwingFrame().setLocation(editorPosition);
-			getSwingFrame().setSize(editorDimension);
-			if(observerToUse.isBulletinEditorMaximized())
-				showMaximized = true;
-		}
-		else
-			showMaximized = true;
-		if(showMaximized)
-		{
-			getSwingFrame().setSize(screenSize.width - 50, screenSize.height - 50);
-			Utilities.maximizeWindow(getSwingFrame());
-		}
-		
 		if(!UiSession.isJavaFx())
 			getView().scrollToTop();
 		
@@ -138,6 +120,34 @@ public class FxInSwingBulletinModifyDialog extends UiBulletinModifyDlg
 		return realFrame;
 	}
 	
+	@Override
+	protected void setFrameLocation(Point bulletinEditorPosition)
+	{
+		getSwingFrame().setLocation(bulletinEditorPosition);
+	}
+
+	@Override
+	protected void setFrameSize(Dimension bulletinEditorDimension)
+	{
+		getSwingFrame().setSize(bulletinEditorDimension.width, bulletinEditorDimension.height);
+	}
+
+	@Override
+	protected void setFrameMaximized(boolean bulletinEditorMaximized)
+	{
+		if(bulletinEditorMaximized)
+		{
+			Utilities.maximizeWindow(getSwingFrame());
+		}
+		else
+		{
+			int state = getSwingFrame().getExtendedState();
+			state &= ~Frame.MAXIMIZED_BOTH;
+			getSwingFrame().setExtendedState(state);
+		}
+			
+	}
+
 	@Override
 	protected Point getFrameLocation()
 	{

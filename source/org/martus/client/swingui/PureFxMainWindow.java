@@ -214,8 +214,9 @@ public class PureFxMainWindow extends UiMainWindow
 		try
 		{
 			dlg = new PureFxBulletinModifyDialog(b, this);
-			setCurrentActiveFrame(dlg);
 			hideMainWindow();
+			setCurrentActiveFrame(dlg);
+			dlg.restoreFrameState();
 			dlg.setVisible(true);
 		}
 		catch(Exception e)

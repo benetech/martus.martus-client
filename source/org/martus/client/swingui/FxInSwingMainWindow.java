@@ -289,6 +289,7 @@ public class FxInSwingMainWindow extends UiMainWindow
 		try
 		{
 			dlg = new FxInSwingBulletinModifyDialog(b, this);
+			dlg.restoreFrameState();
 			setCurrentActiveFrame(dlg);
 			hideMainWindow();
 			dlg.setVisible(true);
