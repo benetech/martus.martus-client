@@ -27,6 +27,7 @@ package org.martus.client.swingui.jfx.generic;
 
 import java.awt.Window;
 
+import org.martus.client.swingui.FxInSwingMainWindow;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
@@ -61,7 +62,7 @@ public class FxRunner implements Runnable
 
 	public static FxInSwingStage createAndActivateEmbeddedStage(UiMainWindow observerToUse, Window windowToUse, FxShellController shellController)
 	{
-		FxInSwingStage stage = observerToUse.createGenericStage(observerToUse, windowToUse, shellController, shellController.getCssName());
+		FxInSwingStage stage = FxInSwingMainWindow.createGenericStage(observerToUse, windowToUse, shellController, shellController.getCssName());
 		
 		FxRunner fxRunner = new FxRunner(stage);
 		fxRunner.setAbortImmediatelyOnError();
