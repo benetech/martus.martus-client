@@ -50,7 +50,12 @@ public class ActionMenuSearch extends ActionSearch
 		}
 		else
 		{
-			mainWindow.updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
+			showSearchResults(bulletinIdsFromSearch);
 		}
+	}
+
+	public void showSearchResults(SortableBulletinList bulletinIdsFromSearch)
+	{
+		mainWindow.updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
 	}	
 }
