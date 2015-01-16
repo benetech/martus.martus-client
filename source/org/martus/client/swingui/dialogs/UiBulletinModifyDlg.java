@@ -64,7 +64,6 @@ import org.martus.client.swingui.jfx.generic.FxRunner;
 import org.martus.client.swingui.jfx.landing.bulletins.FxBulletinEditorShellController;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.EnglishCommonStrings;
-import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.Bulletin.BulletinState;
 import org.martus.common.fieldspec.DateRangeInvertedException;
@@ -247,7 +246,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			{
 				String tag = "send";
 					
-				if (!observer.confirmDlg(this, tag))
+				if (!observer.confirmDlg(tag))
 					return;
 				state = BulletinState.STATE_SHARED;
 			}
@@ -256,8 +255,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		}
 		catch (Exception e) 
 		{
-			e.printStackTrace();
-			observer.notifyDlg(this, "UnexpectedError");
+			observer.unexpectedErrorDlg(e);
 		}
 	}
 
@@ -276,36 +274,35 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		{
 			HashMap map = new HashMap();
 			map.put("#FieldLabel#", e.getFieldLabel());
-			observer.messageDlg(this, "ErrorDateRangeInverted", "", map);
+			observer.messageDlg("ErrorDateRangeInverted", "", map);
 		}
 		catch(DateTooEarlyException e)
 		{
 			HashMap map = new HashMap();
 			map.put("#FieldLabel#", e.getFieldLabel());
 			map.put("#MinimumDate#", observer.getLocalization().convertStoredDateToDisplay(e.getMinimumDate()));
-			observer.messageDlg(this, "ErrorDateTooEarly", "", map);
+			observer.messageDlg("ErrorDateTooEarly", "", map);
 		}
 		catch(DateTooLateException e)
 		{
 			HashMap map = new HashMap();
 			map.put("#FieldLabel#", e.getFieldLabel());
 			map.put("#MaximumDate#", observer.getLocalization().convertStoredDateToDisplay(e.getMaximumDate()));
-			observer.messageDlg(this, "ErrorDateTooLate", "", map);
+			observer.messageDlg("ErrorDateTooLate", "", map);
 		}
 		catch(UiBulletinComponentEditorSection.AttachmentMissingException e)
 		{
-			observer.messageDlg(this,"ErrorAttachmentMissing", e.getlocalizedTag());
+			observer.messageDlg(this, "ErrorAttachmentMissing", e.getlocalizedTag());
 		}
 		catch(RequiredFieldIsBlankException e)
 		{
 			HashMap map = new HashMap();
 			map.put("#FieldLabel#", e.getFieldLabel());
-			observer.messageDlg(this, "ErrorRequiredFieldBlank", "", map);
+			observer.messageDlg("ErrorRequiredFieldBlank", "", map);
 		}
 		catch (Exception e) 
 		{
-			MartusLogger.logException(e);
-			observer.notifyDlg(this, "UnexpectedError");
+			observer.unexpectedErrorDlg(e);
 		}
 		return false;
 	}
@@ -343,8 +340,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		} 
 		catch (Exception e) 
 		{
-			e.printStackTrace();
-			observer.notifyDlg(this, "ErrorSavingBulletin");
+			observer.unexpectedErrorDlg(e);
 		} 
 		finally 
 		{
@@ -383,8 +379,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
-			observer.notifyDlg(this, "UnexpectedError");
+			observer.unexpectedErrorDlg(e);
 		}
 	}
 	// end WindowListener interface
@@ -423,7 +418,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		boolean needConfirmation = view.isBulletinModified();
 		if(needConfirmation)
 		{
-			if(!view.confirmDlg(this, "CancelModifyBulletin"))
+			if(!observer.confirmDlg("CancelModifyBulletin"))
 				return;
 		}
 			
