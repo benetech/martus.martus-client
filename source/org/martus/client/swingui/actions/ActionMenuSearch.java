@@ -25,8 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.actions;
 
-import javax.swing.JDialog;
-
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.SortableBulletinList;
@@ -36,7 +34,6 @@ import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
 import org.martus.common.EnglishCommonStrings;
-import org.martus.swing.UiOptionPane;
 import org.martus.util.TokenReplacement;
 
 public class ActionMenuSearch extends ActionSearch

@@ -75,7 +75,6 @@ import org.martus.client.core.MartusApp.LoadConfigInfoException;
 import org.martus.client.core.MartusApp.MartusAppInitializationException;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.core.MartusJarVerification;
-import org.martus.client.core.SortableBulletinList;
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.core.templates.FormTemplateManager.UnableToLoadCurrentTemplateException;
 import org.martus.client.network.BackgroundUploader;
