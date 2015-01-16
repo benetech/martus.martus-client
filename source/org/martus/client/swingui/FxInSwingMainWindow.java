@@ -88,13 +88,6 @@ public class FxInSwingMainWindow extends UiMainWindow
 	}
 	
 	@Override
-	protected void enableMainWindow()
-	{
-		getSwingFrame().setEnabled(true);
-		getSwingFrame().setVisible(false);
-	}
-	
-	@Override
 	protected void hideMainWindow()
 	{
 		getSwingFrame().setEnabled(false);
@@ -186,6 +179,7 @@ public class FxInSwingMainWindow extends UiMainWindow
 	protected void showMainWindow()
 	{
 		getSwingFrame().setVisible(true);
+		getSwingFrame().setEnabled(true);
 		getSwingFrame().toFront();
 	}
 

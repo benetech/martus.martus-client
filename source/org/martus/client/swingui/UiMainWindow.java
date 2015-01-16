@@ -348,7 +348,6 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 
 	abstract protected void showMainWindow();
 	abstract protected void obscureMainWindow();
-	abstract protected void enableMainWindow();
 	abstract protected void hideMainWindow();
 
 
@@ -2332,7 +2331,7 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 	public void doneModifyingBulletin()
 	{
 		getCurrentUiState().setModifyingBulletin(false);
-		enableMainWindow();
+		showMainWindow();
 		setCurrentActiveFrame(this);
 	}
 

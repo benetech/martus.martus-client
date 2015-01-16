@@ -76,12 +76,6 @@ public class PureFxMainWindow extends UiMainWindow
 	}
 
 	@Override
-	protected void enableMainWindow()
-	{
-		realStage.show();
-	}
-	
-	@Override
 	protected void hideMainWindow()
 	{
 		realStage.hide();
@@ -141,7 +135,7 @@ public class PureFxMainWindow extends UiMainWindow
 	@Override
 	protected void showMainWindow()
 	{
-		// FIXME: We need to support this
+		realStage.show();
 	}
 	
 	@Override
