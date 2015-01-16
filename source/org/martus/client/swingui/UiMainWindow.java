@@ -2326,17 +2326,17 @@ public abstract class UiMainWindow implements ClipboardOwner, UiMainWindowInterf
 		}
 	}
 
-	protected void disableMainWindow()
-	{
-		getSwingFrame().setEnabled(false);
-		getSwingFrame().setVisible(false);
-	}
-
 	public void doneModifyingBulletin()
 	{
 		getCurrentUiState().setModifyingBulletin(false);
 		enableMainWindow();
 		setCurrentActiveFrame(this);
+	}
+
+	protected void disableMainWindow()
+	{
+		getSwingFrame().setEnabled(false);
+		getSwingFrame().setVisible(false);
 	}
 
 	protected void enableMainWindow()
