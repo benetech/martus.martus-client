@@ -26,12 +26,9 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
-import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
@@ -41,7 +38,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
 import javax.swing.JFrame;
-import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
 import org.martus.client.bulletinstore.BulletinFolder;
@@ -60,7 +56,6 @@ import org.martus.common.fieldspec.DateRangeInvertedException;
 import org.martus.common.fieldspec.DateTooEarlyException;
 import org.martus.common.fieldspec.DateTooLateException;
 import org.martus.common.fieldspec.RequiredFieldIsBlankException;
-import org.martus.swing.UiScrollPane;
 
 abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 {
@@ -202,35 +197,6 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		}
 	}
 	
-	protected void addScrollerView() 
-	{
-		scroller = new UiScrollPane();
-		scroller.getVerticalScrollBar().setFocusable(false);
-		scroller.getViewport().add(getView().getComponent());
-		scroller.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-		getSwingFrame().getContentPane().setLayout(new BorderLayout());
-		getSwingFrame().getContentPane().add(scroller, BorderLayout.CENTER);
-		getSwingFrame().getContentPane().invalidate();
-		getSwingFrame().getContentPane().doLayout();
-	}
-	
-	class CancelHandler implements ActionListener
-	{
-		@Override
-		public void actionPerformed(ActionEvent event)
-		{
-			try
-			{
-				closeWindowIfUserConfirms();
-			} 
-			catch (Exception e)
-			{
-				unexpectedErrorDlg(e);
-			}
-		}
-		
-	}
-
 	protected boolean validateData()
 	{
 		try
@@ -378,7 +344,6 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	private UiMainWindow observer;
 
 	private UiBulletinComponentInterface view;
-	private UiScrollPane scroller;
 	
 	private boolean wasBulletinSavedFlag;
 }
