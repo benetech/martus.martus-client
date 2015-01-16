@@ -111,7 +111,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 			send.addActionListener(new SaveSendHandler());
 			draft = new UiButton(localization.getButtonLabel("savedraft"));
 			draft.addActionListener(new SaveSendHandler());
-			cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
+			UiButton cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 			cancel.addActionListener(new CancelHandler());
 
 			addScrollerView();
@@ -483,7 +483,6 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	
 	protected JButton send;
 	private JButton draft;
-	private JButton cancel;
 
 	private boolean wasBulletinSavedFlag;
 }
