@@ -43,7 +43,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
 import javax.swing.Box;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
@@ -107,9 +106,9 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 			view.copyDataFromBulletin(bulletin);
 			view.setLanguageChangeListener(new LanguageChangeHandler());
 
-			send = new UiButton(localization.getButtonLabel("send"));
+			UiButton send = new UiButton(localization.getButtonLabel("send"));
 			send.addActionListener(new SendHandler());
-			draft = new UiButton(localization.getButtonLabel("savedraft"));
+			UiButton draft = new UiButton(localization.getButtonLabel("savedraft"));
 			draft.addActionListener(new SaveHandler());
 			UiButton cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 			cancel.addActionListener(new CancelHandler());
@@ -491,9 +490,6 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	private UiScrollPane scroller;
 	private FxInSwingStage bulletinEditorStage;
 	
-	protected JButton send;
-	private JButton draft;
-
 	private boolean wasBulletinSavedFlag;
 }
 
