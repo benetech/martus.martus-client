@@ -217,7 +217,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	{
 		try
 		{
-			getView().copyDataFromBulletin(getCurrentBulletin());
+			getView().copyDataFromBulletin(getBulletin());
 			getView().setLanguageChangeListener(new LanguageChangeHandler());
 			getView().scrollToTop();
 		} 
@@ -254,13 +254,13 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	
 	public Bulletin createClonedBulletinUsingCurrentTemplate(ClientBulletinStore store) throws Exception
 	{
-		Bulletin bulletinWithOldTemplateButLatestData = getCurrentBulletin();
+		Bulletin bulletinWithOldTemplateButLatestData = getBulletin();
 		getView().copyDataToBulletin(bulletinWithOldTemplateButLatestData);
 		Bulletin clonedBulletin = store.createNewDraftWithCurrentTemplateButIdAndDataAndHistoryFrom(bulletinWithOldTemplateButLatestData);
 		return clonedBulletin;
 	}
 
-	protected Bulletin getCurrentBulletin()
+	protected Bulletin getBulletin()
 	{
 		return bulletin;
 	}
@@ -270,7 +270,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		bulletin = bulletinToShow;
 		try
 		{
-			getView().copyDataFromBulletin(getCurrentBulletin());
+			getView().copyDataFromBulletin(getBulletin());
 			getView().scrollToTop();
 		} 
 		catch (Exception e)
@@ -409,18 +409,18 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 
 			// NOTE: must copyDataToBulletin before setSealed or setDraft
 			// NOTE: after copyDataToBulletin, should not allow user to cancel
-			getView().copyDataToBulletin(getCurrentBulletin());
-			getCurrentBulletin().changeState(bulletinState);
+			getView().copyDataToBulletin(getBulletin());
+			getBulletin().changeState(bulletinState);
 			
 			if(neverDeleteFromServer)
 			{
-				store.removeBulletinFromFolder(draftOutbox, getCurrentBulletin());
-				getCurrentBulletin().setImmutable();
+				store.removeBulletinFromFolder(draftOutbox, getBulletin());
+				getBulletin().setImmutable();
 				outboxToUse = store.getFolderSealedOutbox();
 			}
 			else
 			{
-				getCurrentBulletin().setMutable();
+				getBulletin().setMutable();
 				outboxToUse = draftOutbox;
 			}
 			saveBulletinAndUpdateFolders(store, outboxToUse);
@@ -439,12 +439,12 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 
 	private void saveBulletinAndUpdateFolders(ClientBulletinStore store, BulletinFolder outboxToUse) throws Exception
 	{
-		observer.getApp().saveBulletin(getCurrentBulletin(), outboxToUse);
+		observer.getApp().saveBulletin(getBulletin(), outboxToUse);
 
 		observer.folderContentsHaveChanged(store.getFolderSaved());
 		observer.folderContentsHaveChanged(store.getFolderDiscarded());
-		observer.selectBulletinInCurrentFolderIfExists(getCurrentBulletin().getUniversalId());
-		observer.bulletinContentsHaveChanged(getCurrentBulletin());
+		observer.selectBulletinInCurrentFolderIfExists(getBulletin().getUniversalId());
+		observer.bulletinContentsHaveChanged(getBulletin());
 	}
 
 	public boolean wasBulletinSaved()
