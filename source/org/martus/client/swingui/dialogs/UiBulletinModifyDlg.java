@@ -80,8 +80,8 @@ public class UiBulletinModifyDlg extends JFrame
 	{
 		observer = observerToUse;
 		UiLocalization localization = observer.getLocalization();
-		setTitle(localization.getWindowTitle("create"));
-		UiMainWindow.updateIcon(this);
+		getSwingFrame().setTitle(localization.getWindowTitle("create"));
+		UiMainWindow.updateIcon(getSwingFrame());
 		bulletin = b;
 
 		if(UiSession.isJavaFx())
@@ -89,10 +89,10 @@ public class UiBulletinModifyDlg extends JFrame
 			FxBulletinEditorShellController bulletinEditorShellController = new FxBulletinEditorShellController(observerToUse, this);
 
 			String cssName = "Bulletin.css";
-			bulletinEditorStage = FxRunner.createAndActivateEmbeddedStage(observerToUse, this, bulletinEditorShellController, cssName);
+			bulletinEditorStage = FxRunner.createAndActivateEmbeddedStage(observerToUse, getSwingFrame(), bulletinEditorShellController, cssName);
 			view = bulletinEditorShellController;
 			Platform.runLater(() -> safelyPopulateView());
-			getContentPane().add(bulletinEditorStage.getPanel(), BorderLayout.CENTER);
+			getSwingFrame().getContentPane().add(bulletinEditorStage.getPanel(), BorderLayout.CENTER);
 		}
 		else
 		{
@@ -112,12 +112,12 @@ public class UiBulletinModifyDlg extends JFrame
 			Box box = Box.createHorizontalBox();
 			Component buttons[] = {send, draft, cancel, Box.createHorizontalGlue()};
 			Utilities.addComponentsRespectingOrientation(box, buttons);
-			getContentPane().add(box, BorderLayout.SOUTH);
+			getSwingFrame().getContentPane().add(box, BorderLayout.SOUTH);
 		}
 
 
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		addWindowListener(new WindowEventHandler());
+		getSwingFrame().setDefaultCloseOperation(getSwingFrame().DO_NOTHING_ON_CLOSE);
+		getSwingFrame().addWindowListener(new WindowEventHandler());
 
 		Dimension screenSize = Utilities.getViewableScreenSize();
 		Dimension editorDimension = observerToUse.getBulletinEditorDimension();
@@ -125,8 +125,8 @@ public class UiBulletinModifyDlg extends JFrame
 		boolean showMaximized = false;
 		if(Utilities.isValidScreenPosition(screenSize, editorDimension, editorPosition))
 		{
-			setLocation(editorPosition);
-			setSize(editorDimension);
+			getSwingFrame().setLocation(editorPosition);
+			getSwingFrame().setSize(editorDimension);
 			if(observerToUse.isBulletinEditorMaximized())
 				showMaximized = true;
 		}
@@ -134,14 +134,14 @@ public class UiBulletinModifyDlg extends JFrame
 			showMaximized = true;
 		if(showMaximized)
 		{
-			setSize(screenSize.width - 50, screenSize.height - 50);
-			Utilities.maximizeWindow(this);
+			getSwingFrame().setSize(screenSize.width - 50, screenSize.height - 50);
+			Utilities.maximizeWindow(getSwingFrame());
 		}
 		
 		if(!UiSession.isJavaFx())
 			view.scrollToTop();
 		
-		setGlassPane(new WindowObscurer());
+		getSwingFrame().setGlassPane(new WindowObscurer());
 		
 		ClientBulletinStore store = observerToUse.getApp().getStore();
 		Property<String> currentTemplateNameProperty = store.getCurrentFormTemplateNameProperty();
@@ -177,6 +177,11 @@ public class UiBulletinModifyDlg extends JFrame
 					addScrollerView();
 			*/
 		}
+	}
+	
+	private JFrame getSwingFrame()
+	{
+		return this;
 	}
 	
 	protected void unexpectedErrorDlg(Exception e)
@@ -256,10 +261,10 @@ public class UiBulletinModifyDlg extends JFrame
 		scroller.getVerticalScrollBar().setFocusable(false);
 		scroller.getViewport().add(view.getComponent());
 		scroller.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-		getContentPane().setLayout(new BorderLayout());
-		getContentPane().add(scroller, BorderLayout.CENTER);
-		getContentPane().invalidate();
-		getContentPane().doLayout();
+		getSwingFrame().getContentPane().setLayout(new BorderLayout());
+		getSwingFrame().getContentPane().add(scroller, BorderLayout.CENTER);
+		getSwingFrame().getContentPane().invalidate();
+		getSwingFrame().getContentPane().doLayout();
 	}
 	
 	class CancelHandler implements ActionListener
@@ -318,7 +323,7 @@ public class UiBulletinModifyDlg extends JFrame
 		}
 		catch(UiDateEditor.DateFutureException e)
 		{
-			observer.messageDlg(this,"ErrorDateInFuture", e.getlocalizedTag());
+			observer.messageDlg(getSwingFrame(),"ErrorDateInFuture", e.getlocalizedTag());
 		}
 		catch(DateRangeInvertedException e)
 		{
@@ -342,7 +347,7 @@ public class UiBulletinModifyDlg extends JFrame
 		}
 		catch(UiBulletinComponentEditorSection.AttachmentMissingException e)
 		{
-			observer.messageDlg(this, "ErrorAttachmentMissing", e.getlocalizedTag());
+			observer.messageDlg(getSwingFrame(), "ErrorAttachmentMissing", e.getlocalizedTag());
 		}
 		catch(RequiredFieldIsBlankException e)
 		{
@@ -359,8 +364,8 @@ public class UiBulletinModifyDlg extends JFrame
 
 	public void saveBulletin(boolean neverDeleteFromServer, BulletinState bulletinState)
 	{
-		Cursor originalCursor = getCursor();
-		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+		Cursor originalCursor = getSwingFrame().getCursor();
+		getSwingFrame().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		try 
 		{
 			MartusApp app = observer.getApp();
@@ -394,7 +399,7 @@ public class UiBulletinModifyDlg extends JFrame
 		} 
 		finally 
 		{
-			setCursor(originalCursor);
+			getSwingFrame().setCursor(originalCursor);
 		}
 	}
 
@@ -417,13 +422,13 @@ public class UiBulletinModifyDlg extends JFrame
 	public void cleanupAndExit()
 	{
 		observer.doneModifyingBulletin();
-		saveEditorState(getSize(), getLocation());
-		dispose();
+		saveEditorState(getSwingFrame().getSize(), getSwingFrame().getLocation());
+		getSwingFrame().dispose();
 	}
 
 	public void saveEditorState(Dimension size, Point location)
 	{
-		boolean maximized = getExtendedState() == MAXIMIZED_BOTH;
+		boolean maximized = getSwingFrame().getExtendedState() == getSwingFrame().MAXIMIZED_BOTH;
 		observer.setBulletinEditorDimension(size);
 		observer.setBulletinEditorPosition(location);
 		observer.setBulletinEditorMaximized(maximized);
