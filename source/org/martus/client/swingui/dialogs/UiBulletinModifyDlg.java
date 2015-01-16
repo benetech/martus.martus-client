@@ -78,19 +78,19 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 {
 	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse) throws Exception
 	{
+		bulletin = b;
 		observer = observerToUse;
 		
-		realFrame = new JFrame();
-		
 		UiLocalization localization = getMainWindow().getLocalization();
-		getSwingFrame().setTitle(localization.getWindowTitle("create"));
-		UiMainWindow.updateIcon(getSwingFrame());
-		bulletin = b;
 
 		ClientBulletinStore store = observerToUse.getApp().getStore();
 		Property<String> currentTemplateNameProperty = store.getCurrentFormTemplateNameProperty();
 		currentTemplateNameProperty.addListener(new TemplateChangeHandler(observerToUse));
 
+		realFrame = new JFrame();
+		UiMainWindow.updateIcon(getSwingFrame());
+		getSwingFrame().setTitle(localization.getWindowTitle("create"));
+		
 		if(UiSession.isJavaFx())
 		{
 			FxBulletinEditorShellController bulletinEditorShellController = new FxBulletinEditorShellController(observerToUse, this);
