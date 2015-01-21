@@ -38,6 +38,7 @@ abstract public class PureFxWizardStage extends PureFxDialogStage implements Wiz
 	{
 		super(mainWindowToUse, new FxSetupWizardShellController(mainWindowToUse));
 		
+		serverAvailibilityState = SERVER_STATE_NOT_INITIALIZED;
 		visitedWizardPagesStack = new Stack<FxContentController>();
 
 		setCurrentController(getFirstController());
