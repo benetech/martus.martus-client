@@ -38,6 +38,7 @@ abstract public class FxInSwingWizardStage extends FxInSwingDialogStage implemen
 	{
 		super(mainWindowToUse, cssName);
 		
+		serverAvailibilityState = SERVER_STATE_NOT_INITIALIZED;
 		visitedWizardPagesStack = new Stack<FxContentController>();
 
 		setShellController(new FxSetupWizardShellController(getMainWindow()));
