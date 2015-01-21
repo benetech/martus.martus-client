@@ -56,7 +56,7 @@ public class Martus
 		System.out.println("Java runtime: " + System.getProperty("java.runtime.name"));
 
 		final String javaVersion = System.getProperty("java.version");
-		final String minimumJavaVersion = "1.7.0";
+		final String minimumJavaVersion = "1.8.0";
 		if(javaVersion.compareTo(minimumJavaVersion) < 0)
 		{
 			final String errorMessage = "Requires Java version " + minimumJavaVersion + " or later!";
