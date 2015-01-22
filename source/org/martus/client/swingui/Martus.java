@@ -168,6 +168,8 @@ public class Martus
 			System.exit(1);
 		}
 		
+		Martus.useSystemLookAndFeel();
+
 		if(UiSession.isPureFx)
 			FxMartus.main(args);
 		else
@@ -215,12 +217,19 @@ public class Martus
 	{
 		if(UiSession.isPureFx)
 			return new PureFxMainWindow();
-		
-		boolean useSystemLookAndFeel = true;
-		if(useSystemLookAndFeel)
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
 		return new FxInSwingMainWindow();
+	}
+
+	public static void useSystemLookAndFeel()
+	{
+		try
+		{
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
 	}
 
 	private static int findOption(Vector options, String optionText)
