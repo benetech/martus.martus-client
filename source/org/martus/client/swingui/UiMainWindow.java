@@ -178,14 +178,13 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			SwingUtilities.invokeAndWait(() -> JOptionPane.showMessageDialog(null, "Unknown error attempting to locate crypto jars"));
+			JOptionPane.showMessageDialog(null, "Unknown error attempting to locate crypto jars");
 			throw new RuntimeException(e);
 		}
 		
 		cursorStack = new Stack();
 		
 		UiModelessBusyDlg splashScreen = new UiModelessBusyDlg(new ImageIcon(UiAboutDlg.class.getResource("Martus-logo-black-text-160x72.png")));
-		SwingUtilities.invokeLater(() -> splashScreen.setVisible(true));
 		try
 		{
 			session = new UiSession();
@@ -209,7 +208,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		}
 		finally
 		{
-			SwingUtilities.invokeLater(() -> splashScreen.endDialog());
+			splashScreen.endDialog();
 		}
 	}
 	
@@ -371,7 +370,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		if(foundBcJce)
 		{
 			String hintsToSolve = "Make sure Xbootclasspath does not contain bc-jce.jar";
-			SwingUtilities.invokeAndWait(() -> JOptionPane.showMessageDialog(null, "bc-jce.jar cannot be used\n\n" + hintsToSolve));
+			JOptionPane.showMessageDialog(null, "bc-jce.jar cannot be used\n\n" + hintsToSolve);
 		}
 		
 		try
@@ -381,13 +380,13 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 			if(bcprovJarURL.toString().indexOf(bcprovJarName) < 0)
 			{
 				String hintsToSolve = "Make sure " + bcprovJarName + " is the only bcprov file in Martus/lib/ext";
-				SwingUtilities.invokeAndWait(() -> JOptionPane.showMessageDialog(null, "Didn't load " + bcprovJarName + "\n\n" + hintsToSolve));
+				JOptionPane.showMessageDialog(null, "Didn't load " + bcprovJarName + "\n\n" + hintsToSolve);
 			}
 		} 
 		catch (MartusCrypto.InvalidJarException e)
 		{
 			String hintsToSolve = "Xbootclasspath might be incorrect; " + MartusJarVerification.BCPROV_JAR_FILE_NAME + " might be missing from Martus/lib/ext";
-			SwingUtilities.invokeAndWait(() -> JOptionPane.showMessageDialog(null, "Didn't load bc-jce.jar\n\n" + hintsToSolve));
+			JOptionPane.showMessageDialog(null, "Didn't load bc-jce.jar\n\n" + hintsToSolve);
 		}
 
 	}
@@ -402,7 +401,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 
 		if(!MartusApp.isJarSigned())
 		{
-			SwingUtilities.invokeAndWait(() -> JOptionPane.showMessageDialog(null, "This Martus Jar is not signed, so cannot be verified"));
+			JOptionPane.showMessageDialog(null, "This Martus Jar is not signed, so cannot be verified");
 		}
 	}
 
