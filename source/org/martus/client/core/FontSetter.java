@@ -1,11 +1,12 @@
 package org.martus.client.core;
 
-import javax.swing.*;
-import javax.swing.plaf.FontUIResource;
-import java.awt.*;
+import java.awt.Font;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.swing.UIManager;
+import javax.swing.plaf.FontUIResource;
 
 import org.martus.common.MartusLogger;
 import org.martus.swing.FontHandler;

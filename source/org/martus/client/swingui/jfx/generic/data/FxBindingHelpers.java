@@ -31,20 +31,31 @@ public class FxBindingHelpers
 {
 	public static Property bindToOurPropertyField(Property cellProperty, Property currentFieldProperty, Property cellPropertyBoundToCurrently)
 	{
-		if(cellPropertyBoundToCurrently==null) 
-		{
-			cellPropertyBoundToCurrently = cellProperty;
-			currentFieldProperty.bindBidirectional(cellProperty);
-		}
-		else
-		{
-			if(cellPropertyBoundToCurrently != cellProperty) 
-			{
-				currentFieldProperty.unbindBidirectional(cellPropertyBoundToCurrently);
-				cellPropertyBoundToCurrently = cellProperty;
-				currentFieldProperty.bindBidirectional(cellPropertyBoundToCurrently);
-			}
-		}
+		safelyUnbindProperty(cellProperty, currentFieldProperty,cellPropertyBoundToCurrently);
+		if(shouldBindToProperty(cellProperty, cellPropertyBoundToCurrently))
+			cellPropertyBoundToCurrently = bindBidirectionally(cellProperty, currentFieldProperty);
 		return cellPropertyBoundToCurrently;
+	}
+
+	public static void safelyUnbindProperty(Property cellProperty,
+			Property currentFieldProperty, Property cellPropertyBoundToCurrently)
+	{
+		if(cellPropertyBoundToCurrently != null && cellPropertyBoundToCurrently != cellProperty)
+			currentFieldProperty.unbindBidirectional(cellPropertyBoundToCurrently);
+	}
+
+	private static boolean shouldBindToProperty(Property cellProperty, Property cellPropertyBoundToCurrently)
+	{
+		if(cellPropertyBoundToCurrently==null) 
+			return true;
+		if(cellPropertyBoundToCurrently != cellProperty) 
+			return true;
+		return false;
+	}
+
+	private static Property bindBidirectionally(Property hotPropertyToBeBound, Property controlerProperty)
+	{
+		controlerProperty.bindBidirectional(hotPropertyToBeBound);
+		return hotPropertyToBeBound;
 	}
 }

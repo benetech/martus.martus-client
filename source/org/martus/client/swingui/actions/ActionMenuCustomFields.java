@@ -29,15 +29,12 @@ package org.martus.client.swingui.actions;
 import java.awt.event.ActionEvent;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiCustomFieldsDlg;
 import org.martus.common.FieldCollection;
-import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.FieldSpecCollection;
-import org.martus.common.fieldspec.BulletinFieldSpecs;
-import org.martus.common.fieldspec.CustomFieldTemplate;
+import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class ActionMenuCustomFields extends UiMenuAction
@@ -54,22 +51,24 @@ public class ActionMenuCustomFields extends UiMenuAction
 		
 		MartusApp app = mainWindow.getApp();
 		ClientBulletinStore store = app.getStore();
-		BulletinFieldSpecs existingSpecs = new BulletinFieldSpecs();
-		existingSpecs.setTopSectionSpecs(store.getTopSectionFieldSpecs());
-		existingSpecs.setBottomSectionSpecs(store.getBottomSectionFieldSpecs());
-		ConfigInfo configInfo = app.getConfigInfo();
-		existingSpecs.setTitleOfSpecs(configInfo.getCurrentFormTemplateTitle());
-		existingSpecs.setDescriptionOfSpecs(configInfo.getCurrentFormTemplateDescription());
-		BulletinFieldSpecs newSpecs = getCustomizedFieldsFromUser(existingSpecs);
-		if(newSpecs == null)
+		FormTemplate existingTemplate = null;
+		try
+		{
+			existingTemplate = store.getCurrentFormTemplate();
+		}
+		catch(Exception e)
+		{
+			mainWindow.unexpectedErrorDlg(e);
+			return;
+		}
+
+		FormTemplate updatedTemplate = getCustomizedFieldsFromUser(existingTemplate);
+		if(updatedTemplate == null)
 			return;
 		
 		try
 		{
-			FieldCollection topSection = new FieldCollection(newSpecs.getTopSectionSpecs());
-			FieldCollection bottomSection = new FieldCollection(newSpecs.getBottomSectionSpecs());
-			CustomFieldTemplate updatedTemplate = new CustomFieldTemplate(newSpecs.getTitleOfSpecs(), newSpecs.getDescriptionOfSpecs(), topSection, bottomSection);
-			app.updateCustomFieldTemplate(updatedTemplate);
+			app.updateFormTemplate(updatedTemplate);
 		} 
 		catch (Exception e)
 		{
@@ -78,11 +77,11 @@ public class ActionMenuCustomFields extends UiMenuAction
 		}
 	}
 
-	private BulletinFieldSpecs getCustomizedFieldsFromUser(BulletinFieldSpecs existingSpecs)
+	private FormTemplate getCustomizedFieldsFromUser(FormTemplate existingTemplate)
 	{
 		while(true)
 		{
-			UiCustomFieldsDlg inputDlg = new UiCustomFieldsDlg(mainWindow, existingSpecs);
+			UiCustomFieldsDlg inputDlg = new UiCustomFieldsDlg(mainWindow, existingTemplate);
 			inputDlg.setFocusToInputField();
 			inputDlg.setVisible(true);
 			String newTopSectionCustomFieldXml = inputDlg.getTopSectionXml();
@@ -99,10 +98,10 @@ public class ActionMenuCustomFields extends UiMenuAction
 			{
 				if(mainWindow.confirmDlg("UndoCustomFields"))
 				{
-					existingSpecs.setTopSectionSpecs(StandardFieldSpecs.getDefaultTopSetionFieldSpecs());
-					existingSpecs.setBottomSectionSpecs(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
-					existingSpecs.setTitleOfSpecs("");
-					existingSpecs.setDescriptionOfSpecs("");
+					existingTemplate.setTopFields(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
+					existingTemplate.setBottomFields(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+					existingTemplate.setTitle("");
+					existingTemplate.setDescription("");
 				}					
 			}
 			else
@@ -113,17 +112,12 @@ public class ActionMenuCustomFields extends UiMenuAction
 				{
 					newTopSectionSpecs = FieldCollection.parseXml(newTopSectionCustomFieldXml);
 					newBottomSectionSpecs = FieldCollection.parseXml(newBottomSectionCustomFieldXml);
+					return new FormTemplate(newTitle, newDescription, newTopSectionSpecs, newBottomSectionSpecs);
 				}
-				catch(CustomFieldsParseException e)
+				catch(Exception e)
 				{
-					e.printStackTrace();
+					getMainWindow().unexpectedErrorDlg(e);
 				}
-				BulletinFieldSpecs newFieldSpecs = new BulletinFieldSpecs();
-				newFieldSpecs.setTopSectionSpecs(newTopSectionSpecs);
-				newFieldSpecs.setBottomSectionSpecs(newBottomSectionSpecs);
-				newFieldSpecs.setTitleOfSpecs(newTitle);
-				newFieldSpecs.setDescriptionOfSpecs(newDescription);
-				return newFieldSpecs;
 			}
 		}
 	}

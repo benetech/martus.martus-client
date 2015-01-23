@@ -33,11 +33,15 @@ import java.io.IOException;
 import java.util.Vector;
 
 import org.martus.common.ContactInfo;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.util.StreamableBase64;
@@ -53,7 +57,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 
 	public void testBasics()
 	{
-		assertEquals(24, ConfigInfo.VERSION);
+		assertEquals(29, ConfigInfo.VERSION);
 
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
@@ -67,6 +71,52 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.clear();
 		verifyEmptyInfo(info, "clear");
 		assertFalse("A blank config Info can't be new", info.isNewVersion());
+	}
+	
+	public void testShouldShowOneTimeNoticeFortheRemovalOfPublicBulletins() throws Exception 
+	{
+		verifyShouldShowOneTimeNoticeFortheRemovalOfPublicBulletins(true, -1);
+		verifyShouldShowOneTimeNoticeFortheRemovalOfPublicBulletins(false, 0);
+		verifyShouldShowOneTimeNoticeFortheRemovalOfPublicBulletins(false, 1);
+	}
+	
+	private void verifyShouldShowOneTimeNoticeFortheRemovalOfPublicBulletins(boolean expected, int verionDifference) throws Exception
+	{
+		byte[] data = createFileWithSampleData((short) (ConfigInfo.VERSION_MIGRATE_TO_PRIVATE_ALWAYS + verionDifference));
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(data);
+		ConfigInfo configInfo = ConfigInfo.load(inputStream);
+		
+		assertEquals("Is older version?", expected, configInfo.shouldShowOneTimeNoticeFortheRemovalOfPublicBulletins());
+	}
+	
+	public void testGetLegacyFormTemplate() throws Exception
+	{
+		ConfigInfo configInfo = new ConfigInfo();
+
+		FormTemplate emptyTemplate = configInfo.getLegacyFormTemplate();
+		assertEquals(StandardFieldSpecs.getDefaultTopSectionFieldSpecs().toXml(), emptyTemplate.getTopSectionXml());
+		assertEquals(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().toXml(), emptyTemplate.getBottomSectionXml());
+
+		String title = "title";
+		configInfo.deprecatedSetCurrentFormTemplateTitle(title);
+		
+		String description = "description";
+		configInfo.deprecatedSetCurrentFormTemplateDescription(description);
+		
+		FieldSpecCollection top = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		top.add(FieldSpec.createCustomField("tagtop", "labeltop", new FieldTypeNormal()));
+		configInfo.deprecatedSetCustomFieldTopSectionXml(top.toXml());
+
+		FieldSpecCollection bottom = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
+		bottom.add(FieldSpec.createCustomField("tagbottom", "labelbottom", new FieldTypeNormal()));
+		configInfo.deprecatedSetCustomFieldBottomSectionXml(bottom.toXml());
+		
+		FormTemplate template = configInfo.getLegacyFormTemplate();
+		assertEquals(title, template.getTitle());
+		assertEquals(description, template.getDescription());
+		assertEquals(top.toXml(), template.getTopSectionXml());
+		assertEquals(bottom.toXml(), template.getBottomSectionXml());
+
 	}
 
 	public void testLoadVersions() throws Exception
@@ -132,6 +182,17 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals("should have reverted", server, info.getServerName());
 	}
 
+	public void testTemplates() throws Exception
+	{
+		ConfigInfo info = new ConfigInfo();
+		
+		assertFalse(info.hasLegacyFormTemplate());
+		setConfigToSampleData(info, ConfigInfo.VERSION);
+		assertFalse(info.hasLegacyFormTemplate());
+		info.setDidTemplateMigration(false);
+		assertTrue(info.hasLegacyFormTemplate());
+	}
+	
 	public void testRemoveHQKey() throws Exception
 	{
 		ConfigInfo info = new ConfigInfo();
@@ -291,14 +352,14 @@ public class TestConfigInfo extends TestCaseEnhanced
 	public void testLongStrings() throws Exception
 	{
 		ConfigInfo info = new ConfigInfo();
-		info.setCustomFieldTopSectionXml(longString);
-		info.setCustomFieldBottomSectionXml(longString);
+		info.deprecatedSetCustomFieldTopSectionXml(longString);
+		info.deprecatedSetCustomFieldBottomSectionXml(longString);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		info.save(out);
 		ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
 		ConfigInfo loaded = ConfigInfo.load(in);
-		assertEquals("Didn't restore long string for top?", info.getCustomFieldTopSectionXml(), loaded.getCustomFieldTopSectionXml());
-		assertEquals("Didn't restore long string for bottom?", info.getCustomFieldBottomSectionXml(), loaded.getCustomFieldBottomSectionXml());
+		assertEquals("Didn't restore long string for top?", info.getNoLongerUsedCustomFieldTopSectionXml(), loaded.getNoLongerUsedCustomFieldTopSectionXml());
+		assertEquals("Didn't restore long string for bottom?", info.getNoLongerUsedCustomFieldBottomSectionXml(), loaded.getNoLongerUsedCustomFieldBottomSectionXml());
 	}
 
 	private static String createLongSampleString() 
@@ -330,56 +391,62 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setAllHQKeysXml(sampleAllHQKeysXml);
 		info.setBulletinVersioningAware(sampleBulletinVersioningAware);
 		info.setDefaultHQKeysXml(sampleDefaultHQKeysXml);
-		info.setCheckForFieldOfficeBulletins(sampleCheckForFieldOfficeBulletins);
-		info.setCustomFieldTopSectionXml(sampleCustomFieldTopSectionXml);
-		info.setCustomFieldBottomSectionXml(sampleCustomFieldBottomSectionXml);
+		info.deprecatedSetCustomFieldTopSectionXml(sampleCustomFieldTopSectionXml);
+		info.deprecatedSetCustomFieldBottomSectionXml(sampleCustomFieldBottomSectionXml);
 		info.setUseZawgyiFont(sampleUseZawgyi);
 		info.setFieldDeskKeysXml(sampleFieldDeskKeysXml);
 		info.setBackedUpImprovedKeypairShare(sampleBackedUpImprovedKeypairShare);
 		info.setUseInternalTor(sampleUseInternalTor);
 		info.setMartusAccountAccessTokens(sampleMartusAccountAccessTokens);
 		info.setContactKeysXml(sampleContactKeysXml);
-		info.setCurrentFormTemplateTitle(sampleCurrentFormTemplateTitle);
-		info.setCurrentFormTemplateDescription(sampleCurrentFormTemplateDescription);
-		info.setIsNetworkOnline(sampleIsNetworkOnline);
+		info.deprecatedSetCurrentFormTemplateTitle(sampleCurrentFormTemplateTitle);
+		info.deprecatedSetCurrentFormTemplateDescription(sampleCurrentFormTemplateDescription);
+		info.setOnStartupServerOnlineStatus(sampleOnStartupDefaultServerOnlineStatus);
 		info.setFolderLabelCode(sampleFolderLabelCode);
 		info.setFolderLabelCustomName(sampleFolderLabelCustomName);
 		info.setSyncStatusJson(sampleSyncStatusJson);
+		info.setSyncFrequencyMinutes(sampleSyncFrequency);
+		info.setDidTemplateMigration(sampleDidTemplateMigration);
+		info.setAlwaysImmutableOnServer(sampleImmutableOnServer);
+		info.setDateLastAskedUserToBackupKeypair(sampleDateLastAskedUserToBackupKeypair);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
 	{
-		assertEquals(label + ": sampleSource", "", info.getAuthor());
-		assertEquals(label + ": sampleOrg", "", info.getOrganization());
-		assertEquals(label + ": sampleEmail", "", info.getEmail());
-		assertEquals(label + ": sampleWebPage", "", info.getWebPage());
-		assertEquals(label + ": samplePhone", "", info.getPhone());
-		assertEquals(label + ": sampleAddress", "", info.getAddress());
-		assertEquals(label + ": sampleServerName", "", info.getServerName());
-		assertEquals(label + ": sampleServerKey", "", info.getServerPublicKey());
-		assertEquals(label + ": sampleTemplateDetails", "", info.getTemplateDetails());
-		assertEquals(label + ": sampleHQKey", "", info.getLegacyHQKey());
-		assertEquals(label + ": sampleServerComplicance", "", info.getServerCompliance());
-		assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldLegacySpecs());
-		assertEquals(label + ": sampleForceAllPrivate", false, info.shouldForceBulletinsAllPrivate());
-		assertEquals(label + ": sampleBackedUpKeypairEncrypted", false, info.hasUserBackedUpKeypairEncrypted());
-		assertEquals(label + ": sampleBackedUpKeypairShare", false, info.hasUserBackedUpKeypairShare());
-		assertEquals(label + ": sampleAllHQKeysXml", "", info.getAllHQKeysXml());
-		assertEquals(label + ": sampleBulletinVersioningAware", true, info.isBulletinVersioningAware());
-		assertEquals(label + ": sampleDefaultHQKeysXml", "", info.getDefaultHQKeysXml());
-		assertEquals(label + ": sampleCheckForFieldOfficeBulletins", false, info.getCheckForFieldOfficeBulletins());
-		assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getCustomFieldTopSectionXml());
-		assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
-		assertEquals(label + ": sampleFieldDeskKeysXml", "", info.getFieldDeskKeysXml());
-		assertEquals(label + ": sampleBackedUpImprovedKeypairShare", false, info.hasBackedUpImprovedKeypairShare());
-		assertEquals(label + ": sampleUseInternalTor", false, info.useInternalTor());
-		assertEquals(label + ": sampleMartusAccountAccessTokens", 0, info.getMartusAccountAccessTokens().size());
-		assertEquals(label + ": sampleContactKeysXml", "", info.getContactKeysXml());
-		assertEquals(label + ": sampleCurrentFormTemplateTitle", "", info.getCurrentFormTemplateTitle());
-		assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getCurrentFormTemplateDescription());
-		assertEquals(label + ": sampleFolderLabelIndex", "", info.getFolderLabelCode());
-		assertEquals(label + ": sampleFolderLabelCustomName", "", info.getFolderLabelCustomName());
-		assertEquals(label + ": sampleSyncStatusJson", "", info.getSyncStatusJson());
+		assertEquals(label + ": Author", "", info.getAuthor());
+		assertEquals(label + ": Organization", "", info.getOrganization());
+		assertEquals(label + ": Email", "", info.getEmail());
+		assertEquals(label + ": WebPage", "", info.getWebPage());
+		assertEquals(label + ": Phone", "", info.getPhone());
+		assertEquals(label + ": Address", "", info.getAddress());
+		assertEquals(label + ": ServerName", "", info.getServerName());
+		assertEquals(label + ": ServerKey", "", info.getServerPublicKey());
+		assertEquals(label + ": TemplateDetails", "", info.getTemplateDetails());
+		assertEquals(label + ": LegacyHQKey", "", info.getLegacyHQKey());
+		assertEquals(label + ": ServerComplicance", "", info.getServerCompliance());
+		assertEquals(label + ": CustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldLegacySpecs());
+		assertEquals(label + ": ForceAllPrivate", false, info.shouldForceBulletinsAllPrivate());
+		assertEquals(label + ": BackedUpKeypairEncrypted", false, info.hasUserBackedUpKeypairEncrypted());
+		assertEquals(label + ": BackedUpKeypairShare", false, info.hasUserBackedUpKeypairShare());
+		assertEquals(label + ": AllHQKeysXml", "", info.getAllHQKeysXml());
+		assertEquals(label + ": BulletinVersioningAware", true, info.isBulletinVersioningAware());
+		assertEquals(label + ": DefaultHQKeysXml", "", info.getDefaultHQKeysXml());
+		assertEquals(label + ": CustomFieldTopSectionXml", "", info.getNoLongerUsedCustomFieldTopSectionXml());
+		assertEquals(label + ": CustomFieldBottomSectionXml", "", info.getNoLongerUsedCustomFieldBottomSectionXml());
+		assertEquals(label + ": FieldDeskKeysXml", "", info.getFieldDeskKeysXml());
+		assertEquals(label + ": BackedUpImprovedKeypairShare", false, info.hasBackedUpImprovedKeypairShare());
+		assertEquals(label + ": UseInternalTor", false, info.useInternalTor());
+		assertEquals(label + ": MartusAccountAccessTokens", 0, info.getMartusAccountAccessTokens().size());
+		assertEquals(label + ": ContactKeysXml", "", info.getContactKeysXml());
+		assertEquals(label + ": CurrentFormTemplateTitle", "", info.getNoLongerUsedCurrentFormTemplateTitle());
+		assertEquals(label + ": CurrentFormTemplateDescription", "", info.getNoLongerUsedCurrentFormTemplateDescription());
+		assertEquals(label + ": FolderLabelIndex", "", info.getFolderLabelCode());
+		assertEquals(label + ": FolderLabelCustomName", "", info.getFolderLabelCustomName());
+		assertEquals(label + ": SyncStatusJson", "", info.getSyncStatusJson());
+		assertEquals(label + ": SyncFrequency", "", info.getSyncFrequencyMinutes());
+		assertEquals(label + ": DidMigrateTemplates", false, info.getDidTemplateMigration());
+		assertEquals(label + ": ImmutableOnServer", false, info.getAlwaysImmutableOnServer());
+		assertEquals(label + ": DateLastAskedUserToBackupKeypair", "", info.getDateLastAskedUserToBackupKeypair());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -419,9 +486,9 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldLegacySpecs());
 
 		if(VERSION >= 6 && VERSION < 14)
-			assertEquals(label + ": sampleCustomFieldTopSectionXml", sampleLegacyCustomFieldTopSectionXml, info.getCustomFieldTopSectionXml());	
+			assertEquals(label + ": sampleCustomFieldTopSectionXml", sampleLegacyCustomFieldTopSectionXml, info.getNoLongerUsedCustomFieldTopSectionXml());	
 		else if(VERSION < 6)
-			assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getCustomFieldTopSectionXml());
+			assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getNoLongerUsedCustomFieldTopSectionXml());
 		
 		if(VERSION >= 7)
 			assertEquals(label + ": sampleForceAllPrivate", sampleForceAllPrivate, info.shouldForceBulletinsAllPrivate());
@@ -455,32 +522,33 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleDefaultHQKeysXml", "", info.getDefaultHQKeysXml());
 			
 		if(VERSION >= 12 && VERSION < 14)
-			assertEquals(label + ": sampleCustomFieldBottomSectionXml", sampleLegacyCustomFieldBottomSectionXml, info.getCustomFieldBottomSectionXml());	
+			assertEquals(label + ": sampleCustomFieldBottomSectionXml", sampleLegacyCustomFieldBottomSectionXml, info.getNoLongerUsedCustomFieldBottomSectionXml());	
 		else if(VERSION < 12)
-			assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
+			assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getNoLongerUsedCustomFieldBottomSectionXml());
 
-		if(VERSION >= 13)
-			assertEquals(label + ": sampleCheckForFieldOfficeBulletins", sampleCheckForFieldOfficeBulletins, info.getCheckForFieldOfficeBulletins());	
-		else
-			assertEquals(label + ": sampleCheckForFieldOfficeBulletins", false, info.getCheckForFieldOfficeBulletins());
-		
 		if(VERSION >= 14)
 		{
-			assertEquals(label + ": sampleCustomFieldTopSectionXml", sampleCustomFieldTopSectionXml, info.getCustomFieldTopSectionXml());
-			assertEquals(label + ": sampleCustomFieldBottomSectionXml", sampleCustomFieldBottomSectionXml, info.getCustomFieldBottomSectionXml());
+			assertEquals(label + ": sampleCustomFieldTopSectionXml", sampleCustomFieldTopSectionXml, info.getNoLongerUsedCustomFieldTopSectionXml());
+			assertEquals(label + ": sampleCustomFieldBottomSectionXml", sampleCustomFieldBottomSectionXml, info.getNoLongerUsedCustomFieldBottomSectionXml());
 		}
 		else
 		{
 			if(VERSION < 6)
-				assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getCustomFieldTopSectionXml());
+				assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getNoLongerUsedCustomFieldTopSectionXml());
 			if(VERSION < 12)
-				assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
+				assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getNoLongerUsedCustomFieldBottomSectionXml());
 		}
 
 		if(VERSION >= 15)
+		{
 			assertEquals(label + ": sampleUseZawgyi", sampleUseZawgyi, info.getUseZawgyiFont());
+			assertEquals(label + ": UseZawgyiFontProperty", new Boolean(sampleUseZawgyi), info.getUseZawgyiFontProperty().getValue());
+		}
 		else
+		{
 			assertEquals(label + ": sampleUseZawgyi", false, info.getUseZawgyiFont());
+			assertEquals(label + ": UseZawgyiFontProperty", new Boolean(false), info.getUseZawgyiFontProperty().getValue());
+		}
 		
 		if(VERSION >= 16)
 			assertEquals(label + ": sampleFieldDeskKeys", sampleFieldDeskKeysXml, info.getFieldDeskKeysXml());
@@ -493,9 +561,15 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleBackedUpImprovedKeypairShare", false, info.hasBackedUpImprovedKeypairShare());
 
 		if(VERSION >= 18)
+		{
 			assertEquals(label + ": sampleUseInternalTor", sampleUseInternalTor, info.useInternalTor());
+			assertEquals(label + ": UseInternalTorProperty", new Boolean(sampleUseInternalTor), info.useInternalTorProperty().getValue());
+		}
 		else
+		{
 			assertEquals(label + ": sampleUseInternalTor", false, info.useInternalTor());
+			assertEquals(label + ": UseInternalTorProperty", new Boolean(false), info.useInternalTorProperty().getValue());
+		}
 
 		if(VERSION >= 19)
 		{
@@ -517,18 +591,18 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleContactKeys", "", info.getContactKeysXml());
 		if(VERSION >= 21)
 		{
-			assertEquals(label + ": sampleCurrentFormTemplateTitle", sampleCurrentFormTemplateTitle, info.getCurrentFormTemplateTitle());
-			assertEquals(label + ": sampleCurrentFormTemplateDescription", sampleCurrentFormTemplateDescription, info.getCurrentFormTemplateDescription());
+			assertEquals(label + ": sampleCurrentFormTemplateTitle", sampleCurrentFormTemplateTitle, info.getNoLongerUsedCurrentFormTemplateTitle());
+			assertEquals(label + ": sampleCurrentFormTemplateDescription", sampleCurrentFormTemplateDescription, info.getNoLongerUsedCurrentFormTemplateDescription());
 		}
 		else
 		{
-			assertEquals(label + ": sampleCurrentFormTemplateTitle", "", info.getCurrentFormTemplateTitle());
-			assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getCurrentFormTemplateDescription());
+			assertEquals(label + ": sampleCurrentFormTemplateTitle", "", info.getNoLongerUsedCurrentFormTemplateTitle());
+			assertEquals(label + ": sampleCurrentFormTemplateDescription", "", info.getNoLongerUsedCurrentFormTemplateDescription());
 		}
 		if(VERSION >= 22)
-			assertEquals(label + ": sampleNetworkOnline", sampleIsNetworkOnline, info.isNetworkOnline());
+			assertEquals(label + ": sampleNetworkOnline", sampleOnStartupDefaultServerOnlineStatus, info.getOnStartupServerOnlineStatus());
 		else
-			assertEquals(label + ": sampleNetworkOnline", true, info.isNetworkOnline());
+			assertEquals(label + ": sampleNetworkOnline", true, info.getOnStartupServerOnlineStatus());
 		if(VERSION >= 23)
 		{
 			assertEquals(label + ": sampleFolderLabelIndex", sampleFolderLabelCode, info.getFolderLabelCode());
@@ -546,6 +620,39 @@ public class TestConfigInfo extends TestCaseEnhanced
 		else
 		{
 			assertEquals(label + ": sampleSyncStatusJson", "", info.getSyncStatusJson());
+		}
+		if(VERSION >= 25)
+		{
+			assertEquals(label + ": sampleSyncFrequency", sampleSyncFrequency, info.getSyncFrequencyMinutes());
+		}
+		else
+		{
+			assertEquals(label + ": sampleSyncFrequency", "", info.getSyncFrequencyMinutes());
+		}
+		if(VERSION >= 26)
+		{
+			assertEquals(label + ": sampleDidTemplateMigration", sampleDidTemplateMigration, info.getDidTemplateMigration());
+		}
+		else
+		{
+			assertEquals(label + ": sampleDidTemplateMigration", false, info.getDidTemplateMigration());
+		}
+		if(VERSION >= 27)
+		{
+			assertEquals(label + ": sampleImmutableOnServer", sampleImmutableOnServer, info.getAlwaysImmutableOnServer());
+		}
+		else
+		{
+			assertEquals(label + ": sampleImmutableOnServer", false, info.getAlwaysImmutableOnServer());
+		}
+		//Version 28 MIGRATE_TO_PRIVATE_ALWAYS
+		if(VERSION >= 29)
+		{
+			assertEquals(label + ": sampleDateLastAskedUserToBackupKeypair", sampleDateLastAskedUserToBackupKeypair, info.getDateLastAskedUserToBackupKeypair());
+		}
+		else
+		{
+			assertEquals(label + ": sampleDateLastAskedUserToBackupKeypair", "", info.getDateLastAskedUserToBackupKeypair());
 		}
 	}
 
@@ -623,7 +730,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		}
 		if(VERSION >= 13)
 		{
-			out.writeBoolean(sampleCheckForFieldOfficeBulletins);
+			out.writeBoolean(false); //Not used sampleCheckForFieldOfficeBulletins
 		}
 		if(VERSION >= 14)
 		{
@@ -666,7 +773,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		}
 		if(VERSION >= 22)
 		{
-			out.writeBoolean(sampleIsNetworkOnline);
+			out.writeBoolean(sampleOnStartupDefaultServerOnlineStatus);
 		}
 		if(VERSION >= 23)
 		{
@@ -677,11 +784,29 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			ConfigInfo.writeLongString(out, sampleSyncStatusJson);
 		}
+		if(VERSION >= 25)
+		{
+			out.writeUTF(sampleSyncFrequency);
+		}
+		if(VERSION >= 26)
+		{
+			out.writeBoolean(sampleDidTemplateMigration);
+		}
+		if(VERSION >= 27)
+		{
+			out.writeBoolean(sampleImmutableOnServer);
+		}
+		//Version 28 MIGRATE_TO_PRIVATE_ALWAYS
+		if(VERSION >= 29)
+		{
+			out.writeUTF(sampleDateLastAskedUserToBackupKeypair);
+		}
+		
 		out.close();
 		return outputStream.toByteArray();
 	}
 	
-	private final String defaultCustomFieldSpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultTopSetionFieldSpecs());
+	private final String defaultCustomFieldSpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
 
 	private final static String longString = createLongSampleString();
 	
@@ -721,7 +846,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 //Version 12
 	final String sampleLegacyCustomFieldBottomSectionXml = "<CustomFields></CustomFields>";
 //Version 13
-	final boolean sampleCheckForFieldOfficeBulletins = true;
+	//final boolean sampleCheckForFieldOfficeBulletins = true;
 //Version 14
 	final String sampleCustomFieldTopSectionXml = longString;
 	final String sampleCustomFieldBottomSectionXml = longString;
@@ -741,10 +866,19 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final String sampleCurrentFormTemplateTitle = "Sample Title for this Template";
 	final String sampleCurrentFormTemplateDescription = "Sample Description for this template.";
 //Version 22
-	final boolean sampleIsNetworkOnline = false; // NOTE: Defaults to true
+	final boolean sampleOnStartupDefaultServerOnlineStatus = false; // NOTE: Defaults to true
 //Version 23
 	final String sampleFolderLabelCode = "projects";
 	final String sampleFolderLabelCustomName = "My Cases";
 //Version 24
 	final String sampleSyncStatusJson = "{ }";
+//Version 25
+	final String sampleSyncFrequency = "60";
+//Version 26
+	final boolean sampleDidTemplateMigration = true;
+//Version 27
+	final boolean sampleImmutableOnServer = true; 
+//Version 28 MIGRATE_TO_PRIVATE_ALWAYS
+//Version 29
+	final String sampleDateLastAskedUserToBackupKeypair = "2014-11-04";
 }

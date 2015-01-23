@@ -65,7 +65,7 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 	
 	public UiShowScrollableTextDlg(UiMainWindow owner, String titleTag, String okButtonTag, String cancelButtonTag, String descriptionTag, String text, Map tokenReplacement, JComponent bottomPanel)
 	{
-		super(owner, "", true);
+		super(owner.getSwingFrame(), "", true);
 		mainWindow = owner;
 
 		try 
@@ -124,7 +124,7 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 			panel.add(buttons);
 			getContentPane().add(panel);
 			getRootPane().setDefaultButton(ok);
-			Utilities.centerDlg(this);
+			Utilities.packAndCenterWindow(this);
 			setVisible(true);
 		} 
 		catch (TokenInvalidException e) 

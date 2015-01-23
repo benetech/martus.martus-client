@@ -56,6 +56,7 @@ import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiSession;
+import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.PasswordHelper;
 import org.martus.clientside.UiLocalization;
@@ -70,7 +71,6 @@ import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.LegacyCustomFields;
-import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MiniLocalization;
 import org.martus.common.ProgressMeterInterface;
@@ -81,16 +81,16 @@ import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.FileDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.CustomFieldTemplate;
 import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.test.UniversalIdForTesting;
 import org.martus.swing.Utilities;
 import org.martus.util.DirectoryUtils;
+import org.martus.util.MultiCalendar;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
@@ -112,7 +112,10 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		mockSecurityForApp = MockMartusSecurity.createClient();
 
 		testAppLocalization = new MartusLocalization(null, UiSession.getAllEnglishStrings());
-		testAppLocalization.setCurrentLanguageCode("en");
+		CurrentUiState currentUi = new CurrentUiState();
+		currentUi.setCurrentLanguage(MiniLocalization.ENGLISH);
+		currentUi.setCurrentDateFormat(MDY_SLASH);
+		testAppLocalization.setLanguageSettingsProvider(currentUi);
 		appWithAccount = MockMartusApp.create(mockSecurityForApp, getName());
 		appWithAccount.setSSLNetworkInterfaceHandlerForTesting(new ServerSideNetworkHandlerNotAvailable());
 
@@ -120,6 +123,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		keyPairFile.delete();
 		appWithAccount.getConfigInfoFile().delete();
 		appWithAccount.getConfigInfoSignatureFile().delete();
+		LanguageOptions.setDirectionLeftToRight();
 
 		TRACE_END();
 	}
@@ -283,6 +287,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testGetDefaultLanguageForNewBulletin()
 	{
 		MiniLocalization localization = appWithAccount.getLocalization();
+		CurrentUiState uiStateToUse = new CurrentUiState();
+		uiStateToUse.setCurrentDateFormat(DMY_SLASH);
+		localization.setLanguageSettingsProvider(uiStateToUse);
 		String originalLanguage = localization.getCurrentLanguageCode();
 		assertNull("language not null by default?", originalLanguage);
 		
@@ -482,7 +489,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		
 		Bulletin b = appWithAccount.createBulletin();
 		appWithAccount.saveBulletin(b, outbox);
-		DatabaseKey key = DatabaseKey.createDraftKey(b.getUniversalId());
+		DatabaseKey key = DatabaseKey.createMutableKey(b.getUniversalId());
 		assertTrue("didn't save?", store.getDatabase().doesRecordExist(key));
 		assertTrue("didn't put in outbox?", outbox.contains(b));
 		assertTrue("didn't put in saved?", appWithAccount.getFolderSaved().contains(b));
@@ -519,7 +526,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String newFields = "new,label;another,show";
 		FieldSpecCollection newSpecs = LegacyCustomFields.parseFieldSpecsFromString(newFields);
 		FieldCollection convertedFields = new FieldCollection(newSpecs.asArray());
-		convertedInfo.setCustomFieldBottomSectionXml(convertedFields.toString());
+		convertedInfo.deprecatedSetCustomFieldBottomSectionXml(convertedFields.toString());
 		FieldCollection fields = new FieldCollection(MartusApp.getCustomFieldSpecsBottomSection(convertedInfo));
 
 		FieldCollection expected = new FieldCollection(LegacyCustomFields.parseFieldSpecsFromString(newFields));
@@ -532,45 +539,66 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String newFields = "new,label;another,show";
 		FieldSpecCollection newSpecs = LegacyCustomFields.parseFieldSpecsFromString(newFields);
 		FieldCollection convertedFields = new FieldCollection(newSpecs.asArray());
-		convertedInfo.setCustomFieldTopSectionXml(convertedFields.toString());
+		convertedInfo.deprecatedSetCustomFieldTopSectionXml(convertedFields.toString());
 		FieldCollection fields = new FieldCollection(MartusApp.getCustomFieldSpecsTopSection(convertedInfo));
 
 		FieldCollection expected = new FieldCollection(LegacyCustomFields.parseFieldSpecsFromString(newFields));
 		assertEquals(expected.toString(), fields.toString());
 	}
 	
+	public void testShouldAskUserToBackupKeypair() throws Exception
+	{
+		appWithAccount.startClockToAskForKeypairBackup();
+		assertFalse("should not ask when we just started the clock", appWithAccount.shouldWeAskForKeypairBackup());
+		assertTrue("wasn't true for a date decades into the future?",appWithAccount.shouldWeAskForKeypairBackup("2099-01-01"));
+
+		String dateLastAskedForKeypairBackup = appWithAccount.getConfigInfo().getDateLastAskedUserToBackupKeypair();
+
+		MultiCalendar oneDayPrior = MultiCalendar.createFromIsoDateString(dateLastAskedForKeypairBackup);
+		oneDayPrior.addDays(MartusApp.DAYS_UNTIL_WE_ASK_TO_BACKUP_KEYPAIR - 1);
+		assertFalse("6 days into the future we should still not ask", appWithAccount.shouldWeAskForKeypairBackup(oneDayPrior.toIsoDateString()));
+
+		MultiCalendar sevenDaysLater = MultiCalendar.createFromIsoDateString(dateLastAskedForKeypairBackup);
+		sevenDaysLater.addDays(MartusApp.DAYS_UNTIL_WE_ASK_TO_BACKUP_KEYPAIR);
+		assertTrue("exactly 7 days into the future we need to ask for a backup", appWithAccount.shouldWeAskForKeypairBackup(sevenDaysLater.toIsoDateString()));
+		
+		appWithAccount.clearClockToAskForKeypairBackup();
+		assertFalse("After we clear the clock we should not be asked for a backup", appWithAccount.shouldWeAskForKeypairBackup());
+		assertFalse("After we clear the clock we should not be asked for a backup", appWithAccount.shouldWeAskForKeypairBackup(sevenDaysLater.toIsoDateString()));
+	}
+	
 	public void testSetDefaultUiState() throws Exception
 	{
-		MartusLocalization testLocalization = new MartusLocalization(null, noEnglishStrings);
+		CurrentUiState currentUiState = new CurrentUiState();
 		File tmpFile = createTempFile();
-		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
-		assertNull("File doesn't exist localization should not be set.  Using DefaultUi.txt depends on the language not being set in this case.", testLocalization.getCurrentLanguageCode());
+		MartusApp.setInitialUiDefaultsFromFileIfPresent(currentUiState, tmpFile);
+		assertNull("File doesn't exist localization should not be set.  Using DefaultUi.txt depends on the language not being set in this case.", currentUiState.getCurrentLanguage());
 		FileOutputStream out = new FileOutputStream(tmpFile);
 		out.write("invalidLanguageCode".getBytes());
 		out.close();
-		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
-		assertNull("Invalid language code, localization should not be set", testLocalization.getCurrentLanguageCode());
+		MartusApp.setInitialUiDefaultsFromFileIfPresent(currentUiState, tmpFile);
+		assertNull("Invalid language code, localization should not be set", currentUiState.getCurrentLanguage());
 		tmpFile.delete();
 		out = new FileOutputStream(tmpFile);
 		out.write("en".getBytes());
 		out.close();
-		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
-		assertEquals("English should be set", MtfAwareLocalization.ENGLISH, testLocalization.getCurrentLanguageCode());
-		assertEquals("English code should set DMY correctly", MDY_SLASH, testLocalization.getCurrentDateFormatCode());
+		MartusApp.setInitialUiDefaultsFromFileIfPresent(currentUiState, tmpFile);
+		assertEquals("English should be set", MtfAwareLocalization.ENGLISH, currentUiState.getCurrentLanguage());
+		assertEquals("English code should set DMY correctly", MDY_SLASH, currentUiState.getCurrentDateFormat());
 		tmpFile.delete();
 		out = new FileOutputStream(tmpFile);
 		out.write("es".getBytes());
 		out.close();
-		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
-		assertEquals("Spanish should be set", MtfAwareLocalization.SPANISH, testLocalization.getCurrentLanguageCode());
-		assertEquals("Spanish code should set MDY correctly", DMY_SLASH, testLocalization.getCurrentDateFormatCode());
+		MartusApp.setInitialUiDefaultsFromFileIfPresent(currentUiState, tmpFile);
+		assertEquals("Spanish should be set", MtfAwareLocalization.SPANISH, currentUiState.getCurrentLanguage());
+		assertEquals("Spanish code should set MDY correctly", DMY_SLASH, currentUiState.getCurrentDateFormat());
 		tmpFile.delete();
 		out = new FileOutputStream(tmpFile);
 		out.write("ru".getBytes());
 		out.close();
-		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
-		assertEquals("Russian should be set", MtfAwareLocalization.RUSSIAN, testLocalization.getCurrentLanguageCode());
-		assertEquals("Russian code should set MDY Dot correctly", DMY_DOT, testLocalization.getCurrentDateFormatCode());
+		MartusApp.setInitialUiDefaultsFromFileIfPresent(currentUiState, tmpFile);
+		assertEquals("Russian should be set", MtfAwareLocalization.RUSSIAN, currentUiState.getCurrentLanguage());
+		assertEquals("Russian code should set MDY Dot correctly", DMY_DOT, currentUiState.getCurrentDateFormat());
 		tmpFile.delete();
 	}
 
@@ -579,7 +607,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		Bulletin b1 = appWithAccount.createBulletin();
 		Bulletin b2 = appWithAccount.createBulletin();
 		Bulletin b3 = appWithAccount.createBulletin();
-		b3.setSealed();
+		b3.setImmutable();
 		appWithAccount.getStore().saveBulletin(b1);
 		appWithAccount.getStore().saveBulletin(b2);
 		appWithAccount.getStore().saveBulletin(b3);
@@ -825,9 +853,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_END();
 	}
 	
-	public void testContactInfo() throws Exception
+	public void testConfigInfo() throws Exception
 	{
-		TRACE_BEGIN("testContactInfo");
+		TRACE_BEGIN("testConfigInfo");
 
 		File file = appWithAccount.getConfigInfoFile();
 		file.delete();
@@ -840,38 +868,14 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		originalInfo.setAuthor("blah");
 		assertEquals("should have been set", "blah", appWithAccount.getConfigInfo().getAuthor());
 	
-		FieldSpec[] topSpecs = {FieldSpec.createCustomField("TopTag", "Top Label", new FieldTypeMultiline()),}; 
-		FieldCollection fields = new FieldCollection(topSpecs);
-		String xmlTop = fields.toString();
-		originalInfo.setCustomFieldTopSectionXml(xmlTop);
-		assertEquals("Top section should have been set", xmlTop, appWithAccount.getConfigInfo().getCustomFieldTopSectionXml());
-
-		FieldSpec[] bottomSpecs = {FieldSpec.createCustomField("BottomTag", "Bottom Label", new FieldTypeMultiline()),};
-		fields = new FieldCollection(bottomSpecs);
-		String xmlBottom = fields.toString();
-		originalInfo.setCustomFieldBottomSectionXml(xmlBottom);
-		assertEquals("Bottom section should have been set", xmlBottom, appWithAccount.getConfigInfo().getCustomFieldBottomSectionXml());
-
 		appWithAccount.saveConfigInfo();
 		assertEquals("should still be there", "blah", appWithAccount.getConfigInfo().getAuthor());
-		assertEquals("Top section should still be there", xmlTop, appWithAccount.getConfigInfo().getCustomFieldTopSectionXml());
-		assertEquals("Bottom section should still be there", xmlBottom, appWithAccount.getConfigInfo().getCustomFieldBottomSectionXml());
 		assertEquals("save didn't work!", true, file.exists());
 
 		originalInfo.setAuthor("something else");
 		appWithAccount.loadConfigInfo();
 		assertNotNull("ContactInfo null", appWithAccount.getConfigInfo());
 		assertEquals("should have reloaded", "blah", appWithAccount.getConfigInfo().getAuthor());
-		assertEquals("should have reloaded Top section", xmlTop, appWithAccount.getConfigInfo().getCustomFieldTopSectionXml());
-		assertEquals("should have reloaded Bottom section", xmlBottom, appWithAccount.getConfigInfo().getCustomFieldBottomSectionXml());
-		FieldSpecCollection topSpecsFromStore = appWithAccount.getStore().getTopSectionFieldSpecs();
-		fields = new FieldCollection(topSpecsFromStore);
-		String xmlTopFromStore = fields.toString();
-		assertEquals("Store doesn't have updated Top section?", xmlTop, xmlTopFromStore);
-		FieldSpecCollection bottomSpecsFromStore = appWithAccount.getStore().getBottomSectionFieldSpecs();
-		fields = new FieldCollection(bottomSpecsFromStore);
-		String xmlBottomFromStore = fields.toString();
-		assertEquals("store doesn't have updated Bottom section?", xmlBottom, xmlBottomFromStore);
 
 		File sigFile = appWithAccount.getConfigInfoSignatureFile();
 		sigFile.delete();
@@ -895,59 +899,30 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 	}
 	
-	public void testUpdateCustomFieldTemplate() throws Exception
+	public void testUpdateFormTemplate() throws Exception
 	{
-		TRACE_BEGIN("testUpdateCustomFieldTemplate");
-		File file = appWithAccount.getConfigInfoFile();
-		file.delete();
-		appWithAccount.loadConfigInfo();
+		TRACE_BEGIN("testUpdateFormTemplate");
 
-		ConfigInfo configInfo = appWithAccount.getConfigInfo();
-		ConfigInfo emptyConfigInfo = configInfo;
-		emptyConfigInfo.setCustomFieldLegacySpecs("");
 		ClientBulletinStore store = appWithAccount.getStore();
-		assertEquals("", emptyConfigInfo.getCurrentFormTemplateTitle());
-		assertEquals("", emptyConfigInfo.getCurrentFormTemplateDescription());
-		assertEquals("", emptyConfigInfo.getCustomFieldTopSectionXml());
-		assertEquals("", emptyConfigInfo.getCustomFieldBottomSectionXml());
-		assertEquals("", emptyConfigInfo.getCustomFieldLegacySpecs());
-		store.setTopSectionFieldSpecs(null);
-		store.setBottomSectionFieldSpecs(null);
-		assertNull(store.getTopSectionFieldSpecs());
-		assertNull(store.getBottomSectionFieldSpecs());
 		
-		FieldSpec[] topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray();
+		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		FieldCollection fields = new FieldCollection(topSpecs);
 		String xmlTop = fields.toString();
-		FieldCollection topSection = new FieldCollection(topSpecs);
 
-		FieldSpec[] bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray();
+		FieldSpecCollection bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		fields = new FieldCollection(bottomSpecs);
 		String xmlBottom = fields.toString();
-		FieldCollection bottomSection = new FieldCollection(bottomSpecs);
 
 		String title = "A new Title";
 		String description = "Some Descritpion";
-		CustomFieldTemplate newTemplate = new CustomFieldTemplate(title, description, topSection, bottomSection);
-		appWithAccount.updateCustomFieldTemplate(newTemplate);
-		configInfo = appWithAccount.getConfigInfo();		
-		assertEquals("Top section should have been set", xmlTop, configInfo.getCustomFieldTopSectionXml());
-		assertEquals("Bottom section should have been set", xmlBottom, configInfo.getCustomFieldBottomSectionXml());
-		assertEquals("Title should have been set", title, configInfo.getCurrentFormTemplateTitle());
-		assertEquals("Description should have been set", description, configInfo.getCurrentFormTemplateDescription());
-		assertEquals("Store's Top section should have been set", xmlTop, store.getTopSectionFieldSpecs().toXml());
-		assertEquals("Store's Bottom section should have been set", xmlBottom, store.getBottomSectionFieldSpecs().toXml());
-		assertEquals(MartusConstants.deprecatedCustomFieldSpecs, emptyConfigInfo.getCustomFieldLegacySpecs());
-		
-		appWithAccount.loadConfigInfo();
-		configInfo = appWithAccount.getConfigInfo();		
-		assertEquals("After Loading Config Info.  Top section should have been set", xmlTop, configInfo.getCustomFieldTopSectionXml());
-		assertEquals("After Loading Config Info.  Bottom section should have been set", xmlBottom, configInfo.getCustomFieldBottomSectionXml());
-		assertEquals("After Loading Config Info.  Title should have been set", title, configInfo.getCurrentFormTemplateTitle());
-		assertEquals("After Loading Config Info.  Description should have been set", description, configInfo.getCurrentFormTemplateDescription());
-		assertEquals("After Loading Config Info.  Store's Top section should have been set", xmlTop, store.getTopSectionFieldSpecs().toXml());
-		assertEquals("After Loading Config Info.  Store's Bottom section should have been set", xmlBottom, store.getBottomSectionFieldSpecs().toXml());
-		assertEquals(MartusConstants.deprecatedCustomFieldSpecs, configInfo.getCustomFieldLegacySpecs());
+		FormTemplate newTemplate = new FormTemplate(title, description, topSpecs, bottomSpecs);
+		appWithAccount.updateFormTemplate(newTemplate);
+
+		FormTemplate savedTemplate = store.getFormTemplate(title);
+		assertEquals(title, savedTemplate.getTitle());
+		assertEquals(description, savedTemplate.getDescription());
+		assertEquals(xmlTop, savedTemplate.getTopSectionXml());
+		assertEquals(xmlBottom, savedTemplate.getBottomSectionXml());
 		
 		TRACE_END();
 	}
@@ -1432,10 +1407,36 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("Should now have 0 contacts", 0, keysReturned4.size());
 		assertEquals("Should have 0 HQs", 0, appWithAccount.getAllHQKeys().size());
 		assertEquals("Should have 0 FDs", 0, appWithAccount.getFieldDeskKeys().size());
-		
-		
 	}
 
+	public void testGetKeyVerificationStatus() throws Exception
+	{
+		assertEquals(ContactKey.VERIFIED_ACCOUNT_OWNER ,appWithAccount.getKeyVerificationStatus(appWithAccount.getAccountId()));
+
+		File configFile = appWithAccount.getConfigInfoFile();
+		configFile.deleteOnExit();
+		String sampleHQPublicKeyNotVerified = "HQ";
+		String sampleHQPublicKeyVerified20 = "HQ Verified 20";
+		String sampleHQPublicKeyVerifiedVisually = "HQ Verified Visually";
+		ContactKeys keys = new ContactKeys();
+		ContactKey hqKeyNotVerified = new ContactKey(sampleHQPublicKeyNotVerified, "Not Verified");
+		hqKeyNotVerified.setVerificationStatus(ContactKey.NOT_VERIFIED);
+		ContactKey hqKeyVerified20 = new ContactKey(sampleHQPublicKeyVerified20, "Verified 20");
+		hqKeyVerified20.setVerificationStatus(ContactKey.VERIFIED_ENTERED_20_DIGITS);
+		ContactKey hqKeyVerifiedVisually = new ContactKey(sampleHQPublicKeyVerifiedVisually, "Verified Visually");
+		hqKeyVerifiedVisually.setVerificationStatus(ContactKey.VERIFIED_VISUALLY);
+		keys.add(hqKeyNotVerified);
+		keys.add(hqKeyVerified20);
+		keys.add(hqKeyVerifiedVisually);		
+		appWithAccount.setContactKeys(keys);
+		
+		assertEquals(ContactKey.NOT_VERIFIED ,appWithAccount.getKeyVerificationStatus(hqKeyNotVerified.getPublicKey()));
+		assertEquals(ContactKey.VERIFIED_ENTERED_20_DIGITS ,appWithAccount.getKeyVerificationStatus(hqKeyVerified20.getPublicKey()));
+		assertEquals(ContactKey.VERIFIED_VISUALLY ,appWithAccount.getKeyVerificationStatus(hqKeyVerifiedVisually.getPublicKey()));
+
+		ContactKey unknownContactKey = new ContactKey("Unknown", "Not Verified");
+		assertEquals(ContactKey.NOT_VERIFIED_UNKNOWN ,appWithAccount.getKeyVerificationStatus(unknownContactKey.getPublicKey()));
+	}
 	
 	public void testSetAndGetHQKey() throws Exception
 	{
@@ -1670,7 +1671,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("We should still only have 2 HQ accounts", 2, returnedKeysAfterAddingH1andH2asBothHQandDefault.size());
 		HeadquartersKey testKey = returnedKeysAfterAddingH1andH2asBothHQandDefault.get(0);
 		assertEquals("Key1 Label not correct?",sampleLabel1, testKey.getLabel());
-		assertEquals("Key1 should not be verified", ContactKey.NOT_VERIFIED, testKey.getVerificationStatus());
+		assertEquals("Key1 should not be verified", ContactKey.NOT_VERIFIED_UNKNOWN, testKey.getVerificationStatus());
 		assertTrue("HQ Key1 Can't Receive From", testKey.getCanReceiveFrom());
 		assertTrue("HQ Key1 Can't Send To?", testKey.getCanSendTo());
 
@@ -1799,7 +1800,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("We should only have 2 FD accounts", 2, returnedKeysAfterAddingBothFDs.size());
 		FieldDeskKey testKey = returnedKeysAfterAddingBothFDs.get(0);
 		assertEquals("Key1 Label not correct?",sampleLabel1, testKey.getLabel());
-		assertEquals("Key1 should not be verified", ContactKey.NOT_VERIFIED, testKey.getVerificationStatus());
+		assertEquals("Key1 should not be verified", ContactKey.NOT_VERIFIED_UNKNOWN, testKey.getVerificationStatus());
 		assertTrue("FD Key1 Can't Receive From", testKey.getCanReceiveFrom());
 		assertTrue("FD Key1 Can't Send To?", testKey.getCanSendTo());
 		String newLabel1 = "Flinstone";
@@ -2315,7 +2316,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals(source, b.get(Bulletin.TAGAUTHOR));
 		assertEquals(organization, b.get(Bulletin.TAGORGANIZATION));
 		assertEquals(template, b.get(Bulletin.TAGPUBLICINFO));
-		assertEquals(Bulletin.STATUSDRAFT, b.getStatus());
+		assertEquals(Bulletin.STATUSMUTABLE, b.getStatus());
 		assertEquals("not automatically private?", true, b.isAllPrivate());
 		TRACE_END();
 	}
@@ -2410,7 +2411,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		
 		b1.set(Bulletin.TAGPRIVATEINFO, originalString);
 		b1.set(Bulletin.TAGKEYWORDS, commonString);
-		b1.setSealed();
+		b1.setImmutable();
 		BulletinFolder newFolder = new BulletinFolder(store, "myFolder");
 		appWithAccount.saveBulletin(b1, newFolder);
 		assertNull(store.findFolder(store.getSearchFolderName()));
@@ -2434,7 +2435,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		b2.set(Bulletin.TAGPRIVATEINFO, newString);
 		String publicData2 = "publicData2";
 		b2.set(Bulletin.TAGPUBLICINFO, publicData2);
-		b2.setSealed();
+		b2.setImmutable();
 		appWithAccount.saveBulletin(b2, newFolder);
 		Bulletin b3 = store.createNewDraft(b2, b2.getTopSectionFieldSpecs(), b2.getBottomSectionFieldSpecs());
 		b3.set(Bulletin.TAGPUBLICINFO, "");
@@ -2570,14 +2571,18 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testEncryptPublicData() throws Exception
 	{
 		TRACE_BEGIN("testEncryptPublicData");
-		File temp = createTempDirectory();
 		MartusCrypto security = MockMartusSecurity.createClient();
-		String[] emptyTranslations = {};
-		MartusApp app = new MartusApp(security, temp, new MartusLocalization(temp,emptyTranslations));
-		app.doAfterSigninInitalization();
-		app.getStore().createFieldSpecCacheFromDatabase();
-		app.getStore().deleteAllData();
-		assertEquals("App Not Encypting Public?", true, app.getStore().mustEncryptPublicData());
+		MartusApp app = MockMartusApp.create(security, getName());
+		try
+		{
+			app.doAfterSigninInitalization();
+			app.getStore().createFieldSpecCacheFromDatabase();
+			assertEquals("App Not Encypting Public?", true, app.getStore().mustEncryptPublicData());
+		}
+		finally
+		{
+			DirectoryUtils.deleteEntireDirectoryTree(app.getMartusDataRootDirectory());
+		}
 
 		TRACE_END();
 	}
@@ -2647,7 +2652,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("Keywords", testAppLocalization.getFieldLabel("keywords"));
 		assertEquals("Summary", testAppLocalization.getFieldLabel("summary"));
 		assertEquals("Details", testAppLocalization.getFieldLabel("publicinfo"));
-		assertEquals("Private", testAppLocalization.getFieldLabel("privateinfo"));
+		assertEquals("Additional Information", testAppLocalization.getFieldLabel("privateinfo"));
 		assertEquals("Language", testAppLocalization.getFieldLabel("language"));
 
 		assertEquals("Keep ALL Information Private", testAppLocalization.getFieldLabel(MartusLocalization.ENGLISH, "allprivate"));
@@ -2725,14 +2730,14 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testWindowTitles()
 	{
 		TRACE_BEGIN("testWindowTitles");
-		assertEquals("Martus Human Rights Bulletin System", testAppLocalization.getWindowTitle("main"));
+		assertEquals("Martus Information Management and Data Collection Framework", testAppLocalization.getWindowTitle("main"));
 		TRACE_END();
 	}
 
 	public void testButtonLabels()
 	{
 		TRACE_BEGIN("testButtonLabels");
-		assertEquals("Help", testAppLocalization.getButtonLabel("help"));
+		assertEquals("Help", testAppLocalization.getButtonLabel("Help"));
 		TRACE_END();
 	}
 
@@ -2784,7 +2789,6 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("1987/13/12", testAppLocalization.convertStoredDateToDisplay("1987-12-13"));
 		assertEquals("2004/01/03", testAppLocalization.getViewableDateRange("2004-03-01,20040301+0"));
 		assertEquals("2004/03/07 - 2004/07/01", testAppLocalization.getViewableDateRange("2004-01-07,20040107+178"));
-		
 		TRACE_END();
 	}
 
@@ -2839,8 +2843,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testStatusLabels()
 	{
 		TRACE_BEGIN("testStatusLabels");
-		assertEquals("Draft", testAppLocalization.getStatusLabel(Bulletin.STATUSDRAFT));
-		assertEquals("Sealed", testAppLocalization.getStatusLabel(Bulletin.STATUSSEALED));
+		assertEquals("Draft", testAppLocalization.getStatusLabel(Bulletin.STATUSMUTABLE));
+		assertEquals("Sealed", testAppLocalization.getStatusLabel(Bulletin.STATUSIMMUTABLE));
 		TRACE_END();
 	}
 
@@ -2906,7 +2910,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("is draft outbox folder empty?", 0,draftCount);
 		
 		Bulletin b1 = appWithAccount.createBulletin();
-		b1.setDraft();
+		b1.setMutable();
 		appWithAccount.getStore().saveBulletin(b1);
 		assertEquals("didn't find the orphan?", 1, appWithAccount.repairOrphans());
 		draftCount = appWithAccount.getStore().getFolderDraftOutbox().getBulletinCount();

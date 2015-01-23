@@ -192,7 +192,7 @@ public class SearchFieldTreeDialog extends FieldTreeDialog
 			getContentPane().add(explanation, BorderLayout.NORTH);
 			getContentPane().add(meterPanel, BorderLayout.CENTER);
 			getContentPane().add(cancelPanel, BorderLayout.SOUTH);
-			Utilities.centerDlg(this);
+			Utilities.packAndCenterWindow(this);
 		}
 		
 	}

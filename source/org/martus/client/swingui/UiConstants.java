@@ -32,9 +32,11 @@ public class UiConstants
 	// Also, you should search for "Martus" in EnglishStrings.txt and any .mtf files 
 	// and change other occurrences as required by the license.
 	public static final String programName = "Martus(TM)";
-	public static String versionLabel = "pre-5.0";
+	public static String versionLabel = "pre-5.0.3";
 	public static final String copyrightSymbol = "\u00A9 "; 
-	public static final String copyright = copyrightSymbol + "Copyright 2001-2014, Beneficent Technology, Inc. (The Benetech Initiative)";
+	public static final String copyright = "Martus(TM) is a trademark of Beneficent Technology, Inc (Benetech).\n" +
+										   "This software is " + copyrightSymbol + "Copyright 2002-2015, Beneficent Technology, Inc (Benetech).";
+	public static final String websiteURL = "https://www.benetech.org";
 	public static final String website = "(Benetech, at www.benetech.org)";
-
+	public static final String martusWebsiteURL = "https://martus.org";
 }

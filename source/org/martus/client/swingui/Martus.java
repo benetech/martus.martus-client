@@ -36,7 +36,9 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
+import org.martus.client.swingui.jfx.FxMartus;
 import org.martus.clientside.ClientPortOverride;
+import org.martus.common.MartusConstants;
 import org.martus.common.MartusLogger;
 import org.martus.common.VersionBuildDate;
 import org.martus.swing.UiOptionPane;
@@ -54,7 +56,7 @@ public class Martus
 		System.out.println("Java runtime: " + System.getProperty("java.runtime.name"));
 
 		final String javaVersion = System.getProperty("java.version");
-		final String minimumJavaVersion = "1.7.0";
+		final String minimumJavaVersion = "1.8.0";
 		if(javaVersion.compareTo(minimumJavaVersion) < 0)
 		{
 			final String errorMessage = "Requires Java version " + minimumJavaVersion + " or later!";
@@ -102,15 +104,32 @@ public class Martus
 			options.remove(foundAlphaTester);
 		}
 		
+		int foundSwing = options.indexOf("--swing");
+		if(foundSwing >= 0)
+		{
+			System.out.println(options.get(foundSwing));
+			UiSession.isSwing = true;
+			options.remove(foundSwing);
+		}
+		
 		int foundJavaFx = options.indexOf("--javafx");
 		if(foundJavaFx >= 0)
 		{
 			System.out.println(options.get(foundJavaFx));
-			UiSession.isJavaFx = true;
+			UiSession.isSwing = false;
 			options.remove(foundJavaFx);
 		}
 		
-		UiMainWindow.timeoutInXSeconds = DEFAULT_TIMEOUT_SECONDS;
+		int foundPureFx = options.indexOf("--purefx");
+		if(foundPureFx >= 0)
+		{
+			System.out.println(options.get(foundPureFx));
+			UiSession.isSwing = false;
+			UiSession.isPureFx = true;
+			options.remove(foundPureFx);
+		}
+		
+		timeoutInXSeconds = DEFAULT_TIMEOUT_SECONDS;
 		int foundTimeout = findOption(options, TIMEOUT_OPTION_TEXT);
 		if(foundTimeout >= 0)
 		{
@@ -118,9 +137,18 @@ public class Martus
 			String requestedTimeoutMinutes = fullOption.substring(TIMEOUT_OPTION_TEXT.length());
 			System.out.println("Requested timeout in minutes: " + requestedTimeoutMinutes);
 			int timeoutMinutes = Integer.parseInt(requestedTimeoutMinutes);
-			UiMainWindow.timeoutInXSeconds = 60 * timeoutMinutes;
+			timeoutInXSeconds = 60 * timeoutMinutes;
 			options.remove(foundTimeout);
 		}
+		
+		File dataRootDirectory = MartusConstants.determineMartusDataRootDirectory();
+		File timeoutDebug = new File(dataRootDirectory, "timeout.1min");
+		if(timeoutDebug.exists())
+		{
+			timeoutInXSeconds = TESTING_TIMEOUT_60_SECONDS;
+			System.out.println(timeoutDebug.toString() + " detected");
+		}
+		MartusLogger.log("Inactivity timeout set to " + timeoutInXSeconds + " seconds");
 		
 		int foundInsecurePorts = options.indexOf("--insecure-ports");
 		if(foundInsecurePorts >= 0)
@@ -140,13 +168,24 @@ public class Martus
 			System.exit(1);
 		}
 		
+		Martus.useSystemLookAndFeel();
+
+		if(UiSession.isPureFx)
+			FxMartus.main(args);
+		else
+			run();
+    }
+
+	public static void run()
+	{
 		try
 		{
 			if(Utilities.isMSWindows())
 				UIManager.put("Application.useSystemFontSettings", new Boolean(false));
 
-			boolean useSystemLookAndFeel = true;
-			String osName = System.getProperty("os.name");
+	        UiMainWindow window = constructMainWindow();
+
+	        String osName = System.getProperty("os.name");
 			String osVersion = System.getProperty("os.version");
 			System.out.println(osName + ": " + osVersion);
 			if(osName.startsWith("Windows"))
@@ -156,15 +195,11 @@ public class Martus
 				boolean isModernWindows = (isWin2KOrLater || isWinME); 
 				if(!isModernWindows)
 				{
-					JOptionPane.showMessageDialog(null, "Martus requires Windows ME or later", "ERROR", JOptionPane.ERROR_MESSAGE);
+					window.rawError("Martus requires Windows ME or later");
 					System.exit(1);
 				}
 			}
 			
-			if(useSystemLookAndFeel)
-				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
-	        UiMainWindow window = new UiMainWindow();
 	        if(!window.run())
 	        {
 	        	MartusLogger.log("Exiting after run()");
@@ -176,8 +211,26 @@ public class Martus
 			MartusLogger.logException(e);
 			System.exit(1);
 		}
+	}
 
-    }
+	public static UiMainWindow constructMainWindow() throws Exception
+	{
+		if(UiSession.isPureFx)
+			return new PureFxMainWindow();
+		return new FxInSwingMainWindow();
+	}
+
+	public static void useSystemLookAndFeel()
+	{
+		try
+		{
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+	}
 
 	private static int findOption(Vector options, String optionText)
 	{
@@ -255,5 +308,7 @@ public class Martus
 	}
 
 	private final static String TIMEOUT_OPTION_TEXT = "--timeout-minutes=";
-	private final static int DEFAULT_TIMEOUT_SECONDS = (10 * 60);
+	private final static int DEFAULT_TIMEOUT_SECONDS = (5 * 60);
+	private static final int TESTING_TIMEOUT_60_SECONDS = 60;
+	public static int timeoutInXSeconds;
 }

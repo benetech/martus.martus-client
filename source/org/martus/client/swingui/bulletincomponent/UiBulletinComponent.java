@@ -26,49 +26,57 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.io.IOException;
 
-import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Scrollable;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import org.martus.client.core.BulletinLanguageChangeListener;
-import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.fields.UiField;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.DataInvalidException;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.packet.FieldDataPacket;
+import org.martus.swing.Utilities;
 import org.martus.util.language.LanguageOptions;
 
 import com.jhlabs.awt.Alignment;
 import com.jhlabs.awt.GridLayoutPlus;
 
-abstract public class UiBulletinComponent extends JPanel implements Scrollable, ChangeListener, BulletinLanguageChangeListener 
+abstract public class UiBulletinComponent extends JPanel implements Scrollable, BulletinLanguageChangeListener, UiBulletinComponentInterface 
 {
-	abstract public void setEncryptionChangeListener(EncryptionChangeListener listener);
+	@Override
 	abstract public void setLanguageChangeListener(BulletinLanguageChangeListener listener);
-	abstract public UiBulletinComponentDataSection createBulletinComponentDataSection(String sectionName);
+	abstract protected UiBulletinComponentDataSection createBulletinComponentDataSection(String sectionName);
+	@Override
 	abstract public void copyDataToBulletin(Bulletin bulletin) throws
 			IOException, MartusCrypto.EncryptionException;
+	@Override
 	abstract public void validateData() throws DataInvalidException; 
+	@Override
 	abstract public boolean isBulletinModified() throws Exception;
-	abstract UiBulletinComponentHeaderSection createHeaderSection();
-	abstract UiBulletinComponentHeadQuartersSection createHeadQuartersSection();
+	abstract protected UiBulletinComponentHeaderSection createHeaderSection();
+	abstract protected UiBulletinComponentHeadQuartersSection createHeadQuartersSection();
 
-	// ChangeListener interface
-	abstract public void stateChanged(ChangeEvent event);
-
+	@Override
+	public void updateEncryptedIndicator(boolean allPrivate)
+	{
+		if(allPrivate)
+			return;
+		
+		//FIXME: This is where we would provide an indication to the user that 
+		// the existing data is public, but newly saved data is all private
+	}
+	
 	// LanguageChangeListener interface
+	@Override
 	public void bulletinLanguageHasChanged(String newBulletinLanguageCode)
 	{
 		publicSection.updateSpellChecker(newBulletinLanguageCode);
@@ -77,7 +85,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 
 
 
-	public UiBulletinComponent(UiMainWindow mainWindowToUse)
+	protected UiBulletinComponent(UiMainWindow mainWindowToUse)
 	{
 		GridLayoutPlus layout = new GridLayoutPlus();
 		layout.setFill(Alignment.FILL_NONE);
@@ -87,10 +95,10 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		mainWindow = mainWindowToUse;
 	}
 
-	public void createSections()
+	private void createSections()
 	{
 		headerSection = createHeaderSection();
-		publicSection = createDataSection(Bulletin.TOP_SECTION, currentBulletin.getTopSectionFieldSpecs(), SOMETIMES_ENCRYPTED);
+		publicSection = createDataSection(Bulletin.TOP_SECTION, currentBulletin.getTopSectionFieldSpecs(), ALWAYS_ENCRYPTED);
 		privateSection = createDataSection(Bulletin.BOTTOM_SECTION, currentBulletin.getBottomSectionFieldSpecs(), ALWAYS_ENCRYPTED);
 		headquartersSection = createHeadQuartersSection();
 		
@@ -106,11 +114,6 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 			FieldSpecCollection fieldSpecs, int encryptionStatus)
 	{
 		UiBulletinComponentDataSection target = createBulletinComponentDataSection(section);
-		if(encryptionStatus == SOMETIMES_ENCRYPTED)
-		{
-			allPrivateField = target.createAllPrivateField();
-			allPrivateField.setListener(this);
-		}
 		target.createLabelsAndFields(fieldSpecs, this);
 
 		return target;
@@ -122,11 +125,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		privateSection.matchFirstColumnWidth(publicSection);
 	}
 
-	public Bulletin getCurrentBulletin()
-	{
-		return currentBulletin;
-	}
-
+	@Override
 	public void copyDataFromBulletin(Bulletin bulletinToShow) throws Exception
 	{
 		removeAll();
@@ -144,11 +143,6 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		createSections();
 		
 		headerSection.setBulletin(currentBulletin);
-
-		String isAllPrivate = FieldSpec.FALSESTRING;
-		if(currentBulletin.isAllPrivate())
-			isAllPrivate = FieldSpec.TRUESTRING;
-		allPrivateField.setText(isAllPrivate);
 
 		FieldDataPacket publicData = currentBulletin.getFieldDataPacket();
 		publicSection.clearAttachments();
@@ -216,29 +210,10 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		repaint();
 	}
 
-	public void updateEncryptedIndicator(boolean isEncrypted)
+	@Override
+	public UiMainWindow getMainWindow()
 	{
-		if(publicSection != null)
-			publicSection.updateEncryptedIndicator(isEncrypted);
-		
-		if(privateSection != null)
-			privateSection.updateEncryptedIndicator(true);
-	}
-	
-	public void encryptAndDisableAllPrivate()
-	{
-		JCheckBox allPrivate = ((JCheckBox)(allPrivateField.getComponent()));
-		allPrivate.setSelected(true);
-		allPrivate.setEnabled(false);
-		updateEncryptedIndicator(true);
-	}
-
-	public boolean isAllPrivateBoxChecked()
-	{
-		boolean isAllPrivate = false;
-		if(allPrivateField.getText().equals(FieldSpec.TRUESTRING))
-			isAllPrivate = true;
-		return isAllPrivate;
+		return mainWindow;
 	}
 
 	// Scrollable interface
@@ -268,15 +243,30 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	}
 	// End scrollable interface
 	
-	UiMainWindow mainWindow;
+	@Override
+	public void scrollToTop()
+	{
+		Utilities.forceScrollerToTop(this);
+	}
+	
+	@Override
+	public Component getComponent()
+	{
+		return this;
+	}
+	
+	public boolean confirmDlg(JFrame parent, String baseTag)
+	{
+		return getMainWindow().confirmDlg(parent, baseTag);
+	}
 
-	UiField allPrivateField;
-	Bulletin currentBulletin;
-	UiBulletinComponentHeaderSection headerSection;
-	UiBulletinComponentDataSection publicSection;
-	UiBulletinComponentDataSection privateSection;	
-	UiBulletinComponentHeadQuartersSection headquartersSection;
+	private UiMainWindow mainWindow;
 
-	private static final int SOMETIMES_ENCRYPTED = 1;
+	protected Bulletin currentBulletin;
+	protected UiBulletinComponentHeaderSection headerSection;
+	protected UiBulletinComponentDataSection publicSection;
+	protected UiBulletinComponentDataSection privateSection;	
+	protected UiBulletinComponentHeadQuartersSection headquartersSection;
+
 	private static final int ALWAYS_ENCRYPTED = 2;
 }

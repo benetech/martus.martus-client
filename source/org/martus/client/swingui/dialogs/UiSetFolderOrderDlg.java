@@ -32,15 +32,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Vector;
+
 import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiList;
@@ -56,7 +59,7 @@ public class UiSetFolderOrderDlg extends JDialog implements ActionListener
 {
 	public UiSetFolderOrderDlg(UiMainWindow owner, Vector originalFolderOrderToUse)
 	{
-		super(owner, "", true);
+		super(owner.getSwingFrame(), "", true);
 		originalFolderOrder = originalFolderOrderToUse;
 		hiddenFolders = new Vector();
 		okPressed = false;
@@ -89,9 +92,9 @@ public class UiSetFolderOrderDlg extends JDialog implements ActionListener
 		
 		UiScrollPane scroller = new UiScrollPane(folderList	);
 
-		ok = new UiButton(localization.getButtonLabel("ok"));
+		ok = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 		ok.addActionListener(this);
-		cancel = new UiButton(localization.getButtonLabel("cancel"));
+		cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(this);
 		Box okCancelBox = Box.createHorizontalBox();
 		Utilities.addComponentsRespectingOrientation(okCancelBox, new Component[] {ok, new UiLabel("   "), cancel, Box.createHorizontalGlue()});
@@ -122,7 +125,7 @@ public class UiSetFolderOrderDlg extends JDialog implements ActionListener
 		contentPane.add(okCancelBox,BorderLayout.SOUTH);
 		getRootPane().setDefaultButton(ok);
 		
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 	}
 	

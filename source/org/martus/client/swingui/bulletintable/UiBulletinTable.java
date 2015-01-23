@@ -66,7 +66,6 @@ import org.martus.client.swingui.foldertree.FolderNode;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
-import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiTable;
 
 
@@ -102,11 +101,11 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
     	int width = getColumnHeaderWidth(COLUMN_STATUS);
 
     	MartusLocalization localization = mainWindow.getLocalization();
-		int draftWidth = getRenderedWidth(COLUMN_STATUS, localization.getStatusLabel(Bulletin.STATUSDRAFT));
+		int draftWidth = getRenderedWidth(COLUMN_STATUS, localization.getStatusLabel(Bulletin.STATUSMUTABLE));
     	if(draftWidth > width)
     		width = draftWidth;
     	
-    	int sealedWidth = getRenderedWidth(COLUMN_STATUS, localization.getStatusLabel(Bulletin.STATUSSEALED));
+    	int sealedWidth = getRenderedWidth(COLUMN_STATUS, localization.getStatusLabel(Bulletin.STATUSIMMUTABLE));
     	if(sealedWidth > width)
     		width = sealedWidth;
     	setColumnMaxWidth(COLUMN_STATUS, width);
@@ -421,9 +420,9 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 					continue;
 				}
 
-				if(bulletin.isDraft())
+				if(bulletin.isMutable())
 					draftOutBox.add(bulletin);
-				if(bulletin.isSealed())
+				if(bulletin.isImmutable())
 					sealedOutBox.add(bulletin);
 				
 			}
@@ -440,25 +439,6 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 			mainWindow.notifyDlg("ResendErrorNotAuthorizedToSend");
 		if(errorIO)
 			mainWindow.notifyDlg("ResendError");
-	}
-
-	public boolean confirmDeletionOfFile(String filePath)
-	{
-		UiLocalization localization = mainWindow.getLocalization();
-		String title = localization.getWindowTitle("DeleteBulletinFile");
-		String msg1 = localization.getFieldLabel("DeleteBulletinFileMsg1");
-		String msg2 = localization.getFieldLabel("DeleteBulletinFileMsg2");
-		String[] contents = {msg1, filePath, msg2};
-
-		String delete = localization.getButtonLabel("Delete");
-		String leave = localization.getButtonLabel("Leave");
-		String[] buttons = {delete, leave};
-
-		UiNotifyDlg notify = new UiNotifyDlg(mainWindow, title, contents, buttons);
-		String result = notify.getResult();
-		if(result != null && result.equals(delete))
-			return true;
-		return false;
 	}
 
 	class TableHeaderMouseAdapter extends MouseAdapter
@@ -602,7 +582,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		boolean confirmDiscardSingleBulletin(Bulletin b)
 		{
 			BulletinFolder folderToDiscardFrom = getFolder();
-			if(!isDiscardedFolder(folderToDiscardFrom))
+			if(!folderToDiscardFrom.isDiscardedFolder())
 				return true;
 
 			MartusApp app = mainWindow.getApp();
@@ -633,28 +613,13 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		boolean confirmDiscardMultipleBulletins()
 		{
 			BulletinFolder folderToDiscardFrom = getFolder();
-			if(!isDiscardedFolder(folderToDiscardFrom))
+			if(!folderToDiscardFrom.isDiscardedFolder())
 				return true;
 
 			MartusApp app = mainWindow.getApp();
-
-			BulletinFolder draftOutBox = app.getFolderDraftOutbox();
-			BulletinFolder sealedOutBox = app.getFolderSealedOutbox();
-
-			boolean aBulletinIsUnsent = false;
-			Vector visibleFoldersContainingAnyBulletin = new Vector();
 			UniversalId[] bulletinIds = getSelectedBulletinUids();
-			for (int i = 0; i < bulletinIds.length; i++)
-			{
-				UniversalId uid = bulletinIds[i];
-				Vector visibleFoldersContainingThisBulletin = app.findBulletinInAllVisibleFolders(uid);
-				visibleFoldersContainingThisBulletin.remove(folderToDiscardFrom);
-				addUniqueEntriesOnly(visibleFoldersContainingAnyBulletin, visibleFoldersContainingThisBulletin);
-				
-				if(draftOutBox.contains(uid) || sealedOutBox.contains(uid))
-					aBulletinIsUnsent = true;
-			}
-
+			Vector visibleFoldersContainingAnyBulletin = app.getNonDiscardedFoldersForBulletins(bulletinIds);
+			boolean aBulletinIsUnsent = app.isAnyBulletinsUnsent(bulletinIds);
 			String tagUnsent = null;
 			if(aBulletinIsUnsent)
 				tagUnsent = "warningDeleteMultipleUnsentBulletins";
@@ -724,18 +689,6 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		mainWindow.selectNewCurrentBulletin(getSelectedRow());
 	}
 
-	void addUniqueEntriesOnly(Vector to, Vector from)
-	{
-		for(int i = 0 ; i < from.size(); ++i)
-		{
-			Object elementToAdd = from.get(i);
-			if(!to.contains(elementToAdd))
-				to.add(elementToAdd);
-		}
-	}
-
-	
-	
 
 	String buildFolderNameList(Vector visibleFoldersContainingThisBulletin)
 	{
@@ -748,11 +701,6 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 			names += " - " + node.getLocalizedName() + "\n";
 		}
 		return names;
-	}
-
-	boolean isDiscardedFolder(BulletinFolder f)
-	{
-		return f.equals(f.getStore().getFolderDiscarded());
 	}
 
 	void selectRow(int rowIndex)

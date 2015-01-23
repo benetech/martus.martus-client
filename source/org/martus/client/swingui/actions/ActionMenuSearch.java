@@ -25,8 +25,16 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.actions;
 
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiSession;
+import org.martus.client.swingui.foldertree.UiFolderTreePane;
+import org.martus.client.swingui.jfx.landing.FxMainStage;
+import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
+import org.martus.common.EnglishCommonStrings;
+import org.martus.util.TokenReplacement;
 
 public class ActionMenuSearch extends ActionSearch
 {
@@ -39,7 +47,67 @@ public class ActionMenuSearch extends ActionSearch
 	public void doAction()
 	{
 		SortableBulletinList bulletinIdsFromSearch = doSearch();
-		mainWindow.updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
-		return;
+		if(UiSession.isPureFx)
+		{
+			// FIXME: Needs implementation
+		}
+		else if(UiSession.isJavaFx())
+		{
+			FxMainStage stage = mainWindow.getMainStage();
+			BulletinsListController controller = stage.getBulletinsListController();
+			controller.updateSearchResultsTable(bulletinIdsFromSearch);
+		}
+		else
+		{
+			showSearchResults(bulletinIdsFromSearch);
+		}
+	}
+
+	public void showSearchResults(SortableBulletinList bulletinIdsFromSearch)
+	{
+		updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
 	}	
+
+	public void updateSearchFolderAndNotifyUserOfTheResults(SortableBulletinList matchedBulletinsFromSearch)
+	{
+		if(matchedBulletinsFromSearch == null)
+			return;
+		getApp().updateSearchFolder(matchedBulletinsFromSearch);
+		ClientBulletinStore store = getStore();
+		BulletinFolder searchFolder = store.findFolder(store.getSearchFolderName());
+		UiFolderTreePane folderTreePane = getFolderTreePane();
+		if(folderTreePane == null)
+			return;
+		folderTreePane.folderTreeContentsHaveChanged();
+		folderTreePane.folderContentsHaveChanged(searchFolder);
+		int bulletinsFound = searchFolder.getBulletinCount();
+		if(bulletinsFound > 0)
+		{
+			getMainWindow().selectSearchFolder();
+			showNumberOfBulletinsFound(bulletinsFound, "SearchFound");
+		}
+		else
+		{
+			getMainWindow().notifyDlg("SearchFailed");
+		}
+	}
+
+	public void showNumberOfBulletinsFound(int bulletinsFound,String messageTag)
+	{
+		try
+		{
+			String title = getLocalization().getWindowTitle("notifySearchFound");
+			String message = getLocalization().getFieldLabel(messageTag);
+			String ok = getLocalization().getButtonLabel(EnglishCommonStrings.OK);
+			String[] buttons = { ok };
+			message = TokenReplacement.replaceToken(message , "#NumberBulletinsFound#", (new Integer(bulletinsFound)).toString());
+			String[] contents = new String[] { message };
+			getMainWindow().notifyDlg(title, contents, buttons);
+		}
+		catch(Exception e)
+		{
+			getMainWindow().unexpectedErrorDlg(e);
+		}
+	}
+
 }

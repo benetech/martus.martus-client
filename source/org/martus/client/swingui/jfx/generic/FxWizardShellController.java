@@ -38,7 +38,7 @@ import org.martus.client.swingui.jfx.WizardNavigationHandlerInterface;
 import org.martus.common.MartusLogger;
 
 
-abstract public class FxWizardShellController extends FxInSwingDialogController implements WizardNavigationButtonsInterface
+abstract public class FxWizardShellController extends FxShellController implements WizardNavigationButtonsInterface
 {
 	public FxWizardShellController(UiMainWindow mainWindowToUse)
 	{
@@ -51,10 +51,12 @@ abstract public class FxWizardShellController extends FxInSwingDialogController 
 		super.initialize(location, bundle);
 	}
 	
-	public FxWizardStage getWizardStage()
+	public WizardStageInterface getWizardStage()
 	{
-		return (FxWizardStage) getFxInSwingDialogStage();
+		return (WizardStageInterface) getStage();
 	}
+	
+	abstract public void loadAndIntegrateContentPane(FxController contentPaneController) throws Exception;
 
 	@FXML
 	protected void onNext(ActionEvent event)
@@ -116,7 +118,7 @@ abstract public class FxWizardShellController extends FxInSwingDialogController 
 		return backButton; 
 	}
 	
-	public void setContentController(WizardNavigationHandlerInterface contentNavigationHandlerToUse)
+	public void setContentNavigationHandler(WizardNavigationHandlerInterface contentNavigationHandlerToUse)
 	{
 		contentNavigationHandler = contentNavigationHandlerToUse;
 		contentNavigationHandler.setNavigationHandler(this);

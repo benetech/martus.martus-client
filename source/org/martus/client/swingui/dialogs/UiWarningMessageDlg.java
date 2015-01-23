@@ -44,11 +44,11 @@ import org.martus.swing.Utilities;
 
 public class UiWarningMessageDlg extends JDialog implements ActionListener
 {
-	public UiWarningMessageDlg(JFrame owner, String title, String warningMessageLtoR, String warningMessageRtoL)
+	public UiWarningMessageDlg(JFrame owner, String title, String okButtonLabel, String warningMessageLtoR, String warningMessageRtoL)
 	{
 		super(owner, title, true);
 
-		JButton okButton = new UiButton("OK");
+		JButton okButton = new UiButton(okButtonLabel);
 		okButton.addActionListener(this);
 		
 		UiWrappedTextArea areaLtoR = new UiWrappedTextArea(warningMessageLtoR);
@@ -76,7 +76,7 @@ public class UiWarningMessageDlg extends JDialog implements ActionListener
 		pb.add(okButton);
 		getContentPane().add(pb, BorderLayout.SOUTH);
 
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 		getRootPane().setDefaultButton(okButton);
 		okButton.requestFocus(true);

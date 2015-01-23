@@ -39,8 +39,10 @@ import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiSession;
+import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -75,6 +77,25 @@ public class TestLocalization extends TestCaseEnhanced
 		assertFalse("Translation directory still exists?", testTranslationDirectory.exists());
 	}
 	
+	public void testCalendars() throws Exception
+	{
+		final String JAVA_CHRONOLOGY_TYPE_CODE_FOR_GREGORIAN = "iso8601";
+		final String JAVA_CHRONOLOGY_TYPE_CODE_FOR_THAI = "buddhist";
+		final String JAVA_CHRONOLOGY_TYPE_CODE_FOR_PERSIAN = "islamic-umalqura";
+
+		assertEquals(JAVA_CHRONOLOGY_TYPE_CODE_FOR_GREGORIAN, MartusLocalization.getChronology(MartusLocalization.GREGORIAN_SYSTEM).getCalendarType());
+		assertEquals(JAVA_CHRONOLOGY_TYPE_CODE_FOR_THAI, MartusLocalization.getChronology(MartusLocalization.THAI_SYSTEM).getCalendarType());
+		assertEquals(JAVA_CHRONOLOGY_TYPE_CODE_FOR_PERSIAN, MartusLocalization.getChronology(MartusLocalization.PERSIAN_SYSTEM).getCalendarType());
+		assertEquals(JAVA_CHRONOLOGY_TYPE_CODE_FOR_PERSIAN, MartusLocalization.getChronology(MartusLocalization.AFGHAN_SYSTEM).getCalendarType());
+		
+		String storedDate = "2014-10-06";
+		assertEquals("10/06/2014", bd.convertStoredDateToDisplay(storedDate));
+		
+		bd.setCurrentCalendarSystem(MartusLocalization.THAI_SYSTEM);
+		assertEquals("10/06/2557", bd.convertStoredDateToDisplay(storedDate));
+		assertEquals(JAVA_CHRONOLOGY_TYPE_CODE_FOR_THAI, bd.getCurrentChronology().getCalendarType());
+	}
+	
 	public void testEnglishStringsDontStartWithAngleBrackets() throws Exception
 	{
 		for(int i=0; i < EnglishStrings.strings.length; ++i)
@@ -84,6 +105,14 @@ public class TestLocalization extends TestCaseEnhanced
 			assertFalse("ERROR: English string can't start with < but does: " + entry, 
 						value.startsWith("<"));
 		}
+	}
+	
+	public void testConstructor() throws Exception
+	{
+		assertEquals("en", bd.getCurrentLanguageCode());
+		assertEquals("MM/dd/yyyy", bd.getCurrentDateTemplate());
+		assertEquals("MM/dd/yyyy", bd.getCurrentDateFormatCode());
+		assertEquals(MiniLocalization.GREGORIAN_SYSTEM, bd.getCurrentCalendarSystem());
 	}
 	
 	public void testNonAsciiEnglishTranslations() throws Exception
@@ -116,6 +145,7 @@ public class TestLocalization extends TestCaseEnhanced
 	private void verifyDefaultDateFormat(String languageCode, String mdyOrder, char delimiter)
 	{
 		MiniLocalization localization = new MiniLocalization();
+		localization.setLanguageSettingsProvider(new CurrentUiState());
 		localization.setCurrentLanguageCode(languageCode);
 		localization.setDateFormatFromLanguage();
 		assertEquals("wrong mdy order for " + languageCode + "? ", mdyOrder, localization.getMdyOrder());
@@ -156,6 +186,7 @@ public class TestLocalization extends TestCaseEnhanced
 		tmpDir.deleteOnExit();
 		
 		MartusLocalization directionalLanguages = new MartusLocalization(tmpDir, EnglishTestStrings.strings);
+		directionalLanguages.setLanguageSettingsProvider(new CurrentUiState());
 		directionalLanguages.includeOfficialLanguagesOnly = false;
 		directionalLanguages.setCurrentLanguageCode("en");
 		assertFalse("English is a Left To Right language.", LanguageOptions.isRightToLeftLanguage());
@@ -224,7 +255,7 @@ public class TestLocalization extends TestCaseEnhanced
 	public void testGetAllEnglishStrings() throws Exception
 	{
 		MartusLocalization localization = new MartusLocalization(createTempDirectory(), UiSession.getAllEnglishStrings());
-		assertEquals("Martus Human Rights Bulletin System", localization.getLabel("en", "wintitle", "main"));
+		assertEquals("Martus Information Management and Data Collection Framework", localization.getLabel("en", "wintitle", "main"));
 		assertEquals("or", localization.getLabel("en", "keyword", "or"));
 		assertEquals("-Other-", localization.getLabel("en", "language", "?"));
 		assertEquals("Sealed", localization.getLabel("en", "status", "sealed"));
@@ -277,7 +308,8 @@ public class TestLocalization extends TestCaseEnhanced
 	public void testAddedMTFLanguageFile() throws Exception
 	{
 		File translationDirectory = createTempDirectory();
-		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, EnglishStrings.strings);
+		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, UiSession.getAllEnglishStrings());
+		myLocalization.setLanguageSettingsProvider(new CurrentUiState());
 		myLocalization.includeOfficialLanguagesOnly = false;
 		assertTrue("Default English should always be trusted.", myLocalization.isOfficialTranslation("en"));
 
@@ -301,7 +333,8 @@ public class TestLocalization extends TestCaseEnhanced
 	public void testAddedUnsignedMTFLanguageFileOfficialOnly() throws Exception
 	{
 		File translationDirectory = createTempDirectory();
-		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, EnglishStrings.strings);
+		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, UiSession.getAllEnglishStrings());
+		myLocalization.setLanguageSettingsProvider(new CurrentUiState());
 
 		String someTestLanguageCode = "zz";
 		
@@ -372,13 +405,14 @@ public class TestLocalization extends TestCaseEnhanced
 		foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
 		assertTrue("should now have testLanguage", foundSomeTestLanguage);
 		myLocalization.setCurrentLanguageCode(someTestLanguageCode);
-		assertEquals("Incorrect translation OK from within language pack", "OK", myLocalization.getButtonLabel("ok"));
-		assertEquals("Incorrect translation No from within language pack", "No", myLocalization.getButtonLabel("no"));
+		assertEquals("Incorrect translation OK from within language pack", "OK", myLocalization.getButtonLabel(EnglishCommonStrings.OK));
+		assertEquals("Incorrect translation No from within language pack", "No", myLocalization.getButtonLabel(EnglishCommonStrings.NO));
 		assertTrue("A signed MLP file should be trusted", myLocalization.isOfficialTranslation(someTestLanguageCode));
 		assertTrue("We should be using a Language Pack", myLocalization.isTranslationInsideMLP());
 
 		File translationDirectory2 = createTempDirectory();
 		MartusLocalization myLocalization2 = new MartusLocalization(translationDirectory2, UiSession.getAllEnglishStrings());
+		myLocalization2.setLanguageSettingsProvider(new CurrentUiState());
 		myLocalization2.includeOfficialLanguagesOnly = false;
 		File mlpTestLanguage = new File(translationDirectory2,UiLocalization.getMlpkFilename(someTestLanguageCode));
 		mlpTestLanguage.deleteOnExit();
@@ -386,8 +420,8 @@ public class TestLocalization extends TestCaseEnhanced
 		foundSomeTestLanguage = doesLanguageExist(myLocalization2, someTestLanguageCode);
 		assertTrue("should still have testLanguage even if its not signed.", foundSomeTestLanguage);
 		myLocalization2.setCurrentLanguageCode(someTestLanguageCode);
-		assertEquals("Incorrect translation OK from within unsigned language pack", "OK", myLocalization2.getButtonLabel("ok"));
-		assertEquals("Incorrect translation No from within unsigned language pack", "No", myLocalization2.getButtonLabel("no"));
+		assertEquals("Incorrect translation OK from within unsigned language pack", "OK", myLocalization2.getButtonLabel(EnglishCommonStrings.OK));
+		assertEquals("Incorrect translation No from within unsigned language pack", "No", myLocalization2.getButtonLabel(EnglishCommonStrings.NO));
 		assertTrue("We should be still be using a Language Pack", myLocalization2.isTranslationInsideMLP());
 		
 		assertFalse("A unsigned MLPK file should not be trusted", myLocalization2.isOfficialTranslation(someTestLanguageCode));
@@ -413,8 +447,8 @@ public class TestLocalization extends TestCaseEnhanced
 		foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
 		assertTrue("should have testLanguage since it is official", foundSomeTestLanguage);
 		myLocalization.setCurrentLanguageCode(someTestLanguageCode);
-		assertEquals("Incorrect translation OK from within language pack", "OK", myLocalization.getButtonLabel("ok"));
-		assertEquals("Incorrect translation No from within language pack", "No", myLocalization.getButtonLabel("no"));
+		assertEquals("Incorrect translation OK from within language pack", "OK", myLocalization.getButtonLabel(EnglishCommonStrings.OK));
+		assertEquals("Incorrect translation No from within language pack", "No", myLocalization.getButtonLabel(EnglishCommonStrings.NO));
 		assertTrue("A signed MLP file should be trusted", myLocalization.isOfficialTranslation(someTestLanguageCode));
 		
 		assertEquals("Date of MLP not the correct?", new Date(mlp.getEntry("META-INF").getTime()) , myLocalization.getMlpDate());
@@ -426,6 +460,7 @@ public class TestLocalization extends TestCaseEnhanced
 
 		File translationDirectory2 = createTempDirectory();
 		MartusLocalization myLocalization2 = new MartusLocalization(translationDirectory2, EnglishStrings.strings);
+		myLocalization2.setLanguageSettingsProvider(new CurrentUiState());
 		File someTestLanguage2 = new File(translationDirectory2,UiLocalization.getMlpkFilename(someTestLanguageCode));
 		someTestLanguage2.deleteOnExit();
 		copyResourceFileToLocalFile(someTestLanguage2, "Martus-xx-notSigned.mlp");

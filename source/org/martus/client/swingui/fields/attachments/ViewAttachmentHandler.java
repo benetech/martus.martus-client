@@ -40,13 +40,14 @@ import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.database.ReadableDatabase;
+import org.martus.common.packet.AttachmentPacket;
 import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.swing.Utilities;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
-class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
+public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 {
 	public ViewAttachmentHandler(UiMainWindow mainWindowToUse, AbstractAttachmentPanel panelToUse)
 	{
@@ -60,7 +61,7 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		if(panel.isImageInline)
 			return;
 		
-		if(!Utilities.isMSWindows() && !Utilities.isMacintosh() && !UiSession.isAlphaTester)
+		if(shouldNotViewAttachmentsInExternalViewer())
 		{
 			getMainWindow().notifyDlg("ViewAttachmentNotAvailable");
 			return;
@@ -78,8 +79,8 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 					return;
 			}
 
-			File temp = getAttachmentAsFile(proxy);
-			launchExternalAttachmentViewer(temp);
+			ClientBulletinStore store = getMainWindow().getApp().getStore();
+			launchExternalAttachmentViewer(proxy, store);
 		}
 		catch(Exception e)
 		{
@@ -90,20 +91,20 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		getMainWindow().resetCursor();
 	}
 
-	private File getAttachmentAsFile(AttachmentProxy proxy) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException 
+
+	private void notifyUnableToView()
 	{
-		if(proxy.getFile() != null)
-			return proxy.getFile();
-		
-		ClientBulletinStore store = getMainWindow().getApp().getStore();
-		ReadableDatabase db = store.getDatabase();
-		MartusCrypto security = store.getSignatureVerifier();
-		File temp = extractAttachmentToTempFile(db, proxy, security);
-		return temp;
+		getMainWindow().notifyDlg("UnableToViewAttachment");
+	}
+	
+	static public boolean shouldNotViewAttachmentsInExternalViewer()
+	{
+		return (!Utilities.isMSWindows() && !Utilities.isMacintosh() && !UiSession.isAlphaTester);
 	}
 
-	private void launchExternalAttachmentViewer(File temp) throws IOException, InterruptedException 
+	public static void launchExternalAttachmentViewer(AttachmentProxy proxy, ClientBulletinStore store) throws IOException, InterruptedException, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, InvalidBase64Exception, CryptoException 
 	{
+		File temp = obtainFileForAttachment(proxy, store);
 		Runtime runtime = Runtime.getRuntime();
 
 		String[] launchCommand = getLaunchCommandForThisOperatingSystem(temp.getPath());
@@ -122,11 +123,31 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 			MartusLogger.logError(launchCommandAsString);
 			dumpOutputToConsole("stdout", processView.getInputStream());
 			dumpOutputToConsole("stderr", processView.getErrorStream());
-			notifyUnableToView();
+			throw new IOException();
 		}
 	}
-
-	private void dumpOutputToConsole(String streamName, InputStream capturedOutput) throws IOException
+	
+	static public File obtainFileForAttachment(AttachmentProxy proxy, ClientBulletinStore store) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
+	{
+		File attachmentAlreadyAvailableAsFile = proxy.getFile();
+		if(attachmentAlreadyAvailableAsFile != null)
+			return attachmentAlreadyAvailableAsFile;
+		
+		AttachmentPacket pendingPacket = proxy.getPendingPacket();
+		if(pendingPacket != null)
+		{
+			File tempFileAlreadyAvailable = pendingPacket.getRawFile();
+			if(tempFileAlreadyAvailable != null)
+				return tempFileAlreadyAvailable;
+		}
+		
+		ReadableDatabase db = store.getDatabase();
+		MartusCrypto security = store.getSignatureVerifier();
+		File tempFile = extractAttachmentToTempFile(db, proxy, security);
+		return tempFile;
+	}
+	
+	static private void dumpOutputToConsole(String streamName, InputStream capturedOutput) throws IOException
 	{
 		if(capturedOutput.available() <= 0)
 			return;
@@ -142,7 +163,7 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		System.out.println();
 	}
 
-	private String[] getLaunchCommandForThisOperatingSystem(String fileToLaunch)
+	static private String[] getLaunchCommandForThisOperatingSystem(String fileToLaunch)
 	{
 		if(Utilities.isMSWindows())
 			return new String[] {"cmd", "/C", AttachmentProxy.escapeFilenameForWindows(fileToLaunch)};
@@ -156,11 +177,6 @@ class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		throw new RuntimeException("Launch not supported on this operating system");
 	}
 
-	private void notifyUnableToView()
-	{
-		getMainWindow().notifyDlg("UnableToViewAttachment");
-	}
-	
 	static File extractAttachmentToTempFile(ReadableDatabase db, AttachmentProxy proxy, MartusCrypto security) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
 	{
 		String fileName = proxy.getLabel();

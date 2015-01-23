@@ -26,203 +26,228 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.HashMap;
 
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JViewport;
+import javafx.beans.property.Property;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
+import javax.swing.SwingUtilities;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BulletinLanguageChangeListener;
-import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.TopLevelWindowInterface;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.WindowObscurer;
-import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSection;
-import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
+import org.martus.client.swingui.bulletincomponent.UiBulletinComponentInterface;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.clientside.UiLocalization;
-import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.Bulletin.BulletinState;
 import org.martus.common.fieldspec.DateRangeInvertedException;
 import org.martus.common.fieldspec.DateTooEarlyException;
 import org.martus.common.fieldspec.DateTooLateException;
 import org.martus.common.fieldspec.RequiredFieldIsBlankException;
-import org.martus.swing.UiButton;
-import org.martus.swing.UiScrollPane;
-import org.martus.swing.Utilities;
 
-public class UiBulletinModifyDlg extends JFrame implements ActionListener, WindowListener, EncryptionChangeListener, BulletinLanguageChangeListener
+abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 {
 	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse) throws Exception
 	{
+		setBulletin(b);
 		observer = observerToUse;
-		UiLocalization localization = observer.getLocalization();
-		setTitle(localization.getWindowTitle("create"));
-		UiMainWindow.updateIcon(this);
-			bulletin = b;
-
-			view = new UiBulletinEditor(observer);
-			view.copyDataFromBulletin(bulletin);
-
-			view.setEncryptionChangeListener(this);
-			view.setLanguageChangeListener(this);
-
-			send = new UiButton(localization.getButtonLabel("send"));
-			send.addActionListener(this);
-			draft = new UiButton(localization.getButtonLabel("savedraft"));
-			draft.addActionListener(this);
-			cancel = new UiButton(localization.getButtonLabel("cancel"));
-			cancel.addActionListener(this);
-
-			addScrollerView();
-
-			if(observer.getBulletinsAlwaysPrivate())
-				view.encryptAndDisableAllPrivate();
-			else
-				indicateEncrypted(bulletin.isAllPrivate());
-
-			Box box = Box.createHorizontalBox();
-			Component buttons[] = {send, draft, cancel, Box.createHorizontalGlue()};
-			Utilities.addComponentsRespectingOrientation(box, buttons);
-			getContentPane().add(box, BorderLayout.SOUTH);
-
-			setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-			addWindowListener(this);
-
-			Dimension screenSize = Utilities.getViewableScreenSize();
-			Dimension editorDimension = observerToUse.getBulletinEditorDimension();
-			Point editorPosition = observerToUse.getBulletinEditorPosition();
-			boolean showMaximized = false;
-			if(Utilities.isValidScreenPosition(screenSize, editorDimension, editorPosition))
-			{
-				setLocation(editorPosition);
-				setSize(editorDimension);
-				if(observerToUse.isBulletinEditorMaximized())
-					showMaximized = true;
-			}
-			else
-				showMaximized = true;
-			if(showMaximized)
-			{
-				setSize(screenSize.width - 50, screenSize.height - 50);
-				Utilities.maximizeWindow(this);
-			}
-			Utilities.forceScrollerToTop(view);
-			
-			setGlassPane(new WindowObscurer());
+		
+		ClientBulletinStore store = observerToUse.getApp().getStore();
+		Property<String> currentTemplateNameProperty = store.getCurrentFormTemplateNameProperty();
+		currentTemplateNameProperty.addListener(new TemplateChangeHandler(observerToUse));
 
 	}
 
-	private void addScrollerView() 
+	public UiLocalization getLocalization()
 	{
-		scroller = new UiScrollPane();
-		scroller.getVerticalScrollBar().setFocusable(false);
-		scroller.getViewport().add(view);
-		scroller.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-		getContentPane().add(scroller, BorderLayout.CENTER);
-		getContentPane().invalidate();
-		getContentPane().doLayout();
+		UiLocalization localization = getMainWindow().getLocalization();
+		return localization;
+	}
+	
+	@Override
+	public void repaint()
+	{
+		getSwingFrame().repaint();
+	}
+	
+	protected UiMainWindow getMainWindow()
+	{
+		return observer;
+	}
+	
+	class WindowEventHandler extends WindowAdapter
+	{
+		public void windowClosing(WindowEvent event)
+		{
+			try
+			{
+				closeWindowIfUserConfirms();
+			}
+			catch (Exception e)
+			{
+				unexpectedErrorDlg(e);
+			}
+		}
+	}
+	
+	class LanguageChangeHandler implements BulletinLanguageChangeListener
+	{
+		@Override
+		public void bulletinLanguageHasChanged(String newLanguageCode)
+		{
+			//TODO add this back when its working correctly
+			/*		if(observer.getLocalization().doesLanguageRequirePadding(newLanguage))
+						LanguageOptions.setLanguagePaddingRequired();
+					else
+						LanguageOptions.setLanguagePaddingNotRequired();
+					getContentPane().remove(scroller);
+					addScrollerView();
+			*/
+		}
+	}
+	
+	abstract public void dispose();
+	abstract public void setVisible(boolean newState);
+	
+	protected void unexpectedErrorDlg(Exception e)
+	{
+		observer.unexpectedErrorDlg(e);
 	}
 
-	public void actionPerformed(ActionEvent ae)
-	{		
+	protected void safelyPopulateView()
+	{
 		try
 		{
-			if(ae.getSource() == cancel)
-			{				
-				closeWindowIfUserConfirms();
-				return;
-			}	
-	
-			if(!validateData())
-				return;
-
-			boolean userChoseSeal = (ae.getSource() == send);
-			
-			if(userChoseSeal)
-			{
-				String tag = view.isAllPrivateBoxChecked() ? 
-						"send" : "SendWithPublicData";
-					
-				if (!observer.confirmDlg(this, tag))
-					return;
-			}
-												
-			saveBulletin(userChoseSeal);
-		}
-		catch (Exception e) 
+			getView().copyDataFromBulletin(getBulletin());
+			getView().setLanguageChangeListener(new LanguageChangeHandler());
+			getView().scrollToTop();
+		} 
+		catch (Exception e)
 		{
-			e.printStackTrace();
-			observer.notifyDlg(this, "UnexpectedError");
+			throw new RuntimeException(e);
 		}
 	}
 
-	private boolean validateData()
+	class TemplateChangeHandler implements ChangeListener<String>
+	{
+		public TemplateChangeHandler(UiMainWindow mainWindowToUse)
+		{
+			mainWindow = mainWindowToUse;
+		}
+		
+		@Override
+		public void changed(ObservableValue<? extends String> currentTemplateName, String oldValue, String newValue)
+		{
+			try
+			{
+				ClientBulletinStore store = mainWindow.getApp().getStore();
+				Bulletin clonedBulletin = createClonedBulletinUsingCurrentTemplate(store);
+				SwingUtilities.invokeLater(() -> showBulletin(clonedBulletin));
+			} 
+			catch (Exception e)
+			{
+				
+			}
+		}
+
+		private UiMainWindow mainWindow;
+	}
+	
+	public Bulletin createClonedBulletinUsingCurrentTemplate(ClientBulletinStore store) throws Exception
+	{
+		Bulletin bulletinWithOldTemplateButLatestData = getBulletin();
+		getView().copyDataToBulletin(bulletinWithOldTemplateButLatestData);
+		Bulletin clonedBulletin = store.createNewDraftWithCurrentTemplateButIdAndDataAndHistoryFrom(bulletinWithOldTemplateButLatestData);
+		return clonedBulletin;
+	}
+	
+	public void setBulletin(Bulletin bulletin)
+	{
+		this.bulletin = bulletin;
+	}
+
+	protected Bulletin getBulletin()
+	{
+		return bulletin;
+	}
+
+	protected void showBulletin(Bulletin bulletinToShow)
+	{
+		setBulletin(bulletinToShow);
+		try
+		{
+			getView().copyDataFromBulletin(getBulletin());
+			getView().scrollToTop();
+		} 
+		catch (Exception e)
+		{
+			observer.unexpectedErrorDlg(e);
+		}
+	}
+	
+	protected boolean validateData()
 	{
 		try
 		{	
-			view.validateData();
+			getView().validateData();
 			return true;
 		}
 		catch(UiDateEditor.DateFutureException e)
 		{
-			observer.messageDlg(this,"ErrorDateInFuture", e.getlocalizedTag());
+			observer.messageDlg(getSwingFrame(),"ErrorDateInFuture", e.getlocalizedTag());
 		}
 		catch(DateRangeInvertedException e)
 		{
 			HashMap map = new HashMap();
 			map.put("#FieldLabel#", e.getFieldLabel());
-			observer.messageDlg(this, "ErrorDateRangeInverted", "", map);
+			observer.messageDlg("ErrorDateRangeInverted", "", map);
 		}
 		catch(DateTooEarlyException e)
 		{
 			HashMap map = new HashMap();
 			map.put("#FieldLabel#", e.getFieldLabel());
 			map.put("#MinimumDate#", observer.getLocalization().convertStoredDateToDisplay(e.getMinimumDate()));
-			observer.messageDlg(this, "ErrorDateTooEarly", "", map);
+			observer.messageDlg("ErrorDateTooEarly", "", map);
 		}
 		catch(DateTooLateException e)
 		{
 			HashMap map = new HashMap();
 			map.put("#FieldLabel#", e.getFieldLabel());
 			map.put("#MaximumDate#", observer.getLocalization().convertStoredDateToDisplay(e.getMaximumDate()));
-			observer.messageDlg(this, "ErrorDateTooLate", "", map);
+			observer.messageDlg("ErrorDateTooLate", "", map);
 		}
 		catch(UiBulletinComponentEditorSection.AttachmentMissingException e)
 		{
-			observer.messageDlg(this,"ErrorAttachmentMissing", e.getlocalizedTag());
+			observer.messageDlg(getSwingFrame(), "ErrorAttachmentMissing", e.getlocalizedTag());
 		}
 		catch(RequiredFieldIsBlankException e)
 		{
 			HashMap map = new HashMap();
 			map.put("#FieldLabel#", e.getFieldLabel());
-			observer.messageDlg(this, "ErrorRequiredFieldBlank", "", map);
+			observer.messageDlg("ErrorRequiredFieldBlank", "", map);
 		}
 		catch (Exception e) 
 		{
-			MartusLogger.logException(e);
-			observer.notifyDlg(this, "UnexpectedError");
+			observer.unexpectedErrorDlg(e);
 		}
 		return false;
 	}
 
-	private void saveBulletin(boolean userChoseSeal)
+	public void saveBulletin(boolean neverDeleteFromServer, BulletinState bulletinState)
 	{
-		Cursor originalCursor = getCursor();
-		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+		Cursor originalCursor = getSwingFrame().getCursor();
+		getSwingFrame().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		try 
 		{
 			MartusApp app = observer.getApp();
@@ -232,17 +257,18 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 			// NOTE: must copyDataToBulletin before setSealed or setDraft
 			// NOTE: after copyDataToBulletin, should not allow user to cancel
-			view.copyDataToBulletin(bulletin);
-			if(userChoseSeal)
+			getView().copyDataToBulletin(getBulletin());
+			getBulletin().changeState(bulletinState);
+			
+			if(neverDeleteFromServer)
 			{
-				store.removeBulletinFromFolder(draftOutbox, bulletin);
-				
-				bulletin.setSealed();
+				store.removeBulletinFromFolder(draftOutbox, getBulletin());
+				getBulletin().setImmutable();
 				outboxToUse = store.getFolderSealedOutbox();
 			}
 			else
 			{
-				bulletin.setDraft();
+				getBulletin().setMutable();
 				outboxToUse = draftOutbox;
 			}
 			saveBulletinAndUpdateFolders(store, outboxToUse);
@@ -251,114 +277,90 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		} 
 		catch (Exception e) 
 		{
-			e.printStackTrace();
-			observer.notifyDlg(this, "ErrorSavingBulletin");
+			observer.unexpectedErrorDlg(e);
 		} 
 		finally 
 		{
-			setCursor(originalCursor);
+			getSwingFrame().setCursor(originalCursor);
 		}
 	}
 
 	private void saveBulletinAndUpdateFolders(ClientBulletinStore store, BulletinFolder outboxToUse) throws Exception
 	{
-		observer.getApp().saveBulletin(bulletin, outboxToUse);
+		observer.getApp().saveBulletin(getBulletin(), outboxToUse);
 
 		observer.folderContentsHaveChanged(store.getFolderSaved());
 		observer.folderContentsHaveChanged(store.getFolderDiscarded());
-		observer.selectBulletinInCurrentFolderIfExists(bulletin.getUniversalId());
-		observer.bulletinContentsHaveChanged(bulletin);
+		observer.selectBulletinInCurrentFolderIfExists(getBulletin().getUniversalId());
+		observer.bulletinContentsHaveChanged(getBulletin());
 	}
 
 	public boolean wasBulletinSaved()
 	{
 		return wasBulletinSavedFlag;
 	}
-
-	// WindowListener interface
-	public void windowActivated(WindowEvent event) {}
-	public void windowClosed(WindowEvent event) {}
-	public void windowDeactivated(WindowEvent event) {}
-	public void windowDeiconified(WindowEvent event) {}
-	public void windowIconified(WindowEvent event) {}
-	public void windowOpened(WindowEvent event) {}
-
-	public void windowClosing(WindowEvent event)
-	{
-		try
-		{
-			closeWindowIfUserConfirms();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			observer.notifyDlg(this, "UnexpectedError");
-		}
-	}
-	// end WindowListener interface
-
-
-	public void encryptionChanged(boolean newState)
-	{
-		indicateEncrypted(newState);
-	}
-
-	public void bulletinLanguageHasChanged(String newLanguage) 
-	{
-		//TODO add this back when its working correctly
-/*		if(observer.getLocalization().doesLanguageRequirePadding(newLanguage))
-			LanguageOptions.setLanguagePaddingRequired();
-		else
-			LanguageOptions.setLanguagePaddingNotRequired();
-		getContentPane().remove(scroller);
-		addScrollerView();
-*/
-	}
 	
+	public void restoreFrameState()
+	{
+		setFrameLocation(observer.getBulletinEditorPosition());
+		setFrameSize(observer.getBulletinEditorDimension());
+		setFrameMaximized(observer.isBulletinEditorMaximized());
+	}
+
+	abstract protected void setFrameLocation(Point bulletinEditorPosition);
+	abstract protected void setFrameSize(Dimension bulletinEditorDimension);
+	abstract protected void setFrameMaximized(boolean bulletinEditorMaximized);
+
 	public void cleanupAndExit()
 	{
 		observer.doneModifyingBulletin();
-		saveEditorState(getSize(), getLocation());
+		
+		observer.setBulletinEditorDimension(getFrameSize());
+		observer.setBulletinEditorPosition(getFrameLocation());
+		observer.setBulletinEditorMaximized(isFrameMaximized());
+		observer.saveState();
+		
 		dispose();
 	}
+	
+	abstract protected Point getFrameLocation();
+	abstract protected Dimension getFrameSize();
+	abstract protected boolean isFrameMaximized();
 
-	public void saveEditorState(Dimension size, Point location)
-	{
-		boolean maximized = getExtendedState() == MAXIMIZED_BOTH;
-		observer.setBulletinEditorDimension(size);
-		observer.setBulletinEditorPosition(location);
-		observer.setBulletinEditorMaximized(maximized);
-		observer.saveState();
-	}
-
-	private void indicateEncrypted(boolean isEncrypted)
-	{
-		view.updateEncryptedIndicator(isEncrypted);
-	}
-
-	private void closeWindowIfUserConfirms() throws Exception
+	protected void closeWindowIfUserConfirms()
 	{	
-		boolean needConfirmation = view.isBulletinModified();
-		if(needConfirmation)
+		try
 		{
-			if(!observer.confirmDlg(this, "CancelModifyBulletin"))
-				return;
+			boolean needConfirmation = getView().isBulletinModified();
+			if(needConfirmation)
+			{
+				if(!observer.confirmDlg("CancelModifyBulletin"))
+					return;
+			}
+				
+			cleanupAndExit();
 		}
-			
-		cleanupAndExit();
+		catch (Exception e)
+		{
+			unexpectedErrorDlg(e);
+		}
+	}
+	
+	protected void setView(UiBulletinComponentInterface view)
+	{
+		this.view = view;
 	}
 
+	protected UiBulletinComponentInterface getView()
+	{
+		return view;
+	}
 
-	Bulletin bulletin;
-	UiMainWindow observer;
+	private Bulletin bulletin;
+	private UiMainWindow observer;
 
-	UiBulletinComponent view;
-	UiScrollPane scroller;
-
-	JButton send;
-	JButton draft;
-	JButton cancel;
-
-	boolean wasBulletinSavedFlag;
+	private UiBulletinComponentInterface view;
+	
+	private boolean wasBulletinSavedFlag;
 }
 

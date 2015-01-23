@@ -33,6 +33,7 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
+
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -40,9 +41,11 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
@@ -60,7 +63,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 	
 	public UiPrintBulletinDlg(UiMainWindow mainWindowToUse, boolean warnAboutPrivateData)
 	{
-		super(mainWindowToUse, "", true);
+		super(mainWindowToUse.getSwingFrame(), "", true);
 		mainWindow = mainWindowToUse;
 		allPrivateData = warnAboutPrivateData;
 		init();	
@@ -74,7 +77,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		//includePrivate = new UiCheckBox(localization.getFieldLabel("PrintPrivateData"));
 		ok = new UiButton(localization.getButtonLabel("Continue"));
 		ok.addActionListener(this);		
-		cancel = new UiButton(localization.getButtonLabel("cancel"));
+		cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(this);	
 		
 		publicOnly = new UiRadioButton(localization.getButtonLabel("PrintOnlyPublic"));
@@ -118,7 +121,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 		getContentPane().add(buttons, BorderLayout.SOUTH);
 		getRootPane().setDefaultButton(ok);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 	}
 	
@@ -150,7 +153,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 				HashMap tokenReplacement = new HashMap();
 				tokenReplacement.put("#PrintBack#", back);
 				tokenReplacement.put("#PrintContinue#", continuePrinting);
-				if(mainWindow.confirmCustomButtonsDlg(mainWindow, "PrintAllPrivateData", buttons, tokenReplacement))
+				if(mainWindow.confirmCustomButtonsDlg("PrintAllPrivateData", buttons, tokenReplacement))
 					return;
 			}	
 			pressContinue = true;

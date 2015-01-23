@@ -25,8 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step2;
 
-import java.awt.Desktop;
-import java.io.IOException;
 import java.util.Vector;
 
 import javafx.beans.value.ChangeListener;
@@ -34,6 +32,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.Pane;
 
@@ -63,21 +62,21 @@ public class FxSetupSettingsController extends FxStep2Controller
 		torSwitchButton.setSelected(getApp().getConfigInfo().useInternalTor());
 		torSwitchButton.switchOnProperty().addListener(new FxCheckboxListener());
 
-		ObservableList<ChoiceItem> dateFormatChoices = getDateFormatChoices();
+		ObservableList<ChoiceItem> dateFormatChoices = getDateFormatChoices(getLocalization());
 		dateFormatSequenceDropDown.setItems(FXCollections.observableArrayList(dateFormatChoices));
 		
 		MartusLocalization localization = getLocalization();
 		String dateFormatCode = localization.getMdyOrder();
 		selectItemByCode(dateFormatSequenceDropDown, dateFormatCode);
 		
-		ObservableList<ChoiceItem> dateDelimeterChoices = getDateDelimeterChoices();
+		ObservableList<ChoiceItem> dateDelimeterChoices = getDateDelimeterChoices(getLocalization());
 		dateDelimeterComboBox.setItems(FXCollections.observableArrayList(dateDelimeterChoices));
 	
 		String dateDelimeterCode = "" + localization.getDateDelimiter();
 		selectItemByCode(dateDelimeterComboBox, dateDelimeterCode);
 	}
 
-	private void selectItemByCode(ChoiceBox choiceBox, String code)
+	static public void selectItemByCode(ChoiceBox choiceBox, String code)
 	{
 		ObservableList<ChoiceItem> choices = choiceBox.getItems();
 		for(int i = 0; i < choices.size(); ++i)
@@ -101,6 +100,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 		configInfo.setForceBulletinsAllPrivate(true); //NOTE: is this the best place to do this?
 		saveDateFormatConfiguration();
 		configInfo.setUseInternalTor(torSwitchButton.isSelected());
+		configInfo.setAlwaysImmutableOnServer(alwaysImmutableOnServer.isSelected());
 		getMainWindow().saveConfigInfo();
 	}
 
@@ -136,22 +136,22 @@ public class FxSetupSettingsController extends FxStep2Controller
 		}
 	}
 
-	private ObservableList<ChoiceItem> getDateFormatChoices()
+	static public ObservableList<ChoiceItem> getDateFormatChoices(MartusLocalization localization)
 	{
 		Vector<ChoiceItem> choices = new Vector<ChoiceItem>();
-		choices.add(new ChoiceItem("ymd", UiPreferencesDlg.buildMdyLabel(getLocalization(), "ymd")));
-		choices.add(new ChoiceItem("mdy", UiPreferencesDlg.buildMdyLabel(getLocalization(), "mdy")));
-		choices.add(new ChoiceItem("dmy", UiPreferencesDlg.buildMdyLabel(getLocalization(), "dmy")));
+		choices.add(new ChoiceItem("ymd", UiPreferencesDlg.buildMdyLabel(localization, "ymd")));
+		choices.add(new ChoiceItem("mdy", UiPreferencesDlg.buildMdyLabel(localization, "mdy")));
+		choices.add(new ChoiceItem("dmy", UiPreferencesDlg.buildMdyLabel(localization, "dmy")));
 
 		return FXCollections.observableArrayList(choices);
 	}
 	
-	private ObservableList<ChoiceItem> getDateDelimeterChoices()
+	static public ObservableList<ChoiceItem> getDateDelimeterChoices(MartusLocalization localization)
 	{
 		Vector<ChoiceItem> choices = new Vector<ChoiceItem>();
-		choices.add(new ChoiceItem("/", getLocalization().getFieldLabel("DateDelimiterSlash")));
-		choices.add(new ChoiceItem("-", getLocalization().getFieldLabel("DateDelimiterDash")));
-		choices.add(new ChoiceItem(".", getLocalization().getFieldLabel("DateDelimiterDot")));
+		choices.add(new ChoiceItem("/", localization.getFieldLabel("DateDelimiterSlash")));
+		choices.add(new ChoiceItem("-", localization.getFieldLabel("DateDelimiterDash")));
+		choices.add(new ChoiceItem(".", localization.getFieldLabel("DateDelimiterDot")));
 
 		return FXCollections.observableArrayList(choices);
 	}
@@ -193,15 +193,7 @@ public class FxSetupSettingsController extends FxStep2Controller
 	@FXML 
 	private void OnLinkTorProject()
 	{
-		try
-		{
-			String url = "https://www.torproject.org";
-			Desktop.getDesktop().browse(java.net.URI.create(url));
-		} 
-		catch (IOException e)
-		{
-			MartusLogger.logException(e);
-		}
+		openLinkInDefaultBrowser("https://www.torproject.org");
 	}
 
 	@FXML
@@ -212,6 +204,9 @@ public class FxSetupSettingsController extends FxStep2Controller
 	
 	@FXML
 	protected Pane switchButtonPane;
+	
+	@FXML
+	private CheckBox alwaysImmutableOnServer;
 	
 	protected FxSwitchButton torSwitchButton;
 }

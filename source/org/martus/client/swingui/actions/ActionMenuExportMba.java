@@ -34,6 +34,7 @@ import org.martus.client.swingui.filefilters.MartusBulletinArchiveFileFilter;
 import org.martus.clientside.FormatFilter;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinZipUtilities;
+import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 
@@ -58,15 +59,7 @@ public class ActionMenuExportMba extends UiMenuAction
 				return;
 			if(bulletins.size()!=1)
 				mainWindow.notifyDlg("ExportMbaSingleBulletinOnly");
-			Bulletin bulletin = (Bulletin)bulletins.get(0);
-			
-			String defaultFilename = bulletin.toFileName();
-			FormatFilter filter = new MartusBulletinArchiveFileFilter(getLocalization());
-			File destination = getMainWindow().showFileSaveDialog("ExportMBA", defaultFilename, filter);
-			if(destination == null)
-				return;
-			
-			exportBulletinToMba(bulletin, destination);
+			exportMbaBulletin((Bulletin)bulletins.get(0));
 		} 
 		catch (Exception e)
 		{
@@ -74,10 +67,21 @@ public class ActionMenuExportMba extends UiMenuAction
 		}
 	}
 
-	private void exportBulletinToMba(Bulletin bulletin, File destination) throws Exception
+	private void exportMbaBulletin(Bulletin bulletin) throws Exception
 	{
-		ReadableDatabase db = mainWindow.getApp().getStore().getDatabase();
+		String defaultFilename = bulletin.toFileName();
+		FormatFilter filter = new MartusBulletinArchiveFileFilter(getLocalization());
+		File destination = getMainWindow().showFileSaveDialog("ExportMBA", defaultFilename, filter);
+		if(destination == null)
+			return;
+		exportBulletinToMba(mainWindow, bulletin, destination);
+	}
+
+	static public void exportBulletinToMba(UiMainWindow windowToUse, Bulletin bulletin, File destination) throws Exception
+	{
+		ReadableDatabase db = windowToUse.getApp().getStore().getDatabase();
 		DatabaseKey headerKey = DatabaseKey.createKey(bulletin.getUniversalId(), bulletin.getStatus()); 
-		BulletinZipUtilities.exportBulletinPacketsFromDatabaseToZipFile(db, headerKey, destination, mainWindow.getApp().getSecurity());
+		MartusCrypto security = windowToUse.getApp().getSecurity();
+		BulletinZipUtilities.exportBulletinPacketsFromDatabaseToZipFile(db, headerKey, destination, security);
 	}
 }

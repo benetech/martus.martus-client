@@ -87,7 +87,7 @@ public abstract class WorkerProgressThread extends Thread
 		
 		public void run()
 		{
-			result = mainWindow.confirmDlg(mainWindow, title, contents);
+			result = mainWindow.confirmDlg(title, contents);
 		}
 		
 		public boolean getResult()
@@ -121,7 +121,7 @@ public abstract class WorkerProgressThread extends Thread
 		
 		public void run()
 		{
-			mainWindow.notifyDlg(mainWindow, tag);
+			mainWindow.notifyDlg(tag);
 		}
 		UiMainWindow mainWindow;
 		String tag;

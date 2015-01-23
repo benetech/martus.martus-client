@@ -33,10 +33,16 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Vector;
 
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
+import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class ConfigInfo
@@ -65,13 +71,12 @@ public class ConfigInfo
 	public void setAllHQKeysXml(String allHQKeysXml){this.deprecatedAllHQKeysXml = allHQKeysXml;}
 	public void setBulletinVersioningAware(boolean newBulletinVersioningAware){this.bulletinVersioningAware = newBulletinVersioningAware;}
 	public void setDefaultHQKeysXml(String defaultHQKeysXml){this.deprecatedDefaultHQKeysXml = defaultHQKeysXml;}
-	public void setCheckForFieldOfficeBulletins(boolean newCheckForBulletins){checkForFieldOfficeBulletins = newCheckForBulletins;}
-	public void setCustomFieldTopSectionXml(String newXml)	{customFieldTopSectionXml = newXml;}
-	public void setCustomFieldBottomSectionXml(String newXml)	{customFieldBottomSectionXml = newXml;}
-	public void setUseZawgyiFont(boolean newUseZawgyiFont){useZawgyiFont = newUseZawgyiFont;}
+	public void deprecatedSetCustomFieldTopSectionXml(String newXml)	{customFieldTopSectionXml = newXml;}
+	public void deprecatedSetCustomFieldBottomSectionXml(String newXml)	{customFieldBottomSectionXml = newXml;}
+	public void setUseZawgyiFont(boolean newUseZawgyiFont){useZawgyiFontProperty.setValue(newUseZawgyiFont);}
 	public void setFieldDeskKeysXml(String newFieldDeskKeysXml) { deprecatedFieldDeskKeysXml = newFieldDeskKeysXml; }
 	public void setBackedUpImprovedKeypairShare(boolean newBackedUpImprovedKeypairShare) {backedUpImprovedKeypairShare = newBackedUpImprovedKeypairShare;}
-	public void setUseInternalTor(boolean newUseInternalTor) { useInternalTor = newUseInternalTor;}
+	public void setUseInternalTor(boolean newUseInternalTor) { useInternalTorProperty.setValue(newUseInternalTor);}
 	public void setMartusAccountAccessTokens(Vector newTokens) { martusAccountAccessTokens = newTokens;} 
 	public void setCurrentMartusAccountAccessToken(MartusAccountAccessToken newToken) 
 	{
@@ -80,13 +85,16 @@ public class ConfigInfo
 		setMartusAccountAccessTokens(tokenList);
 	}
 	public void setContactKeysXml(String contactKeysXml){this.contactKeysXml = contactKeysXml;}
-	public void setCurrentFormTemplateTitle(String netFormTemplateTitle) { currentFormTemplateTitle = netFormTemplateTitle; }
-	public void setCurrentFormTemplateDescription(String netFormTemplateDescription) { currentFormTemplateDescription = netFormTemplateDescription; }
-	public void setIsNetworkOnline(boolean newState) { isNetworkOnline = newState; }
+	public void deprecatedSetCurrentFormTemplateTitle(String netFormTemplateTitle) { currentFormTemplateTitle = netFormTemplateTitle; }
+	public void deprecatedSetCurrentFormTemplateDescription(String netFormTemplateDescription) { currentFormTemplateDescription = netFormTemplateDescription; }
+	public void setOnStartupServerOnlineStatus(boolean newState) { onStartupServerOnlineStatus = newState; }
 	public void setFolderLabelCode(String newCode) { folderLabelCode = newCode; }
 	public void setFolderLabelCustomName(String newName) { folderLabelCustomName = newName; }
 	public void setSyncStatusJson(String newSyncStatusJson) { syncStatusJson = newSyncStatusJson; }
-
+	public void setSyncFrequencyMinutes(String newSyncFrequency) { syncFrequencyMinutes = newSyncFrequency; }
+	public void setDidTemplateMigration(boolean newValue) { didTemplateMigrationProperty.setValue(newValue); }
+	public void setAlwaysImmutableOnServer(boolean newValue) { alwaysImmutableOnServer.setValue(newValue); }
+	public void setDateLastAskedUserToBackupKeypair(String newDate) {dateLastAskedUserToBackupKeypair.setValue(newDate); }
 
 	public void clearLegacyHQKey()						{ deprecatedLegacyHQKey = ""; }
 
@@ -109,14 +117,15 @@ public class ConfigInfo
 	public String getAllHQKeysXml()		{return deprecatedAllHQKeysXml;}
 	public boolean isBulletinVersioningAware()	{return bulletinVersioningAware;}
 	public String getDefaultHQKeysXml()		{return deprecatedDefaultHQKeysXml;}
-	public boolean getCheckForFieldOfficeBulletins() {return checkForFieldOfficeBulletins;}
-	public String getCustomFieldTopSectionXml()	{return customFieldTopSectionXml;}
-	public String getCustomFieldBottomSectionXml() {return customFieldBottomSectionXml;}
-	public boolean getUseZawgyiFont() {return useZawgyiFont;}
+	public String getNoLongerUsedCustomFieldTopSectionXml()	{return customFieldTopSectionXml;}
+	public String getNoLongerUsedCustomFieldBottomSectionXml() {return customFieldBottomSectionXml;}
+	public boolean getUseZawgyiFont() {return useZawgyiFontProperty.getValue();}
+	public Property<Boolean> getUseZawgyiFontProperty() {return useZawgyiFontProperty;}
 	public String getFieldDeskKeysXml() { return deprecatedFieldDeskKeysXml; }
 	public boolean hasBackedUpImprovedKeypairShare() {return backedUpImprovedKeypairShare;}
 	public boolean getDoZawgyiConversion() {return true;}
-	public boolean useInternalTor() {return useInternalTor;}
+	public boolean useInternalTor() {return useInternalTorProperty.getValue();}
+	public Property<Boolean> useInternalTorProperty() {return useInternalTorProperty;}
 	public Vector getMartusAccountAccessTokens() { return martusAccountAccessTokens;}
 	public boolean hasMartusAccountAccessToken() 
 	{
@@ -130,14 +139,17 @@ public class ConfigInfo
 		return (MartusAccountAccessToken)martusAccountAccessTokens.get(0);
 	} 
 	public String getContactKeysXml() {return contactKeysXml;}
-	public String getCurrentFormTemplateTitle()  { return currentFormTemplateTitle;}
-	public String getCurrentFormTemplateDescription()  { return currentFormTemplateDescription;}
-	public boolean isNetworkOnline() { return isNetworkOnline; }
+	public String getNoLongerUsedCurrentFormTemplateTitle()  { return currentFormTemplateTitle;}
+	public String getNoLongerUsedCurrentFormTemplateDescription()  { return currentFormTemplateDescription;}
+	public boolean getOnStartupServerOnlineStatus() { return onStartupServerOnlineStatus; }
 	public String getFolderLabelCode() { return folderLabelCode; }
 	public String getFolderLabelCustomName() { return folderLabelCustomName; }
 	public String getSyncStatusJson() {	return syncStatusJson; }
+	public String getSyncFrequencyMinutes() {	return syncFrequencyMinutes; }
+	public boolean getDidTemplateMigration() { return didTemplateMigrationProperty.getValue(); }
+	public boolean getAlwaysImmutableOnServer() { return alwaysImmutableOnServer.getValue(); }
+	public String getDateLastAskedUserToBackupKeypair() { return dateLastAskedUserToBackupKeypair.getValue(); }
 	
-
 	public boolean isServerConfigured()
 	{
 		return (serverName.length()>0 && serverPublicKey.length()>0);
@@ -146,6 +158,11 @@ public class ConfigInfo
 	public boolean isNewVersion()
 	{
 		return version > VERSION;
+	}
+	
+	public boolean shouldShowOneTimeNoticeFortheRemovalOfPublicBulletins() 
+	{
+		return  getVersion() < VERSION_MIGRATE_TO_PRIVATE_ALWAYS;
 	}
 	
 	public void clear()
@@ -163,7 +180,7 @@ public class ConfigInfo
 		deprecatedLegacyHQKey = "";
 		deprecatedSendContactInfoToServer = false;
 		serverCompliance = "";
-		customFieldLegacySpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultTopSetionFieldSpecs());
+		customFieldLegacySpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
 		forceBulletinsAllPrivate = false;
 		backedUpKeypairEncrypted = false;
 		backedUpKeypairShare = false;
@@ -172,18 +189,22 @@ public class ConfigInfo
 		deprecatedDefaultHQKeysXml = "";
 		customFieldTopSectionXml = "";
 		customFieldBottomSectionXml = "";
-		useZawgyiFont = false;
+		useZawgyiFontProperty = new SimpleBooleanProperty();
 		deprecatedFieldDeskKeysXml = "";
 		backedUpImprovedKeypairShare = false;
-		useInternalTor = false;
+		useInternalTorProperty = new SimpleBooleanProperty();
 		martusAccountAccessTokens.clear(); 
 		contactKeysXml = "";
 		currentFormTemplateTitle = "";
 		currentFormTemplateDescription = "";
-		isNetworkOnline = true;
+		onStartupServerOnlineStatus = true;
 		folderLabelCode = "";
 		folderLabelCustomName = "";
 		syncStatusJson = "";
+		syncFrequencyMinutes = "";
+		didTemplateMigrationProperty = new SimpleBooleanProperty();
+		alwaysImmutableOnServer = new SimpleBooleanProperty();
+		dateLastAskedUserToBackupKeypair = new SimpleStringProperty("");
 	}
 
 	public static ConfigInfo load(InputStream inputStream) throws IOException
@@ -240,7 +261,7 @@ public class ConfigInfo
 				loaded.customFieldBottomSectionXml = in.readUTF(); //legacyCustomFieldBottomSectionXml
 
 			if(loaded.version >= 13)
-				loaded.checkForFieldOfficeBulletins = in.readBoolean();
+				in.readBoolean(); //checkForFieldOfficeBulletins not used
 
 			if(loaded.version >= 14)
 			{
@@ -249,7 +270,7 @@ public class ConfigInfo
 			}
 
             if(loaded.version >= 15)
-                loaded.useZawgyiFont = in.readBoolean();
+                loaded.useZawgyiFontProperty.setValue(in.readBoolean());
             
             if(loaded.version >= 16)
             	loaded.deprecatedFieldDeskKeysXml = readLongString(in);
@@ -258,7 +279,7 @@ public class ConfigInfo
 				loaded.backedUpImprovedKeypairShare = in.readBoolean();
 			
 			if(loaded.version >= 18)
-				loaded.useInternalTor = in.readBoolean();
+				loaded.useInternalTorProperty.setValue(in.readBoolean());
 			
 			if(loaded.version >= 19)
 			{
@@ -296,7 +317,7 @@ public class ConfigInfo
 			}
 			if(loaded.version >= 22)
 			{
-				loaded.isNetworkOnline = in.readBoolean();
+				loaded.onStartupServerOnlineStatus = in.readBoolean();
 			}
 			if(loaded.version >= 23)
 			{
@@ -306,6 +327,23 @@ public class ConfigInfo
 			if(loaded.version >= 24)
 			{
 				loaded.syncStatusJson = readLongString(in);
+			}
+			if(loaded.version >= 25)
+			{
+				loaded.syncFrequencyMinutes = in.readUTF();
+			}
+			if(loaded.version >= 26)
+			{
+				loaded.didTemplateMigrationProperty.setValue(in.readBoolean());
+			}
+			if(loaded.version >= 27)
+			{
+				loaded.alwaysImmutableOnServer.setValue(in.readBoolean());
+			}
+			//Version 28 MIGRATE_TO_PRIVATE_ALWAYS
+			if(loaded.version >= 29)
+			{
+				loaded.dateLastAskedUserToBackupKeypair.setValue(in.readUTF());
 			}
 		}
 		finally
@@ -343,13 +381,13 @@ public class ConfigInfo
 			out.writeBoolean(bulletinVersioningAware);
 			out.writeUTF(deprecatedDefaultHQKeysXml);
 			out.writeUTF(""); //legacyCustomFieldBottomSectionXml
-			out.writeBoolean(checkForFieldOfficeBulletins);
+			out.writeBoolean(false); //checkForFieldOfficeBulletins
 			writeLongString(out, customFieldTopSectionXml);
 			writeLongString(out, customFieldBottomSectionXml);
-            out.writeBoolean(useZawgyiFont);
+            out.writeBoolean(useZawgyiFontProperty.getValue());
             writeLongString(out, deprecatedFieldDeskKeysXml);
 			out.writeBoolean(backedUpImprovedKeypairShare);
-			out.writeBoolean(useInternalTor);
+			out.writeBoolean(useInternalTorProperty.getValue());
 			int numTokens = martusAccountAccessTokens.size(); 
 			out.writeInt(numTokens);
 			for(int i = 0; i < numTokens; ++i)
@@ -359,15 +397,46 @@ public class ConfigInfo
 			writeLongString(out,contactKeysXml);
 			writeLongString(out, currentFormTemplateTitle);
 			writeLongString(out, currentFormTemplateDescription);
-			out.writeBoolean(isNetworkOnline);
+			out.writeBoolean(onStartupServerOnlineStatus);
 			out.writeUTF(folderLabelCode);
 			out.writeUTF(folderLabelCustomName);
 			writeLongString(out, syncStatusJson);
+			out.writeUTF(syncFrequencyMinutes);
+			out.writeBoolean(didTemplateMigrationProperty.getValue());
+			out.writeBoolean(alwaysImmutableOnServer.getValue());
+			out.writeUTF(dateLastAskedUserToBackupKeypair.getValue());
 		}
 		finally
 		{
 			out.close();
 		}
+	}
+	
+	public boolean hasLegacyFormTemplate()
+	{
+		if(getDidTemplateMigration())
+			return false;
+		
+		if(getNoLongerUsedCurrentFormTemplateTitle().length() > 0)
+			return true;
+		if(getNoLongerUsedCurrentFormTemplateDescription().length() > 0)
+			return true;
+		if(getNoLongerUsedCustomFieldTopSectionXml().length() > 0)
+			return true;
+		if(getNoLongerUsedCustomFieldBottomSectionXml().length() > 0)
+			return true;
+		
+		return false;
+	}
+
+	public FormTemplate getLegacyFormTemplate() throws Exception
+	{
+		String title = getNoLongerUsedCurrentFormTemplateTitle();
+		String description = getNoLongerUsedCurrentFormTemplateDescription();
+		FieldSpecCollection top = MartusApp.getCustomFieldSpecsTopSection(this);
+		FieldSpecCollection bottom = MartusApp.getCustomFieldSpecsBottomSection(this);
+		FormTemplate existing = new FormTemplate(title, description, top, bottom);
+		return existing;
 	}
 
 	public static void writeLongString(DataOutputStream out, String data) throws IOException
@@ -387,7 +456,7 @@ public class ConfigInfo
 		return new String(bytes, "UTF-8");
 	}
 	
-	public static final short VERSION = 24;
+	public static final short VERSION = 29;
 
 	//Version 1
 	private short version;
@@ -424,18 +493,18 @@ public class ConfigInfo
 	//Version 12
 		// was: private String legacyCustomFieldBottomSectionXml;
 	//Version 13
-	private boolean checkForFieldOfficeBulletins;
+		// was: private boolean checkForFieldOfficeBulletins;
 	//Version 14
 	private String customFieldTopSectionXml;
 	private String customFieldBottomSectionXml;
     //Version 15
-    private boolean useZawgyiFont;
+    private Property <Boolean>  useZawgyiFontProperty; 
     //Version 16
     private String deprecatedFieldDeskKeysXml;
 	//Version 17
 	private boolean backedUpImprovedKeypairShare;
 	//Version 18
-	private boolean useInternalTor;
+	private Property <Boolean> useInternalTorProperty;
 	//Version 19
 	private Vector martusAccountAccessTokens;
 	//Version 20
@@ -445,10 +514,20 @@ public class ConfigInfo
 	private String currentFormTemplateTitle;
 	private String currentFormTemplateDescription;
 	//Version 22
-	private boolean isNetworkOnline;
+	private boolean onStartupServerOnlineStatus;
 	//Version 23
 	private String folderLabelCode;
 	private String folderLabelCustomName;
 	//Version 24
 	private String syncStatusJson;
+	//Version 25
+	private String syncFrequencyMinutes;
+	//Version 26
+	private Property<Boolean> didTemplateMigrationProperty;
+	//Version 27
+	private Property<Boolean> alwaysImmutableOnServer;
+	//Version 28
+	public static final short VERSION_MIGRATE_TO_PRIVATE_ALWAYS = 28;
+	//Version 29
+	private Property<String> dateLastAskedUserToBackupKeypair;
 }

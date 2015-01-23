@@ -44,6 +44,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiNotifyDlg;
@@ -59,7 +60,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 {
 	public UiTemplateDlg(UiMainWindow owner, ConfigInfo infoToUse, File defaultDetailsFileToUse)
 	{
-		super(owner, "", true);
+		super(owner.getSwingFrame(), "", true);
 		info = infoToUse;
 		mainWindow = owner;
 		defaultDetailsFile = defaultDetailsFileToUse;
@@ -67,9 +68,9 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		fontHelper = new UiFontEncodingHelper(info.getDoZawgyiConversion());
 		UiLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle("BulletinTemplate"));
-		okButton = new UiButton(localization.getButtonLabel("ok"));
+		okButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 		okButton.addActionListener(this);
-		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
+		JButton cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(this);
 		JButton help = new UiButton(localization.getButtonLabel("help"));
 		help.addActionListener(new helpHandler());
@@ -99,7 +100,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		getContentPane().add(panel);
 		
 		getRootPane().setDefaultButton(okButton);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 	}
 
 
@@ -114,11 +115,11 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 			String helpMsgExample1 = localization.getFieldLabel("HelpExample1DefaultDetails");
 			String helpMsgExample2 = localization.getFieldLabel("HelpExample2DefaultDetails");
 			String helpMsgExampleEtc = localization.getFieldLabel("HelpExampleEtcDefaultDetails");
-			String ok = localization.getButtonLabel("ok");
+			String ok = localization.getButtonLabel(EnglishCommonStrings.OK);
 			String[] contents = {helpMsg, "", "",helpMsgExample, helpMsgExample1, "", helpMsgExample2, "", helpMsgExampleEtc};
 			String[] buttons = {ok};
 
-			new UiNotifyDlg(mainWindow, title, contents, buttons);
+			new UiNotifyDlg(title, contents, buttons);
 		}
 	}
 

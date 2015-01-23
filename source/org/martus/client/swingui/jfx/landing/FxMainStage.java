@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2014, Beneficent
+monitoring software. Copyright (C) 2015, Beneficent
 Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
@@ -25,40 +25,13 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing;
 
-import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxInSwingContentController;
-import org.martus.client.swingui.jfx.generic.FxInSwingFrameStage;
-import org.martus.client.swingui.jfx.generic.FxScene;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
+import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 
-public class FxMainStage extends FxInSwingFrameStage
+public interface FxMainStage
 {
-	public FxMainStage(UiMainWindow mainWindowToUse)
-	{
-		super(mainWindowToUse);
-		
-		setShellController(new FxLandingShellController(getMainWindow()));
-		setCurrentController(new BulletinsListController(getMainWindow()));
-	}
 
-	@Override
-	public void showCurrentScene() throws Exception
-	{
-		FxInSwingContentController contentPaneController = getCurrentController();
+	public BulletinsListController getBulletinsListController();
+	public FxCaseManagementController getCaseManager();
 
-		showCurrentPage(contentPaneController);
-	}
-
-	@Override
-	protected FxScene createScene() throws Exception
-	{
-		return new FxScene(getExternalFxmlDirectory(), "Landing.css");
-	}
-
-	@Override
-	public void close()
-	{
-		// FIXME: Should we actually close mainWindow here, or 
-		// does that not make any sense?
-	}
 }

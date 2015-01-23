@@ -28,7 +28,6 @@ package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
 
-import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 
 public class ActionToolbarSearch extends UiButtonAction
@@ -40,11 +39,7 @@ public class ActionToolbarSearch extends UiButtonAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		SortableBulletinList bulletinIdsFromSearch = doSearch();
-		if(bulletinIdsFromSearch == null)
-			return;
-		
-		mainWindow.updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
+		new ActionMenuSearch(getMainWindow()).doAction();
 	}
 
 }

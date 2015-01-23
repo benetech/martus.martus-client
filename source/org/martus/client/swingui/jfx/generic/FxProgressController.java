@@ -48,6 +48,12 @@ public class FxProgressController extends FxBackgroundActivityController impleme
 	}
 
 	@Override
+	public void finished()
+	{
+		Platform.runLater(new CloseThisDialog());
+	}
+
+	@Override
 	public void forceCloseDialog()
 	{
 		super.forceCloseDialog();

@@ -35,6 +35,7 @@ import javax.swing.JPanel;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiWrappedTextPanel;
@@ -44,7 +45,7 @@ public class UiReportFieldChooserDlg extends UIReportFieldDlg
 {
 	public UiReportFieldChooserDlg(UiMainWindow mainWindow, FieldSpec[] specsToUse)
 	{
-		super(mainWindow);
+		super(mainWindow.getSwingFrame());
 		setModal(true);
 		
 		String dialogTag = "ChooseReportFields";
@@ -54,9 +55,9 @@ public class UiReportFieldChooserDlg extends UIReportFieldDlg
 
 		fieldSelector = new UiReportFieldSelectorPanel(mainWindow, specsToUse);
 		
-		UiButton okButton = new UiButton(localization.getButtonLabel("ok"));
+		UiButton okButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 		okButton.addActionListener(new OkButtonHandler());
-		UiButton cancelButton = new UiButton(localization.getButtonLabel("cancel"));
+		UiButton cancelButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancelButton.addActionListener(new CancelButtonHandler());
 		Box buttonBar = Box.createHorizontalBox();
 		Component[] buttons = {Box.createHorizontalGlue(), okButton, cancelButton};
@@ -69,7 +70,7 @@ public class UiReportFieldChooserDlg extends UIReportFieldDlg
 
 		getContentPane().add(panel);
 		pack();
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 	}
 	
 	

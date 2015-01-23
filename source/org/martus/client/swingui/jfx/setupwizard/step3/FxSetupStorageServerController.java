@@ -31,9 +31,9 @@ import javafx.scene.control.Hyperlink;
 
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxWizardStage;
+import org.martus.client.swingui.jfx.contacts.FxWizardAddContactsController;
+import org.martus.client.swingui.jfx.generic.FxInSwingWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
-import org.martus.client.swingui.jfx.setupwizard.step4.FxWizardAddContactsController;
 import org.martus.client.swingui.jfx.setupwizard.step5.FxSetupImportTemplatesController;
 import org.martus.common.MartusLogger;
 
@@ -92,7 +92,7 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 	@FXML
 	public void setupServerLater()
 	{
-		FxWizardStage wizardStage = getWizardStage();
+		FxInSwingWizardStage wizardStage = getWizardStage();
 		try
 		{
 			getApp().setServerInfo("", "", "");
@@ -110,17 +110,17 @@ public class FxSetupStorageServerController extends FxSetupWizardAbstractServerS
 	public void useDefaultServer()
 	{
 		attemptToConnect(getDefaultServerIp(), getDefaultServerPublicKey(), false);
-		FxWizardStage wizardStage = getWizardStage();
+		FxInSwingWizardStage wizardStage = getWizardStage();
 		if(wizardStage.hasServerAvailabilityBeenInitialized())
 			getWizardNavigationHandler().doNext();
 	}
 	
-	private String getDefaultServerIp()
+	static public String getDefaultServerIp()
 	{
 		return IP_FOR_SL1_IE;
 	}
 
-	private String getDefaultServerPublicKey()
+	static public String getDefaultServerPublicKey()
 	{
 		return PUBLIC_KEY_FOR_SL1_IE;
 	}

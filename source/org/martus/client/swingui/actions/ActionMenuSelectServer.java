@@ -33,8 +33,8 @@ import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiConfigServerDlg;
 import org.martus.clientside.ClientSideNetworkGateway;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.Exceptions.NetworkOfflineException;
-import org.martus.swing.UiNotifyDlg;
 
 public class ActionMenuSelectServer extends UiMenuAction implements ActionDoer
 {
@@ -52,9 +52,6 @@ public class ActionMenuSelectServer extends UiMenuAction implements ActionDoer
 	{
 		getMainWindow().offerToCancelRetrieveInProgress();
 		if(getMainWindow().isRetrieveInProgress())
-			return;
-		
-		if(!getMainWindow().reSignIn())
 			return;
 		
 		getMainWindow().inConfigServer = true;
@@ -121,11 +118,11 @@ public class ActionMenuSelectServer extends UiMenuAction implements ActionDoer
 			else
 				uploadGranted = getLocalization().getFieldLabel("ServerDeclinesUploads");
 		
-			String ok = getLocalization().getButtonLabel("ok");
+			String ok = getLocalization().getButtonLabel(EnglishCommonStrings.OK);
 			String[] contents = {serverSelected, uploadGranted};
 			String[] buttons = {ok};
 		
-			new UiNotifyDlg(getMainWindow().getCurrentActiveFrame(), title, contents, buttons);
+			getMainWindow().notifyDlg(title, contents, buttons);
 			
 			getMainWindow().forceRecheckOfUidsOnServer();
 			getStore().clearOnServerLists();

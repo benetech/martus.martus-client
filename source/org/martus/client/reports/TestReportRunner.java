@@ -59,6 +59,7 @@ import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeLanguage;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
@@ -277,7 +278,9 @@ public class TestReportRunner extends TestCaseEnhanced
 		dropdown.setLabel("Dropdown");
 		dropdown.addReusableChoicesCode(choices.getCode());
 		specs.add(dropdown);
-		app.getStore().setTopSectionFieldSpecs(specs);
+		FormTemplate template = new FormTemplate("title", "", specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		app.getStore().saveNewFormTemplate(template);
+		app.getStore().setFormTemplate(template.getTitle());
 		
 		Bulletin b1 = app.createBulletin();
 		b1.set(dropdown.getTag(), "a");

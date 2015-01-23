@@ -48,6 +48,7 @@ import javax.swing.table.TableModel;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MiniLocalization;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.MartusParagraphLayout;
@@ -65,7 +66,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 {
 	public UiServerSummariesDlg(UiMainWindow owner, RetrieveTableModel tableModel, String windowTitleTag)
 	{
-		super(owner, owner.getLocalization().getWindowTitle(windowTitleTag), true);
+		super(owner.getSwingFrame(), owner.getLocalization().getWindowTitle(windowTitleTag), true);
 		mainWindow = owner;
 		model = tableModel;
 		displayBulletinVersionRadioButtons = true;
@@ -100,7 +101,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 
 		getContentPane().add(topPanel);	
 		setScreenSize();				
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setVisible(true);
 	}
 
@@ -121,7 +122,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 	{
 		JButton ok = new UiButton(localization.getButtonLabel(okButtonTag));
 		ok.addActionListener(new OkHandler());
-		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
+		JButton cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(new CancelHandler());
 		JButton preview = new UiButton(localization.getButtonLabel("Preview"));
 		preview.addActionListener(new PreviewHandler());

@@ -48,8 +48,8 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.bulletin.BulletinXmlExportImportConstants;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
-import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
+import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
@@ -148,7 +148,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	
 	public void testExportingFieldSpecs() throws Exception
 	{
-		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		FieldSpecCollection bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		String choice1 = "choice A";
 		String choice2 = "choice B";
@@ -311,7 +311,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 				"</GridSpecDetails>" +
 				"</Field></CustomFields>";
 		GridFieldSpec newSpec = (GridFieldSpec)FieldCollection.parseXml(xmlFieldType).get(0); 
-		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray(), newSpec);				
+		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSectionFieldSpecs().asArray(), newSpec);				
 		
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.setAllPrivate(false);
@@ -340,7 +340,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	
 	public void testExportReusableChoices() throws Exception
 	{
-		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		String choicesCode = "ChoicesCode";
 		String choicesLabel = "ChoicesLabel";
 		String choice1Code = "a";
@@ -398,13 +398,13 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		Bulletin version1 = new Bulletin(store.getSignatureGenerator());
 		version1.getField(Bulletin.TAGTITLE).setData(VERSION_1_TITLE);
-		version1.setStatus(Bulletin.STATUSSEALED);
+		version1.setStatus(Bulletin.STATUSIMMUTABLE);
 		app.getStore().saveBulletin(version1);
 		
 		Bulletin version2 = new Bulletin(store.getSignatureGenerator());
 		version2.createDraftCopyOf(version1, database);
 		version2.getField(Bulletin.TAGTITLE).setData(VERSION_2_TITLE);
-		version2.setStatus(Bulletin.STATUSSEALED);
+		version2.setStatus(Bulletin.STATUSIMMUTABLE);
 		app.getStore().saveBulletin(version2);
 
 		Bulletin version3 = new Bulletin(store.getSignatureGenerator());
@@ -529,7 +529,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	{
 		Bulletin b1 = new Bulletin(store.getSignatureGenerator());
 		b1.setAllPrivate(false);
-		b1.setSealed();
+		b1.setImmutable();
 		Bulletin b2 = new Bulletin(store.getSignatureGenerator());
 		b2.setAllPrivate(false);
 
@@ -571,8 +571,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		app.getStore().saveBulletin(imported2);
 		
 		ReadableDatabase db = app.getStore().getDatabase();
-		File imported1File = imported1.getAsFileProxy(imported1.getPublicAttachments()[0],db,Bulletin.STATUSDRAFT).getFile();
-		File imported2File = imported2.getAsFileProxy(imported2.getPublicAttachments()[0],db,Bulletin.STATUSDRAFT).getFile();
+		File imported1File = imported1.getAsFileProxy(imported1.getPublicAttachments()[0],db,Bulletin.STATUSMUTABLE).getFile();
+		File imported2File = imported2.getAsFileProxy(imported2.getPublicAttachments()[0],db,Bulletin.STATUSMUTABLE).getFile();
 		assertEquals("attachment 1's data doesn't match?", UnicodeReader.getFileContents(sampleAttachmentFile1), UnicodeReader.getFileContents(imported1File));
 		assertEquals("attachment 2's data doesn't match?", UnicodeReader.getFileContents(sampleAttachmentFile2), UnicodeReader.getFileContents(imported2File));
 	}
@@ -651,7 +651,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 			"<Label>" + label2 + "</Label></Field></CustomFields>";
 		FieldSpec newSpec2 = FieldCollection.parseXml(xmlFieldType).get(0); 
 		FieldSpec[] extraFieldSpecs = {newSpec1, newSpec2};
-		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray(), extraFieldSpecs);
+		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSectionFieldSpecs().asArray(), extraFieldSpecs);
 		
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.setAllPrivate(false);
@@ -708,7 +708,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		FieldSpec newSpec2 = FieldCollection.parseXml(xmlFieldType).get(0); 
 
 		FieldSpec[] extraFieldSpecs = {newSpec1, newSpec2};
-		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray(), extraFieldSpecs);
+		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSectionFieldSpecs().asArray(), extraFieldSpecs);
 		
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.setAllPrivate(false);				
@@ -794,10 +794,33 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertNotContains("exported raw flexidate?", rawDateRangeString, result);
 		assertContains("didn't write good date range?", "2005-05-01,2005-05-30", result);
 	}
-	
+
+// TODO: uncomment and implement based on Barbra's decision
+//	public void testExportSnapshot() throws Exception
+//	{
+//		Bulletin b = new Bulletin(store.getSignatureGenerator());
+//		final String exportWithoutSnapshot = getExportedXml(b);
+//		assertNotContains("<Snapshot></Snapshot>", exportWithoutSnapshot);
+//		
+//		b.changeState(BulletinState.STATE_SNAPSHOT);
+//		final String exportWithSnapshot = getExportedXml(b);
+//		assertContains("<Snapshot></Snapshot>", exportWithSnapshot);
+//	}
+//	
+//	public void testExportImmutableOnServer() throws Exception
+//	{
+//		Bulletin b = new Bulletin(store.getSignatureGenerator());
+//		final String exportWithoutSnapshot = getExportedXml(b);
+//		assertNotContains("<ImmutableOnServer></ImmutableOnServer>", exportWithoutSnapshot);
+//		
+//		b.setImmutableOnServer(true);
+//		final String exportWithSnapshot = getExportedXml(b);
+//		assertContains("<ImmutableOnServer></ImmutableOnServer>", exportWithSnapshot);
+//	}
+
 	public void testEndToEndExportAndThenImport() throws Exception
 	{
-		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		FieldSpecCollection bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		String choice1 = "choice A";
 		String choice2 = "choice B";
@@ -857,7 +880,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		exported.set(dropdownTag, choice2);
 		exported.set(booleanTag, "False");
 		exported.set(BulletinConstants.TAGPRIVATEINFO, "Private Data");
-		exported.setSealed();
+		exported.setImmutable();
 
 		String localId1 = "pretend local id";
 		String localId2 = "another fake local id";
@@ -880,8 +903,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertEquals(exported.getTopSectionFieldSpecs(), imported.getTopSectionFieldSpecs());
 		assertEquals(exported.getBottomSectionFieldSpecs(), imported.getBottomSectionFieldSpecs());
 		
-		assertTrue("exported should be a sealed", exported.isSealed());
-		assertTrue("Import should always be a draft", imported.isDraft());
+		assertTrue("exported should be a immutable", exported.isImmutable());
+		assertTrue("Import should always be mutable", imported.isMutable());
 		assertFalse("exported should be public", exported.isAllPrivate());
 		assertTrue("Import should always be private", imported.isAllPrivate());
 		assertEquals("exported should be at version 3", 3, exported.getVersion());
@@ -896,7 +919,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	{
 		Bulletin b1 = new Bulletin(store.getSignatureGenerator());
 		b1.setAllPrivate(false);
-		b1.setSealed();
+		b1.setImmutable();
 
 		File sampleAttachmentFile1 = addNewPublicSampleAttachment(b1, "Attachment 1's Data");
 		File sampleAttachmentFile2 = addNewPublicSampleAttachment(b1, "Attachment 2's Data");
@@ -938,7 +961,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		
 		app.getStore().saveBulletin(imported1);
 		ReadableDatabase db = app.getStore().getDatabase();
-		File imported2File = imported1.getAsFileProxy(imported1.getPublicAttachments()[0],db,Bulletin.STATUSDRAFT).getFile();
+		File imported2File = imported1.getAsFileProxy(imported1.getPublicAttachments()[0],db,Bulletin.STATUSMUTABLE).getFile();
 		assertEquals("attachment 2's data doesn't match?", UnicodeReader.getFileContents(sampleAttachmentFile2), UnicodeReader.getFileContents(imported2File));
 	}
 	

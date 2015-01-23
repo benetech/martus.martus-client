@@ -36,6 +36,7 @@ import javax.swing.JLabel;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
@@ -47,7 +48,7 @@ public class UiRemoveServerDlg extends JDialog implements ActionListener
 {
 	public UiRemoveServerDlg(UiMainWindow owner,ConfigInfo info)
 	{
-		super(owner, "", true);
+		super(owner.getSwingFrame(), "", true);
 		UiLocalization localization = owner.getLocalization();			
 		
 		setTitle(localization.getWindowTitle("RemoveServer"));
@@ -65,9 +66,9 @@ public class UiRemoveServerDlg extends JDialog implements ActionListener
 		serversField.setPreferredSize(new Dimension(10,20));
 		serversField.setEditable(false);						
 
-		yes = new UiButton(localization.getButtonLabel("yes"));		
+		yes = new UiButton(localization.getButtonLabel(EnglishCommonStrings.YES));		
 		yes.addActionListener(this);
-		JButton no = new UiButton(localization.getButtonLabel("no"));
+		JButton no = new UiButton(localization.getButtonLabel(EnglishCommonStrings.NO));
 		no.addActionListener(this);
 
 		UiParagraphPanel panel = new UiParagraphPanel();
@@ -79,7 +80,7 @@ public class UiRemoveServerDlg extends JDialog implements ActionListener
 
 		getContentPane().add(panel);
 		getRootPane().setDefaultButton(yes);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setVisible(true);
 	}	
 

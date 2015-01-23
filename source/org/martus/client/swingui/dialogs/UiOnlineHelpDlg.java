@@ -69,7 +69,7 @@ public class UiOnlineHelpDlg extends JDialog
 {
 	public UiOnlineHelpDlg(UiMainWindow owner, String baseTag, InputStream fileStream, String tagMessage, InputStream fileStreamToc, String tagTOCMessage)
 	{
-		super(owner, "", true);
+		super(owner.getSwingFrame(), "", true);
 		mainWindow = owner;
 		previouslyFoundIndex = -1;
 		tocList = null;
@@ -133,7 +133,7 @@ public class UiOnlineHelpDlg extends JDialog
 		getRootPane().setDefaultButton(close);
 		close.requestFocus();
 
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 	}
 
@@ -241,7 +241,7 @@ public class UiOnlineHelpDlg extends JDialog
 			{
 				HashMap tokenReplacement = new HashMap();
 				tokenReplacement.put("#SearchString#", searchString);
-				if(mainWindow.confirmDlg(mainWindow, "helpStringNotFound", tokenReplacement))
+				if(mainWindow.confirmDlg("helpStringNotFound", tokenReplacement))
 				{
 					msgArea.setCaretPosition(0);
 					previouslyFoundIndex = 0;

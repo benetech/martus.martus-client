@@ -51,20 +51,21 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.filefilters.MCTFileFilter;
-import org.martus.clientside.FormatFilter;
+import org.martus.client.swingui.jfx.common.ExportTemplateDoer;
 import org.martus.clientside.MtfAwareLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.Exceptions.ServerNotCompatibleException;
 import org.martus.common.FieldCollection;
 import org.martus.common.FieldDeskKeys;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKeys;
+import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.fieldspec.BulletinFieldSpecs;
 import org.martus.common.fieldspec.CustomFieldError;
-import org.martus.common.fieldspec.CustomFieldTemplate;
-import org.martus.common.fieldspec.CustomFieldTemplate.FutureVersionException;
+import org.martus.common.fieldspec.FormTemplate;
+import org.martus.common.fieldspec.FormTemplate.FutureVersionException;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
@@ -79,9 +80,9 @@ import org.martus.util.inputstreamwithseek.FileInputStreamWithSeek;
 
 public class UiCustomFieldsDlg extends JDialog
 {
-	public UiCustomFieldsDlg(UiMainWindow owner, BulletinFieldSpecs bulletinFieldSpecs)
+	public UiCustomFieldsDlg(UiMainWindow owner, FormTemplate existingTemplate)
 	{
-		super(owner, "", true);
+		super(owner.getSwingFrame(), "", true);
 		mainWindow = owner; 
 		security = mainWindow.getApp().getSecurity();		
 		String baseTag = "CustomFields";
@@ -105,7 +106,7 @@ public class UiCustomFieldsDlg extends JDialog
 		
 		JButton ok = new UiButton(localization.getButtonLabel("input" + baseTag + "ok"));
 		ok.addActionListener(new OkHandler());
-		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
+		JButton cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(new CancelHandler());
 		JButton help = new UiButton(localization.getButtonLabel("customHelp"));
 		help.addActionListener(new CustomHelpHandler());
@@ -120,22 +121,22 @@ public class UiCustomFieldsDlg extends JDialog
 		Component buttonsToAdd[] = {vBox, Box.createHorizontalGlue(), ok, cancel, help};  
 		Utilities.addComponentsRespectingOrientation(buttons, buttonsToAdd);
 		
-		topSectionXmlTextArea = createXMLTextArea(bulletinFieldSpecs.getTopSectionSpecs());
+		topSectionXmlTextArea = createXMLTextArea(existingTemplate.getTopFields());
 		topSectionXmlTextArea.setCaretPosition(0);
 		UiScrollPane topSectionTextPane = new UiScrollPane(topSectionXmlTextArea);
 
-		bottomSectionXmlTextArea = createXMLTextArea(bulletinFieldSpecs.getBottomSectionSpecs());
+		bottomSectionXmlTextArea = createXMLTextArea(existingTemplate.getBottomFields());
 		bottomSectionXmlTextArea.setCaretPosition(0);
 		UiScrollPane bottomSectionTextPane = new UiScrollPane(bottomSectionXmlTextArea);
 
 		UiLabel titleLabel = new UiLabel(localization.getFieldLabel("inputCustomFieldsTitle"));
 		titleField = new UiTextField();
-		titleField.setText(bulletinFieldSpecs.getTitleOfSpecs());
+		titleField.setText(existingTemplate.getTitle());
 		Box titleBox = createLabelAndTextFieldBox(titleLabel, titleField);
 
 		UiLabel descriptionLabel = new UiLabel(localization.getFieldLabel("inputCustomFieldsDescription"));
 		descriptionField = new UiTextField();
-		descriptionField.setText(bulletinFieldSpecs.getDescriptionOfSpecs());
+		descriptionField.setText(existingTemplate.getDescription());
 		Box descriptionBox = createLabelAndTextFieldBox(descriptionLabel, descriptionField);
 		
 		JPanel customFieldsPanel = new JPanel();
@@ -158,7 +159,7 @@ public class UiCustomFieldsDlg extends JDialog
 	
 		getContentPane().add(customFieldsPanel);
 		getRootPane().setDefaultButton(ok);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 	}
 
@@ -184,6 +185,13 @@ public class UiCustomFieldsDlg extends JDialog
 		{
 			try 
 			{
+				titleResult = titleField.getText();
+				if(titleResult.length() == 0)
+				{
+					mainWindow.notifyDlg("Cannot save template without a title (JavaFX won't have this error dialog");
+					return;
+				}
+
 				String topText = topSectionXmlTextArea.getText();
 				String bottomText = bottomSectionXmlTextArea.getText();
 				topText = fontHelper.getStorable(topText);
@@ -194,7 +202,6 @@ public class UiCustomFieldsDlg extends JDialog
 					return;
 				topSectionXmlResult = topText;
 				bottomSectionXmlResult = bottomText;
-				titleResult = titleField.getText();
 				descriptionResult = descriptionField.getText();
 			} 
 			catch (Exception e) 
@@ -221,6 +228,8 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
+			titleResult = "";
+			descriptionResult = "";
 			topSectionXmlResult = "";
 			bottomSectionXmlResult = "";
 			dispose();
@@ -236,7 +245,7 @@ public class UiCustomFieldsDlg extends JDialog
 			if(importFile == null)
 				return;
 
-			CustomFieldTemplate template = new CustomFieldTemplate();
+			FormTemplate template = new FormTemplate();
 			
 			
 			try
@@ -253,8 +262,8 @@ public class UiCustomFieldsDlg extends JDialog
 				
 				if(imported)
 				{
-					topSectionXmlTextArea.setText(template.getImportedTopSectionText());
-					bottomSectionXmlTextArea.setText(template.getImportedBottomSectionText());
+					topSectionXmlTextArea.setText(template.getTopSectionXml());
+					bottomSectionXmlTextArea.setText(template.getBottomSectionXml());
 					titleField.setText(template.getTitle());
 					descriptionField.setText(template.getDescription());
 					String signedBy = template.getSignedBy();
@@ -276,7 +285,7 @@ public class UiCustomFieldsDlg extends JDialog
 			mainWindow.notifyDlg("ErrorImportingCustomizationTemplate");
 		}
 
-		private boolean importFormTemplate(File importFile, CustomFieldTemplate template) throws IOException, FutureVersionException
+		private boolean importFormTemplate(File importFile, FormTemplate template) throws IOException, FutureVersionException
 		{
 			FileInputStreamWithSeek inputStream = new FileInputStreamWithSeek(importFile);
 			try
@@ -350,32 +359,39 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			if(!validateXml(topSectionXmlTextArea.getText(), bottomSectionXmlTextArea.getText()))
+			try
 			{
+				String title = titleField.getText();
+				String description = descriptionField.getText();
+				String topXml = topSectionXmlTextArea.getText();
+				String bottomXml = bottomSectionXmlTextArea.getText();
+	
+				if(!validateXml(topXml, bottomXml))
+				{
+					mainWindow.notifyDlg("ErrorExportingCustomizationTemplate");
+					return;
+				}
+				if(!checkForDuplicateLabels())
+					return;
+				
+				FormTemplate template = createTemplate(title, description, topXml, bottomXml);
+
+				ExportTemplateDoer doer = new ExportTemplateDoer(mainWindow, template);
+				doer.doAction();
+			} 
+			catch (Exception e)
+			{
+				MartusLogger.logException(e);
 				mainWindow.notifyDlg("ErrorExportingCustomizationTemplate");
-				return;
 			}
-			if(!checkForDuplicateLabels())
-				return;
-			
-			FormatFilter filter = new MCTFileFilter(mainWindow.getLocalization());
-			File destFile = mainWindow.showFileSaveDialog("ExportCustomization", filter);
-			if(destFile == null)
-				return;
-			
-			CustomFieldTemplate template = new CustomFieldTemplate();
-			MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
-			String formTemplateTitle = titleField.getText();
-			String formTemplateDescription = descriptionField.getText();
-			if(template.exportTemplate(securityTemp, destFile, topSectionXmlTextArea.getText(), bottomSectionXmlTextArea.getText(), formTemplateTitle, formTemplateDescription))
-			{
-				mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
-			}
-			else
-			{
-				displayXMLError(template);
-				mainWindow.notifyDlg("ErrorExportingCustomizationTemplate");
-			}
+		}
+
+		private FormTemplate createTemplate(String title, String description, String topXml, String bottomXml) throws Exception
+		{
+			FieldSpecCollection top = FieldCollection.parseXml(topXml);
+			FieldSpecCollection bottom = FieldCollection.parseXml(bottomXml);
+			FormTemplate template = new FormTemplate(title, description, top, bottom);
+			return template;
 		}
 	}
 
@@ -396,9 +412,9 @@ public class UiCustomFieldsDlg extends JDialog
 				return;
 			try
 			{
-				FieldCollection specTop = new FieldCollection(FieldCollection.parseXml(topXml));
-				FieldCollection specBottom = new FieldCollection(FieldCollection.parseXml(bottomXml));
-				CustomFieldTemplate template1 = new CustomFieldTemplate(titleField.getText(), descriptionField.getText(), specTop, specBottom);
+				FieldSpecCollection specTop = new FieldCollection(FieldCollection.parseXml(topXml)).getSpecs();
+				FieldSpecCollection specBottom = new FieldCollection(FieldCollection.parseXml(bottomXml)).getSpecs();
+				FormTemplate template1 = new FormTemplate(titleField.getText(), descriptionField.getText(), specTop, specBottom);
 				mainWindow.getApp().putFormTemplateOnServer(template1);
 				mainWindow.notifyDlg("TemplateSavedToServer");
 			} 
@@ -431,13 +447,13 @@ public class UiCustomFieldsDlg extends JDialog
 			formatTextArea(xmlExamples);
 			UiScrollPane pane = createScrollPane(xmlExamples);
 
-			new UiShowScrollableTextDlg(mainWindow, "CreateCustomFieldsHelp", "ok", MtfAwareLocalization.UNUSED_TAG, MtfAwareLocalization.UNUSED_TAG, message, pane);
+			new UiShowScrollableTextDlg(mainWindow, "CreateCustomFieldsHelp", EnglishCommonStrings.OK, MtfAwareLocalization.UNUSED_TAG, MtfAwareLocalization.UNUSED_TAG, message, pane);
 		}
 	}
 	
 	public boolean validateXml(String xmlToValidateTopSection, String xmlToValidateBottomSection)
 	{
-		CustomFieldTemplate template = new CustomFieldTemplate();
+		FormTemplate template = new FormTemplate();
 		if(template.isvalidTemplateXml(xmlToValidateTopSection, xmlToValidateBottomSection))
 			return true;
 
@@ -448,11 +464,37 @@ public class UiCustomFieldsDlg extends JDialog
 	
 	
 
-	void displayXMLError(CustomFieldTemplate template)
+	void displayXMLError(FormTemplate template)
 	{
 		Vector errors = template.getErrors();
+		displayXMLError(mainWindow, fontHelper, errors);
+	}
+	
+	public static void displayXMLError(UiMainWindow mainWindow, UiFontEncodingHelper fontHelper, Vector errors)
+	{
 		if(errors == null)
 			return;
+		
+		StringBuilder errorMessage = createErrorMessage(mainWindow, fontHelper, errors);
+
+		String errorDescription = mainWindow.getLocalization().getFieldLabel("ErrorCustomFields");
+		UiTextArea specificErrors = createXMLTextArea(errorMessage.toString());
+		formatTextArea(specificErrors);
+		UiScrollPane specificErrorsPane = createScrollPane(specificErrors);
+
+		new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", EnglishCommonStrings.OK, MtfAwareLocalization.UNUSED_TAG, MtfAwareLocalization.UNUSED_TAG, errorDescription, specificErrorsPane);
+	}
+	
+	public static StringBuilder createErrorMessage(UiMainWindow mainWindow, Vector errors)
+	{
+		UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(mainWindow.getDoZawgyiConversion());
+
+		return createErrorMessage(mainWindow, fontHelper, errors);
+	}
+	
+
+	private static StringBuilder createErrorMessage(UiMainWindow mainWindow, UiFontEncodingHelper fontHelper, Vector errors)
+	{
 		String header1 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader1");
 		String header2 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader2");
 		String header3 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader3");
@@ -473,16 +515,10 @@ public class UiCustomFieldsDlg extends JDialog
 			errorMessage.append(thisErrorMessage);
 			errorMessage.append('\n');
 		}
-
-		String errorDescription = mainWindow.getLocalization().getFieldLabel("ErrorCustomFields");
-		UiTextArea specificErrors = createXMLTextArea(errorMessage.toString());
-		formatTextArea(specificErrors);
-		UiScrollPane specificErrorsPane = createScrollPane(specificErrors);
-
-		new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", "ok", MtfAwareLocalization.UNUSED_TAG, MtfAwareLocalization.UNUSED_TAG, errorDescription, specificErrorsPane);
+		return errorMessage;
 	}
 
-	protected void formatTextArea(UiTextArea textArea)
+	protected static void formatTextArea(UiTextArea textArea)
 	{
 		textArea.setCaretPosition(0);
 		textArea.setBackground(new JFrame().getBackground());
@@ -490,7 +526,7 @@ public class UiCustomFieldsDlg extends JDialog
 		textArea.setEditable(false);
 	}
 
-	private String GetDataAndSpacing(String data, int columnSpacing)
+	private static String GetDataAndSpacing(String data, int columnSpacing)
 	{
 		if(data == null)
 			return " ";
@@ -510,7 +546,7 @@ public class UiCustomFieldsDlg extends JDialog
 		return createXMLTextArea(xmlRepresentationFieldSpecs);
 	}
 
-	UiTextArea createXMLTextArea(String initialText)
+	static UiTextArea createXMLTextArea(String initialText)
 	{
 		UiTextArea msgArea = new UiTextArea(20, 80);
 		
@@ -521,7 +557,7 @@ public class UiCustomFieldsDlg extends JDialog
 		return msgArea;
 	}
 
-	UiScrollPane createScrollPane(UiTextArea textArea)
+	static UiScrollPane createScrollPane(UiTextArea textArea)
 	{
 		UiScrollPane textPane = new UiScrollPane(textArea, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -571,7 +607,7 @@ public class UiCustomFieldsDlg extends JDialog
 			duplicates.append("\" ");
 		}
 		String[] duplicateWarningMessage = {duplicateWarnging, duplicates.toString(), duplicateContinue};
-		if(mainWindow.confirmDlg(mainWindow, duplicateTitle, duplicateWarningMessage))
+		if(mainWindow.confirmDlg(duplicateTitle, duplicateWarningMessage))
 			return true;
 		return false;
 	}
@@ -589,8 +625,8 @@ public class UiCustomFieldsDlg extends JDialog
 	MartusCrypto security;
 
 
-	private int HEADER_SPACING_1 = 6;
-	private int HEADER_SPACING_2 = 11;
-	private int HEADER_SPACING_3 = 14;
+	private static final int HEADER_SPACING_1 = 6;
+	private static final int HEADER_SPACING_2 = 11;
+	private static final int HEADER_SPACING_3 = 14;
 	
 }

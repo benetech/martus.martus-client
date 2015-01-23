@@ -38,6 +38,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.step3.FxSetupStorageServerController;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiButton;
@@ -50,7 +51,7 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 {
 	public UiConfigServerDlg(UiMainWindow owner, ConfigInfo infoToUse)
 	{
-		super(owner, "", true);
+		super(owner.getSwingFrame(), "", true);
 
 		info = infoToUse;
 		mainWindow = owner;
@@ -87,15 +88,15 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 
 		panel.addBlankLine();
 
-		ok = new UiButton(localization.getButtonLabel("ok"));
+		ok = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 		ok.addActionListener(this);
-		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
+		JButton cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(this);
 		panel.addComponents(ok, cancel);
 
 		getContentPane().add(panel);
 		getRootPane().setDefaultButton(ok);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 		setVisible(true);
 	}

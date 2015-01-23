@@ -31,17 +31,17 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 
 import org.martus.common.ContactKey;
-import org.martus.common.fieldspec.CustomFieldTemplate;
+import org.martus.common.fieldspec.FormTemplate;
 
 public class ContactsWithTemplatesTableData
 {
-	public ContactsWithTemplatesTableData(ContactKey contactKeyToUse, boolean rowSelectedToUse, CustomFieldTemplate selectedFormTemplateToUse, ObservableList<CustomFieldTemplate> customFieldTemplatesToChooseFromToUse) throws Exception
+	public ContactsWithTemplatesTableData(ContactKey contactKeyToUse, boolean rowSelectedToUse, FormTemplate selectedFormTemplateToUse, ObservableList<FormTemplate> formTemplatesToChooseFromToUse) throws Exception
 	{
 		contactName = new SimpleStringProperty(contactKeyToUse.getLabel());
 		publicCode = new SimpleStringProperty(contactKeyToUse.getFormattedPublicCode());
 		isContactChosen = new SimpleBooleanProperty(rowSelectedToUse);
 		selectedFormTemplate = new SimpleObjectProperty(selectedFormTemplateToUse);
-		formTemplatesToChooseFrom = customFieldTemplatesToChooseFromToUse;
+		formTemplatesToChooseFrom = formTemplatesToChooseFromToUse;
 		contactKey = contactKeyToUse;
 	}
 	
@@ -75,23 +75,23 @@ public class ContactsWithTemplatesTableData
 		isContactChosen.set(isContactChosenToUse);
 	}
 	
-	public CustomFieldTemplate getSelectedFormTemplate()
+	public FormTemplate getSelectedFormTemplate()
 	{
 		return selectedFormTemplate.get();
 	}
 	
-	public void setSelectedFormTemplate(CustomFieldTemplate selectedTamplateNameToUse)
+	public void setSelectedFormTemplate(FormTemplate selectedTamplateNameToUse)
 	{
 		selectedFormTemplate.set(selectedTamplateNameToUse);
 	}
 	
-	public void setFormTemplatesToChooseFrom(ObservableList<CustomFieldTemplate> customFieldTemplatesToChooseFromToUse)
+	public void setFormTemplatesToChooseFrom(ObservableList<FormTemplate> formTemplatesToChooseFromToUse)
 	{
 		formTemplatesToChooseFrom.clear();
-		formTemplatesToChooseFrom.addAll(customFieldTemplatesToChooseFromToUse);
+		formTemplatesToChooseFrom.addAll(formTemplatesToChooseFromToUse);
 	}
 	
-	public ObservableList<CustomFieldTemplate> getFormTemplateChoices()
+	public ObservableList<FormTemplate> getFormTemplateChoices()
 	{
 		return formTemplatesToChooseFrom;
 	}
@@ -106,7 +106,7 @@ public class ContactsWithTemplatesTableData
     	return isContactChosen;
     }
 	
-	public SimpleObjectProperty<CustomFieldTemplate> selectedFormTemplateProperty()
+	public SimpleObjectProperty<FormTemplate> selectedFormTemplateProperty()
 	{
 		return selectedFormTemplate;
 	}
@@ -114,7 +114,7 @@ public class ContactsWithTemplatesTableData
 	private final SimpleStringProperty contactName;
 	private final SimpleStringProperty publicCode;
 	private final SimpleBooleanProperty isContactChosen;
-	private final SimpleObjectProperty<CustomFieldTemplate> selectedFormTemplate;
-	private ObservableList<CustomFieldTemplate> formTemplatesToChooseFrom;
+	private final SimpleObjectProperty<FormTemplate> selectedFormTemplate;
+	private ObservableList<FormTemplate> formTemplatesToChooseFrom;
 	private ContactKey contactKey;
 }

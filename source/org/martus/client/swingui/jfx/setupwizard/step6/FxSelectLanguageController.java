@@ -36,6 +36,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.clientside.MtfAwareLocalization;
+import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 
@@ -58,19 +59,19 @@ public class FxSelectLanguageController extends FxStep6Controller
 	
 	public void initializeMainContentPane()
 	{
-		ObservableList<ChoiceItem> availableLanguages = FXCollections.observableArrayList(getAvailableLanguages());
+		ObservableList<ChoiceItem> availableLanguages = FXCollections.observableArrayList(getAvailableLanguages(getLocalization()));
 		languagesDropdown.setItems(availableLanguages);
-		ChoiceItem currentLanguageChoiceItem = findCurrentLanguageChoiceItem();
+		ChoiceItem currentLanguageChoiceItem = findCurrentLanguageChoiceItem(getLocalization());
 		languagesDropdown.getSelectionModel().select(currentLanguageChoiceItem);
 		
 		getWizardNavigationHandler().getBackButton().setVisible(false);
 	}
 	
-	private ChoiceItem findCurrentLanguageChoiceItem()
+	static public ChoiceItem findCurrentLanguageChoiceItem(MartusLocalization localization)
 	{
-		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
+		String currentLanguageCode = localization.getCurrentLanguageCode();
 
-		ObservableList<ChoiceItem> availableLanguages = getAvailableLanguages();
+		ObservableList<ChoiceItem> availableLanguages = getAvailableLanguages(localization);
 		for (ChoiceItem choiceItem : availableLanguages)
 		{
 			if (choiceItem.getCode().equals(currentLanguageCode))
@@ -80,9 +81,8 @@ public class FxSelectLanguageController extends FxStep6Controller
 		return null;
 	}
 
-	private ObservableList<ChoiceItem> getAvailableLanguages()
+	static public ObservableList<ChoiceItem> getAvailableLanguages(MartusLocalization localization)
 	{
-		MartusLocalization localization = getLocalization();
 		String currentLanguageCode = localization.getCurrentLanguageCode();
 		ChoiceItem[] allUILanguagesSupported = localization.getUiLanguages();
 		Vector<ChoiceItem> languageChoices = new Vector<ChoiceItem>();
@@ -94,7 +94,12 @@ public class FxSelectLanguageController extends FxStep6Controller
 			{
 				localization.setCurrentLanguageCode(thisCode);
 				thisLanguageName = localization.getLanguageName(thisCode);
-			} 
+			}
+			catch(Exception e)
+			{
+				MartusLogger.log("Error loading language " + thisCode);
+				throw(e);
+			}
 			finally
 			{
 				localization.setCurrentLanguageCode(currentLanguageCode);

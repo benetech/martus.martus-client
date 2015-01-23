@@ -30,11 +30,11 @@ import javafx.scene.control.Button;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public class DialogWithOkCancelShellController extends DialogShellController 
+public class DialogWithOkCancelShellController extends DialogShellController
 {
-	public DialogWithOkCancelShellController(UiMainWindow mainWindowToUse)
+	public DialogWithOkCancelShellController(UiMainWindow mainWindowToUse, FxController contentController)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, contentController);
 	}
 
 	@Override
@@ -46,7 +46,14 @@ public class DialogWithOkCancelShellController extends DialogShellController
 	@FXML
 	public void onOkClicked()
 	{
-		saveAndClose();
+		getContentController().save();
+		close();
+	}
+	
+	@Override
+	protected String getCssName()
+	{
+		return "mainDialog.css";
 	}
 	
 	@FXML
@@ -55,18 +62,26 @@ public class DialogWithOkCancelShellController extends DialogShellController
 		close();
 	}
 	
-	protected void setOkButtonText(String newText)
+	public void setOkButtonText(String newText)
 	{
 		ok.setText(newText);
 	}
 	
-	protected void setOkButtonSetDisabled(boolean isDisabled)
+	public void setOkButtonDisabled(boolean isDisabled)
 	{
 		ok.setDisable(isDisabled);
+	}
+	
+	public void setCancelButtonText(String buttonTag)
+	{
+		cancel.setText(getLocalization().getButtonLabel(buttonTag));
 	}
 	
 	private static final String LOCATION_DIALOG_WITH_OK_CANCEL_SHELL = "generic/DialogWithOkCancelShell.fxml";
 	
 	@FXML
-	private Button ok;
+	protected Button ok;
+	
+	@FXML
+	protected Button cancel;
 }

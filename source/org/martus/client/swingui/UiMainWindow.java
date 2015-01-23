@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Point;
@@ -35,8 +34,6 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -58,6 +55,7 @@ import javax.crypto.Cipher;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
@@ -76,17 +74,16 @@ import org.martus.client.core.MartusApp.LoadConfigInfoException;
 import org.martus.client.core.MartusApp.MartusAppInitializationException;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.core.MartusJarVerification;
-import org.martus.client.core.SortableBulletinList;
 import org.martus.client.core.TransferableBulletinList;
+import org.martus.client.core.templates.FormTemplateManager.UnableToLoadCurrentTemplateException;
 import org.martus.client.network.BackgroundUploader;
 import org.martus.client.network.RetrieveCommand;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.bulletincomponent.UiBulletinPreviewPane;
 import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
 import org.martus.client.swingui.dialogs.UiAboutDlg;
-import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
-import org.martus.client.swingui.dialogs.UiFancySearchDlg;
+import org.martus.client.swingui.dialogs.UiFancySearchDialogContents;
 import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
 import org.martus.client.swingui.dialogs.UiOnlineHelpDlg;
@@ -99,13 +96,18 @@ import org.martus.client.swingui.dialogs.UiSplashDlg;
 import org.martus.client.swingui.dialogs.UiStringInputDlg;
 import org.martus.client.swingui.dialogs.UiTemplateDlg;
 import org.martus.client.swingui.dialogs.UiWarningMessageDlg;
+import org.martus.client.swingui.filefilters.AllFileFilter;
+import org.martus.client.swingui.filefilters.KeyPairFormatFilter;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
-import org.martus.client.swingui.jfx.generic.FxModalDialog;
-import org.martus.client.swingui.jfx.generic.FxRunner;
+import org.martus.client.swingui.jfx.generic.DialogShellController;
+import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.generic.FxDialogHelper;
+import org.martus.client.swingui.jfx.generic.FxShellController;
+import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
+import org.martus.client.swingui.jfx.generic.VirtualStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
-import org.martus.client.swingui.jfx.landing.bulletins.BulletinsListController;
-import org.martus.client.swingui.jfx.setupwizard.SetupWizardStage;
-import org.martus.client.swingui.jfx.welcome.WelcomeStage;
+import org.martus.client.swingui.jfx.welcome.FxWelcomeContentController;
+import org.martus.client.swingui.jfx.welcome.WelcomeShellController;
 import org.martus.client.swingui.spellcheck.SpellCheckerManager;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.clientside.ClientSideNetworkGateway;
@@ -114,7 +116,9 @@ import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.FormatFilter;
 import org.martus.clientside.MtfAwareLocalization;
+import org.martus.clientside.UiFileChooser;
 import org.martus.clientside.UiUtilities;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.Exceptions.NetworkOfflineException;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusAccountAccessToken;
@@ -122,14 +126,19 @@ import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.MiniLocalization;
+import org.martus.common.ProgressMeterInterface;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.EncryptionException;
+import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
+import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.OrchidTransportWrapper;
 import org.martus.common.packet.Packet;
+import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.XmlPacketLoader;
 import org.martus.swing.FontHandler;
@@ -146,11 +155,10 @@ import org.martus.util.UnicodeReader;
 import org.martus.util.language.LanguageOptions;
 import org.martus.util.xml.XmlUtilities;
 
-public class UiMainWindow extends JFrame implements ClipboardOwner
+public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInterface
 {
 	public UiMainWindow() throws Exception
 	{
-		super();
 
 		try
 		{
@@ -175,57 +183,42 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		
 		cursorStack = new Stack();
+		
 		UiModelessBusyDlg splashScreen = new UiModelessBusyDlg(new ImageIcon(UiAboutDlg.class.getResource("Martus-logo-black-text-160x72.png")));
-
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		try
 		{
 			session = new UiSession();
+			getSession().initalizeUiState();
+
+			// Pop up a nag screen if this is an unofficial private release
+			// NOTE NAG screen now could be localized
+//			new UiNotifyDlg(this, "Martus - Test Version", 
+//					new String[] {"THIS IS A PRE-RELEASE TEST VERSION OF MARTUS.",
+//					"Please contact martus@bentech.org with any feedback or questions."}, 
+//					new String[] {"OK"});
+			
+			// Uncomment the call to restrictToOnlyTestServers for test builds which might
+			// generate bad data that we don't want cluttering up production servers
+			restrictToOnlyTestServers();
+			
 		}
 		catch(MartusApp.MartusAppInitializationException e)
 		{
 			initializationErrorExitMartusDlg(e.getMessage());
 		}
-		UiMainWindow.updateIcon(this);
-
-		// Pop up a nag screen if this is an unofficial private release
-		// NOTE NAG screen now could be localized
-//		new UiNotifyDlg(this, "Martus - Test Version", 
-//				new String[] {"THIS IS A PRE-RELEASE TEST VERSION OF MARTUS.",
-//				"Please contact info@martus.org with any feedback or questions."}, 
-//				new String[] {"OK"});
-		
-		restrictToOnlyTestServers();
-		
-		File timeoutDebug = new File(getApp().getMartusDataRootDirectory(), "timeout.1min");
-		if(timeoutDebug.exists())
+		finally
 		{
-			timeoutInXSeconds = TESTING_TIMEOUT_60_SECONDS;
-			System.out.println(timeoutDebug.toString() + " detected");
+			splashScreen.endDialog();
 		}
-		MartusLogger.log("Inactivity timeout set to " + timeoutInXSeconds + " seconds");
-		
-		timeBetweenFieldOfficeChecksSeconds = TIME_BETWEEN_FIELD_OFFICE_CHECKS_SECONDS;
-		File foCheckDebug = new File(getApp().getMartusDataRootDirectory(), "focheck.debug");
-		if(foCheckDebug.exists())
-		{
-			timeBetweenFieldOfficeChecksSeconds = TESTING_FOCHECK_SECONDS;
-			System.out.println(foCheckDebug.toString() + " detected; field office check every " + timeBetweenFieldOfficeChecksSeconds + " seconds");
-		}
-		
-		splashScreen.endDialog();
-		
-		getSession().initalizeUiState();
-		
-		setGlassPane(new WindowObscurer());
-
-		addWindowListener(new WindowEventHandler());
 	}
 	
-	private void restrictToOnlyTestServers()
+	public abstract JFrame getSwingFrame();
+	
+	protected void restrictToOnlyTestServers()
 	{
 		// NOTE: For now, only allow connecting to servers which we can completely 
 		// delete all user data from if necessary. So NOT .29 or .114.
+		// Visibility 'protected' only so we don't get a warning when we don't call this method for releases.
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("127.0.0.1");
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("127.0.0.2");
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("localhost");
@@ -234,30 +227,20 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("aws-dev");
 		ClientSideNetworkHandlerUsingXmlRpc.addAllowedServer("54.245.101.104"); // aws-dev
 	}
+	
+	public boolean isServerAccessible(String address)
+	{
+		return ClientSideNetworkHandlerUsingXmlRpc.isServerAllowed(address);
+	}
 
 	public boolean run()
 	{
 		setCurrentActiveFrame(this);
 		
-		if(Utilities.isMSWindows())
-		{
-			updateTitle();
-			setVisible(true);
-			Dimension screenSize = Utilities.getViewableScreenSize();
-			setLocation(screenSize.width, screenSize.height);
-		}
-		else if(Utilities.isLinux())
-		{
-			updateTitle();
-			setVisible(true);
-			Dimension screenSize = Utilities.getViewableScreenSize();
-			setLocation(screenSize.width/2, screenSize.height/2);
-		}
-
 		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
 		FontSetter.setDefaultFont(currentLanguageCode.equals(MtfAwareLocalization.BURMESE));
-		displayDefaultUnofficialTranslationMessageIfNecessary(currentActiveFrame, getLocalization(), currentLanguageCode);
-		displayIncompatibleMtfVersionWarningMessageIfNecessary(currentActiveFrame, getLocalization(), getLocalization().getCurrentLanguageCode());
+		displayDefaultUnofficialTranslationMessageIfNecessary(null, getLocalization(), currentLanguageCode);
+		displayIncompatibleMtfVersionWarningMessageIfNecessary(null, getLocalization(), getLocalization().getCurrentLanguageCode());
 		
 		preventTwoInstances();
 		notifyClientCompliance();
@@ -282,8 +265,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			doPostSigninAppInitialization();
 		}
 		
-		getSession().initalizeUiState();
-		
+		initalizeUiState(getLocalization().getCurrentLanguageCode());
 
 		try
 		{
@@ -336,15 +318,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		MartusLogger.log("Ready to show main window");
 		if(timeoutTimerTask.waitingForSignin)
 		{
-			setLocation(100000, 0);
-			setSize(0,0);
-			setEnabled(false);
+			obscureMainWindow();
 		}
 		else
 		{
 			MartusLogger.log("Showing main window");
-			setVisible(true);
-			toFront();
+			showMainWindow();
 			mainWindowInitalizing = false;
 		}
 		
@@ -363,16 +342,21 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return true;
     }
 
+	abstract protected void showMainWindow();
+	abstract protected void obscureMainWindow();
+	abstract protected void hideMainWindow();
+
+
 	public void displayIncorrectVersionJava(String highVersionJava, String expectedVersionJava)
 	{
 		String title = getLocalization().getWindowTitle("IncompatibleJavaVersion");
 		String warningMessage = getLocalization().getFieldLabel("IncompatibleJavaVersion");
-		String buttonMessage = getLocalization().getButtonLabel("ok");
+		String buttonMessage = getLocalization().getButtonLabel(EnglishCommonStrings.OK);
 		Toolkit.getDefaultToolkit().beep();
 		HashMap map = new HashMap();
 		map.put("#HighVersion#", highVersionJava);
 		map.put("#ExpectedVersion#", expectedVersionJava);
-		new UiNotifyDlg(this, title, new String[]{warningMessage}, new String[]{buttonMessage}, map);
+		new UiNotifyDlg(title, new String[]{warningMessage}, new String[]{buttonMessage}, map);
 	}
 
 	private void warnIfCryptoJarsNotLoaded() throws Exception
@@ -444,7 +428,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			String warningMessageLtoR = getWarningMessageAboutUnofficialTranslations(message);
 			String warningMessageRtoL = getWarningMessageAboutUnofficialTranslations(messageRtoL);
 			Toolkit.getDefaultToolkit().beep();
-			new UiWarningMessageDlg(owner, "",warningMessageLtoR, warningMessageRtoL);
+			new UiWarningMessageDlg(owner, "", localization.getButtonLabel(EnglishCommonStrings.OK), warningMessageLtoR, warningMessageRtoL);
 		}
 		catch(Exception e)
 		{
@@ -512,15 +496,19 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			// NOTE: Prevent implicit JavaFX shutdown when the only JFX window is closed
 		    Platform.setImplicitExit(false);
 
-		    FxModalDialog.createAndShow(this, new WelcomeStage(this));
+			FxController contentController = new FxWelcomeContentController(this);
+			DialogShellController shellController = new WelcomeShellController(this, contentController);
+			shellController.doAction();
 		    
-		    FxModalDialog.createAndShow(this, new SetupWizardStage(this));
+		    createAndShowSetupWizard();
 		} 
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
 		}
 	}
+
+	abstract public void createAndShowSetupWizard() throws Exception;
 	
 	private void loadFieldSpecCache() throws Exception
 	{
@@ -528,7 +516,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(!getStore().loadFieldSpecCache())
 		{
 			if(!createdNewAccount)
-				notifyDlg(this, "CreatingFieldSpecCache");
+				notifyDlg("CreatingFieldSpecCache");
 
 			getStore().createFieldSpecCacheFromDatabase();
 		}
@@ -550,6 +538,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		try
 		{
 			getApp().loadConfigInfo();
+			displayPossiblePublicBulletinRemovalNotification();
+			
 			if(getApp().getConfigInfo().isNewVersion())
 			{
 				if(!confirmDlg("NewerConfigInfoFileFound"))
@@ -565,6 +555,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			notifyDlg("ErrorSavingConfig");
 		}
+		catch (Exception e)
+		{
+			notifyDlg("ErrorSavingConfig");
+		}
 		
 		if(createdNewAccount)
 		{
@@ -574,6 +568,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
+	private void displayPossiblePublicBulletinRemovalNotification() throws Exception
+	{
+		if (getApp().getConfigInfo().shouldShowOneTimeNoticeFortheRemovalOfPublicBulletins())
+		{
+			FxDialogHelper.showNotificationDialog(this, "LegacyPublicIsPrivateMessage");
+		}
+	}
+	
 	private void reloadPendingRetrieveQueue()
 	{
 		try
@@ -655,9 +657,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			startInactivityTimeoutDetection();
 			getApp().doAfterSigninInitalization();
 		}
-		catch (MartusAppInitializationException e1)
+		catch (UnableToLoadCurrentTemplateException e)
 		{
-			initializationErrorExitMartusDlg(e1.getMessage());
+			MartusLogger.logException(e);
+			notifyDlg("UnableToLoadCurrentTemplate");
 		}
 		catch (FileVerificationException e1)
 		{
@@ -670,6 +673,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		catch (MissingAccountMapException e1)
 		{
 			askToRepairMissingAccountMapFile();
+		}
+		catch (MartusAppInitializationException e1)
+		{
+			initializationErrorExitMartusDlg(e1.getMessage());
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			initializationErrorExitMartusDlg(e.getMessage());
 		}
 	}
     
@@ -802,31 +814,57 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	private void askAndBackupKeypairIfRequired()
 	{
+
 		ConfigInfo info = getApp().getConfigInfo();
 		boolean hasBackedUpEncrypted = info.hasUserBackedUpKeypairEncrypted();
 		boolean hasBackedUpShare = info.hasUserBackedUpKeypairShare();
 		boolean hasBackedUpImprovedShare = info.hasBackedUpImprovedKeypairShare();
+		boolean askForBackupAgainInSevenDays = false;
+		boolean dontAskForBackupAgain = false;
 		if(!hasBackedUpEncrypted || !hasBackedUpShare || !hasBackedUpImprovedShare)
 		{
-			String generalMsg = getLocalization().getFieldLabel("confirmgeneralBackupKeyPairMsgcause");
-			String generalMsgEffect = getLocalization().getFieldLabel("confirmgeneralBackupKeyPairMsgeffect");
-			String backupEncrypted = "";
-			String backupShare = "";
-			String backupImprovedShare = "";
-			if(!hasBackedUpEncrypted)
-				backupEncrypted = getLocalization().getFieldLabel("confirmbackupIncompleteEncryptedNeeded");
-			if(!hasBackedUpShare)
-				backupShare = getLocalization().getFieldLabel("confirmbackupIncompleteShareNeeded");
-			if (hasBackedUpShare && !hasBackedUpImprovedShare)
-				backupImprovedShare = getLocalization().getFieldLabel("confirmbackupIncompleteImprovedShareNeeded");
-			String[] contents = new String[] {generalMsg, "", backupEncrypted, "", getBackupShareText(backupImprovedShare, backupShare), "", generalMsgEffect};
-			if(confirmDlg(getCurrentActiveFrame(), getLocalization().getWindowTitle("askToBackupKeyPair"), contents))
+			if(info.getDateLastAskedUserToBackupKeypair().isEmpty())
+				askForBackupAgainInSevenDays = true;
+			if(getApp().shouldWeAskForKeypairBackup())
 			{
+				askForBackupAgainInSevenDays = true;
+
+				String generalMsg = getLocalization().getFieldLabel("confirmgeneralBackupKeyPairMsgcause");
+				String generalMsgEffect = getLocalization().getFieldLabel("confirmgeneralBackupKeyPairMsgeffect");
+				String backupEncrypted = "";
+				String backupShare = "";
+				String backupImprovedShare = "";
 				if(!hasBackedUpEncrypted)
-					askToBackupKeyPairEncryptedSingleFile();
-				if(!hasBackedUpShare || !hasBackedUpImprovedShare)
-					askToBackupKeyPareToSecretShareFiles();
+					backupEncrypted = getLocalization().getFieldLabel("confirmbackupIncompleteEncryptedNeeded");
+				if(!hasBackedUpShare)
+					backupShare = getLocalization().getFieldLabel("confirmbackupIncompleteShareNeeded");
+				if (hasBackedUpShare && !hasBackedUpImprovedShare)
+					backupImprovedShare = getLocalization().getFieldLabel("confirmbackupIncompleteImprovedShareNeeded");
+				String[] contents = new String[] {generalMsg, "", backupEncrypted, "", getBackupShareText(backupImprovedShare, backupShare), "", generalMsgEffect};
+				if(confirmDlg(getSwingFrame(), getLocalization().getWindowTitle("askToBackupKeyPair"), contents))
+				{
+					if(!hasBackedUpEncrypted)
+						askToBackupKeyPairEncryptedSingleFile();
+					if(!hasBackedUpShare || !hasBackedUpImprovedShare)
+						askToBackupKeyPareToSecretShareFiles();
+				}
 			}
+		}
+		else
+		{
+			dontAskForBackupAgain = true;
+		}
+
+		try
+		{
+			if(askForBackupAgainInSevenDays)
+				getApp().startClockToAskForKeypairBackup();
+			if(dontAskForBackupAgain)
+				getApp().clearClockToAskForKeypairBackup();
+		}	
+		catch (SaveConfigInfoException e)
+		{
+			MartusLogger.logException(e);
 		}
 	}
 
@@ -846,6 +884,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		// Martus source code license. The easiest way to do 
 		// this is to set modified=true and edit the text below. 
 		final boolean modified = false;
+
+		if(!modified && UiSession.isJavaFx())
+			return;
 		
 		String complianceStatementAlwaysEnglish = "";
 		if(modified)
@@ -868,7 +909,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			productDescription +
 			END_HTML_TAGS;
 		}
-		new UiSplashDlg(getCurrentActiveFrame(), getLocalization(), complianceStatementAlwaysEnglish);
+		new UiSplashDlg(getLocalization(), complianceStatementAlwaysEnglish);
 	}
 	public final static String BEGIN_HTML_TAGS = "<font size='5'>";
 	public final static String END_HTML_TAGS = "</font>";
@@ -897,19 +938,31 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		createdNewAccount = didCreateNewAccount;
 	}
+	
+	public Stack getCursorStack()
+	{
+		return cursorStack;
+	}
 
 	public void resetCursor()
 	{
-		setCursor((Cursor)cursorStack.pop());
+		Object desiredCursor = getCursorStack().pop();
+		rawSetCursor(desiredCursor);
 	}
 
 	public void setWaitingCursor()
 	{
-		cursorStack.push(getCursor());
-		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+		Object existingCursor = getExistingCursor();
+		getCursorStack().push(existingCursor);
+		Object waitCursor = getWaitCursor();
+		rawSetCursor(waitCursor);
 		return;
 	}
 	
+	abstract public void rawSetCursor(Object newCursor);
+	abstract public Object getExistingCursor();
+	abstract public Object getWaitCursor();
+
 	public void allBulletinsInCurrentFolderHaveChanged()
 	{
 		UiBulletinTablePane bulletinsTablePane = getBulletinsTablePane();
@@ -923,7 +976,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(bulletinsTablePane == null)
 			return;
 		Bulletin b = bulletinsTablePane.getSingleSelectedBulletin();
-		if(mainPane == null)
+		if(getMainPane() == null)
 			return;
 		getMainPane().updateEnabledStatuses();
 		getPreviewPane().setCurrentBulletin(b);
@@ -938,7 +991,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			{
 				//TODO this is really for preview, also we shouldn't have to do this, the FX class should be the observer
 				//     for folderContents and BulletinContents HasChanged.
-				((BulletinsListController)stage.getCurrentController()).bulletinContentsHaveChanged(b);
+				stage.getBulletinsListController().bulletinContentsHaveChanged(b);
 			}
 			catch (Exception e)
 			{
@@ -994,6 +1047,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		UiFolderTreePane folderTreePane = getFolderTreePane();
 		if(folderTreePane != null)
 			folderTreePane.folderTreeContentsHaveChanged();
+		if(UiSession.isJavaFx())
+			getMainStage().getCaseManager().folderContentsHaveChanged();
 	}
 
 	public boolean isDiscardedFolderSelected()
@@ -1078,7 +1133,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public boolean confirmDlg(String baseTag)
 	{
-		return confirmDlg(getCurrentActiveFrame(), baseTag);
+		return confirmDlg(getCurrentActiveFrame().getSwingFrame(), baseTag);
 	}
 	
 	public boolean confirmDlg(JFrame parent, String baseTag)
@@ -1086,9 +1141,19 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return UiUtilities.confirmDlg(getLocalization(), parent, baseTag);
 	}
 
+	public boolean confirmDlg(String baseTag, Map tokenReplacement)
+	{
+		return confirmDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, tokenReplacement);
+	}
+
 	public boolean confirmDlg(JFrame parent, String baseTag, Map tokenReplacement)
 	{
 		return UiUtilities.confirmDlg(getLocalization(), parent, baseTag, tokenReplacement);
+	}
+
+	public boolean confirmDlg(String title, String[] contents)
+	{
+		return confirmDlg(getCurrentActiveFrame().getSwingFrame(), title, contents);
 	}
 
 	public boolean confirmDlg(JFrame parent, String title, String[] contents)
@@ -1096,9 +1161,24 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return UiUtilities.confirmDlg(getLocalization(), parent, title, contents);
 	}
 
+	public boolean confirmDlg(String title, String[] contents, String[] buttons)
+	{
+		return confirmDlg(getCurrentActiveFrame().getSwingFrame(), title, contents, buttons);
+	}
+
 	public boolean confirmDlg(JFrame parent, String title, String[] contents, String[] buttons)
 	{
 		return UiUtilities.confirmDlg(parent, title, contents, buttons);
+	}
+
+	public boolean confirmDlg(String title, String[] contents, String[] buttons, Map tokenReplacement)
+	{
+		return UiUtilities.confirmDlg(getCurrentActiveFrame().getSwingFrame(), title, contents, buttons, tokenReplacement);
+	}
+
+	public boolean confirmCustomButtonsDlg(String baseTag, String[] buttons, Map tokenReplacement)
+	{
+		return confirmCustomButtonsDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, buttons, tokenReplacement);
 	}
 
 	public boolean confirmCustomButtonsDlg(JFrame parent,String baseTag, String[] buttons, Map tokenReplacement)
@@ -1129,10 +1209,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return title;
 	}
 
-	public boolean confirmDlg(JFrame parent, String title, String[] contents, String[] buttons, Map tokenReplacement)
+	private boolean confirmDlg(JFrame parent, String title, String[] contents, String[] buttons, Map tokenReplacement)
 	{
 		return UiUtilities.confirmDlg(parent, title, contents, buttons, tokenReplacement);
 	}
+
+	abstract public void rawError(String string);
 
 	public void notifyDlgBeep(String baseTag)
 	{			
@@ -1151,16 +1233,38 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		MartusLogger.logException(e);
 		notifyDlg("UnexpectedError");
 	}
+	
+	private static class Notifier implements Runnable
+	{
+		public Notifier(UiMainWindow mainWindowToUse, String baseTagToUse)
+		{
+			mainWindow = mainWindowToUse;
+			baseTag = baseTagToUse;
+		}
+		
+		public void run()
+		{
+			mainWindow.notifyDlg(baseTag); 
+		}
+
+		private UiMainWindow mainWindow;
+		private String baseTag;
+	}
+
+	public static void showNotifyDlgOnSwingThread(UiMainWindow mainWindowToUse, String baseTag)
+	{
+		SwingUtilities.invokeLater(new Notifier(mainWindowToUse, baseTag));
+	}
 
 	public void notifyDlg(String baseTag)
 	{
 		HashMap emptyTokenReplacement = new HashMap();
-		notifyDlg(getCurrentActiveFrame(), baseTag, emptyTokenReplacement);
+		notifyDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, emptyTokenReplacement);
 	}
 	
 	public void notifyDlg(String baseTag, Map tokenReplacement)
 	{
-		notifyDlg(getCurrentActiveFrame(), baseTag, tokenReplacement);
+		notifyDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, tokenReplacement);
 	}
 
 	public void notifyDlg(JFrame parent, String baseTag)
@@ -1169,9 +1273,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		notifyDlg(parent, baseTag, emptyTokenReplacement);
 	}
 
-	public void notifyDlg(JFrame parent, String baseTag, Map tokenReplacement)
+	private void notifyDlg(JFrame parent, String baseTag, Map tokenReplacement)
 	{
 		notifyDlg(parent, baseTag, "notify" + baseTag, tokenReplacement);
+	}
+
+	public void notifyDlg(String baseTag, String titleTag)
+	{
+		notifyDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, titleTag);
 	}
 
 	public void notifyDlg(JFrame parent, String baseTag, String titleTag)
@@ -1180,9 +1289,19 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		notifyDlg(parent, baseTag, titleTag, emptyTokenReplacement);
 	}
 
-	public void notifyDlg(JFrame parent, String baseTag, String titleTag, Map tokenReplacement)
+	private void notifyDlg(JFrame parent, String baseTag, String titleTag, Map tokenReplacement)
 	{
 		UiUtilities.notifyDlg(getLocalization(), parent, baseTag, titleTag, tokenReplacement);
+	}
+
+	public void notifyDlg(String title, String[] contents, String[] buttons)
+	{
+		new UiNotifyDlg(getCurrentActiveFrame().getSwingFrame(), title, contents, buttons);  
+	}
+
+	public void messageDlg(String baseTag, String message, Map tokenReplacement)
+	{
+		messageDlg(getCurrentActiveFrame().getSwingFrame(), baseTag, message, tokenReplacement);
 	}
 
 	public void messageDlg(JFrame parent, String baseTag, String message)
@@ -1229,23 +1348,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	//ClipboardOwner Interface
 	//TODO: This doesn't seem to be called right now--can we delete it?
+	@Override
 	public void lostOwnership(Clipboard clipboard, Transferable contents)
 	{
 		System.out.println("UiMainWindow: ClipboardOwner.lostOwnership");
 		TransferableBulletinList tb = TransferableBulletinList.extractFrom(contents);
 		if(tb != null)
 			tb.dispose();
-	}
-
-
-	public void setCurrentDefaultKeyboardVirtual(boolean keyboard)
-	{
-		getUiState().setCurrentDefaultKeyboardVirtual(keyboard);
-	}
-
-	public boolean isCurrentDefaultKeyboardVirtual()
-	{
-		return getUiState().isCurrentDefaultKeyboardVirtual();
 	}
 
 	public Dimension getBulletinEditorDimension()
@@ -1320,12 +1429,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		uiState.setCurrentPreviewSplitterPosition(getPreviewSplitterDividerLocation());
 		uiState.setCurrentFolderSplitterPosition(getFolderSplitterDividerLocation());
-		uiState.setCurrentAppDimension(getSize());
-		uiState.setCurrentAppPosition(getLocation());
-		boolean isMaximized = getExtendedState()==MAXIMIZED_BOTH;
-		uiState.setCurrentAppMaximized(isMaximized);
+		uiState.setCurrentAppDimension(getMainWindowSize());
+		uiState.setCurrentAppPosition(getMainWindowLocation());
+		uiState.setCurrentAppMaximized(isMainWindowMaximized());
 		saveCurrentUiState();
 	}
+
+	abstract public boolean isMainWindowMaximized();
+	abstract public Dimension getMainWindowSize();
+	abstract public Point getMainWindowLocation();
 
 	private static final int ARBITRARY_FALLBACK_SPLITTER_LOCATION = 100;
 	
@@ -1424,7 +1536,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			worker.start(progressDialog);
 			progressDialog.pack();
-			Utilities.centerDlg(progressDialog);
+			Utilities.packAndCenterWindow(progressDialog);
 			progressDialog.setVisible(true);
 			worker.cleanup();
 		}
@@ -1453,7 +1565,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public SearchTreeNode askUserForSearchCriteria() throws ParseException
 	{
-		UiFancySearchDlg searchDlg = new UiFancySearchDlg(this);
+		UiFancySearchDialogContents searchDlg = new UiFancySearchDialogContents(this);
 		searchDlg.setSearchFinalBulletinsOnly(getUiState().searchFinalBulletinsOnly());
 		searchDlg.setSearchSameRowsOnly(getUiState().searchSameRowsOnly());
 		String searchString = getUiState().getSearchString();
@@ -1461,7 +1573,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(searchString.startsWith("{"))
 			search = new JSONObject(searchString);
 		searchDlg.setSearchAsJson(search);
-		searchDlg.setVisible(true);
+		ModalDialogWithSwingContents.show(searchDlg);
 		if(!searchDlg.getResults())
 			return null;
 		
@@ -1472,51 +1584,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return searchDlg.getSearchTree();
 	}
 
-	public void updateSearchFolderAndNotifyUserOfTheResults(SortableBulletinList matchedBulletinsFromSearch)
-	{
-		if(matchedBulletinsFromSearch == null)
-			return;
-		getApp().updateSearchFolder(matchedBulletinsFromSearch);
-		ClientBulletinStore store = getStore();
-		BulletinFolder searchFolder = store.findFolder(store.getSearchFolderName());
-		UiFolderTreePane folderTreePane = getFolderTreePane();
-		if(folderTreePane == null)
-			return;
-		folderTreePane.folderTreeContentsHaveChanged();
-		folderTreePane.folderContentsHaveChanged(searchFolder);
-		int bulletinsFound = searchFolder.getBulletinCount();
-		if(bulletinsFound > 0)
-		{
-			selectSearchFolder();
-			showNumberOfBulletinsFound(bulletinsFound, "SearchFound");
-		}
-		else
-		{
-			notifyDlg("SearchFailed");
-		}
-	}
-
-	public void showNumberOfBulletinsFound(int bulletinsFound,String messageTag)
-	{
-		String title = getLocalization().getWindowTitle("notifySearchFound");
-		String message = getLocalization().getFieldLabel(messageTag);
-		String ok = getLocalization().getButtonLabel("ok");
-		String[] buttons = { ok };
-		message = replaceToken(message , "#NumberBulletinsFound#", (new Integer(bulletinsFound)).toString());
-		UiOptionPane pane = new UiOptionPane(message, UiOptionPane.INFORMATION_MESSAGE, UiOptionPane.DEFAULT_OPTION,
-								null, buttons);
-		JDialog dialog = pane.createDialog(this, title);
-		dialog.setVisible(true);
-	}
-
 	public void aboutMartus()
 	{
-		new UiAboutDlg(this);
+		new UiAboutDlg(getCurrentActiveFrame().getSwingFrame(), getLocalization());
 	}
 
 	public void showAccountInfo()
 	{
-		String title = getLocalization().getWindowTitle("AccountInfo");
+		String title = getLocalization().getWindowTitle("AuthorInformation");
 		String userName = getLocalization().getFieldLabel("AccountInfoUserName")
 						  + getApp().getUserName();
 		String keyDescription = getLocalization().getFieldLabel("AccountInfoPublicKey");
@@ -1550,11 +1625,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String accountDirectory = getLocalization().getFieldLabel("AccountInfoDirectory") + getApp().getCurrentAccountDirectory();
 		
 		
-		String ok = getLocalization().getButtonLabel("ok");
+		String ok = getLocalization().getButtonLabel(EnglishCommonStrings.OK);
 		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescriptionOld, formattedCodeContentsOld, " ", codeDescriptionNew, formattedCodeContentsNew, " ", martusAccountAccessTokenDescription, martusAccountAccessToken, " ", accountDirectory};
 		String[] buttons = {ok};
 
-		new UiNotifyDlg(this, title, contents, buttons);
+		notifyDlg(title, contents, buttons);
 	}
 
 	public void displayHelpMessage()
@@ -1597,13 +1672,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return previewPane.getView().getWidth();
 	}
 
-	public void respondToPreferencesChanges()
+	public void respondToPreferencesChanges() throws Exception
 	{
 		initializeViews();
 		restoreState();
 		getTransport().updateStatus();
 		backgroundUploadTimerTask.setWaitingForServer();
-		setVisible(true);
 	}
 
 	
@@ -1623,7 +1697,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(!isRetrieveInProgress())
 			return;
 		
-		if(!confirmDlg(this, "CancelRetrieve"))
+		if(!confirmDlg("CancelRetrieve"))
 			return;
 		
 		try
@@ -1717,7 +1791,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			notifyDlg(currentActiveFrame, "RewriteKeyPairFailed");
+			notifyDlg(getCurrentActiveFrame().getSwingFrame(), "RewriteKeyPairFailed");
 			return false;
 			//TODO eventually try to restore keypair from backup.
 		}
@@ -1773,17 +1847,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(uidList == null)
 				return;
 			
-			getApp().createOrFindFolder(folderName);
-			getApp().getStore().saveFolders();
-			folderTreeContentsHaveChanged();
-
-			RetrieveCommand command = new RetrieveCommand(folderName, uidList);
-			getApp().startBackgroundRetrieve(command);
-			
-			setStatusMessageTag(STATUS_RETRIEVING);
-			
-//			if(progressDlg.shouldExit())
-//				notifyDlg("RetrieveCanceled");
+			retrieveRecordsFromServer(folderName, uidList);
 		}
 		catch(ServerErrorException e)
 		{
@@ -1794,6 +1858,20 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			notifyDlg("UnexpectedError");
 		}
+	}
+
+	public void retrieveRecordsFromServer(String folderName, Vector uidList)
+			throws MartusSignatureException, NoKeyPairException,
+			EncryptionException, IOException
+	{
+		getApp().createOrFindFolder(folderName);
+		getApp().getStore().saveFolders();
+		folderTreeContentsHaveChanged();
+
+		RetrieveCommand command = new RetrieveCommand(folderName, uidList);
+		getApp().startBackgroundRetrieve(command);
+		
+		setStatusMessageTag(STATUS_RETRIEVING);
 	}
 
 
@@ -1819,7 +1897,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			if(!getApp().isSSLServerAvailable())
 			{
-				notifyDlg(this, "retrievenoserver", dlgTitleTag);
+				notifyDlg("retrievenoserver", dlgTitleTag);
 				return false;
 			}
 			model.initialize(progressHandler);
@@ -1843,9 +1921,36 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		catch (Exception e)
 		{
-			notifyDlg(this, "RetrievedOnlySomeSummaries", dlgTitleTag);
+			notifyDlg("RetrievedOnlySomeSummaries", dlgTitleTag);
 		}
 		return true;
+	}
+
+	public void deleteMutableRecordsFromServer(Vector uidList)
+			throws MartusSignatureException, WrongAccountException, Exception
+	{
+		setWaitingCursor();
+		try
+		{
+			String result = getApp().deleteServerDraftBulletins(uidList);
+			if (!result.equals(NetworkInterfaceConstants.OK))
+			{
+				if(UiSession.isJavaFx())
+					FxDialogHelper.showNotificationDialog(this, "DeleteServerDraftsFailed");
+				else
+					notifyDlg("DeleteServerDraftsFailed");
+				return;
+			}
+
+			if(UiSession.isJavaFx())
+				folderTreeContentsHaveChanged();
+			else
+				notifyDlg("DeleteServerDraftsWorked");
+		} 
+		finally
+		{
+			resetCursor();
+		}
 	}
 
 	public void askToBackupKeyPairEncryptedSingleFile()
@@ -1856,11 +1961,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void askToBackupKeyPareToSecretShareFiles()
 	{
-		if(confirmDlg(this,"BackupKeyPairSecretShare", UiBackupRecoverSharedKeyPair.getTokenReplacement()))
-		{
-			UiBackupRecoverSharedKeyPair backup = new UiBackupRecoverSharedKeyPair(this);
-			backup.backupKeyPairToMultipleUnencryptedFiles();
-		}
+		UiBackupRecoverSharedKeyPair backup = new UiBackupRecoverSharedKeyPair(this);
+		backup.backupKeyPairToMultipleUnencryptedFiles();
 	}
 
 	public void doBackupKeyPairToSingleEncryptedFile() 
@@ -1874,7 +1976,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		
 		String defaultBackupFilename = "MartusKeyPairBackup.dat";
-		File newBackupFile = showFileSaveDialog("SaveKeyPair", defaultBackupFilename, new KeyPairFormatFilter());
+		File newBackupFile = showFileSaveDialog("SaveKeyPair", defaultBackupFilename, new KeyPairFormatFilter(getLocalization()));
 		if(newBackupFile == null)
 			return;
 
@@ -1915,28 +2017,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public KeyPairFormatFilter getKeyPairFormatFilter()
 	{
-		return new KeyPairFormatFilter();
-	}
-	
-	public class KeyPairFormatFilter extends FormatFilter
-	{
-		public String getWildCardExtension()
-		{
-			return "*" + getExtension();
-		}
-
-		@Override
-		public String getExtension()
-		{
-			return MartusApp.SHARE_KEYPAIR_FILENAME_EXTENSION;
-		}
-
-		@Override
-		public String getDescription()
-		{
-			return getLocalization().getFieldLabel("KeyPairFileFilter");
-		}
-		
+		return new KeyPairFormatFilter(getLocalization());
 	}
 	
 	public void displayScrollableMessage(String titleTag, String message, String okButtonTag, Map tokenReplacement) 
@@ -1956,26 +2037,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	void initializeViews()
+	void initializeViews() throws Exception
 	{
 		MartusLogger.logBeginProcess("Initializing views");
-		updateTitle();
 
-		setWindowSizeAndState();
-
-		if(UiSession.isJavaFx)
-		{
-			mainStage = new FxMainStage(this);
-			FxRunner fxRunner = new FxRunner(mainStage);
-			fxRunner.setAbortImmediatelyOnError();
-			Platform.runLater(fxRunner);
-			setContentPane(mainStage);
-		}
-		else
-		{
-			mainPane = new UiMainPane(this, getUiState());
-			setContentPane(mainPane);
-		}
+		initializeFrame();
 
 		getTransport().setProgressMeter(getTorProgressMeter());
 		// NOTE: re-start Tor here in case it was turned on in the wizard
@@ -1984,49 +2050,26 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		MartusLogger.logEndProcess("Initializing views");
 
 		MartusLogger.logBeginProcess("Checking server status");
-		checkServerStatus();	
+		setWaitingCursor();
+		updateServerStatusInStatusBar();
+		resetCursor();
 		MartusLogger.logEndProcess("Checking server status");
 	}
 
-	public UiProgressMeter getTorProgressMeter()
+	abstract protected void initializeFrame() throws Exception;
+
+	public ProgressMeterInterface getTorProgressMeter()
 	{
-		UiStatusBar statusBar = getStatusBar();
-		if(statusBar == null)
+		StatusBar torStatusBar = getStatusBar();
+		if(torStatusBar == null)
 			return null;
 		
-		return statusBar.getTorProgressMeter();
+		return torStatusBar.getTorProgressMeter();
 	}
 
-	public void setWindowSizeAndState()
-	{
-		Dimension screenSize = Utilities.getViewableScreenSize();
-		Dimension appDimension = getUiState().getCurrentAppDimension();
-		Point appPosition = getUiState().getCurrentAppPosition();
-		boolean showMaximized = false;
-		if(Utilities.isValidScreenPosition(screenSize, appDimension, appPosition))
-		{
-			setLocation(appPosition);
-			setSize(appDimension);
-			if(getUiState().isCurrentAppMaximized())
-				showMaximized = true;
-		}
-		else
-			showMaximized = true;
-		
-		if(showMaximized)
-		{
-			setSize(screenSize.width - 50 , screenSize.height - 50);
-			Utilities.maximizeWindow(this);
-		}
-		
-		getUiState().setCurrentAppDimension(getSize());
-	}
+	abstract public void restoreWindowSizeAndState();
 
-	private void updateTitle() {
-		setTitle(getLocalization().getWindowTitle("main"));
-	}
-
-	public void checkServerStatus()
+	public void updateServerStatusInStatusBar()
 	{		
 		if (!getApp().isServerConfigured())
 		{	
@@ -2105,13 +2148,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			while(userChoice == UiSigninDlg.LANGUAGE_CHANGED)
 			{	
 				if(mode==UiSigninDlg.INITIAL || mode == UiSigninDlg.INITIAL_NEW_RECOVER_ACCOUNT)
-					signinDlg = new UiInitialSigninDlg(getLocalization(), getCurrentUiState(), getCurrentActiveFrame(), mode, userName, userPassword);
+					signinDlg = new UiInitialSigninDlg(this, mode, userName, userPassword);
 				else
 				{
 					if(getCurrentActiveDialog() != null)
 						signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), (JFrame)null, mode, userName, userPassword);
 					else
-						signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), getCurrentActiveFrame(), mode, userName, userPassword);
+						signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), getCurrentActiveFrame().getSwingFrame(), mode, userName, userPassword);
 				}
 				userChoice = signinDlg.getUserChoice();
 				userName = signinDlg.getNameText();
@@ -2133,7 +2176,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			}
 			catch (Exception e)
 			{
-				notifyDlg(getCurrentActiveFrame(), "incorrectsignin");
+				notifyDlg(getCurrentActiveFrame().getSwingFrame(), "incorrectsignin");
 				busyDlg = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitAfterFailedSignIn"));
 			}
 			finally
@@ -2163,8 +2206,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void exitNormally()
 	{
-		if(createdNewAccount)
-			askAndBackupKeypairIfRequired();
 		if(showRelevantUploadReminder())
 			return;
 		
@@ -2235,33 +2276,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	public void modifyBulletin(Bulletin b) throws Exception
-	{
-		getCurrentUiState().setModifyingBulletin(true);
-		setEnabled(false);
-		UiBulletinModifyDlg dlg = null;
-		try
-		{
-			dlg = new UiBulletinModifyDlg(b, this);
-			setCurrentActiveFrame(dlg);
-			setVisible(false);
-			dlg.setVisible(true);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			if(dlg != null)
-				dlg.dispose();
-			doneModifyingBulletin();
-			throw(e);
-		}
-	}
+	abstract public void modifyBulletin(Bulletin b) throws Exception;
 
 	public void doneModifyingBulletin()
 	{
 		getCurrentUiState().setModifyingBulletin(false);
-		setEnabled(true);
-		setVisible(true);
+		showMainWindow();
 		setCurrentActiveFrame(this);
 	}
 
@@ -2299,11 +2319,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public boolean getBulletinsAlwaysPrivate()
 	{
 		return getApp().getConfigInfo().shouldForceBulletinsAllPrivate();
-	}
-
-	public boolean getCheckFieldOfficeBulletins()
-	{
-		return getApp().getConfigInfo().getCheckForFieldOfficeBulletins();
 	}
 
     public boolean getUseZawgyiFont()
@@ -2348,20 +2363,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	}
 	
 	
-	class WindowEventHandler extends WindowAdapter
-	{
-		public void windowClosing(WindowEvent event)
-		{
-			exitNormally();
-		}
-	}
-
-	class TimeoutTimerTask extends TimerTask
+	private class TimeoutTimerTask extends TimerTask
 	{
 		public TimeoutTimerTask()
 		{
 		}
 
+		@Override
 		public void run()
 		{
 			try 
@@ -2395,7 +2403,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		boolean hasTimedOut()
 		{
-			if(inactivityDetector.secondsSinceLastActivity() > timeoutInXSeconds)
+			if(inactivityDetector.secondsSinceLastActivity() > Martus.timeoutInXSeconds)
 				return true;
 
 			return false;
@@ -2403,9 +2411,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		class ThreadedSignin implements Runnable
 		{
+			@Override
 			public void run()
 			{
-				JFrame frame = getCurrentActiveFrame();
+				JFrame frame = getCurrentActiveFrame().getSwingFrame();
 				if(frame != null)
 				{
 					frame.setGlassPane(new WindowObscurer());
@@ -2440,6 +2449,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	class UploadErrorChecker extends AbstractAction
 	{
+		@Override
 		public void actionPerformed(ActionEvent evt)
 		{
 			if(uploadResult == null)
@@ -2491,12 +2501,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	public void setCurrentActiveFrame(JFrame currentActiveFrame)
+	public void setCurrentActiveFrame(TopLevelWindowInterface currentActiveFrame)
 	{
 		this.currentActiveFrame = currentActiveFrame;
 	}
 
-	public JFrame getCurrentActiveFrame()
+	public TopLevelWindowInterface getCurrentActiveFrame()
 	{
 		return currentActiveFrame;
 	}
@@ -2536,11 +2546,39 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return getTextFieldColumns(Utilities.getViewableScreenSize().width);
 	}
 	
+	public File showChooseDirectoryDialog(String windowTitle)
+	{
+		return UiFileChooser.displayChooseDirectoryDialog(getCurrentActiveFrame().getSwingFrame(), windowTitle);
+	}
+
+	public File showFileOpenDialog(String fileDialogCategory, Vector<FormatFilter> filters)
+	{
+		// TODO: When we switch from Swing to JavaFX, combine this with the other file open dialog
+		JFileChooser fileChooser = new JFileChooser(getApp().getMartusDataRootDirectory());
+		fileChooser.setDialogTitle(getLocalization().getWindowTitle("FileDialog" + fileDialogCategory));
+		filters.forEach(filter -> fileChooser.addChoosableFileFilter(filter));
+		
+		// NOTE: Apparently the all file filter has a Mac bug, so this is a workaround
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		fileChooser.addChoosableFileFilter(new AllFileFilter(getLocalization()));
+
+		int userResult = fileChooser.showOpenDialog(getCurrentActiveFrame().getSwingFrame());
+		File selectedFile = fileChooser.getSelectedFile();
+		if(userResult != JFileChooser.APPROVE_OPTION)
+			selectedFile = null;
+		return selectedFile;
+	}
+	
 	public File showFileOpenDialog(String fileDialogCategory, FileFilter filter)
 	{
 		return internalShowFileOpenDialog(fileDialogCategory, null, filter);
 	}
 	
+	public File showFileOpenDialogWithDirectoryMemory(String fileDialogCategory)
+	{
+		return showFileOpenDialogWithDirectoryMemory(fileDialogCategory, (FileFilter)null);
+	}
+
 	public File showFileOpenDialogWithDirectoryMemory(String fileDialogCategory, FileFilter filter)
 	{
 		File directory = UiSession.getMemorizedFileOpenDirectories().get(fileDialogCategory);
@@ -2556,7 +2594,50 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String okButtonLabel = getLocalization().getButtonLabel("FileDialogOk" + fileDialogCategory);
 		if(directory == null)
 			directory = getApp().getCurrentAccountDirectory();
-		return FileDialogHelpers.doFileOpenDialog(getCurrentActiveFrame(), title, okButtonLabel, directory, filter);
+		return FileDialogHelpers.doFileOpenDialog(getCurrentActiveFrame().getSwingFrame(), title, okButtonLabel, directory, filter);
+	}
+	
+	public File showFileSaveDialog(String fileDialogCategory, Vector<FormatFilter> filters)
+	{
+		// TODO: When we switch from Swing to JavaFX, combine this with the other file save dialog
+		while(true)
+		{
+			JFileChooser fileChooser = new JFileChooser(getApp().getMartusDataRootDirectory());
+			fileChooser.setDialogTitle(getLocalization().getWindowTitle("FileDialog" + fileDialogCategory));
+			filters.forEach(filter -> fileChooser.addChoosableFileFilter(filter));
+			
+			// NOTE: Apparently the all file filter has a Mac bug, so this is a workaround
+			fileChooser.setAcceptAllFileFilterUsed(false);
+	
+			int userResult = fileChooser.showSaveDialog(getCurrentActiveFrame().getSwingFrame());
+			if(userResult != JFileChooser.APPROVE_OPTION)
+				break;
+			
+			File selectedFile = fileChooser.getSelectedFile();
+			FormatFilter selectedFilter = (FormatFilter) fileChooser.getFileFilter();
+			selectedFile = getFileWithExtension(selectedFile, selectedFilter);
+
+			if(!selectedFile.exists())
+				return selectedFile;
+
+			if(UiUtilities.confirmDlg(getLocalization(), getCurrentActiveFrame().getSwingFrame(), "OverWriteExistingFile"))
+				return selectedFile;
+		}
+		
+		return null;
+	}
+	
+	private static File getFileWithExtension(File file, FormatFilter filter)
+	{
+		String extension = filter.getExtension();
+		String fileName = file.getName();
+		if(!fileName.toLowerCase().endsWith(extension.toLowerCase()))
+		{
+			StringBuilder fileNameWithExtension = new StringBuilder(fileName);
+			fileNameWithExtension.append(extension);
+			file = new File(file.getParentFile(), fileNameWithExtension.toString());
+		}
+		return file;
 	}
 	
 	public File showFileSaveDialogNoFilterWithDirectoryMemory(String fileDialogCategory, String defaultFilename)
@@ -2583,7 +2664,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String title = getLocalization().getWindowTitle("FileDialog" + fileDialogCategory);
 		if(defaultDirectory == null)
 			defaultDirectory = getApp().getCurrentAccountDirectory();
-		return FileDialogHelpers.doFileSaveDialog(getCurrentActiveFrame(), title, defaultDirectory, defaultFilename, filter, getLocalization());
+		return FileDialogHelpers.doFileSaveDialog(getCurrentActiveFrame().getSwingFrame(), title, defaultDirectory, defaultFilename, filter, getLocalization());
 	}
 
 	void setLocalization(MartusLocalization localization)
@@ -2606,16 +2687,19 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getSession().initalizeUiState();
 	}
 
-	public UiMainPane getMainPane()
+	public void initalizeUiState(String defaultLanguageCode)
 	{
-		return mainPane;
-	}
-	
-	public FxMainStage getMainStage()
-	{
-		return mainStage;
+		getSession().initalizeUiState(defaultLanguageCode);
 	}
 
+	abstract public UiMainPane getMainPane();
+	abstract public FxMainStage getMainStage();
+
+	public void repaint()
+	{
+		getCurrentActiveFrame().repaint();
+	}
+	
 	private UiBulletinTablePane getBulletinsTablePane()
 	{
 		if(getMainPane() == null)
@@ -2639,12 +2723,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return getMainPane().getPreviewSplitter();
 	}
 
-	private UiStatusBar getStatusBar()
+	public StatusBar getStatusBar()
 	{
-		if(getMainPane() == null)
-			return null;
-		
-		return getMainPane().getStatusBar();
+		return statusBar;
+	}
+	
+	protected void setStatusBar(StatusBar newStatusBar)
+	{
+		statusBar = newStatusBar;
 	}
 
 	private FolderSplitPane getFolderSplitter()
@@ -2668,6 +2754,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		backgroundUploadTimerTask.setNeedToGetAccessToken();
 	}
 
+	abstract public void createAndShowLargeModalDialog(VirtualStage stage) throws Exception;
+	abstract public void createAndShowModalDialog(FxShellController controller, Dimension preferedDimension, String titleTag) throws Exception;
+	abstract public void createAndShowContactsDialog() throws Exception;
+	
+	public static final Dimension SMALL_PREFERRED_DIALOG_SIZE = new Dimension(400, 200);
+	public static final Dimension LARGE_PREFERRED_DIALOG_SIZE = new Dimension(960, 640);
+
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static final String STATUS_READY = "StatusReady";
 	public static final String STATUS_CONNECTING = "StatusConnecting";
@@ -2676,18 +2769,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public static final String STATUS_SERVER_OFFLINE_MODE = "OfflineModeProgressMessage";
 
 	public static final int MINIMUM_TEXT_FIELD_WIDTH = 30;
-	private static final int TESTING_TIMEOUT_60_SECONDS = 60;
-	private static final int TESTING_FOCHECK_SECONDS = 5 * 60;
 	private static final int MINIMUM_SCREEN_WIDTH = 700;
 	public static final int MAX_KEYPAIRFILE_SIZE = 32000;
 	private static final int BACKGROUND_UPLOAD_CHECK_MILLIS = 5*1000;
 	private static final int BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS = 5*1000;
-	private static final int TIME_BETWEEN_FIELD_OFFICE_CHECKS_SECONDS = 60;
 
 	private UiSession session;
-
-	private UiMainPane mainPane;
-	private FxMainStage mainStage;
 
 	private java.util.Timer uploader;
 	private java.util.Timer timeoutChecker;
@@ -2697,7 +2784,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	String uploadResult;
 	UiInactivityDetector inactivityDetector;
 
-	private JFrame currentActiveFrame;
+	private TopLevelWindowInterface currentActiveFrame;
 	private JDialog currentActiveDialog;
 	
 	public boolean inConfigServer;
@@ -2708,9 +2795,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private FileLock lockToPreventTwoInstances; 
 	private FileOutputStream lockStream;
-	public int timeBetweenFieldOfficeChecksSeconds;
-	private Stack cursorStack;
-
-	public static int timeoutInXSeconds;
-
+	private Stack<Object> cursorStack;
+	private StatusBar statusBar;
 }

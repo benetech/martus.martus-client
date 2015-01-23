@@ -59,6 +59,7 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.core.templates.FormTemplateManager.UnableToLoadCurrentTemplateException;
 import org.martus.client.network.RetrieveCommand;
 import org.martus.client.reports.ReportFormatFilter;
 import org.martus.client.search.BulletinSearcher;
@@ -89,6 +90,7 @@ import org.martus.common.FieldDeskKeys;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
+import org.martus.common.LanguageSettingsProvider;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
@@ -114,8 +116,8 @@ import org.martus.common.database.Database;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.CustomFieldTemplate;
-import org.martus.common.fieldspec.CustomFieldTemplate.FutureVersionException;
+import org.martus.common.fieldspec.FormTemplate;
+import org.martus.common.fieldspec.FormTemplate.FutureVersionException;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.network.ClientSideNetworkInterface;
@@ -135,10 +137,12 @@ import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.common.packet.UniversalId;
+import org.martus.common.utilities.DateUtilities;
 import org.martus.jarverifier.JarVerifier;
 import org.martus.swing.FontHandler;
 import org.martus.util.DatePreference;
 import org.martus.util.DirectoryUtils;
+import org.martus.util.MultiCalendar;
 import org.martus.util.Stopwatch;
 import org.martus.util.StreamCopier;
 import org.martus.util.StreamableBase64;
@@ -147,7 +151,6 @@ import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
 import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.FileInputStreamWithSeek;
-import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.ZipEntryInputStreamWithSeekThatClosesZipFile;
 
 public class MartusApp
@@ -262,7 +265,7 @@ public class MartusApp
 		return jarEntry;
 	}
 
-	static public void setInitialUiDefaultsFromFileIfPresent(MtfAwareLocalization localization, File defaultUiFile)
+	static public void setInitialUiDefaultsFromFileIfPresent(LanguageSettingsProvider settings, File defaultUiFile)
 	{
 		if(!defaultUiFile.exists())
 			return;
@@ -278,8 +281,8 @@ public class MartusApp
 				MartusLogger.log("Setting default language: " + languageCode);
 				DatePreference datePref = MiniLocalization.getDefaultDatePreferenceForLanguage(languageCode);
 				MartusLogger.log("Setting default date fmt: " + datePref.getDateTemplate());
-				localization.setCurrentLanguageCode(languageCode);
-				localization.setDateFormatFromLanguage();
+				settings.setCurrentLanguage(languageCode);
+				settings.setDateFormatFromLanguage();
 			}
 		}
 		catch (Exception e)
@@ -302,6 +305,28 @@ public class MartusApp
 	{
 		ContactKeys allContacts = new ContactKeys(configInfo.getContactKeysXml());
 		return allContacts;
+	}
+	
+	public Integer getKeyVerificationStatus(String publicKeyToCheck) throws Exception
+	{
+		if(publicKeyToCheck.equals(getAccountId()))
+				return ContactKey.VERIFIED_ACCOUNT_OWNER;
+		ContactKeys contacts = getContactKeys();
+		for(int i = 0; i < contacts.size(); ++i)
+		{
+			ContactKey key = contacts.get(i);
+			if(publicKeyToCheck.equals(key.getPublicKey()))
+			{
+				if(key.getVerificationStatus().equals(ContactKey.NOT_VERIFIED))
+					return ContactKey.NOT_VERIFIED;
+				else if(key.getVerificationStatus().equals(ContactKey.VERIFIED_ENTERED_20_DIGITS))
+					return ContactKey.VERIFIED_ENTERED_20_DIGITS;
+				else if(key.getVerificationStatus().equals(ContactKey.VERIFIED_VISUALLY))
+					return ContactKey.VERIFIED_VISUALLY;
+				return ContactKey.NOT_VERIFIED_UNKNOWN;	
+			}
+		}
+		return ContactKey.NOT_VERIFIED_UNKNOWN;
 	}
 
 	public void setContactKeys(ContactKeys newContactKeys) throws SaveConfigInfoException 
@@ -552,20 +577,10 @@ public class MartusApp
 	return updatedContactKeysWithCanReceiveFromAdjusted;
 	}
 
-	public void updateCustomFieldTemplate(CustomFieldTemplate updatedTemplate) throws SaveConfigInfoException, CustomFieldsParseException
+	public void updateFormTemplate(FormTemplate updatedTemplate) throws Exception
 	{
-
-		configInfo.setCustomFieldTopSectionXml(updatedTemplate.getImportedTopSectionText());
-		configInfo.setCustomFieldBottomSectionXml(updatedTemplate.getImportedBottomSectionText());
-		configInfo.setCurrentFormTemplateTitle(updatedTemplate.getTitle());
-		configInfo.setCurrentFormTemplateDescription(updatedTemplate.getDescription());
-		configInfo.setCustomFieldLegacySpecs(MartusConstants.deprecatedCustomFieldSpecs);
-		saveConfigInfo();
-
-		FieldSpecCollection topCollection = FieldCollection.parseXml(updatedTemplate.getImportedTopSectionText());
-		FieldSpecCollection bottomCollection = FieldCollection.parseXml(updatedTemplate.getImportedBottomSectionText());
-		store.setTopSectionFieldSpecs(topCollection);
-		store.setBottomSectionFieldSpecs(bottomCollection);
+		store.saveNewFormTemplate(updatedTemplate);
+		store.selectFormTemplateAsDefault(updatedTemplate.getTitle());
 	}
 
 	public void saveConfigInfo() throws SaveConfigInfoException
@@ -589,10 +604,46 @@ public class MartusApp
 		turnNetworkOnOrOffAsRequested();
 		startOrStopTorAsRequested();
 	}
+	
+	public boolean shouldWeAskForKeypairBackup()
+	{
+		return shouldWeAskForKeypairBackup(DateUtilities.getTodayInStoredFormat());
+	}
+
+	public boolean shouldWeAskForKeypairBackup(String today)
+	{
+		String dateLastAskedForKeypairBackup = configInfo.getDateLastAskedUserToBackupKeypair();
+		if(dateLastAskedForKeypairBackup.isEmpty())
+			return false;
+		
+		MultiCalendar todayCalendar = MultiCalendar.createFromIsoDateString(today);
+		MultiCalendar lastNoticeCalendar = MultiCalendar.createFromIsoDateString(dateLastAskedForKeypairBackup);
+		
+		int daysFromLastNotice = MultiCalendar.daysBetween(lastNoticeCalendar, todayCalendar);
+		return (daysFromLastNotice >= DAYS_UNTIL_WE_ASK_TO_BACKUP_KEYPAIR);
+	}
+	
+	public void startClockToAskForKeypairBackup() throws SaveConfigInfoException
+	{
+		String today = DateUtilities.getTodayInStoredFormat();
+		configInfo.setDateLastAskedUserToBackupKeypair(today);
+		saveConfigInfo();
+	}
+	
+	public void clearClockToAskForKeypairBackup() throws SaveConfigInfoException
+	{
+		configInfo.setDateLastAskedUserToBackupKeypair("");
+		saveConfigInfo();
+	}
 
 	public void turnNetworkOnOrOffAsRequested()
 	{
-		boolean shouldBeOnline = configInfo.isNetworkOnline();
+		boolean shouldBeOnline = configInfo.getOnStartupServerOnlineStatus();
+		turnNetworkOnOrOff(shouldBeOnline);
+	}
+
+	public void turnNetworkOnOrOff(boolean shouldBeOnline)
+	{
 		getTransport().setIsOnline(shouldBeOnline);
 		MartusLogger.log("Online status set to " + shouldBeOnline);
 	}
@@ -602,23 +653,9 @@ public class MartusApp
 		orchidStore.saveStore(getOrchidCacheFile(), getSecurity());
 	}
 
-	public void encryptAndWriteFileAndSignatureFile(File file, File signatureFile,
-			byte[] plainText) throws Exception
+	public void encryptAndWriteFileAndSignatureFile(File file, File signatureFile, byte[] plainText) throws Exception
 	{
-		ByteArrayInputStream encryptedInputStream = new ByteArrayInputStream(plainText);
-		FileOutputStream fileOutputStream = new FileOutputStream(file);
-		getSecurity().encrypt(encryptedInputStream, fileOutputStream);
-
-		fileOutputStream.close();
-		encryptedInputStream.close();
-
-		FileInputStream in = new FileInputStream(file);
-		byte[] signature = getSecurity().createSignatureOfStream(in);
-		in.close();
-
-		FileOutputStream out = new FileOutputStream(signatureFile);
-		out.write(signature);
-		out.close();
+		getSecurity().encryptAndWriteFileAndSignatureFile(file, signatureFile, plainText);
 	}
 
 	public void loadConfigInfo() throws LoadConfigInfoException
@@ -640,13 +677,6 @@ public class MartusApp
 			ByteArrayInputStream plainTextConfigInputStream = new ByteArrayInputStream(plainTextConfigInfo);
 			configInfo = ConfigInfo.load(plainTextConfigInputStream);
 			plainTextConfigInputStream.close();
-			
-			FieldSpecCollection specsTop = getCustomFieldSpecsTopSection(configInfo);
-			removeSpaceLikeCharactersFromTags(specsTop);
-			store.setTopSectionFieldSpecs(specsTop);
-			FieldSpecCollection specsBottom = getCustomFieldSpecsBottomSection(configInfo);
-			removeSpaceLikeCharactersFromTags(specsBottom);
-			store.setBottomSectionFieldSpecs(specsBottom);
 			
 			String languageCode = localization.getCurrentLanguageCode();
 			if (languageCode != null && languageCode.equals(MtfAwareLocalization.BURMESE))
@@ -690,21 +720,17 @@ public class MartusApp
 
 	private byte[] verifyAndReadSignedFile(File dataFile, File sigFile) throws Exception
 	{
-		String accountId = getSecurity().getPublicKeyString();
-		if(!isSignatureFileValid(dataFile, sigFile, accountId))
-			throw new SignatureVerificationException();
-
-		InputStreamWithSeek encryptedInputStream = new FileInputStreamWithSeek(dataFile);
-		ByteArrayOutputStream plainTextStream = new ByteArrayOutputStream();
-		getSecurity().decrypt(encryptedInputStream, plainTextStream);
-
-		byte[] plainText = plainTextStream.toByteArray();
-
-		plainTextStream.close();
-		encryptedInputStream.close();
-		return plainText;
+		MartusCrypto security = getSecurity();
+		
+		return MartusCrypto.verifySignatureAndDecryptFile(dataFile, sigFile, security);
 	}
-	
+
+	private boolean isSignatureFileValid(File dataFile, File sigFile, String accountId) throws Exception 
+	{
+		MartusCrypto security = getSecurity();
+		return MartusCrypto.isSignatureFileValid(dataFile, sigFile, accountId, security);
+	}
+
 	public void writeSignedUserDictionary(String string) throws Exception
 	{
 		encryptAndWriteFileAndSignatureFile(getDictionaryFile(), getDictionarySignatureFile(), string.getBytes("UTF-8"));
@@ -745,25 +771,6 @@ public class MartusApp
 	}
 
 	
-	private boolean isSignatureFileValid(File dataFile, File sigFile, String accountId) throws FileNotFoundException, IOException, MartusSignatureException 
-	{
-		byte[] signature =	new byte[(int)sigFile.length()];
-		FileInputStream inSignature = new FileInputStream(sigFile);
-		inSignature.read(signature);
-		inSignature.close();
-
-		FileInputStream inData = new FileInputStream(dataFile);
-		try
-		{
-			boolean verified = getSecurity().isValidSignatureOfStream(accountId, inData, signature);
-			return verified;
-		}
-		finally
-		{
-			inData.close();
-		}
-	}
-
 	private void migrateToUsingContactKeys() throws Exception
 	{
 		String legacyHQKey = configInfo.getLegacyHQKey();
@@ -827,20 +834,22 @@ public class MartusApp
 		loadConfigInfo();
 	}
 
-	public static FieldSpecCollection getCustomFieldSpecsTopSection(ConfigInfo configInfo) throws CustomFieldsParseException
+	public static FieldSpecCollection getCustomFieldSpecsTopSection(ConfigInfo configInfo) throws Exception
 	{
-		String xmlSpecs = configInfo.getCustomFieldTopSectionXml();
+		String xmlSpecs = configInfo.getNoLongerUsedCustomFieldTopSectionXml();
 		if(xmlSpecs.length() > 0)
 			return FieldCollection.parseXml(xmlSpecs);
 			
 		String legacySpecs = configInfo.getCustomFieldLegacySpecs();
-		FieldSpecCollection specs = LegacyCustomFields.parseFieldSpecsFromString(legacySpecs);
-		return specs;
+		if(legacySpecs.length() > 0)
+			return LegacyCustomFields.parseFieldSpecsFromString(legacySpecs);
+		
+		return StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 	}
 
 	public static FieldSpecCollection getCustomFieldSpecsBottomSection(ConfigInfo configInfo) throws CustomFieldsParseException
 	{
-		String xmlSpecs = configInfo.getCustomFieldBottomSectionXml();
+		String xmlSpecs = configInfo.getNoLongerUsedCustomFieldBottomSectionXml();
 		if(xmlSpecs.length() > 0)
 			return FieldCollection.parseXml(xmlSpecs);
 			
@@ -848,12 +857,12 @@ public class MartusApp
 		return specs;
 	}
 
-	public void doAfterSigninInitalization() throws MartusAppInitializationException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
+	public void doAfterSigninInitalization() throws Exception
 	{
 		doAfterSigninInitalization(getCurrentAccountDirectory(), store.createDatabase(getCurrentAccountDirectory()));
 	}
 	
-	public void doAfterSigninInitalization(File dataDirectory,	Database database) throws MartusAppInitializationException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
+	public void doAfterSigninInitalization(File dataDirectory,	Database database) throws Exception
 	{
 		if(isInitialized)
 		{
@@ -861,9 +870,14 @@ public class MartusApp
 			return;
 		}
 		
+		initializeOrchid();
+
 		try
 		{
 			store.doAfterSigninInitialization(dataDirectory, database);
+
+			if(!configInfo.getDidTemplateMigration())
+				migrateTemplateToFormTemplateManager();
 		}
 		catch(FileVerificationException e)
 		{
@@ -877,12 +891,20 @@ public class MartusApp
 		{
 			throw(e);
 		}
+		catch(UnableToLoadCurrentTemplateException e)
+		{
+			throw(e);
+		}
 		catch(Exception e)
 		{
 			MartusLogger.logException(e);
 			throw new MartusAppInitializationException("Error initializing store");
 		}
 		
+	}
+
+	public void initializeOrchid() throws MartusAppInitializationException
+	{
 		try
 		{
 			orchidStore.loadStore(getOrchidCacheFile(), getSecurity());
@@ -897,6 +919,23 @@ public class MartusApp
 			MartusLogger.logException(e);
 			throw new MartusAppInitializationException("Error initializing Tor transport");
 		}
+	}
+
+	private void migrateTemplateToFormTemplateManager() throws Exception
+	{
+		if(configInfo.hasLegacyFormTemplate())
+		{
+			MartusLogger.log("Migrating template from config");
+			FormTemplate template = configInfo.getLegacyFormTemplate();
+			if(template.getTitle().length() == 0)
+			{
+				template.setTitle(localization.getFieldLabel("NoFormTemplateTitle"));
+			}
+			store.saveNewFormTemplate(template);
+		}
+		
+		configInfo.setDidTemplateMigration(true);
+		saveConfigInfo();
 	}
 
 	public File getFxmlDirectory()
@@ -1315,7 +1354,7 @@ public class MartusApp
 		b.set(Bulletin.TAGPUBLICINFO, configInfo.getTemplateDetails());
 		b.set(Bulletin.TAGLANGUAGE, getDefaultLanguageForNewBulletin());
 		setDefaultHQKeysInBulletin(b);
-		b.setDraft();
+		b.setMutable();
 		b.setAllPrivate(true);
 		return b;
 	}
@@ -1344,6 +1383,11 @@ public class MartusApp
 	{
 		return store.getFolderSaved();
 	}
+	
+	public BulletinFolder getFolderRetrieved()
+	{
+		return store.createOrFindFolder(getNameOfFolderForAllRetrieved());
+	}
 
 	public BulletinFolder getFolderDiscarded()
 	{
@@ -1370,6 +1414,11 @@ public class MartusApp
 	{
 		String folderName = getNameOfFolderRetrievedFieldOfficeSealed();
 		return createOrFindFolder(folderName);
+	}
+	
+	public String getNameOfFolderForAllRetrieved()
+	{
+		return store.getNameOfFolderForAllRetrieved();
 	}
 
 	public String getNameOfFolderRetrievedSealed()
@@ -1423,6 +1472,43 @@ public class MartusApp
 		if(newFolder != null)
 			store.saveFolders();
 		return newFolder;
+	}
+	
+	public boolean isAnyBulletinsUnsent(UniversalId[] bulletinIds)
+	{
+		BulletinFolder draftOutBox = getFolderDraftOutbox();
+		BulletinFolder sealedOutBox = getFolderSealedOutbox();
+		for (int i = 0; i < bulletinIds.length; i++)
+		{
+			UniversalId uid = bulletinIds[i];
+			if(draftOutBox.contains(uid) || sealedOutBox.contains(uid))
+				return true;
+		}
+		return false;
+	}
+	
+	public Vector getNonDiscardedFoldersForBulletins(UniversalId[] bulletinIds)
+	{
+		BulletinFolder discardedFolder = getFolderDiscarded();
+		Vector visibleFoldersContainingAnyBulletin = new Vector();
+		for (int i = 0; i < bulletinIds.length; i++)
+		{
+			UniversalId uid = bulletinIds[i];
+			Vector visibleFoldersContainingThisBulletin = findBulletinInAllVisibleFolders(uid);
+			visibleFoldersContainingThisBulletin.remove(discardedFolder);
+			addUniqueEntriesOnly(visibleFoldersContainingAnyBulletin, visibleFoldersContainingThisBulletin);
+		}
+		return visibleFoldersContainingAnyBulletin;
+	}
+
+	private void addUniqueEntriesOnly(Vector to, Vector from)
+	{
+		for(int i = 0 ; i < from.size(); ++i)
+		{
+			Object elementToAdd = from.get(i);
+			if(!to.contains(elementToAdd))
+				to.add(elementToAdd);
+		}
 	}
 	
 	public void cleanupWhenCompleteQuickErase()
@@ -1889,7 +1975,7 @@ public class MartusApp
 		return AccountId;
 	}
 
-	public void putFormTemplateOnServer(CustomFieldTemplate formTemplate) throws Exception 
+	public void putFormTemplateOnServer(FormTemplate formTemplate) throws Exception 
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
@@ -1940,7 +2026,7 @@ public class MartusApp
 	}
 
 	
-	public CustomFieldTemplate getFormTemplateOnServer(String accountId, String formTitle) throws Exception 
+	public FormTemplate getFormTemplateOnServer(String accountId, String formTitle) throws Exception 
 	{
 		if(!isSSLServerAvailable())
 			throw new ServerNotAvailableException();
@@ -1966,9 +2052,9 @@ public class MartusApp
 		return importFormTemplate(formTemplateTempFile);
 	}
 
-	private CustomFieldTemplate importFormTemplate(File formTemplateTempFile) throws FutureVersionException, IOException
+	private FormTemplate importFormTemplate(File formTemplateTempFile) throws FutureVersionException, IOException
 	{
-		CustomFieldTemplate template = new CustomFieldTemplate();
+		FormTemplate template = new FormTemplate();
 		FileInputStreamWithSeek inputStream = new FileInputStreamWithSeek(formTemplateTempFile);
 		try
 		{
@@ -2032,7 +2118,7 @@ public class MartusApp
 		throw new ServerCallFailedException();
 	}
 
-	public void moveBulletinToDamaged(BulletinFolder outbox, UniversalId uid)
+	public void moveBulletinToDamaged(BulletinFolder outbox, UniversalId uid) throws IOException
 	{
 		System.out.println("Moving bulletin to damaged");
 		BulletinFolder damaged = createOrFindFolder(store.getNameOfFolderDamaged());
@@ -2062,7 +2148,7 @@ public class MartusApp
 	public FieldDataPacket retrieveFieldDataPacketFromServer(UniversalId bulletinId, String dataPacketLocalId) throws Exception
 	{
 		UniversalId packetUid = UniversalId.createFromAccountAndLocalId(bulletinId.getAccountId(), dataPacketLocalId);
-		FieldDataPacket fdp = new FieldDataPacket(packetUid, StandardFieldSpecs.getDefaultTopSetionFieldSpecs());
+		FieldDataPacket fdp = new FieldDataPacket(packetUid, StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
 		populatePacketFromServer(fdp, bulletinId.getLocalId());
 		return fdp;
 	}
@@ -2140,21 +2226,33 @@ public class MartusApp
 		}
 	}
 
-	public String deleteServerDraftBulletins(Vector uidList) throws
+	public String deleteServerDraftBulletins(Vector<UniversalId> uidList) throws
 		MartusSignatureException,
 		WrongAccountException
 	{
 		String[] localIds = new String[uidList.size()];
 		for (int i = 0; i < localIds.length; i++)
 		{
-			UniversalId uid = (UniversalId)uidList.get(i);
+			UniversalId uid = uidList.get(i);
 			if(!uid.getAccountId().equals(getAccountId()))
 				throw new WrongAccountException();
 
 			localIds[i] = uid.getLocalId();
 		}
 		NetworkResponse response = getCurrentNetworkInterfaceGateway().deleteServerDraftBulletins(getSecurity(), getAccountId(), localIds);
-		return response.getResultCode();
+		String resultCode = response.getResultCode();
+		if(resultCode.equals(NetworkInterfaceConstants.OK))
+			updateOnServerFlagForLocalCopies(uidList);
+		return resultCode;
+	}
+
+	private void updateOnServerFlagForLocalCopies(Vector<UniversalId> uidList)
+	{
+		for (UniversalId bulletinId : uidList)
+		{
+			if(store.doesBulletinRevisionExist(bulletinId))
+				store.setIsNotOnServer(bulletinId);
+		}
 	}
 
 	public static class AccountAlreadyExistsException extends Exception 
@@ -2544,6 +2642,9 @@ public class MartusApp
 	{
 		try
 		{
+			if(server.getInterface() == null)
+				return false;
+			
 			NetworkResponse response = server.getServerInfo();
 			if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
 				return false;
@@ -2650,7 +2751,7 @@ public class MartusApp
 	private boolean isInitialized;
 
 	public static final String PUBLIC_INFO_EXTENSION = ".mpi";
-	public static final String MARTUS_IMPORT_EXPORT_EXTENSION = ".xml";
+	public static final String XML_EXTENSION = ".xml";
 	public static final String DEFAULT_DETAILS_EXTENSION = ".txt";
 	public static final String AUTHENTICATE_SERVER_FAILED = "Failed to Authenticate Server";
 	public static final String SHARE_KEYPAIR_FILENAME_EXTENSION = ".dat";
@@ -2659,7 +2760,9 @@ public class MartusApp
 	public static final String PACKETS_DIRECTORY_NAME = "packets";
 	public static final String DOCUMENTS_DIRECTORY_NAME = "Docs";
 	public static final String USE_UNOFFICIAL_TRANSLATIONS_NAME = "use_unofficial_translations.txt";
+	public static final int DAYS_UNTIL_WE_ASK_TO_BACKUP_KEYPAIR = 7;
 	private static final String FXML_DIRECTORY_NAME = "fxml";
+	
 	private final int MAXFOLDERS = 50;
 	public int serverChunkSize = NetworkInterfaceConstants.CLIENT_MAX_CHUNK_SIZE;
 }

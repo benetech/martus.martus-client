@@ -34,15 +34,21 @@ import javafx.scene.layout.Pane;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.WizardNavigationButtonsInterface;
 import org.martus.client.swingui.jfx.WizardNavigationHandlerInterface;
-import org.martus.client.swingui.jfx.generic.FxContentController;
-import org.martus.client.swingui.jfx.generic.FxInSwingDialogController;
+import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.generic.FxWizardShellController;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 
-public class ContactsShellController extends FxInSwingDialogController implements WizardNavigationButtonsInterface
+public class ContactsShellController extends FxWizardShellController implements WizardNavigationButtonsInterface
 {
 	public ContactsShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+	}
+	
+	@Override
+	protected String getCssName()
+	{
+		return "Contacts.css";
 	}
 
 	@Override
@@ -51,17 +57,17 @@ public class ContactsShellController extends FxInSwingDialogController implement
 		return "contacts/ContactsShell.fxml";
 	}
 
-	public void setContentPane(FxContentController contentPaneController) throws Exception
+	public void loadAndIntegrateContentPane(FxController contentPaneController) throws Exception
 	{
 		AbstractFxSetupWizardContentController controller = (AbstractFxSetupWizardContentController) contentPaneController;
-		setContentController(controller);
+		setContentNavigationHandler(controller);
 
 		Parent createContents = contentPaneController.createContents();
 		contentPane.getChildren().addAll(createContents);
 		
 	}
 	
-	public void setContentController(WizardNavigationHandlerInterface contentNavigationHandlerToUse)
+	public void setContentNavigationHandler(WizardNavigationHandlerInterface contentNavigationHandlerToUse)
 	{
 		contentNavigationHandler = contentNavigationHandlerToUse;
 		contentNavigationHandler.setNavigationHandler(this);
@@ -89,7 +95,7 @@ public class ContactsShellController extends FxInSwingDialogController implement
 	protected void onClose(ActionEvent event) throws Exception
 	{
 		getContentNavigationHandler().nextWasPressed();
-		getFxInSwingDialogStage().close();
+		getStage().close();
 	}
 	
 	@FXML

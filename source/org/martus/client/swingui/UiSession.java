@@ -32,24 +32,39 @@ import java.util.Map;
 import org.martus.client.core.FontSetter;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.MartusAppInitializationException;
+import org.martus.client.test.MockMartusApp;
 import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.EnglishCommonStrings;
+import org.martus.common.MiniLocalization;
 import org.martus.swing.FontHandler;
+import org.martus.util.DatePreference;
 
 
 public class UiSession
 {
 	public UiSession() throws MartusAppInitializationException
 	{
-		setLocalization(new MartusLocalization(MartusApp.getTranslationsDirectory(), UiSession.getAllEnglishStrings()));
+		MartusLocalization newLocalization = new MartusLocalization(MartusApp.getTranslationsDirectory(), UiSession.getAllEnglishStrings());
+		
+		setLocalization(newLocalization);
 		app = new MartusApp(getLocalization());
 		initializeCurrentLanguage();
 	}
 
 	public void initalizeUiState()
 	{
+		initalizeUiState(MiniLocalization.ENGLISH);
+	}
+	
+	public void initalizeUiState(String defaultLanguageCode)
+	{
 		uiState = new CurrentUiState();
+		
+		getLocalization().setCurrentLanguageCode(defaultLanguageCode);
+		getLocalization().setCurrentDateFormatCode(new DatePreference().getDateTemplate());
+		getLocalization().setCurrentCalendarSystem(MiniLocalization.GREGORIAN_SYSTEM);
+
 		File uiStateFile = getUiStateFile();
 		if(!uiStateFile.exists())
 		{
@@ -58,10 +73,9 @@ public class UiSession
 			return;
 		}
 		getUiState().load(uiStateFile);
-		getLocalization().setCurrentDateFormatCode(getUiState().getCurrentDateFormat());
-		getLocalization().setCurrentCalendarSystem(getUiState().getCurrentCalendarSystem());
-		getLocalization().setAdjustThaiLegacyDates(getUiState().getAdjustThaiLegacyDates());
-		getLocalization().setAdjustPersianLegacyDates(getUiState().getAdjustPersianLegacyDates());
+		if(getApp().isSignedIn())
+			uiState.setCurrentLanguage(defaultLanguageCode);
+		getLocalization().setLanguageSettingsProvider(uiState);
 	}
 
 	public File getUiStateFile()
@@ -81,8 +95,6 @@ public class UiSession
 		getUiState().setCurrentLanguage(getLocalization().getCurrentLanguageCode());
 		getUiState().setCurrentDateFormat(getLocalization().getCurrentDateFormatCode());
 		getUiState().setCurrentCalendarSystem(getLocalization().getCurrentCalendarSystem());
-		getUiState().setCurrentAdjustThaiLegacyDates(getLocalization().getAdjustThaiLegacyDates());
-		getUiState().setCurrentAdjustPersianLegacyDates(getLocalization().getAdjustPersianLegacyDates());
 	}
 
 	private void initializeCurrentLanguage()
@@ -90,23 +102,20 @@ public class UiSession
 		CurrentUiState previouslySavedState = new CurrentUiState();
 		previouslySavedState.load(getUiStateFile());
 		
-		if(previouslySavedState.getCurrentLanguage() != "")
-		{	
-			getLocalization().setCurrentLanguageCode(previouslySavedState.getCurrentLanguage());
-			getLocalization().setCurrentDateFormatCode(previouslySavedState.getCurrentDateFormat());
-		}
+		if(previouslySavedState.getCurrentLanguage() != null)
+			MartusApp.setInitialUiDefaultsFromFileIfPresent(previouslySavedState, new File(getApp().getMartusDataRootDirectory(),"DefaultUi.txt"));
 		
-		if(getLocalization().getCurrentLanguageCode()== null)
-			MartusApp.setInitialUiDefaultsFromFileIfPresent(getLocalization(), new File(getApp().getMartusDataRootDirectory(),"DefaultUi.txt"));
-		
-		if(getLocalization().getCurrentLanguageCode()== null)
+		if(previouslySavedState.getCurrentLanguage() == null)
 		{
-			getLocalization().setCurrentLanguageCode(MtfAwareLocalization.ENGLISH);
-			getLocalization().setDateFormatFromLanguage();
+			previouslySavedState.setCurrentLanguage(MtfAwareLocalization.ENGLISH);
+			previouslySavedState.setDateFormatFromLanguage();
 		}
 
-		if (MtfAwareLocalization.BURMESE.equals(getLocalization().getCurrentLanguageCode()))
+		if (MtfAwareLocalization.BURMESE.equals(previouslySavedState.getCurrentLanguage()))
 			FontSetter.setUIFont(FontHandler.BURMESE_FONT);
+		
+		getLocalization().setLanguageSettingsProvider(previouslySavedState);
+
 	}
 
 	public static String[] getAllEnglishStrings()
@@ -135,8 +144,13 @@ public class UiSession
 	{
 		return app;
 	}
+	
+	public void setAppForUnitTests(MockMartusApp testApp)
+	{
+		app = testApp;
+	}
 
-	CurrentUiState getUiState()
+	public CurrentUiState getUiState()
 	{
 		return uiState;
 	}
@@ -147,12 +161,18 @@ public class UiSession
 			memorizedFileOpenDirectories = new HashMap<String, File>();
 		return memorizedFileOpenDirectories;
 	}
+	
+	public static boolean isJavaFx()
+	{
+		return !isSwing;
+	}
 
 	private MartusLocalization localization;
 	private MartusApp app;
 	private CurrentUiState uiState;
 	public static boolean isAlphaTester;
-	public static boolean isJavaFx;
+	public static boolean isSwing;
+	public static boolean isPureFx;
 	
 	public static boolean defaultFoldersUnsorted;
 	private static Map<String, File> memorizedFileOpenDirectories;

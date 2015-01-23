@@ -42,7 +42,7 @@ public class ActionMenuConfigureSpellCheck extends UiMenuAction
 	{
 		ConfigureSpellCheckDialog dialog = new ConfigureSpellCheckDialog(getMainWindow());
 		dialog.pack();
-		Utilities.centerDlg(dialog);
+		Utilities.packAndCenterWindow(dialog);
 		dialog.setVisible(true);
 	}
 

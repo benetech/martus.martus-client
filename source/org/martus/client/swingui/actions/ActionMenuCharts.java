@@ -94,7 +94,7 @@ import org.martus.swing.Utilities;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 
-public class ActionMenuCharts extends UiMenuAction
+public class ActionMenuCharts extends UiMenuAction implements ActionDoer
 {
 	public ActionMenuCharts(UiMainWindow mainWindowToUse)
 	{
@@ -104,6 +104,11 @@ public class ActionMenuCharts extends UiMenuAction
 
 	public void actionPerformed(ActionEvent events)
 	{
+		doAction();
+	}
+
+	public void doAction()
+	{
 		try
 		{
 			// Re-enable the following when we allow saving chart templates
@@ -111,7 +116,7 @@ public class ActionMenuCharts extends UiMenuAction
 //			
 ////			String runButtonLabel = localization.getButtonLabel("RunChart");
 //			String createChartButtonLabel = localization.getButtonLabel("CreateChart");
-//			String cancelButtonLabel = localization.getButtonLabel("cancel");
+//			String cancelButtonLabel = localization.getButtonLabel(EnglishCommonStrings.CANCEL);
 //			String[] buttonLabels = {/*runButtonLabel,*/ createChartButtonLabel, cancelButtonLabel, };
 //			String title = mainWindow.getLocalization().getWindowTitle("RunOrCreateChart");
 //			UiPushbuttonsDlg runOrCreate = new UiPushbuttonsDlg(mainWindow, title, buttonLabels);
@@ -145,7 +150,7 @@ public class ActionMenuCharts extends UiMenuAction
 	private ChartAnswers createAndSave()
 	{
 		CreateChartDialog dialog = new CreateChartDialog(getMainWindow());
-		Utilities.centerDlg(dialog);
+		Utilities.packAndCenterWindow(dialog);
 		dialog.setVisible(true);
 		if(!dialog.getResult())
 			return null;

@@ -27,19 +27,18 @@ package org.martus.client.swingui.jfx.welcome;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxContentController;
-import org.martus.client.swingui.jfx.generic.FxInSwingDialogController;
+import org.martus.client.swingui.jfx.generic.DialogShellController;
+import org.martus.client.swingui.jfx.generic.FxController;
 
-public class WelcomeShellController extends FxInSwingDialogController
+public class WelcomeShellController extends DialogShellController
 {
-	public WelcomeShellController(UiMainWindow mainWindowToUse)
+	public WelcomeShellController(UiMainWindow mainWindowToUse, FxController contentController)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, contentController);
 	}
 
 	@Override
@@ -48,11 +47,16 @@ public class WelcomeShellController extends FxInSwingDialogController
 		return "welcome/WelcomeShell.fxml";
 	}
 
-	public void setContentPane(FxContentController contentPaneController) throws Exception
+	@Override
+	protected String getCssName()
 	{
-		Parent createContents = contentPaneController.createContents();
-		
-		contentPane.getChildren().addAll(createContents);
+		return "Welcome.css";
+	}
+	
+	@Override
+	protected Pane getContentPane()
+	{
+		return contentPane;
 	}
 	
 	public Button getNextButton()
@@ -63,7 +67,7 @@ public class WelcomeShellController extends FxInSwingDialogController
 	@FXML
 	protected void onNext(ActionEvent event)
 	{
-		getFxInSwingDialogStage().close();
+		getStage().close();
 	}
 	
 	@FXML

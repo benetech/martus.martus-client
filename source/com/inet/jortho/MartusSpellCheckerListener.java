@@ -27,9 +27,6 @@ package com.inet.jortho;
 
 import javax.swing.JComponent;
 
-import com.inet.jortho.CheckerListener;
-import com.inet.jortho.SpellCheckerOptions;
-
 /**
  * This subclass only exists to expose the constructor as public
  */

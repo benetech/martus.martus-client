@@ -119,14 +119,13 @@ public class ActionMenuSealSelectedBulletins extends UiMenuAction
 					break;
 				progressMeter.updateProgressMeter(i, bulletins.size());
 				Bulletin bulletin = (Bulletin)bulletins.get(i);
-				if(bulletin.isDraft())
-					sealBulletin(bulletin);
+				if(bulletin.isMutable())
+					makeBulletinImmutable(bulletin);
 			}
 		}
 		
-		private void sealBulletin(Bulletin bulletin) throws Exception
+		private void makeBulletinImmutable(Bulletin bulletin) throws Exception
 		{
-			System.out.println("sealBulletin not implemented yet");
 			MartusApp app = mainWindow.getApp();
 			ClientBulletinStore store = app.getStore();
 			BulletinFolder draftOutbox = store.getFolderDraftOutbox();
@@ -134,7 +133,7 @@ public class ActionMenuSealSelectedBulletins extends UiMenuAction
 
 			store.removeBulletinFromFolder(draftOutbox, bulletin);
 
-			bulletin.setSealed();
+			bulletin.setImmutable();
 			store.saveBulletin(bulletin);
 
 			store.ensureBulletinIsInFolder(sealedOutbox, bulletin.getUniversalId());

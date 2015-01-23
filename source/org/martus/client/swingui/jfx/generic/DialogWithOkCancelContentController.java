@@ -27,32 +27,16 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.generic;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionDoer;
 
-public abstract class DialogWithOkCancelContentController extends FxInSwingContentController implements ActionDoer
+public abstract class DialogWithOkCancelContentController extends FxContentController
 {
 	public DialogWithOkCancelContentController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 	}
 
-	public DialogWithOkCancelStage getOkCancelStage()
+	public DialogWithOkCancelShellController getOkCancelShellController()
 	{
-		return (DialogWithOkCancelStage)getStage();
-	}
-	
-	
-	@Override
-	public void doAction()
-	{
-		UiMainWindow mainWindow = getMainWindow();
-		try
-		{
-			FxModalDialog.createAndShow(mainWindow, new DialogWithOkCancelStage(mainWindow, this));
-		} 
-		catch (Exception e)
-		{
-			mainWindow.unexpectedErrorDlg(e);
-		}
+		return (DialogWithOkCancelShellController) getStage().getShellController();
 	}
 }

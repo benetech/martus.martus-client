@@ -37,6 +37,11 @@ import org.martus.common.bulletin.Bulletin;
 
 public class ImporterOfXmlFilesOfBulletins
 {
+	public ImporterOfXmlFilesOfBulletins(File bulletinXmlFileToImport, ClientBulletinStore clientStoreToUse, BulletinFolder importFolderToUse, PrintStream consoleMonitorToUse)
+	{
+		this(new File[]{bulletinXmlFileToImport}, clientStoreToUse, importFolderToUse, consoleMonitorToUse);
+	}
+	
 	public ImporterOfXmlFilesOfBulletins(File[] bulletinXmlFilesToImportToUse, ClientBulletinStore clientStoreToUse, BulletinFolder importFolderToUse, PrintStream consoleMonitorToUse)
 	{
 		this(bulletinXmlFilesToImportToUse, clientStoreToUse, importFolderToUse, consoleMonitorToUse, null);
