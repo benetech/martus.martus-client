@@ -32,6 +32,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiLabel;
@@ -59,9 +60,9 @@ public class UiBoolViewer extends UiViewerField
 	{
 		String text = "";
 		if(newText.equals(FieldSpec.TRUESTRING))
-			text = getLocalization().getButtonLabel("yes");
+			text = getLocalization().getButtonLabel(EnglishCommonStrings.YES);
 		else
-			text = getLocalization().getButtonLabel("no");
+			text = getLocalization().getButtonLabel(EnglishCommonStrings.NO);
 
 		widget.setText(" " + text + " ");
 	}

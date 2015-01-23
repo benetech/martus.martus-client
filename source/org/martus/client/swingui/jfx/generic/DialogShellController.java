@@ -25,27 +25,57 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import java.awt.Dimension;
+
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
 
-abstract public class DialogShellController extends FxInSwingDialogController 
+abstract public class DialogShellController extends FxShellWithSingleContentController implements ActionDoer 
 {
-	public DialogShellController(UiMainWindow mainWindowToUse)
+	public DialogShellController(UiMainWindow mainWindowToUse, FxController contentController)
 	{
-		super(mainWindowToUse);
+		this(mainWindowToUse, contentController, "");
+	}
+	
+	public DialogShellController(UiMainWindow mainWindowToUse, FxController contentController, String titleTagToUse)
+	{
+		super(mainWindowToUse, contentController);
+		
+		titleTag = titleTagToUse;
 	}
 
 	@Override
-	public void setContentPane(FxContentController contentController) throws Exception
+	protected Pane getContentPane()
 	{
-		Parent createContents = contentController.createContents();
-		contentPane.getChildren().addAll(createContents);
-		
+		return contentPane;
+	}
+	
+	@Override
+	public void doAction()
+	{
+		UiMainWindow mainWindow = getMainWindow();
+		try
+		{
+			Dimension preferedDimension = this.getContentController().getPreferredDimension();
+			mainWindow.createAndShowModalDialog(this, preferedDimension, this.getTitleTag());
+		} 
+		catch (Exception e)
+		{
+			mainWindow.unexpectedErrorDlg(e);
+		}
 	}
 
+	@Override
+	public String getTitleTag()
+	{
+		return titleTag;
+	}
+	
 	@FXML
 	Pane contentPane;
+	
+	private String titleTag;
 }

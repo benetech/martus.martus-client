@@ -33,12 +33,10 @@ import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import org.martus.clientside.CurrentUiState;
-import org.martus.clientside.UiLocalization;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiRadioButton;
@@ -49,11 +47,11 @@ import org.martus.swing.UiWrappedTextArea;
 
 public class UiInitialSigninDlg extends UiSigninDlg
 {
-	public UiInitialSigninDlg(UiLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode, String userName, char[] password)
+	public UiInitialSigninDlg(UiMainWindow mainWindowToUse, int mode, String userName, char[] password)
 	{
-		super(localizationToUse, uiStateToUse, owner, mode, userName, password);
+		super(mainWindowToUse.getLocalization(), mainWindowToUse.getCurrentUiState(), mode, userName, password);
 	}
-
+	
 	protected Component createMainPanel()
 	{
 		JPanel forceProperAlignment = new JPanel(new BorderLayout());

@@ -49,6 +49,7 @@ import javax.swing.tree.TreeSelectionModel;
 import org.martus.client.search.SearchFieldTreeNode;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor.BlankLeafRenderer;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor.SearchFieldTree;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
@@ -67,7 +68,7 @@ public class FieldTreeDialog extends JDialog implements TreeSelectionListener
 		setTitle(localization.getButtonLabel("PopUpTreeChoose"));
 		setLocation(location);
 		
-		okAction = new OkAction(localization.getButtonLabel("ok"));
+		okAction = new OkAction(localization.getButtonLabel(EnglishCommonStrings.OK));
 
 		tree = new SearchFieldTree(spec.getModel());
 		tree.setRootVisible(false);
@@ -79,7 +80,7 @@ public class FieldTreeDialog extends JDialog implements TreeSelectionListener
 		tree.setCellRenderer(new BlankLeafRenderer());
 		
 		okButton = new UiButton(okAction);
-		cancelButton = new UiButton(localization.getButtonLabel("cancel"));
+		cancelButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancelButton.addActionListener(new CancelButtonHandler());
 		createButtonBox(localization);
 		

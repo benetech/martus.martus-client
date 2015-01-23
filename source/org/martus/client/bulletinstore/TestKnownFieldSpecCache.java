@@ -148,7 +148,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 	
 	public void testSaveAndLoadReusableChoices() throws Exception
 	{
-		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		ReusableChoices reusableChoices = new ReusableChoices("choices", "A");
 		reusableChoices.add(new ChoiceItem("code1", "Label1"));
 		reusableChoices.add(new ChoiceItem("code2", "Label2"));
@@ -258,7 +258,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 	
 	public void testCacheReusableChoiceLists() throws Exception
 	{
-		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		ReusableChoices choices = new ReusableChoices("choices", "Choices:");
 		choices.add(new ChoiceItem("a", "A"));
 		choices.add(new ChoiceItem("b", "B"));

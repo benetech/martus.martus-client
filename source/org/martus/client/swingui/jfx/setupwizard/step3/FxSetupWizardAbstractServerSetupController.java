@@ -30,7 +30,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxWizardStage;
+import org.martus.client.swingui.jfx.generic.FxInSwingWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.tasks.ConnectToServerTask;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.Exceptions.ServerNotAvailableException;
@@ -48,6 +48,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		attemptToConnect(serverIPAddress, serverPublicKey, askComplianceAcceptance, "");
 	}
 	
+	//TODO: look into removing duplicated code here and in SettingsForServerController
 	public void attemptToConnect(String serverIPAddress, String serverPublicKey, boolean askComplianceAcceptance, String magicWord)
 	{
 		MartusLogger.log("Attempting to connect to: " + serverIPAddress);
@@ -55,7 +56,7 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 		getMainWindow().clearStatusMessage();
 		ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, serverPublicKey, getApp().getTransport());
 
-		FxWizardStage wizardStage = getWizardStage();
+		FxInSwingWizardStage wizardStage = getWizardStage();
 		wizardStage.setCurrentServerIsAvailable(false);
 		try
 		{
@@ -65,9 +66,8 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 			showTimeoutDialog(connectingToServerMsg, task);
 			if(!task.isAvailable())
 			{
-				String serverNotRespondingSaveConfigurationTitle = localization.getWindowTitle("ServerNotRespondingSaveConfiguration");
 				String serverNotRespondingSaveConfigurationMessage = localization.getFieldLabel("ServerNotRespondingSaveConfiguration");
-				if(showConfirmationDialog(serverNotRespondingSaveConfigurationTitle, serverNotRespondingSaveConfigurationMessage))
+				if(showConfirmationDialog("ServerNotRespondingSaveConfiguration", serverNotRespondingSaveConfigurationMessage))
 				{
 					saveServerConfig(serverIPAddress, serverPublicKey, "");
 					return;
@@ -137,9 +137,8 @@ abstract public class FxSetupWizardAbstractServerSetupController extends FxStep3
 	private boolean acceptCompliance(String newServerCompliance)
 	{
 		MartusLocalization localization = getLocalization();
-		String title = localization.getWindowTitle("ServerCompliance");
 		String complianceStatementMsg = String.format("%s\n\n%s", localization.getFieldLabel("ServerComplianceDescription"), newServerCompliance);
-		if(!showConfirmationDialog(title, complianceStatementMsg))
+		if(!showConfirmationDialog("ServerCompliance", complianceStatementMsg))
 		{
 			showNotifyDialog("UserRejectedServerCompliance");
 			return false;

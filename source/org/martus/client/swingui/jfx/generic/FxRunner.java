@@ -25,11 +25,15 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import java.awt.Window;
+
+import org.martus.client.swingui.FxInSwingMainWindow;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
 public class FxRunner implements Runnable
 {
-	public FxRunner(FxInSwingStage stageToUse)
+	public FxRunner(VirtualStage stageToUse)
 	{
 		stage = stageToUse;
 	}
@@ -38,14 +42,14 @@ public class FxRunner implements Runnable
 	{
 		try
 		{
-			stage.showCurrentScene();
+			stage.showCurrentPage();
 		} 
 		catch (Exception e)
 		{
 			MartusLogger.logException(e);
 			if(!shouldAbortImmediatelyOnError)
 			{
-				stage.getMainWindow().unexpectedErrorDlg(e);
+				stage.unexpectedErrorDlg(e);
 			}
 			System.exit(1);
 		}
@@ -56,6 +60,17 @@ public class FxRunner implements Runnable
 		shouldAbortImmediatelyOnError = true;
 	}
 
-	private FxInSwingStage stage;
+	public static FxInSwingStage createAndActivateEmbeddedStage(UiMainWindow observerToUse, Window windowToUse, FxShellController shellController)
+	{
+		FxInSwingStage stage = FxInSwingMainWindow.createGenericStage(observerToUse, windowToUse, shellController, shellController.getCssName());
+		
+		FxRunner fxRunner = new FxRunner(stage);
+		fxRunner.setAbortImmediatelyOnError();
+		stage.runOnFxThreadMaybeLater(fxRunner);
+		
+		return stage;
+	}
+
+	private VirtualStage stage;
 	private boolean shouldAbortImmediatelyOnError;
 }

@@ -39,6 +39,7 @@ import org.martus.client.search.SortFieldChooserSpecBuilder;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.MiniFieldSpec;
@@ -53,7 +54,7 @@ public class UiSortFieldsDlg extends JDialog implements ActionListener
 {
 	public UiSortFieldsDlg(UiMainWindow mainWindow, MiniFieldSpec[] specsToAllow)
 	{
-		super(mainWindow);
+		super(mainWindow.getSwingFrame());
 		
 		if(sortMiniSpecs == null)
 			sortMiniSpecs = new Vector();
@@ -112,9 +113,9 @@ public class UiSortFieldsDlg extends JDialog implements ActionListener
 		mainArea.add(breakChoice);
 		
 		contentPane.add(mainArea, BorderLayout.CENTER);
-		okButton = new UiButton(localization.getButtonLabel("ok"));
+		okButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 		okButton.addActionListener(this);
-		UiButton cancelButton = new UiButton(localization.getButtonLabel("cancel"));
+		UiButton cancelButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancelButton.addActionListener(this);
 		Box buttonBar = Box.createHorizontalBox();
 		Component[] buttons = new Component[] {Box.createHorizontalGlue(), okButton, cancelButton};
@@ -123,7 +124,7 @@ public class UiSortFieldsDlg extends JDialog implements ActionListener
 		getRootPane().setDefaultButton(okButton);
 		
 		pack();
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 	}
 	
 	private ChoiceItem createChoiceItem(String tag, MiniLocalization localization)

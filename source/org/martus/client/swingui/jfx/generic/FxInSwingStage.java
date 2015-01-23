@@ -25,54 +25,34 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import java.awt.Container;
 import java.awt.Window;
-import java.io.File;
 
+import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
-import javafx.scene.Parent;
+import javafx.scene.Scene;
 
-import javax.swing.JDialog;
 import javax.swing.SwingUtilities;
 
-import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionDoer;
 
-public abstract class FxInSwingStage extends JFXPanel implements VirtualStage
+public class FxInSwingStage extends VirtualStage
 {
-	public FxInSwingStage(UiMainWindow mainWindowToUse)
+	public FxInSwingStage(UiMainWindow mainWindowToUse, Window windowToUse, FxShellController shellController, String cssNameToUse)
 	{
-		mainWindow = mainWindowToUse;
+		this(mainWindowToUse, cssNameToUse);
+	
+		setWindow(windowToUse);
+		setShellController(shellController);
 	}
 
-	abstract protected FxScene createScene() throws Exception;
-	abstract public void showCurrentScene() throws Exception;
+	public FxInSwingStage(UiMainWindow mainWindowToUse, String cssName)
+	{
+		super(mainWindowToUse, cssName);
 
-	public UiMainWindow getMainWindow()
-	{
-		return mainWindow;
+		panel = new JFXPanel();
 	}
-	
-	public FxScene getFxScene()
-	{
-		return scene;
-	}
-	
-	public void ensureSceneExists() throws Exception
-	{
-		if(scene == null)
-		{
-			scene = createScene();
-			setScene(scene);
-		}
-	}
-	
-	public void setSceneRoot(Parent contents)
-	{
-		scene.setRoot(contents);
-	}
-	
 
 	public void setWindow(Window dialogToUse)
 	{
@@ -84,57 +64,30 @@ public abstract class FxInSwingStage extends JFXPanel implements VirtualStage
 		return window;
 	}
 
-	public JDialog getDialog()
+	@Override
+	public void setScene(Scene scene)
 	{
-		return (JDialog) getWindow();
-	}
-
-	public MartusApp getApp()
-	{
-		return getMainWindow().getApp();
-	}
-
-	public MartusLocalization getLocalization()
-	{
-		return getMainWindow().getLocalization();
-	}
-
-	public File getExternalFxmlDirectory()
-	{
-		return getMainWindow().getApp().getFxmlDirectory();
-	}
-
-	public FxShellController getShellController()
-	{
-		return shellController;
-	}
-
-	public void setShellController(FxShellController controller)
-	{
-		shellController = controller;
-	}
-
-	public FxInSwingContentController getCurrentController()
-	{
-		return currentContentController;
-	}
-
-	public void setCurrentController(FxInSwingContentController contentControllerToUse)
-	{
-		currentContentController = contentControllerToUse;
-	}
-
-	public void showCurrentPage(FxInSwingContentController contentPaneController) throws Exception
-	{
-		ensureSceneExists();
-		contentPaneController.setShellController(getShellController());
-		Parent shellContents = getShellController().createContents();
-		getShellController().setStage(this);
-		getShellController().setContentPane(contentPaneController);
-		setSceneRoot(shellContents);
-		getFxScene().applyStyleSheet(getLocalization().getCurrentLanguageCode());
+		panel.setScene(scene);
 	}
 	
+	@Override
+	public void show()
+	{
+		getWindow().setVisible(true);
+	}
+	
+	@Override
+	public void showCurrentPage() throws Exception
+	{
+		loadAndShowShell();
+	}
+	
+	@Override
+	public void runOnFxThreadMaybeLater(Runnable toRun)
+	{
+		Platform.runLater(toRun);
+	}
+
 	public void doAction(ActionDoer doer)
 	{
 		try
@@ -172,7 +125,7 @@ public abstract class FxInSwingStage extends JFXPanel implements VirtualStage
 
 		public void run()
 		{
-			mainWindow.unexpectedErrorDlg(exceptionToReport);
+			getMainWindow().unexpectedErrorDlg(exceptionToReport);
 		}
 		Exception exceptionToReport;
 	}
@@ -182,10 +135,29 @@ public abstract class FxInSwingStage extends JFXPanel implements VirtualStage
 		SwingUtilities.invokeLater(new ShowErrorDialogHandler(e));
 	}
 
+	public Container getPanel()
+	{
+		return panel;
+	}
 
-	protected UiMainWindow mainWindow;
-	private FxScene scene;
+	public Scene getScene()
+	{
+		return panel.getScene();
+	}
+	
+	@Override
+	public double getWidthAsDouble()
+	{
+		return getPanel().getWidth();
+	}
+	
+	@Override
+	public void close()
+	{
+		throw new RuntimeException("Close called for " + getClass().getName());
+	}
+
+
+	private JFXPanel panel;
 	private Window window;
-	private FxShellController shellController;
-	private FxInSwingContentController currentContentController;
 }

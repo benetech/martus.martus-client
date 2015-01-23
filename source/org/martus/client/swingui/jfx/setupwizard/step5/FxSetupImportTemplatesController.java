@@ -25,11 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step5;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Vector;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -42,15 +37,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.util.StringConverter;
 
+import org.martus.client.core.templates.GenericFormTemplates;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.common.AbstractFxImportFormTemplateController;
+import org.martus.client.swingui.jfx.landing.general.ManageTemplatesController;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
 import org.martus.client.swingui.jfx.setupwizard.step6.FxSetupBackupYourKeyController;
 import org.martus.common.MartusLogger;
-import org.martus.common.fieldspec.CustomFieldTemplate;
-import org.martus.common.fieldspec.CustomFieldTemplate.FutureVersionException;
+import org.martus.common.fieldspec.FormTemplate;
 import org.martus.util.TokenReplacement;
-import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
-import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
 
 public class FxSetupImportTemplatesController extends FxStep5Controller
 {
@@ -81,10 +76,11 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	public void initializeMainContentPane()
 	{
 		genericTemplatesChoiceBox.setConverter(new FormTemplateToStringConverter(getLocalization()));
-		genericTemplatesChoiceBox.setItems(FXCollections.observableArrayList(getDefaultFormTemplateChoices()));
+		ObservableList<FormTemplate> builtInFormTemplates = GenericFormTemplates.getDefaultFormTemplateChoices(getApp().getSecurity());
+		genericTemplatesChoiceBox.setItems(FXCollections.observableArrayList(builtInFormTemplates));
 		genericTemplatesChoiceBox.getSelectionModel().selectedItemProperty().addListener(new GenericTemplatesSelectionChangedHandler());
 
-		customTemplatesChoiceBox.setItems(FXCollections.observableArrayList(getImportTemplateChoices()));
+		customTemplatesChoiceBox.setItems(FXCollections.observableArrayList(getImportTemplateChoices(getMainWindow())));
 		customTemplatesChoiceBox.setConverter(new ControllerToStringConverter());
 		customTemplatesChoiceBox.getSelectionModel().selectedItemProperty().addListener(new CustomTemplatesSelectionChangedHandler());
 		
@@ -110,94 +106,28 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		}
 	} 
 	
-	private ObservableList<AbstractFxImportFormTemplateController> getImportTemplateChoices()
-	{
-		Vector<AbstractFxImportFormTemplateController> choices = new Vector<AbstractFxImportFormTemplateController>();
-		choices.add(new FxImportFormTemplateFromMyContactsPopupController(getMainWindow(), getWizardStage()));
-		choices.add(new FxSetupFormTemplateFromNewContactPopupController(getMainWindow(), getWizardStage()));
-
-		return FXCollections.observableArrayList(choices);
-	}
-
-	private ObservableList<CustomFieldTemplate> getDefaultFormTemplateChoices()
+	private ObservableList<AbstractFxImportFormTemplateController> getImportTemplateChoices(UiMainWindow mainWindowToUse)
 	{
 		try
 		{
-			Vector<CustomFieldTemplate> customTemplates = loadFormTemplates();
-
-			return FXCollections.observableArrayList(customTemplates);
+			return ManageTemplatesController.getImportTemplateChoices(mainWindowToUse);
 		}
 		catch (Exception e)
 		{
-			MartusLogger.logException(e);
+			logAndNotifyUnexpectedError(e);
+
 			return FXCollections.observableArrayList();
 		}
 	}
-	
-	private Vector<CustomFieldTemplate> loadFormTemplates() throws Exception
-	{
-		String[] formTemplateFileNames = new String[]
-		{
-			"formtemplates/Amnesty-Urgent-Actions.mct", 
-			"formtemplates/Journalist-Example.mct", 
-			"formtemplates/Martus-Customization-Example.mct", 
-			"formtemplates/UN-Disappearances.mct", 
-			"formtemplates/UN-Special-Rapporteur-Executions.mct", 
-		};
-		Vector<CustomFieldTemplate> formTemplates = new Vector<CustomFieldTemplate>();
-		for (String formTemplateFileName : formTemplateFileNames)
-		{
-			InputStream resourceAsStream = getClass().getResourceAsStream(formTemplateFileName);
-			CustomFieldTemplate formTemplate = importFormTemplate(resourceAsStream);
-			formTemplates.add(formTemplate);
-		}
-		
-		return formTemplates;
-	}
 
-	private CustomFieldTemplate importFormTemplate(InputStream resourceAsStream) throws Exception, FutureVersionException, IOException
-	{
-		InputStreamWithSeek withSeek = new ByteArrayInputStreamWithSeek(convertToInputStreamWithSeek(resourceAsStream));
-		try
-		{
-			CustomFieldTemplate formTemplate = new CustomFieldTemplate();
-			formTemplate.importTemplate(getApp().getSecurity(), withSeek);
-
-			return formTemplate;
-		}
-		finally
-		{
-			withSeek.close();
-		}
-	}
-
-	private byte[] convertToInputStreamWithSeek(InputStream resourceAsStream) throws Exception
-	{
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		try
-		{
-			int readBytes = -1;
-			while ((readBytes = resourceAsStream.read()) != -1)
-			{
-				outputStream.write(readBytes);
-			}
-
-			return outputStream.toByteArray();
-		}
-		finally
-		{
-			outputStream.close();
-		}
-	}
-	
 	@FXML
 	private void genericComboBoxSelectionChanged() throws Exception
 	{
 		if (genericTemplatesChoiceBox.getSelectionModel().isEmpty())
 			return;
 		
-		CustomFieldTemplate genericCustomFieldTemplate = genericTemplatesChoiceBox.getSelectionModel().getSelectedItem();
-		updateSelectedCustomFieldTemplateComponents(genericCustomFieldTemplate);
+		FormTemplate genericFormTemplate = genericTemplatesChoiceBox.getSelectionModel().getSelectedItem();
+		updateSelectedFormTemplateComponents(genericFormTemplate);
 		genericTemplatesChoiceBox.getSelectionModel().clearSelection();
 	}
 
@@ -225,18 +155,18 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	protected void importFromContacts(AbstractFxImportFormTemplateController controller) throws Exception
 	{
 		showControllerInsideModalDialog(controller);
-		CustomFieldTemplate selectedTemplate = controller.getSelectedFormTemplate();
-		updateSelectedCustomFieldTemplateComponents(selectedTemplate);
+		FormTemplate selectedTemplate = controller.getSelectedFormTemplate();
+		updateSelectedFormTemplateComponents(selectedTemplate);
 	}
 	
-	protected void updateSelectedCustomFieldTemplateComponents(CustomFieldTemplate customFieldTemplate) throws Exception
+	protected void updateSelectedFormTemplateComponents(FormTemplate template) throws Exception
 	{
-		selectedFormTemplateToSave = customFieldTemplate;
+		selectedFormTemplateToSave = template;
 		boolean shouldAllowFormTemplate = false;
 		String loadFormTemplateMessage = "";
-		if (customFieldTemplate != null)
+		if (template != null)
 		{
-			loadFormTemplateMessage = TokenReplacement.replaceToken(getLocalization().getFieldLabel("SuccessfullyImportedForm"), "#templateName", customFieldTemplate.getTitle());
+			loadFormTemplateMessage = TokenReplacement.replaceToken(getLocalization().getFieldLabel("SuccessfullyImportedForm"), "#templateName", template.getTitle());
 			shouldAllowFormTemplate = true;
 		}
 		
@@ -245,11 +175,17 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		switchFormsLaterLabel.setVisible(shouldAllowFormTemplate);
 	}
 	
-	protected void saveCustomFieldTemplate(CustomFieldTemplate customFieldTemplate)
+	protected void saveFormTemplate(FormTemplate template)
 	{
 		try
 		{
-			getApp().updateCustomFieldTemplate(customFieldTemplate);
+			if(template.getTitle().isEmpty())
+			{
+				boolean keepPreviousTemplate = true;
+				String emptyTitleMessage = getLocalization().getFieldLabel("ImportTemplateNoName");
+				ManageTemplatesController.editTemplate(template, emptyTitleMessage, keepPreviousTemplate, this);
+			}
+			getApp().updateFormTemplate(template);
 		}
 		catch (Exception e)
 		{
@@ -278,18 +214,18 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		}
 	}
 	
-	protected class GenericTemplatesSelectionChangedHandler implements ChangeListener<CustomFieldTemplate>
+	protected class GenericTemplatesSelectionChangedHandler implements ChangeListener<FormTemplate>
 	{
 		@Override
-		public void changed(ObservableValue<? extends CustomFieldTemplate> observable, CustomFieldTemplate oldValue, CustomFieldTemplate newValue)
+		public void changed(ObservableValue<? extends FormTemplate> observable, FormTemplate oldValue, FormTemplate newValue)
 		{
 			if (genericTemplatesChoiceBox.getSelectionModel().isEmpty())
 				return;
 
 			try
 			{
-				CustomFieldTemplate genericCustomFieldTemplate = genericTemplatesChoiceBox.getSelectionModel().getSelectedItem();
-				updateSelectedCustomFieldTemplateComponents(genericCustomFieldTemplate);
+				FormTemplate genericFormTemplate = genericTemplatesChoiceBox.getSelectionModel().getSelectedItem();
+				updateSelectedFormTemplateComponents(genericFormTemplate);
 				genericTemplatesChoiceBox.getSelectionModel().clearSelection();
 			}
 			catch (Exception e)
@@ -309,7 +245,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 		public void handle(ActionEvent event)
 		{
 			if (selectedFormTemplateToSave != null)
-				saveCustomFieldTemplate(selectedFormTemplateToSave);
+				saveFormTemplate(selectedFormTemplateToSave);
 		}
 	}
 	
@@ -329,7 +265,7 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	}
 	
 	@FXML 
-	protected ChoiceBox<CustomFieldTemplate> genericTemplatesChoiceBox;
+	protected ChoiceBox<FormTemplate> genericTemplatesChoiceBox;
 	
 	@FXML
 	protected ChoiceBox<AbstractFxImportFormTemplateController> customTemplatesChoiceBox;
@@ -349,5 +285,5 @@ public class FxSetupImportTemplatesController extends FxStep5Controller
 	@FXML
 	private Label sidebarHintTemplates;
 	
-	protected CustomFieldTemplate selectedFormTemplateToSave;
+	protected FormTemplate selectedFormTemplateToSave;
 }

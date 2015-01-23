@@ -69,7 +69,7 @@ public class ReadonlyGridFieldTable extends GridFieldTable
 
 	private GridCellEditorAndRenderer createViewer(FieldType type)
 	{
-		UiLocalization localization = dlgLauncher.GetLocalization();
+		UiLocalization localization = dlgLauncher.getLocalization();
 		if(type.isBoolean())
 			return new GridBooleanCellViewer(localization);
 		if(type.isDate())

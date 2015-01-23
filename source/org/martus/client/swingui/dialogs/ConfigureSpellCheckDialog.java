@@ -39,6 +39,7 @@ import org.martus.client.search.SaneCollator;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.spellcheck.SpellCheckerManager;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
@@ -64,10 +65,10 @@ public class ConfigureSpellCheckDialog extends JDialog
 		dictionaryEditor.setText(getUserDictionaryWords());
 		getContentPane().add(new UiScrollPane(dictionaryEditor), BorderLayout.CENTER);
 		
-		UiButton ok = new UiButton(getLocalization().getButtonLabel("ok"));
+		UiButton ok = new UiButton(getLocalization().getButtonLabel(EnglishCommonStrings.OK));
 		ok.addActionListener(new OkHandler());
 
-		UiButton cancel = new UiButton(getLocalization().getButtonLabel("cancel"));
+		UiButton cancel = new UiButton(getLocalization().getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(new CancelHandler());
 		Box buttonBox = Box.createHorizontalBox();
 		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {Box.createHorizontalGlue(), ok, cancel});

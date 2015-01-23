@@ -8,11 +8,19 @@
    <bottom>
       <HBox alignment="BOTTOM_RIGHT" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onMouseClicked="#onCloseClicked" text="%Button.close" />
+            <Button mnemonicParsing="false" onMouseClicked="#onCloseClicked" text="%Button.ok" />
          </children>
       </HBox>
    </bottom>
    <center>
-      <Pane fx:id="contentPane" BorderPane.alignment="CENTER" />
-   </center>
+      <ScrollPane BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane>
+               <children>
+                  <Pane fx:id="contentPane" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+	</center>
 </BorderPane>

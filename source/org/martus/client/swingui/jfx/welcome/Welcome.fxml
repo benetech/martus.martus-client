@@ -30,7 +30,7 @@
             <Label styleClass="mainText" text="%WizardStep1Information" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
 
             <Label styleClass="stepNumber" text="%Step2" GridPane.rowIndex="2" />
-            <Label styleClass="headingLevel3" text="%WizardStep2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label styleClass="headingLevel3" text="%ServerSettings" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label styleClass="mainText" text="%WizardStep2Information" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
 
             <Label styleClass="stepNumber" text="%Step3" GridPane.rowIndex="3" />
@@ -63,10 +63,10 @@
             <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
          </rowConstraints>
+         <BorderPane.margin>
+            <Insets left="70.0" top="20.0" />
+         </BorderPane.margin>
       </GridPane>
-<BorderPane.margin>
-<Insets left="70.0" top="20" />
-</BorderPane.margin>
   </center>
    <left>
       <ImageView fitHeight="162.5" fitWidth="190.0" pickOnBounds="true" preserveRatio="true">

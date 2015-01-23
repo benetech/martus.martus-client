@@ -29,11 +29,16 @@ import javafx.fxml.FXML;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public class DialogWithCloseShellController extends DialogShellController 
+public class DialogWithCloseShellController extends DialogShellController
 {
-	public DialogWithCloseShellController(UiMainWindow mainWindowToUse)
+	public DialogWithCloseShellController(UiMainWindow mainWindowToUse, FxController contentController)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, contentController);
+	}
+	
+	public DialogWithCloseShellController(UiMainWindow mainWindowToUse, FxController contentController, String titleTagToUse)
+	{
+		super(mainWindowToUse, contentController, titleTagToUse);
 	}
 
 	@Override
@@ -45,9 +50,8 @@ public class DialogWithCloseShellController extends DialogShellController
 	@FXML
 	public void onCloseClicked()
 	{
-		saveAndClose();
+		close();
 	}
 
 	private static final String LOCATION_DIALOG_WITH_CLOSE_SHELL = "generic/DialogWithCloseShell.fxml";
-
 }

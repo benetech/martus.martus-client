@@ -25,12 +25,15 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.welcome;
 
+import java.awt.Dimension;
+
 import javafx.fxml.FXML;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxInSwingContentController;
+import org.martus.client.swingui.jfx.generic.FxContentController;
+import org.martus.client.swingui.jfx.generic.FxInSwingDialogStage;
 
-public class FxWelcomeContentController extends FxInSwingContentController
+public class FxWelcomeContentController extends FxContentController
 {
 	public FxWelcomeContentController(UiMainWindow mainWindowToUse)
 	{
@@ -54,9 +57,14 @@ public class FxWelcomeContentController extends FxInSwingContentController
 		getWelcomeStage().close();
 	}
 
-	private WelcomeStage getWelcomeStage()
+	private FxInSwingDialogStage getWelcomeStage()
 	{
-		return (WelcomeStage) getStage();
+		return (FxInSwingDialogStage) getStage();
 	}
 
+	@Override
+	protected Dimension getPreferredDimension()
+	{
+		return UiMainWindow.LARGE_PREFERRED_DIALOG_SIZE;
+	}
 }

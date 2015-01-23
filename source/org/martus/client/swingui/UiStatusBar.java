@@ -35,41 +35,22 @@ import javax.swing.JPanel;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.Utilities;
 
-public class UiStatusBar extends JPanel
+public class UiStatusBar extends StatusBar
 {
 
 	public UiStatusBar(MartusLocalization localization)
 	{
 		super();
-		setLayout( new BoxLayout( this, BoxLayout.X_AXIS) );
-		setComponentOrientation(UiLanguageDirection.getComponentOrientation());
+		JPanel uiPanel = getUiPanel();
+		uiPanel.setLayout( new BoxLayout( uiPanel, BoxLayout.X_AXIS) );
+		uiPanel.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 
 		Box statusBarBox = Box.createHorizontalBox();
 		backgroundProgressMeter = new UiProgressMeter(null, localization);
 		backgroundProgressMeter.hideProgressMeter();
 		torProgressMeter = new UiProgressMeter(null, localization);
 		torProgressMeter.hideProgressMeter();
-		Utilities.addComponentsRespectingOrientation(statusBarBox, new Component[]{backgroundProgressMeter, Box.createHorizontalGlue(), torProgressMeter});
-		add(statusBarBox);
+		Utilities.addComponentsRespectingOrientation(statusBarBox, new Component[]{(UiProgressMeter)backgroundProgressMeter, Box.createHorizontalGlue(), (UiProgressMeter)torProgressMeter});
+		uiPanel.add(statusBarBox);
 	}
-	
-	public UiProgressMeter getBackgroundProgressMeter()
-	{
-		return backgroundProgressMeter;
-	}
-	
-	public UiProgressMeter getTorProgressMeter()
-	{
-		return torProgressMeter;
-	}
-	
-	public void setStatusMessageTag(String tag)
-	{
-		UiProgressMeter r = getBackgroundProgressMeter();	
-		r.setStatusMessage(tag);
-		r.hideProgressMeter();
-	}
-
-	private UiProgressMeter backgroundProgressMeter;
-	private UiProgressMeter torProgressMeter;
 }

@@ -49,18 +49,30 @@ public class ActionMenuExportBulletins extends UiMenuAction
 	{
 		try
 		{
-			Vector bulletins = getMainWindow().getSelectedBulletins("ExportZeroBulletins");
-			if(bulletins == null)
+			Vector bulletinsToExport = getMainWindow().getSelectedBulletins("ExportZeroBulletins");
+			if(bulletinsToExport == null)
 				return;
+			exportBulletins(bulletinsToExport);
+		} 
+		catch (Exception e)
+		{
+			getMainWindow().unexpectedErrorDlg(e);
+		}	
+	}
+
+	private void exportBulletins(Vector bulletinsToExport)
+	{
+		try
+		{
 			String defaultFileName = getLocalization().getFieldLabel("ExportedBulletins");
-			if(bulletins.size()==1)
-				defaultFileName = ((Bulletin)bulletins.get(0)).toFileName();
-			new UiExportBulletinsDlg(getMainWindow(), bulletins, defaultFileName);
+			if(bulletinsToExport.size()==1)
+				defaultFileName = ((Bulletin)bulletinsToExport.get(0)).toFileName();
+			new UiExportBulletinsDlg(getMainWindow(), bulletinsToExport, defaultFileName);
 		} 
 		catch (Exception e)
 		{
 			getMainWindow().unexpectedErrorDlg(e);
 		}
 	}
-	
+
 }

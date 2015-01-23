@@ -42,6 +42,7 @@ import javax.swing.JViewport;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentViewSection;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.StandardFieldSpecs;
@@ -55,7 +56,7 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 
 	public UiBulletinPreviewDlg(UiMainWindow owner, MartusLocalization localizationToUse, String windowTitleTag)
 	{
-		super(owner, localizationToUse.getWindowTitle(windowTitleTag), true);	
+		super(owner.getSwingFrame(), localizationToUse.getWindowTitle(windowTitleTag), true);	
 		getContentPane().setLayout(new BorderLayout());
 		localization = localizationToUse;
 	}
@@ -65,7 +66,7 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 		this(owner, owner.getLocalization(), "BulletinPreview");
 
 		UiBulletinComponentViewSection view = new UiBulletinComponentViewSection(owner, Bulletin.TOP_SECTION);
-		FieldSpecCollection standardFieldTags = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection standardFieldTags = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		
 		view.createLabelsAndFields(standardFieldTags, null);
 		view.copyDataFromPacket(fdp);
@@ -82,7 +83,7 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 		scrollPane.getViewport().add(view);
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.X_AXIS));
-		JButton ok = new UiButton(localization.getButtonLabel("ok"));
+		JButton ok = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 		ok.addActionListener(this);
 		Dimension okSize = ok.getPreferredSize();
 		okSize.width += 40;
@@ -93,7 +94,7 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 		getRootPane().setDefaultButton(ok);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 		ok.requestFocus(true);
 		Utilities.forceScrollerToTop(view);

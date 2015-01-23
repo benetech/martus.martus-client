@@ -195,7 +195,7 @@ public class ServerLoader {
         Bulletin b = store.createEmptyBulletin();
         b.set(Bulletin.TAGTITLE, "loadtest title " + num);
         b.set(Bulletin.TAGSUMMARY, "loadtest summary " + num);
-        b.setDraft();
+        b.setMutable();
         b.setAllPrivate(true);
         return b;
     }

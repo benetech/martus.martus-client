@@ -25,10 +25,10 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.tasks;
 
+import javafx.concurrent.Task;
+
 import org.martus.client.core.MartusApp;
 import org.martus.common.ProgressMeterInterface;
-
-import javafx.concurrent.Task;
 
 abstract public class AbstractAppTask extends Task<Void>
 {
@@ -46,9 +46,7 @@ abstract public class AbstractAppTask extends Task<Void>
 	{
 		progress = interfaceToUse;
 	}
-	
-	
+		
 	protected MartusApp app;
-	ProgressMeterInterface progress;
-
+	protected ProgressMeterInterface progress;
 }

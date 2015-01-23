@@ -25,23 +25,37 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleStringProperty;
+
+import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
-
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
+import org.martus.swing.FontHandler;
 
 public class BulletinTableRowData
 {
-	public BulletinTableRowData(Bulletin bulletin, boolean onServer, MiniLocalization localization)
+	public BulletinTableRowData(Bulletin bulletin, boolean onServer, Integer authorsValidation, MiniLocalization localization)
 	{
+		UiFontEncodingHelper fontHelper = new UiFontEncodingHelper(FontHandler.isDoZawgyiConversion());
+
 		uid = bulletin.getUniversalId();
-		title = new SimpleStringProperty(bulletin.get(Bulletin.TAGTITLE));
-		author = new SimpleStringProperty(bulletin.get(Bulletin.TAGAUTHOR));
+		String storableTitle = bulletin.get(Bulletin.TAGTITLE);
+		String displayableTitle = fontHelper.getDisplayable(storableTitle);
+		title = new SimpleStringProperty(displayableTitle);
+		String storableAuthor = bulletin.get(Bulletin.TAGAUTHOR);
+		String displayableAuthor = fontHelper.getDisplayable(storableAuthor);
+		author = new SimpleStringProperty(displayableAuthor);
 		long dateLastSaved = bulletin.getBulletinHeaderPacket().getLastSavedTime();
-		dateSaved = new SimpleStringProperty(localization.formatDateTime(dateLastSaved));
+		dateSaved = new SimpleLongProperty(dateLastSaved);
 		this.onServer = new SimpleBooleanProperty(onServer);
+		canView = new SimpleBooleanProperty(true);
+		canEdit = new SimpleBooleanProperty(true);
+		authorVerified = new SimpleIntegerProperty(authorsValidation);
 	}
 	
 	public UniversalId getUniversalId()
@@ -69,12 +83,12 @@ public class BulletinTableRowData
         return author; 
     }
 
-    public String getDateSaved()
+    public Long getDateSaved()
 	{
 		return dateSaved.get();
 	}
 	
-    public SimpleStringProperty dateSavedProperty() 
+    public SimpleLongProperty dateSavedProperty() 
     { 
         return dateSaved; 
     }
@@ -89,15 +103,46 @@ public class BulletinTableRowData
     		return onServer;
     }
 
-    
+    public SimpleIntegerProperty authorVerifiedProperty() 
+    {
+    		return authorVerified;
+    }
+
+    public Boolean getCanView()
+	{
+		return canViewProperty().getValue();
+	}
+	
+    public Property<Boolean> canViewProperty() 
+    { 
+        return canView; 
+    }
+
+    public Boolean getEditBulletin()
+ 	{
+ 		return canEditProperty().getValue();
+ 	}
+ 	
+     public Property<Boolean> canEditProperty() 
+     { 
+         return canEdit;
+     }
+
     static public final String TITLE_PROPERTY_NAME = "title";
     static public final String AUTHOR_PROPERTY_NAME = "author";
-    static public final String DATE_SAVDED_PROPERTY_NAME = "dateSaved";
+    static public final String DATE_SAVED_PROPERTY_NAME = "dateSaved";
     static public final String ON_SERVER_PROPERTY_NAME = "onServer";
+    static public final String CAN_VIEW_PROPERTY_NAME = "canView";
+    static public final String CAN_EDIT_PROPERTY_NAME = "canEdit";
+    static public final String AUTHOR_VERIFIED_PROPERTY_NAME = "authorVerified";
     
     private final SimpleStringProperty title;
 	private final SimpleStringProperty author;
-	private final SimpleStringProperty dateSaved;
+	private final SimpleLongProperty dateSaved;
 	private final SimpleBooleanProperty onServer;
+	private final SimpleBooleanProperty canView;
+	private final SimpleBooleanProperty canEdit;
+	private final SimpleIntegerProperty authorVerified;
+	
 	private final UniversalId uid;
 }

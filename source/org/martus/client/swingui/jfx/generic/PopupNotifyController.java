@@ -34,6 +34,7 @@ import javafx.scene.control.Label;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MartusLogger;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
@@ -52,7 +53,7 @@ public class PopupNotifyController extends FxPopupController implements Initiali
 	public void initialize()
 	{
 		MartusLocalization localization = getLocalization();
-		fxOkButton.setText(localization.getButtonLabel("ok"));
+		fxOkButton.setText(localization.getButtonLabel(EnglishCommonStrings.OK));
 		String fieldLabelRaw = localization.getFieldLabel("notify"+baseTag+"cause");
 		String fieldLabel = fieldLabelRaw;
 		if(tokenReplacement != null)

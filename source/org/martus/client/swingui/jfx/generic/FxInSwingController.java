@@ -29,7 +29,6 @@ import java.awt.Component;
 import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -38,79 +37,52 @@ import javafx.stage.Stage;
 
 import org.martus.client.swingui.TranslucentWindowObscurer;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.MartusLogger;
 
-public abstract class FxInSwingController extends FxShellController
+public abstract class FxInSwingController extends FxController
 {
 	public FxInSwingController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-	}
 
-	abstract public void installGlassPane(Component glassPane);
-
-	@Override
-	public void initializeMainContentPane()
-	{
-	}
-
-	public FxInSwingStage getStage()
-	{
-		return stage;
 	}
 	
-	public void logAndNotifyUnexpectedError(Exception e)
-	{
-		stage.logAndNotifyUnexpectedError(e);
-	}
-
-	public void setStage(FxInSwingStage stageToUse)
-	{
-		stage = stageToUse;
-	}
-
 	protected void showModalPopupStage(Stage popupStage)
 	{
+		FxInSwingStage swingStage = (FxInSwingStage) getStage();
+		Window window = swingStage.getWindow();
+
+		GlassPaneInstaller glassPaneInstaller = new GlassPaneInstaller(window);
 		Runnable fronter = new Fronter(popupStage);
 	
-		Window window = getWindow();
 		DialogWindowHandler windowHandler = new DialogWindowHandler(fronter);
 		window.addWindowListener(windowHandler);
 		window.addWindowFocusListener(windowHandler);
 		
 		Component glassPane = new TranslucentWindowObscurer();
-		installGlassPane(glassPane);
+		glassPaneInstaller.installGlassPane(glassPane);
 		GlassPaneMouseHandler glassPaneMouseHandler = new GlassPaneMouseHandler(fronter);
 		glassPane.addMouseListener(glassPaneMouseHandler);
-		glassPane.addMouseMotionListener(glassPaneMouseHandler);
 		
 		glassPane.setVisible(true);
 		try
 		{
 			popupStage.showAndWait();
+		    MartusLogger.log("Back from showAndWait");
 		}
 		finally
 		{
-			glassPane.removeMouseMotionListener(glassPaneMouseHandler);
 			glassPane.removeMouseListener(glassPaneMouseHandler);
 	
 			window.removeWindowFocusListener(windowHandler);
 			window.removeWindowListener(windowHandler);
 			
 			glassPane.setVisible(false);
+		    MartusLogger.log("Glass pane is now invisible");
 		}
 	}
 
-	public FxScene getScene()
-	{
-		return getStage().getFxScene();
-	}
-
-	public Window getWindow()
-	{
-		return getStage().getWindow();
-	}
-
-	protected static class DialogWindowHandler extends WindowAdapter implements MouseMotionListener
+	protected static class DialogWindowHandler extends WindowAdapter
 	{
 		public DialogWindowHandler(Runnable runOnFocusGained)
 		{
@@ -137,17 +109,6 @@ public abstract class FxInSwingController extends FxShellController
 
 		@Override
 		public void windowGainedFocus(WindowEvent e)
-		{
-			Platform.runLater(task);
-		}
-
-		@Override
-		public void mouseDragged(MouseEvent e)
-		{
-		}
-
-		@Override
-		public void mouseMoved(MouseEvent e)
 		{
 			Platform.runLater(task);
 		}
@@ -195,5 +156,4 @@ public abstract class FxInSwingController extends FxShellController
 		private Stage popupStage;
 	}
 
-	private FxInSwingStage stage;
 }

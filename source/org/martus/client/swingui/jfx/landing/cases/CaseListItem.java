@@ -30,20 +30,25 @@ import org.martus.client.swingui.MartusLocalization;
 
 public class CaseListItem
 {
-	CaseListItem(BulletinFolder folder, MartusLocalization localization)
+	CaseListItem(BulletinFolder folder, MartusLocalization localizationToUse)
 	{
-		caseName = folder.getName();
-		caseNameLocalized = folder.getLocalizedName(localization);
+		caseFolder = folder;
+		localization = localizationToUse;
 	}
 	
 	public String getNameLocalized()
 	{
-		return caseNameLocalized;
+		return caseFolder.getLocalizedName(localization);
 	}
 	
 	public String getName()
 	{
-		return caseName;
+		return caseFolder.getName();
+	}
+	
+	public BulletinFolder getFolder()
+	{
+		return caseFolder;
 	}
 	
 	@Override
@@ -52,6 +57,6 @@ public class CaseListItem
 		return getNameLocalized();
 	}
 
-	final String caseName;
-	final String caseNameLocalized;
+	final BulletinFolder caseFolder;
+	final MartusLocalization localization;
 }

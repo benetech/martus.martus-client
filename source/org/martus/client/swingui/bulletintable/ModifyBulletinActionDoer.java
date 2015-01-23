@@ -25,18 +25,13 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.bulletintable;
 
-import java.util.HashMap;
-
-import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.FieldSpecCollection;
+import org.martus.client.swingui.UiSession;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 
 public class ModifyBulletinActionDoer
 {
-	
 	public ModifyBulletinActionDoer(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
@@ -51,10 +46,9 @@ public class ModifyBulletinActionDoer
 
 			String myAccountId = mainWindow.getApp().getAccountId();
 			boolean isMine = myAccountId.equals(original.getAccount());
-			boolean isSealed = original.isSealed();
 			boolean isVerifiedFieldDeskBulletin = mainWindow.getApp().isVerifiedFieldDeskAccount(original.getAccount());
 
-			if(!isMine)
+			if(!isMine && !UiSession.isJavaFx())
 			{
 				if(isVerifiedFieldDeskBulletin)
 				{
@@ -68,12 +62,6 @@ public class ModifyBulletinActionDoer
 				}
 			}
 			
-			if(isMySealed(isMine, isSealed))
-			{
-				if(!mainWindow.confirmDlg("CloneMySealedAsDraft"))
-					return;
-			}
-			
 			if(original.hasUnknownTags() || original.hasUnknownCustomField())
 			{
 				if(!mainWindow.confirmDlg("EditBulletinWithUnknownTags"))
@@ -81,10 +69,10 @@ public class ModifyBulletinActionDoer
 			}
 			
 			Bulletin bulletinToModify = original; 
-			if(isMyDraft(isMine, isSealed))
-				bulletinToModify = updateFieldSpecsIfNecessary(original);
-			else if(needsCloneToEdit(isMine, isSealed))
-				bulletinToModify = createCloneAndUpdateFieldSpecsIfNecessary(original);
+			if(needsCloneToEdit(isMine, original.requiresNewCopyToEdit()))
+				bulletinToModify = mainWindow.getStore().createCloneWithTemplateAndDataFrom(original);
+			else if(isMyMutable(isMine, original.isMutable()))
+				bulletinToModify = original;
 			bulletinToModify.allowOnlyTheseAuthorizedKeysToRead(mainWindow.getApp().getAllHQKeys());
 			bulletinToModify.addAuthorizedToReadKeys(mainWindow.getApp().getDefaultHQKeysWithFallback());
 			mainWindow.modifyBulletin(bulletinToModify);
@@ -94,63 +82,16 @@ public class ModifyBulletinActionDoer
 			MartusLogger.logException(e);			mainWindow.notifyDlg("UnexpectedError");
 		}
 	}
-
-	private boolean isMySealed(boolean isMine, boolean isSealed)
+	
+	private boolean isMyMutable(boolean isMine, boolean isDraft)
 	{
-		return isMine && isSealed;
+		return isMine && isDraft;
 	}
 	
-	private boolean isMyDraft(boolean isMine, boolean isSealed)
+	private boolean needsCloneToEdit(boolean isMine, boolean requiresCloneToEdit)
 	{
-		return isMine && !isSealed;
+		return requiresCloneToEdit || !isMine;
 	}
 	
-	private boolean needsCloneToEdit(boolean isMine, boolean isSealed)
-	{
-		return isSealed || !isMine;
-	}
-
-	private Bulletin updateFieldSpecsIfNecessary(Bulletin original) throws Exception
-	{
-		ClientBulletinStore store = mainWindow.getApp().getStore();
-		if(store.bulletinHasCurrentFieldSpecs(original))
-			return original;
-		if(confirmUpdateFieldsDlg("UseBulletinsDraftCustomFields"))
-			return original;
-		FieldSpecCollection publicFieldSpecsToUse = store.getTopSectionFieldSpecs();
-		FieldSpecCollection privateFieldSpecsToUse = store.getBottomSectionFieldSpecs();
-		return store.createDraftClone(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
-	}
-
-	private Bulletin createCloneAndUpdateFieldSpecsIfNecessary(Bulletin original) throws Exception
-	{
-		ClientBulletinStore store = mainWindow.getApp().getStore();
-		FieldSpecCollection publicFieldSpecsToUse = store.getTopSectionFieldSpecs();
-		FieldSpecCollection privateFieldSpecsToUse = store.getBottomSectionFieldSpecs();
-		if(!store.bulletinHasCurrentFieldSpecs(original))
-		{
-			if(confirmUpdateFieldsDlg("UseBulletinsCustomFields"))
-			{
-				publicFieldSpecsToUse = original.getTopSectionFieldSpecs();
-				privateFieldSpecsToUse = original.getBottomSectionFieldSpecs();
-			}
-		}
-
-		Bulletin bulletinToModify = store.createNewDraft(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
-		return bulletinToModify;
-	}
-	
-	private boolean confirmUpdateFieldsDlg(String baseTag)
-	{
-		MartusLocalization localization = mainWindow.getLocalization();
-		String useOld = localization.getButtonLabel("UseOldCustomFields");
-		String useNew = localization.getButtonLabel("UseNewCustomFields");
-		String[] buttons = {useOld, useNew};
-		HashMap tokenReplacement = new HashMap();
-		tokenReplacement.put("#UseOldCustomFields#", useOld);
-		tokenReplacement.put("#UseNewCustomFields#", useNew);
-
-		return mainWindow.confirmCustomButtonsDlg(mainWindow, baseTag, buttons, tokenReplacement);
-	}
 	UiMainWindow mainWindow;
 }

@@ -37,11 +37,14 @@ import javax.swing.SwingUtilities;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.network.BackgroundRetriever;
 import org.martus.client.network.BackgroundUploader;
 import org.martus.client.network.SyncBulletinRetriever;
+import org.martus.client.swingui.jfx.generic.FxDialogHelper;
+import org.martus.client.swingui.jfx.landing.general.SettingsForServerController;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.BulletinSummary;
 import org.martus.common.BulletinSummary.WrongValueCount;
@@ -61,16 +64,17 @@ import org.miradi.utils.EnhancedJsonObject;
 
 class BackgroundTimerTask extends TimerTask
 {
-	public BackgroundTimerTask(UiMainWindow mainWindowToUse, UiStatusBar statusBarToUse) throws Exception
+	public BackgroundTimerTask(UiMainWindow mainWindowToUse, StatusBar statusBarToUse) throws Exception
 	{
 		mainWindow = mainWindowToUse;
 		statusBar = statusBarToUse;
 		ProgressMeterInterface progressMeter = getProgressMeter();
-		uploader = new BackgroundUploader(getApp(), progressMeter);
+		uploader = new BackgroundUploader(mainWindow.getApp(), mainWindow, progressMeter);
 		retriever = new BackgroundRetriever(getApp(), progressMeter);
 		syncRetriever = new SyncBulletinRetriever(getApp());
 		if(mainWindow.isServerConfigured() && getApp().getTransport().isOnline())
 			setWaitingForServer();
+		isSyncEnabled = true;
 	}
 
 	public ProgressMeterInterface getProgressMeter()
@@ -174,8 +178,9 @@ class BackgroundTimerTask extends TimerTask
 			progressMeter.setStatusMessage(UiMainWindow.STATUS_RETRIEVING);
 			doRetrieving();
 			if(!retriever.hasWorkToDo())
-				SwingUtilities.invokeLater(new ThreadedNotifyDlgAndUpdateReadyMessage("RetrieveCompleted"));
-			
+			{
+				SwingUtilities.invokeLater(new ThreadedUpdateReadyMessage());
+			}
 			return;
 		}
 		doUploading();
@@ -192,7 +197,8 @@ class BackgroundTimerTask extends TimerTask
 		catch (Exception e)
 		{
 			String tag = "RetrieveError";
-			SwingUtilities.invokeLater(new ThreadedNotifyDlgAndUpdateReadyMessage(tag));
+			SwingUtilities.invokeLater(new WorkerThread.ThreadedNotifyDlg(mainWindow, tag));
+			SwingUtilities.invokeLater(new ThreadedUpdateReadyMessage());
 			e.printStackTrace();
 		}
 		mainWindow.folderContentsHaveChanged(folder);
@@ -253,16 +259,39 @@ class BackgroundTimerTask extends TimerTask
 	
 	private void checkForNewFieldOfficeBulletins()
 	{
-		if(syncRetriever.hadException())
+		String syncFrequency = getApp().getConfigInfo().getSyncFrequencyMinutes();
+		if(syncFrequency.length() == 0)
+			return;
+		if(hasUserChangedSyncFrequency(syncFrequency))
+		{
+			nextCheckForFieldOfficeBulletins = 0;
+			isSyncEnabled = true;
+		}
+
+		if(!isSyncEnabled)
+			return;
+
+		try
+		{
+			if(syncRetriever.hadException())
+				throw syncRetriever.getAndClearException();
+		}
+		catch (AddOlderVersionToFolderFailedException ignoreOldVersionException)
+		{
+			MartusLogger.log("Older version not added."); 
+			return;
+		}
+		catch (Exception e)
 		{
 			disableSync();
+			MartusLogger.logException(e);
 
-			// FIXME: Need to let user know syncing is disabled
-			Exception e = syncRetriever.getAndClearException();
-			mainWindow.unexpectedErrorDlg(e);
-		}
-		if(!getApp().getConfigInfo().getCheckForFieldOfficeBulletins())
+			String baseTag = "SyncDisabledDueToError";
+			UiMainWindow.showNotifyDlgOnSwingThread(mainWindow, baseTag);
 			return;
+		}
+
+		lastKnownSyncFrequencyMinutes = syncFrequency;
 		if(System.currentTimeMillis() < nextCheckForFieldOfficeBulletins)
 			return;
 		if(!isServerAvailable())
@@ -307,7 +336,10 @@ class BackgroundTimerTask extends TimerTask
 		}
 		finally
 		{
-			nextCheckForFieldOfficeBulletins = System.currentTimeMillis() + (1000 * mainWindow.timeBetweenFieldOfficeChecksSeconds);
+			long delayBeforeNextSyncMinutes = getSyncDelayMinutes(syncFrequency);
+			MartusLogger.log("Next sync in " + delayBeforeNextSyncMinutes + " minutes");
+			long delayBeforeNextSyncMillis = delayBeforeNextSyncMinutes * 60 * 1000;
+			nextCheckForFieldOfficeBulletins = System.currentTimeMillis() + delayBeforeNextSyncMillis;
 			checkingForNewFieldOfficeBulletins = false;
 
 			if(foundNew)
@@ -317,9 +349,23 @@ class BackgroundTimerTask extends TimerTask
 		}
 	}
 
+	public boolean hasUserChangedSyncFrequency(String syncFrequency)
+	{
+		return (!syncFrequency.equals(lastKnownSyncFrequencyMinutes));
+	}
+
+	private int getSyncDelayMinutes(String syncFrequency)
+	{
+		if(syncFrequency.equals(SettingsForServerController.SYNC_FREQUENCY_ON_STARTUP))
+			return Integer.MAX_VALUE;
+		
+		int syncMinutes = Integer.parseInt(syncFrequency);
+		return syncMinutes;
+	}
+
 	public void disableSync()
 	{
-		nextCheckForFieldOfficeBulletins = Long.MAX_VALUE;
+		isSyncEnabled = false;
 	}
 	
 	private void getUpdatedListOfBulletinsOnServer()
@@ -547,7 +593,10 @@ class BackgroundTimerTask extends TimerTask
 			return;
 		if(!isServerAvailable())
 			return;
+
+		MartusLogger.logBeginProcess("Checking server news");
 		Vector newsItems = getApp().getNewsFromServer();
+		
 		int newsSize = newsItems.size();
 		if (newsSize > 0)
 			mainWindow.setStatusMessageReady();
@@ -572,6 +621,7 @@ class BackgroundTimerTask extends TimerTask
 			}
 		}
 		alreadyGotNews = true;
+		MartusLogger.logEndProcess("Checking server news");
 	}
 
 	class ThreadedNotify implements Runnable
@@ -590,7 +640,10 @@ class BackgroundTimerTask extends TimerTask
 			
 			HashMap map = new HashMap();
 			map.put("#BulletinTitle#", bulletinTitle);
-			mainWindow.notifyDlg(notifyTag,map);
+			if(UiSession.isJavaFx())
+				FxDialogHelper.showNotificationDialog(mainWindow, notifyTag, map);
+			else
+				mainWindow.notifyDlg(notifyTag,map);
 		}
 		String notifyTag;
 		UniversalId uid;
@@ -642,27 +695,19 @@ class BackgroundTimerTask extends TimerTask
 
 		public void run()
 		{
-			mainWindow.messageDlg(mainWindow, titleTag, messageContents, tokenReplacement);
+			mainWindow.messageDlg(titleTag, messageContents, tokenReplacement);
 		}
 		String titleTag;
 		String messageContents;
 		HashMap tokenReplacement;
 	}
 	
-	class ThreadedNotifyDlgAndUpdateReadyMessage implements Runnable
+	class ThreadedUpdateReadyMessage implements Runnable
 	{
-		public ThreadedNotifyDlgAndUpdateReadyMessage(String tagToUse)
-		{
-			tag = tagToUse;
-		}
-		
 		public void run()
 		{
-			mainWindow.notifyDlg(mainWindow, tag);
 			mainWindow.setStatusMessageReady();
 		}
-		
-		String tag;
 	}
 		
 	MartusApp getApp()
@@ -681,11 +726,12 @@ class BackgroundTimerTask extends TimerTask
 	BackgroundUploader uploader;
 	BackgroundRetriever retriever;
 	private SyncBulletinRetriever syncRetriever;
-	private UiStatusBar statusBar;
+	private StatusBar statusBar;
 	
 	long nextCheckForFieldOfficeBulletins;
 	long nextCheckForToken;
-	
+
+	private boolean isSyncEnabled;
 	boolean waitingForServer;
 	boolean alreadyCheckedCompliance;
 	boolean inComplianceDialog;
@@ -693,5 +739,6 @@ class BackgroundTimerTask extends TimerTask
 	boolean gotUpdatedOnServerUids;
 	boolean checkingForNewFieldOfficeBulletins;
 	private boolean checkingForToken;
+	private String lastKnownSyncFrequencyMinutes;
 }
 

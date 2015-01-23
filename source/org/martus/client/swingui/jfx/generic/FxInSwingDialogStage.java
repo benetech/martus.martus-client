@@ -35,9 +35,9 @@ import org.martus.client.swingui.UiMainWindow;
 
 abstract public class FxInSwingDialogStage extends FxInSwingStage
 {
-	public FxInSwingDialogStage(UiMainWindow mainWindowToUse)
+	public FxInSwingDialogStage(UiMainWindow mainWindowToUse, String cssName)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, cssName);
 	}
 
 	abstract protected boolean confirmExit();
@@ -53,6 +53,11 @@ abstract public class FxInSwingDialogStage extends FxInSwingStage
 		return new WindowCloseHandler();
 	}
 	
+	private JDialog getDialog()
+	{
+		return (JDialog) getWindow();
+	}
+
 	public void close()
 	{
 		getDialog().setVisible(false);

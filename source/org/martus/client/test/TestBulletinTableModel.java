@@ -126,7 +126,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		b.set("title", "xyz");
 		store.saveBulletin(b);
 
-		assertEquals(Bulletin.STATUSSEALED, b.getStatus());
+		assertEquals(Bulletin.STATUSIMMUTABLE, b.getStatus());
 		assertEquals(localization.getStatusLabel("sealed"), list.getValueAt(0,STATUS));
 
 		b.set(BulletinConstants.TAGEVENTDATE, "1999-04-15");
@@ -137,10 +137,10 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		assertEquals("xyz", b.get(BulletinConstants.TAGTITLE));
 		assertEquals("xyz", list.getValueAt(0,TITLE));
 
-		b.setDraft();
+		b.setMutable();
 		store.saveBulletin(b);
 		assertEquals(localization.getStatusLabel("draft"), list.getValueAt(0,STATUS));
-		b.setSealed();
+		b.setImmutable();
 		store.saveBulletin(b);
 		assertEquals(localization.getStatusLabel("sealed"), list.getValueAt(0,STATUS));
 	}
@@ -151,7 +151,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		list.setFolder(folderSaved);
 		int row = 0;
 		Bulletin b = list.getBulletin(row);
-		assertTrue("not sealed?", b.isSealed());
+		assertTrue("not Immutable?", b.isImmutable());
 		assertEquals("already sent?", "", list.getValueAt(row, WASSENT));
 		
 		store.setIsOnServer(b);

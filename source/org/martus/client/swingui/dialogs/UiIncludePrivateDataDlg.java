@@ -30,11 +30,14 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -45,7 +48,7 @@ public class UiIncludePrivateDataDlg extends JDialog implements ActionListener
 {
 	public UiIncludePrivateDataDlg(UiMainWindow mainWindowToUse, int totalBulletins, int privateOnlyBulletins)
 	{
-		super(mainWindowToUse, "", true);
+		super(mainWindowToUse.getSwingFrame(), "", true);
 		mainWindow = mainWindowToUse;
 		init(totalBulletins, privateOnlyBulletins);	
 	}
@@ -59,7 +62,7 @@ public class UiIncludePrivateDataDlg extends JDialog implements ActionListener
 		publicAndPrivate.addActionListener(this);		
 		publicOnly = new UiButton(localization.getButtonLabel("PublicOnly"));
 		publicOnly.addActionListener(this);		
-		cancel = new UiButton(localization.getButtonLabel("cancel"));
+		cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(this);	
 		
 		HashMap tokenReplacement = new HashMap();
@@ -83,7 +86,7 @@ public class UiIncludePrivateDataDlg extends JDialog implements ActionListener
 		getContentPane().add(new UiWrappedTextArea(message, 40), BorderLayout.CENTER);
 		getContentPane().add(buttons, BorderLayout.SOUTH);
 		getRootPane().setDefaultButton(publicAndPrivate);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 	}
 	

@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Vector;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.Utilities;
@@ -86,6 +87,7 @@ public class ActionMenuQuickEraseRemoveMartus extends ActionQuickErase
 
 	private void deleteAndScrubAllAccountKeyPairsAndRelatedFiles()
 	{
+		Vector martusAccounts = app.getAllAccountDirectories();
 		for (Iterator iter = martusAccounts.iterator(); iter.hasNext();)
 		{
 			File accountDir = (File) iter.next();

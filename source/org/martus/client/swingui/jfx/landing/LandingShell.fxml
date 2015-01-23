@@ -7,124 +7,149 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="960.0" style="-fx-background-color: #1a1a1a;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-	<children>
-		<MenuBar fx:id="global_menu" minHeight="30.0" minWidth="490.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="490.0" style="-fx-background-color: #1a1a1a, -fx-text-fill white; -fx-background-color: #1a1a1a;" stylesheets="@main.css">
-			<menus>
-    			<Menu mnemonicParsing="false" styleClass="menu_style" text="Help">
-      				<items>
-        				<MenuItem mnemonicParsing="false" styleClass="menu-item" text="What is Martus" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Getting Started" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="FAQs" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Installation Wizard" /><MenuItem mnemonicParsing="false" styleClass="menu-item" text="Support Documentation" />
-      				</items>
-    			</Menu>
-				<Menu mnemonicParsing="false" styleClass="menu-item" text="Account">
-					<items>
-					<MenuItem mnemonicParsing="false" onAction="#onChangeUsernameAndPassword" styleClass="menu-item" text="Change Username and Password" />
-					<MenuItem mnemonicParsing="false" onAction="#onCreateNewAccount" styleClass="menu-item" text="Create New" />
-					<MenuItem mnemonicParsing="false" onAction="#onContactInformation" styleClass="menu-item" text="Contact Information" />
-					<MenuItem mnemonicParsing="false" onAction="#onBackupKeypair" styleClass="menu-item" text="Backup Key" />
-					</items>
-				</Menu>
-				<Menu mnemonicParsing="false" text="Settings">
-				<items>
-				<MenuItem mnemonicParsing="false" onAction="#onConfigureServer" text="Server" />
-				<MenuItem mnemonicParsing="false" onAction="#onPreferences" text="System Preferences" />
-				<MenuItem mnemonicParsing="false" text="Tor Preferences" />
-				</items>
-				</Menu>
-				<Menu mnemonicParsing="false" text="Contacts">
-				<items>
-				<MenuItem mnemonicParsing="false" onAction="#onManageContacts" text="Manage Contacts" />
-				<MenuItem mnemonicParsing="false" text="Import From File" />
-				</items>
-				</Menu>
-			</menus>
-			<VBox.margin>
-				<Insets right="10.0" />
-			</VBox.margin>
-			<padding>
-				<Insets left="1.0" />
-			</padding>
-		</MenuBar>
-		<VBox prefHeight="480.0" prefWidth="960.0" style="-fx-background-color: #1a1a1a;">
-			<VBox.margin>
-				<Insets bottom="20.0" left="20.0" right="20.0" />
-			</VBox.margin>
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<top>
+		<HBox alignment="CENTER_RIGHT" styleClass="menu-bar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 			<children>
-				<VBox prefHeight="2.0" prefWidth="920.0" style="-fx-background-color: #77bad0;" />
-				<VBox prefHeight="40.0" prefWidth="920.0" style="-fx-background-color: #e6e6e6;">
+				<MenuBar fx:id="global_menu">
+					<menus>
+						<Menu mnemonicParsing="false" text="%Menu.Settings">
+							<items>
+								<MenuItem mnemonicParsing="false" onAction="#onConfigureServer" text="%Menu.ServerSettings" />
+								<MenuItem mnemonicParsing="false" onAction="#onSystemPreferences" text="%Menu.SystemPreferences" />
+								<MenuItem mnemonicParsing="false" onAction="#onTorPreferences" text="%Menu.TorPreferences" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" styleClass="menu-item" text="%Menu.Account">
+							<items>
+							<MenuItem mnemonicParsing="false" onAction="#onAccountInformation" styleClass="menu-item" text="%Menu.AccountInformation" />
+							<MenuItem mnemonicParsing="false" onAction="#onContactInformation" styleClass="menu-item" text="%Menu.AuthorInformation" />
+							<MenuItem mnemonicParsing="false" onAction="#onBackupKeypair" styleClass="menu-item" text="%Menu.KeyBackup" />
+							<MenuItem mnemonicParsing="false" onAction="#onDeleteMyData" styleClass="menu-item" text="%Menu.DeleteAccount" />
+							</items>
+						</Menu>
+                  <Menu mnemonicParsing="false" text="%Menu.Analysis">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#onReports" text="%Menu.Reports" />
+                        <MenuItem mnemonicParsing="false" onAction="#onCharts" text="%Menu.Charts" />
+                        <MenuItem mnemonicParsing="false" onAction="#onAdvanceSearch" text="%Menu.search" />
+                    </items>
+                  </Menu>
+					</menus>
+				</MenuBar>	
+				
+			</children>
+		</HBox>
+	</top>
+	<center>
+		<BorderPane prefHeight="64.0" prefWidth="997.0">
+			<top>
+				<VBox prefHeight="38.0" prefWidth="1012.0" style="-fx-background-color: #e6e6e6;">
 					<VBox.margin>
-					<Insets bottom="1.0" top="1.0" />
+						<Insets bottom="1.0" top="1.0" />
 					</VBox.margin>
 					<children>
-						<GridPane hgap="5.0">
+						<GridPane hgap="5.0" prefHeight="38.0" prefWidth="839.0">
 							<columnConstraints>
-								<ColumnConstraints hgrow="SOMETIMES" />
-								<ColumnConstraints hgrow="SOMETIMES" />
-								<ColumnConstraints hgrow="SOMETIMES" />
-								<ColumnConstraints hgrow="SOMETIMES" />
-							    <ColumnConstraints hgrow="SOMETIMES" />
+								<ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="80.0" prefWidth="296.0" />
+								<ColumnConstraints hgrow="SOMETIMES" maxWidth="164.0" minWidth="25.0" prefWidth="135.0" />
+								<ColumnConstraints hgrow="SOMETIMES" maxWidth="156.0" minWidth="0.0" prefWidth="156.0" />
+								<ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="43.0" prefWidth="89.0" />
+							    <ColumnConstraints hgrow="SOMETIMES" maxWidth="13.0" minWidth="0.0" prefWidth="0.0" />
 							    <ColumnConstraints hgrow="SOMETIMES" />
 							</columnConstraints>
 							<children>
-                        <HBox alignment="CENTER" prefHeight="100.0">
+                        <HBox alignment="CENTER">
                            <children>
-      								<ImageView fitHeight="33.0" fitWidth="97.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true">
+      								<ImageView fitHeight="28.0" onMouseClicked="#onLogoClicked" pickOnBounds="true" preserveRatio="true">
       									<image>
-      										<Image url="@/org/martus/client/swingui/jfx/images/Martus-logo-white-text-120x54.png" />
+      										<Image url="@../../dialogs/Martus-logo-black-text-120x54.png" />
       									</image>
       								</ImageView>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" GridPane.columnIndex="1">
+                        <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1">
                            <children>
-      								<Button mnemonicParsing="false" onAction="#onCreateNewBulletin" style="-fx-background-color: #77bad0;" text="+ Create" textFill="#f7f7f7">
+      								<Button mnemonicParsing="false" onAction="#onCreateNewBulletin" styleClass="toolbarButton" text="%Button.Create">
       									<font>
       										<Font name="Helvetica" size="14.0" />
       									</font>
-      								</Button>
-                              <Separator prefWidth="10.0" visible="false" />
-      								<Button mnemonicParsing="false" style="-fx-background-color: #77bad0;" text="Import" textFill="#f7f7f7">
-      									<font>
-      										<Font name="Helvetica" size="14.0" />
-      									</font>
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/create.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
       								</Button>
                            </children>
                         </HBox>
-								<HBox alignment="CENTER_LEFT" prefHeight="32.0" styleClass="toolbarHBox" GridPane.columnIndex="3">
+								<HBox alignment="CENTER_LEFT" styleClass="toolbarHBox" GridPane.columnIndex="2">
 									<children>
-										<Label contentDisplay="CENTER" styleClass="toolbarLabel" text="Server:">
+										<Label contentDisplay="CENTER" styleClass="toolbarLabel" text="%serverWithColon">
                                  			<padding>
                                     				<Insets right="5.0" />
                                  			</padding>
                                  		</Label>
-										<Button fx:id="toolbarButtonOnline" contentDisplay="CENTER" minWidth="28.0" mnemonicParsing="false" onAction="#onOnline" styleClass="toolbarButton" />
+										<Button fx:id="toolbarButtonOnline" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onOnline" styleClass="toolbarButton">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/blank.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
 									</children>
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
 								</HBox>
- 						<HBox alignment="CENTER_LEFT" styleClass="toolbarHBox" GridPane.columnIndex="4">
+ 						<HBox alignment="CENTER_LEFT" styleClass="toolbarHBox" GridPane.columnIndex="3">
 									<children>
 										<Label styleClass="toolbarLabel" text="%Tor">
                                  			<padding>
                                     				<Insets right="5.0" />
                                  			</padding>
                                  		</Label>
- 										<Button fx:id="toolbarButtonTor" minWidth="50" mnemonicParsing="false" onAction="#onTor" styleClass="toolbarButton" />
+ 										<Button fx:id="toolbarButtonTor" mnemonicParsing="false" onAction="#onTor" styleClass="toolbarButton">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/blank.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
                            			</children>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" GridPane.columnIndex="5">
+                        <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="5">
                            <children>
-      								<TextField fx:id="searchText" maxWidth="160.0" minHeight="27.0" prefWidth="150.0" style="-fx-background-radius: 0px;" />
+      								<TextField fx:id="searchText" maxWidth="160.0" minHeight="27.0" prefWidth="100.0" style="-fx-background-radius: 0px;" />
                               <Label text="   " />
-      								<Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onQuickSearch" style="-fx-background-color: #77bad0; -fx-background-radius: 0px;" text="%Button.search" textAlignment="CENTER" textFill="#f7f7f7">
+      								<Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onQuickSearch" styleClass="toolbarButton" text="%Button.search" textAlignment="CENTER">
       									<font>
       										<Font name="Helvetica" size="14.0" />
       									</font>
       									<opaqueInsets>
       										<Insets />
       									</opaqueInsets>
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/search.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
       								</Button>
+                  
+                  				<Button mnemonicParsing="false" onAction="#onHelpMenu" styleClass="toolbarButton" text="%Button.Help">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/blank.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
                            </children>
                         </HBox>
 							</children>
@@ -137,13 +162,36 @@
 						</GridPane>
 					</children>
 				</VBox>
-				<SplitPane dividerPositions="0.07" focusTraversable="true" minWidth="920.0" prefHeight="360.0" prefWidth="920.0" style="-fx-box-border: transparent; -fx-box-border: 0px;">
-					<items>
-                  		<Pane fx:id="sideContentPane" prefHeight="200.0" prefWidth="200.0" />
-    						<Pane fx:id="mainContentPane" minHeight="380.0" minWidth="620.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #bdbdbd;" />
-  					</items>
-				</SplitPane>
-			</children>
-		</VBox>
-	</children>
-</VBox>
+			</top>
+			<center>
+				<BorderPane>
+					<left>
+						<StackPane fx:id="sideContentPane" />
+					</left>
+					<center>
+						<BorderPane>
+							<top>
+								<HBox alignment="CENTER_LEFT">
+   <children>
+               	        			<Label fx:id="titleBarLabel" styleClass="headingLevel2" text="" />
+               	        			<Button fx:id="closeCurrentViewButton" mnemonicParsing="false" onAction="#onCloseCurrentView" styleClass="toolbarButton" text="%Button.close">
+                                 <graphic>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/blank.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
+   </children>
+            	        		</HBox>	
+							</top>
+							<center>
+								<StackPane fx:id="mainContentPane" />
+							</center>
+						</BorderPane>
+					</center>
+				</BorderPane>
+			</center>
+		</BorderPane>
+	</center>
+</BorderPane>

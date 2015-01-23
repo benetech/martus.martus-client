@@ -121,11 +121,11 @@ public class AttachmentTableModel extends AbstractTableModel
 		if(column == 0)
 			return a.getLabel();
 
-		return getSize(a);
+		return getSize(a, mainWindow.getStore().getDatabase());
 		
 	}
 
-	public String getSize(AttachmentProxy a)
+	static public String getSize(AttachmentProxy a, ReadableDatabase database)
 	{
 		if(a.getFile() != null)
 		{	
@@ -139,16 +139,15 @@ public class AttachmentTableModel extends AbstractTableModel
 			return getSizeInKb(packet.getFileSize());
 		}
 		
-		ReadableDatabase database = mainWindow.getStore().getDatabase();
 		int size = 0;
 		UniversalId id = a.getUniversalId();
 		try
 		{
-			DatabaseKey key = DatabaseKey.createDraftKey(id);
+			DatabaseKey key = DatabaseKey.createMutableKey(id);
 			if(!database.doesRecordExist(key))
-				key = DatabaseKey.createSealedKey(id);
+				key = DatabaseKey.createImmutableKey(id);
 			if(!database.doesRecordExist(key))
-				return getLocalization().getFieldLabel("AttachmentSizeUnknown");
+				return "";
 			size = database.getRecordSize(key);
 		}
 		catch (Exception e)
@@ -161,7 +160,7 @@ public class AttachmentTableModel extends AbstractTableModel
 		return getSizeInKb(size);
 	}
 
-	private String getSizeInKb(long sizeBytes)
+	static private String getSizeInKb(long sizeBytes)
 	{
 		long sizeInKb = sizeBytes / 1024;
 		if (sizeInKb == 0)

@@ -46,18 +46,24 @@ public class ActionMenuPreferences extends UiMenuAction implements ActionDoer
 
 	public void doAction()
 	{
-		getMainWindow().saveState();
-		UiPreferencesDlg dlg = new UiPreferencesDlg(getMainWindow());
-		dlg.setVisible(true);
-		if(dlg.getResult())
+		try
 		{
-			getApp().getConfigInfo().setForceBulletinsAllPrivate(dlg.isAllPrivateChecked());
-			getApp().getConfigInfo().setCheckForFieldOfficeBulletins(dlg.isCheckFieldOfficeBulletinsChecked());
-			getApp().getConfigInfo().setUseZawgyiFont(dlg.isUseZawgyiFont());
-			getApp().getConfigInfo().setUseInternalTor(dlg.isUseInternalTorChecked());
-			getMainWindow().saveConfigInfo();
-			FontSetter.setDefaultFont(dlg.isUseZawgyiFont());
-			getMainWindow().respondToPreferencesChanges();
+			getMainWindow().saveState();
+			UiPreferencesDlg dlg = new UiPreferencesDlg(getMainWindow());
+			dlg.setVisible(true);
+			if(dlg.getResult())
+			{
+				getApp().getConfigInfo().setForceBulletinsAllPrivate(dlg.isAllPrivateChecked());
+				getApp().getConfigInfo().setUseZawgyiFont(dlg.isUseZawgyiFont());
+				getApp().getConfigInfo().setUseInternalTor(dlg.isUseInternalTorChecked());
+				getMainWindow().saveConfigInfo();
+				FontSetter.setDefaultFont(dlg.isUseZawgyiFont());
+				getMainWindow().respondToPreferencesChanges();
+			}
+		}
+		catch(Exception e)
+		{
+			getMainWindow().unexpectedErrorDlg(e);
 		}
 	}
 }

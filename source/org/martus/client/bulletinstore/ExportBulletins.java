@@ -26,44 +26,48 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.bulletinstore;
 
 import java.io.File;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.dialogs.UiImportExportProgressMeterDlg;
 import org.martus.common.MartusLogger;
+import org.martus.common.ProgressMeterInterface;
 import org.martus.util.UnicodeWriter;
 
-public class ExportBulletins
+public class ExportBulletins extends AbstractExport
 {
-	
-	public ExportBulletins(UiMainWindow mainWindowToUse)
+	public ExportBulletins(UiMainWindow mainWindowToUse, ProgressMeterInterface progressDlgToUse)
 	{
-		mainWindow = mainWindowToUse;
+		super(mainWindowToUse, progressDlgToUse);
 	}
-
-	public void doExport(File destFile, Vector bulletinsToUse, boolean userWantsToExportPrivateToUse, boolean userWantsToExportAttachmentsToUse, boolean userWantsToExportAllVersionsToUse)
+	
+	@Override
+	public void doExport(File destFile, Vector bulletinsToUse) 
 	{
 		destinationFile = destFile;
 		bulletinsToExport = bulletinsToUse;
-		userWantsToExportPrivate = userWantsToExportPrivateToUse;
-		userWantsToExportAttachments = userWantsToExportAttachmentsToUse;
-		userWantsToExportAllVersions = userWantsToExportAllVersionsToUse;
-		UiImportExportProgressMeterDlg progressDlg = new UiImportExportProgressMeterDlg(mainWindow, "ExportProgress");
-		ExporterThread exporterThread = new ExporterThread(progressDlg);
+		ExporterThread exporterThread = new ExporterThread(getProgressDlg());
 		exporterThread.start();
-		progressDlg.setVisible(true);
-		int numberOfMissingAttachment = exporterThread.getNumberOfFailingAttachments();
-		int bulletinsExported = exporterThread.getNumberOfBulletinsExported();
-
-		String tag = "ExportComplete";
+	}
+	
+	protected void updateExportMessage(ExporterThread exporterThread,
+			int bulletinsExported, int numberOfMissingAttachment) 
+	{
+		setExportErrorMessage("ExportComplete");
 		if(exporterThread.didUnrecoverableErrorOccur())
-			tag = "ErrorExportingBulletins";
+		{
+			setExportErrorMessage("ErrorExportingBulletins");
+			setErrorOccured(true);
+		}
 		else if(numberOfMissingAttachment > 0)
-			tag = "ExportCompleteMissingAttachments";
-		mainWindow.notifyDlg(tag, getTokenReplacementImporter(bulletinsExported, bulletinsToExport.size(), numberOfMissingAttachment));
+		{
+			setExportErrorMessage("ExportCompleteMissingAttachments");
+			setErrorOccured(true);
+		}
+		setExportErrorMessageTokensMap(getTokenReplacementImporter(bulletinsExported, bulletinsToExport.size(), numberOfMissingAttachment));
 	}
 
 	Map getTokenReplacementImporter(int numberOfBulletinsExported, int totalNumberOfBulletins, int numberOfMissingAttachment) 
@@ -78,19 +82,21 @@ public class ExportBulletins
 	
 	class ExporterThread extends Thread
 	{
-		public ExporterThread(UiImportExportProgressMeterDlg progressRetrieveDlgToUse)
+		public ExporterThread(ProgressMeterInterface progressRetrieveDlgToUse)
 		{
-			clientStore = mainWindow.getStore();
+			clientStore = getMainWindow().getStore();
 			progressMeter = progressRetrieveDlgToUse;
-			exporter = new BulletinXmlExporter(mainWindow.getApp(), mainWindow.getLocalization(), progressMeter);
+			exporter = new BulletinXmlExporter(getMainWindow().getApp(), getMainWindow().getLocalization(), progressMeter);
 		}
 
 		public void run()
 		{
 			try
 			{
+				if(!destinationFile.createNewFile())
+					throw new FileAlreadyExistsException(destinationFile.getAbsolutePath());
 				UnicodeWriter writer = new UnicodeWriter(destinationFile);
-				exporter.exportBulletins(writer, bulletinsToExport, userWantsToExportPrivate, userWantsToExportAttachments, userWantsToExportAllVersions, destinationFile.getParentFile());
+				exporter.exportBulletins(writer, bulletinsToExport, isExportPrivate(), isExportAttachments(), isExportAllVersions(), destinationFile.getParentFile());
 				writer.close();
 			}
 			catch (Exception e)
@@ -100,6 +106,9 @@ public class ExportBulletins
 			}
 			finally
 			{
+				int numberOfMissingAttachment = getNumberOfFailingAttachments();
+				int bulletinsExported = getNumberOfBulletinsExported();
+				updateExportMessage(this, bulletinsExported, numberOfMissingAttachment);
 				progressMeter.finished();
 			}
 		}
@@ -119,12 +128,11 @@ public class ExportBulletins
 			return errorOccured;
 		}
 		
-		UiImportExportProgressMeterDlg progressMeter;
+		ProgressMeterInterface progressMeter;
 		ClientBulletinStore clientStore;
 		private BulletinXmlExporter exporter;
 		private boolean errorOccured;
-	}
-	
+	}	
 
 	Map getTokenReplacementImporter(int bulletinsImported, int totalBulletins, String folder) 
 	{
@@ -134,13 +142,9 @@ public class ExportBulletins
 		map.put("#ImportFolder#", folder);
 		return map;
 	}
-
-	UiMainWindow mainWindow;
-	File destinationFile;
-	Vector bulletinsToExport;
-	boolean userWantsToExportPrivate;
-	boolean userWantsToExportAttachments;
-	boolean userWantsToExportAllVersions;
+		
+	protected File destinationFile;
+	protected Vector bulletinsToExport;
 }
 
 

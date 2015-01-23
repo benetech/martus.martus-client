@@ -28,13 +28,16 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiFontEncodingHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
@@ -48,16 +51,16 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 {
 	public UiContactInfoDlg(UiMainWindow mainWindow, ConfigInfo infoToUse)
 	{
-		super(mainWindow.getCurrentActiveFrame(), "", true);
+		super(mainWindow.getCurrentActiveFrame().getSwingFrame(), "", true);
 		info = infoToUse;
 		fontHelper = new UiFontEncodingHelper(info.getDoZawgyiConversion());
 
 		UiLocalization localization = mainWindow.getLocalization();
 	
 		setTitle(localization.getWindowTitle("setupcontact"));
-		ok = new UiButton(localization.getButtonLabel("ok"));
+		ok = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 		ok.addActionListener(this);
-		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
+		JButton cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(this);
 
 		source = new UiTextField(50);
@@ -100,7 +103,7 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		UiScrollPane scroller = new UiScrollPane(panel);
 		getContentPane().add(scroller);
 		getRootPane().setDefaultButton(ok);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 	}
 
 	private void setInitialValues()

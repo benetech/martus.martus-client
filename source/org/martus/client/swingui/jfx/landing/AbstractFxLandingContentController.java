@@ -28,10 +28,10 @@ package org.martus.client.swingui.jfx.landing;
 import javafx.fxml.Initializable;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxInSwingContentController;
+import org.martus.client.swingui.jfx.generic.FxContentController;
 
 public abstract class AbstractFxLandingContentController
-		extends FxInSwingContentController implements Initializable
+		extends FxContentController implements Initializable
 {
 	public AbstractFxLandingContentController(UiMainWindow mainWindowToUse)
 	{

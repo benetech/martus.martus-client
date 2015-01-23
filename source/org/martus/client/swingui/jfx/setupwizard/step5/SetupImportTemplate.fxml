@@ -4,11 +4,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefWidth="660" maxWidth="660" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<BorderPane maxWidth="660" prefWidth="660" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <center>
     <VBox>
       <children>
-        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0">
+        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="658.0">
           <children>
             <RadioButton fx:id="genericRadioButton" mnemonicParsing="false" onAction="#radioButtonSelectionChanged" styleClass="radioButtonText" text="%Button.GenericForms" GridPane.rowIndex="1">
               <toggleGroup>
@@ -18,20 +18,20 @@
             <ChoiceBox fx:id="genericTemplatesChoiceBox" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <RadioButton fx:id="downloadCustomRadioButton" mnemonicParsing="false" onAction="#radioButtonSelectionChanged" styleClass="radioButtonText" text="%Button.CustomForms" toggleGroup="$chooseTemplateImportMethod" GridPane.rowIndex="2" />
             <ChoiceBox fx:id="customTemplatesChoiceBox" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="selectedTemplateLabel" wrapText="true" styleClass="hintText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label fx:id="switchFormsLaterLabel" wrapText="true" styleClass="hintText" text="%FormsHint" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="selectedTemplateLabel" styleClass="hintText" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="switchFormsLaterLabel" styleClass="hintText" text="%FormsHint" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
           </children>
 
           <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="323.0" minWidth="10.0" prefWidth="187.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="474.0" minWidth="10.0" prefWidth="471.0" />
           </columnConstraints>
           <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="34.0" minHeight="9.0" prefHeight="9.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="78.0" minHeight="9.0" prefHeight="71.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="71.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
       </children>

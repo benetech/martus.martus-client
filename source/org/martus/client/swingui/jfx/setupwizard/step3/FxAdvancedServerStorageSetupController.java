@@ -25,9 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.setupwizard.step3;
 
-import java.awt.Desktop;
-import java.net.URI;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -39,14 +36,17 @@ import javafx.scene.control.TextField;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.FxWizardStage;
+import org.martus.client.swingui.jfx.contacts.FxWizardAddContactsController;
+import org.martus.client.swingui.jfx.generic.FxInSwingWizardStage;
 import org.martus.client.swingui.jfx.setupwizard.AbstractFxSetupWizardContentController;
-import org.martus.client.swingui.jfx.setupwizard.step4.FxWizardAddContactsController;
 import org.martus.client.swingui.jfx.setupwizard.tasks.GetServerPublicKeyTask;
+import org.martus.common.DammCheckDigitAlgorithm.CheckDigitInvalidException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.CreateDigestException;
 import org.martus.common.crypto.MartusSecurity;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstractServerSetupController implements Initializable
 {
@@ -90,17 +90,9 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 	@FXML
 	private void onLinkMailTo()
 	{
-		try
-		{
-			Desktop desktop = Desktop.getDesktop(); 
-			desktop.mail(new URI("mailto:info@martus.org"));
-		} 
-		catch (Exception e)
-		{
-			MartusLogger.logException(e);
-		}
+		openDefaultEmailApp("mailto:martus@benetech.org");
 	}
-	
+
 	@FXML
 	public void connect()
 	{
@@ -112,12 +104,8 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 			showTimeoutDialog(getLocalization().getFieldLabel("GettingServerInformation"), task);
 			
 			String serverKey = task.getPublicKey();
-			String serverPublicCode = MartusCrypto.computePublicCode(serverKey);
-			String serverPublicCode40 = MartusCrypto.computePublicCode40(serverKey);
-
 			String userEnteredPublicCode = publicCodeField.getText();
-			String normalizedPublicCode = MartusCrypto.removeNonDigits(userEnteredPublicCode);
-			if(!(serverPublicCode.equals(normalizedPublicCode) || serverPublicCode40.equals(normalizedPublicCode)))
+			if(!doesPublicCodeMatch(serverKey, userEnteredPublicCode))
 			{
 				showError("ServerCodeWrong");
 				return;
@@ -126,7 +114,7 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 			String magicWord = magicWordField.getText();
 			attemptToConnect(ip, serverKey, true, magicWord);
 
-			FxWizardStage wizardStage = getWizardStage();
+			FxInSwingWizardStage wizardStage = getWizardStage();
 			if(wizardStage.checkIfCurrentServerIsAvailable())
 				getWizardNavigationHandler().doNext();
 		} 
@@ -156,6 +144,17 @@ public class FxAdvancedServerStorageSetupController extends	FxSetupWizardAbstrac
 		{
 			updateButtonStates();
 		}
+	}
+
+	static public boolean doesPublicCodeMatch(String serverKey,
+			String userEnteredPublicCode) throws InvalidBase64Exception,
+			CheckDigitInvalidException, CreateDigestException
+	{
+		String serverPublicCode = MartusCrypto.computePublicCode(serverKey);
+		String serverPublicCode40 = MartusCrypto.computePublicCode40(serverKey);
+
+		String normalizedPublicCode = MartusCrypto.removeNonDigits(userEnteredPublicCode);
+		return (serverPublicCode.equals(normalizedPublicCode) || serverPublicCode40.equals(normalizedPublicCode));
 	}
 	
 	@Override

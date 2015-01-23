@@ -25,7 +25,11 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import java.awt.Desktop;
+import java.awt.Dimension;
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -36,15 +40,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.actions.ActionDoer;
 import org.martus.client.swingui.jfx.generic.data.MartusResourceBundle;
 import org.martus.client.swingui.jfx.setupwizard.tasks.AbstractAppTask;
 import org.martus.client.swingui.jfx.setupwizard.tasks.TaskWithTimeout;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MartusLogger;
+import org.martus.common.crypto.MartusCrypto;
 
 abstract public class FxController implements Initializable
 {
@@ -55,11 +65,43 @@ abstract public class FxController implements Initializable
 	
 	abstract public String getFxmlLocation();
 	
+	protected String getCssName()
+	{
+		return null;
+	}
+	
+	protected Dimension getPreferredDimension()
+	{
+		return null;
+	}
+	
+	public void save()
+	{
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 	}
 	
+	public FxShellController getShellController()
+	{
+		return shellController;
+	}
+	
+	public void setShellController(FxShellController shellControllerToUse)
+	{
+		shellController = shellControllerToUse;
+	}
+	
+	public VirtualStage getStage()
+	{
+		if(getShellController() == null)
+			return null;
+		
+		return getShellController().getStage();
+	}
+
 	public Parent createContents() throws Exception
 	{
 		return (Parent)createLoader().load();
@@ -121,7 +163,12 @@ abstract public class FxController implements Initializable
 	{
 		return getMainWindow().getApp();
 	}
-	
+
+	public MartusCrypto getSecurity()
+	{
+		return getApp().getSecurity();
+	}
+
 	public void showNotifyDialog(String baseTag)
 	{
 		String noExtraMessage = "";
@@ -163,23 +210,69 @@ abstract public class FxController implements Initializable
 		}
 	}
 	
-	public boolean showConfirmationDialog(String title, String message)
+	public void showDialogWithClose(String titleTag, FxController contentController)
+	{
+		DialogWithCloseShellController dialogShellController = new DialogWithCloseShellController(getMainWindow(), contentController, titleTag);
+		doAction(dialogShellController);
+	}
+	
+	public boolean showConfirmationDialog(String tag)
+	{
+		String message = getLocalization().getFieldLabel("confirm" + tag + "cause");
+		message += "\n\n";
+		message += getLocalization().getFieldLabel("confirm" + tag + "effect");
+		message += "\n\n";
+		message += getLocalization().getFieldLabel("confirmquestion");
+		return showConfirmationDialog(tag, message);
+	}
+
+	public boolean showOkCancelConfirmationDialog(String titleTag, String messageTag)
+	{
+		String message = getLocalization().getFieldLabel(messageTag);
+		
+		return showConfirmationDialog(titleTag, EnglishCommonStrings.OK, EnglishCommonStrings.CANCEL, message);
+	}
+	
+	public boolean showConfirmationDialog(String titleTag, String message)
+	{
+		return showConfirmationDialog(titleTag, EnglishCommonStrings.YES, EnglishCommonStrings.NO, message);
+	}
+
+	public boolean showConfirmationDialog(String titleTag, String yesButtonTag, String noButtonTag, String message)
+	{
+		FxController mainAreaController = new FxTextPaneController(getMainWindow(), message);
+		return showModalYesNoDialog(titleTag,  yesButtonTag, noButtonTag, mainAreaController);
+	}
+
+	public boolean showModalYesNoDialog(String titleTag, String yesButtonTag, String noButtonTag, FxController mainAreaController)
 	{
 		try
 		{
-			PopupConfirmationController popupController = new PopupConfirmationController(getMainWindow(), title, message);
+			MartusLocalization localization = getLocalization();
+			String titleText = localization.getWindowTitle(titleTag);
+			String yesButtonText = localization.getButtonLabel(yesButtonTag);
+			String noButtonText = localization.getButtonLabel(noButtonTag);
+			PopupConfirmationController popupController = new PopupConfirmationController(getMainWindow(), titleText, yesButtonText, noButtonText, mainAreaController);
 			showControllerInsideModalDialog(popupController);
 			return popupController.wasYesPressed();
 		} 
 		catch (Exception e)
 		{
-			MartusLogger.logException(e);
-			showNotifyDialog("UnexpectedError");
+			logAndNotifyUnexpectedError(e);
 		}
 		return false;
 	}
+
+	public void logAndNotifyUnexpectedError(Exception e)
+	{
+		VirtualStage stage = getStage();
+		if(stage != null)
+			stage.logAndNotifyUnexpectedError(e);
+		else
+			MartusLogger.logException(e);
+	}
 	
-	public void showBusyDialog(String message, Task task, FxInSwingStage wizardPanel) throws Exception
+	public void showBusyDialog(String message, Task task) throws Exception
 	{
 		FxPopupController popupController = new FxBusyController(getMainWindow(), message, task);
 		showControllerInsideModalDialog(popupController);
@@ -203,7 +296,10 @@ abstract public class FxController implements Initializable
 
 	public void showControllerInsideModalDialog(FxPopupController controller) throws Exception
 	{
-		FxStage popupStage = new FxStage(mainWindow, controller);
+		// NOTE: Stage must be constructed before the fxml is loaded, 
+		// so the controller has access to its stage during initialize()
+		PureFxStage popupStage = new PureFxDialogStage(mainWindow, controller);
+
 		FXMLLoader fl = new FXMLLoader();
 		fl.setResources(new MartusResourceBundle(getLocalization()));
 		fl.setController(controller);
@@ -211,20 +307,77 @@ abstract public class FxController implements Initializable
 		fl.setLocation(fxmlUrl);
 		fl.load();
 		Parent root = fl.getRoot();
-
+		
 		Scene scene = new Scene(root);
 		scene.setNodeOrientation(FxScene.getNodeOrientationBasedOnLanguage());
 		File fxmlDir = getApp().getFxmlDirectory();
 		FxController.applyStyleSheets(scene.getStylesheets(), fxmlDir, getLocalization().getCurrentLanguageCode(), POPUP_CSS);
-		popupStage.setScene(scene);
-	    showModalPopupStage(popupStage);
-	    if(controller.getThrownException() != null)
-	    	throw (Exception)controller.getThrownException();
-	}
 
-	protected void showModalPopupStage(Stage popupStage)
+		popupStage.setScene(scene);
+		showModalPopupStage(popupStage);
+		MartusLogger.log("Back from showModalPopupStage");
+		if(controller.getThrownException() != null)
+		{
+		    MartusLogger.log("Re-throwing exception");
+			throw new Exception(controller.getThrownException());
+		}
+	}
+	
+	protected void showModalPopupStage(PureFxStage popupStage)
 	{
 		popupStage.showAndWait();
+	}
+	
+	public void loadControllerAndEmbedInPane(FxController embeddedContentController, Pane destinationPane) throws Exception
+	{
+		embeddedContentController.setShellController(getShellController());
+		embeddedContentController.setParentController(this);
+		Parent createContents = embeddedContentController.createContents();
+		destinationPane.getChildren().addAll(createContents);
+	}
+
+	private void setParentController(FxController parentControllerToUse)
+	{
+		parentController = parentControllerToUse;
+	}
+	
+	public FxController getParentController()
+	{
+		return parentController;
+	}
+	
+	public FxController getTopLevelController()
+	{
+		FxController top = this;
+		while(top.getParentController() != null)
+			top = top.getParentController();
+		
+		return top;
+	}
+	
+	public Button getOkButton()
+	{
+		return null;
+	}
+
+	public void doAction(ActionDoer doer)
+	{
+		VirtualStage stage = getStage();
+		if(stage == null)
+			MartusLogger.log("Controller has no stage: " + getClass().getName());
+		
+		stage.doAction(doer);
+	}
+
+	public boolean isDoubleClick(MouseEvent mouseEvent)
+	{
+	    if(mouseEvent.getButton().equals(MouseButton.PRIMARY))
+	    {
+		    final int MOUSE_DOUBLE_CLICK = 2;
+	    		if(mouseEvent.getClickCount() == MOUSE_DOUBLE_CLICK)
+	    			return true;
+	    }
+	    return false;
 	}
 	
 	static public void applyStyleSheets(ObservableList<String> stylesheets, File directory, String languageCode, String cssLocation) throws Exception
@@ -266,9 +419,39 @@ abstract public class FxController implements Initializable
 			return getBestFile(directory, "css/" + cssLocation);
 		return getBestFile(directory, "css/" + languageCode + "/" + cssLocation);
 	}
+	
+	protected void openLinkInDefaultBrowser(String url)
+	{
+		try
+		{
+			Desktop.getDesktop().browse(java.net.URI.create(url));
+		} 
+		catch (IOException e)
+		{
+			MartusLogger.logException(e);
+		}
+	}
+
+	protected void openDefaultEmailApp(String email)
+	{
+		try
+		{
+			Desktop desktop = Desktop.getDesktop(); 
+			desktop.mail(new URI(email));
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+	}
 
 	public static class UserCancelledException extends Exception
 	{
+	}
+	
+	public PureFxStage getParentWindow()
+	{
+		return (PureFxStage)getStage();
 	}
 
 	private static final String POPUP_CSS = "Popup.css";
@@ -276,4 +459,6 @@ abstract public class FxController implements Initializable
 
 	private UiMainWindow mainWindow;
 	private static int notifyDialogDepth;
+	private FxShellController shellController;
+	private FxController parentController;
 }

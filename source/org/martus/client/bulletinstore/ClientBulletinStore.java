@@ -44,7 +44,11 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.zip.ZipFile;
 
+import javafx.beans.property.Property;
+import javafx.collections.ObservableSet;
+
 import org.martus.client.core.MartusClientXml;
+import org.martus.client.core.templates.FormTemplateManager;
 import org.martus.client.swingui.bulletintable.BulletinTableModel;
 import org.martus.common.BulletinSummary;
 import org.martus.common.FieldSpecCollection;
@@ -63,9 +67,10 @@ import org.martus.common.database.Database;
 import org.martus.common.database.Database.RecordHiddenException;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.field.MartusField;
-import org.martus.common.fieldspec.StandardFieldSpecs;
+import org.martus.common.fieldspec.FormTemplate;
 import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.BulletinHistory;
+import org.martus.common.packet.ExtendedHistoryList;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.UniversalId.NotUniversalIdException;
@@ -116,15 +121,14 @@ public class ClientBulletinStore extends BulletinStore
 		
 		initializeFolders();
 
-		topSectionFieldSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
-		bottomSectionFieldSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
-		
 		loadCache();
 		
 		File obsoleteCacheFile = new File(getStoreRootDir(), OBSOLETE_CACHE_FILE_NAME);
 		obsoleteCacheFile.delete();
 
 		createKnownFieldSpecCache();
+
+		initializeFormTemplateManager();
 	}
 
 	public void prepareToExitNormally() throws Exception
@@ -208,6 +212,10 @@ public class ClientBulletinStore extends BulletinStore
 			BulletinFolder folder = (BulletinFolder) f.next();
 			setOfUniversalIds.addAll(folder.getAllUniversalIdsUnsorted());
 		}
+		
+		BulletinFolder importFolder = getFolderImport();
+		setOfUniversalIds.addAll(importFolder.getAllUniversalIdsUnsorted());
+		
 		return setOfUniversalIds;
 	}
 
@@ -354,13 +362,14 @@ public class ClientBulletinStore extends BulletinStore
 	{
 		try
 		{
-			if(!f.equals(folderDiscarded))
+			if(f==null || !f.equals(folderDiscarded))
 				folderDiscarded.add(uid);
 		}
 		catch (BulletinAlreadyExistsException saveToIgnoreException)
 		{
 		}
-		removeBulletinFromFolder(f, uid);
+		if(f != null)
+			removeBulletinFromFolder(f, uid);
 		if(isOrphan(uid))
 			destroyBulletin(getBulletinRevision(uid));
 	}
@@ -393,7 +402,7 @@ public class ClientBulletinStore extends BulletinStore
 		return false;
 	}
 	
-	private boolean isDiscarded(UniversalId uid)
+	public boolean isDiscarded(UniversalId uid)
 	{
 		return getFolderDiscarded().contains(uid);
 	}
@@ -582,6 +591,12 @@ public class ClientBulletinStore extends BulletinStore
 	{
 		return RECOVERED_BULLETIN_FOLDER;
 	}
+	
+		
+	public String getNameOfFolderForAllRetrieved()
+	{
+		return RETRIEVED_FOLDER;
+	}
 
 	public String getNameOfFolderRetrievedSealed()
 	{
@@ -629,11 +644,16 @@ public class ClientBulletinStore extends BulletinStore
 		return folderSealedOutbox;
 	}
 	
+	public BulletinFolder getFolderImport()
+	{
+		return createOrFindFolder(IMPORT_FOLDER);
+	}
+
 	private BulletinFolder getFolderOnServer()
 	{
 		return createOrFindFolder(ON_SERVER_FOLDER);
 	}
-	
+		
 	private BulletinFolder getFolderNotOnServer()
 	{
 		return createOrFindFolder(NOT_ON_SERVER_FOLDER);
@@ -708,7 +728,6 @@ public class ClientBulletinStore extends BulletinStore
 		folderSaved = createSystemFolder(SAVED_FOLDER);
 		folderDiscarded = createSystemFolder(DISCARDED_FOLDER);
 		folderDraftOutbox = createSystemFolder(DRAFT_OUTBOX);
-		
 		folderSealedOutbox = createSystemFolder(SEALED_OUTBOX);
 	}
 
@@ -818,25 +837,50 @@ public class ClientBulletinStore extends BulletinStore
 		}
 	}
 
-	public synchronized void moveBulletin(Bulletin b, BulletinFolder from, BulletinFolder to)
+	public Bulletin copyBulletinWithoutContactsOrHistory(UniversalId bulletinId, String newTitle) throws Exception
 	{
-		if(from.equals(to))
-			return;
+		Bulletin original = getBulletinRevision(bulletinId);
+		FieldSpecCollection publicFieldSpecsToUse = original.getTopSectionFieldSpecs();
+		FieldSpecCollection privateFieldSpecsToUse = original.getBottomSectionFieldSpecs();
+		Bulletin copy = createNewDraft(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
+		copy.set(Bulletin.TAGTITLE, newTitle);
+		clearAuthorizedToReadKeys(copy);
+		copy.setHistory(new BulletinHistory());
+		copy.getBulletinHeaderPacket().setExtendedHistory(new ExtendedHistoryList());
+		return copy;
+	}
+
+	private void clearAuthorizedToReadKeys(Bulletin copy)
+	{
+		copy.clearAuthorizedToReadKeys();
+	}
+
+	public boolean isMyBulletin(Bulletin original)
+	{
+		return original.getAccount().equals(getAccountId());
+	}
+	
+	public synchronized void moveBulletin(Bulletin b, BulletinFolder from, BulletinFolder to) throws IOException
+	{
+		if(linkBulletinToFolder(b, to))
+		{
+			removeBulletinFromFolder(from, b);
+			saveFolders();
+		}
+	}
+
+	public synchronized boolean linkBulletinToFolder(Bulletin b, BulletinFolder to) throws IOException
+	{
 		try
 		{
 			to.add(b);
+			return true;
 		}
 		catch (BulletinAlreadyExistsException e)
 		{
 			//System.out.println("Bulletin already exists in destination folder");
 		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		removeBulletinFromFolder(from, b);
-		saveFolders();
+		return false;
 	}
 
 	public void removeBulletinFromFolder(BulletinFolder from, Bulletin b)
@@ -988,14 +1032,24 @@ public class ClientBulletinStore extends BulletinStore
 		return new File(AccountDir, "MartusFolders.dat");
 	}
 
-	public FieldSpecCollection getBottomSectionFieldSpecs()
+	public String getCurrentFormTemplateName() throws Exception
 	{
-		return bottomSectionFieldSpecs;
+		return getCurrentFormTemplate().getTitle();
 	}
 
-	public FieldSpecCollection getTopSectionFieldSpecs()
+	public FormTemplate getCurrentFormTemplate() throws Exception
 	{
-		return topSectionFieldSpecs;
+		return formTemplateManager.getCurrentFormTemplate();
+	}
+
+	public FieldSpecCollection getBottomSectionFieldSpecs() throws Exception
+	{
+		return getCurrentFormTemplate().getBottomFields();
+	}
+
+	public FieldSpecCollection getTopSectionFieldSpecs() throws Exception
+	{
+		return getCurrentFormTemplate().getTopFields();
 	}
 
 	public synchronized BulletinFolder createOrFindFolder(String name)
@@ -1088,7 +1142,7 @@ public class ClientBulletinStore extends BulletinStore
 		orphanFolder.prepareForBulkOperation();
 		orphanFolder.add(b);
 		
-		BulletinFolder outboxFolder =  (b.isDraft())? getFolderDraftOutbox():getFolderSealedOutbox();
+		BulletinFolder outboxFolder =  (b.isMutable())? getFolderDraftOutbox():getFolderSealedOutbox();
 		if (outboxFolder != null)
 			outboxFolder.add(b);
 	}
@@ -1100,16 +1154,11 @@ public class ClientBulletinStore extends BulletinStore
 		createSystemFolders();
 	}
 	
-	public void setTopSectionFieldSpecs(FieldSpecCollection newFieldSpecs)
+	public void setFormTemplate(String formTemplateTitle) throws Exception
 	{
-		topSectionFieldSpecs = newFieldSpecs;
+		formTemplateManager.setCurrentFormTemplate(formTemplateTitle);
 	}
 	
-	public void setBottomSectionFieldSpecs(FieldSpecCollection newFieldSpecs)
-	{
-		bottomSectionFieldSpecs = newFieldSpecs;
-	}
-
 	public int quarantineUnreadableBulletins()
 	{
 		class Quarantiner implements Database.PacketVisitor
@@ -1357,7 +1406,7 @@ public class ClientBulletinStore extends BulletinStore
 			BulletinHeaderPacket bhp = BulletinHeaderPacket.loadFromZipFile(zip, getSignatureVerifier());
 			UniversalId uid = bhp.getUniversalId();
 
-			boolean isSealed = bhp.getStatus().equals(Bulletin.STATUSSEALED);
+			boolean isSealed = Bulletin.isImmutable(bhp.getStatus());
 			if(forceSameUids || !isMyBulletin(uid) || isSealed)
 			{
 				importZipFileToStoreWithSameUids(zipFile);
@@ -1467,7 +1516,7 @@ public class ClientBulletinStore extends BulletinStore
 		return new File(accountDirectory, FIELD_SPEC_CACHE_FILE_NAME);
 	}
 	
-	public boolean bulletinHasCurrentFieldSpecs(Bulletin b)
+	public boolean bulletinHasCurrentFieldSpecs(Bulletin b) throws Exception
 	{
 		return (b.getTopSectionFieldSpecs().equals(getTopSectionFieldSpecs()) &&
 				b.getBottomSectionFieldSpecs().equals(getBottomSectionFieldSpecs()) );
@@ -1490,19 +1539,26 @@ public class ClientBulletinStore extends BulletinStore
 		return b;
 	}
 	
-	public Bulletin createEmptyClone(Bulletin original) throws Exception 
+	public Bulletin createNewDraftWithCurrentTemplateButIdAndDataAndHistoryFrom(Bulletin original) throws Exception
 	{
-		FieldSpecCollection topSectionSpecs = original.getTopSectionFieldSpecs();
-		FieldSpecCollection bottomSectionSpecs = original.getBottomSectionFieldSpecs();
-		return createEmptyCloneWithFields(original, topSectionSpecs, bottomSectionSpecs);
+		FieldSpecCollection topSpecs = getCurrentFormTemplate().getTopFields();
+		FieldSpecCollection bottomSpecs = getCurrentFormTemplate().getBottomFields();
+		Bulletin newDraft = createNewDraft(original, topSpecs, bottomSpecs);
+		newDraft.setHistory(original.getHistory());
+
+		BulletinHeaderPacket oldHeader = original.getBulletinHeaderPacket();
+		BulletinHeaderPacket newHeader = newDraft.getBulletinHeaderPacket();
+		newHeader.setUniversalId(oldHeader.getUniversalId());
+		newHeader.setExtendedHistory(oldHeader.getExtendedHistory());
+		newHeader.setAuthorizedToReadKeysPending(oldHeader.getAuthorizedToReadKeysPending());
+		return newDraft;
 	}
 
-	public Bulletin createEmptyCloneWithFields(Bulletin original, FieldSpecCollection publicSpecs, FieldSpecCollection privateSpecs) throws Exception
+	public Bulletin createCloneWithTemplateAndDataFrom(Bulletin original) throws Exception
 	{
-		UniversalId headerUid = original.getUniversalId();
-		UniversalId publicDataUid = original.getFieldDataPacket().getUniversalId();
-		UniversalId privateDataUid = original.getPrivateFieldDataPacket().getUniversalId();
-		return new Bulletin(getSignatureGenerator(), headerUid, publicDataUid, privateDataUid, publicSpecs, privateSpecs);
+		FieldSpecCollection publicFieldSpecsToUse = original.getTopSectionFieldSpecs();
+		FieldSpecCollection privateFieldSpecsToUse = original.getBottomSectionFieldSpecs();
+		return createNewDraft(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
 	}
 
 	public Bulletin createNewDraft(Bulletin original, FieldSpecCollection topSectionFieldSpecsToUse, FieldSpecCollection bottomSectionFieldSpecsToUse) throws Exception 
@@ -1512,13 +1568,6 @@ public class ClientBulletinStore extends BulletinStore
 		return newDraftBulletin;
 	}
 	
-	public Bulletin createDraftClone(Bulletin original, FieldSpecCollection topSectionFieldSpecsToUse, FieldSpecCollection bottomSectionFieldSpecsToUse) throws Exception 
-	{
-		Bulletin clone = createEmptyCloneWithFields(original, topSectionFieldSpecsToUse, bottomSectionFieldSpecsToUse);
-		clone.createDraftCopyOf(original, getDatabase());
-		return clone;
-	}
-
 	public Vector getUidsOfAllBulletinRevisions()
 	{
 		class UidCollector implements Database.PacketVisitor
@@ -1542,6 +1591,52 @@ public class ClientBulletinStore extends BulletinStore
 		return (String[])tags.toArray(new String[0]);
 	}
 
+	public Property<String> getCurrentFormTemplateNameProperty()
+	{
+		return formTemplateManager.getCurrentFormTemplateNameProperty();
+	}
+
+	public ObservableSet<String> getAvailableTemplates()
+	{
+		return formTemplateManager.getAvailableTemplatesProperty();
+	}
+
+	public FormTemplate getFormTemplate(String title) throws Exception
+	{
+		return formTemplateManager.getTemplate(title);
+	}
+
+	public void saveNewFormTemplate(FormTemplate template) throws Exception
+	{
+		formTemplateManager.putTemplate(template);
+	}
+
+	public void selectFormTemplateAsDefault(String title) throws Exception
+	{
+		formTemplateManager.setCurrentFormTemplate(title);
+	}
+
+	public void deleteFormTemplate(String title) throws Exception
+	{
+		formTemplateManager.deleteTemplate(title);
+	}
+
+	public boolean doesFormTemplateExist(String newTitle) throws Exception
+	{
+		return formTemplateManager.getAvailableTemplateNames().contains(newTitle);
+	}
+
+	private void initializeFormTemplateManager() throws Exception
+	{
+		File templateDirectory = getTemplateDirectory();
+		formTemplateManager = FormTemplateManager.createOrOpen(getSignatureGenerator(), templateDirectory);
+	}
+
+	private File getTemplateDirectory()
+	{
+		return new File(getStoreRootDir(), TEMPLATE_DIRECTORY_NAME);
+	}
+	
 	public static final String SAVED_FOLDER = "%Sent";
 	public static final String DISCARDED_FOLDER = "%Discarded";
 	public static final String SEARCH_RESULTS_BULLETIN_FOLDER = "%SearchResults";
@@ -1554,6 +1649,7 @@ public class ClientBulletinStore extends BulletinStore
 	public static final String DAMAGED_BULLETIN_FOLDER = "%DamagedBulletins";
 	private static final String DRAFT_OUTBOX = "*DraftOutbox";
 	private static final String SEALED_OUTBOX = "*SealedOutbox";
+	private static final String IMPORT_FOLDER = "%Import";
 	private static final String ON_SERVER_FOLDER = "*OnServer";
 	private static final String NOT_ON_SERVER_FOLDER = "*NotOnServer";
 
@@ -1566,6 +1662,8 @@ public class ClientBulletinStore extends BulletinStore
 	private static final String OBSOLETE_CACHE_FILE_NAME = "sfcache.dat";
 	private static final String FIELD_SPEC_CACHE_FILE_NAME = "fscache.dat";
 
+	public static final String TEMPLATE_DIRECTORY_NAME = "templates";
+
 	private Vector folders;
 	private BulletinFolder folderSaved;
 	private BulletinFolder folderDiscarded;
@@ -1573,8 +1671,7 @@ public class ClientBulletinStore extends BulletinStore
 	private BulletinFolder folderSealedOutbox;
 	private boolean loadedLegacyFolders;
 
-	private FieldSpecCollection topSectionFieldSpecs;
-	private FieldSpecCollection bottomSectionFieldSpecs;
 	PartialBulletinCache bulletinDataCache;
 	KnownFieldSpecCache knownFieldSpecCache;
+	private FormTemplateManager formTemplateManager;
 }

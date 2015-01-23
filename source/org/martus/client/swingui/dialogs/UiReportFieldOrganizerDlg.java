@@ -39,6 +39,7 @@ import javax.swing.ListSelectionModel;
 import org.martus.client.search.FieldChooserSpecBuilder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
@@ -50,7 +51,7 @@ public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 {
 	public UiReportFieldOrganizerDlg(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse.getSwingFrame());
 		setModal(true);
 		mainWindow = mainWindowToUse;
 		
@@ -76,9 +77,9 @@ public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 		sideButtonBar.add(upButton);
 		sideButtonBar.add(downButton);
 		
-		okButton = new UiButton(localization.getButtonLabel("ok"));
+		okButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 		okButton.addActionListener(new OkButtonHandler());
-		UiButton cancelButton = new UiButton(localization.getButtonLabel("cancel"));
+		UiButton cancelButton = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancelButton.addActionListener(new CancelButtonHandler());
 		Box bottomButtonBar = Box.createHorizontalBox();
 		Component[] buttons = {Box.createHorizontalGlue(), okButton, cancelButton};
@@ -92,7 +93,7 @@ public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 
 		getContentPane().add(panel);
 		pack();
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		updateButtons();
 	}
 	

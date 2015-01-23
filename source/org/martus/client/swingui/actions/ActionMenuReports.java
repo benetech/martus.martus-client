@@ -60,8 +60,8 @@ import org.martus.client.swingui.dialogs.UiPushbuttonsDlg;
 import org.martus.client.swingui.dialogs.UiReportFieldChooserDlg;
 import org.martus.client.swingui.dialogs.UiReportFieldOrganizerDlg;
 import org.martus.client.swingui.dialogs.UiSortFieldsDlg;
-import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.FormatFilter;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
@@ -71,7 +71,7 @@ import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.util.UnicodeWriter;
 
 
-public class ActionMenuReports extends ActionPrint
+public class ActionMenuReports extends ActionPrint implements ActionDoer
 {
 	public ActionMenuReports(UiMainWindow mainWindowToUse)
 	{
@@ -85,6 +85,11 @@ public class ActionMenuReports extends ActionPrint
 
 	public void actionPerformed(ActionEvent ae)
 	{
+		doAction();
+	}
+
+	public void doAction()
+	{
 		try
 		{
 			MiniLocalization localization = mainWindow.getLocalization();
@@ -92,7 +97,7 @@ public class ActionMenuReports extends ActionPrint
 			String runButtonLabel = localization.getButtonLabel("RunReport");
 			String createTabularReportButtonLabel = localization.getButtonLabel("CreateTabularReport");
 			String createPageReportButtonLabel = localization.getButtonLabel("CreatePageReport");
-			String cancelButtonLabel = localization.getButtonLabel("cancel");
+			String cancelButtonLabel = localization.getButtonLabel(EnglishCommonStrings.CANCEL);
 			String[] buttonLabels = {runButtonLabel, createTabularReportButtonLabel, createPageReportButtonLabel, cancelButtonLabel, };
 			String title = mainWindow.getLocalization().getWindowTitle("RunOrCreateReport");
 			UiPushbuttonsDlg runOrCreate = new UiPushbuttonsDlg(mainWindow, title, buttonLabels);
@@ -187,13 +192,8 @@ public class ActionMenuReports extends ActionPrint
 	
 	ReportAnswers chooseReport() throws Exception
 	{
-		UiMainWindow owner = mainWindow;
-		String title = getLocalization().getWindowTitle("ChooseReportToRun");
-		String okButtonLabel = getLocalization().getButtonLabel("SelectReport");
-		File directory = owner.getApp().getCurrentAccountDirectory();
 		FileFilter filter = new ReportFormatFilter(getLocalization());
-		File chosenFile = FileDialogHelpers.doFileOpenDialog(owner, title, okButtonLabel, directory, filter);
-		
+		File chosenFile = mainWindow.showFileOpenDialog("SelectReport", filter);
 		if(chosenFile == null)
 			return null;
 	
@@ -273,11 +273,11 @@ public class ActionMenuReports extends ActionPrint
 			if(areAllBulletinPrivate)
 			{
 				MartusLocalization localization = mainWindow.getLocalization();
-				String cancel = localization.getButtonLabel("cancel");
+				String cancel = localization.getButtonLabel(EnglishCommonStrings.CANCEL);
 				String includePublic = mainWindow.getLocalization().getButtonLabel("IncludePrivateBulletins");
 				String[] buttons = {includePublic, cancel};
 				HashMap emptyTokenReplacement = new HashMap();
-				if(!mainWindow.confirmCustomButtonsDlg(mainWindow, "ReportIncludePrivate", buttons, emptyTokenReplacement))
+				if(!mainWindow.confirmCustomButtonsDlg("ReportIncludePrivate", buttons, emptyTokenReplacement))
 					return;
 				options.includePrivate = true;
 			}
@@ -411,7 +411,7 @@ public class ActionMenuReports extends ActionPrint
 				return null;
 			if(selectedSpecs.length == 0)
 			{
-				mainWindow.notifyDlg(mainWindow, "NoReportFieldsSelected");
+				mainWindow.notifyDlg("NoReportFieldsSelected");
 				continue;
 			}
 			MiniFieldSpec[] specs = new MiniFieldSpec[selectedSpecs.length];

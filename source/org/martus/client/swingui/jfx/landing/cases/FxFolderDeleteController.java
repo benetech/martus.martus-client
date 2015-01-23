@@ -25,20 +25,18 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.cases;
 
-import org.martus.client.bulletinstore.BulletinFolder;
-import org.martus.client.swingui.MartusLocalization;
-import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.jfx.generic.DialogWithOkCancelContentController;
-import org.martus.util.TokenReplacement;
-import org.martus.util.TokenReplacement.TokenInvalidException;
-
-import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
-public class FxFolderDeleteController extends DialogWithOkCancelContentController
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.generic.DialogWithOkCancelShellController;
+import org.martus.util.TokenReplacement;
+import org.martus.util.TokenReplacement.TokenInvalidException;
+
+public class FxFolderDeleteController extends FxFolderBaseController
 {
 	public FxFolderDeleteController(UiMainWindow mainWindowToUse, BulletinFolder folderToDeleteToUse)
 	{
@@ -46,7 +44,7 @@ public class FxFolderDeleteController extends DialogWithOkCancelContentControlle
 		folderToDelete = folderToDeleteToUse;
 	}
 
-	public void addFolderDeletedListener(ChangeListener folderListenerToUse)
+	public void addFolderDeletedListener(FolderDeletedListener folderListenerToUse)
 	{
 		folderDeletedListener = folderListenerToUse;
 	}
@@ -55,9 +53,9 @@ public class FxFolderDeleteController extends DialogWithOkCancelContentControlle
 	public void initialize()
 	{
 		MartusLocalization localization = getLocalization();
-		String title = localization.getWindowTitle("DeleteFolder");
-		messageTitle.setText(title);
-		
+		String foldersLabel = FxFolderSettingsController.getCurrentFoldersHeading(getApp().getConfigInfo(), localization);
+		updateCaseIncidentProjectTitle(messageTitle, "DeleteCaseIncidentProject", foldersLabel);
+		messageTextArea.setEditable(false);
 		String deleteFolderMessage = localization.getFieldLabel("DeleteFolderMessage");
 		try
 		{
@@ -68,8 +66,8 @@ public class FxFolderDeleteController extends DialogWithOkCancelContentControlle
 		{
 			logAndNotifyUnexpectedError(e);
 		}
-		getOkCancelStage().setOkButtonText(localization.getButtonLabel("DeleteFolder"));
-		deleteAssociatedFiles.selectedProperty().set(false);
+		DialogWithOkCancelShellController shellController = getOkCancelShellController();
+		shellController.setOkButtonText(localization.getButtonLabel("DeleteFolder"));
 	}
 
 	@Override
@@ -81,12 +79,16 @@ public class FxFolderDeleteController extends DialogWithOkCancelContentControlle
 	@Override
 	public void save()
 	{
-		Boolean deleteBulletinsAsWell = deleteAssociatedFiles.isSelected();
 		boolean folderWasDeleted = getApp().getStore().deleteFolder(folderToDelete.getName());
 		if(folderWasDeleted)
-			folderDeletedListener.changed(null, null, deleteBulletinsAsWell);
+			folderDeletedListener.folderWasDeleted();
 		else
 			showNotifyDialog("ErrorDeletingFolder");
+	}
+	
+	public static interface FolderDeletedListener
+	{
+		public void folderWasDeleted();
 	}
 
 	private static final String LOCATION_FOLDER_DELETE_FXML = "landing/cases/FolderDelete.fxml";
@@ -97,9 +99,6 @@ public class FxFolderDeleteController extends DialogWithOkCancelContentControlle
 	@FXML 
 	private TextArea messageTextArea;
 
-	@FXML
-	private CheckBox deleteAssociatedFiles;
-	
-	private ChangeListener folderDeletedListener;	
+	private FolderDeletedListener folderDeletedListener;	
 	private BulletinFolder folderToDelete;
 }

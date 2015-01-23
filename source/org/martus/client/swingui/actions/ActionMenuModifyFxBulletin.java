@@ -26,29 +26,19 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.actions;
 
-import java.awt.event.ActionEvent;
-
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletintable.ModifyBulletinActionDoer;
-import org.martus.common.bulletin.Bulletin;
 
-public class ActionMenuModifyFxBulletin extends UiMenuAction implements ActionDoer
+public class ActionMenuModifyFxBulletin extends ActionMenuFxBulletin
 {
-	public ActionMenuModifyFxBulletin(UiMainWindow mainWindowToUse, Bulletin bulletinToModify)
+	public ActionMenuModifyFxBulletin(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse, "modifyBulletin");
-		bulletin = bulletinToModify;
 	}
-
-	public void actionPerformed(ActionEvent ae)
-	{
-		doAction();
-	}
-
+	
 	public void doAction()
 	{
 		ModifyBulletinActionDoer bulletinHelper = new ModifyBulletinActionDoer(getMainWindow());
-		bulletinHelper.doModifyBulletin(bulletin);
+		bulletinHelper.doModifyBulletin(getBulletin());
 	}
-	Bulletin bulletin;
 }

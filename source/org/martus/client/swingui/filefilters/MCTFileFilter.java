@@ -27,7 +27,7 @@ package org.martus.client.swingui.filefilters;
 
 import org.martus.clientside.FormatFilter;
 import org.martus.common.MiniLocalization;
-import org.martus.common.fieldspec.CustomFieldTemplate;
+import org.martus.common.fieldspec.FormTemplate;
 
 public class MCTFileFilter extends FormatFilter
 {
@@ -39,7 +39,7 @@ public class MCTFileFilter extends FormatFilter
 	@Override
 	public String getExtension()
 	{
-		return CustomFieldTemplate.CUSTOMIZATION_TEMPLATE_EXTENSION;
+		return FormTemplate.CUSTOMIZATION_TEMPLATE_EXTENSION;
 	}
 
 	public String getDescription()

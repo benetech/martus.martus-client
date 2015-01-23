@@ -36,6 +36,8 @@ import java.util.Vector;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiSession;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
@@ -57,7 +59,13 @@ public class BackgroundUploader
 {
 	public BackgroundUploader(MartusApp appToUse, ProgressMeterInterface progressMeterToUse)
 	{
+		this(appToUse, null, progressMeterToUse);
+	}
+	
+	public BackgroundUploader(MartusApp appToUse, UiMainWindow mainWindowForFxToUse, ProgressMeterInterface progressMeterToUse)
+	{
 		app = appToUse;
+		mainWindow = mainWindowForFxToUse;
 		progressMeter = progressMeterToUse;
 	}
 
@@ -80,7 +88,7 @@ public class BackgroundUploader
 	{
 		ClientBulletinStore store = app.getStore();
 		// FIXME: is it safe to skip if it's "probably" on the server???
-		if(b.isSealed() && store.isProbablyOnServer(b.getUniversalId()))
+		if(b.isImmutable() && store.isProbablyOnServer(b.getUniversalId()))
 			return NetworkInterfaceConstants.DUPLICATE;
 		File tempFile = File.createTempFile("$$$MartusUploadBulletin", null);
 		try
@@ -106,7 +114,7 @@ public class BackgroundUploader
 	
 	private String getUploadProgressTag(Bulletin b)
 	{
-		if(b.isDraft())
+		if(b.isMutable())
 			return "UploadingDraftBulletin";
 		return "UploadingSealedBulletin";
 	}
@@ -177,6 +185,8 @@ public class BackgroundUploader
 					uploadResult.result.equals(NetworkInterfaceConstants.DUPLICATE))
 			{
 				store.setIsOnServer(b);
+				if(UiSession.isJavaFx() && mainWindow != null)
+					mainWindow.bulletinContentsHaveChanged(b);
 				// TODO: Is the file this creates ever used???
 				app.resetLastUploadedTime();
 			}
@@ -218,9 +228,21 @@ public class BackgroundUploader
 		finally
 		{
 			if(uploadResult.isHopelesslyDamaged)
-				app.moveBulletinToDamaged(uploadFromFolder, uploadResult.uid);
+			{
+				try
+				{
+					app.moveBulletinToDamaged(uploadFromFolder, uploadResult.uid);
+				} 
+				catch (IOException e)
+				{
+					uploadResult.exceptionThrown = e.toString();
+					uploadResult.isHopelesslyDamaged = true;
+				}
+			}
 			else
+			{
 				uploadFromFolder.remove(uploadResult.uid);
+			}
 			store.saveFolders();
 		}
 		return uploadResult;
@@ -245,6 +267,7 @@ public class BackgroundUploader
 	
 	public static final String CONTACT_INFO_NOT_SENT="Contact Info Not Sent";
 
-	MartusApp app;
-	ProgressMeterInterface progressMeter;
+	private UiMainWindow mainWindow;
+	private MartusApp app;
+	private ProgressMeterInterface progressMeter;
 }

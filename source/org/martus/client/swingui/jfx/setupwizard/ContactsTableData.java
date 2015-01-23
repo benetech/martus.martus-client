@@ -132,6 +132,11 @@ public class ContactsTableData
 	{
 		return sendToByDefault;
 	}
+	
+	public SimpleIntegerProperty verificationStatusProperty()
+	{
+		return verificationStatus;
+	}
 
 	public static final String CONTACT_NAME_PROPERTY_NAME = "contactName";
 	public static final String PUBLIC_CODE_PROPERTY_NAME = "publicCode";

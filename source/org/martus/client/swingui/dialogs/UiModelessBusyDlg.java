@@ -66,7 +66,7 @@ public class UiModelessBusyDlg extends JDialog
 		getRootPane().setBorder(compoundBorder);
 		getContentPane().add(displayItem, BorderLayout.CENTER);
 		setUndecorated(true);
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(false);
 		origCursor = getCursor();
 		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));

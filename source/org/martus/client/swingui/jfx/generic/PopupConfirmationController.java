@@ -28,40 +28,52 @@ package org.martus.client.swingui.jfx.generic;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.layout.Pane;
 
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 
 public class PopupConfirmationController extends FxPopupController implements Initializable
 {
-	public PopupConfirmationController(UiMainWindow mainWindowToUse, String title, String message)
+	public PopupConfirmationController(UiMainWindow mainWindowToUse, String title, String yesLabel, String noLabel, FxController controllerForMainPane)
 	{
 		super(mainWindowToUse);
 		this.title = title;
-		this.message = message;
+		this.controllerForMainPane = controllerForMainPane;
+		yesButtonLabel =  yesLabel;
+		noButtonLabel = noLabel;
 	}
 	
 	@Override
 	public void initialize()
 	{
-		MartusLocalization localization = getLocalization();
-		fxYesButton.setText(localization.getButtonLabel("yes"));
-		fxNoButton.setText(localization.getButtonLabel("no"));
-		textArea.setText(message);
-		textArea.setEditable(false);
+		fxYesButton.setText(yesButtonLabel);
+		fxNoButton.setText(noButtonLabel);
+		try
+		{
+			loadControllerAndEmbedInPane(controllerForMainPane, mainPane);
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
 	}
 	
 	@Override
 	public String getFxmlLocation()
 	{
-		return "setupwizard/ConfirmationPopup.fxml";
+		return "generic/PopupConfirmation.fxml";
 	}
 
 	@Override
 	public String getDialogTitle()
 	{
 		return title; 
+	}
+
+	@Override
+	public Button getOkButton()
+	{
+		return fxYesButton;
 	}
 
 	@FXML
@@ -83,7 +95,7 @@ public class PopupConfirmationController extends FxPopupController implements In
 	}
 
 	@FXML
-	private TextArea textArea;
+	private Pane mainPane;
 
 	@FXML
 	private Button fxYesButton;
@@ -92,6 +104,8 @@ public class PopupConfirmationController extends FxPopupController implements In
 	private Button fxNoButton;
 	
 	private String title;
-	private String message;
 	private boolean yesWasPressed;
+	private FxController controllerForMainPane;
+	private String yesButtonLabel;
+	private String noButtonLabel;
 }

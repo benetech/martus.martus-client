@@ -44,7 +44,6 @@ public class UiRecoverKeyPairFromBackup
 		super();
 		mainWindow = windowToUse;
 		app = mainWindow.getApp();
-		localization = mainWindow.getLocalization();
 	}
 
 	public boolean recoverPrivateKey()
@@ -96,7 +95,7 @@ public class UiRecoverKeyPairFromBackup
 		int userChoice = UiSigninDlg.LANGUAGE_CHANGED;
 		while(userChoice == UiSigninDlg.LANGUAGE_CHANGED)
 		{	
-			signinDlg = new UiSigninDlg(localization, mainWindow.getCurrentUiState(), mainWindow, UiSigninDlg.SECURITY_VALIDATE, userName, userPassword);
+			signinDlg = new UiSigninDlg(getLocalization(), mainWindow.getCurrentUiState(), UiSigninDlg.SECURITY_VALIDATE, userName, userPassword);
 			userChoice = signinDlg.getUserChoice();
 			userName = signinDlg.getNameText();
 			userPassword = signinDlg.getPassword();
@@ -149,9 +148,14 @@ public class UiRecoverKeyPairFromBackup
 		return true;
 		
 	}
+	
+	public MartusLocalization getLocalization()
+	{
+		return mainWindow.getLocalization();
+	}
+	
 	private MartusApp app;
 	private UiMainWindow mainWindow;
-	private MartusLocalization localization;
 	
 	private String userName;
 	private char[] userPassword;

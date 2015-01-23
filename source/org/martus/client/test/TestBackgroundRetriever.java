@@ -100,18 +100,26 @@ class ProgressRecorder implements ProgressMeterInterface
 	{
 	}
 
+	@Override
 	public void updateProgressMeter(int currentValue, int maxValue)
 	{
 		current = currentValue;
 		max = maxValue;
 	}
 
+	@Override
 	public boolean shouldExit()
 	{
 		return false;
 	}
 	
+	@Override
 	public void hideProgressMeter()
+	{
+	}
+	
+	@Override
+	public void finished()
 	{
 	}
 

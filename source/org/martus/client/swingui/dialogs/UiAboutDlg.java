@@ -33,14 +33,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+
 import org.martus.client.swingui.UiConstants;
-import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.VersionBuildDate;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.swing.UiButton;
@@ -52,7 +55,7 @@ import org.martus.util.MultiCalendar;
 
 public class UiAboutDlg extends JDialog implements ActionListener
 {
-	public UiAboutDlg(UiMainWindow owner)
+	public UiAboutDlg(JFrame owner, UiLocalization localization)
 		throws HeadlessException
 	{
 		super(owner, "" , true);
@@ -62,9 +65,6 @@ public class UiAboutDlg extends JDialog implements ActionListener
 //		System.out.println("Number of calls to XmlPacketLoader " + XmlPacketLoader.callsToXmlPacketLoader);
 //		System.out.println("Cumulative time in XmlPacketLoader " + XmlPacketLoader.millisInXmlPacketLoader);
 
-		
-		UiLocalization localization = owner.getLocalization();
-		
 		setTitle(localization.getWindowTitle("about"));
 
 		JLabel icon = new JLabel(new ImageIcon(UiAboutDlg.class.getResource("Martus-logo-black-text-160x72.png")),JLabel.LEFT);
@@ -96,7 +96,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		buildDate.append(" ");
 		buildDate.append(VersionBuildDate.getVersionBuildDate());
 
-		JButton ok = new UiButton(localization.getButtonLabel("ok"));
+		JButton ok = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 		ok.addActionListener(this);
 		ok.addKeyListener(new MakeEnterKeyExit());
 
@@ -122,13 +122,13 @@ public class UiAboutDlg extends JDialog implements ActionListener
 
 		final String disclaimer = localization.getFieldLabel("aboutDlgDisclaimer");
 		final String credits = localization.getFieldLabel("aboutDlgCredits");
-		final String notice = "\n" + disclaimer + "\n\n" + credits + "\n\n" + THIRD_PARTY_NOTICE;
+		final String notice = "\n" + disclaimer + "\n\n" + credits + "\n\n" + localization.getFieldLabel("aboutDlgThirdParty");
 
 		getContentPane().add(hBoxVersionAndIcon, BorderLayout.NORTH);
 		getContentPane().add(new UiWrappedTextArea(notice), BorderLayout.CENTER);
 		getContentPane().add(hBoxOk, BorderLayout.SOUTH);
 		
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setVisible(true);
 	}
 
@@ -146,15 +146,4 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		}
 	}
 
-	private final static String THIRD_PARTY_NOTICE = "This product includes software developed by " +
-			"the Apache Software Foundation (http://www.apache.org/), " +
-			"Bouncy Castle, " +
-			"IBM, " +
-			"JH Labs, " +
-			"JOrtho, " +
-			"JUnit, " +
-			"The Mozilla Foundation, " +
-			"Logi Ragnarsson, " +
-			"Object Refinery Limited, " +
-			"and Subgraph [Orchid].";
 }

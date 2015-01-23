@@ -35,9 +35,6 @@ import org.martus.client.swingui.dialogs.UiServerSummariesDlg;
 import org.martus.client.swingui.tablemodels.DeleteMyServerDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.common.MartusUtilities.ServerErrorException;
-import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.network.NetworkInterfaceConstants;
-import org.martus.common.packet.Packet;
 
 public class ActionMenuDeleteMyServerDraftBulletins extends UiMenuAction
 {
@@ -73,38 +70,17 @@ public class ActionMenuDeleteMyServerDraftBulletins extends UiMenuAction
 			if (uidList == null)
 				return;
 
-			getMainWindow().setWaitingCursor();
-			try
-			{
-				String result = getApp().deleteServerDraftBulletins(uidList);
-				if (!result.equals(NetworkInterfaceConstants.OK))
-				{
-					getMainWindow().notifyDlg("DeleteServerDraftsFailed");
-					return;
-				}
-
-				getMainWindow().notifyDlg("DeleteServerDraftsWorked");
-			} 
-			finally
-			{
-				getMainWindow().resetCursor();
-			}
-		} 
-		catch (MartusCrypto.MartusSignatureException e)
-		{
-			getMainWindow().notifyDlg("UnexpectedError");
-			return;
-		} 
-		catch (Packet.WrongAccountException e)
-		{
-			getMainWindow().notifyDlg("UnexpectedError");
-			return;
+			getMainWindow().deleteMutableRecordsFromServer(uidList);
 		} 
 		catch (ServerErrorException e)
 		{
 			getMainWindow().notifyDlg("ServerError");
 			return;
 		}
+		catch (Exception e)
+		{
+			getMainWindow().notifyDlg("UnexpectedError");
+			return;
+		} 
 	}
-
 }

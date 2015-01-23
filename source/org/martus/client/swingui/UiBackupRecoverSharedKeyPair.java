@@ -33,10 +33,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+import javax.swing.filechooser.FileFilter;
+
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.clientside.MtfAwareLocalization;
-import org.martus.clientside.UiFileChooser;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
@@ -93,7 +95,7 @@ public class UiBackupRecoverSharedKeyPair
 	public void backupKeyPairToMultipleUnencryptedFiles() 
 	{
 		String message = localization.getFieldLabel("BackupKeyPairToSecretShareInformation");
-		mainWindow.displayScrollableMessage("BackupKeyPairToSecretShareInformation", message, "Continue", getTokenReplacement());
+		mainWindow.displayScrollableMessage("confirmBackupKeyPairInformation", message, "Continue", getTokenReplacement());
 
 		String defaultFileName = getDefaultKeyShareFileName();
 		if(defaultFileName == null)
@@ -197,7 +199,7 @@ public class UiBackupRecoverSharedKeyPair
 		File firstShareFile = null;
 		while(true)
 		{
-			firstShareFile = mainWindow.showFileOpenDialog("RecoverSharedKeyPair", null);
+			firstShareFile = mainWindow.showFileOpenDialog("RecoverSharedKeyPair", (FileFilter)null);
 			if(firstShareFile != null)
 			{
 				if(getRootKeyShareFileName(firstShareFile) != null)
@@ -266,7 +268,7 @@ public class UiBackupRecoverSharedKeyPair
 		while(true)
 		{
 			String windowTitle = localization.getWindowTitle("SaveShareKeyPair");
-			File pathChosen = UiFileChooser.displayChooseDirectoryDialog(mainWindow, windowTitle);
+			File pathChosen = mainWindow.showChooseDirectoryDialog(windowTitle);
 			if(pathChosen != null)
 			{	
 				String pathToUse = verifyBackupShareMediaType(pathChosen);
@@ -291,7 +293,7 @@ public class UiBackupRecoverSharedKeyPair
 			if(rootFiles[i].equals(pathChoosen))
 				return pathToUse;
 		}
-		if(mainWindow.confirmDlg(mainWindow, "WarningPathChosenMayNotBeRemoveable", UiBackupRecoverSharedKeyPair.getTokenReplacement()))
+		if(mainWindow.confirmDlg("WarningPathChosenMayNotBeRemoveable", UiBackupRecoverSharedKeyPair.getTokenReplacement()))
 			return pathToUse;
 		return null;
 	}
@@ -403,9 +405,10 @@ public class UiBackupRecoverSharedKeyPair
 		Integer.toString(totalNumberOfDisks);
 		String insertNextDiskMessage[] = {message1, message2};
 
-		String buttons[] = {localization.getButtonLabel("ok"), localization.getButtonLabel("cancel")};			
+		String buttons[] = {localization.getButtonLabel(EnglishCommonStrings.OK), 
+							localization.getButtonLabel(EnglishCommonStrings.CANCEL)};			
 
-		if(!mainWindow.confirmDlg(mainWindow, windowTitle, insertNextDiskMessage, buttons))
+		if(!mainWindow.confirmDlg(windowTitle, insertNextDiskMessage, buttons))
 		{
 			if(mainWindow.confirmDlg(confirmCancelTag))
 				return false;

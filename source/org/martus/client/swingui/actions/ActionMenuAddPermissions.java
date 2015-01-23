@@ -32,8 +32,9 @@ import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WorkerProgressThread;
-import org.martus.client.swingui.dialogs.AddPermissionsDialog;
+import org.martus.client.swingui.dialogs.AddPermissionsDialogContents;
 import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
+import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusLogger;
 import org.martus.common.ProgressMeterInterface;
@@ -85,10 +86,10 @@ public class ActionMenuAddPermissions extends UiMenuAction
 		}
 
 		HeadquartersKeys allHqKeys = mainWindow.getApp().getAllHQKeys();
-		AddPermissionsDialog dlg = new AddPermissionsDialog(mainWindow, selectedBulletins, ourBulletins, allHqKeys);
-		dlg.setVisible(true);
+		AddPermissionsDialogContents contents = new AddPermissionsDialogContents(mainWindow, selectedBulletins, ourBulletins, allHqKeys);
+		ModalDialogWithSwingContents.show(contents);
 		
-		HeadquartersKeys selectedHqKeys = dlg.getSelectedHqKeys();
+		HeadquartersKeys selectedHqKeys = contents.getSelectedHqKeys();
 		if(selectedHqKeys == null)
 			return;
 		
@@ -127,11 +128,11 @@ public class ActionMenuAddPermissions extends UiMenuAction
 			MartusApp app = mainWindow.getApp();
 			Bulletin newBulletin = oldBulletin;
 			BulletinFolder outbox = app.getFolderDraftOutbox();
-			if(oldBulletin.isSealed())
+			if(oldBulletin.isImmutable())
 			{
 				newBulletin = app.createBulletin();
 				newBulletin.createDraftCopyOf(oldBulletin, app.getStore().getDatabase());
-				newBulletin.setSealed();
+				newBulletin.setImmutable();
 				outbox = app.getFolderSealedOutbox();
 			}
 			newBulletin.addAuthorizedToReadKeys(hqKeys);

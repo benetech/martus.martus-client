@@ -33,6 +33,7 @@ import javax.swing.JViewport;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
@@ -85,12 +86,6 @@ public class UiBulletinPreviewPane extends UiScrollPane
 		{
 			System.out.println("UiBulletinPreview.refresh: " + e);
 		}
-		boolean isEncrypted = false;
-		if(currentBulletin != null && currentBulletin.isAllPrivate())
-			isEncrypted = true;
-		indicateEncrypted(isEncrypted);
-		if(currentBulletin == null)
-			return;
 		
 		if(didReturnToPreviousBulletin())
 			Utilities.forceScrollerToRect(view, previousRect);
@@ -100,8 +95,15 @@ public class UiBulletinPreviewPane extends UiScrollPane
 
 	private boolean didReturnToPreviousBulletin()
 	{
-		return previousBulletin != null &&  
-		previousBulletin.getUniversalId().equals(currentBulletin.getUniversalId());
+		if(previousBulletin == null)
+			return false;
+		
+		if(currentBulletin == null)
+			return false;
+			
+		UniversalId previousUid = previousBulletin.getUniversalId();
+		UniversalId currentUid = currentBulletin.getUniversalId();
+		return previousUid.equals(currentUid);
 	}
 
 	public void bulletinContentsHaveChanged(Bulletin b)
@@ -111,11 +113,6 @@ public class UiBulletinPreviewPane extends UiScrollPane
 
 		if(b.getLocalId().equals(currentBulletin.getLocalId()))
 			setCurrentBulletin(b);
-	}
-
-	private void indicateEncrypted(boolean isEncrypted)
-	{
-		view.updateEncryptedIndicator(isEncrypted);
 	}
 
 	Bulletin currentBulletin;

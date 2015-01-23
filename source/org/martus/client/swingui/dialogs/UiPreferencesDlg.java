@@ -40,6 +40,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.swing.FontHandler;
@@ -55,7 +56,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 {
 	public UiPreferencesDlg(UiMainWindow mainWindow)
 	{
-		super(mainWindow, "", true);
+		super(mainWindow.getSwingFrame(), "", true);
 		owner = mainWindow;
 		UiLocalization localization = owner.getLocalization();
 		
@@ -107,10 +108,6 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		allPrivate.setText(localization.getFieldLabel("preferencesAllPrivate"));
 		allPrivate.setSelected(owner.getBulletinsAlwaysPrivate());
 		
-		checkFieldOfficeBulletins = new UiCheckBox();
-		checkFieldOfficeBulletins.setText(localization.getFieldLabel("preferencesCheckFieldOfficeBulletins"));
-		checkFieldOfficeBulletins.setSelected(owner.getCheckFieldOfficeBulletins());
-		
 		useInternalTor = new UiCheckBox();
 		useInternalTor.setText(localization.getFieldLabel("PreferencesUseInternalTor"));
 		useInternalTor.setSelected(owner.getUseInternalTor());
@@ -126,20 +123,19 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 
 		preferences.addBlankLine();
 		preferences.addOnNewLine(allPrivate);
-		preferences.addOnNewLine(checkFieldOfficeBulletins);
 		preferences.addOnNewLine(useInternalTor);
 		preferences.addBlankLine();
 		
-		ok = new UiButton(localization.getButtonLabel("ok"));
+		ok = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 		ok.addActionListener(this);
-		cancel = new UiButton(localization.getButtonLabel("cancel"));
+		cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(this);
 		preferences.addComponents(ok, cancel);
 		
 		getContentPane().add(preferences);
 		getRootPane().setDefaultButton(ok);
 		
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setResizable(true);
 	}
 
@@ -187,11 +183,6 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		return allPrivate.isSelected();
 	}
 	
-	public boolean isCheckFieldOfficeBulletinsChecked()
-	{
-		return checkFieldOfficeBulletins.isSelected();
-	}
-
     public boolean isUseZawgyiFont()
     {
         return useZawgyiFont.isSelected();
@@ -226,15 +217,13 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			MartusLocalization localization = owner.getLocalization();
 			String languageCodeSelected = languageDropdown.getText();
 			FontSetter.setDefaultFont(isUseZawgyiFont());
-			UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(owner.getCurrentActiveFrame(), localization, languageCodeSelected);
-			UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner.getCurrentActiveFrame(), localization, languageCodeSelected);
+			UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(owner.getCurrentActiveFrame().getSwingFrame(), localization, languageCodeSelected);
+			UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner.getCurrentActiveFrame().getSwingFrame(), localization, languageCodeSelected);
 			localization.setMdyOrder(mdyDropdown.getText());
 			String delimiter = delimiterDropdown.getText();
 			setDateDelimiter(localization, delimiter);
 			localization.setCurrentCalendarSystem(calendarDropdown.getText());
 			localization.setCurrentLanguageCode(languageDropdown.getText());
-			localization.setAdjustThaiLegacyDates(adjustThai.isSelected());
-			localization.setAdjustPersianLegacyDates(adjustPersian.isSelected());
 			result = true;
 		}
 		dispose();
@@ -314,7 +303,6 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	private UiCheckBox adjustPersian;
 	private UiCheckBox useZawgyiFont;
 	private UiCheckBox allPrivate;
-	private UiCheckBox checkFieldOfficeBulletins;
 	private UiCheckBox useInternalTor;
 	private JButton ok;
 	private JButton cancel;

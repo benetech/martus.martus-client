@@ -37,6 +37,7 @@ import javax.swing.JDialog;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiProgressMeter;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MartusLogger;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.swing.UiButton;
@@ -45,7 +46,7 @@ public class UiProgressWithCancelDlg extends JDialog implements ProgressMeterInt
 {
 	public UiProgressWithCancelDlg(UiMainWindow mainWindowToUse, String tagToUse)
 	{
-		super(mainWindowToUse, true);
+		super(mainWindowToUse.getSwingFrame(), true);
 		mainWindow = mainWindowToUse;
 		
 		tag = tagToUse;
@@ -53,7 +54,7 @@ public class UiProgressWithCancelDlg extends JDialog implements ProgressMeterInt
 		UiLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle(tagToUse));
 		
-		cancel = new UiButton(localization.getButtonLabel("cancel"));
+		cancel = new UiButton(localization.getButtonLabel(EnglishCommonStrings.CANCEL));
 		cancel.addActionListener(new CancelHandler());
 		cancel.setAlignmentX(JButton.CENTER_ALIGNMENT);
 
@@ -99,6 +100,7 @@ public class UiProgressWithCancelDlg extends JDialog implements ProgressMeterInt
 		dispose();
 	}
 
+	@Override
 	public void finished()
 	{
 		workerFinished();

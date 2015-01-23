@@ -35,16 +35,40 @@ public abstract class FxShellController extends FxController
 	public FxShellController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+		setShellController(this);
 	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle bundle)
 	{
-		initializeMainContentPane();
+		super.initialize(location, bundle);
+	}
+	
+	@Override
+	public VirtualStage getStage()
+	{
+		return stage;
 	}
 
-	abstract public void initializeMainContentPane();
-	abstract public FxInSwingStage getStage();
-	abstract public void setStage(FxInSwingStage stageToUse);
-	abstract public void setContentPane(FxContentController contentController) throws Exception;
+	public void setStage(VirtualStage stageToUse)
+	{
+		stage = stageToUse;
+	}
+
+	protected void close()
+	{
+		getStage().close();
+	}
+
+	public String getTitleTag()
+	{
+		return "";
+	}
+
+	public String getDialogTitle()
+	{
+		return "";
+	}
+
+	private VirtualStage stage;
 }

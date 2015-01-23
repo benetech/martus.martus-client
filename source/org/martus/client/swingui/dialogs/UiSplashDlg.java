@@ -27,7 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.dialogs;
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Frame;
+import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -39,6 +39,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MiniLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
@@ -46,9 +47,11 @@ import org.martus.swing.Utilities;
 
 public class UiSplashDlg extends JDialog implements ActionListener
 {
-	public UiSplashDlg(Frame owner, MiniLocalization localization, String text)
+	public UiSplashDlg(MiniLocalization localization, String text)
 	{
-		super(owner, owner.getTitle(), true);
+		// NOTE: Pass (Dialog)null to force this window to show up in the Task Bar
+		super((Dialog)null);
+		setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 		String versionInfo = UiMainWindow.getDisplayVersionInfo(localization);
 		String copyrightInfo = UiConstants.copyright;
 		String websiteInfo = UiConstants.website;
@@ -65,7 +68,7 @@ public class UiSplashDlg extends JDialog implements ActionListener
 		
 		Box hbox = Box.createHorizontalBox();
 		hbox.add(Box.createHorizontalGlue());
-		JButton ok = new UiButton(localization.getButtonLabel("ok"));
+		JButton ok = new UiButton(localization.getButtonLabel(EnglishCommonStrings.OK));
 		ok.addActionListener(this);
 		hbox.add(ok);
 		hbox.add(Box.createHorizontalGlue());
@@ -76,7 +79,7 @@ public class UiSplashDlg extends JDialog implements ActionListener
 		contents.add(body);
 		contents.add(hbox, BorderLayout.SOUTH);
 		
-		Utilities.centerDlg(this);
+		Utilities.packAndCenterWindow(this);
 		setVisible(true);
 	}
 

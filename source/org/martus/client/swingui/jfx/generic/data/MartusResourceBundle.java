@@ -49,6 +49,10 @@ public class MartusResourceBundle extends ResourceBundle
 	{
 		String[] prefixAndKey = key.split("\\.");
 		String prefix = prefixAndKey[0];
+		if(prefix.equals(MENU_CONTROL))
+			return localization.getMenuLabel(prefixAndKey[1]);
+		if(prefix.equals(TOOLTIP_CONTROL))
+			return localization.getTooltipLabel(prefixAndKey[1]);
 		if(prefix.equals(BUTTON_CONTROL))
 			return localization.getButtonLabel(prefixAndKey[1]);
 		if(prefix.equals(TITLE_CONTROL))
@@ -63,6 +67,8 @@ public class MartusResourceBundle extends ResourceBundle
 	}
 
 	private MartusLocalization localization;
+	private static final String TOOLTIP_CONTROL = "Tooltip";
 	private static final String BUTTON_CONTROL = "Button";
+	private static final String MENU_CONTROL = "Menu";
 	private static final String TITLE_CONTROL = "Title";
 }

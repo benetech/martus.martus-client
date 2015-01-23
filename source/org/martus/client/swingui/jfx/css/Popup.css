@@ -6,6 +6,8 @@
 	-fx-padding: 5 35 5 35;
 	-fx-spacing: 20;
 	-fx-alignment: BOTTOM_CENTER;
+	-fx-border-style:solid;
+	-fx-border-color: #4c5e70;
 }
 
 .text-area {
