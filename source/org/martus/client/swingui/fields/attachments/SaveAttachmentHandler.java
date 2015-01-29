@@ -81,18 +81,5 @@ class SaveAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		}
 		getMainWindow().resetCursor();
 	}
-
-	static void setLastAttachmentSaveDirectory(File newAttachmentSaveDirectory)
-	{
-		lastAttachmentSaveDirectory = newAttachmentSaveDirectory;
-	}
-
-	static File getLastAttachmentSaveDirectory()
-	{
-		return lastAttachmentSaveDirectory;
-	}
-
-	static File lastAttachmentSaveDirectory;
-
 	AttachmentProxy proxy;
 }
