@@ -424,7 +424,6 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 			String messageRtoL = reader.readAll();
 			reader.close();
 
-			updateIcon(owner);
 			String warningMessageLtoR = getWarningMessageAboutUnofficialTranslations(message);
 			String warningMessageRtoL = getWarningMessageAboutUnofficialTranslations(messageRtoL);
 			Toolkit.getDefaultToolkit().beep();
@@ -442,7 +441,6 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 	{
 		if(localization.doesTranslationVersionMatchProgramVersion(languageCodeToTest, UiConstants.versionLabel))
 			return;
-		updateIcon(owner);
 		String langCode = localization.getCurrentLanguageCode();
 		String title = localization.getLabel(langCode, "wintitle", "IncompatibleMtfVersion");
 		String warningMessage = localization.getLabel(langCode, "field", "IncompatibleMtfVersion");
