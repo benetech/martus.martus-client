@@ -65,6 +65,9 @@ public class FxWelcomeContentController extends FxContentController
 	@Override
 	protected Dimension getPreferredDimension()
 	{
-		return UiMainWindow.LARGE_PREFERRED_DIALOG_SIZE;
+		return WELCOME_PREFERRED_DIALOG_SIZE;
 	}
+	
+	public static final Dimension WELCOME_PREFERRED_DIALOG_SIZE = new Dimension(880, 560);
+
 }

@@ -6,18 +6,18 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <BorderPane>
       <bottom>
         <BorderPane>
-          <left>
-            <Button id="" fx:id="nextButton" mnemonicParsing="false" onAction="#onNext" text="%Button.GetStarted" BorderPane.alignment="CENTER_RIGHT">
+               <right>
+            <Button id="" fx:id="nextButton" mnemonicParsing="false" onAction="#onNext" text="%Button.GetStarted" BorderPane.alignment="CENTER">
               <BorderPane.margin>
                 <Insets left="265.0" />
               </BorderPane.margin>
             </Button>
-          </left>
+               </right>
         </BorderPane>
       </bottom>
       <center>
