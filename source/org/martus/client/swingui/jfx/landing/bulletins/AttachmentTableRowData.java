@@ -42,6 +42,7 @@ public class AttachmentTableRowData
 		size =  new SimpleStringProperty(getSizeOfAttachment(attachmentToUse, database));
 		remove = new SimpleBooleanProperty(true);
 		view = new SimpleBooleanProperty(true);
+		save = new SimpleBooleanProperty(true);
 	}
 	
 	private String getSizeOfAttachment(AttachmentProxy attachmentToUse, ReadableDatabase database)
@@ -69,6 +70,12 @@ public class AttachmentTableRowData
         return view; 
     }
 
+	public Property<Boolean> saveProperty() 
+    { 
+        return save; 
+    }
+
+
 	public AttachmentProxy getAttachmentProxy()
 	{
 		return attachmentProxy;
@@ -78,9 +85,11 @@ public class AttachmentTableRowData
 	static public final String ATTACHMENT_SIZE_PROPERTY_NAME = "size";
 	static public final String ATTACHMENT_VIEW_PROPERTY_NAME = "view";
 	static public final String ATTACHMENT_REMOVE_PROPERTY_NAME = "remove";
+	static public final String ATTACHMENT_SAVE_PROPERTY_NAME = "save";
 	private SimpleStringProperty name;
 	private SimpleStringProperty size;
 	private SimpleBooleanProperty view;
 	private SimpleBooleanProperty remove;
+	private SimpleBooleanProperty save;
 	private AttachmentProxy attachmentProxy;
  }
