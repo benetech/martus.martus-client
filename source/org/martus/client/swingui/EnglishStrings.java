@@ -1658,6 +1658,8 @@ public class EnglishStrings
 "wintitle:FileDialogImportContactPublicKey=Import Contact Key",
 "button:FileDialogOkImportContactPublicKey=Import",
 
+"wintitle:FileDialogSaveAttachment=Save Attachment",
+
 "wintitle:notifyAddPermissionsZeroBulletinsOurs=Update Contacts access to Records",
 "wintitle:notifyAddPermissionsZeroHeadquartersSelected=No Contacts Selected",
 "wintitle:RetrieveHQSealedBulletinProgress=Retrieving Records",
