@@ -26,7 +26,10 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
 
 import javafx.beans.binding.Bindings;
@@ -41,7 +44,9 @@ import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
@@ -49,6 +54,13 @@ import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.AttachmentProxy;
+import org.martus.common.bulletin.BulletinLoader;
+import org.martus.common.crypto.MartusCrypto.CryptoException;
+import org.martus.common.database.ReadableDatabase;
+import org.martus.common.packet.Packet.InvalidPacketException;
+import org.martus.common.packet.Packet.SignatureVerificationException;
+import org.martus.common.packet.Packet.WrongPacketTypeException;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 
 public class BulletinAttachmentsController extends FxController
@@ -97,6 +109,10 @@ public class BulletinAttachmentsController extends FxController
 		Image removeImage = new Image(REMOVE_ATTACHMENT_IMAGE_PATH);
 		removeColumn.setCellFactory(FxButtonTableCellFactory.createNormalButtonTableCellFactory(removeImage, () -> removeSelectedAttachment()));
 		removeColumn.setCellValueFactory(new PropertyValueFactory<Object, Boolean>(AttachmentTableRowData.ATTACHMENT_REMOVE_PROPERTY_NAME));
+
+		Image saveImage = new Image(SAVE_ATTACHMENT_IMAGE_PATH);
+		saveColumn.setCellFactory(FxButtonTableCellFactory.createNormalButtonTableCellFactory(saveImage, () -> saveSelectedAttachment()));
+		saveColumn.setCellValueFactory(new PropertyValueFactory<Object, Boolean>(AttachmentTableRowData.ATTACHMENT_SAVE_PROPERTY_NAME));
 	}
 	
 	
@@ -127,6 +143,54 @@ public class BulletinAttachmentsController extends FxController
 		{
 			logAndNotifyUnexpectedError(e);
 		}
+	}
+
+	private void saveSelectedAttachment()
+	{
+		AttachmentTableRowData selectedItem = getSelectedAttachmentRowData();
+		if(selectedItem == null)
+		{
+			MartusLogger.log("Attempted to save Attachment with nothing selected");
+			return;
+		}
+		
+		try
+		{
+			AttachmentProxy proxy = selectedItem.getAttachmentProxy();
+			String fileName = proxy.getLabel();
+
+			FileChooser chooser = new FileChooser();
+			chooser.setInitialFileName(fileName);
+			File outputFile = chooser.showSaveDialog(null);
+			if(outputFile == null)
+				return;
+			
+			File attachmentAlreadyAvailableAsFile = proxy.getFile();
+			if(attachmentAlreadyAvailableAsFile != null)
+				savePendingAttachment(attachmentAlreadyAvailableAsFile, outputFile);
+			else
+				saveAttachmentFromDatabase(proxy, outputFile);	
+		}
+		catch(Exception e)
+		{
+			MartusLogger.logException(e);
+			showNotifyDialog("UnableToSaveAttachment");
+		}
+	}
+
+	private void saveAttachmentFromDatabase(AttachmentProxy proxy, File outputFile)
+			throws IOException, InvalidBase64Exception, InvalidPacketException,
+			SignatureVerificationException, WrongPacketTypeException,
+			CryptoException
+	{
+		ClientBulletinStore store = getApp().getStore();
+		ReadableDatabase db = store.getDatabase();
+		BulletinLoader.extractAttachmentToFile(db, proxy, store.getSignatureVerifier(), outputFile);
+	}
+	
+	private void savePendingAttachment(File source, File target) throws IOException
+	{
+		Files.copy(source.toPath(), target.toPath(), StandardCopyOption.COPY_ATTRIBUTES);
 	}
 
 	private boolean viewAttachmentInternally(AttachmentProxy proxy) throws Exception
@@ -181,6 +245,7 @@ public class BulletinAttachmentsController extends FxController
 	
 	final private String REMOVE_ATTACHMENT_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/trash.png";
 	final private String VIEW_ATTACHMENT_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/view_attachment.png";
+	final private String SAVE_ATTACHMENT_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/save_attachment.png";
 
 	@FXML 
 	private TableView attachmentsTable;
@@ -196,6 +261,9 @@ public class BulletinAttachmentsController extends FxController
 
 	@FXML
 	protected TableColumn<Object, Boolean> removeColumn;
+	
+	@FXML
+	protected TableColumn<Object, Boolean> saveColumn;
 	
 	@FXML
 	private Button addAttachmentButton;
