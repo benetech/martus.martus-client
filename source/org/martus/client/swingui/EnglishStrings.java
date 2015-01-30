@@ -766,6 +766,7 @@ public class EnglishStrings
 "wintitle:FileDialogAddAttachment=Add Attachment",
 "button:FileDialogOkAddAttachment=Add",
 
+"wintitle:FileDialogRestoreFromKeyPair=Restore Account From KeyPair",
 "button:FileDialogOkRestoreFromKeyPair=Restore",
 
 "button:FileDialogOkImportMBA=Import",
