@@ -51,15 +51,26 @@ abstract public class FxPopupController extends FxShellController
 		return (PureFxStage) getStage();
 	}
 	
-	public Throwable getThrownException()
+	public Throwable getThrownThrowable()
+	{
+		return thrownThrowable;
+	}
+	
+	public void setThrownThrowable(Throwable exception)
+	{
+		thrownThrowable = exception;
+	}
+
+	public Exception getThrownException()
 	{
 		return thrownException;
 	}
 	
-	public void setThrownException(Throwable exception)
+	public void setThrownException(Exception exception)
 	{
 		thrownException = exception;
 	}
 
-	private Throwable thrownException;
+	private Throwable thrownThrowable;
+	private Exception thrownException;
 }
