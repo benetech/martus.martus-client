@@ -119,7 +119,12 @@ abstract public class FxBackgroundActivityController extends FxPopupController
 			else if(newState.equals(State.FAILED))
 			{
 				if(task != null)
-					setThrownException(task.getException());
+				{
+					if(task.getException() instanceof Exception)
+						setThrownException((Exception)task.getException());
+					else
+						setThrownThrowable(task.getException());
+				}
 				forceCloseDialog();
 			}
 		}

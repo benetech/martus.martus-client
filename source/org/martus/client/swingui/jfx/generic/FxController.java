@@ -318,8 +318,13 @@ abstract public class FxController implements Initializable
 		MartusLogger.log("Back from showModalPopupStage");
 		if(controller.getThrownException() != null)
 		{
-		    MartusLogger.log("Re-throwing exception");
-			throw new Exception(controller.getThrownException());
+		    MartusLogger.log("Re-throwing Exception");
+			throw controller.getThrownException();
+		}
+		if(controller.getThrownThrowable() != null)
+		{
+		    MartusLogger.log("Re-throwing Throwable");
+			throw new Exception(controller.getThrownThrowable());
 		}
 	}
 	
