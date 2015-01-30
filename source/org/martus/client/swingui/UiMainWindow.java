@@ -2695,7 +2695,13 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 
 	public void repaint()
 	{
-		getCurrentActiveFrame().repaint();
+		TopLevelWindowInterface topLevelWindow = getCurrentActiveFrame();
+		if(topLevelWindow == null)
+			return;
+		
+		JFrame realFrame = topLevelWindow.getSwingFrame();
+		if(realFrame != null)
+			realFrame.repaint();
 	}
 	
 	private UiBulletinTablePane getBulletinsTablePane()
