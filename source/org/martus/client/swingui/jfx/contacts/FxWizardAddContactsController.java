@@ -157,30 +157,34 @@ public class FxWizardAddContactsController extends FxStep4Controller
 				return; 
 			verifyContactAndAddToTable(contactAccountId);
 		} 
-		catch(NetworkOfflineException e)
-		{
-			showNotifyDialog("ErrorNetworkOffline");
-		}
 		catch(UserCancelledException e)
 		{
 			return;
 		}
-		catch (ServerNotAvailableException e)
-		{
-			showNotifyDialog("ContactsNoServer");
-		} 
-		catch (ServerNotCompatibleException e)
-		{
-			showNotifyDialog("ServerNotCompatible");
-		}
-		catch (TokenNotFoundException e)
-		{
-			showNotifyDialog("UnableToRetrieveContactFromServer");
-		} 
 		catch (Exception e)
 		{
-			MartusLogger.logException(e);
-			showNotifyDialog("UnexpectedError");
+			Throwable cause = e.getCause();
+			if(cause instanceof NetworkOfflineException)
+			{
+				showNotifyDialog("ErrorNetworkOffline");
+			}
+			else if(cause instanceof ServerNotAvailableException)
+			{
+				showNotifyDialog("ContactsNoServer");
+			}
+			else if(cause instanceof ServerNotCompatibleException)
+			{
+				showNotifyDialog("ServerNotCompatible");
+			}
+			else if(cause instanceof TokenNotFoundException)
+			{
+				showNotifyDialog("UnableToRetrieveContactFromServer");
+			}
+			else
+			{
+				MartusLogger.logException(e);
+				showNotifyDialog("UnexpectedError");
+			}
 		} 
 	}
 
