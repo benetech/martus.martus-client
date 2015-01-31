@@ -27,11 +27,13 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
@@ -39,6 +41,10 @@ import javax.activation.MimetypesFileTypeMap;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.common.MartusLogger;
+import org.martus.common.utilities.GeoTag;
+import org.martus.common.utilities.JpegGeoTagReader;
+import org.martus.common.utilities.JpegGeoTagReader.NotJpegException;
 
 public class AttachmentViewController extends FxController
 {
@@ -94,8 +100,36 @@ public class AttachmentViewController extends FxController
 		if(attachmentFileType == FileType.HTML || 
 				attachmentFileType == FileType.Image)
 			attachmentStackPane.getChildren().add(getWebView());
+		
+		GeoTag tag = readGeoTag();
+		showMapButton.setVisible(tag.hasData());
 	}
-	
+
+	private GeoTag readGeoTag() throws Exception
+	{
+		InputStream in = attachmentFileToView.toURI().toURL().openStream();
+		try
+		{
+			JpegGeoTagReader reader = new JpegGeoTagReader();
+			GeoTag tag = reader.readMetadata(in);
+			return tag;
+		}
+		catch(NotJpegException e)
+		{
+			// NOTE: this is harmless
+			return new GeoTag();
+		}
+		catch(Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+			return new GeoTag();
+		}
+		finally
+		{
+			in.close();
+		}
+	}
+
 	private WebView getWebView()
 	{
 		WebView webView = new WebView();
@@ -110,11 +144,39 @@ public class AttachmentViewController extends FxController
 		return "landing/bulletins/AttachmentViewer.fxml";
 	}
 	
+	@FXML
+	private void showOnMap()
+	{
+		// NOTE: We can't call notifyDlg here, possibly because we are inside a modal dialog
+		try
+		{
+			MartusLogger.log("Map URL: " + createMapRequestUrl());
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	private String createMapRequestUrl() throws Exception
+	{
+		int zoomFactor = 14;
+		GeoTag tag = readGeoTag();
+		String baseUrl = "https://maps.googleapis.com/maps/api/staticmap";
+		String marker = "markers=%7C" + tag.getLatitude() + "," + tag.getLongitude();
+		String size = "size=640x640";
+		String zoom = "zoom=" + zoomFactor;
+		return baseUrl + "?" + 	marker + "&" + size + "&" + zoom;
+	}
+
 	enum FileType{Unsupported, Image, HTML};
 	
 	@FXML
-	private StackPane attachmentStackPane;
+	private VBox attachmentStackPane;
 
+	@FXML
+	private Button showMapButton;
+	
 	private File attachmentFileToView;
 	private FileType attachmentFileType;
 }
