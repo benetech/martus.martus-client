@@ -86,7 +86,12 @@ public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 	{
 		doPopUp();
 	}
-
+	
+	public void enableButton(boolean enabled)
+	{
+		button.setEnabled(enabled);
+	}
+	
 	public JComponent[] getFocusableComponents()
 	{
 		return new JComponent[] {button};
@@ -101,6 +106,7 @@ public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 		return text;
 	}
 
+	//TODO clean up setText and select as they look identical
 	public void setText(String newText)
 	{
 		selectedItem = spec.findSearchTag(newText);
@@ -109,7 +115,7 @@ public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 		else
 			label.setText(selectedItem.toString());
 	}
-	
+
 	public void select(String codeToSelect)
 	{
 		setText("");

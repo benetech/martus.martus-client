@@ -46,9 +46,13 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor;
 import org.martus.common.EnglishCommonStrings;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
+import org.martus.common.fieldspec.SearchableFieldChoiceItem;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.UiLabel;
@@ -110,8 +114,10 @@ public class CreateChartDialog extends JDialog
 			createChartTypeChoiceItem(ChartAnswers.CHART_TYPE_BAR),
 			createChartTypeChoiceItem(ChartAnswers.CHART_TYPE_3DBAR),
 			createChartTypeChoiceItem(ChartAnswers.CHART_TYPE_PIE),
+			createChartTypeChoiceItem(ChartAnswers.CHART_TYPE_LINE),
 		};
 		chartTypeComponent = new UiComboBox(choices);
+		chartTypeComponent.addActionListener(new ChartChooserActionHandler());
 		return chartTypeComponent;
 	}
 
@@ -136,7 +142,7 @@ public class CreateChartDialog extends JDialog
 		FieldChooserSpecBuilder specBuilder = new SortFieldChooserSpecBuilder(getLocalization());
 		PopUpTreeFieldSpec treeSpec = specBuilder.createSpec(getStore());
 		chooser.setSpec(treeSpec);
-		chooser.setText("");
+		clearField();
 		
 		chooser.addActionListener(new FieldChooserActionHandler());
 
@@ -150,7 +156,44 @@ public class CreateChartDialog extends JDialog
 			boolean isFieldSelected = isFieldSelected();
 			setOkEnabled(isFieldSelected);
 		}
+	}
+	
+	
+	class ChartChooserActionHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			boolean isLineChartSelected = isLineChartSelected();
+			if(isLineChartSelected)
+			{
+		        selectField(Bulletin.TAGENTRYDATE);			
+				setOkEnabled(true);
+				enableFieldChooser(false);
+			}
+			else
+			{
+				clearField();
+				setOkEnabled(isFieldSelected());
+				enableFieldChooser(true);
+			}			
+		}
+	}
 
+	protected void enableFieldChooser(boolean enabled)
+	{
+		chooser.enableButton(enabled);
+	}
+	
+	protected void clearField()
+	{
+		chooser.setText("");
+	}
+	
+	protected void selectField(String fieldTagToSelect)
+	{
+		FieldSpec entryDateSpec = StandardFieldSpecs.findStandardFieldSpec(fieldTagToSelect);
+		SearchableFieldChoiceItem choiceItem = new SearchableFieldChoiceItem(entryDateSpec);
+		chooser.setText(choiceItem.getCode());
 	}
 	
 	public boolean isFieldSelected()
@@ -217,6 +260,12 @@ public class CreateChartDialog extends JDialog
 	{
 		ChoiceItem selected = (ChoiceItem) chartTypeComponent.getSelectedItem();
 		return selected.getCode();
+	}
+	
+	protected boolean isLineChartSelected()
+	{
+		String code = getChartTypeCode();
+		return(code.equals("Line"));
 	}
 
 	private Component createLabel(String fieldName)

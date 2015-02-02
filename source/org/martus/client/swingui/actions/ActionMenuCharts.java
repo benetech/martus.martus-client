@@ -246,6 +246,8 @@ public class ActionMenuCharts extends UiMenuAction implements ActionDoer
 	{
 		if(answers.isBarChart())
 			return createBarChart(counts, selectedFieldLabel);
+		if(answers.isLineChart())
+			return createCumulativeLineChart(counts, selectedFieldLabel);
 		if(answers.is3DBarChart())
 			return create3DBarChart(counts, selectedFieldLabel);
 		if(answers.isPieChart())
@@ -411,6 +413,23 @@ public class ActionMenuCharts extends UiMenuAction implements ActionDoer
 		return barChart;
 	}
 
+	private JFreeChart createCumulativeLineChart(HashMap<String, Integer> counts, String selectedFieldLabel) throws Exception
+	{
+		DefaultCategoryDataset dataset = createCumulativeChartDataset(counts);
+
+		boolean showLegend = false;
+		boolean showTooltips = true;
+		boolean showUrls = false;
+		JFreeChart lineChart = ChartFactory.createLineChart(
+			getChartTitle(selectedFieldLabel), selectedFieldLabel, getYAxisTitle(), 
+			dataset, PlotOrientation.VERTICAL,
+			showLegend, showTooltips, showUrls);
+		
+		configureBarChartPlot(lineChart);
+		
+		return lineChart;
+	}
+
 	private JFreeChart create3DBarChart(HashMap<String, Integer> counts, String selectedFieldLabel) throws Exception
 	{
 		DefaultCategoryDataset dataset = createBarChartDataset(counts);
@@ -448,6 +467,26 @@ public class ActionMenuCharts extends UiMenuAction implements ActionDoer
 			else
 				value = fontHelper.getDisplayable(value);
 			dataset.addValue(count, seriesTitle, value);
+		}
+		return dataset;
+	}
+	
+	private DefaultCategoryDataset createCumulativeChartDataset(HashMap<String, Integer> counts)
+	{
+		String seriesTitle = getLocalization().getFieldLabel("ChartSeriesTitle");
+		seriesTitle = fontHelper.getDisplayable(seriesTitle);
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		Vector<String> keys = new Vector<String>(counts.keySet());
+		Collections.sort(keys, new SaneCollator(getLocalization().getCurrentLanguageCode()));
+		Integer totalCount = 0;
+		for (String value : keys)
+		{
+			totalCount += counts.get(value);
+			if(value.length() == 0)
+				value = getLocalization().getFieldLabel("ChartItemLabelBlank");
+			else
+				value = fontHelper.getDisplayable(value);
+			dataset.addValue(totalCount, seriesTitle, value);
 		}
 		return dataset;
 	}

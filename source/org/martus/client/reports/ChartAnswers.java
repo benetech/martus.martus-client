@@ -66,7 +66,7 @@ public class ChartAnswers
 	
 	public void setChartType(String chartTypeCode)
 	{
-		if(isBarChart(chartTypeCode) || is3DBarChart(chartTypeCode) || isPieChart(chartTypeCode))
+		if(isBarChart(chartTypeCode) || is3DBarChart(chartTypeCode) || isPieChart(chartTypeCode) || isLineChart(chartTypeCode))
 			chartType = chartTypeCode;
 		else
 			throw new RuntimeException("Unknown chart type: " + chartTypeCode);
@@ -87,6 +87,16 @@ public class ChartAnswers
 		return CHART_TYPE_BAR.equals(thisChartType);
 	}
 	
+	public boolean isLineChart()
+	{
+		return isLineChart(getChartType());
+	}
+
+	private boolean isLineChart(String thisChartType)
+	{
+		return CHART_TYPE_LINE.equals(thisChartType);
+	}
+
 	public boolean is3DBarChart()
 	{
 		return is3DBarChart(getChartType());
@@ -149,6 +159,7 @@ public class ChartAnswers
 	public final static String JSON_TYPE_CHART_ANSWERS = "ChartAnswers";
 	private final static int EXPECTED_VERSION = 1;
 	public final static String CHART_TYPE_BAR = "Bar";
+	public final static String CHART_TYPE_LINE = "Line";
 	public final static String CHART_TYPE_3DBAR = "3DBar";
 	public final static String CHART_TYPE_PIE = "Pie";
 

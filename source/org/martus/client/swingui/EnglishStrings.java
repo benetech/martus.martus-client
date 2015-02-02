@@ -736,6 +736,7 @@ public class EnglishStrings
 "field:ChartTypeBar=Bar Chart",
 "field:ChartType3DBar=3D Bar Chart",
 "field:ChartTypePie=Pie Chart",
+"field:ChartTypeLine=Line Chart",
 "field:ChartItemLabelBlank=(Missing field or data)",
 "field:ChartFieldToCount=Field to count",
 "field:ChartSubtitle=Subtitle (optional)",
