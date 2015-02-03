@@ -62,8 +62,8 @@ import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
 import org.martus.client.swingui.jfx.landing.general.AccountController;
 import org.martus.client.swingui.jfx.landing.general.HelpController;
 import org.martus.client.swingui.jfx.landing.general.SettingsController;
+import org.martus.clientside.OrchidTransportWrapper;
 import org.martus.common.MartusLogger;
-import org.martus.common.network.OrchidTransportWrapper;
 
 public class FxLandingShellController extends FxNonWizardShellController
 {
