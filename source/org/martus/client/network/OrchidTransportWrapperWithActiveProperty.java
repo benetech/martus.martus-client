@@ -28,8 +28,8 @@ package org.martus.client.network;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleBooleanProperty;
 
-import org.martus.clientside.OrchidTransportWrapper;
 import org.martus.common.network.MartusOrchidDirectoryStore;
+import org.martus.common.network.OrchidTransportWrapper;
 
 public class OrchidTransportWrapperWithActiveProperty extends OrchidTransportWrapper
 {
