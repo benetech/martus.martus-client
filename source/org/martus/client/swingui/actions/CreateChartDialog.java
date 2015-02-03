@@ -46,9 +46,13 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor;
 import org.martus.common.EnglishCommonStrings;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
+import org.martus.common.fieldspec.SearchableFieldChoiceItem;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.UiLabel;
@@ -136,7 +140,9 @@ public class CreateChartDialog extends JDialog
 		FieldChooserSpecBuilder specBuilder = new SortFieldChooserSpecBuilder(getLocalization());
 		PopUpTreeFieldSpec treeSpec = specBuilder.createSpec(getStore());
 		chooser.setSpec(treeSpec);
-		chooser.setText("");
+		FieldSpec entryDateSpec = StandardFieldSpecs.findStandardFieldSpec(Bulletin.TAGENTRYDATE);
+		SearchableFieldChoiceItem choiceItem = new SearchableFieldChoiceItem(entryDateSpec);
+		chooser.setText(choiceItem.getCode());
 		
 		chooser.addActionListener(new FieldChooserActionHandler());
 
