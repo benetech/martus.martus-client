@@ -30,11 +30,11 @@ import org.martus.client.network.OrchidTransportWrapperWithActiveProperty;
 import org.martus.client.swingui.Martus;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer;
-import org.martus.clientside.OrchidTransportWrapper;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.network.ClientSideNetworkInterface;
 import org.martus.common.network.NetworkResponse;
+import org.martus.common.network.OrchidTransportWrapper;
 
 public class PingServerAsClient
 {
