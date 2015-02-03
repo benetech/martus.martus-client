@@ -72,7 +72,6 @@ import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpc;
 import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer;
 import org.martus.clientside.MtfAwareLocalization;
-import org.martus.clientside.OrchidTransportWrapper;
 import org.martus.clientside.PasswordHelper;
 import org.martus.common.BulletinSummary;
 import org.martus.common.BulletinSummary.WrongValueCount;
@@ -211,7 +210,7 @@ public class MartusApp
 		return new File(getCurrentAccountDirectory(), "OrchidCache.dat");
 	}
 
-	public OrchidTransportWrapper getTransport()
+	public OrchidTransportWrapperWithActiveProperty getTransport()
 	{
 		if(transport == null)
 		{
@@ -2748,7 +2747,7 @@ public class MartusApp
 	private int maxNewFolders;
 	public RetrieveCommand currentRetrieveCommand;
 	private MartusOrchidDirectoryStore orchidStore;
-	private OrchidTransportWrapper transport;
+	private OrchidTransportWrapperWithActiveProperty transport;
 	private boolean isInitialized;
 
 	public static final String PUBLIC_INFO_EXTENSION = ".mpi";
