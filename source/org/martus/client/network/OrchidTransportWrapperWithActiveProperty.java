@@ -25,6 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.network;
 
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleBooleanProperty;
+
 import org.martus.clientside.OrchidTransportWrapper;
 import org.martus.common.network.MartusOrchidDirectoryStore;
 
@@ -43,7 +46,39 @@ public class OrchidTransportWrapperWithActiveProperty extends OrchidTransportWra
 	protected OrchidTransportWrapperWithActiveProperty(MartusOrchidDirectoryStore storeToUse) throws Exception
 	{
 		super(storeToUse);
+
+		isTorActive = new SimpleBooleanProperty();
+	}
+	
+	public Property <Boolean> getIsTorActiveProperty()
+	{
+		return isTorActive;
+	}
+	
+	@Override
+	public boolean isTorEnabled()
+	{
+		return getIsTorActiveProperty().getValue();
+	}
+	
+	public void startTor()
+	{
+		isTorActive.setValue(true);
+		super.startTor();
+	}
+
+	public void startTorInSameThread()
+	{
+		isTorActive.setValue(true);
+		super.startTorInSameThread();
+	}
+	
+	public void stopTor()
+	{
+		isTorActive.setValue(false);
+		super.stopTor();
 	}
 	
 
+	private Property <Boolean> isTorActive;
 }
