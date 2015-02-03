@@ -60,6 +60,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.templates.FormTemplateManager.UnableToLoadCurrentTemplateException;
+import org.martus.client.network.OrchidTransportWrapperWithActiveProperty;
 import org.martus.client.network.RetrieveCommand;
 import org.martus.client.reports.ReportFormatFilter;
 import org.martus.client.search.BulletinSearcher;
@@ -908,7 +909,7 @@ public class MartusApp
 		try
 		{
 			orchidStore.loadStore(getOrchidCacheFile(), getSecurity());
-			transport = OrchidTransportWrapper.create(orchidStore);
+			transport = OrchidTransportWrapperWithActiveProperty.create(orchidStore);
 			turnNetworkOnOrOffAsRequested();
 			startOrStopTorAsRequested();
 

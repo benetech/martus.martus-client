@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.tools;
 
+import org.martus.client.network.OrchidTransportWrapperWithActiveProperty;
 import org.martus.client.swingui.Martus;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer;
@@ -49,7 +50,7 @@ public class PingServerAsClient
 	{
 		processArgs(args);
 		
-		OrchidTransportWrapper transport = OrchidTransportWrapper.createWithoutPersistentStore();
+		OrchidTransportWrapper transport = OrchidTransportWrapperWithActiveProperty.createWithoutPersistentStore();
 		ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer server = new ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer(ip, transport);
 		if(!ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer.isNonSSLServerAvailable(server))
 		{
