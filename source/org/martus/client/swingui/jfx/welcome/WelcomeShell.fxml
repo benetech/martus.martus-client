@@ -14,7 +14,7 @@
                <right>
             <Button id="" fx:id="nextButton" mnemonicParsing="false" onAction="#onNext" text="%Button.GetStarted" BorderPane.alignment="CENTER">
               <BorderPane.margin>
-                <Insets left="265.0" />
+                <Insets left="265.0" top="20"/>
               </BorderPane.margin>
             </Button>
                </right>
