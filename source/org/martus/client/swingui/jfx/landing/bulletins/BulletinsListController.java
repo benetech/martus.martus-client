@@ -68,7 +68,6 @@ import org.martus.client.swingui.jfx.generic.controls.FxTimestampTableCellFactor
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
 import org.martus.client.swingui.jfx.landing.FolderSelectionListener;
 import org.martus.client.swingui.jfx.landing.FxLandingShellController;
-import org.martus.client.swingui.jfx.landing.bulletins.AttachmentViewController.FileType;
 import org.martus.client.swingui.jfx.landing.cases.CaseListItem;
 import org.martus.client.swingui.jfx.landing.cases.CaseListProvider;
 import org.martus.client.swingui.jfx.landing.cases.FxCaseManagementController;
@@ -271,17 +270,11 @@ public class BulletinsListController extends AbstractFxLandingContentController 
 		{
 			AttachmentProxy attachmentProxy = attachments[i];
 			File attachmentFileToView = ViewAttachmentHandler.obtainFileForAttachment(attachmentProxy, getMainWindow().getStore());
-			if(!canViewAttachmentInProgram(attachmentFileToView))
+			if(!AttachmentViewController.canViewAttachmentInProgram(attachmentFileToView))
 				return true;
 		}
 		return false;
 	}
-
-	public static boolean canViewAttachmentInProgram(File attachmentFileToView) throws IOException
-	{
-		FileType fileType = AttachmentViewController.determineFileType(attachmentFileToView);
-		return AttachmentViewController.canViewInProgram(fileType);
-	}		
 
 	public void updateSearchResultsTable(SortableBulletinList searchResults)
 	{

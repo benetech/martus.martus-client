@@ -174,6 +174,12 @@ public class AttachmentViewController extends FxController
 		return baseUrl + "?" + 	marker + "&" + size + "&" + zoom;
 	}
 
+	public static boolean canViewAttachmentInProgram(File attachmentFileToView) throws IOException
+	{
+		FileType fileType = determineFileType(attachmentFileToView);
+		return canViewInProgram(fileType);
+	}
+
 	public static enum FileType{Unsupported, Image, HTML};
 	
 	@FXML
