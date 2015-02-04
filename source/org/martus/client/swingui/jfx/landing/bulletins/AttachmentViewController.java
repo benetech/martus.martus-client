@@ -78,8 +78,7 @@ public class AttachmentViewController extends FxController
 
 	public boolean canViewInProgram()
 	{
-		FileType fileTypeToView = attachmentFileType;
-		return canViewInProgram(fileTypeToView);
+		return canViewInProgram(attachmentFileType);
 	}
 
 	public static boolean canViewInProgram(FileType fileTypeToView)
