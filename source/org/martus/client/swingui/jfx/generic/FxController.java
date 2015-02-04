@@ -218,12 +218,18 @@ abstract public class FxController implements Initializable
 	
 	public boolean showConfirmationDialog(String tag)
 	{
+		String message = buildConfirmationMessage(tag);
+		return showConfirmationDialog(tag, message);
+	}
+
+	public String buildConfirmationMessage(String tag)
+	{
 		String message = getLocalization().getFieldLabel("confirm" + tag + "cause");
 		message += "\n\n";
 		message += getLocalization().getFieldLabel("confirm" + tag + "effect");
 		message += "\n\n";
 		message += getLocalization().getFieldLabel("confirmquestion");
-		return showConfirmationDialog(tag, message);
+		return message;
 	}
 
 	public boolean showOkCancelConfirmationDialog(String titleTag, String messageTag)
@@ -242,6 +248,11 @@ abstract public class FxController implements Initializable
 	{
 		FxController mainAreaController = new FxTextPaneController(getMainWindow(), message);
 		return showModalYesNoDialog(titleTag,  yesButtonTag, noButtonTag, mainAreaController);
+	}
+
+	public boolean showConfirmationDialog(String dialogTag, FxController mainAreaController)
+	{
+		return showModalYesNoDialog(dialogTag,  EnglishCommonStrings.YES, EnglishCommonStrings.NO, mainAreaController);
 	}
 
 	public boolean showModalYesNoDialog(String titleTag, String yesButtonTag, String noButtonTag, FxController mainAreaController)

@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2014, Beneficent
+monitoring software. Copyright (C) 2015, Beneficent
 Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
@@ -26,59 +26,50 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.generic;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.CheckBox;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.util.TokenReplacement;
-import org.martus.util.TokenReplacement.TokenInvalidException;
 
-public class SimpleTextContentController extends FxController
+public class PopupConfirmationWithHideForSessionController extends SimpleTextContentController
 {
-	public SimpleTextContentController(UiMainWindow mainWindowToUse, String confirmationMessageTagToUse)
+	public PopupConfirmationWithHideForSessionController(UiMainWindow mainWindowToUse, String confirmationTag)
 	{
-		this(mainWindowToUse, confirmationMessageTagToUse, null);
+		super(mainWindowToUse, confirmationTag);
+		
+		if(hiddenStatuses ==  null)
+			hiddenStatuses = new HashMap<String, SimpleBooleanProperty>();
+		
+		shouldBeHidden = hiddenStatuses.get(confirmationTag);
+		if(shouldBeHidden == null)
+		{
+			shouldBeHidden = new SimpleBooleanProperty();
+			hiddenStatuses.put(confirmationTag, shouldBeHidden);
+		}
 	}
 	
-	public SimpleTextContentController(UiMainWindow mainWindowToUse, String confirmationMessageTagToUse, Map tokensToUse)
+	public boolean shouldBeHidden()
 	{
-		super(mainWindowToUse);
-		confirmationMessageTag = confirmationMessageTagToUse;
-		tokenReplacement = tokensToUse;
+		return shouldBeHidden.getValue();
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-
-		messageTextArea.setWrapText(true);
-		String rawMessage = getLocalization().getFieldLabel(confirmationMessageTag);
-		String contents = rawMessage;
-		try
-		{
-			if(tokenReplacement != null)
-				contents = TokenReplacement.replaceTokens(rawMessage, tokenReplacement);
-		} 
-		catch (TokenInvalidException e)
-		{
-			e.printStackTrace();
-		}
-		messageTextArea.setText(contents);
-	}
-
-	@Override
-	public String getFxmlLocation()
-	{
-		return "generic/Confirmation.fxml";
+		
+		hideForSessionCheckBox.setVisible(true);
+		hideForSessionCheckBox.selectedProperty().bindBidirectional(shouldBeHidden);
 	}
 	
 	@FXML
-	private Label messageTextArea;
-	
-	private String confirmationMessageTag;
-	private Map tokenReplacement;
+	private CheckBox hideForSessionCheckBox;
+
+	private SimpleBooleanProperty shouldBeHidden;
+	private static Map<String, SimpleBooleanProperty> hiddenStatuses;
 }

@@ -41,7 +41,7 @@ import javax.activation.MimetypesFileTypeMap;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
-import org.martus.client.swingui.jfx.generic.PopupNotifyWithHideForSessionController;
+import org.martus.client.swingui.jfx.generic.PopupConfirmationWithHideForSessionController;
 import org.martus.common.MartusLogger;
 import org.martus.common.utilities.GeoTag;
 import org.martus.common.utilities.JpegGeoTagReader;
@@ -157,9 +157,11 @@ public class AttachmentViewController extends FxController
 		{
 			if(getApp().getTransport().isTorEnabled())
 			{
-				PopupNotifyWithHideForSessionController controller = new PopupNotifyWithHideForSessionController(getMainWindow(), "ShowOnMapBypassesTor");
+				String dialogTag = "confirmShowOnMapBypassesTor";
+				PopupConfirmationWithHideForSessionController controller = new PopupConfirmationWithHideForSessionController(getMainWindow(), dialogTag);
 				if(!controller.shouldBeHidden())
-					showControllerInsideModalDialog(controller);
+					if(!showConfirmationDialog(dialogTag, controller))
+						return;
 			}
 
 			MartusLogger.log("Map URL: " + createMapRequestUrl());

@@ -257,6 +257,9 @@ public class EnglishStrings
 "wintitle:notifySyncDisabledDueToError=Error",
 "field:notifySyncDisabledDueToErrorcause=Automatic syncing has been disabled due to an unexpected error",
 
+"wintitle:confirmShowOnMapBypassesTor=Show On Map",
+"field:confirmShowOnMapBypassesTor=Tor is enabled, but requesting a map will bypass it.\n\nIf you continue, anyone monitoring you could see your map request.",
+
 "wintitle:inputservermagicword=Request Upload Permission",
 "wintitle:inputCustomFields=Customize Fields",
 "wintitle:inputGetShareFileName=Key Backup",
@@ -719,6 +722,7 @@ public class EnglishStrings
 "field:CalendarType=Calendar Type:",
 "field:RecordSettings=Record Settings",
 "field:RecordDetails=Record Details",
+"field:DoNotShowAgainThisSession=Do not show this message again during this session",
 
 "wintitle:PrintPreview=Print Preview",
 "button:PrintToPrinter=Print To Printer",
