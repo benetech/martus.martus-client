@@ -41,6 +41,7 @@ import javax.activation.MimetypesFileTypeMap;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.generic.PopupNotifyWithHideForSessionController;
 import org.martus.common.MartusLogger;
 import org.martus.common.utilities.GeoTag;
 import org.martus.common.utilities.JpegGeoTagReader;
@@ -152,14 +153,21 @@ public class AttachmentViewController extends FxController
 	@FXML
 	private void onShowMap()
 	{
-		// NOTE: We can't call notifyDlg here, possibly because we are inside a modal dialog
 		try
 		{
+			if(getApp().getTransport().isTorEnabled())
+			{
+				PopupNotifyWithHideForSessionController controller = new PopupNotifyWithHideForSessionController(getMainWindow(), "ShowOnMapBypassesTor");
+				if(!controller.shouldBeHidden())
+					showControllerInsideModalDialog(controller);
+			}
+
 			MartusLogger.log("Map URL: " + createMapRequestUrl());
 		} 
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			// FIXME: I think this will hang due to mixing swing and fx
+			getMainWindow().unexpectedErrorDlg(e);
 		}
 	}
 	
