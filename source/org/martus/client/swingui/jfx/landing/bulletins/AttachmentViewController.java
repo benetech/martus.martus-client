@@ -33,7 +33,7 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
@@ -104,7 +104,7 @@ public class AttachmentViewController extends FxController
 	{
 		if(attachmentFileType == FileType.HTML || 
 				attachmentFileType == FileType.Image)
-			attachmentStackPane.getChildren().add(getWebView());
+			attachmentPane.getChildren().add(getWebView());
 		
 		GeoTag tag = readGeoTag();
 		showMapButton.setVisible(tag.hasData());
@@ -183,7 +183,7 @@ public class AttachmentViewController extends FxController
 	public static enum FileType{Unsupported, Image, HTML};
 	
 	@FXML
-	private VBox attachmentStackPane;
+	private StackPane attachmentPane;
 
 	@FXML
 	private Button showMapButton;
