@@ -78,7 +78,8 @@ public class AttachmentViewController extends FxController
 
 	public boolean canViewInProgram()
 	{
-		return attachmentFileType != FileType.Unsupported;
+		FileType fileTypeToView = attachmentFileType;
+		return fileTypeToView != FileType.Unsupported;
 	}
 	
 	private FileType determineFileType(File file) throws IOException
