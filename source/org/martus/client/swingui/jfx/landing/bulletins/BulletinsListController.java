@@ -271,12 +271,18 @@ public class BulletinsListController extends AbstractFxLandingContentController 
 		{
 			AttachmentProxy attachmentProxy = attachments[i];
 			File attachmentFileToView = ViewAttachmentHandler.obtainFileForAttachment(attachmentProxy, getMainWindow().getStore());
-			FileType fileType = AttachmentViewController.determineFileType(attachmentFileToView);
-			boolean canViewInProgram = AttachmentViewController.canViewInProgram(fileType);
+			boolean canViewInProgram = canViewAttachmentInProgram(attachmentFileToView);
 			if(!canViewInProgram)
 				return true;
 		}
 		return false;
+	}
+
+	public static boolean canViewAttachmentInProgram(File attachmentFileToView) throws IOException
+	{
+		FileType fileType = AttachmentViewController.determineFileType(attachmentFileToView);
+		boolean canViewInProgram = AttachmentViewController.canViewInProgram(fileType);
+		return canViewInProgram;
 	}		
 
 	public void updateSearchResultsTable(SortableBulletinList searchResults)
