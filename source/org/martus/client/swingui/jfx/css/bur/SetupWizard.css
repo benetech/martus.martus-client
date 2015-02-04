@@ -1,0 +1,67 @@
+.root {
+	-fx-background-color: #e6e7e9;
+  -fx-font-family: "Zawgyi-One";
+  -fx-line-height: 28px inherit;
+}
+
+#topBar {
+	-fx-background-color: #4c5e70;
+  -fx-padding: 6 25 6 25;
+	-fx-spacing: 13;
+	-fx-alignment: center-left;
+}
+
+.mainTextBox {
+	-fx-background-color: #9ba5ae;
+  -fx-padding: 25 10 35 10;
+	-fx-alignment: center-left;
+	-fx-background-radius: 7.0;
+	-fx-background-insets: 0 0 20 0;
+}
+
+.sidebarText {
+	-fx-text-fill: White;
+	-fx-font-size: 8px;
+  -fx-font-weight: bold;
+}
+
+.sidebarTextHeading1 {
+	-fx-text-fill: White;
+  -fx-font-weight: bold;
+	-fx-font-size: 10px;
+}
+
+.wv-sidebar-hint {
+	background-color: #e6e7e9;
+	font: 9px "Zawgyi-One";
+	border: none;
+}
+
+.current-step .TopBarStepNumber {
+	-fx-text-fill: White;
+	-fx-font-size: 11px;
+}
+
+.current-step .TopBarStepName {
+	-fx-text-fill: White;
+	-fx-font-size: 11px;
+}
+
+.TopBarStepNumber {
+	-fx-text-fill: #707e87;
+	-fx-font-size: 11px;
+	-fx-padding: 0 5 0 3;
+}
+
+.TopBarStepName {
+	-fx-text-fill: #707e87;
+	-fx-alignment: center-left;
+	-fx-font-size: 11px;
+}
+
+.TopBarArrow {
+	-fx-text-fill: #707e87;
+  -fx-padding: 4 4 4 4;
+	-fx-font-size: 11px;
+  -fx-font-weight: bold;
+}
