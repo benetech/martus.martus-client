@@ -86,7 +86,7 @@ public class AttachmentViewController extends FxController
 		return fileTypeToView != FileType.Unsupported;
 	}
 	
-	private FileType determineFileType(File file) throws IOException
+	public static FileType determineFileType(File file) throws IOException
 	{
 		MimetypesFileTypeMap mimeTypeMap = new MimetypesFileTypeMap();
 		mimeTypeMap.addMimeTypes("html htm html");
@@ -174,7 +174,7 @@ public class AttachmentViewController extends FxController
 		return baseUrl + "?" + 	marker + "&" + size + "&" + zoom;
 	}
 
-	enum FileType{Unsupported, Image, HTML};
+	public static enum FileType{Unsupported, Image, HTML};
 	
 	@FXML
 	private VBox attachmentStackPane;
