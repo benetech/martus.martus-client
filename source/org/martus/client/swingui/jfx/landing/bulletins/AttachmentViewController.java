@@ -150,7 +150,7 @@ public class AttachmentViewController extends FxController
 	}
 	
 	@FXML
-	private void showOnMap()
+	private void onShowMap()
 	{
 		// NOTE: We can't call notifyDlg here, possibly because we are inside a modal dialog
 		try
