@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.network.OrchidTransportWrapperWithActiveProperty;
 import org.martus.client.swingui.Martus;
 import org.martus.clientside.ClientPortOverride;
 import org.martus.clientside.ClientSideNetworkGateway;
@@ -149,7 +150,7 @@ public class ServerLoader {
 
     private boolean verifyServer() throws Exception
     {
-	    OrchidTransportWrapper transport = OrchidTransportWrapper.createWithoutPersistentStore();
+	    OrchidTransportWrapper transport = OrchidTransportWrapperWithActiveProperty.createWithoutPersistentStore();
         NonSSLNetworkAPIWithHelpers server = new ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer(serverIP, transport);
         try
         {
