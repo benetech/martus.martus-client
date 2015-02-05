@@ -31,9 +31,7 @@ import java.io.IOException;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.dialogs.UiSigninDlg;
-import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.PasswordHelper;
-import org.martus.clientside.UiFileChooser;
 import org.martus.swing.UiPasswordField;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
@@ -52,10 +50,7 @@ public class UiRecoverKeyPairFromBackup
 		mainWindow.notifyDlg("RecoveryProcessBackupFile");
 		while(true)
 		{
-			String title = getLocalization().getWindowTitle("FileDialogRestoreFromKeyPair");
-			String okButtonLabel = getLocalization().getButtonLabel("FileDialogOkRestoreFromKeyPair");
-			File currentDirectory = UiSession.getMemorizedFileOpenDirectories().get("RestoreFromKeyPair");
-			File backupFile = UiFileChooser.displayFileOpenDialogOnEventThread(null, title, currentDirectory, okButtonLabel, FileDialogHelpers.NO_FILTER).getChosenFile();
+			File backupFile = mainWindow.showFileOpenDialogWithDirectoryMemory("RestoreFromKeyPair");
 			if (backupFile == null)
 				return false;
 			
