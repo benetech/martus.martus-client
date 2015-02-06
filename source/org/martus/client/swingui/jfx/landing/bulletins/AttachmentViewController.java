@@ -25,19 +25,26 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 import javax.activation.MimetypesFileTypeMap;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSocketFactory;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.generic.FxController;
@@ -164,8 +171,39 @@ public class AttachmentViewController extends FxController
 						return;
 			}
 
+			// FIXME: The rest of this code needs refactoring. It works, so I'm committing it, 
+			// and I will follow up immediately with a series of refactorings
 			URL mapRequestUrl = createMapRequestUrl();
 			MartusLogger.log("Map URL: " + mapRequestUrl);
+			URLConnection connection = mapRequestUrl.openConnection();
+			HttpsURLConnection huc = (HttpsURLConnection) connection;
+			huc.setSSLSocketFactory((SSLSocketFactory) SSLSocketFactory.getDefault());
+			InputStream in = huc.getInputStream();
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			try
+			{
+				while(true)
+				{
+					int b = in.read();
+					if(b < 0)
+						break;
+					baos.write(b);
+				}
+			}
+			finally
+			{
+				in.close();
+			}
+			baos.close();
+			
+			InputStream imageInputStream = new ByteArrayInputStream(baos.toByteArray());
+			Image image = new Image(imageInputStream);
+			imageInputStream.close();
+			
+			showMapButton.setVisible(false);
+			ImageView imageView = new ImageView(image);
+			attachmentPane.getChildren().add(imageView);
+			MartusLogger.log("Image size: " + baos.size());
 		} 
 		catch (Exception e)
 		{
