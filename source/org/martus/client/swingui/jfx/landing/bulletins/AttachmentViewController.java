@@ -176,9 +176,9 @@ public class AttachmentViewController extends FxController
 			URL mapRequestUrl = createMapRequestUrl();
 			MartusLogger.log("Map URL: " + mapRequestUrl);
 			HttpsURLConnection huc = createHttpsConnection(mapRequestUrl);
-			ByteArrayOutputStream baos = readEntireContents(huc);
-			MartusLogger.log("Image size: " + baos.size());
-			InputStream imageInputStream = new ByteArrayInputStream(baos.toByteArray());
+			byte[] imageBytes = readEntireContents(huc);
+			MartusLogger.log("Image size: " + imageBytes.length);
+			InputStream imageInputStream = new ByteArrayInputStream(imageBytes);
 			
 			ImageView imageView = createImageViewFromStream(imageInputStream);
 			
@@ -208,7 +208,7 @@ public class AttachmentViewController extends FxController
 		return huc;
 	}
 
-	public ByteArrayOutputStream readEntireContents(URLConnection huc) throws IOException
+	public byte[] readEntireContents(URLConnection huc) throws IOException
 	{
 		InputStream in = huc.getInputStream();
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -227,7 +227,7 @@ public class AttachmentViewController extends FxController
 			in.close();
 		}
 		baos.close();
-		return baos;
+		return baos.toByteArray();
 	}
 	
 	private URL createMapRequestUrl() throws Exception
