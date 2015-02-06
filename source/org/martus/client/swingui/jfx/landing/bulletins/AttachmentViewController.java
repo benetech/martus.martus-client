@@ -164,7 +164,8 @@ public class AttachmentViewController extends FxController
 						return;
 			}
 
-			MartusLogger.log("Map URL: " + createMapRequestUrl());
+			URL mapRequestUrl = createMapRequestUrl();
+			MartusLogger.log("Map URL: " + mapRequestUrl);
 		} 
 		catch (Exception e)
 		{
@@ -173,7 +174,7 @@ public class AttachmentViewController extends FxController
 		}
 	}
 	
-	private String createMapRequestUrl() throws Exception
+	private URL createMapRequestUrl() throws Exception
 	{
 		int zoomFactor = 14;
 		GeoTag tag = readGeoTag();
@@ -181,7 +182,7 @@ public class AttachmentViewController extends FxController
 		String marker = "markers=%7C" + tag.getLatitude() + "," + tag.getLongitude();
 		String size = "size=640x640";
 		String zoom = "zoom=" + zoomFactor;
-		return baseUrl + "?" + 	marker + "&" + size + "&" + zoom;
+		return new URL(baseUrl + "?" + 	marker + "&" + size + "&" + zoom);
 	}
 
 	public static boolean canViewAttachmentInProgram(File attachmentFileToView) throws IOException
