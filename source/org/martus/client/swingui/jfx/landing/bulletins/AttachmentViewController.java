@@ -175,9 +175,7 @@ public class AttachmentViewController extends FxController
 			// and I will follow up immediately with a series of refactorings
 			URL mapRequestUrl = createMapRequestUrl();
 			MartusLogger.log("Map URL: " + mapRequestUrl);
-			URLConnection connection = mapRequestUrl.openConnection();
-			HttpsURLConnection huc = (HttpsURLConnection) connection;
-			huc.setSSLSocketFactory((SSLSocketFactory) SSLSocketFactory.getDefault());
+			HttpsURLConnection huc = createHttpsConnection(mapRequestUrl);
 			ByteArrayOutputStream baos = readEntireContents(huc);
 			
 			InputStream imageInputStream = new ByteArrayInputStream(baos.toByteArray());
@@ -194,6 +192,14 @@ public class AttachmentViewController extends FxController
 			// FIXME: I think this will hang due to mixing swing and fx
 			getMainWindow().unexpectedErrorDlg(e);
 		}
+	}
+
+	public HttpsURLConnection createHttpsConnection(URL mapRequestUrl) throws IOException
+	{
+		URLConnection connection = mapRequestUrl.openConnection();
+		HttpsURLConnection huc = (HttpsURLConnection) connection;
+		huc.setSSLSocketFactory((SSLSocketFactory) SSLSocketFactory.getDefault());
+		return huc;
 	}
 
 	public ByteArrayOutputStream readEntireContents(URLConnection huc) throws IOException
