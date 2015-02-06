@@ -171,8 +171,6 @@ public class AttachmentViewController extends FxController
 						return;
 			}
 
-			// FIXME: The rest of this code needs refactoring. It works, so I'm committing it, 
-			// and I will follow up immediately with a series of refactorings
 			URL mapRequestUrl = createMapRequestUrl();
 			MartusLogger.log("Map URL: " + mapRequestUrl);
 			HttpsURLConnection huc = createHttpsConnection(mapRequestUrl);
@@ -183,6 +181,7 @@ public class AttachmentViewController extends FxController
 			ImageView imageView = createImageViewFromStream(imageInputStream);
 			
 			showMapButton.setVisible(false);
+			attachmentPane.getChildren().clear();
 			attachmentPane.getChildren().add(imageView);
 		} 
 		catch (Exception e)
