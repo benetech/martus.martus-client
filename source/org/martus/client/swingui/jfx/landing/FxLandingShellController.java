@@ -48,6 +48,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuCharts;
 import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
+import org.martus.client.swingui.actions.ActionMenuManageContactsWithoutResignIn;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
 import org.martus.client.swingui.actions.ActionMenuQuickSearch;
 import org.martus.client.swingui.actions.ActionMenuReports;
@@ -352,6 +353,12 @@ public class FxLandingShellController extends FxNonWizardShellController
 	private void onContactInformation(ActionEvent event)
 	{
 		onAccount(AccountController.CONTACT_INFORMATION_TAB_CODE);
+	}
+	
+	@FXML
+	public void onManageContacts(ActionEvent event)
+	{
+		doAction(new ActionMenuManageContactsWithoutResignIn(getMainWindow()));
 	}
 	
 	@FXML

@@ -1592,6 +1592,8 @@ public class EnglishStrings
 "wintitle:RemoveContact=Remove Contact",
 "field:RemoveContactLabel=The following contact will be removed.\n\nName: #Name#\nPublic Code: #PublicCode#.\n\nAre you sure you want to do this?",
 
+
+"menu:ManageContacts=Manage Contacts",
 "field:ManageContacts=Manage Contacts",
 
 "field:AllFiles=All Files",
@@ -1682,7 +1684,6 @@ public class EnglishStrings
 "menu:AddPermissions=Update Contact's Access...",
 "button:AddPermissions=Update Contact's Access",
 "button:Contacts=Contacts",
-"button:ManageContacts=Manage Contacts",
 "button:Create=Create",
 
 "field:confirmWarningSwitchToNormalKeyboardeffect=If this record was shared with you by one of your contacts, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.",

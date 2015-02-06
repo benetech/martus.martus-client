@@ -18,8 +18,6 @@
              	<Button mnemonicParsing="false" onAction="#onExportPublicKey" text="%Button.ExportAccountPublicKey" />
       <Label />
       <Button mnemonicParsing="false" onAction="#onChangeUsernameAndPassword" text="%Button.ChangeUsernameAndPassword" />
-      <Label />
-      <Button mnemonicParsing="false" onAction="#onManageContacts" text="%Button.ManageContacts" />
    </children>
    <padding>
       <Insets left="10.0" top="10.0" />
