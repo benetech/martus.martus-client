@@ -35,7 +35,6 @@ import javafx.scene.control.TextField;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
 import org.martus.client.swingui.actions.ActionMenuExportMyPublicKey;
-import org.martus.client.swingui.actions.ActionMenuManageContactsWithoutResignIn;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.common.MartusAccountAccessToken;
 import org.martus.common.MartusAccountAccessToken.TokenInvalidException;
@@ -108,12 +107,6 @@ public class AccountInformationController extends FxController
 	public void onChangeUsernameAndPassword(ActionEvent event)
 	{
 		doAction(new ActionMenuChangeUserNamePassword(getMainWindow()));
-	}
-
-	@FXML
-	public void onManageContacts(ActionEvent event)
-	{
-		doAction(new ActionMenuManageContactsWithoutResignIn(getMainWindow()));
 	}
 
 	@Override
