@@ -196,8 +196,7 @@ public class AttachmentViewController extends FxController
 		}
 	}
 
-	public ByteArrayOutputStream readEntireContents(HttpsURLConnection huc)
-			throws IOException
+	public ByteArrayOutputStream readEntireContents(URLConnection huc) throws IOException
 	{
 		InputStream in = huc.getInputStream();
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
