@@ -3,7 +3,7 @@
 # Language name:  
 # Translated by:
 # Exported date:  
-# Client version:  Martus\nReport-Msgid-Bugs-To: martus@benetech.org\nPOT-Creation-Date: 2014-12-10 14:41:49 -0800\nPO-Revision-Date: 2015-01-26 23:11+0000\nLast-Translator: yahoe.001\nLanguage-Team: French (http://www.transifex.com/projects/p/martus/language/fr/)\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nLanguage: fr\nPlural-Forms: nplurals=2; plural=(n > 1);\n
+# Client version:  Exported from pre-5.0.3
 # Client build:
 # *** This MTF file was converted from a PO file
 
@@ -2864,7 +2864,7 @@
 -768e-field:title=Titre
 
 #_____________________________=English 5.0.1
-field:translationVersion=Français 5.0.1
+field:translationVersion=Français 5.0
 
 #___________________=Username
 -84c2-field:username=Nom d'utilisateur
