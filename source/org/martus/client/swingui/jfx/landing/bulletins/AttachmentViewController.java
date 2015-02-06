@@ -182,9 +182,9 @@ public class AttachmentViewController extends FxController
 			InputStream imageInputStream = new ByteArrayInputStream(baos.toByteArray());
 			Image image = new Image(imageInputStream);
 			imageInputStream.close();
+			ImageView imageView = new ImageView(image);
 			
 			showMapButton.setVisible(false);
-			ImageView imageView = new ImageView(image);
 			attachmentPane.getChildren().add(imageView);
 		} 
 		catch (Exception e)
