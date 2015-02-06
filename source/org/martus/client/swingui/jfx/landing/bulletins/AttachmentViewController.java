@@ -178,23 +178,7 @@ public class AttachmentViewController extends FxController
 			URLConnection connection = mapRequestUrl.openConnection();
 			HttpsURLConnection huc = (HttpsURLConnection) connection;
 			huc.setSSLSocketFactory((SSLSocketFactory) SSLSocketFactory.getDefault());
-			InputStream in = huc.getInputStream();
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			try
-			{
-				while(true)
-				{
-					int b = in.read();
-					if(b < 0)
-						break;
-					baos.write(b);
-				}
-			}
-			finally
-			{
-				in.close();
-			}
-			baos.close();
+			ByteArrayOutputStream baos = readEntireContents(huc);
 			
 			InputStream imageInputStream = new ByteArrayInputStream(baos.toByteArray());
 			Image image = new Image(imageInputStream);
@@ -210,6 +194,29 @@ public class AttachmentViewController extends FxController
 			// FIXME: I think this will hang due to mixing swing and fx
 			getMainWindow().unexpectedErrorDlg(e);
 		}
+	}
+
+	public ByteArrayOutputStream readEntireContents(HttpsURLConnection huc)
+			throws IOException
+	{
+		InputStream in = huc.getInputStream();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		try
+		{
+			while(true)
+			{
+				int b = in.read();
+				if(b < 0)
+					break;
+				baos.write(b);
+			}
+		}
+		finally
+		{
+			in.close();
+		}
+		baos.close();
+		return baos;
 	}
 	
 	private URL createMapRequestUrl() throws Exception
