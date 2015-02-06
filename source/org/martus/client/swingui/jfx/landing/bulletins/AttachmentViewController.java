@@ -177,6 +177,7 @@ public class AttachmentViewController extends FxController
 			MartusLogger.log("Map URL: " + mapRequestUrl);
 			HttpsURLConnection huc = createHttpsConnection(mapRequestUrl);
 			ByteArrayOutputStream baos = readEntireContents(huc);
+			MartusLogger.log("Image size: " + baos.size());
 			
 			InputStream imageInputStream = new ByteArrayInputStream(baos.toByteArray());
 			Image image = new Image(imageInputStream);
@@ -185,7 +186,6 @@ public class AttachmentViewController extends FxController
 			showMapButton.setVisible(false);
 			ImageView imageView = new ImageView(image);
 			attachmentPane.getChildren().add(imageView);
-			MartusLogger.log("Image size: " + baos.size());
 		} 
 		catch (Exception e)
 		{
