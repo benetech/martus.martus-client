@@ -191,10 +191,14 @@ public class AttachmentViewController extends FxController
 		}
 	}
 
-	public ImageView createImageViewFromStream(ByteArrayOutputStream baos)
-			throws IOException
+	public ImageView createImageViewFromStream(ByteArrayOutputStream baos) throws IOException
 	{
 		InputStream imageInputStream = new ByteArrayInputStream(baos.toByteArray());
+		return createImageViewFromStream(imageInputStream);
+	}
+
+	public ImageView createImageViewFromStream(InputStream imageInputStream) throws IOException
+	{
 		Image image = new Image(imageInputStream);
 		imageInputStream.close();
 		ImageView imageView = new ImageView(image);
