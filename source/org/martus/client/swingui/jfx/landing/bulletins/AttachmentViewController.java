@@ -114,7 +114,8 @@ public class AttachmentViewController extends FxController
 		if(attachmentFileType == FileType.HTML || 
 				attachmentFileType == FileType.Image)
 		{
-			attachmentPane.getChildren().add(getWebView());
+			WebView nodeToShow = getWebView();
+			attachmentPane.getChildren().add(nodeToShow);
 		}
 		
 		GeoTag tag = readGeoTag();
