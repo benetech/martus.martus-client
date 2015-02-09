@@ -80,7 +80,7 @@ public class AttachmentViewController extends FxController
 		try
 		{
 			webView = new WebView();
-			setAttachmentInView();
+			loadAndDisplayAttachment();
 		} 
 		catch (Exception e)
 		{
@@ -112,7 +112,7 @@ public class AttachmentViewController extends FxController
 		return FileType.Unsupported;
 	}
 
-	private void setAttachmentInView() throws Exception
+	private void loadAndDisplayAttachment() throws Exception
 	{
 		if(attachmentFileType == FileType.HTML || 
 				attachmentFileType == FileType.Image)
