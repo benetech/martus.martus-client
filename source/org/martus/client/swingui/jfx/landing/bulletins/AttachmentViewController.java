@@ -34,6 +34,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -173,7 +174,9 @@ public class AttachmentViewController extends FxController
 
 			ImageView imageView = new ImageView();
 			URL mapRequestUrl = createMapRequestUrl();
-			downloadAndDisplayImage(imageView, mapRequestUrl);
+			Thread thread = new Thread(() -> downloadAndDisplayImage(imageView, mapRequestUrl));
+			thread.setDaemon(true);
+			thread.start();
 			
 			showMapButton.setVisible(false);
 			attachmentPane.getChildren().clear();
@@ -181,19 +184,25 @@ public class AttachmentViewController extends FxController
 		} 
 		catch (Exception e)
 		{
-			// FIXME: I think this will hang due to mixing swing and fx
-			getMainWindow().unexpectedErrorDlg(e);
+			logAndNotifyUnexpectedError(e);
 		}
 	}
 
 	public void downloadAndDisplayImage(ImageView imageView, URL mapRequestUrl)
-			throws IOException
 	{
-		MartusLogger.log("Map URL: " + mapRequestUrl);
-		byte[] imageBytes = readEntireContents(mapRequestUrl);
-		MartusLogger.log("Image size: " + imageBytes.length);
-		Image image = createImage(imageBytes);
-		imageView.setImage(image);
+		try
+		{
+			MartusLogger.log("Map URL: " + mapRequestUrl);
+			byte[] imageBytes = readEntireContents(mapRequestUrl);
+			MartusLogger.log("Image size: " + imageBytes.length);
+			Image image = createImage(imageBytes);
+			
+			Platform.runLater(() -> imageView.setImage(image));
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
 	}
 
 	public Image createImage(byte[] imageBytes) throws IOException
