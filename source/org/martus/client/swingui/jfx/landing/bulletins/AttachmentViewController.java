@@ -171,11 +171,11 @@ public class AttachmentViewController extends FxController
 						return;
 			}
 
+			ImageView imageView = new ImageView();
 			URL mapRequestUrl = createMapRequestUrl();
 			MartusLogger.log("Map URL: " + mapRequestUrl);
 			byte[] imageBytes = readEntireContents(mapRequestUrl);
 			MartusLogger.log("Image size: " + imageBytes.length);
-			ImageView imageView = new ImageView();
 			Image image = createImage(imageBytes);
 			imageView.setImage(image);
 			
