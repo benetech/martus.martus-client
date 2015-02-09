@@ -81,7 +81,8 @@ public class AttachmentViewController extends FxController
 		try
 		{
 			webView = new WebView();
-			loadAndDisplayAttachment();
+			loadAttachment();
+			showNode(webView);
 		} 
 		catch (Exception e)
 		{
@@ -113,7 +114,7 @@ public class AttachmentViewController extends FxController
 		return FileType.Unsupported;
 	}
 
-	private void loadAndDisplayAttachment() throws Exception
+	private void loadAttachment() throws Exception
 	{
 		if(attachmentFileType == FileType.HTML || 
 				attachmentFileType == FileType.Image)
@@ -123,7 +124,6 @@ public class AttachmentViewController extends FxController
 
 			WebEngine engine = webView.getEngine();
 			engine.load(attachmentFileToView.toURI().toString());
-			showNode(webView);
 		}
 		
 	}
