@@ -113,7 +113,9 @@ public class AttachmentViewController extends FxController
 	{
 		if(attachmentFileType == FileType.HTML || 
 				attachmentFileType == FileType.Image)
+		{
 			attachmentPane.getChildren().add(getWebView());
+		}
 		
 		GeoTag tag = readGeoTag();
 		showMapButton.setVisible(tag.hasData());
