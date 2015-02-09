@@ -116,7 +116,10 @@ public class AttachmentViewController extends FxController
 		if(attachmentFileType == FileType.HTML || 
 				attachmentFileType == FileType.Image)
 		{
-			WebView nodeToShow = getWebView();
+			WebView webView = new WebView();
+			WebEngine engine = webView.getEngine();
+			engine.load(attachmentFileToView.toURI().toString());
+			WebView nodeToShow = webView;
 			showImageNode(nodeToShow);
 		}
 		
@@ -154,14 +157,6 @@ public class AttachmentViewController extends FxController
 		{
 			in.close();
 		}
-	}
-
-	private WebView getWebView()
-	{
-		WebView webView = new WebView();
-		WebEngine engine = webView.getEngine();
-		engine.load(attachmentFileToView.toURI().toString());
-		return webView;
 	}
 
 	@Override
