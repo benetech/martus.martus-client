@@ -188,7 +188,7 @@ public class AttachmentViewController extends FxController
 		}
 	}
 
-	public void downloadAndDisplayImage(ImageView imageView, URL mapRequestUrl)
+	private void downloadAndDisplayImage(ImageView imageView, URL mapRequestUrl)
 	{
 		try
 		{
@@ -205,7 +205,7 @@ public class AttachmentViewController extends FxController
 		}
 	}
 
-	public Image createImage(byte[] imageBytes) throws IOException
+	private Image createImage(byte[] imageBytes) throws IOException
 	{
 		InputStream imageInputStream = new ByteArrayInputStream(imageBytes);
 		Image image = new Image(imageInputStream);
@@ -213,7 +213,7 @@ public class AttachmentViewController extends FxController
 		return image;
 	}
 
-	public byte[] readEntireContents(URL mapRequestUrl) throws IOException
+	private byte[] readEntireContents(URL mapRequestUrl) throws IOException
 	{
 		HttpsURLConnection huc = createHttpsConnection(mapRequestUrl);
 		InputStream in = huc.getInputStream();
@@ -228,7 +228,7 @@ public class AttachmentViewController extends FxController
 		}
 	}
 
-	public HttpsURLConnection createHttpsConnection(URL mapRequestUrl) throws IOException
+	private HttpsURLConnection createHttpsConnection(URL mapRequestUrl) throws IOException
 	{
 		URLConnection connection = mapRequestUrl.openConnection();
 		HttpsURLConnection huc = (HttpsURLConnection) connection;
@@ -236,7 +236,7 @@ public class AttachmentViewController extends FxController
 		return huc;
 	}
 
-	public byte[] readEntireContents(InputStream in) throws IOException
+	private byte[] readEntireContents(InputStream in) throws IOException
 	{
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		while(true)
