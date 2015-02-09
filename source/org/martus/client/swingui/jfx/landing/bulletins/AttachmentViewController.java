@@ -191,8 +191,9 @@ public class AttachmentViewController extends FxController
 	public ImageView createImageView(byte[] imageBytes) throws IOException
 	{
 		InputStream imageInputStream = new ByteArrayInputStream(imageBytes);
-		
-		ImageView imageView = createImageViewFromStream(imageInputStream);
+		Image image = new Image(imageInputStream);
+		imageInputStream.close();
+		ImageView imageView = new ImageView(image);
 		return imageView;
 	}
 
@@ -209,14 +210,6 @@ public class AttachmentViewController extends FxController
 		{
 			in.close();
 		}
-	}
-
-	public ImageView createImageViewFromStream(InputStream imageInputStream) throws IOException
-	{
-		Image image = new Image(imageInputStream);
-		imageInputStream.close();
-		ImageView imageView = new ImageView(image);
-		return imageView;
 	}
 
 	public HttpsURLConnection createHttpsConnection(URL mapRequestUrl) throws IOException
