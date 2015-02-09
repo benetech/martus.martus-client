@@ -175,7 +175,8 @@ public class AttachmentViewController extends FxController
 			MartusLogger.log("Map URL: " + mapRequestUrl);
 			byte[] imageBytes = readEntireContents(mapRequestUrl);
 			MartusLogger.log("Image size: " + imageBytes.length);
-			ImageView imageView = createImageView(imageBytes);
+			Image image = createImage(imageBytes);
+			ImageView imageView = new ImageView(image);
 			
 			showMapButton.setVisible(false);
 			attachmentPane.getChildren().clear();
@@ -186,13 +187,6 @@ public class AttachmentViewController extends FxController
 			// FIXME: I think this will hang due to mixing swing and fx
 			getMainWindow().unexpectedErrorDlg(e);
 		}
-	}
-
-	public ImageView createImageView(byte[] imageBytes) throws IOException
-	{
-		Image image = createImage(imageBytes);
-		ImageView imageView = new ImageView(image);
-		return imageView;
 	}
 
 	public Image createImage(byte[] imageBytes) throws IOException
