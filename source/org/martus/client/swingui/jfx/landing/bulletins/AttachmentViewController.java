@@ -79,6 +79,7 @@ public class AttachmentViewController extends FxController
 		super.initialize(location, bundle);
 		try
 		{
+			webView = new WebView();
 			setAttachmentInView();
 		} 
 		catch (Exception e)
@@ -116,7 +117,6 @@ public class AttachmentViewController extends FxController
 		if(attachmentFileType == FileType.HTML || 
 				attachmentFileType == FileType.Image)
 		{
-			WebView webView = new WebView();
 			WebEngine engine = webView.getEngine();
 			engine.load(attachmentFileToView.toURI().toString());
 			WebView nodeToShow = webView;
@@ -281,7 +281,8 @@ public class AttachmentViewController extends FxController
 
 	@FXML
 	private Button showMapButton;
-	
+
+	private WebView webView;
 	private File attachmentFileToView;
 	private FileType attachmentFileType;
 }
