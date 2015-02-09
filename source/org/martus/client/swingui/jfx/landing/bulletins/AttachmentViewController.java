@@ -185,8 +185,7 @@ public class AttachmentViewController extends FxController
 			thread.start();
 			
 			showMapButton.setVisible(false);
-			attachmentPane.getChildren().clear();
-			attachmentPane.getChildren().add(imageView);
+			showImageNode(imageView);
 		} 
 		catch (Exception e)
 		{
