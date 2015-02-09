@@ -39,6 +39,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -117,13 +118,14 @@ public class AttachmentViewController extends FxController
 		if(attachmentFileType == FileType.HTML || 
 				attachmentFileType == FileType.Image)
 		{
+			GeoTag tag = readGeoTag();
+			showMapButton.setVisible(tag.hasData());
+
 			WebEngine engine = webView.getEngine();
 			engine.load(attachmentFileToView.toURI().toString());
 			showNode(webView);
 		}
 		
-		GeoTag tag = readGeoTag();
-		showMapButton.setVisible(tag.hasData());
 	}
 
 	private void showNode(Node nodeToShow)
@@ -178,14 +180,14 @@ public class AttachmentViewController extends FxController
 						return;
 			}
 
-			ImageView imageView = new ImageView();
 			URL mapRequestUrl = createMapRequestUrl();
-			Thread thread = new Thread(() -> downloadAndDisplayImage(imageView, mapRequestUrl));
+			Thread thread = new Thread(() -> downloadAndDisplayImage(mapRequestUrl));
 			thread.setDaemon(true);
 			thread.start();
 			
+			Node working = new Label(getLocalization().getFieldLabel("BackgroundWorking"));
 			showMapButton.setVisible(false);
-			showNode(imageView);
+			showNode(working);
 		} 
 		catch (Exception e)
 		{
@@ -193,16 +195,31 @@ public class AttachmentViewController extends FxController
 		}
 	}
 
-	private void downloadAndDisplayImage(ImageView imageView, URL mapRequestUrl)
+	private void downloadAndDisplayImage(URL mapRequestUrl)
 	{
 		try
 		{
 			MartusLogger.log("Map URL: " + mapRequestUrl);
 			byte[] imageBytes = readEntireContents(mapRequestUrl);
-			MartusLogger.log("Image size: " + imageBytes.length);
-			Image image = createImage(imageBytes);
 			
-			Platform.runLater(() -> imageView.setImage(image));
+			MartusLogger.log("Image size: " + imageBytes.length);
+			Platform.runLater(() -> showMap(imageBytes));
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
+
+	public void showMap(byte[] imageBytes)
+	{
+		try
+		{
+			Image image = createImage(imageBytes);
+			ImageView imageView = new ImageView();
+			imageView.setImage(image);
+			showNode(imageView);
+			showMapButton.setVisible(false);
 		} 
 		catch (Exception e)
 		{
