@@ -126,7 +126,7 @@ public class AttachmentViewController extends FxController
 		showMapButton.setVisible(tag.hasData());
 	}
 
-	public void showImageNode(Node nodeToShow)
+	private void showImageNode(Node nodeToShow)
 	{
 		ObservableList<Node> children = attachmentPane.getChildren();
 		children.clear();
