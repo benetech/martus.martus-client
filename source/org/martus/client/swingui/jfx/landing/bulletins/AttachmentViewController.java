@@ -193,8 +193,16 @@ public class AttachmentViewController extends FxController
 	public byte[] readEntireContents(URL mapRequestUrl) throws IOException
 	{
 		HttpsURLConnection huc = createHttpsConnection(mapRequestUrl);
-		byte[] imageBytes = readEntireContents(huc);
-		return imageBytes;
+		InputStream in = huc.getInputStream();
+		try
+		{
+			byte[] imageBytes = readEntireContents(in);
+			return imageBytes;
+		}
+		finally
+		{
+			in.close();
+		}
 	}
 
 	public ImageView createImageViewFromStream(InputStream imageInputStream) throws IOException
@@ -211,19 +219,6 @@ public class AttachmentViewController extends FxController
 		HttpsURLConnection huc = (HttpsURLConnection) connection;
 		huc.setSSLSocketFactory((SSLSocketFactory) SSLSocketFactory.getDefault());
 		return huc;
-	}
-
-	public byte[] readEntireContents(URLConnection huc) throws IOException
-	{
-		InputStream in = huc.getInputStream();
-		try
-		{
-			return readEntireContents(in);
-		}
-		finally
-		{
-			in.close();
-		}
 	}
 
 	public byte[] readEntireContents(InputStream in) throws IOException
