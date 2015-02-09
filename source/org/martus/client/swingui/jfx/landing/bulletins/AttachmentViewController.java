@@ -190,11 +190,17 @@ public class AttachmentViewController extends FxController
 
 	public ImageView createImageView(byte[] imageBytes) throws IOException
 	{
+		Image image = createImage(imageBytes);
+		ImageView imageView = new ImageView(image);
+		return imageView;
+	}
+
+	public Image createImage(byte[] imageBytes) throws IOException
+	{
 		InputStream imageInputStream = new ByteArrayInputStream(imageBytes);
 		Image image = new Image(imageInputStream);
 		imageInputStream.close();
-		ImageView imageView = new ImageView(image);
-		return imageView;
+		return image;
 	}
 
 	public byte[] readEntireContents(URL mapRequestUrl) throws IOException
