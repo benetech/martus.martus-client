@@ -220,13 +220,13 @@ public class AttachmentViewController extends FxController
 					break;
 				baos.write(b);
 			}
+			baos.close();
+			return baos.toByteArray();
 		}
 		finally
 		{
 			in.close();
 		}
-		baos.close();
-		return baos.toByteArray();
 	}
 	
 	private URL createMapRequestUrl() throws Exception
