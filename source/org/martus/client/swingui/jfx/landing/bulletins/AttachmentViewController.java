@@ -119,14 +119,14 @@ public class AttachmentViewController extends FxController
 		{
 			WebEngine engine = webView.getEngine();
 			engine.load(attachmentFileToView.toURI().toString());
-			showImageNode(webView);
+			showNode(webView);
 		}
 		
 		GeoTag tag = readGeoTag();
 		showMapButton.setVisible(tag.hasData());
 	}
 
-	private void showImageNode(Node nodeToShow)
+	private void showNode(Node nodeToShow)
 	{
 		ObservableList<Node> children = attachmentPane.getChildren();
 		children.clear();
@@ -185,7 +185,7 @@ public class AttachmentViewController extends FxController
 			thread.start();
 			
 			showMapButton.setVisible(false);
-			showImageNode(imageView);
+			showNode(imageView);
 		} 
 		catch (Exception e)
 		{
