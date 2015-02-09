@@ -35,7 +35,9 @@ import java.net.URLConnection;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -124,7 +126,9 @@ public class AttachmentViewController extends FxController
 
 	public void showImageNode(WebView nodeToShow)
 	{
-		attachmentPane.getChildren().add(nodeToShow);
+		ObservableList<Node> children = attachmentPane.getChildren();
+		children.clear();
+		children.add(nodeToShow);
 	}
 
 	private GeoTag readGeoTag() throws Exception
