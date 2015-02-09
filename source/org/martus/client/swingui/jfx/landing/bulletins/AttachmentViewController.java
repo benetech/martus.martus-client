@@ -115,11 +115,16 @@ public class AttachmentViewController extends FxController
 				attachmentFileType == FileType.Image)
 		{
 			WebView nodeToShow = getWebView();
-			attachmentPane.getChildren().add(nodeToShow);
+			showImageNode(nodeToShow);
 		}
 		
 		GeoTag tag = readGeoTag();
 		showMapButton.setVisible(tag.hasData());
+	}
+
+	public void showImageNode(WebView nodeToShow)
+	{
+		attachmentPane.getChildren().add(nodeToShow);
 	}
 
 	private GeoTag readGeoTag() throws Exception
