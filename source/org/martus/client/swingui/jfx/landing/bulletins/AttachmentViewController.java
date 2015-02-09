@@ -176,7 +176,8 @@ public class AttachmentViewController extends FxController
 			byte[] imageBytes = readEntireContents(mapRequestUrl);
 			MartusLogger.log("Image size: " + imageBytes.length);
 			Image image = createImage(imageBytes);
-			ImageView imageView = new ImageView(image);
+			ImageView imageView = new ImageView();
+			imageView.setImage(image);
 			
 			showMapButton.setVisible(false);
 			attachmentPane.getChildren().clear();
