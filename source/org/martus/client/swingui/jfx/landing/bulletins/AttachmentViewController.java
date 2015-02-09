@@ -119,8 +119,7 @@ public class AttachmentViewController extends FxController
 		{
 			WebEngine engine = webView.getEngine();
 			engine.load(attachmentFileToView.toURI().toString());
-			WebView nodeToShow = webView;
-			showImageNode(nodeToShow);
+			showImageNode(webView);
 		}
 		
 		GeoTag tag = readGeoTag();
