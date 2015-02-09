@@ -210,9 +210,9 @@ public class AttachmentViewController extends FxController
 	public byte[] readEntireContents(URLConnection huc) throws IOException
 	{
 		InputStream in = huc.getInputStream();
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		try
 		{
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			while(true)
 			{
 				int b = in.read();
