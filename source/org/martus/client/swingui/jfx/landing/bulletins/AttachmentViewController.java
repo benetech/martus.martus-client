@@ -212,21 +212,26 @@ public class AttachmentViewController extends FxController
 		InputStream in = huc.getInputStream();
 		try
 		{
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			while(true)
-			{
-				int b = in.read();
-				if(b < 0)
-					break;
-				baos.write(b);
-			}
-			baos.close();
-			return baos.toByteArray();
+			return readEntireContents(in);
 		}
 		finally
 		{
 			in.close();
 		}
+	}
+
+	public byte[] readEntireContents(InputStream in) throws IOException
+	{
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		while(true)
+		{
+			int b = in.read();
+			if(b < 0)
+				break;
+			baos.write(b);
+		}
+		baos.close();
+		return baos.toByteArray();
 	}
 	
 	private URL createMapRequestUrl() throws Exception
