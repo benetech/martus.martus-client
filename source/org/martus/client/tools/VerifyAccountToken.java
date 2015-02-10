@@ -34,6 +34,7 @@ import org.martus.client.swingui.Martus;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcWithUnverifiedServer;
+import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
@@ -71,7 +72,16 @@ public class VerifyAccountToken
 		System.out.println();
 		System.out.flush();
 
-		initializeNetworkConnection();
+		try
+		{
+			initializeNetworkConnection();
+		}
+		catch(Exception e)
+		{
+			MartusLogger.log("Exception contacting server");
+			MartusLogger.logException(e);
+			System.exit(1);
+		}
 		
 		NetworkResponse response = gateway.getMartusAccountAccessToken(getSecurity());
 		String result = response.getResultCode();
