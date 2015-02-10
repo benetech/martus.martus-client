@@ -210,6 +210,12 @@ abstract public class FxController implements Initializable
 		}
 	}
 	
+	public void showDialogWithNoButtons(String titleTag, FxController contentController)
+	{
+		DialogShellController dialogShellController = new DialogWithNoButtonsShellController(getMainWindow(), contentController, titleTag);
+		doAction(dialogShellController);
+	}
+	
 	public void showDialogWithClose(String titleTag, FxController contentController)
 	{
 		DialogWithCloseShellController dialogShellController = new DialogWithCloseShellController(getMainWindow(), contentController, titleTag);
