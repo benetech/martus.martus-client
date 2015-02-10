@@ -82,8 +82,8 @@ public class AttachmentViewController extends FxController
 	@Override
 	protected Dimension getPreferredDimension()
 	{
-		// NOTE: This is asking for the preferred total dimension of the dialog, 
-		// not just the dimension of this controller's panel
+		// NOTE: This might be asking for the preferred total dimension 
+		// of the dialog, not the dimension of this controller's panel
 		int imageWidth = (int) attachmentImage.getWidth();
 		int imageHeight = (int) attachmentImage.getHeight();
 		if(attachmentGeoTag.hasData())
