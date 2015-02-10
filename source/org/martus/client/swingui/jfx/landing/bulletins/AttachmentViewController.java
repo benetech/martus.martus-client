@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.bulletins;
 
+import java.awt.Dimension;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -38,14 +39,14 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
+import javafx.stage.Screen;
 
 import javax.activation.MimetypesFileTypeMap;
 import javax.net.ssl.HttpsURLConnection;
@@ -68,11 +69,44 @@ public class AttachmentViewController extends FxController
 		{
 			attachmentFileToView = attachmentFile;
 			attachmentFileType = determineFileType(attachmentFileToView);
+			loadAttachment();
 		} 
 		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 		} 
+	}
+	
+	@Override
+	protected Dimension getPreferredDimension()
+	{
+		// NOTE: This is asking for the preferred total dimension of the dialog, 
+		// not just the dimension of this controller's panel
+		int imageWidth = (int) attachmentImage.getWidth();
+		int imageHeight = (int) attachmentImage.getHeight();
+		if(attachmentGeoTag.hasData())
+		{
+			imageWidth = Integer.max(imageWidth, MAP_WIDTH);
+			imageHeight = Integer.max(imageHeight, MAP_HEIGHT);
+		}
+		
+		// FIXME: Instead of fudging here, we should find a way to ask 
+		// what the actual dialog size will be...and better yet, change 
+		// our dialog launcher to ask what size the contents want to be, 
+		// rather than asking the contents how big the dialog should be
+		int dialogWidth = imageWidth + 100;
+		int dialogHeight = imageHeight + 100;
+		
+		Screen screen = Screen.getPrimary();
+		Rectangle2D screenBounds = screen.getVisualBounds();
+		double screenWidth = screenBounds.getWidth();
+		double screenHeight = screenBounds.getHeight();
+		int availableWidth = (int)(screenWidth * 0.9);
+		int availableHeight = (int)(screenHeight * 0.9);
+		
+		dialogWidth = Integer.min(dialogWidth, availableWidth);
+		dialogHeight = Integer.min(dialogHeight, availableHeight);
+		return new Dimension(dialogWidth, dialogHeight);
 	}
 
 	@Override
@@ -81,7 +115,6 @@ public class AttachmentViewController extends FxController
 		super.initialize(location, bundle);
 		try
 		{
-			loadAttachment();
 			displayAttachment();
 		} 
 		catch (Exception e)
@@ -305,7 +338,7 @@ public class AttachmentViewController extends FxController
 		GeoTag tag = readGeoTag();
 		String baseUrl = "https://maps.googleapis.com/maps/api/staticmap";
 		String marker = "markers=%7C" + tag.getLatitude() + "," + tag.getLongitude();
-		String size = "size=640x640";
+		String size = "size=" + MAP_WIDTH + "x" + MAP_HEIGHT;
 		String zoom = "zoom=" + zoomFactor;
 		return new URL(baseUrl + "?" + 	marker + "&" + size + "&" + zoom);
 	}
@@ -315,6 +348,9 @@ public class AttachmentViewController extends FxController
 		FileType fileType = determineFileType(attachmentFileToView);
 		return canViewInProgram(fileType);
 	}
+	
+	private static int MAP_WIDTH = 640;
+	private static int MAP_HEIGHT = 640;
 
 	public static enum FileType{Unsupported, Image};
 	
