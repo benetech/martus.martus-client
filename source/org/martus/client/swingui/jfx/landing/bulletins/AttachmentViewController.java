@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -80,7 +81,6 @@ public class AttachmentViewController extends FxController
 		super.initialize(location, bundle);
 		try
 		{
-			webView = new WebView();
 			loadAttachment();
 			displayAttachment();
 		} 
@@ -118,14 +118,23 @@ public class AttachmentViewController extends FxController
 		
 		attachmentGeoTag = readGeoTag();
 
-		WebEngine engine = webView.getEngine();
-		engine.load(attachmentFileToView.toURI().toString());
+		FileInputStream in = new FileInputStream(attachmentFileToView);
+		try
+		{
+			attachmentImage = new Image(in);
+		}
+		finally
+		{
+			in.close();
+		}
 	}
 
 	private void displayAttachment()
 	{
 		Platform.runLater(() -> {
-			showNode(webView);
+			ImageView imageView = new ImageView();
+			imageView.setImage(attachmentImage);
+			showNode(imageView);
 			showMapButton.setVisible(attachmentGeoTag.hasData()); 
 			showImageButton.setVisible(false); 
 		});
@@ -317,9 +326,9 @@ public class AttachmentViewController extends FxController
 
 	@FXML
 	private Button showImageButton;
-	
-	private WebView webView;
+
 	private File attachmentFileToView;
 	private FileType attachmentFileType;
+	private Image attachmentImage;
 	private GeoTag attachmentGeoTag;
 }
