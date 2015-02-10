@@ -3,16 +3,23 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
 
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
-	<center>
-	    <StackPane fx:id="attachmentPane" />
-	</center>
-	<top>
-	    <StackPane>
+<StackPane fx:id="containerPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
+	<StackPane fx:id="attachmentPane">
+		<VBox>
 		    <Button fx:id="showMapButton" onAction="#onShowMap" mnemonicParsing="false" text="%Button.ShowMap"  />
+		    <ImageView fx:id="attachmentImageView" />
+		</VBox>
+	</StackPane>
+	<StackPane fx:id="workingPane">
+		<Label text="%BackgroundWorking" />
+	</StackPane>
+	<StackPane fx:id="mapPane">
+		<VBox>
 		    <Button fx:id="showImageButton" onAction="#onShowImage" mnemonicParsing="false" text="%Button.ShowImage" />
-		</StackPane>
-	</top>
-</BorderPane>
+		    <ImageView fx:id="mapImageView" />
+		</VBox>
+	</StackPane>
+</StackPane>
