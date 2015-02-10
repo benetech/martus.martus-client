@@ -226,10 +226,7 @@ public class AttachmentViewController extends FxController
 	{
 		try
 		{
-			Image image = createImage(imageBytes);
-			ImageView imageView = new ImageView();
-			imageView.setImage(image);
-			showNode(imageView);
+			showImage(imageBytes);
 			showMapButton.setVisible(false);
 			showImageButton.setVisible(true); 
 		} 
@@ -238,6 +235,14 @@ public class AttachmentViewController extends FxController
 			logAndNotifyUnexpectedError(e);
 			displayAttachment();
 		}
+	}
+
+	public void showImage(byte[] imageBytes) throws IOException
+	{
+		Image image = createImage(imageBytes);
+		ImageView imageView = new ImageView();
+		imageView.setImage(image);
+		showNode(imageView);
 	}
 
 	private Image createImage(byte[] imageBytes) throws IOException
