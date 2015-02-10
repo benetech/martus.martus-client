@@ -82,7 +82,7 @@ public class AttachmentViewController extends FxController
 		{
 			webView = new WebView();
 			loadAttachment();
-			showNode(webView);
+			displayAttachment();
 		} 
 		catch (Exception e)
 		{
@@ -126,6 +126,11 @@ public class AttachmentViewController extends FxController
 			engine.load(attachmentFileToView.toURI().toString());
 		}
 		
+	}
+
+	private void displayAttachment()
+	{
+		showNode(webView);
 	}
 
 	private void showNode(Node nodeToShow)
