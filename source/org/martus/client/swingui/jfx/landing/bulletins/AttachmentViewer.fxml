@@ -5,10 +5,14 @@
 <?import javafx.scene.layout.*?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
-    <StackPane fx:id="attachmentPane" />
-    <StackPane>
-	    <Button fx:id="showMapButton" onAction="#onShowMap" mnemonicParsing="false" text="%Button.ShowMap"  />
-	    <Button fx:id="showImageButton" onAction="#onShowImage" mnemonicParsing="false" text="%Button.ShowImage" />
-	</StackPane>
-</VBox>
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
+	<center>
+	    <StackPane fx:id="attachmentPane" />
+	</center>
+	<top>
+	    <StackPane>
+		    <Button fx:id="showMapButton" onAction="#onShowMap" mnemonicParsing="false" text="%Button.ShowMap"  />
+		    <Button fx:id="showImageButton" onAction="#onShowImage" mnemonicParsing="false" text="%Button.ShowImage" />
+		</StackPane>
+	</top>
+</BorderPane>
