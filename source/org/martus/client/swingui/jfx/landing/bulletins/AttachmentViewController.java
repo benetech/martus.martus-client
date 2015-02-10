@@ -103,28 +103,23 @@ public class AttachmentViewController extends FxController
 	public static FileType determineFileType(File file) throws IOException
 	{
 		MimetypesFileTypeMap mimeTypeMap = new MimetypesFileTypeMap();
-		mimeTypeMap.addMimeTypes("html htm html");
 		mimeTypeMap.addMimeTypes("image png tif jpg jpeg bmp");
 		String mimetype = mimeTypeMap.getContentType(file);
         String type = mimetype.split("/")[0].toLowerCase();
         if(type.equals("image"))
 			return FileType.Image;
-//        else if(type.equals("html")) //TODO: Add back once we are confident we can view HTML securly inside Martus
-//   			return FileType.HTML;        
 		return FileType.Unsupported;
 	}
 
 	private void loadAttachment() throws Exception
 	{
-		if(attachmentFileType == FileType.HTML || 
-				attachmentFileType == FileType.Image)
-		{
-			attachmentGeoTag = readGeoTag();
-
-			WebEngine engine = webView.getEngine();
-			engine.load(attachmentFileToView.toURI().toString());
-		}
+		if(attachmentFileType != FileType.Image)
+			throw new Exception("Attempted to view attachment of unsupported type");
 		
+		attachmentGeoTag = readGeoTag();
+
+		WebEngine engine = webView.getEngine();
+		engine.load(attachmentFileToView.toURI().toString());
 	}
 
 	private void displayAttachment()
@@ -307,7 +302,7 @@ public class AttachmentViewController extends FxController
 		return canViewInProgram(fileType);
 	}
 
-	public static enum FileType{Unsupported, Image, HTML};
+	public static enum FileType{Unsupported, Image};
 	
 	@FXML
 	private StackPane attachmentPane;
