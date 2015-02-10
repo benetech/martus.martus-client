@@ -119,8 +119,7 @@ public class AttachmentViewController extends FxController
 		if(attachmentFileType == FileType.HTML || 
 				attachmentFileType == FileType.Image)
 		{
-			GeoTag tag = readGeoTag();
-			showMapButton.setVisible(tag.hasData());
+			attachmentGeoTag = readGeoTag();
 
 			WebEngine engine = webView.getEngine();
 			engine.load(attachmentFileToView.toURI().toString());
@@ -130,7 +129,10 @@ public class AttachmentViewController extends FxController
 
 	private void displayAttachment()
 	{
-		Platform.runLater(() -> showNode(webView));
+		Platform.runLater(() -> {
+			showNode(webView);
+			showMapButton.setVisible(attachmentGeoTag.hasData()); 
+		});
 	}
 
 	private void showNode(Node nodeToShow)
@@ -308,4 +310,5 @@ public class AttachmentViewController extends FxController
 	private WebView webView;
 	private File attachmentFileToView;
 	private FileType attachmentFileType;
+	private GeoTag attachmentGeoTag;
 }
