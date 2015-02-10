@@ -70,7 +70,8 @@ public class AttachmentViewController extends FxController
 		{
 			attachmentFileToView = attachmentFile;
 			attachmentFileType = determineFileType(attachmentFileToView);
-			loadAttachment();
+			if(canViewInProgram())
+				loadAttachment();
 		} 
 		catch (Exception e)
 		{
@@ -150,9 +151,6 @@ public class AttachmentViewController extends FxController
 
 	private void loadAttachment() throws Exception
 	{
-		if(attachmentFileType != FileType.Image)
-			throw new Exception("Attempted to view attachment of unsupported type");
-		
 		attachmentGeoTag = readGeoTag();
 
 		FileInputStream in = new FileInputStream(attachmentFileToView);
