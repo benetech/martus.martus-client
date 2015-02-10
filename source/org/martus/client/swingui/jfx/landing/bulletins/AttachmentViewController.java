@@ -37,11 +37,13 @@ import java.net.URLConnection;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -114,6 +116,9 @@ public class AttachmentViewController extends FxController
 		super.initialize(location, bundle);
 		try
 		{
+			SimpleBooleanProperty suppressWarningProperty = PopupConfirmationWithHideForSessionController.obtainProperty(confirmationTag);
+			doNotShowAgainCheckBox.selectedProperty().bindBidirectional(suppressWarningProperty);
+			cancelButton.disableProperty().bind(suppressWarningProperty);
 			displayAttachment();
 		} 
 		catch (Exception e)
@@ -213,15 +218,38 @@ public class AttachmentViewController extends FxController
 	{
 		try
 		{
-			if(getApp().getTransport().isTorEnabled())
-			{
-				String dialogTag = "confirmShowOnMapBypassesTor";
-				PopupConfirmationWithHideForSessionController controller = new PopupConfirmationWithHideForSessionController(getMainWindow(), dialogTag);
-				if(!controller.shouldBeHidden())
-					if(!showConfirmationDialog(dialogTag, controller))
-						return;
-			}
+			if(needToConfirmBypassingTor())
+				showNode(torConfirmationPane);
+			else
+				onConfirmShowMap();
 
+		} 
+		catch (Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+			displayAttachment();
+		}
+	}
+
+	public boolean needToConfirmBypassingTor()
+	{
+		if(doNotShowAgainCheckBox.selectedProperty().getValue())
+			return false;
+
+		return getApp().getTransport().isTorEnabled();
+	}
+	
+	@FXML
+	private void onShowImage()
+	{
+		displayAttachment();
+	}
+	
+	@FXML
+	private void onConfirmShowMap()
+	{
+		try
+		{
 			URL mapRequestUrl = createMapRequestUrl();
 			Thread thread = new Thread(() -> downloadAndDisplayImage(mapRequestUrl));
 			thread.setDaemon(true);
@@ -234,12 +262,6 @@ public class AttachmentViewController extends FxController
 			logAndNotifyUnexpectedError(e);
 			displayAttachment();
 		}
-	}
-	
-	@FXML
-	private void onShowImage()
-	{
-		displayAttachment();
 	}
 
 	private void downloadAndDisplayImage(URL mapRequestUrl)
@@ -336,8 +358,9 @@ public class AttachmentViewController extends FxController
 		return canViewInProgram(fileType);
 	}
 	
-	private static int MAP_WIDTH = 640;
-	private static int MAP_HEIGHT = 640;
+	private static final String confirmationTag = "confirmShowOnMapBypassesTor";
+	private static final int MAP_WIDTH = 640;
+	private static final int MAP_HEIGHT = 640;
 
 	public static enum FileType{Unsupported, Image};
 
@@ -346,13 +369,16 @@ public class AttachmentViewController extends FxController
 	
 	@FXML
 	private StackPane attachmentPane;
-
+	
 	@FXML
-	private StackPane mapPane;
+	private StackPane torConfirmationPane;
 
 	@FXML
 	private StackPane workingPane;
 	
+	@FXML
+	private StackPane mapPane;
+
 	@FXML
 	private ImageView attachmentImageView;
 	
@@ -361,6 +387,12 @@ public class AttachmentViewController extends FxController
 	
 	@FXML
 	private Button showMapButton;
+	
+	@FXML
+	private CheckBox doNotShowAgainCheckBox;
+	
+	@FXML
+	private Button cancelButton;
 
 	private File attachmentFileToView;
 	private FileType attachmentFileType;
