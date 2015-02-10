@@ -42,7 +42,6 @@ import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -165,19 +164,17 @@ public class AttachmentViewController extends FxController
 	private void displayAttachment()
 	{
 		Platform.runLater(() -> {
-			ImageView imageView = new ImageView();
-			imageView.setImage(attachmentImage);
-			showNode(imageView);
+			attachmentImageView.setImage(attachmentImage);
+			showNode(attachmentPane);
 			showMapButton.setVisible(attachmentGeoTag.hasData()); 
-			showImageButton.setVisible(false); 
 		});
 	}
 
 	private void showNode(Node nodeToShow)
 	{
-		ObservableList<Node> children = attachmentPane.getChildren();
-		children.clear();
-		children.add(nodeToShow);
+		ObservableList<Node> children = containerPane.getChildren();
+		children.forEach((child) -> child.setVisible(false));
+		nodeToShow.setVisible(true);
 	}
 
 	private GeoTag readGeoTag() throws Exception
@@ -230,9 +227,7 @@ public class AttachmentViewController extends FxController
 			thread.setDaemon(true);
 			thread.start();
 			
-			Node working = new Label(getLocalization().getFieldLabel("BackgroundWorking"));
-			showMapButton.setVisible(false);
-			showNode(working);
+			showNode(workingPane);
 		} 
 		catch (Exception e)
 		{
@@ -268,23 +263,15 @@ public class AttachmentViewController extends FxController
 	{
 		try
 		{
-			showImage(imageBytes);
-			showMapButton.setVisible(false);
-			showImageButton.setVisible(true); 
+			Image image = createImage(imageBytes);
+			mapImageView.setImage(image);
+			showNode(mapPane);
 		} 
 		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 			displayAttachment();
 		}
-	}
-
-	public void showImage(byte[] imageBytes) throws IOException
-	{
-		Image image = createImage(imageBytes);
-		ImageView imageView = new ImageView();
-		imageView.setImage(image);
-		showNode(imageView);
 	}
 
 	private Image createImage(byte[] imageBytes) throws IOException
@@ -353,15 +340,27 @@ public class AttachmentViewController extends FxController
 	private static int MAP_HEIGHT = 640;
 
 	public static enum FileType{Unsupported, Image};
+
+	@FXML
+	private StackPane containerPane;
 	
 	@FXML
 	private StackPane attachmentPane;
 
 	@FXML
-	private Button showMapButton;
+	private StackPane mapPane;
 
 	@FXML
-	private Button showImageButton;
+	private StackPane workingPane;
+	
+	@FXML
+	private ImageView attachmentImageView;
+	
+	@FXML
+	private ImageView mapImageView;
+	
+	@FXML
+	private Button showMapButton;
 
 	private File attachmentFileToView;
 	private FileType attachmentFileType;
