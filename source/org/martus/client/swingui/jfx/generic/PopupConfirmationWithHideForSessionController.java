@@ -42,15 +42,22 @@ public class PopupConfirmationWithHideForSessionController extends SimpleTextCon
 	{
 		super(mainWindowToUse, confirmationTag);
 		
+		shouldBeHidden = obtainProperty(confirmationTag);
+	}
+	
+	public static SimpleBooleanProperty obtainProperty(String confirmationTag)
+	{
 		if(hiddenStatuses ==  null)
 			hiddenStatuses = new HashMap<String, SimpleBooleanProperty>();
-		
-		shouldBeHidden = hiddenStatuses.get(confirmationTag);
-		if(shouldBeHidden == null)
+
+		SimpleBooleanProperty property = hiddenStatuses.get(confirmationTag);
+		if(property == null)
 		{
-			shouldBeHidden = new SimpleBooleanProperty();
-			hiddenStatuses.put(confirmationTag, shouldBeHidden);
+			property = new SimpleBooleanProperty();
+			hiddenStatuses.put(confirmationTag, property);
 		}
+		
+		return property;
 	}
 	
 	public boolean shouldBeHidden()
