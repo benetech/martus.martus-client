@@ -201,7 +201,7 @@ public class BulletinAttachmentsController extends FxController
 		if(!attachmentViewer.canViewInProgram())
 			return false;
 		
-		showDialogWithClose("ViewAttachment", attachmentViewer);
+		showDialogWithNoButtons("ViewAttachment", attachmentViewer);
 		return true;
 	}
 
