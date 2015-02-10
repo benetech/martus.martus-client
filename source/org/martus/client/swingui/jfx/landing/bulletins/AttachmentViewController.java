@@ -130,7 +130,7 @@ public class AttachmentViewController extends FxController
 
 	private void displayAttachment()
 	{
-		showNode(webView);
+		Platform.runLater(() -> showNode(webView));
 	}
 
 	private void showNode(Node nodeToShow)
@@ -197,6 +197,7 @@ public class AttachmentViewController extends FxController
 		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
+			displayAttachment();
 		}
 	}
 
@@ -213,6 +214,7 @@ public class AttachmentViewController extends FxController
 		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
+			displayAttachment();
 		}
 	}
 
@@ -229,6 +231,7 @@ public class AttachmentViewController extends FxController
 		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
+			displayAttachment();
 		}
 	}
 
