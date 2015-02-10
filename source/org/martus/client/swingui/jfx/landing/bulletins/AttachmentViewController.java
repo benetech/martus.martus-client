@@ -96,6 +96,11 @@ public class AttachmentViewController extends FxController
 		// what the actual dialog size will be...and better yet, change 
 		// our dialog launcher to ask what size the contents want to be, 
 		// rather than asking the contents how big the dialog should be
+		
+		// NOTE: I think when we drop Swing, we will be able to have dialogs 
+		// automatically size themseives to accommodate their contents. The 
+		// problem now is that the swing dialog needs to know the size before 
+		// the fx thread has had a chance to initialize the contents.
 		int dialogWidth = imageWidth + 100;
 		int dialogHeight = imageHeight + 100;
 		
