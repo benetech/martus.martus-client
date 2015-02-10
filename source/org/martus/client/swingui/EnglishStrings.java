@@ -258,7 +258,8 @@ public class EnglishStrings
 "field:notifySyncDisabledDueToErrorcause=Automatic syncing has been disabled due to an unexpected error",
 
 "wintitle:confirmShowOnMapBypassesTor=Show On Map",
-"field:confirmShowOnMapBypassesTor=Tor is enabled, but requesting a map will bypass it.\n\nIf you continue, anyone monitoring you could see your map request.",
+"field:confirmShowOnMapBypassesTorcause=Tor is enabled, but requesting a map will bypass it.",
+"field:confirmShowOnMapBypassesToreffect=If you continue, anyone monitoring you could see your map request.",
 
 "wintitle:inputservermagicword=Request Upload Permission",
 "wintitle:inputCustomFields=Customize Fields",

@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 
 
 <StackPane fx:id="containerPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
@@ -20,6 +21,17 @@
 		<VBox>
 		    <Button fx:id="showImageButton" onAction="#onShowImage" mnemonicParsing="false" text="%Button.ShowImage" />
 		    <ImageView fx:id="mapImageView" />
+		</VBox>
+	</StackPane>
+	<StackPane fx:id="torConfirmationPane">
+		<VBox>
+			<Label text="%confirmShowOnMapBypassesTorcause" />
+			<Label text="%confirmShowOnMapBypassesToreffect" />
+			<CheckBox fx:id="doNotShowAgainCheckBox" text="%DoNotShowAgainThisSession" />
+			<HBox>
+			    <Button fx:id="okButton" onAction="#onConfirmShowMap" mnemonicParsing="false" text="%Button.ShowMap" />
+			    <Button fx:id="cancelButton" onAction="#onShowImage" mnemonicParsing="false" text="%Button.ShowImage" />
+			</HBox>
 		</VBox>
 	</StackPane>
 </StackPane>
