@@ -142,7 +142,7 @@ public class AttachmentViewController extends FxController
 	{
 		MimetypesFileTypeMap mimeTypeMap = new MimetypesFileTypeMap();
 		mimeTypeMap.addMimeTypes("image png tif jpg jpeg bmp");
-		String mimetype = mimeTypeMap.getContentType(file);
+		String mimetype = mimeTypeMap.getContentType(file.getName().toLowerCase());
         String type = mimetype.split("/")[0].toLowerCase();
         if(type.equals("image"))
 			return FileType.Image;
