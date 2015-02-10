@@ -31,7 +31,12 @@ public class DialogWithNoButtonsShellController extends DialogShellController
 {
 	public DialogWithNoButtonsShellController(UiMainWindow mainWindowToUse, FxController contentController)
 	{
-		super(mainWindowToUse, contentController);
+		this(mainWindowToUse, contentController, "");
+	}
+
+	public DialogWithNoButtonsShellController(UiMainWindow mainWindowToUse, FxController contentController, String titleTag)
+	{
+		super(mainWindowToUse, contentController, titleTag);
 	}
 
 	@Override
