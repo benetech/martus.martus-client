@@ -132,6 +132,7 @@ public class AttachmentViewController extends FxController
 		Platform.runLater(() -> {
 			showNode(webView);
 			showMapButton.setVisible(attachmentGeoTag.hasData()); 
+			showImageButton.setVisible(false); 
 		});
 	}
 
@@ -202,6 +203,12 @@ public class AttachmentViewController extends FxController
 			displayAttachment();
 		}
 	}
+	
+	@FXML
+	private void onShowImage()
+	{
+		displayAttachment();
+	}
 
 	private void downloadAndDisplayImage(URL mapRequestUrl)
 	{
@@ -229,6 +236,7 @@ public class AttachmentViewController extends FxController
 			imageView.setImage(image);
 			showNode(imageView);
 			showMapButton.setVisible(false);
+			showImageButton.setVisible(true); 
 		} 
 		catch (Exception e)
 		{
@@ -307,6 +315,9 @@ public class AttachmentViewController extends FxController
 	@FXML
 	private Button showMapButton;
 
+	@FXML
+	private Button showImageButton;
+	
 	private WebView webView;
 	private File attachmentFileToView;
 	private FileType attachmentFileType;

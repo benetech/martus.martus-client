@@ -393,6 +393,7 @@ public class EnglishStrings
 "button:send=Share",
 "button:savedraft=Save",
 "button:ShowMap=Show on Map",
+"button:ShowImage=Return to image",
 
 "button:saveBulletin=Save",
 "button:versionBulletin=Version",

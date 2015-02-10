@@ -7,5 +7,8 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
     <StackPane fx:id="attachmentPane" />
-    <Button fx:id="showMapButton" onAction="#onShowMap" mnemonicParsing="false" text="%Button.ShowMap"  />
+    <StackPane>
+	    <Button fx:id="showMapButton" onAction="#onShowMap" mnemonicParsing="false" text="%Button.ShowMap"  />
+	    <Button fx:id="showImageButton" onAction="#onShowImage" mnemonicParsing="false" text="%Button.ShowImage" />
+	</StackPane>
 </VBox>
