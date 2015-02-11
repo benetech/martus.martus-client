@@ -254,6 +254,9 @@ public class EnglishStrings
 "wintitle:notifyErrorNetworkOffline=Network Offline",
 "field:notifyErrorNetworkOfflinecause=Martus is currently in offline mode.",
 
+"wintitle:notifyErrorServerConnection=Server error",
+"field:notifyErrorServerConnectioncause=The request was unsuccessful, due to a network error.",
+
 "wintitle:notifySyncDisabledDueToError=Error",
 "field:notifySyncDisabledDueToErrorcause=Automatic syncing has been disabled due to an unexpected error",
 
