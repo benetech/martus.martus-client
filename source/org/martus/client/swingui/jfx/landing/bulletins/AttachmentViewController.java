@@ -276,12 +276,18 @@ public class AttachmentViewController extends FxController
 			
 			MartusLogger.log("Image size: " + imageBytes.length);
 			Platform.runLater(() -> showMap(imageBytes));
+			return;
 		} 
+		catch(IOException e)
+		{
+			Platform.runLater(() -> showNotifyDialog("ErrorServerConnection"));
+		}
 		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
-			displayAttachment();
 		}
+
+		displayAttachment();
 	}
 
 	public void showMap(byte[] imageBytes)
