@@ -174,8 +174,12 @@ public class AttachmentViewController extends FxController
 		Platform.runLater(() -> {
 			attachmentImageView.setImage(attachmentImage);
 			showNode(attachmentPane);
+
 			boolean hasGeoTagData = attachmentGeoTag.hasData();
-			showMapButton.setVisible(hasGeoTagData); 
+			showMapButton.setVisible(hasGeoTagData);
+			
+			boolean isOnline = getApp().getTransport().isOnline();
+			showMapButton.setDisable(!isOnline);
 		});
 	}
 
