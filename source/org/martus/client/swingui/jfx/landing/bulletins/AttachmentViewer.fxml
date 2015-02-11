@@ -15,7 +15,10 @@
 		</VBox>
 	</StackPane>
 	<StackPane fx:id="workingPane">
-		<Label text="%BackgroundWorking" />
+		<VBox>
+			<Button onAction="#onShowImage" mnemonicParsing="false" text="%Button.ShowImage" />
+			<Label text="%BackgroundWorking" />
+		</VBox>
 	</StackPane>
 	<StackPane fx:id="mapPane">
 		<VBox>
