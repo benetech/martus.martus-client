@@ -174,7 +174,8 @@ public class AttachmentViewController extends FxController
 		Platform.runLater(() -> {
 			attachmentImageView.setImage(attachmentImage);
 			showNode(attachmentPane);
-			showMapButton.setVisible(attachmentGeoTag.hasData()); 
+			boolean hasGeoTagData = attachmentGeoTag.hasData();
+			showMapButton.setVisible(hasGeoTagData); 
 		});
 	}
 
