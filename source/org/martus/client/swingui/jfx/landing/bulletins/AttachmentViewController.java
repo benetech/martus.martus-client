@@ -347,7 +347,7 @@ public class AttachmentViewController extends FxController
 	private URL createMapRequestUrl() throws Exception
 	{
 		int zoomFactor = 14;
-		GeoTag tag = readGeoTag();
+		GeoTag tag = attachmentGeoTag;
 		String baseUrl = "https://maps.googleapis.com/maps/api/staticmap";
 		String marker = "markers=%7C" + tag.getLatitude() + "," + tag.getLongitude();
 		String size = "size=" + MAP_WIDTH + "x" + MAP_HEIGHT;
