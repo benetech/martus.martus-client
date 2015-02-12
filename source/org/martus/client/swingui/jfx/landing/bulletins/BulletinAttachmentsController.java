@@ -34,6 +34,7 @@ import java.util.ResourceBundle;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -87,7 +88,8 @@ public class BulletinAttachmentsController extends FxController
 	
 	private void initalizeItemsTable()
 	{
-		attachmentsTable.setItems(bulletin.getAttachments());
+		ObservableList<AttachmentTableRowData> attachments = bulletin.getAttachments();
+		attachmentsTable.setItems(attachments);
 		attachmentsTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 		BooleanBinding nonEmptyTableBinding = Bindings.isNotEmpty(attachmentsTable.getItems());
