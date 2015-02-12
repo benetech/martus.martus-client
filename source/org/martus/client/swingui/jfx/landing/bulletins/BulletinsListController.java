@@ -188,6 +188,11 @@ public class BulletinsListController extends AbstractFxLandingContentController 
 	{
 		return bulletinTableProvider.getAllFolderBeingDisplayedBooleanProperty().not();
 	}
+	
+	public Boolean isSearchResultsBeingDisplayed()
+	{
+		return bulletinTableProvider.getSearchResultsFolderBeingDisplayedBooleanProperty().getValue();
+	}
 
 	public void loadAllBulletinsAndSortByMostRecent()
 	{
@@ -292,12 +297,17 @@ public class BulletinsListController extends AbstractFxLandingContentController 
 		public void run()
 		{
 			Set foundUids = new HashSet(Arrays.asList(results.getUniversalIds()));
-			loadBulletinData(foundUids);
+			showSearchResults(foundUids);
 		}
 		
 		private SortableBulletinList results;
 	}
 	
+	public void showSearchResults(Set bulletinUids)
+	{
+		loadBulletinData(bulletinUids);
+		bulletinTableProvider.showingSearchResults();
+	}
 
 	public void loadBulletinData(Set bulletinUids)
 	{
@@ -525,6 +535,8 @@ public class BulletinsListController extends AbstractFxLandingContentController 
 		try
 		{
 			BulletinFolder currentFolder = bulletinTableProvider.getFolder();
+			if(isSearchResultsBeingDisplayed())
+				currentFolder = FxCaseManagementController.SEARCH_FOLDER;
 			CaseListProvider casesAvailableToMoveItemsTo = getAvailableCasesForMove();
 			MoveItemsToCasesConfirmationController moveItemsController = new MoveItemsToCasesConfirmationController(getMainWindow(), casesAvailableToMoveItemsTo, currentFolder);
 			if(showModalYesNoDialog("MoveRecords", "move", EnglishCommonStrings.CANCEL, moveItemsController))

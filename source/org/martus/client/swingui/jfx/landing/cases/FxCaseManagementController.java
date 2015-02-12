@@ -533,6 +533,8 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 	}
 
 	public static final BulletinFolder ALL_FOLDER = null;
+	public static final BulletinFolder SEARCH_FOLDER = null;
+
 	private static final String ALL_FOLDER_NAME = null;
 	public static final String LOCATION_CASE_MANAGEMENT_FXML = "landing/cases/CaseManagement.fxml";
 	private final int INVALID_INDEX = -1;

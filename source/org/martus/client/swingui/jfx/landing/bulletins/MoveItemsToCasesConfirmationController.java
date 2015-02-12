@@ -68,7 +68,8 @@ public class MoveItemsToCasesConfirmationController extends FxController
 
 	private void updateRemoveFromExistingCase()
 	{
-		if(currentFolder == FxCaseManagementController.ALL_FOLDER)
+		if(currentFolder == FxCaseManagementController.ALL_FOLDER ||
+		   currentFolder == FxCaseManagementController.SEARCH_FOLDER)
 		{
 			removeFromExistingCase.setVisible(false);
 			return;
