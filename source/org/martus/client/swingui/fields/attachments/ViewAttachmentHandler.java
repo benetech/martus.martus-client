@@ -102,7 +102,7 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		return (!Utilities.isMSWindows() && !Utilities.isMacintosh() && !UiSession.isAlphaTester);
 	}
 
-	public static void launchExternalAttachmentViewer(AttachmentProxy proxy, ClientBulletinStore store) throws IOException, InterruptedException, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, InvalidBase64Exception, CryptoException 
+	public static void launchExternalAttachmentViewer(AttachmentProxy proxy, ClientBulletinStore store) throws Exception 
 	{
 		File temp = obtainFileForAttachment(proxy, store);
 		Runtime runtime = Runtime.getRuntime();
@@ -127,11 +127,16 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		}
 	}
 	
-	static public File obtainFileForAttachment(AttachmentProxy proxy, ClientBulletinStore store) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
+	static public File obtainFileForAttachment(AttachmentProxy proxy, ClientBulletinStore store) throws Exception
 	{
 		ReadableDatabase db = store.getDatabase();
 		MartusCrypto security = store.getSignatureVerifier();
 
+		return obtainFileForAttachment(proxy, db, security);
+	}
+
+	public static File obtainFileForAttachment(AttachmentProxy proxy, ReadableDatabase db, MartusCrypto security) throws Exception
+	{
 		File attachmentAlreadyAvailableAsFile = proxy.getFile();
 		if(attachmentAlreadyAvailableAsFile != null)
 			return attachmentAlreadyAvailableAsFile;
