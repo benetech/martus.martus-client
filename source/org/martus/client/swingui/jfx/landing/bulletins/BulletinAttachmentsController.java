@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.jfx.landing.bulletins;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -53,6 +54,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
+import org.martus.client.swingui.jfx.landing.bulletins.AttachmentViewController.FileType;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinLoader;
@@ -94,8 +96,52 @@ public class BulletinAttachmentsController extends FxController
 
 		BooleanBinding nonEmptyTableBinding = Bindings.isNotEmpty(attachmentsTable.getItems());
 		attachmentsTable.visibleProperty().bind(nonEmptyTableBinding);
+		
+		// FIXME: This is unfinished work. The thumbnails appear to be loading, but 
+		// setting up the cell factories is going to take more time than I have right now
+		boolean loadThumbnails = false;
+		if(loadThumbnails)
+			populateThumbnails(attachments);
 	}	
 	
+	private void populateThumbnails(ObservableList<AttachmentTableRowData> attachments)
+	{
+		attachments.forEach((attachmentTableRowData) -> populateThumbnail(attachmentTableRowData));
+	}
+
+	private void populateThumbnail(	AttachmentTableRowData attachmentTableRowData)
+	{
+		try
+		{
+			AttachmentProxy attachmentProxy = attachmentTableRowData.getAttachmentProxy();
+			FileType type = AttachmentViewController.determineFileType(attachmentProxy.getLabel());
+			if(type == FileType.Image)
+			{
+				File file = ViewAttachmentHandler.obtainFileForAttachment(attachmentProxy, getMainWindow().getStore());
+				Image image = loadImage(file);
+				attachmentTableRowData.imagePreviewProperty().setValue(image);
+			}
+		}
+		catch(Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
+	}
+
+	private Image loadImage(File file) throws Exception
+	{
+		FileInputStream in = new FileInputStream(file);
+		try
+		{
+			Image image = new Image(in);
+			return image;
+		}
+		finally
+		{
+			in.close();
+		}
+	}
+
 	private void initalizeColumns()
 	{
 		nameColumn.setCellValueFactory(new PropertyValueFactory<AttachmentTableRowData, String>(AttachmentTableRowData.ATTACHMENT_NAME_PROPERTY_NAME));
