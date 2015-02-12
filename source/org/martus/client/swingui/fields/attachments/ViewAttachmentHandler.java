@@ -129,6 +129,8 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 	
 	static public File obtainFileForAttachment(AttachmentProxy proxy, ClientBulletinStore store) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
 	{
+		ReadableDatabase db = store.getDatabase();
+
 		File attachmentAlreadyAvailableAsFile = proxy.getFile();
 		if(attachmentAlreadyAvailableAsFile != null)
 			return attachmentAlreadyAvailableAsFile;
@@ -141,7 +143,6 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 				return tempFileAlreadyAvailable;
 		}
 		
-		ReadableDatabase db = store.getDatabase();
 		MartusCrypto security = store.getSignatureVerifier();
 		File tempFile = extractAttachmentToTempFile(db, proxy, security);
 		return tempFile;
