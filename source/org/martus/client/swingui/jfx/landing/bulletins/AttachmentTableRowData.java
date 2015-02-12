@@ -27,7 +27,9 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.image.Image;
 
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -43,6 +45,8 @@ public class AttachmentTableRowData
 		remove = new SimpleBooleanProperty(true);
 		view = new SimpleBooleanProperty(true);
 		save = new SimpleBooleanProperty(true);
+		
+		imagePreview = new SimpleObjectProperty<Image>();
 	}
 	
 	private String getSizeOfAttachment(AttachmentProxy attachmentToUse, ReadableDatabase database)
@@ -74,6 +78,11 @@ public class AttachmentTableRowData
     { 
         return save; 
     }
+	
+	public Property<Image> imagePreviewProperty()
+	{
+		return imagePreview;
+	}
 
 
 	public AttachmentProxy getAttachmentProxy()
@@ -86,10 +95,13 @@ public class AttachmentTableRowData
 	static public final String ATTACHMENT_VIEW_PROPERTY_NAME = "view";
 	static public final String ATTACHMENT_REMOVE_PROPERTY_NAME = "remove";
 	static public final String ATTACHMENT_SAVE_PROPERTY_NAME = "save";
+	static public final String ATTACHMENT_IMAGE_PROPERTY_NAME = "image";
+	
 	private SimpleStringProperty name;
 	private SimpleStringProperty size;
 	private SimpleBooleanProperty view;
 	private SimpleBooleanProperty remove;
 	private SimpleBooleanProperty save;
 	private AttachmentProxy attachmentProxy;
+	private SimpleObjectProperty<Image> imagePreview;
  }
