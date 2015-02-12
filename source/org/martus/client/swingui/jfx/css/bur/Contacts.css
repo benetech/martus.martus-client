@@ -1,0 +1,11 @@
+.root {
+	-fx-background-color: #e6e7e9;
+  -fx-font-family: "Zawgyi-One";
+  -fx-line-height: 28px inherit;
+}
+
+.wv-sidebar-hint {
+	background-color: #e6e7e9;
+	font: 9px "Zawgyi-One";
+	border: none;
+}
