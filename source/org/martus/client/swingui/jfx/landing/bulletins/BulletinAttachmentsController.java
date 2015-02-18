@@ -141,10 +141,19 @@ public class BulletinAttachmentsController extends FxController
 			in.close();
 		}
 	}
+	
+	private static class TableRowStringValueFactory extends PropertyValueFactory<AttachmentTableRowData, String>
+	{
+		public TableRowStringValueFactory(String propertyName)
+		{
+			super(propertyName);
+		}
+		
+	}
 
 	private void initalizeColumns()
 	{
-		PropertyValueFactory<AttachmentTableRowData, String> nameValueFactory = new PropertyValueFactory<AttachmentTableRowData, String>(AttachmentTableRowData.ATTACHMENT_NAME_PROPERTY_NAME);
+		TableRowStringValueFactory nameValueFactory = new TableRowStringValueFactory(AttachmentTableRowData.ATTACHMENT_NAME_PROPERTY_NAME);
 		nameColumn.setCellValueFactory(nameValueFactory);
 		nameColumn.setCellFactory(TextFieldTableCell.<AttachmentTableRowData>forTableColumn());
 
