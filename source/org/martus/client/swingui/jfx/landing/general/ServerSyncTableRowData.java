@@ -32,6 +32,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiFontEncodingHelper;
+import org.martus.client.swingui.jfx.generic.TableRowData;
 import org.martus.client.swingui.jfx.landing.bulletins.BulletinDetailsController;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.common.BulletinSummary;
@@ -40,7 +41,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.FontHandler;
 
-public class ServerSyncTableRowData
+public class ServerSyncTableRowData implements TableRowData
 {
 	public ServerSyncTableRowData(BulletinSummary summaryToUse, boolean canDelete, MartusApp app) throws Exception
 	{
