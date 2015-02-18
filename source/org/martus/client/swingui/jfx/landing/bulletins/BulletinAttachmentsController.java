@@ -144,7 +144,8 @@ public class BulletinAttachmentsController extends FxController
 
 	private void initalizeColumns()
 	{
-		nameColumn.setCellValueFactory(new PropertyValueFactory<AttachmentTableRowData, String>(AttachmentTableRowData.ATTACHMENT_NAME_PROPERTY_NAME));
+		PropertyValueFactory<AttachmentTableRowData, String> nameValueFactory = new PropertyValueFactory<AttachmentTableRowData, String>(AttachmentTableRowData.ATTACHMENT_NAME_PROPERTY_NAME);
+		nameColumn.setCellValueFactory(nameValueFactory);
 		nameColumn.setCellFactory(TextFieldTableCell.<AttachmentTableRowData>forTableColumn());
 
 		sizeColumn.setCellValueFactory(new PropertyValueFactory<AttachmentTableRowData, String>(AttachmentTableRowData.ATTACHMENT_SIZE_PROPERTY_NAME));
