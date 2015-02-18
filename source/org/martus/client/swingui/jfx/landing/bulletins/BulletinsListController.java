@@ -63,6 +63,7 @@ import org.martus.client.swingui.actions.ActionMenuFxBulletin;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
 import org.martus.client.swingui.actions.ActionMenuViewFxBulletin;
 import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
+import org.martus.client.swingui.jfx.generic.TableRowData;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.client.swingui.jfx.generic.controls.FxTimestampTableCellFactory;
 import org.martus.client.swingui.jfx.landing.AbstractFxLandingContentController;
@@ -145,11 +146,11 @@ public class BulletinsListController extends AbstractFxLandingContentController 
 		
         Image viewImage = new Image(VIEW_BULLETIN_IMAGE_PATH);
         viewBulletinColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(viewImage, () -> viewSelectedBulletin()));
-		viewBulletinColumn.setCellValueFactory(new PropertyValueFactory<Object, Boolean>(BulletinTableRowData.CAN_VIEW_PROPERTY_NAME));
+		viewBulletinColumn.setCellValueFactory(new PropertyValueFactory<TableRowData, Boolean>(BulletinTableRowData.CAN_VIEW_PROPERTY_NAME));
 		
         Image editImage = new Image(EDIT_BULLETIN_IMAGE_PATH);
         editBulletinColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(editImage, () -> editSelectedBulletin()));
-		editBulletinColumn.setCellValueFactory(new PropertyValueFactory<Object, Boolean>(BulletinTableRowData.CAN_EDIT_PROPERTY_NAME));
+		editBulletinColumn.setCellValueFactory(new PropertyValueFactory<TableRowData, Boolean>(BulletinTableRowData.CAN_EDIT_PROPERTY_NAME));
 		editBulletinColumn.visibleProperty().bind(getTrashNotBeingDisplayedBinding());
 	}
 	
@@ -622,10 +623,10 @@ public class BulletinsListController extends AbstractFxLandingContentController 
 	protected TableColumn<BulletinTableRowData, Long> dateSavedColumn;	
 
 	@FXML
-	protected TableColumn<Object, Boolean> viewBulletinColumn;
+	protected TableColumn<TableRowData, Boolean> viewBulletinColumn;
 
 	@FXML
-	protected TableColumn<Object, Boolean> editBulletinColumn;
+	protected TableColumn<TableRowData, Boolean> editBulletinColumn;
 	
 	@FXML
 	private Button emptyTrashButton;

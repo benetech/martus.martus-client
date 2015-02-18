@@ -69,6 +69,7 @@ import org.martus.client.swingui.jfx.common.FxImportFormTemplateFromMyContactsPo
 import org.martus.client.swingui.jfx.common.FxSetupFormTemplateFromNewContactPopupController;
 import org.martus.client.swingui.jfx.common.TemplatePropertiesController;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.generic.TableRowData;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.Exceptions.ServerNotAvailableException;
@@ -116,19 +117,19 @@ public class ManageTemplatesController extends FxController
 
         Image trashImage = new Image(TRASH_IMAGE_PATH);
         templateDeleteColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(trashImage, () -> deleteSelectedTemplate()));
-        templateDeleteColumn.setCellValueFactory(new PropertyValueFactory<Object,Boolean>(ManageTemplatesTableRowData.CAN_DELETE_NAME));
+        templateDeleteColumn.setCellValueFactory(new PropertyValueFactory<TableRowData,Boolean>(ManageTemplatesTableRowData.CAN_DELETE_NAME));
         
         Image uploadImage = new Image(UPLOAD_IMAGE_PATH);
         templateUploadColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(uploadImage, () -> uploadSelectedTemplate()));
-        templateUploadColumn.setCellValueFactory(new PropertyValueFactory<Object,Boolean>(ManageTemplatesTableRowData.CAN_UPLOAD_NAME));
+        templateUploadColumn.setCellValueFactory(new PropertyValueFactory<TableRowData,Boolean>(ManageTemplatesTableRowData.CAN_UPLOAD_NAME));
         
         Image exportImage = new Image(EXPORT_IMAGE_PATH);
         templateExportColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(exportImage, () -> exportSelectedTemplate()));
-        templateExportColumn.setCellValueFactory(new PropertyValueFactory<Object,Boolean>(ManageTemplatesTableRowData.CAN_EXPORT_NAME));
+        templateExportColumn.setCellValueFactory(new PropertyValueFactory<TableRowData,Boolean>(ManageTemplatesTableRowData.CAN_EXPORT_NAME));
         
         Image editImage = new Image(EDIT_IMAGE_PATH);
         templateEditColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(editImage, () -> editSelectedTemplate()));
-        templateEditColumn.setCellValueFactory(new PropertyValueFactory<Object,Boolean>(ManageTemplatesTableRowData.CAN_EDIT_NAME));
+        templateEditColumn.setCellValueFactory(new PropertyValueFactory<TableRowData,Boolean>(ManageTemplatesTableRowData.CAN_EDIT_NAME));
         
         populateAvailableTemplatesTable();
 
@@ -555,16 +556,16 @@ public class ManageTemplatesController extends FxController
 	protected TableColumn<ManageTemplatesTableRowData, String> templateNameColumn;
 
 	@FXML
-	protected TableColumn<Object, Boolean> templateDeleteColumn;
+	protected TableColumn<TableRowData, Boolean> templateDeleteColumn;
 	
 	@FXML
-	protected TableColumn<Object, Boolean> templateUploadColumn;
+	protected TableColumn<TableRowData, Boolean> templateUploadColumn;
 	
 	@FXML
-	protected TableColumn<Object, Boolean> templateExportColumn;
+	protected TableColumn<TableRowData, Boolean> templateExportColumn;
 	
 	@FXML
-	protected TableColumn<Object, Boolean> templateEditColumn;
+	protected TableColumn<TableRowData, Boolean> templateEditColumn;
 	
 	@FXML
 	private RadioButton genericRadioButton;

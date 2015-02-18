@@ -31,8 +31,9 @@ import javafx.scene.image.Image;
 import javafx.util.Callback;
 
 import org.martus.client.swingui.actions.ActionDoer;
+import org.martus.client.swingui.jfx.generic.TableRowData;
 
-public class FxButtonTableCellFactory implements Callback<TableColumn<Object, Boolean>, TableCell<Object, Boolean>>
+public class FxButtonTableCellFactory implements Callback<TableColumn<TableRowData, Boolean>, TableCell<TableRowData, Boolean>>
 {
 	public static FxButtonTableCellFactory createNormalButtonTableCellFactory(Image buttonImageToUse, ActionDoer doerToUse)
 	{
