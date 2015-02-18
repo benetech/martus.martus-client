@@ -32,12 +32,13 @@ import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import org.martus.client.swingui.UiFontEncodingHelper;
+import org.martus.client.swingui.jfx.generic.TableRowData;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.FontHandler;
 
-public class BulletinTableRowData
+public class BulletinTableRowData implements TableRowData
 {
 	public BulletinTableRowData(Bulletin bulletin, boolean onServer, Integer authorsValidation, MiniLocalization localization)
 	{

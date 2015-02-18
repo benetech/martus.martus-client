@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
  */
 package org.martus.client.swingui.jfx.generic.controls;
 
+import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
@@ -37,12 +39,18 @@ public class FxButtonTableCell extends TableCell
 {
 	public static FxButtonTableCell createNormalButtonTableCell(Image buttonImageToUse, ActionDoer doerToUse)
 	{
-		return new FxButtonTableCell(buttonImageToUse, doerToUse);
+		SimpleObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>(buttonImageToUse);
+		return createNormalButtonTableCell(imageProperty, doerToUse);
+	}
+
+	public static FxButtonTableCell createNormalButtonTableCell(ReadOnlyProperty<Image> imageProperty, ActionDoer doerToUse)
+	{
+		return new FxButtonTableCell(imageProperty, doerToUse);
 	}
 
 	public static FxButtonTableCell createNarrowButtonTableCell(Image buttonImageToUse, ActionDoer doerToUse)
 	{
-		FxButtonTableCell fxButtonTableCell = new FxButtonTableCell(buttonImageToUse, doerToUse);
+		FxButtonTableCell fxButtonTableCell = createNormalButtonTableCell(buttonImageToUse, doerToUse);
 		fxButtonTableCell.setButtonStyle(NARROW_BUTTON_STYLE);
 		return fxButtonTableCell;
 	}
@@ -52,9 +60,9 @@ public class FxButtonTableCell extends TableCell
 		buttonStyling = styleToUse;
 	}
 
-	private FxButtonTableCell(Image buttonImageToUse, ActionDoer doerToUse)
+	private FxButtonTableCell(ReadOnlyProperty<Image> buttonImageToUse, ActionDoer doerToUse)
 	{
-		buttonImage = buttonImageToUse;
+		buttonImageProperty = buttonImageToUse;
 		doer = doerToUse;
 	}
 	
@@ -69,7 +77,7 @@ public class FxButtonTableCell extends TableCell
 		boolean doesRowSupportButtonAction = isValidRow && ((Boolean)cellObject).booleanValue();
 		if (doesRowSupportButtonAction) 
 		{
-			button = new Button(null, new ImageView(buttonImage));
+			button = new Button(null, new ImageView(buttonImageProperty.getValue()));
 			button.getStyleClass().add(buttonStyling);
 			FxTableCellButtonActionHandler handler = new FxTableCellButtonActionHandler(getTableView(), doer);
 			handler.setTableRowIndex(getIndex());
@@ -81,7 +89,7 @@ public class FxButtonTableCell extends TableCell
 	}
 	
 	static final private String NARROW_BUTTON_STYLE = "button-minpadding";
-	private Image buttonImage;
+	private ReadOnlyProperty<Image> buttonImageProperty;
 	private ActionDoer doer;
 	private String buttonStyling = "";
 }
