@@ -157,7 +157,8 @@ public class BulletinAttachmentsController extends FxController
 		nameColumn.setCellValueFactory(nameValueFactory);
 		nameColumn.setCellFactory(TextFieldTableCell.<AttachmentTableRowData>forTableColumn());
 
-		sizeColumn.setCellValueFactory(new PropertyValueFactory<AttachmentTableRowData, String>(AttachmentTableRowData.ATTACHMENT_SIZE_PROPERTY_NAME));
+		TableRowStringValueFactory sizeValueFactory = new TableRowStringValueFactory(AttachmentTableRowData.ATTACHMENT_SIZE_PROPERTY_NAME);
+		sizeColumn.setCellValueFactory(sizeValueFactory);
 		sizeColumn.setCellFactory(TextFieldTableCell.<AttachmentTableRowData>forTableColumn());
 
 		Image viewImage = new Image(VIEW_ATTACHMENT_IMAGE_PATH);
