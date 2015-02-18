@@ -53,6 +53,7 @@ import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.client.swingui.jfx.generic.FxController;
+import org.martus.client.swingui.jfx.generic.TableRowData;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.client.swingui.jfx.landing.bulletins.AttachmentViewController.FileType;
 import org.martus.common.MartusLogger;
@@ -163,15 +164,15 @@ public class BulletinAttachmentsController extends FxController
 
 		Image viewImage = new Image(VIEW_ATTACHMENT_IMAGE_PATH);
 		viewColumn.setCellFactory(FxButtonTableCellFactory.createNormalButtonTableCellFactory(viewImage, () -> viewSelectedAttachment()));
-		viewColumn.setCellValueFactory(new PropertyValueFactory<Object, Boolean>(AttachmentTableRowData.ATTACHMENT_VIEW_PROPERTY_NAME));
+		viewColumn.setCellValueFactory(new PropertyValueFactory<TableRowData, Boolean>(AttachmentTableRowData.ATTACHMENT_VIEW_PROPERTY_NAME));
 
 		Image removeImage = new Image(REMOVE_ATTACHMENT_IMAGE_PATH);
 		removeColumn.setCellFactory(FxButtonTableCellFactory.createNormalButtonTableCellFactory(removeImage, () -> removeSelectedAttachment()));
-		removeColumn.setCellValueFactory(new PropertyValueFactory<Object, Boolean>(AttachmentTableRowData.ATTACHMENT_REMOVE_PROPERTY_NAME));
+		removeColumn.setCellValueFactory(new PropertyValueFactory<TableRowData, Boolean>(AttachmentTableRowData.ATTACHMENT_REMOVE_PROPERTY_NAME));
 
 		Image saveImage = new Image(SAVE_ATTACHMENT_IMAGE_PATH);
 		saveColumn.setCellFactory(FxButtonTableCellFactory.createNormalButtonTableCellFactory(saveImage, () -> saveSelectedAttachment()));
-		saveColumn.setCellValueFactory(new PropertyValueFactory<Object, Boolean>(AttachmentTableRowData.ATTACHMENT_SAVE_PROPERTY_NAME));
+		saveColumn.setCellValueFactory(new PropertyValueFactory<TableRowData, Boolean>(AttachmentTableRowData.ATTACHMENT_SAVE_PROPERTY_NAME));
 	}
 	
 	
@@ -316,13 +317,13 @@ public class BulletinAttachmentsController extends FxController
 	protected TableColumn<AttachmentTableRowData, String> sizeColumn;	
 	
 	@FXML
-	protected TableColumn<Object, Boolean> viewColumn;
+	protected TableColumn<TableRowData, Boolean> viewColumn;
 
 	@FXML
-	protected TableColumn<Object, Boolean> removeColumn;
+	protected TableColumn<TableRowData, Boolean> removeColumn;
 	
 	@FXML
-	protected TableColumn<Object, Boolean> saveColumn;
+	protected TableColumn<TableRowData, Boolean> saveColumn;
 	
 	@FXML
 	private Button addAttachmentButton;
