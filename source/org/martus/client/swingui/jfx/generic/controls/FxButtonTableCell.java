@@ -39,7 +39,7 @@ public class FxButtonTableCell extends TableCell
 {
 	public static FxButtonTableCell createNormalButtonTableCell(Image buttonImageToUse, ActionDoer doerToUse)
 	{
-		return new FxButtonTableCell(buttonImageToUse, doerToUse);
+		return new FxButtonTableCell(new SimpleObjectProperty<Image>(buttonImageToUse), doerToUse);
 	}
 
 	public static FxButtonTableCell createNarrowButtonTableCell(Image buttonImageToUse, ActionDoer doerToUse)
@@ -54,9 +54,9 @@ public class FxButtonTableCell extends TableCell
 		buttonStyling = styleToUse;
 	}
 
-	private FxButtonTableCell(Image buttonImageToUse, ActionDoer doerToUse)
+	private FxButtonTableCell(ReadOnlyProperty<Image> buttonImageToUse, ActionDoer doerToUse)
 	{
-		buttonImageProperty = new SimpleObjectProperty<Image>(buttonImageToUse);
+		buttonImageProperty = buttonImageToUse;
 		doer = doerToUse;
 	}
 	
