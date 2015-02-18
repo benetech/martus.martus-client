@@ -29,10 +29,11 @@ import javafx.beans.property.Property;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import org.martus.client.swingui.jfx.generic.TableRowData;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FormTemplate;
 
-public class ManageTemplatesTableRowData
+public class ManageTemplatesTableRowData implements TableRowData
 {
 	public ManageTemplatesTableRowData(String rawTemplateNameToUse, MiniLocalization localizationToUse)
 	{

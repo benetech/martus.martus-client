@@ -31,11 +31,12 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 
+import org.martus.client.swingui.jfx.generic.TableRowData;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.database.ReadableDatabase;
 
-public class AttachmentTableRowData
+public class AttachmentTableRowData implements TableRowData
 {
 	public AttachmentTableRowData(AttachmentProxy attachmentToUse, ReadableDatabase database)
 	{
