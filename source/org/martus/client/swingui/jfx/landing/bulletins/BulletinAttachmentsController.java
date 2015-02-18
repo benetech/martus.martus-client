@@ -152,7 +152,7 @@ public class BulletinAttachmentsController extends FxController
 		
 	}
 	
-	class TableRowBooleanValueFactory extends PropertyValueFactory<TableRowData, Boolean>
+	private static class TableRowBooleanValueFactory extends PropertyValueFactory<TableRowData, Boolean>
 	{
 		public TableRowBooleanValueFactory(String propertyName)
 		{
