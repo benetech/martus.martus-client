@@ -44,7 +44,7 @@ public class FxButtonTableCell extends TableCell
 
 	public static FxButtonTableCell createNarrowButtonTableCell(Image buttonImageToUse, ActionDoer doerToUse)
 	{
-		FxButtonTableCell fxButtonTableCell = new FxButtonTableCell(buttonImageToUse, doerToUse);
+		FxButtonTableCell fxButtonTableCell = createNormalButtonTableCell(buttonImageToUse, doerToUse);
 		fxButtonTableCell.setButtonStyle(NARROW_BUTTON_STYLE);
 		return fxButtonTableCell;
 	}
