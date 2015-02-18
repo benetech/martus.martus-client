@@ -43,7 +43,7 @@ public class FxButtonTableCell extends TableCell
 		return createNormalButtonTableCell(imageProperty, doerToUse);
 	}
 
-	public static FxButtonTableCell createNormalButtonTableCell(SimpleObjectProperty<Image> imageProperty, ActionDoer doerToUse)
+	public static FxButtonTableCell createNormalButtonTableCell(ReadOnlyProperty<Image> imageProperty, ActionDoer doerToUse)
 	{
 		return new FxButtonTableCell(imageProperty, doerToUse);
 	}
