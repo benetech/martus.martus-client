@@ -28,6 +28,12 @@ package org.martus.client.core;
 import java.io.File;
 
 import org.junit.Test;
+import org.martus.client.test.MockBulletinStore;
+import org.martus.common.bulletin.AttachmentProxy;
+import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.BulletinForTesting;
+import org.martus.common.crypto.MartusSecurity;
+import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestAttachmentProxyFile extends TestCaseEnhanced
@@ -36,9 +42,25 @@ public class TestAttachmentProxyFile extends TestCaseEnhanced
 	{
 		super(name);
 	}
+	
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+
+		security = MockMartusSecurity.createClient();
+		store = new MockBulletinStore();
+	}
+	
+	@Override
+	protected void tearDown() throws Exception
+	{
+		store.deleteAllData();
+		super.tearDown();
+	}
 
 	@Test
-	public void test() throws Exception
+	public void testWrapFile() throws Exception
 	{
 		File pretendNonTemp = createTempFile();
 		try
@@ -46,6 +68,7 @@ public class TestAttachmentProxyFile extends TestCaseEnhanced
 			AttachmentProxyFile apf = AttachmentProxyFile.wrapFile(pretendNonTemp);
 			assertEquals(pretendNonTemp, apf.getFile());
 			apf.release();
+			assertNull(apf.getFile());
 			assertTrue(pretendNonTemp.exists());
 		}
 		finally
@@ -54,4 +77,31 @@ public class TestAttachmentProxyFile extends TestCaseEnhanced
 		}
 	}
 
+	public void testExtractAttachment() throws Exception
+	{
+		File fileToAttach = createTempFile();
+		try
+		{
+			BulletinForTesting original = new BulletinForTesting(security);
+			AttachmentProxy originalProxy = new AttachmentProxy(fileToAttach);
+			original.addPrivateAttachment(originalProxy);
+			store.saveBulletinForTesting(original);
+			
+			Bulletin loaded = store.loadFromDatabase(original.getDatabaseKey());
+			AttachmentProxy proxyFromDatabase = loaded.getPrivateAttachments()[0];
+
+			AttachmentProxyFile apf = AttachmentProxyFile.extractAttachment(store, proxyFromDatabase);
+			File file = apf.getFile();
+			apf.release();
+			assertNull(apf.getFile());
+			assertFalse(file.exists());
+		}
+		finally
+		{
+			fileToAttach.delete();
+		}
+	}
+
+	private MartusSecurity security;
+	private MockBulletinStore store;
 }
