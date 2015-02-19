@@ -32,21 +32,11 @@ import java.io.InputStream;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.AttachmentProxyFile;
-import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiSession;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.AttachmentProxy;
-import org.martus.common.bulletin.BulletinLoader;
-import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.crypto.MartusCrypto.CryptoException;
-import org.martus.common.database.ReadableDatabase;
-import org.martus.common.packet.AttachmentPacket;
-import org.martus.common.packet.Packet.InvalidPacketException;
-import org.martus.common.packet.Packet.SignatureVerificationException;
-import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.swing.Utilities;
-import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 {
@@ -135,24 +125,6 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		}
 	}
 	
-	public static File obtainFileForAttachment(AttachmentProxy proxy, ReadableDatabase db, MartusCrypto security) throws Exception
-	{
-		File attachmentAlreadyAvailableAsFile = proxy.getFile();
-		if(attachmentAlreadyAvailableAsFile != null)
-			return attachmentAlreadyAvailableAsFile;
-		
-		AttachmentPacket pendingPacket = proxy.getPendingPacket();
-		if(pendingPacket != null)
-		{
-			File tempFileAlreadyAvailable = pendingPacket.getRawFile();
-			if(tempFileAlreadyAvailable != null)
-				return tempFileAlreadyAvailable;
-		}
-		
-		File tempFile = extractAttachmentToTempFile(db, proxy, security);
-		return tempFile;
-	}
-	
 	static private void dumpOutputToConsole(String streamName, InputStream capturedOutput) throws IOException
 	{
 		if(capturedOutput.available() <= 0)
@@ -181,17 +153,6 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 			return new String[] {"firefox", fileToLaunch};
 		
 		throw new RuntimeException("Launch not supported on this operating system");
-	}
-
-	static File extractAttachmentToTempFile(ReadableDatabase db, AttachmentProxy proxy, MartusCrypto security) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
-	{
-		String fileName = proxy.getLabel();
-		
-		File temp = File.createTempFile(BulletinXmlExporter.extractFileNameOnly(fileName), BulletinXmlExporter.extractExtentionOnly(fileName));
-		temp.deleteOnExit();
-	
-		BulletinLoader.extractAttachmentToFile(db, proxy, security, temp);
-		return temp;
 	}
 
 	AbstractAttachmentPanel panel;
