@@ -47,10 +47,25 @@ public class AttachmentProxyFile
 		return new AttachmentProxyFile(pretendNonTemp, false);
 	}
 
-	public static AttachmentProxyFile extractAttachment(ClientBulletinStore storeToUse, AttachmentProxy proxyFromDatabase) throws Exception
+	public static AttachmentProxyFile extractAttachment(ClientBulletinStore store, AttachmentProxy proxy) throws Exception
 	{
-		File fileToWrap = obtainFileForAttachment(proxyFromDatabase, storeToUse);
-		return new AttachmentProxyFile(fileToWrap, true);
+		ReadableDatabase db = store.getDatabase();
+		MartusCrypto security = store.getSignatureVerifier();
+	
+		File attachmentAlreadyAvailableAsFile = proxy.getFile();
+		if(attachmentAlreadyAvailableAsFile != null)
+			return new AttachmentProxyFile(attachmentAlreadyAvailableAsFile, false);
+		
+		AttachmentPacket pendingPacket = proxy.getPendingPacket();
+		if(pendingPacket != null)
+		{
+			File tempFileAlreadyAvailable = pendingPacket.getRawFile();
+			if(tempFileAlreadyAvailable != null)
+				return new AttachmentProxyFile(tempFileAlreadyAvailable, false);
+		}
+		
+		File tempFile = AttachmentProxyFile.extractAttachmentToTempFile(db, proxy, security);
+		return new AttachmentProxyFile(tempFile, true);
 	}
 
 	public AttachmentProxyFile(File fileToWrap, boolean shouldDeleteOnRelease)
@@ -70,27 +85,6 @@ public class AttachmentProxyFile
 			file.delete();
 		
 		file = null;
-	}
-
-	public static File obtainFileForAttachment(AttachmentProxy proxy, ClientBulletinStore store) throws Exception
-	{
-		ReadableDatabase db = store.getDatabase();
-		MartusCrypto security = store.getSignatureVerifier();
-	
-		File attachmentAlreadyAvailableAsFile = proxy.getFile();
-		if(attachmentAlreadyAvailableAsFile != null)
-			return attachmentAlreadyAvailableAsFile;
-		
-		AttachmentPacket pendingPacket = proxy.getPendingPacket();
-		if(pendingPacket != null)
-		{
-			File tempFileAlreadyAvailable = pendingPacket.getRawFile();
-			if(tempFileAlreadyAvailable != null)
-				return tempFileAlreadyAvailable;
-		}
-		
-		File tempFile = AttachmentProxyFile.extractAttachmentToTempFile(db, proxy, security);
-		return tempFile;
 	}
 
 	private static File extractAttachmentToTempFile(ReadableDatabase db, AttachmentProxy proxy, MartusCrypto security) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException

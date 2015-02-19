@@ -275,15 +275,15 @@ public class BulletinsListController extends AbstractFxLandingContentController 
 		for (int i = 0; i < numberOfAttachments; i++)
 		{
 			AttachmentProxy attachmentProxy = attachments[i];
-			File attachmentFileToView = AttachmentProxyFile.obtainFileForAttachment(attachmentProxy, getMainWindow().getStore());
+			AttachmentProxyFile apf = AttachmentProxyFile.extractAttachment(getMainWindow().getStore(), attachmentProxy);
 			try
 			{
-				if(!AttachmentViewController.canViewAttachmentInProgram(attachmentFileToView))
+				if(!AttachmentViewController.canViewAttachmentInProgram(apf.getFile()))
 					return true;
 			}
 			finally
 			{
-				attachmentFileToView.delete();
+				apf.release();
 			}
 		}
 		return false;

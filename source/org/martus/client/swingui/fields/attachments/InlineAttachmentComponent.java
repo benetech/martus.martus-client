@@ -43,18 +43,19 @@ class InlineAttachmentComponent extends UiLabel
 {
 	public InlineAttachmentComponent(ClientBulletinStore store, AttachmentProxy proxy) throws Exception
 	{
-		File tempFile = AttachmentProxyFile.obtainFileForAttachment(proxy, store);
+		AttachmentProxyFile apf = AttachmentProxyFile.extractAttachment(store, proxy);
 		try
 		{
 			Toolkit toolkit = Toolkit.getDefaultToolkit();
-			Image image = toolkit.getImage(tempFile.getAbsolutePath());
+			File file = apf.getFile();
+			Image image = toolkit.getImage(file.getAbsolutePath());
 			ImageIcon icon = new ImageIcon(image);
 			setIcon(icon);
 			setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		}
 		finally
 		{
-			tempFile.delete();
+			apf.release();
 		}
 	}
 
