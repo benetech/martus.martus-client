@@ -139,7 +139,11 @@ public class BulletinAttachmentsController extends FxController
 		FileInputStream in = new FileInputStream(file);
 		try
 		{
-			Image image = new Image(in);
+			double width = 96;
+			double height = 96;
+			boolean preserveRatio = true;
+			boolean loadInBackground = true;
+			Image image = new Image(in, width, height, preserveRatio, loadInBackground);
 			return image;
 		}
 		finally
