@@ -48,6 +48,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
+import javafx.stage.Screen;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.FxBulletin;
@@ -139,8 +140,9 @@ public class BulletinAttachmentsController extends FxController
 		FileInputStream in = new FileInputStream(file);
 		try
 		{
-			double width = 96;
-			double height = 96;
+			double dpi = Screen.getPrimary().getDpi();
+			double width = dpi;
+			double height = dpi;
 			boolean preserveRatio = true;
 			boolean loadInBackground = true;
 			Image image = new Image(in, width, height, preserveRatio, loadInBackground);
