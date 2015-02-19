@@ -53,7 +53,7 @@ public class DialogWithOkCancelShellController extends DialogShellController
 	@Override
 	protected String getCssName()
 	{
-		return "mainDialog.css";
+		return "MainDialog.css";
 	}
 	
 	@FXML
