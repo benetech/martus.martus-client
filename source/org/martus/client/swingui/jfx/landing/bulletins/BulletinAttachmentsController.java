@@ -94,49 +94,15 @@ public class BulletinAttachmentsController extends FxController
 	private void initalizeItemsTable()
 	{
 		ObservableList<AttachmentTableRowData> attachments = bulletin.getAttachments();
-		attachments.forEach((rowData) -> loadThumbnailIfAny(rowData));
 		attachmentsTable.setItems(attachments);
 		attachmentsTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		
 		BooleanBinding nonEmptyTableBinding = Bindings.isNotEmpty(attachmentsTable.getItems());
 		attachmentsTable.visibleProperty().bind(nonEmptyTableBinding);
 		
-		// FIXME: This is unfinished work. The thumbnails appear to be loading, but 
-		// setting up the cell factories is going to take more time than I have right now
-		boolean loadThumbnails = false;
-		if(loadThumbnails)
-			populateThumbnails(attachments);
+		populateThumbnails(attachments);
 	}	
 	
-	private void loadThumbnailIfAny(AttachmentTableRowData rowData)
-	{
-		try
-		{
-			AttachmentProxy proxy = rowData.getAttachmentProxy();
-			File file = ViewAttachmentHandler.obtainFileForAttachment(proxy, getMainWindow().getStore());
-
-			FileType type = AttachmentViewController.determineFileType(file);
-			if(type != FileType.Image)
-				return;
-			
-			FileInputStream in = new FileInputStream(file);
-			try
-			{
-				Image image = new Image(in);
-				rowData.imageProperty().setValue(image);
-			}
-			finally
-			{
-				in.close();
-			}
-		} 
-		catch (Exception relativelyHarmlessException)
-		{
-			MartusLogger.logException(relativelyHarmlessException);
-		}
-
-	}
-
 	private void populateThumbnails(ObservableList<AttachmentTableRowData> attachments)
 	{
 		attachments.forEach((attachmentTableRowData) -> populateThumbnail(attachmentTableRowData));
@@ -148,16 +114,23 @@ public class BulletinAttachmentsController extends FxController
 		{
 			AttachmentProxy attachmentProxy = attachmentTableRowData.getAttachmentProxy();
 			FileType type = AttachmentViewController.determineFileType(attachmentProxy.getLabel());
-			if(type == FileType.Image)
+			if(type != FileType.Image)
+				return;
+			
+			File file = ViewAttachmentHandler.obtainFileForAttachment(attachmentProxy, getMainWindow().getStore());
+			try
 			{
-				File file = ViewAttachmentHandler.obtainFileForAttachment(attachmentProxy, getMainWindow().getStore());
 				Image image = loadImage(file);
 				attachmentTableRowData.imageProperty().setValue(image);
 			}
+			finally
+			{
+				file.delete();
+			}
 		}
-		catch(Exception e)
+		catch (Exception relativelyHarmlessException)
 		{
-			logAndNotifyUnexpectedError(e);
+			MartusLogger.logException(relativelyHarmlessException);
 		}
 	}
 
@@ -307,13 +280,20 @@ public class BulletinAttachmentsController extends FxController
 	private boolean viewAttachmentInternally(AttachmentProxy proxy) throws Exception
 	{
 		File attachmentFileToView = ViewAttachmentHandler.obtainFileForAttachment(proxy, getMainWindow().getStore());
-		AttachmentViewController attachmentViewer = new AttachmentViewController(getMainWindow(), attachmentFileToView);
-
-		if(!attachmentViewer.canViewInProgram())
-			return false;
-		
-		showDialogWithNoButtons("ViewAttachment", attachmentViewer);
-		return true;
+		try
+		{
+			AttachmentViewController attachmentViewer = new AttachmentViewController(getMainWindow(), attachmentFileToView);
+	
+			if(!attachmentViewer.canViewInProgram())
+				return false;
+			
+			showDialogWithNoButtons("ViewAttachment", attachmentViewer);
+			return true;
+		}
+		finally
+		{
+			attachmentFileToView.delete();
+		}
 	}
 
 	private void removeSelectedAttachment()
