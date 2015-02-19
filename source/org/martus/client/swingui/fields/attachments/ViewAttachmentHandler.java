@@ -105,25 +105,32 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 	public static void launchExternalAttachmentViewer(AttachmentProxy proxy, ClientBulletinStore store) throws Exception 
 	{
 		File temp = obtainFileForAttachment(proxy, store);
-		Runtime runtime = Runtime.getRuntime();
-
-		String[] launchCommand = getLaunchCommandForThisOperatingSystem(temp.getPath());
-		
-		Process processView=runtime.exec(launchCommand);
-		int exitCode = processView.waitFor();
-		if(exitCode != 0)
+		try
 		{
-			MartusLogger.logError("Error viewing attachment: " + exitCode);
-			String launchCommandAsString = "";
-			for (String part : launchCommand)
+			Runtime runtime = Runtime.getRuntime();
+	
+			String[] launchCommand = getLaunchCommandForThisOperatingSystem(temp.getPath());
+			
+			Process processView=runtime.exec(launchCommand);
+			int exitCode = processView.waitFor();
+			if(exitCode != 0)
 			{
-				launchCommandAsString += part;
-				launchCommandAsString += ' ';
+				MartusLogger.logError("Error viewing attachment: " + exitCode);
+				String launchCommandAsString = "";
+				for (String part : launchCommand)
+				{
+					launchCommandAsString += part;
+					launchCommandAsString += ' ';
+				}
+				MartusLogger.logError(launchCommandAsString);
+				dumpOutputToConsole("stdout", processView.getInputStream());
+				dumpOutputToConsole("stderr", processView.getErrorStream());
+				throw new IOException();
 			}
-			MartusLogger.logError(launchCommandAsString);
-			dumpOutputToConsole("stdout", processView.getInputStream());
-			dumpOutputToConsole("stderr", processView.getErrorStream());
-			throw new IOException();
+		}
+		finally
+		{
+			temp.delete();
 		}
 	}
 	
