@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
  */
 package org.martus.client.swingui.jfx.generic.controls;
 
+import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.Image;
@@ -37,20 +39,21 @@ public class FxButtonTableCellFactory implements Callback<TableColumn<TableRowDa
 {
 	public static FxButtonTableCellFactory createNormalButtonTableCellFactory(Image buttonImageToUse, ActionDoer doerToUse)
 	{
-		return new FxButtonTableCellFactory(buttonImageToUse, doerToUse);
+		ReadOnlyProperty<Image> imageProperty = new SimpleObjectProperty<Image>(buttonImageToUse);
+		return new FxButtonTableCellFactory(imageProperty, doerToUse);
 	}
 
 	public static FxButtonTableCellFactory createNarrowButtonTableCell(Image buttonImageToUse, ActionDoer doerToUse)
 	{
-		FxButtonTableCellFactory fxButtonTableCellFactory = new FxButtonTableCellFactory(buttonImageToUse, doerToUse);
+		FxButtonTableCellFactory fxButtonTableCellFactory = createNormalButtonTableCellFactory(buttonImageToUse, doerToUse);
 		fxButtonTableCellFactory.useNarrowButtons();
 		return fxButtonTableCellFactory;
 	}
 	
 	
-	private FxButtonTableCellFactory(Image imageToUse, ActionDoer doerToUse)
+	private FxButtonTableCellFactory(ReadOnlyProperty<Image> imagePropertyToUse, ActionDoer doerToUse)
 	{
-		buttonImage = imageToUse;
+		buttonImageProperty = imagePropertyToUse;
 		doer = doerToUse;
 	}
 	
@@ -64,13 +67,13 @@ public class FxButtonTableCellFactory implements Callback<TableColumn<TableRowDa
 	{
 		FxButtonTableCell cell;
 		if(narrowButtons)
-			cell = FxButtonTableCell.createNarrowButtonTableCell(buttonImage, doer);
+			cell = FxButtonTableCell.createNarrowButtonTableCell(buttonImageProperty, doer);
 		else
-			cell = FxButtonTableCell.createNormalButtonTableCell(buttonImage, doer);
+			cell = FxButtonTableCell.createNormalButtonTableCell(buttonImageProperty, doer);
 		return cell;
 	}
 	
 	private boolean narrowButtons;
-	private Image buttonImage;
+	private ReadOnlyProperty<Image> buttonImageProperty;
 	private ActionDoer doer;
 }
