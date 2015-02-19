@@ -77,11 +77,6 @@ public class AttachmentProxyFile
 		ReadableDatabase db = store.getDatabase();
 		MartusCrypto security = store.getSignatureVerifier();
 	
-		return AttachmentProxyFile.obtainFileForAttachment(proxy, db, security);
-	}
-
-	private static File obtainFileForAttachment(AttachmentProxy proxy, ReadableDatabase db, MartusCrypto security) throws Exception
-	{
 		File attachmentAlreadyAvailableAsFile = proxy.getFile();
 		if(attachmentAlreadyAvailableAsFile != null)
 			return attachmentAlreadyAvailableAsFile;
@@ -94,7 +89,7 @@ public class AttachmentProxyFile
 				return tempFileAlreadyAvailable;
 		}
 		
-		File tempFile = extractAttachmentToTempFile(db, proxy, security);
+		File tempFile = AttachmentProxyFile.extractAttachmentToTempFile(db, proxy, security);
 		return tempFile;
 	}
 
