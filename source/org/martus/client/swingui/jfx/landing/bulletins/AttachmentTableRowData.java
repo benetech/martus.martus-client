@@ -47,7 +47,7 @@ public class AttachmentTableRowData implements TableRowData
 		view = new SimpleBooleanProperty(true);
 		save = new SimpleBooleanProperty(true);
 		
-		imagePreview = new SimpleObjectProperty<Image>();
+		image = new SimpleObjectProperty<Image>();
 	}
 	
 	private String getSizeOfAttachment(AttachmentProxy attachmentToUse, ReadableDatabase database)
@@ -80,9 +80,9 @@ public class AttachmentTableRowData implements TableRowData
         return save; 
     }
 	
-	public Property<Image> imagePreviewProperty()
+	public Property<Image> imageProperty()
 	{
-		return imagePreview;
+		return image;
 	}
 
 
@@ -104,5 +104,5 @@ public class AttachmentTableRowData implements TableRowData
 	private SimpleBooleanProperty remove;
 	private SimpleBooleanProperty save;
 	private AttachmentProxy attachmentProxy;
-	private SimpleObjectProperty<Image> imagePreview;
+	private SimpleObjectProperty<Image> image;
  }

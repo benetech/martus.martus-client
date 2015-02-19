@@ -35,6 +35,7 @@ import java.util.ResourceBundle;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,6 +56,7 @@ import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.TableRowData;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
+import org.martus.client.swingui.jfx.generic.controls.FxImageTableCellFactory;
 import org.martus.client.swingui.jfx.landing.bulletins.AttachmentViewController.FileType;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -92,9 +94,10 @@ public class BulletinAttachmentsController extends FxController
 	private void initalizeItemsTable()
 	{
 		ObservableList<AttachmentTableRowData> attachments = bulletin.getAttachments();
+		attachments.forEach((rowData) -> loadThumbnailIfAny(rowData));
 		attachmentsTable.setItems(attachments);
 		attachmentsTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
+		
 		BooleanBinding nonEmptyTableBinding = Bindings.isNotEmpty(attachmentsTable.getItems());
 		attachmentsTable.visibleProperty().bind(nonEmptyTableBinding);
 		
@@ -105,6 +108,35 @@ public class BulletinAttachmentsController extends FxController
 			populateThumbnails(attachments);
 	}	
 	
+	private void loadThumbnailIfAny(AttachmentTableRowData rowData)
+	{
+		try
+		{
+			AttachmentProxy proxy = rowData.getAttachmentProxy();
+			File file = ViewAttachmentHandler.obtainFileForAttachment(proxy, getMainWindow().getStore());
+
+			FileType type = AttachmentViewController.determineFileType(file);
+			if(type != FileType.Image)
+				return;
+			
+			FileInputStream in = new FileInputStream(file);
+			try
+			{
+				Image image = new Image(in);
+				rowData.imageProperty().setValue(image);
+			}
+			finally
+			{
+				in.close();
+			}
+		} 
+		catch (Exception relativelyHarmlessException)
+		{
+			MartusLogger.logException(relativelyHarmlessException);
+		}
+
+	}
+
 	private void populateThumbnails(ObservableList<AttachmentTableRowData> attachments)
 	{
 		attachments.forEach((attachmentTableRowData) -> populateThumbnail(attachmentTableRowData));
@@ -120,7 +152,7 @@ public class BulletinAttachmentsController extends FxController
 			{
 				File file = ViewAttachmentHandler.obtainFileForAttachment(attachmentProxy, getMainWindow().getStore());
 				Image image = loadImage(file);
-				attachmentTableRowData.imagePreviewProperty().setValue(image);
+				attachmentTableRowData.imageProperty().setValue(image);
 			}
 		}
 		catch(Exception e)
@@ -158,7 +190,14 @@ public class BulletinAttachmentsController extends FxController
 		{
 			super(propertyName);
 		}
-		
+	}
+
+	private static class TableRowImageValueFactory extends PropertyValueFactory<TableRowData, ReadOnlyProperty<Image>>
+	{
+		public TableRowImageValueFactory(String propertyName)
+		{
+			super(propertyName);
+		}
 	}
 
 	private void initalizeColumns()
@@ -170,6 +209,9 @@ public class BulletinAttachmentsController extends FxController
 		TableRowStringValueFactory sizeValueFactory = new TableRowStringValueFactory(AttachmentTableRowData.ATTACHMENT_SIZE_PROPERTY_NAME);
 		sizeColumn.setCellValueFactory(sizeValueFactory);
 		sizeColumn.setCellFactory(TextFieldTableCell.<AttachmentTableRowData>forTableColumn());
+
+		thumbnailColumn.setCellFactory(FxImageTableCellFactory.createNormalImageTableCellFactory(() -> viewSelectedAttachment()));
+		thumbnailColumn.setCellValueFactory(new TableRowImageValueFactory(AttachmentTableRowData.ATTACHMENT_IMAGE_PROPERTY_NAME));
 
 		Image viewImage = new Image(VIEW_ATTACHMENT_IMAGE_PATH);
 		viewColumn.setCellFactory(FxButtonTableCellFactory.createNormalButtonTableCellFactory(viewImage, () -> viewSelectedAttachment()));
@@ -302,7 +344,7 @@ public class BulletinAttachmentsController extends FxController
 	{
 		AttachmentProxy attachmentProxy = new AttachmentProxy(fileToAdd);
 		AttachmentTableRowData newAttachmentRowData = new AttachmentTableRowData(attachmentProxy, getApp().getStore().getDatabase());	
-
+		
 		attachmentsTable.getItems().add(newAttachmentRowData);
 	}
 	
@@ -324,6 +366,9 @@ public class BulletinAttachmentsController extends FxController
 
 	@FXML
 	protected TableColumn<AttachmentTableRowData, String> sizeColumn;	
+	
+	@FXML
+	protected TableColumn<TableRowData, ReadOnlyProperty<Image>> thumbnailColumn;
 	
 	@FXML
 	protected TableColumn<TableRowData, Boolean> viewColumn;
