@@ -98,28 +98,28 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		db = (MockDatabase)testStore.getDatabase();
 		security = (MockMartusSecurity)testStore.getSignatureGenerator();
 
-	    	if(tempFile1 == null)
-	    	{
-				tempFile1 = createTempFileWithData(sampleBytes1);
-				tempFile2 = createTempFileWithData(sampleBytes2);
-	    	}
-	    	
-	    	if(customPublicSpecs == null)
-	    	{
-	    		FieldSpec title = FieldSpec.createFieldSpec(new FieldTypeNormal());
-	    		title.setTag(Bulletin.TAGTITLE);
-	    		
-	    		customPublicSpecs =  new FieldSpecCollection(new FieldSpec[] {title});
-	    	}
-	    	if(customPrivateSpecs == null)
-	    	{
-	    		FieldSpec keyword = FieldSpec.createFieldSpec(new FieldTypeNormal());
-	    		keyword.setTag(Bulletin.TAGKEYWORDS);
-	    		FieldSpec author = FieldSpec.createFieldSpec(new FieldTypeNormal());
-	    		author.setTag(Bulletin.TAGAUTHOR);
-	    		
-	    		customPrivateSpecs = new FieldSpecCollection(new FieldSpec[] {keyword, author});   		    	
-	    	}
+    	if(tempFile1 == null)
+    	{
+			tempFile1 = createTempFileWithData(sampleBytes1);
+			tempFile2 = createTempFileWithData(sampleBytes2);
+    	}
+    	
+    	if(customPublicSpecs == null)
+    	{
+    		FieldSpec title = FieldSpec.createFieldSpec(new FieldTypeNormal());
+    		title.setTag(Bulletin.TAGTITLE);
+    		
+    		customPublicSpecs =  new FieldSpecCollection(new FieldSpec[] {title});
+    	}
+    	if(customPrivateSpecs == null)
+    	{
+    		FieldSpec keyword = FieldSpec.createFieldSpec(new FieldTypeNormal());
+    		keyword.setTag(Bulletin.TAGKEYWORDS);
+    		FieldSpec author = FieldSpec.createFieldSpec(new FieldTypeNormal());
+    		author.setTag(Bulletin.TAGAUTHOR);
+    		
+    		customPrivateSpecs = new FieldSpecCollection(new FieldSpec[] {keyword, author});   		    	
+    	}
     }
 
     public void tearDown() throws Exception
@@ -216,128 +216,128 @@ public class TestClientBulletinStore extends TestCaseEnhanced
    }
 
     
-    public void testRemoveBulletinFromAllFolders() throws Exception
+	public void testRemoveBulletinFromAllFolders() throws Exception
 	{
-	    	Bulletin original = testStore.createEmptyBulletin();
-	    	original.setImmutable();
-	    	testStore.saveBulletin(original);
-	    	testStore.setIsOnServer(original);
-	    	assertTrue("original not on server?", testStore.isProbablyOnServer(original.getUniversalId()));
-	
-	    	Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
-	    	testStore.saveBulletin(clone);
-	    	testStore.setIsOnServer(clone);
-	    	
-	    	assertTrue("new version not on server?", testStore.isProbablyOnServer(clone.getUniversalId()));
-	    	assertTrue("original still not on server?", testStore.isProbablyOnServer(original.getUniversalId()));
-	    	
-	    	testStore.removeBulletinFromAllFolders(clone);
-	    	assertFalse("didn't remove original?", testStore.isProbablyOnServer(original.getUniversalId()));
+		Bulletin original = testStore.createEmptyBulletin();
+		original.setImmutable();
+		testStore.saveBulletin(original);
+		testStore.setIsOnServer(original);
+		assertTrue("original not on server?", testStore.isProbablyOnServer(original.getUniversalId()));
+
+		Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
+		testStore.saveBulletin(clone);
+		testStore.setIsOnServer(clone);
+
+		assertTrue("new version not on server?", testStore.isProbablyOnServer(clone.getUniversalId()));
+		assertTrue("original still not on server?", testStore.isProbablyOnServer(original.getUniversalId()));
+
+		testStore.removeBulletinFromAllFolders(clone);
+		assertFalse("didn't remove original?", testStore.isProbablyOnServer(original.getUniversalId()));
 	}
     
     public void testCreateDraftCopyOfMySealed() throws Exception
 	{
-	    	Bulletin original = createImmutableBulletin(security);
+    	Bulletin original = createImmutableBulletin(security);
     	
-	    	Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
-	    	assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
-	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
-	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
-	    	assertEquals("did not clear authorized HQ?", 0, clone.getAuthorizedToReadKeys().size());
-	    	assertEquals("did not move HQ to Pending?", 1, clone.getBulletinHeaderPacket().getAuthorizedToReadKeysPending().size());
-	    	assertEquals("should still have 1 HQ in anyHQs since one is in pending", 1, clone.getAuthorizedToReadKeysIncludingPending().size());
-	    	assertTrue("not Mutable?", clone.isMutable());
-	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
-	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
-	    	BulletinHistory history = clone.getHistory();
+		Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
+		assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
+		assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
+		assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
+		assertEquals("did not clear authorized HQ?", 0, clone.getAuthorizedToReadKeys().size());
+		assertEquals("did not move HQ to Pending?", 1, clone.getBulletinHeaderPacket().getAuthorizedToReadKeysPending().size());
+		assertEquals("should still have 1 HQ in anyHQs since one is in pending", 1, clone.getAuthorizedToReadKeysIncludingPending().size());
+		assertTrue("not Mutable?", clone.isMutable());
+		assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
+		assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
+		BulletinHistory history = clone.getHistory();
 		assertEquals("no history?", 1, history.size());
-	    	assertEquals("wrong ancestor?", original.getLocalId(), history.get(0));
+		assertEquals("wrong ancestor?", original.getLocalId(), history.get(0));
 	}
 
     public void testCreateDraftCopyOfMyVersionedBulletin() throws Exception
  	{
-	    	Bulletin originalMutable = createMutableBulletin(security);
-	    	originalMutable.changeState(BulletinState.STATE_SNAPSHOT);
-	    	Bulletin cloneMutable = testStore.createNewDraft(originalMutable, customPublicSpecs, customPrivateSpecs);
-	    	assertTrue(originalMutable.isSnapshot());
-	    	assertFalse(cloneMutable.isSnapshot());
- 	   
-	    	Bulletin originalImmutable = createImmutableBulletin(security);
-	    	originalImmutable.changeState(BulletinState.STATE_SNAPSHOT);
-  	    	Bulletin cloneImmutable = testStore.createNewDraft(originalMutable, customPublicSpecs, customPrivateSpecs);
-  	    	assertTrue(originalImmutable.isSnapshot());
-  	    	assertFalse(cloneImmutable.isSnapshot());
+		Bulletin originalMutable = createMutableBulletin(security);
+		originalMutable.changeState(BulletinState.STATE_SNAPSHOT);
+		Bulletin cloneMutable = testStore.createNewDraft(originalMutable, customPublicSpecs, customPrivateSpecs);
+		assertTrue(originalMutable.isSnapshot());
+		assertFalse(cloneMutable.isSnapshot());
+		   
+		Bulletin originalImmutable = createImmutableBulletin(security);
+		originalImmutable.changeState(BulletinState.STATE_SNAPSHOT);
+		Bulletin cloneImmutable = testStore.createNewDraft(originalMutable, customPublicSpecs, customPrivateSpecs);
+		assertTrue(originalImmutable.isSnapshot());
+		assertFalse(cloneImmutable.isSnapshot());
  	}
   
     public void testCreateDraftCopyOfMyDraftWithNewFieldSpecs() throws Exception
 	{
-    		Bulletin original = createImmutableBulletin(security);
-    		original.setMutable();
-   	
- 	    	Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
-	    	assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
-	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
-	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
-	    	assertEquals("did not clear authorized HQ?", 0, clone.getAuthorizedToReadKeys().size());
-	    	assertEquals("did not move HQ to Pending?", 1, clone.getBulletinHeaderPacket().getAuthorizedToReadKeysPending().size());
-	    	assertEquals("should still have 1 HQ in anyHQs since one is in pending", 1, clone.getAuthorizedToReadKeysIncludingPending().size());
-	    	assertTrue("not Mutable?", clone.isMutable());
-	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
-	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
-	    	BulletinHistory history = clone.getHistory();
+		Bulletin original = createImmutableBulletin(security);
+		original.setMutable();
+		
+		Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
+		assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
+		assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
+		assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
+		assertEquals("did not clear authorized HQ?", 0, clone.getAuthorizedToReadKeys().size());
+		assertEquals("did not move HQ to Pending?", 1, clone.getBulletinHeaderPacket().getAuthorizedToReadKeysPending().size());
+		assertEquals("should still have 1 HQ in anyHQs since one is in pending", 1, clone.getAuthorizedToReadKeysIncludingPending().size());
+		assertTrue("not Mutable?", clone.isMutable());
+		assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
+		assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
+		BulletinHistory history = clone.getHistory();
 		assertEquals("has history?", 0, history.size());
  	}
     
     public void testCreateDraftCopyOfNotMyBulletin() throws Exception
 	{
-	    	MartusCrypto otherSecurity = MockMartusSecurity.createOtherClient();
-	    	Bulletin original = createImmutableBulletin(otherSecurity);
-	    	Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
-	    	assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
-	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
-	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
-	    	assertEquals("did not clear authorized HQ?", 0, clone.getAuthorizedToReadKeys().size());
-	    	assertEquals("did not clear any pending HQs?", 0, clone.getBulletinHeaderPacket().getAuthorizedToReadKeysPending().size());
-	    	assertEquals("We no longer keep HQs for copies of bulletins that were not ours.", 0, clone.getAuthorizedToReadKeysIncludingPending().size());
-	    	assertTrue("not Mutable?", clone.isMutable());
-	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
-	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
-	    	assertEquals("has history?", 0, clone.getHistory().size());
+		MartusCrypto otherSecurity = MockMartusSecurity.createOtherClient();
+		Bulletin original = createImmutableBulletin(otherSecurity);
+		Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
+		assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
+		assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
+		assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
+		assertEquals("did not clear authorized HQ?", 0, clone.getAuthorizedToReadKeys().size());
+		assertEquals("did not clear any pending HQs?", 0, clone.getBulletinHeaderPacket().getAuthorizedToReadKeysPending().size());
+		assertEquals("We no longer keep HQs for copies of bulletins that were not ours.", 0, clone.getAuthorizedToReadKeysIncludingPending().size());
+		assertTrue("not Mutable?", clone.isMutable());
+		assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
+		assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
+		assertEquals("has history?", 0, clone.getHistory().size());
 	}
     
     public void testCreateCloneWithTemplateAndDataFrom() throws Exception
     {
 		MockBulletinStore clientStore = new MockBulletinStore(security);
-	    	MartusCrypto otherSecurity = MockMartusSecurity.createOtherClient();
-	    	Bulletin original = createImmutableBulletin(otherSecurity);
-	    	original.setAuthorizedToReadKeys(new HeadquartersKeys(new HeadquartersKey(security.getPublicKeyString())));
-	    	clientStore.saveBulletin(original);
-	    	AttachmentProxy[] originalAttachments = original.getPublicAttachments();
-	    	assertEquals("Original Attachment not added?", 1, originalAttachments.length);
+		MartusCrypto otherSecurity = MockMartusSecurity.createOtherClient();
+		Bulletin original = createImmutableBulletin(otherSecurity);
+		original.setAuthorizedToReadKeys(new HeadquartersKeys(new HeadquartersKey(security.getPublicKeyString())));
+		clientStore.saveBulletin(original);
+		AttachmentProxy[] originalAttachments = original.getPublicAttachments();
+		assertEquals("Original Attachment not added?", 1, originalAttachments.length);
 		File originalFile = AttachmentProxyFile.obtainFileForAttachment(originalAttachments[0], clientStore);
 		assertNotNull(originalFile);
 		assertTrue ("original file didn't end in .txt?", originalFile.getName().endsWith(ATTACHMENT_1_EXTENSION));
 	    	
-	    	Bulletin clone = clientStore.createCloneWithTemplateAndDataFrom(original);
-	    	AttachmentProxy[] cloneAttachmentsBeforeSave = clone.getPublicAttachments();
+		Bulletin clone = clientStore.createCloneWithTemplateAndDataFrom(original);
+		AttachmentProxy[] cloneAttachmentsBeforeSave = clone.getPublicAttachments();
 		File cloneFile = AttachmentProxyFile.obtainFileForAttachment(cloneAttachmentsBeforeSave[0], clientStore);
-	    	assertNotNull(cloneFile);
+		assertNotNull(cloneFile);
 		assertTrue ("cloned attachment before save didn't end in .txt?", cloneFile.getName().endsWith(ATTACHMENT_1_EXTENSION));
 
-	    	clientStore.saveBulletin(clone);
-	    	AttachmentProxy[] cloneAttachmentsAfterSave = clone.getPublicAttachments();
+		clientStore.saveBulletin(clone);
+		AttachmentProxy[] cloneAttachmentsAfterSave = clone.getPublicAttachments();
 		File cloneFileAfterSave = AttachmentProxyFile.obtainFileForAttachment(cloneAttachmentsAfterSave[0], clientStore);
-	    	assertEquals("Clone Attachment after save not added?", 1, cloneAttachmentsAfterSave.length);
-	    	assertNotNull(cloneFileAfterSave);
+		assertEquals("Clone Attachment after save not added?", 1, cloneAttachmentsAfterSave.length);
+		assertNotNull(cloneFileAfterSave);
 		assertTrue ("cloned attachment after save didn't end in .txt?", cloneFileAfterSave.getName().endsWith(ATTACHMENT_1_EXTENSION));
 
-	    	assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
-	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
-	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
-	    	assertEquals("did not clear authorized HQ?", 0, clone.getAuthorizedToReadKeys().size());
-	    	assertEquals("did not clear any pending HQs?", 0, clone.getBulletinHeaderPacket().getAuthorizedToReadKeysPending().size());
-	    	assertEquals("We no longer keep HQs for copies of bulletins that were not ours.", 0, clone.getAuthorizedToReadKeysIncludingPending().size());
-	    	assertEquals("has history?", 0, clone.getHistory().size());
+		assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
+		assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
+		assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
+		assertEquals("did not clear authorized HQ?", 0, clone.getAuthorizedToReadKeys().size());
+		assertEquals("did not clear any pending HQs?", 0, clone.getBulletinHeaderPacket().getAuthorizedToReadKeysPending().size());
+		assertEquals("We no longer keep HQs for copies of bulletins that were not ours.", 0, clone.getAuthorizedToReadKeysIncludingPending().size());
+		assertEquals("has history?", 0, clone.getHistory().size());
     }
     
     public void testCreateNewDraftWithCurrentTemplateButIdAndDataAndHistoryFrom() throws Exception
@@ -379,13 +379,13 @@ public class TestClientBulletinStore extends TestCaseEnhanced
    private Bulletin createImmutableBulletin(MartusCrypto otherSecurity) throws Exception
 	{
 		HeadquartersKeys oldHq = new HeadquartersKeys(new HeadquartersKey(fakeHqKey));
- 	    	Bulletin original = new Bulletin(otherSecurity);
-	    	original.set(Bulletin.TAGTITLE, PUBLIC_DATA);
-	    	original.set(Bulletin.TAGAUTHOR, PRIVATE_DATA);
-	    	original.setAuthorizedToReadKeys(oldHq);
-	    	File attachment = createAttachment(ATTACHMENT_1_DATA);
-	    	original.addPublicAttachment(new AttachmentProxy(attachment));
-	    	original.setImmutable();
+		Bulletin original = new Bulletin(otherSecurity);
+		original.set(Bulletin.TAGTITLE, PUBLIC_DATA);
+		original.set(Bulletin.TAGAUTHOR, PRIVATE_DATA);
+		original.setAuthorizedToReadKeys(oldHq);
+		File attachment = createAttachment(ATTACHMENT_1_DATA);
+		original.addPublicAttachment(new AttachmentProxy(attachment));
+		original.setImmutable();
 		return original;
 	}
 
@@ -396,51 +396,51 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
      private Bulletin createMutableBulletin(MartusCrypto otherSecurity) throws Exception
 	{
-    		Bulletin b = createImmutableBulletin(otherSecurity);
-	    	b.setMutable();
+		Bulletin b = createImmutableBulletin(otherSecurity);
+		b.setMutable();
 		return b;
 	}
 
     public void testChooseBulletinToUpload() throws Exception
 	{
-	    	BulletinFolder outbox = testStore.createFolder("*My outbox");
-	    	int count = 10;
-	    	Bulletin[] bulletins = new Bulletin[count];
-	    	Set bulletinsToBeSent = new HashSet();
-	    	for(int i=0; i < count; ++i)
-	    	{
-	    		bulletins[i] = testStore.createEmptyBulletin();
-	    		testStore.saveBulletin(bulletins[i]);
-	        	UniversalId universalId = bulletins[i].getUniversalId();
-				testStore.addBulletinToFolder(outbox, universalId);
-	        	bulletinsToBeSent.add(universalId);
-	    	}
-	    	
-	    	UniversalId uidRemoved = bulletins[3].getUniversalId();
-	    	UniversalId uidDiscarded = bulletins[6].getUniversalId();
-	    	UniversalId uidRemovedAndDiscarded = bulletins[9].getUniversalId();
-	    	
-	    	testStore.removeBulletinFromFolder(outbox, uidRemoved);
-	    	testStore.removeBulletinFromFolder(outbox, uidRemovedAndDiscarded);
-	    	
-	    	BulletinFolder discarded = testStore.getFolderDiscarded();
-	    	testStore.addBulletinToFolder(discarded, uidDiscarded);
-	    	testStore.addBulletinToFolder(discarded, uidRemovedAndDiscarded);
-	    	
-	    	bulletinsToBeSent.remove(uidRemoved);
-	    	bulletinsToBeSent.remove(uidRemovedAndDiscarded);
-	    	bulletinsToBeSent.remove(uidDiscarded);
-	
-	    	Set bulletinsActuallySent = new HashSet();
-	    	for(int startIndex=0; startIndex < count; ++startIndex)
-	    	{
-	    		UniversalId gotUid = testStore.chooseBulletinToUpload(outbox, startIndex).getUniversalId();
-	    		bulletinsActuallySent.add(gotUid);
-	    		assertNotEquals("Sent removed bulletin?", uidRemoved, gotUid);
-	    		assertNotEquals("Sent discarded bulletin?", uidDiscarded, gotUid);
-	    		assertNotEquals("Sent removed and discarded bulletin?", uidRemovedAndDiscarded, gotUid);
-	    	}
-	    	assertEquals("Didn't send expected bulletins?", bulletinsToBeSent, bulletinsActuallySent);
+		BulletinFolder outbox = testStore.createFolder("*My outbox");
+		int count = 10;
+		Bulletin[] bulletins = new Bulletin[count];
+		Set bulletinsToBeSent = new HashSet();
+		for(int i=0; i < count; ++i)
+		{
+			bulletins[i] = testStore.createEmptyBulletin();
+			testStore.saveBulletin(bulletins[i]);
+			UniversalId universalId = bulletins[i].getUniversalId();
+			testStore.addBulletinToFolder(outbox, universalId);
+			bulletinsToBeSent.add(universalId);
+		}
+		
+		UniversalId uidRemoved = bulletins[3].getUniversalId();
+		UniversalId uidDiscarded = bulletins[6].getUniversalId();
+		UniversalId uidRemovedAndDiscarded = bulletins[9].getUniversalId();
+		
+		testStore.removeBulletinFromFolder(outbox, uidRemoved);
+		testStore.removeBulletinFromFolder(outbox, uidRemovedAndDiscarded);
+		
+		BulletinFolder discarded = testStore.getFolderDiscarded();
+		testStore.addBulletinToFolder(discarded, uidDiscarded);
+		testStore.addBulletinToFolder(discarded, uidRemovedAndDiscarded);
+		
+		bulletinsToBeSent.remove(uidRemoved);
+		bulletinsToBeSent.remove(uidRemovedAndDiscarded);
+		bulletinsToBeSent.remove(uidDiscarded);
+		
+		Set bulletinsActuallySent = new HashSet();
+		for(int startIndex=0; startIndex < count; ++startIndex)
+		{
+			UniversalId gotUid = testStore.chooseBulletinToUpload(outbox, startIndex).getUniversalId();
+			bulletinsActuallySent.add(gotUid);
+			assertNotEquals("Sent removed bulletin?", uidRemoved, gotUid);
+			assertNotEquals("Sent discarded bulletin?", uidDiscarded, gotUid);
+			assertNotEquals("Sent removed and discarded bulletin?", uidRemovedAndDiscarded, gotUid);
+		}
+		assertEquals("Didn't send expected bulletins?", bulletinsToBeSent, bulletinsActuallySent);
     	
 	}
     
@@ -474,7 +474,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	
     public void testNeedsFolderMigration()
     {
-    		assertFalse("normal store needs migration?", testStore.needsFolderMigration());
+    	assertFalse("normal store needs migration?", testStore.needsFolderMigration());
 		testStore.createSystemFolder(ClientBulletinStore.OBSOLETE_OUTBOX_FOLDER);
 		assertTrue("outbox doesn't trigger migration?", testStore.needsFolderMigration());
 		testStore.deleteFolder(ClientBulletinStore.OBSOLETE_OUTBOX_FOLDER);
@@ -487,25 +487,25 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     {
 
 		BulletinFolder outbox = testStore.createSystemFolder(ClientBulletinStore.OBSOLETE_OUTBOX_FOLDER);
-	    	Bulletin saved = testStore.createEmptyBulletin();
-	    	testStore.saveBulletin(saved);
-	    	testStore.addBulletinToFolder(outbox, saved.getUniversalId());
-	
-	    	BulletinFolder drafts = testStore.createSystemFolder(ClientBulletinStore.OBSOLETE_DRAFT_FOLDER);
-	    	Bulletin draft = testStore.createEmptyBulletin();
-	    	testStore.saveBulletin(draft);
-	    	testStore.addBulletinToFolder(drafts, draft.getUniversalId());
+		Bulletin saved = testStore.createEmptyBulletin();
+		testStore.saveBulletin(saved);
+		testStore.addBulletinToFolder(outbox, saved.getUniversalId());
+		
+		BulletinFolder drafts = testStore.createSystemFolder(ClientBulletinStore.OBSOLETE_DRAFT_FOLDER);
+		Bulletin draft = testStore.createEmptyBulletin();
+		testStore.saveBulletin(draft);
+		testStore.addBulletinToFolder(drafts, draft.getUniversalId());
 	    	
 		assertFalse("Already saved folders?", testStore.getFoldersFile().exists());
-	    	assertTrue("Migration failed?", testStore.migrateFolders());
+		assertTrue("Migration failed?", testStore.migrateFolders());
 		assertTrue("Didn't save changes?", testStore.getFoldersFile().exists());
 	
-	    	assertEquals(2, testStore.getFolderSaved().getBulletinCount());
-	    	assertEquals(1, testStore.getFolderSealedOutbox().getBulletinCount());
-	    	assertEquals(0, testStore.getFolderSealedOutbox().find(saved.getUniversalId()));
-	
-	    	assertNull("Didn't remove outbox?", testStore.findFolder(ClientBulletinStore.OBSOLETE_OUTBOX_FOLDER));
-	    	assertNull("Didn't remove drafts folder?", testStore.findFolder(ClientBulletinStore.OBSOLETE_DRAFT_FOLDER));
+		assertEquals(2, testStore.getFolderSaved().getBulletinCount());
+		assertEquals(1, testStore.getFolderSealedOutbox().getBulletinCount());
+		assertEquals(0, testStore.getFolderSealedOutbox().find(saved.getUniversalId()));
+		
+		assertNull("Didn't remove outbox?", testStore.findFolder(ClientBulletinStore.OBSOLETE_OUTBOX_FOLDER));
+		assertNull("Didn't remove drafts folder?", testStore.findFolder(ClientBulletinStore.OBSOLETE_DRAFT_FOLDER));
     	
     }
     
