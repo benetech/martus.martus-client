@@ -35,6 +35,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.core.AttachmentProxyFile;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.swing.UiLabel;
 
@@ -42,7 +43,7 @@ class InlineAttachmentComponent extends UiLabel
 {
 	public InlineAttachmentComponent(ClientBulletinStore store, AttachmentProxy proxy) throws Exception
 	{
-		File tempFile = ViewAttachmentHandler.obtainFileForAttachment(proxy, store);
+		File tempFile = AttachmentProxyFile.obtainFileForAttachment(proxy, store);
 		try
 		{
 			Toolkit toolkit = Toolkit.getDefaultToolkit();

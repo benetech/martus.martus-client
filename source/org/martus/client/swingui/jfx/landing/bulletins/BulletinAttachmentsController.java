@@ -51,6 +51,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.core.AttachmentProxyFile;
 import org.martus.client.core.FxBulletin;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
@@ -128,7 +129,7 @@ public class BulletinAttachmentsController extends FxController
 		if(type != FileType.Image)
 			return;
 		
-		File file = ViewAttachmentHandler.obtainFileForAttachment(attachmentProxy, getMainWindow().getStore());
+		File file = AttachmentProxyFile.obtainFileForAttachment(attachmentProxy, getMainWindow().getStore());
 		try
 		{
 			Image image = loadImage(file);
@@ -290,7 +291,7 @@ public class BulletinAttachmentsController extends FxController
 
 	private boolean viewAttachmentInternally(AttachmentProxy proxy) throws Exception
 	{
-		File attachmentFileToView = ViewAttachmentHandler.obtainFileForAttachment(proxy, getMainWindow().getStore());
+		File attachmentFileToView = AttachmentProxyFile.obtainFileForAttachment(proxy, getMainWindow().getStore());
 		try
 		{
 			AttachmentViewController attachmentViewer = new AttachmentViewController(getMainWindow(), attachmentFileToView);

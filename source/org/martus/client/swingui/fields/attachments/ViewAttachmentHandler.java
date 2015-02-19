@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.core.AttachmentProxyFile;
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiSession;
@@ -104,7 +105,7 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 
 	public static void launchExternalAttachmentViewer(AttachmentProxy proxy, ClientBulletinStore store) throws Exception 
 	{
-		File temp = obtainFileForAttachment(proxy, store);
+		File temp = AttachmentProxyFile.obtainFileForAttachment(proxy, store);
 		try
 		{
 			Runtime runtime = Runtime.getRuntime();
@@ -134,14 +135,6 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		}
 	}
 	
-	static public File obtainFileForAttachment(AttachmentProxy proxy, ClientBulletinStore store) throws Exception
-	{
-		ReadableDatabase db = store.getDatabase();
-		MartusCrypto security = store.getSignatureVerifier();
-
-		return obtainFileForAttachment(proxy, db, security);
-	}
-
 	public static File obtainFileForAttachment(AttachmentProxy proxy, ReadableDatabase db, MartusCrypto security) throws Exception
 	{
 		File attachmentAlreadyAvailableAsFile = proxy.getFile();

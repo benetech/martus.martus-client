@@ -55,6 +55,7 @@ import javafx.scene.layout.Pane;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.core.AttachmentProxyFile;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.StatusBar;
@@ -62,7 +63,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuFxBulletin;
 import org.martus.client.swingui.actions.ActionMenuModifyFxBulletin;
 import org.martus.client.swingui.actions.ActionMenuViewFxBulletin;
-import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.client.swingui.jfx.generic.TableRowData;
 import org.martus.client.swingui.jfx.generic.controls.FxButtonTableCellFactory;
 import org.martus.client.swingui.jfx.generic.controls.FxTimestampTableCellFactory;
@@ -275,7 +275,7 @@ public class BulletinsListController extends AbstractFxLandingContentController 
 		for (int i = 0; i < numberOfAttachments; i++)
 		{
 			AttachmentProxy attachmentProxy = attachments[i];
-			File attachmentFileToView = ViewAttachmentHandler.obtainFileForAttachment(attachmentProxy, getMainWindow().getStore());
+			File attachmentFileToView = AttachmentProxyFile.obtainFileForAttachment(attachmentProxy, getMainWindow().getStore());
 			try
 			{
 				if(!AttachmentViewController.canViewAttachmentInProgram(attachmentFileToView))

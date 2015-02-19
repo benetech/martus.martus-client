@@ -37,8 +37,8 @@ import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.core.AttachmentProxyFile;
 import org.martus.client.core.MartusClientXml;
-import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.client.test.MockBulletinStore;
 import org.martus.client.test.MockMartusApp;
 import org.martus.common.BulletinSummary;
@@ -314,19 +314,19 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	clientStore.saveBulletin(original);
 	    	AttachmentProxy[] originalAttachments = original.getPublicAttachments();
 	    	assertEquals("Original Attachment not added?", 1, originalAttachments.length);
-		File originalFile = ViewAttachmentHandler.obtainFileForAttachment(originalAttachments[0], clientStore);
+		File originalFile = AttachmentProxyFile.obtainFileForAttachment(originalAttachments[0], clientStore);
 		assertNotNull(originalFile);
 		assertTrue ("original file didn't end in .txt?", originalFile.getName().endsWith(ATTACHMENT_1_EXTENSION));
 	    	
 	    	Bulletin clone = clientStore.createCloneWithTemplateAndDataFrom(original);
 	    	AttachmentProxy[] cloneAttachmentsBeforeSave = clone.getPublicAttachments();
-		File cloneFile = ViewAttachmentHandler.obtainFileForAttachment(cloneAttachmentsBeforeSave[0], clientStore);
+		File cloneFile = AttachmentProxyFile.obtainFileForAttachment(cloneAttachmentsBeforeSave[0], clientStore);
 	    	assertNotNull(cloneFile);
 		assertTrue ("cloned attachment before save didn't end in .txt?", cloneFile.getName().endsWith(ATTACHMENT_1_EXTENSION));
 
 	    	clientStore.saveBulletin(clone);
 	    	AttachmentProxy[] cloneAttachmentsAfterSave = clone.getPublicAttachments();
-		File cloneFileAfterSave = ViewAttachmentHandler.obtainFileForAttachment(cloneAttachmentsAfterSave[0], clientStore);
+		File cloneFileAfterSave = AttachmentProxyFile.obtainFileForAttachment(cloneAttachmentsAfterSave[0], clientStore);
 	    	assertEquals("Clone Attachment after save not added?", 1, cloneAttachmentsAfterSave.length);
 	    	assertNotNull(cloneFileAfterSave);
 		assertTrue ("cloned attachment after save didn't end in .txt?", cloneFileAfterSave.getName().endsWith(ATTACHMENT_1_EXTENSION));

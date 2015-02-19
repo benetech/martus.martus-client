@@ -30,6 +30,8 @@ import java.io.File;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.common.bulletin.AttachmentProxy;
+import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.database.ReadableDatabase;
 
 public class AttachmentProxyFile
 {
@@ -40,7 +42,7 @@ public class AttachmentProxyFile
 
 	public static AttachmentProxyFile extractAttachment(ClientBulletinStore storeToUse, AttachmentProxy proxyFromDatabase) throws Exception
 	{
-		File fileToWrap = ViewAttachmentHandler.obtainFileForAttachment(proxyFromDatabase, storeToUse);
+		File fileToWrap = obtainFileForAttachment(proxyFromDatabase, storeToUse);
 		return new AttachmentProxyFile(fileToWrap, true);
 	}
 
@@ -61,6 +63,14 @@ public class AttachmentProxyFile
 			file.delete();
 		
 		file = null;
+	}
+
+	static public File obtainFileForAttachment(AttachmentProxy proxy, ClientBulletinStore store) throws Exception
+	{
+		ReadableDatabase db = store.getDatabase();
+		MartusCrypto security = store.getSignatureVerifier();
+	
+		return ViewAttachmentHandler.obtainFileForAttachment(proxy, db, security);
 	}
 
 	private File file;
