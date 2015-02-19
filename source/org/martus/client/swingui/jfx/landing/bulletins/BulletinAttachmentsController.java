@@ -113,25 +113,30 @@ public class BulletinAttachmentsController extends FxController
 	{
 		try
 		{
-			AttachmentProxy attachmentProxy = attachmentTableRowData.getAttachmentProxy();
-			FileType type = AttachmentViewController.determineFileType(attachmentProxy.getLabel());
-			if(type != FileType.Image)
-				return;
-			
-			File file = ViewAttachmentHandler.obtainFileForAttachment(attachmentProxy, getMainWindow().getStore());
-			try
-			{
-				Image image = loadImage(file);
-				attachmentTableRowData.imageProperty().setValue(image);
-			}
-			finally
-			{
-				file.delete();
-			}
+			rawPopulateThumbnail(attachmentTableRowData);
 		}
 		catch (Exception relativelyHarmlessException)
 		{
 			MartusLogger.logException(relativelyHarmlessException);
+		}
+	}
+
+	public void rawPopulateThumbnail(AttachmentTableRowData attachmentTableRowData) throws Exception
+	{
+		AttachmentProxy attachmentProxy = attachmentTableRowData.getAttachmentProxy();
+		FileType type = AttachmentViewController.determineFileType(attachmentProxy.getLabel());
+		if(type != FileType.Image)
+			return;
+		
+		File file = ViewAttachmentHandler.obtainFileForAttachment(attachmentProxy, getMainWindow().getStore());
+		try
+		{
+			Image image = loadImage(file);
+			attachmentTableRowData.imageProperty().setValue(image);
+		}
+		finally
+		{
+			file.delete();
 		}
 	}
 
