@@ -129,15 +129,15 @@ public class BulletinAttachmentsController extends FxController
 		if(type != FileType.Image)
 			return;
 		
-		File file = AttachmentProxyFile.obtainFileForAttachment(attachmentProxy, getMainWindow().getStore());
+		AttachmentProxyFile apf = AttachmentProxyFile.extractAttachment(getMainWindow().getStore(), attachmentProxy);
 		try
 		{
-			Image image = loadImage(file);
+			Image image = loadImage(apf.getFile());
 			attachmentTableRowData.imageProperty().setValue(image);
 		}
 		finally
 		{
-			file.delete();
+			apf.release();
 		}
 	}
 
@@ -291,10 +291,11 @@ public class BulletinAttachmentsController extends FxController
 
 	private boolean viewAttachmentInternally(AttachmentProxy proxy) throws Exception
 	{
-		File attachmentFileToView = AttachmentProxyFile.obtainFileForAttachment(proxy, getMainWindow().getStore());
+		AttachmentProxyFile apf = AttachmentProxyFile.extractAttachment(getMainWindow().getStore(), proxy);
 		try
 		{
-			AttachmentViewController attachmentViewer = new AttachmentViewController(getMainWindow(), attachmentFileToView);
+			File file = apf.getFile();
+			AttachmentViewController attachmentViewer = new AttachmentViewController(getMainWindow(), file);
 	
 			if(!attachmentViewer.canViewInProgram())
 				return false;
@@ -304,7 +305,7 @@ public class BulletinAttachmentsController extends FxController
 		}
 		finally
 		{
-			attachmentFileToView.delete();
+			apf.release();
 		}
 	}
 

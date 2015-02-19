@@ -95,12 +95,13 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 
 	public static void launchExternalAttachmentViewer(AttachmentProxy proxy, ClientBulletinStore store) throws Exception 
 	{
-		File temp = AttachmentProxyFile.obtainFileForAttachment(proxy, store);
+		AttachmentProxyFile apf = AttachmentProxyFile.extractAttachment(store, proxy);
 		try
 		{
 			Runtime runtime = Runtime.getRuntime();
 	
-			String[] launchCommand = getLaunchCommandForThisOperatingSystem(temp.getPath());
+			File file = apf.getFile();
+			String[] launchCommand = getLaunchCommandForThisOperatingSystem(file.getPath());
 			
 			Process processView=runtime.exec(launchCommand);
 			int exitCode = processView.waitFor();
@@ -121,7 +122,7 @@ public class ViewAttachmentHandler extends AbstractViewOrSaveAttachmentHandler
 		}
 		finally
 		{
-			temp.delete();
+			apf.release();
 		}
 	}
 	

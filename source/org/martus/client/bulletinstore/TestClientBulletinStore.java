@@ -237,7 +237,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     
     public void testCreateDraftCopyOfMySealed() throws Exception
 	{
-    	Bulletin original = createImmutableBulletin(security);
+    	Bulletin original = createImmutableBulletinWithAttachment(security);
     	
 		Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
 		assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
@@ -262,7 +262,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertTrue(originalMutable.isSnapshot());
 		assertFalse(cloneMutable.isSnapshot());
 		   
-		Bulletin originalImmutable = createImmutableBulletin(security);
+		Bulletin originalImmutable = createImmutableBulletinWithAttachment(security);
 		originalImmutable.changeState(BulletinState.STATE_SNAPSHOT);
 		Bulletin cloneImmutable = testStore.createNewDraft(originalMutable, customPublicSpecs, customPrivateSpecs);
 		assertTrue(originalImmutable.isSnapshot());
@@ -271,7 +271,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
   
     public void testCreateDraftCopyOfMyDraftWithNewFieldSpecs() throws Exception
 	{
-		Bulletin original = createImmutableBulletin(security);
+		Bulletin original = createImmutableBulletinWithAttachment(security);
 		original.setMutable();
 		
 		Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
@@ -291,7 +291,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     public void testCreateDraftCopyOfNotMyBulletin() throws Exception
 	{
 		MartusCrypto otherSecurity = MockMartusSecurity.createOtherClient();
-		Bulletin original = createImmutableBulletin(otherSecurity);
+		Bulletin original = createImmutableBulletinWithAttachment(otherSecurity);
 		Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
 		assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
 		assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
@@ -309,27 +309,35 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     {
 		MockBulletinStore clientStore = new MockBulletinStore(security);
 		MartusCrypto otherSecurity = MockMartusSecurity.createOtherClient();
-		Bulletin original = createImmutableBulletin(otherSecurity);
+		Bulletin original = createImmutableBulletinWithAttachment(otherSecurity);
 		original.setAuthorizedToReadKeys(new HeadquartersKeys(new HeadquartersKey(security.getPublicKeyString())));
 		clientStore.saveBulletin(original);
 		AttachmentProxy[] originalAttachments = original.getPublicAttachments();
 		assertEquals("Original Attachment not added?", 1, originalAttachments.length);
-		File originalFile = AttachmentProxyFile.obtainFileForAttachment(originalAttachments[0], clientStore);
+		AttachmentProxyFile originalApf = AttachmentProxyFile.extractAttachment(clientStore, originalAttachments[0]);
+		File originalFile = originalApf.getFile();
 		assertNotNull(originalFile);
 		assertTrue ("original file didn't end in .txt?", originalFile.getName().endsWith(ATTACHMENT_1_EXTENSION));
+		originalApf.release();
 	    	
 		Bulletin clone = clientStore.createCloneWithTemplateAndDataFrom(original);
 		AttachmentProxy[] cloneAttachmentsBeforeSave = clone.getPublicAttachments();
-		File cloneFile = AttachmentProxyFile.obtainFileForAttachment(cloneAttachmentsBeforeSave[0], clientStore);
+		AttachmentProxy cloneAttachmentProxyBeforeSave = cloneAttachmentsBeforeSave[0];
+		assertNull(cloneAttachmentProxyBeforeSave.getFile());
+		AttachmentProxyFile cloneApf = AttachmentProxyFile.extractAttachment(clientStore, cloneAttachmentProxyBeforeSave);
+		File cloneFile = cloneApf.getFile();
 		assertNotNull(cloneFile);
 		assertTrue ("cloned attachment before save didn't end in .txt?", cloneFile.getName().endsWith(ATTACHMENT_1_EXTENSION));
+		cloneApf.release();
 
 		clientStore.saveBulletin(clone);
 		AttachmentProxy[] cloneAttachmentsAfterSave = clone.getPublicAttachments();
-		File cloneFileAfterSave = AttachmentProxyFile.obtainFileForAttachment(cloneAttachmentsAfterSave[0], clientStore);
+		AttachmentProxyFile cloneApfAfterSave = AttachmentProxyFile.extractAttachment(clientStore, cloneAttachmentsAfterSave[0]);
+		File cloneFileAfterSave = cloneApfAfterSave.getFile();
 		assertEquals("Clone Attachment after save not added?", 1, cloneAttachmentsAfterSave.length);
 		assertNotNull(cloneFileAfterSave);
 		assertTrue ("cloned attachment after save didn't end in .txt?", cloneFileAfterSave.getName().endsWith(ATTACHMENT_1_EXTENSION));
+		cloneApfAfterSave.release();
 
 		assertEquals("wrong account?", testStore.getAccountId(), clone.getAccount());
 		assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
@@ -376,7 +384,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	assertEquals(originalHeader.getAuthorizedToReadKeysPending(), cloneHeader.getAuthorizedToReadKeysPending());
     }
 
-   private Bulletin createImmutableBulletin(MartusCrypto otherSecurity) throws Exception
+   private Bulletin createImmutableBulletinWithAttachment(MartusCrypto otherSecurity) throws Exception
 	{
 		HeadquartersKeys oldHq = new HeadquartersKeys(new HeadquartersKey(fakeHqKey));
 		Bulletin original = new Bulletin(otherSecurity);
@@ -396,7 +404,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
      private Bulletin createMutableBulletin(MartusCrypto otherSecurity) throws Exception
 	{
-		Bulletin b = createImmutableBulletin(otherSecurity);
+		Bulletin b = createImmutableBulletinWithAttachment(otherSecurity);
 		b.setMutable();
 		return b;
 	}
