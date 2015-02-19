@@ -26,12 +26,19 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.core;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
 import org.martus.common.bulletin.AttachmentProxy;
+import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.database.ReadableDatabase;
+import org.martus.common.packet.AttachmentPacket;
+import org.martus.common.packet.Packet.InvalidPacketException;
+import org.martus.common.packet.Packet.SignatureVerificationException;
+import org.martus.common.packet.Packet.WrongPacketTypeException;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class AttachmentProxyFile
 {
@@ -65,12 +72,41 @@ public class AttachmentProxyFile
 		file = null;
 	}
 
-	static public File obtainFileForAttachment(AttachmentProxy proxy, ClientBulletinStore store) throws Exception
+	public static File obtainFileForAttachment(AttachmentProxy proxy, ClientBulletinStore store) throws Exception
 	{
 		ReadableDatabase db = store.getDatabase();
 		MartusCrypto security = store.getSignatureVerifier();
 	
-		return ViewAttachmentHandler.obtainFileForAttachment(proxy, db, security);
+		return AttachmentProxyFile.obtainFileForAttachment(proxy, db, security);
+	}
+
+	private static File obtainFileForAttachment(AttachmentProxy proxy, ReadableDatabase db, MartusCrypto security) throws Exception
+	{
+		File attachmentAlreadyAvailableAsFile = proxy.getFile();
+		if(attachmentAlreadyAvailableAsFile != null)
+			return attachmentAlreadyAvailableAsFile;
+		
+		AttachmentPacket pendingPacket = proxy.getPendingPacket();
+		if(pendingPacket != null)
+		{
+			File tempFileAlreadyAvailable = pendingPacket.getRawFile();
+			if(tempFileAlreadyAvailable != null)
+				return tempFileAlreadyAvailable;
+		}
+		
+		File tempFile = extractAttachmentToTempFile(db, proxy, security);
+		return tempFile;
+	}
+
+	private static File extractAttachmentToTempFile(ReadableDatabase db, AttachmentProxy proxy, MartusCrypto security) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
+	{
+		String fileName = proxy.getLabel();
+		
+		File temp = File.createTempFile(BulletinXmlExporter.extractFileNameOnly(fileName), BulletinXmlExporter.extractExtentionOnly(fileName));
+		temp.deleteOnExit();
+	
+		BulletinLoader.extractAttachmentToFile(db, proxy, security, temp);
+		return temp;
 	}
 
 	private File file;
