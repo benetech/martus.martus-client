@@ -27,16 +27,27 @@ package org.martus.client.core;
 
 import java.io.File;
 
+import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.swingui.fields.attachments.ViewAttachmentHandler;
+import org.martus.common.bulletin.AttachmentProxy;
+
 public class AttachmentProxyFile
 {
 	public static AttachmentProxyFile wrapFile(File pretendNonTemp)
 	{
-		return new AttachmentProxyFile(pretendNonTemp);
+		return new AttachmentProxyFile(pretendNonTemp, false);
 	}
 
-	public AttachmentProxyFile(File fileToWrap)
+	public static AttachmentProxyFile extractAttachment(ClientBulletinStore storeToUse, AttachmentProxy proxyFromDatabase) throws Exception
+	{
+		File fileToWrap = ViewAttachmentHandler.obtainFileForAttachment(proxyFromDatabase, storeToUse);
+		return new AttachmentProxyFile(fileToWrap, true);
+	}
+
+	public AttachmentProxyFile(File fileToWrap, boolean shouldDeleteOnRelease)
 	{
 		file = fileToWrap;
+		shouldDelete = shouldDeleteOnRelease;
 	}
 	
 	public File getFile()
@@ -46,7 +57,12 @@ public class AttachmentProxyFile
 	
 	public void release()
 	{
+		if(shouldDelete)
+			file.delete();
+		
+		file = null;
 	}
 
 	private File file;
+	private boolean shouldDelete;
 }
