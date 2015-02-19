@@ -59,6 +59,7 @@ public class FxImageTableCell extends TableCell
 		if (doesRowSupportButtonAction) 
 		{
 			button = new Button(null, new ImageView(image));
+			button.getStyleClass().add(NARROW_BUTTON_STYLE);
 			FxTableCellButtonActionHandler handler = new FxTableCellButtonActionHandler(getTableView(), doer);
 			handler.setTableRowIndex(getIndex());
 			button.setOnAction(handler);
@@ -68,5 +69,7 @@ public class FxImageTableCell extends TableCell
 		setGraphic(button);
 	}
 	
+	static final private String NARROW_BUTTON_STYLE = "button-minpadding";
+
 	private ActionDoer doer;
 }
