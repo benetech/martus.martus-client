@@ -40,6 +40,11 @@ public class FxButtonTableCellFactory implements Callback<TableColumn<TableRowDa
 	public static FxButtonTableCellFactory createNormalButtonTableCellFactory(Image buttonImageToUse, ActionDoer doerToUse)
 	{
 		ReadOnlyProperty<Image> imageProperty = new SimpleObjectProperty<Image>(buttonImageToUse);
+		return createNormalButtonTableCellFactory(imageProperty, doerToUse);
+	}
+
+	public static FxButtonTableCellFactory createNormalButtonTableCellFactory(ReadOnlyProperty<Image> imageProperty, ActionDoer doerToUse)
+	{
 		return new FxButtonTableCellFactory(imageProperty, doerToUse);
 	}
 
