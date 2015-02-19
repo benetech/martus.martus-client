@@ -32,6 +32,7 @@ import junit.framework.TestSuite;
 import org.martus.client.bulletinstore.TestBulletinFolder;
 import org.martus.client.bulletinstore.TestClientBulletinStore;
 import org.martus.client.bulletinstore.TestKnownFieldSpecCache;
+import org.martus.client.core.TestAttachmentProxyFile;
 import org.martus.client.core.TestConfigInfo;
 import org.martus.client.core.TestCustomFieldsDuplicateLabelChecker;
 import org.martus.client.core.TestFxBulletin;
@@ -78,6 +79,7 @@ public class TestClient
 	{
 		TestSuite suite= new TestSuite("All Client Martus Tests");
 		
+		suite.addTest(new TestSuite(TestAttachmentProxyFile.class));
 		suite.addTest(new TestSuite(TestBackgroundRetriever.class));
 		suite.addTest(new TestSuite(TestBulletinFolder.class));
 		suite.addTest(new TestSuite(TestBulletinSearcher.class));
