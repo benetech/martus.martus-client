@@ -104,6 +104,8 @@ import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
+import org.martus.client.swingui.jfx.generic.SigninController;
+import org.martus.client.swingui.jfx.generic.SigninController.SigninResult;
 import org.martus.client.swingui.jfx.generic.VirtualStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.welcome.FxWelcomeContentController;
@@ -602,49 +604,66 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 
 	private boolean sessionSignIn()
 	{
-		int mode = UiSigninDlg.INITIAL_NEW_RECOVER_ACCOUNT;
-		if(getApp().doesAnyAccountExist())
-			mode = UiSigninDlg.INITIAL;
-		
 		while(!isAlreadySignedIn())
 		{
-			int result = signIn(mode); 
-			if(result== UiSigninDlg.CANCEL)
-				return false;
-			if(result == UiSigninDlg.SIGN_IN)
-				return true;
-			
-			switch(result)
+			try
 			{
-				case UiSigninDlg.NEW_ACCOUNT:
+				SigninController signinController = new SigninController(this);
+				createAndShowModalDialog(signinController, null, "signin");
+				SigninResult result = signinController.getResult();
+				switch(result)
 				{
-					setCreatedNewAccount(false);
-					startAccountSetupWizard();
-					if(isAlreadySignedIn())
-						setCreatedNewAccount(true);
-					break;
-				}
-				case UiSigninDlg.RECOVER_ACCOUNT_BY_SHARE:
-				{	
-					UiBackupRecoverSharedKeyPair recover = new UiBackupRecoverSharedKeyPair(this);
-					if(recover.recoverKeyPairFromMultipleUnencryptedFiles())
-						justRecovered = true;
-					break;
-				}
-				case UiSigninDlg.RECOVER_ACCOUNT_BY_BACKUP_FILE:
-				{
-					UiRecoverKeyPairFromBackup recover = new UiRecoverKeyPairFromBackup(this);
-					if(recover.recoverPrivateKey())
-						justRecovered = true;
-					break;
-				}
-				default:
-				{
-					throw new RuntimeException("Unknown signin result: " + result);
+					case CANCEL:
+						return false;
+					case CREATE_ACCOUNT:
+					{
+						setCreatedNewAccount(false);
+						startAccountSetupWizard();
+						if(isAlreadySignedIn())
+							setCreatedNewAccount(true);
+						continue;
+					}
+					case CHANGE_LANGUAGE:
+					{
+						String newLanguageCode = signinController.getSelectedLanguageCode();
+						getLocalization().setCurrentLanguageCode(newLanguageCode);
+						continue;
+					}
+					case SIGNIN:
+					{
+						String userName = signinController.getUserName();
+						char[] userPassword = signinController.getUserPassword();
+						getApp().attemptSignIn(userName, userPassword);
+						if(!isAlreadySignedIn())
+						{
+							// pop up waiting dialog and delay increasing number of seconds
+						}
+						continue;
+					}
+					case RESTORE_FILE:
+					{
+						UiRecoverKeyPairFromBackup recover = new UiRecoverKeyPairFromBackup(this);
+						if(recover.recoverPrivateKey())
+							justRecovered = true;
+						continue;
+					}
+					case RESTORE_SHARE:
+					{
+						UiBackupRecoverSharedKeyPair recover = new UiBackupRecoverSharedKeyPair(this);
+						if(recover.recoverKeyPairFromMultipleUnencryptedFiles())
+							justRecovered = true;
+						continue;
+					}
+					default:
+						throw new Exception("Unknown signin result: " + result);
 				}
 			}
+			catch(Exception e)
+			{
+				unexpectedErrorDlg(e);
+			}
 		}
-		
+			
 		return true;
 	}
 
