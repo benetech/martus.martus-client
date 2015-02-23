@@ -37,8 +37,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.step6.FxSelectLanguageController;
@@ -46,7 +48,7 @@ import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto.AuthorizationFailedException;
 import org.martus.common.fieldspec.ChoiceItem;
 
-public class SigninController extends FxNonWizardShellController
+abstract public class SigninController extends FxNonWizardShellController
 {
 	public SigninController(UiMainWindow mainWindowToUse)
 	{
@@ -87,12 +89,6 @@ public class SigninController extends FxNonWizardShellController
 		getStage().close();
 	}
 
-	@Override
-	public String getFxmlLocation()
-	{
-		return "generic/Signin.fxml";
-	}
-	
 	public SigninResult getResult()
 	{
 		return result;
@@ -189,6 +185,12 @@ public class SigninController extends FxNonWizardShellController
 
 	@FXML
 	private GridPane signInPane;
+	
+	@FXML
+	private VBox createPane;
+	
+	@FXML
+	private TabPane tabPane;
 	
 	@FXML
 	private TextField userNameField;

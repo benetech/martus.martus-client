@@ -103,6 +103,7 @@ import org.martus.client.swingui.jfx.generic.DialogShellController;
 import org.martus.client.swingui.jfx.generic.FxController;
 import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.generic.FxShellController;
+import org.martus.client.swingui.jfx.generic.InitialSigninController;
 import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
 import org.martus.client.swingui.jfx.generic.SigninController;
 import org.martus.client.swingui.jfx.generic.SigninController.SigninResult;
@@ -608,7 +609,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		{
 			try
 			{
-				SigninController signinController = new SigninController(this);
+				SigninController signinController = new InitialSigninController(this);
 				createAndShowModalDialog(signinController, null, "signin");
 				SigninResult result = signinController.getResult();
 				if(result == null)
