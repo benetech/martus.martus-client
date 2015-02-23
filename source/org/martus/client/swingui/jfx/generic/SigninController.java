@@ -131,7 +131,7 @@ abstract public class SigninController extends FxNonWizardShellController
 		{
 			String userName = getUserName();
 			char[] userPassword = getUserPassword();
-			getMainWindow().getApp().attemptSignIn(userName, userPassword);
+			attemptSigninOrReSignin(userName, userPassword);
 			if(getMainWindow().isAlreadySignedIn())
 				closeDialog(SigninResult.SIGNIN);
 		}
@@ -146,6 +146,11 @@ abstract public class SigninController extends FxNonWizardShellController
 		{
 			logAndNotifyUnexpectedError(e);
 		}
+	}
+
+	public void attemptSigninOrReSignin(String userName, char[] userPassword) throws Exception
+	{
+		getMainWindow().getApp().attemptSignIn(userName, userPassword);
 	}
 
 	public void punishTheUserBySleeping(String message)
