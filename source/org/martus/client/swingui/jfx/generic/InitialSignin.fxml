@@ -6,7 +6,7 @@
 <?import javafx.scene.web.*?>
 
 <StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-	<TabPane tabClosingPolicy="UNAVAILABLE">
+	<TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
 		<Tab text="%SignIn" >
 		    <BorderPane>
 				<center>
@@ -35,7 +35,7 @@
 				</bottom>
 		    </BorderPane>
 		</Tab>
-		<Tab text="%Restore" >
+		<Tab fx:id="restoreTab" text="%Restore" >
 			<VBox>
 			    <Button onAction="#onRestoreShare" text="%Button.RecoverAccountByShare" />
 			    <Button onAction="#onRestoreFile" text="%Button.RecoverAccountByBackup" />
