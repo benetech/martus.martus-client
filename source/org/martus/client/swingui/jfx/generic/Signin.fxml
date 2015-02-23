@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <BorderPane>
+		<center>
+		  <VBox >
+		    <GridPane fx:id="signInPane" vgap="5.0" xmlns:fx="http://javafx.com/fxml" >
+		        <Label styleClass="headingLevel3" text="%CreateAccountUserName" />
+		        <TextField id="accountName" fx:id="userName" promptText="%AccountUserNameInstructions" GridPane.columnIndex="1" />
+
+		        <Label styleClass="headingLevel3" text="%Password" GridPane.rowIndex="1" />
+		        <PasswordField id="password" fx:id="passwordField" promptText="%PasswordInstructions" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+		    </GridPane>
+		    <Hyperlink fx:id="newAccountButton" onAction="#onNewAccount" text="%CreateNewAccount" />
+		    <Button onAction="#onRestoreShare" text="%Button.RecoverAccountByShare" />
+		    <Button onAction="#onRestoreFile" text="%Button.RecoverAccountByBackup" />
+		  </VBox>
+		</center>
+		<bottom>
+			<HBox>
+			    <Label styleClass="headingLevel2" text="%ChooseLanguage" />
+        		<ChoiceBox fx:id="languagesDropdown"  />
+			
+				<Button fx:id="okButton" text="%button.SignIn" onAction="#onOk" />
+				<Button text="%Button.cancel" onAction="#onCancel" />
+			</HBox>
+		</bottom>
+    </BorderPane>
+  </children>
+</StackPane>
