@@ -611,6 +611,9 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 				SigninController signinController = new SigninController(this);
 				createAndShowModalDialog(signinController, null, "signin");
 				SigninResult result = signinController.getResult();
+				if(result == null)
+					return false;
+				
 				switch(result)
 				{
 					case CANCEL:
@@ -631,13 +634,6 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 					}
 					case SIGNIN:
 					{
-						String userName = signinController.getUserName();
-						char[] userPassword = signinController.getUserPassword();
-						getApp().attemptSignIn(userName, userPassword);
-						if(!isAlreadySignedIn())
-						{
-							// pop up waiting dialog and delay increasing number of seconds
-						}
 						continue;
 					}
 					case RESTORE_FILE:
@@ -702,7 +698,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		}
 	}
     
- 	private boolean isAlreadySignedIn()
+ 	public boolean isAlreadySignedIn()
 	{
 		return (getApp().getAccountId() != null);
 	}
