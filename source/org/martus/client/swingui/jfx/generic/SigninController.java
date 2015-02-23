@@ -41,6 +41,7 @@ import javafx.scene.layout.GridPane;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.step6.FxSelectLanguageController;
+import org.martus.common.crypto.MartusCrypto.AuthorizationFailedException;
 import org.martus.common.fieldspec.ChoiceItem;
 
 public class SigninController extends FxNonWizardShellController
@@ -64,7 +65,7 @@ public class SigninController extends FxNonWizardShellController
 		ReadOnlyObjectProperty<ChoiceItem> selectedLanguageProperty = selectionModel.selectedItemProperty();
 		selectedLanguageProperty.addListener((property, oldValue, newValue) -> languageChangedTo(newValue));
 		
-		BooleanBinding isUserNameEmpty = userName.textProperty().isEmpty();
+		BooleanBinding isUserNameEmpty = userNameField.textProperty().isEmpty();
 		BooleanBinding isPasswordEmpty = passwordField.textProperty().isEmpty();
 		okButton.disableProperty().bind(isUserNameEmpty.or(isPasswordEmpty));
 		
@@ -100,7 +101,7 @@ public class SigninController extends FxNonWizardShellController
 
 	public String getUserName()
 	{
-		return userName.getText();
+		return userNameField.getText();
 	}
 
 	public char[] getUserPassword()
@@ -126,7 +127,23 @@ public class SigninController extends FxNonWizardShellController
 	@FXML
 	private void onOk()
 	{
-		closeDialog(SigninResult.SIGNIN);
+		try
+		{
+			String userName = getUserName();
+			char[] userPassword = getUserPassword();
+			getMainWindow().getApp().attemptSignIn(userName, userPassword);
+			if(getMainWindow().isAlreadySignedIn())
+				closeDialog(SigninResult.SIGNIN);
+		}
+		catch(AuthorizationFailedException failedSignin)
+		{
+			// FIXME: Delay here
+			return;
+		}
+		catch(Exception e)
+		{
+			logAndNotifyUnexpectedError(e);
+		}
 	}
 
 	@FXML
@@ -145,7 +162,7 @@ public class SigninController extends FxNonWizardShellController
 	private GridPane signInPane;
 	
 	@FXML
-	private TextField userName;
+	private TextField userNameField;
 	
 	@FXML
 	private PasswordField passwordField;
