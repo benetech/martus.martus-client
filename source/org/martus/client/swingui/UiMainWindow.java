@@ -2135,7 +2135,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		setStatusMessageTag(UiMainWindow.STATUS_READY);
 	}
 
-	int signIn(int mode)
+	private int signIn(int mode)
 	{
 		int seconds = 0;
 		UiModelessBusyDlg busyDlg = null;
