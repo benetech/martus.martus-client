@@ -84,14 +84,12 @@ import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
 import org.martus.client.swingui.dialogs.UiAboutDlg;
 import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
 import org.martus.client.swingui.dialogs.UiFancySearchDialogContents;
-import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
 import org.martus.client.swingui.dialogs.UiOnlineHelpDlg;
 import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesRetrieveDlg;
 import org.martus.client.swingui.dialogs.UiShowScrollableTextDlg;
-import org.martus.client.swingui.dialogs.UiSigninDlg;
 import org.martus.client.swingui.dialogs.UiSplashDlg;
 import org.martus.client.swingui.dialogs.UiStringInputDlg;
 import org.martus.client.swingui.dialogs.UiTemplateDlg;
@@ -147,10 +145,8 @@ import org.martus.common.packet.XmlPacketLoader;
 import org.martus.swing.FontHandler;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiOptionPane;
-import org.martus.swing.UiPasswordField;
 import org.martus.swing.UiPopupMenu;
 import org.martus.swing.Utilities;
-import org.martus.swing.Utilities.Delay;
 import org.martus.util.FileVerifier;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
@@ -2146,71 +2142,6 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		setStatusMessageTag(UiMainWindow.STATUS_READY);
 	}
 
-	protected int signIn(int mode)
-	{
-		int seconds = 0;
-		UiModelessBusyDlg busyDlg = null;
-		while(true)
-		{
-			Delay delay = new Delay(seconds);
-			delay.start();
-			Utilities.waitForThreadToTerminate(delay);
-			if( busyDlg != null )
-				busyDlg.endDialog();
-
-			seconds = seconds * 2 + 1;
-			if(mode == UiSigninDlg.TIMED_OUT)
-			{
-				//Forces this dialog to the top of all windows in system by switching from iconified to normal, then just make the main window not visible
-				//cml caused problem when retrieving bulletin summaries when it times out	
-				//currentActiveFrame.setState(NORMAL);
-				//currentActiveFrame.setVisible(false);
-			}
-			UiSigninDlg signinDlg = null;
-			int userChoice = UiSigninDlg.LANGUAGE_CHANGED;
-			String userName = "";
-			char[] userPassword = "".toCharArray();
-			while(userChoice == UiSigninDlg.LANGUAGE_CHANGED)
-			{	
-				if(mode==UiSigninDlg.INITIAL || mode == UiSigninDlg.INITIAL_NEW_RECOVER_ACCOUNT)
-					signinDlg = new UiInitialSigninDlg(this, mode, userName, userPassword);
-				else
-				{
-					if(getCurrentActiveDialog() != null)
-						signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), (JFrame)null, mode, userName, userPassword);
-					else
-						signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), getCurrentActiveFrame().getSwingFrame(), mode, userName, userPassword);
-				}
-				userChoice = signinDlg.getUserChoice();
-				userName = signinDlg.getNameText();
-				userPassword = signinDlg.getPassword();
-			}
-			if (userChoice != UiSigninDlg.SIGN_IN)
-				return userChoice;
-			try
-			{
-				if(mode == UiSigninDlg.INITIAL)
-				{	
-					getApp().attemptSignIn(userName, userPassword);
-				}
-				else
-				{	
-					getApp().attemptReSignIn(userName, userPassword);
-				}
-				return UiSigninDlg.SIGN_IN;
-			}
-			catch (Exception e)
-			{
-				notifyDlg(getCurrentActiveFrame().getSwingFrame(), "incorrectsignin");
-				busyDlg = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitAfterFailedSignIn"));
-			}
-			finally
-			{
-				UiPasswordField.scrubData(userPassword);
-			}
-		}
-	}
-
 	private boolean showRelevantUploadReminder()
 	{
 		boolean dontExitApplication = false;
@@ -2451,7 +2382,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 					dialog.setGlassPane(new WindowObscurer());
 					dialog.getGlassPane().setVisible(true);
 				}
-				if(signIn(UiSigninDlg.TIMED_OUT) != UiSigninDlg.SIGN_IN)
+				if(!reSignIn())
 				{
 					System.out.println("Cancelled from timeout signin");
 					exitWithoutSavingState();
