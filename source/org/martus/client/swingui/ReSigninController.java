@@ -33,6 +33,12 @@ public class ReSigninController extends SigninController
 	{
 		super(mainWindowToUse);
 	}
+	
+	@Override
+	public void attemptSigninOrReSignin(String userName, char[] userPassword) throws Exception
+	{
+		getApp().attemptReSignIn(userName, userPassword);
+	}
 
 	@Override
 	public String getFxmlLocation()
