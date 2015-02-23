@@ -1775,12 +1775,23 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 
 	public boolean reSignIn()
 	{
-		int result = signIn(UiSigninDlg.SECURITY_VALIDATE);
-		if(!getApp().isSignedIn())
-			exitWithoutSavingState();
-		if(result == UiSigninDlg.SIGN_IN)
+		try
+		{
+			SigninController signinController = new ReSigninController(this);
+			createAndShowModalDialog(signinController, null, "signin");
+			SigninResult result = signinController.getResult();
+			if(result == null || result == SigninResult.CANCEL)
+				return false;
+	
+			if(!getApp().isSignedIn())
+				exitWithoutSavingState();
 			return true;
-		return false;
+		}
+		catch(Exception e)
+		{
+			unexpectedErrorDlg(e);
+			return false;
+		}
 	}
 
 
@@ -2135,7 +2146,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		setStatusMessageTag(UiMainWindow.STATUS_READY);
 	}
 
-	private int signIn(int mode)
+	protected int signIn(int mode)
 	{
 		int seconds = 0;
 		UiModelessBusyDlg busyDlg = null;
