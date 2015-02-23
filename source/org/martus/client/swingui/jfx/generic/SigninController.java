@@ -31,6 +31,7 @@ import java.util.ResourceBundle;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -41,6 +42,7 @@ import javafx.scene.layout.GridPane;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.jfx.setupwizard.step6.FxSelectLanguageController;
+import org.martus.common.MartusLogger;
 import org.martus.common.crypto.MartusCrypto.AuthorizationFailedException;
 import org.martus.common.fieldspec.ChoiceItem;
 
@@ -49,6 +51,8 @@ public class SigninController extends FxNonWizardShellController
 	public SigninController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+		
+		secondsToDelay = 1;
 	}
 	
 	@Override
@@ -137,13 +141,38 @@ public class SigninController extends FxNonWizardShellController
 		}
 		catch(AuthorizationFailedException failedSignin)
 		{
-			// FIXME: Delay here
+			String message = getLocalization().getFieldLabel("waitAfterFailedSignIn");
+			punishTheUserBySleeping(message);
+			secondsToDelay *= 2;
 			return;
 		}
 		catch(Exception e)
 		{
 			logAndNotifyUnexpectedError(e);
 		}
+	}
+
+	public void punishTheUserBySleeping(String message)
+	{
+		try
+		{
+			showBusyDialog(message, new Sleeper());
+		} 
+		catch (Exception notMuchWeCanDoAboutIt)
+		{
+			MartusLogger.logException(notMuchWeCanDoAboutIt);
+		}
+	}
+	
+	class Sleeper extends Task
+	{
+		@Override
+		protected Object call() throws Exception
+		{
+			Thread.sleep(1000 * secondsToDelay);
+			return null;
+		}
+		
 	}
 
 	@FXML
@@ -177,4 +206,5 @@ public class SigninController extends FxNonWizardShellController
 	private Button cancelButton;
 
 	private SigninResult result;
+	protected int secondsToDelay;
 }
