@@ -59,7 +59,7 @@ abstract public class SigninController extends FxNonWizardShellController
 	
 	public void attemptSigninOrReSignin(String userName, char[] userPassword) throws Exception
 	{
-		getMainWindow().getApp().attemptSignIn(userName, userPassword);
+		getApp().attemptSignIn(userName, userPassword);
 	}
 
 	@Override
