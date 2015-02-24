@@ -103,6 +103,7 @@ import org.martus.client.swingui.jfx.generic.FxDialogHelper;
 import org.martus.client.swingui.jfx.generic.FxShellController;
 import org.martus.client.swingui.jfx.generic.InitialSigninController;
 import org.martus.client.swingui.jfx.generic.ModalDialogWithSwingContents;
+import org.martus.client.swingui.jfx.generic.ReSigninController;
 import org.martus.client.swingui.jfx.generic.SigninController;
 import org.martus.client.swingui.jfx.generic.SigninController.SigninResult;
 import org.martus.client.swingui.jfx.generic.VirtualStage;

@@ -23,9 +23,9 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui;
+package org.martus.client.swingui.jfx.generic;
 
-import org.martus.client.swingui.jfx.generic.SigninController;
+import org.martus.client.swingui.UiMainWindow;
 
 public class ReSigninController extends SigninController
 {
