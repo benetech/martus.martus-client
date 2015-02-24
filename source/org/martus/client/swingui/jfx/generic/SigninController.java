@@ -57,6 +57,11 @@ abstract public class SigninController extends FxNonWizardShellController
 		secondsToDelay = 1;
 	}
 	
+	public void attemptSigninOrReSignin(String userName, char[] userPassword) throws Exception
+	{
+		getMainWindow().getApp().attemptSignIn(userName, userPassword);
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle bundle)
 	{
@@ -144,11 +149,6 @@ abstract public class SigninController extends FxNonWizardShellController
 		{
 			logAndNotifyUnexpectedError(e);
 		}
-	}
-
-	public void attemptSigninOrReSignin(String userName, char[] userPassword) throws Exception
-	{
-		getMainWindow().getApp().attemptSignIn(userName, userPassword);
 	}
 
 	public void punishTheUserBySleeping(String message)
