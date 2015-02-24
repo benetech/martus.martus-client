@@ -110,8 +110,6 @@ abstract public class SigninController extends FxNonWizardShellController
 		return passwordField.getText().toCharArray();
 	}
 	
-	public static enum SigninResult { CANCEL, SIGNIN, CREATE_ACCOUNT, CHANGE_LANGUAGE, RESTORE_SHARE, RESTORE_FILE };
-	
 	@FXML
 	private void onNewAccount()
 	{
@@ -188,6 +186,8 @@ abstract public class SigninController extends FxNonWizardShellController
 		closeDialog(SigninResult.RESTORE_FILE);
 	}
 
+	public static enum SigninResult { CANCEL, SIGNIN, CREATE_ACCOUNT, CHANGE_LANGUAGE, RESTORE_SHARE, RESTORE_FILE };
+	
 	@FXML
 	private GridPane signInPane;
 	
