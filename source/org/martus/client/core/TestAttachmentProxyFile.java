@@ -92,6 +92,8 @@ public class TestAttachmentProxyFile extends TestCaseEnhanced
 
 			AttachmentProxyFile apf = AttachmentProxyFile.extractAttachment(store, proxyFromDatabase);
 			File file = apf.getFile();
+			assertNotNull(file);
+			assertTrue(file.exists());
 			apf.release();
 			assertNull(apf.getFile());
 			assertFalse(file.exists());
