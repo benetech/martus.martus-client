@@ -111,7 +111,9 @@ abstract public class SigninController extends FxNonWizardShellController
 
 	public char[] getUserPassword()
 	{
-		// NOTE: If PasswordField supported get char[] 
+		// NOTE: If PasswordField supported get char[], we would use it for security.
+		// The caller will wipe the char[] we return, but the string could exist 
+		// in memory even after Martus exits. 
 		return passwordField.getText().toCharArray();
 	}
 	
