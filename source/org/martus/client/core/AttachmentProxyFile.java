@@ -42,9 +42,9 @@ import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class AttachmentProxyFile
 {
-	public static AttachmentProxyFile wrapFile(File pretendNonTemp)
+	public static AttachmentProxyFile wrapFile(File fileToWrap)
 	{
-		return new AttachmentProxyFile(pretendNonTemp, false);
+		return new AttachmentProxyFile(fileToWrap, false);
 	}
 
 	public static AttachmentProxyFile extractAttachment(ClientBulletinStore store, AttachmentProxy proxy) throws Exception
