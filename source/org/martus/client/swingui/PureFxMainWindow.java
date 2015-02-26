@@ -112,7 +112,7 @@ public class PureFxMainWindow extends UiMainWindow
 	@Override
 	public void rawError(String errorText)
 	{
-		// FIXME: We need to support this
+		// FIXME: PureFX: We need to support this
 	}
 
 	@Override
@@ -142,7 +142,7 @@ public class PureFxMainWindow extends UiMainWindow
 	@Override
 	protected void obscureMainWindow()
 	{
-		// FIXME: We need to support this
+		// FIXME: PureFX: We need to support this
 	}
 	
 	public static void setStage(Stage stage)
