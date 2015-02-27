@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.generic;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
@@ -66,7 +67,6 @@ abstract public class SigninController extends FxNonWizardShellController
 	public void initialize(URL location, ResourceBundle bundle)
 	{
 		super.initialize(location, bundle);
-		
 		ObservableList<ChoiceItem> availableLanguages = FxSelectLanguageController.getAvailableLanguages(getLocalization());
 		languagesDropdown.setItems(availableLanguages);
 		ChoiceItem currentLanguageChoiceItem = FxSelectLanguageController.findCurrentLanguageChoiceItem(getLocalization());
@@ -81,6 +81,7 @@ abstract public class SigninController extends FxNonWizardShellController
 		okButton.disableProperty().bind(isUserNameEmpty.or(isPasswordEmpty));
 		
 		signInPane.setVisible(getApp().doesAnyAccountExist());
+		Platform.runLater(()->userNameField.requestFocus());
 	}
 
 	private void languageChangedTo(ChoiceItem newValue)
