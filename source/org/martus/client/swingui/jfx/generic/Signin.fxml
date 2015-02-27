@@ -38,7 +38,7 @@
       			    <Label styleClass="headingLevel2" text="%ChooseLanguage" />
               		<ChoiceBox fx:id="languagesDropdown" />
       			
-      				<Button fx:id="okButton" onAction="#onOk" text="%button.SignIn" />
+      				<Button fx:id="okButton" defaultButton="true" onAction="#onOk" text="%button.SignIn" />
       				<Button onAction="#onCancel" text="%Button.cancel" />
       </children>
    			</HBox>
