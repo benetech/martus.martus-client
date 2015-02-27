@@ -6,27 +6,43 @@
 <?import javafx.scene.web.*?>
 
 <StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-    <BorderPane>
-		<center>
-		  <VBox >
-		    <GridPane fx:id="signInPane" vgap="5.0" xmlns:fx="http://javafx.com/fxml" >
-		        <Label styleClass="headingLevel3" text="%CreateAccountUserName" />
-		        <TextField id="accountName" fx:id="userNameField" promptText="%AccountUserNameInstructions" GridPane.columnIndex="1" />
-
-		        <Label styleClass="headingLevel3" text="%Password" GridPane.rowIndex="1" />
-		        <PasswordField id="password" fx:id="passwordField" promptText="%PasswordInstructions" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-		    </GridPane>
-		  </VBox>
-		</center>
-		<bottom>
-			<HBox>
-			    <Label styleClass="headingLevel2" text="%ChooseLanguage" />
-        		<ChoiceBox fx:id="languagesDropdown"  />
-			
-				<Button fx:id="okButton" text="%button.SignIn" onAction="#onOk" />
-				<Button text="%Button.cancel" onAction="#onCancel" />
-			</HBox>
-		</bottom>
-    </BorderPane>
+   <children>
+       <BorderPane>
+   		<center>
+   		  <VBox>
+      <children>
+      		    <GridPane fx:id="signInPane" vgap="5.0" xmlns:fx="http://javafx.com/fxml">
+         <children>
+         		        <Label styleClass="headingLevel3" text="%CreateAccountUserName" />
+         		        <TextField id="accountName" fx:id="userNameField" promptText="%AccountUserNameInstructions" GridPane.columnIndex="1" />
+         
+         		        <Label styleClass="headingLevel3" text="%Password" GridPane.rowIndex="1" />
+         		        <PasswordField id="password" fx:id="passwordField" promptText="%PasswordInstructions" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+                     <columnConstraints>
+                        <ColumnConstraints />
+                        <ColumnConstraints />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints />
+                        <RowConstraints />
+                     </rowConstraints>
+      
+      		    </GridPane>
+      </children>
+   		  </VBox>
+   		</center>
+   		<bottom>
+   			<HBox>
+      <children>
+      			    <Label styleClass="headingLevel2" text="%ChooseLanguage" />
+              		<ChoiceBox fx:id="languagesDropdown" />
+      			
+      				<Button fx:id="okButton" onAction="#onOk" text="%button.SignIn" />
+      				<Button onAction="#onCancel" text="%Button.cancel" />
+      </children>
+   			</HBox>
+   		</bottom>
+       </BorderPane>
+   </children>
 </StackPane>
