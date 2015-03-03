@@ -479,6 +479,9 @@ public class ActionMenuCharts extends UiMenuAction implements ActionDoer
 		Vector<String> keys = new Vector<String>(counts.keySet());
 		Collections.sort(keys, new SaneCollator(getLocalization().getCurrentLanguageCode()));
 		Integer totalCount = 0;
+		int tickCount = 0;
+		int skipElementsModulous = getSkipModulous(keys.size());
+		 
 		for (String value : keys)
 		{
 			totalCount += counts.get(value);
@@ -486,9 +489,24 @@ public class ActionMenuCharts extends UiMenuAction implements ActionDoer
 				value = getLocalization().getFieldLabel("ChartItemLabelBlank");
 			else
 				value = fontHelper.getDisplayable(value);
-			dataset.addValue(totalCount, seriesTitle, value);
+			if(shouldDisplayElement(tickCount, skipElementsModulous))
+				dataset.addValue(totalCount, seriesTitle, value);
+			++tickCount;
 		}
 		return dataset;
+	}
+
+	private boolean shouldDisplayElement(int tickCount, int skipElementsModulous)
+	{
+		return tickCount % skipElementsModulous == 0;
+	}
+
+	private int getSkipModulous(int size)
+	{
+		if(size < 25)
+			return 1;
+		int maxItemsAccrossAxis = size / 25;
+		return maxItemsAccrossAxis + 1;
 	}
 
 	private void configureBarChartPlot(JFreeChart barChart)
