@@ -658,7 +658,7 @@ public class EnglishStrings
 "wintitle:notifyPrintCompleted=Reports",
 "field:notifyPrintCompletedcause=Printing Complete",
 "field:OrganizeReportFields=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.",
-"field:SkippingBulletinsNotOurs=NOTE: Records authored by other accounts cannot be changed using this command, " +
+"field:SkippingBulletinsNotOurs=Note: Records authored by other accounts cannot be changed using this command, " +
 	"so they are not included in the list above.",
 "field:DownloadTemplateFromMartusUser=Download from Another Martus User",
 "field:DownloadTemplateFromMyContacts=Download from my Contacts",
@@ -1097,7 +1097,7 @@ public class EnglishStrings
 	"You can restrict standard or custom date fields, date grid columns, date range fields, " +
 	"and date range grid columns by using <MinimumDate> and/or <MaximumDate> " +
 	"tags with a date in YYYY-MM-DD format. " +
-	"NOTE: The year must always be a 'Gregorian' year like 2009, " +
+	"Note: The year must always be a 'Gregorian' year like 2009, " +
 	"even if Martus is configured to use Thai or Afghan or Persian dates. " +
 	"A blank date, shown as <MaximumDate/>, means 'today', " +
 	"although it may allow one day earlier or later, " +
@@ -1388,7 +1388,7 @@ public class EnglishStrings
 "field:timedout1=Martus is still running in the background, but has locked the screen for security.  You must sign in to Martus again to continue working.",
 "field:timedout2=Any unsaved records will be lost unless you sign in to Martus again and save them.",
 "field:defaultFolderName=New Folder",
-"field:SearchBulletinRules=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNOTE: Records that appear only in the Trash will not be searched.",
+"field:SearchBulletinRules=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNote: Records that appear only in the Trash will not be searched.",
 "field:SearchBulletinAddingRules=Press Enter to create a new row in the search query.",
 "field:SearchBulletinHelp=Click '#SearchHelpButton#' to get additional information on searching.",
 "field:AccountInfoUserName=Username ",
