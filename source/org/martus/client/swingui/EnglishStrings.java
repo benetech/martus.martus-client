@@ -444,7 +444,7 @@ public class EnglishStrings
 "button:RecoverAccountTab=Restore Account",
 "button:RecoverAccountByShare=Restore account from multiple disks",
 "button:RecoverAccountByBackup=Restore account from backup key file",
-
+"field:CreateNewAccount=Want to create a new Martus account?  Click here.",
 "button:BulletinDetails=Record Details",
 "button:ViewPreviousBulletinVersion=View Selected Version",
 "button:RetrieveAllVersions=Retrieve all record versions",
