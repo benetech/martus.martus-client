@@ -43,7 +43,7 @@ public class EnglishStrings
 "wintitle:askToBackupKeyPair=Key Backup Needed",
 "wintitle:BulletinDetailsDialog=Record Details",
 "wintitle:IncompatibleMtfVersion=Incompatible Translation Version",
-"wintitle:DuplicateLabelsInCustomTemplate=Warning Duplicate Labels Found",
+"wintitle:DuplicateLabelsInCustomTemplate=Warning: Duplicate Labels Found",
 "wintitle:ImportProgress=Importing Records",
 "wintitle:ExportProgress=Exporting Records",
 
@@ -201,8 +201,8 @@ public class EnglishStrings
 "wintitle:notifyImportComplete=Import Complete",
 "wintitle:notifyErrorImportingBulletins=Error Importing Records",
 "wintitle:notifyErrorExportingBulletins=Error Exporting Records",
-"wintitle:notifyImportMissingAttachments=Warning Missing Attachments",
-"wintitle:notifyImportBulletinsNotImported=Warning Records Not Imported",
+"wintitle:notifyImportMissingAttachments=Warning: Missing Attachments",
+"wintitle:notifyImportBulletinsNotImported=Warning: Records Not Imported",
 "wintitle:notifyNoReportFieldsSelected=Create Report",
 "wintitle:notifyNotValidReportFormat=Reports",
 "wintitle:notifyReportFormatIsOld=Reports",
@@ -325,7 +325,7 @@ public class EnglishStrings
 
 "wintitle:RunOrCreateReport=Reports",
 "wintitle:ReportChooseSortFields=Reports",
-"wintitle:FileDialogSelectReport=Run Report...",
+"wintitle:FileDialogSelectReport=Run Report",
 "button:FileDialogOkSelectReport=Select",
 "wintitle:ChooseReportFields=Create Report",
 "wintitle:OrganizeReportFields=Organize Report Fields",
@@ -388,7 +388,7 @@ public class EnglishStrings
 "tooltip:AddContact=Add Contacts",
 "tooltip:ServerSync=Sync Manager",
 "tooltip:ImportBulletin=Import Record",
-"tooltip:NeverDeleteFromServer=Check this to not allow your records to be deleted from the Martus server.",
+"tooltip:NeverDeleteFromServer=Check to prohibit deletion of your records from the Martus server.",
 "button:export=Export",
 "button:Help=Help",
 "button:create=Create",
@@ -424,7 +424,7 @@ public class EnglishStrings
 "button:removeattachment=Remove",
 "button:attachmentLabel=Name",
 "button:attachmentSize=Size(Kb)",
-"button:saveattachment=Save...",
+"button:saveattachment=Save",
 "button:viewattachment=View",
 "button:hideattachment=Hide",
 "button:VirtualKeyboardSwitchToNormal=Switch to using regular keyboard",
@@ -445,8 +445,8 @@ public class EnglishStrings
 "button:RecoverAccountByShare=Restore account from multiple disks",
 "button:RecoverAccountByBackup=Restore account from backup key file",
 
-"button:BulletinDetails=Record Details...",
-"button:ViewPreviousBulletinVersion=View Selected Version...",
+"button:BulletinDetails=Record Details",
+"button:ViewPreviousBulletinVersion=View Selected Version",
 "button:RetrieveAllVersions=Retrieve all record versions",
 "button:RetrieveLatestBulletinRevisionOnly=Retrieve latest record version only",
 "button:FolderOrderUp=Up",
@@ -457,7 +457,7 @@ public class EnglishStrings
 "button:DeleteSelectedGridRow=Delete Selected Row",
 "button:InsertEmptyGridRow=Insert Row",
 "button:AppendEmptyGridRow=Append Row",
-"button:PopUpTreeChoose=Choose Field...",
+"button:PopUpTreeChoose=Choose Field",
 "button:RunReport=Use Existing Report Format",
 "button:CreateTabularReport=Create New Tabular Report",
 "button:CreatePageReport=Create New Page Report",
@@ -465,8 +465,8 @@ public class EnglishStrings
 "button:FieldLabel=Field Label",
 "button:FieldType=Type",
 "button:FieldTag=Tag",
-"button:SaveSearch=Save This Search...",
-"button:LoadSearch=Load Previous Search...",
+"button:SaveSearch=Save This Search",
+"button:LoadSearch=Load Previous Search",
 "button:LoadSearchOkButton=Load",
 "button:LoadFieldValuesFromAllBulletins=Load all possible values for selected field",
 
@@ -485,7 +485,7 @@ public class EnglishStrings
 "button:ServerSyncRecordAuthor=Author",
 "button:ServerSyncRecordLastModified=Last Saved",
 "button:ServerSyncRecordSize=Size (Kb)",
-"button:HaveServerDefaultToOn=Have Server Default to On? (will be applied on login)",
+"button:HaveServerDefaultToOn=Have Server Default to On? (Applied on login)",
 "button:AutomaticallyDownloadFiles=Automatically Download Files from Server?",
 "button:ExportAccountPublicKey=Export Public Account Key",
 "button:ExportMultiKey=Export Multi-Part Key",
@@ -493,7 +493,7 @@ public class EnglishStrings
 "field:RecordLocationLocal=Local",
 "field:RecordLocationServer=Server",
 "field:RecordLocationServerTab=Server",
-"field:serverWithColon=Server:",
+"field:serverWithColon=Server ",
 "field:RecordLocationBothLocalAndServer=Both",
 "field:RecordLocationUnknown=Unknown",
 "field:NoServerSyncDataInTable=No Records available",
@@ -548,7 +548,7 @@ public class EnglishStrings
 "menu:QuickEraseDeleteMyDataOnly=Delete My Data",
 "menu:QuickEraseRemoveMartus=Delete All Data And Remove Martus",
 "menu:BackupMyKeyPairFile=Backup My Key",
-"menu:ExportMyPublicKey=Export My Public Account Id",
+"menu:ExportMyPublicKey=Export My Public Account ID",
 "menu:CustomFields=Customize Fields",
 "menu:help=Help",
 "menu:helpMessage=Help",
@@ -576,16 +576,16 @@ public class EnglishStrings
 
 "field:BulletinSize=Size (Kb)",
 
-"field:Author=Author:",
-"field:Organization=Organization:",
+"field:Author=Author ",
+"field:Organization=Organization ",
 "field:TemplateDetails=Details",
 "field:MayBeDamaged=Warning: Portions may be missing or damaged",
 "field:NotAuthorizedToViewPrivate=The author has not given you permission to view this record.",
 "field:BulletinHasUnknownStuff=Warning: Some information in this record is not visible",
 "field:retrieveflag=Retrieve?",
 "field:DeleteFlag=Delete?",
-"field:waitingForBulletinsToLoad=Loading Martus.  Please wait...",
-"field:waitAfterFailedSignIn=Please wait to sign in again ...",
+"field:waitingForBulletinsToLoad=Loading Martus.  Please wait",
+"field:waitAfterFailedSignIn=Please wait to sign in again.",
 "field:HelpDefaultDetails=Enter questions, details, or other information your organization wants to have answered in future records created.",
 "field:HelpExampleDefaultDetails=Example:",
 "field:HelpExample1DefaultDetails=Were there any witnesses?",
@@ -670,11 +670,11 @@ public class EnglishStrings
 "field:HistoryVersion=#VersionNumber#: #DateSaved# : #Title#",
 "menu:Account=Account",
 "field:AuthorNicknameFieldDescription=Name here if available otherwise blank",
-"field:AuthorPublicCode=Author Public Code:",
-"field:BulletinID=Record ID:",
+"field:AuthorPublicCode=Author Public Code ",
+"field:BulletinID=Record ID ",
 "field:DateCreated=Date Created",
 "field:LastModified=Last Modified",
-"field:EnterNewName=Enter New Name:",
+"field:EnterNewName=Enter New Name ",
 
 "wintitle:IncludePrivateData=Include Private Data",
 "field:IncludePrivateData=#TotalBulletins# records were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?",
@@ -690,7 +690,7 @@ public class EnglishStrings
 "button:Download=Download",
 "button:DeleteFromServer=Delete from Server",
 
-"field:Location=Location:",
+"field:Location=Location ",
 "field:OnServer=On Server",
 "field:Edit=Edit",
 "field:AssistanceWithMartusPart1=Martus help documentation is available at",
@@ -709,22 +709,22 @@ public class EnglishStrings
 "field:Upload=Upload",
 "field:Export=Export",
 "field:AddNewTemplate=Add New Template",
-"field:Import=Import:",
+"field:Import=Import ",
 "field:TemplateSelector=Template Selector",
 "field:SystemTab=System",
 "field:TorTab=Tor",
 "field:CurrentConnection=Current Connection",
-"field:DefaultServerConnection=Default Server:",
+"field:DefaultServerConnection=Default Server ",
 "field:ConnectToDefault=Connect to Default",
-"field:AdvancedSettings=Advanced Settings:",
-"field:ServerIP=Server IP:",
+"field:AdvancedSettings=Advanced Server Settings ",
+"field:ServerIP=IP Address",
 "field:ServerPreferences=Server Preferences",
 "field:Download=Download",
-"field:SelectLanguage=Select Language:",
+"field:SelectLanguage=Select Language ",
 "field:Calendar=Calendar",
-"field:DateDelimiter=Date Delimiter:",
-"field:DateFormatSequence=Date Format Sequence:",
-"field:CalendarType=Calendar Type:",
+"field:DateDelimiter=Date Delimiter ",
+"field:DateFormatSequence=Date Format Sequence ",
+"field:CalendarType=Calendar Type ",
 "field:RecordSettings=Record Settings",
 "field:RecordDetails=Record Details",
 "field:DoNotShowAgainThisSession=Do not show this message again during this session",
@@ -734,7 +734,7 @@ public class EnglishStrings
 "button:PrintToFile=Print To File",
 "button:FromContact=From Another Martus User",
 "button:ImportFromFile=Import From File",
-"button:Choose=Choose...",
+"button:Choose=Choose",
 "button:ConnectToServer=Connect to Server",
 "button:ChangeUsernameAndPassword=Change Username and Password",
 
@@ -968,7 +968,7 @@ public class EnglishStrings
 "field:notifyConfigNoServercause=The selected server is not responding. Before you choose a server, you must be connected to the internet, and that server must be available.",
 "field:notifyServerCodeWrongcause=The Server Public Code does not match the one you entered.",
 "field:notifyRememberPasswordcause=Please remember your username and password. It cannot be recovered.",
-"field:notifyDamagedBulletinMovedToDiscardedcause=An error occurred during upload, and the damaged record:'#BulletinTitle#' has been moved to the Damaged Records folder.",
+"field:notifyDamagedBulletinMovedToDiscardedcause=An error occurred during upload, and the damaged record'#BulletinTitle#' has been moved to the Damaged Records folder.",
 "field:notifyUploadFailedBulletinNotSentToServercause=An error occurred during upload, and the record:'#BulletinTitle#' has not been sent to the server.  You may try and resend the record later.",
 "field:notifyPreviewOneBulletinOnlycause=You may only preview one record at a time.  Please only select one record to preview.",
 "field:notifyPreviewNoBulletinsSelectedcause=No record selected.  Please select the record you wish to preview.",
@@ -995,11 +995,11 @@ public class EnglishStrings
 "field:notifyOperationCompletedcause=Operation completed.",
 "field:notifycontactRejectedcause=The current Martus Server has refused to accept your contact info",
 "field:notifyUserAlreadyExistscause=The Username you chose already exists on this system, please choose a different Username.",
-"field:notifyRecoveryProcessBackupFilecause=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your Username and password and restore your key so you can log in normally and access your account.",
+"field:notifyRecoveryProcessBackupFilecause=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Account from Key Backup' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your Username and password and restore your key so you can log in normally and access your account.",
 "field:notifyRecoveryOfKeyPairCompletecause=Key restore is complete, you will now be logged into Martus.",
 "field:notifyErrorRecoveringAccountDirectorycause=Error during key restore. This key backup copy may be damaged.",
 "field:notifyServerSSLNotRespondingcause=Unable to make a secure connection with the Martus backup server.\n\nMartus can connect to a server using either of two ports.  When trying to connect to this server, neither port is accessible, probably because both ports are being blocked by a local firewall or by your ISP.\n\nWe recommend that any firewalls be configured to allow outgoing connections on both TCP port 443 and 987.  Please contact your LAN administrator or office technical support staff to verify that your firewall configuration allows this.\n\nIf the problem persists, you may need to select a different server.",
-"field:notifyAlreadyRunningcause=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.",
+"field:notifyAlreadyRunningcause=An instance of Martus is already running on this computer. You must close that copy before starting a new copy.",
 "field:notifyFilesWillNotBeDeletedcause=The original files have not been deleted from your computer, you must delete them manually if you wish.",
 "field:notifyFolderMigrationFailedcause=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.",
 "field:notifyResendErrorNotAuthorizedToSendcause=One or more records were unable to be resent because you are not authorized to upload them.",
@@ -1020,7 +1020,7 @@ public class EnglishStrings
 "field:notifyRetrieveFileDataVersionErrorcause=A retrieve was in progress when you upgraded to a newer version of Martus. That retrieve will be canceled, so you should re-select any records that had not yet been retrieved.",
 "field:notifyRetrieveFileErrorcause=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any records that had not yet been retrieved.",
 "field:notifyNoGridRowSelectedcause=No row selected.",
-"field:notifyImportCompletecause=Import complete.  Imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# records into folder: #ImportFolder#",
+"field:notifyImportCompletecause=Import complete.  Imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# records into folder #ImportFolder#",
 "field:notifyErrorImportingBulletinscause=There was an error importing records into Martus.  Not all records were imported.",
 "field:notifyErrorExportingBulletinscause=There was an error exporting records from Martus.  Not all records were exported.",
 "field:notifyNoImportFileSpecifiedcause=No folder specified.  You must enter a folder you wish the files to be imported into.  This folder can already exist in the system, or can be a new folder.",
@@ -1032,8 +1032,8 @@ public class EnglishStrings
 "field:notifyReportFormatIsTooNewcause=This report format was created with a newer version of Martus, so it may not work correctly",
 "field:notifyReportFormatDifferentLanguagecause=This report format was created in a different language. As a result, some headings may not print properly, and some of the fields may not be available for sorting.",
 "field:notifyViewAttachmentNotAvailablecause=This computer can only view JPEG, GIF, and PNG image attachments",
-"field:notifyAddPermissionsZeroBulletinsOurscause=Must select at least one record that was created by this account",
-"field:notifySealSelectedZeroBulletinsOurscause=Must select at least one record that was created by this account",
+"field:notifyAddPermissionsZeroBulletinsOurscause=You must select at least one record that was created by this account",
+"field:notifySealSelectedZeroBulletinsOurscause=You must select at least one record that was created by this account",
 
 
 "field:notifyErrorImportingBulletinsTooOldcause=This XML file was created by an older version of Martus and cannot be read by this version.",
@@ -1045,7 +1045,7 @@ public class EnglishStrings
 
 "field:SingleEncryptedKeyBackupCreated=Single, Encrypted File #backupFileName created (this still requires remembering your username and password to restore your account).",
 
-"field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (https://martus.org/download.html) for the appropriate version.",
+"field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (https://martus.org) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",
 "field:IncompatibleMtfVersionProgram=Martus Software Version: #ProgramVersionNumber#",
 
@@ -1367,20 +1367,20 @@ public class EnglishStrings
 
 "field:warningDeleteSingleBulletin=You have chosen to permanently delete a record from the Discarded Records folder. Even if this record was recently cut or copied, you will not be able to paste it. If this record has already been sent to a server, it will remain on the server. This action will only delete it from this computer.",
 "field:warningDeleteMultipleBulletins=You have chosen to permanently delete records from the Discarded Records folder. Even if these records were recently cut or copied, you will not be able to paste them. If they have already been sent to a server, they will remain on the server. This action will only delete them from this computer.",
-"field:warningDeleteSingleUnsentBulletin=WARNING: This record has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.",
-"field:warningDeleteMultipleUnsentBulletins=WARNING: One or more of these records have not been sent to a server since they were last modified. Deleting them will prevent the latest changes from being backed up.",
-"field:warningDeleteSingleBulletinWithCopies=NOTE: A copy of this record exists in one or more other folders, and those copies will not be removed.",
-"field:warningDeleteMultipleBulletinsWithCopies=NOTE: Copies of one or more of these records exist in one or more other folders. Those copies will not be removed.",
+"field:warningDeleteSingleUnsentBulletin=Warning: This record has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.",
+"field:warningDeleteMultipleUnsentBulletins=Warning: One or more of these records have not been sent to a server since they were last modified. Deleting them will prevent the latest changes from being backed up.",
+"field:warningDeleteSingleBulletinWithCopies=Note: Copies of this record exist in other folders. Those copies will not be removed.",
+"field:warningDeleteMultipleBulletinsWithCopies=Note: Copies of these records exist in one or more other folders. Those copies will not be removed.",
 
 "wintitle:IncompatibleJavaVersion=Incompatible Java Version",
 "field:IncompatibleJavaVersion=The current version of Martus cannot run with Java #HighVersion#. Please use Java #ExpectedVersion# or lower to run Martus.",
 
-"field:username=Username",
-"field:email=Email Address:",
-"field:webpage=Web Page:",
-"field:phone=Phone Number:",
-"field:address=Mailing Address:",
-"field:password=Password",
+"field:username=Username ",
+"field:email=Email Address ",
+"field:webpage=Web Page ",
+"field:phone=Phone Number ",
+"field:address=Mailing Address ",
+"field:password=Password ",
 "field:securityServerConfigValidate=For security reasons, we must validate your username and password.",
 "field:RetypeUserNameAndPassword=Please retype your username and password for verification.",
 "field:CreateNewUserNamePassword=Please enter your new username and password.",
@@ -1391,23 +1391,23 @@ public class EnglishStrings
 "field:SearchBulletinRules=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNOTE: Records that appear only in the Trash will not be searched.",
 "field:SearchBulletinAddingRules=Press Enter to create a new row in the search query.",
 "field:SearchBulletinHelp=Click '#SearchHelpButton#' to get additional information on searching.",
-"field:AccountInfoUserName=Username: ",
-"field:AccountInfoPublicKey=Public Account Id:",
-"field:AccountInfoPublicCode=Public Code (Old):",
-"field:AccountInfoPublicCode40=Public Code:",
+"field:AccountInfoUserName=Username ",
+"field:AccountInfoPublicKey=Public Account ID ",
+"field:AccountInfoPublicCode=Public Code (Old) ",
+"field:AccountInfoPublicCode40=Public Code ",
 "field:AccountInfoDirectory=Account Directory: ",
-"field:AccountAccessToken=Access Token: ",
+"field:AccountAccessToken=Access Token ",
 "field:DefaultServerHeading=Default Server",
 "field:AdvanceServerSetupHeading=Advanced Server Setup",
 "field:NoContactsInTable=No Contacts.",
 "field:NoBulletinsInTable=No Records.",
 "button:ChooseDefaultServer=Use Default Server",
-"field:ServerNameEntry=IP Address:",
+"field:ServerNameEntry=IP Address ",
 "field:ServerNameEntryInformation=enter your server's IP address",
-"field:ServerPublicCodeEntry=Server Public Code:",
+"field:ServerPublicCodeEntry=Server Public Code ",
 "field:ServerPublicCodeEntryInformation=enter your server's public code",
-"field:PublicCode=Public Code:",
-"field:ServerMagicWordEntry=Magic Word:",
+"field:PublicCode=Public Code ",
+"field:ServerMagicWordEntry=Magic Word ",
 "field:ServerMagicWordEntryInformation=enter your server's magic word",
 "field:ServerSelectionResults=The following server has been selected:",
 "field:ServerAcceptsUploads=You will be allowed to upload records to this server.",
@@ -1419,7 +1419,7 @@ public class EnglishStrings
 "field:HowToCreateInitialAccount=No accounts exist on this computer.  To create a new account click OK.  Otherwise you can click on the Restore Account tab to restore an account which was previously backed up.",
 "field:UntitledBulletin=Untitled Record",
 "field:GetShareFileNameDescription=This file name should be unique and identifiable to you but we recommend not using your Username.  Each file will be generated with this name and its number sequence.",
-"field:UnknownFieldType=WARNING: This field requires a newer release of Martus to be viewed",
+"field:UnknownFieldType=Warning: This field requires a newer release of Martus to be viewed",
 "field:BackupSecretShareCompleteInformation=Backup complete, please give each disk to someone you trust, so that if you forget your Username and/or password in the future you can recreate your account.  You will need #MinimumNumberOfFilesNeededForRecovery# of these disks to recreate your account.",
 "field:BackupRecoverKeyPairInsertNextDiskMessage=Please insert disk #",
 "field:RemoveServerLabel1=The following server will be removed:",
@@ -1495,7 +1495,7 @@ public class EnglishStrings
 		"you'll see a list of records that contain both words. " +
 		"The keyword \"#And#\" is implied, so if you search for:\n" +
 		"   prison assault \n" +
-		"Martus will find records the same records as if you searched for:\n" +
+		"Martus will find the same records as if you searched for:\n" +
 		"   prison #And# assault\n\n" + 
 	"When you use both \"#And#\" and \"#Or#\", your search terms are grouped from the beginning of your list " +
 		"(either across record fields or within a particular field). " +
@@ -1515,7 +1515,7 @@ public class EnglishStrings
 + "if you want to search for a specific victim name in a single item in your records created after a certain date, "
 + "select the checkbox and enter the following fields in the Search screen: \"Victim Information: First Name\" = x and "
 + "\"Victim Information: Last Name\" = y and \"Date Created\" >= YYYY-Mon-DD. "
-+ "If you do not select the \"Match multi-item details\" checkbox, "
++ "If you do not select the \"Match multi-item list details\" checkbox, "
 + "Martus will find records created after your specified date where any item has the first name you specified and any other item has the last name specified, "
 + "but not necessarily in the same item (you could have an item with \"First Name\" = x and \"Last Name\" = b, "
 + "and a different item with \"First Name\" = a and \"Last Name\" = y, "
@@ -1544,12 +1544,12 @@ public class EnglishStrings
 + "\n\n"
 + " 3. If you do not see your search terms/dates in the final version of the record displayed in the Search Results folder, "
 + "your criteria may have been matched in an earlier version of the record. "
-+ "You can access previous versions by clicking the \"Record Details...\" button at the bottom of the record. "
-+ "To search only the most recent versions of records, select Only Search Most Recent Versions of Records in the Search dialog box."
++ "You can access previous versions by clicking the \"Record Details\" button at the bottom of the record. "
++ "To search only the most recent versions of records, select \"Only search most recent version of records\" in the Search dialog box."
 + "\n\n"
 + " 4. If you have fields in different records or from different customizations that are exactly the same, "
 + "Martus will combine them in any Search and Report field lists. "
-+ "And while Martus warns you about duplicate labels where you are creating a new record customization, "
++ "And while Martus warns you about duplicate labels when you are creating a new record customization, "
 + "it is possible that over time, you may have records with different customizations that ended up with the same labels "
 + "(e.g. maybe you changed a text field to a dropdown field but kept the same label). "
 + "In these cases, Martus will display both fields in the search screen, "
@@ -1602,7 +1602,7 @@ public class EnglishStrings
 "field:ManageContacts=Manage Contacts",
 
 "field:AllFiles=All Files",
-"field:RemoveMartusFromSystemWarning=WARNING!",
+"field:RemoveMartusFromSystemWarning=Warning!",
 "field:RemoveMartusFromSystemMultipleAccountsWarning1=IMPORTANT: There are other Martus accounts on this system.",
 "field:RemoveMartusFromSystemMultipleAccountsWarning2=All of their data will be removed as well!",
 "field:QuickEraseFollowingItems=Clicking on Ok will do the following on this computer:",
@@ -1664,17 +1664,17 @@ public class EnglishStrings
 
 "field:BackgroundPrinting=Preparing Report...",
 "field:BackgroundWorking=Working...",
-"field:RecordTitle=Title:",
-"field:To=To:",
-"field:From=From:",
-"field:VersionNumber=Version #:",
+"field:RecordTitle=Title ",
+"field:To=To ",
+"field:From=From ",
+"field:VersionNumber=Version # ",
 
 "wintitle:FileDialogImportContactPublicKey=Import Contact Key",
 "button:FileDialogOkImportContactPublicKey=Import",
 
 "wintitle:FileDialogSaveAttachment=Save Attachment",
 
-"wintitle:notifyAddPermissionsZeroBulletinsOurs=Update Contacts access to Records",
+"wintitle:notifyAddPermissionsZeroBulletinsOurs=Update Contacts Access to Records",
 "wintitle:notifyAddPermissionsZeroHeadquartersSelected=No Contacts Selected",
 "wintitle:RetrieveHQSealedBulletinProgress=Retrieving Records",
 "wintitle:RetrieveHQDraftBulletinProgress=Retrieving Records",
@@ -1686,14 +1686,14 @@ public class EnglishStrings
 "wintitle:Details=Details",
 "wintitle:Contacts=Contacts",
 
-"menu:AddPermissions=Update Contact's Access...",
+"menu:AddPermissions=Update Contact's Access",
 "button:AddPermissions=Update Contact's Access",
 "button:Contacts=Contacts",
 "button:Create=Create",
 
 "field:confirmWarningSwitchToNormalKeyboardeffect=If this record was shared with you by one of your contacts, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.",
 "field:confirmCloneBulletinAsMineeffect=Clicking on Yes will create a new record that contains a copy of all the same information. You will be the official author of this new record, and any private data in it will only be visible by you (and your Contact's accounts that you have shared the record with). The original record will remain unchanged.",
-"field:notifyAddPermissionsZeroHeadquartersSelectedcause=Must select at least one contact's account",
+"field:notifyAddPermissionsZeroHeadquartersSelectedcause=You must select at least one contact's account",
 "field:ConfigureHQColumnHeaderPublicCode=Public Code",
 "field:BulletinHeadQuartersHQLabel=Label",
 "field:QuickEraseWillRemoveItems=Delete your Martus key, records, folders, and configuration information (such as your contacts, server, and custom field settings).",
@@ -1705,7 +1705,7 @@ public class EnglishStrings
 "If a record is sealed, a new version will be created.",
 "field:ChooseHeadquartersToAdd=Select the contacts listed below that you want to add to all the records listed above.",
 "field:TemplateCreatedByHeadquarters=Contacts #Name#",
-"field:PublicCodeWithColon=Public Code:",
+"field:PublicCodeWithColon=Public Code ",
 
 "wintitle:ViewAttachment=View Attachment",
 "wintitle:confirmCloneUnverifiedFDBulletinAsMine=Confirm Create Copy of Record",
@@ -1718,8 +1718,8 @@ public class EnglishStrings
 
 "menu:RetrieveHQSealedBulletins=Retrieve Sealed Records from My Contacts",
 "menu:RetrieveHQDraftBulletins=Retrieve Draft Records from My Contacts",
-"folder:%RetrievedFieldOfficeBulletin=Contacts Sealed Records",
-"folder:%RetrievedFieldOfficeBulletinDraft=Contacts Draft Records",
+"folder:%RetrievedFieldOfficeBulletin=Contacts' Sealed Records",
+"folder:%RetrievedFieldOfficeBulletinDraft=Contacts' Draft Records",
 "field:confirmCloneUnverifiedFDBulletinAsMinecause=You have chosen to modify a record that was created by a Martus user that has not been verified, so the record could contain incorrect information or potentially damaging attachments. We recommend that you verify this account before continuing (See Tools > Manage Contacts).",
 "field:confirmCloneUnverifiedFDBulletinAsMineeffect=Clicking on Yes to continue with the modify operation will create a new record that contains a copy of all the same information.  You will be the official author of this new record, so you will become responsible for all the content. Any private data in it will only be visible to you (and any contacts accounts you have shared this with).  The original record will remain unchanged.",
 
@@ -1756,10 +1756,10 @@ public class EnglishStrings
 "button:PublicCode=Public Code",
 "button:ContactVerified=Verified",
 "button:ContactRemove=Remove",
-"field:AccessToken=Access Token:",
+"field:AccessToken=Access Token ",
 "field:AccessTokenInstructions=Access Token",
-"button:AddContact=Add Contact...",
-"button:ImportContactFromFile=Import Contact From File...",
+"button:AddContact=Add Contact",
+"button:ImportContactFromFile=Import Contact From File",
 "button:ContactsSaveClose=Save and Close",
 "button:CopyItem=Copy",
 "wintitle:CopyItem=Copy",
@@ -1785,11 +1785,11 @@ public class EnglishStrings
 "field:WizardStep1Heading=Account Creation",
 "field:WizardStep1Information=Your information will be kept safe, with a password protected, encrypted account.",
 "field:ServerSettings=Settings",
-"field:WizardStep2Information=Establish your system settings for the use of Tor (a tool to help hide network activity) and dates.",
+"field:WizardStep2Information=Establish your calendar and Tor (a tool to help hide network activity) settings.",
 "field:WizardStep3=Server Setup",
 "field:WizardStep3Information=Backup your information to a secure server.",
 "field:WizardStep4=Contacts",
-"field:WizardStep4Information=Send and receive information from other Martus users of your choice.",
+"field:WizardStep4Information=Send and receive information to/from other Martus users of your choice.",
 "field:WizardStep5=Import Forms",
 "field:WizardStep5Heading=Import Form Template",
 "field:WizardStep5Information=Select a template for creating Martus forms.",
@@ -1801,9 +1801,9 @@ public class EnglishStrings
 
 "field:CreateAccount=Create an Account",
 "field:CreateAccountInstructions=When creating a Username and password for your account, please be aware there is no way to retrieve your Username and password if you forget it. This is for your safety.",
-"field:CreateAccountUserName=Username:",
+"field:CreateAccountUserName=Username ",
 "field:AccountUserNameInstructions=create a Username",
-"field:Password=Password:",
+"field:Password=Password ",
 "field:PasswordInstructions=create a password",
 "field:BackupAccountInfo=Note: Later in this wizard, you will be led through a process to backup your account key. This will help protect your account from loss.",
 "field:UserNameTips=Username Tips:",
@@ -1823,8 +1823,8 @@ public class EnglishStrings
 "field:UserNameAndPasswordMatches=Username and password match!",
 
 "field:VerifyContactPublicCode=Verify your contact public code",
-"field:VerifyContactPublicCodeNew=Public code:",
-"field:VerifyContactPublicCodeOld=Public code (for Martus 4.4 and below):",
+"field:VerifyContactPublicCodeNew=Public code ",
+"field:VerifyContactPublicCodeOld=Public code (for Martus 4.4 and below) ",
 "button:VerifyContactLater=Verify Later",
 "button:VerifyContactNow=Verify Now",
 
@@ -1878,8 +1878,8 @@ public class EnglishStrings
 "field:LinkToTokenAndPublicCode=Get your Token and Code",
 
 "field:NoFormTemplateTitle=[no title]",
-"button:GenericForms=Generic",
-"button:CustomForms=Download Custom",
+"button:GenericForms=Generic Template",
+"button:CustomForms=Download Custom Template",
 "field:FormsHint=You can switch forms later",
 "field:ImportFormTemplates=Import Form Templates",
 "field:ImportFormTemplateHelp=Martus allows you to create and share custom forms for data entry. Get started by selecting a form template if desired. Martus comes with several generic form templates you can use. You can also download a custom template from one of your current contacts or another Martus user.",
@@ -1902,7 +1902,7 @@ public class EnglishStrings
 "field:BackupYourKeyTip1=Be sure to save a copy of your account key to a secure location that is different from the computer where you currently have Martus installed, so you have it if you need to restore your account.",
 "field:BackupYourKeyTip2=Martus also offers a way to back up your key in 3 separate pieces, which is the only way for you to access your Martus account and data if you forget your Username and password. You will be prompted to create the 3 piece backup after completing your account setup and we strongly encourage you to do so.",
 
-"field:Tor=Tor:",
+"field:Tor=Tor ",
 "button:On=On",
 "button:Off=Off",
 
@@ -1910,19 +1910,19 @@ public class EnglishStrings
 "button:move=Move",
 
 "field:TitleCaseManagement=Label Manager",
-"field:MainFolderLabel=Label:",
+"field:MainFolderLabel=Label ",
 "field:EmptyCustomName=Custom Name",
 "field:FolderNameCases=Cases",
 "field:FolderNameIncidents=Incidents",
 "field:FolderNameProjects=Projects",
 "field:FolerNameUserDefined=Custom Name",
-"field:FolderCreateNewName=Name:",
+"field:FolderCreateNewName=Name ",
 "field:HintEnterFolderName=Enter Name",
 "field:defaultCaseName=Untitled",
 "field:HintFolderNameAlreadyExists=This name is already in the system.  Please choose a unique name.",
 "field:HintFolderNameInvalid=You must enter a valid name.",
 "field:HintFolderNameIsSame=Enter a new name.",
-"field:FolderRename=New Name:",
+"field:FolderRename=New Name ",
 "button:CreateFolder=Create",
 "button:DeleteFolder=Delete",
 "button:RenameFolder=Rename",
