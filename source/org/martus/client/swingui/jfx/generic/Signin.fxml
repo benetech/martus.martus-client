@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -13,10 +14,10 @@
       <children>
       		    <GridPane fx:id="signInPane" vgap="5.0" xmlns:fx="http://javafx.com/fxml">
          <children>
-         		        <Label styleClass="headingLevel3" text="%CreateAccountUserName" />
+         		        <Label styleClass="headingLevel2" text="%CreateAccountUserName" />
          		        <TextField id="accountName" fx:id="userNameField" promptText="%AccountUserNameInstructions" GridPane.columnIndex="1" />
          
-         		        <Label styleClass="headingLevel3" text="%Password" GridPane.rowIndex="1" />
+         		        <Label styleClass="headingLevel2" text="%Password" GridPane.rowIndex="1" />
          		        <PasswordField id="password" fx:id="passwordField" promptText="%PasswordInstructions" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
                      <columnConstraints>
@@ -35,14 +36,16 @@
    		<bottom>
    			<HBox>
       <children>
-      			    <Label styleClass="headingLevel2" text="%ChooseLanguage" />
               		<ChoiceBox fx:id="languagesDropdown" />
       			
-      				<Button fx:id="okButton" defaultButton="true" onAction="#onOk" text="%button.SignIn" />
+      				<Button fx:id="okButton" defaultButton="true" onAction="#onOk" text="%Button.SignIn" />
       				<Button onAction="#onCancel" text="%Button.cancel" />
       </children>
    			</HBox>
    		</bottom>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
        </BorderPane>
    </children>
 </StackPane>
