@@ -728,7 +728,7 @@ public class EnglishStrings
 "field:RecordSettings=Record Settings",
 "field:RecordDetails=Record Details",
 "field:DoNotShowAgainThisSession=Do not show this message again during this session",
-
+"field:NotAvailable=(n/a)",
 "wintitle:PrintPreview=Print Preview",
 "button:PrintToPrinter=Print To Printer",
 "button:PrintToFile=Print To File",
