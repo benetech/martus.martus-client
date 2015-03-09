@@ -135,7 +135,7 @@ abstract public class FxFieldCreator
 	protected Text getText(ReadOnlyStringProperty property)
 	{
 		String textStringValue = property.getValue();
-		return new Text(textStringValue);
+		return getDisplayableText(textStringValue);
 	}
 
 	protected static final int MINIMUM_REASONABLE_COLUMN_COUNT = 10;
