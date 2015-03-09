@@ -110,7 +110,7 @@ public class FxViewFieldCreator extends FxFieldCreator
 	@Override
 	protected Node createFieldNotAvailable()
 	{
-		return responsiveTextFlowNode("(n/a)");
+		return responsiveTextFlowNode(localization.getFieldLabel("NotAvailable"));
 	}
 
 	@Override
