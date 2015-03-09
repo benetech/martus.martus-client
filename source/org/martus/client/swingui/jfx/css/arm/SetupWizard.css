@@ -1,7 +1,7 @@
 .root {
 	-fx-background-color: #e6e7e9;
   -fx-font-family: "DejaVuSans";
-  -fx-line-height: 28px inherit;
+  -fx-line-height: inherit 28px;
 }
 
 .sidebarText {
