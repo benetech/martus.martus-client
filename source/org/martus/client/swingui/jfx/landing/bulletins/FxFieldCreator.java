@@ -127,9 +127,9 @@ abstract public class FxFieldCreator
 		return getDisplayableText(stringContentWithNewLine);
 	}
 
-	private Text getDisplayableText(String stringContentWithNewLine)
+	private Text getDisplayableText(String text)
 	{
-		return new Text(stringContentWithNewLine);
+		return new Text(text);
 	}
 
 	protected Text getText(ReadOnlyStringProperty property)
