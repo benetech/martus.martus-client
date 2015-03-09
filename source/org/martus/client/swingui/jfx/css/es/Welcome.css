@@ -1,6 +1,6 @@
 BorderPane {
     -fx-font-family: "Helvetica";
-    -fx-line-height: 21px inherit;
+  -fx-line-height: inherit 21px;
 }
 
 .root {
