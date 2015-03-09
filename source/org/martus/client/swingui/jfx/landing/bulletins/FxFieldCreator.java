@@ -112,7 +112,8 @@ abstract public class FxFieldCreator
 
 	protected Node responsiveTextFlowNode(Text mainContent)
 	{
-		TextFlow flow = new TextFlow(getContentWithNewLineAdded(mainContent));
+		Text contentWithNewLineAdded = getContentWithNewLineAdded(mainContent);
+		TextFlow flow = new TextFlow(contentWithNewLineAdded);
 		flow.getStyleClass().add("systemTextField");
 		flow.setMinWidth(DEFAULT_TEXT_VIEW_WIDTH); //TODO: Ideally we would get the width of the Dialog - Width of the Field Title and bind us to that.
 		flow.prefWidthProperty().bind(fieldWidthProperty);
@@ -123,13 +124,18 @@ abstract public class FxFieldCreator
 	{
 		String stringContentWithNewLine = mainContent.getText();
 		stringContentWithNewLine += NEW_LINE;
+		return getDisplayableText(stringContentWithNewLine);
+	}
+
+	private Text getDisplayableText(String stringContentWithNewLine)
+	{
 		return new Text(stringContentWithNewLine);
 	}
 
 	protected Text getText(ReadOnlyStringProperty property)
 	{
-		Text text = new Text(property.getValue());
-		return text;
+		String textStringValue = property.getValue();
+		return new Text(textStringValue);
 	}
 
 	protected static final int MINIMUM_REASONABLE_COLUMN_COUNT = 10;
