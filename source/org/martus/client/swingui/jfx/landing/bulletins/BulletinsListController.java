@@ -144,12 +144,12 @@ public class BulletinsListController extends AbstractFxLandingContentController 
 		dateSavedColumn.setCellValueFactory(new PropertyValueFactory<BulletinTableRowData, Long>(BulletinTableRowData.DATE_SAVED_PROPERTY_NAME));
 		dateSavedColumn.setCellFactory(new FxTimestampTableCellFactory(getLocalization()));
 		
-        Image viewImage = new Image(VIEW_BULLETIN_IMAGE_PATH);
-        viewBulletinColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(viewImage, () -> viewSelectedBulletin()));
+        Image viewRecordImage = new Image(VIEW_BULLETIN_IMAGE_PATH);
+        viewBulletinColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(viewRecordImage, () -> viewSelectedBulletin()));
 		viewBulletinColumn.setCellValueFactory(new PropertyValueFactory<TableRowData, Boolean>(BulletinTableRowData.CAN_VIEW_PROPERTY_NAME));
 		
-        Image editImage = new Image(EDIT_BULLETIN_IMAGE_PATH);
-        editBulletinColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(editImage, () -> editSelectedBulletin()));
+        Image editRecordImage = new Image(EDIT_BULLETIN_IMAGE_PATH);
+        editBulletinColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(editRecordImage, () -> editSelectedBulletin()));
 		editBulletinColumn.setCellValueFactory(new PropertyValueFactory<TableRowData, Boolean>(BulletinTableRowData.CAN_EDIT_PROPERTY_NAME));
 		editBulletinColumn.visibleProperty().bind(getTrashNotBeingDisplayedBinding());
 	}
