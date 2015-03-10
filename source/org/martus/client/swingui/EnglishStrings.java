@@ -218,6 +218,7 @@ public class EnglishStrings
 "wintitle:BulletinContacts=Record Contacts",
 
 "wintitle:FileDialogImportTemplate=Import Form Template",
+"wintitle:FileDialogRecoverSharedKeyPair=Restore Account from Key Backup",
 
 "wintitle:SelectTemplate=Template Selector",
 "field:confirmOkToSwitchTemplate=Changing templates will replace the old template with a new one and may remove existing data from this record.",
