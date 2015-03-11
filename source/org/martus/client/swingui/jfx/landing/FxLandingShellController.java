@@ -209,11 +209,9 @@ public class FxLandingShellController extends FxNonWizardShellController
 	private void updateTooltipMessage(Button toolbarButton, boolean enabled, String onMessage, String offMessage)
 	{
 		Tooltip tooltip = new Tooltip();
-		String tooltipMessage = new String("");
+		String tooltipMessage = new String(getLocalization().getTooltipLabel(offMessage));
 		if(enabled)
 			tooltipMessage = getLocalization().getTooltipLabel(onMessage);
-		else
-			tooltipMessage = getLocalization().getTooltipLabel(offMessage);
 		tooltip.setText(tooltipMessage);
 		toolbarButton.setTooltip(tooltip);
 	}
