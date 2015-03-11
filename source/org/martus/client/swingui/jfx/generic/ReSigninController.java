@@ -25,6 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import org.martus.client.swingui.UiMainWindow;
 
 public class ReSigninController extends SigninController
@@ -32,6 +35,13 @@ public class ReSigninController extends SigninController
 	public ReSigninController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle bundle)
+	{
+		super.initialize(location, bundle);
+		hideLanguageDropdown();
 	}
 	
 	@Override
