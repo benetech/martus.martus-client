@@ -118,6 +118,11 @@ abstract public class SigninController extends FxNonWizardShellController
 		return passwordField.getText().toCharArray();
 	}
 	
+	protected void hideLanguageDropdown()
+	{
+		languagesDropdown.setVisible(false);
+	}
+	
 	@FXML
 	private void onNewAccount()
 	{
