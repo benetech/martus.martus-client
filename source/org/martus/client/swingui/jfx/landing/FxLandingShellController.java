@@ -39,6 +39,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
@@ -202,6 +203,19 @@ public class FxLandingShellController extends FxNonWizardShellController
 		OrchidTransportWrapper transport = getApp().getTransport();
 		boolean isTorEnabled = transport.isTorEnabled();
 		toolbarButtonTor.setText(getStatusMessage(isTorEnabled));
+		updateTooltipMessage(toolbarButtonTor, isTorEnabled, "TorCurrentlyOn", "TorCurrentlyOff");
+	}
+
+	private void updateTooltipMessage(Button toolbarButton, boolean enabled, String onMessage, String offMessage)
+	{
+		Tooltip tooltip = new Tooltip();
+		String tooltipMessage = new String("");
+		if(enabled)
+			tooltipMessage = getLocalization().getTooltipLabel(onMessage);
+		else
+			tooltipMessage = getLocalization().getTooltipLabel(offMessage);
+		tooltip.setText(tooltipMessage);
+		toolbarButton.setTooltip(tooltip);
 	}
 	
 	class UpdateTorStatusLater implements Runnable
@@ -235,6 +249,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	{
 		boolean isOnline = getApp().getTransport().isOnline();
 		toolbarButtonOnline.setText(getStatusMessage(isOnline));
+		updateTooltipMessage(toolbarButtonOnline, isOnline, "ServerCurrentlyOn", "ServerCurrentlyOff");
 		getMainWindow().updateServerStatusInStatusBar();
 	}
 	
