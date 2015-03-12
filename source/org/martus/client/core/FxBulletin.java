@@ -323,19 +323,19 @@ public class FxBulletin
 		fieldSpecs = new FieldSpecCollection();
 	}
 
-	private void safelyClearValue(ReadOnlyObjectWrapper bulletinHistory2)
+	private void safelyClearValue(ReadOnlyObjectWrapper valueToClear)
 	{
-		if(bulletinHistory2 != null)
+		if(valueToClear != null)
 		{
-			bulletinHistory2.setValue(null);
+			valueToClear.setValue(null);
 		}
 	}
 
-	private void safelyClearList(ObservableList authorizedToReadKeysToUse)
+	private void safelyClearList(ObservableList valueToClear)
 	{
-		if(authorizedToReadKeysToUse != null)
+		if(valueToClear != null)
 		{
-			authorizedToReadKeysToUse.clear();
+			valueToClear.clear();
 		}
 	}
 	
