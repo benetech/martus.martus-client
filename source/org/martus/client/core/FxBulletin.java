@@ -329,21 +329,23 @@ public class FxBulletin
 		}
 		
 		ObservableList authorizedToReadKeysToUse = authorizedToReadKeys;
-		if(authorizedToReadKeysToUse != null)
-		{
-			authorizedToReadKeysToUse.clear();
-		}
+		safelyClearList(authorizedToReadKeysToUse);
 
 		ObservableList attachmentsToUse = attachments;
-		if(attachmentsToUse != null)
-		{
-			attachmentsToUse.clear();
-		}
+		safelyClearList(attachmentsToUse);
 
 		fields.forEach((key, field) -> clearField(field));
 		fields.clear();
 		
 		fieldSpecs = new FieldSpecCollection();
+	}
+
+	private void safelyClearList(ObservableList authorizedToReadKeysToUse)
+	{
+		if(authorizedToReadKeysToUse != null)
+		{
+			authorizedToReadKeysToUse.clear();
+		}
 	}
 	
 	private void clearField(FxBulletinField field)
