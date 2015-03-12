@@ -310,16 +310,16 @@ public class FxBulletin
 		if(universalIdProperty2 != null)
 		{
 			universalIdProperty2.setValue(null);
-			universalIdProperty = null;
 		}
 
 		ReadOnlyObjectWrapper bulletinHistory2 = bulletinHistory;
 		if(bulletinHistory2 != null)
 		{
 			bulletinHistory2.setValue(null);
-			bulletinHistory = null;
 		}
 		
+		bulletinHistory = null;
+		universalIdProperty = null;
 		bulletinLocalId = null;
 		versionProperty = null;
 		
