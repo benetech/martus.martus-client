@@ -80,3 +80,14 @@
 .button-transparentWithHover:pressed {
 }
 
+.button-transparentNoHover{
+		-fx-background-color:transparent;
+}
+
+.button-transparentNoHover:hover{
+		-fx-background-color:transparent;
+}
+
+.button-transparentNoHover:pressed{
+		-fx-background-color:transparent;
+}
