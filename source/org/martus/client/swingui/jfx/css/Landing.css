@@ -70,3 +70,13 @@
 	-fx-font-size: 14px;
 }
 
+.button-transparentWithHover{
+		-fx-background-color:transparent;
+}
+
+.button-transparentWithHover:hover {
+}
+
+.button-transparentWithHover:pressed {
+}
+
