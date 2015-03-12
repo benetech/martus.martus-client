@@ -191,6 +191,14 @@ public class FxLandingShellController extends FxNonWizardShellController
 		return contents;
 	}
 
+	private void updateOnlineStatus()
+	{
+		boolean isOnline = getApp().getTransport().isOnline();
+		toolbarImageViewOnline.setImage(getUpdatedOnOffStatusImage(isOnline));
+		toolbarButtonOnline.setTooltip(getUpdatedToolTip(isOnline, "ServerCurrentlyOn", "ServerCurrentlyOff"));
+		getMainWindow().updateServerStatusInStatusBar();
+	}
+
 	protected void updateTorStatus()
 	{
 		OrchidTransportWrapper transport = getApp().getTransport();
@@ -207,6 +215,15 @@ public class FxLandingShellController extends FxNonWizardShellController
 			tooltipMessage = getLocalization().getTooltipLabel(onMessage);
 		tooltip.setText(tooltipMessage);
 		return tooltip;
+	}
+
+	private Image getUpdatedOnOffStatusImage(boolean isOn)
+	{
+		String onOffImagePath = TOGGLE_OFF_IMAGE_PATH;
+		if(isOn)
+			onOffImagePath = TOGGLE_ON_IMAGE_PATH;
+		Image onOffImage = new Image(onOffImagePath);
+		return onOffImage;
 	}
 	
 	class UpdateTorStatusLater implements Runnable
@@ -236,23 +253,6 @@ public class FxLandingShellController extends FxNonWizardShellController
 		}
 	}
 
-	private void updateOnlineStatus()
-	{
-		boolean isOnline = getApp().getTransport().isOnline();
-		toolbarImageViewOnline.setImage(getUpdatedOnOffStatusImage(isOnline));
-		toolbarButtonOnline.setTooltip(getUpdatedToolTip(isOnline, "ServerCurrentlyOn", "ServerCurrentlyOff"));
-		getMainWindow().updateServerStatusInStatusBar();
-	}
-
-	private Image getUpdatedOnOffStatusImage(boolean isOn)
-	{
-		String onOffImagePath = TOGGLE_OFF_IMAGE_PATH;
-		if(isOn)
-			onOffImagePath = TOGGLE_ON_IMAGE_PATH;
-		Image onOffImage = new Image(onOffImagePath);
-		return onOffImage;
-	}
-	
 	private void onSettings(String tabToDisplayFirst)
 	{
 		FxTabbedShellController settingsController = new SettingsController(getMainWindow());
