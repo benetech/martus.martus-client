@@ -218,6 +218,7 @@ public class EnglishStrings
 "wintitle:BulletinContacts=Record Contacts",
 
 "wintitle:FileDialogImportTemplate=Import Form Template",
+"wintitle:FileDialogRecoverSharedKeyPair=Restore Account from Key Backup",
 
 "wintitle:SelectTemplate=Template Selector",
 "field:confirmOkToSwitchTemplate=Changing templates will replace the old template with a new one and may remove existing data from this record.",
@@ -389,6 +390,15 @@ public class EnglishStrings
 "tooltip:ServerSync=Sync Manager",
 "tooltip:ImportBulletin=Import Record",
 "tooltip:NeverDeleteFromServer=Check to prohibit deletion of your records from the Martus server.",
+"tooltip:CreateNewRecord=Create new record",
+"tooltip:ServerCurrentlyOn=Server ON: Click to turn Server off",
+"tooltip:ServerCurrentlyOff=Server OFF: Click to turn Server on",
+"tooltip:TorCurrentlyOn=Tor:ON, Click to turn Tor off",
+"tooltip:TorCurrentlyOff=Tor:OFF, Click to turn Tor on",
+"tooltip:TorOn=Click to turn Tor off",
+"tooltip:QuickSearch=Search",
+"tooltip:Help=Help",
+
 "button:export=Export",
 "button:Help=Help",
 "button:create=Create",

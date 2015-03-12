@@ -119,18 +119,19 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 	private Set getUniversalIds()
 	{
 		if(folder == FxCaseManagementController.ALL_FOLDER)
-			return getAllNonDeleletedBulletinUids();
+			return getAllBulletinUids();
 		return folder.getAllUniversalIdsUnsorted();
 	}
 
-	public Set getAllNonDeleletedBulletinUids()
+	public Set getAllBulletinUids()
 	{
 		{			
-			Set allNonDiscardedBulletinUids = mainWindow.getStore().getAllBulletinLeafUids();
-			BulletinFolder discarded = mainWindow.getStore().getFolderDiscarded();
-			Set discardedUids = discarded.getAllUniversalIdsUnsorted();
-			allNonDiscardedBulletinUids.removeAll(discardedUids);
-			return allNonDiscardedBulletinUids;
+			Set allBulletinUids = mainWindow.getStore().getAllBulletinLeafUids();
+			//NOTE: MARTUSDEV-1200 Desktop: Records that exist in both "Trash" and another folder will not be listed in "All"
+			//BulletinFolder discarded = mainWindow.getStore().getFolderDiscarded();
+			//Set discardedUids = discarded.getAllUniversalIdsUnsorted();
+			//allBulletinUids.removeAll(discardedUids);
+			return allBulletinUids;
 		}
 	}
 
