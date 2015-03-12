@@ -101,9 +101,9 @@
                                  		</Label>
 										<Button fx:id="toolbarButtonOnline" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onOnline">
                                  <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="toolbarImageViewOnline" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../images/blank.png" />
+                                          <Image url="@../images/toggle-off.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -113,6 +113,7 @@
                                  <styleClass>
                                     <String fx:value="toolbarButton" />
                                     <String fx:value="button-minpadding" />
+                                    <String fx:value="button-transparentWithHover" />
                                  </styleClass></Button>
 									</children>
                            <opaqueInsets>
@@ -128,9 +129,9 @@
                                  		</Label>
  										<Button fx:id="toolbarButtonTor" mnemonicParsing="false" onAction="#onTor">
                                  <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="toolbarImageViewTor" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../images/blank.png" />
+                                          <Image url="@../images/toggle-off.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -140,6 +141,7 @@
                                  <styleClass>
                                     <String fx:value="toolbarButton" />
                                     <String fx:value="button-minpadding" />
+                                    <String fx:value="button-transparentWithHover" />
                                  </styleClass></Button>
                            			</children>
                         </HBox>
