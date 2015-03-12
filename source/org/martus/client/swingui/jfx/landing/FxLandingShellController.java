@@ -196,17 +196,17 @@ public class FxLandingShellController extends FxNonWizardShellController
 		OrchidTransportWrapper transport = getApp().getTransport();
 		boolean isTorEnabled = transport.isTorEnabled();
 		updateOnOffStatusImage(toolbarImageViewTor, isTorEnabled);
-		updateTooltipMessage(toolbarButtonTor, isTorEnabled, "TorCurrentlyOn", "TorCurrentlyOff");
+		toolbarButtonTor.setTooltip(getUpdatedToolTip(isTorEnabled, "TorCurrentlyOn", "TorCurrentlyOff"));
 	}
 
-	private void updateTooltipMessage(Button toolbarButton, boolean enabled, String onMessage, String offMessage)
+	private Tooltip getUpdatedToolTip(boolean enabled, String onMessage, String offMessage)
 	{
 		Tooltip tooltip = new Tooltip();
 		String tooltipMessage = new String(getLocalization().getTooltipLabel(offMessage));
 		if(enabled)
 			tooltipMessage = getLocalization().getTooltipLabel(onMessage);
 		tooltip.setText(tooltipMessage);
-		toolbarButton.setTooltip(tooltip);
+		return tooltip;
 	}
 	
 	class UpdateTorStatusLater implements Runnable
@@ -240,7 +240,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	{
 		boolean isOnline = getApp().getTransport().isOnline();
 		updateOnOffStatusImage(toolbarImageViewOnline, isOnline);
-		updateTooltipMessage(toolbarButtonOnline, isOnline, "ServerCurrentlyOn", "ServerCurrentlyOff");
+		toolbarButtonOnline.setTooltip(getUpdatedToolTip(isOnline, "ServerCurrentlyOn", "ServerCurrentlyOff"));
 		getMainWindow().updateServerStatusInStatusBar();
 	}
 
