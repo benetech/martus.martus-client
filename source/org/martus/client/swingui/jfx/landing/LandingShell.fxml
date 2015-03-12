@@ -103,7 +103,7 @@
                                  <graphic>
                                     <ImageView fx:id="toolbarImageViewOnline" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../images/toggle-off.png" />
+                                          <Image url="@../images/toggle_off.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -131,7 +131,7 @@
                                  <graphic>
                                     <ImageView fx:id="toolbarImageViewTor" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../images/toggle-off.png" />
+                                          <Image url="@../images/toggle_off.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
