@@ -306,15 +306,17 @@ public class FxBulletin
 		notAuthorizedToRead = false;
 		hasBeenValidatedProperty.setValue(false);
 		
-		if(universalIdProperty != null)
+		ReadOnlyObjectWrapper universalIdProperty2 = universalIdProperty;
+		if(universalIdProperty2 != null)
 		{
-			universalIdProperty.setValue(null);
+			universalIdProperty2.setValue(null);
 			universalIdProperty = null;
 		}
 
-		if(bulletinHistory != null)
+		ReadOnlyObjectWrapper bulletinHistory2 = bulletinHistory;
+		if(bulletinHistory2 != null)
 		{
-			bulletinHistory.setValue(null);
+			bulletinHistory2.setValue(null);
 			bulletinHistory = null;
 		}
 		
