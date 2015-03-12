@@ -333,15 +333,15 @@ public class FxBulletin
 			authorizedToReadKeys.clear();
 		}
 
-		fields.forEach((key, field) -> clearField(field));
-		fields.clear();
-		
-		fieldSpecs = new FieldSpecCollection();
-		
 		if(attachments != null)
 		{
 			attachments.clear();
 		}
+
+		fields.forEach((key, field) -> clearField(field));
+		fields.clear();
+		
+		fieldSpecs = new FieldSpecCollection();
 	}
 	
 	private void clearField(FxBulletinField field)
