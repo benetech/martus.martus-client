@@ -20,7 +20,7 @@
 }
 
 .button:hover {
-		-fx-background-color: #638a4b;
+		-fx-background-color: #77bad0;
 		-fx-border-radius: 5;
 		-fx-text-fill: White;
 		-fx-alignment: center;
@@ -30,7 +30,7 @@
 }
 
 .button:pressed {
-		-fx-background-color: DarkGreen;
+		-fx-background-color: #9bd6ea;
 		-fx-border-radius: 5;
 		-fx-text-fill: White;
 		-fx-alignment: center;
