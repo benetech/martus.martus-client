@@ -51,8 +51,7 @@ public class FxButtonTableCell extends TableCell
 	public static FxButtonTableCell createNarrowButtonTableCell(ReadOnlyProperty<Image> imagePropertyToUse, ActionDoer doerToUse)
 	{
 		FxButtonTableCell fxButtonTableCell = createNormalButtonTableCell(imagePropertyToUse, doerToUse);
-		fxButtonTableCell.setButtonStyle(NARROW_BUTTON_STYLE);
-		fxButtonTableCell.setButtonStyle(TRANSPARENT_WITH_HOVER_BUTTON_STYLE);
+		fxButtonTableCell.setButtonStyle(TRANSPARENT_NARROW_BUTTON_STYLE);
 		return fxButtonTableCell;
 	}
 
@@ -89,8 +88,7 @@ public class FxButtonTableCell extends TableCell
 		setGraphic(button);
 	}
 	
-	static final private String NARROW_BUTTON_STYLE = "button-minpadding";
-	static final private String TRANSPARENT_WITH_HOVER_BUTTON_STYLE = "button-transparentWithHover";
+	static final private String TRANSPARENT_NARROW_BUTTON_STYLE = "button-transparentMinPadding";
 	private ReadOnlyProperty<Image> buttonImageProperty;
 	private ActionDoer doer;
 	private String buttonStyling = "";

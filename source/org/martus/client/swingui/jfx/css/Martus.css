@@ -39,15 +39,16 @@
 		-fx-background-insets: 2px;
 }
 
-.button-minpadding{
+.button-transparentMinPadding{
+		-fx-background-color:transparent;
 		-fx-padding: 5 5 5 5;
 }
 
-.button-minpadding:hover {
+.button-transparentMinPadding {
 		-fx-padding: 5 5 5 5;
 }
 
-.button-minpadding:pressed {
+.button-transparentMinPadding {
 		-fx-padding: 5 5 5 5;
 }
 
@@ -102,6 +103,30 @@
 	-fx-alignment: center;
 	-fx-font-size: 17px;
 	-fx-padding: 5 35 5 35;
+}
+
+.button-transparentWithHover{
+		-fx-background-color:transparent;
+		-fx-padding: 5 5 5 5;
+}
+
+.button-transparentWithHover:hover {
+		-fx-padding: 5 5 5 5;
+}
+
+.button-transparentWithHover:pressed {
+		-fx-padding: 5 5 5 5;
+}
+
+.button-transparentDarkText{
+		-fx-text-fill: #4F9AB2;
+		-fx-background-color:transparent;
+}
+
+.button-transparentDarkText {
+}
+
+.button-transparentDarkText {
 }
 
 /************/
