@@ -199,15 +199,15 @@ public class BulletinAttachmentsController extends FxController
 		thumbnailColumn.setCellValueFactory(new TableRowImageValueFactory(AttachmentTableRowData.ATTACHMENT_IMAGE_PROPERTY_NAME));
 
 		Image viewImage = new Image(VIEW_ATTACHMENT_IMAGE_PATH);
-		viewColumn.setCellFactory(FxButtonTableCellFactory.createNormalButtonTableCellFactory(viewImage, () -> viewSelectedAttachment()));
+		viewColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(viewImage, () -> viewSelectedAttachment()));
 		viewColumn.setCellValueFactory(new TableRowBooleanValueFactory(AttachmentTableRowData.ATTACHMENT_VIEW_PROPERTY_NAME));
 
 		Image removeImage = new Image(REMOVE_ATTACHMENT_IMAGE_PATH);
-		removeColumn.setCellFactory(FxButtonTableCellFactory.createNormalButtonTableCellFactory(removeImage, () -> removeSelectedAttachment()));
+		removeColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(removeImage, () -> removeSelectedAttachment()));
 		removeColumn.setCellValueFactory(new TableRowBooleanValueFactory(AttachmentTableRowData.ATTACHMENT_REMOVE_PROPERTY_NAME));
 
 		Image saveImage = new Image(SAVE_ATTACHMENT_IMAGE_PATH);
-		saveColumn.setCellFactory(FxButtonTableCellFactory.createNormalButtonTableCellFactory(saveImage, () -> saveSelectedAttachment()));
+		saveColumn.setCellFactory(FxButtonTableCellFactory.createNarrowButtonTableCell(saveImage, () -> saveSelectedAttachment()));
 		saveColumn.setCellValueFactory(new TableRowBooleanValueFactory(AttachmentTableRowData.ATTACHMENT_SAVE_PROPERTY_NAME));
 	}
 	

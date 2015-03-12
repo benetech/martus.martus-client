@@ -37,7 +37,7 @@
       </HBox>
       <HBox>
          <children>
-            <Button fx:id="uploadButton" mnemonicParsing="false" onAction="#onUpload" text="%Button.Upload">
+            <Button fx:id="uploadButton" mnemonicParsing="false" onAction="#onUpload" styleClass="button-transparentDarkText" text="%Button.Upload">
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -45,7 +45,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="downloadButton" mnemonicParsing="false" onAction="#onDownload" text="%Button.Download">
+            <Button fx:id="downloadButton" mnemonicParsing="false" onAction="#onDownload" styleClass="button-transparentDarkText" text="%Button.Download">
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -53,7 +53,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDelete" text="%Button.DeleteFromServer">
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDelete" styleClass="button-transparentDarkText" text="%Button.DeleteFromServer">
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
