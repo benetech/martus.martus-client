@@ -86,6 +86,8 @@
                                  </tooltip>
                                  <styleClass>
                                     <String fx:value="toolbarButton" />
+                                    <String fx:value="button-minpadding" />
+                                    <String fx:value="button-transparentWithHover" />
                                  </styleClass>
       								</Button>
                            </children>
@@ -165,6 +167,7 @@
                                  <styleClass>
                                     <String fx:value="toolbarButton" />
                                     <String fx:value="button-minpadding" />
+                                    <String fx:value="button-transparentWithHover" />
                                  </styleClass>
       								</Button>
                               <Label text="   " />
