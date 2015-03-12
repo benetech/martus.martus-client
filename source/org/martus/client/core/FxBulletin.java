@@ -313,7 +313,9 @@ public class FxBulletin
 		}
 		
 		if(bulletinLocalId != null)
+		{
 			bulletinLocalId = null;
+		}
 		
 		if(bulletinHistory != null)
 		{
@@ -322,10 +324,14 @@ public class FxBulletin
 		}
 
 		if(authorizedToReadKeys != null)
+		{
 			authorizedToReadKeys.clear();
+		}
 
 		if(versionProperty != null)
+		{
 			versionProperty = null;
+		}
 		
 		fields.forEach((key, field) -> clearField(field));
 		fields.clear();
@@ -333,10 +339,11 @@ public class FxBulletin
 		fieldSpecs = new FieldSpecCollection();
 		
 		if(attachments != null)
+		{
 			attachments.clear();
-
+		}
 	}
-
+	
 	private void clearField(FxBulletinField field)
 	{
 		field.clear();
