@@ -80,6 +80,25 @@ public class TestFxBulletin extends TestCaseEnhanced
 		store = new MockBulletinStore();
 	}
 	
+	public void testConstructorClearingMembers()
+	{
+		FxBulletin fxBulletin = new FxBulletin(getLocalization());
+		assertEquals("Should be empty?", 0, fxBulletin.getAllReusableChoicesLists().size());
+		assertEquals("Should be empty?", 0, fxBulletin.getAttachments().size());
+		assertEquals("Should be empty?", 0, fxBulletin.getFieldSpecs().size());
+		
+		assertNull("Member should be null", fxBulletin.getHistory());
+		assertNull("Member should be null", fxBulletin.getAuthorizedToReadList());
+		assertNull("Member should be null", fxBulletin.bulletinLocalIdProperty());
+		assertNull("Member should be null", fxBulletin.getHistory());
+		assertNull("Member should be null", fxBulletin.versionProperty());
+
+		assertFalse("Member should be false", fxBulletin.hasBeenModified());
+		assertFalse("Member should be false", fxBulletin.hasBeenValidatedProperty().get());
+		assertFalse("Member should be false", fxBulletin.isValidBulletin());
+		assertFalse("Member should be false", fxBulletin.notAuthorizedToRead());		
+	}
+	
 	public void testZawgyi() throws Exception
 	{
 		Bulletin b = new Bulletin(security);

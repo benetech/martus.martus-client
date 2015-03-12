@@ -75,6 +75,8 @@ public class FxBulletin
 		fields = new HashMap<String, FxBulletinField>();
 		attachments = FXCollections.observableArrayList();
 		hasBeenValidatedProperty = new SimpleBooleanProperty();
+		
+		clear();
 	}
 
 	public void copyDataFromBulletin(Bulletin b, BulletinStore store) throws Exception
