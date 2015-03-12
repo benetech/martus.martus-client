@@ -113,7 +113,7 @@
                                  <styleClass>
                                     <String fx:value="toolbarButton" />
                                     <String fx:value="button-minpadding" />
-                                    <String fx:value="button-transparentWithHover" />
+                                    <String fx:value="button-transparentNoHover" />
                                  </styleClass></Button>
 									</children>
                            <opaqueInsets>
@@ -141,7 +141,7 @@
                                  <styleClass>
                                     <String fx:value="toolbarButton" />
                                     <String fx:value="button-minpadding" />
-                                    <String fx:value="button-transparentWithHover" />
+                                    <String fx:value="button-transparentNoHover" />
                                  </styleClass></Button>
                            			</children>
                         </HBox>
