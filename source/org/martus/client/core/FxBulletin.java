@@ -318,15 +318,8 @@ public class FxBulletin
 			bulletinHistory = null;
 		}
 		
-		if(bulletinLocalId != null)
-		{
-			bulletinLocalId = null;
-		}
-		
-		if(versionProperty != null)
-		{
-			versionProperty = null;
-		}
+		bulletinLocalId = null;
+		versionProperty = null;
 		
 		safelyClearList(authorizedToReadKeys);
 		safelyClearList(attachments);
