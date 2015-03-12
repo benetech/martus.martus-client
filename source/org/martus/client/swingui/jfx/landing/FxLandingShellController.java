@@ -417,8 +417,8 @@ public class FxLandingShellController extends FxNonWizardShellController
 		caseManagementController.showAllCases();
 	}
 	
-	final private String TOGGLE_ON_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/toggle-on.png";
-	final private String TOGGLE_OFF_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/toggle-off.png";
+	final private String TOGGLE_ON_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/toggle_on.png";
+	final private String TOGGLE_OFF_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/toggle_off.png";
 	
 	@FXML
 	private TextField searchText;
