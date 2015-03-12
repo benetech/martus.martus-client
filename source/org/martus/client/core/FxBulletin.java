@@ -311,18 +311,18 @@ public class FxBulletin
 			universalIdProperty.setValue(null);
 			universalIdProperty = null;
 		}
+
+		if(bulletinHistory != null)
+		{
+			bulletinHistory.setValue(null);
+			bulletinHistory = null;
+		}
 		
 		if(bulletinLocalId != null)
 		{
 			bulletinLocalId = null;
 		}
 		
-		if(bulletinHistory != null)
-		{
-			bulletinHistory.setValue(null);
-			bulletinHistory = null;
-		}
-
 		if(authorizedToReadKeys != null)
 		{
 			authorizedToReadKeys.clear();
