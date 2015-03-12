@@ -323,16 +323,16 @@ public class FxBulletin
 			bulletinLocalId = null;
 		}
 		
-		if(authorizedToReadKeys != null)
-		{
-			authorizedToReadKeys.clear();
-		}
-
 		if(versionProperty != null)
 		{
 			versionProperty = null;
 		}
 		
+		if(authorizedToReadKeys != null)
+		{
+			authorizedToReadKeys.clear();
+		}
+
 		fields.forEach((key, field) -> clearField(field));
 		fields.clear();
 		
