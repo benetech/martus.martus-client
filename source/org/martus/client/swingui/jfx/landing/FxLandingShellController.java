@@ -195,7 +195,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	{
 		OrchidTransportWrapper transport = getApp().getTransport();
 		boolean isTorEnabled = transport.isTorEnabled();
-		updateOnOffStatusImage(toolbarImageViewTor, isTorEnabled);
+		toolbarImageViewTor.setImage(getUpdatedOnOffStatusImage(isTorEnabled));
 		toolbarButtonTor.setTooltip(getUpdatedToolTip(isTorEnabled, "TorCurrentlyOn", "TorCurrentlyOff"));
 	}
 
@@ -239,18 +239,18 @@ public class FxLandingShellController extends FxNonWizardShellController
 	private void updateOnlineStatus()
 	{
 		boolean isOnline = getApp().getTransport().isOnline();
-		updateOnOffStatusImage(toolbarImageViewOnline, isOnline);
+		toolbarImageViewOnline.setImage(getUpdatedOnOffStatusImage(isOnline));
 		toolbarButtonOnline.setTooltip(getUpdatedToolTip(isOnline, "ServerCurrentlyOn", "ServerCurrentlyOff"));
 		getMainWindow().updateServerStatusInStatusBar();
 	}
 
-	private void updateOnOffStatusImage(ImageView imageStatus, boolean isOn)
+	private Image getUpdatedOnOffStatusImage(boolean isOn)
 	{
 		String onOffImagePath = TOGGLE_OFF_IMAGE_PATH;
 		if(isOn)
 			onOffImagePath = TOGGLE_ON_IMAGE_PATH;
 		Image onOffImage = new Image(onOffImagePath);
-		imageStatus.setImage(onOffImage);
+		return onOffImage;
 	}
 	
 	private void onSettings(String tabToDisplayFirst)
