@@ -40,12 +40,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuCharts;
 import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
@@ -190,19 +191,11 @@ public class FxLandingShellController extends FxNonWizardShellController
 		return contents;
 	}
 
-	private String getStatusMessage(Boolean state)
-	{
-		MartusLocalization localization = getLocalization();
-		String on = localization.getButtonLabel("On");
-		String off = localization.getButtonLabel("Off");
-		return state ? on : off;
-	}
-
 	protected void updateTorStatus()
 	{
 		OrchidTransportWrapper transport = getApp().getTransport();
 		boolean isTorEnabled = transport.isTorEnabled();
-		toolbarButtonTor.setText(getStatusMessage(isTorEnabled));
+		updateOnOffStatusImage(toolbarImageViewTor, isTorEnabled);
 		updateTooltipMessage(toolbarButtonTor, isTorEnabled, "TorCurrentlyOn", "TorCurrentlyOff");
 	}
 
@@ -246,9 +239,18 @@ public class FxLandingShellController extends FxNonWizardShellController
 	private void updateOnlineStatus()
 	{
 		boolean isOnline = getApp().getTransport().isOnline();
-		toolbarButtonOnline.setText(getStatusMessage(isOnline));
+		updateOnOffStatusImage(toolbarImageViewOnline, isOnline);
 		updateTooltipMessage(toolbarButtonOnline, isOnline, "ServerCurrentlyOn", "ServerCurrentlyOff");
 		getMainWindow().updateServerStatusInStatusBar();
+	}
+
+	private void updateOnOffStatusImage(ImageView imageStatus, boolean isOn)
+	{
+		String onOffImagePath = TOGGLE_OFF_IMAGE_PATH;
+		if(isOn)
+			onOffImagePath = TOGGLE_ON_IMAGE_PATH;
+		Image onOffImage = new Image(onOffImagePath);
+		imageStatus.setImage(onOffImage);
 	}
 	
 	private void onSettings(String tabToDisplayFirst)
@@ -415,6 +417,9 @@ public class FxLandingShellController extends FxNonWizardShellController
 		caseManagementController.showAllCases();
 	}
 	
+	final private String TOGGLE_ON_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/toggle-on.png";
+	final private String TOGGLE_OFF_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/toggle-off.png";
+	
 	@FXML
 	private TextField searchText;
 	
@@ -422,8 +427,14 @@ public class FxLandingShellController extends FxNonWizardShellController
 	private Button toolbarButtonOnline;
 	
 	@FXML
+	private ImageView toolbarImageViewOnline;
+	
+	@FXML
 	private Button toolbarButtonTor;
 	
+	@FXML
+	private ImageView toolbarImageViewTor;
+
 	@FXML
 	private Pane sideContentPane;
 	
@@ -435,6 +446,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	
 	@FXML
 	private Button closeCurrentViewButton;
+	
 	
 	private BulletinsListController bulletinsListController;
 	private BulletinListProvider bulletinListProvider;
