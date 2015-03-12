@@ -307,16 +307,10 @@ public class FxBulletin
 		hasBeenValidatedProperty.setValue(false);
 		
 		ReadOnlyObjectWrapper universalIdProperty2 = universalIdProperty;
-		if(universalIdProperty2 != null)
-		{
-			universalIdProperty2.setValue(null);
-		}
+		safelyClearValue(universalIdProperty2);
 
 		ReadOnlyObjectWrapper bulletinHistory2 = bulletinHistory;
-		if(bulletinHistory2 != null)
-		{
-			bulletinHistory2.setValue(null);
-		}
+		safelyClearValue(bulletinHistory2);
 		
 		bulletinHistory = null;
 		universalIdProperty = null;
@@ -330,6 +324,14 @@ public class FxBulletin
 		fields.clear();
 		
 		fieldSpecs = new FieldSpecCollection();
+	}
+
+	private void safelyClearValue(ReadOnlyObjectWrapper bulletinHistory2)
+	{
+		if(bulletinHistory2 != null)
+		{
+			bulletinHistory2.setValue(null);
+		}
 	}
 
 	private void safelyClearList(ObservableList authorizedToReadKeysToUse)
