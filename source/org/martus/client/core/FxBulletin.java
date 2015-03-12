@@ -328,11 +328,8 @@ public class FxBulletin
 			versionProperty = null;
 		}
 		
-		ObservableList authorizedToReadKeysToUse = authorizedToReadKeys;
-		safelyClearList(authorizedToReadKeysToUse);
-
-		ObservableList attachmentsToUse = attachments;
-		safelyClearList(attachmentsToUse);
+		safelyClearList(authorizedToReadKeys);
+		safelyClearList(attachments);
 
 		fields.forEach((key, field) -> clearField(field));
 		fields.clear();
