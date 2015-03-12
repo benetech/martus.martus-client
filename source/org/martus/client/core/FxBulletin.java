@@ -306,11 +306,8 @@ public class FxBulletin
 		notAuthorizedToRead = false;
 		hasBeenValidatedProperty.setValue(false);
 		
-		ReadOnlyObjectWrapper universalIdProperty2 = universalIdProperty;
-		safelyClearValue(universalIdProperty2);
-
-		ReadOnlyObjectWrapper bulletinHistory2 = bulletinHistory;
-		safelyClearValue(bulletinHistory2);
+		safelyClearValue(universalIdProperty);
+		safelyClearValue(bulletinHistory);
 		
 		bulletinHistory = null;
 		universalIdProperty = null;
