@@ -45,7 +45,7 @@ public class ActionMenuChangeUserNamePassword extends UiMenuAction implements Ac
 
 	public void doAction()
 	{
-		if(!getMainWindow().reSignIn())
+		if(!getMainWindow().reSignIn("securityServerConfigValidate"))
 			return;
 		
 		if(!getMainWindow().getAndSaveUserNamePassword(getApp().getCurrentKeyPairFile()))

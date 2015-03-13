@@ -35,9 +35,10 @@ import org.martus.client.swingui.jfx.landing.bulletins.FxViewFieldCreator;
 
 public class ReSigninController extends SigninController
 {
-	public ReSigninController(UiMainWindow mainWindowToUse)
+	public ReSigninController(UiMainWindow mainWindowToUse, String messageTagToUse)
 	{
 		super(mainWindowToUse);
+		messageTag = messageTagToUse;
 	}
 	
 	@Override
@@ -45,12 +46,13 @@ public class ReSigninController extends SigninController
 	{
 		super.initialize(location, bundle);
 		hideLanguageDropdown();
-		updateMessagePane(getLocalization().getFieldLabel("timedout1"));
+		updateMessagePane();
 	}
 
-	private void updateMessagePane(String message)
+	private void updateMessagePane()
 	{
 		FxViewFieldCreator textField = new FxViewFieldCreator(getLocalization());
+		String message = getLocalization().getFieldLabel(messageTag);
 		Node textFieldNode = textField.createResponsiveMessage(message, getPreferredDimension().getWidth());
 		signInMessagePane.getChildren().add(textFieldNode);
 	}
@@ -66,4 +68,6 @@ public class ReSigninController extends SigninController
 	{
 		return "generic/Signin.fxml";
 	}
+	
+	private String messageTag;
 }
