@@ -1770,11 +1770,11 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		return getApp().getConfigInfo().isServerConfigured();
 	}
 
-	public boolean reSignIn()
+	public boolean reSignIn(String messageTag)
 	{
 		try
 		{
-			SigninController signinController = new ReSigninController(this);
+			SigninController signinController = new ReSigninController(this, messageTag);
 			createAndShowModalDialog(signinController, signinController.getPreferredDimension(), "MartusSignIn");
 			SigninResult result = signinController.getResult();
 			if(result == null || result == SigninResult.CANCEL)
@@ -2383,7 +2383,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 					dialog.setGlassPane(new WindowObscurer());
 					dialog.getGlassPane().setVisible(true);
 				}
-				if(!reSignIn())
+				if(!reSignIn("timedout1"))
 				{
 					System.out.println("Cancelled from timeout signin");
 					exitWithoutSavingState();
