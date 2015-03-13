@@ -1,6 +1,7 @@
 .root {
   -fx-font-family: "Helvetica";
   -fx-line-height: inherit 28px;
+  -fx-font-size: 15px;
 }
 
 /***********/
@@ -193,6 +194,7 @@
     -fx-border-color: #2c2c2c;
     -fx-border-radius: 5;
     -fx-background-insets: 0;
+    
 }
 
 .list-cell:filled:selected:focused:selected {
