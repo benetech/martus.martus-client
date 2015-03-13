@@ -210,7 +210,7 @@
 /*************/
 /* Selected row */
 .table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: 4f9ab2;
+    -fx-background-color: #4f9ab2;
 }
 
 
