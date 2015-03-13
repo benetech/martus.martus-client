@@ -595,7 +595,6 @@ public class EnglishStrings
 "field:retrieveflag=Retrieve?",
 "field:DeleteFlag=Delete?",
 "field:waitingForBulletinsToLoad=Loading Martus.  Please wait",
-"field:waitAfterFailedSignIn=Please wait to sign in again.",
 "field:HelpDefaultDetails=Enter questions, details, or other information your organization wants to have answered in future records created.",
 "field:HelpExampleDefaultDetails=Example:",
 "field:HelpExample1DefaultDetails=Were there any witnesses?",
