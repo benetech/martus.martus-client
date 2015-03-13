@@ -56,7 +56,7 @@ public class FxInSwingModalDialog extends JDialog
 		setGlassPane(new WindowObscurer());
 	}
 	
-	public static final Dimension MEDIUM_SMALL_PREFERRED_DIALOG_SIZE = new Dimension(650, 200);
+	public static final Dimension MEDIUM_SMALL_PREFERRED_DIALOG_SIZE = new Dimension(650, 225);
 	public static final Dimension MEDIUM_PREFERRED_DIALOG_SIZE = new Dimension(650, 450);
 	public static String EMPTY_TITLE = "";
 }

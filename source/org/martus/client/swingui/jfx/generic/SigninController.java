@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import java.awt.Dimension;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -180,6 +181,12 @@ abstract public class SigninController extends FxNonWizardShellController
 			return null;
 		}
 		
+	}
+
+	public Dimension getPreferredDimension()
+	{
+		//TODO fix this is not getting called
+		return FxInSwingModalDialog.MEDIUM_SMALL_PREFERRED_DIALOG_SIZE;
 	}
 
 	@FXML

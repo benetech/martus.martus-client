@@ -607,7 +607,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 			try
 			{
 				SigninController signinController = new InitialSigninController(this);
-				createAndShowModalDialog(signinController, null, "MartusSignIn");
+				createAndShowModalDialog(signinController, signinController.getPreferredDimension(), "MartusSignIn");
 				SigninResult result = signinController.getResult();
 				if(result == null)
 					return false;
@@ -1775,7 +1775,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		try
 		{
 			SigninController signinController = new ReSigninController(this);
-			createAndShowModalDialog(signinController, null, "MartusSignIn");
+			createAndShowModalDialog(signinController, signinController.getPreferredDimension(), "MartusSignIn");
 			SigninResult result = signinController.getResult();
 			if(result == null || result == SigninResult.CANCEL)
 				return false;
