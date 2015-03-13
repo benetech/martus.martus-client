@@ -42,6 +42,7 @@ import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -221,6 +222,9 @@ abstract public class SigninController extends FxNonWizardShellController
 	@FXML 
 	private ChoiceBox<ChoiceItem> languagesDropdown; 
 	
+	@FXML 
+	Pane signInMessagePane;
+
 	@FXML
 	private Button okButton;
 	
