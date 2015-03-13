@@ -13,7 +13,7 @@
             <Label styleClass="headingLevel1" text="%FieldTypeLANGUAGE" />
             <HBox alignment="CENTER_LEFT">
  		     <children>
-                  <Label text="%SelectLanguage" />
+                  <Label fx:id="languageChoiceLabel" text="%SelectLanguage" />
                   <ChoiceBox fx:id="languageSelection">
                      <HBox.margin>
                         <Insets left="10.0" />
