@@ -90,7 +90,7 @@ Scene {
 }
 
 .context-menu {
--fx-background-color: darkgray;
+-fx-background-color: white;
 }
 
 .choice-box {
@@ -98,7 +98,7 @@ Scene {
 -fx-font-size: 13px;
 -fx-text-fill: #FFFFFF;
 -fx-control-inner-background: #2c2c2c;
--fx-background-color: darkgray;
+-fx-background-color: white;
 -fx-border-color: #bdbdbd;
 -fx-border-width: 2;
 -fx-background-radius: 0;
