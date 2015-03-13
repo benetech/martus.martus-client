@@ -149,7 +149,7 @@ abstract public class SigninController extends FxNonWizardShellController
 		}
 		catch(AuthorizationFailedException failedSignin)
 		{
-			String message = getLocalization().getFieldLabel("waitAfterFailedSignIn");
+			String message = getLocalization().getFieldLabel("notifyincorrectsignincause");
 			punishTheUserBySleeping(message);
 			secondsToDelay *= 2;
 			return;
