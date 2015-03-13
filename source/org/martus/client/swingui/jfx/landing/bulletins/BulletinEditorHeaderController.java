@@ -69,7 +69,7 @@ public class BulletinEditorHeaderController extends FxController
 	@Override
 	protected String getCssName()
 	{
-		return "css/mainDialog.css";
+		return "css/MainDialog.css";
 	}
 
 	public void showBulletin(FxBulletin bulletinToShow)
