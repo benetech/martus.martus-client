@@ -36,6 +36,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
@@ -70,6 +71,13 @@ public class SettingsforSystemController extends FxController
 		initializeDateFormatChoices(localization);
 		initializeDateDelimiterChoices(localization);
 		initializeCalendarChoices(localization);
+		hideLanguageChoice();
+	}
+
+	private void hideLanguageChoice()
+	{
+		languageChoiceLabel.setVisible(false);
+		languageSelection.setVisible(false);
 	} 
 		
 	private void initializeCalendarChoices(MartusLocalization localization)
@@ -204,6 +212,9 @@ public class SettingsforSystemController extends FxController
 	
 	@FXML
 	private ChoiceBox<ChoiceItem> languageSelection;
+	
+	@FXML Label languageChoiceLabel;
+	
 	private ChoiceItem originalLanguageChoiceItem;
 	
 	@FXML
