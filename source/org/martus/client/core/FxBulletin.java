@@ -25,6 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -40,11 +43,23 @@ import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import org.javarosa.core.model.Constants;
+import org.javarosa.core.model.FormDef;
+import org.javarosa.core.model.QuestionDef;
+import org.javarosa.core.model.data.IAnswerData;
+import org.javarosa.core.model.instance.TreeElement;
+import org.javarosa.core.model.instance.TreeReference;
+import org.javarosa.form.api.FormEntryController;
+import org.javarosa.form.api.FormEntryModel;
+import org.javarosa.form.api.FormEntryPrompt;
+import org.javarosa.xform.parse.XFormParser;
+import org.javarosa.xform.util.XFormUtils;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.landing.bulletins.AttachmentTableRowData;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
+import org.martus.common.MartusXml;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.ReusableChoices;
@@ -55,12 +70,15 @@ import org.martus.common.database.ReadableDatabase;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.packet.BulletinHistory;
+import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.utilities.BurmeseUtilities;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.swing.FontHandler;
 import org.martus.util.MultiCalendar;
+import org.martus.util.xml.XmlUtilities;
 
 /**
  * This class wraps a Bulletin object, exposing each data member as a 
@@ -82,6 +100,9 @@ public class FxBulletin
 	public void copyDataFromBulletin(Bulletin b, BulletinStore store) throws Exception
 	{
 		clear();
+		
+		if (isXFormsBulletin(b))
+			b = createNewBulletinFromXFormsBulletin(b);
 		
 		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>(b.getUniversalId());
 		versionProperty = new SimpleIntegerProperty(b.getVersion());
@@ -443,6 +464,152 @@ public class FxBulletin
 	public boolean notAuthorizedToRead()
 	{
 		return notAuthorizedToRead;
+	}
+	
+	private Bulletin createNewBulletinFromXFormsBulletin(Bulletin bulletinWithXForms) throws Exception
+	{
+		String xFormsModelXmlAsString = getXformsModelWithoutRootElement(bulletinWithXForms);
+		String xFormsInstanceXmlAsString = getXFormsInstanceWithoutRootElement(bulletinWithXForms);
+		FormEntryController formEntryController = importXFormsData(xFormsModelXmlAsString, xFormsInstanceXmlAsString);
+		if (formEntryController == null)
+			throw new Exception("Could not import xforms data");
+		
+		FieldSpecCollection fieldSpecsFromXForms = createFieldSpecsFromXForms(formEntryController);
+		
+		return createBulletin(bulletinWithXForms, formEntryController, fieldSpecsFromXForms);
+	}
+
+	private String getXFormsInstanceWithoutRootElement(Bulletin bulletinWithXForms)
+	{
+		String xFormsInstanceXmlAsString = bulletinWithXForms.getFieldDataPacket().getXFormsInstanceAsString();
+		
+		return stripRootElement(xFormsInstanceXmlAsString, MartusXml.XFormsInstanceElementName);
+	}
+
+	private String getXformsModelWithoutRootElement(Bulletin bulletinWithXForms)
+	{
+		String xFormsModelXmlAsString = bulletinWithXForms.getFieldDataPacket().getXFormsModelAString();
+		
+		return stripRootElement(xFormsModelXmlAsString, MartusXml.XFormsModelElementName);
+	}
+
+	private String stripRootElement(String xml, String elementNameToStrip)
+	{
+		return XmlUtilities.stripXmlStartEndElements(xml, elementNameToStrip);
+	}
+
+	private Bulletin createBulletin(Bulletin bulletinWithXForms, FormEntryController formEntryController, FieldSpecCollection fieldsFromXForms) throws Exception
+	{
+		Bulletin bulletinLoadedFromXForms = new Bulletin(bulletinWithXForms.getSignatureGenerator(), new FieldSpecCollection(), fieldsFromXForms);		
+		resetFormEntryControllerIndex(formEntryController);
+		int event;
+		while ((event = formEntryController.stepToNextEvent()) != FormEntryController.EVENT_END_OF_FORM) 
+		{
+			if (event != FormEntryController.EVENT_QUESTION) 
+			{
+				continue;
+			}
+		
+			FormEntryPrompt questionPrompt = formEntryController.getModel().getQuestionPrompt();
+			IAnswerData answer = questionPrompt.getAnswerValue();
+			QuestionDef questionDef = questionPrompt.getQuestion();
+			final int dataType = questionPrompt.getDataType();
+			if (dataType == Constants.DATATYPE_TEXT)
+			{
+				TreeReference reference = (TreeReference) questionDef.getBind().getReference();
+				if (answer != null) 
+				{
+					FieldDataPacket privateFieldDataPacket = bulletinLoadedFromXForms.getPrivateFieldDataPacket();
+					String xFormsFieldTag = reference.getNameLast();
+					privateFieldDataPacket.set(xFormsFieldTag, answer.getDisplayText());
+				}
+			}
+		}
+		
+		return bulletinLoadedFromXForms;
+	}
+
+	private FieldSpecCollection createFieldSpecsFromXForms(FormEntryController formEntryController)
+	{
+		FieldSpecCollection fieldsFromXForms = new FieldSpecCollection();
+		int event;
+		while ((event = formEntryController.stepToNextEvent()) != FormEntryController.EVENT_END_OF_FORM) 
+		{
+			if (event != FormEntryController.EVENT_QUESTION) 
+			{
+				continue;
+			}
+			
+			FormEntryPrompt questionPrompt = formEntryController.getModel().getQuestionPrompt();
+			IAnswerData answer = questionPrompt.getAnswerValue();
+			QuestionDef questionDef = questionPrompt.getQuestion();
+			final int dataType = questionPrompt.getDataType();
+			if (dataType == Constants.DATATYPE_TEXT)
+			{
+				TreeReference reference = (TreeReference) questionDef.getBind().getReference();
+				if (answer != null) 
+				{
+					FieldSpec fieldSpec = FieldSpec.createCustomField(reference.getNameLast(), questionPrompt.getQuestion().getLabelInnerText(), new FieldTypeNormal());
+					fieldsFromXForms.add(fieldSpec);
+				}
+			}
+		}
+		
+		return fieldsFromXForms;
+	}
+
+	private void resetFormEntryControllerIndex(FormEntryController formEntryController)
+	{
+		while (formEntryController.stepToPreviousEvent() != FormEntryController.EVENT_BEGINNING_OF_FORM);
+	}
+
+    private FormEntryController importXFormsData(String xFormsModelXmlAsString, String xFormsInstance) 
+    {
+    	InputStream xFormsModelInputStream = new ByteArrayInputStream(xFormsModelXmlAsString.getBytes(StandardCharsets.UTF_8));
+		FormDef formDef = XFormUtils.getFormFromInputStream(xFormsModelInputStream);
+		FormEntryModel formEntryModel = new FormEntryModel(formDef);
+		FormEntryController formEntryController = new FormEntryController(formEntryModel);
+		
+    	byte[] xFormsInstanceBytes = xFormsInstance.getBytes(StandardCharsets.UTF_8);
+    	TreeElement instanceRootElement = XFormParser.restoreDataModel(xFormsInstanceBytes, null).getRoot();
+    	TreeElement modelRootElement = formEntryController.getModel().getForm().getInstance().getRoot().deepCopy(true);
+    	if (!instanceRootElement.getName().equals(modelRootElement.getName()))
+    		return null;
+    	
+    	if (instanceRootElement.getMult() != TreeReference.DEFAULT_MUTLIPLICITY)
+    		return null;
+    	
+    	populateDataModel(modelRootElement);
+    	modelRootElement.populate(instanceRootElement, formEntryController.getModel().getForm());
+    	populateFormEntryControllerModel(formEntryController, modelRootElement);
+    	fixLanguageIusses(formEntryController);
+    	
+    	return formEntryController;
+    }
+
+	private void populateFormEntryControllerModel(FormEntryController formEntryController, TreeElement modelRoot)
+	{
+		formEntryController.getModel().getForm().getInstance().setRoot(modelRoot);
+	}
+
+	private void fixLanguageIusses(FormEntryController formEntryController)
+	{
+		//NOTE: this comment is from Collect's java rosa seference
+    	// fix any language issues
+    	// : http://bitbucket.org/javarosa/main/issue/5/itext-n-appearing-in-restored-instances
+		if (formEntryController.getModel().getLanguages() != null) 
+    		formEntryController.getModel().getForm().localeChanged(formEntryController.getModel().getLanguage(), formEntryController.getModel().getForm().getLocalizer());
+	}
+
+	private void populateDataModel(TreeElement modelRootElement)
+	{
+		TreeReference treeReference = TreeReference.rootRef();
+    	treeReference.add(modelRootElement.getName(), TreeReference.INDEX_UNBOUND);
+	}
+	
+	private boolean isXFormsBulletin(Bulletin bulletinToUse)
+	{
+		return bulletinToUse.getFieldDataPacket().containXFormsData();
 	}
 	
 	private MiniLocalization localization;

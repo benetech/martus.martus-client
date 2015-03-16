@@ -684,6 +684,26 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals(beforeTags, afterTags);
 	}
 
+	public void testFxBulletinWithXFormsWithOneInputField() throws Exception
+	{
+		FxBulletin fxBulletin = new FxBulletin(getLocalization());
+		assertEquals("FxBulletin field specs should be filled?", 0, fxBulletin.getFieldSpecs().size());
+		
+		Bulletin bulletin = new BulletinForTesting(security);
+		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithOnStringInputFieldXmlAsString());
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceXmlAsString());
+		fxBulletin.copyDataFromBulletin(bulletin, store);
+		assertEquals("FxBulletin filled from bulletin with data should have data?", 1, fxBulletin.getFieldSpecs().size());
+		
+		FieldSpec fieldSpec = fxBulletin.getFieldSpecs().firstElement();
+		assertTrue("Only field should be string?", fieldSpec.getType().isString());
+		assertEquals("Incorrect field label?", FIELD_LABEL, fieldSpec.getLabel());
+		assertEquals("Incorrect field tag?", "name", fieldSpec.getTag());
+		
+		FxBulletinField field = fxBulletin.getField(fieldSpec);
+		assertEquals("Incorrect field value?", FIELD_VALUE, field.getValue());
+	}
+
 	private Vector<String> extractFieldTags(Bulletin b)
 	{
 		Vector<String> fieldTags = new Vector<String>();
@@ -707,6 +727,43 @@ public class TestFxBulletin extends TestCaseEnhanced
 	{
 		return localization;
 	}
+	
+	private static String getXFormsModelWithOnStringInputFieldXmlAsString()
+	{
+		return 	"		<xforms_model>" +
+				"			<h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
+				"				<h:head>" +
+				"				<h:title>XForms Sample</h:title>" +
+				"					<model>" +
+				"					<instance>" +
+				"						<nm id=\"SampleForUnitTesting\" >" +
+				"							<name/>" +
+				"						</nm>" +
+				"		            </instance>" +
+				"		            <bind nodeset=\"/nm/name\" type=\"string\" />" +
+				"		        </model>" +
+				"		    </h:head>" +
+				"		    <h:body>" +
+				"		            <input ref=\"name\" >" +
+				"		                <label>" + FIELD_LABEL +  "</label>" +
+				"		                <hint>(required)</hint>" +
+				"		            </input>" +
+				"		    </h:body>" +
+				"		</h:html>" +
+				"	</xforms_model>";
+	}
+	
+	private static String getXFormsInstanceXmlAsString()
+	{
+		return "<xforms_instance>" +
+				   "<nm id=\"SampleForUnitTesting\">" +
+				      "<name>" + FIELD_VALUE + "</name>" +
+				   "</nm>" +
+				"</xforms_instance>";
+	}
+	
+	private static final String FIELD_LABEL = "What is your name?";
+	private static final String FIELD_VALUE = "John Johnson";
 	
 	public static final String BURMESE_UNICODE_TEST_STRING = "\u104E\u1004\u103A\u1038";
 	public static final String BURMESE_ZAWGYI_TEST_STRING = "\u104E";
