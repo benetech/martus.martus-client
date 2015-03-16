@@ -575,8 +575,8 @@ public class FxBulletin
 		FormEntryController formEntryController = new FormEntryController(formEntryModel);
 		
     	byte[] xFormsInstanceBytes = xFormsInstance.getBytes(StandardCharsets.UTF_8);
-    	TreeElement instanceRootElement = XFormParser.restoreDataModel(xFormsInstanceBytes, null).getRoot();
     	TreeElement modelRootElement = formEntryController.getModel().getForm().getInstance().getRoot().deepCopy(true);
+    	TreeElement instanceRootElement = XFormParser.restoreDataModel(xFormsInstanceBytes, null).getRoot();
     	if (!instanceRootElement.getName().equals(modelRootElement.getName()))
     		return null;
     	
