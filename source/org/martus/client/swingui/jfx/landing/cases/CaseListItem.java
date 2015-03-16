@@ -25,8 +25,13 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.landing.cases;
 
+import java.util.HashMap;
+
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.common.MartusLogger;
+import org.martus.util.TokenReplacement;
+import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class CaseListItem
 {
@@ -36,9 +41,23 @@ public class CaseListItem
 		localization = localizationToUse;
 	}
 	
-	public String getNameLocalized()
+	public String getNameLocalizedWithRecordCount()
 	{
-		return caseFolder.getLocalizedName(localization);
+		String localizedFolderName = caseFolder.getLocalizedName(localization);
+		String recordCount = String.valueOf(caseFolder.getBulletinCount());
+		HashMap map = new HashMap();
+		map.put("#CaseName#", localizedFolderName);
+		map.put("#RecordCount#", recordCount);
+		String originalMessage = localization.getFieldLabel("caseNameWithRecordCount");
+		try
+		{
+			return TokenReplacement.replaceTokens(originalMessage, map);
+		} 
+		catch (TokenInvalidException e)
+		{
+			MartusLogger.logException(e);
+			return localizedFolderName;
+		}
 	}
 	
 	public String getName()
@@ -54,7 +73,7 @@ public class CaseListItem
 	@Override
 	public String toString()
 	{
-		return getNameLocalized();
+		return getNameLocalizedWithRecordCount();
 	}
 
 	final BulletinFolder caseFolder;
