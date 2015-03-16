@@ -41,23 +41,10 @@ public class CaseListItem
 		localization = localizationToUse;
 	}
 	
-	public String getNameLocalizedWithRecordCount()
+	public String getNameLocalized()
 	{
 		String localizedFolderName = caseFolder.getLocalizedName(localization);
-		String recordCount = String.valueOf(caseFolder.getBulletinCount());
-		HashMap map = new HashMap();
-		map.put("#CaseName#", localizedFolderName);
-		map.put("#RecordCount#", recordCount);
-		String originalMessage = localization.getFieldLabel("caseNameWithRecordCount");
-		try
-		{
-			return TokenReplacement.replaceTokens(originalMessage, map);
-		} 
-		catch (TokenInvalidException e)
-		{
-			MartusLogger.logException(e);
-			return localizedFolderName;
-		}
+		return localizedFolderName;
 	}
 	
 	public String getName()
@@ -73,7 +60,7 @@ public class CaseListItem
 	@Override
 	public String toString()
 	{
-		return getNameLocalizedWithRecordCount();
+		return getNameLocalized();
 	}
 
 	final BulletinFolder caseFolder;
