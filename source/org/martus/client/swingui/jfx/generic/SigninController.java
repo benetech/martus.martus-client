@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import java.awt.Dimension;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -41,6 +42,7 @@ import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -148,7 +150,7 @@ abstract public class SigninController extends FxNonWizardShellController
 		}
 		catch(AuthorizationFailedException failedSignin)
 		{
-			String message = getLocalization().getFieldLabel("waitAfterFailedSignIn");
+			String message = getLocalization().getFieldLabel("notifyincorrectsignincause");
 			punishTheUserBySleeping(message);
 			secondsToDelay *= 2;
 			return;
@@ -180,6 +182,12 @@ abstract public class SigninController extends FxNonWizardShellController
 			return null;
 		}
 		
+	}
+
+	public Dimension getPreferredDimension()
+	{
+		//TODO fix this is not getting called
+		return FxInSwingModalDialog.MEDIUM_SMALL_PREFERRED_DIALOG_SIZE;
 	}
 
 	@FXML
@@ -214,6 +222,9 @@ abstract public class SigninController extends FxNonWizardShellController
 	@FXML 
 	private ChoiceBox<ChoiceItem> languagesDropdown; 
 	
+	@FXML 
+	Pane signInMessagePane;
+
 	@FXML
 	private Button okButton;
 	

@@ -12,6 +12,11 @@
    		<center>
    		  <VBox>
       <children>
+                  <Label>
+                     <graphic>
+                        <Pane fx:id="signInMessagePane" />
+                     </graphic>
+                  </Label>
       		    <GridPane fx:id="signInPane" vgap="5.0" xmlns:fx="http://javafx.com/fxml">
          <children>
          		        <Label styleClass="headingLevel2" text="%CreateAccountUserName" />
@@ -36,9 +41,15 @@
    		<bottom>
    			<HBox>
       <children>
-              		<ChoiceBox fx:id="languagesDropdown" />
+              		<ChoiceBox fx:id="languagesDropdown">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin></ChoiceBox>
       			
-      				<Button fx:id="okButton" defaultButton="true" onAction="#onOk" text="%Button.SignIn" />
+      				<Button fx:id="okButton" defaultButton="true" onAction="#onOk" text="%Button.SignIn">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin></Button>
       				<Button onAction="#onCancel" text="%Button.cancel" />
       </children>
    			</HBox>

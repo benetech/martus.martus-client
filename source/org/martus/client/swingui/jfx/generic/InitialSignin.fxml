@@ -36,7 +36,7 @@
             				    </GridPane>
             				    <VBox fx:id="createPane">
                <children>
-               					    <Hyperlink fx:id="newAccountButton" onAction="#onNewAccount" styleClass="headingLevel3" text="%CreateNewAccount" />
+               					    <Hyperlink onAction="#onNewAccount" styleClass="headingLevel3" text="%CreateNewAccount" />
                </children>
             					</VBox>
             </children>
@@ -45,9 +45,15 @@
          				<bottom>
          					<HBox>
             <children>
-            		        		<ChoiceBox fx:id="languagesDropdown" />
+            		        		<ChoiceBox fx:id="languagesDropdown">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin></ChoiceBox>
             					
-            						<Button fx:id="okButton" defaultButton="true" onAction="#onOk" text="%Button.SignIn" />
+            						<Button fx:id="okButton" defaultButton="true" onAction="#onOk" text="%Button.SignIn">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin></Button>
             						<Button onAction="#onCancel" text="%Button.cancel" />
             </children>
          					</HBox>
