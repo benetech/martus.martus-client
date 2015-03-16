@@ -333,7 +333,7 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 		@Override
 		public int compare(CaseListItem case1, CaseListItem case2) 
 		{
-			return case1.getNameLocalizedWithRecordCount().compareToIgnoreCase(case2.getNameLocalizedWithRecordCount());
+			return case1.getNameLocalized().compareToIgnoreCase(case2.getNameLocalized());
 		}
 	}
 
