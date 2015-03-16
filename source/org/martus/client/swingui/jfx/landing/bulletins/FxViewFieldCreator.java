@@ -28,7 +28,10 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import java.util.Vector;
 
 import javafx.beans.property.Property;
+import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.property.ReadOnlyStringProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 
@@ -95,6 +98,15 @@ public class FxViewFieldCreator extends FxFieldCreator
 		return responsiveTextFlowNode(text);
 	}
 
+	public Node createResponsiveMessage(String message, double width)
+	{
+		ReadOnlyDoubleProperty widthProperty = new SimpleDoubleProperty(width);
+		this.fieldWidthProperty = widthProperty;
+
+		Property<String> messageProperty = new SimpleStringProperty(message);
+		return responsiveTextFlowNode(messageProperty);
+	}
+	
 	@Override
 	protected Node createStringField(Property<String> property)
 	{

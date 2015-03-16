@@ -28,13 +28,17 @@ package org.martus.client.swingui.jfx.generic;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.scene.Node;
+
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.jfx.landing.bulletins.FxViewFieldCreator;
 
 public class ReSigninController extends SigninController
 {
-	public ReSigninController(UiMainWindow mainWindowToUse)
+	public ReSigninController(UiMainWindow mainWindowToUse, String messageTagToUse)
 	{
 		super(mainWindowToUse);
+		messageTag = messageTagToUse;
 	}
 	
 	@Override
@@ -42,6 +46,15 @@ public class ReSigninController extends SigninController
 	{
 		super.initialize(location, bundle);
 		hideLanguageDropdown();
+		updateMessagePane();
+	}
+
+	private void updateMessagePane()
+	{
+		FxViewFieldCreator textField = new FxViewFieldCreator(getLocalization());
+		String message = getLocalization().getFieldLabel(messageTag);
+		Node textFieldNode = textField.createResponsiveMessage(message, getPreferredDimension().getWidth());
+		signInMessagePane.getChildren().add(textFieldNode);
 	}
 	
 	@Override
@@ -55,5 +68,6 @@ public class ReSigninController extends SigninController
 	{
 		return "generic/Signin.fxml";
 	}
-
+	
+	private String messageTag;
 }

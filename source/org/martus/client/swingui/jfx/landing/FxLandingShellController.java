@@ -40,12 +40,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionMenuCharts;
 import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
@@ -190,30 +191,44 @@ public class FxLandingShellController extends FxNonWizardShellController
 		return contents;
 	}
 
-	private String getStatusMessage(Boolean state)
+	private void updateOnlineStatus()
 	{
-		MartusLocalization localization = getLocalization();
-		String on = localization.getButtonLabel("On");
-		String off = localization.getButtonLabel("Off");
-		return state ? on : off;
+		boolean isOnline = getApp().getTransport().isOnline();
+		toolbarImageViewOnline.setImage(getUpdatedOnOffStatusImage(isOnline));
+		toolbarButtonOnline.setTooltip(getUpdatedToolTip(isOnline, "ServerCurrentlyOn", "ServerCurrentlyOff"));
+		getMainWindow().updateServerStatusInStatusBar();
 	}
 
 	protected void updateTorStatus()
 	{
 		OrchidTransportWrapper transport = getApp().getTransport();
 		boolean isTorEnabled = transport.isTorEnabled();
-		toolbarButtonTor.setText(getStatusMessage(isTorEnabled));
-		updateTooltipMessage(toolbarButtonTor, isTorEnabled, "TorCurrentlyOn", "TorCurrentlyOff");
+		toolbarImageViewTor.setImage(getUpdatedOnOffStatusImage(isTorEnabled));
+		toolbarButtonTor.setTooltip(getUpdatedToolTip(isTorEnabled, "TorCurrentlyOn", "TorCurrentlyOff"));
 	}
 
-	private void updateTooltipMessage(Button toolbarButton, boolean enabled, String onMessage, String offMessage)
+	private Tooltip getUpdatedToolTip(boolean enabled, String onMessage, String offMessage)
 	{
 		Tooltip tooltip = new Tooltip();
 		String tooltipMessage = new String(getLocalization().getTooltipLabel(offMessage));
 		if(enabled)
 			tooltipMessage = getLocalization().getTooltipLabel(onMessage);
 		tooltip.setText(tooltipMessage);
-		toolbarButton.setTooltip(tooltip);
+		return tooltip;
+	}
+
+	private Image getUpdatedOnOffStatusImage(boolean isOn)
+	{
+		Image onOffImage = new Image(getOnOffImagePath(isOn));
+		return onOffImage;
+	}
+
+	private String getOnOffImagePath(boolean isOn)
+	{
+		String onOffImagePath = TOGGLE_OFF_IMAGE_PATH;
+		if(isOn)
+			onOffImagePath = TOGGLE_ON_IMAGE_PATH;
+		return onOffImagePath;
 	}
 	
 	class UpdateTorStatusLater implements Runnable
@@ -243,14 +258,6 @@ public class FxLandingShellController extends FxNonWizardShellController
 		}
 	}
 
-	private void updateOnlineStatus()
-	{
-		boolean isOnline = getApp().getTransport().isOnline();
-		toolbarButtonOnline.setText(getStatusMessage(isOnline));
-		updateTooltipMessage(toolbarButtonOnline, isOnline, "ServerCurrentlyOn", "ServerCurrentlyOff");
-		getMainWindow().updateServerStatusInStatusBar();
-	}
-	
 	private void onSettings(String tabToDisplayFirst)
 	{
 		FxTabbedShellController settingsController = new SettingsController(getMainWindow());
@@ -415,6 +422,9 @@ public class FxLandingShellController extends FxNonWizardShellController
 		caseManagementController.showAllCases();
 	}
 	
+	final private String TOGGLE_ON_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/toggle_on.png";
+	final private String TOGGLE_OFF_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/toggle_off.png";
+	
 	@FXML
 	private TextField searchText;
 	
@@ -422,8 +432,14 @@ public class FxLandingShellController extends FxNonWizardShellController
 	private Button toolbarButtonOnline;
 	
 	@FXML
+	private ImageView toolbarImageViewOnline;
+	
+	@FXML
 	private Button toolbarButtonTor;
 	
+	@FXML
+	private ImageView toolbarImageViewTor;
+
 	@FXML
 	private Pane sideContentPane;
 	
@@ -435,6 +451,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	
 	@FXML
 	private Button closeCurrentViewButton;
+	
 	
 	private BulletinsListController bulletinsListController;
 	private BulletinListProvider bulletinListProvider;
