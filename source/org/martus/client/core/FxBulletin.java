@@ -512,11 +512,11 @@ public class FxBulletin
 		
 			FormEntryPrompt questionPrompt = formEntryController.getModel().getQuestionPrompt();
 			IAnswerData answer = questionPrompt.getAnswerValue();
-			QuestionDef questionDef = questionPrompt.getQuestion();
+			QuestionDef question = questionPrompt.getQuestion();
 			final int dataType = questionPrompt.getDataType();
 			if (dataType == Constants.DATATYPE_TEXT)
 			{
-				TreeReference reference = (TreeReference) questionDef.getBind().getReference();
+				TreeReference reference = (TreeReference) question.getBind().getReference();
 				if (answer != null) 
 				{
 					FieldDataPacket privateFieldDataPacket = bulletinLoadedFromXForms.getPrivateFieldDataPacket();
