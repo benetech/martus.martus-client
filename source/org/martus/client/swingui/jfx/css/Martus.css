@@ -1,8 +1,7 @@
 .root {
   -fx-font-family: "Helvetica";
   -fx-line-height: inherit 28px;
-  -fx-font-size: 15px;
-}
+ }
 
 /***********/
 /* Buttons */
@@ -170,6 +169,7 @@
 /*********/
 .cases {
     -fx-background-color:  #C8C8C8;
+ -fx-font-size: 15px;
 }
 
 /********/
@@ -194,8 +194,7 @@
     -fx-border-color: #2c2c2c;
     -fx-border-radius: 5;
     -fx-background-insets: 0;
-    
-}
+ }
 
 .list-cell:filled:selected:focused:selected {
     -fx-background-color: #4F9ab2;
@@ -210,6 +209,10 @@
 /*************/
 /* TableView */
 /*************/
+.table-view{
+ -fx-font-size: 15px;
+}
+
 /* Selected row */
 .table-view:focused .table-row-cell:filled:focused:selected {
     -fx-background-color: #4f9ab2;
