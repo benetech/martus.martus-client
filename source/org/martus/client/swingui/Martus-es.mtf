@@ -1,14 +1,107 @@
-﻿﻿# Martus Client Translation File
+﻿# Martus Client Translation File
 # Language code:  es
 # Language name:  Spanish
 # Translated by:
-# Exported date: 
-# Client version:  exported from pre-5.0.3
-# Client build:
-# *** This MTF file was converted from a PO file
+# Exported date:  Sat Mar 14 16:12:47 PDT 2015
+# Client version: pre-5.0.3
+# Client build:   2015-03-13.3506
+#
+# This file MUST be saved in UTF-8 format!
+# Lines beginning with # are comments and are ignored by Martus
+# Each entry has two lines. The first line is the current English
+#    text, and the second line consists of: KEY=VALUE
+#    (e.g. -c47a-button:customHelp=<Help> )
+# Do not modify any KEY. Do localize every VALUE.
+# Each VALUE that needs to be translated has <> around it.
+#    As you translate each VALUE, remove its <>
+# When a non-English VALUE appears inside <> it is because the English
+#    translation has changed. Verify or update the translation to 
+#    match the new English text, and remove the <>
+# If there is an English VALUE inside <> , it is because it is a field
+#    added after the last release. Remove the english, insert/update the
+#    VALUE translation to match the new English text which is in the
+#    comment line directly above it, and remove the <>
+# If you name it Martus-es.mtf, put the file in your
+#     Martus directory, and create a file (which can be empty)
+#     called use_unofficial_translations.txt in your Martus directory,
+#     then Martus will automatically read it.  You will receive a warning
+#     message when you use this file while testing.
+# In Martus, to choose a language, pick one from the drop-down list
+#    in the lower left-hand corner of the signin screen, or after you
+#    are logged in, go to Options/Preferences.
+#
+#  1.  do NOT translate "\n" (used for new lines)
+#      And do NOT put spaces before the  equal sign after field:xxx.
+#      [should be "field:fieldtag=fieldtext" instead of
+#  	   "field:fieldtag = fieldtext" (space before the equals sign)]
+#  2.  do NOT create any user-entered new-lines/carriage-returns
+#      (by using the enter key) in any mtf entry
+#      (from the field:xxx to the end of the translated text),
+#      since a continuous block of text is needed.
+#  3.  in field:VirtualKeyboardKeys, keep the english alphabet, but include any
+#      non-english characters at the end of the english alphabet/numbers/special
+#      characters (e.g. attach entire Thai alphabet at the end of the line)
+#  4.  in CreateCustomFieldsHelp2/3 fields, you can translate tags into foreign
+#      characters (but without punctuation or spaces)
+#  5.  when there are file or directory names, do not translate them
+#      (e.g.  "acctmap.txt" and "packets"
+#      in field:confirmWarnMissingAccountMapFilecause=Warning: acctmap.txt
+#      file in your account's packets directory...)
+#  6.  do not translate the words "Martus" or "Benetech" or "Tor"
+#  7.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
+#      CreateCustomFieldsHelp2, but put translation in parentheses after
+#      english : e.g.  'author' (translation-of-author from mtf, e.g. autor in spanish), so users know what they refer to
+#  8.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
+#      DATE), but put translation in parentheses after english, so users know
+#      what they refer to.
+#  9.  Leave field types in English in CreateCustomFieldsHelp3 examples
+#      (e.g. BOOLEAN, DATE)
+# 10.  In CreateCustomFieldsHelp3, do not translate words between angle brackets in the XML for custom fields, such as:
+#      <Field type='SECTION'>, <Field type='STRING'>, <Field type='BOOLEAN'>, <Field type='DATE'>, 
+#      <Field type='DATERANGE'>, <Field type='DROPDOWN'>, <Field type='MULTILINE'> 
+#      <Field type='LANGUAGE'>, <Field type='MESSAGE'>, <Field type='GRID'>, 
+#      </Field>, <Tag>, </Tag>, <Label>, </Label>,  <Message>, </Message> 
+#      <Choices>, </Choices>, <Choice>, </Choice>, <DataSource>, </DataSource>
+#      <GridFieldTag>, </GridFieldTag>, <GridColumnLabel>, </GridColumnLabel> 
+#      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>, 
+#      <Column type='STRING'>, <Column type='BOOLEAN'>, <Column type='DATE'>,
+#      <Column type='DATERANGE'>, <Column type='DROPDOWN'> 
+#      <KeepWithPrevious/>, <RequiredField/>, <DefaultValue>, </DefaultValue>,
+#      <MinimumDate>, </MinimumDate>, <MaximumDate>, </MaximumDate>, <MaximumDate/>.
+#      For Reusable choices sections, translate anything within single quotes '...', but not  <UseReusableChoices code= , </UseReusableChoices>
+#      <ReusableChoices code= , </ReusableChoices>, label= , <Choice code= . 
+# 10b.  In CreateCustomFieldsHelp2, change the "ddd" in "<DefaultValue>ddd</DefaultValue>" to whatever letter the translation of "default" begins with.
+# 10c.  For  CreateCustomFieldsHelp1/2/2b/3, check the User Guide section 10b to see if the text has already been translated and use the same translation for consistency.
+# 11.  Do not translate words that are surrounded by #'s, but you may move
+#      them around as grammatically appropriate.
+#      Example: #TotalNumberOfFilesInBackup#, #Titles#, #FieldLabel#, etc.
+#      as these words will be replaced when the program runs with
+#      a particular value.
+#      For Example. #TotalNumberOfFilesInBackup# = '5'
+#                   #Titles# = 'A list of bulletin titles'
+# 12.  Do not translate the numbers in the field:translationVersion string.
+# 13.  Do not translate the numbers in the field:ErrorCustomFields string.
+# 14.  For Thai, Afghan and Persian months, please do the following: 
+#          - for Thai translation, Thai months should be the same as the translation
+#            of default/Gregorian months, and Afghan and Persian dates are the same as in English.
+#          - for Afghan or Persian translation, Thai and Afghan and Persian months 
+#            should be the same as the translation of default/Gregorian months
+#          - for Arabic translation, Thai months should be the same as 
+#            the translation of default/Gregorian months, but do an Arabic translation
+#            (or transliteration) of Afghan and Persian dates (not the same as in English).
+#          - for all other languages, Thai and Afghan and Persian dates can be the same
+#            as the translation of default/Gregorian months 
+# 15       - We have file filters like 'Martus Report Format (.mrf)'
+#            and 'Martus Search Specification (.mss)'.
+#            The descriptive names should be translated, but the (.mrf) and (.mss)
+#            must not be translated. Similarly for .html, .htm, .mba, .mpi, .xml, .mct, .jpeg, .jpg, and .dat file extensions.
+# 16.  If you want your language to appear right to left,
+#      Uncomment the next line (by removing the # in front of #!right-to-left)
+#!right-to-left
+#
 
-#______________________=Add Contact...
--8f02-button:AddContact=Añadir contacto...
+#______________________=Add Contact
+-d7f5-button:AddContact=Añadir contacto
 
 #____________________________=Add
 -61cc-button:AddFieldToReport=Añadir
@@ -31,8 +124,8 @@
 #________________=Back
 -b52b-button:Back=Atrás
 
-#___________________________=Record Details...
--6bb8-button:BulletinDetails=Detalles del expediente...
+#___________________________=Record Details
+-5522-button:BulletinDetails=Detalles del expediente
 
 #___________________=All
 -6a72-button:CaseAll=Todos
@@ -46,8 +139,8 @@
 #_____________________________________=Change Username and Password
 -e954-button:ChangeUsernameAndPassword=Cambiar nombre de usuario y contraseña
 
-#__________________=Choose...
--1f77-button:Choose=Seleccionar...
+#__________________=Choose
+-78b7-button:Choose=Seleccionar
 
 #_______________________________=Use Default Server
 -7a68-button:ChooseDefaultServer=Predeterminado
@@ -97,8 +190,8 @@
 #_______________________________=Create New Tabular Report
 -34ee-button:CreateTabularReport=Crear nuevo informe tabulado
 
-#_______________________=Download Custom
--da95-button:CustomForms=Plantilla personalizada
+#_______________________=Download Custom Template
+-2e59-button:CustomForms=Bajar plantilla personalizada
 
 #__________________=Delete
 -f6fd-button:Delete=Eliminar
@@ -142,8 +235,14 @@
 #_____________________=Type
 -3deb-button:FieldType=Tipo
 
+#_____________________________________=Add
+-61cc-button:FileDialogOkAddAttachment=Añadir
+
 #_______________________________________=Import
 -d6fb-button:FileDialogOkImportBulletins=Importar
+
+#______________________________________________=Import
+-d6fb-button:FileDialogOkImportContactPublicKey=Importar
 
 #___________________________________________=Import
 -d6fb-button:FileDialogOkImportCustomization=Importar
@@ -157,6 +256,9 @@
 #__________________________________________=Restore
 -3cbe-button:FileDialogOkRestoreFromKeyPair=Restaurar
 
+#____________________________________=Select
+-8598-button:FileDialogOkSelectReport=Seleccionar
+
 #___________________________=Down
 -bf93-button:FolderOrderDown=Bajar
 
@@ -166,8 +268,8 @@
 #_______________________=From Another Martus User
 -ad27-button:FromContact=Desde otro usuario de Martus
 
-#________________________=Generic
--ff76-button:GenericForms=Plantilla genérica
+#________________________=Generic Template
+-6598-button:GenericForms=Plantilla genérica
 
 #______________________=Get Started
 -bd2c-button:GetStarted=Comenzar
@@ -175,14 +277,14 @@
 #__________________=Go Back
 -f03e-button:GoBack=Ir atrás
 
-#_________________________________=Have Server Default to On? (will be applied on login)
--7d27-button:HaveServerDefaultToOn=¿Tiene el servidor activo de forma predeterminada? (se aplicará al iniciar sesión)
+#_________________________________=Have Server Default to On? (Applied on login)
+-555b-button:HaveServerDefaultToOn=¿Tiene el servidor activo de forma predeterminada? (se aplicará al iniciar session)
 
 #________________=Help
 -c47a-button:Help=Ayuda
 
-#_________________________________=Import Contact From File...
--eaff-button:ImportContactFromFile=Importar desde archivo...
+#_________________________________=Import Contact From File
+-9393-button:ImportContactFromFile=Importar contacto desde archivo
 
 #__________________________=Import From File
 -85a7-button:ImportFromFile=Importar desde archivo
@@ -199,20 +301,14 @@
 #______________________________=Insert Row
 -9f53-button:InsertEmptyGridRow=Insertar fila
 
-#_________________=Leave
--7e35-button:Leave=Abandonar
-
 #___________________________________________=Load all possible values for selected field
 -345d-button:LoadFieldValuesFromAllBulletins=Cargar todos los valores posibles para el campo seleccionado
 
-#______________________=Load Previous Search...
--75f7-button:LoadSearch=Cargar búsqueda previa...
+#______________________=Load Previous Search
+-88b0-button:LoadSearch=Cargar búsqueda previa
 
 #______________________________=Load
 -ddcb-button:LoadSearchOkButton=Cargar
-
-#__________________________=Manage Contacts
--88c0-button:ManageContacts=Administrar contactos
 
 #_________________________________=Move Down
 -4158-button:MoveFieldDownInReport=Mover abajo
@@ -229,8 +325,8 @@
 #______________=On
 -e004-button:On=Sí
 
-#___________________________=Choose Field...
--288f-button:PopUpTreeChoose=Seleccionar campo...
+#___________________________=Choose Field
+-4598-button:PopUpTreeChoose=Seleccionar campo
 
 #___________________=Preview
 -f1fb-button:Preview=Vista previa
@@ -292,8 +388,8 @@
 #_______________________=Save Changes
 -fa29-button:SaveChanges=Guardar cambios
 
-#______________________=Save This Search...
--e372-button:SaveSearch=Guardar esta búsqueda...
+#______________________=Save This Search
+-4d28-button:SaveSearch=Guardar esta búsqueda
 
 #____________________________________=Only search most recent version of records
 -0ae7-button:SearchFinalBulletinsOnly=Buscar sólo la versión más reciente de los expedientes
@@ -340,6 +436,12 @@
 #__________________________=Show as Grid
 -172d-button:ShowGridNormal=Mostrar como tabla
 
+#_____________________=Return to image
+-a24b-button:ShowImage=Volver al imagen
+
+#___________________=Show on Map
+-0c4b-button:ShowMap=Mostrar en un mapa
+
 #__________________=Sign In
 -f849-button:SignIn=Iniciar sesión
 
@@ -355,8 +457,8 @@
 #____________________________=Verify Now
 -b8b4-button:VerifyContactNow=Verificar ahora
 
-#_______________________________________=View Selected Version...
--f943-button:ViewPreviousBulletinVersion=Ver la versión seleccionada...
+#_______________________________________=View Selected Version
+-b4d5-button:ViewPreviousBulletinVersion=Ver la versión seleccionada
 
 #_________________________________________=Switch to using regular keyboard
 -c1ee-button:VirtualKeyboardSwitchToNormal=Cambiar al teclado normal
@@ -448,8 +550,8 @@
 #________________________=Save
 -efc0-button:saveBulletin=Guardar
 
-#__________________________=Save...
--96b4-button:saveattachment=Guardar…
+#__________________________=Save
+-efc0-button:saveattachment=Guardar
 
 #_____________________=Save
 -efc0-button:savedraft=Guardar
@@ -475,32 +577,32 @@
 #_______________=Yes
 -5397-button:yes=Sí
 
-#______________________=Access Token:
--c45e-field:AccessToken=Credencial de acceso
+#______________________=Access Token 
+-0d63-field:AccessToken=Credencial de acceso
 
 #__________________________________=Access Token
 -0d23-field:AccessTokenInstructions=Credencial de acceso
 
-#_____________________________=Access Token:
--d42d-field:AccountAccessToken=Credencial de acceso
+#_____________________________=Access Token 
+-0d63-field:AccountAccessToken=Credencial de acceso
 
 #__________________________________=#AccountId# #PublicCode#
 -ca80-field:AccountIdWithPublicCode=#AccountId# #PublicCode#
 
-#_______________________________=Account Directory:
+#_______________________________=Account Directory: 
 -c354-field:AccountInfoDirectory=Carpeta de la cuenta
 
-#________________________________=Public Code (Old):
--5662-field:AccountInfoPublicCode=Código público (antiguo)
+#________________________________=Public Code (Old) 
+-acec-field:AccountInfoPublicCode=Código público (antiguo)
 
-#__________________________________=Public Code:
--63bc-field:AccountInfoPublicCode40=Código público
+#__________________________________=Public Code 
+-dea4-field:AccountInfoPublicCode40=Código público
 
-#_______________________________=Public Account Id:
--6723-field:AccountInfoPublicKey=identificación pública de cuenta
+#_______________________________=Public Account ID 
+-162c-field:AccountInfoPublicKey=Identificación pública de cuenta
 
-#______________________________=Username:
--869c-field:AccountInfoUserName=Nombre de usuario
+#______________________________=Username 
+-f964-field:AccountInfoUserName=Nombre de usuario
 
 #_____________________________=Account Information
 -0cbd-field:AccountInformation=Información de cuenta
@@ -538,8 +640,8 @@
 #____________________________________=Advanced Server Setup
 -6421-field:AdvanceServerSetupHeading=Configuración de servidor avanzada
 
-#___________________________=Advanced Settings:
--4371-field:AdvancedSettings=Configuracion avanzada:
+#___________________________=Advanced Server Settings 
+-1c4e-field:AdvancedSettings=Configuracion avanzada
 
 #______________=All
 -6a72-field:All=Todos
@@ -550,7 +652,7 @@
 #____________________________________=Martus help documentation is available at
 -ab4d-field:AssistanceWithMartusPart1=La documentación de ayuda de Martus está disponible en
 
-#_____________________________________=or inside C:\\Martus\\Docs on Windows
+#_____________________________________=or inside C:\Martus\Docs on Windows
 -caff-field:AssistanceWithMartusPart1B=o dentro de C:\\Martus\\Docs en Windows
 
 #_____________________________________=and the Martus Documentation folder inside the Martus DMG on Mac.
@@ -565,8 +667,8 @@
 #___________________________________________________=Attempting to connect to server
 -e9ba-field:AttemptToConnectToServerAndGetCompliance=Tratando de conectar al servidor
 
-#_________________=Author:
--8445-field:Author=Autor
+#_________________=Author 
+-f056-field:Author=Autor
 
 #___________________________________=This information is optional and is used to auto-fill your records for your convenience. It is stored on your local computer and not sent to the Martus server.
 -696e-field:AuthorContactInformation=Esta información es opcional y se usa para auto-rellenar sus expedientes para su comodidad. Se almacena en su computadora local y no se envía al servidor Martus.
@@ -577,8 +679,8 @@
 #_________________________________________=Name here if available otherwise blank
 -6338-field:AuthorNicknameFieldDescription=El nombre aquí si está disponible, en blanco de otro modo.
 
-#___________________________=Author Public Code:
--bcc8-field:AuthorPublicCode=Código público del autor
+#___________________________=Author Public Code 
+-36ce-field:AuthorPublicCode=Código público del autor
 
 #________________________________________=#PublicCode# (not currently in contacts)
 -68c3-field:AuthorizedToReadNotInContacts=#PublicCode# (no está actualmente en contactos)
@@ -661,22 +763,22 @@
 #______________________________________=Label
 -7434-field:BulletinHeadQuartersHQLabel=Nombre
 
-#_____________________=Record ID:
--1f5c-field:BulletinID=Identificación del expediente
+#_____________________=Record ID 
+-680d-field:BulletinID=Identificación del expediente
 
-#_____________________=Record Id:
+#_____________________=Bulletin Id:
 -a081-field:BulletinId=Identificación de expediente
 
 #____________________________=Last Saved
 -eb05-field:BulletinLastSaved=Última modificación
 
-#___________________________=Contact Record
+#___________________________=Contact Bulletin
 -c778-field:BulletinNotYours=Expediente del contacto
 
 #_______________________=Size (Kb)
 -fa2e-field:BulletinSize=Tamaño (Kb)
 
-#_________________________=Record Status:
+#_________________________=Bulletin Status:
 -c567-field:BulletinStatus=Estado del expediente
 
 #______________________________________=Created by an UNKNOWN Contact
@@ -687,9 +789,6 @@
 
 #__________________________=Sent
 -35f4-field:BulletinWasSent=Enviado
-
-#________________________________=XML Files (*.xml)
--09f1-field:BulletinXmlFileFilter=Archivos XML (*.xml)
 
 #___________________=Calendar
 -adab-field:Calendar=Calendario
@@ -709,8 +808,8 @@
 #_____________________________=Thai Solar (2548-05-31)
 -2be4-field:CalendarSystemThai=Solar tailandés (2548-05-31)
 
-#_______________________=Calendar Type:
--522d-field:CalendarType=Tipo de calendario
+#_______________________=Calendar Type 
+-0628-field:CalendarType=Tipo de calendario
 
 #_________________________=Chart produced #Date#
 -fb8c-field:ChartCreatedOn=Gráfica producida el #Date#
@@ -751,6 +850,9 @@
 #_______________________=Bar Chart
 -75fe-field:ChartTypeBar=Gráfica de barras
 
+#________________________=Line Chart (records over time)
+-7b24-field:ChartTypeLine=Gráfica de líneas (expedientes a travéz del tiempo)
+
 #_______________________=Pie Chart
 -75ed-field:ChartTypePie=Gráfica circular de tarta
 
@@ -769,7 +871,7 @@
 #_________________________=Choose a Language
 -254a-field:ChooseLanguage=Elija un idioma
 
-#_____________________________=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report.
+#_____________________________=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. 
 -e4a8-field:ChooseReportFields=Use Ctrl-Clic o Mayús-Clic para seleccionar los campos (columnas) que aparecerán en este informe.
 
 #_____________________________________=Download Progress
@@ -835,20 +937,23 @@
 #____________________________________=When creating a Username and password for your account, please be aware there is no way to retrieve your Username and password if you forget it. This is for your safety.
 -cafe-field:CreateAccountInstructions=Al crear un nombre de usuario y contraseña para su cuenta, por favor tenga en cuenta que no hay forma de recuperar su nombre de usuario y contraseña si los olvida. Esto es por su seguridad.
 
-#________________________________=Username:
--17df-field:CreateAccountUserName=Nombre de usuario
+#________________________________=Username 
+-f964-field:CreateAccountUserName=Nombre de usuario
 
 #__________________________________=The layout of the records is dictated by an XML document.  The document must begin with <CustomFields> and end with </CustomFields>. By default the standard record fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
 -53b4-field:CreateCustomFieldsHelp1=La distribución de los expedientes está dictada por un documento XML. El documento debe comenzar con <CustomFields> y terminar con </CustomFields>. Por defecto, los campos estándar del expediente aparecen en la parte superior de la declaración del campos personalizados (CustomFields), pero pueden moverse si se desea. Sin embargo, hay cuatro campos requeridos que no pueden moverse: 'author', 'entrydate', 'language' y 'title' (autor, fecha de entrada, idioma y título).\n\n
 
-#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', 'STRING', and 'SECTION'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'VictimsName', 'EyeColorChoice', etc.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nYou can create sections (which you can hide/unhide) in your records using a SECTION field type.  \n\nYou can put multiple fields on a single row in your record by using <KeepWithPrevious/> in the field definition.\n\nYou can require certain fields or grid columns to be entered before saving a record by using </RequiredField> in the field definition.\n\nYou can restrict standard or custom date fields, date grid columns, date range fields, and date range grid columns by using <MinimumDate> and/or <MaximumDate> tags with a date in YYYY-MM-DD format. NOTE: The year must always be a 'Gregorian' year like 2009, even if Martus is configured to use Thai or Afghan or Persian dates. A blank date, shown as <MaximumDate/>, means 'today', although it may allow one day earlier or later, due to time zone issues. \n\nYou can populate drop-down lists (either inside or outside of a grid) in three ways - 1) by entering a list of <Choices> values in the field definition, 2) with values that have been entered in a grid elsewhere in your record by using <DataSource> (sometimes called “data-driven dropdowns”), and 3) by creating a list of “Reusable Choices” that can be referred to by more than one field.  See examples below for the correct XML definition syntax to use.\n\nYou can set a default value for text and dropdown list fields by using <DefaultValue>ddd</DefaultValue>. For dropdowns, you must use a value already in the list of choices you defined. For Reusable Choices dropdowns it can be a partial or complete code, with each level separated by dots (for a location dropdown that has both Region and City levels, you could pick the default to be at either level, e.g. either R1 or R1.C1, see example below). Default values can be set for both standard and custom fields, but are NOT allowed for BOOLEAN, DATE, DATERANGE, GRID, LANGUAGE, MESSAGE, and SECTION field types, and are not allowed for dropdowns where the values in the list are based on data entered in another field.(i.e. data-driven dropdowns).  Please note that default values are only applied when a new record is created, not when a new version of a record is created, so that the value of the field in the previous version is not overwritten.  This means that default values entered in a record using an earlier customization will be kept even if you create a new version of the record with an updated customization that has a new default value\n\n Additional Comments\n\n1. XML is case-sensitive ('Witness' is not the same as 'witness')\n\n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING” is not valid. It must be 'STRING' or “STRING”)\n\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n\n4.  Use “MESSAGE” fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every record.\n\n5.  Dropdowns using a “Reusable Choices” list can have multiple levels (e.g. for locations that might have Region and City), different fields can use one or more of the levels, and the number of levels is not limited.\n\n6. Both STRING and MULTILINE fields are text fields.  STRING fields will expand to fit the size of the text you enter, while MULTILINE fields have a scrollbar so that the field doesn't exceed its original height.\n\n7.  A GRID can contain columns of various types:  BOOLEAN, DATE, DATERANGE, DROPDOWN, and STRING. When you're entering data into a grid, press Enter to create a new line, press Tab to advance to the next cell, and double-click to copy and paste text.\n\n8.  You can update your customization if the information you are collecting over time changes, for example by adding new fields.  If you are changing fields in a customization, you should think about how you will want to search/report on records created with the old customization as well as new records you create with the new customization, and try to make the changes so that you can search/report on all records at the same time.  Changing field types may cause your searching/reporting to be more complex, so we always recommend that you test out creating records with a new customization and searching/reporting on both old and new records before officially updating the customization for your project.  When you change customizations, Martus will do its best to update the old formatted data to the new customization if you create a new version of a record with the old customization.  If you add completely new fields but don't change any of the old fields, the new version of the record will have all the old fields filled in as they were in the previous version, and the new fields will be blank and you can fill them in.  If you delete fields, the new version of the record will not contain those fields, but you can go back to see the deleted fields in the previous version if it was a sealed record instead of a draft (by hitting the Record Details button in the Header section of the record), and copy any info from the old version into a different field in the new one if desired.  You have to be very careful if you make changes to the customization definitions of old fields.  If you keep the same tag and label, but change the type of field, Martus may be able to transfer the old data into the new field type, but not in all cases.  For example, if you change field type from DROPDOWN to STRING, the data will be transferred over, but if you change from STRING to BOOLEAN, the data will be lost. If you change from a DATE to DATERANGE, your data will be transferred, but if you change from DATERANGE to DATE, you will lose the end date from your earlier data. DROPDOWN and GRID fields are subject to additional rules regarding the modification of dropdown options/values and grid columns. If you add options/values to a dropdown list, the old data will be transferred over. But if you modify or delete an option/value, all records for which that option was selected will lose that data. If you want to add columns to a grid, please make sure to do so at the end of the old grid definition and not in the middle, or the old data will not be transferred to the new version of the record. If you change fields and lose old data in the new version as a result, please note that you can go back to see the deleted data in the previous version if it was a sealed record instead of a draft (by hitting the Record Details button in the Header section of the record), and copy any info from the old version into a different field in the new one if desired. In this release, if you want to change the number of levels in a “Reusable Choices” dropdown field when updating a customization, you should also change the field tag and/or label so that they are more easily distinguished from each other in searching and reporting.  If you do not, the search/report results may be confusing since fields with the same label/tag will be treated differently due to them having a different number of levels.\n\nSee examples below and if you need additional help with customization, please email martus@benetech.org.\n\n
--3a61-field:CreateCustomFieldsHelp2=Para campos personalizados (no-estándar), seleccione primero el tipo de campo que quiera. Las opciones posibles son 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', 'STRING', and 'SECTION' (booleano, fecha, rango de fechas, lista desplegable, tabla, idioma, mensaje, múltiples líneas, cadena de texto, y sección). \n\nPara cada campo personalizado necesitará una etiqueta identificadora única. Esta etiqueta puede ser bien cualquier palabra excepto aquellas ya en uso por el sistema (ej. 'author', 'summary', 'location', 'title' etc.), y no pueden contener espacios o caracteres especiales. Ejemplos de elecciones son 'NombreVictima', 'EleccionColorOjos', etc.\n\nLuego necesita un letrero que se mostrará junto a su campo personalizado. Un ejemplo podría ser 'Nombre del primer testigo'.\n\nPuede crear secciones (que puede ocultar/mostrar) en sus expedientes usando un campo de tipo 'SECTION'.\n\nPuede poner múltiples campos en una sóla fila de su expediente usando <KeepWithPrevious/> en la definición del campo.\n\nPuede requerir que ciertos campos o columnas de una tabla sean introducidas antes de guardar un expediente usando </RequiredField> en la definición del campo.\n\nPuede restringir campos de fechas estándar o personalizados, columnas de fecha de una tabla, campos de rangos de fechas, y columnas de rango de fechas de una tabla, usando las etiquetas <MinimumDate> y/o <MaximumDate> con una fecha en formato AAAA-MM-DD. NOTA: El año siempre tiene que tener formato de calendario 'gregoriano' como 2009, incluso si Martus está configurado para usar fechas del calendario tailandés, afgano o persa. Una fecha en blanco, mostrada como <MaximumDate/>, significa 'hoy', sin embargo puede que habilite el día anterior o el posterior, debido a problemas con la zona horaria.\n\nPuede poblar las listas desplegables (tanto dentro como fuera de una tabla) de tres maneras - 1) introduciendo una lista de valores '<Choices>' (opciones) en la definición del campo, 2) con valores que hayan sido introducidos en una tabla en algún lugar de su expediente usando '<DataSource>' (a veces llamados "listas desplegables manejadas por datos"), y 3) creando una lista de (opciones reutilizables) que puede ser referenciada por más de un campo. Vea ejemplos debajo para la sintáxis correcta de la definición XML a usar.\n\nPuede establecer un valor predeterminado para campos de texto y de lista desplegable usando '<DefaultValue>ddd</DefaultValue>'. Para listas desplegables, tiene que usar un valor ya presente en la lista de opciones que definió. Para listas desplegables de opciones reutilizables puede usar un código parcial o completo, con cada nivel separado por puntos (para una lista desplegable de lugares que tenga niveles tanto de Región como de Ciudad, puede establecer el valor predeterminado para cada uno de los niveles, ej. podría establecer tanto R1 como R1.C1, vea el ejemplo de debajo). Los valores predeterminadospueden establecerse tanto para campos estándar como para campos personalizados, pero NO están permitidos para los tipos de campo 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MESSAGE', y 'SECTION', y no está permitidospara listas desplegables donde los vvalores en la lista estén basados en datos introducidos en otro campo (es decir, listas desplegables manejadas por datos). Por favor observe que los valores predeterminados sólo se aplican cuando se crea un nuevo expediente, no cuando se crea una nueva versión de un expediente, así que el valor del campo en la versión previa no se sobreescribe. Esto significa que los valores predeterminados introducidos en un expediente al utilizar una personalización anterior, se conservarán incluso si crea una nueva versión del expediente con una personalización actualizada que tenga un nuevo valor predeterminado.\n\n\nComentarios adicionales\n\n1. XML distingue mayúsculas de minúsculas ('Testigo' no es lo mismo que 'testigo)\n\n2. Las comillas alrededor de un nombre de tipo de campo pueden ser simples o dobles mientras sean coincidentes (ej. 'STRING” no es válido, tiene que ser 'STRING' o "STRING")\n\n3. Un campo booleano se mostrará como una casilla de marcado al editar la plantilla del expediente, y como Sí/No al previsualizarlo o imprimirlo.\n\n4. Utilice campos de tipo "MESSAGE" para proporcionar directrices sobre como introducir los datos en el formulario del expediente, y para crear comentarios /nostas serán mostradas en cada expediente.\n\n5. Las listas desplegables que utilizan una lista de "Reusable Choices" (opciones reutilizables) pueden tener múltiples niveles (ej. para ubicaciones que puedan incluir Región y Ciudad), distintos campos pueden utilizar uno o más de los nivles, y el número de niveles no está limitado.\n\n6. Ambos tipos de campo 'STRING' y 'MULTILINE' son campos de texto. Los campos 'STRING' se expandirán para adaptarse al tamaño del texto que introduzca, mientras que los campos 'MULTILINE' tienen una barra de desplazamiento de forma que el campo no excede su altura original.\n\n7. Una 'GRID' (tabla) puede contener columnas de varios tipos: 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', y 'STRING'. Cuando esté introduciendo datos en una tabla, pulse Intro para crear una nueva línea, pulse Tab para avanzar a la celda siguiente, y haga doble-clic para copiar y pegar texto.\n\n8. Puede actualizar su personalización si la naturaleza de la información que está recogiendo cambia con el tiempo, por ejemplo, añadiendo nuevos campos. Si está cambiando campos en una personalización, debe pensar acerca de cómo querrá buscar/elaborar-informes sobre los expedientes creados con la personalización antigua así como sobre los nuevos expedientes que cree con la nueva personalización, e intente hacer los cambios de forma que pueda buscar/elaborar-informes sobre todos los expedientes al mismo tiempo. Cambiar los tipos de campo puede causar que su búsqueda/elaboración-de-informes sea más compleja, así que siempre recomendamos que pruebe a crear expedientes con una nueva personalización y haga búsquedas/elabore-informes sobre ambas, tanto los expedientes con la personalización antigua como con la nueva, antes de actualizar oficialmente la personalización para su proyecto. Cuando cambie personalizaciones, Martus se esmerará para actualizar los datos en el formato antiguo a la nueva personalización si crea una nueva versión del un expediente con la antigua personalización. Si añade campos completamente nuevos pero no cambia ninguno de los campos antiguos, la nueva versión ddel expediente tendrá todos los campos antiguos rellenados tal como estaban en la versión previa, y los nuevos campos estarán en blanco y podrá rellenarlos. Si borra campos, la versión nueva del expediente no contendrá esos campos, pero si era un expediente sellado en lugar de un borrador (véalo pulsando el botón Detalles del Expediente en la sección de encabezamiento del expediente) puede volver atrás para ver los campos de la versión anterior que se han borrado, y si se desea copiar cualquier información de la versión anterior en un campo distinto en la nueva.  Ha de tener mucho cuidado si hace cambios en las definiciones de campos antiguos de la personalización.  Si conserva la misma etiqueta y letrero, pero cambia el tipo de campo, Martus puede que sea capaz de transferir los datos del campo antiguo al nuevo tipo de campo, pero no en todos los casos. Por ejemplo, si cambia el tiepo de campo desde 'DROPDOWN' a 'STRING', los datos serán transferidos, pero i cambiar desde 'STRING' a 'BOOLEAN', los datos se perderán. Si cambia desde 'DATE' a 'DATERANGE', los datos serán transferidos, pero si cambia desde 'DATERANGE' a 'DATE' perderá la fecha superior de los rangos de fechas anteriores. Los campos de tipo 'DROPDOWN' y 'GRID' están sujetos a reglas adicionales en relación a la modificación de opciones/valores de lista desplegable y columnas de tabla. Si añade opciones/valores a una lista desplegable, los datos antiguos serán transferidos. Pero si modifica o borra una opción/valor, todos los expedientes para los cuales esa opción estuviera seleccionada perderán esos datos. Si quiere añadir columnas a una tabla, por asegúrese de hacerlo al final de la definición de la tabla antigua y no en el medio, o los datos antiguos no serán transferios a la versión nueva del expediente. Si cambia campos y como resultado pierde los datos antiguos en la nueva versión, por favor observe que si era un expediente sellado en lugar de un de un borrador (véalo al pulsar el botón Detalles del Expediente en la sección de encabezamiento del expediente) puede volver atrás para ver los datos borrados en la versión previa, y si lo desea copiar cualquier información de la versión antigua a un campo distinto en la nueva. En esta versión de Martus, si quiere cambiar el número de niveles en un campo de lista desplegable de “Opciones Reutilizables” al actualizar una personalización, también debe cambiar la etiqueta del campo y/o el letrero, de forma que sean distinguidos más fácilmente de uno de otro al buscar y elaborar informes. Si no lo hace, los resultados de la búsqueda/elaboración-de-informe puedde ser confusos ya que los campos con el mismo letrero/etiqueta serán tratados de forma diferente debido a que tienen distinto número de niveles.\n\nVea ejemplos dejajo, y si necesita ayuda adicional con la personalización por favor escriba un correo a martus@benetech.org\n\n
+#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', 'STRING', and 'SECTION'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'VictimsName', 'EyeColorChoice', etc.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nYou can create sections (which you can hide/unhide) in your records using a SECTION field type.  \n\nYou can put multiple fields on a single row in your record by using <KeepWithPrevious/> in the field definition.\n\nYou can require certain fields or grid columns to be entered before saving a record by using </RequiredField> in the field definition.\n\nYou can restrict standard or custom date fields, date grid columns, date range fields, and date range grid columns by using <MinimumDate> and/or <MaximumDate> tags with a date in YYYY-MM-DD format. Note: The year must always be a 'Gregorian' year like 2009, even if Martus is configured to use Thai or Afghan or Persian dates. A blank date, shown as <MaximumDate/>, means 'today', although it may allow one day earlier or later, due to time zone issues. \n\nYou can populate drop-down lists (either inside or outside of a grid) in three ways - 1) by entering a list of <Choices> values in the field definition, 2) with values that have been entered in a grid elsewhere in your record by using <DataSource> (sometimes called "data-driven dropdowns"), and 3) by creating a list of "Reusable Choices" that can be referred to by more than one field.  See examples below for the correct XML definition syntax to use.\n\nYou can set a default value for text and dropdown list fields by using <DefaultValue>ddd</DefaultValue>. For dropdowns, you must use a value already in the list of choices you defined. For Reusable Choices dropdowns it can be a partial or complete code, with each level separated by dots (for a location dropdown that has both Region and City levels, you could pick the default to be at either level, e.g. either R1 or R1.C1, see example below). Default values can be set for both standard and custom fields, but are NOT allowed for BOOLEAN, DATE, DATERANGE, GRID, LANGUAGE, MESSAGE, and SECTION field types, and are not allowed for dropdowns where the values in the list are based on data entered in another field.(i.e. data-driven dropdowns).  Please note that default values are only applied when a new record is created, not when a new version of a record is created, so that the value of the field in the previous version is not overwritten.  This means that default values entered in a record using an earlier customization will be kept even if you create a new version of the record with an updated customization that has a new default value\n\n Additional Comments\n\n1. XML is case-sensitive ('Witness' is not the same as 'witness')\n\n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING")\n\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n\n4.  Use "MESSAGE" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every record.\n\n5.  Dropdowns using a "Reusable Choices" list can have multiple levels (e.g. for locations that might have Region and City), different fields can use one or more of the levels, and the number of levels is not limited.\n\n6. Both STRING and MULTILINE fields are text fields.  STRING fields will expand to fit the size of the text you enter, while MULTILINE fields have a scrollbar so that the field doesn't exceed its original height.\n\n7.  A GRID can contain columns of various types:  BOOLEAN, DATE, DATERANGE, DROPDOWN, and STRING. When you're entering data into a grid, press Enter to create a new line, press Tab to advance to the next cell, and double-click to copy and paste text.\n\n8.  You can update your customization if the information you are collecting over time changes, for example by adding new fields.  If you are changing fields in a customization, you should think about how you will want to search/report on records created with the old customization as well as new records you create with the new customization, and try to make the changes so that you can search/report on all records at the same time.  Changing field types may cause your searching/reporting to be more complex, so we always recommend that you test out creating records with a new customization and searching/reporting on both old and new records before officially updating the customization for your project.  When you change customizations, Martus will do its best to update the old formatted data to the new customization if you create a new version of a record with the old customization.  If you add completely new fields but don't change any of the old fields, the new version of the record will have all the old fields filled in as they were in the previous version, and the new fields will be blank and you can fill them in.  If you delete fields, the new version of the record will not contain those fields, but you can go back to see the deleted fields in the previous version if it was a sealed record instead of a draft (by hitting the Record Details button in the Header section of the record), and copy any info from the old version into a different field in the new one if desired.  You have to be very careful if you make changes to the customization definitions of old fields.  If you keep the same tag and label, but change the type of field, Martus may be able to transfer the old data into the new field type, but not in all cases.  For example, if you change field type from DROPDOWN to STRING, the data will be transferred over, but if you change from STRING to BOOLEAN, the data will be lost. If you change from a DATE to DATERANGE, your data will be transferred, but if you change from DATERANGE to DATE, you will lose the end date from your earlier data. DROPDOWN and GRID fields are subject to additional rules regarding the modification of dropdown options/values and grid columns. If you add options/values to a dropdown list, the old data will be transferred over. But if you modify or delete an option/value, all records for which that option was selected will lose that data. If you want to add columns to a grid, please make sure to do so at the end of the old grid definition and not in the middle, or the old data will not be transferred to the new version of the record. If you change fields and lose old data in the new version as a result, please note that you can go back to see the deleted data in the previous version if it was a sealed record instead of a draft (by hitting the Record Details button in the Header section of the record), and copy any info from the old version into a different field in the new one if desired. In this release, if you want to change the number of levels in a "Reusable Choices" dropdown field when updating a customization, you should also change the field tag and/or label so that they are more easily distinguished from each other in searching and reporting.  If you do not, the search/report results may be confusing since fields with the same label/tag will be treated differently due to them having a different number of levels.\n\nSee examples below and if you need additional help with customization, please email martus@benetech.org.\n\n
+-c9b3-field:CreateCustomFieldsHelp2=Para campos personalizados (no-estándar), seleccione primero el tipo de campo que quiera. Las opciones posibles son 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', 'STRING', and 'SECTION' (booleano, fecha, rango de fechas, lista desplegable, tabla, idioma, mensaje, múltiples líneas, cadena de texto, y sección). \n\nPara cada campo personalizado necesitará una etiqueta identificadora única. Esta etiqueta puede ser bien cualquier palabra excepto aquellas ya en uso por el sistema (ej. 'author', 'summary', 'location', 'title' etc.), y no pueden contener espacios o caracteres especiales. Ejemplos de elecciones son 'NombreVictima', 'EleccionColorOjos', etc.\n\nLuego necesita un letrero que se mostrará junto a su campo personalizado. Un ejemplo podría ser 'Nombre del primer testigo'.\n\nPuede crear secciones (que puede ocultar/mostrar) en sus expedientes usando un campo de tipo 'SECTION'.\n\nPuede poner múltiples campos en una sóla fila de su expediente usando <KeepWithPrevious/> en la definición del campo.\n\nPuede requerir que ciertos campos o columnas de una tabla sean introducidas antes de guardar un expediente usando </RequiredField> en la definición del campo.\n\nPuede restringir campos de fechas estándar o personalizados, columnas de fecha de una tabla, campos de rangos de fechas, y columnas de rango de fechas de una tabla, usando las etiquetas <MinimumDate> y/o <MaximumDate> con una fecha en formato AAAA-MM-DD. NOTA: El año siempre tiene que tener formato de calendario 'gregoriano' como 2009, incluso si Martus está configurado para usar fechas del calendario tailandés, afgano o persa. Una fecha en blanco, mostrada como <MaximumDate/>, significa 'hoy', sin embargo puede que habilite el día anterior o el posterior, debido a problemas con la zona horaria.\n\nPuede poblar las listas desplegables (tanto dentro como fuera de una tabla) de tres maneras - 1) introduciendo una lista de valores '<Choices>' (opciones) en la definición del campo, 2) con valores que hayan sido introducidos en una tabla en algún lugar de su expediente usando '<DataSource>' (a veces llamados "listas desplegables manejadas por datos"), y 3) creando una lista de (opciones reutilizables) que puede ser referenciada por más de un campo. Vea ejemplos debajo para la sintáxis correcta de la definición XML a usar.\n\nPuede establecer un valor predeterminado para campos de texto y de lista desplegable usando '<DefaultValue>ddd</DefaultValue>'. Para listas desplegables, tiene que usar un valor ya presente en la lista de opciones que definió. Para listas desplegables de opciones reutilizables puede usar un código parcial o completo, con cada nivel separado por puntos (para una lista desplegable de lugares que tenga niveles tanto de Región como de Ciudad, puede establecer el valor predeterminado para cada uno de los niveles, ej. podría establecer tanto R1 como R1.C1, vea el ejemplo de debajo). Los valores predeterminadospueden establecerse tanto para campos estándar como para campos personalizados, pero NO están permitidos para los tipos de campo 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MESSAGE', y 'SECTION', y no está permitidospara listas desplegables donde los vvalores en la lista estén basados en datos introducidos en otro campo (es decir, listas desplegables manejadas por datos). Por favor observe que los valores predeterminados sólo se aplican cuando se crea un nuevo expediente, no cuando se crea una nueva versión de un expediente, así que el valor del campo en la versión previa no se sobreescribe. Esto significa que los valores predeterminados introducidos en un expediente al utilizar una personalización anterior, se conservarán incluso si crea una nueva versión del expediente con una personalización actualizada que tenga un nuevo valor predeterminado.\n\n\nComentarios adicionales\n\n1. XML distingue mayúsculas de minúsculas ('Testigo' no es lo mismo que 'testigo)\n\n2. Las comillas alrededor de un nombre de tipo de campo pueden ser simples o dobles mientras sean coincidentes (ej. 'STRING” no es válido, tiene que ser 'STRING' o "STRING")\n\n3. Un campo booleano se mostrará como una casilla de marcado al editar la plantilla del expediente, y como Sí/No al previsualizarlo o imprimirlo.\n\n4. Utilice campos de tipo "MESSAGE" para proporcionar directrices sobre como introducir los datos en el formulario del expediente, y para crear comentarios /nostas serán mostradas en cada expediente.\n\n5. Las listas desplegables que utilizan una lista de "Reusable Choices" (opciones reutilizables) pueden tener múltiples niveles (ej. para ubicaciones que puedan incluir Región y Ciudad), distintos campos pueden utilizar uno o más de los nivles, y el número de niveles no está limitado.\n\n6. Ambos tipos de campo 'STRING' y 'MULTILINE' son campos de texto. Los campos 'STRING' se expandirán para adaptarse al tamaño del texto que introduzca, mientras que los campos 'MULTILINE' tienen una barra de desplazamiento de forma que el campo no excede su altura original.\n\n7. Una 'GRID' (tabla) puede contener columnas de varios tipos: 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', y 'STRING'. Cuando esté introduciendo datos en una tabla, pulse Intro para crear una nueva línea, pulse Tab para avanzar a la celda siguiente, y haga doble-clic para copiar y pegar texto.\n\n8. Puede actualizar su personalización si la naturaleza de la información que está recogiendo cambia con el tiempo, por ejemplo, añadiendo nuevos campos. Si está cambiando campos en una personalización, debe pensar acerca de cómo querrá buscar/elaborar-informes sobre los expedientes creados con la personalización antigua así como sobre los nuevos expedientes que cree con la nueva personalización, e intente hacer los cambios de forma que pueda buscar/elaborar-informes sobre todos los expedientes al mismo tiempo. Cambiar los tipos de campo puede causar que su búsqueda/elaboración-de-informes sea más compleja, así que siempre recomendamos que pruebe a crear expedientes con una nueva personalización y haga búsquedas/elabore-informes sobre ambas, tanto los expedientes con la personalización antigua como con la nueva, antes de actualizar oficialmente la personalización para su proyecto. Cuando cambie personalizaciones, Martus se esmerará para actualizar los datos en el formato antiguo a la nueva personalización si crea una nueva versión del un expediente con la antigua personalización. Si añade campos completamente nuevos pero no cambia ninguno de los campos antiguos, la nueva versión ddel expediente tendrá todos los campos antiguos rellenados tal como estaban en la versión previa, y los nuevos campos estarán en blanco y podrá rellenarlos. Si borra campos, la versión nueva del expediente no contendrá esos campos, pero si era un expediente sellado en lugar de un borrador (véalo pulsando el botón Detalles del Expediente en la sección de encabezamiento del expediente) puede volver atrás para ver los campos de la versión anterior que se han borrado, y si se desea copiar cualquier información de la versión anterior en un campo distinto en la nueva.  Ha de tener mucho cuidado si hace cambios en las definiciones de campos antiguos de la personalización.  Si conserva la misma etiqueta y letrero, pero cambia el tipo de campo, Martus puede que sea capaz de transferir los datos del campo antiguo al nuevo tipo de campo, pero no en todos los casos. Por ejemplo, si cambia el tiepo de campo desde 'DROPDOWN' a 'STRING', los datos serán transferidos, pero i cambiar desde 'STRING' a 'BOOLEAN', los datos se perderán. Si cambia desde 'DATE' a 'DATERANGE', los datos serán transferidos, pero si cambia desde 'DATERANGE' a 'DATE' perderá la fecha superior de los rangos de fechas anteriores. Los campos de tipo 'DROPDOWN' y 'GRID' están sujetos a reglas adicionales en relación a la modificación de opciones/valores de lista desplegable y columnas de tabla. Si añade opciones/valores a una lista desplegable, los datos antiguos serán transferidos. Pero si modifica o borra una opción/valor, todos los expedientes para los cuales esa opción estuviera seleccionada perderán esos datos. Si quiere añadir columnas a una tabla, por asegúrese de hacerlo al final de la definición de la tabla antigua y no en el medio, o los datos antiguos no serán transferios a la versión nueva del expediente. Si cambia campos y como resultado pierde los datos antiguos en la nueva versión, por favor observe que si era un expediente sellado en lugar de un de un borrador (véalo al pulsar el botón Detalles del Expediente en la sección de encabezamiento del expediente) puede volver atrás para ver los datos borrados en la versión previa, y si lo desea copiar cualquier información de la versión antigua a un campo distinto en la nueva. En esta versión de Martus, si quiere cambiar el número de niveles en un campo de lista desplegable de “Opciones Reutilizables” al actualizar una personalización, también debe cambiar la etiqueta del campo y/o el letrero, de forma que sean distinguidos más fácilmente de uno de otro al buscar y elaborar informes. Si no lo hace, los resultados de la búsqueda/elaboración-de-informe puedde ser confusos ya que los campos con el mismo letrero/etiqueta serán tratados de forma diferente debido a que tienen distinto número de niveles.\n\nVea ejemplos dejajo, y si necesita ayuda adicional con la personalización por favor escriba un correo a martus@benetech.org\n\n
 
-#___________________________________= Notes on “Reusable Choices” dropdown fields:\n\n 1. Dropdowns using a “Reusable Choices” list can have multiple levels (e.g. for locations that might have Region and City), different fields can use one or more of the levels (e.g. if you have defined Region and City levels, you could have a field that just uses the Region level, and another field that uses both levels), and you do not need to define all levels for all entries (e.g. you could have defined Neighborhood values as a lower level for some larger Cities, but not all Cities need to have Neighborhoods defined).  The number of levels is not limited by Martus, but please note that if you have large amounts of data in your definitions lists, or a large number of levels, performance of certain Martus record operations may be affected.\n\n 2. In this release, we recommend that if you want to change the number of levels in a “Reusable Choices” dropdown field when updating a customization, you also change the field tag and/or label so that they are more easily distinguished from each other in searching and reporting.  If you do not, the search/report results may be confusing since fields with the same label/tag will be treated differently due to them having a different number of levels.\n\n 3. “Reusable Choices” codes have the same restrictions that field tags do; they can be in any language, but cannot contain spaces, special characters, or punctuation.\n\n 4. Please make sure to not use the same codes in Reusable Choices lists if you edit your customizations unless you are just fixing typos in the labels, because using the same code for different labels can cause confusion when searching or reporting on those fields. Ideally you should use codes that are not numeric, but are letters that are a meaningful abbreviation of the label so there is no confusion over what they stand for if you update the customization at a later date (e.g. use 2 or 3 letter abbreviations for locations instead of numbers).  See the “Search” Help screen for more information about how code and label choices can affect searching on these fields.\n\n 5. You cannot use a multiple level / reusable choice dropdown as a data source for another dropdown inside or outside of grids. If you try to do this you will see an error message.\n\n 6. Please note that when you save customization XML with a Reusable Choices list for dropdown fields, Martus will move those choice definitions to the bottom of the XML when you reload it.\n\n
+#___________________________________= Notes on "Reusable Choices" dropdown fields:\n\n 1. Dropdowns using a "Reusable Choices" list can have multiple levels (e.g. for locations that might have Region and City), different fields can use one or more of the levels (e.g. if you have defined Region and City levels, you could have a field that just uses the Region level, and another field that uses both levels), and you do not need to define all levels for all entries (e.g. you could have defined Neighborhood values as a lower level for some larger Cities, but not all Cities need to have Neighborhoods defined).  The number of levels is not limited by Martus, but please note that if you have large amounts of data in your definitions lists, or a large number of levels, performance of certain Martus record operations may be affected.\n\n 2. In this release, we recommend that if you want to change the number of levels in a "Reusable Choices" dropdown field when updating a customization, you also change the field tag and/or label so that they are more easily distinguished from each other in searching and reporting.  If you do not, the search/report results may be confusing since fields with the same label/tag will be treated differently due to them having a different number of levels.\n\n 3. "Reusable Choices" codes have the same restrictions that field tags do; they can be in any language, but cannot contain spaces, special characters, or punctuation.\n\n 4. Please make sure to not use the same codes in Reusable Choices lists if you edit your customizations unless you are just fixing typos in the labels, because using the same code for different labels can cause confusion when searching or reporting on those fields. Ideally you should use codes that are not numeric, but are letters that are a meaningful abbreviation of the label so there is no confusion over what they stand for if you update the customization at a later date (e.g. use 2 or 3 letter abbreviations for locations instead of numbers).  See the "Search" Help screen for more information about how code and label choices can affect searching on these fields.\n\n 5. You cannot use a multiple level / reusable choice dropdown as a data source for another dropdown inside or outside of grids. If you try to do this you will see an error message.\n\n 6. Please note that when you save customization XML with a Reusable Choices list for dropdown fields, Martus will move those choice definitions to the bottom of the XML when you reload it.\n\n
 -1d9a-field:CreateCustomFieldsHelp2b= Notas sobre campos de listas desplegables de “Opciones Reutilizables”:\n\n 1. Las listas desplegables que utilizan una lista de “Opciones Reutilizables” pueden tener múltiples niveles (ej. para señalar lugares que puedan componerse de Región y Ciudad), diferentes campos podrían usar uno o más de los niveles (ej. si ha definido los niveles de Resgión y Ciudad, podrían tener un campo que sólo usase el nivel de Región, y otro que usase ambos niveles), y no necesita definir todos los niveles para todas las entradas (ej. podría haber definido el nivel Distrito como valores en un nivel inferior para algunas grandes Ciudades, pero no todas las Ciudades necesitan tener Distritos definidos). El número de niveles no está limitado por Martus, pero por favor observe que si tiene grandes cantidades de datos en sus listas de definiciones, o un gran número de niveles, puede resultar afectado el rendimiento de ciertas operaciones con los expedientes de Martus. \n\n 2. En esta versión, recomendamos que si al actualizar una personalización quiere cambiar el número de niveles de un campo de lista desplegable de “Opciones Reutilizables”, cambié también la etiqueta y/o el letrero de forma que sean más fácilmente distinguibles unos de otros al buscar y confeccionar informes. Si no lo hace así, los resultados de la búsqueda/confección-de-informes pueden ser confusos ya que los campos con el mismo letrero/etiqueta serán tratados de distinta manera debido que tienen distinto número de niveles.\n\n 3. Los códigos de “Opciones Reutilizables” tienen las mismas restricciones que las etiquetas de los campos; pueden estar en cualquier idioma, pero no pueden contener espacios, caracteres especiales, o signos de puntuación.\n\n 4. Por favor asegúrese de que no utiliza los mismos códigos presentes en las listas de Opciones Reutilizables si edita su personalización, a menos que esté arreglando errores tipográficos en las etiquetas, porque utilizar el mismo código para diferentes letreros puede causar confusión al buscar o confeccionar informes sobre esos campos. Idealmente debería usar códigos que no sean numéricos, sino letras que formen una abreviatura del letrero con significado comprensible, de forma que no haya confusión sobre qué es lo que representan en el caso de que actualice la personalización en una fecha posterior (ej. utilice abreviaturas de 2 o 3 letras para lugares en lugar de números). Vea la pantalla de Ayuda de “Búsqueda” para más información acerca de cómo las elecciones de códigos y letreros pueden afectar a la búsqueda sobre estos campos.\n\n 5. No puede utilizar una lista de opciones reutilizables de múltiples niveles como fuente de datos para otra lista desplegable dentro o fuera de una tabla. Si intenta hacer se mostrará un mensaje de error.\n\n 6. Por favor observe que cuando guarda una personalización XML con una lista de Opciones Reutilizables para campos de lista desplegable, Martus moverá esas definiciones de opciones al fondo del XML cuando lo vuelva a cargar.\n\n
 
-#__________________________________=\n<Field type='SECTION'>\n<Tag>summarysection</Tag>\n<Label>Summary Section</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>office</Tag>\n<Label>Regional office collecting the data</Label>\n<DefaultValue>Region 3 field office</DefaultValue>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>BulletinSource</Tag>\n<Label>Source of record information</Label>\n<RequiredField/>\n<DefaultValue>Media/Press</DefaultValue>\n<Choices>\n<Choice>Media/Press</Choice>\n<Choice>Legal Report</Choice>\n<Choice>Personal Interview</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>SpecifyOther</Tag>\n<Label>If Source = “Other”, please specify:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>IntervieweeName</Tag>\n<Label>Interviewee Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>IntervieweeLanguage</Tag>\n<Label>Interviewee Speaks</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>InterviewDates</Tag>\n<Label>Date(s) of interview(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anonymous</Tag>\n<Label>Does interviewee wish to remain anonymous?</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>AdditionalInfo</Tag>\n<Label>Is interviewee willing to give additional information if needed?</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Testify</Tag>\n<Label>Is interviewee willing to testify?</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>EventLocation</Tag>\n<Label>Event Location</Label>\n<DefaultValue>R1</DefaultValue>\n  <UseReusableChoices code='RegionChoices'></UseReusableChoices>\n  <UseReusableChoices code='CityChoices'></UseReusableChoices>\n</Field>\n\n<Field type='SECTION'>\n<Tag>peoplesection</Tag>\n<Label>People Section</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>VictimInformationGrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label><MinimumDate>1910-01-01</MinimumDate><MaximumDate/></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label><RequiredField/>\n<Choices>\n<Choice>Male</Choice>\n<Choice>Female</Choice>\n<Choice>Unknown</Choice>\n</Choices></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Region of Birth</Label>\n  <UseReusableChoices code='RegionChoices'></UseReusableChoices></Column>\n<Column type='STRING'><Tag></Tag><Label>Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MessageProfession</Tag>\n<Label>Profession History Table Note</Label>\n<Message>If you have information about a person who has had different professions over time, enter multiple rows with the same First and Last Names and show the date ranges for each profession on a separate row.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>ProfessionHistoryGrid</Tag>\n<Label>Profession History</Label>\n<GridSpecDetails>\n<Column type='DROPDOWN'><Tag></Tag><Label>First Name</Label>\n <DataSource>\n <GridFieldTag>VictimInformationGrid</GridFieldTag>\n <GridColumnLabel>First Name</GridColumnLabel>\n </DataSource>\n</Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Last Name</Label>\n <DataSource>\n <GridFieldTag>VictimInformationGrid</GridFieldTag>\n <GridColumnLabel>Last Name</GridColumnLabel>\n </DataSource>\n</Column>\n<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label><MaximumDate/></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MULTILINE'>\n<Tag>narrative</Tag>\n<Label>Narrative description of events</Label>\n<DefaultValue>What happened in detail is as follows:</DefaultValue>\n</Field>\n\n\n<ReusableChoices code='RegionChoices' label='Region'>\n  <Choice code='R1' label='Region 1'></Choice>\n  <Choice code='R2' label='Region 2'></Choice>\n  <Choice code='R3' label='Region 3'></Choice>\n</ReusableChoices>\n\n<ReusableChoices code='CityChoices' label='City'>\n  <Choice code='R1.C1' label='City 1'></Choice>\n  <Choice code='R1.C2' label='City 2'></Choice>\n  <Choice code='R2.C3' label='City 3'></Choice>\n  <Choice code='R2.C4' label='City 4'></Choice>\n  <Choice code='R3.C5' label='City 5'></Choice>\n  <Choice code='R3.C6' label='City 6'></Choice>\n</ReusableChoices>
+#__________________________________=\n<Field type='SECTION'>\n<Tag>summarysection</Tag>\n<Label>Summary Section</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>office</Tag>\n<Label>Regional office collecting the data</Label>\n<DefaultValue>Region 3 field office</DefaultValue>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>BulletinSource</Tag>\n<Label>Source of record information</Label>\n<RequiredField/>\n<DefaultValue>Media/Press</DefaultValue>\n<Choices>\n<Choice>Media/Press</Choice>\n<Choice>Legal Report</Choice>\n<Choice>Personal Interview</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>SpecifyOther</Tag>\n<Label>If Source = "Other", please specify:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>IntervieweeName</Tag>\n<Label>Interviewee Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>IntervieweeLanguage</Tag>\n<Label>Interviewee Speaks</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>InterviewDates</Tag>\n<Label>Date(s) of interview(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anonymous</Tag>\n<Label>Does interviewee wish to remain anonymous?</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>AdditionalInfo</Tag>\n<Label>Is interviewee willing to give additional information if needed?</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Testify</Tag>\n<Label>Is interviewee willing to testify?</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>EventLocation</Tag>\n<Label>Event Location</Label>\n<DefaultValue>R1</DefaultValue>\n  <UseReusableChoices code='RegionChoices'></UseReusableChoices>\n  <UseReusableChoices code='CityChoices'></UseReusableChoices>\n</Field>\n\n<Field type='SECTION'>\n<Tag>peoplesection</Tag>\n<Label>People Section</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>VictimInformationGrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label><MinimumDate>1910-01-01</MinimumDate><MaximumDate/></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label><RequiredField/>\n<Choices>\n<Choice>Male</Choice>\n<Choice>Female</Choice>\n<Choice>Unknown</Choice>\n</Choices></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Region of Birth</Label>\n  <UseReusableChoices code='RegionChoices'></UseReusableChoices></Column>\n<Column type='STRING'><Tag></Tag><Label>Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MessageProfession</Tag>\n<Label>Profession History Table Note</Label>\n<Message>If you have information about a person who has had different professions over time, enter multiple rows with the same First and Last Names and show the date ranges for each profession on a separate row.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>ProfessionHistoryGrid</Tag>\n<Label>Profession History</Label>\n<GridSpecDetails>\n<Column type='DROPDOWN'><Tag></Tag><Label>First Name</Label>\n <DataSource>\n <GridFieldTag>VictimInformationGrid</GridFieldTag>\n <GridColumnLabel>First Name</GridColumnLabel>\n </DataSource>\n</Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Last Name</Label>\n <DataSource>\n <GridFieldTag>VictimInformationGrid</GridFieldTag>\n <GridColumnLabel>Last Name</GridColumnLabel>\n </DataSource>\n</Column>\n<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label><MaximumDate/></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MULTILINE'>\n<Tag>narrative</Tag>\n<Label>Narrative description of events</Label>\n<DefaultValue>What happened in detail is as follows:</DefaultValue>\n</Field>\n\n\n<ReusableChoices code='RegionChoices' label='Region'>\n  <Choice code='R1' label='Region 1'></Choice>\n  <Choice code='R2' label='Region 2'></Choice>\n  <Choice code='R3' label='Region 3'></Choice>\n</ReusableChoices>\n\n<ReusableChoices code='CityChoices' label='City'>\n  <Choice code='R1.C1' label='City 1'></Choice>\n  <Choice code='R1.C2' label='City 2'></Choice>\n  <Choice code='R2.C3' label='City 3'></Choice>\n  <Choice code='R2.C4' label='City 4'></Choice>\n  <Choice code='R3.C5' label='City 5'></Choice>\n  <Choice code='R3.C6' label='City 6'></Choice>\n</ReusableChoices>
 -fa80-field:CreateCustomFieldsHelp3=\n<Field type='SECTION'>\n<Tag>seccionresumen</Tag>\n<Label>Sección de resumen</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>oficina</Tag>\n<Label>Oficina regional recogiendo los datos</Label>\n<DefaultValue>Oficina de campo de la Región 3</DefaultValue>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>FuenteExpediente</Tag>\n<Label>Fuente de información del expediente</Label>\n<RequiredField/>\n<DefaultValue>Medios/Prensa</DefaultValue>\n<Choices>\n<Choice>Medios/Prensa</Choice>\n<Choice>Informe legal</Choice>\n<Choice>Entrevista personal</Choice>\n<Choice>Otra</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>EspecificarOtra</Tag>\n<Label>If Source = “Otra”, por favor especifíquela:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>NombreEntrevistado</Tag>\n<Label>Nombre del entrevistado</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>IdiomaEntrevistado</Tag>\n<Label>El entrevistado habla</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>FechasEntrevistas</Tag>\n<Label>Fecha(s) de la(s) entrevista(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anonimo</Tag>\n<Label>¿Desea el entrevistado permanecer anónimo?</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>InfoAdicional</Tag>\n<Label>¿El entrevistado tiene voluntad de proporcionar información adicional si es necesario?</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Testificar</Tag>\n<Label>¿El entrevistado tiene voluntad de testificar?</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>LugarEvento</Tag>\n<Label>Lugar del evento</Label>\n<DefaultValue>R1</DefaultValue>\n  <UseReusableChoices code='OpcionesRegion'></UseReusableChoices>\n  <UseReusableChoices code='OpcionesCiudad'></UseReusableChoices>\n</Field>\n\n<Field type='SECTION'>\n<Tag>seccionpersonas</Tag>\n<Label>Sección de personas</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>TablaInformacionVictima</Tag>\n<Label>Información de la víctima</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>Nombre</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Apellidos</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>¿Está identificada?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Fecha de nacimiento</Label><MinimumDate>1910-01-01</MinimumDate><MaximumDate/></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Sexo</Label><RequiredField/>\n<Choices>\n<Choice>Masculino</Choice>\n<Choice>Femenino</Choice>\n<Choice>Otro</Choice>\n<Choice>Desconocido</Choice>\n</Choices></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Región de nacimiento</Label>\n  <UseReusableChoices code='OpcionesRegion'></UseReusableChoices></Column>\n<Column type='STRING'><Tag></Tag><Label>Grupo étnico</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MensajeProfesion</Tag>\n<Label>Nota sobre la tabla de historial profesional</Label>\n<Message>Si tiene información acerca de una persona que ha tenido diferentes profesiones a lo largo del tiempo, introduzca múltiples filas con el mismo Nombre y Apellidos, y muestre los rangos de fechas para cada profesión en una fila aparte.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>TablaHistorialProfesional</Tag>\n<Label>Historial profesional</Label>\n<GridSpecDetails>\n<Column type='DROPDOWN'><Tag></Tag><Label>Nombre</Label>\n <DataSource>\n <GridFieldTag>TablaInformacionVictima</GridFieldTag>\n <GridColumnLabel>Nombre</GridColumnLabel>\n </DataSource>\n</Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Apellidos</Label>\n <DataSource>\n <GridFieldTag>TablaInformacionVictima</GridFieldTag>\n <GridColumnLabel>Apellidos</GridColumnLabel>\n </DataSource>\n</Column>\n<Column type='STRING'><Tag></Tag><Label>Profesión</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Fechas como profesional</Label><MaximumDate/></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MULTILINE'>\n<Tag>narrativa</Tag>\n<Label>Descripción narrativa de los acontecimientos</Label>\n<DefaultValue>El detalle de lo que sucedió es como sigue:</DefaultValue>\n</Field>\n\n\n<ReusableChoices code='OpcionesRegion' label='Región'>\n  <Choice code='R1' label='Región 1'></Choice>\n  <Choice code='R2' label='Región 2'></Choice>\n  <Choice code='R3' label='Región 3'></Choice>\n</ReusableChoices>\n\n<ReusableChoices code='OpcionesCiudad' label='Ciudad'>\n  <Choice code='R1.C1' label='Ciudad 1'></Choice>\n  <Choice code='R1.C2' label='Ciudad 2'></Choice>\n  <Choice code='R2.C3' label='Ciudad 3'></Choice>\n  <Choice code='R2.C4' label='Ciudad 4'></Choice>\n  <Choice code='R3.C5' label='Ciudad 5'></Choice>\n  <Choice code='R3.C6' label='Ciudad 6'></Choice>\n</ReusableChoices>
+
+#___________________________=Want to create a new Martus account?  Click here.
+-3373-field:CreateNewAccount=¿Quiere crear una cuenta nueva de Martus?  Pulse aquí.
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=Introduzca su nuevo nombre de usuario y contraseña.
@@ -877,8 +982,8 @@
 #______________________=Date Created
 -dda2-field:DateCreated=Fecha de creación
 
-#________________________=Date Delimiter:
--ce90-field:DateDelimiter=Delimitador de fecha
+#________________________=Date Delimiter 
+-0939-field:DateDelimiter=Delimitador de fecha
 
 #____________________________=Dash (00-00-00)
 -997c-field:DateDelimiterDash=Guión (00-00-00)
@@ -892,8 +997,8 @@
 #____________________=Exact Date
 -8a81-field:DateExact=Fecha exacta
 
-#_____________________________=Date Format Sequence:
--f14f-field:DateFormatSequence=Secuencia de formato de fecha
+#_____________________________=Date Format Sequence 
+-6f1a-field:DateFormatSequence=Secuencia de formato de fecha
 
 #___________________________=Unknown
 -bc78-field:DateNotSpecified=Desconocido
@@ -925,20 +1030,14 @@
 #_____________________________________=records.html
 -3f09-field:DefaultPrintToDiskFileName=expedientes.html
 
-#__________________________________=Default Server:
--c985-field:DefaultServerConnection=Servidor predeterminado:
+#__________________________________=Default Server 
+-ca26-field:DefaultServerConnection=Servidor predeterminado
 
 #_______________________________=Default Server
 -6d35-field:DefaultServerHeading=Servidor predeterminado
 
 #_________________=Delete
 -f6fd-field:Delete=Eliminar
-
-#_________________________________=This record has been pasted into Martus from the file:
--1608-field:DeleteBulletinFileMsg1=Este expediente ha sido pegado en Martus desde el archivo:
-
-#_________________________________=Do you want to delete the original file, or leave it in place?
--3425-field:DeleteBulletinFileMsg2=¿Desea eliminar el archivo original, o dejarlo donde está?
 
 #_____________________=Delete?
 -042d-field:DeleteFlag=¿Eliminar?
@@ -954,6 +1053,9 @@
 
 #_____________________________________________=Martus Standard Fields
 -0a0f-field:DisplayableDefaultFormTemplateName=Campos estándar de Martus
+
+#____________________________________=Do not show this message again during this session
+-4f4f-field:DoNotShowAgainThisSession=No muestre este mensaje de nuevo durante esta sesión
 
 #___________________=Download
 -a479-field:Download=Descargar
@@ -994,8 +1096,8 @@
 #___________________________=Enter Access Token
 -4f8c-field:EnterAccessToken=Introducir credencial de acceso
 
-#_______________________=Enter New Name:
--3819-field:EnterNewName=Introduzca un nuevo nombre
+#_______________________=Enter New Name 
+-6231-field:EnterNewName=Introduzca un nuevo nombre
 
 #________________________________=Unable to back up the key file on this disk.
 -bda3-field:ErrorBackingupKeyPair=No se pudo hacer copia de seguridad del archivo del par claves en este disco.
@@ -1063,17 +1165,17 @@
 #______________________________=---Overview---\n\nMartus searches all versions of every record (both public and private, sealed and draft) in every folder, including the Discarded Records folder.  When the search is completed, the Search Results folder lists copies of the records found in your search.\n\nYou can search for words in any language.  Martus searches are not case-sensitive in English and other purely Latin character languages, so it doesn't matter whether a word is capitalized or not.\n\nSearches include attachment filenames, but not content of attachments.\n\nYou can search both standard and custom fields.\n\n
 -23f2-field:FancySearchHelpMsg1=---Panorama---\n\nMartus busca sobre todas las versiones de cada expediente (tanto públicas como privadas, selladas y borradores) en cada carpeta, incluyendo la carpeta de Expedientes Descartados. Cuando se completa la búsqueda, la carpeta de Resultados de la Búsqueda lista copias de los expedientes encontrados con su búsqueda.\n\nPuede buscar palabras en cualquier idioma. Las búsquedas de Martus no distinguen mayúsculas y minúsculas en inglés y otros idiomas con caracteres puramente latinos, así que no importa si una palaba está escrita en mayúsculas o no.\n\nLas búsquedas incluyen los nombres de archivos adjuntos, pero no el contenido de los adjuntos.\n\nPuede buscar tanto sobre campos estándar como sobre campos personalizados.\n\n
 
-#______________________________=---Search tips---\n\nMartus will find any text you enter whether it's a complete word or part of a larger word. For example, if you search for the word prison, you'll see records that include the words prison, imprison, and imprisonment. Likewise, if you search for the word prison, Martus will find records that include attachments with names such as photos-prison.jpg and prisoners-report.doc.\n\nTo search for an exact phrase, type it with quotation marks around the phrase  (e.g.  “Witness Testimony”). If you do not put quotation marks around the phrase, Martus will search for the words individually.\n\nUse the word “#Or#” to broaden your search, or the word “#And#” to narrow it.  You can use the #And# / #Or# dropdowns to specify different fields you want search across (e.g. you want to search for records that have “Last Saved Date” in the last week and have a certain author).  If you want to search on multiple text values within a single record field, you can use #Or# or #And# in-between words in the “Search For...” entry box.  For example, if you search “Any Field” for:\n   prison #Or# jail\nyou'll see a list of records that contain either word anywhere in the record. If you search for:\n   prison #And# assault \nyou'll see a list of records that contain both words. The keyword “#And#” is implied, so if you search for:\n   prison assault \nMartus will find records the same records as if you searched for:\n   prison #And# assault\n\nWhen you use both “#And#” and “#Or#”, your search terms are grouped from the beginning of your list (either across record fields or within a particular field). For example, if you enter:\n   prison #Or# jail #And# trial \nin the “Search For...” entry box, Martus will search for any records that contain either of the words prison or jail, and also contain the word trial. But if you enter:\n   prison #And# jail #Or# trial \nMartus will search for any records that contain both the words prison and jail, or contain the word trial.\n
--bd23-field:FancySearchHelpMsg2=---Consejos de búsqueda---\n\nMartus buscará cualquier texto que introduzca tanto si es una palabra completa como si es parte de una palabra más larga. Por ejemplo, si busca la palabra prisión, verá expedientes que incluyen las palabras prisión, aprisionamiento o prisionero. Probablemente, si busca la palabra prisión, Martus encontrará expedientes que incluyan adjuntos con nombres tales como fotos-prision.jpg e informe-prisioneros.doc.\n\nPara buscar una frase exácta, tecléela con comillas alrededor de la frase (ej. “la declaración del testigo”). Si no pone las comillas alrededor de la frase, Martus buscará las palabras individualmente.\n\nUtilice la palabra “#Or#” para ampliar su búsqueda, o la palabra “#And#” para estrecharla. Puede usar los menús desplegables #And# / #Or# para especificar distintos campos sobre los que quiera buscar (ej. quiere buscar expedientes que tengan “Fecha de última modificación” en la última semana, y tengan determinado autor). Si quiere buscar por múltiples valores de texto dentro de un único campo del expediente, puede utilizar #Or# o #And# entre medias de las palabras en el cuadro de entraa “Buscar...”. Por ejemplo, si busca en “Cualquier campo” por:\n   prisión #Or# cárcel\nverá una lista de expedientes que contienen cada palabra en cualquier parte del expediente. Si busca por:\n   prisión #And# asalto\nverá una lista de expedientes que contienen ambas palabras. La palabra clave “#And#” está implícita, así que si busca por:\n   prisión asalto\nMartus encontrará los mismos expedientes que si buscase por:\n   prisión #And# asalto\n\nCuando utilice tanto “#And#” como “#Or#”, sus términos de búsqueda están agrupados desde el principio de su lista (bien por todos los campos del expediente o dentro de un campo concreto). Por ejemplo, si introduce:\n   prisión #Or# cárcel #And# juicio\nen el cuadro de entrada “Buscar...”, Martus buscará cualquier expediente que contenga tanto las palabras prisión o cárcel, y también contenga la palabra juicio. Pero si introduce:\n   prisión #And# cárcel #Or# juicio\nMartus buscará cualquiera de los expedientes que contenga ambas palabras, prisión y cárcel, o contenga la palabra juicio.\n
+#______________________________=---Search tips---\n\nMartus will find any text you enter whether it's a complete word or part of a larger word. For example, if you search for the word prison, you'll see records that include the words prison, imprison, and imprisonment. Likewise, if you search for the word prison, Martus will find records that include attachments with names such as photos-prison.jpg and prisoners-report.doc.\n\nTo search for an exact phrase, type it with quotation marks around the phrase  (e.g.  "Witness Testimony"). If you do not put quotation marks around the phrase, Martus will search for the words individually.\n\nUse the word "#Or#" to broaden your search, or the word "#And#" to narrow it.  You can use the #And# / #Or# dropdowns to specify different fields you want search across (e.g. you want to search for records that have "Last Saved Date" in the last week and have a certain author).  If you want to search on multiple text values within a single record field, you can use #Or# or #And# in-between words in the "Search For..." entry box.  For example, if you search "Any Field" for:\n   prison #Or# jail\nyou'll see a list of records that contain either word anywhere in the record. If you search for:\n   prison #And# assault \nyou'll see a list of records that contain both words. The keyword "#And#" is implied, so if you search for:\n   prison assault \nMartus will find the same records as if you searched for:\n   prison #And# assault\n\nWhen you use both "#And#" and "#Or#", your search terms are grouped from the beginning of your list (either across record fields or within a particular field). For example, if you enter:\n   prison #Or# jail #And# trial \nin the "Search For..." entry box, Martus will search for any records that contain either of the words prison or jail, and also contain the word trial. But if you enter:\n   prison #And# jail #Or# trial \nMartus will search for any records that contain both the words prison and jail, or contain the word trial.\n
+-52fb-field:FancySearchHelpMsg2=---Consejos de búsqueda---\n\nMartus buscará cualquier texto que introduzca tanto si es una palabra completa como si es parte de una palabra más larga. Por ejemplo, si busca la palabra prisión, verá expedientes que incluyen las palabras prisión, aprisionamiento o prisionero. Probablemente, si busca la palabra prisión, Martus encontrará expedientes que incluyan adjuntos con nombres tales como fotos-prision.jpg e informe-prisioneros.doc.\n\nPara buscar una frase exácta, tecléela con comillas alrededor de la frase (ej. “la declaración del testigo”). Si no pone las comillas alrededor de la frase, Martus buscará las palabras individualmente.\n\nUtilice la palabra “#Or#” para ampliar su búsqueda, o la palabra “#And#” para estrecharla. Puede usar los menús desplegables #And# / #Or# para especificar distintos campos sobre los que quiera buscar (ej. quiere buscar expedientes que tengan “Fecha de última modificación” en la última semana, y tengan determinado autor). Si quiere buscar por múltiples valores de texto dentro de un único campo del expediente, puede utilizar #Or# o #And# entre medias de las palabras en el cuadro de entraa “Buscar...”. Por ejemplo, si busca en “Cualquier campo” por:\n   prisión #Or# cárcel\nverá una lista de expedientes que contienen cada palabra en cualquier parte del expediente. Si busca por:\n   prisión #And# asalto\nverá una lista de expedientes que contienen ambas palabras. La palabra clave “#And#” está implícita, así que si busca por:\n   prisión asalto\nMartus encontrará los mismos expedientes que si buscase por:\n   prisión #And# asalto\n\nCuando utilice tanto “#And#” como “#Or#”, sus términos de búsqueda están agrupados desde el principio de su lista (bien por todos los campos del expediente o dentro de un campo concreto). Por ejemplo, si introduce:\n   prisión #Or# cárcel #And# juicio\nen el cuadro de entrada “Buscar...”, Martus buscará cualquier expediente que contenga tanto las palabras prisión o cárcel, y también contenga la palabra juicio. Pero si introduce:\n   prisión #And# cárcel #Or# juicio\nMartus buscará cualquiera de los expedientes que contenga ambas palabras, prisión y cárcel, o contenga la palabra juicio.\n
 
-#______________________________=You can use the word #Or# or #And#, or you can use the English words “#OrEnglish#” and “#AndEnglish#” to search.\n\nYou need to put spaces before and after any #Or# / #And# keywords you use in your search.\n
+#______________________________=You can use the word #Or# or #And#, or you can use the English words "#OrEnglish#" and "#AndEnglish#" to search.\n\nYou need to put spaces before and after any #Or# / #And# keywords you use in your search.\n
 -1573-field:FancySearchHelpMsg3=Puede usar la palabra #Or# o #And#, o puede usar las palabras en inglés “#OrEnglish#” y “#AndEnglish#” para buscar.\n\nTiene que poner espacios antes y después de cualquier palabra clave #Or# / #And# que utilice en su búsqueda.\n
 
-#______________________________=If you want all of your multi-item list search criteria to be met in a single list item, please check the “Match multi-item list details” checkbox. For example, if you want to search for a specific victim name in a single item in your records created after a certain date, select the checkbox and enter the following fields in the Search screen: “Victim Information: First Name” = x and “Victim Information: Last Name” = y and “Date Created” >= YYYY-Mon-DD. If you do not select the “Match multi-item details” checkbox, Martus will find records created after your specified date where any item has the first name you specified and any other item has the last name specified, but not necessarily in the same item (you could have an item with “First Name” = x and “Last Name” = b, and a different item with “First Name” = a and “Last Name” = y, and Martus will find that record as matching the search because you did not specify that it had to match in a single item)\n\n
--0375-field:FancySearchHelpMsg4=Si quiere que todos sus criterios de búsqueda en una lista de múltiples-elementos se satisfagan simultáneamente en un único elemento de la lista, por favor marque la casilla “Satisfacer detalles en la lista de múltiples-elementos”. Por ejemplo, si quiere buscar por el nombre de una víctima específica en un único elemento en sus expedientes creados después de cierta fecha, seleccione la casilla e introduzca los siguientes campos en la pantalla de búsqueda: “Información de la víctima: Nombre de pila” = x, “Información de la víctima”: Apellidos” = y, y “Fecha de creación” >= AAAA-MM-DD. Si no selecciona la casilla “Satisfacer detalles en la lista de múltiples-elementos”, Martus buscará expedientes creados después de la fecha que especificó, donde cualquier elemento que tenga el nombre de pila que especificó, y cualquier otro elemento que tenga los apellidos que especificó, pero no necesariamente en el mismo elemento (podría tener un elemento con “Nombre de pila” = x, y “Apellidos” = b; y un elemento distinto con “Nombre de pila” = a, y “Apellidos” = y; y Martus encontrará esos expedientes como satisfactorios de la búsqueda porque no especificó que tenía que satisfacerse en un único elemento).\n\n
+#______________________________=If you want all of your multi-item list search criteria to be met in a single list item, please check the "Match multi-item list details" checkbox. For example, if you want to search for a specific victim name in a single item in your records created after a certain date, select the checkbox and enter the following fields in the Search screen: "Victim Information: First Name" = x and "Victim Information: Last Name" = y and "Date Created" >= YYYY-Mon-DD. If you do not select the "Match multi-item list details" checkbox, Martus will find records created after your specified date where any item has the first name you specified and any other item has the last name specified, but not necessarily in the same item (you could have an item with "First Name" = x and "Last Name" = b, and a different item with "First Name" = a and "Last Name" = y, and Martus will find that record as matching the search because you did not specify that it had to match in a single item)\n\n
+-7c24-field:FancySearchHelpMsg4=Si quiere que todos sus criterios de búsqueda en una lista de múltiples-elementos se satisfagan simultáneamente en un único elemento de la lista, por favor marque la casilla “Satisfacer detalles en la lista de múltiples-elementos”. Por ejemplo, si quiere buscar por el nombre de una víctima específica en un único elemento en sus expedientes creados después de cierta fecha, seleccione la casilla e introduzca los siguientes campos en la pantalla de búsqueda: “Información de la víctima: Nombre de pila” = x, “Información de la víctima”: Apellidos” = y, y “Fecha de creación” >= AAAA-MM-DD. Si no selecciona la casilla “Satisfacer detalles en la lista de múltiples-elementos”, Martus buscará expedientes creados después de la fecha que especificó, donde cualquier elemento que tenga el nombre de pila que especificó, y cualquier otro elemento que tenga los apellidos que especificó, pero no necesariamente en el mismo elemento (podría tener un elemento con “Nombre de pila” = x, y “Apellidos” = b; y un elemento distinto con “Nombre de pila” = a, y “Apellidos” = y; y Martus encontrará esos expedientes como satisfactorios de la búsqueda porque no especificó que tenía que satisfacerse en un único elemento).\n\n
 
-#______________________________= Additional Search Notes:\n\n 1. Because Martus searches all details of any multi-item list for your criteria, it may find records where one item detail matches your criteria but other details do not. For example you could have a record with an item that has a location field in it and you have multiple details in the item with locations A, B, and C. If you search for records where location != C (does not equal C), Martus will find that record because there are 2 details in the record item where the location is not C, even though there is one item where the locations IS C.\n\n 2. In this release, if you are searching on a multi-level dropdown, all searches are exact matches, not partial or “starts with” matches. This means that you have to pick the exact level at which you want to be searching. For example, an “Event Location” field that has three levels (Region/City/Neighborhood) will have three entries in the search field list: Event Location: Region, Event Location: City, and Event Location: Neighborhood. So if you want to find any records that have an Event Location anywhere in Region X (regardless of the City), you have to pick the “Event Location: Region” field to search on and pick Region X off the dropdown list choices. If you pick Event Location: City to search on and then pick Region X but leave the City level blank, Martus will only find entries where there was no City data entered (City was blank), as opposed to ANY location with Region X regardless of what data was entered at the City level.\n\n 3. If you do not see your search terms/dates in the final version of the record displayed in the Search Results folder, your criteria may have been matched in an earlier version of the record. You can access previous versions by clicking the “Record Details...” button at the bottom of the record. To search only the most recent versions of records, select Only Search Most Recent Versions of Records in the Search dialog box.\n\n 4. If you have fields in different records or from different customizations that are exactly the same, Martus will combine them in any Search and Report field lists. And while Martus warns you about duplicate labels where you are creating a new record customization, it is possible that over time, you may have records with different customizations that ended up with the same labels (e.g. maybe you changed a text field to a dropdown field but kept the same label). In these cases, Martus will display both fields in the search screen, and try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists. Also, if you have fields with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same. So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion.\n\n 5. You may sometimes see duplicate entries in dropdown list search criteria values in the search screen. If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria dropdown list options are the labels for each list entry, but the codes you defined determine how many entries there will be in the search dropdown list. So if you have different Reusable Choices codes with the same label in different record customizations in your account, the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like “label1” and your search will be on records that have that label, regardless of which code the customization had for the label). And if you have the same Reusable Choices code with different labels in different record customizations in your account, the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like “label1; label2” and your search will be on records that have either of those labels).\n\nFor additional help with searching, see the documentation at martus.org or email martus@benetech.org.
--caa1-field:FancySearchHelpMsg5= Notas adicionales sobre búsqueda:\n \n 1. A causa de que Martus recorre todos los detalles de cada elemento de cualquier lista multi-elemento para compararlo con su criterio, puede encontrar expedientes donde un detalle de un elemento coincida con su criterio de búsqueda, pero otros detalles no. Por ejemplo podría tener un expediente con un elemento que tenga un campo de para la ubicación, y tener múltiples detalles en el el elemento con diferentes ubicaciones A, B y C. Si busca expedientes donde la ubicación != C (distinta de C), Martus encontrará ese expediente porque hay 2 detalles en el expediente donde la ubicación no es C, incluso aunque haya un elemento donde la ubicación es C.\n\n 2. En esta versión, si está buscando en una lista desplegable de múltiples-niveles, todas las búsquedas son coincidencias exactas, no coincidencias parciales ni del tipo “empieza con”. Esto significa que tiene que seleccionar el nivel exacto en el que quiere buscar. Por ejemplo, un campo de “Lugar del Evento” que tenga tres niveles (Región/Ciudad/Distrito) tendrá tres entradas en la lista del campo de búsqueda: Lugar del Evento: Region, Ubicación del Evento: Ciudad, y Lugar del Evento: Distrito. Así que si quiere encontrar cualquier expediente que tenga una Lugar del Evento en algún punto de la Región X (sin importar en qué ciudad), tiene que seleccionar el campo de “Lugar del Evento: Región” sobre el que realizar la búsqueda, y seleccionar la Región X de la lista desplegable de opciones. Si selecciona Lugar del Evento: Ciudad sobre el que buscar, y luego selecciona Región X pero deja vacío el nivel Ciudad, Martus sólo buscara entradas donde no se hubiera introducido Ciudad (la Ciudad esté en blanco), en lugar de buscar CUALQUIER lugar de la Región X sin importar qué dato tuviera introducido en el nivel Ciudad.\n\n 3. Si no ve su términos-de-búsqueda/fechas en última versión del expediente mostrado en la carpeta de Resultados de la Búsqueda, su criterio de búsqueda puede que haya sido satisfecho con una versión anterior del expediente. Puede accerder a versiones previas haciendo clic en el botón “Detalles del expediente...”. Para buscar sólo las versiones más recientes de los expedientes, seleccione 'Buscar sólo las versiones más recientes de los expedientes' en el cuadro de diálogo de Búsqueda.\n\n 4. Si tiene campos en distintos expedientes, o de distintas personalizaciones, que sean exactamente los mismos, Martus los combinará en cualquier lista de Búsqueda y Confección de Informe del campo. Y aunque Martus le advierta sobre letreros duplicados donde esté creando una nueva personalización de expediente, es posible que a lo largo del tiempo puedan surgir expedientes con distintas personalizaciones que terminen con las mismos letreros (ej. quizá una transformación de un campo de texto en uno de lista desplegable pero conservando el mismo letrero). En estos casos, Martus le mostrará ambos campos en la pantalla de búsqueda, e intentará ayudarle a que entienda la diferencia entre ambos campos mostrandole qué tipo de campo y etiqueta tienen en las listas de selección de campo. Además, si tiene campos con la misma etiqueta pero diferentes letreros y/o tipos de campo, Martus podría usar la etiqueta y el tipo de campo para intentar determinar cuándo diferentes campos en realidad son el mismo. Así que le animamos a que para una personalización haga que las etiquetas de campo y letreros estén claramente relacionados entre ellos para evitar cualquier confusión.\n\n 5. A veces verá entradas duplicadas en la lista desplegable de valores de criterios de búsqueda, en la pantalla de búsqueda. Si selecciona un campo de lista desplegable de Opciones Reutilizables sobre el que buscar, los valores que se mostrarán como criterios de búsqueda en la lista desplegable de opciones son los letreros de cada entrada de la lista, pero los códigos que definió ddeterminan cuántas entradas habrá en el lista desplegable de búsqueda. Así que si tiene distintos códigos de Opcones Reutilizables con el mismo letrero en distintas personalizaciones de expedientes en su cuenta, los letreros se mostrarán dos veces en las listas de opciones desplegables de búsqueda (esto es, si utilizó letrero1 tanto para código1 como para código2, verá 2 entradas en la lista de desplegable de búsqueda que constarán como “letrero1 y su búsquedda se realizará sobre expedientes que tenga ese letrero, en lugar de qué código tenga la personalización para ese letrero). Y si tiene los mismos códigos de Opciones Reutilizables con diferentes letreros en distintas personalizaciones de expediente en su  cuenta, la lista desplegable e búsqueda para ese código mostrará ambos valores separados por un punto y coma (es decir, si usó el código1 tanto para el letrero1 como para el letrero2, verá una entrada en la lista desplegable de búsqueda que constará como “letrero1; letrero2” y su búsqueda se realizará sobre los expedientes que tengan cualquiera de los dos letreros).\n\nPara información adicional sobre búsquedas, vea la documentación en martus.org o envíe un correo a martus@benetech.org
+#______________________________= Additional Search Notes:\n\n 1. Because Martus searches all details of any multi-item list for your criteria, it may find records where one item detail matches your criteria but other details do not. For example you could have a record with an item that has a location field in it and you have multiple details in the item with locations A, B, and C. If you search for records where location != C (does not equal C), Martus will find that record because there are 2 details in the record item where the location is not C, even though there is one item where the locations IS C.\n\n 2. In this release, if you are searching on a multi-level dropdown, all searches are exact matches, not partial or "starts with" matches. This means that you have to pick the exact level at which you want to be searching. For example, an "Event Location" field that has three levels (Region/City/Neighborhood) will have three entries in the search field list: Event Location: Region, Event Location: City, and Event Location: Neighborhood. So if you want to find any records that have an Event Location anywhere in Region X (regardless of the City), you have to pick the "Event Location: Region" field to search on and pick Region X off the dropdown list choices. If you pick Event Location: City to search on and then pick Region X but leave the City level blank, Martus will only find entries where there was no City data entered (City was blank), as opposed to ANY location with Region X regardless of what data was entered at the City level.\n\n 3. If you do not see your search terms/dates in the final version of the record displayed in the Search Results folder, your criteria may have been matched in an earlier version of the record. You can access previous versions by clicking the "Record Details" button at the bottom of the record. To search only the most recent versions of records, select "Only search most recent version of records" in the Search dialog box.\n\n 4. If you have fields in different records or from different customizations that are exactly the same, Martus will combine them in any Search and Report field lists. And while Martus warns you about duplicate labels when you are creating a new record customization, it is possible that over time, you may have records with different customizations that ended up with the same labels (e.g. maybe you changed a text field to a dropdown field but kept the same label). In these cases, Martus will display both fields in the search screen, and try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists. Also, if you have fields with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same. So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion.\n\n 5. You may sometimes see duplicate entries in dropdown list search criteria values in the search screen. If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria dropdown list options are the labels for each list entry, but the codes you defined determine how many entries there will be in the search dropdown list. So if you have different Reusable Choices codes with the same label in different record customizations in your account, the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like "label1" and your search will be on records that have that label, regardless of which code the customization had for the label). And if you have the same Reusable Choices code with different labels in different record customizations in your account, the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like "label1; label2" and your search will be on records that have either of those labels).\n\nFor additional help with searching, see the documentation at martus.org or email martus@benetech.org.
+-3d76-field:FancySearchHelpMsg5= Notas adicionales sobre búsqueda:\n \n 1. A causa de que Martus recorre todos los detalles de cada elemento de cualquier lista multi-elemento para compararlo con su criterio, puede encontrar expedientes donde un detalle de un elemento coincida con su criterio de búsqueda, pero otros detalles no. Por ejemplo podría tener un expediente con un elemento que tenga un campo de para la ubicación, y tener múltiples detalles en el el elemento con diferentes ubicaciones A, B y C. Si busca expedientes donde la ubicación != C (distinta de C), Martus encontrará ese expediente porque hay 2 detalles en el expediente donde la ubicación no es C, incluso aunque haya un elemento donde la ubicación es C.\n\n 2. En esta versión, si está buscando en una lista desplegable de múltiples-niveles, todas las búsquedas son coincidencias exactas, no coincidencias parciales ni del tipo “empieza con”. Esto significa que tiene que seleccionar el nivel exacto en el que quiere buscar. Por ejemplo, un campo de “Lugar del Evento” que tenga tres niveles (Región/Ciudad/Distrito) tendrá tres entradas en la lista del campo de búsqueda: Lugar del Evento: Region, Ubicación del Evento: Ciudad, y Lugar del Evento: Distrito. Así que si quiere encontrar cualquier expediente que tenga una Lugar del Evento en algún punto de la Región X (sin importar en qué ciudad), tiene que seleccionar el campo de “Lugar del Evento: Región” sobre el que realizar la búsqueda, y seleccionar la Región X de la lista desplegable de opciones. Si selecciona Lugar del Evento: Ciudad sobre el que buscar, y luego selecciona Región X pero deja vacío el nivel Ciudad, Martus sólo buscara entradas donde no se hubiera introducido Ciudad (la Ciudad esté en blanco), en lugar de buscar CUALQUIER lugar de la Región X sin importar qué dato tuviera introducido en el nivel Ciudad.\n\n 3. Si no ve su términos-de-búsqueda/fechas en última versión del expediente mostrado en la carpeta de Resultados de la Búsqueda, su criterio de búsqueda puede que haya sido satisfecho con una versión anterior del expediente. Puede accerder a versiones previas haciendo clic en el botón “Detalles del expediente...”. Para buscar sólo las versiones más recientes de los expedientes, seleccione 'Buscar sólo las versiones más recientes de los expedientes' en el cuadro de diálogo de Búsqueda.\n\n 4. Si tiene campos en distintos expedientes, o de distintas personalizaciones, que sean exactamente los mismos, Martus los combinará en cualquier lista de Búsqueda y Confección de Informe del campo. Y aunque Martus le advierta sobre letreros duplicados donde esté creando una nueva personalización de expediente, es posible que a lo largo del tiempo puedan surgir expedientes con distintas personalizaciones que terminen con las mismos letreros (ej. quizá una transformación de un campo de texto en uno de lista desplegable pero conservando el mismo letrero). En estos casos, Martus le mostrará ambos campos en la pantalla de búsqueda, e intentará ayudarle a que entienda la diferencia entre ambos campos mostrandole qué tipo de campo y etiqueta tienen en las listas de selección de campo. Además, si tiene campos con la misma etiqueta pero diferentes letreros y/o tipos de campo, Martus podría usar la etiqueta y el tipo de campo para intentar determinar cuándo diferentes campos en realidad son el mismo. Así que le animamos a que para una personalización haga que las etiquetas de campo y letreros estén claramente relacionados entre ellos para evitar cualquier confusión.\n\n 5. A veces verá entradas duplicadas en la lista desplegable de valores de criterios de búsqueda, en la pantalla de búsqueda. Si selecciona un campo de lista desplegable de Opciones Reutilizables sobre el que buscar, los valores que se mostrarán como criterios de búsqueda en la lista desplegable de opciones son los letreros de cada entrada de la lista, pero los códigos que definió ddeterminan cuántas entradas habrá en el lista desplegable de búsqueda. Así que si tiene distintos códigos de Opcones Reutilizables con el mismo letrero en distintas personalizaciones de expedientes en su cuenta, los letreros se mostrarán dos veces en las listas de opciones desplegables de búsqueda (esto es, si utilizó letrero1 tanto para código1 como para código2, verá 2 entradas en la lista de desplegable de búsqueda que constarán como “letrero1 y su búsquedda se realizará sobre expedientes que tenga ese letrero, en lugar de qué código tenga la personalización para ese letrero). Y si tiene los mismos códigos de Opciones Reutilizables con diferentes letreros en distintas personalizaciones de expediente en su  cuenta, la lista desplegable e búsqueda para ese código mostrará ambos valores separados por un punto y coma (es decir, si usó el código1 tanto para el letrero1 como para el letrero2, verá una entrada en la lista desplegable de búsqueda que constará como “letrero1; letrero2” y su búsqueda se realizará sobre los expedientes que tengan cualquiera de los dos letreros).\n\nPara información adicional sobre búsquedas, vea la documentación en martus.org o envíe un correo a martus@benetech.org>
 
 #___________________________=Yes/No
 -9f62-field:FieldTypeBOOLEAN=Sí/No
@@ -1105,8 +1207,8 @@
 #_____________________________=Please wait while we find this account on the server.
 -6ec9-field:FindAccountByToken=Por favor espere mientras buscamos esta cuenta en el servidor.
 
-#______________________________=Name:
--71dd-field:FolderCreateNewName=Nombre
+#______________________________=Name 
+-7aa3-field:FolderCreateNewName=Nombre
 
 #__________________________=Cases
 -eccd-field:FolderNameCases=Casos
@@ -1117,8 +1219,8 @@
 #_____________________________=Projects
 -53e8-field:FolderNameProjects=Proyectos
 
-#_______________________=New Name:
--a636-field:FolderRename=Nuevo nombre
+#_______________________=New Name 
+-696b-field:FolderRename=Nuevo nombre
 
 #_______________________________=Custom Name
 -3cb5-field:FolerNameUserDefined=Nombre personalizado
@@ -1132,8 +1234,8 @@
 #____________________=You can switch forms later
 -a78d-field:FormsHint=Puede cambiar de plantillas más tarde
 
-#_______________=From:
--c4d6-field:From=Desde
+#_______________=From 
+-6e9b-field:From=Desde
 
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your Username.  Each file will be generated with this name and its number sequence.
 -4753-field:GetShareFileNameDescription=Este nombre de archivo debe ser único e identificable para usted, pero le recomendamos que no use su nombre de usuario. Cada archivo será generado con este nombre y su secuencia numérica.
@@ -1195,8 +1297,8 @@
 #_________________________=HTML (*.html, *.htm)
 -842b-field:HtmlFileFilter=HTML (*.html, *.htm)
 
-#_________________=Import:
--5098-field:Import=Importar
+#_________________=Import 
+-58d5-field:Import=Importar
 
 #_________________________________________=Import records into which Folder?
 -c09e-field:ImportBulletinsIntoWhichFolder=¿En qué carpeta se han de importar los expedientes?
@@ -1225,8 +1327,8 @@
 #__________________________________=The current version of Martus cannot run with Java #HighVersion#. Please use Java #ExpectedVersion# or lower to run Martus.
 -7927-field:IncompatibleJavaVersion=La versión actual de Martus no puede ejecutarse con Java #HighVersion#. Por favor use Java #ExpectedVersion# o inferior para ejecutar Martus.
 
-#_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
--a747-field:IncompatibleMtfVersion=La versión de esta traducción no es compatible con esta versión del programa Martus. Le recomendamos que no siga usando esta versión de traducción y vaya al sitio web (http://www.martus.org/downloads) para descargar la versión apropiada.
+#_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (https://martus.org) for the appropriate version.
+-0178-field:IncompatibleMtfVersion=La versión de esta traducción no es compatible con esta versión del programa Martus. Le recomendamos que no siga usando esta versión de traducción y vaya al sitio web (http://www.martus.org/downloads) para descargar la versión apropiada.
 
 #________________________________________=Martus Software Version: #ProgramVersionNumber#
 -fcd7-field:IncompatibleMtfVersionProgram=Versión del programa Martus: #ProgramVersionNumber#
@@ -1267,14 +1369,14 @@
 #____________________=Local Only
 -05ed-field:LocalOnly=Sólo local
 
-#___________________=Location:
--1bf3-field:Location=Ubicación
+#___________________=Location 
+-f660-field:Location=Ubicación
 
 #________________________=Martus Record Archive (*.mba)
 -8d99-field:MBAFileFilter=Archivo de expediente de Martus (*.mba)
 
-#__________________________=Label:
--f70a-field:MainFolderLabel=Letrero
+#__________________________=Label 
+-f02f-field:MainFolderLabel=Letrero
 
 #_________________________=Manage Contacts
 -88c0-field:ManageContacts=Administrar contactos
@@ -1284,9 +1386,6 @@
 
 #__________________________________=Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information.
 -3e7b-field:ManageContactsOverview2=Asegúrese de comunicar con seguridad las credenciales de acceso y códigos públicos usando un método como el correo cifrado, el chat con cifrado off-the-record (OTR), el cara a cara, u otro canal de comunicación donde nadie pueda interceptar su información.
-
-#____________________________=Manage Contacts
--88c0-field:ManageContactsTab=Administrar contactos
 
 #_______________________________________=Martus Report Format (.mrf)
 -62cd-field:MartusReportFormatFileFilter=Formato de informe de Martus (.mrf)
@@ -1315,7 +1414,7 @@
 #______________________________=[no title]
 -6e34-field:NoFormTemplateTitle=[sin título]
 
-#__________________________=No Contact accounts selected for this record.
+#__________________________=No Contact accounts selected for this bulletin.
 -0255-field:NoHQsConfigured=No hay cuentas de contacto seleccionadas para este expediente.
 
 #___________________________________________=Server Not Available
@@ -1336,6 +1435,9 @@
 #_____________________________________=The author has not given you permission to view this record.
 -7d03-field:NotAuthorizedToViewPrivate=El autor no le ha dado permiso para ver este expediente.
 
+#_______________________=(n/a)
+-4448-field:NotAvailable=(n/a)
+
 #____________________=(none)
 -3c6b-field:NotSorted=(ninguno)
 
@@ -1351,14 +1453,14 @@
 #_______________________________=Topics:
 -3a8c-field:OnlineHelpTOCMessage=Asuntos
 
-#_______________________=Organization:
--6da9-field:Organization=Organización
+#_______________________=Organization 
+-3714-field:Organization=Organización
 
 #_______________________________=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.
 -b511-field:OrganizeReportFields=Agregue los campos que desea que aparezcan en su informe, y luego organícelos en el orden en que quiere que sean impresos.
 
-#___________________=Password:
--be81-field:Password=Contraseña
+#___________________=Password 
+-0aa0-field:Password=Contraseña
 
 #_______________________________=create a password
 -b61b-field:PasswordInstructions=cree una contraseña
@@ -1405,11 +1507,11 @@
 #_______________________________=You can print the record contents to a printer or to a file.
 -9b30-field:PrintToPrinterOrDisk=Puede imprimir los contenidos del expediente a una impresiora o a un archivo.
 
-#_____________________=Public Code:
--63bc-field:PublicCode=Código público
+#_____________________=Public Code 
+-dea4-field:PublicCode=Código público
 
-#______________________________=Public Code:
--63bc-field:PublicCodeWithColon=Código público
+#______________________________=Public Code 
+-dea4-field:PublicCodeWithColon=Código público
 
 #_________________________________=Public Information Files (*.mpi)
 -bd0c-field:PublicInformationFiles=Archivos de información pública (*.mpi)
@@ -1447,8 +1549,8 @@
 #_________________________=Record Settings
 -9c80-field:RecordSettings=Configuración del expediente
 
-#______________________=Title:
--7698-field:RecordTitle=Título
+#______________________=Title 
+-5cb1-field:RecordTitle=Título
 
 #_________________________=Restore your existing account from a backup file.
 -c2a2-field:RecoverAccount=Restaurar su cuenta existente desde una copia de seguridad.
@@ -1465,8 +1567,8 @@
 #_________________________________________________________=All of their data will be removed as well!
 -8e74-field:RemoveMartusFromSystemMultipleAccountsWarning2=¡La información de todas estas cuentas también va a ser eliminada!
 
-#________________________________________=WARNING!
--83d3-field:RemoveMartusFromSystemWarning=¡ADVERTENCIA!
+#________________________________________=Warning!
+-c94e-field:RemoveMartusFromSystemWarning=¡Advertencia!
 
 #________________________________________________=Delete the Martus directory and all of its contents.
 -9a43-field:RemoveMartusWillDeleteMartusDirectory=Elimina la carpeta de Martus y todo su contenido.
@@ -1495,7 +1597,7 @@
 #__________________________________=Total Records:
 -c0e4-field:ReportNumberOfBulletins=Expedientes totales:
 
-#_______________________________=Progress:
+#_______________________________=Progress: 
 -92b6-field:ReportSearchProgress=Progreso:
 
 #______________________________=Print Summary Counts Only
@@ -1546,8 +1648,8 @@
 #_____________________________=Click '#SearchHelpButton#' to get additional information on searching.
 -eb4b-field:SearchBulletinHelp=Pulse '#SearchHelpButton#' para obtener información adicional sobre búsquedas.
 
-#______________________________=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNOTE: Records that appear only in the Trash will not be searched.
--9127-field:SearchBulletinRules=Para cada fila, seleccione un campo a buscar (o escoja satisfacerla con cualquier campo), seleccione qué clase de comparación realizar, y luego introduzca un valor a buscar.\n\nNOTA: No se buscará en los expedientes que sólo aparezcan en la Papelera.
+#______________________________=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNote: Records that appear only in the Trash will not be searched.
+-c992-field:SearchBulletinRules=Para cada fila, seleccione un campo a buscar (o escoja satisfacerla con cualquier campo), seleccione qué clase de comparación realizar, y luego introduzca un valor a buscar.\n\nNota: No se buscará en los expedientes que sólo aparezcan en la Papelera.
 
 #______________________=#NumberBulletinsFound# records matched the search, and have been added to the Search Results folder.
 -8e78-field:SearchFound=#NumberBulletinsFound# expedientes satisficieron la búsqueda, y se han añadido a la carpeta de resultados de búsqueda.
@@ -1564,11 +1666,11 @@
 #___________________________=contains
 -caeb-field:SearchOpContains=contiene
 
-#_________________________=Progress:
+#_________________________=Progress: 
 -92b6-field:SearchProgress=Progreso:
 
-#_________________________=Select Language:
--bc5e-field:SelectLanguage=Seleccione idioma
+#_________________________=Select Language 
+-a532-field:SelectLanguage=Seleccione idioma
 
 #_______________________________=You will be allowed to upload records to this server.
 -6574-field:ServerAcceptsUploads=Se le permitirá subir expedientes a este servidor.
@@ -1582,17 +1684,17 @@
 #________________________________=You will not be allowed to upload records to this server.
 -4d75-field:ServerDeclinesUploads=No se le permitirá subir expedientes a este servidor.
 
-#___________________=Server IP:
--c31c-field:ServerIP=Dirección IP
+#___________________=IP Address
+-11f5-field:ServerIP=Dirección IP
 
-#_______________________________=Magic Word:
--7ba0-field:ServerMagicWordEntry=Palabra mágica
+#_______________________________=Magic Word 
+-3998-field:ServerMagicWordEntry=Palabra mágica
 
 #__________________________________________=enter your server's magic word
 -0481-field:ServerMagicWordEntryInformation=introduzca la palabra mágica de su servidor
 
-#__________________________=IP Address:
--4e30-field:ServerNameEntry=Dirección IP
+#__________________________=IP Address 
+-64b5-field:ServerNameEntry=Dirección IP
 
 #_____________________________________=enter your server's IP address
 -4cb2-field:ServerNameEntryInformation=introduzca la dirección IP de su servidor
@@ -1609,8 +1711,8 @@
 #____________________________=Server Preferences
 -6e14-field:ServerPreferences=Preferencias de servidor
 
-#________________________________=Server Public Code:
--f3d1-field:ServerPublicCodeEntry=Código público del servidor
+#________________________________=Server Public Code 
+-e444-field:ServerPublicCodeEntry=Código público del servidor
 
 #___________________________________________=enter your server's public code
 -b02c-field:ServerPublicCodeEntryInformation=introduzca el código público de su servidor
@@ -1645,8 +1747,8 @@
 #__________________________________________=Single, Encrypted File #backupFileName created (this still requires remembering your username and password to restore your account).
 -4689-field:SingleEncryptedKeyBackupCreated=Se creó un único archivo cifrado #backupFileName (de esta forma todavía se requiere que recuerde su nombre de usuario y contraseña para restaurar su cuenta).
 
-#___________________________________=NOTE: Records authored by other accounts cannot be changed using this command, so they are not included in the list above.
--da36-field:SkippingBulletinsNotOurs=NOTA: Los expedientes elaborados por otras cuentas no se pueden cambiar usando este comando, así que no están incluidos en la lista de arriba.
+#___________________________________=Note: Records authored by other accounts cannot be changed using this command, so they are not included in the list above.
+-917b-field:SkippingBulletinsNotOurs=Nota: Los expedientes elaborados por otras cuentas no se pueden cambiar usando este comando, así que no están incluidos en la lista de arriba.
 
 #_______________________________________________=The following words have been added to the user dictionary. \nYou can delete or edit them here, or you can add more words. \nEach word must be on a line by itself.
 -ad45-field:SpellCheckUserDictionaryInstructions=Las siguientes palabras han sido agregadas al diccionario de usuario. \nAquí puede eliminarlas o editarlas, o puede añadir más palabras. \nCada palabra tiene que estar en su propia línea.
@@ -1744,14 +1846,14 @@
 #______________________________=Label Manager
 -1fed-field:TitleCaseManagement=Administrador de letreros
 
-#_____________=To:
--7e7f-field:To=A
+#_____________=To 
+-19e9-field:To=A
 
 #____________________________=Not Available
 -4028-field:TokenNotAvailable=No disponible
 
-#______________=Tor:
--8c44-field:Tor=Tor
+#______________=Tor 
+-5f03-field:Tor=Tor
 
 #______________________=Your Tor Settings
 -4656-field:TorSettings=Su configuración de Tor
@@ -1780,13 +1882,13 @@
 #__________________=(unknown)
 -d4bd-field:Unknown=(desconocido)
 
-#___________________________=WARNING: This field requires a newer release of Martus to be viewed
--06ce-field:UnknownFieldType=ADVERTENCIA: Para ver la información de este campo necesita una versión más reciente de Martus
+#___________________________=Warning: This field requires a newer release of Martus to be viewed
+-61ed-field:UnknownFieldType=Advertencia: Para ver la información de este campo necesita una versión más reciente de Martus
 
 #___________________________=Untitled Record
 -51e7-field:UntitledBulletin=Expediente sin título
 
-#_________________________________=The Martus account that created this record has not been verified, so there is an increased chance that this attachment could be dangerous. We recommend that you verify this Contact's account before you #action# this attachment (See Tools > Manage Contacts). Opening this attachment could put your computer at risk.
+#_________________________________=The Martus account that created this record has not been verified, so there is an increased chance that this attachment could be dangerous. We recommend that you verify this Contact's account before you #action# this attachment (See Tools > Manage Contacts). Opening this attachment could put your computer at risk. 
 -d66f-field:UnverifiedFDAttachment=La cuenta de Martus que creó este expediente no ha sido verificada, así que hay una mayor probabilidad de que este adjunto sea peligroso. Recomendamos que verifique esta cuenta de contacto antes de #action# este adjunto (vea Herramientas > Administrar contactos). Abrir este adjunto podría poner en riesgo su equipo.
 
 #_________________=Upload
@@ -1825,17 +1927,14 @@
 #_______________________=Username Tips:
 -c1b3-field:UserNameTips=Consejos para el nombre de usuario:
 
-#______________________________=Username and Password
--d205-field:UsernameAndPassword=Nombre de usuario y contraseña
-
 #__________________________________=Verify your contact public code
 -1e3f-field:VerifyContactPublicCode=Verifique el código público de su contacto
 
-#_____________________________________=Public code:
--0ae0-field:VerifyContactPublicCodeNew=Código público
+#_____________________________________=Public code 
+-b7ff-field:VerifyContactPublicCodeNew=Código público
 
-#_____________________________________=Public code (for Martus 4.4 and below):
--cfad-field:VerifyContactPublicCodeOld=Código público (para Martus 4.4 e inferior)
+#_____________________________________=Public code (for Martus 4.4 and below) 
+-10e0-field:VerifyContactPublicCodeOld=Código público (para Martus 4.4 e inferior)
 
 #___________________________=A public code is a unique identifier that can help you verify that a contact that you are adding is who they say they are.\n\nYou can visually verify the public code below. If you don’t know your contact’s public code, you can always perform the verification later.\n\nVerification is an important step that only needs to be performed once.
 -5ce7-field:VerifyPublicCode=Un código público es un identificador único que puede ayudarle a verificar que un contacto que usted esté añadiendo es quien dice ser.\n\nPuede verificar visualmente el código público debajo. Si no conoce el código público de su contacto, siempre puede realizar la verificación más tarde.\n\nLa verificación es un paso importante que sólo precisa ser realizado una vez.
@@ -1843,8 +1942,8 @@
 #____________________________________=Please visually verify either public code below to ensure you are adding the person you think you are adding.
 -1162-field:VerifyPublicCodeNewAndOld=Por favor verifique visualmente cada código público debajo para asegurarse de que efectivamente está añadiendo a la persona que cree que estar añadiendo.
 
-#________________________=Version #:
--4e0d-field:VersionNumber=Versión #:
+#________________________=Version # 
+-3370-field:VersionNumber=Versión #
 
 #_______________________________=View
 -69bd-field:ViewAttachmentAction=Ver
@@ -1852,7 +1951,7 @@
 #___________________________________=Back Space
 -7ae6-field:VirtualKeyboardBackSpace=Retroceso/Borrar
 
-#______________________________=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\\/?|;:~
+#______________________________=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\/?|;:~
 -25df-field:VirtualKeyboardKeys=AÁBCDEÉFGHIÍJKLMNÑOÓPQRSTUÚÜVWXYZaábcdeéfghiíjklmnñoópqrstuúüvwxyz1234567890-+=¡!@#$%^&*()_,.[]{}<>\\/¿?|;:~
 
 #_______________________________=Space
@@ -1894,8 +1993,8 @@
 #_________________________________=Your information will be kept safe, with a password protected, encrypted account.
 -f3b9-field:WizardStep1Information=Su información será conservada de forma segura mediante una cuenta cifrada, protegida por contraseña.
 
-#_________________________________=Establish your system settings for the use of Tor (a tool to help hide network activity) and dates.
--3bb3-field:WizardStep2Information=Establece la configuración de datos y de Tor (una herramienta de seguridad para ayudar a ocultar la actividad de red).
+#_________________________________=Establish your calendar and Tor (a tool to help hide network activity) settings.
+-fd9f-field:WizardStep2Information=Establece la configuración de datos y de Tor (una herramienta de seguridad para ayudar a ocultar la actividad de red).
 
 #______________________=Server Setup
 -3db1-field:WizardStep3=Configuración de servidor
@@ -1906,8 +2005,8 @@
 #______________________=Contacts
 -b0dd-field:WizardStep4=Contactos
 
-#_________________________________=Send and receive information from other Martus users of your choice.
--d76d-field:WizardStep4Information=Envíe y reciba información desde otros usuarios de Martus de su elección.
+#_________________________________=Send and receive information to/from other Martus users of your choice.
+-4eb0-field:WizardStep4Information=Envíe y reciba información desde otros usuarios de Martus de su elección.
 
 #______________________=Import Forms
 -cf9d-field:WizardStep5=Importar plantillas
@@ -1924,13 +2023,16 @@
 #_________________________________=Make a copy of your account's encryption key to ensure continued access to your account.
 -bb2f-field:WizardStep6Information=Realiza una copia de seguridad del par de claves de cifrado de su cuenta para asegurar la continuidad del acceso a su cuenta.
 
+#________________________=XML Files (*.xml)
+-09f1-field:XmlFileFilter=Archivos de XML (*.xml)
+
 #__________________________=Unknown
 -bc78-field:YearUnspecified=Desconocido
 
-#________________________________= 
+#________________________________=
 -da39-field:_SectionBottomSection= 
 
-#_____________________________= 
+#_____________________________=
 -da39-field:_SectionTopSection= 
 
 #_________________________________________=Header
@@ -1954,7 +2056,7 @@
 #__________________________=Martus Software is developed by Benetech in partnership with the Information Program of the Open Society Institute, Aspiration, and the John D. and Catherine T. MacArthur Foundation.
 -3033-field:aboutDlgCredits=El software Martus es desarrollado por Benetech en conjunto con el Programa de Información del Open Society Foundations, Aspiration, y la John D. and Catherine T. MacArthur Foundation.
 
-#_____________________________=Martus comes with ABSOLUTELY NO WARRANTY, and is made available under license terms in the file named license.txt in the Martus directory. This is free software, and you are welcome to redistribute it under certain conditions discussed in license.txt.
+#_____________________________=Martus comes with ABSOLUTELY NO WARRANTY, and is made available under license terms in the file named license.txt in the Martus directory. This is free software, and you are welcome to redistribute it under certain conditions discussed in license.txt. 
 -8b41-field:aboutDlgDisclaimer=Martus no tiene NINGUNA GARANTÍA, y se distribuye bajo los términos descritos en el archivo license.txt en la carpeta del programa. Este programa es software libre, y tiene permiso para redistribuirlo bajo las condiciones mencionadas en el archivo license.txt .
 
 #______________________________=Language Pack Date
@@ -1969,8 +2071,8 @@
 #______________________________=software version
 -f2cc-field:aboutDlgVersionInfo=Versión del programa
 
-#__________________=Mailing Address:
--22f5-field:address=Dirección de correo para contactarle
+#__________________=Mailing Address 
+-5a7a-field:address=Dirección de correo 
 
 #_____________________=Keep ALL Information Private
 -9b5e-field:allprivate=Mantener privada TODA la información
@@ -2137,10 +2239,10 @@
 #_____________________________________________=The existing file will be deleted and replaced with the new information.
 -0863-field:confirmOverWriteExistingFileeffect=El archivo adjunto elegido reemplazará al archivo existente borrándolo.
 
-#__________________________________________=One or more records will not be printed because all the information is private, and you marked the “Print only public information” box.
+#__________________________________________=One or more records will not be printed because all the information is private, and you marked the "Print only public information" box.
 -74e9-field:confirmPrintAllPrivateDatacause=Uno o más expedientes no se imprimirán porque toda su información es privada, y usted marcó la casilla “Imprimir sólo información pública”.
 
-#___________________________________________=Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the “Include private information” box. Answering '#PrintContinue#' will print only the public information in the records and skip those records which are all private.
+#___________________________________________=Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the "Include private information" box. Answering '#PrintContinue#' will print only the public information in the records and skip those records which are all private.
 -4a27-field:confirmPrintAllPrivateDataeffect=Responder '#PrintBack#' le permitirá volver al cuadro de diálogo previo, de forma que pueda marcar la casilla “Incluir información privada”. Respondiendo '#PrintContinue#' sólo imprimirá la información pública de los expedientes, y omitirá aquellos expedientes que sean completamente privados.
 
 #_______________________________________________=Please Note: There are records that have not been sent to a server. If you continue these records will be lost.
@@ -2203,7 +2305,13 @@
 #______________________________________________=Benetech recommends that you do not use this server until a compliance statement is made available for you to read.  Continuing will select this non-compliant server anyway.
 -8731-field:confirmServerComplianceFailedeffect=Benetech le recomienda que no utilice este servidor hasta que una declaración de cumplimiento sea publicada para su lectura. Aunque si lo desea, puede ignorar esta advertencia y continuar con este servidor.
 
-#__________________________________________________________=The record entitled “#Title#” already exists in this system.  Do you wish to delete the old record and replace it with this record?
+#___________________________________________=Tor is enabled, but requesting a map will bypass it.
+-3cf3-field:confirmShowOnMapBypassesTorcause=Tor está activado, pero solicitando un mapa lo circunvalará.
+
+#____________________________________________=If you continue, anyone monitoring you could see your map request.
+-70bd-field:confirmShowOnMapBypassesToreffect=Si continúa, cualquiera que le esté monitoreando podría ver su solicitud de mapa.
+
+#__________________________________________________________=The record entitled "#Title#" already exists in this system.  Do you wish to delete the old record and replace it with this record?
 -d374-field:confirmUnAuthoredBulletinDeleteBeforePastecause=El expediente titulado “#Title#” ya existe en este sistema. ¿Desea borrar el expediente antiguo y reemplazarlo con este expediente?
 
 #___________________________________________________________=Answering Yes will replace the old record with this record.  Answering on No will leave the original record and skip this file.
@@ -2272,10 +2380,10 @@
 #_____________________________________________=A multiple disk backup of your key has yet to be created.
 -b185-field:confirmbackupIncompleteShareNeeded=Aún no ha creado una copia de seguridad de su par de claves en múltiples partes/soportes extraíbles.
 
-#___________________________________=You have chosen to permanently delete a folder.
+#___________________________________=You have chosen to permanently delete a folder.  
 -76fa-field:confirmdeletefoldercause=Ha escogido eliminar permanentemente la carpeta.
 
-#____________________________________=Any records in the folder will be moved to Discarded Records.
+#____________________________________=Any records in the folder will be moved to Discarded Records.  
 -fccf-field:confirmdeletefoldereffect=Cualquier expediente en la carpeta se moverá a Expedientes Descartados.
 
 #______________________________________________=If you lose your key, and you do not have a copy, you will not be able to open any of your records.
@@ -2284,19 +2392,19 @@
 #_______________________________________________=Selecting Yes will guide you through the backup procedure, selecting No will skip this important step.
 -8571-field:confirmgeneralBackupKeyPairMsgeffect=Pulsando Sí iniciará el procedimiento asistido de creación de copias de seguridad. Pulsando No eludirá este importante paso.
 
-#_________________________________________=The text “#SearchString#” was not found.  Do you wish to search from the beginning?
+#_________________________________________=The text "#SearchString#" was not found.  Do you wish to search from the beginning?
 -25f6-field:confirmhelpStringNotFoundcause=No se encontró el texto “#SearchString#”. ¿Desea buscar desde el principio?
 
-#__________________________________________=Clicking on Yes will search for “#SearchString#” from the beginning.
+#__________________________________________=Clicking on Yes will search for "#SearchString#" from the beginning.
 -0981-field:confirmhelpStringNotFoundeffect=Pulsando Sí buscará “#SearchString#” desde el principio.
 
 #__________________________=Are you sure you want to continue?
--8de6-field:confirmquestion=¿Está segurod de que quiere continuar?
+-8de6-field:confirmquestion=¿Está seguro de que quiere continuar?
 
-#_______________________________=You have chosen to retrieve all records from the Martus server.
+#_______________________________=You have chosen to retrieve all records from the Martus server.  
 -ca39-field:confirmretrievecause=Ha escogido descargar todos los expedientes del servidor de Martus.
 
-#________________________________=This will restore all the discarded records that were sent to the server.
+#________________________________=This will restore all the discarded records that were sent to the server.  
 -dc79-field:confirmretrieveeffect=Esto restaurará todos los expedientes descartgados que fueron enviados al servidor.
 
 #___________________________=You have chosen to save a completed record.
@@ -2311,8 +2419,8 @@
 #____________________________=New Folder
 -d8ed-field:defaultFolderName=Nueva carpeta
 
-#________________=Email Address:
--852c-field:email=Dirección de correo electrónico
+#________________=Email Address 
+-32d0-field:email=Dirección de correo electrónico
 
 #____________________=Date Created
 -dda2-field:entrydate=Fecha de creación
@@ -2365,17 +2473,17 @@
 #_____________________________________=Select one or more #FolderName#, to move selected items to.
 -7aeb-field:moveToCaseProjectIncidents=Seleccione uno o más #FolderName#, al que mover los elementos seleccionados.
 
-#_____________________________________________________=Must select at least one record that was created by this account
--8ac6-field:notifyAddPermissionsZeroBulletinsOurscause=Tiene que seleccionar al menos un expedienteque fuera creado por esta cuenta.
+#_____________________________________________________=You must select at least one record that was created by this account
+-ae15-field:notifyAddPermissionsZeroBulletinsOurscause=Tiene que seleccionar al menos un expediente que fuera creado por esta cuenta.
 
-#____________________________________________________________=Must select at least one contact's account
--9f77-field:notifyAddPermissionsZeroHeadquartersSelectedcause=Tiene que seleccionar al menos una cuenta de contacto
+#____________________________________________________________=You must select at least one contact's account
+-2393-field:notifyAddPermissionsZeroHeadquartersSelectedcause=Tiene que seleccionar al menos una cuenta de contacto
 
 #________________________________________________=A connection to the server was not made. This could be because the server is not available, you have entered an incorrect IP, the server is blocked, or your Internet connection is down.
 -4028-field:notifyAdvanceServerNotRespondingcause=No se hizo ninguna conexión al servidor. Esto podría suceder a causa de que el servidor no esté disponible, que haya introducido una IP incorrecta, que el servidor esté bloqueado, o que la conexión a Internet esté caída.
 
-#____________________________________=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.
--614e-field:notifyAlreadyRunningcause=Ya hay una copia de Martus en ejecución en esta computadora. Tiene que cerrar esa copia antes de iniciar una copia nueva.
+#____________________________________=An instance of Martus is already running on this computer. You must close that copy before starting a new copy.
+-dab6-field:notifyAlreadyRunningcause=Ya hay una copia de Martus en ejecución en esta computadora. Tiene que cerrar esa copia antes de iniciar una copia nueva.
 
 #_______________________________________________=You currently are viewing this version of the record.
 -0221-field:notifyAlreadyViewingThisVersioncause=Se encuentra viendo esta versión del expediente.
@@ -2413,8 +2521,8 @@
 #____________________________________________=Martus needs to keep a list of all the fields in all the records in your system.\n\nThis list does not exist, so it will be created now. This may take a few seconds per record on a slower computer.
 -161a-field:notifyCreatingFieldSpecCachecause=Martus necesita mantener una lista de todos los campos en todos los expediente de su sistema.\n\nEsta lista no existe, así que se creará ahora. Esto puede llevar unos pocos segundos por expediente en una computadora lenta.
 
-#_____________________________________________________=An error occurred during upload, and the damaged record:'#BulletinTitle#' has been moved to the Damaged Records folder.
--b1f8-field:notifyDamagedBulletinMovedToDiscardedcause=Ocurrió un error durante la subida, y el expediente dañado: '#BulletinTitle#' se ha movido a la carpeta de Expedientes Dañados.
+#_____________________________________________________=An error occurred during upload, and the damaged record'#BulletinTitle#' has been moved to the Damaged Records folder.
+-9fd1-field:notifyDamagedBulletinMovedToDiscardedcause=Ocurrió un error durante la subida, y el expediente dañado: '#BulletinTitle#' se ha movido a la carpeta de Expedientes Dañados.
 
 #______________________________________________=Error: Unable to delete all of those draft records from the server. Some of them may have been deleted.
 -4a52-field:notifyDeleteServerDraftsFailedcause=Error: No se pudieron borrar todos esos borradores de expediente del servidor. Algunos de ellos puede haber sido borrados.
@@ -2524,6 +2632,9 @@
 #_________________________________________________=Unexpected error saving template to server.
 -6e61-field:notifyErrorSavingTemplateToServercause=Error inesperado guardando la plantilla en el servidor.
 
+#___________________________________________=The request was unsuccessful, due to a network error.
+-8242-field:notifyErrorServerConnectioncause=La solicitud no tuvo éxito debido a un error en la red.
+
 #________________________________________=Unable to connect to the server.
 -595b-field:notifyErrorServerOfflinecause=No se pudo conectar con el servidor.
 
@@ -2566,8 +2677,8 @@
 #________________________________________________=Not all records were imported.  The following records had problems during import.\n\n#ImportBulletinsNotImported#
 -a73e-field:notifyImportBulletinsNotImportedcause=No todos los expedientes fueron importados. Los siguientes expedientes tuvieron problemas durante la importación.\n\n#ImportBulletinsNotImported#
 
-#____________________________________=Import complete.  Imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# records into folder: #ImportFolder#
--6566-field:notifyImportCompletecause=Importación completa. #BulletinsSuccessfullyImported# de #TotalBulletinsToImport# expedientes importados en la carpeta: #ImportFolder#
+#____________________________________=Import complete.  Imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# records into folder #ImportFolder#
+-ad7a-field:notifyImportCompletecause=Importación completa. #BulletinsSuccessfullyImported# de #TotalBulletinsToImport# expedientes importados en la carpeta #ImportFolder#
 
 #______________________________________________=Not all attachments were imported.  The following records had problems importing these attachments.\n\n#ImportMissingAttachments#
 -e318-field:notifyImportMissingAttachmentscause=No todos los adjuntos fueron importados. Los siguientes expedientes tuvieron problemas importantod estos adjuntos.\n\n#ImportMissingAttachments#
@@ -2641,8 +2752,8 @@
 #________________________________________________=You have successfully restored your key from your backup files.  It is very important that you now re-distribute your backup files.  We also recommend you backup your key as a single password-encrypted file, though you do not need to recreate the multiple file backup.
 -f50c-field:notifyRecoveryOfKeyShareCompletecause=Ha recuperado la cuenta al restaurar (sin contraseña) el par de claves desde los archivos de copia de seguridad por partes. Es extremadamente importante que ahora vuelva a separar estos archivos. También le recomendamos que haga una copia de seguridad del par de claves en un único archivo cifrado-con-contraseña, no es necesario volver a crear otra en múltiples archivos.
 
-#_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your Username and password and restore your key so you can log in normally and access your account.
--1d12-field:notifyRecoveryProcessBackupFilecause=Para restaurar su clave, primero tiene que encontrar el archivo de copia de seguridad que guardó previamente. Usando el cuadro de diálogo 'Restaurar clave desde el archivo de copia de seguridad', busque el archivo en el disco duro de su computadora, un disco duro de red, o un dispositivo extraible, y luego haga clie en el botón Abrir. Entonces Martus le preguntará por su nombre de usuario y contraseña, y restaurará su clave de forma que pueda iniciar sesión normlamente y acceder a su cuenta. 
+#_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Account from Key Backup' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your Username and password and restore your key so you can log in normally and access your account.
+-e88a-field:notifyRecoveryProcessBackupFilecause=Para restaurar su clave, primero tiene que encontrar el archivo de copia de seguridad que guardó previamente. Usando el cuadro de diálogo 'Restaurar cuenta desde copia de seguridad de par de claves', busque el archivo en el disco duro de su computadora, un disco duro de red, o un dispositivo extraible, y luego haga clie en el botón Abrir. Entonces Martus le preguntará por su nombre de usuario y contraseña, y restaurará su clave de forma que pueda iniciar sesión normlamente y acceder a su cuenta. >
 
 #_____________________________________________=You will now have to provide #MinimumNumberOfFilesNeededForRecovery# out of the #TotalNumberOfFilesInBackup# files you previously saved when you backed up your key.
 -f571-field:notifyRecoveryProcessKeySharecause=Ahora necesitará tener #MinimumNumberOfFilesNeededForRecovery# de los #TotalNumberOfFilesInBackup# archivos de la copia de seguridad por partes que creó del par de claves.
@@ -2668,9 +2779,6 @@
 #____________________________________________________=Please restart Martus to see the language you have chosen.
 -2191-field:notifyRestartMartusForLanguageChangecause=Por favor reinicie Martus para ver el idioma que ha escogido.
 
-#_______________________________________=Retrieving records from the server is complete
--1efb-field:notifyRetrieveCompletedcause=La descarga de expedientes desde el servidor se ha completado.
-
 #___________________________________=An error has occurred while retrieving a record.
 -29af-field:notifyRetrieveErrorcause=Ha ocurrido un error al descargar un expediente.
 
@@ -2695,8 +2803,8 @@
 #_________________________________________=Successfully saved your new username and password.
 -0398-field:notifyRewriteKeyPairSavedcause=Su nuevo nombre de usuario y contraseña han sido guardados.
 
-#___________________________________________________=Must select at least one record that was created by this account
--8ac6-field:notifySealSelectedZeroBulletinsOurscause=Tiene que seleccionar al menos un expediente que fuera creado por esta cuenta.
+#___________________________________________________=You must select at least one record that was created by this account
+-ae15-field:notifySealSelectedZeroBulletinsOurscause=Tiene que seleccionar al menos un expediente que fuera creado por esta cuenta.
 
 #__________________________________=Sorry, no records were found.
 -5778-field:notifySearchFailedcause=Lo sentimos, no se encontraron expedientes.
@@ -2803,11 +2911,11 @@
 #_______________________=Organization
 -5192-field:organization=Organización
 
-#___________________=Password
--8be3-field:password=Contraseña
+#___________________=Password 
+-0aa0-field:password=Contraseña
 
-#________________=Phone Number:
--846e-field:phone=Número telefónico
+#________________=Phone Number 
+-32d0-field:phone=Número telefónico
 
 #___________________________________=Automatically adjust legacy Afghan/Persian dates
 -396e-field:preferencesAdjustPersian=Ajustar automáticamente fechas afganas/persas antiguas
@@ -2839,8 +2947,8 @@
 #_______________________________________=For security reasons, we must validate your username and password.
 -0381-field:securityServerConfigValidate=Por razones de seguridad debemos validar su nombre de usuario y contraseña.
 
-#__________________________=Server:
--05a1-field:serverWithColon=Servidor
+#__________________________=Server 
+-915e-field:serverWithColon=Servidor
 
 #_________________=Status
 -bae7-field:status=Estado
@@ -2863,44 +2971,41 @@
 #________________=Title
 -768e-field:title=Título
 
-#_____________________________=English 5.0.3
-field:translationVersion=Español 5.0
+#_____________________________=Spanish pre-5.0.3
+field:translationVersion=Español 5.1
 
-#___________________=Username
--84c2-field:username=Nombre de usuario
+#___________________=Username 
+-f964-field:username=Nombre de usuario
 
-#________________________________=Please wait to sign in again ...
--d901-field:waitAfterFailedSignIn=Por favor espere para volver a iniciar sesión...
-
-#____________________________________=Loading Martus.  Please wait...
--4d07-field:waitingForBulletinsToLoad=Cargando Martus. Por favor espere un momento...
+#____________________________________=Loading Martus.  Please wait
+-32c0-field:waitingForBulletinsToLoad=Cargando Martus. Por favor espere un momento...
 
 #_________________________________________=You have chosen to permanently delete records from the Discarded Records folder. Even if these records were recently cut or copied, you will not be able to paste them. If they have already been sent to a server, they will remain on the server. This action will only delete them from this computer.
 -d398-field:warningDeleteMultipleBulletins=Ha elegido borrar expedientes permanentemente de la carpeta Expedientes Descartados. Incluso si estos expedientes fueron cortados o copiados recientemente, no poldrá pegarlos. Si ya han sido enviados al servidor, permanecerán en el servidor. Esta acción sólo los borrará desde esta computadora.
 
-#___________________________________________________=NOTE: Copies of one or more of these records exist in one or more other folders. Those copies will not be removed.
--21e7-field:warningDeleteMultipleBulletinsWithCopies=NOTA: Las copias de uno o más de estos expedientes existen en una o más carpetas adicionales. Esas copias no serán eliminadas.
+#___________________________________________________=Note: Copies of these records exist in one or more other folders. Those copies will not be removed.
+-d279-field:warningDeleteMultipleBulletinsWithCopies=Nota: Las copias de uno o más de estos expedientes existen en una o más carpetas adicionales. Esas copias no serán eliminadas.
 
-#_______________________________________________=WARNING: One or more of these records have not been sent to a server since they were last modified. Deleting them will prevent the latest changes from being backed up.
--a064-field:warningDeleteMultipleUnsentBulletins=ADVERTENCIA: Uno o más de estos expedientes no han sido enviados al servidor desde la última vez que fueron moddificados. Borrarlos evitará que se realice copia de seguridad de los últimos cambios.
+#_______________________________________________=Warning: One or more of these records have not been sent to a server since they were last modified. Deleting them will prevent the latest changes from being backed up.
+-98d9-field:warningDeleteMultipleUnsentBulletins=Advertencia: Uno o más de estos expedientes no han sido enviados al servidor desde la última vez que fueron moddificados. Borrarlos evitará que se realice copia de seguridad de los últimos cambios.
 
 #______________________________________=You have chosen to permanently delete a record from the Discarded Records folder. Even if this record was recently cut or copied, you will not be able to paste it. If this record has already been sent to a server, it will remain on the server. This action will only delete it from this computer.
 -c0b7-field:warningDeleteSingleBulletin=Ha escogido borrar permanentemente un expediente de la carpeta de Expedientes descartados. Incluso si este expediente fue cortado o copiado recientemente, no podrá pegarlo. Si este expediente ya ha sido enviado al un servidor, permanecerá en el servidor. Esta acción sólo lo borrará de esta computadora.
 
-#________________________________________________=NOTE: A copy of this record exists in one or more other folders, and those copies will not be removed.
--24fc-field:warningDeleteSingleBulletinWithCopies=NOTA: Una copai de este expediente existe en una o más carpetas adicionales, y esas copias no serán borradas.
+#________________________________________________=Note: Copies of this record exist in other folders. Those copies will not be removed.
+-fb09-field:warningDeleteSingleBulletinWithCopies=Nota: Una copai de este expediente existe en una o más carpetas adicionales, y esas copias no serán borradas.
 
-#____________________________________________=WARNING: This record has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.
--680c-field:warningDeleteSingleUnsentBulletin=ADVERTENCIA: Este expediente no ha sido enviado al servidor desde que fue modificado por última vez. Borrarlo evitará que se realice copia de seguridad de los últimos cambios.
+#____________________________________________=Warning: This record has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.
+-15fe-field:warningDeleteSingleUnsentBulletin=Adventura: Este expediente no ha sido enviado al servidor desde que fue modificado por última vez. Borrarlo evitará que se realice copia de seguridad de los últimos cambios.
 
-#__________________=Web Page:
--cfeb-field:webpage=Sitio web
+#__________________=Web Page 
+-e546-field:webpage=Sitio web
 
 #_____________________________=Damaged Records
 -a6df-folder:%DamagedBulletins=Expedientes dañados
 
-#______________________=Discarded Records
--039a-folder:%Discarded=Expedientes descartados
+#______________________=Trash
+-e3bf-folder:%Discarded=Papelera 
 
 #__________________=Old Draft Records
 -8f12-folder:%Draft=Borradores antiguos de expedientes
@@ -2917,11 +3022,11 @@ field:translationVersion=Español 5.0
 #_______________________________=Received Records
 -f68a-folder:%RetrievedBulletins=Expedientes recibidos
 
-#_________________________________________=Contacts Sealed Records
--9292-folder:%RetrievedFieldOfficeBulletin=Expedientes sellados de los contactos
+#_________________________________________=Contacts' Sealed Records
+-736d-folder:%RetrievedFieldOfficeBulletin=Expedientes sellados de los contactos
 
-#______________________________________________=Contacts Draft Records
--4622-folder:%RetrievedFieldOfficeBulletinDraft=Borradores de expedientes de los contactos
+#______________________________________________=Contacts' Draft Records
+-3278-folder:%RetrievedFieldOfficeBulletinDraft=Borradores de expedientes de los contactos
 
 #________________________________=Received Records
 -f68a-folder:%RetrievedMyBulletin=Expedientes recibidos
@@ -3106,8 +3211,8 @@ field:translationVersion=Español 5.0
 #____________________________=Account Information
 -0cbd-menu:AccountInformation=Información de cuenta
 
-#________________________=Update Contact's Access...
--1462-menu:AddPermissions=Actualizar acceso del contacto...
+#________________________=Update Contact's Access
+-ba05-menu:AddPermissions=Actualizar acceso del contacto...
 
 #_________________________=Add '#NewWord#' to User Dictionary
 -0ca4-menu:AddToDictionary=Añadir '#NewWord#' al diccionario de usuario
@@ -3120,9 +3225,6 @@ field:translationVersion=Español 5.0
 
 #_____________________________=Backup My Key
 -2852-menu:BackupMyKeyPairFile=Crear copia de seguridad de mi par de claves
-
-#___________________________________=Username and Password
--d205-menu:ChangeUsernameAndPassword=Nombre de usuario y contraseña
 
 #________________=Charts
 -8610-menu:Charts=Gráficas
@@ -3169,8 +3271,8 @@ field:translationVersion=Español 5.0
 #______________________=Export Folder
 -3f96-menu:ExportFolder=Exportar carpeta
 
-#___________________________=Export My Public Account Id
--2b8a-menu:ExportMyPublicKey=Exportar mi identificación pública de cuenta
+#___________________________=Export My Public Account ID
+-71d7-menu:ExportMyPublicKey=Exportar mi identificación pública de cuenta
 
 #_________________________=Import Records
 -7223-menu:ImportBulletins=Importar expedientes
@@ -3475,6 +3577,9 @@ field:translationVersion=Español 5.0
 #_____________________=Copy
 -af74-tooltip:CopyItem=Copiar
 
+#____________________________=Create new record
+-9015-tooltip:CreateNewRecord=Crear expediente nuevo
+
 #_______________________=Delete
 -f6fd-tooltip:DeleteCase=Eliminar
 
@@ -3487,14 +3592,26 @@ field:translationVersion=Español 5.0
 #_______________________=Export
 -f3e4-tooltip:ExportItem=Exportar
 
+#_________________=Help
+-c47a-tooltip:Help=Ayuda
+
 #___________________________=Import Record
 -b810-tooltip:ImportBulletin=Importar expediente
 
 #_____________________=Move
 -76cd-tooltip:MoveItem=Mover
 
-#__________________________________=Check this to not allow your records to be deleted from the Martus server.
--9379-tooltip:NeverDeleteFromServer=Marque esto para no permitir que sus expedientes sean borrados del servidor Martus.
+#__________________________________=Check to prohibit deletion of your records from the Martus server.
+-e1e9-tooltip:NeverDeleteFromServer=Marque esto para no permitir que sus expedientes sean borrados del servidor Martus.
+
+#________________________=Search
+-bce0-tooltip:QuickSearch=Buscar
+
+#_______________________________=Server OFF: Click to turn Server on
+-4ca5-tooltip:ServerCurrentlyOff=Servidor DESACTIVADO: Pulse para activar el servidor
+
+#______________________________=Server ON: Click to turn Server off
+-534c-tooltip:ServerCurrentlyOn=Servidor ACTIVADO: Pulse para desactivar el servidor
 
 #_______________________=Sync Manager
 -9979-tooltip:ServerSync=Administrador de sincronización
@@ -3507,6 +3624,15 @@ field:translationVersion=Español 5.0
 
 #______________________=Template Manager
 -3fe3-tooltip:Templates=Administrador de plantillas
+
+#____________________________=Tor:OFF, Click to turn Tor on
+-f8b7-tooltip:TorCurrentlyOff=Tor DESACTIVADO: Pulse para activar Tor
+
+#___________________________=Tor:ON, Click to turn Tor off
+-b37e-tooltip:TorCurrentlyOn=Tor ACTIVADO: Pulse para desactivar Tor
+
+#__________________=Click to turn Tor off
+-ada6-tooltip:TorOn=Pulse para desactivar Tor
 
 #____________________________=Update your contacts' access to Records
 -bc61-wintitle:AddPermissions=Actualizar sus el acceso de sus contactos a los expedientes
@@ -3523,7 +3649,7 @@ field:translationVersion=Español 5.0
 #_______________________________=Author Information
 -42f4-wintitle:AuthorInformation=Información del autor
 
-#___________________________________________________=Backup Key Information
+#___________________________________________________=Backup Key Information 
 -53df-wintitle:BackupKeyPairToSecretShareInformation=Información de la copia de seguridad del par de claves
 
 #__________________________________________________=Backup Complete
@@ -3559,9 +3685,6 @@ field:translationVersion=Español 5.0
 #________________________________=Create Report
 -446e-wintitle:ChooseReportFields=Crear informe
 
-#_______________________________=Run Report...
--56fb-wintitle:ChooseReportToRun=Ejecutar informe...
-
 #__________________________=Server Configuration
 -add5-wintitle:ConfigServer=Configuración del servidor
 
@@ -3583,9 +3706,6 @@ field:translationVersion=Español 5.0
 #____________________________________=Help on Creating Custom Fields
 -ed1d-wintitle:CreateCustomFieldsHelp=Ayuda para crear campos personalizados
 
-#________________________________=Delete Record File
--a3fd-wintitle:DeleteBulletinFile=Borrar archivo de expediente
-
 #_______________________________________=Delete #FolderName#
 -ec13-wintitle:DeleteCaseIncidentProject=Borrar #FolderName#
 
@@ -3601,8 +3721,8 @@ field:translationVersion=Español 5.0
 #_____________________=Details
 -dc3d-wintitle:Details=Detalles
 
-#_____________________________________________=Warning Duplicate Labels Found
--8e46-wintitle:DuplicateLabelsInCustomTemplate=Advertencia: Se encontraron títulos (<Label>) duplicados
+#_____________________________________________=Warning: Duplicate Labels Found
+-0848-wintitle:DuplicateLabelsInCustomTemplate=Advertencia: Se encontraron títulos (<Label>) duplicados
 
 #________________________=Empty Trash
 -cb42-wintitle:EmptyTrash=Vaciar papelera
@@ -3667,8 +3787,32 @@ field:translationVersion=Español 5.0
 #___________________________________________=Export Customization Template
 -5318-wintitle:FileDialogExportCustomization=Exportar plantilla de personalización
 
+#______________________________________=Import Record
+-b810-wintitle:FileDialogImportBulletin=Importar expediente
+
+#______________________________________________=Import Contact Key
+-e3a4-wintitle:FileDialogImportContactPublicKey=Importar clave de contacto
+
+#______________________________________=Import Form Template
+-2f11-wintitle:FileDialogImportTemplate=Importar plantilla
+
+#____________________________________________=Restore Account from Key Backup
+-428a-wintitle:FileDialogRecoverSharedKeyPair=Restaurar cuenta desde copia de seguridad de par de claves
+
+#__________________________________________=Restore Account From KeyPair
+-6b76-wintitle:FileDialogRestoreFromKeyPair=Restaurar cuenta desde copia de seguridad de par de claves 
+
+#______________________________________=Save Attachment
+-f513-wintitle:FileDialogSaveAttachment=Guardar adjunto
+
 #___________________________________=Backup Key File
 -2ba4-wintitle:FileDialogSaveKeyPair=Crear copia de seguridad del par de claves
+
+#__________________________________=Save Search
+-1340-wintitle:FileDialogSaveSearch=Guardar búsqueda
+
+#____________________________________=Run Report
+-884c-wintitle:FileDialogSelectReport=Ejecutar informe
 
 #__________________________________=Export Records to which file?
 -ff53-wintitle:FileSaveDialogExport=¿A qué archivo exportar los expedientes?
@@ -3682,17 +3826,11 @@ field:translationVersion=Español 5.0
 #________________________________=Help on Record Details Field Default Content
 -8b08-wintitle:HelpDefaultDetails=Ayuda sobre el contenido del campo de Detalles predeterminados del expediente
 
-#____________________________=Import Record
--b810-wintitle:ImportBulletin=Importar expediente
-
 #_____________________________=Import Records
 -7223-wintitle:ImportBulletins=Importar expedientes
 
-#____________________________________=Import Contact Key
--e3a4-wintitle:ImportContactPublicKey=Importar clave de contacto
-
-#____________________________=Importing Recordss
--f82d-wintitle:ImportProgress=Importando expedientes
+#____________________________=Importing Records
+-e238-wintitle:ImportProgress=Importando expedientes
 
 #________________________________=Include Private Data
 -e6dc-wintitle:IncludePrivateData=Incluir información privada
@@ -3801,9 +3939,6 @@ field:translationVersion=Español 5.0
 
 #_______________________________________=of
 -de04-wintitle:SaveRecoverShareKeyPairOf=de
-
-#________________________=Save Search
--1340-wintitle:SaveSearch=Guardar búsqueda
 
 #______________________________=Saving Backup Disk
 -9204-wintitle:SaveShareKeyPair=Guardando disco de copia de seguridad
@@ -3958,6 +4093,9 @@ field:translationVersion=Español 5.0
 #___________________________________________=Server Compliance Statement
 -20f8-wintitle:confirmServerComplianceFailed=Declaración de conformidad
 
+#_________________________________________=Show On Map
+-c052-wintitle:confirmShowOnMapBypassesTor=Mostrar en un mapa
+
 #________________________________________________________=Record Already Exists
 -c883-wintitle:confirmUnAuthoredBulletinDeleteBeforePaste=El expediente ya existe
 
@@ -4021,8 +4159,8 @@ field:translationVersion=Español 5.0
 #______________________________=Add Contact
 -d7f5-wintitle:notifyAddContact=Añadir contacto
 
-#___________________________________________________=Update Contacts access to Records
--4f58-wintitle:notifyAddPermissionsZeroBulletinsOurs=Actualizar el acceso de los contactos a los expedientes
+#___________________________________________________=Update Contacts Access to Records
+-a9fa-wintitle:notifyAddPermissionsZeroBulletinsOurs=Actualizar el acceso de los contactos a los expedientes
 
 #__________________________________________________________=No Contacts Selected
 -e057-wintitle:notifyAddPermissionsZeroHeadquartersSelected=No se seleccionaron contactos
@@ -4180,6 +4318,9 @@ field:translationVersion=Español 5.0
 #_______________________________________________=Save Template To Server
 -b3a3-wintitle:notifyErrorSavingTemplateToServer=Guardar plantilla en el servidor
 
+#_________________________________________=Server error
+-8210-wintitle:notifyErrorServerConnection=Error del servidor
+
 #______________________________________=Unable to Connect to Server
 -1b07-wintitle:notifyErrorServerOffline=No se pudo conectar al servidor
 
@@ -4219,14 +4360,14 @@ field:translationVersion=Español 5.0
 #________________________________=Recovered Lost Records
 -66cf-wintitle:notifyFoundOrphans=Expedientes perdidos recuperados
 
-#______________________________________________=Warning Records Not Imported
--f392-wintitle:notifyImportBulletinsNotImported=Advertencia: Expedientes no importados
+#______________________________________________=Warning: Records Not Imported
+-2506-wintitle:notifyImportBulletinsNotImported=Advertencia: Expedientes no importados
 
 #__________________________________=Import Complete
 -a5cb-wintitle:notifyImportComplete=Importación completada
 
-#____________________________________________=Warning Missing Attachments
--79ef-wintitle:notifyImportMissingAttachments=Advertencia: se pedieron adjuntos
+#____________________________________________=Warning: Missing Attachments
+-f6aa-wintitle:notifyImportMissingAttachments=Advertencia: se pedieron adjuntos
 
 #__________________________________=Import Template
 -6d2d-wintitle:notifyImportTemplate=Importar plantilla
@@ -4320,9 +4461,6 @@ field:translationVersion=Español 5.0
 
 #__________________________________________________=Martus Restart Required
 -9ec8-wintitle:notifyRestartMartusForLanguageChange=Se requiere reiniciar Martus
-
-#_____________________________________=Retrieve Complete
--653b-wintitle:notifyRetrieveCompleted=Descarga completada
 
 #_________________________________=Retrieve Error
 -8ed0-wintitle:notifyRetrieveError=Error al descargar
@@ -4476,4 +4614,3 @@ field:translationVersion=Español 5.0
 
 #_________________________________________=Confirm Delete Record
 -f056-wintitle:warningDeleteSingleBulletin=Confirmar borrado del expediente
-
