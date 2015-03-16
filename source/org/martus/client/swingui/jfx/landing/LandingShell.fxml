@@ -148,7 +148,6 @@
                         <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4">
                            <children>
       								<TextField fx:id="searchText" maxWidth="302.0" minHeight="27.0" prefHeight="27.0" prefWidth="173.0" style="-fx-background-radius: 0px;" />
-                              <Label text="   " />
       								<Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onQuickSearch" textAlignment="CENTER">
       									<font>
       										<Font name="Helvetica" size="14.0" />
