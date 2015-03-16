@@ -219,11 +219,16 @@ public class FxLandingShellController extends FxNonWizardShellController
 
 	private Image getUpdatedOnOffStatusImage(boolean isOn)
 	{
+		Image onOffImage = new Image(getOnOffImagePath(isOn));
+		return onOffImage;
+	}
+
+	private String getOnOffImagePath(boolean isOn)
+	{
 		String onOffImagePath = TOGGLE_OFF_IMAGE_PATH;
 		if(isOn)
 			onOffImagePath = TOGGLE_ON_IMAGE_PATH;
-		Image onOffImage = new Image(onOffImagePath);
-		return onOffImage;
+		return onOffImagePath;
 	}
 	
 	class UpdateTorStatusLater implements Runnable
