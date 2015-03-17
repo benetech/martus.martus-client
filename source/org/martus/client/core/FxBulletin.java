@@ -56,6 +56,7 @@ import org.javarosa.xform.parse.XFormParser;
 import org.javarosa.xform.util.XFormUtils;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.landing.bulletins.AttachmentTableRowData;
+import org.martus.common.Exceptions.ImportXFormsException;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
@@ -472,7 +473,7 @@ public class FxBulletin
 		String xFormsInstanceXmlAsString = getXFormsInstanceWithoutRootElement(bulletinWithXForms);
 		FormEntryController formEntryController = importXFormsData(xFormsModelXmlAsString, xFormsInstanceXmlAsString);
 		if (formEntryController == null)
-			throw new Exception("Could not import xforms data");
+			throw new ImportXFormsException();
 		
 		FieldSpecCollection fieldSpecsFromXForms = createFieldSpecsFromXForms(formEntryController);
 		
