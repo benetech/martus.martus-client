@@ -1363,7 +1363,6 @@ public class EnglishStrings
 "field:inputGetShareFileNameentry=Enter a name for the exported backup file(s).",
 "field:InputCustomFieldsTitle=Title",
 "field:inputCustomFieldsDescription=Description",
-"field:caseNameWithRecordCount=#CaseName# (#RecordCount#)",
 "field:warningDeleteSingleBulletin=You have chosen to permanently delete a record from the Discarded Records folder. Even if this record was recently cut or copied, you will not be able to paste it. If this record has already been sent to a server, it will remain on the server. This action will only delete it from this computer.",
 "field:warningDeleteMultipleBulletins=You have chosen to permanently delete records from the Discarded Records folder. Even if these records were recently cut or copied, you will not be able to paste them. If they have already been sent to a server, they will remain on the server. This action will only delete them from this computer.",
 "field:warningDeleteSingleUnsentBulletin=Warning: This record has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.",
