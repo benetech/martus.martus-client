@@ -31,7 +31,7 @@ Scene {
 }
 
 .bulletin-editor-field-cell {
-	-fx-padding: 5 5 5 5;
+	-fx-padding: 5 5 15 5;
 }
 
 .bulletin-warning-message {
