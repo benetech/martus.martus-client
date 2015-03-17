@@ -213,7 +213,7 @@
 							<top>
 								<HBox alignment="CENTER_LEFT">
    <children>
-               	        			<Label fx:id="titleBarLabel" styleClass="headingLevel2" text="" />
+               	        			<Label fx:id="titleBarCaseNameBeingShown" styleClass="headingLevel2" text="" />
                	        			<Button fx:id="closeCurrentViewButton" mnemonicParsing="false" onAction="#onCloseCurrentView" styleClass="toolbarButton" text="%Button.close">
                                  <graphic>
                                     <ImageView pickOnBounds="true" preserveRatio="true">

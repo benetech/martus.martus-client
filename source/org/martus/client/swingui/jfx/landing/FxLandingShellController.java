@@ -142,7 +142,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 
 	private void setTitleBarTranslatedLabel(String translatedLabel)
 	{
-		titleBarLabel.setText(translatedLabel);
+		titleBarCaseNameBeingShown.setText(translatedLabel);
 	}
 	
 	private void showCloseCurrentViewButton()
@@ -447,7 +447,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 	private Pane mainContentPane;
 	
 	@FXML
-	private Label titleBarLabel;
+	private Label titleBarCaseNameBeingShown;
 	
 	@FXML
 	private Button closeCurrentViewButton;
