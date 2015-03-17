@@ -31,6 +31,8 @@ import java.util.Set;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -53,6 +55,7 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 		trashFolderBeingDisplayedProperty = new SimpleBooleanProperty();
 		allFolderBeingDisplayedProperty = new SimpleBooleanProperty();
 		searchFolderBeingDisplayedProperty = new SimpleBooleanProperty();
+		numberOfRecordsBeingDisplayedProperty = new SimpleStringProperty();
 	}
 	
 	@Override
@@ -181,6 +184,19 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 		{
 			MartusLogger.logException(e);
 		}
+		updateNumberOfRecordsBeingDisplayed();
+	}
+
+	private void updateNumberOfRecordsBeingDisplayed()
+	{
+		int currentCount = size();
+		String countString = "(" + String.valueOf(currentCount) + ")";
+		numberOfRecordsBeingDisplayedProperty.setValue(countString);
+	}
+	
+	public StringProperty getRecordsBeingDisplayedProperty()
+	{
+		return numberOfRecordsBeingDisplayedProperty;
 	}
 
 	protected BulletinTableRowData getCurrentBulletinData(UniversalId leafBulletinUid) throws Exception
@@ -228,4 +244,5 @@ public class BulletinListProvider extends ArrayObservableList<BulletinTableRowDa
 	private BooleanProperty trashFolderBeingDisplayedProperty;
 	private BooleanProperty allFolderBeingDisplayedProperty;
 	private BooleanProperty searchFolderBeingDisplayedProperty;
+	private StringProperty numberOfRecordsBeingDisplayedProperty;
 }

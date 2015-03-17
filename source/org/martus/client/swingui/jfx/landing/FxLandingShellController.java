@@ -31,6 +31,7 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.Property;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -98,6 +99,13 @@ public class FxLandingShellController extends FxNonWizardShellController
 		return caseManagementController;
 	}
 	
+	private void setupBindingForRecordCounts()
+	{
+		StringProperty recordCountProperty = bulletinListProvider.getRecordsBeingDisplayedProperty();
+		titleBarNumberOfRecordsBeingShown.textProperty().bind(recordCountProperty);
+	}
+
+
 	public void setTitleBarToAll()
 	{
 		hideCloseCurrentViewButton();
@@ -171,6 +179,7 @@ public class FxLandingShellController extends FxNonWizardShellController
 		caseManagementController.addFolderSelectionListener(bulletinListProvider);
 		caseManagementController.addFolderSelectionListener(bulletinsListController);
 		setTitleBarToAll();
+		setupBindingForRecordCounts();
 	}
 
 	private void initializeTorListener()
@@ -450,8 +459,10 @@ public class FxLandingShellController extends FxNonWizardShellController
 	private Label titleBarCaseNameBeingShown;
 	
 	@FXML
+	private Label titleBarNumberOfRecordsBeingShown;
+
+	@FXML
 	private Button closeCurrentViewButton;
-	
 	
 	private BulletinsListController bulletinsListController;
 	private BulletinListProvider bulletinListProvider;

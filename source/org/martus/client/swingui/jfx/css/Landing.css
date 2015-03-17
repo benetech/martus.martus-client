@@ -91,3 +91,7 @@
 .button-transparentNoHover:pressed{
 		-fx-background-color:transparent;
 }
+
+.labelLeftRightPadding{
+	-fx-padding: 0 5 0 5;
+}
