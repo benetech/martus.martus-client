@@ -593,9 +593,10 @@ public class FxBulletin
 			QuestionDef question = questionPrompt.getQuestion();
 			final int dataType = questionPrompt.getDataType();
 			TreeReference reference = (TreeReference) question.getBind().getReference();
+			String tag = reference.getNameLast();
 			if (dataType == Constants.DATATYPE_TEXT)
 			{
-				FieldSpec fieldSpec = FieldSpec.createCustomField(reference.getNameLast(), questionPrompt.getQuestion().getLabelInnerText(), new FieldTypeNormal());
+				FieldSpec fieldSpec = FieldSpec.createCustomField(tag, questionPrompt.getQuestion().getLabelInnerText(), new FieldTypeNormal());
 				fieldsFromXForms.add(fieldSpec);
 			}
 			
@@ -611,14 +612,14 @@ public class FxBulletin
 				}
 				
 				DropDownFieldSpec dropDownFieldSpec = new DropDownFieldSpec(convertedChoices.toArray(new ChoiceItem[0]));
-				dropDownFieldSpec.setTag(reference.getNameLast());
+				dropDownFieldSpec.setTag(tag);
 				dropDownFieldSpec.setLabel(questionPrompt.getQuestion().getLabelInnerText());
 				fieldsFromXForms.add(dropDownFieldSpec);
 			}
 			
 			if (dataType == Constants.DATATYPE_DATE)
 			{
-				FieldSpec fieldSpec = FieldSpec.createCustomField(reference.getNameLast(), questionPrompt.getQuestion().getLabelInnerText(), new FieldTypeDate());
+				FieldSpec fieldSpec = FieldSpec.createCustomField(tag, questionPrompt.getQuestion().getLabelInnerText(), new FieldTypeDate());
 				fieldsFromXForms.add(fieldSpec);
 			}
 		}
