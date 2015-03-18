@@ -759,6 +759,24 @@ public class TestFxBulletin extends TestCaseEnhanced
 		return expectedChoiceItems;
 	}
 	
+	public void testFxBulletinWithXFormsWithDateField() throws Exception
+	{
+		FxBulletin fxBulletin = new FxBulletin(getLocalization());
+
+		assertEquals("FxBulletin field specs should be filled?", 0, fxBulletin.getFieldSpecs().size());
+		Bulletin bulletin = new BulletinForTesting(security);
+		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithDateInputField());
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithDateField());
+		fxBulletin.copyDataFromBulletin(bulletin, store);
+		assertEquals("FxBulletin filled from bulletin with data should have date field?", 1, fxBulletin.getFieldSpecs().size());
+		
+		FieldSpec fieldSpec = fxBulletin.getFieldSpecs().firstElement();
+		assertTrue("Incorrect field type?", fieldSpec.getType().isDate());
+		
+		FxBulletinField dateField = fxBulletin.getField(fieldSpec);
+		assertEquals("Incorrect date?", DATE_VALUE, dateField.getValue());
+	} 
+	
 	private Vector<String> extractFieldTags(Bulletin b)
 	{
 		Vector<String> fieldTags = new Vector<String>();
@@ -862,6 +880,38 @@ public class TestFxBulletin extends TestCaseEnhanced
 				"</xforms_instance>";
 	}
 	
+	private static String getXFormsModelWithDateInputField()
+	{
+		return 
+		"<h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
+			"<h:head>" +
+				"<h:title>secureApp Prototype</h:title>" +
+				"<model>" +
+					"<instance>" +
+						"<nm id=\"VitalVoices\" >" +
+							"<date></date>" +
+							"</nm>" +
+					"</instance>" +
+				"<bind jr:constraintMsg=\"No dates before 2000-01-01 allowed\" nodeset=\"/nm/date\" constraint=\". >= date('2000-01-01')\" type=\"date\" ></bind>" +
+				"</model>" +
+			"</h:head>" +
+			"<h:body>" +
+					"<input ref=\"date\" >" +
+						"<label>Date of incident</label>" +
+						"<hint>(No dates before 2000-01-01 allowed)</hint>" +
+					"</input>" +
+			"</h:body>" +
+		"</h:html>" ;
+	}
+	
+	private static String getXFormsInstanceWithDateField()
+	{
+		return 
+				"<nm id=\"VitalVoices\" >" +
+				"<date>" + DATE_VALUE + "</date>" +
+				"</nm>";
+	}
+	
 	private static final String DROPDOWN_FIELD_TAG = "sourceOfRecordInformation";
 	private static final String DROPDOWN_FIELD_LABEL = "Source of record information";
 	private static final String DROPDOWN_FIELD_CHOICE_MEDIA_PRESS_CODE = "mediaPressCode";
@@ -871,6 +921,8 @@ public class TestFxBulletin extends TestCaseEnhanced
 	private static final String DROPDOWN_FIELD_CHOICE_MEDIA_PRESS_LABEL = "Media Press";
 	private static final String DROPDOWN_FIELD_CHOICE_LEGAL_REPORT_LABEL = "Legal Report";
 	private static final String DROPDOWN_FIELD_CHOICE_PERSONAL_INTERVIEW_LABEL = "Personal Interview";
+	
+	private static final String DATE_VALUE = "2015-03-24";
 	
 	private static final String FIELD_LABEL = "What is your name?";
 	private static final String FIELD_VALUE = "John Johnson";
