@@ -542,21 +542,12 @@ public class FxBulletin
 			FieldDataPacket privateFieldDataPacket = bulletinLoadedFromXForms.getPrivateFieldDataPacket();
 			String xFormsFieldTag = reference.getNameLast();
 			String answerAsString = answer.getDisplayText();
-			if (dataType == Constants.DATATYPE_TEXT)
-			{
-				privateFieldDataPacket.set(xFormsFieldTag, answerAsString);
-			}
-
-			if (dataType == Constants.DATATYPE_CHOICE)
-			{
-				privateFieldDataPacket.set(xFormsFieldTag, answerAsString);
-			}
-
 			if (dataType == Constants.DATATYPE_DATE)
 			{
 				answerAsString = formatDateToMartusDateFormat(answerAsString);
-				privateFieldDataPacket.set(xFormsFieldTag, answerAsString);
 			}
+			
+			privateFieldDataPacket.set(xFormsFieldTag, answerAsString);
 		}
 		
 		return bulletinLoadedFromXForms;
