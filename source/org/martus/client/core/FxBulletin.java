@@ -52,7 +52,6 @@ import org.javarosa.core.model.FormDef;
 import org.javarosa.core.model.QuestionDef;
 import org.javarosa.core.model.SelectChoice;
 import org.javarosa.core.model.data.IAnswerData;
-import org.javarosa.core.model.data.helper.Selection;
 import org.javarosa.core.model.instance.TreeElement;
 import org.javarosa.core.model.instance.TreeReference;
 import org.javarosa.form.api.FormEntryController;
@@ -549,8 +548,7 @@ public class FxBulletin
 
 			if (dataType == Constants.DATATYPE_CHOICE)
 			{
-				Selection value = (Selection) answer.getValue();
-				privateFieldDataPacket.set(xFormsFieldTag, value.getValue());
+				privateFieldDataPacket.set(xFormsFieldTag, answer.getDisplayText());
 			}
 
 			if (dataType == Constants.DATATYPE_DATE)
