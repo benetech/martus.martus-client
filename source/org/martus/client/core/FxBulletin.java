@@ -612,10 +612,9 @@ public class FxBulletin
 					convertedChoices.add(new ChoiceItem(choiceItemCode, choiceItemLabel));
 				}
 				
-				DropDownFieldSpec dropDownFieldSpec = new DropDownFieldSpec(convertedChoices.toArray(new ChoiceItem[0]));
-				dropDownFieldSpec.setTag(tag);
-				dropDownFieldSpec.setLabel(questionLabel);
-				fieldSpec = dropDownFieldSpec;
+				fieldSpec = new DropDownFieldSpec(convertedChoices.toArray(new ChoiceItem[0]));
+				fieldSpec.setTag(tag);
+				fieldSpec.setLabel(questionLabel);
 			}
 			
 			if (dataType == Constants.DATATYPE_DATE)
