@@ -28,6 +28,9 @@ package org.martus.client.core;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
@@ -77,6 +80,7 @@ import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.FieldDataPacket;
@@ -551,9 +555,29 @@ public class FxBulletin
 					privateFieldDataPacket.set(xFormsFieldTag, value.getValue());
 				}
 			}
+			
+			if (dataType == Constants.DATATYPE_DATE)
+			{
+				if (answer != null)
+				{
+					String dateAsString = answer.getDisplayText();
+					FieldDataPacket privateFieldDataPacket = bulletinLoadedFromXForms.getPrivateFieldDataPacket();
+					String formattedDate = formatDateToMartusDateFormat(dateAsString);
+					privateFieldDataPacket.set(reference.getNameLast(), formattedDate);
+				}
+			}
 		}
 		
 		return bulletinLoadedFromXForms;
+	}
+
+	private String formatDateToMartusDateFormat(String dateAsString) throws Exception
+	{
+		DateFormat incomingDateFormat = new SimpleDateFormat("dd/MM/yy");
+		Date parsedDate = incomingDateFormat.parse(dateAsString);
+		MultiCalendar multiCalendar = new MultiCalendar(parsedDate);
+		
+		return multiCalendar.toString();
 	}
 
 	private FieldSpecCollection createFieldSpecsFromXForms(FormEntryController formEntryController)
@@ -598,6 +622,12 @@ public class FxBulletin
 				dropDownFieldSpec.setTag(reference.getNameLast());
 				dropDownFieldSpec.setLabel(questionPrompt.getQuestion().getLabelInnerText());
 				fieldsFromXForms.add(dropDownFieldSpec);
+			}
+			
+			if (dataType == Constants.DATATYPE_DATE)
+			{
+				FieldSpec fieldSpec = FieldSpec.createCustomField(reference.getNameLast(), questionPrompt.getQuestion().getLabelInnerText(), new FieldTypeDate());
+				fieldsFromXForms.add(fieldSpec);
 			}
 		}
 		
