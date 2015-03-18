@@ -720,7 +720,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		verifyFieldSpecCount(fxBulletin, 1);
 
 		FieldSpec fieldSpec = fxBulletin.getFieldSpecs().firstElement();
-		verifyFieldSpecCreatedFromXFormsData(fieldSpec);
+		verifyDropDownFieldSpecCreatedFromXFormsData(fieldSpec);
 		verifyFieldCreatedFromXFormsData(fxBulletin.getField(fieldSpec));
 	}
 
@@ -729,7 +729,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals("Incorrect field spec count?", expectedFieldSpecCount, fxBulletin.getFieldSpecs().size());
 	}
 
-	private void verifyFieldSpecCreatedFromXFormsData(FieldSpec fieldSpec)
+	private void verifyDropDownFieldSpecCreatedFromXFormsData(FieldSpec fieldSpec)
 	{
 		assertTrue("Only field should be dropdown?", fieldSpec.getType().isDropdown());
 		
