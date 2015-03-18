@@ -143,6 +143,7 @@ import org.martus.common.packet.Packet;
 import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.XmlPacketLoader;
+import org.martus.common.utilities.MartusClientUtilities;
 import org.martus.swing.FontHandler;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiOptionPane;
@@ -2439,18 +2440,9 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		return getUiState();
 	}
 	
-	static public Image getMartusIconImage()
-	{
-		URL imageURL = UiMainWindow.class.getResource("dialogs/Martus-swoosh-64x64.png");
-		if(imageURL == null)
-			return null;
-		ImageIcon imageicon = new ImageIcon(imageURL);
-		return imageicon.getImage();
-	}
-	
 	static public void updateIcon(JFrame window)
 	{
-		Image image = getMartusIconImage();
+		Image image = MartusClientUtilities.getMartusIconImage();
 		if(image != null)
 		{
 			window.setIconImage(image);
