@@ -51,7 +51,6 @@ import org.martus.client.swingui.jfx.landing.FxInSwingMainStage;
 import org.martus.client.swingui.jfx.landing.FxMainStage;
 import org.martus.client.swingui.jfx.setupwizard.FxInSwingSetupWizardStage;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.utilities.MartusClientUtilities;
 import org.martus.swing.Utilities;
 
 public class FxInSwingMainWindow extends UiMainWindow
@@ -231,7 +230,7 @@ public class FxInSwingMainWindow extends UiMainWindow
 			dimension = LARGE_PREFERRED_DIALOG_SIZE;
 		
 		FxInSwingModalDialog dialog = createDialog(this);
-		dialog.setIconImage(MartusClientUtilities.getMartusIconImage());
+		dialog.setIconImage(Utilities.getMartusIconImage());
 		
 		if (titleTag.length() > 0)
 			dialog.setTitle(getLocalization().getWindowTitle(titleTag));

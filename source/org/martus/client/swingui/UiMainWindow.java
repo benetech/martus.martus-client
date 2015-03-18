@@ -143,7 +143,6 @@ import org.martus.common.packet.Packet;
 import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.XmlPacketLoader;
-import org.martus.common.utilities.MartusClientUtilities;
 import org.martus.swing.FontHandler;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiOptionPane;
@@ -2442,7 +2441,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 	
 	static public void updateIcon(JFrame window)
 	{
-		Image image = MartusClientUtilities.getMartusIconImage();
+		Image image = Utilities.getMartusIconImage();
 		if(image != null)
 		{
 			window.setIconImage(image);
