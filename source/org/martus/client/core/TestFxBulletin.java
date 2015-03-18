@@ -711,15 +711,6 @@ public class TestFxBulletin extends TestCaseEnhanced
 	public void testFxBulletinWithXFormsWithChoiceField() throws Exception
 	{
 		FxBulletin fxBulletin = new FxBulletin(getLocalization());
-		verifyBasicXFormsData(fxBulletin);
-
-		FieldSpec fieldSpec = fxBulletin.getFieldSpecs().firstElement();
-		verifyFieldSpec(fieldSpec);
-		verifyField(fxBulletin.getField(fieldSpec));
-	}
-
-	private void verifyBasicXFormsData(FxBulletin fxBulletin) throws Exception
-	{
 		verifyFieldSpecCount(fxBulletin, 0);
 		
 		Bulletin bulletin = new BulletinForTesting(security);
@@ -727,6 +718,10 @@ public class TestFxBulletin extends TestCaseEnhanced
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithChoiceAnswers());
 		fxBulletin.copyDataFromBulletin(bulletin, store);
 		verifyFieldSpecCount(fxBulletin, 1);
+
+		FieldSpec fieldSpec = fxBulletin.getFieldSpecs().firstElement();
+		verifyFieldSpec(fieldSpec);
+		verifyField(fxBulletin.getField(fieldSpec));
 	}
 
 	private void verifyFieldSpecCount(FxBulletin fxBulletin, int expectedFieldSpecCount)
