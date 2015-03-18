@@ -592,9 +592,11 @@ public class FxBulletin
 			}
 			
 			FieldSpec fieldSpec = convertToFieldSpec(questionPrompt);
+			if (fieldSpec == null)
+				continue;
 			
-			if (fieldSpec != null)
-				fieldsFromXForms.add(fieldSpec);
+			
+			fieldsFromXForms.add(fieldSpec);
 		}
 		
 		return fieldsFromXForms;
