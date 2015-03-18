@@ -594,9 +594,9 @@ public class FxBulletin
 			final int dataType = questionPrompt.getDataType();
 			TreeReference reference = (TreeReference) question.getBind().getReference();
 			String tag = reference.getNameLast();
+			String questionLabel = questionPrompt.getQuestion().getLabelInnerText();
 			if (dataType == Constants.DATATYPE_TEXT)
 			{
-				String questionLabel = questionPrompt.getQuestion().getLabelInnerText();
 				FieldSpec fieldSpec = FieldSpec.createCustomField(tag, questionLabel, new FieldTypeNormal());
 				fieldsFromXForms.add(fieldSpec);
 			}
@@ -614,20 +614,23 @@ public class FxBulletin
 				
 				DropDownFieldSpec dropDownFieldSpec = new DropDownFieldSpec(convertedChoices.toArray(new ChoiceItem[0]));
 				dropDownFieldSpec.setTag(tag);
-				String questionLabel = questionPrompt.getQuestion().getLabelInnerText();
 				dropDownFieldSpec.setLabel(questionLabel);
 				fieldsFromXForms.add(dropDownFieldSpec);
 			}
 			
 			if (dataType == Constants.DATATYPE_DATE)
 			{
-				String qustionLabel = questionPrompt.getQuestion().getLabelInnerText();
-				FieldSpec fieldSpec = FieldSpec.createCustomField(tag, qustionLabel, new FieldTypeDate());
+				FieldSpec fieldSpec = FieldSpec.createCustomField(tag, questionLabel, new FieldTypeDate());
 				fieldsFromXForms.add(fieldSpec);
 			}
 		}
 		
 		return fieldsFromXForms;
+	}
+
+	public String getQuetionLabel(FormEntryPrompt questionPrompt)
+	{
+		return questionPrompt.getQuestion().getLabelInnerText();
 	}
 
 	private void resetFormEntryControllerIndex(FormEntryController formEntryController)
