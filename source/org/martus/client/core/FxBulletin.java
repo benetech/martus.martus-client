@@ -532,39 +532,35 @@ public class FxBulletin
 		
 			FormEntryPrompt questionPrompt = formEntryController.getModel().getQuestionPrompt();
 			IAnswerData answer = questionPrompt.getAnswerValue();
+			if (answer == null)
+			{
+				continue;
+			}
+
 			QuestionDef question = questionPrompt.getQuestion();
 			final int dataType = questionPrompt.getDataType();
 			TreeReference reference = (TreeReference) question.getBind().getReference();
 			if (dataType == Constants.DATATYPE_TEXT)
 			{
-				if (answer != null) 
-				{
-					FieldDataPacket privateFieldDataPacket = bulletinLoadedFromXForms.getPrivateFieldDataPacket();
-					String xFormsFieldTag = reference.getNameLast();
-					privateFieldDataPacket.set(xFormsFieldTag, answer.getDisplayText());
-				}
+				FieldDataPacket privateFieldDataPacket = bulletinLoadedFromXForms.getPrivateFieldDataPacket();
+				String xFormsFieldTag = reference.getNameLast();
+				privateFieldDataPacket.set(xFormsFieldTag, answer.getDisplayText());
 			}
-			
+
 			if (dataType == Constants.DATATYPE_CHOICE)
 			{
-				if (answer != null)
-				{
-					Selection value = (Selection) answer.getValue();
-					FieldDataPacket privateFieldDataPacket = bulletinLoadedFromXForms.getPrivateFieldDataPacket();
-					String xFormsFieldTag = reference.getNameLast();
-					privateFieldDataPacket.set(xFormsFieldTag, value.getValue());
-				}
+				Selection value = (Selection) answer.getValue();
+				FieldDataPacket privateFieldDataPacket = bulletinLoadedFromXForms.getPrivateFieldDataPacket();
+				String xFormsFieldTag = reference.getNameLast();
+				privateFieldDataPacket.set(xFormsFieldTag, value.getValue());
 			}
-			
+
 			if (dataType == Constants.DATATYPE_DATE)
 			{
-				if (answer != null)
-				{
-					String dateAsString = answer.getDisplayText();
-					FieldDataPacket privateFieldDataPacket = bulletinLoadedFromXForms.getPrivateFieldDataPacket();
-					String formattedDate = formatDateToMartusDateFormat(dateAsString);
-					privateFieldDataPacket.set(reference.getNameLast(), formattedDate);
-				}
+				String dateAsString = answer.getDisplayText();
+				FieldDataPacket privateFieldDataPacket = bulletinLoadedFromXForms.getPrivateFieldDataPacket();
+				String formattedDate = formatDateToMartusDateFormat(dateAsString);
+				privateFieldDataPacket.set(reference.getNameLast(), formattedDate);
 			}
 		}
 		
@@ -595,16 +591,17 @@ public class FxBulletin
 			
 			FormEntryPrompt questionPrompt = formEntryController.getModel().getQuestionPrompt();
 			IAnswerData answer = questionPrompt.getAnswerValue();
+			if (answer == null)
+			{
+				continue;
+			}
 			QuestionDef question = questionPrompt.getQuestion();
 			final int dataType = questionPrompt.getDataType();
 			TreeReference reference = (TreeReference) question.getBind().getReference();
 			if (dataType == Constants.DATATYPE_TEXT)
 			{
-				if (answer != null) 
-				{
-					FieldSpec fieldSpec = FieldSpec.createCustomField(reference.getNameLast(), questionPrompt.getQuestion().getLabelInnerText(), new FieldTypeNormal());
-					fieldsFromXForms.add(fieldSpec);
-				}
+				FieldSpec fieldSpec = FieldSpec.createCustomField(reference.getNameLast(), questionPrompt.getQuestion().getLabelInnerText(), new FieldTypeNormal());
+				fieldsFromXForms.add(fieldSpec);
 			}
 			
 			if (dataType == Constants.DATATYPE_CHOICE)
