@@ -541,20 +541,20 @@ public class FxBulletin
 			TreeReference reference = (TreeReference) question.getBind().getReference();
 			FieldDataPacket privateFieldDataPacket = bulletinLoadedFromXForms.getPrivateFieldDataPacket();
 			String xFormsFieldTag = reference.getNameLast();
+			String answerAsString = answer.getDisplayText();
 			if (dataType == Constants.DATATYPE_TEXT)
 			{
-				privateFieldDataPacket.set(xFormsFieldTag, answer.getDisplayText());
+				privateFieldDataPacket.set(xFormsFieldTag, answerAsString);
 			}
 
 			if (dataType == Constants.DATATYPE_CHOICE)
 			{
-				privateFieldDataPacket.set(xFormsFieldTag, answer.getDisplayText());
+				privateFieldDataPacket.set(xFormsFieldTag, answerAsString);
 			}
 
 			if (dataType == Constants.DATATYPE_DATE)
 			{
-				String dateAsString = answer.getDisplayText();
-				String formattedDate = formatDateToMartusDateFormat(dateAsString);
+				String formattedDate = formatDateToMartusDateFormat(answerAsString);
 				privateFieldDataPacket.set(xFormsFieldTag, formattedDate);
 			}
 		}
