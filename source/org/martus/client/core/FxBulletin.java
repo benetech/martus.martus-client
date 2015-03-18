@@ -596,7 +596,8 @@ public class FxBulletin
 			String tag = reference.getNameLast();
 			if (dataType == Constants.DATATYPE_TEXT)
 			{
-				FieldSpec fieldSpec = FieldSpec.createCustomField(tag, questionPrompt.getQuestion().getLabelInnerText(), new FieldTypeNormal());
+				String questionLabel = questionPrompt.getQuestion().getLabelInnerText();
+				FieldSpec fieldSpec = FieldSpec.createCustomField(tag, questionLabel, new FieldTypeNormal());
 				fieldsFromXForms.add(fieldSpec);
 			}
 			
@@ -613,13 +614,15 @@ public class FxBulletin
 				
 				DropDownFieldSpec dropDownFieldSpec = new DropDownFieldSpec(convertedChoices.toArray(new ChoiceItem[0]));
 				dropDownFieldSpec.setTag(tag);
-				dropDownFieldSpec.setLabel(questionPrompt.getQuestion().getLabelInnerText());
+				String questionLabel = questionPrompt.getQuestion().getLabelInnerText();
+				dropDownFieldSpec.setLabel(questionLabel);
 				fieldsFromXForms.add(dropDownFieldSpec);
 			}
 			
 			if (dataType == Constants.DATATYPE_DATE)
 			{
-				FieldSpec fieldSpec = FieldSpec.createCustomField(tag, questionPrompt.getQuestion().getLabelInnerText(), new FieldTypeDate());
+				String qustionLabel = questionPrompt.getQuestion().getLabelInnerText();
+				FieldSpec fieldSpec = FieldSpec.createCustomField(tag, qustionLabel, new FieldTypeDate());
 				fieldsFromXForms.add(fieldSpec);
 			}
 		}
