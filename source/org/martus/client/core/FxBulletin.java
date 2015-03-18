@@ -177,7 +177,6 @@ public class FxBulletin
 			if(FontHandler.isDoZawgyiConversion())
 				storable = BurmeseUtilities.getStorable(value);
 			modified.set(fieldTag, storable);
-//			System.out.println("copyDataToBulletin " + fieldTag + ":" + value);
 		}
 		HeadquartersKeys modifiedKeys = new HeadquartersKeys();
 		authorizedToReadKeys.forEach(key -> modifiedKeys.add(key));
