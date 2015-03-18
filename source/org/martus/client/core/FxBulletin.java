@@ -577,7 +577,6 @@ public class FxBulletin
 		int event;
 		while ((event = formEntryController.stepToNextEvent()) != FormEntryController.EVENT_END_OF_FORM) 
 		{
-			FieldSpec fieldSpec = null;
 			//FIXME urgent - This method only handles string fields
 			//This will change as more fields are added
 			if (event != FormEntryController.EVENT_QUESTION) 
@@ -591,42 +590,51 @@ public class FxBulletin
 			{
 				continue;
 			}
-			QuestionDef question = questionPrompt.getQuestion();
-			final int dataType = questionPrompt.getDataType();
-			TreeReference reference = (TreeReference) question.getBind().getReference();
-			String tag = reference.getNameLast();
-			String questionLabel = questionPrompt.getQuestion().getLabelInnerText();
-			if (dataType == Constants.DATATYPE_TEXT)
-			{
-				fieldSpec = FieldSpec.createCustomField(tag, questionLabel, new FieldTypeNormal());
-			}
 			
-			if (dataType == Constants.DATATYPE_CHOICE)
-			{
-				Vector<ChoiceItem> convertedChoices = new Vector<ChoiceItem>();
-				List<SelectChoice> choicesToConvert = question.getChoices();
-				for (SelectChoice choiceToConvert : choicesToConvert)
-				{
-					String choiceItemCode = choiceToConvert.getValue();
-					String choiceItemLabel = choiceToConvert.getLabelInnerText();
-					convertedChoices.add(new ChoiceItem(choiceItemCode, choiceItemLabel));
-				}
-				
-				fieldSpec = new DropDownFieldSpec(convertedChoices.toArray(new ChoiceItem[0]));
-				fieldSpec.setTag(tag);
-				fieldSpec.setLabel(questionLabel);
-			}
-			
-			if (dataType == Constants.DATATYPE_DATE)
-			{
-				fieldSpec = FieldSpec.createCustomField(tag, questionLabel, new FieldTypeDate());
-			}
+			FieldSpec fieldSpec = convertToFieldSpec(questionPrompt);
 			
 			if (fieldSpec != null)
 				fieldsFromXForms.add(fieldSpec);
 		}
 		
 		return fieldsFromXForms;
+	}
+	
+	private FieldSpec convertToFieldSpec(FormEntryPrompt questionPrompt)
+	{
+		QuestionDef question = questionPrompt.getQuestion();
+		final int dataType = questionPrompt.getDataType();
+		TreeReference reference = (TreeReference) question.getBind().getReference();
+		String tag = reference.getNameLast();
+		String questionLabel = questionPrompt.getQuestion().getLabelInnerText();
+		if (dataType == Constants.DATATYPE_TEXT)
+		{
+			return FieldSpec.createCustomField(tag, questionLabel, new FieldTypeNormal());
+		}
+		
+		if (dataType == Constants.DATATYPE_CHOICE)
+		{
+			Vector<ChoiceItem> convertedChoices = new Vector<ChoiceItem>();
+			List<SelectChoice> choicesToConvert = question.getChoices();
+			for (SelectChoice choiceToConvert : choicesToConvert)
+			{
+				String choiceItemCode = choiceToConvert.getValue();
+				String choiceItemLabel = choiceToConvert.getLabelInnerText();
+				convertedChoices.add(new ChoiceItem(choiceItemCode, choiceItemLabel));
+			}
+			
+			FieldSpec fieldSpec = new DropDownFieldSpec(convertedChoices.toArray(new ChoiceItem[0]));
+			fieldSpec.setTag(tag);
+			fieldSpec.setLabel(questionLabel);
+			return fieldSpec;
+		}
+		
+		if (dataType == Constants.DATATYPE_DATE)
+		{
+			return FieldSpec.createCustomField(tag, questionLabel, new FieldTypeDate());
+		}
+		
+		return null;
 	}
 
 	public String getQuetionLabel(FormEntryPrompt questionPrompt)
