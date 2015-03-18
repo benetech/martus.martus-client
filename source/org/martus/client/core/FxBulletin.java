@@ -577,6 +577,7 @@ public class FxBulletin
 		int event;
 		while ((event = formEntryController.stepToNextEvent()) != FormEntryController.EVENT_END_OF_FORM) 
 		{
+			FieldSpec fieldSpec = null;
 			//FIXME urgent - This method only handles string fields
 			//This will change as more fields are added
 			if (event != FormEntryController.EVENT_QUESTION) 
@@ -597,8 +598,7 @@ public class FxBulletin
 			String questionLabel = questionPrompt.getQuestion().getLabelInnerText();
 			if (dataType == Constants.DATATYPE_TEXT)
 			{
-				FieldSpec fieldSpec = FieldSpec.createCustomField(tag, questionLabel, new FieldTypeNormal());
-				fieldsFromXForms.add(fieldSpec);
+				fieldSpec = FieldSpec.createCustomField(tag, questionLabel, new FieldTypeNormal());
 			}
 			
 			if (dataType == Constants.DATATYPE_CHOICE)
@@ -615,14 +615,16 @@ public class FxBulletin
 				DropDownFieldSpec dropDownFieldSpec = new DropDownFieldSpec(convertedChoices.toArray(new ChoiceItem[0]));
 				dropDownFieldSpec.setTag(tag);
 				dropDownFieldSpec.setLabel(questionLabel);
-				fieldsFromXForms.add(dropDownFieldSpec);
+				fieldSpec = dropDownFieldSpec;
 			}
 			
 			if (dataType == Constants.DATATYPE_DATE)
 			{
-				FieldSpec fieldSpec = FieldSpec.createCustomField(tag, questionLabel, new FieldTypeDate());
-				fieldsFromXForms.add(fieldSpec);
+				fieldSpec = FieldSpec.createCustomField(tag, questionLabel, new FieldTypeDate());
 			}
+			
+			if (fieldSpec != null)
+				fieldsFromXForms.add(fieldSpec);
 		}
 		
 		return fieldsFromXForms;
