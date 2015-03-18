@@ -148,7 +148,7 @@
       										<Insets />
       									</opaqueInsets>
                                  <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                    <ImageView pickOnBounds="true" preserveRatio="true" styleClass="labelLeftRightPadding">
                                        <image>
                                           <Image url="@../images/search.png" />
                                        </image>
@@ -163,7 +163,6 @@
                                     <String fx:value="button-transparentWithHover" />
                                  </styleClass>
       								</Button>
-                              <Label text="   " />
                   
                   				<Button mnemonicParsing="false" onAction="#onHelpMenu">
                                  <graphic>
