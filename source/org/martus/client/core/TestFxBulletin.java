@@ -720,13 +720,18 @@ public class TestFxBulletin extends TestCaseEnhanced
 
 	private void verifyBasicXFormsData(FxBulletin fxBulletin) throws Exception
 	{
-		assertEquals("Incorrect field spec count?", 0, fxBulletin.getFieldSpecs().size());
+		verifyFieldSpecCount(fxBulletin, 0);
 		
 		Bulletin bulletin = new BulletinForTesting(security);
 		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithOnChoiceInputFieldXmlAsString());
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithChoiceAnswers());
 		fxBulletin.copyDataFromBulletin(bulletin, store);
-		assertEquals("Incorrect field spec count?", 1, fxBulletin.getFieldSpecs().size());
+		verifyFieldSpecCount(fxBulletin, 1);
+	}
+
+	private void verifyFieldSpecCount(FxBulletin fxBulletin, int expectedFieldSpecCount)
+	{
+		assertEquals("Incorrect field spec count?", expectedFieldSpecCount, fxBulletin.getFieldSpecs().size());
 	}
 
 	private void verifyFieldSpec(FieldSpec fieldSpec)
