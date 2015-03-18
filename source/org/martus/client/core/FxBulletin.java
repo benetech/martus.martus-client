@@ -580,21 +580,16 @@ public class FxBulletin
 			//FIXME urgent - This method only handles string fields
 			//This will change as more fields are added
 			if (event != FormEntryController.EVENT_QUESTION) 
-			{
 				continue;
-			}
 			
 			FormEntryPrompt questionPrompt = formEntryController.getModel().getQuestionPrompt();
 			IAnswerData answer = questionPrompt.getAnswerValue();
 			if (answer == null)
-			{
 				continue;
-			}
 			
 			FieldSpec fieldSpec = convertToFieldSpec(questionPrompt);
 			if (fieldSpec == null)
 				continue;
-			
 			
 			fieldsFromXForms.add(fieldSpec);
 		}
