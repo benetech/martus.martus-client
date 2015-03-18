@@ -230,6 +230,8 @@ public class FxInSwingMainWindow extends UiMainWindow
 			dimension = LARGE_PREFERRED_DIALOG_SIZE;
 		
 		FxInSwingModalDialog dialog = createDialog(this);
+		dialog.setIconImage(UiMainWindow.getMartusIconImage());
+		
 		if (titleTag.length() > 0)
 			dialog.setTitle(getLocalization().getWindowTitle(titleTag));
 		
