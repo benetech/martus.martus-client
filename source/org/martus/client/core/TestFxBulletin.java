@@ -721,7 +721,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 
 		FieldSpec fieldSpec = fxBulletin.getFieldSpecs().firstElement();
 		verifyFieldSpecCreatedFromXFormsData(fieldSpec);
-		verifyField(fxBulletin.getField(fieldSpec));
+		verifyFieldCreatedFromXFormsData(fxBulletin.getField(fieldSpec));
 	}
 
 	private void verifyFieldSpecCount(FxBulletin fxBulletin, int expectedFieldSpecCount)
@@ -742,7 +742,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertTrue("Incorrect choice items found in list?", expectedChoiceItems.containsAll(actualChoiceItems));
 	}
 
-	private void verifyField(FxBulletinField field)
+	private void verifyFieldCreatedFromXFormsData(FxBulletinField field)
 	{
 		Vector<ObservableChoiceItemList> choiceItems = field.getChoiceItemLists();
 		assertEquals("Incorrect number of choiceItems?", 1, choiceItems.size());
