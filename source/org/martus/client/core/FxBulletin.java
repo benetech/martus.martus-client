@@ -29,6 +29,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Vector;
 
 import javafx.beans.property.BooleanProperty;
@@ -46,12 +47,15 @@ import javafx.collections.ObservableList;
 import org.javarosa.core.model.Constants;
 import org.javarosa.core.model.FormDef;
 import org.javarosa.core.model.QuestionDef;
+import org.javarosa.core.model.SelectChoice;
 import org.javarosa.core.model.data.IAnswerData;
+import org.javarosa.core.model.data.helper.Selection;
 import org.javarosa.core.model.instance.TreeElement;
 import org.javarosa.core.model.instance.TreeReference;
 import org.javarosa.form.api.FormEntryController;
 import org.javarosa.form.api.FormEntryModel;
 import org.javarosa.form.api.FormEntryPrompt;
+import org.javarosa.model.xform.XFormsModule;
 import org.javarosa.xform.parse.XFormParser;
 import org.javarosa.xform.util.XFormUtils;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
@@ -69,7 +73,9 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletinstore.BulletinStore;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.field.MartusField;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DataInvalidException;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.packet.BulletinHistory;
@@ -471,7 +477,10 @@ public class FxBulletin
 	{
 		String xFormsModelXmlAsString = getXformsModelWithoutRootElement(bulletinWithXForms);
 		String xFormsInstanceXmlAsString = getXFormsInstanceWithoutRootElement(bulletinWithXForms);
-		FormEntryController formEntryController = importXFormsData(xFormsModelXmlAsString, xFormsInstanceXmlAsString);
+		
+        initializeJavaRosa();    	
+		
+        FormEntryController formEntryController = importXFormsData(xFormsModelXmlAsString, xFormsInstanceXmlAsString);
 		if (formEntryController == null)
 			throw new ImportXFormsException();
 		
@@ -479,7 +488,12 @@ public class FxBulletin
 		
 		return createBulletin(bulletinWithXForms, formEntryController, fieldSpecsFromXForms);
 	}
-
+	
+	private static final void initializeJavaRosa() 
+	{
+		new XFormsModule().registerModule();
+	}
+	
 	private String getXFormsInstanceWithoutRootElement(Bulletin bulletinWithXForms)
 	{
 		String xFormsInstanceXmlAsString = bulletinWithXForms.getFieldDataPacket().getXFormsInstanceAsString();
@@ -501,7 +515,7 @@ public class FxBulletin
 
 	private Bulletin createBulletin(Bulletin bulletinWithXForms, FormEntryController formEntryController, FieldSpecCollection fieldsFromXForms) throws Exception
 	{
-		Bulletin bulletinLoadedFromXForms = new Bulletin(bulletinWithXForms.getSignatureGenerator(), new FieldSpecCollection(), fieldsFromXForms);		
+		Bulletin bulletinLoadedFromXForms = new Bulletin(bulletinWithXForms.getSignatureGenerator(), new FieldSpecCollection(), fieldsFromXForms);
 		resetFormEntryControllerIndex(formEntryController);
 		int event;
 		while ((event = formEntryController.stepToNextEvent()) != FormEntryController.EVENT_END_OF_FORM) 
@@ -517,14 +531,25 @@ public class FxBulletin
 			IAnswerData answer = questionPrompt.getAnswerValue();
 			QuestionDef question = questionPrompt.getQuestion();
 			final int dataType = questionPrompt.getDataType();
+			TreeReference reference = (TreeReference) question.getBind().getReference();
 			if (dataType == Constants.DATATYPE_TEXT)
 			{
-				TreeReference reference = (TreeReference) question.getBind().getReference();
 				if (answer != null) 
 				{
 					FieldDataPacket privateFieldDataPacket = bulletinLoadedFromXForms.getPrivateFieldDataPacket();
 					String xFormsFieldTag = reference.getNameLast();
 					privateFieldDataPacket.set(xFormsFieldTag, answer.getDisplayText());
+				}
+			}
+			
+			if (dataType == Constants.DATATYPE_CHOICE)
+			{
+				if (answer != null)
+				{
+					Selection value = (Selection) answer.getValue();
+					FieldDataPacket privateFieldDataPacket = bulletinLoadedFromXForms.getPrivateFieldDataPacket();
+					String xFormsFieldTag = reference.getNameLast();
+					privateFieldDataPacket.set(xFormsFieldTag, value.getValue());
 				}
 			}
 		}
@@ -549,14 +574,31 @@ public class FxBulletin
 			IAnswerData answer = questionPrompt.getAnswerValue();
 			QuestionDef question = questionPrompt.getQuestion();
 			final int dataType = questionPrompt.getDataType();
+			TreeReference reference = (TreeReference) question.getBind().getReference();
 			if (dataType == Constants.DATATYPE_TEXT)
 			{
-				TreeReference reference = (TreeReference) question.getBind().getReference();
 				if (answer != null) 
 				{
 					FieldSpec fieldSpec = FieldSpec.createCustomField(reference.getNameLast(), questionPrompt.getQuestion().getLabelInnerText(), new FieldTypeNormal());
 					fieldsFromXForms.add(fieldSpec);
 				}
+			}
+			
+			if (dataType == Constants.DATATYPE_CHOICE)
+			{
+				Vector<ChoiceItem> convertedChoices = new Vector<ChoiceItem>();
+				List<SelectChoice> choicesToConvert = question.getChoices();
+				for (SelectChoice choiceToConvert : choicesToConvert)
+				{
+					String choiceItemCode = choiceToConvert.getValue();
+					String choiceItemLabel = choiceToConvert.getLabelInnerText();
+					convertedChoices.add(new ChoiceItem(choiceItemCode, choiceItemLabel));
+				}
+				
+				DropDownFieldSpec dropDownFieldSpec = new DropDownFieldSpec(convertedChoices.toArray(new ChoiceItem[0]));
+				dropDownFieldSpec.setTag(reference.getNameLast());
+				dropDownFieldSpec.setLabel(questionPrompt.getQuestion().getLabelInnerText());
+				fieldsFromXForms.add(dropDownFieldSpec);
 			}
 		}
 		
