@@ -554,8 +554,8 @@ public class FxBulletin
 
 			if (dataType == Constants.DATATYPE_DATE)
 			{
-				String formattedDate = formatDateToMartusDateFormat(answerAsString);
-				privateFieldDataPacket.set(xFormsFieldTag, formattedDate);
+				answerAsString = formatDateToMartusDateFormat(answerAsString);
+				privateFieldDataPacket.set(xFormsFieldTag, answerAsString);
 			}
 		}
 		
