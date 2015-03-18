@@ -26,6 +26,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.core;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import javafx.beans.property.BooleanProperty;
@@ -48,7 +50,9 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinForTesting;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.FieldTypeDate;
@@ -703,7 +707,58 @@ public class TestFxBulletin extends TestCaseEnhanced
 		FxBulletinField field = fxBulletin.getField(fieldSpec);
 		assertEquals("Incorrect field value?", FIELD_VALUE, field.getValue());
 	}
+	
+	public void testFxBulletinWithXFormsWithChoiceField() throws Exception
+	{
+		FxBulletin fxBulletin = new FxBulletin(getLocalization());
+		verifyBasicXFormsData(fxBulletin);
 
+		FieldSpec fieldSpec = fxBulletin.getFieldSpecs().firstElement();
+		verifyFieldSpec(fieldSpec);
+		verifyField(fxBulletin.getField(fieldSpec));
+	}
+
+	private void verifyBasicXFormsData(FxBulletin fxBulletin) throws Exception
+	{
+		assertEquals("FxBulletin field specs should be filled?", 0, fxBulletin.getFieldSpecs().size());
+		
+		Bulletin bulletin = new BulletinForTesting(security);
+		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithOnChoiceInputFieldXmlAsString());
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithChoiceAnswers());
+		fxBulletin.copyDataFromBulletin(bulletin, store);
+		assertEquals("FxBulletin filled from bulletin with data should have data?", 1, fxBulletin.getFieldSpecs().size());
+	}
+
+	private void verifyFieldSpec(FieldSpec fieldSpec)
+	{
+		assertTrue("Only field should be dropdown?", fieldSpec.getType().isDropdown());
+		
+		DropDownFieldSpec dropDownFieldSpec = (DropDownFieldSpec) fieldSpec;
+		assertEquals("Incorrect drop down field label?", DROPDOWN_FIELD_LABEL, dropDownFieldSpec.getLabel());
+		assertEquals("Incorrect drop down field tag?", DROPDOWN_FIELD_TAG, dropDownFieldSpec.getTag());
+		List<ChoiceItem> expectedChoiceItems = getExpectedChoiceItems();
+		List<ChoiceItem> actualChoiceItems = dropDownFieldSpec.getChoiceItemList();
+		assertEquals("Incorrect choiceItem count", expectedChoiceItems.size(), actualChoiceItems.size());
+		assertTrue("Incorrect choice items found in list?", expectedChoiceItems.containsAll(actualChoiceItems));
+	}
+
+	private void verifyField(FxBulletinField field)
+	{
+		Vector<ObservableChoiceItemList> choiceItems = field.getChoiceItemLists();
+		assertEquals("Incorrect number of choiceItems?", 1, choiceItems.size());
+		assertEquals("Incorrect choice?", DROPDOWN_FIELD_CHOICE_PERSONAL_INTERVIEW_CODE, field.getValue());
+	}
+	
+	private List<ChoiceItem> getExpectedChoiceItems()
+	{
+		List<ChoiceItem> expectedChoiceItems = new ArrayList<ChoiceItem>();
+		expectedChoiceItems.add(new ChoiceItem(DROPDOWN_FIELD_CHOICE_LEGAL_REPORT_CODE, DROPDOWN_FIELD_CHOICE_LEGAL_REPORT_LABEL));
+		expectedChoiceItems.add(new ChoiceItem(DROPDOWN_FIELD_CHOICE_MEDIA_PRESS_CODE, DROPDOWN_FIELD_CHOICE_MEDIA_PRESS_LABEL));
+		expectedChoiceItems.add(new ChoiceItem(DROPDOWN_FIELD_CHOICE_PERSONAL_INTERVIEW_CODE, DROPDOWN_FIELD_CHOICE_PERSONAL_INTERVIEW_LABEL));
+		
+		return expectedChoiceItems;
+	}
+	
 	private Vector<String> extractFieldTags(Bulletin b)
 	{
 		Vector<String> fieldTags = new Vector<String>();
@@ -761,6 +816,61 @@ public class TestFxBulletin extends TestCaseEnhanced
 				   "</nm>" +
 				"</xforms_instance>";
 	}
+	
+	private static String getXFormsModelWithOnChoiceInputFieldXmlAsString()
+	{
+		return 	"		<xforms_model>" +
+				"			<h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
+				"				<h:head>" +
+				"				<h:title>XForms Sample</h:title>" +
+				"					<model>" +
+				"					<instance>" +
+				"						<nm id=\"SampleForUnitTesting\" >" +
+				" 							<" + DROPDOWN_FIELD_TAG +"/>"+			
+				"						</nm>" +
+				"		            </instance>" +
+				" 					<bind nodeset=\"/nm/"+ DROPDOWN_FIELD_TAG + "\" type=\"select1\" ></bind>" +
+				"		        </model>" +
+				"		    </h:head>" +
+				"		    <h:body>" +				
+				" 				<select1 ref=\""+ DROPDOWN_FIELD_TAG + "\" appearance=\"minimal\" >" +
+				"				<label>" + DROPDOWN_FIELD_LABEL + "</label>" +
+				"					 <item>" +
+				"						 <label>" + DROPDOWN_FIELD_CHOICE_MEDIA_PRESS_LABEL + "</label>" +
+				"						 <value>" + DROPDOWN_FIELD_CHOICE_MEDIA_PRESS_CODE + "</value>" +
+				" 					</item>" +
+				" 					<item>" +
+				" 						<label>" + DROPDOWN_FIELD_CHOICE_LEGAL_REPORT_LABEL + "</label>" +
+				" 						<value>" + DROPDOWN_FIELD_CHOICE_LEGAL_REPORT_CODE + "</value>" +
+				" 					</item>" +
+				" 					<item>" +
+				" 						<label>" + DROPDOWN_FIELD_CHOICE_PERSONAL_INTERVIEW_LABEL + "</label>" +
+				" 						<value>" + DROPDOWN_FIELD_CHOICE_PERSONAL_INTERVIEW_CODE + "</value>" +
+				" 					</item>" +
+				" 				</select1>" +
+				"		    </h:body>" +
+				"		</h:html>" +
+				"	</xforms_model>";
+	}
+	
+	private static String getXFormsInstanceWithChoiceAnswers()
+	{
+		return "<xforms_instance>" +
+				   "<nm id=\"SampleForUnitTesting\">" +
+				      "<sourceOfRecordInformation>" + DROPDOWN_FIELD_CHOICE_PERSONAL_INTERVIEW_CODE + "</sourceOfRecordInformation>" +
+				   "</nm>" +
+				"</xforms_instance>";
+	}
+	
+	private static final String DROPDOWN_FIELD_TAG = "sourceOfRecordInformation";
+	private static final String DROPDOWN_FIELD_LABEL = "Source of record information";
+	private static final String DROPDOWN_FIELD_CHOICE_MEDIA_PRESS_CODE = "mediaPressCode";
+	private static final String DROPDOWN_FIELD_CHOICE_LEGAL_REPORT_CODE = "legalReportCode";
+	private static final String DROPDOWN_FIELD_CHOICE_PERSONAL_INTERVIEW_CODE = "personalInterviewCode";
+	
+	private static final String DROPDOWN_FIELD_CHOICE_MEDIA_PRESS_LABEL = "Media Press";
+	private static final String DROPDOWN_FIELD_CHOICE_LEGAL_REPORT_LABEL = "Legal Report";
+	private static final String DROPDOWN_FIELD_CHOICE_PERSONAL_INTERVIEW_LABEL = "Personal Interview";
 	
 	private static final String FIELD_LABEL = "What is your name?";
 	private static final String FIELD_VALUE = "John Johnson";
