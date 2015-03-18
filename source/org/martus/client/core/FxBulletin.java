@@ -609,6 +609,11 @@ public class FxBulletin
 			return FieldSpec.createCustomField(tag, questionLabel, new FieldTypeNormal());
 		}
 		
+		if (dataType == Constants.DATATYPE_DATE)
+		{
+			return FieldSpec.createCustomField(tag, questionLabel, new FieldTypeDate());
+		}
+		
 		if (dataType == Constants.DATATYPE_CHOICE)
 		{
 			Vector<ChoiceItem> convertedChoices = new Vector<ChoiceItem>();
@@ -624,11 +629,6 @@ public class FxBulletin
 			fieldSpec.setTag(tag);
 			fieldSpec.setLabel(questionLabel);
 			return fieldSpec;
-		}
-		
-		if (dataType == Constants.DATATYPE_DATE)
-		{
-			return FieldSpec.createCustomField(tag, questionLabel, new FieldTypeDate());
 		}
 		
 		return null;
