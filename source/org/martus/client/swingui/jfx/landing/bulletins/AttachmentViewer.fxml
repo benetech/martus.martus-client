@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+
+
+<StackPane fx:id="containerPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
+	<StackPane fx:id="attachmentPane">
+		<VBox>
+		    <Button fx:id="showMapButton" onAction="#onShowMap" mnemonicParsing="false" text="%Button.ShowMap"  />
+		    <ImageView fx:id="attachmentImageView" />
+		</VBox>
+	</StackPane>
+	<StackPane fx:id="workingPane">
+		<VBox>
+			<Button onAction="#onShowImage" mnemonicParsing="false" text="%Button.ShowImage" />
+			<Label text="%BackgroundWorking" />
+		</VBox>
+	</StackPane>
+	<StackPane fx:id="mapPane">
+		<VBox>
+		    <Button fx:id="showImageButton" onAction="#onShowImage" mnemonicParsing="false" text="%Button.ShowImage" />
+		    <ImageView fx:id="mapImageView" />
+		</VBox>
+	</StackPane>
+	<StackPane fx:id="torConfirmationPane">
+		<VBox>
+			<Label text="%confirmShowOnMapBypassesTorcause" />
+			<Label text="%confirmShowOnMapBypassesToreffect" />
+			<CheckBox fx:id="doNotShowAgainCheckBox" text="%DoNotShowAgainThisSession" />
+			<HBox>
+			    <Button fx:id="okButton" onAction="#onConfirmShowMap" mnemonicParsing="false" text="%Button.ShowMap" />
+			    <Button fx:id="cancelButton" onAction="#onShowImage" mnemonicParsing="false" text="%Button.ShowImage" />
+			</HBox>
+		</VBox>
+	</StackPane>
+</StackPane>
