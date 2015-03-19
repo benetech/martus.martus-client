@@ -525,16 +525,12 @@ public class FxBulletin
 			//FIXME urgent - This method only handles string fields
 			//This will change as more fields are added
 			if (event != FormEntryController.EVENT_QUESTION) 
-			{
 				continue;
-			}
 		
 			FormEntryPrompt questionPrompt = formEntryController.getModel().getQuestionPrompt();
 			IAnswerData answer = questionPrompt.getAnswerValue();
 			if (answer == null)
-			{
 				continue;
-			}
 
 			QuestionDef question = questionPrompt.getQuestion();
 			final int dataType = questionPrompt.getDataType();
@@ -543,9 +539,7 @@ public class FxBulletin
 			String xFormsFieldTag = reference.getNameLast();
 			String answerAsString = answer.getDisplayText();
 			if (dataType == Constants.DATATYPE_DATE)
-			{
 				answerAsString = formatDateToMartusDateFormat(answerAsString);
-			}
 			
 			privateFieldDataPacket.set(xFormsFieldTag, answerAsString);
 		}
