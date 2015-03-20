@@ -12,11 +12,7 @@
    		<center>
    		  <VBox>
       <children>
-                  <Label>
-                     <graphic>
-                        <Pane fx:id="signInMessagePane" />
-                     </graphic>
-                  </Label>
+                  <Pane fx:id="signInMessagePane" />
       		    <GridPane fx:id="signInPane" vgap="5.0" xmlns:fx="http://javafx.com/fxml">
          <children>
          		        <Label styleClass="headingLevel2" text="%CreateAccountUserName" />
