@@ -53,7 +53,7 @@ public class ReSigninController extends SigninController
 	{
 		FxViewFieldCreator textField = new FxViewFieldCreator(getLocalization());
 		String message = getLocalization().getFieldLabel(messageTag);
-		Node textFieldNode = textField.createResponsiveMessage(message, getPreferredDimension().getWidth());
+		Node textFieldNode = textField.createResponsiveMessage(message, getPreferredDimension().getWidth()-PADDING);
 		signInMessagePane.getChildren().add(textFieldNode);
 	}
 	
@@ -69,5 +69,7 @@ public class ReSigninController extends SigninController
 		return "generic/Signin.fxml";
 	}
 	
+	private static final double PADDING = 5.0;
+
 	private String messageTag;
 }
