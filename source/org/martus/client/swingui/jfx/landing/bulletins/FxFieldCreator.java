@@ -36,6 +36,7 @@ import org.martus.client.core.FxBulletin;
 import org.martus.client.core.FxBulletinField;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.jfx.generic.controls.MartusDatePicker;
+import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
 
@@ -115,7 +116,12 @@ abstract public class FxFieldCreator
 		Text contentWithNewLineAdded = getContentWithNewLineAdded(mainContent);
 		TextFlow flow = new TextFlow(contentWithNewLineAdded);
 		flow.getStyleClass().add("systemTextField");
-		flow.setMinWidth(DEFAULT_TEXT_VIEW_WIDTH); //TODO: Ideally we would get the width of the Dialog - Width of the Field Title and bind us to that.
+		double width = fieldWidthProperty.doubleValue();
+		if(width == 0.0) //FIXME, this shouldn't happen
+			width = DEFAULT_TEXT_VIEW_WIDTH; 
+		flow.setMinWidth(width); 
+		flow.setMaxWidth(width); 
+		flow.setPrefWidth(width); 
 		flow.prefWidthProperty().bind(fieldWidthProperty);
 		return flow;
 	}
