@@ -49,6 +49,7 @@ import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSect
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentInterface;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.Bulletin.BulletinState;
 import org.martus.common.fieldspec.DateRangeInvertedException;
@@ -62,7 +63,7 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	{
 		setBulletin(b);
 		observer = observerToUse;
-		
+
 		ClientBulletinStore store = observerToUse.getApp().getStore();
 		Property<String> currentTemplateNameProperty = store.getCurrentFormTemplateNameProperty();
 		currentTemplateNameProperty.addListener(new TemplateChangeHandler(observerToUse));
@@ -151,13 +152,14 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 		{
 			try
 			{
+				MartusLogger.log("Switching Templates:'" + newValue + "'  was ='" + oldValue +"'");
 				ClientBulletinStore store = mainWindow.getApp().getStore();
 				Bulletin clonedBulletin = createClonedBulletinUsingCurrentTemplate(store);
 				SwingUtilities.invokeLater(() -> showBulletin(clonedBulletin));
 			} 
 			catch (Exception e)
 			{
-				
+				MartusLogger.logException(e);
 			}
 		}
 
