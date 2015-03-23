@@ -523,8 +523,6 @@ public class FxBulletin
 		int event;
 		while ((event = formEntryController.stepToNextEvent()) != FormEntryController.EVENT_END_OF_FORM) 
 		{
-			//FIXME urgent - This method only handles string fields
-			//This will change as more fields are added
 			if (event != FormEntryController.EVENT_QUESTION) 
 				continue;
 		
@@ -566,8 +564,6 @@ public class FxBulletin
 		int event;
 		while ((event = formEntryController.stepToNextEvent()) != FormEntryController.EVENT_END_OF_FORM) 
 		{
-			//FIXME urgent - This method only handles string fields
-			//This will change as more fields are added
 			if (event != FormEntryController.EVENT_QUESTION) 
 				continue;
 			
