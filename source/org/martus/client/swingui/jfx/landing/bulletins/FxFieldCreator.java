@@ -118,8 +118,6 @@ abstract public class FxFieldCreator
 		flow.getStyleClass().add("systemTextField");
 		double width = fieldWidthProperty.doubleValue();
 		flow.setMinWidth(width); 
-//		flow.setMaxWidth(width); 
-//		flow.setPrefWidth(width); 
 		flow.prefWidthProperty().bind(fieldWidthProperty);
 		return flow;
 	}
