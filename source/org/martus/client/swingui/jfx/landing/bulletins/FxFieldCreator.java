@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.property.ReadOnlyStringProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -36,7 +37,6 @@ import org.martus.client.core.FxBulletin;
 import org.martus.client.core.FxBulletinField;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.jfx.generic.controls.MartusDatePicker;
-import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
 
@@ -45,11 +45,11 @@ abstract public class FxFieldCreator
 	public FxFieldCreator(MartusLocalization localizationToUse)
 	{
 		localization = localizationToUse;
+		this.fieldWidthProperty = new SimpleDoubleProperty(DEFAULT_TEXT_VIEW_WIDTH);
 	}
 	
-	public Node createFieldNode(FxBulletin bulletin, FxBulletinField field, ReadOnlyDoubleProperty widthProperty) throws Exception
+	public Node createFieldNode(FxBulletin bulletin, FxBulletinField field) throws Exception
 	{
-		this.fieldWidthProperty = widthProperty;
 		FieldSpec spec = field.getFieldSpec();
 		Property<String> property = field.valueProperty();
 		
@@ -117,11 +117,9 @@ abstract public class FxFieldCreator
 		TextFlow flow = new TextFlow(contentWithNewLineAdded);
 		flow.getStyleClass().add("systemTextField");
 		double width = fieldWidthProperty.doubleValue();
-		if(width == 0.0) //FIXME, this shouldn't happen
-			width = DEFAULT_TEXT_VIEW_WIDTH; 
 		flow.setMinWidth(width); 
-		flow.setMaxWidth(width); 
-		flow.setPrefWidth(width); 
+//		flow.setMaxWidth(width); 
+//		flow.setPrefWidth(width); 
 		flow.prefWidthProperty().bind(fieldWidthProperty);
 		return flow;
 	}
@@ -146,7 +144,7 @@ abstract public class FxFieldCreator
 
 	protected static final int MINIMUM_REASONABLE_COLUMN_COUNT = 10;
 	protected static final int MULTILINE_FIELD_HEIGHT_IN_ROWS = 5;
-	protected static final int DEFAULT_TEXT_VIEW_WIDTH = 650;
+	protected static final double DEFAULT_TEXT_VIEW_WIDTH = 650.0;
 	protected static final String NEW_LINE = "\n";
 	
 	protected MartusLocalization localization;
