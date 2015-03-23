@@ -79,6 +79,7 @@ import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.packet.BulletinHistory;
@@ -541,6 +542,9 @@ public class FxBulletin
 			if (dataType == Constants.DATATYPE_DATE)
 				answerAsString = formatDateToMartusDateFormat(answerAsString);
 			
+			if (shouldTreatSingleItemChoiceListAsBooleanField(dataType, question) && answerAsString.isEmpty())
+				answerAsString = FieldSpec.FALSESTRING;
+			
 			privateFieldDataPacket.set(xFormsFieldTag, answerAsString);
 		}
 		
@@ -568,10 +572,6 @@ public class FxBulletin
 				continue;
 			
 			FormEntryPrompt questionPrompt = formEntryController.getModel().getQuestionPrompt();
-			IAnswerData answer = questionPrompt.getAnswerValue();
-			if (answer == null)
-				continue;
-			
 			FieldSpec fieldSpec = convertToFieldSpec(questionPrompt);
 			if (fieldSpec == null)
 				continue;
@@ -599,6 +599,9 @@ public class FxBulletin
 			return FieldSpec.createCustomField(tag, questionLabel, new FieldTypeDate());
 		}
 		
+		if (shouldTreatSingleItemChoiceListAsBooleanField(dataType, question))
+			return FieldSpec.createCustomField(tag, questionLabel, new FieldTypeBoolean());
+		
 		if (dataType == Constants.DATATYPE_CHOICE)
 		{
 			Vector<ChoiceItem> convertedChoices = new Vector<ChoiceItem>();
@@ -617,6 +620,22 @@ public class FxBulletin
 		}
 		
 		return null;
+	}
+
+	private boolean shouldTreatSingleItemChoiceListAsBooleanField(int xFormsDataType, QuestionDef question)
+	{
+		if (xFormsDataType != Constants.DATATYPE_CHOICE_LIST)
+			return false;
+		
+		if (question.getChoices().size() != 1)
+			return false;
+		
+		List<SelectChoice> choices = question.getChoices();
+		SelectChoice onlyChoice = choices.get(0);
+		if (onlyChoice.getValue().equals(FieldSpec.TRUESTRING))
+			return true;
+		
+		return false;
 	}
 
 	public String getQuetionLabel(FormEntryPrompt questionPrompt)

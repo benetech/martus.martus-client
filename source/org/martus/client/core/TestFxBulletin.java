@@ -775,7 +775,31 @@ public class TestFxBulletin extends TestCaseEnhanced
 		
 		FxBulletinField dateField = fxBulletin.getField(fieldSpec);
 		assertEquals("Incorrect date?", DATE_VALUE, dateField.getValue());
-	} 
+	}
+	
+	public void testFxBulletinWithXFormsBooleanField() throws Exception
+	{		
+		verifyBooleanFieldConversion(getXFormsInstanceWithSingleItemChoiceListAsTrueBoolean(), FieldSpec.TRUESTRING);
+		verifyBooleanFieldConversion(getXFormsInstanceWithSingleItemChoiceListAsFalseBoolean(), FieldSpec.FALSESTRING);
+		verifyBooleanFieldConversion(getXFormsInstanceWithSingleItemChoiceListAsNoValueBoolean(), FieldSpec.FALSESTRING);
+	}
+
+	private void verifyBooleanFieldConversion(String xFormsInstance, String expectedBooleanValue) throws Exception
+	{
+		FxBulletin fxBulletin = new FxBulletin(getLocalization());
+		assertEquals("FxBulletin field specs should be filled?", 0, fxBulletin.getFieldSpecs().size());
+		Bulletin bulletin = new BulletinForTesting(security);
+		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithSingleItemChoiceListAsBoolean());
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(xFormsInstance);
+		fxBulletin.copyDataFromBulletin(bulletin, store);
+		assertEquals("FxBulletin filled from bulletin with data should have date field?", 1, fxBulletin.getFieldSpecs().size());
+		
+		FieldSpec fieldSpec = fxBulletin.getFieldSpecs().firstElement();
+		assertTrue("Incorrect field type?", fieldSpec.getType().isBoolean());
+		
+		FxBulletinField dateField = fxBulletin.getField(fieldSpec);
+		assertEquals("Incorrect date?", expectedBooleanValue, dateField.getValue());
+	}
 	
 	private Vector<String> extractFieldTags(Bulletin b)
 	{
@@ -910,6 +934,50 @@ public class TestFxBulletin extends TestCaseEnhanced
 				"<nm id=\"VitalVoices\" >" +
 				"<date>" + DATE_VALUE + "</date>" +
 				"</nm>";
+	}
+	
+	private static String getXFormsModelWithSingleItemChoiceListAsBoolean()
+	{
+		return "<h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
+			    "<h:head>" +
+			        "<h:title>secureApp Prototype</h:title>" +
+			        "<model>" +
+			            "<instance>" +
+			                "<nm id=\"VitalVoices2\" >" +
+			                    "<anonymous></anonymous>" +
+			                "</nm>" +
+			            "</instance>" +
+			            "<bind nodeset=\"/nm/anonymous\" type=\"select\" ></bind>" +
+			        "</model>" +
+			    "</h:head>" +
+			    "<h:body>" +
+			        "<group appearance=\"field-list\" >" +
+			            "<label>Section 4 (Check boxes)</label>" +
+			            "<select ref=\"anonymous\" >" +
+			                "<label>Does interviewee wish to remain anonymous?</label>" +
+			                "<item>" +
+			                    "<label></label>" +
+			                    "<value>1</value>" +
+			                "</item>" +
+			            "</select>" +
+			        "</group>" +
+			    "</h:body>" +
+			"</h:html>";
+	}
+	
+	private static String getXFormsInstanceWithSingleItemChoiceListAsTrueBoolean()
+	{
+		return "<nm id=\"VitalVoices2\" ><anonymous>1</anonymous></nm>";
+	}
+	
+	private static String getXFormsInstanceWithSingleItemChoiceListAsFalseBoolean()
+	{
+		return "<nm id=\"VitalVoices2\" ><anonymous>0</anonymous></nm>";
+	}
+	
+	private static String getXFormsInstanceWithSingleItemChoiceListAsNoValueBoolean()
+	{
+		return "<nm id=\"VitalVoices2\" ><anonymous/></nm>";
 	}
 	
 	private static final String DROPDOWN_FIELD_TAG = "sourceOfRecordInformation";
