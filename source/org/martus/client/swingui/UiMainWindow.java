@@ -119,6 +119,7 @@ import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.FormatFilter;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiFileChooser;
+import org.martus.clientside.UiLocalization;
 import org.martus.clientside.UiUtilities;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.Exceptions.NetworkOfflineException;
@@ -404,7 +405,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		}
 	}
 
-	static public void displayDefaultUnofficialTranslationMessageIfNecessary(JFrame owner, MtfAwareLocalization localization, String languageCodeToTest)
+	static private void displayDefaultUnofficialTranslationMessageIfNecessary(JFrame owner, MtfAwareLocalization localization, String languageCodeToTest)
 	{
 		if(localization.isOfficialTranslation(languageCodeToTest))
 			return;
@@ -436,7 +437,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		
 	}
 	
-	public static void displayIncompatibleMtfVersionWarningMessageIfNecessary(JFrame owner, MtfAwareLocalization localization, String languageCodeToTest)
+	static private void displayIncompatibleMtfVersionWarningMessageIfNecessary(JFrame owner, MtfAwareLocalization localization, String languageCodeToTest)
 	{
 		if(localization.doesTranslationVersionMatchProgramVersion(languageCodeToTest, UiConstants.versionLabel))
 			return;
@@ -661,10 +662,15 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		return true;
 	}
 
-	private void displayPossibleUnofficialIncompatibleTranslationWarnings(String newLanguageCode)
+	public static void displayPossibleUnofficialIncompatibleTranslationWarnings(JFrame owner, UiLocalization localization, String newLanguageCode)
 	{
-		UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(getSwingFrame(), getLocalization(), newLanguageCode);
-		UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(getSwingFrame(), getLocalization(), newLanguageCode);
+		UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(owner, localization, newLanguageCode);
+		UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner, localization, newLanguageCode);
+	}
+
+	public void displayPossibleUnofficialIncompatibleTranslationWarnings(String newLanguageCode)
+	{
+		UiMainWindow.displayPossibleUnofficialIncompatibleTranslationWarnings(getCurrentActiveFrame().getSwingFrame(), getLocalization(), newLanguageCode);
 	}
 
 	public void doPostSigninAppInitialization()

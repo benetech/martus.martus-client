@@ -71,8 +71,7 @@ public class UiSigninDlg extends UiBasicSigninDlg
 		{
 			String languageCode = languageDropdown.getText();
 			FontSetter.setDefaultFont(languageCode.equals(MtfAwareLocalization.BURMESE));
-			UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(owner, localization, languageCode);
-			UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner, localization, languageCode);
+			UiMainWindow.displayPossibleUnofficialIncompatibleTranslationWarnings(owner, localization, languageCode);
 			changeLanguagesAndRestartSignin(languageCode);
 			dispose();
 		}

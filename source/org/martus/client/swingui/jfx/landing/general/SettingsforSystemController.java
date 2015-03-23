@@ -200,8 +200,7 @@ public class SettingsforSystemController extends FxController
 
 		public void doAction()
 		{
-			UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(mainWindow.getCurrentActiveFrame().getSwingFrame(), getLocalization(), selectedLanguageCode);
-			UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(mainWindow.getCurrentActiveFrame().getSwingFrame(), getLocalization(), selectedLanguageCode);
+			mainWindow.displayPossibleUnofficialIncompatibleTranslationWarnings(selectedLanguageCode);
 		}		
 		private UiMainWindow mainWindow;
 		private String selectedLanguageCode;
