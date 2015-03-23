@@ -239,8 +239,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		
 		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
 		FontSetter.setDefaultFont(currentLanguageCode.equals(MtfAwareLocalization.BURMESE));
-		displayDefaultUnofficialTranslationMessageIfNecessary(null, getLocalization(), currentLanguageCode);
-		displayIncompatibleMtfVersionWarningMessageIfNecessary(null, getLocalization(), getLocalization().getCurrentLanguageCode());
+		displayPossibleUnofficialIncompatibleTranslationWarnings(currentLanguageCode);
 		
 		preventTwoInstances();
 		notifyClientCompliance();
@@ -627,6 +626,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 					case CHANGE_LANGUAGE:
 					{
 						String newLanguageCode = signinController.getSelectedLanguageCode();
+						displayPossibleUnofficialIncompatibleTranslationWarnings(newLanguageCode);
 						getLocalization().setCurrentLanguageCode(newLanguageCode);
 						continue;
 					}
@@ -659,6 +659,12 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		}
 			
 		return true;
+	}
+
+	private void displayPossibleUnofficialIncompatibleTranslationWarnings(String newLanguageCode)
+	{
+		UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(getSwingFrame(), getLocalization(), newLanguageCode);
+		UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(getSwingFrame(), getLocalization(), newLanguageCode);
 	}
 
 	public void doPostSigninAppInitialization()
