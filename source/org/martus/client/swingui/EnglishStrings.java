@@ -1426,7 +1426,7 @@ public class EnglishStrings
 "wintitle:FileDialogPrintToFile=Print to File",
 "field:ExportedBulletins=Exported Records",
 "field:confirmSearchProgressCancelcause=The search in progress will be stopped immediately.",
-"field:confirmSearchProgressCanceleffect=If you do this, the Search Results will only contain bulletins that have been found so far.",
+"field:confirmSearchProgressCanceleffect=If you do this, the Search Results will only contain records that have been found so far.",
 "wintitle:confirmSearchProgressCancel=Cancel Search",
 "field:ErrorCustomFields=There is an error in the custom field definitions. " +
 	"Each problem is identified with the following codes:\n" +

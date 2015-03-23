@@ -28,6 +28,7 @@ package org.martus.client.swingui.jfx.landing.bulletins;
 import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.property.ReadOnlyStringProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -44,11 +45,11 @@ abstract public class FxFieldCreator
 	public FxFieldCreator(MartusLocalization localizationToUse)
 	{
 		localization = localizationToUse;
+		this.fieldWidthProperty = new SimpleDoubleProperty(DEFAULT_TEXT_VIEW_WIDTH);
 	}
 	
-	public Node createFieldNode(FxBulletin bulletin, FxBulletinField field, ReadOnlyDoubleProperty widthProperty) throws Exception
+	public Node createFieldNode(FxBulletin bulletin, FxBulletinField field) throws Exception
 	{
-		this.fieldWidthProperty = widthProperty;
 		FieldSpec spec = field.getFieldSpec();
 		Property<String> property = field.valueProperty();
 		
@@ -115,7 +116,8 @@ abstract public class FxFieldCreator
 		Text contentWithNewLineAdded = getContentWithNewLineAdded(mainContent);
 		TextFlow flow = new TextFlow(contentWithNewLineAdded);
 		flow.getStyleClass().add("systemTextField");
-		flow.setMinWidth(DEFAULT_TEXT_VIEW_WIDTH); //TODO: Ideally we would get the width of the Dialog - Width of the Field Title and bind us to that.
+		double width = fieldWidthProperty.doubleValue();
+		flow.setMinWidth(width); 
 		flow.prefWidthProperty().bind(fieldWidthProperty);
 		return flow;
 	}
@@ -140,7 +142,7 @@ abstract public class FxFieldCreator
 
 	protected static final int MINIMUM_REASONABLE_COLUMN_COUNT = 10;
 	protected static final int MULTILINE_FIELD_HEIGHT_IN_ROWS = 5;
-	protected static final int DEFAULT_TEXT_VIEW_WIDTH = 650;
+	protected static final double DEFAULT_TEXT_VIEW_WIDTH = 650.0;
 	protected static final String NEW_LINE = "\n";
 	
 	protected MartusLocalization localization;

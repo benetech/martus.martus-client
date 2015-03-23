@@ -69,7 +69,7 @@ public class CreateChartDialog extends JDialog
 		
 		setTitle(getLocalization().getWindowTitle("CreateChart"));
 		setModal(true);
-		
+		setIconImage(Utilities.getMartusIconImage());
 		getContentPane().setLayout(new BorderLayout());
 		String disclaimerText = getLocalization().getFieldLabel("ChartPrivateFieldsNotice");
 		String htmlDisclaimerText = "<html><b>" + disclaimerText.replaceAll("\\n", "<br/>");

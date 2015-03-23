@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -354,11 +355,19 @@ public class ActionMenuCharts extends UiMenuAction implements ActionDoer
 		PrinterJob printJob = PrinterJob.getPrinterJob();
 		printJob.setPrintable(new PrintableChart(chart));
 		HashPrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
+		removeJavaLogoFromTitle(attributes);  
 		if(!printJob.printDialog(attributes))
 			return false;
 		
 		printJob.print(attributes);
 		return true;
+	}
+
+	private void removeJavaLogoFromTitle(HashPrintRequestAttributeSet attributes)
+	{
+		attributes.add(javax.print.attribute.standard.DialogTypeSelection.NATIVE);	
+		Frame f = new Frame();
+		attributes.add(new sun.print.DialogOwner(f));
 	}
 	
 	class PrintableChart implements Printable
