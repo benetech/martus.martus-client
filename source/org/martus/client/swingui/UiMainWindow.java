@@ -119,6 +119,7 @@ import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.FormatFilter;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiFileChooser;
+import org.martus.clientside.UiLocalization;
 import org.martus.clientside.UiUtilities;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.Exceptions.NetworkOfflineException;
@@ -239,8 +240,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		
 		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
 		FontSetter.setDefaultFont(currentLanguageCode.equals(MtfAwareLocalization.BURMESE));
-		displayDefaultUnofficialTranslationMessageIfNecessary(null, getLocalization(), currentLanguageCode);
-		displayIncompatibleMtfVersionWarningMessageIfNecessary(null, getLocalization(), getLocalization().getCurrentLanguageCode());
+		displayPossibleUnofficialIncompatibleTranslationWarnings(currentLanguageCode);
 		
 		preventTwoInstances();
 		notifyClientCompliance();
@@ -405,7 +405,18 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		}
 	}
 
-	static public void displayDefaultUnofficialTranslationMessageIfNecessary(JFrame owner, MtfAwareLocalization localization, String languageCodeToTest)
+	public void displayPossibleUnofficialIncompatibleTranslationWarnings(String newLanguageCode)
+	{
+		UiMainWindow.displayPossibleUnofficialIncompatibleTranslationWarnings(getCurrentActiveFrame().getSwingFrame(), getLocalization(), newLanguageCode);
+	}
+
+	public static void displayPossibleUnofficialIncompatibleTranslationWarnings(JFrame owner, UiLocalization localization, String newLanguageCode)
+	{
+		UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(owner, localization, newLanguageCode);
+		UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner, localization, newLanguageCode);
+	}
+
+	private static void displayDefaultUnofficialTranslationMessageIfNecessary(JFrame owner, MtfAwareLocalization localization, String languageCodeToTest)
 	{
 		if(localization.isOfficialTranslation(languageCodeToTest))
 			return;
@@ -437,7 +448,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		
 	}
 	
-	public static void displayIncompatibleMtfVersionWarningMessageIfNecessary(JFrame owner, MtfAwareLocalization localization, String languageCodeToTest)
+	private static void displayIncompatibleMtfVersionWarningMessageIfNecessary(JFrame owner, MtfAwareLocalization localization, String languageCodeToTest)
 	{
 		if(localization.doesTranslationVersionMatchProgramVersion(languageCodeToTest, UiConstants.versionLabel))
 			return;
@@ -627,6 +638,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 					case CHANGE_LANGUAGE:
 					{
 						String newLanguageCode = signinController.getSelectedLanguageCode();
+						displayPossibleUnofficialIncompatibleTranslationWarnings(newLanguageCode);
 						getLocalization().setCurrentLanguageCode(newLanguageCode);
 						continue;
 					}
@@ -2439,18 +2451,9 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		return getUiState();
 	}
 	
-	static public Image getMartusIconImage()
-	{
-		URL imageURL = UiMainWindow.class.getResource("dialogs/Martus-swoosh-64x64.png");
-		if(imageURL == null)
-			return null;
-		ImageIcon imageicon = new ImageIcon(imageURL);
-		return imageicon.getImage();
-	}
-	
 	static public void updateIcon(JFrame window)
 	{
-		Image image = getMartusIconImage();
+		Image image = Utilities.getMartusIconImage();
 		if(image != null)
 		{
 			window.setIconImage(image);
