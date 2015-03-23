@@ -405,7 +405,18 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		}
 	}
 
-	static private void displayDefaultUnofficialTranslationMessageIfNecessary(JFrame owner, MtfAwareLocalization localization, String languageCodeToTest)
+	public void displayPossibleUnofficialIncompatibleTranslationWarnings(String newLanguageCode)
+	{
+		UiMainWindow.displayPossibleUnofficialIncompatibleTranslationWarnings(getCurrentActiveFrame().getSwingFrame(), getLocalization(), newLanguageCode);
+	}
+
+	public static void displayPossibleUnofficialIncompatibleTranslationWarnings(JFrame owner, UiLocalization localization, String newLanguageCode)
+	{
+		UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(owner, localization, newLanguageCode);
+		UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner, localization, newLanguageCode);
+	}
+
+	private static void displayDefaultUnofficialTranslationMessageIfNecessary(JFrame owner, MtfAwareLocalization localization, String languageCodeToTest)
 	{
 		if(localization.isOfficialTranslation(languageCodeToTest))
 			return;
@@ -437,7 +448,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		
 	}
 	
-	static private void displayIncompatibleMtfVersionWarningMessageIfNecessary(JFrame owner, MtfAwareLocalization localization, String languageCodeToTest)
+	private static void displayIncompatibleMtfVersionWarningMessageIfNecessary(JFrame owner, MtfAwareLocalization localization, String languageCodeToTest)
 	{
 		if(localization.doesTranslationVersionMatchProgramVersion(languageCodeToTest, UiConstants.versionLabel))
 			return;
@@ -660,17 +671,6 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		}
 			
 		return true;
-	}
-
-	public static void displayPossibleUnofficialIncompatibleTranslationWarnings(JFrame owner, UiLocalization localization, String newLanguageCode)
-	{
-		UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(owner, localization, newLanguageCode);
-		UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner, localization, newLanguageCode);
-	}
-
-	public void displayPossibleUnofficialIncompatibleTranslationWarnings(String newLanguageCode)
-	{
-		UiMainWindow.displayPossibleUnofficialIncompatibleTranslationWarnings(getCurrentActiveFrame().getSwingFrame(), getLocalization(), newLanguageCode);
 	}
 
 	public void doPostSigninAppInitialization()
