@@ -212,9 +212,9 @@ public class ClientBulletinStore extends BulletinStore
 			BulletinFolder folder = (BulletinFolder) f.next();
 			setOfUniversalIds.addAll(folder.getAllUniversalIdsUnsorted());
 		}
-		
-		BulletinFolder importFolder = getFolderImport();
-		setOfUniversalIds.addAll(importFolder.getAllUniversalIdsUnsorted());
+		BulletinFolder importFolder = findFolder(IMPORT_FOLDER);
+		if(importFolder != null)
+			setOfUniversalIds.addAll(importFolder.getAllUniversalIdsUnsorted());
 		
 		return setOfUniversalIds;
 	}
