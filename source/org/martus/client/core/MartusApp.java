@@ -108,6 +108,7 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.AuthorizationFailedException;
 import org.martus.common.crypto.MartusCrypto.DecryptionException;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
@@ -2534,12 +2535,22 @@ public class MartusApp
 			getSecurity().readKeyPair(keyPairFile, PasswordHelper.getCombinedPassPhrase(userName, userPassPhrase));
 			setCurrentAccount(userName, keyPairFile.getParentFile());
 		}
+		catch(IOException e)
+		{
+			clearCurrentUser();
+			throw new AuthorizationFailedException(e);
+		}
 		catch(Exception e)
 		{
-			getSecurity().clearKeyPair();
-			currentUserName = "";
+			clearCurrentUser();
 			throw e;
 		}
+	}
+
+	private void clearCurrentUser()
+	{
+		getSecurity().clearKeyPair();
+		currentUserName = "";
 	}
 	
 	public void attemptReSignInInternal(File keyPairFile, String userName, char[] userPassPhrase) throws Exception

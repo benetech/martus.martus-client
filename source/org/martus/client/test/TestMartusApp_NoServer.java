@@ -76,6 +76,7 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.AuthorizationFailedException;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
@@ -1236,13 +1237,13 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 			fail("Can't create an account if we can't write the file!");
 
 		}
-		catch(MartusApp.CannotCreateAccountFileException e)
+		catch(MartusApp.CannotCreateAccountFileException expected)
 		{
-			// expected exception
 		}
 		assertEquals("store account not unset on error?", false, mockSecurityForApp.hasKeyPair());
 		TRACE_END();
 	}
+	
 
 	public void testCreateAccount() throws Exception
 	{
@@ -1884,6 +1885,35 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_END();
 	}	
 	
+	
+	public void testSignInNonExistentAccount() throws Exception
+	{
+		TRACE_BEGIN("testSignInNonExistentAccount");
+
+		mockSecurityForApp.createKeyPair();
+		File tempDirectory = createTempDirectory();
+		tempDirectory.deleteOnExit();
+		appWithAccount.setCurrentAccount(userName, tempDirectory);
+		try
+		{
+			File noAccount = new File(NONEXISTENT_FILENAME);
+			noAccount.delete();
+			appWithAccount.attemptSignInInternal(noAccount, userName, userPassword);
+			fail("Can't open an account that doesn't exist!");
+
+		}
+		catch(AuthorizationFailedException expected)
+		{
+		}
+		catch(Exception e)
+		{
+			fail("Didn't throw AuthorizationFailedException?");
+		}
+		assertEquals("keypair not cleared?", false, mockSecurityForApp.hasKeyPair());
+		assertEquals("non-blank username?", "", appWithAccount.getUserName());
+		TRACE_END();
+	}
+
 	public void testFileOutputStreamReadOnly() throws Exception
 	{
 		TRACE_BEGIN("testFileOutputStreamReadOnly");
@@ -2988,6 +3018,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 	MartusLocalization testAppLocalization;
 	private MockMartusApp appWithAccount;
+	
+	static final String NONEXISTENT_FILENAME = "someFileWhichDoesnotExist.key";
 	
 	static final boolean SEARCH_ALL_BULLETIN_REVISIONS = false; 
 	static final boolean SEARCH_FINAL_BULLETIN_REVISION_ONLY = true; 
