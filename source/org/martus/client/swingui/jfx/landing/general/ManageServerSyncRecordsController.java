@@ -33,6 +33,7 @@ import java.util.Vector;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -60,9 +61,10 @@ import org.martus.common.packet.UniversalId;
 
 public class ManageServerSyncRecordsController extends AbstractFxLandingContentController
 {
-	public ManageServerSyncRecordsController(UiMainWindow mainWindowToUse)
+	public ManageServerSyncRecordsController(UiMainWindow mainWindowToUse) throws Exception
 	{
 		super(mainWindowToUse);
+		getServerRecords();
 	}
 
 	@Override
@@ -78,7 +80,6 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 	
 	private void initalizeItemsTable()
 	{
-		getMainWindow().setWaitingCursor();
 		Label noRecords = new Label(getLocalization().getFieldLabel("NoServerSyncDataInTable"));
 		allRecordsTable.setPlaceholder(noRecords);
 		allRecordsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -88,10 +89,6 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		try
 		{
 			Set localRecords = getLocalRecords();
-			Vector serverMyDrafts = getServerMyDrafts();
-			Vector serverMySealeds = getServerMySealeds();
-			Vector serverHQDrafts = getServerHQDrafts();
-			Vector serverHQSealeds = getServerHQSealeds();
 			syncRecordsTableProvider.addBulletinsAndSummaries(localRecords, serverMyDrafts, serverMySealeds, serverHQDrafts, serverHQSealeds);
 			onShowAll(null);
 		} 
@@ -99,48 +96,67 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 		{
 			logAndNotifyUnexpectedError(e);
 		}
-		finally
-		{
-			getMainWindow().resetCursor();
-		}
 	}
 
-	private Vector getServerMyDrafts() throws Exception
-	{
-		//TODO should show a progress dialog that user can abort.
-		RetrieveTableModel model = new RetrieveMyDraftsTableModel(getApp(), getLocalization());
-		model.initialize(null);
-		return model.getAllSummaries();
-	}
-
-	private Vector getServerMySealeds() throws Exception
-	{
-		//TODO should show a progress dialog that user can abort.
-		RetrieveTableModel model = new RetrieveMyTableModel(getApp(), getLocalization());
-		model.initialize(null);
-		return model.getAllSummaries();
-	}
-
-	private Vector getServerHQDrafts() throws Exception
-	{
-		//TODO should show a progress dialog that user can abort.
-		RetrieveTableModel model = new RetrieveHQDraftsTableModel(getApp(), getLocalization());
-		model.initialize(null);
-		return model.getAllSummaries();
-	}
-
-	private Vector getServerHQSealeds() throws Exception
-	{
-		//TODO should show a progress dialog that user can abort.
-		RetrieveTableModel model = new RetrieveHQTableModel(getApp(), getLocalization());
-		model.initialize(null);
-		return model.getAllSummaries();
-	}
-	
 	private Set getLocalRecords()
 	{
 		return getApp().getStore().getAllBulletinLeafUids();
 	}
+
+	public void getServerRecords() throws Exception
+	{
+		showBusyDialogWithCancel(getLocalization().getFieldLabel("RetrievingRecordSummariesFromServer"), new UpdateAllRecordsTask());
+	}
+	
+	class UpdateAllRecordsTask extends Task
+	{
+		@Override
+		protected Object call() throws Exception
+		{
+			//TODO: should all be on separate background threads to improve performance 
+			if(!isCancelled())
+				serverMyDrafts = getServerMyDrafts();
+			if(!isCancelled())
+				serverMySealeds = getServerMySealeds();
+			if(!isCancelled())
+				serverHQDrafts = getServerHQDrafts();
+			if(!isCancelled())
+				serverHQSealeds = getServerHQSealeds();
+			return null;
+		}
+			
+		private Vector getServerMyDrafts() throws Exception
+		{
+			RetrieveTableModel model = new RetrieveMyDraftsTableModel(getApp(), getLocalization());
+			model.initialize(null);
+			return model.getAllSummaries();
+		}
+
+		private Vector getServerMySealeds() throws Exception
+		{
+			RetrieveTableModel model = new RetrieveMyTableModel(getApp(), getLocalization());
+			model.initialize(null);
+			return model.getAllSummaries();
+		}
+
+		private Vector getServerHQDrafts() throws Exception
+		{
+			RetrieveTableModel model = new RetrieveHQDraftsTableModel(getApp(), getLocalization());
+			model.initialize(null);
+			return model.getAllSummaries();
+		}
+
+		private Vector getServerHQSealeds() throws Exception
+		{
+			RetrieveTableModel model = new RetrieveHQTableModel(getApp(), getLocalization());
+			model.initialize(null);
+			return model.getAllSummaries();
+		}
+		
+		
+		
+	}
+
 
 	private void initalizeColumns()
 	{
@@ -444,6 +460,11 @@ public class ManageServerSyncRecordsController extends AbstractFxLandingContentC
 
 	@FXML 
 	private Button deleteButton;
+	
+	protected Vector serverMyDrafts;
+	protected Vector serverMySealeds;
+	protected Vector serverHQDrafts;
+	protected Vector serverHQSealeds;
 	
 	private SyncRecordsTableProvider syncRecordsTableProvider;
 }
