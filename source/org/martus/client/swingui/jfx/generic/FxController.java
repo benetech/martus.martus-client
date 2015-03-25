@@ -297,6 +297,14 @@ abstract public class FxController implements Initializable
 		showControllerInsideModalDialog(popupController);
 	}
 
+	public void showBusyDialogWithCancel(String message, Task task) throws Exception
+	{
+		FxBusyControllerWithCancel popupController = new FxBusyControllerWithCancel(getMainWindow(), message, task);
+		showControllerInsideModalDialog(popupController);
+		if(popupController.didUserCancel())
+			throw new UserCancelledException();
+	}
+
 	public void showTimeoutDialog(String message, TaskWithTimeout task) throws Exception
 	{
 		int maxSeconds = task.getMaxSeconds();
