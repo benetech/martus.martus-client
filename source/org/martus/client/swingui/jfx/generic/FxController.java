@@ -34,6 +34,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.Property;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
@@ -61,6 +62,7 @@ abstract public class FxController implements Initializable
 	public FxController(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
+		FxController.useZawgyiFontProperty = mainWindowToUse.getApp().getConfigInfo().getUseZawgyiFontProperty();
 	}
 	
 	abstract public String getFxmlLocation();
@@ -410,6 +412,13 @@ abstract public class FxController implements Initializable
 			return;
 		applyPageSpecificStyleSheets(stylesheets, directory, languageCode, cssLocation);
 	}
+	
+	public void updateBurmeseStyleSheets() throws Exception
+	{
+		ObservableList<String> stylesheets = getStage().getScene().getStylesheets();
+		File directory = getApp().getFxmlDirectory();
+		FxController.updateBurmeseStyleSheet(stylesheets, directory);
+	}
 
 	private static void applyMasterMartusStyleSheets(ObservableList<String> stylesheets, File directory,
 			String languageCode) throws Exception
@@ -433,6 +442,20 @@ abstract public class FxController implements Initializable
 			if(languageCssUrl != null)
 				stylesheets.add(languageCssUrl.toExternalForm());
 		}
+		
+		updateBurmeseStyleSheet(stylesheets, directory);
+	}
+
+	public static void updateBurmeseStyleSheet(ObservableList<String> stylesheets, File directory) throws Exception
+	{
+		URL languageCssUrl = getBestCss(directory, MartusLocalization.BURMESE, MARTUS_CSS);
+		if(languageCssUrl == null)
+			return;
+		String externalFormCSS = languageCssUrl.toExternalForm();
+		if(FxController.useZawgyiFontProperty.getValue())
+			stylesheets.add(externalFormCSS);
+		else
+			stylesheets.remove(externalFormCSS);
 	}
 	
 	public static URL getBestCss(File directory, String languageCode,
@@ -479,7 +502,8 @@ abstract public class FxController implements Initializable
 
 	private static final String POPUP_CSS = "Popup.css";
 	private static final String MARTUS_CSS = "Martus.css";
-
+	private static Property<Boolean> useZawgyiFontProperty;
+	
 	private UiMainWindow mainWindow;
 	private static int notifyDialogDepth;
 	private FxShellController shellController;
