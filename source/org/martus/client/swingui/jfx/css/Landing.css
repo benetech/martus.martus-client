@@ -45,28 +45,24 @@
 .toolbarLabel {
 	-fx-text-fill: #4c5e70;
 	-fx-alignment: center-right;
-	-fx-font-family: Helvetica;
 	-fx-font-size: 14px;
 }
 
 .toolbarButton {
 	-fx-background-color: #77bad0;
 	-fx-text-fill: #f7f7f7;
-	-fx-font-family: Helvetica;
 	-fx-font-size: 14px;
 }
 
 .toolbarButton:hover {
 	-fx-background-color: #77bad0;
 	-fx-text-fill: White;
-	-fx-font-family: Helvetica;
 	-fx-font-size: 14px;
 }
 
 .toolbarButton:pressed {
 	-fx-background-color: #9bd6ea;
 	-fx-text-fill: White;
-	-fx-font-family: Helvetica;
 	-fx-font-size: 14px;
 }
 
