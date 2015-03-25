@@ -37,6 +37,7 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TabPane;
@@ -82,7 +83,12 @@ abstract public class SigninController extends FxNonWizardShellController
 		BooleanBinding isPasswordEmpty = passwordField.textProperty().isEmpty();
 		okButton.disableProperty().bind(isUserNameEmpty.or(isPasswordEmpty));
 		
-		signInPane.setVisible(getApp().doesAnyAccountExist());
+		boolean doesAnyAccountExist = getApp().doesAnyAccountExist();
+		signInPane.setVisible(doesAnyAccountExist);
+		if(doesAnyAccountExist)
+			newAccountHyperLink.getStyleClass().add("headingLevel3");
+		else
+			newAccountHyperLink.getStyleClass().add("headingLevel1");
 		Platform.runLater(()->userNameField.requestFocus());
 	}
 
@@ -212,6 +218,9 @@ abstract public class SigninController extends FxNonWizardShellController
 	
 	@FXML
 	private TabPane tabPane;
+	
+	@FXML
+	private Hyperlink newAccountHyperLink;
 	
 	@FXML
 	private TextField userNameField;
