@@ -344,6 +344,7 @@ public class EnglishStrings
 "field:CreatingAccount=Please wait. Your account's encryption key is being created.",
 "field:LoadingTemplates=Please wait while we retrieve a list of templates from the server.",
 "field:FindAccountByToken=Please wait while we find this account on the server.",
+"field:RetrievingRecordSummariesFromServer=Please wait while we retrieve records from the server.",
 "field:moveToCaseProjectIncidents=Select one or more #FolderName#, to move selected items to.",
 "field:VerifyPublicCodeNewAndOld=Please visually verify either public code below to ensure you are adding the person you think you are adding.",
 "field:VerifyPublicCode=A public code is a unique identifier that can help you verify that a contact that you are adding is who they say they are.\n\nYou can visually verify the public code below. If you don’t know your contact’s public code, you can always perform the verification later.\n\nVerification is an important step that only needs to be performed once.",
