@@ -49,6 +49,9 @@ import javafx.collections.ObservableList;
 
 import org.javarosa.core.model.Constants;
 import org.javarosa.core.model.FormDef;
+import org.javarosa.core.model.FormIndex;
+import org.javarosa.core.model.GroupDef;
+import org.javarosa.core.model.IFormElement;
 import org.javarosa.core.model.QuestionDef;
 import org.javarosa.core.model.SelectChoice;
 import org.javarosa.core.model.data.IAnswerData;
@@ -82,6 +85,7 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.packet.UniversalId;
@@ -480,7 +484,6 @@ public class FxBulletin
 	{
 		String xFormsModelXmlAsString = getXformsModelWithoutRootElement(bulletinWithXForms);
 		String xFormsInstanceXmlAsString = getXFormsInstanceWithoutRootElement(bulletinWithXForms);
-		
         initializeJavaRosa();    	
 		
         FormEntryController formEntryController = importXFormsData(xFormsModelXmlAsString, xFormsInstanceXmlAsString);
@@ -558,24 +561,73 @@ public class FxBulletin
 		return multiCalendar.toString();
 	}
 
-	private FieldSpecCollection createFieldSpecsFromXForms(FormEntryController formEntryController)
+	private FieldSpecCollection createFieldSpecsFromXForms(FormEntryController formEntryController) throws Exception
+	{
+		FormDef formDef = formEntryController.getModel().getForm();
+		List<IFormElement> children = formDef.getChildren();
+		
+		return recursivelyConvertXFormsFormToFieldSpecs(formEntryController, children);
+	}
+
+	private FieldSpecCollection recursivelyConvertXFormsFormToFieldSpecs(FormEntryController formEntryController, List<IFormElement> children) throws Exception
 	{
 		FieldSpecCollection fieldsFromXForms = new FieldSpecCollection();
-		int event;
-		while ((event = formEntryController.stepToNextEvent()) != FormEntryController.EVENT_END_OF_FORM) 
+		for (IFormElement child : children)
 		{
-			if (event != FormEntryController.EVENT_QUESTION) 
-				continue;
+			if (child instanceof GroupDef)
+			{
+				GroupDef groupDef = (GroupDef) child;
+				List<IFormElement> groupChildrem = groupDef.getChildren();
+				FieldSpecCollection gridChildrenFieldSpecs = recursivelyConvertXFormsFormToFieldSpecs(formEntryController, groupChildrem);
+				if (isRepeatGroup(groupDef))
+				{
+					GridFieldSpec gridSpec = new GridFieldSpec();
+					TreeReference thisTreeReference = (TreeReference) groupDef.getBind().getReference();
+					gridSpec.setTag(thisTreeReference.toString());
+					gridSpec.addColumns(gridChildrenFieldSpecs);
+					fieldsFromXForms.add(gridSpec);
+				}
+				else
+				{
+					fieldsFromXForms.addAll(gridChildrenFieldSpecs);
+				}
+			}
 			
-			FormEntryPrompt questionPrompt = formEntryController.getModel().getQuestionPrompt();
-			FieldSpec fieldSpec = convertToFieldSpec(questionPrompt);
-			if (fieldSpec == null)
-				continue;
-			
-			fieldsFromXForms.add(fieldSpec);
+			if (child instanceof QuestionDef)
+			{
+				QuestionDef questionDef = (QuestionDef) child;
+				FormEntryPrompt questionPrompt = findQuestion(formEntryController, (TreeReference) questionDef.getBind().getReference());
+				FieldSpec fieldSpec = convertToFieldSpec(questionPrompt);
+				if (fieldSpec != null)
+					fieldsFromXForms.add(fieldSpec);
+			}
 		}
 		
 		return fieldsFromXForms;
+	}
+
+	private boolean isRepeatGroup(GroupDef groupDef)
+	{
+		return groupDef.getRepeat();
+	}
+	
+	private FormEntryPrompt findQuestion(FormEntryController formEntryContorller, TreeReference treeReferenceToMatch)
+	{
+		formEntryContorller.jumpToIndex(FormIndex.createBeginningOfFormIndex());
+		int event;
+		while ((event = formEntryContorller.stepToNextEvent()) != FormEntryController.EVENT_END_OF_FORM) 
+		{
+			if (event == FormEntryController.EVENT_QUESTION) 
+			{
+				FormEntryPrompt questionPrompt = formEntryContorller.getModel().getQuestionPrompt();
+				QuestionDef thisQuestionDef = questionPrompt.getQuestion();
+				TreeReference thisTreeReference = (TreeReference) thisQuestionDef.getBind().getReference();
+				if (thisTreeReference.equals(treeReferenceToMatch))
+					return questionPrompt;
+			} 
+		}
+
+		return null;
 	}
 	
 	private FieldSpec convertToFieldSpec(FormEntryPrompt questionPrompt)
