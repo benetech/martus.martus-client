@@ -1,6 +1,5 @@
 .root {
 	-fx-background-color: #e6e7e9;
-  -fx-font-family: "Helvetica";
   -fx-line-height: inherit 28px;
 }
 
@@ -90,18 +89,6 @@
 	-fx-text-fill: White;
   -fx-font-weight: bold;
 	-fx-font-size: 13px;
-}
-
-
-.wv-sidebar-hint {
-	background-color: #e6e7e9;
-	font: 9px "Helvetica";
-	border: none;
-}
-
-.wv-bottom-alert {
-	background-color: #e6e7e9;
-	color: White;
 }
 
 .not-used-yet {
