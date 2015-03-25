@@ -83,13 +83,18 @@ abstract public class SigninController extends FxNonWizardShellController
 		BooleanBinding isPasswordEmpty = passwordField.textProperty().isEmpty();
 		okButton.disableProperty().bind(isUserNameEmpty.or(isPasswordEmpty));
 		
+		updateCreateNewAccountBehavior();
+		Platform.runLater(()->userNameField.requestFocus());
+	}
+
+	public void updateCreateNewAccountBehavior()
+	{
 		boolean doesAnyAccountExist = getApp().doesAnyAccountExist();
 		signInPane.setVisible(doesAnyAccountExist);
 		if(doesAnyAccountExist)
 			newAccountHyperLink.getStyleClass().add("headingLevel3");
 		else
 			newAccountHyperLink.getStyleClass().add("headingLevel1");
-		Platform.runLater(()->userNameField.requestFocus());
 	}
 
 	private void languageChangedTo(ChoiceItem newValue)
