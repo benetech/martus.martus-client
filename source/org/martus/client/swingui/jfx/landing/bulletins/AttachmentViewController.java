@@ -180,6 +180,9 @@ public class AttachmentViewController extends FxController
 	{
 		Platform.runLater(() -> {
 			attachmentImageView.setImage(attachmentImage);
+			Dimension preferredDimension = getPreferredDimension();
+			attachmentImageView.fitWidthProperty().set(preferredDimension.getWidth());
+			attachmentImageView.fitHeightProperty().set(preferredDimension.getHeight());
 			showNode(attachmentPane);
 
 			boolean hasGeoTagData = attachmentGeoTag.hasData();

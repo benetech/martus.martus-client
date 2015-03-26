@@ -173,17 +173,6 @@
 }
 
 
-.wv-sidebar-hint {
-	background-color: #e6e7e9;
-	font: 9px "Helvetica";
-	border: none;
-}
-
-.wv-bottom-alert {
-	background-color: #e6e7e9;
-	color: White;
-}
-
 .not-used-yet {
 	-fx-background-insets: 25;
 	-fx-insets: 10 10 10 10;
