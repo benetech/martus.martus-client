@@ -484,6 +484,9 @@ public class FxCaseManagementController extends AbstractFxLandingContentControll
 			ActionDoer shellController = new DialogWithNoButtonsShellController(getMainWindow(), controller);
 			doAction(shellController);
 		}
+		catch (UserCancelledException exitCleanly)
+		{
+		}
 		catch (Exception e)
 		{
 			logAndNotifyUnexpectedError(e);

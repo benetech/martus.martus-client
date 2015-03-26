@@ -14,7 +14,6 @@
 .titleText {
 	-fx-font-size: 13px;
 	-fx-text-fill: #ffffff;
-	-fx-font-family: "Helvetica";
 	-fx-text-alignment:center;
 }
 
@@ -26,7 +25,6 @@
 	-fx-font-size: 15px;
 	-fx-text-fill: #405980;
 	-fx-font-weight: bold;
-	-fx-font-family: "Helvetica";
 	-fx-text-alignment:left;
 	-fx-padding:5 0 5 0;
 }

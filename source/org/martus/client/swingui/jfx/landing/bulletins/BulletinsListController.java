@@ -37,6 +37,7 @@ import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.Property;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -91,6 +92,21 @@ public class BulletinsListController extends AbstractFxLandingContentController 
 	{
 		super(mainWindowToUse);
 		bulletinTableProvider = bulletinListProviderToUse;
+		useZawgyiFontProperty = getApp().getConfigInfo().getUseZawgyiFontProperty();
+		useZawgyiFontProperty.addListener((observable, oldValue, newValue) -> updateFonts());
+	}
+
+	private Object updateFonts()
+	{
+		try
+		{
+			updateBurmeseStyleSheets();
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+		}
+		return null;
 	}
 
 	@Override
@@ -622,7 +638,7 @@ public class BulletinsListController extends AbstractFxLandingContentController 
 
 	final private String VIEW_BULLETIN_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/view.png";
 	final private String EDIT_BULLETIN_IMAGE_PATH = "/org/martus/client/swingui/jfx/images/edit.png";
-	
+	private Property<Boolean> useZawgyiFontProperty;
 	@FXML 
 	protected TableView<BulletinTableRowData> itemsTable;
 

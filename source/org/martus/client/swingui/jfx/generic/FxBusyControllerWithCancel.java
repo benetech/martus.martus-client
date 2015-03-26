@@ -22,21 +22,38 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
+package org.martus.client.swingui.jfx.generic;
 
-package org.martus.client.swingui;
+import javafx.concurrent.Task;
 
-public class UiConstants
+import org.martus.client.swingui.UiMainWindow;
+
+public class FxBusyControllerWithCancel extends FxBusyController
 {
-	// NOTE: See the license terms to understand when the following MUST be changed.
-	// Also, you should search for "Martus" in EnglishStrings.txt and any .mtf files 
-	// and change other occurrences as required by the license.
-	public static final String programName = "Martus(TM)";
-	public static String versionLabel = "pre-5.0.3";
-	public static final String copyrightSymbol = "\u00A9 "; 
-	public static final String copyright = "Martus(TM) is a trademark of Beneficent Technology, Inc.\n"
-											+ "This software is "+ copyrightSymbol 
-											+ "Copyright 2002-2015, Beneficent Technology, Inc.";
-	public static final String websiteURL = "https://www.benetech.org";
-	public static final String website = "(Benetech, at www.benetech.org)";
-	public static final String martusWebsiteURL = "https://martus.org";
+	public FxBusyControllerWithCancel(UiMainWindow mainWindowToUse, String messageToUse, Task taskToUse)
+	{
+		super(mainWindowToUse, messageToUse, taskToUse);
+	}
+
+	@Override
+	public void initialize()
+	{
+		super.initialize();
+		cancelButton.setVisible(true);
+	}	
+	
+	@Override
+	public void cancelPressed()
+	{
+		userCancelled = true;
+		forceCloseDialog();
+	}
+	
+	@Override
+	public boolean didUserCancel()
+	{
+		return userCancelled;
+	}
+
+	private boolean userCancelled;
 }

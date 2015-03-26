@@ -250,11 +250,6 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		inactivityDetector = new UiInactivityDetector();
 		timeoutTimerTask = new TimeoutTimerTask();
 
-		if (getApp().hasNoAccounts())
-		{
-			startAccountSetupWizard();
-		}
-
 		if(!getApp().isSignedIn())
 		{
 			if(!sessionSignIn())

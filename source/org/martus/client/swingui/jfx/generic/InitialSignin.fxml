@@ -36,7 +36,7 @@
             				    </GridPane>
             				    <VBox fx:id="createPane">
                <children>
-               					    <Hyperlink onAction="#onNewAccount" styleClass="headingLevel3" text="%CreateNewAccount" />
+               					    <Hyperlink fx:id="newAccountHyperLink" onAction="#onNewAccount" text="%CreateNewAccount" />
                </children>
             					</VBox>
             </children>
