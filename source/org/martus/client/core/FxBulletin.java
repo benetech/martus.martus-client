@@ -84,7 +84,7 @@ public class FxBulletin
 		clear();
 		
 		if (b.isXFormsBulletin())
-			b = b.createNewBulletinFromXFormsBulletin();
+			b = b.createNewBulletinFromXFormsBulletin(store);
 		
 		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>(b.getUniversalId());
 		versionProperty = new SimpleIntegerProperty(b.getVersion());
@@ -236,7 +236,7 @@ public class FxBulletin
 
 	public SimpleStringProperty fieldProperty(String fieldTag)
 	{
-		FieldSpec foundSpec = fieldSpecs.findBytag(fieldTag);
+		FieldSpec foundSpec = findFieldSpecByTag(fieldTag);
 		if(foundSpec == null)
 			throw new NullPointerException("No such field: " + fieldTag);
 
@@ -249,7 +249,7 @@ public class FxBulletin
 	
 	public ObservableBooleanValue isValidProperty(String fieldTag)
 	{
-		FieldSpec foundSpec = fieldSpecs.findBytag(fieldTag);
+		FieldSpec foundSpec = findFieldSpecByTag(fieldTag);
 		if(foundSpec == null)
 			throw new NullPointerException("No such field: " + fieldTag);
 
@@ -257,6 +257,11 @@ public class FxBulletin
 			throw new NullPointerException("fieldProperty not available for a grid: " + fieldTag);
 
 		return fields.get(fieldTag).fieldIsValidProperty();
+	}
+
+	public FieldSpec findFieldSpecByTag(String fieldTag)
+	{
+		return fieldSpecs.findBytag(fieldTag);
 	}
 	
 	public Vector<ObservableChoiceItemList> gridColumnValuesProperty(String gridTag, String gridColumnLabel)
