@@ -67,6 +67,8 @@ import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.client.swingui.jfx.landing.bulletins.AttachmentTableRowData;
 import org.martus.common.Exceptions.ImportXFormsException;
 import org.martus.common.FieldSpecCollection;
+import org.martus.common.GridData;
+import org.martus.common.GridRow;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusXml;
@@ -526,6 +528,9 @@ public class FxBulletin
 		int event;
 		while ((event = formEntryController.stepToNextEvent()) != FormEntryController.EVENT_END_OF_FORM) 
 		{
+			if (event == FormEntryController.EVENT_REPEAT)
+				convertXFormRepeatToGridData(formEntryController, fieldsFromXForms, bulletinLoadedFromXForms);
+			
 			if (event != FormEntryController.EVENT_QUESTION) 
 				continue;
 		
@@ -550,6 +555,96 @@ public class FxBulletin
 		}
 		
 		return bulletinLoadedFromXForms;
+	}
+
+	private void convertXFormRepeatToGridData(FormEntryController formEntryController, FieldSpecCollection fieldsFromXForms, Bulletin bulletinLoadedFromXForms) throws Exception
+	{
+		FormEntryModel formModel = formEntryController.getModel();
+		IFormElement repeatElement = formModel.getForm().getChild(formModel.getFormIndex());
+		GroupDef castedRepeatDef = (GroupDef) repeatElement;
+		TreeReference repeatTreeReference = (TreeReference) castedRepeatDef.getBind().getReference(); 
+		GridFieldSpec foundGridFieldSpec = (GridFieldSpec) fieldsFromXForms.findBytag(repeatTreeReference.toString());
+		PoolOfReusableChoicesLists allReusableChoiceLists = fieldsFromXForms.getAllReusableChoiceLists();
+		GridData gridData = new GridData(foundGridFieldSpec, allReusableChoiceLists);
+		handleRepeat(formEntryController, fieldsFromXForms, gridData);
+		
+		String gridTag = repeatTreeReference.toString();
+		bulletinLoadedFromXForms.set(gridTag, gridData.getXmlRepresentation());
+	}
+
+	private void handleRepeat(FormEntryController formEntryController, FieldSpecCollection fieldsFromXForms, GridData gridData) throws Exception
+	{
+		int event = returnToPreivousEventToAvoidConsumingEvent(formEntryController);
+		while ((event = formEntryController.stepToNextEvent()) != FormEntryController.EVENT_END_OF_FORM) 
+		{
+			if (event == FormEntryController.EVENT_REPEAT)
+			{
+				FormEntryModel formModel = formEntryController.getModel();
+				IFormElement element = formModel.getForm().getChild(formModel.getFormIndex());
+		        if (element instanceof GroupDef) 
+		        {
+		        	GridRow gridRow = createGridRowWithData(formEntryController, gridData.getSpec(), fieldsFromXForms.getAllReusableChoiceLists());
+		        	gridData.addRow(gridRow);
+		        	System.out.println(gridData.toString());
+		        }
+			}
+			
+			if (hasNoMoreUserFilledRepeats(event))
+				return;
+		}
+	}
+
+	private boolean hasNoMoreUserFilledRepeats(int event)
+	{
+		final int PROMPT_USER_TO_ADD_NEW_REPEAT = FormEntryController.EVENT_PROMPT_NEW_REPEAT;
+		return event == PROMPT_USER_TO_ADD_NEW_REPEAT;
+	}
+	
+	private GridRow createGridRowWithData(FormEntryController formEntryController, GridFieldSpec gridFieldSpec, PoolOfReusableChoicesLists allReusableChoiceLists) throws Exception
+	{
+		GridRow gridRow = new GridRow(gridFieldSpec, allReusableChoiceLists);
+		int columnIndex = 0;
+		int event;
+		while ((event = formEntryController.stepToNextEvent()) != FormEntryController.EVENT_END_OF_FORM) 
+		{
+			if (event == FormEntryController.EVENT_REPEAT || hasNoMoreUserFilledRepeats(event))
+			{
+				returnToPreivousEventToAvoidConsumingEvent(formEntryController);
+				return gridRow;
+			}
+			
+			if (event == FormEntryController.EVENT_QUESTION)
+			{
+				fillGridRow(formEntryController, gridRow, columnIndex);
+				++columnIndex;
+			}
+		}
+		
+		return gridRow;
+	}
+
+	private void fillGridRow(FormEntryController formEntryController, GridRow gridRow, int columnIndex) throws Exception
+	{
+		FormEntryPrompt currentQuestionPrompt = formEntryController.getModel().getQuestionPrompt();
+		IAnswerData currentAnswer = currentQuestionPrompt.getAnswerValue();
+		if (currentAnswer == null)
+			return;
+				
+		final int dataType = currentQuestionPrompt.getDataType();
+		String answerAsString = currentAnswer.getDisplayText();
+		if (dataType == Constants.DATATYPE_DATE)
+			answerAsString = formatDateToMartusDateFormat(answerAsString);
+
+		QuestionDef questionDef = currentQuestionPrompt.getQuestion();
+		if (shouldTreatSingleItemChoiceListAsBooleanField(dataType, questionDef) && answerAsString.isEmpty())
+			answerAsString = FieldSpec.FALSESTRING;
+
+		gridRow.setCellText(columnIndex, answerAsString);
+	}
+
+	private int returnToPreivousEventToAvoidConsumingEvent(FormEntryController formEntryController)
+	{
+		return formEntryController.stepToPreviousEvent();
 	}
 
 	private String formatDateToMartusDateFormat(String dateAsString) throws Exception
