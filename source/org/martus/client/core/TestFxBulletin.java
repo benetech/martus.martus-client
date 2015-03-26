@@ -698,7 +698,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithOnStringInputFieldXmlAsString());
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceXmlAsString());
 		fxBulletin.copyDataFromBulletin(bulletin, store);
-		assertEquals("FxBulletin filled from bulletin with data should have data?", 12, fxBulletin.getFieldSpecs().size());
+		assertEquals("FxBulletin filled from bulletin with data should have data?", getExpectedFieldCount(1), fxBulletin.getFieldSpecs().size());
 		
 		String TAG = "name";
 		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag(TAG);
@@ -718,7 +718,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithOnChoiceInputFieldXmlAsString());
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithChoiceAnswers());
 		fxBulletin.copyDataFromBulletin(bulletin, store);
-		verifyFieldSpecCount(fxBulletin, 12);
+		verifyFieldSpecCount(fxBulletin, getExpectedFieldCount(1));
 
 		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag(DROPDOWN_FIELD_TAG);
 		verifyDropDownFieldSpecCreatedFromXFormsData(fieldSpec);
@@ -769,7 +769,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithDateInputField());
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithDateField());
 		fxBulletin.copyDataFromBulletin(bulletin, store);
-		assertEquals("FxBulletin filled from bulletin with data should have date field?", 12, fxBulletin.getFieldSpecs().size());
+		assertEquals("FxBulletin filled from bulletin with data should have date field?", getExpectedFieldCount(1), fxBulletin.getFieldSpecs().size());
 		
 		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag("date");
 		assertTrue("Incorrect field type?", fieldSpec.getType().isDate());
@@ -793,13 +793,21 @@ public class TestFxBulletin extends TestCaseEnhanced
 		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithSingleItemChoiceListAsBoolean());
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(xFormsInstance);
 		fxBulletin.copyDataFromBulletin(bulletin, store);
-		assertEquals("FxBulletin filled from bulletin with data should have date field?", 12, fxBulletin.getFieldSpecs().size());
+		assertEquals("FxBulletin filled from bulletin with data should have date field?", getExpectedFieldCount(1), fxBulletin.getFieldSpecs().size());
 		
 		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag("anonymous");
 		assertTrue("Incorrect field type?", fieldSpec.getType().isBoolean());
 		
 		FxBulletinField dateField = fxBulletin.getField(fieldSpec);
 		assertEquals("Incorrect date?", expectedBooleanValue, dateField.getValue());
+	}
+
+	private int getExpectedFieldCount(int expectedFieldsConverted)
+	{
+		final int TOP_SECTION_DEFAULT_FIELD_COUNT = StandardFieldSpecs.getDefaultTopSectionFieldSpecs().size();
+		final int TOTAL_SECTION_FIELDS = 1;
+		
+		return TOP_SECTION_DEFAULT_FIELD_COUNT + TOTAL_SECTION_FIELDS + expectedFieldsConverted;
 	}
 	
 	public void testFxBulletinWithXFormsRepeatField() throws Exception
@@ -811,7 +819,7 @@ public class TestFxBulletin extends TestCaseEnhanced
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithRepeats());
 		fxBulletin.copyDataFromBulletin(bulletin, store);
 		Vector<FieldSpec> fieldSpecs = fxBulletin.getFieldSpecs();
-		assertEquals("FxBulletin filled from bulletin with data should have grid field?", 12, fieldSpecs.size());
+		assertEquals("FxBulletin filled from bulletin with data should have grid field?", getExpectedFieldCount(1), fieldSpecs.size());
 		
 		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag("/nm/victim_information");
 		verifyGridFieldSpec(fieldSpec);
