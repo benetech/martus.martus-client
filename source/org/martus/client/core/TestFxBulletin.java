@@ -56,6 +56,7 @@ import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.FieldTypeDate;
+import org.martus.common.fieldspec.FieldTypeDropdown;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.RequiredFieldIsBlankException;
@@ -801,6 +802,49 @@ public class TestFxBulletin extends TestCaseEnhanced
 		assertEquals("Incorrect date?", expectedBooleanValue, dateField.getValue());
 	}
 	
+	public void testFxBulletinWithXFormsRepeatField() throws Exception
+	{
+		FxBulletin fxBulletin = new FxBulletin(getLocalization());
+		assertEquals("FxBulletin field specs should be filled?", 0, fxBulletin.getFieldSpecs().size());
+		Bulletin bulletin = new BulletinForTesting(security);
+		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithRepeats());
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithRepeats());
+		fxBulletin.copyDataFromBulletin(bulletin, store);
+		assertEquals("FxBulletin filled from bulletin with data should have grid field?", 1, fxBulletin.getFieldSpecs().size());
+		
+		FieldSpec fieldSpec = fxBulletin.getFieldSpecs().firstElement();
+		verifyGridFieldSpec(fieldSpec);
+		verifyGridFieldData(fxBulletin, fieldSpec);
+	}
+
+	private void verifyGridFieldData(FxBulletin fxBulletin, FieldSpec fieldSpec) throws Exception
+	{
+		FxBulletinGridField fxBulletinGridField = (FxBulletinGridField) fxBulletin.getField(fieldSpec);
+		GridData gridData = new GridData(fxBulletinGridField.getGridFieldSpec(), fxBulletin.getAllReusableChoicesLists());
+		gridData.setFromXml(fxBulletinGridField.getValue());
+		assertEquals("Incorrect grid row count?", 2, gridData.getRowCount());
+	
+		GridRow firstRow = gridData.getRow(0);
+		assertEquals("incorrect grid column value", "John", firstRow.getCellText(0));
+		assertEquals("incorrect grid column value", "Smith", firstRow.getCellText(1));
+		assertEquals("incorrect grid column value", "male", firstRow.getCellText(2));
+		
+		GridRow secondRow = gridData.getRow(1);
+		assertEquals("incorrect grid column value", "Sunny", secondRow.getCellText(0));
+		assertEquals("incorrect grid column value", "Dale", secondRow.getCellText(1));
+		assertEquals("incorrect grid column value", "other", secondRow.getCellText(2));
+	}
+
+	private void verifyGridFieldSpec(FieldSpec fieldSpec)
+	{
+		assertTrue("Incorrect field type?", fieldSpec.getType().isGrid());
+		GridFieldSpec gridFieldSpec = (GridFieldSpec) fieldSpec;
+		assertEquals("incorrect grid column count?", 3, gridFieldSpec.getColumnCount());
+		assertEquals("incorrect fieldType?", new FieldTypeNormal(), gridFieldSpec.getColumnType(0));
+		assertEquals("incorrect fieldType?", new FieldTypeNormal(), gridFieldSpec.getColumnType(1));
+		assertEquals("incorrect fieldType?", new FieldTypeDropdown(), gridFieldSpec.getColumnType(2));
+	}
+	
 	private Vector<String> extractFieldTags(Bulletin b)
 	{
 		Vector<String> fieldTags = new Vector<String>();
@@ -978,6 +1022,71 @@ public class TestFxBulletin extends TestCaseEnhanced
 	private static String getXFormsInstanceWithSingleItemChoiceListAsNoValueBoolean()
 	{
 		return "<nm id=\"VitalVoices2\" ><anonymous/></nm>";
+	}
+	
+	private static String getXFormsInstanceWithRepeats()
+	{
+		return 	"<nm id=\"VitalVoices\" >" +
+				"<victim_information>" +
+				"<victimFirstName>John</victimFirstName>" +
+				"<victimLastName>Smith</victimLastName>" +
+				"<sex>male</sex>" +
+				"</victim_information>" +
+				"<victim_information>" +
+				"<victimFirstName>Sunny</victimFirstName>" +
+				"<victimLastName>Dale</victimLastName>" +
+				"<sex>other</sex>" +
+				"</victim_information>" +
+				"</nm>";
+	}
+	
+	private static String getXFormsModelWithRepeats()
+	{
+		return	"<h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
+			    "<h:head>" +
+			        "<h:title>secureApp Prototype</h:title>" +
+			        "<model>" +
+			            "<instance>" +
+			                "<nm id=\"VitalVoices\" >" +
+			                    "<victim_information>" +
+			                        "<victimFirstName></victimFirstName>" +
+			                        "<victimLastName></victimLastName>" +
+			                        "<sex></sex>" +
+			                    "</victim_information>" +
+			                "</nm>" +
+			            "</instance>" +
+			           	"<bind nodeset=\"/nm/victim_information/victimFirstName\" type=\"string\" ></bind>" +
+			            "<bind nodeset=\"/nm/victim_information/victimLastName\" type=\"string\" ></bind>" +
+			            "<bind nodeset=\"/nm/victim_information/sex\" type=\"select1\" ></bind>" +
+			        "</model>" +
+			    "</h:head>" +
+			    "<h:body>" +
+			            "<repeat nodeset=\"/nm/victim_information\" >" +
+			                "<input ref=\"victimFirstName\" >" +
+			                    "<label>Victim first name</label>" +
+			                "</input>" +
+			                "<input ref=\"victimLastName\" >" +
+			                    "<label>Victim last name</label>" +
+			                "</input>" +
+			                "<select1 ref=\"sex\" appearance=\"minimal\" >" +
+			                    "<label>Victim Sex</label>" +
+			                    "<item>" +
+			                        "<label>Female</label>" +
+			                        "<value>female</value>" +
+			                    "</item>" +
+			                    "<item>" +
+			                        "<label>Male</label>" +
+			                        "<value>male</value>" +
+			                    "</item>" +
+			                    "<item>" +
+			                        "<label>Other</label>" +
+			                        "<value>other</value>" +
+			                    "</item>" +
+			                "</select1>" +
+			            "</repeat>" +
+			       
+			    "</h:body>" +
+			"</h:html>";
 	}
 	
 	private static final String DROPDOWN_FIELD_TAG = "sourceOfRecordInformation";
