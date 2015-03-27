@@ -84,10 +84,11 @@ public class FxBulletin
 	{
 		clear();
 		
+		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>(b.getUniversalId());
+
 		if (b.isXFormsBulletin())
 			b = new BulletinFromXFormsLoader(getLocalization(), b).createNewBulletinFromXFormsBulletin();
-		
-		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>(b.getUniversalId());
+
 		versionProperty = new SimpleIntegerProperty(b.getVersion());
 
 		immutableOnServer = new SimpleBooleanProperty(b.getImmutableOnServer());
