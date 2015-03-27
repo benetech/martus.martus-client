@@ -29,10 +29,12 @@ import java.util.List;
 import java.util.Vector;
 
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
 import org.martus.common.GridRow;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.BulletinFromXFormsLoader;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
@@ -67,6 +69,73 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		return localization;
 	}
 	
+	public void testBulletinStandardFields() throws Exception
+	{
+		verifyBulletinWithEmptyStandardFields();
+		verifyBulletinWithFilledStandardFields();
+	}
+
+	private void verifyBulletinWithEmptyStandardFields() throws Exception
+	{
+		Bulletin bulletin = new Bulletin(security);
+		FieldSpecCollection defaultTopSectionFieldSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		bulletin.getFieldDataPacket().setXFormsModelAsString(getEmptyXFormsModelXmlAsString());
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getEmptyXFormsInstanceXmlAsString());
+		
+		bulletin = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(getLocalization(), bulletin);
+		FieldSpecCollection topSectionFieldSpecsWithoutSections = stripAllSectionFields(bulletin.getTopSectionFieldSpecs());
+		assertEquals("Default fields were changed after loading from xforms?", defaultTopSectionFieldSpecs.size(), topSectionFieldSpecsWithoutSections.size());
+	}
+	
+	private void verifyBulletinWithFilledStandardFields() throws Exception
+	{
+		Bulletin bulletin = new Bulletin(security);
+		FieldSpecCollection standardFieldSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		fillStandardFieldsWithRandomValues(bulletin, standardFieldSpecs);
+		
+		bulletin.getFieldDataPacket().setXFormsModelAsString(getEmptyXFormsModelXmlAsString());
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getEmptyXFormsInstanceXmlAsString());
+		bulletin = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(getLocalization(), bulletin);
+		FieldSpecCollection topSectionFieldSpecsWithoutSections = stripAllSectionFields(bulletin.getTopSectionFieldSpecs());
+		assertEquals("Default fields were changed after loading from xforms?", standardFieldSpecs.size(), topSectionFieldSpecsWithoutSections.size());
+		
+		for (int index = 0; index < standardFieldSpecs.size(); ++index)
+		{
+			FieldSpec standardField = standardFieldSpecs.get(index);
+			String value = bulletin.get(standardField.getTag());
+			assertEquals("Standard field value changed after loading from xforms?", createExpectedRandomValue(standardField), value);
+		}
+	}
+
+	private void fillStandardFieldsWithRandomValues(Bulletin bulletin, FieldSpecCollection standardFieldSpecs)
+	{
+		for (int index = 0; index < standardFieldSpecs.size(); ++index)
+		{
+			FieldSpec standardField = standardFieldSpecs.get(index);
+			bulletin.set(standardField.getTag(), createExpectedRandomValue(standardField));
+		}
+	}
+
+	private String createExpectedRandomValue(FieldSpec standardField)
+	{
+		return "Some Random data for" + standardField.getTag();
+	}
+	
+	private FieldSpecCollection stripAllSectionFields(FieldSpecCollection fieldSpecs)
+	{
+		FieldSpecCollection fieldSpecsWithoutSections = new FieldSpecCollection();
+		for (int index = 0; index < fieldSpecs.size(); ++index)
+		{
+			FieldSpec fieldSpec = fieldSpecs.get(index);
+			if (fieldSpec.getType().isSectionStart())
+				continue;
+			
+			fieldSpecsWithoutSections.add(fieldSpec);
+		}
+		
+		return fieldSpecsWithoutSections;
+	}
+
 	public void testFxBulletinWithXFormsWithOneInputField() throws Exception
 	{
 		FxBulletin fxBulletin = new FxBulletin(getLocalization());
@@ -231,7 +300,33 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		assertEquals("incorrect fieldType?", new FieldTypeNormal(), gridFieldSpec.getColumnType(1));
 		assertEquals("incorrect fieldType?", new FieldTypeDropdown(), gridFieldSpec.getColumnType(2));
 	}
-
+	
+	
+	private static String getEmptyXFormsModelXmlAsString()
+	{
+		return 	"		<xforms_model>" +
+				"			<h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
+				"				<h:head>" +
+				"				<h:title>XForms Sample</h:title>" +
+				"					<model>" +
+				"					<instance>" +
+				"						<nm id=\"SampleForUnitTesting\" >" +
+				"						</nm>" +
+				"		            </instance>" +
+				"		        </model>" +
+				"		    </h:head>" +
+				"		    <h:body>" +
+				"		    </h:body>" +
+				"		</h:html>" +
+				"	</xforms_model>";
+	}
+	
+	private static String getEmptyXFormsInstanceXmlAsString()
+	{
+		return "<xforms_instance>" +
+				   "<nm id=\"SampleForUnitTesting\"></nm>" +
+				"</xforms_instance>";
+	}
 	
 	private static String getXFormsModelWithOnStringInputFieldXmlAsString()
 	{
