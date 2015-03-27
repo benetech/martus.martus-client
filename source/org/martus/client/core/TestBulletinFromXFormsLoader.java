@@ -28,9 +28,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
+
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.GridData;
 import org.martus.common.GridRow;
+import org.martus.common.HeadquartersKey;
+import org.martus.common.HeadquartersKeys;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MockMartusSecurity;
@@ -41,6 +45,7 @@ import org.martus.common.fieldspec.FieldTypeDropdown;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
+import org.martus.common.packet.UniversalId;
 import org.martus.common.test.MockBulletinStore;
 import org.martus.util.TestCaseEnhanced;
 
@@ -202,6 +207,41 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag("/nm/victim_information");
 		verifyGridFieldSpec(fieldSpec);
 		verifyGridFieldData(fxBulletin, fieldSpec);
+	}
+	
+	public void testOwnershipOfXFormsRecordWhenCreatingACopy() throws Exception
+	{
+		MockMartusSecurity secureAppAccount = MockMartusSecurity.createOtherClient();
+		MockMartusSecurity martusDesktopAccount = MockMartusSecurity.createHQ();
+		store.setSignatureGenerator(martusDesktopAccount);	
+
+		String secureAppPublicKey = secureAppAccount.getPublicKeyString();
+		String martusDesktopPublicKey = martusDesktopAccount.getPublicKeyString();
+		assertNotEquals(secureAppPublicKey, martusDesktopPublicKey);
+		
+		Bulletin secureAppBulletin = new Bulletin(secureAppAccount);
+		secureAppBulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithRepeats());
+		secureAppBulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithRepeats());
+
+		HeadquartersKey desktopKey = new HeadquartersKey(martusDesktopAccount.getPublicKeyString());
+		HeadquartersKeys keys = new HeadquartersKeys(desktopKey);
+		secureAppBulletin.setAuthorizedToReadKeys(keys);
+		store.saveBulletinForTesting(secureAppBulletin);
+		UniversalId 	secureAppId = secureAppBulletin.getUniversalId();
+		
+		FxBulletin desktopFxBulletin = new FxBulletin(localization);
+		
+		assertEquals("Not secureApp Public Key?", secureAppPublicKey, secureAppBulletin.getAccount());
+		desktopFxBulletin.copyDataFromBulletin(secureAppBulletin, store);
+		ReadOnlyObjectWrapper<UniversalId> universalIdProperty = desktopFxBulletin.universalIdProperty();
+		assertEquals("UniversalId not change after we copied data from the bulletin", secureAppId, universalIdProperty.get());
+		assertEquals("Now should be Public Key after copying data.", secureAppPublicKey, secureAppBulletin.getAccount());
+
+		Bulletin desktopEditedBulletin = new Bulletin(martusDesktopAccount);
+		desktopFxBulletin.copyDataToBulletin(desktopEditedBulletin);
+		assertEquals("After editing desktop should own this bulletin", martusDesktopPublicKey, desktopEditedBulletin.getAccount());
+		
+		store.setSignatureGenerator(security);
 	}
 
 	private void verifyGridFieldData(FxBulletin fxBulletin, FieldSpec fieldSpec) throws Exception
