@@ -87,17 +87,18 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 
 	private void verifyBulletinWithSomeFilledStandardFields() throws Exception
 	{
-		FieldSpecCollection standardFieldSpecs = getSomeRandomTopSectionFieldSpecs();
-		Bulletin bulletin = new Bulletin(security, standardFieldSpecs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		FieldSpecCollection someStandardFieldSpecs = getSomeRandomTopSectionFieldSpecs();
+		Bulletin bulletin = new Bulletin(security, someStandardFieldSpecs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		bulletin.getFieldDataPacket().setXFormsModelAsString(getEmptyXFormsModelXmlAsString());
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getEmptyXFormsInstanceXmlAsString());
-		fillStandardFieldsWithRandomValues(bulletin, standardFieldSpecs);
+		fillStandardFieldsWithRandomValues(bulletin, someStandardFieldSpecs);
 		
 		bulletin = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(getLocalization(), bulletin);
 		FieldSpecCollection topSectionFieldSpecsWithoutSections = stripAllSectionFields(bulletin.getTopSectionFieldSpecs());
-		assertEquals("Default fields were changed after loading from xforms?", standardFieldSpecs.size(), topSectionFieldSpecsWithoutSections.size());
+		assertEquals("Default fields were changed after loading from xforms?", someStandardFieldSpecs.size(), topSectionFieldSpecsWithoutSections.size());
+		assertNotEquals("Some Default fields equalled the total # of default possible fields?", StandardFieldSpecs.getDefaultTopSectionFieldSpecs().size(), topSectionFieldSpecsWithoutSections.size());
 		
-		verifyFieldValues(bulletin, standardFieldSpecs);
+		verifyFieldValues(bulletin, someStandardFieldSpecs);
 	}
 
 	private void verifyBulletinWithEmptyStandardFields() throws Exception
