@@ -38,12 +38,16 @@ import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.bulletin.BulletinFromXFormsLoader;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeDropdown;
+import org.martus.common.fieldspec.FieldTypeLanguage;
+import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
@@ -78,6 +82,22 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 	{
 		verifyBulletinWithEmptyStandardFields();
 		verifyBulletinWithFilledStandardFields();
+		verifyBulletinWithSomeFilledStandardFields();
+	}
+
+	private void verifyBulletinWithSomeFilledStandardFields() throws Exception
+	{
+		FieldSpecCollection standardFieldSpecs = getSomeRandomTopSectionFieldSpecs();
+		Bulletin bulletin = new Bulletin(security, standardFieldSpecs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		bulletin.getFieldDataPacket().setXFormsModelAsString(getEmptyXFormsModelXmlAsString());
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getEmptyXFormsInstanceXmlAsString());
+		fillStandardFieldsWithRandomValues(bulletin, standardFieldSpecs);
+		
+		bulletin = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(getLocalization(), bulletin);
+		FieldSpecCollection topSectionFieldSpecsWithoutSections = stripAllSectionFields(bulletin.getTopSectionFieldSpecs());
+		assertEquals("Default fields were changed after loading from xforms?", standardFieldSpecs.size(), topSectionFieldSpecsWithoutSections.size());
+		
+		verifyFieldValues(bulletin, standardFieldSpecs);
 	}
 
 	private void verifyBulletinWithEmptyStandardFields() throws Exception
@@ -104,6 +124,11 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		FieldSpecCollection topSectionFieldSpecsWithoutSections = stripAllSectionFields(bulletin.getTopSectionFieldSpecs());
 		assertEquals("Default fields were changed after loading from xforms?", standardFieldSpecs.size(), topSectionFieldSpecsWithoutSections.size());
 		
+		verifyFieldValues(bulletin, standardFieldSpecs);
+	}
+	
+	private void verifyFieldValues(Bulletin bulletin, FieldSpecCollection standardFieldSpecs)
+	{
 		for (int index = 0; index < standardFieldSpecs.size(); ++index)
 		{
 			FieldSpec standardField = standardFieldSpecs.get(index);
@@ -341,6 +366,17 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		assertEquals("incorrect fieldType?", new FieldTypeDropdown(), gridFieldSpec.getColumnType(2));
 	}
 	
+	public static FieldSpecCollection getSomeRandomTopSectionFieldSpecs()
+	{
+		return new FieldSpecCollection(new FieldSpec[] 
+			{
+				FieldSpec.createStandardField(BulletinConstants.TAGLANGUAGE, new FieldTypeLanguage()),
+				FieldSpec.createStandardField(BulletinConstants.TAGORGANIZATION, new FieldTypeNormal()),
+				FieldSpec.createStandardField(BulletinConstants.TAGLOCATION, new FieldTypeNormal()), 
+				FieldSpec.createStandardField(BulletinConstants.TAGEVENTDATE, new FieldTypeDateRange()),
+				FieldSpec.createStandardField(BulletinConstants.TAGSUMMARY, new FieldTypeMultiline()),
+			});
+	}
 	
 	private static String getEmptyXFormsModelXmlAsString()
 	{
