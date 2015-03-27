@@ -1930,6 +1930,7 @@ public class EnglishStrings
 "wintitle:CaseSent=Sent",
 "wintitle:CaseReceived=Received",
 "wintitle:CaseSaved=Saved",
+"field:secureAppDataSection=secureApp Section",
 
 "folder:%OutBox=Unsent Records",
 "folder:%Sent=Saved",
