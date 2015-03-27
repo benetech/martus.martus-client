@@ -85,7 +85,7 @@ public class FxBulletin
 		clear();
 		
 		if (b.isXFormsBulletin())
-			b = new BulletinFromXFormsLoader(b).createNewBulletinFromXFormsBulletin();
+			b = new BulletinFromXFormsLoader(getLocalization(), b).createNewBulletinFromXFormsBulletin();
 		
 		universalIdProperty = new ReadOnlyObjectWrapper<UniversalId>(b.getUniversalId());
 		versionProperty = new SimpleIntegerProperty(b.getVersion());
