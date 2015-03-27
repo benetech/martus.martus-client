@@ -33,6 +33,7 @@ import org.martus.client.bulletinstore.TestBulletinFolder;
 import org.martus.client.bulletinstore.TestClientBulletinStore;
 import org.martus.client.bulletinstore.TestKnownFieldSpecCache;
 import org.martus.client.core.TestAttachmentProxyFile;
+import org.martus.client.core.TestBulletinFromXFormsLoader;
 import org.martus.client.core.TestConfigInfo;
 import org.martus.client.core.TestCustomFieldsDuplicateLabelChecker;
 import org.martus.client.core.TestFxBulletin;
@@ -127,6 +128,8 @@ public class TestClient
 		suite.addTest(new TestSuite(TestTransferableBulletin.class));
 		suite.addTest(new TestSuite(TestRandomAccessFileOverwrite.class));
 		suite.addTest(new TestSuite(TestUiSession.class));
+		suite.addTest(new TestSuite(TestBulletinFromXFormsLoader.class));
+		
 	    return suite;
 	}
 }
