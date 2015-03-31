@@ -1,5 +1,5 @@
 .root {
-    -fx-font-family: "Helvetica";
+    -fx-font-family: "DejaVu Sans Mono";
 }
 
 #fxGridPane {
@@ -26,7 +26,7 @@
 
 		-fx-alignment: center;
 
-		-fx-font: 17px "Helvetica";
+		-fx-font: 17px "DejaVu Sans Mono";
 
 		-fx-padding: 5 35 5 35;
 
@@ -65,7 +65,7 @@
 
 		-fx-alignment: center;
 
-		-fx-font: 17px "Helvetica";
+		-fx-font: 17px "DejaVu Sans Mono";
 
 		-fx-padding: 5 35 5 35;
 
@@ -87,7 +87,7 @@
 
 		-fx-alignment: center;
 
-		-fx-font: 17px "Helvetica";
+		-fx-font: 17px "DejaVu Sans Mono";
 
 		-fx-padding: 5 35 5 35;
 
@@ -103,7 +103,7 @@
 
 	-fx-stroke: White;
 
-	-fx-font: 20px "Helvetica";
+	-fx-font: 20px "DejaVu Sans Mono";
 
   -fx-font-weight: bold;
 
@@ -121,7 +121,7 @@
 
 	-fx-stroke: #4c5e70;
 
-	-fx-font: 20px "Helvetica";
+	-fx-font: 20px "DejaVu Sans Mono";
 
   -fx-font-weight: bold;
 
@@ -135,7 +135,7 @@
 
 	-fx-text-fill: #4c5e70;
 
-	-fx-font: 11px "Helvetica";
+	-fx-font: 11px "DejaVu Sans Mono";
 
   -fx-font-weight: bold;
 
@@ -151,7 +151,7 @@
 
 	-fx-stroke: #797769;
 
-	-fx-font: 20px "Helvetica";
+	-fx-font: 20px "DejaVu Sans Mono";
 
   -fx-font-weight: bold;
 
@@ -166,7 +166,7 @@
 
 	-fx-alignment: center-left;
 
-	-fx-font: 13px "Helvetica";
+	-fx-font: 13px "DejaVu Sans Mono";
 
 }
 
@@ -194,7 +194,7 @@
 
 	-fx-alignment: center-left;
 
-	-fx-font: 11px "Helvetica";
+	-fx-font: 11px "DejaVu Sans Mono";
 
 }
 
@@ -206,7 +206,7 @@
 
 	-fx-alignment: center-left;
 
-	-fx-font: 13px "Helvetica";
+	-fx-font: 13px "DejaVu Sans Mono";
 
 }
 
@@ -218,7 +218,7 @@
 
 	-fx-alignment: center-left;
 
-	-fx-font: 13px "Helvetica";
+	-fx-font: 13px "DejaVu Sans Mono";
 
 }
 
@@ -226,7 +226,7 @@
 .radioButtonText {
 	-fx-text-fill: #4c5e70;
   -fx-padding: 0 4 4 4;
-	-fx-font: 38px "Helvetica";
+	-fx-font: 38px "DejaVu Sans Mono";
 }
 
 
