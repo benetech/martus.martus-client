@@ -29,6 +29,10 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <styleClass>
+                                    <String fx:value="caseLabel" />
+                                    <String fx:value="headingLevel1" />
+                                 </styleClass>
                                 </Label>
                               <VBox alignment="TOP_CENTER" spacing="2.0">
                                  <children>

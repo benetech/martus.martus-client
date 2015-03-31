@@ -91,3 +91,7 @@
 .labelLeftRightPadding{
 	-fx-padding: 0 5 0 5;
 }
+
+.caseLabel{
+	-fx-text-fill: #36536C;
+}
