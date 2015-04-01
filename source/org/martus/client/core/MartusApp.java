@@ -107,6 +107,7 @@ import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.MiniLocalization;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.BulletinFromXFormsLoader;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.AuthorizationFailedException;
 import org.martus.common.crypto.MartusCrypto.DecryptionException;
@@ -1766,7 +1767,7 @@ public class MartusApp
 		setLastUploadRemindedTime(new Date());
 	}
 
-	public SortableBulletinList search(SearchTreeNode searchNode, MiniFieldSpec[] specsForSorting, MiniFieldSpec[] extraSpecs, boolean searchFinalVersionsOnly, boolean searchSameRowsOnly, ProgressMeterInterface progressMeter)
+	public SortableBulletinList search(SearchTreeNode searchNode, MiniFieldSpec[] specsForSorting, MiniFieldSpec[] extraSpecs, boolean searchFinalVersionsOnly, boolean searchSameRowsOnly, ProgressMeterInterface progressMeter) throws Exception
 	{
 		Stopwatch stopWatch = new Stopwatch();
 		stopWatch.start();
@@ -1794,6 +1795,8 @@ public class MartusApp
 			for(int j = 0; j < allRevisions.size(); ++j)
 			{
 				Bulletin b = store.getBulletinRevision((UniversalId)allRevisions.get(j));
+				if(b.containsXFormsData())
+					b = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(getLocalization(), b);
 				++revisionsSearched;
 				if(b != null && matcher.doesMatch(new SafeReadableBulletin(b, localization), localization))
 				{

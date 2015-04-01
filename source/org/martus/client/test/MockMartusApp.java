@@ -367,5 +367,34 @@ public class MockMartusApp extends MartusApp
 		}
 	}
 
+	public void loadSampleDataWithXForms() throws Exception
+	{
+		loadSampleData();
+		BulletinFolder f = this.getFolderSaved();
+		Bulletin b = createBulletin();
+		b.set("language",	"en");
+		b.set("author",		"SecureApp");
+		b.set("title",		"Secure App Title 1");
+		b.set("entrydate",	"2015-03-31");
+		b.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithOnStringInputFieldXmlAsString());
+		b.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceXmlAsString());
+		b.setImmutable();
+		store.saveBulletin(b);
+		f.add(b);
+	}
+	
+	private static String getXFormsModelWithOnStringInputFieldXmlAsString()
+	{
+		return 	"<xforms_model><h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
+				"<h:head><h:title>XForms Sample</h:title><model><instance><nm id=\"SampleForUnitTesting\" ><name/>" +
+				"</nm></instance><bind nodeset=\"/nm/name\" type=\"string\" /></model></h:head>" +
+				"<h:body><input ref=\"name\" ><label>some randon name</label><hint>(required)</hint></input></h:body></h:html></xforms_model>";
+	}
+	
+	private static String getXFormsInstanceXmlAsString()
+	{
+		return "<xforms_instance><nm id=\"SampleForUnitTesting\"><name>xforms Name Field</name></nm></xforms_instance>";
+	}
+	
 	String testDataDirectory;
 }

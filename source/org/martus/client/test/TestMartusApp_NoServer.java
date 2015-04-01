@@ -2403,6 +2403,38 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_END();
 	}
 	
+	public void testSearchWithXFormsData() throws Exception
+	{
+		TRACE_BEGIN("testSearchWithXFormsData");
+		ClientBulletinStore store = appWithAccount.getStore();
+		assertNull("Search results already exists?", store.findFolder(store.getSearchFolderName()));
+
+		appWithAccount.loadSampleDataWithXForms();
+		appWithAccount.getLocalization().setCurrentLanguageCode(MiniLocalization.ENGLISH);
+
+		
+		Bulletin b = store.getBulletinRevision((UniversalId)(new Vector(store.getAllBulletinLeafUids()).get(0)));
+		String andKeyword = "and";
+		String orKeyword = "or";
+		search(appWithAccount, b.get("title"), andKeyword, orKeyword, SEARCH_ALL_BULLETIN_REVISIONS);
+		assertNotNull("Search results should have been created", store.getSearchFolderName());
+
+		search(appWithAccount, "--not in any bulletin--", andKeyword, orKeyword, SEARCH_ALL_BULLETIN_REVISIONS);
+		assertEquals("search should clear results folder", 0, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+
+		assertTrue("not enough bulletins?", appWithAccount.getStore().getBulletinCount() >= 5);
+		assertTrue("too many bulletins?", appWithAccount.getStore().getBulletinCount() <= 15);
+		String uniqueAuthor = b.get("author");
+		search(appWithAccount, uniqueAuthor, andKeyword, orKeyword, SEARCH_ALL_BULLETIN_REVISIONS);
+		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+		search(appWithAccount, "xforms Name Field", andKeyword, orKeyword, SEARCH_ALL_BULLETIN_REVISIONS);
+		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+		search(appWithAccount, "", andKeyword, orKeyword, SEARCH_ALL_BULLETIN_REVISIONS);
+		assertEquals(11, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+
+		TRACE_END();
+	}
+
 	public void testSkipDiscardedBulletins() throws Exception
 	{
 		TRACE_BEGIN("testSkipDiscardedBulletins");
@@ -3003,13 +3035,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	
 	
 	
-	private void search(MartusApp app, String searchFor, String andKeyword, String orKeyword, boolean searchFinalBulletinVersionsOnly)
+	private void search(MartusApp app, String searchFor, String andKeyword, String orKeyword, boolean searchFinalBulletinVersionsOnly) throws Exception
 	{
 		SearchParser parser = new SearchParser(andKeyword, orKeyword);
 		SearchTreeNode searchNode = parser.parseJustAmazonValueForTesting(searchFor);
 		MiniFieldSpec[] noSpecs = new MiniFieldSpec[0];
-		app.updateSearchFolder(app.search(searchNode, noSpecs, noSpecs, searchFinalBulletinVersionsOnly, false, new NullProgressMeter()));
-		
+		app.updateSearchFolder(app.search(searchNode, noSpecs, noSpecs, searchFinalBulletinVersionsOnly, false, new NullProgressMeter()));		
 	}
 
 
