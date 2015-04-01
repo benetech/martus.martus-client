@@ -46,6 +46,7 @@ import org.martus.common.MartusLogger;
 import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.BulletinFromXFormsLoader;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.bulletinstore.BulletinStoreCache;
 import org.martus.common.crypto.MartusCrypto;
@@ -106,7 +107,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		addDetailsToCache(key);
 	}
 
-	synchronized public void revisionWasSaved(Bulletin b)
+	synchronized public void revisionWasSaved(Bulletin b) throws Exception
 	{
 		addDetailsToCache(b);
 	}
@@ -500,10 +501,12 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		addDetailsToCache(b);
 	}
 
-	private void addDetailsToCache(Bulletin b)
+	private void addDetailsToCache(Bulletin b) throws Exception
 	{
 		if(!b.isNonAttachmentDataValid())
 			return;
+		if(b.containsXFormsData())
+			b = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(null, b);
 		FieldSpecCollection publicSpecs = b.getTopSectionFieldSpecs();
 		FieldSpecCollection privateSpecs = b.getBottomSectionFieldSpecs();
 		setSpecs(b.getUniversalId(), new FieldSpecCollection[] {publicSpecs, privateSpecs});
