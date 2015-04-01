@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.zip.ZipFile;
 
+import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.client.test.MockMartusApp;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.ReusableChoices;
@@ -93,6 +94,29 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		assertContains("didn't add private?", privateSpecs.asArray()[0], specsAfterSave);
 		
 		// two fieldspecs with same tag name
+	}
+
+	public void testSaveXFormsBulletin() throws Exception
+	{
+		Bulletin normalBulletin = new Bulletin(security, StandardFieldSpecs.getDefaultTopSectionFieldSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		app.saveBulletin(normalBulletin, app.getFolderDraftOutbox());
+
+		Bulletin withXForms = createSampleXFormsBulletin(security);
+		Set specsBeforeXFormsSaved = cache.getAllKnownFieldSpecs();
+		app.saveBulletin(withXForms, app.getFolderDraftOutbox());
+		Set specsAfterXFormsSaved = cache.getAllKnownFieldSpecs();
+		int numberOfSpecsBeforeXFormsSaved = specsBeforeXFormsSaved.size();
+		assertNotEquals("didn't add new specs?", numberOfSpecsBeforeXFormsSaved, specsAfterXFormsSaved.size());
+
+		UiFieldContext contextToUse = new UiFieldContext();
+		FieldSpecCollection allSpecs = new FieldSpecCollection();
+		allSpecs.addAllSpecs(specsAfterXFormsSaved);
+		contextToUse.setSectionFieldSpecs(allSpecs);
+
+		FieldSpec newXFormSpec = contextToUse.getFieldSpec(numberOfSpecsBeforeXFormsSaved);
+		assertEquals("Label incorrect?", "some randon name", newXFormSpec.getLabel());
+		assertEquals("Tag incorrect?", "name", newXFormSpec.getTag());
+		assertTrue("Type incorrect?",  newXFormSpec.getType().isString());
 	}
 
 	public void testIgnoreUnauthorizedBulletins() throws Exception
@@ -289,6 +313,15 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		return b;
 	}
 	
+	private Bulletin createSampleXFormsBulletin(MartusCrypto authorSecurity) throws Exception
+	{
+		Bulletin b = new Bulletin(authorSecurity, StandardFieldSpecs.getDefaultTopSectionFieldSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		b.getFieldDataPacket().setXFormsModelAsString(MockMartusApp.getXFormsModelWithOnStringInputFieldXmlAsString());
+		b.getFieldDataPacket().setXFormsInstanceAsString(MockMartusApp.getXFormsInstanceXmlAsString());
+
+		return b;
+	}
+
 	String[] sampleDataSpecTags = {
 			"language", "title", "eventdate", "entrydate",  
 			"author", "organization", "location",

@@ -383,7 +383,7 @@ public class MockMartusApp extends MartusApp
 		f.add(b);
 	}
 	
-	private static String getXFormsModelWithOnStringInputFieldXmlAsString()
+	public static String getXFormsModelWithOnStringInputFieldXmlAsString()
 	{
 		return 	"<xforms_model><h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
 				"<h:head><h:title>XForms Sample</h:title><model><instance><nm id=\"SampleForUnitTesting\" ><name/>" +
@@ -391,7 +391,7 @@ public class MockMartusApp extends MartusApp
 				"<h:body><input ref=\"name\" ><label>some randon name</label><hint>(required)</hint></input></h:body></h:html></xforms_model>";
 	}
 	
-	private static String getXFormsInstanceXmlAsString()
+	public static String getXFormsInstanceXmlAsString()
 	{
 		return "<xforms_instance><nm id=\"SampleForUnitTesting\"><name>xforms Name Field</name></nm></xforms_instance>";
 	}
