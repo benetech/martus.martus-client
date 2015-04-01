@@ -39,7 +39,7 @@ public class SearchThread extends WorkerProgressThread
 		extraSpecs = extraSpecsToUse;
 	}
 	
-	public void doTheWorkWithNO_SWING_CALLS()
+	public void doTheWorkWithNO_SWING_CALLS() throws Exception
 	{
 		searchResults = mainWindow.getApp().search(searchTree, sortSpecs, extraSpecs, mainWindow.getUiState().searchFinalBulletinsOnly(), mainWindow.getUiState().searchSameRowsOnly(), getProgressMeter());
 	}
