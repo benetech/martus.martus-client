@@ -25,10 +25,33 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.jfx.generic;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Hyperlink;
+
 import org.martus.client.swingui.UiMainWindow;
 
 public class InitialSigninController extends SigninController
 {
+	@Override
+	public void initialize(URL location, ResourceBundle bundle)
+	{
+		super.initialize(location, bundle);
+		updateCreateNewAccountBehavior();
+	}
+
+	public void updateCreateNewAccountBehavior()
+	{
+		boolean doesAnyAccountExist = getApp().doesAnyAccountExist();
+		setSignInPaneVisible(doesAnyAccountExist);
+		if(doesAnyAccountExist)
+			newAccountHyperLink.getStyleClass().add("headingLevel3");
+		else
+			newAccountHyperLink.getStyleClass().add("headingLevel1");
+	}
+
 	public InitialSigninController(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
@@ -39,4 +62,8 @@ public class InitialSigninController extends SigninController
 	{
 		return "generic/InitialSignin.fxml";
 	}
+	
+	@FXML
+	private Hyperlink newAccountHyperLink;
+	
 }
