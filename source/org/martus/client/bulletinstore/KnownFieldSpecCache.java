@@ -506,7 +506,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		if(!b.isNonAttachmentDataValid())
 			return;
 		if(b.containsXFormsData())
-			b = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(null, b);
+			b = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(b);
 		FieldSpecCollection publicSpecs = b.getTopSectionFieldSpecs();
 		FieldSpecCollection privateSpecs = b.getBottomSectionFieldSpecs();
 		setSpecs(b.getUniversalId(), new FieldSpecCollection[] {publicSpecs, privateSpecs});
