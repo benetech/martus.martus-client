@@ -30,6 +30,7 @@ import java.util.Vector;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 
+import org.javarosa.core.model.Constants;
 import org.martus.client.swingui.jfx.generic.data.ObservableChoiceItemList;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
@@ -194,6 +195,27 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		assertEquals("Unknown Field added. Must be supported in BulletinFromXFormsLoader", expectedNumberOfFieldTypes, FieldType.getNumberOfFieldTypes());
 	}
 	
+	public void testNormalFieldTypes() throws Exception
+	{
+		assertTrue("Text are not Normal?", BulletinFromXFormsLoader.isNormalFieldType(Constants.DATATYPE_TEXT));
+		assertTrue("Integer are not Normal?", BulletinFromXFormsLoader.isNormalFieldType(Constants.DATATYPE_INTEGER));
+		assertTrue("Decimal are not Normal?", BulletinFromXFormsLoader.isNormalFieldType(Constants.DATATYPE_DECIMAL));
+		assertFalse("Dates are Normal?", BulletinFromXFormsLoader.isNormalFieldType(Constants.DATATYPE_DATE));
+		assertTrue("Time are not Normal?", BulletinFromXFormsLoader.isNormalFieldType(Constants.DATATYPE_TIME));
+		assertTrue("Date/Time are not Normal?", BulletinFromXFormsLoader.isNormalFieldType(Constants.DATATYPE_DATE_TIME));
+		assertFalse("Choice are Normal?", BulletinFromXFormsLoader.isNormalFieldType(Constants.DATATYPE_CHOICE));
+		assertFalse("ChoiceList are Normal?", BulletinFromXFormsLoader.isNormalFieldType(Constants.DATATYPE_CHOICE_LIST));
+		assertTrue("GeoPoint are not Normal?", BulletinFromXFormsLoader.isNormalFieldType(Constants.DATATYPE_GEOPOINT));
+		assertTrue("Barcode are not Normal?", BulletinFromXFormsLoader.isNormalFieldType(Constants.DATATYPE_BARCODE));
+		assertTrue("Binary are not Normal?", BulletinFromXFormsLoader.isNormalFieldType(Constants.DATATYPE_BINARY));
+		assertTrue("Long are not Normal?", BulletinFromXFormsLoader.isNormalFieldType(Constants.DATATYPE_LONG));
+		assertTrue("GeoSpace are not Normal?", BulletinFromXFormsLoader.isNormalFieldType(Constants.DATATYPE_GEOSHAPE));
+		assertTrue("GeoTrace are not Normal?", BulletinFromXFormsLoader.isNormalFieldType(Constants.DATATYPE_GEOTRACE));
+		assertFalse("Unsupported are Normal?", BulletinFromXFormsLoader.isNormalFieldType(Constants.DATATYPE_UNSUPPORTED));
+		assertFalse("Null are Normal?", BulletinFromXFormsLoader.isNormalFieldType(Constants.DATATYPE_NULL));
+
+	}
+	
 	public void testFxBulletinWithXFormsWithChoiceField() throws Exception
 	{
 		FxBulletin fxBulletin = new FxBulletin(getLocalization());
@@ -209,6 +231,28 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		verifyDropDownFieldSpecCreatedFromXFormsData(fieldSpec);
 		verifyFieldCreatedFromXFormsData(fxBulletin.getField(fieldSpec));
 	}
+	
+	
+	public void testFxBulletinWithXFormsWithIntegerField() throws Exception
+	{
+		FxBulletin fxBulletin = new FxBulletin(getLocalization());
+		verifyFieldSpecCount(fxBulletin, 0);
+		
+		Bulletin bulletin = new Bulletin(security);
+		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithIntegerFieldXmlAsString());
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithIntegerFieldXmlAsString());
+		fxBulletin.copyDataFromBulletin(bulletin, store);
+		assertEquals("FxBulletin filled from bulletin with data should have data?", getExpectedFieldCount(1), fxBulletin.getFieldSpecs().size());
+		
+		String TAG = "age";
+		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag(TAG);
+		assertTrue("Only field should be string?", fieldSpec.getType().isString());
+		assertEquals("Incorrect field label?", AGE_LABEL, fieldSpec.getLabel());
+		assertEquals("Incorrect field tag?", TAG, fieldSpec.getTag());
+		FxBulletinField field = fxBulletin.getField(fieldSpec);
+		assertEquals("Incorrect field value?", AGE_VALUE, field.getValue());
+	}
+	
 
 	private void verifyFieldSpecCount(FxBulletin fxBulletin, int expectedFieldSpecCount)
 	{
@@ -490,6 +534,44 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 				   "</nm>" +
 				"</xforms_instance>";
 	}
+
+	private static String getXFormsModelWithIntegerFieldXmlAsString()
+	{
+		return 
+			"<xforms_model>" +
+				"<h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
+					"<h:head>"+
+						"<h:title>secureApp Prototype</h:title>"+
+						"<model>"+
+							"<instance>"+
+								"<nm id=\"VitalVoices\" >"+
+									"<age></age>"+
+								"</nm>"+
+							"</instance>"+				""+
+							"<bind nodeset=\"/nm/age\" type=\"integer\" ></bind>"+
+						"</model>"+
+					"</h:head>"+
+				"<h:body>"+
+					"<group appearance=\"field-list\" >"+
+						"<label>Section 1 (Text fields)</label>"+
+						"<input ref=\"age\" >"+
+							"<label>"+ AGE_LABEL +"</label>"+
+						"</input>"+
+					"</group>"+
+				"</h:body>"+
+			"</h:html>" +
+		"</xforms_model>";
+	}
+	
+	private static String getXFormsInstanceWithIntegerFieldXmlAsString()
+	{
+		return 
+			"<xforms_instance>" +
+				"<nm id=\"VitalVoices\">"+
+					"<age>" + AGE_VALUE + "</age>"+
+				"</nm>"+
+			"</xforms_instance>";
+	}
 	
 	private static String getXFormsModelWithDateInputField()
 	{
@@ -643,6 +725,9 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 	private static final String DROPDOWN_FIELD_CHOICE_PERSONAL_INTERVIEW_LABEL = "Personal Interview";
 	
 	private static final String DATE_VALUE = "2015-03-24";
+	
+	private static final String AGE_VALUE = "20";
+	private static final String AGE_LABEL = "What is your age:";
 	
 	private static final String FIELD_LABEL = "What is your name?";
 	private static final String FIELD_VALUE = "John Johnson";
