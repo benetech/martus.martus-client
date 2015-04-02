@@ -567,22 +567,6 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		return "<nm id=\"VitalVoices2\" ><anonymous/></nm>";
 	}
 	
-	private static String getXFormsInstanceWithRepeats()
-	{
-		return 	"<nm id=\"VitalVoices\" >" +
-				"<victim_information>" +
-				"<victimFirstName>John</victimFirstName>" +
-				"<victimLastName>Smith</victimLastName>" +
-				"<sex>male</sex>" +
-				"</victim_information>" +
-				"<victim_information>" +
-				"<victimFirstName>Sunny</victimFirstName>" +
-				"<victimLastName>Dale</victimLastName>" +
-				"<sex>other</sex>" +
-				"</victim_information>" +
-				"</nm>";
-	}
-	
 	private static String getXFormsModelWithRepeats()
 	{
 		return	"<h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
@@ -630,6 +614,22 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 			       
 			    "</h:body>" +
 			"</h:html>";
+	}
+	
+	private static String getXFormsInstanceWithRepeats()
+	{
+		return 	"<nm id=\"VitalVoices\" >" +
+				"<victim_information>" +
+				"<victimFirstName>John</victimFirstName>" +
+				"<victimLastName>Smith</victimLastName>" +
+				"<sex>male</sex>" +
+				"</victim_information>" +
+				"<victim_information>" +
+				"<victimFirstName>Sunny</victimFirstName>" +
+				"<victimLastName>Dale</victimLastName>" +
+				"<sex>other</sex>" +
+				"</victim_information>" +
+				"</nm>";
 	}
 	
 	private static final String DROPDOWN_FIELD_TAG = "sourceOfRecordInformation";
