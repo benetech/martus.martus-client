@@ -19,10 +19,10 @@
             				    <GridPane fx:id="signInPane" vgap="5.0" xmlns:fx="http://javafx.com/fxml">
                <children>
                				        <Label styleClass="headingLevel2" text="%CreateAccountUserName" />
-               				        <TextField id="accountName" fx:id="userNameField" promptText="%AccountUserNameInstructions" GridPane.columnIndex="1" />
+               				        <TextField id="accountName" fx:id="userNameField" GridPane.columnIndex="1" />
                		
                				        <Label styleClass="headingLevel2" text="%Password" GridPane.rowIndex="1" />
-               				        <PasswordField id="password" fx:id="passwordField" promptText="%PasswordInstructions" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               				        <PasswordField id="password" fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
                                  <columnConstraints>
                                     <ColumnConstraints />
