@@ -811,7 +811,7 @@ public class EnglishStrings
 "field:confirmsendcause=You have chosen to save a completed record.",
 "field:confirmsendeffect=This will permanently seal the record and you will not be allowed to make any further modifications to it except by creating a new version of the record.",
 "field:confirmdeletefoldercause=You have chosen to permanently delete a folder.  ",
-"field:confirmdeletefoldereffect=Any records in the folder will be moved to Discarded Records.  ",
+"field:confirmdeletefoldereffect=Any records in the folder will be moved to Trash.  ",
 "field:confirmretrievecause=You have chosen to retrieve all records from the Martus server.  ",
 "field:confirmretrieveeffect=This will restore all the discarded records that were sent to the server.  ",
 "field:confirmRemoveAttachmentcause=You have chosen to remove the selected attachments from this record.",
@@ -1943,6 +1943,8 @@ public class EnglishStrings
 "folder:%RecoveredBulletins=Recovered Records",
 "folder:%DamagedBulletins=Damaged Records",
 "folder:%Import=Imported Records",
+"folder:%RetrievedFieldOfficeBulletin=Field Desk Records",
+"folder:%RetrievedFieldOfficeBulletinDraft=Field Desk Draft Records",
 
 "month:jan=Jan",
 "month:feb=Feb",
