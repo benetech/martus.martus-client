@@ -44,6 +44,7 @@ import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeDropdown;
 import org.martus.common.fieldspec.FieldTypeLanguage;
@@ -185,6 +186,12 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		assertEquals("Incorrect field tag?", TAG, fieldSpec.getTag());
 		FxBulletinField field = fxBulletin.getField(fieldSpec);
 		assertEquals("Incorrect field value?", FIELD_VALUE, field.getValue());
+	}
+	
+	public void testNumberOfCustomFields() throws Exception
+	{
+		final int expectedNumberOfFieldTypes = 12;
+		assertEquals("Unknown Field added. Must be supported in BulletinFromXFormsLoader", expectedNumberOfFieldTypes, FieldType.getNumberOfFieldTypes());
 	}
 	
 	public void testFxBulletinWithXFormsWithChoiceField() throws Exception
