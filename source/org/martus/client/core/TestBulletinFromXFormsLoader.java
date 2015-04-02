@@ -174,8 +174,8 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		assertEquals("FxBulletin field specs should be filled?", 0, fxBulletin.getFieldSpecs().size());
 		
 		Bulletin bulletin = new Bulletin(security);
-		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithOnStringInputFieldXmlAsString());
-		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceXmlAsString());
+		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithOneStringInputFieldXmlAsString());
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithOneStringInputFieldXmlAsString());
 		fxBulletin.copyDataFromBulletin(bulletin, store);
 		assertEquals("FxBulletin filled from bulletin with data should have data?", getExpectedFieldCount(1), fxBulletin.getFieldSpecs().size());
 		
@@ -200,8 +200,8 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		verifyFieldSpecCount(fxBulletin, 0);
 		
 		Bulletin bulletin = new Bulletin(security);
-		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithOnChoiceInputFieldXmlAsString());
-		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithChoiceAnswers());
+		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithOneChoiceInputFieldXmlAsString());
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithOneChoiceInputFieldXmlAsString());
 		fxBulletin.copyDataFromBulletin(bulletin, store);
 		verifyFieldSpecCount(fxBulletin, getExpectedFieldCount(1));
 
@@ -252,7 +252,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		assertEquals("FxBulletin field specs should be filled?", 0, fxBulletin.getFieldSpecs().size());
 		Bulletin bulletin = new Bulletin(security);
 		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithDateInputField());
-		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithDateField());
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithDateInputField());
 		fxBulletin.copyDataFromBulletin(bulletin, store);
 		assertEquals("FxBulletin filled from bulletin with data should have date field?", getExpectedFieldCount(1), fxBulletin.getFieldSpecs().size());
 		
@@ -412,7 +412,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 				"</xforms_instance>";
 	}
 	
-	private static String getXFormsModelWithOnStringInputFieldXmlAsString()
+	private static String getXFormsModelWithOneStringInputFieldXmlAsString()
 	{
 		return 	"		<xforms_model>" +
 				"			<h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
@@ -437,7 +437,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 				"	</xforms_model>";
 	}
 	
-	private static String getXFormsInstanceXmlAsString()
+	private static String getXFormsInstanceWithOneStringInputFieldXmlAsString()
 	{
 		return "<xforms_instance>" +
 				   "<nm id=\"SampleForUnitTesting\">" +
@@ -446,7 +446,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 				"</xforms_instance>";
 	}
 	
-	private static String getXFormsModelWithOnChoiceInputFieldXmlAsString()
+	private static String getXFormsModelWithOneChoiceInputFieldXmlAsString()
 	{
 		return 	"		<xforms_model>" +
 				"			<h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
@@ -482,7 +482,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 				"	</xforms_model>";
 	}
 	
-	private static String getXFormsInstanceWithChoiceAnswers()
+	private static String getXFormsInstanceWithOneChoiceInputFieldXmlAsString()
 	{
 		return "<xforms_instance>" +
 				   "<nm id=\"SampleForUnitTesting\">" +
@@ -515,7 +515,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		"</h:html>" ;
 	}
 	
-	private static String getXFormsInstanceWithDateField()
+	private static String getXFormsInstanceWithDateInputField()
 	{
 		return 
 				"<nm id=\"VitalVoices\" >" +
