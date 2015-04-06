@@ -425,7 +425,7 @@ abstract public class FxController implements Initializable
 	{
 		ObservableList<String> stylesheets = getStage().getScene().getStylesheets();
 		File directory = getApp().getFxmlDirectory();
-		FxController.updateBurmeseStyleSheets(stylesheets, directory);
+		FxController.updateBurmeseStyleSheetsIfUsingZawgyi(stylesheets, directory);
 	}
 
 	private static void applyMasterMartusStyleSheets(ObservableList<String> stylesheets, File directory,
@@ -450,17 +450,17 @@ abstract public class FxController implements Initializable
 			if(languageCssUrl != null)
 				stylesheets.add(languageCssUrl.toExternalForm());
 		}
-		
-		updateBurmeseStyleSheets(stylesheets, directory);
+		if(!languageCode.equals(MartusLocalization.BURMESE))
+			updateBurmeseStyleSheetsIfUsingZawgyi(stylesheets, directory);
 	}
 
-	private static void updateBurmeseStyleSheets(ObservableList<String> stylesheets, File directory) throws Exception
+	private static void updateBurmeseStyleSheetsIfUsingZawgyi(ObservableList<String> stylesheets, File directory) throws Exception
 	{
-		updateBurmeseSytleSheet(stylesheets, directory, MARTUS_CSS);
-		updateBurmeseSytleSheet(stylesheets, directory, POPUP_CSS);
+		updateBurmeseSytleSheetIfUsingZawgyi(stylesheets, directory, MARTUS_CSS);
+		updateBurmeseSytleSheetIfUsingZawgyi(stylesheets, directory, POPUP_CSS);
 	}
 
-	private static void updateBurmeseSytleSheet(ObservableList<String> stylesheets, File directory, String styleSheet) throws Exception
+	private static void updateBurmeseSytleSheetIfUsingZawgyi(ObservableList<String> stylesheets, File directory, String styleSheet) throws Exception
 	{
 		URL burmeseLanguageCssUrl = getBestCss(directory, MartusLocalization.BURMESE, styleSheet);
 		if(burmeseLanguageCssUrl == null)
