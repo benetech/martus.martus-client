@@ -425,7 +425,7 @@ abstract public class FxController implements Initializable
 	{
 		ObservableList<String> stylesheets = getStage().getScene().getStylesheets();
 		File directory = getApp().getFxmlDirectory();
-		FxController.updateBurmeseStyleSheet(stylesheets, directory);
+		FxController.updateBurmeseStyleSheets(stylesheets, directory);
 	}
 
 	private static void applyMasterMartusStyleSheets(ObservableList<String> stylesheets, File directory,
@@ -451,12 +451,18 @@ abstract public class FxController implements Initializable
 				stylesheets.add(languageCssUrl.toExternalForm());
 		}
 		
-		updateBurmeseStyleSheet(stylesheets, directory);
+		updateBurmeseStyleSheets(stylesheets, directory);
 	}
 
-	public static void updateBurmeseStyleSheet(ObservableList<String> stylesheets, File directory) throws Exception
+	private static void updateBurmeseStyleSheets(ObservableList<String> stylesheets, File directory) throws Exception
 	{
-		URL burmeseLanguageCssUrl = getBestCss(directory, MartusLocalization.BURMESE, MARTUS_CSS);
+		updateBurmeseSytleSheet(stylesheets, directory, MARTUS_CSS);
+		updateBurmeseSytleSheet(stylesheets, directory, POPUP_CSS);
+	}
+
+	private static void updateBurmeseSytleSheet(ObservableList<String> stylesheets, File directory, String styleSheet) throws Exception
+	{
+		URL burmeseLanguageCssUrl = getBestCss(directory, MartusLocalization.BURMESE, styleSheet);
 		if(burmeseLanguageCssUrl == null)
 			return;
 		String burmeseCSS = burmeseLanguageCssUrl.toExternalForm();
