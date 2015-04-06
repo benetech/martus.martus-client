@@ -239,7 +239,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		setCurrentActiveFrame(this);
 		
 		String currentLanguageCode = getLocalization().getCurrentLanguageCode();
-		FontSetter.setDefaultFont(currentLanguageCode.equals(MtfAwareLocalization.BURMESE));
+		setDefaultFont(currentLanguageCode);
 		displayPossibleUnofficialIncompatibleTranslationWarnings(currentLanguageCode);
 		
 		preventTwoInstances();
@@ -336,6 +336,13 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		MartusLogger.log("Initialization complete");
 		return true;
     }
+
+	public void setDefaultFont(String currentLanguageCode)
+	{
+		boolean currentLanguageBurmese = currentLanguageCode.equals(MtfAwareLocalization.BURMESE);
+		FontSetter.setDefaultFont(currentLanguageBurmese);
+		getApp().getConfigInfo().getUseZawgyiFontProperty().setValue(currentLanguageBurmese);
+	}
 
 	abstract protected void showMainWindow();
 	abstract protected void obscureMainWindow();
