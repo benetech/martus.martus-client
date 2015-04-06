@@ -9,21 +9,19 @@
 <AnchorPane id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <BorderPane layoutX="0.0" layoutY="0.0" styleClass="pageMargin">
-      <top>
-        <Pane fx:id="contentPane" />
-      </top>
-         <bottom>
+         <padding>
+            <Insets left="10.0" top="10.0" />
+         </padding>
+         <center>
             <VBox BorderPane.alignment="CENTER">
                <children>
+              <Pane fx:id="contentPane" prefHeight="250.0" />
               <Button mnemonicParsing="false" onAction="#onExportMultiKey" text="%Button.ExportMultiKey" />
                   <Label />
                   <Label text="%ExportMultiKeyNote" />
                </children>
             </VBox>
-         </bottom>
-         <padding>
-            <Insets left="10.0" top="10.0" />
-         </padding>
+         </center>
     </BorderPane>
   </children>
 </AnchorPane>
