@@ -1944,7 +1944,6 @@ public class EnglishStrings
 "folder:%DamagedBulletins=Damaged Records",
 "folder:%Import=Imported Records",
 "folder:%RetrievedFieldOfficeBulletin=Field Desk Records",
-"folder:%RetrievedFieldOfficeBulletinDraft=Field Desk Draft Records",
 
 "month:jan=Jan",
 "month:feb=Feb",
