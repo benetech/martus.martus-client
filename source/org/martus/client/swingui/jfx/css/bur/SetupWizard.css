@@ -1,18 +1,19 @@
 .root {
+ 	-fx-font-family: "Zawgyi-One";
 	-fx-background-color: #e6e7e9;
-  -fx-line-height: inherit 28px;
+  	-fx-line-height: inherit 28px;
 }
 
 #topBar {
 	-fx-background-color: #4c5e70;
-  -fx-padding: 6 25 6 25;
+  	-fx-padding: 6 25 6 25;
 	-fx-spacing: 13;
 	-fx-alignment: center-left;
 }
 
 .mainTextBox {
 	-fx-background-color: #9ba5ae;
-  -fx-padding: 25 10 35 10;
+  	-fx-padding: 25 10 35 10;
 	-fx-alignment: center-left;
 	-fx-background-radius: 7.0;
 	-fx-background-insets: 0 0 20 0;
@@ -21,7 +22,7 @@
 .sidebarText {
 	-fx-text-fill: White;
 	-fx-font-size: 8px;
-  -fx-font-weight: bold;
+  	-fx-font-weight: bold;
 }
 
 .sidebarTextHeading1 {
@@ -54,7 +55,35 @@
 
 .TopBarArrow {
 	-fx-text-fill: #707e87;
-  -fx-padding: 4 4 4 4;
+  	-fx-padding: 4 4 4 4;
 	-fx-font-size: 11px;
-  -fx-font-weight: bold;
+  	-fx-font-weight: bold;
+}
+
+.headingLevel1 {
+	-fx-font-size: 16px;
+}
+
+.button {
+		-fx-font-size: 14px;
+}
+
+.button:hover {
+		-fx-font-size: 14px;
+}
+
+.button:pressed {
+		-fx-font-size: 14px;
+}
+
+.button-MinPadding{
+		-fx-padding: 5 5 5 5;
+}
+
+.button-MinPadding:hover {
+	-fx-padding: 5 5 5 5;
+}
+
+.button-MinPadding:pressed {
+	-fx-padding: 5 5 5 5;
 }
