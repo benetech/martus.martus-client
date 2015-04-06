@@ -186,7 +186,7 @@ abstract public class SigninController extends FxNonWizardShellController
 	public Dimension getPreferredDimension()
 	{
 		//TODO fix this is not getting called
-		return FxInSwingModalDialog.MEDIUM_SMALL_PREFERRED_DIALOG_SIZE;
+		return SIGNIN_PREFERRED_DIALOG_SIZE;
 	}
 
 	@FXML
@@ -207,6 +207,7 @@ abstract public class SigninController extends FxNonWizardShellController
 	}
 	
 	public static enum SigninResult { CANCEL, SIGNIN, CREATE_ACCOUNT, CHANGE_LANGUAGE, RESTORE_SHARE, RESTORE_FILE };
+	public static final Dimension SIGNIN_PREFERRED_DIALOG_SIZE = new Dimension(700, 250);
 	
 	@FXML
 	private GridPane signInPane;
