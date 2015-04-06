@@ -44,12 +44,12 @@
 		-fx-padding: 5 5 5 5;
 }
 
-.button-transparentMinPadding {
-		-fx-padding: 5 5 5 5;
+.button-transparentMinPadding:hover {
+	-fx-padding: 5 5 5 5;
 }
 
-.button-transparentMinPadding {
-		-fx-padding: 5 5 5 5;
+.button-transparentMinPadding:pressed {
+	-fx-padding: 5 5 5 5;
 }
 
 .button-defaultcase{
