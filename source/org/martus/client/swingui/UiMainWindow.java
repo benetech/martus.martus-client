@@ -635,6 +635,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 						String newLanguageCode = signinController.getSelectedLanguageCode();
 						displayPossibleUnofficialIncompatibleTranslationWarnings(newLanguageCode);
 						getLocalization().setCurrentLanguageCode(newLanguageCode);
+						getApp().getConfigInfo().getUseZawgyiFontProperty().setValue(newLanguageCode.equals(MiniLocalization.BURMESE));
 						continue;
 					}
 					case SIGNIN:
