@@ -633,9 +633,7 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 					case CHANGE_LANGUAGE:
 					{
 						String newLanguageCode = signinController.getSelectedLanguageCode();
-						displayPossibleUnofficialIncompatibleTranslationWarnings(newLanguageCode);
-						getLocalization().setCurrentLanguageCode(newLanguageCode);
-						getApp().getConfigInfo().getUseZawgyiFontProperty().setValue(newLanguageCode.equals(MiniLocalization.BURMESE));
+						updateUIStateForLanguageChosen(newLanguageCode);
 						continue;
 					}
 					case SIGNIN:
@@ -667,6 +665,14 @@ public abstract class UiMainWindow implements ClipboardOwner, TopLevelWindowInte
 		}
 			
 		return true;
+	}
+
+	public void updateUIStateForLanguageChosen(String newLanguageCode)
+	{
+		displayPossibleUnofficialIncompatibleTranslationWarnings(newLanguageCode);
+		getLocalization().setCurrentLanguageCode(newLanguageCode);
+		getApp().getConfigInfo().getUseZawgyiFontProperty().setValue(newLanguageCode.equals(MiniLocalization.BURMESE));
+		getSession().saveCurrentUiState();
 	}
 
 	public void doPostSigninAppInitialization()
