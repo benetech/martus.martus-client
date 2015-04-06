@@ -456,14 +456,14 @@ abstract public class FxController implements Initializable
 
 	public static void updateBurmeseStyleSheet(ObservableList<String> stylesheets, File directory) throws Exception
 	{
-		URL languageCssUrl = getBestCss(directory, MartusLocalization.BURMESE, MARTUS_CSS);
-		if(languageCssUrl == null)
+		URL burmeseLanguageCssUrl = getBestCss(directory, MartusLocalization.BURMESE, MARTUS_CSS);
+		if(burmeseLanguageCssUrl == null)
 			return;
-		String externalFormCSS = languageCssUrl.toExternalForm();
+		String burmeseCSS = burmeseLanguageCssUrl.toExternalForm();
 		if(FxController.useZawgyiFontProperty.getValue())
-			stylesheets.add(externalFormCSS);
+			stylesheets.add(burmeseCSS);
 		else
-			stylesheets.remove(externalFormCSS);
+			stylesheets.remove(burmeseCSS);
 	}
 	
 	public static URL getBestCss(File directory, String languageCode,
