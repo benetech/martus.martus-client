@@ -33,6 +33,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 
+import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.AbstractDateOrientedFieldSpec;
 import org.martus.swing.UiComboBox;
@@ -235,6 +236,11 @@ public class UiDateEditorComponent extends Box
 
 	public void setStoredDateText(String newText)
 	{
+		if(newText.isEmpty())
+		{
+			setUnknownDate();
+			return;
+		}
 		try
 		{
 			MultiCalendar cal = localization.createCalendarFromIsoDateString(newText);
@@ -242,9 +248,9 @@ public class UiDateEditorComponent extends Box
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
-			System.out.println(e);
-		}			
+			MartusLogger.logException(e);
+			setUnknownDate();
+		}
 	}
 	
 	private void setUnknownDate()
