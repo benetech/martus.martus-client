@@ -45,6 +45,7 @@ import org.martus.client.swingui.jfx.landing.bulletins.AttachmentTableRowData;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
+import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.ReusableChoices;
@@ -392,10 +393,18 @@ public class FxBulletin
 		if(data.isEmpty())
 			return data;
 		
-		MultiCalendar multiCalendar = MultiCalendar.createFromIsoDateString(data);
-		if(multiCalendar.isUnknown())
+		try
+		{
+			MultiCalendar multiCalendar = MultiCalendar.createFromIsoDateString(data);
+			if(multiCalendar.isUnknown())
+				return "";
+		}
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
 			return "";
-		
+		}
+			
 		return data;
 	}
 
