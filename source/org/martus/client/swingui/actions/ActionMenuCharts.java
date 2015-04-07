@@ -284,7 +284,7 @@ public class ActionMenuCharts extends UiMenuAction implements ActionDoer
 				}
 			}
 			
-			String[] data = fieldToCount.getHumanReadableData(getLocalization());
+			String[] data = getSortableHumanReadableData(fieldToCount);
 			String value = "";
 			boolean hasAnyData = false;
 			for (int level = 0; level < data.length && level <= relevantLevel; ++level)
@@ -306,6 +306,14 @@ public class ActionMenuCharts extends UiMenuAction implements ActionDoer
 			counts.put(value, newCount);
 		}
 		return counts;
+	}
+
+	public String[] getSortableHumanReadableData(MartusField fieldToCount)
+	{
+		MartusLocalization localization = getLocalization();
+		if(fieldToCount.getType().isDate())
+			localization.setMdyOrder(DATE_FORMAT_SORTABLE_YMD);
+		return fieldToCount.getHumanReadableData(localization);
 	}
 
 	private boolean printToDisk(JFreeChart chart) throws IOException
@@ -649,6 +657,7 @@ public class ActionMenuCharts extends UiMenuAction implements ActionDoer
 //		return chart;
 //	}
 //
+	private final static String DATE_FORMAT_SORTABLE_YMD = "ymd";
 	private final static String JPEG_EXTENSION = ".jpeg";
 	private final static String JPG_EXTENSION = ".jpg";
 	UiFontEncodingHelper fontHelper;
