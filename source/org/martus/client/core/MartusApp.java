@@ -681,9 +681,10 @@ public class MartusApp
 			plainTextConfigInputStream.close();
 			
 			String languageCode = localization.getCurrentLanguageCode();
-			if (languageCode != null && languageCode.equals(MtfAwareLocalization.BURMESE))
-				configInfo.setUseZawgyiFont(true);
-			FontSetter.setDefaultFont(configInfo.getUseZawgyiFont());
+			
+			boolean useZawgyiFont = (languageCode != null && languageCode.equals(MtfAwareLocalization.BURMESE));
+			configInfo.setUseZawgyiFont(useZawgyiFont);
+			FontSetter.setDefaultFont(useZawgyiFont);
 			FontHandler.setDoZawgyiConversion(configInfo.getDoZawgyiConversion());
 			
 			if(configInfo.getVersion() < ConfigInfo.VERSION_WITH_CONTACT_KEYS)
