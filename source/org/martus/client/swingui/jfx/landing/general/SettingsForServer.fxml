@@ -41,13 +41,13 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="225.0" prefWidth="200.0">
 <children><VBox prefWidth="480.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-<children><Label text="%DefaultServerConnection">
+<children><Label styleClass="headingLevel3" text="%DefaultServerConnection">
 <font>
 <Font name="Helvetica" size="14.0" />
 </font></Label><Button mnemonicParsing="false" onMouseClicked="#onConnectToDefaultServer" text="%ConnectToDefault">
 <VBox.margin>
 <Insets bottom="10.0" top="10.0" />
-</VBox.margin></Button><Label text="%AdvancedSettings">
+</VBox.margin></Button><Label styleClass="headingLevel3" text="%AdvancedSettings">
 <font>
 <Font name="Helvetica" size="14.0" />
 </font></Label><GridPane>
@@ -59,7 +59,7 @@
     <RowConstraints vgrow="SOMETIMES" />
     <RowConstraints vgrow="SOMETIMES" />
   </rowConstraints>
-<children><Label text="%ServerIP" /><Label text="%AccountInfoPublicCode40" GridPane.rowIndex="1" /><TextField fx:id="advanceServerIpAddress" GridPane.columnIndex="1" /><TextField fx:id="advanceServerPublicCode" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+<children><Label styleClass="mainText" text="%ServerIP" /><Label styleClass="mainText" text="%AccountInfoPublicCode40" GridPane.rowIndex="1" /><TextField fx:id="advanceServerIpAddress" GridPane.columnIndex="1" /><TextField fx:id="advanceServerPublicCode" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 </children>
 </GridPane><Button fx:id="connectToAdvanceServer" mnemonicParsing="false" onMouseClicked="#onConnectToAdvanceServer" text="%Button.ConnectToServer">
 <VBox.margin>
