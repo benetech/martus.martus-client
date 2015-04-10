@@ -30,6 +30,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.zip.ZipFile;
 
@@ -113,10 +114,19 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		allSpecs.addAllSpecs(specsAfterXFormsSaved);
 		contextToUse.setSectionFieldSpecs(allSpecs);
 
-		FieldSpec newXFormSpec = contextToUse.getFieldSpec(numberOfSpecsBeforeXFormsSaved);
-		assertEquals("Label incorrect?", "some randon name", newXFormSpec.getLabel());
-		assertEquals("Tag incorrect?", "name", newXFormSpec.getTag());
-		assertTrue("Type incorrect?",  newXFormSpec.getType().isString());
+		String xFormsTag = "name";
+		for (Iterator iterator = specsAfterXFormsSaved.iterator(); iterator.hasNext();)
+		{
+			FieldSpec newXFormSpec = (FieldSpec) iterator.next();
+			if(newXFormSpec.getTag().equals(xFormsTag))
+			{
+				assertEquals("Label incorrect?", "some randon name", newXFormSpec.getLabel());
+				assertEquals("Tag incorrect?", "name", newXFormSpec.getTag());
+				assertTrue("Type incorrect?",  newXFormSpec.getType().isString());
+				return;
+			}
+		}
+		fail("Didn't find xForms Field?");
 	}
 
 	public void testIgnoreUnauthorizedBulletins() throws Exception
