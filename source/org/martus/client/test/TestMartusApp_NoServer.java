@@ -2734,6 +2734,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_BEGIN("testLanguageNames");
 		assertNotNull(testAppLocalization.getLanguageName("Not a valid code"));
 		assertEquals("English", testAppLocalization.getLanguageName("en"));
+		assertEquals("Albanian", testAppLocalization.getLanguageName("sq"));
 		assertEquals("Arabic", testAppLocalization.getLanguageName("ar"));
 		assertEquals("Azerbaijani", testAppLocalization.getLanguageName("az"));
 		assertEquals("Bengali, Bangla", testAppLocalization.getLanguageName("bn"));
