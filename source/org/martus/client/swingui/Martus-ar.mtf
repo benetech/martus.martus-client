@@ -2,9 +2,9 @@
 # Language code:  ar
 # Language name:  Arabic
 # Translated by:
-# Exported date:  Sun Mar 15 15:54:24 PDT 2015
+# Exported date:  Mon Mar 30 13:35:08 PDT 2015
 # Client version: pre-5.0.3
-# Client build:   2015-03-13.3506
+# Client build:   2015-03-28.3519
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -101,7 +101,7 @@
 #
 
 #______________________=Add Contact
--d7f5-button:AddContactإضافة جهة الاتصال
+-d7f5-button:AddContact=إضافة جهة اتصال
 
 #____________________________=Add
 -61cc-button:AddFieldToReport=إضافة
@@ -110,7 +110,7 @@
 -ba05-button:AddPermissions=تحديث وصول جهة الاتصال
 
 #_______________________=Add
--61cc-button:AddTemplateإضافة
+-61cc-button:AddTemplate=إضافة
 
 #________________________=Show all records on this server and on this computer.
 -ccf0-button:AllSummaries=عرض كل النشرات على هذا الخادم و على هذا الكمبيوتر
@@ -125,7 +125,7 @@
 -b52b-button:Back=السابق
 
 #___________________________=Record Details
--5522-button:BulletinDetailsتفاصيل التسجيل
+-5522-button:BulletinDetails=تفاصيل التسجيلات
 
 #___________________=All
 -6a72-button:CaseAll=الكل
@@ -143,7 +143,7 @@
 -78b7-button:Choose=اختيار
 
 #_______________________________=Use Default Server
--7a68-button:ChooseDefaultServer=استخدام الخادم الافتراضي
+-7a68-button:ChooseDefaultServer=الخادم الافتراضي
 
 #_____________________=Close Help
 -8624-button:CloseHelp=إغلاق المساعدة
@@ -284,7 +284,7 @@
 -c47a-button:Help=المساعدة
 
 #_________________________________=Import Contact From File
--9393-button:ImportContactFromFile=استيراد جهة الاتصال من ملف
+-9393-button:ImportContactFromFile=استيراد من ملف
 
 #__________________________=Import From File
 -85a7-button:ImportFromFile=استيراد من ملف
@@ -397,7 +397,6 @@
 #______________________________=Match multi-item list details in the search screen to a single item. See the search Help screen for additional guidance on this advanced option.
 -92e3-button:SearchSameRowsOnly=مطابقة تفاصيل القائمة المتعددة العناصر الموجودة في شاشة البحث مع عنصر أحادي. اذهب إلى شاشة البحث عن المساعدة للحصول على إرشادات إضافية حول هذا الخيار المتقدم.
 
-
 #____________________=See Forms
 -fac4-button:SeeForms=مراجعة النماذج
 
@@ -438,10 +437,10 @@
 -172d-button:ShowGridNormal=إظهار كشبكة
 
 #_____________________=Return to image
--a24b-button:ShowImage=<Return to image>
+-a24b-button:ShowImage=الرجوع إلى الصورة
 
 #___________________=Show on Map
--0c4b-button:ShowMap=<Show on Map>
+-0c4b-button:ShowMap=أظهر الخريطة
 
 #__________________=Sign In
 -f849-button:SignIn=تسجيل الدخول
@@ -578,8 +577,8 @@
 #_______________=Yes
 -5397-button:yes=نعم
 
-#______________________=Access Token:
--c45e-field:AccessToken=شارة الوصول 
+#______________________=Access Token 
+-0d63-field:AccessToken=شارة الوصول
 
 #__________________________________=Access Token
 -0d23-field:AccessTokenInstructions=شارة الوصول
@@ -590,7 +589,7 @@
 #__________________________________=#AccountId# #PublicCode#
 -ca80-field:AccountIdWithPublicCode=#AccountId# ‏#PublicCode#
 
-#_______________________________=Account Directory:
+#_______________________________=Account Directory: 
 -c354-field:AccountInfoDirectory=مجلد الحساب :
 
 #________________________________=Public Code (Old) 
@@ -608,12 +607,11 @@
 #_____________________________=Account Information
 -0cbd-field:AccountInformation=معلومات الحساب
 
-#______________________________________=create a Username
--e8c1-field:AccountUserNameInstructions=إنشاء اسم المستخدم
+#______________________________________=create a username
+-a7db-field:AccountUserNameInstructions=إنشاء اسم المستخدم
 
 #_________________________________=To send information through Martus to your contacts, pull their public key from the Martus server using their access token. Verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add them here. If you do not have this information now, you will be able to add contacts later.
 -70e8-field:AddContactInstructions=لإرسال معلومات عبر برنامج Martus إلى جهات اتصالك، اسحب مفاتيحهم العمومية من خادم Martus باستخدام شارة الوصول. ثم تحقق من أنك سحبت المفاتيح الصحيحة وذلك بفحص الرمز العمومي لكل مفتاح. اسأل جهات اتصالك عن شارة وصولهم وعن الرمز العمومي لإضافتهما هنا. إن لم تتوفر حاليا على هذه المعلومات، فسوف يكون بإمكانك إضافة جهات الاتصال لاحقا.
-
 
 #______________________=Contacts
 -b0dd-field:AddContacts=جهات الاتصال
@@ -629,7 +627,6 @@
 
 #____________________________________=If you are connecting to a Martus server, email martus@benetech.org for this info.
 -62cc-field:AdvanceMartusServerMailTo=إذا أردت الاتصال بخادم Martus، راسلنا على martus@benetech.org لهذه المعلومة.
-
 
 #____________________________________=If you are connecting to your organization's server, contact your administrator.
 -1eae-field:AdvanceOrganizationServer=إذا أردت الاتصال بخادم منظمتك، اتصل بمديرك.
@@ -654,10 +651,10 @@
 
 #____________________________________=Martus help documentation is available at
 -ab4d-field:AssistanceWithMartusPart1=وثائق مساعدة Martus متاحة في
-#_____________________________________=or inside C:\\Martus\\Docs on Windows
+
+#_____________________________________=or inside C:\Martus\Docs on Windows
 -caff-field:AssistanceWithMartusPart1B=أو داخل C:\\Martus\\Docs في ويندوز
 
-#. Do NOT translate the word Martus.
 #_____________________________________=and the Martus Documentation folder inside the Martus DMG on Mac.
 -a9c9-field:AssistanceWithMartusPart1C=ووثائق مساعدة Martus متاحة داخل Martus DMG في حاسوب ماك.
 
@@ -682,8 +679,8 @@
 #_________________________________________=Name here if available otherwise blank
 -6338-field:AuthorNicknameFieldDescription=املأ الاسم هنا إن كان متاحا أو اتركه فارغا
 
-#___________________________=Author Public Code:
--bcc8-field:AuthorPublicCode=الرمز العمومي للمؤلف
+#___________________________=Author Public Code 
+-36ce-field:AuthorPublicCode=الرمز العمومي للمؤلف
 
 #________________________________________=#PublicCode# (not currently in contacts)
 -68c3-field:AuthorizedToReadNotInContacts=#PublicCode# (غير موجود حاليا في جهات الاتصال)
@@ -706,8 +703,8 @@
 #____________________________________________________=Please insert disk #
 -b877-field:BackupRecoverKeyPairInsertNextDiskMessage=يُرجى إدخال القرص رقم
 
-#_______________________________________________=Backup complete, please give each disk to someone you trust, so that if you forget your Username and/or password in the future you can recreate your account.  You will need #MinimumNumberOfFilesNeededForRecovery# of these disks to recreate your account.
--a721-field:BackupSecretShareCompleteInformation=اكتمل النسخ الاحتياطي، يُرجى إعطاء القرص لمن تثق به لكي تتمكن من إعادة إنشاء حسابك إذا نسيت اسم المستخدم أو كلمة السر في المستقبل. سوف تحتاج إلى #MinimumNumberOfFilesNeededForRecovery# أقراص لإعادة إنشاء حسابك.
+#_______________________________________________=Backup complete, please give each disk to someone you trust, so that if you forget your username and/or password in the future you can recreate your account.  You will need #MinimumNumberOfFilesNeededForRecovery# of these disks to recreate your account.
+-0e07-field:BackupSecretShareCompleteInformation=اكتمل النسخ الاحتياطي، يُرجى إعطاء القرص لمن تثق به لكي تتمكن من إعادة إنشاء حسابك إذا نسيت اسم المستخدم أو كلمة السر في المستقبل. سوف تحتاج إلى #MinimumNumberOfFilesNeededForRecovery# أقراص لإعادة إنشاء حسابك. 
 
 #________________________=Backup Your Key
 -a49a-field:BackupYourKey=نسخ مفتاحك احتياطيا
@@ -718,9 +715,8 @@
 #____________________________=Be sure to save a copy of your account key to a secure location that is different from the computer where you currently have Martus installed, so you have it if you need to restore your account.
 -0204-field:BackupYourKeyTip1=تأكد من حفظ نسخة من مفتاح حسابك في موقع آمن باستثناء الحاسوب الذي ثَبتْتَ فيه حاليا برنامج Martus. بهذا، يكون هذا المفتاح بحوزتك إذا أردت استعادة حسابك.
 
-#____________________________=Martus also offers a way to back up your key in 3 separate pieces, which is the only way for you to access your Martus account and data if you forget your Username and password. You will be prompted to create the 3 piece backup after completing your account setup and we strongly encourage you to do so.
--5264-field:BackupYourKeyTip2=يوفر Martus أيضا طريقة لنسخ مفتاحك احتياطيا في 3 أجزاء متفرقة، لأنها الطريقة الوحيدة للوصول إلى حساب Martus والبيانات إذا نسيت اسم المستخدم أو كلمة السر. سوف يُعرَض عليك إنشاء 3 أجزاء للنسخ الاحتياطية بعد إكتمال إعداد حسابك، لذلك نوصيك بشدة القيام بذلك.
-
+#____________________________=Martus also offers a way to back up your key in 3 separate pieces, which is the only way for you to access your Martus account and data if you forget your username and password. You will be prompted to create the 3 piece backup after completing your account setup and we strongly encourage you to do so.
+-0943-field:BackupYourKeyTip2=يوفر Martus أيضا طريقة لنسخ مفتاحك احتياطيا في 3 أجزاء متفرقة، لأنها الطريقة الوحيدة للوصول إلى حساب Martus والبيانات إذا نسيت اسم المستخدم أو كلمة السر. سوف يُعرَض عليك إنشاء 3 أجزاء للنسخ الاحتياطية بعد إكتمال إعداد حسابك، لذلك نوصيك بشدة القيام بذلك. 
 
 #__________________________=Record Details
 -5522-field:BulletinDetails=تفاصيل التسجيلات
@@ -770,19 +766,19 @@
 #_____________________=Record ID 
 -680d-field:BulletinID=مُعرِّف التسجيل
 
-#_____________________=Record Id:
+#_____________________=Bulletin Id:
 -a081-field:BulletinId=مُعرِّف التسجيل
 
 #____________________________=Last Saved
 -eb05-field:BulletinLastSaved=المحفوظ أخيرا
 
-#___________________________=Contact Record
+#___________________________=Contact Bulletin
 -c778-field:BulletinNotYours=جهة اتصال التسجيل
 
 #_______________________=Size (Kb)
 -fa2e-field:BulletinSize=الحجم (كيلو بايت)
 
-#_________________________=Record Status:
+#_________________________=Bulletin Status:
 -c567-field:BulletinStatus=حالة التسجيل :
 
 #______________________________________=Created by an UNKNOWN Contact
@@ -793,6 +789,7 @@
 
 #__________________________=Sent
 -35f4-field:BulletinWasSent=أُرسِل
+
 #___________________=Calendar
 -adab-field:Calendar=التقويم
 
@@ -813,6 +810,7 @@
 
 #_______________________=Calendar Type 
 -0628-field:CalendarType=نوع التقويم
+
 #_________________________=Chart produced #Date#
 -fb8c-field:ChartCreatedOn=أُنشِيء المخطط بتاريخ #Date#
 
@@ -853,7 +851,7 @@
 -75fe-field:ChartTypeBar=مخطط شريطي
 
 #________________________=Line Chart (records over time)
--7b24-field:ChartTypeLine=<Line Chart (records over time)>
+-7b24-field:ChartTypeLine=‫مخطط بياني خطي (عرض زمني للتسجيلات)‬
 
 #_______________________=Pie Chart
 -75ed-field:ChartTypePie=مخطط دائري
@@ -873,7 +871,7 @@
 #_________________________=Choose a Language
 -254a-field:ChooseLanguage=اختيار اللغة
 
-#_____________________________=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report.
+#_____________________________=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. 
 -e4a8-field:ChooseReportFields=استخدم Ctrl-Click أو Shift-Click لتحديد الحقول (الأعمدة) التي ستظهر في هذا التقرير.
 
 #_____________________________________=Download Progress
@@ -900,10 +898,8 @@
 #______________________________________=- Backup your documents on the Martus server in case your computer is lost or stolen
 -5824-field:ConnectMartusServerReasons2=- نسخ وثائقك احتياطيا على خادم Martus في حال ضياع حاسوبك أو سرقته
 
-
 #______________________________________=- Easily retrieve the public keys of your contacts, so you can send them records
 -cd7d-field:ConnectMartusServerReasons3=- جلب يسير للمفاتيح العمومية لجهات اتصالك لكي تتمكن من إرسال التسجيلات إليهم
-
 
 #______________________________________=- Import form templates from your contacts
 -d2ed-field:ConnectMartusServerReasons4=- لستيراد قوالب النماذج من جهات اتصالك
@@ -912,7 +908,7 @@
 -b654-field:ConnectToAdvanceServer=اتصل
 
 #___________________________=Connect to Default
--e649-field:ConnectToDefault=الاتصال بالافتراضي
+-e649-field:ConnectToDefault=الاتصال بالخادم الافتراضي
 
 #____________________________________________=Attempting to connect to the server and retrieve your Token.
 -7e13-field:ConnectingToServerToRetrieveToken=تجري محاولة الاتصال بالخادم لجلب شارتك.
@@ -926,7 +922,6 @@
 #____________________________________=This information identifies your organization.\nYou may enter either an Author, Organization, or both, and both are shown in every record you create.
 -6835-field:ContactInfoRequiredFields=هذه المعلومة تمكن من التعرف على منظمتك.\nيمكن إدخال المؤلف أو المنظمة أو كلاهما، إذ سيظهران في كل تسجيل تُنشِئه.
 
-
 #________________________________=,
 -5c10-field:ContactNamesSeparator=,
 
@@ -939,9 +934,8 @@
 #________________________=Create an Account
 -d48e-field:CreateAccount=إنشاء حساب
 
-#____________________________________=When creating a Username and password for your account, please be aware there is no way to retrieve your Username and password if you forget it. This is for your safety.
--cafe-field:CreateAccountInstructions=عند إنشاء اسم المستخدم وكلمة السر لحسابك، يُرجى توخي الاحتياط لأنه لا توجد طريقة لجلب اسم المستخدم وكلمة سرك إذا نسيتهما. وذلك من أجل الحفاظ على سلامتك.
-
+#____________________________________=When creating a username and password for your account, please be aware there is no way to retrieve your username and password if you forget it. This is for your safety.
+-70db-field:CreateAccountInstructions=عند إنشاء اسم المستخدم وكلمة السر لحسابك، يُرجى توخي الاحتياط لأنه لا توجد طريقة لجلب اسم المستخدم وكلمة سرك إذا نسيتهما. وذلك من أجل الحفاظ على سلامتك. 
 
 #________________________________=Username 
 -f964-field:CreateAccountUserName=اسم المستخدم
@@ -959,14 +953,13 @@
 -fa80-field:CreateCustomFieldsHelp3=\n<Field type='SECTION'>\n<Tag>قسمالمصدر</Tag>\n<Label>قسم المصدر</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>المكتب</Tag>\n<Label>المكتب المحلي الذي يجمع البيانات</Label>\n<DefaultValue>المكتب الميداني للمنطقة 3</DefaultValue>\n</Field> \n\n<Field type='DROPDOWN'>\n<Tag>مصدرالنشرة</Tag>\n<Label>مصدر معلومات التسجيل</Label>\n<RequiredField/>\n<DefaultValue>وسائل الإعلام/صحف</DefaultValue> \n<Choices>\n<Choice>وسائل الإعلام/صحف</Choice>\n<Choice>تقرير قانوني</Choice>\n<Choice>لقاء شخصي</Choice>\n<Choice>غير ذلك</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>حددغيرذلك</Tag>\n<Label>إذا كان 'غير ذلك' يُرجى تذكر المصدر بوضوح :</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>اسمالمتحدث</Tag>\n<Label>اسم المتحدث</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>لغةالمتحدث</Tag>\n<Label>يتكلم المتحدث</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>تواريخاللقاءات</Tag>\n<Label>تاريخ أو تواريخ اللقاءات</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>مجهول</Tag>\n<Label>هل يريد المتحدث أن يبقى مجهول الهوية ؟</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>معلوماتإضافية</Tag>\n<Label>هل المتحدث على استعداد لتقديم معلومات إضافية إذا طُلب منه ذلك ؟</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>الإشهاد</Tag>\n<Label>هل يرغب المتحدث في الإدلاء بشهادته ؟</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>موقعالحدث</Tag>\n<Label>موقع الحدث</Label>\n  <DefaultValue>م1</DefaultValue>\n  <UseReusableChoices code='RegionChoices'></UseReusableChoices>\n<UseReusableChoices code='CityChoices'></UseReusableChoices>\n</Field>\n\n<Field type='SECTION'>\n<Tag>قسمالناس</Tag>\n<Label>قسم الناس</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدولمعلوماتالضحية</Tag>\n<Label>معلومات الضحية</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>الاسم الشخصي</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>اللقب العائلي</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>مُتعرَّف عليه ؟</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>تاريخ الازدياد</Label></Column>\n<MinimumDate>1910-01-01</MinimumDate><MaximumDate/></Column> \n<Column type='DROPDOWN'><Tag></Tag><Label>الجنس</Label>\n<Choices>\n<Choice>ذكر</Choice>\n<Choice>أنثى</Choice>\n<Choice>مجهول</Choice>\n</Choices></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>مكان الازدياد</Label>\n<UseReusableChoices code='RegionChoices'></UseReusableChoices></Column>\n<Column type='STRING'><Tag></Tag><Label>العِرق</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>مهنةالرسالة</Tag>\n<Label>جدول التجربة العملية </Label>\n<Message>إذا كانت لديك معلومات حول شخص شغل وظائف مختلفة، أدخل صفوفا متعددة باستخدام نفس الاسم الشخصي واللقب العائلي وأدخل النطاق التاريخي لكل وظيفة في صف مختلف.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدولالتجربةالعملية</Tag>\n<Label>التجربة العملية</Label>\n<GridSpecDetails>\n<Column type='DROPDOWN'><Tag></Tag><Label>الاسم الشخصي</Label>\n <DataSource>\n <GridFieldTag>جدولمعلوماتالضحية</GridFieldTag>\n <GridColumnLabel></GridColumnLabel>\n </DataSource>\n</Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>اللقب العائلي</Label>\n <DataSource>\n <GridFieldTag>جدولمعلوماتالضحية</GridFieldTag>\n <GridColumnLabel>اللقب العائلي</GridColumnLabel>\n </DataSource>\n</Column>\n<Column type='STRING'><Tag></Tag><Label>المهنة</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>تواريخ الوظائف</Label></Column>\n<MaximumDate/></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MULTILINE'>\n<Tag>السرد</Tag>\n<Label>وصف سردي للأحداث</Label>\n<DefaultValue>أكتب ما حدث بالتفصيل كما يلي:</DefaultValue>\n</Field>\n\n\n<ReusableChoices code='RegionChoices' label='Region'>\n  <Choice code='R1' label='Region 1'></Choice>\n  <Choice code='R2' label='Region 2'></Choice>\n  <Choice code='R3' label='Region 3'></Choice>\n</ReusableChoices>\n\n<ReusableChoices code='CityChoices' label='City'>\n  <Choice code='R1.C1' label='City 1'></Choice>\n  <Choice code='R1.C2' label='City 2'></Choice>\n  <Choice code='R2.C3' label='City 3'></Choice>\n  <Choice code='R2.C4' label='City 4'></Choice>\n  <Choice code='R3.C5' label='City 5'></Choice>\n  <Choice code='R3.C6' label='City 6'></Choice>\n</ReusableChoices>
 
 #___________________________=Want to create a new Martus account?  Click here.
--3373-field:CreateNewAccount= هل تريد إنشاء حساب جديد لـMartus ؟ اضغط على هذا الرابط.
+-3373-field:CreateNewAccount=هل تريد إنشاء حساب جديد لـMartus ؟ اضغط على هذا الرابط.
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=يُرجى إدخال اسم المستخدم وكلمة السر.
 
 #_______________________________________________=Note: This requires your username and password to restore your account.
 -8706-field:CreateSingleEncryptedFileInformation=ملاحظة : هذا يتطلب إدخال اسم المستخدم وكلمة السر لاستعادة حسابك.
-
 
 #__________________________=Please wait. Your account's encryption key is being created.
 -cae1-field:CreatingAccount=يُرجى الانتظار. يجري الآن إنشاء مفتاح التعمية الخاص بحسابك.
@@ -1024,6 +1017,7 @@
 
 #_________________________________=#FieldLabel# (beginning)
 -007f-field:DateRangeTemplatebegin=#FieldLabel# (
+
 #_______________________________=#FieldLabel# (end)
 -fea7-field:DateRangeTemplateend=#FieldLabel# (النهاية)
 
@@ -1054,7 +1048,6 @@
 #____________________________________=You can only delete draft records from the server that are not currently on your computer.
 -55e3-field:DeleteServerDraftsMessage=تستطيع فقط حذف مسودات التسجيلات من الخادم والتي لا توجد حاليا في حاسوبك.
 
-
 #__________________________=Your Display Settings
 -9d27-field:DisplaySettings=إعدادات العرض الخاصة بك
 
@@ -1062,7 +1055,7 @@
 -0a0f-field:DisplayableDefaultFormTemplateName=حقول Martus المعيارية
 
 #____________________________________=Do not show this message again during this session
--4f4f-field:DoNotShowAgainThisSession=<Do not show this message again during this session>
+-4f4f-field:DoNotShowAgainThisSession=لا تظهر هذه الرسالة مرة أخرى خلال هذه الجلسة
 
 #___________________=Download
 -a479-field:Download=تنزيل
@@ -1124,10 +1117,8 @@
 #____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag\n   102 - A previous Tag already exists with this name\n   103 - Label cannot be blank\n   104 - Unrecognized Field Type\n   105 - A label was found in a standard field\n   106 - XML Parse Error (e.g. mismatched quotation marks or bracket syntax)\n   107 - Tag or Code contains illegal characters (e.g. spaces or punctuation)\n   108 - Duplicate entry in Dropdown field\n   109 - No Choices in Dropdown field\n   110 - System/Standard field tag cannot be used for custom field\n   111 - Standard field in top pane cannot be placed in bottom (always Private) pane\n   112 - Standard field in bottom (always Private) pane cannot be placed in the top pane\n   113 - Data Source Grid not found in same pane as resulting dropdown field\n   114 - Unknown Data Source Grid Column Label\n   115 - Dropdown cannot have both choices and data source\n   116 - Invalid date must be in ISO format YYYY-MM-DD\n   117 - No Reusable Choices list defined for Dropdown\n   118 - Reusable dropdown definition missing code value.  Please verify that the definition looks like the following:\n         <UseReusableChoices code='FieldChoices'></UseReusableChoices>\n   119 - Reusable choice must have a code and label\n   120 - Dropdown data source cannot be a single or multiple level dropdown with Reusable Choices\n   121 - Default value is not valid for this field\n   122 - Reusable Choices lists cannot have the same Label\n   123 - Lower-level reusable choice code has no matching higher-level code\n   200 - All fields empty\n   201 - Unrecognized Contact created this template\n   202 - Security validation error\n   203 - File Error\n   204 - Imported XML Missing Field
 -8bd5-field:ErrorCustomFields=يوجد خطأ في تعريفات الحقول المخصصة، ومن ثمَّ يتم تعريف كل خطأ من خلال الرموز التالية:\n   100 - الحقل القياسي المطلوب غير موجود\n   101 – لا يحتوي الحقل المخصص على علامة صحيحة\n   102 - توجد علامة بنفس الاسم\n   103 - لا يمكن أن تكون التسمية فارغة\n   104 - نوع الحقل غير معروف\n   105 – عُثِر على تسمية في أحد الحقول القياسية\n   106 - خطأ في تحليل XML (كأن يكون تركيب الأقواس أو علامات الاقتباس غير متطابق)\n   107 - تحتوي العلامة أو الرمز على حروف غير مسموح بها (كالمسافات أو علامات الترقيم)\n   108 – إدخال مكرر في حقل القائمة المنسدلة\n   109 - لا توجد خيارات في حقل القائمة المنسدلة\n   110 – لا يمكن للحقل مخصص استخدام علامة الحقل القياسي أو علامة حقل النظام\n   111 – لا يمكن وضع الحقل القياسي الموجود بالجزء العلوي في الجزء السفلي (خاص دائما)\n   112 – لا يمكن وضع الحقل القياسي الموجود بالجزء السفلي (خاص دائما) في الجزء العلوي\n   113 - لم يُعثَر على شبكة مصدر البيانات في نفس الجزء كما هو الحال مع حقل القائمة المنسدلة الناتجة\n   114 - تسمية مجهولة لعمود شبكة مصدر البيانات\n   115 - لا يمكن أن تحتوي القائمة المنسدلة على الخيارات ومصدر البيانات في آن واحد\n   116 – يجب أن يكون التاريخ غير الصالح بتنسيق ISO، وهو س س س س-ش ش-ي ي\n   117 – لم تُحدَّد قائمة الخيارات القابلة لإعادة الاستخدام للقائمة المنسدلة\n   118 – لا تتوفر قيمة الرمز للقائمة المنسدلة القابلة لإعادة الاستخدام. يُرجى التحقق من أن التعريف يشبه ما يلي:\n         <UseReusableChoices code='FieldChoices'></UseReusableChoices>\n   119 - يجب أن يتضمن الخيار القابل لإعادة الاستخدام رمزا وتسمية\n   120 - لا يمكن لمصدر بيانات القائمة المنسدلة أن تكون عبارة عن قائمة منسدلة منفردة أو متعددة المستويات ذات خيارات قابلة لإعادة الاستخدام\n   121 - القيمة الافتراضية غير صالحة لهذا الحقل\n   122 – لا يمكن لقوائم الخيارات القابلة لإعادة الاستخدام أن تكون بنفس التسمية\n   123 – ليس لرمز الخيار القابل لإعادة الاستخدام المنخفض المستوى رمز يطابقه من المستوى الأعلى\n   200 - جميع الحقول فارغة\n   201 – قامت جهة اتصال مجهولة بإنشاء هذا القالب\n   202 - خطأ في التحقق من صحة الأمان\n   203 - خطأ في الملف\n   204 - حقل XML المستورَد غير موجود
 
-
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=يوجد ملف سابق للنسخ الاحتياطي. يجب عليك حفظ كل ملف على قرص قابل للإزالة كــ DVD أو CD أو USB. 
-
 
 #_____________________________________________=No appropriate backup file was found on this disk, please try a different disk.
 -618a-field:ErrorRecoverNoAppropriateFileFound=لم يعثر على ملف النسخ الاحتياطي مناسب في هذا القرص، يُرجى محاولة استخدام قرص آخر.
@@ -1175,9 +1166,9 @@
 -23f2-field:FancySearchHelpMsg1=---لمحة---\n\nيبحث Martus عن كافة نسخ كل تسجيل (بما في ذلك العمومية والخاصة والمختومة والمسودة) في كل مجلد، بما في ذلك مجلد التسجيلات المُتجاهَلة. عند اكتمال البحث، يُظهِر مجلد نتائج البحث قائمة نسخ التسجيلات التي عثر عليها.\n\nتستطيع البحث عن الكلمات بجميع اللغات. وسيلة بحث Martus لا تميز بين حالة الحروف عندما تبحث بالإنجليزية أو أي لغة تعتمد على الحروف اللاتينية، لذلك لا تؤثر حالة الحرف في نتيجة البحث.\n\nيشمل البحث أسماء المرفقات فقط دون البحث في محتواها.\n\nيمكنك البحث عن الحقول القياسية والحقول المخصصة معا.\n\n
 
 #______________________________=---Search tips---\n\nMartus will find any text you enter whether it's a complete word or part of a larger word. For example, if you search for the word prison, you'll see records that include the words prison, imprison, and imprisonment. Likewise, if you search for the word prison, Martus will find records that include attachments with names such as photos-prison.jpg and prisoners-report.doc.\n\nTo search for an exact phrase, type it with quotation marks around the phrase  (e.g.  "Witness Testimony"). If you do not put quotation marks around the phrase, Martus will search for the words individually.\n\nUse the word "#Or#" to broaden your search, or the word "#And#" to narrow it.  You can use the #And# / #Or# dropdowns to specify different fields you want search across (e.g. you want to search for records that have "Last Saved Date" in the last week and have a certain author).  If you want to search on multiple text values within a single record field, you can use #Or# or #And# in-between words in the "Search For..." entry box.  For example, if you search "Any Field" for:\n   prison #Or# jail\nyou'll see a list of records that contain either word anywhere in the record. If you search for:\n   prison #And# assault \nyou'll see a list of records that contain both words. The keyword "#And#" is implied, so if you search for:\n   prison assault \nMartus will find the same records as if you searched for:\n   prison #And# assault\n\nWhen you use both "#And#" and "#Or#", your search terms are grouped from the beginning of your list (either across record fields or within a particular field). For example, if you enter:\n   prison #Or# jail #And# trial \nin the "Search For..." entry box, Martus will search for any records that contain either of the words prison or jail, and also contain the word trial. But if you enter:\n   prison #And# jail #Or# trial \nMartus will search for any records that contain both the words prison and jail, or contain the word trial.\n
--bd23-field:FancySearchHelpMsg2=---نصائح البحث---\n\nسيعثر Martus على أي نص تدخله سواء كان كلمة بكاملها أو جزءً من كلمة طويلة. مثلا إذا بحثت عن كلمة prison، سوف ترى كل التسجيلات التي تحمل أسماء كــ prison و imprison و imprisonment. كذلك، إذا بحثت عن كلمة prison، سيعثر Martus على التسجيلات التي تتضمن مرفقات بهذا الاسم كـ photos-prison.jpg و prisoners-report.doc\n\nللبحث عن عبارة معينة، اكتبها داخل مزدوجتين (مثلا 'Witness Testimony'). إن لم تكتبها داخل المزدوجتين، سيبحث Martus عن كل كلمة بمعزل عن الأخرى.\n\nاستخدم كلمة '#Or#' لتوسيع مجال البحث، أو كلمة '#And#' لتضييقه. يمكنك استخدام القوائم المنسدلة '#And#' / #Or# لتحديد الحقول المختلفة التي تود البحث من خلالها (مثلا، تريد البحث عن التسجيلات ذات الحقل 'تاريخ المحفوظ أخيرا' في الأسبوع الأخير وذات مؤلف محدد). إذا أردت البحث عن قيم نصية متعددة في تسجيل واحد، يمكنك استخدام #Or# أو #And# بين كل كلمتين في مربع الإدخال 'البحث عن...'. مثلا، إذا بحثت بواسطة 'مهما كان الحقل' بإدخال :\nprison #Or# jail\nسوف ترى قائمة التسجيلات التي تحوي أحد الكلمتين أو كلتاهما في التسجيل. إذا أدخلت :\nprison #And# assault \nسوف ترى قائمة التسجيلات التي تحوي كلتا الكلمتين في التسجيل بسبب استخدام الكلمة المفتاحية '#And#'. لذلك فإن إدخال :\nprison assault \nيعادل نفس نتيجة بحث Martus كما لو أنك أدخلت :\nprison #And# assault\n\nعند استخدامك كلاّ من '#And#' و '#Or#'، فإن مفردات البحث سيتم تجميعها انطلاقا من بداية القائمة (إما عبر حقول التسجيل أو داخل حقل معين). مثلا، إذا أدخلت :\nprison #Or# jail #And# trial \nفي مربع إدخال 'البحث عن...'، سيبحث Martus عن كل التسجيلات التي تحوي كلمتي prison أو jail، وكذلك التي تحوي كلمة trial. لكن إذا أدخلت :\nprison #And# jail #Or# trial \nسيبحث Martus عن كل التسجيلات التي تحوي كلمتي prison و jail، أو التي تحوي كلمة trial.\n
+-52fb-field:FancySearchHelpMsg2=---نصائح البحث---\n\nسيعثر Martus على أي نص تدخله سواء كان كلمة بكاملها أو جزءً من كلمة طويلة. مثلا إذا بحثت عن كلمة prison، سوف ترى كل التسجيلات التي تحمل أسماء كــ prison و imprison و imprisonment. كذلك، إذا بحثت عن كلمة prison، سيعثر Martus على التسجيلات التي تتضمن مرفقات بهذا الاسم كـ photos-prison.jpg و prisoners-report.doc\n\nللبحث عن عبارة معينة، اكتبها داخل مزدوجتين (مثلا 'Witness Testimony'). إن لم تكتبها داخل المزدوجتين، سيبحث Martus عن كل كلمة بمعزل عن الأخرى.\n\nاستخدم كلمة '#Or#' لتوسيع مجال البحث، أو كلمة '#And#' لتضييقه. يمكنك استخدام القوائم المنسدلة '#And#' / #Or# لتحديد الحقول المختلفة التي تود البحث من خلالها (مثلا، تريد البحث عن التسجيلات ذات الحقل 'تاريخ المحفوظ أخيرا' في الأسبوع الأخير وذات مؤلف محدد). إذا أردت البحث عن قيم نصية متعددة في تسجيل واحد، يمكنك استخدام #Or# أو #And# بين كل كلمتين في مربع الإدخال 'البحث عن...'. مثلا، إذا بحثت بواسطة 'مهما كان الحقل' بإدخال :\nprison #Or# jail\nسوف ترى قائمة التسجيلات التي تحوي أحد الكلمتين أو كلتاهما في التسجيل. إذا أدخلت :\nprison #And# assault \nسوف ترى قائمة التسجيلات التي تحوي كلتا الكلمتين في التسجيل بسبب استخدام الكلمة المفتاحية '#And#'. لذلك فإن إدخال :\nprison assault \nيعادل نفس نتيجة بحث Martus كما لو أنك أدخلت :\nprison #And# assault\n\nعند استخدامك كلاّ من '#And#' و '#Or#'، فإن مفردات البحث سيتم تجميعها انطلاقا من بداية القائمة (إما عبر حقول التسجيل أو داخل حقل معين). مثلا، إذا أدخلت :\nprison #Or# jail #And# trial \nفي مربع إدخال 'البحث عن...'، سيبحث Martus عن كل التسجيلات التي تحوي كلمتي prison أو jail، وكذلك التي تحوي كلمة trial. لكن إذا أدخلت :\nprison #And# jail #Or# trial \nسيبحث Martus عن كل التسجيلات التي تحوي كلمتي prison و jail، أو التي تحوي كلمة trial.\n
 
-#______________________________=You can use the word #Or# or #And#, or you can use the English words '#OrEnglish#' and '#AndEnglish#' to search.\n\nYou need to put spaces before and after any #Or# / #And# keywords you use in your search.\n
+#______________________________=You can use the word #Or# or #And#, or you can use the English words "#OrEnglish#" and "#AndEnglish#" to search.\n\nYou need to put spaces before and after any #Or# / #And# keywords you use in your search.\n
 -1573-field:FancySearchHelpMsg3=يمكنك استخدام كلمة #Or# أو #And#، أو يمكنك استخدام الكلمتين الإنجليزيتين '#OrEnglish#' و '#AndEnglish#' للبحث.\n\nيجب عليك إدخال الفراغات قبل وبعد كل من الكلمتين المفتاحيتين #Or# و #And# لاستخدام البحث.\n
 
 #______________________________=If you want all of your multi-item list search criteria to be met in a single list item, please check the "Match multi-item list details" checkbox. For example, if you want to search for a specific victim name in a single item in your records created after a certain date, select the checkbox and enter the following fields in the Search screen: "Victim Information: First Name" = x and "Victim Information: Last Name" = y and "Date Created" >= YYYY-Mon-DD. If you do not select the "Match multi-item list details" checkbox, Martus will find records created after your specified date where any item has the first name you specified and any other item has the last name specified, but not necessarily in the same item (you could have an item with "First Name" = x and "Last Name" = b, and a different item with "First Name" = a and "Last Name" = y, and Martus will find that record as matching the search because you did not specify that it had to match in a single item)\n\n
@@ -1185,7 +1176,6 @@
 
 #______________________________= Additional Search Notes:\n\n 1. Because Martus searches all details of any multi-item list for your criteria, it may find records where one item detail matches your criteria but other details do not. For example you could have a record with an item that has a location field in it and you have multiple details in the item with locations A, B, and C. If you search for records where location != C (does not equal C), Martus will find that record because there are 2 details in the record item where the location is not C, even though there is one item where the locations IS C.\n\n 2. In this release, if you are searching on a multi-level dropdown, all searches are exact matches, not partial or "starts with" matches. This means that you have to pick the exact level at which you want to be searching. For example, an "Event Location" field that has three levels (Region/City/Neighborhood) will have three entries in the search field list: Event Location: Region, Event Location: City, and Event Location: Neighborhood. So if you want to find any records that have an Event Location anywhere in Region X (regardless of the City), you have to pick the "Event Location: Region" field to search on and pick Region X off the dropdown list choices. If you pick Event Location: City to search on and then pick Region X but leave the City level blank, Martus will only find entries where there was no City data entered (City was blank), as opposed to ANY location with Region X regardless of what data was entered at the City level.\n\n 3. If you do not see your search terms/dates in the final version of the record displayed in the Search Results folder, your criteria may have been matched in an earlier version of the record. You can access previous versions by clicking the "Record Details" button at the bottom of the record. To search only the most recent versions of records, select "Only search most recent version of records" in the Search dialog box.\n\n 4. If you have fields in different records or from different customizations that are exactly the same, Martus will combine them in any Search and Report field lists. And while Martus warns you about duplicate labels when you are creating a new record customization, it is possible that over time, you may have records with different customizations that ended up with the same labels (e.g. maybe you changed a text field to a dropdown field but kept the same label). In these cases, Martus will display both fields in the search screen, and try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists. Also, if you have fields with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same. So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion.\n\n 5. You may sometimes see duplicate entries in dropdown list search criteria values in the search screen. If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria dropdown list options are the labels for each list entry, but the codes you defined determine how many entries there will be in the search dropdown list. So if you have different Reusable Choices codes with the same label in different record customizations in your account, the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like "label1" and your search will be on records that have that label, regardless of which code the customization had for the label). And if you have the same Reusable Choices code with different labels in different record customizations in your account, the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like "label1; label2" and your search will be on records that have either of those labels).\n\nFor additional help with searching, see the documentation at martus.org or email martus@benetech.org.
 -3d76-field:FancySearchHelpMsg5=ملاحظات إضافية للبحث :\n\n1. بما أن Martus يبحث عن جميع الحقول في جميع صفوف كل الشبكات لأجل معيار بحثك، فيمكنه أن يعثر على تسجيلات فيها صفوف توافق أحد المعايير ولا توافق أخرى. على سبيل المثال، قد تكون لديك تسجيل فيها شبكة تحوي عدة مواقع أ و ب و ج في صفوف مختلفة. إذا كنت تبحث عن تسجيلات التي يكون الموقع فيها != ج (ليس ج)، سيجد Martus هذه التسجيل لأنه يوجد صفّان في الجدول ليس لديهما الموقع ج حتى وإن كان هناك صف فيه الموقع ج.\n\n2. في هذا الإصدار، إذا بحثت في قوائم منسدلة ذات مستويات متعددة فكل الأبحاث لها نتائج مطابقة تماما وغير جزئية، أو 'تبدأ بـ'. هذا يعني أنه يجب عليك اختيار المستوى الدقيق الذي من خلاله تريد إنجاز البحث. فمثلا، سيكون للحقل 'موقع الحدث' فيه ثلاث مستويات (المنطقة/المدينة/الحي) ثلاث مداخل في حقل البحث : موقع الحدث : المنطقة، موقع الحدث : المدينة، موقع الحدث : الحي. وعليه، إذا أردت البحث عن تسجيلات موجودة في المنطقة س (أيا كانت المدينة)، يجب عليك اختيار 'موقع الحدث : المنطقة' لكي تقوم بالبحث وثم قم باختيار المنطقة س من القائمة المنسدلة. إذا اخترت 'موقع الحدث : المدينة' كبحث ثم اخترت المنطقة س مع ترك مستوى المدينة فارغا، لن يحصل Martus إلا على النتائج التي تُرك فيها مكان المدينة غير مملوء وبقي بذلك فارغا، وليس كل المواقع في المنطقة س مهما كانت القيمة المُدخَلة في المدينة.\n\n3. إذا لم تستطع رؤية بيانات البحث التي أدخلتها في النسخة الأخيرة من التسجيل في مجلد نتائج البحث، فقد يكون ذلك راجعا إلى أن المعايير التي أدخلتها كانت موافقة لنسخة سابقة من التسجيل. يمكنك الوصول إلى النسخ السابقة عبر نقر زر 'تفاصيل التسجيل...' الموجود فوق التسجيل. للبحث فقط عن نسخ التسجيلات التي صدرت حديثا، اختر 'البحث فقط عن نسخ التسجيلات التي صدرت حديثا' الموجودة في مربع حوار البحث.\n\n4. إذا كانت بعض حقول مختلف التسجيلات أو مختلف التخصيصات متطابقة التشابه، سيقوم Martus بدمجهما معا في كل قائمة تقرير أو بحث. على الرغم من تحذير Martus حول وجود تسميات مكررة عندما تنشيء تخصيصات التسجيل، فمع مرور الوقت يمكن أن تكون لديك تسجيلات ذات تخصيصات متعددة ولها نفس التسميات (مثلا، قمت باستبدال مربع إدخال النص بلائحة منسدلة مع ترك نفس التسمية). في هذه الحالات، سيظهِر Martus الحقلين في شاشة البحث، وسيحاول إظهار الفرق بين الحقلين عبر عرض نوع الحقل والعلامة المرتبطة به في لائحة الحقول التي يجب تحديدها. إضافة إلى ذلك، إذا كان لديك حقلان بنفس العلامة وتسميات مختلفة أو أنواع مختلفة، فقد يستعمل Martus العلامة ونوع الحقل ليحاول تحديد ما إذا كان يلزم على الحقول أن تكون متشابهة. لهذا السبب ننصحك بالربط الصريح بين علامات الحقول والتسميات عبر التخصيصات لتفادي أي التباس.\n\n5. قد ترى أحيانا إدخالات مكررة في اللائحة الانسدالية للبحث في شاشة البحث. إذا اخترت الحقل 'خيارات قابل لإعادة الاستعمال' في القائمة الانسدالية، فإن القيم التي تظهر كخيارات المعايير في اللائحة الانسدالية هي تسميات لكل إدخال في اللائحة. لكن الرموز التي عيّنتَ هي التي تحدد كم يوجد من إدخال في اللائحة الانسدالية للبحث. أي أنه إذا كانت لديك رموز مختلفة للخيارات القابلة لإعادة الاستعمال بنفس التسمية في العديد من تخصيصات التسجيل في حسابك، فإن التسميات ستظهر مرتين في اللوائح الانسدالية للبحث (مثلا إذا استخدمت التسمية 1 بالنسبة للرمز 1 والرمز 2، فستجد في اللائحة الإسدالية للبحث إدخالين يشبهان 'التسمية 1' ثم سيجري بحثك في التسجيلات التي تحوي هذه التسمية، بغض النظر عن رمز التخصيص الذي كان في هذه التسمية).\n\nوأما إن كان لديك نفس الرمز لكن بتسميات مختلفة للخيارات القابلة لإعادة الاستعمال في تخصيصات التسجيلات المختلفة التي في حسابك، فإن اللائحة الانسدالية للبحث لهذا الرمز ستُظهر قيمتين تفرِّق بينهما فاصلة منقوطة (مثلا إذا استخدمت الرمز 1 بالنسبة للتسمية 1 والتسمية 2، فسترى في اللائحة الانسدالية للبحث الإدخال 'التسمية 1 ؛ التسمية 2' وسيجري البحث عن التسجيلات التي تحوي على الأقل أحد التسميتين).\n\n للمزيد من المساعدة حول البحث، راسلنا على martus@benetech.org.
-
 
 #___________________________=Yes/No
 -9f62-field:FieldTypeBOOLEAN=نعم/لا
@@ -1238,10 +1228,8 @@
 #____________________________=You can load and switch to other form templates later inside of Martus, if you do not have access to a server now, or you need one that is different from what you select here.
 -2a63-field:FormTemplatesTip1=يمكنك التحميل والتبديل إلى قوالب نماذج أخرى لاحقًا داخل Martus إذا لم تتمكن من الوصول إلى الخادم الآن، أو إذا كنت بحاجة إلى خادم غير الذي قمت بتحديده هنا.
 
-
 #____________________________=Note: you can change templates, but you will not be able to import templates from the server, outside of the account creation process at this time.
 -16a2-field:FormTemplatesTip2=ملاحظة : يمكنك تغيير القوالب، لكنك لن تتمكن من استيراد قوالب من الخادم بعيدا عن عملية إنشاء الحساب في هذا الوقت.
-
 
 #____________________=You can switch forms later
 -a78d-field:FormsHint=يمكنك تبديل النماذج لاحقا
@@ -1249,9 +1237,8 @@
 #_______________=From 
 -6e9b-field:From=من
 
-#______________________________________=This file name should be unique and identifiable to you but we recommend not using your Username.  Each file will be generated with this name and its number sequence.
--4753-field:GetShareFileNameDescription=يجب ألا يكون لاسم الملف نظير ويجب أن يكون قابلا للتعرف بالنسبة إليك. لكننا لا نوصيك باستخدام اسم المستخدم الخاص بك. إذ أن كل ملف سوف يجري توليده بناء على هذا الاسم ورقم تسلسله.
-
+#______________________________________=This file name should be unique and identifiable to you but we recommend not using your username.  Each file will be generated with this name and its number sequence.
+-2b46-field:GetShareFileNameDescription=يجب ألا يكون لاسم الملف نظير ويجب أن يكون قابلا للتعرف بالنسبة إليك. لكننا لا نوصيك باستخدام اسم المستخدم الخاص بك. إذ أن كل ملف سوف يجري توليده بناء على هذا الاسم ورقم تسلسله. 
 
 #___________________________________=Getting server information
 -90d2-field:GettingServerInformation=الحصول على معلومات الخادم
@@ -1268,7 +1255,6 @@
 #_____________________________=Enter questions, details, or other information your organization wants to have answered in future records created.
 -3672-field:HelpDefaultDetails=ادخل الأسئلة والتفاصيل والمعلومات الأخرى التي تريد منظمتك معرفة الأجوبة عنها في التسجيلات التي تنوي إنشاءها.
 
-
 #_____________________________________=Were there any witnesses?
 -d8c8-field:HelpExample1DefaultDetails=هل هناك شهود ؟
 
@@ -1284,10 +1270,8 @@
 #____________________________________=If someone wishes to send you information, provide them with your access token and public code.
 -9b9d-field:HelpForTokenAndPublicCode=إذا رغب شخص في إرسال معلومات إليك، فقدِّم له شارة الوصول ورمزك العمومي.
 
-
 #____________________________________=When choosing a password, it is important not to use a password that is easy to guess like names, important dates of events or simple words.  Try adding numbers to random letters and making the password long.  Remember your password, but do not share it.  No one else has access to the password if you forget it, so if you write it down, put it in a safe place.
 -65cc-field:HelpOnCreatingNewPassword=عندما تختار كلمة السر، يجب ألا تستخدم كلمة سر يسهل تخمينها، كالأسماء وتواريخ الأحداث الهامة أوالكلمات البسيطة. قم بإضافة أرقام لحروف عشوائية واجعل كلمة السر طويلة. تذكر كلمة السر ولا تَبُحْ بها لأحد. لا أحد يستطيع الوصول إلى كلمة السر إذا نسيتها. إذا كتبتها على ورقة، ضع هذه الأخيرة في مكان آمن.
-
 
 #______________________________=Enter Name
 -c571-field:HintEnterFolderName=ادخل الاسم
@@ -1307,10 +1291,8 @@
 #____________________________________=No accounts exist on this computer.  To create a new account click OK.  Otherwise you can click on the Restore Account tab to restore an account which was previously backed up.
 -7d69-field:HowToCreateInitialAccount=لا توجد حسابات على هذا الحاسوب. لإنشاء حساب جديد، اضغط على موافق، و إلا فاضغط على علامة التبويب استعادة الحساب لاستعادة حساب سبق نسخه احتياطيا.
 
-
 #________________________________=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.
 -02f2-field:HowToCreateNewAccount=يوجد حساب أو أكثر على هذا الحاسوب بالفعل. لإنشاء حساب إضافي باسم مستخدم وعبارة سر جديدين، اضغط على موافق.
-
 
 #_________________________=HTML (*.html, *.htm)
 -842b-field:HtmlFileFilter=HTML ‏(*.html، ‏*.htm)
@@ -1326,7 +1308,6 @@
 
 #_________________________________=Martus allows you to create and share custom forms for data entry. Get started by selecting a form template if desired. Martus comes with several generic form templates you can use. You can also download a custom template from one of your current contacts or another Martus user.
 -8a1b-field:ImportFormTemplateHelp=يتيح لك Martus إنشاء نماذج مخصصة لإدخال البيانات. ابدأ الاستخدام عبر تحديد قالب النموذج الذي تريده. يأتي Martus بالعديد من قوالب النماذج العامة التي يمكنك استخدامها. يمكنك أيضا تنزيل قالب مخصص من بين إحدى جهات اتصالك الحالية أو من مستخدم آخر لبرنامج Martus.
-
 
 #______________________________=Import Form Templates
 -6d6d-field:ImportFormTemplates=استيراد قوالب النموذج
@@ -1346,8 +1327,8 @@
 #__________________________________=The current version of Martus cannot run with Java #HighVersion#. Please use Java #ExpectedVersion# or lower to run Martus.
 -7927-field:IncompatibleJavaVersion=لا يمكن لإصدار Martus الحالي أن يعمل بـ Java ‏#HighVersion#. لذا يُرجى استخدام Java ‏#ExpectedVersion# أو أقل لتشغيل Martus.
 
-#_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
--a747-field:IncompatibleMtfVersion=إصدار الترجمة هذه غير موافق لإصدار Martus هذا، ومن الأفضل أن تتوقف عن استخدامه وتنتقل إلى (http://www.martus.org/downloads) للحصول على الإصدار المناسب.
+#_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (https://martus.org) for the appropriate version.
+-0178-field:IncompatibleMtfVersion=إصدار الترجمة هذه غير موافق لإصدار Martus هذا، ومن الأفضل أن تتوقف عن استخدامه وتنتقل إلى (http://www.martus.org/downloads) للحصول على الإصدار المناسب. 
 
 #________________________________________=Martus Software Version: #ProgramVersionNumber#
 -fcd7-field:IncompatibleMtfVersionProgram=إصدار Martus : ‏#ProgramVersionNumber#
@@ -1403,7 +1384,6 @@
 #__________________________________=To send information through Martus to your contacts, you can pull their public key off of the Martus server using their access token. You can verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add your contacts here.
 -35f4-field:ManageContactsOverview1=لإرسال معلومات عبر Martus إلى جهات اتصالك، يمكنك الوصول إلى مفاتيحهم العمومية من خادم Martus باستخدام شارة وصولهم. كما يمكنك التحقق من توصلك بالمفتاح الصحيح من عدمه، وذلك بالتحقق من الرموز العمومية لمفاتيحهم. اسأل جهات اتصالك عن شارة الوصول ورموزهم العمومية لإضافة جهات اتصالك هنا.
 
-
 #__________________________________=Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information.
 -3e7b-field:ManageContactsOverview2=تأكد من نقل شارات الوصول والرموز العمومية بأمان باستخدام طريقة مثل البريد الإلكتروني المُعمَّى أو من خلال المحادثة الخاصة (OTR) أو وجها لوجه أو أي وسيلة تواصل أخرى حيث لا يمكن لأحد اصطياد معلوماتك.
 
@@ -1435,7 +1415,7 @@
 -6e34-field:NoFormTemplateTitle=[لا يوجد عنوان]
 
 #__________________________=No Contact accounts selected for this record.
--0255-field:NoHQsConfigured=لم تُحدَّد حسابات جهات الاتصال لهذا التسجيل.
+-42a3-field:NoHQsConfigured=لم تُحدَّد حسابات جهات الاتصال لهذا التسجيل. 
 
 #___________________________________________=Server Not Available
 -c79c-field:NoServerAvailableProgressMessage=الخادم غير متاح
@@ -1449,7 +1429,6 @@
 #_____________________________=Remember: Entering your password using the regular keyboard may reduce security.
 -55fa-field:NormalKeyboardMsg1=تذكر : قد يقل الأمان نتيجة إدخال كلمة السر باستخدام لوحة المفاتيح المعتادة.
 
-
 #_____________________________=For maximum security switch to the on-screen keyboard.
 -8167-field:NormalKeyboardMsg2=استخدم لوحة المفاتيح التي تظهر على الشاشة لتتمتع بأقصى درجات الأمان.
 
@@ -1457,7 +1436,7 @@
 -7d03-field:NotAuthorizedToViewPrivate=لم يسمح لك المؤلف بعرض هذا التسجيل.
 
 #_______________________=(n/a)
--4448-field:NotAvailable=<(n/a)>
+-4448-field:NotAvailable=غير متوفر
 
 #____________________=(none)
 -3c6b-field:NotSorted=(لا شيء)
@@ -1480,15 +1459,14 @@
 #_______________________________=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.
 -b511-field:OrganizeReportFields=أضف الحقول التي تريد إظهارها في تقريرك، ثم رتبها حسب رغبتك لطباعتها.
 
-
 #___________________=Password 
 -0aa0-field:Password=كلمة السر
 
 #_______________________________=create a password
 -b61b-field:PasswordInstructions=إنشاء كلمة السر
 
-#_______________________=- Do not use your Username
--bcd7-field:PasswordTip1=- لا تستخدم اسم المستخدم الخاص بك
+#_______________________=- Do not use your username
+-c7eb-field:PasswordTip1=- لا تستخدم اسم المستخدم الخاص بك
 
 #_______________________=- Do not use a single dictionary word
 -6002-field:PasswordTip2=- لا تستخدم كلمة معجمية واحدة
@@ -1499,16 +1477,14 @@
 #_______________________=- Use a combination of alphabet characters, numbers, and special characters (such as !@#$%^*&amp;)
 -3d55-field:PasswordTip4=- استخدم مجموعة من الحروف الهجائية والأرقام والحروف الخاصة (مثل !@#$%^*&amp;)
 
-
 #_______________________=- Use a combination of uppercase (capital) and lowercase characters if you use a case-sensitive language.
 -9278-field:PasswordTip5=- استخدم مجموعة من الأحرف الكبيرة (الاستهلالية) والصغيرة إذا كنت تستخدم لغة ذات تحسس لحالة الأحرف.
-
 
 #_____________________________=Create secure passwords by using numbers, letters and symbols.
 -fb50-field:PasswordTipGeneral=أنشيء كلمات سر آمنة باستخدام الأرقام والحروف والرموز.
 
 #_______________________=Password Tips:
--42ae-field:PasswordTips=نصائح خاصة بكلمة السر :
+-42ae-field:PasswordTips=نصائح خاصة بكلمة السر:
 
 #____________________________________=Use embedded Tor (Using Tor can improve security but may be slower than not using Tor)
 -aaff-field:PreferencesUseInternalTor=استخدام Tor المضمَن (يؤدي استخدام Tor إلى تحسين الأمان مقابل اتصال بطيء، على عكس عدم استخدامه)
@@ -1551,7 +1527,6 @@
 
 #____________________________________=Delete your Martus key, records, folders, and configuration information (such as your contacts, server, and custom field settings).
 -900c-field:QuickEraseWillRemoveItems=احذف مفتاح Martus الخاص بك وتسجيلاتك ومجلداتك ومعلومات تهيئتك (كجهات الاتصال والخادم وإعدادات الحقل المخصص).
-
 
 #________________________=Record Details
 -5522-field:RecordDetails=تفاصيل التسجيلات
@@ -1613,7 +1588,6 @@
 #_________________________________=Choose how the records will be sorted in the report. The records will be ordered by the first field chosen. When two records have the same value in that field, they will be sorted by the next sort field, and so on.
 -d9ad-field:ReportChooseSortFields=اختر كيفية ترتيب التسجيلات في هذا التقرير. سوف تُرتَّب التسجيلات بناء على الحقل الأول المختار. عند وجود نفس قيمة الحقل لتسجيلَين، سوف تُرتَّب حسب الحقل الموالي، وهكذا دواليك.
 
-
 #___________________________=Print Record Information
 -9142-field:ReportDetailOnly=طباعة التسجيل
 
@@ -1623,38 +1597,20 @@
 #__________________________________=Total Records:
 -c0e4-field:ReportNumberOfBulletins=مجموع التسجيلات :
 
-#_______________________________=Progress:
+#_______________________________=Progress: 
 -92b6-field:ReportSearchProgress=التقدم :
 
 #______________________________=Print Summary Counts Only
 -9ca4-field:ReportSummariesOnly=طباعة أعداد الملخصات فقط
 
-#__________________________________________=Retrieving Draft Records from Contacts
--21da-field:RetrieveHQDraftBulletinProgress=يجري جلب مسودات التسجيلات من جهات الاتصال
-
-#___________________________________________=Retrieving Draft Record Summaries from Contacts
--6a1c-field:RetrieveHQDraftBulletinSummaries=يجري جلب ملخصات مسودات التسجيلات من جهات الاتصال
-
-#___________________________________________=Retrieving Sealed Records from Contacts
--450a-field:RetrieveHQSealedBulletinProgress=يجري جلب التسجيلات المختومة من جهات الاتصال.
-
-#____________________________________________=Retrieving Sealed Record Summaries from Contacts
--4db2-field:RetrieveHQSealedBulletinSummaries=يجري جلب ملخصات التسجيلات المختومة من جهات الاتصال.
-
 #__________________________________________=Retrieving My Draft Records
 -d4d4-field:RetrieveMyDraftBulletinProgress=يجري جلب مسودات تسجيلاتي
 
-#___________________________________________=Retrieving My Draft Record Summaries
--bb3c-field:RetrieveMyDraftBulletinSummaries=يجري جلب ملخصات مسودات تسجيلاتي
-
-#___________________________________________=Retrieving My Sealed Records
--cd62-field:RetrieveMySealedBulletinProgress=يجري جلب تسجيلاتي المختومة
-
-#____________________________________________=Retrieving My Sealed Record Summaries
--35bc-field:RetrieveMySealedBulletinSummaries=يجري جلب تسجيلاتي المختومة
-
 #___________________________________=All records retrieved will still remain on the server.\nYou can only retrieve records that are not currently on your computer.
 -8f98-field:RetrieveSummariesMessage=ستظل كل التسجيلات التي جلبتها في الخادم.\nيمكنك فقط جلب التسجيلات غير الموجودة حاليا في حاسوبك.
+
+#______________________________________________=Please wait while we retrieve records from the server.
+-e267-field:RetrievingRecordSummariesFromServer=يُرجى الانتظار بينما يجري جلب التسجيلات من الخادم.‏
 
 #____________________________________=Please retype your username and password for verification.
 -67cd-field:RetypeUserNameAndPassword=يُرجى إعادة كتابة اسم المستخدم وكلمة السر من أجل التحقق.
@@ -1674,12 +1630,11 @@
 #_____________________________=Click '#SearchHelpButton#' to get additional information on searching.
 -eb4b-field:SearchBulletinHelp=اضغط على '#SearchHelpButton#' للحصول على معلومات إضافية حول البحث.
 
-#______________________________=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNOTE: Records that appear only in the Trash will not be searched.
--9127-field:SearchBulletinRules=في كل صف، حدِّد حقل البحث (أو اختر المطابقة مع أي حقل)، حدِّد نوع المقارنة التي تريد إجراءها، ثم أدخل قيمة للبحث عنها. \n\n ملاحظة : لن يجري البحث في التسجيلات الظاهرة فقط في سلة المهملات.
+#______________________________=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNote: Records that appear only in the Trash will not be searched.
+-c992-field:SearchBulletinRules=في كل صف، حدِّد حقل البحث (أو اختر المطابقة مع أي حقل)، حدِّد نوع المقارنة التي تريد إجراءها، ثم أدخل قيمة للبحث عنها. \n\n ملاحظة : لن يجري البحث في التسجيلات الظاهرة فقط في سلة المهملات.
 
 #______________________=#NumberBulletinsFound# records matched the search, and have been added to the Search Results folder.
 -8e78-field:SearchFound=يطابق #NumberBulletinsFound# تسجيل البحث الذي قمت به، وقد أُضيف إلى مجلد نتائج البحث.
-
 
 #________________________________=Field(s) to search
 -9acd-field:SearchGridHeaderField=الحقل (أو الحقول) المبحوث عنه
@@ -1693,7 +1648,7 @@
 #___________________________=contains
 -caeb-field:SearchOpContains=يحوي
 
-#_________________________=Progress:
+#_________________________=Progress: 
 -92b6-field:SearchProgress=التقدم :
 
 #_________________________=Select Language 
@@ -1708,7 +1663,6 @@
 #______________________________________=The server you have selected has provided the following statement describing its compliance with the official guidelines for the secure and reliable operation of a Martus server.  You can accept or reject this server based on its compliance statement.
 -276f-field:ServerComplianceDescription=قام الخادم الذي اخترته بإصدار البيان التالي واصفا تماشيه مع الإرشادات الرسمية التي يتبعها خادم Martus للقيام بعمله بكفاءة وموثوقية. ويمكنك قبول أو رفض هذا الخادم بناءً على بيان تَوافُقه.
 
-
 #________________________________=You will not be allowed to upload records to this server.
 -4d75-field:ServerDeclinesUploads=لن يُسمَح لك برفع التسجيلات إلى هذا الخادم.
 
@@ -1722,7 +1676,7 @@
 -0481-field:ServerMagicWordEntryInformation=أدخل الكلمة السحرية الخاصة بخادمك
 
 #__________________________=IP Address 
--64b5-field:ServerNameEntry=عنوان IP
+-64b5-field:ServerNameEntry=عنوان IP الخادم
 
 #_____________________________________=enter your server's IP address
 -4cb2-field:ServerNameEntryInformation=أدخل عنوان IP الخاص بخادمك
@@ -1732,7 +1686,6 @@
 
 #_______________________________________________=A connection to the server was not made. This could be because the server is not available, the server is blocked, or your Internet connection is down. Would you like to save this server configuration for later?
 -24f7-field:ServerNotRespondingSaveConfiguration=لم يَجْرِ اتصال بالخادم. قد يكون هذا ناجما عن عدم توفر الخادم أو حظره أو انقطاع اتصالك بالإنترنت. هل تود حفظ معلومات تهيئة هذا الخادم في وقت لاحق ؟
-
 
 #_____________________=Server Only
 -f6b1-field:ServerOnly=الخادم فقط
@@ -1767,10 +1720,8 @@
 #___________________________=Set up server later
 -0739-field:SetupServerLater=إعداد الخادم لاحقا
 
-
 #__________________________=The data you store on Martus servers are completely encrypted using 3072-bit encryption. This means even Martus server administrators cannot read your data.
 -6a66-field:SetupServerTips=عُمِّيت البيانات التي خزّنتها على خوادم Martus كليا باستخدام تعمية بمتانة 3072 بت. هذا يعني أن مسؤولي خادم Martus لن يتمكنوا أيضا من قراءة بياناتك.
-
 
 #_______________________=Shared With Me
 -10fc-field:SharedWithMe=جرت مشاركته معي
@@ -1779,11 +1730,10 @@
 -4689-field:SingleEncryptedKeyBackupCreated=أُنشِيء ملف فردي مُعمَّى #backupFileName (لكن استعادة حسابك تجبرك على تذكر اسم المستخدم وكلمة السر).
 
 #___________________________________=Note: Records authored by other accounts cannot be changed using this command, so they are not included in the list above.
--917b-field:SkippingBulletinsNotOurs= ملاحظة : لا يمكن تغيير التسجيلات التي كُتبت بواسطة حسابات أخرى باستخدام هذا الأمر، لذا لم يتم تضمينها في القائمة أعلاه.
+-917b-field:SkippingBulletinsNotOurs=ملاحظة : لا يمكن تغيير التسجيلات التي كُتبت بواسطة حسابات أخرى باستخدام هذا الأمر، لذا لم يتم تضمينها في القائمة أعلاه.
 
 #_______________________________________________=The following words have been added to the user dictionary. \nYou can delete or edit them here, or you can add more words. \nEach word must be on a line by itself.
 -ad45-field:SpellCheckUserDictionaryInstructions=أُضيفت الكلمات التالية إلى قاموس المستخدم.\nيمكنك حذفها هنا أو تحريرها هنا أو إضافة المزيد من الكلمات. \nيجب أن يشمل كل سطر كلمة واحدة فقط.
-
 
 #___________________________________=Information Management and Data Collection Framework
 -ac47-field:SplashProductDescription=إطار عمل إدارة المعلومات وجمع البيانات
@@ -1816,7 +1766,7 @@
 -c1df-field:Step6=6
 
 #____________________=➔
--a53b-field:StepArrow=➔
+-a53b-field:StepArrow=←
 
 #___________________________________=Successfully imported the #templateName Form
 -de98-field:SuccessfullyImportedForm=تم استيراد النموذج #templateName بنجاح
@@ -1920,9 +1870,8 @@
 #___________________________=Untitled Record
 -51e7-field:UntitledBulletin=تسجيل غير معنون
 
-#_________________________________=The Martus account that created this record has not been verified, so there is an increased chance that this attachment could be dangerous. We recommend that you verify this Contact's account before you #action# this attachment (See Tools > Manage Contacts). Opening this attachment could put your computer at risk.
+#_________________________________=The Martus account that created this record has not been verified, so there is an increased chance that this attachment could be dangerous. We recommend that you verify this Contact's account before you #action# this attachment (See Tools > Manage Contacts). Opening this attachment could put your computer at risk. 
 -d66f-field:UnverifiedFDAttachment=لم يتحقق من حساب Martus الذي أنشأ هذا التسجيل، لذا يُحتمَل أن يكون المرفق خطيرا. نوصيك بالتحقق من حساب جهاز اتصالك قبل #action# هذا المرفق (اذهب إلى الأدوات - إدارة جهات الاتصال). إن فتح هذا المرفق قد يعرض حاسوبك للمخاطر.
-
 
 #_________________=Upload
 -8bdf-field:Upload=رفع
@@ -1937,10 +1886,10 @@
 -a605-field:UploadingSealedBulletin=يجري إرسال التسجيل
 
 #___________________________=Use default server
--9894-field:UseDefaultServer=استخدام الخادم الافتراضي
+-9894-field:UseDefaultServer=الخادم الافتراضي
 
 #_________________=Use Tor
--bc93-field:UseTor=استخدام Tor
+-bc93-field:UseTor=Tor
 
 #_____________________________=Tor is a security tool you can use to hide your identity when connecting to sites on the Internet. If Martus servers are blocked from your location, using Tor may help reach the servers.
 -6339-field:UseTorInstructions=يُعدّ Tor إحدى الأدوات الأمنية التي يمكنك استخدامها لإخفاء هويتك عند الاتصال بمواقع عبر الإنترنت. إذا كانت خوادم Martus محظورة في موقعك، فقد يمكِّنك استخدام Tor من الوصول إلى هذه الخوادم.
@@ -1948,18 +1897,17 @@
 #_____________________________________=Username and password match!
 -7dc3-field:UserNameAndPasswordMatches=اسم المستخدم وكلمة السر تطابقان السابقتين !
 
-#_______________________=- Your Username can contain letters, numbers, punctuation and spaces.
--f047-field:UserNameTip1=-  يمكن لاسم المستخدم الخاص بك أن يحوي حروفا وأرقاما وعلامات ترقيم ومسافات.
+#_______________________=- Your username can contain letters, numbers, punctuation and spaces.
+-1bce-field:UserNameTip1=-  يمكن لاسم المستخدم الخاص بك أن يحوي حروفا وأرقاما وعلامات ترقيم ومسافات. 
 
 #_______________________=- It should have between 8-50 characters, and it is case sensitive.
 -3180-field:UserNameTip2=- ينبغي أن يتضمن ما بين 8 إلى 50 حرفا، ويكون حساسا لحالة الحروف.
 
-#_______________________=- Remember to choose a Username you can remember.
--c6f9-field:UserNameTip3=- لا تنس اختيار اسم مستخدم يسهل عليك تذكّره.
+#_______________________=- Remember to choose a username you can remember.
+-ba3e-field:UserNameTip3=- لا تنس اختيار اسم مستخدم يسهل عليك تذكّره. 
 
 #_______________________=Username Tips:
--c1b3-field:UserNameTips=نصائح خاصة لاسم المستخدم :
-
+-c1b3-field:UserNameTips=نصائح خاصة لاسم المستخدم:
 
 #__________________________________=Verify your contact public code
 -1e3f-field:VerifyContactPublicCode=تحقق من الرمز العمومي لجهة اتصالك
@@ -1973,10 +1921,8 @@
 #___________________________=A public code is a unique identifier that can help you verify that a contact that you are adding is who they say they are.\n\nYou can visually verify the public code below. If you don’t know your contact’s public code, you can always perform the verification later.\n\nVerification is an important step that only needs to be performed once.
 -5ce7-field:VerifyPublicCode=الرمز العمومي هو مُعرِّف لا نظير له يساعد في التحقق من أن جهة الاتصال التي أضفتها هي فعلا كما تدعي.\n\nيمكنك التحقق بصريا من الرمز العمومي أسفله. إذا كنت تجهل الرمز العمومي لجهة اتصالك، تستطيع إجراء التحقق لاحقا.\n\nإن التحقق خطوة هامة تحتاج للقيام بها مرة واحدة.
 
-
 #____________________________________=Please visually verify either public code below to ensure you are adding the person you think you are adding.
 -1162-field:VerifyPublicCodeNewAndOld=يٌرجى التحقق بصريا من الرمز العمومي أسفله للتأكد من إضافة الشخص الذي تعتقده.
-
 
 #________________________=Version # 
 -3370-field:VersionNumber=النسخة #
@@ -2001,7 +1947,6 @@
 
 #______________________________________________=Be sure to securely communicate access tokens and public codes using a method such as encrypted email, Off-the-record (OTR) chat, face to face, or another communication channel where nobody can intercept your information.
 -3e7b-field:WarningOnTokenAndPublicCodeSecurity=تأكد من نقل شارات الوصول والرموز العمومية بأمان باستخدام طريقة مثل البريد الإلكتروني المُعمَّى أو من خلال المحادثة الخاصة (OTR) أو وجها لوجه أو أي وسيلة تواصل أخرى حيث لا يمكن لأحد اصطياد معلوماتك.
-
 
 #____________________=No
 -816c-field:WasSentNo=لا
@@ -2031,8 +1976,7 @@
 -f3b9-field:WizardStep1Information=ستُحفَظ معلوماتك بأمان من خلال حساب مٌعمَّى ومحمي بكلمة السر.
 
 #_________________________________=Establish your calendar and Tor (a tool to help hide network activity) settings.
--fd9f-field:WizardStep2Information=أنشيءْ إعدادات النظام الخاصة بك لاستخدام Tor (هو أداة تساعدك على إخفاء نشاط الشبكة) واستخدام التواريخ.
-
+-fd9f-field:WizardStep2Information=أنشيءْ إعدادات النظام الخاصة بك لاستخدام Tor واستخدام التواريخ.
 
 #______________________=Server Setup
 -3db1-field:WizardStep3=إعداد الخادم
@@ -2052,7 +1996,6 @@
 #_____________________________=Import Form Template
 -2f11-field:WizardStep5Heading=استيراد قالب النموذج
 
-
 #_________________________________=Select a template for creating Martus forms.
 -22ff-field:WizardStep5Information=حدد قالبا لإنشاء نماذج Martus.
 
@@ -2063,16 +2006,16 @@
 -bb2f-field:WizardStep6Information=انسخ مفتاح التعمية حسابك لتضمن وصولا مستمرا إلى حسابك.
 
 #________________________=XML Files (*.xml)
--09f1-field:XmlFileFilter= ملفات XML (*.xml)‎
+-09f1-field:XmlFileFilter=ملفات XML (*.xml)‎
 
 #__________________________=Unknown
 -bc78-field:YearUnspecified=مجهول
 
-#________________________________= 
--da39-field:_SectionBottomSection= 
+#________________________________=
+-da39-field:_SectionBottomSection=
 
-#_____________________________= 
--da39-field:_SectionTopSection= 
+#_____________________________=
+-da39-field:_SectionTopSection=
 
 #_________________________________________=Header
 -3134-field:_Section_BulletinSectionHeader=الرأس
@@ -2089,13 +2032,13 @@
 #___________________=Sent
 -35f4-field:_wasSent=أُرسِل
 
-#____________________________=Built on
--5342-field:aboutDlgBuildDate=تاريخ الإنشاء
+#____________________________=Built on:
+-179a-field:aboutDlgBuildDate=:تاريخ الإنشاء
 
 #__________________________=Martus Software is developed by Benetech in partnership with the Information Program of the Open Society Institute, Aspiration, and the John D. and Catherine T. MacArthur Foundation.
 -3033-field:aboutDlgCredits=قامت Benetech بتطوير برنامج Martus بالتعاون مع برنامج المعلومات بمعهد المجتمع المفتوح (Open Society Institute)، ومنظمة Aspiration، و مؤسسة John D. وCatherine T. MacArthur.
 
-#_____________________________=Martus comes with ABSOLUTELY NO WARRANTY, and is made available under license terms in the file named license.txt in the Martus directory. This is free software, and you are welcome to redistribute it under certain conditions discussed in license.txt.
+#_____________________________=Martus comes with ABSOLUTELY NO WARRANTY, and is made available under license terms in the file named license.txt in the Martus directory. This is free software, and you are welcome to redistribute it under certain conditions discussed in license.txt. 
 -8b41-field:aboutDlgDisclaimer=لا يأتي برنامج Martus بأي ضمانات، بل يتم إصداره تحت شروط الترخيص المذكورة في ملف license.txt الموجود في مجلد Martus. هذا البرنامج مجاني ونرحب بتوزيعك إياه وفق شروط معينة مذكورة في license.txt.
 
 #______________________________=Language Pack Date
@@ -2104,14 +2047,14 @@
 #_____________________________=This product includes software developed by the Apache Software Foundation, Bouncy Castle, IBM, JH Labs, JOrtho, JUnit, The Mozilla Foundation, Logi Ragnarsson, Object Refinery Limited, and Subgraph [Orchid].
 -f246-field:aboutDlgThirdParty=إن المنتوج يحوي برامج مصممة من طرف Apache Software Foundation، Bouncy Castle، IBM، JH Labs، JOrtho، JUnit، The Mozilla Foundation، Logi Ragnarsson، Object Refinery Limited، and Subgraph [Orchid].
 
-#_________________________________________=Translation version
--ba67-field:aboutDlgTranslationVersionInfo=إصدار الترجمة
+#_________________________________________=Translation version:
+-d3a5-field:aboutDlgTranslationVersionInfo=إصدار الترجمة:
 
-#______________________________=software version
--f2cc-field:aboutDlgVersionInfo=إصدار البرنامج
+#______________________________=software version:
+-6286-field:aboutDlgVersionInfo=إصدار البرنامج: 
 
 #__________________=Mailing Address 
--5a7a-field:address=عنوان البريد :
+-5a7a-field:address=عنوان البريد
 
 #_____________________=Keep ALL Information Private
 -9b5e-field:allprivate=جعل *جميع* المعلومات خاصة
@@ -2128,13 +2071,11 @@
 #_______________________________________________=Save your password encrypted key backup file to a single removable medium and store it in a safe place. You can use this backup file, with your username and password, to restore your data.
 -b6f5-field:confirmBackupKeyPairInformationcause=احفظ ملف مفتاح التعمية الاحتياطي والمحمي بكلمة السر في وسط قابل للإزالة وخزِّنه في مكان آمن. إذ يمكنك ملف المفتاح الاحتياطي إضافة إلى اسم المستخدم وكلمة السر من استعادة بياناتك.
 
-
 #________________________________________________=Choosing Yes will begin the backup process.
 -0b47-field:confirmBackupKeyPairInformationeffect=باختيار 'نعم' ستبدأ عملية النسخ الاحتياطي.
 
 #________________________________________________=We strongly recommend that you now verify all disks to make sure the data was written correctly.
 -ee28-field:confirmBackupKeyShareVerifyDiskscause=نوصيك بشدة بالتحقق من جميع الأقراص لتتأكد من أن البيانات كُتبت بالطريقة الصحيحة.
-
 
 #_________________________________________________=By choosing Yes, the verification process will begin.
 -fdd0-field:confirmBackupKeyShareVerifyDiskseffect=باختيار 'نعم'، ستبدأ عملية التحقق.
@@ -2156,7 +2097,6 @@
 
 #______________________________________=This operation will cancel the current retrieval, so some of the requested records may not be retrieved.
 -b6b3-field:confirmCancelRetrieveeffect=إن هذه العملية سوف تلغي الجلب الحالي، لذا فقد لا يجلب بعض التسجيلات التي طلبت.
-
 
 #________________________________________=Do you wish to cancel this backup?
 -7b46-field:confirmCancelShareBackupcause=هل تريد إلغاء هذا النسخ الاحتياطي ؟
@@ -2212,13 +2152,11 @@
 #__________________________________________________=The record you have chosen to modify contains information that this version of Martus cannot understand. It may have been created by a newer release of Martus, so you should ensure that you are running the latest release.
 -9e3e-field:confirmEditBulletinWithUnknownTagscause=إن التسجيل الذي اخترت يحوي معلومات لا يستطيع إصدار Martus هذا فهمه. يُحتمل أنه أُنشِيء بواسطة إصدار Martus الحديث، لذا يجب عليك التأكد من تشغيلك لآخر إصدار.
 
-
 #___________________________________________________=If you copy this record, the unknown information will be lost.
 -c962-field:confirmEditBulletinWithUnknownTagseffect=إذا نسخت هذا التسجيل، ستضيع المعلومات المجهولة.
 
 #________________________________________=You have chosen to customize the fields that will be used in any new records created by this account.
 -6c5e-field:confirmEnterCustomFieldscause=لقد اخترت تخصيص الحقول التي سوف تُستخدَم في التسجيلات الجديدة التي أنشأها هذا الحساب.
-
 
 #_________________________________________=Customizing fields is an advanced operation. You should only proceed if you are certain that you understand the feature.
 -518e-field:confirmEnterCustomFieldseffect=يتميز تخصيص الحقول بكونه عملية متقدمة. إذ لا ينبغي عليك المتابعة إلا إذا كنت متأكدا من فهم هذه الميزة.
@@ -2226,10 +2164,8 @@
 #_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked>-#.dat' where # is the sequence number in the disk set previously created.
 -2e41-field:confirmErrorRecoverIvalidFileNamecause=لا يُعدُّ الملف الذي اخترته جزءاً من مجموعة ملفات المفاتيح الاحتياطية. لقد سُمِّي هذا الملف بـ '<الإسم الذي اخترته>-#.dat' حيث يمثل # الرقم التسلسلي في مجموعة الأقراص التي أُنشئت سابقا.
 
-
 #__________________________________________________=Choosing yes will bring up the file selection dialog again so you may pick a different file.
 -c237-field:confirmErrorRecoverIvalidFileNameeffect=باختيارك 'نعم' سيظهر مربع حوار تحديد الملفات مرة أخرى مما سيمكنك من اختيار ملف آخر.
-
 
 #__________________________________________=Your changes will be lost, are you sure you want to do this?
 -62c3-field:confirmExitManageContactseffect=ستُفقَد التغييرات التي أجريتها، هل تريد القيام بذلك فعلا ؟
@@ -2237,14 +2173,11 @@
 #________________________________________=One or more of the records you have chosen to export contain information that this version of Martus cannot understand. They may have been created by a newer release of Martus, so you should ensure that you are running the latest release.
 -ef90-field:confirmExportUnknownTagscause=لقد اخترت تصدير بعض التسجيلات التي تحوي معلومات لا يفهمها إصدار Martus الحالي. يُحتمل أنها أُنشِئت بواسطة إصدار Martus حديث، لذلك تأكد من تشغيل آخر إصدار للبرنامج.
 
-
 #_________________________________________=If you continue with the export, any unknown information will not be exported.
 -232e-field:confirmExportUnknownTagseffect=إذا واصلت التصدير، فلن يتم تصدير أي معلومة مجهولة.
 
-
 #__________________________________________________________=This template was not created by a known account. You should carefully review the fields to make sure the template is suitable. You will be able to cancel the template editing to restore the earlier template.
 -c062-field:confirmImportingCustomizationUnknownSignercause=لم يُنشَأْ هذا النموذج بواسطة حساب معروف. ينبغي عليك مراجعة الحقول بعناية للتأكد من أن القالب مناسب. سوف تتمكن من إلغاء تحرير القالب لاستعادة القالب السابق.
-
 
 #___________________________________________________________=To see the template contents, continue with the import.
 -36e9-field:confirmImportingCustomizationUnknownSignereffect=للاطلاع على محتويات القالب، استمر في الاستيراد.
@@ -2252,17 +2185,14 @@
 #_________________________________________________=A key file already exists for this account.  Do you wish to overwrite it?
 -6829-field:confirmKeyPairFileExistsOverWritecause=يوجد ملف المفتاح لهذا الحساب. هل تريد استبداله ؟
 
-
 #__________________________________________________=Clicking on Yes will delete the old key file and replace it with your restored key.
 -167f-field:confirmKeyPairFileExistsOverWriteeffect=بالضغط على 'نعم' سيُحذف ملف المفتاح القديم ويجري استبداله بالمفتاح الذي تمت استعادته.
 
 #_______________________________________________________=This account was created with an older release of Martus, which was unaware of multiple sealed record versions. We need to update your system to recognize records with versions.  The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.
--4b50-field:confirmNeedsBulletinVersioningMigrationcause= لقد أُنشِيء هذا الحساب بواسطة إصدار Martus قديم، والذي لم يكن يعير اهتماما لتعدد نسخ التسجيل المختوم. يجب تحديث نظامك للتعرف على التسجيلات التي تتوفر على التسجيلات ذات النسخ. إن عملية التهجير آلية و سريعة وآمنة. لن تتمكن من تشغيل إصدار Martus هذا حتى تسمح بهذا التهجير.
-
+-4b50-field:confirmNeedsBulletinVersioningMigrationcause=لقد أُنشِيء هذا الحساب بواسطة إصدار Martus قديم، والذي لم يكن يعير اهتماما لتعدد نسخ التسجيل المختوم. يجب تحديث نظامك للتعرف على التسجيلات التي تتوفر على التسجيلات ذات النسخ. إن عملية التهجير آلية و سريعة وآمنة. لن تتمكن من تشغيل إصدار Martus هذا حتى تسمح بهذا التهجير.
 
 #________________________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
 -2a34-field:confirmNeedsBulletinVersioningMigrationeffect=إذا أجبت بـ'نعم'، سيُسمح بمتابعة الترحيل، أما إذا أجبت بـ'لا'، سيخرج من Martus.
-
 
 #___________________________________________=This account was created with an older release of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.
 -3e24-field:confirmNeedsFolderMigrationcause=أُنشيء هذا الحساب بواسطة إصدار Martus قديم، والذي كان يستخدم مجموعة مختلفة من المجلدات. يلزم ترحيل هذه المجلدات إلى تنسيق مختلف. يتميز الترحيل بتلقائيته وسرعته وأمانه. لذا، لا يمكنك تشغيل إصدار Martus هذا إلا إذا سمحت بهذا الترحيل.
@@ -2276,18 +2206,14 @@
 #________________________________________________=Answering Yes will continue to use this older release of Martus.  Answering No will exit Martus so you can upgrade to the latest release.
 -5630-field:confirmNewerConfigInfoFileFoundeffect=إذا أجبت بـ'نعم'، ستتمكن من متابعة استخدام إصدار Martus القديم, أما إذا أجبت بـ'لا' فستغادر Martus لكي تتمكن من الترقية إلى أحدث إصدار.
 
-
 #___________________________________________________________=Warning: the record you are currently viewing is not yours.  Attachments can contain viruses, or malicious programs harmful to your computer.
 -7296-field:confirmNotYourBulletinViewAttachmentAnywayscause=تحذير : إنك تَعرِض حاليا تسجيلات لا تملكها. لذا، فإن المرفقات قد تحوي فيروسات أو برامج محتالة قد تضرُّ حاسوبك.
-
 
 #____________________________________________________________=Clicking on Yes will #action# the attachment. Clicking on No will cancel this action.
 -104d-field:confirmNotYourBulletinViewAttachmentAnywayseffect=بالضغط على 'نعم'، ستٌنفَّذ #action# على المرفق. بالضغط على 'لا' سيلغى هذا الإجراء.
 
-
 #____________________________________=Changing templates will replace the old template with a new one and may remove existing data from this record.
 -8734-field:confirmOkToSwitchTemplate=إن تغيير القوالب سوف يستبدل القوالب القديمة بأخرى جديدة، كما سيزيل البيانات الموجودة من هذا التسجيل.
-
 
 #____________________________________________=A file already exists with that name.
 -8fa3-field:confirmOverWriteExistingFilecause=يوجد ملف بهذا الإسم بالفعل.
@@ -2295,13 +2221,11 @@
 #_____________________________________________=The existing file will be deleted and replaced with the new information.
 -0863-field:confirmOverWriteExistingFileeffect=سيُحذف الملف الموجود ثم سيجري استبداله بالمعلومات الجديدة.
 
-
-#__________________________________________=One or more records will not be printed because all the information is private, and you marked the 'Print only public information' box.
+#__________________________________________=One or more records will not be printed because all the information is private, and you marked the "Print only public information" box.
 -74e9-field:confirmPrintAllPrivateDatacause=لن تُطبَع بعض تسجيلات لأن كل معلوماتها خاصة، ولأنك حددتَ خانة التأشير 'اطبع المعلومات العلنية فقط'.
 
 #___________________________________________=Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the "Include private information" box. Answering '#PrintContinue#' will print only the public information in the records and skip those records which are all private.
 -4a27-field:confirmPrintAllPrivateDataeffect=إذا أجبت '#PrintBack#' سيتم إرجاعك إلى مربع الحوار السابق لتتمكن من تحديد مربع 'تضمين المعلومات الخاصة'. إذا أجبت '#PrintContinue#' ستتم طباعة المعلومات العلنية للتسجيلات ولن يتم طباعة التسجيلات الخاصة.
-
 
 #_______________________________________________=Please Note: There are records that have not been sent to a server. If you continue these records will be lost.
 -ac62-field:confirmQuickEraseOutboxNotEmptycause=يُرجى الملاحظة : هذه التسجيلات لم تُرسَل إلى خادم. إن استمررت، ستضيع هذه التسجيلات.
@@ -2309,17 +2233,14 @@
 #________________________________________________=Clicking on Yes will bring you to a confirmation dialog, Clicking on No will return you to Martus without erasing anything.
 -ffe3-field:confirmQuickEraseOutboxNotEmptyeffect=بالضغط على 'نعم'، سيظهر لك مربع حوار التأكيد. بالضغط على 'لا'، ستعود إلى Martus دون حذف أي شيء.
 
-
 #______________________________________________________=Key Restore failed, we suggest you try again with a different set of files. Choose Yes to try again, No to exit Martus.
 -cf94-field:confirmRecoveredKeyShareFailedTryAgaincause=فشلت استعادة المفتاح، نوصيك بإعادة المحاولة مع مجموعة أخرى من المفاتيح. اختر 'نعم' لإعادة المحاولة، أو 'لا' لمغادرة Martus.
-
 
 #_______________________________________________________=Choosing Yes will begin the restore process again.
 -cb49-field:confirmRecoveredKeyShareFailedTryAgaineffect=باختيار 'نعم' ستبدأ عملية الاستعادة مرة أخرى.
 
 #_______________________________________=The password you chose has fewer than 15 characters and less than 2 non-alphanumeric characters. We recommend choosing a stronger password.
 -73a6-field:confirmRedoWeakPasswordcause=يجب أن تحوي كلمة السر التي اخترتها 15 حرفا على أقل وأقل من حرفين أبجديَيْن عدديَيْن. نوصيك بانتقاء كلمة سر متينة.
-
 
 #________________________________________=Clicking on Yes will continue with the password you just entered.
 -86eb-field:confirmRedoWeakPasswordeffect=الضغط على 'نعم' يجعلك تتابع استخدام كلمة السر التي أدخلتها للتو.
@@ -2336,17 +2257,14 @@
 #____________________________________=Answering Yes will delete all data, uninstall Martus and exit the program.  Answering No will return you to Martus with nothing deleted.
 -b6a1-field:confirmRemoveMartuseffect=إذا أجبت بـ 'نعم'، ستُحذَف جميع البيانات وسيُلَغى تثبيت Martus ثم يغادر البرنامج. إذا أجبت بـ 'لا'، ستعود إلى Martus دون حذف أي شيء.
 
-
 #___________________________________________=There are no records with public data. Include private data?
 -e4ab-field:confirmReportIncludePrivatecause=لا وجود لتسجيلات تحوي بيانات عمومية. هل تريد تضمين بيانات خاصة ؟
 
 #____________________________________________=Press 'Include Private Data' to continue with private data included, or press 'Cancel' to exit and return to Martus.
 -c1bb-field:confirmReportIncludePrivateeffect=اضغط على 'إلحاق البيانات الخاصة' لمتابعة استخدام البيانات الخاصة الملحقة أو اضغط على 'إلغاء' للخروج والعودة إلى Martus.
 
-
 #__________________________________________=This will reset the current Default Details contents to the original contents. After resetting the contents, you should review them to be sure they are correct.
 -37bf-field:confirmResetDefaultDetailscause=سيعيد هذا الأمر تعيين محتويات التفاصيل الافتراضية الراهنة إلى حالتها الأصلية. بعد إعادة تعيين المحتويات، يجب عليك مراجعتها للتأكد من صحتها.
-
 
 #___________________________________________=After you review the contents, you can accept them, modify them, or press cancel to keep the existing default details.
 -bbcf-field:confirmResetDefaultDetailseffect=بعد مراجعتك للمحتويات، يمكنك قبولها أو تعديلها أو الضغط على إلغاء للاحتفاظ بالتفاصيل الافتراضية الموجودة.
@@ -2354,16 +2272,20 @@
 #____________________________________________=The following record(s) selected for retrieval are newer versions of records already on this computer:\n\n#Titles#
 -5414-field:confirmRetrieveNewerVersionscause=إن التسجيلات المحددة التالية المراد جلبها هي النسخ الأحدث للتسجيلات الموجودة على هذا الحاسوب :\n\n#Titles#
 
-
 #_____________________________________________=Each older version will be replaced by the newer version from the server.
 -1d86-field:confirmRetrieveNewerVersionseffect=ستُستبدَل كل نشرة قديمة بأخرى حديثة انطلاقا من الخادم.
-
 
 #____________________________________________=This will seal all the currently selected draft records.
 -335e-field:confirmSealSelectedBulletinscause=هذا سيختم كل مسودات التسجيلات المحددة حاليا.
 
 #_____________________________________________=Any selected records that are already sealed will remain unchanged.
 -2f3b-field:confirmSealSelectedBulletinseffect=إن كل التسجيلات المحددة التي جرى ختمها مسبقا ستظل دون تغيير.
+
+#___________________________________________=The search in progress will be stopped immediately.
+-c6a2-field:confirmSearchProgressCancelcause=سوف يتوقف البحث الجاري حالا.‏
+
+#____________________________________________=If you do this, the Search Results will only contain records that have been found so far.
+-c3e4-field:confirmSearchProgressCanceleffect=إذا قمت بهذا، سوف تُظهر نتائج البحث التسجيل
 
 #_____________________________________________=Martus software is unable to determine whether this server complies with the official guidelines for operating a secure and reliable Martus server.
 -ab16-field:confirmServerComplianceFailedcause=لا يستطيع برنامج Martus تحديد ما إذا كان هذا الخادم يتماشى مع الإرشادات الرسمية اللازمة لتشغيل خادم Martus بأمان وموثوقية.
@@ -2372,18 +2294,16 @@
 -8731-field:confirmServerComplianceFailedeffect=توصي Benetech بعدم استخدام هذا الخادم إلى حين إصدار بيان توافُق يمكنك قراءته. بعد استمرارك، سيُحدَّد هذا الخادم غير المتوافق على أي حال.
 
 #___________________________________________=Tor is enabled, but requesting a map will bypass it.
--3cf3-field:confirmShowOnMapBypassesTorcause=<Tor is enabled, but requesting a map will bypass it.>
+-3cf3-field:confirmShowOnMapBypassesTorcause=‫إن Tor مفعَّل، لكن طلب خريطة سوف يتجاوزه.‏‬
 
 #____________________________________________=If you continue, anyone monitoring you could see your map request.
--70bd-field:confirmShowOnMapBypassesToreffect=<If you continue, anyone monitoring you could see your map request.>
+-70bd-field:confirmShowOnMapBypassesToreffect=إن استمرارك سيسمح لكل من يقتفي أثرك برؤية طلبات خريطتك.‏
 
-#__________________________________________________________=The record entitled '#Title#' already exists in this system.  Do you wish to delete the old record and replace it with this record?
+#__________________________________________________________=The record entitled "#Title#" already exists in this system.  Do you wish to delete the old record and replace it with this record?
 -d374-field:confirmUnAuthoredBulletinDeleteBeforePastecause=إن التسجيل المعنون '#Title#' يوجد مسبقا في النظام. هل تريد حقا حذف التسجيل القديم واستبداله بهذا التسجيل ؟
-
 
 #___________________________________________________________=Answering Yes will replace the old record with this record.  Answering on No will leave the original record and skip this file.
 -7f1f-field:confirmUnAuthoredBulletinDeleteBeforePasteeffect=الإجابة بنعم ستستبدل التسجيل القديم بهذا التسجيل. الإجابة بلا سوف تتجاهل التسجيل الأصلي وستتخطى هذا الملف.
-
 
 #____________________________________________________=Key restore failed, we suggest you try again with a different backup file.
 -f6c1-field:confirmUnableToRecoverFromBackupFilecause=فشلت استعادة المفتاح، نوصيك بإعادة المحاولة مع ملف الاحتياطي آخر.
@@ -2403,13 +2323,11 @@
 #___________________________________________________________=Select Yes to make this template’s details publicly available on the server.
 -84ac-field:confirmUploadPublicTemplateToServerWarningeffect=اختر نعم لجعل تفاصيل هذا القالب متاحة بشكل علني على الخادم.
 
-
 #_____________________________________=Please Note: There are records that have not been sent to a server.  Do you still want to exit?
 -52ed-field:confirmUploadRemindercause=يُرجى الملاحظة : مازالت هناك تسجيلات غير مُرسلَة إلى الخادم. هل تريد حقا المغادرة ؟
 
 #______________________________________=Clicking on Yes will exit Martus, and leave the unsent records.  They will be sent the next time you run Martus and connect to a server.
 -00cc-field:confirmUploadRemindereffect=الضغط على نعم يؤدي إلى مغادرة Martus مع تجاهل التسجيلات غير المُرسلَة. سوف تُرسَل في التشغيل القادم لـ Martus بعد اتصاله بالخادم.
-
 
 #________________________________________________=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.
 -61cb-field:confirmWarnMissingAccountMapFilecause=تحذير: حدث فقدان أو تلف لملف acctmap.txt الموجود في دليل حزم الحسابات. قد يُشير ذلك إلى أن شخصا حاول العبث ببياناتك أو أن هناك خطأ في عتادك.
@@ -2426,17 +2344,14 @@
 #__________________________________________________________=Are you sure the directory you chose to save your backup files to is removable?  You cannot save all #TotalNumberOfFilesInBackup# files to the same location without inserting a new disk for each backup file.
 -2aad-field:confirmWarningPathChosenMayNotBeRemoveablecause=هل أنت متأكد من أن المجلد الذي اخترته لحفظ ملفات نسخك الاحتياطية قابل للإزالة ؟ لا يمكنك حفظ #TotalNumberOfFilesInBackup# ملفات بأكملها في نفس الموقع دون إدخال قرص جديد لكل ملف النسخ الاحتياطي.
 
-
 #___________________________________________________________=Choosing Yes will begin the backup process as instructed.
 -7744-field:confirmWarningPathChosenMayNotBeRemoveableeffect=باختيار 'نعم' ستبدأ عملية النسخ الاحتياطي كما أُشير إليه.
 
 #____________________________________________________=Warning! Using the regular keyboard to enter your password greatly reduces the security of the Martus system, and could make it easier for an attacker to view your private data.
 -f068-field:confirmWarningSwitchToNormalKeyboardcause=تحذير ! إن استخدام لوحة المفاتيح العادية لإدخال كلمة السر يَحدُّ من أمان نظام Martus بشدة ويجعل من اليسير على أي متطفل الاطلاع على بياناتك الخاصة.
 
-
 #_____________________________________________________=If this record was shared with you by one of your contacts, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.
 -7208-field:confirmWarningSwitchToNormalKeyboardeffect=إذا شاركَت معك إحدى جهات الاتصال هذا التسجيل، فالأجدر أهمية استخدام لوحة المفاتيح المعروضة على الشاشة، لأن كل متطفل قد يتمكن من الوصول إلى كل البيانات الخاصة التي يُسمَح لك بعرضها.
-
 
 #_________________________________________________=This XML file was created by a newer version of Martus.
 -4241-field:confirmXmlSchemaNewerImportAnywaycause=أُنشِيء ملف XML هذا بواسطة إصدار Martus حديث.
@@ -2444,52 +2359,47 @@
 #__________________________________________________=If you continue with the import, some information in the record(s) might not be imported.
 -d7f1-field:confirmXmlSchemaNewerImportAnywayeffect=إذا استمررت في الاستيراد، فإن بعض المعلومات الموجودة في التسجيل (أو التسجيلات) يمكن ألا تُستورَد.
 
-
 #_________________________________________________=A single encrypted backup file of your key has yet to be created.
 -71c0-field:confirmbackupIncompleteEncryptedNeeded=لا يزال من الواجب عليك إنشاء ملف احتياطي مُعمَّى وفردي لمفتاحك.
 
 #_____________________________________________________=Martus has improved the security of the multiple pieces key backup.  To keep your account secure and enable you to access your data if you forget your password, please create a new set of key backup files, and delete/destroy the old ones.
 -3425-field:confirmbackupIncompleteImprovedShareNeeded=لقد حسَّن Martus أمان المفتاح الاحتياطي المتعدد الأجزاء. لكي يبقى حسابك مؤمَّنا ولكي تتمكن من الوصول إلى بياناتك إذا نسيت كلمة السر، يُرجى إنشاء مجموعة جديدة من ملفات مفتاحك الاحتياطية ثم حذف/إتلاف النسخ القديمة.
 
-
 #_____________________________________________=A multiple disk backup of your key has yet to be created.
 -b185-field:confirmbackupIncompleteShareNeeded=ما زال من الواجب عليك إنشاء نسخة احتياطية متعددة الأقراص لمفتاحك.
 
-#___________________________________=You have chosen to permanently delete a folder.
+#___________________________________=You have chosen to permanently delete a folder.  
 -76fa-field:confirmdeletefoldercause=لقد اخترت أن تحذف مجلدا نهائيا.
 
-#____________________________________=Any records in the folder will be moved to Discarded Records.
+#____________________________________=Any records in the folder will be moved to Discarded Records.  
 -fccf-field:confirmdeletefoldereffect=ستُنقَل كل النشرات التي داخل المجلد إلى مجلد النشرات المُتجاهَلة.
 
 #______________________________________________=If you lose your key, and you do not have a copy, you will not be able to open any of your records.
 -e655-field:confirmgeneralBackupKeyPairMsgcause=إذا فقدت مفتاحك دون وجود نسخة منهاـ فلن تتمكن من فتح أي تسجيل من تسجيلاتك.
 
-
 #_______________________________________________=Selecting Yes will guide you through the backup procedure, selecting No will skip this important step.
 -8571-field:confirmgeneralBackupKeyPairMsgeffect=إذا حددت 'نعم'، سيتم إرشادك خلال عملية النسخ الاحتياطي، أما إذا حددت 'لا'، سيتم التغاضي عن هذه الخطوة المهمة.
 
-#_________________________________________=The text '#SearchString#' was not found.  Do you wish to search from the beginning?
+#_________________________________________=The text "#SearchString#" was not found.  Do you wish to search from the beginning?
 -25f6-field:confirmhelpStringNotFoundcause=لم يُعثَر على النص '#SearchString#'. هل تريد البحث من البداية ؟
 
-#__________________________________________=Clicking on Yes will search for '#SearchString#' from the beginning.
+#__________________________________________=Clicking on Yes will search for "#SearchString#" from the beginning.
 -0981-field:confirmhelpStringNotFoundeffect=بالضغط على 'نعم' سيجري البحث عن '#SearchString#' من البداية.
 
 #__________________________=Are you sure you want to continue?
 -8de6-field:confirmquestion=هل تريد الاستمرار حقا ؟
 
-#_______________________________=You have chosen to retrieve all records from the Martus server.
+#_______________________________=You have chosen to retrieve all records from the Martus server.  
 -ca39-field:confirmretrievecause=لقد اخترت جلب كل التسجيلات من خادم Martus.
 
-#________________________________=This will restore all the discarded records that were sent to the server.
+#________________________________=This will restore all the discarded records that were sent to the server.  
 -dc79-field:confirmretrieveeffect=سوف يستعيد هذا كل التسجيلات المُتجاهَلة التي لم تُرسَل إل الخادم.
-
 
 #___________________________=You have chosen to save a completed record.
 -58d4-field:confirmsendcause=لقد اخترت حفظ تسجيل مُكتمِل.
 
 #____________________________=This will permanently seal the record and you will not be allowed to make any further modifications to it except by creating a new version of the record.
 -b76b-field:confirmsendeffect=سوف يَختم هذا التسجيل نهائيا ولن يُسمَح لك بعد ذلك بإجراء أي تعديلات، اللهم إلا أن يتم إنشاء نسخة جديدة من هذا التسجيل.
-
 
 #__________________________=Untitled
 -6215-field:defaultCaseName=معنون
@@ -2514,7 +2424,6 @@
 
 #____________________________________=If you want to request permission to upload to this server, enter the 'magic word' now:
 -3ea8-field:inputservermagicwordentry=إذا كنت تريد طلب الإذن لتتمكن من الرفع إلى هذا الخادم، فأدخل 'الكلمة السحرية' الآن :
-
 
 #___________________=Keywords
 -f530-field:keywords=الكلمات المفتاحية
@@ -2553,7 +2462,7 @@
 -7aeb-field:moveToCaseProjectIncidents=حدِّد مجلدا أو عدة #FolderName# لنقل العناصر المُحدَّدة إليها.
 
 #_____________________________________________________=You must select at least one record that was created by this account
--ae15-field:notifyAddPermissionsZeroBulletinsOurscause= لابد على الأقل من تحديد تسجيل تم إنشاؤه بواسطة هذا الحساب.
+-ae15-field:notifyAddPermissionsZeroBulletinsOurscause=لابد على الأقل من تحديد تسجيل تم إنشاؤه بواسطة هذا الحساب.
 
 #____________________________________________________________=You must select at least one contact's account
 -2393-field:notifyAddPermissionsZeroHeadquartersSelectedcause=يجب  على الأقل تحديد حساب واحد لجهة الاتصال
@@ -2564,23 +2473,17 @@
 #____________________________________=An instance of Martus is already running on this computer. You must close that copy before starting a new copy.
 -dab6-field:notifyAlreadyRunningcause=هناك عملية Martus آخرى قيد التشغيل بالفعل على هذا الحاسوب. يجب أن تقوم بإغلاق تلك النسخة قبل البدء بنسخة جديدة.
 
-
 #_______________________________________________=You currently are viewing this version of the record.
 -0221-field:notifyAlreadyViewingThisVersioncause=أنت تعرض هذه النسخة من التسجيل حاليا.
-
 
 #______________________________________________=Martus could not authenticate the server. The server may have been compromised.  Please verify your server configuration and contact the server operator.
 -f27c-field:notifyAuthenticateServerFailedcause=لم يستطع Martus تحديد هوية الخادم. ربما وقع فيه اضطراب. يُرجى التحقق من تهيئة الخادم ثم الاتصال بالمُشغِّل الخادم.
 
-
 #________________________________________________=The record version you are trying to view is currently not on your computer.
--97cb-field:notifyBulletinVersionNotInSystemcause= نسخة التسجيل التي تريد عرضها لا توجد حاليا في حاسوبك.
+-97cb-field:notifyBulletinVersionNotInSystemcause=نسخة التسجيل التي تريد عرضها لا توجد حاليا في حاسوبك.
 
-
-#. Do NOT translate the word Martus.
 #________________________________________________________________=Warning: This record includes attachments that need to be read outside of the Martus system. In addition, this file was sent to you from an [unknown/unverified] contact. Opening unknown attachments is one of the most common ways of introducing malware to your computer. Be sure of the safety of the attachment(s) before opening or sharing with others.
 -e61c-field:notifyBulletinWithAnUnverifiedExternalAttachmentcause=تحذير : يتضمن هذا التسجيل مرفقات يُستلزَم فتحها خارج نظام Martus. إضافة إلى ذلك، هذا الملف أُرسل من جهة اتصال [مجهولة أو غير مُتحقَّق منها]. إن فتح مرفقات مجهولة لهُوَ أكثر الطرق انتشارا لإدخال برنامج احتيالي إلى جهازك. تأكد إذن من سلامة مرفقاتك (أو مرفقك) قبل فتحها أو مشاركتها مع الآخرين.
-
 
 #____________________________________=Printing complete
 -b4a9-field:notifyChartCompletedcause=اكتملت الطباعة
@@ -2590,7 +2493,6 @@
 
 #____________________________________=The selected server is not responding. Before you choose a server, you must be connected to the internet, and that server must be available.
 -38fd-field:notifyConfigNoServercause=لا يستجيب الخادم المحدد. لذا فقبل أن تختار الخادم، يجب عليك أن تكون متصلا بالإنترنت وأن يكون هذا الخادم متاحا.
-
 
 #______________________________________________________=Please confirm that the default details retrieved are correct.
 -af6b-field:notifyConfirmCorrectDefaultDetailsDatacause=يُرجى التأكد من صحة التفاصيل الافتراضية التي جُلبت.
@@ -2610,10 +2512,8 @@
 #_____________________________________________________=An error occurred during upload, and the damaged record'#BulletinTitle#' has been moved to the Damaged Records folder.
 -9fd1-field:notifyDamagedBulletinMovedToDiscardedcause=حدث خطأ أثناء الرفع ونُقِل التسجيل المُتلَف إلى مجلد التسجيلات المُتلَفة : '#BulletinTitle#' نُقلَت إلى مجلد التسجيلات المُتلَفة.
 
-
 #______________________________________________=Error: Unable to delete all of those draft records from the server. Some of them may have been deleted.
 -4a52-field:notifyDeleteServerDraftsFailedcause=خطأ : تعذر حذف جميع مسودات هذه التسجيلات من الخادم. ربما حُذِف بعضها.
-
 
 #____________________________________________=No records were selected
 -4dca-field:notifyDeleteServerDraftsNonecause=لم تُحدَّد أي تسجيلات.
@@ -2624,14 +2524,11 @@
 #_____________________________________________=One or more records cannot be moved to that folder, because it already exists in that folder.
 -effd-field:notifyDropErrorBulletinExistscause=لا يمكن نقل تسجيل أو أكثر إلى هذا المجلد لأنه موجود بالفعل في هذا المجلد.
 
-
 #____________________________________________=One or more records cannot be moved to that folder, because a newer version of this record already exists.
 -e6da-field:notifyDropErrorBulletinOldercause=لا يمكن نقل بعض التسجيلات إلى هذا المجلد، لأن أحدث النسخ لهذه التسجيلات موجودة بالفعل.
 
-
 #________________________________=An unexpected error occurred while moving the record(s). One or more files may be damaged.
 -933f-field:notifyDropErrorscause=حدث خطأ غير متوقع أثناء نقل هذه التسجيلات. قد تكون بعض الملفات مُتلَفة.
-
 
 #____________________________________________=The attachment could not be located.
 -65b1-field:notifyErrorAttachmentMissingcause=لم يتم تحديد موقع المُرفق.
@@ -2642,7 +2539,6 @@
 #______________________________________=Unable to verify the backup. Please try again, possibly to a different destination.
 -e78e-field:notifyErrorBackingupKeyPair=تعذر التحقق من النسخة الاحتياطية. يُرجى إعادة المحاولة، ربما إلى وجهة أخرى.
 
-
 #_______________________________________=This date occurs in the future:
 -438b-field:notifyErrorDateInFuturecause=يقع هذا التاريخ في المستقبل :
 
@@ -2651,6 +2547,7 @@
 
 #_______________________________________=Dates entered in '#FieldLabel#' cannot be earlier than #MinimumDate#
 -db1c-field:notifyErrorDateTooEarlycause=لا يمكن أن تسبق التواريخ المدخلة في '#FieldLabel#' التاريخ #MinimumDate
+
 #______________________________________=Dates entered in '#FieldLabel#' cannot be later than #MaximumDate#
 -615b-field:notifyErrorDateTooLatecause=لا يمكن أن تلي التواريخ المدخلة في '#FieldLabel#' التاريخ #MaximumDate#
 
@@ -2662,7 +2559,6 @@
 
 #_____________________________________________=There was an error exporting records from Martus.  Not all records were exported.
 -29d7-field:notifyErrorExportingBulletinscause=حدث خطأ خلال تصدير التسجيلات من Martus. لم يتم تصدير كل التسجيلات.
-
 
 #_________________________________________________________=There was an error saving your template.
 -88ed-field:notifyErrorExportingCustomizationTemplatecause=حدث خطأ أثناء حفظ القالب.
@@ -2678,9 +2574,9 @@
 
 #_____________________________________________=There was an error importing records into Martus.  Not all records were imported.
 -03f7-field:notifyErrorImportingBulletinscause=حدث خطأ خلال استيراد التسجيلات إلى Martus. لم يتم استيراد كل 
+
 #_______________________________________________________________=The customization template you are trying to import was created by a newer version of Martus.  You need to upgrade to the latest version of Martus before you can import this template.
 -39dd-field:notifyErrorImportingCustomizationTemplateFuturecause=قالب التخصيص الذي تحاول استيراده أُنشِيء بإصدار أحدث لبرنامج Martus. ما عليك سوى ترقية Martus إلى أحدث إصدار قبل استيراد هذا القالب.
-
 
 #_________________________________________________________=There was an error importing this template.
 -4a9a-field:notifyErrorImportingCustomizationTemplatecause=حدث خطأ أثناء استيراد هذا القالب.
@@ -2709,7 +2605,6 @@
 #_________________________________________=An error prevented the record from being saved. Check to make sure the disk is not full or write protected.
 -6bc1-field:notifyErrorSavingBulletincause=حدث خطأ أثناء حفظ التسجيل. تأكد أن القرص فيه مساحة فارغة وأنه مسموح بالكتابة عليه.
 
-
 #_______________________________________=Unable to save configuration file.
 -896e-field:notifyErrorSavingConfigcause=تعذر حفظ ملف التهيئة.
 
@@ -2719,7 +2614,6 @@
 #_____________________________________=Unable to save the file. This could be because the destination is readonly or full, or because of a hardware error.
 -258a-field:notifyErrorSavingFilecause=تعذر حفظ الملف. قد يكون ذلك لأن الوجهة صالحة للقراءة فقط أو ممتلئة، أو بسبب خطأ في العتاد.
 
-
 #______________________________________=Unable to save current screen layout.
 -2bad-field:notifyErrorSavingStatecause=تعذر حفظ تخطيط الشاشة الحالية.
 
@@ -2727,7 +2621,7 @@
 -6e61-field:notifyErrorSavingTemplateToServercause=حدث خطأ غير متوقع أثناء حفظ القالب في الخادم.
 
 #___________________________________________=The request was unsuccessful, due to a network error.
--8242-field:notifyErrorServerConnectioncause=<The request was unsuccessful, due to a network error.>
+-8242-field:notifyErrorServerConnectioncause=فشل الطلب بسبب خطإ في الشبكة.‏
 
 #________________________________________=Unable to connect to the server.
 -595b-field:notifyErrorServerOfflinecause=تعذر الاتصال بالخادم.
@@ -2735,10 +2629,8 @@
 #_____________________________________________=Unable to update the dictionary. Be sure the word list is in the correct format.
 -6486-field:notifyErrorUpdatingDictionarycause=تعذر تحديث القاموس. تأكد من أن قائمة الكلمات صحيحة التنسيق.
 
-
 #______________________________________=An error prevented the file from being written. Check to make sure the disk is not full or write protected.
 -2a84-field:notifyErrorWritingFilecause=حدث خطأ تسبب في الحيلولة دون قراءة الملف. تأكد من أن القرص به مساحة فارغة وأنه غير محمي من الكتابة فيه.
-
 
 #___________________________________________=You will have to select a server for any records to be backed up to that server, or to retrieve records from that server.
 -3a30-field:notifyExistingServerRemovedcause=سيتحتم عليك تحديد خادم لكل التسجيلات التي تريد نسخها احتياطيا في هذا الخادم، أو جلب تلك التسجيلات من هذا الخادم.
@@ -2749,7 +2641,6 @@
 #____________________________________=Successfully exported #BulletinsExported# of #TotalBulletinsToExport# records.
 -5bae-field:notifyExportCompletecause=تم تصدير #BulletinsExported# من أصل #TotalBulletinsToExport# تسجيلا.
 
-
 #_______________________________________=The folder you are trying to export does not contain any records.  Select a folder which has records before exporting the folder.
 -99a9-field:notifyExportFolderEmptycause=لا يحوي المجلد الذي تحاول تصديره أي تسجيل. حدِّد المجلد الذي يحوي التسجيلات قبل تصدير المجلد.
 
@@ -2759,23 +2650,20 @@
 #_________________________________________=To export records, select them first, and then perform the export operation.
 -6500-field:notifyExportZeroBulletinscause=لتصدير التسجيلات، حددها أولا، ثم قم بعملية التصدير.
 
-
 #___________________________________________=The original files have not been deleted from your computer, you must delete them manually if you wish.
 -8965-field:notifyFilesWillNotBeDeletedcause=لم تُحذَف الملفات الأصلية من الحاسوب، لذا يجب عليك حذفها يدويا إن شئت ذلك.
 
 #___________________________________________=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.
 -73de-field:notifyFolderMigrationFailedcause=حدث خطأ أثناء تحويل مجلداتك. لا يزال بإمكانك استخدام Martus، لكن إذا كان مجلد الصادر أو مجلد المسودات موجودا، فلا تستخدم أياً منهما.
 
-
 #___________________________________________=One or more records were severely damaged, and cannot be displayed. If these records were backed up to a server, you may be able to retrieve undamaged copies from there.
 -fe5e-field:notifyFoundDamagedBulletinscause=لقد أُتلِفت بعض التسجيلات، ولا يمكن عرضها. إذا نسخت هذه التسجيلات احتياطيا في الخادم، يمكنك جلب النسخ غير المُتلَفة منه.
-
 
 #__________________________________=One or more records were not in any folder. These lost records have been placed into the Recovered Records folder.
 -cfb3-field:notifyFoundOrphanscause=لا توجد التسجيلات في أي مجلد. إن هذه التسجيلات الضائعة قد وُضِعت في مجلد التسجيلات المستعادة.
 
 #________________________________________________=Not all records were imported.  The following records had problems during import.\n\n#ImportBulletinsNotImported#
--a73e-field:notifyImportBulletinsNotImportedcause= لم يتم استيراد كل التسجيلات. لقد حدثت مشاكل في التسجيلات التالية خلال الاستيراد.\n\n #ImportBulletinsNotImported#.
+-a73e-field:notifyImportBulletinsNotImportedcause=لم يتم استيراد كل التسجيلات. لقد حدثت مشاكل في التسجيلات التالية خلال الاستيراد.\n\n #ImportBulletinsNotImported#.
 
 #____________________________________=Import complete.  Imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# records into folder #ImportFolder#
 -ad7a-field:notifyImportCompletecause=اكتمل الاستيراد. #BulletinsSuccessfullyImported# مستوردة من أصل #TotalBulletinsToImport# في المجلد : #ImportFolder#
@@ -2783,10 +2671,8 @@
 #______________________________________________=Not all attachments were imported.  The following records had problems importing these attachments.\n\n#ImportMissingAttachments#
 -e318-field:notifyImportMissingAttachmentscause=لم يتم استيراد كل المرفقات. لقد حدثت مشاكل في التسجيلات التالية خلال استيراد هذه المرفقات.\n\n\n#ImportMissingAttachments#.
 
-
 #___________________________________________________________=Successfully imported a customization template that was created by #CreatedBy#.
 -16f2-field:notifyImportingCustomizationTemplateSuccesscause=نجح استيراد قالب التخصيص الذي تم إنشاؤه بنجاح بواسطة #CreatedBy#.
-
 
 #_______________________________________=You must have a server public code.
 -2fde-field:notifyInvalidServerCodecause=يجب أن تتوفر على الرمز العمومي للخادم.
@@ -2794,17 +2680,14 @@
 #_______________________________________=You must have a server name or IP address.
 -984b-field:notifyInvalidServerNamecause=يجب أن تتوفر على اسم الخادم أو عنوان IP.
 
-
 #__________________________________________________=Note: Any record data made public using previous versions of Martus will no longer be public in the new Martus system.
 -d4d1-field:notifyLegacyPublicIsPrivateMessagecause=ملاحظة : إن كل بيانات التسجيلات التي كانت علنية في إصدارات Martus السابقة لن تكون علنية بعد ذلك في نظام Martus الجديد.
-
 
 #_______________________________________=No row selected.
 -7b20-field:notifyNoGridRowSelectedcause=لم يُحدَّد الصف.
 
 #___________________________________________=No folder specified.  You must enter a folder you wish the files to be imported into.  This folder can already exist in the system, or can be a new folder.
 -05f7-field:notifyNoImportFileSpecifiedcause=لم يُحدَّد أي مجلد. يجب عليك إدخال المجلد الذي ترغب في استيراد الملفات إليه. يمكن أن يكون هذا المجلد موجودا في النظام وقد يكون مجلدا جديدا.
-
 
 #____________________________________________=You must select at least one field to be included in the report.
 -9390-field:notifyNoReportFieldsSelectedcause=يجب عليك تحديد حقل واحد على الأقل لتضمينه في التقرير.
@@ -2818,28 +2701,23 @@
 #_____________________________________=Not a valid password, passwords must be at least 8 characters long, 15 recommended.
 -6148-field:notifyPasswordInvalidcause=كلمة السر غير صالحة، يجب ألا تقل كلمات السر عن 8 أحرف، بل يُوصى بإدخال 15 حرفا.
 
-
 #_____________________________________________=Your password can not be your username
 -0acb-field:notifyPasswordMatchesUserNamecause=لا يمكن لكلمة السر أن تكون إسم المستخدم الخاص بك
 
 #_____________________________________________________=One or more records cannot be pasted in that folder, because they already exist in this folder.
 -4bec-field:notifyPasteErrorBulletinAlreadyExistscause=لا يمكن لصق بعض التسجيلات في هذا المجلد، لأنها موجودة بالفعل داخله.
 
-
 #_____________________________________________=One or more records cannot be pasted in that folder, because a newer version of this record already exists.
 -2a8a-field:notifyPasteErrorBulletinOldercause=لا يمكن لصق بعض التسجيلات في هذا المجلد، لأن نسخا جديدة موجودة بالفعل.
 
-
 #________________________________=An unexpected error occurred while pasting the record(s). One or more files may be damaged.
 -03f2-field:notifyPasteErrorcause=حدث خطأ غير متوقع أثناء لصق هذه التسجيلات. قد تكون بعض الملفات مُتلَفة.
-
 
 #________________________________________________=No record selected.  Please select the record you wish to preview.
 -6d18-field:notifyPreviewNoBulletinsSelectedcause=لم يُحدَّد أي تسجيل. يُرجى تحديد التسجيل الذي تريد معاينته.
 
 #____________________________________________=You may only preview one record at a time.  Please only select one record to preview.
 -f02a-field:notifyPreviewOneBulletinOnlycause=تستطيع عرض تسجيل واحد فقط في آن واحد. يُرجى تحديد تسجيل واحد فقط لعرضه.
-
 
 #____________________________________=Printing Complete
 -ab0a-field:notifyPrintCompletedcause=اكتملت الطباعة
@@ -2850,12 +2728,11 @@
 #________________________________________=To print one or more records, select them first, and then perform the print operation.
 -1718-field:notifyPrintZeroBulletinscause=لطباعة تسجيل أو أكثر، حددها أولا، ثم قم بعملية الطباعة.
 
-
 #_________________________________________=The file does not contain valid public information.
 -f5b5-field:notifyPublicInfoFileErrorcause=لا يحوي الملف معلومات علنية صالحة.
 
-#___________________________________________________________________________=Key restore succeeded!  You now have to enter a Username and password.
--08d1-field:notifyRecoveredKeyShareSucceededNewUserNamePasswordRequiredcause=نجحت استعادة المفتاح ! يجب عليك إدخال اسم المستخدم وكلمة السر.
+#___________________________________________________________________________=Key restore succeeded!  You now have to enter a username and password.
+-8808-field:notifyRecoveredKeyShareSucceededNewUserNamePasswordRequiredcause=نجحت استعادة المفتاح ! يجب عليك إدخال اسم المستخدم وكلمة السر. 
 
 #_______________________________________________=Key restore is complete, you will now be logged into Martus.
 -efa0-field:notifyRecoveryOfKeyPairCompletecause=اكتملت استعادة المفتاح، ستتمكن الآن من تسجيل الدخول إلى Martus.
@@ -2863,13 +2740,11 @@
 #________________________________________________=You have successfully restored your key from your backup files.  It is very important that you now re-distribute your backup files.  We also recommend you backup your key as a single password-encrypted file, though you do not need to recreate the multiple file backup.
 -f50c-field:notifyRecoveryOfKeyShareCompletecause=لقد نجحت في استعادة مفتاحك من الملفات الاحتياطية. من المهم جدا أن تقوم الآن بإعادة توزيع ملفاتك الاحتياطية. نوصيك كذلك بنسخ مفتاحك احتياطيا على شكل ملف فردي مُعمًّى بكلمة السر، على الرغم من أنك لن تحتاج لإعادة إنشاء نسخة احتياطية متعددة الملفات.
 
-
-#_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Account from Key Backup' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your Username and password and restore your key so you can log in normally and access your account.
--e88a-field:notifyRecoveryProcessBackupFilecause=لاستعادة مفتاحك، يجب عليك أولا العثور على الملف الاحتياطي الذي حفظته من قبل. باستخدام مربع الحوار 'استعادة الحساب'، ابحث عن الملف في القرص الثابت لجهازك، أو في قرص الشبكة، أو في قرص قابل للإزالة، ثم اضغط على زر الفتح. سيسألك Martus حينها عن اسم المستخدم وكلمة السر، ثم يستعيد بعد ذلك مفتاحك لكي تتمكن من الولوج كالمعتاد والوصول إلى حسابك.
+#_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Account from Key Backup' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your username and password and restore your key so you can log in normally and access your account.
+-f73b-field:notifyRecoveryProcessBackupFilecause=لاستعادة مفتاحك، يجب عليك أولا العثور على الملف الاحتياطي الذي حفظته من قبل. باستخدام مربع الحوار 'استعادة الحساب من ملف المفتاح الاحتياطي'، ابحث عن الملف في القرص الثابت لجهازك، أو في قرص الشبكة، أو في قرص قابل للإزالة، ثم اضغط على زر الفتح. سيسألك Martus حينها عن اسم المستخدم وكلمة السر، ثم يستعيد بعد ذلك مفتاحك لكي تتمكن من الولوج كالمعتاد والوصول إلى حسابك.
 
 #_____________________________________________=You will now have to provide #MinimumNumberOfFilesNeededForRecovery# out of the #TotalNumberOfFilesInBackup# files you previously saved when you backed up your key.
 -f571-field:notifyRecoveryProcessKeySharecause=يجب عليك الآن إدخال #MinimumNumberOfFilesNeededForRecovery# ملف من أصل #TotalNumberOfFilesInBackup# ملفا والتي سبق لك حفظها عندما قمت بنسخ مفتاحك احتياطيا.
-
 
 #______________________________________=Please remember your username and password. It cannot be recovered.
 -e9e0-field:notifyRememberPasswordcause=يُرجى تذكر اسم المستخدم وكلمة السر. إذ لا يمكن استردادهما.
@@ -2901,28 +2776,23 @@
 #_______________________________________=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any records that had not yet been retrieved.
 -6d0c-field:notifyRetrieveFileErrorcause=منع خطأ ما Martus من متابعة عملية الجلب التي كانت جارية. عليك إعادة تحديد التسجيلات التي لم يتم جلبها بعد.
 
-
 #________________________________________=A retrieve is already in progress. You cannot start another retrieve until that one has finished.
 -3e55-field:notifyRetrieveInProgresscause=الجلب قيد التقدم، ولا يمكنك بدء عملية جلب أخرى إلا بعد انتهاء هذه.
-
 
 #____________________________________________________=Preview not yet available for this record. Please wait until the information has been retrieved from the server, and then try again.
 -60d3-field:notifyRetrievePreviewNotAvailableYetcause=المعاينة غير متاحة لهذا التسجيل. يُرجى الانتظار حتى ينتهي من جلب المعلومات من الخادم. بعد ذلك، حاول مرة أخرى.
 
-
 #________________________________________________=Errors occurred while retrieving record summaries.  Some of the records on the server will not be shown.
 -dcf0-field:notifyRetrievedOnlySomeSummariescause=حدث خطأ أثناء جلب ملخصات التسجيل. لن تظهر بعض التسجيلات التي في الخادم.
 
-
-#__________________________________________=An error occurred.  Unable to change Username or password.  You may need to restore your backup key file.
--cbd8-field:notifyRewriteKeyPairFailedcause=حدث خطأ. تعذر تغيير اسم المستخدم أو كلمة السر. قد تحتاج لاستعادة ملف مفتاحك من نسخته الاحتياطية.
-
+#__________________________________________=An error occurred.  Unable to change username or password.  You may need to restore your backup key file.
+-1a72-field:notifyRewriteKeyPairFailedcause=حدث خطأ. تعذر تغيير اسم المستخدم أو كلمة السر. قد تحتاج لاستعادة ملف مفتاحك من نسخته الاحتياطية.
 
 #_________________________________________=Successfully saved your new username and password.
 -0398-field:notifyRewriteKeyPairSavedcause=حُفِظ اسم المستخدم وكلمة السر الجديدين بنجاح.
 
 #___________________________________________________=You must select at least one record that was created by this account
--ae15-field:notifySealSelectedZeroBulletinsOurscause= لابد من تحديد تسجيل على الأقل تم إنشاؤه بواسطة هذا الحساب.
+-ae15-field:notifySealSelectedZeroBulletinsOurscause=لابد من تحديد تسجيل على الأقل تم إنشاؤه بواسطة هذا الحساب.
 
 #__________________________________=Sorry, no records were found.
 -5778-field:notifySearchFailedcause=آسف، لم يعثر على أي تسجيل.
@@ -2957,10 +2827,8 @@
 #____________________________________________________=The following records were unable to be downloaded since they were only found locally.  The remaining records will be downloaded in the background.
 -f0ba-field:notifySyncUnableToDownloadLocalFilescause=تعذر تنزيل التسجيلات الحالية لأنه عُثِر عليها محليا فقط. إن باقي التسجيلات سوف تُنزَّل في الخلفية.
 
-
 #___________________________________________________=The following records were unable to be uploaded since they were only found on the server or you do not have permission to upload these as your own.  The remaining records will be uploaded in the background.
 -6d6f-field:notifySyncUnableToUploadServerFilescause=تعذر رفع التسجيلات الحالية لأنه عُثِر عليها فقط في الخادم، أو لا يُسمَح لك برفعها من الخادم. إن باقي التسجيلات سوف تُرفَع في الخلفية.
-
 
 #___________________________________________=Successfully saved form template to your account on the server.
 -f995-field:notifyTemplateSavedToServercause=حُفظ قالب النموذج لحسابك بنجاح في الخادم.
@@ -2977,7 +2845,6 @@
 #____________________________________________=Unable to save the selected attachment for some reason.  Try saving it to a different file.
 -4a93-field:notifyUnableToSaveAttachmentcause=تعذر حفظ المرفق المحدد لسبب ما. حاول حفظه في ملف آخر.
 
-
 #____________________________________________=Unable to view the selected attachment for some reason.
 -db36-field:notifyUnableToViewAttachmentcause=تعذر عرض المرفق المحدد لسبب ما.
 
@@ -2987,10 +2854,8 @@
 #_________________________________________________________=An error occurred during upload, and the record:'#BulletinTitle#' has not been sent to the server.  You may try and resend the record later.
 -4a05-field:notifyUploadFailedBulletinNotSentToServercause=حدث خطأ أثناء الرفع، والتسجيل : '#BulletinTitle#' لم يُرسَل إلى الخادم. يمكنك إعادة إرسال التسجيل لاحقا.
 
-
-#_______________________________________=The Username you chose already exists on this system, please choose a different Username.
--3efd-field:notifyUserAlreadyExistscause=إن اسم المستخدم الذي اخترت موجود بالفعل في هذا النظام، يُرجى اختيار اسم مستخدم آخر.
-
+#_______________________________________=The username you chose already exists on this system, please choose a different username.
+-ef0a-field:notifyUserAlreadyExistscause=إن اسم المستخدم الذي اخترت موجود بالفعل في هذا النظام، يُرجى اختيار اسم مستخدم آخر. 
 
 #___________________________________=Username must not be blank
 -66fb-field:notifyUserNameBlankcause=يجب ألا يكون اسم المستخدم فارغا
@@ -3010,31 +2875,26 @@
 #_______________________________________=The configuration file may be corrupted
 -d84d-field:notifycorruptconfiginfocause=قد يكون ملف التهيئة مُتلَفا
 
-#_____________________________________=Username or Password incorrect
--7b2d-field:notifyincorrectsignincause=إسم المستخدم غير صحيح أو كلمة السر غير صحيحة
+#_____________________________________=Username or password incorrect
+-11b8-field:notifyincorrectsignincause=إسم المستخدم غير صحيح أو كلمة السر غير صحيحة
 
 #_______________________________________=The Server has rejected your request. The magic word is probably not correct.
 -2baa-field:notifymagicwordrejectedcause=لقد رفض الخادم طلبك. قد تكون الكلمة السحرية غير صحيحة.
 
-
 #________________________________________=Warning: You must enter the same password you entered on the previous screen.
 -2a81-field:notifypasswordsdontmatchcause=تحذير : يجب أن تكتب كلمة السر ذاتها التي أدخلتها في الشاشة السابقة.
-
 
 #______________________________________=The current server is not responding or may need to be configured from the server menu.
 -9b3c-field:notifyretrievenoservercause=الخادم الحالي لا يستجيب أو يحتاج للتهيئة من خلال قائمة الخادم.
 
-
 #_____________________________________=No records were selected
 -4dca-field:notifyretrievenothingcause=لم يُحدَّد أي تسجيل
-
 
 #____________________________________=The current Martus Server has refused to accept a record
 -ea98-field:notifyuploadrejectedcause=رفض خادم Martus الحالي قبول التسجيل
 
-#_________________________________________=Warning: You must enter the same Username you entered on the previous screen.
--0648-field:notifyusernamessdontmatchcause=تحذير : يجب عليك إدخال نفس اسم المستخدم الذي أدخلته في الشاشة السابقة.
-
+#_________________________________________=Warning: You must enter the same username you entered on the previous screen.
+-5754-field:notifyusernamessdontmatchcause=تحذير : يجب عليك إدخال نفس اسم المستخدم الذي أدخلته في الشاشة السابقة. 
 
 #_______________________=Organization
 -5192-field:organization=المنظمة
@@ -3072,6 +2932,9 @@
 #_______________________=Retrieve?
 -460d-field:retrieveflag=جلب ؟
 
+#_______________________________=secureApp Section
+-a282-field:secureAppDataSection=‫فقرة secureApp‬
+
 #_______________________________________=For security reasons, we must validate your username and password.
 -0381-field:securityServerConfigValidate=لأسباب أمنية، يجب التحقق من اسم المستخدم وكلمة السر.
 
@@ -3096,47 +2959,41 @@
 #____________________=Any unsaved records will be lost unless you sign in to Martus again and save them.
 -6b3d-field:timedout2=سوف يضيع كل تسجيل لم تحفظه، اللهم إلا إذا سجَّلت الدخول إلى Martus وقمت بحفظه.
 
-
 #________________=Title
 -768e-field:title=العنوان
 
 #_____________________________=Arabic pre-5.0.3
 field:translationVersion=العربية 5.1
 
-
 #___________________=Username 
 -f964-field:username=اسم المستخدم
 
-#____________________________________=Loading Martus.  Please wait
--32c0-field:waitingForBulletinsToLoad=يجري تحميل Martus. يُرجى الانتظار...
+#____________________________________=Loading Martus.  Please wait...
+-4d07-field:waitingForBulletinsToLoad=يجري تحميل Martus. يُرجى الانتظار... 
 
 #_________________________________________=You have chosen to permanently delete records from the Discarded Records folder. Even if these records were recently cut or copied, you will not be able to paste them. If they have already been sent to a server, they will remain on the server. This action will only delete them from this computer.
--d398-field:warningDeleteMultipleBulletins= لقد اخترت حذف التسجيلات نهائيا من مجلد التسجيلات المُتجاهلة. إذا كنت قد نسخت أو قصصت تلك التسجيلات حديثا، فلن تتمكن من لصقها بعد ذلك. إذا أُرسلَت مسبقا إلى الخادم، ستظل في الخادم. سيؤدي هذا الإجراء إلى حذفها من جهازك فقط.
+-d398-field:warningDeleteMultipleBulletins=لقد اخترت حذف التسجيلات نهائيا من مجلد التسجيلات المُتجاهلة. إذا كنت قد نسخت أو قصصت تلك التسجيلات حديثا، فلن تتمكن من لصقها بعد ذلك. إذا أُرسلَت مسبقا إلى الخادم، ستظل في الخادم. سيؤدي هذا الإجراء إلى حذفها من جهازك فقط.
 
 #___________________________________________________=Note: Copies of these records exist in one or more other folders. Those copies will not be removed.
 -d279-field:warningDeleteMultipleBulletinsWithCopies=ملاحظة : توجد نسخ بعض هذه التسجيلات في بعض المجلدات. لذلك لن تُزال هذه النسخ.
 
-
 #_______________________________________________=Warning: One or more of these records have not been sent to a server since they were last modified. Deleting them will prevent the latest changes from being backed up.
 -98d9-field:warningDeleteMultipleUnsentBulletins=تحذير : لم تُرسَل هذه التسجيلات إلى الخادم بعد آخر تعديل لها. إن حذفها سيمنع آخر التعديلات من نسخها احتياطيا.
-
 
 #______________________________________=You have chosen to permanently delete a record from the Discarded Records folder. Even if this record was recently cut or copied, you will not be able to paste it. If this record has already been sent to a server, it will remain on the server. This action will only delete it from this computer.
 -c0b7-field:warningDeleteSingleBulletin= لقد اخترت حذف التسجيل بصورة نهائية من مجلد النشرات المُتجاهلَة. حتى بعد نسخك أو قصِّك هذا التسجيل حديثا، لن تتمكن من لصقه بعد ذلك. إذا أُرسِل هذا التسجيل إلى الخادم، سيظل فيه. سيؤدي هذا الإجراء إلى حذف هذا التسجيل من جهازك فقط.
 
 #________________________________________________=Note: Copies of this record exist in other folders. Those copies will not be removed.
--fb09-field:warningDeleteSingleBulletinWithCopies= ملاحظة : توجد نسخة من هذا التسجيل في مجلد آخر أو أكثر. لذا، لن تُزال هذه النسخ.
+-fb09-field:warningDeleteSingleBulletinWithCopies=ملاحظة : توجد نسخة من هذا التسجيل في مجلد آخر أو أكثر. لذا، لن تُزال هذه النسخ.
 
 #____________________________________________=Warning: This record has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.
 -15fe-field:warningDeleteSingleUnsentBulletin=تحذير : لم يرسل هذا التسجيل إلى الخادم منذ آخر تعديل له. إن حذفه سيمنع آخر التعديلات من نسخها احتياطيا.
-
 
 #__________________=Web Page 
 -e546-field:webpage=صفحة الوِبْ 
 
 #_____________________________=Damaged Records
 -a6df-folder:%DamagedBulletins=التسجيلات المُتلَفة
-
 
 #______________________=Trash
 -e3bf-folder:%Discarded=التسجيلات المُتجاهلَة
@@ -3156,9 +3013,6 @@ field:translationVersion=العربية 5.1
 #_______________________________=Received Records
 -f68a-folder:%RetrievedBulletins=التسجيلات المُستلَمة
 
-#_________________________________________=Contacts' Sealed Records
--736d-folder:%RetrievedFieldOfficeBulletin=التسجيلات المختومة من طرف جهات الاتصال
- 
 #______________________________________________=Contacts' Draft Records
 -3278-folder:%RetrievedFieldOfficeBulletinDraft=مسودات تسجيلات جهات الاتصال
 
@@ -3360,7 +3214,6 @@ field:translationVersion=العربية 5.1
 #_____________________________=Backup My Key
 -2852-menu:BackupMyKeyPairFile=نسخ مفتاحي احتياطيا
 
-
 #________________=Charts
 -8610-menu:Charts=المخططات
 
@@ -3393,9 +3246,6 @@ field:translationVersion=العربية 5.1
 
 #______________________=Delete Folder
 -2880-menu:DeleteFolder=حذف المجلد
-
-#______________________________=Delete My Drafts From Server
--b43a-menu:DeleteMyServerDrafts=حذف مسوداتي من الخادم
 
 #__________________________=Discard Record(s)
 -9d87-menu:DiscardBulletins=تجاهل التسجيل (أو التسجيلات)
@@ -3447,18 +3297,6 @@ field:translationVersion=العربية 5.1
 
 #_________________________=Resend Record(s)
 -2816-menu:ResendBulletins=إعداد إرسال التسجيل (أو التسجيلات)
-
-#__________________________________=Retrieve Draft Records from My Contacts
--f94d-menu:RetrieveHQDraftBulletins=جلب مسودات التسجيلات من جهات اتصالي
-
-#___________________________________=Retrieve Sealed Records from My Contacts
--9eda-menu:RetrieveHQSealedBulletins=يجري جلب التسجيلات المختومة من جهات اتصالي
-
-#___________________________________=Retrieve My Draft Records
--216e-menu:RetrieveMyDraftsBulletins=جلب مسودات تسجيلاتي
-
-#___________________________________=Retrieve My Sealed Records
--6e78-menu:RetrieveMySealedBulletins=جلب تسجيلاتي المختومة
 
 #_______________________________=Seal Record(s)
 -2b85-menu:SealSelectedBulletins=ختم التسجيل (أو التسجيلات)
@@ -3740,13 +3578,13 @@ field:translationVersion=العربية 5.1
 -e1e9-tooltip:NeverDeleteFromServer=قم بالتأشير على هذا لمنع حذف تسجيلاتك من خادم Martus.
 
 #________________________=Search
--bce0-tooltip:QuickSearch= بحث
+-bce0-tooltip:QuickSearch=بحث
 
 #_______________________________=Server OFF: Click to turn Server on
--4ca5-tooltip:ServerCurrentlyOff=<Server OFF: Click to turn Server on>
+-4ca5-tooltip:ServerCurrentlyOff=الخادم غير مُشغَّل : اضغط لتشغيله
 
 #______________________________=Server ON: Click to turn Server off
--534c-tooltip:ServerCurrentlyOn=<Server ON: Click to turn Server off>
+-534c-tooltip:ServerCurrentlyOn=الخادم  مُشغَّل : اضغط لتوقيفه
 
 #_______________________=Sync Manager
 -9979-tooltip:ServerSync=مدير المزامنة
@@ -3760,14 +3598,11 @@ field:translationVersion=العربية 5.1
 #______________________=Template Manager
 -3fe3-tooltip:Templates=مدير القوالب
 
-#____________________________=Tor:OFF, Click to turn Tor on
--f8b7-tooltip:TorCurrentlyOff=<Tor:OFF, Click to turn Tor on>
+#____________________________=Tor OFF: Click to turn Tor on
+-ab26-tooltip:TorCurrentlyOff=‫Tor : غير مُشغَّل، اضغط لتشغيل Tor‬
 
-#___________________________=Tor:ON, Click to turn Tor off
--b37e-tooltip:TorCurrentlyOn=<Tor:ON, Click to turn Tor off>
-
-#__________________=Click to turn Tor off
--ada6-tooltip:TorOn=<Click to turn Tor off>
+#___________________________=Tor ON: Click to turn Tor off
+-20f7-tooltip:TorCurrentlyOn=‫Tor :  مُشغَّل، اضغط لتوقيف Tor‬
 
 #____________________________=Update your contacts' access to Records
 -bc61-wintitle:AddPermissions=تحديث وصول جهات اتصالك للتسجيلات
@@ -3784,7 +3619,7 @@ field:translationVersion=العربية 5.1
 #_______________________________=Author Information
 -42f4-wintitle:AuthorInformation=معلومات المؤلف
 
-#___________________________________________________=Backup Key Information
+#___________________________________________________=Backup Key Information 
 -53df-wintitle:BackupKeyPairToSecretShareInformation=نسخ معلومات المفتاح احتياطيا
 
 #__________________________________________________=Backup Complete
@@ -3849,9 +3684,6 @@ field:translationVersion=العربية 5.1
 
 #__________________________________________=Delete My Data From This Computer
 -216c-wintitle:DeleteMyDataFromThisComputer=حذف بياناتي من هذا الحاسوب
-
-#______________________________________=Delete My Drafts From Server
--b43a-wintitle:DeleteMyDraftsFromServer=حذف مسوداتي من الخادم
 
 #_____________________=Details
 -dc3d-wintitle:Details=التفاصيل
@@ -3924,12 +3756,15 @@ field:translationVersion=العربية 5.1
 
 #______________________________________=Import Record
 -b810-wintitle:FileDialogImportBulletin=استيراد التسجيل
-	
+
 #______________________________________________=Import Contact Key
 -e3a4-wintitle:FileDialogImportContactPublicKey=استيراد مفتاح جهة الاتصال
 
 #______________________________________=Import Form Template
 -2f11-wintitle:FileDialogImportTemplate=استيراد قوالب النموذج
+
+#___________________________________=Print to File
+-4549-wintitle:FileDialogPrintToFile=طباعة على ملف
 
 #____________________________________________=Restore Account from Key Backup
 -428a-wintitle:FileDialogRecoverSharedKeyPair=استعادة المفتاح المشترك
@@ -3943,11 +3778,14 @@ field:translationVersion=العربية 5.1
 #___________________________________=Backup Key File
 -2ba4-wintitle:FileDialogSaveKeyPair=نسخ ملف المفتاح احتياطيا
 
+#________________________________________=Save Report Format
+-ca8a-wintitle:FileDialogSaveReportFormat=احفظ نسق التقرير
+
 #__________________________________=Save Search
 -1340-wintitle:FileDialogSaveSearch=حفظ البحث
 
 #____________________________________=Run Report
--884c-wintitle:FileDialogSelectReport=<Run Report>
+-884c-wintitle:FileDialogSelectReport=شغِّل التقرير
 
 #__________________________________=Export Records to which file?
 -ff53-wintitle:FileSaveDialogExport=إلى أي ملف تريد تصدير التسجيلات ؟
@@ -3960,7 +3798,6 @@ field:translationVersion=العربية 5.1
 
 #________________________________=Help on Record Details Field Default Content
 -8b08-wintitle:HelpDefaultDetails=المساعدة حول المحتوى الافتراضي لحقل تفاصيل التسجيل
-
 
 #_____________________________=Import Records
 -7223-wintitle:ImportBulletins=استيراد 
@@ -4032,7 +3869,7 @@ field:translationVersion=العربية 5.1
 -ba2b-wintitle:ReportSearchProgress=يجري البحث...
 
 #_____________________________=Resend Records
--e278-wintitle:ResendBulletins= إعادة إرسال التسجيلات
+-e278-wintitle:ResendBulletins=إعادة إرسال التسجيلات
 
 #_____________________________________________=Retrieving Records
 -4083-wintitle:RetrieveHQDraftBulletinProgress=يجري جلب التسجيلات
@@ -4040,17 +3877,11 @@ field:translationVersion=العربية 5.1
 #______________________________________________=Retrieving Record Summaries
 -84e6-wintitle:RetrieveHQDraftBulletinSummaries=يجري جلب ملخصات التسجيلات
 
-#______________________________________=Retrieve Draft Records from My Contacts
--f94d-wintitle:RetrieveHQDraftBulletins=جلب مسودات التسجيلات من جهات اتصالي
-
 #______________________________________________=Retrieving Records
 -4083-wintitle:RetrieveHQSealedBulletinProgress=يجري جلب التسجيلات
 
 #_______________________________________________=Retrieving Record Summaries
 -84e6-wintitle:RetrieveHQSealedBulletinSummaries=يجري جلب ملخصات التسجيلات
-
-#_______________________________________=Retrieve Sealed Records from My Contacts
--9eda-wintitle:RetrieveHQSealedBulletins=يجري جلب التسجيلات المختومة من جهات اتصالي
 
 #_____________________________________________=Retrieving Records
 -4083-wintitle:RetrieveMyDraftBulletinProgress=يجري جلب التسجيلات
@@ -4058,17 +3889,11 @@ field:translationVersion=العربية 5.1
 #______________________________________________=Retrieving Record Summaries
 -84e6-wintitle:RetrieveMyDraftBulletinSummaries=يجري جلب ملخصات التسجيلات
 
-#______________________________________=Retrieve My Draft Records
--216e-wintitle:RetrieveMyDraftBulletins=جلب مسودات تسجيلاتي
-
 #______________________________________________=Retrieving Records
 -4083-wintitle:RetrieveMySealedBulletinProgress=يجري جلب التسجيلات
 
 #_______________________________________________=Retrieving Record Summaries
 -84e6-wintitle:RetrieveMySealedBulletinSummaries=يجري جلب ملخصات التسجيلات
-
-#_______________________________________=Retrieve My Sealed Records
--6e78-wintitle:RetrieveMySealedBulletins=جلب تسجيلاتي المختومة
 
 #_______________________________=Reports
 -88bc-wintitle:RunOrCreateReport=التقارير
@@ -4134,7 +3959,7 @@ field:translationVersion=العربية 5.1
 -3b7c-wintitle:confirmCancelBackupRecovery=إلغاء استعادة النسخة الاحتياطية
 
 #_________________________________________=Cancel Edit
--4d63-wintitle:confirmCancelModifyBulletin= إلغاء التحرير
+-4d63-wintitle:confirmCancelModifyBulletin=إلغاء التحرير
 
 #___________________________________=Cancel Retrieve
 -d984-wintitle:confirmCancelRetrieve=إلغاء الجلب
@@ -4226,11 +4051,14 @@ field:translationVersion=العربية 5.1
 #__________________________________________=Seal Records
 -b07e-wintitle:confirmSealSelectedBulletins=ختم التسجيلات
 
+#_________________________________________=Cancel Search
+-5109-wintitle:confirmSearchProgressCancel=ألغِ البحث
+
 #___________________________________________=Server Compliance Statement
 -20f8-wintitle:confirmServerComplianceFailed=بيان توافق الخادم
 
 #_________________________________________=Show On Map
--c052-wintitle:confirmShowOnMapBypassesTor=<Show On Map>
+-c052-wintitle:confirmShowOnMapBypassesTor=أظهر الخريطة
 
 #________________________________________________________=Record Already Exists
 -c883-wintitle:confirmUnAuthoredBulletinDeleteBeforePaste=التسجيل موجودة بالفعل
@@ -4288,14 +4116,15 @@ field:translationVersion=العربية 5.1
 
 #__________________________________=Request Upload Permission
 -7e44-wintitle:inputservermagicword=طلب السماح 
+
 #__________________=Martus Information Management and Data Collection Framework
 -d850-wintitle:main=إطار عمل Martus لإدارة المعلومات والتقاط البيانات
 
 #______________________________=Add Contact
 -d7f5-wintitle:notifyAddContact=إضافة جهة اتصال
 
-#___________________________________________________=Update Contacts access to Records
--4f58-wintitle:notifyAddPermissionsZeroBulletinsOurs=تحديث وصول جهات الاتصال للتسجيلات
+#___________________________________________________=Update Contacts' Access to Records
+-4dba-wintitle:notifyAddPermissionsZeroBulletinsOurs=تحديث وصول جهات الاتصال للتسجيلات
 
 #__________________________________________________________=No Contacts Selected
 -e057-wintitle:notifyAddPermissionsZeroHeadquartersSelected=لم يتم تحديد جهات اتصال

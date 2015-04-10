@@ -2,9 +2,9 @@
 # Language code:  fr
 # Language name:  French
 # Translated by:
-# Exported date:  Sun Mar 15 15:54:02 PDT 2015
+# Exported date:  Fri Apr 10 13:18:02 PDT 2015
 # Client version: pre-5.0.3
-# Client build:   2015-03-13.3506
+# Client build:   2015-04-08.3523
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -437,10 +437,10 @@
 -172d-button:ShowGridNormal=Afficher en grille
 
 #_____________________=Return to image
--a24b-button:ShowImage=<Return to image>
+-a24b-button:ShowImage=Revenir à l’image
 
 #___________________=Show on Map
--0c4b-button:ShowMap=<Show on Map>
+-0c4b-button:ShowMap=Afficher sur la carte
 
 #__________________=Sign In
 -f849-button:SignIn=Connexion
@@ -607,8 +607,8 @@
 #_____________________________=Account Information
 -0cbd-field:AccountInformation=Informations sur le compte
 
-#______________________________________=create a Username
--e8c1-field:AccountUserNameInstructions=créer un nom d'utilisateur
+#______________________________________=create a username
+-a7db-field:AccountUserNameInstructions=créer un nom d'utilisateur
 
 #_________________________________=To send information through Martus to your contacts, pull their public key from the Martus server using their access token. Verify that you have pulled the correct key, by checking their key's public code. Ask your contacts for their access token and public code to add them here. If you do not have this information now, you will be able to add contacts later.
 -70e8-field:AddContactInstructions=Pour envoyer des informations à vos contacts avec Martus, extrayez leurs clés publiques à partir du serveur Martus en utilisant leurs jetons d'accès. Assurez-vous d'avoir extrait la bonne clé en vérifiant le code public de leur clé. Demandez à vos contacts leur jeton d'accès et leur code public afin de les ajouter ici. Si vous n'avez pas ces informations actuellement, vous pourrez ajouter des contacts ultérieurement.
@@ -703,8 +703,8 @@
 #____________________________________________________=Please insert disk #
 -b877-field:BackupRecoverKeyPairInsertNextDiskMessage=Veuillez insérer le disque no
 
-#_______________________________________________=Backup complete, please give each disk to someone you trust, so that if you forget your Username and/or password in the future you can recreate your account.  You will need #MinimumNumberOfFilesNeededForRecovery# of these disks to recreate your account.
--a721-field:BackupSecretShareCompleteInformation=Sauvegarde terminée, veuillez distribuer chaque disque à une personne de confiance, de façon à pouvoir recréer votre compte si vous oubliez votre nom d'utilisateur et/ou votre mot de passe à l'avenir. Il vous faudra #MinimumNumberOfFilesNeededForRecovery# de ces disques pour recréer votre compte.
+#_______________________________________________=Backup complete, please give each disk to someone you trust, so that if you forget your username and/or password in the future you can recreate your account.  You will need #MinimumNumberOfFilesNeededForRecovery# of these disks to recreate your account.
+-0e07-field:BackupSecretShareCompleteInformation=Sauvegarde terminée, veuillez distribuer chaque disque à une personne de confiance, de façon à pouvoir recréer votre compte si vous oubliez votre nom d'utilisateur et/ou votre mot de passe à l'avenir. Il vous faudra #MinimumNumberOfFilesNeededForRecovery# de ces disques pour recréer votre compte.
 
 #________________________=Backup Your Key
 -a49a-field:BackupYourKey=Sauvegardez votre clé
@@ -715,8 +715,8 @@
 #____________________________=Be sure to save a copy of your account key to a secure location that is different from the computer where you currently have Martus installed, so you have it if you need to restore your account.
 -0204-field:BackupYourKeyTip1=Assurez-vous d'enregistrer une copie de la clé de votre compte dans un endroit sécurisé autre que l'ordinateur sur lequel Martus est installé afin de l'avoir si vous devez restaurer votre compte.
 
-#____________________________=Martus also offers a way to back up your key in 3 separate pieces, which is the only way for you to access your Martus account and data if you forget your Username and password. You will be prompted to create the 3 piece backup after completing your account setup and we strongly encourage you to do so.
--5264-field:BackupYourKeyTip2=Martus offre aussi une manière de sauvegarder votre clé en 3 morceaux séparés, la seule façon pour vous de pouvoir accéder à votre compte et à vos données Martus si vous oubliez votre nom d'utilisateur et votre mot de passe. On vous invitera à créer la sauvegarde en trois morceaux après avoir terminé la configuration de votre compte et nous vous encourageons fortement de le faire.
+#____________________________=Martus also offers a way to back up your key in 3 separate pieces, which is the only way for you to access your Martus account and data if you forget your username and password. You will be prompted to create the 3 piece backup after completing your account setup and we strongly encourage you to do so.
+-0943-field:BackupYourKeyTip2=Martus offre aussi une manière de sauvegarder votre clé en 3 morceaux séparés, la seule façon pour vous de pouvoir accéder à votre compte et à vos données Martus si vous oubliez votre nom d'utilisateur et votre mot de passe. On vous invitera à créer la sauvegarde en trois morceaux après avoir terminé la configuration de votre compte et nous vous encourageons fortement de le faire.
 
 #__________________________=Record Details
 -5522-field:BulletinDetails=Détails du bulletin
@@ -934,8 +934,8 @@
 #________________________=Create an Account
 -d48e-field:CreateAccount=Créer un compte
 
-#____________________________________=When creating a Username and password for your account, please be aware there is no way to retrieve your Username and password if you forget it. This is for your safety.
--cafe-field:CreateAccountInstructions=Lors de la création d'un nom d'utilisateur et d'un mot de passe pour votre compte, soyez conscient qu'il n'y a aucune manière de récupérer vos nom d'utilisateur et mot de passe si vous les oubliez. Ceci est pour votre sécurité.
+#____________________________________=When creating a username and password for your account, please be aware there is no way to retrieve your username and password if you forget it. This is for your safety.
+-70db-field:CreateAccountInstructions=Lors de la création d'un nom d'utilisateur et d'un mot de passe pour votre compte, soyez conscient qu'il n'y a aucune manière de récupérer vos nom d'utilisateur et mot de passe si vous les oubliez. Ceci est pour votre sécurité.
 
 #________________________________=Username 
 -f964-field:CreateAccountUserName=Nom d'utilisateur
@@ -953,7 +953,7 @@
 -fa80-field:CreateCustomFieldsHelp3=\n<Field type='SECTION'>\n<Tag>SectionRésumé</Tag>\n<Label>Section du résumé</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>Bureau</Tag>\n<Label>Bureau régional colligeant les données</Label>\n<DefaultValue>Bureau extérieur de la région 3</DefaultValue>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>SourceBulletin</Tag>\n<Label>Source des informations du bulletin</Label>\n<RequiredField/>\n<DefaultValue>Médias/Presse</DefaultValue>\n<Choices>\n<Choice>Médias/Presse</Choice>\n<Choice>Rapport juridique</Choice>\n<Choice>Entrevue personnelle</Choice>\n<Choice>Autre</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>SpécifierAutre</Tag>\n<Label>Si source = « Autre », veuillez spécifier : </Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>NomInterviewé</Tag>\n<Label>Nom de l'interviewé</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>LangueInterviewé</Tag>\n<Label>Langue de l'interviewé</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>DatesEntretien</Tag>\n<Label>Date(s) de l'entretien(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anonyme</Tag>\n<Label>L'interviewé désire-t-il rester anonyme ?</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>InfosSupplémentaires</Tag>\n<Label>L'interviewé accepte-t-il de donner des infos supplémentaires si besoin est ?</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Témoigner</Tag>\n<Label>L'interviewé est-il prêt à témoigner ?</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>LieuÉvénement</Tag>\n<Label>Lieu de l'événement</Label>\n<DefaultValue>R1</DefaultValue>\n<UseReusableChoices code='ChoixRégion'>\n</UseReusableChoices>\n<UseReusableChoices code='ChoixVille'>\n</UseReusableChoices>\n</Field>\n\n<Field type='SECTION'>\n<Tag>SectionPersonne</Tag>\n<Label>Section sur la personne</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>GrilleInformationsVictime</Tag>\n<Label>Informations sur la victime</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>Prénom</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Nom de famille</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>Est identifié ?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Date de naissance</Label><MinimumDate>1910-01-01</MinimumDate><MaximumDate/></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Genre</Label><RequiredField/>\n<Choices>\n<Choice>Homme</Choice>\n<Choice>Femme</Choice>\n<Choice>Inconnu</Choice>\n</Choices></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Région de naissance</Label>\n<UseReusableChoices code='ChoixRégion'>\n</UseReusableChoices></Column>\n<Column type='STRING'><Tag></Tag><Label>Ethnicité</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MessageProfession</Tag>\n<Label>Note du tableau de l'historique professionnel</Label>\n<Message>Si vous avez des informations concernant une personne ayant eu différentes professions au fil des années, saisissez plusieurs lignes avec les mêmes prénom et nom de famille, et montrez la plage de dates pour chaque profession sur une ligne séparée.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>GrilleHistoriqueProfessionnel</Tag>\n<Label>Historique Professionnel</Label>\n<GridSpecDetails>\n<Column type='DROPDOWN'><Tag></Tag><Label>Prénom</Label>\n<DataSource>\n<GridFieldTag>GrilleInformationsVictime</GridFieldTag>\n<GridColumnLabel>Prénom</GridColumnLabel>\n</DataSource>\n</Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Nom de famille</Label>\n<DataSource>\n<GridFieldTag>GrilleInformationsVictime</GridFieldTag>\n <GridColumnLabel>Nom de famille</GridColumnLabel>\n</DataSource>\n</Column>\n<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Dates de la profession</Label><MaximumDate/></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MULTILINE'>\n<Tag>Descriptif</Tag>\n<Label>Texte descriptif des événements</Label>\n<DefaultValue>Voici ce qu'il s'est passé en détails : </DefaultValue>\n</Field>\n\n\n<ReusableChoices code='ChoixRégion' label='Région'>\n<Choice code='R1' label='Région 1'></Choice>\n<Choice code='R2' label='Région 2'></Choice>\n<Choice code='R3' label='Région 3'></Choice>\n</ReusableChoices>\n\n<ReusableChoices code='ChoixVille' label='Ville'>\n<Choice code='R1.C1' label='Ville 1'></Choice>\n<Choice code='R1.C2' label='Ville 2'></Choice>\n<Choice code='R2.C3' label='Ville 3'></Choice>\n<Choice code='R2.C4' label='Ville 4'></Choice>\n<Choice code='R3.C5' label='Ville 5'></Choice>\n<Choice code='R3.C6' label='Ville 6'></Choice>\n</ReusableChoices>
 
 #___________________________=Want to create a new Martus account?  Click here.
--3373-field:CreateNewAccount=<Want to create a new Martus account?  Click here.>
+-3373-field:CreateNewAccount=Pour créer un nouveau compte, cliquez ici. 
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=Veuillez saisir vos nouveaux nom d'utilisateur et mot de passe.
@@ -1055,7 +1055,7 @@
 -0a0f-field:DisplayableDefaultFormTemplateName=Champs standards de Martus
 
 #____________________________________=Do not show this message again during this session
--4f4f-field:DoNotShowAgainThisSession=<Do not show this message again during this session>
+-4f4f-field:DoNotShowAgainThisSession=Ne pas afficher ce message encore Durant cette session
 
 #___________________=Download
 -a479-field:Download=Télécharger 
@@ -1237,8 +1237,8 @@
 #_______________=From 
 -6e9b-field:From=De
 
-#______________________________________=This file name should be unique and identifiable to you but we recommend not using your Username.  Each file will be generated with this name and its number sequence.
--4753-field:GetShareFileNameDescription=Le nom de ce fichier devrait être unique et être identifiable par vous, mais nous vous recommandons de ne pas utiliser votre nom d'utilisateur. Chaque fichier sera généré avec ce nom et sa séquence numérique.
+#______________________________________=This file name should be unique and identifiable to you but we recommend not using your username.  Each file will be generated with this name and its number sequence.
+-2b46-field:GetShareFileNameDescription=Le nom de ce fichier devrait être unique et être identifiable par vous, mais nous vous recommandons de ne pas utiliser votre nom d'utilisateur. Chaque fichier sera généré avec ce nom et sa séquence numérique.
 
 #___________________________________=Getting server information
 -90d2-field:GettingServerInformation=Obtention des informations du serveur
@@ -1414,8 +1414,8 @@
 #______________________________=[no title]
 -6e34-field:NoFormTemplateTitle=[aucun titre]
 
-#__________________________=No Contact accounts selected for this bulletin.
--0255-field:NoHQsConfigured=Aucun compte de contact sélectionné pour ce bulletin
+#__________________________=No Contact accounts selected for this record.
+-42a3-field:NoHQsConfigured=Aucun compte de contact sélectionné pour ce bulletin.
 
 #___________________________________________=Server Not Available
 -c79c-field:NoServerAvailableProgressMessage=Serveur non disponible
@@ -1436,7 +1436,7 @@
 -7d03-field:NotAuthorizedToViewPrivate=L'auteur ne vous a pas donné la permission de visualiser ce bulletin.
 
 #_______________________=(n/a)
--4448-field:NotAvailable=<(n/a)>
+-4448-field:NotAvailable=(n/a)
 
 #____________________=(none)
 -3c6b-field:NotSorted=(aucun)
@@ -1465,8 +1465,8 @@
 #_______________________________=create a password
 -b61b-field:PasswordInstructions=créer un mot de passe
 
-#_______________________=- Do not use your Username
--bcd7-field:PasswordTip1=- N'utilisez pas votre nom d'utilisateur
+#_______________________=- Do not use your username
+-c7eb-field:PasswordTip1=- N'utilisez pas votre nom d'utilisateur
 
 #_______________________=- Do not use a single dictionary word
 -6002-field:PasswordTip2=- N'utilisez pas un mot seul du dictionnaire
@@ -1603,32 +1603,14 @@
 #______________________________=Print Summary Counts Only
 -9ca4-field:ReportSummariesOnly=Imprimer uniquement le résumé chiffré
 
-#__________________________________________=Retrieving Draft Records from Contacts
--21da-field:RetrieveHQDraftBulletinProgress=Extraction des brouillons de bulletins à partir des contacts
-
-#___________________________________________=Retrieving Draft Record Summaries from Contacts
--6a1c-field:RetrieveHQDraftBulletinSummaries=Extraction des résumés de brouillons de bulletins à partir des contacts
-
-#___________________________________________=Retrieving Sealed Records from Contacts
--450a-field:RetrieveHQSealedBulletinProgress=Extraction des bulletins protégés à partir des contacts
-
-#____________________________________________=Retrieving Sealed Record Summaries from Contacts
--4db2-field:RetrieveHQSealedBulletinSummaries=Extraction des résumés de bulletins protégés à partir des contacts
-
 #__________________________________________=Retrieving My Draft Records
 -d4d4-field:RetrieveMyDraftBulletinProgress=Extraction de mes brouillons de bulletins
 
-#___________________________________________=Retrieving My Draft Record Summaries
--bb3c-field:RetrieveMyDraftBulletinSummaries=Extraction des résumés de Mes brouillons de bulletins
-
-#___________________________________________=Retrieving My Sealed Records
--cd62-field:RetrieveMySealedBulletinProgress=Extraction de Mes bulletins protégés
-
-#____________________________________________=Retrieving My Sealed Record Summaries
--35bc-field:RetrieveMySealedBulletinSummaries=Extraction des résumés de Mes bulletins protégés
-
 #___________________________________=All records retrieved will still remain on the server.\nYou can only retrieve records that are not currently on your computer.
 -8f98-field:RetrieveSummariesMessage=Tous les bulletins extraits seront conservés sur le serveur.\nVous pouvez seulement extraire les bulletins ne se trouvant pas présentement sur votre ordinateur.
+
+#______________________________________________=Please wait while we retrieve records from the server.
+-e267-field:RetrievingRecordSummariesFromServer=Veuillez attendre le téléchargement des bulletins depuis le serveur.
 
 #____________________________________=Please retype your username and password for verification.
 -67cd-field:RetypeUserNameAndPassword=Veuillez saisir votre nom d'utilisateur et votre mot de passe de nouveau pour vérification.
@@ -1915,14 +1897,14 @@
 #_____________________________________=Username and password match!
 -7dc3-field:UserNameAndPasswordMatches=Le nom d'utilisateur et le mot de passe correspondent !
 
-#_______________________=- Your Username can contain letters, numbers, punctuation and spaces.
--f047-field:UserNameTip1=- Votre nom d'utilisateur peut contenir des lettres, des nombres, de la ponctuation et des espaces.
+#_______________________=- Your username can contain letters, numbers, punctuation and spaces.
+-1bce-field:UserNameTip1=- Votre nom d'utilisateur peut contenir des lettres, des nombres, de la ponctuation et des espaces.
 
 #_______________________=- It should have between 8-50 characters, and it is case sensitive.
 -3180-field:UserNameTip2=- Il devrait contenir entre 8-50 caractères et est sensible à la casse.
 
-#_______________________=- Remember to choose a Username you can remember.
--c6f9-field:UserNameTip3=- Souvenez-vous de choisir un nom d'utilisateur dont vous vous souviendrez.
+#_______________________=- Remember to choose a username you can remember.
+-ba3e-field:UserNameTip3=- Souvenez-vous de choisir un nom d'utilisateur dont vous vous souviendrez.
 
 #_______________________=Username Tips:
 -c1b3-field:UserNameTips=Suggestions sur les noms d'utilisateur : 
@@ -2050,8 +2032,8 @@
 #___________________=Sent
 -35f4-field:_wasSent=Envoyé
 
-#____________________________=Built on
--5342-field:aboutDlgBuildDate=Construit le
+#____________________________=Built on:
+-179a-field:aboutDlgBuildDate=Construit le :
 
 #__________________________=Martus Software is developed by Benetech in partnership with the Information Program of the Open Society Institute, Aspiration, and the John D. and Catherine T. MacArthur Foundation.
 -3033-field:aboutDlgCredits=Les logiciels Martus sont développés par Benetech en partenariat avec le programme d'Informations de l'« Open Society Institute », Aspiration et la fondation John D. et Catherine T. MacArthur.
@@ -2065,11 +2047,11 @@
 #_____________________________=This product includes software developed by the Apache Software Foundation, Bouncy Castle, IBM, JH Labs, JOrtho, JUnit, The Mozilla Foundation, Logi Ragnarsson, Object Refinery Limited, and Subgraph [Orchid].
 -f246-field:aboutDlgThirdParty=Ce produit inclut des logiciels développés par la Fondation des logiciels Apache (Apache Software Foundation), Bouncy Castle, IBM, JH Labs, JOrtho, JUnit, la Fondation Mozilla (Mozilla Foundation), Logi Ragnarsson, Object Refinery Limited et Subgraph [Orchid].
 
-#_________________________________________=Translation version
--ba67-field:aboutDlgTranslationVersionInfo=Version de la traduction
+#_________________________________________=Translation version:
+-d3a5-field:aboutDlgTranslationVersionInfo=Version de la traduction :
 
-#______________________________=software version
--f2cc-field:aboutDlgVersionInfo=version du logiciel
+#______________________________=software version:
+-6286-field:aboutDlgVersionInfo=version du logiciel :
 
 #__________________=Mailing Address 
 -5a7a-field:address=Adresse postale
@@ -2299,6 +2281,12 @@
 #_____________________________________________=Any selected records that are already sealed will remain unchanged.
 -2f3b-field:confirmSealSelectedBulletinseffect=Tout bulletin sélectionné étant déjà protégé restera inchangé.
 
+#___________________________________________=The search in progress will be stopped immediately.
+-c6a2-field:confirmSearchProgressCancelcause=La recherché en cours sera arrêtée immédiatement.
+
+#____________________________________________=If you do this, the Search Results will only contain records that have been found so far.
+-c3e4-field:confirmSearchProgressCanceleffect=Si vous faites cela, les résultats de la recherché ne vont contenir que les bulletins retrouvés auparavant.
+
 #_____________________________________________=Martus software is unable to determine whether this server complies with the official guidelines for operating a secure and reliable Martus server.
 -ab16-field:confirmServerComplianceFailedcause=Le logiciel Martus est incapable de déterminer si ce serveur est conforme aux directives officielles de sécurité et de fiabilité d'exploitation d'un serveur Martus.
 
@@ -2306,10 +2294,10 @@
 -8731-field:confirmServerComplianceFailedeffect=Benetech recommande que vous n'utilisiez pas ce serveur tant qu'une déclaration de conformité que vous puissiez lire ne soit proposée. Si vous poursuivez, ce serveur non-conforme sera quand même sélectionné.
 
 #___________________________________________=Tor is enabled, but requesting a map will bypass it.
--3cf3-field:confirmShowOnMapBypassesTorcause=<Tor is enabled, but requesting a map will bypass it.>
+-3cf3-field:confirmShowOnMapBypassesTorcause=Tor est active, néanmoins demander une carte le contournera.
 
 #____________________________________________=If you continue, anyone monitoring you could see your map request.
--70bd-field:confirmShowOnMapBypassesToreffect=<If you continue, anyone monitoring you could see your map request.>
+-70bd-field:confirmShowOnMapBypassesToreffect=Si vous continuez, n’importe quell person qui surveille votre activité pourra voir votre requite de carte.
 
 #__________________________________________________________=The record entitled "#Title#" already exists in this system.  Do you wish to delete the old record and replace it with this record?
 -d374-field:confirmUnAuthoredBulletinDeleteBeforePastecause=Le bulletin intitulé « #Title# » existe déjà sur ce système. Voulez-vous supprimer l'ancien bulletin et le remplacer par celui-ci ?
@@ -2383,8 +2371,8 @@
 #___________________________________=You have chosen to permanently delete a folder.  
 -76fa-field:confirmdeletefoldercause=Vous avez choisi de supprimer définitivement un dossier.
 
-#____________________________________=Any records in the folder will be moved to Discarded Records.  
--fccf-field:confirmdeletefoldereffect=Tout bulletin dans le dossier sera déplacé vers Bulletins rejetés.
+#____________________________________=Any records in the folder will be moved to Trash.  
+-d3bf-field:confirmdeletefoldereffect=Tout bulletin dans le dossier sera déplacé vers Corbeille.
 
 #______________________________________________=If you lose your key, and you do not have a copy, you will not be able to open any of your records.
 -e655-field:confirmgeneralBackupKeyPairMsgcause=Si vous perdez votre clé et que vous n'avez pas de copie, vous ne pourrez ouvrir aucun de vos bulletins.
@@ -2633,7 +2621,7 @@
 -6e61-field:notifyErrorSavingTemplateToServercause=Erreur inattendue lors de l'enregistrement du modèle sur le serveur.
 
 #___________________________________________=The request was unsuccessful, due to a network error.
--8242-field:notifyErrorServerConnectioncause=<The request was unsuccessful, due to a network error.>
+-8242-field:notifyErrorServerConnectioncause=La requite a échoué, due à une erreur réseau.
 
 #________________________________________=Unable to connect to the server.
 -595b-field:notifyErrorServerOfflinecause=Impossible de se connecter au serveur.
@@ -2743,8 +2731,8 @@
 #_________________________________________=The file does not contain valid public information.
 -f5b5-field:notifyPublicInfoFileErrorcause=Le fichier ne contient aucune information publique valide.
 
-#___________________________________________________________________________=Key restore succeeded!  You now have to enter a Username and password.
--08d1-field:notifyRecoveredKeyShareSucceededNewUserNamePasswordRequiredcause=Restauration de la clé réussie ! Vous devez maintenant saisir un nom d'utilisateur et un mot de passe.
+#___________________________________________________________________________=Key restore succeeded!  You now have to enter a username and password.
+-8808-field:notifyRecoveredKeyShareSucceededNewUserNamePasswordRequiredcause=Restauration de la clé réussie ! Vous devez maintenant saisir un nom d'utilisateur et un mot de passe.
 
 #_______________________________________________=Key restore is complete, you will now be logged into Martus.
 -efa0-field:notifyRecoveryOfKeyPairCompletecause=Restauration de la clé terminée. Vous allez maintenant être connecté à Martus.
@@ -2752,8 +2740,8 @@
 #________________________________________________=You have successfully restored your key from your backup files.  It is very important that you now re-distribute your backup files.  We also recommend you backup your key as a single password-encrypted file, though you do not need to recreate the multiple file backup.
 -f50c-field:notifyRecoveryOfKeyShareCompletecause=Vous avez restauré votre clé avec succès à partir de vos fichiers de sauvegarde. Il est très important de redistribuer maintenant vos fichiers de sauvegarde. Nous vous recommandons aussi de sauvegarder votre clé sous forme de fichier unique chiffré par mot de passe, bien que vous n'ayez pas à recréer la sauvegarde multifichiers.
 
-#_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Account from Key Backup' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your Username and password and restore your key so you can log in normally and access your account.
--e88a-field:notifyRecoveryProcessBackupFilecause=Pour restaurer votre clé, vous devez d'abord trouver le fichier de sauvegarde que vous avez enregistré précédemment. À l'aide de la boîte de dialogue 'Restaurer le compte', trouvez ce fichier sur le disque dur de votre ordinateur, sur un lecteur réseau ou sur un disque amovible, puis cliquez sur le bouton Ouvrir. Martus vous demandera alors votre nom d'utilisateur et votre mot de passe et restaurera votre clé afin que vous puissiez vous connecter normalement et accéder à votre compte.
+#_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Account from Key Backup' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your username and password and restore your key so you can log in normally and access your account.
+-f73b-field:notifyRecoveryProcessBackupFilecause=Pour restaurer votre clé, vous devez d'abord trouver le fichier de sauvegarde que vous avez enregistré précédemment. À l'aide de la boîte de dialogue 'Restaurer le compte à partir de la sauvegarde de clé', trouvez ce fichier sur le disque dur de votre ordinateur, sur un lecteur réseau ou sur un disque amovible, puis cliquez sur le bouton Ouvrir. Martus vous demandera alors votre nom d'utilisateur et votre mot de passe et restaurera votre clé afin que vous puissiez vous connecter normalement et accéder à votre compte.
 
 #_____________________________________________=You will now have to provide #MinimumNumberOfFilesNeededForRecovery# out of the #TotalNumberOfFilesInBackup# files you previously saved when you backed up your key.
 -f571-field:notifyRecoveryProcessKeySharecause=Il vous faut maintenant fournir #MinimumNumberOfFilesNeededForRecovery# des #TotalNumberOfFilesInBackup# fichiers que vous avez enregistrés précédemment lors de la sauvegarde de votre clé.
@@ -2797,8 +2785,8 @@
 #________________________________________________=Errors occurred while retrieving record summaries.  Some of the records on the server will not be shown.
 -dcf0-field:notifyRetrievedOnlySomeSummariescause=Des erreurs sont survenues lors de l'extraction des résumés de bulletins. Certains bulletins sur le serveur ne seront pas montrés.
 
-#__________________________________________=An error occurred.  Unable to change Username or password.  You may need to restore your backup key file.
--cbd8-field:notifyRewriteKeyPairFailedcause=Une erreur est survenue. Impossible de changer le nom d'utilisateur ou le mot de passe. Vous pourriez avoir à restaurer votre fichier de sauvegarde de clé.
+#__________________________________________=An error occurred.  Unable to change username or password.  You may need to restore your backup key file.
+-1a72-field:notifyRewriteKeyPairFailedcause=Une erreur est survenue. Impossible de changer le nom d'utilisateur ou le mot de passe. Vous pourriez avoir à restaurer votre fichier de sauvegarde de clé.
 
 #_________________________________________=Successfully saved your new username and password.
 -0398-field:notifyRewriteKeyPairSavedcause=Vos nouveaux nom d'utilisateur et mot de passe ont été enregistrés avec succès.
@@ -2866,8 +2854,8 @@
 #_________________________________________________________=An error occurred during upload, and the record:'#BulletinTitle#' has not been sent to the server.  You may try and resend the record later.
 -4a05-field:notifyUploadFailedBulletinNotSentToServercause=Une erreur est survenue lors du téléversement et le bulletin '#BulletinTitle#' n’a pas été envoyé au serveur. Vous pourrez essayer de renvoyer ce bulletin plus tard.
 
-#_______________________________________=The Username you chose already exists on this system, please choose a different Username.
--3efd-field:notifyUserAlreadyExistscause=Le nom d'utilisateur que vous avez choisi existe déjà sur ce système. Veuillez choisir un autre nom d'utilisateur.
+#_______________________________________=The username you chose already exists on this system, please choose a different username.
+-ef0a-field:notifyUserAlreadyExistscause=Le nom d'utilisateur que vous avez choisi existe déjà sur ce système. Veuillez choisir un autre nom d'utilisateur.
 
 #___________________________________=Username must not be blank
 -66fb-field:notifyUserNameBlankcause=Le nom d'utilisateur ne doit pas être vide
@@ -2887,8 +2875,8 @@
 #_______________________________________=The configuration file may be corrupted
 -d84d-field:notifycorruptconfiginfocause=Le fichier de configuration pourrait être corrompu
 
-#_____________________________________=Username or Password incorrect
--7b2d-field:notifyincorrectsignincause=Nom d'utilisateur ou mot de passe erroné
+#_____________________________________=Username or password incorrect
+-11b8-field:notifyincorrectsignincause=Nom d'utilisateur ou mot de passe erroné
 
 #_______________________________________=The Server has rejected your request. The magic word is probably not correct.
 -2baa-field:notifymagicwordrejectedcause=Le serveur a refusé votre requête. Le mot magique est probablement erroné.
@@ -2905,8 +2893,8 @@
 #____________________________________=The current Martus Server has refused to accept a record
 -ea98-field:notifyuploadrejectedcause=Le serveur Martus actuel a refusé d'accepter un bulletin
 
-#_________________________________________=Warning: You must enter the same Username you entered on the previous screen.
--0648-field:notifyusernamessdontmatchcause=Avertissement : vous devez saisir le même nom d'utilisateur que sur l'écran précédent.
+#_________________________________________=Warning: You must enter the same username you entered on the previous screen.
+-5754-field:notifyusernamessdontmatchcause=Avertissement : vous devez saisir le même nom d'utilisateur que sur l'écran précédent.
 
 #_______________________=Organization
 -5192-field:organization=Organisation
@@ -2944,6 +2932,9 @@
 #_______________________=Retrieve?
 -460d-field:retrieveflag=Récupérer ?
 
+#_______________________________=secureApp Section
+-a282-field:secureAppDataSection=Section secureApp
+
 #_______________________________________=For security reasons, we must validate your username and password.
 -0381-field:securityServerConfigValidate=Pour des raisons de sécurité, nous devons valider votre nom d'utilisateur et votre mot de passe.
 
@@ -2977,8 +2968,8 @@ field:translationVersion=Français 5.1
 #___________________=Username 
 -f964-field:username=Nom d'utilisateur
 
-#____________________________________=Loading Martus.  Please wait
--32c0-field:waitingForBulletinsToLoad=Chargement de Martus. Veuillez patienter...
+#____________________________________=Loading Martus.  Please wait...
+-4d07-field:waitingForBulletinsToLoad=Chargement de Martus. Veuillez patienter...
 
 #_________________________________________=You have chosen to permanently delete records from the Discarded Records folder. Even if these records were recently cut or copied, you will not be able to paste them. If they have already been sent to a server, they will remain on the server. This action will only delete them from this computer.
 -d398-field:warningDeleteMultipleBulletins=Vous avez choisi de supprimer définitivement les bulletins du dossier Bulletins rejetés. Même si ces bulletins ont été coupés ou copiés récemment, vous ne pourrez plus les coller. S'ils ont déjà été envoyés vers un serveur, ils resteront sur le serveur. Cette action ne les supprimera que de cet ordinateur.
@@ -3005,7 +2996,7 @@ field:translationVersion=Français 5.1
 -a6df-folder:%DamagedBulletins=Bulletins endommagés
 
 #______________________=Trash
--e3bf-folder:%Discarded=Bulletins rejetés
+-e3bf-folder:%Discarded=Corbeille
 
 #__________________=Old Draft Records
 -8f12-folder:%Draft=Anciens brouillons de bulletins
@@ -3022,8 +3013,8 @@ field:translationVersion=Français 5.1
 #_______________________________=Received Records
 -f68a-folder:%RetrievedBulletins=Bulletins reçus
 
-#_________________________________________=Contacts' Sealed Records
--736d-folder:%RetrievedFieldOfficeBulletin=Bulletins protégés des contacts
+#_________________________________________=Field Desk Records
+-6a28-folder:%RetrievedFieldOfficeBulletin=Bulletins protégés des contacts
 
 #______________________________________________=Contacts' Draft Records
 -3278-folder:%RetrievedFieldOfficeBulletinDraft=Brouillons de bulletins des contacts
@@ -3259,9 +3250,6 @@ field:translationVersion=Français 5.1
 #______________________=Delete Folder
 -2880-menu:DeleteFolder=Supprimer le dossier
 
-#______________________________=Delete My Drafts From Server
--b43a-menu:DeleteMyServerDrafts=Supprimer mes brouillons du serveur
-
 #__________________________=Discard Record(s)
 -9d87-menu:DiscardBulletins=Rejeter le/les bulletin(s)
 
@@ -3312,18 +3300,6 @@ field:translationVersion=Français 5.1
 
 #_________________________=Resend Record(s)
 -2816-menu:ResendBulletins=Renvoyer un/des bulletin(s)
-
-#__________________________________=Retrieve Draft Records from My Contacts
--f94d-menu:RetrieveHQDraftBulletins=Extraire les brouillons de bulletins de mes contacts
-
-#___________________________________=Retrieve Sealed Records from My Contacts
--9eda-menu:RetrieveHQSealedBulletins=Extraire les bulletins protégés de mes contacts
-
-#___________________________________=Retrieve My Draft Records
--216e-menu:RetrieveMyDraftsBulletins=Extraire mes brouillons de bulletins
-
-#___________________________________=Retrieve My Sealed Records
--6e78-menu:RetrieveMySealedBulletins=Extraire mes bulletins protégés
 
 #_______________________________=Seal Record(s)
 -2b85-menu:SealSelectedBulletins=Protéger un/des bulletin(s)
@@ -3608,10 +3584,10 @@ field:translationVersion=Français 5.1
 -bce0-tooltip:QuickSearch=Rechercher
 
 #_______________________________=Server OFF: Click to turn Server on
--4ca5-tooltip:ServerCurrentlyOff=<Server OFF: Click to turn Server on>
+-4ca5-tooltip:ServerCurrentlyOff=Serveur INACTIF : cliquer pour l’activer
 
 #______________________________=Server ON: Click to turn Server off
--534c-tooltip:ServerCurrentlyOn=<Server ON: Click to turn Server off>
+-534c-tooltip:ServerCurrentlyOn=Serveur ACTIF : cliquer pour le désactiver
 
 #_______________________=Sync Manager
 -9979-tooltip:ServerSync=Gestionnaire de synchro
@@ -3625,14 +3601,11 @@ field:translationVersion=Français 5.1
 #______________________=Template Manager
 -3fe3-tooltip:Templates=Gestionnaire de modèles
 
-#____________________________=Tor:OFF, Click to turn Tor on
--f8b7-tooltip:TorCurrentlyOff=<Tor:OFF, Click to turn Tor on>
+#____________________________=Tor OFF: Click to turn Tor on
+-ab26-tooltip:TorCurrentlyOff=Tor INACTIF : cliquer pour l’activer
 
-#___________________________=Tor:ON, Click to turn Tor off
--b37e-tooltip:TorCurrentlyOn=<Tor:ON, Click to turn Tor off>
-
-#__________________=Click to turn Tor off
--ada6-tooltip:TorOn=<Click to turn Tor off>
+#___________________________=Tor ON: Click to turn Tor off
+-20f7-tooltip:TorCurrentlyOn=Tor ACTIF : cliquer pour le désactiver
 
 #____________________________=Update your contacts' access to Records
 -bc61-wintitle:AddPermissions=Mettre à jour l'accès de vos contacts à vos bulletins
@@ -3715,9 +3688,6 @@ field:translationVersion=Français 5.1
 #__________________________________________=Delete My Data From This Computer
 -216c-wintitle:DeleteMyDataFromThisComputer=Supprimer mes données de cet ordinateur
 
-#______________________________________=Delete My Drafts From Server
--b43a-wintitle:DeleteMyDraftsFromServer=Supprimer mes brouillons du serveur
-
 #_____________________=Details
 -dc3d-wintitle:Details=Détails
 
@@ -3796,6 +3766,9 @@ field:translationVersion=Français 5.1
 #______________________________________=Import Form Template
 -2f11-wintitle:FileDialogImportTemplate= Importer des modèles
 
+#___________________________________=Print to File
+-4549-wintitle:FileDialogPrintToFile=Imprimer dans un fichier
+
 #____________________________________________=Restore Account from Key Backup
 -428a-wintitle:FileDialogRecoverSharedKeyPair=Restaurer le compte à partir de la sauvegarde de clé
 
@@ -3808,11 +3781,14 @@ field:translationVersion=Français 5.1
 #___________________________________=Backup Key File
 -2ba4-wintitle:FileDialogSaveKeyPair=Sauvegarder le fichier de clé
 
+#________________________________________=Save Report Format
+-ca8a-wintitle:FileDialogSaveReportFormat=Sauvegarder le format du rapport
+
 #__________________________________=Save Search
 -1340-wintitle:FileDialogSaveSearch=Engregistrer recherche 
 
 #____________________________________=Run Report
--884c-wintitle:FileDialogSelectReport=<Run Report>
+-884c-wintitle:FileDialogSelectReport=Démarrer le rapport
 
 #__________________________________=Export Records to which file?
 -ff53-wintitle:FileSaveDialogExport=Exporter les bulletins vers quel fichier ?
@@ -3904,17 +3880,11 @@ field:translationVersion=Français 5.1
 #______________________________________________=Retrieving Record Summaries
 -84e6-wintitle:RetrieveHQDraftBulletinSummaries=Extraction des résumés de bulletins
 
-#______________________________________=Retrieve Draft Records from My Contacts
--f94d-wintitle:RetrieveHQDraftBulletins=Extraire les brouillons de bulletins de mes contacts
-
 #______________________________________________=Retrieving Records
 -4083-wintitle:RetrieveHQSealedBulletinProgress=Extractions des bulletins
 
 #_______________________________________________=Retrieving Record Summaries
 -84e6-wintitle:RetrieveHQSealedBulletinSummaries=Extraction des résumés de bulletins
-
-#_______________________________________=Retrieve Sealed Records from My Contacts
--9eda-wintitle:RetrieveHQSealedBulletins=Extraire les bulletins protégés de mes contacts
 
 #_____________________________________________=Retrieving Records
 -4083-wintitle:RetrieveMyDraftBulletinProgress=Extractions des bulletins
@@ -3922,17 +3892,11 @@ field:translationVersion=Français 5.1
 #______________________________________________=Retrieving Record Summaries
 -84e6-wintitle:RetrieveMyDraftBulletinSummaries=Extraction des résumés de bulletins
 
-#______________________________________=Retrieve My Draft Records
--216e-wintitle:RetrieveMyDraftBulletins=Extraire mes brouillons de bulletins
-
 #______________________________________________=Retrieving Records
 -4083-wintitle:RetrieveMySealedBulletinProgress=Extractions des bulletins
 
 #_______________________________________________=Retrieving Record Summaries
 -84e6-wintitle:RetrieveMySealedBulletinSummaries=Extraction des résumés de bulletins
-
-#_______________________________________=Retrieve My Sealed Records
--6e78-wintitle:RetrieveMySealedBulletins=Extraire mes bulletins protégés
 
 #_______________________________=Reports
 -88bc-wintitle:RunOrCreateReport=Rapports
@@ -4090,11 +4054,14 @@ field:translationVersion=Français 5.1
 #__________________________________________=Seal Records
 -b07e-wintitle:confirmSealSelectedBulletins=Protéger les bulletins
 
+#_________________________________________=Cancel Search
+-5109-wintitle:confirmSearchProgressCancel=Annuler la recherche
+
 #___________________________________________=Server Compliance Statement
 -20f8-wintitle:confirmServerComplianceFailed=Déclaration de conformité du serveur
 
 #_________________________________________=Show On Map
--c052-wintitle:confirmShowOnMapBypassesTor=<Show On Map>
+-c052-wintitle:confirmShowOnMapBypassesTor=Afficher sur la carte
 
 #________________________________________________________=Record Already Exists
 -c883-wintitle:confirmUnAuthoredBulletinDeleteBeforePaste=Le bulletin existe déjà
@@ -4159,8 +4126,8 @@ field:translationVersion=Français 5.1
 #______________________________=Add Contact
 -d7f5-wintitle:notifyAddContact=Ajouter un contact
 
-#___________________________________________________=Update Contacts Access to Records
--a9fa-wintitle:notifyAddPermissionsZeroBulletinsOurs=Mettre à jour l'accès des contacts aux bulletins
+#___________________________________________________=Update Contacts' Access to Records
+-4dba-wintitle:notifyAddPermissionsZeroBulletinsOurs=Mettre à jour l'accès des contacts aux bulletins
 
 #__________________________________________________________=No Contacts Selected
 -e057-wintitle:notifyAddPermissionsZeroHeadquartersSelected=Aucun contact choisi
