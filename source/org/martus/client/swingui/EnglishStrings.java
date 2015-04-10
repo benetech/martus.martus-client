@@ -45,6 +45,7 @@ public class EnglishStrings
 "wintitle:DuplicateLabelsInCustomTemplate=Warning: Duplicate Labels Found",
 "wintitle:ImportProgress=Importing Records",
 "wintitle:ExportProgress=Exporting Records",
+"wintitle:FileDialogExportPublicKey=Export Public Account ID",
 
 // NOTE: With confirm is for swing; without is for javafx
 "wintitle:confirmsend=Confirm Save Record",
