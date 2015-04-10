@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.core;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -178,7 +179,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithOneStringInputFieldXmlAsString());
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithOneStringInputFieldXmlAsString());
 		fxBulletin.copyDataFromBulletin(bulletin, store);
-		assertEquals("FxBulletin filled from bulletin with data should have data?", getExpectedFieldCount(1), fxBulletin.getFieldSpecs().size());
+		assertEquals("FxBulletin filled from bulletin with data should have data?", getExpectedFieldCountWithNoSections(1), fxBulletin.getFieldSpecs().size());
 		
 		String TAG = "name";
 		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag(TAG);
@@ -225,7 +226,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithOneChoiceInputFieldXmlAsString());
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithOneChoiceInputFieldXmlAsString());
 		fxBulletin.copyDataFromBulletin(bulletin, store);
-		verifyFieldSpecCount(fxBulletin, getExpectedFieldCount(1));
+		verifyFieldSpecCount(fxBulletin, getExpectedFieldCountWithNoSections(1));
 
 		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag(DROPDOWN_FIELD_TAG);
 		verifyDropDownFieldSpecCreatedFromXFormsData(fieldSpec);
@@ -242,7 +243,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithIntegerFieldXmlAsString());
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithIntegerFieldXmlAsString());
 		fxBulletin.copyDataFromBulletin(bulletin, store);
-		assertEquals("FxBulletin filled from bulletin with data should have data?", getExpectedFieldCount(1), fxBulletin.getFieldSpecs().size());
+		assertEquals("FxBulletin filled from bulletin with data should have data?", getExpectedFieldCountWithSections(1, 1), fxBulletin.getFieldSpecs().size());
 		
 		String TAG = "age";
 		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag(TAG);
@@ -298,7 +299,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithDateInputField());
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithDateInputField());
 		fxBulletin.copyDataFromBulletin(bulletin, store);
-		assertEquals("FxBulletin filled from bulletin with data should have date field?", getExpectedFieldCount(1), fxBulletin.getFieldSpecs().size());
+		assertEquals("FxBulletin filled from bulletin with data should have date field?", getExpectedFieldCountWithNoSections(1), fxBulletin.getFieldSpecs().size());
 		
 		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag("date");
 		assertTrue("Incorrect field type?", fieldSpec.getType().isDate());
@@ -313,6 +314,28 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		verifyBooleanFieldConversion(getXFormsInstanceWithSingleItemChoiceListAsFalseBoolean(), FieldSpec.FALSESTRING);
 		verifyBooleanFieldConversion(getXFormsInstanceWithSingleItemChoiceListAsNoValueBoolean(), FieldSpec.FALSESTRING);
 	}
+	
+	public void testXFormGroupsAsSections() throws Exception
+	{
+		//TODO test xforms with least 2 groups
+		Bulletin bulletin = new Bulletin(security);
+		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithSingleItemChoiceListAsBoolean());
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithSingleItemChoiceListAsTrueBoolean());
+
+		FxBulletin fxBulletin = new FxBulletin(getLocalization());
+		fxBulletin.copyDataFromBulletin(bulletin, store);
+		Vector<FieldSpec> specs = fxBulletin.getFieldSpecs();
+		for (Iterator iterator = specs.iterator(); iterator.hasNext();)
+		{
+			FieldSpec fieldSpec = (FieldSpec) iterator.next();
+			if(fieldSpec.getType().isSectionStart())
+			{
+				assertEquals("Not XForms Section Label?", SECTION_LABEL, fieldSpec.getLabel());
+				return;
+			}
+		}
+		fail("Didn't find any Sections?");
+	}
 
 	private void verifyBooleanFieldConversion(String xFormsInstance, String expectedBooleanValue) throws Exception
 	{
@@ -322,7 +345,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithSingleItemChoiceListAsBoolean());
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(xFormsInstance);
 		fxBulletin.copyDataFromBulletin(bulletin, store);
-		assertEquals("FxBulletin filled from bulletin with data should have date field?", getExpectedFieldCount(1), fxBulletin.getFieldSpecs().size());
+		assertEquals("FxBulletin filled from bulletin with data should have date field?", getExpectedFieldCountWithSections(1, 1), fxBulletin.getFieldSpecs().size());
 		
 		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag("anonymous");
 		assertTrue("Incorrect field type?", fieldSpec.getType().isBoolean());
@@ -331,14 +354,17 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		assertEquals("Incorrect date?", expectedBooleanValue, dateField.getValue());
 	}
 
-	private int getExpectedFieldCount(int expectedFieldsConverted)
+	private int getExpectedFieldCountWithNoSections(int expectedFieldsConverted)
 	{
-		final int TOP_SECTION_DEFAULT_FIELD_COUNT = StandardFieldSpecs.getDefaultTopSectionFieldSpecs().size();
-		final int TOTAL_SECTION_FIELDS = 1;
-		
-		return TOP_SECTION_DEFAULT_FIELD_COUNT + TOTAL_SECTION_FIELDS + expectedFieldsConverted;
+		return getExpectedFieldCountWithSections(expectedFieldsConverted, 0);
 	}
 	
+	private int getExpectedFieldCountWithSections(int expectedFieldsConverted, int expectedSections)
+	{
+		final int TOP_SECTION_DEFAULT_FIELD_COUNT = StandardFieldSpecs.getDefaultTopSectionFieldSpecs().size();
+		return TOP_SECTION_DEFAULT_FIELD_COUNT + expectedSections + expectedFieldsConverted;
+	}
+
 	public void testFxBulletinWithXFormsRepeatField() throws Exception
 	{
 		FxBulletin fxBulletin = new FxBulletin(getLocalization());
@@ -348,7 +374,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithRepeats());
 		fxBulletin.copyDataFromBulletin(bulletin, store);
 		Vector<FieldSpec> fieldSpecs = fxBulletin.getFieldSpecs();
-		assertEquals("FxBulletin filled from bulletin with data should have grid field?", getExpectedFieldCount(1), fieldSpecs.size());
+		assertEquals("FxBulletin filled from bulletin with data should have grid field?", getExpectedFieldCountWithNoSections(1), fieldSpecs.size());
 		
 		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag("/nm/victim_information");
 		verifyGridFieldSpec(fieldSpec);
@@ -605,6 +631,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 				"</nm>";
 	}
 	
+	private static final String SECTION_LABEL = "Section 4 (Check boxes)";
 	private static String getXFormsModelWithSingleItemChoiceListAsBoolean()
 	{
 		return "<h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
@@ -621,7 +648,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 			    "</h:head>" +
 			    "<h:body>" +
 			        "<group appearance=\"field-list\" >" +
-			            "<label>Section 4 (Check boxes)</label>" +
+			            "<label>"+SECTION_LABEL+"</label>" +
 			            "<select ref=\"anonymous\" >" +
 			                "<label>Does interviewee wish to remain anonymous?</label>" +
 			                "<item>" +
