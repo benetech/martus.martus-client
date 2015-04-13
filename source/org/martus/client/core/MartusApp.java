@@ -1797,7 +1797,7 @@ public class MartusApp
 			{
 				Bulletin b = store.getBulletinRevision((UniversalId)allRevisions.get(j));
 				if(b.containsXFormsData())
-					b = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(getLocalization(), b);
+					b = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(b);
 				++revisionsSearched;
 				if(b != null && matcher.doesMatch(new SafeReadableBulletin(b, localization), localization))
 				{

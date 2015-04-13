@@ -96,7 +96,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getEmptyXFormsInstanceXmlAsString());
 		fillStandardFieldsWithRandomValues(bulletin, someStandardFieldSpecs);
 		
-		bulletin = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(getLocalization(), bulletin);
+		bulletin = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(bulletin);
 		FieldSpecCollection topSectionFieldSpecsWithoutSections = stripAllSectionFields(bulletin.getTopSectionFieldSpecs());
 		assertEquals("Default fields were changed after loading from xforms?", someStandardFieldSpecs.size(), topSectionFieldSpecsWithoutSections.size());
 		assertNotEquals("Some Default fields equalled the total # of default possible fields?", StandardFieldSpecs.getDefaultTopSectionFieldSpecs().size(), topSectionFieldSpecsWithoutSections.size());
@@ -111,7 +111,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		bulletin.getFieldDataPacket().setXFormsModelAsString(getEmptyXFormsModelXmlAsString());
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getEmptyXFormsInstanceXmlAsString());
 		
-		bulletin = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(getLocalization(), bulletin);
+		bulletin = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(bulletin);
 		FieldSpecCollection topSectionFieldSpecsWithoutSections = stripAllSectionFields(bulletin.getTopSectionFieldSpecs());
 		assertEquals("Default fields were changed after loading from xforms?", defaultTopSectionFieldSpecs.size(), topSectionFieldSpecsWithoutSections.size());
 	}
@@ -124,7 +124,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		
 		bulletin.getFieldDataPacket().setXFormsModelAsString(getEmptyXFormsModelXmlAsString());
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getEmptyXFormsInstanceXmlAsString());
-		bulletin = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(getLocalization(), bulletin);
+		bulletin = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(bulletin);
 		FieldSpecCollection topSectionFieldSpecsWithoutSections = stripAllSectionFields(bulletin.getTopSectionFieldSpecs());
 		assertEquals("Default fields were changed after loading from xforms?", standardFieldSpecs.size(), topSectionFieldSpecsWithoutSections.size());
 		
