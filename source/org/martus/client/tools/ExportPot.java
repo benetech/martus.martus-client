@@ -44,15 +44,18 @@ public class ExportPot
 {
 	public static void main(String[] args) throws Exception
 	{
-		System.err.println("Usage: ExportPot <filename.pot>");
 		if(args.length == 0)
 		{
+			System.err.println("Usage: ExportPot <filename.pot>");
 			System.exit(1);
 		}
 			
-		PrintStream out = new PrintStream(new File(args[0]));
-		
+		PrintStream out = new PrintStream(new File(args[0]), "UTF-8");
 		new ExportPot().exportPot(out);
+		out.flush();
+		out.close();
+		
+		System.out.println("Done.");
 	}
 
 	public ExportPot() throws Exception
