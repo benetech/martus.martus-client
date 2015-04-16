@@ -164,6 +164,8 @@ public class FxBulletinEditorShellController extends FxNonWizardShellController 
 	@Override
 	public boolean isBulletinModified() throws Exception
 	{
+		if(fxBulletin == null)
+			return false;
 		return fxBulletin.hasBeenModified();
 	}
 
