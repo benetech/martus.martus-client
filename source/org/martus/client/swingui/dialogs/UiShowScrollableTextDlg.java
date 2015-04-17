@@ -66,6 +66,7 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 	public UiShowScrollableTextDlg(UiMainWindow owner, String titleTag, String okButtonTag, String cancelButtonTag, String descriptionTag, String text, Map tokenReplacement, JComponent bottomPanel)
 	{
 		super(owner.getSwingFrame(), "", true);
+		setIconImage(Utilities.getMartusIconImage());
 		mainWindow = owner;
 
 		try 
