@@ -2,9 +2,9 @@
 # Language code:  fr
 # Language name:  French
 # Translated by:
-# Exported date:  Fri Apr 10 13:18:02 PDT 2015
+# Exported date:  Fri Apr 10 16:47:12 PDT 2015
 # Client version: pre-5.0.3
-# Client build:   2015-04-08.3523
+# Client build:   2015-04-10.3524
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -3160,6 +3160,9 @@ field:translationVersion=Français 5.1
 #________________=Sinhalese
 -6d55-language:si=Cingalais
 
+#________________=Albanian
+-d71c-language:sq=<Albanian>
+
 #________________=Serbian
 -a75e-language:sr=Serbe
 
@@ -3756,6 +3759,9 @@ field:translationVersion=Français 5.1
 
 #___________________________________________=Export Customization Template
 -5318-wintitle:FileDialogExportCustomization=Exporter le modèle de personnalisation
+
+#_______________________________________=Export Public Account ID
+-b0d3-wintitle:FileDialogExportPublicKey=Exporter ID public de compte
 
 #______________________________________=Import Record
 -b810-wintitle:FileDialogImportBulletin=Importer un bulletin
