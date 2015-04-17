@@ -305,8 +305,21 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	public void restoreFrameState()
 	{
 		setFrameLocation(observer.getBulletinEditorPosition());
-		setFrameSize(observer.getBulletinEditorDimension());
-		setFrameMaximized(observer.isBulletinEditorMaximized());
+		Dimension bulletinEditorDimension = observer.getBulletinEditorDimension();
+		boolean bulletinEditorMaximized = observer.isBulletinEditorMaximized();
+		if(!isEditorDimensionsValid(bulletinEditorDimension))
+		{
+			bulletinEditorDimension = NON_MAXIMIZED_MINIMUM_STARTING_EDITOR_DIMENSIONS;
+			bulletinEditorMaximized = true;
+		}
+		setFrameSize(bulletinEditorDimension);
+		setFrameMaximized(bulletinEditorMaximized);
+	}
+
+	public boolean isEditorDimensionsValid(Dimension bulletinEditorDimension)
+	{
+		return( bulletinEditorDimension.getHeight() > MINIMUM_EDITOR_HEIGHT && 
+				bulletinEditorDimension.getWidth() > MINIMUM_EDITOR_WIDTH);
 	}
 
 	abstract protected void setFrameLocation(Point bulletinEditorPosition);
@@ -357,6 +370,10 @@ abstract public class UiBulletinModifyDlg implements TopLevelWindowInterface
 	{
 		return view;
 	}
+
+	private static final double MINIMUM_EDITOR_WIDTH = 200.0;
+	private static final double MINIMUM_EDITOR_HEIGHT = 200.0;
+	private static final Dimension NON_MAXIMIZED_MINIMUM_STARTING_EDITOR_DIMENSIONS = new Dimension(640,480);
 
 	private Bulletin bulletin;
 	private UiMainWindow observer;
