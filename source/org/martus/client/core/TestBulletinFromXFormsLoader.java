@@ -81,14 +81,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		return localization;
 	}
 	
-	public void testBulletinStandardFields() throws Exception
-	{
-		verifyBulletinWithEmptyStandardFields();
-		verifyBulletinWithFilledStandardFields();
-		verifyBulletinWithSomeFilledStandardFields();
-	}
-
-	private void verifyBulletinWithSomeFilledStandardFields() throws Exception
+	public void testVerifyBulletinWithSomeFilledStandardFields() throws Exception
 	{
 		FieldSpecCollection someStandardFieldSpecs = getSomeRandomTopSectionFieldSpecs();
 		Bulletin bulletin = new Bulletin(security, someStandardFieldSpecs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
@@ -104,7 +97,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		verifyFieldValues(bulletin, someStandardFieldSpecs);
 	}
 
-	private void verifyBulletinWithEmptyStandardFields() throws Exception
+	public void testVerifyBulletinWithEmptyStandardFields() throws Exception
 	{
 		Bulletin bulletin = new Bulletin(security);
 		FieldSpecCollection defaultTopSectionFieldSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
@@ -116,7 +109,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		assertEquals("Default fields were changed after loading from xforms?", defaultTopSectionFieldSpecs.size(), topSectionFieldSpecsWithoutSections.size());
 	}
 	
-	private void verifyBulletinWithFilledStandardFields() throws Exception
+	public void testVerifyBulletinWithFilledStandardFields() throws Exception
 	{
 		Bulletin bulletin = new Bulletin(security);
 		FieldSpecCollection standardFieldSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
