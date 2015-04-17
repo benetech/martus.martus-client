@@ -330,24 +330,28 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 	
 	public void testXFormGroupsAsSections() throws Exception
 	{
-		//TODO test xforms with least 2 groups
 		Bulletin bulletin = new Bulletin(security);
-		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithSingleItemChoiceListAsBoolean());
-		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithSingleItemChoiceListAsTrueBoolean());
+		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithTwoGroups());
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithTwoGroups());
 
 		FxBulletin fxBulletin = new FxBulletin(getLocalization());
 		fxBulletin.copyDataFromBulletin(bulletin, store);
 		Vector<FieldSpec> specs = fxBulletin.getFieldSpecs();
+		boolean section1Found = false;
+		boolean section2Found = false;
 		for (Iterator iterator = specs.iterator(); iterator.hasNext();)
 		{
 			FieldSpec fieldSpec = (FieldSpec) iterator.next();
 			if(fieldSpec.getType().isSectionStart())
 			{
-				assertEquals("Not XForms Section Label?", SECTION_LABEL, fieldSpec.getLabel());
-				return;
+				if(fieldSpec.getLabel().equals(SECTION_LABEL_1))
+					section1Found = true;
+				if(fieldSpec.getLabel().equals(SECTION_LABEL_2))
+					section2Found = true;
 			}
 		}
-		fail("Didn't find any Sections?");
+		assertTrue("Didn't find Section1?", section1Found);
+		assertTrue("Didn't find Section2?", section2Found);
 	}
 
 	private void verifyBooleanFieldConversion(String xFormsInstance, String expectedBooleanValue) throws Exception
@@ -685,7 +689,52 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 				"</nm>";
 	}
 	
-	private static final String SECTION_LABEL = "Section 4 (Check boxes)";
+	private static String getXFormsModelWithTwoGroups()
+	{
+		return 
+		"<h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
+			"<h:head>" +
+				"<h:title>secureApp Prototype</h:title>" +
+				"<model>" +
+					"<instance>" +
+						"<nm id=\"VitalVoices\" >" +
+							"<date></date>" +
+							"<age></age>"+
+						"</nm>" +
+					"</instance>" +
+				"<bind jr:constraintMsg=\"No dates before 2000-01-01 allowed\" nodeset=\"/nm/date\" constraint=\". >= date('2000-01-01')\" type=\"date\" ></bind>" +
+				"<bind nodeset=\"/nm/age\" type=\"integer\" ></bind>"+
+				"</model>" +
+			"</h:head>" +
+			"<h:body>" +
+		        "<group appearance=\"field-list\" >" +
+	            "<label>"+SECTION_LABEL_1+"</label>" +
+					"<input ref=\"date\" >" +
+						"<label>Date of incident</label>" +
+						"<hint>(No dates before 2000-01-01 allowed)</hint>" +
+					"</input>" +
+				"</group>" +
+		        "<group appearance=\"field-list\" >" +
+	            "<label>"+SECTION_LABEL_2+"</label>" +
+					"<input ref=\"age\" >"+
+						"<label>"+ AGE_LABEL +"</label>"+
+					"</input>"+
+				"</group>" +
+			"</h:body>" +
+		"</h:html>" ;
+	}
+	
+	private static String getXFormsInstanceWithTwoGroups()
+	{
+		return 
+				"<nm id=\"VitalVoices\" >" +
+				"<date>" + DATE_VALUE + "</date>" +
+				"<age>" + AGE_VALUE + "</age>"+
+				"</nm>";
+	}
+
+	private static final String SECTION_LABEL_1 = "Section 4 (Check boxes)";
+	private static final String SECTION_LABEL_2 = "Section 7 (Ages)";
 	private static String getXFormsModelWithSingleItemChoiceListAsBoolean()
 	{
 		return "<h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
@@ -702,7 +751,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 			    "</h:head>" +
 			    "<h:body>" +
 			        "<group appearance=\"field-list\" >" +
-			            "<label>"+SECTION_LABEL+"</label>" +
+			            "<label>"+SECTION_LABEL_1+"</label>" +
 			            "<select ref=\"anonymous\" >" +
 			                "<label>Does interviewee wish to remain anonymous?</label>" +
 			                "<item>" +
