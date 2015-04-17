@@ -108,7 +108,7 @@ public class UiBackupRecoverSharedKeyPair
 			return;
 		}
 
-		String driveToUse = getBackupKeyShareDriveToUse(defaultFileName);
+		String driveToUse = getBackupKeyShareDriveToUse();
 		if(driveToUse == null)
 			return;
 
@@ -263,7 +263,7 @@ public class UiBackupRecoverSharedKeyPair
 		return defaultFileName;
 	}
 
-	private String getBackupKeyShareDriveToUse(String defaultFileName) 
+	private String getBackupKeyShareDriveToUse() 
 	{
 		while(true)
 		{
