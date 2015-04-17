@@ -24,6 +24,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -39,6 +40,7 @@ import org.martus.common.GridRow;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MiniLocalization;
+import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.bulletin.BulletinFromXFormsLoader;
@@ -407,6 +409,47 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		assertEquals("After editing desktop should own this bulletin", martusDesktopPublicKey, desktopEditedBulletin.getAccount());
 		
 		store.setSignatureGenerator(security);
+	}
+	
+	public void testXFormsRecordWithAttachments() throws Exception
+	{
+		Bulletin bulletin = new Bulletin(security);
+		bulletin.getFieldDataPacket().setXFormsModelAsString(getEmptyXFormsModelXmlAsString());
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getEmptyXFormsInstanceXmlAsString());
+
+		verifyBulletinWithoutAttachments(bulletin);
+		
+		AttachmentProxy expectedPrivateAttachmentProxy = createAttachmentProxyWithTempFile();
+		bulletin.addPrivateAttachment(expectedPrivateAttachmentProxy);
+		
+		AttachmentProxy expectedPublicAttachmentProxy = createAttachmentProxyWithTempFile();
+		bulletin.addPublicAttachment(expectedPublicAttachmentProxy);
+		
+		verifyBulletinWithAttachments(bulletin, expectedPrivateAttachmentProxy, expectedPublicAttachmentProxy);
+	}
+
+	private AttachmentProxy createAttachmentProxyWithTempFile() throws IOException
+	{
+		return new AttachmentProxy(createTempFile());
+	}
+
+	private void verifyBulletinWithAttachments(Bulletin bulletin, AttachmentProxy expectedPrivateAttachmentProxy, AttachmentProxy expectedPublicAttachmentProxy) throws Exception
+	{
+		bulletin = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(bulletin);
+		AttachmentProxy[] publicAttachments = bulletin.getPublicAttachments();
+		assertEquals("There should be no public attachments?", 1, publicAttachments.length);
+		assertEquals("Incorrect public attachment proxy?", expectedPublicAttachmentProxy, publicAttachments[0]);
+		
+		AttachmentProxy[] privateAttachments = bulletin.getPrivateAttachments();
+		assertEquals("There should be no private attachments?", 1, privateAttachments.length);
+		assertEquals("Incorrect private attachment proxy?", expectedPrivateAttachmentProxy, privateAttachments[0]);
+	}
+
+	private void verifyBulletinWithoutAttachments(Bulletin bulletin) throws Exception
+	{
+		bulletin = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(bulletin);
+		assertEquals("There should be no public attachments?", 0, bulletin.getPublicAttachments().length);
+		assertEquals("There should be no private attachments?", 0, bulletin.getPrivateAttachments().length);
 	}
 
 	private void verifyGridFieldData(FxBulletin fxBulletin, FieldSpec fieldSpec) throws Exception
