@@ -47,6 +47,7 @@ public class UiStringInputDlg extends JDialog
 	public UiStringInputDlg(UiMainWindow owner, String baseTag, String descriptionTag, String rawDescriptionText, String defaultText)
 	{
 		super(owner.getSwingFrame(), "", true);
+		setIconImage(Utilities.getMartusIconImage());
 
 		fontHelper = new UiFontEncodingHelper(owner.getDoZawgyiConversion());
 		UiLocalization localization = owner.getLocalization();
