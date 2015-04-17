@@ -102,13 +102,12 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 	public void testVerifyBulletinWithEmptyStandardFields() throws Exception
 	{
 		Bulletin bulletin = new Bulletin(security);
-		FieldSpecCollection defaultTopSectionFieldSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		bulletin.getFieldDataPacket().setXFormsModelAsString(getEmptyXFormsModelXmlAsString());
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getEmptyXFormsInstanceXmlAsString());
 		
 		bulletin = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(bulletin);
 		FieldSpecCollection topSectionFieldSpecsWithoutSections = stripAllSectionFields(bulletin.getTopSectionFieldSpecs());
-		assertEquals("Default fields were changed after loading from xforms?", defaultTopSectionFieldSpecs.size(), topSectionFieldSpecsWithoutSections.size());
+		assertEquals("Default fields were changed after loading from xforms?", REQUIRED_FOUR_STANDARD_FIELDS_COUNT, topSectionFieldSpecsWithoutSections.size());
 	}
 	
 	public void testVerifyBulletinWithFilledStandardFields() throws Exception
@@ -303,6 +302,25 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		assertEquals("Incorrect date?", DATE_VALUE, dateField.getValue());
 	}
 	
+	public void testFxBulletinWithXFormsWithOptionalTopField() throws Exception
+	{
+		FxBulletin fxBulletin = new FxBulletin(getLocalization());
+
+		assertEquals("FxBulletin field specs should be filled?", 0, fxBulletin.getFieldSpecs().size());
+		Bulletin bulletin = new Bulletin(security);
+		String keywords = "Fun Fun Fun";
+		bulletin.set(Bulletin.TAGKEYWORDS, keywords);
+		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithDateInputField());
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithDateInputField());
+		fxBulletin.copyDataFromBulletin(bulletin, store);
+		assertEquals("FxBulletin filled from bulletin with data should have date field?", getExpectedFieldCountWithNoSections(2), fxBulletin.getFieldSpecs().size());
+		
+		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag(Bulletin.TAGKEYWORDS);
+		
+		FxBulletinField dataField = fxBulletin.getField(fieldSpec);
+		assertEquals("Incorrect date?", keywords, dataField.getValue());
+	}
+
 	public void testFxBulletinWithXFormsBooleanField() throws Exception
 	{		
 		verifyBooleanFieldConversion(getXFormsInstanceWithSingleItemChoiceListAsTrueBoolean(), FieldSpec.TRUESTRING);
@@ -356,7 +374,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 	
 	private int getExpectedFieldCountWithSections(int expectedFieldsConverted, int expectedSections)
 	{
-		final int TOP_SECTION_DEFAULT_FIELD_COUNT = StandardFieldSpecs.getDefaultTopSectionFieldSpecs().size();
+		final int TOP_SECTION_DEFAULT_FIELD_COUNT = REQUIRED_FOUR_STANDARD_FIELDS_COUNT;
 		return TOP_SECTION_DEFAULT_FIELD_COUNT + expectedSections + expectedFieldsConverted;
 	}
 
@@ -794,7 +812,9 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 	
 	private static final String FIELD_LABEL = "What is your name?";
 	private static final String FIELD_VALUE = "John Johnson";
-	
+
+	private static final int REQUIRED_FOUR_STANDARD_FIELDS_COUNT = 4;
+
 	private MockMartusSecurity security;
 	private MiniLocalization localization;
 	private MockBulletinStore store;
