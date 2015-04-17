@@ -339,19 +339,28 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		Vector<FieldSpec> specs = fxBulletin.getFieldSpecs();
 		boolean section1Found = false;
 		boolean section2Found = false;
+		FieldSpec fieldSpec1 = null;
+		FieldSpec fieldSpec2 = null;
 		for (Iterator iterator = specs.iterator(); iterator.hasNext();)
 		{
 			FieldSpec fieldSpec = (FieldSpec) iterator.next();
 			if(fieldSpec.getType().isSectionStart())
 			{
 				if(fieldSpec.getLabel().equals(SECTION_LABEL_1))
+				{
 					section1Found = true;
+					fieldSpec1 = fieldSpec;
+				}
 				if(fieldSpec.getLabel().equals(SECTION_LABEL_2))
+				{
 					section2Found = true;
+					fieldSpec2 = fieldSpec;
+				}
 			}
 		}
 		assertTrue("Didn't find Section1?", section1Found);
 		assertTrue("Didn't find Section2?", section2Found);
+		assertNotEquals(fieldSpec1.getTag(), fieldSpec2.getTag());
 	}
 
 	private void verifyBooleanFieldConversion(String xFormsInstance, String expectedBooleanValue) throws Exception
