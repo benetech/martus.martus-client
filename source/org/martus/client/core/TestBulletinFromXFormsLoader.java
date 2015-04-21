@@ -328,7 +328,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		verifyBooleanFieldConversion(getXFormsInstanceWithSingleItemChoiceListAsNoValueBoolean(), FieldSpec.FALSESTRING);
 	}
 	
-	public void testXFormGroupsAsSections() throws Exception
+	public void testFxBulletinWithXFormGroupsAsSections() throws Exception
 	{
 		Bulletin bulletin = new Bulletin(security);
 		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithTwoGroups());
