@@ -2115,7 +2115,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		FxBulletinField field = fxBulletin.getField(fieldSpec);
 		assertEquals("Incorrect field value?", TestBulletinFromXFormsLoaderConstants.AGE_VALUE, field.getValue());
 
-		final String newAge = "30";
+		final String newAge = "45";
 		field.setValue(newAge);
 		final String newTitle = "Some New Title";
 		fxBulletin.getField(Bulletin.TAGTITLE).setValue(newTitle);
