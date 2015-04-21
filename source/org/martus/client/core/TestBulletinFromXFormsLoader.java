@@ -248,6 +248,33 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		assertEquals("Incorrect field value?", AGE_VALUE, field.getValue());
 	}
 	
+	public void testFxBulletinWithXFormsEditing() throws Exception
+	{
+		Bulletin bulletin = new Bulletin(security);
+		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithIntegerFieldXmlAsString());
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithIntegerFieldXmlAsString());
+
+		FxBulletin fxBulletin = new FxBulletin(getLocalization());
+		fxBulletin.copyDataFromBulletin(bulletin, store);
+
+		final String XFORMS_AGE_TAG = "age";
+		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag(XFORMS_AGE_TAG);
+		assertTrue("Only field should be string?", fieldSpec.getType().isString());
+		assertEquals("Incorrect field label?", AGE_LABEL, fieldSpec.getLabel());
+		assertEquals("Incorrect field tag?", XFORMS_AGE_TAG, fieldSpec.getTag());
+		FxBulletinField field = fxBulletin.getField(fieldSpec);
+		assertEquals("Incorrect field value?", AGE_VALUE, field.getValue());
+
+		final String newAge = "30";
+		field.setValue(newAge);
+		final String newTitle = "Some New Title";
+		fxBulletin.getField(Bulletin.TAGTITLE).setValue(newTitle);
+		
+		Bulletin modified = new Bulletin(security);
+		fxBulletin.copyDataToBulletin(modified);
+		assertEquals("Title didn't update?", newTitle, modified.get(Bulletin.TAGTITLE));
+		assertEquals("xForms Field wasn't updated?", newAge, modified.get(XFORMS_AGE_TAG));
+	}
 
 	private void verifyFieldSpecCount(FxBulletin fxBulletin, int expectedFieldSpecCount)
 	{
