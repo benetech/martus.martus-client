@@ -121,23 +121,6 @@ public class FxBulletin
 			notAuthorizedToRead = !b.getAuthorizedToReadKeys().containsKey(accountId);
 	}
 	
-	private void addAttachmentProxies(AttachmentProxy[] attachmentsToAdd, ReadableDatabase db)
-	{
-		for (AttachmentProxy attachmentProxy : attachmentsToAdd)
-		{
-			AttachmentTableRowData attachmentRow = new AttachmentTableRowData(attachmentProxy, db);
-			
-			String storable = attachmentRow.nameProperty().getValue();
-			String displayable = storable;
-			if(FontHandler.isDoZawgyiConversion())
-				displayable = BurmeseUtilities.getDisplayable(storable);
-			attachmentRow.nameProperty().setValue(displayable);
-			attachmentProxy.setLabel(displayable);
-			
-			attachments.add(attachmentRow);
-		}
-	}
-
 	public void copyDataToBulletin(Bulletin modified) throws Exception
 	{
 		modified.setImmutableOnServer(immutableOnServer.get());
@@ -175,6 +158,24 @@ public class FxBulletin
 			modified.addPrivateAttachment(proxy);
 		}
 	}
+
+	private void addAttachmentProxies(AttachmentProxy[] attachmentsToAdd, ReadableDatabase db)
+	{
+		for (AttachmentProxy attachmentProxy : attachmentsToAdd)
+		{
+			AttachmentTableRowData attachmentRow = new AttachmentTableRowData(attachmentProxy, db);
+			
+			String storable = attachmentRow.nameProperty().getValue();
+			String displayable = storable;
+			if(FontHandler.isDoZawgyiConversion())
+				displayable = BurmeseUtilities.getDisplayable(storable);
+			attachmentRow.nameProperty().setValue(displayable);
+			attachmentProxy.setLabel(displayable);
+			
+			attachments.add(attachmentRow);
+		}
+	}
+
 
 	public ReadOnlyObjectWrapper<UniversalId> universalIdProperty()
 	{
