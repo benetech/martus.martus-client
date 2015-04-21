@@ -202,4 +202,40 @@ public interface TestBulletinFromXFormsLoaderConstants
 																"	<sex>other</sex>" + 
 																"</victim_information>" + 
 																"</nm>";
+
+	public static final String AGE_LABEL = "AGE";
+	public static final String AGE_VALUE = "30";
+
+	public static final String XFORMS_MODEL_INTERGER_FIELD =
+			"<xforms_model>" +
+				"<h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
+					"<h:head>"+
+						"<h:title>secureApp Prototype</h:title>"+
+						"<model>"+
+							"<instance>"+
+								"<nm id=\"VitalVoices\" >"+
+									"<age></age>"+
+								"</nm>"+
+							"</instance>"+				""+
+							"<bind nodeset=\"/nm/age\" type=\"integer\" ></bind>"+
+						"</model>"+
+					"</h:head>"+
+				"<h:body>"+
+					"<group appearance=\"field-list\" >"+
+						"<label>Section 1 (Text fields)</label>"+
+						"<input ref=\"age\" >"+
+							"<label>"+ AGE_LABEL +"</label>"+
+						"</input>"+
+					"</group>"+
+				"</h:body>"+
+			"</h:html>" +
+		"</xforms_model>";
+
+	public static final String XFORMS_INSTANCE_INTERGER_FIELD = 
+			"<xforms_instance>" +
+				"<nm id=\"VitalVoices\">"+
+					"<age>" + AGE_VALUE + "</age>"+
+				"</nm>"+
+			"</xforms_instance>";
+
 }

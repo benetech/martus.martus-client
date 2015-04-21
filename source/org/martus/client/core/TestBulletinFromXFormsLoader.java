@@ -234,25 +234,25 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		verifyFieldSpecCount(fxBulletin, 0);
 		
 		Bulletin bulletin = new Bulletin(security);
-		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithIntegerFieldXmlAsString());
-		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithIntegerFieldXmlAsString());
+		bulletin.getFieldDataPacket().setXFormsModelAsString(TestBulletinFromXFormsLoaderConstants.XFORMS_MODEL_INTERGER_FIELD);
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(TestBulletinFromXFormsLoaderConstants.XFORMS_INSTANCE_INTERGER_FIELD);
 		fxBulletin.copyDataFromBulletin(bulletin, store);
 		assertEquals("FxBulletin filled from bulletin with data should have data?", getExpectedFieldCountWithSections(1, 1), fxBulletin.getFieldSpecs().size());
 		
 		String TAG = "age";
 		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag(TAG);
 		assertTrue("Only field should be string?", fieldSpec.getType().isString());
-		assertEquals("Incorrect field label?", AGE_LABEL, fieldSpec.getLabel());
+		assertEquals("Incorrect field label?", TestBulletinFromXFormsLoaderConstants.AGE_LABEL, fieldSpec.getLabel());
 		assertEquals("Incorrect field tag?", TAG, fieldSpec.getTag());
 		FxBulletinField field = fxBulletin.getField(fieldSpec);
-		assertEquals("Incorrect field value?", AGE_VALUE, field.getValue());
+		assertEquals("Incorrect field value?", TestBulletinFromXFormsLoaderConstants.AGE_VALUE, field.getValue());
 	}
 	
 	public void testFxBulletinWithXFormsEditing() throws Exception
 	{
 		Bulletin bulletin = new Bulletin(security);
-		bulletin.getFieldDataPacket().setXFormsModelAsString(getXFormsModelWithIntegerFieldXmlAsString());
-		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithIntegerFieldXmlAsString());
+		bulletin.getFieldDataPacket().setXFormsModelAsString(TestBulletinFromXFormsLoaderConstants.XFORMS_MODEL_INTERGER_FIELD);
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(TestBulletinFromXFormsLoaderConstants.XFORMS_INSTANCE_INTERGER_FIELD);
 
 		FxBulletin fxBulletin = new FxBulletin(getLocalization());
 		fxBulletin.copyDataFromBulletin(bulletin, store);
@@ -260,20 +260,20 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		final String XFORMS_AGE_TAG = "age";
 		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag(XFORMS_AGE_TAG);
 		assertTrue("Only field should be string?", fieldSpec.getType().isString());
-		assertEquals("Incorrect field label?", AGE_LABEL, fieldSpec.getLabel());
+		assertEquals("Incorrect field label?", TestBulletinFromXFormsLoaderConstants.AGE_LABEL, fieldSpec.getLabel());
 		assertEquals("Incorrect field tag?", XFORMS_AGE_TAG, fieldSpec.getTag());
 		FxBulletinField field = fxBulletin.getField(fieldSpec);
-		assertEquals("Incorrect field value?", AGE_VALUE, field.getValue());
+		assertEquals("Incorrect field value?", TestBulletinFromXFormsLoaderConstants.AGE_VALUE, field.getValue());
 
 		final String newAge = "30";
 		field.setValue(newAge);
 		final String newTitle = "Some New Title";
 		fxBulletin.getField(Bulletin.TAGTITLE).setValue(newTitle);
 		
-		Bulletin modified = new Bulletin(security);
-		fxBulletin.copyDataToBulletin(modified);
-		assertEquals("Title didn't update?", newTitle, modified.get(Bulletin.TAGTITLE));
-		assertEquals("xForms Field wasn't updated?", newAge, modified.get(XFORMS_AGE_TAG));
+		fxBulletin.copyDataToBulletin(bulletin);
+		assertFalse("xForms model/instance still exists?", bulletin.containsXFormsData());
+		assertEquals("Title didn't update?", newTitle, bulletin.get(Bulletin.TAGTITLE));
+		assertEquals("xForms Field wasn't updated?", newAge, bulletin.get(XFORMS_AGE_TAG));
 	}
 
 	private void verifyFieldSpecCount(FxBulletin fxBulletin, int expectedFieldSpecCount)
@@ -428,8 +428,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		fxBulletin.copyDataFromBulletin(bulletin, store);
 		Vector<FieldSpec> fieldSpecs = fxBulletin.getFieldSpecs();
 		assertEquals("FxBulletin filled from bulletin with data should have grid field?", getExpectedFieldCountWithNoSections(2), fieldSpecs.size());
-		
-		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag("/nm/victim_information");
+		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag("_nm_victim_informationTagGrid");
 		verifyGridFieldSpec(fieldSpec);
 		verifyGridFieldData(fxBulletin, fieldSpec);
 	}
@@ -698,44 +697,6 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 				   "</nm>" +
 				"</xforms_instance>";
 	}
-
-	private static String getXFormsModelWithIntegerFieldXmlAsString()
-	{
-		return 
-			"<xforms_model>" +
-				"<h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
-					"<h:head>"+
-						"<h:title>secureApp Prototype</h:title>"+
-						"<model>"+
-							"<instance>"+
-								"<nm id=\"VitalVoices\" >"+
-									"<age></age>"+
-								"</nm>"+
-							"</instance>"+				""+
-							"<bind nodeset=\"/nm/age\" type=\"integer\" ></bind>"+
-						"</model>"+
-					"</h:head>"+
-				"<h:body>"+
-					"<group appearance=\"field-list\" >"+
-						"<label>Section 1 (Text fields)</label>"+
-						"<input ref=\"age\" >"+
-							"<label>"+ AGE_LABEL +"</label>"+
-						"</input>"+
-					"</group>"+
-				"</h:body>"+
-			"</h:html>" +
-		"</xforms_model>";
-	}
-	
-	private static String getXFormsInstanceWithIntegerFieldXmlAsString()
-	{
-		return 
-			"<xforms_instance>" +
-				"<nm id=\"VitalVoices\">"+
-					"<age>" + AGE_VALUE + "</age>"+
-				"</nm>"+
-			"</xforms_instance>";
-	}
 	
 	private static String getXFormsModelWithDateInputField()
 	{
@@ -797,7 +758,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		        "<group appearance=\"field-list\" >" +
 	            "<label>"+SECTION_LABEL_2+"</label>" +
 					"<input ref=\"age\" >"+
-						"<label>"+ AGE_LABEL +"</label>"+
+						"<label>"+ TestBulletinFromXFormsLoaderConstants.AGE_LABEL +"</label>"+
 					"</input>"+
 				"</group>" +
 			"</h:body>" +
@@ -809,7 +770,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		return 
 				"<nm id=\"VitalVoices\" >" +
 				"<date>" + DATE_VALUE + "</date>" +
-				"<age>" + AGE_VALUE + "</age>"+
+				"<age>" + TestBulletinFromXFormsLoaderConstants.AGE_VALUE + "</age>"+
 				"</nm>";
 	}
 
@@ -935,9 +896,6 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 	private static final String DROPDOWN_FIELD_CHOICE_PERSONAL_INTERVIEW_LABEL = "Personal Interview";
 	
 	private static final String DATE_VALUE = "2015-03-24";
-	
-	private static final String AGE_VALUE = "20";
-	private static final String AGE_LABEL = "What is your age:";
 	
 	private static final String FIELD_LABEL = "What is your name?";
 	private static final String FIELD_VALUE = "John Johnson";
