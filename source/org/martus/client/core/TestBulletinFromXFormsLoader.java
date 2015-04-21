@@ -400,7 +400,7 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		bulletin.getFieldDataPacket().setXFormsInstanceAsString(getXFormsInstanceWithRepeats());
 		fxBulletin.copyDataFromBulletin(bulletin, store);
 		Vector<FieldSpec> fieldSpecs = fxBulletin.getFieldSpecs();
-		assertEquals("FxBulletin filled from bulletin with data should have grid field?", getExpectedFieldCountWithNoSections(1), fieldSpecs.size());
+		assertEquals("FxBulletin filled from bulletin with data should have grid field?", getExpectedFieldCountWithNoSections(2), fieldSpecs.size());
 		
 		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag("/nm/victim_information");
 		verifyGridFieldSpec(fieldSpec);
@@ -457,6 +457,50 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		bulletin.addPublicAttachment(expectedPublicAttachmentProxy);
 		
 		verifyBulletinWithAttachments(bulletin, expectedPrivateAttachmentProxy, expectedPublicAttachmentProxy);
+	}
+	
+	public void testGridAppearsUnderOwnSection() throws Exception
+	{
+		Bulletin bulletin = new Bulletin(security);
+		bulletin.getFieldDataPacket().setXFormsModelAsString(TestBulletinFromXFormsLoaderConstants.COMPLETE_XFORMS_MODEL);
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(TestBulletinFromXFormsLoaderConstants.COMPLETE_XFORMS_INSTANCE);
+
+		Bulletin bulletinLoadedFromXForms = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(bulletin);
+		FieldSpecCollection fieldSpecs = bulletinLoadedFromXForms.getFieldDataPacket().getFieldSpecs();
+		
+		FieldSpecCollection sectionFieldSpecs = getOnlySectionFieldSpecs(fieldSpecs);
+		
+		assertEquals("Incorrect field section start types", 5, sectionFieldSpecs.size());
+		assertTrue("should contain section label?", verifyContainsSectionName(sectionFieldSpecs, "Section 1 (Text fields)"));
+		assertTrue("should contain section label?", verifyContainsSectionName(sectionFieldSpecs, "Section 2 (Date field)"));
+		assertTrue("should contain section label?", verifyContainsSectionName(sectionFieldSpecs, "Section 3 (Drop down lists)"));
+		assertTrue("should contain section label?", verifyContainsSectionName(sectionFieldSpecs, "Section 4 (Check boxes)"));
+		assertTrue("should contain section label?", verifyContainsSectionName(sectionFieldSpecs, "Section 5 (Repeating group of fields)"));
+	}
+
+	private FieldSpecCollection getOnlySectionFieldSpecs(FieldSpecCollection fieldSpecs)
+	{
+		FieldSpecCollection sectionFieldSpecs = new FieldSpecCollection();
+		for (int index = 0; index < fieldSpecs.size(); ++index)
+		{
+			FieldSpec fieldSpec = fieldSpecs.get(index);
+			if (fieldSpec.getType().isSectionStart())
+				sectionFieldSpecs.add(fieldSpec);
+		}
+		
+		return sectionFieldSpecs;
+	}
+
+	private boolean verifyContainsSectionName(FieldSpecCollection sectionFieldSpecs, String sectionLabelToMatch)
+	{
+		for (int index = 0; index < sectionFieldSpecs.size(); ++index)
+		{
+			FieldSpec sectionFieldSpec = sectionFieldSpecs.get(index);
+			if (sectionFieldSpec.getLabel().equals(sectionLabelToMatch))
+				return true;
+		}
+		
+		return false;
 	}
 
 	private AttachmentProxy createAttachmentProxyWithTempFile() throws IOException
