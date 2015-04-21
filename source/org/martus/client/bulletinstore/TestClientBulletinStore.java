@@ -38,7 +38,10 @@ import java.util.Vector;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.AttachmentProxyFile;
+import org.martus.client.core.FxBulletin;
+import org.martus.client.core.FxBulletinField;
 import org.martus.client.core.MartusClientXml;
+import org.martus.client.core.TestBulletinFromXFormsLoaderConstants;
 import org.martus.client.test.MockBulletinStore;
 import org.martus.client.test.MockMartusApp;
 import org.martus.common.BulletinSummary;
@@ -47,6 +50,7 @@ import org.martus.common.FieldSpecCollection;
 import org.martus.common.HeadquartersKey;
 import org.martus.common.HeadquartersKeys;
 import org.martus.common.MartusXml;
+import org.martus.common.MiniLocalization;
 import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
@@ -2092,8 +2096,42 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		Vector empty = testStore.getUidsOfAllBulletinRevisions();
 		assertEquals("not empty?", 0, empty.size());			
 	}	
+	
+	public void testFxBulletinWithXFormsEditing() throws Exception
+	{
+		Bulletin bulletin = new Bulletin(security);
+		bulletin.getFieldDataPacket().setXFormsModelAsString(TestBulletinFromXFormsLoaderConstants.XFORMS_MODEL_INTERGER_FIELD);
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(TestBulletinFromXFormsLoaderConstants.XFORMS_INSTANCE_INTERGER_FIELD);
 
+		MiniLocalization localization = new MiniLocalization();
+		FxBulletin fxBulletin = new FxBulletin(localization);
+		fxBulletin.copyDataFromBulletin(bulletin, testStore);
 
+		final String XFORMS_AGE_TAG = "age";
+		FieldSpec fieldSpec = fxBulletin.findFieldSpecByTag(XFORMS_AGE_TAG);
+		assertTrue("Only field should be string?", fieldSpec.getType().isString());
+		assertEquals("Incorrect field label?", TestBulletinFromXFormsLoaderConstants.AGE_LABEL, fieldSpec.getLabel());
+		assertEquals("Incorrect field tag?", XFORMS_AGE_TAG, fieldSpec.getTag());
+		FxBulletinField field = fxBulletin.getField(fieldSpec);
+		assertEquals("Incorrect field value?", TestBulletinFromXFormsLoaderConstants.AGE_VALUE, field.getValue());
+
+		final String newAge = "30";
+		field.setValue(newAge);
+		final String newTitle = "Some New Title";
+		fxBulletin.getField(Bulletin.TAGTITLE).setValue(newTitle);
+		
+		fxBulletin.copyDataToBulletin(bulletin);
+		assertFalse("xForms model/instance still exists?", bulletin.containsXFormsData());
+		assertEquals("Title didn't update?", newTitle, bulletin.get(Bulletin.TAGTITLE));
+		assertEquals("xForms Field wasn't updated?", newAge, bulletin.get(XFORMS_AGE_TAG));
+		
+		testStore.saveBulletin(bulletin);
+		Bulletin loaded = testStore.loadFromDatabase(bulletin.getDatabaseKey());
+		assertEquals("Title wasn't saved?", newTitle, loaded.get(Bulletin.TAGTITLE));
+		assertEquals("xForms Field wasn't saved?", newAge, loaded.get(XFORMS_AGE_TAG));
+		
+	}
+	
 	private static MockBulletinStore testStore;
 	private static MockMartusSecurity security;
 	private static MockDatabase db;

@@ -123,6 +123,7 @@ public class FxBulletin
 	
 	public void copyDataToBulletin(Bulletin modified) throws Exception
 	{
+		modified.clearXFormsData();
 		modified.setImmutableOnServer(immutableOnServer.get());
 		
 		modified.getFieldDataPacket().setFieldSpecs(fieldSpecs);
