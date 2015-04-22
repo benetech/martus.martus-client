@@ -26,6 +26,35 @@ package org.martus.client.core;
 
 public interface TestBulletinFromXFormsLoaderConstants
 {
+	
+	public static final  String XFORMS_MODEL_WITH_GROUP_WITHOUT_LABEL = 
+		"<h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" +
+			    "<h:head>" +
+			        "<h:title>Sample XForms for Testing</h:title>" +
+			        "<model>" +
+			            "<instance>" +
+			            		"<nm id=\"SampleForUnitTesting\" >" +
+			    					"<name/>" +
+			    				"</nm>" +
+			            "</instance>" +
+			            "<bind nodeset=\"/nm/name\" type=\"string\" />" +
+			        "</model>" +
+			    "</h:head>" +
+			    "<h:body>" +
+			        "<group appearance=\"field-list\" >" +
+			        "<input ref=\"name\" >" +
+						"<label>Some Random Label</label>" +
+						"</input>" +
+			        "</group>" +
+			    "</h:body>" +
+			"</h:html>";
+	
+	public static final String XFORMS_INSTANCE_WITH_SINGLE_INPUT = "<xforms_instance>" +
+			   "<nm id=\"SampleForUnitTesting\">" +
+			      "<name>Some Randome value</name>" +
+			   "</nm>" +
+			"</xforms_instance>";
+	
 	public static final String COMPLETE_XFORMS_MODEL = 
 															"<h:html xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:jr=\"http://openrosa.org/javarosa\" xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" >" + 
 															"    <h:head>" + 

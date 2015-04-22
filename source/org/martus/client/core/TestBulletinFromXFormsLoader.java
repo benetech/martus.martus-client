@@ -83,6 +83,21 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		return localization;
 	}
 	
+	public void testGroupWithoutLabel() throws Exception
+	{
+		Bulletin bulletin = new Bulletin(security);
+		bulletin.getFieldDataPacket().setXFormsModelAsString(TestBulletinFromXFormsLoaderConstants.XFORMS_MODEL_WITH_GROUP_WITHOUT_LABEL);
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(TestBulletinFromXFormsLoaderConstants.XFORMS_INSTANCE_WITH_SINGLE_INPUT);
+		try
+		{
+			BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(bulletin);
+		}
+		catch (Exception e)
+		{
+			fail("Copying xForms Data should not have failed");
+		}
+	}
+	
 	public void testVerifyBulletinWithSomeFilledStandardFields() throws Exception
 	{
 		FieldSpecCollection someStandardFieldSpecs = getSomeRandomTopSectionFieldSpecs();
