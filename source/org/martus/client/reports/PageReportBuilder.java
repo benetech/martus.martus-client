@@ -74,12 +74,12 @@ public class PageReportBuilder extends ReportBuilder
 	
 	public String createDetailSection()
 	{
+		//TODO Missing unit tests, changes made didn't flag a failing unit test
 		StringBuffer result = new StringBuffer();
-		BulletinHtmlGenerator.appendTitleOfSection(result, "$localization.getStorableFieldLabel('publicsection')");
+		BulletinHtmlGenerator.appendTitleOfSection(result, "$localization.getStorableFieldLabel('privatesection')");
 		result.append("#foreach($field in $bulletin.getTopFields())\n");
 		result.append(getFieldRow());
 		result.append("#end\n");
-		BulletinHtmlGenerator.appendTitleOfSection(result, "$localization.getStorableFieldLabel('privatesection')");
 		result.append("#foreach($field in $bulletin.getBottomFields())\n");
 		result.append(getFieldRow());
 		result.append("#end\n");
