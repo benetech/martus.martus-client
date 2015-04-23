@@ -500,6 +500,31 @@ public class TestBulletinFromXFormsLoader extends TestCaseEnhanced
 		verifyBulletinWithAttachments(bulletin, expectedPrivateAttachmentProxy, expectedPublicAttachmentProxy);
 	}
 	
+	public void testFieldsAreUnderCorrectSections() throws Exception
+	{
+		Bulletin bulletin = new Bulletin(security);
+		bulletin.getFieldDataPacket().setXFormsModelAsString(TestBulletinFromXFormsLoaderConstants.COMPLETE_XFORMS_MODEL);
+		bulletin.getFieldDataPacket().setXFormsInstanceAsString(TestBulletinFromXFormsLoaderConstants.COMPLETE_XFORMS_INSTANCE);
+
+		Bulletin bulletinLoadedFromXForms = BulletinFromXFormsLoader.createNewBulletinFromXFormsBulletin(bulletin);
+		FieldSpecCollection fieldSpecs = bulletinLoadedFromXForms.getFieldDataPacket().getFieldSpecs();
+		
+		String[] expectedFieldSpecSequence = new String[]{
+		"language","author","title","entrydate",   
+		"Section_1__Text_fields_TagSection","name",	"nationality","age",
+		"Section_2__Date_field_TagSection","date",
+		"Section_3__Drop_down_lists_TagSection", "sourceOfRecordInformation", "eventLocation",
+		"Section_4__Check_boxes_TagSection", "anonymous","additionalInfo","testify",
+		"_nm_victim_informationTagSection","_nm_victim_informationTagGrid"};
+		
+		for (int index = 0; index < fieldSpecs.size(); ++index)
+		{
+			String actualTag = fieldSpecs.get(index).getTag();
+			String expectedTag = expectedFieldSpecSequence[index];
+			assertEquals("Incorrect sequence position within list?", expectedTag, actualTag);
+		}
+	}
+	
 	public void testGridAppearsUnderOwnSection() throws Exception
 	{
 		Bulletin bulletin = new Bulletin(security);
