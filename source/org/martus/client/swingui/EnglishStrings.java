@@ -1640,8 +1640,8 @@ public class EnglishStrings
 "field:LoadingFieldValuesFromAllBulletinsExplanation=Scanning all records to create a list of all the values in #FieldName#",
 
 "field:_Section_BulletinSectionHeader=Header",
-"field:_SectionTopSection=",
-"field:_SectionBottomSection=",
+"field:_SectionTopSection= ",
+"field:_SectionBottomSection= ",
 
 "field:mdyOrder=Date Format",
 "field:CalendarSystem=Calendar type",
