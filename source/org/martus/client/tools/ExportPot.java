@@ -124,11 +124,8 @@ public class ExportPot
 		printlnQuoted(out, entry.getContext());
 		out.print("msgid ");
 		printlnQuoted(out, "");
+		out.print("msgstr ");
 		printlnQuoted(out, english_text);
-		// FIXME: The following commented-out code can be deleted unless Transifex requires it
-//		out.print("msgstr ");
-//		printlnQuoted(out, "");
-//		printlnQuoted(out, "");
 		out.println();
 	}
 	
